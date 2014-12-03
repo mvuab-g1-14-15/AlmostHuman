@@ -1,0 +1,39 @@
+Logs/_(28-11-2014)_(18h-23m-14s).txt
+	[  WARNING  ]	CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto: para el tag <fonts_path>
+	[INFORMATION]	RenderManager:: Inicializando la libreria Direct3D
+	[INFORMATION]	RenderManager:: D3DCREATE_HARDWARE_VERTEXPROCESSING
+	[INFORMATION]	RenderManager:: La resolucion de pantalla es (784x562)
+	[INFORMATION]	InputManager:: calling initialization
+	[INFORMATION]	Keyboard:: crancking up keyboard
+	[INFORMATION]	Keyboard:: keyboard online
+	[INFORMATION]	Mouse:: crancking up mouse
+	[INFORMATION]	Mouse:: mouse online
+	[INFORMATION]	InputManager:: GamePad is not connected
+	[INFORMATION]	LanguageManager::LoadXML-> Parseando fichero de lenguaje: Data/lan/castellano.xml
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(HiWorld,xfiles,[0.500000,0.100000,0.100000,1.000000],Hola Mundo)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(Exit,xfiles,[0.100000,0.100000,0.100000,1.000000],Salir)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(PickUp,Annabel,[0.100000,0.100000,0.100000,1.000000],Press E to grab the item)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(puertaBruja,Annabel,[0.100000,0.100000,0.100000,1.000000],The door has opened, you can now advance to the next level)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(textoItem,Annabel,[0.100000,0.100000,0.100000,1.000000],You need more items to go through this door)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(textoPuerta,Annabel,[0.100000,0.100000,0.100000,1.000000],Press E to go through this door)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(textoCinematic,Annabel,[0.100000,0.100000,0.100000,1.000000],Press F repeatedly)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(FPS,Annabel,[0.900000,0.100000,0.100000,1.000000],Frames Per Second)
+	[INFORMATION]	LanguageManager::LoadXML-> Parseando fichero de lenguaje: Data/lan/catalan.xml
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(HiWorld,xfiles,[0.500000,0.100000,0.100000,0.700000],Hola Món)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(Exit,xfiles,[0.100000,0.100000,0.100000,0.800000],Sortir)
+	[INFORMATION]	LanguageManager::LoadXML-> Añadido literal(PARTY,xfiles,[1.000000,1.000000,1.000000,0.800000],PARTY HARD!!!!)
+	[INFORMATION]	LanguageManager::SetCurrentLanguage-> Se ha seteado como current el language castellano
+	[INFORMATION]	CFontManager:: Inicializando FontManager
+	[INFORMATION]	LoadFonts:: Add font arial (file:Data/fonts/arial.ttf,size:16,bold:1,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font xfiles (file:Data/fonts/xfiles.ttf,size:32,bold:0,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font futurama (file:Data/fonts/fr-fal1-2.ttf,size:32,bold:0,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font Annabel (file:Data/fonts/AnnabelScript.ttf,size:32,bold:0,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font Slap (file:Data/fonts/SF Slapstick Comic.ttf,size:32,bold:0,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font Deco (file:Data/fonts/Market_Deco.ttf,size:20,bold:0,italica:0,default:0),
+	[INFORMATION]	LoadFonts:: Add font Titania (file:Data/fonts/Titania-Regular.ttf,size:20,bold:0,italica:0,default:0),
+	[INFORMATION]	InputManager:: shutting down DirectInput
+	[INFORMATION]	Keyboard:: releasing keyboard
+	[INFORMATION]	InputDevice::nput device offline (ok)
+	[INFORMATION]	Mouse:: releasing mouse
+	[INFORMATION]	InputDevice::nput device offline (ok)
+	[INFORMATION]	InputManager:: offline (ok)

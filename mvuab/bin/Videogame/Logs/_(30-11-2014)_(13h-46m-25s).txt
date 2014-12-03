@@ -1,0 +1,4 @@
+Logs/_(30-11-2014)_(13h-46m-25s).txt
+	[  WARNING  ]	CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto: para el tag <fonts_path>
+	[INFORMATION]	RenderManager:: Inicializando la libreria Direct3D
+	[___ERROR___]	Rendermanager::Init-> Error al inicializar Direct3D

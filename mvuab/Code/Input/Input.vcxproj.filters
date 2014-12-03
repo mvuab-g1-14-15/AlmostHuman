@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Periphericals\GamePad.cpp" />
+    <ClCompile Include="Periphericals\InputDevice.cpp" />
+    <ClCompile Include="Periphericals\Keyboard.cpp" />
+    <ClCompile Include="Periphericals\Mouse.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="ActionManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Periphericals\GamePad.h" />
+    <ClInclude Include="Periphericals\InputDevice.h" />
+    <ClInclude Include="Periphericals\Keyboard.h" />
+    <ClInclude Include="Periphericals\Mouse.h" />
+    <ClInclude Include="InputDefs.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ActionManager.h" />
+  </ItemGroup>
+</Project>

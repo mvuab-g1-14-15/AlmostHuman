@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Actions>
+	<action name="ShowHideLogRender">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_F1"/>
+    </action>
+	
+	<action name="PgUpLogRender">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_PGUP"/>
+    </action>
+	
+	<action name="PgDownLogRender">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_PGDOWN"/>
+    </action>
+	
+    <action name="CommutationCamera">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_G"/>
+	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_H"/>
+    </action>
+	
+	<action name="Reload">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_R"/>
+    </action>
+	
+	<action name="MoveForward">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_W"/>
+    </action>
+	
+	<action name="MoveBackward">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_S"/>
+    </action>
+	
+	<action name="MoveLeft">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_A"/>
+    </action>
+	
+	<action name="MoveRight">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_D"/>
+    </action>
+	
+	<action name="MoveUp">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_E"/>
+    </action>
+	
+	<action name="MoveDown">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
+    </action>
+ 
+    <action name="LeftMouseButtonPressed">
+   	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+    </action>
+	
+	<action name="RightMouseButtonPressed">
+   	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
+    </action>
+ 
+    <action name="Logger">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F1"/>
+    </action>
+
+</Actions>
