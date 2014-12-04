@@ -16,8 +16,10 @@ protected:
 public:
 	CTexture();
 	virtual ~CTexture();
+
 	const std::string & GetFileName() const;
 	bool Load(const std::string &FileName);
+
 	bool Reload();
 	void Activate(size_t StageId);
 };

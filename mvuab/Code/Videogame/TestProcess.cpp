@@ -16,10 +16,13 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "Texture\Texture.h"
 
+#include "StaticMeshes\StaticMesh.h"
+
 #include <d3dx9.h>
 
 CRenderableVertexs *g_RV = 0;
 CTexture *g_TX = 0;
+CStaticMesh *g_StaticMesh = 0;
 
 CTestProcess::CTestProcess() : CProcess(), 
 	m_Speed( 0.1f ),
@@ -107,6 +110,8 @@ void CTestProcess::Init()
 
 	g_RV = new CIndexedVertexs<TT1_VERTEX>(CGraphicsManager::GetSingletonPtr(), v, indexes, 4, 6 );
 	g_TX = new CTexture(); g_TX->Load("./Data/Textures/texture0.jpg");
+	g_StaticMesh = new CStaticMesh();
+	g_StaticMesh->Load("./Data/meshes/prueba.mesh");
 }
 
 void CTestProcess::Render()

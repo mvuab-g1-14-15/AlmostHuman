@@ -22,7 +22,7 @@ class CStaticMesh
 {
 	protected:
 		std::vector<CRenderableVertexs*> m_RVs;
-		std::vector<std::vector<CTexture *>> m_Textures;
+		std::vector< std::vector<CTexture *> > m_Textures;
 
 		std::string m_FileName;
 		unsigned int m_NumVertexs, m_NumFaces;
