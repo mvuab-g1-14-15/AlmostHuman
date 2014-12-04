@@ -12,6 +12,9 @@
 
 CStaticMesh::CStaticMesh()
 {
+	m_FileName	 = "";
+	m_NumFaces	 = 0;
+	m_NumVertexs = 0;
 }
 
 CStaticMesh::~CStaticMesh()
