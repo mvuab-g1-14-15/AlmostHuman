@@ -17,6 +17,9 @@
     <Filter Include="Fonts">
       <UniqueIdentifier>{30a93bf9-552c-4de6-b5b3-bae13c115214}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StaticMeshes">
+      <UniqueIdentifier>{33d56e21-a98a-4a7e-9726-ca011d3f142b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
       <Filter>Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshes\StaticMesh.cpp">
+      <Filter>StaticMeshes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="RenderableVertex\VertexTypes.h">
       <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\StaticMesh.h">
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
