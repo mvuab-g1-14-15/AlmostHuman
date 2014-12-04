@@ -17,8 +17,11 @@
     <Filter Include="Fonts">
       <UniqueIdentifier>{30a93bf9-552c-4de6-b5b3-bae13c115214}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RenderableObject">
+      <UniqueIdentifier>{88983a84-8789-44ac-8a00-6614cc5557ba}</UniqueIdentifier>
+    </Filter>
     <Filter Include="StaticMeshes">
-      <UniqueIdentifier>{33d56e21-a98a-4a7e-9726-ca011d3f142b}</UniqueIdentifier>
+      <UniqueIdentifier>{42d4f003-1d0b-4079-a500-f337ff9de0dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
       <Filter>Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp">
+      <Filter>RenderableObject</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshes\StaticMesh.cpp">
       <Filter>StaticMeshes</Filter>
@@ -93,6 +102,12 @@
     </ClInclude>
     <ClInclude Include="RenderableVertex\VertexTypes.h">
       <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObject.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObjectsManager.h">
+      <Filter>RenderableObject</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshes\StaticMesh.h">
       <Filter>StaticMeshes</Filter>

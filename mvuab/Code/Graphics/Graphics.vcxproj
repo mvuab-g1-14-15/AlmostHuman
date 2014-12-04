@@ -18,6 +18,8 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObject\RenderableObject.cpp" />
+    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
     <ClCompile Include="StaticMeshes\StaticMesh.cpp" />
     <ClCompile Include="Texture\CubedTexture.cpp" />
     <ClCompile Include="Texture\GUITexture.cpp" />
@@ -32,6 +34,8 @@
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="RenderableObject\RenderableObject.h" />
+    <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
