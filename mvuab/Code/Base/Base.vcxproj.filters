@@ -111,9 +111,6 @@
     <ClInclude Include="Timer\Timer.h">
       <Filter>Timer</Filter>
     </ClInclude>
-    <ClInclude Include="BaseUtils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Logger\Logger.h">
       <Filter>Logger</Filter>
     </ClInclude>
@@ -143,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="Language\LanguageManager.h">
       <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\BaseUtils.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,0 @@
-Logs/_(26-11-2014)_(19h-43m-31s).txt
-	[  WARNING  ]	CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto: para el tag <fonts_path>
-	[INFORMATION]	RenderManager:: Inicializando la libreria Direct3D
-	[INFORMATION]	RenderManager:: D3DCREATE_HARDWARE_VERTEXPROCESSING
-	[INFORMATION]	RenderManager:: La resolucion de pantalla es (784x562)
-	[___ERROR___]	Rendermanager::Init-> Error al inicializar Direct3D

@@ -64,9 +64,6 @@
     <ClInclude Include="Texture\CubedTexture.h">
       <Filter>Texture</Filter>
     </ClInclude>
-    <ClInclude Include="VertexTypes.h">
-      <Filter>RenderableVertex</Filter>
-    </ClInclude>
     <ClInclude Include="Cameras\Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -84,6 +81,12 @@
     </ClInclude>
     <ClInclude Include="Fonts\FontManager.h">
       <Filter>Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableVertex\IndexedVertexs.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableVertex\VertexTypes.h">
+      <Filter>RenderableVertex</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

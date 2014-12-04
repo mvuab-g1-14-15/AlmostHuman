@@ -1,6 +1,5 @@
 #include "GraphicsManager.h"
 #include "Utils\Defines.h"
-#include "VertexTypes.h"
 #include "Math\MathTypes.h"
 #include "Logger\Logger.h"
 #include "Cameras\Camera.h"
@@ -8,6 +7,42 @@
 #include <malloc.h>
 #include <vector>
 #include "Exceptions\Exception.h"
+
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
+typedef struct CUSTOMVERTEX
+{
+	float x, y, z;
+	DWORD color;
+
+	static unsigned int getFlags()
+	{
+		return(D3DFVF_CUSTOMVERTEX);
+	}
+}CUSTOMVERTEX;
+
+typedef struct CUSTOMVERTEX2
+{
+	D3DXVECTOR3 pos;
+	DWORD color;
+	static unsigned int getFlags()
+	{
+		return D3DFVF_CUSTOMVERTEX;
+	}
+}CUSTOMVERTEX2;
+
+struct SCREEN_COLOR_VERTEX
+{
+	float x, y, z, w;
+	DWORD color;
+    float u, v; 
+
+	static unsigned int getFlags()
+	{
+		return(D3DFVF_XYZRHW|D3DFVF_DIFFUSE|D3DFVF_TEX1);
+	}
+};
+
+
 
 CGraphicsManager::CGraphicsManager() :
 	m_uWidth(800),

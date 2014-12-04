@@ -10,98 +10,16 @@
 #include "Logger\Logger.h"
 #include "Utils\LogRender.h"
 #include "Utils\Defines.h"
+
 #include "RenderableVertex\RenderableVertex.h"
+#include "RenderableVertex\IndexedVertexs.h"
 #include "RenderableVertex\VertexTypes.h"
+#include "Texture\Texture.h"
 
 #include <d3dx9.h>
 
-struct TT1_VERTEX
-{
-        float x, y, z;
-        float tu, tv;
-
-        static inline unsigned short GetVertexType()
-        {
-                return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_TEXTURE1;
-        }
-        static inline unsigned int GetFVF()
-        {
-                return D3DFVF_XYZ|D3DFVF_TEX1;
-        }
-};
-
-class CRenderableVertexs
-{
-public:
-	CRenderableVertexs()
-	{
-	}
-	virtual ~CRenderableVertexs()
-	{
-		CHECKED_RELEASE(m_VB);
-		CHECKED_RELEASE(m_IB);
-	}
-	virtual bool Render(CGraphicsManager *RM) = 0;
-	virtual inline size_t GetFacesCount() const{ return m_VertexCount / 3; }
-	virtual inline size_t GetVertexsCount() const{ return m_VertexCount; }
-	virtual inline unsigned short GetVertexType() const = 0;
-	virtual inline size_t GetVertexSize() = 0;
-	virtual inline size_t GetIndexSize() = 0;
-protected:
-	LPDIRECT3DVERTEXBUFFER9 m_VB;
-	LPDIRECT3DINDEXBUFFER9 m_IB;
-	size_t m_IndexCount, m_VertexCount;
-};
-
-template<class T>
-class CIndexedVertexs : public CRenderableVertexs
-{
-protected:
-	inline size_t GetVertexSize() {return sizeof(T);}
-	inline size_t GetIndexSize() {return sizeof(unsigned short);}
-	LPDIRECT3DTEXTURE9 m_Texture;
-public:
-	CIndexedVertexs(CGraphicsManager *renderManager, void *VertexAddress, void *IndexAddres, size_t
-					VertexCount, size_t IndexCount)
-	{
-		m_VertexCount = VertexCount;
-		m_IndexCount = IndexCount;
-		const LPDIRECT3DDEVICE9 device = renderManager->GetDevice();
-		
-		device->CreateVertexBuffer( m_VertexCount* GetVertexSize() , 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
-		VOID* l_VRAMAdress = NULL;
-		m_VB->Lock(0, m_VertexCount* GetVertexSize(), &l_VRAMAdress, 0);
-		memcpy(l_VRAMAdress, VertexAddress, m_VertexCount* GetVertexSize());
-		m_VB->Unlock();
-		
-		device->CreateIndexBuffer( m_IndexCount * GetIndexSize(), 0, D3DFMT_INDEX16,D3DPOOL_DEFAULT, &m_IB, 0 );
-		l_VRAMAdress = NULL;
-		m_IB->Lock(0, m_IndexCount * GetIndexSize(), &l_VRAMAdress, 0);
-		memcpy(l_VRAMAdress, IndexAddres, m_IndexCount * GetIndexSize() );
-		m_IB->Unlock();
-
-		D3DXCreateTextureFromFile(device, "Data/textures/texture0.jpg", &m_Texture );
-	}
-
-	~CIndexedVertexs()
-	{
-	}
-
-	virtual bool Render(CGraphicsManager *renderManager)
-	{
-		const LPDIRECT3DDEVICE9 device = renderManager->GetDevice();
-		device->SetTexture(0, m_Texture);
-		device->SetStreamSource(0, m_VB, 0, GetVertexSize() );
-		device->SetIndices(m_IB);
-		device->SetFVF(T::GetFVF());
-		//device->DrawPrimitive(D3DPT_TRIANGLELIST,0,GetVertexsCount());
-		device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,0,0,m_VertexCount,0, m_IndexCount/3 );
-		return true;
-	}
-	virtual inline unsigned short GetVertexType() const {return T::GetVertexType();}
-};
-
-CRenderableVertexs* g_RV = 0;
+CRenderableVertexs *g_RV = 0;
+CTexture *g_TX = 0;
 
 CTestProcess::CTestProcess() : CProcess(), 
 	m_Speed( 0.1f ),
@@ -125,31 +43,25 @@ void CTestProcess::Update(float32 deltaTime)
 	CInputManager* pInputManager = CInputManager::GetSingletonPtr();
 
 	m_Amount +=  0.01f;
-	m_Angle  += deltaTime* 0.05f;
-	m_AngleMoon += deltaTime*0.05;
+	m_Angle  += deltaTime * 0.05f;
+	m_AngleMoon += deltaTime * 0.05f;
 	
 	Vect3f CameraDirection( m_pCamera->GetDirection() );
 
 	CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
-	if( pActionManager->DoAction("CommutationCamera" ) )
+	if( pActionManager->DoAction("CommutationCamera") )
 	{
 		CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
-		if( pProcessCamera )
-		{
-			m_pCamera = m_pTPSCamera;
-		}
-		else
-		{
-			m_pCamera = m_pFPSCamera;
-		}
+		if( pProcessCamera ) m_pCamera = m_pTPSCamera;
+		else m_pCamera = m_pFPSCamera;
 	}
 
-	if( pActionManager->DoAction("MoveForward" ) )
+	if( pActionManager->DoAction("MoveForward") )
 	{
 		m_pCamera->Move( CFPSCamera::FORWARD, m_Speed );
 	}
-	if( pActionManager->DoAction("MoveBackward" ) )
+	if( pActionManager->DoAction("MoveBackward") )
 	{
 		m_pCamera->Move( CFPSCamera::BACKWARD, m_Speed );
 	}
@@ -157,15 +69,15 @@ void CTestProcess::Update(float32 deltaTime)
 	{
 		m_pCamera->Move( CFPSCamera::LEFT, m_Speed );
 	}
-	if( pActionManager->DoAction("MoveRight" ) )
+	if( pActionManager->DoAction("MoveRight") )
 	{
 		m_pCamera->Move( CFPSCamera::RIGHT, m_Speed );
 	}
-	if( pActionManager->DoAction("MoveUp" ) )
+	if( pActionManager->DoAction("MoveUp") )
 	{
 		m_pCamera->Move( CFPSCamera::UP, m_Speed );
 	}
-	if( pActionManager->DoAction("MoveDown" ) )
+	if( pActionManager->DoAction("MoveDown") )
 	{
 		m_pCamera->Move( CFPSCamera::DOWN, m_Speed );
 	}
@@ -173,12 +85,11 @@ void CTestProcess::Update(float32 deltaTime)
 	Vect3i delta = pInputManager->GetMouseDelta();
 	if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
 	{
-		m_pCamera->AddYawPitch(delta.x,delta.y);
+		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
 	}
 
 	CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-	if(pTPSCam)
-		pTPSCam->AddZoom(delta.z * m_Speed);
+	if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
 }
 
 void CTestProcess::Init()
@@ -195,6 +106,7 @@ void CTestProcess::Init()
 	unsigned short int indexes[6] = { 0, 1, 2, 0, 2, 3};
 
 	g_RV = new CIndexedVertexs<TT1_VERTEX>(CGraphicsManager::GetSingletonPtr(), v, indexes, 4, 6 );
+	g_TX = new CTexture(); g_TX->Load("./Data/Textures/texture0.jpg");
 }
 
 void CTestProcess::Render()
@@ -248,6 +160,7 @@ void CTestProcess::Render()
 
 	pGraphicsManager->SetTransform( identity );
 
+	g_TX->Activate(0);
 	g_RV->Render(pGraphicsManager);
 
 	//pGraphicsManager->DrawCamera(m_pTPSCamera);

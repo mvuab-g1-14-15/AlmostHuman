@@ -83,6 +83,6 @@ void CVideogameProcess::Render()
 	if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT ) )
 	{
 		Vect3i delta = pInputManager->GetMouseDelta();
-		m_pCamera->AddYawPitch(delta.x,delta.y);
+		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
 	}
 }
