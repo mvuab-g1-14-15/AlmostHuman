@@ -1,3 +1,3 @@
 <RenderableObjects>
-	<MeshInstance name="Boli Azul" core="" pos="" yaw="" pitch="" roll="" scale=""/>
+	<MeshInstance name="Boli_Azul1" core="Boli_Azul" pos="0,0,0" yaw="45" pitch="45" roll="0" scale="1"/>
 </RenderableObjects>

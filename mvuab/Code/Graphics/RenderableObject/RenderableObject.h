@@ -7,8 +7,8 @@
 class CRenderableObject : public CObject3D, public CName
 {
 public:
-CRenderableObject();
-virtual ~CRenderableObject() {}
-virtual void Update(float ElapsedTime) {}
-virtual void Render(CGraphicsManager *RM) = 0;
+	CRenderableObject();
+	virtual ~CRenderableObject() {}
+	virtual void Update(float ElapsedTime) {}
+	virtual void Render(CGraphicsManager *GM) = 0;
 };
