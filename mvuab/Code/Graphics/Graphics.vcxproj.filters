@@ -66,6 +66,9 @@
     <ClCompile Include="StaticMeshes\StaticMeshManager.cpp">
       <Filter>StaticMeshes</Filter>
     </ClCompile>
+    <ClCompile Include="StaticMeshes\InstanceMesh.cpp">
+      <Filter>StaticMeshes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -116,6 +119,9 @@
       <Filter>StaticMeshes</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshes\StaticMeshManager.h">
+      <Filter>StaticMeshes</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\InstanceMesh.h">
       <Filter>StaticMeshes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "Fonts\FontManager.h"
 #include "ActionManager.h"
 #include "Utils\DebugWindowManager.h"
+#include "StaticMeshes\StaticMeshManager.h"
 
 CCore::CCore() :
 	m_ConfigPath(""),
@@ -26,7 +27,8 @@ CCore::CCore() :
 	m_pLanguageManager( new CLanguageManager() ),
 	m_pFontManager( new CFontManager() ),
 	m_pActionManager( new CActionManager() ),
-	m_pDebugWindowManager( new CDebugWindowManager() )
+	m_pDebugWindowManager( new CDebugWindowManager() ),
+	m_pStaticMeshManager( new CStaticMeshManager() )
 {
 }
 

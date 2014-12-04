@@ -17,6 +17,7 @@ class CLanguageManager;
 class CFontManager;
 class CActionManager;
 class CDebugWindowManager;
+class CStaticMeshManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -47,6 +48,7 @@ private:
 	CFontManager*			m_pFontManager;
 	CActionManager*			m_pActionManager;
 	CDebugWindowManager*	m_pDebugWindowManager;
+	CStaticMeshManager*		m_pStaticMeshManager;
 
 	void LoadXml();
 	void InitManagers();
@@ -76,6 +78,7 @@ public:
 	GET_SET(CFontManager*, pFontManager);
 	GET_SET(CLanguageManager*, pLanguageManager);
 	GET_SET(CActionManager*, pActionManager);
+	GET_SET(CStaticMeshManager*, pStaticMeshManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

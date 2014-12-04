@@ -10,11 +10,11 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh()
+CStaticMesh::CStaticMesh():
+	m_FileName(""),
+	m_NumFaces(0),
+	m_NumVertexs(0)
 {
-	m_FileName	 = "";
-	m_NumFaces	 = 0;
-	m_NumVertexs = 0;
 }
 
 CStaticMesh::~CStaticMesh()
@@ -114,6 +114,6 @@ bool CStaticMesh::ReLoad ()
 	return Load(m_FileName);
 }
 
-void CStaticMesh::Render(CGraphicsManager *RM) const
+void CStaticMesh::Render(CGraphicsManager *GM) const
 {
 }

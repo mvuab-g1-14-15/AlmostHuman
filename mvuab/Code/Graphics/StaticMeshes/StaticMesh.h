@@ -1,3 +1,7 @@
+#pragma once
+#ifndef INC_STATIC_MESH_H_
+#define INC_STATIC_MESH_H_
+
 #include <vector>
 #include <string>
 
@@ -30,5 +34,7 @@ class CStaticMesh
 		bool Load (const std::string &FileName);
 		bool ReLoad ();
 
-		void Render (CGraphicsManager *RM) const;
+		void Render (CGraphicsManager *GM) const;
 };
+
+#endif //INC_STATIC_MESH_H_
