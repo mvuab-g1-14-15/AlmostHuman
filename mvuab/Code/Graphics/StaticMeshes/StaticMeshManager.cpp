@@ -17,14 +17,14 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 	m_FileName = FileName;
 	
 	CXMLTreeNode newFile;
-	if(false == newFile.LoadFile(FileName.c_str()))
+	if (!newFile.LoadFile(m_FileName.c_str()))
 	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load No se puede abrir \"%s\"!", FileName.c_str());
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
 		return false;
 	}
 
 	CXMLTreeNode node = newFile["static_meshes"];
-	if(false == node.Exists())
+	if(!node.Exists())
 	{
 		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
 		return false;
@@ -36,8 +36,14 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 		std::string file = node(i).GetPszProperty("filename", "no_file");
 
 		CStaticMesh *l_StaticMesh = new CStaticMesh();
-		if(false == l_StaticMesh->Load(file)) delete l_StaticMesh;
-		else AddResource(name, l_StaticMesh);
+		if(!l_StaticMesh->Load(file))
+		{
+			delete l_StaticMesh;
+		}
+		else
+		{
+			AddResource(name, l_StaticMesh);
+		}
 	}
 	
 	return true;

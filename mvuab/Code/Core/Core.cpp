@@ -16,8 +16,8 @@ CCore::CCore() :
 	m_SoundPath(""),
 	m_InputPath(""),
 	m_FontsPath(""),
-	m_StaticMeshesPath(".\\Data\\StaticMeshes.xml"),
-	m_RenderableObjectsPath(".\\Data\\RenderableObjects.xml"),
+	m_StaticMeshesPath("./Data/static_meshes.xml"),
+	m_RenderableObjectsPath("./Data/renderable_objects.xml"),
 	m_ScreenWidth(800),
 	m_ScreenHeight(600),
 	m_WindowXPos(0),
@@ -71,7 +71,7 @@ void CCore::Render()
 {
 	m_pGraphicsManager->Render();
 	m_pDebugWindowManager->Render();
-	//m_pRenderableObjectsManager->Render(m_pGraphicsManager);
+	m_pRenderableObjectsManager->Render(m_pGraphicsManager);
 	//uint32 idFont = m_pFontManager->GetTTF_Id("Annabel");
 	//uint32 nextLine = m_pFontManager->DrawLiteral(0,0,"FPS");
 	//m_pFontManager->DrawDefaultText(0,nextLine, colGREEN, "%d", (uint32) m_FPS);
