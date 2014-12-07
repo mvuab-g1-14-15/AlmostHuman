@@ -24,7 +24,7 @@ public:
     Vect3f GetVecUp() const;
     Vect3f GetVecSide() const;
     void AddYawPitch( float32 dx, float32 dy );
-    void Update(float32 aElapsedTime);
+    void Update(float32 deltaTime);
     
     enum CameraMovementDirecction{ UP = 0, DOWN, FORWARD, BACKWARD, LEFT, RIGHT };
     void Move( CameraMovementDirecction aMovementDir, float32 speed );
@@ -50,6 +50,7 @@ protected:
     float32             m_Yaw;
     float32             m_Pitch;
     float32             m_Roll;
+    float32             m_Speed;
     Vect3f              m_EyePosition;
     Vect3f              m_LookAt;
     std::string         m_TypeStr;

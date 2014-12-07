@@ -1,7 +1,8 @@
 #include "Camera.h"
 #include "Math\MathUtils.h"
-#include "..\Object3D.h"
+#include "Object3D.h"
 #include "Utils\Defines.h"
+#include "ActionManager.h"
 
 CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio, std::string aType ) 
 	: m_FOV(aFOV),
@@ -11,7 +12,8 @@ CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 a
 	m_EyePosition( aEyePosition ),
 	m_LookAt( aLookAt ),
 	m_pAttachedObject( 0 ),
-    m_TypeStr(aType)
+    m_TypeStr(aType),
+    m_Speed( 0.1f )
 {
 	InitYawAndPitch();
 }
@@ -24,7 +26,8 @@ CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObje
 	m_EyePosition( aEyePosition ),
 	m_LookAt( aLookAt ),
 	m_pAttachedObject( apAttachedObject ),
-    m_TypeStr(aType)
+    m_TypeStr(aType),
+    m_Speed( 0.1f )
 {
 	InitYawAndPitch();
 }
@@ -121,7 +124,32 @@ void CCamera::Move( CameraMovementDirecction aMovementDir, float32 speed )
 	m_pAttachedObject->SetPosition(m_LookAt);
 }
 
-void CCamera::Update(float32 aElapsedTime)
+void CCamera::Update(float32 deltaTime)
 {
+    CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+    if( pActionManager->DoAction("MoveForward") )
+    {
+        Move( FORWARD, m_Speed );
+    }
+    if( pActionManager->DoAction("MoveBackward") )
+    {
+        Move( BACKWARD, m_Speed );
+    }
+    if( pActionManager->DoAction("MoveLeft" ) )
+    {
+        Move( LEFT, m_Speed );
+    }
+    if( pActionManager->DoAction("MoveRight") )
+    {
+        Move( RIGHT, m_Speed );
+    }
+    if( pActionManager->DoAction("MoveUp") )
+    {
+        Move( UP, m_Speed );
+    }
+    if( pActionManager->DoAction("MoveDown") )
+    {
+        Move( DOWN, m_Speed );
+    }
 }
 

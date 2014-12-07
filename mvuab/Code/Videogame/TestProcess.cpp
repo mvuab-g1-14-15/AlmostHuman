@@ -42,6 +42,7 @@ CTestProcess::~CTestProcess()
 
 void CTestProcess::Update(float32 deltaTime)
 {
+    m_pCamera->Update(deltaTime);
 	m_FPS = 1.0f/deltaTime;
 
 	CInputManager* pInputManager = CInputManager::GetSingletonPtr();
@@ -61,39 +62,14 @@ void CTestProcess::Update(float32 deltaTime)
 		else m_pCamera = m_pFPSCamera;
 	}
 
-	if( pActionManager->DoAction("MoveForward") )
-	{
-		m_pCamera->Move( CFPSCamera::FORWARD, m_Speed );
-	}
-	if( pActionManager->DoAction("MoveBackward") )
-	{
-		m_pCamera->Move( CFPSCamera::BACKWARD, m_Speed );
-	}
-	if( pActionManager->DoAction("MoveLeft" ) )
-	{
-		m_pCamera->Move( CFPSCamera::LEFT, m_Speed );
-	}
-	if( pActionManager->DoAction("MoveRight") )
-	{
-		m_pCamera->Move( CFPSCamera::RIGHT, m_Speed );
-	}
-	if( pActionManager->DoAction("MoveUp") )
-	{
-		m_pCamera->Move( CFPSCamera::UP, m_Speed );
-	}
-	if( pActionManager->DoAction("MoveDown") )
-	{
-		m_pCamera->Move( CFPSCamera::DOWN, m_Speed );
-	}
-
-	Vect3i delta = pInputManager->GetMouseDelta();
+    Vect3i delta = pInputManager->GetMouseDelta();
 	if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
 	{
 		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
 	}
 
-	CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-	if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
+	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
 }
 
 void CTestProcess::Init()

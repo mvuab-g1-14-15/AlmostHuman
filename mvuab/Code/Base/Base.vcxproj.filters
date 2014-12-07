@@ -147,6 +147,9 @@
     <ClInclude Include="Utils\Name.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Math\AABB.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">
