@@ -4,13 +4,13 @@
 #include <d3dx9.h>
 
 CTPSCamera::CTPSCamera(Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio)
-: CCamera( aEyePosition, aLookAt, aZNear, aZFar, aFOV, aAspectRatio )
+: CCamera( aEyePosition, aLookAt, aZNear, aZFar, aFOV, aAspectRatio,"TPS" )
 {
 	m_Zoom = m_EyePosition.Distance(m_LookAt);
 }
 
 CTPSCamera::CTPSCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject )
-: CCamera( aEyePosition, aLookAt, apAttachedObject )
+: CCamera( aEyePosition, aLookAt, apAttachedObject, "TPS" )
 {
 	m_Zoom = m_EyePosition.Distance(m_LookAt);
 }

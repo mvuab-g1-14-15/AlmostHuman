@@ -4,11 +4,11 @@
 #include <d3dx9.h>
 
 CFPSCamera::CFPSCamera(Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio)
-: CCamera( aEyePosition, aLookAt, aZNear, aZFar, aFOV, aAspectRatio )
+: CCamera( aEyePosition, aLookAt, aZNear, aZFar, aFOV, aAspectRatio, "FPS")
 {}
 
 CFPSCamera::CFPSCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject )
-: CCamera( aEyePosition, aLookAt, apAttachedObject )
+: CCamera( aEyePosition, aLookAt, apAttachedObject,"FPS" )
 {}
 
 void CFPSCamera::RecalculateCameraData()

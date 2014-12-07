@@ -10,6 +10,7 @@
 #include "Logger\Logger.h"
 #include "Utils\LogRender.h"
 #include "Utils\Defines.h"
+#include "Math\AABB.h"
 
 #include "RenderableVertex\RenderableVertex.h"
 #include "RenderableVertex\IndexedVertexs.h"
@@ -112,6 +113,12 @@ void CTestProcess::Init()
 	g_TX = new CTexture(); g_TX->Load("./Data/Textures/texture0.jpg");
 	g_StaticMesh = new CStaticMesh();
 	g_StaticMesh->Load("./Data/meshes/prueba.mesh");
+
+    AABB3f BndBox(Vect3f(0.0f,0.0f,0.0f), Vect3f(0.0f,1.0f,1.0f) );
+
+    Vect3f center( BndBox.GetCenter() );
+    Vect3f height( BndBox.GetCenter() );
+    Vect3f radious( BndBox.GetCenter() );
 }
 
 void CTestProcess::Render()

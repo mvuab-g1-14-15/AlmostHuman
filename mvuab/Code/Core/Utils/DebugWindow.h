@@ -29,6 +29,8 @@ protected:
 	uint32								m_WindowWidth;
 	uint32								m_WindowHeight;
 	Vect2i								m_WindowPosition;
+    CColor				                m_FontColor_debug;
+	CColor				                m_FontColor_release;
 };
 
 #endif //INC_DEBUG_WINDOW_H_

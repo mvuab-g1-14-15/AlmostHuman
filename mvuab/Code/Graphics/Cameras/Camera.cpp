@@ -3,26 +3,28 @@
 #include "..\Object3D.h"
 #include "Utils\Defines.h"
 
-CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio ) 
+CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio, std::string aType ) 
 	: m_FOV(aFOV),
 	m_AspectRatio(aAspectRatio),
 	m_ZNear(aZNear),
 	m_ZFar(aZFar),
 	m_EyePosition( aEyePosition ),
 	m_LookAt( aLookAt ),
-	m_pAttachedObject( 0 )
+	m_pAttachedObject( 0 ),
+    m_TypeStr(aType)
 {
 	InitYawAndPitch();
 }
 
-CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject )
+CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject, std::string aType )
 	: m_FOV(mathUtils::Deg2Rad(60.f)),
 	m_AspectRatio(4.f/3.f),
 	m_ZNear(0.1f),
 	m_ZFar(100.f),
 	m_EyePosition( aEyePosition ),
 	m_LookAt( aLookAt ),
-	m_pAttachedObject( apAttachedObject )
+	m_pAttachedObject( apAttachedObject ),
+    m_TypeStr(aType)
 {
 	InitYawAndPitch();
 }

@@ -36,12 +36,19 @@ void CFPSDebugWindow::RenderInfo()
 {
 	CFontManager* fm = CFontManager::GetSingletonPtr();
 	CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
+
+#ifdef _DEBUG
+    const CColor &l_FontColor = m_FontColor_debug;
+#else
+    const CColor &l_FontColor = m_FontColor_release;
+#endif
+
 	uint32 w, h;
 	renderManager->GetWidthAndHeight(w,h);
 	m_WindowPosition.y = uint32(h - (85.0f)); //85 = 5 lines *17 height per line
-	uint32 incY = fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y,  colBLACK, "FPS");
-	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, colBLACK, "Current: %d", m_FPS );
-	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, colBLACK, "Average: %d", (m_NumberFPSCount) ? (uint32)m_NumberFPSSum / m_NumberFPSCount : 0 );
-	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, colBLACK, "Min: %d", m_MinFps );
-	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, colBLACK, "Max: %d", m_MaxFps );
+	uint32 incY = fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y,  l_FontColor, "FPS");
+	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Current: %d", m_FPS );
+	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Average: %d", (m_NumberFPSCount) ? (uint32)m_NumberFPSSum / m_NumberFPSCount : 0 );
+	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Min: %d", m_MinFps );
+	incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Max: %d", m_MaxFps );
 }
