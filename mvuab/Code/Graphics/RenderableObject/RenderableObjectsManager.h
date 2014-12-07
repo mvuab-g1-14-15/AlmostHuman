@@ -19,6 +19,6 @@ class CRenderableObjectsManager : CTemplatedVectorMapManager<CRenderableObject>
 		const std::string &InstanceModelName, const Vect3f &Position);
 		//void AddResource(const std::string &Name, CRenderableObject *RenderableObject);
 		void CleanUp();
-		void Load(const std::string &FileName);
+		bool Load(const std::string &FileName);
 		CRenderableObject * GetInstance(const std::string &Name) const;
 };

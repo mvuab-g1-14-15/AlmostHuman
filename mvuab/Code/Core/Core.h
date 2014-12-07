@@ -18,6 +18,7 @@ class CFontManager;
 class CActionManager;
 class CDebugWindowManager;
 class CStaticMeshManager;
+class CRenderableObjectsManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -39,6 +40,8 @@ private:
 	std::string					m_SoundPath;
 	std::string					m_FontsPath;
 	std::string					m_InputPath;
+	std::string					m_StaticMeshesPath;
+	std::string					m_RenderableObjectsPath;
 	std::vector<std::string>	m_v_languages;
 
 	// Managers
@@ -49,6 +52,7 @@ private:
 	CActionManager*			m_pActionManager;
 	CDebugWindowManager*	m_pDebugWindowManager;
 	CStaticMeshManager*		m_pStaticMeshManager;
+	CRenderableObjectsManager* m_pRenderableObjectsManager;
 
 	void LoadXml();
 	void InitManagers();
@@ -79,6 +83,7 @@ public:
 	GET_SET(CLanguageManager*, pLanguageManager);
 	GET_SET(CActionManager*, pActionManager);
 	GET_SET(CStaticMeshManager*, pStaticMeshManager);
+	GET_SET(CRenderableObjectsManager*, pRenderableObjectsManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

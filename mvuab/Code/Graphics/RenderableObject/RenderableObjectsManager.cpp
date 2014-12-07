@@ -13,7 +13,7 @@ CRenderableObjectsManager::~CRenderableObjectsManager()
 }
 
 //<MeshInstance name="Boli Azul" core="" pos="" yaw="" pitch="" roll="" scale=""/>
-void CRenderableObjectsManager::Load(const std::string &FileName)
+bool CRenderableObjectsManager::Load(const std::string &FileName)
 {
 	CXMLTreeNode newFile;
 	CXMLTreeNode m;
@@ -21,6 +21,7 @@ void CRenderableObjectsManager::Load(const std::string &FileName)
 	if (!newFile.LoadFile(FileName.c_str()))
 	{
 		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR,"CStaticMeshManager::Load --> Error loading XML %s.",FileName.c_str());
+		return false;
 	}
 
 	m = newFile["RenderableObjects"];
@@ -60,4 +61,11 @@ void CRenderableObjectsManager::Load(const std::string &FileName)
 void CRenderableObjectsManager::CleanUp()
 {
 	Destroy();
+}
+
+void
+CRenderableObjectsManager::Render(CGraphicsManager *GM)
+{
+	for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+		m_ResourcesVector[i]->Render(GM);
 }
