@@ -47,7 +47,7 @@ struct SCREEN_COLOR_VERTEX
 CGraphicsManager::CGraphicsManager() :
 	m_uWidth(800),
 	m_uHeight(600),
-    m_BackbufferColor_debug(colWHITE),
+    m_BackbufferColor_debug(colBLACK),
 	m_BackbufferColor_release(colBLACK),
 	m_bPaintSolid(true)
 {

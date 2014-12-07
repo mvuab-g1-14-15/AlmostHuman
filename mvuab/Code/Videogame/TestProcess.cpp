@@ -21,13 +21,11 @@
 
 #include <d3dx9.h>
 
-CRenderableVertexs *g_RV = 0;
-CTexture *g_TX = 0;
 CStaticMesh *g_StaticMesh = 0;
 
 CTestProcess::CTestProcess() : CProcess(), 
 	m_Speed( 0.1f ),
-	m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
+	m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,5.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
 	m_pTPSCamera( new CTPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
 	m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {

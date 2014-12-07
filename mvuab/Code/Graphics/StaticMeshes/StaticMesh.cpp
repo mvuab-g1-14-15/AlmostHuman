@@ -104,12 +104,12 @@ bool CStaticMesh::Load(const std::string &FileName)
 		std::fread(l_VtxsAddress, l_dataSize, 1, l_pFile);
 
 		// Reading index buffer
-		unsigned short int l_IdxCount = 0;
-		std::fread(&l_IdxCount, sizeof(unsigned short int), 1, l_pFile);
+		unsigned short l_IdxCount = 0;
+		std::fread(&l_IdxCount, sizeof(unsigned short), 1, l_pFile);
 		
 		void *l_IdxAddress = NULL;
-		l_IdxAddress = malloc(sizeof(unsigned short) * l_IdxCount);
-		std::fread(l_VtxsAddress, sizeof(unsigned short), 1, l_pFile);
+		l_IdxAddress = malloc(sizeof(unsigned short int) * l_IdxCount);
+		std::fread(l_VtxsAddress, sizeof(unsigned short int) * l_IdxCount, 1, l_pFile);
 
 		// Now create the renderable vertex
 		CRenderableVertexs *l_RV = NULL;
