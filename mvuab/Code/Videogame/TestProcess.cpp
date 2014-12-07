@@ -21,8 +21,6 @@
 
 #include <d3dx9.h>
 
-CStaticMesh *g_StaticMesh = 0;
-
 CTestProcess::CTestProcess() : CProcess(), 
 	m_Speed( 0.1f ),
 	m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,5.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
@@ -74,9 +72,6 @@ void CTestProcess::Init()
 {
 	m_pCamera = m_pFPSCamera;
 
-	g_StaticMesh = new CStaticMesh();
-	g_StaticMesh->Load("./Data/meshes/prueba.mesh");
-
     AABB3f BndBox(Vect3f(0.0f,0.0f,0.0f), Vect3f(0.0f,1.0f,1.0f) );
 
     Vect3f center( BndBox.GetCenter() );
@@ -90,8 +85,6 @@ void CTestProcess::Render()
 
     pGraphicsManager->DrawAxis(5);
 	pGraphicsManager->DrawGrid(100, colORANGE, 50, 50);
-	
-	g_StaticMesh->Render(pGraphicsManager);
 }
 
 void CTestProcess::RenderDebugInfo()
