@@ -36,9 +36,9 @@ void CVideogameProcess::Render()
 
 
 	pGraphicsManager->DrawAxis(5);
-	pGraphicsManager->DrawBox(2,10,15, colBLACK );
+	//pGraphicsManager->DrawBox(2,10,15, colBLACK );
 	pGraphicsManager->DrawGrid(40,colORANGE,20,20);
-	pGraphicsManager->DrawSphere( 5, colRED, 80 );
+	//pGraphicsManager->DrawSphere( 5, colRED, 80 );
 
 	Vect3f CameraDirection( m_pCamera->GetDirection() );
 	if( pActionManager->DoAction("CommutationCamera" ) )

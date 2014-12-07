@@ -52,23 +52,24 @@ bool CStaticMesh::Load(const std::string &FileName)
 	std::vector<unsigned int> l_VertexTypes;
 	for(unsigned int i = 0; i < l_NumMat; ++i)
 	{
-		unsigned short int l_numTexturas = 0;
-		std::fread(&l_numTexturas, sizeof(unsigned short int), 1, l_pFile);
+		unsigned short l_VertexType = 0;
+		std::fread(&l_VertexType, sizeof(unsigned short int), 1, l_pFile);
+
+		unsigned short int l_numTexturas = 1;
 
 		std::vector<CTexture *> l_Texture;
 		for(unsigned int j = 0; j < l_numTexturas; ++j)
 		{
-			unsigned short l_VertexType = 0;
-			std::fread(&l_VertexType, sizeof(unsigned short int), 1, l_pFile);
 			l_VertexTypes.push_back(l_VertexType);
 
 			unsigned short l_TextureLength = 0;
 			std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
+			++l_TextureLength;
 
 			char *textureName = (char *) malloc (sizeof(char) * (l_TextureLength));
-			ZeroMemory(textureName, l_TextureLength);
+			ZeroMemory(textureName, sizeof(char)* l_TextureLength);
 
-			std::fread(textureName, l_TextureLength, 1, l_pFile);
+			std::fread(textureName, sizeof(char) * l_TextureLength, 1, l_pFile);
 
 			CTexture *t = new CTexture(); 
 			if(!t->Load(textureName)) delete (t);
@@ -126,4 +127,6 @@ bool CStaticMesh::ReLoad ()
 
 void CStaticMesh::Render(CGraphicsManager *GM) const
 {
+	for(unsigned int i=0; i<m_RVs.size(); ++i)
+		m_RVs[i]->Render(GM);
 }

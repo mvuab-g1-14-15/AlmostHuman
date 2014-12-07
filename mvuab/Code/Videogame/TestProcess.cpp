@@ -127,53 +127,56 @@ void CTestProcess::Render()
 
 	//pGraphicsManager->DrawAxis(5);
 	pGraphicsManager->DrawGrid(100,colORANGE,50,50);
+	pGraphicsManager->DrawAxis(1);
 
-	Mat44f identity;
-	identity.SetIdentity();
+	//Mat44f identity;
+	//identity.SetIdentity();
 
-	//pGraphicsManager->DrawCylinder( 10,10,20,20, colBLACK, true);
-	//pGraphicsManager->DrawSphere( 2, colYELLOW, 20 );
-	pGraphicsManager->DrawIcoSphere();
-	if( m_PaintAll )
-	{
-		// Sun
-		Mat44f transformationSun;
-		transformationSun.SetIdentity();
-		transformationSun.RotByAngleY(m_Amount);
-		pGraphicsManager->SetTransform( transformationSun );
-		pGraphicsManager->DrawSphere( 2, colYELLOW, 20 );
-		pGraphicsManager->SetTransform( identity );
+	////pGraphicsManager->DrawCylinder( 10,10,20,20, colBLACK, true);
+	////pGraphicsManager->DrawSphere( 2, colYELLOW, 20 );
+	////pGraphicsManager->DrawIcoSphere();
+	//if( m_PaintAll )
+	//{
+	//	// Sun
+	//	Mat44f transformationSun;
+	//	transformationSun.SetIdentity();
+	//	transformationSun.RotByAngleY(m_Amount);
+	//	pGraphicsManager->SetTransform( transformationSun );
+	//	pGraphicsManager->DrawSphere( 2, colYELLOW, 20 );
+	//	pGraphicsManager->SetTransform( identity );
 
-		// Earth
-		Mat44f transformationEarth;
-		transformationEarth.SetIdentity();
-		transformationEarth.RotByAngleY(m_Amount);
+	//	// Earth
+	//	Mat44f transformationEarth;
+	//	transformationEarth.SetIdentity();
+	//	transformationEarth.RotByAngleY(m_Amount);
 
-		Mat44f transformationEarthTrsf;
-		transformationEarthTrsf.SetIdentity();
-		transformationEarthTrsf.Translate( Vect3f( mathUtils::Cos(m_Angle) * 10.0f, 0.0f, mathUtils::Sin(m_Angle)* 10.0f ) );
+	//	Mat44f transformationEarthTrsf;
+	//	transformationEarthTrsf.SetIdentity();
+	//	transformationEarthTrsf.Translate( Vect3f( mathUtils::Cos(m_Angle) * 10.0f, 0.0f, mathUtils::Sin(m_Angle)* 10.0f ) );
 
-		pGraphicsManager->SetTransform(  transformationEarth*transformationEarthTrsf );
-		pGraphicsManager->DrawSphere( 1, colWHITE, 20 );
-		pGraphicsManager->SetTransform( identity );
+	//	pGraphicsManager->SetTransform(  transformationEarth*transformationEarthTrsf );
+	//	pGraphicsManager->DrawSphere( 1, colWHITE, 20 );
+	//	pGraphicsManager->SetTransform( identity );
 
-		//Moon
-		Mat44f transformationMoon;
-		transformationMoon.SetIdentity();
-		transformationMoon.RotByAngleY(m_Amount);
+	//	//Moon
+	//	Mat44f transformationMoon;
+	//	transformationMoon.SetIdentity();
+	//	transformationMoon.RotByAngleY(m_Amount);
 
-		Mat44f transformationMoonTrsf;
-		transformationMoonTrsf.SetIdentity();
-		transformationMoonTrsf.Translate( Vect3f( mathUtils::Cos(m_AngleMoon)*2.0f, 0.0f, mathUtils::Sin(m_AngleMoon) * 2.0f ) );
+	//	Mat44f transformationMoonTrsf;
+	//	transformationMoonTrsf.SetIdentity();
+	//	transformationMoonTrsf.Translate( Vect3f( mathUtils::Cos(m_AngleMoon)*2.0f, 0.0f, mathUtils::Sin(m_AngleMoon) * 2.0f ) );
 
-		pGraphicsManager->SetTransform( transformationMoonTrsf * transformationMoon * transformationEarthTrsf );
-		pGraphicsManager->DrawSphere( 0.2f, colBLACK, 20 );
-	}
+	//	pGraphicsManager->SetTransform( transformationMoonTrsf * transformationMoon * transformationEarthTrsf );
+	//	pGraphicsManager->DrawSphere( 0.2f, colBLACK, 20 );
+	//}
 
-	pGraphicsManager->SetTransform( identity );
+	//pGraphicsManager->SetTransform( identity );
 
 	g_TX->Activate(0);
-	g_RV->Render(pGraphicsManager);
+	//g_RV->Render(pGraphicsManager);
+
+	g_StaticMesh->Render(pGraphicsManager);
 
 	//pGraphicsManager->DrawCamera(m_pTPSCamera);
 	//pGraphicsManager->DrawCamera(m_pFPSCamera);

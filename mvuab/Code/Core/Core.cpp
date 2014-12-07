@@ -8,6 +8,7 @@
 #include "ActionManager.h"
 #include "Utils\DebugWindowManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
 
 CCore::CCore() :
 	m_ConfigPath(""),
@@ -15,6 +16,8 @@ CCore::CCore() :
 	m_SoundPath(""),
 	m_InputPath(""),
 	m_FontsPath(""),
+	m_StaticMeshesPath(".\\Data\\StaticMeshes.xml"),
+	m_RenderableObjectsPath(".\\Data\\RenderableObjects.xml"),
 	m_ScreenWidth(800),
 	m_ScreenHeight(600),
 	m_WindowXPos(0),
@@ -28,7 +31,8 @@ CCore::CCore() :
 	m_pFontManager( new CFontManager() ),
 	m_pActionManager( new CActionManager() ),
 	m_pDebugWindowManager( new CDebugWindowManager() ),
-	m_pStaticMeshManager( new CStaticMeshManager() )
+	m_pStaticMeshManager( new CStaticMeshManager() ),
+	m_pRenderableObjectsManager( new CRenderableObjectsManager() )
 {
 }
 
@@ -40,6 +44,8 @@ CCore::~CCore()
 	CHECKED_DELETE(m_pFontManager);
 	CHECKED_DELETE(m_pLanguageManager);
 	CHECKED_DELETE(m_pDebugWindowManager);
+	CHECKED_DELETE(m_pStaticMeshManager);
+	CHECKED_DELETE(m_pRenderableObjectsManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -65,6 +71,7 @@ void CCore::Render()
 {
 	m_pGraphicsManager->Render();
 	m_pDebugWindowManager->Render();
+	//m_pRenderableObjectsManager->Render(m_pGraphicsManager);
 	//uint32 idFont = m_pFontManager->GetTTF_Id("Annabel");
 	//uint32 nextLine = m_pFontManager->DrawLiteral(0,0,"FPS");
 	//m_pFontManager->DrawDefaultText(0,nextLine, colGREEN, "%d", (uint32) m_FPS);
@@ -156,4 +163,6 @@ void CCore::InitManagers()
 	m_pLanguageManager->SetCurrentLanguage(m_CurrentLanguage);
 	m_pFontManager->Init(m_pGraphicsManager);
 	m_pFontManager->LoadTTFs(m_FontsPath);
+	m_pStaticMeshManager->Load(m_StaticMeshesPath);
+	m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
 }
