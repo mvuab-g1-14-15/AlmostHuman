@@ -9,15 +9,6 @@ class CRenderableVertexs;
 class CGraphicsManager;
 class CTexture;
 
-enum MaterialType
-{
-	DIFFUSE = 0,
-	BUMP,
-	SPECULAR,
-	REFLECTION
-
-};
-
 class CStaticMesh
 {
 	protected:
@@ -31,10 +22,11 @@ class CStaticMesh
 		CStaticMesh();
 		~CStaticMesh();
 
-		bool Load (const std::string &FileName);
-		bool ReLoad ();
+		bool Load       (const std::string &FileName);
+		bool ReLoad     ();
 
-		void Render (CGraphicsManager *GM) const;
+		void Render     (CGraphicsManager *GM) const;
+        void Destroy    ();
 };
 
 #endif //INC_STATIC_MESH_H_

@@ -14,8 +14,8 @@ CTexture::~CTexture()
 
 bool CTexture::LoadFile()
 {
-	HRESULT l_Res = D3DXCreateTextureFromFile(CGraphicsManager::GetSingletonPtr()->GetDevice(), ("/Data/textures/"+m_FileName).c_str(), &m_Texture );
-	return m_Texture != NULL;
+	HRESULT l_Res = D3DXCreateTextureFromFile(CGraphicsManager::GetSingletonPtr()->GetDevice(), ("./Data/textures/" + m_FileName).c_str(), &m_Texture );
+    return(l_Res == S_OK);
 }
 
 void CTexture::Unload()

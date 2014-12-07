@@ -33,18 +33,19 @@ void CEngine::Render()
 	// Obtain an instance to the graphics manager
 	CGraphicsManager* pGraphicsManager = GraphicsInstance;
 	pGraphicsManager->BeginRender();
-	pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
-	m_pCore->Render();
-	m_pProcess->Render();
-	m_pLogRender->Render();
 
-#if _DEBUG
-	pGraphicsManager->DisbaleZBuffering();
-	pGraphicsManager->EnableAlphaBlend();
-	m_pProcess->RenderDebugInfo();
-	pGraphicsManager->DisbaleAlphaBlend();
-	pGraphicsManager->EnableZBuffering();
-#endif
+	    pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
+	    m_pCore->Render();
+	    m_pProcess->Render();
+	    m_pLogRender->Render();
+
+        #if _DEBUG
+	        pGraphicsManager->DisbaleZBuffering();
+	        pGraphicsManager->EnableAlphaBlend();
+	        m_pProcess->RenderDebugInfo();
+	        pGraphicsManager->DisbaleAlphaBlend();
+	        pGraphicsManager->EnableZBuffering();
+        #endif
 
 	pGraphicsManager->EndRender();
 }
@@ -52,7 +53,9 @@ void CEngine::Render()
 void CEngine::Init( CProcess * apProcess, const std::string &aConfigPath, HWND aWindowId )
 {
 	m_pCore->Init(aConfigPath, aWindowId);
+    m_pLogRender->SetLinePerPage(20);
+
 	m_pProcess = apProcess;
 	m_pProcess->Init();
-	m_pLogRender->SetLinePerPage(20);
+	
 }

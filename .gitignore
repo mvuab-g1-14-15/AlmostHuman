@@ -12,3 +12,4 @@
 *.rc
 *.cache
 *.ipch
+*.db
