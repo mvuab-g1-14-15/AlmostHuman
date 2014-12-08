@@ -21,7 +21,7 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 	
 	button GetButton "Get" pos:[14,369] width:77 height:29
 	button SetButton "Set" pos:[171,369] width:77 height:29
-	
+	--ENABLE OR DISABLE DROPLISTDOWN
 	on ExportCheckRender changed theState do
 	if (ExportCheckRender.checked)==true then
 	(
@@ -75,7 +75,9 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 	(
 		GenerateListLogic.enabled=false
 	)
+	--ENABLE OR DISABLE DROPLISTDOWN END
 	
+	--GETBUTTON METHOD FOR PROPERTIES
 	on GetButton pressed do
 	(
 		for i=1 to $.count do
@@ -217,9 +219,12 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 			)
 		)
 	)
+	--GETBUTTON METHOD FOR PROPERTIES END
 	
+	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	on SetButton pressed do
 	(
+		
 		for i=1 to $.count do
 		(
 			if (ExportCheckRender.checked)==true then
@@ -285,8 +290,7 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 				setUserProp $[i] "generate_logic" ""
 			)
 		)
-		
 	)
-	
+	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
 )
 createDialog UABSetProperties
