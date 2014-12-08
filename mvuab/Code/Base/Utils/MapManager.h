@@ -17,7 +17,7 @@ protected:
 public:
 	virtual T * GetResource(const std::string &Name)
 	{
-		if( m_Resources.find(Name) != m_Resources.end() )
+		if( m_Resources.find(Name) == m_Resources.end() )
 		{
 			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::GetResource->(%s)", Name.c_str() );
 			return 0;

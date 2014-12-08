@@ -18,5 +18,19 @@ CInstanceMesh::~CInstanceMesh()
 
 void CInstanceMesh::Render(CGraphicsManager *GM)
 {
+	Mat44f t, rot, pos;
+	t.SetIdentity();
+	rot.SetIdentity();
+	pos.SetIdentity();
+
+	rot.RotByAnglesYXZ(m_fYaw, m_fPitch, m_fRoll);
+	pos.Translate(m_Position);
+
+	t = pos*rot;
+
+	GM->SetTransform(t);
 	m_pStaticMesh->Render(GM);
+
+	t.SetIdentity();
+	GM->SetTransform(t);
 }
