@@ -94,6 +94,12 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 					)
 				)
 			)
+			else
+			(
+				CheckBox.checked=false
+				List.selection=1
+				List.enabled=false
+			)
 		)
 		else
 		(
@@ -218,7 +224,7 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 		)
 	)
 	--SET PROPERTY IN SELECTED ITEMS END
-	global ObjAnterior
+	global ObjAnterior=undefined
 	--GETBUTTON METHOD FOR PROPERTIES
 	on GetButton pressed do
 	(
@@ -289,11 +295,15 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	on SetButton pressed do
 	(
-		if ObjAnterior!=$ then
+		format "El objeto es %\n" ObjAnterior
+		if ObjAnterior!=undefined then
 		(
-			if (queryBox "Are the properties are of another object, you are sure assign it to another?")==true then
+			if ObjAnterior!=$ then
 			(
-				SetProperties $
+				if (queryBox "Are the properties are of another object, you are sure assign it to another?")==true then
+				(
+					SetProperties $
+				)
 			)
 		)
 		else
