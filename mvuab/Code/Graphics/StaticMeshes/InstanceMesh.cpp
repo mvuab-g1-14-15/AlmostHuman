@@ -13,7 +13,6 @@ CInstanceMesh::CInstanceMesh(const std::string &Name, const std::string &CoreNam
 	
 CInstanceMesh::~CInstanceMesh()
 {
-	CHECKED_DELETE(m_pStaticMesh);
 }
 
 void CInstanceMesh::Render(CGraphicsManager *GM)

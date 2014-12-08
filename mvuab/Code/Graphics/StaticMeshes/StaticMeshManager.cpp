@@ -2,14 +2,13 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 
-CStaticMeshManager::CStaticMeshManager()
+CStaticMeshManager::CStaticMeshManager() : m_FileName("")
 {
-	m_FileName = "";
 }
 
 CStaticMeshManager::~CStaticMeshManager()
 {
-	CMapManager::Destroy();
+    Destroy();
 }
 
 bool CStaticMeshManager::Load(const std::string &FileName)
@@ -51,6 +50,6 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 
 bool CStaticMeshManager::Reload()
 {
-	CMapManager::Destroy();
+    Destroy();
 	return Load(m_FileName);
 }

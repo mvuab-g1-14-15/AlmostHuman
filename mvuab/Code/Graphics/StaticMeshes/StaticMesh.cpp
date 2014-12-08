@@ -21,9 +21,13 @@ CStaticMesh::~CStaticMesh()
 
 void CStaticMesh::Destroy()
 {
-    for(std::vector<std::vector<CTexture *>>::iterator it1 = m_Textures.begin(); it1 != m_Textures.end(); it1++)
+    for(std::vector<TTextureVector>::iterator it1 = m_Textures.begin(); it1 != m_Textures.end(); ++it1)
 	{
-		for(std::vector<CTexture *>::iterator it2 = it1->begin(); it2 != it1->end(); it2++) delete(*it2); 
+		for(TTextureVector::iterator it2 = it1->begin(); it2 != it1->end(); ++it2)
+        {
+            CTexture* pTexture = *it2;
+            CHECKED_DELETE(pTexture);
+        }
 		it1->clear();
 	}
 
