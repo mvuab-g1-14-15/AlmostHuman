@@ -1,3 +1,4 @@
 <static_meshes>
 	<static_mesh name="Box" filename="./Data/meshes/prueba.mesh"/>
+	<static_mesh name="BoxMM" filename="./Data/meshes/multimat.mesh"/>
 </static_meshes>

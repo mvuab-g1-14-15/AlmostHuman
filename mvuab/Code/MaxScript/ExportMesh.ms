@@ -194,10 +194,7 @@ fn WriteBuffers file VertexBuffer IndexBuffer =
 			WriteFloat file uv.x
 			WriteFloat file uv.y
 		)
-	)
-	
-	for iMaterial = 1 to num_materials do
-	(
+		
 		num_face = IndexBuffer[iMaterial].count
 		format "#Faces = %\n" num_face
 		WriteShort file num_face #unsigned
@@ -278,4 +275,4 @@ fn ExportMesh Obj filename =
 	return 0
 )
 
-ExportMesh $ "D:\prueba.mesh"
+ExportMesh $ "E:\multimat.mesh"
