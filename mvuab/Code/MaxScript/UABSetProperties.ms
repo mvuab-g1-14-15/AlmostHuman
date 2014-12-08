@@ -77,145 +77,210 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 	)
 	--ENABLE OR DISABLE DROPLISTDOWN END
 	
+	--GET PROPERTY AND UPDATE INTERFACE
+	fn GetPropertyCheckList aProperty CheckBox List=
+	(
+		if aProperty!="" then
+		(
+			if aProperty!=undefined then
+			(
+				CheckBox.checked=true
+				for i=1 to List.items.count do
+				(
+					if List.items[i]==aProperty then
+					(
+						List.selection=i
+						List.enabled=true
+					)
+				)
+			)
+		)
+		else
+		(
+			CheckBox.checked=false
+			List.selection=1
+			List.enabled=false
+		)
+	)
+	fn GetPropertyCheckBox aProperty CheckBox=
+	(
+		if aProperty==true then
+		(
+			if aProperty!=undefined then
+			(
+				CheckBox.checked=true
+			)
+		)
+		else
+		(
+			CheckBox.checked=false
+		)
+	)
+	
+	fn GetPropertyEditText aProperty EditText=
+	(
+		if aProperty!="" then
+		(
+			if aProperty!=undefined then
+			(
+				AnimModelEditText.text=EditText
+			)
+		)
+		else
+		(
+			AnimModelEditText.text=""
+		)
+	)
+	--GET PROPERTY AND UPDATE INTERFACE END
+	--SET PROPERTY IN SELECTED ITEMS
+	fn SetPropertyCheckList Obj Type Check List=
+	(
+		if Check.checked==true then
+		(
+			setUserProp Obj Type List.items[List.selection]
+		)
+		else
+		(
+			setUserProp Obj Type ""
+		)
+	)
+	
+	fn SetPropertyCheck Obj Type Check=
+	(
+		if Check.checked==true then
+		(
+			setUserProp Obj Type true
+		)
+		else
+		(
+			setUserProp Obj Type false
+		)
+	)
+	
+	fn SetPropertyEditText Obj Type EditText=
+	(
+		if EditText.text !="" then
+		(
+			setUserProp Obj Type EditText.text
+		)
+		else
+		(
+			setUserProp Obj Type ""
+		)
+	)
+	
+	fn SetProperties Obj=
+	(
+		if ((classof  Obj)==ObjectSet)==false then
+		(
+			--------RENDER---------
+			--ADD/UPDATE PROPERTY EXPORT
+			SetPropertyCheckList  Obj "export_render" ExportCheckRender ExportListRender
+			--ADD/UPDATE PROPERTY VISIBLE
+			SetPropertyCheck Obj "visible_render" VisibleCheckRender
+			--ADD/UPDATE PROPERTY LAYER
+			SetPropertyCheckList Obj "layer_render" LayerCheckRender LayerListRender
+			--ADD/UPDATE PROPERTYANIMATION MODEL
+			SetPropertyEditText Obj"anim_model" AnimModelEditText
+			--------PHYSICS---------
+			--ADD/UPDATE PROPERTY GENERATE
+			SetPropertyCheckList Obj "generate_physics" GenerateCheckPhysics GenerateListPhysics
+			--ADD/UPDATE PROPERTY LAYER
+			SetPropertyCheckList Obj "layer_physics" LayerCheckPhysics LayerListPhysics
+			--------LOGIC---------
+			--ADD/UPDATE PROPERTY GENERATE
+			SetPropertyCheckList Obj "generate_logic" GenerateCheckLogic GenerateListLogic
+			ObjAnterior=Obj
+		)
+		else
+		(
+			for i=1 to Obj.count do
+			(
+				--------RENDER---------
+				--ADD/UPDATE PROPERTY EXPORT
+				SetPropertyCheckList Obj[i] "export_render" ExportCheckRender ExportListRender
+				--ADD/UPDATE VISIBLE
+				SetPropertyCheck Obj[i] "visible_render"
+				--ADD/UPDATE LAYER
+				SetPropertyCheckList Obj[i] "layer_render" LayerCheckRender LayerListRender
+				--ADD/UPDATE ANIMATE MODEL
+				SetPropertyEditText Obj[i] "anim_model" AnimModelEditText
+				--------PHYSICS---------
+				--ADD/UPDATE GENERATE
+				SetPropertyCheckList Obj[i] "generate_physics" GenerateCheckPhysics GenerateListPhysics
+				--ADD/UPDATE LAYER
+				SetPropertyCheckList Obj[i] "layer_physics" LayerCheckPhysics LayerListPhysics
+				--------LOGIC---------
+				--ADD/UPDATE GENERATE
+				SetPropertyCheckList Obj[i] "generate_logic" GenerateCheckLogic GenerateListLogic
+				ObjAnterior=Obj[i]
+			)
+		)
+	)
+	--SET PROPERTY IN SELECTED ITEMS END
+	global ObjAnterior
 	--GETBUTTON METHOD FOR PROPERTIES
 	on GetButton pressed do
 	(
-		for i=1 to $.count do
+		local Property
+		if ((classof $)==ObjectSet)==false then
 		(
-			local Property=getUserProp $[i] "export_render"
-			if Property!="" then
+			--------RENDER---------
+			--OBTAIN PROPERTY EXPORT
+			Property=getUserProp $ "export_render"
+			GetPropertyCheckList Property ExportCheckRender ExportListRender
+			--OBTAIN PROPERTY VISIBLE
+			Property=getUserProp $ "visible_render"
+			GetPropertyCheckBox Property VisibleCheckRender
+			--OBTAIN PROPERTY LAYER
+			Property=getUserProp $ "layer_render"
+			GetPropertyCheckList Property LayerCheckRender LayerListRender
+			--OBTAIN PROPERTY ANIMATION MODEL
+			Property=getUserProp $ "anim_model"
+			GetPropertyEditText Property AnimModelEditText
+			--------PHYSICS---------
+			--OBTAIN GENERATE
+			Property=getUserProp $ "generate_physics"
+			GetPropertyCheckList Property GenerateCheckPhysics GenerateListPhysics
+			--OBTAIN LAYER
+			Property=getUserProp $ "layer_physics"
+			GetPropertyCheckList Property LayerCheckPhysics LayerListPhysics
+			--------LOGIC---------
+			--OBTAIN GENERATE
+			Property=getUserProp $ "generate_logic"
+			GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
+			
+			ObjAnterior=$
+		)
+		else
+		(
+			for i=1 to $.count do
 			(
-				if Property!=undefined then
-				(
-					ExportCheckRender.checked=true
-					for i=1 to ExportListRender.items.count do
-					(
-						if ExportListRender.items[i]==Property then
-						(
-							ExportListRender.selection=i
-							ExportListRender.enabled=true
-						)
-					)
-				)
-			)
-			else
-			(
-				ExportCheckRender.checked=false
-				ExportListRender.selection=1
-				ExportListRender.enabled=false
-			)
-			Property=(getUserProp $[i] "visible_render")
-			if Property!=true then
-			(
-				if Property!=undefined then
-				(
-					VisibleCheckRender.checked=false
-				)
-			)
-			else
-			(
-				VisibleCheckRender.checked=true
-			)
-			Property=getUserProp $[i] "layer_render"
-			if Property!="" then
-			(
-				if Property!=undefined then
-				(
-					LayerCheckRender.checked=true
-					for i=1 to LayerListRender.items.count do
-					(
-						if LayerListRender.items[i]==Property then
-						(
-							LayerListRender.selection=i
-							LayerListRender.enabled=true
-						)
-					)
-				)
-			)
-			else
-			(
-				LayerCheckRender.checked=false
-				LayerListRender.selection=1
-				LayerListRender.enabled=false
-			)
-			Property=getUserProp $[i] "anim_model"
-			if Property!="" then
-			(
-				if Property!=undefined then
-				(
-					AnimModelEditText.text=Property
-				)
-			)
-			else
-			(
-				AnimModelEditText.text=""
-			)
-			Property=getUserProp $[i] "generate_physics"
-			if Property!="" then
-			(
-				if Property!=undefined then
-				(
-					GenerateCheckPhysics.checked=true
-					for i=1 to GenerateListPhysics.items.count do
-					(
-						if GenerateListPhysics.items[i]==Property then
-						(
-							GenerateListPhysics.selection=i
-							GenerateListPhysics.enabled=true
-							
-						)
-					)
-				)
-			)
-			else
-			(
-				GenerateCheckPhysics.checked=false
-				GenerateListPhysics.selection=1
-				GenerateListPhysics.enabled=false
-			)
-			Property=getUserProp $[i] "layer_physics"
-			if Property!="" then
-			(
-				if Property!=undefined then
-				(
-					LayerCheckPhysics.checked=true
-					for i=1 to LayerListPhysics.items.count do
-					(
-						if LayerListPhysics.items[i]==Property then
-						(
-							LayerListPhysics.selection=i
-							LayerListPhysics.enabled=true
-						)
-					)
-				)
-			)
-			else
-			(
-				LayerCheckPhysics.checked=false
-				LayerListPhysics.selection=1
-				LayerListPhysics.enabled=false
-			)
-			Property=getUserProp $[i] "generate_logic"
-			if Property!="" then
-			(
-				if Property!=undefined then
-				(
-					GenerateCheckLogic.checked=true
-					for i=1 to GenerateListLogic.items.count do
-					(
-						if GenerateListLogic.items[i]==Property then
-						(
-							GenerateListLogic.selection=i
-							GenerateListLogic.enabled=true
-						)
-					)
-				)
-			)
-			else
-			(
-				GenerateCheckLogic.checked=false
-				GenerateListLogic.selection=1
-				GenerateListLogic.enabled=false
+				--------RENDER---------
+				--OBTAIN PROPERTY EXPORT
+				Property=getUserProp $[i] "export_render"
+				GetPropertyCheckList Property ExportCheckRender ExportListRender
+				--OBTAIN VISIBLE
+				Property=getUserProp $[i] "visible_render"
+				GetPropertyCheckBox Property VisibleCheckRender
+				--OBTAIN LAYER
+				Property=getUserProp $[i] "layer_render"
+				GetPropertyCheckList Property LayerCheckRender LayerListRender
+				--OBTAIN ANIMATE MODEL
+				Property=getUserProp $[i] "anim_model"
+				GetPropertyEditText Property AnimModelEditText
+				--OBTAIN GENERATE
+				Property=getUserProp $[i] "generate_physics"
+				GetPropertyCheckList Property GenerateCheckPhysics GenerateListPhysics
+				--------PHYSICS---------
+				--OBTAIN LAYER
+				Property=getUserProp $[i] "layer_physics"
+				GetPropertyCheckList Property LayerCheckPhysics LayerListPhysics
+				--------LOGIC---------
+				--OBTAIN GENERATE
+				Property=getUserProp $[i] "generate_logic"
+				GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
+				ObjAnterior=$[i]
 			)
 		)
 	)
@@ -224,72 +289,18 @@ rollout UABSetProperties "UABSetProperties" width:264 height:406
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	on SetButton pressed do
 	(
-		
-		for i=1 to $.count do
+		if ObjAnterior!=$ then
 		(
-			if (ExportCheckRender.checked)==true then
+			if (queryBox "Are the properties are of another object, you are sure assign it to another?")==true then
 			(
-				setUserProp $[i] "export_render" ExportListRender.items[ExportListRender.selection]
-			)
-			else
-			(
-				setUserProp $[i] "export_render" ""
-			)
-			
-			if (VisibleCheckRender.checked)==true then
-			(
-				setUserProp $[i] "visible_render" true
-			)
-			else
-			(
-				setUserProp $[i] "visible_render" false
-			)
-			
-			if (LayerCheckRender.checked)==true then
-			(
-				setUserProp $[i] "layer_render" LayerListRender.items[LayerListRender.selection]
-			)
-			else
-			(
-				setUserProp $[i] "layer_render" ""
-			)
-			
-			if AnimModelEditText.text != "" then
-			(
-				setUserProp $[i] "anim_model" AnimModelEditText.text
-			)
-			else
-			(
-				setUserProp $[i] "anim_model" ""
-			)
-			
-			if (GenerateCheckPhysics.checked)==true then
-			(
-				setUserProp $[i] "generate_physics" GenerateListPhysics.items[GenerateListPhysics.selection]
-			)
-			else
-			(
-				setUserProp $[i] "generate_physics" ""
-			)
-			
-			if (LayerCheckPhysics.checked)==true then
-			(
-				setUserProp $[i] "layer_physics" LayerListPhysics.items[LayerListPhysics.selection]
-			)
-			else
-			(
-				setUserProp $[i] "layer_physics" ""
-			)
-			
-			if (GenerateCheckLogic.checked)==true then
-			(
-				setUserProp $[i] "generate_logic" GenerateListLogic.items[GenerateListLogic.selection]
-			)
-			else
-			(
-				setUserProp $[i] "generate_logic" ""
+				SetProperties $
 			)
 		)
+		else
+		(
+			SetProperties $
+		)
+		
 	)
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
 )
