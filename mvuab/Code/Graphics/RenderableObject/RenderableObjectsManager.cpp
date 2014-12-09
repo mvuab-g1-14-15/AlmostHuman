@@ -3,6 +3,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "StaticMeshes\InstanceMesh.h"
+#include "Math\MathTypes.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager()
 {
@@ -47,9 +48,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
             float32 l_Scale=m(i).Getfloat32Property("scale",1);
             CInstanceMesh* l_InstanceMesh	= new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
-            l_InstanceMesh->SetYaw(l_Yaw);
-            l_InstanceMesh->SetPitch(l_Pitch);
-            l_InstanceMesh->SetRoll(l_Roll);
+            l_InstanceMesh->SetYaw(l_Yaw * ePIf/180.0f);
+            l_InstanceMesh->SetPitch(l_Pitch * ePIf/180.0f);
+            l_InstanceMesh->SetRoll(l_Roll * ePIf/180.0f);
             //l_InstanceMesh->SetScale(l_Scale);
             AddResource(l_Name,l_InstanceMesh);
         }

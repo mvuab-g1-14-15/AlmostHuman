@@ -31,9 +31,9 @@ public:
 	void SetTransform (D3DXMATRIX& matrix);
 	void SetTransform (Mat44f& matrix);
 	void EnableAlphaBlend();
-	void DisbaleAlphaBlend();
+	void DisableAlphaBlend();
 	void EnableZBuffering();
-	void DisbaleZBuffering();
+	void DisableZBuffering();
 	void GetWidthAndHeight( uint32& w,uint32& h);
 
 	uint32 GetNumberOfVisibleObjects()

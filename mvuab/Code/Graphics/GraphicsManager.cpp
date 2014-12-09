@@ -178,21 +178,19 @@ bool CGraphicsManager::Init(HWND hWnd, bool fullscreenMode, uint32 widthScreen, 
 			d3dpp.BackBufferFormat	= D3DFMT_UNKNOWN;
 		}
 
-		d3dpp.SwapEffect			= D3DSWAPEFFECT_DISCARD;
+		d3dpp.SwapEffect				= D3DSWAPEFFECT_DISCARD;
 		d3dpp.AutoDepthStencilFormat	= D3DFMT_D16;
 		d3dpp.EnableAutoDepthStencil	= TRUE;
 		d3dpp.AutoDepthStencilFormat	= D3DFMT_D24S8;
-		d3dpp.Flags			= D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
+		d3dpp.Flags						= D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
 		d3dpp.PresentationInterval		= D3DPRESENT_INTERVAL_IMMEDIATE;
 
 		// Create the D3DDevice
-		m_bIsOk = !FAILED(m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
-				   hWnd,D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) );
+		m_bIsOk = !FAILED(m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) );
 
 		if (!m_bIsOk)
 		{
-			m_bIsOk = !FAILED(m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,								D3DCREATE_SOFTWARE_VERTEXPROCESSING, 
-					  &d3dpp, &m_pD3DDevice ) );
+			m_bIsOk = !FAILED(m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) );
 
 			if (m_bIsOk)
 			{
@@ -739,7 +737,7 @@ void CGraphicsManager::EnableAlphaBlend ()
 	m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE ); 
 }
 
-void CGraphicsManager::DisbaleAlphaBlend ()
+void CGraphicsManager::DisableAlphaBlend ()
 {
 	m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );	
 }
@@ -749,7 +747,7 @@ void CGraphicsManager::EnableZBuffering ()
 	m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
 }
 
-void CGraphicsManager::DisbaleZBuffering ()
+void CGraphicsManager::DisableZBuffering ()
 {
 	m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );	
 }

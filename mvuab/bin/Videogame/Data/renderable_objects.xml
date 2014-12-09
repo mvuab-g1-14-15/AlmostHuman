@@ -1,4 +1,4 @@
 <RenderableObjects>
-	<MeshInstance name="Box1" core="Box" pos="0,0,0" yaw="45" pitch="45" roll="0" scale="1"/>
-	<MeshInstance name="Box2" core="BoxMM" pos="0,5,0" yaw="45" pitch="45" roll="0" scale="1"/>
+	<MeshInstance name="Box1" core="Box" pos="0 -5 0" yaw="45" pitch="45" roll="0" scale="1"/>
+	<MeshInstance name="Box2" core="BoxMM" pos="0 5 0" yaw="0" pitch="0" roll="0" scale="1"/>
 </RenderableObjects>
