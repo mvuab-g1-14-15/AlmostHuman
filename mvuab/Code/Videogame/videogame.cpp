@@ -97,6 +97,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 		ShowWindow( hWnd, SW_SHOWDEFAULT );
 		UpdateWindow( hWnd );
+
 		MSG msg;
 		ZeroMemory( &msg, sizeof(msg) );
 	
@@ -115,13 +116,6 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 			{
 				pEngine->Update(0.0f);
 				pEngine->Render();
-				// Main loop: Añadir aquí el Update y Render de la aplicación principal
-				//if(::GetAsyncKeyState(VK_F9) & 0x8000)
-					//l_EnemyManager.Reload();
-
-				//l_EnemyManager.Update(0.0f);
-				//l_EnemyManager.Render();
-
 			}
 		}
 		UnregisterClass( APPLICATION_NAME, wc.hInstance );

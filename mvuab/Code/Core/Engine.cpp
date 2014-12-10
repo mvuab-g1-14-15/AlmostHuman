@@ -32,12 +32,11 @@ void CEngine::Render()
 {	
 	// Obtain an instance to the graphics manager
 	CGraphicsManager* pGraphicsManager = GraphicsInstance;
-	pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	//pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
 	pGraphicsManager->BeginRender();
-
 	pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
-	//pGraphicsManager->GetDevice()->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE);
+
 	m_pCore->Render();
 	m_pProcess->Render();
 	m_pLogRender->Render();

@@ -13,8 +13,9 @@ class CStaticMesh
 {
 	protected:
         typedef std::vector<CTexture *> TTextureVector;
-		std::vector<CRenderableVertexs*> m_RVs;
-		std::vector< TTextureVector > m_Textures;
+
+		std::vector<CRenderableVertexs *> m_RVs;
+		std::vector<TTextureVector> m_Textures;
 
 		std::string m_FileName;
 		unsigned int m_NumVertexs, m_NumFaces;

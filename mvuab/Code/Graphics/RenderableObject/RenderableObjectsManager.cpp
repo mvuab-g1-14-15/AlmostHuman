@@ -68,5 +68,7 @@ void
 CRenderableObjectsManager::Render(CGraphicsManager *GM)
 {
 	for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+	{
 		m_ResourcesVector[i]->Render(GM);
+	}
 }

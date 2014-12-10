@@ -17,8 +17,12 @@
 	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_H"/>
     </action>
 	
-	<action name="Reload">
+	<action name="ReloadActionToInput">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_R"/>
+    </action>
+	
+	<action name="ReloadStaticMesh">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F9"/>
     </action>
 	
 	<action name="MoveForward">

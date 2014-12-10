@@ -11,6 +11,11 @@
 #include "Utils\LogRender.h"
 #include "Utils\Defines.h"
 #include "Math\AABB.h"
+#include "Core.h"
+
+#include "StaticMeshes\StaticMeshManager.h"
+#include "StaticMeshes\InstanceMesh.h"
+#include "StaticMeshes\StaticMesh.h"
 
 #include "RenderableVertex\RenderableVertex.h"
 #include "RenderableVertex\IndexedVertexs.h"
@@ -62,6 +67,16 @@ void CTestProcess::Update(float32 deltaTime)
 	if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
 	{
 		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
+	}
+
+	if( pActionManager->DoAction("ReloadStaticMesh") )
+	{
+		CCore::GetSingletonPtr()->GetpStaticMeshManager()->Reload();
+	}
+
+	if( pActionManager->DoAction("ReloadActionToInput") )
+	{
+		CCore::GetSingletonPtr()->GetpActionManager()->Reload();
 	}
 
 	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
