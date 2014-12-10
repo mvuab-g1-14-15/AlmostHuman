@@ -6,6 +6,9 @@
 #include <vector>
 #include "Utils\Name.h"
 
+// Define the default xml file that will be searched inside the path
+const std::string defaultXML ="actor.xml";
+
 class CalCoreModel;
 
 class CAnimatedCoreModel : public CName
@@ -23,7 +26,7 @@ public:
     CalCoreModel *GetCoreModel( );
     const std::string & GetTextureName( size_t id );
     size_t GetNumTextures( ) const;
-    void Load(const std::string &Path);
+    bool Load(const std::string &Path);
     int GetAnimationId(const std::string &AnimationName) const;
 };
 

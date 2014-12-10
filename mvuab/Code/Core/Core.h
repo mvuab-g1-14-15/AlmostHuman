@@ -19,13 +19,13 @@ class CActionManager;
 class CDebugWindowManager;
 class CStaticMeshManager;
 class CRenderableObjectsManager;
+class CAnimatedModelsManager;
 
 class CCore : public CSingleton<CCore>
 {
 private:
 
 	// Configuration
-	float32						m_FPS;
 	HWND						m_WindowId;						// 3D render window handle
 	bool						m_FullScreenMode;
 	bool						m_ExclusiveModeInMouse;
@@ -46,14 +46,15 @@ private:
 	std::vector<std::string>	m_v_languages;
 
 	// Managers
-	CGraphicsManager*		m_pGraphicsManager;
-	CInputManager*			m_pInputManager;
-	CLanguageManager*		m_pLanguageManager;
-	CFontManager*			m_pFontManager;
-	CActionManager*			m_pActionManager;
-	CDebugWindowManager*	m_pDebugWindowManager;
-	CStaticMeshManager*		m_pStaticMeshManager;
-	CRenderableObjectsManager* m_pRenderableObjectsManager;
+	CGraphicsManager*			m_pGraphicsManager;
+	CInputManager*				m_pInputManager;
+	CLanguageManager*			m_pLanguageManager;
+	CFontManager*				m_pFontManager;
+	CActionManager*				m_pActionManager;
+	CDebugWindowManager*		m_pDebugWindowManager;
+	CStaticMeshManager*			m_pStaticMeshManager;
+	CRenderableObjectsManager*	m_pRenderableObjectsManager;
+	CAnimatedModelsManager*		m_pAnimatedModelsManager;
 
 	void LoadXml();
 	void InitManagers();
@@ -86,6 +87,7 @@ public:
 	GET_SET(CActionManager*, pActionManager);
 	GET_SET(CStaticMeshManager*, pStaticMeshManager);
 	GET_SET(CRenderableObjectsManager*, pRenderableObjectsManager);
+	GET_SET(CAnimatedModelsManager*, pAnimatedModelsManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

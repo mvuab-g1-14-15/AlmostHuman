@@ -37,12 +37,10 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 		CStaticMesh *l_StaticMesh = new CStaticMesh();
 		if(!l_StaticMesh->Load(file))
 		{
-			delete l_StaticMesh;
+			CHECKED_DELETE(l_StaticMesh);
 		}
 		else
-		{
 			AddResource(name, l_StaticMesh);
-		}
 	}
 	
 	return true;

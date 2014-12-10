@@ -7,11 +7,11 @@
 class CAnimatedInstanceModel;
 class CAnimatedCoreModel;
 
-class CAnimatedModelManager : public CMapManager<CAnimatedCoreModel>
+class CAnimatedModelsManager : public CMapManager<CAnimatedCoreModel>
 {
 public:
-	CAnimatedModelManager();
-	~CAnimatedModelManager();
+	CAnimatedModelsManager();
+	~CAnimatedModelsManager();
 	CAnimatedCoreModel * GetCore(const std::string &Name, const std::string &Path);
 	CAnimatedInstanceModel * GetInstance(const std::string &Name);
 	void Load(const std::string &Filename);

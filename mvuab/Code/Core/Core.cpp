@@ -9,6 +9,7 @@
 #include "Utils\DebugWindowManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "AnimatedModels\AnimatedModelsManager.h"
 
 CCore::CCore() :
 	m_ConfigPath(""),
@@ -33,7 +34,8 @@ CCore::CCore() :
 	m_pActionManager( new CActionManager() ),
 	m_pDebugWindowManager( new CDebugWindowManager() ),
 	m_pStaticMeshManager( new CStaticMeshManager() ),
-	m_pRenderableObjectsManager( new CRenderableObjectsManager() )
+	m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
+	m_pAnimatedModelsManager( new CAnimatedModelsManager() )
 {
 }
 
@@ -47,6 +49,7 @@ CCore::~CCore()
 	CHECKED_DELETE(m_pDebugWindowManager);
 	CHECKED_DELETE(m_pStaticMeshManager);
 	CHECKED_DELETE(m_pRenderableObjectsManager);
+	CHECKED_DELETE(m_pAnimatedModelsManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -65,7 +68,6 @@ void CCore::Update(float32 deltaTime)
 	m_pGraphicsManager->Update(deltaTime);
 	m_pInputManager->Update();
 	m_pDebugWindowManager->Update(deltaTime);
-	m_FPS = 1/ deltaTime;
 }
 
 void CCore::Render()
@@ -73,9 +75,6 @@ void CCore::Render()
 	m_pGraphicsManager->Render();
 	m_pDebugWindowManager->Render();
 	m_pRenderableObjectsManager->Render(m_pGraphicsManager);
-	//uint32 idFont = m_pFontManager->GetTTF_Id("Annabel");
-	//uint32 nextLine = m_pFontManager->DrawLiteral(0,0,"FPS");
-	//m_pFontManager->DrawDefaultText(0,nextLine, colGREEN, "%d", (uint32) m_FPS);
 }
 
 void CCore::LoadXml()
@@ -178,4 +177,5 @@ void CCore::InitManagers()
 	m_pFontManager->LoadTTFs(m_FontsPath);
 	m_pStaticMeshManager->Load(m_StaticMeshesPath);
 	m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
+	m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
 }
