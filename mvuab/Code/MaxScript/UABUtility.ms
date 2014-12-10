@@ -13,14 +13,11 @@ utility UABUtility "UAB Utility" width:162 height:325
 	button SceneButton "Scene" pos:[18,263] width:124 height:17
 	button SetProperties "Set Properties" pos:[21,301] width:98 height:19
 	
-	--Local vars
-	local ostream
-	
-	
 	on UABUtility open do
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
+		--PathLabel.text="C:\\Users\\Galix\\Desktop"
 	)
 	on SetPathButton pressed do
 	(
@@ -38,64 +35,103 @@ utility UABUtility "UAB Utility" width:162 height:325
 		fileIn "XMLExporter.ms"
 		
 		--export Mesh
-		local MeshDir = PathLabel.text + "\meshes"		--poner parametrico
-		local TextureDir = PathLabel.text + "\\textures"
-		local filenameXML = MeshDir + "\static_meshes2.xml"
+		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
 		
-		--selec all objects
-		if ExportMeshCheckBox.checked then
+		for Obj in selection do
 		(
-			local filename = MeshDir + "\mesh.mesh"--poner parametrico
-			ExportMesh $ filename
+			filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+			ExportMesh Obj filename
 		)
 		
-		--selec all objects
-		if CopyTexturesCheckBox.checked then
-		(
-			ExportTextureFile allObj TextureDir
-		)
-
-		--TODO Loop only geometry
-		select $*
-		local allObj =#()
-		append allObj $
-		
-		--ostream = GetSaveFileStream filenameXML
-		if filenameXML != undefined then
-		(
-			ExportMeshXMLFile allObj filenameXML
-		)
 	)
 	on CameraButon pressed do
 	(
 		--export camera
 	)
+	
 	on StaticMeshManagerButton pressed do
 	(
+		fileIn "XMLExporter.ms"
 		
+		local rootDir = PathLabel.text --poner parametrico
+		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
+		local MeshDir = PathLabel.text + "\\meshes"
+		local TexturesDir = PathLabel.text + "\\textures"
+		
+		select $*
+
+		--ostream = GetSaveFileStream filenameXML
+		if fileSrcMeshXML != undefined then
+		(
+			ExportStaticMeshXMLFile selection fileSrcMeshXML MeshDir
+			format "StaticMeshXML created on: % \n" fileSrcMeshXML
+		)
+			
+		--selec all objects
+		if CopyTexturesCheckBox.checked then
+		(
+			ExportTextureFile selection TexturesDir
+			format "Textures copied on: % \n" TexturesDir
+		)
+
+		--selec all objects
+		if ExportMeshCheckBox.checked then
+		(
+			--poner parametrico
+			for Obj in selection do
+			(
+				filename = MeshDir +"\\"+  Obj.name + ".mesh"--poner parametrico
+				ExportMesh Obj filename
+			)
+			
+			format "Meshes copied on: % \n" MeshDir
+		)
 	)
+	
 	on SceneButton pressed do
 	(
 		fileIn "XMLExporter.ms"
 		
 		local rootDir = PathLabel.text		--poner parametrico
 		local fileSrcRenderableXML = rootDir + "\\renderable_objects.xml"
-		local fileSrcMeshXML = rootDir + "\static_meshes2.xml"
+		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
+		local MeshDir = PathLabel.text + "\\meshes"
+		local TexturesDir = PathLabel.text + "\\textures"
 		
 		select $*
-		local allObj =#()
-		append allObj $
 		
-		--ostream = GetSaveFileStream filenameXML
 		if fileSrcMeshXML != undefined then
 		(
-			ExportMeshXMLFile allObj fileSrcMeshXML
+			ExportStaticMeshXMLFile selection fileSrcMeshXML MeshDir
+			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
 		
 		if fileSrcRenderableXML != undefined then
 		(
-			ExportRenderableObjectXMLFile allObj fileSrcRenderableXML
+			ExportRenderableObjectXMLFile selection fileSrcRenderableXML
+			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
 		)
+		
+		--selec all objects
+		if CopyTexturesCheckBox.checked then
+		(
+			ExportTextureFile selection TexturesDir
+			format "Textures copied on: % \n" TexturesDir
+		)
+
+		--selec all objects
+		if ExportMeshCheckBox.checked then
+		(
+			--poner parametrico
+			for Obj in selection do
+			(
+				filename = MeshDir +"\\"+  Obj.name + ".mesh"--poner parametrico
+				ExportMesh Obj filename
+			)
+			
+			format "Meshes copied on: % \n" MeshDir
+		)
+		
 	)
 	
 	on SetProperties pressed do

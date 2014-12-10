@@ -275,5 +275,3 @@ fn ExportMesh Obj filename =
 	
 	return 0
 )
-
---ExportMesh $ "E:\multimat.mesh"

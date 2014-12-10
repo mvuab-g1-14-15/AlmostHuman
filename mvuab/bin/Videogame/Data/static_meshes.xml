@@ -1,4 +1,5 @@
 <static_meshes>
-	<static_mesh name="Box" filename="./Data/meshes/prueba.mesh"/>
-	<static_mesh name="BoxMM" filename="./Data/meshes/multimat.mesh"/>
+	<static_mesh name="Box001" filename="C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data\meshes\Box001.mesh"/>
+	<static_mesh name="Box003" filename="C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data\meshes\Box003.mesh"/>
+	<static_mesh name="Box004" filename="C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data\meshes\Box004.mesh"/>
 </static_meshes>

@@ -1,35 +1,37 @@
 	--export de la class
-	fn ExportMeshXMLFile AllObj filenameXML =
+	fn ExportStaticMeshXMLFile AllObj filenameXML MeshDir=
 	(
-		local ostream = fopen filenameXML "wt"
+		--TODO
+		--only export unique instance
 
-		WriteString  ostream "<static_meshes>" 
+		local ostream=createfile filenameXML
+		
+		format "<static_meshes>\n" to:ostream
+
 		for Obj in AllObj do
 		(
-			
 			if ( classOf(Obj) ) != Editable_mesh then
 			(
 				format "Only Editable Meshes allowed...\n"
 				return -1
 			)
-			
-			--WriteShort file 0x55ff
-			filename = Obj.material.diffuseMap.filename
-			tag1 = "\n<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>"
-			WriteString ostream tag1
+		
+			filename = MeshDir + "\\" + Obj.name +".mesh"
+			tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
+			format tag1 to:ostream
 			
 		)
-		--Format "</static_meshes>" to:ostream
-		WriteString ostream "</static_meshes>"
-		fclose ostream
+		
+		format "</static_meshes>\n" to:ostream
+		close ostream
 	)
 	
 	--export de la class
 	fn ExportRenderableObjectXMLFile AllObj filenameXML =
 	(
-		local ostream = fopen filenameXML "wt"
+		local ostream=createfile filenameXML
 
-		WriteString  ostream "<RenderableObjects>" 
+		format "<RenderableObjects>>\n" to:ostream
 		for Obj in AllObj do
 		(
 			
@@ -46,24 +48,23 @@
 			PosY = Obj.Pos.y as string
 			PosZ = Obj.Pos.z as string
 			
-			
 			Pos = stringStream ""
-			format "%,%,%" PosX PosY PosZ to:Pos
+			format "% % %" PosX PosY PosZ to:Pos
 			strPos = Pos as string
 			
 			ScaleStr = stringStream ""
-			format "%,%,%" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
+			format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
 			strScale = ScaleStr as string
 			
 			tag1 = stringStream ""
-			format "\n<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>"  Obj.name Obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
+			format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name Obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
 			strTag1 = tag1 as string
 			
-			WriteString ostream strTag1
-			
+			format strTag1 to:ostream		
 		)
-		WriteString ostream "</RenderableObjects>"
-		fclose ostream
+		
+		format "</RenderableObjects>\n" to:ostream
+		close ostream
 	)
 
 	fn ExportTextureFile AllObj DestPath = 
@@ -103,5 +104,37 @@
 		return (transform as eulerangles).y
 	)
 	
+fn GetInstances = 
+(
+	allInsts = #()
+	for obj in geometry do
+	(
+		if (InstanceMgr.GetInstances obj &instances) > 1 do
+		(
+			if findItem allInsts obj == 0 do
+				join allInsts instances
+		)
+	)
+	--allInsts.wirecolor = green
+	return allInsts
+)
+
+fn GetNodeReferences node =
+(
+	local inst
+	InstanceMgr.GetInstances node &inst
+	for n in inst where not (areNodesInstances node n) collect n
+)
+
+fn GetReferences = 
+(
+	--if nodes == unsupplied do nodes = getCurrentSelection()
+	local refnodes = #()
+	for node in geometry where findItem refnodes node == 0 do 
+	(
+		for ref in (GetNodeReferences node) where findItem nodes ref == 0 do append refnodes ref 
+	)
+	makeUniqueArray refnodes
+)
 	
 	
