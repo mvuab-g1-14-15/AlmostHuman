@@ -16,9 +16,13 @@ struct Vertex
 function CreateVertex Coord Normal TUVMap1 =
 (
 	local NewVertex = Vertex()
-	NewVertex.Coord = (Coord as point3)
+	
+	local newCoord = point3 Coord.x Coord.z Coord.y
+	NewVertex.Coord = newCoord
+	
 	NewVertex.Normal = (Normal as point3)
 	NewVertex.TUVMap1 = (TUVMap1 as point3)
+	NewVertex.TUVMap1.y=1.0-NewVertex.TUVMap1.y
 	return NewVertex
 )
 
@@ -27,7 +31,7 @@ fn AreVertexsEqual vtx1 vtx2 =
 	--format "Comparing % with % \n" vtx1 vtx2
 	local coords = vtx1.Coord.x == vtx2.Coord.x and vtx1.Coord.y == vtx2.Coord.y and vtx1.Coord.z == vtx2.Coord.z
 	local normals = vtx1.Normal.x == vtx2.Normal.x and vtx1.Normal.y == vtx2.Normal.y and vtx1.Normal.z == vtx2.Normal.z
-	local UVs = vtx1.TUVMap1.x == vtx2.TUVMap1.x and vtx1.TUVMap1.y == vtx2.TUVMap1.y and vtx1.TUVMap1.z == vtx2.TUVMap1.z
+	local UVs = vtx1.TUVMap1.x == vtx2.TUVMap1.x and vtx1.TUVMap1.y == vtx2.TUVMap1.y /*and vtx1.TUVMap1.z == vtx2.TUVMap1.z*/
 	return coords and normals and UVs
 )
 
@@ -40,7 +44,7 @@ fn FindVertex vtx vtxs =
 		if AreVertexsEqual vtxs[i] vtx then
 		(
 			--format "The vertex is equal in index % \n" i
-			return ( i as integer )
+			return ( i as integer )-1
 		)
 	)
 	
@@ -117,8 +121,8 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		local IdxsFace=getFace Obj iFaces
 		-- Para coger los vértices de la primera cara
 		local Coord1=getVert Obj IdxsFace.x
-		local Coord3=getVert Obj IdxsFace.y
-		local Coord2=getVert Obj IdxsFace.z
+		local Coord2=getVert Obj IdxsFace.y
+		local Coord3=getVert Obj IdxsFace.z
 		-- Para coger las normales de los vértices de la primera cara
 		local Normal1=getNormal Obj IdxsFace.x
 		local Normal2=getNormal Obj IdxsFace.y
@@ -147,8 +151,8 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		--format "%\n%\n%\n - Material ID: %\n" Vertex1 Vertex2 Vertex3 MaterialID
 		
 		local id1 = AddVertex Vertex1 VertexBuffer MaterialID
-		local id2 = AddVertex Vertex3 VertexBuffer MaterialID
-		local id3 = AddVertex Vertex2 VertexBuffer MaterialID
+		local id2 = AddVertex Vertex2 VertexBuffer MaterialID
+		local id3 = AddVertex Vertex3 VertexBuffer MaterialID
 		--format "ID1 % ID2 % ID3 %\n" id1 id2 id3
 		
 		--format "Material ID: %\n" MaterialID
@@ -157,8 +161,8 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 			append IndexBuffer #()
 		)
 		append IndexBuffer[MaterialID] id1
-		append IndexBuffer[MaterialID] id2
 		append IndexBuffer[MaterialID] id3
+		append IndexBuffer[MaterialID] id2
 	)
 )
 
@@ -209,20 +213,19 @@ fn WriteBuffers file VertexBuffer IndexBuffer =
 
 fn ExportMesh Obj filename =
 (
-	format "filename: % \n" filename
-	if ( classOf(Obj) ) != Editable_mesh then
-	(
-		format "Only Editable Meshes allowed...\n"
-		return -1
-	)
+	format "dir: % \n" filename
 	
+	maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+	convertToMesh newObj
+	actualObj = newObj[1]
+		
 	local file = fopen filename "wb"
 	
 	format "0x55ff\n"
 	WriteShort file 0x55ff #unsigned
 	
 	-- MATERIALS
-	local l_Material = Obj.material
+	local l_Material = actualObj.material
 	materials = #()
 	if classof(l_Material) == Multimaterial then
 	(
@@ -264,20 +267,15 @@ fn ExportMesh Obj filename =
 	--GetBuffers Obj file
 	local l_VertexBuffer = #()
 	local l_IndexBuffer = #()
-	GetBuffers Obj l_VertexBuffer l_IndexBuffer
+	GetBuffers actualObj l_VertexBuffer l_IndexBuffer
 	WriteBuffers file l_VertexBuffer l_IndexBuffer
 
 	--format "Vertex Buffer: %\n#Vertex Buffer: %\nIndex Buffer: %\n#Index Buffer: %\n" l_VertexBuffer l_VertexBuffer.count l_IndexBuffer l_IndexBuffer.count
 	
 	WriteShort file 0xff55 #unsigned
 	fclose file
-	format "0xff55\n"
+	format "0xff55\n"	
 	
+	delete newObj
 	return 0
-<<<<<<< HEAD
 )
-=======
-)
-
-ExportMesh $ "D:\multimat.mesh"
->>>>>>> 2b8b68cec3f1aba97b5c14f7b336aa9008b006bc
