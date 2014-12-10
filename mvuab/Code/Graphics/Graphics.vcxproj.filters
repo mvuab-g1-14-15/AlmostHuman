@@ -23,6 +23,9 @@
     <Filter Include="StaticMeshes">
       <UniqueIdentifier>{42d4f003-1d0b-4079-a500-f337ff9de0dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AnimatedModels">
+      <UniqueIdentifier>{cc26a49c-a5ec-4e3d-a219-1e416c5e48ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
@@ -68,6 +71,15 @@
     </ClCompile>
     <ClCompile Include="StaticMeshes\InstanceMesh.cpp">
       <Filter>StaticMeshes</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModels\AnimatedCoreModel.cpp">
+      <Filter>AnimatedModels</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp">
+      <Filter>AnimatedModels</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp">
+      <Filter>AnimatedModels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +135,15 @@
     </ClInclude>
     <ClInclude Include="StaticMeshes\InstanceMesh.h">
       <Filter>StaticMeshes</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModels\AnimatedCoreModel.h">
+      <Filter>AnimatedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h">
+      <Filter>AnimatedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModels\AnimatedModelsManager.h">
+      <Filter>AnimatedModels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

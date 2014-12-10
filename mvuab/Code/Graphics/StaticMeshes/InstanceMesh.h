@@ -2,12 +2,14 @@
 #ifndef INC_INSTANCE_MESH_H_
 #define INC_INSTANCE_MESH_H_
 
-#include "GraphicsManager.h"
 #include "RenderableObject\RenderableObject.h"
-#include "StaticMesh.h"
 #include "Utils\Defines.h"
 
 #include <string>
+
+class CStaticMesh;
+class CGraphicsManager;
+
 
 class CInstanceMesh : public CRenderableObject
 {

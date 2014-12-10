@@ -147,8 +147,8 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		--format "%\n%\n%\n - Material ID: %\n" Vertex1 Vertex2 Vertex3 MaterialID
 		
 		local id1 = AddVertex Vertex1 VertexBuffer MaterialID
-		local id2 = AddVertex Vertex2 VertexBuffer MaterialID
-		local id3 = AddVertex Vertex3 VertexBuffer MaterialID
+		local id2 = AddVertex Vertex3 VertexBuffer MaterialID
+		local id3 = AddVertex Vertex2 VertexBuffer MaterialID
 		--format "ID1 % ID2 % ID3 %\n" id1 id2 id3
 		
 		--format "Material ID: %\n" MaterialID
@@ -274,4 +274,10 @@ fn ExportMesh Obj filename =
 	format "0xff55\n"
 	
 	return 0
+<<<<<<< HEAD
 )
+=======
+)
+
+ExportMesh $ "D:\multimat.mesh"
+>>>>>>> 2b8b68cec3f1aba97b5c14f7b336aa9008b006bc
