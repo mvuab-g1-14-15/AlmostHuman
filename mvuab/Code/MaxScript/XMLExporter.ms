@@ -10,16 +10,9 @@
 
 		for Obj in AllObj do
 		(
-			if ( classOf(Obj) ) != Editable_mesh then
-			(
-				format "Only Editable Meshes allowed...\n"
-				return -1
-			)
-		
 			filename = MeshDir + "\\" + Obj.name +".mesh"
 			tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
 			format tag1 to:ostream
-			
 		)
 		
 		format "</static_meshes>\n" to:ostream
@@ -31,16 +24,9 @@
 	(
 		local ostream=createfile filenameXML
 
-		format "<RenderableObjects>>\n" to:ostream
+		format "<RenderableObjects>\n" to:ostream
 		for Obj in AllObj do
-		(
-			
-			if ( classOf(Obj) ) != Editable_mesh then
-			(
-				format "Only Editable Meshes allowed...\n"
-				return -1
-			)
-			
+		(			
 			YawAngle =GetYaw Obj.transform as string
 			PitchAngle= GetPitch Obj.transform as string
 			RollAngle= GetRoll Obj.transform as string

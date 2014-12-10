@@ -16,8 +16,9 @@ CCore::CCore() :
 	m_SoundPath(""),
 	m_InputPath(""),
 	m_FontsPath(""),
-	m_StaticMeshesPath("./Data/static_meshes.xml"),
-	m_RenderableObjectsPath("./Data/renderable_objects.xml"),
+	m_AnimatedModelsPath(""),
+	m_StaticMeshesPath(""),
+	m_RenderableObjectsPath(""),
 	m_ScreenWidth(800),
 	m_ScreenHeight(600),
 	m_WindowXPos(0),
@@ -148,6 +149,18 @@ void CCore::LoadXml()
 					}
 				}
 				m_FontsPath = std::string( TreeNode(i).GetPszProperty("fonts_path", "") );
+			}
+			else if( TagName == "animated_models" )
+			{
+				m_AnimatedModelsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+			}
+			else if( TagName == "static_meshes" )
+			{
+				m_StaticMeshesPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+			}
+			else if( TagName == "renderable_objects" )
+			{
+				m_RenderableObjectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
 			}
 		}
 	}

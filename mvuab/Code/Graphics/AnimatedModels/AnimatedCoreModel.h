@@ -4,14 +4,14 @@
 
 #include <string>
 #include <vector>
+#include "Utils\Name.h"
 
-//class CalCoreModel;
+class CalCoreModel;
 
-class CAnimatedCoreModel
+class CAnimatedCoreModel : public CName
 {
 private:
-    //CalCoreModel* m_CalCoreModel;
-    std::string m_Name;
+    CalCoreModel* m_CalCoreModel;
     std::vector<std::string> m_TextureFilenameList;
     std::string m_Path;
     bool LoadMesh(const std::string &Filename);
@@ -20,7 +20,7 @@ private:
 public:
     CAnimatedCoreModel();
     ~CAnimatedCoreModel();
-    //CalCoreModel *GetCoreModel( );
+    CalCoreModel *GetCoreModel( );
     const std::string & GetTextureName( size_t id );
     size_t GetNumTextures( ) const;
     void Load(const std::string &Path);

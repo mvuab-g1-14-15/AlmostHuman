@@ -1,4 +1,14 @@
 #include "AnimatedCoreModel.h"
+#include "cal3d\cal3d.h"
+
+
+CAnimatedCoreModel::CAnimatedCoreModel() : m_Path(""), m_CalCoreModel(0), CName()
+{
+}
+
+CAnimatedCoreModel::~CAnimatedCoreModel()
+{
+}
 
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 {
@@ -15,15 +25,6 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::strin
 {
     std::string AnimationFullPath = m_Path + Filename;
     return true;
-}
-
-CAnimatedCoreModel::CAnimatedCoreModel() : m_Path(""), m_Name("")
-{
-
-}
-
-CAnimatedCoreModel::~CAnimatedCoreModel()
-{
 }
 
 const std::string & CAnimatedCoreModel::GetTextureName( size_t id )
@@ -46,4 +47,9 @@ void CAnimatedCoreModel::Load(const std::string &Path)
 int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
 {
     return 0;
+}
+
+CalCoreModel *CAnimatedCoreModel::GetCoreModel( )
+{
+	return m_CalCoreModel;
 }
