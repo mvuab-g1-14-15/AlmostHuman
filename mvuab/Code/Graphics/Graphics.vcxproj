@@ -99,7 +99,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

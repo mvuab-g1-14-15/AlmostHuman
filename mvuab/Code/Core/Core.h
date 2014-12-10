@@ -42,6 +42,7 @@ private:
 	std::string					m_InputPath;
 	std::string					m_StaticMeshesPath;
 	std::string					m_RenderableObjectsPath;
+	std::string					m_AnimatedModelsPath;
 	std::vector<std::string>	m_v_languages;
 
 	// Managers
@@ -69,6 +70,7 @@ public:
 	GET_SET_REF(std::string, ConfigPath);
 	GET_SET_REF(std::string, GUIPath);
 	GET_SET_REF(std::string, SoundPath);
+	GET_SET_REF(std::string, AnimatedModelsPath);
 	GET_SET(uint32, ScreenWidth);
 	GET_SET(uint32, ScreenHeight);
 	GET_SET(uint32, WindowXPos);

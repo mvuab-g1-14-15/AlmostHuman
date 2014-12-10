@@ -28,7 +28,8 @@ void CInstanceMesh::Render(CGraphicsManager *GM)
 	t = pos*rot;
 
 	GM->SetTransform(t);
-	m_pStaticMesh->Render(GM);
+	if(m_pStaticMesh)
+		m_pStaticMesh->Render(GM);
 
 	t.SetIdentity();
 	GM->SetTransform(t);
