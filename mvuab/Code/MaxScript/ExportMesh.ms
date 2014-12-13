@@ -239,12 +239,22 @@ fn ExportMesh Obj filename =
 		if classof(l_Material) == Multimaterial then
 		(
 			--format "Saving multimaterial object...\n"
-			for i=1 to l_Material.numsubs do
+			local nFaces = getNumfaces actualObj
+			local assigned_mats = #()
+			for i=1 to nFaces do
 			(
+				local id = getFaceMatId actualObj i
+				if findItem assigned_mats id == 0 then
+					append assigned_mats id
+			)
+			
+			for i=1 to assigned_mats.count do
+			(
+				local mat = assigned_mats[i]
 				actual_mat = #()
-				if l_Material[i] != undefined then
+				if l_Material[mat] != undefined then
 				(
-					append types ( ExportMaterial l_Material[i] actual_mat )
+					append types ( ExportMaterial l_Material[mat] actual_mat )
 					append materials (actual_mat)
 				)
 			)
@@ -258,25 +268,24 @@ fn ExportMesh Obj filename =
 			append types ( ExportMaterial l_Material actual_mat)
 			append materials (actual_mat)
 		)
-		format "%\n" types
 		
 		-- Write into file
 		WriteShort file materials.count #unsigned--Write number of materials
-		format "%\n" materials.count
+		format "#Materials: %\n" materials.count
 		for iMaterials = 1 to materials.count do
 		(
 			current_material = materials[iMaterials]
 			
 			local type = types[iMaterials]
 			WriteShort file type #unsigned
-			format "%\n" type
+			format "Type: %\n" type
 			for iTexture = 1 to current_material.count do
 			(
 				current_texture = current_material[iTexture]
 				WriteShort file current_texture.count #unsigned--Write Lenght Name
-				format "%\n" current_texture.count
+				format "#Name: %\n" current_texture.count
 				WriteString file current_texture --Write Name
-				format "%\n" current_texture
+				format "Name: %\n" current_texture
 			)
 		)
 		-- MATERIALS END
@@ -302,4 +311,4 @@ fn ExportMesh Obj filename =
 	return 0
 )
 
-ExportMesh $ "gh"
+ExportMesh $ "path"
