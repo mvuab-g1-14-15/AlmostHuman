@@ -82,31 +82,36 @@ fn AddVertex vertex_to_add vertex_buffers material_id =
 	return id
 )
 
-fn ExportMaterial material =
+fn ExportMaterial objMaterial material_out=
 (
-	local material_out = #()
-	if material.diffuseMapEnable then 
+	type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
+
+	if objMaterial != undefined then
 	(
-		append material_out (filenameFromPath Material.diffuseMap.filename)
+		if objMaterial.diffuseMapEnable == true AND classOf(objMaterial.diffuseMap) == BitmapTexture then
+		(
+			type = (bit.or type VERTEX_TYPE_TEXTURE1)
+			append material_out (filenameFromPath objMaterial.diffuseMap.filename)
+
+			if objMaterial.selfIllumMapEnable == true AND classOf(objMaterial.selfIllumMap) == BitmapTexture then
+			(
+				type = (bit.or type VERTEX_TYPE_TEXTURE2)
+				append material_out (filenameFromPath objMaterial.selfIllumMap.filename)
+			)
+			
+			if objMaterial.bumpMapEnable == true AND classOf(objMaterial.bumpMap) == BitmapTexture then
+			(
+				type = (bit.or type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
+				append material_out (filenameFromPath objMaterial.bumpMap.filename)
+			)
+		)
+		else
+		(
+			type = (bit.or type VERTEX_TYPE_DIFFUSE)
+		)
 	)
-	
-	if material.selfIllumMapEnable then 
-	(
-		append material_out (filenameFromPath Material.selfIllumMap.filename)
-	)
-	
-	if material.bumpMapEnable then 
-	(
-		append material_out (filenameFromPath Material.bumpMap.filename)
-	)
-	
-	if material.reflectionMapEnable then 
-	(
-		append material_out (filenameFromPath Material.reflectionMap.filename)
-	)
-	
-	--format "%\n" material_out
-	return material_out
+
+	return type
 )
 
 fn GetBuffers Obj VertexBuffer IndexBuffer =
@@ -216,66 +221,85 @@ fn ExportMesh Obj filename =
 	format "dir: % \n" filename
 	
 	maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-	convertToMesh newObj
-	actualObj = newObj[1]
-		
-	local file = fopen filename "wb"
 	
-	format "0x55ff\n"
-	WriteShort file 0x55ff #unsigned
-	
-	-- MATERIALS
-	local l_Material = actualObj.material
-	materials = #()
-	if classof(l_Material) == Multimaterial then
+	try
 	(
-		--format "Saving multimaterial object...\n"
-		for i=1 to l_Material.numsubs do
+		convertToMesh newObj
+		actualObj = newObj[1]
+			
+		local file = fopen filename "wb"
+		
+		format "0x55ff\n"
+		WriteShort file 0x55ff #unsigned
+		
+		-- MATERIALS
+		local l_Material = actualObj.material
+		materials = #()
+		types = #()
+		if classof(l_Material) == Multimaterial then
 		(
-			if l_Material[i] != undefined then
-				append materials ( ExportMaterial l_Material[i] )
+			--format "Saving multimaterial object...\n"
+			for i=1 to l_Material.numsubs do
+			(
+				actual_mat = #()
+				if l_Material[i] != undefined then
+				(
+					append types ( ExportMaterial l_Material[i] actual_mat )
+					append materials (actual_mat)
+				)
+			)
+			
+			--format "Num mats: % v %\n" materials.count materials
 		)
-		
-		--format "Num mats: % v %\n" materials.count materials
-	)
-	else
-	(
-		--format "Saving standard material object...\n"
-		append materials ( ExportMaterial l_Material )
-	)
-	
-	-- Write into file
-	WriteShort file materials.count #unsigned--Write number of materials
-	format "%\n" materials.count
-	for iMaterials = 1 to materials.count do
-	(
-		current_material = materials[iMaterials]
-		
-		WriteShort file 19 #unsigned
-		format "19\n"
-		for iTexture = 1 to current_material.count do
+		else
 		(
-			current_texture = current_material[iTexture]
-			WriteShort file current_texture.count #unsigned--Write Lenght Name
-			format "%\n" current_texture.count
-			WriteString file current_texture --Write Name
-			format "%\n" current_texture
+			--format "Saving standard material object...\n"
+			actual_mat = #()
+			append types ( ExportMaterial l_Material actual_mat)
+			append materials (actual_mat)
 		)
+		format "%\n" types
+		
+		-- Write into file
+		WriteShort file materials.count #unsigned--Write number of materials
+		format "%\n" materials.count
+		for iMaterials = 1 to materials.count do
+		(
+			current_material = materials[iMaterials]
+			
+			local type = types[iMaterials]
+			WriteShort file type #unsigned
+			format "%\n" type
+			for iTexture = 1 to current_material.count do
+			(
+				current_texture = current_material[iTexture]
+				WriteShort file current_texture.count #unsigned--Write Lenght Name
+				format "%\n" current_texture.count
+				WriteString file current_texture --Write Name
+				format "%\n" current_texture
+			)
+		)
+		-- MATERIALS END
+
+		--GetBuffers Obj file
+		local l_VertexBuffer = #()
+		local l_IndexBuffer = #()
+		GetBuffers actualObj l_VertexBuffer l_IndexBuffer
+		WriteBuffers file l_VertexBuffer l_IndexBuffer
+
+		--format "Vertex Buffer: %\n#Vertex Buffer: %\nIndex Buffer: %\n#Index Buffer: %\n" l_VertexBuffer l_VertexBuffer.count l_IndexBuffer l_IndexBuffer.count
+		
+		WriteShort file 0xff55 #unsigned
+		fclose file
+		format "0xff55\n"
 	)
-	-- MATERIALS END
-
-	--GetBuffers Obj file
-	local l_VertexBuffer = #()
-	local l_IndexBuffer = #()
-	GetBuffers actualObj l_VertexBuffer l_IndexBuffer
-	WriteBuffers file l_VertexBuffer l_IndexBuffer
-
-	--format "Vertex Buffer: %\n#Vertex Buffer: %\nIndex Buffer: %\n#Index Buffer: %\n" l_VertexBuffer l_VertexBuffer.count l_IndexBuffer l_IndexBuffer.count
-	
-	WriteShort file 0xff55 #unsigned
-	fclose file
-	format "0xff55\n"	
+	catch
+	(
+		format "Error while exporting object\n"
+	)
 	
 	delete newObj
 	return 0
 )
+
+ExportMesh $ "gh"
