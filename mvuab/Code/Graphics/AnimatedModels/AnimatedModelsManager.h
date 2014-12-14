@@ -17,6 +17,7 @@ public:
 	void Load(const std::string &Filename);
 protected:
 	std::string m_FileName;
+    CAnimatedCoreModel *AddNewCore( const std::string &Name, const std::string &Path );
 };
 
 #endif //ANIMATED_MODEL_MANAGER_H

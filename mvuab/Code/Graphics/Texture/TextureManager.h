@@ -9,7 +9,7 @@
 #include "Utils\MapManager.h"
 #include "Texture.h"
 
-class CTextureManager : public CMapManager<CTexture>
+class CTextureManager : public CMapManager<CTexture>, public CSingleton<CTextureManager>
 {
 public:
 	CTextureManager();

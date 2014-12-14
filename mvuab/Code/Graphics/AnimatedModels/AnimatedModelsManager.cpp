@@ -16,7 +16,15 @@ CAnimatedModelsManager::~CAnimatedModelsManager()
 
 CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, const std::string &Path)
 {
-    return 0;
+    CAnimatedCoreModel * l_pAnimatedCoreModel = GetResource(Name);
+
+    // Check if the core model is already in memory
+    if(!l_pAnimatedCoreModel)
+        l_pAnimatedCoreModel = AddNewCore(Name,Path);
+    
+    assert(l_pAnimatedCoreModel);
+
+    return l_pAnimatedCoreModel;
 }
 
 CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &Name)
@@ -46,13 +54,19 @@ void CAnimatedModelsManager::Load(const std::string &Filename)
 	{
 		const std::string &name = node(i).GetPszProperty("name", "no_name");
 		const std::string &path = node(i).GetPszProperty("path", "no_file");
-
-		CAnimatedCoreModel *l_pAnimatedCoreModel = new CAnimatedCoreModel();
-		if(!l_pAnimatedCoreModel->Load(path))
-		{
-			CHECKED_DELETE(l_pAnimatedCoreModel);
-		}
-		else
-			AddResource(name, l_pAnimatedCoreModel);
+		AddNewCore(name,path);
 	}
+}
+
+CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string &Name, const std::string &Path )
+{
+   CAnimatedCoreModel *l_pAnimatedCoreModel = new CAnimatedCoreModel(Name);
+   if(!l_pAnimatedCoreModel->Load(Path))
+    {
+        CHECKED_DELETE(l_pAnimatedCoreModel);
+    }
+    else
+        AddResource(Name, l_pAnimatedCoreModel); 
+
+   return l_pAnimatedCoreModel;
 }
