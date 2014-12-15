@@ -3,7 +3,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 (
 	local ostream=createfile filenameXML
 	
-	UniqueInstanceArray = GetUniqueInstances()
+	local UniqueInstanceArray = GetUniqueInstances()
 	format "<static_meshes>\n" to:ostream
 
 	for Obj in UniqueInstanceArray do
@@ -22,9 +22,24 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
 	local ostream=createfile filenameXML
 
+	local unique_instances = GetUniqueInstances()
+	
 	format "<RenderableObjects>\n" to:ostream
 	for Obj in AllObj do
-	(		
+	(
+		local instance_obj;
+		if findItem unique_instances Obj != 0 then
+			instance_obj = Obj
+		else
+		(
+			local references = GetNodeReferences Obj
+			for ref_obj in references do
+			(
+				if findItem unique_instances ref_obj != 0 then
+					instance_obj = ref_obj
+			)
+		)
+		
 		YawAngle =GetYaw Obj.transform as string
 		PitchAngle= GetPitch Obj.transform as string
 		RollAngle= GetRoll Obj.transform as string
@@ -41,7 +56,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		strScale = ScaleStr as string
 		
 		tag1 = stringStream ""
-		format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name Obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
+		format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name instance_obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
 		strTag1 = tag1 as string
 		
 		format strTag1 to:ostream		
@@ -110,7 +125,7 @@ fn GetNodeReferences node =
 (
 	local inst
 	InstanceMgr.GetInstances node &inst
-	for n in inst where not (areNodesInstances node n) collect n
+	return for n in inst where not (areNodesInstances node n) collect n
 )
 
 fn GetReferences = 
@@ -122,13 +137,12 @@ fn GetReferences =
 		for ref in (GetNodeReferences node) where findItem nodes ref == 0 do append refnodes ref 
 	)
 	makeUniqueArray refnodes
+	return refnodes
 )
 	
 fn GetUniqueInstances = 
 (
-	allInsts = #()
-	uniqueInstance = #()
-
+	local uniqueInstance = #()
 	for obj in geometry do
 	(
 		

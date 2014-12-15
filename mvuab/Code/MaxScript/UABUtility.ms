@@ -17,7 +17,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
-		--PathLabel.text="C:\\Users\\Galix\\Desktop"
+		PathLabel.text="E:\Master\GameEngineUAB\mvuab\bin\Videogame\Data"
 	)
 	on SetPathButton pressed do
 	(
@@ -123,7 +123,8 @@ utility UABUtility "UAB Utility" width:162 height:325
 		if ExportMeshCheckBox.checked then
 		(
 			--poner parametrico
-			for Obj in selection do
+			local unique_instances = GetUniqueInstances()
+			for Obj in unique_instances do
 			(
 				filename = MeshDir +"\\"+  Obj.name + ".mesh"--poner parametrico
 				ExportMesh Obj filename
