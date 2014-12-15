@@ -80,14 +80,14 @@ public:
 	GET_SET(bool, ExclusiveModeInMouse);
 	GET_SET(bool, DrawPointerMouse);
 
-	GET_SET(CInputManager*, pInputManager);
-	GET_SET(CGraphicsManager*, pGraphicsManager);
-	GET_SET(CFontManager*, pFontManager);
-	GET_SET(CLanguageManager*, pLanguageManager);
-	GET_SET(CActionManager*, pActionManager);
-	GET_SET(CStaticMeshManager*, pStaticMeshManager);
-	GET_SET(CRenderableObjectsManager*, pRenderableObjectsManager);
-	GET_SET(CAnimatedModelsManager*, pAnimatedModelsManager);
+	GET_SET_PTR(CInputManager, InputManager);
+	GET_SET_PTR(CGraphicsManager, GraphicsManager);
+	GET_SET_PTR(CFontManager, FontManager);
+	GET_SET_PTR(CLanguageManager, LanguageManager);
+	GET_SET_PTR(CActionManager, ActionManager);
+	GET_SET_PTR(CStaticMeshManager, StaticMeshManager);
+	GET_SET_PTR(CRenderableObjectsManager, RenderableObjectsManager);
+	GET_SET_PTR(CAnimatedModelsManager, AnimatedModelsManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

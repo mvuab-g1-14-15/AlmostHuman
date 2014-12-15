@@ -69,16 +69,6 @@ void CTestProcess::Update(float32 deltaTime)
 		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
 	}
 
-	if( pActionManager->DoAction("ReloadStaticMesh") )
-	{
-		CCore::GetSingletonPtr()->GetpStaticMeshManager()->Reload();
-	}
-
-	if( pActionManager->DoAction("ReloadActionToInput") )
-	{
-		CCore::GetSingletonPtr()->GetpActionManager()->Reload();
-	}
-
 	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
 	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
 }

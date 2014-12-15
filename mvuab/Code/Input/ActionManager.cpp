@@ -252,3 +252,9 @@ bool CActionManager::Reload()
 
 	return true;
 }
+
+void CActionManager::Update( float32 deltaTime )
+{
+  if( DoAction("ReloadActionToInput") )
+    Reload();
+}
