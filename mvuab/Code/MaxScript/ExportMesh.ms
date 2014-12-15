@@ -310,5 +310,3 @@ fn ExportMesh Obj filename =
 	delete newObj
 	return 0
 )
-
-ExportMesh $ "path"

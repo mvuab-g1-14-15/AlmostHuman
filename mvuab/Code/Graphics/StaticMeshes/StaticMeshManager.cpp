@@ -33,6 +33,7 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 	{
 		std::string name = node(i).GetPszProperty("name", "no_name");
 		std::string file = node(i).GetPszProperty("filename", "no_file");
+		file = "Data" + file;
 
 		CStaticMesh *l_StaticMesh = new CStaticMesh();
 		if(!l_StaticMesh->Load(file))

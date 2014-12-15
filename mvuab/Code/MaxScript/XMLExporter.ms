@@ -1,99 +1,95 @@
-	--export de la class
-	fn ExportStaticMeshXMLFile filenameXML MeshDir =
-	(
-		local ostream=createfile filenameXML
-		
-		UniqueInstanceArrary = GetUniqueInstances()
-		format "<static_meshes>\n" to:ostream
+--export de la class
+fn ExportStaticMeshXMLFile filenameXML MeshDir =
+(
+	local ostream=createfile filenameXML
+	
+	UniqueInstanceArray = GetUniqueInstances()
+	format "<static_meshes>\n" to:ostream
 
-		for Obj in UniqueInstanceArrary do
-		(
-				filename = MeshDir + "\\" + Obj.name +".mesh"
-				tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
-				format tag1 to:ostream
-		)
-		
-		format "</static_meshes>\n" to:ostream
-		close ostream
+	for Obj in UniqueInstanceArray do
+	(
+			filename = "\\meshes\\" + Obj.name +".mesh"
+			tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
+			format tag1 to:ostream
 	)
 	
-	--export de la class
-	fn ExportRenderableObjectXMLFile AllObj filenameXML =
-	(
-		local ostream=createfile filenameXML
+	format "</static_meshes>\n" to:ostream
+	close ostream
+)
 
-		format "<RenderableObjects>>\n" to:ostream
-		for Obj in AllObj do
-		(
-			
-			if ( classOf(Obj) ) != Editable_mesh then
-			(
-				format "Only Editable Meshes allowed...\n"
-				return -1
-			)
-			
-			YawAngle =GetYaw Obj.transform as string
-			PitchAngle= GetPitch Obj.transform as string
-			RollAngle= GetRoll Obj.transform as string
-			PosX = Obj.Pos.x as string
-			PosY = Obj.Pos.y as string
-			PosZ = Obj.Pos.z as string
-			
-			Pos = stringStream ""
-			format "% % %" PosX PosY PosZ to:Pos
-			strPos = Pos as string
-			
-			ScaleStr = stringStream ""
-			format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
-			strScale = ScaleStr as string
-			
-			tag1 = stringStream ""
-			format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name Obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
-			strTag1 = tag1 as string
-			
-			format strTag1 to:ostream		
-		)
+--export de la class
+fn ExportRenderableObjectXMLFile AllObj filenameXML =
+(
+	local ostream=createfile filenameXML
+
+	format "<RenderableObjects>\n" to:ostream
+	for Obj in AllObj do
+	(		
+		YawAngle =GetYaw Obj.transform as string
+		PitchAngle= GetPitch Obj.transform as string
+		RollAngle= GetRoll Obj.transform as string
+		PosX = Obj.Pos.x as string
+		PosY = Obj.Pos.y as string
+		PosZ = Obj.Pos.z as string
 		
-		format "</RenderableObjects>\n" to:ostream
-		close ostream
+		Pos = stringStream ""
+		format "% % %" PosX PosY PosZ to:Pos
+		strPos = Pos as string
+		
+		ScaleStr = stringStream ""
+		format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
+		strScale = ScaleStr as string
+		
+		tag1 = stringStream ""
+		format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name Obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
+		strTag1 = tag1 as string
+		
+		format strTag1 to:ostream		
 	)
-
-	fn ExportTextureFile AllObj DestPath = 
-	(
 	
-		for Obj in AllObj do
+	format "</RenderableObjects>\n" to:ostream
+	close ostream
+)
+
+fn ExportTextureFile AllObj DestPath = 
+(
+
+	for Obj in AllObj do
+	(
+		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+		
+		try
 		(
-			
-			if ( classOf(Obj) ) != Editable_mesh then
-			(
-				format "Only Editable Meshes allowed...\n"
-				return -1
-			)
-			
-			filename = filenameFromPath Obj.material.diffuseMap.filename
+			convertToMesh newObj
+			actualObj = newObj[1]
+			filename = filenameFromPath actualObj.material.diffuseMap.filename
 			DestPath = DestPath + "/" + filename
 			
 			copyFile Obj.material.diffuseMap.filename DestPath
 		)
-		
-		
-	)
-	
-	--UTIL
-	
-	fn GetYaw transform =
-	(
-		return (transform as eulerangles).z
-	)
-	
-	fn GetPitch transform =
-	(
-		return (transform as eulerangles).x
-	)
-	fn GetRoll transform =
-	(
-		return (transform as eulerangles).y
-	)
+		catch
+		(
+			format "Error while exporting object\n"
+		)
+		delete newObj
+	)		
+)
+
+--UTIL
+
+fn GetYaw transform =
+(
+	return (transform as eulerangles).z
+)
+
+fn GetPitch transform =
+(
+	return (transform as eulerangles).x
+)
+fn GetRoll transform =
+(
+	return (transform as eulerangles).y
+)
 	
 fn GetAllInstances = 
 (
@@ -133,7 +129,7 @@ fn GetUniqueInstances =
 	allInsts = #()
 	uniqueInstance = #()
 
-	for obj in geometry  where classOf(obj) == Editable_mesh do
+	for obj in geometry do
 	(
 		
 		if (InstanceMgr.GetInstances obj &instances) > 1 then
