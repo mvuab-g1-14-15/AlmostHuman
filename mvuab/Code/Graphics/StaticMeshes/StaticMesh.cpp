@@ -30,8 +30,13 @@ void CStaticMesh::Destroy()
         }
 		it1->clear();
 	}
-
 	m_Textures.clear();
+
+	for(std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it)
+	{
+		CHECKED_DELETE(*it);
+	}
+	m_RVs.clear();
 }
 
 bool CStaticMesh::Load(const std::string &FileName)
