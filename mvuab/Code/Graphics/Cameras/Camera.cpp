@@ -34,7 +34,7 @@ CCamera::CCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObje
 
 CCamera::~CCamera()
 {
-//	CHECKED_DELETE(m_pAttachedObject);
+	CHECKED_DELETE(m_pAttachedObject);
 }
 
 Vect3f CCamera::GetDirection() const
