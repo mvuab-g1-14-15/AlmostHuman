@@ -206,6 +206,17 @@ bool CStaticMesh::Load(const std::string &FileName)
         free(l_IdxAddress);
 	}
 
+	std::fread(&m_AABB, sizeof(float) * 6, 1, l_pFile);
+
+	unsigned short int l_footer = 0;
+	std::fread(&l_footer, sizeof(unsigned short int), 1, l_pFile);
+
+	if(l_footer != 0xff55)
+	{
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMesh::Load Footer incorrecto!");
+		std::fclose(l_pFile); return(false);
+	}
+
 	std::fclose(l_pFile);
 	return(true);
 }

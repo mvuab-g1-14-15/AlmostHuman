@@ -6,6 +6,8 @@ global VERTEX_TYPE_TEXTURE1 	= 0x0010
 global VERTEX_TYPE_TEXTURE2 	= 0x0020
 global VERTEX_TYPE_DIFFUSE 		= 0x0040
 
+fileIn "GetAABB.ms"
+
 struct Vertex
 (
 	Coord,
@@ -295,6 +297,14 @@ fn ExportMesh Obj filename =
 		local l_IndexBuffer = #()
 		GetBuffers actualObj l_VertexBuffer l_IndexBuffer
 		WriteBuffers file l_VertexBuffer l_IndexBuffer
+		
+		local bb = GetAABB actualObj
+		WriteFloat file bb[1].x
+		WriteFloat file bb[1].y
+		WriteFloat file bb[1].z
+		WriteFloat file bb[2].x
+		WriteFloat file bb[2].y
+		WriteFloat file bb[2].z
 
 		--format "Vertex Buffer: %\n#Vertex Buffer: %\nIndex Buffer: %\n#Index Buffer: %\n" l_VertexBuffer l_VertexBuffer.count l_IndexBuffer l_IndexBuffer.count
 		

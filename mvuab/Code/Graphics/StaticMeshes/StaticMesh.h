@@ -19,6 +19,7 @@ protected:
   std::string m_FileName;
 
   unsigned int m_NumVertexs, m_NumFaces;
+  float m_AABB[6];
 
 public:
   CStaticMesh();
