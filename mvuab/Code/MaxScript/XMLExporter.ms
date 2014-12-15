@@ -1,18 +1,16 @@
 	--export de la class
-	fn ExportStaticMeshXMLFile AllObj filenameXML MeshDir=
+	fn ExportStaticMeshXMLFile filenameXML MeshDir =
 	(
-		--TODO
-		--only export unique instance
-
 		local ostream=createfile filenameXML
 		
+		UniqueInstanceArrary = GetUniqueInstances()
 		format "<static_meshes>\n" to:ostream
 
-		for Obj in AllObj do
+		for Obj in UniqueInstanceArrary do
 		(
-			filename = MeshDir + "\\" + Obj.name +".mesh"
-			tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
-			format tag1 to:ostream
+				filename = MeshDir + "\\" + Obj.name +".mesh"
+				tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
+				format tag1 to:ostream
 		)
 		
 		format "</static_meshes>\n" to:ostream
@@ -24,9 +22,16 @@
 	(
 		local ostream=createfile filenameXML
 
-		format "<RenderableObjects>\n" to:ostream
+		format "<RenderableObjects>>\n" to:ostream
 		for Obj in AllObj do
-		(			
+		(
+			
+			if ( classOf(Obj) ) != Editable_mesh then
+			(
+				format "Only Editable Meshes allowed...\n"
+				return -1
+			)
+			
 			YawAngle =GetYaw Obj.transform as string
 			PitchAngle= GetPitch Obj.transform as string
 			RollAngle= GetRoll Obj.transform as string
@@ -90,7 +95,7 @@
 		return (transform as eulerangles).y
 	)
 	
-fn GetInstances = 
+fn GetAllInstances = 
 (
 	allInsts = #()
 	for obj in geometry do
@@ -101,7 +106,7 @@ fn GetInstances =
 				join allInsts instances
 		)
 	)
-	--allInsts.wirecolor = green
+    allInsts.wirecolor = green
 	return allInsts
 )
 
@@ -123,4 +128,25 @@ fn GetReferences =
 	makeUniqueArray refnodes
 )
 	
-	
+fn GetUniqueInstances = 
+(
+	allInsts = #()
+	uniqueInstance = #()
+
+	for obj in geometry  where classOf(obj) == Editable_mesh do
+	(
+		
+		if (InstanceMgr.GetInstances obj &instances) > 1 then
+		(
+			if findItem uniqueInstance instances[1] == 0 do
+				append uniqueInstance instances[1]
+		)
+		else
+		(
+			append uniqueInstance obj
+		)
+	)
+    --allInsts.wirecolor = green
+	--print uniqueInstance
+	return uniqueInstance
+)	

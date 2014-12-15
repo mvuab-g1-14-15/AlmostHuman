@@ -63,7 +63,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		--ostream = GetSaveFileStream filenameXML
 		if fileSrcMeshXML != undefined then
 		(
-			ExportStaticMeshXMLFile selection fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
 			
@@ -102,7 +102,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		if fileSrcMeshXML != undefined then
 		(
-			ExportStaticMeshXMLFile selection fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
 		
