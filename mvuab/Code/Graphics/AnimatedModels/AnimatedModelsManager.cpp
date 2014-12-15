@@ -11,7 +11,7 @@ CAnimatedModelsManager::CAnimatedModelsManager()
 
 CAnimatedModelsManager::~CAnimatedModelsManager()
 {
-
+	Destroy();
 }
 
 CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, const std::string &Path)
