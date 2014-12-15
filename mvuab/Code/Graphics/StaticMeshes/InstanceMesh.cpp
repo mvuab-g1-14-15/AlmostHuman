@@ -4,11 +4,11 @@
 #include "StaticMeshManager.h"
 
 
-CInstanceMesh::CInstanceMesh(const std::string &Name, const std::string &CoreName): m_pStaticMesh(0)
+CInstanceMesh::CInstanceMesh(const std::string &Name, const std::string &CoreName): 
+    m_pStaticMesh(CStaticMeshManager::GetSingletonPtr()->GetResource(CoreName))
 {
-	m_pStaticMesh = CCore::GetSingletonPtr()->GetpStaticMeshManager()->GetResource(CoreName);
-	if(0 == m_pStaticMesh)
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh");
+	if(!m_pStaticMesh)
+    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh");
 
 	SetName(Name);
 }

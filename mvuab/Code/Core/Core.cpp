@@ -67,6 +67,8 @@ void CCore::Update(float32 deltaTime)
 {
 	m_pGraphicsManager->Update(deltaTime);
 	m_pInputManager->Update();
+  m_pActionManager->Update(deltaTime);
+  m_pStaticMeshManager->Update(deltaTime);
 	m_pDebugWindowManager->Update(deltaTime);
 }
 

@@ -12,8 +12,11 @@ private:
 	std::vector<CTexture *> m_TextureList;
 	LPDIRECT3DVERTEXBUFFER9 m_pVB;
 	LPDIRECT3DINDEXBUFFER9 m_pIB;
-	int m_NumVtxs;
-	int m_NumFaces;
+	uint32 m_NumVtxs;
+	uint32 m_NumFaces;
+  uint32 m_CurrentAnimationId;
+  float32 m_BlendTime;
+  float32 m_LodLevel;
 	bool LoadVertexBuffer(CGraphicsManager *RM);
 	void LoadTextures();
 public:
@@ -21,13 +24,12 @@ public:
 	~CAnimatedInstanceModel();
 	void Render(CGraphicsManager *RM);
 	void RenderModelBySoftware(CGraphicsManager *RM);
-	void Update(float ElapsedTime);
+	void Update(float32 deltaTime);
 	void Initialize(CAnimatedCoreModel *AnimatedCoreModel, CGraphicsManager *RM);
 	void Destroy();
-	void ExecuteAction(int Id, float DelayIn, float DelayOut, float WeightTarget=1.0f, bool
-		AutoLock=true);
-	void BlendCycle(int Id, float Weight, float DelayIn);
-	void ClearCycle(int Id, float DelayOut);
-	bool IsCycleAnimationActive(int Id) const;
-	bool IsActionAnimationActive(int Id) const;
+	void ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget=1.0f, bool AutoLock=true);
+	void BlendCycle(uint32 Id, float32 Weight, float32 DelayIn);
+	void ClearCycle(uint32 Id, float32 DelayOut);
+	bool IsCycleAnimationActive(uint32 Id) const;
+	bool IsActionAnimationActive(uint32 Id) const;
 };

@@ -23,6 +23,7 @@ public:
 	void Init( const std::string &xmlFile, CInputManager *a_pInputManager );
 	bool LoadXML();
 	bool Reload();
+  void Update(float32 deltaTime);
 
 	bool DoAction	(const std::string &action);
 	bool DoAction	(const std::string &action, float32 &amount);
