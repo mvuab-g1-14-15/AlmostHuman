@@ -44,8 +44,8 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		PitchAngle= GetPitch Obj.transform as string
 		RollAngle= GetRoll Obj.transform as string
 		PosX = Obj.Pos.x as string
-		PosY = Obj.Pos.y as string
-		PosZ = Obj.Pos.z as string
+		PosY = Obj.Pos.z as string
+		PosZ = Obj.Pos.y as string
 		
 		Pos = stringStream ""
 		format "% % %" PosX PosY PosZ to:Pos
