@@ -39,7 +39,7 @@ public:
   CalSpringSystem(CalModel* pModel);
   ~CalSpringSystem() { }
 
-// member functions	
+// member functions    
 public:
   void calculateForces(CalSubmesh *pSubmesh, float deltaTime);
   void calculateVertices(CalSubmesh *pSubmesh, float deltaTime);

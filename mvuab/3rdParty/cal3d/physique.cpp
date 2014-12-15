@@ -62,7 +62,7 @@ int CalPhysique::calculateVertices(CalSubmesh *pSubmesh, float *pVertexBuffer, i
 {
   if(stride <= 0)
   {
-	  stride = 3*sizeof(float);
+      stride = 3*sizeof(float);
   }
 
   // get bone vector of the skeleton
@@ -129,32 +129,32 @@ int CalPhysique::calculateVertices(CalSubmesh *pSubmesh, float *pVertexBuffer, i
     // blend together all vertex influences
     size_t influenceCount=vertex.vectorInfluence.size();
     if(influenceCount == 0) 
-	{
+    {
       x = position.x;
       y = position.y;
       z = position.z;
     } 
-	else 
-	{
-		for(size_t influenceId = 0; influenceId < influenceCount; ++influenceId)
-		{
-			// get the influence
-			CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
-			
-			// get the bone of the influence vertex
-			CalBone *pBone;
-			pBone = vectorBone[influence.boneId];
-			
-			// transform vertex with current state of the bone
-			CalVector v(position);
-			v *= pBone->getTransformMatrix();
-			v += pBone->getTranslationBoneSpace();
-			
-			x += influence.weight * v.x;
-			y += influence.weight * v.y;
-			z += influence.weight * v.z;
-		}
-	}
+    else 
+    {
+        for(size_t influenceId = 0; influenceId < influenceCount; ++influenceId)
+        {
+            // get the influence
+            CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
+            
+            // get the bone of the influence vertex
+            CalBone *pBone;
+            pBone = vectorBone[influence.boneId];
+            
+            // transform vertex with current state of the bone
+            CalVector v(position);
+            v *= pBone->getTransformMatrix();
+            v += pBone->getTranslationBoneSpace();
+            
+            x += influence.weight * v.x;
+            y += influence.weight * v.y;
+            z += influence.weight * v.z;
+        }
+    }
 
     // save vertex position
     if(pSubmesh->getCoreSubmesh()->getSpringCount() > 0 && pSubmesh->hasInternalData())
@@ -238,7 +238,7 @@ CalVector CalPhysique::calculateVertex(CalSubmesh *pSubmesh, int vertexId)
     for(morphTargetId=0; morphTargetId < morphTargetCount;++morphTargetId)
     {
       CalCoreSubMorphTarget::BlendVertex& blendVertex =
-	vectorSubMorphTarget[morphTargetId]->getVectorBlendVertex()[vertexId];
+    vectorSubMorphTarget[morphTargetId]->getVectorBlendVertex()[vertexId];
       float currentWeight = pSubmesh->getMorphTargetWeight(morphTargetId);
       position.x += currentWeight*blendVertex.position.x;
       position.y += currentWeight*blendVertex.position.y;
@@ -263,24 +263,24 @@ CalVector CalPhysique::calculateVertex(CalSubmesh *pSubmesh, int vertexId)
   } 
   else 
   {
-	  for(influenceId = 0; influenceId < influenceCount; ++influenceId)
-	  {
-		  // get the influence
-		  CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
-		  
-		  // get the bone of the influence vertex
-		  CalBone *pBone;
-		  pBone = vectorBone[influence.boneId];
-		  
-		  // transform vertex with current state of the bone
-		  CalVector v(position);
-		  v *= pBone->getTransformMatrix();
-		  v += pBone->getTranslationBoneSpace();
-		  
-		  x += influence.weight * v.x;
-		  y += influence.weight * v.y;
-		  z += influence.weight * v.z;
-	  }
+      for(influenceId = 0; influenceId < influenceCount; ++influenceId)
+      {
+          // get the influence
+          CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
+          
+          // get the bone of the influence vertex
+          CalBone *pBone;
+          pBone = vectorBone[influence.boneId];
+          
+          // transform vertex with current state of the bone
+          CalVector v(position);
+          v *= pBone->getTransformMatrix();
+          v += pBone->getTranslationBoneSpace();
+          
+          x += influence.weight * v.x;
+          y += influence.weight * v.y;
+          z += influence.weight * v.z;
+      }
   }
   /*
   // save vertex position
@@ -328,7 +328,7 @@ int CalPhysique::calculateTangentSpaces(CalSubmesh *pSubmesh, int mapId, float *
   if((mapId < 0) || (mapId >= (int)pSubmesh->getCoreSubmesh()->getVectorVectorTangentSpace().size())) return false;
   if(stride <= 0)
   {
-	  stride = 4*sizeof(float);
+      stride = 4*sizeof(float);
   }
 
   // get bone vector of the skeleton
@@ -385,15 +385,15 @@ int CalPhysique::calculateTangentSpaces(CalSubmesh *pSubmesh, int mapId, float *
     if (m_Normalize)
     {
       float scale;
-	  tx/= m_axisFactorX;
-	  ty/= m_axisFactorY;
-	  tz/= m_axisFactorZ;
+      tx/= m_axisFactorX;
+      ty/= m_axisFactorY;
+      tz/= m_axisFactorZ;
 
       scale = (float)( 1.0f / sqrt(tx * tx + ty * ty + tz * tz));
 
       pTangentSpaceBuffer[0] = tx * scale;
       pTangentSpaceBuffer[1] = ty * scale;
-      pTangentSpaceBuffer[2] = tz * scale;	  
+      pTangentSpaceBuffer[2] = tz * scale;      
     }
     else
     {
@@ -429,7 +429,7 @@ int CalPhysique::calculateNormals(CalSubmesh *pSubmesh, float *pNormalBuffer, in
 {
   if(stride <= 0)
   {
-	  stride = 3*sizeof(float);
+      stride = 3*sizeof(float);
   }
 
   // get bone vector of the skeleton
@@ -492,40 +492,40 @@ int CalPhysique::calculateNormals(CalSubmesh *pSubmesh, float *pNormalBuffer, in
 
     // blend together all vertex influences
     int influenceId;
-	int influenceCount=(int)vertex.vectorInfluence.size();
+    int influenceCount=(int)vertex.vectorInfluence.size();
     if(influenceCount == 0) 
-	{
+    {
       nx = normal.x;
       ny = normal.y;
       nz = normal.z;
     } 
-	else 
-	{
-		for(influenceId = 0; influenceId < influenceCount; ++influenceId)
-		{
-			// get the influence
-			CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
-			
-			// get the bone of the influence vertex
-			CalBone *pBone;
-			pBone = vectorBone[influence.boneId];
-			
-			// transform normal with current state of the bone
-			CalVector v(normal);
-			v *= pBone->getTransformMatrix(); 
-			
-			nx += influence.weight * v.x;
-			ny += influence.weight * v.y;
-			nz += influence.weight * v.z;
-		}
-	}
+    else 
+    {
+        for(influenceId = 0; influenceId < influenceCount; ++influenceId)
+        {
+            // get the influence
+            CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
+            
+            // get the bone of the influence vertex
+            CalBone *pBone;
+            pBone = vectorBone[influence.boneId];
+            
+            // transform normal with current state of the bone
+            CalVector v(normal);
+            v *= pBone->getTransformMatrix(); 
+            
+            nx += influence.weight * v.x;
+            ny += influence.weight * v.y;
+            nz += influence.weight * v.z;
+        }
+    }
 
     // re-normalize normal if necessary
     if (m_Normalize)
     {
-	  nx/= m_axisFactorX;
-	  ny/= m_axisFactorY;
-	  nz/= m_axisFactorZ;
+      nx/= m_axisFactorX;
+      ny/= m_axisFactorY;
+      nz/= m_axisFactorZ;
 
       float scale;
       scale = (float)( 1.0f / sqrt(nx * nx + ny * ny + nz * nz));
@@ -566,7 +566,7 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
 {
   if(stride <= 0)
   {
-	  stride = 6*sizeof(float);
+      stride = 6*sizeof(float);
   }
 
   // get bone vector of the skeleton
@@ -640,7 +640,7 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
     y = 0.0f;
     z = 0.0f;
 
-	// initialize normal
+    // initialize normal
     float nx, ny, nz;
     nx = 0.0f;
     ny = 0.0f;
@@ -648,9 +648,9 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
 
     // blend together all vertex influences
     int influenceId;
-	int influenceCount=(int)vertex.vectorInfluence.size();
+    int influenceCount=(int)vertex.vectorInfluence.size();
     if(influenceCount == 0) 
-	{
+    {
       x = position.x;
       y = position.y;
       z = position.z;
@@ -658,35 +658,35 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
       ny = normal.y;
       nz = normal.z;
     } 
-	else 
-	{
-		for(influenceId = 0; influenceId < influenceCount; ++influenceId)
-		{
-			// get the influence
-			CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
-			
-			// get the bone of the influence vertex
-			CalBone *pBone;
-			pBone = vectorBone[influence.boneId];
-			
-			// transform vertex with current state of the bone
-			CalVector v(position);
-			v *= pBone->getTransformMatrix();
-			v += pBone->getTranslationBoneSpace();
-			
-			x += influence.weight * v.x;
-			y += influence.weight * v.y;
-			z += influence.weight * v.z;
-			
-			// transform normal with current state of the bone
-			CalVector n(normal);
-			n *= pBone->getTransformMatrix();
-			
-			nx += influence.weight * n.x;
-			ny += influence.weight * n.y;
-			nz += influence.weight * n.z;
-		}
-	}
+    else 
+    {
+        for(influenceId = 0; influenceId < influenceCount; ++influenceId)
+        {
+            // get the influence
+            CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
+            
+            // get the bone of the influence vertex
+            CalBone *pBone;
+            pBone = vectorBone[influence.boneId];
+            
+            // transform vertex with current state of the bone
+            CalVector v(position);
+            v *= pBone->getTransformMatrix();
+            v += pBone->getTranslationBoneSpace();
+            
+            x += influence.weight * v.x;
+            y += influence.weight * v.y;
+            z += influence.weight * v.z;
+            
+            // transform normal with current state of the bone
+            CalVector n(normal);
+            n *= pBone->getTransformMatrix();
+            
+            nx += influence.weight * n.x;
+            ny += influence.weight * n.y;
+            nz += influence.weight * n.z;
+        }
+    }
 
     // save vertex position
     if(pSubmesh->getCoreSubmesh()->getSpringCount() > 0 && pSubmesh->hasInternalData())
@@ -712,9 +712,9 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
     // re-normalize normal if necessary
     if (m_Normalize)
     {
-	  nx/= m_axisFactorX;
-	  ny/= m_axisFactorY;
-	  nz/= m_axisFactorZ;
+      nx/= m_axisFactorX;
+      ny/= m_axisFactorY;
+      nz/= m_axisFactorZ;
 
       float scale;
       scale = (float)( 1.0f / sqrt(nx * nx + ny * ny + nz * nz));
@@ -731,7 +731,7 @@ int CalPhysique::calculateVerticesAndNormals(CalSubmesh *pSubmesh, float *pVerte
     } 
 
 
-	// next vertex position in buffer	
+    // next vertex position in buffer    
     pVertexBuffer = (float *)(((char *)pVertexBuffer) + stride) ;
   }
 
@@ -772,11 +772,11 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
   // check if the map id is valid
   if(((NumTexCoords < 0) || (NumTexCoords > TextureCoordinateCount)))
   {
-	 if(TextureCoordinateCount!=0)
-	 {    
-		 CalError::setLastError(CalError::INVALID_HANDLE, __FILE__, __LINE__);
-		 return -1;
-	 }
+     if(TextureCoordinateCount!=0)
+     {    
+         CalError::setLastError(CalError::INVALID_HANDLE, __FILE__, __LINE__);
+         return -1;
+     }
   }  
 
   // get physical property vector of the core submesh
@@ -844,7 +844,7 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
     y = 0.0f;
     z = 0.0f;
 
-	// initialize normal
+    // initialize normal
     float nx, ny, nz;
     nx = 0.0f;
     ny = 0.0f;
@@ -852,9 +852,9 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
 
     // blend together all vertex influences
     int influenceId;
-	int influenceCount=(int)vertex.vectorInfluence.size();
-	if(influenceCount == 0) 
-	{
+    int influenceCount=(int)vertex.vectorInfluence.size();
+    if(influenceCount == 0) 
+    {
       x = position.x;
       y = position.y;
       z = position.z;
@@ -862,35 +862,35 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
       ny = normal.y;
       nz = normal.z;
     } 
-	else 
-	{
-		for(influenceId = 0; influenceId < influenceCount; ++influenceId)
-		{
-			// get the influence
-			CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
-			
-			// get the bone of the influence vertex
-			CalBone *pBone;
-			pBone = vectorBone[influence.boneId];
-			
-			// transform vertex with current state of the bone
-			CalVector v(position);
-			v *= pBone->getTransformMatrix();
-			v += pBone->getTranslationBoneSpace();
-			
-			x += influence.weight * v.x;
-			y += influence.weight * v.y;
-			z += influence.weight * v.z;
-			
-			// transform normal with current state of the bone
-			CalVector n(normal);	  
-			n *= pBone->getTransformMatrix();
-			
-			nx += influence.weight * n.x;
-			ny += influence.weight * n.y;
-			nz += influence.weight * n.z;
-		}
-	}
+    else 
+    {
+        for(influenceId = 0; influenceId < influenceCount; ++influenceId)
+        {
+            // get the influence
+            CalCoreSubmesh::Influence& influence = vertex.vectorInfluence[influenceId];
+            
+            // get the bone of the influence vertex
+            CalBone *pBone;
+            pBone = vectorBone[influence.boneId];
+            
+            // transform vertex with current state of the bone
+            CalVector v(position);
+            v *= pBone->getTransformMatrix();
+            v += pBone->getTranslationBoneSpace();
+            
+            x += influence.weight * v.x;
+            y += influence.weight * v.y;
+            z += influence.weight * v.z;
+            
+            // transform normal with current state of the bone
+            CalVector n(normal);      
+            n *= pBone->getTransformMatrix();
+            
+            nx += influence.weight * n.x;
+            ny += influence.weight * n.y;
+            nz += influence.weight * n.z;
+        }
+    }
 
     // save vertex position
     if(pSubmesh->getCoreSubmesh()->getSpringCount() > 0 && pSubmesh->hasInternalData())
@@ -913,12 +913,12 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
       pVertexBuffer[2] = z * m_axisFactorZ;
     }
     
-	 // re-normalize normal if necessary
+     // re-normalize normal if necessary
     if (m_Normalize)
     {
-	  nx/= m_axisFactorX;
-	  ny/= m_axisFactorY;
-	  nz/= m_axisFactorZ;
+      nx/= m_axisFactorX;
+      ny/= m_axisFactorY;
+      nz/= m_axisFactorZ;
 
       float scale;
       scale = (float) (1.0f / sqrt(nx * nx + ny * ny + nz * nz));
@@ -934,21 +934,21 @@ int CalPhysique::calculateVerticesNormalsAndTexCoords(CalSubmesh *pSubmesh, floa
       pVertexBuffer[5] = nz;
     }
 
-	pVertexBuffer += 6;
-	
-	if(TextureCoordinateCount==0)
-	{
-		pVertexBuffer+=NumTexCoords*2;
-	}
-	else
-	{
-		for(int mapId=0; mapId < NumTexCoords; ++mapId)
-		{
-			pVertexBuffer[0] = vectorvectorTextureCoordinate[mapId][vertexId].u;
-			pVertexBuffer[1] = vectorvectorTextureCoordinate[mapId][vertexId].v;			
-			pVertexBuffer += 2;
-		}
-	}
+    pVertexBuffer += 6;
+    
+    if(TextureCoordinateCount==0)
+    {
+        pVertexBuffer+=NumTexCoords*2;
+    }
+    else
+    {
+        for(int mapId=0; mapId < NumTexCoords; ++mapId)
+        {
+            pVertexBuffer[0] = vectorvectorTextureCoordinate[mapId][vertexId].u;
+            pVertexBuffer[1] = vectorvectorTextureCoordinate[mapId][vertexId].v;            
+            pVertexBuffer += 2;
+        }
+    }
   }
 
   return vertexCount;
@@ -1020,19 +1020,19 @@ void CalPhysique::setNormalization(bool normalize)
 
 void CalPhysique::setAxisFactorX(float factor)
 {
-	m_axisFactorX = factor;
-	m_Normalize = true;	
+    m_axisFactorX = factor;
+    m_Normalize = true;    
 }
 
 void CalPhysique::setAxisFactorY(float factor)
 {
-	m_axisFactorY = factor;
-	m_Normalize = true;	
+    m_axisFactorY = factor;
+    m_Normalize = true;    
 }
 
 void CalPhysique::setAxisFactorZ(float factor)
 {
-	m_axisFactorZ = factor;
-	m_Normalize = true;	
+    m_axisFactorZ = factor;
+    m_Normalize = true;    
 }
 //****************************************************************************//

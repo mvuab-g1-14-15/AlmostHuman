@@ -351,7 +351,7 @@ bool CalCoreSubmesh::reserve(int vertexCount, int textureCoordinateCount, int fa
   {
     m_vectorvectorTextureCoordinate[textureCoordinateId].reserve(vertexCount);
     m_vectorvectorTextureCoordinate[textureCoordinateId].resize(vertexCount);
-	
+    
     if (m_vectorTangentsEnabled[textureCoordinateId])
     {
       m_vectorvectorTangentSpace[textureCoordinateId].reserve(vertexCount);
@@ -638,7 +638,7 @@ void CalCoreSubmesh::scale(float factor)
 
   for(size_t vertexId = 0; vertexId < m_vectorVertex.size() ; vertexId++)
   {
-    m_vectorVertex[vertexId].position*=factor;		
+    m_vectorVertex[vertexId].position*=factor;        
   }
 
   if(!m_vectorSpring.empty())
@@ -656,28 +656,28 @@ void CalCoreSubmesh::scale(float factor)
     }
 
 
-/*		
-		for(vertexId = 0; vertexId < m_vectorVertex.size() ; vertexId++)
-		{
-			//m_vectorPhysicalProperty[vertexId].weight *= factor;
-			m_vectorPhysicalProperty[vertexId].weight *= factor*factor;
-			//m_vectorPhysicalProperty[vertexId].weight *= 0.5f;
-		}
+/*        
+        for(vertexId = 0; vertexId < m_vectorVertex.size() ; vertexId++)
+        {
+            //m_vectorPhysicalProperty[vertexId].weight *= factor;
+            m_vectorPhysicalProperty[vertexId].weight *= factor*factor;
+            //m_vectorPhysicalProperty[vertexId].weight *= 0.5f;
+        }
 
 
-		int springId;
-		for(springId = 0; springId < m_vectorVertex.size() ; springId++)
-		{
-			//m_vectorSpring[springId].idleLength*=factor;
-			CalVector distance = m_vectorVertex[m_vectorSpring[springId].vertexId[1]].position - m_vectorVertex[m_vectorSpring[springId].vertexId[0]].position;
-			
-			m_vectorSpring[springId].idleLength = distance.length();		
-		}
+        int springId;
+        for(springId = 0; springId < m_vectorVertex.size() ; springId++)
+        {
+            //m_vectorSpring[springId].idleLength*=factor;
+            CalVector distance = m_vectorVertex[m_vectorSpring[springId].vertexId[1]].position - m_vectorVertex[m_vectorSpring[springId].vertexId[0]].position;
+            
+            m_vectorSpring[springId].idleLength = distance.length();        
+        }
 
    */
   }
 
-	
+    
 
 }
 

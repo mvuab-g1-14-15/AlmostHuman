@@ -258,7 +258,7 @@ void CalSubmesh::disableInternalData()
 
 bool CalSubmesh::isTangentsEnabled(int mapId)
 {
-	return m_pCoreSubmesh->isTangentsEnabled(mapId);
+    return m_pCoreSubmesh->isTangentsEnabled(mapId);
 }
 
  /*****************************************************************************/
@@ -283,7 +283,7 @@ bool CalSubmesh::enableTangents(int mapId, bool enabled)
 
   m_vectorvectorTangentSpace[mapId].reserve(m_pCoreSubmesh->getVertexCount());
   m_vectorvectorTangentSpace[mapId].resize(m_pCoreSubmesh->getVertexCount());
-	
+    
   // get the tangent space vector of the core submesh
   std::vector<CalCoreSubmesh::TangentSpace >& vectorTangentSpace = m_pCoreSubmesh->getVectorVectorTangentSpace()[mapId];
 

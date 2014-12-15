@@ -87,13 +87,13 @@ inline Matrix33<T>& Matrix33<T>::ResetRotation ()
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::ResetScale ()
 {
-	T escale_x = 1.0f / GetVectorBasisLength(0);
-	T escale_y = 1.0f / GetVectorBasisLength(1);
-	T escale_z = 1.0f / GetVectorBasisLength(2);
+    T escale_x = 1.0f / GetVectorBasisLength(0);
+    T escale_y = 1.0f / GetVectorBasisLength(1);
+    T escale_z = 1.0f / GetVectorBasisLength(2);
 
-	m00 *= escale_x;  m01 *= escale_y;  m02 *= escale_z;
-	m10 *= escale_x;  m11 *= escale_y;  m12 *= escale_z;
-	m20 *= escale_x;  m21 *= escale_y;  m22 *= escale_z;
+    m00 *= escale_x;  m01 *= escale_y;  m02 *= escale_z;
+    m10 *= escale_x;  m11 *= escale_y;  m12 *= escale_z;
+    m20 *= escale_x;  m21 *= escale_y;  m22 *= escale_z;
 
   return (*this);
 }
@@ -144,12 +144,12 @@ inline Matrix33<T>& Matrix33<T>::SetZero ()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetFromBasis (const Vector3<T>& ejeX,
-																							 const Vector3<T>& ejeY,
-																							 const Vector3<T>& ejeZ)
+                                                                                             const Vector3<T>& ejeY,
+                                                                                             const Vector3<T>& ejeZ)
 {
-	m00 = ejeX.x;  m01 = ejeY.x;  m02 = ejeZ.x;
-	m10 = ejeX.y;  m11 = ejeY.y;  m12 = ejeZ.y;
-	m20 = ejeX.z;  m21 = ejeY.z;  m22 = ejeZ.z;
+    m00 = ejeX.x;  m01 = ejeY.x;  m02 = ejeZ.x;
+    m10 = ejeX.y;  m11 = ejeY.y;  m12 = ejeZ.y;
+    m20 = ejeX.z;  m21 = ejeY.z;  m22 = ejeZ.z;
 
   return (*this);
 }
@@ -416,28 +416,28 @@ inline Matrix33<T>& Matrix33<T>::SetRotByAngleX (const T angleX)
 {
   ResetRotation();
 
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
   return (*this);
 }
@@ -451,28 +451,28 @@ inline Matrix33<T>& Matrix33<T>::SetRotByAngleY (const T angleY)
 {
   ResetRotation();
 
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m20;
-	v.y = m00;
-	v.Rotate(angleY);
-	m20 = v.x;
-	m00 = v.y;
+    // eje X
+    v.x = m20;
+    v.y = m00;
+    v.Rotate(angleY);
+    m20 = v.x;
+    m00 = v.y;
 
-	// eje Y
-	v.x = m21;
-	v.y = m01;
-	v.Rotate(angleY);
-	m21 = v.x;
-	m01 = v.y;
+    // eje Y
+    v.x = m21;
+    v.y = m01;
+    v.Rotate(angleY);
+    m21 = v.x;
+    m01 = v.y;
 
-	// eje Z
-	v.x = m22;
-	v.y = m02;
-	v.Rotate(angleY);
-	m22 = v.x;
-	m02 = v.y;
+    // eje Z
+    v.x = m22;
+    v.y = m02;
+    v.Rotate(angleY);
+    m22 = v.x;
+    m02 = v.y;
 
   return (*this);
 }
@@ -486,28 +486,28 @@ inline Matrix33<T>& Matrix33<T>::SetRotByAngleZ (const T angleZ)
 {
   ResetRotation();
 
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
 
   return (*this);
 }
@@ -521,57 +521,57 @@ inline Matrix33<T>& Matrix33<T>::SetRotByAnglesXZ (const T angleX, const T angle
 {
   ResetRotation();
 
-	Vector2<T> v;
+    Vector2<T> v;
 
-	////////////
-	// RotX
-	////////////
+    ////////////
+    // RotX
+    ////////////
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
-	////////////
-	// RotZ
-	////////////
+    ////////////
+    // RotZ
+    ////////////
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
 
   return (*this);
 }
@@ -585,82 +585,82 @@ inline Matrix33<T>& Matrix33<T>::SetRotByAnglesYXZ (const T angleY, const T angl
 {
   ResetRotation();
 
-	Vector2<T> v;
+    Vector2<T> v;
 
-	////////////
-	// RotY
-	////////////
+    ////////////
+    // RotY
+    ////////////
 
-	// eje X
-	v.x = m20;
-	v.y = m00;
-	v.Rotate(angleY);
-	m20 = v.x;
-	m00 = v.y;
+    // eje X
+    v.x = m20;
+    v.y = m00;
+    v.Rotate(angleY);
+    m20 = v.x;
+    m00 = v.y;
 
-	// eje Y
-	v.x = m21;
-	v.y = m01;
-	v.Rotate(angleY);
-	m21 = v.x;
-	m01 = v.y;
+    // eje Y
+    v.x = m21;
+    v.y = m01;
+    v.Rotate(angleY);
+    m21 = v.x;
+    m01 = v.y;
 
-	// eje Z
-	v.x = m22;
-	v.y = m02;
-	v.Rotate(angleY);
-	m22 = v.x;
-	m02 = v.y;
+    // eje Z
+    v.x = m22;
+    v.y = m02;
+    v.Rotate(angleY);
+    m22 = v.x;
+    m02 = v.y;
 
-	////////////
-	// RotX
-	////////////
+    ////////////
+    // RotX
+    ////////////
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
-	////////////
-	// RotZ
-	////////////
+    ////////////
+    // RotZ
+    ////////////
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
 
   return (*this);
 }
@@ -693,13 +693,13 @@ inline Matrix34<T>& Matrix33<T>::SetRotByQuat(const Quatn<T>& quat)
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetScale (const Matrix33<T>& mat_escala)
 {
-	T scale_x = mat_escala.m00 / GetVectorBasisLength(0);
-	T scale_y = mat_escala.m11 / GetVectorBasisLength(1);
-	T scale_z = mat_escala.m22 / GetVectorBasisLength(2);
+    T scale_x = mat_escala.m00 / GetVectorBasisLength(0);
+    T scale_y = mat_escala.m11 / GetVectorBasisLength(1);
+    T scale_z = mat_escala.m22 / GetVectorBasisLength(2);
 
-	m00 *= scale_x;  m01 *= scale_y;  m02 = *= scale_z;
-	m10 *= scale_x;  m11 *= scale_y;  m12 = *= scale_z;
-	m20 *= scale_x;  m21 *= scale_y;  m22 = *= scale_z;
+    m00 *= scale_x;  m01 *= scale_y;  m02 = *= scale_z;
+    m10 *= scale_x;  m11 *= scale_y;  m12 = *= scale_z;
+    m20 *= scale_x;  m21 *= scale_y;  m22 = *= scale_z;
 
   return (*this);
 }
@@ -717,13 +717,13 @@ inline Matrix33<T>& Matrix33<T>::SetScale (const Matrix33<T>& mat_escala)
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetScale (const Vector3<T>& vect_escala)
 {
-	T scale_x = vect_escala.x / GetVectorBasisLength(0);
-	T scale_y = vect_escala.y / GetVectorBasisLength(1);
-	T scale_z = vect_escala.z / GetVectorBasisLength(2);
+    T scale_x = vect_escala.x / GetVectorBasisLength(0);
+    T scale_y = vect_escala.y / GetVectorBasisLength(1);
+    T scale_z = vect_escala.z / GetVectorBasisLength(2);
 
-	m00 *= scale_x;  m01 *= scale_y;  m02 *= scale_z;
-	m10 *= scale_x;  m11 *= scale_y;  m12 *= scale_z;
-	m20 *= scale_x;  m21 *= scale_y;  m22 *= scale_z;
+    m00 *= scale_x;  m01 *= scale_y;  m02 *= scale_z;
+    m10 *= scale_x;  m11 *= scale_y;  m12 *= scale_z;
+    m20 *= scale_x;  m21 *= scale_y;  m22 *= scale_z;
 
   return (*this);
 }
@@ -740,13 +740,13 @@ inline Matrix33<T>& Matrix33<T>::SetScale (const Vector3<T>& vect_escala)
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetScale (const T escala_x, const T escala_y, const T escala_z)
 {
-	T scale_x = escala_x / GetVectorBasisLength(0);
-	T scale_y = escala_y / GetVectorBasisLength(1);
-	T scale_z = escala_z / GetVectorBasisLength(2);
+    T scale_x = escala_x / GetVectorBasisLength(0);
+    T scale_y = escala_y / GetVectorBasisLength(1);
+    T scale_z = escala_z / GetVectorBasisLength(2);
 
-	m00 *= scale_x;  m01 *= scale_y;  m02 *= scale_z;
-	m10 *= scale_x;  m11 *= scale_y;  m12 *= scale_z;
-	m20 *= scale_x;  m21 *= scale_y;  m22 *= scale_z;
+    m00 *= scale_x;  m01 *= scale_y;  m02 *= scale_z;
+    m10 *= scale_x;  m11 *= scale_y;  m12 *= scale_z;
+    m20 *= scale_x;  m21 *= scale_y;  m22 *= scale_z;
 
   return (*this);
 }
@@ -758,7 +758,7 @@ template<typename T>
 inline Vector3<T> Matrix33<T>::GetRow (int i) const
 {
 #ifdef ROW_MAJOR_MATRICES
-	return *((Vector3<T>*)this + i);
+    return *((Vector3<T>*)this + i);
 #else
   return Vector3<T>( ((T*)this)[i],
                      ((T*)this)[3 + i],
@@ -773,11 +773,11 @@ template<typename T>
 inline T Matrix33<T>::GetVectorBasisLength (int i) const
 {
 #ifdef ROW_MAJOR_MATRICES
-	return Vector3<T>(((T*)this)[i],
-										((T*)this)[3 + i],
-										((T*)this)[6 + i] ).Length();
+    return Vector3<T>(((T*)this)[i],
+                                        ((T*)this)[3 + i],
+                                        ((T*)this)[6 + i] ).Length();
 #else
-	return (*((Vector3<T>*)this + i)).Length();
+    return (*((Vector3<T>*)this + i)).Length();
 #endif
 
 }
@@ -790,9 +790,9 @@ template<typename T>
 inline Vector3<T> Matrix33<T>::GetColum (int i) const
 {
 #ifdef ROW_MAJOR_MATRICES
-	return Vector3<T>(((T*)this)[i],
-										((T*)this)[3 + i],
-										((T*)this)[6 + i] );
+    return Vector3<T>(((T*)this)[i],
+                                        ((T*)this)[3 + i],
+                                        ((T*)this)[6 + i] );
 #else
   return *((Vector3<T>*)this + i);
 #endif
@@ -1501,28 +1501,28 @@ Matrix33<T> Matrix33<T>::GetRotedByAngleX (const T angleX) const
 template<typename T> 
 Matrix33<T>& Matrix33<T>::RotByAngleX (const T angleX)
 {
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
   return (*this);
 }
@@ -1544,28 +1544,28 @@ Matrix33<T> Matrix33<T>::GetRotedByAngleY (const T angleY) const
 template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAngleY (const T angleY)
 {
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m20;
-	v.y = m00;
-	v.Rotate(angleY);
-	m20 = v.x;
-	m00 = v.y;
+    // eje X
+    v.x = m20;
+    v.y = m00;
+    v.Rotate(angleY);
+    m20 = v.x;
+    m00 = v.y;
 
-	// eje Y
-	v.x = m21;
-	v.y = m01;
-	v.Rotate(angleY);
-	m21 = v.x;
-	m01 = v.y;
+    // eje Y
+    v.x = m21;
+    v.y = m01;
+    v.Rotate(angleY);
+    m21 = v.x;
+    m01 = v.y;
 
-	// eje Z
-	v.x = m22;
-	v.y = m02;
-	v.Rotate(angleY);
-	m22 = v.x;
-	m02 = v.y;
+    // eje Z
+    v.x = m22;
+    v.y = m02;
+    v.Rotate(angleY);
+    m22 = v.x;
+    m02 = v.y;
 
   return (*this);
 }
@@ -1587,28 +1587,28 @@ Matrix33<T> Matrix33<T>::GetRotedByAngleZ (const T angleZ) const
 template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAngleZ (const T angleZ)
 {
-	Vector2<T> v;
+    Vector2<T> v;
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
   
   return (*this);
 }
@@ -1630,57 +1630,57 @@ Matrix33<T> Matrix33<T>::GetRotedByAnglesXZ (const T angleX, const T angleZ) con
 template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAnglesXZ (const T angleX, const T angleZ)
 {
-	Vector2<T> v;
+    Vector2<T> v;
 
-	////////////
-	// RotX
-	////////////
+    ////////////
+    // RotX
+    ////////////
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
-	////////////
-	// RotZ
-	////////////
+    ////////////
+    // RotZ
+    ////////////
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
 
   return (*this);
 }
@@ -1702,83 +1702,83 @@ Matrix33<T> Matrix33<T>::GetRotedByAnglesYXZ (const T angleY, const T angleX, co
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAnglesYXZ (const T angleY, const T angleX, const T angleZ)
-{	
-	Vector2<T> v;
+{    
+    Vector2<T> v;
 
-	////////////
-	// RotY
-	////////////
+    ////////////
+    // RotY
+    ////////////
 
-	// eje X
-	v.x = m20;
-	v.y = m00;
-	v.Rotate(angleY);
-	m20 = v.x;
-	m00 = v.y;
+    // eje X
+    v.x = m20;
+    v.y = m00;
+    v.Rotate(angleY);
+    m20 = v.x;
+    m00 = v.y;
 
-	// eje Y
-	v.x = m21;
-	v.y = m01;
-	v.Rotate(angleY);
-	m21 = v.x;
-	m01 = v.y;
+    // eje Y
+    v.x = m21;
+    v.y = m01;
+    v.Rotate(angleY);
+    m21 = v.x;
+    m01 = v.y;
 
-	// eje Z
-	v.x = m22;
-	v.y = m02;
-	v.Rotate(angleY);
-	m22 = v.x;
-	m02 = v.y;
+    // eje Z
+    v.x = m22;
+    v.y = m02;
+    v.Rotate(angleY);
+    m22 = v.x;
+    m02 = v.y;
 
-	////////////
-	// RotX
-	////////////
+    ////////////
+    // RotX
+    ////////////
 
-	// eje X
-	v.x = m10;
-	v.y = m20;
-	v.Rotate(angleX);
-	m10 = v.x;
-	m20 = v.y;
+    // eje X
+    v.x = m10;
+    v.y = m20;
+    v.Rotate(angleX);
+    m10 = v.x;
+    m20 = v.y;
 
-	// eje Y
-	v.x = m11;
-	v.y = m21;
-	v.Rotate(angleX);
-	m11 = v.x;
-	m21 = v.y;
+    // eje Y
+    v.x = m11;
+    v.y = m21;
+    v.Rotate(angleX);
+    m11 = v.x;
+    m21 = v.y;
 
-	// eje Z
-	v.x = m12;
-	v.y = m22;
-	v.Rotate(angleX);
-	m12 = v.x;
-	m22 = v.y;
+    // eje Z
+    v.x = m12;
+    v.y = m22;
+    v.Rotate(angleX);
+    m12 = v.x;
+    m22 = v.y;
 
-	////////////
-	// RotZ
-	////////////
+    ////////////
+    // RotZ
+    ////////////
 
-	// eje X
-	v.x = m00;
-	v.y = m10;
-	v.Rotate(angleZ);
-	m00 = v.x;
-	m10 = v.y;
+    // eje X
+    v.x = m00;
+    v.y = m10;
+    v.Rotate(angleZ);
+    m00 = v.x;
+    m10 = v.y;
 
-	// eje Y
-	v.x = m01;
-	v.y = m11;
-	v.Rotate(angleZ);
-	m01 = v.x;
-	m11 = v.y;
+    // eje Y
+    v.x = m01;
+    v.y = m11;
+    v.Rotate(angleZ);
+    m01 = v.x;
+    m11 = v.y;
 
-	// eje Z
-	v.x = m02;
-	v.y = m12;
-	v.Rotate(angleZ);
-	m02 = v.x;
-	m12 = v.y;
+    // eje Z
+    v.x = m02;
+    v.y = m12;
+    v.Rotate(angleZ);
+    m02 = v.x;
+    m12 = v.y;
 
   return (*this);
 }
@@ -1800,9 +1800,9 @@ Matrix33<T> Matrix33<T>::GetScaled (const T escala_x, const T escala_y, const T 
 template<typename T>
 Matrix33<T>& Matrix33<T>::Scale (const T escala_x, const T escala_y, const T escala_z)
 {
-	m00 *= escala_x;  m01 *= escala_y;  m02 *= escala_z;
-	m10 *= escala_x;  m11 *= escala_y;  m12 *= escala_z;
-	m20 *= escala_x;  m21 *= escala_y;  m22 *= escala_z;
+    m00 *= escala_x;  m01 *= escala_y;  m02 *= escala_z;
+    m10 *= escala_x;  m11 *= escala_y;  m12 *= escala_z;
+    m20 *= escala_x;  m21 *= escala_y;  m22 *= escala_z;
 
   return (*this);
 }
@@ -1822,7 +1822,7 @@ Matrix33<T>& Matrix33<T>::AlignYX (const Vector3<T>& vY, const Vector3<T>& vX)
   Vector3<T> z = vX ^ vY;
   Vector3<T> x = vY ^ z;
 
-	SetFromBasis(x, y , z);
+    SetFromBasis(x, y , z);
 
   ResetScale();
 
@@ -1840,13 +1840,13 @@ Matrix33<T>& Matrix33<T>::AlignYX (const Vector3<T>& vY, const Vector3<T>& vX)
 template<typename T>
 Matrix33<T>& Matrix33<T>::AlignYZ (const Vector3<T>& vY, const Vector3<T>& vZ)
 {
-	Vector3<T> y = vY;
-	Vector3<T> x = vY ^ vZ;
-	Vector3<T> z = x ^ vY;
+    Vector3<T> y = vY;
+    Vector3<T> x = vY ^ vZ;
+    Vector3<T> z = x ^ vY;
 
-	SetFromBasis(x, y , z);
+    SetFromBasis(x, y , z);
 
-	ResetScale();
+    ResetScale();
 
   return (*this);
 }
@@ -1862,13 +1862,13 @@ Matrix33<T>& Matrix33<T>::AlignYZ (const Vector3<T>& vY, const Vector3<T>& vZ)
 template<typename T>
 Matrix33<T>& Matrix33<T>::AlignXZ (const Vector3<T>& vX, const Vector3<T>& vZ)
 {
-	Vector3<T> x = vX;
-	Vector3<T> y = vZ ^ vX;
-	Vector3<T> z = vX ^ y;
+    Vector3<T> x = vX;
+    Vector3<T> y = vZ ^ vX;
+    Vector3<T> z = vX ^ y;
 
-	SetFromBasis(x, y , z);
+    SetFromBasis(x, y , z);
 
-	ResetScale();
+    ResetScale();
 
   return (*this);
 }

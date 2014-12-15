@@ -8,20 +8,20 @@
 class CTexture
 {
 protected:
-	LPDIRECT3DTEXTURE9 m_Texture;
-	std::string m_FileName;
-	virtual bool LoadFile();
-	void Unload();
+    LPDIRECT3DTEXTURE9 m_Texture;
+    std::string m_FileName;
+    virtual bool LoadFile();
+    void Unload();
 
 public:
-	CTexture();
-	virtual ~CTexture();
+    CTexture();
+    virtual ~CTexture();
 
-	const std::string & GetFileName() const;
-	bool Load(const std::string &FileName);
+    const std::string & GetFileName() const;
+    bool Load(const std::string &FileName);
 
-	bool Reload();
-	void Activate(size_t StageId);
+    bool Reload();
+    void Activate(size_t StageId);
 };
 
 #endif //INC_TEXTURE_H_

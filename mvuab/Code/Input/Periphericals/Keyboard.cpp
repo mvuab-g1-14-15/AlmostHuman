@@ -6,13 +6,13 @@
 //----------------------------------------------------------------------------
 void CKeyboard::Done ()
 {
-	CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: releasing keyboard"); 
+    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: releasing keyboard"); 
 
-	if (IsOk())
-	{
-		Release();
-		m_bIsOk = false;
-	}
+    if (IsOk())
+    {
+        Release();
+        m_bIsOk = false;
+    }
 }
 
 
@@ -22,31 +22,31 @@ void CKeyboard::Done ()
 */
 bool CKeyboard::Init(LPDIRECTINPUT8 pDI, HWND hWnd) 
 {
-	bool bIsOk = Inherited::Init(pDI, hWnd);
+    bool bIsOk = Inherited::Init(pDI, hWnd);
 
-	if (bIsOk)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: crancking up keyboard");
-		bIsOk = !FAILED(CrankUp(GUID_SysKeyboard, &c_dfDIKeyboard));
+    if (bIsOk)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: crancking up keyboard");
+        bIsOk = !FAILED(CrankUp(GUID_SysKeyboard, &c_dfDIKeyboard));
 
-		if (bIsOk)
-		{
-			// clear out the structs
-			memset(m_Keys, 0, sizeof(m_Keys));
-			memset(m_KeysOld, 0, sizeof(m_KeysOld));
+        if (bIsOk)
+        {
+            // clear out the structs
+            memset(m_Keys, 0, sizeof(m_Keys));
+            memset(m_KeysOld, 0, sizeof(m_KeysOld));
 
-			// acquire the device to make it work
-			m_pDevice->Acquire();
-			CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: keyboard online");
-		}
-	}
+            // acquire the device to make it work
+            m_pDevice->Acquire();
+            CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Keyboard:: keyboard online");
+        }
+    }
 
-	if (!bIsOk)
-	{
-		Done();
-	}
+    if (!bIsOk)
+    {
+        Done();
+    }
 
-	return bIsOk;
+    return bIsOk;
 }
 
 /**
@@ -54,16 +54,16 @@ bool CKeyboard::Init(LPDIRECTINPUT8 pDI, HWND hWnd)
 */
 HRESULT CKeyboard::Update(void) 
 {
-	// copy keyboard state from last frame
-	memcpy(m_KeysOld, m_Keys, sizeof(m_Keys));
+    // copy keyboard state from last frame
+    memcpy(m_KeysOld, m_Keys, sizeof(m_Keys));
 
-	// try to get the data from the keyboard
-	if (FAILED(GetData(IDV_KEYBOARD, &m_Keys[0], NULL))) 
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "Keyboard:: GetData(Keyboard) failed");
-		return E_FAIL;
-	}
-	return S_OK;
+    // try to get the data from the keyboard
+    if (FAILED(GetData(IDV_KEYBOARD, &m_Keys[0], NULL))) 
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "Keyboard:: GetData(Keyboard) failed");
+        return E_FAIL;
+    }
+    return S_OK;
 } 
 
 
@@ -72,10 +72,10 @@ HRESULT CKeyboard::Update(void)
 */
 bool CKeyboard::IsDown(uint32 nID) const
 {
-	// translate virtual code to scan code
-	if (m_Keys[nID] & 0x80)
-		return true;
-	return false;
+    // translate virtual code to scan code
+    if (m_Keys[nID] & 0x80)
+        return true;
+    return false;
 } // IsPressed
 
 /**
@@ -83,10 +83,10 @@ bool CKeyboard::IsDown(uint32 nID) const
 */
 bool CKeyboard::IsDownUp(uint32 nID)  const
 {
-	// translate virtual code to scan code
-	if ( (m_KeysOld[nID]&0x80) && !(m_Keys[nID]&0x80) )
-		return true;
-	return false;
+    // translate virtual code to scan code
+    if ( (m_KeysOld[nID]&0x80) && !(m_Keys[nID]&0x80) )
+        return true;
+    return false;
 } 
 
 /**
@@ -94,8 +94,8 @@ bool CKeyboard::IsDownUp(uint32 nID)  const
 */
 bool CKeyboard::IsUpDown(uint32 nID) const
 {
-	// translate virtual code to scan code
-	if ( !(m_KeysOld[nID]&0x80) && (m_Keys[nID]&0x80) )
-		return true;
-	else return false;
+    // translate virtual code to scan code
+    if ( !(m_KeysOld[nID]&0x80) && (m_Keys[nID]&0x80) )
+        return true;
+    else return false;
 }

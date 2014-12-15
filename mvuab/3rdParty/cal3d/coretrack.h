@@ -67,7 +67,7 @@ public:
   *****************************************************************************/
   inline int getCoreBoneId()
   {
-	  return m_coreBoneId;
+      return m_coreBoneId;
   }
 
   bool setCoreBoneId(int coreBoneId);
@@ -76,7 +76,7 @@ public:
   CalCoreKeyframe* getCoreKeyframe(int idx);
 
   bool addCoreKeyframe(CalCoreKeyframe *pCoreKeyframe);
-	void removeCoreKeyFrame(int _i) { m_keyframes.erase( m_keyframes.begin() + _i); }
+    void removeCoreKeyFrame(int _i) { m_keyframes.erase( m_keyframes.begin() + _i); }
 
   void scale(float factor);
 

@@ -30,7 +30,7 @@ public:
   bool addCoreTrack(CalCoreTrack *pCoreTrack);
   CalCoreTrack *getCoreTrack(int coreBoneId);
 
-	float getDuration() const;
+    float getDuration() const;
   void setDuration(float duration);
   void scale(float factor);
   void setFilename(const std::string& filename);
@@ -43,7 +43,7 @@ public:
 
   unsigned int getTrackCount() const;
   std::list<CalCoreTrack *>& getListCoreTrack();
-	unsigned int getTotalNumberOfKeyframes() const;
+    unsigned int getTotalNumberOfKeyframes() const;
 
   struct CallbackRecord
   {

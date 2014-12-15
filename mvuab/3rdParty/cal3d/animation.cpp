@@ -156,8 +156,8 @@ void CalAnimation::checkCallbacks(float animationTime,CalModel *model)
 
   for (size_t i=0; i<list.size(); i++)
   {
-	if (m_lastCallbackTimes.size() <= i)                // need these two lines to allow dynamic adding of callbacks. 
-		m_lastCallbackTimes.push_back(animationTime);
+    if (m_lastCallbackTimes.size() <= i)                // need these two lines to allow dynamic adding of callbacks. 
+        m_lastCallbackTimes.push_back(animationTime);
 
     list[i].callback->AnimationUpdate(animationTime, model, model->getUserData());
     if (animationTime > 0 && animationTime < m_lastCallbackTimes[i])  // looped

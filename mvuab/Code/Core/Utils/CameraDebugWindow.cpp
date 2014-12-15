@@ -5,10 +5,10 @@
 //#include "Utils\MemLeaks.h"
 
 CCameraDebugWindow::CCameraDebugWindow(Vect2i aWindowPosition) :
-	CDebugWindow(aWindowPosition)
+    CDebugWindow(aWindowPosition)
 {
-	m_WindowHeight = 85;
-	m_WindowWidth = 100;
+    m_WindowHeight = 85;
+    m_WindowWidth = 100;
 }
 
 CCameraDebugWindow::~CCameraDebugWindow()
@@ -27,7 +27,7 @@ void CCameraDebugWindow::RenderInfo()
     CCamera* pCamera = renderManager->GetCurrentCamera();
     
     if(!pCamera)
-    	return;
+        return;
     
     uint32 w, h;
     renderManager->GetWidthAndHeight(w,h);

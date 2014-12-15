@@ -50,65 +50,65 @@ public:
 public:
   inline float& operator[](unsigned int i) 
   {
-	  return (&x)[i];
+      return (&x)[i];
   }
 
   inline const float& operator[](unsigned int i) const
   {
-	  return (&x)[i];
+      return (&x)[i];
   }
 
   inline void operator=(const CalVector& v)
   {
-	  x = v.x;
-	  y = v.y;
-	  z = v.z;
+      x = v.x;
+      y = v.y;
+      z = v.z;
   }
 
   inline void operator+=(const CalVector& v)
   {
-	  x += v.x;
-	  y += v.y;
-	  z += v.z;
+      x += v.x;
+      y += v.y;
+      z += v.z;
   }
   
   
   inline void operator-=(const CalVector& v)
   {
-	  x -= v.x;
-	  y -= v.y;
-	  z -= v.z;
+      x -= v.x;
+      y -= v.y;
+      z -= v.z;
   }
 
   inline void operator*=(const float d)
   {
-	  x *= d;
-	  y *= d;
-	  z *= d;
+      x *= d;
+      y *= d;
+      z *= d;
   }
 
   void operator*=(const CalQuaternion& q);
 
   inline void operator*=(const CalMatrix &m)
   {
-	  float ox = x;
-	  float oy = y;
-	  float oz = z;
-	  x = m.dxdx*ox + m.dxdy*oy + m.dxdz*oz;
-	  y = m.dydx*ox + m.dydy*oy + m.dydz*oz;
-	  z = m.dzdx*ox + m.dzdy*oy + m.dzdz*oz;
+      float ox = x;
+      float oy = y;
+      float oz = z;
+      x = m.dxdx*ox + m.dxdy*oy + m.dxdz*oz;
+      y = m.dydx*ox + m.dydy*oy + m.dydz*oz;
+      z = m.dzdx*ox + m.dzdy*oy + m.dzdz*oz;
   }  
 
   inline void operator/=(const float d)
   {
-	  x /= d;
-	  y /= d;
-	  z /= d;
+      x /= d;
+      y /= d;
+      z /= d;
   }
 
   inline bool operator==(const CalVector& v) const
   {
-	  return ((x == v.x) && (y == v.y) && (z == v.z));
+      return ((x == v.x) && (y == v.y) && (z == v.z));
   }
 
   inline bool operator!=(const CalVector& v) const
@@ -118,41 +118,41 @@ public:
 
   inline void blend(float d, const CalVector& v)
   {
-	  x += d * (v.x - x);
-	  y += d * (v.y - y);
-	  z += d * (v.z - z);
+      x += d * (v.x - x);
+      y += d * (v.y - y);
+      z += d * (v.z - z);
   }
 
   inline void clear() 
   {
-	  x=0.0f;
-	  y=0.0f;
-	  z=0.0f;		  
+      x=0.0f;
+      y=0.0f;
+      z=0.0f;          
   }
 
   inline float length() const
   {
-	  return (float)sqrt(x * x + y * y + z * z);
+      return (float)sqrt(x * x + y * y + z * z);
   }
   inline float normalize()
   {
-	  // calculate the length of the vector
-	  float length;
-	  length = (float) sqrt(x * x + y * y + z * z);
-	  
-	  // normalize the vector
-	  x /= length;
-	  y /= length;
-	  z /= length;
-	  
-	  return length;
+      // calculate the length of the vector
+      float length;
+      length = (float) sqrt(x * x + y * y + z * z);
+      
+      // normalize the vector
+      x /= length;
+      y /= length;
+      z /= length;
+      
+      return length;
   }
   
   void set(float vx, float vy, float vz)
   {
-	  x = vx;
-	  y = vy;
-	  z = vz;
+      x = vx;
+      y = vy;
+      z = vz;
   }
 
 };
@@ -164,32 +164,32 @@ static inline CalVector operator+(const CalVector& v, const CalVector& u)
 
 static inline CalVector operator-(const CalVector& v, const CalVector& u)
 {
-	return CalVector(v.x - u.x, v.y - u.y, v.z - u.z);
+    return CalVector(v.x - u.x, v.y - u.y, v.z - u.z);
 }
 
 static inline CalVector operator*(const CalVector& v, const float d)
 {
-	return CalVector(v.x * d, v.y * d, v.z * d);
+    return CalVector(v.x * d, v.y * d, v.z * d);
 }
 
 static inline CalVector operator*(const float d, const CalVector& v)
 {
-	return CalVector(v.x * d, v.y * d, v.z * d);
+    return CalVector(v.x * d, v.y * d, v.z * d);
 }
 
 static inline CalVector operator/(const CalVector& v, const float d)
 {
-	return CalVector(v.x / d, v.y / d, v.z / d);
+    return CalVector(v.x / d, v.y / d, v.z / d);
 }
 
 static inline float operator*(const CalVector& v, const CalVector& u)
 {
-	return v.x * u.x + v.y * u.y + v.z * u.z;
+    return v.x * u.x + v.y * u.y + v.z * u.z;
 }  
 
 static inline CalVector operator%(const CalVector& v, const CalVector& u)
 {
-	return CalVector(v.y * u.z - v.z * u.y, v.z * u.x - v.x * u.z, v.x * u.y - v.y * u.x);
+    return CalVector(v.y * u.z - v.z * u.y, v.z * u.x - v.x * u.z, v.x * u.y - v.y * u.x);
 }
 
 
@@ -207,7 +207,7 @@ class CAL3D_API CalPlane
       // don't use them in you program
       
       float eval(CalVector &p);
-	  float dist(CalVector &p);
+      float dist(CalVector &p);
       void setPosition(CalVector &p);
       void setNormal(CalVector &p);
 };

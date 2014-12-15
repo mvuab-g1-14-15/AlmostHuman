@@ -28,7 +28,7 @@ template  <typename T>          inline  T     Pow2    (T _val)                  
 template  <typename T>          inline  T     PowN    (T _val,int _n)           { T r=1.0f; if(_n>0) for(int i=0;i<_n;++i) { r*=_val; } else if(_n<0) { for(int i=0; i<-_n; ++i) r/=_val; } return r; }
 
 template  <typename T>          inline  T     Log     (T val)                   { return (T) log(val); }
-template  <typename T>					inline	T			LogBase	(T val, T base)						{ return (T) (log(val) / log(base)); }
+template  <typename T>                    inline    T            LogBase    (T val, T base)                        { return (T) (log(val) / log(base)); }
 
 template  <typename T>          inline  T     Min     (T _a, T _b)              { return _a<_b ? _a : _b;  }
 template  <typename T>          inline  T     Max     (T _a, T _b)              { return _a>_b ? _a : _b;  }
@@ -66,35 +66,35 @@ inline float32 Sign(float32 fVal)
 
 inline uint32 RoundUp4(uint32 n)
 {
-	if(n & 0x3)
-		return ((n & 0xFFFFFFFC) + 0x4);
-	else
-		return n;
+    if(n & 0x3)
+        return ((n & 0xFFFFFFFC) + 0x4);
+    else
+        return n;
 }
 
 inline uint32 RoundUp32(uint32 n)
 {
-	if(n & 0x1F)
-		return ((n & 0xFFFFFFE0) + 0x20);
-	else
-		return n;
+    if(n & 0x1F)
+        return ((n & 0xFFFFFFE0) + 0x20);
+    else
+        return n;
 }
 
 inline uint32 RoundDown32(uint32 n)
 {
-	return (n & 0xFFFFFFE0);
+    return (n & 0xFFFFFFE0);
 }
 
 inline bool IsPowerOf2(uint32 n)
 {
-	if(n == 0)
-	{
-		return false;
-	}
-	else
-	{
-		return (n & (n-1)) == 0;
-	}
+    if(n == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return (n & (n-1)) == 0;
+    }
 }
 
 

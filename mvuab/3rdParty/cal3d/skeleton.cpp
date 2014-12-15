@@ -189,7 +189,7 @@ void CalSkeleton::getBoneBoundingBox(float *min, float *max)
 {
   if(!m_isBoundingBoxesComputed)
   {
-	  calculateBoundingBoxes();
+      calculateBoundingBoxes();
   }
 
 
@@ -237,7 +237,7 @@ void CalSkeleton::getBoneBoundingBox(float *min, float *max)
 void CalSkeleton::calculateBoundingBoxes()
 {
    if(m_isBoundingBoxesComputed) 
-	   return;
+       return;
 
    for(size_t boneId=0;boneId<m_vectorBone.size();++boneId)
    {

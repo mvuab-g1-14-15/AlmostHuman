@@ -105,7 +105,7 @@ protected:
   CalPlatform();
   virtual ~CalPlatform();
 
-// member functions	
+// member functions    
 public:
   static bool readBytes(std::istream& input, void *pBuffer, int length);
   static bool readFloat(std::istream& input, float& value);

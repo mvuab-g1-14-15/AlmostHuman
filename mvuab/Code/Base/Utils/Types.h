@@ -12,7 +12,7 @@ typedef unsigned char       uint8;  // integer positivo de 8 bits
 typedef unsigned short      uint16; // integer positivo de 16 bits
 typedef unsigned int        uint32; // integer positivo de 32 bits
 
-typedef float               float32;	// float32 de 32 bits
-typedef double              float64;	// float32 de 64 bits
+typedef float               float32;    // float32 de 32 bits
+typedef double              float64;    // float32 de 64 bits
 
 #endif

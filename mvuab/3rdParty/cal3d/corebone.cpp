@@ -85,8 +85,8 @@ void CalCoreBone::calculateState()
     m_translationAbsolute *= pParent->getRotationAbsolute();
     m_translationAbsolute += pParent->getTranslationAbsolute();
 
-	m_rotationAbsolute = m_rotation;
-	m_rotationAbsolute *= pParent->getRotationAbsolute();
+    m_rotationAbsolute = m_rotation;
+    m_rotationAbsolute *= pParent->getRotationAbsolute();
   }
 
   // calculate all child bones
@@ -388,46 +388,46 @@ void CalCoreBone::calculateBoundingBox(CalCoreModel * pCoreModel)
    for(meshId=0; meshId < pCoreModel->getCoreMeshCount(); ++meshId)
    {
        CalCoreMesh * pCoreMesh = pCoreModel->getCoreMesh(meshId);
-	   
+       
        int submeshId;
        for(submeshId=0;submeshId<pCoreMesh->getCoreSubmeshCount();submeshId++)
        {
-		   CalCoreSubmesh *pCoreSubmesh = pCoreMesh->getCoreSubmesh(submeshId);
-		   
-		   if(pCoreSubmesh->getSpringCount()==0)
-		   {
-			   
-			   std::vector<CalCoreSubmesh::Vertex>& vectorVertex =  pCoreSubmesh->getVectorVertex();
-			   for(size_t vertexId=0;vertexId <vectorVertex.size(); ++vertexId)
-			   {
-				   for(size_t influenceId=0;influenceId<vectorVertex[vertexId].vectorInfluence.size();++influenceId)
-				   {
-					   if(vectorVertex[vertexId].vectorInfluence[influenceId].boneId == boneId && vectorVertex[vertexId].vectorInfluence[influenceId].weight > 0.5f)
-					   {						   
-						   for(planeId = 0; planeId < 6; ++planeId)
-						   {
-							   if(m_boundingBox.plane[planeId].eval(vectorVertex[vertexId].position) < 0.0f)
-							   {
-								   m_boundingBox.plane[planeId].setPosition(vectorVertex[vertexId].position);
-								   m_boundingPosition[planeId]=vectorVertex[vertexId].position;
-								   bBoundsComputed=true;
-							   }
-						   }
-					   }
-				   }
-			   }	
-		   }
-	   }
+           CalCoreSubmesh *pCoreSubmesh = pCoreMesh->getCoreSubmesh(submeshId);
+           
+           if(pCoreSubmesh->getSpringCount()==0)
+           {
+               
+               std::vector<CalCoreSubmesh::Vertex>& vectorVertex =  pCoreSubmesh->getVectorVertex();
+               for(size_t vertexId=0;vertexId <vectorVertex.size(); ++vertexId)
+               {
+                   for(size_t influenceId=0;influenceId<vectorVertex[vertexId].vectorInfluence.size();++influenceId)
+                   {
+                       if(vectorVertex[vertexId].vectorInfluence[influenceId].boneId == boneId && vectorVertex[vertexId].vectorInfluence[influenceId].weight > 0.5f)
+                       {                           
+                           for(planeId = 0; planeId < 6; ++planeId)
+                           {
+                               if(m_boundingBox.plane[planeId].eval(vectorVertex[vertexId].position) < 0.0f)
+                               {
+                                   m_boundingBox.plane[planeId].setPosition(vectorVertex[vertexId].position);
+                                   m_boundingPosition[planeId]=vectorVertex[vertexId].position;
+                                   bBoundsComputed=true;
+                               }
+                           }
+                       }
+                   }
+               }    
+           }
+       }
    }
 
    // To handle bones with no vertices assigned 
    if(!bBoundsComputed) 
    { 
-	   for(planeId = 0; planeId < 6; ++planeId) 
-	   { 
-		   m_boundingBox.plane[planeId].setPosition(m_translation); 
-		   m_boundingPosition[planeId] = m_translation; 
-	   } 
+       for(planeId = 0; planeId < 6; ++planeId) 
+       { 
+           m_boundingBox.plane[planeId].setPosition(m_translation); 
+           m_boundingPosition[planeId] = m_translation; 
+       } 
    } 
    
    m_boundingBoxPrecomputed = true;
@@ -454,7 +454,7 @@ void CalCoreBone::getBoundingData(int planeId,CalVector & position)
 
 bool CalCoreBone::isBoundingBoxPrecomputed()
 {
-	return m_boundingBoxPrecomputed;
+    return m_boundingBoxPrecomputed;
 }
 
 
@@ -472,16 +472,16 @@ bool CalCoreBone::isBoundingBoxPrecomputed()
 
 void CalCoreBone::scale(float factor)
 {
-	m_translation*=factor;
-	m_translationAbsolute*=factor;
-	m_translationBoneSpace*=factor;
-	
-	// calculate all child bones
-	std::list<int>::iterator iteratorChildId;
-	for(iteratorChildId = m_listChildId.begin(); iteratorChildId != m_listChildId.end(); ++iteratorChildId)
-	{
-		m_pCoreSkeleton->getCoreBone(*iteratorChildId)->scale(factor);
-	}
+    m_translation*=factor;
+    m_translationAbsolute*=factor;
+    m_translationBoneSpace*=factor;
+    
+    // calculate all child bones
+    std::list<int>::iterator iteratorChildId;
+    for(iteratorChildId = m_listChildId.begin(); iteratorChildId != m_listChildId.end(); ++iteratorChildId)
+    {
+        m_pCoreSkeleton->getCoreBone(*iteratorChildId)->scale(factor);
+    }
 }
 
 

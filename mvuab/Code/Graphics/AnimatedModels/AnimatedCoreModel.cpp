@@ -2,6 +2,7 @@
 #include "cal3d\cal3d.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
+
 #include "Texture\Texture.h"
 #include "Texture\TextureManager.h"
 
@@ -44,14 +45,27 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::strin
     return true;
 }
 
+bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
+{
+    // Get the texture from the texture manager
+    CTexture *t = CTextureManager::GetSingletonPtr()->GetTexture(Filename);
+    if(t)
+    {
+        m_TextureVector.push_back(t);
+        return true;
+    }
+
+    return false;
+}
+
 const std::string & CAnimatedCoreModel::GetTextureName( size_t id )
 {
-    return m_TextureFilenameVector[id];
+    return m_TextureVector[id]->GetFileName();
 }
 
 size_t CAnimatedCoreModel::GetNumTextures( ) const 
 {
-    return m_TextureFilenameVector.size();
+    return m_TextureVector.size();
 }
 
 bool CAnimatedCoreModel::Load(const std::string &Path)
@@ -63,74 +77,61 @@ bool CAnimatedCoreModel::Load(const std::string &Path)
 
 bool CAnimatedCoreModel::Load()
 {
-	CXMLTreeNode newFile;
-	if (!newFile.LoadFile(m_FileName.c_str()))
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-		return false;
-	}
+    CXMLTreeNode newFile;
+    if (!newFile.LoadFile(m_FileName.c_str()))
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+        return false;
+    }
 
-	CXMLTreeNode node = newFile["animated_model"];
-	if(!node.Exists())
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
-		return false;
-	}
+    CXMLTreeNode node = newFile["animated_model"];
+    if(!node.Exists())
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
+        return false;
+    }
 
     // Parse the animation stuff
-	for(int i = 0; i < node.GetNumChildren(); ++i)
-	{
-		const std::string &TagName = node(i).GetName();
-
-		if( TagName == "texture" )
-		{
-			const std::string &textureFilename = node.GetPszProperty("file", "no_file");
-            m_TextureFilenameVector.push_back( textureFilename );
-		}
-		else if( TagName == "skeleton" )
-		{
-			const std::string &skeletonFilename = node.GetPszProperty("file", "no_file");
-			if(!LoadSkeleton(skeletonFilename))
-      {
-          CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
-      }
-		}
-		else if( TagName == "mesh" )
-		{
-			const std::string &meshFilename = node.GetPszProperty("file", "no_file");
-			if(!LoadMesh(meshFilename))
-      {
-          CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
-      }
-		}
-		else if( TagName == "animation" )
-		{
-			const std::string &animationFilename = node.GetPszProperty("file", "no_file");
-			const std::string &name = node.GetPszProperty("name", "no_name");
-      if(!LoadAnimation(name, animationFilename))
-      {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
-      }
-		}
-	}
-
-    // Load all the textures
-    LoadTextures();
-
-    // make one material thread for each material
-    // NOTE: this is not the right way to do it, but this viewer can't do the right
-    // mapping without further information on the model etc., so this is the only
-    // thing we can do here.
-    for( uint32 materialId = 0; materialId < m_CalCoreModel->getCoreMaterialCount(); ++materialId)
+    for(int i = 0; i < node.GetNumChildren(); ++i)
     {
-        // create the a material thread
-        m_CalCoreModel->createCoreMaterialThread(materialId);
+        const std::string &TagName = node(i).GetName();
 
-        // initialize the material thread
-        m_CalCoreModel->setCoreMaterialId(materialId, 0, materialId);
+        if( TagName == "texture" )
+        {
+            const std::string &textureFilename = node.GetPszProperty("file", "no_file");
+            if(!LoadTexture(textureFilename))
+            {
+                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadTexture No se puede abrir \"%s\"!", m_FileName.c_str());
+            }
+        }
+        else if( TagName == "skeleton" )
+        {
+            const std::string &skeletonFilename = node.GetPszProperty("file", "no_file");
+            if(!LoadSkeleton(skeletonFilename))
+            {
+                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
+            }
+        }
+        else if( TagName == "mesh" )
+        {
+            const std::string &meshFilename = node.GetPszProperty("file", "no_file");
+            if(!LoadMesh(meshFilename))
+            {
+                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
+            }
+        }
+        else if( TagName == "animation" )
+        {
+            const std::string &animationFilename = node.GetPszProperty("file", "no_file");
+            const std::string &name = node.GetPszProperty("name", "no_name");
+            if(!LoadAnimation(name, animationFilename))
+            {
+                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
+            }
+        }
     }
-	
-	return true;
+
+    return true;
 }
 
 int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
@@ -140,7 +141,7 @@ int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
 
 CalCoreModel *CAnimatedCoreModel::GetCoreModel( )
 {
-	return m_CalCoreModel;
+    return m_CalCoreModel;
 }
 
 bool CAnimatedCoreModel::Reload()
@@ -151,16 +152,7 @@ bool CAnimatedCoreModel::Reload()
 
 void CAnimatedCoreModel::Destroy()
 {
-    m_TextureFilenameVector.clear();
+    m_TextureVector.clear();
     m_AnimationsMap.clear();
     CHECKED_DELETE(m_CalCoreModel);
-}
-
-void CAnimatedCoreModel::LoadTextures()
-{
-    size_t l_TexCount = m_TextureFilenameVector.size();
-    for(size_t i = 0; i < l_TexCount; ++i)
-    {
-        std::string l_Path = m_TextureFilenameVector[i];
-    }
 }

@@ -7,33 +7,33 @@
 CInstanceMesh::CInstanceMesh(const std::string &Name, const std::string &CoreName): 
     m_pStaticMesh(CStaticMeshManager::GetSingletonPtr()->GetResource(CoreName))
 {
-	if(!m_pStaticMesh)
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh");
+    if(!m_pStaticMesh)
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh");
 
-	SetName(Name);
+    SetName(Name);
 }
-	
+    
 CInstanceMesh::~CInstanceMesh()
 {
 }
 
 void CInstanceMesh::Render(CGraphicsManager *GM)
 {
-	Mat44f t, rot, pos;
+    Mat44f t, rot, pos;
 
-	t.SetIdentity();
-	rot.SetIdentity();
-	pos.SetIdentity();
+    t.SetIdentity();
+    rot.SetIdentity();
+    pos.SetIdentity();
 
-	rot.RotByAnglesYXZ(m_fYaw, m_fPitch, m_fRoll);
-	pos.Translate(m_Position);
+    rot.RotByAnglesYXZ(m_fYaw, m_fPitch, m_fRoll);
+    pos.Translate(m_Position);
 
-	t = pos * rot;
+    t = pos * rot;
 
-	GM->SetTransform(t);
-	if(0 != m_pStaticMesh)
-		m_pStaticMesh->Render(GM);
+    GM->SetTransform(t);
+    if(0 != m_pStaticMesh)
+        m_pStaticMesh->Render(GM);
 
-	t.SetIdentity();
-	GM->SetTransform(t);
+    t.SetIdentity();
+    GM->SetTransform(t);
 }

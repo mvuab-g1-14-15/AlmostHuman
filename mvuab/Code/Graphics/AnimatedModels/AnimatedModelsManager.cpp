@@ -11,7 +11,7 @@ CAnimatedModelsManager::CAnimatedModelsManager()
 
 CAnimatedModelsManager::~CAnimatedModelsManager()
 {
-	Destroy();
+    Destroy();
 }
 
 CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, const std::string &Path)
@@ -34,28 +34,28 @@ CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &
 
 void CAnimatedModelsManager::Load(const std::string &Filename)
 {
-	m_FileName = Filename;
-	
-	CXMLTreeNode newFile;
-	if (!newFile.LoadFile(m_FileName.c_str()))
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-		return;
-	}
+    m_FileName = Filename;
+    
+    CXMLTreeNode newFile;
+    if (!newFile.LoadFile(m_FileName.c_str()))
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+        return;
+    }
 
-	CXMLTreeNode node = newFile["animated_models"];
-	if(!node.Exists())
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load Tag \"%s\" no existe",  "animated_models");
-		return;
-	}
+    CXMLTreeNode node = newFile["animated_models"];
+    if(!node.Exists())
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load Tag \"%s\" no existe",  "animated_models");
+        return;
+    }
 
-	for(uint32 i = 0; i < node.GetNumChildren(); ++i)
-	{
-		const std::string &name = node(i).GetPszProperty("name", "no_name");
-		const std::string &path = node(i).GetPszProperty("path", "no_file");
-		AddNewCore(name,path);
-	}
+    for(uint32 i = 0; i < node.GetNumChildren(); ++i)
+    {
+        const std::string &name = node(i).GetPszProperty("name", "no_name");
+        const std::string &path = node(i).GetPszProperty("path", "no_file");
+        AddNewCore(name,path);
+    }
 }
 
 CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string &Name, const std::string &Path )

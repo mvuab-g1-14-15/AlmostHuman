@@ -398,7 +398,7 @@ void CalBone::setSkeleton(CalSkeleton *pSkeleton)
 void CalBone::calculateBoundingBox()
 {
    if(!getCoreBone()->isBoundingBoxPrecomputed())
-	   return;
+       return;
 
    CalVector dir = CalVector(1.0f,0.0f,0.0f);
    dir*=getTransformMatrix();

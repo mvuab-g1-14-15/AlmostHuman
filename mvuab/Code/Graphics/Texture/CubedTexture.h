@@ -6,11 +6,11 @@
 class CCubedTexture
 {
 protected:
-	virtual bool LoadFile();
+    virtual bool LoadFile();
 
 public:
-	CCubedTexture();
-	virtual ~CCubedTexture();
+    CCubedTexture();
+    virtual ~CCubedTexture();
 };
 
 #endif //INC_TEXTURE_H_

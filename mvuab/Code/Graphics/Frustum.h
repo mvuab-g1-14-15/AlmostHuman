@@ -15,11 +15,11 @@
 class CFrustum 
 {
 public:
-	
-  void	Update							( const D3DXMATRIX &viewproj );
-  bool	SphereVisible				( const D3DXVECTOR3 &p, float32 radius ) const;
-  bool	BoxVisible					( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min ) const;
-  bool  BoxVisibleByVertexs	( const Vect3f* points) const;
+    
+  void    Update                            ( const D3DXMATRIX &viewproj );
+  bool    SphereVisible                ( const D3DXVECTOR3 &p, float32 radius ) const;
+  bool    BoxVisible                    ( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min ) const;
+  bool  BoxVisibleByVertexs    ( const Vect3f* points) const;
    
 private:
 

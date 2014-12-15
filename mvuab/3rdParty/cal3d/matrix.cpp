@@ -188,7 +188,7 @@ float CalMatrix::det()
 {
    return dxdx * (dydy*dzdz-dydz*dzdy)
             -dxdy* ( dydx*dzdz-dzdx*dydz)
-	    +dxdz* (dydx*dzdy-dzdx*dydy);
+        +dxdz* (dydx*dzdy-dzdx*dydy);
 }
 */
 //****************************************************************************//

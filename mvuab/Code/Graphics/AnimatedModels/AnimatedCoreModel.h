@@ -18,7 +18,6 @@ class CAnimatedCoreModel : public CName
 protected:
     typedef std::vector<CTexture *> TTextureVector;
     CalCoreModel*                   m_CalCoreModel;
-    std::vector<std::string>        m_TextureFilenameVector;
     TTextureVector                  m_TextureVector;
     std::map<std::string, uint16>   m_AnimationsMap;
     std::string                     m_Path;
@@ -30,6 +29,7 @@ private:
     bool Load();
     bool LoadMesh(const std::string &Filename);
     bool LoadSkeleton(const std::string &Filename);
+    bool LoadTexture(const std::string &Filename);
     bool LoadAnimation(const std::string &Name, const std::string &Filename);
     void LoadTextures();
 

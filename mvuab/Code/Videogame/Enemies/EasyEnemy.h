@@ -8,11 +8,11 @@
 class CEasyEnemy : public CEnemy
 {
 public:
-	CEasyEnemy(CXMLTreeNode &Node);
-	~CEasyEnemy();
+    CEasyEnemy(CXMLTreeNode &Node);
+    ~CEasyEnemy();
 
-	void Update(float32 deltaTime);
-	void Render();
+    void Update(float32 deltaTime);
+    void Render();
 };
 
 

@@ -621,29 +621,29 @@ inline T Vector3<T>::SqDistance(const Vector3<T>& rhs) const
 template<typename T>
 inline Vector3<T>& Vector3<T>::Normalize (const T tk)
 {
-	#ifdef CHECK_MATH_SINGULARITY
-		//------------------------------------------<<<
-		// Con chequeo de división por cero
-		T length = Length();
+    #ifdef CHECK_MATH_SINGULARITY
+        //------------------------------------------<<<
+        // Con chequeo de división por cero
+        T length = Length();
 
-		ASSERTMSG(length != Zero<T>(), "División por cero en normalización de vector");
-		if(length != Zero<T>())
-		{
-			T aux = tk / length;
-			x *= aux;
-			y *= aux;
-			z *= aux;
-		}
-		//------------------------------------------>>>
-	#else
-		//------------------------------------------<<<
-		// Sin chequeo
-		T aux = tk / Length();
-		x *= aux;
-		y *= aux;
-		z *= aux;
-		//------------------------------------------>>>
-	#endif    
+        ASSERTMSG(length != Zero<T>(), "División por cero en normalización de vector");
+        if(length != Zero<T>())
+        {
+            T aux = tk / length;
+            x *= aux;
+            y *= aux;
+            z *= aux;
+        }
+        //------------------------------------------>>>
+    #else
+        //------------------------------------------<<<
+        // Sin chequeo
+        T aux = tk / Length();
+        x *= aux;
+        y *= aux;
+        z *= aux;
+        //------------------------------------------>>>
+    #endif    
 
   return (*this);
 }
@@ -654,32 +654,32 @@ inline Vector3<T>& Vector3<T>::Normalize (const T tk)
 template<typename T>
 inline Vector3<T> Vector3<T>::GetNormalized (const T tk) const
 {
-	#ifdef CHECK_MATH_SINGULARITY
-		//-----------------------------------------------------<<<
-		// Con chequeo de división por cero
-		Vector3<T> retVect(*this);
+    #ifdef CHECK_MATH_SINGULARITY
+        //-----------------------------------------------------<<<
+        // Con chequeo de división por cero
+        Vector3<T> retVect(*this);
 
-		T length = Length();
-		ASSERTMSG(length != Zero<T>(), "División por cero en normalización de vector");
-		if(length != Zero<T>())
-		{
-			T aux = tk / length;
-			retVect.x *= aux;
-			retVect.y *= aux;
-			retVect.z *= aux;
-		}
+        T length = Length();
+        ASSERTMSG(length != Zero<T>(), "División por cero en normalización de vector");
+        if(length != Zero<T>())
+        {
+            T aux = tk / length;
+            retVect.x *= aux;
+            retVect.y *= aux;
+            retVect.z *= aux;
+        }
 
-		return retVect;
-		//----------------------------------------------------->>>
-	#else
-		//-----------------------------------------------------<<<
-		// Sin chequeo
-		T aux = tk / Length();
-		return (Vector3<T>(x * aux,
-											 y * aux,
-											 z * aux));
-		//----------------------------------------------------->>>
-	#endif
+        return retVect;
+        //----------------------------------------------------->>>
+    #else
+        //-----------------------------------------------------<<<
+        // Sin chequeo
+        T aux = tk / Length();
+        return (Vector3<T>(x * aux,
+                                             y * aux,
+                                             z * aux));
+        //----------------------------------------------------->>>
+    #endif
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -859,7 +859,7 @@ inline Vector3<T> VectorMaxComponents (const Vector3<T>& uno, const Vector3<T>& 
 template<typename T>
 inline Vector3<T> Vector3<T>::DotProduct(const Vector3<T>& other) const
 {
-	return x*other.x + y*other.y + z*other.z;
+    return x*other.x + y*other.y + z*other.z;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -868,5 +868,5 @@ inline Vector3<T> Vector3<T>::DotProduct(const Vector3<T>& other) const
 template<typename T>
 inline Vector3<T> Vector3<T>::CrossProduct(const Vector3<T>& other) const
 {
-	return Vector3<T>(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
+    return Vector3<T>(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
 }

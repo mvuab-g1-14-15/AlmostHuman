@@ -49,9 +49,9 @@ public:
   //------------------------------------------
 
 #ifdef ROW_MAJOR_MATRICES
-	T m00, m01, m02, m03;
-	T m10, m11, m12, m13;
-	T m20, m21, m22, m23;
+    T m00, m01, m02, m03;
+    T m10, m11, m12, m13;
+    T m20, m21, m22, m23;
 #else
   T m00, m10, m20;
   T m01, m11, m21;
@@ -95,9 +95,9 @@ public:
                                           const Vector3<T>& ejeZ,
                                           const Vector3<T>& pos);
 
-	inline Matrix34<T>& SetFromBasis       (const Vector3<T>& ejeX,
-																					const Vector3<T>& ejeY,
-																					const Vector3<T>& ejeZ);
+    inline Matrix34<T>& SetFromBasis       (const Vector3<T>& ejeX,
+                                                                                    const Vector3<T>& ejeY,
+                                                                                    const Vector3<T>& ejeZ);
 
   inline Matrix34<T>& SetFromAngleX    (const T angleX);
   inline Matrix34<T>& SetFromAngleY    (const T angleY);
@@ -132,9 +132,9 @@ public:
 
 
   // Acceso  
-  inline Vector3<T>				 GetVectorBasis           (int i) const;
-	inline T								 GetVectorBasisLength    (int i) const;
-  inline Vector3<T>				 GetPosBasis              () const;
+  inline Vector3<T>                 GetVectorBasis           (int i) const;
+    inline T                                 GetVectorBasisLength    (int i) const;
+  inline Vector3<T>                 GetPosBasis              () const;
   inline void              GetBasis                 (Vector3<T>& vBasisX,
                                                      Vector3<T>& vBasisY,
                                                      Vector3<T>& vBasisZ,

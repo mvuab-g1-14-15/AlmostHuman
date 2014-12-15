@@ -14,6 +14,6 @@ CCubedTexture::~CCubedTexture()
 
 bool CCubedTexture::LoadFile()
 {
-	CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CCubedTexture::LoadFile" );
-	return false;
+    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CCubedTexture::LoadFile" );
+    return false;
 }

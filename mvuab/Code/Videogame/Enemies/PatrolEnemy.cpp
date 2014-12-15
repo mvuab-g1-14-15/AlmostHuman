@@ -13,10 +13,10 @@ CPatrolEnemy::~CPatrolEnemy(void)
 
 void CPatrolEnemy::Update(float32 deltaTime)
 {
-	printf("Updating CPatrolEnemy");
+    printf("Updating CPatrolEnemy");
 }
 
 void CPatrolEnemy::Render()
 {
-	printf("Rendering CPatrolEnemy");
+    printf("Rendering CPatrolEnemy");
 }
