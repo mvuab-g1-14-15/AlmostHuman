@@ -11,5 +11,5 @@ public:
     virtual ~CRenderableObject();
 
     virtual void Update(float ElapsedTime) {}
-    virtual void Render(CGraphicsManager *GM) = 0;
+    virtual void Render() = 0;
 };

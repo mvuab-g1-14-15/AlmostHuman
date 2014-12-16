@@ -1,11 +1,13 @@
 #include "RenderableObject/RenderableObject.h"
 #include "cal3d/cal3d.h"
+#include "Utils/Name.h"
 
 class CAnimatedCoreModel;
 class CTexture;
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
+
 private:
     CalModel *m_CalModel;
     CAnimatedCoreModel *m_AnimatedCoreModel;
@@ -22,12 +24,12 @@ private:
     bool LoadVertexBuffer(CGraphicsManager *RM);
     void LoadTextures();
 public:
-    CAnimatedInstanceModel();
+    CAnimatedInstanceModel(const std::string &Name, const std::string &CoreName);
     ~CAnimatedInstanceModel();
-    void Render(CGraphicsManager *RM);
-    void RenderModelBySoftware(CGraphicsManager *RM);
+    void Render();
+    void RenderModelBySoftware();
     void Update(float32 deltaTime);
-    void Initialize(CAnimatedCoreModel *AnimatedCoreModel, CGraphicsManager *RM);
+    void Initialize();
     void Destroy();
     void ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget=1.0f, bool AutoLock=true);
     void BlendCycle(uint32 Id, float32 Weight, float32 DelayIn);
