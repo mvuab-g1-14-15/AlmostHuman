@@ -12,11 +12,11 @@ class CSoundManager : public CSingleton<CSoundManager>
 {
 private:
 public:
-	CSoundManager();
-	~CSoundManager();
+    CSoundManager();
+    ~CSoundManager();
 
-	void Update(float32 deltaTime);
-	void Render();
+    void Update(float32 deltaTime);
+    void Render();
 };
 
 #endif // SOUND_MANAGER_H

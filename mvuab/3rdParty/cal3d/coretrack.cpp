@@ -89,12 +89,12 @@ bool CalCoreTrack::create()
 
 void CalCoreTrack::destroy()
 {
-	// destroy all core keyframes
-	for (unsigned int i = 0; i < m_keyframes.size(); ++i)
-	{
-		m_keyframes[i]->destroy();
-		delete m_keyframes[i];
-	}
+    // destroy all core keyframes
+    for (unsigned int i = 0; i < m_keyframes.size(); ++i)
+    {
+        m_keyframes[i]->destroy();
+        delete m_keyframes[i];
+    }
   m_keyframes.clear();
 
   m_coreBoneId = -1;
@@ -175,26 +175,26 @@ std::vector<CalCoreKeyframe*>::iterator CalCoreTrack::getUpperBound(float time)
 
   int lowerBound = 0;
   int upperBound = m_keyframes.size()-1;
-	//static int aa = 0;
+    //static int aa = 0;
 
-	//upperBound += aa;
-	//upperBound %= m_keyframes.size();
-	//aa++;
-	//time = m_keyframes[upperBound]->getTime();
+    //upperBound += aa;
+    //upperBound %= m_keyframes.size();
+    //aa++;
+    //time = m_keyframes[upperBound]->getTime();
 
   while(lowerBound<upperBound-1)
   {
-	  int middle = (lowerBound+upperBound)/2;
+      int middle = (lowerBound+upperBound)/2;
 
-	  if(time >= m_keyframes[middle]->getTime())
-	  {
-		  lowerBound=middle;
-	  }
-	  else
-	  {
-		  upperBound=middle;
-	  }
-		//break;
+      if(time >= m_keyframes[middle]->getTime())
+      {
+          lowerBound=middle;
+      }
+      else
+      {
+          upperBound=middle;
+      }
+        //break;
   }
 
   return m_keyframes.begin() + upperBound;

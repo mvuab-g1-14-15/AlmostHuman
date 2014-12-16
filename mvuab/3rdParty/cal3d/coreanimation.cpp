@@ -84,7 +84,7 @@ CalCoreTrack *CalCoreAnimation::getCoreTrack(int coreBoneId)
 
 unsigned int CalCoreAnimation::getTrackCount() const
 {
-	return m_listCoreTrack.size();
+    return m_listCoreTrack.size();
 }
 
  /*****************************************************************************/
@@ -128,7 +128,7 @@ void CalCoreAnimation::scale(float factor)
   std::list<CalCoreTrack *>::iterator iteratorCoreTrack;
   for(iteratorCoreTrack = m_listCoreTrack.begin(); iteratorCoreTrack != m_listCoreTrack.end(); ++iteratorCoreTrack)
   {
-	  (*iteratorCoreTrack)->scale(factor);
+      (*iteratorCoreTrack)->scale(factor);
   }
 }
 
@@ -250,12 +250,12 @@ std::list<CalCoreTrack *>& CalCoreAnimation::getListCoreTrack()
 
 unsigned int CalCoreAnimation::getTotalNumberOfKeyframes() const
 {
-	unsigned int nbKeys = 0;
-	for (std::list<CalCoreTrack*>::const_iterator it = m_listCoreTrack.begin(); it != m_listCoreTrack.end(); ++it)
-	{
-		CalCoreTrack *track = *it;
-		nbKeys += track->getCoreKeyframeCount();
-	}
-	return nbKeys;
+    unsigned int nbKeys = 0;
+    for (std::list<CalCoreTrack*>::const_iterator it = m_listCoreTrack.begin(); it != m_listCoreTrack.end(); ++it)
+    {
+        CalCoreTrack *track = *it;
+        nbKeys += track->getCoreKeyframeCount();
+    }
+    return nbKeys;
 }
 

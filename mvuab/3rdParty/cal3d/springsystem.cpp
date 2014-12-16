@@ -80,7 +80,7 @@ void CalSpringSystem::calculateForces(CalSubmesh *pSubmesh, float deltaTime)
     // only take vertices with a weight > 0 into account
     if(corePhysicalProperty.weight > 0.0f)
     {
-		physicalProperty.force = m_vForce + m_vGravity * corePhysicalProperty.weight;		
+        physicalProperty.force = m_vForce + m_vGravity * corePhysicalProperty.weight;        
     }
   }
 }
@@ -130,59 +130,59 @@ void CalSpringSystem::calculateVertices(CalSubmesh *pSubmesh, float deltaTime)
       // do the Verlet step
       physicalProperty.position += (position - physicalProperty.positionOld) * 0.99f + physicalProperty.force / corePhysicalProperty.weight * deltaTime * deltaTime;
 
-		CalSkeleton *pSkeleton = m_pModel->getSkeleton();
-		
-		if(m_collision)
-		{
-			std::vector<CalBone *> &m_vectorbone =  pSkeleton->getVectorBone();
-			
-			for(size_t boneId=0; boneId < m_vectorbone.size(); boneId++)
-			{
-				CalBoundingBox p = m_vectorbone[boneId]->getBoundingBox();
-				bool in=true;
-				float min=1e10;
-				int index=-1;
-				
-				int faceId;
-				for(faceId=0; faceId < 6 ; faceId++)
-				{				
-					if(p.plane[faceId].eval(physicalProperty.position)<=0)
-					{
-						in=false;
-					}
-					else
-					{
-						float dist=p.plane[faceId].dist(physicalProperty.position);
-						if(dist<min)
-						{
-							index=faceId;
-							min=dist;
-						}
-					}
-				}
-				
-				if(in && index!=-1)
-				{
-					CalVector normal = CalVector(p.plane[index].a,p.plane[index].b,normal.z = p.plane[index].c);
-					normal.normalize();
-					physicalProperty.position = physicalProperty.position - min*normal;
-				}
-				
-				in=true;
-				
-				for(faceId=0; faceId < 6 ; faceId++)
-				{				
-					if(p.plane[faceId].eval(physicalProperty.position) < 0 )
-					{
-						in=false;				
-					}
-				}
-				if(in)
-				{
-					physicalProperty.position = vectorVertex[vertexId];
-				}
-			}
-		}
+        CalSkeleton *pSkeleton = m_pModel->getSkeleton();
+        
+        if(m_collision)
+        {
+            std::vector<CalBone *> &m_vectorbone =  pSkeleton->getVectorBone();
+            
+            for(size_t boneId=0; boneId < m_vectorbone.size(); boneId++)
+            {
+                CalBoundingBox p = m_vectorbone[boneId]->getBoundingBox();
+                bool in=true;
+                float min=1e10;
+                int index=-1;
+                
+                int faceId;
+                for(faceId=0; faceId < 6 ; faceId++)
+                {                
+                    if(p.plane[faceId].eval(physicalProperty.position)<=0)
+                    {
+                        in=false;
+                    }
+                    else
+                    {
+                        float dist=p.plane[faceId].dist(physicalProperty.position);
+                        if(dist<min)
+                        {
+                            index=faceId;
+                            min=dist;
+                        }
+                    }
+                }
+                
+                if(in && index!=-1)
+                {
+                    CalVector normal = CalVector(p.plane[index].a,p.plane[index].b,normal.z = p.plane[index].c);
+                    normal.normalize();
+                    physicalProperty.position = physicalProperty.position - min*normal;
+                }
+                
+                in=true;
+                
+                for(faceId=0; faceId < 6 ; faceId++)
+                {                
+                    if(p.plane[faceId].eval(physicalProperty.position) < 0 )
+                    {
+                        in=false;                
+                    }
+                }
+                if(in)
+                {
+                    physicalProperty.position = vectorVertex[vertexId];
+                }
+            }
+        }
 
     }
     else
@@ -225,19 +225,19 @@ void CalSpringSystem::calculateVertices(CalSubmesh *pSubmesh, float deltaTime)
 
       if(length > 0.0f)
       {
-      	/*if (spring.springCoefficient == 0)
-      	{ 
-      	 	vectorVertex[spring.vertexId[1]] = vectorVertex[spring.vertexId[0]];  
-      	 	vectorPhysicalProperty[spring.vertexId[1]].position = vectorVertex[spring.vertexId[0]]; 
-      	} 
-      	else
-	{*/
-	   float factor[2];
-	   factor[0] = (length - spring.idleLength) / length;
-	   factor[1] = factor[0];
-	   
-	   if(vectorCorePhysicalProperty[spring.vertexId[0]].weight > 0.0f)
-	   {
+          /*if (spring.springCoefficient == 0)
+          { 
+               vectorVertex[spring.vertexId[1]] = vectorVertex[spring.vertexId[0]];  
+               vectorPhysicalProperty[spring.vertexId[1]].position = vectorVertex[spring.vertexId[0]]; 
+          } 
+          else
+    {*/
+       float factor[2];
+       factor[0] = (length - spring.idleLength) / length;
+       factor[1] = factor[0];
+       
+       if(vectorCorePhysicalProperty[spring.vertexId[0]].weight > 0.0f)
+       {
               factor[0] /= 2.0f;
               factor[1] /= 2.0f;
            }
@@ -348,7 +348,7 @@ void CalSpringSystem::update(float deltaTime)
 
 CalVector & CalSpringSystem::getGravityVector()
 {
-	return m_vGravity;
+    return m_vGravity;
 }
 
  /*****************************************************************************/
@@ -362,7 +362,7 @@ CalVector & CalSpringSystem::getGravityVector()
 
 CalVector & CalSpringSystem::getForceVector()
 {
-	return m_vForce;
+    return m_vForce;
 }
 
  /*****************************************************************************/
@@ -375,7 +375,7 @@ CalVector & CalSpringSystem::getForceVector()
 
 void CalSpringSystem::setGravityVector(const CalVector & vGravity)
 {
-	m_vGravity = vGravity;
+    m_vGravity = vGravity;
 }
 
  /*****************************************************************************/
@@ -388,7 +388,7 @@ void CalSpringSystem::setGravityVector(const CalVector & vGravity)
 
 void CalSpringSystem::setForceVector(const CalVector & vForce)
 {
-	m_vForce = vForce;
+    m_vForce = vForce;
 }
 
  /*****************************************************************************/
@@ -399,7 +399,7 @@ void CalSpringSystem::setForceVector(const CalVector & vForce)
 
 void CalSpringSystem::setCollisionDetection(bool collision)
 {
-	m_collision=collision;
+    m_collision=collision;
 }
 
 

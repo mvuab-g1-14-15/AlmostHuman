@@ -56,7 +56,7 @@ public:
   *****************************************************************************/
   inline float getTime() const
   {
-	  return m_time;
+      return m_time;
   }
 
   const CalVector& getTranslation();

@@ -8,11 +8,11 @@
 class CName
 {
 public:
-	CName(){}
-	~CName() {}
+    CName(){}
+    ~CName() {}
 protected:
-	std::string m_Name;
-	GET_SET(std::string,Name);
+    std::string m_Name;
+    GET_SET(std::string,Name);
 };
 
 #endif // INC_NAME_H_

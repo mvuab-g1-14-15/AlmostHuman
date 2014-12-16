@@ -95,27 +95,27 @@ CalMixer::~CalMixer()
 ///
 static void addExtraKeyframeForLoopedAnim(CalCoreAnimation* pCoreAnimation)
 {
-	std::list<CalCoreTrack*>& listCoreTrack = pCoreAnimation->getListCoreTrack();
+    std::list<CalCoreTrack*>& listCoreTrack = pCoreAnimation->getListCoreTrack();
 
    if(listCoreTrack.size() == 0)
-		 return;
+         return;
 
-	CalCoreTrack *coreTrack = listCoreTrack.front();
+    CalCoreTrack *coreTrack = listCoreTrack.front();
   if(coreTrack == 0)
-		 return;
+         return;
 
-	CalCoreKeyframe *lastKeyframe = coreTrack->getCoreKeyframe(coreTrack->getCoreKeyframeCount()-1);
-	if(lastKeyframe == 0)
-		 return;
+    CalCoreKeyframe *lastKeyframe = coreTrack->getCoreKeyframe(coreTrack->getCoreKeyframeCount()-1);
+    if(lastKeyframe == 0)
+         return;
 
-	if(lastKeyframe->getTime() < pCoreAnimation->getDuration())
-	{
-		std::list<CalCoreTrack *>::iterator itr;
+    if(lastKeyframe->getTime() < pCoreAnimation->getDuration())
+    {
+        std::list<CalCoreTrack *>::iterator itr;
     for(itr=listCoreTrack.begin();itr!=listCoreTrack.end();++itr)
-		{
-			coreTrack = *itr;
+        {
+            coreTrack = *itr;
 
-			CalCoreKeyframe *firstKeyframe = coreTrack->getCoreKeyframe(0);
+            CalCoreKeyframe *firstKeyframe = coreTrack->getCoreKeyframe(0);
       CalCoreKeyframe *newKeyframe = new CalCoreKeyframe();
 
       newKeyframe->setTranslation(firstKeyframe->getTranslation());
@@ -123,8 +123,8 @@ static void addExtraKeyframeForLoopedAnim(CalCoreAnimation* pCoreAnimation)
       newKeyframe->setTime(pCoreAnimation->getDuration());
 
       coreTrack->addCoreKeyframe(newKeyframe);
-		}
-	}
+        }
+    }
 }
 
  /*****************************************************************************/
@@ -370,7 +370,7 @@ void CalMixer::updateAnimation(float deltaTime)
     {
       m_animationTime = (float) fmod(m_animationTime, m_animationDuration);
     }
-	if (m_animationTime < 0)
+    if (m_animationTime < 0)
       m_animationTime += m_animationDuration;
 
   }
@@ -550,7 +550,7 @@ void CalMixer::updateSkeleton()
 
 float CalMixer::getAnimationTime()
 {
-	return m_animationTime;
+    return m_animationTime;
 }
 
 /*****************************************************************************/
@@ -563,7 +563,7 @@ float CalMixer::getAnimationTime()
 
 float CalMixer::getAnimationDuration()
 {
-	return m_animationDuration;
+    return m_animationDuration;
 }
 
 /*****************************************************************************/
@@ -575,7 +575,7 @@ float CalMixer::getAnimationDuration()
 
 void CalMixer::setAnimationTime(float animationTime)
 {
-	m_animationTime=animationTime;
+    m_animationTime=animationTime;
 }
 
 /*****************************************************************************/

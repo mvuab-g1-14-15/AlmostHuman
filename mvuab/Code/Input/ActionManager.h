@@ -11,6 +11,7 @@
 
 typedef struct S_INPUT_ACTION
 {
+<<<<<<< HEAD
     S_INPUT_ACTION::S_INPUT_ACTION(): m_DeviceType(IDV_NOTHING), m_EventType(EVENT_NOTHING),
                             m_AxisType(AXIS_NOTHING), m_Code(MOUSE_BUTTON_NOTHING), m_fDelta(1.f),
                             m_sDeviceType(""), m_sEventType(""), m_sAxisType(""), m_sCode("") {}
@@ -26,6 +27,11 @@ typedef struct S_INPUT_ACTION
     std::string             m_sAxisType;
     std::string             m_sEventType;
     std::string             m_sCode;
+=======
+    INPUT_DEVICE_TYPE       m_DeviceType;
+    INPUT_EVENT_TYPE        m_EventType;
+    unsigned int            m_Code;
+>>>>>>> origin/master
 } S_INPUT_ACTION;
 
 typedef std::vector<S_INPUT_ACTION> VecInputs;
@@ -33,9 +39,10 @@ typedef std::vector<S_INPUT_ACTION> VecInputs;
 class CActionManager : public CSingleton<CActionManager>
 {
 public:
-	CActionManager	();
-	~CActionManager	();
+    CActionManager    ();
+    ~CActionManager    ();
 
+<<<<<<< HEAD
 	void Init( const std::string &xmlFile, CInputManager *a_pInputManager );
 	bool LoadXML();
 	bool Reload();
@@ -56,6 +63,23 @@ private:
 	INPUT_AXIS_TYPE		strAxisToCode	(const std::string &strAxis);
 	INPUT_EVENT_TYPE	strEventToCode	(const std::string &strEvent);
 	unsigned int		strKeyToCode	(const std::string &strKey);
+=======
+    void Init( const std::string &xmlFile, CInputManager *a_pInputManager );
+    bool LoadXML();
+    bool Reload();
+  void Update(float32 deltaTime);
+
+    bool DoAction    (const std::string &action);
+    bool DoAction    (const std::string &action, float32 &amount);
+private:
+    std::map<std::string, std::vector<S_INPUT_ACTION>> m_mActions;
+    CInputManager *m_pInputManager;
+    std::string  m_ActionsPath;
+
+    INPUT_DEVICE_TYPE    strDeviceToCode    (const std::string &strAction);
+    INPUT_EVENT_TYPE    strEventToCode    (const std::string &strEvent);
+    unsigned int        strKeyToCode    (const std::string &strKey);
+>>>>>>> origin/master
 };
 
 #endif //ACTION_MANAGER_H

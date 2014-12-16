@@ -9,15 +9,15 @@ class CCamera;
 class CCameraDebugWindow : public CDebugWindow
 {
 public:
-	CCameraDebugWindow(Vect2i aWindowPosition);
-	~CCameraDebugWindow();
-	virtual void Update(float32 deltaTime);
+    CCameraDebugWindow(Vect2i aWindowPosition);
+    ~CCameraDebugWindow();
+    virtual void Update(float32 deltaTime);
 
 protected:
    virtual void RenderInfo();
 
 private:
-	CCamera*		m_pCurrentCamera;
+    CCamera*        m_pCurrentCamera;
 };
 
 #endif //INC_CAMERA_DEBUG_WINDOW_H_

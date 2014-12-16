@@ -14,71 +14,71 @@
 
 typedef enum INPUT_DEVICE_TYPE 
 {
-	IDV_KEYBOARD,
-	IDV_GAMEPAD1,
-	IDV_GAMEPAD2,
-	IDV_GAMEPAD3,
-	IDV_GAMEPAD4,
-	IDV_MOUSE,
-	IDV_NOTHING
+    IDV_KEYBOARD,
+    IDV_GAMEPAD1,
+    IDV_GAMEPAD2,
+    IDV_GAMEPAD3,
+    IDV_GAMEPAD4,
+    IDV_MOUSE,
+    IDV_NOTHING
 };
 
 typedef enum INPUT_AXIS_TYPE
 {
-	AXIS_MOUSE_X,
-	AXIS_MOUSE_Y,
-	AXIS_MOUSE_Z,
-	AXIS_LEFT_THUMB_X,
-	AXIS_LEFT_THUMB_Y,
-	AXIS_RIGHT_THUMB_X,
-	AXIS_RIGHT_THUMB_Y,
-	AXIS_DELTA_TRIGGER_RIGHT,
-	AXIS_DELTA_TRIGGER_LEFT,
-	AXIS_NOTHING
+    AXIS_MOUSE_X,
+    AXIS_MOUSE_Y,
+    AXIS_MOUSE_Z,
+    AXIS_LEFT_THUMB_X,
+    AXIS_LEFT_THUMB_Y,
+    AXIS_RIGHT_THUMB_X,
+    AXIS_RIGHT_THUMB_Y,
+    AXIS_DELTA_TRIGGER_RIGHT,
+    AXIS_DELTA_TRIGGER_LEFT,
+    AXIS_NOTHING
 };
 
 typedef enum INPUT_EVENT_TYPE
 {
-	EVENT_DOWN,
-	EVENT_UP_DOWN,
-	EVENT_DOWN_UP,
-	EVENT_NOTHING
+    EVENT_DOWN,
+    EVENT_UP_DOWN,
+    EVENT_DOWN_UP,
+    EVENT_NOTHING
 };
 
 typedef enum MOUSE_BUTTON 
 {
-	MOUSE_BUTTON_LEFT,
-	MOUSE_BUTTON_RIGHT,
-	MOUSE_BUTTON_MIDDLE,
-	MOUSE_BUTTON_NOTHING
+    MOUSE_BUTTON_LEFT,
+    MOUSE_BUTTON_RIGHT,
+    MOUSE_BUTTON_MIDDLE,
+    MOUSE_BUTTON_NOTHING
 };
 
 struct SInputInfo
 {
-	std::string			keyName;
-	float32				delta;
-	uint32				key;
-	INPUT_DEVICE_TYPE	deviceType;
-	INPUT_EVENT_TYPE	eventType;
-	INPUT_AXIS_TYPE		axisType;
+    std::string            keyName;
+    float32                delta;
+    uint32                key;
+    INPUT_DEVICE_TYPE    deviceType;
+    INPUT_EVENT_TYPE    eventType;
+    INPUT_AXIS_TYPE        axisType;
 };
 
 //------------------------------------------
 //----- Gamepad codes from XInput.h --------
-#define PAD_DPAD_UP  				0x0001
-#define PAD_DPAD_DOWN 				0x0002
-#define PAD_DPAD_LEFT       		0x0004
-#define PAD_DPAD_RIGHT       		0x0008
-#define PAD_DPAD_START            	0x0010
-#define PAD_DPAD_BACK             	0x0020
-#define PAD_BUTTON_LEFT_THUMB     	0x0040
-#define PAD_BUTTON_RIGHT_THUMB    	0x0080
-#define PAD_BUTTON_LEFT_SHOULDER  	0x0100
-#define PAD_BUTTON_RIGHT_SHOULDER 	0x0200
-#define PAD_BUTTON_A              	0x1000
-#define PAD_BUTTON_B              	0x2000
-#define PAD_BUTTON_X              	0x4000
-#define PAD_BUTTON_Y              	0x8000
+#define PAD_DPAD_UP                  0x0001
+#define PAD_DPAD_DOWN                 0x0002
+#define PAD_DPAD_LEFT               0x0004
+#define PAD_DPAD_RIGHT               0x0008
+#define PAD_DPAD_START                0x0010
+#define PAD_DPAD_BACK                 0x0020
+#define PAD_BUTTON_LEFT_THUMB         0x0040
+#define PAD_BUTTON_RIGHT_THUMB        0x0080
+#define PAD_BUTTON_LEFT_SHOULDER      0x0100
+#define PAD_BUTTON_RIGHT_SHOULDER     0x0200
+#define PAD_BUTTON_A                  0x1000
+#define PAD_BUTTON_B                  0x2000
+#define PAD_BUTTON_X                  0x4000
+#define PAD_BUTTON_Y                  0x8000
 //------------------------------------------
 
 

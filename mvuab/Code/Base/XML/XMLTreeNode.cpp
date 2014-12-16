@@ -232,10 +232,10 @@ int CXMLTreeNode::GetIntProperty (const char* _pszKey, int _iDefault, bool warni
   {
     iRet = atoi((const char*)value);
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_iDefault, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_iDefault, _pszKey);
+    }
 
   xmlFree(value);
 
@@ -255,10 +255,10 @@ float32 CXMLTreeNode::Getfloat32Property (const char* _pszKey, float32 _fDefault
   {
     fRet = static_cast<float32>(atof((const char*)value));
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::Getfloat32Property se ha utilizado el valor por defecto:%f para el tag <%s>",_fDefault, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::Getfloat32Property se ha utilizado el valor por defecto:%f para el tag <%s>",_fDefault, _pszKey);
+    }
 
   xmlFree(value);
 
@@ -284,10 +284,10 @@ bool CXMLTreeNode::GetBoolProperty (const char* _pszKey, bool _bDefault, bool wa
     else
       bRet = false;
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_bDefault, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_bDefault, _pszKey);
+    }
 
   xmlFree(value);
 
@@ -307,10 +307,10 @@ const char* CXMLTreeNode::GetPszProperty (const char* _pszKey, const char* _pszD
   {
     pszRet = (const char*)value;
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
+    }
 
   return pszRet;
 }
@@ -334,10 +334,10 @@ std::string CXMLTreeNode::GetPszISOProperty (const char* _pszKey, const char* _p
     szRet = (char*)out;
     free(out);
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
+    }
 
   return szRet;
 }
@@ -355,10 +355,10 @@ Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Vect2f& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%f %f",&l_V2f.x, &l_V2f.y);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
+    }
 
   xmlFree(value);
   return l_V2f;
@@ -377,10 +377,10 @@ Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Vect3f& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%f %f %f",&l_V3f.x, &l_V3f.y, &l_V3f.z);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
+    }
 
   xmlFree(value);
   return l_V3f;
@@ -399,10 +399,10 @@ Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Vect4f& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%f %f %f %f", &l_V4f.x, &l_V4f.y, &l_V4f.z, &l_V4f.w);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+    }
 
   xmlFree(value);
   return l_V4f;
@@ -421,10 +421,10 @@ Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Vect2i& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%d %d",&l_V2i.x, &l_V2i.y);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
+    }
 
   xmlFree(value);
   return l_V2i;
@@ -443,10 +443,10 @@ Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Vect3i& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%d %d %d",&l_V3i.x, &l_V3i.y, &l_V3i.z);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
+    }
 
   xmlFree(value);
   return l_V3i;
@@ -465,10 +465,10 @@ Vect4i CXMLTreeNode::GetVect4iProperty  (const char* _pszKey, const Vect4i& _Def
     const char* pszValue = (const char*)value;
     sscanf_s(pszValue,"%d %d %d %d",&l_V4i.x, &l_V4i.y, &l_V4i.z, &l_V4i.w);    
   }
-	else if(warningDefault)
-	{
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
-	}
+    else if(warningDefault)
+    {
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+    }
 
   xmlFree(value);
   return l_V4i;
@@ -786,7 +786,7 @@ bool CXMLTreeNode::WritePszProperty(const char* _pszKey, const char* _pszValue)
 
   if (_pszKey && _pszValue && m_pWriter)
   {
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST _pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST _pszValue);
     if (rc >= 0)
       return true;
   }
@@ -805,7 +805,7 @@ bool CXMLTreeNode::WriteIntProperty(const char* _pszKey, int _iValue)
   {
     char pszValue[32];
     sprintf_s(pszValue, "%d", _iValue);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -824,7 +824,7 @@ bool CXMLTreeNode::Writefloat32Property(const char* _pszKey, float32 _fValue)
   {
     char pszValue[32];
     sprintf_s(pszValue, "%f", _fValue);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -844,7 +844,7 @@ bool CXMLTreeNode::WriteBoolProperty(const char* _pszKey, bool _bValue)
     char pszValue[32];
     sprintf_s(pszValue, _bValue ? "true" : "false");
 
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -856,7 +856,7 @@ bool CXMLTreeNode::WriteBoolProperty(const char* _pszKey, bool _bValue)
 //----------------------------------------------------------------------------
 // Writes a Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect2fProperty	(const char* _pszKey, const Vect2f& _value)
+bool CXMLTreeNode::WriteVect2fProperty    (const char* _pszKey, const Vect2f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -864,7 +864,7 @@ bool CXMLTreeNode::WriteVect2fProperty	(const char* _pszKey, const Vect2f& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%f %f", _value.x, _value.y);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -875,7 +875,7 @@ bool CXMLTreeNode::WriteVect2fProperty	(const char* _pszKey, const Vect2f& _valu
 //----------------------------------------------------------------------------
 // Writes a Vect3f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect3fProperty	(const char* _pszKey, const Vect3f& _value)
+bool CXMLTreeNode::WriteVect3fProperty    (const char* _pszKey, const Vect3f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -883,7 +883,7 @@ bool CXMLTreeNode::WriteVect3fProperty	(const char* _pszKey, const Vect3f& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%f %f %f", _value.x, _value.y, _value.z);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -894,7 +894,7 @@ bool CXMLTreeNode::WriteVect3fProperty	(const char* _pszKey, const Vect3f& _valu
 //----------------------------------------------------------------------------
 // Writes a Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect4fProperty	(const char* _pszKey, const Vect4f& _value)
+bool CXMLTreeNode::WriteVect4fProperty    (const char* _pszKey, const Vect4f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -902,7 +902,7 @@ bool CXMLTreeNode::WriteVect4fProperty	(const char* _pszKey, const Vect4f& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%f %f %f %f", _value.x, _value.y, _value.z, _value.w);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -913,7 +913,7 @@ bool CXMLTreeNode::WriteVect4fProperty	(const char* _pszKey, const Vect4f& _valu
 //----------------------------------------------------------------------------
 // Writes a Vect2i property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect2iProperty	(const char* _pszKey, const Vect2i& _value)
+bool CXMLTreeNode::WriteVect2iProperty    (const char* _pszKey, const Vect2i& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -921,7 +921,7 @@ bool CXMLTreeNode::WriteVect2iProperty	(const char* _pszKey, const Vect2i& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%i %i", _value.x, _value.y);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -932,7 +932,7 @@ bool CXMLTreeNode::WriteVect2iProperty	(const char* _pszKey, const Vect2i& _valu
 //----------------------------------------------------------------------------
 // Writes a Vect3i property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect3iProperty	(const char* _pszKey, const Vect3i& _value)
+bool CXMLTreeNode::WriteVect3iProperty    (const char* _pszKey, const Vect3i& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -940,7 +940,7 @@ bool CXMLTreeNode::WriteVect3iProperty	(const char* _pszKey, const Vect3i& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%i %i %i", _value.x, _value.y, _value.z);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }
@@ -951,7 +951,7 @@ bool CXMLTreeNode::WriteVect3iProperty	(const char* _pszKey, const Vect3i& _valu
 //----------------------------------------------------------------------------
 // Writes a Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect4iProperty	(const char* _pszKey, const Vect4i& _value)
+bool CXMLTreeNode::WriteVect4iProperty    (const char* _pszKey, const Vect4i& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -959,7 +959,7 @@ bool CXMLTreeNode::WriteVect4iProperty	(const char* _pszKey, const Vect4i& _valu
   {
     char pszValue[32];
     sprintf_s(pszValue, "%i %i %i %i", _value.x, _value.y, _value.z, _value.w);
-    int rc = xmlTextWriterWriteAttribute	(m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
+    int rc = xmlTextWriterWriteAttribute    (m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue);
     if (rc >= 0)
       return true;
   }

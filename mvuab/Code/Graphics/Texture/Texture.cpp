@@ -9,37 +9,37 @@ CTexture::CTexture() : m_Texture(0), m_FileName("")
 
 CTexture::~CTexture()
 {
-	Unload();
+    Unload();
 }
 
 bool CTexture::LoadFile()
 {
-	HRESULT l_Res = D3DXCreateTextureFromFile(CGraphicsManager::GetSingletonPtr()->GetDevice(), ("./Data/textures/" + m_FileName).c_str(), &m_Texture );
+    HRESULT l_Res = D3DXCreateTextureFromFile(CGraphicsManager::GetSingletonPtr()->GetDevice(), ("./Data/textures/" + m_FileName).c_str(), &m_Texture );
     return(l_Res == S_OK);
 }
 
 void CTexture::Unload()
 {
-	CHECKED_RELEASE(m_Texture);
+    CHECKED_RELEASE(m_Texture);
 }
 
 const std::string & CTexture::GetFileName() const
 {
-	return m_FileName;
+    return m_FileName;
 }
 
 bool CTexture::Load(const std::string &FileName)
 {
-	m_FileName = FileName;
-	return LoadFile();
+    m_FileName = FileName;
+    return LoadFile();
 }
 bool CTexture::Reload()
 {
-	Unload();
-	return LoadFile();
+    Unload();
+    return LoadFile();
 }
 
 void CTexture::Activate(size_t StageId)
 {
-	CGraphicsManager::GetSingletonPtr()->GetDevice()->SetTexture(StageId, m_Texture);
+    CGraphicsManager::GetSingletonPtr()->GetDevice()->SetTexture(StageId, m_Texture);
 }

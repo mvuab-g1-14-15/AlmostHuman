@@ -13,10 +13,10 @@ CEasyEnemy::~CEasyEnemy()
 
 void CEasyEnemy::Update(float32 deltaTime)
 {
-	printf("Updating CEasyEnemy");
+    printf("Updating CEasyEnemy");
 }
 
 void CEasyEnemy::Render()
 {
-	printf("Rendering CEasyEnemy");
+    printf("Rendering CEasyEnemy");
 }

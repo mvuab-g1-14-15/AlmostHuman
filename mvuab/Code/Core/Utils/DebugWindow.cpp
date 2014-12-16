@@ -10,10 +10,10 @@
 //#include "Utils\MemLeaks.h"
 
 CDebugWindow::CDebugWindow(Vect2i aWindowPosition) :
-		m_bIsVisible(true),
-		m_WindowPosition(aWindowPosition),
+        m_bIsVisible(true),
+        m_WindowPosition(aWindowPosition),
         m_FontColor_debug(colBLACK),
-	    m_FontColor_release(colWHITE)
+        m_FontColor_release(colWHITE)
 {
 
 }
@@ -25,13 +25,13 @@ CDebugWindow::~CDebugWindow()
 
 void CDebugWindow::ToggleVisibility()
 {
-	SetVisible(!m_bIsVisible);
+    SetVisible(!m_bIsVisible);
 }
 
 void CDebugWindow::Render()
 {
-	CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
-	CFontManager * fm = CFontManager::GetSingletonPtr();
-	if( m_bIsVisible )
-		RenderInfo();
+    CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
+    CFontManager * fm = CFontManager::GetSingletonPtr();
+    if( m_bIsVisible )
+        RenderInfo();
 }

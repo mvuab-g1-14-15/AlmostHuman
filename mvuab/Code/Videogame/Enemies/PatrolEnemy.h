@@ -10,13 +10,13 @@
 class CPatrolEnemy : public CEnemy
 {
 private:
-	std::vector<Vect3f>					m_Waypoints;
+    std::vector<Vect3f>                    m_Waypoints;
 public:
-	CPatrolEnemy(CXMLTreeNode &Node);
-	~CPatrolEnemy();
+    CPatrolEnemy(CXMLTreeNode &Node);
+    ~CPatrolEnemy();
 
-	void Update(float32 deltaTime);
-	void Render();
+    void Update(float32 deltaTime);
+    void Render();
 };
 
 #endif

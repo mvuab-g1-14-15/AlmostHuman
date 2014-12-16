@@ -391,67 +391,67 @@ CalSpringSystem *CalModel::getSpringSystem() const
 
 CalBoundingBox & CalModel::getBoundingBox(bool precision)
 {
-	CalVector v;
-	v = CalVector(1.0f,0.0f,0.0f);	
-	m_boundingBox.plane[0].setNormal(v);
-	v = CalVector(-1.0f,0.0f,0.0f);	
-	m_boundingBox.plane[1].setNormal(v);
-	v = CalVector(0.0f,1.0f,0.0f);	
-	m_boundingBox.plane[2].setNormal(v);
-	v = CalVector(0.0f,-1.0f,0.0f);	
-	m_boundingBox.plane[3].setNormal(v);
-	v = CalVector(0.0f,0.0f,1.0f);	
-	m_boundingBox.plane[4].setNormal(v);
-	v = CalVector(0.0f,0.0f,-1.0f);	
-	m_boundingBox.plane[5].setNormal(v);
+    CalVector v;
+    v = CalVector(1.0f,0.0f,0.0f);    
+    m_boundingBox.plane[0].setNormal(v);
+    v = CalVector(-1.0f,0.0f,0.0f);    
+    m_boundingBox.plane[1].setNormal(v);
+    v = CalVector(0.0f,1.0f,0.0f);    
+    m_boundingBox.plane[2].setNormal(v);
+    v = CalVector(0.0f,-1.0f,0.0f);    
+    m_boundingBox.plane[3].setNormal(v);
+    v = CalVector(0.0f,0.0f,1.0f);    
+    m_boundingBox.plane[4].setNormal(v);
+    v = CalVector(0.0f,0.0f,-1.0f);    
+    m_boundingBox.plane[5].setNormal(v);
 
-	if(precision)
-		m_pSkeleton->calculateBoundingBoxes();
+    if(precision)
+        m_pSkeleton->calculateBoundingBoxes();
 
-	
-	std::vector<CalBone *> & vectorBone =  m_pSkeleton->getVectorBone();
-		
-	std::vector<CalBone *>::iterator iteratorBone;
-	for(iteratorBone = vectorBone.begin(); iteratorBone != vectorBone.end(); ++iteratorBone)
-	{
-		// If it's just an approximation that are needed then
-		// we just compute the bounding box from the skeleton
+    
+    std::vector<CalBone *> & vectorBone =  m_pSkeleton->getVectorBone();
+        
+    std::vector<CalBone *>::iterator iteratorBone;
+    for(iteratorBone = vectorBone.begin(); iteratorBone != vectorBone.end(); ++iteratorBone)
+    {
+        // If it's just an approximation that are needed then
+        // we just compute the bounding box from the skeleton
 
-		if(!precision || !(*iteratorBone)->getCoreBone()->isBoundingBoxPrecomputed())
-		{
-			
-			CalVector translation = (*iteratorBone)->getTranslationAbsolute();
-			
-			int planeId;
-			for(planeId = 0; planeId < 6; ++planeId)
-			{
-				if(m_boundingBox.plane[planeId].eval(translation) < 0.0f)
-				{
-					m_boundingBox.plane[planeId].setPosition(translation);
-				}
-			}
-		}
-		else
-		{
-			CalBoundingBox localBoundingBox = (*iteratorBone)->getBoundingBox();
-			CalVector points[8];
-			localBoundingBox.computePoints(points);
-			
-			for(int i=0; i < 8; i++)
-			{				
-				int planeId;
-				for(planeId = 0; planeId < 6; ++planeId)
-				{
-					if(m_boundingBox.plane[planeId].eval(points[i]) < 0.0f)
-					{
-						m_boundingBox.plane[planeId].setPosition(points[i]);
-					}
-				}
-			}				
-		}
-	}
-	
-	return m_boundingBox;
+        if(!precision || !(*iteratorBone)->getCoreBone()->isBoundingBoxPrecomputed())
+        {
+            
+            CalVector translation = (*iteratorBone)->getTranslationAbsolute();
+            
+            int planeId;
+            for(planeId = 0; planeId < 6; ++planeId)
+            {
+                if(m_boundingBox.plane[planeId].eval(translation) < 0.0f)
+                {
+                    m_boundingBox.plane[planeId].setPosition(translation);
+                }
+            }
+        }
+        else
+        {
+            CalBoundingBox localBoundingBox = (*iteratorBone)->getBoundingBox();
+            CalVector points[8];
+            localBoundingBox.computePoints(points);
+            
+            for(int i=0; i < 8; i++)
+            {                
+                int planeId;
+                for(planeId = 0; planeId < 6; ++planeId)
+                {
+                    if(m_boundingBox.plane[planeId].eval(points[i]) < 0.0f)
+                    {
+                        m_boundingBox.plane[planeId].setPosition(points[i]);
+                    }
+                }
+            }                
+        }
+    }
+    
+    return m_boundingBox;
 }
 
  /*****************************************************************************/

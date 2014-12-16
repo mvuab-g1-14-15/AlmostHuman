@@ -6,11 +6,11 @@
 class CGUITexture
 {
 protected:
-	virtual bool LoadFile();
+    virtual bool LoadFile();
 
 public:
-	CGUITexture();
-	virtual ~CGUITexture();
+    CGUITexture();
+    virtual ~CGUITexture();
 };
 
 #endif //INC_TEXTURE_H_

@@ -725,17 +725,17 @@ std::vector<CalCoreBone *>& CalCoreSkeleton_GetVectorCoreBone(CalCoreSkeleton *s
 
 void CalCoreSkeleton_Scale(CalCoreSkeleton *self,float factor)
 {
-	self->scale(factor);
+    self->scale(factor);
 }
 
 void CalSkeleton_GetBoneBoundingBox(CalSkeleton *self, float *min, float *max)
 {
-	self->getBoneBoundingBox(min, max);
+    self->getBoneBoundingBox(min, max);
 }
 
 void CalSkeleton_CalculateBoundingBoxes(CalSkeleton *self)
 {
-	self->calculateBoundingBoxes();
+    self->calculateBoundingBoxes();
 }
 
 //****************************************************************************//

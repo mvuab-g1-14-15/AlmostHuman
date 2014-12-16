@@ -8,17 +8,17 @@
 #include "Utils\Name.h"
 
 // Define the default xml file that will be searched inside the path
-const std::string defaultXML ="actor.xml";
+const std::string defaultXML = "actor.xml";
 
 class CalCoreModel;
 class CTexture;
 
 class CAnimatedCoreModel : public CName
 {
-private:
+protected:
+    typedef std::vector<CTexture *> TTextureVector;
     CalCoreModel*                   m_CalCoreModel;
-    std::vector<std::string>        m_TextureFilenameVector;
-    std::vector<CTexture*>          m_TextureVector;
+    TTextureVector                  m_TextureVector;
     std::map<std::string, uint16>   m_AnimationsMap;
     std::string                     m_Path;
     std::string                     m_FileName;
@@ -29,8 +29,10 @@ private:
     bool Load();
     bool LoadMesh(const std::string &Filename);
     bool LoadSkeleton(const std::string &Filename);
+    bool LoadTexture(const std::string &Filename);
     bool LoadAnimation(const std::string &Name, const std::string &Filename);
     void LoadTextures();
+
 public:
     CAnimatedCoreModel(const std::string &Name);
     ~CAnimatedCoreModel();

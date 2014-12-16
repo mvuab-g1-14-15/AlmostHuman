@@ -8,11 +8,11 @@
 class CBossEnemy : public CEnemy
 {
 public:
-	CBossEnemy(CXMLTreeNode &Node);
-	~CBossEnemy();
+    CBossEnemy(CXMLTreeNode &Node);
+    ~CBossEnemy();
 
-	void Update(float32 deltaTime);
-	void Render();
+    void Update(float32 deltaTime);
+    void Render();
 };
 
 

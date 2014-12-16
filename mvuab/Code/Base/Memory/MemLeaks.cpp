@@ -11,7 +11,7 @@ static unsigned int _nFile(0);
 
 bool MemLeaks::MemoryBegin()
 {
-	//Si se ponen threads hay que bloquear este acceso con un mute	x
+    //Si se ponen threads hay que bloquear este acceso con un mute    x
 
     _CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
     //_CrtSetBreakAlloc(1523);
@@ -24,7 +24,7 @@ bool MemLeaks::MemoryBegin()
 
 bool MemLeaks::MemoryEnd()
 {
-	//Si se ponen threads hay que desbloquear aqui un mutex
+    //Si se ponen threads hay que desbloquear aqui un mutex
     return true;
 }
 
@@ -44,7 +44,7 @@ const char* MemLeaks::FileString( const char* sFile )
    {
         pFile = _vFile[_nFile];
         //strncpy(pFile,sFile,MEMORY_FILE_LENGTH);
-				strncpy_s(pFile,_countof(_vFile[_nFile]),sFile,MEMORY_FILE_LENGTH);
+                strncpy_s(pFile,_countof(_vFile[_nFile]),sFile,MEMORY_FILE_LENGTH);
 
         ++_nFile;
         // Si nos pasamos del numero de ficheros, machacamos el primero

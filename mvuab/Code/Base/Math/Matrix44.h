@@ -152,10 +152,10 @@ public:
   //-----------------
 
 #ifdef ROW_MAJOR_MATRICES
-	T m00, m01, m02, m03;       // Primera 'fila'
-	T m10, m11, m12, m13;       // Segunda 'fila'
-	T m20, m21, m22, m23;       // Tercera 'fila'
-	T m30, m31, m32, m33;       // Cuarta  'fila' 
+    T m00, m01, m02, m03;       // Primera 'fila'
+    T m10, m11, m12, m13;       // Segunda 'fila'
+    T m20, m21, m22, m23;       // Tercera 'fila'
+    T m30, m31, m32, m33;       // Cuarta  'fila' 
 #else
   T m00, m10, m20, m30;       // Primera 'columna'
   T m01, m11, m21, m31;       // Segunda 'columna'
@@ -170,7 +170,7 @@ public:
 
   // Construcción
   inline Matrix44 ();
-	inline Matrix44 (const D3DXMATRIX &otra);
+    inline Matrix44 (const D3DXMATRIX &otra);
   inline Matrix44 (const Matrix44<T>& otra);
   inline Matrix44 (const Matrix33<T>& otra);
   inline Matrix44 (const Matrix34<T>& otra);
@@ -199,9 +199,9 @@ public:
                                         const Vector3<T>& vBasisY,
                                         const Vector3<T>& vBasisZ,
                                         const Vector3<T>& Pos);
-	inline Matrix44<T>& SetFromBasis     (const Vector3<T>& vBasisX,
-																				const Vector3<T>& vBasisY,
-																				const Vector3<T>& vBasisZ);
+    inline Matrix44<T>& SetFromBasis     (const Vector3<T>& vBasisX,
+                                                                                const Vector3<T>& vBasisY,
+                                                                                const Vector3<T>& vBasisZ);
   inline Matrix44<T>& SetFromAngleX    (const T angleX);
   inline Matrix44<T>& SetFromAngleY    (const T angleY);
   inline Matrix44<T>& SetFromAngleZ    (const T angleZ);
@@ -236,10 +236,10 @@ public:
 
   // Acceso
   inline Vector4<T>        GetRow                  (int i) const;
-  inline Vector4<T>				 GetColum                (int i) const;
-  inline Vector3<T>				 GetVectorBasis          (int i) const;
-	inline T								 GetVectorBasisLength    (int i) const;
-  inline Vector3<T>				 GetPosBasis             () const;
+  inline Vector4<T>                 GetColum                (int i) const;
+  inline Vector3<T>                 GetVectorBasis          (int i) const;
+    inline T                                 GetVectorBasisLength    (int i) const;
+  inline Vector3<T>                 GetPosBasis             () const;
   inline void              GetBasis                (Vector3<T>& vBasisX,
                                                     Vector3<T>& vBasisY,
                                                     Vector3<T>& vBasisZ,
@@ -316,7 +316,7 @@ public:
   inline Vector3<T> GetTransformPoint     (const Vector3<T>& vector) const;
   void              TransformArrayVectors (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
   void              TransformArrayPoints  (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
-	D3DXMATRIX        GetD3DXMatrix         ( ) const;
+    D3DXMATRIX        GetD3DXMatrix         ( ) const;
 
 
   // Operaciones especiales con matrices

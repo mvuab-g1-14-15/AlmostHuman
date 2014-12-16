@@ -8,15 +8,15 @@ class CTPSCamera: public CCamera
 {
 public:
 
-	CTPSCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio );
-	CTPSCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject );
-	void AddZoom( float32 dz );
-	virtual ~CTPSCamera(){}
+    CTPSCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio );
+    CTPSCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject );
+    void AddZoom( float32 dz );
+    virtual ~CTPSCamera(){}
 
 protected:
-	virtual void RecalculateCameraData();
+    virtual void RecalculateCameraData();
 
-	float32 m_Zoom;
+    float32 m_Zoom;
 
 };
 

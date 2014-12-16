@@ -15,20 +15,20 @@ class CLogRender;
 class CEngine : public CSingleton<CEngine>
 {
 public:
-	CEngine();
-	~CEngine();
-	void Init( CProcess * apProcess, const std::string &aConfigPath, HWND aWindowId );
-	void Update(float32 deltaTime);
-	void Render();
-	
-	// Getters and setters
-	GET_SET(CCore*, pCore);
+    CEngine();
+    ~CEngine();
+    void Init( CProcess * apProcess, const std::string &aConfigPath, HWND aWindowId );
+    void Update(float32 deltaTime);
+    void Render();
+    
+    // Getters and setters
+    GET_SET(CCore*, pCore);
 
 private:
-	CCore*			m_pCore;
-	CLogRender*		m_pLogRender;
-	CProcess*		m_pProcess;
-	CTimer			m_timer;
+    CCore*            m_pCore;
+    CLogRender*        m_pLogRender;
+    CProcess*        m_pProcess;
+    CTimer            m_timer;
 };
 
 #endif // GRAPHICS_MANAGER_H

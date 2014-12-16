@@ -17,30 +17,30 @@
 class CKeyboard : public CInputDevice 
 {
 public:
-	// Init and End protocols
-	CKeyboard() {}
-	virtual ~CKeyboard() { Done(); } 
+    // Init and End protocols
+    CKeyboard() {}
+    virtual ~CKeyboard() { Done(); } 
 
-	bool          Init            (LPDIRECTINPUT8, HWND);
-	bool	        IsOk			      ( void ) const { return m_bIsOk; }
-	void	        Done			      ();
+    bool          Init            (LPDIRECTINPUT8, HWND);
+    bool            IsOk                  ( void ) const { return m_bIsOk; }
+    void            Done                  ();
 
-	//----CInputDevice Interface----
-	HRESULT       Init			      ();
-	HRESULT       Update			    ();
+    //----CInputDevice Interface----
+    HRESULT       Init                  ();
+    HRESULT       Update                ();
 
-	//----CMouse Interface----------
-	bool					IsDown					(uint32 nID) const;
-	bool					IsUpDown    		(uint32 nID) const;
-	bool					IsDownUp				(uint32 nID) const;
+    //----CMouse Interface----------
+    bool                    IsDown                    (uint32 nID) const;
+    bool                    IsUpDown            (uint32 nID) const;
+    bool                    IsDownUp                (uint32 nID) const;
 
 private:
-	// Tipos----
-	typedef CInputDevice Inherited;
-	//----------
+    // Tipos----
+    typedef CInputDevice Inherited;
+    //----------
 
-	char          m_Keys[256];
-	char          m_KeysOld[256];
+    char          m_Keys[256];
+    char          m_KeysOld[256];
 };
 
 #endif //INC_KEYBOARD_H_

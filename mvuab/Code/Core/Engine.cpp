@@ -6,58 +6,59 @@
 #include "Utils\LogRender.h"
 
 CEngine::CEngine() :
-	m_pCore( new CCore() ),
-	m_pLogRender( new CLogRender()),
-	m_pProcess( 0 ),
-	m_timer(30)
+    m_pCore( new CCore() ),
+    m_pLogRender( new CLogRender()),
+    m_pProcess( 0 ),
+    m_timer(30)
 {
 }
 
 CEngine::~CEngine()
 {
-	CHECKED_DELETE( m_pCore );
-	CHECKED_DELETE( m_pProcess );
-	CHECKED_DELETE( m_pLogRender );
+    CHECKED_DELETE( m_pCore );
+    CHECKED_DELETE( m_pProcess );
+    CHECKED_DELETE( m_pLogRender );
 }
 
 void CEngine::Update(float32 deltaTime)
 {
-	m_timer.Update();
-	m_pCore->Update(m_timer.GetElapsedTime());
-	m_pProcess->Update(m_timer.GetElapsedTime());
-	m_pLogRender->Update(m_timer.GetElapsedTime());
+    m_timer.Update();
+    m_pCore->Update(m_timer.GetElapsedTime());
+    m_pProcess->Update(m_timer.GetElapsedTime());
+    m_pLogRender->Update(m_timer.GetElapsedTime());
 }
 
 void CEngine::Render()
-{	
-	// Obtain an instance to the graphics manager
-	CGraphicsManager* pGraphicsManager = GraphicsInstance;
-	//pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+{    
+    // Obtain an instance to the graphics manager
+    CGraphicsManager* pGraphicsManager = GraphicsInstance;
+    //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
-	pGraphicsManager->BeginRender();
-	pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
+    pGraphicsManager->BeginRender();
+    pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
 
-	m_pCore->Render();
-	m_pProcess->Render();
-	m_pLogRender->Render();
-	
+    m_pCore->Render();
+    m_pProcess->Render();
+    m_pLogRender->Render();
+    //pGraphicsManager->RenderCursor();
+    
     #if _DEBUG
-	    /*pGraphicsManager->DisableZBuffering();
-	    pGraphicsManager->EnableAlphaBlend();
-	    m_pProcess->RenderDebugInfo();
-	    pGraphicsManager->DisableAlphaBlend();
-	    pGraphicsManager->EnableZBuffering();*/
+        /*pGraphicsManager->DisableZBuffering();
+        pGraphicsManager->EnableAlphaBlend();
+        m_pProcess->RenderDebugInfo();
+        pGraphicsManager->DisableAlphaBlend();
+        pGraphicsManager->EnableZBuffering();*/
     #endif
 
-	pGraphicsManager->EndRender();
+    pGraphicsManager->EndRender();
 }
 
 void CEngine::Init( CProcess * apProcess, const std::string &aConfigPath, HWND aWindowId )
 {
-	m_pCore->Init(aConfigPath, aWindowId);
+    m_pCore->Init(aConfigPath, aWindowId);
     m_pLogRender->SetLinePerPage(20);
 
-	m_pProcess = apProcess;
-	m_pProcess->Init();
-	
+    m_pProcess = apProcess;
+    m_pProcess->Init();
+    
 }

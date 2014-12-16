@@ -9,18 +9,18 @@
 class CVideogameProcess : public CProcess
 {
 private:
-	float32 m_Speed;
-	Vect2i m_LastMousePoint;
-	CCamera* m_pFPSCamera;
-	CCamera* m_pTPSCamera;
+    float32 m_Speed;
+    Vect2i m_LastMousePoint;
+    CCamera* m_pFPSCamera;
+    CCamera* m_pTPSCamera;
 
 public:
-	CVideogameProcess();
-	virtual ~CVideogameProcess();
+    CVideogameProcess();
+    virtual ~CVideogameProcess();
 
-	virtual void Init();
-	virtual void Update(float32 deltaTime);
-	virtual void Render();
+    virtual void Init();
+    virtual void Update(float32 deltaTime);
+    virtual void Render();
 };
 
 #endif // GRAPHICS_MANAGER_H

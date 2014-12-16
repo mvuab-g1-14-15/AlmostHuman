@@ -3,32 +3,32 @@
 
 void CCountDownTimer::SetTime (float32 TotalTime, bool automaticReset) 
 {
-	m_fTotalTime		= TotalTime;
-	m_fElapsedTime	= 0.f;
+    m_fTotalTime        = TotalTime;
+    m_fElapsedTime    = 0.f;
 }
 
 bool CCountDownTimer::Update (float32 deltaTime) 
 {
-	m_fElapsedTime += deltaTime;
-	return Finished();
+    m_fElapsedTime += deltaTime;
+    return Finished();
 }
 
 bool CCountDownTimer::Finished ()
 {
-	if(m_fElapsedTime>=m_fTotalTime) 
-	{
-		if (m_bAutomaticReset)
-		{
-			m_fElapsedTime = 0.f;
-		}
-		else
-		{
-			m_fElapsedTime = m_fTotalTime;
-		}
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if(m_fElapsedTime>=m_fTotalTime) 
+    {
+        if (m_bAutomaticReset)
+        {
+            m_fElapsedTime = 0.f;
+        }
+        else
+        {
+            m_fElapsedTime = m_fTotalTime;
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

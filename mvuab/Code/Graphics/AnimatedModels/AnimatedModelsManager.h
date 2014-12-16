@@ -10,13 +10,13 @@ class CAnimatedCoreModel;
 class CAnimatedModelsManager : public CMapManager<CAnimatedCoreModel>
 {
 public:
-	CAnimatedModelsManager();
-	~CAnimatedModelsManager();
-	CAnimatedCoreModel * GetCore(const std::string &Name, const std::string &Path);
-	CAnimatedInstanceModel * GetInstance(const std::string &Name);
-	void Load(const std::string &Filename);
+    CAnimatedModelsManager();
+    ~CAnimatedModelsManager();
+    CAnimatedCoreModel * GetCore(const std::string &Name, const std::string &Path);
+    CAnimatedInstanceModel * GetInstance(const std::string &Name);
+    void Load(const std::string &Filename);
 protected:
-	std::string m_FileName;
+    std::string m_FileName;
     CAnimatedCoreModel *AddNewCore( const std::string &Name, const std::string &Path );
 };
 

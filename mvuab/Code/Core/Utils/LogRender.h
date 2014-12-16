@@ -33,13 +33,13 @@ public:
 
    void                    Render                       (CColor color = colWHITE);
    void                    Update                       (float32 deltaTime);
-   uint32				   GetNumOfLines                () const                                {return m_uLinesPerPage;}
+   uint32                   GetNumOfLines                () const                                {return m_uLinesPerPage;}
    void                    PageUp                       ();
    void                    PageDown                     ();
    void                    NextLine                     ();
    void                    PrevLine                     ();
-   void                    SetWindowsPos                (const Vect2i& pos )					{m_WindowsPos = pos;}
-   const Vect2i&		   GetWindowsPos                () const                                {return m_WindowsPos;}
+   void                    SetWindowsPos                (const Vect2i& pos )                    {m_WindowsPos = pos;}
+   const Vect2i&           GetWindowsPos                () const                                {return m_WindowsPos;}
    bool                    GetVisible                   () const                                {return m_bIsVisible;}
    void                    SetVisible                   (bool flag);
    void                    ToggleVisibility();
@@ -49,28 +49,28 @@ private:
    void                    RenderLines                  ( CGraphicsManager* renderManager, CFontManager* fm, const std::vector<SLog>& vecLogs,
                                                           uint32 beginIndex, uint32 endIndex, bool errors, bool warnings,CColor color );
    void                    RenderQuad                   ();
-   void                    ComputeBeginAndEnd			(const std::vector<SLog>& vecLogs,uint32& beginIndex, uint32& endIndex);
+   void                    ComputeBeginAndEnd            (const std::vector<SLog>& vecLogs,uint32& beginIndex, uint32& endIndex);
 
 private:
 
-   bool									m_bIsVisible;
-   bool									m_uIsInLastLog;
-   bool									m_uIsFullFirstPage;
-   Vect2i								m_WindowsPos;
-   uint32								m_uLinesPerPage;
-   uint32								m_uCurrentBeginIndex;
-   uint32								m_uCurrentEndIndex;
-   std::vector<SLog>					m_VecLogsToRender;
+   bool                                    m_bIsVisible;
+   bool                                    m_uIsInLastLog;
+   bool                                    m_uIsFullFirstPage;
+   Vect2i                                m_WindowsPos;
+   uint32                                m_uLinesPerPage;
+   uint32                                m_uCurrentBeginIndex;
+   uint32                                m_uCurrentEndIndex;
+   std::vector<SLog>                    m_VecLogsToRender;
 
-   uint32								m_uLinesPerPageAnimation;
-   bool									m_bAnimation;
+   uint32                                m_uLinesPerPageAnimation;
+   bool                                    m_bAnimation;
    int32                                m_iDirecion;
    float32                                m_fAnimationTime;
    float32                                m_fTotalAnimation;
-   CColor								m_Quad2dColor;
+   CColor                                m_Quad2dColor;
    float32                                m_fAlpha;
 
-   CLerpAnimator1D						m_LerpAnimator1D;
+   CLerpAnimator1D                        m_LerpAnimator1D;
 
 };
 

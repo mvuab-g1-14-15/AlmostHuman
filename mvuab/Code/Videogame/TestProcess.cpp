@@ -27,35 +27,36 @@
 #include <d3dx9.h>
 
 CTestProcess::CTestProcess() : CProcess(), 
-	m_Speed( 0.1f ),
-	m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,5.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
-	m_pTPSCamera( new CTPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
-	m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
+    m_Speed( 0.1f ),
+    m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,5.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
+    m_pTPSCamera( new CTPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
+    m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
 }
 
 CTestProcess::~CTestProcess()
 {
-	CLogger::GetSingletonPtr()->SaveLogsInFile();
-	CHECKED_DELETE(m_pFPSCamera);
-	CHECKED_DELETE(m_pTPSCamera);
+    CLogger::GetSingletonPtr()->SaveLogsInFile();
+    CHECKED_DELETE(m_pFPSCamera);
+    CHECKED_DELETE(m_pTPSCamera);
 }
 
 void CTestProcess::Update(float32 deltaTime)
 {
     m_pCamera->Update(deltaTime);
-	m_FPS = 1.0f/deltaTime;
+    m_FPS = 1.0f/deltaTime;
 
-	CInputManager* pInputManager = CInputManager::GetSingletonPtr();
+    CInputManager* pInputManager = CInputManager::GetSingletonPtr();
 
-	m_Amount +=  0.01f;
-	m_Angle  += deltaTime * 0.05f;
-	m_AngleMoon += deltaTime * 0.05f;
-	
-	Vect3f CameraDirection( m_pCamera->GetDirection() );
+    m_Amount +=  0.01f;
+    m_Angle  += deltaTime * 0.05f;
+    m_AngleMoon += deltaTime * 0.05f;
+    
+    Vect3f CameraDirection( m_pCamera->GetDirection() );
 
-	CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+    CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
+<<<<<<< HEAD
 	if( pActionManager->DoAction("CommutationCamera") )
 	{
 		CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
@@ -107,11 +108,28 @@ void CTestProcess::Update(float32 deltaTime)
     }
 	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
 	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+=======
+    if( pActionManager->DoAction("CommutationCamera") )
+    {
+        CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
+        if( pProcessCamera ) m_pCamera = m_pTPSCamera;
+        else m_pCamera = m_pFPSCamera;
+    }
+
+    Vect3i delta = pInputManager->GetMouseDelta();
+    if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
+    {
+        m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
+    }
+
+    //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
+    //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+>>>>>>> origin/master
 }
 
 void CTestProcess::Init()
 {
-	m_pCamera = m_pFPSCamera;
+    m_pCamera = m_pFPSCamera;
 
     AABB3f BndBox(Vect3f(0.0f,0.0f,0.0f), Vect3f(0.0f,1.0f,1.0f) );
 
@@ -122,13 +140,13 @@ void CTestProcess::Init()
 
 void CTestProcess::Render()
 {
-	CGraphicsManager* pGraphicsManager = GraphicsInstance;
+    CGraphicsManager* pGraphicsManager = GraphicsInstance;
 
     pGraphicsManager->DrawAxis(5);
-	pGraphicsManager->DrawGrid(100, colORANGE, 50, 50);
+    pGraphicsManager->DrawGrid(100, colORANGE, 50, 50);
 }
 
 void CTestProcess::RenderDebugInfo()
 {
-	CProcess::RenderDebugInfo();
+    CProcess::RenderDebugInfo();
 }

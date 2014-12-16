@@ -46,7 +46,7 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
             float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
             float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
             float32 l_Scale=m(i).Getfloat32Property("scale",1);
-            CInstanceMesh* l_InstanceMesh	= new CInstanceMesh(l_Name, l_Core);
+            CInstanceMesh* l_InstanceMesh    = new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
             l_InstanceMesh->SetYaw(l_Yaw * ePIf/180.0f);
             l_InstanceMesh->SetPitch(l_Pitch * ePIf/180.0f);
@@ -61,14 +61,14 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
 
 void CRenderableObjectsManager::CleanUp()
 {
-	Destroy();
+    Destroy();
 }
 
 void
 CRenderableObjectsManager::Render(CGraphicsManager *GM)
 {
-	for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
-	{
-		m_ResourcesVector[i]->Render(GM);
-	}
+    for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+    {
+        m_ResourcesVector[i]->Render(GM);
+    }
 }

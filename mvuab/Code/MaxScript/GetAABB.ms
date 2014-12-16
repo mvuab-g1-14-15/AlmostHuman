@@ -4,15 +4,8 @@ fn GetAABB Obj =
 	local l_maxPoint = point3 -999999999999999999 -999999999999999999 -999999999999999999
 	local l_nFaces = getNumFaces Obj
 	
-	if ( classOf(Obj) ) != Editable_mesh then
-	(
-		format "Only Editable Meshes allowed...\n"
-		return -1
-	)
-	
 	for iFaces = 1 to l_nFaces do
 	(
-		format "FACE: %\n" iFaces
 		local IdxsFace=getFace Obj iFaces
 		local Coord1=getVert Obj IdxsFace.x
 		local Coord3=getVert Obj IdxsFace.y
@@ -46,6 +39,8 @@ fn GetAABB Obj =
 	)
 	
 	format "Points Min % and Max % and num faces %\n" l_minPoint l_maxPoint l_nFaces
+	
+	return #(l_minPoint, l_maxPoint)
 )
 
 fn GetMin a b =
@@ -71,5 +66,3 @@ fn GetMax a b =
 		return a
 	)
 )
-
-GetAABB $

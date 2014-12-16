@@ -114,7 +114,7 @@ void CLogRender::SetVisible (bool flag)
 
 void CLogRender::ToggleVisibility()
 {
-	SetVisible(!m_bIsVisible);
+    SetVisible(!m_bIsVisible);
 }
 
 void CLogRender::Render(CColor color)
@@ -352,10 +352,10 @@ void CLogRender::ComputeBeginAndEnd ( const std::vector<SLog>& vecLogs, uint32& 
    {
        if(m_uIsInLastLog)
        {
-		      //MODIFICACIO....
-	       if(sizeLogs < m_uLinesPerPage)
-			     m_uLinesPerPage = sizeLogs;
-		      /************************/
+              //MODIFICACIO....
+           if(sizeLogs < m_uLinesPerPage)
+                 m_uLinesPerPage = sizeLogs;
+              /************************/
            m_uCurrentBeginIndex = sizeLogs -m_uLinesPerPage;
            m_uCurrentEndIndex = sizeLogs -1;
        }
