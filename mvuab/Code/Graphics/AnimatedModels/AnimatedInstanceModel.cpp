@@ -61,19 +61,19 @@ CAnimatedInstanceModel::ClearCycle(int Id, float DelayOut)
 bool
 CAnimatedInstanceModel::IsCycleAnimationActive(int Id) const
 {
-
+	return false;
 }
 
 bool
 CAnimatedInstanceModel::IsActionAnimationActive(int Id) const
 {
-
+	return false;
 }
 
 bool
 CAnimatedInstanceModel::LoadVertexBuffer(CGraphicsManager *RM)
 {
-
+	return false;
 }
 
 void

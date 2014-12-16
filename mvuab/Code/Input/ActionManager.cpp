@@ -9,8 +9,13 @@ CActionManager::CActionManager()
 
 CActionManager::~CActionManager()
 {
+    Destroy();
 }
 
+void CActionManager::Destroy()
+{
+    m_mActions.clear();
+}
 void CActionManager::Init( const std::string &xmlFile, CInputManager *a_pInputManager )
 {
 	m_pInputManager = a_pInputManager;
@@ -26,27 +31,101 @@ bool CActionManager::DoAction(const std::string &action)
 
 bool CActionManager::DoAction(const std::string &action, float32 &amount)
 {
-	std::map<std::string, std::vector<S_INPUT_ACTION>>::iterator it1 = m_mActions.find(action);
+    MapActions::iterator it1 = m_mActions.find(action);
 	if(it1 == m_mActions.end())
 		return(false);
 
-	std::vector<S_INPUT_ACTION> vector = m_mActions[action];
-	std::vector<S_INPUT_ACTION>::iterator itb = vector.begin(), ite = vector.end();
+	VecInputs vector = m_mActions[action];
+	VecInputs::iterator itb = vector.begin(), ite = vector.end();
 
-	bool doIt = false;
-	for(; itb != ite; ++itb)
-	{
-		S_INPUT_ACTION current_action = *itb;
+	bool doIt = true;
 
-		if(current_action.m_EventType == EVENT_DOWN)
-			doIt = doIt || m_pInputManager->IsDown(current_action.m_DeviceType, current_action.m_Code);
-		if(current_action.m_EventType == EVENT_DOWN_UP)
-			doIt = doIt || m_pInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
-		if(current_action.m_EventType == EVENT_UP_DOWN)
-			doIt = doIt || m_pInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
-	}
 
-	return(doIt);
+    for(; itb != ite; ++itb)
+    {
+	    S_INPUT_ACTION current_action = *itb;
+	    if ( current_action.m_AxisType != AXIS_NOTHING)
+        {
+            switch(current_action.m_AxisType)
+		    {
+			    case AXIS_MOUSE_X:
+                    {
+					    Vect3i deltas = m_pInputManager->GetMouseDelta();
+					    amount = (float)deltas.x * current_action.m_fDelta;
+                    }
+				    break;
+			    case AXIS_MOUSE_Y:
+                    {
+					    Vect3i deltas = m_pInputManager->GetMouseDelta();
+					    amount = (float)deltas.y * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_MOUSE_Z:
+                    {
+					    Vect3i deltas = m_pInputManager->GetMouseDelta();
+					    amount = (float)deltas.z * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_LEFT_THUMB_X:
+                    {
+					    float x,y;
+					    m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
+					    amount = x * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_LEFT_THUMB_Y:
+                    {
+					    float x,y;
+					    m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
+					    amount = y * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_RIGHT_THUMB_X:
+                    {
+					    float x,y;
+					    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
+					    amount = x * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_RIGHT_THUMB_Y:
+                    {
+					    float x,y;
+					    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
+					    amount = y * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_DELTA_TRIGGER_RIGHT:
+                    {
+					    float right, left;
+					    m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
+					    amount = right * current_action.m_fDelta;
+				    }
+				    break;
+			    case AXIS_DELTA_TRIGGER_LEFT:
+                    {
+				        float right, left;
+					    m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
+					    amount = left * current_action.m_fDelta;
+				    }
+				    break;        
+		    }//END switch(current_action.m_AxisType)
+            if( amount == 0.f)       
+            {
+                    doIt = false;
+            }
+	    }
+        
+	    if(current_action.m_EventType == EVENT_DOWN)
+		    doIt = doIt && m_pInputManager->IsDown(current_action.m_DeviceType, current_action.m_Code);
+	    else if(current_action.m_EventType == EVENT_DOWN_UP)
+		    doIt = doIt && m_pInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
+	    else if(current_action.m_EventType == EVENT_UP_DOWN)
+		    doIt = doIt && m_pInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
+        else 
+            doIt = false;
+    }
+
+    return(doIt);
 }
 
 bool CActionManager::LoadXML()
@@ -60,7 +139,7 @@ bool CActionManager::LoadXML()
 		exit(EXIT_FAILURE);
 	}
 
-	CXMLTreeNode  actions_TreeNode =l_File["Actions"];
+	CXMLTreeNode  actions_TreeNode = l_File["Actions"];
 	if(actions_TreeNode.Exists())
 	{
 		int count = actions_TreeNode.GetNumChildren();
@@ -73,6 +152,7 @@ bool CActionManager::LoadXML()
 				CXMLTreeNode  action_TreeNode = actions_TreeNode(i);
 				if(action_TreeNode.Exists())
 				{
+                    std::vector<S_INPUT_ACTION> vector;
 					int iSubActions = action_TreeNode.GetNumChildren();
 					for( int j = 0; j < iSubActions; ++j )
 					{
@@ -80,29 +160,103 @@ bool CActionManager::LoadXML()
 						if( TagName == "input" )
 						{
 							S_INPUT_ACTION new_action;
-							std::string deviceTypeStr(action_TreeNode(j).GetPszProperty("deviceType", "") );
-							std::string EventTypeStr(action_TreeNode(j).GetPszProperty("EventType", "") );
-							std::string CodeStr(action_TreeNode(j).GetPszProperty("Code", "") );
+							std::string deviceTypeStr(action_TreeNode(j).GetPszProperty("deviceType", "IDV_NOTHING") );
+							std::string axisTypeStr(action_TreeNode(j).GetPszProperty("AxisType", "AXIS_NOTHING") );
+							std::string EventTypeStr(action_TreeNode(j).GetPszProperty("EventType", "EVENT_NOTHING") );
+							std::string CodeStr(action_TreeNode(j).GetPszProperty("Code", "MOUSE_BUTTON_NOTHING") );
+							float Delta(action_TreeNode(j).Getfloat32Property("Delta", 1.f, false));
 
 							new_action.m_Code = strKeyToCode(CodeStr);
 							new_action.m_DeviceType = strDeviceToCode(deviceTypeStr);
 							new_action.m_EventType = strEventToCode(EventTypeStr);
+							new_action.m_AxisType = strAxisToCode(axisTypeStr);
+							new_action.m_fDelta = Delta;
+                            new_action.m_sCode = CodeStr;
+                            new_action.m_sDeviceType = deviceTypeStr;
+                            new_action.m_sEventType = EventTypeStr;
+                            new_action.m_sAxisType = axisTypeStr;
 
-							std::vector<S_INPUT_ACTION> vector;
+							
 							if( m_mActions.find(TagName) != m_mActions.end())
 							{
 								vector = m_mActions[TagName];
 							}
 							vector.push_back(new_action);
 
-							m_mActions[StrActionName] = vector;
 						}
 					}
+                    m_mActions[StrActionName] = vector;
 				}
 			}
 		}
 	}
 	return true;
+}
+
+bool CActionManager::SaveXML(const std::string &xmlFile)
+{
+        bool isOk = true;
+        CXMLTreeNode NewXML;
+        
+        if (NewXML.StartNewFile(xmlFile.c_str()))
+        {
+                // We fill the doc here
+                NewXML.StartElement("Actions");
+                MapActions::const_iterator it = m_mActions.begin();
+                MapActions::const_iterator itEnd = m_mActions.end();
+                for ( ; it!= itEnd; ++it)
+                {
+                        NewXML.StartElement("action");
+                        NewXML.WritePszProperty("name", it->first.c_str());
+                        VecInputs vInputs = it->second;
+                        VecInputs::const_iterator aux_it = vInputs.begin();
+                        VecInputs::const_iterator aux_itEnd = vInputs.end();
+                        for(; aux_it != aux_itEnd; ++aux_it)
+                        {
+                                //<input deviceType="IDV_KEYBOARD"      EventType="EVENT_DOWN_UP"               Code="KEY_F4"/>
+                                //<input deviceType="IDV_MOUSE"                 AxisType="AXIS_MOUSE_X"                 Delta="1.f"/>
+                                NewXML.StartElement("input");
+                                NewXML.WritePszProperty("deviceType", aux_it->m_sDeviceType.c_str());
+
+                                if (aux_it->m_sEventType != "EVENT_NOTHING")
+                                {
+                                        NewXML.WritePszProperty("EventType", aux_it->m_sEventType.c_str());
+                                }
+
+                                if (aux_it->m_sAxisType != "AXIS_NOTHING")
+                                {
+                                        NewXML.WritePszProperty("AxisType", aux_it->m_sAxisType.c_str());
+                                        NewXML.Writefloat32Property("Delta", aux_it->m_fDelta);
+                                }
+
+                                if (aux_it->m_sCode != "MOUSE_BUTTON_NOTHING")
+                                {
+                                        NewXML.WritePszProperty("Code", aux_it->m_sCode.c_str());
+                                }
+                                
+                                NewXML.EndElement(); //("input")
+                        }
+                        NewXML.EndElement(); //("action");
+                }
+                NewXML.EndElement(); //("Actions");
+                
+                NewXML.EndNewFile();
+        }
+        else
+        {
+                bool isOk = false;
+        }
+        return isOk;
+}
+
+void CActionManager::SetAction (const std::string& action, VecInputs &a_vInputs)
+{
+        MapActions::const_iterator it = m_mActions.find(action);
+        if (it != m_mActions.end())
+        {
+                m_mActions.erase(it);
+        }
+        m_mActions[action] = a_vInputs;
 }
 
 INPUT_DEVICE_TYPE CActionManager::strDeviceToCode(const std::string &strAction)
@@ -243,6 +397,21 @@ unsigned int CActionManager::strKeyToCode(const std::string &strKey)
 	else if("KEY_SCROLL" == strKey) return(KEY_SCROLL);  
 
 	return(0);
+}
+
+INPUT_AXIS_TYPE	CActionManager::strAxisToCode (const std::string &strAxis)
+{
+	if("AXIS_MOUSE_X" == strAxis) return(AXIS_MOUSE_X);
+	else if("AXIS_MOUSE_Y" == strAxis) return(AXIS_MOUSE_Y);
+	else if("AXIS_MOUSE_Z" == strAxis) return(AXIS_MOUSE_Z);
+	else if("AXIS_LEFT_THUMB_X" == strAxis) return(AXIS_LEFT_THUMB_X);
+	else if("AXIS_LEFT_THUMB_Y" == strAxis) return(AXIS_LEFT_THUMB_Y);
+	else if("AXIS_RIGHT_THUMB_X" == strAxis) return(AXIS_RIGHT_THUMB_X);
+	else if("AXIS_RIGHT_THUMB_Y" == strAxis) return(AXIS_RIGHT_THUMB_Y);
+	else if("AXIS_DELTA_TRIGGER_RIGHT" == strAxis) return(AXIS_DELTA_TRIGGER_RIGHT);
+	else if("AXIS_DELTA_TRIGGER_LEFT"  == strAxis) return(AXIS_DELTA_TRIGGER_LEFT);
+	return(AXIS_NOTHING);
+
 }
 
 bool CActionManager::Reload()

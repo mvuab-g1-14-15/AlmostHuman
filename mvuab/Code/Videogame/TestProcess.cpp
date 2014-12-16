@@ -62,12 +62,12 @@ void CTestProcess::Update(float32 deltaTime)
 		if( pProcessCamera ) m_pCamera = m_pTPSCamera;
 		else m_pCamera = m_pFPSCamera;
 	}
-
-    Vect3i delta = pInputManager->GetMouseDelta();
-	if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
-	{
-		m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
-	}
+    float x = 0;
+    float y = 0;
+    if ( pActionManager->DoAction("MouseLeftX", x) && pActionManager->DoAction("MouseLeftY", y) )
+    {
+        m_pCamera->AddYawPitch(x, y);
+    }
 
 	if( pActionManager->DoAction("ReloadStaticMesh") )
 	{
@@ -79,6 +79,32 @@ void CTestProcess::Update(float32 deltaTime)
 		CCore::GetSingletonPtr()->GetpActionManager()->Reload();
 	}
 
+    if( pActionManager->DoAction("SaveActionToInput") )
+    {
+        CCore::GetSingletonPtr()->GetpActionManager()->SaveXML("Data/Prueba.xml");
+    }
+
+    if( pActionManager->DoAction("SetActionToInput") )
+    {
+        std::vector<S_INPUT_ACTION> vecInputAction;
+        S_INPUT_ACTION sInputAction;
+        sInputAction.m_DeviceType = IDV_KEYBOARD;
+        sInputAction.m_EventType = EVENT_DOWN_UP;
+        sInputAction.m_Code = KEY_H;
+        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
+        sInputAction.m_sEventType = "EVENT_DOWN_UP";
+        sInputAction.m_sCode = "KEY_H";
+        vecInputAction.push_back(sInputAction);
+        sInputAction.m_DeviceType = IDV_KEYBOARD;
+        sInputAction.m_EventType = EVENT_DOWN;
+        sInputAction.m_Code = KEY_LCTRL;
+        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
+        sInputAction.m_sEventType = "EVENT_DOWN";
+        sInputAction.m_sCode = "KEY_LCTRL";
+        vecInputAction.push_back(sInputAction);
+        CCore::GetSingletonPtr()->GetpActionManager()->SetAction("SaveActionToInput", vecInputAction);
+        vecInputAction.clear();
+    }
 	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
 	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
 }
