@@ -157,3 +157,13 @@ void CAnimatedCoreModel::Destroy()
     m_AnimationsMap.clear();
     CHECKED_DELETE(m_CalCoreModel);
 }
+
+void CAnimatedCoreModel::ActivateTextures()
+{
+	TTextureVector::iterator itb = m_TextureVector.begin(),
+							 ite = m_TextureVector.end();
+	for( size_t i = 0; itb != ite ; ++itb, ++i )
+	{
+		(*itb)->Activate(i);
+	}
+}

@@ -3,6 +3,7 @@
 #include "AnimatedCoreModel.h"
 #include "cal3d\cal3d.h"
 #include "RenderableVertex\VertexTypes.h"
+#include "Texture\TextureManager.h"
 
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string &Name, const std::string &CoreName ) :
     m_CalModel(0),
@@ -27,6 +28,7 @@ CAnimatedInstanceModel::~CAnimatedInstanceModel()
 void
 CAnimatedInstanceModel::Render()
 {
+	CGraphicsManager::GetSingleton().SetTransform(GetTransform());
     RenderModelBySoftware();
 }
 
@@ -102,7 +104,10 @@ CAnimatedInstanceModel::RenderModelBySoftware()
 
 
           l_pD3DDevice->SetRenderState(D3DRS_CULLMODE,D3DCULL_NONE);
-          //l_pD3DDevice->SetTexture(0,(LPDIRECT3DTEXTURE9)l_pCalRenderer->getMapUserData(0));
+
+		  // Activate textures
+		  //m_AnimatedCoreModel->ActivateTextures();
+		  m_Textures[meshId]->Activate(0);
           
           l_pD3DDevice->DrawIndexedPrimitive(
               D3DPT_TRIANGLELIST,
@@ -150,17 +155,20 @@ CAnimatedInstanceModel::Initialize()
   }
   
   // set the material set of the whole model
-  m_CalModel->setMaterialSet(0);
+  //m_CalModel->setMaterialSet(0);
 
   // set initial animation state
-  float32 l_Weight(1.0f), l_DelayIn(0.0f);
+  /*float32 l_Weight(1.0f), l_DelayIn(0.0f);
   if(l_CalCoreModel->getCoreAnimationCount() > 1)
   {
     l_Weight = 0.0f;
     l_DelayIn = m_BlendTime;
-  }
+  }*/
 
-  BlendCycle(m_CurrentAnimationId, l_Weight, l_DelayIn);
+  BlendCycle(0, 1.0f, 0.0f);
+
+
+  m_CalModel->update(0.0f);
 
   // Load Vertex and Index buffers
   CGraphicsManager * GM = CGraphicsManager::GetSingletonPtr();
@@ -189,6 +197,7 @@ CAnimatedInstanceModel::Initialize()
       D3DPOOL_DEFAULT ,&m_pIB, NULL)))
       return;
   }
+  LoadTextures();
 }
 
 void
@@ -249,5 +258,9 @@ CAnimatedInstanceModel::LoadVertexBuffer(CGraphicsManager *RM)
 void
 CAnimatedInstanceModel::LoadTextures()
 {
-
+	for(size_t i=0;i<m_AnimatedCoreModel->GetNumTextures();++i)
+	{
+		CTexture *l_Texture=CTextureManager::GetSingleton().GetTexture(m_AnimatedCoreModel->GetTextureName(i));
+		m_Textures.push_back(l_Texture);
+	}
 }

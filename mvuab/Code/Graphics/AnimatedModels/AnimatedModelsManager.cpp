@@ -6,7 +6,7 @@
 
 CAnimatedModelsManager::CAnimatedModelsManager()
 {
-
+	CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
 
 CAnimatedModelsManager::~CAnimatedModelsManager()

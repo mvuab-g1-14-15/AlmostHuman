@@ -95,3 +95,9 @@ void CRenderableObjectsManager::Render()
         m_NumDraws += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumDraws();
     }
 }
+
+void CRenderableObjectsManager::Update(float ElapsedTime)
+{
+    for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+        m_ResourcesVector[i]->Update(ElapsedTime);
+}

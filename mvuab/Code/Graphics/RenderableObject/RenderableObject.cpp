@@ -8,3 +8,4 @@ CRenderableObject::CRenderableObject()
 CRenderableObject::~CRenderableObject()
 {
 }
+

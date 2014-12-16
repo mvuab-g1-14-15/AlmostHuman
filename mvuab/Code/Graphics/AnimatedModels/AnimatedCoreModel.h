@@ -39,6 +39,7 @@ public:
     CalCoreModel *GetCoreModel( );
     const std::string & GetTextureName( size_t id );
     size_t GetNumTextures( ) const;
+	void ActivateTextures();
     bool Load(const std::string &Path);
     int GetAnimationId(const std::string &AnimationName) const;
 };

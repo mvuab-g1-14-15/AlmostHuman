@@ -31,6 +31,8 @@ public:
     void        SetPitch        ( float32 pitch )                    {m_fPitch = pitch;}
     void        SetRoll            ( float32 roll )                    {m_fRoll = roll;}
 
+	Mat44f GetTransform();
+
 protected:
     Vect3f    m_Position;
     float32        m_fYaw;

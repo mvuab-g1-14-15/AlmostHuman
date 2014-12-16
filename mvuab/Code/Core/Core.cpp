@@ -11,6 +11,7 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
 
 CCore::CCore() :
     m_ConfigPath(""),
@@ -72,6 +73,7 @@ void CCore::Update(float32 deltaTime)
     m_pInputManager->Update();
     m_pActionManager->Update(deltaTime);
     m_pDebugWindowManager->Update(deltaTime);
+	m_pRenderableObjectsManager->Update(deltaTime);
 }
 
 void CCore::Render()

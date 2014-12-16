@@ -15,6 +15,7 @@ private:
     LPDIRECT3DVERTEXBUFFER9 m_pVB;
     int m_VBCursor;
     LPDIRECT3DINDEXBUFFER9  m_pIB;
+	std::vector<CTexture *> m_Textures;
     int m_IBCursor;
     uint32 m_NumVtxs;
     uint32 m_NumFaces;
