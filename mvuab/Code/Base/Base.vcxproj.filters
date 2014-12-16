@@ -67,6 +67,9 @@
     <ClCompile Include="Language\LanguageManager.cpp">
       <Filter>Language</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -148,6 +151,9 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Math\AABB.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>

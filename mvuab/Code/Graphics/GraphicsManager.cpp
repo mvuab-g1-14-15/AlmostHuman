@@ -142,17 +142,8 @@ void CGraphicsManager::SetupMatrices( CCamera* ap_Camera )
     }
     else
     {
-        Vect3f eye = ap_Camera->GetEyePosition();
-        D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z);
-        Vect3f lookat = ap_Camera->GetLookAt();
-        D3DXVECTOR3 l_LookAt(lookat.x, lookat.y, lookat.z);
-        Vect3f vup = ap_Camera->GetVecUp();
-        D3DXVECTOR3 l_VUP(vup.x, vup.y, vup.z);
-        //Setup Matrix view
-        D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
-
-        //Setup Matrix projection
-        D3DXMatrixPerspectiveFovLH(    &m_matProject, ap_Camera->GetFOV(), ap_Camera->GetAspectRatio(), ap_Camera->GetZNear(), ap_Camera->GetZFar() );
+        m_matView = ap_Camera->GetMatrixView();
+        m_matProject = ap_Camera->GetMatrixProj();
     }
 
     m_Frustum.Update( m_matView * m_matProject );
@@ -544,127 +535,7 @@ void CGraphicsManager::SetTransform    (Mat44f& m)
 
 void CGraphicsManager::DrawCamera (CCamera* camera)
 {
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Obtain the data from the camera
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Vect3f vDirection = camera->GetDirection();
-    Vect3f vUp          = camera->GetVecUp();
-    Vect3f vSide      = camera->GetVecSide();
-    Vect3f pntEyePos  = camera->GetEyePosition();
-    Vect3f pntLookAt  = camera->GetLookAt();
-    float32 yaw          = camera->GetYaw();
-    float32 pitch     = camera->GetPitch();
-    float32 fov       = camera->GetFOV();
-    float32 aspect    = camera->GetAspectRatio();
-    float32 d         = 2.0f;
-    float32 zNear     = camera->GetZNear();
-    float32 zFar      = camera->GetZFar();
-
-    m_pD3DDevice->SetTexture(0,NULL);
-    m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Draw the vectors of the camera
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Vect3f pntEndDirection = pntEyePos + vDirection * 3.0f;
-    Vect3f pntEndUp           = pntEyePos + vUp * 3.0f;
-    Vect3f pntEndSide       = pntEyePos + vSide * 3.0f;
-
-    DWORD direction_color_aux = colRED.GetUint32Argb();
-    DWORD side_color_aux = colGREEN.GetUint32Argb();
-    DWORD up_color_aux = colBLACK.GetUint32Argb();
-
-    CUSTOMVERTEX v[6] =
-    {
-        //EJE X
-        {pntEyePos.x, pntEyePos.y, pntEyePos.z,direction_color_aux},
-        {pntEndDirection.x, pntEndDirection.y, pntEndDirection.z, direction_color_aux},
-        //EJE Y
-        {pntEyePos.x, pntEyePos.y, pntEyePos.z, side_color_aux},
-        {pntEndUp.x, pntEndUp.y, pntEndUp.z, side_color_aux},
-        //EJE Z
-        {pntEyePos.x, pntEyePos.y, pntEyePos.z, up_color_aux},
-        {pntEndSide.x, pntEndSide.y, pntEndSide.z, up_color_aux},
-    };
-    m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(CUSTOMVERTEX));
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Paint a cube to show where the camera is looking at
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    D3DXMATRIX matrix;
-    D3DXMATRIX translationLookAt;
-    D3DXMatrixTranslation( &translationLookAt, pntLookAt.x ,pntLookAt.y ,pntLookAt.z );
-    m_pD3DDevice->SetTransform( D3DTS_WORLD, &translationLookAt );
-    DrawSphere(0.5f,colGREEN);
-    D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-    m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Draw the frustum of the camera
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    D3DXMATRIX translationEyePos;
-    D3DXMATRIX rotation;
-    D3DXMATRIX rotation2;
-    D3DXMATRIX rotation3;
-    D3DXMatrixTranslation( &translationEyePos, pntEyePos.x ,pntEyePos.y ,pntEyePos.z );
-    D3DXMatrixRotationAxis( &rotation, new D3DXVECTOR3( vUp.x, vUp.y, vUp.z),  yaw );
-    D3DXMatrixRotationAxis( &rotation2, new D3DXVECTOR3( vSide.x, vSide.y, vSide.z),  pitch );
-    D3DXMatrixRotationAxis( &rotation3, new D3DXVECTOR3( vSide.x, vSide.y, vSide.z),  -ePIf );
-
-    matrix = rotation3 * rotation2 * rotation * translationEyePos;
-
-    // Cambiar el sistema de coordenadas
-    m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
-    
-    CUSTOMVERTEX2 pts[9];
-    float32 h_near = zNear * tan ( fov * 0.5f );
-    float32 k_near = h_near * aspect;
-
-    float32 h_far = d * tan ( fov * 0.5f );
-    float32 k_far = h_far * aspect;
-
-    pts[ 0 ].pos = D3DXVECTOR3( 0, 0,0 );
-    pts[ 0 ].color = 0xffff0000;
-
-    pts[ 1 ].pos = D3DXVECTOR3( d, h_far, k_far );
-    pts[ 1 ].color = 0xffff0000;
-    pts[ 2 ].pos = D3DXVECTOR3( d, h_far, -k_far );
-    pts[ 2 ].color = 0xffff0000;
-    pts[ 3 ].pos = D3DXVECTOR3( d,-h_far, -k_far );
-    pts[ 3 ].color = 0xffff0000;
-    pts[ 4 ].pos = D3DXVECTOR3( d, -h_far, k_far );
-    pts[ 4 ].color = 0xffff0000;
-
-    pts[ 5 ].pos = D3DXVECTOR3( zNear, h_near, k_near );
-    pts[ 5 ].color = 0xffff0000;
-    pts[ 6 ].pos = D3DXVECTOR3( zNear, h_near, -k_near );
-    pts[ 6 ].color = 0xffff0000;
-    pts[ 7 ].pos = D3DXVECTOR3( zNear,-h_near, -k_near );
-    pts[ 7 ].color = 0xffff0000;
-    pts[ 8 ].pos = D3DXVECTOR3( zNear, -h_near, k_near );
-    pts[ 8 ].color = 0xffff0000;
-
-    // Decimos el tipo de vertice que vamos a proporcionar...
-    m_pD3DDevice->SetFVF( CUSTOMVERTEX2::getFlags() );
-
-    // Desactivar la textura
-    m_pD3DDevice->SetTexture (0, NULL);
-
-    m_pD3DDevice->DrawPrimitiveUP( D3DPT_POINTLIST, 9, pts, sizeof( CUSTOMVERTEX2 ) );
-    static short int indexes[] =  {
-        0,1, 0,2, 0,3, 0,4,
-        1,2, 2,3, 3,4, 4,1,
-        5,6, 6,7, 7,8, 8,5
-    };
-    // Draw the frustum
-    m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_LINELIST, 0, 9, 12, indexes, D3DFMT_INDEX16, pts, sizeof( CUSTOMVERTEX2 ) );
-
-    // Draw the cube of the camera
-    DrawCube(0.3f,colRED);
-
-    // Restet all the transformations
-    D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-    m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+    camera->RenderCamera(m_pD3DDevice);
 }
 
 //La posicion y el (w,h) esta en pixeles

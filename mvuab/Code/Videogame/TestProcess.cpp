@@ -3,8 +3,6 @@
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
-#include "Cameras\FPSCamera.h"
-#include "Cameras\TPSCamera.h"
 #include "Object3D.h"
 #include "Math\Matrix44.h"
 #include "Logger\Logger.h"
@@ -23,51 +21,36 @@
 #include "Texture\Texture.h"
 
 #include "StaticMeshes\StaticMesh.h"
+#include "Cameras\CameraFPShooter.h"
 
 #include <d3dx9.h>
 
 CTestProcess::CTestProcess() : CProcess(), 
     m_Speed( 0.1f ),
-    m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,5.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
-    m_pTPSCamera( new CTPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
+    m_pFPSCamera( new CCameraFPShooter()),
     m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
+    m_pFPSCamera->SetPos( D3DXVECTOR3(15.0f,5.0f,0.0f) );
+    m_pFPSCamera->SetYaw( ePIf );
+    m_pFPSCamera->SetPitch( -0.5f );
 }
 
 CTestProcess::~CTestProcess()
 {
     CLogger::GetSingletonPtr()->SaveLogsInFile();
     CHECKED_DELETE(m_pFPSCamera);
-    CHECKED_DELETE(m_pTPSCamera);
 }
 
 void CTestProcess::Update(float32 deltaTime)
 {
     m_pCamera->Update(deltaTime);
-    m_FPS = 1.0f/deltaTime;
-
-    CInputManager* pInputManager = CInputManager::GetSingletonPtr();
 
     m_Amount +=  0.01f;
     m_Angle  += deltaTime * 0.05f;
     m_AngleMoon += deltaTime * 0.05f;
     
-    Vect3f CameraDirection( m_pCamera->GetDirection() );
-
+ 
     CActionManager* pActionManager = CActionManager::GetSingletonPtr();
-
-    if( pActionManager->DoAction("CommutationCamera") )
-    {
-        CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
-        if( pProcessCamera ) m_pCamera = m_pTPSCamera;
-        else m_pCamera = m_pFPSCamera;
-    }
-    float x = 0;
-    float y = 0;
-    if ( pActionManager->DoAction("MouseLeftX", x) && pActionManager->DoAction("MouseLeftY", y) )
-    {
-        m_pCamera->AddYawPitch(x, y);
-    }
 
     if( pActionManager->DoAction("ReloadStaticMesh") )
     {

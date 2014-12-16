@@ -15,10 +15,9 @@
     <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
-    <ClCompile Include="Cameras\FPSCamera.cpp" />
-    <ClCompile Include="Cameras\TPSCamera.cpp" />
+    <ClCompile Include="Cameras\CameraFPShooter.cpp" />
+    <ClCompile Include="Cameras\Frustum.cpp" />
     <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderableObject\RenderableObject.cpp" />
@@ -36,10 +35,9 @@
     <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
     <ClInclude Include="Cameras\Camera.h" />
-    <ClInclude Include="Cameras\FPSCamera.h" />
-    <ClInclude Include="Cameras\TPSCamera.h" />
+    <ClInclude Include="Cameras\CameraFPShooter.h" />
+    <ClInclude Include="Cameras\Frustum.h" />
     <ClInclude Include="Fonts\FontManager.h" />
-    <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
@@ -54,6 +52,9 @@
     <ClInclude Include="Texture\GUITexture.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="Texture\TextureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{399F3B78-06DC-41CE-A9C6-612A5AAC1C97}</ProjectGuid>

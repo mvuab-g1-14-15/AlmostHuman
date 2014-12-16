@@ -9,7 +9,7 @@
 #include "Utils\Defines.h"
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
-#include "Frustum.h"
+#include "Cameras\Frustum.h"
 
 class CCamera;
 

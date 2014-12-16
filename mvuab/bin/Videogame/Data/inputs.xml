@@ -67,13 +67,18 @@
    	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
     </action>
 	
-	<action name="MouseLeftX">
+	<action name="MoveYaw">
 	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
     </action>
 	
-	<action name="MouseLeftY">
+	<action name="MovePitch">
    	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
     </action>
+	
+	<action name="Run">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LSHIFT"/>
+    </action>
+
  
     <action name="Logger">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>

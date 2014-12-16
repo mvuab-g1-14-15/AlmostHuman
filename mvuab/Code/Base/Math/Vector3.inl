@@ -857,7 +857,7 @@ inline Vector3<T> VectorMaxComponents (const Vector3<T>& uno, const Vector3<T>& 
 /// Función externa: Devuelve el producto escalar entre this y other
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
-inline Vector3<T> Vector3<T>::DotProduct(const Vector3<T>& other) const
+inline T Vector3<T>::DotProduct(const Vector3<T>& other) const
 {
     return x*other.x + y*other.y + z*other.z;
 }

@@ -140,7 +140,7 @@ public:
   inline Vector3<T>  GetLerp (const Vector3<T>& otro, const T t) const;
 
   // Get the dot and cross product with another vector.
-  inline Vector3<T> DotProduct(const Vector3<T>& other) const;
+  inline T DotProduct(const Vector3<T>& other) const;
   inline Vector3<T> CrossProduct(const Vector3<T>& other) const;
 };
 

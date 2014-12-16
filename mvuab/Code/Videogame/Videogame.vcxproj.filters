@@ -26,7 +26,6 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="VideogameProcess.cpp" />
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -45,7 +44,6 @@
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="VideogameProcess.h" />
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
 </Project>

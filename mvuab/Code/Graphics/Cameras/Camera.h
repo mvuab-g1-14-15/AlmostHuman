@@ -1,63 +1,64 @@
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
-#pragma once
+#ifndef INC_CAMERA_H_
+#define INC_CAMERA_H_
 
-#include "Utils\Defines.h"
-#include "Math\Vector3.h"
-#include "Math\MathTypes.h"
-#include <string>
-
-static const float32 PITCH_LIM_UP = (-ehalfPIf + 0.8f);
-static const float32 PITCH_LIM_DOWN = (ehalfPIf - 0.35f);
-
-class CObject3D;
+#include <d3dx9.h>
+#include "Utils\Types.h"
 
 class CCamera
 {
+
 public:
 
-    CCamera( Vect3f aEyePosition, Vect3f aLookAt, float32 aZNear, float32 aZFar, float32 aFOV, float32 aAspectRatio, std::string aType );
-    CCamera( Vect3f aEyePosition, Vect3f aLookAt, CObject3D* apAttachedObject, std::string aType );
-    virtual ~CCamera();
+    CCamera(){};
+    virtual ~CCamera(){};
+
+    // Render (para debug) de la posicion y la orientacion de la camara
+    void    RenderCamera    ( LPDIRECT3DDEVICE9 device);
+    virtual void    Update( float32 deltaTime );
+
+    //--- GET FUNCTIONS ---
+    virtual D3DXVECTOR3 GetDirection( void ) const = 0;
+    virtual D3DXVECTOR3 GetLookAt( void ) const = 0;
+    virtual D3DXVECTOR3 GetEye( void ) const = 0;
+    virtual D3DXVECTOR3 GetVecUp( void ) const = 0;
+    virtual D3DXVECTOR3 GetPos( void ) const = 0;
+    float32 GetYaw( void ) const { return m_yaw; }
+    float32 GetPitch( void ) const { return m_pitch; }
+
+    D3DXMATRIX GetMatrixView( void );
+    D3DXMATRIX  GetMatrixProj( void );
     
-    Vect3f GetDirection() const;
-    Vect3f GetVecUp() const;
-    Vect3f GetVecSide() const;
-    void AddYawPitch( float32 dx, float32 dy );
-    void Update(float32 deltaTime);
+    void    SetYaw( const float32 &new_yaw ){ m_yaw  = new_yaw; }
+    void    SetPitch( const float32 &new_pitch ){ m_pitch  = new_pitch; }
+    void    SetPos( const D3DXVECTOR3 &new_pos ){ m_pos = new_pos; }
+    void    SetZn( const float32 &amount ){ m_zn = amount; }
     
-    enum CameraMovementDirecction{ UP = 0, DOWN, FORWARD, BACKWARD, LEFT, RIGHT };
-    void Move( CameraMovementDirecction aMovementDir, float32 speed );
-    
-    // Getters and setters
-    GET_SET(float32, FOV);
-    GET_SET(float32, AspectRatio);
-    GET_SET(float32, ZNear);
-    GET_SET(float32, ZFar);
-    GET_SET(float32, Yaw);
-    GET_SET(float32, Pitch);
-    GET_SET(float32, Roll);
-    GET_SET_REF(Vect3f, EyePosition);
-    GET_SET_REF(Vect3f, LookAt);
-    GET_SET_REF(std::string, TypeStr);
-    GET_SET_PTR(CObject3D, AttachedObject);
+    void    AddPos( const D3DXVECTOR3 &position ) { m_pos += position; }
+    void    AddYaw( const float32 &radian ){ m_yaw += D3DXToRadian(radian); }
+    void    AddPitch( const float32 &radian ){ m_pitch += D3DXToRadian(radian); }
+    void    AddZf( const float32 &amount ){ m_zf += amount; }
+    void    AddFov( const float32 &delta_fov ){ m_fov_radians += delta_fov; }
+    void    AddViewD( const float32 &amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
+
+    //--- AUXILIARY FUNCTIONS ---
+    D3DXVECTOR3            Yaw2vector        ( const float32 &yaw_angle ) const;
+    D3DXVECTOR3            YawPitch2vector ( const float32 &yaw_angle, const float32 &pitch_angle ) const;        
+
 
 protected:
-    float32             m_FOV;
-    float32             m_AspectRatio;
-    float32             m_ZNear;
-    float32             m_ZFar;
-    float32             m_Yaw;
-    float32             m_Pitch;
-    float32             m_Roll;
-    float32             m_Speed;
-    Vect3f              m_EyePosition;
-    Vect3f              m_LookAt;
-    std::string         m_TypeStr;
-    CObject3D*          m_pAttachedObject;
+    
+    D3DXVECTOR3        m_pos;               // posicion de la camara
+    float32            m_yaw;               // angulo yaw de la camara
+    float32            m_pitch;             // angulo pitch de la camara
 
-    virtual void RecalculateCameraData() = 0;
-    void InitYawAndPitch();
+    float32            m_view_d;            // variable de debug utilizada para pintar el objeto de la camara.    
+    float32            m_fov_radians;
+    float32            m_aspect_ratio;
+    float32            m_zn;                // valor del z near (a partir de que vemos)
+    float32            m_zf;                // valor del z far (hasta donde podemos ver)
+    
+    D3DXMATRIXA16    m_view;                // matriz vista
+    D3DXMATRIXA16    m_proj;                // matriz proyeccion
 };
 
-#endif // _CAMERA_H_
+#endif // INC_CAMERA_H_

@@ -94,7 +94,6 @@
     <ClCompile Include="Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="TestProcess.cpp" />
     <ClCompile Include="videogame.cpp" />
-    <ClCompile Include="VideogameProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemies\BossEnemy.h" />
@@ -103,7 +102,6 @@
     <ClInclude Include="Enemies\EnemyManager.h" />
     <ClInclude Include="Enemies\PatrolEnemy.h" />
     <ClInclude Include="TestProcess.h" />
-    <ClInclude Include="VideogameProcess.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

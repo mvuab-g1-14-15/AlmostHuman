@@ -3,14 +3,12 @@
 #include "GraphicsManager.h"
 #include "ActionManager.h"
 #include "InputManager.h"
-#include "Cameras\FPSCamera.h"
-#include "Cameras\TPSCamera.h"
 #include "Object3D.h"
 
 CVideogameProcess::CVideogameProcess() : CProcess(), 
     m_Speed( 0.1f ),
-    m_pFPSCamera( new CFPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) ),
-    m_pTPSCamera( new CTPSCamera( Vect3f(15.0f,0.0f,0.0f), Vect3f(0.0f,0.0f,-0.0f), new CObject3D()) )
+    m_pFPSCamera( 0 ),
+    m_pTPSCamera( 0 )
 {
     
 }

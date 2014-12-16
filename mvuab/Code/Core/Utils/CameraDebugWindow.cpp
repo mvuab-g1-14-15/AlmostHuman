@@ -41,9 +41,9 @@ void CCameraDebugWindow::RenderInfo()
 #endif
 
     uint32 incY = fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y,  l_FontColor, "CAMERA");
-    const Vect3f &l_CameraPosition = pCamera->GetEyePosition();
+    const Vect3f l_CameraPosition( pCamera->GetPos().x, pCamera->GetPos().y, pCamera->GetPos().z );
     incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Position: %d,%d,%d", (uint32)l_CameraPosition.x, (uint32)l_CameraPosition.y, (uint32)l_CameraPosition.z );
-    const Vect3f &l_CameraLookAt = pCamera->GetLookAt();
+    const Vect3f l_CameraLookAt( pCamera->GetLookAt().x, pCamera->GetLookAt().y, pCamera->GetLookAt().z );
     incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Target:   %d,%d,%d",  (uint32)l_CameraLookAt.x, (uint32)l_CameraLookAt.y, (uint32)l_CameraLookAt.z );
-    incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Type:   %s", pCamera->GetTypeStr().c_str());
+    //incY += fm->DrawDefaultText(m_WindowPosition.x, m_WindowPosition.y + incY, l_FontColor, "Type:   %s", pCamera->GetTypeStr().c_str());
 }

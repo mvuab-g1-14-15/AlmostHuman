@@ -15,7 +15,6 @@ private:
     float32             m_AngleMoon;
     Vect2i              m_LastMousePoint;
     CCamera*            m_pFPSCamera;
-    CCamera*            m_pTPSCamera;
     bool                m_PaintAll;
 
 public:
