@@ -17,7 +17,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
-		PathLabel.text="E:\Master\GameEngineUAB\mvuab\bin\Videogame\Data"
 	)
 	on SetPathButton pressed do
 	(
@@ -36,13 +35,23 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		--export Mesh
 		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
+		--Check if exist dir, if not mkdir
+		DoesFolderExist MeshDir
 		
-		for Obj in selection do
+		--poner parametrico
+		if selection.count > 0 then 
 		(
-			filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-			ExportMesh Obj filename
+			for Obj in selection do
+			(
+				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+				ExportMesh Obj filename
+			)
 		)
-		
+		else
+		(
+			format "Empty selection. Select any object \n"
+			return -1
+		)
 	)
 	on CameraButon pressed do
 	(
@@ -55,32 +64,31 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		local rootDir = PathLabel.text --poner parametrico
 		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
-		local MeshDir = PathLabel.text + "\\meshes"
-		local TexturesDir = PathLabel.text + "\\textures"
+		local MeshDir = PathLabel.text + "\\meshes\\"
+		local TexturesDir = PathLabel.text + "\\textures\\"
 		
 		select $*
 
-		--ostream = GetSaveFileStream filenameXML
 		if fileSrcMeshXML != undefined then
 		(
+			DoesFolderExist MeshDir
 			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
-			
-		--selec all objects
+
 		if CopyTexturesCheckBox.checked then
 		(
-			ExportTextureFile selection TexturesDir
+			DoesFolderExist TexturesDir
+			ExportTextureFile geometry TexturesDir
 			format "Textures copied on: % \n" TexturesDir
 		)
 
 		--selec all objects
 		if ExportMeshCheckBox.checked then
 		(
-			--poner parametrico
-			for Obj in selection do
+			for Obj in geometry do
 			(
-				filename = MeshDir +"\\"+  Obj.name + ".mesh"--poner parametrico
+				filename = MeshDir + Obj.name + ".mesh"--poner parametrico
 				ExportMesh Obj filename
 			)
 			
@@ -95,13 +103,17 @@ utility UABUtility "UAB Utility" width:162 height:325
 		local rootDir = PathLabel.text		--poner parametrico
 		local fileSrcRenderableXML = rootDir + "\\renderable_objects.xml"
 		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
-		local MeshDir = PathLabel.text + "\\meshes"
-		local TexturesDir = PathLabel.text + "\\textures"
+		local MeshDir = PathLabel.text + "\\meshes\\"
+		local TexturesDir = PathLabel.text + "\\textures\\"
 		
 		select $*
 		
+		--Check if exist dir, if not mkdir
+		--DoesFolderExist rootDir
+		
 		if fileSrcMeshXML != undefined then
 		(
+			DoesFolderExist MeshDir
 			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
@@ -115,6 +127,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		--selec all objects
 		if CopyTexturesCheckBox.checked then
 		(
+			DoesFolderExist TexturesDir
 			ExportTextureFile selection TexturesDir
 			format "Textures copied on: % \n" TexturesDir
 		)
@@ -123,10 +136,9 @@ utility UABUtility "UAB Utility" width:162 height:325
 		if ExportMeshCheckBox.checked then
 		(
 			--poner parametrico
-			local unique_instances = GetUniqueInstances()
-			for Obj in unique_instances do
+			for Obj in geometry do
 			(
-				filename = MeshDir +"\\"+  Obj.name + ".mesh"--poner parametrico
+				filename = MeshDir + Obj.name + ".mesh"--poner parametrico
 				ExportMesh Obj filename
 			)
 			
