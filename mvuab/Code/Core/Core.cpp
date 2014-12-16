@@ -52,6 +52,7 @@ CCore::~CCore()
     CHECKED_DELETE(m_pStaticMeshManager);
     CHECKED_DELETE(m_pRenderableObjectsManager);
     CHECKED_DELETE(m_pAnimatedModelsManager);
+	CHECKED_DELETE(m_pTextureManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
