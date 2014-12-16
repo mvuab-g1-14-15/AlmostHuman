@@ -56,7 +56,6 @@ void CTestProcess::Update(float32 deltaTime)
 
     CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
-<<<<<<< HEAD
 	if( pActionManager->DoAction("CommutationCamera") )
 	{
 		CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
@@ -72,17 +71,17 @@ void CTestProcess::Update(float32 deltaTime)
 
 	if( pActionManager->DoAction("ReloadStaticMesh") )
 	{
-		CCore::GetSingletonPtr()->GetpStaticMeshManager()->Reload();
+		CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
 	}
 
 	if( pActionManager->DoAction("ReloadActionToInput") )
 	{
-		CCore::GetSingletonPtr()->GetpActionManager()->Reload();
+		CCore::GetSingletonPtr()->GetActionManager()->Reload();
 	}
 
     if( pActionManager->DoAction("SaveActionToInput") )
     {
-        CCore::GetSingletonPtr()->GetpActionManager()->SaveXML("Data/Prueba.xml");
+        CCore::GetSingletonPtr()->GetActionManager()->SaveXML("Data/Prueba.xml");
     }
 
     if( pActionManager->DoAction("SetActionToInput") )
@@ -103,28 +102,10 @@ void CTestProcess::Update(float32 deltaTime)
         sInputAction.m_sEventType = "EVENT_DOWN";
         sInputAction.m_sCode = "KEY_LCTRL";
         vecInputAction.push_back(sInputAction);
-        CCore::GetSingletonPtr()->GetpActionManager()->SetAction("SaveActionToInput", vecInputAction);
-        vecInputAction.clear();
+        CCore::GetSingletonPtr()->GetActionManager()->SetAction("SaveActionToInput", vecInputAction);
     }
 	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
 	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
-=======
-    if( pActionManager->DoAction("CommutationCamera") )
-    {
-        CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
-        if( pProcessCamera ) m_pCamera = m_pTPSCamera;
-        else m_pCamera = m_pFPSCamera;
-    }
-
-    Vect3i delta = pInputManager->GetMouseDelta();
-    if( pInputManager->IsDown( IDV_MOUSE, MOUSE_BUTTON_LEFT) )
-    {
-        m_pCamera->AddYawPitch((float) delta.x, (float) delta.y);
-    }
-
-    //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-    //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
->>>>>>> origin/master
 }
 
 void CTestProcess::Init()

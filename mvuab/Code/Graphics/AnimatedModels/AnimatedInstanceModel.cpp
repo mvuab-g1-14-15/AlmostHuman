@@ -185,9 +185,6 @@ CAnimatedInstanceModel::ClearCycle(uint32 Id, float32 DelayOut)
 bool
 CAnimatedInstanceModel::IsCycleAnimationActive(uint32 Id) const
 {
-<<<<<<< HEAD
-	return false;
-=======
   CalCoreAnimation * l_pAnimation = m_AnimatedCoreModel->GetCoreModel()->getCoreAnimation(Id);
   const std::list<CalAnimationCycle *> &l_AnimList = m_CalModel->getMixer()->getAnimationCycle();
   std::list<CalAnimationCycle *>::const_iterator itb = l_AnimList.begin(), ite = l_AnimList.end();
@@ -199,28 +196,19 @@ CAnimatedInstanceModel::IsCycleAnimationActive(uint32 Id) const
   }
 
   return false;
->>>>>>> origin/master
 }
 
 bool
 CAnimatedInstanceModel::IsActionAnimationActive(uint32 Id) const
 {
-<<<<<<< HEAD
-	return false;
-=======
   const std::vector<CalAnimation *> &l_AnimVect = m_CalModel->getMixer()->getAnimationVector();
   return ( l_AnimVect[Id] != NULL );
->>>>>>> origin/master
 }
 
 bool
 CAnimatedInstanceModel::LoadVertexBuffer(CGraphicsManager *RM)
 {
-<<<<<<< HEAD
-	return false;
-=======
   return true;
->>>>>>> origin/master
 }
 
 void
