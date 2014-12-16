@@ -2,8 +2,8 @@
 #define STATIC_MESH_MANAGER_H
 #pragma once
 
-#include "Utils\MapManager.h"
 #include "StaticMesh.h"
+#include "Utils\MapManager.h"
 #include "Utils/SingletonPattern.h"
 
 #include <string>
@@ -19,6 +19,5 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CSingleton<CS
 
         bool Load(const std::string &FileName);
         bool Reload();
-    void Update( float32 deltaTime );
 };
 #endif

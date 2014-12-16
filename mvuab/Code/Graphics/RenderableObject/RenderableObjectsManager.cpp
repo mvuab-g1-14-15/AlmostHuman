@@ -5,7 +5,7 @@
 #include "StaticMeshes\InstanceMesh.h"
 #include "Math\MathTypes.h"
 
-CRenderableObjectsManager::CRenderableObjectsManager()
+CRenderableObjectsManager::CRenderableObjectsManager() : m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
 {
 }
 
@@ -64,11 +64,16 @@ void CRenderableObjectsManager::CleanUp()
     Destroy();
 }
 
-void
-CRenderableObjectsManager::Render(CGraphicsManager *GM)
+void CRenderableObjectsManager::Render(CGraphicsManager *GM)
 {
+	m_NumVertexs = m_NumFaces = m_NumDraws = 0;
+
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
     {
         m_ResourcesVector[i]->Render(GM);
+
+		m_NumVertexs += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumVertex();
+		m_NumFaces += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumFaces();
+		m_NumDraws += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumDraws();
     }
 }

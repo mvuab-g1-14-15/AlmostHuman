@@ -69,8 +69,7 @@ void CCore::Update(float32 deltaTime)
 {
     m_pGraphicsManager->Update(deltaTime);
     m_pInputManager->Update();
-  m_pActionManager->Update(deltaTime);
-  m_pStaticMeshManager->Update(deltaTime);
+	m_pActionManager->Update(deltaTime);
     m_pDebugWindowManager->Update(deltaTime);
 }
 
@@ -79,6 +78,13 @@ void CCore::Render()
     m_pGraphicsManager->Render();
     m_pDebugWindowManager->Render();
     m_pRenderableObjectsManager->Render(m_pGraphicsManager);
+
+	// START: TO DELETE LATER IF IS NOT NECESSARY,
+	unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
+	unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
+	unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
+	m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 1.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+	// END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CCore::LoadXml()

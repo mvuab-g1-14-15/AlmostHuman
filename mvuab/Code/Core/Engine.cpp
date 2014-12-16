@@ -43,11 +43,11 @@ void CEngine::Render()
     //pGraphicsManager->RenderCursor();
     
     #if _DEBUG
-        /*pGraphicsManager->DisableZBuffering();
+        pGraphicsManager->DisableZBuffering();
         pGraphicsManager->EnableAlphaBlend();
         m_pProcess->RenderDebugInfo();
         pGraphicsManager->DisableAlphaBlend();
-        pGraphicsManager->EnableZBuffering();*/
+        pGraphicsManager->EnableZBuffering();
     #endif
 
     pGraphicsManager->EndRender();

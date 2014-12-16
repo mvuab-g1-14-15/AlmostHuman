@@ -53,11 +53,3 @@ bool CStaticMeshManager::Reload()
     Destroy();
     return Load(m_FileName);
 }
-
-void CStaticMeshManager::Update( float32 deltaTime )
-{
-  CActionManager* l_pActionManager = CActionManager::GetSingletonPtr();
-
-  if( l_pActionManager->DoAction("ReloadStaticMesh") )
-    Reload();
-}
