@@ -17,29 +17,31 @@ CInstanceMesh::~CInstanceMesh()
 {
 }
 
-void CInstanceMesh::Render(CGraphicsManager *GM)
+void CInstanceMesh::Render()
 {
-    Mat44f t, rot, pos;
+  CGraphicsManager *GM = CGraphicsManager::GetSingletonPtr();
 
-    t.SetIdentity();
-    rot.SetIdentity();
-    pos.SetIdentity();
+  Mat44f t, rot, pos;
 
-    rot.RotByAnglesYXZ(m_fYaw, m_fPitch, m_fRoll);
-    pos.Translate(m_Position);
+  t.SetIdentity();
+  rot.SetIdentity();
+  pos.SetIdentity();
 
-    t = pos * rot;
+  rot.RotByAnglesYXZ(m_fYaw, m_fPitch, m_fRoll);
+  pos.Translate(m_Position);
 
-    GM->SetTransform(t);
-    if(0 != m_pStaticMesh)
-	{
-        m_pStaticMesh->Render(GM);
+  t = pos * rot;
 
-		m_NumVertexs = m_pStaticMesh->GetNumVertex();
-		m_NumFaces	 = m_pStaticMesh->GetNumFaces();
-		m_NumDraws	 = m_pStaticMesh->GetNumDraws();
-	}
+  GM->SetTransform(t);
+  if(0 != m_pStaticMesh)
+  {
+    m_pStaticMesh->Render(GM);
 
-    t.SetIdentity();
-    GM->SetTransform(t);
+    m_NumVertexs = m_pStaticMesh->GetNumVertex();
+    m_NumFaces     = m_pStaticMesh->GetNumFaces();
+    m_NumDraws     = m_pStaticMesh->GetNumDraws();
+  }
+
+  t.SetIdentity();
+  GM->SetTransform(t);
 }

@@ -56,12 +56,12 @@ void CTestProcess::Update(float32 deltaTime)
 
     CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
-	if( pActionManager->DoAction("CommutationCamera") )
-	{
-		CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
-		if( pProcessCamera ) m_pCamera = m_pTPSCamera;
-		else m_pCamera = m_pFPSCamera;
-	}
+    if( pActionManager->DoAction("CommutationCamera") )
+    {
+        CFPSCamera* pProcessCamera = dynamic_cast<CFPSCamera*>(m_pCamera);
+        if( pProcessCamera ) m_pCamera = m_pTPSCamera;
+        else m_pCamera = m_pFPSCamera;
+    }
     float x = 0;
     float y = 0;
     if ( pActionManager->DoAction("MouseLeftX", x) && pActionManager->DoAction("MouseLeftY", y) )
@@ -69,15 +69,15 @@ void CTestProcess::Update(float32 deltaTime)
         m_pCamera->AddYawPitch(x, y);
     }
 
-	if( pActionManager->DoAction("ReloadStaticMesh") )
-	{
-		CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
-	}
+    if( pActionManager->DoAction("ReloadStaticMesh") )
+    {
+        CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
+    }
 
-	if( pActionManager->DoAction("ReloadActionToInput") )
-	{
-		CCore::GetSingletonPtr()->GetActionManager()->Reload();
-	}
+    if( pActionManager->DoAction("ReloadActionToInput") )
+    {
+        CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    }
 
     if( pActionManager->DoAction("SaveActionToInput") )
     {
@@ -104,8 +104,8 @@ void CTestProcess::Update(float32 deltaTime)
         vecInputAction.push_back(sInputAction);
         CCore::GetSingletonPtr()->GetActionManager()->SetAction("SaveActionToInput", vecInputAction);
     }
-	//CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-	//if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+    //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
+    //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
 }
 
 void CTestProcess::Init()

@@ -32,95 +32,95 @@ bool CActionManager::DoAction(const std::string &action)
 bool CActionManager::DoAction(const std::string &action, float32 &amount)
 {
     MapActions::iterator it1 = m_mActions.find(action);
-	if(it1 == m_mActions.end())
-		return(false);
+    if(it1 == m_mActions.end())
+        return(false);
 
-	VecInputs vector = m_mActions[action];
-	VecInputs::iterator itb = vector.begin(), ite = vector.end();
+    VecInputs vector = m_mActions[action];
+    VecInputs::iterator itb = vector.begin(), ite = vector.end();
 
-	bool doIt = true;
+    bool doIt = true;
 
 
     for(; itb != ite; ++itb)
     {
-	    S_INPUT_ACTION current_action = *itb;
-	    if ( current_action.m_AxisType != AXIS_NOTHING)
+        S_INPUT_ACTION current_action = *itb;
+        if ( current_action.m_AxisType != AXIS_NOTHING)
         {
             switch(current_action.m_AxisType)
-		    {
-			    case AXIS_MOUSE_X:
+            {
+                case AXIS_MOUSE_X:
                     {
-					    Vect3i deltas = m_pInputManager->GetMouseDelta();
-					    amount = (float)deltas.x * current_action.m_fDelta;
+                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        amount = (float)deltas.x * current_action.m_fDelta;
                     }
-				    break;
-			    case AXIS_MOUSE_Y:
+                    break;
+                case AXIS_MOUSE_Y:
                     {
-					    Vect3i deltas = m_pInputManager->GetMouseDelta();
-					    amount = (float)deltas.y * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_MOUSE_Z:
+                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        amount = (float)deltas.y * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_MOUSE_Z:
                     {
-					    Vect3i deltas = m_pInputManager->GetMouseDelta();
-					    amount = (float)deltas.z * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_LEFT_THUMB_X:
+                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        amount = (float)deltas.z * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_LEFT_THUMB_X:
                     {
-					    float x,y;
-					    m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
-					    amount = x * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_LEFT_THUMB_Y:
+                        float x,y;
+                        m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
+                        amount = x * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_LEFT_THUMB_Y:
                     {
-					    float x,y;
-					    m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
-					    amount = y * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_RIGHT_THUMB_X:
+                        float x,y;
+                        m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y, current_action.m_DeviceType);
+                        amount = y * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_RIGHT_THUMB_X:
                     {
-					    float x,y;
-					    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
-					    amount = x * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_RIGHT_THUMB_Y:
+                        float x,y;
+                        m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
+                        amount = x * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_RIGHT_THUMB_Y:
                     {
-					    float x,y;
-					    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
-					    amount = y * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_DELTA_TRIGGER_RIGHT:
+                        float x,y;
+                        m_pInputManager->GetGamePadRightThumbDeflection(&x,&y, current_action.m_DeviceType);
+                        amount = y * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_DELTA_TRIGGER_RIGHT:
                     {
-					    float right, left;
-					    m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
-					    amount = right * current_action.m_fDelta;
-				    }
-				    break;
-			    case AXIS_DELTA_TRIGGER_LEFT:
+                        float right, left;
+                        m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
+                        amount = right * current_action.m_fDelta;
+                    }
+                    break;
+                case AXIS_DELTA_TRIGGER_LEFT:
                     {
-				        float right, left;
-					    m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
-					    amount = left * current_action.m_fDelta;
-				    }
-				    break;        
-		    }//END switch(current_action.m_AxisType)
+                        float right, left;
+                        m_pInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
+                        amount = left * current_action.m_fDelta;
+                    }
+                    break;        
+            }//END switch(current_action.m_AxisType)
             if( amount == 0.f)       
             {
                     doIt = false;
             }
-	    }
+        }
         
-	    if(current_action.m_EventType == EVENT_DOWN)
-		    doIt = doIt && m_pInputManager->IsDown(current_action.m_DeviceType, current_action.m_Code);
-	    else if(current_action.m_EventType == EVENT_DOWN_UP)
-		    doIt = doIt && m_pInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
-	    else if(current_action.m_EventType == EVENT_UP_DOWN)
-		    doIt = doIt && m_pInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
+        if(current_action.m_EventType == EVENT_DOWN)
+            doIt = doIt && m_pInputManager->IsDown(current_action.m_DeviceType, current_action.m_Code);
+        else if(current_action.m_EventType == EVENT_DOWN_UP)
+            doIt = doIt && m_pInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
+        else if(current_action.m_EventType == EVENT_UP_DOWN)
+            doIt = doIt && m_pInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
         else 
             doIt = false;
 
@@ -131,67 +131,67 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
 
 bool CActionManager::LoadXML()
 {
-	CXMLTreeNode l_File;
-	if(false == l_File.LoadFile(m_ActionsPath.c_str()))
-	{
-		std::string err = "ERROR reading the file " + m_ActionsPath;
+    CXMLTreeNode l_File;
+    if(false == l_File.LoadFile(m_ActionsPath.c_str()))
+    {
+        std::string err = "ERROR reading the file " + m_ActionsPath;
 
-		MessageBox(NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK);
-		exit(EXIT_FAILURE);
-	}
+        MessageBox(NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK);
+        exit(EXIT_FAILURE);
+    }
 
-	CXMLTreeNode  actions_TreeNode = l_File["Actions"];
-	if(actions_TreeNode.Exists())
-	{
-		int count = actions_TreeNode.GetNumChildren();
-		for( int i = 0; i < count; ++i )
-		{
-			std::string TagName = actions_TreeNode(i).GetName();
-			if( TagName == "action" )
-			{
-				std::string StrActionName = std::string( actions_TreeNode(i).GetPszProperty("name", "") );
-				CXMLTreeNode  action_TreeNode = actions_TreeNode(i);
-				if(action_TreeNode.Exists())
-				{
+    CXMLTreeNode  actions_TreeNode = l_File["Actions"];
+    if(actions_TreeNode.Exists())
+    {
+        int count = actions_TreeNode.GetNumChildren();
+        for( int i = 0; i < count; ++i )
+        {
+            std::string TagName = actions_TreeNode(i).GetName();
+            if( TagName == "action" )
+            {
+                std::string StrActionName = std::string( actions_TreeNode(i).GetPszProperty("name", "") );
+                CXMLTreeNode  action_TreeNode = actions_TreeNode(i);
+                if(action_TreeNode.Exists())
+                {
                     std::vector<S_INPUT_ACTION> vector;
-					int iSubActions = action_TreeNode.GetNumChildren();
-					for( int j = 0; j < iSubActions; ++j )
-					{
-						std::string TagName = action_TreeNode(j).GetName();
-						if( TagName == "input" )
-						{
-							S_INPUT_ACTION new_action;
-							std::string deviceTypeStr(action_TreeNode(j).GetPszProperty("deviceType", "IDV_NOTHING") );
-							std::string axisTypeStr(action_TreeNode(j).GetPszProperty("AxisType", "AXIS_NOTHING") );
-							std::string EventTypeStr(action_TreeNode(j).GetPszProperty("EventType", "EVENT_NOTHING") );
-							std::string CodeStr(action_TreeNode(j).GetPszProperty("Code", "MOUSE_BUTTON_NOTHING") );
-							float Delta(action_TreeNode(j).Getfloat32Property("Delta", 1.f, false));
+                    int iSubActions = action_TreeNode.GetNumChildren();
+                    for( int j = 0; j < iSubActions; ++j )
+                    {
+                        std::string TagName = action_TreeNode(j).GetName();
+                        if( TagName == "input" )
+                        {
+                            S_INPUT_ACTION new_action;
+                            std::string deviceTypeStr(action_TreeNode(j).GetPszProperty("deviceType", "IDV_NOTHING") );
+                            std::string axisTypeStr(action_TreeNode(j).GetPszProperty("AxisType", "AXIS_NOTHING") );
+                            std::string EventTypeStr(action_TreeNode(j).GetPszProperty("EventType", "EVENT_NOTHING") );
+                            std::string CodeStr(action_TreeNode(j).GetPszProperty("Code", "MOUSE_BUTTON_NOTHING") );
+                            float Delta(action_TreeNode(j).Getfloat32Property("Delta", 1.f, false));
 
-							new_action.m_Code = strKeyToCode(CodeStr);
-							new_action.m_DeviceType = strDeviceToCode(deviceTypeStr);
-							new_action.m_EventType = strEventToCode(EventTypeStr);
-							new_action.m_AxisType = strAxisToCode(axisTypeStr);
-							new_action.m_fDelta = Delta;
+                            new_action.m_Code = strKeyToCode(CodeStr);
+                            new_action.m_DeviceType = strDeviceToCode(deviceTypeStr);
+                            new_action.m_EventType = strEventToCode(EventTypeStr);
+                            new_action.m_AxisType = strAxisToCode(axisTypeStr);
+                            new_action.m_fDelta = Delta;
                             new_action.m_sCode = CodeStr;
                             new_action.m_sDeviceType = deviceTypeStr;
                             new_action.m_sEventType = EventTypeStr;
                             new_action.m_sAxisType = axisTypeStr;
 
-							
-							if( m_mActions.find(TagName) != m_mActions.end())
-							{
-								vector = m_mActions[TagName];
-							}
-							vector.push_back(new_action);
+                            
+                            if( m_mActions.find(TagName) != m_mActions.end())
+                            {
+                                vector = m_mActions[TagName];
+                            }
+                            vector.push_back(new_action);
 
-						}
-					}
+                        }
+                    }
                     m_mActions[StrActionName] = vector;
-				}
-			}
-		}
-	}
-	return true;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 bool CActionManager::SaveXML(const std::string &xmlFile)
@@ -400,18 +400,18 @@ unsigned int CActionManager::strKeyToCode(const std::string &strKey)
     return(0);
 }
 
-INPUT_AXIS_TYPE	CActionManager::strAxisToCode (const std::string &strAxis)
+INPUT_AXIS_TYPE    CActionManager::strAxisToCode (const std::string &strAxis)
 {
-	if("AXIS_MOUSE_X" == strAxis) return(AXIS_MOUSE_X);
-	else if("AXIS_MOUSE_Y" == strAxis) return(AXIS_MOUSE_Y);
-	else if("AXIS_MOUSE_Z" == strAxis) return(AXIS_MOUSE_Z);
-	else if("AXIS_LEFT_THUMB_X" == strAxis) return(AXIS_LEFT_THUMB_X);
-	else if("AXIS_LEFT_THUMB_Y" == strAxis) return(AXIS_LEFT_THUMB_Y);
-	else if("AXIS_RIGHT_THUMB_X" == strAxis) return(AXIS_RIGHT_THUMB_X);
-	else if("AXIS_RIGHT_THUMB_Y" == strAxis) return(AXIS_RIGHT_THUMB_Y);
-	else if("AXIS_DELTA_TRIGGER_RIGHT" == strAxis) return(AXIS_DELTA_TRIGGER_RIGHT);
-	else if("AXIS_DELTA_TRIGGER_LEFT"  == strAxis) return(AXIS_DELTA_TRIGGER_LEFT);
-	return(AXIS_NOTHING);
+    if("AXIS_MOUSE_X" == strAxis) return(AXIS_MOUSE_X);
+    else if("AXIS_MOUSE_Y" == strAxis) return(AXIS_MOUSE_Y);
+    else if("AXIS_MOUSE_Z" == strAxis) return(AXIS_MOUSE_Z);
+    else if("AXIS_LEFT_THUMB_X" == strAxis) return(AXIS_LEFT_THUMB_X);
+    else if("AXIS_LEFT_THUMB_Y" == strAxis) return(AXIS_LEFT_THUMB_Y);
+    else if("AXIS_RIGHT_THUMB_X" == strAxis) return(AXIS_RIGHT_THUMB_X);
+    else if("AXIS_RIGHT_THUMB_Y" == strAxis) return(AXIS_RIGHT_THUMB_Y);
+    else if("AXIS_DELTA_TRIGGER_RIGHT" == strAxis) return(AXIS_DELTA_TRIGGER_RIGHT);
+    else if("AXIS_DELTA_TRIGGER_LEFT"  == strAxis) return(AXIS_DELTA_TRIGGER_LEFT);
+    return(AXIS_NOTHING);
 
 }
 

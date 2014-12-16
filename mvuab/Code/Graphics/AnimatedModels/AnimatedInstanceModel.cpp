@@ -4,15 +4,19 @@
 #include "cal3d\cal3d.h"
 #include "RenderableVertex\VertexTypes.h"
 
-CAnimatedInstanceModel::CAnimatedInstanceModel() :
+CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string &Name, const std::string &CoreName ) :
     m_CalModel(0),
-    m_AnimatedCoreModel(0),
+    m_AnimatedCoreModel(CAnimatedModelsManager::GetSingletonPtr()->GetCore(CoreName)),
     m_BlendTime(0.3f),
     m_LodLevel(1.0f),
     m_CurrentAnimationId(0),
     m_NumVtxs(0),
-    m_NumFaces(0)
+    m_NumFaces(0),
+    m_pIB(0),
+    m_pVB(0)
 {
+  SetName(Name);
+  Initialize();
 }
 
 CAnimatedInstanceModel::~CAnimatedInstanceModel()
@@ -21,19 +25,22 @@ CAnimatedInstanceModel::~CAnimatedInstanceModel()
 }
 
 void
-CAnimatedInstanceModel::Render(CGraphicsManager *RM)
+CAnimatedInstanceModel::Render()
 {
-    RenderModelBySoftware(RM);
+    RenderModelBySoftware();
 }
 
 void
-CAnimatedInstanceModel::RenderModelBySoftware(CGraphicsManager *RM)
+CAnimatedInstanceModel::RenderModelBySoftware()
 {
+  CGraphicsManager *RM = CGraphicsManager::GetSingletonPtr();
+
   // get the renderer of the model
   CalRenderer *l_pCalRenderer = m_CalModel->getRenderer();
 
   // begin the rendering loop
-  if(!l_pCalRenderer->beginRendering()) return;
+  if(!l_pCalRenderer->beginRendering())
+    return;
 
   m_VBCursor=0;
   m_IBCursor=0;
@@ -62,18 +69,18 @@ CAnimatedInstanceModel::RenderModelBySoftware(CGraphicsManager *RM)
       // select mesh and submesh for further data access
       if(l_pCalRenderer->selectMeshSubmesh(meshId, submeshId))
       {
-          /*if(m_VBCursor+ l_pCalRenderer->getVertexCount()>=30000)
+          if(m_VBCursor+ l_pCalRenderer->getVertexCount()>=30000)
           {
                 m_VBCursor=0;
               dwVBLockFlags=D3DLOCK_DISCARD;
           }
           
-          if(m_IBCursor + pCalRenderer->getFaceCount()>=50000)
+          if(m_IBCursor + l_pCalRenderer->getFaceCount()>=50000)
           {
                 m_IBCursor=0;
               dwIBLockFlags=D3DLOCK_DISCARD;
 
-          }*/
+          }
           
 
           // Get vertexbuffer from the model
@@ -128,10 +135,10 @@ CAnimatedInstanceModel::Update(float32 deltaTime)
 }
 
 void
-CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *AnimatedCoreModel, CGraphicsManager *RM)
+CAnimatedInstanceModel::Initialize()
 {
+  assert(m_AnimatedCoreModel);
   // Create the calcoremodel
-  m_AnimatedCoreModel = AnimatedCoreModel;
   CalCoreModel *l_CalCoreModel = m_AnimatedCoreModel->GetCoreModel();
   m_CalModel = new CalModel( l_CalCoreModel );
 
@@ -154,6 +161,34 @@ CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *AnimatedCoreModel, CGraph
   }
 
   BlendCycle(m_CurrentAnimationId, l_Weight, l_DelayIn);
+
+  // Load Vertex and Index buffers
+  CGraphicsManager * GM = CGraphicsManager::GetSingletonPtr();
+  LPDIRECT3DDEVICE9 l_pD3DDevice = GM->GetDevice();
+  // Create vertex buffer
+  if(FAILED(l_pD3DDevice->CreateVertexBuffer(30000*sizeof(TNORMAL_T1_VERTEX),
+    D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC, TNORMAL_T1_VERTEX::GetFVF(), 
+    D3DPOOL_DEFAULT , &m_pVB, NULL
+    )))
+    return;
+
+  // Create index buffer
+  if(sizeof(CalIndex)==2)
+  {
+    if(FAILED(
+      l_pD3DDevice->CreateIndexBuffer(50000*3*sizeof(CalIndex),
+      D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC,D3DFMT_INDEX16,
+      D3DPOOL_DEFAULT ,&m_pIB, NULL)))
+      return;
+  }
+  else
+  {
+    if(FAILED(
+      l_pD3DDevice->CreateIndexBuffer(50000*3*sizeof(CalIndex),
+      D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC,D3DFMT_INDEX32,
+      D3DPOOL_DEFAULT ,&m_pIB, NULL)))
+      return;
+  }
 }
 
 void

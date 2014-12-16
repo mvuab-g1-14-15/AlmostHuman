@@ -52,7 +52,7 @@ CCore::~CCore()
     CHECKED_DELETE(m_pStaticMeshManager);
     CHECKED_DELETE(m_pRenderableObjectsManager);
     CHECKED_DELETE(m_pAnimatedModelsManager);
-	CHECKED_DELETE(m_pTextureManager);
+    CHECKED_DELETE(m_pTextureManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -70,7 +70,7 @@ void CCore::Update(float32 deltaTime)
 {
     m_pGraphicsManager->Update(deltaTime);
     m_pInputManager->Update();
-	m_pActionManager->Update(deltaTime);
+    m_pActionManager->Update(deltaTime);
     m_pDebugWindowManager->Update(deltaTime);
 }
 
@@ -78,14 +78,14 @@ void CCore::Render()
 {
     m_pGraphicsManager->Render();
     m_pDebugWindowManager->Render();
-    m_pRenderableObjectsManager->Render(m_pGraphicsManager);
+    m_pRenderableObjectsManager->Render();
 
-	// START: TO DELETE LATER IF IS NOT NECESSARY,
-	unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
-	unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
-	unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
-	m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 1.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
-	// END: TO DELETE LATER IF IS NOT NECESSARY
+    // START: TO DELETE LATER IF IS NOT NECESSARY,
+    unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
+    unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
+    unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
+    m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 1.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+    // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CCore::LoadXml()
@@ -187,6 +187,6 @@ void CCore::InitManagers()
     m_pFontManager->Init(m_pGraphicsManager);
     m_pFontManager->LoadTTFs(m_FontsPath);
     m_pStaticMeshManager->Load(m_StaticMeshesPath);
-    m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
     m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
+    m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
 }

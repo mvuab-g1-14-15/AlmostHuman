@@ -27,6 +27,15 @@ CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, co
     return l_pAnimatedCoreModel;
 }
 
+CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name)
+{
+  CAnimatedCoreModel * l_pAnimatedCoreModel = GetResource(Name);
+
+  assert(l_pAnimatedCoreModel);
+
+  return l_pAnimatedCoreModel;
+}
+
 CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &Name)
 {
     return 0;
@@ -50,7 +59,7 @@ void CAnimatedModelsManager::Load(const std::string &Filename)
         return;
     }
 
-    for(uint32 i = 0; i < node.GetNumChildren(); ++i)
+    for(int32 i = 0; i < node.GetNumChildren(); ++i)
     {
         const std::string &name = node(i).GetPszProperty("name", "no_name");
         const std::string &path = node(i).GetPszProperty("path", "no_file");

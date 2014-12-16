@@ -23,7 +23,8 @@ CAnimatedCoreModel::~CAnimatedCoreModel()
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 {
     assert(m_CalCoreModel);
-    uint16 err = m_CalCoreModel->loadCoreMesh( Filename );
+    std::string MeshFullPath = m_Path + Filename;
+    uint16 err = m_CalCoreModel->loadCoreMesh( MeshFullPath );
     return ( err == -1 ) ? false : true;
 }
 
@@ -98,7 +99,7 @@ bool CAnimatedCoreModel::Load()
 
         if( TagName == "texture" )
         {
-            const std::string &textureFilename = node.GetPszProperty("file", "no_file");
+            const std::string &textureFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadTexture(textureFilename))
             {
                 CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadTexture No se puede abrir \"%s\"!", m_FileName.c_str());
@@ -106,7 +107,7 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "skeleton" )
         {
-            const std::string &skeletonFilename = node.GetPszProperty("file", "no_file");
+            const std::string &skeletonFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadSkeleton(skeletonFilename))
             {
                 CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
@@ -114,7 +115,7 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "mesh" )
         {
-            const std::string &meshFilename = node.GetPszProperty("file", "no_file");
+            const std::string &meshFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadMesh(meshFilename))
             {
                 CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
@@ -122,8 +123,8 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "animation" )
         {
-            const std::string &animationFilename = node.GetPszProperty("file", "no_file");
-            const std::string &name = node.GetPszProperty("name", "no_name");
+            const std::string &animationFilename = node(i).GetPszProperty("file", "no_file");
+            const std::string &name = node(i).GetPszProperty("name", "no_name");
             if(!LoadAnimation(name, animationFilename))
             {
                 CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
