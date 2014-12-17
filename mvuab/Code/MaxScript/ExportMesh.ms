@@ -121,15 +121,17 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 	--format "Getting buffers...\n"
 	local l_nVertexs = getNumVerts Obj
 	local l_nFaces = getNumFaces Obj
+	
+	local InvTransform=inverse Obj.transform
 	for iFaces = 1 to l_nFaces do
 	(
 		--format "Parsing face %...\n" iFaces
 		-- Para coger los indices de la primera cara
 		local IdxsFace=getFace Obj iFaces
 		-- Para coger los vértices de la primera cara
-		local Coord1=getVert Obj IdxsFace.x
-		local Coord2=getVert Obj IdxsFace.y
-		local Coord3=getVert Obj IdxsFace.z
+		local Coord1=getVert Obj IdxsFace.x*InvTransform
+		local Coord2=getVert Obj IdxsFace.y*InvTransform
+		local Coord3=getVert Obj IdxsFace.z*InvTransform
 		-- Para coger las normales de los vértices de la primera cara
 		local Normal1=getNormal Obj IdxsFace.x
 		local Normal2=getNormal Obj IdxsFace.y

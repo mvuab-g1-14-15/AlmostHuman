@@ -5,7 +5,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 	
 	local UniqueInstanceArray = GetUniqueInstances()
 	
-	if UniqueInstanceArrary.count == 0 then 
+	if UniqueInstanceArray.count == 0 then 
 	(
 		format "Empty selection. Select any object \n"
 		return -1
