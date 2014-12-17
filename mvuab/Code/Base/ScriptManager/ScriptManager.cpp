@@ -6,6 +6,8 @@
 #include <RenderableObject\RenderableObject.h>
 #include <RenderableObject\RenderableObjectsManager.h>
 
+#include "GraphicsManager.h"
+
 #include <Math\Matrix44.h>
 #include <Math\Vector3.h>
 #include <Object3D.h>
@@ -169,5 +171,48 @@ void CScriptManager::RegisterLUAFunctions()
 			
 			.def("SetVisible", &CVisible::SetVisible)
 			.def("GetVisible", &CVisible::GetVisible)
+	];
+
+	module(m_LS)
+	[
+		class_<CGraphicsManager>("CGraphicsManager")
+			.def(constructor<>())
+			.def("BeginRender", &CGraphicsManager::BeginRender)
+			.def("DisableAlphaBlend", &CGraphicsManager::DisableAlphaBlend)
+			.def("DisableZBuffering", &CGraphicsManager::DisableZBuffering)
+			.def("DrawAxis", &CGraphicsManager::DrawAxis)
+			.def("DrawBox", &CGraphicsManager::DrawBox)
+			//.def("DrawCamera", &CGraphicsManager::DrawCamera)
+			.def("DrawCapsule", &CGraphicsManager::DrawCapsule)
+			.def("DrawCircle", &CGraphicsManager::DrawCircle)
+			.def("DrawCube", &CGraphicsManager::DrawCube)
+			.def("DrawCylinder", &CGraphicsManager::DrawCylinder)
+			.def("DrawGrid", &CGraphicsManager::DrawGrid)
+			.def("DrawIcoSphere", &CGraphicsManager::DrawIcoSphere)
+			.def("DrawLine", &CGraphicsManager::DrawLine)
+			.def("DrawPlane", &CGraphicsManager::DrawPlane)
+			.def("DrawQuad2D", &CGraphicsManager::DrawQuad2D)
+			//.def("DrawQuad3D", &CGraphicsManager::DrawQuad3D)
+			.def("DrawRectangle2D", &CGraphicsManager::DrawRectangle2D)
+			.def("DrawSphere", &CGraphicsManager::DrawSphere)
+			.def("EnableAlphaBlend", &CGraphicsManager::EnableAlphaBlend)
+			.def("EnableZBuffering", &CGraphicsManager::EnableZBuffering)
+			.def("EndRender", &CGraphicsManager::EndRender)
+			//.def("GetCurrentCamera", &CGraphicsManager::GetCurrentCamera)
+			.def("GetDevice", &CGraphicsManager::GetDevice)
+			.def("GetNumberOfVisibleObjects", &CGraphicsManager::GetNumberOfVisibleObjects)
+			.def("GetRay", &CGraphicsManager::GetRay)
+			.def("GetuHeight", &CGraphicsManager::GetuHeight)
+			.def("GetuWidth", &CGraphicsManager::GetuWidth)
+			.def("GetWidthAndHeight", &CGraphicsManager::GetWidthAndHeight)
+			.def("Init", &CGraphicsManager::Init)
+			.def("Release", &CGraphicsManager::Release)
+			.def("Render", &CGraphicsManager::Render)
+			.def("RenderCursor", &CGraphicsManager::RenderCursor)
+			//.def("SetTransform", &CGraphicsManager::SetTransform)
+			.def("SetuHeight", &CGraphicsManager::SetuHeight)
+			.def("SetupMatrices", &CGraphicsManager::SetupMatrices)
+			.def("SetuWidth", &CGraphicsManager::SetuWidth)
+			.def("Update", &CGraphicsManager::Update)
 	];
 }

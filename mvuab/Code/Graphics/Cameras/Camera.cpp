@@ -47,7 +47,7 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     D3DXMatrixRotationY ( &rotation,  -m_yaw);
     D3DXMatrixRotationZ ( &rotation2, +m_pitch);
 
-    matrix = rotation2 * rotation * translation; ;
+    matrix = rotation2 * rotation * translation;
 
     // Cambiar el sistema de coordenadas
     device->SetTransform( D3DTS_WORLD, &matrix );

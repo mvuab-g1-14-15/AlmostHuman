@@ -46,13 +46,13 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
             float32 l_Yaw=m(i).Getfloat32Property("yaw",0.0f);
             float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
             float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
-            float32 l_Scale=m(i).Getfloat32Property("scale",1);
+            Vect3f l_Scale=m(i).GetVect3fProperty("scale",Vect3f(1.0f,1.0f,1.0f));
             CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
             l_InstanceMesh->SetYaw(l_Yaw * ePIf/180.0f);
             l_InstanceMesh->SetPitch(l_Pitch * ePIf/180.0f);
             l_InstanceMesh->SetRoll(l_Roll * ePIf/180.0f);
-            //l_InstanceMesh->SetScale(l_Scale);
+            l_InstanceMesh->SetScale(l_Scale);
             AddResource(l_Name,l_InstanceMesh);
         }
         else if(l_TagName=="AnimatedInstance")
@@ -61,15 +61,15 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
           const std::string& l_Core=m(i).GetPszProperty("core","");
           const Vect3f& l_Pos=m(i).GetVect3fProperty("pos",Vect3f(0,0,0));
           float32 l_Yaw=m(i).Getfloat32Property("yaw",0.0f);
-          float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
+		  float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
           float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
-          float32 l_Scale=m(i).Getfloat32Property("scale",1);
+		  Vect3f l_Scale=m(i).GetVect3fProperty("scale",Vect3f(1.0f,1.0f,1.0f));
           CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(l_Name, l_Core);
           l_AnimatedInstance->SetPosition(l_Pos);
           l_AnimatedInstance->SetYaw(l_Yaw * ePIf/180.0f);
           l_AnimatedInstance->SetPitch(l_Pitch * ePIf/180.0f);
           l_AnimatedInstance->SetRoll(l_Roll * ePIf/180.0f);
-          //l_InstanceMesh->SetScale(l_Scale);
+          l_AnimatedInstance->SetScale(l_Scale);
           AddResource(l_Name,l_AnimatedInstance);
         }
     }
