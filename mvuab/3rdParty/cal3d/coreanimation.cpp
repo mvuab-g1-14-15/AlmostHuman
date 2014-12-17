@@ -22,6 +22,12 @@ CalCoreAnimation::CalCoreAnimation()
 
 CalCoreAnimation::~CalCoreAnimation()
 {
+	std::list<CalCoreTrack *>::iterator iteratorCoreTrack;
+	for(iteratorCoreTrack=m_listCoreTrack.begin();iteratorCoreTrack!=m_listCoreTrack.end();++iteratorCoreTrack)
+	{
+		(*iteratorCoreTrack)->destroy();
+		delete *iteratorCoreTrack;
+	}
 }
 
 /*****************************************************************************/
