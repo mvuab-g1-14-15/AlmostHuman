@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+#include "Math/AABB.h"
+
 class CRenderableVertexs;
 class CGraphicsManager;
 class CTexture;
@@ -22,7 +24,7 @@ protected:
   unsigned int m_NumFaces;
   unsigned int m_NumDraws;
 
-  float m_AABB[6];
+  AABB3f m_AABB;
 
 public:
   CStaticMesh();
@@ -37,6 +39,8 @@ public:
   unsigned int        GetNumVertex    () { return m_NumVertexs; }
   unsigned int        GetNumFaces        () { return m_NumFaces; }
   unsigned int        GetNumDraws        () { return m_NumDraws; }
+
+  AABB3f GetAABB() { return m_AABB;}
 
 };
 

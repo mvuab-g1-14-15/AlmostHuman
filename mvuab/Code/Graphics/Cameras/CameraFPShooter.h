@@ -9,6 +9,7 @@ class CCameraFPShooter : public CCamera
 public:
 
     CCameraFPShooter();
+    CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3DXVECTOR3 &TargetPoint );
     ~CCameraFPShooter();
     void    Update( float32 deltaTime );
     

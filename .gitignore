@@ -14,4 +14,4 @@
 *.ipch
 *.db
 *.sdf
-*.Boost
+*Boost/
