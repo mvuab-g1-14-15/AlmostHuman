@@ -3,21 +3,44 @@
 
 CCameraFPShooter::CCameraFPShooter()
 {
-    m_posY            = 2.f;
-    m_pos            = D3DXVECTOR3(0.f, m_posY, 0.f);
-    m_yaw            = 0.f;
-    m_pitch            = 0.f;
-    m_view_d        =  2.f;
-    m_fov_radians    = D3DXToRadian( 50.f );
-    m_aspect_ratio    = 640.f / 480.f;
-    m_zn            = 0.1f;
-    m_zf            = 1000.f;
-    m_speed_yaw        =  100.f;
-    m_speed_pitch    = 60.f;
-    m_speed_forward = 10.f;
-    m_speed_strafe    = 5.f;
-    m_speed            = 2.f;
+  m_posY            = 2.f;
+  m_pos            = D3DXVECTOR3(0.f, m_posY, 0.f);
+  m_yaw            = 0.f;
+  m_pitch            = 0.f;
+  m_view_d        =  2.f;
+  m_fov_radians    = D3DXToRadian( 50.f );
+  m_aspect_ratio    = 640.f / 480.f;
+  m_zn            = 0.1f;
+  m_zf            = 1000.f;
+  m_speed_yaw        =  100.f;
+  m_speed_pitch    = 60.f;
+  m_speed_forward = 10.f;
+  m_speed_strafe    = 5.f;
+  m_speed            = 2.f;
 }
+
+CCameraFPShooter::CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3DXVECTOR3 &TargetPoint )
+{
+  m_posY            = InitialPosition.y;
+  m_pos             = InitialPosition;
+
+  D3DXVECTOR3 d = TargetPoint - InitialPosition;
+  // Calculate the yaw and the pitch to allow the camera be looking at the TargetPoint
+
+  m_yaw               = mathUtils::ATan2(d.z, d.x);
+  m_pitch             = mathUtils::ATan2(d.y,mathUtils::Sqrt(d.z * d.z + d.x * d.x));
+  m_view_d        =  2.f;
+  m_fov_radians    = D3DXToRadian( 50.f );
+  m_aspect_ratio    = 640.f / 480.f;
+  m_zn            = 0.1f;
+  m_zf            = 1000.f;
+  m_speed_yaw        =  100.f;
+  m_speed_pitch    = 60.f;
+  m_speed_forward = 10.f;
+  m_speed_strafe    = 5.f;
+  m_speed            = 2.f;
+}
+
 
 CCameraFPShooter::~CCameraFPShooter()
 {

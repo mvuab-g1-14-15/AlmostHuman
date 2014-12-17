@@ -27,12 +27,9 @@
 
 CTestProcess::CTestProcess() : CProcess(), 
     m_Speed( 0.1f ),
-    m_pFPSCamera( new CCameraFPShooter()),
+    m_pFPSCamera( new CCameraFPShooter(D3DXVECTOR3(15.0f,2.0f,0.0f), D3DXVECTOR3(0.0f,2.0f,0.0f))),
     m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
-    m_pFPSCamera->SetPos( D3DXVECTOR3(15.0f,5.0f,0.0f) );
-    m_pFPSCamera->SetYaw( ePIf );
-    m_pFPSCamera->SetPitch( -0.5f );
 }
 
 CTestProcess::~CTestProcess()
