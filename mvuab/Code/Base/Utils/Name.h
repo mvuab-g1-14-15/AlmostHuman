@@ -10,9 +10,11 @@ class CName
 public:
     CName(){}
     ~CName() {}
+	
+	GET_SET(std::string,Name);
+
 protected:
     std::string m_Name;
-    GET_SET(std::string,Name);
 };
 
 #endif // INC_NAME_H_

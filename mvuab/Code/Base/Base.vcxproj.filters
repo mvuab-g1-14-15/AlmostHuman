@@ -165,6 +165,9 @@
     <ClInclude Include="ScriptManager\ScriptManager.h">
       <Filter>ScriptManager</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\Visible.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">
