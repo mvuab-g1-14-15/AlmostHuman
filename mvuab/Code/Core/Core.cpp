@@ -86,7 +86,7 @@ void CCore::Render()
     unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
     unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
     unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
-    m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 1.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+    m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
     // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 

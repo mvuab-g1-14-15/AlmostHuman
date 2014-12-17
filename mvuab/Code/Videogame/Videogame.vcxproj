@@ -61,7 +61,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>base_d.lib;core_d.lib;libxml2.lib;graphics_d.lib;d3dxof.lib;cal3d_d.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;input_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_d.lib;core_d.lib;libxml2.lib;graphics_d.lib;d3dxof.lib;cal3d_d.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;input_d.lib;Lua_d.lib;LuaBind_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -83,7 +83,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>base.lib;core.lib;graphics.lib;input.lib;libxml2.lib;cal3d.lib;d3dxof.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base.lib;core.lib;graphics.lib;input.lib;libxml2.lib;cal3d.lib;d3dxof.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;Lua.lib;LuaBind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
