@@ -10,6 +10,8 @@
 #include "Logger\Logger.h"
 #include "StaticMesh.h"
 
+#include "Math/AABB.h"
+
 #include <cstdio>
 
 CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
@@ -204,7 +206,10 @@ bool CStaticMesh::Load(const std::string &FileName)
         free(l_IdxAddress);
     }
 
-    std::fread(&m_AABB, sizeof(float) * 6, 1, l_pFile);
+	float l_AABB[6];
+    std::fread(&l_AABB, sizeof(float) * 6, 1, l_pFile);
+
+	m_AABB = AABB3f(Vect3f(l_AABB[0], l_AABB[1], l_AABB[2]), Vect3f(l_AABB[3], l_AABB[4], l_AABB[5]));
 
     unsigned short int l_footer = 0;
     std::fread(&l_footer, sizeof(unsigned short int), 1, l_pFile);
