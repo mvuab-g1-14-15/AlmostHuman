@@ -101,3 +101,13 @@ void CRenderableObjectsManager::Update(float ElapsedTime)
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
         m_ResourcesVector[i]->Update(ElapsedTime);
 }
+
+CRenderableObject * CRenderableObjectsManager::AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Vect3f &Position)
+{
+	return NULL;
+}
+
+CRenderableObject * CRenderableObjectsManager::AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Vect3f &Position)
+{
+	return NULL;
+}

@@ -47,7 +47,7 @@ void CScriptManager::RunCode(const std::string &Code) const
 	if(luaL_dostring(m_LS,Code.c_str()))
 	{
 		const char *l_Str = lua_tostring(m_LS, -1);
-		assert("%s",l_Str);
+		assert(l_Str);
 	}
 }
 
@@ -56,7 +56,7 @@ void CScriptManager::RunFile(const std::string &FileName) const
 	if(luaL_dofile(m_LS, FileName.c_str()))
 	{
 		const char *l_Str = lua_tostring(m_LS, -1);
-		assert("%s",l_Str);
+		assert(l_Str);
 	}
 }
 

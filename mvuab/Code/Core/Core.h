@@ -21,6 +21,7 @@ class CDebugWindowManager;
 class CStaticMeshManager;
 class CRenderableObjectsManager;
 class CAnimatedModelsManager;
+class CScriptManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -57,6 +58,7 @@ private:
     CRenderableObjectsManager*      m_pRenderableObjectsManager;
     CAnimatedModelsManager*         m_pAnimatedModelsManager;
     CTextureManager*                m_pTextureManager;
+	CScriptManager*					m_pScriptManager;
 
     void LoadXml();
     void InitManagers();
@@ -91,6 +93,7 @@ public:
     GET_SET_PTR(CRenderableObjectsManager, RenderableObjectsManager);
     GET_SET_PTR(CAnimatedModelsManager, AnimatedModelsManager);
     GET_SET_PTR(CTextureManager, TextureManager);
+	GET_SET_PTR(CScriptManager, ScriptManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

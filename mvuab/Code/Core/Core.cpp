@@ -12,6 +12,7 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "ScriptManager\ScriptManager.h"
 
 CCore::CCore() :
     m_ConfigPath(""),
@@ -38,7 +39,8 @@ CCore::CCore() :
     m_pDebugWindowManager( new CDebugWindowManager() ),
     m_pStaticMeshManager( new CStaticMeshManager() ),
     m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
-    m_pAnimatedModelsManager( new CAnimatedModelsManager() )
+    m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
+	m_pScriptManager( new CScriptManager() )
 {
 }
 
@@ -54,6 +56,7 @@ CCore::~CCore()
     CHECKED_DELETE(m_pRenderableObjectsManager);
     CHECKED_DELETE(m_pAnimatedModelsManager);
     CHECKED_DELETE(m_pTextureManager);
+	CHECKED_DELETE(m_pScriptManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -191,4 +194,5 @@ void CCore::InitManagers()
     m_pStaticMeshManager->Load(m_StaticMeshesPath);
     m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
     m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
+	m_pScriptManager->Initialize();
 }
