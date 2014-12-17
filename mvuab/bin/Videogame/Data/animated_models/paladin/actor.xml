@@ -1,0 +1,34 @@
+<animated_model name="paladin">
+	<texture file="paladin_arm.tga"/>
+	<texture file="paladin_cape.tga"/>
+	<texture file="paladin_chest.tga"/>
+	<texture file="paladin_cloth.tga"/>
+	<texture file="paladin_edge.tga"/>
+	<texture file="paladin_edge_alpha.tga"/>
+	<texture file="paladin_gird.tga"/>
+	<texture file="paladin_head.tga"/>
+	<texture file="paladin_legging.tga"/>
+	<texture file="paladin_legguard.tga"/>
+	<texture file="paladin_legplate_left.tga"/>
+	<texture file="paladin_legplate_right.tga"/>
+	<texture file="paladin_head.tga"/>
+	<texture file="paladin_plate.tga"/>
+	<texture file="paladin_ponytail.tga"/>
+	<texture file="paladin_shoe.tga"/>
+	<texture file="paladin_stripe.tga"/>
+	
+	<skeleton file="paladin.csf"/>
+	
+	<mesh file="paladin_body.cmf"/>
+	<mesh file="paladin_cape.cmf"/>
+	<mesh file="paladin_cape.cmf"/>
+	
+	<animation name="shoot_walk" file="paladin_walk.caf"/>
+	<animation name="shoot_wave" file="paladin_wave.caf"/>
+	<animation name="shoot_arrow" file="paladin_shoot_arrow.caf"/>
+	<animation name="shoot_sneak" file="paladin_sneak.caf"/>
+	<animation name="idle" file="paladin_idle.caf"/>
+	<animation name="jog" file="paladin_jog.caf"/>
+	<animation name="shoot_strut" file="paladin_strut.caf"/>
+	
+</animated_model>

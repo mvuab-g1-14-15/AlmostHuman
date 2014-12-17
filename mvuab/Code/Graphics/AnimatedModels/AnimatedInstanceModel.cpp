@@ -10,11 +10,12 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string &Name, const s
     m_AnimatedCoreModel(CAnimatedModelsManager::GetSingletonPtr()->GetCore(CoreName)),
     m_BlendTime(0.3f),
     m_LodLevel(1.0f),
-    m_CurrentAnimationId(0),
+    m_CurrentAnimationId(5),
     m_NumVtxs(0),
     m_NumFaces(0),
     m_pIB(0),
-    m_pVB(0)
+    m_pVB(0),
+	m_ChangeAnimation(0)
 {
   SetName(Name);
   Initialize();
@@ -136,7 +137,7 @@ CAnimatedInstanceModel::RenderModelBySoftware()
 void
 CAnimatedInstanceModel::Update(float32 deltaTime)
 {
-  m_CalModel->update(deltaTime);
+	m_CalModel->update(deltaTime);
 }
 
 void

@@ -177,6 +177,10 @@ void CCore::LoadXml()
             {
                 m_RenderableObjectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
             }
+			else if( TagName == "lua" )
+            {
+                m_LuaRunPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+            }
         }
     }
 }
@@ -194,5 +198,7 @@ void CCore::InitManagers()
     m_pStaticMeshManager->Load(m_StaticMeshesPath);
     m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
     m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
+
 	m_pScriptManager->Initialize();
+	m_pScriptManager->RunFile(m_LuaRunPath);
 }

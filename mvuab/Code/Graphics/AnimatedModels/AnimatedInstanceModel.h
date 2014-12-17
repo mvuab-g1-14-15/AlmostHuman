@@ -22,6 +22,7 @@ private:
     uint32 m_CurrentAnimationId;
     float32 m_BlendTime;
     float32 m_LodLevel;
+	float32 m_ChangeAnimation;
     bool LoadVertexBuffer(CGraphicsManager *RM);
     void LoadTextures();
 public:

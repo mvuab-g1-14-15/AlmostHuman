@@ -18,6 +18,7 @@ class CScriptManager
 
 	public:
 		CScriptManager();
+		~CScriptManager();
 
 		void Initialize();
 		void Destroy();

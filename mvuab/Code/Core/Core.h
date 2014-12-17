@@ -45,7 +45,8 @@ private:
     std::string                    m_StaticMeshesPath;
     std::string                    m_RenderableObjectsPath;
     std::string                    m_AnimatedModelsPath;
-    std::vector<std::string>    m_v_languages;
+	std::string                    m_LuaRunPath;
+    std::vector<std::string>	   m_v_languages;
 
     // Managers
     CGraphicsManager*               m_pGraphicsManager;

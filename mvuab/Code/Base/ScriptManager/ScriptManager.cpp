@@ -27,6 +27,11 @@ CScriptManager::CScriptManager()
 {
 }
 
+CScriptManager::~CScriptManager()
+{
+	Destroy();
+}
+
 void CScriptManager::Initialize()
 {
 	m_LS = luaL_newstate();

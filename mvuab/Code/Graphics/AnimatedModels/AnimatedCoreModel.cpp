@@ -88,7 +88,7 @@ bool CAnimatedCoreModel::Load()
     CXMLTreeNode node = newFile["animated_model"];
     if(!node.Exists())
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::Load Tag \"%s\" no existe",  "static_meshes");
         return false;
     }
 

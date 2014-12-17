@@ -91,6 +91,19 @@ void CCameraFPShooter::Update( float32 deltaTime )
         strafe -= 1;
     }
 
+	if( pActionManager->DoAction("MoveUp" ) )
+    {
+        D3DXVECTOR3 pos = GetPos();
+		pos.y += 1;
+		SetPos(pos);
+    }
+    if( pActionManager->DoAction("MoveDown") )
+    {
+		D3DXVECTOR3 pos = GetPos();
+		pos.y -= 1;
+		SetPos(pos);
+    }
+
     //Definimos el movimiento del Yaw y Pitch de la camara
     if( pActionManager->DoAction("MoveYaw",amount) )
     {
