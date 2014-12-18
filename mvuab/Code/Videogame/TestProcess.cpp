@@ -91,12 +91,6 @@ void CTestProcess::Update(float32 deltaTime)
 void CTestProcess::Init()
 {
     m_pCamera = m_pFPSCamera;
-
-    AABB3f BndBox(Vect3f(0.0f,0.0f,0.0f), Vect3f(0.0f,1.0f,1.0f) );
-
-    Vect3f center( BndBox.GetCenter() );
-    Vect3f height( BndBox.GetCenter() );
-    Vect3f radious( BndBox.GetCenter() );
 }
 
 void CTestProcess::Render()
@@ -104,7 +98,7 @@ void CTestProcess::Render()
     CGraphicsManager* pGraphicsManager = GraphicsInstance;
 
     pGraphicsManager->DrawAxis(5);
-    pGraphicsManager->DrawGrid(100, colORANGE, 50, 50);
+    pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
 }
 
 void CTestProcess::RenderDebugInfo()

@@ -10,7 +10,7 @@ class CVideogameProcess : public CProcess
 {
 private:
     float32 m_Speed;
-    Vect2i m_LastMousePoint;
+    Math::Vect2i m_LastMousePoint;
     CCamera* m_pFPSCamera;
     CCamera* m_pTPSCamera;
 

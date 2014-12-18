@@ -18,7 +18,6 @@
     <ClCompile Include="Math\LerpAnimator2D.cpp" />
     <ClCompile Include="Math\LerpAnimator3D.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
-    <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Memory\MemLeaks.cpp" />
     <ClCompile Include="ScriptManager\ScriptManager.cpp" />
     <ClCompile Include="Timer\CountDownTimer.cpp" />
@@ -43,7 +42,6 @@
     <ClInclude Include="Math\Matrix33.h" />
     <ClInclude Include="Math\Matrix34.h" />
     <ClInclude Include="Math\Matrix44.h" />
-    <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />

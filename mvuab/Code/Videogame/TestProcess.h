@@ -13,7 +13,7 @@ private:
     float32             m_Amount;
     float32             m_Angle;
     float32             m_AngleMoon;
-    Vect2i              m_LastMousePoint;
+    Math::Vect2i              m_LastMousePoint;
     CCamera*            m_pFPSCamera;
     bool                m_PaintAll;
 
