@@ -61,9 +61,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
           const std::string& l_Core=m(i).GetPszProperty("core","");
           const Vect3f& l_Pos=m(i).GetVect3fProperty("pos",Vect3f(0,0,0));
           float32 l_Yaw=m(i).Getfloat32Property("yaw",0.0f);
-		  float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
+          float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
           float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
-		  Vect3f l_Scale=m(i).GetVect3fProperty("scale",Vect3f(1.0f,1.0f,1.0f));
+          Vect3f l_Scale=m(i).GetVect3fProperty("scale",Vect3f(1.0f,1.0f,1.0f));
           CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(l_Name, l_Core);
           l_AnimatedInstance->SetPosition(l_Pos);
           l_AnimatedInstance->SetYaw(l_Yaw * ePIf/180.0f);

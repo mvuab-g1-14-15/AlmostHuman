@@ -15,7 +15,7 @@
 class CObject3D
 {
 public:
-    CObject3D(const Vect3f& pos, float32 yaw, float32 pitch, float32 roll = 0);
+    CObject3D(const Vect3f& pos, float32 yaw, float32 pitch, float32 roll = 0, Vect3f scale = Vect3f(1.0f, 1.0f, 1.0f));
     CObject3D();
     virtual ~CObject3D(void) {/*Nothing*/;}
 
@@ -30,11 +30,13 @@ public:
     void        SetYaw         ( float32 yaw )              {m_fYaw = yaw;}
     void        SetPitch       ( float32 pitch )            {m_fPitch = pitch;}
     void        SetRoll        ( float32 roll )             {m_fRoll = roll;}
+    void        SetScale       ( const Vect3f& scale )        {m_Scale = scale;}
 
 	Mat44f GetTransform();
 
 protected:
     Vect3f    m_Position;
+    Vect3f    m_Scale;
     float32   m_fYaw;
     float32   m_fPitch;
     float32   m_fRoll;
