@@ -29,7 +29,7 @@ public:
     void BeginRender();
     void EndRender();
     void SetTransform (D3DXMATRIX& matrix);
-    void SetTransform (Mat44f& matrix);
+    void SetTransform ( Math::Mat44f& matrix);
     void EnableAlphaBlend();
     void DisableAlphaBlend();
     void EnableZBuffering();
@@ -57,21 +57,21 @@ public:
     // Basic Primitives
     void DrawAxis(float32 Size);
     void DrawIcoSphere();
-    void DrawGrid(float32 Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
-    void DrawPlane(    float32 Size, const Vect3f& normal, float32 distance,CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
-    void DrawCube(float32 Size, CColor Color=colWHITE);
-    void DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, CColor Color=colWHITE);
-    void DrawCircle(float32 Radius, CColor Color=colWHITE, int32 Aristas=10);
-    void DrawSphere(float32 Radius, CColor Color=colWHITE, int32 Aristas=10);
-    void DrawLine(const Vect3f &PosA, const Vect3f &PosB, CColor Color=colWHITE);
+    void DrawGrid(float32 Size, Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
+    void DrawPlane(    float32 Size, const Math::Vect3f& normal, float32 distance,Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
+    void DrawCube(float32 Size, Math::CColor Color=Math::colWHITE);
+    void DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color=Math::colWHITE);
+    void DrawCircle(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
+    void DrawSphere(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
+    void DrawLine(const Math::Vect3f &PosA, const Math::Vect3f &PosB, Math::CColor Color=Math::colWHITE);
     void DrawCamera (CCamera* camera);
-    void DrawQuad2D (const Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CColor color = colBLUE);
-    void GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dirRay);
-    void DrawRectangle2D ( const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor, uint32 edge_w, uint32 edge_h, CColor& edgeColor );
-    void DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, CColor Color, bool drawCover);
-    void DrawCapsule (    float32 radius, float32 h, uint32 Aristas=10, CColor Color=colWHITE );
-    void DrawQuad3D(const Vect3f& pos, const Vect3f& up, const Vect3f& right, float32 w, float32 h, CColor color = colBLUE);
-    void DrawQuad3D(    const Vect3f& ul, const Vect3f& ur, const Vect3f& dl, const Vect3f& dr, CColor color);
+    void DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, Math::CColor color = Math::colBLUE);
+    void GetRay (const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay);
+    void DrawRectangle2D ( const Math::Vect2i& pos, uint32 w, uint32 h, Math::CColor& backGroundColor, uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor );
+    void DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, Math::CColor Color, bool drawCover);
+    void DrawCapsule (    float32 radius, float32 h, uint32 Aristas=10, Math::CColor Color=Math::colWHITE );
+    void DrawQuad3D(const Math::Vect3f& pos, const Math::Vect3f& up, const Math::Vect3f& right, float32 w, float32 h, Math::CColor color = Math::colBLUE);
+    void DrawQuad3D(    const Math::Vect3f& ul, const Math::Vect3f& ur, const Math::Vect3f& dl, const Math::Vect3f& dr, Math::CColor color);
 
 
 private:
@@ -80,8 +80,8 @@ private:
     LPDIRECT3DDEVICE9   m_pD3DDevice;                    // direct3d device
     uint32                m_uWidth;                        // width of the client windows
     uint32                m_uHeight;                        // height of the client windows
-    CColor                m_BackbufferColor_debug;        // Clear the backbuffer with this color in debug mode 
-    CColor                m_BackbufferColor_release;        // Clear the backbuffer with this color in release mode
+    Math::CColor                m_BackbufferColor_debug;        // Clear the backbuffer with this color in debug mode 
+    Math::CColor                m_BackbufferColor_release;        // Clear the backbuffer with this color in release mode
     LPDIRECT3DSURFACE9    m_pBackBuffer;
     CFrustum            m_Frustum;
     bool                m_bPaintSolid;
@@ -91,7 +91,7 @@ private:
 
     CCamera*            m_pCurrentCamera;
 
-    void CGraphicsManager::CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Vect2i & finalPos);
+    void CGraphicsManager::CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i & finalPos);
 };
 
 #endif // GRAPHICS_MANAGER_H

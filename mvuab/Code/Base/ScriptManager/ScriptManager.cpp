@@ -1,19 +1,20 @@
 #include "ScriptManager.h"
 
-#include <Texture\TextureManager.h>
-#include <Texture\Texture.h>
+#include "Texture\TextureManager.h"
+#include "Texture\Texture.h"
 
-#include <RenderableObject\RenderableObject.h>
-#include <RenderableObject\RenderableObjectsManager.h>
+#include "RenderableObject\RenderableObject.h"
+#include "RenderableObject\RenderableObjectsManager.h"
 
 #include "GraphicsManager.h"
 
-#include <Math\Matrix44.h>
-#include <Math\Vector3.h>
-#include <Object3D.h>
+#include "Math\Matrix44.h"
+#include "Math\Matrix34.h"
+#include "Math\Vector3.h"
+#include "Object3D.h"
 
-#include <Utils\Name.h>
-#include <Utils\Visible.h>
+#include "Utils\Name.h"
+#include "Utils\Visible.h"
 
 #include <assert.h>
 
@@ -71,9 +72,9 @@ void CScriptManager::RegisterLUAFunctions()
 {
 	module(m_LS)
 	[
-		class_<Vect3f>("Vect3f")
+		class_<Math::Vect3f>("Math::Vect3f")
 			.def(constructor<float, float, float>())
-			.def(constructor<const Vect3f &>())
+			.def(constructor<const Math::Vect3f &>())
 			.def(constructor<float>())
 			.def(constructor<>())
 
@@ -87,15 +88,15 @@ void CScriptManager::RegisterLUAFunctions()
 			.def(const_self * float())
 			.def(const_self / float())
 
-			.def_readwrite("x", &Vect3f::x)
-			.def_readwrite("y", &Vect3f::y)
-			.def_readwrite("z", &Vect3f::z)
+			.def_readwrite("x", &Math::Vect3f::x)
+			.def_readwrite("y", &Math::Vect3f::y)
+			.def_readwrite("z", &Math::Vect3f::z)
 	];
 
 	module(m_LS)
 	[
 		class_<CObject3D>("CObject3D")
-			.def(constructor<const Vect3f &, float, float, float>())
+			.def(constructor<const Math::Vect3f &, float, float, float>())
 			.def(constructor<>())
 
 			.def("GetYaw", &CObject3D::GetYaw)

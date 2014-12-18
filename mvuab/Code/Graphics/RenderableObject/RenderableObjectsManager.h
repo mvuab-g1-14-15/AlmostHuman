@@ -20,8 +20,8 @@ class CRenderableObjectsManager : CTemplatedVectorMapManager<CRenderableObject>
         void Update(float ElapsedTime);
         void Render();
 
-        CRenderableObject * AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Vect3f &Position);
-        CRenderableObject * AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Vect3f &Position);
+        CRenderableObject * AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Math::Vect3f &Position);
+        CRenderableObject * AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Math::Vect3f &Position);
         
         //void AddResource(const std::string &Name, CRenderableObject *RenderableObject);
         void CleanUp();

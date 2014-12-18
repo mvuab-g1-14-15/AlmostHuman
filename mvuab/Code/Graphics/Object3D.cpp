@@ -1,7 +1,7 @@
 #include "Object3D.h"
 #include "Math\Matrix44.h"
 
-CObject3D::CObject3D(const Vect3f& pos, float32 yaw, float32 pitch, float32 roll, Vect3f scale)
+CObject3D::CObject3D(const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll, Math::Vect3f scale)
 : m_Position(pos)
 , m_fYaw(yaw)
 , m_fPitch(pitch)
@@ -12,17 +12,17 @@ CObject3D::CObject3D(const Vect3f& pos, float32 yaw, float32 pitch, float32 roll
 }
 
 CObject3D::CObject3D()
-: m_Position( Vect3f(0.f,0.f,0.f))
+: m_Position( Math::Vect3f(0.f,0.f,0.f))
 , m_fYaw(0.f)
 , m_fPitch(0.f)
 , m_fRoll(0.f)
-, m_Scale(Vect3f(1.0f,1.0f,1.0f))
+, m_Scale(Math::Vect3f(1.0f,1.0f,1.0f))
 {
 }
 
-Mat44f CObject3D::GetTransform()
+Math::Mat44f CObject3D::GetTransform()
 {
-	Mat44f l_MRotation, l_MTranslate, l_MScale;
+	Math::Mat44f l_MRotation, l_MTranslate, l_MScale;
 	l_MRotation.SetIdentity();
 	l_MTranslate.SetIdentity();
 	l_MScale.SetIdentity();

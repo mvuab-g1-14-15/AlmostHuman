@@ -168,7 +168,7 @@ uint32 CFontManager::CreateFont (uint32 size, bool bold, bool italica, const std
     return id;
 }
 
-uint32 CFontManager::DrawDefaultText(uint32 x, uint32 y, CColor color, const char * format, ... )
+uint32 CFontManager::DrawDefaultText(uint32 x, uint32 y, Math::CColor color, const char * format, ... )
 {
     va_list args;
     char* buffer;
@@ -196,7 +196,7 @@ uint32 CFontManager::DrawDefaultText(uint32 x, uint32 y, CColor color, const cha
     return (rect.bottom  - rect.top);
 }
 
-uint32 CFontManager::DrawText(uint32 x, uint32 y, CColor color, uint32 idFont, const char * format, ... )
+uint32 CFontManager::DrawText(uint32 x, uint32 y, Math::CColor color, uint32 idFont, const char * format, ... )
 {
     va_list args;
     char* buffer;
@@ -237,10 +237,10 @@ uint32 CFontManager::DrawLiteral (uint32 x, uint32 y, const std::string & s_lit)
         }
         else
         {
-            return DrawDefaultText(x, y, colGREEN, "Font Error: %s", lit.m_sFontId.c_str());
+            return DrawDefaultText(x, y, Math::colGREEN, "Font Error: %s", lit.m_sFontId.c_str());
         }
     }    
-    return DrawDefaultText(x, y, colGREEN, "Literal Error: %s", s_lit.c_str());
+    return DrawDefaultText(x, y, Math::colGREEN, "Literal Error: %s", s_lit.c_str());
 }
 
 

@@ -21,7 +21,7 @@ void CInstanceMesh::Render()
 {
   CGraphicsManager *GM = CGraphicsManager::GetSingletonPtr();
 
-  Mat44f t, rot, pos;
+  Math::Mat44f t, rot, pos;
 
   t.SetIdentity();
   rot.SetIdentity();

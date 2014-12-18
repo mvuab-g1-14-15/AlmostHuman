@@ -209,7 +209,7 @@ bool CStaticMesh::Load(const std::string &FileName)
 	float l_AABB[6];
     std::fread(&l_AABB, sizeof(float) * 6, 1, l_pFile);
 
-	m_AABB = AABB3f(Vect3f(l_AABB[0], l_AABB[1], l_AABB[2]), Vect3f(l_AABB[3], l_AABB[4], l_AABB[5]));
+  	m_AABB = Math::AABB3f(Math::Vect3f(l_AABB[0], l_AABB[1], l_AABB[2]), Math::Vect3f(l_AABB[3], l_AABB[4], l_AABB[5]));
 
     unsigned short int l_footer = 0;
     std::fread(&l_footer, sizeof(unsigned short int), 1, l_pFile);

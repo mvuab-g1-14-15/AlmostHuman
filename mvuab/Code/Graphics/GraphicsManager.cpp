@@ -58,8 +58,8 @@ struct VERTEX2
 CGraphicsManager::CGraphicsManager() :
     m_uWidth(800),
     m_uHeight(600),
-	m_BackbufferColor_debug(colBLUE),
-    m_BackbufferColor_release(colBLACK),
+    m_BackbufferColor_debug(Math::colBLUE),
+    m_BackbufferColor_release(Math::colBLACK),
     m_bPaintSolid(true)
 {
 }
@@ -262,9 +262,9 @@ void CGraphicsManager::GetWindowRect( HWND hwnd )
 
 void CGraphicsManager::DrawAxis(float32 Size)
 {
-    DWORD x_axis_color_aux = colRED.GetUint32Argb();
-    DWORD y_axis_color_aux = colGREEN.GetUint32Argb();
-    DWORD z_axis_color_aux = colYELLOW.GetUint32Argb();
+    DWORD x_axis_color_aux = Math::colRED.GetUint32Argb();
+    DWORD y_axis_color_aux = Math::colGREEN.GetUint32Argb();
+    DWORD z_axis_color_aux = Math::colYELLOW.GetUint32Argb();
 
     CUSTOMVERTEX v[] =
     {
@@ -286,7 +286,7 @@ void CGraphicsManager::DrawAxis(float32 Size)
     m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,3, v,sizeof(CUSTOMVERTEX));
 }
 
-void CGraphicsManager::DrawGrid (float32 Size, CColor Color, int32 GridX, int32 GridZ)
+void CGraphicsManager::DrawGrid (float32 Size, Math::CColor Color, int32 GridX, int32 GridZ)
 {
   // Check if the size of the grid is null
     if( Size <= 0 )
@@ -321,12 +321,12 @@ void CGraphicsManager::DrawGrid (float32 Size, CColor Color, int32 GridX, int32 
   }
 }
 
-void CGraphicsManager::DrawPlane (float32 Size, const Vect3f& normal, float32 distance, CColor Color, int32 GridX, int32 GridZ )
+void CGraphicsManager::DrawPlane (float32 Size, const Math::Vect3f& normal, float32 distance, Math::CColor Color, int32 GridX, int32 GridZ )
 {
 
 }
 
-void CGraphicsManager::DrawCube (float32 Size, CColor Color)
+void CGraphicsManager::DrawCube (float32 Size, Math::CColor Color)
 {
     float32 halfSize = Size * 0.5f;
     DWORD cube_color_aux = Color.GetUint32Argb();
@@ -378,7 +378,7 @@ void CGraphicsManager::DrawCube (float32 Size, CColor Color)
     m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
 }
 
-void CGraphicsManager::DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, CColor Color)
+void CGraphicsManager::DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color)
 {
     float32 halfSizeX = SizeX * 0.5f;
     float32 halfSizeZ = SizeZ * 0.5f;
@@ -431,7 +431,7 @@ void CGraphicsManager::DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, CCol
     m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
 }
 
-void CGraphicsManager::DrawSphere( float32 Radius, CColor Color, int32 Aristas )
+void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Aristas )
 {
     if(!m_Frustum.SphereVisible( D3DXVECTOR3(0.0f,0.0f,0.0f), Radius) )
         return;
@@ -439,36 +439,36 @@ void CGraphicsManager::DrawSphere( float32 Radius, CColor Color, int32 Aristas )
     ++m_VisibleObjects;
   DWORD sphere_color_aux = Color.GetUint32Argb();
 
-  float32 Angle = mathUtils::Deg2Rad(360.0f/Aristas);
+  float32 Angle = Math::Utils::Deg2Rad(360.0f/Aristas);
 
   // Set the attributes to the paint device
   m_pD3DDevice->SetTexture(0,NULL);
   m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
 
-  for(float32 i = 0; i < e2PIf; i += Angle)
+  for(float32 i = 0; i < Math::two_pi32; i += Angle)
   {
-    const float32 height = mathUtils::Sin(i) * Radius;
-    const float32 newRadius = Radius * mathUtils::Cos(i);
-    for(float32 j = 0; j < e2PIf; j += Angle)
+    const float32 height = Math::Utils::Sin(i) * Radius;
+    const float32 newRadius = Radius * Math::Utils::Cos(i);
+    for(float32 j = 0; j < Math::two_pi32; j += Angle)
     {
       // Drawing an step of the circle located in height
       CUSTOMVERTEX v[2] =
       { 
-        { mathUtils::Cos(j) * newRadius, height, mathUtils::Sin(j) * newRadius, sphere_color_aux},
-        { mathUtils::Cos(j + Angle) * newRadius, height, mathUtils::Sin(j + Angle) * newRadius, sphere_color_aux},
+        { Math::Utils::Cos(j) * newRadius, height, Math::Utils::Sin(j) * newRadius, sphere_color_aux},
+        { Math::Utils::Cos(j + Angle) * newRadius, height, Math::Utils::Sin(j + Angle) * newRadius, sphere_color_aux},
       };
 
       m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,1, v,sizeof(CUSTOMVERTEX));
 
       // From the current position in the X-Z axis obtain the same position 
       // in the next Y height and draw a line for each angle step
-      const float32 height2 = mathUtils::Sin(i + Angle) * Radius;
-      const float32 newRadius2 = Radius * mathUtils::Cos( i + Angle );
+      const float32 height2 = Math::Utils::Sin(i + Angle) * Radius;
+      const float32 newRadius2 = Radius * Math::Utils::Cos( i + Angle );
 
       CUSTOMVERTEX v1[2] =
       { 
-        { mathUtils::Cos(j) * newRadius, height, mathUtils::Sin(j) * newRadius, sphere_color_aux},
-        { mathUtils::Cos(j) * newRadius2, height2, mathUtils::Sin(j) * newRadius2, sphere_color_aux},
+        { Math::Utils::Cos(j) * newRadius, height, Math::Utils::Sin(j) * newRadius, sphere_color_aux},
+        { Math::Utils::Cos(j) * newRadius2, height2, Math::Utils::Sin(j) * newRadius2, sphere_color_aux},
       };
 
       m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,1, v1,sizeof(CUSTOMVERTEX));
@@ -476,27 +476,27 @@ void CGraphicsManager::DrawSphere( float32 Radius, CColor Color, int32 Aristas )
   }
 }
 
-void CGraphicsManager::DrawCircle( float32 Radius, CColor Color, int32 Aristas )
+void CGraphicsManager::DrawCircle( float32 Radius, Math::CColor Color, int32 Aristas )
 {
   DWORD sphere_color_aux = Color.GetUint32Argb();
 
-  float32 Angle = mathUtils::Deg2Rad(360.0f/Aristas);
+  float32 Angle = Math::Utils::Deg2Rad(360.0f/Aristas);
 
   // Set the attributes to the paint device
   m_pD3DDevice->SetTexture(0,NULL);
   m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
 
-  for(float32 i = 0; i < e2PIf; i += Angle)
+  for(float32 i = 0; i < Math::two_pi32; i += Angle)
   {
     CUSTOMVERTEX v[2] =
     { 
-      { mathUtils::Cos(i) * Radius,
+      { Math::Utils::Cos(i) * Radius,
       0.0f,
-      mathUtils::Sin(i) * Radius,
+      Math::Utils::Sin(i) * Radius,
       sphere_color_aux},
-      { mathUtils::Cos(i + Angle) * Radius,
+      { Math::Utils::Cos(i + Angle) * Radius,
       0.0f,
-      mathUtils::Sin(i+Angle) * Radius,
+      Math::Utils::Sin(i+Angle) * Radius,
       sphere_color_aux},
     };
 
@@ -504,7 +504,7 @@ void CGraphicsManager::DrawCircle( float32 Radius, CColor Color, int32 Aristas )
   }
 }
 
-void CGraphicsManager::DrawLine ( const Vect3f &PosA, const Vect3f &PosB, CColor Color)
+void CGraphicsManager::DrawLine ( const Math::Vect3f &PosA, const Math::Vect3f &PosB, Math::CColor Color)
 {
     DWORD color_aux = Color.GetUint32Argb();
 
@@ -524,7 +524,7 @@ void CGraphicsManager::SetTransform    (D3DXMATRIX& matrix)
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 }
 
-void CGraphicsManager::SetTransform    (Mat44f& m)
+void CGraphicsManager::SetTransform(Math::Mat44f& m)
 {
     D3DXMATRIX aux(    m.m00, m.m10, m.m20, m.m30
                 , m.m01, m.m11, m.m21, m.m31
@@ -540,9 +540,9 @@ void CGraphicsManager::DrawCamera (CCamera* camera)
 
 //La posicion y el (w,h) esta en pixeles
 //La posicion y el (w,h) esta en pixeles
-void CGraphicsManager::DrawQuad2D (const Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CColor color)
+void CGraphicsManager::DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, Math::CColor color)
 {
-    Vect2i finalPos = pos;
+    Math::Vect2i finalPos = pos;
     CalculateAlignment(w, h, alignment, finalPos);
 
     // finalPos = [0] 
@@ -567,7 +567,7 @@ void CGraphicsManager::DrawQuad2D (const Vect2i& pos, uint32 w, uint32 h, ETypeA
     m_pD3DDevice->SetTexture(0, NULL);
     m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2,indices,D3DFMT_INDEX16, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
-void CGraphicsManager::CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Vect2i & finalPos)
+void CGraphicsManager::CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i & finalPos)
 {
     switch (alignment)
     {
@@ -634,7 +634,7 @@ void CGraphicsManager::DisableZBuffering ()
     m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );    
 }
 
-void CGraphicsManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dirRay)
+void CGraphicsManager::GetRay (const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay)
 {
     D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
 
@@ -663,8 +663,8 @@ void CGraphicsManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& d
     dirRay.z = ray_dir.z;
 }
 
-void CGraphicsManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor,
-                                        uint32 edge_w, uint32 edge_h, CColor& edgeColor )
+void CGraphicsManager::DrawRectangle2D (const Math::Vect2i& pos, uint32 w, uint32 h, Math::CColor& backGroundColor,
+                                        uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor )
 {
     //Draw background quad2D:
     DrawQuad2D(pos, w, h, UPPER_LEFT, backGroundColor);
@@ -672,7 +672,7 @@ void CGraphicsManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, C
     //Draw the four edges:
 
     //2 Horizontal:
-    Vect2i pos_aux = pos;
+    Math::Vect2i pos_aux = pos;
     pos_aux.y -= edge_h;
     DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
     pos_aux = pos;
@@ -694,31 +694,31 @@ void CGraphicsManager::GetWidthAndHeight( uint32& w,uint32& h)
     h = m_uHeight;
 }
 
-void CGraphicsManager::DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, CColor Color, bool drawCover)
+void CGraphicsManager::DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, Math::CColor Color, bool drawCover)
 {
 
-    CColor color_aux = Color;
+    Math::CColor color_aux = Color;
     /*if (mode == PAINT_BOTH)
     {
-        color_aux = colWHITE;
+        color_aux = Math::colWHITE;
     }*/
-    std::vector< std::vector<Vect3f> > l_AllPoints;
+    std::vector< std::vector<Math::Vect3f> > l_AllPoints;
     
     float32 currentRadius, currentHeight;
     for(uint32 i= 0; i < Aristas; ++i)
     {
-        std::vector<Vect3f> l_currentCircle;
-        currentRadius = mathUtils::Lerp(Top_Radius, Bottom_Radius,(float32)i/(float32)(Aristas-1));
-        currentHeight = mathUtils::Lerp(h*0.5f, -h*0.5f,(float32)i/(float32)(Aristas-1));
+        std::vector<Math::Vect3f> l_currentCircle;
+        currentRadius = Math::Utils::Lerp(Top_Radius, Bottom_Radius,(float32)i/(float32)(Aristas-1));
+        currentHeight = Math::Utils::Lerp(h*0.5f, -h*0.5f,(float32)i/(float32)(Aristas-1));
         for(uint32 t= 0; t < Aristas; ++t)
         {
-            float32 angle = mathUtils::Deg2Rad(360.0f*((float32)t)/((float32)Aristas));
-            Vect3f l_PosA(    currentRadius*cos(angle), currentHeight, currentRadius*sin(angle) );
+            float32 angle = Math::Utils::Deg2Rad(360.0f*((float32)t)/((float32)Aristas));
+            Math::Vect3f l_PosA(    currentRadius*cos(angle), currentHeight, currentRadius*sin(angle) );
 
             //if (mode != PAINT_SOLID)
             //{
-                angle = mathUtils::Deg2Rad(360.0f*((float32)t+1)/((float32)Aristas));
-                Vect3f l_PosB(    currentRadius*cos(angle), currentHeight,    currentRadius*sin(angle) );
+                angle = Math::Utils::Deg2Rad(360.0f*((float32)t+1)/((float32)Aristas));
+                Math::Vect3f l_PosB(    currentRadius*cos(angle), currentHeight,    currentRadius*sin(angle) );
                 DrawLine(l_PosA,l_PosB, color_aux);
             //}
 
@@ -730,24 +730,24 @@ void CGraphicsManager::DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, f
     for(uint32 cont = 0; cont < Aristas; ++cont)
     {
         //Laterales:
-        std::vector<Vect3f> l_TopRadiusPoints            = l_AllPoints[0];
-        std::vector<Vect3f> l_BottomRadiusPoints    = l_AllPoints[Aristas-1];
+        std::vector<Math::Vect3f> l_TopRadiusPoints            = l_AllPoints[0];
+        std::vector<Math::Vect3f> l_BottomRadiusPoints    = l_AllPoints[Aristas-1];
         DrawLine(l_TopRadiusPoints[cont],l_BottomRadiusPoints[cont],color_aux);
         if (drawCover)
         {
             //if (mode != PAINT_SOLID)
             //{    
                 //Tapa de arriba:
-                DrawLine(l_TopRadiusPoints[cont], Vect3f(0.f,h*0.5f,0.f), color_aux);
+                DrawLine(l_TopRadiusPoints[cont], Math::Vect3f(0.f,h*0.5f,0.f), color_aux);
                 //Tapa de abajo:
-                DrawLine(l_BottomRadiusPoints[cont], Vect3f(0.f,-h*0.5f,0.f), color_aux);
+                DrawLine(l_BottomRadiusPoints[cont], Math::Vect3f(0.f,-h*0.5f,0.f), color_aux);
             /*}
             if (mode != PAINT_WIREFRAME)
             {
                 //Tapa de arriba:
-                DrawTriangle3D(l_TopRadiusPoints[cont],    l_TopRadiusPoints[(cont+1)%Aristas],        Vect3f(0.f,h*0.5f,0.f),            Color);
+                DrawTriangle3D(l_TopRadiusPoints[cont],    l_TopRadiusPoints[(cont+1)%Aristas],        Math::Vect3f(0.f,h*0.5f,0.f),            Color);
                 //Tapa de abajo:
-                DrawTriangle3D(Vect3f(0.f,-h*0.5f,0.f),    l_BottomRadiusPoints[(cont+1)%Aristas],    l_BottomRadiusPoints[cont],    Color);
+                DrawTriangle3D(Math::Vect3f(0.f,-h*0.5f,0.f),    l_BottomRadiusPoints[(cont+1)%Aristas],    l_BottomRadiusPoints[cont],    Color);
             }*/
         }
     }
@@ -760,10 +760,10 @@ void CGraphicsManager::DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, f
         {
             for(uint32 cont = 0; cont < Aristas; ++cont)
             {
-                Vect3f ul = l_AllPoints[i][cont];
-                Vect3f dl = l_AllPoints[i+1][cont];
-                Vect3f ur;
-                Vect3f dr;
+                Math::Vect3f ul = l_AllPoints[i][cont];
+                Math::Vect3f dl = l_AllPoints[i+1][cont];
+                Math::Vect3f ur;
+                Math::Vect3f dr;
                 if( cont == Aristas -1 )
                 {
                     ur = l_AllPoints[i][0];
@@ -781,7 +781,7 @@ void CGraphicsManager::DrawCylinder(float32 Top_Radius, float32 Bottom_Radius, f
     }*/
 }
 
-void CGraphicsManager::DrawCapsule(    float32 radius, float32 h, uint32 Aristas, CColor Color)
+void CGraphicsManager::DrawCapsule(    float32 radius, float32 h, uint32 Aristas, Math::CColor Color)
 {
     D3DXMATRIX matrix;
     D3DXMatrixIdentity(&matrix);
@@ -799,9 +799,9 @@ void CGraphicsManager::DrawCapsule(    float32 radius, float32 h, uint32 Aristas
     //DrawSphere(radius, Color, Aristas, mode, HALF_BOTTOM);
 }
 
-void CGraphicsManager::DrawQuad3D (    const Vect3f& pos, const Vect3f& up, const Vect3f& right, float32 w, float32 h, CColor color)
+void CGraphicsManager::DrawQuad3D (    const Math::Vect3f& pos, const Math::Vect3f& up, const Math::Vect3f& right, float32 w, float32 h, Math::CColor color)
 {
-    Vect3f upper_left, upper_right, down_right, down_left;
+    Math::Vect3f upper_left, upper_right, down_right, down_left;
     upper_left    = pos + up*h*0.5f - right*w*0.5f;
     upper_right    = pos + up*h*0.5f + right*w*0.5f;
     down_left        = pos - up*h*0.5f - right*w*0.5f;
@@ -810,7 +810,7 @@ void CGraphicsManager::DrawQuad3D (    const Vect3f& pos, const Vect3f& up, cons
     DrawQuad3D (    upper_left, upper_right, down_left, down_right, color);
 }
 
-void CGraphicsManager::DrawQuad3D (    const Vect3f& ul, const Vect3f& ur, const Vect3f& dl, const Vect3f& dr, CColor color)
+void CGraphicsManager::DrawQuad3D (    const Math::Vect3f& ul, const Math::Vect3f& ur, const Math::Vect3f& dl, const Math::Vect3f& dr, Math::CColor color)
 {
     unsigned short indices[6]={0,2,1,1,2,3};
     CUSTOMVERTEX v[4] =
@@ -837,7 +837,7 @@ void CGraphicsManager::DrawIcoSphere()
         7,10,3, 7,6,10, 7,11,6, 11,0,6 ,0,1,6,
         6,1,10, 9,0,11, 9,11,2, 9,2,5  ,7,2,11 };
             
-    CColor color = colBLACK;                                    
+    Math::CColor color = Math::colBLACK;
                                                                 
     CUSTOMVERTEX v[] =
     {
@@ -872,7 +872,7 @@ void CGraphicsManager::RenderCursor()
 
     VERTEX2 Vertex[3];
 
-    Vect2i l_MousePosition;
+    Math::Vect2i l_MousePosition;
     CInputManager::GetSingletonPtr()->GetPosition(IDV_MOUSE, l_MousePosition);
     
     Vertex[0].pos=D3DXVECTOR3((float)(l_MousePosition.x), (float)(l_MousePosition.y),0.0f );

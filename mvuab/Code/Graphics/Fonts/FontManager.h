@@ -36,8 +36,8 @@ public:
     bool                                LoadTTFs                                    (const std::string& pathFile);
     int32                                GetTTF_Id                                    (const std::string& name);
     uint32                            CreateFont                                (uint32 size, bool bold, bool italica, const std::string& fontName, bool replaceDefault = false);
-    uint32                DrawDefaultText                   (uint32 x, uint32 y, CColor color, const char * format, ... );
-    uint32                            DrawText                                    (uint32 x, uint32 y, CColor color, uint32 idFont, const char * format, ... );
+    uint32                DrawDefaultText                   (uint32 x, uint32 y, Math::CColor color, const char * format, ... );
+    uint32                            DrawText                                    (uint32 x, uint32 y, Math::CColor color, uint32 idFont, const char * format, ... );
     uint32                            DrawLiteral                                (uint32 x, uint32 y, const std::string & lit);
     uint32                            SizeX                                            (const char * format, uint32 idFont = 0);
     uint32                            SizeY                                            (const char * format, uint32 idFont = 0);

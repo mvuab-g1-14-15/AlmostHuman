@@ -24,7 +24,7 @@ protected:
   unsigned int m_NumFaces;
   unsigned int m_NumDraws;
 
-  AABB3f m_AABB;
+  Math::AABB3f m_AABB;
 
 public:
   CStaticMesh();
@@ -40,7 +40,7 @@ public:
   unsigned int        GetNumFaces        () { return m_NumFaces; }
   unsigned int        GetNumDraws        () { return m_NumDraws; }
 
-  AABB3f GetAABB() { return m_AABB;}
+  Math::AABB3f GetAABB() { return m_AABB;}
 
 };
 
