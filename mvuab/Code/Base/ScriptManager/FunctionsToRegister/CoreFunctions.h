@@ -3,6 +3,18 @@
 
 #include "Engine.h"
 #include "Core.h"
+#include "GraphicsManager.h"
+#include "InputManager.h"
+#include "Language\LanguageManager.h"
+#include "Fonts\FontManager.h"
+#include "ActionManager.h"
+#include "Utils\DebugWindowManager.h"
+#include "StaticMeshes\StaticMeshManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
+#include "AnimatedModels\AnimatedModelsManager.h"
+#include "Texture\TextureManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
+#include "ScriptManager\ScriptManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -42,7 +54,7 @@ void registerCore(lua_State *m_LS)
 			.def("Render", &CCore::Render)
 
 			//Getter Managers
-			/*.def("GetActionManager", &CCore::GetActionManager)	PREGUNTAR A JORDI
+			.def("GetActionManager", &CCore::GetActionManager)	
 			.def("GetAnimatedModelsManager", &CCore::GetAnimatedModelsManager)
 			.def("GetFontManager", &CCore::GetFontManager)
 			.def("GetGraphicsManager", &CCore::GetGraphicsManager)
@@ -51,7 +63,7 @@ void registerCore(lua_State *m_LS)
 			.def("GetRenderableObjectsManager", &CCore::GetRenderableObjectsManager)
 			.def("GetScriptManager", &CCore::GetScriptManager)
 			.def("GetStaticMeshManager", &CCore::GetStaticMeshManager)
-			.def("GetTextureManager", &CCore::GetTextureManager)*/
+			.def("GetTextureManager", &CCore::GetTextureManager)
 			//Getter Variables
 			.def("GetAnimatedModelsPath", &CCore::GetAnimatedModelsPath)
 			.def("GetConfigPath", &CCore::GetConfigPath)
