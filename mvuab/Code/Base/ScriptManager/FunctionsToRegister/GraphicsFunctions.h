@@ -1,0 +1,4 @@
+#ifndef GRAPHICSREGISTER_H
+#define GRAPHICSREGISTER_H
+
+#endif

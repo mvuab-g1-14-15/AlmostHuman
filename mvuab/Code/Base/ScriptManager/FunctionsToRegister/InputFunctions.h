@@ -1,0 +1,4 @@
+#ifndef INPUTFUNCTIONS_H
+#define INPUTFUNCTIONS_H
+
+#endif
