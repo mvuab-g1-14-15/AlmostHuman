@@ -13,7 +13,7 @@
 using namespace luabind;
 
 
-CScriptManager::CScriptManager()
+CScriptManager::CScriptManager() : m_XMLFile("")
 {
 }
 
@@ -37,7 +37,20 @@ void CScriptManager::Destroy()
 	lua_close(m_LS);
 }
 
-void CScriptManager::RunCode(const std::string &Code) const
+void CScriptManager::Reload()
+{
+	Destroy();
+
+	Load(m_XMLFile);
+	Initialize();
+}
+
+void CScriptManager::Load(const std::string &XMLFile)
+{
+	m_XMLFile = XMLFile;
+}
+
+void CScriptManager::RunCode(const std::string &Code)
 {
 	if(luaL_dostring(m_LS,Code.c_str()))
 	{
@@ -46,7 +59,7 @@ void CScriptManager::RunCode(const std::string &Code) const
 	}
 }
 
-void CScriptManager::RunFile(const std::string &FileName) const
+void CScriptManager::RunFile(const std::string &FileName)
 {
 	if(luaL_dofile(m_LS, FileName.c_str()))
 	{
