@@ -17,7 +17,7 @@
 struct SLiteral
 {
     std::string    m_sFontId;
-    CColor            m_cColor;
+    Math::CColor            m_cColor;
     std::string    m_value;
 };
 

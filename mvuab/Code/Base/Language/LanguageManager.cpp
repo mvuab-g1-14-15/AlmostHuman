@@ -61,9 +61,9 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
             
             std::string id            = m(i).GetPszProperty("id");
             l_literal.m_sFontId    = m(i).GetPszProperty("font");
-            Vect4f vecColor            = m(i).GetVect4fProperty("color", Vect4f(0.f,0.f,0.f,0.f));    
+            Math::Vect4f vecColor            = m(i).GetVect4fProperty("color", Math::Vect4f(0.f,0.f,0.f,0.f));    
             l_literal.m_value        = m(i).GetPszISOProperty("value", "nothing");    
-            l_literal.m_cColor    = CColor(vecColor.x, vecColor.y, vecColor.z, vecColor.w);
+            l_literal.m_cColor    = Math::CColor(vecColor.x, vecColor.y, vecColor.z, vecColor.w);
             language.insert(std::pair<std::string,SLiteral>(id, l_literal));
             CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "LanguageManager::LoadXML-> Añadido literal(%s,%s,[%f,%f,%f,%f],%s)", 
                                                   id.c_str(), l_literal.m_sFontId.c_str(),vecColor.x,vecColor.y,vecColor.z,vecColor.w, l_literal.m_value.c_str());
