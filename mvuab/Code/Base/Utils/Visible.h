@@ -5,10 +5,16 @@
 class CVisible
 {
 public:
-	CVisible(){}
-    ~CVisible() {}
+	CVisible() : m_Visible( false )
+	{
+	}
+
+    ~CVisible()
+	{
+	}
 	
-	GET_SET(bool,Visible);
+	bool GetVisible(){return m_Visible;}
+	void SetVisible( bool visible ){ m_Visible = visible; }
 
 protected:
     bool m_Visible;

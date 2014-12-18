@@ -12,7 +12,6 @@
 #include "Core.h"
 
 #include "ScriptManager\ScriptManager.h"
-+
 #include "StaticMeshes\StaticMeshManager.h"
 #include "StaticMeshes\InstanceMesh.h"
 #include "StaticMeshes\StaticMesh.h"
