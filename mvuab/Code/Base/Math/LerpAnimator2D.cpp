@@ -2,7 +2,7 @@
 #include <cmath>
 #include <assert.h>
 
-void CLerpAnimator2D::SetValues (Vect2f initValue, Vect2f endValue, float32 totalTime, ETypeFunction type)
+void Math::CLerpAnimator2D::SetValues (Math::Vect2f initValue, Math::Vect2f endValue, float32 totalTime, ETypeFunction type)
 {
     assert( totalTime > 0);
 
@@ -14,7 +14,7 @@ void CLerpAnimator2D::SetValues (Vect2f initValue, Vect2f endValue, float32 tota
 }
 
 
-bool CLerpAnimator2D::Update (float32 deltaTime, Vect2f &value)
+bool Math::CLerpAnimator2D::Update (float32 deltaTime, Math::Vect2f &value)
 {
     m_fElapsedTime += deltaTime;
     bool finish = false;
@@ -39,7 +39,7 @@ bool CLerpAnimator2D::Update (float32 deltaTime, Vect2f &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = mathUtils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);            
         }
         break;
     case FUNC_DECREMENT:

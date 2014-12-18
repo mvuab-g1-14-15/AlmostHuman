@@ -4,6 +4,8 @@
 #include "Utils\Types.h"
 #include "Vector3.h"
 
+namespace Math
+{
 template<typename T>
 class AABB
 {
@@ -66,4 +68,5 @@ typedef AABB<int32>     AABB3i;
 typedef AABB<uint32>    AABB3u;
 typedef AABB<uint16>    AABB3w;
 
+} //namespace Math
 #endif //AABB_H

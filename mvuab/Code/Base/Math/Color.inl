@@ -1,11 +1,11 @@
 #include "MathUtils.h"
 
-inline CColor& CColor::Clamp()
+inline CColor& Math::CColor::Clamp()
 {
-    m_Color.x = mathUtils::Min(mathUtils::Max(m_Color.x, 0.0f), 1.0f);
-    m_Color.y = mathUtils::Min(mathUtils::Max(m_Color.y, 0.0f), 1.0f);
-    m_Color.z = mathUtils::Min(mathUtils::Max(m_Color.z, 0.0f), 1.0f);
-    m_Color.w = mathUtils::Min(mathUtils::Max(m_Color.w, 0.0f), 1.0f);
+    m_Color.x = Math::Utils::Min(Math::Utils::Max(m_Color.x, 0.0f), 1.0f);
+    m_Color.y = Math::Utils::Min(Math::Utils::Max(m_Color.y, 0.0f), 1.0f);
+    m_Color.z = Math::Utils::Min(Math::Utils::Max(m_Color.z, 0.0f), 1.0f);
+    m_Color.w = Math::Utils::Min(Math::Utils::Max(m_Color.w, 0.0f), 1.0f);
 
     return (*this);
 }
@@ -13,7 +13,7 @@ inline CColor& CColor::Clamp()
 ///
 /// Construye un uint32 que codifica el color como 0xAARRGGBB (PC)
 ///
-inline uint32 CColor::GetUint32Argb () const
+inline uint32 Math::CColor::GetUint32Argb () const
 {
     return  (uint32)(float32ToByte(m_Color[3])<<24) 
         + (float32ToByte(m_Color[0])<<16)
@@ -24,7 +24,7 @@ inline uint32 CColor::GetUint32Argb () const
 ///
 /// Construye un uint32 que codifica el color como 0xAABBGGRR (PC)
 ///
-inline uint32 CColor::GetUint32Abgr () const
+inline uint32 Math::CColor::GetUint32Abgr () const
 {
     return  (uint32)(float32ToByte(m_Color[3])<<24) 
         + (float32ToByte(m_Color[2])<<16)
@@ -35,7 +35,7 @@ inline uint32 CColor::GetUint32Abgr () const
 ///
 /// Asigna el color a partir de un uint32 en formato  0xAARRGGBB
 ///
-inline void    CColor::SetUint32Argb (int32 argb)
+inline void  Math::CColor::SetUint32Argb (int32 argb)
 {
     m_Color[3] = ByteTofloat32(static_cast<uint8>(     (argb>>24))); // alpha
     m_Color[0] = ByteTofloat32(static_cast<uint8>(0xff&(argb>>16))); // red
@@ -46,7 +46,7 @@ inline void    CColor::SetUint32Argb (int32 argb)
 ///
 /// Asigna el color a partir de un uint32 en formato  0xAABBGGRR
 ///
-inline void    CColor::SetUint32Abgr (int32 abgr)
+inline void  Math::CColor::SetUint32Abgr (int32 abgr)
 {
     m_Color[3] = ByteTofloat32(static_cast<uint8>(     (abgr>>24))); // alpha
     m_Color[2] = ByteTofloat32(static_cast<uint8>(0xff&(abgr>>16))); // blue
@@ -59,18 +59,18 @@ inline void    CColor::SetUint32Abgr (int32 abgr)
 inline uint8 CColor::float32ToByte(float32 fValue) const 
 { 
   int i = static_cast<int>(0xff * fValue); 
-    i = mathUtils::Clamp(i, 0, 0xff); 
+    i = Math::Utils::Clamp(i, 0, 0xff); 
 
   return static_cast<uint8>(i); 
 }
 
 // Funci??n de utilidad para convertir un byte con una componente de color (0..255) a componente float32 (0.0..1.0)
-inline float32 CColor::ByteTofloat32 (uint8 uValue) const 
+inline float32 Math::CColor::ByteTofloat32 (uint8 uValue) const 
 { 
   return static_cast<float32>(uValue)/255.0f; 
 }
 
-inline CColor& CColor::Lerp(const CColor& other, float32 f)
+inline Math::CColor& Math::CColor::Lerp(const Math::CColor& other, float32 f)
 {
     m_Color.Lerp(other.GetArgb(), f);
 
@@ -78,45 +78,45 @@ inline CColor& CColor::Lerp(const CColor& other, float32 f)
 }
 
 // Operadores aritméticos   
-inline CColor CColor::operator + (const CColor& otro)    const
+inline Math::CColor Math::CColor::operator + (const Math::CColor& otro)    const
 {
-    return CColor(otro.m_Color + m_Color);
+    return Math::CColor(otro.m_Color + m_Color);
 }
 
-inline CColor CColor::operator - (const CColor& otro)    const
+inline Math::CColor Math::CColor::operator - (const Math::CColor& otro)    const
 {
-    return CColor(m_Color - otro.m_Color);
+    return Math::CColor(m_Color - otro.m_Color);
 }
 
-inline CColor CColor::operator * (const CColor& otro)    const
+inline Math::CColor Math::CColor::operator * (const Math::CColor& otro)    const
 {
-    return CColor(otro.m_Color.x * m_Color.x,
+    return Math::CColor(otro.m_Color.x * m_Color.x,
                                 otro.m_Color.y * m_Color.y,
                                 otro.m_Color.z * m_Color.z,
                                 otro.m_Color.w * m_Color.w);
 }
 
-inline CColor CColor::operator * (float32 escalar) const
+inline Math::CColor Math::CColor::operator * (float32 escalar) const
 {
-    return CColor(m_Color * escalar);
+    return Math::CColor(m_Color * escalar);
 }
 
 // Operadores aritméticos de actualización   
-inline CColor& CColor::operator += (const CColor& otro)
+inline Math::CColor& Math::CColor::operator += (const Math::CColor& otro)
 {
     m_Color += otro.m_Color;
     
     return (*this);
 }
 
-inline CColor& CColor::operator -= (const CColor& otro)
+inline Math::CColor& Math::CColor::operator -= (const Math::CColor& otro)
 {
     m_Color -= otro.m_Color;
 
     return (*this);
 }
 
-inline CColor& CColor::operator *= (const CColor& otro)
+inline Math::CColor& Math::CColor::operator *= (const Math::CColor& otro)
 {
     m_Color.x *= otro.m_Color.x;
     m_Color.y *= otro.m_Color.y;
@@ -126,7 +126,7 @@ inline CColor& CColor::operator *= (const CColor& otro)
     return (*this);
 }
 
-inline CColor& CColor::operator *= (float32 escalar)
+inline Math::CColor& Math::CColor::operator *= (float32 escalar)
 {
     m_Color *= escalar;
 

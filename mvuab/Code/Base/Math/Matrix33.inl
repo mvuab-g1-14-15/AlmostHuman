@@ -172,7 +172,7 @@ inline Matrix33<T>& Matrix33<T>::SetFromAngleX (const T angleX)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleX, sina, cosa);
+  Math::Utils::SinCos(angleX, sina, cosa);
 
   m00 = One<T>();   m01 = Zero<T>();  m02 = Zero<T>();
   m10 = Zero<T>();  m11 = cosa;       m12 = -sina;
@@ -199,7 +199,7 @@ inline Matrix33<T>& Matrix33<T>::SetFromAngleY (const T angleY)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleY, sina, cosa);
+  Math::Utils::SinCos(angleY, sina, cosa);
 
   m00 = cosa;       m01 = Zero<T>();  m02 = sina;
   m10 = Zero<T>();  m11 = One<T>();   m12 = Zero<T>();
@@ -226,7 +226,7 @@ inline Matrix33<T>& Matrix33<T>::SetFromAngleZ (const T angleZ)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleZ, sina, cosa);
+  Math::Utils::SinCos(angleZ, sina, cosa);
 
   m00 = cosa;       m01 = -sina;      m02 = Zero<T>();
   m10 = sina;       m11 = cosa;       m12 = Zero<T>();
@@ -255,8 +255,8 @@ template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetFromAnglesXZ (const T angleX, const T angleZ)
 {
   T sinx, cosx, sinz, cosz;
-  mathUtils::SinCos(angleX, sinx, cosx);
-  mathUtils::SinCos(angleZ, sinz, cosz);
+  Math::Utils::SinCos(angleX, sinx, cosx);
+  Math::Utils::SinCos(angleZ, sinz, cosz);
 
   m00 = cosz;         m01 = -sinz * cosx;   m02 = sinz * sinx;
   m10 = sinz;         m11 = cosz * cosx;    m12 = -cosz * sinx;
@@ -291,9 +291,9 @@ template<typename T>
 inline Matrix33<T>& Matrix33<T>::SetFromAnglesYXZ (const T angleY, const T angleX, const T angleZ)
 {
   T sx, cx, sy, cy, sz, cz;
-  mathUtils::SinCos(angleX, sx, cx);
-  mathUtils::SinCos(angleY, sy, cy);
-  mathUtils::SinCos(angleZ, sz, cz);
+  Math::Utils::SinCos(angleX, sx, cx);
+  Math::Utils::SinCos(angleY, sy, cy);
+  Math::Utils::SinCos(angleZ, sz, cz);
 
   m00 = cz*cy - sz*sx*sy;    m01 = -sz*cx;    m02 = cz*sy + sz*sx*cy;
   m10 = sz*cy + cz*sx*sy;    m11 = cz*cx;     m12 = sz*sy - cz*sx*cy;
@@ -920,9 +920,9 @@ inline T Matrix33<T>::GetScaleZ () const
 template<typename T>
 void Matrix33<T>::GetAnglesYXZ(T& angleY, T& angleX, T& angleZ) const
 {
-  angleY = mathUtils::ATan2(-m20, m22);
-  angleX = mathUtils::ASin(m21);
-  angleZ = mathUtils::ATan2(-m01, m11); 
+  angleY = Math::Utils::ATan2(-m20, m22);
+  angleX = Math::Utils::ASin(m21);
+  angleZ = Math::Utils::ATan2(-m01, m11); 
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -933,7 +933,7 @@ void Matrix33<T>::GetAnglesYXZ(T& angleY, T& angleX, T& angleZ) const
 template<typename T>
 T Matrix33<T>::GetAngleX() const
 {
-  return mathUtils::ASin(m21);
+  return Math::Utils::ASin(m21);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -944,7 +944,7 @@ T Matrix33<T>::GetAngleX() const
 template<typename T>
 T Matrix33<T>::GetAngleY() const
 {
-  return mathUtils::ATan2(-m20, m22);
+  return Math::Utils::ATan2(-m20, m22);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -955,7 +955,7 @@ T Matrix33<T>::GetAngleY() const
 template<typename T>
 T Matrix33<T>::GetAngleZ() const
 {
-  return mathUtils::ATan2(-m01, m11); 
+  return Math::Utils::ATan2(-m01, m11); 
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -965,7 +965,7 @@ T Matrix33<T>::GetAngleZ() const
 template<typename T>
 T Matrix33<T>::GetRoll() const
 {
-  return mathUtils::ATan2(m20, m00);
+  return Math::Utils::ATan2(m20, m00);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -975,7 +975,7 @@ T Matrix33<T>::GetRoll() const
 template<typename T>
 T Matrix33<T>::GetPitch() const
 {
-  return mathUtils::ATan2(-m12, m11);
+  return Math::Utils::ATan2(-m12, m11);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -985,7 +985,7 @@ T Matrix33<T>::GetPitch() const
 template<typename T>
 T Matrix33<T>::GetYaw() const
 {
-  return mathUtils::ASin(-m10);
+  return Math::Utils::ASin(-m10);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1010,9 +1010,9 @@ T Matrix33<T>::GetYaw() const
 template<typename T>
 Vector3<T> Matrix33<T>::GetPitchRollYaw () const
 {
-  return Vector3<T>(mathUtils::ATan2(-m12, m11),
-                    mathUtils::ATan2(m20, m00),
-                    mathUtils::ASin(-m10));
+  return Vector3<T>(Math::Utils::ATan2(-m12, m11),
+                    Math::Utils::ATan2(m20, m00),
+                    Math::Utils::ASin(-m10));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1053,9 +1053,9 @@ template<typename T>
 Matrix33<T>& Matrix33<T>::SetPitchRollYaw (const Vector3<T>& v3PitchRollYaw)
 {
   T sx, cx, sy, cy, sz, cz;
-  mathUtils::SinCos(v3PitchRollYaw.x, sx, cx);
-  mathUtils::SinCos(v3PitchRollYaw.y, sy, cy);
-  mathUtils::SinCos(v3PitchRollYaw.z, sz, cz);
+  Math::Utils::SinCos(v3PitchRollYaw.x, sx, cx);
+  Math::Utils::SinCos(v3PitchRollYaw.y, sy, cy);
+  Math::Utils::SinCos(v3PitchRollYaw.z, sz, cz);
 
   m00 = cy*cz;  m01 = cy*sz*cx - sy*sx;  m02 = -cy*sz*sx - sy*cx;
   m10 = -sz;    m11 = cz*cx;             m12 = -cz*sx;
@@ -1288,7 +1288,7 @@ inline bool Matrix33<T>::IsEqualEpsilon (const Matrix33<T>& otra, const T Epsilo
   bool bIgual = true;
   for(int i = 0; i < 9; i++)
   {
-    if(!mathUtils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
+    if(!Math::Utils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
     {
       bIgual = false;
       break;
@@ -1898,9 +1898,9 @@ inline T Matrix33<T>::Determinant () const
 template<typename T>
 bool Matrix33<T>::IsOrthogonalEpsilon () const
 {
-  return(mathUtils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(1)) &&
-         mathUtils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(2)) &&
-         mathUtils::ZeroEpsilon<T>(GetVectorBasis(1) * GetVectorBasis(2)));
+  return(Math::Utils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(1)) &&
+         Math::Utils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(2)) &&
+         Math::Utils::ZeroEpsilon<T>(GetVectorBasis(1) * GetVectorBasis(2)));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1912,9 +1912,9 @@ template<typename T>
 bool Matrix33<T>::IsOrthonormalEpsilon () const
 {
   return(IsOrthogonalEpsilon() &&
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

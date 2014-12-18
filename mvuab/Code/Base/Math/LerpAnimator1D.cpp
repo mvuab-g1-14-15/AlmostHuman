@@ -3,7 +3,7 @@
 #include <assert.h>
 
 
-void CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type)
+void Math::CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type)
 {
     assert( totalTime > 0);
 
@@ -15,7 +15,7 @@ void CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, float32 to
 }
 
 
-bool CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
+bool Math::CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
 {
     m_fElapsedTime += deltaTime;
     bool finish = false;
@@ -40,7 +40,7 @@ bool CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = mathUtils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);            
         }
         break;
     case FUNC_DECREMENT:
@@ -50,7 +50,7 @@ bool CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
         break;
     }
     
-    float32 progress = mathUtils::Lerp(m_fInitValue, m_fEndValue, mu);
+    float32 progress = Math::Utils::Lerp(m_fInitValue, m_fEndValue, mu);
         
     if (m_fEndValue > m_fInitValue)
     {

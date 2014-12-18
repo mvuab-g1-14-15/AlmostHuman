@@ -9,19 +9,22 @@
 /// @brief Constantes númericas de los distintos tipos de la librería matemática
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+namespace Math
+{
+
 //---------
-// CColor
+// Math::CColor
 //---------------------------------------------------------------------------------------------------------------------
-const CColor colBLACK            (0.0f, 0.0f, 0.0f);
-const CColor colWHITE            (1.0f, 1.0f, 1.0f);
-const CColor colRED                (1.0f, 0.0f, 0.0f);
-const CColor colGREEN            (0.0f, 1.0f, 0.0f);
-const CColor colBLUE            (0.0f, 0.0f, 1.0f);
-const CColor colMAGENTA            (1.0f, 0.0f, 1.0f);
-const CColor colYELLOW            (1.0f, 1.0f, 0.0f);
-const CColor colCYAN            (0.0f, 1.0f, 1.0f);
-const CColor colORANGE            (1.0f, 0.5f, 0.0f);
-const CColor colORANGEalpha     (1.0f, 0.5f, 0.0f, 0.5f);
+const Math::CColor colBLACK            (0.0f, 0.0f, 0.0f);
+const Math::CColor colWHITE            (1.0f, 1.0f, 1.0f);
+const Math::CColor colRED              (1.0f, 0.0f, 0.0f);
+const Math::CColor colGREEN            (0.0f, 1.0f, 0.0f);
+const Math::CColor colBLUE             (0.0f, 0.0f, 1.0f);
+const Math::CColor colMAGENTA          (1.0f, 0.0f, 1.0f);
+const Math::CColor colYELLOW           (1.0f, 1.0f, 0.0f);
+const Math::CColor colCYAN             (0.0f, 1.0f, 1.0f);
+const Math::CColor colORANGE           (1.0f, 0.5f, 0.0f);
+const Math::CColor colORANGEalpha      (1.0f, 0.5f, 0.0f, 0.5f);
 
 //------------
 // Matrix33
@@ -142,18 +145,18 @@ const Transformd quatposdIDENTITY (0.0, 0.0, 0.0, 1.0,
 // Vector2
 //---------------------------------------------------------------------------------------------------------------------
 // float32
-const Vect2f  v2fX       ( 1.0f, 0.0f);
-const Vect2f  v2fY       ( 0.0f, 1.0f);
-const Vect2f  v2fONE     ( 1.0f, 1.0f);
-const Vect2f  v2fNEGX    (-1.0f, 0.0f);
-const Vect2f  v2fNEGY    ( 0.0f,-1.0f);
-const Vect2f  v2fNEGONE  (-1.0f,-1.0f);
-const Vect2f  v2fZERO    ( 0.0f, 0.0f);
-const Vect2f  v2fMAX     ( FLT_MAX, FLT_MAX);
-const Vect2f  v2fMIN     (-FLT_MAX,-FLT_MAX);
-const Vect2f  v2fFRONT   ( 0.0f, 1.0f);
-const Vect2f  v2fRIGHT   ( 1.0f, 0.0f);
-const Vect2f  v2fUNIT    ( 1.0f, 1.0f);
+const Math::Vect2f  v2fX       ( 1.0f, 0.0f);
+const Math::Vect2f  v2fY       ( 0.0f, 1.0f);
+const Math::Vect2f  v2fONE     ( 1.0f, 1.0f);
+const Math::Vect2f  v2fNEGX    (-1.0f, 0.0f);
+const Math::Vect2f  v2fNEGY    ( 0.0f,-1.0f);
+const Math::Vect2f  v2fNEGONE  (-1.0f,-1.0f);
+const Math::Vect2f  v2fZERO    ( 0.0f, 0.0f);
+const Math::Vect2f  v2fMAX     ( FLT_MAX, FLT_MAX);
+const Math::Vect2f  v2fMIN     (-FLT_MAX,-FLT_MAX);
+const Math::Vect2f  v2fFRONT   ( 0.0f, 1.0f);
+const Math::Vect2f  v2fRIGHT   ( 1.0f, 0.0f);
+const Math::Vect2f  v2fUNIT    ( 1.0f, 1.0f);
 
 // float64
 const Vect2d  v2dX       ( 1.0, 0.0);
@@ -171,38 +174,38 @@ const Vect2d  v2dRIGHT   ( 1.0, 0.0);
 const Vect2d  v2dUNIT    ( 1.0, 1.0);
 
 // INT
-const Vect2i  v2iX       ( 1, 0);
-const Vect2i  v2iY       ( 0, 1);
-const Vect2i  v2iONE     ( 1, 1);
-const Vect2i  v2iNEGX    (-1, 0);
-const Vect2i  v2iNEGY    ( 0,-1);
-const Vect2i  v2iNEGONE  (-1,-1);
-const Vect2i  v2iZERO    ( 0, 0);
-const Vect2i  v2iTOP     ( 0, 0);
-const Vect2i  v2iFRONT   ( 0, 1);
-const Vect2i  v2iRIGHT   ( 1, 0);
-const Vect2i  v2iUNIT    ( 1, 1);
+const Math::Vect2i  v2iX       ( 1, 0);
+const Math::Vect2i  v2iY       ( 0, 1);
+const Math::Vect2i  v2iONE     ( 1, 1);
+const Math::Vect2i  v2iNEGX    (-1, 0);
+const Math::Vect2i  v2iNEGY    ( 0,-1);
+const Math::Vect2i  v2iNEGONE  (-1,-1);
+const Math::Vect2i  v2iZERO    ( 0, 0);
+const Math::Vect2i  v2iTOP     ( 0, 0);
+const Math::Vect2i  v2iFRONT   ( 0, 1);
+const Math::Vect2i  v2iRIGHT   ( 1, 0);
+const Math::Vect2i  v2iUNIT    ( 1, 1);
 
 //-----------
 // Vector3
 //---------------------------------------------------------------------------------------------------------------------
 // float32
-const Vect3f  v3fX       ( 1.0f, 0.0f, 0.0f);
-const Vect3f  v3fY       ( 0.0f, 1.0f, 0.0f);
-const Vect3f  v3fZ       ( 0.0f, 0.0f, 1.0f);
-const Vect3f  v3fONE     ( 1.0f, 1.0f, 1.0f);
-const Vect3f  v3fNEGX    (-1.0f, 0.0f, 0.0f);
-const Vect3f  v3fNEGY    ( 0.0f,-1.0f, 0.0f);
-const Vect3f  v3fNEGZ    ( 0.0f, 0.0f,-1.0f);
-const Vect3f  v3fNEGONE  (-1.0f,-1.0f,-1.0f);
-const Vect3f  v3fZERO    ( 0.0f, 0.0f, 0.0f);
-const Vect3f  v3fMAX     ( FLT_MAX, FLT_MAX, FLT_MAX);
-const Vect3f  v3fMIN     (-FLT_MAX,-FLT_MAX,-FLT_MAX);
-const Vect3f  v3fTOP     ( 0.0f, 0.0f, 1.0f);
-const Vect3f  v3fBOTTOM  (0.0f, 0.0f, -1.0f);
-const Vect3f  v3fFRONT   ( 0.0f, 1.0f, 0.0f);
-const Vect3f  v3fRIGHT   ( 1.0f, 0.0f, 0.0f);
-const Vect3f  v3fUNIT    ( 1.0f, 1.0f, 1.0f);
+const Math::Vect3f  v3fX       ( 1.0f, 0.0f, 0.0f);
+const Math::Vect3f  v3fY       ( 0.0f, 1.0f, 0.0f);
+const Math::Vect3f  v3fZ       ( 0.0f, 0.0f, 1.0f);
+const Math::Vect3f  v3fONE     ( 1.0f, 1.0f, 1.0f);
+const Math::Vect3f  v3fNEGX    (-1.0f, 0.0f, 0.0f);
+const Math::Vect3f  v3fNEGY    ( 0.0f,-1.0f, 0.0f);
+const Math::Vect3f  v3fNEGZ    ( 0.0f, 0.0f,-1.0f);
+const Math::Vect3f  v3fNEGONE  (-1.0f,-1.0f,-1.0f);
+const Math::Vect3f  v3fZERO    ( 0.0f, 0.0f, 0.0f);
+const Math::Vect3f  v3fMAX     ( FLT_MAX, FLT_MAX, FLT_MAX);
+const Math::Vect3f  v3fMIN     (-FLT_MAX,-FLT_MAX,-FLT_MAX);
+const Math::Vect3f  v3fTOP     ( 0.0f, 0.0f, 1.0f);
+const Math::Vect3f  v3fBOTTOM  (0.0f, 0.0f, -1.0f);
+const Math::Vect3f  v3fFRONT   ( 0.0f, 1.0f, 0.0f);
+const Math::Vect3f  v3fRIGHT   ( 1.0f, 0.0f, 0.0f);
+const Math::Vect3f  v3fUNIT    ( 1.0f, 1.0f, 1.0f);
 
 // float64
 const Vect3d  v3dX       ( 1.0, 0.0, 0.0);
@@ -222,40 +225,40 @@ const Vect3d  v3dRIGHT   ( 1.0, 0.0, 0.0);
 const Vect3d  v3dUNIT    ( 1.0, 1.0, 1.0);
 
 // INT
-const Vect3i  v3iX       ( 1, 0, 0);
-const Vect3i  v3iY       ( 0, 1, 0);
-const Vect3i  v3iZ       ( 0, 0, 1);
-const Vect3i  v3iONE     ( 1, 1, 1);
-const Vect3i  v3iNEGX    (-1, 0, 0);
-const Vect3i  v3iNEGY    ( 0,-1, 0);
-const Vect3i  v3iNEGZ    ( 0, 0,-1);
-const Vect3i  v3iNEGONE  (-1,-1,-1);
-const Vect3i  v3iZERO    ( 0, 0, 0);
-const Vect3i  v3iTOP     ( 0, 0, 1);
-const Vect3i  v3iFRONT   ( 0, 1, 0);
-const Vect3i  v3iRIGHT   ( 1, 0, 0);
-const Vect3i  v3iUNIT    ( 1, 1, 1);
+const Math::Vect3i  v3iX       ( 1, 0, 0);
+const Math::Vect3i  v3iY       ( 0, 1, 0);
+const Math::Vect3i  v3iZ       ( 0, 0, 1);
+const Math::Vect3i  v3iONE     ( 1, 1, 1);
+const Math::Vect3i  v3iNEGX    (-1, 0, 0);
+const Math::Vect3i  v3iNEGY    ( 0,-1, 0);
+const Math::Vect3i  v3iNEGZ    ( 0, 0,-1);
+const Math::Vect3i  v3iNEGONE  (-1,-1,-1);
+const Math::Vect3i  v3iZERO    ( 0, 0, 0);
+const Math::Vect3i  v3iTOP     ( 0, 0, 1);
+const Math::Vect3i  v3iFRONT   ( 0, 1, 0);
+const Math::Vect3i  v3iRIGHT   ( 1, 0, 0);
+const Math::Vect3i  v3iUNIT    ( 1, 1, 1);
 
 //------------
 // Vector4
 //---------------------------------------------------------------------------------------------------------------------
 // float32
-const Vect4f  v4fX       ( 1.0f, 0.0f, 0.0f, 0.0f);
-const Vect4f  v4fY       ( 0.0f, 1.0f, 0.0f, 0.0f);
-const Vect4f  v4fZ       ( 0.0f, 0.0f, 1.0f, 0.0f);
-const Vect4f  v4fW       ( 0.0f, 0.0f, 0.0f, 1.0f);
-const Vect4f  v4fONE     ( 1.0f, 1.0f, 1.0f, 1.0f);
-const Vect4f  v4fNEGX    (-1.0f, 0.0f, 0.0f, 0.0f);
-const Vect4f  v4fNEGY    ( 0.0f,-1.0f, 0.0f, 0.0f);
-const Vect4f  v4fNEGZ    ( 0.0f, 0.0f,-1.0f, 0.0f);
-const Vect4f  v4fNEGW    ( 0.0f, 0.0f, 0.0f,-1.0f);
-const Vect4f  v4fNEGONE  (-1.0f,-1.0f,-1.0f,-1.0f);
-const Vect4f  v4fZERO    ( 0.0f, 0.0f, 0.0f, 0.0f);
-const Vect4f  v4fMAX     ( FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX);
-const Vect4f  v4fMIN     (-FLT_MAX,-FLT_MAX,-FLT_MAX, FLT_MAX);
-const Vect4f  v4fTOP     ( 0.0f, 0.0f, 1.0f, 1.0f);
-const Vect4f  v4fFRONT   ( 0.0f, 1.0f, 0.0f, 1.0f);
-const Vect4f  v4fRIGHT   ( 1.0f, 0.0f, 0.0f, 1.0f);
+const Math::Vect4f  v4fX       ( 1.0f, 0.0f, 0.0f, 0.0f);
+const Math::Vect4f  v4fY       ( 0.0f, 1.0f, 0.0f, 0.0f);
+const Math::Vect4f  v4fZ       ( 0.0f, 0.0f, 1.0f, 0.0f);
+const Math::Vect4f  v4fW       ( 0.0f, 0.0f, 0.0f, 1.0f);
+const Math::Vect4f  v4fONE     ( 1.0f, 1.0f, 1.0f, 1.0f);
+const Math::Vect4f  v4fNEGX    (-1.0f, 0.0f, 0.0f, 0.0f);
+const Math::Vect4f  v4fNEGY    ( 0.0f,-1.0f, 0.0f, 0.0f);
+const Math::Vect4f  v4fNEGZ    ( 0.0f, 0.0f,-1.0f, 0.0f);
+const Math::Vect4f  v4fNEGW    ( 0.0f, 0.0f, 0.0f,-1.0f);
+const Math::Vect4f  v4fNEGONE  (-1.0f,-1.0f,-1.0f,-1.0f);
+const Math::Vect4f  v4fZERO    ( 0.0f, 0.0f, 0.0f, 0.0f);
+const Math::Vect4f  v4fMAX     ( FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX);
+const Math::Vect4f  v4fMIN     (-FLT_MAX,-FLT_MAX,-FLT_MAX, FLT_MAX);
+const Math::Vect4f  v4fTOP     ( 0.0f, 0.0f, 1.0f, 1.0f);
+const Math::Vect4f  v4fFRONT   ( 0.0f, 1.0f, 0.0f, 1.0f);
+const Math::Vect4f  v4fRIGHT   ( 1.0f, 0.0f, 0.0f, 1.0f);
 
 // float64
 const Vect4d  v4dX       ( 1.0, 0.0, 0.0, 0.0);
@@ -274,6 +277,8 @@ const Vect4d  v4dMIN     (-DBL_MAX,-DBL_MAX,-DBL_MAX, DBL_MAX);
 const Vect4d  v4dTOP     ( 0.0, 0.0, 1.0, 1.0);
 const Vect4d  v4dFRONT   ( 0.0, 1.0, 0.0, 1.0);
 const Vect4d  v4dRIGHT   ( 1.0, 0.0, 0.0, 1.0);
+
+} //namespace Math
 /*
 //-------
 // OBox

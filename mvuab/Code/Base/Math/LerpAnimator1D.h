@@ -6,15 +6,15 @@
 #define LERP_ANIMATOR_1D_H
 
 #include "Utils\Types.h"
+#include "Math\MathTypes.h"
 
-typedef enum ETypeFunction { FUNC_CONSTANT, FUNC_INCREMENT, FUNC_DECREMENT};
-
-
+namespace Math
+{
 class CLerpAnimator1D
 {
 public:
- CLerpAnimator1D ():    m_fElapsedTime(0.f), m_bPause(false), m_fInitValue(0.f),
-                                            m_fEndValue(0.f), m_fTotalTime(0.f), m_eFunction(FUNC_CONSTANT), m_uDegree(2) {}
+    CLerpAnimator1D (): m_fElapsedTime(0.f), m_bPause(false), m_fInitValue(0.f),
+                        m_fEndValue(0.f), m_fTotalTime(0.f), m_eFunction(Math::FUNC_CONSTANT), m_uDegree(2) {}
 
     virtual ~CLerpAnimator1D () {/*NOTHING*/}
     
@@ -33,4 +33,5 @@ private:
     uint32            m_uDegree;
 };
 
+} //namespace Math
 #endif //INTERPOLATION_H

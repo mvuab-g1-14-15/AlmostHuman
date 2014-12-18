@@ -143,6 +143,8 @@
 ///                                                            los puntos en local.
 /// \endverbatim
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Math
+{
 template<typename T>
 class Matrix44
 {
@@ -386,6 +388,6 @@ extern const Mat44f  m44fONES;
 extern const Mat44d  m44dIDENTITY;
 extern const Mat44d  m44dZERO;
 extern const Mat44d  m44dONES;
-
+} // namespace Math
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

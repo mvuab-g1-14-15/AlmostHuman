@@ -9,17 +9,19 @@
 // Constantes
 #include "Utils/Types.h"
 
+namespace Math
+{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constantes numéricas
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const float64 ALG_EPSILON_float64 = (float64)1e-05;
-const float32  ALG_EPSILON_float32  = (float32)ALG_EPSILON_float64;
+const float64   ALG_EPSILON_float64 = (float64)1e-05;
+const float32   ALG_EPSILON_float32  = (float32)ALG_EPSILON_float64;
 
-const float64 QUAT_POLE_EPSILON_float64 = (float64)0.999950;
-const float32  QUAT_POLE_EPSILON_float32  = (float32)0.99990f;
+const float64   QUAT_POLE_EPSILON_float64 = (float64)0.999950;
+const float32   QUAT_POLE_EPSILON_float32  = (float32)0.99990f;
 
-const float64 float64_PI_VALUE = 3.14159265358979323846;
-const float32  float32_PI_VALUE  = (float32)float64_PI_VALUE;
+const float64   PI_64_VALUE = 3.1415926535897932384626433832795028841971693993751;
+const float32   PI_32_VALUE = 3.14159265359f;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constantes numéricas con tipo templatizado
@@ -55,49 +57,44 @@ template<>            inline float32  QuatPoleEpsilon<float32>  () { return QUAT
 template<>            inline float64 QuatPoleEpsilon<float64> () { return QUAT_POLE_EPSILON_float64; }
 
 // Constantes relacionadas con el número PI
-template<typename T>  inline T      ePI            () { return (T)float64_PI_VALUE; }
-template<>            inline float32  ePI<float32>     () { return float32_PI_VALUE;     }
-template<>            inline float64 ePI<float64>    () { return float64_PI_VALUE;    }
+template<typename T>  inline T      ePI            () { return (T)PI_64_VALUE; }
+template<>            inline float32  ePI<float32>     () { return PI_32_VALUE;     }
+template<>            inline float64 ePI<float64>    () { return PI_64_VALUE;    }
 
-template<typename T>  inline T      e2PI           () { return (T)(2.0 * float64_PI_VALUE); }
-template<>            inline float32  e2PI<float32>    () { return (2.0f * float32_PI_VALUE);    }
-template<>            inline float64 e2PI<float64>   () { return (2.0 * float64_PI_VALUE);    }
+template<typename T>  inline T      e2PI           () { return (T)(2.0 * PI_64_VALUE); }
+template<>            inline float32  e2PI<float32>    () { return (2.0f * PI_32_VALUE);    }
+template<>            inline float64 e2PI<float64>   () { return (2.0 * PI_64_VALUE);    }
 
-template<typename T>  inline T      ePI2           () { return (T)(0.5 * float64_PI_VALUE); }
-template<>            inline float32  ePI2<float32>    () { return (0.5f * float32_PI_VALUE);    }
-template<>            inline float64 ePI2<float64>   () { return (0.5 * float64_PI_VALUE);    }
+template<typename T>  inline T      ePI2           () { return (T)(0.5 * PI_64_VALUE); }
+template<>            inline float32  ePI2<float32>    () { return (0.5f * PI_32_VALUE);    }
+template<>            inline float64 ePI2<float64>   () { return (0.5 * PI_64_VALUE);    }
 
-template<typename T>  inline T      eInPI          () { return (T)(1.0 / float64_PI_VALUE); }
-template<>            inline float32  eInPI<float32>   () { return (1.0f / float32_PI_VALUE);    }
-template<>            inline float64 eInPI<float64>  () { return (1.0 / float64_PI_VALUE);    }
+template<typename T>  inline T      eInPI          () { return (T)(1.0 / PI_64_VALUE); }
+template<>            inline float32  eInPI<float32>   () { return (1.0f / PI_32_VALUE);    }
+template<>            inline float64 eInPI<float64>  () { return (1.0 / PI_64_VALUE);    }
 
-template<typename T>  inline T      eIn2PI         () { return (T)(1.0 / (2.0 * float64_PI_VALUE)); }
-template<>            inline float32  eIn2PI<float32>  () { return (1.0f / (2.0f * float32_PI_VALUE));   }
-template<>            inline float64 eIn2PI<float64> () { return (1.0 / (2.0 * float64_PI_VALUE));    }
+template<typename T>  inline T      eIn2PI         () { return (T)(1.0 / (2.0 * PI_64_VALUE)); }
+template<>            inline float32  eIn2PI<float32>  () { return (1.0f / (2.0f * PI_32_VALUE));   }
+template<>            inline float64 eIn2PI<float64> () { return (1.0 / (2.0 * PI_64_VALUE));    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// CONSTANTES DE PI CON TIPOS CONCRETOS DE DATOS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const float32 ePIf       = float32_PI_VALUE;
-static const float32 e2PIf      = 2.0f * ePIf;
-static const float32 ehalfPIf   = 0.5f * ePIf;
-static const float32 eInPIf     = 1.0f / ePIf;
-static const float32 eIn2PIf    = 1.0f / e2PIf;
+static const float32 pi32           = PI_32_VALUE;
+static const float32 two_pi32       = 2.0f * PI_32_VALUE;
+static const float32 half_pi32      = 0.5f * PI_32_VALUE;
 
-static const float64 ePId    = float64_PI_VALUE;
-static const float64 e2PId   = 2.0 * ePId;
-static const float64 ePI2d   = 0.5 * ePId;
-static const float64 eInPId  = 1.0 / ePId;
-static const float64 eIn2PId = 1.0 / e2PId;
-
+static const float64 pi64           = PI_64_VALUE;
+static const float64 two_pi64       = 2.0f * PI_64_VALUE;
+static const float64 half_pi64      = 0.5f * PI_64_VALUE;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// TIPOS DE MATRICES [3x3] CON TIPOS CONCRETOS DE DATOS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template<typename T> class Matrix33;
-typedef Matrix33<float32>   Mat33f;
+typedef Matrix33<float32>  Mat33f;
 typedef Matrix33<float64>  Mat33d;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,7 +131,7 @@ typedef QuatPos<float64> Transformd;
 /// TIPOS DE VECTORES 2D CON TIPOS CONCRETOS DE DATOS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T> class Vector2;
-typedef Vector2<float32>  Vect2f;
+typedef Vector2<float32> Vect2f;
 typedef Vector2<float64> Vect2d;
 typedef Vector2<int32>  Vect2i;
 typedef Vector2<uint32> Vect2u;
@@ -158,5 +155,11 @@ typedef Vector4<float64> Vect4d;
 typedef Vector4<int32>  Vect4i;
 typedef Vector4<uint8>  Vect4u8;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// TIPOS DE FUNCIONES DE INTERPOLACION
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef enum ETypeFunction { FUNC_CONSTANT, FUNC_INCREMENT, FUNC_DECREMENT};
 
+} // Math namespace
 #endif
+

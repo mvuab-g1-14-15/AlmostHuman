@@ -89,7 +89,7 @@ inline bool ZeroRelatEpsilon (const T a, const T epsilon)
 template<typename T>
 inline T PiTimes (T _times)
 {
-  return ((T)float64_PI_VALUE)*_times;
+  return ((T)Math::PI_64_VALUE)*_times;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,8 +115,8 @@ inline T Rad2Deg( T rad )
 //////////////////////////////////////////////////////////////////////////
 void CanonizeAngle (float32& fAngle)
 {
-  fAngle = fmod (fAngle, e2PIf);
+  fAngle = fmod (fAngle, Math::two_pi32);
 
-  if (fAngle >  ePIf) fAngle -= e2PIf;
-  if (fAngle < -ePIf) fAngle += e2PIf;
+  if (fAngle >  Math::pi32) fAngle -= Math::two_pi32;
+  if (fAngle < -Math::pi32) fAngle += Math::two_pi32;
 }

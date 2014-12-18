@@ -3,7 +3,7 @@
 #include <cmath>
 
 
-void CLerpAnimator3D::SetValues (Vect3f initValue, Vect3f endValue, float32 totalTime, ETypeFunction type)
+void Math::CLerpAnimator3D::SetValues (Math::Vect3f initValue, Math::Vect3f endValue, float32 totalTime, ETypeFunction type)
 {
     assert( totalTime > 0);
 
@@ -15,7 +15,7 @@ void CLerpAnimator3D::SetValues (Vect3f initValue, Vect3f endValue, float32 tota
 }
 
 
-bool CLerpAnimator3D::Update (float32 deltaTime, Vect3f &value)
+bool Math::CLerpAnimator3D::Update (float32 deltaTime, Math::Vect3f &value)
 {
     m_fElapsedTime += deltaTime;
     bool finish = false;
@@ -40,7 +40,7 @@ bool CLerpAnimator3D::Update (float32 deltaTime, Vect3f &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = mathUtils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);            
         }
         break;
     case FUNC_DECREMENT:

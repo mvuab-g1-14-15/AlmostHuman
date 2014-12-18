@@ -260,7 +260,7 @@ inline Matrix34<T>& Matrix34<T>::SetFromAngleX (const T angleX)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleX, sina, cosa);
+  Math::Utils::SinCos(angleX, sina, cosa);
 
   m00 = One<T>();   m01 = Zero<T>();  m02 = Zero<T>();  m03 = Zero<T>();
   m10 = Zero<T>();  m11 = cosa;       m12 = -sina;      m13 = Zero<T>();
@@ -280,7 +280,7 @@ inline Matrix34<T>& Matrix34<T>::SetFromAngleY (const T angleY)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleY, sina, cosa);
+  Math::Utils::SinCos(angleY, sina, cosa);
 
   m00 = cosa;       m01 = Zero<T>();  m02 = sina;       m03 = Zero<T>();
   m10 = Zero<T>();  m11 = One<T>();   m12 = Zero<T>();  m13 = Zero<T>();
@@ -300,7 +300,7 @@ inline Matrix34<T>& Matrix34<T>::SetFromAngleZ (const T angleZ)
 {
   T sina;
   T cosa;
-  mathUtils::SinCos(angleZ, sina, cosa);
+  Math::Utils::SinCos(angleZ, sina, cosa);
 
   m00 = cosa;       m01 = -sina;      m02 = Zero<T>();  m03 = Zero<T>();
   m10 = sina;       m11 = cosa;       m12 = Zero<T>();  m13 = Zero<T>();
@@ -319,8 +319,8 @@ template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetFromAnglesXZ  (const T angleX, const T angleZ)
 {
   T sinx, cosx, sinz, cosz;
-  mathUtils::SinCos(angleX, sinx, cosx);
-  mathUtils::SinCos(angleZ, sinz, cosz);
+  Math::Utils::SinCos(angleX, sinx, cosx);
+  Math::Utils::SinCos(angleZ, sinz, cosz);
 
   m00 = cosz;       m01 = -sinz * cosx;  m02 = sinz * sinx;   m03 = Zero<T>();
   m10 = sinz;       m11 = cosz * cosx;   m12 = -cosz * sinx;  m13 = Zero<T>();
@@ -342,9 +342,9 @@ template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetFromAnglesYXZ (const T angleY, const T angleX, const T angleZ)
 {
   T sx, cx, sy, cy, sz, cz;
-  mathUtils::SinCos(angleX, sx, cx);
-  mathUtils::SinCos(angleY, sy, cy);
-  mathUtils::SinCos(angleZ, sz, cz);
+  Math::Utils::SinCos(angleX, sx, cx);
+  Math::Utils::SinCos(angleY, sy, cy);
+  Math::Utils::SinCos(angleZ, sz, cz);
 
   m00 = cz*cy - sz*sx*sy;  m01 = -sz*cx;  m02 = cz*sy + sz*sx*cy;  m03 = Zero<T>();
   m10 = sz*cy + cz*sx*sy;  m11 = cz*cx;   m12 = sz*sy - cz*sx*cy;  m13 = Zero<T>();
@@ -1184,9 +1184,9 @@ template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetFromPitchRollYaw (const Vector3<T>& v3PitchRollYaw)
 {
   T sx, cx, sy, cy, sz, cz;
-  mathUtils::SinCos(v3PitchRollYaw.x, sx, cx);
-  mathUtils::SinCos(v3PitchRollYaw.y, sy, cy);
-  mathUtils::SinCos(v3PitchRollYaw.z, sz, cz);
+  Math::Utils::SinCos(v3PitchRollYaw.x, sx, cx);
+  Math::Utils::SinCos(v3PitchRollYaw.y, sy, cy);
+  Math::Utils::SinCos(v3PitchRollYaw.z, sz, cz);
 
   m00 = cy*cz;  m01 = cy*sz*cx - sy*sx;  m02 = -cy*sz*sx - sy*cx;  m03 = Zero<T>();
   m10 = -sz;    m11 = cz*cx;             m12 = -cz*sx;             m13 = Zero<T>();
@@ -1459,7 +1459,7 @@ inline bool Matrix34<T>::IsEqualEpsilon (const Matrix34<T>& otra, const T Epsilo
   bool bIgual = true;
   for(int i = 0; i < 12; i++)
   {
-    if(!mathUtils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
+    if(!Math::Utils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
     {
       bIgual = false;
       break;
@@ -1478,7 +1478,7 @@ inline bool Matrix34<T>::IsNotEqualEpsilon (const Matrix34<T>& otra, const T Eps
   bool bDistinto = false;
   for(int i=0; i<12; i++)
   {
-    if(!mathUtils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
+    if(!Math::Utils::EqualEpsilon( ((T*)this)[i], ((T*)&otra)[i], Epsilon ))
     {
       bDistinto = true;
       break;
@@ -2228,9 +2228,9 @@ inline T Matrix34<T>::Determinant () const
 template<typename T>
 bool Matrix34<T>::IsOrthogonalEpsilon () const
 {
-  return(mathUtils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(1)) &&
-         mathUtils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(2)) &&
-         mathUtils::ZeroEpsilon<T>(GetVectorBasis(1) * GetVectorBasis(2)));
+  return(Math::Utils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(1)) &&
+         Math::Utils::ZeroEpsilon<T>(GetVectorBasis(0) * GetVectorBasis(2)) &&
+         Math::Utils::ZeroEpsilon<T>(GetVectorBasis(1) * GetVectorBasis(2)));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2244,7 +2244,7 @@ template<typename T>
 bool Matrix34<T>::IsOrthonormalEpsilon () const
 {
   return(IsOrthogonalEpsilon() &&
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
-         mathUtils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
 }
