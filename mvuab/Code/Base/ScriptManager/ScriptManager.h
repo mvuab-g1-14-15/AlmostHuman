@@ -15,7 +15,9 @@ class CScriptManager
 {
 	private:
 		lua_State	*m_LS;
-		std::string  m_XMLFile;
+		typedef std::vector<std::string> TVectorLuaFiles;
+		TVectorLuaFiles m_LuaFiles;
+		std::string		m_LuaPath;
 
 	public:
 		CScriptManager();

@@ -5,15 +5,23 @@
 
 #include <assert.h>
 
+// Lua includes
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+#include <boost/progress.hpp>
+
+#include <iostream>
+
 using namespace luabind;
 
+namespace fs = boost::filesystem;
 
-CScriptManager::CScriptManager() : m_XMLFile("")
+CScriptManager::CScriptManager() : m_LuaPath("")
 {
 }
 
@@ -39,15 +47,59 @@ void CScriptManager::Destroy()
 
 void CScriptManager::Reload()
 {
+	m_LuaFiles.clear();
+
 	Destroy();
 
-	Load(m_XMLFile);
+	Load(m_LuaPath);
 	Initialize();
 }
 
-void CScriptManager::Load(const std::string &XMLFile)
+void CScriptManager::Load(const std::string &Path)
 {
-	m_XMLFile = XMLFile;
+	m_LuaPath = Path;
+
+	fs::path full_path( fs::initial_path<fs::path>() );
+
+    full_path = fs::system_complete( fs::path( m_LuaPath ) );
+
+  unsigned long file_count = 0;
+  unsigned long err_count = 0;
+
+  if ( !fs::exists( full_path ) )
+  {
+    //std::cout << "\nNot found: " << full_path.file_string() << std::endl;
+    //return 1;
+  }
+
+  if ( fs::is_directory( full_path ) )
+  {
+    fs::directory_iterator end_iter;
+    for ( fs::directory_iterator dir_itr( full_path ); dir_itr != end_iter; ++dir_itr )
+    {
+      try
+      {
+        if ( fs::is_directory( dir_itr->status() ) )
+        {
+          //std::cout << dir_itr->path().filename() << " [directory]\n";
+        }
+        else if ( fs::is_regular( dir_itr->status() ) )
+        {
+          ++file_count;
+		  m_LuaFiles.push_back(dir_itr->string());
+        }
+      }
+      catch ( const std::exception & ex )
+      {
+        ++err_count;
+        //std::cout << dir_itr->path().filename() << " " << ex.what() << std::endl;
+      }
+    }
+  }
+  else // must be a file
+  {
+    //std::cout << "\nFound: " << full_path.file_string() << "\n";    
+  }
 }
 
 void CScriptManager::RunCode(const std::string &Code)
