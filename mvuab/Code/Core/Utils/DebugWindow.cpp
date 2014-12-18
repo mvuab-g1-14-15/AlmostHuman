@@ -9,11 +9,11 @@
 #include "Logger\Logger.h"
 //#include "Utils\MemLeaks.h"
 
-CDebugWindow::CDebugWindow(Vect2i aWindowPosition) :
+CDebugWindow::CDebugWindow(Math::Vect2i aWindowPosition) :
         m_bIsVisible(true),
         m_WindowPosition(aWindowPosition),
-        m_FontColor_debug(colBLACK),
-        m_FontColor_release(colWHITE)
+        m_FontColor_debug(Math::colBLACK),
+        m_FontColor_release(Math::colWHITE)
 {
 
 }

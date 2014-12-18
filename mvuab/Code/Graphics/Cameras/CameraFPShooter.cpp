@@ -27,8 +27,8 @@ CCameraFPShooter::CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3
   D3DXVECTOR3 d = TargetPoint - InitialPosition;
   // Calculate the yaw and the pitch to allow the camera be looking at the TargetPoint
 
-  m_yaw               = mathUtils::ATan2(d.z, d.x);
-  m_pitch             = mathUtils::ATan2(d.y,mathUtils::Sqrt(d.z * d.z + d.x * d.x));
+  m_yaw               = Math::Utils::ATan2(d.z, d.x);
+  m_pitch             = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
   m_view_d        =  2.f;
   m_fov_radians    = D3DXToRadian( 50.f );
   m_aspect_ratio    = 640.f / 480.f;

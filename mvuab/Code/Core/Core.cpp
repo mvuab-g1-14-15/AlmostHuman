@@ -89,7 +89,7 @@ void CCore::Render()
     unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
     unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
     unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
-    m_pFontManager->DrawDefaultText(300, 0, CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+    m_pFontManager->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
     // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
@@ -188,7 +188,7 @@ void CCore::LoadXml()
 void CCore::InitManagers()
 {
     m_pGraphicsManager->Init( m_WindowId, m_FullScreenMode, m_ScreenWidth, m_ScreenHeight);
-    m_pInputManager->Init( m_WindowId, Vect2i( m_ScreenWidth, m_ScreenHeight ), m_ExclusiveModeInMouse );
+    m_pInputManager->Init( m_WindowId, Math::Vect2i( m_ScreenWidth, m_ScreenHeight ), m_ExclusiveModeInMouse );
     m_pActionManager->Init( m_InputPath, m_pInputManager );
     m_pLanguageManager->SetXmlPaths( m_v_languages );
     m_pLanguageManager->LoadXMLs();

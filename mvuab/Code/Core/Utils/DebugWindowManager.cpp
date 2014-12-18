@@ -9,9 +9,9 @@ CDebugWindowManager::CDebugWindowManager() :
         m_bIsVisible(true),
         m_CurrentDebugWindow(0)
 {
-    CFPSDebugWindow* p_FPSDebugWindow = new CFPSDebugWindow(Vect2i( 5, 0 ));
+    CFPSDebugWindow* p_FPSDebugWindow = new CFPSDebugWindow(Math::Vect2i( 5, 0 ));
     m_vDebugWindows.push_back(p_FPSDebugWindow);
-    CCameraDebugWindow* p_CameraDebugWindow = new CCameraDebugWindow(Vect2i( p_FPSDebugWindow->GetWindowWidth(), 0 ));
+    CCameraDebugWindow* p_CameraDebugWindow = new CCameraDebugWindow(Math::Vect2i( p_FPSDebugWindow->GetWindowWidth(), 0 ));
     m_vDebugWindows.push_back(p_CameraDebugWindow);
 }
 

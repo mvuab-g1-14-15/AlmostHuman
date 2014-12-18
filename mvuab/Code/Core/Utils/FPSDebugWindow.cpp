@@ -3,7 +3,7 @@
 #include "Fonts\FontManager.h"
 //#include "Utils\MemLeaks.h"
 
-CFPSDebugWindow::CFPSDebugWindow(Vect2i aWindowPosition) :
+CFPSDebugWindow::CFPSDebugWindow(Math::Vect2i aWindowPosition) :
     CDebugWindow(aWindowPosition),
     m_NumberFPSCount(0),
     m_NumberFPSSum(0),
@@ -38,9 +38,9 @@ void CFPSDebugWindow::RenderInfo()
     CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
 
 #ifdef _DEBUG
-    const CColor &l_FontColor = m_FontColor_debug;
+    const Math::CColor &l_FontColor = m_FontColor_debug;
 #else
-    const CColor &l_FontColor = m_FontColor_release;
+    const Math::CColor &l_FontColor = m_FontColor_release;
 #endif
 
     uint32 w, h;

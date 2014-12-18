@@ -100,7 +100,7 @@ bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const
     return true;
 }
 
-bool CFrustum::BoxVisibleByVertexs( const Vect3f* points) const 
+bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const 
 {  
   int iInCount;
     for(int p=0; p<6; p++)

@@ -6,7 +6,7 @@
 class CFPSDebugWindow : public CDebugWindow
 {
 public:
-    CFPSDebugWindow(Vect2i aWindowPosition);
+    CFPSDebugWindow(Math::Vect2i aWindowPosition);
     ~CFPSDebugWindow();
     virtual void Update(float32 deltaTime);
 

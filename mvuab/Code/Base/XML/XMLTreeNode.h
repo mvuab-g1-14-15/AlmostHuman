@@ -38,23 +38,23 @@ public:
   const char*                    GetName                ();
 
   // To get properties from xml file
-  int                                    GetIntProperty         (const char* _pszKey, int _iDefault=0, bool warningDefault = true) const;
-  float32                                Getfloat32Property       (const char* _pszKey, float32 _fDefault=0.0, bool warningDefault = true) const;
+  int                                 GetIntProperty         (const char* _pszKey, int _iDefault=0, bool warningDefault = true) const;
+  float32                             Getfloat32Property     (const char* _pszKey, float32 _fDefault=0.0, bool warningDefault = true) const;
   bool                                GetBoolProperty        (const char* _pszKey, bool _bDefault=false, bool warningDefault = true) const;
-  const char*                    GetPszProperty         (const char* _pszKey, const char* _pszDefault=NULL, bool warningDefault = true) const;
-    std::string                    GetPszISOProperty        (const char* _pszKey, const char* _pszDefault=NULL,    bool warningDefault = true) const;
-    Vect2f                            GetVect2fProperty      (const char* _pszKey, const Vect2f& _Default, bool warningDefault = true) const;
-    Vect3f                            GetVect3fProperty      (const char* _pszKey, const Vect3f& _Default, bool warningDefault = true) const;
-    Vect4f                            GetVect4fProperty      (const char* _pszKey, const Vect4f& _Default, bool warningDefault = true) const;
-    Vect2i                            GetVect2iProperty      (const char* _pszKey, const Vect2i& _Default, bool warningDefault = true) const;
-    Vect3i                            GetVect3iProperty      (const char* _pszKey, const Vect3i& _Default, bool warningDefault = true) const;
-    Vect4i                            GetVect4iProperty      (const char* _pszKey, const Vect4i& _Default, bool warningDefault = true) const;
+  const char*                         GetPszProperty         (const char* _pszKey, const char* _pszDefault=NULL, bool warningDefault = true) const;
+    std::string                       GetPszISOProperty      (const char* _pszKey, const char* _pszDefault=NULL,    bool warningDefault = true) const;
+    Math::Vect2f                      GetVect2fProperty      (const char* _pszKey, const Math::Vect2f& _Default, bool warningDefault = true) const;
+    Math::Vect3f                      GetVect3fProperty      (const char* _pszKey, const Math::Vect3f& _Default, bool warningDefault = true) const;
+    Math::Vect4f                      GetVect4fProperty      (const char* _pszKey, const Math::Vect4f& _Default, bool warningDefault = true) const;
+    Math::Vect2i                            GetVect2iProperty      (const char* _pszKey, const Math::Vect2i& _Default, bool warningDefault = true) const;
+    Math::Vect3i                            GetVect3iProperty      (const char* _pszKey, const Math::Vect3i& _Default, bool warningDefault = true) const;
+    Math::Vect4i                            GetVect4iProperty      (const char* _pszKey, const Math::Vect4i& _Default, bool warningDefault = true) const;
 
   // To get keywords from xml file
-  int                                    GetIntKeyword          (const char* _pszKey, int _iDefault=0) const;
-  float32                                Getfloat32Keyword        (const char* _pszKey, float32 _fDefault=0.0) const;
+  int                                 GetIntKeyword          (const char* _pszKey, int _iDefault=0) const;
+  float32                             Getfloat32Keyword      (const char* _pszKey, float32 _fDefault=0.0) const;
   bool                                GetBoolKeyword         (const char* _pszKey, bool _bDefault=false) const;
-  const char*                    GetPszKeyword          (const char* _pszKey, const char* _pszDefault=NULL) const;
+  const char*                         GetPszKeyword          (const char* _pszKey, const char* _pszDefault=NULL) const;
 
   int                                    GetNumChildren         () ;
 
@@ -83,12 +83,12 @@ public:
   bool                        WriteIntProperty       (const char* _pszKey, int _iValue);
   bool                        Writefloat32Property     (const char* _pszKey, float32 _fValue);
   bool                        WriteBoolProperty      (const char* _pszKey, bool _bValue);
-    bool                                WriteVect2fProperty    (const char* _pszKey, const Vect2f& _value);
-    bool                                WriteVect3fProperty    (const char* _pszKey, const Vect3f& _value);
-    bool                                WriteVect4fProperty    (const char* _pszKey, const Vect4f& _value);
-    bool                                WriteVect2iProperty    (const char* _pszKey, const Vect2i& _value);
-    bool                                WriteVect3iProperty    (const char* _pszKey, const Vect3i& _value);
-    bool                                WriteVect4iProperty    (const char* _pszKey, const Vect4i& _value);
+    bool                                WriteVect2fProperty    (const char* _pszKey, const Math::Vect2f& _value);
+    bool                                WriteVect3fProperty    (const char* _pszKey, const Math::Vect3f& _value);
+    bool                                WriteVect4fProperty    (const char* _pszKey, const Math::Vect4f& _value);
+    bool                                WriteVect2iProperty    (const char* _pszKey, const Math::Vect2i& _value);
+    bool                                WriteVect3iProperty    (const char* _pszKey, const Math::Vect3i& _value);
+    bool                                WriteVect4iProperty    (const char* _pszKey, const Math::Vect4i& _value);
 
 private:
   void                        Release                       ();

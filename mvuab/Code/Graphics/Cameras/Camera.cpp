@@ -30,7 +30,7 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     D3DXMatrixTranslation( &translation, m_pos.x ,m_pos.y ,m_pos.z );
     device->SetTransform( D3DTS_WORLD, &translation );
         
-    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, colRED);
+    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, Math::colRED);
 
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );
@@ -143,7 +143,7 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     device->SetFVF(AXIS_VERTEX::getFlags());
     device->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(AXIS_VERTEX));
     
-    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, colRED);
+    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, Math::colRED);
 
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );

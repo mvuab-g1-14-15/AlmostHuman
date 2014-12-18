@@ -9,7 +9,7 @@ class CCamera;
 class CCameraDebugWindow : public CDebugWindow
 {
 public:
-    CCameraDebugWindow(Vect2i aWindowPosition);
+    CCameraDebugWindow(Math::Vect2i aWindowPosition);
     ~CCameraDebugWindow();
     virtual void Update(float32 deltaTime);
 

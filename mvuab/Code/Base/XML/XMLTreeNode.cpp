@@ -343,12 +343,12 @@ std::string CXMLTreeNode::GetPszISOProperty (const char* _pszKey, const char* _p
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect2f param if found. Else a default value
+// Returns an Math::Vect2f param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Vect2f& _Default, bool warningDefault) const
+Math::Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Math::Vect2f& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect2f l_V2f(0.0f, 0.0f);
+  Math::Vect2f l_V2f(0.0f, 0.0f);
 
   if (value)
   {
@@ -357,7 +357,7 @@ Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Vect2f& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
     }
 
   xmlFree(value);
@@ -365,12 +365,12 @@ Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Vect2f& _Def
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect3f param if found. Else a default value
+// Returns an Math::Vect3f param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Vect3f& _Default, bool warningDefault) const
+Math::Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Math::Vect3f& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect3f l_V3f(0.0f, 0.0f, 0.0f);
+  Math::Vect3f l_V3f(0.0f, 0.0f, 0.0f);
 
   if (value)
   {
@@ -379,7 +379,7 @@ Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Vect3f& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
     }
 
   xmlFree(value);
@@ -387,12 +387,12 @@ Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Vect3f& _Def
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect4f param if found. Else a default value
+// Returns an Math::Vect4f param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Vect4f& _Default, bool warningDefault) const
+Math::Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Math::Vect4f& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect4f l_V4f(0.0f, 0.0f, 0.0f, 0.0f);
+  Math::Vect4f l_V4f(0.0f, 0.0f, 0.0f, 0.0f);
 
   if (value)
   {
@@ -401,7 +401,7 @@ Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Vect4f& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
     }
 
   xmlFree(value);
@@ -409,12 +409,12 @@ Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Vect4f& _Def
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect2i param if found. Else a default value
+// Returns an Math::Vect2i param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Vect2i& _Default, bool warningDefault) const
+Math::Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Math::Vect2i& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect2i l_V2i(0, 0);
+  Math::Vect2i l_V2i(0, 0);
 
   if (value)
   {
@@ -423,7 +423,7 @@ Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Vect2i& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
     }
 
   xmlFree(value);
@@ -431,12 +431,12 @@ Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Vect2i& _Def
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect3i param if found. Else a default value
+// Returns an Math::Vect3i param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Vect3i& _Default, bool warningDefault) const
+Math::Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Math::Vect3i& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect3i l_V3i(0, 0, 0);
+  Math::Vect3i l_V3i(0, 0, 0);
 
   if (value)
   {
@@ -445,7 +445,7 @@ Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Vect3i& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
     }
 
   xmlFree(value);
@@ -453,12 +453,12 @@ Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Vect3i& _Def
 }
 
 //----------------------------------------------------------------------------
-// Returns an Vect4i param if found. Else a default value
+// Returns an Math::Vect4i param if found. Else a default value
 //----------------------------------------------------------------------------
-Vect4i CXMLTreeNode::GetVect4iProperty  (const char* _pszKey, const Vect4i& _Default, bool warningDefault) const
+Math::Vect4i CXMLTreeNode::GetVect4iProperty  (const char* _pszKey, const Math::Vect4i& _Default, bool warningDefault) const
 {
   xmlChar* value = GetProperty(_pszKey);
-  Vect4i l_V4i(0, 0, 0, 0);
+  Math::Vect4i l_V4i(0, 0, 0, 0);
 
   if (value)
   {
@@ -467,7 +467,7 @@ Vect4i CXMLTreeNode::GetVect4iProperty  (const char* _pszKey, const Vect4i& _Def
   }
     else if(warningDefault)
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
     }
 
   xmlFree(value);
@@ -854,9 +854,9 @@ bool CXMLTreeNode::WriteBoolProperty(const char* _pszKey, bool _bValue)
 
 
 //----------------------------------------------------------------------------
-// Writes a Vect2f property
+// Writes a Math::Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect2fProperty    (const char* _pszKey, const Vect2f& _value)
+bool CXMLTreeNode::WriteVect2fProperty    (const char* _pszKey, const Math::Vect2f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -873,9 +873,9 @@ bool CXMLTreeNode::WriteVect2fProperty    (const char* _pszKey, const Vect2f& _v
 }
 
 //----------------------------------------------------------------------------
-// Writes a Vect3f property
+// Writes a Math::Vect3f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect3fProperty    (const char* _pszKey, const Vect3f& _value)
+bool CXMLTreeNode::WriteVect3fProperty    (const char* _pszKey, const Math::Vect3f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -892,9 +892,9 @@ bool CXMLTreeNode::WriteVect3fProperty    (const char* _pszKey, const Vect3f& _v
 }
 
 //----------------------------------------------------------------------------
-// Writes a Vect2f property
+// Writes a Math::Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect4fProperty    (const char* _pszKey, const Vect4f& _value)
+bool CXMLTreeNode::WriteVect4fProperty    (const char* _pszKey, const Math::Vect4f& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -911,9 +911,9 @@ bool CXMLTreeNode::WriteVect4fProperty    (const char* _pszKey, const Vect4f& _v
 }
 
 //----------------------------------------------------------------------------
-// Writes a Vect2i property
+// Writes a Math::Vect2i property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect2iProperty    (const char* _pszKey, const Vect2i& _value)
+bool CXMLTreeNode::WriteVect2iProperty    (const char* _pszKey, const Math::Vect2i& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -930,9 +930,9 @@ bool CXMLTreeNode::WriteVect2iProperty    (const char* _pszKey, const Vect2i& _v
 }
 
 //----------------------------------------------------------------------------
-// Writes a Vect3i property
+// Writes a Math::Vect3i property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect3iProperty    (const char* _pszKey, const Vect3i& _value)
+bool CXMLTreeNode::WriteVect3iProperty    (const char* _pszKey, const Math::Vect3i& _value)
 {
   assert(_pszKey && m_pWriter);
 
@@ -949,9 +949,9 @@ bool CXMLTreeNode::WriteVect3iProperty    (const char* _pszKey, const Vect3i& _v
 }
 
 //----------------------------------------------------------------------------
-// Writes a Vect2f property
+// Writes a Math::Vect2f property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::WriteVect4iProperty    (const char* _pszKey, const Vect4i& _value)
+bool CXMLTreeNode::WriteVect4iProperty    (const char* _pszKey, const Math::Vect4i& _value)
 {
   assert(_pszKey && m_pWriter);
 

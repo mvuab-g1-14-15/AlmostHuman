@@ -97,7 +97,7 @@ void CLogRender::SetVisible (bool flag)
            m_uLinesPerPage = 1;
            m_bIsVisible = true;
            m_bAnimation = true;
-           m_LerpAnimator1D.SetValues(0.f,(float32)m_uLinesPerPageAnimation, 0.8f,FUNC_INCREMENT);
+           m_LerpAnimator1D.SetValues(0.f,(float32)m_uLinesPerPageAnimation, 0.8f,Math::FUNC_INCREMENT);
            m_iDirecion = 1;
            
        }
@@ -106,7 +106,7 @@ void CLogRender::SetVisible (bool flag)
            //Realizamos animación de desaparecer:
            m_bAnimation = true;
            m_iDirecion = -1;
-           m_LerpAnimator1D.SetValues((float32)m_uLinesPerPageAnimation,0.f, 0.8f,FUNC_INCREMENT);
+           m_LerpAnimator1D.SetValues((float32)m_uLinesPerPageAnimation,0.f, 0.8f,Math::FUNC_INCREMENT);
            
        }
    }
@@ -117,7 +117,7 @@ void CLogRender::ToggleVisibility()
     SetVisible(!m_bIsVisible);
 }
 
-void CLogRender::Render(CColor color)
+void CLogRender::Render(Math::CColor color)
 {
     CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
     CFontManager * fm = CFontManager::GetSingletonPtr();
@@ -191,9 +191,9 @@ void CLogRender::Render(CColor color)
        uint32 sizeY = fm->SizeY("|");
        uint32 h_aux = sizeY * (m_uLinesPerPage+4); //4 lienas que llenamos con informacion extra
        
-       CColor edgeColor = colBLACK;
+       Math::CColor edgeColor = Math::colBLACK;
        edgeColor.SetAlpha(0.7f);
-       renderManager->DrawRectangle2D(Vect2i(5,2),w-10, h_aux,m_Quad2dColor,2,2,edgeColor);
+       renderManager->DrawRectangle2D(Math::Vect2i(5,2),w-10, h_aux,m_Quad2dColor,2,2,edgeColor);
 
        
        //Draw Info Text
@@ -207,18 +207,18 @@ void CLogRender::Render(CColor color)
        baseUtils::FormatSrting(l_sInfo, "Press %s to view the Log", shortInfo.c_str());
 
        //Draw background quad2D
-       CColor quad2dColor(0.f,0.f,0.5f,0.7f);
+       Math::CColor quad2dColor(0.f,0.f,0.5f,0.7f);
        uint32 w = fm->SizeX(l_sInfo.c_str());
        uint32 h = fm->SizeY(l_sInfo.c_str());
        
-       CColor edgeColor = colBLACK;
+       Math::CColor edgeColor = Math::colBLACK;
        edgeColor.SetAlpha(0.7f);
-       renderManager->DrawRectangle2D(Vect2i(m_WindowsPos.x, (uint32)(m_WindowsPos.y - h*0.5)), w, h, m_Quad2dColor, 1, 1, edgeColor);
+       renderManager->DrawRectangle2D(Math::Vect2i(m_WindowsPos.x, (uint32)(m_WindowsPos.y - h*0.5)), w, h, m_Quad2dColor, 1, 1, edgeColor);
 
 
        //Draw Info Text
-       if    (pLogger->Warnings())    color = colGREEN;
-       if    (pLogger->Errors())        color = colRED;
+       if    (pLogger->Warnings())    color = Math::colGREEN;
+       if    (pLogger->Errors())      color = Math::colRED;
        
 
        fm->DrawDefaultText(m_WindowsPos.x,m_WindowsPos.y-10,color, l_sInfo.c_str());
@@ -365,7 +365,7 @@ void CLogRender::ComputeBeginAndEnd ( const std::vector<SLog>& vecLogs, uint32& 
 }
 
 void CLogRender::RenderLines ( CGraphicsManager* renderManager, CFontManager* fm, const std::vector<SLog>& vecLogs,
-                               uint32 beginIndex, uint32 endIndex, bool errors, bool warnings, CColor color)
+                               uint32 beginIndex, uint32 endIndex, bool errors, bool warnings, Math::CColor color)
 {
    assert( beginIndex >= 0);
    assert( endIndex >= 0);
@@ -382,9 +382,9 @@ void CLogRender::RenderLines ( CGraphicsManager* renderManager, CFontManager* fm
 
    //Dibujamos la cabecera:
    std::string header = "    LINE   |         LEVEL         |                       MESSAGE                                          (Press F1 to hide the Log)";
-   incY += fm->DrawDefaultText(m_WindowsPos.x, dy, colWHITE, header.c_str());
+   incY += fm->DrawDefaultText(m_WindowsPos.x, dy, Math::colWHITE, header.c_str());
    header = "______________________________________________________________________________________________________________________________________";
-   dy +=fm->DrawDefaultText(m_WindowsPos.x, dy, colWHITE, header.c_str());
+   dy +=fm->DrawDefaultText(m_WindowsPos.x, dy, Math::colWHITE, header.c_str());
 
    uint32 lastLineInRender;
    uint32 totalLineInLogger;
@@ -420,30 +420,30 @@ void CLogRender::RenderLines ( CGraphicsManager* renderManager, CFontManager* fm
    {
        SLog log = *it;
        std::string level;
-       CColor color = colWHITE;
+       Math::CColor color = Math::colWHITE;
        switch(log.m_eLogLevel)
        {
        case ELL_ERROR:        
            {
-               color = colRED; //red
+               color = Math::colRED; //red
                level = "ERROR";
            }
            break;                    
        case ELL_INFORMATION:
            {
-               color = colWHITE; //white
+               color = Math::colWHITE; //white
                level = "INFORMATION";
            }
            break;
        case ELL_WARNING:
            {
-               color = colGREEN; //green
+               color = Math::colGREEN; //green
                level = "WARNING";
            }
            break;
        case ELL_NONE :
            {
-               color = colWHITE; //black
+               color = Math::colWHITE; //black
                level = "";
            }
            break;
@@ -459,7 +459,7 @@ void CLogRender::RenderLines ( CGraphicsManager* renderManager, CFontManager* fm
        it++;
    }
 
-   color = colWHITE;
+   color = Math::colWHITE;
    header = "______________________________________________________________________________________________________________________________________";
    dy+=10;
    fm->DrawDefaultText(m_WindowsPos.x,dy-incY,color, header.c_str());
@@ -469,27 +469,27 @@ void CLogRender::RenderLines ( CGraphicsManager* renderManager, CFontManager* fm
 
    if( errors )
    {
-       color = colRED;
+       color = Math::colRED;
        fm->DrawDefaultText(    m_WindowsPos.x+300,dy,color, "|  Errors: YES  |");
    }
    else
    {
-       color = colWHITE;
+       color = Math::colWHITE;
        fm->DrawDefaultText(    m_WindowsPos.x+300,dy,color, "|  Errors: NOT  |");
    }
 
    if( warnings )
    {
-       color = colGREEN;
+       color = Math::colGREEN;
        fm->DrawDefaultText(    m_WindowsPos.x+400,dy,color, "Warnings: YES");
    }
    else
    {
-       color = colWHITE;
+       color = Math::colWHITE;
        fm->DrawDefaultText(    m_WindowsPos.x+400,dy,color, "Warnings: NOT");
    }
    
-   color = colWHITE;
+   color = Math::colWHITE;
 
    fm->DrawDefaultText(    m_WindowsPos.x+500,dy,color, "|      (Press PgDown, PgUp to view more logs)");
    header = "______________________________________________________________________________________________________________________________________";
