@@ -377,8 +377,8 @@ template<typename T>
 void Vector3<T>::SetFromPolar(const T longitude, const T latitude, const T length)
 {
   T cos_lat;
-  mathUtils::SinCos(latitude, z, cos_lat);
-  mathUtils::SinCos(longitude, y, x);
+  Math::Utils::SinCos(latitude, z, cos_lat);
+  Math::Utils::SinCos(longitude, y, x);
   
   T k_length = length * cos_lat;
  
@@ -394,7 +394,7 @@ template<typename T>
 void Vector3<T>::GetPolar(T& longitude, T& latitude, T& length) const
 {
   length    = Length();
-  latitude  = mathUtils::ASin(z / length);
+  latitude  = Math::Utils::ASin(z / length);
   longitude = (T)atan2(y, x);
 }
 
@@ -446,9 +446,9 @@ inline bool Vector3<T>::operator != (const Vector3<T>& otro) const
 template<typename T>
 inline bool Vector3<T>::IsEqualEpsilon (const Vector3<T>& otro, const T Epsilon) const
 {
-  return (mathUtils::EqualEpsilon(x, otro.x, Epsilon) &&
-          mathUtils::EqualEpsilon(y, otro.y, Epsilon) &&
-          mathUtils::EqualEpsilon(z, otro.z, Epsilon));
+  return (Math::Utils::EqualEpsilon(x, otro.x, Epsilon) &&
+          Math::Utils::EqualEpsilon(y, otro.y, Epsilon) &&
+          Math::Utils::EqualEpsilon(z, otro.z, Epsilon));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -457,9 +457,9 @@ inline bool Vector3<T>::IsEqualEpsilon (const Vector3<T>& otro, const T Epsilon)
 template<typename T>
 inline bool Vector3<T>::IsNotEqualEpsilon (const Vector3<T>& otro, const T Epsilon) const
 {
-  return (!mathUtils::EqualEpsilon(x, otro.x, Epsilon) ||
-          !mathUtils::EqualEpsilon(y, otro.y, Epsilon) ||
-          !mathUtils::EqualEpsilon(z, otro.z, Epsilon));
+  return (!Math::Utils::EqualEpsilon(x, otro.x, Epsilon) ||
+          !Math::Utils::EqualEpsilon(y, otro.y, Epsilon) ||
+          !Math::Utils::EqualEpsilon(z, otro.z, Epsilon));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -836,9 +836,9 @@ inline Vector3<T> Vector3<T>::GetLerp (const Vector3<T>& otro, const T t) const
 template<typename T>
 inline Vector3<T> VectorMinComponents (const Vector3<T>& uno, const Vector3<T>& otro)
 {
-  return Vector3<T>(mathUtils::Min(uno.x, otro.x),
-                    mathUtils::Min(uno.y, otro.y),
-                    mathUtils::Min(uno.z, otro.z));
+  return Vector3<T>(Math::Utils::Min(uno.x, otro.x),
+                    Math::Utils::Min(uno.y, otro.y),
+                    Math::Utils::Min(uno.z, otro.z));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -848,9 +848,9 @@ inline Vector3<T> VectorMinComponents (const Vector3<T>& uno, const Vector3<T>& 
 template<typename T>
 inline Vector3<T> VectorMaxComponents (const Vector3<T>& uno, const Vector3<T>& otro)
 {
-  return Vector3<T>(mathUtils::Max(uno.x, otro.x),
-                    mathUtils::Max(uno.y, otro.y),
-                    mathUtils::Max(uno.z, otro.z));
+  return Vector3<T>(Math::Utils::Max(uno.x, otro.x),
+                    Math::Utils::Max(uno.y, otro.y),
+                    Math::Utils::Max(uno.z, otro.z));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

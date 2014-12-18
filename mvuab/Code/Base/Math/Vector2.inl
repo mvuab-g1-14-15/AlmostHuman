@@ -339,7 +339,7 @@ inline void Vector2<T>::SetZero ()
 template<typename T>
 void Vector2<T>::SetFromPolar(const T ang, const T length)
 { 
-  mathUtils::SinCos(ang, y, x);
+  Math::Utils::SinCos(ang, y, x);
   x *= length;
   y *= length;
 }
@@ -389,8 +389,8 @@ inline bool Vector2<T>::operator != (const Vector2<T>& otro) const
 template<typename T> 
 inline bool Vector2<T>::IsEqualEpsilon (const Vector2<T>& otro) const
 {
-  return (mathUtils::Compare(x, otro.x) == 0 &&
-          mathUtils::Compare(y, otro.y) == 0);
+  return (Math::Utils::Compare(x, otro.x) == 0 &&
+          Math::Utils::Compare(y, otro.y) == 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,8 +399,8 @@ inline bool Vector2<T>::IsEqualEpsilon (const Vector2<T>& otro) const
 template<typename T> 
 inline bool Vector2<T>::IsNotEqualEpsilon (const Vector2<T>& otro) const
 {
-  return (mathUtils::Compare(x, otro.x) != 0 ||
-          mathUtils::Compare(y, otro.y) != 0);
+  return (Math::Utils::Compare(x, otro.x) != 0 ||
+          Math::Utils::Compare(y, otro.y) != 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -557,7 +557,7 @@ inline Vector2<T>& Vector2<T>::Rotate(const T angle)
   T sina;
   T cosa;
 
-  mathUtils::SinCos(angle, sina, cosa);
+  Math::Utils::SinCos(angle, sina, cosa);
 
   T aux_x = x;
   T aux_y = y;
@@ -627,8 +627,8 @@ inline Vector2<T> Vector2<T>::GetLerp (const Vector2<T>& otro, const T t) const
 template<typename T>
 inline Vector2<T> VectorMinComponents (const Vector2<T>& uno, const Vector2<T>& otro)
 {
-  return Vector2<T>(mathUtils::Min(uno.x, otro.x),
-                    mathUtils::Min(uno.y, otro.y));
+  return Vector2<T>(Math::Utils::Min(uno.x, otro.x),
+                    Math::Utils::Min(uno.y, otro.y));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -638,8 +638,8 @@ inline Vector2<T> VectorMinComponents (const Vector2<T>& uno, const Vector2<T>& 
 template<typename T>
 inline Vector2<T> VectorMaxComponents (const Vector2<T>& uno, const Vector2<T>& otro)
 {
-  return Vector2<T>(mathUtils::Max(uno.x, otro.x),
-                    mathUtils::Max(uno.y, otro.y));
+  return Vector2<T>(Math::Utils::Max(uno.x, otro.x),
+                    Math::Utils::Max(uno.y, otro.y));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -457,10 +457,10 @@ inline bool Vector4<T>::operator != (const Vector4<T>& otro) const
 template<typename T>
 inline bool Vector4<T>::IsEqualEpsilon (const Vector4<T>& otro) const
 {
-  return (mathUtils::Compare(x, otro.x) == 0 &&
-          mathUtils::Compare(y, otro.y) == 0 &&
-          mathUtils::Compare(z, otro.z) == 0 &&
-          mathUtils::Compare(w, otro.w) == 0);
+  return (Math::Utils::Compare(x, otro.x) == 0 &&
+          Math::Utils::Compare(y, otro.y) == 0 &&
+          Math::Utils::Compare(z, otro.z) == 0 &&
+          Math::Utils::Compare(w, otro.w) == 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -469,10 +469,10 @@ inline bool Vector4<T>::IsEqualEpsilon (const Vector4<T>& otro) const
 template<typename T>
 inline bool Vector4<T>::IsNotEqualEpsilon (const Vector4<T>& otro) const
 {
-  return (mathUtils::Compare(x, otro.x) != 0 ||
-          mathUtils::Compare(y, otro.y) != 0 ||
-          mathUtils::Compare(z, otro.z) != 0 ||
-          mathUtils::Compare(w, otro.w) != 0);
+  return (Math::Utils::Compare(x, otro.x) != 0 ||
+          Math::Utils::Compare(y, otro.y) != 0 ||
+          Math::Utils::Compare(z, otro.z) != 0 ||
+          Math::Utils::Compare(w, otro.w) != 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

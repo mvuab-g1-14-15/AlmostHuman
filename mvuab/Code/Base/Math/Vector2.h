@@ -8,7 +8,8 @@
 #include "MathTypes.h"
 #include "MathUtils.h"
 #include "Utils/Types.h"
-
+namespace Math
+{
 
 template<typename T>
 class Vector2
@@ -129,18 +130,18 @@ typedef Vector2<uint16> Vect2w;
 //--------------------------------------------------------------------------
 //  CONSTANTES float32
 //--------------------------------------------------------------------------
-extern const Vect2f  v2fX;
-extern const Vect2f  v2fY;
-extern const Vect2f  v2fONE;
-extern const Vect2f  v2fNEGX;
-extern const Vect2f  v2fNEGY;
-extern const Vect2f  v2fNEGONE;
-extern const Vect2f  v2fZERO;
-extern const Vect2f  v2fMAX;
-extern const Vect2f  v2fMIN;
-extern const Vect2f  v2fFRONT;
-extern const Vect2f  v2fRIGHT;
-extern const Vect2f  v2fUNIT;
+extern const Math::Vect2f  v2fX;
+extern const Math::Vect2f  v2fY;
+extern const Math::Vect2f  v2fONE;
+extern const Math::Vect2f  v2fNEGX;
+extern const Math::Vect2f  v2fNEGY;
+extern const Math::Vect2f  v2fNEGONE;
+extern const Math::Vect2f  v2fZERO;
+extern const Math::Vect2f  v2fMAX;
+extern const Math::Vect2f  v2fMIN;
+extern const Math::Vect2f  v2fFRONT;
+extern const Math::Vect2f  v2fRIGHT;
+extern const Math::Vect2f  v2fUNIT;
 
 //--------------------------------------------------------------------------
 //  CONSTANTES float64
@@ -162,17 +163,18 @@ extern const Vect2d  v2dUNIT;
 //--------------------------------------------------------------------------
 // CONSTANTES INT
 //--------------------------------------------------------------------------
-extern const Vect2i  v2iX;
-extern const Vect2i  v2iY;
-extern const Vect2i  v2iONE;
-extern const Vect2i  v2iNEGX;
-extern const Vect2i  v2iNEGY;
-extern const Vect2i  v2iNEGONE;
-extern const Vect2i  v2iZERO;
-extern const Vect2i  v2iTOP;
-extern const Vect2i  v2iFRONT;
-extern const Vect2i  v2iRIGHT;
-extern const Vect2i  v2iUNIT;
+extern const Math::Vect2i  v2iX;
+extern const Math::Vect2i  v2iY;
+extern const Math::Vect2i  v2iONE;
+extern const Math::Vect2i  v2iNEGX;
+extern const Math::Vect2i  v2iNEGY;
+extern const Math::Vect2i  v2iNEGONE;
+extern const Math::Vect2i  v2iZERO;
+extern const Math::Vect2i  v2iTOP;
+extern const Math::Vect2i  v2iFRONT;
+extern const Math::Vect2i  v2iRIGHT;
+extern const Math::Vect2i  v2iUNIT;
 
+} //namespace Math
 
 #endif

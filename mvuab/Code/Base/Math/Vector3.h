@@ -28,6 +28,9 @@
 // matematica.
 // \endverbatim
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Math
+{
 template<typename T>
 class Vector3
 {
@@ -166,7 +169,7 @@ template<typename T> inline Vector3<T> VectorMaxComponents (const Vector3<T>& un
 ////////////////////////////////////////////////////////////////////////////////////////
 // TIPOS DE VECTORES 3D CON TIPOS CONCRETOS DE DATOS
 ////////////////////////////////////////////////////////////////////////////////////////
-typedef Vector3<float32>  Vect3f;
+typedef Vector3<float32> Vect3f;
 typedef Vector3<float64> Vect3d;
 typedef Vector3<int32>  Vect3i;
 typedef Vector3<uint32> Vect3u;
@@ -176,22 +179,22 @@ typedef Vector3<uint16> Vect3w;
 ////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float32
 ////////////////////////////////////////////////////////////////////////////////////////
-extern const Vect3f  v3fX;
-extern const Vect3f  v3fY;
-extern const Vect3f  v3fZ;
-extern const Vect3f  v3fONE;
-extern const Vect3f  v3fNEGX;
-extern const Vect3f  v3fNEGY;
-extern const Vect3f  v3fNEGZ;
-extern const Vect3f  v3fNEGONE;
-extern const Vect3f  v3fZERO;
-extern const Vect3f  v3fMAX;
-extern const Vect3f  v3fMIN;
-extern const Vect3f  v3fTOP;
-extern const Vect3f  v3fBOTTOM;
-extern const Vect3f  v3fFRONT;
-extern const Vect3f  v3fRIGHT;
-extern const Vect3f  v3fUNIT;
+extern const Math::Vect3f  v3fX;
+extern const Math::Vect3f  v3fY;
+extern const Math::Vect3f  v3fZ;
+extern const Math::Vect3f  v3fONE;
+extern const Math::Vect3f  v3fNEGX;
+extern const Math::Vect3f  v3fNEGY;
+extern const Math::Vect3f  v3fNEGZ;
+extern const Math::Vect3f  v3fNEGONE;
+extern const Math::Vect3f  v3fZERO;
+extern const Math::Vect3f  v3fMAX;
+extern const Math::Vect3f  v3fMIN;
+extern const Math::Vect3f  v3fTOP;
+extern const Math::Vect3f  v3fBOTTOM;
+extern const Math::Vect3f  v3fFRONT;
+extern const Math::Vect3f  v3fRIGHT;
+extern const Math::Vect3f  v3fUNIT;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float64
@@ -215,19 +218,20 @@ extern const Vect3d  v3dUNIT;
 ////////////////////////////////////////////////////////////////////////////////////////
 // CONSTANTES INT
 ////////////////////////////////////////////////////////////////////////////////////////
-extern const Vect3i  v3iX;
-extern const Vect3i  v3iY;
-extern const Vect3i  v3iZ;
-extern const Vect3i  v3iONE;
-extern const Vect3i  v3iNEGX;
-extern const Vect3i  v3iNEGY;
-extern const Vect3i  v3iNEGZ;
-extern const Vect3i  v3iNEGONE;
-extern const Vect3i  v3iZERO;
-extern const Vect3i  v3iTOP;
-extern const Vect3i  v3iFRONT;
-extern const Vect3i  v3iRIGHT;
-extern const Vect3i  v3iUNIT;
+extern const Math::Vect3i  v3iX;
+extern const Math::Vect3i  v3iY;
+extern const Math::Vect3i  v3iZ;
+extern const Math::Vect3i  v3iONE;
+extern const Math::Vect3i  v3iNEGX;
+extern const Math::Vect3i  v3iNEGY;
+extern const Math::Vect3i  v3iNEGZ;
+extern const Math::Vect3i  v3iNEGONE;
+extern const Math::Vect3i  v3iZERO;
+extern const Math::Vect3i  v3iTOP;
+extern const Math::Vect3i  v3iFRONT;
+extern const Math::Vect3i  v3iRIGHT;
+extern const Math::Vect3i  v3iUNIT;
 
+} //namespace Math
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

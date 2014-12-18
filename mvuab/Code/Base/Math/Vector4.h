@@ -12,7 +12,8 @@
 #include "Vector3.h"
 #include "Utils/Types.h"
 
-
+namespace Math
+{
 template<typename T>
 class Vector4
 {
@@ -118,7 +119,7 @@ template<typename T> inline Vector4<T>  operator - (const T escalar, const Vecto
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// TIPOS DE VECTORES 4D CON TIPOS CONCRETOS DE DATOS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef Vector4<float32>  Vect4f;
+typedef Vector4<float32> Vect4f;
 typedef Vector4<float64> Vect4d;
 typedef Vector4<int32>  Vect4i;
 typedef Vector4<uint32> Vect4u;
@@ -128,22 +129,22 @@ typedef Vector4<uint16> Vect4w;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float32
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const Vect4f  v4fX;
-extern const Vect4f  v4fY;
-extern const Vect4f  v4fZ;
-extern const Vect4f  v4fW;
-extern const Vect4f  v4fONE;
-extern const Vect4f  v4fNEGX;
-extern const Vect4f  v4fNEGY;
-extern const Vect4f  v4fNEGZ;
-extern const Vect4f  v4fNEGW;
-extern const Vect4f  v4fNEGONE;
-extern const Vect4f  v4fZERO;
-extern const Vect4f  v4fMAX;
-extern const Vect4f  v4fMIN;
-extern const Vect4f  v4fTOP;
-extern const Vect4f  v4fFRONT;
-extern const Vect4f  v4fRIGHT;
+extern const Math::Vect4f  v4fX;
+extern const Math::Vect4f  v4fY;
+extern const Math::Vect4f  v4fZ;
+extern const Math::Vect4f  v4fW;
+extern const Math::Vect4f  v4fONE;
+extern const Math::Vect4f  v4fNEGX;
+extern const Math::Vect4f  v4fNEGY;
+extern const Math::Vect4f  v4fNEGZ;
+extern const Math::Vect4f  v4fNEGW;
+extern const Math::Vect4f  v4fNEGONE;
+extern const Math::Vect4f  v4fZERO;
+extern const Math::Vect4f  v4fMAX;
+extern const Math::Vect4f  v4fMIN;
+extern const Math::Vect4f  v4fTOP;
+extern const Math::Vect4f  v4fFRONT;
+extern const Math::Vect4f  v4fRIGHT;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float64
@@ -164,6 +165,8 @@ extern const Vect4d  v4dMIN;
 extern const Vect4d  v4dTOP;
 extern const Vect4d  v4dFRONT;
 extern const Vect4d  v4dRIGHT;
+
+} //namespace Math
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // CONSTANTES INT
