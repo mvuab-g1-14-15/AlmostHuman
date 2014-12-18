@@ -20,7 +20,7 @@ void CMouse::Done ()
 /**
 * Initializes the mouse device
 */
-bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Vect2i& screenRes, bool exclusiveMode) 
+bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveMode) 
 {
     bool bIsOk = Inherited::Init(pDI, hWnd);
     m_ScreenResolution = screenRes;

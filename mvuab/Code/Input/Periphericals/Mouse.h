@@ -24,7 +24,7 @@ public:
     CMouse() {}
     virtual ~CMouse() { Done(); } 
 
-    bool                Init            (LPDIRECTINPUT8, HWND, const Vect2i& screenRes, bool exclusiveMode);
+    bool                Init            (LPDIRECTINPUT8, HWND, const Math::Vect2i& screenRes, bool exclusiveMode);
     void                Done            ();
 
     //----CInputDevice Interface----
@@ -32,7 +32,7 @@ public:
 
 
     //----CMouse Interface----------
-    const Vect3i&       GetMouseDelta            ()        const        { return m_Delta; }
+    const Math::Vect3i&       GetMouseDelta            ()        const        { return m_Delta; }
 
     bool                IsDown                    (uint32 nBtn)        const         { if (nBtn<3) return m_bIsDown[nBtn]; return false; }
     bool                IsUpDown                (uint32 nBtn)        const        { if (nBtn<3) return m_bIsUpDown[nBtn]; return false; }
@@ -50,8 +50,8 @@ private:
     bool                m_bIsDown[3];
     bool                m_bIsUpDown[3];
     bool                m_bIsDownUp[3];
-    Vect3i                m_Delta;
-    Vect2i                m_ScreenResolution;
+    Math::Vect3i                m_Delta;
+    Math::Vect2i                m_ScreenResolution;
 };
 
 

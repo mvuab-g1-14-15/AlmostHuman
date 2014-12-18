@@ -34,8 +34,8 @@ public:
     virtual HRESULT         CrankUp            ( REFGUID rguid, LPCDIDATAFORMAT lpdf, bool exclusiveMode = false);
 
     // Accessor-Methods
-    virtual const Vect2i&        GetPosition        ()    { return m_Pos; }
-    virtual void                SetPosition        ( const Vect2i &pos ) { m_Pos = pos; }
+    virtual const Math::Vect2i&        GetPosition        ()    { return m_Pos; }
+    virtual void                SetPosition        ( const Math::Vect2i &pos ) { m_Pos = pos; }
 
 
 protected:
@@ -47,7 +47,7 @@ protected:
     LPDIRECTINPUTDEVICE8      m_pDevice;
     LPDIRECTINPUT8                m_pDI;
     HWND                              m_hWnd;
-    Vect2i                                    m_Pos;
+    Math::Vect2i                                    m_Pos;
 }; 
 
 #endif //_INPUT_DEVICE_H_

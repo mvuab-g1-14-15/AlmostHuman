@@ -24,7 +24,7 @@ struct PAD_CONTROLLER
     XINPUT_VIBRATION        m_vibration;
   WORD                m_wOldButtons;
   WORD                m_wNewButtons;
-    Vect2i                            m_Pos;
+    Math::Vect2i                            m_Pos;
 };
 
 #define INPUT_DEADZONE  ( 0.2f * float32(0x7FFF) )  // Default to 20% of the +/- 32767 range.   This is a reasonable default value but can be altered if needed.
@@ -37,7 +37,7 @@ class CGamePad
         CGamePad(): m_bIsOk(false), m_bDeadZoneOn(true) {}
         virtual ~CGamePad() {/*Nothing*/;}
 
-      bool                        Init                        (const Vect2i& screenRes);
+      bool                        Init                        (const Math::Vect2i& screenRes);
       void                        Update                                        ();
 
       bool                        IsDeadZoneOn                  ()    const {return m_bDeadZoneOn;}
@@ -53,13 +53,13 @@ class CGamePad
     bool                      GetRightThumbDeflection   (float32 *pfX, float32 *pfY, uint32 idController = 0);
     bool                      GetDeltaTriggers          (float32 *pfLeft, float32 *pfRight, uint32 idController = 0);
     uint32                     GetButtonsPressed         (uint32 idController = 0)    const; 
-        void                        GetPosition                                (Vect2i &pos, uint32 idController = 0);
+        void                        GetPosition                                (Math::Vect2i &pos, uint32 idController = 0);
 
   private:
     bool            m_bDeadZoneOn;
     bool            m_bIsOk;
         PAD_CONTROLLER    m_Controllers[MAX_CONTROLLERS];
-        Vect2i                    m_ScreenResolution;
+        Math::Vect2i                    m_ScreenResolution;
 };
 
 #endif // INC_GAMEPAD_H_

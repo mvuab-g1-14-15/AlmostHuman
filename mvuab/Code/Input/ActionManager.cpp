@@ -50,19 +50,19 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
             {
                 case AXIS_MOUSE_X:
                     {
-                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        Math::Vect3i deltas = m_pInputManager->GetMouseDelta();
                         amount = (float)deltas.x * current_action.m_fDelta;
                     }
                     break;
                 case AXIS_MOUSE_Y:
                     {
-                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        Math::Vect3i deltas = m_pInputManager->GetMouseDelta();
                         amount = (float)deltas.y * current_action.m_fDelta;
                     }
                     break;
                 case AXIS_MOUSE_Z:
                     {
-                        Vect3i deltas = m_pInputManager->GetMouseDelta();
+                        Math::Vect3i deltas = m_pInputManager->GetMouseDelta();
                         amount = (float)deltas.z * current_action.m_fDelta;
                     }
                     break;

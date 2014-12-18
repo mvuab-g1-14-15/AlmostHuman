@@ -1,6 +1,6 @@
 #include "GamePad.h"
 
-bool CGamePad::Init(const Vect2i& screenRes)
+bool CGamePad::Init(const Math::Vect2i& screenRes)
 {
   m_bIsOk = true;
     m_ScreenResolution = screenRes;
@@ -245,7 +245,7 @@ uint32 CGamePad::GetButtonsPressed (uint32 idController)    const
         return 0;
     }
 }
-void CGamePad::GetPosition (Vect2i &pos, uint32 idController)
+void CGamePad::GetPosition (Math::Vect2i &pos, uint32 idController)
 {
     if(idController < MAX_CONTROLLERS)
     {

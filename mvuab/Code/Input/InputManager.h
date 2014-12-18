@@ -35,7 +35,7 @@ public:
     CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL), m_bActiveMouse(true) {}
     virtual ~CInputManager() { Done(); }  
 
-    bool                  Init            (HWND, const Vect2i& screenRes, bool exclusiveModeinMouse);
+    bool                  Init            (HWND, const Math::Vect2i& screenRes, bool exclusiveModeinMouse);
     void                  Done            ();
     bool                  IsOk            () const { return m_bIsOk; }
 
@@ -44,8 +44,8 @@ public:
 
 
     //--Query Input Data and States--------
-    HRESULT            GetPosition                                    (INPUT_DEVICE_TYPE, Vect2i&);        // will work for mouse and joystick only
-    const Vect3i&   GetMouseDelta                                  ();                                            // get change in mouse position
+    HRESULT            GetPosition                                    (INPUT_DEVICE_TYPE, Math::Vect2i&);        // will work for mouse and joystick only
+    const Math::Vect3i&   GetMouseDelta                                  ();                                            // get change in mouse position
     bool            IsDown                                        (INPUT_DEVICE_TYPE, uint32);      // will work for keyboard, mouse and joystick
     bool            IsDownUp                                      (INPUT_DEVICE_TYPE, uint32);      // will work for keyboard, mouse and joystick
     bool            IsUpDown                                      (INPUT_DEVICE_TYPE, uint32);      // will work for keyboard, mouse and joystick

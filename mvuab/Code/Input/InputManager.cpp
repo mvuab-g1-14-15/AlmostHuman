@@ -40,7 +40,7 @@ void CInputManager::Release ()
 // If present joystick will also be initialized, but is not mandatory.
 //-> IN: HWND      - handle to main application window
 //----------------------------------------------------------------------------
-bool CInputManager::Init (HWND hWnd, const Vect2i& screenRes, bool exclusiveModeinMouse)
+bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveModeinMouse)
 {
     HRESULT hr;
     m_hWndMain = hWnd;
@@ -155,7 +155,7 @@ HRESULT CInputManager::Update(void)
 //----------------------------------------------------------------------------
 // If mouse or joystick return current position.
 //----------------------------------------------------------------------------
-HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Vect2i& pos) 
+HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Math::Vect2i& pos) 
 {
     switch (idType)
     {
@@ -292,7 +292,7 @@ void    CInputManager::SetGamePadRightMotorSpeed (uint32 speed, INPUT_DEVICE_TYP
 //----------------------------------------------------------------------------
 // Return the change of mouse cursor since last call to Update().
 //----------------------------------------------------------------------------
-const Vect3i& CInputManager::GetMouseDelta(void) 
+const Math::Vect3i& CInputManager::GetMouseDelta(void) 
 { 
     return m_pMouse->GetMouseDelta();
 }
