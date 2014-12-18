@@ -46,6 +46,14 @@
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Memory\MemLeaks.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h" />
     <ClInclude Include="ScriptManager\ScriptManager.h" />
     <ClInclude Include="Timer\CountDownTimer.h" />
     <ClInclude Include="Timer\Timer.h" />

@@ -32,6 +32,9 @@
     <Filter Include="ScriptManager">
       <UniqueIdentifier>{a5ff754c-0772-42c5-80f6-88cbf7764c47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ScriptManager\FunctionsToRegister">
+      <UniqueIdentifier>{3b820a63-a420-4502-a976-304ea36dc761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -161,6 +164,30 @@
     </ClInclude>
     <ClInclude Include="Utils\Visible.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
