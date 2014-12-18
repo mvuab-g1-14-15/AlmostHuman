@@ -2,6 +2,7 @@
 #include "ScriptManager\FunctionsToRegister\BaseFunctions.h"
 #include "ScriptManager\FunctionsToRegister\CoreFunctions.h"
 #include "ScriptManager\FunctionsToRegister\GraphicsFunctions.h"
+#include <string>
 
 #include <assert.h>
 
@@ -57,7 +58,7 @@ void CScriptManager::Reload()
 
 void CScriptManager::Load(const std::string &Path)
 {
-	m_LuaPath = Path;
+	/*m_LuaPath = Path;
 
 	fs::path full_path( fs::initial_path<fs::path>() );
 
@@ -99,7 +100,7 @@ void CScriptManager::Load(const std::string &Path)
   else // must be a file
   {
     //std::cout << "\nFound: " << full_path.file_string() << "\n";    
-  }
+  }*/
 }
 
 void CScriptManager::RunCode(const std::string &Code)

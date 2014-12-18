@@ -10,6 +10,7 @@
 #include "Utils\Defines.h"
 #include "Math\AABB.h"
 #include "Core.h"
+#include "Utils\BaseUtils.h"
 
 #include "ScriptManager\ScriptManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
@@ -25,6 +26,8 @@
 #include "Cameras\CameraFPShooter.h"
 
 #include <d3dx9.h>
+
+void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFiles);
 
 CTestProcess::CTestProcess() : CProcess(), 
     m_Speed( 0.1f ),
@@ -96,6 +99,8 @@ void CTestProcess::Update(float32 deltaTime)
 
 void CTestProcess::Init()
 {
+	std::vector<std::string> l_Files;
+	baseUtils::GetFilesFromPath("d:\\", "pdf", l_Files);
     m_pCamera = m_pFPSCamera;
 }
 
