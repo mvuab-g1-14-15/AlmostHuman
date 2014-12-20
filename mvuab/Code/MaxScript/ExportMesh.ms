@@ -179,7 +179,7 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		local id = MaterialID
 		while id > l_VtxsMap.count do
 		(
-			append l_VtxsMap dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
+			append l_VtxsMap (dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
 		)
 		
 		local Vertex1 = CreateVertex Coord1 Normal1 TUVMap1
@@ -347,3 +347,5 @@ fn ExportMesh Obj filename =
 	delete newObj
 	return 0
 )
+
+--ExportMesh $ "path"
