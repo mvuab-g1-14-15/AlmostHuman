@@ -4,7 +4,7 @@
 CCameraFPShooter::CCameraFPShooter()
 {
   m_posY            = 2.f;
-  m_pos            = D3DXVECTOR3(0.f, m_posY, 0.f);
+  m_Pos            = Math::Vect3f(0.f, m_posY, 0.f);
   m_yaw            = 0.f;
   m_pitch            = 0.f;
   m_view_d        =  2.f;
@@ -22,7 +22,7 @@ CCameraFPShooter::CCameraFPShooter()
 CCameraFPShooter::CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3DXVECTOR3 &TargetPoint )
 {
   m_posY            = InitialPosition.y;
-  m_pos             = InitialPosition;
+  m_Pos             = Math::Vect3f(InitialPosition.x, InitialPosition.y, InitialPosition.z);
 
   D3DXVECTOR3 d = TargetPoint - InitialPosition;
   // Calculate the yaw and the pitch to allow the camera be looking at the TargetPoint
@@ -49,7 +49,7 @@ CCameraFPShooter::~CCameraFPShooter()
 
 void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const float32 &dt)
 {
-    D3DXVECTOR3 addPos;
+    Math::Vect3f addPos;
     addPos.y =  0.0f;
     addPos.x =    forward * (  cos(m_yaw) )+
                 strafe  * (  cos(m_yaw+ D3DX_PI * 0.5f) );
@@ -59,12 +59,12 @@ void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const flo
                 strafe  * (  sin(m_yaw+ D3DX_PI * 0.5f) );
                 
     
-    D3DXVec3Normalize(&addPos, &addPos);
+    addPos = addPos.GetNormalized();
     float32 constant = dt * m_speed_forward;
     if( flag_speed )
         constant *= m_speed;
     addPos *= constant;
-    m_pos += addPos;
+    m_Pos += addPos;
 }
 
 void CCameraFPShooter::Update( float32 deltaTime )
@@ -77,31 +77,31 @@ void CCameraFPShooter::Update( float32 deltaTime )
     if( pActionManager->DoAction("MoveForward") )
     {
         forward += 1;
+        Move(strafe, forward ,flag_speed, deltaTime);
     }
     if( pActionManager->DoAction("MoveBackward") )
     {
         forward -= 1;
+        Move(strafe, forward ,flag_speed, deltaTime);
     }
     if( pActionManager->DoAction("MoveLeft" ) )
     {
         strafe += 1;
+        Move(strafe, forward ,flag_speed, deltaTime);
     }
     if( pActionManager->DoAction("MoveRight") )
     {
         strafe -= 1;
+        Move(strafe, forward ,flag_speed, deltaTime);
     }
 
 	if( pActionManager->DoAction("MoveUp" ) )
     {
-        D3DXVECTOR3 pos = GetPos();
-		pos.y += 1;
-		SetPos(pos);
+        m_Pos.y +=1;
     }
     if( pActionManager->DoAction("MoveDown") )
     {
-		D3DXVECTOR3 pos = GetPos();
-		pos.y -= 1;
-		SetPos(pos);
+		m_Pos.y -=1;
     }
 
     //Definimos el movimiento del Yaw y Pitch de la camara
@@ -113,8 +113,6 @@ void CCameraFPShooter::Update( float32 deltaTime )
     {
         AddPitch( amount * deltaTime );
     }
-
-    Move(strafe, forward ,flag_speed, deltaTime);
 }
 
 void CCameraFPShooter::AddYaw( const float32 &degree ) 
@@ -140,21 +138,21 @@ void CCameraFPShooter::AddPitch( const float32 &radian )
     }
 }
 
-D3DXVECTOR3 CCameraFPShooter::GetLookAt(void) const
+Math::Vect3f CCameraFPShooter::GetLookAt(void) const
 {    
     //Pasamos de coordenadas esfericas a coordenadas cartesianas
-    D3DXVECTOR3 look( cos(m_yaw) * cos(m_pitch), 
-                      sin(m_pitch),
-                      sin(m_yaw) * cos(m_pitch) );
+    Math::Vect3f look( Math::Utils::Cos(m_yaw) * Math::Utils::Cos(m_pitch), 
+                       Math::Utils::Sin(m_pitch),
+                       Math::Utils::Sin(m_yaw) * Math::Utils::Cos(m_pitch) );
 
-    return m_pos + look;
+    return m_Pos + look;
 }
 
-D3DXVECTOR3 CCameraFPShooter::GetVecUp(void) const
+Math::Vect3f CCameraFPShooter::GetVecUp(void) const
 {
-    D3DXVECTOR3 vUpVec( -cos(m_yaw) * sin(m_pitch), 
-                         cos(m_pitch), 
-                        -sin(m_yaw) * sin(m_pitch) );
+    Math::Vect3f vUpVec( -Math::Utils::Cos(m_yaw) * Math::Utils::Sin(m_pitch), 
+                         Math::Utils::Cos(m_pitch), 
+                        -Math::Utils::Sin(m_yaw) * Math::Utils::Sin(m_pitch) );
     
     return vUpVec;
 }

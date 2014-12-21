@@ -23,7 +23,7 @@ CAnimatedCoreModel::~CAnimatedCoreModel()
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 {
     assert(m_CalCoreModel);
-    std::string MeshFullPath = m_Path + Filename;
+    std::string &MeshFullPath = m_Path + Filename;
     uint16 err = m_CalCoreModel->loadCoreMesh( MeshFullPath );
     return ( err == -1 ) ? false : true;
 }
@@ -31,13 +31,13 @@ bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 bool CAnimatedCoreModel::LoadSkeleton(const std::string &Filename)
 {
     assert(m_CalCoreModel);
-    std::string SkeletonFullPath = m_Path + Filename;
+    std::string &SkeletonFullPath = m_Path + Filename;
     return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);
 }
 bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::string &Filename)
 {
     assert( m_CalCoreModel != NULL );
-    std::string AnimationFullPath = m_Path + Filename;
+    std::string &AnimationFullPath = m_Path + Filename;
     uint16 id = m_CalCoreModel->loadCoreAnimation(AnimationFullPath, Name);
     if( id == -1 )
         return false;

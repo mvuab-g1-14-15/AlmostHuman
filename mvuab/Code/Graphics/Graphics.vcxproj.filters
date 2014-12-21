@@ -78,6 +78,9 @@
     <ClCompile Include="Cameras\Frustum.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Cameras\CameraInfo.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -139,8 +142,8 @@
     <ClInclude Include="Cameras\Frustum.h">
       <Filter>Camera</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <ClInclude Include="Cameras\CameraInfo.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

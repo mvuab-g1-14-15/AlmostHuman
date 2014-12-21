@@ -16,6 +16,7 @@
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Cameras\CameraFPShooter.cpp" />
+    <ClCompile Include="Cameras\CameraInfo.cpp" />
     <ClCompile Include="Cameras\Frustum.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Cameras\CameraFPShooter.h" />
+    <ClInclude Include="Cameras\CameraInfo.h" />
     <ClInclude Include="Cameras\Frustum.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="GraphicsManager.h" />
@@ -52,9 +54,6 @@
     <ClInclude Include="Texture\GUITexture.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="Texture\TextureManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{399F3B78-06DC-41CE-A9C6-612A5AAC1C97}</ProjectGuid>

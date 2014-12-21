@@ -17,13 +17,11 @@ public:
         
     void    AddYaw( const float32 &radians );
     void    AddPitch( const float32 &radians );
-    void    AddY( const float32 &amount ) { m_pos.y = m_posY + amount; }
+    void    AddY( const float32 &amount ) { m_Pos.y = m_posY + amount; }
     
-    D3DXVECTOR3 GetPos            ( void ) const { return m_pos; }
-    D3DXVECTOR3 GetEye            ( void ) const { return m_pos; }
-    D3DXVECTOR3 GetDirection    ( void ) const { return GetLookAt() - m_pos;}
-    D3DXVECTOR3 GetLookAt        ( void ) const;
-    D3DXVECTOR3 GetVecUp        ( void ) const;
+    Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Pos;}
+    Math::Vect3f GetLookAt( void ) const;
+    Math::Vect3f GetVecUp( void ) const;
     
 private:
 

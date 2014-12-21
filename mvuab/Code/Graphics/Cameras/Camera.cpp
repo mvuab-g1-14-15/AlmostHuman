@@ -3,31 +3,35 @@
 
 D3DXMATRIX CCamera::GetMatrixView(void) 
 {
-
-  D3DXMatrixLookAtLH( &m_view, 
-                      &GetEye(),
-                      &GetLookAt(), 
-                      &GetVecUp());
+    Math::Vect3f &l_LookAt = GetLookAt();
+    Math::Vect3f &l_UpVec = GetVecUp();
+    D3DXVECTOR3 d3dxPos( m_Pos.x, m_Pos.y, m_Pos.z );
+    D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
+    D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
+    D3DXMatrixLookAtLH( &m_view,
+                        &d3dxPos,
+                        &d3dxTarget,
+                        &d3dxUp);
   return m_view;
 }
 
 D3DXMATRIX CCamera::GetMatrixProj(void)
 {
-
    D3DXMatrixPerspectiveFovLH( &m_proj, 
-                               m_fov_radians, 
-                               m_aspect_ratio, 
-                               m_zn, 
+                               m_fov_radians,
+                               m_aspect_ratio,
+                               m_zn,
                                m_zf );
   return m_proj;
 }
 
 void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device) 
 {
+#ifdef _DEBUG
     D3DXMATRIX matrix;
     D3DXMATRIX translation;
 
-    D3DXMatrixTranslation( &translation, m_pos.x ,m_pos.y ,m_pos.z );
+    D3DXMatrixTranslation( &translation, m_Pos.x ,m_Pos.y ,m_Pos.z );
     device->SetTransform( D3DTS_WORLD, &translation );
         
     CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, Math::colRED);
@@ -36,8 +40,8 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     device->SetTransform( D3DTS_WORLD, &matrix );
 
     //---------PINTAMOS EL FRUSTUM-------------//
-       D3DXMATRIX translation2;
-    D3DXVECTOR3 eye = GetEye();
+    D3DXMATRIX translation2;
+    D3DXVECTOR3 eye( m_Pos.x, m_Pos.y, m_Pos.z );
     D3DXMatrixTranslation( &translation, eye.x ,eye.y ,eye.z );
                         
     D3DXMATRIX rotation;
@@ -147,18 +151,5 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
 
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );
-}
-
-D3DXVECTOR3 CCamera::Yaw2vector( const float32 &yaw_angle ) const
-{
-    return D3DXVECTOR3( cos(yaw_angle), 0.0f, sin(yaw_angle) );
-}
-
-D3DXVECTOR3 CCamera::YawPitch2vector( const float32 &yaw_angle, const float32 &pitch_angle ) const
-{
-    return D3DXVECTOR3( sin(yaw_angle), sin(pitch_angle), cos(yaw_angle) );
-}
-
-void CCamera::Update( float32 deltaTime )
-{
+#endif
 }

@@ -245,7 +245,7 @@ int CXMLTreeNode::GetIntProperty (const char* _pszKey, int _iDefault, bool warni
 //----------------------------------------------------------------------------
 // Returns a float32 param if found. Else a default value
 //----------------------------------------------------------------------------
-float32 CXMLTreeNode::Getfloat32Property (const char* _pszKey, float32 _fDefault, bool warningDefault) const
+float32 CXMLTreeNode::GetFloatProperty (const char* _pszKey, float32 _fDefault, bool warningDefault) const
 {
   float32 fRet = _fDefault;
 
@@ -514,7 +514,7 @@ int CXMLTreeNode::GetIntKeyword (const char* _pszKey, int _iDefault/*=0*/) const
 //----------------------------------------------------------------------------
 // Returns a float32 keyword if found. Else a default value
 //----------------------------------------------------------------------------
-float32 CXMLTreeNode::Getfloat32Keyword (const char* _pszKey, float32 _fDefault/*=0.0*/) const
+float32 CXMLTreeNode::GetFloatKeyword (const char* _pszKey, float32 _fDefault/*=0.0*/) const
 {
   float32 fRet = _fDefault;
 
@@ -738,7 +738,7 @@ bool CXMLTreeNode::WriteIntKeyword(const char* _pszKey, int _iValue)
 //----------------------------------------------------------------------------
 // Writes a float32 keyword
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::Writefloat32Keyword(const char* _pszKey, float32 _fValue)
+bool CXMLTreeNode::WriteFloatKeyword(const char* _pszKey, float32 _fValue)
 {
   assert(_pszKey && m_pWriter);
 
@@ -816,7 +816,7 @@ bool CXMLTreeNode::WriteIntProperty(const char* _pszKey, int _iValue)
 //----------------------------------------------------------------------------
 // Writes a float32 property
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::Writefloat32Property(const char* _pszKey, float32 _fValue)
+bool CXMLTreeNode::WriteFloatProperty(const char* _pszKey, float32 _fValue)
 {
   assert(_pszKey && m_pWriter);
 

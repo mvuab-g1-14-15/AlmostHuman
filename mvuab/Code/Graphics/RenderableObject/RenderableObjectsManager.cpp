@@ -37,15 +37,15 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
 
     for(int i=0;i<m.GetNumChildren();++i)
     {
-        std::string l_TagName=m(i).GetName();
+        const std::string &l_TagName=m(i).GetName();
         if(l_TagName=="MeshInstance")
         {
             std::string l_Name=m(i).GetPszProperty("name","");
             std::string l_Core=m(i).GetPszProperty("core","");
             Math::Vect3f l_Pos=m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-            float32 l_Yaw=m(i).Getfloat32Property("yaw",0.0f);
-            float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
-            float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
+            float32 l_Yaw=m(i).GetFloatProperty("yaw",0.0f);
+            float32 l_Pitch=m(i).GetFloatProperty("pitch",0.0f);
+            float32 l_Roll=m(i).GetFloatProperty("roll",0.0f);
             Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
             CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
@@ -60,9 +60,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
           const std::string& l_Name=m(i).GetPszProperty("name","");
           const std::string& l_Core=m(i).GetPszProperty("core","");
           const Math::Vect3f& l_Pos=m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-          float32 l_Yaw=m(i).Getfloat32Property("yaw",0.0f);
-          float32 l_Pitch=m(i).Getfloat32Property("pitch",0.0f);
-          float32 l_Roll=m(i).Getfloat32Property("roll",0.0f);
+          float32 l_Yaw=m(i).GetFloatProperty("yaw",0.0f);
+          float32 l_Pitch=m(i).GetFloatProperty("pitch",0.0f);
+          float32 l_Roll=m(i).GetFloatProperty("roll",0.0f);
           Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
           CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(l_Name, l_Core);
           l_AnimatedInstance->SetPosition(l_Pos);

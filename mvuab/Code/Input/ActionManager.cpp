@@ -165,7 +165,7 @@ bool CActionManager::LoadXML()
                             std::string axisTypeStr(action_TreeNode(j).GetPszProperty("AxisType", "AXIS_NOTHING") );
                             std::string EventTypeStr(action_TreeNode(j).GetPszProperty("EventType", "EVENT_NOTHING") );
                             std::string CodeStr(action_TreeNode(j).GetPszProperty("Code", "MOUSE_BUTTON_NOTHING") );
-                            float Delta(action_TreeNode(j).Getfloat32Property("Delta", 1.f, false));
+                            float Delta(action_TreeNode(j).GetFloatProperty("Delta", 1.f, false));
 
                             new_action.m_Code = strKeyToCode(CodeStr);
                             new_action.m_DeviceType = strDeviceToCode(deviceTypeStr);
@@ -227,7 +227,7 @@ bool CActionManager::SaveXML(const std::string &xmlFile)
                                 if (aux_it->m_sAxisType != "AXIS_NOTHING")
                                 {
                                         NewXML.WritePszProperty("AxisType", aux_it->m_sAxisType.c_str());
-                                        NewXML.Writefloat32Property("Delta", aux_it->m_fDelta);
+                                        NewXML.WriteFloatProperty("Delta", aux_it->m_fDelta);
                                 }
 
                                 if (aux_it->m_sCode != "MOUSE_BUTTON_NOTHING")

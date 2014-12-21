@@ -39,7 +39,7 @@ public:
 
   // To get properties from xml file
   int                                 GetIntProperty         (const char* _pszKey, int _iDefault=0, bool warningDefault = true) const;
-  float32                             Getfloat32Property     (const char* _pszKey, float32 _fDefault=0.0, bool warningDefault = true) const;
+  float32                             GetFloatProperty     (const char* _pszKey, float32 _fDefault=0.0, bool warningDefault = true) const;
   bool                                GetBoolProperty        (const char* _pszKey, bool _bDefault=false, bool warningDefault = true) const;
   const char*                         GetPszProperty         (const char* _pszKey, const char* _pszDefault=NULL, bool warningDefault = true) const;
     std::string                       GetPszISOProperty      (const char* _pszKey, const char* _pszDefault=NULL,    bool warningDefault = true) const;
@@ -52,7 +52,7 @@ public:
 
   // To get keywords from xml file
   int                                 GetIntKeyword          (const char* _pszKey, int _iDefault=0) const;
-  float32                             Getfloat32Keyword      (const char* _pszKey, float32 _fDefault=0.0) const;
+  float32                             GetFloatKeyword      (const char* _pszKey, float32 _fDefault=0.0) const;
   bool                                GetBoolKeyword         (const char* _pszKey, bool _bDefault=false) const;
   const char*                         GetPszKeyword          (const char* _pszKey, const char* _pszDefault=NULL) const;
 
@@ -75,13 +75,13 @@ public:
   // To write keywords to xml file
   bool                                WritePszKeyword        (const char* _pszKey, const char* _pszValue);
   bool                                WriteIntKeyword        (const char* _pszKey, int _iValue);
-  bool                                Writefloat32Keyword      (const char* _pszKey, float32 _fValue);
+  bool                                WriteFloatKeyword      (const char* _pszKey, float32 _fValue);
   bool                                WriteBoolKeyword       (const char* _pszKey, bool _bValue);
 
   // To write properties to xml file
   bool                        WritePszProperty       (const char* _pszKey, const char* _pszValue);
   bool                        WriteIntProperty       (const char* _pszKey, int _iValue);
-  bool                        Writefloat32Property     (const char* _pszKey, float32 _fValue);
+  bool                        WriteFloatProperty     (const char* _pszKey, float32 _fValue);
   bool                        WriteBoolProperty      (const char* _pszKey, bool _bValue);
     bool                                WriteVect2fProperty    (const char* _pszKey, const Math::Vect2f& _value);
     bool                                WriteVect3fProperty    (const char* _pszKey, const Math::Vect3f& _value);
