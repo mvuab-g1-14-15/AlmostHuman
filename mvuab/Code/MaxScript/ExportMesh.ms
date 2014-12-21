@@ -8,33 +8,19 @@ global VERTEX_TYPE_DIFFUSE 		= 0x0040
 
 fileIn "GetAABB.ms"
 
-struct Vertex
+function CreateVertex Coord Normal TUVMap =
 (
-	Coord,
-	Normal,
-	TUVMap1
-)
-
-function CreateVertex Coord Normal TUVMap1 =
-(
-	local NewVertex = Vertex()
-	
-	local newCoord = point3 Coord.x Coord.z Coord.y
-	NewVertex.Coord = newCoord
-	
-	NewVertex.Normal = (Normal as point3)
-	NewVertex.TUVMap1 = (TUVMap1 as point3)
-	NewVertex.TUVMap1.y=1.0-NewVertex.TUVMap1.y
+	local NewVertex = #(Coord.x, Coord.y, Coord.z, Normal.x, Normal.y, Normal.z, TUVMap.x, 1.0-TUVMap.y)
 	return NewVertex
 )
 
 fn AreVertexsEqual vtx1 vtx2 =
 (
 	--format "Comparing % with % \n" vtx1 vtx2
-	local coords = vtx1.Coord.x == vtx2.Coord.x and vtx1.Coord.y == vtx2.Coord.y and vtx1.Coord.z == vtx2.Coord.z
-	local normals = vtx1.Normal.x == vtx2.Normal.x and vtx1.Normal.y == vtx2.Normal.y and vtx1.Normal.z == vtx2.Normal.z
-	local UVs = vtx1.TUVMap1.x == vtx2.TUVMap1.x and vtx1.TUVMap1.y == vtx2.TUVMap1.y /*and vtx1.TUVMap1.z == vtx2.TUVMap1.z*/
-	return coords and normals and UVs
+	result = true
+	for i = 1 to vtx1.count do
+		result = result and vtx1[i] == vtx2[i]
+	return result
 )
 
 fn FindVertex vtx vtxs =
@@ -54,8 +40,41 @@ fn FindVertex vtx vtxs =
 	return -1
 )
 
-fn AddVertex vertex_to_add vertex_buffers material_id =
+function ConvertVtx Vtx = 
 (
+	local l_Text = stringstream ""
+	local l_Value=""
+	for i=1 to Vtx.count do
+	(   
+		format "%," Vtx[i] to:l_Text
+	)
+	return (l_Text as string)
+)
+
+function DotNetAddVertex FullVtx VtxBuffers VtxMaps material_id =
+(
+	while material_id > VtxBuffers.count do
+	(
+		append VtxBuffers #()
+	)
+	VtxMap = VtxMaps[material_id]
+	Vtxs = VtxBuffers[material_id]
+	
+	local l_VtxString=ConvertVtx FullVtx
+	local l_Idx=1
+	if (VtxMap.ContainsKey (l_VtxString))==false then
+	(
+		append vtxs FullVtx
+		l_Idx=vtxs.count-1
+		VtxMap.Add l_VtxString l_Idx
+	)
+	else
+		l_Idx=VtxMap.Item[l_VtxString]
+	return  l_Idx
+)
+
+fn AddVertex vertex_to_add vertex_buffers material_id =
+(	
 	--format "Material ID: %\n" material_id
 	while material_id > vertex_buffers.count do
 	(
@@ -118,6 +137,8 @@ fn ExportMaterial objMaterial material_out=
 
 fn GetBuffers Obj VertexBuffer IndexBuffer =
 (	
+	l_VtxsMap=#(dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
+	
 	--format "Getting buffers...\n"
 	local l_nVertexs = getNumVerts Obj
 	local l_nFaces = getNumFaces Obj
@@ -154,14 +175,21 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		(
 			MaterialID = 1
 		)
+		
+		local id = MaterialID
+		while id > l_VtxsMap.count do
+		(
+			append l_VtxsMap (dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
+		)
+		
 		local Vertex1 = CreateVertex Coord1 Normal1 TUVMap1
 		local Vertex2 = CreateVertex Coord2 Normal2 TUVMap2
 		local Vertex3 = CreateVertex Coord3 Normal3 TUVMap3
 		--format "%\n%\n%\n - Material ID: %\n" Vertex1 Vertex2 Vertex3 MaterialID
 		
-		local id1 = AddVertex Vertex1 VertexBuffer MaterialID
-		local id2 = AddVertex Vertex2 VertexBuffer MaterialID
-		local id3 = AddVertex Vertex3 VertexBuffer MaterialID
+		local id1 = DotNetAddVertex Vertex1 VertexBuffer l_VtxsMap MaterialID
+		local id2 = DotNetAddVertex Vertex2 VertexBuffer l_VtxsMap MaterialID
+		local id3 = DotNetAddVertex Vertex3 VertexBuffer l_VtxsMap MaterialID
 		--format "ID1 % ID2 % ID3 %\n" id1 id2 id3
 		
 		--format "Material ID: %\n" MaterialID
@@ -189,23 +217,20 @@ fn WriteBuffers file VertexBuffer IndexBuffer =
 		(
 			current_vertex = VertexBuffer[iMaterial][iVertex]
 			format "Vertex %:\n" iVertex
-			pos = current_vertex.Coord
-			normal = current_vertex.Normal
-			uv = current_vertex.TUVMap1
 			
-			format "\tPos: (%, %, %)\n" pos.x pos.y pos.z
-			WriteFloat file pos.x
-			WriteFloat file pos.y
-			WriteFloat file pos.z
+			format "\tPos: (%, %, %)\n" current_vertex[1] current_vertex[2] current_vertex[3]
+			WriteFloat file current_vertex[1]
+			WriteFloat file current_vertex[3]
+			WriteFloat file current_vertex[2]
 			
-			format "\tNormal: (%, %, %)\n" normal.x normal.y normal.z
-			WriteFloat file normal.x
-			WriteFloat file normal.y
-			WriteFloat file normal.z
+			format "\tNormal: (%, %, %)\n" current_vertex[4] current_vertex[5] current_vertex[6]
+			WriteFloat file current_vertex[4]
+			WriteFloat file current_vertex[6]
+			WriteFloat file current_vertex[5]
 			
-			format "\tUV: (%, %)\n" uv.x uv.y
-			WriteFloat file uv.x
-			WriteFloat file uv.y
+			format "\tUV: (%, %)\n" current_vertex[7] current_vertex[8]
+			WriteFloat file current_vertex[7]
+			WriteFloat file current_vertex[8]
 		)
 		
 		num_face = IndexBuffer[iMaterial].count
@@ -322,3 +347,5 @@ fn ExportMesh Obj filename =
 	delete newObj
 	return 0
 )
+
+--ExportMesh $ "path"
