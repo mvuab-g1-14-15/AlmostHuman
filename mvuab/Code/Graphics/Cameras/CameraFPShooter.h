@@ -2,6 +2,7 @@
 #define INC_CAMERAFPSHOOTER_H_
 
 #include "Camera.h"
+#include <d3dx9math.h>
 
 class CCameraFPShooter : public CCamera 
 {

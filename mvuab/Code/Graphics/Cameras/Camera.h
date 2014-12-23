@@ -5,6 +5,8 @@
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
 
+#include <d3dx9.h>
+
 class CCamera
 {
 
