@@ -81,6 +81,12 @@
     <ClCompile Include="Cameras\CameraInfo.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Cameras\CameraKey.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraKeyController.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -143,6 +149,12 @@
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraInfo.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraKey.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraKeyController.h">
       <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
