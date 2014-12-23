@@ -29,6 +29,9 @@
     <Filter Include="Cinematics">
       <UniqueIdentifier>{cfdcb786-391c-4e3d-9f96-f99ea5d243c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{e07e974a-64fc-4da1-b816-555d4cd53cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
@@ -101,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="Cinematics\CinematicObjectKeyFrame.cpp">
       <Filter>Cinematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\LightManager.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\Light.cpp">
+      <Filter>Lights</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +192,12 @@
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h">
       <Filter>Cinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\LightManager.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\Light.h">
+      <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

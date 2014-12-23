@@ -26,6 +26,8 @@
     <ClCompile Include="Cinematics\CinematicPlayer.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="Lights\Light.cpp" />
+    <ClCompile Include="Lights\LightManager.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderableObject\RenderableObject.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
@@ -53,6 +55,8 @@
     <ClInclude Include="Cinematics\CinematicPlayer.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="Lights\Light.h" />
+    <ClInclude Include="Lights\LightManager.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
