@@ -24,6 +24,7 @@
 
 #include "StaticMeshes\StaticMesh.h"
 #include "Cameras\CameraFPShooter.h"
+#include "Cameras\CameraManager.h"
 
 #include <d3dx9.h>
 
@@ -31,26 +32,24 @@ void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFil
 
 CTestProcess::CTestProcess() : CProcess(), 
     m_Speed( 0.1f ),
-    m_pFPSCamera( new CCameraFPShooter(D3DXVECTOR3(15.0f,2.0f,0.0f), D3DXVECTOR3(0.0f,2.0f,0.0f))),
     m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
+    CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FPS, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
+                                                 Math::Vect3f(0.0f,2.0f,0.0f) );
+    CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 }
 
 CTestProcess::~CTestProcess()
 {
     CLogger::GetSingletonPtr()->SaveLogsInFile();
-    CHECKED_DELETE(m_pFPSCamera);
 }
 
 void CTestProcess::Update(float32 deltaTime)
 {
-    m_pCamera->Update(deltaTime);
-
     m_Amount +=  0.01f;
     m_Angle  += deltaTime * 0.05f;
     m_AngleMoon += deltaTime * 0.05f;
     
- 
     CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
     if( pActionManager->DoAction("ReloadStaticMesh") )
@@ -99,9 +98,8 @@ void CTestProcess::Update(float32 deltaTime)
 
 void CTestProcess::Init()
 {
-	std::vector<std::string> l_Files;
-	baseUtils::GetFilesFromPath("d:\\", "pdf", l_Files);
-    m_pCamera = m_pFPSCamera;
+    std::vector<std::string> l_Files;
+    baseUtils::GetFilesFromPath("d:\\", "pdf", l_Files);
 }
 
 void CTestProcess::Render()

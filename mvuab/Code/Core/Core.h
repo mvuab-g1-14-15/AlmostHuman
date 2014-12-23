@@ -22,13 +22,14 @@ class CStaticMeshManager;
 class CRenderableObjectsManager;
 class CAnimatedModelsManager;
 class CScriptManager;
+class CCameraManager;
 
 class CCore : public CSingleton<CCore>
 {
 private:
 
     // Configuration
-    HWND                        m_WindowId;                        // 3D render window handle
+    HWND                        m_WindowId;
     bool                        m_FullScreenMode;
     bool                        m_ExclusiveModeInMouse;
     bool                        m_DrawPointerMouse;
@@ -45,7 +46,7 @@ private:
     std::string                    m_StaticMeshesPath;
     std::string                    m_RenderableObjectsPath;
     std::string                    m_AnimatedModelsPath;
-	std::string                    m_LuaRunPath;
+    std::string                    m_LuaRunPath;
     std::vector<std::string>	   m_v_languages;
 
     // Managers
@@ -59,7 +60,8 @@ private:
     CRenderableObjectsManager*      m_pRenderableObjectsManager;
     CAnimatedModelsManager*         m_pAnimatedModelsManager;
     CTextureManager*                m_pTextureManager;
-	CScriptManager*					m_pScriptManager;
+    CScriptManager*                 m_pScriptManager;
+    CCameraManager*                 m_pCameraManager;
 
     void LoadXml();
     void InitManagers();
@@ -94,7 +96,8 @@ public:
     GET_SET_PTR(CRenderableObjectsManager, RenderableObjectsManager);
     GET_SET_PTR(CAnimatedModelsManager, AnimatedModelsManager);
     GET_SET_PTR(CTextureManager, TextureManager);
-	GET_SET_PTR(CScriptManager, ScriptManager);
+    GET_SET_PTR(CScriptManager, ScriptManager);
+    GET_SET_PTR(CCameraManager, CameraManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

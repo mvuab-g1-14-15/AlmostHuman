@@ -3,6 +3,7 @@
 #include "Process.h"
 #include "Core.h"
 #include "GraphicsManager.h"
+#include "Cameras\CameraManager.h"
 #include "Utils\LogRender.h"
 
 CEngine::CEngine() :
@@ -35,7 +36,7 @@ void CEngine::Render()
     //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
     pGraphicsManager->BeginRender();
-    pGraphicsManager->SetupMatrices( m_pProcess->GetCamera());
+    pGraphicsManager->SetupMatrices( CCameraManager::GetSingletonPtr()->GetCurrentCamera() );
 
     m_pCore->Render();
     m_pProcess->Render();
