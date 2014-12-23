@@ -93,22 +93,20 @@
     <ClCompile Include="Cameras\CameraKeyController.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Cinematics\CinematicPlayer.cpp">
-      <Filter>Cinematics</Filter>
-    </ClCompile>
-    <ClCompile Include="Cinematics\Cinematic.cpp">
-      <Filter>Cinematics</Filter>
-    </ClCompile>
-    <ClCompile Include="Cinematics\CinematicObject.cpp">
-      <Filter>Cinematics</Filter>
-    </ClCompile>
-    <ClCompile Include="Cinematics\CinematicObjectKeyFrame.cpp">
-      <Filter>Cinematics</Filter>
-    </ClCompile>
     <ClCompile Include="Lights\LightManager.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
     <ClCompile Include="Lights\Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraManager.cpp" />
+    <ClCompile Include="Lights\OmniLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\DirectionalLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\SpotLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
   </ItemGroup>
@@ -181,22 +179,20 @@
     <ClInclude Include="Cameras\CameraKeyController.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Cinematics\CinematicPlayer.h">
-      <Filter>Cinematics</Filter>
-    </ClInclude>
-    <ClInclude Include="Cinematics\Cinematic.h">
-      <Filter>Cinematics</Filter>
-    </ClInclude>
-    <ClInclude Include="Cinematics\CinematicObject.h">
-      <Filter>Cinematics</Filter>
-    </ClInclude>
-    <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h">
-      <Filter>Cinematics</Filter>
-    </ClInclude>
     <ClInclude Include="Lights\LightManager.h">
       <Filter>Lights</Filter>
     </ClInclude>
     <ClInclude Include="Lights\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraManager.h" />
+    <ClInclude Include="Lights\OmniLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\DirectionalLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\SpotLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
