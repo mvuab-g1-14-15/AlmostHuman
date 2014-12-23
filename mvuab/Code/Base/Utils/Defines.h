@@ -15,7 +15,6 @@
         return m_##PARAMETER_NAME; \
     }
 
-// MACROS
 #define GET_SET_PTR(TYPE, PARAMETER_NAME) \
     void Set##PARAMETER_NAME(TYPE##* PARAMETER_NAME) \
     { \
@@ -35,6 +34,7 @@
     { \
         return m_##PARAMETER_NAME; \
     }
+
 
 #define CHECKED_DELETE(x)                if(x!=NULL) delete x; x=NULL;
 #define DIRECTINPUT_VERSION                0x0800

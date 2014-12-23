@@ -17,6 +17,8 @@
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Cameras\CameraFPShooter.cpp" />
     <ClCompile Include="Cameras\CameraInfo.cpp" />
+    <ClCompile Include="Cameras\CameraKey.cpp" />
+    <ClCompile Include="Cameras\CameraKeyController.cpp" />
     <ClCompile Include="Cameras\Frustum.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
@@ -38,6 +40,8 @@
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Cameras\CameraFPShooter.h" />
     <ClInclude Include="Cameras\CameraInfo.h" />
+    <ClInclude Include="Cameras\CameraKey.h" />
+    <ClInclude Include="Cameras\CameraKeyController.h" />
     <ClInclude Include="Cameras\Frustum.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="GraphicsManager.h" />
