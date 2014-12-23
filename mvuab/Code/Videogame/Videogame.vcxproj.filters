@@ -8,6 +8,9 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{43b5a5ab-8eb2-4adf-b834-622fadd1ef11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ScriptedController">
+      <UniqueIdentifier>{f6546d18-bd8b-4938-9f8b-d0c09c24532d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="videogame.cpp" />
@@ -27,6 +30,9 @@
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="TestProcess.cpp" />
+    <ClCompile Include="ScriptedController\ScriptedController.cpp">
+      <Filter>ScriptedController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemies\EasyEnemy.h">
@@ -45,5 +51,8 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="TestProcess.h" />
+    <ClInclude Include="ScriptedController\ScriptedController.h">
+      <Filter>ScriptedController</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
