@@ -1,6 +1,23 @@
 #include "Camera.h"
 #include "GraphicsManager.h"
 
+CCamera::CCamera()
+    : m_Pos(),
+    m_Yaw(0.0f),
+    m_Pitch(0.0f),
+    m_view_d(2.0f),
+    m_fov_radians(Math::Utils::Deg2Rad(50.0f)),
+    m_aspect_ratio(640.f / 480.f),
+    m_ZNear(0.1f),
+    m_ZFar(1000.0f)
+{
+}
+
+CCamera::~CCamera()
+{
+}
+
+
 D3DXMATRIX CCamera::GetMatrixView(void) 
 {
     Math::Vect3f &l_LookAt = GetLookAt();
@@ -20,8 +37,8 @@ D3DXMATRIX CCamera::GetMatrixProj(void)
    D3DXMatrixPerspectiveFovLH( &m_proj, 
                                m_fov_radians,
                                m_aspect_ratio,
-                               m_zn,
-                               m_zf );
+                               m_ZNear,
+                               m_ZFar );
   return m_proj;
 }
 
@@ -48,8 +65,8 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     D3DXMATRIX rotation2;
     
     
-    D3DXMatrixRotationY ( &rotation,  -m_yaw);
-    D3DXMatrixRotationZ ( &rotation2, +m_pitch);
+    D3DXMatrixRotationY ( &rotation,  -m_Yaw);
+    D3DXMatrixRotationZ ( &rotation2, +m_Pitch);
 
     matrix = rotation2 * rotation * translation;
 
@@ -70,7 +87,7 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     
     float32 d = m_view_d;
 
-    float32 h_near = m_zn * tan ( m_fov_radians * 0.5f );
+    float32 h_near = m_ZNear * tan ( m_fov_radians * 0.5f );
     float32 k_near = h_near * m_aspect_ratio;
 
     float32 h_far = d * tan ( m_fov_radians * 0.5f );
@@ -88,13 +105,13 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     pts[ 4 ].loc = D3DXVECTOR3( d, -h_far, k_far );
     pts[ 4 ].color = 0xffffffff;
 
-    pts[ 5 ].loc = D3DXVECTOR3( m_zn, h_near, k_near );
+    pts[ 5 ].loc = D3DXVECTOR3( m_ZNear, h_near, k_near );
     pts[ 5 ].color = 0xffffffff;
-    pts[ 6 ].loc = D3DXVECTOR3( m_zn, h_near, -k_near );
+    pts[ 6 ].loc = D3DXVECTOR3( m_ZNear, h_near, -k_near );
     pts[ 6 ].color = 0xffffffff;
-    pts[ 7 ].loc = D3DXVECTOR3( m_zn,-h_near, -k_near );
+    pts[ 7 ].loc = D3DXVECTOR3( m_ZNear,-h_near, -k_near );
     pts[ 7 ].color = 0xffffffff;
-    pts[ 8 ].loc = D3DXVECTOR3( m_zn, -h_near, k_near );
+    pts[ 8 ].loc = D3DXVECTOR3( m_ZNear, -h_near, k_near );
     pts[ 8 ].color = 0xffffffff;
 
     // Decimos el tipo de vertice que vamos a proporcionar...

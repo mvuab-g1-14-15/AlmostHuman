@@ -2,67 +2,31 @@
 #include "ActionManager.h"
 
 CCameraFPShooter::CCameraFPShooter()
+    : m_Height( 2.0f ),
+    m_YawSpeed(100.f),
+    m_PitchSpeed( 60.0f),
+    m_ForwardSpeed(10.f),
+    m_StrafeSpeed(5.0f),
+    m_Speed(2.f)
 {
-  m_posY            = 2.f;
-  m_Pos            = Math::Vect3f(0.f, m_posY, 0.f);
-  m_yaw            = 0.f;
-  m_pitch            = 0.f;
-  m_view_d        =  2.f;
-  m_fov_radians    = D3DXToRadian( 50.f );
-  m_aspect_ratio    = 640.f / 480.f;
-  m_zn            = 0.1f;
-  m_zf            = 1000.f;
-  m_speed_yaw        =  100.f;
-  m_speed_pitch    = 60.f;
-  m_speed_forward = 10.f;
-  m_speed_strafe    = 5.f;
-  m_speed            = 2.f;
 }
-
-CCameraFPShooter::CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3DXVECTOR3 &TargetPoint )
-{
-  m_posY            = InitialPosition.y;
-  m_Pos             = Math::Vect3f(InitialPosition.x, InitialPosition.y, InitialPosition.z);
-
-  D3DXVECTOR3 d = TargetPoint - InitialPosition;
-  // Calculate the yaw and the pitch to allow the camera be looking at the TargetPoint
-
-  m_yaw               = Math::Utils::ATan2(d.z, d.x);
-  m_pitch             = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
-  m_view_d        =  2.f;
-  m_fov_radians    = D3DXToRadian( 50.f );
-  m_aspect_ratio    = 640.f / 480.f;
-  m_zn            = 0.1f;
-  m_zf            = 1000.f;
-  m_speed_yaw        =  100.f;
-  m_speed_pitch    = 60.f;
-  m_speed_forward = 10.f;
-  m_speed_strafe    = 5.f;
-  m_speed            = 2.f;
-}
-
 
 CCameraFPShooter::~CCameraFPShooter()
 {
-    
 }
 
 void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const float32 &dt)
 {
     Math::Vect3f addPos;
+    addPos.x =    forward * ( Math::Utils::Cos(m_Yaw) )+ strafe * (  Math::Utils::Cos(m_Yaw + Math::pi32 * 0.5f) );
     addPos.y =  0.0f;
-    addPos.x =    forward * (  cos(m_yaw) )+
-                strafe  * (  cos(m_yaw+ D3DX_PI * 0.5f) );
-                
+    addPos.z =    forward * ( Math::Utils::Sin(m_Yaw) )+
+                  strafe  * ( Math::Utils::Sin(m_Yaw+ Math::pi32 * 0.5f) );
 
-    addPos.z =    forward * (  sin(m_yaw) )+
-                strafe  * (  sin(m_yaw+ D3DX_PI * 0.5f) );
-                
-    
     addPos = addPos.GetNormalized();
-    float32 constant = dt * m_speed_forward;
+    float32 constant = dt * m_ForwardSpeed;
     if( flag_speed )
-        constant *= m_speed;
+        constant *= m_Speed;
     addPos *= constant;
     m_Pos += addPos;
 }
@@ -115,44 +79,49 @@ void CCameraFPShooter::Update( float32 deltaTime )
     }
 }
 
-void CCameraFPShooter::AddYaw( const float32 &degree ) 
+void CCameraFPShooter::AddYaw( float32 degree )
 {
-    m_yaw -= D3DXToRadian(degree * m_speed_yaw);
+    m_Yaw -= Math::Utils::Deg2Rad(degree * m_YawSpeed);
     
     //Para controlar que el valor de m_yaw siempre este acotado
-    if( m_yaw > 2*D3DX_PI)
-        m_yaw -= 2*D3DX_PI;    
-    else if( m_yaw < -2*D3DX_PI ) 
-        m_yaw += 2*D3DX_PI;
-
+    if( m_Yaw > Math::two_pi32)
+        m_Yaw -= Math::two_pi32;
+    else if( m_Yaw < -Math::two_pi32 )
+        m_Yaw += Math::two_pi32;
 }
 
-void CCameraFPShooter::AddPitch( const float32 &radian ) 
+void CCameraFPShooter::AddPitch( float32 radian )
 {
-    float32 degrees = D3DXToRadian(radian * m_speed_pitch);
+    float32 degrees = Math::Utils::Deg2Rad(radian * m_PitchSpeed);
     //Hemos de limitar el ángulo yaw entre 90º  y -90º
-    if( (m_pitch - degrees <  (D3DX_PI*0.5)) &&  
-        (m_pitch - degrees > -(D3DX_PI*0.5)) )
+    if( (m_Pitch - degrees <  (Math::pi32*0.5)) &&  
+        (m_Pitch - degrees > -(Math::pi32*0.5)) )
     {    
-        m_pitch -= degrees;
+        m_Pitch -= degrees;
     }
+}
+
+void CCameraFPShooter::AddHeight( float32 amount )
+{
+    m_Height += amount;
+    m_Pos.y = m_Height;
 }
 
 Math::Vect3f CCameraFPShooter::GetLookAt(void) const
 {    
     //Pasamos de coordenadas esfericas a coordenadas cartesianas
-    Math::Vect3f look( Math::Utils::Cos(m_yaw) * Math::Utils::Cos(m_pitch), 
-                       Math::Utils::Sin(m_pitch),
-                       Math::Utils::Sin(m_yaw) * Math::Utils::Cos(m_pitch) );
+    Math::Vect3f look( Math::Utils::Cos(m_Yaw) * Math::Utils::Cos(m_Pitch), 
+                       Math::Utils::Sin(m_Pitch),
+                       Math::Utils::Sin(m_Yaw) * Math::Utils::Cos(m_Pitch) );
 
     return m_Pos + look;
 }
 
 Math::Vect3f CCameraFPShooter::GetVecUp(void) const
 {
-    Math::Vect3f vUpVec( -Math::Utils::Cos(m_yaw) * Math::Utils::Sin(m_pitch), 
-                         Math::Utils::Cos(m_pitch), 
-                        -Math::Utils::Sin(m_yaw) * Math::Utils::Sin(m_pitch) );
+    Math::Vect3f vUpVec( -Math::Utils::Cos(m_Yaw) * Math::Utils::Sin(m_Pitch), 
+                         Math::Utils::Cos(m_Pitch), 
+                        -Math::Utils::Sin(m_Yaw) * Math::Utils::Sin(m_Pitch) );
     
     return vUpVec;
 }

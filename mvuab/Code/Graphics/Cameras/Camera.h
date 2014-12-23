@@ -4,16 +4,19 @@
 #include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
+#include "Utils\Name.h"
 
 #include <d3dx9.h>
 
-class CCamera
+class CCamera : public CName
 {
 
 public:
 
-    CCamera(){};
-    virtual ~CCamera(){};
+    enum Type{ FREE = 0, TPS, FPS, SPHERICAL, CINEMATICAL };
+
+    CCamera();
+    virtual ~CCamera();
 
     void            RenderCamera( LPDIRECT3DDEVICE9 device);
     virtual void    Update( float32 deltaTime ) = 0;
@@ -25,30 +28,30 @@ public:
     D3DXMATRIX GetMatrixView( void );
     D3DXMATRIX  GetMatrixProj( void );
 
-    GET_SET( float32, yaw )
-    GET_SET( float32, pitch )
-    GET_SET( float32, zn )
-    GET_SET( float32, zf )
+    GET_SET( float32, Yaw )
+    GET_SET( float32, Pitch )
+    GET_SET( float32, ZNear )
+    GET_SET( float32, ZFar )
     GET_SET_REF( Math::Vect3f, Pos )
     
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
-    void    AddYaw( const float32 &radian ){ m_yaw += D3DXToRadian(radian); }
-    void    AddPitch( const float32 &radian ){ m_pitch += D3DXToRadian(radian); }
-    void    AddZf( const float32 &amount ){ m_zf += amount; }
-    void    AddFov( const float32 &delta_fov ){ m_fov_radians += delta_fov; }
-    void    AddViewD( const float32 &amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
+    void    AddYaw( float32 radian ){ m_Yaw += D3DXToRadian(radian); }
+    void    AddPitch( float32 radian ){ m_Pitch += D3DXToRadian(radian); }
+    void    AddZf( float32 amount ){ m_ZNear += amount; }
+    void    AddFov( float32 delta_fov ){ m_fov_radians += delta_fov; }
+    void    AddViewD( float32 amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
 
 protected:
     
     Math::Vect3f       m_Pos;
-    float32            m_yaw;
-    float32            m_pitch;
+    float32            m_Yaw;
+    float32            m_Pitch;
 
     float32            m_view_d;
     float32            m_fov_radians;
     float32            m_aspect_ratio;
-    float32            m_zn;
-    float32            m_zf;
+    float32            m_ZNear;
+    float32            m_ZFar;
 
     D3DXMATRIXA16      m_view;
     D3DXMATRIXA16      m_proj;

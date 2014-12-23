@@ -6,32 +6,35 @@
 
 class CCameraFPShooter : public CCamera 
 {
-
 public:
-
     CCameraFPShooter();
-    CCameraFPShooter( const D3DXVECTOR3 &InitialPosition, const D3DXVECTOR3 &TargetPoint );
     ~CCameraFPShooter();
     void    Update( float32 deltaTime );
     
     void    Move (    int strafe, int forward, bool flag_speed, const float32 &dt);
         
-    void    AddYaw( const float32 &radians );
-    void    AddPitch( const float32 &radians );
-    void    AddY( const float32 &amount ) { m_Pos.y = m_posY + amount; }
+    void    AddYaw( float32 radians );
+    void    AddPitch( float32 radians );
+    void    AddHeight( float32 amount );
     
     Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Pos;}
     Math::Vect3f GetLookAt( void ) const;
     Math::Vect3f GetVecUp( void ) const;
-    
-private:
 
-    float32 m_posY;            //Altura de la camara
-    float32 m_speed_yaw;        //Velocidad a la que gira la camara respecto el angulo Yaw
-    float32 m_speed_pitch;    //Velocidad a la que gita la camara respecto el angulo Pitch
-    float32 m_speed;            //Velocidad a la que se desplaza lateralmente y adelante/atras la camara
-    float32 m_speed_forward;    //Velocidad a la que se despleza hacia adelante/atras la camara
-    float32 m_speed_strafe;    //Velocidad a la que se desplaza lateralmente la camara
+    GET_SET( float32, Height )
+    GET_SET( float32, YawSpeed )
+    GET_SET( float32, PitchSpeed )
+    GET_SET( float32, Speed )
+    GET_SET( float32, ForwardSpeed )
+    GET_SET( float32, StrafeSpeed )
+    
+private: // Members
+    float32 m_Height;
+    float32 m_YawSpeed;
+    float32 m_PitchSpeed;
+    float32 m_Speed;
+    float32 m_ForwardSpeed;
+    float32 m_StrafeSpeed;
 };
 
 #endif //INC_CAMERAFPSHOOTER_H_
