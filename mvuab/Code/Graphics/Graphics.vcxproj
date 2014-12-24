@@ -21,6 +21,10 @@
     <ClCompile Include="Cameras\CameraKeyController.cpp" />
     <ClCompile Include="Cameras\CameraManager.cpp" />
     <ClCompile Include="Cameras\Frustum.cpp" />
+    <ClCompile Include="Cinematics\Cinematic.cpp" />
+    <ClCompile Include="Cinematics\CinematicObject.cpp" />
+    <ClCompile Include="Cinematics\CinematicObjectKeyFrame.cpp" />
+    <ClCompile Include="Cinematics\CinematicPlayer.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Lights\DirectionalLight.cpp" />
@@ -50,6 +54,10 @@
     <ClInclude Include="Cameras\CameraKeyController.h" />
     <ClInclude Include="Cameras\CameraManager.h" />
     <ClInclude Include="Cameras\Frustum.h" />
+    <ClInclude Include="Cinematics\Cinematic.h" />
+    <ClInclude Include="Cinematics\CinematicObject.h" />
+    <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h" />
+    <ClInclude Include="Cinematics\CinematicPlayer.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Lights\DirectionalLight.h" />
