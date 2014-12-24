@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "CameraInfo.h"
 #include "GraphicsManager.h"
 
 CCamera::CCamera()
@@ -169,4 +170,15 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );
 #endif
+}
+
+void CCamera::SetInfo(CCameraInfo* CameraInfo)
+{
+    m_Pos = CameraInfo->GetEye();
+    Math::Vect3f l_LookAt = CameraInfo->GetLookAt();
+    Math::Vect3f d = l_LookAt-m_Pos;
+    SetYaw(Math::Utils::ATan2(d.z, d.x));
+    SetPitch(Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x)));
+    m_ZFar = CameraInfo->GetFarPlane();
+    m_ZNear = CameraInfo->GetNearPlane();
 }

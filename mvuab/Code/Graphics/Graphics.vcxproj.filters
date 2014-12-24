@@ -99,7 +99,6 @@
     <ClCompile Include="Lights\Light.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
-    <ClCompile Include="Cameras\CameraManager.cpp" />
     <ClCompile Include="Lights\OmniLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -108,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Lights\SpotLight.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraManager.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +187,6 @@
     <ClInclude Include="Lights\Light.h">
       <Filter>Lights</Filter>
     </ClInclude>
-    <ClInclude Include="Cameras\CameraManager.h" />
     <ClInclude Include="Lights\OmniLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
@@ -194,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="Lights\SpotLight.h">
       <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraManager.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
