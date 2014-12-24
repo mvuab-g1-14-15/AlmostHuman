@@ -6,7 +6,7 @@
 #include <vector>
 
 
-class CRenderableObjectsManager : CTemplatedVectorMapManager<CRenderableObject>
+class CRenderableObjectsManager : public CTemplatedVectorMapManager<CRenderableObject>
 {
     private:
         unsigned int m_NumVertexs;

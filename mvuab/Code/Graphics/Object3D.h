@@ -25,6 +25,7 @@ public:
     float32              GetRoll        () const {return m_fRoll;}
     float32              GetPitch       () const {return m_fPitch;}
     const Math::Vect3f&        GetPosition    () const {return m_Position;}
+	const Math::Vect3f&        GetScale    () const {return m_Scale;}
     Math::Mat44f GetTransform();
 
     //---Set Functions
