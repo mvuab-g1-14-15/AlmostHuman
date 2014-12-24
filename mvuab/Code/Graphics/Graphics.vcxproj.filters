@@ -109,6 +109,18 @@
     <ClCompile Include="Lights\SpotLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
+    <ClCompile Include="Cinematics\Cinematic.cpp">
+      <Filter>Cinematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicObject.cpp">
+      <Filter>Cinematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicObjectKeyFrame.cpp">
+      <Filter>Cinematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicPlayer.cpp">
+      <Filter>Cinematics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -194,6 +206,18 @@
     </ClInclude>
     <ClInclude Include="Lights\SpotLight.h">
       <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\Cinematic.h">
+      <Filter>Cinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicObject.h">
+      <Filter>Cinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h">
+      <Filter>Cinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicPlayer.h">
+      <Filter>Cinematics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
