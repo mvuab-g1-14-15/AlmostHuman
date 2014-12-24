@@ -8,14 +8,13 @@
 #include <string>
 
 class CCinematicObject;
-class CXMLTreeNode;
 
 class CCinematic : public CRenderableObject, public CCinematicPlayer
 {
 protected:
 	std::vector<CCinematicObject *> m_CinematicObjects;
 public:
-	CCinematic(CXMLTreeNode &atts);
+	CCinematic(const std::string &Filename);
 	virtual ~CCinematic();
 	virtual void Stop();
 	virtual void Play(bool Cycle);
