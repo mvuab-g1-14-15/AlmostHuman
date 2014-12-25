@@ -5,12 +5,13 @@
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
 #include "Utils\LogRender.h"
+#include "Timer\Timer.h"
 
 CEngine::CEngine() :
     m_pCore( new CCore() ),
     m_pLogRender( new CLogRender()),
     m_pProcess( 0 ),
-    m_timer(30)
+    m_timer(new CTimer(30))
 {
 }
 
@@ -19,14 +20,15 @@ CEngine::~CEngine()
     CHECKED_DELETE( m_pCore );
     CHECKED_DELETE( m_pProcess );
     CHECKED_DELETE( m_pLogRender );
+    CHECKED_DELETE( m_timer );
 }
 
 void CEngine::Update(float32 deltaTime)
 {
-    m_timer.Update();
-    m_pCore->Update(m_timer.GetElapsedTime());
-    m_pProcess->Update(m_timer.GetElapsedTime());
-    m_pLogRender->Update(m_timer.GetElapsedTime());
+    m_timer->Update();
+    m_pCore->Update(m_timer->GetElapsedTime());
+    m_pProcess->Update(m_timer->GetElapsedTime());
+    m_pLogRender->Update(m_timer->GetElapsedTime());
 }
 
 void CEngine::Render()

@@ -1,6 +1,7 @@
 #include "CameraManager.h"
 #include "CameraFPShooter.h"
 #include "GraphicsManager.h"
+#include "Timer\Timer.h"
 
 CCameraManager::CCameraManager() : m_RenderCameras( false )
 {
@@ -92,9 +93,9 @@ void CCameraManager::RenderCameras()
 #endif
 }
 
-void CCameraManager::Update( float dt )
+void CCameraManager::Update()
 {
     TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
     for( ; itb != ite; ++itb )
-        itb->second->Update(dt);
+        itb->second->Update();
 }

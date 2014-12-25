@@ -73,7 +73,7 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
           AddResource(l_Name,l_AnimatedInstance);
         }
     }
-
+    
     return true;
 }
 

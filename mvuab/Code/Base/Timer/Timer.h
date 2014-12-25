@@ -12,8 +12,9 @@
 #define INC_TIMERMANAGER_H_
 
 #include "Utils\Types.h"
+#include "Utils\SingletonPattern.h"
 
-class CTimer
+class CTimer : public CSingleton<CTimer>
 {
 
 public:
