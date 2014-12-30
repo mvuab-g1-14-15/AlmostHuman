@@ -38,8 +38,8 @@ void CDebugWindowManager::Render()
         m_vDebugWindows[i]->Render();
 }
 
-void CDebugWindowManager::Update(float32 deltaTime)
+void CDebugWindowManager::Update()
 {
     for( uint32 i = 0; i < m_vDebugWindows.size(); ++i )
-        m_vDebugWindows[i]->Update(deltaTime);
+        m_vDebugWindows[i]->Update();
 }

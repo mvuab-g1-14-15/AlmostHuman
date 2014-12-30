@@ -11,7 +11,7 @@ class CCameraDebugWindow : public CDebugWindow
 public:
     CCameraDebugWindow(Math::Vect2i aWindowPosition);
     ~CCameraDebugWindow();
-    virtual void Update(float32 deltaTime);
+    virtual void Update();
 
 protected:
    virtual void RenderInfo();

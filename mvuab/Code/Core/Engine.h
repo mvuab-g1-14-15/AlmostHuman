@@ -18,7 +18,7 @@ public:
     CEngine();
     ~CEngine();
     void Init( CProcess * apProcess, const std::string &aConfigPath, HWND aWindowId );
-    void Update(float32 deltaTime);
+    void Update();
     void Render();
     
     // Getters and setters

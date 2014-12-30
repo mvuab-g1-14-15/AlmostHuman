@@ -16,7 +16,7 @@ CCameraDebugWindow::~CCameraDebugWindow()
 
 }
 
-void CCameraDebugWindow::Update (float32 deltaTime)
+void CCameraDebugWindow::Update ()
 {
 }
 
