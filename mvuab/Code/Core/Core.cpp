@@ -14,6 +14,7 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "ScriptManager\ScriptManager.h"
 #include "Cameras\CameraManager.h"
+#include "Effects\EffectManager.h"
 
 CCore::CCore() :
     m_ConfigPath(""),
@@ -41,8 +42,9 @@ CCore::CCore() :
     m_pStaticMeshManager( new CStaticMeshManager() ),
     m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
     m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
-	m_pScriptManager( new CScriptManager() ),
-    m_pCameraManager( new CCameraManager() )
+    m_pScriptManager( new CScriptManager() ),
+    m_pCameraManager( new CCameraManager() ),
+    m_pEffectManager( new CEffectManager() )
 {
 }
 
@@ -58,8 +60,9 @@ CCore::~CCore()
     CHECKED_DELETE(m_pRenderableObjectsManager);
     CHECKED_DELETE(m_pAnimatedModelsManager);
     CHECKED_DELETE(m_pTextureManager);
-	CHECKED_DELETE(m_pScriptManager);
+    CHECKED_DELETE(m_pScriptManager);
     CHECKED_DELETE(m_pCameraManager);
+    CHECKED_DELETE(m_pEffectManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -79,7 +82,7 @@ void CCore::Update(float32 deltaTime)
     m_pInputManager->Update();
     m_pActionManager->Update(deltaTime);
     m_pDebugWindowManager->Update(deltaTime);
-	m_pRenderableObjectsManager->Update(deltaTime);
+    m_pRenderableObjectsManager->Update(deltaTime);
     m_pCameraManager->Update(deltaTime);
 }
 

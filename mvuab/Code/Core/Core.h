@@ -23,31 +23,32 @@ class CRenderableObjectsManager;
 class CAnimatedModelsManager;
 class CScriptManager;
 class CCameraManager;
+class CEffectManager;
 
 class CCore : public CSingleton<CCore>
 {
 private:
 
     // Configuration
-    HWND                        m_WindowId;
-    bool                        m_FullScreenMode;
-    bool                        m_ExclusiveModeInMouse;
-    bool                        m_DrawPointerMouse;
-    uint32                        m_ScreenWidth;
-    uint32                        m_ScreenHeight;
-    uint32                        m_WindowXPos;
-    uint32                        m_WindowYPos;
-    std::string                    m_CurrentLanguage;
-    std::string                    m_ConfigPath;
-    std::string                    m_GUIPath;
-    std::string                    m_SoundPath;
-    std::string                    m_FontsPath;
-    std::string                    m_InputPath;
-    std::string                    m_StaticMeshesPath;
-    std::string                    m_RenderableObjectsPath;
-    std::string                    m_AnimatedModelsPath;
-    std::string                    m_LuaRunPath;
-    std::vector<std::string>	   m_v_languages;
+    HWND                            m_WindowId;
+    bool                            m_FullScreenMode;
+    bool                            m_ExclusiveModeInMouse;
+    bool                            m_DrawPointerMouse;
+    uint32                          m_ScreenWidth;
+    uint32                          m_ScreenHeight;
+    uint32                          m_WindowXPos;
+    uint32                          m_WindowYPos;
+    std::string                     m_CurrentLanguage;
+    std::string                     m_ConfigPath;
+    std::string                     m_GUIPath;
+    std::string                     m_SoundPath;
+    std::string                     m_FontsPath;
+    std::string                     m_InputPath;
+    std::string                     m_StaticMeshesPath;
+    std::string                     m_RenderableObjectsPath;
+    std::string                     m_AnimatedModelsPath;
+    std::string                     m_LuaRunPath;
+    std::vector<std::string>        m_v_languages;
 
     // Managers
     CGraphicsManager*               m_pGraphicsManager;
@@ -62,6 +63,7 @@ private:
     CTextureManager*                m_pTextureManager;
     CScriptManager*                 m_pScriptManager;
     CCameraManager*                 m_pCameraManager;
+    CEffectManager*                 m_pEffectManager;
 
     void LoadXml();
     void InitManagers();
@@ -98,6 +100,7 @@ public:
     GET_SET_PTR(CTextureManager, TextureManager);
     GET_SET_PTR(CScriptManager, ScriptManager);
     GET_SET_PTR(CCameraManager, CameraManager);
+    GET_SET_PTR(CEffectManager, EffectManager);
 };
 
 #endif // GRAPHICS_MANAGER_H
