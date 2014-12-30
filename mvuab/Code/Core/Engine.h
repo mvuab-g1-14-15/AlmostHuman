@@ -6,11 +6,11 @@
 #include <Windows.h>
 #include "Utils\SingletonPattern.h"
 #include "Utils\Defines.h"
-#include "Timer\Timer.h"
 
 class CCore;
 class CProcess;
 class CLogRender;
+class CTimer;
 
 class CEngine : public CSingleton<CEngine>
 {
@@ -25,10 +25,10 @@ public:
     GET_SET(CCore*, pCore);
 
 private:
-    CCore*            m_pCore;
-    CLogRender*        m_pLogRender;
-    CProcess*        m_pProcess;
-    CTimer            m_timer;
+    CCore*              m_pCore;
+    CLogRender*         m_pLogRender;
+    CProcess*           m_pProcess;
+    CTimer*             m_timer;
 };
 
-#endif // GRAPHICS_MANAGER_H
+#endif // ENGINE_H

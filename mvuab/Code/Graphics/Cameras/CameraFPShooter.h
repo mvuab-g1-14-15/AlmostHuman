@@ -9,7 +9,7 @@ class CCameraFPShooter : public CCamera
 public:
     CCameraFPShooter();
     ~CCameraFPShooter();
-    void    Update( float32 deltaTime );
+    void    Update( );
     
     void    Move (    int strafe, int forward, bool flag_speed, const float32 &dt);
         

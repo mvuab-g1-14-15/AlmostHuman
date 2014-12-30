@@ -1,5 +1,6 @@
 #include "CameraFPShooter.h"
 #include "ActionManager.h"
+#include "Timer\Timer.h"
 
 CCameraFPShooter::CCameraFPShooter()
     : m_Height( 2.0f ),
@@ -31,9 +32,10 @@ void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const flo
     m_Pos += addPos;
 }
 
-void CCameraFPShooter::Update( float32 deltaTime )
+void CCameraFPShooter::Update( )
 {
     CActionManager *pActionManager = CActionManager::GetSingletonPtr();
+    float32 deltaTime = CTimer::GetSingletonPtr()->GetElapsedTime();
     float32 amount;
     bool flag_speed =  pActionManager->DoAction("Run");
     int forward = 0;

@@ -21,7 +21,7 @@ public:
     CCameraManager(); 
     ~CCameraManager();
     
-    void Update( float dt );
+    void Update();
 
     CCamera* GetCamera( const std::string &name );
     GET_SET_PTR( CCamera, CurrentCamera);
