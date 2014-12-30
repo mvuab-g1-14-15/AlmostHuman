@@ -90,9 +90,9 @@ void CRenderableObjectsManager::Render()
     {
         m_ResourcesVector[i]->Render();
 
-        m_NumVertexs += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumVertex();
-        m_NumFaces += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumFaces();
-        m_NumDraws += ((CInstanceMesh *) m_ResourcesVector[i])->GetNumDraws();
+        m_NumVertexs += m_ResourcesVector[i]->GetNumVertex();
+        m_NumFaces += m_ResourcesVector[i]->GetNumFaces();
+        m_NumDraws += m_ResourcesVector[i]->GetNumDraws();
     }
 }
 

@@ -12,4 +12,8 @@ public:
 
     virtual void Update(float ElapsedTime) {}
     virtual void Render() = 0;
+
+    virtual unsigned int GetNumVertex   () { return 0; }
+    virtual unsigned int GetNumFaces    () { return 0; }
+    virtual unsigned int GetNumDraws    () { return 0; }
 };

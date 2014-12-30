@@ -26,7 +26,7 @@ public:
     void Render();
     GET_SET(CStaticMesh*, pStaticMesh);
 
-    unsigned int GetNumVertex    () { return m_NumVertexs; }
+    unsigned int GetNumVertex   () { return m_NumVertexs; }
     unsigned int GetNumFaces    () { return m_NumFaces; }
     unsigned int GetNumDraws    () { return m_NumDraws; }
 };
