@@ -23,7 +23,7 @@ CEngine::~CEngine()
     CHECKED_DELETE( m_timer );
 }
 
-void CEngine::Update(float32 deltaTime)
+void CEngine::Update()
 {
     m_timer->Update();
     m_pCore->Update(m_timer->GetElapsedTime());

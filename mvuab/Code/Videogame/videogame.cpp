@@ -114,7 +114,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
             }
             else
             {
-                pEngine->Update(0.0f);
+                pEngine->Update();
                 pEngine->Render();
             }
         }

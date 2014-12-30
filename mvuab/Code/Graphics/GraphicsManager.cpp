@@ -56,8 +56,8 @@ struct VERTEX2
 
 
 CGraphicsManager::CGraphicsManager() :
-    m_uWidth(800),
-    m_uHeight(600),
+    m_uWidth(1200),
+    m_uHeight(800),
     m_BackbufferColor_debug(Math::colBLUE),
     m_BackbufferColor_release(Math::colBLACK),
     m_bPaintSolid(true)

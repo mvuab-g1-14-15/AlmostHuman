@@ -30,15 +30,15 @@ public:
   CStaticMesh();
   ~CStaticMesh();
 
-  bool Load            (const std::string &FileName);
-  bool ReLoad        ();
+  bool Load         (const std::string &FileName);
+  bool ReLoad       ();
 
-  void Render        (CGraphicsManager *GM);
-  void Destroy        ();
+  void Render       (CGraphicsManager *GM);
+  void Destroy      ();
 
-  unsigned int        GetNumVertex    () { return m_NumVertexs; }
-  unsigned int        GetNumFaces        () { return m_NumFaces; }
-  unsigned int        GetNumDraws        () { return m_NumDraws; }
+  unsigned int GetNumVertex  () { return m_NumVertexs; }
+  unsigned int GetNumFaces   () { return m_NumFaces; }
+  unsigned int GetNumDraws   () { return m_NumDraws; }
 
   Math::AABB3f GetAABB() { return m_AABB;}
 

@@ -38,23 +38,22 @@ std::string CCameraManager::GetCurrentCameraName()
     return m_pCurrentCamera->GetName();
 }
 
-void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string &name, const Math::Vect3f &Eye,
-                                const Math::Vect3f &LookAt )
+void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string &name, const Math::Vect3f &Eye, const Math::Vect3f &LookAt )
 {
     CCamera * l_pNewCamera = 0;
         
     switch(id_cam)
     {
-        case CCamera::FPS:
+    case CCamera::FirstPerson:
             l_pNewCamera = new  CCameraFPShooter();
             break;
-        case CCamera::TPS:
+    case CCamera::ThirdPerson:
              //l_pNewCamera = new CCameraThPShooter();
            break;
-        case CCamera::SPHERICAL:
+    case CCamera::Spherical:
              //l_pNewCamera =new CCameraFPShooter();
            break;
-        case CCamera::CINEMATICAL:
+    case CCamera::Cinematical:
              //new_l_pNewCameracamera =new CCameraFPShooter();
            break;
     }

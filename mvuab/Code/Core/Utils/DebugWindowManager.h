@@ -15,7 +15,7 @@ public:
     ~CDebugWindowManager();
 
     void Render();
-    void Update(float32 deltaTime);
+    void Update();
     bool GetVisible() const {return m_bIsVisible;}
     void SetVisible(bool flag){ m_bIsVisible = flag;}
     void ToggleVisibility();
