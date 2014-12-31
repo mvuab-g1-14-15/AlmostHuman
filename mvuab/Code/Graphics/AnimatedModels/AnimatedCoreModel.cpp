@@ -8,10 +8,12 @@
 
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) : 
+        CName(),
         m_Path(""),
         m_FileName(""),
-        m_CalCoreModel( new CalCoreModel(Name)),
-        CName()
+        m_RenderableVertexs(0),
+        m_CalCoreModel(new CalCoreModel(Name)),
+        m_CalHardwareModel(new CalHardwareModel(m_CalCoreModel))
 {
 }
 
@@ -64,7 +66,7 @@ const std::string & CAnimatedCoreModel::GetTextureName( size_t id )
     return m_TextureVector[id]->GetFileName();
 }
 
-size_t CAnimatedCoreModel::GetNumTextures( ) const 
+size_t CAnimatedCoreModel::GetNumTextures() 
 {
     return m_TextureVector.size();
 }
@@ -145,6 +147,16 @@ CalCoreModel *CAnimatedCoreModel::GetCoreModel( )
     return m_CalCoreModel;
 }
 
+CalHardwareModel* CAnimatedCoreModel::GetCalHardwareModel()
+{
+    return m_CalHardwareModel;
+}
+
+CRenderableVertexs* CAnimatedCoreModel::GetRenderableVertexs()
+{
+    return m_RenderableVertexs;
+}
+
 bool CAnimatedCoreModel::Reload()
 {
     Destroy();
@@ -155,7 +167,10 @@ void CAnimatedCoreModel::Destroy()
 {
     m_TextureVector.clear();
     m_AnimationsMap.clear();
+
     CHECKED_DELETE(m_CalCoreModel);
+    CHECKED_DELETE(m_CalHardwareModel);
+    CHECKED_DELETE(m_RenderableVertexs);
 }
 
 void CAnimatedCoreModel::ActivateTextures()
