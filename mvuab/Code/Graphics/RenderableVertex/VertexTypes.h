@@ -23,14 +23,15 @@ G N T B D T1 T2
 #pragma once 
 
 #include <d3dx9.h>
+#include "Utils\Defines.h"
 
 #define VERTEX_TYPE_GEOMETRY    0x0001
-#define VERTEX_TYPE_NORMAL        0x0002
-#define VERTEX_TYPE_TANGENT        0x0004
+#define VERTEX_TYPE_NORMAL      0x0002
+#define VERTEX_TYPE_TANGENT     0x0004
 #define VERTEX_TYPE_BINORMAL    0x0008
 #define VERTEX_TYPE_TEXTURE1    0x0010
 #define VERTEX_TYPE_TEXTURE2    0x0020
-#define VERTEX_TYPE_DIFFUSE        0x0040
+#define VERTEX_TYPE_DIFFUSE     0x0040
 
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
@@ -42,6 +43,13 @@ struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2|VERTEX_TYPE_DIFFUSE;
@@ -62,6 +70,13 @@ struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
     unsigned long color;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
@@ -82,6 +97,13 @@ struct TNORMAL_TAN_BI_T2_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2;
@@ -101,6 +123,13 @@ struct TNORMAL_TAN_BI_T1_VERTEX
     float bx, by, bz;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1;
@@ -120,6 +149,13 @@ struct TNORMAL_T2_DIFF_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2|VERTEX_TYPE_DIFFUSE;
@@ -138,6 +174,13 @@ struct TNORMAL_T1_DIFF_VERTEX
     unsigned long color;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
@@ -155,6 +198,13 @@ struct TNORMAL_DIFF_VERTEX
     float nx, ny, nz;
     unsigned long color;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_DIFFUSE;
@@ -173,6 +223,13 @@ struct TNORMAL_T2_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2;
@@ -190,6 +247,13 @@ struct TNORMAL_T1_VERTEX
     float nx, ny, nz;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1;
@@ -208,6 +272,13 @@ struct TT2_DIFF_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2|VERTEX_TYPE_DIFFUSE;
@@ -225,6 +296,13 @@ struct TT1_DIFF_VERTEX
     unsigned long color;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
@@ -241,6 +319,13 @@ struct TDIFF_VERTEX
     float x, y, z;
     unsigned long color;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_DIFFUSE;
@@ -258,6 +343,13 @@ struct TT2_VERTEX
     float tu, tv;
     float tu2, tv2;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_TEXTURE2;
@@ -274,6 +366,13 @@ struct TT1_VERTEX
     float x, y, z;
     float tu, tv;
     
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
     static inline unsigned short GetVertexType()
     {
         return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_TEXTURE1;

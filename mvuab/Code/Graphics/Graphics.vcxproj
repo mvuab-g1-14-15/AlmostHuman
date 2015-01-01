@@ -45,6 +45,7 @@
     <ClCompile Include="Texture\GUITexture.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="Texture\TextureManager.cpp" />
+    <ClCompile Include="VertexTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedModels\AnimatedCoreModel.h" />
