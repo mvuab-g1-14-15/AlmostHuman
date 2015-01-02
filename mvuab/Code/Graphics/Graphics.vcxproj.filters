@@ -135,7 +135,7 @@
     <ClCompile Include="Cinematics\CinematicPlayer.cpp">
       <Filter>Cinematics</Filter>
     </ClCompile>
-    <ClCompile Include="VertexTypes.cpp">
+    <ClCompile Include="RenderableVertex\VertexTypes.cpp">
       <Filter>RenderableVertex</Filter>
     </ClCompile>
   </ItemGroup>

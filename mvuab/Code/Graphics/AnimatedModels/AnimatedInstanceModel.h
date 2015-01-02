@@ -26,13 +26,11 @@ class CAnimatedInstanceModel : public CRenderableObject
         float32 m_BlendTime;
 	    float32 m_ChangeAnimation;
 
-        bool LoadVertexBuffer           (CGraphicsManager *RM);
         void LoadTextures               ();
 
     public:
         CAnimatedInstanceModel          (const std::string &Name, const std::string &CoreName);
         ~CAnimatedInstanceModel         ();
-
 
         void Initialize                 ();
         void Destroy                    ();
@@ -42,7 +40,6 @@ class CAnimatedInstanceModel : public CRenderableObject
         void RenderModelByHardware      ();
 
         void Update                     (float32 deltaTime);
-        
         void ExecuteAction              (uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget=1.0f, bool AutoLock=true);
 
         void BlendCycle                 (uint32 Id, float32 Weight, float32 DelayIn);

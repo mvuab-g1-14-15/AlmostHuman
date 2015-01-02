@@ -1,19 +1,25 @@
 #include "AnimatedCoreModel.h"
 #include "cal3d\cal3d.h"
+
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 
 #include "Texture\Texture.h"
 #include "Texture\TextureManager.h"
 
+#include "GraphicsManager.h"
+#include "RenderableVertex\VertexTypes.h"
+#include "RenderableVertex\IndexedVertexs.h"
+
+#define MAXBONES 29
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) : 
         CName(),
         m_Path(""),
         m_FileName(""),
+        m_CalHardwareModel(0),
         m_RenderableVertexs(0),
-        m_CalCoreModel(new CalCoreModel(Name)),
-        m_CalHardwareModel(new CalHardwareModel(m_CalCoreModel))
+        m_CalCoreModel(new CalCoreModel(Name))
 {
 }
 
@@ -45,6 +51,39 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::strin
         return false;
 
     m_AnimationsMap[Name] = id;
+    return true;
+}
+
+bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
+{
+    //CAL3D_HW_VERTEX *pVertex;
+
+    m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
+    int *l_Idxs = new int[m_NumFaces * 3];
+    CAL3D_HW_VERTEX *l_Vtxs = new CAL3D_HW_VERTEX[m_NumVtxs * 2];
+    
+    m_CalHardwareModel->setVertexBuffer((char*) l_Vtxs, sizeof(CAL3D_HW_VERTEX));
+    m_CalHardwareModel->setWeightBuffer(((char*) l_Vtxs) + 12, sizeof(CAL3D_HW_VERTEX));
+    m_CalHardwareModel->setMatrixIndexBuffer(((char*) l_Vtxs) + 28, sizeof(CAL3D_HW_VERTEX));
+
+    m_CalHardwareModel->setNormalBuffer(((char*) l_Vtxs) + 44, sizeof(CAL3D_HW_VERTEX));
+
+    m_CalHardwareModel->setTextureCoordNum(1);
+    m_CalHardwareModel->setTextureCoordBuffer(0,((char*)l_Vtxs)+92,sizeof(CAL3D_HW_VERTEX));
+    
+    m_CalHardwareModel->setIndexBuffer(l_Idxs);
+    m_CalHardwareModel->load( 0, 0, MAXBONES);
+    
+    m_NumVtxs = m_CalHardwareModel->getTotalVertexCount();
+    m_NumFaces = m_CalHardwareModel->getTotalFaceCount();
+
+    //En caso de utilizar NormalMap
+    //CalcTangentsAndBinormals(l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces*3, sizeof(CAL3D_HW_VERTEX),0, 44, 60, 76, 92);
+    
+    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
+    delete []l_Vtxs; 
+    delete []l_Idxs;
+
     return true;
 }
 

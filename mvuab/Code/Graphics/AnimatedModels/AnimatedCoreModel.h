@@ -13,6 +13,7 @@ const std::string defaultXML = "actor.xml";
 
 class CRenderableVertexs;
 class CalHardwareModel;
+class CGraphicsManager;
 class CalCoreModel;
 class CTexture;
 
@@ -27,8 +28,12 @@ class CAnimatedCoreModel : public CName
         CRenderableVertexs              *m_RenderableVertexs;
 
         std::map<std::string, uint16>   m_AnimationsMap;
-        std::string                     m_Path;
         std::string                     m_FileName;
+        std::string                     m_Path;
+
+        int                             m_NumVtxs;
+        int                             m_NumFaces;
+
 
     private:
         void Destroy();
@@ -50,11 +55,13 @@ class CAnimatedCoreModel : public CName
         CRenderableVertexs  *GetRenderableVertexs   ();
 
         const   std::string & GetTextureName    (size_t id);
-        size_t  GetNumTextures                  ();
 	    void    ActivateTextures                ();
 
-        bool Load(const std::string &Path);
-        int GetAnimationId(const std::string &AnimationName) const;
+        bool Load               (const std::string &Path);
+        bool LoadVertexBuffer   (CGraphicsManager *RM);
+
+        int     GetAnimationId  (const std::string &AnimationName) const;
+        size_t  GetNumTextures  ();
 };
 
 #endif
