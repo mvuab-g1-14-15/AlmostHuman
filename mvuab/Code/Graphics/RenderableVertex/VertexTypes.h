@@ -383,3 +383,35 @@ struct TT1_VERTEX
         return D3DFVF_XYZ|D3DFVF_TEX1;
     }
 };
+
+struct CAL3D_HW_VERTEX
+{
+    float x, y, z;
+    float weights[4];
+    float indices[4];
+    float nx, ny, nz;
+    
+    //En caso de utilizar NormalMap
+    //float nx, ny, nz, nw;
+    //float tangentx, tangenty, tangentz, tangentw;
+    //float binormalx, binormaly, binormalz, binormalw;
+    
+    float tu,tv;
+    static inline unsigned short GetVertexType()
+    {
+        return 0;
+    }
+
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
+    
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+};

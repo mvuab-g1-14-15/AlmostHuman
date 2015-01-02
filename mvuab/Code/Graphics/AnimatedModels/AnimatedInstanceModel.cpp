@@ -66,7 +66,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
         l_pCalHardwareModel->selectHardwareMesh(hardwareMeshId);
         for(int boneId = 0; boneId < l_pCalHardwareModel->getBoneCount(); ++boneId)
         {
-            D3DXMatrixRotationQuaternion(&transformation[boneId],(CONST D3DXQUATERNION*)&l_pCalHardwareModel->getRotationBoneSpace(boneId, m_CalModel->getSkeleton()));
+            D3DXMatrixRotationQuaternion(&transformation[boneId], (CONST D3DXQUATERNION*)&l_pCalHardwareModel->getRotationBoneSpace(boneId, m_CalModel->getSkeleton()));
             CalVector translationBoneSpace = l_pCalHardwareModel->getTranslationBoneSpace(boneId, m_CalModel->getSkeleton());
 
             transformation[boneId]._14 = translationBoneSpace.x;
@@ -83,7 +83,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
         l_Effect->SetFloatArray(l_pEffect->GetBonesParameter(), (float *) l_Matrix, l_pCalHardwareModel->getBoneCount() * 3 * 4);
         m_Textures[0]->Activate(0);
         //m_NormalTextureList[0]->Activate(1);
-        /*m_AnimatedCoreModel->GetRenderableVertexs()->Render
+        m_AnimatedCoreModel->GetRenderableVertexs()->Render
             (
                 CCore::GetSingletonPtr()->GetGraphicsManager(), 
                 l_pEffectTechnique, 
@@ -92,7 +92,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
                 l_pCalHardwareModel->getVertexCount(),
                 l_pCalHardwareModel->getStartIndex(),
                 l_pCalHardwareModel->getFaceCount()
-            )*/
+            );
     }
 }
 
@@ -278,11 +278,6 @@ bool CAnimatedInstanceModel::IsActionAnimationActive(uint32 Id) const
 {
     const std::vector<CalAnimation *> &l_AnimVect = m_CalModel->getMixer()->getAnimationVector();
     return ( l_AnimVect[Id] != NULL );
-}
-
-bool CAnimatedInstanceModel::LoadVertexBuffer(CGraphicsManager *RM)
-{
-    return true;
 }
 
 void CAnimatedInstanceModel::LoadTextures()

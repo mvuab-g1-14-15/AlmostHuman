@@ -4,6 +4,7 @@
 
 #include "Utils\Defines.h"
 #include "GraphicsManager.h"
+#include "Effects\EffectTechnique.h"
 
 #include <d3dx9.h>
 
@@ -36,7 +37,10 @@ class CRenderableVertexs
         }
 
         virtual inline unsigned short GetVertexType() const = 0;
+
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount) = 0; 
         virtual bool Render(CGraphicsManager *GM) = 0;
+
         virtual inline size_t GetVertexSize() = 0;
         virtual inline size_t GetIndexSize() = 0;
 };

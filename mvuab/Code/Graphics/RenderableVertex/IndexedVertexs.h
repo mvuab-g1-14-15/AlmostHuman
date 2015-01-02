@@ -45,6 +45,11 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             return(true);
         }
 
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount)
+        {
+            return(true);
+        }
+
         virtual inline unsigned short GetVertexType() const {return T::GetVertexType();}
 
 };
