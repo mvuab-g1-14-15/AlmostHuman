@@ -4,6 +4,9 @@
 
 #include "RenderableVertex.h"
 
+#include "Effects\Effect.h"
+#include "Effects\EffectTechnique.h"
+
 template<class T> class CIndexedVertexs : public CRenderableVertexs
 {
     protected:
@@ -45,12 +48,57 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             return(true);
         }
 
-        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount)
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount)
         {
+            LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+            LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
+            UINT l_NumPasses = 0;
+            
+            l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
+            if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+            
+            l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
+            l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
+            l_Device->SetIndices(m_IB);
+                
+            for (UINT b = 0; b < l_NumPasses; ++b)
+            {
+                l_Effect->BeginPass(b);
+                l_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, baseVertexIndexCount, minVertexIndex, verticesCount, startIndex, facesCount);
+                l_Effect->EndPass();
+            }
+                
+            l_Effect->End();
             return(true);
         }
 
-        virtual inline unsigned short GetVertexType() const {return T::GetVertexType();}
+        bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique)
+        {
+            LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+            LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
+            UINT l_NumPasses = 0;
+            
+            l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
+            if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+            
+            l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
+            l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
+            l_Device->SetIndices(m_IB);
+                
+            for (UINT b = 0; b < l_NumPasses; ++b)
+            {
+                l_Effect->BeginPass(b);
+                l_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (UINT)m_VertexCount, 0, (UINT) m_IndexCount/3);
+                l_Effect->EndPass();
+            }
+                
+            l_Effect->End();
+            return true;
+        }
 
+        virtual inline unsigned short GetVertexType() const
+        {
+            return T::GetVertexType();
+        }
 };
 #endif

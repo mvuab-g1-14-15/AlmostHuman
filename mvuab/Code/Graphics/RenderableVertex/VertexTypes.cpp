@@ -16,6 +16,8 @@ LPDIRECT3DVERTEXDECLARATION9 TDIFF_VERTEX::s_VertexDeclaration=NULL;
 LPDIRECT3DVERTEXDECLARATION9 TT2_VERTEX::s_VertexDeclaration=NULL;
 LPDIRECT3DVERTEXDECLARATION9 TT1_VERTEX::s_VertexDeclaration=NULL;
 
+LPDIRECT3DVERTEXDECLARATION9 CAL3D_HW_VERTEX::s_VertexDeclaration = NULL;
+
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexDeclaration()
 {
     if(s_VertexDeclaration==NULL)
@@ -248,6 +250,24 @@ LPDIRECT3DVERTEXDECLARATION9 & TT1_VERTEX::GetVertexDeclaration()
         {
             { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
             { 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_TEXCOORD, 0 },
+            D3DDECL_END()
+        };
+        CGraphicsManager::GetSingletonPtr()->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9 & CAL3D_HW_VERTEX::GetVertexDeclaration()
+{
+    if(s_VertexDeclaration==NULL)
+    {
+        D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+        {
+            { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+            { 0, 12, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT, 0 },
+            { 0, 28, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDINDICES, 0 },
+            { 0, 44, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+            { 0, 56, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
             D3DDECL_END()
         };
         CGraphicsManager::GetSingletonPtr()->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
