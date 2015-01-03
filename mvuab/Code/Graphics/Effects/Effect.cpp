@@ -163,6 +163,7 @@ bool CEffect::LoadEffect()
 
 void CEffect::Unload()
 {
+    SetNullParameters();
     CHECKED_RELEASE(m_Effect);
 }
 
@@ -180,7 +181,7 @@ bool CEffect::Reload()
 
 D3DXHANDLE CEffect::GetTechniqueByName(const std::string &TechniqueName)
 {
-    return m_Effect->GetTechniqueByName(TechniqueName.c_str());
+    return (m_Effect) ? m_Effect->GetTechniqueByName(TechniqueName.c_str()) : 0;
 }
 
 bool CEffect::SetLights(size_t NumOfLights)

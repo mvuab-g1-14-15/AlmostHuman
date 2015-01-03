@@ -14,7 +14,9 @@ CCameraKeyController::CCameraKeyController(CXMLTreeNode &atts)
     m_Reverse(false),
     m_Finish(false),
     m_PlayingBackward(false),
-    m_PlayingForward(true)
+    m_PlayingForward(true),
+    m_Name(""),
+    m_FileName("")
 {
 }
 
@@ -39,6 +41,7 @@ void CCameraKeyController::LoadXML(const std::string &FileName)
         return;
     }
 
+    m_Name = l_Node.GetPszProperty("name","no_name");
     m_Cycle = l_Node.GetBoolProperty("cycle", false);
     m_Reverse = l_Node.GetBoolProperty("reverse", false);
     m_TotalTime = l_Node.GetFloatProperty("total_time", 0.0f);

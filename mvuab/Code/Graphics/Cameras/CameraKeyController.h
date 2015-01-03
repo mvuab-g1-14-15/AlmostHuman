@@ -25,6 +25,7 @@ public:
 
 private: // Members
     std::string                 m_FileName;
+    std::string                 m_Name;
     std::vector<CCameraKey *>   m_Keys;
     size_t                      m_CurrentKey;
     size_t                      m_NextKey;
