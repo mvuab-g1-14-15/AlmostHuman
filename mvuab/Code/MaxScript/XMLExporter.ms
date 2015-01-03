@@ -1,8 +1,7 @@
 --export de la class
 fn ExportStaticMeshXMLFile filenameXML MeshDir =
-(
+(	
 	local ostream=createfile filenameXML
-	
 	local UniqueInstanceArray = GetUniqueInstances()
 	
 	if UniqueInstanceArray.count == 0 then 
@@ -11,7 +10,6 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 		return -1
 	)
 
-	
 	format "<static_meshes>\n" to:ostream
 
 	for Obj in UniqueInstanceArray do
@@ -28,10 +26,10 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 --export de la class
 fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
-	local ostream=createfile filenameXML
-
-	local unique_instances = GetUniqueInstances()
 	
+	local ostream=createfile filenameXML
+	local unique_instances = GetUniqueInstances()
+		
 	if AllObj.count == 0 then 
 	(
 		format "Empty selection. Select any object \n"
@@ -39,6 +37,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 	)
 	
 	format "<RenderableObjects>\n" to:ostream
+	
 	for Obj in AllObj do
 	(
 		local instance_obj;
@@ -47,13 +46,22 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		else
 		(
 			local references = GetNodeReferences Obj
-			for ref_obj in references do
+			if (references.count > 0) then
 			(
-				if findItem unique_instances ref_obj != 0 then
-					instance_obj = ref_obj
+				for ref_obj in references do
+				(
+					if findItem unique_instances ref_obj != 0 then
+						instance_obj = ref_obj
+				)
+			)
+			else
+			(
+				instance_obj = Obj
 			)
 		)
-		
+
+		ObjectName = Obj.name as string
+	
 		YawAngle =GetYaw Obj.transform as string
 		PitchAngle= GetPitch Obj.transform as string
 		RollAngle= GetRoll Obj.transform as string
@@ -70,7 +78,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		strScale = ScaleStr as string
 		
 		tag1 = stringStream ""
-		format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n"  Obj.name instance_obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
+		format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n" ObjectName instance_obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
 		strTag1 = tag1 as string
 		
 		format strTag1 to:ostream		
@@ -91,12 +99,12 @@ fn ExportTextureFile AllObj DestPath =
 
 	for Obj in AllObj do
 	(
-		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-		
 		try
 		(
+			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 			convertToMesh newObj
 			actualObj = newObj[1]
+
 			filename = filenameFromPath actualObj.material.diffuseMap.filename
 			DestPath = DestPath + "/" + filename
 			

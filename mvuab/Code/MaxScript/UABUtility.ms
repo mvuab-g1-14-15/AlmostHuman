@@ -33,6 +33,12 @@ utility UABUtility "UAB Utility" width:162 height:325
 		fileIn "ExportMesh.ms"
 		fileIn "XMLExporter.ms"
 		
+		if PathLabel.text == "" then
+		(
+			format "Destination Path undefined, please choose a path \n"
+			return -1 
+		)
+		
 		--export Mesh
 		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
 		--Check if exist dir, if not mkdir
@@ -53,14 +59,34 @@ utility UABUtility "UAB Utility" width:162 height:325
 			return -1
 		)
 	)
+	
 	on CameraButon pressed do
 	(
-		--export camera
+		fileIn "Cinematics.ms"
+		
+		if PathLabel.text == "" then
+		(
+			format "Destination Path undefined, please choose a path \n"
+			return -1 
+		)
+		
+		cameraDir = PathLabel.text + "\\camera.xml"
+		nFrames = 5
+		isCycle = 1
+		isReverse = 0
+		
+		ExportKeyCamera nFrames isCycle isReverse cameraDir
 	)
 	
 	on StaticMeshManagerButton pressed do
 	(
 		fileIn "XMLExporter.ms"
+		
+		if PathLabel.text == "" then
+		(
+			format "Destination Path undefined, please choose a path \n"
+			return -1 
+		)
 		
 		local rootDir = PathLabel.text --poner parametrico
 		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
@@ -100,6 +126,12 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		fileIn "XMLExporter.ms"
 		
+		if PathLabel.text == "" then
+		(
+			format "Destination Path undefined, please choose a path \n"
+			return -1 
+		)
+		
 		local rootDir = PathLabel.text		--poner parametrico
 		local fileSrcRenderableXML = rootDir + "\\renderable_objects.xml"
 		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
@@ -128,7 +160,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		if CopyTexturesCheckBox.checked then
 		(
 			DoesFolderExist TexturesDir
-			ExportTextureFile selection TexturesDir
+			ExportTextureFile geometry TexturesDir
 			format "Textures copied on: % \n" TexturesDir
 		)
 
