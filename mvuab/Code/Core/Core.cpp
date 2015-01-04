@@ -15,6 +15,7 @@
 #include "ScriptManager\ScriptManager.h"
 #include "Cameras\CameraManager.h"
 #include "Effects\EffectManager.h"
+#include "Lights\LightManager.h"
 
 CCore::CCore() :
     m_ConfigPath(""),
@@ -44,7 +45,8 @@ CCore::CCore() :
     m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
     m_pScriptManager( new CScriptManager() ),
     m_pCameraManager( new CCameraManager() ),
-    m_pEffectManager( new CEffectManager() )
+    m_pEffectManager( new CEffectManager() ),
+	m_pLightManager( new CLightManager() )
 {
 }
 
@@ -63,6 +65,7 @@ CCore::~CCore()
     CHECKED_DELETE(m_pScriptManager);
     CHECKED_DELETE(m_pCameraManager);
     CHECKED_DELETE(m_pEffectManager);
+	CHECKED_DELETE(m_pLightManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -91,6 +94,7 @@ void CCore::Render()
     m_pGraphicsManager->Render();
     m_pDebugWindowManager->Render();
     m_pRenderableObjectsManager->Render();
+	m_pLightManager->Render();
 
     // START: TO DELETE LATER IF IS NOT NECESSARY,
     unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
@@ -208,4 +212,6 @@ void CCore::InitManagers()
 
 	m_pScriptManager->Initialize();
 	m_pScriptManager->RunFile(m_LuaRunPath);
+
+	m_pLightManager->Load("Data/Lights.xml");
 }

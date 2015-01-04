@@ -3,8 +3,6 @@
 
 #include "Light.h"
 
-class CGraphicsManager;
-
 class CDirectionalLight : public CLight
 {
 protected:
@@ -13,7 +11,7 @@ public:
 	CDirectionalLight() : CLight() {}
 	void SetDirection(const Math::Vect3f &Direction);
 	Math::Vect3f GetDirection() const;
-	virtual void Render(CGraphicsManager *gm);
+	virtual void Render();
 };
 
 #endif // DIRECTIONAL_LIGHT_H

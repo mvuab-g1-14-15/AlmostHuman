@@ -6,8 +6,6 @@
 
 #include <string>
 
-class CGraphicsManager;
-
 class CLight : public CObject3D
 {
 public:
@@ -39,7 +37,7 @@ public:
 	bool RenderShadows() const;
 	void SetType(const TLightType Type);
 	TLightType GetType() const;
-	virtual void Render(CGraphicsManager *gm);
+	virtual void Render();
 };
 
 #endif // LIGHT_H
