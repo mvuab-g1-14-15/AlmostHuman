@@ -1,5 +1,22 @@
 #include "CinematicPlayer.h"
 
+CCinematicPlayer::CCinematicPlayer() :
+	m_Playing(false),
+	m_CurrentTime(0.0),
+	m_Duration(0.0),
+	m_Cycle(false)
+{
+}
+
+CCinematicPlayer::~CCinematicPlayer()
+{
+}
+
+void CCinematicPlayer::Init(float Duration)
+{
+	m_Duration = Duration;
+}
+
 void CCinematicPlayer::Update(float ElapsedTime)
 {
 	if (m_Playing)

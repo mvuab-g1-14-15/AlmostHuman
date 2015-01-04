@@ -5,6 +5,7 @@
 #include "StaticMeshes\InstanceMesh.h"
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "Math\MathTypes.h"
+#include "Cinematics\Cinematic.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager() : m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
 {
@@ -74,6 +75,10 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
         }
     }
     
+	CCinematic* l_CinematicInstance = new CCinematic("Data/cinematic.xml");
+	l_CinematicInstance->Play(true);
+	AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);
+
     return true;
 }
 

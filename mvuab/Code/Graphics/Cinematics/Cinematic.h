@@ -22,7 +22,7 @@ public:
 	void LoadXML(const std::string &Filename);
 	void AddCinematicObject(CCinematicObject *CinematicObject);
 	void Update(float ElapsedTime);
-	virtual void Render(CGraphicsManager* gm);
+	virtual void Render();
 };
 
 #endif // CINEMATIC_H

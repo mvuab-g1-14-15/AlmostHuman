@@ -23,6 +23,7 @@ public:
 	void Update(float ElapsedTime);
 	void Stop();
 	void OnRestartCycle();
+	void Render();
 };
 
 #endif // CINEMATIC_OBJECT_H
