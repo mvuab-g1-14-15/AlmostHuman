@@ -1,3 +1,4 @@
+fileIn "Utils.ms"
 fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
 	try 
@@ -8,7 +9,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 			(
 				local ostream=createfile filenameXML
 				
-				if (EachCamera.position.controller.keys.count > 0) then --TODO if has keys - else fixedcamera
+				if (EachCamera.position.controller.keys.count > 0) then 
 				(
 					
 					--If number of frames is empty, set to 1
@@ -23,7 +24,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 					
 					isCycleStr = isCycle as string
 					isReverseStr = isReverse as string
-					--totalTimeStr = animationRange.end as string
+					
 					totalTimeStr = stringStream ""
 					format "%" (((animationRange.end as integer) / ticksPerFrame) * framerate) to:totalTimeStr
 					strTotalTime = totalTimeStr as string
@@ -46,21 +47,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 									fov = EachCamera.fov as string
 									nearclip = EachCamera.nearclip as string
 									farclip = EachCamera.farclip as string	
-								
-									/*format "Pos x % \n" EachCamera.Pos.x
-									format "Pos y % \n" EachCamera.Pos.y
-									format "Pos z % \n" EachCamera.Pos.z
-									
-									format "LookAt % \n" EachCamera.Target.Pos.X
-									format "LookAt % \n" EachCamera.Target.Pos.Y
-									format "LookAt % \n" EachCamera.Target.Pos.Z
-								
-									format "FOV % \n" fov
-									format "nearclip % \n" nearclip
-									format "farclip % \n" farclip
-								
-									format "%"( ((t as integer) / ticksPerFrame) * framerate)*/
-								
+														
 									TimeInSeconds = stringStream ""
 									format "%" (((t as float) / ticksPerFrame) / framerate) to:TimeInSeconds
 									strTime = TimeInSeconds as string
@@ -88,14 +75,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				else 
 				(
 					--<fixedcamera name="camera1" pos="-26.8859 9.80159 -6.46455" look_at="-20.3781 3.19479 8.47801" fov="0.602417" near_plane="1.0" far_plane="1000.0"/>
-					/*format "Pos x % \n" EachCamera.Pos.x
-					format "Pos y % \n" EachCamera.Pos.y
-					format "Pos z % \n" EachCamera.Pos.z
 					
-					format "LookAt % \n" EachCamera.Target.Pos.X
-					format "LookAt % \n" EachCamera.Target.Pos.Y
-					format "LookAt % \n" EachCamera.Target.Pos.z*/
-
 					Pos = stringStream ""
 					format "% % %" EachCamera.Pos.x EachCamera.Pos.y EachCamera.Pos.z to:Pos
 					strPos = Pos as string
@@ -110,7 +90,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 
 					--<key time="0.0" pos="-26.8859 9.80159 -6.46455" look_at="-20.3781 3.19479 8.47801" fov="0.602417" near_plane="1.0" far_plane="1000.0"/>
 					fixed_camera_tag = stringStream ""
-					format  "\t<fixed_camera name=\"%\" pos=\"%\" look_at=\"%\" fov=\"%\" near_plane=\"%\" far_plane=\"%\"/>\n" EachCamera.name strPos strLookAt fov nearclip farclip to:fixed_camera_tag 
+					format  "<fixed_camera name=\"%\" pos=\"%\" look_at=\"%\" fov=\"%\" near_plane=\"%\" far_plane=\"%\"/>\n" EachCamera.name strPos strLookAt fov nearclip farclip to:fixed_camera_tag 
 					strFixedCamera = fixed_camera_tag  as string
 					format strFixedCamera to:ostream		
 				)
@@ -125,4 +105,78 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 	)
 	
 )
---ExportKeyCamera 5 1 0 "C:\Users\Galix\Desktop\camera.xml"
+
+fn ExportCinematicObjects nFrames filenameXML =
+(
+	try
+	(
+	
+		local ostream=createfile filenameXML
+		
+		totalTimeStr = stringStream ""
+		format "%" (((animationRange.end as float) / ticksPerFrame) / framerate) to:totalTimeStr
+		strTotalTime = totalTimeStr as string
+		
+		cinematic_tag = "<cinematic name=\"" + maxFileName + "\" duration=\"" + totalTimeStr  + "\"/>\n"
+		format cinematic_tag to:ostream
+		
+		for Obj in geometry do
+		(
+			isCinematic = getUserProp Obj "isCinematic"
+			
+			if (isCinematic == true) then 
+			(
+
+				--<cinematic_object resource="Box001_Part_7" renderable_objects_manager="solid">
+				cinematic_object_tag = "\t<cinematic_object resource=\"" + Obj.name + "\" renderable_objects_manager=\"" + Obj.name  + "\"/>\n"
+				format cinematic_object_tag to:ostream
+				
+				for t = animationRange.start to animationRange.end by nFrames do
+				(
+					animate on
+					(
+						at time t
+						(
+							TimeInSeconds = stringStream ""
+							format "%" (((t as float) / ticksPerFrame) / framerate) to:TimeInSeconds
+							strTime = TimeInSeconds as string
+							
+							Pos = stringStream ""
+							format "% % %" Obj.Pos.x Obj.Pos.y Obj.Pos.z to:Pos
+							strPos = Pos as string
+		
+							YawAngle =GetYaw Obj.transform as string
+							PitchAngle= GetPitch Obj.transform as string
+							RollAngle= GetRoll Obj.transform as string
+
+							ScaleStr = stringStream ""
+							format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
+							strScale = ScaleStr as string
+
+							--<cinematic_object_key_frame time="0.0333333" pos="1.63108 0.564489 10.0025" yaw="-1.19209e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+							
+							cinematic_object_key_frame = stringStream ""
+							format "\t\t<cinematic_object_key_frame time=\"%\" pos=\"%\" yaw=\"%\" pitch=\"%\" roll=\"%\" scale=\"%\"/>\n" strTime strPos YawAngle PitchAngle RollAngle strScale to:cinematic_object_key_frame
+							strKeyTag = cinematic_object_key_frame as string
+							
+							format strKeyTag to:ostream		
+							
+							
+							
+						)
+					)
+				)
+				cinematic_object_close_tag = "\t</cinematic_object>\n"
+				format cinematic_object_close_tag to:ostream
+			)
+		)
+		cinematic_close_tag = "</cinematic>"
+		format cinematic_close_tag to:ostream	
+		close ostream
+	)
+	catch
+	(
+		format "Error generating cinematics XML \n"
+	)
+	format "Cinematics XML created successfully: % \n" filenameXML
+)
