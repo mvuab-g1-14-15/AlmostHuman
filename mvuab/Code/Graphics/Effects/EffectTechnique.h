@@ -20,7 +20,7 @@ public:
     //DirectX Methods Interface
     D3DXHANDLE GetD3DTechnique() {return m_D3DTechnique;}
 
-private:
+private: // Members
     bool                        m_UseCameraPosition;
     bool                        m_UseInverseProjMatrix;
     bool                        m_UseInverseViewMatrix;
@@ -40,5 +40,8 @@ private:
     D3DXHANDLE                  m_D3DTechnique;
     std::string                 m_TechniqueName;
     std::string                 m_EffectName;
+private: // Methods
+    void SetupMatrices();
+    bool SetupLights();
 };
 #endif // EFFECT_TECHNIQUE_H

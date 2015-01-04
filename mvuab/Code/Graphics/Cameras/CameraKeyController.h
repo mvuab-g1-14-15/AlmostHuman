@@ -6,10 +6,11 @@
 #include "XML\XMLTreeNode.h"
 #include <vector>
 #include <string.h>
+#include "Utils\Name.h"
 
 class CCameraKey;
 
-class CCameraKeyController
+class CCameraKeyController : public CName
 {
 public:
     CCameraKeyController(CXMLTreeNode &atts);
@@ -25,7 +26,6 @@ public:
 
 private: // Members
     std::string                 m_FileName;
-    std::string                 m_Name;
     std::vector<CCameraKey *>   m_Keys;
     size_t                      m_CurrentKey;
     size_t                      m_NextKey;

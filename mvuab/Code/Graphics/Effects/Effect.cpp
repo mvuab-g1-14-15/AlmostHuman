@@ -27,6 +27,15 @@ CEffect::CEffect()
     m_BonesParameter(0),
     m_TimeParameter(0)
 {
+    memset(m_LightsEnabled,                 0, sizeof(BOOL) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsType,                    0, sizeof(int32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsAngle,                   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsFallOff,                 0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsStartRangeAttenuation,   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsEndRangeAttenuation,     0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsPosition,                0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsDirection,               0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsColor,                   0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
 }
 
 CEffect::CEffect( const std::string & EffectName)
@@ -54,6 +63,15 @@ CEffect::CEffect( const std::string & EffectName)
     m_TimeParameter (0)
 {
     SetName(EffectName);
+    memset(m_LightsEnabled,                 0, sizeof(BOOL) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsType,                    0, sizeof(int32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsAngle,                   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsFallOff,                 0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsStartRangeAttenuation,   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsEndRangeAttenuation,     0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsPosition,                0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsDirection,               0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsColor,                   0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
 }
 
 CEffect::~CEffect()
@@ -83,6 +101,16 @@ void CEffect::SetNullParameters()
     m_CameraPositionParameter = 0;
     m_BonesParameter = 0;
     m_TimeParameter = 0;
+
+    memset(m_LightsEnabled,                 0, sizeof(BOOL) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsType,                    0, sizeof(int32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsAngle,                   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsFallOff,                 0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsStartRangeAttenuation,   0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsEndRangeAttenuation,     0, sizeof(float32) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsPosition,                0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsDirection,               0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
+    memset(m_LightsColor,                   0, sizeof(Math::Vect3f) * MAX_LIGHTS_BY_SHADER);
 }
 
 void CEffect::GetParameterBySemantic(const std::string &SemanticName, D3DXHANDLE &a_Handle)
@@ -187,4 +215,57 @@ D3DXHANDLE CEffect::GetTechniqueByName(const std::string &TechniqueName)
 bool CEffect::SetLights(size_t NumOfLights)
 {
     return true;
+}
+
+bool CEffect::SetCameraPosition(Math::Vect3f CameraPosition)
+{
+    float32 l_Camera[3];
+    l_Camera[0] = CameraPosition.x;
+    l_Camera[1] = CameraPosition.y;
+    l_Camera[2] = CameraPosition.z;
+    return ( m_Effect->SetFloatArray(m_CameraPositionParameter, l_Camera, 3) == S_OK );
+}
+
+bool CEffect::SetWorldMatrix( Math::Mat44f Matrix, bool Inverse)
+{
+    if( Inverse )
+        return (m_Effect->SetMatrix(m_InverseWorldMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
+    else
+        return (m_Effect->SetMatrix(m_WorldMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetViewMatrix( Math::Mat44f Matrix, bool Inverse)
+{
+    if( Inverse )
+        return (m_Effect->SetMatrix(m_InverseViewMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
+    else
+        return (m_Effect->SetMatrix(m_ViewMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetProjectionMatrix( Math::Mat44f Matrix, bool Inverse)
+{
+    if( Inverse )
+        return (m_Effect->SetMatrix(m_InverseProjectionMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
+    else
+        return (m_Effect->SetMatrix(m_ProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetWorldViewMatrix( Math::Mat44f Matrix )
+{
+    return (m_Effect->SetMatrix(m_WorldViewMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetWorldViewProjectionMatrix( Math::Mat44f Matrix )
+{
+    return (m_Effect->SetMatrix(m_WorldViewProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetViewProjectionMatrix( Math::Mat44f Matrix )
+{
+    return (m_Effect->SetMatrix(m_ViewProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
+}
+
+bool CEffect::SetViewToLightMatrix( Math::Mat44f Matrix )
+{
+    return (m_Effect->SetMatrix(m_ViewToLightProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }

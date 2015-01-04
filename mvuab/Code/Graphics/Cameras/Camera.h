@@ -4,6 +4,7 @@
 #include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
+#include "Frustum.h"
 #include "Utils\Name.h"
 
 #include <d3dx9.h>
@@ -46,6 +47,10 @@ public:
     void    AddFov( float32 delta_fov ){ m_fov_radians += delta_fov; }
     void    AddViewD( float32 amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
 
+    // Frustum methods
+    GET_SET( CFrustum, Frustum );
+    void UpdateFrustum(D3DXMATRIX ViewProjectionMatrix);
+
 protected:
 
     Math::Vect3f       m_Pos;
@@ -57,6 +62,8 @@ protected:
     float32            m_aspect_ratio;
     float32            m_ZNear;
     float32            m_ZFar;
+
+    CFrustum           m_Frustum;
 
     D3DXMATRIXA16      m_view;
     D3DXMATRIXA16      m_proj;

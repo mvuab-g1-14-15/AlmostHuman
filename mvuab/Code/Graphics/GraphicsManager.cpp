@@ -2,12 +2,14 @@
 #include "Utils\Defines.h"
 #include "Math\MathTypes.h"
 #include "Logger\Logger.h"
+#include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
 #include "Math\Vector3.h"
 #include <malloc.h>
 #include <vector>
 #include "Exceptions\Exception.h"
 #include "InputManager.h"
+#include "Effects\EffectManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -122,34 +124,41 @@ void CGraphicsManager::EndRender()
     m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-void CGraphicsManager::SetupMatrices( CCamera* ap_Camera )
+void CGraphicsManager::SetupMatrices()
 {
-    m_VisibleObjects = 0;
-    m_pCurrentCamera = ap_Camera;
-    D3DXMATRIX m_matView;
+    Math::Vect3f l_CameraPosition;
+    D3DXMATRIX l_matView;
     D3DXMATRIX m_matProject;
 
-    if(!ap_Camera)
+    // Obtain the current camera from the camera manager
+    CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+
+    //Set default view and projection matrix
+    if(!l_CurrentCamera)
     {
-        //Set default view and projection matrix
+        // Harcoded position
+        l_CameraPosition = Math::Vect3f(0.0f,5.0f,-5.0f);
 
         //Setup Matrix view
         D3DXVECTOR3 l_Eye(0.0f,5.0f,-5.0f), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
-        D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
+        D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP);
 
         //Setup Matrix projection
         D3DXMatrixPerspectiveFovLH( &m_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f );
     }
     else
     {
-        m_matView = ap_Camera->GetMatrixView();
-        m_matProject = ap_Camera->GetMatrixProj();
+        l_CameraPosition = l_CurrentCamera->GetPos();
+        l_matView        = l_CurrentCamera->GetMatrixView();
+        m_matProject     = l_CurrentCamera->GetMatrixProj();
+        l_CurrentCamera->UpdateFrustum( l_matView * m_matProject );
     }
 
-    m_Frustum.Update( m_matView * m_matProject );
-
-    m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
+    m_pD3DDevice->SetTransform( D3DTS_VIEW, &l_matView );
     m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
+
+    // Set the new parameters to the effect manager
+    CEffectManager::GetSingletonPtr()->ActivateCamera( Math::Mat44f(l_matView), Math::Mat44f(l_matView), l_CameraPosition );
 }
 
 bool CGraphicsManager::Init(HWND hWnd, bool fullscreenMode, uint32 widthScreen, uint32 heightScreen)
@@ -433,10 +442,6 @@ void CGraphicsManager::DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math
 
 void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Aristas )
 {
-    if(!m_Frustum.SphereVisible( D3DXVECTOR3(0.0f,0.0f,0.0f), Radius) )
-        return;
-
-    ++m_VisibleObjects;
   DWORD sphere_color_aux = Color.GetUint32Argb();
 
   float32 Angle = Math::Utils::Deg2Rad(360.0f/Aristas);
@@ -531,11 +536,6 @@ void CGraphicsManager::SetTransform(Math::Mat44f& m)
                 , m.m02, m.m12, m.m22, m.m32
                 , m.m03, m.m13, m.m23, m.m33);
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &aux);
-}
-
-void CGraphicsManager::DrawCamera (CCamera* camera)
-{
-    camera->RenderCamera(m_pD3DDevice);
 }
 
 //La posicion y el (w,h) esta en pixeles
