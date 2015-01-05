@@ -26,8 +26,8 @@ void CCameraCinematical::Update( )
     m_ZFar = l_pCameraInfo->GetFarPlane();
     m_ZNear = l_pCameraInfo->GetNearPlane();
     m_fov_radians = l_pCameraInfo->GetFOV();
-    baseUtils::TraceVect3f("CameraPosition",m_Pos);
-    baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
+    //baseUtils::TraceVect3f("CameraPosition",m_Pos);
+    // baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
 }
 
 Math::Vect3f CCameraCinematical::GetLookAt(void) const

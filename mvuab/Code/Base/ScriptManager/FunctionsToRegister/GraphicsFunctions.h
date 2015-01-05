@@ -9,6 +9,8 @@
 
 #include "Object3D.h"
 
+#include "Cameras/CameraManager.h"
+
 extern "C"
 {
 	#include "lua.h"
@@ -120,6 +122,23 @@ void registerGraphics(lua_State *m_LS)
 			.def("SetupMatrices", &CGraphicsManager::SetupMatrices)
 			.def("Update", &CGraphicsManager::Update)
 	];
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    module(m_LS)
+        [
+            class_<CCameraManager>("CCameraManager")
+            .def(constructor<>())
+
+            .def("GetCamera", &CCameraManager::GetCamera)
+            //.def("SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
+            .def("GetCurrentCamera", &CCameraManager::GetCurrentCamera)
+            .def("NewCamera", &CCameraManager::NewCamera)
+            .def("DeleteCamera", &CCameraManager::DeleteCamera)
+        ];
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
 #endif
