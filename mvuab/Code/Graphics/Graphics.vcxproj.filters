@@ -35,6 +35,9 @@
     <Filter Include="Effects">
       <UniqueIdentifier>{afbd743f-6b3c-463b-9e6d-6cc691f5ce97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneRenderCommands">
+      <UniqueIdentifier>{68565af9-a786-4f59-b5ff-8f118aa776b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
@@ -137,6 +140,78 @@
     </ClCompile>
     <ClCompile Include="RenderableVertex\VertexTypes.cpp">
       <Filter>RenderableVertex</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DisableZTestSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DisableZWriteSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DrawQuadRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\EnableZTestSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\EnableZWriteSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\EndRenderSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\SceneRendererCommandManager.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\SetMatricesSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\StagedTexturedRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp">
+      <Filter>SceneRenderCommands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +324,78 @@
     </ClInclude>
     <ClInclude Include="Effects\Defines.h">
       <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DisableZTestSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DisableZWriteSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DrawQuadRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\EnableZTestSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\EnableZWriteSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\EndRenderSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\SceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\SceneRendererCommandManager.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\SetMatricesSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\StagedTexturedRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h">
+      <Filter>SceneRenderCommands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

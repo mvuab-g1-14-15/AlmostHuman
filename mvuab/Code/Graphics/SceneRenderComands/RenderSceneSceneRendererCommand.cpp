@@ -3,6 +3,7 @@
 
 CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {
+
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
