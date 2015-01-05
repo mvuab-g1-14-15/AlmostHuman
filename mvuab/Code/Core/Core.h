@@ -24,6 +24,7 @@ class CAnimatedModelsManager;
 class CScriptManager;
 class CCameraManager;
 class CEffectManager;
+class CLightManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -64,6 +65,7 @@ private:
     CScriptManager*                 m_pScriptManager;
     CCameraManager*                 m_pCameraManager;
     CEffectManager*                 m_pEffectManager;
+	CLightManager*					m_pLightManager;
 
     void LoadXml();
     void InitManagers();
@@ -101,6 +103,7 @@ public:
     GET_SET_PTR(CScriptManager, ScriptManager);
     GET_SET_PTR(CCameraManager, CameraManager);
     GET_SET_PTR(CEffectManager, EffectManager);
+	GET_SET_PTR(CLightManager, LightManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

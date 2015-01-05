@@ -11,8 +11,6 @@
 #include "Math\Matrix44.h"
 #include "Cameras\Frustum.h"
 
-class CCamera;
-
 class CGraphicsManager : public CSingleton<CGraphicsManager>
 {
 public:
@@ -25,7 +23,7 @@ public:
     void Update(float32 deltaTime);
     void Render();
     void Release();
-    void SetupMatrices( CCamera* ap_Camera );
+    void SetupMatrices();
     void BeginRender();
     void EndRender();
     void SetTransform (D3DXMATRIX& matrix);
@@ -37,22 +35,8 @@ public:
     void GetWidthAndHeight( uint32& w,uint32& h);
     void RenderCursor();
 
-    uint32 GetNumberOfVisibleObjects()
-    {
-        return m_VisibleObjects;
-    }
-
     // Getters and setters
-    const LPDIRECT3DDEVICE9 GetDevice() const
-    { 
-        return m_pD3DDevice;
-    }
-
-    // GetSet
-    GET_SET(uint32, uWidth);
-    GET_SET(uint32, uHeight);
-
-    CCamera* GetCurrentCamera(){ return m_pCurrentCamera;}
+    const LPDIRECT3DDEVICE9 GetDevice() const { return m_pD3DDevice; }
 
     // Basic Primitives
     void DrawAxis(float32 Size);
@@ -64,7 +48,6 @@ public:
     void DrawCircle(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
     void DrawSphere(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
     void DrawLine(const Math::Vect3f &PosA, const Math::Vect3f &PosB, Math::CColor Color=Math::colWHITE);
-    void DrawCamera (CCamera* camera);
     void DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, Math::CColor color = Math::colBLUE);
     void GetRay (const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay);
     void DrawRectangle2D ( const Math::Vect2i& pos, uint32 w, uint32 h, Math::CColor& backGroundColor, uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor );
@@ -74,24 +57,21 @@ public:
     void DrawQuad3D(    const Math::Vect3f& ul, const Math::Vect3f& ur, const Math::Vect3f& dl, const Math::Vect3f& dr, Math::CColor color);
 
 
-private:
-    HWND                m_WindowId;                        // 3D render window handle
-    LPDIRECT3D9            m_pD3D;                            // direct3d interface
-    LPDIRECT3DDEVICE9   m_pD3DDevice;                    // direct3d device
-    uint32                m_uWidth;                        // width of the client windows
-    uint32                m_uHeight;                        // height of the client windows
-    Math::CColor                m_BackbufferColor_debug;        // Clear the backbuffer with this color in debug mode 
-    Math::CColor                m_BackbufferColor_release;        // Clear the backbuffer with this color in release mode
-    LPDIRECT3DSURFACE9    m_pBackBuffer;
-    CFrustum            m_Frustum;
-    bool                m_bPaintSolid;
-    bool                m_bIsOk;                        // Initialization boolean control
+private: // Members
+    HWND                    m_WindowId;                      // 3D render window handle
+    LPDIRECT3D9             m_pD3D;                          // direct3d interface
+    LPDIRECT3DDEVICE9       m_pD3DDevice;                    // direct3d device
+    uint32                  m_uWidth;                        // width of the client windows
+    uint32                  m_uHeight;                       // height of the client windows
+    Math::CColor            m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode 
+    Math::CColor            m_BackbufferColor_release;       // Clear the backbuffer with this color in release mode
+    LPDIRECT3DSURFACE9      m_pBackBuffer;
+    bool                    m_bPaintSolid;
+    bool                    m_bIsOk;                         // Initialization boolean control
+
+private: // Methods
     void GetWindowRect( HWND hwnd );
-    uint32                m_VisibleObjects;
-
-    CCamera*            m_pCurrentCamera;
-
-    void CGraphicsManager::CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i & finalPos);
+    void CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i & finalPos);
 };
 
 #endif // GRAPHICS_MANAGER_H

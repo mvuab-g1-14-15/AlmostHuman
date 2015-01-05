@@ -1,6 +1,6 @@
 <static_meshes>
+	<static_mesh name="Box004" filename="\meshes\Box004.mesh"/>
+	<static_mesh name="Box005" filename="\meshes\Box005.mesh"/>
 	<static_mesh name="Plane001" filename="\meshes\Plane001.mesh"/>
-	<static_mesh name="Cylinder001" filename="\meshes\Cylinder001.mesh"/>
-	<static_mesh name="Cone001" filename="\meshes\Cone001.mesh"/>
-	<static_mesh name="Box003" filename="\meshes\Box003.mesh"/>
+	<static_mesh name="Box006" filename="\meshes\Box006.mesh"/>
 </static_meshes>

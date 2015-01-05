@@ -15,6 +15,7 @@
     <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
+    <ClCompile Include="Cameras\CameraCinematical.cpp" />
     <ClCompile Include="Cameras\CameraFPShooter.cpp" />
     <ClCompile Include="Cameras\CameraInfo.cpp" />
     <ClCompile Include="Cameras\CameraKey.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
     <ClInclude Include="Cameras\Camera.h" />
+    <ClInclude Include="Cameras\CameraCinematical.h" />
     <ClInclude Include="Cameras\CameraFPShooter.h" />
     <ClInclude Include="Cameras\CameraInfo.h" />
     <ClInclude Include="Cameras\CameraKey.h" />

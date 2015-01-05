@@ -38,7 +38,7 @@ void CEngine::Render()
     //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
     pGraphicsManager->BeginRender();
-    pGraphicsManager->SetupMatrices( CCameraManager::GetSingletonPtr()->GetCurrentCamera() );
+    pGraphicsManager->SetupMatrices();
 
     m_pCore->Render();
     m_pProcess->Render();

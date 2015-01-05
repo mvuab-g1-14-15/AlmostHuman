@@ -9,6 +9,8 @@
 
 #include "Object3D.h"
 
+#include "Cameras/CameraManager.h"
+
 extern "C"
 {
 	#include "lua.h"
@@ -110,21 +112,33 @@ void registerGraphics(lua_State *m_LS)
 			.def("EndRender", &CGraphicsManager::EndRender)
 			//.def("GetCurrentCamera", &CGraphicsManager::GetCurrentCamera)
 			.def("GetDevice", &CGraphicsManager::GetDevice)
-			.def("GetNumberOfVisibleObjects", &CGraphicsManager::GetNumberOfVisibleObjects)
 			.def("GetRay", &CGraphicsManager::GetRay)
-			.def("GetuHeight", &CGraphicsManager::GetuHeight)
-			.def("GetuWidth", &CGraphicsManager::GetuWidth)
 			.def("GetWidthAndHeight", &CGraphicsManager::GetWidthAndHeight)
 			.def("Init", &CGraphicsManager::Init)
 			.def("Release", &CGraphicsManager::Release)
 			.def("Render", &CGraphicsManager::Render)
 			.def("RenderCursor", &CGraphicsManager::RenderCursor)
 			//.def("SetTransform", &CGraphicsManager::SetTransform)
-			.def("SetuHeight", &CGraphicsManager::SetuHeight)
 			.def("SetupMatrices", &CGraphicsManager::SetupMatrices)
-			.def("SetuWidth", &CGraphicsManager::SetuWidth)
 			.def("Update", &CGraphicsManager::Update)
 	];
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    module(m_LS)
+        [
+            class_<CCameraManager>("CCameraManager")
+            .def(constructor<>())
+
+            .def("GetCamera", &CCameraManager::GetCamera)
+            //.def("SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
+            .def("GetCurrentCamera", &CCameraManager::GetCurrentCamera)
+            .def("NewCamera", &CCameraManager::NewCamera)
+            .def("DeleteCamera", &CCameraManager::DeleteCamera)
+        ];
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
 #endif

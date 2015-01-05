@@ -52,6 +52,7 @@ const Math::Mat44f & CEffectManager::GetLightViewMatrix() const
 {
     return m_LightViewMatrix;
 }
+
 const Math::Mat44f & CEffectManager::GetShadowProjectionMatrix()
 {
     return m_ShadowProjectionMatrix;

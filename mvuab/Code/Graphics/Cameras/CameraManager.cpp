@@ -1,6 +1,8 @@
 #include "CameraManager.h"
 #include "CameraFPShooter.h"
+#include "CameraCinematical.h"
 #include "GraphicsManager.h"
+#include "CameraKeyController.h"
 #include "Timer\Timer.h"
 
 CCameraManager::CCameraManager() : m_RenderCameras( false )
@@ -8,9 +10,18 @@ CCameraManager::CCameraManager() : m_RenderCameras( false )
     //---Por defecto insertamos la camara del player----
     CCamera * l_pFPSCamera = new CCameraFPShooter();
     std::string name_Cameraplayer = "player";
-    AddResource("player", l_pFPSCamera);
+    AddResource(name_Cameraplayer, l_pFPSCamera);
 
-    SetCurrentCamera("player");
+    CCameraKeyController*  l_pkeyController = new CCameraKeyController();
+    if(l_pkeyController->LoadXML("./Data/camera.xml"))
+    {
+        CCamera * l_pCinematicalCamera = new CCameraCinematical(l_pkeyController);
+        std::string name_CameraCinematical = "cinematical";
+        AddResource(name_CameraCinematical, l_pCinematicalCamera);
+        SetCurrentCamera(name_CameraCinematical);
+    }
+    else
+        SetCurrentCamera(name_Cameraplayer);
 }
 
 CCameraManager::~CCameraManager()

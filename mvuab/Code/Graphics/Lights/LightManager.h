@@ -14,7 +14,7 @@ public:
 	CLightManager();
 	~CLightManager();
 	void Load(const std::string &FileName);
-	void Render(CGraphicsManager *gm);
+	void Render();
 };
 
 #endif // LIGHT_MANAGER_H

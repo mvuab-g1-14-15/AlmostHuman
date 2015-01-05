@@ -9,8 +9,9 @@
 #include <sstream>
 #include <stdio.h>
 #include <vector>
-#include "Windows.h"
+#include <Windows.h>
 #include "Utils\Types.h"
+#include "Math\Vector3.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +29,24 @@ namespace baseUtils
         vsprintf_s( buffer, len, format, args );
         output = buffer;
         delete buffer;
+    }
+
+    inline void  Trace( const char* format, ... )
+    {
+        va_list args;
+        char* buffer;
+        va_start(args,format);
+        int len = _vscprintf(format, args) + 1;
+        buffer = (char*)malloc(len*sizeof(char));
+        vsprintf_s( buffer, len, format, args );
+        OutputDebugStringA(buffer);
+        delete buffer;
+    }
+
+    inline void TraceVect3f( const std::string & output, Math::Vect3f vector )
+    {
+        std::string  outputStr = output + "=>%f-%f-%f\n";
+        Trace(outputStr.c_str(), vector.x, vector.y,vector.z);
     }
 
     inline void GetDate (uint32& day, uint32& month, uint32& year, uint32& hour, uint32& minute, uint32& second)

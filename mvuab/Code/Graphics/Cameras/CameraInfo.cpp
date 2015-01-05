@@ -25,7 +25,7 @@ CCameraInfo::CCameraInfo(const Math::Vect3f &Eye, const Math::Vect3f &LookAt, co
 CCameraInfo::CCameraInfo(CXMLTreeNode &attribs)
     : m_NearPlane(attribs.GetFloatProperty("near_plane", 0.0f)), 
     m_FarPlane(attribs.GetFloatProperty("far_plane", 1000.0f)),
-    m_FOV(attribs.GetFloatProperty("fov", Math::half_pi32)),
+    m_FOV(Math::Utils::Deg2Rad(attribs.GetFloatProperty("fov", Math::half_pi32))),
     m_Eye(attribs.GetVect3fProperty("pos", Math::Vect3f(1.0f, 0.0f, 0.0f))),
     m_LookAt(attribs.GetVect3fProperty("look_at", Math::Vect3f(0.0f, 0.0f, 0.0f))),
     m_Up(Math::Vect3f(0.0f, 1.0f, 0.0f))

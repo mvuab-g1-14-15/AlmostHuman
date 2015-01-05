@@ -10,7 +10,7 @@ protected:
 	float m_FallOff;
 public:
 	CSpotLight();
-	void SetAngle(float Angle);
+	void SetAngle(const float Angle);
 	float GetAngle() const;
 	void SetFallOff(const float FallOff);
 	float GetFallOff() const;

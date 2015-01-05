@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "CameraInfo.h"
 #include "GraphicsManager.h"
+#include "Utils/BaseUtils.h"
 
 CCamera::CCamera()
     : m_Pos(),
@@ -18,7 +19,6 @@ CCamera::~CCamera()
 {
 }
 
-
 D3DXMATRIX CCamera::GetMatrixView(void) 
 {
     Math::Vect3f &l_LookAt = GetLookAt();
@@ -26,21 +26,14 @@ D3DXMATRIX CCamera::GetMatrixView(void)
     D3DXVECTOR3 d3dxPos( m_Pos.x, m_Pos.y, m_Pos.z );
     D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
     D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
-    D3DXMatrixLookAtLH( &m_view,
-                        &d3dxPos,
-                        &d3dxTarget,
-                        &d3dxUp);
-  return m_view;
+    D3DXMatrixLookAtLH( &m_view, &d3dxPos, &d3dxTarget, &d3dxUp);
+    return m_view;
 }
 
 D3DXMATRIX CCamera::GetMatrixProj(void)
 {
-   D3DXMatrixPerspectiveFovLH( &m_proj, 
-                               m_fov_radians,
-                               m_aspect_ratio,
-                               m_ZNear,
-                               m_ZFar );
-  return m_proj;
+    D3DXMatrixPerspectiveFovLH( &m_proj, m_fov_radians, m_aspect_ratio, m_ZNear, m_ZFar );
+    return m_proj;
 }
 
 void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device) 
@@ -172,13 +165,7 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
 #endif
 }
 
-void CCamera::SetInfo(CCameraInfo* CameraInfo)
+void CCamera::UpdateFrustum(D3DXMATRIX ViewProjectionMatrix)
 {
-    m_Pos = CameraInfo->GetEye();
-    Math::Vect3f l_LookAt = CameraInfo->GetLookAt();
-    Math::Vect3f d = l_LookAt-m_Pos;
-    SetYaw(Math::Utils::ATan2(d.z, d.x));
-    SetPitch(Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x)));
-    m_ZFar = CameraInfo->GetFarPlane();
-    m_ZNear = CameraInfo->GetNearPlane();
+    m_Frustum.Update(ViewProjectionMatrix);
 }

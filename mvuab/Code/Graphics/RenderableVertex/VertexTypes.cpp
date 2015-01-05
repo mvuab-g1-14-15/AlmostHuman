@@ -1,26 +1,26 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "GraphicsManager.h"
 
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T2_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T1_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T2_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T1_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T2_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T1_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T2_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T1_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TT2_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TT1_DIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TDIFF_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TT2_VERTEX::s_VertexDeclaration=NULL;
-LPDIRECT3DVERTEXDECLARATION9 TT1_VERTEX::s_VertexDeclaration=NULL;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T2_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T1_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T2_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T1_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T2_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T1_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T2_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMAL_T1_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TT2_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TT1_DIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TDIFF_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TT2_VERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TT1_VERTEX::s_VertexDeclaration=0;
 
-LPDIRECT3DVERTEXDECLARATION9 CAL3D_HW_VERTEX::s_VertexDeclaration = NULL;
+LPDIRECT3DVERTEXDECLARATION9 CAL3D_HW_VERTEX::s_VertexDeclaration = 0;
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -40,7 +40,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexDeclarati
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -59,7 +59,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexDeclarati
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T2_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -78,7 +78,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T2_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T1_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -96,7 +96,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_TAN_BI_T1_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T2_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -114,7 +114,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T2_DIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T1_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -131,7 +131,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T1_DIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -147,7 +147,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_DIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T2_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -164,7 +164,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T2_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T1_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -180,7 +180,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TNORMAL_T1_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TT2_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -197,7 +197,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TT2_DIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TT1_DIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -213,7 +213,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TT1_DIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TDIFF_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -228,7 +228,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TDIFF_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TT2_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -244,7 +244,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TT2_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & TT1_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {
@@ -259,7 +259,7 @@ LPDIRECT3DVERTEXDECLARATION9 & TT1_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9 & CAL3D_HW_VERTEX::GetVertexDeclaration()
 {
-    if(s_VertexDeclaration==NULL)
+    if(s_VertexDeclaration==0)
     {
         D3DVERTEXELEMENT9 l_VertexDeclaration[] =
         {

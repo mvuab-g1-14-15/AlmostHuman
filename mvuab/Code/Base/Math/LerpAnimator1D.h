@@ -20,7 +20,7 @@ public:
     
     void        SetValues            (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type); 
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
-    bool        Update                (float32 deltaTime, float32 &value);
+    bool        Update                (float32 ElapsedTime, float32 &value);
     void        Pause                    (bool flag) {m_bPause = flag;}
     
 private:

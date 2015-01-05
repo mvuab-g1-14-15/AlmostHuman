@@ -23,8 +23,7 @@ public:
     const Math::Vect3f & GetCameraEye();
     const Math::Mat44f & GetLightViewMatrix() const;
     const Math::Mat44f & GetShadowProjectionMatrix();
-    void ActivateCamera(const Math::Mat44f &ViewMatrix, const Math::Mat44f &ProjectionMatrix,
-    const Math::Vect3f &CameraEye);
+    void ActivateCamera( const Math::Mat44f &ViewMatrix, const Math::Mat44f &ProjectionMatrix, const Math::Vect3f &CameraEye);
     void SetWorldMatrix(const Math::Mat44f &Matrix);
     void SetProjectionMatrix(const Math::Mat44f &Matrix);
     void SetViewMatrix(const Math::Mat44f &Matrix);

@@ -1,8 +1,9 @@
 <RenderableObjects>
-	<MeshInstance name="Plane001" core="Plane001" pos="7.73776 0.0 -0.623278" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<MeshInstance name="Cylinder001" core="Cylinder001" pos="0.85808 0.0 3.77919" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<MeshInstance name="Cone001" core="Cone001" pos="0.847576 4.38499 3.79157" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<MeshInstance name="Box001" core="Box003" pos="11.293 0.0 -0.497752" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<MeshInstance name="Box002" core="Box003" pos="11.293 0.0 -6.10792" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<MeshInstance name="Box003" core="Box003" pos="7.45615 0.0 -0.497752" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box001" core="Box004" pos="-10.2713 0.0 10.4602" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box002" core="Box004" pos="9.31425 0.0 10.4602" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box003" core="Box004" pos="-10.1392 0.0 -0.635879" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box004" core="Box004" pos="0.0845766 0.0 -0.449444" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box005" core="Box005" pos="-23.3071 0.0 5.13691" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Plane001" core="Plane001" pos="2.30585 0.0 4.66551" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+	<MeshInstance name="Box006" core="Box006" pos="-6.9179 0.0 22.1306" yaw="-90.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
 </RenderableObjects>

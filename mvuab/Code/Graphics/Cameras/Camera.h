@@ -4,11 +4,10 @@
 #include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
+#include "Frustum.h"
 #include "Utils\Name.h"
 
 #include <d3dx9.h>
-
-class CCameraInfo;
 
 class CCamera : public CName
 {
@@ -36,8 +35,6 @@ public:
     GET_SET( float32, ZFar )
     GET_SET( float32, aspect_ratio )
     GET_SET_REF( Math::Vect3f, Pos )
-
-    void SetInfo( CCameraInfo* CameraInfo );
     
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
     void    AddYaw( float32 radian ){ m_Yaw += D3DXToRadian(radian); }
@@ -45,6 +42,10 @@ public:
     void    AddZf( float32 amount ){ m_ZNear += amount; }
     void    AddFov( float32 delta_fov ){ m_fov_radians += delta_fov; }
     void    AddViewD( float32 amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
+
+    // Frustum methods
+    GET_SET( CFrustum, Frustum );
+    void UpdateFrustum(D3DXMATRIX ViewProjectionMatrix);
 
 protected:
 
@@ -57,6 +58,8 @@ protected:
     float32            m_aspect_ratio;
     float32            m_ZNear;
     float32            m_ZFar;
+
+    CFrustum           m_Frustum;
 
     D3DXMATRIXA16      m_view;
     D3DXMATRIXA16      m_proj;

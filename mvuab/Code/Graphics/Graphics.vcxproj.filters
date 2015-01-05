@@ -212,6 +212,8 @@
     </ClCompile>
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp">
       <Filter>SceneRenderCommands</Filter>
+    <ClCompile Include="Cameras\CameraCinematical.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -396,6 +398,8 @@
     </ClInclude>
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h">
       <Filter>SceneRenderCommands</Filter>
+    <ClInclude Include="Cameras\CameraCinematical.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

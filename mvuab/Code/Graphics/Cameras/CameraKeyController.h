@@ -6,15 +6,18 @@
 #include "XML\XMLTreeNode.h"
 #include <vector>
 #include <string.h>
+#include "Utils\Name.h"
 
 class CCameraKey;
+class CCameraInfo;
 
-class CCameraKeyController
+class CCameraKeyController : public CName
 {
 public:
+    CCameraKeyController();
     CCameraKeyController(CXMLTreeNode &atts);
     virtual ~CCameraKeyController();
-    void Update(float32 deltaTime);
+    void Update();
     void SetCurrentTime(float32 CurrentTime);
     void ResetTime();
     float32 GetTotalTime();
@@ -22,10 +25,11 @@ public:
     void SetCycle(bool Cycle);
     bool IsReverse() const;
     void SetReverse(bool Reverse);
+    bool LoadXML(const std::string &FileName);
+    CCameraInfo* GetCurrentInfo(){return  m_pCameraInfo; }
 
 private: // Members
     std::string                 m_FileName;
-    std::string                 m_Name;
     std::vector<CCameraKey *>   m_Keys;
     size_t                      m_CurrentKey;
     size_t                      m_NextKey;
@@ -36,12 +40,14 @@ private: // Members
     bool                        m_Cycle;
     bool                        m_Reverse;
     bool                        m_Finish;
+    CCameraInfo*          m_pCameraInfo;
 
 private: // Methods
-    void LoadXML(const std::string &FileName);
-    void GetCurrentKey();
     void GetCurrentKeyForward();
     void GetCurrentKeyBackward();
+    void PlayFoward();
+    void PlayBackward();
+    void InterpolateKeys( float32 Percentage, CCameraInfo A, CCameraInfo B);
 };
 
 #endif // INC_CAMERA_KEY_CONTROLLER_H_

@@ -18,6 +18,15 @@ public:
     CEffect( const std::string & EffectName );
     ~CEffect();
     bool SetLights(size_t NumOfLights);
+    bool SetCameraPosition( Math::Vect3f CameraPosition);
+    bool SetWorldMatrix( Math::Mat44f Matrix, bool Inverse = false );
+    bool SetViewMatrix( Math::Mat44f Matrix, bool Inverse = false );
+    bool SetProjectionMatrix( Math::Mat44f Matrix, bool Inverse = false );
+    bool SetWorldViewMatrix( Math::Mat44f Matrix );
+    bool SetWorldViewProjectionMatrix( Math::Mat44f Matrix );
+    bool SetViewProjectionMatrix( Math::Mat44f Matrix );
+    bool SetViewToLightMatrix( Math::Mat44f Matrix );
+    
     bool Load(const std::string &FileName);
     bool Reload();
     //DirectX Methods Interface
@@ -81,6 +90,7 @@ private: // Members
     D3DXHANDLE m_CameraPositionParameter;
     D3DXHANDLE m_BonesParameter;
     D3DXHANDLE m_TimeParameter;
+
 private: // Methods
     void  SetNullParameters();
     void GetParameterBySemantic(const char* SemanticName, D3DXHANDLE &a_Handle);
