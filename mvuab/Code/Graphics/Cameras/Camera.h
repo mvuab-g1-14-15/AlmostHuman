@@ -9,8 +9,6 @@
 
 #include <d3dx9.h>
 
-class CCameraInfo;
-
 class CCamera : public CName
 {
 
@@ -37,8 +35,6 @@ public:
     GET_SET( float32, ZFar )
     GET_SET( float32, aspect_ratio )
     GET_SET_REF( Math::Vect3f, Pos )
-
-    void SetInfo( CCameraInfo* CameraInfo );
     
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
     void    AddYaw( float32 radian ){ m_Yaw += D3DXToRadian(radian); }

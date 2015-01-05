@@ -52,8 +52,8 @@ void CCinematicObject::Update(float ElapsedTime)
             if( l_PrevKeyFrame < m_CurrentKeyFrame )
             {
                 KeyFrameChanged = true;
-                baseUtils::Trace("KeyFrameChanged - Next=>%d\n", m_CurrentKeyFrame);
-                baseUtils::Trace("KeyFrameChanged - Prev=>%d\n", l_PrevKeyFrame);
+                //baseUtils::Trace("KeyFrameChanged - Next=>%d\n", m_CurrentKeyFrame);
+                //baseUtils::Trace("KeyFrameChanged - Prev=>%d\n", l_PrevKeyFrame);
             }
             
 			break;
@@ -101,11 +101,11 @@ void CCinematicObject::Update(float ElapsedTime)
 
     if(KeyFrameChanged)
     {
-        baseUtils::Trace("Current Time=>%f\n", m_CurrentTime);
-        baseUtils::Trace("YawPrev=>%f\n",m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetYaw());
-        baseUtils::Trace("YawNext=>%f\n",m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetYaw());
-        baseUtils::Trace("KeyFrameChanged - Next=>%d\n", l_NextKeyFrame);
-        baseUtils::Trace("KeyFrameChanged - Prev=>%d\n", m_CurrentKeyFrame);
+        //baseUtils::Trace("Current Time=>%f\n", m_CurrentTime);
+//         baseUtils::Trace("YawPrev=>%f\n",m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetYaw());
+//         baseUtils::Trace("YawNext=>%f\n",m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetYaw());
+//         baseUtils::Trace("KeyFrameChanged - Next=>%d\n", l_NextKeyFrame);
+//         baseUtils::Trace("KeyFrameChanged - Prev=>%d\n", m_CurrentKeyFrame);
     }
 
 	lerp_animator_1D.SetValues(m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetPitch(), m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetPitch(),1.0f,Math::FUNC_CONSTANT);

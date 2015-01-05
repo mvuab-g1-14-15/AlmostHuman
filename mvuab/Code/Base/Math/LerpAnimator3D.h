@@ -20,7 +20,7 @@ public:
     
     void        SetValues            (Math::Vect3f initValue, Math::Vect3f endValue, float32 totalTime, ETypeFunction type); 
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
-    bool        Update                (float32 deltaTime, Math::Vect3f &value);
+    bool        Update                (float32 ElapsedTime, Math::Vect3f &value);
     void        Pause                    (bool flag) {m_bPause = flag;}
     
 private:

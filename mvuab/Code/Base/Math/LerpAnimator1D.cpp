@@ -15,9 +15,9 @@ void Math::CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, floa
 }
 
 
-bool Math::CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
+bool Math::CLerpAnimator1D::Update (float32 ElapsedTime, float32 &value)
 {
-    m_fElapsedTime += deltaTime;
+    m_fElapsedTime += ElapsedTime;
     bool finish = false;
     if (m_fElapsedTime >= m_fTotalTime)
     {

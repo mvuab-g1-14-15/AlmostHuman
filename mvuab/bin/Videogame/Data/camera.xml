@@ -1,4 +1,4 @@
-<camera_key_controller name="Camera001" cycle="1" reverse="0" total_time="3000"/>
+<camera_key_controller name="Camera001" cycle="1" reverse="1" total_time="3.33333">
 	<key time="0.0" pos="16.1941 -2.02528 3.57777" look_at="7.68359 3.37563 3.57777" fov="45.0" near_plane="1.0" far_plane="1000.0"/>
 	<key time="0.166667" pos="14.729 -0.576432 3.57777" look_at="6.22812 3.78221 3.57777" fov="45.0" near_plane="1.0" far_plane="1000.0"/>
 	<key time="0.333333" pos="11.16 2.61103 3.57777" look_at="2.68144 4.67667 3.57777" fov="45.0" near_plane="1.0" far_plane="1000.0"/>

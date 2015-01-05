@@ -3,6 +3,27 @@
 #include "Logger\Logger.h"
 #include "CameraKey.h"
 #include "CameraInfo.h"
+#include "Timer/Timer.h"
+#include "Utils/BaseUtils.h"
+#include "Math\LerpAnimator3D.h"
+#include "Math\Vector3.h"
+#include "Math\LerpAnimator1D.h"
+
+CCameraKeyController::CCameraKeyController()
+    :
+    m_CurrentKey(0),
+    m_NextKey(1),
+    m_CurrentTime(0),
+    m_TotalTime(0),
+    m_Cycle(false),
+    m_Reverse(false),
+    m_Finish(false),
+    m_PlayingBackward(false),
+    m_PlayingForward(true),
+    m_FileName(""),
+    m_pCameraInfo(new CCameraInfo())
+{
+}
 
 CCameraKeyController::CCameraKeyController(CXMLTreeNode &atts)
     :
@@ -15,11 +36,12 @@ CCameraKeyController::CCameraKeyController(CXMLTreeNode &atts)
     m_Finish(false),
     m_PlayingBackward(false),
     m_PlayingForward(true),
-    m_FileName("")
+    m_FileName(""),
+    m_pCameraInfo(new CCameraInfo())
 {
 }
 
-void CCameraKeyController::LoadXML(const std::string &FileName)
+bool CCameraKeyController::LoadXML(const std::string &FileName)
 {
     // Obtain the filename
     m_FileName = FileName;
@@ -29,7 +51,7 @@ void CCameraKeyController::LoadXML(const std::string &FileName)
     if (!newFile.LoadFile(m_FileName.c_str()))
     {
         CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CCameraKeyController::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-        return;
+        return false;
     }
 
     // Parse the file and search for the key's
@@ -37,12 +59,12 @@ void CCameraKeyController::LoadXML(const std::string &FileName)
     if(!l_Node.Exists())
     {
         CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CCameraKeyController::Load Tag \"%s\" no existe", "camera_key_controller");
-        return;
+        return false;
     }
 
     SetName( l_Node.GetPszProperty("name","no_name") );
-    m_Cycle = l_Node.GetBoolProperty("cycle", false);
-    m_Reverse = l_Node.GetBoolProperty("reverse", false);
+    m_Cycle = (l_Node.GetIntProperty("cycle", 0) != 0);
+    m_Reverse =(l_Node.GetIntProperty("reverse",0) != 0);
     m_TotalTime = l_Node.GetFloatProperty("total_time", 0.0f);
 
     for(int i = 0; i < l_Node.GetNumChildren(); i++)
@@ -60,11 +82,8 @@ void CCameraKeyController::LoadXML(const std::string &FileName)
     //Check that there are more than one key, in order to set the next key to 0
     if(m_Keys.size() == 1 )
         m_NextKey = 0;
-}
 
-void CCameraKeyController::GetCurrentKey()
-{
-    
+    return true;
 }
 
 void CCameraKeyController::GetCurrentKeyForward()
@@ -74,12 +93,10 @@ void CCameraKeyController::GetCurrentKeyForward()
         if(m_Keys[i]->GetTime() > m_CurrentTime )
         {
             m_CurrentKey = i - 1;
+            m_NextKey = i;
             return;
         }
     }
-
-    // Something is wrong, therfore use always the first key
-    m_CurrentKey = 0;
 }
 
 void CCameraKeyController::GetCurrentKeyBackward()
@@ -89,6 +106,7 @@ void CCameraKeyController::GetCurrentKeyBackward()
         if(m_Keys[i]->GetTime() < m_CurrentTime )
         {
             m_CurrentKey = i + 1;
+            m_NextKey = i;
             return;
         }
     }
@@ -105,9 +123,11 @@ CCameraKeyController::~CCameraKeyController()
     }
 
     m_Keys.clear();
+
+    CHECKED_DELETE(m_pCameraInfo)
 }
 
-void CCameraKeyController::Update(float32 deltaTime)
+void CCameraKeyController::Update()
 {
     // Check if the animation of the camera has finished
     if( m_Finish )
@@ -115,46 +135,11 @@ void CCameraKeyController::Update(float32 deltaTime)
 
     if( m_PlayingBackward )
     {
-        // Decrement the time
-        m_CurrentTime -= deltaTime;
-        GetCurrentKeyBackward();
-
-        if( m_CurrentTime <= 0.0f )
-        {
-            // If the animation was going Backwards, means that it is a cycle
-            m_PlayingForward = true;
-            m_PlayingBackward = false;
-            m_CurrentTime = 0.0f;
-            m_CurrentKey = 0;
-        }
+        PlayBackward();
     }
     else if( m_PlayingForward )
     {
-        // Increment the time
-        m_CurrentTime += deltaTime;
-        GetCurrentKeyForward();
-
-        if( m_CurrentTime >= m_TotalTime )
-        {
-            if( m_Cycle )
-            {
-                if(m_Reverse)
-                {
-                    m_PlayingForward = false;
-                    m_PlayingBackward = true;
-                    m_CurrentTime = m_TotalTime;
-                    m_CurrentKey = m_Keys.size() - 1;
-                }
-                else
-                {
-                    m_CurrentTime = 0.0f;
-                }
-            }
-            else
-            {
-                m_Finish = true;
-            }
-        }
+        PlayFoward();
     }
 }
 
@@ -191,4 +176,114 @@ bool CCameraKeyController::IsReverse() const
 void CCameraKeyController::SetReverse(bool Reverse)
 {
     m_Reverse = Reverse;
+}
+
+void CCameraKeyController::PlayBackward()
+{
+    // Decrement the time
+    m_CurrentTime -= deltaTime;
+
+    // Obtain the current key
+    GetCurrentKeyBackward();
+
+    // Obtain the current camera info and the next one
+    CCameraInfo l_CurrentCameraInfo = m_Keys[m_CurrentKey]->GetCameraInfo();
+    CCameraInfo l_NextCameraInfo = m_Keys[m_NextKey]->GetCameraInfo();
+
+    // Calculate the % of the animation, in order to interpolate key by key
+    float32 l_CurrentP = (m_CurrentTime-m_Keys[m_CurrentKey]->GetTime())/(m_Keys[m_NextKey]->GetTime()-m_Keys[m_CurrentKey]->GetTime());
+
+    InterpolateKeys( l_CurrentP , l_CurrentCameraInfo, l_NextCameraInfo );
+
+    if( m_CurrentTime <= 0.0f )
+    {
+        // If the animation was going Backwards, means that it is a cycle
+        m_PlayingForward = true;
+        m_PlayingBackward = false;
+        m_CurrentTime = 0.0f;
+        m_CurrentKey = 0;
+    }
+}
+
+void CCameraKeyController::PlayFoward()
+{
+    // Increment the time
+    m_CurrentTime += deltaTime;
+
+    // Obtain the current key
+    GetCurrentKeyForward();
+
+    // Obtain the current camera info and the next one
+    CCameraInfo l_CurrentCameraInfo = m_Keys[m_CurrentKey]->GetCameraInfo();
+    CCameraInfo l_NextCameraInfo = m_Keys[m_NextKey]->GetCameraInfo();
+
+    // Calculate the % of the animation, in order to interpolate key by key
+    float32 l_CurrentP = (m_CurrentTime-m_Keys[m_CurrentKey]->GetTime())/(m_Keys[m_NextKey]->GetTime()-m_Keys[m_CurrentKey]->GetTime());
+
+   InterpolateKeys( l_CurrentP , l_CurrentCameraInfo, l_NextCameraInfo );
+
+    // Check if the animation has finished
+    if( m_CurrentTime >= m_TotalTime )
+    {
+        if( m_Cycle )
+        {
+            if(m_Reverse)
+            {
+                m_PlayingForward = false;
+                m_PlayingBackward = true;
+                m_CurrentTime = m_TotalTime;
+                m_CurrentKey = m_Keys.size() - 1;
+            }
+            else
+            {
+                m_CurrentTime = 0.0f;
+            }
+        }
+        else
+        {
+            m_Finish = true;
+        }
+    }
+}
+
+void CCameraKeyController::InterpolateKeys(float32 Percentage, CCameraInfo A, CCameraInfo B)
+{
+    Math::CLerpAnimator3D l_Interpolator3D;
+    Math::CLerpAnimator1D l_Interpolator1D;
+
+    // Obtain the current camera position
+    l_Interpolator3D.SetValues(A.GetEye(),B.GetEye(),1.0f,Math::FUNC_CONSTANT);
+    Math::Vect3f l_Eye;
+    l_Interpolator3D.Update(Percentage, l_Eye);
+    m_pCameraInfo->SetEye(l_Eye);
+
+    // Obtain the current camera look at
+    l_Interpolator3D.SetValues(A.GetLookAt(),B.GetLookAt(),1.0f,Math::FUNC_CONSTANT);
+    Math::Vect3f l_LookAt;
+    l_Interpolator3D.Update(Percentage, l_LookAt);
+    m_pCameraInfo->SetLookAt(l_LookAt);
+
+    // Obtain the current camera up vector
+    l_Interpolator3D.SetValues(A.GetUp(),B.GetUp(),1.0f,Math::FUNC_CONSTANT);
+    Math::Vect3f l_Up;
+    l_Interpolator3D.Update(Percentage, l_Up);
+    m_pCameraInfo->SetUp(l_Up);
+
+    // Obtain the current camera far plane
+    l_Interpolator1D.SetValues(A.GetFarPlane(),B.GetFarPlane(),1.0f,Math::FUNC_CONSTANT);
+    float32 l_FarPlane;
+    l_Interpolator1D.Update(Percentage, l_FarPlane);
+    m_pCameraInfo->SetFarPlane(l_FarPlane);
+
+    // Obtain the current camera near plane
+    l_Interpolator1D.SetValues(A.GetNearPlane(),B.GetNearPlane(),1.0f,Math::FUNC_CONSTANT);
+    float32 l_NearPlane;
+    l_Interpolator1D.Update(Percentage, l_NearPlane);
+    m_pCameraInfo->SetNearPlane(l_NearPlane);
+
+    // Obtain the current camera FOV
+    l_Interpolator1D.SetValues(A.GetFOV(),B.GetFOV(),1.0f,Math::FUNC_CONSTANT);
+    float32 l_FOV;
+    l_Interpolator1D.Update(Percentage, l_FOV);
+    m_pCameraInfo->SetFOV(l_NearPlane);
 }

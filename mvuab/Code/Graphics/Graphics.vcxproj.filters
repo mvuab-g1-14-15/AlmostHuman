@@ -138,6 +138,9 @@
     <ClCompile Include="RenderableVertex\VertexTypes.cpp">
       <Filter>RenderableVertex</Filter>
     </ClCompile>
+    <ClCompile Include="Cameras\CameraCinematical.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -249,6 +252,9 @@
     </ClInclude>
     <ClInclude Include="Effects\Defines.h">
       <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraCinematical.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

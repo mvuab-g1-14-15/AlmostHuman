@@ -15,9 +15,9 @@ void Math::CLerpAnimator3D::SetValues (Math::Vect3f initValue, Math::Vect3f endV
 }
 
 
-bool Math::CLerpAnimator3D::Update (float32 deltaTime, Math::Vect3f &value)
+bool Math::CLerpAnimator3D::Update (float32 ElapsedTime, Math::Vect3f &value)
 {
-    m_fElapsedTime += deltaTime;
+    m_fElapsedTime += ElapsedTime;
     bool finish = false;
     if (m_fElapsedTime >= m_fTotalTime)
     {
