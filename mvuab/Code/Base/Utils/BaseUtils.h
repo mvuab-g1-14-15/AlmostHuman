@@ -9,7 +9,7 @@
 #include <sstream>
 #include <stdio.h>
 #include <vector>
-#include "Windows.h"
+#include <Windows.h>
 #include "Utils\Types.h"
 
 
@@ -27,6 +27,18 @@ namespace baseUtils
         buffer = (char*)malloc(len*sizeof(char));
         vsprintf_s( buffer, len, format, args );
         output = buffer;
+        delete buffer;
+    }
+
+    inline void  Trace( const char* format, ... )
+    {
+        va_list args;
+        char* buffer;
+        va_start(args,format);
+        int len = _vscprintf(format, args) + 1;
+        buffer = (char*)malloc(len*sizeof(char));
+        vsprintf_s( buffer, len, format, args );
+        OutputDebugStringA(buffer);
         delete buffer;
     }
 

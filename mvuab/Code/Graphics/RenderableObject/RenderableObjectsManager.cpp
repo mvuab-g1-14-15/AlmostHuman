@@ -50,9 +50,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
             Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
             CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
-            l_InstanceMesh->SetYaw(l_Yaw * Math::pi32/180.0f);
-            l_InstanceMesh->SetPitch(l_Pitch * Math::pi32/180.0f);
-            l_InstanceMesh->SetRoll(l_Roll * Math::pi32/180.0f);
+            l_InstanceMesh->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
+            l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
+            l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
             l_InstanceMesh->SetScale(l_Scale);
             AddResource(l_Name,l_InstanceMesh);
         }
@@ -67,9 +67,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
           Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
           CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(l_Name, l_Core);
           l_AnimatedInstance->SetPosition(l_Pos);
-          l_AnimatedInstance->SetYaw(l_Yaw * Math::pi32/180.0f);
-          l_AnimatedInstance->SetPitch(l_Pitch * Math::pi32/180.0f);
-          l_AnimatedInstance->SetRoll(l_Roll * Math::pi32/180.0f);
+          l_AnimatedInstance->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
+          l_AnimatedInstance->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
+          l_AnimatedInstance->SetRoll(Math::Utils::Deg2Rad(l_Roll));
           l_AnimatedInstance->SetScale(l_Scale);
           AddResource(l_Name,l_AnimatedInstance);
         }

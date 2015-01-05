@@ -8,52 +8,10 @@ global VERTEX_TYPE_DIFFUSE 		= 0x0040
 
 fileIn "GetAABB.ms"
 
-function CreateVertex Coord Normal TUVMap diff Material =
+function CreateVertex Coord Normal TUVMap =
 (
-	local vertex = #()
-	if Material.diffuseMap == undefined then
-	(
-		append vertex (Coord.x as float)
-		append vertex (Coord.y as float)
-		append vertex (Coord.z as float)
-		append vertex (diff as integer)
-		return vertex	
-	)
-	else
-	(
-		append vertex (Coord.x as float)
-		append vertex (Coord.y as float)
-		append vertex (Coord.z as float)
-		append vertex (Normal.x as float)
-		append vertex (Normal.y as float)
-		append vertex (Normal.z as float)
-		--if Material.bumpMap != undefined then
-		--(
-		--	append vertex (0 as float) --el motor se espera una normal con 4 coordenadas en caso de tener tangenciales y binormales
-		--	append vertex (Tang.x as float)
-		--	append vertex (Tang.y as float)
-		--	append vertex (Tang.z as float)
-		--	append vertex (Tang.w as float)
-		--	append vertex (Bin.x as float)
-		--	append vertex (Bin.y as float)
-		--	append vertex (Bin.z as float)
-		--	append vertex (Bin.w as float)
-		--)
-		--if Material.reflectionMap != undefined then
-		--(
-		--	append vertex (diff as integer)
-		--)
-		append vertex (TUVMap.x as float)
-		append vertex ((1.0-TUVMap.y) as float)
-		--append vertex (TUV1.y as float)
-		--if Material.selfIllumMap != undefined then
-		--(
-		--	append vertex (TUV2.x as float)
-		--	append vertex ((1.0-TUV2.y) as float)
-			--append vertex (TUV2.y as float)
-		--)
-		return vertex
-	)
+	local NewVertex = #(Coord.x, Coord.y, Coord.z, Normal.x, Normal.y, Normal.z, TUVMap.x, 1.0-TUVMap.y)
+	return NewVertex
 )
 
 fn AreVertexsEqual vtx1 vtx2 =
@@ -208,21 +166,15 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 		local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
 		/* Por ultimo para saber el Id del material que tiene aplicada esta cara en caso de estar utilizando
 		un multimaterial sobre el objeto */
-		local material
 		local MaterialID
-		local Diffuse
 		if classof(Obj.material) == Multimaterial then
 		(
 			MaterialID=getFaceMatID Obj iFaces
-			material = Obj.material[MaterialID]
-			Diffuse = bit.shift material.diffuse.r 24 + bit.shift material.diffuse.g 16 + bit.shift material.diffuse.b 8 + material.diffuse.a
 		)
-		else if classof(Obj.material) == Standard then
+		else
 		(
 			MaterialID = 1
-			material = Obj.material
-			Diffuse = bit.shift material.diffuse.r 24 + bit.shift material.diffuse.g 16 + bit.shift material.diffuse.b 8 + material.diffuse.a
-		)		
+		)
 		
 		local id = MaterialID
 		while id > l_VtxsMap.count do
@@ -230,9 +182,9 @@ fn GetBuffers Obj VertexBuffer IndexBuffer =
 			append l_VtxsMap (dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
 		)
 		
-		local Vertex1 = CreateVertex Coord1 Normal1 TUVMap1 Diffuse material
-		local Vertex2 = CreateVertex Coord2 Normal2 TUVMap2 Diffuse material
-		local Vertex3 = CreateVertex Coord3 Normal3 TUVMap3 Diffuse material
+		local Vertex1 = CreateVertex Coord1 Normal1 TUVMap1
+		local Vertex2 = CreateVertex Coord2 Normal2 TUVMap2
+		local Vertex3 = CreateVertex Coord3 Normal3 TUVMap3
 		--format "%\n%\n%\n - Material ID: %\n" Vertex1 Vertex2 Vertex3 MaterialID
 		
 		local id1 = DotNetAddVertex Vertex1 VertexBuffer l_VtxsMap MaterialID
@@ -266,23 +218,19 @@ fn WriteBuffers file VertexBuffer IndexBuffer =
 			current_vertex = VertexBuffer[iMaterial][iVertex]
 			format "Vertex %:\n" iVertex
 			
-			for i = 1 to current_vertex.count do
-			(
-				WriteFloat file current_vertex[i]
-			)
-			--format "\tPos: (%, %, %)\n" current_vertex[1] current_vertex[2] current_vertex[3]
-			--WriteFloat file current_vertex[1]
-			--WriteFloat file current_vertex[3]
-			--WriteFloat file current_vertex[2]
+			format "\tPos: (%, %, %)\n" current_vertex[1] current_vertex[2] current_vertex[3]
+			WriteFloat file current_vertex[1]
+			WriteFloat file current_vertex[3]
+			WriteFloat file current_vertex[2]
 			
-			--format "\tNormal: (%, %, %)\n" current_vertex[4] current_vertex[5] current_vertex[6]
-			--WriteFloat file current_vertex[4]
-			--WriteFloat file current_vertex[6]
-			--WriteFloat file current_vertex[5]
+			format "\tNormal: (%, %, %)\n" current_vertex[4] current_vertex[5] current_vertex[6]
+			WriteFloat file current_vertex[4]
+			WriteFloat file current_vertex[6]
+			WriteFloat file current_vertex[5]
 			
-			--format "\tUV: (%, %)\n" current_vertex[7] current_vertex[8]
-			--WriteFloat file current_vertex[7]
-			--WriteFloat file current_vertex[8]
+			format "\tUV: (%, %)\n" current_vertex[7] current_vertex[8]
+			WriteFloat file current_vertex[7]
+			WriteFloat file current_vertex[8]
 		)
 		
 		num_face = IndexBuffer[iMaterial].count

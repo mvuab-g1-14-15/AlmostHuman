@@ -22,12 +22,21 @@ CObject3D::CObject3D()
 
 Math::Mat44f CObject3D::GetTransform()
 {
-	Math::Mat44f l_MRotation, l_MTranslate, l_MScale;
-	l_MRotation.SetIdentity();
-	l_MTranslate.SetIdentity();
-	l_MScale.SetIdentity();
-	l_MRotation.SetFromAnglesYXZ(m_fYaw, m_fRoll, m_fPitch);
-	l_MTranslate.Translate(m_Position);
-	l_MScale.Scale(m_Scale.x, m_Scale.y, m_Scale.z);
-	return l_MRotation * l_MTranslate * l_MScale;
+    Math::Mat44f world;
+    Math::Mat44f scale;
+    Math::Mat44f rotationY;
+    Math::Mat44f rotationX;
+    Math::Mat44f rotationZ;
+    Math::Mat44f translation;
+
+    translation.SetFromPos	(m_Position);
+    scale.SetFromScale(m_Scale.x, m_Scale.y, m_Scale.z);
+    rotationX.SetFromAngleX	(m_fPitch);
+    rotationY.SetFromAngleY	(m_fYaw);
+    rotationZ.SetFromAngleZ	(m_fRoll);
+
+    //World = Scale * Rotation * Translation
+    world = translation * scale * (rotationY * rotationX * rotationZ);
+
+    return world;
 }

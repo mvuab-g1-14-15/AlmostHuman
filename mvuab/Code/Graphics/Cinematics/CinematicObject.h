@@ -24,6 +24,7 @@ public:
 	void Stop();
 	void OnRestartCycle();
 	void Render();
-};
+};
+
 
 #endif // CINEMATIC_OBJECT_H

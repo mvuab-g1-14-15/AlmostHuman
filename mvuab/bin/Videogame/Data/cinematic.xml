@@ -1,10 +1,10 @@
 <cinematic name="BoxMoving" duration="5">
 	<cinematic_object resource="Box003" renderable_objects_manager="solid">
-		<cinematic_object_key_frame time="0.0" pos="0.0 0.0 0.0" yaw="0.2" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-		<cinematic_object_key_frame time="1.0" pos="0.0 0.5 0.2" yaw="0.4" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-		<cinematic_object_key_frame time="2.0" pos="0.0 1.0 0.4" yaw="0.6" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-		<cinematic_object_key_frame time="3.0" pos="0.0 1.5 0.6" yaw="0.8" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-		<cinematic_object_key_frame time="4.0" pos="0.0 2.0 0.8" yaw="1.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-		<cinematic_object_key_frame time="5.0" pos="0.0 2.5 1.0" yaw="1.2" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="0.0" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="1.0" pos="0.0 0.5 0.0" yaw="0.1" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="2.0" pos="0.0 1.0 0.0" yaw="0.2" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="3.0" pos="0.0 1.5 0.0" yaw="0.3" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="4.0" pos="0.0 2.0 0.0" yaw="0.4" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+		<cinematic_object_key_frame time="5.0" pos="0.0 2.5 0.0" yaw="0.5" pitch="0.0" roll="0.0" scale="2.0 2.0 2.0"/>
 	</cinematic_object>
 </cinematic>

@@ -49,17 +49,8 @@ bool Math::CLerpAnimator1D::Update (float32 deltaTime, float32 &value)
         }
         break;
     }
-    
-    float32 progress = Math::Utils::Lerp(m_fInitValue, m_fEndValue, mu);
-        
-    if (m_fEndValue > m_fInitValue)
-    {
-        value = m_fInitValue + progress;
-    }
-    else
-    {
-        value = m_fEndValue + progress;
-    }
+
+    value = Math::Utils::Lerp(m_fInitValue, m_fEndValue, mu);
 
     return finish;
 }
