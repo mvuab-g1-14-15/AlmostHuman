@@ -46,7 +46,7 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::strin
 {
     assert( m_CalCoreModel != NULL );
     std::string &AnimationFullPath = m_Path + Filename;
-    uint16 id = m_CalCoreModel->loadCoreAnimation(AnimationFullPath, Name);
+    int id = m_CalCoreModel->loadCoreAnimation(AnimationFullPath, Name);
     if( id == -1 )
         return false;
 
@@ -91,6 +91,7 @@ bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
     CTexture *t = CTextureManager::GetSingletonPtr()->GetTexture(Filename);
+
     if(t)
     {
         m_TextureVector.push_back(t);

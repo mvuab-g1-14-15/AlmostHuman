@@ -21,7 +21,7 @@ class CAnimatedCoreModel : public CName
 {
     protected:
         typedef std::vector<CTexture *> TTextureVector;
-         TTextureVector                 m_TextureVector;
+        TTextureVector                  m_TextureVector;
 
         CalCoreModel                    *m_CalCoreModel;
         CalHardwareModel                *m_CalHardwareModel;
