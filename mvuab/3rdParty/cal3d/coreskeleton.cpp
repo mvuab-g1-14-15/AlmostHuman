@@ -29,7 +29,7 @@ CalCoreSkeleton::~CalCoreSkeleton()
   std::vector<CalCoreBone *>::iterator iteratorCoreBone;
   for(iteratorCoreBone = m_vectorCoreBone.begin(); iteratorCoreBone != m_vectorCoreBone.end(); ++iteratorCoreBone)
   {
-    delete (*iteratorCoreBone);
+      delete (*iteratorCoreBone);
   }
 }
 

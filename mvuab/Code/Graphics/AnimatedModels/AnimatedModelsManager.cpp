@@ -71,11 +71,13 @@ CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string &Name,
 {
    CAnimatedCoreModel *l_pAnimatedCoreModel = new CAnimatedCoreModel(Name);
    if(!l_pAnimatedCoreModel->Load(Path))
-    {
-        CHECKED_DELETE(l_pAnimatedCoreModel);
-    }
-    else
-        AddResource(Name, l_pAnimatedCoreModel); 
+   {
+       CHECKED_DELETE(l_pAnimatedCoreModel);
+   }
+   else
+   {
+       AddResource(Name, l_pAnimatedCoreModel);
+   }
 
    return l_pAnimatedCoreModel;
 }

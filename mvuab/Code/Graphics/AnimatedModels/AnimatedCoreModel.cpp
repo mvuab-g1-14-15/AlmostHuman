@@ -28,11 +28,21 @@ CAnimatedCoreModel::~CAnimatedCoreModel()
     Destroy();
 }
 
+void CAnimatedCoreModel::Destroy()
+{
+    m_TextureVector.clear();
+    m_AnimationsMap.clear();
+
+    CHECKED_DELETE(m_CalCoreModel);
+    CHECKED_DELETE(m_CalHardwareModel);
+    CHECKED_DELETE(m_RenderableVertexs);
+}
+
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 {
     assert(m_CalCoreModel);
     std::string &MeshFullPath = m_Path + Filename;
-    uint16 err = m_CalCoreModel->loadCoreMesh( MeshFullPath );
+    int err = m_CalCoreModel->loadCoreMesh( MeshFullPath );
     return ( err == -1 ) ? false : true;
 }
 
@@ -40,7 +50,7 @@ bool CAnimatedCoreModel::LoadSkeleton(const std::string &Filename)
 {
     assert(m_CalCoreModel);
     std::string &SkeletonFullPath = m_Path + Filename;
-    return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);
+    return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);      //mem leak
 }
 bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::string &Filename)
 {
@@ -201,16 +211,6 @@ bool CAnimatedCoreModel::Reload()
 {
     Destroy();
     return Load();
-}
-
-void CAnimatedCoreModel::Destroy()
-{
-    m_TextureVector.clear();
-    m_AnimationsMap.clear();
-
-    CHECKED_DELETE(m_CalCoreModel);
-    CHECKED_DELETE(m_CalHardwareModel);
-    CHECKED_DELETE(m_RenderableVertexs);
 }
 
 void CAnimatedCoreModel::ActivateTextures()
