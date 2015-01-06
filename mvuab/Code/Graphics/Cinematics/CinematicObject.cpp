@@ -22,11 +22,12 @@ CCinematicObject::CCinematicObject(CXMLTreeNode &atts)
 
 CCinematicObject::~CCinematicObject()
 {
-	//std::vector<CCinematicObjectKeyFrame *>::iterator it = m_CinematicObjectKeyFrames.begin();
-	//std::vector<CCinematicObjectKeyFrame *>::iterator it_end = m_CinematicObjectKeyFrames.end();
+    for(std::vector<CCinematicObjectKeyFrame *>::iterator it = m_CinematicObjectKeyFrames.begin(); it != m_CinematicObjectKeyFrames.end(); ++it)
+    {
+         CHECKED_DELETE((*it));
+    }
 
-	//for(; it != it_end; ++it)
-	//	CHECKED_DELETE(*it);
+    m_CinematicObjectKeyFrames.clear();
 }
 
 bool CCinematicObject::IsOk()

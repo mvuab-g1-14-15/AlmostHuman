@@ -34,11 +34,12 @@ CCinematic::CCinematic(const std::string &FileName)
 
 CCinematic::~CCinematic()
 {
-	//std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin();
-	//std::vector<CCinematicObject *>::iterator it_end = m_CinematicObjects.end();
+    for(std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(); it != m_CinematicObjects.end(); ++it)
+    {
+         CHECKED_DELETE((*it));
+    }
 
-	//for(; it != it_end; ++it)
-	//	CHECKED_DELETE(*it);
+    m_CinematicObjects.clear();
 }
 
 void CCinematic::LoadXML(const std::string &FileName)
