@@ -1,77 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Texture">
-      <UniqueIdentifier>{fce4ae15-28a3-4c88-ac40-6f51f069a6d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderableVertex">
-      <UniqueIdentifier>{51e2cb65-bd01-4d00-95cf-02a246a9398c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{8961e2e7-c337-4808-ad2f-973708e650cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fonts">
-      <UniqueIdentifier>{30a93bf9-552c-4de6-b5b3-bae13c115214}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderableObject">
-      <UniqueIdentifier>{88983a84-8789-44ac-8a00-6614cc5557ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StaticMeshes">
-      <UniqueIdentifier>{42d4f003-1d0b-4079-a500-f337ff9de0dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AnimatedModels">
-      <UniqueIdentifier>{cc26a49c-a5ec-4e3d-a219-1e416c5e48ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cinematics">
-      <UniqueIdentifier>{cfdcb786-391c-4e3d-9f96-f99ea5d243c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lights">
-      <UniqueIdentifier>{e07e974a-64fc-4da1-b816-555d4cd53cf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Effects">
-      <UniqueIdentifier>{afbd743f-6b3c-463b-9e6d-6cc691f5ce97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneRenderCommands">
-      <UniqueIdentifier>{68565af9-a786-4f59-b5ff-8f118aa776b4}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Object3D.cpp" />
-    <ClCompile Include="Texture\Texture.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture\TextureManager.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture\GUITexture.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture\CubedTexture.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject\RenderableObject.cpp">
-      <Filter>RenderableObject</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp">
-      <Filter>RenderableObject</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticMeshes\StaticMesh.cpp">
-      <Filter>StaticMeshes</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticMeshes\StaticMeshManager.cpp">
-      <Filter>StaticMeshes</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticMeshes\InstanceMesh.cpp">
-      <Filter>StaticMeshes</Filter>
-    </ClCompile>
     <ClCompile Include="AnimatedModels\AnimatedCoreModel.cpp">
       <Filter>AnimatedModels</Filter>
     </ClCompile>
@@ -82,49 +13,28 @@
       <Filter>AnimatedModels</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\Camera.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraCinematical.cpp">
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\CameraFPShooter.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Cameras\Frustum.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\CameraInfo.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\CameraKey.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\CameraKeyController.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Lights\LightManager.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="Lights\Light.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="Lights\OmniLight.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="Lights\DirectionalLight.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="Lights\SpotLight.cpp">
-      <Filter>Lights</Filter>
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cameras\CameraManager.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClCompile>
-    <ClCompile Include="Effects\Effect.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Effects\EffectManager.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Effects\EffectTechnique.cpp">
-      <Filter>Effects</Filter>
+    <ClCompile Include="Cameras\Frustum.cpp">
+      <Filter>Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Cinematics\Cinematic.cpp">
       <Filter>Cinematics</Filter>
@@ -138,126 +48,139 @@
     <ClCompile Include="Cinematics\CinematicPlayer.cpp">
       <Filter>Cinematics</Filter>
     </ClCompile>
+    <ClCompile Include="Effects\Effect.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects\EffectManager.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects\EffectTechnique.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\DirectionalLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\LightManager.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\OmniLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\SpotLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
     <ClCompile Include="RenderableVertex\VertexTypes.cpp">
       <Filter>RenderableVertex</Filter>
     </ClCompile>
+    <ClCompile Include="StaticMeshes\InstanceMesh.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshes\StaticMesh.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshes\StaticMeshManager.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\CubedTexture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\GUITexture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\TextureManager.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\DisableZTestSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\DisableZWriteSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\DrawQuadRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\EnableZTestSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\EnableZWriteSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\EndRenderSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\SceneRendererCommandManager.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\SetMatricesSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\StagedTexturedRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp">
-      <Filter>SceneRenderCommands</Filter>
-    <ClCompile Include="Cameras\CameraCinematical.cpp">
-      <Filter>Camera</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Object3D.h" />
-    <ClInclude Include="Texture\Texture.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture\TextureManager.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture\GUITexture.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture\CubedTexture.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableVertex\RenderableVertex.h">
-      <Filter>RenderableVertex</Filter>
-    </ClInclude>
-    <ClInclude Include="Fonts\FontManager.h">
-      <Filter>Fonts</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableVertex\IndexedVertexs.h">
-      <Filter>RenderableVertex</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableVertex\VertexTypes.h">
-      <Filter>RenderableVertex</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableObject\RenderableObject.h">
-      <Filter>RenderableObject</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableObject\RenderableObjectsManager.h">
-      <Filter>RenderableObject</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticMeshes\StaticMesh.h">
-      <Filter>StaticMeshes</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticMeshes\StaticMeshManager.h">
-      <Filter>StaticMeshes</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticMeshes\InstanceMesh.h">
-      <Filter>StaticMeshes</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatedModels\AnimatedCoreModel.h">
       <Filter>AnimatedModels</Filter>
     </ClInclude>
@@ -268,52 +191,28 @@
       <Filter>AnimatedModels</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\Camera.h">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraCinematical.h">
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraFPShooter.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Cameras\Frustum.h">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraInfo.h">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraKey.h">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraKeyController.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Lights\LightManager.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="Lights\Light.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="Lights\OmniLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="Lights\DirectionalLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="Lights\SpotLight.h">
-      <Filter>Lights</Filter>
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cameras\CameraManager.h">
-      <Filter>Camera</Filter>
+      <Filter>Cameras</Filter>
     </ClInclude>
-    <ClInclude Include="Effects\EffectTechnique.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\Effect.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\EffectManager.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Cinematics\CinematicPlayer.h">
-      <Filter>Cinematics</Filter>
+    <ClInclude Include="Cameras\Frustum.h">
+      <Filter>Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Cinematics\Cinematic.h">
       <Filter>Cinematics</Filter>
@@ -324,82 +223,181 @@
     <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h">
       <Filter>Cinematics</Filter>
     </ClInclude>
+    <ClInclude Include="Cinematics\CinematicPlayer.h">
+      <Filter>Cinematics</Filter>
+    </ClInclude>
     <ClInclude Include="Effects\Defines.h">
       <Filter>Effects</Filter>
     </ClInclude>
+    <ClInclude Include="Effects\Effect.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects\EffectManager.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects\EffectTechnique.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Fonts\FontManager.h">
+      <Filter>Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\DirectionalLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\LightManager.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\OmniLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\SpotLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObject.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObjectsManager.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableVertex\IndexedVertexs.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableVertex\RenderableVertex.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableVertex\VertexTypes.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\InstanceMesh.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\StaticMesh.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\StaticMeshManager.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\CubedTexture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\GUITexture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\TextureManager.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
     <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DisableZTestSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DisableZWriteSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DrawQuadRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\EnableZTestSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\EnableZWriteSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\EndRenderSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\SceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\SceneRendererCommandManager.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\SetMatricesSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\StagedTexturedRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h">
-      <Filter>SceneRenderCommands</Filter>
-    <ClInclude Include="Cameras\CameraCinematical.h">
-      <Filter>Camera</Filter>
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="AnimatedModels">
+      <UniqueIdentifier>{c851e9a3-f686-4c95-bb3c-1dacf0798ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{7c74970e-52b7-44ee-9933-8bd1ae1ca344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cinematics">
+      <UniqueIdentifier>{5920acd4-d670-4a77-a018-c70262fa58e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects">
+      <UniqueIdentifier>{df5c5414-9dd3-470d-a0ae-3f3ad2539e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fonts">
+      <UniqueIdentifier>{c4945c5c-7fca-4907-ab6c-35f3cab08c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{2bdcc88a-1952-409f-8c64-cf5a65e10cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject">
+      <UniqueIdentifier>{711d03cc-1154-4a95-b51d-b7d939e3be78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableVertex">
+      <UniqueIdentifier>{0e2eebee-d1e8-4f48-9b14-e17660514624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMesh">
+      <UniqueIdentifier>{5c5324d5-4c2d-48ae-b6af-fddbe48f4f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{adc506b2-03c9-4540-995b-b0c9b286ae15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneRenderComands">
+      <UniqueIdentifier>{4e7fd12b-15d4-4384-b496-28ef5169fa2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
