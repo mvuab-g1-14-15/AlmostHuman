@@ -26,11 +26,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 					isReverseStr = isReverse as string
 					
 					totalTimeStr = stringStream ""
-					format "%" (((animationRange.end as integer) / ticksPerFrame) * framerate) to:totalTimeStr
+					format "%" (((animationRange.end as float) / ticksPerFrame) / framerate) to:totalTimeStr
 					strTotalTime = totalTimeStr as string
 					
 					--<camera_key_controller cycle="1" reverse="0" total_time="100.0">
-					camera_key_controller_tag = "<camera_key_controller name=\"" + EachCamera.name + "\" cycle=\"" + isCycleStr + "\" reverse=\"" + isReverseStr + "\" total_time=\"" + totalTimeStr  + "\"/>\n"
+					camera_key_controller_tag = "<camera_key_controller name=\"" + EachCamera.name + "\" cycle=\"" + isCycleStr + "\" reverse=\"" + isReverseStr + "\" total_time=\"" + totalTimeStr  + "\">\n"
 					format camera_key_controller_tag to:ostream
 					
 					--sorting keys of controller
@@ -128,7 +128,7 @@ fn ExportCinematicObjects nFrames filenameXML =
 			(
 
 				--<cinematic_object resource="Box001_Part_7" renderable_objects_manager="solid">
-				cinematic_object_tag = "\t<cinematic_object resource=\"" + Obj.name + "\" renderable_objects_manager=\"" + Obj.name  + "\"/>\n"
+				cinematic_object_tag = "\t<cinematic_object resource=\"" + Obj.name + "\" renderable_objects_manager=\"" + Obj.name  + "\">\n"
 				format cinematic_object_tag to:ostream
 				
 				for t = animationRange.start to animationRange.end by nFrames do
