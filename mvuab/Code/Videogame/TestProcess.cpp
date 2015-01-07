@@ -36,7 +36,7 @@ CTestProcess::CTestProcess() : CProcess(),
 {
     CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
                                                  Math::Vect3f(0.0f,2.0f,0.0f) );
-    CCameraManager::GetSingletonPtr()->SetCurrentCamera("cinematical");
+    CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 }
 
 CTestProcess::~CTestProcess()

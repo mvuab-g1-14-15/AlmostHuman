@@ -342,6 +342,7 @@ fn ExportMesh Obj filename =
 	catch
 	(
 		format "Error while exporting object\n"
+		format "Obj name: %\n" Obj.name
 	)
 	
 	delete newObj

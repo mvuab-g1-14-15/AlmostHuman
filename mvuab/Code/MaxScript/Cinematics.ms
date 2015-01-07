@@ -117,7 +117,7 @@ fn ExportCinematicObjects nFrames filenameXML =
 		format "%" (((animationRange.end as float) / ticksPerFrame) / framerate) to:totalTimeStr
 		strTotalTime = totalTimeStr as string
 		
-		cinematic_tag = "<cinematic name=\"" + maxFileName + "\" duration=\"" + totalTimeStr  + "\"/>\n"
+		cinematic_tag = "<cinematic name=\"" + maxFileName + "\" duration=\"" + totalTimeStr  + "\">\n"
 		format cinematic_tag to:ostream
 		
 		for Obj in geometry do
@@ -142,7 +142,7 @@ fn ExportCinematicObjects nFrames filenameXML =
 							strTime = TimeInSeconds as string
 							
 							Pos = stringStream ""
-							format "% % %" Obj.Pos.x Obj.Pos.y Obj.Pos.z to:Pos
+							format "% % %" Obj.Pos.x Obj.Pos.z Obj.Pos.y to:Pos
 							strPos = Pos as string
 		
 							YawAngle =GetYaw Obj.transform as string
@@ -150,7 +150,7 @@ fn ExportCinematicObjects nFrames filenameXML =
 							RollAngle= GetRoll Obj.transform as string
 
 							ScaleStr = stringStream ""
-							format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
+							format "% % %" Obj.Scale.x Obj.Scale.z Obj.Scale.y to:ScaleStr
 							strScale = ScaleStr as string
 
 							--<cinematic_object_key_frame time="0.0333333" pos="1.63108 0.564489 10.0025" yaw="-1.19209e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
