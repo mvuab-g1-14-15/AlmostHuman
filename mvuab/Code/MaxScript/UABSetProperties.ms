@@ -23,13 +23,14 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	checkbox WorldTransformCheckBox "Don't export world transform" pos:[21,240] width:217 height:17
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[21,184] width:91 height:17
 	edittext edt4 "" pos:[112,184] width:120 height:19
-	checkbox ExportToCinematicsChecbox "Export to cinematics" pos:[21,268] width:217 height:17
+	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[21,268] width:217 height:17
 	label lbl7 "Technique" pos:[21,152] width:64 height:18
 	edittext LineEditTechnique "" pos:[112,152] width:120 height:19
-	checkbox chk42 "Show Normal" pos:[261,57] width:139 height:13
+	checkbox ShowNormalCheck "Show Normal" pos:[261,57] width:139 height:13
 	GroupBox grp15 "Events" pos:[258,168] width:226 height:40
 	checkbox GenerateEventsCheckBox "Generate" pos:[263,187] width:66 height:13
-	dropdownList GenerateEventsComboBox "" pos:[347,183] width:123 height:21 enabled:false
+	dropdownList GenerateEventsComboBox "" pos:[347,183] width:123 height:21 enabled:false items:#("", "event_1", "event_2", "event_3", "event_4", "event_5")
+	
 	GroupBox GBTracks "Traks" pos:[257,211] width:226 height:40
 	checkbox GenerateTracksCheckBox "Generate" pos:[264,228] width:66 height:13
 	GroupBox GBCameras "Cameras" pos:[257,256] width:226 height:40
@@ -40,59 +41,73 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	
 	button GetButton "Get" pos:[16,311] width:112 height:29
 	button SetButton "Set" pos:[134,311] width:108 height:29
+	
 	--ENABLE OR DISABLE DROPLISTDOWN
 	on ExportCheckRender changed theState do
-	if (ExportCheckRender.checked)==true then
 	(
-		ExportListRender.enabled=true
+			if (ExportCheckRender.checked)==true then
+			(
+				ExportListRender.enabled=true
+			)
+			else
+			(
+				ExportListRender.enabled=false
+			)
 	)
-	else
-	(
-		ExportListRender.enabled=false
-	)
-	
 	on LayerCheckRender changed theState do
-	if (LayerCheckRender.checked)==true then
 	(
-		
-		LayerListRender.enabled=true
+			if (LayerCheckRender.checked)==true then
+			(
+				LayerListRender.enabled=true
+			)
+			else
+			(
+				LayerListRender.enabled=false
+			)
 	)
-	else
-	(
-		LayerListRender.enabled=false
-	)
-	
 	on GenerateCheckPhysics changed theState do
-	if (GenerateCheckPhysics.checked)==true then
 	(
-		
-		GenerateListPhysics.enabled=true
+			if (GenerateCheckPhysics.checked)==true then
+			(
+				GenerateListPhysics.enabled=true
+			)
+			else
+			(
+				GenerateListPhysics.enabled=false
+			)
 	)
-	else
-	(
-		GenerateListPhysics.enabled=false
-	)
-	
 	on LayerCheckPhysics changed theState do
-	if (LayerCheckPhysics.checked)==true then
 	(
-		
-		LayerListPhysics.enabled=true
+			if (LayerCheckPhysics.checked)==true then
+			(				
+				LayerListPhysics.enabled=true
+			)
+			else
+			(
+				LayerListPhysics.enabled=false
+			)
 	)
-	else
-	(
-		LayerListPhysics.enabled=false
-	)
-	
 	on GenerateCheckLogic changed theState do
-	if (GenerateCheckLogic.checked)==true then
 	(
-		
-		GenerateListLogic.enabled=true
+			if (GenerateCheckLogic.checked)==true then
+			(
+				GenerateListLogic.enabled=true
+			)
+			else
+			(
+				GenerateListLogic.enabled=false
+			)
 	)
-	else
+	on GenerateEventsCheckBox changed theState do
 	(
-		GenerateListLogic.enabled=false
+			if (GenerateEventsCheckBox.checked)==true then
+			(
+				GenerateEventsComboBox.enabled=true
+			)
+			else
+			(
+				GenerateEventsComboBox.enabled=false
+			)
 	)
 	
 	
@@ -151,12 +166,36 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		(
 			if aProperty!=undefined then
 			(
-				AnimModelEditText.text=EditText
+				EditText.text=aProperty
 			)
 		)
 		else
 		(
-			AnimModelEditText.text=""
+			EditText.text=""
+		)
+	)
+	fn GetPropertyList aProperty List=
+	(
+		if aProperty!="" then
+		(
+			if aProperty!=undefined then
+			(
+				for i=1 to List.items.count do
+				(
+					if List.items[i]==aProperty then
+					(
+						List.selection=i
+					)
+				)
+			)
+			else
+			(
+				List.selection=1
+			)
+		)
+		else
+		(
+			List.selection=1
 		)
 	)
 	--GET PROPERTY AND UPDATE INTERFACE END
@@ -197,6 +236,10 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		)
 	)
 	
+	fn SetPropertyList Obj Type List=
+	(
+		setUserProp Obj Type List.items[List.selection]
+	)
 	fn SetProperties Obj=
 	(
 		if ((classof  Obj)==ObjectSet)==false then
@@ -208,8 +251,8 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			SetPropertyCheck Obj "visible_render" VisibleCheckRender
 			--ADD/UPDATE PROPERTY LAYER
 			SetPropertyCheckList Obj "layer_render" LayerCheckRender LayerListRender
-			--ADD/UPDATE PROPERTYANIMATION MODEL
-			SetPropertyEditText Obj"anim_model" AnimModelEditText
+			--ADD/UPDATE PROPERTY ANIMATION MODEL
+			SetPropertyEditText Obj "anim_model" AnimModelEditText
 			--------PHYSICS---------
 			--ADD/UPDATE PROPERTY GENERATE
 			SetPropertyCheckList Obj "generate_physics" GenerateCheckPhysics GenerateListPhysics
@@ -218,6 +261,30 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			--------LOGIC---------
 			--ADD/UPDATE PROPERTY GENERATE
 			SetPropertyCheckList Obj "generate_logic" GenerateCheckLogic GenerateListLogic
+			--ADD/UPDATE PROPERTY CAMERA VISIBILITY
+			SetPropertyCheck Obj "camera_visibility" CameraVisibilityCheckBox
+			--ADD/UPDATE PROPERTY WORLD TRANSFORM
+			SetPropertyCheck Obj "world_transform" WorldTransformCheckBox
+			--ADD/UPDATE PROPERTY LINKED TO BONE
+			SetPropertyCheck Obj "linked_to_bone" LinkedToBoneCheckBox
+			--ADD/UPDATE PROPERTY edt4
+			SetPropertyEditText Obj "edt4" edt4
+			--ADD/UPDATE PROPERTY EXPORT TO CINEMATICS
+			SetPropertyCheck Obj "export_to_cinematics" ExportToCinematicsCheckbox
+			--ADD/UPDATE PROPERTY LINE EDIT TECHNIQUE
+			SetPropertyEditText Obj "line_edit_technique" LineEditTechnique
+			--ADD/UPDATE PROPERTY SHOW NORMAL
+			SetPropertyCheck Obj "show_normal" ShowNormalCheck
+			--ADD/UPDATE PROPERTY GENERATE EVENTS
+			SetPropertyCheckList Obj "generate_events" GenerateEventsCheckBox GenerateEventsComboBox
+			--ADD/UPDATE PROPERTY GENERATE TRACKS
+			SetPropertyCheck Obj "generate_tracks" GenerateTracksCheckBox
+			--ADD/UPDATE PROPERTY CYCLE CAMERA
+			SetPropertyCheck Obj "cycle_camera" CycleCameraCheckBox
+			--ADD/UPDATE PROPERTY REVERSE CAMERA
+			SetPropertyCheck Obj "reverse_camera" ReverseCameraCheckBox
+			--ADD/UPDATE PROPERTY EXPORT LIGHTS
+			SetPropertyCheck Obj "export_lights" ExportLightsCheckBox
 			ObjAnterior=Obj
 		)
 		else
@@ -228,7 +295,7 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 				--ADD/UPDATE PROPERTY EXPORT
 				SetPropertyCheckList Obj[i] "export_render" ExportCheckRender ExportListRender
 				--ADD/UPDATE VISIBLE
-				SetPropertyCheck Obj[i] "visible_render"
+				SetPropertyCheck Obj[i] "visible_render" VisibleCheckRender
 				--ADD/UPDATE LAYER
 				SetPropertyCheckList Obj[i] "layer_render" LayerCheckRender LayerListRender
 				--ADD/UPDATE ANIMATE MODEL
@@ -241,6 +308,30 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 				--------LOGIC---------
 				--ADD/UPDATE GENERATE
 				SetPropertyCheckList Obj[i] "generate_logic" GenerateCheckLogic GenerateListLogic
+				--ADD/UPDATE PROPERTY CAMERA VISIBILITY
+				SetPropertyCheck Obj[i] "camera_visibility" CameraVisibilityCheckBox
+				--ADD/UPDATE PROPERTY WORLD TRANSFORM
+				SetPropertyCheck Obj[i] "world_transform" WorldTransformCheckBox
+				--ADD/UPDATE PROPERTY LINKED TO BONE
+				SetPropertyCheck Obj[i] "linked_to_bone" LinkedToBoneCheckBox
+				--ADD/UPDATE PROPERTY edt4
+				SetPropertyEditText Obj[i] "edt4" edt4
+				--ADD/UPDATE PROPERTY EXPORT TO CINEMATICS
+				SetPropertyCheck Obj[i] "export_to_cinematics" ExportToCinematicsCheckbox
+				--ADD/UPDATE PROPERTY LINE EDIT TECHNIQUE
+				SetPropertyEditText Obj[i] "line_edit_technique" LineEditTechnique
+				--ADD/UPDATE PROPERTY SHOW NORMAL
+				SetPropertyCheck Obj[i] "show_normal" ShowNormalCheck
+				--ADD/UPDATE PROPERTY GENERATE EVENTS
+				SetPropertyCheckList Obj[i] "generate_events" GenerateEventsCheckBox GenerateEventsComboBox
+				--ADD/UPDATE PROPERTY GENERATE TRACKS
+				SetPropertyCheck Obj[i] "generate_tracks" GenerateTracksCheckBox
+				--ADD/UPDATE PROPERTY CYCLE CAMERA
+				SetPropertyCheck Obj[i] "cycle_camera" CycleCameraCheckBox
+				--ADD/UPDATE PROPERTY REVERSE CAMERA
+				SetPropertyCheck Obj[i] "reverse_camera" ReverseCameraCheckBox
+				--ADD/UPDATE PROPERTY EXPORT LIGHTS
+				SetPropertyCheck Obj[i] "export_lights" ExportLightsCheckBox
 				ObjAnterior=Obj[i]
 			)
 		)
@@ -252,133 +343,7 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
-	on ExportCheckRender changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-		)
-	on LayerCheckRender changed theState do
-	(
-			if (LayerCheckRender.checked)==true then
-			(
-				
-				LayerListRender.enabled=true
-			)
-			else
-			(
-				LayerListRender.enabled=false
-			)
-		)
-	on GenerateCheckPhysics changed theState do
-	(
-			if (GenerateCheckPhysics.checked)==true then
-			(
-				
-				GenerateListPhysics.enabled=true
-			)
-			else
-			(
-				GenerateListPhysics.enabled=false
-			)
-		)
-	on LayerCheckPhysics changed theState do
-	(
-			if (LayerCheckPhysics.checked)==true then
-			(
-				
-				LayerListPhysics.enabled=true
-			)
-			else
-			(
-				LayerListPhysics.enabled=false
-			)
-		)
-	on GenerateCheckLogic changed theState do
-	(
-			if (GenerateCheckLogic.checked)==true then
-			(
-				
-				GenerateListLogic.enabled=true
-			)
-			else
-			(
-				GenerateListLogic.enabled=false
-			)
-		)
-	on CameraVisibilityCheckBox changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-		)
-	on WorldTransformCheckBox changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-		)
-	on LinkedToBoneCheckBox changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-		)
-	on ExportToCinematicsChecbox changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-		)
-	on chk42 changed theState do
-	(
-			if (GenerateCheckLogic.checked)==true then
-			(
-				
-				GenerateListLogic.enabled=true
-			)
-			else
-			(
-				GenerateListLogic.enabled=false
-			)
-		)
-	on GenerateEventsCheckBox changed theState do
-	(
-			if (GenerateCheckPhysics.checked)==true then
-			(
-				
-				GenerateListPhysics.enabled=true
-			)
-			else
-			(
-				GenerateListPhysics.enabled=false
-			)
-		)
+	
 	on GetButton pressed do
 	(
 		local Property
@@ -408,39 +373,47 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			--OBTAIN GENERATE
 			Property=getUserProp $ "generate_logic"
 			GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
-			
+			--OBTAIN CAMERA VISIBILITY
+			Property=getUserProp $ "camera_visibility"
+			GetPropertyCheckBox Property CameraVisibilityCheckBox
+			--OBTAIN WORLD TRANSFORM
+			Property=getUserProp $ "world_transform"
+			GetPropertyCheckBox Property WorldTransformCheckBox
+			--OBTAIN LINKED TO BONE
+			Property=getUserProp $ "linked_to_bone"
+			GetPropertyCheckBox Property LinkedToBoneCheckBox
+			--OBTAIN edt4
+			Property=getUserProp $ "edt4"
+			GetPropertyEditText Property edt4
+			--OBTAIN EXPORT TO CINEMATICS
+			Property=getUserProp $ "export_to_cinematics"
+			GetPropertyCheckBox Property ExportToCinematicsCheckbox
+			--OBTAIN LINE EDIT TECHNIQUE
+			Property=getUserProp $ "line_edit_technique"
+			GetPropertyEditText Property LineEditTechnique
+			--OBTAIN SHOW NORMAL
+			Property=getUserProp $ "show_normal"
+			GetPropertyCheckBox Property ShowNormalCheck
+			--OBTAIN GENERATE EVENTS
+			Property=getUserProp $ "generate_events"
+			GetPropertyCheckList Property GenerateEventsCheckBox GenerateEventsComboBox
+			--OBTAIN GENERATE TRACKS
+			Property=getUserProp $ "generate_tracks"
+			GetPropertyCheckBox Property GenerateTracksCheckBox
+			--OBTAIN CYCLE CAMERA
+			Property=getUserProp $ "cycle_camera"
+			GetPropertyCheckBox Property CycleCameraCheckBox
+			--OBTAIN REVERSE CAMERA
+			Property=getUserProp $ "reverse_camera"
+			GetPropertyCheckBox Property ReverseCameraCheckBox
+			--OBTAIN EXPORT LIGHTS
+			Property=getUserProp $ "export_lights"
+			GetPropertyCheckBox Property ExportLightsCheckBox
 			ObjAnterior=$
 		)
 		else
 		(
-			for i=1 to $.count do
-			(
-				--------RENDER---------
-				--OBTAIN PROPERTY EXPORT
-				Property=getUserProp $[i] "export_render"
-				GetPropertyCheckList Property ExportCheckRender ExportListRender
-				--OBTAIN VISIBLE
-				Property=getUserProp $[i] "visible_render"
-				GetPropertyCheckBox Property VisibleCheckRender
-				--OBTAIN LAYER
-				Property=getUserProp $[i] "layer_render"
-				GetPropertyCheckList Property LayerCheckRender LayerListRender
-				--OBTAIN ANIMATE MODEL
-				Property=getUserProp $[i] "anim_model"
-				GetPropertyEditText Property AnimModelEditText
-				--OBTAIN GENERATE
-				Property=getUserProp $[i] "generate_physics"
-				GetPropertyCheckList Property GenerateCheckPhysics GenerateListPhysics
-				--------PHYSICS---------
-				--OBTAIN LAYER
-				Property=getUserProp $[i] "layer_physics"
-				GetPropertyCheckList Property LayerCheckPhysics LayerListPhysics
-				--------LOGIC---------
-				--OBTAIN GENERATE
-				Property=getUserProp $[i] "generate_logic"
-				GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
-				ObjAnterior=$[i]
-			)
+			messageBox "You can only select an object"
 		)
 	)
 	on SetButton pressed do
@@ -454,6 +427,10 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 				(
 					SetProperties $
 				)
+			)
+			else
+			(
+				SetProperties $
 			)
 		)
 		else
