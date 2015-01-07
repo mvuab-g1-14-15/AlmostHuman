@@ -88,7 +88,22 @@ void CCinematicObject::Update(float ElapsedTime)
     //baseUtils::Trace("Pos=>%f-%f-%f\n", pos.x, pos.y,pos.z);
 
 	Math::CLerpAnimator1D lerp_animator_1D;
-	lerp_animator_1D.SetValues(m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetYaw(), m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetYaw(),1.0f,Math::FUNC_CONSTANT);
+	float init = m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetYaw();
+	float final = m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetYaw();
+
+	if(Math::Utils::Abs(final - init) > Math::pi32)
+	{
+        if (final > init)
+        {
+			init += Math::two_pi32;
+        }
+        else
+        {
+            final += Math::two_pi32;
+        }
+	}
+
+	lerp_animator_1D.SetValues(init, final,1.0f,Math::FUNC_CONSTANT);
 	float yaw;
 	lerp_animator_1D.Update(l_CurrentP, yaw);
     baseUtils::Trace("yaw=>%f\n",yaw);
@@ -109,13 +124,43 @@ void CCinematicObject::Update(float ElapsedTime)
 //         baseUtils::Trace("KeyFrameChanged - Prev=>%d\n", m_CurrentKeyFrame);
     }
 
-	lerp_animator_1D.SetValues(m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetPitch(), m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetPitch(),1.0f,Math::FUNC_CONSTANT);
+	init = m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetPitch();
+	final = m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetPitch();
+
+	if(Math::Utils::Abs(final - init) > Math::pi32)
+	{
+        if (final > init)
+        {
+			init += Math::two_pi32;
+        }
+        else
+        {
+            final += Math::two_pi32;
+        }
+	}
+
+	lerp_animator_1D.SetValues(init, final,1.0f,Math::FUNC_CONSTANT);
 	float pitch;
 	lerp_animator_1D.Update(l_CurrentP, pitch);
 
     //baseUtils::Trace("pitch=>%f\n", pitch);
 
-	lerp_animator_1D.SetValues(m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetRoll(), m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetRoll(),1.0f,Math::FUNC_CONSTANT);
+	init = m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetRoll();
+	final = m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetRoll();
+
+	if(Math::Utils::Abs(final - init) > Math::pi32)
+	{
+        if (final > init)
+        {
+			init += Math::two_pi32;
+        }
+        else
+        {
+            final += Math::two_pi32;
+        }
+	}
+
+	lerp_animator_1D.SetValues(init, final,1.0f,Math::FUNC_CONSTANT);
 	float roll;
 	lerp_animator_1D.Update(l_CurrentP, roll);
 
