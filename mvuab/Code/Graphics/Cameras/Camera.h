@@ -29,6 +29,7 @@ public:
     D3DXMATRIX GetMatrixView( void );
     D3DXMATRIX  GetMatrixProj( void );
 
+    GET_SET( Type, CameraType )
     GET_SET( float32, Yaw )
     GET_SET( float32, Pitch )
     GET_SET( float32, ZNear )
@@ -58,6 +59,8 @@ protected:
     float32            m_aspect_ratio;
     float32            m_ZNear;
     float32            m_ZFar;
+
+    Type               m_CameraType;
 
     CFrustum           m_Frustum;
 

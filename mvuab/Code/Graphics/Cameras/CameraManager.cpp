@@ -5,7 +5,7 @@
 #include "CameraKeyController.h"
 #include "Timer\Timer.h"
 
-CCameraManager::CCameraManager() : m_RenderCameras( false )
+CCameraManager::CCameraManager() : m_RenderCameras( true )
 {
     //---Por defecto insertamos la camara del player----
     CCamera * l_pFPSCamera = new CCameraFPShooter();

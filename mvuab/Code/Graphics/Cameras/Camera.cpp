@@ -42,11 +42,15 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     D3DXMATRIX matrix;
     D3DXMATRIX translation;
 
-    D3DXMatrixTranslation( &translation, m_Pos.x ,m_Pos.y ,m_Pos.z );
-    device->SetTransform( D3DTS_WORLD, &translation );
-        
-    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, Math::colRED);
-
+    if( m_CameraType != FirstPerson )
+    {
+        Math::Vect3f l_LookAt = GetLookAt();
+        D3DXMatrixTranslation( &translation, l_LookAt.x ,l_LookAt.y ,l_LookAt.z );
+        device->SetTransform( D3DTS_WORLD, &translation );
+        GraphicsInstance->DrawSphere(0.5f, Math::colRED,20);
+    }
+    
+    //Reset the translation
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );
 
@@ -121,12 +125,11 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
         5,6, 6,7, 7,8, 8,5
     };
     device->DrawIndexedPrimitiveUP( D3DPT_LINELIST, 0, 9, 12, indexes, D3DFMT_INDEX16, pts, sizeof( CAMERA_VERTEX ) );
-    
+    GraphicsInstance->DrawCube(0.5f,Math::colRED);
+
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );
 
-    
-    
     //---------PINTAMOS LA BOX Y LOS EJES------------------//
     D3DXMatrixTranslation( &translation2, -1.0f, 0.0f, 0.0f );
     matrix = translation2 * rotation2 * rotation * translation; 
@@ -144,21 +147,19 @@ void CCamera::RenderCamera(LPDIRECT3DDEVICE9 device)
     AXIS_VERTEX v[6] =
     {
         //EJE X
-        {0, 0, 0, 0xffff0000},
-        {3, 0, 0, 0xffff0000},
+        {0, 0, 0, 0xffffff00},
+        {3, 0, 0, 0xffffff00},
         //EJE Y
         {0, 0, 0, 0xff00ff00},
         {0, 3, 0, 0xff00ff00},
         //EJE Z
-        {0, 0, 0, 0xff0000ff},
-        {0, 0, 3, 0xff0000ff},
+        {0, 0, 0, 0xff00ffff},
+        {0, 0, 3, 0xff00ffff},
     };
 
     device->SetTexture(0,NULL);
     device->SetFVF(AXIS_VERTEX::getFlags());
     device->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(AXIS_VERTEX));
-    
-    CGraphicsManager::GetSingletonPtr()->DrawCube(5.0f, Math::colRED);
 
     D3DXMatrixTranslation( &matrix, 0, 0, 0 );
     device->SetTransform( D3DTS_WORLD, &matrix );

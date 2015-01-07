@@ -10,6 +10,7 @@ CCameraFPShooter::CCameraFPShooter()
     m_StrafeSpeed(5.0f),
     m_Speed(2.f)
 {
+    SetCameraType(CCamera::FirstPerson);
 }
 
 CCameraFPShooter::~CCameraFPShooter()

@@ -271,23 +271,17 @@ void CGraphicsManager::GetWindowRect( HWND hwnd )
 
 void CGraphicsManager::DrawAxis(float32 Size)
 {
-    DWORD x_axis_color_aux = Math::colRED.GetUint32Argb();
-    DWORD y_axis_color_aux = Math::colGREEN.GetUint32Argb();
-    DWORD z_axis_color_aux = Math::colYELLOW.GetUint32Argb();
-
     CUSTOMVERTEX v[] =
     {
-        // X Axis
-        {0.0f, 0.0f, 0.0f, x_axis_color_aux},
-        {Size, 0.0f, 0.0f, x_axis_color_aux},
-
-        // Y Axis
-        {0.0f, 0.0f, 0.0f, y_axis_color_aux},
-        {0.0f, Size, 0.0f, y_axis_color_aux},
-
-        // Z Axis
-        {0.0f, 0.0f, 0.0f, z_axis_color_aux},
-        {0.0f, 0.0f, Size, z_axis_color_aux},
+        //EJE X
+        {0, 0, 0, 0xffffff00},
+        {3, 0, 0, 0xffffff00},
+        //EJE Y
+        {0, 0, 0, 0xff00ff00},
+        {0, 3, 0, 0xff00ff00},
+        //EJE Z
+        {0, 0, 0, 0xff00ffff},
+        {0, 0, 3, 0xff00ffff},
     };
 
     m_pD3DDevice->SetTexture(0,NULL);

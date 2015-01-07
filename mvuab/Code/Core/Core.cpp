@@ -95,6 +95,7 @@ void CCore::Render()
     m_pDebugWindowManager->Render();
     m_pRenderableObjectsManager->Render();
 	m_pLightManager->Render();
+    m_pCameraManager->RenderCameras();
 
     // START: TO DELETE LATER IF IS NOT NECESSARY,
     unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
