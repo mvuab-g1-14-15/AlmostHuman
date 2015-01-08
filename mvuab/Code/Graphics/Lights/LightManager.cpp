@@ -55,6 +55,9 @@ void CLightManager::Load(const std::string &FileName)
 				Math::Vect3f l_Position = m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
 				l_Light->SetPosition(l_Position);
 
+				float l_Intensity = m(i).GetFloatProperty("intensity", 0);
+				l_Light->SetIntensity(l_Intensity);
+
 				float l_Yaw = m(i).GetFloatProperty("yaw", 0);
 				l_Light->SetYaw(l_Yaw);
 
@@ -88,6 +91,9 @@ void CLightManager::Load(const std::string &FileName)
 
 				Math::Vect3f l_Position = m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
 				l_Light->SetPosition(l_Position);
+
+				float l_Intensity = m(i).GetFloatProperty("intensity", 0);
+				l_Light->SetIntensity(l_Intensity);
 
 				float l_Yaw = m(i).GetFloatProperty("yaw", 0);
 				l_Light->SetYaw(l_Yaw);
@@ -131,6 +137,9 @@ void CLightManager::Load(const std::string &FileName)
 
 				Math::Vect3f l_Position = m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
 				l_Light->SetPosition(l_Position);
+
+				float l_Intensity = m(i).GetFloatProperty("intensity", 0);
+				l_Light->SetIntensity(l_Intensity);
 
 				float l_Yaw = m(i).GetFloatProperty("yaw", 0);
 				l_Light->SetYaw(l_Yaw);

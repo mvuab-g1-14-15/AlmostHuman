@@ -20,6 +20,7 @@ protected:
 	TLightType m_Type;
 	std::string m_Name;
 	bool m_RenderShadows;
+	float m_Intensity;
 	float m_StartRangeAttenuation;
 	float m_EndRangeAttenuation;
 	static TLightType GetLightTypeByName(const std::string &StrLightType);
@@ -28,6 +29,8 @@ public:
 	virtual ~CLight();
 	void SetName(const std::string &Name);
 	const std::string &GetName();
+	void SetIntensity(const float intensity);
+	float GetIntensity() const;
 	void SetColor(const Math::CColor &Color);
 	const Math::CColor & GetColor() const;
 	void SetStartRangeAttenuation(const float StartRangeAttenuation);
