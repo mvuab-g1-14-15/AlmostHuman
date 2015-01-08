@@ -11,6 +11,8 @@
 
 #include "Cameras/CameraManager.h"
 
+#include "Math\Matrix44.h"
+
 extern "C"
 {
 	#include "lua.h"
@@ -118,7 +120,7 @@ void registerGraphics(lua_State *m_LS)
 			.def("Release", &CGraphicsManager::Release)
 			.def("Render", &CGraphicsManager::Render)
 			.def("RenderCursor", &CGraphicsManager::RenderCursor)
-			//.def("SetTransform", &CGraphicsManager::SetTransform)
+			.def("SetTransform", (void(CGraphicsManager::*)(Math::Mat44f&)) &CGraphicsManager::SetTransform)
 			.def("SetupMatrices", &CGraphicsManager::SetupMatrices)
 			.def("Update", &CGraphicsManager::Update)
 	];
