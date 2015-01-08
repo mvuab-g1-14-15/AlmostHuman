@@ -94,12 +94,16 @@ void CTestProcess::Update(float32 deltaTime)
     }
     //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
     //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+
+	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 }
 
 void CTestProcess::Init()
 {
     std::vector<std::string> l_Files;
     baseUtils::GetFilesFromPath("d:\\", "pdf", l_Files);
+
+	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
 }
 
 void CTestProcess::Render()
@@ -108,6 +112,8 @@ void CTestProcess::Render()
 
     pGraphicsManager->DrawAxis(5);
     pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
+
+	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
 }
 
 void CTestProcess::RenderDebugInfo()

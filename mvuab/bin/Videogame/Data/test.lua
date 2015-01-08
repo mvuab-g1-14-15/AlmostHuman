@@ -1,16 +1,29 @@
-local v1 = Vect3f(1, 2, 3)
-local v2 = Vect3f(1, 1, 1)
-local v3 = Vect3f(v1 + v2)
+function init ()
+	input_manager = CInputManager()
+	graphics_manager = CGraphicsManager()
+	pos = Vect3f(0, 0, 0)
+end
 
-local o1 = CObject3D()
-o1.SetYaw(0.1)
-o1.SetRoll(0.2)
-o1.SetPitch(0.3)
+function update ()
+	if input_manager:IsDownUp(0x1E) then
+		pos.x = pos.x - 1
+	end
+	if input_manager:IsDownUp(0x20) then
+		pos.x = pos.x + 1
+	end
+	if input_manager:IsDownUp(0x1F) then
+		pos.z = pos.z - 1
+	end
+	if input_manager:IsDownUp(0x11) then
+		pos.z = pos.z + 1
+	end
+end
 
-local n1 = CName()
-n1.SetName("Tete")
-n1.GetMame()
-
-local vs1 = CVisible()
-vs1:SetVisible(true)
-vs1:GetVisible()
+function render ()
+	local t = Mat44f()
+	t:SetPos(pos)
+	graphics_manager:SetTransform(t)
+	graphics_manager:DrawBox(1,1,1)
+	t:SetIdentity()
+	graphics_manager:SetTransform(t)
+end

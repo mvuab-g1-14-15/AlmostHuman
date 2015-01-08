@@ -11,6 +11,16 @@ CLight::~CLight()
 {
 }
 
+void CLight::SetIntensity(const float intensity)
+{
+	m_Intensity = intensity;
+}
+
+float CLight::GetIntensity() const
+{
+	return m_Intensity;
+}
+
 void CLight::SetType(const TLightType Type)
 {
 	m_Type = Type;
