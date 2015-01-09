@@ -43,7 +43,8 @@ public:
     void DrawIcoSphere();
     void DrawGrid(float32 Size, Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
     void DrawPlane(    float32 Size, const Math::Vect3f& normal, float32 distance,Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
-    void DrawCube(float32 Size, Math::CColor Color=Math::colWHITE);
+    void DrawCube(float32 Size, Math::CColor Color);
+	void DrawCube(float32 Size);
     void DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color=Math::colWHITE);
     void DrawCircle(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
     void DrawSphere(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);

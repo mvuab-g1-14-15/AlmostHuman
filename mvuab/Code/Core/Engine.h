@@ -12,7 +12,7 @@ class CProcess;
 class CLogRender;
 class CTimer;
 
-class CEngine : public CSingleton<CEngine>
+class CEngine
 {
 public:
     CEngine();

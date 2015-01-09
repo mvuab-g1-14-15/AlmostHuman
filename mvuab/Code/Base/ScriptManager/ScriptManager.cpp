@@ -2,6 +2,7 @@
 #include "ScriptManager\FunctionsToRegister\BaseFunctions.h"
 #include "ScriptManager\FunctionsToRegister\CoreFunctions.h"
 #include "ScriptManager\FunctionsToRegister\GraphicsFunctions.h"
+#include "ScriptManager\FunctionsToRegister\InputFunctions.h"
 #include <string>
 
 #include "Utils/BaseUtils.h"
@@ -81,4 +82,5 @@ void CScriptManager::RegisterLUAFunctions()
 	registerBase(m_LS);
 	registerCore(m_LS);
 	registerGraphics(m_LS);
+	registerInputs(m_LS);
 }

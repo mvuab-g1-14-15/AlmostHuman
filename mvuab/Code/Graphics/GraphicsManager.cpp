@@ -329,6 +329,11 @@ void CGraphicsManager::DrawPlane (float32 Size, const Math::Vect3f& normal, floa
 
 }
 
+void CGraphicsManager::DrawCube (float32 Size)
+{
+	DrawCube(Size, Math::colWHITE);
+}
+
 void CGraphicsManager::DrawCube (float32 Size, Math::CColor Color)
 {
     float32 halfSize = Size * 0.5f;

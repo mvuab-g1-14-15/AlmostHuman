@@ -27,27 +27,15 @@ void registerCore(lua_State *m_LS)
 {
 	module(m_LS)
 	[
-		class_<CEngine>("CEngine")
-			.def(constructor<>())
-			//Methods
-			.def("Init", &CEngine::Init)
-			.def("Update", &CEngine::Update)
-			.def("Render", &CEngine::Render)
-
-			//Getter
-			.def("GetpCore", &CEngine::GetpCore)
-
-			//Getter Singleton
-			.def("GetSingleton", &CEngine::GetSingleton)
-			.def("GetSingletonPtr", &CEngine::GetSingletonPtr)
-			//Setter
-			.def("SetpCore", &CEngine::SetpCore)
-			
+		class_<CSingleton<CCore>>("Singleton_Core")
+		.scope
+		[
+				def("get_singleton", &CSingleton<CCore>::GetSingletonPtr)
+		]
 	];
 	module(m_LS)
 	[
 		class_<CCore>("CCore")
-			.def(constructor<>())
 			//Methods
 			.def("Init", &CCore::Init)
 			.def("Update", &CCore::Update)

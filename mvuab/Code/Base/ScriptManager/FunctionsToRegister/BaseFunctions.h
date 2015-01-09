@@ -19,7 +19,7 @@ void registerBase(lua_State *m_LS)
 
 	module(m_LS)
 	[
-		class_<Math::Vect3f>("Math::Vect3f")
+		class_<Math::Vect3f>("Vect3f")
 			.def(constructor<float, float, float>())
 			.def(constructor<const Math::Vect3f &>())
 			.def(constructor<float>())
@@ -42,7 +42,7 @@ void registerBase(lua_State *m_LS)
 
 	module(m_LS)
 	[
-		class_<Math::Mat44f>("Math::Mat44f") 
+		class_<Math::Mat44f>("Mat44f") 
 			.def(constructor<>())
 
 			.def("SetRotByAngleX", &Math::Mat44f::SetRotByAngleX)
@@ -50,6 +50,8 @@ void registerBase(lua_State *m_LS)
 			.def("SetRotByAngleZ", &Math::Mat44f::SetRotByAngleZ)
 
 			//.def("SetScale", &Math::Mat44f::SetScale) //TODO to ask
+
+			.def("SetIdentity", &Math::Mat44f::SetIdentity)
 			
 			.def("SetPos", (Math::Mat44f&(Math::Mat44f::*)(const Math::Vect3f&)) &Math::Mat44f::SetPos) //TODO to ask
 			.def("GetPos", &Math::Mat44f::GetPos) //TODO to ask
