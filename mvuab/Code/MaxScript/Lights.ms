@@ -18,7 +18,6 @@ fn ExportLights filenameXML =
 		xDoc.SaveXML()
 		
 		count = 0;
-		format "Begin Loop\n"
 		for iLight in lights do
 		(
 			try
@@ -35,14 +34,16 @@ fn ExportLights filenameXML =
 					l_RootNode.AppendNode l_NewLightNode
 			
 					--add the common attributes of the light
-					l_NewLightNode.AddAttributeAsString "name" iLight.name
+					l_NewLightNode.AddAttributeAsString "name" l_LightName
 					l_NewLightNode.AddAttributeCoordinate "pos" iLight.pos
 					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
 					l_NewLightNode.AddAttributeFloat "att_start_range" iLight.farAttenStart
 					l_NewLightNode.AddAttributeFloat "att_end_range" iLight.farAttenEnd
 					
+					--add the specific data for each light
 					if classof iLight == Omnilight then
 					(
+						-- Nothing to export now for omni lights
 					)
 					else if classof iLight == TargetDirectionallight then
 					(
@@ -63,17 +64,13 @@ fn ExportLights filenameXML =
 				format "Error Light % would not be exported\n" l_LightName
 			)
 		)
-		format "End Loop Lights Exported=>%\n" count
+		format "Congratulations! :D You have exported % lights in the file %\n" count filenameXML
 		xDoc.SaveXML()
-		if xDoc.PrettySaveXML()  == false do
-		(
-			format "Error exporting lights in=>%\n" filenameXML
-			return false
-		)
+		return xDoc.PrettySaveXML()
 	)
 	catch
 	(
-		format "Catch Error exporting lights in=>%\n" filenameXML
+		format "The File % has not been generated due to a unexpected error\n" filenameXML
 		return false
 	)
 )
