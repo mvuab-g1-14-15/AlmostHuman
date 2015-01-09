@@ -1,7 +1,7 @@
 fileIn "XMLStruct.ms"
 fn ExportLights filenameXML =
 (
-	clearListener()
+	--clearListener()
 	
 	try
 	(
@@ -70,7 +70,7 @@ fn ExportLights filenameXML =
 	)
 	catch
 	(
-		format "The File % has not been generated due to a unexpected error\n" filenameXML
+		format "The File % has not been generated due to an unexpected error\n" filenameXML
 		return false
 	)
 )
