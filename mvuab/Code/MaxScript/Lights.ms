@@ -1,73 +1,78 @@
---export_lights
+fileIn "XMLStruct.ms"
 fn ExportLights filenameXML =
 (
-	try 
+	clearListener()
+	
+	try
 	(
-		local ostream=createfile filenameXML
-		format "<lights>\n" to:ostream
-		for EachLight in lights do
-		(
-			
-			Pos = stringStream ""
-			format "% % %" EachLight.Pos.x EachLight.Pos.z EachLight.Pos.y to:Pos
-			strPos = Pos as string
-			
-			Colors = stringStream ""
-			format "% % %" EachLight.rgb.red EachLight.rgb.green EachLight.rgb.blue to:Colors
-			strColor = Colors as string
-			
-			if(classof EachLight == Omnilight) then 
-			(
-							
-				/* <light name=" Light03" type="omni" pos="51.2215 0.0 38.0957" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0"/>*/
-				
-				omni_tag = stringStream ""
-				format "\t<light name=\"%\" type=\"%\" pos=\"%\" color=\"%\" att_start_range=\"%\" att_end_range=\"%\"/>\n" EachLight.name "omni" strPos strColor EachLight.farAttenStart EachLight.farAttenEnd to:omni_tag 
-				str_light_tag = omni_tag  as string	
-				
-			)
-			else if(classof EachLight == targetSpot) then
-			(
-				/*<light name="Light02" type="directional" pos="-31.3958 35.6993 -74.0128" dir="0.555733 -0.350478 0.753874" color="1.0 1.0 1.0" render_shadows="true" att_start_range="8000.0" att_end_range="20000.0"/>
-				*/
-				
-				Direct=(EachLight.target.pos-EachLight.pos)
-				Direction = stringStream ""
-				format "% % %" EachLight.Direct.x EachLight.Direct.z EachLight.Direct.y to:Direction
-				strDirection = Direction as string
-				
-				target_spot_tag = stringStream ""
-				format "\t<light name=\"%\" type=\"%\" pos=\"%\" dir=\"%\"  color=\"%\" render_shadows=\"%\" att_start_range=\"%\" att_end_range=\"%\"/>\n" EachLight.name "spot" strPos strDirection strColor true EachLight.farAttenStart EachLight.farAttenEnd to:target_spot_tag 
-				str_light_tag = target_spot_tag as string	
-				
-			)
-			else if (classof EachLight == TargetDirectionallight) then
-			(
-			
-				/*<light name="Light01" type="spot" pos="58.335 6.15266 85.1666" dir="-0.758065 -0.193092 -0.622939" color="0.223529 0.788235 1.0" angle="0.226893" fall_off="0.977384" att_start_range="28.0" att_end_range="40.0"/>*/
-				
-				Direct=(EachLight.target.pos-EachLight.pos)
-				Direction = stringStream ""
-				format "% % %" EachLight.Direct.x EachLight.Direct.z EachLight.Direct.y to:Direction
-				strDirection = Direction as string
-				
-				target_dir_tag = stringStream ""
-				format "\t<light name=\"%\" type=\"%\" pos=\"%\" dir=\"%\"  color=\"%\" angle=\"%\" fall_off=\"%\" att_start_range=\"%\" att_end_range=\"%\"/>\n" EachLight.name "directional" strPos strDirection strColor EachLight.hotspot EachLight.Falloff EachLight.farAttenStart EachLight.farAttenEnd to:target_dir_tag 
-				str_light_tag = target_dir_tag as string	
-			)
-			
-			format str_light_tag to:ostream
-		)
-			format "</lights>\n" to:ostream
-			close ostream				
+		format "Exporting lights in=>%\n" filenameXML
+		-- Create the document and set the filename
+		xDoc = XMLDocument()
+		xDoc.file = 	filenameXML
+		xDoc.loaded = true
 		
-		format "Light XML created successfully: % \n" filenameXML
+		--create the base node
+		l_RootNode = xDoc.getNewNode "lights"
+		xDoc.AppendNode l_RootNode
+		l_RootNode = xDoc.getRootNode()
+		xDoc.SaveXML()
+		
+		count = 0;
+		for iLight in lights do
+		(
+			try
+			(
+				-- We need to check if the class of the object is a target, because the lights
+				-- of max script also contain their targets
+				if classof iLight != Targetobject then
+				(
+					l_LightName = iLight.name
+					--create the light node
+					l_NewLightNode = xDoc.getNewNode "light"
+			
+					-- append the new node light to the root node lights
+					l_RootNode.AppendNode l_NewLightNode
+			
+					--add the common attributes of the light
+					l_NewLightNode.AddAttributeAsString "name" l_LightName
+					l_NewLightNode.AddAttributeCoordinate "pos" iLight.pos
+					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
+					l_NewLightNode.AddAttributeFloat "att_start_range" iLight.farAttenStart
+					l_NewLightNode.AddAttributeFloat "att_end_range" iLight.farAttenEnd
+					
+					--add the specific data for each light
+					if classof iLight == Omnilight then
+					(
+						-- Nothing to export now for omni lights
+					)
+					else if classof iLight == TargetDirectionallight then
+					(
+						l_Direction = iLight.target.pos-iLight.pos
+						l_NewLightNode.AddAttributeCoordinate "dir" l_Direction
+						l_NewLightNode.AddAttributeFloat "angle" iLight.hotspot
+						l_NewLightNode.AddAttributeFloat "fall_off" iLight.Falloff
+					)
+					else if classof iLight == targetSpot then
+					(
+						l_NewLightNode.AddAttributeBool "render_shadows" false
+					)
+					count = count + 1
+				)
+			)
+			catch
+			(
+				format "Error Light % would not be exported\n" l_LightName
+			)
 		)
+		format "Congratulations! :D You have exported % lights in the file %\n" count filenameXML
+		xDoc.SaveXML()
+		return xDoc.PrettySaveXML()
+	)
 	catch
 	(
-		format "Error generating light XML \n"
+		format "The File % has not been generated due to a unexpected error\n" filenameXML
+		return false
 	)
-	
 )
 
-ExportLights "D:\lights.xml"
+ExportLights "C:\\Temp.xml"
