@@ -51,7 +51,7 @@ void registerBase(lua_State *m_LS)
 
 			//.def("SetScale", &Math::Mat44f::SetScale) //TODO to ask
 			
-			//.def("SetPos", (void(Math::Mat44f::*)(const Vect3f&))&Math::Mat44f::SetPos) //TODO to ask
+			.def("SetPos", (Math::Mat44f&(Math::Mat44f::*)(const Math::Vect3f&)) &Math::Mat44f::SetPos) //TODO to ask
 			.def("GetPos", &Math::Mat44f::GetPos) //TODO to ask
 
 			.def("GetScaleX", &Math::Mat44f::GetScaleX)
