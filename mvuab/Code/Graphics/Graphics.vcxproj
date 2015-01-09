@@ -37,8 +37,12 @@
     <ClCompile Include="Lights\OmniLight.cpp" />
     <ClCompile Include="Lights\SpotLight.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObject.cpp" />
+    <ClCompile Include="RenderableObject\RenderableObjectsLayersManager.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
+    <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp" />
+    <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
@@ -100,8 +104,12 @@
     <ClInclude Include="Lights\OmniLight.h" />
     <ClInclude Include="Lights\SpotLight.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
+    <ClInclude Include="RenderableObject\RenderableObjectsLayersManager.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
+    <ClInclude Include="RenderableObject\RenderableObjectTechnique.h" />
+    <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />

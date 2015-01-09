@@ -4,6 +4,7 @@
 
 
 #include "SceneRenderComands\SceneRendererCommand.h"
+#include "RenderableObject\PoolRenderableObjectTechnique.h"
 #include <string>
 
 class CGraphicsManager;
@@ -11,7 +12,7 @@ class CGraphicsManager;
 class CRenderableObjectTechniquesSceneRendererCommand : public CSceneRendererCommand
 {
 	private:
-		//CPoolRenderableObjectTechnique  *m_PoolRenderableObjectTechnique;
+		CPoolRenderableObjectTechnique  *m_PoolRenderableObjectTechnique;
     public:
         CRenderableObjectTechniquesSceneRendererCommand(CXMLTreeNode &atts);
         ~CRenderableObjectTechniquesSceneRendererCommand();

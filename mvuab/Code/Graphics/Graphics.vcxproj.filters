@@ -85,13 +85,13 @@
       <Filter>RenderableVertex</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshes\InstanceMesh.cpp">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshes\StaticMesh.cpp">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshes\StaticMeshManager.cpp">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClCompile>
     <ClCompile Include="Texture\CubedTexture.cpp">
       <Filter>Texture</Filter>
@@ -176,6 +176,18 @@
     </ClCompile>
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\RenderableObjectsLayersManager.cpp">
+      <Filter>RenderableObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,13 +284,13 @@
       <Filter>RenderableVertex</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshes\InstanceMesh.h">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshes\StaticMesh.h">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshes\StaticMeshManager.h">
-      <Filter>StaticMesh</Filter>
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
     <ClInclude Include="Texture\CubedTexture.h">
       <Filter>Texture</Filter>
@@ -364,6 +376,18 @@
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObjectTechnique.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\RenderableObjectsLayersManager.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -390,14 +414,14 @@
     <Filter Include="RenderableVertex">
       <UniqueIdentifier>{0e2eebee-d1e8-4f48-9b14-e17660514624}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StaticMesh">
-      <UniqueIdentifier>{5c5324d5-4c2d-48ae-b6af-fddbe48f4f7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Texture">
       <UniqueIdentifier>{adc506b2-03c9-4540-995b-b0c9b286ae15}</UniqueIdentifier>
     </Filter>
     <Filter Include="SceneRenderComands">
       <UniqueIdentifier>{4e7fd12b-15d4-4384-b496-28ef5169fa2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMeshes">
+      <UniqueIdentifier>{5c5324d5-4c2d-48ae-b6af-fddbe48f4f7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

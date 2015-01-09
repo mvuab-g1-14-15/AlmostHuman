@@ -1,4 +1,6 @@
 #pragma once
+#ifndef RENDERABLE_OBJECT_H
+#define RENDERABLE_OBJECT_H
 
 #include "Object3D.h"
 #include "Utils\Name.h"
@@ -17,3 +19,5 @@ public:
     virtual unsigned int GetNumFaces    () { return 0; }
     virtual unsigned int GetNumDraws    () { return 0; }
 };
+
+#endif
