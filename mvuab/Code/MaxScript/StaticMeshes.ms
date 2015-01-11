@@ -7,20 +7,16 @@ fn ExportStaticMeshes filenameXML=
 		local l_UniqueInstanceArray = GetUniqueInstances()
 		if l_UniqueInstanceArray.count == 0 then 
 		(
-			format "Empty selection. Select any object \n"
+			format "Empty selection. Select an object \n"
 			return false
 		)
 		
-		-- Create the document and set the filename
-		xDoc = XMLDocument()
-		xDoc.file = 	filenameXML
-		xDoc.loaded = true
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
 		
-		--create the base node
-		l_RootNode = xDoc.getNewNode "static_meshes"
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "static_meshes"
 		xDoc.AppendNode l_RootNode
-		l_RootNode = xDoc.getRootNode()
-		xDoc.SaveXML()
 		
 		for iStaticMesh in l_UniqueInstanceArray do
 		(
@@ -43,7 +39,6 @@ fn ExportStaticMeshes filenameXML=
 			)
 		)
 		
-		xDoc.SaveXML()
 		return xDoc.PrettySaveXML()
 	)
 	catch
