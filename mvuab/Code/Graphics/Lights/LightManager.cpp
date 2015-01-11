@@ -39,7 +39,7 @@ void CLightManager::Load(const std::string &FileName)
 		if(l_TagName=="light")
 		{
 			std::string l_Type = m(i).GetPszProperty("type","");
-			if(l_Type=="directional")
+			if(l_Type=="targetDirect")
 			{
 				CDirectionalLight* l_Light = new CDirectionalLight();
 
@@ -116,7 +116,7 @@ void CLightManager::Load(const std::string &FileName)
 
 				AddResource(l_Name, l_Light);
 			}
-			else if(l_Type=="spot")
+			else if(l_Type=="targetSpot")
 			{
 				CSpotLight* l_Light = new CSpotLight();
 

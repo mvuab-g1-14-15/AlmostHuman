@@ -1,39 +1,49 @@
+--includes
 fileIn "XMLStruct.ms"
+
+/*
+	Export all the lights of the scenary into the format of the UABEngine
+	Notes:
+	The allowed types of lights in the exportation are only:
+	- Omni
+	- Target Spot
+	- Target Direct
+	The other, including the target objects must not be exported.
+*/
 fn ExportLights filenameXML =
 (
-	--clearListener()
+	clearListener()
 	
 	try
 	(
-		format "Exporting lights in=>%\n" filenameXML
-		-- Create the document and set the filename
-		xDoc = XMLDocument()
-		xDoc.file = 	filenameXML
-		xDoc.loaded = true
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
 		
-		--create the base node
-		l_RootNode = xDoc.getNewNode "lights"
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "lights"
 		xDoc.AppendNode l_RootNode
-		l_RootNode = xDoc.getRootNode()
-		xDoc.SaveXML()
 		
-		count = 0;
+		-- iterate for all the lights and exported the allowed types into the xml file
+		local l_LightsCount = 0;
 		for iLight in lights do
 		(
 			try
 			(
-				-- We need to check if the class of the object is a target, because the lights
-				-- of max script also contain their targets
-				if classof iLight != Targetobject then
+				if classof iLight != Targetobject and 
+				   classof iLight != freeDirect and
+				   classof iLight != freeSpot
+				then
 				(
-					l_LightName = iLight.name
+					local l_LightName = iLight.name
 					--create the light node
-					l_NewLightNode = xDoc.getNewNode "light"
+					local l_NewLightNode = xDoc.getNewNode "light"
 			
 					-- append the new node light to the root node lights
 					l_RootNode.AppendNode l_NewLightNode
-			
+					
 					--add the common attributes of the light
+					local l_LightTypeStr = iLight.type as string
+					l_NewLightNode.AddAttributeAsString "type" l_LightTypeStr
 					l_NewLightNode.AddAttributeAsString "name" l_LightName
 					l_NewLightNode.AddAttributeCoordinate "pos" iLight.pos
 					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
@@ -41,13 +51,10 @@ fn ExportLights filenameXML =
 					l_NewLightNode.AddAttributeFloat "att_end_range" iLight.farAttenEnd
 					
 					--add the specific data for each light
-					if classof iLight == Omnilight then
+					if classof iLight == TargetDirectionallight then
 					(
-						-- Nothing to export now for omni lights
-					)
-					else if classof iLight == TargetDirectionallight then
-					(
-						l_Direction = iLight.target.pos-iLight.pos
+						local l_Direction = iLight.target.pos-iLight.pos
+						
 						l_NewLightNode.AddAttributeCoordinate "dir" l_Direction
 						l_NewLightNode.AddAttributeFloat "angle" iLight.hotspot
 						l_NewLightNode.AddAttributeFloat "fall_off" iLight.Falloff
@@ -56,7 +63,7 @@ fn ExportLights filenameXML =
 					(
 						l_NewLightNode.AddAttributeBool "render_shadows" false
 					)
-					count = count + 1
+					l_LightsCount = l_LightsCount + 1
 				)
 			)
 			catch
@@ -64,15 +71,15 @@ fn ExportLights filenameXML =
 				format "Error Light % would not be exported\n" l_LightName
 			)
 		)
-		format "Congratulations! :D You have exported % lights in the file %\n" count filenameXML
-		xDoc.SaveXML()
+		format "% Lights have been exported to %\n" l_LightsCount filenameXML
 		return xDoc.PrettySaveXML()
 	)
 	catch
 	(
 		format "The File % has not been generated due to an unexpected error\n" filenameXML
+		format "Check the path of the file\n"
 		return false
 	)
 )
 
-ExportLights "C:\\Temp.xml"
+ExportLights "C:\Users\Alex\camera.xml"

@@ -108,9 +108,9 @@ struct XMLNode(
 
 struct XMLDocument ( 
 	file = undefined,
+	loaded = true,
 	rootNode = undefined,
 	dom = dotNetObject "System.Xml.XmlDocument",
-	loaded = undefined,
 	
 	fn LoadXML pathToXml = (
 		file = pathToXml
