@@ -1,13 +1,17 @@
-texture tex0 < string name = "tiger.bmp"; >;
+texture tex0 < string name = "C:\\Program Files (x86)\\Microsoft DirectX SDK (June 2010)\\Samples\\Media\\tiger\\tiger.bmp"; >;
 
-string XFile = "tiger.x";   // Model to load
+float3 lightDir
+<
+    string UIDirectional = "Light Direction";
+> = {0.577, -0.577, 0.577};
+
+string XFile = "C:\\Program Files (x86)\\Microsoft DirectX SDK (June 2010)\\Samples\\Media\\tiger\\tiger.x";   // Model to load
 
 DWORD  BCLR = 0xff202080;  // Background color (if no image)
 
-// Creem una matriu de tipus float4x4 que té com a semàntica WORLDVIEWPROJECTION
-float4x4 wvpMatrix : WORLDVIEWPROJECTION;
+float4x4 g_WorldViewProjectionMatrix : WORLDVIEWPROJECTION;
+float4x4 g_WorldMatrix : WORLD;
 
-// TODO: Creem un sampler que agafa la textura tex0 i amb filtres LINEAR
 sampler DiffuseTextureSampler  = sampler_state
 { 
     Texture = (tex0);
@@ -19,7 +23,8 @@ sampler DiffuseTextureSampler  = sampler_state
 
 struct VNormalVertex 
 {
-    float3 pos : POSITION;
+    float4 pos : POSITION;
+    float3 normal : NORMAL;
     float2 uv : TEXCOORD0;
 };
 
@@ -27,37 +32,36 @@ struct VNormalVertex
 struct PNormalVertex
 {
     float4 pos : POSITION;
-    float2 uv : TEXCOORD0;
+    float3 normal : TEXCOORD0;
+    float2 uv : TEXCOORD1;
 };
 
 PNormalVertex RenderNormalsVS(
     VNormalVertex IN,
-    uniform float4x4 WorldViewProj)
+    uniform float4x4 WorldViewProj,
+    uniform float4x4 worldMatrix)
 {
-    // Inicialitzem l'estructura OUT de tipus PNormalVertex que retornarem a 0
     PNormalVertex OUT = (PNormalVertex )0;
-    // Multipliquem la posició d'entrada per la matriu WorldViewProj per tenir el vèrtex transformat
-    OUT.pos=mul(float4(IN.pos,1),WorldViewProj);
-    // Passem les coordenades de textura d'entrada a la variable de sortida
+    OUT.pos=mul(float4(IN.pos.xyz,1),WorldViewProj);
     OUT.uv=IN.uv;
-    // Retornem OUT
+    OUT.normal=mul(IN.normal,worldMatrix);
+
+
     return OUT;
 }
 
-float4 RenderNormalsPS(PNormalVertex IN) : COLOR
+float4 RenderNormalsPS20(PNormalVertex IN) : COLOR
 {
-    // TODO: Retornem el difús de la textura
-    return tex2D(DiffuseTextureSampler,IN.uv);
+    float4 OUT;
+
+    return tex2D(DiffuseTextureSampler , IN.uv);
 }
 
 technique tec0
 {
-    // Creem una passada 
     pass p0
     {
-        // Creem un vèrtex shader 1.1 cridant a RenderNormalVS passant-li la matriu de WorldViewProj
-        VertexShader =compile vs_1_1 RenderNormalsVS(wvpMatrix);
-        // Creem un pixel shader 1.1 cridant a RenderNormalPS
-        PixelShader = compile ps_1_1 RenderNormalsPS();
+        VertexShader =compile vs_1_1 RenderNormalsVS(g_WorldViewProjectionMatrix, g_WorldMatrix );
+        PixelShader = compile ps_2_0 RenderNormalsPS20();
     }
 }
