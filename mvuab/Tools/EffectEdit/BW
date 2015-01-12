@@ -1,0 +1,73 @@
+texture tex0 < string name = "C:\\Program Files (x86)\\Microsoft DirectX SDK (June 2010)\\Samples\\Media\\tiger\\tiger.bmp"; >;
+
+float3 g_LightDir
+<
+    string UIDirectional = "Light Direction";
+> = {0.577, -0.577, 0.577};
+
+string XFile = "C:\\Program Files (x86)\\Microsoft DirectX SDK (June 2010)\\Samples\\Media\\tiger\\tiger.x";   // Model to load
+
+DWORD  BCLR = 0xff202080;  // Background color (if no image)
+
+float4x4 g_WorldViewProjectionMatrix : WORLDVIEWPROJECTION;
+float4x4 g_WorldMatrix : WORLD;
+float4x4 g_ViewMatrix : INVERSE_VIEW;
+float g_SpecularExponent=20;
+float3 g_LightColor=float3(1,0.6,0.7);
+float3 g_LightAmbient=float3(0.3, 0.35, 0.4);
+float4 g_Color = float4(1,0,0,1);
+
+sampler DiffuseTextureSampler  = sampler_state
+{ 
+    Texture = (tex0);
+    MipFilter = LINEAR; 
+    MinFilter = LINEAR;
+    MagFilter = LINEAR;
+};
+
+
+struct VNormalVertex 
+{
+    float4 pos : POSITION;
+    float3 normal : NORMAL;
+    float2 uv : TEXCOORD0;
+};
+
+
+struct PNormalVertex
+{
+    float4 pos : POSITION;
+    float3 normal : TEXCOORD0;
+    float2 uv : TEXCOORD1;
+    float3 WorldPosition: TEXCOORD2;
+};
+
+PNormalVertex RenderNormalsVS(
+    VNormalVertex IN,
+    uniform float4x4 WorldViewProj,
+    uniform float4x4 worldMatrix)
+{
+    PNormalVertex OUT = (PNormalVertex )0;
+    OUT.pos=mul(float4(IN.pos.xyz,1),WorldViewProj);
+    OUT.uv=IN.uv;
+    OUT.normal=mul(IN.normal,worldMatrix);
+    OUT.WorldPosition=mul(float4(IN.pos.xyz, 1.0), g_WorldMatrix).xyz;
+
+
+    return OUT;
+}
+
+float4 RenderNormalsPS20(PNormalVertex IN) : COLOR
+{
+    float4 l_DiffuseColor=tex2D(DiffuseTextureSampler , IN.uv);
+    return float4(l_DiffuseColor);
+}
+
+technique tec0
+{
+    pass p0
+    {
+        VertexShader =compile vs_3_0 RenderNormalsVS(g_WorldViewProjectionMatrix, g_WorldMatrix );
+        PixelShader = compile ps_3_0 RenderNormalsPS20();
+    }
+}
