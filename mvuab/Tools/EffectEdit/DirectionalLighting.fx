@@ -61,14 +61,12 @@ float4 RenderNormalsPS20(PNormalVertex IN) : COLOR
     float3 l_Nn=normalize(IN.normal);
     float4 OUT;
     float4 l_DiffuseColor=tex2D(DiffuseTextureSampler , IN.uv);
-    float l_Mean = (l_DiffuseColor.x+l_DiffuseColor.y+l_DiffuseColor.z)/3;
-    float4 l_DiffuseColorBW = float4(l_Mean,l_Mean,l_Mean,1.0f);
     float3 l_AmbientContrib=g_LightAmbient*l_DiffuseColor.xyz;
     float3 l_DiffuseContrib=saturate(dot(l_Nn, -g_LightDir))*l_DiffuseColor.xyz*g_LightColor;
     float3 l_CameraPostion=g_ViewMatrix[3].xyz;
     float3 l_Hn=normalize(normalize(l_CameraPostion-IN.WorldPosition)-g_LightDir);
     float3 l_SpecularContrib=g_LightColor*pow(saturate(dot(l_Nn, l_Hn)), g_SpecularExponent);
-    return float4(l_DiffuseColorBW );
+    return float4(l_AmbientContrib+l_DiffuseContrib+l_SpecularContrib, l_DiffuseColor.a);
 }
 
 technique tec0
