@@ -1,4 +1,7 @@
+--includes
+fileIn "XMLStruct.ms"
 fileIn "Utils.ms"
+
 fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
 	try 
@@ -110,26 +113,35 @@ fn ExportCinematicObjects nFrames filenameXML =
 (
 	try
 	(
-	
-		local ostream=createfile filenameXML
-		
 		totalTimeStr = stringStream ""
 		format "%" (((animationRange.end as float) / ticksPerFrame) / framerate) to:totalTimeStr
 		strTotalTime = totalTimeStr as string
+			
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
 		
-		cinematic_tag = "<cinematic name=\"" + maxFileName + "\" duration=\"" + totalTimeStr  + "\">\n"
-		format cinematic_tag to:ostream
-		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "cinematic"
+		xDoc.AppendNode l_RootNode
+
+		l_RootNode.AddAttributeAsString "name"		maxFileName
+		l_RootNode.AddAttributeAsString "duration" 	totalTimeStr
+
 		for Obj in geometry do
 		(
-			isCinematic = getUserProp Obj "isCinematic"
+			isCinematic = getUserProp Obj "export_to_cinematics"
 			
 			if (isCinematic == true) then 
 			(
+				
+				local l_NewCinematicObjectNode = xDoc.getNewNode "cinematic_object"
+			
+				-- append the new node cinematic_object to the root node cinematic
+				l_RootNode.AppendNode l_NewCinematicObjectNode 
 
-				--<cinematic_object resource="Box001_Part_7" renderable_objects_manager="solid">
-				cinematic_object_tag = "\t<cinematic_object resource=\"" + Obj.name + "\" renderable_objects_manager=\"" + Obj.name  + "\">\n"
-				format cinematic_object_tag to:ostream
+				l_NewCinematicObjectNode.AddAttributeAsString "resource" Obj.name
+				l_NewCinematicObjectNode.AddAttributeAsString "renderable_objects_manager" Obj.name
+				
 				
 				for t = animationRange.start to animationRange.end by nFrames do
 				(
@@ -140,43 +152,34 @@ fn ExportCinematicObjects nFrames filenameXML =
 							TimeInSeconds = stringStream ""
 							format "%" (((t as float) / ticksPerFrame) / framerate) to:TimeInSeconds
 							strTime = TimeInSeconds as string
-							
-							Pos = stringStream ""
-							format "% % %" Obj.Pos.x Obj.Pos.z Obj.Pos.y to:Pos
-							strPos = Pos as string
-		
-							YawAngle =GetYaw Obj.transform as string
-							PitchAngle= GetPitch Obj.transform as string
-							RollAngle= GetRoll Obj.transform as string
-
-							ScaleStr = stringStream ""
-							format "% % %" Obj.Scale.x Obj.Scale.z Obj.Scale.y to:ScaleStr
-							strScale = ScaleStr as string
+								
+							YawAngle =GetYaw Obj.transform
+							PitchAngle= GetPitch Obj.transform
+							RollAngle= GetRoll Obj.transform
 
 							--<cinematic_object_key_frame time="0.0333333" pos="1.63108 0.564489 10.0025" yaw="-1.19209e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+							local l_NewCinematicObjectKeyNode = xDoc.getNewNode "cinematic_object_key_frame"
 							
-							cinematic_object_key_frame = stringStream ""
-							format "\t\t<cinematic_object_key_frame time=\"%\" pos=\"%\" yaw=\"%\" pitch=\"%\" roll=\"%\" scale=\"%\"/>\n" strTime strPos YawAngle PitchAngle RollAngle strScale to:cinematic_object_key_frame
-							strKeyTag = cinematic_object_key_frame as string
+							-- append the new node cinematic_key_object to the cinematic_object
+							l_NewCinematicObjectNode.AppendNode l_NewCinematicObjectKeyNode 
 							
-							format strKeyTag to:ostream		
-							
-							
+							l_NewCinematicObjectKeyNode.AddAttributeAsString "time" strTime
+							l_NewCinematicObjectKeyNode.AddAttributeCoordinate "pos" Obj.Pos
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "yaw" YawAngle
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "pitch" PitchAngle
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "roll" RollAngle
+							l_NewCinematicObjectKeyNode.AddAttributeCoordinate "scale" Obj.Scale						
 							
 						)
 					)
 				)
-				cinematic_object_close_tag = "\t</cinematic_object>\n"
-				format cinematic_object_close_tag to:ostream
 			)
 		)
-		cinematic_close_tag = "</cinematic>"
-		format cinematic_close_tag to:ostream	
-		close ostream
+		format "Cinematics XML created successfully: % \n" filenameXML
+		return xDoc.PrettySaveXML()
 	)
 	catch
 	(
 		format "Error generating cinematics XML \n"
 	)
-	format "Cinematics XML created successfully: % \n" filenameXML
 )
