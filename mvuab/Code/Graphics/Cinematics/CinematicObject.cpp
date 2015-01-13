@@ -106,7 +106,7 @@ void CCinematicObject::Update(float ElapsedTime)
 	lerp_animator_1D.SetValues(init, final,1.0f,Math::FUNC_CONSTANT);
 	float yaw;
 	lerp_animator_1D.Update(l_CurrentP, yaw);
-    baseUtils::Trace("yaw=>%f\n",yaw);
+    //baseUtils::Trace("yaw=>%f\n",yaw);
 
     //Math::Vect3f actual(m_CinematicObjectKeyFrames[m_CurrentKeyFrame]->GetYaw(), 0.0, 0.0);
     //Math::Vect3f next(m_CinematicObjectKeyFrames[l_NextKeyFrame]->GetYaw(), 0.0, 0.0);
@@ -177,7 +177,7 @@ void CCinematicObject::Update(float ElapsedTime)
 	m_RenderableObject->SetPitch(pitch);
 	m_RenderableObject->SetRoll(roll);
 	m_RenderableObject->SetScale(scale);
-    baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
+    //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
 
 void CCinematicObject::OnRestartCycle()
