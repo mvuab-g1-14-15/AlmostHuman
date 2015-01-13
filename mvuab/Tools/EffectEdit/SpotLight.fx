@@ -1,144 +1,139 @@
-//Ommi FX
-/*
+float g_SpecularExponent
+<
+string UIWidget = "slider";
+float UIMin = 0.0;
+float UIMax = 200.0;
+float UIStep = 1.0;
+string UIName =  "g_SpecularExponent";
+> = 20;
 
-% Description of my shader.
-% Second line of description for my shader.
+float g_LightIntensity
+<
+string UIWidget = "slider";
+float UIMin = 0.0;
+float UIMax = 3.0;
+float UIStep = 0.01;
+string UIName =  "g_LightIntensity";
+> = 0.5;
 
-keywords: material classic
+float g_NearAt
+<
+string UIWidget = "slider";
+float UIMin = 0.0;
+float UIMax = 50.0;
+float UIStep = 0.01;
+string UIName =  "g_NearAt";
+> = 20;
 
-date: YYMMDD
 
-*/
+float g_FarAt
+<
+string UIWidget = "slider";
+float UIMin = 0.0;
+float UIMax = 50.0;
+float UIStep = 0.01;
+string UIName =  "g_FarAt";
+> = 50;
+
+float3 Lamp0Direction : DIRECTION
+<
+string Object = "Directional Light 0";
+string UIName =  "Lamp 0 Direction";
+string Space = "World";
+> = {-0.5f,2.0f,1.25f};
+
+float3 Lamp_0_color : COLOR <
+string Object = "Directional Light 0";
+string UIName =  "Lamp 0 Color";
+string UIWidget = "Color";
+> = {1.0f,1.0f,1.0f};
 
 
-	  float g_Intensity
-	  <
-	  string UIWidget = "slider";
-	  float UIMin = 0.0;
-	  float UIMax = 3.0;
-	  float UIStep = 0.01;
-	  string UIName =  "g_Intensity";
-	  > = 1.0;
-	
+float3 Lamp0Point : POSITION
+<
+string Object = "Directional Light 0";
+string UIName =  "Lamp 0 Position";
+string Space = "World";
+> = {-0.5f,2.0f,1.25f};
+	  	
+texture Diffuse  <
+string ResourceName = "";//Optional default file name
+string UIName =  "Diffuse Texture";
+string ResourceType = "2D";
+>;
 
-	  float g_SpecularExponent
-	  <
-	  string UIWidget = "slider";
-	  float UIMin = 0.0;
-	  float UIMax = 200.0;
-	  float UIStep = 1.0;
-	  string UIName =  "g_SpecularExponent";
-	  > = 20;
-	
+sampler2D DiffuseSampler = sampler_state {
+Texture = <Diffuse>;
+MinFilter = Linear;
+MagFilter = Linear;
+MipFilter = Linear;
+AddressU = Wrap;
+AddressV = Wrap;
+};
 
-	  texture Diffuse  <
-	  string ResourceName = "";//Optional default file name
-	  string UIName =  "Diffuse Texture";
-	  string ResourceType = "2D";
-	  >;
+float4x4 g_WorldViewProj : WorldViewProjection;
+float4x4 g_World : World;
+float4x4 g_ViewInverseMatrix : ViewInverse;
 
-	  sampler2D DiffuseSampler = sampler_state {
-	  Texture = <Diffuse>;
-	  MinFilter = Linear;
-	  MagFilter = Linear;
-	  MipFilter = Linear;
-	  AddressU = Wrap;
-	  AddressV = Wrap;
-	  };
-	
-	  float g_NearAt
-	  <
-	  string UIWidget = "slider";
-	  float UIMin = 0.0;
-	  float UIMax = 50.0;
-	  float UIStep = 0.01;
-	  string UIName =  "g_NearAt";
-	  > = 2;
-	  
-	  
-	  float g_FarAt
-	  <
-	  string UIWidget = "slider";
-	  float UIMin = 0.0;
-	  float UIMax = 50.0;
-	  float UIStep = 0.01;
-	  string UIName =  "g_FarAt";
-	  > = 5;
-	  float3 Lamp0Point : POSITION
-	  <
-	  string Object = "Point Light 0";
-	  string UIName =  "Lamp 0 Position";
-	  string Space = "World";
-	  > = {-0.5f,2.0f,1.25f};
-
-	  float3 Lamp0Color : COLOR <
-	  string Object = "Point Light 0";
-	  string UIName =  "Lamp 0 Color";
-	  string UIWidget = "Color";
-	  > = {1.0f,1.0f,1.0f};
-	  
-	  float3 Lamp0Dir : DIRECTION
-	  <
-	  string Object = "Point Light 0";
-	  string UIName =  "Lamp 0 Direction";
-	  string Space = "World";
-	  > = {0.0f, 0.0f, 0.0f};
-	  
-	  float Lamp0Angle = 20.0f;
-	  float Lamp0AngleOff = 30.0f;
-struct VertexVS 
+struct VertexVS
 {
     float3 Position	: POSITION;
     float4 UV		: TEXCOORD0;
     float4 Normal	: NORMAL;
 };
 
-/* data passed from vertex shader to pixel shader */
-struct VertexPS 
+struct VertexPS
 {
     float4 HPosition		: POSITION;
     float2 UV				: TEXCOORD0;
 	float3 Normal			: TEXCOORD1;
-    float3 LightVec			: TEXCOORD2;
-	float3 WorldPosition	: TEXCOORD3;
-    float3 WorldNormal		: TEXCOORD4;
-    float3 WorldView		: TEXCOORD5;
+	float3 WorldPosition	: TEXCOORD2;
+    float3 WorldNormal		: TEXCOORD3;
+    float3 WorldView		: TEXCOORD4;
 };
 
 float4x4 g_WorldViewProjectionMatrix : WORLDVIEWPROJECTION;
 float4x4 g_WorldMatrix : WORLD;
-float4x4 g_ViewMatrix : WorldViewInverse;
 
 VertexPS mainVS(VertexVS IN)
 {
-	VertexPS OUT = (VertexPS)0;
-	OUT.HPosition = mul(float4(IN.Position.xyz, 1.0), g_WorldViewProjectionMatrix);
-    OUT.UV=IN.UV;
-    OUT.Normal=mul(IN.Normal,g_WorldMatrix);
-    OUT.WorldPosition=mul(float4(IN.Position.xyz, 1.0), g_WorldMatrix).xyz;
-    return OUT;
+	VertexPS l_OUT=(VertexPS)0;
+	l_OUT.HPosition=mul(float4(IN.Position.xyz, 1.0), g_WorldViewProj);
+	l_OUT.WorldNormal=mul(IN.Normal, (float3x3)g_World);
+	l_OUT.UV=IN.UV;
+	l_OUT.WorldPosition=mul(float4(IN.Position, 1.0), g_World);
+	return l_OUT;
 }
 
-float4 mainPS(VertexPS IN) : COLOR
+float4 mainPS(VertexPS IN) : COLOR 
 {
-	float l_DistanceLightPixel = length(IN.WorldPosition - Lamp0Point);
-	float l_Attenuation= 1 - saturate((l_DistanceLightPixel - g_NearAt)/(g_FarAt - g_NearAt));
-	float3 l_Nn=normalize(IN.Normal);
 	float4 l_MaterialColor=tex2D(DiffuseSampler, IN.UV);
-	float3 l_OmniLightToPixelDir = normalize(IN.WorldPosition - Lamp0Point);
-	float3 l_DiffuseContrib=saturate(dot(l_Nn, -l_OmniLightToPixelDir))*l_MaterialColor.xyz*Lamp0Color*g_Intensity*l_Attenuation;
-	float3 l_CameraPostion=g_ViewMatrix[3].xyz;
-	float3 l_Hn=normalize(normalize(l_CameraPostion-IN.WorldPosition)-l_OmniLightToPixelDir);
-    float3 l_SpecularContrib=Lamp0Color*pow(saturate(dot(l_Nn, l_Hn)), g_SpecularExponent)*g_Intensity*l_Attenuation;
+	float l_DistanceLightPixel = length(IN.WorldPosition - Lamp0Point);
+	float l_DistanceAttenuation= 1 - saturate((l_DistanceLightPixel - g_NearAt)/(g_FarAt - g_NearAt));
 	
-	//1 - saturate((l_DistanceLightPixel - g_NearAt)/(g_FarAt - g_NearAt));
-	float cosLamp0Angle = cos((Lamp0Angle * 3.14151692 / 180.0) / 2);
-	float cosLamp0AngleOff = cos((Lamp0AngleOff * 3.14151692 / 180.0) / 2);
-	float l_SpotLight = 1 - saturate((dot(l_OmniLightToPixelDir, Lamp0Dir) - cosLamp0Angle)/(cosLamp0AngleOff - cosLamp0Angle));
-
-	return l_SpotLight*float4(l_DiffuseContrib + l_SpecularContrib, 1.0);
+	float3 l_Nn=normalize(IN.WorldNormal);
+	float3 l_PixelToLightPosition=normalize(Lamp0Point-IN.WorldPosition);
+	float l_Angle=cos((60.0*3.1416/180.0)/2.0);
+	float l_AngleFallOff=cos((80.0*3.1416/180.0)/2.0);
+	float l_SpotDotValue=dot(-l_PixelToLightPosition, Lamp0Direction);
+	float l_AngleAttenuation=saturate((l_SpotDotValue-l_AngleFallOff)/(l_Angle-l_AngleFallOff));
+	float3 l_DiffuseContrib=saturate(dot(l_PixelToLightPosition, l_Nn));
+	
+	float3 l_CameraPostion=g_ViewInverseMatrix[3].xyz;
+	float3 l_Hn=normalize(normalize(l_CameraPostion-IN.WorldPosition)-Lamp0Direction);
+    float3 l_SpecularContrib=pow(saturate(dot(l_Nn, l_Hn)), g_SpecularExponent);
+	
+	float3 l_PixelColor = (l_DiffuseContrib + l_SpecularContrib) 
+						* g_LightIntensity 
+						* l_DistanceAttenuation
+						* Lamp_0_color
+						* l_AngleAttenuation
+						* l_MaterialColor.xyz;
+						
+	return float4(l_PixelColor,1.0);
+	return float4(Lamp0Point,1.0);
+	return float4(1.0, 0.0, 0.0, 1.0);
 }
-
 
 technique technique0
 {
