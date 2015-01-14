@@ -44,7 +44,7 @@ bool CStaticMesh::Load(const std::string &FileName)
     if(0 == l_pFile)
     {
         CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMesh::Load No se ha podido abrir \"%s\"!", FileName.c_str());
-        return(false);
+		return(false);
     }
 
     unsigned short int l_header = 0;

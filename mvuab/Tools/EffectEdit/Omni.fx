@@ -1,15 +1,40 @@
-//Ommi FX
-/*
+	  float g_Intensity
+	  <
+	  string UIWidget = "slider";
+	  float UIMin = 0.0;
+	  float UIMax = 3.0;
+	  float UIStep = 0.01;
+	  string UIName =  "g_Intensity";
+	  > = 0.5;
+	  
+	  float g_NearAt
+	  <
+	  string UIWidget = "slider";
+	  float UIMin = 0.0;
+	  float UIMax = 50.0;
+	  float UIStep = 0.01;
+	  string UIName =  "g_NearAt";
+	  > = 20;
+	  
+	  
+	  float g_FarAt
+	  <
+	  string UIWidget = "slider";
+	  float UIMin = 0.0;
+	  float UIMax = 50.0;
+	  float UIStep = 0.01;
+	  string UIName =  "g_FarAt";
+	  > = 50;
 
-% Description of my shader.
-% Second line of description for my shader.
-
-keywords: material classic
-
-date: YYMMDD
-
-*/
-
+	  float g_SpecularExponent
+	  <
+	  string UIWidget = "slider";
+	  float UIMin = 0.0;
+	  float UIMax = 200.0;
+	  float UIStep = 1.0;
+	  string UIName =  "g_SpecularExponent";
+	  > = 20;
+	
 
 	  texture Diffuse  <
 	  string ResourceName = "";//Optional default file name
@@ -73,19 +98,22 @@ VertexPS mainVS(VertexVS IN)
 
 float4 mainPS(VertexPS IN) : COLOR
 {
-	float3 l_Nn=normalize(IN.Normal); // Pixel Normal
+	float l_DistanceLightPixel = length(IN.WorldPosition - Lamp0Point);
+	float l_Attenuation= 1 - saturate((l_DistanceLightPixel - g_NearAt)/(g_FarAt - g_NearAt));
+	float3 l_Nn=normalize(IN.Normal);
 	float4 l_MaterialColor=tex2D(DiffuseSampler, IN.UV);
 	float3 l_OmniLightToPixelDir = normalize(IN.WorldPosition - Lamp0Point);
-	float3 l_DiffuseContrib=saturate(dot(l_Nn, -l_OmniLightToPixelDir))*l_MaterialColor.xyz*Lamp_0_color;
+	float3 l_DiffuseContrib=saturate(dot(l_Nn, -l_OmniLightToPixelDir))*l_MaterialColor.xyz*Lamp_0_color*g_Intensity*l_Attenuation;
 	float3 l_CameraPostion=g_ViewMatrix[3].xyz;
 	float3 l_Hn=normalize(normalize(l_CameraPostion-IN.WorldPosition)-l_OmniLightToPixelDir);
-    float3 l_SpecularContrib=Lamp_0_color*pow(saturate(dot(l_Nn, l_Hn)), 20);
+    float3 l_SpecularContrib=Lamp_0_color*pow(saturate(dot(l_Nn, l_Hn)), g_SpecularExponent)*g_Intensity*l_Attenuation;
 	return float4(l_DiffuseContrib + l_SpecularContrib, 1.0);
 }
 
-
-technique technique0 {
-	pass p0 {
+technique technique0
+{
+	pass p0
+	{
 		CullMode = None;
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();

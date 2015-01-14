@@ -50,7 +50,7 @@ bool CAnimatedCoreModel::LoadSkeleton(const std::string &Filename)
 {
     assert(m_CalCoreModel);
     std::string &SkeletonFullPath = m_Path + Filename;
-    return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);      //mem leak
+    return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);
 }
 bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::string &Filename)
 {
