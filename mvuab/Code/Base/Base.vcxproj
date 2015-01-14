@@ -19,6 +19,14 @@
     <ClCompile Include="Math\LerpAnimator3D.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
     <ClCompile Include="Memory\MemLeaks.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp" />
     <ClCompile Include="ScriptManager\ScriptManager.cpp" />
     <ClCompile Include="Timer\CountDownTimer.cpp" />
     <ClCompile Include="Timer\Timer.cpp" />

@@ -76,6 +76,30 @@
     <ClCompile Include="ScriptManager\ScriptManager.cpp">
       <Filter>ScriptManager</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">

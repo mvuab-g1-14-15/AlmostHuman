@@ -17,18 +17,6 @@ extern "C"
 
 using namespace luabind;
 
-
-void registerInputs(lua_State *m_LS)
-{
-	module(m_LS)
-	[
-		class_<CInputManager>("CInputManager")
-			.def(constructor<>())
-
-			.def("IsDown", &CInputManager::IsDown)
-			.def("IsDownUp", &CInputManager::IsDownUp)
-			.def("IsUpDown", &CInputManager::IsUpDown)
-	];
-}
+void registerInputs(lua_State *m_LS);
 
 #endif
