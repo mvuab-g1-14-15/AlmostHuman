@@ -6,11 +6,21 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
 	try 
 	(
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
+		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "camera"
+		xDoc.AppendNode l_RootNode
+		
 		for EachCamera in cameras do
 		(
 			if(classof EachCamera == targetcamera) then 
 			(
-				local ostream=createfile filenameXML
+				
+				fov = EachCamera.Fov as string
+				nearclip = EachCamera.nearclip as string
+				farclip = EachCamera.farclip as string
 				
 				if (EachCamera.position.controller.keys.count > 0) then 
 				(
@@ -33,8 +43,15 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 					strTotalTime = totalTimeStr as string
 					
 					--<camera_key_controller cycle="1" reverse="0" total_time="100.0">
-					camera_key_controller_tag = "<camera_key_controller name=\"" + EachCamera.name + "\" cycle=\"" + isCycleStr + "\" reverse=\"" + isReverseStr + "\" total_time=\"" + totalTimeStr  + "\">\n"
-					format camera_key_controller_tag to:ostream
+					local l_NewCameraKeyControllerNode = xDoc.getNewNode "camera_key_controller"
+			
+					-- append the new node camera_key_controller to the root node camera
+					l_RootNode.AppendNode l_NewCameraKeyControllerNode
+
+					l_NewCameraKeyControllerNode.AddAttributeAsString "name" EachCamera.name
+					l_NewCameraKeyControllerNode.AddAttributeAsString "cycle" isCycleStr
+					l_NewCameraKeyControllerNode.AddAttributeAsString "reverse" isReverseStr
+					l_NewCameraKeyControllerNode.AddAttributeAsString "total_time" totalTimeStr
 					
 					--sorting keys of controller
 					sortkeys EachCamera.controller
@@ -46,67 +63,52 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 						(
 							at time t
 							(
-					
-									fov = EachCamera.fov as string
-									nearclip = EachCamera.nearclip as string
-									farclip = EachCamera.farclip as string	
-														
+																			
 									TimeInSeconds = stringStream ""
 									format "%" (((t as float) / ticksPerFrame) / framerate) to:TimeInSeconds
 									strTime = TimeInSeconds as string
-									
-									Pos = stringStream ""
-									format "% % %" EachCamera.Pos.x EachCamera.Pos.y EachCamera.Pos.z to:Pos
-									strPos = Pos as string
-				
-									Look_at = stringStream ""
-									format "% % %" EachCamera.Target.Pos.X EachCamera.Target.Pos.Y EachCamera.Target.Pos.Z to:Look_at
-									strLookAt = Look_at as string
 
 									--<key time="0.0" pos="-26.8859 9.80159 -6.46455" look_at="-20.3781 3.19479 8.47801" fov="0.602417" near_plane="1.0" far_plane="1000.0"/>
-									key_tag = stringStream ""
-									format "\t<key time=\"%\" pos=\"%\" look_at=\"%\" fov=\"%\" near_plane=\"%\" far_plane=\"%\"/>\n" strTime strPos strLookAt fov nearclip farclip to:key_tag
-									strKeyTag = key_tag as string					
-									
-									format strKeyTag to:ostream		
-								
+									local l_NewCameraKeyTagNode = xDoc.getNewNode "key"
+			
+									-- append the new node key to node camera_key_controller
+									l_NewCameraKeyControllerNode.AppendNode l_NewCameraKeyTagNode 
+
+									l_NewCameraKeyTagNode.AddAttributeAsString "time" strTime
+									l_NewCameraKeyTagNode.AddAttributeCoordinate "pos" EachCamera.Pos
+									l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
+									l_NewCameraKeyTagNode.AddAttributeAsString "fov" fov
+									l_NewCameraKeyTagNode.AddAttributeAsString "near_plane" nearclip
+									l_NewCameraKeyTagNode.AddAttributeAsString "far_plane" farclip
 							)
 						)
 					)	
-					format "</camera_key_controller>\n" to:ostream
 				)
 				else 
 				(
 					--<fixedcamera name="camera1" pos="-26.8859 9.80159 -6.46455" look_at="-20.3781 3.19479 8.47801" fov="0.602417" near_plane="1.0" far_plane="1000.0"/>
+					local l_NewFixedCameraNode = xDoc.getNewNode "fixed_camera"
 					
-					Pos = stringStream ""
-					format "% % %" EachCamera.Pos.x EachCamera.Pos.y EachCamera.Pos.z to:Pos
-					strPos = Pos as string
+					-- append the new node fixedcamera to the root node camera
+					l_RootNode.AppendNode l_NewFixedCameraNode 
 
-					Look_at = stringStream ""
-					format "% % %" EachCamera.Target.Pos.X EachCamera.Target.Pos.Y EachCamera.Target.Pos.Z to:Look_at
-					strLookAt = Look_at as string
-				
-					fov = EachCamera.Fov as string
-					nearclip = EachCamera.nearclip as string
-					farclip = EachCamera.farclip as string
-
-					--<key time="0.0" pos="-26.8859 9.80159 -6.46455" look_at="-20.3781 3.19479 8.47801" fov="0.602417" near_plane="1.0" far_plane="1000.0"/>
-					fixed_camera_tag = stringStream ""
-					format  "<fixed_camera name=\"%\" pos=\"%\" look_at=\"%\" fov=\"%\" near_plane=\"%\" far_plane=\"%\"/>\n" EachCamera.name strPos strLookAt fov nearclip farclip to:fixed_camera_tag 
-					strFixedCamera = fixed_camera_tag  as string
-					format strFixedCamera to:ostream		
-				)
-				close ostream				
+					l_NewFixedCameraNode.AddAttributeAsString "name" EachCamera.name
+					l_NewFixedCameraNode.AddAttributeCoordinate "pos" EachCamera.Pos
+					l_NewFixedCameraNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
+					l_NewFixedCameraNode.AddAttributeAsString "fov" fov
+					l_NewFixedCameraNode.AddAttributeAsString "near_plane" nearclip
+					l_NewFixedCameraNode.AddAttributeAsString "far_plane" farclip
+				)			
 			)
 		)
-		format "Camera XML created successfully: % \n" filenameXML
 	)
 	catch
 	(
 		format "Error generating camera XML \n"
 	)
 	
+	format "Camera XML created successfully: % \n" filenameXML
+	return xDoc.PrettySaveXML()
 )
 
 fn ExportCinematicObjects nFrames filenameXML =

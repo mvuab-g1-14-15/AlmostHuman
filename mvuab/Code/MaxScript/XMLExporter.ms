@@ -1,27 +1,44 @@
 fileIn "Utils.ms"
+fileIn "XMLStruct.ms"
+
 --export de la class
 fn ExportStaticMeshXMLFile filenameXML MeshDir =
 (	
-	local ostream=createfile filenameXML
-	local UniqueInstanceArray = GetUniqueInstances()
-	
-	if UniqueInstanceArray.count == 0 then 
+	try
 	(
-		format "Empty selection. Select any object \n"
-		return -1
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
+		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "lights"
+		xDoc.AppendNode l_RootNode
+		
+		local UniqueInstanceArray = GetUniqueInstances()
+				
+		if UniqueInstanceArray.count == 0 then 
+		(
+			format "Empty selection. Select any object \n"
+			return -1
+		)
+		
+		for Obj in UniqueInstanceArray do
+		(
+				filename = "\\meshes\\" + Obj.name +".mesh"
+				
+				local l_NewStaticMeshNode = xDoc.getNewNode "static_mesh"			
+				-- append the new node static_mesh to the root node static_meshs
+				l_RootNode.AppendNode l_NewStaticMeshNode 
+
+				l_NewStaticMeshNode.AddAttributeAsString "name" Obj.name	
+				l_NewStaticMeshNode.AddAttributeAsString "filename" filename
+
+		)
 	)
-
-	format "<static_meshes>\n" to:ostream
-
-	for Obj in UniqueInstanceArray do
+	catch
 	(
-			filename = "\\meshes\\" + Obj.name +".mesh"
-			tag1 = "\t<static_mesh name=\"" + Obj.name + "\" filename=\"" + filename + "\"/>\n"
-			format tag1 to:ostream
+		format "Error generating mesh instance\n"
 	)
-	
-	format "</static_meshes>\n" to:ostream
-	close ostream
+	return xDoc.PrettySaveXML()
 )
 
 --export de la class
@@ -29,16 +46,19 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
 	try
 	(
-		local ostream=createfile filenameXML
 		local unique_instances = GetUniqueInstances()
-			
+		
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "RenderableObjects"
+		xDoc.AppendNode l_RootNode
+		
 		if AllObj.count == 0 then 
 		(
 			format "Empty selection. Select any object \n"
 			return -1
 		)
-		
-		format "<RenderableObjects>\n" to:ostream
 		
 		for Obj in AllObj do
 		(
@@ -61,39 +81,26 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 					instance_obj = Obj
 				)
 			)
+		
+			local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
+			-- append the new node MeshInstance to the root node RenderableObjects
+			l_RootNode.AppendNode l_NewMeshInstanceNode 
 
-			ObjectName = Obj.name as string
-		
-			YawAngle =GetYaw Obj.transform as string
-			PitchAngle= GetPitch Obj.transform as string
-			RollAngle= GetRoll Obj.transform as string
+			l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
+			l_NewMeshInstanceNode.AddAttributeAsString "core" instance_obj.name
+			l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+			l_NewMeshInstanceNode.AddAttributeAsString "yaw" GetYaw Obj.transform
+			l_NewMeshInstanceNode.AddAttributeAsString "pitch" GetPitch Obj.transform
+			l_NewMeshInstanceNode.AddAttributeAsString "roll" GetRoll Obj.transform
+			l_NewMeshInstanceNode.AddAttributeAsString "scale" Obj.Scale
 			
-			PosX = Obj.Pos.x as string
-			PosY = Obj.Pos.z as string
-			PosZ = Obj.Pos.y as string
-			
-			Pos = stringStream ""
-			format "% % %" PosX PosY PosZ to:Pos
-			strPos = Pos as string
-			
-			ScaleStr = stringStream ""
-			format "% % %" Obj.Scale.x Obj.Scale.y Obj.Scale.z to:ScaleStr
-			strScale = ScaleStr as string
-			
-			tag1 = stringStream ""
-			format "\t<MeshInstance name=\"%\" core=\"%\" pos=\"%\" yaw=\"%\"  pitch=\"%\" roll=\"%\" scale=\"%\"/>\n" ObjectName instance_obj.name strPos YawAngle PitchAngle RollAngle strScale to:tag1
-			strTag1 = tag1 as string
-			
-			format strTag1 to:ostream		
 		)
-		
-		format "</RenderableObjects>\n" to:ostream
-		close ostream
 	)
 	catch
 	(
 		format "Error generating renderable object\n"
-	)	
+	)
+	return xDoc.PrettySaveXML()
 )
 
 fn ExportTextureFile AllObj DestPath = 
