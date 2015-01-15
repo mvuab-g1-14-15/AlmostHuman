@@ -2,7 +2,7 @@
 #ifndef EFFECTS_DEFINES_H
 #define EFFECTS_DEFINES_H
 
-#define MAX_LIGHTS_BY_SHADER 1
+#define MAX_LIGHTS_BY_SHADER 4
 
 const char WorldMatrixParameterStr[] = "WORLD";
 const char ViewMatrixParameterStr[] = "VIEW";

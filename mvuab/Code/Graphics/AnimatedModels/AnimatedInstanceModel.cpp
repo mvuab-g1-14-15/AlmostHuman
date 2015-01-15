@@ -44,7 +44,7 @@ void CAnimatedInstanceModel::Render()
 
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
-    CEffectManager   *l_pEffectManager  = CCore::GetSingletonPtr()->GetEffectManager();
+    /*CEffectManager   *l_pEffectManager  = CCore::GetSingletonPtr()->GetEffectManager();
     CEffectTechnique *l_pEffectTechnique = l_pEffectManager->GetAnimatedModelTechnique();
 
     //if(NULL == l_pEffectTecnique) l_pEffectTecnique = m_EffectTechnique;
@@ -94,7 +94,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
                 l_pCalHardwareModel->getStartIndex(),
                 l_pCalHardwareModel->getFaceCount()
             );
-    }
+    }*/
 }
 
 void CAnimatedInstanceModel::RenderModelBySoftware()

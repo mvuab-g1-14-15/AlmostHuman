@@ -523,18 +523,24 @@ void CGraphicsManager::DrawLine ( const Math::Vect3f &PosA, const Math::Vect3f &
     m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,1, v,sizeof(CUSTOMVERTEX));
 }
 
-void CGraphicsManager::SetTransform    (D3DXMATRIX& matrix)
+void CGraphicsManager::SetTransform(D3DXMATRIX& matrix)
 {
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
+	CEffectManager::GetSingletonPtr()->SetWorldMatrix(Math::Mat44f(matrix));
 }
 
 void CGraphicsManager::SetTransform(Math::Mat44f& m)
 {
-    D3DXMATRIX aux(    m.m00, m.m10, m.m20, m.m30
-                , m.m01, m.m11, m.m21, m.m31
-                , m.m02, m.m12, m.m22, m.m32
-                , m.m03, m.m13, m.m23, m.m33);
+    D3DXMATRIX aux
+	(
+		m.m00, m.m10, m.m20, m.m30,
+		m.m01, m.m11, m.m21, m.m31,
+		m.m02, m.m12, m.m22, m.m32,
+		m.m03, m.m13, m.m23, m.m33
+	);
+
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &aux);
+	CEffectManager::GetSingletonPtr()->SetWorldMatrix(m);
 }
 
 //La posicion y el (w,h) esta en pixeles

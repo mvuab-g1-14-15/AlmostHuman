@@ -214,7 +214,8 @@ D3DXHANDLE CEffect::GetTechniqueByName(const std::string &TechniqueName)
 
 bool CEffect::SetLights(size_t NumOfLights)
 {
-    return true;
+
+	return (NumOfLights < MAX_LIGHTS_BY_SHADER)? true : false;
 }
 
 bool CEffect::SetCameraPosition(Math::Vect3f CameraPosition)

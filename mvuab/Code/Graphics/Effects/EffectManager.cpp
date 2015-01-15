@@ -11,16 +11,12 @@ CEffectManager::CEffectManager()
     m_LightViewMatrix(Math::m44fIDENTITY),
     m_ShadowProjectionMatrix(Math::m44fIDENTITY),
     m_CameraEye(Math::v3fZERO),
-    m_StaticMeshTechnique(0),
-    m_AnimatedModelTechnique(0),
     m_Filename("")
 {
 }
 
 CEffectManager::~CEffectManager()
 {
-    CHECKED_DELETE(m_StaticMeshTechnique);
-    CHECKED_DELETE(m_AnimatedModelTechnique);
     CleanUp();
     Destroy();
 }
@@ -100,37 +96,12 @@ std::string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short
 
 size_t CEffectManager::GetMaxLights() const
 {
-    return 1; // Ask Jordi
+    return MAX_LIGHTS_BY_SHADER;
 }
 
 CEffect * CEffectManager::GetEffect(const std::string &Name)
 {
     return m_Effects.GetResource(Name);
-}
-
-CEffectTechnique * CEffectManager::GetEffectTechnique(const std::string &Name)
-{
-    return GetResource(Name);
-}
-
-CEffectTechnique * CEffectManager::GetStaticMeshTechnique() const
-{
-    return m_StaticMeshTechnique;
-}
-
-void CEffectManager::SetStaticMeshTechnique(CEffectTechnique *StaticMeshTechnique)
-{
-    m_StaticMeshTechnique = StaticMeshTechnique;
-}
-
-CEffectTechnique * CEffectManager::GetAnimatedModelTechnique() const
-{
-    return m_AnimatedModelTechnique;
-}
-
-void CEffectManager::SetAnimatedModelTechnique(CEffectTechnique *AnimatedModelTechnique)
-{
-    m_AnimatedModelTechnique = AnimatedModelTechnique;
 }
 
 void CEffectManager::CleanUp()
