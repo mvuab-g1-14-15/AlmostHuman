@@ -18,7 +18,7 @@ public:
     virtual ~CProcess(){}
 
     virtual void Init() = 0;
-    virtual void Update(float32 deltaTime) = 0;
+    virtual void Update() = 0;
     virtual void Render() = 0;
     virtual void RenderDebugInfo();
 

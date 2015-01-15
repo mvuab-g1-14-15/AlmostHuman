@@ -10,7 +10,7 @@ CSoundManager::~CSoundManager()
 {
 }
 
-void CSoundManager::Update(float32 deltaTime)
+void CSoundManager::Update()
 {    
 }
 

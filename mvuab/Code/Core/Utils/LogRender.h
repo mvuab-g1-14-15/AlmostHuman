@@ -32,7 +32,7 @@ public:
    ~CLogRender();
 
    void                    Render                       (Math::CColor color = Math::colWHITE);
-   void                    Update                       (float32 deltaTime);
+   void                    Update                       ();
    uint32                   GetNumOfLines                () const                                {return m_uLinesPerPage;}
    void                    PageUp                       ();
    void                    PageDown                     ();

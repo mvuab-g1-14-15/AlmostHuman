@@ -1,12 +1,16 @@
-#include "LogRender.h"
+#include "Utils\LogRender.h"
 #include "Assert.h"
-#include <windows.h>
-#include <vector>
 #include "Utils\BaseUtils.h"
 #include "ActionManager.h"
 #include "GraphicsManager.h"
 #include "Fonts\FontManager.h"
 #include "Logger\Logger.h"
+#include "Timer\Timer.h"
+#include "Core.h"
+
+#include <windows.h>
+#include <vector>
+
 //#include "Utils\MemLeaks.h"
 
 
@@ -41,12 +45,12 @@ void CLogRender::SetLinePerPage (uint32 lines)
    m_uIsInLastLog = true;
 }
 
-void CLogRender::Update (float32 deltaTime)
+void CLogRender::Update ()
 {
    if (m_bAnimation)
    {
        float32 value;
-       bool finish = m_LerpAnimator1D.Update(deltaTime,value);
+       bool finish = m_LerpAnimator1D.Update(deltaTime, value);
        SetLinePerPage((uint32)(value));
        
        if( finish)

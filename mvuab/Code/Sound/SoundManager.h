@@ -15,7 +15,7 @@ public:
     CSoundManager();
     ~CSoundManager();
 
-    void Update(float32 deltaTime);
+    void Update();
     void Render();
 };
 

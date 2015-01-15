@@ -24,8 +24,8 @@ CEngine::~CEngine()
 void CEngine::Update()
 {
     m_pCore->Update();
-    m_pProcess->Update(deltaTime);
-    m_pLogRender->Update(deltaTime);
+    m_pProcess->Update();
+    m_pLogRender->Update();
 }
 
 void CEngine::Render()

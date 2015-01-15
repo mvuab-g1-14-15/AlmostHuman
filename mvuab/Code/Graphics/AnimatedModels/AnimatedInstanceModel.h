@@ -39,7 +39,7 @@ class CAnimatedInstanceModel : public CRenderableObject
         void RenderModelBySoftware      ();
         void RenderModelByHardware      ();
 
-        void Update                     (float32 deltaTime);
+        void Update                     ();
         void ExecuteAction              (uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget=1.0f, bool AutoLock=true);
 
         void BlendCycle                 (uint32 Id, float32 Weight, float32 DelayIn);

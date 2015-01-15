@@ -12,7 +12,7 @@ public:
     CRenderableObject();
     virtual ~CRenderableObject();
 
-    virtual void Update(float ElapsedTime) {}
+    virtual void Update() {}
     virtual void Render() = 0;
 
     virtual unsigned int GetNumVertex   () { return 0; }

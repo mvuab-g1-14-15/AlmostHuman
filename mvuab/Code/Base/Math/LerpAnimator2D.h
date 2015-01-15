@@ -21,7 +21,7 @@ public:
     
     void        SetValues            (Math::Vect2f initValue, Math::Vect2f endValue, float32 totalTime, ETypeFunction type); 
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
-    bool        Update                (float32 deltaTime, Math::Vect2f &value);
+    bool        Update                (float32 ElapsedTime, Math::Vect2f &value);
     void        Pause                    (bool flag) {m_bPause = flag;}
     
 private:

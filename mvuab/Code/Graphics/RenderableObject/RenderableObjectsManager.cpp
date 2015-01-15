@@ -7,7 +7,6 @@
 #include "Math\MathTypes.h"
 #include "Cinematics\Cinematic.h"
 #include "Core.h"
-#include "Timer/Timer.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager() : m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
 {
@@ -121,7 +120,7 @@ void CRenderableObjectsManager::Render()
 void CRenderableObjectsManager::Update()
 {
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
-        m_ResourcesVector[i]->Update(deltaTime);
+        m_ResourcesVector[i]->Update();
 }
 
 CRenderableObject * CRenderableObjectsManager::AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Math::Vect3f &Position)

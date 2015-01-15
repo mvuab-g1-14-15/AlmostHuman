@@ -21,7 +21,7 @@ public:
     virtual ~CTestProcess();
 
     virtual void Init();
-    virtual void Update(float32 deltaTime);
+    virtual void Update();
     virtual void Render();
     virtual void RenderDebugInfo();
 };

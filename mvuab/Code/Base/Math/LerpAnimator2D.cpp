@@ -14,9 +14,9 @@ void Math::CLerpAnimator2D::SetValues (Math::Vect2f initValue, Math::Vect2f endV
 }
 
 
-bool Math::CLerpAnimator2D::Update (float32 deltaTime, Math::Vect2f &value)
+bool Math::CLerpAnimator2D::Update (float32 ElapsedTime, Math::Vect2f &value)
 {
-    m_fElapsedTime += deltaTime;
+    m_fElapsedTime += ElapsedTime;
     bool finish = false;
     if (m_fElapsedTime >= m_fTotalTime)
     {

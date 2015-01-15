@@ -11,6 +11,7 @@
 
 #include "RenderableVertex\RenderableVertex.h"
 #include "Core.h"
+#include "Timer\Timer.h"
 
 #define MAXBONES 29
 
@@ -180,7 +181,7 @@ void CAnimatedInstanceModel::RenderModelBySoftware()
     l_pCalRenderer->endRendering();
 }
 
-void CAnimatedInstanceModel::Update(float32 deltaTime)
+void CAnimatedInstanceModel::Update()
 {
 	m_CalModel->update(deltaTime);
 }

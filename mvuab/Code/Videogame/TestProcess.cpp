@@ -11,6 +11,7 @@
 #include "Math\AABB.h"
 #include "Core.h"
 #include "Utils\BaseUtils.h"
+#include "Timer\Timer.h"
 
 #include "ScriptManager\ScriptManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
@@ -44,7 +45,7 @@ CTestProcess::~CTestProcess()
     CLogger::GetSingletonPtr()->SaveLogsInFile();
 }
 
-void CTestProcess::Update(float32 deltaTime)
+void CTestProcess::Update()
 {
     m_Amount +=  0.01f;
     m_Angle  += deltaTime * 0.05f;
