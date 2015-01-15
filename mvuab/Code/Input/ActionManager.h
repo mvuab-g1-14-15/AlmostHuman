@@ -45,7 +45,7 @@ public:
     bool DoAction    (const std::string &action);
     bool DoAction    (const std::string &action, float32 &amount);
     void SetAction  (const std::string &action, VecInputs &a_vInputs);
-    void Update(float32 deltaTime);
+    void Update();
     void Destroy();
 private:
     typedef std::map<std::string, std::vector<S_INPUT_ACTION>> MapActions;

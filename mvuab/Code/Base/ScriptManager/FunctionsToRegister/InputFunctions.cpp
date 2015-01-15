@@ -1,6 +1,7 @@
 #include "InputFunctions.h"
 
 #include "InputManager.h"
+#include "ActionManager.h"
 
 extern "C"
 {
@@ -26,5 +27,19 @@ void registerInputs(lua_State *m_LS)
 			.def("IsDown", &CInputManager::IsDown)
 			.def("IsDownUp", &CInputManager::IsDownUp)
 			.def("IsUpDown", &CInputManager::IsUpDown)
+	];
+
+    module(m_LS)
+	[
+		class_<CActionManager>("CActionManager")
+			.def(constructor<>())
+			
+
+			.def("LoadXML", &CActionManager::LoadXML)
+            .def("SaveXML", &CActionManager::SaveXML)
+			.def("DoAction",(bool(CActionManager::*)(const std::string &)) &CActionManager::DoAction)
+			.def("DoAction",(bool(CActionManager::*)(const std::string &, float32 &)) &CActionManager::DoAction)
+            .def("SetAction", &CActionManager::SetAction)
+            .def("Update", &CActionManager::Update)
 	];
 }

@@ -1,22 +1,26 @@
 function init ()
 	core = Singleton_Core.get_singleton()
-	input_manager = core:GetInputManager()
+	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
 	pos = Vect3f(0, 0, 0)
 end
 
 function update ()
-	if input_manager:IsDownUp(0,0xCB) then
-		pos.x = pos.x - 1
+	local amount = 0
+	if action_manager:DoAction("Left") then
+		pos.x = pos.x - 0.1
 	end
-	if input_manager:IsDownUp(0,0xCD) then
-		pos.x = pos.x + 1
+	amount = 0
+	if action_manager:DoAction("Right") then
+		pos.x = pos.x + 0.1
 	end
-	if input_manager:IsDownUp(0,0xD0) then
-		pos.z = pos.z - 1
+	amount = 0
+	if action_manager:DoAction("Backward") then
+		pos.z = pos.z - 0.1
 	end
-	if input_manager:IsDownUp(0,0xC8) then
-		pos.z = pos.z + 1
+	amount = 0
+	if action_manager:DoAction("Forward") then
+		pos.z = pos.z + 0.1
 	end
 end
 
