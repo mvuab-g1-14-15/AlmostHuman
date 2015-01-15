@@ -3,6 +3,7 @@
 #include "Effect.h"
 #include "Lights\LightManager.h"
 #include "Cameras\CameraManager.h"
+#include "Core.h"
 #include "Timer\Timer.h"
 #include "Logger\Logger.h"
 

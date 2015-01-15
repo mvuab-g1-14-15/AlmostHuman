@@ -10,6 +10,7 @@
 #include "Math\Vector3.h"
 #include "Utils\Visible.h"
 #include "Utils\Name.h"
+#include "Timer\Timer.h"
 
 using namespace luabind;
 
@@ -126,5 +127,11 @@ void registerBase(lua_State *m_LS)
 			
 			.def("SetVisible", &CVisible::SetVisible)
 			.def("GetVisible", &CVisible::GetVisible)
+	];
+
+	module(m_LS)
+	[
+		class_<CTimer>("CTimer")
+			.def("GetElapsedTime", &CTimer::GetElapsedTime)
 	];
 }

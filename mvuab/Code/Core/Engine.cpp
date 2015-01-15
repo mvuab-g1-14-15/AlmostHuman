@@ -10,8 +10,7 @@
 CEngine::CEngine() :
     m_pCore( new CCore() ),
     m_pLogRender( new CLogRender()),
-    m_pProcess( 0 ),
-    m_timer(new CTimer(30))
+    m_pProcess( 0 )
 {
 }
 
@@ -20,15 +19,13 @@ CEngine::~CEngine()
     CHECKED_DELETE( m_pCore );
     CHECKED_DELETE( m_pProcess );
     CHECKED_DELETE( m_pLogRender );
-    CHECKED_DELETE( m_timer );
 }
 
 void CEngine::Update()
 {
-    m_timer->Update();
-    m_pCore->Update(m_timer->GetElapsedTime());
-    m_pProcess->Update(m_timer->GetElapsedTime());
-    m_pLogRender->Update(m_timer->GetElapsedTime());
+    m_pCore->Update();
+    m_pProcess->Update(deltaTime);
+    m_pLogRender->Update(deltaTime);
 }
 
 void CEngine::Render()

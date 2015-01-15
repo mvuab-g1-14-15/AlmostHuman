@@ -70,7 +70,7 @@ CGraphicsManager::~CGraphicsManager()
 {
 }
 
-void CGraphicsManager::Update(float32 deltaTime)
+void CGraphicsManager::Update()
 {
 }
 

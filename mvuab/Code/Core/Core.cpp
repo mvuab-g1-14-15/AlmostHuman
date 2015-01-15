@@ -16,6 +16,7 @@
 #include "Cameras\CameraManager.h"
 #include "Effects\EffectManager.h"
 #include "Lights\LightManager.h"
+#include "Timer\Timer.h"
 
 CCore::CCore() :
     m_ConfigPath(""),
@@ -46,7 +47,8 @@ CCore::CCore() :
     m_pScriptManager( new CScriptManager() ),
     m_pCameraManager( new CCameraManager() ),
     m_pEffectManager( new CEffectManager() ),
-	m_pLightManager( new CLightManager() )
+	m_pLightManager( new CLightManager() ),
+	m_pTimer( new CTimer(30) )
 {
 }
 
@@ -66,6 +68,7 @@ CCore::~CCore()
     CHECKED_DELETE(m_pCameraManager);
     CHECKED_DELETE(m_pEffectManager);
 	CHECKED_DELETE(m_pLightManager);
+	CHECKED_DELETE(m_pTimer);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -79,9 +82,10 @@ void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
     InitManagers();
 }
 
-void CCore::Update(float32 deltaTime)
+void CCore::Update()
 {
-    m_pGraphicsManager->Update(deltaTime);
+	m_pTimer->Update();
+    m_pGraphicsManager->Update();
     m_pInputManager->Update();
     m_pActionManager->Update();
     m_pDebugWindowManager->Update();

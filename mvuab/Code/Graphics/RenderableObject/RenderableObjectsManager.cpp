@@ -6,7 +6,9 @@
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "Math\MathTypes.h"
 #include "Cinematics\Cinematic.h"
+#include "Core.h"
 #include "Timer/Timer.h"
+
 CRenderableObjectsManager::CRenderableObjectsManager() : m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
 {
 }

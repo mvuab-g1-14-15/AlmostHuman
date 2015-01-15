@@ -1,6 +1,7 @@
 #include "FPSDebugWindow.h"
 #include "GraphicsManager.h"
 #include "Fonts\FontManager.h"
+#include "Core.h"
 #include "Timer\Timer.h"
 
 CFPSDebugWindow::CFPSDebugWindow(Math::Vect2i aWindowPosition) :

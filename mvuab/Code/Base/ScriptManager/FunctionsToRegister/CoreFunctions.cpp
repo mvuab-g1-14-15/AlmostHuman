@@ -2,6 +2,7 @@
 
 #include "Engine.h"
 #include "Core.h"
+#include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "Language\LanguageManager.h"
@@ -51,6 +52,7 @@ void registerCore(lua_State *m_LS)
 			.def("GetScriptManager", &CCore::GetScriptManager)
 			.def("GetStaticMeshManager", &CCore::GetStaticMeshManager)
 			.def("GetTextureManager", &CCore::GetTextureManager)
+			.def("GetTimer", &CCore::GetTimer)
 			//Getter Variables
 			.def("GetAnimatedModelsPath", &CCore::GetAnimatedModelsPath)
 			.def("GetConfigPath", &CCore::GetConfigPath)

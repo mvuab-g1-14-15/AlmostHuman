@@ -1,5 +1,6 @@
 #include "CameraFPShooter.h"
 #include "ActionManager.h"
+#include "Core.h"
 #include "Timer\Timer.h"
 
 CCameraFPShooter::CCameraFPShooter()

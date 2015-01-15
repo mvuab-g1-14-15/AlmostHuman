@@ -20,7 +20,7 @@ public:
     ~CGraphicsManager();
 
     bool Init (HWND hWnd, bool fullscreenMode, uint32 widthScreen, uint32 heightScreen);
-    void Update(float32 deltaTime);
+    void Update();
     void Render();
     void Release();
     void SetupMatrices();

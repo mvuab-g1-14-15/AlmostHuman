@@ -12,9 +12,8 @@
 #define INC_TIMERMANAGER_H_
 
 #include "Utils\Types.h"
-#include "Utils\SingletonPattern.h"
 
-class CTimer : public CSingleton<CTimer>
+class CTimer
 {
 
 public:
@@ -43,9 +42,9 @@ private:
         uint32          m_uIndex;               // current array position
 };
 
-#define deltaTime CTimer::GetSingletonPtr()->GetElapsedTime()
-#define FPS       CTimer::GetSingletonPtr()->GetFPS()
-#define MinFPS    CTimer::GetSingletonPtr()->GetMinFPS()
-#define MaxFPS    CTimer::GetSingletonPtr()->GetMaxFPS()
+#define deltaTime CCore::GetSingletonPtr()->GetTimer()->GetElapsedTime()
+#define FPS       CCore::GetSingletonPtr()->GetTimer()->GetFPS()
+#define MinFPS    CCore::GetSingletonPtr()->GetTimer()->GetMinFPS()
+#define MaxFPS    CCore::GetSingletonPtr()->GetTimer()->GetMaxFPS()
 
 #endif //INC_TIMERMANAGER_H_

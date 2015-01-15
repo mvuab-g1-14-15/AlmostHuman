@@ -10,7 +10,6 @@
 class CCore;
 class CProcess;
 class CLogRender;
-class CTimer;
 
 class CEngine
 {
@@ -28,7 +27,6 @@ private:
     CCore*              m_pCore;
     CLogRender*         m_pLogRender;
     CProcess*           m_pProcess;
-    CTimer*             m_timer;
 };
 
 #endif // ENGINE_H

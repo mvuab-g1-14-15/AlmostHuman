@@ -25,6 +25,7 @@ class CScriptManager;
 class CCameraManager;
 class CEffectManager;
 class CLightManager;
+class CTimer;
 
 class CCore : public CSingleton<CCore>
 {
@@ -66,6 +67,7 @@ private:
     CCameraManager*                 m_pCameraManager;
     CEffectManager*                 m_pEffectManager;
 	CLightManager*					m_pLightManager;
+	CTimer*							m_pTimer;
 
     void LoadXml();
     void InitManagers();
@@ -75,7 +77,7 @@ public:
     ~CCore();
 
     void Init( const std::string & aConfigPath, HWND aWindowId );
-    void Update(float32 deltaTime);
+    void Update();
     void Render();
 
     // Getters and setters
@@ -104,6 +106,7 @@ public:
     GET_SET_PTR(CCameraManager, CameraManager);
     GET_SET_PTR(CEffectManager, EffectManager);
 	GET_SET_PTR(CLightManager, LightManager);
+	GET_SET_PTR(CTimer, Timer);
 };
 
 #endif // GRAPHICS_MANAGER_H
