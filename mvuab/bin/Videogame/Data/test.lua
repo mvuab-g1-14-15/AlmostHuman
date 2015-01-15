@@ -6,19 +6,15 @@ function init ()
 end
 
 function update ()
-	local amount = 0
 	if action_manager:DoAction("Left") then
 		pos.x = pos.x - 0.1
 	end
-	amount = 0
 	if action_manager:DoAction("Right") then
 		pos.x = pos.x + 0.1
 	end
-	amount = 0
 	if action_manager:DoAction("Backward") then
 		pos.z = pos.z - 0.1
 	end
-	amount = 0
 	if action_manager:DoAction("Forward") then
 		pos.z = pos.z + 0.1
 	end
