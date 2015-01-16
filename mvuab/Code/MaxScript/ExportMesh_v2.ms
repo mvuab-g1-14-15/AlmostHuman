@@ -1,3 +1,5 @@
+fileIn "GetAABB.ms"
+
 clearListener()
 
 struct STexture
@@ -78,6 +80,33 @@ struct SVertex
 		--convert Color
 		format "%" m_Color to:l_Text
 		return (l_Text as string)
+	),
+	
+	fn WriteToFile =
+	(
+		format "\tPos: (%, %, %)\n" m_Position.x m_Position.z m_Position.y
+		WriteFloat file m_Position.x
+		WriteFloat file m_Position.z
+		WriteFloat file m_Position.y
+		
+		
+		format "\tNormal: (%, %, %)\n" m_Normal.x m_Normal.z m_Normal.y
+		WriteFloat file m_Normal.x
+		WriteFloat file m_Normal.z
+		WriteFloat file m_Normal.y
+		
+		format "\tUV1: (%, %, %)\n" m_UV.x m_UV.y
+		WriteFloat file m_UV.x
+		WriteFloat file m_UV.y
+	
+		format "\tUV2: (%, %)\n" m_UV2.x m_UV2.y
+		WriteFloat file m_UV2.x
+		WriteFloat file m_UV2.y
+		
+		format "\tColor: (%, %, %)\n" m_Color.r m_Color.g m_Color.b
+		WriteFloat file m_Color.r
+		WriteFloat file m_Color.g
+		WriteFloat file m_Color.b
 	)
 )
 
@@ -100,6 +129,17 @@ struct SVertexBuffer
 		(
 			return m_VertexIdMap.Item[l_VertexStr]
 		)
+	),
+	
+	fn WriteToFile file =
+	(
+			local l_NumVertex = m_VertexList.count 
+			WriteShort file num_vertex #unsigned
+			for iVertex = 1 to l_NumVertex do
+			(
+				m_VertexList[iVertex].WriteToFile file
+			)
+	
 	)
 )
 
@@ -110,13 +150,40 @@ struct SIndexBuffer
 	fn AddIndex index =
 	(
 		append m_IndexList index
+	),
+	
+	fn WriteToFile =
+	(
+		local l_NumIds = m_IndexList.count
+		WriteShort file num_face #unsigned
+		for iIndex = 1 to l_NumIds do
+		(
+			WriteShort file m_IndexList[iIndex] #unsigned
+		)
 	)
 )
 
 struct SAABB
 (
 	m_PointMin = point3 0 0 0,
-	m_PointMax = point3 0 0 0
+	m_PointMax = point3 0 0 0,
+	
+	fn WriteToFile file = 
+	(
+		WriteFloat file m_PointMin.x
+		WriteFloat file m_PointMin.z
+		WriteFloat file m_PointMin.y
+		WriteFloat file m_PointMax.x
+		WriteFloat file m_PointMax.z
+		WriteFloat file m_PointMax.y
+	),
+	
+	fn CalculateFromObject Obj =
+	(
+		local bb = GetAABB Obj
+		m_PointMin = point3 bb[1].x bb[1].y bb[1].z
+		m_PointMax = point3 bb[2].x bb[2].y bb[2].z
+	)
 )
 
 struct SBndSphere
