@@ -5,11 +5,14 @@
 
 #include "RenderableObject\RenderableObject.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "Utils\Name.h"
 #include "Math\Color.h"
 
 #include "Object3D.h"
 
 #include "Cameras/CameraManager.h"
+
+#include "Cinematics/Cinematic.h"
 
 #include "Math\Matrix44.h"
 
@@ -84,6 +87,8 @@ void registerGraphics(lua_State *m_LS)
 			.def("CleanUp", &CRenderableObjectsManager::CleanUp)
 			.def("Load", &CRenderableObjectsManager::Load)
 
+			.def("AddResource", &CRenderableObjectsManager::AddResource)
+
 	];
 
 	module(m_LS)
@@ -124,20 +129,34 @@ void registerGraphics(lua_State *m_LS)
 			.def("Update", &CGraphicsManager::Update)
 	];
 
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     module(m_LS)
-        [
-            class_<CCameraManager>("CCameraManager")
-            .def(constructor<>())
+    [
+        class_<CCameraManager>("CCameraManager")
+        .def(constructor<>())
 
-            .def("GetCamera", &CCameraManager::GetCamera)
-            //.def("SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
-            .def("GetCurrentCamera", &CCameraManager::GetCurrentCamera)
-            .def("NewCamera", &CCameraManager::NewCamera)
-            .def("DeleteCamera", &CCameraManager::DeleteCamera)
-        ];
+        .def("GetCamera", &CCameraManager::GetCamera)
+        //.def("SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
+        .def("GetCurrentCamera", &CCameraManager::GetCurrentCamera)
+        .def("NewCamera", &CCameraManager::NewCamera)
+        .def("DeleteCamera", &CCameraManager::DeleteCamera)
+    ];
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	module(m_LS)
+	[
+		class_<CRenderableObject, CName>("CRenderableObject")
+	];
+
+	module(m_LS)
+    [
+        class_<CCinematic, CRenderableObject>("CCinematic")
+        .def(constructor<const std::string &>())
+
+        .def("Stop", &CCinematic::Stop)
+		.def("Play", &CCinematic::Play)
+		.def("Pause", &CCinematic::Pause)
+	];
 }

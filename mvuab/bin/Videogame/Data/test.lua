@@ -2,6 +2,10 @@ function init ()
 	core = Singleton_Core.get_singleton()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
+	renderable_objects_manager = core:GetRenderableObjectsManager()
+	cinematic = CCinematic("Data/cinematic.xml")
+	cinematic:Stop()
+	renderable_objects_manager:AddResource(cinematic:GetName(), cinematic)
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 end
@@ -20,6 +24,10 @@ function update ()
 	end
 	if action_manager:DoAction("Forward") then
 		pos.z = pos.z + speed * dt
+	end
+	
+	if pos.x > 2 then
+		cinematic:Play(false)
 	end
 end
 

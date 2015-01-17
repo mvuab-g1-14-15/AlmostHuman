@@ -40,10 +40,10 @@ void CCinematicObject::AddCinematicObjectKeyFrame(CCinematicObjectKeyFrame *Cine
 	m_CinematicObjectKeyFrames.push_back(CinematicObjectKeyFrame);
 }
 
-void CCinematicObject::Update(float ElapsedTime)
+void CCinematicObject::Update()
 {
     bool KeyFrameChanged(false);
-	CCinematicPlayer::Update(ElapsedTime);
+	CCinematicPlayer::Update();
 	for(int i=0; i<m_CinematicObjectKeyFrames.size(); ++i)
 	{
 		if(m_CinematicObjectKeyFrames[i]->GetKeyFrameTime() > m_CurrentTime)

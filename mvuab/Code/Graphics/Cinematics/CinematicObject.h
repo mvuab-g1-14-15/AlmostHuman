@@ -20,7 +20,7 @@ public:
 	bool IsOk();
 	virtual ~CCinematicObject();
 	void AddCinematicObjectKeyFrame(CCinematicObjectKeyFrame *CinematicObjectKeyFrame);
-	void Update(float ElapsedTime);
+	void Update();
 	void Stop();
 	void OnRestartCycle();
 	void Render();

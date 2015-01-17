@@ -12,7 +12,7 @@ public:
 	CCinematicPlayer();
 	virtual ~CCinematicPlayer();
 	void Init(float Duration);
-	virtual void Update(float ElapsedTime);
+	virtual void Update();
 	virtual void Stop();
 	virtual void Play(bool Cycle);
 	virtual void Pause();

@@ -21,7 +21,7 @@ public:
 	virtual void Pause();
 	void LoadXML(const std::string &Filename);
 	void AddCinematicObject(CCinematicObject *CinematicObject);
-	void Update(float ElapsedTime);
+	virtual void Update();
 	virtual void Render();
 };
 

@@ -91,9 +91,9 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
         }
     }
     
-	CCinematic* l_CinematicInstance = new CCinematic("Data/cinematic.xml");
-	l_CinematicInstance->Play(true);
-	AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);
+	//CCinematic* l_CinematicInstance = new CCinematic("Data/cinematic.xml");
+	//l_CinematicInstance->Play(true);
+	//AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);
 
     return true;
 }

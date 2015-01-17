@@ -74,12 +74,11 @@ void CCinematic::AddCinematicObject(CCinematicObject *CinematicObject)
 	m_CinematicObjects.push_back(CinematicObject);
 }
 
-void CCinematic::Update(float ElapsedTime)
+void CCinematic::Update()
 {
-
 	std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(), it_end = m_CinematicObjects.end();
 	for(; it != it_end; ++it)
-		(*it)->Update(ElapsedTime);
+		(*it)->Update();
 }
 
 void CCinematic::Stop()

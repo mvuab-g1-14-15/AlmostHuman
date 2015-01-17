@@ -1,5 +1,8 @@
 #include "CinematicPlayer.h"
 
+#include "Core.h"
+#include "Timer\Timer.h"
+
 CCinematicPlayer::CCinematicPlayer() :
 	m_Playing(false),
 	m_CurrentTime(0.0),
@@ -17,10 +20,10 @@ void CCinematicPlayer::Init(float Duration)
 	m_Duration = Duration;
 }
 
-void CCinematicPlayer::Update(float ElapsedTime)
+void CCinematicPlayer::Update()
 {
 	if (m_Playing)
-		m_CurrentTime += ElapsedTime;
+		m_CurrentTime += deltaTime;
 }
 
 void CCinematicPlayer::Stop()
