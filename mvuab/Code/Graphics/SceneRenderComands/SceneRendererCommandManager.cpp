@@ -38,7 +38,7 @@ void CSceneRendererCommandManager::CleanUp()
 }
 std::string CSceneRendererCommandManager::GetNextName()
 {
-    return "";
+    return "";//No lo entiendo
 }
 
 bool CSceneRendererCommandManager::Load(const std::string &FileName)
