@@ -4,27 +4,28 @@
 
 #define MAX_LIGHTS_BY_SHADER 4
 
-const char WorldMatrixParameterStr[] = "WORLD";
-const char ViewMatrixParameterStr[] = "VIEW";
-const char ProjectionMatrixParameterStr[] = "PROJECTION";
-const char InverseProjectionMatrixParameterStr[] = "INVERSE_PROJECTION";
-const char InverseViewMatrixParameterStr[] = "INVERSE_VIEW";
-const char InverseWorldMatrixParameterStr[] = "INVERSE_WORLD";
-const char WorldViewMatrixParameterStr[] = "WORLD_VIEW";
-const char ViewProjectionMatrixParameterStr[] = "VIEW_PROJECTION";
-const char WorldViewProjectionMatrixParameterStr[] = "WORLD_VIEW_PROJECTION";
-const char ViewToLightProjectionMatrixParameterStr[] = "VIEW_TO_LIGHT_PROJECTION";
-const char LightEnabledParameterStr[] = "LIGHT_ENABLED";
-const char LightsTypeParameterStr[] = "LIGHTS_TYPES";
-const char LightsPositionParameterStr[] = "LIGHTS_POSITION";
-const char LightsDirectionParameterStr[] = "LIGHTS_DIRECTION";
-const char LightsAngleParameterStr[] = "LIGHTS_ANGLE";
-const char LightsFallOffParameterStr[] = "LIGHTS_FALL_OFF";
-const char LightsColorParameterStr[] = "LIGHTS_COLOR";
-const char LightsStartRangeAttenuationParameterStr[] = "LIGHTS_START_ANGLE";
-const char LightsEndRangeAttenuationParameterStr[] = "LIGHTS_END_ANGLE";
-const char CameraPositionParameterStr[] = "EYE";
-const char BonesParameterStr[] = "BONES";
-const char TimeParameterStr[] = "TIME";
+const char WorldMatrixParameterStr[] = "World";
+const char ViewMatrixParameterStr[] = "View";
+const char ProjectionMatrixParameterStr[] = "Projection";
+const char InverseProjectionMatrixParameterStr[] = "ProjectionInverse";
+const char InverseViewMatrixParameterStr[] = "ViewInverse";
+const char InverseWorldMatrixParameterStr[] = "WorldInverse";
+const char WorldViewMatrixParameterStr[] = "WorldView";
+const char ViewProjectionMatrixParameterStr[] = "ViewProjection";
+const char WorldViewProjectionMatrixParameterStr[] = "WorldViewProjection";
+const char ViewToLightProjectionMatrixParameterStr[] = "ViewToLightProjection";
+const char LightAmbientColorParameterStr[] = "AmbientLightColor";
+const char LightEnabledParameterStr[] = "LightEnabled";
+const char LightsTypeParameterStr[] = "LightsTypes";
+const char LightsPositionParameterStr[] = "LightsPosition";
+const char LightsDirectionParameterStr[] = "LightsDirection";
+const char LightsAngleParameterStr[] = "LightsAngle";
+const char LightsFallOffParameterStr[] = "LightsFallOff";
+const char LightsColorParameterStr[] = "LightsColor";
+const char LightsStartRangeAttenuationParameterStr[] = "LightsStartAngle";
+const char LightsEndRangeAttenuationParameterStr[] = "LightsEndAngle";
+const char CameraPositionParameterStr[] = "CameraPosition";
+const char BonesParameterStr[] = "Bones";
+const char TimeParameterStr[] = "DeltaTime";
 
 #endif //EFFECTS_DEFINES_H

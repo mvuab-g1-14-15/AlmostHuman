@@ -49,10 +49,10 @@ public:
     GET_SET(D3DXHANDLE, LightsDirectionParameter);
     GET_SET(D3DXHANDLE, LightsAngleParameter);
     GET_SET(D3DXHANDLE, LightsColorParameter);
-
     GET_SET(D3DXHANDLE, LightsFallOffParameter);
     GET_SET(D3DXHANDLE, LightsStartRangeAttenuationParameter);
     GET_SET(D3DXHANDLE, LightsEndRangeAttenuationParameter);
+
     GET_SET(D3DXHANDLE, CameraPositionParameter);
     GET_SET(D3DXHANDLE, BonesParameter);
     GET_SET(D3DXHANDLE, TimeParameter);
