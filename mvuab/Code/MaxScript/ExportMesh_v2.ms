@@ -81,13 +81,16 @@ struct SMaterial
 	
 	fn WriteToFile file =
 	(
-
+		format "Writing Material\n"
+		
 		WriteShort file m_Type #unsigned
 		format "Type: %\n" m_Type
 		
 		m_Texture1.WriteToFile file
 		m_Texture2.WriteToFile file
 		m_TextureBump.WriteToFile file
+		
+		format "Writing Material End\n"
 	)
 )
 
@@ -99,7 +102,7 @@ struct SVertex
 	m_UV2 = point2 0 0,
 	m_Color = 0,
 	
-	fn ToStr = 
+	fn GetAsString = 
 	(
 		local l_Text = stringstream ""
 		--convert position
@@ -128,7 +131,7 @@ struct SVertex
 		WriteFloat file m_Normal.z
 		WriteFloat file m_Normal.y
 		
-		format "\tUV1: (%, %, %)\n" m_UV.x m_UV.y
+		format "\tUV1: (%, %)\n" m_UV.x m_UV.y
 		WriteFloat file m_UV.x
 		WriteFloat file m_UV.y
 	
@@ -136,43 +139,42 @@ struct SVertex
 		WriteFloat file m_UV2.x
 		WriteFloat file m_UV2.y
 		
-		format "\tColor: (%, %, %)\n" m_Color.r m_Color.g m_Color.b
-		WriteFloat file m_Color.r
-		WriteFloat file m_Color.g
-		WriteFloat file m_Color.b
+		format "\tColor: (%)\n" m_Color
+		WriteFloat file m_Color
+		--WriteFloat file m_Color.g
+		--WriteFloat file m_Color.b
 	)
 )
 
 struct SVertexBuffer
 (
 	m_VertexList = #(),
-	m_VertexIdMap = #(dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"),
+	m_VertexIdMap = dotNetObject "System.Collections.Hashtable",
 	
 	fn AddVertex vertex =
 	(
-		local l_VertexStr = vertex.ToStr
-		if (m_VertexIdMap.ContainsKey (l_VertexStr))==false then
+		local l_VertexStr = vertex.GetAsString()
+		local l_VertexIdx = m_VertexIdMap.Item[l_VertexStr];
+		if ( l_VertexIdx == undefinded ) then
 		(
 			append m_VertexList vertex
-			local l_Idx = m_VertexList.count-1
-			m_VertexIdMap.Add l_VtxString l_Idx
-			return l_Idx
+			l_VertexIdx = m_VertexList.count-1
+			m_VertexIdMap.Add l_VertexStr l_VertexIdx
 		)
-		else
-		(
-			return m_VertexIdMap.Item[l_VertexStr]
-		)
+		
+		return l_VertexIdx
 	),
 	
 	fn WriteToFile file =
 	(
-			local l_NumVertex = m_VertexList.count 
-			WriteShort file l_NumVertex #unsigned
-			for iVertex in m_VertexList do
-			(
-				iVertex.WriteToFile file
-			)
-	
+		format "Writing BV\n"
+		local l_NumVertex = m_VertexList.count 
+		WriteShort file l_NumVertex #unsigned
+		for iVertex in m_VertexList do
+		(
+			iVertex.WriteToFile file
+		)
+		format "Writing BV end\n"
 	)
 )
 
@@ -185,14 +187,17 @@ struct SIndexBuffer
 		append m_IndexList index
 	),
 	
-	fn WriteToFile =
+	fn WriteToFile file =
 	(
+		format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
-		WriteShort file num_face #unsigned
+		WriteShort file l_NumIds #unsigned
 		for iIndex in m_IndexList do
 		(
 			WriteShort file iIndex #unsigned
 		)
+		
+		format "Writing IB end\n"
 	)
 )
 
@@ -244,7 +249,7 @@ struct SMesh
 	m_SubMeshes = #(),
 	m_AABB = SAABB(),
 	m_BS = SBndSphere(),
-    m_MaterialsMap = #(dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.Int16]"),
+    m_MaterialsHashTable = dotNetObject "System.Collections.Hashtable",
 	
 	fn CreateSubMeshes Obj =
 	(
@@ -261,8 +266,12 @@ struct SMesh
             	(
 					local l_MaterialId = getFaceMatId Obj iMaterial
 					
+					local l_MaterialNameById = m_MaterialsHashTable.Item[l_MaterialId];
+			
+					format "Material Name: %\n" l_MaterialNameById
+					
 					-- Check if the material is not already added
-        	        if (m_MaterialsMap.ContainsKey(l_MaterialId))==false then
+        	        if l_MaterialNameById == undefined then
     	            (
 						-- Obtain the submaterial from the main material
 	                	local l_NewMaterial = l_Material[l_MaterialId]
@@ -277,7 +286,7 @@ struct SMesh
 						append m_SubMeshes l_NewSubMesh
 						
 						--Update the donet map in order have the same data as the submeshes
-						m_MaterialsMap.Add l_MaterialId l_MaterialId
+						m_MaterialsHashTable.Add l_MaterialId l_NewMaterial.name
 					)
             	)
 				catch
@@ -290,21 +299,16 @@ struct SMesh
 		)
 		else
 		(
+			format "Single Material Object\n"
          	local l_NewSubMesh = SSubMesh()
             l_NewSubMesh.m_Material.FromMaxMaterial l_Material
+			format "Material Name: %\n" l_Material.name
 			append m_SubMeshes l_NewSubMesh
+			format "Submesh: %\n" m_SubMeshes
+			local l_MaterialId = 1
+			local l_MaterialName = l_Material.name as string
+			m_MaterialsHashTable.Add l_MaterialId l_MaterialName
 		)
-	),
-	
-	fn InitFromMaxObject Obj =
-	(
-		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-		convertToMesh newObj
-		actualObj = newObj[1]
-		CreateSubMeshes actualObj
-		CreateBuffers actualObj
-		
-		delete newObj
 	),
 	
 	fn CreateBuffers Obj =
@@ -315,7 +319,7 @@ struct SMesh
 		local InvTransform=inverse Obj.transform
 		for iFaces = 1  to l_nFaces do
 		(
-			--format "Parsing face %...\n" iFaces
+			format "Parsing face %...\n" iFaces
 			
 			local l_MaterialId
 			if classof(Obj.material) == Multimaterial then
@@ -327,11 +331,17 @@ struct SMesh
 				l_MaterialId = 1
 			)
 		
+			local l_MaterialNameById = m_MaterialsHashTable.Item[l_MaterialId];
+			
+			--format "Material Name: %\n" l_MaterialNameById
+			
 			-- Check if the material is found
-			if (m_MaterialsMap.ContainsKey(l_MaterialId))==true then
+			if ( l_MaterialNameById != undefined ) then
 			(
 				-- Para coger los indices de la primera cara
 				local IdxsFace=getFace Obj iFaces
+				
+				format "Face: %\n" IdxsFace
 				-- Para coger los vértices de la primera cara
 				local Coord1=getVert Obj IdxsFace.x*InvTransform
 				local Coord2=getVert Obj IdxsFace.y*InvTransform
@@ -351,23 +361,23 @@ struct SMesh
 				local l_NewVertex1 = SVertex()
 				l_NewVertex1.m_Position = Coord1
 				l_NewVertex1.m_Normal = Normal1
-				l_NewVertex1.m_UV = point2 TUVMap1.x 1.0-TUVMap1.y
+				l_NewVertex1.m_UV = point2 TUVMap1.x 1.0 - TUVMap1.y
 				--l_NewVertex1.m_UV2 = point2 0 0,
 				--l_NewVertex1.m_Color = 0,
 				
-				local NewVertex2 = SVertex()
-				NewVertex2.m_Position = Coord2
-				NewVertex2.m_Normal = Normal2
-				NewVertex2.m_UV = point2 TUVMap2.x 1.0-TUVMap2.y
+				local l_NewVertex2 = SVertex()
+				l_NewVertex2.m_Position = Coord2
+				l_NewVertex2.m_Normal = Normal2
+				l_NewVertex2.m_UV = point2 TUVMap2.x 1.0 - TUVMap2.y
 				--NewVertex2.m_UV2 = point2 0 0,
 				--NewVertex2.m_Color = 0,
 				
-				local NewVertex3 = SVertex()
-				NewVertex3.m_Position = Coord3
-				NewVertex3.m_Normal = Normal3
-				NewVertex3.m_UV = point2 TUVMap3.x 1.0-TUVMap3.y
-				--NewVertex3.m_UV2 = point2 0 0,
-				--NewVertex3.m_Color = 0,
+				local l_NewVertex3 = SVertex()
+				l_NewVertex3.m_Position = Coord3
+				l_NewVertex3.m_Normal = Normal3
+				l_NewVertex3.m_UV = point2 TUVMap3.x 1.0 - TUVMap3.y
+				--l_NewVertex3.m_UV2 = point2 0 0,
+				--l_NewVertex3.m_Color = 0,
 				
 				-- Add the new vertex
 				local l_Id1 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex1
@@ -375,24 +385,39 @@ struct SMesh
 				local l_Id3 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex3
 				
 				-- Add the new indexes
-				m_SubMeshes[l_MaterialId].m_VB.AddIndex l_Id1
-				m_SubMeshes[l_MaterialId].m_VB.AddIndex l_Id2
-				m_SubMeshes[l_MaterialId].m_VB.AddIndex l_Id3
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id1
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
 			)
 		)
+		
+		format "% submeshes found on the object\n" m_SubMeshes.count
+	),
+	
+	fn InitFromMaxObject Obj =
+	(
+		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+		convertToMesh newObj
+		actualObj = newObj[1]
+		CreateSubMeshes actualObj
+		CreateBuffers actualObj
+		
+		delete newObj
 	),
 	
 	fn WriteToFile file =
 	(
-			WriteShort file 0x55ff #unsigned
-			WriteShort file m_SubMeshes.count #unsigned--Write number of materials
-		
-			for iSubMesh in m_SubMeshes do
-			(
-					iSubMesh.WriteToFile file
-			)			
-		
-			WriteShort file 0xff55 #unsigned
+		format "Write to file\n"
+		WriteShort file 0x55ff #unsigned
+		WriteShort file m_SubMeshes.count #unsigned--Write number of materials
+	
+		for iSubMesh in m_SubMeshes do
+		(
+			format "Current Submesh%\n" iSubMesh
+			iSubMesh.WriteToFile file 
+		)			
+	
+		WriteShort file 0xff55 #unsigned
 	)
 )
 
