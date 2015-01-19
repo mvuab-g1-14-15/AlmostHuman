@@ -274,7 +274,7 @@ bool CEffect::SetCameraPosition(Math::Vect3f CameraPosition)
   return ( m_Effect->SetFloatArray(m_CameraPositionParameter, l_Camera, 3) == S_OK );
 }
 
-bool CEffect::SetWorldMatrix( Math::Mat44f Matrix, bool Inverse)
+bool CEffect::SetWorldMatrix(const Math::Mat44f &Matrix, bool Inverse)
 {
   if( Inverse )
     return (m_Effect->SetMatrix(m_InverseWorldMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
@@ -282,7 +282,7 @@ bool CEffect::SetWorldMatrix( Math::Mat44f Matrix, bool Inverse)
     return (m_Effect->SetMatrix(m_WorldMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetViewMatrix( Math::Mat44f Matrix, bool Inverse)
+bool CEffect::SetViewMatrix( const Math::Mat44f &Matrix, bool Inverse)
 {
   if( Inverse )
     return (m_Effect->SetMatrix(m_InverseViewMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
@@ -290,7 +290,7 @@ bool CEffect::SetViewMatrix( Math::Mat44f Matrix, bool Inverse)
     return (m_Effect->SetMatrix(m_ViewMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetProjectionMatrix( Math::Mat44f Matrix, bool Inverse)
+bool CEffect::SetProjectionMatrix( const Math::Mat44f &Matrix, bool Inverse)
 {
   if( Inverse )
     return (m_Effect->SetMatrix(m_InverseProjectionMatrixParameter, &Matrix.GetInverted().GetD3DXMatrix()) == S_OK );
@@ -298,22 +298,22 @@ bool CEffect::SetProjectionMatrix( Math::Mat44f Matrix, bool Inverse)
     return (m_Effect->SetMatrix(m_ProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetWorldViewMatrix( Math::Mat44f Matrix )
+bool CEffect::SetWorldViewMatrix( const Math::Mat44f &Matrix )
 {
   return (m_Effect->SetMatrix(m_WorldViewMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetWorldViewProjectionMatrix( Math::Mat44f Matrix )
+bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f &Matrix )
 {
   return (m_Effect->SetMatrix(m_WorldViewProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetViewProjectionMatrix( Math::Mat44f Matrix )
+bool CEffect::SetViewProjectionMatrix( const Math::Mat44f &Matrix )
 {
   return (m_Effect->SetMatrix(m_ViewProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }
 
-bool CEffect::SetViewToLightMatrix( Math::Mat44f Matrix )
+bool CEffect::SetViewToLightMatrix( const Math::Mat44f &Matrix )
 {
   return (m_Effect->SetMatrix(m_ViewToLightProjectionMatrixParameter, &Matrix.GetD3DXMatrix()) == S_OK );
 }

@@ -236,6 +236,10 @@ void CStaticMesh::Render(CGraphicsManager *GM)
 {
     m_NumVertexs = m_NumFaces = m_NumDraws = 0;
 
+	CEffectTechnique* l_pTechnique = CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique");
+
+	l_pTechnique->BeginRender();
+
     for(unsigned int i = 0; i < m_RVs.size(); ++i)
     {
         for(unsigned int j = 0; j < m_Textures[i].size(); ++j)
@@ -247,6 +251,6 @@ void CStaticMesh::Render(CGraphicsManager *GM)
         m_NumFaces += m_RVs[i]->GetFacesCount();
         ++m_NumDraws;
 
-        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
+        m_RVs[i]->Render(GM, l_pTechnique);
     }
 }
