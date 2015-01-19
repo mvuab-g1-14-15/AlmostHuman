@@ -247,6 +247,6 @@ void CStaticMesh::Render(CGraphicsManager *GM)
         m_NumFaces += m_RVs[i]->GetFacesCount();
         ++m_NumDraws;
 
-        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
+        m_RVs[i]->Render(GM);//, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
     }
 }

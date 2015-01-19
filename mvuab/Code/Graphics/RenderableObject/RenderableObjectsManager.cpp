@@ -132,3 +132,12 @@ CRenderableObject * CRenderableObjectsManager::AddAnimatedInstanceModel(const st
 {
 	return NULL;
 }
+
+CCinematic* CRenderableObjectsManager::CreateCinematic(const std::string &FileName)
+{
+	CCinematic* l_Cinematic = new CCinematic(FileName);
+
+	AddResource(l_Cinematic->GetName(), l_Cinematic);
+
+	return l_Cinematic;
+}

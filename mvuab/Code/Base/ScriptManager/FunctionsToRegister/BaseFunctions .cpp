@@ -12,7 +12,15 @@
 #include "Utils\Name.h"
 #include "Timer\Timer.h"
 
+#include "Math\MathTypes.h"
+#include "Utils\Types.h"
+
 using namespace luabind;
+
+void DA_Normalize(Math::Vect3f* vector3)
+{
+	vector3->Normalize(Math::One<float32>());
+}
 
 void registerBase(lua_State *m_LS)
 {
@@ -34,10 +42,16 @@ void registerBase(lua_State *m_LS)
 
 			.def(const_self * float())
 			.def(const_self / float())
+			.def(float() * const_self)
+			.def(float() / const_self)
 
 			.def_readwrite("x", &Math::Vect3f::x)
 			.def_readwrite("y", &Math::Vect3f::y)
 			.def_readwrite("z", &Math::Vect3f::z)
+
+			.def("CrossProduct", &Math::Vect3f::CrossProduct)
+
+			.def("Normalize", &DA_Normalize)
 	];
 
 	module(m_LS)

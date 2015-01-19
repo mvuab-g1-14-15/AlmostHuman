@@ -1,29 +1,42 @@
+local cinematic=nil
+
 function init ()
 	core = Singleton_Core.get_singleton()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
 	renderable_objects_manager = core:GetRenderableObjectsManager()
-	cinematic = CCinematic("Data/cinematic.xml")
+	camera_manager = core:GetCameraManager()
+	cinematic=renderable_objects_manager:CreateCinematic("Data/cinematic.xml")
 	cinematic:Stop()
-	renderable_objects_manager:AddResource(cinematic:GetName(), cinematic)
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 end
 
 function update ()
 	local dt = timer:GetElapsedTime()
-	local speed = 1;
+	local speed = 5;
+	
+	local current_camera = camera_manager:GetCurrentCamera();
+	local vec_up = current_camera:GetVecUp()
+	local cam_pos = current_camera:GetPos()
+	local dir = pos - cam_pos
+	dir:Normalize()
+	local dir_per = dir:CrossProduct(vec_up)
+	dir_per:Normalize()
+	
+	current_camera:SetPos(pos-5.0*dir)
+	
 	if action_manager:DoAction("Left") then
-		pos.x = pos.x - speed * dt
+		pos = pos + dir_per * speed * dt
 	end
 	if action_manager:DoAction("Right") then
-		pos.x = pos.x + speed * dt
+		pos = pos - dir_per * speed * dt
 	end
 	if action_manager:DoAction("Backward") then
-		pos.z = pos.z - speed * dt
+		pos = pos - dir * speed * dt
 	end
 	if action_manager:DoAction("Forward") then
-		pos.z = pos.z + speed * dt
+		pos = pos + dir * speed * dt
 	end
 	
 	if pos.x > 2 then

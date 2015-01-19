@@ -15,6 +15,7 @@
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "ScriptManager\ScriptManager.h"
+#include "Cameras\CameraManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -52,6 +53,7 @@ void registerCore(lua_State *m_LS)
 			.def("GetScriptManager", &CCore::GetScriptManager)
 			.def("GetStaticMeshManager", &CCore::GetStaticMeshManager)
 			.def("GetTextureManager", &CCore::GetTextureManager)
+			.def("GetCameraManager", &CCore::GetCameraManager)
 			.def("GetTimer", &CCore::GetTimer)
 			//Getter Variables
 			.def("GetAnimatedModelsPath", &CCore::GetAnimatedModelsPath)

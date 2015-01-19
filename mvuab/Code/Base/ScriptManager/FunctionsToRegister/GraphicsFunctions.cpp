@@ -11,8 +11,10 @@
 #include "Object3D.h"
 
 #include "Cameras/CameraManager.h"
+#include "Cameras/Camera.h"
 
 #include "Cinematics/Cinematic.h"
+#include "Cinematics/CinematicPlayer.h"
 
 #include "Math\Matrix44.h"
 
@@ -88,6 +90,7 @@ void registerGraphics(lua_State *m_LS)
 			.def("Load", &CRenderableObjectsManager::Load)
 
 			.def("AddResource", &CRenderableObjectsManager::AddResource)
+			.def("CreateCinematic", &CRenderableObjectsManager::CreateCinematic)
 
 	];
 
@@ -142,17 +145,48 @@ void registerGraphics(lua_State *m_LS)
         .def("NewCamera", &CCameraManager::NewCamera)
         .def("DeleteCamera", &CCameraManager::DeleteCamera)
     ];
+
+	module(m_LS)
+	[
+		class_<CCamera, CName>("CCamera")
+
+		.def("GetDirection", &CCamera::GetDirection)
+		.def("GetLookAt", &CCamera::GetLookAt)
+		.def("GetVecUp", &CCamera::GetVecUp)
+
+		.def("GetPitch", &CCamera::GetPitch)
+		.def("GetYaw", &CCamera::GetYaw)
+		.def("GetCameraType", &CCamera::GetCameraType)
+		.def("GetZNear", &CCamera::GetZNear)
+		.def("GetZFar", &CCamera::GetZFar)
+		.def("GetAspectRatio", &CCamera::Getaspect_ratio)
+		.def("GetPos", &CCamera::GetPos)
+
+		.def("SetPitch", &CCamera::SetPitch)
+		.def("SetYaw", &CCamera::SetYaw)
+		.def("SetCameraType", &CCamera::SetCameraType)
+		.def("SetZNear", &CCamera::SetZNear)
+		.def("SetZFar", &CCamera::SetZFar)
+		.def("SetAspectRatio", &CCamera::Setaspect_ratio)
+		.def("SetPos", &CCamera::SetPos)
+	];
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	module(m_LS)
 	[
-		class_<CRenderableObject, CName>("CRenderableObject")
+		class_<CRenderableObject, bases<CObject3D, CName>>("CRenderableObject")
+	];
+
+	module(m_LS)
+	[
+		class_<CCinematicPlayer>("CCinematicPlayer")
 	];
 
 	module(m_LS)
     [
-        class_<CCinematic, CRenderableObject>("CCinematic")
+		class_<CCinematic, bases<CRenderableObject, CCinematicPlayer>>("CCinematic")
         .def(constructor<const std::string &>())
 
         .def("Stop", &CCinematic::Stop)

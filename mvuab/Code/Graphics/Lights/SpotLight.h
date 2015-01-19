@@ -9,7 +9,7 @@ protected:
 	float m_Angle;
 	float m_FallOff;
 public:
-	CSpotLight();
+	CSpotLight(CXMLTreeNode node);
 	void SetAngle(const float Angle);
 	float GetAngle() const;
 	void SetFallOff(const float FallOff);
