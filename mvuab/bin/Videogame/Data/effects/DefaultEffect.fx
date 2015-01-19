@@ -1,8 +1,8 @@
 float4x4 g_WorldViewProj : WorldViewProjection;
 float4x4 g_WorldMatrix : World;
-float4x4 g_InverseViewMatrix: ViewInverse;
+//float4x4 g_InverseViewMatrix: ViewInverse;
 
-float g_EnvironmentFactor
+/*float g_EnvironmentFactor
 <
 string UIWidget = "slider";
 float UIMin = 0.0;
@@ -40,44 +40,46 @@ MagFilter = Linear;
 MipFilter = Linear;
 AddressU = Wrap;
 AddressV = Wrap;
+};*/
+
+sampler DiffuseTextureSampler : register( s0 ) = sampler_state
+{
+	MipFilter = LINEAR;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
 };
-	
 
 struct VertexVS {
     float3 Position	: POSITION;
+    float3 Normal	: NORMAL;
     float4 UV		: TEXCOORD0;
-    float4 Normal	: NORMAL;
-    float4 Tangent	: TANGENT0;
-    float4 Binormal	: BINORMAL0;
 };
 
 struct VertexPS {
     float4 HPosition	: POSITION;
     float2 UV		: TEXCOORD0;
-    float3 WorldNormal	: TEXCOORD1;
-    float3 WorldTangent	: TEXCOORD2;
-    float3 WorldBinormal : TEXCOORD3;
-	float3 WorldPosition: TEXCOORD4;
+	float3 WorldNormal : TEXCOORD1;
 };
 
 VertexPS mainVS(VertexVS IN)
 {
 	VertexPS l_OUT=(VertexPS)0;
 	l_OUT.HPosition=mul(float4(IN.Position.xyz, 1.0), g_WorldViewProj);
-	l_OUT.WorldNormal=mul(IN.Normal, (float3x3)g_WorldMatrix);
-	l_OUT.WorldPosition=mul(float4(IN.Position, 1.0), (float3x3)g_WorldMatrix);
+	l_OUT.WorldNormal=mul(float4(IN.Normal.xyz, 1.0), (float3x3)g_WorldMatrix);
 	l_OUT.UV=IN.UV;
 	return l_OUT;
 }
 
 float4 mainPS(VertexPS IN) : COLOR
 {	
+	float3 Nn=normalize(IN.WorldNormal);
+	return float4(Nn, 1.0);
+	return tex2D(DiffuseTextureSampler, IN.UV);
 	return float4(1.0, 0.0, 1.0, 1.0);
 }
 
 technique DefaultTechnique {
 	pass p0 {
-		CullMode = None;
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();
 	}

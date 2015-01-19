@@ -128,7 +128,7 @@ void CGraphicsManager::SetupMatrices()
 {
     Math::Vect3f l_CameraPosition;
     D3DXMATRIX l_matView;
-    D3DXMATRIX m_matProject;
+    D3DXMATRIX l_matProject;
 
     // Obtain the current camera from the camera manager
     CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
@@ -144,21 +144,21 @@ void CGraphicsManager::SetupMatrices()
         D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP);
 
         //Setup Matrix projection
-        D3DXMatrixPerspectiveFovLH( &m_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f );
+        D3DXMatrixPerspectiveFovLH( &l_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f );
     }
     else
     {
         l_CameraPosition = l_CurrentCamera->GetPos();
         l_matView        = l_CurrentCamera->GetMatrixView();
-        m_matProject     = l_CurrentCamera->GetMatrixProj();
-        l_CurrentCamera->UpdateFrustum( l_matView * m_matProject );
+        l_matProject     = l_CurrentCamera->GetMatrixProj();
+        l_CurrentCamera->UpdateFrustum( l_matView * l_matProject );
     }
 
     m_pD3DDevice->SetTransform( D3DTS_VIEW, &l_matView );
-    m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
+    m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
 
     // Set the new parameters to the effect manager
-    CEffectManager::GetSingletonPtr()->ActivateCamera( Math::Mat44f(l_matView), Math::Mat44f(l_matView), l_CameraPosition );
+    CEffectManager::GetSingletonPtr()->ActivateCamera(Math::Mat44f(l_matView), Math::Mat44f(l_matProject), l_CameraPosition );
 }
 
 bool CGraphicsManager::Init(HWND hWnd, bool fullscreenMode, uint32 widthScreen, uint32 heightScreen)

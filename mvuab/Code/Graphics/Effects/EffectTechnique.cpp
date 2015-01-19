@@ -55,6 +55,9 @@ bool CEffectTechnique::BeginRender()
     l_Effect->SetFloat(l_Handle, deltaTime );
   }
 
+  SetupMatrices();
+  SetupLights();
+
   return true;
 }
 
