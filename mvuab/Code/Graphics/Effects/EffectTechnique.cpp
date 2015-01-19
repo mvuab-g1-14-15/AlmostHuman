@@ -24,14 +24,10 @@ CEffectTechnique::CEffectTechnique(CXMLTreeNode & node)
     m_UseViewProjectionMatrix(node.GetBoolProperty("use_view_projection_matrix")),
     m_UseViewToLightProjectionMatrix(node.GetBoolProperty("use_view_to_light_projection_matrix")),
     m_UseTime(node.GetBoolProperty("use_time")),
-    m_NumOfLights(node.GetIntProperty("num_of_lights")),
-    m_D3DTechnique(0)
+    m_NumOfLights(node.GetIntProperty("num_of_lights"))
 {
-  if(!Refresh())
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CEffectTechnique::Refresh()");
-
-  m_Effect = CEffectManager::GetSingletonPtr()->GetEffect(m_EffectName);
-  assert(m_Effect);
+  m_Effect=CEffectManager::GetSingletonPtr()->GetEffect(m_EffectName);
+  m_D3DTechnique = (m_Effect) ? m_Effect->GetTechniqueByName(m_TechniqueName) : 0;
 }
 
 CEffectTechnique::~CEffectTechnique()

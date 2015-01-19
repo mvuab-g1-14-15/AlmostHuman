@@ -12,6 +12,8 @@
 
 #include "Math/AABB.h"
 
+#include "Effects/EffectManager.h"
+
 #include <cstdio>
 
 CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
@@ -245,6 +247,6 @@ void CStaticMesh::Render(CGraphicsManager *GM)
         m_NumFaces += m_RVs[i]->GetFacesCount();
         ++m_NumDraws;
 
-        m_RVs[i]->Render(GM);
+        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
     }
 }

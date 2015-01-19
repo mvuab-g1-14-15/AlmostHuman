@@ -1,0 +1,5 @@
+<effects>
+	<default_technique vertex_type="19" technique="DefaultTechnique"/>
+	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
+	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+</effects>

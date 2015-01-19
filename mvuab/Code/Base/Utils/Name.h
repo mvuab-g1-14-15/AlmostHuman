@@ -9,7 +9,7 @@ class CName
 {
 public:
     CName(){}
-    ~CName() {}
+    virtual ~CName() {}
 	
 	GET_SET(std::string,Name);
 

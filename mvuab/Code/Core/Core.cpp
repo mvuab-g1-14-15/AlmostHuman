@@ -54,6 +54,7 @@ CCore::CCore() :
 
 CCore::~CCore()
 {
+  CHECKED_DELETE(m_pScriptManager);
     CHECKED_DELETE(m_pGraphicsManager);
     CHECKED_DELETE(m_pInputManager);
     CHECKED_DELETE(m_pActionManager);
@@ -64,7 +65,6 @@ CCore::~CCore()
     CHECKED_DELETE(m_pRenderableObjectsManager);
     CHECKED_DELETE(m_pAnimatedModelsManager);
     CHECKED_DELETE(m_pTextureManager);
-    CHECKED_DELETE(m_pScriptManager);
     CHECKED_DELETE(m_pCameraManager);
     CHECKED_DELETE(m_pEffectManager);
 	CHECKED_DELETE(m_pLightManager);
@@ -219,4 +219,5 @@ void CCore::InitManagers()
 	m_pScriptManager->RunFile(m_LuaRunPath);
 
 	m_pLightManager->Load("Data/Lights.xml");
+  m_pEffectManager->Load("Data/effects.xml");
 }

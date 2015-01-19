@@ -2,6 +2,8 @@
 #include "Math\Matrix44.h"
 
 CRenderableObject::CRenderableObject()
+  : CObject3D()
+  , CName()
 {
 }
 

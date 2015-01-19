@@ -154,7 +154,7 @@ bool CEffect::LoadEffect()
                    &m_Effect,
                    &l_ErrorBuffer );
 
-  assert(l_HR != S_OK );
+  assert(l_HR == S_OK );
   if( l_ErrorBuffer )
   {
     CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR,"Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer());

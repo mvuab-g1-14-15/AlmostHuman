@@ -5,6 +5,8 @@
 #include "CinematicObject.h"
 
 CCinematic::CCinematic(const std::string &FileName)
+  : CRenderableObject()
+  , CCinematicPlayer()
 {
 	CXMLTreeNode newFile;
 
