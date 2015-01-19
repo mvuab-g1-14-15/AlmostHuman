@@ -22,7 +22,7 @@
 //                       |  / y
 //                       | /
 //                       |/
-//                        --------  x
+//                        --------  x	
 // 
 // Este criterio es utilizado y respetado en todas las operaciones entre objetos de la librería
 // matematica.

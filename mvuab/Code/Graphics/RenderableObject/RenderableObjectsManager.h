@@ -5,6 +5,7 @@
 #include "GraphicsManager.h"
 #include <vector>
 
+class CCinematic;
 
 class CRenderableObjectsManager : public CTemplatedVectorMapManager<CRenderableObject>
 {
@@ -22,6 +23,7 @@ class CRenderableObjectsManager : public CTemplatedVectorMapManager<CRenderableO
 
         CRenderableObject * AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Math::Vect3f &Position);
         CRenderableObject * AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Math::Vect3f &Position);
+		CCinematic* CreateCinematic(const std::string &FileName);
 
         void CleanUp();
         bool Load(const std::string &FileName);

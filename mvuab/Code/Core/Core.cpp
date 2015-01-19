@@ -54,7 +54,7 @@ CCore::CCore() :
 
 CCore::~CCore()
 {
-  CHECKED_DELETE(m_pScriptManager);
+	CHECKED_DELETE(m_pScriptManager);
     CHECKED_DELETE(m_pGraphicsManager);
     CHECKED_DELETE(m_pInputManager);
     CHECKED_DELETE(m_pActionManager);
