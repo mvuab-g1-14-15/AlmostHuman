@@ -19,6 +19,20 @@ struct STexture
 	(
 		m_Name = filenameFromPath textureFileName
 		m_Path = getFilenamePath textureFileName
+	),
+	
+	fn IsNotNull =
+	(
+		return m_Name.count > 0
+	),
+	
+	fn WriteToFile file = 
+	(
+		if IsNotNull == true then
+		(
+			WriteShort file m_Name.count #unsigned--Write Lenght Name
+			WriteString file m_Name --Write Name
+		)
 	)
 )
 
@@ -37,14 +51,14 @@ struct SMaterial
 		(
 			if mat.diffuseMapEnable == true AND classOf(mat.diffuseMap) == BitmapTexture then
 			(
-				m_Type = (bit.or type VERTEX_TYPE_TEXTURE1)
+				m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE1)
 				-- Load the texture 1
 				local l_Texture1FileName = mat.diffuseMap.filename
 				m_Texture1.FromMaxTexture l_Texture1FileName
 
 				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
 				(
-					m_Type = (bit.or type VERTEX_TYPE_TEXTURE2)
+					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
 					-- Load the texture 2
 					local l_Texture2FileName = mat.selfIllumMap.filename
 					m_Texture2.FromMaxTexture l_Texture2FileName
@@ -52,7 +66,7 @@ struct SMaterial
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
-					m_Type = (bit.or type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
+					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
 					-- Load the texture of bump mapping
 					local l_TextureBumpMappingFileName = mat.bumpMap.filenames
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
@@ -68,45 +82,12 @@ struct SMaterial
 	fn WriteToFile file =
 	(
 
-		WriteShort file type #unsigned
-		format "Type: %\n" type
-
-		if m_Texture1.count > 0 then
-		(
-				
-			for iTexture = 1 to m_Texture1.count do
-			(
-				current_texture = m_Texture1[iTexture]
-				WriteShort file current_texture.count #unsigned--Write Lenght Name
-				format "#Name: %\n" current_texture.count
-				WriteString file current_texture --Write Name
-				format "Name: %\n" current_texture
-			)
-
-			if m_Texture2.count > 0  then
-			(
-				for iTexture = 1 to m_Texture2.count do
-				(
-					current_texture = m_Texture2[iTexture]
-					WriteShort file current_texture.count #unsigned--Write Lenght Name
-					format "#Name: %\n" current_texture.count
-					WriteString file current_texture --Write Name
-					format "Name: %\n" iTexture
-				)
-			)
-			
-			if m_TextureBump.count > 0  then
-			(
-				for iTexture = 1 to m_TextureBump.count do
-				(
-					current_texture = m_TextureBump[iTexture]
-					WriteShort file current_texture.count #unsigned--Write Lenght Name
-					format "#Name: %\n" current_texture.count
-					WriteString file current_texture --Write Name
-					format "Name: %\n" current_texture
-				)
-			)	
-		)
+		WriteShort file m_Type #unsigned
+		format "Type: %\n" m_Type
+		
+		m_Texture1.WriteToFile file
+		m_Texture2.WriteToFile file
+		m_TextureBump.WriteToFile file
 	)
 )
 
@@ -186,10 +167,10 @@ struct SVertexBuffer
 	fn WriteToFile file =
 	(
 			local l_NumVertex = m_VertexList.count 
-			WriteShort file num_vertex #unsigned
-			for iVertex = 1 to l_NumVertex do
+			WriteShort file l_NumVertex #unsigned
+			for iVertex in m_VertexList do
 			(
-				m_VertexList[iVertex].WriteToFile file
+				iVertex.WriteToFile file
 			)
 	
 	)
@@ -208,9 +189,9 @@ struct SIndexBuffer
 	(
 		local l_NumIds = m_IndexList.count
 		WriteShort file num_face #unsigned
-		for iIndex = 1 to l_NumIds do
+		for iIndex in m_IndexList do
 		(
-			WriteShort file m_IndexList[iIndex] #unsigned
+			WriteShort file iIndex #unsigned
 		)
 	)
 )
@@ -248,7 +229,14 @@ struct SSubMesh
 (
 	m_Material = SMaterial(),
 	m_IB = SIndexBuffer(),
-	m_VB = SVertexBuffer()
+	m_VB = SVertexBuffer(),
+	
+	fn WriteToFile file =
+	(
+		m_Material.WriteToFile file
+		m_VB.WriteToFile file
+		m_IB.WriteToFile file
+	)
 )
 
 struct SMesh
@@ -258,18 +246,13 @@ struct SMesh
 	m_BS = SBndSphere(),
     m_MaterialsMap = #(dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.Int16]"),
 	
-	fn InitFromMaxObject Obj =
+	fn CreateSubMeshes Obj =
 	(
-		CreateSubMeshes Obj
-		CreateBuffers Obj
-	),
-    
-    fn CreateSubMeshes Obj =
-	(
+		format "Creating submeshes\n"
     	local l_Material = Obj.material
 		if classof( l_Material ) == Multimaterial then
 		(
-			--format "Saving multimaterial object...\n"
+			format "Saving multimaterial object...\n"
 			local l_NumMaterials = getNumfaces l_Material
             
 			for iMaterial=1 to l_NumMaterials do
@@ -303,7 +286,7 @@ struct SMesh
 				)
 			)
             
-			--format "Num mats: % v %\n" materials.count materials
+			format "Num mats: % v %\n" materials.count materials
 		)
 		else
 		(
@@ -311,6 +294,17 @@ struct SMesh
             l_NewSubMesh.m_Material.FromMaxMaterial l_Material
 			append m_SubMeshes l_NewSubMesh
 		)
+	),
+	
+	fn InitFromMaxObject Obj =
+	(
+		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+		convertToMesh newObj
+		actualObj = newObj[1]
+		CreateSubMeshes actualObj
+		CreateBuffers actualObj
+		
+		delete newObj
 	),
 	
 	fn CreateBuffers Obj =
@@ -390,6 +384,15 @@ struct SMesh
 	
 	fn WriteToFile file =
 	(
+			WriteShort file 0x55ff #unsigned
+			WriteShort file m_SubMeshes.count #unsigned--Write number of materials
+		
+			for iSubMesh in m_SubMeshes do
+			(
+					iSubMesh.WriteToFile file
+			)			
+		
+			WriteShort file 0xff55 #unsigned
 	)
 )
 
@@ -470,4 +473,11 @@ function UABCalcVertexsNormals obj =
 )
 
 */
+
+file = fopen "D:\camera.mesh" "wb"
+l_ObjectMesh = SMesh()
+l_ObjectMesh.InitFromMaxObject $
+l_ObjectMesh.WriteToFile file
+fclose file
+
 

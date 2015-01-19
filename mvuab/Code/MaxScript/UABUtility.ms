@@ -29,9 +29,11 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		--export lights
 	)
+	
 	on MeshButton pressed do
 	(
 		fileIn "ExportMesh.ms"
+		fileIn "ExportMesh_v2.ms"
 		fileIn "XMLExporter.ms"
 		
 		if PathLabel.text == "" then
@@ -51,7 +53,11 @@ utility UABUtility "UAB Utility" width:162 height:325
 			for Obj in selection do
 			(
 				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-				ExportMesh Obj filename
+				local file = fopen filename "wb"
+				local l_ObjectMesh = SMesh()
+				l_ObjectMesh.InitFromMaxObject Obj
+				l_ObjectMesh.WriteToFile file
+				fclose file
 			)
 		)
 		else
