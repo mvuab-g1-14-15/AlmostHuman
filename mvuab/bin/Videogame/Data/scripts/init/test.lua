@@ -10,9 +10,15 @@ function init ()
 	cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
+	
+	initialized = true;
 end
 
 function update ()
+	if not initialized then
+		init()
+	end
+	
 	local dt = timer:GetElapsedTime()
 	local speed = 5;
 	
