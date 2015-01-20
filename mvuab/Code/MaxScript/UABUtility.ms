@@ -136,8 +136,12 @@ utility UABUtility "UAB Utility" width:162 height:325
 		(
 			for Obj in geometry do
 			(
-				filename = MeshDir + Obj.name + ".mesh"--poner parametrico
-				ExportMesh Obj filename
+				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+				local file = fopen filename "wb"
+				local l_ObjectMesh = SMesh()
+				l_ObjectMesh.InitFromMaxObject Obj
+				l_ObjectMesh.WriteToFile file
+				fclose file
 			)
 			
 			format "Meshes copied on: % \n" MeshDir

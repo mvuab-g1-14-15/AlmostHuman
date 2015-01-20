@@ -313,7 +313,7 @@ struct SMesh
 	
 	fn CreateBuffers Obj =
 	(
-		--format "Getting buffers...\n"
+		fileIn "CalculateNormals.ms"
 		local l_nFaces = getNumFaces Obj
 		
 		local InvTransform=inverse Obj.transform
@@ -346,10 +346,17 @@ struct SMesh
 				local Coord1=getVert Obj IdxsFace.x*InvTransform
 				local Coord2=getVert Obj IdxsFace.y*InvTransform
 				local Coord3=getVert Obj IdxsFace.z*InvTransform
+				
+				UABCalcVertexsNormals Obj
+
+				local l_FaceNormal = getFaceNormal Obj iFaces
+				local l_SmoothValue = getFaceSmoothGroup Obj iFaces
+				
 				-- Para coger las normales de los vértices de la primera cara
-				local Normal1=getNormal Obj IdxsFace.x
-				local Normal2=getNormal Obj IdxsFace.y
-				local Normal3=getNormal Obj IdxsFace.z
+				local Normal1 = UABGetVertexNormal Obj IdxsFace.x l_SmoothValue l_FaceNormal
+				local Normal2 = UABGetVertexNormal Obj IdxsFace.y l_SmoothValue l_FaceNormal
+				local Normal3 = UABGetVertexNormal Obj IdxsFace.z l_SmoothValue l_FaceNormal
+				
 				/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
 				conjunto de coordenadas aplicadas sobre la cara */
 				local IdxsMap = meshop.getMapFace Obj 1 iFaces
@@ -357,7 +364,7 @@ struct SMesh
 				local TUVMap1= meshop.getMapVert Obj 1 IdxsMap.x
 				local TUVMap2= meshop.getMapVert Obj 1 IdxsMap.y
 				local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
-				
+
 				local l_NewVertex1 = SVertex()
 				l_NewVertex1.m_Position = Coord1
 				l_NewVertex1.m_Normal = Normal1
@@ -420,89 +427,4 @@ struct SMesh
 		WriteShort file 0xff55 #unsigned
 	)
 )
-
-/*
-global UABVtxsNormals=#()
-function UABClearNormalsArray =
-(
-	while UABVtxsNormals.count>0 do
-	(
-		deleteItem UABVtxsNormals 1
-	)
-)
-
-function IsSmoothingGroupEnabled IdGroup Value =
-(
-	local ValueMask=2^(IdGroup-1)
-	return (bit.and Value ValueMask)==ValueMask
-)
-
-function UABGetVertexNormal obj IdVertex SmoothValue FaceNormal =
-(
-	local HasNormal=false
-	local Normal=point3 0 0 0
-	for b=1 to 32 do
-	(
-		if((IsSmoothingGroupEnabled b SmoothValue)==true) then
-		(
-			Normal=Normal+UABVtxsNormals[IdVertex][b]
-			HasNormal=true
-		)
-	)
-	
-	if HasNormal==false then
-	(
-		Normal=FaceNormal
-	)
-	
-	return Normal
-)
-
-function UABCalcVertexsNormals obj =
-(
-
-	UABClearNormalsArray()
-	local NumVtxs=getNumVerts obj
-
-	for b=1 to NumVtxs do
-	(
-		UABVtxsNormals[b]=#()
-		for t=1 to 32 do
-		(
-			UABVtxsNormals[b][t]=point3 0 0 0
-		)
-	)
-
-	local NumFaces=getNumFaces obj
-	local InvTransform=inverse obj.transform
-
-	for IdFace=1 to NumFaces do
-	(
-		local IdxsFace=getFace obj IdFace
-		local Vtx1=(getVert obj IdxsFace.x)*InvTransform
-		local Vtx2=(getVert obj IdxsFace.y)*InvTransform
-		local Vtx3=(getVert obj IdxsFace.z)*InvTransform
-		local FaceNormal=getFaceNormal obj IdFace
-		local SmoothValue=getFaceSmoothGroup obj IdFace
-		
-		for b=1 to 32 do
-		(
-			if((IsSmoothingGroupEnabled b SmoothValue)==true) then
-			(
-				UABVtxsNormals[IdxsFace.x][b]=UABVtxsNormals[IdxsFace.x][b] + FaceNormal 
-				UABVtxsNormals[IdxsFace.y][b]=UABVtxsNormals[IdxsFace.y][b] + FaceNormal
-				UABVtxsNormals[IdxsFace.z][b]=UABVtxsNormals[IdxsFace.z][b] + FaceNormal
-			)
-		)
-	)
-)
-
-*/
-
-file = fopen "D:\camera.mesh" "wb"
-l_ObjectMesh = SMesh()
-l_ObjectMesh.InitFromMaxObject $
-l_ObjectMesh.WriteToFile file
-fclose file
-
 

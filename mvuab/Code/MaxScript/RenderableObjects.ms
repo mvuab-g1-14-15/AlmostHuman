@@ -88,7 +88,6 @@ fn ExportRenderableObjects filenameXML RenderableObjects =
 				l_NewLightNode.AddAttributeCoordinate "scale" l_Scale
 
 				l_RenderableObjectsCount = l_RenderableObjectsCount + 1
-				)
 			)
 			catch
 			(
