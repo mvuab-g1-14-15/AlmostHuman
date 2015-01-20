@@ -12,6 +12,7 @@
 
 #include "Cameras/CameraManager.h"
 #include "Cameras/Camera.h"
+#include "Cameras/CameraInfo.h"
 
 #include "Cinematics/Cinematic.h"
 #include "Cinematics/CinematicPlayer.h"
@@ -169,6 +170,13 @@ void registerGraphics(lua_State *m_LS)
 		.def("SetZFar", &CCamera::SetZFar)
 		.def("SetAspectRatio", &CCamera::Setaspect_ratio)
 		.def("SetPos", &CCamera::SetPos)
+	];
+
+	module(m_LS)
+	[
+		class_<CCameraInfo>("CCameraInfo")
+
+		.def("SetLookAt", &CCameraInfo::SetLookAt)
 	];
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
