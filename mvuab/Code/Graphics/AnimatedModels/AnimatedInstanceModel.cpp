@@ -29,6 +29,8 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string &Name, const s
 {
     SetName(Name);
     Initialize();
+
+	m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
 }
 
 CAnimatedInstanceModel::~CAnimatedInstanceModel()
@@ -44,21 +46,16 @@ void CAnimatedInstanceModel::Render()
 
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
-    /*CEffectManager   *l_pEffectManager  = CCore::GetSingletonPtr()->GetEffectManager();
-    CEffectTechnique *l_pEffectTechnique = l_pEffectManager->GetAnimatedModelTechnique();
+    if(NULL == m_pEffectTechnique) return;
+	CCore::GetSingletonPtr()->GetEffectManager()->SetWorldMatrix(GetTransform());
 
-    //if(NULL == l_pEffectTecnique) l_pEffectTecnique = m_EffectTechnique;
-    if(NULL == l_pEffectTechnique) return;
-
-    l_pEffectManager->SetWorldMatrix(GetTransform());
-
-    CEffect *l_pEffect = l_pEffectTechnique->GetEffect();
+    CEffect *l_pEffect = m_pEffectTechnique->GetEffect();
     if(NULL == l_pEffect) return;
 
     LPD3DXEFFECT l_Effect = l_pEffect->GetEffect();
     if(NULL == l_Effect) return;
 
-    l_pEffectTechnique->BeginRender();
+    m_pEffectTechnique->BeginRender();
     CalHardwareModel *l_pCalHardwareModel = m_AnimatedCoreModel->GetCalHardwareModel();
 
     D3DXMATRIX transformation[MAXBONES];
@@ -87,14 +84,14 @@ void CAnimatedInstanceModel::RenderModelByHardware()
         m_AnimatedCoreModel->GetRenderableVertexs()->Render
             (
                 CCore::GetSingletonPtr()->GetGraphicsManager(), 
-                l_pEffectTechnique, 
+                m_pEffectTechnique, 
                 l_pCalHardwareModel->getBaseVertexIndex(),
                 0,
                 l_pCalHardwareModel->getVertexCount(),
                 l_pCalHardwareModel->getStartIndex(),
                 l_pCalHardwareModel->getFaceCount()
             );
-    }*/
+    }
 }
 
 void CAnimatedInstanceModel::RenderModelBySoftware()

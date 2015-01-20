@@ -3,12 +3,14 @@
 #include "Utils/Name.h"
 
 class CAnimatedCoreModel;
+class CEffectTechnique;
 class CTexture;
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
     private:
-        CalModel *m_CalModel;
+        CalModel		   *m_CalModel;
+		CEffectTechnique   *m_pEffectTechnique;
         CAnimatedCoreModel *m_AnimatedCoreModel;
 
         LPDIRECT3DVERTEXBUFFER9 m_pVB;
