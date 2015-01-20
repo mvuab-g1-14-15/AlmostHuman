@@ -41,19 +41,23 @@ CAnimatedInstanceModel::~CAnimatedInstanceModel()
 void CAnimatedInstanceModel::Render()
 {
 	CGraphicsManager::GetSingleton().SetTransform(GetTransform());
-    RenderModelBySoftware();
+    RenderModelByHardware();
 }
 
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
-    if(NULL == m_pEffectTechnique) return;
+    if(NULL == m_pEffectTechnique)
+		return;
+
 	CCore::GetSingletonPtr()->GetEffectManager()->SetWorldMatrix(GetTransform());
 
     CEffect *l_pEffect = m_pEffectTechnique->GetEffect();
-    if(NULL == l_pEffect) return;
+    if(NULL == l_pEffect)
+		return;
 
     LPD3DXEFFECT l_Effect = l_pEffect->GetEffect();
-    if(NULL == l_Effect) return;
+    if(NULL == l_Effect)
+		return;
 
     m_pEffectTechnique->BeginRender();
     CalHardwareModel *l_pCalHardwareModel = m_AnimatedCoreModel->GetCalHardwareModel();
@@ -233,6 +237,8 @@ void CAnimatedInstanceModel::Initialize()
     }
     
     LoadTextures();
+
+	m_AnimatedCoreModel->LoadVertexBuffer(GM);
 }
 
 void CAnimatedInstanceModel::Destroy()

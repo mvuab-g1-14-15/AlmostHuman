@@ -19,7 +19,9 @@ CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) :
         m_FileName(""),
         m_CalHardwareModel(0),
         m_RenderableVertexs(0),
-        m_CalCoreModel(new CalCoreModel(Name))
+        m_CalCoreModel(new CalCoreModel(Name)),
+		m_NumFaces(0), 
+		m_NumVtxs(0)
 {
 }
 
@@ -66,9 +68,25 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::strin
 
 bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 {
-	int *l_Idxs = new int[m_NumFaces * 3];
+	m_NumVtxs=0;
+	m_NumFaces=0;
+	for(int i=0;i<m_CalCoreModel->getCoreMeshCount();++i)
+	{
+		CalCoreMesh *l_CalCoreMesh=m_CalCoreModel->getCoreMesh(i);
+		for(int j=0;j<l_CalCoreMesh->getCoreSubmeshCount();++j)
+		{
+			CalCoreSubmesh *l_CalCoreSubmesh=l_CalCoreMesh->getCoreSubmesh(j);
+			if(l_CalCoreSubmesh!=NULL)
+			{
+				m_NumVtxs+=l_CalCoreSubmesh->getVertexCount();
+				m_NumFaces+=l_CalCoreSubmesh->getFaceCount();
+			}
+		}
+	}
+
 	m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
-    CAL3D_HW_VERTEX *l_Vtxs = new CAL3D_HW_VERTEX[m_NumVtxs * 2];
+	unsigned short *l_Idxs = new unsigned short[m_NumFaces*3];
+	CAL3D_HW_VERTEX *l_Vtxs = new CAL3D_HW_VERTEX[m_NumFaces*3];
     
     m_CalHardwareModel->setVertexBuffer((char*) l_Vtxs, sizeof(CAL3D_HW_VERTEX));
     m_CalHardwareModel->setWeightBuffer(((char*) l_Vtxs) + 12, sizeof(CAL3D_HW_VERTEX));

@@ -204,6 +204,7 @@ void CCore::LoadXml()
 void CCore::InitManagers()
 {
     m_pGraphicsManager->Init( m_WindowId, m_FullScreenMode, m_ScreenWidth, m_ScreenHeight);
+	m_pEffectManager->Load("Data/effects.xml");
     m_pInputManager->Init( m_WindowId, Math::Vect2i( m_ScreenWidth, m_ScreenHeight ), m_ExclusiveModeInMouse );
     m_pActionManager->Init( m_InputPath, m_pInputManager );
     m_pLanguageManager->SetXmlPaths( m_v_languages );
@@ -219,5 +220,4 @@ void CCore::InitManagers()
 	m_pScriptManager->Load(m_LuaRunPath);
 
 	m_pLightManager->Load("Data/Lights.xml");
-	m_pEffectManager->Load("Data/effects.xml");
 }

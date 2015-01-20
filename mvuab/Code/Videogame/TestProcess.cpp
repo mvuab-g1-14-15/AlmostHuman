@@ -28,6 +28,7 @@
 #include "Cameras\CameraManager.h"
 
 #include "Effects\EffectManager.h"
+#include "RenderableVertex\VertexTypes.h"
 
 #include <d3dx9.h>
 
@@ -40,6 +41,10 @@ CTestProcess::CTestProcess() : CProcess(),
     CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
                                                  Math::Vect3f(0.0f,2.0f,0.0f) );
     CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
+
+	//unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
+
+	//int i = 0;
 }
 
 CTestProcess::~CTestProcess()

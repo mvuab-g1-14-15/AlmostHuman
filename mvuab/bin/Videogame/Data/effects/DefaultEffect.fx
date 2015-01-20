@@ -1,6 +1,4 @@
-float4x4 g_WorldViewProj : WorldViewProjection;
-float4x4 g_WorldMatrix : World;
-//float4x4 g_InverseViewMatrix: ViewInverse;
+#include "globals.fxh"
 
 /*float g_EnvironmentFactor
 <

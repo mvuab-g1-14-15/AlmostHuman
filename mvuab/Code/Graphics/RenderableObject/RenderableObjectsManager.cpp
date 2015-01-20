@@ -17,7 +17,6 @@ CRenderableObjectsManager::~CRenderableObjectsManager()
 	Destroy();
 }
 
-//<MeshInstance name="Boli Azul" core="" pos="" yaw="" pitch="" roll="" scale=""/>
 bool CRenderableObjectsManager::Load(const std::string &FileName)
 {
 	CXMLTreeNode newFile;
@@ -40,25 +39,24 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
     for(int i=0;i<m.GetNumChildren();++i)
     {
 		const std::string &l_TagName=m(i).GetName();
+		const std::string &l_Name=m(i).GetPszProperty("name","");
+        const std::string &l_Core=m(i).GetPszProperty("core","");
+
+        const Math::Vect3f &l_Pos=m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
+		const Math::Vect3f &l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
+
+        float32 l_Yaw=m(i).GetFloatProperty("yaw",0.0f);
+        float32 l_Pitch=m(i).GetFloatProperty("pitch",0.0f);
+        float32 l_Roll=m(i).GetFloatProperty("roll",0.0f);
+
         if(l_TagName=="MeshInstance")
-        {
-			std::string l_Name=m(i).GetPszProperty("name","");
-            std::string l_Core=m(i).GetPszProperty("core","");
-
-            Math::Vect3f l_Pos=m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-			Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
-
-            float32 l_Yaw=m(i).GetFloatProperty("yaw",0.0f);
-            float32 l_Pitch=m(i).GetFloatProperty("pitch",0.0f);
-            float32 l_Roll=m(i).GetFloatProperty("roll",0.0f);
-
+		{
             CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
             l_InstanceMesh->SetPosition(l_Pos);
             l_InstanceMesh->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
             l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
             l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
             l_InstanceMesh->SetScale(l_Scale);
-
 
 			if(!AddResource(l_Name, l_InstanceMesh))
 			{
@@ -67,16 +65,6 @@ bool CRenderableObjectsManager::Load(const std::string &FileName)
         }
         else if(l_TagName=="AnimatedInstance")
         {
-			const std::string& l_Name=m(i).GetPszProperty("name","");
-			const std::string& l_Core=m(i).GetPszProperty("core","");
-
-			const Math::Vect3f& l_Pos=m(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-			Math::Vect3f l_Scale=m(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
-
-			float32 l_Yaw=m(i).GetFloatProperty("yaw",0.0f);
-			float32 l_Pitch=m(i).GetFloatProperty("pitch",0.0f);
-			float32 l_Roll=m(i).GetFloatProperty("roll",0.0f);
-			
 			CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(l_Name, l_Core);
 			l_AnimatedInstance->SetPosition(l_Pos);
 			l_AnimatedInstance->SetYaw( Math::Utils::Deg2Rad(l_Yaw));

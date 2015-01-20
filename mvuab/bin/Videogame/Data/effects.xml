@@ -1,5 +1,10 @@
 <effects>
 	<default_technique vertex_type="19" technique="DefaultTechnique"/>
+	<default_technique vertex_type="415" technique="Cal3DTechnique"/>
+	
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
+	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
+	
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 </effects>
