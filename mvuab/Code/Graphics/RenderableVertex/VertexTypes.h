@@ -397,7 +397,7 @@ struct CAL3D_HW_VERTEX
     float tu,tv;
     static inline unsigned short GetVertexType()
     {
-        return 0;
+		return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
     }
 
     static inline unsigned int GetFVF()

@@ -27,6 +27,8 @@
 #include "Cameras\CameraFPShooter.h"
 #include "Cameras\CameraManager.h"
 
+#include "Effects\EffectManager.h"
+
 #include <d3dx9.h>
 
 void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFiles);
@@ -61,6 +63,11 @@ void CTestProcess::Update()
 	if( pActionManager->DoAction("ReloadLUA") )
     {
 		CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    }
+
+	if( pActionManager->DoAction("ReloadShaders") )
+    {
+		CCore::GetSingletonPtr()->GetEffectManager()->Reload();
     }
 
     if( pActionManager->DoAction("ReloadActionToInput") )
