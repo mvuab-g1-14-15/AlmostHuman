@@ -1,7 +1,20 @@
 #include "Light.h"
 #include "Math\Color.h"
+#include "GraphicsManager.h"
 
 #include <string>
+
+#define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
+typedef struct CUSTOMVERTEXLIGHT
+{
+  float x, y, z;
+  DWORD color;
+
+  static unsigned int getFlags()
+  {
+    return(D3DFVF_CUSTOMVERTEXLIGHT);
+  }
+} CUSTOMVERTEXLIGHT;
 
 CLight::CLight()
 {
@@ -78,4 +91,14 @@ CLight::TLightType CLight::GetType() const
 
 void CLight::Render()
 {
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+  D3DXMATRIX matrix;
+  D3DXMATRIX translation;
+
+  D3DXMatrixTranslation( &translation, m_Position.x ,m_Position.y ,m_Position.z );
+  l_Device->SetTransform( D3DTS_WORLD, &translation );
+  GraphicsInstance->DrawSphere(0.5f, Math::colYELLOW,20);
+
+  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
+  l_Device->SetTransform( D3DTS_WORLD, &matrix );
 }

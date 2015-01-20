@@ -47,7 +47,7 @@ void CLightManager::Load(const std::string &FileName)
       else if(l_Type=="omni")
       {
         COmniLight* l_Light = new COmniLight(m(i));
-		AddResource(l_Light->GetName(), l_Light);
+        AddResource(l_Light->GetName(), l_Light);
       }
       else if(l_Type=="targetSpot")
       {
@@ -60,6 +60,11 @@ void CLightManager::Load(const std::string &FileName)
 
 void CLightManager::Render()
 {
+#ifdef _DEBUG
+  TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
+  for( ; itb!=ite; ++itb)
+    (*itb)->Render();
+#endif
 }
 
 CLight* CLightManager::GetLight( size_t at )

@@ -13,8 +13,8 @@
 
 class CGraphicsManager : public CSingleton<CGraphicsManager>
 {
-public:
-    typedef enum{ CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
+  public:
+    typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
 
     CGraphicsManager();
     ~CGraphicsManager();
@@ -36,15 +36,19 @@ public:
     void RenderCursor();
 
     // Getters and setters
-    const LPDIRECT3DDEVICE9 GetDevice() const { return m_pD3DDevice; }
+    const LPDIRECT3DDEVICE9 GetDevice() const
+    {
+      return m_pD3DDevice;
+    }
 
     // Basic Primitives
     void DrawAxis(float32 Size);
     void DrawIcoSphere();
+    void DrawCone(float32 size, uint16 edges, Math::CColor color);
     void DrawGrid(float32 Size, Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
     void DrawPlane(    float32 Size, const Math::Vect3f& normal, float32 distance,Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
     void DrawCube(float32 Size, Math::CColor Color);
-	void DrawCube(float32 Size);
+    void DrawCube(float32 Size);
     void DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color=Math::colWHITE);
     void DrawCircle(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
     void DrawSphere(float32 Radius, Math::CColor Color=Math::colWHITE, int32 Aristas=10);
@@ -58,19 +62,19 @@ public:
     void DrawQuad3D(    const Math::Vect3f& ul, const Math::Vect3f& ur, const Math::Vect3f& dl, const Math::Vect3f& dr, Math::CColor color);
 
 
-private: // Members
+  private: // Members
     HWND                    m_WindowId;                      // 3D render window handle
     LPDIRECT3D9             m_pD3D;                          // direct3d interface
     LPDIRECT3DDEVICE9       m_pD3DDevice;                    // direct3d device
     uint32                  m_uWidth;                        // width of the client windows
     uint32                  m_uHeight;                       // height of the client windows
-    Math::CColor            m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode 
+    Math::CColor            m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode
     Math::CColor            m_BackbufferColor_release;       // Clear the backbuffer with this color in release mode
     LPDIRECT3DSURFACE9      m_pBackBuffer;
     bool                    m_bPaintSolid;
     bool                    m_bIsOk;                         // Initialization boolean control
 
-private: // Methods
+  private: // Methods
     void GetWindowRect( HWND hwnd );
     void CalculateAlignment (uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i & finalPos);
 };

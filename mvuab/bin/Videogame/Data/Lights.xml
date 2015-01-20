@@ -1,10 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<lights>	
-	<light name="Direct001" type="directional" pos="-30.21 43.16 -25.56" dir="0.0154038 -0.898505 -0.438693" color="0.337255 0.372549 0.203922" att_start_range="80.0" att_end_range="200.0" intensity="1.0"  export_shadows="false" generate_shadow_map="false" shadow_map_format_type="R32F" shadow_map_width="128" shadow_map_height="128" generate_static_shadow_map="false" static_shadow_map_format_type="R32F" static_shadow_map_width="128" static_shadow_map_height="128" update_static_shadow_map="true" ortho_shadow_map_width="50" ortho_shadow_map_height="50" uses_cascaded_shadows_map="true" cascaded_shadow_map_format_type="R32F" cascaded_shadow_map_width="1024" cascaded_shadow_map_height="1024" ortho_shadow_map_width_0="12" ortho_shadow_map_height_0="12" ortho_shadow_map_width_1="30" ortho_shadow_map_height_1="30" ortho_shadow_map_width_2="170" ortho_shadow_map_height_2="170" shadow_map_epsilon="0.0005" cascaded_epsilon="0.0015" cascaded_light_distance="150" >
-		<cascaded renderable_objects_manager="solid" />
-		<cascaded renderable_objects_manager="alpha_objects" />
-	</light>
-	<light name="Omni001" type="omni" pos="-20.8575 10.9709 8.70984" color="0.811765 0.521569 0.419608" att_start_range="2.74275" att_end_range="4.10399" intensity="0.99" />
-	<light name="Omni002" type="omni" pos="-19.896 10.9709 12.1927" color="0.811765 0.521569 0.419608" att_start_range="2.74275" att_end_range="4.10399" intensity="0.99" />
-	<light name="Omni003" type="omni" pos="-7.27437 21.1545 -70.2244" color="0.0313726 0.266667 0.482353" att_start_range="11.0818" att_end_range="14.91" intensity="1.0" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lights>
+  <light type="omni" name="Omni001" pos="13.7135 24.8479 66.3453" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" />
+  <light type="targetDirect" name="Direct001" pos="-47.1989 0.0 46.1801" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="103.828 0.0 -89.1114" />
+  <light type="targetSpot" name="Spot001" pos="-33.7708 0.0 -61.7502" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="18.6417 0.0 49.3139" angle="43.0" fall_off="45.0" render_shadows="false" />
 </lights>

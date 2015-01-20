@@ -56,11 +56,14 @@ fn ExportLights filenameXML =
 						local l_Direction = iLight.target.pos-iLight.pos
 						
 						l_NewLightNode.AddAttributeCoordinate "dir" l_Direction
-						l_NewLightNode.AddAttributeFloat "angle" iLight.hotspot
-						l_NewLightNode.AddAttributeFloat "fall_off" iLight.Falloff
 					)
 					else if classof iLight == targetSpot then
 					(
+						local l_Direction = iLight.target.pos-iLight.pos
+						
+						l_NewLightNode.AddAttributeCoordinate "dir" l_Direction
+						l_NewLightNode.AddAttributeFloat "angle" iLight.hotspot
+						l_NewLightNode.AddAttributeFloat "fall_off" iLight.Falloff
 						l_NewLightNode.AddAttributeBool "render_shadows" false
 					)
 					l_LightsCount = l_LightsCount + 1
