@@ -44,11 +44,11 @@ void CCinematicObject::Update()
 {
     bool KeyFrameChanged(false);
 	CCinematicPlayer::Update();
-	for(int i=0; i<m_CinematicObjectKeyFrames.size(); ++i)
+	for(unsigned int i=0; i<m_CinematicObjectKeyFrames.size(); ++i)
 	{
 		if(m_CinematicObjectKeyFrames[i]->GetKeyFrameTime() > m_CurrentTime)
 		{
-            float l_PrevKeyFrame = m_CurrentKeyFrame;
+            size_t l_PrevKeyFrame = m_CurrentKeyFrame;
 			m_CurrentKeyFrame = i-1;
             if( l_PrevKeyFrame < m_CurrentKeyFrame )
             {

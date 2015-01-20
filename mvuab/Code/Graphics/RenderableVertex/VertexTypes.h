@@ -389,12 +389,10 @@ struct CAL3D_HW_VERTEX
     float x, y, z;
     float weights[4];
     float indices[4];
-    float nx, ny, nz;
     
-    //En caso de utilizar NormalMap
-    //float nx, ny, nz, nw;
-    //float tangentx, tangenty, tangentz, tangentw;
-    //float binormalx, binormaly, binormalz, binormalw;
+    float nx, ny, nz, nw;
+    float tangentx, tangenty, tangentz, tangentw;
+    float binormalx, binormaly, binormalz, binormalw;
     
     float tu,tv;
     static inline unsigned short GetVertexType()
@@ -415,3 +413,5 @@ struct CAL3D_HW_VERTEX
         CHECKED_RELEASE(s_VertexDeclaration);
     }
 };
+
+void CalcTangentsAndBinormals(void *VtxsData, unsigned short *IdxsData, size_t VtxCount, size_t IdxCount, size_t VertexStride, size_t GeometryStride, size_t NormalStride, size_t TangentStride, size_t BiNormalStride, size_t TextureCoordsStride);
