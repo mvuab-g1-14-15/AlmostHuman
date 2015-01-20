@@ -45,18 +45,23 @@ void CScriptManager::Destroy()
 void CScriptManager::Reload()
 {
 	m_LuaFiles.clear();
+	m_LuaInitFiles.clear();
 
 	Destroy();
 
-	Load(m_LuaPath);
 	Initialize();
+	Load(m_LuaPath);
 }
 
 void CScriptManager::Load(const std::string &Path)
 {
 	m_LuaPath = Path;
+	baseUtils::GetFilesFromPath(m_LuaPath, "lua", m_LuaFiles );
+	baseUtils::GetFilesFromPath(m_LuaPath+"init/", "lua", m_LuaInitFiles );
 
-  baseUtils::GetFilesFromPath(m_LuaPath, "lua", m_LuaFiles );
+	TVectorLuaFiles::iterator it = m_LuaInitFiles.begin(), it_end = m_LuaInitFiles.end();
+	for (; it != it_end; ++it)
+		RunFile(m_LuaPath+"init/"+(*it));
 }
 
 void CScriptManager::RunCode(const std::string &Code)

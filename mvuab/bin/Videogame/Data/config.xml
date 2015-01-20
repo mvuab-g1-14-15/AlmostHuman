@@ -17,6 +17,6 @@
   <animated_models path="Data/animated_models.xml"/>
   <static_meshes path="Data/static_meshes.xml"/>
   <renderable_objects path="Data/renderable_objects.xml"/>
-   <lua path="Data/test.lua"/>
+   <lua path="Data/scripts/"/>
   
 </config>

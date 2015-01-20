@@ -216,8 +216,8 @@ void CCore::InitManagers()
     m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
 
 	m_pScriptManager->Initialize();
-	m_pScriptManager->RunFile(m_LuaRunPath);
+	m_pScriptManager->Load(m_LuaRunPath);
 
 	m_pLightManager->Load("Data/Lights.xml");
-  m_pEffectManager->Load("Data/effects.xml");
+	m_pEffectManager->Load("Data/effects.xml");
 }

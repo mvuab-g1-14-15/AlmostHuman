@@ -10,9 +10,15 @@ function init ()
 	cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
+	
+	initialized = true;
 end
 
 function update ()
+	if not initialized then
+		init()
+	end
+	
 	local dt = timer:GetElapsedTime()
 	local speed = 5;
 	
@@ -24,7 +30,9 @@ function update ()
 	local dir_per = dir:CrossProduct(vec_up)
 	dir_per:Normalize()
 	
-	current_camera:SetPos(pos-5.0*dir)
+	camera_offset = Vect3f(-5,5,-5)
+	
+	current_camera:SetPos(pos+camera_offset)
 	
 	if action_manager:DoAction("Left") then
 		pos = pos + dir_per * speed * dt
