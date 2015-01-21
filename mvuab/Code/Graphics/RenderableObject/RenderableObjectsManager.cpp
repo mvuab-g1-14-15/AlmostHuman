@@ -8,7 +8,7 @@
 #include "Cinematics\Cinematic.h"
 #include "Core.h"
 
-CRenderableObjectsManager::CRenderableObjectsManager() : m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
+CRenderableObjectsManager::CRenderableObjectsManager()
 {
 }
 
@@ -93,15 +93,9 @@ void CRenderableObjectsManager::CleanUp()
 
 void CRenderableObjectsManager::Render()
 {
-    m_NumVertexs = m_NumFaces = m_NumDraws = 0;
-
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
     {
         m_ResourcesVector[i]->Render();
-
-        m_NumVertexs += m_ResourcesVector[i]->GetNumVertex();
-        m_NumFaces += m_ResourcesVector[i]->GetNumFaces();
-        m_NumDraws += m_ResourcesVector[i]->GetNumDraws();
     }
 }
 

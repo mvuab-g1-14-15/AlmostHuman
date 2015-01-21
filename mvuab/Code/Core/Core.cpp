@@ -95,19 +95,12 @@ void CCore::Update()
 
 void CCore::Render()
 {
-  m_pGraphicsManager->Render();
-  m_pDebugWindowManager->Render();
-  m_pRenderableObjectsManager->Render();
-  m_pLightManager->Render();
-  m_pCameraManager->RenderCameras();
-  m_pLightManager->Render();
-
-  // START: TO DELETE LATER IF IS NOT NECESSARY,
-  unsigned int v = m_pRenderableObjectsManager->GetNumVertex();
-  unsigned int f = m_pRenderableObjectsManager->GetNumFaces();
-  unsigned int d = m_pRenderableObjectsManager->GetNumDraws();
-  m_pFontManager->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
-  // END: TO DELETE LATER IF IS NOT NECESSARY
+	m_pGraphicsManager->Render();
+	m_pDebugWindowManager->Render();
+	m_pRenderableObjectsManager->Render();
+	m_pLightManager->Render();
+	m_pCameraManager->RenderCameras();
+	m_pLightManager->Render();
 }
 
 void CCore::LoadXml()

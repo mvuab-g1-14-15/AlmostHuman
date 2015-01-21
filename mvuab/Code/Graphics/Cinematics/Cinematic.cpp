@@ -4,9 +4,7 @@
 #include "Logger\Logger.h"
 #include "CinematicObject.h"
 
-CCinematic::CCinematic(const std::string &FileName)
-  : CRenderableObject()
-  , CCinematicPlayer()
+CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCinematicPlayer()
 {
 	CXMLTreeNode newFile;
 
