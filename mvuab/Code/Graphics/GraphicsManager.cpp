@@ -10,6 +10,7 @@
 #include "Exceptions\Exception.h"
 #include "InputManager.h"
 #include "Effects\EffectManager.h"
+#include "Core.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -58,8 +59,8 @@ struct VERTEX2
 
 
 CGraphicsManager::CGraphicsManager() :
-  m_uWidth(1200),
-  m_uHeight(800),
+  m_uWidth(CCore::GetSingletonPtr()->GetScreenHeight()),
+  m_uHeight(CCore::GetSingletonPtr()->GetScreenWidth()),
   m_BackbufferColor_debug(Math::colBLUE),
   m_BackbufferColor_release(Math::colBLACK),
   m_bPaintSolid(true)

@@ -113,10 +113,7 @@ void CTestProcess::Update()
 
 void CTestProcess::Init()
 {
-    std::vector<std::string> l_Files;
-    baseUtils::GetFilesFromPath("d:\\", "pdf", l_Files);
-
-	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
 }
 
 void CTestProcess::Render()
