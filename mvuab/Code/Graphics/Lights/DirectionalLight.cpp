@@ -2,8 +2,6 @@
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
 
-#include "XML\XMLTreeNode.h"
-
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
 {
@@ -12,27 +10,21 @@ typedef struct CUSTOMVERTEXLIGHT
 
   static unsigned int getFlags()
   {
-    return(D3DFVF_CUSTOMVERTEXLIGHT);
+    return ( D3DFVF_CUSTOMVERTEXLIGHT );
   }
 } CUSTOMVERTEXLIGHT;
 
-CDirectionalLight::CDirectionalLight(CXMLTreeNode node) : CLight()
+CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
+  : CLight( node )
+  , m_Direction( node.GetVect3fProperty( "dir", Math::Vect3f( 0, 0, 0 ) ) )
 {
-  m_Direction = node.GetVect3fProperty("dir",Math::Vect3f(0,0,0));
-  m_Name = node.GetPszProperty("name","");
-  m_Color = Math::colWHITE;
-  m_Position = node.GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-  m_Intensity = node.GetFloatProperty("intensity", 0);
-  m_fYaw = node.GetFloatProperty("yaw", 0);
-  m_fPitch = node.GetFloatProperty("pitch", 0);
-  m_fRoll = node.GetFloatProperty("roll", 0);
-  m_Scale = node.GetVect3fProperty("scale",Math::Vect3f(0,0,0));
-  m_StartRangeAttenuation = node.GetFloatProperty("att_start_range", 0);
-  m_EndRangeAttenuation = node.GetFloatProperty("att_end_range", 0);
-  SetType(CLight::DIRECTIONAL);
+  m_fYaw = Math::Utils::ATan2( m_Direction.z, m_Direction.x );
+  m_fPitch = Math::Utils::ATan2( m_Direction.y,
+                                 Math::Utils::Sqrt( m_Direction.z * m_Direction.z + m_Direction.x * m_Direction.x ) );
+  SetType( CLight::DIRECTIONAL );
 }
 
-void CDirectionalLight::SetDirection(const Math::Vect3f &Direction)
+void CDirectionalLight::SetDirection( const Math::Vect3f& Direction )
 {
   m_Direction = Direction;
 }
@@ -44,8 +36,12 @@ Math::Vect3f CDirectionalLight::GetDirection() const
 
 void CDirectionalLight::Render()
 {
-  Math::Vect3f l_Direction = m_Direction.GetNormalized();
   LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+
+  D3DXMATRIX matrix = GetTransform().GetD3DXMatrix();
+
+  l_Device->SetTransform( D3DTS_WORLD, &matrix );
+  Math::Vect3f l_Direction = m_Direction.GetNormalized() * 10.0f;
   CUSTOMVERTEXLIGHT v[2] =
   {
     {
@@ -62,14 +58,9 @@ void CDirectionalLight::Render()
     },
   };
 
-  l_Device->DrawPrimitiveUP( D3DPT_LINELIST,1, v,sizeof(CUSTOMVERTEXLIGHT));
+  l_Device->DrawPrimitiveUP( D3DPT_LINELIST, 1, v, sizeof( CUSTOMVERTEXLIGHT ) );
 
-  D3DXMATRIX matrix;
-  D3DXMATRIX translation;
-
-  D3DXMatrixTranslation( &translation, m_Position.x ,m_Position.y ,m_Position.z );
-  l_Device->SetTransform( D3DTS_WORLD, &translation );
-  GraphicsInstance->DrawCube(0.5f, Math::colRED);
+  GraphicsInstance->DrawSphere( 0.5f, Math::colRED );
 
   D3DXMatrixTranslation( &matrix, 0, 0, 0 );
   l_Device->SetTransform( D3DTS_WORLD, &matrix );

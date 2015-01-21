@@ -8,7 +8,8 @@
 class COmniLight : public CLight
 {
 public:
-	COmniLight(CXMLTreeNode node);
+  COmniLight( CXMLTreeNode node );
+  virtual void Render();
 };
 
 #endif // OMNI_LIGHT_H

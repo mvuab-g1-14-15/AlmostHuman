@@ -1,18 +1,23 @@
 #include "OmniLight.h"
 
 #include "XML/XMLTreeNode.h"
+#include "GraphicsManager.h"
 
-COmniLight::COmniLight(CXMLTreeNode node)
+COmniLight::COmniLight( CXMLTreeNode node ) : CLight( node )
 {
-	m_Name = node.GetPszProperty("name","");
-    m_Color = Math::colWHITE;
-    m_Position = node.GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-    m_Intensity = node.GetFloatProperty("intensity", 0);
-    m_fYaw = node.GetFloatProperty("yaw", 0);
-    m_fPitch = node.GetFloatProperty("pitch", 0);
-    m_fRoll = node.GetFloatProperty("roll", 0);
-    m_Scale = node.GetVect3fProperty("scale",Math::Vect3f(0,0,0));
-    m_StartRangeAttenuation = node.GetFloatProperty("att_start_range", 0);
-    m_EndRangeAttenuation = node.GetFloatProperty("att_end_range", 0);
-    SetType(CLight::OMNI);
+  SetType( CLight::OMNI );
+}
+
+void COmniLight::Render()
+{
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+
+  D3DXMATRIX matrix = GetTransform().GetD3DXMatrix();
+
+  l_Device->SetTransform( D3DTS_WORLD, &matrix );
+
+  GraphicsInstance->DrawSphere( 0.5f, Math::colRED );
+
+  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
+  l_Device->SetTransform( D3DTS_WORLD, &matrix );
 }

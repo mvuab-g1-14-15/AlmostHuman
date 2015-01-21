@@ -94,10 +94,12 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
 
     if ( AllocConsole() )
     {
+      freopen( "CONIN$", "r", stdin );
       freopen( "CONOUT$", "w", stdout );
+      freopen( "CONOUT$", "w", stderr );
       //HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
       system( "mode 120, 30" );
-      SetConsoleTitle( "UAB OUTPUT WINDOW" );
+      SetConsoleTitle( "LOG WINDOW" );
       _COORD coord;
       coord.X = 800;
       coord.Y = 800;
