@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <config>
-  <screen_resolution width="1280" height="720"/> 
+  <screen_resolution width="800" height="600"/> 
   <window_position x_pos="100" y_pos="100"/>
   <render_mode fullscreen_mode="false"/>          
   <console_logger activateConsole="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
