@@ -18,7 +18,6 @@ CLogger::CLogger()
 void CLogger::AddNewLog( ELOG_LEVEL ll, const char* format, ... )
 {
   HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-
   va_list args;
   char* buffer;
   va_start( args, format );
@@ -39,20 +38,20 @@ void CLogger::AddNewLog( ELOG_LEVEL ll, const char* format, ... )
     {
     case ELL_INFORMATION:
     {
-      SetConsoleTextAttribute( hConsole, COMMON_LVB_UNDERSCORE );
+      SetConsoleTextAttribute( hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
     }
     break;
 
     case ELL_WARNING:
     {
-      SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN );
+      SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
       m_bWarnings = true;
     }
     break;
 
     case ELL_ERROR:
     {
-      SetConsoleTextAttribute( hConsole, FOREGROUND_RED );
+      SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY );
       m_bErrors = true;
     }
     break;

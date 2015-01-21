@@ -95,8 +95,22 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     if ( AllocConsole() )
     {
       freopen( "CONOUT$", "w", stdout );
-      HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+      //HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+      system( "mode 120, 30" );
       SetConsoleTitle( "UAB OUTPUT WINDOW" );
+      _COORD coord;
+      coord.X = 800;
+      coord.Y = 800;
+
+      _SMALL_RECT Rect;
+      Rect.Top = 0;
+      Rect.Left = 0;
+      Rect.Bottom = 800 - 1;
+      Rect.Right = 800 - 1;
+
+      HANDLE Handle = GetStdHandle( STD_OUTPUT_HANDLE );    // Get Handle
+      SetConsoleScreenBufferSize( Handle, coord );          // Set Buffer Size
+      SetConsoleWindowInfo( Handle, TRUE, &Rect );          // Set Window Size
     }
 
 #endif
