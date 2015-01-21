@@ -10,6 +10,7 @@
 #include "Utils\Defines.h"
 #include <string>
 #include "Exceptions\Exception.h"
+#include "Core.h"
 
 #if _DEBUG
 #include "Memory\MemLeaks.h"
@@ -117,6 +118,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
 
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
     pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
+
+    SetWindowPos(hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(), CCore::GetSingletonPtr()->GetWindowYPos(), CCore::GetSingletonPtr()->GetScreenWidth(), CCore::GetSingletonPtr()->GetScreenHeight(), SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
 
     // Añadir aquí el Init de la applicacioón
 
