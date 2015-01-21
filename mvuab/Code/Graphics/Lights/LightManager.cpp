@@ -42,17 +42,26 @@ void CLightManager::Load(const std::string &FileName)
       if(l_Type=="targetDirect")
       {
         CDirectionalLight* l_Light = new CDirectionalLight(m(i));
-        AddResource(l_Light->GetName(), l_Light);
+        if(!AddResource(l_Light->GetName(), l_Light))
+		{
+			delete l_Light;
+		}
       }
       else if(l_Type=="omni")
       {
         COmniLight* l_Light = new COmniLight(m(i));
-        AddResource(l_Light->GetName(), l_Light);
+        if(!AddResource(l_Light->GetName(), l_Light))
+		{
+			delete l_Light;
+		}
       }
       else if(l_Type=="targetSpot")
       {
         CSpotLight* l_Light = new CSpotLight(m(i));
-        AddResource(l_Light->GetName(), l_Light);
+        if(!AddResource(l_Light->GetName(), l_Light))
+		{
+			delete l_Light;
+		}
       }
     }
   }
