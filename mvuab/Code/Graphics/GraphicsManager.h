@@ -4,6 +4,7 @@
 
 #include <Windows.h>
 #include <d3dx9.h>
+#include "d3dx9shape.h"
 
 #include "Utils\SingletonPattern.h"
 #include "Utils\Defines.h"
@@ -44,7 +45,6 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     // Basic Primitives
     void DrawAxis(float32 Size);
     void DrawIcoSphere();
-    void DrawCone(float32 size, uint16 edges, Math::CColor color);
     void DrawGrid(float32 Size, Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
     void DrawPlane(    float32 Size, const Math::Vect3f& normal, float32 distance,Math::CColor Color=Math::colWHITE, int GridX=10, int32 GridZ=10 );
     void DrawCube(float32 Size, Math::CColor Color);
@@ -73,6 +73,9 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     LPDIRECT3DSURFACE9      m_pBackBuffer;
     bool                    m_bPaintSolid;
     bool                    m_bIsOk;                         // Initialization boolean control
+    LPD3DXMESH              m_SphereMesh;
+    LPD3DXMESH              m_BoxMesh;
+    LPD3DXMESH              m_CylinderMesh;
 
   private: // Methods
     void GetWindowRect( HWND hwnd );
