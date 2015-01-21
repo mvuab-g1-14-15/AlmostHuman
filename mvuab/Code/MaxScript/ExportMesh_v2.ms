@@ -1,12 +1,5 @@
 fileIn "GetAABB.ms"
-
-global VERTEX_TYPE_GEOMETRY 	= 0x0001
-global VERTEX_TYPE_NORMAL 		= 0x0002
-global VERTEX_TYPE_TANGENT 	 	= 0x0004
-global VERTEX_TYPE_BINORMAL	 	= 0x0008
-global VERTEX_TYPE_TEXTURE1 	= 0x0010
-global VERTEX_TYPE_TEXTURE2 	= 0x0020
-global VERTEX_TYPE_DIFFUSE 		= 0x0040
+fileIn "VertexTypes.ms"
 
 clearListener()
 
@@ -28,10 +21,16 @@ struct STexture
 	
 	fn WriteToFile file = 
 	(
-		if IsNotNull == true then
+		if IsNotNull() then
 		(
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
+		)
+		else
+		(
+			l_Name = "test.png"
+			WriteShort file l_Name.count #unsigned--Write Lenght Name
+			WriteString file l_Name --Write Name
 		)
 	)
 )
@@ -42,6 +41,7 @@ struct SMaterial
 	m_Texture1 = STexture(),
 	m_Texture2  = STexture(),
 	m_TextureBump  = STexture(),
+	m_Color = 0,
 	
 	fn FromMaxMaterial mat =
 	(
@@ -75,6 +75,7 @@ struct SMaterial
 			else
 			(
 				m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
+				m_Color = bit.shift mat.diffuse.r 24 + bit.shift mat.diffuse.g 16 + bit.shift mat.diffuse.b 8 + mat.diffuse.a
 			)
 		)
 	),
@@ -87,62 +88,8 @@ struct SMaterial
 		format "Type: %\n" m_Type
 		
 		m_Texture1.WriteToFile file
-		m_Texture2.WriteToFile file
-		m_TextureBump.WriteToFile file
 		
 		format "Writing Material End\n"
-	)
-)
-
-struct SVertex
-(
-	m_Position = point3 0 0 0,
-	m_Normal = point3 0 0 0,
-	m_UV = point2 0 0,
-	m_UV2 = point2 0 0,
-	m_Color = 0,
-	
-	fn GetAsString = 
-	(
-		local l_Text = stringstream ""
-		--convert position
-		format "% % % " m_Position.x m_Position.y m_Position.z to:l_Text
-		--convert normal
-		format "% % % " m_Normal.x m_Normal.y m_Normal.z to:l_Text
-		--convert UV
-		format "% % " m_UV.x m_UV.y to:l_Text
-		--convert UV2
-		format "% % " m_UV2.x m_UV2.y to:l_Text
-		--convert Color
-		format "%" m_Color to:l_Text
-		return (l_Text as string)
-	),
-	
-	fn WriteToFile file =
-	(
-		format "\tPos: (%, %, %)\n" m_Position.x m_Position.z m_Position.y
-		WriteFloat file m_Position.x
-		WriteFloat file m_Position.z
-		WriteFloat file m_Position.y
-		
-		
-		format "\tNormal: (%, %, %)\n" m_Normal.x m_Normal.z m_Normal.y
-		WriteFloat file m_Normal.x
-		WriteFloat file m_Normal.z
-		WriteFloat file m_Normal.y
-		
-		format "\tUV1: (%, %)\n" m_UV.x m_UV.y
-		WriteFloat file m_UV.x
-		WriteFloat file m_UV.y
-	
-		format "\tUV2: (%, %)\n" m_UV2.x m_UV2.y
-		WriteFloat file m_UV2.x
-		WriteFloat file m_UV2.y
-		
-		format "\tColor: (%)\n" m_Color
-		WriteFloat file m_Color
-		--WriteFloat file m_Color.g
-		--WriteFloat file m_Color.b
 	)
 )
 
@@ -192,9 +139,11 @@ struct SIndexBuffer
 		format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
 		WriteShort file l_NumIds #unsigned
+		format "Idx count: %\n" l_NumIds
 		for iIndex in m_IndexList do
 		(
 			WriteShort file iIndex #unsigned
+			format "Idx actual id: %\n" iIndex
 		)
 		
 		format "Writing IB end\n"
@@ -317,7 +266,7 @@ struct SMesh
 		local l_nFaces = getNumFaces Obj
 		
 		local InvTransform=inverse Obj.transform
-		for iFaces = 1  to l_nFaces do
+		for iFaces = 1 to l_nFaces do
 		(
 			format "Parsing face %...\n" iFaces
 			
@@ -338,6 +287,10 @@ struct SMesh
 			-- Check if the material is found
 			if ( l_MaterialNameById != undefined ) then
 			(
+				local l_NewVertex1 = SVertex()
+				local l_NewVertex2 = SVertex()
+				local l_NewVertex3 = SVertex()
+              
 				-- Para coger los indices de la primera cara
 				local IdxsFace=getFace Obj iFaces
 				
@@ -346,6 +299,10 @@ struct SMesh
 				local Coord1=getVert Obj IdxsFace.x*InvTransform
 				local Coord2=getVert Obj IdxsFace.y*InvTransform
 				local Coord3=getVert Obj IdxsFace.z*InvTransform
+              
+              	l_NewVertex1.m_Position = Coord1
+                l_NewVertex2.m_Position = Coord2
+                l_NewVertex3.m_Position = Coord3
 				
 				UABCalcVertexsNormals Obj
 
@@ -356,36 +313,55 @@ struct SMesh
 				local Normal1 = UABGetVertexNormal Obj IdxsFace.x l_SmoothValue l_FaceNormal
 				local Normal2 = UABGetVertexNormal Obj IdxsFace.y l_SmoothValue l_FaceNormal
 				local Normal3 = UABGetVertexNormal Obj IdxsFace.z l_SmoothValue l_FaceNormal
+              
+                --igual con normales
+                l_NewVertex1.m_Normal = Normal1
+                l_NewVertex2.m_Normal = Normal2
+                l_NewVertex3.m_Normal = Normal3
+			
+				if (bit.and(type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+				(
+					/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
+					conjunto de coordenadas aplicadas sobre la cara */
+					local IdxsMap = meshop.getMapFace Obj 1 iFaces
+					
+					-- Para coger las coordenadas de los vértices de la primera cara
+					local TUVMap1= meshop.getMapVert Obj 1 IdxsMap.x
+					local TUVMap2= meshop.getMapVert Obj 1 IdxsMap.y
+					local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
 				
-				/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
-				conjunto de coordenadas aplicadas sobre la cara */
-				local IdxsMap = meshop.getMapFace Obj 1 iFaces
-				-- Para coger las coordenadas de los vértices de la primera cara
-				local TUVMap1= meshop.getMapVert Obj 1 IdxsMap.x
-				local TUVMap2= meshop.getMapVert Obj 1 IdxsMap.y
-				local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
+					l_NewVertex1.m_UV = point2 TUVMap1.x 1.0 - TUVMap1.y
+					l_NewVertex2.m_UV = point2 TUVMap2.x 1.0 - TUVMap2.y
+					l_NewVertex3.m_UV = point2 TUVMap3.x 1.0 - TUVMap3.y
 
-				local l_NewVertex1 = SVertex()
-				l_NewVertex1.m_Position = Coord1
-				l_NewVertex1.m_Normal = Normal1
-				l_NewVertex1.m_UV = point2 TUVMap1.x 1.0 - TUVMap1.y
-				--l_NewVertex1.m_UV2 = point2 0 0,
-				--l_NewVertex1.m_Color = 0,
-				
-				local l_NewVertex2 = SVertex()
-				l_NewVertex2.m_Position = Coord2
-				l_NewVertex2.m_Normal = Normal2
-				l_NewVertex2.m_UV = point2 TUVMap2.x 1.0 - TUVMap2.y
-				--NewVertex2.m_UV2 = point2 0 0,
-				--NewVertex2.m_Color = 0,
-				
-				local l_NewVertex3 = SVertex()
-				l_NewVertex3.m_Position = Coord3
-				l_NewVertex3.m_Normal = Normal3
-				l_NewVertex3.m_UV = point2 TUVMap3.x 1.0 - TUVMap3.y
-				--l_NewVertex3.m_UV2 = point2 0 0,
-				--l_NewVertex3.m_Color = 0,
-				
+				)
+			
+				if (bit.and(type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+				(
+					local IdxsMap = meshop.getMapFace Obj 2 iFaces
+			  
+					-- Para coger las coordenadas de los vértices de la primera cara
+					local TUVMap1= meshop.getMapVert Obj 2 IdxsMap.x
+					local TUVMap2= meshop.getMapVert Obj 2 IdxsMap.y
+					local TUVMap3= meshop.getMapVert Obj 2 IdxsMap.z
+			  
+					l_NewVertex1.m_UV2 = point2 TUVMap1.x 1.0 - TUVMap1.y
+					l_NewVertex2.m_UV2 = point2 TUVMap2.x 1.0 - TUVMap2.y
+					l_NewVertex3.m_UV2 = point2 TUVMap3.x 1.0 - TUVMap3.y
+				)
+			
+				if (bit.and type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+				(
+					--Set Binormal and Tangent for Bump
+				)
+			
+				if ((bit.and type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
+				(
+					--l_NewVertex1.m_Color = color
+					--l_NewVertex2.m_Color = color
+					--l_NewVertex3.m_Color = color
+				)
+		
 				-- Add the new vertex
 				local l_Id1 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex1
 				local l_Id2 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex2
@@ -393,10 +369,10 @@ struct SMesh
 				
 				-- Add the new indexes
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id1
-				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
 			)
-		)
+		)	
 		
 		format "% submeshes found on the object\n" m_SubMeshes.count
 	),
@@ -412,6 +388,7 @@ struct SMesh
 		delete newObj
 	),
 	
+
 	fn WriteToFile file =
 	(
 		format "Write to file\n"
@@ -421,8 +398,10 @@ struct SMesh
 		for iSubMesh in m_SubMeshes do
 		(
 			format "Current Submesh%\n" iSubMesh
-			iSubMesh.WriteToFile file 
-		)			
+			iSubMesh.WriteToFile file
+		)
+		
+		m_AABB.WriteToFile file
 	
 		WriteShort file 0xff55 #unsigned
 	)
