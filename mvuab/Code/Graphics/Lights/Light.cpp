@@ -4,18 +4,6 @@
 
 #include <string>
 
-#define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
-typedef struct CUSTOMVERTEXLIGHT
-{
-  float x, y, z;
-  DWORD color;
-
-  static unsigned int getFlags()
-  {
-    return ( D3DFVF_CUSTOMVERTEXLIGHT );
-  }
-} CUSTOMVERTEXLIGHT;
-
 CLight::CLight( const CXMLTreeNode& node )
   : CObject3D()
   , m_StartRangeAttenuation( node.GetFloatProperty( "att_start_range", 0 ) )
@@ -24,6 +12,7 @@ CLight::CLight( const CXMLTreeNode& node )
   , m_Intensity( node.GetFloatProperty( "intensity", 0 ) )
 {
   m_Position = node.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) );
+  SetName(node.GetPszProperty("name",""));
 }
 
 CLight::~CLight()

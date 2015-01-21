@@ -9,6 +9,7 @@
 
 #include "Utils\SingletonPattern.h"
 #include "Utils\Defines.h"
+#include "Math\Vector3.h"
 
 // Forward declarations
 class CGraphicsManager;
@@ -81,6 +82,13 @@ public:
     void Init( const std::string & aConfigPath, HWND aWindowId );
     void Update();
     void Render();
+
+
+	// Methods that trace Lua
+	void TraceString(const std::string & TraceStr);
+	void TraceInteger(int TraceInteger);
+	void TraceFloat(float TraceFloat);
+	void TraceVector( const Math::Vect3f & vector );
 
     // Getters and setters
     GET_SET_REF(std::string, ConfigPath);

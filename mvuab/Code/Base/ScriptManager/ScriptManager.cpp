@@ -4,6 +4,7 @@
 #include "ScriptManager\FunctionsToRegister\GraphicsFunctions.h"
 #include "ScriptManager\FunctionsToRegister\InputFunctions.h"
 #include <string>
+#include <iostream>
 
 #include "Utils/BaseUtils.h"
 
@@ -68,7 +69,7 @@ void CScriptManager::RunCode(const std::string &Code)
 {
 	if(luaL_dostring(m_LS,Code.c_str()))
 	{
-		const char *l_Str = lua_tostring(m_LS, -1);
+		const char *l_Str = lua_tostring(m_LS, -1);		
 		assert(l_Str);
 	}
 }
@@ -79,6 +80,7 @@ void CScriptManager::RunFile(const std::string &FileName)
 	{
 		const char *l_Str = lua_tostring(m_LS, -1);
 		assert(l_Str);
+		std::cout << l_Str << std::endl << std::endl;
 	}
 }
 

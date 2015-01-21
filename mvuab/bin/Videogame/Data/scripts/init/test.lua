@@ -1,6 +1,10 @@
 local cinematic=nil
+local g_Pi = 3.141618
+local g_ForwardSpeed = 5
+local g_StrafeSpeed = 6
+local g_Speed = 5
 
-function init ()
+function init()
 	core = Singleton_Core.get_singleton()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
@@ -14,45 +18,69 @@ function init ()
 	initialized = true;
 end
 
-function update ()
+function update()
 	if not initialized then
 		init()
 	end
 	
 	local dt = timer:GetElapsedTime()
-	local speed = 5;
-	
-	local current_camera = camera_manager:GetCurrentCamera();
-	local vec_up = current_camera:GetVecUp()
-	local cam_pos = current_camera:GetPos()
-	local dir = pos - cam_pos
-	dir:Normalize()
-	local dir_per = dir:CrossProduct(vec_up)
-	dir_per:Normalize()
-	
-	camera_offset = Vect3f(-5,5,-5)
-	
-	current_camera:SetPos(pos+camera_offset)
-	
-	if action_manager:DoAction("Left") then
-		pos = pos + dir_per * speed * dt
+	flag_speed = 0
+    forward = 0
+    strafe = 0
+	if action_manager:DoAction("Run") then
+		core:trace_str("Run")
+		flag_speed = 1
 	end
-	if action_manager:DoAction("Right") then
-		pos = pos - dir_per * speed * dt
+	if action_manager:DoAction("MoveLeft") then
+		core:trace_str("MoveLeft")
+		strafe = strafe + 1;
+		move( flag_speed, forward, strafe )
 	end
-	if action_manager:DoAction("Backward") then
-		pos = pos - dir * speed * dt
+	if action_manager:DoAction("MoveRight") then
+		core:trace_str("MoveRight")
+		strafe = strafe - 1;
+		move( flag_speed, forward, strafe )
 	end
-	if action_manager:DoAction("Forward") then
-		pos = pos + dir * speed * dt
+	if action_manager:DoAction("MoveBackward") then
+		core:trace_str("MoveBackward")
+		forward = forward - 1
+		move( flag_speed, forward, strafe )
 	end
-	
-	if pos.x > 2 then
-		cinematic:Play(false)
+	if action_manager:DoAction("MoveForward") then
+		core:trace_str("MoveForward")
+		forward = forward + 1
+		move( flag_speed, forward, strafe )
 	end
 end
 
-function render ()
+function move( flag_speed, forward, strafe )
+	core:trace_str("MoveFuntionCalled")
+	local current_camera = camera_manager:GetCurrentCamera();
+	local Yaw = current_camera:GetYaw()
+	local Pitch = current_camera:GetPitch()
+	local cam_pos = current_camera:GetPos()
+	local addPos = Vect3f(0, 0, 0)
+    addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_Pi * 0.5) )
+    addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_Pi * 0.5) )
+    addPos:Normalized()
+	
+	core:trace_float(addPos.x)
+	core:trace_float(addPos.y)
+	core:trace_float(addPos.z)
+	
+    constant = dt * m_ForwardSpeed;
+	
+	if flag_speed == 1 then
+        constant = constant * m_Speed;
+	end
+	
+    addPos = addPos * constant;
+    cam_pos = cam_pos + addPos;
+	
+	current_camera:SetPos(cam_pos)
+end
+
+function render()
 	local t = Mat44f()
 	t:SetPos(pos)
 	graphics_manager:SetTransform(t)

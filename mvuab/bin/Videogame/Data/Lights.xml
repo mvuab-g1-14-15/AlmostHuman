@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <light type="omni" name="Omni001" pos="13.7135 24.8479 66.3453" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" />
-  <light type="targetDirect" name="Direct001" pos="-47.1989 0.0 46.1801" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="103.828 0.0 -89.1114" />
-  <light type="targetSpot" name="Spot001" pos="-33.7708 0.0 -61.7502" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="18.6417 0.0 49.3139" angle="43.0" fall_off="45.0" render_shadows="false" />
+  <light type="targetSpot" name="Spot001" pos="-2.61232 34.7637 -20.4574" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.918182 -34.7637 0.575027" angle="43.0" fall_off="45.0" render_shadows="false" />
 </lights>

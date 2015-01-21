@@ -93,6 +93,12 @@ void registerCore(lua_State *m_LS)
 			.def("SetSoundPath", &CCore::SetSoundPath)
 			.def("SetWindowXPos", &CCore::SetWindowXPos)
 			.def("SetWindowYPos", &CCore::SetWindowYPos)
+
+			// Other
+			.def("trace_str", &CCore::TraceString)
+			.def("trace_int", &CCore::TraceInteger)
+			.def("trace_float", &CCore::TraceFloat)
+			.def("trace_vect3f", &CCore::TraceVector)
 	];
 	
 }

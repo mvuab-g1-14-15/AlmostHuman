@@ -36,7 +36,7 @@ void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const flo
 
 void CCameraFPShooter::Update( )
 {
-    CActionManager *pActionManager = CActionManager::GetSingletonPtr();
+    /*CActionManager *pActionManager = CActionManager::GetSingletonPtr();
     float32 amount;
     bool flag_speed =  pActionManager->DoAction("Run");
     int forward = 0;
@@ -80,6 +80,7 @@ void CCameraFPShooter::Update( )
     {
         AddPitch( amount * deltaTime );
     }
+	*/
 }
 
 void CCameraFPShooter::AddYaw( float32 degree )

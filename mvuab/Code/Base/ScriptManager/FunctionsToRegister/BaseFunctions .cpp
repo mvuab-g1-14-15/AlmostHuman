@@ -11,6 +11,7 @@
 #include "Utils\Visible.h"
 #include "Utils\Name.h"
 #include "Timer\Timer.h"
+#include "Logger\Logger.h"
 
 #include "Math\MathTypes.h"
 #include "Utils\Types.h"

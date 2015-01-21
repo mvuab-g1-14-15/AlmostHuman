@@ -85,4 +85,4 @@ fn ExportLights filenameXML =
 	)
 )
 
-ExportLights "C:\Users\Alex\camera.xml"
+ExportLights "D:\lights.xml"
