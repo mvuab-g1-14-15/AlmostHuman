@@ -119,7 +119,7 @@ void CEffectTechnique::SetupMatrices()
   }
   if(m_UseInverseViewMatrix)
   {
-    if( !m_Effect->SetViewMatrix(l_pEffectManager->GetWorldMatrix(), true))
+    if( !m_Effect->SetViewMatrix(l_pEffectManager->GetViewMatrix(), true))
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupMatrices->Error Setting Inverse View Matrix");
   }
   if(m_UseInverseWorldMatrix)

@@ -111,7 +111,7 @@ float4 CalcLighting(float3 worldPosition, float3 worldNormal, float4 diffuseColo
 	float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
 	float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 50.0);
 	
-	return float4(outDiffuseColor * diffuseColor.xyz, diffuseColor.a) + float4(outSpecularColor * specularColor.xyz, specularColor.a);
+	return float4(outDiffuseColor * diffuseColor.xyz, diffuseColor.a) + float4(outSpecularColor * specularColor.xyz, 0);
 }
 
 float4 RenderCal3DHWPS(CAL3D_HW_VERTEX_PS IN) : COLOR
