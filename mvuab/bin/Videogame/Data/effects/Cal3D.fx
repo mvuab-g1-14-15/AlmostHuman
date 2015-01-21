@@ -104,14 +104,14 @@ CAL3D_HW_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 
 float4 CalcLighting(float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
 {
-	float3 lightPosition  = float3(10, 10, 10); //hardcoded
+	float3 lightPosition  = float3(50, 50, 50); //hardcoded
 	float3 vertexToLight  = normalize(lightPosition - worldPosition);
 	float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
 	
-	float4 outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
-	float4 outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 20.0);
+	float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
+	float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 50.0);
 	
-	return outDiffuseColor * diffuseColor + outSpecularColor * specularColor;
+	return float4(outDiffuseColor * diffuseColor.xyz, diffuseColor.a) + float4(outSpecularColor * specularColor.xyz, specularColor.a);
 }
 
 float4 RenderCal3DHWPS(CAL3D_HW_VERTEX_PS IN) : COLOR
