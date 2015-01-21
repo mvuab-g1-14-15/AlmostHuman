@@ -26,6 +26,7 @@ class CCameraManager;
 class CEffectManager;
 class CLightManager;
 class CTimer;
+class CRenderableObjectTechniqueManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -53,21 +54,22 @@ private:
     std::vector<std::string>        m_v_languages;
 
     // Managers
-    CGraphicsManager*               m_pGraphicsManager;
-    CInputManager*                  m_pInputManager;
-    CLanguageManager*               m_pLanguageManager;
-    CFontManager*                   m_pFontManager;
-    CActionManager*                 m_pActionManager;
-    CDebugWindowManager*            m_pDebugWindowManager;
-    CStaticMeshManager*             m_pStaticMeshManager;
-    CRenderableObjectsManager*      m_pRenderableObjectsManager;
-    CAnimatedModelsManager*         m_pAnimatedModelsManager;
-    CTextureManager*                m_pTextureManager;
-    CScriptManager*                 m_pScriptManager;
-    CCameraManager*                 m_pCameraManager;
-    CEffectManager*                 m_pEffectManager;
-	CLightManager*					m_pLightManager;
-	CTimer*							m_pTimer;
+    CGraphicsManager*						m_pGraphicsManager;
+    CInputManager*							m_pInputManager;
+    CLanguageManager*						m_pLanguageManager;
+    CFontManager*							m_pFontManager;
+    CActionManager*							m_pActionManager;
+    CDebugWindowManager*					m_pDebugWindowManager;
+    CStaticMeshManager*						m_pStaticMeshManager;
+    CRenderableObjectsManager*				m_pRenderableObjectsManager;
+    CAnimatedModelsManager*					m_pAnimatedModelsManager;
+    CTextureManager*						m_pTextureManager;
+    CScriptManager*							m_pScriptManager;
+    CCameraManager*							m_pCameraManager;
+    CEffectManager*							m_pEffectManager;
+	CLightManager*							m_pLightManager;
+	CTimer*									m_pTimer;
+	CRenderableObjectTechniqueManager*		m_pRenderableObjectTechniqueManager;
 
     void LoadXml();
     void InitManagers();
@@ -107,6 +109,7 @@ public:
     GET_SET_PTR(CEffectManager, EffectManager);
 	GET_SET_PTR(CLightManager, LightManager);
 	GET_SET_PTR(CTimer, Timer);
+	GET_SET_PTR(CRenderableObjectTechniqueManager, RenderableObjectTechniqueManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

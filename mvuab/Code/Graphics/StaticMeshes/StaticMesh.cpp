@@ -14,6 +14,9 @@
 
 #include "Effects/EffectManager.h"
 
+#include "Core.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
+
 #include <cstdio>
 
 CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
@@ -249,4 +252,25 @@ void CStaticMesh::Render(CGraphicsManager *GM)
 
         m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
     }
+}
+
+bool CStaticMesh::GetRenderableObjectTechnique()
+{
+	/*CRenderableObjectTechniqueManager *l_ROTM= CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+	
+	bool l_Ok=true;
+	for(size_t i=0;i<m_VertexTypes.size();++i)
+	{
+		if(m_RenderableObjectTechniqueName=="")
+			m_RenderableObjectTechniqueName=l_ROTM->GetRenderableObjectTechniqueNameByVertexType(m_VertexTypes[i]);
+		CRenderableObjectTechnique *l_ROT=l_ROTM-
+		>GetResource(m_RenderableObjectTechniqueName);
+		m_RenderableObjectTechniques.push_back(l_ROT);
+		if(l_ROT==NULL)
+			Info("Error trying to GetRenderableObjectTechnique '%s' on
+			CStaticMesh", m_RenderableObjectTechniqueName.c_str());
+		l_Ok=l_Ok && l_ROT!=NULL;
+	}
+	return l_Ok;*/
+	return true;
 }

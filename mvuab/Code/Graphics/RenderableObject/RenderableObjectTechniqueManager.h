@@ -20,7 +20,7 @@ public:
 private:
     CMapManager<CPoolRenderableObjectTechnique> m_PoolRenderableObjectTechniques;
 private:
-    void InsertRenderableObjectTechnique(const std::string &ROTName, const std::string &TechniqueName, uint32 VertexType);
+    void InsertRenderableObjectTechnique(const std::string &ROTName, const std::string &TechniqueName);
 };
 
 #endif

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef POOL_RENDERABLE_OBJECT_TECHINQUE_ELEMENT_H
-#define POOL_RENDERABLE_OBJECT_TECHINQUE_ELEMENT_H
+#ifndef POOL_RENDERABLE_OBJECT_TECHINQUE_H
+#define POOL_RENDERABLE_OBJECT_TECHINQUE_H
 
 #include "Effects\EffectTechnique.h"
 #include "RenderableObject\RenderableObjectTechnique.h"
@@ -11,7 +11,6 @@
 
 class CPoolRenderableObjectTechnique : public CName
 {
-
 public:
     CPoolRenderableObjectTechnique(CXMLTreeNode &TreeNode);
     virtual ~CPoolRenderableObjectTechnique();

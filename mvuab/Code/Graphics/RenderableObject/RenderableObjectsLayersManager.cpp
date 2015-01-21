@@ -32,7 +32,7 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
         int count = TreeNode.GetNumChildren();
         for( int i = 0; i < count; ++i )
         {
-            std::string TagName = TreeNode(i).GetName();
+            const std::string &TagName = TreeNode(i).GetName();
             if( TagName == "layer" && TreeNode(i).GetBoolProperty("default", false))
             {
                 m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
@@ -43,46 +43,39 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
                 CRenderableObjectsManager *RenderableObjectManager = new CRenderableObjectsManager();
                 AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager);
             }
-            if( TagName == "instance_mesh" && 0!=strcmp("",TreeNode(i).GetPszProperty("layer", "")))
-            {
+            if( TagName == "instance_mesh")
+            { 
                 CRenderableObjectsManager *RenderableObjectManager = GetResource(TreeNode(i).GetPszProperty("layer", ""));
-                std::string l_Name=TreeNode(i).GetPszProperty("name","");
-                std::string l_Core=TreeNode(i).GetPszProperty("core_name","");
-                Math::Vect3f l_Pos=TreeNode(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-                float32 l_Yaw=TreeNode(i).GetFloatProperty("yaw",0.0f);
-                float32 l_Pitch=TreeNode(i).GetFloatProperty("pitch",0.0f);
-                float32 l_Roll=TreeNode(i).GetFloatProperty("roll",0.0f);
-                Math::Vect3f l_Scale=TreeNode(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
-                /*bool l_Visible = TreeNode(i).GetBoolProperty("visible", false);
-                bool l_CreatePhysics = TreeNode(i).GetBoolProperty("create_physics", false);
-                std::string l_Physics = TreeNode(i).GetPszProperty("physics_type", "");*/
+                const std::string	&l_Name=TreeNode(i).GetPszProperty("name","");
+                const std::string	&l_Core=TreeNode(i).GetPszProperty("core_name","");
+                const Math::Vect3f	&l_Pos=TreeNode(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
+                const float32		&l_Yaw=TreeNode(i).GetFloatProperty("yaw",0.0f);
+                const float32		&l_Pitch=TreeNode(i).GetFloatProperty("pitch",0.0f);
+                const float32		&l_Roll=TreeNode(i).GetFloatProperty("roll",0.0f);
+                const Math::Vect3f	&l_Scale=TreeNode(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
+                /*const bool			&l_Visible = TreeNode(i).GetBoolProperty("visible", false);
+                const bool			&l_CreatePhysics = TreeNode(i).GetBoolProperty("create_physics", false);
+                const std::string	&l_Physics = TreeNode(i).GetPszProperty("physics_type", "");*/
                 CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
                 l_InstanceMesh->SetPosition(l_Pos);
                 l_InstanceMesh->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
                 l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
                 l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
-                l_InstanceMesh->SetScale(l_Scale);
-                RenderableObjectManager->AddResource(l_Name,l_InstanceMesh);                                
-            }
-            if( TagName == "instance_mesh" && 0==strcmp("",TreeNode(i).GetPszProperty("layer", "")))
-            {
-                std::string l_Name=TreeNode(i).GetPszProperty("name","");
-                std::string l_Core=TreeNode(i).GetPszProperty("core_name","");
-                Math::Vect3f l_Pos=TreeNode(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
-                float32 l_Yaw=TreeNode(i).GetFloatProperty("yaw",0.0f);
-                float32 l_Pitch=TreeNode(i).GetFloatProperty("pitch",0.0f);
-                float32 l_Roll=TreeNode(i).GetFloatProperty("roll",0.0f);
-                Math::Vect3f l_Scale=TreeNode(i).GetVect3fProperty("scale",Math::Vect3f(1.0f,1.0f,1.0f));
-                /*bool l_Visible = TreeNode(i).GetBoolProperty("visible", false);
-                bool l_CreatePhysics = TreeNode(i).GetBoolProperty("create_physics", false);
-                std::string l_Physics = TreeNode(i).GetPszProperty("physics_type", "");*/
-                CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
-                l_InstanceMesh->SetPosition(l_Pos);
-                l_InstanceMesh->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
-                l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
-                l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
-                l_InstanceMesh->SetScale(l_Scale);
-                m_DefaultRenderableObjectManager->AddResource(l_Name,l_InstanceMesh);      
+                l_InstanceMesh->SetScale(l_Scale);  
+				if(0!=strcmp("",TreeNode(i).GetPszProperty("layer", "")))
+				{
+					if(!RenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
+					{
+						CHECKED_DELETE(l_InstanceMesh);
+					}
+				}
+				else
+				{
+					if(!m_DefaultRenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
+					{
+						CHECKED_DELETE(l_InstanceMesh);
+					}
+				}
             }
         }
     }
@@ -99,7 +92,7 @@ void CRenderableObjectsLayersManager::Update()
         (*itb)->Update();
     }
 }
-void CRenderableObjectsLayersManager::Render(CGraphicsManager *GM)
+void CRenderableObjectsLayersManager::Render()
 {
     std::vector<CRenderableObjectsManager*>::iterator itb = GetResourcesVector().begin(), ite = GetResourcesVector().end();
     for(; itb != ite; ++itb)
@@ -107,7 +100,7 @@ void CRenderableObjectsLayersManager::Render(CGraphicsManager *GM)
         (*itb)->Render();
     }
 }
-void CRenderableObjectsLayersManager::Render(CGraphicsManager *GM, const std::string &LayerName)
+void CRenderableObjectsLayersManager::Render(const std::string &LayerName)
 {
     std::map<std::string, CMapResourceValue> l_ResourcesMap = GetResourcesMap();
     std::map<std::string, CMapResourceValue>::iterator itb = l_ResourcesMap.find(LayerName);

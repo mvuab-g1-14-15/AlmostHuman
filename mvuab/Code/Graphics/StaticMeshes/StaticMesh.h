@@ -42,6 +42,8 @@ public:
 
   Math::AABB3f GetAABB() { return m_AABB;}
 
+  bool GetRenderableObjectTechnique();
+
 };
 
 #endif //INC_STATIC_MESH_H_

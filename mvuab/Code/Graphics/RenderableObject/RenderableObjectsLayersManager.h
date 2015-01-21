@@ -21,7 +21,7 @@ public:
     void Load(const std::string &FileName);
     void Reload();
     void Update();
-    void Render(CGraphicsManager *GM);
-    void Render(CGraphicsManager *GM, const std::string &LayerName);
+    void Render();
+    void Render(const std::string &LayerName);
 };
 #endif
