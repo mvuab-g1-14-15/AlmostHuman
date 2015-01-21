@@ -1,5 +1,6 @@
 fileIn "GetAABB.ms"
 fileIn "VertexTypes.ms"
+fileIn "CalculateNormals.ms"
 
 clearListener()
 
@@ -87,8 +88,34 @@ struct SMaterial
 		WriteShort file m_Type #unsigned
 		format "Type: %\n" m_Type
 		
-		m_Texture1.WriteToFile file
+		local l_nTextures = 0
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
+		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+		(
+			l_nTextures = l_nTextures + 1
+		)
 		
+		WriteShort file l_nTextures #unsigned
+		
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+		(
+			m_Texture1.WriteToFile file
+		)
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+		(
+			m_Texture2.WriteToFile file
+		)
+		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+		(
+			m_TextureBump.WriteToFile file
+		)
 		format "Writing Material End\n"
 	)
 )
@@ -262,7 +289,6 @@ struct SMesh
 	
 	fn CreateBuffers Obj =
 	(
-		fileIn "CalculateNormals.ms"
 		local l_nFaces = getNumFaces Obj
 		
 		local InvTransform=inverse Obj.transform
@@ -287,9 +313,15 @@ struct SMesh
 			-- Check if the material is found
 			if ( l_MaterialNameById != undefined ) then
 			(
+				local l_Type = m_SubMeshes[l_MaterialId].m_Material.m_Type
+				
 				local l_NewVertex1 = SVertex()
 				local l_NewVertex2 = SVertex()
 				local l_NewVertex3 = SVertex()
+				
+				l_NewVertex1.m_Type = l_Type
+				l_NewVertex2.m_Type = l_Type
+				l_NewVertex3.m_Type = l_Type
               
 				-- Para coger los indices de la primera cara
 				local IdxsFace=getFace Obj iFaces
@@ -318,48 +350,61 @@ struct SMesh
                 l_NewVertex1.m_Normal = Normal1
                 l_NewVertex2.m_Normal = Normal2
                 l_NewVertex3.m_Normal = Normal3
-			
-				if (bit.and(type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+
+				if ((bit.and l_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 				(
 					/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
 					conjunto de coordenadas aplicadas sobre la cara */
 					local IdxsMap = meshop.getMapFace Obj 1 iFaces
 					
 					-- Para coger las coordenadas de los vértices de la primera cara
-					local TUVMap1= meshop.getMapVert Obj 1 IdxsMap.x
-					local TUVMap2= meshop.getMapVert Obj 1 IdxsMap.y
-					local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
+					local TUV1Map1= meshop.getMapVert Obj 1 IdxsMap.x
+					local TUV1Map2= meshop.getMapVert Obj 1 IdxsMap.y
+					local TUV1Map3= meshop.getMapVert Obj 1 IdxsMap.z
 				
-					l_NewVertex1.m_UV = point2 TUVMap1.x 1.0 - TUVMap1.y
-					l_NewVertex2.m_UV = point2 TUVMap2.x 1.0 - TUVMap2.y
-					l_NewVertex3.m_UV = point2 TUVMap3.x 1.0 - TUVMap3.y
+					l_NewVertex1.m_UV = point2 TUV1Map1.x 1.0 - TUV1Map1.y
+					l_NewVertex2.m_UV = point2 TUV1Map2.x 1.0 - TUV1Map2.y
+					l_NewVertex3.m_UV = point2 TUV1Map3.x 1.0 - TUV1Map3.y
 
 				)
 			
-				if (bit.and(type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+				if ((bit.and l_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
 				(
 					local IdxsMap = meshop.getMapFace Obj 2 iFaces
 			  
 					-- Para coger las coordenadas de los vértices de la primera cara
-					local TUVMap1= meshop.getMapVert Obj 2 IdxsMap.x
-					local TUVMap2= meshop.getMapVert Obj 2 IdxsMap.y
-					local TUVMap3= meshop.getMapVert Obj 2 IdxsMap.z
+					local TUV2Map1= meshop.getMapVert Obj 2 IdxsMap.x
+					local TUV2Map2= meshop.getMapVert Obj 2 IdxsMap.y
+					local TUV2Map3= meshop.getMapVert Obj 2 IdxsMap.z
 			  
-					l_NewVertex1.m_UV2 = point2 TUVMap1.x 1.0 - TUVMap1.y
-					l_NewVertex2.m_UV2 = point2 TUVMap2.x 1.0 - TUVMap2.y
-					l_NewVertex3.m_UV2 = point2 TUVMap3.x 1.0 - TUVMap3.y
+					l_NewVertex1.m_UV2 = point2 TUV2Map1.x 1.0 - TUV2Map1.y
+					l_NewVertex2.m_UV2 = point2 TUV2Map2.x 1.0 - TUV2Map2.y
+					l_NewVertex3.m_UV2 = point2 TUV2Map3.x 1.0 - TUV2Map3.y
 				)
 			
-				if (bit.and type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+				if (bit.and l_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 				(
-					--Set Binormal and Tangent for Bump
+					l_Binormal1 = point3 0 0 0
+					l_Binormal2 = point3 0 0 0
+					l_Binormal3 = point3 0 0 0
+					l_NewVertex1.m_Binormal = l_Binormal1
+					l_NewVertex2.m_Binormal = l_Binormal2
+					l_NewVertex3.m_Binormal = l_Binormal3
+					
+					l_Tan1 = point3 0 0 0
+					l_Tan2 = point3 0 0 0
+					l_Tan3 = point3 0 0 0
+					l_NewVertex1.m_Tan = l_Tan1
+					l_NewVertex2.m_Tan = l_Tan2
+					l_NewVertex3.m_Tan = l_Tan3
 				)
 			
-				if ((bit.and type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
+				if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 				(
-					--l_NewVertex1.m_Color = color
-					--l_NewVertex2.m_Color = color
-					--l_NewVertex3.m_Color = color
+					l_Color = bit.shift Obj.material.diffuse.r 24 + bit.shift Obj.material.diffuse.g 16 + bit.shift Obj.material.diffuse.b 8 + Obj.material.diffuse.a
+					l_NewVertex1.m_Color = l_Color
+					l_NewVertex2.m_Color = l_Color
+					l_NewVertex3.m_Color = l_Color
 				)
 		
 				-- Add the new vertex

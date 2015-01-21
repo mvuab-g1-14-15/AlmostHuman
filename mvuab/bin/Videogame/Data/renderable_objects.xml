@@ -1,5 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-	<MeshInstance name="Box001" core="Box001" pos="0.0 0.0 0.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	<AnimatedInstance name="thug001" core="thug" pos="0.0 0.0 0.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
-	
+  <MeshInstance name="BOX_Lightmap" core="BOX_Lightmap" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

@@ -70,7 +70,8 @@ bool CStaticMesh::Load(const std::string &FileName)
         unsigned short l_VertexType = 0;
         std::fread(&l_VertexType, sizeof(unsigned short int), 1, l_pFile);
 
-        unsigned short int l_numTexturas = 1;
+        unsigned short l_numTexturas = 0;
+		std::fread(&l_numTexturas, sizeof(unsigned short int), 1, l_pFile);
 
         std::vector<CTexture *> l_Texture;
         for(unsigned int j = 0; j < l_numTexturas; ++j)
@@ -250,7 +251,7 @@ void CStaticMesh::Render(CGraphicsManager *GM)
         m_NumFaces += m_RVs[i]->GetFacesCount();
         ++m_NumDraws;
 
-        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
+        m_RVs[i]->Render(GM);//, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
     }
 }
 

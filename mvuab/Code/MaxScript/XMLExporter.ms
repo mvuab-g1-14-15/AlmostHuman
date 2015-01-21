@@ -10,7 +10,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 		xDoc = XMLDocument filenameXML
 		
 		--create the base node and append the node to the document
-		local l_RootNode = xDoc.getNewNode "lights"
+		local l_RootNode = xDoc.getNewNode "static_meshes"
 		xDoc.AppendNode l_RootNode
 		
 		local UniqueInstanceArray = GetUniqueInstances()
@@ -44,8 +44,8 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 --export de la class
 fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
-	try
-	(
+	--try
+	--(
 		local unique_instances = GetUniqueInstances()
 		
 		-- create the document and set the filename
@@ -82,6 +82,10 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 				)
 			)
 		
+			local l_Yaw = GetYaw Obj.transform as string
+			local l_Pitch = GetPitch Obj.transform as string
+			local l_Roll = GetRoll Obj.transform as string
+			
 			local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
 			-- append the new node MeshInstance to the root node RenderableObjects
 			l_RootNode.AppendNode l_NewMeshInstanceNode 
@@ -89,17 +93,17 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
 			l_NewMeshInstanceNode.AddAttributeAsString "core" instance_obj.name
 			l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
-			l_NewMeshInstanceNode.AddAttributeAsString "yaw" GetYaw Obj.transform
-			l_NewMeshInstanceNode.AddAttributeAsString "pitch" GetPitch Obj.transform
-			l_NewMeshInstanceNode.AddAttributeAsString "roll" GetRoll Obj.transform
-			l_NewMeshInstanceNode.AddAttributeAsString "scale" Obj.Scale
+			l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
+			l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
+			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
+			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" Obj.Scale
 			
 		)
-	)
-	catch
-	(
-		format "Error generating renderable object\n"
-	)
+	--)
+	--catch
+	--(
+		--format "Error generating renderable object\n"
+	--)
 	return xDoc.PrettySaveXML()
 )
 

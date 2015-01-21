@@ -13,6 +13,8 @@ struct SVertex
 	m_Normal = point3 0 0 0,
 	m_UV = point2 0 0,
 	m_UV2 = point2 0 0,
+	m_Binormal = point3 0 0 0,
+	m_Tan = point3 0 0 0,
 	m_Color = 0,
 	
 	fn GetAsString = 
@@ -40,27 +42,38 @@ struct SVertex
 		WriteFloat file m_Normal.x
 		WriteFloat file m_Normal.z
 		WriteFloat file m_Normal.y
-				
-		if (bit.and(m_type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+		
+		format "mTYPE % \n" m_Type
+		format "VERTEX_TYPE_TEXTURE1 % \n" VERTEX_TYPE_TEXTURE1
+		
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 		(
 			format "\tUV1: (%, %)\n" m_UV.x m_UV.y
 			WriteFloat file m_UV.x
 			WriteFloat file m_UV.y
 		)
 		
-		if (bit.and(m_type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
 		(
 			format "\tUV2: (%, %)\n" m_UV2.x m_UV2.y
 			WriteFloat file m_UV2.x
 			WriteFloat file m_UV2.y
 		)
 		
-		if (bit.and m_type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 		(
-			--PRint Bump
+			format "\tBinormal: (%, %, %)\n" m_Binormal.x m_Binormal.y m_Binormal.z
+			WriteFloat file m_Binormal.x
+			WriteFloat file m_Binormal.y
+			WriteFloat file m_Binormal.z
+			
+			format "\tTangencial: (%, %, %)\n" m_Tan.x m_Tan.y m_Tan.z
+			WriteFloat file m_Tan.x
+			WriteFloat file m_Tan.y
+			WriteFloat file m_Tan.z
 		)
 		
-		if ((bit.and m_type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
+		if ((bit.and m_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 		(
             format "\t Color: (%)\n" m_Color
 			WriteFloat file m_Color

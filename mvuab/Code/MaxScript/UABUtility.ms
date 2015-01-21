@@ -1,4 +1,8 @@
-
+--fileIn "ExportMesh.ms"
+fileIn "ExportMesh_v2.ms"
+fileIn "XMLExporter.ms"
+fileIn "Cinematics.ms"
+		
 utility UABUtility "UAB Utility" width:162 height:325
 (
 	button SetPathButton "Set Path" pos:[13,9] width:127 height:30
@@ -19,6 +23,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
+		PathLabel.text = "D:\GameEngineUAB\mvuab\bin\Videogame\Data"
 	)
 	on SetPathButton pressed do
 	(
@@ -32,11 +37,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	)
 	
 	on MeshButton pressed do
-	(
-		fileIn "ExportMesh.ms"
-		fileIn "ExportMesh_v2.ms"
-		fileIn "XMLExporter.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
@@ -68,9 +69,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		)
 	)
 	on CameraButon pressed do
-	(
-		fileIn "Cinematics.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
@@ -86,9 +85,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	)
 	
 	on CinematicsButton pressed do
-	(
-		fileIn "Cinematics.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
@@ -102,9 +99,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	)
 	
 	on StaticMeshManagerButton pressed do
-	(
-		fileIn "XMLExporter.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
@@ -149,9 +144,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		)
 	)
 	on SceneButton pressed do
-	(
-		fileIn "XMLExporter.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
@@ -196,8 +189,12 @@ utility UABUtility "UAB Utility" width:162 height:325
 			--poner parametrico
 			for Obj in geometry do
 			(
-				filename = MeshDir + Obj.name + ".mesh"--poner parametrico
-				ExportMesh Obj filename
+				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+				local file = fopen filename "wb"
+				local l_ObjectMesh = SMesh()
+				l_ObjectMesh.InitFromMaxObject Obj
+				l_ObjectMesh.WriteToFile file
+				fclose file
 			)
 			
 			format "Meshes copied on: % \n" MeshDir
@@ -209,10 +206,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		fileIn "UABSetProperties.ms"
 	)
 	on btn8 pressed do
-	(
-		fileIn "ExportMesh.ms"
-		fileIn "XMLExporter.ms"
-		
+	(		
 		if PathLabel.text == "" then
 		(
 			format "Destination Path undefined, please choose a path \n"
