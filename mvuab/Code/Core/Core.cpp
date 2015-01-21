@@ -19,6 +19,8 @@
 #include "Timer\Timer.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
+#include <iostream>
+
 CCore::CCore() :
   m_ConfigPath(""),
   m_GUIPath(""),
@@ -199,4 +201,32 @@ void CCore::InitManagers()
   m_pScriptManager->Load(m_LuaRunPath);
 
   m_pLightManager->Load("Data/lights.xml");
+}
+
+void CCore::TraceString(const std::string & TraceStr)
+{
+	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+	std::cout << TraceStr << std::endl << std::endl;
+}
+
+void CCore::TraceInteger(int TraceInteger)
+{
+	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+	std::cout << TraceInteger << std::endl << std::endl;
+}
+
+void CCore::TraceFloat(float TraceFloat)
+{
+	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+	std::cout << TraceFloat << std::endl << std::endl;
+}
+
+void CCore::TraceVector( const Math::Vect3f & vector )
+{
+	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+	std::cout << vector.x << "-" << vector.y << "-" <<vector.z <<std::endl << std::endl;
 }
