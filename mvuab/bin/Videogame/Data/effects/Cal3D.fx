@@ -83,28 +83,46 @@ void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, fl
 CAL3D_HW_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 {
 	CAL3D_HW_VERTEX_PS OUT =(CAL3D_HW_VERTEX_PS) 0;
-	float3 l_Normal= 0;
-	float3 l_Tangent=0;
+	float3 l_Normal  = normalize(IN.Normal).xyz;
+	float3 l_Tangent = IN.Tangent;
 	
-	//CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal, l_Tangent);
+	CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal, l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
 	float4 l_WorldPosition = float4(l_Position, 1.0);
 	
-	OUT.WorldPosition = mul(l_WorldPosition,g_WorldMatrix);
-	//OUT.WorldNormal = normalize(mul(l_Normal,g_WorldMatrix));
+	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
+	OUT.WorldNormal = normalize(mul(l_Normal, g_WorldMatrix));
 	
-	//OUT.WorldTangent = normalize(mul(l_Tangent,g_WorldMatrix));
-	//OUT.WorldBinormal = mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
+	OUT.WorldTangent = normalize(mul(l_Tangent, g_WorldMatrix));
+	OUT.WorldBinormal = mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix);
 	
-	//OUT.UV = IN.TexCoord.xy;
+	OUT.UV = IN.TexCoord.xy;
 	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProj );
 	
 	return OUT;
 }
 
+float4 CalcLighting(float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
+{
+	float3 lightPosition  = float3(10, 10, 10); //hardcoded
+	float3 vertexToLight  = normalize(lightPosition - worldPosition);
+	float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+	
+	float4 outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
+	float4 outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 20.0);
+	
+	return outDiffuseColor * diffuseColor + outSpecularColor * specularColor;
+}
+
 float4 RenderCal3DHWPS(CAL3D_HW_VERTEX_PS IN) : COLOR
 {
-	return float4(1.0, 1.0, 1.0, 1.0);
+	//float3 Nn = CalcBumpMap(IN.WorldPosition, IN.WorldNormal, IN.WorldTangent, IN.WorldBinormal, IN.UV);
+	float3 Nn = normalize(IN.WorldNormal);
+	
+	float4 l_SpecularColor = 1.0;
+	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler, IN.UV);
+	
+	return CalcLighting (IN.WorldPosition, Nn, l_DiffuseColor, l_SpecularColor);
 }
 
 technique Cal3DTechnique

@@ -30,7 +30,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string &Name, const s
     SetName(Name);
     Initialize();
 
-	m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
+	//m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
 }
 
 CAnimatedInstanceModel::~CAnimatedInstanceModel()
@@ -46,6 +46,9 @@ void CAnimatedInstanceModel::Render()
 
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
+	// If shaders are reloaded pointers are changing so we have to ask again for the technique
+	m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
+
     if(NULL == m_pEffectTechnique)
 		return;
 
