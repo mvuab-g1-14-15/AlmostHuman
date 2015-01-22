@@ -22,15 +22,19 @@
 #include <iostream>
 
 CCore::CCore() :
+  m_CurrentLanguage(""),
   m_ConfigPath(""),
   m_GUIPath(""),
   m_SoundPath(""),
-  m_InputPath(""),
   m_FontsPath(""),
-  m_AnimatedModelsPath(""),
+  m_InputPath(""),
   m_StaticMeshesPath(""),
   m_RenderableObjectsPath(""),
   m_RenderableObjectTechniquePath(""),
+  m_AnimatedModelsPath(""),
+  m_LuaRunPath(""),
+  m_EffectsPath(""),
+  m_LightsPath(""),
   m_ScreenWidth(800),
   m_ScreenHeight(600),
   m_WindowXPos(0),
@@ -181,6 +185,10 @@ void CCore::LoadXml()
         m_RenderableObjectTechniquePath = std::string( TreeNode(i).GetPszProperty("path", "") );
       else if( TagName == "lua" )
         m_LuaRunPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+	  else if( TagName == "effects" )
+        m_EffectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+	  else if( TagName == "lights" )
+        m_LightsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
     }
   }
 }
@@ -188,7 +196,7 @@ void CCore::LoadXml()
 void CCore::InitManagers()
 {
   m_pGraphicsManager->Init( m_WindowId, m_FullScreenMode, m_ScreenWidth, m_ScreenHeight);
-  m_pEffectManager->Load("Data/effects.xml");
+  m_pEffectManager->Load(m_EffectsPath);
   m_pInputManager->Init( m_WindowId, Math::Vect2i( m_ScreenWidth, m_ScreenHeight ), m_ExclusiveModeInMouse );
   m_pActionManager->Init( m_InputPath, m_pInputManager );
   m_pLanguageManager->SetXmlPaths( m_v_languages );
@@ -199,10 +207,15 @@ void CCore::InitManagers()
   m_pStaticMeshManager->Load(m_StaticMeshesPath);
   m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
   m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
+
+  m_pCameraManager->Init();
+  m_pCameraManager->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),Math::Vect3f(0.0f,2.0f,0.0f) );
+  m_pCameraManager->SetCurrentCamera("TestProcessCam");
+
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(m_LuaRunPath);
-  m_pRenderableObjectTechniqueManager->Load(m_RenderableObjectTechniquePath);
-  m_pLightManager->Load("Data/lights.xml");
+
+  m_pLightManager->Load(m_LightsPath);
 }
 
 void CCore::TraceString(const std::string & TraceStr)
