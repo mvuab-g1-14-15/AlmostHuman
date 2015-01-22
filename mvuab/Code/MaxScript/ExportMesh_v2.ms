@@ -362,9 +362,9 @@ struct SMesh
 					local TUV1Map2= meshop.getMapVert Obj 1 IdxsMap.y
 					local TUV1Map3= meshop.getMapVert Obj 1 IdxsMap.z
 				
-					l_NewVertex1.m_UV = point2 TUV1Map1.x 1.0 - TUV1Map1.y
-					l_NewVertex2.m_UV = point2 TUV1Map2.x 1.0 - TUV1Map2.y
-					l_NewVertex3.m_UV = point2 TUV1Map3.x 1.0 - TUV1Map3.y
+					l_NewVertex1.m_UV = point2 TUV1Map1.x (1.0 - TUV1Map1.y)
+					l_NewVertex2.m_UV = point2 TUV1Map2.x (1.0 - TUV1Map2.y)
+					l_NewVertex3.m_UV = point2 TUV1Map3.x (1.0 - TUV1Map3.y)
 
 				)
 			
@@ -377,9 +377,9 @@ struct SMesh
 					local TUV2Map2= meshop.getMapVert Obj 2 IdxsMap.y
 					local TUV2Map3= meshop.getMapVert Obj 2 IdxsMap.z
 			  
-					l_NewVertex1.m_UV2 = point2 TUV2Map1.x 1.0 - TUV2Map1.y
-					l_NewVertex2.m_UV2 = point2 TUV2Map2.x 1.0 - TUV2Map2.y
-					l_NewVertex3.m_UV2 = point2 TUV2Map3.x 1.0 - TUV2Map3.y
+					l_NewVertex1.m_UV2 = point2 TUV2Map1.x (1.0 - TUV2Map1.y)
+					l_NewVertex2.m_UV2 = point2 TUV2Map2.x (1.0 - TUV2Map2.y)
+					l_NewVertex3.m_UV2 = point2 TUV2Map3.x (1.0 - TUV2Map3.y)
 				)
 			
 				if (bit.and l_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
