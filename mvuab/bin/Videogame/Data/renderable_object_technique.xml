@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<renderable_object_techniques>
+	<pool_renderable_object_technique name="dummy_manager">
+		<!--<default_technique vertex_type="31" technique="NormalMapAmbientLightNormalTextureVertexTechnique"/>>
+		<default_technique vertex_type="19"	technique="AmbientLightNormalTextureVertexTechnique"/>
+		
+		<default_technique vertex_type="35"	technique="AmbientLightNormalTextureVertexTechnique"/>-->
+		<default_technique vertex_type="159" technique="Cal3DTechnique" effect="Cal3DEffect"/>
+	</pool_renderable_object_technique>
+</renderable_object_techniques>

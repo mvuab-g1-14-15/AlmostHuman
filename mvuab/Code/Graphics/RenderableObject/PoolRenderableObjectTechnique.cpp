@@ -1,5 +1,5 @@
 #include "RenderableObject\PoolRenderableObjectTechnique.h"
-
+#include "Effects\EffectManager.h"
 CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode &TreeNode)
 {
   
@@ -22,11 +22,8 @@ void CPoolRenderableObjectTechnique::Destroy()
 void CPoolRenderableObjectTechnique::AddElement(const std::string &Name, const std::string &TechniqueName, 
     CRenderableObjectTechnique *ROTOnRenderableObjectTechniqueManager)
 {
-    CXMLTreeNode nodo = CXMLTreeNode::CXMLTreeNode();
-    nodo.WritePszProperty("name", TechniqueName.c_str());
-
     CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement = 
-		new CPoolRenderableObjectTechniqueElement(Name, new CEffectTechnique(nodo),
+		new CPoolRenderableObjectTechniqueElement(Name, CEffectManager::GetSingletonPtr()->GetResource(TechniqueName),
 			ROTOnRenderableObjectTechniqueManager); 
 
     m_RenderableObjectTechniqueElements.push_back(PoolRenderableObjectTechniqueElement);

@@ -12,6 +12,9 @@
 #include "Exceptions\Exception.h"
 #include "Core.h"
 #include "Utils\GPUStatics.h"
+#include "Console\Console.h"
+
+#include <iostream>
 
 #if _DEBUG
 #include "Memory\MemLeaks.h"
@@ -95,7 +98,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
 
 #ifdef _DEBUG
 
-    if ( AllocConsole() )
+    /*if ( AllocConsole() )
     {
       freopen( "CONIN$", "r", stdin );
       freopen( "CONOUT$", "w", stdout );
@@ -117,9 +120,21 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
       SetConsoleScreenBufferSize( Handle, coord );          // Set Buffer Size
       SetConsoleWindowInfo( Handle, TRUE, &Rect );          // Set Window Size
     }
-
+	*/
 #endif
 
+	CConsole con(TRUE);
+    con.RedirectToConsole(0);
+
+	// test stdio
+    con.SetNumberOfLines (200);
+    con.SetNumberOfColumns (132);
+    con.SetMaxLinesInWindow (25);
+
+	WORD x = con.SetAttributes (FOREGROUND_BLUE|BACKGROUND_GREEN,2);
+	con.SetAttributes (x);
+
+	
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
     pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
 

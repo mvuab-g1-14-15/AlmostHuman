@@ -35,6 +35,9 @@
     <Filter Include="ScriptManager\FunctionsToRegister">
       <UniqueIdentifier>{3b820a63-a420-4502-a976-304ea36dc761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{1afb5b90-17a7-4b41-8432-093aabd38248}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -99,6 +102,9 @@
     </ClCompile>
     <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp">
       <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Console.cpp">
+      <Filter>Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="Utils\GPUStatics.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

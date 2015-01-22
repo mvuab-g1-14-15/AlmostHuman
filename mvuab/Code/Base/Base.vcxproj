@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Exceptions\Exception.cpp" />
     <ClCompile Include="Language\LanguageManager.cpp" />
     <ClCompile Include="Logger\Logger.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Console\Console.h" />
     <ClInclude Include="Exceptions\Exception.h" />
     <ClInclude Include="Language\LanguageManager.h" />
     <ClInclude Include="Logger\Logger.h" />

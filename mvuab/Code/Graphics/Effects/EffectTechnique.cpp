@@ -8,23 +8,23 @@
 #include "Logger\Logger.h"
 
 CEffectTechnique::CEffectTechnique(CXMLTreeNode & node)
-  : m_TechniqueName(node.GetPszProperty("name")),
-    m_EffectName(node.GetPszProperty("effect")),
-    m_UseCameraPosition(node.GetBoolProperty("use_camera_position")),
-    m_UseInverseProjMatrix(node.GetBoolProperty("use_inverse_projection_matrix")),
-    m_UseInverseViewMatrix(node.GetBoolProperty("use_inverse_view_matrix")),
-    m_UseInverseWorldMatrix(node.GetBoolProperty("use_inverse_world_matrix")),
-    m_UseLights(node.GetBoolProperty("use_lights")),
-    m_UseLightAmbientColor(node.GetBoolProperty("use_light_ambient_color")),
-    m_UseProjMatrix(node.GetBoolProperty("use_projection_matrix")),
-    m_UseViewMatrix(node.GetBoolProperty("use_view_matrix")),
-    m_UseWorldMatrix(node.GetBoolProperty("use_world_matrix")),
-    m_UseWorldViewMatrix(node.GetBoolProperty("use_world_view_matrix")),
-    m_UseWorldViewProjectionMatrix(node.GetBoolProperty("use_world_view_projection_matrix")),
-    m_UseViewProjectionMatrix(node.GetBoolProperty("use_view_projection_matrix")),
-    m_UseViewToLightProjectionMatrix(node.GetBoolProperty("use_view_to_light_projection_matrix")),
-    m_UseTime(node.GetBoolProperty("use_time")),
-    m_NumOfLights(node.GetIntProperty("num_of_lights"))
+  : m_TechniqueName(node.GetPszProperty("name", "")),
+    m_EffectName(node.GetPszProperty("effect", "")),
+    m_UseCameraPosition(node.GetBoolProperty("use_camera_position", false)),
+    m_UseInverseProjMatrix(node.GetBoolProperty("use_inverse_projection_matrix", false)),
+    m_UseInverseViewMatrix(node.GetBoolProperty("use_inverse_view_matrix", false)),
+    m_UseInverseWorldMatrix(node.GetBoolProperty("use_inverse_world_matrix", false)),
+    m_UseLights(node.GetBoolProperty("use_lights", false)),
+    m_UseLightAmbientColor(node.GetBoolProperty("use_light_ambient_color", false)),
+    m_UseProjMatrix(node.GetBoolProperty("use_projection_matrix", false)),
+    m_UseViewMatrix(node.GetBoolProperty("use_view_matrix", false)),
+    m_UseWorldMatrix(node.GetBoolProperty("use_world_matrix", false)),
+    m_UseWorldViewMatrix(node.GetBoolProperty("use_world_view_matrix", false)),
+    m_UseWorldViewProjectionMatrix(node.GetBoolProperty("use_world_view_projection_matrix", false)),
+    m_UseViewProjectionMatrix(node.GetBoolProperty("use_view_projection_matrix", false)),
+    m_UseViewToLightProjectionMatrix(node.GetBoolProperty("use_view_to_light_projection_matrix", false)),
+    m_UseTime(node.GetBoolProperty("use_time", false)),
+    m_NumOfLights(node.GetIntProperty("num_of_lights", 0))
 {
   m_Effect=CEffectManager::GetSingletonPtr()->GetEffect(m_EffectName);
   m_D3DTechnique = (m_Effect) ? m_Effect->GetTechniqueByName(m_TechniqueName) : 0;

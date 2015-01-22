@@ -30,6 +30,7 @@ CCore::CCore() :
   m_InputPath(""),
   m_StaticMeshesPath(""),
   m_RenderableObjectsPath(""),
+  m_RenderableObjectTechniquePath(""),
   m_AnimatedModelsPath(""),
   m_LuaRunPath(""),
   m_EffectsPath(""),
@@ -180,6 +181,8 @@ void CCore::LoadXml()
         m_StaticMeshesPath = std::string( TreeNode(i).GetPszProperty("path", "") );
       else if( TagName == "renderable_objects" )
         m_RenderableObjectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+	   else if( TagName == "renderable_object_technique" )
+        m_RenderableObjectTechniquePath = std::string( TreeNode(i).GetPszProperty("path", "") );
       else if( TagName == "lua" )
         m_LuaRunPath = std::string( TreeNode(i).GetPszProperty("path", "") );
 	  else if( TagName == "effects" )

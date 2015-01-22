@@ -71,6 +71,7 @@ void CScriptManager::RunCode(const std::string &Code)
 	{
 		const char *l_Str = lua_tostring(m_LS, -1);		
 		assert(l_Str);
+		std::cout << l_Str << std::endl << std::endl;
 	}
 }
 
