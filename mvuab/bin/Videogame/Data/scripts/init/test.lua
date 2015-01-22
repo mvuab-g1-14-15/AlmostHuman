@@ -31,52 +31,64 @@ function update()
 		core:trace_str("Run")
 		flag_speed = 1
 	end
+	
 	if action_manager:DoAction("MoveLeft") then
-		core:trace_str("MoveLeft")
 		strafe = strafe + 1;
-		move( flag_speed, forward, strafe )
-	end
-	if action_manager:DoAction("MoveRight") then
-		core:trace_str("MoveRight")
+		move( flag_speed, forward, strafe, dt )
+	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
-		move( flag_speed, forward, strafe )
+		move( flag_speed, forward, strafe, dt )
 	end
 	if action_manager:DoAction("MoveBackward") then
-		core:trace_str("MoveBackward")
 		forward = forward - 1
-		move( flag_speed, forward, strafe )
-	end
-	if action_manager:DoAction("MoveForward") then
-		core:trace_str("MoveForward")
+		move( flag_speed, forward, strafe, dt )
+	elseif action_manager:DoAction("MoveForward") then
 		forward = forward + 1
-		move( flag_speed, forward, strafe )
+		move( flag_speed, forward, strafe, dt )
 	end
+	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
+	local value=""
+	
+	local current_camera = camera_manager:GetCurrentCamera();
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
+		current_camera:AddYaw( l_ActionManagerLuaWrapper.amount * dt );
+	end
+		--core:trace_str("eo "..action_manager:DoAction("MoveYaw", out value))
+	--if  then
+	--end
 end
 
-function move( flag_speed, forward, strafe )
-	core:trace_str("MoveFuntionCalled")
+function move( flag_speed, forward, strafe, dt )
 	local current_camera = camera_manager:GetCurrentCamera();
 	local Yaw = current_camera:GetYaw()
 	local Pitch = current_camera:GetPitch()
 	local cam_pos = current_camera:GetPos()
+	
 	local addPos = Vect3f(0, 0, 0)
-    addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_Pi * 0.5) )
-    addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_Pi * 0.5) )
-    addPos:Normalized()
+	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_Pi * 0.5) )
+	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_Pi * 0.5) )
+	addPos:Normalize()
 	
-	core:trace_float(addPos.x)
-	core:trace_float(addPos.y)
-	core:trace_float(addPos.z)
-	
-    constant = dt * m_ForwardSpeed;
+    constant = dt * g_ForwardSpeed;
 	
 	if flag_speed == 1 then
-        constant = constant * m_Speed;
+        constant = constant * g_Speed;
 	end
 	
     addPos = addPos * constant;
+	
+	core:trace_str("=====NEW=======")
+	core:trace_str(tostring(cam_pos.x))
+	core:trace_str(tostring(cam_pos.y))
+	core:trace_str(tostring(cam_pos.z))
+	core:trace_str("===============")
     cam_pos = cam_pos + addPos;
 	
+	core:trace_str("=====NEW=======")
+	core:trace_str(tostring(cam_pos.x))
+	core:trace_str(tostring(cam_pos.y))
+	core:trace_str(tostring(cam_pos.z))
+	core:trace_str("===============")
 	current_camera:SetPos(cam_pos)
 end
 

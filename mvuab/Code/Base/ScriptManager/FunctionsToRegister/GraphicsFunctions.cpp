@@ -170,6 +170,9 @@ void registerGraphics(lua_State *m_LS)
 		.def("SetZFar", &CCamera::SetZFar)
 		.def("SetAspectRatio", &CCamera::Setaspect_ratio)
 		.def("SetPos", &CCamera::SetPos)
+
+		.def("AddYaw", &CCamera::AddYaw)
+		.def("AddPitch", &CCamera::AddPitch)
 	];
 
 	module(m_LS)
