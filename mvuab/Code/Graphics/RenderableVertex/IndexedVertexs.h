@@ -2,6 +2,7 @@
 #define _INDEX_VERTEXS_H
 #pragma once
 
+#include "Utils\GPUStatics.h"
 #include "RenderableVertex.h"
 
 #include "Effects\Effect.h"
@@ -43,6 +44,10 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
 
         virtual bool Render(CGraphicsManager *GM)
         {
+			CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
+			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
+			CGPUStatics::GetSingletonPtr()->AddDrawCount(1);
+
             GM->GetDevice()->SetIndices(m_IB);
             GM->GetDevice()->SetFVF(T::GetFVF());
             GM->GetDevice()->SetStreamSource(0, m_VB, 0, GetVertexSize());
@@ -53,9 +58,14 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
 
         virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount)
         {
-            LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+			LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
+
+			CGPUStatics::GetSingletonPtr()->AddVertexCount(verticesCount);
+			CGPUStatics::GetSingletonPtr()->AddFacesCount(facesCount);
+			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
+
             
             l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
             if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
@@ -80,6 +90,10 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
+
+			CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
+			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
+			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
             
             l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
             if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;

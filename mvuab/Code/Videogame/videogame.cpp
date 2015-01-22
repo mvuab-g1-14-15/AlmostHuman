@@ -11,6 +11,7 @@
 #include <string>
 #include "Exceptions\Exception.h"
 #include "Core.h"
+#include "Utils\GPUStatics.h"
 
 #if _DEBUG
 #include "Memory\MemLeaks.h"
@@ -85,6 +86,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     RegisterClassEx( &wc );
 
     // Optain the engine instance
+	CGPUStatics *gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
     CEngine* pEngine = new CEngine();
     // Create the application's window
@@ -154,6 +156,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
     CHECKED_DELETE( pEngine );
     CHECKED_DELETE( pLogger );
+	CHECKED_DELETE( gpu );
 
 #if _DEBUG
     MemLeaks::MemoryEnd();

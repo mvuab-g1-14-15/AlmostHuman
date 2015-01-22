@@ -67,6 +67,7 @@
     <ClInclude Include="Timer\Timer.h" />
     <ClInclude Include="Utils\BaseUtils.h" />
     <ClInclude Include="Utils\Defines.h" />
+    <ClInclude Include="Utils\GPUStatics.h" />
     <ClInclude Include="Utils\MapManager.h" />
     <ClInclude Include="Utils\Name.h" />
     <ClInclude Include="Utils\SingletonPattern.h" />

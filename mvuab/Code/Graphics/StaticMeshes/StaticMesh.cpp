@@ -19,7 +19,7 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0), m_RenderableObjectTechniqueName("")
+CStaticMesh::CStaticMesh(): m_FileName(""), m_RenderableObjectTechniqueName("")
 {
 }
 
@@ -239,18 +239,12 @@ bool CStaticMesh::ReLoad ()
 
 void CStaticMesh::Render(CGraphicsManager *GM)
 {
-    m_NumVertexs = m_NumFaces = m_NumDraws = 0;
-
     for(unsigned int i = 0; i < m_RVs.size(); ++i)
     {
         for(unsigned int j = 0; j < m_Textures[i].size(); ++j)
         {
             m_Textures[i][j]->Activate(j);
         }
-
-        m_NumVertexs += m_RVs[i]->GetVertexsCount();
-        m_NumFaces += m_RVs[i]->GetFacesCount();
-        ++m_NumDraws;
 
         m_RVs[i]->Render(GM);//, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
     }

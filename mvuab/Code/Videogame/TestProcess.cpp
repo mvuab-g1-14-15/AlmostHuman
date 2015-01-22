@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "Fonts\FontManager.h"
 #include "Object3D.h"
 #include "Math\Matrix44.h"
 #include "Logger\Logger.h"
@@ -124,6 +125,14 @@ void CTestProcess::Render()
     pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
 
 	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
+
+	// START: TO DELETE LATER IF IS NOT NECESSARY,
+	unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
+	unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
+	unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
+	CGPUStatics::GetSingletonPtr()->SetToZero();
+	CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+	// END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CTestProcess::RenderDebugInfo()
