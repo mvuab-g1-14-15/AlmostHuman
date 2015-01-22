@@ -2,6 +2,7 @@
 #include "CameraInfo.h"
 #include "GraphicsManager.h"
 #include "Utils/BaseUtils.h"
+#include "Core.h"
 
 CCamera::CCamera()
     : m_Pos(),
@@ -9,10 +10,12 @@ CCamera::CCamera()
     m_Pitch(0.0f),
     m_view_d(2.0f),
     m_fov_radians(Math::Utils::Deg2Rad(50.0f)),
-    m_aspect_ratio(640.f / 480.f),
     m_ZNear(0.1f),
     m_ZFar(1000.0f)
 {
+	float w = CCore::GetSingletonPtr()->GetScreenWidth();
+	float h = CCore::GetSingletonPtr()->GetScreenHeight();
+	m_aspect_ratio = w / h;
 }
 
 CCamera::~CCamera()

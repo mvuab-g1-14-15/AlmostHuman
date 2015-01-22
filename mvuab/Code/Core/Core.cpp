@@ -205,6 +205,10 @@ void CCore::InitManagers()
   m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
   m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
 
+  m_pCameraManager->Init();
+  m_pCameraManager->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),Math::Vect3f(0.0f,2.0f,0.0f) );
+  m_pCameraManager->SetCurrentCamera("TestProcessCam");
+
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(m_LuaRunPath);
 

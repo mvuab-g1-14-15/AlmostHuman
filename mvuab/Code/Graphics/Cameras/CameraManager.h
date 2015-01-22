@@ -20,6 +20,8 @@ public:
 
     CCameraManager(); 
     ~CCameraManager();
+
+	void Init();
     
     void Update();
 
