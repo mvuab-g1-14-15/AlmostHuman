@@ -1,7 +1,8 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
-#include <map>
 #include "Utils\MapManager.h"
-#include <sstream>
+#include "Effects\EffectManager.h"
+
+#include <map>
 
 CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager()
 {
@@ -39,8 +40,12 @@ void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
             if( TagName == "pool_renderable_object_technique" )
             {
 				CXMLTreeNode l_NodePoolRenderableObjectTechnique = CXMLTreeNode::CXMLTreeNode();
-				l_NodePoolRenderableObjectTechnique.WritePszProperty("name", TreeNode(i).GetPszProperty("name", ""));
-
+				l_NodePoolRenderableObjectTechnique.StartNewFile(TagName.c_str());
+				l_NodePoolRenderableObjectTechnique.StartElement(TagName.c_str());
+				const std::string &l_Name = TreeNode(i).GetPszProperty("name", "");
+				l_NodePoolRenderableObjectTechnique.WritePszProperty("name", l_Name.c_str());
+				l_NodePoolRenderableObjectTechnique.EndElement();
+				l_NodePoolRenderableObjectTechnique.EndNewFile();
                 CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_NodePoolRenderableObjectTechnique);
 
                 CXMLTreeNode  SubTreeNode = TreeNode(i);
@@ -51,16 +56,15 @@ void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
                     std::string SubTagName = SubTreeNode(j).GetName();
                     if( SubTagName == "default_technique" )
                     {
-						std::string l_ROTName = std::string("DefaultROTTechnique_")+std::string("%u",SubTreeNode(j).GetIntProperty("vertex_type", 0));
+						std::string  l_ROTName = std::string("DefaultROTTechnique_")+std::string(SubTreeNode(j).GetPszProperty("vertex_type", ""));
 						
-						CXMLTreeNode l_NodeEffectTechnique = CXMLTreeNode::CXMLTreeNode();
-						l_NodeEffectTechnique.WritePszProperty("name", SubTreeNode(j).GetPszProperty("technique", ""));
-
-                        PoolRenderableObjectTechnique->AddElement(l_ROTName, SubTreeNode(j).GetPszProperty("technique", ""), 
+						const std::string &l_Technique = SubTreeNode(j).GetPszProperty("technique", "");
+						
+                        PoolRenderableObjectTechnique->AddElement(l_ROTName, l_Technique, 
                             new CRenderableObjectTechnique(l_ROTName, 
-                                new CEffectTechnique(l_NodeEffectTechnique))); 
+                                CEffectManager::GetSingletonPtr()->GetResource(l_Technique))); 
 
-                        InsertRenderableObjectTechnique(l_ROTName, SubTreeNode(j).GetPszProperty("technique", ""));
+                        InsertRenderableObjectTechnique(l_ROTName, l_Technique);
                     }
                 }
                 m_PoolRenderableObjectTechniques.AddResource(TreeNode(i).GetPszProperty("name", ""), 
@@ -86,8 +90,5 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
 
 void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique(const std::string &ROTName, const std::string &TechniqueName)
 {
-	CXMLTreeNode l_NodeEffectTechnique = CXMLTreeNode::CXMLTreeNode();
-	l_NodeEffectTechnique.WritePszProperty("name", TechniqueName.c_str());
-
-    AddResource(TechniqueName, new CRenderableObjectTechnique(ROTName, new CEffectTechnique(l_NodeEffectTechnique))); 
+    AddResource(TechniqueName, new CRenderableObjectTechnique(ROTName, CEffectManager::GetSingletonPtr()->GetResource(TechniqueName))); 
 }

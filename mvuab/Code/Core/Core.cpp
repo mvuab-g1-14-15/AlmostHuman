@@ -30,6 +30,7 @@ CCore::CCore() :
   m_AnimatedModelsPath(""),
   m_StaticMeshesPath(""),
   m_RenderableObjectsPath(""),
+  m_RenderableObjectTechniquePath(""),
   m_ScreenWidth(800),
   m_ScreenHeight(600),
   m_WindowXPos(0),
@@ -176,6 +177,8 @@ void CCore::LoadXml()
         m_StaticMeshesPath = std::string( TreeNode(i).GetPszProperty("path", "") );
       else if( TagName == "renderable_objects" )
         m_RenderableObjectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+	   else if( TagName == "renderable_object_technique" )
+        m_RenderableObjectTechniquePath = std::string( TreeNode(i).GetPszProperty("path", "") );
       else if( TagName == "lua" )
         m_LuaRunPath = std::string( TreeNode(i).GetPszProperty("path", "") );
     }
@@ -196,10 +199,9 @@ void CCore::InitManagers()
   m_pStaticMeshManager->Load(m_StaticMeshesPath);
   m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
   m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
-
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(m_LuaRunPath);
-
+  m_pRenderableObjectTechniqueManager->Load(m_RenderableObjectTechniquePath);
   m_pLightManager->Load("Data/lights.xml");
 }
 
