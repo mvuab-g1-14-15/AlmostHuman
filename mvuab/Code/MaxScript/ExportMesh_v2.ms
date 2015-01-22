@@ -123,17 +123,21 @@ struct SMaterial
 struct SVertexBuffer
 (
 	m_VertexList = #(),
-	m_VertexIdMap = dotNetObject "System.Collections.Hashtable",
+	m_VertexIdMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]",
 	
 	fn AddVertex vertex =
 	(
 		local l_VertexStr = vertex.GetAsString()
-		local l_VertexIdx = m_VertexIdMap.Item[l_VertexStr];
-		if ( l_VertexIdx == undefinded ) then
+		local l_VertexIdx = 0
+		if m_VertexIdMap.ContainsKey l_VertexStr == false then
 		(
 			append m_VertexList vertex
 			l_VertexIdx = m_VertexList.count-1
 			m_VertexIdMap.Add l_VertexStr l_VertexIdx
+		)
+		else
+		(
+			l_VertexIdx = m_VertexIdMap.Item[l_VertexStr]
 		)
 		
 		return l_VertexIdx
@@ -225,7 +229,7 @@ struct SMesh
 	m_SubMeshes = #(),
 	m_AABB = SAABB(),
 	m_BS = SBndSphere(),
-    m_MaterialsHashTable = dotNetObject "System.Collections.Hashtable",
+    m_MaterialsHashTable = dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.String]",
 	
 	fn CreateSubMeshes Obj =
 	(
@@ -242,13 +246,11 @@ struct SMesh
             	(
 					local l_MaterialId = getFaceMatId Obj iMaterial
 					
-					local l_MaterialNameById = m_MaterialsHashTable.Item[l_MaterialId];
-			
-					format "Material Name: %\n" l_MaterialNameById
-					
 					-- Check if the material is not already added
-        	        if l_MaterialNameById == undefined then
+        	        if m_MaterialsHashTable.ContainsKey l_MaterialId == false then
     	            (
+						format "Material Name: %\n" m_MaterialsHashTable[l_MaterialId]
+					
 						-- Obtain the submaterial from the main material
 	                	local l_NewMaterial = l_Material[l_MaterialId]
 						
