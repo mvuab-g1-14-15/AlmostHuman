@@ -246,7 +246,7 @@ void CStaticMesh::Render(CGraphicsManager *GM)
             m_Textures[i][j]->Activate(j);
         }
 
-        m_RVs[i]->Render(GM);//, CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique"));
+        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("MultiLightsTechnique"));
     }
 }
 

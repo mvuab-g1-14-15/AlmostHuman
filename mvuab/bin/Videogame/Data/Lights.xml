@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <light type="targetSpot" name="Spot001" pos="-2.61232 34.7637 -20.4574" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.918182 -34.7637 0.575027" angle="43.0" fall_off="45.0" render_shadows="false" />
+  <light type="omni" name="Spot001" pos="-2.61232 34.7637 -20.4574" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.918182 -34.7637 0.575027" angle="43.0" fall_off="45.0" render_shadows="false" />
 </lights>
