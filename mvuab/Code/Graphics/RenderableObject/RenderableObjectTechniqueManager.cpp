@@ -64,7 +64,8 @@ void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
                             new CRenderableObjectTechnique(l_ROTName, 
                                 CEffectManager::GetSingletonPtr()->GetResource(l_Technique))); 
 
-                        InsertRenderableObjectTechnique(l_ROTName, l_Technique);
+						if(0==GetResource(l_Technique))
+							InsertRenderableObjectTechnique(l_ROTName, l_Technique);
                     }
                 }
                 m_PoolRenderableObjectTechniques.AddResource(TreeNode(i).GetPszProperty("name", ""), 
