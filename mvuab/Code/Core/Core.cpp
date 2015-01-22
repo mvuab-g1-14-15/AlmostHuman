@@ -33,7 +33,7 @@ CCore::CCore() :
   m_AnimatedModelsPath(""),
   m_LuaRunPath(""),
   m_EffectsPath(""),
-  m_LightsnPath(""),
+  m_LightsPath(""),
   m_ScreenWidth(800),
   m_ScreenHeight(600),
   m_WindowXPos(0),
@@ -185,7 +185,7 @@ void CCore::LoadXml()
 	  else if( TagName == "effects" )
         m_EffectsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
 	  else if( TagName == "lights" )
-        m_LightsnPath = std::string( TreeNode(i).GetPszProperty("path", "") );
+        m_LightsPath = std::string( TreeNode(i).GetPszProperty("path", "") );
     }
   }
 }
@@ -208,7 +208,7 @@ void CCore::InitManagers()
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(m_LuaRunPath);
 
-  m_pLightManager->Load(m_LightsnPath);
+  m_pLightManager->Load(m_LightsPath);
 }
 
 void CCore::TraceString(const std::string & TraceStr)
