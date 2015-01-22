@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <config>
-  <screen_resolution width="800" height="600"/> 
-  <window_position x_pos="100" y_pos="100"/>
-  <render_mode fullscreen_mode="false"/>          
-  <console_logger activateConsole="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
-  <mouse exclusive_mode_in_mouse="false"  draw_pointer_mouse="true" />
-  <GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
-  <sound init_sound_path="./Data/Sounds/LaberynthSounds.xml"/>
-  <languages current_language="castellano">
-	<language path="Data/lan/castellano.xml"/>
-	<language path="Data/lan/catalan.xml"/>
-  </languages>
-  <fonts fonts_path="Data/fonts/fonts.xml"/>
-  <process init_process="LaberynthGame"/>
-  <input path="Data/inputs.xml"/>
-  <animated_models path="Data/animated_models.xml"/>
-  <static_meshes path="Data/static_meshes.xml"/>
-  <renderable_objects path="Data/renderable_objects.xml"/>
-   <lua path="Data/scripts/"/>
-  
+	<screen_resolution width="800" height="600"/> 
+	<window_position x_pos="100" y_pos="100"/>
+	<render_mode fullscreen_mode="false"/>          
+	<console_logger activateConsole="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
+	<mouse exclusive_mode_in_mouse="false"  draw_pointer_mouse="true" />
+	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
+	<sound init_sound_path="./Data/Sounds/LaberynthSounds.xml"/>
+	<languages current_language="castellano">
+		<language path="Data/lan/castellano.xml"/>
+		<language path="Data/lan/catalan.xml"/>
+	</languages>
+	<fonts fonts_path="Data/fonts/fonts.xml"/>
+	<process init_process="LaberynthGame"/>
+	<input path="Data/inputs.xml"/>
+	<animated_models path="Data/animated_models.xml"/>
+	<static_meshes path="Data/static_meshes.xml"/>
+	<renderable_objects path="Data/renderable_objects.xml"/>
+	<renderable_object_technique path="Data/renderable_object_technique.xml"/>
+	<lua path="Data/scripts/"/>
 </config>

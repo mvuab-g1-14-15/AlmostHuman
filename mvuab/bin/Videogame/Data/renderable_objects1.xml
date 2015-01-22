@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<renderable_objects>
+	<layer name="solid" default="true"/>
+	<layer name="alpha_objects"/>
+	<layer name="alpha_blend_objects"/>
+	<layer name="particles"/>
+	<MeshInstance name="box01" core="box01" pos="-0.964345 12.3275 589.132" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh" />
+	<MeshInstance name="plane" core="plane" pos="627.34 57.8755 296.19" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh" />
+	<MeshInstance name="transparent_box" core="transparent_box" layer="alpha_objects" pos="9.34357 8.83837 -176.701" yaw="-1.0472" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" visible="true" />
+</renderable_objects>

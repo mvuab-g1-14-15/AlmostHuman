@@ -50,8 +50,11 @@ private:
     std::string                     m_InputPath;
     std::string                     m_StaticMeshesPath;
     std::string                     m_RenderableObjectsPath;
+    std::string                     m_RenderableObjectTechniquePath;
     std::string                     m_AnimatedModelsPath;
     std::string                     m_LuaRunPath;
+	std::string                     m_EffectsPath;
+	std::string                     m_LightsPath;
     std::vector<std::string>        m_v_languages;
 
     // Managers

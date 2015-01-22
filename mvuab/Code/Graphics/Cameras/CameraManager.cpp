@@ -7,7 +7,11 @@
 
 CCameraManager::CCameraManager() : m_RenderCameras( true )
 {
-    //---Por defecto insertamos la camara del player----
+}
+
+void CCameraManager::Init()
+{
+	//---Por defecto insertamos la camara del player----
     CCamera * l_pFPSCamera = new CCameraFPShooter();
     std::string name_Cameraplayer = "player";
     AddResource(name_Cameraplayer, l_pFPSCamera);
