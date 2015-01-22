@@ -19,7 +19,7 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0)
+CStaticMesh::CStaticMesh(): m_FileName(""), m_NumFaces(0), m_NumVertexs(0), m_NumDraws(0), m_RenderableObjectTechniqueName("")
 {
 }
 
@@ -77,6 +77,7 @@ bool CStaticMesh::Load(const std::string &FileName)
         for(unsigned int j = 0; j < l_numTexturas; ++j)
         {
             l_VertexTypes.push_back(l_VertexType);
+            m_VertexTypes.push_back(l_VertexType);
 
             unsigned short l_TextureLength = 0;
             std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
@@ -257,21 +258,18 @@ void CStaticMesh::Render(CGraphicsManager *GM)
 
 bool CStaticMesh::GetRenderableObjectTechnique()
 {
-	/*CRenderableObjectTechniqueManager *l_ROTM= CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+	CRenderableObjectTechniqueManager *l_ROTM= CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
 	
 	bool l_Ok=true;
 	for(size_t i=0;i<m_VertexTypes.size();++i)
 	{
 		if(m_RenderableObjectTechniqueName=="")
 			m_RenderableObjectTechniqueName=l_ROTM->GetRenderableObjectTechniqueNameByVertexType(m_VertexTypes[i]);
-		CRenderableObjectTechnique *l_ROT=l_ROTM-
-		>GetResource(m_RenderableObjectTechniqueName);
+		CRenderableObjectTechnique *l_ROT=l_ROTM->GetResource(m_RenderableObjectTechniqueName);
 		m_RenderableObjectTechniques.push_back(l_ROT);
 		if(l_ROT==NULL)
-			Info("Error trying to GetRenderableObjectTechnique '%s' on
-			CStaticMesh", m_RenderableObjectTechniqueName.c_str());
+			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh", m_RenderableObjectTechniqueName.c_str());
 		l_Ok=l_Ok && l_ROT!=NULL;
 	}
-	return l_Ok;*/
-	return true;
+	return l_Ok;
 }

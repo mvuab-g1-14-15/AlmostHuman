@@ -10,6 +10,7 @@
 class CRenderableVertexs;
 class CGraphicsManager;
 class CTexture;
+class CRenderableObjectTechnique;
 
 class CStaticMesh
 {
@@ -17,8 +18,11 @@ protected:
   typedef std::vector<CTexture *> TTextureVector;
   std::vector<CRenderableVertexs*> m_RVs;
   std::vector<TTextureVector> m_Textures;
+  std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
+  std::vector<size_t> m_VertexTypes;
 
   std::string m_FileName;
+  std::string m_RenderableObjectTechniqueName;
 
   unsigned int m_NumVertexs;
   unsigned int m_NumFaces;
