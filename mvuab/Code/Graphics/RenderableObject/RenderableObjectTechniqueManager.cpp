@@ -3,6 +3,7 @@
 #include "Effects\EffectManager.h"
 
 #include <map>
+#include <sstream>
 
 CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager()
 {
@@ -17,6 +18,7 @@ CRenderableObjectTechniqueManager::~CRenderableObjectTechniqueManager()
 void CRenderableObjectTechniqueManager::Destroy()
 {
     m_PoolRenderableObjectTechniques.Destroy();
+    CMapManager::Destroy();
 }
 
 void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
@@ -39,14 +41,7 @@ void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
             std::string TagName = TreeNode(i).GetName();
             if( TagName == "pool_renderable_object_technique" )
             {
-				CXMLTreeNode l_NodePoolRenderableObjectTechnique = CXMLTreeNode::CXMLTreeNode();
-				l_NodePoolRenderableObjectTechnique.StartNewFile(TagName.c_str());
-				l_NodePoolRenderableObjectTechnique.StartElement(TagName.c_str());
-				const std::string &l_Name = TreeNode(i).GetPszProperty("name", "");
-				l_NodePoolRenderableObjectTechnique.WritePszProperty("name", l_Name.c_str());
-				l_NodePoolRenderableObjectTechnique.EndElement();
-				l_NodePoolRenderableObjectTechnique.EndNewFile();
-                CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_NodePoolRenderableObjectTechnique);
+                CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(TreeNode(i));
 
                 CXMLTreeNode  SubTreeNode = TreeNode(i);
                 int SubCount = SubTreeNode.GetNumChildren();
@@ -78,10 +73,14 @@ void CRenderableObjectTechniqueManager::Load(const std::string &FileName)
 
 std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameByVertexType(uint32 VertexType)
 {
+    std::ostringstream l_VertexType;
+    l_VertexType << "DefaultROTTechnique_"<<VertexType;
+
     TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
+
     for(; itb != ite; ++itb)
     {
-        if (itb->second->GetName() == (std::string("DefaultROTTechnique_")+std::string("%u",VertexType)))
+        if (itb->second->GetName() == l_VertexType.str())
         {
             return itb->second->GetName();
         }

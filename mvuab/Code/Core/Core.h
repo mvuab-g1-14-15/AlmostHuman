@@ -21,13 +21,14 @@ class CTextureManager;
 class CDebugWindowManager;
 class CStaticMeshManager;
 class CRenderableObjectsManager;
+class CRenderableObjectsLayersManager;
+class CRenderableObjectTechniqueManager;
 class CAnimatedModelsManager;
 class CScriptManager;
 class CCameraManager;
 class CEffectManager;
 class CLightManager;
 class CTimer;
-class CRenderableObjectTechniqueManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -66,6 +67,8 @@ private:
     CDebugWindowManager*					m_pDebugWindowManager;
     CStaticMeshManager*						m_pStaticMeshManager;
     CRenderableObjectsManager*				m_pRenderableObjectsManager;
+	CRenderableObjectsLayersManager*		m_pRenderableObjectsLayersManager;
+	CRenderableObjectTechniqueManager*		m_pRenderableObjectTechniqueManager;
     CAnimatedModelsManager*					m_pAnimatedModelsManager;
     CTextureManager*						m_pTextureManager;
     CScriptManager*							m_pScriptManager;
@@ -73,7 +76,6 @@ private:
     CEffectManager*							m_pEffectManager;
 	CLightManager*							m_pLightManager;
 	CTimer*									m_pTimer;
-	CRenderableObjectTechniqueManager*		m_pRenderableObjectTechniqueManager;
 
     void LoadXml();
     void InitManagers();
@@ -113,6 +115,8 @@ public:
     GET_SET_PTR(CActionManager, ActionManager);
     GET_SET_PTR(CStaticMeshManager, StaticMeshManager);
     GET_SET_PTR(CRenderableObjectsManager, RenderableObjectsManager);
+	GET_SET_PTR(CRenderableObjectsLayersManager, RenderableObjectsLayersManager);
+	GET_SET_PTR(CRenderableObjectTechniqueManager, RenderableObjectTechniqueManager);
     GET_SET_PTR(CAnimatedModelsManager, AnimatedModelsManager);
     GET_SET_PTR(CTextureManager, TextureManager);
     GET_SET_PTR(CScriptManager, ScriptManager);
@@ -120,7 +124,6 @@ public:
     GET_SET_PTR(CEffectManager, EffectManager);
 	GET_SET_PTR(CLightManager, LightManager);
 	GET_SET_PTR(CTimer, Timer);
-	GET_SET_PTR(CRenderableObjectTechniqueManager, RenderableObjectTechniqueManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

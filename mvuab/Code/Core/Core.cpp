@@ -12,12 +12,13 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "ScriptManager\ScriptManager.h"
 #include "Cameras\CameraManager.h"
 #include "Effects\EffectManager.h"
 #include "Lights\LightManager.h"
 #include "Timer\Timer.h"
-#include "RenderableObject\RenderableObjectTechniqueManager.h"
 
 #include <iostream>
 
@@ -50,14 +51,15 @@ CCore::CCore() :
   m_pActionManager( new CActionManager() ),
   m_pDebugWindowManager( new CDebugWindowManager() ),
   m_pStaticMeshManager( new CStaticMeshManager() ),
-  m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
+  //m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
+  m_pRenderableObjectsLayersManager( new CRenderableObjectsLayersManager() ),
+  m_pRenderableObjectTechniqueManager( new CRenderableObjectTechniqueManager() ),
   m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
   m_pScriptManager( new CScriptManager() ),
   m_pCameraManager( new CCameraManager() ),
   m_pEffectManager( new CEffectManager() ),
   m_pLightManager( new CLightManager() ),
-  m_pTimer( new CTimer(30) ),
-  m_pRenderableObjectTechniqueManager( new CRenderableObjectTechniqueManager() )
+  m_pTimer( new CTimer(30) )
 {
 }
 
@@ -71,14 +73,15 @@ CCore::~CCore()
   CHECKED_DELETE(m_pLanguageManager);
   CHECKED_DELETE(m_pDebugWindowManager);
   CHECKED_DELETE(m_pStaticMeshManager);
-  CHECKED_DELETE(m_pRenderableObjectsManager);
+  //CHECKED_DELETE(m_pRenderableObjectsManager);
+  CHECKED_DELETE(m_pRenderableObjectsLayersManager);
+  CHECKED_DELETE(m_pRenderableObjectTechniqueManager);
   CHECKED_DELETE(m_pAnimatedModelsManager);
   CHECKED_DELETE(m_pTextureManager);
   CHECKED_DELETE(m_pCameraManager);
   CHECKED_DELETE(m_pEffectManager);
   CHECKED_DELETE(m_pLightManager);
   CHECKED_DELETE(m_pTimer);
-  CHECKED_DELETE(m_pRenderableObjectTechniqueManager);
 }
 
 void CCore::Init( const std::string & aConfigPath, HWND aWindowId )
@@ -99,7 +102,8 @@ void CCore::Update()
   m_pInputManager->Update();
   m_pActionManager->Update();
   m_pDebugWindowManager->Update();
-  m_pRenderableObjectsManager->Update();
+  //m_pRenderableObjectsManager->Update();
+  m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
 }
 
@@ -107,7 +111,8 @@ void CCore::Render()
 {
 	m_pGraphicsManager->Render();
 	m_pDebugWindowManager->Render();
-	m_pRenderableObjectsManager->Render();
+	//m_pRenderableObjectsManager->Render();
+    m_pRenderableObjectsLayersManager->Render();
 	m_pLightManager->Render();
 	m_pCameraManager->RenderCameras();
 	m_pLightManager->Render();
@@ -206,8 +211,8 @@ void CCore::InitManagers()
   m_pFontManager->LoadTTFs(m_FontsPath);
   m_pStaticMeshManager->Load(m_StaticMeshesPath);
   m_pAnimatedModelsManager->Load(m_AnimatedModelsPath);
-  m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
-
+  //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
+  m_pRenderableObjectsLayersManager->Load(m_RenderableObjectsPath);
   m_pCameraManager->Init();
   m_pCameraManager->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),Math::Vect3f(0.0f,2.0f,0.0f) );
   m_pCameraManager->SetCurrentCamera("TestProcessCam");

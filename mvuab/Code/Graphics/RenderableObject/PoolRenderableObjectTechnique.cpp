@@ -2,7 +2,7 @@
 #include "Effects\EffectManager.h"
 CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode &TreeNode)
 {
-  
+    SetName(TreeNode.GetPszProperty("name", ""));
 }
 
 CPoolRenderableObjectTechnique::~CPoolRenderableObjectTechnique()
