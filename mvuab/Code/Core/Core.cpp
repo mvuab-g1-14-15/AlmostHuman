@@ -52,7 +52,7 @@ CCore::CCore() :
   m_pActionManager( new CActionManager() ),
   m_pDebugWindowManager( new CDebugWindowManager() ),
   m_pStaticMeshManager( new CStaticMeshManager() ),
-  //m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
+  m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
   m_pRenderableObjectsLayersManager( new CRenderableObjectsLayersManager() ),
   m_pRenderableObjectTechniqueManager( new CRenderableObjectTechniqueManager() ),
   m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
@@ -84,7 +84,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pLanguageManager );
   CHECKED_DELETE( m_pDebugWindowManager );
   CHECKED_DELETE( m_pStaticMeshManager );
-  //CHECKED_DELETE(m_pRenderableObjectsManager);
+  CHECKED_DELETE(m_pRenderableObjectsManager);
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
   CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
   CHECKED_DELETE( m_pAnimatedModelsManager );

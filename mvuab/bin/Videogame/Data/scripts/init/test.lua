@@ -16,7 +16,7 @@ function init()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	
-	initialized = true;
+	initialized = true
 end
 
 function update()
@@ -29,7 +29,6 @@ function update()
     forward = 0
     strafe = 0
 	if action_manager:DoAction("Run") then
-		core:trace_str("Run")
 		flag_speed = 1
 	end
 	if action_manager:DoAction("MoveLeft") then
@@ -51,11 +50,12 @@ function update()
 	
 	local current_camera = camera_manager:GetCurrentCamera();
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
-		current_camera:AddYaw( l_ActionManagerLuaWrapper.amount * dt );
+		current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
 end
 
 function move( flag_speed, forward, strafe, dt )
+
 	local current_camera = camera_manager:GetCurrentCamera();
 	local Yaw = current_camera:GetYaw()
 	local Pitch = current_camera:GetPitch()

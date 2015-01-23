@@ -79,7 +79,17 @@ void registerGraphics(lua_State *m_LS)
 
 	module(m_LS)
 	[
-		class_<CRenderableObjectsManager>("CRenderableObjectsManager")
+		class_<CRenderableObject, bases<CObject3D, CName>>("CRenderableObject")
+	];
+
+	module(m_LS)
+	[
+		class_<CTemplatedVectorMapManager<CRenderableObject>>("CTemplatedVectorMapManagerCRenderableObject")
+	];
+
+	module(m_LS)
+	[
+		class_<CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject>>("CRenderableObjectsManager")
 			.def(constructor<>())
 			
 			.def("Update", &CRenderableObjectsManager::Update)
@@ -184,12 +194,7 @@ void registerGraphics(lua_State *m_LS)
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	module(m_LS)
-	[
-		class_<CRenderableObject, bases<CObject3D, CName>>("CRenderableObject")
-	];
-
+	
 	module(m_LS)
 	[
 		class_<CCinematicPlayer>("CCinematicPlayer")
