@@ -37,6 +37,9 @@ CEffectTechnique::~CEffectTechnique()
 
 bool CEffectTechnique::BeginRender()
 {
+  if (!m_Effect)
+    return false;
+
   // Obtain the direct x effect
   LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
 
@@ -155,10 +158,10 @@ bool CEffectTechnique::SetupLights()
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting lights fall of parameters");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsStartRangeAttenuationParameter(), &m_Effect->GetLightsStartRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting start range");
+      //CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting start range");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsEndRangeAttenuationParameter(), &m_Effect->GetLightsEndRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER) != S_OK)
-      CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting end range");
+      //CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting end range");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsPositionParameter(), &m_Effect->GetLightsPosition()[0].x, MAX_LIGHTS_BY_SHADER*3) != S_OK )
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting lights position");

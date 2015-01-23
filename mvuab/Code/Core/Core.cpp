@@ -66,7 +66,7 @@ CCore::CCore() :
   m_pConsole->RedirectToConsole( 0 );
 
   // test stdio
-  m_pConsole->SetNumberOfLines( 200 );
+  m_pConsole->SetNumberOfLines( 800 );
   m_pConsole->SetNumberOfColumns( 132 );
   m_pConsole->SetMaxLinesInWindow( 25 );
 

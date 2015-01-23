@@ -17,6 +17,9 @@
 #include "Cinematics/Cinematic.h"
 #include "Cinematics/CinematicPlayer.h"
 
+#include "Lights\LightManager.h"
+#include "Lights\OmniLight.h"
+
 #include "Math\Matrix44.h"
 
 extern "C"
@@ -53,6 +56,25 @@ void registerGraphics(lua_State *m_LS)
 			.def("SetPitch", &CObject3D::SetPitch)
 
 			.def("SetPosition", &CObject3D::SetPosition)
+	];
+
+  module(m_LS)
+	[
+		class_<CLight,CObject3D>("CLight")
+	];
+
+  module(m_LS)
+	[
+		class_<CLightManager>("CLightManager")
+			.def(constructor<>())
+
+			.def("GetLight", &CLightManager::GetLight)
+	];
+
+  module(m_LS)
+	[
+		class_<COmniLight,bases<CLight,CObject3D>>("COmniLight")
+			.def(constructor<>())
 	];
 
 	module(m_LS)

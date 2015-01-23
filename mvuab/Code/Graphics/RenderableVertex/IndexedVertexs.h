@@ -86,6 +86,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
 
         bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique)
         {
+			EffectTechnique->BeginRender();
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;

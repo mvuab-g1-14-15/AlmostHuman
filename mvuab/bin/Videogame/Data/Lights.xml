@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <light type="omni" name="Spot001" pos="-2.61232 34.7637 -20.4574" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.918182 -34.7637 0.575027" angle="43.0" fall_off="45.0" render_shadows="false" />
+  <light type="omni" name="Omni001" pos="0.0 3.0 0.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" />
+  <light type="omni" name="Omni002" pos="53.7786 13.3104 -36.5944" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" />
+  <light type="omni" name="Omni003" pos="-33.9653 42.6148 -40.0921" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" />
 </lights>

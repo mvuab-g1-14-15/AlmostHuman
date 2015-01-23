@@ -14,7 +14,7 @@ date: YYMMDD
 struct ApplitationToVertex
 {
 	float4 vertexPosition	: POSITION0;
-	float3 vertexNormal		: NORMAL0;
+	float3 vertexNormal		: NORMAL;
 	float2 vertexTexture 	: TEXCOORD0;
 };
 
@@ -39,7 +39,7 @@ float4 CalcPointLighting(float3 lightPosition, float3 worldPosition, float3 worl
 	float dstToLight = length(lightPosition - worldPosition);
 	float attenuation = 1.0f / (1.0f + 1.0f * pow(dstToLight, 2.0f));
 	
-	return attenuation * (float4(outDiffuseColor * diffuseColor.xyz, diffuseColor.a) + float4(outSpecularColor * specularColor.xyz, 0));
+	return 1 * (float4(outDiffuseColor * diffuseColor.xyz, diffuseColor.a) + float4(outSpecularColor * specularColor.xyz, 0));
 }
 
 float4 CalcSpotLighting(float3 lightPosition, float3 lightDirection, float angle, float angleFallOff, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
@@ -75,7 +75,7 @@ VertexToPixel mainVS(ApplitationToVertex IN)
 
 float4 mainPS(VertexToPixel IN) : COLOR
 {
-	return float4(1,0,0,1);
+	//return float4(1,0,0,1);
 	float3 l_Normal = normalize(IN.worldNormal);
 	float3 l_Position = IN.worldPosition;
 	
@@ -94,11 +94,12 @@ float4 mainPS(VertexToPixel IN) : COLOR
 			}
 			else if(SPOT_LIGHT == g_LightsType[i])
 			{
-				finalColor += CalcSpotLighting(g_LightsPosition[i], g_LightsDirection[i], g_LightsAngle[i], g_LightsFallOff[i], l_Position, l_Normal, diffuse, specular);
+				finalColor =  float4(g_LightsPosition[i].x,g_LightsPosition[i].y,g_LightsPosition[i].z,1);
+				//finalColor += CalcSpotLighting(g_LightsPosition[i], g_LightsDirection[i], g_LightsAngle[i], g_LightsFallOff[i], l_Position, l_Normal, diffuse, specular);
 			}
 		}
 	}
-		
+
 	return finalColor;
 }
 

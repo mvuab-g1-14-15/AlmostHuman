@@ -26,6 +26,7 @@ protected:
   float m_EndRangeAttenuation;
   static TLightType GetLightTypeByName( const std::string& StrLightType );
 public:
+  CLight( ){};
   CLight( const CXMLTreeNode& node );
   virtual ~CLight();
   void SetIntensity( const float intensity );

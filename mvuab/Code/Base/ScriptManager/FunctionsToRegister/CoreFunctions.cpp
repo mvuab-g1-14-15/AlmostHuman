@@ -16,6 +16,7 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "ScriptManager\ScriptManager.h"
 #include "Cameras\CameraManager.h"
+#include "Lights\LightManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -43,7 +44,8 @@ void registerCore(lua_State *m_LS)
 			.def("Render", &CCore::Render)
 
 			//Getter Managers
-			.def("GetActionManager", &CCore::GetActionManager)	
+			.def("GetActionManager", &CCore::GetActionManager)
+      .def("GetLightManager", &CCore::GetLightManager)	
 			.def("GetAnimatedModelsManager", &CCore::GetAnimatedModelsManager)
 			.def("GetFontManager", &CCore::GetFontManager)
 			.def("GetGraphicsManager", &CCore::GetGraphicsManager)
