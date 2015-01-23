@@ -9,6 +9,7 @@
 
 #include <vector>
 
+
 class CPoolRenderableObjectTechnique : public CName
 {
 public:

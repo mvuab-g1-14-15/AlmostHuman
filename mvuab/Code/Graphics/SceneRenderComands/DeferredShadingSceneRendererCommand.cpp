@@ -1,5 +1,5 @@
 #include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
-
+#include "GraphicsManager.h"
 
 CDeferredShadingSceneRendererCommand::CDeferredShadingSceneRendererCommand(CXMLTreeNode &atts)
     :CStagedTexturedRendererCommand(atts)

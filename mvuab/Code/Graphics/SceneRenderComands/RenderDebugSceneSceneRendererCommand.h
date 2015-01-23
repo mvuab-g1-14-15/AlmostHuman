@@ -5,9 +5,9 @@
 
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
-#include "RenderableObject\RenderableObjectsManager.h"
 
 class CGraphicsManager;
+class CRenderableObjectsManager;
 
 class CRenderDebugSceneSceneRendererCommand : public CSceneRendererCommand
 {

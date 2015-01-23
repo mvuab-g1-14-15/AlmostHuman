@@ -1,4 +1,5 @@
 #include "SceneRenderComands\BeginRenderSceneRendererCommand.h"
+#include "GraphicsManager.h"
 
 CBeginRenderSceneRendererCommand::CBeginRenderSceneRendererCommand(CXMLTreeNode &atts) : CSceneRendererCommand(atts)
 {
@@ -8,5 +9,5 @@ CBeginRenderSceneRendererCommand::CBeginRenderSceneRendererCommand(CXMLTreeNode 
 
 void CBeginRenderSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-
+	GM.BeginRender();
 }

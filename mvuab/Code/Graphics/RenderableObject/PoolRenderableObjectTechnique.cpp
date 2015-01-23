@@ -34,12 +34,9 @@ void CPoolRenderableObjectTechnique::Apply()
 	size_t l_Count = m_RenderableObjectTechniqueElements.size();
 	for(size_t i = 0; i<l_Count; ++i)
 	{
-		m_RenderableObjectTechniqueElements[i]->m_OnRenderableObjectTechniqueManager->
-			SetEffectTechnique(m_RenderableObjectTechniqueElements[i]->
-				m_RenderableObjectTechnique.GetEffectTechnique());
+		CPoolRenderableObjectTechnique::CPoolRenderableObjectTechniqueElement *l_PoolRenderableObjectTechniqueElement=m_RenderableObjectTechniqueElements[i];
+		l_PoolRenderableObjectTechniqueElement->m_OnRenderableObjectTechniqueManager->SetEffectTechnique(l_PoolRenderableObjectTechniqueElement->m_RenderableObjectTechnique.GetEffectTechnique());
 
-		m_RenderableObjectTechniqueElements[i]->m_OnRenderableObjectTechniqueManager->
-			SetName(m_RenderableObjectTechniqueElements[i]->m_RenderableObjectTechnique.GetName());
 	}
 }
 

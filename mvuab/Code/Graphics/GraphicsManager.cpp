@@ -114,6 +114,21 @@ void CGraphicsManager::BeginRender()
     m_pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME  );
 }
 
+void CGraphicsManager::Clear()
+{
+#ifdef _DEBUG // Clear the backbuffer to a blue color in a Debug mode
+  uint32 red        = (uint32) (m_BackbufferColor_debug.GetRed() * 255);
+  uint32 green    = (uint32) (m_BackbufferColor_debug.GetGreen() * 255);
+  uint32 blue        = (uint32) (m_BackbufferColor_debug.GetBlue()* 255);
+  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );
+#else // Clear the backbuffer to a black color in a Release mode
+  uint32 red        = (uint32) (m_BackbufferColor_release.GetRed() * 256);
+  uint32 green    = (uint32) (m_BackbufferColor_release.GetGreen() * 256);
+  uint32 blue        = (uint32) (m_BackbufferColor_release.GetBlue()* 256);
+  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );
+#endif
+}
+
 void CGraphicsManager::EndRender()
 {
   m_pD3DDevice->EndScene();
@@ -924,4 +939,30 @@ void CGraphicsManager::RenderCursor()
 
   m_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE,FALSE);
   m_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
+}
+
+
+void CGraphicsManager::EnableZTest()
+{
+	m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, TRUE);
+}
+
+void CGraphicsManager::DisableZTest()
+{
+	m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, FALSE);
+}
+
+void CGraphicsManager::EnableZWrite()
+{
+	m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE);
+}
+
+void CGraphicsManager::DisableZWrite()
+{
+	m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, FALSE);
+}
+
+void CGraphicsManager::Present()
+{	
+  m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
