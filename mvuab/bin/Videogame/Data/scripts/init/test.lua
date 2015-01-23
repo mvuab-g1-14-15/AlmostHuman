@@ -1,5 +1,6 @@
 local cinematic=nil
 local g_Pi = 3.141618
+local g_HalfPi = 3.141618 * 0.5
 local g_ForwardSpeed = 5
 local g_StrafeSpeed = 6
 local g_Speed = 5
@@ -31,7 +32,6 @@ function update()
 		core:trace_str("Run")
 		flag_speed = 1
 	end
-	
 	if action_manager:DoAction("MoveLeft") then
 		strafe = strafe + 1;
 		move( flag_speed, forward, strafe, dt )
@@ -53,9 +53,6 @@ function update()
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
 		current_camera:AddYaw( l_ActionManagerLuaWrapper.amount * dt );
 	end
-		--core:trace_str("eo "..action_manager:DoAction("MoveYaw", out value))
-	--if  then
-	--end
 end
 
 function move( flag_speed, forward, strafe, dt )
@@ -65,8 +62,8 @@ function move( flag_speed, forward, strafe, dt )
 	local cam_pos = current_camera:GetPos()
 	
 	local addPos = Vect3f(0, 0, 0)
-	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_Pi * 0.5) )
-	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_Pi * 0.5) )
+	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
+	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
 	addPos:Normalize()
 	
     constant = dt * g_ForwardSpeed;
@@ -77,18 +74,18 @@ function move( flag_speed, forward, strafe, dt )
 	
     addPos = addPos * constant;
 	
-	core:trace_str("=====NEW=======")
-	core:trace_str(tostring(cam_pos.x))
-	core:trace_str(tostring(cam_pos.y))
-	core:trace_str(tostring(cam_pos.z))
-	core:trace_str("===============")
+	core:trace("=====NEW=======")
+	core:trace(tostring(cam_pos.x))
+	core:trace(tostring(cam_pos.y))
+	core:trace(tostring(cam_pos.z))
+	core:trace("===============")
     cam_pos = cam_pos + addPos;
 	
-	core:trace_str("=====NEW=======")
-	core:trace_str(tostring(cam_pos.x))
-	core:trace_str(tostring(cam_pos.y))
-	core:trace_str(tostring(cam_pos.z))
-	core:trace_str("===============")
+	core:trace("=====NEW=======")
+	core:trace(tostring(cam_pos.x))
+	core:trace(tostring(cam_pos.y))
+	core:trace(tostring(cam_pos.z))
+	core:trace("===============")
 	current_camera:SetPos(cam_pos)
 end
 

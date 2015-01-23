@@ -89,56 +89,19 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     RegisterClassEx( &wc );
 
     // Optain the engine instance
-	CGPUStatics *gpu = new CGPUStatics();
+    CGPUStatics* gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
     CEngine* pEngine = new CEngine();
     // Create the application's window
     HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL,
                               wc.hInstance, NULL );
 
-#ifdef _DEBUG
-
-    /*if ( AllocConsole() )
-    {
-      freopen( "CONIN$", "r", stdin );
-      freopen( "CONOUT$", "w", stdout );
-      freopen( "CONOUT$", "w", stderr );
-      //HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-      system( "mode 120, 30" );
-      SetConsoleTitle( "LOG WINDOW" );
-      _COORD coord;
-      coord.X = 800;
-      coord.Y = 800;
-
-      _SMALL_RECT Rect;
-      Rect.Top = 0;
-      Rect.Left = 0;
-      Rect.Bottom = 800 - 1;
-      Rect.Right = 800 - 1;
-
-      HANDLE Handle = GetStdHandle( STD_OUTPUT_HANDLE );    // Get Handle
-      SetConsoleScreenBufferSize( Handle, coord );          // Set Buffer Size
-      SetConsoleWindowInfo( Handle, TRUE, &Rect );          // Set Window Size
-    }
-	*/
-#endif
-
-	CConsole con(TRUE);
-    con.RedirectToConsole(0);
-
-	// test stdio
-    con.SetNumberOfLines (200);
-    con.SetNumberOfColumns (132);
-    con.SetMaxLinesInWindow (25);
-
-	WORD x = con.SetAttributes (FOREGROUND_BLUE|BACKGROUND_GREEN,2);
-	con.SetAttributes (x);
-
-	
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
     pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
 
-    SetWindowPos(hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(), CCore::GetSingletonPtr()->GetWindowYPos(), CCore::GetSingletonPtr()->GetScreenWidth(), CCore::GetSingletonPtr()->GetScreenHeight(), SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+    SetWindowPos( hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(), CCore::GetSingletonPtr()->GetWindowYPos(),
+                  CCore::GetSingletonPtr()->GetScreenWidth(), CCore::GetSingletonPtr()->GetScreenHeight(),
+                  SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE );
 
     // Añadir aquí el Init de la applicacioón
 
@@ -171,7 +134,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
     CHECKED_DELETE( pEngine );
     CHECKED_DELETE( pLogger );
-	CHECKED_DELETE( gpu );
+    CHECKED_DELETE( gpu );
 
 #if _DEBUG
     MemLeaks::MemoryEnd();
