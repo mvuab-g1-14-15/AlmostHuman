@@ -12,5 +12,5 @@ CUnsetRenderTargetSceneRendererCommand::~CUnsetRenderTargetSceneRendererCommand(
 
 void CUnsetRenderTargetSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-
+	m_SetRenderTargetRendererCommand->UnSetRenderTarget();
 }

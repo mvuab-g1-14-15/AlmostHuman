@@ -12,23 +12,15 @@ class CGraphicsManager;
 
 class CInstanceMesh : public CRenderableObject
 {
-private:
-    CStaticMesh* m_pStaticMesh;
+	private:
+		CStaticMesh* m_pStaticMesh;
 
-    unsigned int m_NumVertexs;
-    unsigned int m_NumFaces;
-    unsigned int m_NumDraws;
+	public:
+		CInstanceMesh(const std::string &Name, const std::string &CoreName);
+		~CInstanceMesh();
 
-public:
-    CInstanceMesh(const std::string &Name, const std::string &CoreName);
-    ~CInstanceMesh();
-
-    void Render();
-    GET_SET(CStaticMesh*, pStaticMesh);
-
-    unsigned int GetNumVertex   () { return m_NumVertexs; }
-    unsigned int GetNumFaces    () { return m_NumFaces; }
-    unsigned int GetNumDraws    () { return m_NumDraws; }
+		void Render();
+		GET_SET(CStaticMesh*, pStaticMesh);
 };
 
 #endif //INC_INSTANCE_MESH_H_

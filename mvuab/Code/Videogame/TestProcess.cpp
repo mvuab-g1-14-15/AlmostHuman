@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "Fonts\FontManager.h"
 #include "Object3D.h"
 #include "Math\Matrix44.h"
 #include "Logger\Logger.h"
@@ -38,9 +39,9 @@ CTestProcess::CTestProcess() : CProcess(),
     m_Speed( 0.1f ),
     m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
-    CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
-                                                 Math::Vect3f(0.0f,2.0f,0.0f) );
-    CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
+   // CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
+    //                                             Math::Vect3f(0.0f,2.0f,0.0f) );
+    //CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
 	//unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
 
@@ -124,6 +125,14 @@ void CTestProcess::Render()
     pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
 
 	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
+
+	// START: TO DELETE LATER IF IS NOT NECESSARY,
+	unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
+	unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
+	unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
+	CGPUStatics::GetSingletonPtr()->SetToZero();
+	CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+	// END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CTestProcess::RenderDebugInfo()

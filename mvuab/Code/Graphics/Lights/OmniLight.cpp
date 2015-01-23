@@ -8,6 +8,11 @@ COmniLight::COmniLight( CXMLTreeNode node ) : CLight( node )
   SetType( CLight::OMNI );
 }
 
+COmniLight::COmniLight( ) : CLight(  )
+{
+  SetType( CLight::OMNI );
+}
+
 void COmniLight::Render()
 {
   LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();

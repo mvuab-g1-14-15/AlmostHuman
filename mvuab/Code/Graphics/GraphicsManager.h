@@ -35,6 +35,12 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     void DisableZBuffering();
     void GetWidthAndHeight( uint32& w,uint32& h);
     void RenderCursor();
+	void Clear();
+	void EnableZTest();
+	void DisableZTest();
+	void EnableZWrite();
+	void DisableZWrite();
+	void Present();
 
     // Getters and setters
     const LPDIRECT3DDEVICE9 GetDevice() const

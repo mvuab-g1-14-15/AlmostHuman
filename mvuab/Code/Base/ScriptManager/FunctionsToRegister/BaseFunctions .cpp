@@ -68,8 +68,8 @@ void registerBase(lua_State *m_LS)
 
 			.def("SetIdentity", &Math::Mat44f::SetIdentity)
 			
-			.def("SetPos", (Math::Mat44f&(Math::Mat44f::*)(const Math::Vect3f&)) &Math::Mat44f::SetPos) //TODO to ask
-			.def("GetPos", &Math::Mat44f::GetPos) //TODO to ask
+			.def("SetPos", (Math::Mat44f&(Math::Mat44f::*)(const Math::Vect3f&)) &Math::Mat44f::SetPos)
+			.def("GetPos", &Math::Mat44f::GetPos)
 
 			.def("GetScaleX", &Math::Mat44f::GetScaleX)
 			.def("GetScaleY", &Math::Mat44f::GetScaleY)

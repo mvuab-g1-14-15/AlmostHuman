@@ -8,11 +8,12 @@ CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
 
 CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 {
-
+    Destroy();
 }
 void CRenderableObjectsLayersManager::Destroy()
 {
-    Destroy();
+    m_DefaultRenderableObjectManager->Destroy();
+    CTemplatedVectorMapManager::Destroy();
 }
 void CRenderableObjectsLayersManager::Load(const std::string &FileName)
 {
@@ -26,7 +27,7 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
         exit(EXIT_FAILURE);
     }
 
-    CXMLTreeNode  TreeNode =l_File["renderable_objects"];
+    CXMLTreeNode  TreeNode =l_File["RenderableObjects"];
     if(TreeNode.Exists())
     {
         int count = TreeNode.GetNumChildren();
@@ -36,18 +37,24 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
             if( TagName == "layer" && TreeNode(i).GetBoolProperty("default", false))
             {
                 m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
-                AddResource(TreeNode(i).GetPszProperty("name", ""), m_DefaultRenderableObjectManager);
+                if(!AddResource(TreeNode(i).GetPszProperty("name", ""), m_DefaultRenderableObjectManager))
+                {
+                    CHECKED_DELETE(m_DefaultRenderableObjectManager);
+                }
             }
-            if( TagName == "layer" && !TreeNode(i).GetBoolProperty("default", false))
+            if( TagName == "layer" )
             {
                 CRenderableObjectsManager *RenderableObjectManager = new CRenderableObjectsManager();
-                AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager);
+                if(!AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager))
+                {
+                    CHECKED_DELETE(RenderableObjectManager);
+                }
             }
-            if( TagName == "instance_mesh")
+            if( TagName == "MeshInstance")
             { 
-                CRenderableObjectsManager *RenderableObjectManager = GetResource(TreeNode(i).GetPszProperty("layer", ""));
+                CRenderableObjectsManager *RenderableObjectManager = GetRenderableObjectManager(TreeNode(i));
                 const std::string	&l_Name=TreeNode(i).GetPszProperty("name","");
-                const std::string	&l_Core=TreeNode(i).GetPszProperty("core_name","");
+                const std::string	&l_Core=TreeNode(i).GetPszProperty("core","");
                 const Math::Vect3f	&l_Pos=TreeNode(i).GetVect3fProperty("pos",Math::Vect3f(0,0,0));
                 const float32		&l_Yaw=TreeNode(i).GetFloatProperty("yaw",0.0f);
                 const float32		&l_Pitch=TreeNode(i).GetFloatProperty("pitch",0.0f);
@@ -62,19 +69,9 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
                 l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
                 l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
                 l_InstanceMesh->SetScale(l_Scale);  
-				if(0!=strcmp("",TreeNode(i).GetPszProperty("layer", "")))
+				if(!RenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
 				{
-					if(!RenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
-					{
-						CHECKED_DELETE(l_InstanceMesh);
-					}
-				}
-				else
-				{
-					if(!m_DefaultRenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
-					{
-						CHECKED_DELETE(l_InstanceMesh);
-					}
+					CHECKED_DELETE(l_InstanceMesh);
 				}
             }
         }
@@ -102,12 +99,20 @@ void CRenderableObjectsLayersManager::Render()
 }
 void CRenderableObjectsLayersManager::Render(const std::string &LayerName)
 {
-    std::map<std::string, CMapResourceValue> l_ResourcesMap = GetResourcesMap();
-    std::map<std::string, CMapResourceValue>::iterator itb = l_ResourcesMap.find(LayerName);
+    TMapResources l_ResourcesMap = GetResourcesMap();
+    TMapResources::iterator itb = l_ResourcesMap.find(LayerName);
     if(itb != l_ResourcesMap.end())
         (*itb).second.m_Value->Render();
 }
 CRenderableObjectsManager * CRenderableObjectsLayersManager::GetRenderableObjectManager(CXMLTreeNode &Node)
 {
-    return m_DefaultRenderableObjectManager;
+    const std::string &l_Layer = Node.GetPszProperty("layer", "");
+    if( 0==strcmp("",l_Layer.c_str()) )
+    {
+        return m_DefaultRenderableObjectManager;
+    }
+    else
+    {
+        return GetResource(l_Layer.c_str());
+    }
 }

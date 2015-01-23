@@ -17,6 +17,9 @@
 #include "Cinematics/Cinematic.h"
 #include "Cinematics/CinematicPlayer.h"
 
+#include "Lights\LightManager.h"
+#include "Lights\OmniLight.h"
+
 #include "Math\Matrix44.h"
 
 extern "C"
@@ -55,6 +58,25 @@ void registerGraphics(lua_State *m_LS)
 			.def("SetPosition", &CObject3D::SetPosition)
 	];
 
+  module(m_LS)
+	[
+		class_<CLight,CObject3D>("CLight")
+	];
+
+  module(m_LS)
+	[
+		class_<CLightManager>("CLightManager")
+			.def(constructor<>())
+
+			.def("GetLight", &CLightManager::GetLight)
+	];
+
+  module(m_LS)
+	[
+		class_<COmniLight,bases<CLight,CObject3D>>("COmniLight")
+			.def(constructor<>())
+	];
+
 	module(m_LS)
 	[
 		class_<CTextureManager>("CTextureManager")
@@ -79,7 +101,17 @@ void registerGraphics(lua_State *m_LS)
 
 	module(m_LS)
 	[
-		class_<CRenderableObjectsManager>("CRenderableObjectsManager")
+		class_<CRenderableObject, bases<CObject3D, CName>>("CRenderableObject")
+	];
+
+	module(m_LS)
+	[
+		class_<CTemplatedVectorMapManager<CRenderableObject>>("CTemplatedVectorMapManagerCRenderableObject")
+	];
+
+	module(m_LS)
+	[
+		class_<CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject>>("CRenderableObjectsManager")
 			.def(constructor<>())
 			
 			.def("Update", &CRenderableObjectsManager::Update)
@@ -170,6 +202,9 @@ void registerGraphics(lua_State *m_LS)
 		.def("SetZFar", &CCamera::SetZFar)
 		.def("SetAspectRatio", &CCamera::Setaspect_ratio)
 		.def("SetPos", &CCamera::SetPos)
+
+		.def("AddYaw", &CCamera::AddYaw)
+		.def("AddPitch", &CCamera::AddPitch)
 	];
 
 	module(m_LS)
@@ -181,12 +216,7 @@ void registerGraphics(lua_State *m_LS)
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	module(m_LS)
-	[
-		class_<CRenderableObject, bases<CObject3D, CName>>("CRenderableObject")
-	];
-
+	
 	module(m_LS)
 	[
 		class_<CCinematicPlayer>("CCinematicPlayer")

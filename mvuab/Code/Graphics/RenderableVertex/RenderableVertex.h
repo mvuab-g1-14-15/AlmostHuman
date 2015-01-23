@@ -13,11 +13,15 @@ class CRenderableVertexs
     protected:
         LPDIRECT3DVERTEXBUFFER9 m_VB;
         LPDIRECT3DINDEXBUFFER9 m_IB;
-        size_t m_IndexCount, m_VertexCount;
+
+        size_t m_IndexCount;
+		size_t m_VertexCount;
 
     public:
         CRenderableVertexs()
         {
+			m_IndexCount = 0;
+			m_VertexCount = 0;
         }
 
         virtual ~CRenderableVertexs() 

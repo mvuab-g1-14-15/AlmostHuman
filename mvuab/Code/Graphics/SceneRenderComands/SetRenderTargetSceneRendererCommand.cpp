@@ -14,10 +14,9 @@ CSetRenderTargetSceneRendererCommand::~CSetRenderTargetSceneRendererCommand()
 
 void CSetRenderTargetSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-
+	
 }
 
 void CSetRenderTargetSceneRendererCommand::UnSetRenderTarget()
 {
-
 }
