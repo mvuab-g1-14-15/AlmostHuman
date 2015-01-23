@@ -37,12 +37,18 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
             if( TagName == "layer" && TreeNode(i).GetBoolProperty("default", false))
             {
                 m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
-                AddResource(TreeNode(i).GetPszProperty("name", ""), m_DefaultRenderableObjectManager);
+                if(!AddResource(TreeNode(i).GetPszProperty("name", ""), m_DefaultRenderableObjectManager))
+                {
+                    CHECKED_DELETE(m_DefaultRenderableObjectManager);
+                }
             }
             if( TagName == "layer" )
             {
                 CRenderableObjectsManager *RenderableObjectManager = new CRenderableObjectsManager();
-                AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager);
+                if(!AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager))
+                {
+                    CHECKED_DELETE(RenderableObjectManager);
+                }
             }
             if( TagName == "MeshInstance")
             { 

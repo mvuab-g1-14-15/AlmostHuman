@@ -61,14 +61,13 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
 			LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
-
-			CGPUStatics::GetSingletonPtr()->AddVertexCount(verticesCount);
-			CGPUStatics::GetSingletonPtr()->AddFacesCount(facesCount);
-			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
-
             
             l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
             if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+
+            CGPUStatics::GetSingletonPtr()->AddVertexCount(verticesCount);
+			CGPUStatics::GetSingletonPtr()->AddFacesCount(facesCount);
+			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
             
             l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
             l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
@@ -90,13 +89,13 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
-
-			CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
-			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
-			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
             
             l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
             if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+
+            CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
+			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
+			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
             
             l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
             l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));

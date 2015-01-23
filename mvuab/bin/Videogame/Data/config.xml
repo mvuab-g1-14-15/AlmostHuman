@@ -19,4 +19,6 @@
 	<renderable_objects path="Data/renderable_objects1.xml"/>
 	<renderable_object_technique path="Data/renderable_object_technique.xml"/>
 	<lua path="Data/scripts/"/>
+	<effects path="Data/effects.xml"/>
+	<lights path="Data/lights.xml"/>
 </config>
