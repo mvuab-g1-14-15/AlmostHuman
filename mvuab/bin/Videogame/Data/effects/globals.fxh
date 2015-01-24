@@ -1,8 +1,9 @@
 #define MAX_LIGHTS_BY_SHADER 4
 #define MAXBONES 29
 
-#define POINT_LIGHT 0
-#define SPOT_LIGHT	2
+#define OMNI_LIGHT  0
+#define DIR_LIGHT   1
+#define SPOT_LIGHT  2
 
 #define PI			3.14159265359
 #define Deg2Rad(x)	(x * PI / 180.0)
