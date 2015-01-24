@@ -36,42 +36,6 @@ void CCameraFPShooter::Move( int strafe, int forward, bool flag_speed, const flo
 
 void CCameraFPShooter::Update( )
 {
-  CActionManager *pActionManager = CActionManager::GetSingletonPtr();
-  float32 amount;
-  bool flag_speed =  pActionManager->DoAction("Run");
-  int forward = 0;
-  int strafe = 0;
-  if( pActionManager->DoAction("MoveForward") )
-  {
-    forward += 1;
-    Move(strafe, forward ,flag_speed, deltaTime);
-  }
-  if( pActionManager->DoAction("MoveBackward") )
-  {
-    forward -= 1;
-    Move(strafe, forward ,flag_speed, deltaTime);
-  }
-  if( pActionManager->DoAction("MoveLeft" ) )
-  {
-    strafe += 1;
-    Move(strafe, forward ,flag_speed, deltaTime);
-  }
-  if( pActionManager->DoAction("MoveRight") )
-  {
-    strafe -= 1;
-    Move(strafe, forward ,flag_speed, deltaTime);
-  }
-
-  if( pActionManager->DoAction("MoveUp" ) )
-    m_Pos.y +=1;
-  if( pActionManager->DoAction("MoveDown") )
-    m_Pos.y -=1;
-
-  //Definimos el movimiento del Yaw y Pitch de la camara
-  if( pActionManager->DoAction("MoveYaw",amount) )
-    AddYaw( amount * deltaTime );
-  if( pActionManager->DoAction("MovePitch",amount) )
-    AddPitch( amount * deltaTime );
 }
 
 void CCameraFPShooter::AddYaw( float32 degree )

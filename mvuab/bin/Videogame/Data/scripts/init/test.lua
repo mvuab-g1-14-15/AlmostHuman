@@ -11,6 +11,7 @@ function init()
 	graphics_manager = core:GetGraphicsManager()
 	renderable_objects_manager = core:GetRenderableObjectsManager()
 	camera_manager = core:GetCameraManager()
+	light_manager = core:GetLightManager()
 	cinematic=renderable_objects_manager:CreateCinematic("Data/cinematic.xml")
 	cinematic:Stop()
 	timer = core:GetTimer()
@@ -25,6 +26,37 @@ function update()
 	end
 	
 	local dt = timer:GetElapsedTime()
+	
+	move_player( dt )
+	move_light( dt )
+end
+
+function move_light( dt )
+	local current_light = light_manager:GetLight(0);
+	local pos = current_light:GetPosition()
+	
+	local addPos = Vect3f(0, 0, 0)
+	
+	if action_manager:DoAction("Left") then
+		addPos.x = 1 * dt * g_Speed
+	elseif action_manager:DoAction("Right") then
+		addPos.x = - 1 * dt * g_Speed
+	end
+	if action_manager:DoAction("Backward") then
+		addPos.z = 1 * dt * g_Speed
+	elseif action_manager:DoAction("Forward") then
+		addPos.z = -1 * dt * g_Speed
+	end
+	if action_manager:DoAction("MoveUp") then
+		addPos.y = 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveDown") then
+		addPos.y = -1 * dt * g_Speed
+	end
+	
+	current_light:SetPosition(pos+addPos)
+end
+
+function move_player( dt )
 	flag_speed = 0
     forward = 0
     strafe = 0
@@ -47,15 +79,17 @@ function update()
 	end
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
-	
 	local current_camera = camera_manager:GetCurrentCamera();
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
 		current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
+	local current_camera = camera_manager:GetCurrentCamera();
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
+		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+	end
 end
 
 function move( flag_speed, forward, strafe, dt )
-
 	local current_camera = camera_manager:GetCurrentCamera();
 	local Yaw = current_camera:GetYaw()
 	local Pitch = current_camera:GetPitch()
@@ -74,19 +108,7 @@ function move( flag_speed, forward, strafe, dt )
 	
     addPos = addPos * constant;
 	
-	core:trace("=====NEW=======")
-	core:trace(tostring(cam_pos.x))
-	core:trace(tostring(cam_pos.y))
-	core:trace(tostring(cam_pos.z))
-	core:trace("===============")
-    cam_pos = cam_pos + addPos;
-	
-	core:trace("=====NEW=======")
-	core:trace(tostring(cam_pos.x))
-	core:trace(tostring(cam_pos.y))
-	core:trace(tostring(cam_pos.z))
-	core:trace("===============")
-	current_camera:SetPos(cam_pos)
+	current_camera:SetPos((cam_pos + addPos))
 end
 
 function render()
