@@ -49,20 +49,20 @@ void CSpotLight::Render()
   D3DXMATRIX translation;
   D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
   D3DXMatrixTranslation( &translation, eye.x ,eye.y ,eye.z );
-                        
+
   D3DXMATRIX rotation;
   D3DXMATRIX rotation2;
-      
+
   D3DXMatrixRotationY ( &rotation,  -m_fYaw + Math::half_pi32);
   D3DXMatrixRotationZ ( &rotation2, m_fPitch + Math::pi32);
 
   matrix = rotation2 * rotation * translation;
 
-  l_Device->SetTransform( D3DTS_WORLD, &matrix );
+  GraphicsInstance->SetTransform(matrix );
   Math::Vect3f l_Direction = m_Direction.GetNormalized() * 4.0f;
   GraphicsInstance->DrawSphere( 0.5f, Math::colRED );
   GraphicsInstance->DrawCylinder( 0.5f, 0.0f, l_Direction.Length(), 30, Math::colYELLOW, true );
 
   D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-  l_Device->SetTransform( D3DTS_WORLD, &matrix );
+  GraphicsInstance->SetTransform(matrix );
 }

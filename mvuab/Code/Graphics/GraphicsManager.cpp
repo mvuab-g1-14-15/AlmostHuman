@@ -10,6 +10,8 @@
 #include "Exceptions\Exception.h"
 #include "InputManager.h"
 #include "Effects\EffectManager.h"
+#include "Effects\EffectTechnique.h"
+#include "Effects\Effect.h"
 #include "Core.h"
 
 
@@ -66,6 +68,9 @@ CGraphicsManager::CGraphicsManager() :
   m_BackbufferColor_release(Math::colBLACK),
   m_bPaintSolid(true)
 {
+  m_CylinderMesh = 0;
+  m_SphereMesh = 0;
+  m_CylinderMesh = 0;
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -355,8 +360,24 @@ void CGraphicsManager::DrawBox(float32 SizeX, float32 SizeY, float32 SizeZ, Math
   if( FAILED(D3DXCreateBox( m_pD3DDevice, SizeX, SizeY, SizeZ, &m_BoxMesh, 0)) )
     return;
 
-  m_BoxMesh->DrawSubset(0);
+  CEffectTechnique *EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique");
 
+  EffectTechnique->BeginRender();
+
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+  UINT l_NumPasses = 0;
+
+  l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
+  if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return;
+
+  for (UINT b = 0; b < l_NumPasses; ++b)
+  {
+    l_Effect->BeginPass(b);
+    m_BoxMesh->DrawSubset(0);
+    l_Effect->EndPass();
+  }
+
+  l_Effect->End();
   CHECKED_RELEASE(m_BoxMesh);
 }
 
@@ -364,9 +385,24 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
 {
   if( FAILED(D3DXCreateSphere( m_pD3DDevice, Radius, Aristas, Aristas, &m_SphereMesh, 0)) )
     return;
+  CEffectTechnique *EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource("DefaultTechnique");
 
-  m_SphereMesh->DrawSubset(0);
+  EffectTechnique->BeginRender();
 
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+  UINT l_NumPasses = 0;
+
+  l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
+  if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return;
+
+  for (UINT b = 0; b < l_NumPasses; ++b)
+  {
+    l_Effect->BeginPass(b);
+    m_SphereMesh->DrawSubset(0);
+    l_Effect->EndPass();
+  }
+
+  l_Effect->End();
   CHECKED_RELEASE(m_SphereMesh);
 }
 
@@ -729,25 +765,25 @@ void CGraphicsManager::RenderCursor()
 
 void CGraphicsManager::EnableZTest()
 {
-	m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, TRUE);
+  m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, TRUE);
 }
 
 void CGraphicsManager::DisableZTest()
 {
-	m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, FALSE);
+  m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, FALSE);
 }
 
 void CGraphicsManager::EnableZWrite()
 {
-	m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE);
+  m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE);
 }
 
 void CGraphicsManager::DisableZWrite()
 {
-	m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, FALSE);
+  m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, FALSE);
 }
 
 void CGraphicsManager::Present()
-{	
+{
   m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
