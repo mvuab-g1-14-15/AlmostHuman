@@ -24,8 +24,8 @@ bool		g_LightsEnabled[MAX_LIGHTS_BY_SHADER]					: LightsEnabled;
 
 float 		g_LightsAngle[MAX_LIGHTS_BY_SHADER]						: LightsAngles;
 float 		g_LightsFallOff[MAX_LIGHTS_BY_SHADER]					: LightsFallOffs;
-float 		g_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER]		: LightsEndRangeAttenuations;
-float 		g_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER]		: LightsStartRangeAttenuations;
+float 		g_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER]		: LightsEndAngle;
+float 		g_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER]		: LightsStartAngle;
 
 float3	 	g_LightsColor[MAX_LIGHTS_BY_SHADER]						: LightsColors;
 float3	 	g_LightsPosition[MAX_LIGHTS_BY_SHADER]					: LightsPositions;

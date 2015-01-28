@@ -816,7 +816,7 @@ void CGraphicsManager::Present()
 
 void CGraphicsManager::DrawTeapot()
 {
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "MultiLightsTechnique" );
 
   EffectTechnique->BeginRender();
 
