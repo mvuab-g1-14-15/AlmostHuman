@@ -66,6 +66,7 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     void DrawCapsule (    float32 radius, float32 h, uint32 Aristas=10, Math::CColor Color=Math::colWHITE );
     void DrawQuad3D(const Math::Vect3f& pos, const Math::Vect3f& up, const Math::Vect3f& right, float32 w, float32 h, Math::CColor color = Math::colBLUE);
     void DrawQuad3D(    const Math::Vect3f& ul, const Math::Vect3f& ur, const Math::Vect3f& dl, const Math::Vect3f& dr, Math::CColor color);
+    void DrawTeapot();
 
 
   private: // Members
@@ -82,6 +83,7 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     LPD3DXMESH              m_SphereMesh;
     LPD3DXMESH              m_BoxMesh;
     LPD3DXMESH              m_CylinderMesh;
+    LPD3DXMESH              m_TeapotMesh;
 
   private: // Methods
     void GetWindowRect( HWND hwnd );
