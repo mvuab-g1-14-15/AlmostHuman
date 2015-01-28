@@ -31,17 +31,17 @@ struct VertexToPixel
 
 float4 CalcOmniLight(float3 lightPosition, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor, float nearAt, float farAt)
 {
-    float3 vertexToLight  = normalize(lightPosition - worldPosition);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+    float3 vertexToLight  = normalize(worldPosition - lightPosition);
+    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
 	
-	float dstToLight = length(lightPosition - worldPosition);
+	float dstToLight = length(worldPosition - lightPosition);
     float attenuation = 1 - saturate((dstToLight - nearAt) / (farAt - nearAt));
     
     float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
     float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 2.0);
     
-    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 0.0);
+    float4 finalDiffuse  = float4( outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
+    float4 finalSpecular = float4( outSpecularColor * specularColor.xyz, 0.0);
     
     return finalDiffuse + finalSpecular;
 }
@@ -49,24 +49,24 @@ float4 CalcOmniLight(float3 lightPosition, float3 worldPosition, float3 worldNor
 float4 CalcDirectionalLight(float3 lightPosition, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor, float nearAt, float farAt)
 {
     float3 vertexToLight  = normalize(lightPosition);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
 	
-	float dstToLight = length(lightPosition - worldPosition);
+	float dstToLight = length(worldPosition - lightPosition);
     float attenuation = 1 - saturate((dstToLight - nearAt) / (farAt - nearAt));
     
     float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
     float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 2.0);
     
-    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 0.0);
+    float4 finalDiffuse  = float4( diffuseColor.xyz * outDiffuseColor, diffuseColor.a);
+    float4 finalSpecular = float4( specularColor.xyz * outSpecularColor, 0.0);
     
     return finalDiffuse + finalSpecular;
 }
 
 float4 CalcSpotLight(float3 lightPosition, float3 lightDirection, float angle, float angleFallOff, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
 {
-    float3 vertexToLight  = normalize(lightPosition - worldPosition);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+    float3 vertexToLight  = normalize(worldPosition - lightPosition);
+    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
 	
 	float l_Angle = cos(Deg2Rad(angle) / 2.0);
     float l_AngleFallOff = cos(Deg2Rad(angleFallOff) / 2.0);
@@ -102,10 +102,10 @@ float4 mainPS(VertexToPixel IN) : COLOR
     float3 l_Normal = normalize(IN.worldNormal);
     float3 l_Position = IN.worldPosition;
     
-    float4 diffuse    = float4(1.0, 1.0, 1.0, 1.0);
+    float4 diffuse    = tex2D(S0LineaWrapSample, IN.vertexTexture);
     float4 specular   = float4(1.0, 1.0, 1.0, 1.0);
-    float4 finalColor = float4(0.0, 0.0, 0.0, 0.0);
-    
+    float4 finalColor = float4(0.0, 0.0, 0.0, 1.0);
+	
     for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
         if(g_LightsEnabled[i]) 
