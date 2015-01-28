@@ -73,7 +73,7 @@ CGraphicsManager::CGraphicsManager() :
   m_SphereMesh = 0;
   m_CylinderMesh = 0;
 
-  D3DXCreateTeapot( m_pD3DDevice, &m_TeapotMesh, 0 );
+  
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -283,6 +283,7 @@ bool CGraphicsManager::Init( HWND hWnd, bool fullscreenMode, uint32 widthScreen,
 
   }
 
+  D3DXCreateTeapot( m_pD3DDevice, &m_TeapotMesh, 0 );
   return m_bIsOk;
 }
 
