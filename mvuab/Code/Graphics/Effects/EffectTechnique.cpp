@@ -117,17 +117,17 @@ void CEffectTechnique::SetupMatrices()
   }
   if(m_UseInverseProjMatrix)
   {
-    if( !m_Effect->SetProjectionMatrix( l_pEffectManager->GetProjectionMatrix(), true))
+    if( !m_Effect->SetProjectionMatrix( l_pEffectManager->GetProjectionMatrix().GetInverted(), true))
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupMatrices->Error Setting Inverse Projection Matrix");
   }
   if(m_UseInverseViewMatrix)
   {
-    if( !m_Effect->SetViewMatrix(l_pEffectManager->GetViewMatrix(), true))
+    if( !m_Effect->SetViewMatrix(l_pEffectManager->GetViewMatrix().GetInverted().GetTransposed(), true))
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupMatrices->Error Setting Inverse View Matrix");
   }
   if(m_UseInverseWorldMatrix)
   {
-    if( !m_Effect->SetWorldMatrix(l_pEffectManager->GetWorldMatrix(), true))
+    if( !m_Effect->SetWorldMatrix(l_pEffectManager->GetWorldMatrix().GetInverted(), true))
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupMatrices->Error Setting Inverse World Matrix");
   }
 }
@@ -158,10 +158,10 @@ bool CEffectTechnique::SetupLights()
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting lights fall of parameters");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsStartRangeAttenuationParameter(), &m_Effect->GetLightsStartRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER) != S_OK )
-      //CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting start range");
+      CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting start range");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsEndRangeAttenuationParameter(), &m_Effect->GetLightsEndRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER) != S_OK)
-      //CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting end range");
+      CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting end range");
 
     if( l_Effect->SetFloatArray(m_Effect->GetLightsPositionParameter(), &m_Effect->GetLightsPosition()[0].x, MAX_LIGHTS_BY_SHADER*3) != S_OK )
       CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CEffectTechnique::SetupLights->Error Setting lights position");

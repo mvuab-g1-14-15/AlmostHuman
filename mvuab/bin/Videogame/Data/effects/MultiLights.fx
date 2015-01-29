@@ -15,7 +15,7 @@ date: YYMMDD
 struct ApplitationToVertex
 {
     float4 vertexPosition   : POSITION0;
-    float3 vertexNormal     : NORMAL;
+    float3 vertexNormal     : NORMAL0;
     float2 vertexTexture    : TEXCOORD0;
 };
 
@@ -31,17 +31,17 @@ struct VertexToPixel
 
 float4 CalcOmniLight(float3 lightPosition, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor, float nearAt, float farAt)
 {
-    float3 vertexToLight  = normalize(worldPosition - lightPosition);
-    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
+    float3 vertexToLight  = normalize(lightPosition - worldPosition);
+    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
 	
 	float dstToLight = length(worldPosition - lightPosition);
-    float attenuation = 1 - saturate((dstToLight - nearAt) / (farAt - nearAt));
+    float attenuation =  1.0 - saturate((dstToLight - nearAt) / (farAt - nearAt));
     
-    float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
-    float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 2.0);
+    float outDiffuseColor  = saturate(dot(vertexToLight, worldNormal));
+    float outSpecularColor = pow(saturate(dot(vertexToCamera, reflect(vertexToLight, worldNormal))), 2.0);
     
-    float4 finalDiffuse  = float4( outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4( outSpecularColor * specularColor.xyz, 0.0);
+    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
+    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 0.0);
     
     return finalDiffuse + finalSpecular;
 }
@@ -49,24 +49,24 @@ float4 CalcOmniLight(float3 lightPosition, float3 worldPosition, float3 worldNor
 float4 CalcDirectionalLight(float3 lightPosition, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor, float nearAt, float farAt)
 {
     float3 vertexToLight  = normalize(lightPosition);
-    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
+    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
 	
 	float dstToLight = length(worldPosition - lightPosition);
-    float attenuation = 1 - saturate((dstToLight - nearAt) / (farAt - nearAt));
+    float attenuation =  1.0 - saturate((dstToLight - nearAt) / (farAt - nearAt));
     
     float outDiffuseColor  = saturate(dot(worldNormal, vertexToLight));
     float outSpecularColor = pow(saturate(dot(worldNormal, normalize(vertexToCamera + vertexToLight))), 2.0);
     
-    float4 finalDiffuse  = float4( diffuseColor.xyz * outDiffuseColor, diffuseColor.a);
-    float4 finalSpecular = float4( specularColor.xyz * outSpecularColor, 0.0);
+    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
+    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 0.0);
     
     return finalDiffuse + finalSpecular;
 }
 
 float4 CalcSpotLight(float3 lightPosition, float3 lightDirection, float angle, float angleFallOff, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
 {
-    float3 vertexToLight  = normalize(worldPosition - lightPosition);
-    float3 vertexToCamera = normalize(worldPosition - g_ViewInverseMatrix[3].xyz);
+    float3 vertexToLight  = normalize(lightPosition - worldPosition);
+    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - lightPosition);
 	
 	float l_Angle = cos(Deg2Rad(angle) / 2.0);
     float l_AngleFallOff = cos(Deg2Rad(angleFallOff) / 2.0);
@@ -90,10 +90,9 @@ VertexToPixel mainVS(ApplitationToVertex IN)
     l_OUT.vertexPosition = mul(IN.vertexPosition, g_WorldViewProj);
     l_OUT.vertexTexture = IN.vertexTexture;
     
-    l_OUT.worldPosition = mul(IN.vertexPosition, (float3x3) g_WorldMatrix);
-    l_OUT.worldNormal = mul(IN.vertexNormal, (float3x3) g_WorldMatrix);
-    
-    
+    l_OUT.worldPosition = mul(IN.vertexPosition, g_WorldMatrix);	
+    l_OUT.worldNormal = mul(IN.vertexNormal, g_WorldMatrix);
+	
     return l_OUT;
 }
 
