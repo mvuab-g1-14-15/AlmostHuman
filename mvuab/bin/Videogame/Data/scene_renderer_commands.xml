@@ -9,5 +9,6 @@
 	<render_scene layer="solid" active="true"/>
 	<disable_z_write/>
 	<!--end pre_render-->
+	<end_scene/>
 	<present/>
 </scene_renderer_commands>
