@@ -25,7 +25,9 @@ class CGraphicsManager : public CSingleton<CGraphicsManager>
     void Render();
     void Release();
     void SetupMatrices();
+	void BeginScene();
     void BeginRender();
+	void EndScene();
     void EndRender();
     void SetTransform (D3DXMATRIX& matrix);
     void SetTransform ( Math::Mat44f& matrix);

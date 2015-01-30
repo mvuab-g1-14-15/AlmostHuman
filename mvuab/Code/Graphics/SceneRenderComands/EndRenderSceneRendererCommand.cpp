@@ -13,5 +13,5 @@ CEndRenderSceneRendererCommand::~CEndRenderSceneRendererCommand()
 
 void CEndRenderSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	GM.EndRender();
+	GM.EndScene();
 }

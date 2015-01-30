@@ -21,6 +21,8 @@
 #include "Timer\Timer.h"
 #include "Console\Console.h"
 
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+
 #include <iostream>
 
 CCore::CCore() :
@@ -37,6 +39,7 @@ CCore::CCore() :
   m_LuaRunPath( "" ),
   m_EffectsPath( "" ),
   m_LightsPath( "" ),
+  m_SceneRendererCommandPath( "" ),
   m_ScreenWidth( 800 ),
   m_ScreenHeight( 600 ),
   m_WindowXPos( 0 ),
@@ -60,6 +63,7 @@ CCore::CCore() :
   m_pCameraManager( new CCameraManager() ),
   m_pEffectManager( new CEffectManager() ),
   m_pLightManager( new CLightManager() ),
+  m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
 {
@@ -92,6 +96,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pCameraManager );
   CHECKED_DELETE( m_pEffectManager );
   CHECKED_DELETE( m_pLightManager );
+  CHECKED_DELETE( m_pSceneRendererCommandManager);
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE(m_pConsole);
 }
@@ -234,6 +239,9 @@ void CCore::LoadXml()
                                   else
                                     if ( TagName == "lights" )
                                       m_LightsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+									else
+									  if ( TagName == "scene_renderer_commands" )
+										m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path", "") );
     }
   }
 }
@@ -262,6 +270,8 @@ void CCore::InitManagers()
   m_pScriptManager->Load( m_LuaRunPath );
 
   m_pLightManager->Load( m_LightsPath );
+
+  m_pSceneRendererCommandManager->Load(m_SceneRendererCommandPath);
 }
 
 void CCore::Trace( const std::string& TraceStr )

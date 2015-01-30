@@ -9,5 +9,5 @@ CBeginRenderSceneRendererCommand::CBeginRenderSceneRendererCommand(CXMLTreeNode 
 
 void CBeginRenderSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	GM.BeginRender();
+	GM.BeginScene();
 }

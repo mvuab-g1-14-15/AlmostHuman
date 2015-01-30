@@ -97,6 +97,12 @@ void CGraphicsManager::Release()
   CHECKED_RELEASE( m_TeapotMesh );
 }
 
+void CGraphicsManager::BeginScene()
+{
+	HRESULT hr = m_pD3DDevice->BeginScene();
+	assert( SUCCEEDED( hr ) );
+}
+
 void CGraphicsManager::BeginRender()
 {
 #ifdef _DEBUG // Clear the backbuffer to a blue color in a Debug mode
@@ -141,6 +147,11 @@ void CGraphicsManager::Clear()
   uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 256 );
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ), 1.0f, 0 );
 #endif
+}
+
+void CGraphicsManager::EndScene()
+{
+	m_pD3DDevice->EndScene();
 }
 
 void CGraphicsManager::EndRender()

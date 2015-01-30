@@ -42,7 +42,7 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
                     CHECKED_DELETE(m_DefaultRenderableObjectManager);
                 }
             }
-            if( TagName == "layer" )
+            else if( TagName == "layer" )
             {
                 CRenderableObjectsManager *RenderableObjectManager = new CRenderableObjectsManager();
                 if(!AddResource(TreeNode(i).GetPszProperty("name", ""), RenderableObjectManager))

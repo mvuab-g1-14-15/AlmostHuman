@@ -7,8 +7,6 @@
 #include "SceneRendererCommand.h"
 #include <string>
 
-class CGraphicsManager;
-
 class CSceneRendererCommandManager
 {
 	private:
@@ -21,6 +19,6 @@ class CSceneRendererCommandManager
         ~ CSceneRendererCommandManager();
 
         bool Load(const std::string &FileName);
-        bool Execute(CGraphicsManager &GM);
+        bool Execute();
 };
 #endif

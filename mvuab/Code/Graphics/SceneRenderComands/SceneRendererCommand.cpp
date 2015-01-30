@@ -8,3 +8,7 @@ CSceneRendererCommand::CSceneRendererCommand(CXMLTreeNode &atts)
         SetVisible(atts.GetBoolProperty("active", false));
     }
 }
+
+CSceneRendererCommand::~CSceneRendererCommand()
+{
+}

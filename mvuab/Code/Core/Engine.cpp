@@ -7,6 +7,8 @@
 #include "Utils\LogRender.h"
 #include "Timer\Timer.h"
 
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+
 CEngine::CEngine() :
     m_pCore( new CCore() ),
     m_pLogRender( new CLogRender()),
@@ -29,7 +31,11 @@ void CEngine::Update()
 }
 
 void CEngine::Render()
-{    
+{
+	//CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
+
+	//srcm->Execute();
+	
     // Obtain an instance to the graphics manager
     CGraphicsManager* pGraphicsManager = GraphicsInstance;
     //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);

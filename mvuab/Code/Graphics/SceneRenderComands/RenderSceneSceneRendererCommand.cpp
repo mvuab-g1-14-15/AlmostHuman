@@ -6,13 +6,12 @@
 
 CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {
-	const std::string &l_LayerName = atts.GetPszProperty("name", "");
+	const std::string &l_LayerName = atts.GetPszProperty("layer", "");
 	m_Layer = CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource(l_LayerName);
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
 {
-	CHECKED_DELETE(m_Layer);
 }
 
 void CRenderSceneSceneRendererCommand::Execute(CGraphicsManager &GM)

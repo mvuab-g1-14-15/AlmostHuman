@@ -30,6 +30,7 @@ class CEffectManager;
 class CLightManager;
 class CTimer;
 class CConsole;
+class CSceneRendererCommandManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -57,6 +58,7 @@ private:
   std::string                     m_LuaRunPath;
   std::string                     m_EffectsPath;
   std::string                     m_LightsPath;
+  std::string					  m_SceneRendererCommandPath;
   std::vector<std::string>        m_v_languages;
 
   // Managers
@@ -76,6 +78,7 @@ private:
   CCameraManager*                     m_pCameraManager;
   CEffectManager*                     m_pEffectManager;
   CLightManager*                      m_pLightManager;
+  CSceneRendererCommandManager*		  m_pSceneRendererCommandManager;
   CTimer*                             m_pTimer;
   CConsole*                           m_pConsole;
   void LoadXml();
@@ -121,6 +124,7 @@ public:
   GET_SET_PTR( CCameraManager, CameraManager );
   GET_SET_PTR( CEffectManager, EffectManager );
   GET_SET_PTR( CLightManager, LightManager );
+  GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager );
   GET_SET_PTR( CTimer, Timer );
 };
 

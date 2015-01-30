@@ -18,7 +18,11 @@
 #include "SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h"
 #include "SceneRenderComands\RenderGUISceneRendererCommand.h"
 #include "SceneRenderComands\PresentSceneRendererCommand.h"
+#include "SceneRenderComands\SetMatricesSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
+
+#include "Core.h"
+#include "GraphicsManager.h"
 
 #include <Windows.h>
 
@@ -60,12 +64,12 @@ bool CSceneRendererCommandManager::Load(const std::string &FileName)
         for( int i = 0; i < count; ++i )
         {
             std::string TagName = TreeNode(i).GetName();
-            if( TagName == "begin_render" )
+            if( TagName == "begin_scene" )
             {
                 CSceneRendererCommand * BeginRender = new CBeginRenderSceneRendererCommand(TreeNode(i));
                 m_SceneRendererCommands.AddResource(TreeNode(i).GetPszProperty("name", TagName.c_str()), BeginRender);
             }
-            else if( TagName == "clear_scen" )
+            else if( TagName == "clear_scene" )
             {
                CSceneRendererCommand * ClearScene = new CClearSceneRendererCommand(TreeNode(i));
                m_SceneRendererCommands.AddResource(TreeNode(i).GetPszProperty("name", TagName.c_str()), ClearScene);
@@ -80,6 +84,11 @@ bool CSceneRendererCommandManager::Load(const std::string &FileName)
                 CSceneRendererCommand * EnableZTest = new CEnableZTestSceneRendererCommand(TreeNode(i));
                 m_SceneRendererCommands.AddResource(TreeNode(i).GetPszProperty("name", TagName.c_str()), EnableZTest);
             }
+			else if( TagName == "set_matrices" )
+			{
+				CSceneRendererCommand* SetupMatrices = new CSetMatricesSceneRendererCommand(TreeNode(i));
+				m_SceneRendererCommands.AddResource(TreeNode(i).GetPszProperty("name", TagName.c_str()), SetupMatrices);
+			}
             else if( TagName == "set_pool_renderable_objects_technique" )
             {
                 //PENDIENTE CREAR CLASE RENDERABLEOBJECTTECHNIQUE
@@ -164,7 +173,14 @@ bool CSceneRendererCommandManager::Load(const std::string &FileName)
     return true;
 }
 
-bool CSceneRendererCommandManager::Execute(CGraphicsManager &GM)
+bool CSceneRendererCommandManager::Execute()
 {
+	CGraphicsManager* gm = CCore::GetSingletonPtr()->GetGraphicsManager();
+
+	std::vector<CSceneRendererCommand*>::iterator it = m_SceneRendererCommands.GetResourcesVector().begin(),
+												  it_end = m_SceneRendererCommands.GetResourcesVector().end();
+	for (; it != it_end; ++it)
+		(*it)->Execute(*gm);
+
     return true;
 }

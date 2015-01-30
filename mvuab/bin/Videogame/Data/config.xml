@@ -21,4 +21,5 @@
 	<lua path="Data/scripts/"/>
 	<effects path="Data/effects.xml"/>
 	<lights path="Data/lights.xml"/>
+	<scene_renderer_commands path="Data/scene_renderer_commands.xml"/>
 </config>
