@@ -115,7 +115,7 @@ function render()
 	local t = Mat44f()
 	t:SetPos(pos)
 	graphics_manager:SetTransform(t)
-	graphics_manager:DrawCube(1)
+	--graphics_manager:DrawCube(1)
 	t:SetIdentity()
 	graphics_manager:SetTransform(t)
 end

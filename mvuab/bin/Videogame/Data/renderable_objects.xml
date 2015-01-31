@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <MeshInstance name="BOX_Lightmap" core="BOX_Lightmap" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+	<layer name="solid" default="true"/>
+	<layer name="alpha_objects"/>
+	<layer name="alpha_blend_objects"/>
+	<layer name="particles"/>
+  <MeshInstance name="Box001" layer="solid" core="Box001" pos="0.0 0.0 -1.47597e-007" yaw="0.0" pitch="90.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

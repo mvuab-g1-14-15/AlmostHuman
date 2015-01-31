@@ -37,7 +37,7 @@ float4 CalcOmniLight(int i, float3 worldPosition, float3 worldNormal, float4 dif
 	float dstToLight = length(worldPosition - g_LightsPosition[i]);
     float attenuation =  1.0 - saturate((dstToLight - g_LightsStartRangeAttenuation[i]) / (g_LightsEndRangeAttenuation[i] - g_LightsStartRangeAttenuation[i]));
     
-    float outDiffuseColor  = saturate(dot(vertexToLight, worldNormal));
+    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
     float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
     
     float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
@@ -54,7 +54,7 @@ float4 CalcDirectionalLight(int i, float3 worldPosition, float3 worldNormal, flo
 	float dstToLight = length(worldPosition - g_LightsPosition[i]);
     float attenuation =  1.0 - saturate((dstToLight - g_LightsStartRangeAttenuation[i]) / (g_LightsEndRangeAttenuation[i] - g_LightsStartRangeAttenuation[i]));
     
-    float outDiffuseColor  = saturate(dot(vertexToLight, worldNormal));
+    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
     float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
     
     float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
@@ -77,7 +77,7 @@ float4 CalcSpotLight(int i, float3 worldPosition, float3 worldNormal, float4 dif
 	float l_SpotDotValue = dot(vertexToLight, g_LightsDirection[i]);
     float attenuationAng = saturate((l_SpotDotValue - l_AngleFallOff) / (l_Angle - l_AngleFallOff));
     
-    float outDiffuseColor  = saturate(dot(vertexToLight, worldNormal));
+    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
     float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
     
     float4 finalDiffuse  = float4(attenuationAng * attenuationDst * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
@@ -106,8 +106,10 @@ float4 mainPS(VertexToPixel IN) : COLOR
 {
     float3 l_Normal = normalize(IN.worldNormal);
     float3 l_Position = IN.worldPosition;
+	
+	return tex2D(S0LineaWrapSample, IN.vertexTexture);
     
-    float4 diffuse    = float4(1.0, 1.0, 1.0, 1.0); //tex2D(S0LineaWrapSample, IN.vertexTexture);
+    float4 diffuse    = tex2D(S0LineaWrapSample, IN.vertexTexture);//float4(1.0, 1.0, 1.0, 1.0); //tex2D(S0LineaWrapSample, IN.vertexTexture);
     float4 specular   = float4(1.0, 1.0, 1.0, 1.0);
     float4 finalColor = float4(0.0, 0.0, 0.0, 1.0);
     

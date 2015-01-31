@@ -98,10 +98,7 @@ bool CStaticMesh::Load(const std::string &FileName)
             free(textureName);
         }
         m_Textures.push_back(l_Texture);
-    }
 
-    for(unsigned int i = 0; i < l_NumMat; ++i)
-    {
         // Reading vertex buffer
         unsigned short l_VrtexCount = 0;
         std::fread(&l_VrtexCount, sizeof(unsigned short int), 1, l_pFile);

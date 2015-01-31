@@ -107,12 +107,5 @@ void CRenderableObjectsLayersManager::Render(const std::string &LayerName)
 CRenderableObjectsManager * CRenderableObjectsLayersManager::GetRenderableObjectManager(CXMLTreeNode &Node)
 {
     const std::string &l_Layer = Node.GetPszProperty("layer", "");
-    if( 0==strcmp("",l_Layer.c_str()) )
-    {
-        return m_DefaultRenderableObjectManager;
-    }
-    else
-    {
-        return GetResource(l_Layer.c_str());
-    }
+	return (l_Layer == "") ? m_DefaultRenderableObjectManager : GetResource(l_Layer.c_str());
 }

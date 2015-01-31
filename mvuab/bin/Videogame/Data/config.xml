@@ -16,7 +16,7 @@
 	<input path="Data/inputs.xml"/>
 	<animated_models path="Data/animated_models.xml"/>
 	<static_meshes path="Data/static_meshes.xml"/>
-	<renderable_objects path="Data/renderable_objects1.xml"/>
+	<renderable_objects path="Data/renderable_objects.xml"/>
 	<renderable_object_technique path="Data/renderable_object_technique.xml"/>
 	<lua path="Data/scripts/"/>
 	<effects path="Data/effects.xml"/>

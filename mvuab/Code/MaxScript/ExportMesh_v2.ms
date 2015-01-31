@@ -24,6 +24,8 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
+			format "Texture name: %\n" m_Name
+			format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
 		)
@@ -148,6 +150,7 @@ struct SVertexBuffer
 		format "Writing BV\n"
 		local l_NumVertex = m_VertexList.count 
 		WriteShort file l_NumVertex #unsigned
+		format "Vtx count: %\n" l_NumVertex
 		for iVertex in m_VertexList do
 		(
 			iVertex.WriteToFile file
@@ -235,45 +238,48 @@ struct SMesh
 	(
 		format "Creating submeshes\n"
     	local l_Material = Obj.material
-		if classof( l_Material ) == Multimaterial then
+		if classof l_Material == Multimaterial then
 		(
 			format "Saving multimaterial object...\n"
-			local l_NumMaterials = getNumfaces l_Material
+			local l_NumMaterials = l_Material.count
             
 			for iMaterial=1 to l_NumMaterials do
 			(
-            	try
-            	(
-					local l_MaterialId = getFaceMatId Obj iMaterial
+            	--try
+            	--(
+					local l_MaterialId = l_Material[iMaterial]
 					
-					-- Check if the material is not already added
-        	        if m_MaterialsHashTable.ContainsKey l_MaterialId == false then
-    	            (
-						format "Material Name: %\n" m_MaterialsHashTable[l_MaterialId]
+					format "Material ID: %\n" l_MaterialId
 					
-						-- Obtain the submaterial from the main material
-	                	local l_NewMaterial = l_Material[l_MaterialId]
+					if l_materialId != undefined then
+					(
+						-- Check if the material is not already added
+						if m_MaterialsHashTable.ContainsKey iMaterial == false then
+						(
+							format "Material Name: %\n" l_MaterialId.name
 						
-						-- Create a new submehs
-                    	local l_NewSubMesh = SSubMesh()
-						
-						-- Init the material of the new sub mesh with the max material
-                    	l_NewSubMesh.m_Material.FromMaxMaterial l_NewMaterial
-						
-						--Finally add the new submesh to the submeshes in the object
-						append m_SubMeshes l_NewSubMesh
-						
-						--Update the donet map in order have the same data as the submeshes
-						m_MaterialsHashTable.Add l_MaterialId l_NewMaterial.name
+							-- Obtain the submaterial from the main material
+							local l_NewMaterial = l_Material[iMaterial]
+							
+							-- Create a new submehs
+							local l_NewSubMesh = SSubMesh()
+							
+							-- Init the material of the new sub mesh with the max material
+							l_NewSubMesh.m_Material.FromMaxMaterial l_NewMaterial
+							
+							--Finally add the new submesh to the submeshes in the object
+							append m_SubMeshes l_NewSubMesh
+							
+							--Update the donet map in order have the same data as the submeshes
+							m_MaterialsHashTable.Add iMaterial l_NewMaterial.name
+						)
 					)
-            	)
-				catch
-				(
-					format "Error while exporting submaterial %.\n" l_MaterialId
-				)
+            	--)
+	--			catch
+		--		(
+				--	format "Error while exporting submaterial %.\n" l_MaterialId
+			--	)
 			)
-            
-			format "Num mats: % v %\n" materials.count materials
 		)
 		else
 		(
@@ -307,13 +313,11 @@ struct SMesh
 			(
 				l_MaterialId = 1
 			)
-		
-			local l_MaterialNameById = m_MaterialsHashTable.Item[l_MaterialId];
 			
 			--format "Material Name: %\n" l_MaterialNameById
 			
 			-- Check if the material is found
-			if ( l_MaterialNameById != undefined ) then
+			if m_MaterialsHashTable.ContainsKey l_MaterialId == true then
 			(
 				local l_Type = m_SubMeshes[l_MaterialId].m_Material.m_Type
 				
@@ -403,7 +407,7 @@ struct SMesh
 			
 				if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 				(
-					l_Color = bit.shift Obj.material.diffuse.r 24 + bit.shift Obj.material.diffuse.g 16 + bit.shift Obj.material.diffuse.b 8 + Obj.material.diffuse.a
+					l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
 					l_NewVertex1.m_Color = l_Color
 					l_NewVertex2.m_Color = l_Color
 					l_NewVertex3.m_Color = l_Color
