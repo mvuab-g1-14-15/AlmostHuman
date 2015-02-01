@@ -42,6 +42,8 @@ float 		g_DeltaTime												: DeltaTime;
 float4	 	g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
 float 		g_SpecularExponent=100;
 
+float 		g_Bump = 4.0;
+
 
 // Functions
 float DistanceAttenuation( int i, float3 LightToPixelDirection )

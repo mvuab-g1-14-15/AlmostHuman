@@ -1,4 +1,15 @@
 // SXLineaWrapSample
+
+samplerCUBE S0LineaWrapSampleCUBE : register(s0) = sampler_state
+{
+	MipFilter = LINEAR;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
 sampler S0LineaWrapSample : register(s0) = sampler_state
 {
 	MipFilter = LINEAR;

@@ -1,7 +1,7 @@
 <effects>
 	<default_technique vertex_type="19" technique="DefaultTechnique"/>
 	<default_technique vertex_type="415" technique="Cal3DTechnique"/>
-	<default_technique vertex_type="19" technique="MultiLightsTechnique"/>
+	<default_technique vertex_type="31" technique="MultiLightsTechnique"/>
 	
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
 	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
