@@ -69,7 +69,7 @@ struct TNORMAL_T1_VERTEX {
 };
 
 struct TT2_DIFF_VERTEX {
-	float3 	Position	: POSITION
+	float3 	Position	: POSITION;
     float4 	Color 		: COLOR0;
 	float2 	UV 			: TEXCOORD0;
     float2 	UV2 		: TEXCOORD1;
@@ -100,7 +100,7 @@ struct TT1_VERTEX {
 struct CAL3D_HW_VERTEX {
 	float3 	Position	: POSITION;
 	float4 	Weights 	: WEIGHTS;
-	float4 	Indices;	: INDICES;
+	float4 	Indices		: INDICES;
 	//float4 	Normal 		: NORMAL;
     //float4 	Tangent 	: TANGENT0;
     //float4 	Binormal 	: BINORMAL0;

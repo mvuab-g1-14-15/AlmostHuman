@@ -4,7 +4,7 @@
 #include "Utils\Defines.h"
 
 CEffectManager::CEffectManager()
-    : m_WorldMatrix(Math::m44fIDENTITY),
+  : m_WorldMatrix(Math::m44fIDENTITY),
     m_ProjectionMatrix(Math::m44fIDENTITY),
     m_ViewMatrix(Math::m44fIDENTITY),
     m_ViewProjectionMatrix(Math::m44fIDENTITY),
@@ -17,170 +17,166 @@ CEffectManager::CEffectManager()
 
 CEffectManager::~CEffectManager()
 {
-    CleanUp();
-    Destroy();
+  CleanUp();
+  Destroy();
 }
 
 const Math::Mat44f & CEffectManager::GetWorldMatrix() const
 {
-    return m_WorldMatrix;
+  return m_WorldMatrix;
 }
 
 const Math::Mat44f & CEffectManager::GetProjectionMatrix() const
 {
-    return m_ProjectionMatrix;
+  return m_ProjectionMatrix;
 }
 
 const Math::Mat44f & CEffectManager::GetViewMatrix() const
 {
-    return m_ViewMatrix;
+  return m_ViewMatrix;
 }
 
 const Math::Mat44f & CEffectManager::GetViewProjectionMatrix()
 {
-    return m_ViewProjectionMatrix;
+  return m_ViewProjectionMatrix;
 }
 const Math::Vect3f & CEffectManager::GetCameraEye()
 {
-    return m_CameraEye;
+  return m_CameraEye;
 }
 const Math::Mat44f & CEffectManager::GetLightViewMatrix() const
 {
-    return m_LightViewMatrix;
+  return m_LightViewMatrix;
 }
 
 const Math::Mat44f & CEffectManager::GetShadowProjectionMatrix()
 {
-    return m_ShadowProjectionMatrix;
+  return m_ShadowProjectionMatrix;
 }
 
 void CEffectManager::SetWorldMatrix(const Math::Mat44f &Matrix)
 {
-    m_WorldMatrix = Matrix;
+  m_WorldMatrix = Matrix;
 }
 
 void CEffectManager::SetProjectionMatrix(const Math::Mat44f &Matrix)
 {
-    m_ProjectionMatrix = Matrix;
+  m_ProjectionMatrix = Matrix;
 }
 
 void CEffectManager::SetViewMatrix(const Math::Mat44f &Matrix)
 {
-    m_ViewMatrix = Matrix;
+  m_ViewMatrix = Matrix;
 }
 
 void CEffectManager::SetViewProjectionMatrix(const Math::Mat44f &ViewProjectionMatrix)
 {
-    m_ViewProjectionMatrix = ViewProjectionMatrix;
+  m_ViewProjectionMatrix = ViewProjectionMatrix;
 }
 
 void CEffectManager::SetLightViewMatrix(const Math::Mat44f &Matrix)
 {
-    m_LightViewMatrix = Matrix;
+  m_LightViewMatrix = Matrix;
 }
 
 void CEffectManager::SetShadowProjectionMatrix(const Math::Mat44f &Matrix)
 {
-    m_ShadowProjectionMatrix = Matrix;
+  m_ShadowProjectionMatrix = Matrix;
 }
 
 void CEffectManager::SetCameraEye(const Math::Vect3f &CameraEye)
 {
-    m_CameraEye = CameraEye;
+  m_CameraEye = CameraEye;
 }
 
 std::string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short VertexType)
 {
-    return m_DefaultTechniqueEffectMap[VertexType];
+  return m_DefaultTechniqueEffectMap[VertexType];
 }
 
 size_t CEffectManager::GetMaxLights() const
 {
-    return MAX_LIGHTS_BY_SHADER;
+  return MAX_LIGHTS_BY_SHADER;
 }
 
 CEffect * CEffectManager::GetEffect(const std::string &Name)
 {
-    return m_Effects.GetResource(Name);
+  return m_Effects.GetResource(Name);
 }
 
 void CEffectManager::CleanUp()
 {
-    m_DefaultTechniqueEffectMap.clear();
-    m_Effects.Destroy();
+  m_DefaultTechniqueEffectMap.clear();
+  m_Effects.Destroy();
 }
 
 void CEffectManager::ActivateCamera(const Math::Mat44f &ViewMatrix, const Math::Mat44f &ProjectionMatrix, const Math::Vect3f &CameraEye)
 {
-    SetViewMatrix(ViewMatrix);
-    SetProjectionMatrix(ProjectionMatrix);
-    SetCameraEye(CameraEye);
+  SetViewMatrix(ViewMatrix);
+  SetProjectionMatrix(ProjectionMatrix);
+  SetCameraEye(CameraEye);
 }
 
 void CEffectManager::Load(const std::string &FileName)
 {
-    // Obtain the filename
-    m_Filename = FileName;
-    
-    // Check if the file exist
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_Filename.c_str()))
+  // Obtain the filename
+  m_Filename = FileName;
+
+  // Check if the file exist
+  CXMLTreeNode newFile;
+  if (!newFile.LoadFile(m_Filename.c_str()))
+  {
+    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CEffectManager::Load No se puede abrir \"%s\"!", m_Filename.c_str());
+    return;
+  }
+
+  // Parse the file and search for the key's
+  CXMLTreeNode l_Node = newFile["effects"];
+  if(!l_Node.Exists())
+  {
+    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CEffectManager::Load Tag \"%s\" no existe", "effects");
+    return;
+  }
+
+  for(int i = 0; i < l_Node.GetNumChildren(); i++)
+  {
+    CXMLTreeNode &l_CurrentNode =l_Node(i);
+    const std::string &l_TagName = l_CurrentNode.GetName();
+
+    if( l_TagName == "effect" )
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CEffectManager::Load No se puede abrir \"%s\"!", m_Filename.c_str());
-        return;
+      const std::string &l_EffectName = l_CurrentNode.GetPszProperty("name");
+      CEffect* l_pEffect = new CEffect(l_EffectName);
+      if(!l_pEffect->Load(l_CurrentNode.GetPszProperty("file")))
+      {
+        std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, msg_error.c_str());
+        CHECKED_DELETE(l_pEffect);
+      }
+      m_Effects.AddResource(l_EffectName, l_pEffect);
     }
-
-    // Parse the file and search for the key's
-    CXMLTreeNode l_Node = newFile["effects"];
-    if(!l_Node.Exists())
+    else if( l_TagName == "technique" )
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CCameraKeyController::Load Tag \"%s\" no existe", "camera_key_controller");
-        return;
+      CEffectTechnique* l_pEffectTechninque = new CEffectTechnique(l_CurrentNode);
+      const std::string &l_EffectTechniqueName = l_CurrentNode.GetPszProperty("name");
+      AddResource(l_EffectTechniqueName, l_pEffectTechninque);
     }
-
-    for(int i = 0; i < l_Node.GetNumChildren(); i++)
+    else if( l_TagName == "default_technique" )
     {
-        CXMLTreeNode &l_CurrentNode =l_Node(i);
-        const std::string &l_TagName = l_CurrentNode.GetName();
+      int l_VertexType = l_CurrentNode.GetIntProperty("vertex_type");
+      const std::string &l_EffectTechniqueName = l_CurrentNode.GetPszProperty("technique");
 
-        if( l_TagName == "effect" )
-        {
-            const std::string &l_EffectName = l_CurrentNode.GetPszProperty("name");
-            CEffect* l_pEffect = new CEffect(l_EffectName);
-            if(!l_pEffect->Load(l_CurrentNode.GetPszProperty("file")))
-            {
-              std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-              CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, msg_error.c_str());
-              CHECKED_DELETE(l_pEffect);
-            }
-            m_Effects.AddResource(l_EffectName, l_pEffect);
-        }
-        else if( l_TagName == "technique" )
-        {
-            CEffectTechnique* l_pEffectTechninque = new CEffectTechnique(l_CurrentNode);
-            const std::string &l_EffectTechniqueName = l_CurrentNode.GetPszProperty("name");
-            AddResource(l_EffectTechniqueName, l_pEffectTechninque);
-        }
-        else if( l_TagName == "default_technique" )
-        {
-            int l_VertexType = l_CurrentNode.GetIntProperty("vertex_type");
-            const std::string &l_EffectTechniqueName = l_CurrentNode.GetPszProperty("technique");
-
-            if(m_DefaultTechniqueEffectMap.find(l_VertexType)==m_DefaultTechniqueEffectMap.end())
-            {
-                m_DefaultTechniqueEffectMap[l_VertexType] = l_EffectTechniqueName;
-            }
-            else
-            {
-                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "Redefinición de vertice");
-            }
-        }
+      if(m_DefaultTechniqueEffectMap.find(l_VertexType)==m_DefaultTechniqueEffectMap.end())
+        m_DefaultTechniqueEffectMap[l_VertexType] = l_EffectTechniqueName;
+      else
+        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CEffectManager::Vertex %d has two entries in \"%s\"!", l_VertexType, m_Filename.c_str() );
     }
+  }
 }
 
 void CEffectManager::Reload()
 {
-    CleanUp();
-    Destroy();
-    Load(m_Filename);
+  CleanUp();
+  Destroy();
+  Load(m_Filename);
 }

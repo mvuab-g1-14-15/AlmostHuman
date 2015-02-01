@@ -1,148 +1,70 @@
-/*
-
-% Description of my shader.
-% Second line of description for my shader.
-
-keywords: material classic
-
-date: YYMMDD
-
-*/
-
-#include "globals.fxh"
+#include "vertex_types.fxh"
 #include "samples.fxh"
+#include "globals.fxh"
 
-struct ApplitationToVertex
+struct VertexPS
 {
-    float4 vertexPosition   : POSITION0;
-    float3 vertexNormal     : NORMAL0;
-    float2 vertexTexture    : TEXCOORD0;
+    float4 HPosition : POSITION;
+    float2 UV : TEXCOORD0;
+    float3 Normal : TEXCOORD1;
+	float3 WorldPosition : TEXCOORD2;
 };
 
-struct VertexToPixel
+VertexPS RenderVS(TNORMAL_T1_VERTEX IN)
 {
-    float4 vertexPosition   : POSITION0;
-    float2 vertexTexture    : TEXCOORD0;
-    
-    float3 worldPosition    : TEXCOORD1;
-    float3 worldNormal      : TEXCOORD2;
-};
-
-
-float4 CalcOmniLight(int i, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
-{
-    float3 vertexToLight  = normalize(g_LightsPosition[i] - worldPosition);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
-	
-	float dstToLight = length(worldPosition - g_LightsPosition[i]);
-    float attenuation =  1.0 - saturate((dstToLight - g_LightsStartRangeAttenuation[i]) / (g_LightsEndRangeAttenuation[i] - g_LightsStartRangeAttenuation[i]));
-    
-    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
-    float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
-    
-    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 1.0);
-    
-    return finalDiffuse + finalSpecular;
+    VertexPS OUT=(VertexPS)0;
+    OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
+    OUT.UV=IN.UV;
+    OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
+    OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix);
+    return OUT;
 }
 
-float4 CalcDirectionalLight(int i, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
+float4 RenderPS(VertexPS IN) : COLOR
 {
-    float3 vertexToLight  = normalize(g_LightsPosition[i]);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+	// Obtain the normal of the face and the position
+	float3 l_Normal= normalize(IN.Normal);
+	float3 l_Position = IN.WorldPosition;
 	
-	float dstToLight = length(worldPosition - g_LightsPosition[i]);
-    float attenuation =  1.0 - saturate((dstToLight - g_LightsStartRangeAttenuation[i]) / (g_LightsEndRangeAttenuation[i] - g_LightsStartRangeAttenuation[i]));
-    
-    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
-    float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
-    
-    float4 finalDiffuse  = float4(attenuation * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4(attenuation * outSpecularColor * specularColor.xyz, 1.0);
-    
-    return finalDiffuse + finalSpecular;
-}
-
-float4 CalcSpotLight(int i, float3 worldPosition, float3 worldNormal, float4 diffuseColor, float4 specularColor)
-{
-    float3 vertexToLight  = normalize(g_LightsPosition[i] - worldPosition);
-    float3 vertexToCamera = normalize(g_ViewInverseMatrix[3].xyz - worldPosition);
+	// Init the color of the pixel with the color of the material
+	float4 l_PixelColor = float4(0.0, 0.0, 0.0, 1.0); //tex2D(S0LineaWrapSample, IN.UV);
 	
-	float dstToLight = length(worldPosition - g_LightsPosition[i]);
-    float attenuationDst =  1.0 - saturate((dstToLight - g_LightsStartRangeAttenuation[i]) / (g_LightsEndRangeAttenuation[i] - g_LightsStartRangeAttenuation[i]));
-    
-    float l_Angle = cos(Deg2Rad(g_LightsAngle[i]) / 2.0);
-    float l_AngleFallOff = cos(Deg2Rad(g_LightsFallOff[i]) / 2.0);
-	
-	float l_SpotDotValue = dot(vertexToLight, g_LightsDirection[i]);
-    float attenuationAng = saturate((l_SpotDotValue - l_AngleFallOff) / (l_Angle - l_AngleFallOff));
-    
-    float outDiffuseColor  = saturate(dot(-vertexToLight, worldNormal));
-    float outSpecularColor = pow(saturate(dot(normalize(vertexToCamera + vertexToLight), worldNormal)), 50.0);
-    
-    float4 finalDiffuse  = float4(attenuationAng * attenuationDst * outDiffuseColor * diffuseColor.xyz, diffuseColor.a);
-    float4 finalSpecular = float4(attenuationAng * attenuationDst * outSpecularColor * specularColor.xyz, 1.0);
-    
-    return finalDiffuse + finalSpecular;
-}
-
-VertexToPixel mainVS(ApplitationToVertex IN)
-{
-    VertexToPixel l_OUT = (VertexToPixel) 0;
-    
-    l_OUT.vertexPosition = mul(IN.vertexPosition, g_WorldViewProj);
-    l_OUT.vertexTexture = IN.vertexTexture;
-    
-    l_OUT.worldPosition = mul(IN.vertexPosition, g_WorldMatrix);
-    l_OUT.worldPosition = mul(l_OUT.worldPosition, g_ViewMatrix);
-	
-    l_OUT.worldNormal = mul(IN.vertexNormal, g_WorldMatrix);
-    l_OUT.worldNormal = mul(l_OUT.worldNormal, g_ViewInverseMatrix);
-    
-    return l_OUT;
-}
-
-float4 mainPS(VertexToPixel IN) : COLOR
-{
-    float3 l_Normal = normalize(IN.worldNormal);
-    float3 l_Position = IN.worldPosition;
-	
-	return tex2D(S0LineaWrapSample, IN.vertexTexture);
-    
-    float4 diffuse    = tex2D(S0LineaWrapSample, IN.vertexTexture);//float4(1.0, 1.0, 1.0, 1.0); //tex2D(S0LineaWrapSample, IN.vertexTexture);
-    float4 specular   = float4(1.0, 1.0, 1.0, 1.0);
-    float4 finalColor = float4(0.0, 0.0, 0.0, 1.0);
-    
-    for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
+	for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
-        if(g_LightsEnabled[i]) 
+        if(g_LightsEnabled[i] == 1) 
         {
-            g_LightsPosition[i] = mul(g_LightsPosition[i], g_ViewInverseMatrix);
-            
+			float3 l_LightDirection = normalize(l_Position-g_LightsPosition[i]);
+			float4 l_TextureColor = tex2D(S0LineaWrapSample, IN.UV);
+			float l_Attenuation = DistanceAttenuation(i, l_LightDirection );
             if(OMNI_LIGHT == g_LightsType[i])
             {
-                finalColor += CalcOmniLight(i, l_Position, l_Normal, diffuse, specular);
             }
             if(DIR_LIGHT == g_LightsType[i])
             {
-                finalColor += CalcDirectionalLight(i, l_Position, l_Normal, diffuse, specular);
+				l_LightDirection = normalize(g_LightsDirection[i]);
             }
             else if(SPOT_LIGHT == g_LightsType[i])
-            {
-                finalColor += CalcSpotLight(i, l_Position, l_Normal, diffuse, specular);
+            {	
+				// Modify the distance attenuation with the spot attenuation
+				l_Attenuation = l_Attenuation * SpotAttenuation(i, l_LightDirection);
+				//l_PixelColor = l_PixelColor * SpotAttenuation(i, l_LightDirection);
             }
+			
+			float3 l_Hn=normalize(normalize(g_CameraPosition-l_Position)-l_LightDirection);
+			float3 l_DiffuseContrib = l_TextureColor*saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[i];
+			float l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[i];
+			l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
         }
     }
-
-    return finalColor;
+	
+	return l_PixelColor;
 }
 
 technique MultiLightsTechnique
 {
     pass p0
     {
-        CullMode = None;
-        VertexShader = compile vs_3_0 mainVS();
-        PixelShader = compile ps_3_0 mainPS();
+        VertexShader =compile vs_3_0 RenderVS();
+        PixelShader = compile ps_3_0 RenderPS();
     }
 }

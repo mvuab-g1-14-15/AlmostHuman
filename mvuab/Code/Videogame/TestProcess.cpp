@@ -35,81 +35,71 @@
 
 void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFiles);
 
-CTestProcess::CTestProcess() : CProcess(), 
-    m_Speed( 0.1f ),
-    m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
+CTestProcess::CTestProcess() : CProcess(),
+  m_Speed( 0.1f ),
+  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
-   // CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
-    //                                             Math::Vect3f(0.0f,2.0f,0.0f) );
-    //CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
+  // CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
+  //                                             Math::Vect3f(0.0f,2.0f,0.0f) );
+  //CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
-	//unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
+  //unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
 
-	//int i = 0;
+  //int i = 0;
 }
 
 CTestProcess::~CTestProcess()
 {
-    CLogger::GetSingletonPtr()->SaveLogsInFile();
+  CLogger::GetSingletonPtr()->SaveLogsInFile();
 }
 
 void CTestProcess::Update()
 {
-    m_Amount +=  0.01f;
-    m_Angle  += deltaTime * 0.05f;
-    m_AngleMoon += deltaTime * 0.05f;
-    
-    CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  m_Amount +=  0.01f;
+  m_Angle  += deltaTime * 0.05f;
+  m_AngleMoon += deltaTime * 0.05f;
 
-    if( pActionManager->DoAction("ReloadStaticMesh") )
-    {
-        CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
-    }
+  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
-	if( pActionManager->DoAction("ReloadLUA") )
-    {
-		CCore::GetSingletonPtr()->GetScriptManager()->Reload();
-    }
+  if( pActionManager->DoAction("ReloadStaticMesh") )
+    CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
 
-	if( pActionManager->DoAction("ReloadShaders") )
-    {
-		CCore::GetSingletonPtr()->GetEffectManager()->Reload();
-    }
+  if( pActionManager->DoAction("ReloadLUA") )
+    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
 
-    if( pActionManager->DoAction("ReloadActionToInput") )
-    {
-        CCore::GetSingletonPtr()->GetActionManager()->Reload();
-    }
+  if( pActionManager->DoAction("ReloadShaders") )
+    CCore::GetSingletonPtr()->GetEffectManager()->Reload();
 
-    if( pActionManager->DoAction("SaveActionToInput") )
-    {
-        CCore::GetSingletonPtr()->GetActionManager()->SaveXML("Data/Prueba.xml");
-    }
+  if( pActionManager->DoAction("ReloadActionToInput") )
+    CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-    if( pActionManager->DoAction("SetActionToInput") )
-    {
-        std::vector<S_INPUT_ACTION> vecInputAction;
-        S_INPUT_ACTION sInputAction;
-        sInputAction.m_DeviceType = IDV_KEYBOARD;
-        sInputAction.m_EventType = EVENT_DOWN_UP;
-        sInputAction.m_Code = KEY_H;
-        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-        sInputAction.m_sEventType = "EVENT_DOWN_UP";
-        sInputAction.m_sCode = "KEY_H";
-        vecInputAction.push_back(sInputAction);
-        sInputAction.m_DeviceType = IDV_KEYBOARD;
-        sInputAction.m_EventType = EVENT_DOWN;
-        sInputAction.m_Code = KEY_LCTRL;
-        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-        sInputAction.m_sEventType = "EVENT_DOWN";
-        sInputAction.m_sCode = "KEY_LCTRL";
-        vecInputAction.push_back(sInputAction);
-        CCore::GetSingletonPtr()->GetActionManager()->SetAction("SaveActionToInput", vecInputAction);
-    }
-    //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-    //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+  if( pActionManager->DoAction("SaveActionToInput") )
+    CCore::GetSingletonPtr()->GetActionManager()->SaveXML("Data/Prueba.xml");
 
-	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
+  if( pActionManager->DoAction("SetActionToInput") )
+  {
+    std::vector<S_INPUT_ACTION> vecInputAction;
+    S_INPUT_ACTION sInputAction;
+    sInputAction.m_DeviceType = IDV_KEYBOARD;
+    sInputAction.m_EventType = EVENT_DOWN_UP;
+    sInputAction.m_Code = KEY_H;
+    sInputAction.m_sDeviceType = "IDV_KEYBOARD";
+    sInputAction.m_sEventType = "EVENT_DOWN_UP";
+    sInputAction.m_sCode = "KEY_H";
+    vecInputAction.push_back(sInputAction);
+    sInputAction.m_DeviceType = IDV_KEYBOARD;
+    sInputAction.m_EventType = EVENT_DOWN;
+    sInputAction.m_Code = KEY_LCTRL;
+    sInputAction.m_sDeviceType = "IDV_KEYBOARD";
+    sInputAction.m_sEventType = "EVENT_DOWN";
+    sInputAction.m_sCode = "KEY_LCTRL";
+    vecInputAction.push_back(sInputAction);
+    CCore::GetSingletonPtr()->GetActionManager()->SetAction("SaveActionToInput", vecInputAction);
+  }
+  //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
+  //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 }
 
 void CTestProcess::Init()
@@ -119,24 +109,24 @@ void CTestProcess::Init()
 
 void CTestProcess::Render()
 {
-    CGraphicsManager* pGraphicsManager = GraphicsInstance;
+  CGraphicsManager* pGraphicsManager = GraphicsInstance;
 
-    pGraphicsManager->DrawAxis(5);
-    pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
-    //pGraphicsManager->DrawTeapot();
+  pGraphicsManager->DrawAxis(5);
+  pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
+  pGraphicsManager->DrawTeapot();
 
-	CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
 
-	// START: TO DELETE LATER IF IS NOT NECESSARY,
-	unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
-	unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
-	unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
-	CGPUStatics::GetSingletonPtr()->SetToZero();
-	CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
-	// END: TO DELETE LATER IF IS NOT NECESSARY
+  // START: TO DELETE LATER IF IS NOT NECESSARY,
+  unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
+  unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
+  unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
+  CGPUStatics::GetSingletonPtr()->SetToZero();
+  CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
+  // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CTestProcess::RenderDebugInfo()
 {
-    CProcess::RenderDebugInfo();
+  CProcess::RenderDebugInfo();
 }

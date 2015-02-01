@@ -15,9 +15,13 @@ float4x4 g_ProjectionInverseMatrix 									: ProjectionInverse;
 float4x4 g_ProjectionMatrix	 										: Projection;
 float4x4 g_WorldMatrix 		 										: World;
 float4x4 g_WorldInverseMatrix 		 								: WorldInverse;
+float4x4 g_WorldViewMatrix 		 								    : WorldView;
+float4x4 g_ViewProjMatrix 		 								    : ViewProjection;
+
 
 float4x4 g_ShadowProjectionMatrix									: ShadowProjection;
 float4x4 g_LightViewMatrix 		 									: LightView;
+float4x4 g_ViewToLightProjMatrix 		 						    : ViewToLightProjection;
 
 int 		g_LightsType[MAX_LIGHTS_BY_SHADER]						: LightsTypes;
 bool		g_LightsEnabled[MAX_LIGHTS_BY_SHADER]					: LightsEnabled;
@@ -34,3 +38,19 @@ float3	 	g_LightsDirection[MAX_LIGHTS_BY_SHADER]					: LightsDirections;
 float3x4 	g_Bones[MAXBONES]										: Bones;
 float3	    g_CameraPosition										: CameraPosition;
 float 		g_DeltaTime												: DeltaTime;
+
+float4	 	g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
+float 		g_SpecularExponent=100;
+
+
+// Functions
+float DistanceAttenuation( int i, float3 LightToPixelDirection )
+{
+	float l_DistanceToLight = length(LightToPixelDirection);
+    return 1.0;// - saturate((l_DistanceToLight-g_LightsEndRangeAttenuation[i])/(g_LightsStartRangeAttenuation[i]-g_LightsEndRangeAttenuation[i]));
+}
+float SpotAttenuation( int i, float3 LightToPixelDirection )
+{	
+	float3 l_LightDirection = normalize(g_LightsDirection[i]);
+    return 1.0-saturate((cos(g_LightsAngle[i])-dot(-LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+}
