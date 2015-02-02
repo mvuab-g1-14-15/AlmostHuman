@@ -12,6 +12,8 @@
 
 #define PHYSX_OBJ_BOX	0x0001
 
+using namespace Math;
+
 struct TPhysXObj : public CObject3D
 {
 	int m_Type;
@@ -26,7 +28,7 @@ struct TPhysXObj : public CObject3D
 
 struct TPhysXObjBox : public TPhysXObj 
 {
-	Vect3f m_Dimensions;
+	Math::Vect3f m_Dimensions;
 
 	TPhysXObjBox()
 		: m_Dimensions(v3fZERO)

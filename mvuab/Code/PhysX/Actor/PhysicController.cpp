@@ -1,5 +1,5 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
-#include "Utils\Base.h"
+//#include "Utils\Base.h"
 #include "Core.h"
 #include "Actor\PhysicController.h"
 
@@ -25,7 +25,7 @@
 //		  CONSTRUCTORS / DESTRUCTOR
 // -----------------------------------------
 CPhysicController::CPhysicController ( float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset
-												, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Vect3f& _vPos, float _fGravity )
+												, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity )
 	: m_pPhXController				( NULL )
 	, m_pPhXCapsuleControllerDesc	( NULL )
 	, m_pPhXBoxControllerDesc		( NULL )
@@ -68,8 +68,8 @@ CPhysicController::CPhysicController ( float _fRadius, float _fHeight, float _fS
 	m_pPhXCapsuleControllerDesc->interactionFlag	= NXIF_INTERACTION_USE_FILTER;	// Diu si el controler colisiona amb altres controlers
 }
 
-CPhysicController::CPhysicController ( Vect3f _Dim, float _fSlope, float _fSkinwidth, float _fStepOffset
-												, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Vect3f& _vPos, float _fGravity )
+CPhysicController::CPhysicController ( Math::Vect3f _Dim, float _fSlope, float _fSkinwidth, float _fStepOffset
+												, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity )
 	: m_pPhXController				( NULL )
 	, m_pPhXCapsuleControllerDesc	( NULL )
 	, m_pPhXBoxControllerDesc		( NULL )
@@ -126,7 +126,7 @@ void CPhysicController::CreateController ( NxController* _pController, NxScene* 
 	CHECKED_DELETE ( m_pPhXCapsuleControllerDesc );
 }
 
-void CPhysicController::SetPosition	(const Vect3f& pos)
+void CPhysicController::SetPosition	(const Math::Vect3f& pos)
 {
 	if ( m_pPhXController != NULL )
 	{
@@ -161,9 +161,9 @@ void CPhysicController::SetPosition	(const Vect3f& pos)
 	CObject3D::SetPosition(pos);
 }
 
-Vect3f CPhysicController::GetPosition ()
+Math::Vect3f CPhysicController::GetPosition ()
 {
-	Vect3f vec(0, 0, 0);
+	Math::Vect3f vec(0, 0, 0);
 	if (m_pPhXController != NULL)
 	{
 		// Parche Jordi!!
@@ -197,7 +197,7 @@ void CPhysicController::Jump(float ammount)
 	m_Jump.StartJump(ammount);
 }
 
-void CPhysicController::Move ( const Vect3f& _vDirection, float _ElapsedTime )
+void CPhysicController::Move ( const Math::Vect3f& _vDirection, float _ElapsedTime )
 {
 	assert ( m_pPhXController != NULL );
 
@@ -238,8 +238,8 @@ void CPhysicController::Move ( const Vect3f& _vDirection, float _ElapsedTime )
 	
 	tmp = m_pPhXController->getDebugPosition();
 	
-	SetPosition ( Vect3f ( (float) tmp.x, (float) tmp.y, (float) tmp.z ) );
-	CObject3D::InitMat44();
+	SetPosition ( Math::Vect3f ( (float) tmp.x, (float) tmp.y, (float) tmp.z ) );
+	//CObject3D::InitMat44();
 }
 
 void CPhysicController::SetCollision ( bool _bFlag )
@@ -283,7 +283,7 @@ bool CPhysicController::UpdateCharacterExtents (bool bent, float ammount)
 
 	NxExtendedVec3 position(pos.x, pos.y, pos.z);
 	m_pPhXController->setPosition(position);
-	SetPosition ( Vect3f ( (float)pos.x, (float)pos.y, (float)pos.z ) );
+	SetPosition ( Math::Vect3f ( (float)pos.x, (float)pos.y, (float)pos.z ) );
 	NxCapsuleController* c = static_cast<NxCapsuleController*> (m_pPhXController);
 	c->setHeight(height);
 	m_fHeightControler = height;

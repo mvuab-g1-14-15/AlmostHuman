@@ -7,7 +7,7 @@
 
 struct SSphericalLimitInfo
 {
-	Vect3f m_vAnchor, m_vAxis;
+	Math::Vect3f m_vAnchor, m_vAxis;
 	bool  TwistLimit;
 	float TwistLowValue, TwistLowRestitution, TwistHighValue, TwistHighRestitution;
 

@@ -12,7 +12,7 @@
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
-#include "RenderManager.h"
+#include "GraphicsManager.h"
 #include "Core.h"
 #include "base.h"
 #include "Math\Matrix44.h"
@@ -88,7 +88,7 @@ bool CPhysxSkeleton::Load(const std::string& _szFileName)
   CXMLTreeNode l_XMLObjects;
 	if(!l_XML.LoadFile(_szFileName.c_str()))
 	{
-		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
 		return false;
 	}
   
@@ -169,7 +169,7 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
   CXMLTreeNode l_XMLObjects;
 	if(!l_XML.LoadFile(_szFileName.c_str()))
 	{
-		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
 		return false;
 	}
 
@@ -232,9 +232,9 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
 
   CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
-  Vect3f l_vJointPoint(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+  Math::Vect3f l_vJointPoint(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
   l_vJointPoint = m_mTransform*l_vJointPoint;
-  Vect3f l_vAxis;
+  Math::Vect3f l_vAxis;
   CalVector l_vVect;
 
   
@@ -249,12 +249,12 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
       CPhysxBone* l_pPhysChild = GetPhysxBoneByName(l_szNameChild);
       l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
       l_vVect.x = -l_vVect.x;
-    /*  l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+    /*  l_vAxis = Math::Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
       l_vAxis.Normalize();*/
     }
     else
     {
-      Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
+      Math::Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
       l_vVect = CalVector(l_vMiddle.x,l_vMiddle.y,l_vMiddle.z);
       /*l_vAxis(l_vMiddle.x-l_vJointPoint.x,l_vMiddle.y-l_vJointPoint.y,l_vMiddle.z-l_vJointPoint.z);
       l_vAxis.Normalize();*/
@@ -269,16 +269,16 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
       CPhysxBone* l_pPhysParent = GetPhysxBoneByName(l_szNameParent);
       CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
       l_vVect.x = -l_vVect.x;
-     /* l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+     /* l_vAxis = Math::Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
       l_vAxis.Normalize();*/
     }
     
   }
 
   
-  Vect3f l_vAxisAux(l_vVect.x,l_vVect.y,l_vVect.z);
+  Math::Vect3f l_vAxisAux(l_vVect.x,l_vVect.y,l_vVect.z);
   l_vAxisAux = m_mTransform*l_vAxisAux;
-  l_vAxis = Vect3f(l_vAxisAux.x-l_vJointPoint.x,l_vAxisAux.y-l_vJointPoint.y,l_vAxisAux.z-l_vJointPoint.z);
+  l_vAxis = Math::Vect3f(l_vAxisAux.x-l_vJointPoint.x,l_vAxisAux.y-l_vJointPoint.y,l_vAxisAux.z-l_vJointPoint.z);
   l_vAxis.Normalize();
 
   l_pJointInfo.m_vAnchor = l_vJointPoint;
@@ -297,7 +297,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
     //l_pSphericalJoint->SetInfoComplete(l_vJointPoint,l_vAxis,l_pActor1,l_pActor2);
     l_pSphericalJoint->SetInfoRagdoll(l_pJointInfo,l_pActor1,l_pActor2);
   }
-  CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
   m_vSphericalJoints.push_back(l_pSphericalJoint);
 
 	return true;
@@ -332,7 +332,7 @@ bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
     l_pFixedJoint->SetInfo(l_pActor1,l_pActor2);
   }
 
-  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
   m_vFixedJoints.push_back(l_pFixedJoint);
 
 	return true;
@@ -606,7 +606,7 @@ CBoundingBox CPhysxSkeleton::ComputeBoundingBox()
   vector<CPhysxBone*>::iterator l_end = m_vBones.end();
   Mat44f m;
   bool m_bFirst = true;
-  Vect3f v, min, max;
+  Math::Vect3f v, min, max;
 
   for(; l_it != l_end; ++l_it)
   {

@@ -23,7 +23,7 @@ class CPhysicUserData;
 class CPhysicTriggerReport : public NxUserTriggerReport 
 {
 public:
-	//--- Init and End protocols------------------------------------------
+	//--- Init and End protoMath::cols------------------------------------------
 					CPhysicTriggerReport	( void ) {}
 	virtual			~CPhysicTriggerReport	( void ) {}
 

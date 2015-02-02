@@ -9,6 +9,7 @@
 //---- MACROS ------------
 #define MAX_ARISTAS 10
 
+using namespace Math;
 
 //---- Declaracion de nuevos tipos------------
 struct SPhysicsInitParams
@@ -31,8 +32,8 @@ struct SPhysicsInitParams
 struct SCollisionInfo
 {
 	float		m_fDistance;
-	Vect3f		m_Normal;
-	Vect3f		m_CollisionPoint;
+	Math::Vect3f		m_Normal;
+	Math::Vect3f		m_CollisionPoint;
 };
 
 enum ECollisionGroup {

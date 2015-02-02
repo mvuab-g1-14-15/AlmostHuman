@@ -1,10 +1,11 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 #include "Utils\PhysicASELoader.h"
 #include "Math\Vector3.h"
-#include "Utils\Base.h"
+////#include "Utils\Base.h"
+#include "Utils\Defines.h"
 #include <stdio.h>
 
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 
 char* CPhysicASELoader::TrimFront(char* c)
 {
@@ -16,7 +17,7 @@ char* CPhysicASELoader::TrimFront(char* c)
 }
 
 
-bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Vect3f>&vertices,
+bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Math::Vect3f>&vertices,
 																			 std::vector<uint32>& faces ) 
 {
 	FILE* f = NULL;
@@ -46,7 +47,7 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Vect3f
 	return true;
 };
 
-void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Vect3f>&vertices, std::vector<uint32>& faces ) 
+void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f>&vertices, std::vector<uint32>& faces ) 
 {
 	char line[512];
 	int nbVertices = 0;
@@ -72,7 +73,7 @@ void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Vect3f>&vertice
 
 
 
-void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Vect3f>& vertices ) 
+void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Math::Vect3f>& vertices ) 
 {
 	char line[512];
 
@@ -89,8 +90,8 @@ void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Vect3f>& vertices )
 			float a,b,c;
 			int i;
 			sscanf_s(l, "*MESH_VERTEX %d %f %f %f", &i, &a, &b, &c);
-			//Vect3f a2(3,3,3);
-			vertices.push_back( Vect3f(a,c,b) );
+			//Math::Vect3f a2(3,3,3);
+			vertices.push_back( Math::Vect3f(a,c,b) );
 		}
 	}
 }

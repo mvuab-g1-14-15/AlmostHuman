@@ -1,6 +1,6 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 
-#include "Utils\Base.h"
+//#include "Utils\Base.h"
 #include "Reports\PhysicTriggerReport.h"
 
 void CPhysicTriggerReport::onTrigger ( NxShape &_TriggerShape, NxShape &_OtherShape, NxTriggerFlag _Status )

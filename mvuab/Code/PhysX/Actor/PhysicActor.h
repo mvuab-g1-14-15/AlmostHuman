@@ -10,10 +10,12 @@
 #define __PHYSIC_ACTOR_CLASS_H__
 
 #include <vector>
-#include "Utils\Base.h"
+////#include "Utils\Base.h"
 #include "Math\Vector3.h"
 #include "Math\Matrix44.h"
 #include "PhysicsDefs.h"
+
+using namespace Math;
 
 //---Forward Declarations---
 class NxActor;
@@ -46,26 +48,26 @@ public:
 	void				CreateBody					( float _Density, float _AngularDamping = 0.5f, float _LinearDamping = 0.5f );
 	
 	//---Trigger Function---
-	void				CreateBoxTrigger			( const Vect3f& _vGlobalPos, const Vect3f& _vSize, uint32 _uiGroup = 0 );
-	void				CreateSphereTrigger			( const Vect3f& _vGlobalPos, const float _fRadius, uint32 _uiGroup );
+	void				CreateBoxTrigger			( const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vSize, uint32 _uiGroup = 0 );
+	void				CreateSphereTrigger			( const Math::Vect3f& _vGlobalPos, const float _fRadius, uint32 _uiGroup );
 	void				ActivateAllTriggers			( void );
 
 	//---Get PhsX Info---
 	void				CreateActor					( NxActor* actor );
 
 	//---- Functions ---------------------------------------
-	void				AddImpulseAtPos				( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true );
-	void				AddVelocityAtPos			( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true );
-	void				AddAcelerationAtPos			( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true );
-	void				AddForceAtPos				( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true );
-	void				AddTorque					( const Vect3f  _vTorque );
+	void				AddImpulseAtPos				( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal = true );
+	void				AddVelocityAtPos			( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal = true );
+	void				AddAcelerationAtPos			( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal = true );
+	void				AddForceAtPos				( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal = true );
+	void				AddTorque					( const Math::Vect3f  _vTorque );
 	
 	//---AddShape Functions-----
-	void				AddSphereShape				( float radius, const Vect3f& _vGlobalPos = v3fZERO, const Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
-	void				AddBoxSphape				( const Vect3f& _vSize, const Vect3f& _vGlobalPos = v3fZERO, const Vect3f& _vLocalPos = v3fZERO, const Vect3f& rotation = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
-	void				AddCapsuleShape				( float _Radius, float _Height, const Vect3f& _vGlobalPos = v3fZERO, const Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
-	void				AddMeshShape				( NxTriangleMesh* mesh, const Vect3f& _vGlobalPos = v3fZERO, const Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0);
-	void				AddPlaneShape				( const Vect3f& _vNormal, float _Distance, uint32 _uiGroup = 0);
+	void				AddSphereShape				( float radius, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+	void				AddBoxSphape				( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+	void				AddCapsuleShape				( float _Radius, float _Height, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+	void				AddMeshShape				( NxTriangleMesh* mesh, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0);
+	void				AddPlaneShape				( const Math::Vect3f& _vNormal, float _Distance, uint32 _uiGroup = 0);
 
 	//---Activate---
 	void				Activate					( bool _bActivate );
@@ -74,21 +76,21 @@ public:
   //---- Properties ( get & Set )---------------------------------------
 	CPhysicUserData*	GetUserData					()							{ return m_pUserData; }
 
-	void				SetLinearVelocity			( const Vect3f& _vVelocity );
-	Vect3f				GetLinearVelocity			();
+	void				SetLinearVelocity			( const Math::Vect3f& _vVelocity );
+	Math::Vect3f				GetLinearVelocity			();
 	
-	Vect3f				GetPosition					();
-	Vect3f				GetRotation					();
-	void				SetRotation     			( const Vect3f& _vRot);
+	Math::Vect3f				GetPosition					();
+	Math::Vect3f				GetRotation					();
+	void				SetRotation     			( const Math::Vect3f& _vRot);
 	void				SetRotation     			( const Mat33f& _mRot);
 	
-	void				SetAngularVelocity			( const Vect3f  _vVelocity );
-	Vect3f				GetAngularVelocity			();
+	void				SetAngularVelocity			( const Math::Vect3f  _vVelocity );
+	Math::Vect3f				GetAngularVelocity			();
 	
-	void				SetGlobalPosition			( const Vect3f& _vPos = Vect3f ( 0.f, 0.f, 0.f ) );
-	void				MoveGlobalPosition			( const Vect3f& _vPos);
+	void				SetGlobalPosition			( const Math::Vect3f& _vPos = Math::Vect3f ( 0.f, 0.f, 0.f ) );
+	void				MoveGlobalPosition			( const Math::Vect3f& _vPos);
 	
-	Vect3f				GetAngularMomentum			();
+	Math::Vect3f				GetAngularMomentum			();
 	
 	Mat33f				GetInertiaTensor			();
 	
@@ -116,7 +118,7 @@ public:
 	void				Destroy						();
 private:
 //	void				Destroy						();
-	void				AddForceAtPos				( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal );
+	void				AddForceAtPos				( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal );
 
 	//---- Members ---------------------------------------
 private:

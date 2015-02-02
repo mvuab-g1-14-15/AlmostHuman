@@ -1,8 +1,8 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 #include <string>
 
-#include "Utils\Logger.h"
-#include "Utils\Base.h"
+#include "Logger\Logger.h"
+//#include "Utils\Base.h"
 
 //---PhysX includes----
 #undef min
@@ -16,8 +16,10 @@
 #include "Cooking Mesh\PhysicCookingMesh.h"
 //--------------------------
 
+#include "Utils\Defines.h"
+
 #if defined( _DEBUG )
-	#include "Utils\MemLeaks.h"
+	#include "Memory\MemLeaks.h"
 #endif //defined(_DEBUG)
 
 //----------------------------------------------------------------------------
@@ -140,7 +142,7 @@ bool CPhysicCookingMesh::CreatePhysicMesh (	const std::string& _Bin_Filename, co
 //----------------------------------------------------------------------------
 // Creating a PhysicMesh from a buffer
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::CreatePhysicMesh (	const std::vector<Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_NameMesh )
+bool CPhysicCookingMesh::CreatePhysicMesh (	const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_NameMesh )
 {
 	bool isOk = false;
 	std::map<std::string,NxTriangleMesh*>::iterator it = m_TriangleMeshes.find(_NameMesh);
@@ -150,7 +152,7 @@ bool CPhysicCookingMesh::CreatePhysicMesh (	const std::vector<Vect3f>& _Vertices
 		NxTriangleMeshDesc triangleMeshDesc;
 		triangleMeshDesc.numVertices			= (NxU32) _Vertices.size();
 		triangleMeshDesc.numTriangles			= (NxU32) _Faces.size()/3;
-		triangleMeshDesc.pointStrideBytes		= sizeof(Vect3f);
+		triangleMeshDesc.pointStrideBytes		= sizeof(Math::Vect3f);
 		triangleMeshDesc.triangleStrideBytes	= 3*sizeof(uint32);
 		triangleMeshDesc.points					= &_Vertices[0].x;
 		triangleMeshDesc.triangles				= &_Faces[0];
@@ -178,14 +180,14 @@ bool CPhysicCookingMesh::CreatePhysicMesh (	const std::vector<Vect3f>& _Vertices
 //----------------------------------------------------------------------------
 // Save a PhysicMesh in a bin file
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::SavePhysicMesh ( const std::vector<Vect3f>& _Vertices, const std::vector<uint32>& _Faces,
+bool CPhysicCookingMesh::SavePhysicMesh ( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces,
 																				 const std::string &_BinFilename )
 {
 	// Build physical model
 	NxTriangleMeshDesc triangleMeshDesc;
 	triangleMeshDesc.numVertices			= (NxU32)_Vertices.size();
 	triangleMeshDesc.numTriangles			= (NxU32)_Faces.size()/3;
-	triangleMeshDesc.pointStrideBytes		= sizeof(Vect3f);
+	triangleMeshDesc.pointStrideBytes		= sizeof(Math::Vect3f);
 	triangleMeshDesc.triangleStrideBytes	= 3*sizeof(uint32);
 	triangleMeshDesc.points					= &_Vertices[0].x;
 	triangleMeshDesc.triangles				= &_Faces[0];
@@ -214,7 +216,7 @@ bool CPhysicCookingMesh::CookClothMesh(const NxClothMeshDesc& desc, NxStream& st
 //----------------------------------------------------------------------------
 // Load the ASE File thought ASE Loader
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::ReadMeshFromASE ( std::string _FileName, std::vector<Vect3f>& _Vertices, std::vector<unsigned int>& _Faces )
+bool CPhysicCookingMesh::ReadMeshFromASE ( std::string _FileName, std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces )
 {
 	bool l_bOK = CPhysicASELoader::ReadMeshFromASE ( _FileName, _Vertices, _Faces );
 	return l_bOK;
@@ -222,7 +224,7 @@ bool CPhysicCookingMesh::ReadMeshFromASE ( std::string _FileName, std::vector<Ve
 
 bool CPhysicCookingMesh::CreateMeshFromASE ( std::string _FileName, std::string _Name )
 {
-	std::vector<Vect3f>			l_Vertices;
+	std::vector<Math::Vect3f>			l_Vertices;
 	std::vector<unsigned int>	l_Faces;
 
 	if ( ReadMeshFromASE ( _FileName, l_Vertices, l_Faces ) )
@@ -230,12 +232,12 @@ bool CPhysicCookingMesh::CreateMeshFromASE ( std::string _FileName, std::string 
 			return true;
 		else
 		{
-			LOGGER->AddNewLog ( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s", _FileName );
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s", _FileName );
 			return false; 
 		}
 	else
 	{
-		LOGGER->AddNewLog ( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s", _FileName );
+		CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s", _FileName );
 		return false; 
 	}
 }

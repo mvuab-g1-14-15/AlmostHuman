@@ -25,7 +25,7 @@ public:
 							~CPhysicRevoluteJoint	( void );
 
 	void					CreateJoint				( NxJoint* joint );
-	void					SetInfo					( const Vect3f& axis, const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB = 0 );
+	void					SetInfo					( const Math::Vect3f& axis, const Math::Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB = 0 );
 													  
 	void					SetMotor				( float maxForce, float veltarget, bool limit=false, float limHigh=0.f, float limLow=0.f );
 	void					ActiveMotor				( float velocity );

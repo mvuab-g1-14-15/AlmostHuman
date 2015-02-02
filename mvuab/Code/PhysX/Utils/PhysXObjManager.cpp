@@ -1,5 +1,5 @@
 #include "XML\XMLTreeNode.h"
-#include "Base.h"
+//#include "Base.h"
 #include "Logger\Logger.h"
 #include "Core.h"
 #include "PhysXObjManager.h"
@@ -13,9 +13,9 @@
 #include "NxCapsuleController.h"
 #include "NxActor.h"*/
 #include "PhysicsManager.h"
-#include "PhysicActor.h"
-#include "PhysicTriggerReport.h"
-#include "PhysicCookingMesh.h"
+#include "Actor/PhysicActor.h"
+#include "Reports/PhysicTriggerReport.h"
+#include "Cooking Mesh/PhysicCookingMesh.h"
 #include "PhysicUserData.h"
 ////--------------------------------
 
@@ -53,7 +53,7 @@ bool CPhysXObjManager::Reload()
 	if (!newFile.LoadFile(m_Filename.c_str()))
 	{
 		std::string msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
-		LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, msg_error.c_str());
 		return false;
 	}
 
@@ -70,7 +70,7 @@ bool CPhysXObjManager::Reload()
 			{
 				std::string name = l_xml(i).GetPszProperty("name", "", true);
 				int type = l_xml(i).GetIntProperty("type", 0, true);
-				Vect3f pos = l_xml(i).GetVect3fProperty("pos", Vect3f(0, 0, 0), true);
+				Math::Vect3f pos = l_xml(i).GetMath::Vect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
 				float yaw = l_xml(i).GetFloatProperty("yaw", 0.0f, true);
 				float pitch = l_xml(i).GetFloatProperty("pitch", 0.0f, true);
 				float roll = l_xml(i).GetFloatProperty("roll", 0.0f, true);
@@ -83,7 +83,7 @@ bool CPhysXObjManager::Reload()
 				{
 					TPhysXObjBox* pxBox = new TPhysXObjBox();
 
-					pxBox->m_Dimensions = l_xml(i).GetVect3fProperty("dimension", Vect3f(0, 0, 0), true);
+					pxBox->m_Dimensions = l_xml(i).GetMath::Vect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
 
 					pxObj = pxBox;
 				}
@@ -91,7 +91,7 @@ bool CPhysXObjManager::Reload()
 				assert(pxObj);
 
 				pxObj->m_Type = type;
-				pxObj->m_Group = CORE->GetPhysicsManager()->GetCollisionGroup(groupName);
+				pxObj->m_Group = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCollisionGroup(groupName);
 				pxObj->SetName(name);
 				pxObj->SetPosition(pos);
 				pxObj->SetYaw(yaw);
@@ -107,7 +107,7 @@ bool CPhysXObjManager::Reload()
 
 					l_pPhysicUserDataMesh->SetGroup(static_cast<ECollisionGroup>(pxObj->m_Group));
 
-					Vect3f rotationVect = v3fZERO;
+					Math::Vect3f rotationVect = v3fZERO;
 
 					rotationVect.x = mathUtils::Deg2Rad(pxObj->GetPitch());
 					rotationVect.y = mathUtils::Deg2Rad(pxObj->GetYaw());
@@ -115,15 +115,15 @@ bool CPhysXObjManager::Reload()
 
 					TPhysXObjBox* pxBox = static_cast<TPhysXObjBox*>(pxObj);
 
-					Vect3f size = pxBox->m_Dimensions;
+					Math::Vect3f size = pxBox->m_Dimensions;
 					size /= 2;
 					
 					CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
 					l_pPhysicUserDataMesh->SetPaint (true);
 
-					l_MeshActor->AddBoxSphape(size, pxBox->GetPosition(), Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
+					l_MeshActor->AddBoxSphape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
 
-					CORE->GetPhysicsManager()->AddPhysicActor(l_MeshActor);
+					CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_MeshActor);
 				}
 			}
 		}

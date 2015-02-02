@@ -3,9 +3,9 @@
 #include "NxPhysics.h"
 #include "Utils\PhysicStream.h"
 
-#include "Utils\Base.h"
+//#include "Utils\Base.h"
 
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 
 CPhysicUserStream::CPhysicUserStream(const char* filename, bool load) : fp(NULL)
 {

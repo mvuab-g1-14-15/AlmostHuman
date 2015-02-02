@@ -3,8 +3,9 @@
 #ifndef _PHYSICS_CONTROLLER_HIT_REPORT_H
 #define _PHYSICS_CONTROLLER_HIT_REPORT_H
 
-#include "Utils\Logger.h"
-#include "Utils\Base.h"
+#include "Logger\Logger.h"
+//#include "Utils\Base.h"
+#include "NxPhysics.h"
 
 class CPhysicsControllerHitReport : public NxUserControllerHitReport
 {
@@ -14,7 +15,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 	{
 		if(hit.shape)
 		{
-				NxCollisionGroup group = hit.shape->getGroup();
+			NxCollisionGroup group = hit.shape->getGroup();
 			if ( group == ECG_DYNAMIC_OBJECTS )
 			{
 				NxActor& actor = hit.shape->getActor();
@@ -29,7 +30,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 			if ( group == ECG_PLAYER )
 			{
 				#if defined _DEBUG
-					LOGGER->AddNewLog( ELL_INFORMATION, "onShapeHit -> Hit ECG_PLAYER" );
+					CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "onShapeHit -> Hit ECG_PLAYER" );
 				#endif	
 				return NX_ACTION_NONE;
 			}
@@ -37,7 +38,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 			if ( group == ECG_ENEMY )
 			{
 				#if defined _DEBUG
-					LOGGER->AddNewLog( ELL_INFORMATION, "onShapeHit -> Hit ECG_ENEMY" );
+					CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "onShapeHit -> Hit ECG_ENEMY" );
 				#endif	
 				return NX_ACTION_NONE;
 			}
@@ -54,7 +55,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 			if ( group == ECG_DYNAMIC_OBJECTS )
 			{
 				#if defined _DEBUG
-					LOGGER->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_DYNAMIC_OBJECTS" );
+					CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_DYNAMIC_OBJECTS" );
 				#endif	
 				return NX_ACTION_NONE;
 			}
@@ -62,7 +63,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 			if ( group == ECG_PLAYER )
 			{
 				#if defined _DEBUG
-					LOGGER->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_PLAYER" );
+					CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_PLAYER" );
 				#endif	
 				return NX_ACTION_NONE;
 			}
@@ -70,7 +71,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 			if ( group == ECG_ENEMY )
 			{
 				#if defined _DEBUG
-					LOGGER->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_ENEMY" );
+					CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "onControllerHit -> Hit ECG_ENEMY" );
 				#endif	
 				return NX_ACTION_NONE;
 			}

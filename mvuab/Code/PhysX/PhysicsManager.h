@@ -18,7 +18,7 @@
 #include "Math\Color.h"
 #include "Math\MathUtils.h"
 #include "Math\Vector3.h"
-#include "Utils\Named.h"
+#include "Utils\Name.h"
 #include "PhysicsDefs.h"
 
 //#include "Script/ScriptRegister.h"
@@ -42,8 +42,10 @@ class CPhysicUserAllocator;
 class CPhysicUserData;
 //class CScriptManager;
 class CGameEntity;
-class CRenderManager;
+class CGraphicsManager;
 //--------------------------
+
+using namespace Math;
 
 class CPhysicsManager
 {
@@ -62,8 +64,8 @@ public:
 	bool					CreateMeshFromXML				(const std::string &FileName);
 	
 	//--- Rendering Stuff:
-	void					DebugRender						( CRenderManager *_RM );
-	void					DrawActor						( NxActor* actor, CRenderManager* _RM );
+	void					DebugRender						( CGraphicsManager *_RM );
+	void					DrawActor						( NxActor* actor, CGraphicsManager* _RM );
 
 	//--- Add/Release Actors
 	bool					AddPhysicActor					( CPhysicActor* _pActor);
@@ -84,12 +86,12 @@ public:
 	bool					RelasePhysicFixedJoint			( CPhysicFixedJoint* _pJoint );
 
 	////--- Intersection Functions:	
-	//CPhysicUserData*		RaycastClosestActor				( const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info );
-	CPhysicUserData*		RaycastClosestActor				( const Vect3f _vPosRay, const Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
-	CPhysicUserData*		RaycastClosestActorShoot		( const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower );
-	void					OverlapSphereActor				( float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects, uint32 impactMask );
-	void					OverlapSphereActorGrenade		( float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower );
-	void					ApplyExplosion					( NxActor* _pActor, const Vect3f& _vPosSphere, float _fEffectRadius, float _fPower );
+	//CPhysicUserData*		RaycastClosestActor				( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info );
+	CPhysicUserData*		RaycastClosestActor				( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
+	CPhysicUserData*		RaycastClosestActorShoot		( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower );
+	void					OverlapSphereActor				( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects, uint32 impactMask );
+	void					OverlapSphereActorGrenade		( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower );
+	void					ApplyExplosion					( NxActor* _pActor, const Math::Vect3f& _vPosSphere, float _fEffectRadius, float _fPower );
 
 	//----Update
 	void					Update							( float _ElapsedTime );

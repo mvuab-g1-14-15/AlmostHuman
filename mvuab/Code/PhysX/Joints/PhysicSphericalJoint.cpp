@@ -2,11 +2,12 @@
 #include "Joints\PhysicSphericalJoint.h"
 #include "NxSphericalJointDesc.h"
 #include "Actor\PhysicActor.h"
-#include "Utils\Logger.h"
-#include "Utils\Base.h"
+#include "Logger\Logger.h"
+////#include "Utils\Base.h"
+#include "Utils\Defines.h"
 
 #if defined(_DEBUG)
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 #endif
 
 CPhysicSphericalJoint::CPhysicSphericalJoint()
@@ -28,11 +29,11 @@ void CPhysicSphericalJoint::CreateJoint(NxJoint* joint)
 	CHECKED_DELETE(m_pSphericalDesc);
 }
 
-void CPhysicSphericalJoint::SetInfo	(const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB)
+void CPhysicSphericalJoint::SetInfo	(const Math::Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB)
 {
 	if (actorA==NULL)
 	{
-		LOGGER->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
 		return;
 	}
 
@@ -56,11 +57,11 @@ void CPhysicSphericalJoint::SetInfo	(const Vect3f& anchor, CPhysicActor* actorA,
  
 }
 
-void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f& _axis, CPhysicActor* actorA,  CPhysicActor* actorB)
+void CPhysicSphericalJoint::SetInfoComplete	(const Math::Vect3f& anchor, const Math::Vect3f& _axis, CPhysicActor* actorA,  CPhysicActor* actorB)
 {
 	if (actorA==NULL)
 	{
-		LOGGER->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
 		return;
 	}
 
@@ -122,7 +123,7 @@ void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicA
 {
   if (actorA==NULL)
 	{
-		LOGGER->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
 		return;
 	}
 

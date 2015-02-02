@@ -31,15 +31,15 @@ public:
 	//--- Init and End protocols------------------------------------------
 	CPhysicController ( float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset
 												, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData
-												, const Vect3f& _vPos = Vect3f ( 0.f, 0.f, 0.f ), float _fGravity = -9.8f );
+												, const Math::Vect3f& _vPos = Math::Vect3f ( 0.f, 0.f, 0.f ), float _fGravity = -9.8f );
 
-	CPhysicController ( Vect3f _Dim, float _fSlope, float _fSkinwidth, float _fStepOffset, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, 
-												const Vect3f& _vPos = Vect3f ( 0.f, 0.f, 0.f ), float _fGravity = -9.8f );
+	CPhysicController ( Math::Vect3f _Dim, float _fSlope, float _fSkinwidth, float _fStepOffset, ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, 
+												const Math::Vect3f& _vPos = Math::Vect3f ( 0.f, 0.f, 0.f ), float _fGravity = -9.8f );
 
 	~CPhysicController ( void );
 
 	//---- Main Functions ------------------------------------------------
-	void						Move					( const Vect3f& _vDirection, float _fElapsedTime );
+	void						Move					( const Math::Vect3f& _vDirection, float _fElapsedTime );
 	void						Jump					( float _fAmmount );
 	void						CreateController		( NxController* _pController, NxScene* _PScene );
 
@@ -51,8 +51,8 @@ public:
 	
 	void						SetCollision			( bool _bFlag );
 	
-	Vect3f						GetPosition				( void );
-	void						SetPosition				( const Vect3f& _vPos );
+	Math::Vect3f						GetPosition				( void );
+	void						SetPosition				( const Math::Vect3f& _vPos );
 	
 	float						GetGravity				( void ) const			{ return m_fGravity; }
 	void						SetGravity				( float _fGravity )		{ m_fGravity = _fGravity; }
@@ -95,7 +95,7 @@ private:
 	float							m_fSkinWidthControler;
 	float							m_fStepOffsetControler;
 
-	Vect3f							m_vExtensio;
+	Math::Vect3f							m_vExtensio;
 	
 	EControleType					m_Type;
 

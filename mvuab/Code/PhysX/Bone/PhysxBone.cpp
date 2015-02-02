@@ -10,7 +10,7 @@
 #include "Math\Matrix44.h"
 
 #include "RenderableObjects\AnimatedModel\AnimatedModelManager.h"
-#include "RenderManager.h"
+#include "GraphicsManager.h"
 #include <XML/XMLTreeNode.h>
 #include "Core.h"
 #include "base.h"
@@ -74,14 +74,14 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
                               l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy,
                               l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz).Get33RotationNormalized();
 
-  float l_fAngleX = FLOAT_PI_VALUE - l_Rotation.GetAngleX();
-  float l_fAngleY = FLOAT_PI_VALUE - l_Rotation.GetAngleY();
-  float l_fAngleZ = FLOAT_PI_VALUE - l_Rotation.GetAngleZ();
+  float l_fAngleX = pi32 - l_Rotation.GetAngleX();
+  float l_fAngleY = pi32 - l_Rotation.GetAngleY();
+  float l_fAngleZ = pi32 - l_Rotation.GetAngleZ();
 
   Mat44f l_Transform;
   l_Transform.SetIdentity();
   l_Transform.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
-  l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));
+  l_Transform.Translate(Math::Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));
 
   return l_Transform;
   
@@ -92,15 +92,15 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 {
   string l_szName;
-  Vect3f l_vSize,l_fMiddlePoint; 
+  Math::Vect3f l_vSize,l_fMiddlePoint; 
   float l_fDensity;
 
   l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
   l_fDensity            = _XMLObjects.GetFloatProperty("density");
-  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Vect3f(0.0f), false);
-  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Vect3f(0.0f), false);
+  l_fMiddlePoint        = _XMLObjects.GetMath::Vect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetMath::Vect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
-  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
+  CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
   m_vMiddlePoint = l_fMiddlePoint;
@@ -112,7 +112,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
   l_pUserData->SetColor(colGREEN);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_mTotal.GetPos(), l_fMiddlePoint,v3fZERO, NULL,m_iCollisionGroup);
+  l_pActor->AddBoxSphape(Math::Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_mTotal.GetPos(), l_fMiddlePoint,v3fZERO, NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f,1.0f);
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetActorSolverIterationCount(75);
@@ -129,15 +129,15 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 {
   string l_szName;
-  Vect3f l_vSize,l_fMiddlePoint; 
+  Math::Vect3f l_vSize,l_fMiddlePoint; 
   float l_fDensity;
 
   l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
   l_fDensity            = _XMLObjects.GetFloatProperty("density");
-  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Vect3f(0.0f), false);
-  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Vect3f(0.0f), false);
+  l_fMiddlePoint        = _XMLObjects.GetMath::Vect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetMath::Vect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
-  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
+  CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
   m_vMiddlePoint = l_fMiddlePoint;
@@ -146,7 +146,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
   l_pUserData->SetColor(colYELLOW);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddSphereShape(l_vSize.x*0.5f,m_vMatActor.GetPos(),Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,m_iCollisionGroup);
+  l_pActor->AddSphereShape(l_vSize.x*0.5f,m_vMatActor.GetPos(),Math::Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);
@@ -187,9 +187,9 @@ void CPhysxBone::UpdateCal3dFromPhysx()
 
       Mat33f l_vMat33 = l_vRelative.Get33RotationNormalized();
 
-      float l_fAngleX = FLOAT_PI_VALUE - l_vMat33.GetAngleX();
-      float l_fAngleY = FLOAT_PI_VALUE - l_vMat33.GetAngleY();
-      float l_fAngleZ = FLOAT_PI_VALUE - l_vMat33.GetAngleZ();
+      float l_fAngleX = pi32 - l_vMat33.GetAngleX();
+      float l_fAngleY = pi32 - l_vMat33.GetAngleY();
+      float l_fAngleZ = pi32 - l_vMat33.GetAngleZ();
 
       NxMat33 l_vMat33PhysxX;
       NxMat33 l_vMat33PhysxY;

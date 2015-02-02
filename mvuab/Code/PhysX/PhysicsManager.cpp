@@ -3,7 +3,7 @@
 #include "Assert.h"
 #include "PhysicsManager.h"
 #include "XML\XMLTreeNode.h"
-#include "Utils\Base.h"
+////#include "Utils\Base.h"
 
 ////----PhysX Includes-------------
 #undef min
@@ -24,18 +24,22 @@
 #include "Utils\PhysicUserData.h"
 ////--------------------------------
 
-#include "RenderManager.h"
-#include "Utils\Exception.h"
-#include "Utils\Logger.h"
-#include "Utils\Base.h"
+#include "Utils\Defines.h"
+
+#include "GraphicsManager.h"
+//#include "Utils\Exception.h"
+#include "Logger\Logger.h"
+////#include "Utils\Base.h"
 
 #if defined(_DEBUG)
-	#include "Utils\MemLeaks.h"
+	#include "Memory\MemLeaks.h"
 #endif
 
 // -----------------------------------------
 //			CONSTRUCTOR/DESTRUCTOR
 // -----------------------------------------
+
+using namespace Math;
 
 CPhysicsManager::CPhysicsManager( void )
 	: m_szConfigFileName	( "" )
@@ -63,7 +67,7 @@ bool CPhysicsManager::Init ( void )
 	m_bIsOk = (m_pMyAllocator != NULL);
 	if (m_bIsOk)
 	{
-		LOGGER->AddNewLog(ELL_INFORMATION, "PhysicsManager:: Inicializando la libreria PhysX");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "PhysicsManager:: Inicializando la libreria PhysX");
 		// Initialize PhysicsSDK
 		NxPhysicsSDKDesc l_SDK_Desc;
 		NxSDKCreateError errorCode = NXCE_NO_ERROR;
@@ -74,9 +78,9 @@ bool CPhysicsManager::Init ( void )
 		m_bIsOk = (m_pPhysicsSDK != NULL);
 		if (m_bIsOk)
 		{
-			LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: Creado el PhysXSDK" );
-			LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---" );
-			LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: Creado el PhysXSDK" );
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---" );
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
       
 			m_pPhysicsSDK->setParameter( NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth );
 
@@ -88,7 +92,7 @@ bool CPhysicsManager::Init ( void )
 			m_pPhysicsSDK->setParameter ( NX_CONTINUOUS_CD, 1 );
 
 			// Create a scene
-			LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity);
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity);
 			NxSceneDesc sceneDesc;
 			
 			sceneDesc.gravity = NxVec3(0.0f, m_InitParams.m_fGravity, 0.0f);
@@ -103,11 +107,11 @@ bool CPhysicsManager::Init ( void )
 			m_bIsOk = (m_pScene != NULL);
 			if (m_bIsOk)
 			{
-				LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
-				LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
-				LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:", m_InitParams.m_StaticFriction_DefMat );
-				LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:", m_InitParams.m_DynamicFriction_DefMat );
-				LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> ----END PhsX Settings---" );
+				CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
+				CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
+				CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:", m_InitParams.m_StaticFriction_DefMat );
+				CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:", m_InitParams.m_DynamicFriction_DefMat );
+				CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> ----END PhsX Settings---" );
 				
 				// Set default material
 				//TODO: Borrar líneas
@@ -125,12 +129,12 @@ bool CPhysicsManager::Init ( void )
 				m_bIsOk = ( m_pControllerManager != NULL );
 				if ( m_bIsOk )
 				{
-					LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Creado el controlador de caracteres" );
+					CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Creado el controlador de caracteres" );
 					m_pCookingMesh = new CPhysicCookingMesh();
 					assert ( m_pCookingMesh );
 					m_bIsOk = m_pCookingMesh->Init ( m_pPhysicsSDK, m_pMyAllocator );
 					if ( m_bIsOk ) {
-						LOGGER->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Creado el CookingMesh" );
+						CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "PhysicsManager::Init-> Creado el CookingMesh" );
 					}
 
 				}// isOk m_pControllerManager?
@@ -142,7 +146,7 @@ bool CPhysicsManager::Init ( void )
 	if ( !m_bIsOk )
 	{
 		std::string msg_error = "PhysicsManager::Init-> Error en la inicializacion de PhysX";
-		LOGGER->AddNewLog ( ELL_ERROR, msg_error.c_str() );
+		CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, msg_error.c_str() );
 		Release();
 		throw CException ( __FILE__, __LINE__, msg_error );
 	}
@@ -247,7 +251,7 @@ void CPhysicsManager::ReleaseElement ( const std::string &_ase )
 //----------------------------------------------------------------------------
 bool CPhysicsManager::Load ( const std::string &_PhysXConfig )
 {
-	LOGGER->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Load-->Loading physics." );
+	CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Load-->Loading physics." );
 	m_szConfigFileName = _PhysXConfig;
 	Init();
 	return LoadXML();
@@ -258,7 +262,7 @@ bool CPhysicsManager::Load ( const std::string &_PhysXConfig )
 //----------------------------------------------------------------------------
 bool CPhysicsManager::Reload ( void )
 {
-	LOGGER->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Reload-> Reloading physics.");
+	CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Reload-> Reloading physics.");
 
 	/* By XMA */
 	ReleaseToReload();
@@ -269,7 +273,7 @@ bool CPhysicsManager::Reload ( void )
 
 bool CPhysicsManager::ReloadXML ( const std::string &FileName )
 {
-	LOGGER->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Reload-> Reloading physics.");
+	CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::Reload-> Reloading physics.");
 	Release ();
 //	return LoadXML ();
 
@@ -283,7 +287,7 @@ bool CPhysicsManager::ReloadXML ( const std::string &FileName )
 //----------------------------------------------------------------------------
 bool CPhysicsManager::LoadXML ( void ) 
 {
-	LOGGER->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::LoadXML --> Loading physic Files..." );
+	CLogger::GetSingletonPtr()->AddNewLog ( ELL_INFORMATION, "CPhysicsManager::LoadXML --> Loading physic Files..." );
 	/*CXMLTreeNode l_File;
 	
 	if ( l_File.LoadFile ( m_FileName.c_str () ) )
@@ -302,19 +306,19 @@ bool CPhysicsManager::LoadXML ( void )
 				}
 				else
 				{
-					LOGGER->AddNewLog ( ELL_WARNING, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't contain any tag different form <SCRIPT>.", m_FileName ); 
+					CLogger::GetSingletonPtr()->AddNewLog ( ELL_WARNING, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't contain any tag different form <SCRIPT>.", m_FileName ); 
 				}
 			}
 		}
 		else
 		{
-			LOGGER->AddNewLog ( ELL_ERROR, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't contain tag <SCRIPTS>.", m_FileName ); 
+			CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't contain tag <SCRIPTS>.", m_FileName ); 
 			return false;
 		}
 	}
 	else 
 	{
-		LOGGER->AddNewLog ( ELL_ERROR, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't exist or contain sintaxis errors.", m_FileName ); 
+		CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, "CPhysicsManager::LoadXML --> Error loading file %s. The file doesn't exist or contain sintaxis errors.", m_FileName ); 
 		return false;
 	}
 	*/
@@ -361,7 +365,7 @@ void CPhysicsManager::WaitForSimulation ( void )
 //----------------------------------------------------------------------------------------
 // Debug Render : dibuixa cada un dels actors trobats a l'escena si estem en mode debug
 //----------------------------------------------------------------------------------------
-void CPhysicsManager::DebugRender ( CRenderManager* _RM )
+void CPhysicsManager::DebugRender ( CGraphicsManager* _RM )
 {
 	assert( m_pScene != NULL );
 
@@ -380,7 +384,7 @@ void CPhysicsManager::DebugRender ( CRenderManager* _RM )
 //----------------------------------------------------------------------------
 // DrawActor : Dibuixa l'actor en mode debug
 //----------------------------------------------------------------------------
-void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
+void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 {
 	CPhysicUserData* physicUserData = NULL;
 	physicUserData = ( CPhysicUserData* ) _pActor->userData;
@@ -401,10 +405,10 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 		{
 		case NX_SHAPE_PLANE:
 			{
-				CColor color = colBLACK;
+				Math::CColor color = colBLACK;
 				float distance = shapes[nShapes]->isPlane()->getPlane().d;
 				NxVec3 normal =  shapes[nShapes]->isPlane()->getPlane().normal;
-				Vect3f n(normal.x,normal.y,normal.z);
+				Math::Vect3f n(normal.x,normal.y,normal.z);
 				_RM->DrawPlane(100.f, n, distance,color,40,40);
 			}
 			break;
@@ -422,9 +426,9 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 
 				_RM->SetTransform(m);
 				NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
-				CColor color = physicUserData->GetColor();
-				//CColor	color = colRED;
-				_RM->DrawCube(Vect3f(boxDim.x,boxDim.y,boxDim.z), color);
+				Math::CColor color = physicUserData->GetColor();
+				//Math::CColor	color = colRED;
+				_RM->DrawCube(Math::Vect3f(boxDim.x,boxDim.y,boxDim.z), color);
 				//_RM->DrawCube(boxDim.y*2,color);
 
 				_RM->SetTransform(m44fIDENTITY);
@@ -441,7 +445,7 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 				
 				_RM->SetTransform(m);
 				NxReal radius = shapes[nShapes]->isSphere()->getRadius();
-				CColor color = physicUserData->GetColor();
+				Math::CColor color = physicUserData->GetColor();
 				_RM->DrawSphere(radius, MAX_ARISTAS, color);
 			}
 			break;
@@ -460,15 +464,15 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 
 				const NxReal & radius = shapes[nShapes]->isCapsule()->getRadius();
 				const NxReal & height = shapes[nShapes]->isCapsule()->getHeight();
-				CColor color = physicUserData->GetColor();
-				translation.Translate(Vect3f(0.f, (height*0.5f), 0.f));
+				Math::CColor color = physicUserData->GetColor();
+				translation.Translate(Math::Vect3f(0.f, (height*0.5f), 0.f));
 				
 				total = m * translation;
 				_RM->SetTransform(total);
 			//	_RM->DrawSphere(radius, MAX_ARISTAS, color); 
 				_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
 
-				translation.Translate( Vect3f(0.f, -(height*0.5f), 0.f ));
+				translation.Translate( Math::Vect3f(0.f, -(height*0.5f), 0.f ));
 				total = m * translation;
 				_RM->SetTransform(total);
 			//	_RM->DrawSphere(radius, MAX_ARISTAS, color);  
@@ -476,7 +480,7 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 				/* By XMA */
 				for(float h = -(height*0.5f); h <= (height*0.5f); h += (height*0.125f))
 				{
-					translation.Translate(Vect3f(0.f, h, 0.f));
+					translation.Translate(Math::Vect3f(0.f, h, 0.f));
 					total = m * translation;
 					_RM->SetTransform(total);
 					if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
@@ -504,7 +508,7 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 				Point* points = (Point *)meshDesc.points;
 				Triangle* triangles = (Triangle *)meshDesc.triangles;
 
-				CColor color = physicUserData->GetColor();
+				Math::CColor color = physicUserData->GetColor();
 				NxF32 m_aux[16];
 				mesh->getGlobalPose().getColumnMajor44(m_aux);
 				Mat44f m(	m_aux[0], m_aux[4], m_aux[8], m_aux[12], 
@@ -514,12 +518,12 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CRenderManager* _RM )
 				
 				_RM->SetTransform(m);
 				
-				Vect3f a,b,c;
+				Math::Vect3f a,b,c;
 				while(nbTriangles--)
 				{
-					a = Vect3f(points[triangles->p0].x, points[triangles->p0].y,points[triangles->p0].z);
-					b = Vect3f(points[triangles->p1].x, points[triangles->p1].y,points[triangles->p1].z);
-					c = Vect3f(points[triangles->p2].x, points[triangles->p2].y,points[triangles->p2].z);
+					a = Math::Vect3f(points[triangles->p0].x, points[triangles->p0].y,points[triangles->p0].z);
+					b = Math::Vect3f(points[triangles->p1].x, points[triangles->p1].y,points[triangles->p1].z);
+					c = Math::Vect3f(points[triangles->p2].x, points[triangles->p2].y,points[triangles->p2].z);
 
 					_RM->DrawLine(a, b, color);
 					_RM->DrawLine(b, c, color);
@@ -851,7 +855,7 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton (float size)
 	return m_pPhysicsSDK->createCCDSkeleton(stm);
 }
 
-//CPhysicUserData* CPhysicsManager::RaycastClosestActor ( const Vect3f _vPosRay, const Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info )
+//CPhysicUserData* CPhysicsManager::RaycastClosestActor ( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info )
 //{
 //  //NxUserRaycastReport::ALL_SHAPES
 //	assert(m_pScene != NULL);
@@ -877,13 +881,13 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton (float size)
 //	assert(impactObject);
 //
 //	_Info.m_fDistance		= hit.distance;
-//	_Info.m_Normal			= Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
-//	_Info.m_CollisionPoint	= Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z ); 
+//	_Info.m_Normal			= Math::Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
+//	_Info.m_CollisionPoint	= Math::Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z ); 
 //
 //	return impactObject;
 //}
 
-CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Vect3f _vPosRay, const Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance )
+CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance )
 {
   //NxUserRaycastReport::ALL_SHAPES
 	assert(m_pScene != NULL);
@@ -912,13 +916,13 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Vect3f _vPosRay, co
 	assert(impactObject);
 
 	_Info.m_fDistance		= hit.distance;
-	_Info.m_Normal			= Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
-	_Info.m_CollisionPoint	= Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
+	_Info.m_Normal			= Math::Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
+	_Info.m_CollisionPoint	= Math::Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
 
 	return impactObject;
 }
 
-CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot ( const Vect3f _vPosRay, const Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _fPower )
+CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot ( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _fPower )
 {
   
   //NxUserRaycastReport::ALL_SHAPES
@@ -943,10 +947,10 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot ( const Vect3f _vPosR
 	assert(impactObject);
 
 	_Info.m_fDistance		= hit.distance;
-	_Info.m_Normal			= Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
-	_Info.m_CollisionPoint	= Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z ); 
+	_Info.m_Normal			= Math::Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
+	_Info.m_CollisionPoint	= Math::Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z ); 
 
-	Vect3f l_vDirection( _vDirRay.x-_vPosRay.x,_vDirRay.y-_vPosRay.y,_vDirRay.z-_vPosRay.z );
+	Math::Vect3f l_vDirection( _vDirRay.x-_vPosRay.x,_vDirRay.y-_vPosRay.y,_vDirRay.z-_vPosRay.z );
 	l_vDirection.Normalize();
 
 	NxVec3 l_vDirectionVec( _vDirRay.x, _vDirRay.y, _vDirRay.z ); 
@@ -956,7 +960,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot ( const Vect3f _vPosR
 	return impactObject;
 }
 
-void CPhysicsManager::OverlapSphereActor ( float _fRadiusSphere, const Vect3f& _vPosSphere, std::vector<CPhysicUserData*> &_ImpactObjects, uint32 _uiImpactMask )
+void CPhysicsManager::OverlapSphereActor ( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, std::vector<CPhysicUserData*> &_ImpactObjects, uint32 _uiImpactMask )
 {
 	assert ( m_pScene );
 
@@ -998,7 +1002,7 @@ void CPhysicsManager::OverlapSphereActor ( float _fRadiusSphere, const Vect3f& _
   delete shapes;
 }
 
-void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower)
+void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower)
 {
 	assert(m_pScene);
 
@@ -1083,16 +1087,16 @@ void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3
 ////	//   ];
 ////}
 
-void CPhysicsManager::ApplyExplosion(NxActor* _pActor,const Vect3f& _vPosSphere, float _fEffectRadius, float _fPower)
+void CPhysicsManager::ApplyExplosion(NxActor* _pActor,const Math::Vect3f& _vPosSphere, float _fEffectRadius, float _fPower)
 {
 
-	Vect3f l_vVelocityDirection;
-	Vect3f l_vActorPosition;
+	Math::Vect3f l_vVelocityDirection;
+	Math::Vect3f l_vActorPosition;
 	float l_fDistance;
 	float l_fTotalPower;
 
 	NxVec3 l_vPos = _pActor->getGlobalPosition();
-	l_vActorPosition = Vect3f(l_vPos.x,l_vPos.y,l_vPos.z);
+	l_vActorPosition = Math::Vect3f(l_vPos.x,l_vPos.y,l_vPos.z);
 
 	l_vVelocityDirection = l_vActorPosition-_vPosSphere;
 	l_vVelocityDirection.Normalize();
@@ -1331,7 +1335,7 @@ bool CPhysicsManager::CreateMeshFromXML(const std::string &FileName)
 	CXMLTreeNode newFile;
 	if (!newFile.LoadFile(FileName.c_str()))
 	{
-		LOGGER->AddNewLog(ELL_WARNING, "ERROR loading the file %s.\n", FileName);
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "ERROR loading the file %s.\n", FileName);
 		return false;
 	}
 

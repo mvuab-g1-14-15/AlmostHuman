@@ -26,7 +26,7 @@ public:
 
   virtual void Release();
 
-  bool              Init(const std::string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup, CObject3D *_pEntity = 0);
+  bool              Init(const std::string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iMath::colisionGroup, CObject3D *_pEntity = 0);
   const CalSkeleton* GetSkeleton()                        {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
   const Mat44f&     GetTransform()                 {return m_mTransform;};
@@ -40,7 +40,7 @@ public:
   void              SetRagdollActive(bool _bRagdollActive);
   void              WakeUpPhysxBones();
   void              SleepPhysxBones();
-  void              SetCollisions(bool _bValue);
+  void              SetMath::collisions(bool _bValue);
   bool              IsRagdollPhysXActor(const std::string& _szName);
   CPhysxBone*       GetPhysxBoneByName(const std::string& _szName);
 

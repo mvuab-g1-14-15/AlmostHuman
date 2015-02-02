@@ -11,7 +11,7 @@
 #include "NxActor.h"
 //-------------------------------
 
-
+using namespace Math;
 
 // -----------------------------------------
 //		  CONSTRUCTORS / DESTRUCTOR
@@ -120,7 +120,7 @@ void CPhysicActor::CreateActor ( NxActor* _pActor )
 	Destroy();
 }
 
-void CPhysicActor::CreateBoxTrigger ( const Vect3f& _vGlobalPos, const Vect3f& _vSize, uint32 _uiGroup )
+void CPhysicActor::CreateBoxTrigger ( const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vSize, uint32 _uiGroup )
 {
 	assert ( m_pPhXActorDesc );
 	NxBoxShapeDesc* boxDesc = new NxBoxShapeDesc();
@@ -133,7 +133,7 @@ void CPhysicActor::CreateBoxTrigger ( const Vect3f& _vGlobalPos, const Vect3f& _
 	m_pPhXActorDesc->shapes.pushBack ( boxDesc );
 }
 
-void CPhysicActor::CreateSphereTrigger ( const Vect3f& _vGlobalPos, const float _fRadius, uint32 _uiGroup )
+void CPhysicActor::CreateSphereTrigger ( const Math::Vect3f& _vGlobalPos, const float _fRadius, uint32 _uiGroup )
 {
 	assert ( m_pPhXActorDesc );
 	NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
@@ -150,7 +150,7 @@ void CPhysicActor::CreateSphereTrigger ( const Vect3f& _vGlobalPos, const float 
 //					MÈTODES
 // -----------------------------------------
 
-void CPhysicActor::AddTorque(const Vect3f _vTorque)
+void CPhysicActor::AddTorque(const Math::Vect3f _vTorque)
 {
 	if (m_pPhXActor)
 	{
@@ -166,7 +166,7 @@ void CPhysicActor::AddTorque(const Vect3f _vTorque)
 	}
 }
 
-void CPhysicActor::AddSphereShape ( float radius, const Vect3f& _vGlobalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
+void CPhysicActor::AddSphereShape ( float radius, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 
@@ -189,7 +189,7 @@ void CPhysicActor::AddSphereShape ( float radius, const Vect3f& _vGlobalPos, con
   
 }
 
-void CPhysicActor::AddBoxSphape ( const Vect3f& _vSize, const Vect3f& _vGlobalPos, const Vect3f& localPos, const Vect3f& rotation, NxCCDSkeleton* skeleton, uint32 _uiGroup )
+void CPhysicActor::AddBoxSphape ( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, const Math::Vect3f& rotation, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 
@@ -232,7 +232,7 @@ void CPhysicActor::AddBoxSphape ( const Vect3f& _vSize, const Vect3f& _vGlobalPo
   
 }
 
-void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& _vGlobalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
+void CPhysicActor::AddCapsuleShape (float radius, float height, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 
@@ -255,7 +255,7 @@ void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& _v
 	m_pPhXActorDesc->shapes.pushBack( capsuleDesc );
 }
 
-void CPhysicActor::AddMeshShape	( NxTriangleMesh* mesh, const Vect3f& _vGlobalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
+void CPhysicActor::AddMeshShape	( NxTriangleMesh* mesh, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 	assert(mesh);
@@ -280,7 +280,7 @@ void CPhysicActor::AddMeshShape	( NxTriangleMesh* mesh, const Vect3f& _vGlobalPo
 	m_pPhXActorDesc->shapes.pushBack( triangleMeshDesc );
 }
 
-void CPhysicActor::AddPlaneShape ( const Vect3f& _vNormal, float distance, uint32 _uiGroup )
+void CPhysicActor::AddPlaneShape ( const Math::Vect3f& _vNormal, float distance, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 
@@ -319,27 +319,27 @@ void CPhysicActor::Activate ( bool _bActivate)
   }
 }
 
-void CPhysicActor::AddImpulseAtPos ( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal )
+void CPhysicActor::AddImpulseAtPos ( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_IMPULSE, _bLocal);
 }
 
-void CPhysicActor::AddVelocityAtPos ( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal )
+void CPhysicActor::AddVelocityAtPos ( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_VELOCITY_CHANGE, _bLocal);
 }
 
-void CPhysicActor::AddAcelerationAtPos ( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal )
+void CPhysicActor::AddAcelerationAtPos ( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_ACCELERATION, _bLocal);
 }
 
-void CPhysicActor::AddForceAtPos ( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal )
+void CPhysicActor::AddForceAtPos ( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_FORCE, _bLocal);
 }
 
-void CPhysicActor::AddForceAtPos ( const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal )
+void CPhysicActor::AddForceAtPos ( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal )
 {
   if (m_pPhXActor)
   {
@@ -374,7 +374,7 @@ void CPhysicActor::CreateBody ( float density, float angularDamping, float linea
 	}	
 }
 
-void CPhysicActor::SetGlobalPosition (const Vect3f& _vPos )
+void CPhysicActor::SetGlobalPosition (const Math::Vect3f& _vPos )
 {
 	if(m_pPhXActorDesc)
   {
@@ -387,7 +387,7 @@ void CPhysicActor::SetGlobalPosition (const Vect3f& _vPos )
   }
 }
 
-void CPhysicActor::MoveGlobalPosition(const Vect3f& _vPos )
+void CPhysicActor::MoveGlobalPosition(const Math::Vect3f& _vPos )
 {
   if(m_pPhXActor)
   {
@@ -435,18 +435,18 @@ void CPhysicActor::SetActorSolverIterationCount ( int _iCount )
 	}
 }
 
-Vect3f CPhysicActor::GetAngularMomentum ( void )
+Math::Vect3f CPhysicActor::GetAngularMomentum ( void )
 {
   if (m_pPhXActor)
 	{
     NxVec3 l_nxMom = m_pPhXActor->getAngularMomentum();
-    return Vect3f(l_nxMom.x,l_nxMom.y,l_nxMom.z);
+    return Math::Vect3f(l_nxMom.x,l_nxMom.y,l_nxMom.z);
 	}
 
   return v3fZERO;
 }
 
-void CPhysicActor::SetAngularVelocity(const Vect3f _vVelocity)
+void CPhysicActor::SetAngularVelocity(const Math::Vect3f _vVelocity)
 {
 	if (m_pPhXActor)
 	{
@@ -462,12 +462,12 @@ void CPhysicActor::SetAngularVelocity(const Vect3f _vVelocity)
 	}
 }
 
-Vect3f CPhysicActor::GetAngularVelocity ( void )
+Math::Vect3f CPhysicActor::GetAngularVelocity ( void )
 {
   if (m_pPhXActor)
 	{
     NxVec3 l_nxVel = m_pPhXActor->getAngularVelocity();
-    return Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
+    return Math::Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
 	}
 
   return v3fZERO;
@@ -488,7 +488,7 @@ void CPhysicActor::SetKinematic ( bool _bValue )
 	}
 }
 
-void CPhysicActor::SetLinearVelocity ( const Vect3f& _vVelocity )
+void CPhysicActor::SetLinearVelocity ( const Math::Vect3f& _vVelocity )
 { 
 	if (m_pPhXActor)
 	{
@@ -504,12 +504,12 @@ void CPhysicActor::SetLinearVelocity ( const Vect3f& _vVelocity )
 	}
 }
 
-Vect3f CPhysicActor::GetLinearVelocity ( void )
+Math::Vect3f CPhysicActor::GetLinearVelocity ( void )
 {
   if (m_pPhXActor)
 	{
     NxVec3 l_nxVel = m_pPhXActor->getLinearVelocity();
-    return Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
+    return Math::Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
 	}
 
   return v3fZERO;
@@ -598,23 +598,23 @@ void CPhysicActor::SetContactReportThreshold ( float _fThreshold )
 	}
 }
 
-void CPhysicActor::SetRotation ( const Vect3f& _vRot )
+void CPhysicActor::SetRotation ( const Math::Vect3f& _vRot )
 {
   assert(m_pPhXActor);
 
 
   //no va bé, només rota de 0 a pi i repeteix.
   //angles between -pi and pi
-  Vect3f l_vRot = _vRot;
+  Math::Vect3f l_vRot = _vRot;
 
-  while(l_vRot.x > FLOAT_PI_VALUE)  l_vRot.x -= 2 * FLOAT_PI_VALUE;
-  while(l_vRot.x < -FLOAT_PI_VALUE) l_vRot.x += 2 * FLOAT_PI_VALUE;
+  while(l_vRot.x > pi32)  l_vRot.x -= 2 * pi32;
+  while(l_vRot.x < -pi32) l_vRot.x += 2 * pi32;
 
-  while(l_vRot.y > FLOAT_PI_VALUE)  l_vRot.y -= 2 * FLOAT_PI_VALUE;
-  while(l_vRot.y < -FLOAT_PI_VALUE) l_vRot.y += 2 * FLOAT_PI_VALUE;
+  while(l_vRot.y > pi32)  l_vRot.y -= 2 * pi32;
+  while(l_vRot.y < -pi32) l_vRot.y += 2 * pi32;
 
-  while(l_vRot.z > FLOAT_PI_VALUE)  l_vRot.z -= 2 * FLOAT_PI_VALUE;
-  while(l_vRot.z < -FLOAT_PI_VALUE) l_vRot.z += 2 * FLOAT_PI_VALUE;
+  while(l_vRot.z > pi32)  l_vRot.z -= 2 * pi32;
+  while(l_vRot.z < -pi32) l_vRot.z += 2 * pi32;
 
   Mat44f l_mat44;
   GetMat44(l_mat44);
@@ -624,9 +624,9 @@ void CPhysicActor::SetRotation ( const Vect3f& _vRot )
   
   l_rot44.RotByAnglesYXZ(l_vRot.y, l_vRot.x, l_vRot.z);
   
-  Vect3f l_rotScaleX(l_rot44.m00, l_rot44.m10, l_rot44.m20);
-  Vect3f l_rotScaleY(l_rot44.m01, l_rot44.m11, l_rot44.m21);
-  Vect3f l_rotScaleZ(l_rot44.m02, l_rot44.m12, l_rot44.m22);
+  Math::Vect3f l_rotScaleX(l_rot44.m00, l_rot44.m10, l_rot44.m20);
+  Math::Vect3f l_rotScaleY(l_rot44.m01, l_rot44.m11, l_rot44.m21);
+  Math::Vect3f l_rotScaleZ(l_rot44.m02, l_rot44.m12, l_rot44.m22);
   
   assert(l_rotScaleX * l_rotScaleX < 1.01f && l_rotScaleX * l_rotScaleX > 0.99f);
   assert(l_rotScaleY * l_rotScaleY < 1.01f && l_rotScaleY * l_rotScaleY > 0.99f);
@@ -660,21 +660,21 @@ void CPhysicActor::SetRotation ( const Mat33f& _vRot )
   SetMat44(l_rot44);
 }
 
-Vect3f CPhysicActor::GetPosition ( void )
+Math::Vect3f CPhysicActor::GetPosition ( void )
 {
 	assert(m_pPhXActor);
 	NxVec3 pos = m_pPhXActor->getGlobalPosition();
-	return Vect3f(pos.x, pos.y, pos.z);
+	return Math::Vect3f(pos.x, pos.y, pos.z);
 }
 
-Vect3f CPhysicActor::GetRotation ( void )
+Math::Vect3f CPhysicActor::GetRotation ( void )
 {
 	assert(m_pPhXActor);
   
 	 Mat44f l_mat44;
 	 GetMat44 ( l_mat44 );
 	
-	 Vect3f l_vRot;
+	 Math::Vect3f l_vRot;
 	 l_mat44.GetAnglesYXZ(l_vRot.y, l_vRot.x, l_vRot.z);
 
 	return l_vRot;

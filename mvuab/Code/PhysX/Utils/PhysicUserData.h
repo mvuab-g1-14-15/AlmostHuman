@@ -5,17 +5,18 @@
 
 #include <string>
 
-#include "Utils\Named.h"
+#include "Utils\Name.h"
 #include "Math\Color.h"
-#include "Utils\Base.h"
+////#include "Utils\Base.h"
 #include "Actor\PhysicController.h"
 #include "PhysicsDefs.h"
 
+using namespace Math;
 
 // ----- FOWARD Declarations -------//
 class CObject3D;
 class CPhysicActor;
-class CColor;
+class Math::CColor;
 //class CSteeringEntity;
 // ---------------------------------//
 
@@ -33,11 +34,11 @@ enum EUserDataFlag
 	UD_RENDER_USING_LIGHT1			= (1<<9),
 }; 
 
-class CPhysicUserData : public CNamed
+class CPhysicUserData : public CName
 {
 public:
 	CPhysicUserData				( const std::string& _szName, EUserDataFlag _eflags = UD_IS_HW_ACTOR, ECollisionGroup _uiGrup = ::ECG_ESCENE )	// Afegeixo el flag per distingir-lo
-		: CNamed				( )
+		: CName				( )
 		, m_bPaintPhysicObject	( false )
 		, m_ColorPhysicObject	( colWHITE )
 		, m_pEntity				( 0 )
@@ -55,7 +56,7 @@ public:
 	}
 
 	void						SetPaint			( bool _bFlag )							{ m_bPaintPhysicObject = _bFlag; };
-	void						SetColor			( const CColor& _Color )				{ m_ColorPhysicObject = _Color; };
+	void						SetColor			( const Math::CColor& _Color )				{ m_ColorPhysicObject = _Color; };
 	void						SetEntity			( CObject3D* _pEntity )					{ m_pEntity = _pEntity; };
 	void						SetActor			( CPhysicActor* _pActor )				{ m_pActor = _pActor; };
 	void						SetController		( CPhysicController* _pController )		{ m_pController = _pController; };
@@ -65,7 +66,7 @@ public:
 	void						SetMyCollisionGroup	( ECollisionGroup _uiGroup )			{ m_myCollisionGroup = _uiGroup; };
 	
 	inline bool					GetPaint			() const								{ return m_bPaintPhysicObject; };
-	inline const CColor&		GetColor			() const								{ return m_ColorPhysicObject; };
+	inline const Math::CColor&		GetColor			() const								{ return m_ColorPhysicObject; };
 	inline CObject3D* 			GetEntity			() const								{ return m_pEntity; };
 	inline CPhysicActor*		GetActor			() const								{ return m_pActor; };
 	inline CPhysicController*	GetController		() const								{ return m_pController; };
@@ -81,7 +82,7 @@ public:
 private:
 	float				m_fRadius;
 	bool				m_bPaintPhysicObject;
-	CColor				m_ColorPhysicObject;
+	Math::CColor				m_ColorPhysicObject;
 	CPhysicActor*		m_pActor;
 	CPhysicController*	m_pController;
 	CObject3D*			m_pEntity;

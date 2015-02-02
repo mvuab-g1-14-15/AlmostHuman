@@ -1,8 +1,8 @@
-#include "Utils\Base.h"
+//#include "Utils\Base.h"
 #include "Jump\Jump.h"
 
 #if defined(_DEBUG)
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 #endif
 
 CJump::CJump()

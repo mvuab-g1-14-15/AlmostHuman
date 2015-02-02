@@ -3,10 +3,11 @@
 #include "NxRevoluteJointDesc.h"
 #include "NxRevoluteJoint.h"
 #include "Actor\PhysicActor.h"
-#include "Utils\Logger.h"
+#include "Logger\Logger.h"
+#include "Utils\Defines.h"
 
 #if defined(_DEBUG)
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 #endif
 
 CPhysicRevoluteJoint::CPhysicRevoluteJoint()
@@ -28,11 +29,11 @@ void CPhysicRevoluteJoint::CreateJoint(NxJoint* joint)
 	CHECKED_DELETE(m_pRevoluteDesc);
 }
 
-void CPhysicRevoluteJoint::SetInfo	(const Vect3f& axis, const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB)
+void CPhysicRevoluteJoint::SetInfo	(const Math::Vect3f& axis, const Math::Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB)
 {
 	if (actorA==NULL)
 	{
-		LOGGER->AddNewLog(ELL_ERROR, "PhysicRevoluteJoint:: El primer actor pasado como argumento no puede ser null");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "PhysicRevoluteJoint:: El primer actor pasado como argumento no puede ser null");
 		return;
 	}
 

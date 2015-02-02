@@ -2,11 +2,13 @@
 #include "Joints\PhysicFixedJoint.h"
 #include "NxFixedJointDesc.h"
 #include "Actor\PhysicActor.h"
-#include "Utils\Logger.h"
-#include "Utils\Base.h"
+////#include "Utils\Base.h"
+
+#include "Utils\Defines.h"
+#include "Logger\Logger.h"
 
 #if defined(_DEBUG)
-#include "Utils\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 #endif
 
 CPhysicFixedJoint::CPhysicFixedJoint()
@@ -32,7 +34,7 @@ void CPhysicFixedJoint::SetInfo	(CPhysicActor* actorA,  CPhysicActor* actorB)
 {
 	if (actorA==NULL)
 	{
-		LOGGER->AddNewLog(ELL_ERROR, "CPhysicFixedJoint:: El primer actor pasado como argumento no puede ser null");
+		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CPhysicFixedJoint:: El primer actor pasado como argumento no puede ser null");
 		return;
 	} 
 
