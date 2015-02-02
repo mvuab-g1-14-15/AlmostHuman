@@ -144,10 +144,16 @@ bool CEffect::LoadEffect()
 
   LPD3DXBUFFER l_ErrorBuffer = 0;
 
+  D3DXMACRO pDefines [2];
+  pDefines[0].Name = "_NORMAL_MAP";
+  pDefines[0].Definition = "TRUE";
+  pDefines[1].Name = "_SELF_ILLUM";
+  pDefines[1].Definition = "TRUE";
+
   HRESULT l_HR = D3DXCreateEffectFromFile(
                    l_Device,
                    m_FileName.c_str(),
-                   0, // CONST D3DXMACRO* pDefines,
+                   0, // [CONST D3DXMACRO* pDefines,] pDefines,
                    0, // LPD3DXINCLUDE pInclude,
                    dwShaderFlags,
                    0, // LPD3DXEFFECTPOOL pPool,
