@@ -10,6 +10,53 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor\PhysicActor.cpp" />
+    <ClCompile Include="Actor\PhysicController.cpp" />
+    <ClCompile Include="Bone\PhysxBone.cpp" />
+    <ClCompile Include="Bone\PhysxSkeleton.cpp" />
+    <ClCompile Include="Cooking Mesh\PhysicCookingMesh.cpp" />
+    <ClCompile Include="Joints\PhysicFixedJoint.cpp" />
+    <ClCompile Include="Joints\PhysicRevoluteJoint.cpp" />
+    <ClCompile Include="Joints\PhysicSphericalJoint.cpp" />
+    <ClCompile Include="Jump\Jump.cpp" />
+    <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="Reports\PhysicCollisionReport.cpp" />
+    <ClCompile Include="Reports\PhysicTriggerReport.cpp" />
+    <ClCompile Include="Triggers\Trigger.cpp" />
+    <ClCompile Include="Triggers\TriggerManager.cpp" />
+    <ClCompile Include="Utils\PhysicASELoader.cpp" />
+    <ClCompile Include="Utils\PhysicStream.cpp" />
+    <ClCompile Include="Utils\PhysicUserAllocator.cpp" />
+    <ClCompile Include="Utils\PhysXObjManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor\PhysicActor.h" />
+    <ClInclude Include="Actor\PhysicController.h" />
+    <ClInclude Include="Bone\PhysxBone.h" />
+    <ClInclude Include="Bone\PhysxSkeleton.h" />
+    <ClInclude Include="Cooking Mesh\PhysicCookingMesh.h" />
+    <ClInclude Include="Joints\JointsDefs.h" />
+    <ClInclude Include="Joints\PhysicFixedJoint.h" />
+    <ClInclude Include="Joints\PhysicRevoluteJoint.h" />
+    <ClInclude Include="Joints\PhysicSphericalJoint.h" />
+    <ClInclude Include="Jump\Jump.h" />
+    <ClInclude Include="PhysicMaterial\PhysicMaterial.h" />
+    <ClInclude Include="PhysicsDefs.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Reports\PhysicCollisionReport.h" />
+    <ClInclude Include="Reports\PhysicsControllerHitReport.h" />
+    <ClInclude Include="Reports\PhysicTriggerReport.h" />
+    <ClInclude Include="Triggers\Trigger.h" />
+    <ClInclude Include="Triggers\TriggerManager.h" />
+    <ClInclude Include="Utils\PhysicASELoader.h" />
+    <ClInclude Include="Utils\PhysicStream.h" />
+    <ClInclude Include="Utils\PhysicUserAllocator.h" />
+    <ClInclude Include="Utils\PhysicUserData.h" />
+    <ClInclude Include="Utils\PhysXObjDefs.h" />
+    <ClInclude Include="Utils\PhysXObjManager.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{392190F1-755A-4E17-9A9C-C9C14939E8A5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
