@@ -171,7 +171,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		if fileSrcRenderableXML != undefined then
 		(
-			ExportRenderableObjectXMLFile selection fileSrcRenderableXML
+			ExportRenderableObjectXMLFile geometry fileSrcRenderableXML
 			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
 		)
 		
