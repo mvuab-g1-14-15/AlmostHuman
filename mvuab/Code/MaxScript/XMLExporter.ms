@@ -59,7 +59,10 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			format "Empty selection. Select any object \n"
 			return -1
 		)
-		local layers=#()
+		
+		--TODO: Petan los layers
+		
+		/*local layers=#()
 
 		for Obj in AllObj do
 		(
@@ -88,7 +91,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 				l_RootNode.AppendNode l_NewLayerNode
 				l_NewLayerNode.AddAttributeAsString "name" (getUserProp Obj "layer_render")
 			)
-		)
+		)*/
 		
 		for Obj in AllObj do
 		(
@@ -127,7 +130,8 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
 			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" Obj.Scale
-			l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
+			l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
+			--l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
 			
 		)
 	--)
