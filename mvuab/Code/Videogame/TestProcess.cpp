@@ -39,11 +39,11 @@ CTestProcess::CTestProcess() : CProcess(),
   m_Speed( 0.1f ),
   m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
-  // CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(15.0f,2.0f,0.0f),
-  //                                             Math::Vect3f(0.0f,2.0f,0.0f) );
-  //CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
+  CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-50.0f,2.0f,0.0f),
+                                          Math::Vect3f(0.0f,2.0f,0.0f) );
+  CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
-  //unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
+  unsigned short debug = VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
 
   //int i = 0;
 }
