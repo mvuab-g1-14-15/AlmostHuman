@@ -133,8 +133,8 @@ struct SVertexBuffer
 	fn AddVertex vertex =
 	(
 		local l_VertexStr = vertex.GetAsString()
-		local l_VertexIdx = 0
-		if m_VertexIdMap.ContainsKey l_VertexStr == false then
+		local l_VertexIdx = 1
+		if (m_VertexIdMap.ContainsKey (l_VertexStr)) == false then
 		(
 			append m_VertexList vertex
 			l_VertexIdx = m_VertexList.count-1

@@ -33,6 +33,8 @@ struct SVertex
 	
 	fn WriteToFile file =
 	(
+		format "Vertex info:\n"
+		format "\tType % \n" m_Type
 		format "\tPos: (%, %, %)\n" m_Position.x m_Position.z m_Position.y
 		WriteFloat file m_Position.x
 		WriteFloat file m_Position.z
@@ -42,9 +44,6 @@ struct SVertex
 		WriteFloat file m_Normal.x
 		WriteFloat file m_Normal.z
 		WriteFloat file m_Normal.y
-		
-		format "mTYPE % \n" m_Type
-		format "VERTEX_TYPE_TEXTURE1 % \n" VERTEX_TYPE_TEXTURE1
 		
 		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 		(

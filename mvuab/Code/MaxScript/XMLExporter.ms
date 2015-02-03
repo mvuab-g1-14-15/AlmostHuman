@@ -62,7 +62,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		
 		--TODO: Petan los layers
 		
-		/*local layers=#()
+		local layers=#()
 
 		for Obj in AllObj do
 		(
@@ -86,12 +86,19 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			)
 			else
 			(
-				layers[1] = getUserProp Obj "layer_render"
+				if (getUserProp Obj "layer_render") == undefined then
+				(
+					layers[1] = "solid"
+				)
+				else
+				(
+					layers[1] = getUserProp Obj "layer_render"
+				)
 				local l_NewLayerNode = xDoc.getNewNode "layer"
 				l_RootNode.AppendNode l_NewLayerNode
-				l_NewLayerNode.AddAttributeAsString "name" (getUserProp Obj "layer_render")
+				l_NewLayerNode.AddAttributeAsString "name" layers[1]
 			)
-		)*/
+		)
 		
 		for Obj in AllObj do
 		(
@@ -130,8 +137,16 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
 			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" Obj.Scale
-			l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
-			--l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
+			--l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
+			if (getUserProp Obj "layer_render") == undefined then
+			(
+				l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
+			)
+			else
+			(
+				l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
+			)
+			
 			
 		)
 	--)
