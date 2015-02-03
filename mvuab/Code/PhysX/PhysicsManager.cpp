@@ -153,12 +153,12 @@ bool CPhysicsManager::Init ( void )
 
 
 	/*Precompilation Directives*/
-#if defined( _DEBUG )
-#define USE_DEBUGGER
-#ifdef USE_DEBUGGER
+//#if defined( _DEBUG )
+//#define USE_DEBUGGER
+//#ifdef USE_DEBUGGER
 	m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect("127.0.0.1");
-#endif
-#endif
+//#endif
+//#endif
 
 	return m_bIsOk;
 }
@@ -428,11 +428,8 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 				NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
 				Math::CColor color = physicUserData->GetColor();
 				//Math::CColor	color = colRED;
-				_RM->DrawBox(boxDim.x,boxDim.y,boxDim.z, color);
+				_RM->DrawBox(boxDim.x*2,boxDim.y*2,boxDim.z*2, color);
 				//_RM->DrawCube(boxDim.y*2,color);
-
-				Math::Mat44f identity = Math::m44fIDENTITY;
-				_RM->SetTransform(identity);
 			}
 			break;
 		case NX_SHAPE_SPHERE:
@@ -547,6 +544,9 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 			break;
 		}
 	}
+
+	Math::Mat44f identity = Math::m44fIDENTITY;
+	_RM->SetTransform(identity);
 }
 
 //----------------------------------------------------------------------------

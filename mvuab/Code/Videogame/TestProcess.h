@@ -6,6 +6,8 @@
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
 
+class CPhysicActor;
+
 class CTestProcess : public CProcess
 {
 private:
@@ -15,6 +17,10 @@ private:
     float32             m_AngleMoon;
     Math::Vect2i        m_LastMousePoint;
     bool                m_PaintAll;
+
+	// TODO DELETE
+	CPhysicActor* m_pPhysicActor;
+	float time;
 
 public:
     CTestProcess();

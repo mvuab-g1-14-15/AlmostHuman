@@ -177,7 +177,6 @@ void CPhysicActor::AddSphereShape ( float radius, const Math::Vect3f& _vGlobalPo
 	m_vSphereDesc.push_back(sphereDesc);
 	sphereDesc->radius = radius;
 	sphereDesc->localPose.t = NxVec3(localPos.x, localPos.y, localPos.z);
-
 	m_pPhXActorDesc->globalPose.t = NxVec3 ( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
 
 	if (skeleton != NULL)
