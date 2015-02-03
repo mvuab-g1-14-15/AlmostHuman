@@ -20,7 +20,7 @@ class CObject3D;
 
 
 class CPhysxBone :
-  public CName,
+  public CName//,
   //public CBaseControl
 {
 public:
@@ -46,8 +46,8 @@ public:
   void                SetTransformAfterUpdate(const Mat44f& _mTransform);
   
   
-  bool                IsBoneRoot()                           {return m_bRoot;};
-  static Mat44f       GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
+  //bool                IsBoneRoot()                           {return m_bRoot;};
+  //static Mat44f       GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
   //Funcions per afegir la info del actor de fisica.
   bool				        AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity);

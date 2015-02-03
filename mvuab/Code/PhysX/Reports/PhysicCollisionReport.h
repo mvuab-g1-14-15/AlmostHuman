@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _PHYSIC_Math::colLISION_REPORT_H
-#define _PHYSIC_Math::colLISION_REPORT_H
+#ifndef _PHYSIC_COLLISION_REPORT_H
+#define _PHYSIC_COLLISION_REPORT_H
 
 //---Engine Includes---//
 #include "NxPhysics.h"
@@ -9,12 +9,12 @@
 
 class CPhysicUserData;
 
-class CPhysicMath::collisionReport : public NxUserContactReport
+class CPhysicCollisionReport : public NxUserContactReport
 {
 public:
 	//--- Init and End protoMath::cols------------------------------------------
-					CPhysicMath::collisionReport	( void ) {}	
-	virtual			~CPhysicMath::collisionReport	( void ) {}
+					CPhysicCollisionReport	( void ) {}	
+	virtual			~CPhysicCollisionReport	( void ) {}
 
 	//--- NxUserContactReport Interface	----------------------------------
 	void			onContactNotify	( NxContactPair& _Pair, NxU32 _Events );

@@ -20,6 +20,7 @@
 #include "Lights\LightManager.h"
 #include "Timer\Timer.h"
 #include "Console\Console.h"
+#include "PhysicsManager.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -64,6 +65,7 @@ CCore::CCore() :
   m_pEffectManager( new CEffectManager() ),
   m_pLightManager( new CLightManager() ),
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
+  m_pPhysicsManager( new CPhysicsManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
 {
@@ -99,6 +101,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pSceneRendererCommandManager);
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE(m_pConsole);
+  CHECKED_DELETE( m_pPhysicsManager);
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -122,6 +125,7 @@ void CCore::Update()
   //m_pRenderableObjectsManager->Update();
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
+  m_pPhysicsManager->Update(deltaTime);
 
   if( m_pActionManager->DoAction("ClearConsole") )
   {
@@ -135,9 +139,9 @@ void CCore::Render()
   m_pDebugWindowManager->Render();
   //m_pRenderableObjectsManager->Render();
   m_pRenderableObjectsLayersManager->Render();
-  m_pLightManager->Render();
   m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
+  m_pPhysicsManager->DebugRender(m_pGraphicsManager);
 }
 
 void CCore::LoadXml()
@@ -272,6 +276,8 @@ void CCore::InitManagers()
   m_pLightManager->Load( m_LightsPath );
 
   m_pSceneRendererCommandManager->Load(m_SceneRendererCommandPath);
+
+  m_pPhysicsManager->Init();
 }
 
 void CCore::Trace( const std::string& TraceStr )

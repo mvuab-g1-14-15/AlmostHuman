@@ -31,6 +31,7 @@ class CLightManager;
 class CTimer;
 class CConsole;
 class CSceneRendererCommandManager;
+class CPhysicsManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -79,6 +80,7 @@ private:
   CEffectManager*                     m_pEffectManager;
   CLightManager*                      m_pLightManager;
   CSceneRendererCommandManager*		  m_pSceneRendererCommandManager;
+  CPhysicsManager*					  m_pPhysicsManager;
   CTimer*                             m_pTimer;
   CConsole*                           m_pConsole;
   void LoadXml();
@@ -125,6 +127,7 @@ public:
   GET_SET_PTR( CEffectManager, EffectManager );
   GET_SET_PTR( CLightManager, LightManager );
   GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager );
+  GET_SET_PTR( CPhysicsManager, PhysicsManager );
   GET_SET_PTR( CTimer, Timer );
 };
 

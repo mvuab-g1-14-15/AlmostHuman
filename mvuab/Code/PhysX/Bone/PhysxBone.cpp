@@ -1,25 +1,27 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
-#include "PhysxBone.h"
+#include "Bone/PhysxBone.h"
 #include <cal3d/cal3d.h>
 #include "PhysicsManager.h"
-#include "PhysicActor.h"
-#include "PhysicController.h"
-#include "PhysicFixedJoint.h"
-#include "PhysicSphericalJoint.h"
-#include "PhysicUserData.h"
+#include "Actor/PhysicActor.h"
+#include "Actor/PhysicController.h"
+#include "Joints/PhysicFixedJoint.h"
+#include "Joints/PhysicSphericalJoint.h"
+#include "Utils/PhysicUserData.h"
 #include "Math\Matrix44.h"
 
-#include "RenderableObjects\AnimatedModel\AnimatedModelManager.h"
+#include "AnimatedModels\AnimatedModelsManager.h"
 #include "GraphicsManager.h"
 #include <XML/XMLTreeNode.h>
 #include "Core.h"
-#include "base.h"
+//#include "base.h"
 
 //---PhysX Includes---//
 #undef min
 #undef max
 #include "NxPhysics.h"
 //---------------------//
+
+using namespace Math;
 
 bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44, int _iColisionGroup)
 {
@@ -41,8 +43,9 @@ bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44, int _iColisionGroup)
     m_vChildListID.push_back(*iteratorChildId);
   }
 
-  SetOk(true);
-  return IsOk();
+  //SetOk(true);
+  //return IsOk();
+  return true;
 }
 
 void CPhysxBone::Release()
@@ -52,9 +55,6 @@ void CPhysxBone::Release()
   m_vChildListID.clear();
   
 }
-
-
-
 
 Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 {
@@ -97,8 +97,8 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 
   l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
   l_fDensity            = _XMLObjects.GetFloatProperty("density");
-  l_fMiddlePoint        = _XMLObjects.GetMath::Vect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
-  l_vSize               = _XMLObjects.GetMath::Vect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
+  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
   CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
   Mat44f l_vMatActor;
@@ -134,8 +134,8 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 
   l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
   l_fDensity            = _XMLObjects.GetFloatProperty("density");
-  l_fMiddlePoint        = _XMLObjects.GetMath::Vect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
-  l_vSize               = _XMLObjects.GetMath::Vect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
+  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
   CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
   Mat44f l_vMatActor;

@@ -23,6 +23,8 @@
 #include "Memory\MemLeaks.h"
 #endif
 
+#include "Utils\Name.h"
+
 CPhysXObjManager::CPhysXObjManager()
 	: m_Filename("")
 {
@@ -70,7 +72,7 @@ bool CPhysXObjManager::Reload()
 			{
 				std::string name = l_xml(i).GetPszProperty("name", "", true);
 				int type = l_xml(i).GetIntProperty("type", 0, true);
-				Math::Vect3f pos = l_xml(i).GetMath::Vect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
+				Math::Vect3f pos = l_xml(i).GetVect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
 				float yaw = l_xml(i).GetFloatProperty("yaw", 0.0f, true);
 				float pitch = l_xml(i).GetFloatProperty("pitch", 0.0f, true);
 				float roll = l_xml(i).GetFloatProperty("roll", 0.0f, true);
@@ -83,7 +85,7 @@ bool CPhysXObjManager::Reload()
 				{
 					TPhysXObjBox* pxBox = new TPhysXObjBox();
 
-					pxBox->m_Dimensions = l_xml(i).GetMath::Vect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
+					pxBox->m_Dimensions = l_xml(i).GetVect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
 
 					pxObj = pxBox;
 				}
@@ -98,8 +100,8 @@ bool CPhysXObjManager::Reload()
 				pxObj->SetPitch(pitch);
 				pxObj->SetRoll(roll);
 
-				bool isOk = this->AddResource(name, pxObj);
-				assert(isOk);
+				/*bool isOk = */this->AddResource(name, pxObj);
+				//assert(isOk);
 
 				if(activeStart)
 				{
@@ -109,9 +111,9 @@ bool CPhysXObjManager::Reload()
 
 					Math::Vect3f rotationVect = v3fZERO;
 
-					rotationVect.x = mathUtils::Deg2Rad(pxObj->GetPitch());
-					rotationVect.y = mathUtils::Deg2Rad(pxObj->GetYaw());
-					rotationVect.z = mathUtils::Deg2Rad(pxObj->GetRoll());
+					rotationVect.x = Math::Utils::Deg2Rad(pxObj->GetPitch());
+					rotationVect.y = Math::Utils::Deg2Rad(pxObj->GetYaw());
+					rotationVect.z = Math::Utils::Deg2Rad(pxObj->GetRoll());
 
 					TPhysXObjBox* pxBox = static_cast<TPhysXObjBox*>(pxObj);
 

@@ -9,12 +9,13 @@
 #include "Math\Vector3.h"
 #include "Object3D.h"
 #include "Utils\Types.h"
+#include "Utils\Name.h"
 
 #define PHYSX_OBJ_BOX	0x0001
 
 using namespace Math;
 
-struct TPhysXObj : public CObject3D
+struct TPhysXObj : public CObject3D, public CName
 {
 	int m_Type;
 	uint32 m_Group;

@@ -44,7 +44,7 @@ using namespace Math;
 CPhysicsManager::CPhysicsManager( void )
 	: m_szConfigFileName	( "" )
 	, m_bIsOk				( false )
-	, m_bDebugRenderMode	( false )
+	, m_bDebugRenderMode	( true )
 	, m_pPhysicsSDK			( NULL )
 	, m_pScene				( NULL )
 	, m_pControllerManager	( NULL )
@@ -148,7 +148,7 @@ bool CPhysicsManager::Init ( void )
 		std::string msg_error = "PhysicsManager::Init-> Error en la inicializacion de PhysX";
 		CLogger::GetSingletonPtr()->AddNewLog ( ELL_ERROR, msg_error.c_str() );
 		Release();
-		throw CException ( __FILE__, __LINE__, msg_error );
+		//throw CException ( __FILE__, __LINE__, msg_error ); TODO
 	}
 
 
@@ -428,10 +428,11 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 				NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
 				Math::CColor color = physicUserData->GetColor();
 				//Math::CColor	color = colRED;
-				_RM->DrawCube(Math::Vect3f(boxDim.x,boxDim.y,boxDim.z), color);
+				_RM->DrawBox(boxDim.x,boxDim.y,boxDim.z, color);
 				//_RM->DrawCube(boxDim.y*2,color);
 
-				_RM->SetTransform(m44fIDENTITY);
+				Math::Mat44f identity = Math::m44fIDENTITY;
+				_RM->SetTransform(identity);
 			}
 			break;
 		case NX_SHAPE_SPHERE:
@@ -446,7 +447,7 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 				_RM->SetTransform(m);
 				NxReal radius = shapes[nShapes]->isSphere()->getRadius();
 				Math::CColor color = physicUserData->GetColor();
-				_RM->DrawSphere(radius, MAX_ARISTAS, color);
+				_RM->DrawSphere(radius, color, MAX_ARISTAS);
 			}
 			break;
 		case NX_SHAPE_CAPSULE:
@@ -469,24 +470,25 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 				
 				total = m * translation;
 				_RM->SetTransform(total);
-			//	_RM->DrawSphere(radius, MAX_ARISTAS, color); 
-				_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
+			//	_RM->DrawSphere(radius, MAX_ARISTAS, color);
+				_RM->DrawCapsule(radius, height, 10, color);
+				//_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
 
 				translation.Translate( Math::Vect3f(0.f, -(height*0.5f), 0.f ));
 				total = m * translation;
 				_RM->SetTransform(total);
 			//	_RM->DrawSphere(radius, MAX_ARISTAS, color);  
-				_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
+				//_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
 				/* By XMA */
 				for(float h = -(height*0.5f); h <= (height*0.5f); h += (height*0.125f))
 				{
 					translation.Translate(Math::Vect3f(0.f, h, 0.f));
 					total = m * translation;
 					_RM->SetTransform(total);
-					if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
-					else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);
-				}  
-				_RM->DrawCylinderLines(radius, MAX_ARISTAS, -height, color); // By XMA
+					/*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
+					else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
+				} 
+				//_RM->DrawCylinder(radius, MAX_ARISTAS, -height, color); // By XMA
 			}
 			break;
 		case NX_SHAPE_CONVEX:
