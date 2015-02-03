@@ -243,7 +243,10 @@ void CStaticMesh::Render(CGraphicsManager *GM)
             m_Textures[i][j]->Activate(j);
         }
 
-        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource("MultiLightsTechnique"));
+		CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
+		unsigned short l_VertexType = m_RVs[i]->GetVertexType();
+		std::string l_EffectName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault(l_VertexType);
+        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource(l_EffectName));
     }
 }
 

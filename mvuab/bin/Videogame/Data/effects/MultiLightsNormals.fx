@@ -2,6 +2,15 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
+
+struct VertexVS {
+	float3 	Position	: POSITION;
+    float3 	Normal 		: NORMAL;
+	float2 	UV 			: TEXCOORD0;
+	float3 	Binormal 	: BINORMAL0;
+    float3 	Tangent 	: TANGENT0;
+};
+
 struct VertexPS
 {
     float4 HPosition : POSITION;
@@ -12,7 +21,7 @@ struct VertexPS
     float3 WorldBinormal : TEXCOORD4;
 };
 
-VertexPS RenderVS(TNORMAL_TAN_BI_T1_DIFF_VERTEX IN)
+VertexPS RenderVS(VertexVS IN)
 {
     VertexPS OUT=(VertexPS)0;
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
@@ -69,7 +78,7 @@ float4 RenderPS(VertexPS IN) : COLOR
 				l_Attenuation = l_Attenuation * SpotAttenuation(i, l_LightDirection);
 				//l_PixelColor = l_PixelColor * SpotAttenuation(i, l_LightDirection);
             }
-
+			
 			float3 l_Hn=normalize(normalize(g_CameraPosition-l_Position)-l_LightDirection);
 			float3 l_DiffuseContrib = l_TextureColor*saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[i];
 			float l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[i];

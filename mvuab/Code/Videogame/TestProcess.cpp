@@ -113,7 +113,7 @@ void CTestProcess::Render()
 
   pGraphicsManager->DrawAxis(5);
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
-  pGraphicsManager->DrawTeapot();
+  //pGraphicsManager->DrawTeapot();
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("render()");
 

@@ -29,9 +29,9 @@ struct TNORMAL_TAN_BI_T2_VERTEX {
 struct TNORMAL_TAN_BI_T1_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
+	float2 	UV 			: TEXCOORD0;
     float3 	Tangent 	: TANGENT0;
     float3 	Binormal 	: BINORMAL0;
-	float2 	UV 			: TEXCOORD0;
 };
 
 struct TNORMAL_T2_DIFF_VERTEX {

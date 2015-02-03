@@ -23,7 +23,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
-		PathLabel.text = "C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data"
+		PathLabel.text = "E:\Master\GameEngineUAB\mvuab\bin\Videogame\Data"
 	)
 	on SetPathButton pressed do
 	(
