@@ -74,7 +74,7 @@ struct SMaterial
 				(
 					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
 					-- Load the texture of bump mapping
-					local l_TextureBumpMappingFileName = mat.bumpMap.filenames
+					local l_TextureBumpMappingFileName = mat.bumpMap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
 				)
 			)
