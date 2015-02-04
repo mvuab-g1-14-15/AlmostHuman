@@ -1,5 +1,59 @@
-#include "samplers.fxh"
 #include "globals.fxh"
+
+sampler DiffuseSampler : register ( s0 ) = sampler_state
+{ 
+	MipFilter = LINEAR; 
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+};
+
+#ifdef _NORMAL_MAP
+sampler NormalSampler : register ( s1 ) = sampler_state
+{ 
+	MipFilter = LINEAR; 
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+};
+#endif
+
+#ifdef _SELF_ILLUM
+sampler LightMapSampler : register(
+#ifdef _NORMAL_MAP
+s2
+#else
+s1
+#endif
+) = sampler_state
+{
+	MipFilter = LINEAR;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+#endif
+
+#ifdef _REFLECTION
+samplerCUBE ReflectionSampler : register (
+#ifdef _SELF_ILLUM
+#ifdef _NORMAL_MAP
+s3
+#else
+s2
+#endif
+#else
+#ifdef _NORMAL_MAP
+s2
+#else
+s1
+#endif
+) = sampler_state
+{ 
+	MipFilter = ANISOTROPIC; 
+	MinFilter = ANISOTROPIC;
+	MagFilter = ANISOTROPIC;
+};
+#endif
 
 struct VertexVS
 {
@@ -57,30 +111,22 @@ float4 RenderPS(VertexPS IN) : COLOR
 	float3 Tn=normalize(IN.WorldTangent);
 	float3 Bn=normalize(IN.WorldBinormal);
 
-	float3 bump=g_Bump*(tex2D(S1LinearSampler,IN.UV).rgb - float3(0.5,0.5,0.5));
+	float3 bump=g_Bump*(tex2D(NormalSampler,IN.UV).rgb - float3(0.5,0.5,0.5));
 	l_Normal = l_Normal + bump.x*Tn + bump.y*Bn;
 	l_Normal = normalize(l_Normal);
 #endif
 			
 	float3 l_Position = IN.WorldPosition;
+
+	float4 l_DiffuseColor = tex2D(DiffuseSampler, IN.UV);
 	
-	// Init the color of the pixel with the color of the material
-	float4 l_PixelColor = float4(0.0, 0.0, 0.0, 1.0); //tex2D(S0LinearSampler, IN.UV);
-	
-	/*float3 l_CameraPosition = g_ViewInverseMatrix[3].xyz;
-	float3 l_CameraToPixel = normalize(l_CameraPosition - l_Position);
-	
-	float3 l_ReflectVector = reflect(l_CameraToPixel, l_Normal);
-	float4 l_EnvironmentColor = texCUBE(S0LineaWrapSampleCUBE, l_ReflectVector);
-	
-	l_PixelColor = l_PixelColor + l_EnvironmentColor;*/
+	float4 l_LightsContrib = float4(0.0, 0.0, 0.0, 1.0);
 	
 	for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
         if(g_LightsEnabled[i] == 1) 
         {
 			float3 l_LightDirection = normalize(l_Position-g_LightsPosition[i]);
-			float4 l_TextureColor = tex2D(S0LinearSampler, IN.UV);
 			float l_Attenuation = DistanceAttenuation(i, l_LightDirection );
             if(OMNI_LIGHT == g_LightsType[i])
             {
@@ -96,15 +142,27 @@ float4 RenderPS(VertexPS IN) : COLOR
             }
 
 			float3 l_Hn=normalize(normalize(g_CameraPosition-l_Position)-l_LightDirection);
-			float3 l_DiffuseContrib = l_TextureColor*saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[i];
+			float3 l_DiffuseContrib = saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[i];
 			float l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[i];
-			l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
+			l_LightsContrib = l_LightsContrib + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
         }
     }
 	
 #ifdef _SELF_ILLUM
-	l_SelfIllum = tex2D(ShadowMapTextureSampler, IN.UV2);
-	l_PixelColor = l_PixelColor * l_SelfIllum;
+	l_SelfIllumContrib = tex2D(LightMapSampler, IN.UV2);
+	l_LightsContrib = l_LightsContrib + l_SelfIllumContrib;
+#endif
+	
+#ifdef _REFLECTION
+	float3 l_CameraPosition = g_ViewInverseMatrix[3].xyz;
+	float3 l_CameraToPixel = normalize(l_CameraPosition - l_Position);
+	
+	float3 l_ReflectVector = reflect(l_CameraToPixel, l_Normal);
+	float4 l_EnvironmentColor = texCUBE(ReflectionSampler, l_ReflectVector);
+	
+	float4 l_PixelColor = l_LightsContrib * l_DiffuseColor + l_EnvironmentColor;
+#else
+	float4 l_PixelColor = l_LightsContrib * l_DiffuseColor;
 #endif
 	
 	return l_PixelColor;
