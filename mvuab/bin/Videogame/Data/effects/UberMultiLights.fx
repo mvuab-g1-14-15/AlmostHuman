@@ -91,7 +91,7 @@ VertexPS RenderVS(VertexVS IN)
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
     OUT.UV=IN.UV;
 #ifdef _SELF_ILLUM
-	OUT.UV2=IN:UV2
+	OUT.UV2=IN.UV2;
 #endif
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
     OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix);
@@ -149,7 +149,7 @@ float4 RenderPS(VertexPS IN) : COLOR
     }
 	
 #ifdef _SELF_ILLUM
-	l_SelfIllumContrib = tex2D(LightMapSampler, IN.UV2);
+	float4 l_SelfIllumContrib = tex2D(LightMapSampler, IN.UV2);
 	l_LightsContrib = l_LightsContrib + l_SelfIllumContrib;
 #endif
 	

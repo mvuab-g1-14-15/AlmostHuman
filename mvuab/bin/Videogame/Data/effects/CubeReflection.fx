@@ -1,62 +1,31 @@
 #include "globals.fxh"
 
-sampler DiffuseSampler : register ( s0 ) = sampler_state
+samplerCUBE ReflectionSampler : register ( s0 ) = sampler_state
 { 
 	MipFilter = LINEAR; 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
-};
-
-sampler NormalSampler : register ( s1 ) = sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-};
-
-sampler LightMapSampler : register(
-s2
-) = sampler_state
-{
-	MipFilter = LINEAR;
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	AddressU = Clamp;
-	AddressV = Clamp;
 };
 
 struct VertexVS
 {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
-    float3 	Tangent 	: TANGENT0;
-    float3 	Binormal 	: BINORMAL0;
-    float4 	Color 		: COLOR0;
-	float2 	UV 			: TEXCOORD0;
-    float2 	UV2 		: TEXCOORD1;
 };
 
 struct VertexPS
 {
     float4 HPosition		: POSITION;
-    float2 UV 				: TEXCOORD0;
-	float2 UV2				: TEXCOORD1;
     float3 Normal 			: TEXCOORD2;
 	float3 WorldPosition 	: TEXCOORD3;
-	float3 WorldTangent		: TEXCOORD4;
-    float3 WorldBinormal 	: TEXCOORD5;
 };
 
 VertexPS RenderVS(VertexVS IN)
 {
     VertexPS OUT=(VertexPS)0;
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
-    OUT.UV=IN.UV;
-	OUT.UV2=IN.UV2;
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
     OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix);
-	OUT.WorldTangent=mul(IN.Tangent.xyz, (float3x3)g_WorldMatrix);
-	OUT.WorldBinormal=mul(IN.Binormal.xyz, (float3x3)g_WorldMatrix);
     return OUT;
 }
 
@@ -64,17 +33,10 @@ float4 RenderPS(VertexPS IN) : COLOR
 {
 	// Obtain the normal of the face and the position
 	float3 l_Normal= normalize(IN.Normal);
-	
-	float3 Tn=normalize(IN.WorldTangent);
-	float3 Bn=normalize(IN.WorldBinormal);
-
-	float3 bump=g_Bump*(tex2D(NormalSampler,IN.UV).rgb - float3(0.5,0.5,0.5));
-	l_Normal = l_Normal + bump.x*Tn + bump.y*Bn;
-	l_Normal = normalize(l_Normal);
 			
 	float3 l_Position = IN.WorldPosition;
 
-	float4 l_DiffuseColor = tex2D(DiffuseSampler, IN.UV);
+	float4 l_DiffuseColor = float4(0.2, 0.2, 0.4, 1.0);
 	
 	float4 l_LightsContrib = float4(0.0, 0.0, 0.0, 1.0);
 	
@@ -104,16 +66,18 @@ float4 RenderPS(VertexPS IN) : COLOR
         }
     }
 	
-	float4 l_SelfIllumContrib = tex2D(LightMapSampler, IN.UV2);
-	l_LightsContrib = l_LightsContrib + l_SelfIllumContrib;
-
+	float3 l_CameraPosition = g_ViewInverseMatrix[3].xyz;
+	float3 l_CameraToPixel = normalize(l_CameraPosition - l_Position);
 	
-	float4 l_PixelColor = l_LightsContrib * l_DiffuseColor;
+	float3 l_ReflectVector = reflect(l_CameraToPixel, l_Normal);
+	float4 l_EnvironmentColor = texCUBE(ReflectionSampler, l_ReflectVector);
+	
+	float4 l_PixelColor = l_LightsContrib * l_DiffuseColor + l_EnvironmentColor;
 	
 	return l_PixelColor;
 }
 
-technique MultiLightsNormalsLightMapTechnique
+technique MultiLightsTechnique
 {
     pass p0
     {

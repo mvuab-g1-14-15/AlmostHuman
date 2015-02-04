@@ -82,6 +82,14 @@ struct SMaterial
 			(
 				m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
 				m_Color = bit.shift mat.diffuse.r 24 + bit.shift mat.diffuse.g 16 + bit.shift mat.diffuse.b 8 + mat.diffuse.a
+				
+				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
+				(
+					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
+					-- Load the texture of bump mapping
+					local l_TextureBumpMappingFileName = mat.bumpMap.filename
+					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+				)
 			)
 		)
 	),
@@ -410,7 +418,8 @@ struct SMesh
 			
 				if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 				(
-					l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
+					--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
+					l_Color = 0
 					l_NewVertex1.m_Color = l_Color
 					l_NewVertex2.m_Color = l_Color
 					l_NewVertex3.m_Color = l_Color

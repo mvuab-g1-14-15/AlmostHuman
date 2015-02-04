@@ -90,6 +90,32 @@ struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
     }
 };
 
+struct TNORMAL_TAN_BI_DIFF_VERTEX
+{
+    float x, y, z;
+    float nx, ny, nz;
+    float tanx, tany, tanz;
+    float bx, by, bz;
+    unsigned long color;
+    
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_DIFFUSE;
+    }
+    
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
+};
+
 struct TNORMAL_TAN_BI_T2_VERTEX
 {
     float x, y, z;

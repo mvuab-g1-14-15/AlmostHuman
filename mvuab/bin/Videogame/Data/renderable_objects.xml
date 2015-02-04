@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <layer name="solid" />
-  <MeshInstance name="Box001" core="Box001" pos="-15.3889 0.0 14.8627" yaw="0.0" pitch="0.0" roll="0.0" scale="0.05592 0.05592 0.05592" layer="solid" />
-  <MeshInstance name="Box002" core="Box002" pos="-5.7036 0.0 14.8627" yaw="0.0" pitch="0.0" roll="0.0" scale="0.05592 0.05592 0.05592" layer="solid" />
-  <MeshInstance name="Box003" core="Box003" pos="5.8389 0.0 14.8627" yaw="0.0" pitch="0.0" roll="0.0" scale="0.05592 0.05592 0.05592" layer="solid" />
+	<layer name="solid" default="true"/>
+	<layer name="alpha_objects"/>
+	<layer name="alpha_blend_objects"/>
+	<layer name="particles"/>
+	<MeshInstance name="Box001" core="Box001" pos="-2.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh" layer="solid"/>
+	<MeshInstance name="Box002" core="Box002" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh"  layer="solid"/>
+	<MeshInstance name="Box003" core="Box003" pos="2.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh"  layer="solid"/>
+	<MeshInstance name="Sphere001" core="Sphere001" pos="0.0 0.0 2.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" visible="true" create_physics="true" physics_type="triangle_mesh"  layer="solid"/>
 </RenderableObjects>

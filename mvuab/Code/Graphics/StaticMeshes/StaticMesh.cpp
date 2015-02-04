@@ -70,15 +70,15 @@ bool CStaticMesh::Load(const std::string &FileName)
         unsigned short l_VertexType = 0;
         std::fread(&l_VertexType, sizeof(unsigned short int), 1, l_pFile);
 
+		l_VertexTypes.push_back(l_VertexType);
+        m_VertexTypes.push_back(l_VertexType);
+
         unsigned short l_numTexturas = 0;
 		std::fread(&l_numTexturas, sizeof(unsigned short int), 1, l_pFile);
 
         std::vector<CTexture *> l_Texture;
         for(unsigned int j = 0; j < l_numTexturas; ++j)
         {
-            l_VertexTypes.push_back(l_VertexType);
-            m_VertexTypes.push_back(l_VertexType);
-
             unsigned short l_TextureLength = 0;
             std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
             ++l_TextureLength;
@@ -147,6 +147,8 @@ bool CStaticMesh::Load(const std::string &FileName)
 
         else if(l_VertexTypes[i] == TT1_VERTEX::GetVertexType()) 
             l_dataSize = sizeof(TT1_VERTEX) * l_VrtexCount;
+		else if(l_VertexTypes[i] == 79) 
+            l_dataSize = sizeof(TNORMAL_TAN_BI_DIFF_VERTEX) * l_VrtexCount;
 
         l_VtxsAddress = (void *) malloc(l_dataSize);
         std::fread(l_VtxsAddress, l_dataSize, 1, l_pFile);
@@ -203,6 +205,8 @@ bool CStaticMesh::Load(const std::string &FileName)
         
         else if(l_VertexTypes[i] == TT1_VERTEX::GetVertexType()) 
             l_RV = new CIndexedVertexs<TT1_VERTEX>(CGraphicsManager::GetSingletonPtr(), l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+	    else if(l_VertexTypes[i] == 79) 
+            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>(CGraphicsManager::GetSingletonPtr(), l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
 
         // Check the renderable object
         if(l_RV) m_RVs.push_back(l_RV);

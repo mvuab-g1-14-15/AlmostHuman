@@ -123,13 +123,6 @@ void CTestProcess::Render()
   unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
   CGPUStatics::GetSingletonPtr()->SetToZero();
   CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 0, Math::CColor(0.0f, 0.0f, 0.0f), "Vertex: %u   Faces: %u   Draws:%u", v, f, d);
-  unsigned short VertexTypeBox1 = CCore::GetSingletonPtr()->GetStaticMeshManager()->GetResource("Box001")->GetRVs()[0]->GetVertexType();
-  unsigned short VertexTypeBox2 = CCore::GetSingletonPtr()->GetStaticMeshManager()->GetResource("Box002")->GetRVs()[0]->GetVertexType();
-  unsigned short VertexTypeBox3 = CCore::GetSingletonPtr()->GetStaticMeshManager()->GetResource("Box003")->GetRVs()[0]->GetVertexType();
-  CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText(300, 15, Math::CColor(0.0f, 0.0f, 0.0f), "VertexType Box1: %u   VertexType Box2: %u   VertexType Box3:%u", VertexTypeBox1, VertexTypeBox2, VertexTypeBox3);
-
-  unsigned short FVF = TNORMAL_T1_VERTEX::GetFVF();
-  unsigned short FVF1 = TNORMAL_T2_VERTEX::GetFVF();
   // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
