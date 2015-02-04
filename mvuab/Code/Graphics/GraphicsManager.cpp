@@ -359,10 +359,66 @@ void CGraphicsManager::DrawGrid( float32 Size, Math::CColor Color, int32 GridX, 
   }
 }
 
-void CGraphicsManager::DrawPlane( float32 Size, const Math::Vect3f& normal, float32 distance, Math::CColor Color,
+void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, float32 distance, Math::CColor Color,
                                   int32 GridX, int32 GridZ )
 {
+		D3DXMATRIX matrix;
+        D3DXMatrixIdentity(&matrix);
+        m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
+        float A, B, C, D;
+        A = normal.x;
+        B = normal.y;
+        C = normal.z;
+        D = distance;
+
+
+        Math::Vect3f pointA, pointB;
+        if (C != 0)
+        {
+                pointA = Math::Vect3f(0.f, 0.f, -D / C);
+                pointB = Math::Vect3f(1.f, 1.f, (D - A - B) / C);
+        }
+        else if (B != 0)
+        {
+                pointA = Math::Vect3f(0.f, -D / B, 0.f);
+                pointB = Math::Vect3f(1.f, (-D - A - C) / B, 1.f);
+        }
+        else if (A != 0)
+        {
+                pointA = Math::Vect3f(-D / A, 0.f, 0.f);
+                pointB = Math::Vect3f((-D - B - C) / A, 1.f, 1.f);
+        }
+        else
+        {
+			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "drawplane: ALL VALUES = 0");
+                std::string l_msgerror = "Error, se genero un logger con la informacion";
+                throw CException(__FILE__, __LINE__, l_msgerror);
+        }
+
+        Math::Vect3f vectorA = pointB - pointA;
+        vectorA.Normalize();
+        Math::Vect3f vectorB;
+        vectorB = normal^vectorA;
+        vectorB.Normalize();
+        Math::Vect3f initPoint = normal*distance;
+
+        assert(GridX > 0);
+        assert(GridZ > 0);
+        //LINEAS EN Z
+        Math::Vect3f initPointA = initPoint - vectorB*size*0.5;
+        for (int b = 0; b <= GridX; ++b)
+        {
+                DrawLine(initPointA + vectorA*size*0.5, initPointA - vectorA*size*0.5, Color);
+
+                initPointA += vectorB*size / (float)GridX;
+        }
+        initPointA = initPoint - vectorA*size*0.5;
+        for (int b = 0; b <= GridX; ++b)
+        {
+                DrawLine(initPointA + vectorB*size*0.5, initPointA - vectorB*size*0.5, Color);
+                initPointA += vectorA*size / (float)GridX;
+        }
 }
 
 void CGraphicsManager::DrawCube( float32 Size )

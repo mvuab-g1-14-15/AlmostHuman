@@ -18,10 +18,6 @@ private:
     Math::Vect2i        m_LastMousePoint;
     bool                m_PaintAll;
 
-	// TODO DELETE
-	CPhysicActor* m_pPhysicActor;
-	float time;
-
 public:
     CTestProcess();
     virtual ~CTestProcess();

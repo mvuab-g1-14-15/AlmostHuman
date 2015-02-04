@@ -54,6 +54,8 @@ public:
 							CPhysicsManager					();
 	virtual					~CPhysicsManager				()		{ Done(); }
 
+	void					AddGravity						(Math::Vect3f g);
+
 	//---- Main Functions ---------------------------------------
 	bool					Init							();
 	void					Done							();

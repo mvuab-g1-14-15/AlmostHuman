@@ -362,6 +362,13 @@ void CPhysicsManager::WaitForSimulation ( void )
 	}
 }
 
+void CPhysicsManager::AddGravity(Math::Vect3f g)
+{
+	NxVec3 actual_g;
+	m_pScene->getGravity(actual_g);
+	m_pScene->setGravity(actual_g + NxVec3(g.x, g.y, g.z));
+}
+
 //----------------------------------------------------------------------------------------
 // Debug Render : dibuixa cada un dels actors trobats a l'escena si estem en mode debug
 //----------------------------------------------------------------------------------------
