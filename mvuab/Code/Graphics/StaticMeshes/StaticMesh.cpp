@@ -246,7 +246,7 @@ void CStaticMesh::Render(CGraphicsManager *GM)
 		CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
 		unsigned short l_VertexType = m_RVs[i]->GetVertexType();
 		std::string l_EffectName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault(l_VertexType);
-        m_RVs[i]->Render(GM, CEffectManager::GetSingletonPtr()->GetResource(l_EffectName));
+        m_RVs[i]->Render(GM, l_pEffectManager->GetResource(l_EffectName));
     }
 }
 

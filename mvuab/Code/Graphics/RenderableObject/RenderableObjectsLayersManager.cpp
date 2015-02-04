@@ -12,7 +12,6 @@ CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 }
 void CRenderableObjectsLayersManager::Destroy()
 {
-    m_DefaultRenderableObjectManager->Destroy();
     CTemplatedVectorMapManager::Destroy();
 }
 void CRenderableObjectsLayersManager::Load(const std::string &FileName)
