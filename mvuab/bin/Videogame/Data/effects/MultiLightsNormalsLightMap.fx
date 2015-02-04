@@ -95,7 +95,7 @@ float4 RenderPS(VertexPS IN) : COLOR
 	return l_PixelColor;
 }
 
-technique MultiLightsTechnique
+technique MultiLightsNormalsLightMapTechnique
 {
     pass p0
     {

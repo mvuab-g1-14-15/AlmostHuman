@@ -6,6 +6,7 @@
 #include <string>
 
 #include "Math/AABB.h"
+#include "Utils/Defines.h"
 
 class CRenderableVertexs;
 class CGraphicsManager;
@@ -29,6 +30,7 @@ class CStaticMesh
 	public:
 		CStaticMesh();
 		~CStaticMesh();
+        GET_SET(std::vector<CRenderableVertexs*>, RVs);
 		
 		bool Load         (const std::string &FileName);
 		bool ReLoad       ();
@@ -39,6 +41,7 @@ class CStaticMesh
 		Math::AABB3f GetAABB() { return m_AABB;}
 		
 		bool GetRenderableObjectTechnique();
+
 };
 
 #endif //INC_STATIC_MESH_H_

@@ -109,9 +109,9 @@ void CGraphicsManager::BeginRender()
   uint32 blue        = ( uint32 )( m_BackbufferColor_debug.GetBlue() * 255 );
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ), 1.0f, 0 );
 #else // Clear the backbuffer to a black color in a Release mode
-  uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 256 );
-  uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 256 );
-  uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 256 );
+  uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 255 );
+  uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 255 );
+  uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 255 );
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ), 1.0f, 0 );
 #endif
 
@@ -140,9 +140,9 @@ void CGraphicsManager::Clear()
   uint32 blue        = ( uint32 )( m_BackbufferColor_debug.GetBlue() * 255 );
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ), 1.0f, 0 );
 #else // Clear the backbuffer to a black color in a Release mode
-  uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 256 );
-  uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 256 );
-  uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 256 );
+  uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 255 );
+  uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 255 );
+  uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 255 );
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ), 1.0f, 0 );
 #endif
 }
