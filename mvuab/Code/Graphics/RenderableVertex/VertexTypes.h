@@ -145,11 +145,11 @@ struct TNORMAL_TAN_BI_T2_VERTEX
 
 struct TNORMAL_TAN_BI_T1_VERTEX
 {
-    float x, y, z;
-    float nx, ny, nz;
-    float tanx, tany, tanz;
-    float bx, by, bz;
-    float tu, tv;
+    float x, y, z; //0 - 11
+    float nx, ny, nz; // 12 - 23
+    float tanx, tany, tanz; // 24 - 35
+    float bx, by, bz; // 36 - 47
+    float tu, tv; // 48 - 56
     
     static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
     static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();

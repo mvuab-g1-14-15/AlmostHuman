@@ -2,13 +2,12 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-
 struct VertexVS {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
-	float2 	UV 			: TEXCOORD0;
+	float3 	Tangent 	: TANGENT0;
 	float3 	Binormal 	: BINORMAL0;
-    float3 	Tangent 	: TANGENT0;
+	float2 	UV 			: TEXCOORD0;
 };
 
 struct VertexPS
