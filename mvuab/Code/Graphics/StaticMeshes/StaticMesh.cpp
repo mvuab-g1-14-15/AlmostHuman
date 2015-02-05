@@ -73,12 +73,12 @@ bool CStaticMesh::Load(const std::string &FileName)
         unsigned short l_numTexturas = 0;
 		std::fread(&l_numTexturas, sizeof(unsigned short int), 1, l_pFile);
 
+		    l_VertexTypes.push_back(l_VertexType);
+            m_VertexTypes.push_back(l_VertexType);
+
         std::vector<CTexture *> l_Texture;
         for(unsigned int j = 0; j < l_numTexturas; ++j)
         {
-            l_VertexTypes.push_back(l_VertexType);
-            m_VertexTypes.push_back(l_VertexType);
-
             unsigned short l_TextureLength = 0;
             std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
             ++l_TextureLength;

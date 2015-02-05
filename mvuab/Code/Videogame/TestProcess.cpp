@@ -37,6 +37,10 @@
 
 #include <d3dx9.h>
 
+#include "Items\Grenade.h"
+
+CGrenade* p_Greande;
+
 void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFiles);
 
 CTestProcess::CTestProcess() : CProcess(),
@@ -49,7 +53,6 @@ CTestProcess::CTestProcess() : CProcess(),
 
   unsigned short debug = VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
 
-  //int i = 0;
 }
 bool done = false;
 
@@ -106,12 +109,15 @@ void CTestProcess::Update()
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
+  //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
+  p_Greande->Update();
 }
 
 void CTestProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
+  p_Greande = new CGrenade( 0.2f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  p_Greande->Start();
 
   /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
   l_PUD->SetPaint(true);
@@ -158,18 +164,20 @@ void CTestProcess::Init()
   l_pPhysicActor->SetGlobalPosition(Math::Vect3f(1,0,0));
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
 
-  /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
+  CPhysicUserData* l_PUD = new CPhysicUserData("Plane");
   l_PUD->SetPaint(true);
   CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,1),0);
+  l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
   
+  /*
   l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddSphereShape(0.2f);
   l_pPhysicActor->SetGlobalPosition(Math::Vect3f(0,1,0));
   l_pPhysicActor->CreateBody(0.1f);
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
 
+/*
   CPhysicUserData* l_PUD = new CPhysicUserData("Box");
   l_PUD->SetPaint(true);
   CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
@@ -182,8 +190,7 @@ void CTestProcess::Init()
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,6,0));
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
 
-
-  /*CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
+CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
   Math::Vect3f l_FirstPosSphere = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
   l_pPhysicActor->AddSphereShape(0.2f, l_FirstPosSphere, l_FirstPosSphere );
   l_pPhysicActor->CreateBody(0.1f);
@@ -197,6 +204,7 @@ void CTestProcess::Init()
 void CTestProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
+  p_Greande->Render();
 
   pGraphicsManager->DrawAxis(5);
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);

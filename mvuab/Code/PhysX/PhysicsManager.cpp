@@ -404,8 +404,6 @@ void CPhysicsManager::DrawActor ( NxActor* _pActor, CGraphicsManager* _RM )
 
 	NxShape*const* shapes = _pActor->getShapes();
 	NxU32 nShapes = _pActor->getNbShapes();
-
-	nShapes = _pActor->getNbShapes();
 	while (nShapes--)
 	{
 		switch(shapes[nShapes]->getType())
