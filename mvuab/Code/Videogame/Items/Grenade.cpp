@@ -52,6 +52,7 @@ void CGrenade::Update()
 				m_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() * m_Force );
 			}
 	}
+   
 }
 
 void CGrenade::Render()

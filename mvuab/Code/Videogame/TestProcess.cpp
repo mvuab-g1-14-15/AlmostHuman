@@ -39,7 +39,7 @@
 
 #include "Items\Grenade.h"
 
-CGrenade* p_Greande;
+CGrenade* p_Grenade;
 
 void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFiles);
 
@@ -106,18 +106,50 @@ void CTestProcess::Update()
   }
   //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
   //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
+  //RAYCAST
+  if( pActionManager->DoAction("ShootRayCast") )
+  {
+    CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+    if( l_CurrentCamera )
+    {
+	    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+	    CPhysicUserData* l_PhysicUserData = new CPhysicUserData("RayCast");
+	    l_PhysicUserData->SetPaint(true);
+        CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
+        //If don't want box, you can remove this line
+        l_Actor->AddBoxSphape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
+	    l_Actor->CreateBody(1.0f);
+		
+	    // Add at the end allways it needs to have a shape
+	    l_PM->AddPhysicActor(l_Actor);	
+
+        l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() * 20.0f );
+
+        SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
+        uint32 mask = 1 << ECG_ESCENE;
+
+
+        //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
+        CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo, 40.0f);
+
+        if(l_PUD)
+	        std::string l_Object = l_PUD->GetName();
+        else
+	        std::string l_Object = "";
+    }
+  }
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
-  p_Greande->Update();
+  p_Grenade->Update();
 }
 
 void CTestProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
-  p_Greande = new CGrenade( 0.2f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  p_Greande->Start();
+  p_Grenade = new CGrenade( 0.2f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  p_Grenade->Start();
 
   /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
   l_PUD->SetPaint(true);
@@ -170,6 +202,15 @@ void CTestProcess::Init()
   l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
   
+  l_PUD = new CPhysicUserData("Box1");
+  l_PUD->SetPaint(true);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
+  l_pPhysicActor->CreateBody(0.5f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
   /*
   l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddSphereShape(0.2f);
@@ -204,7 +245,7 @@ CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
 void CTestProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
-  p_Greande->Render();
+  p_Grenade->Render();
 
   pGraphicsManager->DrawAxis(5);
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);
