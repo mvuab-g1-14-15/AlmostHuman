@@ -51,7 +51,7 @@ CTestProcess::CTestProcess() : CProcess(),
   m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
 {
   CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
-                                          Math::Vect3f(0.0f,2.0f,0.0f) );
+      Math::Vect3f(0.0f,2.0f,0.0f) );
   CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
   unsigned short debug = VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
@@ -115,30 +115,30 @@ void CTestProcess::Update()
     CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
     if( l_CurrentCamera )
     {
-	    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-	    CPhysicUserData* l_PhysicUserData = new CPhysicUserData("RayCast");
-	    l_PhysicUserData->SetPaint(true);
+      CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+      CPhysicUserData* l_PhysicUserData = new CPhysicUserData("RayCast");
+      l_PhysicUserData->SetPaint(true);
       CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
       //If don't want box, you can remove this line
       l_Actor->AddBoxSphape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
-	    l_Actor->CreateBody(1.0f);
-		
-	    // Add at the end allways it needs to have a shape
-	    l_PM->AddPhysicActor(l_Actor);	
+      l_Actor->CreateBody(1.0f);
 
-        l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() * 20.0f );
+      // Add at the end allways it needs to have a shape
+      l_PM->AddPhysicActor(l_Actor);
 
-        SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
-        uint32 mask = 1 << ECG_ESCENE;
+      l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() * 20.0f );
+
+      SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
+      uint32 mask = 1 << ECG_ESCENE;
 
 
-        //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
-        CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo, 40.0f);
+      //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
+      CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo, 40.0f);
 
-        if(l_PUD)
-	        std::string l_Object = l_PUD->GetName();
-        else
-	        std::string l_Object = "";
+      if(l_PUD)
+        std::string l_Object = l_PUD->GetName();
+      else
+        std::string l_Object = "";
     }
     
   }
@@ -180,7 +180,7 @@ void CTestProcess::Update()
 void CTestProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("init()");
-  p_Grenade = new CGrenade( 0.2f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
   p_Grenade->Start();
 
   /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
@@ -228,39 +228,59 @@ void CTestProcess::Init()
   l_pPhysicActor->SetGlobalPosition(Math::Vect3f(1,0,0));
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
 
+  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+
   CPhysicUserData* l_PUD = new CPhysicUserData("Plane");
   l_PUD->SetPaint(true);
   CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
-  
-  l_PUD = new CPhysicUserData("Box1");
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box");
   l_PUD->SetPaint(true);
   l_PUD->SetColor(colBLACK);
   l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,0,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
-  l_pPhysicActor->CreateBody(0.5f);
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
 
   l_PUD = new CPhysicUserData("Box2");
   l_PUD->SetPaint(true);
-  l_PUD->SetColor(colWHITE);
   l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1));
-  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(3,0,0.4));
-  l_pPhysicActor->CreateBody(1);
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
 
   l_PUD = new CPhysicUserData("Box3");
   l_PUD->SetPaint(true);
   l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1));
-  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(6,0,0.4));
-  l_pPhysicActor->CreateBody(1);
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box4");
+  l_PUD->SetPaint(true);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box5");
+  l_PUD->SetPaint(true);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,8,0));
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box6");
+  l_PUD->SetPaint(true);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,10,0));
+  l_pPhysicActor->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
+
+
   /*
   l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddSphereShape(0.2f);
@@ -268,27 +288,27 @@ void CTestProcess::Init()
   l_pPhysicActor->CreateBody(0.1f);
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
 
-/*
-  CPhysicUserData* l_PUD = new CPhysicUserData("Box");
-  l_PUD->SetPaint(true);
-  CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,0,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,1,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,2,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,3,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,4,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,5,0));
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,6,0));
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  /*
+    CPhysicUserData* l_PUD = new CPhysicUserData("Box");
+    l_PUD->SetPaint(true);
+    CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,0,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,1,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,2,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,3,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,4,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,5,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,6,0));
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
 
-CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
-  Math::Vect3f l_FirstPosSphere = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
-  l_pPhysicActor->AddSphereShape(0.2f, l_FirstPosSphere, l_FirstPosSphere );
-  l_pPhysicActor->CreateBody(0.1f);
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor1);
+  CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
+    Math::Vect3f l_FirstPosSphere = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
+    l_pPhysicActor->AddSphereShape(0.2f, l_FirstPosSphere, l_FirstPosSphere );
+    l_pPhysicActor->CreateBody(0.1f);
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor1);
 
-  if (CCore::GetSingletonPtr()->GetInputManager()->IsDownUp(IDV_KEYBOARD, KEY_SPACE))
-	  l_pPhysicActor1->AddImpulseAtPos(CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetDirection(),l_FirstPosSphere,150,true);*/
+    if (CCore::GetSingletonPtr()->GetInputManager()->IsDownUp(IDV_KEYBOARD, KEY_SPACE))
+      l_pPhysicActor1->AddImpulseAtPos(CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetDirection(),l_FirstPosSphere,150,true);*/
 
 }
 
