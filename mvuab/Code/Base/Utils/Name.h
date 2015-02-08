@@ -7,13 +7,17 @@
 
 class CName
 {
-public:
-    CName(){}
+  public:
+    CName() {}
+    CName( std::string Name )
+    {
+      m_Name = Name;
+    }
     virtual ~CName() {}
-	
-	GET_SET(std::string,Name);
 
-protected:
+    GET_SET(std::string,Name);
+
+  protected:
     std::string m_Name;
 };
 
