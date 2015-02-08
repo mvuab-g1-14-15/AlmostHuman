@@ -13,6 +13,7 @@
 #include "Core.h"
 #include "Utils\BaseUtils.h"
 #include "Timer\Timer.h"
+#include "Periphericals\Mouse.h"
 
 #include "ScriptManager\ScriptManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
@@ -38,6 +39,8 @@
 #include <d3dx9.h>
 
 #include "Items\Grenade.h"
+
+
 
 CGrenade* p_Grenade;
 
@@ -115,9 +118,9 @@ void CTestProcess::Update()
 	    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 	    CPhysicUserData* l_PhysicUserData = new CPhysicUserData("RayCast");
 	    l_PhysicUserData->SetPaint(true);
-        CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
-        //If don't want box, you can remove this line
-        l_Actor->AddBoxSphape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
+      CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
+      //If don't want box, you can remove this line
+      l_Actor->AddBoxSphape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
 	    l_Actor->CreateBody(1.0f);
 		
 	    // Add at the end allways it needs to have a shape
@@ -137,8 +140,37 @@ void CTestProcess::Update()
         else
 	        std::string l_Object = "";
     }
+    
   }
-
+  if ( pActionManager->DoAction("DisableCamera") )
+  {
+      CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+      if( l_CurrentCamera )
+      {
+        if( l_CurrentCamera->GetEnable() )
+          l_CurrentCamera->SetEnable(false);
+        else
+          l_CurrentCamera->SetEnable(true);
+      }
+  }
+  if ( pActionManager->DoAction("DrawActor") )
+  {
+    Vect2i l_PosMouse = CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
+    Vect3f l_Pos, l_Dir;
+    
+    CGraphicsManager::GetSingletonPtr()->GetRay(l_PosMouse,l_Pos, l_Dir);
+    
+    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    
+    SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
+    uint32 mask = 1 << ECG_ESCENE;
+    
+    CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
+    if(l_PUD)
+    {
+      l_PUD->SetColor(colRED);
+    }
+  }
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
@@ -204,12 +236,30 @@ void CTestProcess::Init()
   
   l_PUD = new CPhysicUserData("Box1");
   l_PUD->SetPaint(true);
+  l_PUD->SetColor(colBLACK);
   l_pPhysicActor = new CPhysicActor(l_PUD);
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,0,0));
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
   l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
   l_pPhysicActor->CreateBody(0.5f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box2");
+  l_PUD->SetPaint(true);
+  l_PUD->SetColor(colWHITE);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1));
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(3,0,0.4));
+  l_pPhysicActor->CreateBody(1);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_PUD = new CPhysicUserData("Box3");
+  l_PUD->SetPaint(true);
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1));
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(6,0,0.4));
+  l_pPhysicActor->CreateBody(1);
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
   /*
   l_pPhysicActor = new CPhysicActor(l_PUD);

@@ -6,7 +6,7 @@
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
 
-class CPhysicActor;
+class CCamera;
 
 class CTestProcess : public CProcess
 {
@@ -17,6 +17,7 @@ private:
     float32             m_AngleMoon;
     Math::Vect2i        m_LastMousePoint;
     bool                m_PaintAll;
+    CCamera*            m_Camera;
 
 public:
     CTestProcess();

@@ -26,9 +26,12 @@ function update()
 	end
 	
 	local dt = timer:GetElapsedTime()
-	
-	move_player( dt )
-	move_light( dt )
+	local current_camera = camera_manager:GetCurrentCamera();
+	local enable = current_camera:GetEnable();
+	if enable == true then
+		move_player( dt )
+		move_light( dt )
+	end
 end
 
 function move_light( dt )
@@ -107,8 +110,8 @@ function move( flag_speed, forward, strafe, dt )
 	end
 	
     addPos = addPos * constant;
-	
 	current_camera:SetPos((cam_pos + addPos))
+	
 end
 
 function render()
