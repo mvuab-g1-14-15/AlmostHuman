@@ -15,6 +15,12 @@
 #include "Math\Matrix44.h"
 #include "PhysicsDefs.h"
 
+#undef min
+#undef max
+
+#include "NxMaterial.h"
+#include "Utils\Defines.h"
+
 using namespace Math;
 
 //---Forward Declarations---
@@ -101,6 +107,8 @@ public:
 	void				SetTriggerGroup				( ECollisionGroup _uiGroup ){ m_TriggerGroup = _uiGroup;}
 	ECollisionGroup		GetTriggerGroup				( void ) const				{ return m_TriggerGroup; }
 
+  GET_SET(NxMaterialIndex, MaterialIndex);
+
 	//---Get Info-------
 	void				GetMat44					( Mat44f& _mMatrix ) const;
 	Mat44f&				GetMat44					() const;
@@ -138,6 +146,8 @@ private:
 	ECollisionGroup								m_uCollisionGroups;
 	ECollisionGroup								m_myCollisionGroups;
 	ECollisionGroup								m_TriggerGroup;
+
+  NxMaterialIndex               m_MaterialIndex;
 };
 
 #endif __PHYSIC_ACTOR_CLASS_H__

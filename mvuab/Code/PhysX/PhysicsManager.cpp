@@ -12,6 +12,8 @@
 #include "NxControllerManager.h"
 #include "NxCapsuleController.h"
 #include "NxUserRaycastReport.h"
+#include "NxMaterial.h"
+#include "NxMaterialDesc.h"
 
 #include "Actor\PhysicActor.h"
 #include "Reports\PhysicCollisionReport.h"
@@ -1320,4 +1322,15 @@ bool CPhysicsManager::CreateMeshFromXML(const std::string &FileName)
     }
   }
   return true;
+}
+
+int CPhysicsManager::AddMaterial(float restitution, float staticFriction, float dynamicFriction)
+{
+  NxMaterialDesc l_MatDesc;
+  l_MatDesc.restitution = restitution;
+  l_MatDesc.staticFriction = staticFriction;
+  l_MatDesc.dynamicFriction = dynamicFriction;
+  l_MatDesc.restitutionCombineMode = NxCombineMode::NX_CM_AVERAGE;
+
+  return m_pScene->createMaterial(l_MatDesc)->getMaterialIndex();
 }

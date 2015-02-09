@@ -30,6 +30,7 @@ class NxScene;
 class NxActor;
 class NxCCDSkeleton;
 class NxControllerManager;
+class NxMaterial;
 
 class CPhysicActor;
 class CPhysicCollisionReport;
@@ -93,6 +94,10 @@ class CPhysicsManager
     bool          RelasePhysicRevoluteJoint   ( CPhysicRevoluteJoint* _pJoint );
     bool          AddPhysicFixedJoint       ( CPhysicFixedJoint* _pJoint );
     bool          RelasePhysicFixedJoint      ( CPhysicFixedJoint* _pJoint );
+
+	//Materials
+
+	  int            AddMaterial(float restitution, float staticFriction, float dynamicFriction);
 
     ////--- Intersection Functions:
     //CPhysicUserData*    RaycastClosestActor       ( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info );
@@ -251,6 +256,6 @@ class CPhysicsManager
     std::map<std::string,unsigned int>    m_vIds;     // para guardar los id's del vector de actors
 };
 
-#endif __PHYSX_MANAGER_CLASS_H__
+#endif //__PHYSX_MANAGER_CLASS_H__
 
 

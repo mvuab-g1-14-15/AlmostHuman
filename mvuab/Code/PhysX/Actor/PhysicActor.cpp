@@ -22,6 +22,7 @@ CPhysicActor::CPhysicActor( CPhysicUserData* _pUserData )
 	, m_pPhXActor		( NULL )
 	, m_pPhXActorDesc	( NULL )
 	, m_pPhXBodyDesc	( NULL )
+  , m_MaterialIndex ( 0 )
 {
 	assert ( m_pUserData );
 	_pUserData->SetActor(this);
@@ -195,6 +196,7 @@ void CPhysicActor::AddBoxSphape ( const Math::Vect3f& _vSize, const Math::Vect3f
 	NxBoxShapeDesc* l_BoxDesc = new NxBoxShapeDesc();
 	assert ( l_BoxDesc );
 	l_BoxDesc->group = _uiGroup;
+  l_BoxDesc->materialIndex = m_MaterialIndex;
 	m_vBoxDesc.push_back ( l_BoxDesc );
 	// Add a box shape to the actor descriptor
 	l_BoxDesc->dimensions = NxVec3( _vSize.x, _vSize.y, _vSize.z);
