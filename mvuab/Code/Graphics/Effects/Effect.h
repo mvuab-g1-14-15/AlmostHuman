@@ -57,6 +57,8 @@ public:
     GET_SET(D3DXHANDLE, BonesParameter);
     GET_SET(D3DXHANDLE, TimeParameter);
 
+	GET_SET(D3DXHANDLE, DebugColor);
+
     GET_SET_REF(std::string, FileName);
     GET_SET(LPD3DXEFFECT, Effect);
 
@@ -90,6 +92,7 @@ private: // Members
     D3DXHANDLE m_CameraPositionParameter;
     D3DXHANDLE m_BonesParameter;
     D3DXHANDLE m_TimeParameter;
+	D3DXHANDLE m_DebugColor;
 
 private: // Methods
     void  SetNullParameters();

@@ -142,6 +142,8 @@ void CTestProcess::Update()
     }
     
   }
+  CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+
   if ( pActionManager->DoAction("DisableCamera") )
   {
       CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
@@ -165,7 +167,9 @@ void CTestProcess::Update()
     SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
     uint32 mask = 1 << ECG_ESCENE;
     
-    CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
+	
+	CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
+    //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
     if(l_PUD)
     {
       l_PUD->SetColor(colRED);

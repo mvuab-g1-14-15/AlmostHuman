@@ -7,7 +7,7 @@
 	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
 	<effect name="MultiLightsEffect" file="data/effects/MultiLights.fx"/>
 
-	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
 	<technique name="MultiLightsTechnique" effect="MultiLightsEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 </effects>

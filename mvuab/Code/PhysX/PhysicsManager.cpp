@@ -895,7 +895,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
   NxReal l_Distance = (NxReal) _uiMaxDistance;
 
   // --- Jordi : Provisional. Cal deixar aquesta linia i modificar la col·lisió de càmera
-  closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, _uiImpactMask, l_Distance );
+  closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, 0xffffffff, l_Distance );
   if (!closestShape)
   {
     //No hemos tocado a ningún objeto físico de la escena.

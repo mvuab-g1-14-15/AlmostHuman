@@ -4,6 +4,7 @@
 
 #include "d3dx9.h"
 #include "XML\XMLTreeNode.h"
+#include "Math/Color.h"
 #include <string>
 
 class CEffect;
@@ -19,6 +20,8 @@ public:
     bool Refresh();
     //DirectX Methods Interface
     D3DXHANDLE GetD3DTechnique() {return m_D3DTechnique;}
+
+	void SetDebugColor(Math::CColor color = Math::colWHITE);
 
 private: // Members
     bool                        m_UseCameraPosition;
@@ -36,10 +39,14 @@ private: // Members
     bool                        m_UseViewProjectionMatrix;
     bool                        m_UseViewToLightProjectionMatrix;
     bool                        m_UseTime;
+	bool						m_UseDebugColor;
+
     CEffect                    *m_Effect;
     D3DXHANDLE                  m_D3DTechnique;
     std::string                 m_TechniqueName;
     std::string                 m_EffectName;
+
+	Math::CColor				m_DebugColor;
 private: // Methods
     void SetupMatrices();
     bool SetupLights();

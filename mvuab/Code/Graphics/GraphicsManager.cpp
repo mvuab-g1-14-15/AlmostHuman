@@ -438,6 +438,9 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
 
   CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
 
+  // Set the debug color
+  EffectTechnique->SetDebugColor( Color );
+
   EffectTechnique->BeginRender();
 
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
@@ -657,31 +660,31 @@ void CGraphicsManager::DisableZBuffering()
 
 void CGraphicsManager::GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay )
 {
-  D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
+	D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
 
-  m_pD3DDevice->GetTransform( D3DTS_PROJECTION, &projectionMatrix );
-  m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
-  m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
+    m_pD3DDevice->GetTransform(D3DTS_PROJECTION, &projectionMatrix);
+    m_pD3DDevice->GetTransform(D3DTS_VIEW, &viewMatrix);
+    m_pD3DDevice->GetTransform(D3DTS_WORLD, &worldMatrix);
 
-  float32 angle_x = ( ( ( 2.0f * mousePos.x ) / m_uWidth ) - 1.0f ) / projectionMatrix( 0, 0 );
-  float32 angle_y = ( ( ( -2.0f * mousePos.y ) / m_uHeight ) + 1.0f ) / projectionMatrix( 1, 1 );
+    float angle_x = (((2.0f * mousePos.x) / 392) - 1.0f);
+    float angle_y = (((-2.0f * mousePos.y) / 281) + 1.0f);
 
-  D3DXVECTOR3 ray_org = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
-  D3DXVECTOR3 ray_dir = D3DXVECTOR3( angle_x, angle_y, 1.0f );
+    D3DXVECTOR3 ray_org = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+    D3DXVECTOR3 ray_dir = D3DXVECTOR3(angle_x, angle_y, 1.0f);
 
-  D3DXMATRIX m = worldMatrix * viewMatrix;
-  D3DXMatrixInverse( &worldViewInverse, 0, &m );
-  D3DXVec3TransformCoord( &ray_org, &ray_org, &worldViewInverse );
-  D3DXVec3TransformNormal( &ray_dir, &ray_dir, &worldViewInverse );
-  D3DXVec3Normalize( &ray_dir, &ray_dir );
+    D3DXMATRIX m = worldMatrix * viewMatrix;
+    D3DXMatrixInverse(&worldViewInverse, 0, &m);
+    D3DXVec3TransformCoord(&ray_org, &ray_org, &worldViewInverse);
+    D3DXVec3TransformNormal(&ray_dir, &ray_dir, &worldViewInverse);
+    D3DXVec3Normalize(&ray_dir, &ray_dir);
 
-  posRay.x = ray_org.x;
-  posRay.y = ray_org.y;
-  posRay.z = ray_org.z;
+    posRay.x = ray_org.x;
+    posRay.y = ray_org.y;
+    posRay.z = ray_org.z;
 
-  dirRay.x = ray_dir.x;
-  dirRay.y = ray_dir.y;
-  dirRay.z = ray_dir.z;
+    dirRay.x = ray_dir.x;
+    dirRay.y = ray_dir.y;
+    dirRay.z = ray_dir.z;
 }
 
 void CGraphicsManager::DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h, Math::CColor& backGroundColor,

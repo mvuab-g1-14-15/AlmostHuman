@@ -24,7 +24,9 @@ CEffectTechnique::CEffectTechnique(CXMLTreeNode & node)
     m_UseViewProjectionMatrix(node.GetBoolProperty("use_view_projection_matrix", false)),
     m_UseViewToLightProjectionMatrix(node.GetBoolProperty("use_view_to_light_projection_matrix", false)),
     m_UseTime(node.GetBoolProperty("use_time", false)),
-    m_NumOfLights(node.GetIntProperty("num_of_lights", 0))
+	m_UseDebugColor(node.GetBoolProperty("use_debug_color", false)),
+    m_NumOfLights(node.GetIntProperty("num_of_lights", 0)),
+	m_DebugColor( Math::colWHITE )
 {
   m_Effect=CEffectManager::GetSingletonPtr()->GetEffect(m_EffectName);
   m_D3DTechnique = (m_Effect) ? m_Effect->GetTechniqueByName(m_TechniqueName) : 0;
@@ -50,6 +52,18 @@ bool CEffectTechnique::BeginRender()
   {
     Math::Vect3f l_CameraEye = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
     m_Effect->SetCameraPosition( l_CameraEye );
+  }
+
+  if(m_UseDebugColor)
+  {
+    l_Handle = m_Effect->GetDebugColor();
+	float32 l_DebugColor[4];
+	l_DebugColor[0] = m_DebugColor.GetRed();
+	l_DebugColor[1] = m_DebugColor.GetGreen();
+	l_DebugColor[2] = m_DebugColor.GetBlue();
+	l_DebugColor[3] = m_DebugColor.GetAlpha();
+
+    l_Effect->SetFloatArray(l_Handle, l_DebugColor, sizeof(float)*4 );
   }
 
   if(m_UseTime)
@@ -179,4 +193,9 @@ bool CEffectTechnique::SetupLights()
   }
 
   return true;
+}
+
+void CEffectTechnique::SetDebugColor(Math::CColor color)
+{
+	m_DebugColor = color;
 }

@@ -70,10 +70,7 @@ VertexPS mainVS(VertexVS IN)
 
 float4 mainPS(VertexPS IN) : COLOR
 {	
-	return float4(0.0, 0.5, 0.0, 1.0);
-	float3 Nn=normalize(IN.WorldNormal);
-	return float4(Nn, 1.0);
-	return tex2D(DiffuseTextureSampler, IN.UV);
+	return g_DebugColor;
 }
 
 technique DefaultTechnique {

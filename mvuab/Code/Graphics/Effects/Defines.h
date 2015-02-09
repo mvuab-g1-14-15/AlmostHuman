@@ -27,5 +27,6 @@ const char LightsEndRangeAttenuationParameterStr[] = "LightsEndAngle";
 const char CameraPositionParameterStr[] = "CameraPosition";
 const char BonesParameterStr[] = "Bones";
 const char TimeParameterStr[] = "DeltaTime";
+const char DebugColorStr[] = "DebugColor";
 
 #endif //EFFECTS_DEFINES_H
