@@ -112,7 +112,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
   l_pUserData->SetColor(colGREEN);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddBoxSphape(Math::Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_mTotal.GetPos(), l_fMiddlePoint,v3fZERO, NULL,m_iCollisionGroup);
+  l_pActor->AddBoxShape(Math::Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_mTotal.GetPos(), l_fMiddlePoint,v3fZERO, NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f,1.0f);
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetActorSolverIterationCount(75);

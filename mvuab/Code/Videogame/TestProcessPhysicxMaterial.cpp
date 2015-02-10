@@ -39,8 +39,6 @@
 #include <d3dx9.h>
 
 #include "Items\Grenade.h"
-#include "Joints\PhysicSphericalJoint.h"
-#include "Joints\PhysicRevoluteJoint.h"
 
 
 
@@ -123,7 +121,7 @@ void CTestProcess::Update()
       l_PhysicUserData->SetPaint(true);
       CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
       //If don't want box, you can remove this line
-      l_Actor->AddBoxShape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
+      l_Actor->AddBoxSphape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
       l_Actor->CreateBody(1.0f);
 
       // Add at the end allways it needs to have a shape
@@ -190,51 +188,134 @@ void CTestProcess::Init()
   p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
   p_Grenade->Start();
 
+  /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
+  l_PUD->SetPaint(true);
+  CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(0.2f,0.4f,0.2f),Math::Vect3f(0,0,0),Math::Vect3f(-0.75,10,-0.75));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(0.2f,0.4f,0.2f),Math::Vect3f(0,0,0),Math::Vect3f(0.75,10,-0.75));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(0.2f,0.4f,0.2f),Math::Vect3f(0,0,0),Math::Vect3f(-0.75,10,0.75));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(0.2f,0.4f,0.2f),Math::Vect3f(0,0,0),Math::Vect3f(0.75,10,0.75));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,0.1f,1.0f),Math::Vect3f(0,0,0),Math::Vect3f(0,10.4f,0));
+  l_pPhysicActor->CreateBody(0.5f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
 
-  //Ejercicio 1 - Pendulo
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddSphereShape(0.5f);
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(1,12,0));
+  l_pPhysicActor->CreateBody(0.5f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(0.2f,0.4f,0.2f));
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(0,4,0.4));
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(1,0,0));
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
+
+  /*CPhysicUserData* l_PUD = new CPhysicUserData("Box");
+  l_PUD->SetPaint(true);
+  CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1),Math::Vect3f(0,0,0),Math::Vect3f(0,10,2));
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1),Math::Vect3f(0,0,0),Math::Vect3f(0,10,-2));
+  l_pPhysicActor->CreateBody(0.1f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1));
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(0,4,0));
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(1,0,0));
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
+
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
-  CPhysicSphericalJoint* l_PSJ = new CPhysicSphericalJoint();
+  CPhysicUserData* l_PUD = new CPhysicUserData("Plane");
+  l_PUD->SetPaint(true);
+  CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
+  int id = l_PM->AddMaterial(0, 0, 0);
+  l_pPhysicActor->SetMaterialIndex(id);
+  l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1.5f,1),0);
+  l_PM->AddPhysicActor(l_pPhysicActor);
+
   CPhysicUserData* l_PUD1 = new CPhysicUserData("Box");
   l_PUD1->SetPaint(true);
   l_PUD1->SetColor(colBLACK);
   CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD1);
-  l_pPhysicActor1->AddSphereShape(0.4f, Math::Vect3f(6,4,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor1->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,4,0), Math::Vect3f(0,0,0));
   l_pPhysicActor1->CreateBody(1.0f);
-//  CPhysicActor* l_pPhysicActor2 = new CPhysicActor(l_PUD1);
-  //l_pPhysicActor2->SetGlobalPosition(Math::Vect3f(6,4,-2));
   l_PM->AddPhysicActor(l_pPhysicActor1);
-  //l_PM->AddPhysicActor(l_pPhysicActor2);
-  l_PSJ->SetInfo(Math::Vect3f(0,8,0), l_pPhysicActor1);
-  l_PM->AddPhysicSphericalJoint(l_PSJ);
 
-  //Ejercicio 2 - Puente levadiso
-
-  CPhysicRevoluteJoint* l_PSJ2 = new CPhysicRevoluteJoint();
   CPhysicUserData* l_PUD2 = new CPhysicUserData("Box2");
   l_PUD2->SetPaint(true);
-  l_PUD2->SetColor(colBLACK);
   CPhysicActor* l_pPhysicActor2 = new CPhysicActor(l_PUD2);
-  l_pPhysicActor2->AddBoxShape(Math::Vect3f(0.2f, 4, 1), Math::Vect3f(0,4,0), Math::Vect3f(0,0,0));
-  l_pPhysicActor2->CreateBody(0.5f);
+  l_pPhysicActor2->SetMaterialIndex(1);
+  l_pPhysicActor2->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(4,4,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor2->CreateBody(1.0f);
   l_PM->AddPhysicActor(l_pPhysicActor2);
-  l_PSJ2->SetInfo(Math::Vect3f(0,0,-1), Math::Vect3f(0,0,0), l_pPhysicActor2);
-  l_PSJ2->SetMotor(2, 0.4f);
-  l_PM->AddPhysicRevoluteJoint(l_PSJ2);
 
-  CPhysicUserData* l_PUD3 = new CPhysicUserData("Box3");
+  /*CPhysicUserData* l_PUD3 = new CPhysicUserData("Box3");
   l_PUD3->SetPaint(true);
-  l_PUD3->SetColor(colBLACK);
   CPhysicActor* l_pPhysicActor3 = new CPhysicActor(l_PUD3);
-  l_pPhysicActor3->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(-7,-1.5f,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor3->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
+  l_pPhysicActor3->CreateBody(1.0f);
   l_PM->AddPhysicActor(l_pPhysicActor3);
 
-  CPhysicUserData* l_PUD4 = new CPhysicUserData("Box3");
+  CPhysicUserData* l_PUD4 = new CPhysicUserData("Box4");
   l_PUD4->SetPaint(true);
-  l_PUD4->SetColor(colBLACK);
   CPhysicActor* l_pPhysicActor4 = new CPhysicActor(l_PUD4);
-  l_pPhysicActor4->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(7,-1.5f,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor4->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
+  l_pPhysicActor4->CreateBody(1.0f);
   l_PM->AddPhysicActor(l_pPhysicActor4);
+
+  CPhysicUserData* l_PUD5 = new CPhysicUserData("Box5");
+  l_PUD5->SetPaint(true);
+  CPhysicActor* l_pPhysicActor5 = new CPhysicActor(l_PUD5);
+  l_pPhysicActor5->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,8,0));
+  l_pPhysicActor5->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor5);
+
+  CPhysicUserData* l_PUD6 = new CPhysicUserData("Box6");
+  l_PUD6->SetPaint(true);
+  CPhysicActor* l_pPhysicActor6 = new CPhysicActor(l_PUD6);
+  l_pPhysicActor6->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,10,0));
+  l_pPhysicActor6->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor6);*/
+  
+
+  /*
+  l_pPhysicActor = new CPhysicActor(l_PUD);
+  l_pPhysicActor->AddSphereShape(0.2f);
+  l_pPhysicActor->SetGlobalPosition(Math::Vect3f(0,1,0));
+  l_pPhysicActor->CreateBody(0.1f);
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);*/
+
+  /*
+    CPhysicUserData* l_PUD = new CPhysicUserData("Box");
+    l_PUD->SetPaint(true);
+    CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,0,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,1,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,2,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,3,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,4,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,5,0));
+    l_pPhysicActor->AddBoxSphape(Math::Vect3f(1.0f,1.0f,1.0f), Math::Vect3f(0,0,0),Math::Vect3f(0,6,0));
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD2);
+    Math::Vect3f l_FirstPosSphere = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
+    l_pPhysicActor->AddSphereShape(0.2f, l_FirstPosSphere, l_FirstPosSphere );
+    l_pPhysicActor->CreateBody(0.1f);
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor1);
+
+    if (CCore::GetSingletonPtr()->GetInputManager()->IsDownUp(IDV_KEYBOARD, KEY_SPACE))
+      l_pPhysicActor1->AddImpulseAtPos(CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetDirection(),l_FirstPosSphere,150,true);*/
 
 }
 

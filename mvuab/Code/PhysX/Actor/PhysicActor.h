@@ -70,7 +70,7 @@ public:
 	
 	//---AddShape Functions-----
 	void				AddSphereShape				( float radius, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
-	void				AddBoxSphape				( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+	void				AddBoxShape					( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
 	void				AddCapsuleShape				( float _Radius, float _Height, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
 	void				AddMeshShape				( NxTriangleMesh* mesh, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0);
 	void				AddPlaneShape				( const Math::Vect3f& _vNormal, float _Distance, uint32 _uiGroup = 0);

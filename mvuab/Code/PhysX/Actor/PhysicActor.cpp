@@ -189,7 +189,7 @@ void CPhysicActor::AddSphereShape ( float radius, const Math::Vect3f& _vGlobalPo
   
 }
 
-void CPhysicActor::AddBoxSphape ( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, const Math::Vect3f& rotation, NxCCDSkeleton* skeleton, uint32 _uiGroup )
+void CPhysicActor::AddBoxShape ( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, const Math::Vect3f& rotation, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
 	assert(m_pPhXActorDesc);
 
@@ -292,6 +292,7 @@ void CPhysicActor::AddPlaneShape ( const Math::Vect3f& _vNormal, float distance,
 	m_vPlaneDesc.push_back(planeDesc);
 	planeDesc->normal	= NxVec3 ( _vNormal.x, _vNormal.y, _vNormal.z );
 	planeDesc->d		= distance;
+	planeDesc->materialIndex = m_MaterialIndex;
 	m_pPhXActorDesc->shapes.pushBack( planeDesc );
 
 }

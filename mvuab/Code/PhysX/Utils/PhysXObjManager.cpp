@@ -123,7 +123,7 @@ bool CPhysXObjManager::Reload()
 					CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
 					l_pPhysicUserDataMesh->SetPaint (true);
 
-					l_MeshActor->AddBoxSphape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
+					l_MeshActor->AddBoxShape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
 
 					CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_MeshActor);
 				}
