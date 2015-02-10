@@ -359,10 +359,66 @@ void CGraphicsManager::DrawGrid( float32 Size, Math::CColor Color, int32 GridX, 
   }
 }
 
-void CGraphicsManager::DrawPlane( float32 Size, const Math::Vect3f& normal, float32 distance, Math::CColor Color,
+void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, float32 distance, Math::CColor Color,
                                   int32 GridX, int32 GridZ )
 {
+		D3DXMATRIX matrix;
+        D3DXMatrixIdentity(&matrix);
+        m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
+        float A, B, C, D;
+        A = normal.x;
+        B = normal.y;
+        C = normal.z;
+        D = distance;
+
+
+        Math::Vect3f pointA, pointB;
+        if (C != 0)
+        {
+                pointA = Math::Vect3f(0.f, 0.f, -D / C);
+                pointB = Math::Vect3f(1.f, 1.f, (D - A - B) / C);
+        }
+        else if (B != 0)
+        {
+                pointA = Math::Vect3f(0.f, -D / B, 0.f);
+                pointB = Math::Vect3f(1.f, (-D - A - C) / B, 1.f);
+        }
+        else if (A != 0)
+        {
+                pointA = Math::Vect3f(-D / A, 0.f, 0.f);
+                pointB = Math::Vect3f((-D - B - C) / A, 1.f, 1.f);
+        }
+        else
+        {
+			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "drawplane: ALL VALUES = 0");
+                std::string l_msgerror = "Error, se genero un logger con la informacion";
+                throw CException(__FILE__, __LINE__, l_msgerror);
+        }
+
+        Math::Vect3f vectorA = pointB - pointA;
+        vectorA.Normalize();
+        Math::Vect3f vectorB;
+        vectorB = normal^vectorA;
+        vectorB.Normalize();
+        Math::Vect3f initPoint = normal*distance;
+
+        assert(GridX > 0);
+        assert(GridZ > 0);
+        //LINEAS EN Z
+        Math::Vect3f initPointA = initPoint - vectorB*size*0.5;
+        for (int b = 0; b <= GridX; ++b)
+        {
+                DrawLine(initPointA + vectorA*size*0.5, initPointA - vectorA*size*0.5, Color);
+
+                initPointA += vectorB*size / (float)GridX;
+        }
+        initPointA = initPoint - vectorA*size*0.5;
+        for (int b = 0; b <= GridX; ++b)
+        {
+                DrawLine(initPointA + vectorB*size*0.5, initPointA - vectorB*size*0.5, Color);
+                initPointA += vectorA*size / (float)GridX;
+        }
 }
 
 void CGraphicsManager::DrawCube( float32 Size )
@@ -381,6 +437,9 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+
+  // Set the debug color
+  EffectTechnique->SetDebugColor( Color );
 
   EffectTechnique->BeginRender();
 
@@ -601,31 +660,31 @@ void CGraphicsManager::DisableZBuffering()
 
 void CGraphicsManager::GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay )
 {
-  D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
+	D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
 
-  m_pD3DDevice->GetTransform( D3DTS_PROJECTION, &projectionMatrix );
-  m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
-  m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
+    m_pD3DDevice->GetTransform(D3DTS_PROJECTION, &projectionMatrix);
+    m_pD3DDevice->GetTransform(D3DTS_VIEW, &viewMatrix);
+    m_pD3DDevice->GetTransform(D3DTS_WORLD, &worldMatrix);
 
-  float32 angle_x = ( ( ( 2.0f * mousePos.x ) / m_uWidth ) - 1.0f ) / projectionMatrix( 0, 0 );
-  float32 angle_y = ( ( ( -2.0f * mousePos.y ) / m_uHeight ) + 1.0f ) / projectionMatrix( 1, 1 );
+    float angle_x = (((2.0f * mousePos.x) / 392) - 1.0f);
+    float angle_y = (((-2.0f * mousePos.y) / 281) + 1.0f);
 
-  D3DXVECTOR3 ray_org = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
-  D3DXVECTOR3 ray_dir = D3DXVECTOR3( angle_x, angle_y, 1.0f );
+    D3DXVECTOR3 ray_org = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+    D3DXVECTOR3 ray_dir = D3DXVECTOR3(angle_x, angle_y, 1.0f);
 
-  D3DXMATRIX m = worldMatrix * viewMatrix;
-  D3DXMatrixInverse( &worldViewInverse, 0, &m );
-  D3DXVec3TransformCoord( &ray_org, &ray_org, &worldViewInverse );
-  D3DXVec3TransformNormal( &ray_dir, &ray_dir, &worldViewInverse );
-  D3DXVec3Normalize( &ray_dir, &ray_dir );
+    D3DXMATRIX m = worldMatrix * viewMatrix;
+    D3DXMatrixInverse(&worldViewInverse, 0, &m);
+    D3DXVec3TransformCoord(&ray_org, &ray_org, &worldViewInverse);
+    D3DXVec3TransformNormal(&ray_dir, &ray_dir, &worldViewInverse);
+    D3DXVec3Normalize(&ray_dir, &ray_dir);
 
-  posRay.x = ray_org.x;
-  posRay.y = ray_org.y;
-  posRay.z = ray_org.z;
+    posRay.x = ray_org.x;
+    posRay.y = ray_org.y;
+    posRay.z = ray_org.z;
 
-  dirRay.x = ray_dir.x;
-  dirRay.y = ray_dir.y;
-  dirRay.z = ray_dir.z;
+    dirRay.x = ray_dir.x;
+    dirRay.y = ray_dir.y;
+    dirRay.z = ray_dir.z;
 }
 
 void CGraphicsManager::DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h, Math::CColor& backGroundColor,

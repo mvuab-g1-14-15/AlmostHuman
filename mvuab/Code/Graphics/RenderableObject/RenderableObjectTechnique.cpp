@@ -14,5 +14,5 @@ m_EffectTechnique(EffectTechnique)
 
 CRenderableObjectTechnique::~CRenderableObjectTechnique()
 {
-    CHECKED_DELETE(m_EffectTechnique);
+ 
 }

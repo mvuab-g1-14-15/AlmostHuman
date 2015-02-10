@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
+	<action name="ShootRayCast">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_SPACE"/>
+    </action>
+	<action name="ThrowGrenade">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_G"/>
+    </action>
+	
+	<action name="DisableCamera">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_L"/>
+    </action>
+	
+	<action name="DrawActor">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_H"/>
+    </action>
+	
 	<action name="ShowHideLogRender">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_F1"/>
     </action>

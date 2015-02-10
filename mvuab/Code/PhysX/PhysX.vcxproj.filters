@@ -5,5 +5,159 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Triggers">
+      <UniqueIdentifier>{e8c75923-ce88-47b4-88be-11eef738a67a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{ac043a06-2e31-48ed-9207-3a52d0a6b328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bone">
+      <UniqueIdentifier>{389730b2-b60f-4137-b9a9-ab578d817daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cooking Mesh">
+      <UniqueIdentifier>{5af4e941-472e-4019-84aa-1f043f776773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Joints">
+      <UniqueIdentifier>{b5379f1b-f110-4ef4-80d3-adc09aec6dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jump">
+      <UniqueIdentifier>{c251fe31-866a-40a5-bc7f-99ec2c8e4e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicMaterial">
+      <UniqueIdentifier>{8466d894-06a3-4776-9086-3fd77da184f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Reports">
+      <UniqueIdentifier>{ae2b23b6-a721-42c4-b7cf-e3ba15264250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{350e3c8d-e5ce-48c8-9f64-58ca3b53b1eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Triggers\Trigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Triggers\TriggerManager.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="Actor\PhysicActor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\PhysicController.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone\PhysxBone.cpp">
+      <Filter>Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone\PhysxSkeleton.cpp">
+      <Filter>Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="Cooking Mesh\PhysicCookingMesh.cpp">
+      <Filter>Cooking Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Joints\PhysicFixedJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="Joints\PhysicRevoluteJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="Joints\PhysicSphericalJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="Jump\Jump.cpp">
+      <Filter>Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PhysicASELoader.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PhysicStream.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PhysicUserAllocator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PhysXObjManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Reports\PhysicCollisionReport.cpp">
+      <Filter>Reports</Filter>
+    </ClCompile>
+    <ClCompile Include="Reports\PhysicTriggerReport.cpp">
+      <Filter>Reports</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp">
+      <Filter>PhysicMaterial</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Triggers\Trigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Triggers\TriggerManager.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsDefs.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Actor\PhysicActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\PhysicController.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone\PhysxBone.h">
+      <Filter>Bone</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone\PhysxSkeleton.h">
+      <Filter>Bone</Filter>
+    </ClInclude>
+    <ClInclude Include="Cooking Mesh\PhysicCookingMesh.h">
+      <Filter>Cooking Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Joints\JointsDefs.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="Joints\PhysicFixedJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="Joints\PhysicRevoluteJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="Joints\PhysicSphericalJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="Jump\Jump.h">
+      <Filter>Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysicASELoader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysicStream.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysicUserAllocator.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysicUserData.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysXObjDefs.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PhysXObjManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Reports\PhysicCollisionReport.h">
+      <Filter>Reports</Filter>
+    </ClInclude>
+    <ClInclude Include="Reports\PhysicsControllerHitReport.h">
+      <Filter>Reports</Filter>
+    </ClInclude>
+    <ClInclude Include="Reports\PhysicTriggerReport.h">
+      <Filter>Reports</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicMaterial\PhysicMaterial.h">
+      <Filter>PhysicMaterial</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

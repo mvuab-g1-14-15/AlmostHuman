@@ -159,7 +159,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 
 fn ExportTextureFile AllObj DestPath = 
 (
-
+	
 	if AllObj.count == 0 then 
 	(
 		format "Empty selection. Select any object \n"
@@ -175,9 +175,9 @@ fn ExportTextureFile AllObj DestPath =
 			actualObj = newObj[1]
 
 			filename = filenameFromPath actualObj.material.diffuseMap.filename
-			DestPath = DestPath + "/" + filename
+			DestTexturePath = DestPath + filename
 			
-			copyFile Obj.material.diffuseMap.filename DestPath
+			copyFile Obj.material.diffuseMap.filename DestTexturePath
 		)
 		catch
 		(

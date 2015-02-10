@@ -194,6 +194,7 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic(CameraPositionParameterStr, m_CameraPositionParameter);
   GetParameterBySemantic(BonesParameterStr, m_BonesParameter);
   GetParameterBySemantic(TimeParameterStr, m_TimeParameter);
+  GetParameterBySemantic(DebugColorStr, m_DebugColor);
 
   return true;
 }

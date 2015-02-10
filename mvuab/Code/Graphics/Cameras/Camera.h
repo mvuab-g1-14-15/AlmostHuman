@@ -15,7 +15,7 @@ class CCamera : public CName
 public:
 
     enum Type{ FREE = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
-
+    
     CCamera();
     virtual ~CCamera();
 
@@ -35,6 +35,7 @@ public:
     GET_SET( float32, ZNear )
     GET_SET( float32, ZFar )
     GET_SET( float32, aspect_ratio )
+    GET_SET( bool, Enable )
     GET_SET_REF( Math::Vect3f, Pos )
     
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
@@ -61,6 +62,8 @@ protected:
     float32            m_ZFar;
 
     Type               m_CameraType;
+
+    bool               m_Enable;
 
     CFrustum           m_Frustum;
 

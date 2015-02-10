@@ -5,15 +5,15 @@
 	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
 	<default_technique vertex_type="31" technique="MultiLightsNormalTechnique"/>
 	<default_technique vertex_type="79" technique="CubeReflectionTechnique"/>
-	
+		
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
 	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
 	<effect name="MultiLightsEffect" file="data/effects/MultiLights.fx"/>
 	<effect name="MultiLightsNormalEffect" file="data/effects/MultiLightsNormals.fx"/>
 	<effect name="MultiLightsNormalsLightMapEffect" file="data/effects/MultiLightsNormalsLightMap.fx"/>
 	<effect name="CubeReflectionEffect" file="data/effects/CubeReflection.fx"/>
-	
-	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+
+	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
 	<technique name="MultiLightsTechnique" effect="MultiLightsEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="MultiLightsNormalTechnique" effect="MultiLightsNormalEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>

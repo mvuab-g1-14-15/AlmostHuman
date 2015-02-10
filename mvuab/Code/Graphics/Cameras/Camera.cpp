@@ -11,7 +11,8 @@ CCamera::CCamera()
     m_view_d(2.0f),
     m_fov_radians(Math::Utils::Deg2Rad(50.0f)),
     m_ZNear(0.1f),
-    m_ZFar(1000.0f)
+    m_ZFar(1000.0f),
+    m_Enable(true)
 {
   float w = CCore::GetSingletonPtr()->GetScreenWidth();
   float h = CCore::GetSingletonPtr()->GetScreenHeight();
