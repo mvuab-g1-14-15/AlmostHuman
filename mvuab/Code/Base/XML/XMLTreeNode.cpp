@@ -979,3 +979,8 @@ bool CXMLTreeNode::IsComment () const
 
   return false;
 }
+
+Math::CColor CXMLTreeNode::GetCColorProperty(const char* _pszKey, const Math::CColor& _Default, bool warningDefault ) const
+{
+  return Math::CColor( GetVect4fProperty(_pszKey, Math::Vect4f(0,0,0,0), warningDefault));
+}

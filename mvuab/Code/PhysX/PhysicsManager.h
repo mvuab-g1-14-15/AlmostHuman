@@ -21,6 +21,7 @@
 #include "Math\Vector3.h"
 #include "Utils\Name.h"
 #include "PhysicsDefs.h"
+#include "Utils\SingletonPattern.h"
 
 //#include "Script/ScriptRegister.h"
 
@@ -49,7 +50,7 @@ class CGraphicsManager;
 
 using namespace Math;
 
-class CPhysicsManager
+class CPhysicsManager : public CSingleton<CPhysicsManager>
 {
   public:
     //--- Init and End protocols------------------------------------------

@@ -17,36 +17,18 @@
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Actor\PhysicActor.h"
 
-//---Forward Declarations---//
+// Forward declarations
 class CPhysicUserData;
 class CXMLTreeNode;
 class ItemCore;
-//--------------------------
+class CTrigger;
 
-struct sTrigger
+class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>
 {
-        std::string             enter;
-        std::string             exit;   
-        std::string             stay;   
-};
-
-class CTriggerManager : public CTemplatedVectorMapManager<CPhysicActor>
-{
-public:
-        enum TTriggerType
-        {
-                ENTER=0,
-                LEAVE,
-                STAY
-        };
-
-private:
+private: // Members
         std::string                                     m_FileName;
-        std::vector<CPhysicUserData *>					m_UserData;
-        std::map<std::string, sTrigger>					m_LUAMap;
-        
-        // Luabind value
-        int                                             m_Value;
+private: // Methods
+
 public:
         CTriggerManager ();
         ~CTriggerManager();
@@ -57,7 +39,6 @@ public:
         std::vector<CPhysicActor*>          GetTriggersVector           ();
         CPhysicActor*                       GetTriggerByName            ( std::string Name );
         std::string                         GetLUAByName                ( std::string Name, u_int Type );
-        TTriggerType                        GetTypeByName               ( std::string Name );
         void                                Clear                       ();
         void                                Release                     ();
         void                                ReleaseTrigger              (const std::string &_trigger);
@@ -65,12 +46,12 @@ public:
 		//void                                AddTrigger                  (CXMLTreeNode XMLData, ItemCore *Core, Vect3f Pos,sTrigger TriggerLua);
         //void                                AddTriggerWithoutXML        (std::string Name, ItemCore *Core, Vect3f Pos);
 
-		void                                AddTrigger                  (CXMLTreeNode XMLData,Vect3f Size, Vect3f Pos, int Group,sTrigger TriggerLua);
-		void                                AddTriggerWithoutXML        (std::string Name, Vect3f Size, Vect3f Pos, int Group, sTrigger TriggerLua);
+		//void                                AddTrigger                  (CXMLTreeNode XMLData,Vect3f Size, Vect3f Pos, int Group,sTrigger TriggerLua);
+		//void                                AddTriggerWithoutXML        (std::string Name, Vect3f Size, Vect3f Pos, int Group, sTrigger TriggerLua);
 
         // Métodos para Luabind
         int                                 GetValue                    () const;
-        void                                SetValue                    ( const unsigned int& v ); 
+        void                                SetValue                    ( const unsigned int& v );
 };
 
 #endif __TRIGGER_MANAGER_H__
