@@ -20,6 +20,7 @@
 //---Forward Declarations---//
 class CPhysicUserData;
 class CXMLTreeNode;
+class ItemCore;
 //--------------------------
 
 struct sTrigger

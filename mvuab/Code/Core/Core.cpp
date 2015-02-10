@@ -98,10 +98,10 @@ CCore::~CCore()
   CHECKED_DELETE( m_pCameraManager );
   CHECKED_DELETE( m_pEffectManager );
   CHECKED_DELETE( m_pLightManager );
-  CHECKED_DELETE( m_pSceneRendererCommandManager);
+  CHECKED_DELETE( m_pSceneRendererCommandManager );
   CHECKED_DELETE( m_pTimer );
-  CHECKED_DELETE(m_pConsole);
-  CHECKED_DELETE( m_pPhysicsManager);
+  CHECKED_DELETE( m_pConsole );
+  CHECKED_DELETE( m_pPhysicsManager );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )

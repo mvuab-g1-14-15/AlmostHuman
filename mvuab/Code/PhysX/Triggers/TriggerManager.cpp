@@ -12,6 +12,7 @@
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
 #include "Logger\Logger.h"
+#include "Core.h"
 
 CTriggerManager::CTriggerManager(): 
 m_Value(16),
@@ -71,9 +72,9 @@ bool CTriggerManager::LoadXML( const std::string &FileName )
                                 if (l_sType!="")
                                 {
                                         int triggerGroup = m(i).GetIntProperty("group",1);
-                                        ECollisionGroup group = CORE->GetPhysicsManager()->GetCollisionGroup(triggerGroup);
+                                        ECollisionGroup group = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCollisionGroup(triggerGroup);
                                         l_pActorTrigger->SetTriggerGroup(group);
-                                        CORE->GetPhysicsManager()->AddPhysicActor(l_pActorTrigger);
+                                        CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_pActorTrigger);
                                         //llevar esto a physicsManager
                                         AddResource(l_sTriggerName, l_pActorTrigger);
                                         // Trigger

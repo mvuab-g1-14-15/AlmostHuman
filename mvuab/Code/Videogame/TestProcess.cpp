@@ -62,6 +62,7 @@ bool done = false;
 CTestProcess::~CTestProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
+  CHECKED_DELETE(p_Grenade);
 }
 
 void CTestProcess::Update()
@@ -168,7 +169,7 @@ void CTestProcess::Update()
     uint32 mask = 1 << ECG_ESCENE;
     
 	
-	CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
+	  CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
     //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
     if(l_PUD)
     {
@@ -240,50 +241,49 @@ void CTestProcess::Init()
   l_pPhysicActor->AddPlaneShape(Math::Vect3f(0,1,0),0);
   l_PM->AddPhysicActor(l_pPhysicActor);
 
-  l_PUD = new CPhysicUserData("Box");
-  l_PUD->SetPaint(true);
-  l_PUD->SetColor(colBLACK);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,0,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
+  CPhysicUserData* l_PUD1 = new CPhysicUserData("Box");
+  l_PUD1->SetPaint(true);
+  l_PUD1->SetColor(colBLACK);
+  CPhysicActor* l_pPhysicActor1 = new CPhysicActor(l_PUD1);
+  l_pPhysicActor1->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor1->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor1);
 
-  l_PUD = new CPhysicUserData("Box2");
-  l_PUD->SetPaint(true);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
+  CPhysicUserData* l_PUD2 = new CPhysicUserData("Box2");
+  l_PUD2->SetPaint(true);
+  CPhysicActor* l_pPhysicActor2 = new CPhysicActor(l_PUD2);
+  l_pPhysicActor2->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,2,0));
+  l_pPhysicActor2->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor2);
 
-  l_PUD = new CPhysicUserData("Box3");
-  l_PUD->SetPaint(true);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
+  CPhysicUserData* l_PUD3 = new CPhysicUserData("Box3");
+  l_PUD3->SetPaint(true);
+  CPhysicActor* l_pPhysicActor3 = new CPhysicActor(l_PUD3);
+  l_pPhysicActor3->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,4,0));
+  l_pPhysicActor3->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor3);
 
-  l_PUD = new CPhysicUserData("Box4");
-  l_PUD->SetPaint(true);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
+  CPhysicUserData* l_PUD4 = new CPhysicUserData("Box4");
+  l_PUD4->SetPaint(true);
+  CPhysicActor* l_pPhysicActor4 = new CPhysicActor(l_PUD4);
+  l_pPhysicActor4->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,6,0));
+  l_pPhysicActor4->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor4);
 
-  l_PUD = new CPhysicUserData("Box5");
-  l_PUD->SetPaint(true);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,8,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
+  CPhysicUserData* l_PUD5 = new CPhysicUserData("Box5");
+  l_PUD5->SetPaint(true);
+  CPhysicActor* l_pPhysicActor5 = new CPhysicActor(l_PUD5);
+  l_pPhysicActor5->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,8,0));
+  l_pPhysicActor5->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor5);
 
-  l_PUD = new CPhysicUserData("Box6");
-  l_PUD->SetPaint(true);
-  l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,10,0));
-  l_pPhysicActor->CreateBody(1.0f);
-  l_PM->AddPhysicActor(l_pPhysicActor);
-
-
+  CPhysicUserData* l_PUD6 = new CPhysicUserData("Box6");
+  l_PUD6->SetPaint(true);
+  CPhysicActor* l_pPhysicActor6 = new CPhysicActor(l_PUD6);
+  l_pPhysicActor6->AddBoxSphape(Math::Vect3f(1,1,1), Math::Vect3f(0,0,0), Math::Vect3f(0,10,0));
+  l_pPhysicActor6->CreateBody(1.0f);
+  l_PM->AddPhysicActor(l_pPhysicActor6);
+  
 
   /*
   l_pPhysicActor = new CPhysicActor(l_PUD);

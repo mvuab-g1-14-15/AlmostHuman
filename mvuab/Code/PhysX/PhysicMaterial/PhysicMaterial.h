@@ -23,7 +23,6 @@ public:
 	CPhysicMaterial	(float restitution, float staticFriction, float dynamicFriction); 
 	~CPhysicMaterial	();
 
-  GET_SET_PTR(NxMaterial, Material);
 
 private:
   NxMaterial* m_Material;

@@ -4,7 +4,7 @@
 #include <string>
 
 class CPhysicActor;
-class CStaticMesh;
+//class CStaticMesh;
 
 class CGrenade
 {
@@ -14,7 +14,7 @@ class CGrenade
     float m_ForceMax;
     float m_Force;
     CPhysicActor* m_Actor;
-    CStaticMesh* m_StaticMesh;
+    //CStaticMesh* m_StaticMesh;
     std::string m_MeshName;
     bool m_GrenadeThrown;
     float m_ElapsedTime;

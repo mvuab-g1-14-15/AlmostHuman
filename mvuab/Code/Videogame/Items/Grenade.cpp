@@ -27,7 +27,7 @@ CGrenade::CGrenade(float a_TimeAux, float a_ForceMin, float a_ForceMax, float a_
 
 CGrenade::~CGrenade()
 {
-  CHECKED_DELETE( m_Actor );
+ 
 }
 
 void CGrenade::Start()
