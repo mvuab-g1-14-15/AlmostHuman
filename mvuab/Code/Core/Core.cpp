@@ -90,7 +90,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pLanguageManager );
   CHECKED_DELETE( m_pDebugWindowManager );
   CHECKED_DELETE( m_pStaticMeshManager );
-  CHECKED_DELETE(m_pRenderableObjectsManager);
+  CHECKED_DELETE( m_pRenderableObjectsManager);
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
   CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
   CHECKED_DELETE( m_pAnimatedModelsManager );
