@@ -90,11 +90,11 @@ class CPhysicsManager : public CSingleton<CPhysicsManager>
 
     ////--- Add/Release Joints
     bool          AddPhysicSphericalJoint     ( CPhysicSphericalJoint* _pJoint );
-    bool          RelasePhysicSphericalJoint    ( CPhysicSphericalJoint* _pJoint );
+    bool          ReleasePhysicSphericalJoint    ( CPhysicSphericalJoint* _pJoint );
     bool          AddPhysicRevoluteJoint      ( CPhysicRevoluteJoint* _pJoint );
-    bool          RelasePhysicRevoluteJoint   ( CPhysicRevoluteJoint* _pJoint );
+    bool          ReleasePhysicRevoluteJoint   ( CPhysicRevoluteJoint* _pJoint );
     bool          AddPhysicFixedJoint       ( CPhysicFixedJoint* _pJoint );
-    bool          RelasePhysicFixedJoint      ( CPhysicFixedJoint* _pJoint );
+    bool          ReleasePhysicFixedJoint      ( CPhysicFixedJoint* _pJoint );
 
 	//Materials
 

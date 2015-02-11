@@ -206,7 +206,6 @@ void CPhysicsManager::Release ( void )
     m_pPhysicsSDK = NULL;
   }
   CHECKED_DELETE ( m_pMyAllocator );
-
 }
 
 void CPhysicsManager::ReleaseVectors ()
@@ -668,9 +667,9 @@ bool CPhysicsManager::AddPhysicSphericalJoint ( CPhysicSphericalJoint* _Joint )
 }
 
 //----------------------------------------------------------------------------
-// RelasePhysicSphericalJoint : Alliberem un joint esféric de l'escena
+// ReleasePhysicSphericalJoint : Alliberem un joint esféric de l'escena
 //----------------------------------------------------------------------------
-bool CPhysicsManager::RelasePhysicSphericalJoint ( CPhysicSphericalJoint* _Joint )
+bool CPhysicsManager::ReleasePhysicSphericalJoint ( CPhysicSphericalJoint* _Joint )
 {
   assert ( _Joint );
   assert ( m_pScene );
@@ -704,9 +703,9 @@ bool CPhysicsManager::AddPhysicRevoluteJoint ( CPhysicRevoluteJoint* _pJoint )
 }
 
 //----------------------------------------------------------------------------
-// RelasePhysicRevoluteJoint : Alliberem un joint de bisagre de l'escena
+// ReleasePhysicRevoluteJoint : Alliberem un joint de bisagre de l'escena
 //----------------------------------------------------------------------------
-bool CPhysicsManager::RelasePhysicRevoluteJoint ( CPhysicRevoluteJoint* _Joint)
+bool CPhysicsManager::ReleasePhysicRevoluteJoint ( CPhysicRevoluteJoint* _Joint)
 {
   assert ( _Joint );
   assert ( m_pScene );
@@ -740,9 +739,9 @@ bool CPhysicsManager::AddPhysicFixedJoint ( CPhysicFixedJoint* _pJoint )
 }
 
 //----------------------------------------------------------------------------
-// RelasePhysicFixedJoint : Alliberem un joint fixe de l'escena
+// ReleasePhysicFixedJoint : Alliberem un joint fixe de l'escena
 //----------------------------------------------------------------------------
-bool CPhysicsManager::RelasePhysicFixedJoint ( CPhysicFixedJoint* _pJoint )
+bool CPhysicsManager::ReleasePhysicFixedJoint ( CPhysicFixedJoint* _pJoint )
 {
   assert ( _pJoint );
   assert ( m_pScene );

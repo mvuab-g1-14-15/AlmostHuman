@@ -50,14 +50,16 @@ void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFil
 
 CTestProcess::CTestProcess() : CProcess(),
   m_Speed( 0.1f ),
-  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
+  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false), m_PRJ(new CPhysicRevoluteJoint())
+  
 {
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
     //  Math::Vect3f(0.0f,2.0f,0.0f) );
   CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
   unsigned short debug = VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
-
+  m_pPhysicUserData = new CPhysicUserData("TestProcess");
+  m_pPhysicActor = new CPhysicActor(m_pPhysicUserData);
 }
 bool done = false;
 
@@ -80,6 +82,7 @@ CTestProcess::~CTestProcess()
 		CHECKED_DELETE(m_vPUD[i]);
 	}
 	m_vPUD.clear();
+
 }
 
 void CTestProcess::Update()
@@ -128,7 +131,7 @@ void CTestProcess::Update()
   //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
   //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
   //RAYCAST
-  if( pActionManager->DoAction("ShootRayCast") )
+  if( pActionManager->DoAction("LeftMouseButtonPressed") )
   {
     CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
     if( l_CurrentCamera )
@@ -136,6 +139,7 @@ void CTestProcess::Update()
       CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
       CPhysicUserData* l_PhysicUserData = new CPhysicUserData("RayCast");
       l_PhysicUserData->SetPaint(true);
+      m_vPUD.push_back(l_PhysicUserData);
       CPhysicActor* l_Actor = new CPhysicActor(l_PhysicUserData);
       //If don't want box, you can remove this line
       l_Actor->AddBoxShape(Math::Vect3f(0.05f, 0.05f, 0.05f), l_CurrentCamera->GetPos(), Math::Vect3f(0,0,0));
@@ -143,9 +147,8 @@ void CTestProcess::Update()
 
       // Add at the end allways it needs to have a shape
       l_PM->AddPhysicActor(l_Actor);
-
+      m_vPA.push_back(l_Actor);
       l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() * 20.0f );
-
       SCollisionInfo &l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
       uint32 mask = 1 << ECG_ESCENE;
 
@@ -158,10 +161,10 @@ void CTestProcess::Update()
       else
         std::string l_Object = "";
     }
-    
+
   }
   CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
+  //Enable or disable Current camera
   if ( pActionManager->DoAction("DisableCamera") )
   {
       CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
@@ -173,6 +176,8 @@ void CTestProcess::Update()
           l_CurrentCamera->SetEnable(true);
       }
   }
+
+  //Draw actor with color red
   if ( pActionManager->DoAction("DrawActor") )
   {
     Vect2i l_PosMouse = CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
@@ -192,6 +197,25 @@ void CTestProcess::Update()
     {
       l_PUD->SetColor(colRED);
     }
+  }
+
+  if(pActionManager->DoAction("LeftBridge") )
+  {
+    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    m_pPhysicActor = l_PM->GetActor("Box2");
+    m_PRJ = new CPhysicRevoluteJoint();
+    m_PRJ->SetInfo(Math::Vect3f(0,0,1), Math::Vect3f(0,0,0), m_pPhysicActor);
+    m_PRJ->SetMotor(2, 0.4f);
+    l_PM->AddPhysicRevoluteJoint(m_PRJ);
+  }
+  if(pActionManager->DoAction("RightBridge") )
+  {
+    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    m_pPhysicActor = l_PM->GetActor("Box2");
+    m_PRJ = new CPhysicRevoluteJoint();
+    m_PRJ->SetInfo(Math::Vect3f(0,0,-1), Math::Vect3f(0,0,0), m_pPhysicActor);
+    m_PRJ->SetMotor(2, 0.4f);
+    l_PM->AddPhysicRevoluteJoint(m_PRJ);
   }
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 
@@ -215,44 +239,55 @@ void CTestProcess::Init()
   l_PUD->SetColor(colBLACK);
   m_vPUD.push_back(l_PUD);
   CPhysicActor* l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddSphereShape(0.4f, Math::Vect3f(6,4,6), Math::Vect3f(0,0,0));
+  l_pPhysicActor->AddSphereShape(0.4f, Math::Vect3f(10,4,6));
   l_pPhysicActor->CreateBody(1.0f);
   m_vPA.push_back(l_pPhysicActor);
   l_PM->AddPhysicActor(l_pPhysicActor);
-  m_PSJ->SetInfo(Math::Vect3f(4,6,4), l_pPhysicActor);
+  l_pPhysicActor->AddVelocityAtPos(Math::Vect3f(10,0,6),Math::Vect3f(10,4,6), 10);
+  m_PSJ->SetInfo(Math::Vect3f(5,4,6), l_pPhysicActor);
   l_PM->AddPhysicSphericalJoint(m_PSJ);
+  
 
   //Ejercicio 2 - Puente levadiso
 
+  
   m_PRJ = new CPhysicRevoluteJoint();
   l_PUD = new CPhysicUserData("Box2");
   l_PUD->SetPaint(true);
   l_PUD->SetColor(colBLACK);
   m_vPUD.push_back(l_PUD);
   l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxShape(Math::Vect3f(0.2f, 4, 1), Math::Vect3f(0,4,0), Math::Vect3f(0,0,0));
-  l_pPhysicActor->CreateBody(0.5f);
+  l_pPhysicActor->AddBoxShape(Math::Vect3f(0.2f, 4, 1), Math::Vect3f(0,4,0));
+  l_pPhysicActor->CreateBody(1.0f);
   l_PM->AddPhysicActor(l_pPhysicActor);
   m_vPA.push_back(l_pPhysicActor);
   m_PRJ->SetInfo(Math::Vect3f(0,0,-1), Math::Vect3f(0,0,0), l_pPhysicActor);
-  m_PRJ->SetMotor(2, 0.4f);
   l_PM->AddPhysicRevoluteJoint(m_PRJ);
+
+  //l_PUD = new CPhysicUserData("MiniBox");
+  //l_PUD->SetPaint(true);
+  //l_PUD->SetColor(colBLACK);
+  //m_vPUD.push_back(l_PUD);
+  //l_pPhysicActor = new CPhysicActor(l_PUD);
+  //l_pPhysicActor->AddBoxShape(Math::Vect3f(0.2f, 0.2f, 1), Math::Vect3f(0,-0.4f,0));
+  //m_vPA.push_back(l_pPhysicActor);
+  //l_PM->AddPhysicActor(l_pPhysicActor);
 
   l_PUD = new CPhysicUserData("Box3");
   l_PUD->SetPaint(true);
   l_PUD->SetColor(colBLACK);
   m_vPUD.push_back(l_PUD);
   l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(-7,-1.5f,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(-7,-1.5f,0));
   m_vPA.push_back(l_pPhysicActor);
   l_PM->AddPhysicActor(l_pPhysicActor);
 
-  l_PUD = new CPhysicUserData("Box3");
+  l_PUD = new CPhysicUserData("Box4");
   l_PUD->SetPaint(true);
   l_PUD->SetColor(colBLACK);
   m_vPUD.push_back(l_PUD);
   l_pPhysicActor = new CPhysicActor(l_PUD);
-  l_pPhysicActor->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(7,-1.5f,0), Math::Vect3f(0,0,0));
+  l_pPhysicActor->AddBoxShape(Math::Vect3f(1,1,1), Math::Vect3f(7,-1.5f,0));
   m_vPA.push_back(l_pPhysicActor);
   l_PM->AddPhysicActor(l_pPhysicActor);
 
