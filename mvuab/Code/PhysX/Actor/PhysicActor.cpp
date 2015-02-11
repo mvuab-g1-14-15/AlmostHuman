@@ -175,6 +175,7 @@ void CPhysicActor::AddSphereShape ( float radius, const Math::Vect3f& _vGlobalPo
 	NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
 	assert(sphereDesc);
 	sphereDesc->group = _uiGroup;
+  sphereDesc->materialIndex = m_MaterialIndex;
 	m_vSphereDesc.push_back(sphereDesc);
 	sphereDesc->radius = radius;
 	sphereDesc->localPose.t = NxVec3(localPos.x, localPos.y, localPos.z);
@@ -241,6 +242,7 @@ void CPhysicActor::AddCapsuleShape (float radius, float height, const Math::Vect
 	NxCapsuleShapeDesc* capsuleDesc = new NxCapsuleShapeDesc();
 	assert(capsuleDesc);
 	capsuleDesc->group = _uiGroup;
+  capsuleDesc->materialIndex = m_MaterialIndex;
 	m_vCapsuleDesc.push_back(capsuleDesc);
 	capsuleDesc->height = height;
 	capsuleDesc->radius = radius;
@@ -265,6 +267,7 @@ void CPhysicActor::AddMeshShape	( NxTriangleMesh* mesh, const Math::Vect3f& _vGl
 	NxTriangleMeshShapeDesc* triangleMeshDesc = new NxTriangleMeshShapeDesc();
 	assert(triangleMeshDesc);
 	triangleMeshDesc->group = _uiGroup;
+  triangleMeshDesc->materialIndex = m_MaterialIndex;
 	m_vMeshDesc.push_back(triangleMeshDesc);
 	// The actor has mesh shape
 	triangleMeshDesc->meshData = mesh;
@@ -289,10 +292,10 @@ void CPhysicActor::AddPlaneShape ( const Math::Vect3f& _vNormal, float distance,
 	NxPlaneShapeDesc *planeDesc = new NxPlaneShapeDesc();
 	assert ( planeDesc );
 	planeDesc->group	= _uiGroup;
+  planeDesc->materialIndex = m_MaterialIndex;
 	m_vPlaneDesc.push_back(planeDesc);
 	planeDesc->normal	= NxVec3 ( _vNormal.x, _vNormal.y, _vNormal.z );
 	planeDesc->d		= distance;
-	planeDesc->materialIndex = m_MaterialIndex;
 	m_pPhXActorDesc->shapes.pushBack( planeDesc );
 
 }
