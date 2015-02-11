@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{11f0a30d-b02d-43af-8208-f559044e1db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{7f91bac8-a732-44d7-8618-dc472d5800e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{caa3ddbc-1b0a-4009-b76d-8a938431d797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{00b07b0a-7f1f-4548-be14-855270829a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{725406a5-82dc-4b52-a931-fe370d3f61ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{a26ababb-829b-49e4-b1dd-9956b4b9ca94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{ae19777b-b643-44c6-ba4e-b7923c348451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language">
+      <UniqueIdentifier>{660e04ee-6558-42d3-9686-91e4ee147049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager">
+      <UniqueIdentifier>{a5ff754c-0772-42c5-80f6-88cbf7764c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager\FunctionsToRegister">
+      <UniqueIdentifier>{3b820a63-a420-4502-a976-304ea36dc761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{1afb5b90-17a7-4b41-8432-093aabd38248}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Math\MathConstants.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\Example.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLTreeNode.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\Timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger\Logger.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\LerpAnimator1D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\LerpAnimator2D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\LerpAnimator3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\MemLeaks.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\Exception.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\CountDownTimer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Language\LanguageManager.cpp">
+      <Filter>Language</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\ScriptManager.cpp">
+      <Filter>ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\ECSFunctions .cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Console.cpp">
+      <Filter>Console</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Math\MathTypes.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\MathUtils.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix34.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\XMLTreeNode.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Types.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Defines.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SingletonPattern.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Color.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\Timer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\Logger.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\LerpAnimator3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\LerpAnimator1D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\LerpAnimator2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\MemLeaks.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\Exception.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\TemplatedVectorMapManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\MapManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\CountDownTimer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Language\LanguageManager.h">
+      <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ECSUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Name.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\AABB.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\ScriptManager.h">
+      <Filter>ScriptManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Visible.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\ECSFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\GPUStatics.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Console</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Math\MathUtils.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Matrix33.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Matrix34.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Matrix44.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Vector2.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Vector3.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Vector4.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="Math\Color.inl">
+      <Filter>Math</Filter>
+    </None>
+  </ItemGroup>
+</Project>
