@@ -21,6 +21,7 @@
 #include "Timer\Timer.h"
 #include "Console\Console.h"
 #include "PhysicsManager.h"
+#include "ECSManager.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -66,6 +67,7 @@ CCore::CCore() :
   m_pLightManager( new CLightManager() ),
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pPhysicsManager( new CPhysicsManager() ),
+  m_pECSManager( new CECSManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
 {
@@ -102,6 +104,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pPhysicsManager );
+  CHECKED_DELETE( m_pECSManager );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -126,6 +129,7 @@ void CCore::Update()
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
   m_pPhysicsManager->Update(deltaTime);
+  m_pECSManager->Update();
 
   if( m_pActionManager->DoAction("ClearConsole") )
   {
@@ -142,6 +146,7 @@ void CCore::Render()
   m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
   m_pPhysicsManager->DebugRender(m_pGraphicsManager);
+  m_pECSManager->Render();
 }
 
 void CCore::LoadXml()
@@ -278,6 +283,8 @@ void CCore::InitManagers()
   m_pSceneRendererCommandManager->Load(m_SceneRendererCommandPath);
 
   m_pPhysicsManager->Init();
+
+  m_pECSManager->Init("XML-SYSTEMS_FILE");
 }
 
 void CCore::Trace( const std::string& TraceStr )
