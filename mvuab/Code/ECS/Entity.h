@@ -16,8 +16,12 @@ public:
 
   CComponent* GetComponent(const ComponentType);
 
+  int GetEntityType(void) const;
+
 private:
 	std::map<ComponentType, CComponent*> m_Components;
+
+  int m_EntityType;
 };
 
 #endif //_ENTITY_H

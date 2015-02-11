@@ -3,6 +3,7 @@
 #include "Utils\Defines.h"
 
 CEntity::CEntity(void)
+  : m_EntityType( 0 )
 {
 }
 
@@ -28,7 +29,10 @@ void CEntity::AddComponent(CComponent* a_Component)
     it->second = a_Component;
   }
   else
+  {
     m_Components[l_ComponentType] = a_Component;
+    m_EntityType |= l_ComponentType;
+  }
 }
 
 void CEntity::RemoveComponent(const ComponentType a_ComponentType)
@@ -38,6 +42,7 @@ void CEntity::RemoveComponent(const ComponentType a_ComponentType)
   {
     CHECKED_DELETE(it->second);
     m_Components.erase(it);
+    m_EntityType &= ~a_ComponentType;
   }
 }
 
@@ -49,4 +54,9 @@ CComponent* CEntity::GetComponent(const ComponentType a_ComponentType)
     return it->second;
   }
   return 0;
+}
+
+int CEntity::GetEntityType() const
+{
+  return m_EntityType;
 }

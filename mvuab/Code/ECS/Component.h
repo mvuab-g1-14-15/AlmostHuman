@@ -3,7 +3,8 @@
 
 enum ComponentType
 {
-	TRANSFORM = 0
+	TRANSFORM = 1 << 0,
+  PHYSIC = 1 << 1
 };
 
 class CComponent
