@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Transform.h"
+#include "Renderer.h"
 
 CTestProcess::CTestProcess() : CProcess()
 {
@@ -19,11 +20,20 @@ void CTestProcess::Update()
 void CTestProcess::Init()
 {
   CEntity* l_Entity = new CEntity();
-  CComponent* l_Component = new CTransform();
 
   int l_Type = l_Entity->GetEntityType();
 
-  l_Entity->AddComponent(l_Component);
+  CComponent* l_Transform = new CTransform();
+  l_Entity->AddComponent(l_Transform);
+
+  l_Type = l_Entity->GetEntityType();
+
+  CComponent* l_Renderer = new CRenderer();
+  l_Entity->AddComponent(l_Renderer);
+
+  l_Type = l_Entity->GetEntityType();
+
+  l_Entity->RemoveComponent(TRANSFORM);
 
   l_Type = l_Entity->GetEntityType();
 

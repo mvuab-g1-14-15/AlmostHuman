@@ -4,7 +4,9 @@
 enum ComponentType
 {
 	TRANSFORM = 1 << 0,
-  PHYSIC = 1 << 1
+  RENDERER = 1 << 1,
+  PHYSIC = 1 << 2,
+  SCRIPT = 1 << 3
 };
 
 class CComponent
