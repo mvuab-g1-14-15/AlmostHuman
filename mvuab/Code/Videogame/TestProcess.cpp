@@ -200,22 +200,12 @@ void CTestProcess::Update()
   }
 
   if(pActionManager->DoAction("LeftBridge") )
-  {
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-    m_pPhysicActor = l_PM->GetActor("Box2");
-    m_PRJ = new CPhysicRevoluteJoint();
-    m_PRJ->SetInfo(Math::Vect3f(0,0,1), Math::Vect3f(0,0,0), m_pPhysicActor);
-    m_PRJ->SetMotor(2, 0.4f);
-    l_PM->AddPhysicRevoluteJoint(m_PRJ);
+  {   
+    m_PRJ->ActiveMotor(-200);
   }
   if(pActionManager->DoAction("RightBridge") )
   {
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-    m_pPhysicActor = l_PM->GetActor("Box2");
-    m_PRJ = new CPhysicRevoluteJoint();
-    m_PRJ->SetInfo(Math::Vect3f(0,0,-1), Math::Vect3f(0,0,0), m_pPhysicActor);
-    m_PRJ->SetMotor(2, 0.4f);
-    l_PM->AddPhysicRevoluteJoint(m_PRJ);
+   m_PRJ->ActiveMotor(200);
   }
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode("update()");
 
@@ -251,7 +241,7 @@ void CTestProcess::Init()
   //Ejercicio 2 - Puente levadiso
 
   
-  m_PRJ = new CPhysicRevoluteJoint();
+ 
   l_PUD = new CPhysicUserData("Box2");
   l_PUD->SetPaint(true);
   l_PUD->SetColor(colBLACK);
@@ -261,17 +251,11 @@ void CTestProcess::Init()
   l_pPhysicActor->CreateBody(1.0f);
   l_PM->AddPhysicActor(l_pPhysicActor);
   m_vPA.push_back(l_pPhysicActor);
+  m_PRJ = new CPhysicRevoluteJoint();
   m_PRJ->SetInfo(Math::Vect3f(0,0,-1), Math::Vect3f(0,0,0), l_pPhysicActor);
+  m_PRJ->SetMotor(20, 5.f);
   l_PM->AddPhysicRevoluteJoint(m_PRJ);
-
-  //l_PUD = new CPhysicUserData("MiniBox");
-  //l_PUD->SetPaint(true);
-  //l_PUD->SetColor(colBLACK);
-  //m_vPUD.push_back(l_PUD);
-  //l_pPhysicActor = new CPhysicActor(l_PUD);
-  //l_pPhysicActor->AddBoxShape(Math::Vect3f(0.2f, 0.2f, 1), Math::Vect3f(0,-0.4f,0));
-  //m_vPA.push_back(l_pPhysicActor);
-  //l_PM->AddPhysicActor(l_pPhysicActor);
+ 
 
   l_PUD = new CPhysicUserData("Box3");
   l_PUD->SetPaint(true);
