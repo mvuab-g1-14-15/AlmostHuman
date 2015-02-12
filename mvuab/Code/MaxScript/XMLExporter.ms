@@ -78,10 +78,13 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 				)
 				if Exists == false then
 				(
-					layers[(layers.count+1)] = getUserProp Obj "layer_render"
-					local l_NewLayerNode = xDoc.getNewNode "layer"
-					l_RootNode.AppendNode l_NewLayerNode
-					l_NewLayerNode.AddAttributeAsString "name" (getUserProp Obj "layer_render")
+					if (getUserProp Obj "layer_render") != undefined then
+					(
+						layers[(layers.count+1)] = getUserProp Obj "layer_render"
+						local l_NewLayerNode = xDoc.getNewNode "layer"
+						l_RootNode.AppendNode l_NewLayerNode
+						l_NewLayerNode.AddAttributeAsString "name" layers[layers.count-1]
+					)
 				)
 			)
 			else

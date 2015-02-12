@@ -1,9 +1,10 @@
 <effects>
+	<default_technique vertex_type="19" technique="MultiLightsTechnique"/>
+	<default_technique vertex_type="31" technique="MultiLightsNormalTechnique"/>
+	<default_technique vertex_type="51" technique="MultiLightsLightMapTechnique"/>
+	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
 	<default_technique vertex_type="233" technique="DefaultTechnique"/>
 	<default_technique vertex_type="415" technique="Cal3DTechnique"/>
-	<default_technique vertex_type="19" technique="MultiLightsTechnique"/>
-	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
-	<default_technique vertex_type="31" technique="MultiLightsNormalTechnique"/>
 	<default_technique vertex_type="531" technique="CubeReflectionTechnique"/>
 		
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
@@ -12,6 +13,7 @@
 	<effect name="MultiLightsNormalEffect" file="data/effects/MultiLightsNormals.fx"/>
 	<effect name="MultiLightsNormalsLightMapEffect" file="data/effects/MultiLightsNormalsLightMap.fx"/>
 	<effect name="CubeReflectionEffect" file="data/effects/CubeReflection.fx"/>
+	<effect name="MultiLightsLightMapEffect" file="data/effects/MultiLightsLightMap.fx"/>
 
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
@@ -19,4 +21,5 @@
 	<technique name="MultiLightsNormalTechnique" effect="MultiLightsNormalEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="MultiLightsNormalsLightMapTechnique" effect="MultiLightsNormalsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="CubeReflectionTechnique" effect="CubeReflectionEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
+	<technique name="MultiLightsLightMapTechnique" effect="MultiLightsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 </effects>
