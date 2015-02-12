@@ -47,6 +47,7 @@ struct SMaterial
 	m_Texture1 = STexture(),
 	m_Texture2  = STexture(),
 	m_TextureBump  = STexture(),
+	m_TextureReflection = STexture(),
 	m_Color = 0,
 	
 	fn FromMaxMaterial mat =
@@ -76,6 +77,14 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureBumpMappingFileName = mat.bumpMap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+				)
+				
+				if mat.reflectionMapEnable == true AND classOf(mat.reflectionMap) == BitmapTexture then
+				(
+					m_Type = (bit.or m_Type VERTEX_TYPE_REFLECTION)
+					-- Load the texture of bump mapping
+					local l_TextureReflectionFileName = mat.reflectionMap.filename
+					m_TextureReflection.FromMaxTexture l_TextureReflectionFileName
 				)
 			)
 			else
@@ -114,6 +123,10 @@ struct SMaterial
 		(
 			l_nTextures = l_nTextures + 1
 		)
+		if ((bit.and m_Type VERTEX_TYPE_REFLECTION) == VERTEX_TYPE_REFLECTION ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
 		
 		WriteShort file l_nTextures #unsigned
 		
@@ -128,6 +141,10 @@ struct SMaterial
 		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 		(
 			m_TextureBump.WriteToFile file
+		)
+		if ((bit.and m_Type VERTEX_TYPE_REFLECTION) == VERTEX_TYPE_REFLECTION ) then 
+		(
+			m_TextureReflection.WriteToFile file
 		)
 		format "Writing Material End\n"
 	)

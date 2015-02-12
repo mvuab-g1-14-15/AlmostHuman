@@ -25,15 +25,16 @@ G N T B D T1 T2
 #include <d3dx9.h>
 #include "Utils\Defines.h"
 
-#define VERTEX_TYPE_GEOMETRY    0x0001 // 1
-#define VERTEX_TYPE_NORMAL      0x0002 // 2
-#define VERTEX_TYPE_TANGENT     0x0004 // 4
-#define VERTEX_TYPE_BINORMAL    0x0008 // 8
-#define VERTEX_TYPE_TEXTURE1    0x0010 // 16
-#define VERTEX_TYPE_TEXTURE2    0x0020 // 32
-#define VERTEX_TYPE_DIFFUSE     0x0040 // 64
-#define VERTEX_TYPE_WEIGHT		0x0080 // 128
-#define VERTEX_TYPE_INDICES		0x0100 // 256
+#define VERTEX_TYPE_GEOMETRY    1 << 0 // 1
+#define VERTEX_TYPE_NORMAL      1 << 1 // 2
+#define VERTEX_TYPE_TANGENT     1 << 2 // 4
+#define VERTEX_TYPE_BINORMAL    1 << 3 // 8
+#define VERTEX_TYPE_TEXTURE1    1 << 4 // 16
+#define VERTEX_TYPE_TEXTURE2    1 << 5 // 32
+#define VERTEX_TYPE_DIFFUSE     1 << 6 // 64
+#define VERTEX_TYPE_WEIGHT		1 << 7 // 128
+#define VERTEX_TYPE_INDICES		1 << 8 // 256
+#define VERTEX_TYPE_REFLECTION  1 << 9 // 512
 
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
@@ -266,6 +267,30 @@ struct TNORMAL_T2_VERTEX
     static inline unsigned int GetFVF()
     {
         return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX1|D3DFVF_TEX2;
+    }
+};
+
+struct TNORMAL_T1_REFLECTION_VERTEX
+{
+    float x, y, z;
+    float nx, ny, nz;
+    float tu, tv;
+    
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE(s_VertexDeclaration);
+    }
+
+    static inline unsigned short GetVertexType()
+    {
+		return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_REFLECTION;
+    }
+    
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX1;
     }
 };
 

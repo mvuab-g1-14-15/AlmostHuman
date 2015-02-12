@@ -1,16 +1,21 @@
 #pragma once
-#ifndef INC_TEXTURE_H_
-#define INC_TEXTURE_H_
+#ifndef INC_CUBED_TEXTURE_H_
+#define INC_CUBED_TEXTURE_H_
 
 #include "Texture.h"
-class CCubedTexture
+
+class CCubedTexture : public CTexture
 {
 protected:
     virtual bool LoadFile();
 
+	LPDIRECT3DCUBETEXTURE9 m_CubeTexture;
+
 public:
     CCubedTexture();
     virtual ~CCubedTexture();
+
+	virtual void Activate(size_t StageId);
 };
 
-#endif //INC_TEXTURE_H_
+#endif //INC_CUBED_TEXTURE_H_
