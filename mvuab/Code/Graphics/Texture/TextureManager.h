@@ -8,6 +8,7 @@
 #include "Utils\SingletonPattern.h"
 #include "Utils\MapManager.h"
 #include "Texture.h"
+#include "CubedTexture.h"
 
 class CTextureManager : public CMapManager<CTexture>, public CSingleton<CTextureManager>
 {

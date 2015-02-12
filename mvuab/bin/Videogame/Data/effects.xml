@@ -4,7 +4,7 @@
 	<default_technique vertex_type="19" technique="MultiLightsTechnique"/>
 	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
 	<default_technique vertex_type="31" technique="MultiLightsNormalTechnique"/>
-	<default_technique vertex_type="79" technique="CubeReflectionTechnique"/>
+	<default_technique vertex_type="531" technique="CubeReflectionTechnique"/>
 		
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
 	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>

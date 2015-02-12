@@ -5,6 +5,7 @@ global VERTEX_TYPE_BINORMAL	 	= 0x0008
 global VERTEX_TYPE_TEXTURE1 	= 0x0010
 global VERTEX_TYPE_TEXTURE2 	= 0x0020
 global VERTEX_TYPE_DIFFUSE 		= 0x0040
+global VERTEX_TYPE_REFLECTION	= 0x0200
 
 struct SVertex
 (
@@ -76,7 +77,6 @@ struct SVertex
 		(
             --format "\t Color: (%)\n" m_Color
 			WriteFloat file m_Color
-		)
-			
+		)			
 	)
 )

@@ -21,7 +21,7 @@ public:
     bool Load(const std::string &FileName);
 
     bool Reload();
-    void Activate(size_t StageId);
+    virtual void Activate(size_t StageId);
 };
 
 #endif //INC_TEXTURE_H_

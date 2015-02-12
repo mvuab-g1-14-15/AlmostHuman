@@ -1,31 +1,22 @@
 #include "globals.fxh"
-
-samplerCUBE ReflectionSampler : register ( s0 ) = sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-};
-
-struct VertexVS
-{
-	float3 	Position	: POSITION;
-    float3 	Normal 		: NORMAL;
-};
+#include "vertex_types.fxh"
+#include "samplers.fxh"
 
 struct VertexPS
 {
     float4 HPosition		: POSITION;
-    float3 Normal 			: TEXCOORD2;
-	float3 WorldPosition 	: TEXCOORD3;
+    float3 Normal 			: TEXCOORD0;
+	float3 WorldPosition 	: TEXCOORD1;
+	float2 UV				: TEXCOORD2;
 };
 
-VertexPS RenderVS(VertexVS IN)
+VertexPS RenderVS(TNORMAL_T1_VERTEX IN)
 {
     VertexPS OUT=(VertexPS)0;
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
     OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix);
+	OUT.UV = IN.UV;
     return OUT;
 }
 
@@ -70,7 +61,7 @@ float4 RenderPS(VertexPS IN) : COLOR
 	float3 l_CameraToPixel = normalize(l_CameraPosition - l_Position);
 	
 	float3 l_ReflectVector = reflect(l_CameraToPixel, l_Normal);
-	float4 l_EnvironmentColor = texCUBE(ReflectionSampler, l_ReflectVector);
+	float4 l_EnvironmentColor = texCUBE(S1CubeLinearSampler, l_ReflectVector);
 	
 	float4 l_PixelColor = l_LightsContrib * l_DiffuseColor + l_EnvironmentColor;
 	

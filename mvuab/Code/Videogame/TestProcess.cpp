@@ -50,7 +50,7 @@ void GetFilesFromPath(const std::string &Path, std::vector<std::string> &_OutFil
 
 CTestProcess::CTestProcess() : CProcess(),
   m_Speed( 0.1f ),
-  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false), m_PRJ(new CPhysicRevoluteJoint())
+  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll(false)
   
 {
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
@@ -58,8 +58,7 @@ CTestProcess::CTestProcess() : CProcess(),
   CCameraManager::GetSingletonPtr()->SetCurrentCamera("TestProcessCam");
 
   unsigned short debug = VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TANGENT|VERTEX_TYPE_BINORMAL|VERTEX_TYPE_TEXTURE1|VERTEX_TYPE_DIFFUSE;
-  m_pPhysicUserData = new CPhysicUserData("TestProcess");
-  m_pPhysicActor = new CPhysicActor(m_pPhysicUserData);
+  
 }
 bool done = false;
 

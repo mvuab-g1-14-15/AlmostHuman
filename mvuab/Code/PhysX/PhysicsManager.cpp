@@ -712,7 +712,6 @@ bool CPhysicsManager::ReleasePhysicRevoluteJoint ( CPhysicRevoluteJoint* _Joint)
   NxJoint* l_PhXJoint = _Joint->GetPhXJoint();
   m_pScene->releaseJoint(*l_PhXJoint);
   l_PhXJoint = 0;
-  CHECKED_DELETE(_Joint);
   return true;
 }
 

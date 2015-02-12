@@ -24,7 +24,11 @@ CTexture* CTextureManager::GetTexture(const std::string fileName )
 {
     if( m_Resources.find(fileName) == m_Resources.end() )
     {
-        CTexture *t = new CTexture();
+        CTexture *t;
+		if (fileName.find("Cube") != std::string::npos)
+			t = new CCubedTexture();
+		else
+			t = new CTexture();
         if(!t->Load(fileName)) 
         {
             CHECKED_DELETE(t);

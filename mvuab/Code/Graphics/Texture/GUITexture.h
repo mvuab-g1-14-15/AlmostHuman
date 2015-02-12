@@ -1,6 +1,6 @@
 #pragma once
-#ifndef INC_TEXTURE_H_
-#define INC_TEXTURE_H_
+#ifndef INC_GUI_TEXTURE_H_
+#define INC_GUI_TEXTURE_H_
 
 #include "Texture.h"
 class CGUITexture
@@ -13,4 +13,4 @@ public:
     virtual ~CGUITexture();
 };
 
-#endif //INC_TEXTURE_H_
+#endif //INC_GUI_TEXTURE_H_
