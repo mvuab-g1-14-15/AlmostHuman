@@ -1,43 +1,15 @@
+var m_TimeToRefresh = 10000;
+var m_SecondsInMilis = 1000;
 
 $(document).ready(function() 
 {
-	$.ajax({
-            type: "GET",
-            url: "log.xml",
-            cache: false,
-            dataType: "xml",
-            success: function(xml) {
+    LoadXML();
+    var refInterval1 = window.setInterval('ClearDivXML()', m_TimeToRefresh-1); // 10 seconds
+    var refInterval2 = window.setInterval('LoadXML()', m_TimeToRefresh); // 10 seconds
 
-    			var trace_iteration = 0;
-
-        		$(xml).find('log').each(function(){
-
-        			trace_iteration = 		trace_iteration + 1;
-
-                    var module = 			$(this).attr('module');
-                    var engine_class = 		$(this).attr('engine_class');
-					var msg = 				$(this).attr('msg');
-					var timestamp = 		$(this).attr('timestamp');
-					var date_time = 		$(this).attr('date_time');
-					var level = 			$(this).attr('level');
-					
-
-//<p class="System"><span class="time">0</span><a onclick="hide('trace0')">STACK</a> GlobalManager.Awake</p>
-					var item = '<p class="' + module + '"><img src="img/level_'+level+'.png" alt="'+level+'" style="width:35px;height:35px"><span class="time">'+date_time+'</span></span><a onclick="hide(\'trace_'+trace_iteration+'\')">DETAILS</a> ' + engine_class + ' </p><pre id="trace_'+trace_iteration+'"> '+ msg +'</pre>';
-
-					 $('#logger_wrapper').append($(item));
-     	 		});
-            }
-
-       
-	});
 });
-
-/**
-	Functions for toggling visibility in the log.
-*/
-
-
+ 
+//	Functions for toggling visibility in the log.
 /**
 	Gets all the elements in the node of the given  class and tag.
 */
@@ -114,69 +86,45 @@ function hide_class(className)
 }
 
 //http://tutorialab.com/web-deisgn-tutorials/jquery-js/79-create-dynamic-html-using-xml-and-jquery
-function LoadXML() {
+function LoadXML() 
+{
 
-    /*$.get('log.xml', function(callback_data){
-        
-        var trace_iteration = 0;
-
-
-        //loop each logger_row
-        $(callback_data).find('log').each(function(){
-          
-          	$('#logger_wrapper').append('<div id="logger_row">');
-
-	          var $log = $(this);
-
-console.log ($log);
-
-	          var module = $log.find('module').text();
-	          var engine_class = $log.find('engine_class').text();
-	          var msg = $log.find('msg').text();
-	          var timestamp = $log.find('timestamp').text();
-	          var date_time = $log.find('date_time').text(); 
-	          var level = $log.find('info').text();
-	          var trace_iteration = trace_iteration + 1;
-
-	          var item = '<p class="' + engine_class + '">';
-	          /* var item = '<p class="' + engine_class + '"> <a onclick="hide( trace_'+ trace_iteration +')">STACK</a> '+ module +'</p>
-	          <pre id=" trace_'+ trace_iteration +'">'+msg+'</pre>';
-          
-
-          $('#logger_row').append($(item));    
-
-        });
-  	});*/
-
-/*
-	$.ajax({
+    $.ajax({
             type: "GET",
-            url: "log.xml",
+            url: "logs/log.xml",
             cache: false,
-            dataType: "xmlp",
+            dataType: "xml",
             success: function(xml) {
-                $(xml).find('log').each(function(){
-                    
- 					var trace_iteration = 0;
 
-					$('#logger_wrapper').append('<div id="logger_row">');	
+    			var trace_iteration = 0;
 
-                    var module = $log.find('module').text();
-					var engine_class = $log.find('engine_class').text();
-					var msg = $log.find('msg').text();
-					var timestamp = $log.find('timestamp').text();
-					var date_time = $log.find('date_time').text(); 
-					var level = $log.find('info').text();
-					var trace_iteration = trace_iteration + 1;
+        		$(xml).find('log').each(function(){
 
-					var item = '<p class="' + engine_class + '">';
+        			trace_iteration = 		trace_iteration + 1;
 
-					 $('#logger_row').append($(item)); 
-                });
-            },
-            setTimeout(function() {}, 0);
+                    var module = 			$(this).attr('module');
+                    var engine_class = 		$(this).attr('engine_class');
+					var msg = 				$(this).attr('msg');
+					var timestamp = 		$(this).attr('timestamp');
+					var date_time = 		$(this).attr('date_time');
+					var level = 			$(this).attr('level');
+				
+					
 
-        });*/
+//<p class="System"><span class="time">0</span><a onclick="hide('trace0')">STACK</a> GlobalManager.Awake</p>
+					var item = '<p class="' + module + '"><img src="img/level_'+level+'.png" alt="'+level+'" style="width:35px;height:35px"><span class="time">'+date_time+'</span></span><a onclick="hide(\'trace_'+trace_iteration+'\')">DETAILS</a> ' + engine_class + ' </p><pre id="trace_'+trace_iteration+'"> '+ msg +'</pre>';
 
+					 $('#logger_wrapper').append($(item));
+     	 		});
+            }
+        });
+
+}
+
+
+function ClearDivXML()
+{
+
+	$('#logger_wrapper').empty();
 
 }
