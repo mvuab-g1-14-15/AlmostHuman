@@ -25,8 +25,6 @@ private:
     std::vector<CPhysicUserData *>  m_vPUD;
     CPhysicSphericalJoint*          m_PSJ;
     CPhysicRevoluteJoint*           m_PRJ;
-    CPhysicActor*                   m_pPhysicActor;
-    CPhysicUserData*                m_pPhysicUserData;
 
 public:
     CTestProcess();
