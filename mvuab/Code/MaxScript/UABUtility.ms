@@ -1,5 +1,4 @@
---fileIn "ExportMesh.ms"
-fileIn "ExportMesh_v2.ms"
+fileIn "ExportMesh.ms"
 fileIn "XMLExporter.ms"
 fileIn "Cinematics.ms"
 		
@@ -34,6 +33,8 @@ utility UABUtility "UAB Utility" width:162 height:325
 	on LightsButton pressed do
 	(
 		--export lights
+		local LightDir = PathLabel.text + "\\lights.xml"		--poner parametrico
+		ExportLights LightDir
 	)
 	
 	on MeshButton pressed do
@@ -203,7 +204,8 @@ utility UABUtility "UAB Utility" width:162 height:325
 	)
 	on SetProperties pressed do
 	(
-		fileIn "UABSetProperties.ms"
+		--fileIn "UABSetProperties.ms"
+		createDialog UABSetProperties
 	)
 	on btn8 pressed do
 	(		

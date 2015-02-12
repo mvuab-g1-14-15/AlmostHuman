@@ -84,5 +84,3 @@ fn ExportLights filenameXML =
 		return false
 	)
 )
-
-ExportLights "D:\lights.xml"

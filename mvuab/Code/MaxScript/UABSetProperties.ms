@@ -440,4 +440,4 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		
 	)
 )
-createDialog UABSetProperties
+--createDialog UABSetProperties

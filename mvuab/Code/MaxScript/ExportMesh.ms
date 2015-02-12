@@ -1,352 +1,472 @@
-global VERTEX_TYPE_GEOMETRY 	= 0x0001
-global VERTEX_TYPE_NORMAL 		= 0x0002
-global VERTEX_TYPE_TANGENT 	 	= 0x0004
-global VERTEX_TYPE_BINORMAL	 	= 0x0008
-global VERTEX_TYPE_TEXTURE1 	= 0x0010
-global VERTEX_TYPE_TEXTURE2 	= 0x0020
-global VERTEX_TYPE_DIFFUSE 		= 0x0040
-
 fileIn "GetAABB.ms"
+fileIn "VertexTypes.ms"
+fileIn "CalculateNormals.ms"
 
-function CreateVertex Coord Normal TUVMap =
-(
-	local NewVertex = #(Coord.x, Coord.y, Coord.z, Normal.x, Normal.y, Normal.z, TUVMap.x, 1.0-TUVMap.y)
-	return NewVertex
-)
+clearListener()
 
-fn AreVertexsEqual vtx1 vtx2 =
-(
-	--format "Comparing % with % \n" vtx1 vtx2
-	result = true
-	for i = 1 to vtx1.count do
-		result = result and vtx1[i] == vtx2[i]
-	return result
-)
+--Set amount of mem allocation 200MB
+--heapSize = 200000000L
 
-fn FindVertex vtx vtxs =
+struct STexture
 (
-	--format "Finding Vertex: % in Vertex Buffer: %\n" vtx vtxs
-	for i=1 to vtxs.count do
+	m_Name = "",
+	m_Path = "",
+	
+	fn FromMaxTexture textureFileName =
 	(
-		--format "Comparing % with % \n" vtxs[i] vtx
-		if AreVertexsEqual vtxs[i] vtx then
+		m_Name = filenameFromPath textureFileName
+		m_Path = getFilenamePath textureFileName
+	),
+	
+	fn IsNotNull =
+	(
+		return m_Name.count > 0
+	),
+	
+	fn WriteToFile file = 
+	(
+		if IsNotNull() then
 		(
-			--format "The vertex is equal in index % \n" i
-			return ( i as integer )-1
-		)
-	)
-	
-	--format "Not in -1 \n"
-	return -1
-)
-
-function ConvertVtx Vtx = 
-(
-	local l_Text = stringstream ""
-	local l_Value=""
-	for i=1 to Vtx.count do
-	(   
-		format "%," Vtx[i] to:l_Text
-	)
-	return (l_Text as string)
-)
-
-function DotNetAddVertex FullVtx VtxBuffers VtxMaps material_id =
-(
-	while material_id > VtxBuffers.count do
-	(
-		append VtxBuffers #()
-	)
-	VtxMap = VtxMaps[material_id]
-	Vtxs = VtxBuffers[material_id]
-	
-	local l_VtxString=ConvertVtx FullVtx
-	local l_Idx=1
-	if (VtxMap.ContainsKey (l_VtxString))==false then
-	(
-		append vtxs FullVtx
-		l_Idx=vtxs.count-1
-		VtxMap.Add l_VtxString l_Idx
-	)
-	else
-		l_Idx=VtxMap.Item[l_VtxString]
-	return  l_Idx
-)
-
-fn AddVertex vertex_to_add vertex_buffers material_id =
-(	
-	--format "Material ID: %\n" material_id
-	while material_id > vertex_buffers.count do
-	(
-		append vertex_buffers #()
-	)
-	
-	--format "-- Vertex Buffers %\n" vertex_buffers
-	--format "Adding new vertex % \n" vertex_to_add
-	current_vertex_buffer = vertex_buffers[material_id]
-	
-	id = FindVertex vertex_to_add current_vertex_buffer
-	
-	--format "Id from find vertex % \n" id
-	if id == -1 then
-	(
-		id = current_vertex_buffer.count;
-		--format "Id Not Found Create new % \n" id
-		append current_vertex_buffer vertex_to_add
-	)
-	else
-	(
-		--format "Id Found %\n" id
-	)
-	
-	--format "Buffer Size % Elements % \n" vertex_buffers.count vertex_buffer
-	return id
-)
-
-fn ExportMaterial objMaterial material_out=
-(
-	type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
-
-	if objMaterial != undefined then
-	(
-		if objMaterial.diffuseMapEnable == true AND classOf(objMaterial.diffuseMap) == BitmapTexture then
-		(
-			type = (bit.or type VERTEX_TYPE_TEXTURE1)
-			append material_out (filenameFromPath objMaterial.diffuseMap.filename)
-
-			if objMaterial.selfIllumMapEnable == true AND classOf(objMaterial.selfIllumMap) == BitmapTexture then
-			(
-				type = (bit.or type VERTEX_TYPE_TEXTURE2)
-				append material_out (filenameFromPath objMaterial.selfIllumMap.filename)
-			)
-			
-			if objMaterial.bumpMapEnable == true AND classOf(objMaterial.bumpMap) == BitmapTexture then
-			(
-				type = (bit.or type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
-				append material_out (filenameFromPath objMaterial.bumpMap.filename)
-			)
+			----format "Texture name: %\n" m_Name
+			----format "Texture length: %\n" m_Name.count
+			WriteShort file m_Name.count #unsigned--Write Lenght Name
+			WriteString file m_Name --Write Name
 		)
 		else
 		(
-			type = (bit.or type VERTEX_TYPE_DIFFUSE)
+			l_Name = "test.png"
+			WriteShort file l_Name.count #unsigned--Write Lenght Name
+			WriteString file l_Name --Write Name
 		)
-	)
-
-	return type
-)
-
-fn GetBuffers Obj VertexBuffer IndexBuffer =
-(	
-	l_VtxsMap=#(dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
-	
-	--format "Getting buffers...\n"
-	local l_nVertexs = getNumVerts Obj
-	local l_nFaces = getNumFaces Obj
-	
-	local InvTransform=inverse Obj.transform
-	for iFaces = 1 to l_nFaces do
-	(
-		--format "Parsing face %...\n" iFaces
-		-- Para coger los indices de la primera cara
-		local IdxsFace=getFace Obj iFaces
-		-- Para coger los vértices de la primera cara
-		local Coord1=getVert Obj IdxsFace.x*InvTransform
-		local Coord2=getVert Obj IdxsFace.y*InvTransform
-		local Coord3=getVert Obj IdxsFace.z*InvTransform
-		-- Para coger las normales de los vértices de la primera cara
-		local Normal1=getNormal Obj IdxsFace.x
-		local Normal2=getNormal Obj IdxsFace.y
-		local Normal3=getNormal Obj IdxsFace.z
-		/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
-		conjunto de coordenadas aplicadas sobre la cara */
-		local IdxsMap = meshop.getMapFace Obj 1 iFaces
-		-- Para coger las coordenadas de los vértices de la primera cara
-		local TUVMap1= meshop.getMapVert Obj 1 IdxsMap.x
-		local TUVMap2= meshop.getMapVert Obj 1 IdxsMap.y
-		local TUVMap3= meshop.getMapVert Obj 1 IdxsMap.z
-		/* Por ultimo para saber el Id del material que tiene aplicada esta cara en caso de estar utilizando
-		un multimaterial sobre el objeto */
-		local MaterialID
-		if classof(Obj.material) == Multimaterial then
-		(
-			MaterialID=getFaceMatID Obj iFaces
-		)
-		else
-		(
-			MaterialID = 1
-		)
-		
-		local id = MaterialID
-		while id > l_VtxsMap.count do
-		(
-			append l_VtxsMap (dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]")
-		)
-		
-		local Vertex1 = CreateVertex Coord1 Normal1 TUVMap1
-		local Vertex2 = CreateVertex Coord2 Normal2 TUVMap2
-		local Vertex3 = CreateVertex Coord3 Normal3 TUVMap3
-		--format "%\n%\n%\n - Material ID: %\n" Vertex1 Vertex2 Vertex3 MaterialID
-		
-		local id1 = DotNetAddVertex Vertex1 VertexBuffer l_VtxsMap MaterialID
-		local id2 = DotNetAddVertex Vertex2 VertexBuffer l_VtxsMap MaterialID
-		local id3 = DotNetAddVertex Vertex3 VertexBuffer l_VtxsMap MaterialID
-		--format "ID1 % ID2 % ID3 %\n" id1 id2 id3
-		
-		--format "Material ID: %\n" MaterialID
-		while MaterialID > IndexBuffer.count do
-		(
-			append IndexBuffer #()
-		)
-		append IndexBuffer[MaterialID] id1
-		append IndexBuffer[MaterialID] id3
-		append IndexBuffer[MaterialID] id2
 	)
 )
 
-fn WriteBuffers file VertexBuffer IndexBuffer =
+struct SMaterial
 (
-	--format "Writing Buffers...\n"
-	num_materials = VertexBuffer.count
-	format "#Materials = %\n" num_materials
-	for iMaterial = 1 to num_materials do
+	m_Type,
+	m_Texture1 = STexture(),
+	m_Texture2  = STexture(),
+	m_TextureBump  = STexture(),
+	m_Color = 0,
+	
+	fn FromMaxMaterial mat =
 	(
-		num_vertex = VertexBuffer[iMaterial].count
-		format "#Vertex = %\n" num_vertex
-		WriteShort file num_vertex #unsigned
-		for iVertex = 1 to num_vertex do
-		(
-			current_vertex = VertexBuffer[iMaterial][iVertex]
-			format "Vertex %:\n" iVertex
-			
-			format "\tPos: (%, %, %)\n" current_vertex[1] current_vertex[2] current_vertex[3]
-			WriteFloat file current_vertex[1]
-			WriteFloat file current_vertex[3]
-			WriteFloat file current_vertex[2]
-			
-			format "\tNormal: (%, %, %)\n" current_vertex[4] current_vertex[5] current_vertex[6]
-			WriteFloat file current_vertex[4]
-			WriteFloat file current_vertex[6]
-			WriteFloat file current_vertex[5]
-			
-			format "\tUV: (%, %)\n" current_vertex[7] current_vertex[8]
-			WriteFloat file current_vertex[7]
-			WriteFloat file current_vertex[8]
-		)
-		
-		num_face = IndexBuffer[iMaterial].count
-		format "#Faces = %\n" num_face
-		WriteShort file num_face #unsigned
-		for iFace = 1 to num_face do
-		(
-			current_face = IndexBuffer[iMaterial][iFace]
-			format "Current Face: %\n" current_face
-			WriteShort file current_face #unsigned
-		)
-	)
-)
+		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 
-fn ExportMesh Obj filename =
-(
-	format "dir: % \n" filename
-	
-	maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-	
-	try
-	(
-		convertToMesh newObj
-		actualObj = newObj[1]
-			
-		local file = fopen filename "wb"
-		
-		format "0x55ff\n"
-		WriteShort file 0x55ff #unsigned
-		
-		-- MATERIALS
-		local l_Material = actualObj.material
-		materials = #()
-		types = #()
-		if classof(l_Material) == Multimaterial then
+		if material != undefined then
 		(
-			--format "Saving multimaterial object...\n"
-			local nFaces = getNumfaces actualObj
-			local assigned_mats = #()
-			for i=1 to nFaces do
+			if mat.diffuseMapEnable == true AND classOf(mat.diffuseMap) == BitmapTexture then
 			(
-				local id = getFaceMatId actualObj i
-				if findItem assigned_mats id == 0 then
-					append assigned_mats id
-			)
-			
-			for i=1 to assigned_mats.count do
-			(
-				local mat = assigned_mats[i]
-				actual_mat = #()
-				if l_Material[mat] != undefined then
+				m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE1)
+				-- Load the texture 1
+				local l_Texture1FileName = mat.diffuseMap.filename
+				m_Texture1.FromMaxTexture l_Texture1FileName
+
+				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
 				(
-					append types ( ExportMaterial l_Material[mat] actual_mat )
-					append materials (actual_mat)
+					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
+					-- Load the texture 2
+					local l_Texture2FileName = mat.selfIllumMap.filename
+					m_Texture2.FromMaxTexture l_Texture2FileName
+				)
+				
+				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
+				(
+					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
+					-- Load the texture of bump mapping
+					local l_TextureBumpMappingFileName = mat.bumpMap.filename
+					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
 				)
 			)
-			
-			--format "Num mats: % v %\n" materials.count materials
+			else
+			(
+				m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
+				m_Color = bit.shift mat.diffuse.r 24 + bit.shift mat.diffuse.g 16 + bit.shift mat.diffuse.b 8 + mat.diffuse.a
+				
+				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
+				(
+					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
+					-- Load the texture of bump mapping
+					local l_TextureBumpMappingFileName = mat.bumpMap.filename
+					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+				)
+			)
+		)
+	),
+	
+	fn WriteToFile file =
+	(
+		--format "Writing Material\n"
+		
+		WriteShort file m_Type #unsigned
+		--format "Type: %\n" m_Type
+		
+		local l_nTextures = 0
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
+		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+		(
+			l_nTextures = l_nTextures + 1
+		)
+		
+		WriteShort file l_nTextures #unsigned
+		
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+		(
+			m_Texture1.WriteToFile file
+		)
+		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+		(
+			m_Texture2.WriteToFile file
+		)
+		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+		(
+			m_TextureBump.WriteToFile file
+		)
+		--format "Writing Material End\n"
+	)
+)
+
+struct SVertexBuffer
+(
+	m_VertexList = #(),
+	m_VertexIdMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]",
+	
+	fn AddVertex vertex =
+	(
+		local l_VertexStr = vertex.GetAsString()
+		local l_VertexIdx = 1
+		if (m_VertexIdMap.ContainsKey (l_VertexStr)) == false then
+		(
+			append m_VertexList vertex
+			l_VertexIdx = m_VertexList.count-1
+			m_VertexIdMap.Add l_VertexStr l_VertexIdx
 		)
 		else
 		(
-			--format "Saving standard material object...\n"
-			actual_mat = #()
-			append types ( ExportMaterial l_Material actual_mat)
-			append materials (actual_mat)
+			l_VertexIdx = m_VertexIdMap.Item[l_VertexStr]
 		)
 		
-		-- Write into file
-		WriteShort file materials.count #unsigned--Write number of materials
-		format "#Materials: %\n" materials.count
-		for iMaterials = 1 to materials.count do
-		(
-			current_material = materials[iMaterials]
-			
-			local type = types[iMaterials]
-			WriteShort file type #unsigned
-			format "Type: %\n" type
-			for iTexture = 1 to current_material.count do
-			(
-				current_texture = current_material[iTexture]
-				WriteShort file current_texture.count #unsigned--Write Lenght Name
-				format "#Name: %\n" current_texture.count
-				WriteString file current_texture --Write Name
-				format "Name: %\n" current_texture
-			)
-		)
-		-- MATERIALS END
-
-		--GetBuffers Obj file
-		local l_VertexBuffer = #()
-		local l_IndexBuffer = #()
-		GetBuffers actualObj l_VertexBuffer l_IndexBuffer
-		WriteBuffers file l_VertexBuffer l_IndexBuffer
-		
-		local bb = GetAABB actualObj
-		WriteFloat file bb[1].x
-		WriteFloat file bb[1].y
-		WriteFloat file bb[1].z
-		WriteFloat file bb[2].x
-		WriteFloat file bb[2].y
-		WriteFloat file bb[2].z
-
-		--format "Vertex Buffer: %\n#Vertex Buffer: %\nIndex Buffer: %\n#Index Buffer: %\n" l_VertexBuffer l_VertexBuffer.count l_IndexBuffer l_IndexBuffer.count
-		
-		WriteShort file 0xff55 #unsigned
-		fclose file
-		format "0xff55\n"
-	)
-	catch
-	(
-		format "Error while exporting object\n"
-		format "Obj name: %\n" Obj.name
-	)
+		return l_VertexIdx
+	),
 	
-	delete newObj
-	return 0
+	fn WriteToFile file =
+	(
+		--format "Writing BV\n"
+		local l_NumVertex = m_VertexList.count 
+		WriteShort file l_NumVertex #unsigned
+		--format "Vtx count: %\n" l_NumVertex
+		for iVertex in m_VertexList do
+		(
+			iVertex.WriteToFile file
+		)
+		--format "Writing BV end\n"
+	)
 )
 
---ExportMesh $ "path"
+struct SIndexBuffer
+(
+	m_IndexList = #(),
+	
+	fn AddIndex index =
+	(
+		append m_IndexList index
+	),
+	
+	fn WriteToFile file =
+	(
+		--format "Writing IB\n"
+		local l_NumIds = m_IndexList.count
+		WriteShort file l_NumIds #unsigned
+		--format "Idx count: %\n" l_NumIds
+		for iIndex in m_IndexList do
+		(
+			WriteShort file iIndex #unsigned
+			--format "Idx actual id: %\n" iIndex
+		)
+		
+		--format "Writing IB end\n"
+	)
+)
+
+struct SAABB
+(
+	m_PointMin = point3 0 0 0,
+	m_PointMax = point3 0 0 0,
+	
+	fn WriteToFile file = 
+	(
+		WriteFloat file m_PointMin.x
+		WriteFloat file m_PointMin.z
+		WriteFloat file m_PointMin.y
+		WriteFloat file m_PointMax.x
+		WriteFloat file m_PointMax.z
+		WriteFloat file m_PointMax.y
+	),
+	
+	fn CalculateFromObject Obj =
+	(
+		local bb = GetAABB Obj
+		m_PointMin = point3 bb[1].x bb[1].y bb[1].z
+		m_PointMax = point3 bb[2].x bb[2].y bb[2].z
+	)
+)
+
+struct SBndSphere
+(
+	m_Radious = 0,
+	m_Center = point3 0 0 0
+)
+
+struct SSubMesh
+(
+	m_Material = SMaterial(),
+	m_IB = SIndexBuffer(),
+	m_VB = SVertexBuffer(),
+	
+	fn WriteToFile file =
+	(
+		m_Material.WriteToFile file
+		m_VB.WriteToFile file
+		m_IB.WriteToFile file
+	)
+)
+
+struct SMesh
+(
+	m_SubMeshes = #(),
+	m_AABB = SAABB(),
+	m_BS = SBndSphere(),
+    m_MaterialsHashTable = dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.String]",
+	
+	fn CreateSubMeshes Obj =
+	(
+		--format "Creating submeshes\n"
+    	local l_Material = Obj.material
+		if classof l_Material == Multimaterial then
+		(
+			--format "Saving multimaterial object...\n"
+			local l_NumMaterials = l_Material.count
+            
+			for iMaterial=1 to l_NumMaterials do
+			(
+            	try
+            	(
+					local l_MaterialId = l_Material[iMaterial]
+					
+					--format "Material ID: %\n" l_MaterialId
+					
+					if l_materialId != undefined then
+					(
+						-- Check if the material is not already added
+						if m_MaterialsHashTable.ContainsKey iMaterial == false then
+						(
+							--format "Material Name: %\n" l_MaterialId.name
+						
+							-- Obtain the submaterial from the main material
+							local l_NewMaterial = l_Material[iMaterial]
+							
+							-- Create a new submehs
+							local l_NewSubMesh = SSubMesh()
+							
+							-- Init the material of the new sub mesh with the max material
+							l_NewSubMesh.m_Material.FromMaxMaterial l_NewMaterial
+							
+							--Finally add the new submesh to the submeshes in the object
+							append m_SubMeshes l_NewSubMesh
+							
+							--Update the donet map in order have the same data as the submeshes
+							m_MaterialsHashTable.Add iMaterial l_NewMaterial.name
+						)
+					)
+            	)
+				catch
+				(
+					format "Error while exporting submaterial %.\n" l_MaterialId
+				)
+			)
+		)
+		else
+		(
+			--format "Single Material Object\n"
+         	local l_NewSubMesh = SSubMesh()
+            l_NewSubMesh.m_Material.FromMaxMaterial l_Material
+			--format "Material Name: %\n" l_Material.name
+			append m_SubMeshes l_NewSubMesh
+			--format "Submesh: %\n" m_SubMeshes
+			local l_MaterialId = 1
+			local l_MaterialName = l_Material.name as string
+			m_MaterialsHashTable.Add l_MaterialId l_MaterialName
+		)
+	),
+	
+	fn CreateBuffers Obj =
+	(
+		local l_nFaces = getNumFaces Obj
+		
+		UABCalcVertexsNormals Obj
+		
+		local InvTransform=inverse Obj.transform
+		for iFaces = 1 to l_nFaces do
+		(
+			--format "Parsing face %...\n" iFaces
+			
+			local l_MaterialId
+			if classof(Obj.material) == Multimaterial then
+			(
+				l_MaterialId=getFaceMatID Obj iFaces
+			)
+			else
+			(
+				l_MaterialId = 1
+			)
+			
+			----format "Material Name: %\n" l_MaterialNameById
+			
+			-- Check if the material is found
+			if m_MaterialsHashTable.ContainsKey l_MaterialId == true then
+			(
+				local l_Type = m_SubMeshes[l_MaterialId].m_Material.m_Type
+				
+				local l_NewVertex1 = SVertex()
+				local l_NewVertex2 = SVertex()
+				local l_NewVertex3 = SVertex()
+				
+				l_NewVertex1.m_Type = l_Type
+				l_NewVertex2.m_Type = l_Type
+				l_NewVertex3.m_Type = l_Type
+              
+				-- Para coger los indices de la primera cara
+				local IdxsFace=getFace Obj iFaces
+				
+				--format "Face: %\n" IdxsFace
+				-- Para coger los vértices de la primera cara
+				local Coord1=getVert Obj IdxsFace.x*InvTransform
+				local Coord2=getVert Obj IdxsFace.y*InvTransform
+				local Coord3=getVert Obj IdxsFace.z*InvTransform
+              
+              	l_NewVertex1.m_Position = Coord1
+                l_NewVertex2.m_Position = Coord2
+                l_NewVertex3.m_Position = Coord3
+
+				local l_FaceNormal = getFaceNormal Obj iFaces
+				local l_SmoothValue = getFaceSmoothGroup Obj iFaces
+				
+				-- Para coger las normales de los vértices de la primera cara
+				local Normal1 = UABGetVertexNormal Obj IdxsFace.x l_SmoothValue l_FaceNormal
+				local Normal2 = UABGetVertexNormal Obj IdxsFace.y l_SmoothValue l_FaceNormal
+				local Normal3 = UABGetVertexNormal Obj IdxsFace.z l_SmoothValue l_FaceNormal
+              
+                --igual con normales
+                l_NewVertex1.m_Normal = Normal1
+                l_NewVertex2.m_Normal = Normal2
+                l_NewVertex3.m_Normal = Normal3
+
+				if ((bit.and l_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+				(
+					/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
+					conjunto de coordenadas aplicadas sobre la cara */
+					local IdxsMap = meshop.getMapFace Obj 1 iFaces
+					
+					-- Para coger las coordenadas de los vértices de la primera cara
+					local TUV1Map1= meshop.getMapVert Obj 1 IdxsMap.x
+					local TUV1Map2= meshop.getMapVert Obj 1 IdxsMap.y
+					local TUV1Map3= meshop.getMapVert Obj 1 IdxsMap.z
+				
+					l_NewVertex1.m_UV = point2 TUV1Map1.x (1.0 - TUV1Map1.y)
+					l_NewVertex2.m_UV = point2 TUV1Map2.x (1.0 - TUV1Map2.y)
+					l_NewVertex3.m_UV = point2 TUV1Map3.x (1.0 - TUV1Map3.y)
+
+				)
+			
+				if ((bit.and l_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+				(
+					local IdxsMap = meshop.getMapFace Obj 2 iFaces
+			  
+					-- Para coger las coordenadas de los vértices de la primera cara
+					local TUV2Map1= meshop.getMapVert Obj 2 IdxsMap.x
+					local TUV2Map2= meshop.getMapVert Obj 2 IdxsMap.y
+					local TUV2Map3= meshop.getMapVert Obj 2 IdxsMap.z
+			  
+					l_NewVertex1.m_UV2 = point2 TUV2Map1.x (1.0 - TUV2Map1.y)
+					l_NewVertex2.m_UV2 = point2 TUV2Map2.x (1.0 - TUV2Map2.y)
+					l_NewVertex3.m_UV2 = point2 TUV2Map3.x (1.0 - TUV2Map3.y)
+				)
+			
+				if (bit.and l_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+				(
+					l_Binormal1 = point3 0 0 0
+					l_Binormal2 = point3 0 0 0
+					l_Binormal3 = point3 0 0 0
+					l_NewVertex1.m_Binormal = l_Binormal1
+					l_NewVertex2.m_Binormal = l_Binormal2
+					l_NewVertex3.m_Binormal = l_Binormal3
+					
+					l_Tan1 = point3 0 0 0
+					l_Tan2 = point3 0 0 0
+					l_Tan3 = point3 0 0 0
+					l_NewVertex1.m_Tan = l_Tan1
+					l_NewVertex2.m_Tan = l_Tan2
+					l_NewVertex3.m_Tan = l_Tan3
+				)
+			
+				if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
+				(
+					--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
+					l_Color = 0
+					l_NewVertex1.m_Color = l_Color
+					l_NewVertex2.m_Color = l_Color
+					l_NewVertex3.m_Color = l_Color
+				)
+		
+				-- Add the new vertex
+				local l_Id1 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex1
+				local l_Id2 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex2
+				local l_Id3 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex3
+				
+				-- Add the new indexes
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id1
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
+				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
+			)
+		)	
+		
+		--format "% submeshes found on the object\n" m_SubMeshes.count
+	),
+	
+	fn InitFromMaxObject Obj =
+	(
+		actualObj = copy Obj
+		convertToMesh actualObj 
+		
+		CreateSubMeshes actualObj
+		CreateBuffers actualObj
+		
+		delete actualObj
+	),
+	
+
+	fn WriteToFile file =
+	(
+		--format "Write to file\n"
+		WriteShort file 0x55ff #unsigned
+		WriteShort file m_SubMeshes.count #unsigned--Write number of materials
+	
+		for iSubMesh in m_SubMeshes do
+		(
+			--format "Current Submesh%\n" iSubMesh
+			iSubMesh.WriteToFile file
+		)
+		
+		m_AABB.WriteToFile file
+	
+		WriteShort file 0xff55 #unsigned
+	)
+)
+
