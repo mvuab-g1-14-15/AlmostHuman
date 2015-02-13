@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
-  <static_mesh name="Box002" filename="\meshes\Box002.mesh" />
-  <static_mesh name="BoxLightMap" filename="\meshes\BoxLightMap.mesh" />
 </static_meshes>
