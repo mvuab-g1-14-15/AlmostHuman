@@ -18,7 +18,7 @@ VertexPS RenderVS(TNORMAL_T2_VERTEX IN)
     OUT.UV=IN.UV;
 	OUT.UV2=IN.UV2;
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
-    OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix);
+    OUT.WorldPosition=mul(float4(IN.Position,1.0), g_WorldMatrix).xyz;
     return OUT;
 }
 
@@ -40,13 +40,16 @@ float4 RenderPS(VertexPS IN) : COLOR
 	
 	l_PixelColor = l_PixelColor + l_EnvironmentColor;*/
 	
+	float4 l_TextureColor = tex2D(S0LinearSampler, IN.UV);
+	
 	for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
-        if(g_LightsEnabled[i] == 1) 
+		if(g_LightsEnabled[i] == 1) 
         {
-			float3 l_LightDirection = normalize(l_Position-g_LightsPosition[i]);
-			float4 l_TextureColor = tex2D(S0LinearSampler, IN.UV);
+			float3 l_LightDirection = l_Position-g_LightsPosition[i];
 			float l_Attenuation = DistanceAttenuation(i, l_LightDirection );
+			l_LightDirection=normalize(l_LightDirection);
+			
             if(OMNI_LIGHT == g_LightsType[i])
             {
             }
@@ -67,8 +70,7 @@ float4 RenderPS(VertexPS IN) : COLOR
 			l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
         }
     }
-	
-	l_PixelColor = l_PixelColor + tex2D(S1LinearSampler, IN.UV2);
+	l_PixelColor = l_PixelColor + tex2D(S1LinearSampler, IN.UV2)*l_TextureColor;
 	
 	return l_PixelColor;
 }

@@ -51,7 +51,10 @@ float 		g_Bump = 10.0;
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
 {
 	float l_DistanceToLight = length(LightToPixelDirection);
-    return 1.0;// - saturate((l_DistanceToLight-g_LightsEndRangeAttenuation[i])/(g_LightsStartRangeAttenuation[i]-g_LightsEndRangeAttenuation[i]));
+	//*return 1.0 - saturate((l_DistanceToLight-80.0)/(80.0-200.0));
+//return 1;
+	return 1.0 - saturate((l_DistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
+    //return 1.0 - saturate((l_DistanceToLight-g_LightsEndRangeAttenuation[i])/(g_LightsStartRangeAttenuation[i]-g_LightsEndRangeAttenuation[i]));
 }
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {	

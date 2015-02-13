@@ -36,7 +36,7 @@ void CEngine::Render()
 
 	//srcm->Execute();
 	
-    // Obtain an instance to the graphics manager
+    //// Obtain an instance to the graphics manager
     CGraphicsManager* pGraphicsManager = GraphicsInstance;
     //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 

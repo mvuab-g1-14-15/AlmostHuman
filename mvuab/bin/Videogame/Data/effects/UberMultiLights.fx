@@ -1,61 +1,22 @@
 #include "globals.fxh"
 
-sampler DiffuseSampler : register ( s0 ) = sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-};
+#if _NORMAL_MAP
 
-#ifdef _NORMAL_MAP
-sampler NormalSampler : register ( s1 ) = sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-};
+#if _SELF_ILLUM
+	#define UBER_VERTEX TNORMAL_TAN_BI_T2_VERTEX
+#else
+	#define UBER_VERTEX TNORMAL_TAN_BI_T1_VERTEX
 #endif
 
-#ifdef _SELF_ILLUM
-sampler LightMapSampler : register(
-#ifdef _NORMAL_MAP
-s2
 #else
-s1
+#if _SELF_ILLUM
+	#define UBER_VERTEX TNORMAL_T2_VERTEX
+#else
+	#define UBER_VERTEX TNORMAL_T1_VERTEX
 #endif
-) = sampler_state
-{
-	MipFilter = LINEAR;
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	AddressU = Clamp;
-	AddressV = Clamp;
-};
 #endif
 
-#ifdef _REFLECTION
-samplerCUBE ReflectionSampler : register (
-#ifdef _SELF_ILLUM
-#ifdef _NORMAL_MAP
-s3
-#else
-s2
-#endif
-#else
-#ifdef _NORMAL_MAP
-s2
-#else
-s1
-#endif
-) = sampler_state
-{ 
-	MipFilter = ANISOTROPIC; 
-	MinFilter = ANISOTROPIC;
-	MagFilter = ANISOTROPIC;
-};
-#endif
-
-struct VertexVS
+/*struct VertexVS
 {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
@@ -68,7 +29,7 @@ struct VertexVS
 #ifdef _SELF_ILLUM
     float2 	UV2 		: TEXCOORD1;
 #endif
-};
+};*/
 
 struct VertexPS
 {
@@ -85,7 +46,7 @@ struct VertexPS
 #endif
 };
 
-VertexPS RenderVS(VertexVS IN)
+VertexPS RenderVS(UBER_VERTEX IN)
 {
     VertexPS OUT=(VertexPS)0;
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);

@@ -245,28 +245,31 @@ bool CEffect::SetLights(size_t NumOfLights)
   {
     CLight* l_pCurrentLight = l_pLightManager->GetLight(i);
 
-    m_LightsEnabled[i] = (BOOL)1;
-    CLight::TLightType l_LightType = l_pCurrentLight->GetType();
-    m_LightsType[i] = static_cast<int>(l_LightType);
-    m_LightsStartRangeAttenuation[i] = l_pCurrentLight->GetStartRangeAttenuation();
-    m_LightsEndRangeAttenuation[i] = l_pCurrentLight->GetEndRangeAttenuation();
-    m_LightsPosition[i] = l_pCurrentLight->GetPosition();
+    m_LightsEnabled[i] = (BOOL)l_pCurrentLight==NULL ? 0 : 1;
+	if(l_pCurrentLight!=NULL)
+	{
+		CLight::TLightType l_LightType = l_pCurrentLight->GetType();
+		m_LightsType[i] = static_cast<int>(l_LightType);
+		m_LightsStartRangeAttenuation[i] = l_pCurrentLight->GetStartRangeAttenuation();
+		m_LightsEndRangeAttenuation[i] = l_pCurrentLight->GetEndRangeAttenuation();
+		m_LightsPosition[i] = l_pCurrentLight->GetPosition();
 
-    Math::CColor l_Color = l_pCurrentLight->GetColor();
-    m_LightsColor[i] = Math::Vect3f(l_Color.GetRed()/255.0f, l_Color.GetGreen()/255.0f, l_Color.GetBlue()/255.0f);
+		Math::CColor l_Color = l_pCurrentLight->GetColor();
+		m_LightsColor[i] = Math::Vect3f(l_Color.GetRed()/255.0f, l_Color.GetGreen()/255.0f, l_Color.GetBlue()/255.0f);
 
-    if( l_LightType == CLight::DIRECTIONAL )
-    {
-      CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*>(l_pCurrentLight);
-      m_LightsDirection[i] = l_pDirectionalLight->GetDirection();
-    }
-    else if( l_LightType == CLight::SPOT )
-    {
-      CSpotLight* l_SpotLight = static_cast<CSpotLight*>(l_pCurrentLight);
-      m_LightsDirection[i] = l_SpotLight->GetDirection();
-      m_LightsAngle[i] = l_SpotLight->GetAngle();
-      m_LightsFallOff[i] = l_SpotLight->GetFallOff();
-    }
+		if( l_LightType == CLight::DIRECTIONAL )
+		{
+		  CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*>(l_pCurrentLight);
+		  m_LightsDirection[i] = l_pDirectionalLight->GetDirection();
+		}
+		else if( l_LightType == CLight::SPOT )
+		{
+		  CSpotLight* l_SpotLight = static_cast<CSpotLight*>(l_pCurrentLight);
+		  m_LightsDirection[i] = l_SpotLight->GetDirection();
+		  m_LightsAngle[i] = l_SpotLight->GetAngle();
+		  m_LightsFallOff[i] = l_SpotLight->GetFallOff();
+		}
+	}
   }
 
   return true;
