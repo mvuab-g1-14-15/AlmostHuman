@@ -146,7 +146,7 @@ struct SMaterial
 		(
 			m_TextureReflection.WriteToFile file
 		)
-		format "Writing Material End\n"
+		--format "Writing Material End\n"
 	)
 )
 
@@ -459,13 +459,17 @@ struct SMesh
 	
 	fn InitFromMaxObject Obj =
 	(
+		format "Mesh: % \n" Obj.name
 		actualObj = copy Obj
 		convertToMesh actualObj 
 		
 		CreateSubMeshes actualObj
 		CreateBuffers actualObj
 		
-		delete actualObj
+		if delete actualObj != 1 then
+		(
+			format "% not deleted, please delete the object manually\n" actualObj
+		)
 	),
 	
 

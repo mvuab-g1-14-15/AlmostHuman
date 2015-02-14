@@ -1,3 +1,4 @@
+clearListener()
 filein "CalculateNormals.ms"
 filein "Cinematics.ms"
 filein "ExportMesh.ms"
