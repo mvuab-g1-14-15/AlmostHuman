@@ -32,14 +32,6 @@ float4 RenderPS(VertexPS IN) : COLOR
 	// Init the color of the pixel with the color of the material
 	float4 l_PixelColor = float4(0.0, 0.0, 0.0, 1.0); //tex2D(S0LinearSampler, IN.UV);
 	
-	/*float3 l_CameraPosition = g_ViewInverseMatrix[3].xyz;
-	float3 l_CameraToPixel = normalize(l_CameraPosition - l_Position);
-	
-	float3 l_ReflectVector = reflect(l_CameraToPixel, l_Normal);
-	float4 l_EnvironmentColor = texCUBE(S0LineaWrapSampleCUBE, l_ReflectVector);
-	
-	l_PixelColor = l_PixelColor + l_EnvironmentColor;*/
-	
 	float4 l_TextureColor = tex2D(S0LinearSampler, IN.UV);
 	
 	for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
@@ -61,7 +53,6 @@ float4 RenderPS(VertexPS IN) : COLOR
             {	
 				// Modify the distance attenuation with the spot attenuation
 				l_Attenuation = l_Attenuation * SpotAttenuation(i, l_LightDirection);
-				//l_PixelColor = l_PixelColor * SpotAttenuation(i, l_LightDirection);
             }
 			
 			float3 l_Hn=normalize(normalize(g_CameraPosition-l_Position)-l_LightDirection);

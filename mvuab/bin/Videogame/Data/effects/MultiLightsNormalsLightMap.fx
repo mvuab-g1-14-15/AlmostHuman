@@ -2,15 +2,6 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-struct VertexVS {
-	float3 	Position	: POSITION;
-    float3 	Normal 		: NORMAL;
-	float3 	Tangent 	: TANGENT0;
-	float3 	Binormal 	: BINORMAL0;
-	float2 	UV 			: TEXCOORD0;
-	float2	UV2			: TEXCOORD1;
-};
-
 struct VertexPS
 {
     float4 HPosition : POSITION;
@@ -22,7 +13,7 @@ struct VertexPS
     float3 WorldBinormal : TEXCOORD5;
 };
 
-VertexPS RenderVS(VertexVS IN)
+VertexPS RenderVS(TNORMAL_TAN_BI_T2_VERTEX IN)
 {
     VertexPS OUT=(VertexPS)0;
     OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
@@ -37,6 +28,7 @@ VertexPS RenderVS(VertexVS IN)
 
 float4 RenderPS(VertexPS IN) : COLOR
 {
+	return float4(0.0, 0.0, 0.0, 1.0);
 	float3 Tn=normalize(IN.WorldTangent);
 	float3 Bn=normalize(IN.WorldBinormal);
 	
