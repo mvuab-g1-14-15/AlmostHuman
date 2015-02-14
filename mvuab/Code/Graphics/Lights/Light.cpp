@@ -21,9 +21,10 @@ CLight::CLight( const CXMLTreeNode& node )
   , m_GenerateStaticShadowMap( node.GetBoolProperty( "generate_static_shadow_map",
                                false ) )
   , m_RenderShadows(
-      false )//TODO ALEX No se como activar esto (si mirando los Generate si estan true o no.
+      false )//TODO ALEX No se como activar esto (si mirando los Generate si estan true o no)
   , m_ViewShadowMap( m44fIDENTITY )
   , m_ProjectionShadowMap( m44fIDENTITY )
+
 {
   m_Position = node.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) );
 
@@ -51,15 +52,22 @@ CLight::CLight( const CXMLTreeNode& node )
                                CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
+  //TODO ALEX No sé que hacer con esto...
+  float l_Angle = node.GetFloatProperty( "angle", 0 );
+  float l_FallOff = node.GetFloatProperty( "fall_off", 0 );
+  //FIN TODO
   m_ShadowMaskTexture = new CTexture();
 
   if ( !m_ShadowMaskTexture->Load( node.GetPszProperty( "shadow_texture_mask",
                                    "" ) ) )
     CHECKED_DELETE( m_ShadowMaskTexture );
 
+  //TODO ALEX ¿Esto es un fail? Porque al ser const node, no podia obtener el GetNumChildren e hice una copia
   CXMLTreeNode nodeCopy = node;
   size_t count = nodeCopy.GetNumChildren();
 
+  //TODO ALEX, Esta parte lo miré en el grupo de la cobaya y guardas en el vector los RenderableObjectsManager
+  //de cada capa que tenga, entiendo que es para tener los objetos que son solidos, bla, ¿para aplicarle las sombras?
   for ( size_t i = 0; i < count; ++i )
   {
     const std::string& l_TagName = nodeCopy( i ).GetName();
@@ -205,7 +213,7 @@ CLight::GetDynamicShadowMapRenderableObjectsManagers()
 
 void CLight::GenerateShadowMap( CGraphicsManager* GM )
 {
-  //TODO ALEX. I DON'T HAVE FUCKING IDEA
+  //TODO ALEX. I DON'T HAVE FUCKING IDEA (Diria que la Cobaya lo tienen hecho, sería ver como lo hicieron y adaptarlo)
 }
 
 const Mat44f& CLight::GetViewShadowMap() const

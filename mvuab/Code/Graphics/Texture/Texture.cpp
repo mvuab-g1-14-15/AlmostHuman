@@ -51,7 +51,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
                        size_t MipMaps, TUsageType UsageType, TPoolType PoolType,
                        TFormatType FormatType )
 {
-  //TODO ALEX No deriva de CName, habrá que ponerselo, si es así ahora tendremos que pasarle el name.
+  //TODO ALEX No deriva de CName, habrá que ponerselo, si es así ahora tendremos que pasarle el name. Lo puse en principio
   SetName( Name );
   D3DPOOL l_Pool = D3DPOOL_DEFAULT;
   DWORD l_UsageType = D3DUSAGE_DYNAMIC;
