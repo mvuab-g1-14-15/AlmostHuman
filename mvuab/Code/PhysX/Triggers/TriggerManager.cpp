@@ -75,8 +75,8 @@ void CTriggerManager::Clear()
 
 void CTriggerManager::Release()
 {
-  // TODO RAUL RELEASE ALL THE TRIGGERS
-  for ( TVectorResources::iterator it = m_ResourcesVector.begin();
-        it < m_ResourcesVector.end(); ++it )
-    ( *it )->Release();
+  TVectorResources::iterator itb = m_ResourcesVector.begin();
+
+  for ( ; itb != m_ResourcesVector.end(); ++itb )
+    ( *itb )->Release();
 }

@@ -52,7 +52,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
                        TFormatType FormatType )
 {
   //TODO ALEX No deriva de CName, habrá que ponerselo, si es así ahora tendremos que pasarle el name.
-  //SetName( Name );
+  SetName( Name );
   D3DPOOL l_Pool = D3DPOOL_DEFAULT;
   DWORD l_UsageType = D3DUSAGE_DYNAMIC;
   D3DFORMAT l_Format = D3DFMT_A8R8G8B8;
@@ -166,7 +166,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
   l_RenderTarget->Release();
 }
 
-TFormatType CTexture::GetFormatTypeFromString( const
+CTexture::TFormatType CTexture::GetFormatTypeFromString( const
     std::string& FormatType )
 {
   if ( FormatType == "R32F" )

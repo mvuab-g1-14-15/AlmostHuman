@@ -4,33 +4,35 @@
 
 #include <d3dx9.h>
 #include <string>
+#include "Utils\Name.h"
 
-enum TPoolType
-{
-  DEFAULT = 0,
-  SYSTEMMEM
-};
-enum TUsageType
-{
-  DYNAMIC = 0,
-  RENDERTARGET
-};
-enum TTextureType
-{
-  TGA = 0,
-  JPG,
-  BMP
-};
-enum TFormatType
-{
-  A8R8G8B8 = 0,
-  R8G8B8,
-  X8R8G8B8,
-  R32F
-};
 
-class CTexture
+class CTexture: public CName
 {
+public:
+  enum TPoolType
+  {
+    DEFAULT = 0,
+    SYSTEMMEM
+  };
+  enum TUsageType
+  {
+    DYNAMIC = 0,
+    RENDERTARGET
+  };
+  enum TTextureType
+  {
+    TGA = 0,
+    JPG,
+    BMP
+  };
+  enum TFormatType
+  {
+    A8R8G8B8 = 0,
+    R8G8B8,
+    X8R8G8B8,
+    R32F
+  };
 protected:
   //Members
   LPDIRECT3DTEXTURE9 m_Texture;
