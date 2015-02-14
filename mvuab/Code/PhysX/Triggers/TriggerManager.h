@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------
 // CTriggerManager class
-// 
+//
 // Description:
 // Clase Manager de Triggers de PhysX.
 //----------------------------------------------------------------------------------
@@ -26,32 +26,34 @@ class CTrigger;
 class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>
 {
 private: // Members
-        std::string                                     m_FileName;
+  std::string                                     m_FileName;
 private: // Methods
 
 public:
-        CTriggerManager ();
-        ~CTriggerManager();
+  CTriggerManager();
+  ~CTriggerManager();
 
-        bool                                LoadXML                     ( const std::string &FileName );
-        bool                                Reload                      ();
-        bool                                ReloadXML                   ( const std::string &FileName );
-        std::vector<CPhysicActor*>          GetTriggersVector           ();
-        CPhysicActor*                       GetTriggerByName            ( std::string Name );
-        std::string                         GetLUAByName                ( std::string Name, u_int Type );
-        void                                Clear                       ();
-        void                                Release                     ();
-        void                                ReleaseTrigger              (const std::string &_trigger);
-        
-		//void                                AddTrigger                  (CXMLTreeNode XMLData, ItemCore *Core, Vect3f Pos,sTrigger TriggerLua);
-        //void                                AddTriggerWithoutXML        (std::string Name, ItemCore *Core, Vect3f Pos);
+  bool                                LoadXML( const std::string& FileName );
+  bool                                Reload();
+  bool                                ReloadXML( const std::string& FileName );
+  std::vector<CPhysicActor*>          GetTriggersVector();
+  CPhysicActor*                       GetTriggerByName( std::string Name );
+  std::string                         GetLUAByName( std::string Name,
+      u_int Type );
+  void                                Clear();
+  void                                Release();
+  void                                ReleaseTrigger( const std::string&
+      _trigger );
 
-		//void                                AddTrigger                  (CXMLTreeNode XMLData,Vect3f Size, Vect3f Pos, int Group,sTrigger TriggerLua);
-		//void                                AddTriggerWithoutXML        (std::string Name, Vect3f Size, Vect3f Pos, int Group, sTrigger TriggerLua);
+  //void                                AddTrigger                  (CXMLTreeNode XMLData, ItemCore *Core, Vect3f Pos,sTrigger TriggerLua);
+  //void                                AddTriggerWithoutXML        (std::string Name, ItemCore *Core, Vect3f Pos);
 
-        // Métodos para Luabind
-        int                                 GetValue                    () const;
-        void                                SetValue                    ( const unsigned int& v );
+  //void                                AddTrigger                  (CXMLTreeNode XMLData,Vect3f Size, Vect3f Pos, int Group,sTrigger TriggerLua);
+  //void                                AddTriggerWithoutXML        (std::string Name, Vect3f Size, Vect3f Pos, int Group, sTrigger TriggerLua);
+
+  // Métodos para Luabind
+  int                                 GetValue() const;
+  void                                SetValue( const unsigned int& v );
 };
 
 #endif __TRIGGER_MANAGER_H__
