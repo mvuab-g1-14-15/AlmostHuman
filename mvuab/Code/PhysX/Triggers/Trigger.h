@@ -2,7 +2,7 @@
 #define _TRIGGER_H
 
 #include "Utils\Name.h"
-#include "Math\Vector3.h" 
+#include "Math\Vector3.h"
 #include "Math\Color.h"
 #include "Utils\Defines.h"
 
@@ -13,12 +13,15 @@ class CPhysicActor;
 class CTrigger : public CName
 {
 public:
-  CTrigger(const CXMLTreeNode& Node);
+  CTrigger( const CXMLTreeNode& Node );
   virtual ~CTrigger();
+  void Release();
+  void Destroy();
+
 private: // Members
   enum TEventType
   {
-    ENTER=0,
+    ENTER = 0,
     LEAVE,
     STAY
   };
@@ -29,7 +32,7 @@ private: // Members
   Math::CColor m_Color;
   int32        m_Group;
 
-  // The enter events 
+  // The enter events
   typedef std::pair<TEventType, std::string> TTriggerEvent;
   TTriggerEvent m_Enter;
   TTriggerEvent m_Stay;

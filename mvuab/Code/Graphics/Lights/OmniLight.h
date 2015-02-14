@@ -11,6 +11,7 @@ public:
   COmniLight( );
   COmniLight( CXMLTreeNode node );
   virtual void Render();
+  virtual void SetShadowMap( CGraphicsManager* GM );
 };
 
 #endif // OMNI_LIGHT_H

@@ -10,9 +10,11 @@ public:
   void SetDirection( const Math::Vect3f& Direction );
   Math::Vect3f GetDirection() const;
   virtual void Render();
+  virtual void SetShadowMap( CGraphicsManager* GM );
 
 protected:
   Math::Vect3f m_Direction;
+  Vect2f m_OrthoShadowMapSize;
 };
 
 #endif // DIRECTIONAL_LIGHT_H

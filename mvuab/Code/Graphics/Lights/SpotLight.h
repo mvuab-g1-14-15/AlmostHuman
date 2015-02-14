@@ -5,16 +5,17 @@
 
 class CSpotLight : public CDirectionalLight
 {
-  protected:
-    float m_Angle;
-    float m_FallOff;
-  public:
-    CSpotLight(CXMLTreeNode node);
-    void SetAngle(const float Angle);
-    float GetAngle() const;
-    void SetFallOff(const float FallOff);
-    float GetFallOff() const;
-    virtual void Render();
+protected:
+  float m_Angle;
+  float m_FallOff;
+public:
+  CSpotLight( CXMLTreeNode node );
+  void SetAngle( const float Angle );
+  float GetAngle() const;
+  void SetFallOff( const float FallOff );
+  float GetFallOff() const;
+  virtual void Render();
+  virtual void SetShadowMap( CGraphicsManager* GM );
 };
 
 #endif // SPOT_LIGHT_H
