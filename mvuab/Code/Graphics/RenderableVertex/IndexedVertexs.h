@@ -10,112 +10,117 @@
 
 template<class T> class CIndexedVertexs : public CRenderableVertexs
 {
-    protected:
-        inline size_t GetVertexSize() {return sizeof(T);}
-        inline size_t GetIndexSize() {return sizeof(unsigned short);}
+protected:
+  inline size_t GetVertexSize()
+  {
+    return sizeof( T );
+  }
+  inline size_t GetIndexSize()
+  {
+    return sizeof( unsigned short );
+  }
 
-    public:
-        CIndexedVertexs(CGraphicsManager *GM, void *VertexAddress, void *IndexAddres, size_t VertexCount, size_t IndexCount)
-		{
-			if (IndexCount != 0 || VertexCount != 0)
-			{
-				void *l_memSrcV = 0; 
-				void *l_memSrcI = 0;
+public:
+  CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount,
+                   size_t IndexCount )
+  {
+    if ( IndexCount != 0 || VertexCount != 0 )
+    {
+      void* l_memSrcV = 0;
+      void* l_memSrcI = 0;
+      m_IndexCount = IndexCount;
+      m_VertexCount = VertexCount;
+      GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT,
+                                          &m_IB, 0 );
+      GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT,
+                                           &m_VB, 0 );
+      m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
+      memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
+      m_VB->Unlock();
+      m_IB->Lock( 0, IndexCount * GetIndexSize(), &l_memSrcI, 0 );
+      memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
+      m_IB->Unlock();
+    }
+  }
 
-				m_IndexCount = IndexCount;
-				m_VertexCount = VertexCount;
+  ~CIndexedVertexs()
+  {
+  }
 
-				GM->GetDevice()->CreateIndexBuffer(IndexCount * GetIndexSize(), 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_IB, 0);
-				GM->GetDevice()->CreateVertexBuffer(VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0);
-            
-				m_VB->Lock(0, VertexCount * GetVertexSize(), &l_memSrcV, 0);
-				memcpy(l_memSrcV, VertexAddress, VertexCount * GetVertexSize());
-				m_VB->Unlock();
+  virtual bool Render( CGraphicsManager* GM )
+  {
+    CGPUStatics::GetSingletonPtr()->AddVertexCount( m_VertexCount );
+    CGPUStatics::GetSingletonPtr()->AddFacesCount( m_IndexCount / 3 );
+    CGPUStatics::GetSingletonPtr()->AddDrawCount( 1 );
+    GM->GetDevice()->SetIndices( m_IB );
+    GM->GetDevice()->SetFVF( T::GetFVF() );
+    GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
+    GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0,
+                                           m_IndexCount / 3 );
+    return ( true );
+  }
 
-				m_IB->Lock(0, IndexCount * GetIndexSize(), &l_memSrcI, 0);
-				memcpy(l_memSrcI, IndexAddres, IndexCount * GetIndexSize());
-				m_IB->Unlock();
-			}
-        }
+  virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique,
+                       int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount )
+  {
+    LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+    LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
+    UINT l_NumPasses = 0;
+    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
 
-        ~CIndexedVertexs()
-        {
-        }
+    if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) ) return false;
 
-        virtual bool Render(CGraphicsManager *GM)
-        {
-			CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
-			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
-			CGPUStatics::GetSingletonPtr()->AddDrawCount(1);
+    CGPUStatics::GetSingletonPtr()->AddVertexCount( verticesCount );
+    CGPUStatics::GetSingletonPtr()->AddFacesCount( facesCount );
+    CGPUStatics::GetSingletonPtr()->AddDrawCount( l_NumPasses );
+    l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
+    l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
+    l_Device->SetIndices( m_IB );
 
-            GM->GetDevice()->SetIndices(m_IB);
-            GM->GetDevice()->SetFVF(T::GetFVF());
-            GM->GetDevice()->SetStreamSource(0, m_VB, 0, GetVertexSize());
-            GM->GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3);
+    for ( UINT b = 0; b < l_NumPasses; ++b )
+    {
+      l_Effect->BeginPass( b );
+      l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, baseVertexIndexCount, minVertexIndex,
+                                      verticesCount, startIndex, facesCount );
+      l_Effect->EndPass();
+    }
 
-            return(true);
-        }
+    l_Effect->End();
+    return ( true );
+  }
 
-        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount)
-        {
-			LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-            LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
-            UINT l_NumPasses = 0;
-            
-            l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
-            if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+  bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique )
+  {
+    EffectTechnique->BeginRender();
+    LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+    LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
+    UINT l_NumPasses = 0;
+    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
 
-            CGPUStatics::GetSingletonPtr()->AddVertexCount(verticesCount);
-			CGPUStatics::GetSingletonPtr()->AddFacesCount(facesCount);
-			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
-            
-            l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
-            l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
-            l_Device->SetIndices(m_IB);
-                
-            for (UINT b = 0; b < l_NumPasses; ++b)
-            {
-                l_Effect->BeginPass(b);
-                l_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, baseVertexIndexCount, minVertexIndex, verticesCount, startIndex, facesCount);
-                l_Effect->EndPass();
-            }
-                
-            l_Effect->End();
-            return(true);
-        }
+    if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) ) return false;
 
-        bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique)
-        {
-			EffectTechnique->BeginRender();
-            LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-            LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
-            UINT l_NumPasses = 0;
-            
-            l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
-            if(FAILED(l_Effect->Begin(&l_NumPasses, 0))) return false;
+    CGPUStatics::GetSingletonPtr()->AddVertexCount( m_VertexCount );
+    CGPUStatics::GetSingletonPtr()->AddFacesCount( m_IndexCount / 3 );
+    CGPUStatics::GetSingletonPtr()->AddDrawCount( l_NumPasses );
+    l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
+    l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
+    l_Device->SetIndices( m_IB );
 
-            CGPUStatics::GetSingletonPtr()->AddVertexCount(m_VertexCount);
-			CGPUStatics::GetSingletonPtr()->AddFacesCount(m_IndexCount/3);
-			CGPUStatics::GetSingletonPtr()->AddDrawCount(l_NumPasses);
-            
-            l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
-            l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
-            l_Device->SetIndices(m_IB);
-                
-            for (UINT b = 0; b < l_NumPasses; ++b)
-            {
-                l_Effect->BeginPass(b);
-                l_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (UINT)m_VertexCount, 0, (UINT) m_IndexCount/3);
-                l_Effect->EndPass();
-            }
-                
-            l_Effect->End();
-            return true;
-        }
+    for ( UINT b = 0; b < l_NumPasses; ++b )
+    {
+      l_Effect->BeginPass( b );
+      l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, ( UINT )m_VertexCount, 0,
+                                      ( UINT ) m_IndexCount / 3 );
+      l_Effect->EndPass();
+    }
 
-        virtual inline unsigned short GetVertexType() const
-        {
-            return T::GetVertexType();
-        }
+    l_Effect->End();
+    return true;
+  }
+
+  virtual inline unsigned short GetVertexType() const
+  {
+    return T::GetVertexType();
+  }
 };
 #endif
