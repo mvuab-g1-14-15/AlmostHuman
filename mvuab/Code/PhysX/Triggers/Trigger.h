@@ -12,19 +12,24 @@ class CPhysicActor;
 
 class CTrigger : public CName
 {
-public:
-  CTrigger( const CXMLTreeNode& Node );
-  virtual ~CTrigger();
-  void Release();
-  void Destroy();
-
-private: // Members
+private:
   enum TEventType
   {
     ENTER = 0,
     LEAVE,
     STAY
   };
+
+public:
+  CTrigger( const CXMLTreeNode& Node );
+  virtual ~CTrigger();
+  void Release();
+  void Destroy();
+  std::string& GetEnter();
+  std::string& GetStay();
+  std::string& GetLeave();
+private: // Members
+
 
   Math::Vect3f m_Position;
   Math::Vect3f m_Size;

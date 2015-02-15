@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include "Math/Vector3.h"
 #include "XML/XMLTreeNode.h"
-#include "Enemies/EnemyManager.h"
+//#include "Enemies/EnemyManager.h"
 #include "Logger\Logger.h"
 #include "Utils\Defines.h"
 #include "Engine.h"
@@ -13,6 +13,7 @@
 #include "Core.h"
 #include "Utils\GPUStatics.h"
 #include "Console\Console.h"
+#include "TestProcess\PhysicProcess.h"
 
 #include <iostream>
 
@@ -34,7 +35,8 @@ void ShowErrorMessage( const std::string& message )
     end_message += "Sorry, Application failed. Logs could not be saved\n";
 
   end_message += message;
-  MessageBox( 0, end_message.c_str(), "FlostiProject Report", MB_OK | MB_ICONERROR );
+  MessageBox( 0, end_message.c_str(), "FlostiProject Report",
+              MB_OK | MB_ICONERROR );
 }
 
 
@@ -73,41 +75,36 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 // WinMain
 //-----------------------------------------------------------------------
-int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow )
+int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
+                      LPSTR _lpCmdLine, int _nCmdShow )
 {
-
   try
   {
-
 #if _DEBUG
     MemLeaks::MemoryBegin();
 #endif
-
     // Register the window class
     WNDCLASSEX wc = {    sizeof( WNDCLASSEX ), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle( NULL ), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
-
     RegisterClassEx( &wc );
-
     // Optain the engine instance
     CGPUStatics* gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
     CEngine* pEngine = new CEngine();
     // Create the application's window
-    HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL,
+    HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME,
+                              WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL,
                               wc.hInstance, NULL );
-
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
-    pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
-
-    SetWindowPos( hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(), CCore::GetSingletonPtr()->GetWindowYPos(),
-                  CCore::GetSingletonPtr()->GetScreenWidth(), CCore::GetSingletonPtr()->GetScreenHeight(),
+    //pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
+    pEngine->Init( new CPhysicProcess(), "./Data/config.xml", hWnd );
+    SetWindowPos( hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(),
+                  CCore::GetSingletonPtr()->GetWindowYPos(),
+                  CCore::GetSingletonPtr()->GetScreenWidth(),
+                  CCore::GetSingletonPtr()->GetScreenHeight(),
                   SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE );
-
     // Añadir aquí el Init de la applicacioón
-
     ShowWindow( hWnd, SW_SHOWDEFAULT );
     UpdateWindow( hWnd );
-
     MSG msg;
     ZeroMemory( &msg, sizeof( msg ) );
 
@@ -130,12 +127,10 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     }
 
     UnregisterClass( APPLICATION_NAME, wc.hInstance );
-
     // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
     CHECKED_DELETE( pEngine );
     CHECKED_DELETE( pLogger );
     CHECKED_DELETE( gpu );
-
 #if _DEBUG
     MemLeaks::MemoryEnd();
 #endif
@@ -148,7 +143,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
   {
     ShowErrorMessage( "Exception Occured" );
   }
-
 
   return 0;
 }

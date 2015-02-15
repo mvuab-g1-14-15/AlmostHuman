@@ -7,7 +7,7 @@
 #include "Core.h"
 #include "Trigger.h"
 
-CTriggerManager::CTriggerManager()
+CTriggerManager::CTriggerManager(): m_FileName( "" )
 {
 }
 
@@ -79,4 +79,13 @@ void CTriggerManager::Release()
 
   for ( ; itb != m_ResourcesVector.end(); ++itb )
     ( *itb )->Release();
+}
+
+std::vector<CTrigger*> CTriggerManager::GetTriggersVector()
+{
+  return m_ResourcesVector;
+}
+CTrigger* CTriggerManager::GetTriggerByName( std::string Name )
+{
+  return GetResource( Name );
 }
