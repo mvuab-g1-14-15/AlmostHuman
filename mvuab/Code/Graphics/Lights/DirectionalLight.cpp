@@ -1,6 +1,7 @@
 #include "DirectionalLight.h"
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
+#include "Effects\EffectManager.h"
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
@@ -44,13 +45,31 @@ void CDirectionalLight::Render()
   D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
   D3DXMatrixTranslation( &translation, eye.x , eye.y , eye.z );
   GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawSphere( 0.5f, Math::colRED );
-  GraphicsInstance->DrawLine( Math::v3fZERO,
-                              Math::v3fZERO + m_Direction.GetNormalized() );
+  GraphicsInstance->DrawSphere( 0.5f, Math::colGREEN );
   D3DXMatrixTranslation( &matrix, 0, 0, 0 );
   GraphicsInstance->SetTransform( matrix );
+  GraphicsInstance->DrawLine( m_Position, m_Position + m_Direction.GetNormalized() * 5.0f,
+                              Math::colGREEN );
 }
 
 void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
 {
+  // Calculate the View Matrix of the light
+  D3DXVECTOR3 d3dxPos( m_Position.x, m_Position.y, m_Position.z );
+  Math::Vect3f& l_LookAt = m_Position + m_Direction.GetNormalized();
+  D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
+  // Create the up vector with the ideal vector up of the word
+  Math::Vect3f l_UpVec( 0.0f, 1.0f, 0.0f );
+  const Math::Vect3f& l_SideVec = m_Direction.GetNormalized().CrossProduct( l_UpVec );
+  l_UpVec = m_Direction.CrossProduct( l_SideVec );
+  D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
+  D3DXMATRIX l_ViewD3DX;
+  D3DXMatrixLookAtLH( &l_ViewD3DX, &d3dxPos, &d3dxTarget, &d3dxUp );
+  m_ViewShadowMap = Math::Mat44f( l_ViewD3DX );
+  D3DXMATRIX l_OrthoD3DX;
+  D3DXMatrixOrthoLH( &l_OrthoD3DX, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 1.0f,
+                     m_EndRangeAttenuation );
+  m_ProjectionShadowMap = Math::Mat44f( l_OrthoD3DX );
+  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
+  l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
 }

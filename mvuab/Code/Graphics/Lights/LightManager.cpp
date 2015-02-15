@@ -14,55 +14,58 @@ CLightManager::~CLightManager()
 {
 }
 
-void CLightManager::Load(const std::string &FileName)
+void CLightManager::Load( const std::string& FileName )
 {
   CXMLTreeNode newFile;
   CXMLTreeNode m;
 
-  if (!newFile.LoadFile(FileName.c_str()))
+  if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR,"CLightManager::Load --> Error loading XML %s.",FileName.c_str());
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CLightManager::Load --> Error loading XML %s.",
+                                           FileName.c_str() );
     return;
   }
 
   m = newFile["lights"];
 
-  if (!m.Exists())
+  if ( !m.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR,"CLightManager::Load --> Error reading %s, lights no existeix.",FileName.c_str());
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                           "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
     return;
   }
 
-  for(int i=0; i<m.GetNumChildren(); ++i)
+  for ( int i = 0; i < m.GetNumChildren(); ++i )
   {
-    const std::string &l_TagName=m(i).GetName();
-    if(l_TagName=="light")
+    const std::string& l_TagName = m( i ).GetName();
+
+    if ( l_TagName == "light" )
     {
-      std::string l_Type = m(i).GetPszProperty("type","");
-      if(l_Type=="targetDirect")
+      std::string l_Type = m( i ).GetPszProperty( "type", "" );
+
+      if ( l_Type == "targetDirect" )
       {
-        CDirectionalLight* l_Light = new CDirectionalLight(m(i));
-        if(!AddResource(l_Light->GetName(), l_Light))
-		{
-			delete l_Light;
-		}
+        CDirectionalLight* l_Light = new CDirectionalLight( m( i ) );
+
+        if ( !AddResource( l_Light->GetName(), l_Light ) )
+          delete l_Light;
       }
-      else if(l_Type=="omni")
-      {
-        COmniLight* l_Light = new COmniLight(m(i));
-        if(!AddResource(l_Light->GetName(), l_Light))
-		{
-			delete l_Light;
-		}
-      }
-      else if(l_Type=="targetSpot")
-      {
-        CSpotLight* l_Light = new CSpotLight(m(i));
-        if(!AddResource(l_Light->GetName(), l_Light))
-		{
-			delete l_Light;
-		}
-      }
+      else
+        if ( l_Type == "omni" )
+        {
+          COmniLight* l_Light = new COmniLight( m( i ) );
+
+          if ( !AddResource( l_Light->GetName(), l_Light ) )
+            delete l_Light;
+        }
+        else
+          if ( l_Type == "targetSpot" )
+          {
+            CSpotLight* l_Light = new CSpotLight( m( i ) );
+
+            if ( !AddResource( l_Light->GetName(), l_Light ) )
+              delete l_Light;
+          }
     }
   }
 }
@@ -71,12 +74,22 @@ void CLightManager::Render()
 {
 #ifdef _DEBUG
   TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
-  for( ; itb!=ite; ++itb)
-    (*itb)->Render();
+
+  for ( ; itb != ite; ++itb )
+    ( *itb )->Render();
+
 #endif
 }
 
 CLight* CLightManager::GetLight( size_t at )
 {
-  return GetResourceById(at);
+  return GetResourceById( at );
+}
+
+void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
+{
+  TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
+
+  for ( ; itb != ite; ++itb )
+    ( *itb )->GenerateShadowMap( GM );
 }

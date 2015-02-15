@@ -1,13 +1,13 @@
 #include "Light.h"
-#include "Math\Color.h"
-#include "GraphicsManager.h"
-#include "Effects\Effect.h"
 #include "Core.h"
+#include "Effects\Effect.h"
 #include "Effects\EffectManager.h"
-#include "Texture\Texture.h"
+#include "GraphicsManager.h"
+#include "Math\Color.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
-
+#include "Texture\Texture.h"
+#include "Texture\TextureManager.h"
 #include <string>
 
 CLight::CLight( const CXMLTreeNode& node )
@@ -16,15 +16,13 @@ CLight::CLight( const CXMLTreeNode& node )
   , m_EndRangeAttenuation( node.GetFloatProperty( "att_end_range", 0 ) )
   , m_Color( node.GetVect3fProperty( "color", Math::Vect3f( 1, 1, 1 ) ) )
   , m_Intensity( node.GetFloatProperty( "intensity", 0 ) )
-  , m_GenerateDynamicShadowMap( node.GetBoolProperty( "generate_shadow_map",
-                                false ) )
-  , m_GenerateStaticShadowMap( node.GetBoolProperty( "generate_static_shadow_map",
-                               false ) )
-  , m_RenderShadows(
-      false )//TODO ALEX No se como activar esto (si mirando los Generate si estan true o no)
-  , m_ViewShadowMap( m44fIDENTITY )
-  , m_ProjectionShadowMap( m44fIDENTITY )
-
+  , m_GenerateDynamicShadowMap( node.GetBoolProperty( "generate_shadow_map", false ) )
+  , m_GenerateStaticShadowMap( node.GetBoolProperty( "generate_static_shadow_map", false ) )
+  , m_RenderShadows( node.GetBoolProperty( "render_shadows", false ) )
+  , m_ViewShadowMap( Math::m44fIDENTITY )
+  , m_ProjectionShadowMap( Math:: m44fIDENTITY )
+  , m_DynamicShadowMap( 0 )
+  , m_StaticShadowMap( 0 )
 {
   m_Position = node.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) );
 
@@ -52,51 +50,35 @@ CLight::CLight( const CXMLTreeNode& node )
                                CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
-  //TODO ALEX No sé que hacer con esto...
-  float l_Angle = node.GetFloatProperty( "angle", 0 );
-  float l_FallOff = node.GetFloatProperty( "fall_off", 0 );
-  //FIN TODO
-  m_ShadowMaskTexture = new CTexture();
+  const std::string& l_ShadowMaskTextureFile = node.GetPszProperty( "shadow_texture_mask", "" );
 
-  if ( !m_ShadowMaskTexture->Load( node.GetPszProperty( "shadow_texture_mask",
-                                   "" ) ) )
-    CHECKED_DELETE( m_ShadowMaskTexture );
-
-  //TODO ALEX ¿Esto es un fail? Porque al ser const node, no podia obtener el GetNumChildren e hice una copia
-  CXMLTreeNode nodeCopy = node;
-  size_t count = nodeCopy.GetNumChildren();
-
-  //TODO ALEX, Esta parte lo miré en el grupo de la cobaya y guardas en el vector los RenderableObjectsManager
-  //de cada capa que tenga, entiendo que es para tener los objetos que son solidos, bla, ¿para aplicarle las sombras?
-  for ( size_t i = 0; i < count; ++i )
+  if ( l_ShadowMaskTextureFile != "" )
   {
-    const std::string& l_TagName = nodeCopy( i ).GetName();
+    m_ShadowMaskTexture = CTextureManager::GetSingletonPtr()->GetTexture( l_ShadowMaskTextureFile );
+    assert( m_ShadowMaskTexture );
+  }
 
-    if ( l_TagName == "static" )
-    {
-      const std::string& l_Layer = nodeCopy(
-                                     i ).GetPszProperty( "renderable_objects_manager",
-                                         "" );
+  for ( int i = 0; i < node.GetNumChildren() ; ++i )
+  {
+    const std::string& l_Layer = node( i ).GetPszProperty( "renderable_objects_manager", "" );
+    CRenderableObjectsManager* l_ROM =
+      CoreInstance->GetRenderableObjectsLayersManager()->GetResource( l_Layer );
 
-      if ( CoreInstance->GetRenderableObjectsLayersManager()->GetResource(
-             l_Layer ) != NULL )
-        m_StaticShadowMapRenderableObjectsManagers.push_back(
-          CoreInstance->GetRenderableObjectsLayersManager()->GetResource( l_Layer ) );
-    }
+    if ( !l_ROM )
+      continue;
 
-    if ( l_TagName == "dynamic" )
-    {
-      std::string l_Layer = nodeCopy(
-                              i ).GetPszProperty( "renderable_objects_manager",
-                                  "" );
-      m_DynamicShadowMapRenderableObjectsManagers.push_back(
-        CoreInstance->GetRenderableObjectsLayersManager()->GetResource( l_Layer ) );
-    }
+    if ( node( i ).GetName() == "static" )
+      m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
+
+    if ( node( i ).GetName()  == "dynamic" )
+      m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
   }
 }
 
 CLight::~CLight()
 {
+  CHECKED_DELETE( m_DynamicShadowMap );
+  CHECKED_DELETE( m_StaticShadowMap );
 }
 
 void CLight::SetIntensity( const float intensity )
@@ -213,7 +195,38 @@ CLight::GetDynamicShadowMapRenderableObjectsManagers()
 
 void CLight::GenerateShadowMap( CGraphicsManager* GM )
 {
-  //TODO ALEX. I DON'T HAVE FUCKING IDEA (Diria que la Cobaya lo tienen hecho, sería ver como lo hicieron y adaptarlo)
+  if ( !m_RenderShadows )
+    return;
+
+  SetShadowMap( GM );
+
+  if ( m_GenerateStaticShadowMap && m_MustUpdateStaticShadowMap )
+  {
+    // To write into the texture of the static shadow map
+    m_StaticShadowMap->SetAsRenderTarget();
+    GM->BeginRender();
+    GM->Clear( true, true, true, 0xffffffff );
+
+    for ( size_t i = 0; i < m_StaticShadowMapRenderableObjectsManagers.size(); ++i )
+      m_StaticShadowMapRenderableObjectsManagers[i]->Render();
+
+    m_MustUpdateStaticShadowMap = false;
+    GM->EndRender();
+    m_StaticShadowMap->UnsetAsRenderTarget();
+  }
+
+  if ( !m_DynamicShadowMapRenderableObjectsManagers.empty() )
+  {
+    m_DynamicShadowMap->SetAsRenderTarget();
+    GM->BeginRender();
+    GM->Clear( true, true, true, 0xffffffff );
+
+    for ( size_t i = 0; i < m_DynamicShadowMapRenderableObjectsManagers.size(); ++i )
+      m_DynamicShadowMapRenderableObjectsManagers[i]->Render();
+
+    GM->EndRender();
+    m_DynamicShadowMap->UnsetAsRenderTarget();
+  }
 }
 
 const Mat44f& CLight::GetViewShadowMap() const

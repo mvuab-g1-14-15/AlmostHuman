@@ -32,6 +32,7 @@ const std::string& CTexture::GetFileName() const
 
 bool CTexture::Load( const std::string& FileName )
 {
+  SetName( m_FileName );
   m_FileName = FileName;
   return LoadFile();
 }
@@ -51,7 +52,6 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
                        size_t MipMaps, TUsageType UsageType, TPoolType PoolType,
                        TFormatType FormatType )
 {
-  //TODO ALEX No deriva de CName, habrá que ponerselo, si es así ahora tendremos que pasarle el name. Lo puse en principio
   SetName( Name );
   D3DPOOL l_Pool = D3DPOOL_DEFAULT;
   DWORD l_UsageType = D3DUSAGE_DYNAMIC;
@@ -100,24 +100,23 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
     break;
   }
 
-  HRESULT hr = CGraphicsManager::GetSingletonPtr()->GetDevice()->CreateTexture(
-                 Width, Height, MipMaps, l_UsageType, l_Format, l_Pool,
-                 &m_Texture, NULL );
+  // Obtain the device from the graphics manager
+  const LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool,
+                                        &m_Texture, NULL );
+  assert( hr == D3D_OK );
+  assert( m_Texture != NULL );
 
   if ( l_CreateDepthStencilSurface )
   {
-    CGraphicsManager::GetSingletonPtr()->GetDevice()->
-    CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8,
-                               D3DMULTISAMPLE_NONE, 0, TRUE,
-                               &m_DepthStencilRenderTargetTexture, NULL );
+    l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE,
+                                         &m_DepthStencilRenderTargetTexture, NULL );
     assert( m_DepthStencilRenderTargetTexture != NULL );
   }
 
-  assert( m_Texture != NULL );
-  assert( hr == D3D_OK );
   m_Width = Width;
   m_Height = Height;
-  return hr != D3D_OK;
+  return ( hr != D3D_OK );
 }
 
 void CTexture::Deactivate( size_t Stage )
@@ -131,19 +130,16 @@ bool CTexture::SetAsRenderTarget( size_t IdStage )
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   l_Device->GetRenderTarget( ( DWORD )IdStage, &m_OldRenderTarget );
 
-  if ( FAILED( m_Texture->GetSurfaceLevel( 0, &m_RenderTargetTexture )
-             ) )
+  if ( FAILED( m_Texture->GetSurfaceLevel( 0, &m_RenderTargetTexture ) ) )
     return false;
 
   l_Device->SetRenderTarget( ( DWORD )IdStage, m_RenderTargetTexture );
   CHECKED_RELEASE( m_RenderTargetTexture );
 
-  if ( FAILED( l_Device->GetDepthStencilSurface(
-                 &m_OldDepthStencilRenderTarget ) ) )
+  if ( FAILED( l_Device->GetDepthStencilSurface( &m_OldDepthStencilRenderTarget ) ) )
     return false;
 
-  l_Device->SetDepthStencilSurface(
-    m_DepthStencilRenderTargetTexture );
+  l_Device->SetDepthStencilSurface( m_DepthStencilRenderTargetTexture );
   return true;
 }
 
@@ -166,8 +162,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
   l_RenderTarget->Release();
 }
 
-CTexture::TFormatType CTexture::GetFormatTypeFromString( const
-    std::string& FormatType )
+CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& FormatType )
 {
   if ( FormatType == "R32F" )
     return R32F;
@@ -181,8 +176,7 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const
         if ( FormatType == "X8R8G8B8" )
           return X8R8G8B8;
         else
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                                 "Format Type '%s' not recognized",
+          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Format Type '%s' not recognized",
                                                  FormatType.c_str() );
 
   return A8R8G8B8;

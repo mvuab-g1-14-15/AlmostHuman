@@ -14,7 +14,7 @@ public:
 
 protected:
   Math::Vect3f m_Direction;
-  Vect2f m_OrthoShadowMapSize;
+  Math::Vect2f m_OrthoShadowMapSize;
 };
 
 #endif // DIRECTIONAL_LIGHT_H

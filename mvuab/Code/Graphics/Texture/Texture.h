@@ -6,7 +6,6 @@
 #include <string>
 #include "Utils\Name.h"
 
-
 class CTexture: public CName
 {
 public:

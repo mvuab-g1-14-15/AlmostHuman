@@ -18,27 +18,28 @@ class CCameraManager : public CMapManager<CCamera>, public CSingleton<CCameraMan
 
 public:
 
-    CCameraManager(); 
-    ~CCameraManager();
+  CCameraManager();
+  ~CCameraManager();
 
-	void Init();
-    
-    void Update();
+  void Init();
 
-    CCamera* GetCamera( const std::string &name );
-    GET_SET_PTR( CCamera, CurrentCamera);
-    void SetCurrentCamera( const std::string &name );
-    std::string GetCurrentCameraName();
+  void Update();
 
-    // Create & Destroy Cameras
-    void NewCamera( CCamera::Type id_cam, const std::string &name, const Math::Vect3f &Eye, const Math::Vect3f &LookAt);
-    void DeleteCamera( const std::string &name );
-    void RenderCameras();
+  CCamera* GetCamera( const std::string& name );
+  GET_SET_PTR( CCamera, CurrentCamera );
+  void SetCurrentCamera( const std::string& name );
+  std::string GetCurrentCameraName();
+
+  // Create & Destroy Cameras
+  void NewCamera( CCamera::Type id_cam, const std::string& name, const Math::Vect3f& Eye,
+                  const Math::Vect3f& LookAt );
+  void DeleteCamera( const std::string& name );
+  void RenderCameras();
 
 private:
 
-    bool        m_RenderCameras;
-    CCamera    *m_pCurrentCamera;
+  bool        m_RenderCameras;
+  CCamera*    m_pCurrentCamera;
 
 };
 

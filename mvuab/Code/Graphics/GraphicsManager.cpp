@@ -107,13 +107,15 @@ void CGraphicsManager::BeginRender()
   uint32 red        = ( uint32 )( m_BackbufferColor_debug.GetRed() * 255 );
   uint32 green    = ( uint32 )( m_BackbufferColor_debug.GetGreen() * 255 );
   uint32 blue        = ( uint32 )( m_BackbufferColor_debug.GetBlue() * 255 );
-  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ),
+  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ,
+                       D3DCOLOR_XRGB( red, green, blue ),
                        1.0f, 0 );
 #else // Clear the backbuffer to a black color in a Release mode
   uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 255 );
   uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 255 );
   uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 255 );
-  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ),
+  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ,
+                       D3DCOLOR_XRGB( red, green, blue ),
                        1.0f, 0 );
 #endif
   // Begin the scene
@@ -148,6 +150,22 @@ void CGraphicsManager::Clear()
   m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB( red, green, blue ),
                        1.0f, 0 );
 #endif
+}
+
+void CGraphicsManager::Clear( bool target, bool zbuffer, bool stencil, u_int mask )
+{
+  u_int l_Mask = 0x00000000;
+
+  if ( target )
+    l_Mask = l_Mask | D3DCLEAR_TARGET;
+
+  if ( zbuffer )
+    l_Mask = l_Mask | D3DCLEAR_ZBUFFER;
+
+  if ( stencil )
+    l_Mask = l_Mask | D3DCLEAR_STENCIL;
+
+  m_pD3DDevice->Clear( 0, NULL, l_Mask, mask, 1.0f, 0 );
 }
 
 void CGraphicsManager::EndScene()

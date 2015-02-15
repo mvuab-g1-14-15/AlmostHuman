@@ -269,24 +269,15 @@ bool CEffect::SetLights( size_t NumOfLights )
   // Obtain the manager of lights
   CLightManager* l_pLightManager = CLightManager::GetSingletonPtr();
   //Reset all the lights of the effect
-  memset( m_LightsEnabled,                 0,
-          sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType,                    0,
-          sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle,                   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff,                 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation,   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation,     0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition,                0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection,               0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor,                   0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEnabled, 0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
 
   for ( size_t i = 0; i < NumOfLights; ++i )
   {
@@ -318,6 +309,9 @@ bool CEffect::SetLights( size_t NumOfLights )
           m_LightsAngle[i] = l_SpotLight->GetAngle();
           m_LightsFallOff[i] = l_SpotLight->GetFallOff();
         }
+
+      //Begin the render of the shadow
+      l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
     }
   }
 
