@@ -94,7 +94,13 @@
     <ClCompile Include="Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="Items\Grenade.cpp" />
     <ClCompile Include="ScriptedController\ScriptedController.cpp" />
-    <ClCompile Include="TestProcess.cpp" />
+    <ClCompile Include="TestProcess.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TestProcess\PhysicProcess.cpp" />
+    <ClCompile Include="TestProcess\TestProcessPhysicxMaterial.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="videogame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +111,13 @@
     <ClInclude Include="Enemies\PatrolEnemy.h" />
     <ClInclude Include="Items\Grenade.h" />
     <ClInclude Include="ScriptedController\ScriptedController.h" />
-    <ClInclude Include="TestProcess.h" />
+    <ClInclude Include="TestProcess.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="TestProcess\PhysicProcess.h" />
+    <ClInclude Include="TestProcess\TestProcessPhysicxMaterial.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

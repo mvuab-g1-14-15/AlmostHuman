@@ -1,5 +1,5 @@
-#ifndef TEST_PROCESS_H
-#define TEST_PROCESS_H
+#ifndef PHYSIC_PROCESS_H
+#define PHYSIC_PROCESS_H
 #pragma once
 
 #include "Process.h"
@@ -12,8 +12,9 @@ class CPhysicActor;
 class CPhysicUserData;
 class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
+class CTriggerManager;
 
-class CTestProcess : public CProcess, public CPhysicTriggerReport
+class CPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
 private:
   float32                         m_Speed;
@@ -26,10 +27,11 @@ private:
   std::vector<CPhysicUserData*>  m_vPUD;
   CPhysicSphericalJoint*          m_PSJ;
   CPhysicRevoluteJoint*           m_PRJ;
+  CTriggerManager*                m_TriggerManager;
 
 public:
-  CTestProcess();
-  virtual ~CTestProcess();
+  CPhysicProcess();
+  virtual ~CPhysicProcess();
 
   virtual void Init();
   virtual void Update();
@@ -43,4 +45,4 @@ public:
                   CPhysicUserData* _Other_Shape );
 };
 
-#endif // TEST_PROCESS_H
+#endif // PHYSIC_PROCESS_H

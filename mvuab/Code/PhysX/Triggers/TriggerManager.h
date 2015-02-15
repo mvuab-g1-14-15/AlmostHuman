@@ -19,8 +19,8 @@
 
 // Forward declarations
 class CPhysicUserData;
-class CXMLTreeNode;
-class ItemCore;
+//class CXMLTreeNode;
+//class ItemCore;
 class CTrigger;
 
 class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>
@@ -36,8 +36,8 @@ public:
   bool                                LoadXML( const std::string& FileName );
   bool                                Reload();
   bool                                ReloadXML( const std::string& FileName );
-  std::vector<CPhysicActor*>          GetTriggersVector();
-  CPhysicActor*                       GetTriggerByName( std::string Name );
+  std::vector<CTrigger*>              GetTriggersVector();
+  CTrigger*                           GetTriggerByName( std::string Name );
   std::string                         GetLUAByName( std::string Name,
       u_int Type );
   void                                Clear();

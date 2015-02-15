@@ -1,4 +1,4 @@
-#include "TestProcess.h"
+#include "PhysicProcess.h"
 #include "Utils\Defines.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
@@ -38,10 +38,12 @@
 
 #include <d3dx9.h>
 
-#include "Items\Grenade.h"
+#include "..\Items\Grenade.h"
 #include "Joints\PhysicSphericalJoint.h"
 #include "Joints\PhysicRevoluteJoint.h"
 #include "Reports\PhysicTriggerReport.h"
+#include "Triggers\TriggerManager.h"
+#include "Triggers\Trigger.h"
 
 
 
@@ -50,7 +52,7 @@ CGrenade* p_Grenade;
 void GetFilesFromPath( const std::string& Path,
                        std::vector<std::string>& _OutFiles );
 
-CTestProcess::CTestProcess() : CProcess(),
+CPhysicProcess::CPhysicProcess() : CProcess(),
   m_Speed( 0.1f ),
   m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false )
 
@@ -64,7 +66,7 @@ CTestProcess::CTestProcess() : CProcess(),
 }
 bool done = false;
 
-CTestProcess::~CTestProcess()
+CPhysicProcess::~CPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
   CHECKED_DELETE( p_Grenade );
@@ -80,9 +82,10 @@ CTestProcess::~CTestProcess()
     CHECKED_DELETE( m_vPUD[i] );
 
   m_vPUD.clear();
+  CHECKED_DELETE( m_TriggerManager );
 }
 
-void CTestProcess::Update()
+void CPhysicProcess::Update()
 {
   m_Amount +=  0.01f;
   m_Angle  += deltaTime * 0.05f;
@@ -211,8 +214,10 @@ void CTestProcess::Update()
   p_Grenade->Update();
 }
 
-void CTestProcess::Init()
+void CPhysicProcess::Init()
 {
+  m_TriggerManager = new CTriggerManager();
+  m_TriggerManager->LoadXML( "Data/triggers.xml" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
   p_Grenade->Start();
@@ -266,11 +271,11 @@ void CTestProcess::Init()
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
-  //Añado un TriggerReport
+  //Asigno el TriggerReport en el physicManager a esta clase
   l_PM->SetTriggerReport( this );
 }
 
-void CTestProcess::Render()
+void CPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   p_Grenade->Render();
@@ -289,29 +294,56 @@ void CTestProcess::Render()
   // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
-void CTestProcess::RenderDebugInfo()
+void CPhysicProcess::RenderDebugInfo()
 {
   CProcess::RenderDebugInfo();
 }
 
-void CTestProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
-                            CPhysicUserData* _Other_Shape )
+void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
+                              CPhysicUserData* _Other_Shape )
 {
   std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
+  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
+                          _Entity_Trigger1->GetName() );
+  std::string l_TriggerEvent = l_Trigger->GetEnter();
+
+  if ( l_TriggerEvent != "" )
+  {
+    //Hacer lo que deba hacer el script
+  }
+
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
-void CTestProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
-                            CPhysicUserData* _Other_Shape )
+void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
+                              CPhysicUserData* _Other_Shape )
 {
   std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
+  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
+                          _Entity_Trigger1->GetName() );
+  std::string l_TriggerEvent = l_Trigger->GetLeave();
+
+  if ( l_TriggerEvent != "" )
+  {
+    //Hacer lo que deba hacer el script
+  }
+
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
-void CTestProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
-                           CPhysicUserData* _Other_Shape )
+void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
+                             CPhysicUserData* _Other_Shape )
 {
   std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
+  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
+                          _Entity_Trigger1->GetName() );
+  std::string l_TriggerEvent = l_Trigger->GetStay();
+
+  if ( l_TriggerEvent != "" )
+  {
+    //Hacer lo que deba hacer el script
+  }
+
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }

@@ -32,6 +32,7 @@ class CTimer;
 class CConsole;
 class CSceneRendererCommandManager;
 class CPhysicsManager;
+//class CTriggerManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -59,7 +60,7 @@ private:
   std::string                     m_LuaRunPath;
   std::string                     m_EffectsPath;
   std::string                     m_LightsPath;
-  std::string					  m_SceneRendererCommandPath;
+  std::string           m_SceneRendererCommandPath;
   std::vector<std::string>        m_v_languages;
 
   // Managers
@@ -79,8 +80,9 @@ private:
   CCameraManager*                     m_pCameraManager;
   CEffectManager*                     m_pEffectManager;
   CLightManager*                      m_pLightManager;
-  CSceneRendererCommandManager*		  m_pSceneRendererCommandManager;
-  CPhysicsManager*					  m_pPhysicsManager;
+  CSceneRendererCommandManager*       m_pSceneRendererCommandManager;
+  CPhysicsManager*                    m_pPhysicsManager;
+  //CTriggerManager*                    m_pTriggerManager;
   CTimer*                             m_pTimer;
   CConsole*                           m_pConsole;
   void LoadXml();
@@ -119,7 +121,8 @@ public:
   GET_SET_PTR( CStaticMeshManager, StaticMeshManager );
   GET_SET_PTR( CRenderableObjectsManager, RenderableObjectsManager );
   GET_SET_PTR( CRenderableObjectsLayersManager, RenderableObjectsLayersManager );
-  GET_SET_PTR( CRenderableObjectTechniqueManager, RenderableObjectTechniqueManager );
+  GET_SET_PTR( CRenderableObjectTechniqueManager,
+               RenderableObjectTechniqueManager );
   GET_SET_PTR( CAnimatedModelsManager, AnimatedModelsManager );
   GET_SET_PTR( CTextureManager, TextureManager );
   GET_SET_PTR( CScriptManager, ScriptManager );
@@ -128,6 +131,7 @@ public:
   GET_SET_PTR( CLightManager, LightManager );
   GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager );
   GET_SET_PTR( CPhysicsManager, PhysicsManager );
+  //GET_SET_PTR( CTriggerManager, TriggerManager );
   GET_SET_PTR( CTimer, Timer );
 };
 

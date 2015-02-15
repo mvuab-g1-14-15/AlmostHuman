@@ -10,7 +10,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
   : CName( Node.GetPszProperty( "name", "unknown" ) )
   , m_Position( Node.GetVect3fProperty( "position", Math::Vect3f( 0, 0, 0 ) ) )
   , m_Size( Node.GetVect3fProperty( "size", Math::Vect3f( 0, 0, 0 ) ) )
-  , m_Color( Node.GetCColorProperty( "size", Math::CColor( 0, 0, 0, 0 ) ) )
+  , m_Color( Node.GetCColorProperty( "color", Math::CColor( 0, 0, 0, 1 ) ) )
   , m_Group( Node.GetIntProperty( "group", 0 ) )
   , m_Paint( Node.GetBoolProperty( "paint", false ) )
   , m_PhysicUserData( new CPhysicUserData( Node.GetPszProperty( "name",
@@ -34,18 +34,18 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
   m_PhysicActor = new CPhysicActor( m_PhysicUserData );
   const std::string& l_sType = Node.GetPszProperty( "shape", "" );
 
-  if ( l_sType == "Box" )
+  if ( l_sType == "box" )
   {
     m_PhysicActor->CreateBoxTrigger( m_Position, m_Size, m_Group );
-    //TODO JAUME AÑADIR EL ACTOR AL PHYSICMANAGER (DIRIA YO QUE FALTABA ESTO)
+    m_PhysicActor->ActivateAllTriggers();
     CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
     l_PM->AddPhysicActor( m_PhysicActor );
   }
   else
-    if ( l_sType == "Sphere" )
+    if ( l_sType == "sphere" )
     {
       m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
-      //TODO JAUME AÑADIR EL ACTOR AL PHYSICMANAGER (DIRIA YO QUE FALTABA ESTO)
+      m_PhysicActor->ActivateAllTriggers();
       CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
       l_PM->AddPhysicActor( m_PhysicActor );
     }
@@ -68,8 +68,21 @@ void CTrigger::Release()
 
 void CTrigger::Destroy()
 {
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  l_PM->ReleasePhysicActor( m_PhysicUserData->GetActor() );
+  // CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  // l_PM->ReleasePhysicActor( m_PhysicUserData->GetActor() );
   CHECKED_DELETE( m_PhysicActor );
   CHECKED_DELETE( m_PhysicUserData );
 }
+
+std::string& CTrigger::GetEnter()
+{
+  return m_Enter.second;
+};
+std::string& CTrigger::GetStay()
+{
+  return m_Stay.second;
+};
+std::string& CTrigger::GetLeave()
+{
+  return m_Leave.second;
+};

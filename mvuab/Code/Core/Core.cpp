@@ -21,6 +21,8 @@
 #include "Timer\Timer.h"
 #include "Console\Console.h"
 #include "PhysicsManager.h"
+//#include "Triggers\TriggerManager.h"
+#include "Actor\PhysicActor.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -66,16 +68,15 @@ CCore::CCore() :
   m_pLightManager( new CLightManager() ),
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pPhysicsManager( new CPhysicsManager() ),
+  //m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
 {
   m_pConsole->RedirectToConsole( 0 );
-
   // test stdio
   m_pConsole->SetNumberOfLines( 800 );
   m_pConsole->SetNumberOfColumns( 132 );
   m_pConsole->SetMaxLinesInWindow( 25 );
-
   WORD x = m_pConsole->SetAttributes( FOREGROUND_BLUE | BACKGROUND_GREEN, 2 );
   m_pConsole->SetAttributes( x );
 }
@@ -90,7 +91,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pLanguageManager );
   CHECKED_DELETE( m_pDebugWindowManager );
   CHECKED_DELETE( m_pStaticMeshManager );
-  CHECKED_DELETE( m_pRenderableObjectsManager);
+  CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
   CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
   CHECKED_DELETE( m_pAnimatedModelsManager );
@@ -102,6 +103,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pPhysicsManager );
+  // CHECKED_DELETE( m_pTriggerManager );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -110,7 +112,6 @@ void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
   m_ConfigPath = aConfigPath;
   m_WindowId = aWindowId;
   LoadXml();
-
   // Init the managers
   InitManagers();
 }
@@ -125,12 +126,10 @@ void CCore::Update()
   //m_pRenderableObjectsManager->Update();
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
-  m_pPhysicsManager->Update(deltaTime);
+  m_pPhysicsManager->Update( deltaTime );
 
-  if( m_pActionManager->DoAction("ClearConsole") )
-  {
+  if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
-  }
 }
 
 void CCore::Render()
@@ -141,7 +140,7 @@ void CCore::Render()
   m_pRenderableObjectsLayersManager->Render();
   m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
-  m_pPhysicsManager->DebugRender(m_pGraphicsManager);
+  m_pPhysicsManager->DebugRender( m_pGraphicsManager );
 }
 
 void CCore::LoadXml()
@@ -154,7 +153,6 @@ void CCore::LoadXml()
   if ( !l_File.LoadFile( m_ConfigPath.c_str() ) )
   {
     std::string err = "ERROR reading the file " + m_ConfigPath;
-
     MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
     exit( EXIT_FAILURE );
   }
@@ -186,15 +184,18 @@ void CCore::LoadXml()
           else
             if ( TagName == "mouse" )
             {
-              m_ExclusiveModeInMouse = TreeNode( i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
-              m_DrawPointerMouse = TreeNode( i ).GetBoolProperty( "draw_pointer_mouse", false );
+              m_ExclusiveModeInMouse = TreeNode(
+                                         i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
+              m_DrawPointerMouse = TreeNode( i ).GetBoolProperty( "draw_pointer_mouse",
+                                   false );
             }
             else
               if ( TagName == "GUI" )
                 m_GUIPath = std::string( TreeNode( i ).GetPszProperty( "init_gui_path", "" ) );
               else
                 if ( TagName == "sound" )
-                  m_SoundPath = std::string( TreeNode( i ).GetPszProperty( "init_sound_path", "" ) );
+                  m_SoundPath = std::string( TreeNode( i ).GetPszProperty( "init_sound_path",
+                                             "" ) );
                 else
                   if ( TagName == "fonts" )
                     m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
@@ -204,7 +205,8 @@ void CCore::LoadXml()
                     else
                       if ( TagName == "languages" )
                       {
-                        m_CurrentLanguage = std::string( TreeNode( i ).GetPszProperty( "current_language", "" ) );
+                        m_CurrentLanguage = std::string( TreeNode(
+                                                           i ).GetPszProperty( "current_language", "" ) );
                         CXMLTreeNode  SubTreeNode = l_File["languages"];
 
                         if ( SubTreeNode.Exists() )
@@ -216,7 +218,8 @@ void CCore::LoadXml()
                             std::string TagName = SubTreeNode( lans ).GetName();
 
                             if ( TagName == "language" )
-                              m_v_languages.push_back( std::string( SubTreeNode( lans ).GetPszProperty( "path", "" ) ) );
+                              m_v_languages.push_back( std::string( SubTreeNode(
+                                                                      lans ).GetPszProperty( "path", "" ) ) );
                           }
                         }
 
@@ -224,16 +227,19 @@ void CCore::LoadXml()
                       }
                       else
                         if ( TagName == "animated_models" )
-                          m_AnimatedModelsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+                          m_AnimatedModelsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                                              "" ) );
                         else
                           if ( TagName == "static_meshes" )
                             m_StaticMeshesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
                           else
                             if ( TagName == "renderable_objects" )
-                              m_RenderableObjectsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+                              m_RenderableObjectsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                                                     "" ) );
                             else
                               if ( TagName == "renderable_object_technique" )
-                                m_RenderableObjectTechniquePath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+                                m_RenderableObjectTechniquePath = std::string( TreeNode(
+                                                                    i ).GetPszProperty( "path", "" ) );
                               else
                                 if ( TagName == "lua" )
                                   m_LuaRunPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
@@ -243,18 +249,21 @@ void CCore::LoadXml()
                                   else
                                     if ( TagName == "lights" )
                                       m_LightsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-									else
-									  if ( TagName == "scene_renderer_commands" )
-										m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path", "") );
+                                    else
+                                      if ( TagName == "scene_renderer_commands" )
+                                        m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                                                     "" ) );
     }
   }
 }
 
 void CCore::InitManagers()
 {
-  m_pGraphicsManager->Init( m_WindowId, m_FullScreenMode, m_ScreenWidth, m_ScreenHeight );
+  m_pGraphicsManager->Init( m_WindowId, m_FullScreenMode, m_ScreenWidth,
+                            m_ScreenHeight );
   m_pEffectManager->Load( m_EffectsPath );
-  m_pInputManager->Init( m_WindowId, Math::Vect2i( m_ScreenWidth, m_ScreenHeight ), m_ExclusiveModeInMouse );
+  m_pInputManager->Init( m_WindowId, Math::Vect2i( m_ScreenWidth,
+                         m_ScreenHeight ), m_ExclusiveModeInMouse );
   m_pActionManager->Init( m_InputPath, m_pInputManager );
   m_pLanguageManager->SetXmlPaths( m_v_languages );
   m_pLanguageManager->LoadXMLs();
@@ -266,23 +275,22 @@ void CCore::InitManagers()
   //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
   m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
   m_pCameraManager->Init();
-  m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam", Math::Vect3f( 15.0f, 2.0f, 0.0f ),
+  m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
+                               Math::Vect3f( 15.0f, 2.0f, 0.0f ),
                                Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
   m_pCameraManager->SetCurrentCamera( "TestProcessCam" );
-
   m_pScriptManager->Initialize();
   m_pScriptManager->Load( m_LuaRunPath );
-
   m_pLightManager->Load( m_LightsPath );
-
-  m_pSceneRendererCommandManager->Load(m_SceneRendererCommandPath);
-
+  m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
   m_pPhysicsManager->Init();
+  //m_pTriggerManager->LoadXML( "Data/triggers.xml" );
 }
 
 void CCore::Trace( const std::string& TraceStr )
 {
   HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-  SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+  SetConsoleTextAttribute( hConsole,
+                           FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
   std::cout << TraceStr << std::endl << std::endl;
 }
