@@ -54,6 +54,7 @@ public:
 
   const std::string& GetFileName() const;
   bool Load( const std::string& FileName );
+  bool Save( const std::string& FileName );
 
   bool Reload();
   virtual void Activate( size_t StageId );
