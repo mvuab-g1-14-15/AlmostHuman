@@ -42,8 +42,8 @@ struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  float tanx, tany, tanz;
-  float bx, by, bz;
+  float tanx, tany, tanz, tanw;
+  float bx, by, bz, bw;
   unsigned long color;
   float tu, tv;
   float tu2, tv2;
@@ -71,8 +71,8 @@ struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  float tanx, tany, tanz;
-  float bx, by, bz;
+  float tanx, tany, tanz, tanw;
+  float bx, by, bz, bw;
   unsigned long color;
   float tu, tv;
 
@@ -99,8 +99,8 @@ struct TNORMAL_TAN_BI_DIFF_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  float tanx, tany, tanz;
-  float bx, by, bz;
+  float tanx, tany, tanz, tanw;
+  float bx, by, bz, bw;
   unsigned long color;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
@@ -126,8 +126,8 @@ struct TNORMAL_TAN_BI_T2_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  float tanx, tany, tanz;
-  float bx, by, bz;
+  float tanx, tany, tanz, tanw;
+  float bx, by, bz, bw;
   float tu, tv;
   float tu2, tv2;
 
@@ -154,8 +154,8 @@ struct TNORMAL_TAN_BI_T1_VERTEX
 {
   float x, y, z; //0 - 11
   float nx, ny, nz; // 12 - 23
-  float tanx, tany, tanz; // 24 - 35
-  float bx, by, bz; // 36 - 47
+  float tanx, tany, tanz, tanw; // 24 - 35
+  float bx, by, bz, bw; // 36 - 47
   float tu, tv; // 48 - 56
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;

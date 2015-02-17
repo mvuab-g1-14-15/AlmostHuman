@@ -10,12 +10,12 @@ class CGraphicsManager;
 
 class CClearSceneRendererCommand : public CSceneRendererCommand
 {
-	protected:
-		bool	m_Color;
-		bool	m_Depht;
-		bool	m_Stencil;
-    public:
-        CClearSceneRendererCommand(CXMLTreeNode &atts);
-        virtual void Execute(CGraphicsManager &GM);
+protected:
+  bool  m_Color;
+  bool  m_Depht;
+  bool  m_Stencil;
+public:
+  CClearSceneRendererCommand( CXMLTreeNode& atts );
+  virtual void Execute( CGraphicsManager& GM );
 };
 #endif

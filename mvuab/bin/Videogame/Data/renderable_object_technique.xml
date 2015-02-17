@@ -7,4 +7,13 @@
 		<default_technique vertex_type="35"	technique="AmbientLightNormalTextureVertexTechnique"/>-->
 		<default_technique vertex_type="159" technique="Cal3DTechnique" effect="Cal3DEffect"/>
 	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
+		<default_technique vertex_type="19"	technique="AmbientLightNormalTextureVertexTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="draw_quad_sampler_0_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
+	</pool_renderable_object_technique>
+	
 </renderable_object_techniques>
