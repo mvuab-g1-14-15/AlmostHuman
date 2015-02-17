@@ -18,6 +18,7 @@ public:
   CEffect( const std::string& EffectName );
   ~CEffect();
   bool SetLights( size_t NumOfLights );
+  bool SetLight( size_t i_light );
   bool SetCameraPosition( Math::Vect3f CameraPosition );
   bool SetWorldMatrix( const Math::Mat44f& Matrix, bool Inverse = false );
   bool SetViewMatrix( const Math::Mat44f& Matrix, bool Inverse = false );

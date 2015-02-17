@@ -273,8 +273,10 @@ bool CEffect::SetLights( size_t NumOfLights )
   memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation, 0,
+          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation, 0,
+          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
@@ -313,6 +315,63 @@ bool CEffect::SetLights( size_t NumOfLights )
       //Begin the render of the shadow
       l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
     }
+  }
+
+  return true;
+}
+
+bool CEffect::SetLight( size_t i_light )
+{
+  if ( i_light > MAX_LIGHTS_BY_SHADER )
+    return false;
+
+  // Obtain the manager of lights
+  CLightManager* l_pLightManager = CLightManager::GetSingletonPtr();
+  //Reset all the lights of the effect
+  memset( m_LightsEnabled, 0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation, 0,
+          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation, 0,
+          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  CLight* l_pCurrentLight = l_pLightManager->GetLight( i_light );
+  m_LightsEnabled[i_light] = ( BOOL )l_pCurrentLight == NULL ? 0 : 1;
+
+  if ( l_pCurrentLight != NULL )
+  {
+    CLight::TLightType l_LightType = l_pCurrentLight->GetType();
+    m_LightsType[i_light] = static_cast<int>( l_LightType );
+    m_LightsStartRangeAttenuation[i_light] =
+      l_pCurrentLight->GetStartRangeAttenuation();
+    m_LightsEndRangeAttenuation[i_light] =
+      l_pCurrentLight->GetEndRangeAttenuation();
+    m_LightsPosition[i_light] = l_pCurrentLight->GetPosition();
+    Math::CColor l_Color = l_pCurrentLight->GetColor();
+    m_LightsColor[i_light] = Math::Vect3f( l_Color.GetRed() / 255.0f,
+                                           l_Color.GetGreen() / 255.0f, l_Color.GetBlue() / 255.0f );
+
+    if ( l_LightType == CLight::DIRECTIONAL )
+    {
+      CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*>
+          ( l_pCurrentLight );
+      m_LightsDirection[i_light] = l_pDirectionalLight->GetDirection();
+    }
+    else
+      if ( l_LightType == CLight::SPOT )
+      {
+        CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
+        m_LightsDirection[i_light] = l_SpotLight->GetDirection();
+        m_LightsAngle[i_light] = l_SpotLight->GetAngle();
+        m_LightsFallOff[i_light] = l_SpotLight->GetFallOff();
+      }
+
+    //Begin the render of the shadow
+    l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
   }
 
   return true;

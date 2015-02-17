@@ -13,7 +13,8 @@
 #include "Effects\EffectTechnique.h"
 #include "Effects\Effect.h"
 #include "Core.h"
-
+#include "RenderableVertex/VertexTypes.h"
+#include "Texture/Texture.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -37,17 +38,17 @@ typedef struct CUSTOMVERTEX2
   }
 } CUSTOMVERTEX2;
 
-struct SCREEN_COLOR_VERTEX
-{
-  float x, y, z, w;
-  DWORD color;
-  float u, v;
-
-  static unsigned int getFlags()
-  {
-    return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
-  }
-};
+// struct SCREEN_COLOR_VERTEX
+// {
+//   float x, y, z, w;
+//   DWORD color;
+//   float u, v;
+//
+//   static unsigned int getFlags()
+//   {
+//     return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
+//   }
+// };
 
 struct VERTEX2
 {
@@ -586,7 +587,7 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
     , { ( float32 )finalPos.x + w, ( float32 )finalPos.y,        0, 1, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() )} //(x,y) sup_dr.
     ,    { ( float32 )finalPos.x + w, ( float32 )finalPos.y + h,    0, 1, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() )} //(x,y) inf_dr.
   };
-  m_pD3DDevice->SetFVF( SCREEN_COLOR_VERTEX::getFlags() );
+  m_pD3DDevice->SetFVF( SCREEN_COLOR_VERTEX::GetFVF() );
   m_pD3DDevice->SetTexture( 0, NULL );
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v,
                                         sizeof( SCREEN_COLOR_VERTEX ) );
@@ -882,4 +883,50 @@ void CGraphicsManager::DrawTeapot()
   }
 
   l_Effect->End();
+}
+
+void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
+    CTexture* Texture, float U0, float V0, float U1, float V1 )
+{
+  SCREEN_COLOR_VERTEX v[4] =
+  {
+    { ( ( float )Rect.left ) - 0.5f, ( ( float )Rect.top ) - 0.5f, 0, 1, Color.GetUint32Argb(), U0, V0 }
+    , { ( ( float )Rect.right ) + 0.5f, ( ( float )Rect.top ) - 0.5f, 0, 1, Color.GetUint32Argb(), U1, V0 }
+    , { ( ( float )Rect.left ) - 0.5f, ( ( float )Rect.bottom ) + 0.5f, 0, 1, Color.GetUint32Argb(), U0, V1 }
+    , { ( ( float )Rect.right ) + 0.5f, ( ( float )Rect.bottom ) + 0.5f, 0, 1, Color.GetUint32Argb(), U1, V1 }
+  };
+  m_pD3DDevice->SetFVF( SCREEN_COLOR_VERTEX::GetFVF() );
+
+  if ( Texture != NULL )
+    Texture->Activate( 0 );
+
+  m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
+}
+
+void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
+  CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
+  float U0, float V0, float U1, float V1 )
+{
+  if ( EffectTechnique == NULL )
+    return;
+
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+
+  if ( l_Effect != NULL )
+  {
+    m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
+    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+    UINT l_NumPasses;
+    l_Effect->Begin( &l_NumPasses, 0 );
+
+    for ( UINT iPass = 0; iPass < l_NumPasses; iPass++ )
+    {
+      l_Effect->BeginPass( iPass );
+      DrawColoredQuad2DTexturedInPixels( Rect, Color, Texture, U0, V0, U1, V1 );
+      l_Effect->EndPass();
+    }
+
+    l_Effect->End();
+  }
 }

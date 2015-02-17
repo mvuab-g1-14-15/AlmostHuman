@@ -74,19 +74,11 @@ float4 RenderLightDeferredShadingPS(TMultiRenderTargetPixel IN) : COLOR
 	return float4(1.0, 0.0, 0.0, 1.0);
 }
 
-technique RenderLightDeferredShadingTechnique
+technique GenerateGBufferTechnique
 {
 	pass p0
 	{
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();
-	}
-	pass p1
-	{
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
-		PixelShader = compile ps_3_0 RenderLightDeferredShadingPS();
 	}
 }
