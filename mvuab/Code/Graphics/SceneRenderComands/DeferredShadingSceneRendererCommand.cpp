@@ -1,5 +1,6 @@
 #include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
 #include "GraphicsManager.h"
+#include "Math\Color.h"
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "Effects\Effect.h"
@@ -23,15 +24,34 @@ CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
 {
 }
 
-void CDeferredShadingSceneRendererCommand::SetLightsData(CGraphicsManager &GM)
-{
-	CEffectTechnique* l_EffectTechnique = m_RenderableObjectTechnique->GetEffectTechnique();
-	//l_EffectTechnique->SetupLights();
-}
-
 void CDeferredShadingSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+	ActivateTextures();
+
+	for (size_t i = 0; i < m_StageTextures.size(); i++)
+	{
+		m_StageTextures[i].m_Texture->Activate(m_StageTextures[i].m_StageId);
+	}
+
+	SetLightsData(GM);
+	/*
 	CEffectTechnique* l_EffectTechnique = m_RenderableObjectTechnique->GetEffectTechnique();
 	l_EffectTechnique->BeginRender();
-	CEffect* l_Effect = l_EffectTechnique->GetEffect();
+	CEffect* l_Effect = l_EffectTechnique->GetEffect();*/
+}
+
+
+void CDeferredShadingSceneRendererCommand::SetLightsData(CGraphicsManager &GM)
+{
+	
+	CLightManager* l_LightManager = CCore::GetSingletonPtr()->GetLightManager();
+	
+	uint32 l_Width, l_Height;
+	GM.GetWidthAndHeight(l_Width, l_Height);
+
+	RECT l_Rect = { 0, 0, (long)l_Width, (long)l_Height};
+
+	/*
+	CEffectTechnique* l_EffectTechnique = m_RenderableObjectTechnique->GetEffectTechnique();
+	//l_EffectTechnique->SetupLights();*/
 }
