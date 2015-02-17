@@ -10,11 +10,11 @@ class CGraphicsManager;
 
 class CSetRenderTargetSceneRendererCommand : public CStagedTexturedRendererCommand
 {
-    public:
-        CSetRenderTargetSceneRendererCommand(CXMLTreeNode &atts);
-        ~ CSetRenderTargetSceneRendererCommand();
+public:
+  CSetRenderTargetSceneRendererCommand( CXMLTreeNode& atts );
+  ~CSetRenderTargetSceneRendererCommand();
 
-        void Execute(CGraphicsManager &GM);
-        void UnSetRenderTarget();
+  void Execute( CGraphicsManager& GM );
+  void UnSetRenderTarget();
 };
 #endif

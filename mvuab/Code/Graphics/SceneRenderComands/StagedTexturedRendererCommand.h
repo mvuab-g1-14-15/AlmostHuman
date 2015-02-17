@@ -13,27 +13,27 @@ class CGraphicsManager;
 
 class CStagedTexturedRendererCommand : public CSceneRendererCommand
 {
-	protected:
-		class CKGStageTexture
-		{
-		public:
-			int			m_StageId;
-			CTexture	*m_Texture;
-            CKGStageTexture(int StageId, CTexture *Texture)
-            {
-                m_StageId = StageId;
-                m_Texture = Texture;
-            }
-            void Activate();
-        };
+protected:
+  class CKGStageTexture
+  {
+  public:
+    int     m_StageId;
+    CTexture*  m_Texture;
+    CKGStageTexture( int StageId, CTexture* Texture )
+    {
+      m_StageId = StageId;
+      m_Texture = Texture;
+    }
+    void Activate();
+  };
 
-        std::vector<CKGStageTexture>    m_StageTextures;
-    public:
-        CStagedTexturedRendererCommand(CXMLTreeNode &atts);
-        virtual ~CStagedTexturedRendererCommand();
-        void ActivateTextures();
-        void AddStageTexture(int StageId, CTexture *Texture);
+  std::vector<CKGStageTexture>    m_StageTextures;
+public:
+  CStagedTexturedRendererCommand( CXMLTreeNode& atts );
+  virtual ~CStagedTexturedRendererCommand();
+  void ActivateTextures();
+  void AddStageTexture( int StageId, CTexture* Texture );
 
-        virtual void Execute(CGraphicsManager &GM) = 0;
+  virtual void Execute( CGraphicsManager& GM ) = 0;
 };
 #endif

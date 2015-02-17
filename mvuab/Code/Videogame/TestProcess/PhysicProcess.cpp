@@ -60,9 +60,8 @@ CPhysicProcess::CPhysicProcess() : CProcess(),
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
   //  Math::Vect3f(0.0f,2.0f,0.0f) );
   CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
-  unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL |
-                         VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1 |
-                         VERTEX_TYPE_DIFFUSE;
+  unsigned short debug = VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
+  int i = 0;
 }
 bool done = false;
 

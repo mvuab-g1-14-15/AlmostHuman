@@ -1,6 +1,7 @@
 #include "SceneRenderComands\StagedTexturedRendererCommand.h"
 #include "Texture\Texture.h"
 #include "GraphicsManager.h"
+#include "Texture\TextureManager.h"
 
 CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
   CXMLTreeNode& atts ): CSceneRendererCommand( atts )
@@ -13,7 +14,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
 
     for ( int i = 0; i < count; ++i )
     {
-      std::string TagName = atts( i ).GetName();
+      const std::string& TagName = atts( i ).GetName();
 
       if ( TagName == "dynamic_texture" )
       {
@@ -29,6 +30,14 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
         CTexture* l_Texture = new CTexture();
         l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET,
                            CTexture::DEFAULT, l_iFormatType );
+        AddStageTexture( l_StageId, l_Texture );
+      }
+
+      if ( TagName == "texture" )
+      {
+        const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
+        int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
+        CTexture* l_Texture = CTextureManager::GetSingletonPtr()->GetTexture( l_Name );
         AddStageTexture( l_StageId, l_Texture );
       }
     }
