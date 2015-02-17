@@ -48,6 +48,7 @@ struct SMaterial
 	m_Texture2  = STexture(),
 	m_TextureBump  = STexture(),
 	m_TextureReflection = STexture(),
+	m_TextureSkyBox = STexture(),
 	m_Color = 0,
 	
 	fn FromMaxMaterial mat =
@@ -85,6 +86,14 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureReflectionFileName = mat.reflectionMap.filename
 					m_TextureReflection.FromMaxTexture l_TextureReflectionFileName
+				)
+				
+				if mat.refractionMapEnable == true AND classOf(mat.refractionMap) == BitmapTexture then
+				(
+					m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_SKYBOX)
+					-- Load the texture of bump mapping
+					local l_TextureSkyBoxFileName = mat.refractionMap.filename
+					m_TextureSkyBox.FromMaxTexture l_TextureSkyBoxFileName
 				)
 			)
 			else
@@ -127,6 +136,10 @@ struct SMaterial
 		(
 			l_nTextures = l_nTextures + 1
 		)
+		if ((bit.and m_Type VERTEX_TYPE_SKYBOX) == VERTEX_TYPE_SKYBOX ) then 
+		(
+			l_nTextures = l_nTextures + 1
+		)
 		
 		WriteShort file l_nTextures #unsigned
 		
@@ -145,6 +158,10 @@ struct SMaterial
 		if ((bit.and m_Type VERTEX_TYPE_REFLECTION) == VERTEX_TYPE_REFLECTION ) then 
 		(
 			m_TextureReflection.WriteToFile file
+		)
+		if ((bit.and m_Type VERTEX_TYPE_SKYBOX) == VERTEX_TYPE_SKYBOX ) then 
+		(
+			m_TextureSkyBox.WriteToFile file
 		)
 		--format "Writing Material End\n"
 	)
