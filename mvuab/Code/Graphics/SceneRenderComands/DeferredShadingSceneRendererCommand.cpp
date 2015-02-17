@@ -1,10 +1,10 @@
-#include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
-#include "GraphicsManager.h"
-#include "Math\Color.h"
 #include "Core.h"
-#include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "Effects\Effect.h"
+#include "GraphicsManager.h"
 #include "Lights\LightManager.h"
+#include "Math\Color.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
 
 /*
 <set_render_target name="deferred_multiple_render_target">
