@@ -17,14 +17,14 @@ void CCameraManager::Init()
   AddResource( name_Cameraplayer, l_pFPSCamera );
   CCameraKeyController*  l_pkeyController = new CCameraKeyController();
 
-  if ( l_pkeyController->LoadXML( "./Data/camera.xml" ) )
+  /*if ( l_pkeyController->LoadXML( "./Data/camera.xml" ) )
   {
     CCamera* l_pCinematicalCamera = new CCameraCinematical( l_pkeyController );
     std::string name_CameraCinematical = "cinematical";
     AddResource( name_CameraCinematical, l_pCinematicalCamera );
     SetCurrentCamera( name_CameraCinematical );
   }
-  else
+  else*/
     SetCurrentCamera( name_Cameraplayer );
 }
 
