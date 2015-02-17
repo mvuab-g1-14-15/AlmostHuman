@@ -36,7 +36,7 @@ float4 PixelShaderFunction(VertexShaderOutput IN) : COLOR0
 	return texCUBE(cubeSampler, IN.TextureCoordinate);
 }
 
-technique DefaultTechnique
+technique SkyBox
 {
 	pass p0
 	{
