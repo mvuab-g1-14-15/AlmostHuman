@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <logs>
     <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
     <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
@@ -7,83 +8,5 @@
      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
     <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
     <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-      <log module="Physics" engine_class="PhysicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="Input" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-    <log module="Graphics" engine_class="GraphicsManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="i"/>
-     <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e"/>
-    <log module="GUI" engine_class="InputManager.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="w"/>
-
-    
+    <log module="Audio" engine_class="Audio.c" msg="this is a long mesage" timestamp="121231223414" date_time="03-02-14 19:41:32.123" level="e">
 </logs>

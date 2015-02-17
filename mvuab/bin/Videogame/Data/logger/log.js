@@ -1,12 +1,11 @@
 var m_TimeToRefresh = 10000;
 var m_SecondsInMilis = 1000;
+var m_Filename = "logs/log.xml";
 
 $(document).ready(function() 
 {
-    LoadXML();
-    var refInterval1 = window.setInterval('ClearDivXML()', m_TimeToRefresh-1); // 10 seconds
-    var refInterval2 = window.setInterval('LoadXML()', m_TimeToRefresh); // 10 seconds
-
+    //LoadXML();
+    LoadXML2(m_Filename);
 });
  
 //	Functions for toggling visibility in the log.
@@ -89,7 +88,7 @@ function hide_class(className)
 function LoadXML() 
 {
 
-    $.ajax({
+    /*$.ajax({
             type: "GET",
             url: "logs/log.xml",
             cache: false,
@@ -117,14 +116,88 @@ function LoadXML()
 					 $('#logger_wrapper').append($(item));
      	 		});
             }
-        });
+        });*/
+
+		/*$.get("logs/log.xml",function(xml) {
+
+    			var trace_iteration = 0;
+
+        		$(xml).find('log').each(function(){
+
+        			trace_iteration = 		trace_iteration + 1;
+
+                    var module = 			$(this).attr('module');
+                    var engine_class = 		$(this).attr('engine_class');
+					var msg = 				$(this).attr('msg');
+					var timestamp = 		$(this).attr('timestamp');
+					var date_time = 		$(this).attr('date_time');
+					var level = 			$(this).attr('level');
+				
+					
+
+//<p class="System"><span class="time">0</span><a onclick="hide('trace0')">STACK</a> GlobalManager.Awake</p>
+					var item = '<p class="' + module + '"><img src="img/level_'+level+'.png" alt="'+level+'" style="width:35px;height:35px"><span class="time">'+date_time+'</span></span><a onclick="hide(\'trace_'+trace_iteration+'\')">DETAILS</a> ' + engine_class + ' </p><pre id="trace_'+trace_iteration+'"> '+ msg +'</pre>';
+
+					 $('#logger_wrapper').append($(item));
+     	 		});
+           
+        });*/
 
 }
 
+
+function LoadXML2(m_filename)
+{
+
+
+/*var xml = "<rss version='2.0'><channel><title>RSS Title</title></channel></rss>",
+  xmlDoc = $.parseXML( xml ),
+  $xml = $( xmlDoc ),
+  $title = $xml.find( "title" );*/
+
+ 	xmlString = (new XMLSerializer()).serializeToString("logs/log.xml");
+
+  	/*var xml = doc,
+	xmlDoc = $.parseXML( xml ),
+	$xml = $( xml ),
+	$log = $(xml).find('log')*/
+
+	console.log(xmlString);
+/*
+	var trace_iteration = 0;
+
+	$(xmlDoc).find('log').each(function(){
+
+		trace_iteration = 		trace_iteration + 1;
+
+        var module = 			$(this).attr('module');
+        var engine_class = 		$(this).attr('engine_class');
+		var msg = 				$(this).attr('msg');
+		var timestamp = 		$(this).attr('timestamp');
+		var date_time = 		$(this).attr('date_time');
+		var level = 			$(this).attr('level');
+	
+		
+
+//<p class="System"><span class="time">0</span><a onclick="hide('trace0')">STACK</a> GlobalManager.Awake</p>
+		var item = '<p class="' + module + '"><img src="img/level_'+level+'.png" alt="'+level+'" style="width:35px;height:35px"><span class="time">'+date_time+'</span></span><a onclick="hide(\'trace_'+trace_iteration+'\')">DETAILS</a> ' + engine_class + ' </p><pre id="trace_'+trace_iteration+'"> '+ msg +'</pre>';
+
+		 $('#logger_wrapper').append($(item));
+ 		});
+*/
+           
+}
 
 function ClearDivXML()
 {
 
 	$('#logger_wrapper').empty();
 
+
+}
+
+function ReloadXML()
+{
+	ClearDivXML();
+	LoadXML();
 }
