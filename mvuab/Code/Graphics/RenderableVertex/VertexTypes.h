@@ -37,6 +37,29 @@ G N T B D T1 T2
 #define VERTEX_TYPE_REFLECTION  1 << 9 // 512
 #define VERTEX_TYPE_SCREEN_GEOMETRY 1 << 10
 #define VERTEX_TYPE_SCREEN 1 << 11
+#define VERTEX_TYPE_SKYBOX 1 << 12
+
+struct T_SKYBOX_VERTEX
+{
+  float x, y, z;
+
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+
+  static inline unsigned short GetVertexType()
+  {
+	  return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_SKYBOX;
+  }
+
+  static inline unsigned int GetFVF()
+  {
+    return 0;
+  }
+};
 
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
