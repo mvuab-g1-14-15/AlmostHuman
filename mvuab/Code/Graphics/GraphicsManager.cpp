@@ -396,24 +396,22 @@ void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, floa
     pointA = Math::Vect3f( 0.f, 0.f, -D / C );
     pointB = Math::Vect3f( 1.f, 1.f, ( D - A - B ) / C );
   }
+  else if ( B != 0 )
+  {
+    pointA = Math::Vect3f( 0.f, -D / B, 0.f );
+    pointB = Math::Vect3f( 1.f, ( -D - A - C ) / B, 1.f );
+  }
+  else if ( A != 0 )
+  {
+    pointA = Math::Vect3f( -D / A, 0.f, 0.f );
+    pointB = Math::Vect3f( ( -D - B - C ) / A, 1.f, 1.f );
+  }
   else
-    if ( B != 0 )
-    {
-      pointA = Math::Vect3f( 0.f, -D / B, 0.f );
-      pointB = Math::Vect3f( 1.f, ( -D - A - C ) / B, 1.f );
-    }
-    else
-      if ( A != 0 )
-      {
-        pointA = Math::Vect3f( -D / A, 0.f, 0.f );
-        pointB = Math::Vect3f( ( -D - B - C ) / A, 1.f, 1.f );
-      }
-      else
-      {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "drawplane: ALL VALUES = 0" );
-        std::string l_msgerror = "Error, se genero un logger con la informacion";
-        throw CException( __FILE__, __LINE__, l_msgerror );
-      }
+  {
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "drawplane: ALL VALUES = 0" );
+    std::string l_msgerror = "Error, se genero un logger con la informacion";
+    throw CException( __FILE__, __LINE__, l_msgerror );
+  }
 
   Math::Vect3f vectorA = pointB - pointA;
   vectorA.Normalize();
@@ -839,6 +837,33 @@ void CGraphicsManager::RenderCursor()
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
 
+void CGraphicsManager::EnableAlphaTest()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, TRUE );
+}
+
+void CGraphicsManager::DisableAlphaTest()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
+}
+
+void CGraphicsManager::SetBlendOP()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
+}
+
+//SrcBlend=SrcAlpha;
+//DestBlend=InvSrcAlpha;
+
+void CGraphicsManager::SetSrcBlend()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+}
+
+void CGraphicsManager::SetDestBlend()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+}
 
 void CGraphicsManager::EnableZTest()
 {

@@ -128,6 +128,12 @@ private: // Methods
   void GetWindowRect( HWND hwnd );
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment,
                            Math::Vect2i& finalPos );
+public:
+  void EnableAlphaTest();
+  void DisableAlphaTest();
+  void SetBlendOP();
+  void SetSrcBlend();
+  void SetDestBlend();
 };
 
 #endif // GRAPHICS_MANAGER_H
