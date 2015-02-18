@@ -19,7 +19,8 @@ float3 Texture2Normal(float3 Color)
 	return (Color-0.5)*2;
 }
 
-/*float3 GetPositionFromZDepthView(float ZDepthView, float2 UV, float4x4 InverseViewMatrix, float4x4 InverseProjectionMatrix)
+/*
+float3 GetPositionFromZDepthView(float ZDepthView, float2 UV, float4x4 InverseViewMatrix, float4x4 InverseProjectionMatrix)
 {
 	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV,
 	InverseProjectionMatrix);
@@ -37,8 +38,8 @@ float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV, f
 	float4 l_PositionVS = mul(l_ProjectedPos, InverseProjection atrix);
 	// Divide by w to get the view-space position
 	return l_PositionVS.xyz / l_PositionVS.w;
-}*/
-
+}
+*/
 struct VertexPS
 {
 	float4 HPosition : POSITION;
@@ -64,7 +65,7 @@ TMultiRenderTargetPixel mainPS(VertexPS IN) : COLOR
 	float4 l_Albedo = float4( (float3)tex2D(S0LinearSampler, IN.UV), 1.0f);
 	float4 l_Ambient = float4( (float3)g_AmbientLight, 1.0f);
 	float4 l_Normal = float4(Normal2Texture(normalize(IN.Normal)), 0.0f);
-	float4 l_Depth=IN.Pos.x/IN.Pos.y;
+	float4 l_Depth = IN.Pos.x/IN.Pos.y;
 	
 	OUT.Albedo = l_Albedo;
 	OUT.Ambient = l_Ambient;

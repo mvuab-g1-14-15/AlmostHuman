@@ -21,14 +21,18 @@
 	<set_matrices/>
 	<render_scene layer="solid" active="true"/>
 	
-	<set_pool_renderable_objects_technique pool="draw_quad_sampler_0_pool_renderable_object_technique"/>
+	<set_pool_renderable_objects_technique pool="init_deferred_technique"/>
+	<draw_quad>
+		<texture stage_id="0" name="LightMapTexture"/>
+	</draw_quad>
+	<set_pool_renderable_objects_technique pool="render_deferred_technique"/>
 	<render_deferred_shading>
 		<texture stage_id="0" name="DiffuseMapTexture"/>
 		<texture stage_id="1" name="LightMapTexture"/>
 		<texture stage_id="2" name="NormalMapTexture"/>
 		<texture stage_id="3" name="DepthMapTexture"/>
 	</render_deferred_shading>
-	<disable_z_write/>
+
 	<!--end pre_render-->
 	<end_scene/>
 	<present/>

@@ -28,9 +28,10 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
   {
     std::string err = "ERROR reading the file " + FileName;
     MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
-    exit( EXIT_FAILURE );
+    exit( EXIT_FAILURE ); // TODO RAUL
   }
 
+  m_FileName = FileName;
   CXMLTreeNode  TreeNode = l_File["renderable_object_techniques"];
 
   if ( TreeNode.Exists() )
@@ -84,7 +85,13 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
 void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName,
     const std::string& TechniqueName )
 {
-	CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
-               CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
-	AddResource( ROTName, l_RenderableObjectTechnique );
+  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
+      CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+  AddResource( ROTName, l_RenderableObjectTechnique );
+}
+
+void CRenderableObjectTechniqueManager::ReLoad()
+{
+  Destroy();
+  Load( m_FileName );
 }

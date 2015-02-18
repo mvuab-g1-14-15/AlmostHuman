@@ -271,9 +271,9 @@ void CCore::InitManagers()
   m_pFontManager->Init( m_pGraphicsManager );
   m_pFontManager->LoadTTFs( m_FontsPath );
   m_pRenderableObjectTechniqueManager->Load( m_RenderableObjectTechniquePath );
+  m_pStaticMeshManager->Load( m_StaticMeshesPath );
   m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
   m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
-  m_pStaticMeshManager->Load( m_StaticMeshesPath );
   m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
   //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
   m_pCameraManager->Init();

@@ -1,5 +1,5 @@
 <effects>
-	<default_technique vertex_type="19" technique="MultiLightsTechnique"/>
+	<default_technique vertex_type="19" technique="GenerateGBufferTechnique"/>
 	<default_technique vertex_type="31" technique="MultiLightsNormalTechnique"/>
 	<default_technique vertex_type="51" technique="MultiLightsLightMapTechnique"/>
 	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
@@ -18,6 +18,7 @@
 	<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
 	<effect name="DrawQuad" file="data/effects/DrawQuad.fx"/>
 	<effect name="RenderDeferredEffect" file="data/effects/RenderDeferred.fx"/>
+	<effect name="InitRenderDeferredEffect" file="data/effects/InitRenderDeferred.fx"/>
 
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
@@ -29,4 +30,5 @@
 	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	<technique name="DrawQuadSampler0Technique" effect="DrawQuad"/>
 	<technique name="RenderDeferredTechnique" effect="RenderDeferredEffect"/>
+	<technique name="InitRenderDeferredTechnique" effect="InitRenderDeferredEffect"/>
 </effects>

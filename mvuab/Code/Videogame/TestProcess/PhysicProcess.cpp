@@ -36,16 +36,18 @@
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
 
-#include <d3dx9.h>
-
-#include "..\Items\Grenade.h"
+#include "Items\Grenade.h"
 #include "Joints\PhysicSphericalJoint.h"
 #include "Joints\PhysicRevoluteJoint.h"
 #include "Reports\PhysicTriggerReport.h"
 #include "Triggers\TriggerManager.h"
 #include "Triggers\Trigger.h"
+#include "Lights\LightManager.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
 
-
+#include <d3dx9.h>
+#include "SceneRenderComands\SceneRendererCommandManager.h"
 
 CGrenade* p_Grenade;
 
@@ -98,7 +100,15 @@ void CPhysicProcess::Update()
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
-    CCore::GetSingletonPtr()->GetEffectManager()->Reload();
+  {
+    // NOTE this must be in this order
+    CEffectManager::GetSingletonPtr()->Reload();
+    CLightManager::GetSingletonPtr()->ReLoad();
+    CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
+    CStaticMeshManager::GetSingletonPtr()->Reload();
+    CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
+    CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
+  }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();

@@ -7,6 +7,7 @@
 #include "Logger\Logger.h"
 
 CLightManager::CLightManager()
+  : m_Filename( "" )
 {
 }
 
@@ -14,7 +15,7 @@ CLightManager::~CLightManager()
 {
 }
 
-void CLightManager::Load( const std::string& FileName )
+bool CLightManager::Load( const std::string& FileName )
 {
   CXMLTreeNode newFile;
   CXMLTreeNode m;
@@ -23,16 +24,17 @@ void CLightManager::Load( const std::string& FileName )
   {
     CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CLightManager::Load --> Error loading XML %s.",
                                            FileName.c_str() );
-    return;
+    return false;
   }
 
+  m_Filename = FileName;
   m = newFile["lights"];
 
   if ( !m.Exists() )
   {
     CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
                                            "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
-    return;
+    return false;
   }
 
   for ( int i = 0; i < m.GetNumChildren(); ++i )
@@ -68,6 +70,8 @@ void CLightManager::Load( const std::string& FileName )
           }
     }
   }
+
+  return true;
 }
 
 void CLightManager::Render()
@@ -92,4 +96,10 @@ void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
 
   for ( ; itb != ite; ++itb )
     ( *itb )->GenerateShadowMap( GM );
+}
+
+bool CLightManager::ReLoad()
+{
+  Destroy();
+  return Load( m_Filename );
 }

@@ -6,19 +6,25 @@
 #include "Utils\TemplatedVectorMapManager.h"
 #include "SceneRendererCommand.h"
 #include <string>
+#include "Utils/SingletonPattern.h"
 
-class CSceneRendererCommandManager
+class CSceneRendererCommandManager : public CSingleton<CSceneRendererCommandManager>
 {
-	private:
-		CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
+private:
+  CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
 
-		void CleanUp();
-		std::string GetNextName();
-    public:
-        CSceneRendererCommandManager();
-        ~ CSceneRendererCommandManager();
+  void CleanUp();
+  std::string GetNextName();
+public:
+  CSceneRendererCommandManager();
+  ~ CSceneRendererCommandManager();
 
-        bool Load(const std::string &FileName);
-        bool Execute();
+  bool Load( const std::string& FileName );
+  bool ReLoad();
+  bool Execute();
+
+private:
+  std::string m_FileName;
+
 };
 #endif

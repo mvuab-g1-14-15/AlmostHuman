@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="Plane001" filename="\meshes\Plane001.mesh" />
+  <static_mesh name="BoxDef" filename="\meshes\BoxDef.mesh" />
+  <static_mesh name="SphereDef" filename="\meshes\SphereDef.mesh" />
 </static_meshes>

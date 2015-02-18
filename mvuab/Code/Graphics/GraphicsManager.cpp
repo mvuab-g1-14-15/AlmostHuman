@@ -457,7 +457,7 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
@@ -484,7 +484,7 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
     return;
 
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
