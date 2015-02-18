@@ -7,16 +7,15 @@ CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesScen
   CXMLTreeNode& atts )
   : CSceneRendererCommand( atts )
 {
-  CRenderableObjectTechniqueManager* l_ROTManager =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+  CRenderableObjectTechniqueManager* l_ROTManager = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+  
   const std::string& l_PoolName = atts.GetPszProperty( "pool", "" );
-  m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
-                                      l_PoolName );
+  m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource( l_PoolName );
 }
 
 CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSceneRendererCommand()
 {
-  CHECKED_DELETE( m_PoolRenderableObjectTechnique );
+  m_PoolRenderableObjectTechnique->Destroy();
 }
 
 void CRenderableObjectTechniquesSceneRendererCommand::Execute( CGraphicsManager& GM )

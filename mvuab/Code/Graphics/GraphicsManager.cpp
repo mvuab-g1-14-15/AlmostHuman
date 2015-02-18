@@ -72,6 +72,7 @@ CGraphicsManager::CGraphicsManager() :
 {
   m_CylinderMesh = 0;
   m_SphereMesh = 0;
+  m_BoxMesh = 0;
   m_CylinderMesh = 0;
 }
 

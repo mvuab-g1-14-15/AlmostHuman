@@ -38,8 +38,8 @@
 #define DIRECTINPUT_VERSION     0x0800
 
 #define CHECKED_DELETE(x)       if(x != NULL){ delete x; x = NULL; }
-#define CHECKED_RELEASE(x)      if(x){ x->Release(); x = NULL; }
-#define CHECKED_DELETE_ARRAY(x) if(x){ delete [] x; x = NULL; }
+#define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
+#define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
 
 #define CoreInstance        CCore::GetSingletonPtr()
 #define EngineInstance      CEngine::GetSingletonPtr()

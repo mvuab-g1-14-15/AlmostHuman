@@ -38,8 +38,8 @@ void CPoolRenderableObjectTechnique::Destroy()
 {
   for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
     CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
-
-  m_RenderableObjectTechniqueElements.clear();
+  
+  if(m_RenderableObjectTechniqueElements.size() != 0) m_RenderableObjectTechniqueElements.clear();
 }
 
 void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
