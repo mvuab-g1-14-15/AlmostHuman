@@ -17,6 +17,7 @@
 	<effect name="MultiLightsLightMapEffect" file="data/effects/MultiLightsLightMap.fx"/>
 	<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
 	<effect name="DrawQuad" file="data/effects/DrawQuad.fx"/>
+	<effect name="RenderDeferredEffect" file="data/effects/RenderDeferred.fx"/>
 
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
@@ -27,4 +28,5 @@
 	<technique name="MultiLightsLightMapTechnique" effect="MultiLightsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	<technique name="DrawQuadSampler0Technique" effect="DrawQuad"/>
+	<technique name="RenderDeferredTechnique" effect="RenderDeferredEffect"/>
 </effects>

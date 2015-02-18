@@ -22,9 +22,12 @@
 	<render_scene layer="solid" active="true"/>
 	
 	<set_pool_renderable_objects_technique pool="draw_quad_sampler_0_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" file="DiffuseMapTexture"/>
-	</render_draw_quad>
+	<render_deferred_shading>
+		<texture stage_id="0" name="DiffuseMapTexture"/>
+		<texture stage_id="1" name="LightMapTexture"/>
+		<texture stage_id="2" name="NormalMapTexture"/>
+		<texture stage_id="3" name="DepthMapTexture"/>
+	</render_deferred_shading>
 	<disable_z_write/>
 	<!--end pre_render-->
 	<end_scene/>

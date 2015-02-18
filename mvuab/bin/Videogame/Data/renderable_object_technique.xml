@@ -16,4 +16,8 @@
 		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
 	</pool_renderable_object_technique>
 	
+	<pool_renderable_object_technique name="render_deferred_technique">
+		<default_technique vertex_type="1105" technique="RenderDeferredTechnique"/>
+	</pool_renderable_object_technique>
+	
 </renderable_object_techniques>

@@ -84,6 +84,7 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
 void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName,
     const std::string& TechniqueName )
 {
-  AddResource( ROTName, new CRenderableObjectTechnique( ROTName,
-               CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) ) );
+	CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
+               CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+	AddResource( ROTName, l_RenderableObjectTechnique );
 }

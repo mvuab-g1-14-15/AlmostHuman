@@ -20,7 +20,7 @@ CDeferredShadingSceneRendererCommand::CDeferredShadingSceneRendererCommand(
   : CStagedTexturedRendererCommand( atts )
 {
   m_RenderableObjectTechnique =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( "GenerateGBufferTechnique" );
+    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( "DefaultROTTechnique_1105" );
 }
 
 CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
@@ -45,12 +45,11 @@ void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
   {
     CEffectTechnique* l_ET = m_RenderableObjectTechnique->GetEffectTechnique();
     size_t n_lights = l_LightManager->GetResourcesVector().size();
-    //l_ET->GetEffect()->SetLights( n_lights );
 
     for ( size_t i = 0; i < n_lights; ++i )
     {
       l_ET->GetEffect()->SetLight( i );
-      //GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, l_Col, NULL, l_ScreenMin.x, l_ScreenMin.y, l_ScreenMax.x, l_ScreenMax.y );
+	  GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1, 1 );
     }
   }
 }
