@@ -32,6 +32,7 @@ void CStaticMesh::Destroy()
 {
   // Clear the references to the vector of textures
   m_Textures.clear();
+
   for ( std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin();
         it != m_RVs.end(); ++it )
     CHECKED_DELETE( *it );
@@ -253,7 +254,7 @@ bool CStaticMesh::Load( const std::string& FileName )
   }
 
   std::fclose( l_pFile );
-  return ( true );
+  return ( GetRenderableObjectTechnique() );
 }
 
 bool CStaticMesh::ReLoad()
@@ -269,10 +270,18 @@ void CStaticMesh::Render( CGraphicsManager* GM )
     for ( unsigned int j = 0; j < m_Textures[i].size(); ++j )
       m_Textures[i][j]->Activate( j );
 
-    CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
+    if ( m_RenderableObjectTechniques[i] != NULL )
+    {
+      CEffectTechnique* l_pEffectTechnique = m_RenderableObjectTechniques[i]->GetEffectTechnique();
+      m_RVs[i]->Render( GM, l_pEffectTechnique );
+    }
+    else
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "No technique in file %s", m_FileName.c_str() );
+
+    /*CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
     unsigned short l_VertexType = m_RVs[i]->GetVertexType();
     std::string l_EffectName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault( l_VertexType );
-    m_RVs[i]->Render( GM, l_pEffectManager->GetResource( l_EffectName ) );
+    m_RVs[i]->Render( GM, l_pEffectManager->GetResource( l_EffectName ) );*/
   }
 }
 

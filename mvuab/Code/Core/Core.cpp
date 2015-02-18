@@ -270,10 +270,12 @@ void CCore::InitManagers()
   m_pLanguageManager->SetCurrentLanguage( m_CurrentLanguage );
   m_pFontManager->Init( m_pGraphicsManager );
   m_pFontManager->LoadTTFs( m_FontsPath );
+  m_pRenderableObjectTechniqueManager->Load( m_RenderableObjectTechniquePath );
+  m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
+  m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
   m_pStaticMeshManager->Load( m_StaticMeshesPath );
   m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
   //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
-  m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
   m_pCameraManager->Init();
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
                                Math::Vect3f( 15.0f, 2.0f, 0.0f ),
@@ -282,9 +284,7 @@ void CCore::InitManagers()
   m_pScriptManager->Initialize();
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
-  m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
   m_pPhysicsManager->Init();
-  //m_pTriggerManager->LoadXML( "Data/triggers.xml" );
 }
 
 void CCore::Trace( const std::string& TraceStr )

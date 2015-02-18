@@ -35,7 +35,8 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
 
       if ( TagName == "texture" )
       {
-        const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
+        //TODO ALEX Aquí lo cambié por file ya que en el xml el nombre de la textura esta puesto con file
+        const std::string& l_Name = atts( i ).GetPszProperty( "file", "" );
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
         CTexture* l_Texture = CTextureManager::GetSingletonPtr()->GetTexture( l_Name );
         AddStageTexture( l_StageId, l_Texture );

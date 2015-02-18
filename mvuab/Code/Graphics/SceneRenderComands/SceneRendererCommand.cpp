@@ -1,12 +1,12 @@
 #include "SceneRenderComands\SceneRendererCommand.h"
 
-CSceneRendererCommand::CSceneRendererCommand(CXMLTreeNode &atts)
+CSceneRendererCommand::CSceneRendererCommand( CXMLTreeNode& atts )
 {
-    if(atts.Exists())
-    {
-        SetName(atts.GetName());
-        SetVisible(atts.GetBoolProperty("active", false));
-    }
+  if ( atts.Exists() )
+  {
+    SetName( atts.GetPszKeyword( "name", atts.GetName() ) );
+    SetVisible( atts.GetBoolProperty( "active", false ) );
+  }
 }
 
 CSceneRendererCommand::~CSceneRendererCommand()
