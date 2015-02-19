@@ -49,7 +49,8 @@ void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
     for ( size_t i = 0; i < n_lights; ++i )
     {
       l_ET->GetEffect()->SetLight( i );
-	  GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1, 1 );
+      GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1,
+          1, 0 );
     }
   }
 }

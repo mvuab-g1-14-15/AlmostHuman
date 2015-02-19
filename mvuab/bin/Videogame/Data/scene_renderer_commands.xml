@@ -37,12 +37,13 @@
 		<dynamic_texture stage_id="0" name="CaptureFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
 	<set_pool_renderable_objects_technique pool="VignettingAndNoise"/>
-	<render_draw_quad>
-		<texture stage_id="0" name="CaptureFrameBuffer"/>		
+	<render_draw_quad name="noise_and_vignetting_scene_effect" active="true">
+		<texture stage_id="0" name="CaptureFrameBuffer"/>
 		<texture stage_id="1" name="vignetting.tga"/>
-		<texture stage_id="2" name="noise.tga"/>
+		<texture stage_id="2" name="noise2d.png"/>
 	</render_draw_quad>
 	<disable_alpha_blend/>
+	
 	
 
 	<!--end pre_render-->

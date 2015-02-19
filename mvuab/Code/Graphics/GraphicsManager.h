@@ -94,12 +94,14 @@ public:
                    const Math::Vect3f& dr, Math::CColor color );
   void DrawTeapot();
 
+//TODO AÑADIDO STAGEID NO SE SI ES NECESARIO, POR DEFECTO SIEMPRE PONE 0
+
   void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
-      CTexture* Texture, float U0, float V0, float U1, float V1 );
+      CTexture* Texture, float U0, float V0, float U1, float V1, size_t StageId );
 
   void DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
     CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
-    float U0, float V0, float U1, float V1 );
+    float U0, float V0, float U1, float V1, size_t StageId );
 
 
 private: // Members

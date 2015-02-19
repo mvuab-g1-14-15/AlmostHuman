@@ -30,12 +30,12 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
     if ( l_EffectTech )
     {
       GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
-          m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+          m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[i].m_StageId );
     }
     else
     {
       GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
-                                            m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+                                            m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[i].m_StageId );
     }
   }
 }
