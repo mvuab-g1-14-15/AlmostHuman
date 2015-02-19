@@ -852,19 +852,6 @@ void CGraphicsManager::SetBlendOP()
   m_pD3DDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
 }
 
-//SrcBlend=SrcAlpha;
-//DestBlend=InvSrcAlpha;
-
-void CGraphicsManager::SetSrcBlend()
-{
-  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-}
-
-void CGraphicsManager::SetDestBlend()
-{
-  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-}
-
 void CGraphicsManager::EnableZTest()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
@@ -955,4 +942,54 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
 
     l_Effect->End();
   }
+}
+
+void CGraphicsManager::SetSrcBlend(const std::string & BlendState )
+{
+  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, ToD3DBlendEnum(BlendState) );
+}
+
+void CGraphicsManager::SetDstBlend(const std::string & BlendState )
+{
+  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, ToD3DBlendEnum(BlendState) );
+}
+
+D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
+{
+  if ( BlendState == "One" )
+    return D3DBLEND_ONE;
+  else if ( BlendState == "SrcColor" )
+    return D3DBLEND_SRCCOLOR;
+  else if ( BlendState == "InvSrcColor" )
+    return D3DBLEND_INVSRCCOLOR;
+  else if ( BlendState == "SrcAlpha" )
+    return D3DBLEND_SRCALPHA;
+  else if ( BlendState == "InvSrcAlpha" )
+    return D3DBLEND_INVSRCALPHA;
+  else if ( BlendState == "DestAlpha" )
+    return D3DBLEND_DESTALPHA;
+  else if ( BlendState == "InvDestAlpha" )
+    return D3DBLEND_INVDESTALPHA;
+  else if ( BlendState == "DestColor" )
+    return D3DBLEND_DESTCOLOR;
+  else if ( BlendState == "InvDestColor" )
+    return D3DBLEND_INVDESTCOLOR;
+  else if ( BlendState == "SrcAlphaSat" )
+    return D3DBLEND_SRCALPHASAT;
+  else if ( BlendState == "BothSrcAlpha" )
+    return D3DBLEND_BOTHSRCALPHA;
+  else if ( BlendState == "BothInvSrcAlpha" )
+    return D3DBLEND_BOTHINVSRCALPHA;
+  else if ( BlendState == "BlendFactor" )
+    return D3DBLEND_BLENDFACTOR;
+  else if ( BlendState == "InvBlendFactor" )
+    return D3DBLEND_INVBLENDFACTOR;
+  else if ( BlendState == "SrcColor2" )
+    return D3DBLEND_SRCCOLOR2;
+  else if ( BlendState == "InvSrcColor2" )
+    return D3DBLEND_INVSRCCOLOR2;
+  else if ( BlendState == "ForceDWord" )
+    return D3DBLEND_FORCE_DWORD;
+
+  return D3DBLEND_ZERO;
 }

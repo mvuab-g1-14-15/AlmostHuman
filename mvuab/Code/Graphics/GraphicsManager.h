@@ -11,6 +11,7 @@
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
 #include "Cameras\Frustum.h"
+#include <string>
 
 class CEffectTechnique;
 class CTexture;
@@ -48,6 +49,11 @@ public:
   void EnableZWrite();
   void DisableZWrite();
   void Present();
+  void EnableAlphaTest();
+  void DisableAlphaTest();
+  void SetBlendOP();
+  void SetSrcBlend(const std::string & BlendState );
+  void SetDstBlend(const std::string & BlendState );
 
   // Getters and setters
   const LPDIRECT3DDEVICE9 GetDevice() const
@@ -130,12 +136,7 @@ private: // Methods
   void GetWindowRect( HWND hwnd );
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment,
                            Math::Vect2i& finalPos );
-public:
-  void EnableAlphaTest();
-  void DisableAlphaTest();
-  void SetBlendOP();
-  void SetSrcBlend();
-  void SetDestBlend();
+  D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
 };
 
 #endif // GRAPHICS_MANAGER_H
