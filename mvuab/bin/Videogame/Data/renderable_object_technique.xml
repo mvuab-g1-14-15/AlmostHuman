@@ -17,11 +17,15 @@
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="init_deferred_technique">
-		<default_technique vertex_type="1104" technique="InitRenderDeferredTechnique"/>
+		<default_technique vertex_type="1105" technique="InitRenderDeferredTechnique"/>
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="render_deferred_technique">
-		<default_technique vertex_type="1105" technique="RenderDeferredTechnique"/>
+		<default_technique vertex_type="1106" technique="RenderDeferredTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="VignettingAndNoise">
+		<default_technique vertex_type="1104" technique="VignettingTechnique"/>
 	</pool_renderable_object_technique>
 	
 </renderable_object_techniques>

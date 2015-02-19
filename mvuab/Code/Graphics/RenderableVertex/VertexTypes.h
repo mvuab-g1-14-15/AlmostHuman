@@ -35,9 +35,9 @@ G N T B D T1 T2
 #define VERTEX_TYPE_WEIGHT    1 << 7 // 128
 #define VERTEX_TYPE_INDICES   1 << 8 // 256
 #define VERTEX_TYPE_REFLECTION  1 << 9 // 512
-#define VERTEX_TYPE_SCREEN_GEOMETRY 1 << 10
-#define VERTEX_TYPE_SCREEN 1 << 11
-#define VERTEX_TYPE_SKYBOX 1 << 12
+#define VERTEX_TYPE_SCREEN_GEOMETRY 1 << 10 //1024
+#define VERTEX_TYPE_SCREEN 1 << 11 // 2048
+#define VERTEX_TYPE_SKYBOX 1 << 12 // 4096
 
 struct T_SKYBOX_VERTEX
 {
@@ -52,7 +52,7 @@ struct T_SKYBOX_VERTEX
 
   static inline unsigned short GetVertexType()
   {
-	  return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_SKYBOX;
+    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_SKYBOX;
   }
 
   static inline unsigned int GetFVF()

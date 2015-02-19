@@ -56,9 +56,8 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
             std::string  l_ROTName = GetRenderableObjectTechniqueNameByVertexType( SubTreeNode(
                                        j ).GetIntProperty( "vertex_type", 0 ) );
             const std::string& l_Technique = SubTreeNode( j ).GetPszProperty( "technique", "" );
-
-            if ( 0 == GetResource( l_Technique ) )
-              InsertRenderableObjectTechnique( l_ROTName, l_Technique );
+            //if ( 0 == GetResource( l_Technique ) )
+            InsertRenderableObjectTechnique( l_ROTName, l_Technique );
           }
         }
 

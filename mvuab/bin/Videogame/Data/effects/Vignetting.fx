@@ -2,19 +2,27 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-float min;
-float max;
 
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
-	float4 base = tex2D(S0PointSampler, UV);
-	float dist = distance(IN, float2(0.5,0.5)) * 0.7 ;    
-	base.rgb *= smoothstep(min, max, dist);    
-    return base; 
+	//float2 l_Offset=float2(cos(g_Time),sin(g_Time));
+	//float2 l_UV=UV+l_Offset;
+	//float4 l_VignettingColor=tex2D(NormalMapTextureSampler, UV);
+	//float4 l_NoiseColor=tex2D(DiffuseTextureSampler, l_UV);
+	//return float4(l_NoiseColor.xyz*l_VignettingColor.xyz, l_NoiseColor.a+l_VignettingColor.a);
+	//float4 l_Color = tex2D(S0LinearSampler, UV);
+	float2 l_Offset=float2(cos(30),sin(30));
+	float2 l_UV=UV+l_Offset;
+	float4 l_Vignetting = tex2D(S1LinearSampler, UV);
+    float4 l_NoiseColor = tex2D(S2LinearSampler, l_UV);
+    return float4(l_Vignetting.xyz*l_NoiseColor.xyz, l_Vignetting.a*l_NoiseColor.a); 
 }
 
-technique Vignetting0Technique {
-	pass p0 {
+technique VignettingTechnique 
+	{
+	pass p0 
+	{
+		CullMode = CCW;
 		PixelShader = compile ps_3_0 mainPS();
 	}
 }
