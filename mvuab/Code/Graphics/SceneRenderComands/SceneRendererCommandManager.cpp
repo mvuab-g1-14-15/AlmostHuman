@@ -19,6 +19,8 @@
 #include "SceneRenderComands\RenderGUISceneRendererCommand.h"
 #include "SceneRenderComands\PresentSceneRendererCommand.h"
 #include "SceneRenderComands\SetMatricesSceneRendererCommand.h"
+#include "SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h"
+#include "SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -98,7 +100,6 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
       }
       else if ( TagName == "set_pool_renderable_objects_technique" )
       {
-        //PENDIENTE CREAR CLASE RENDERABLEOBJECTTECHNIQUE
         CSceneRendererCommand* SetPoolRenderableObjectTechnique = new
         CRenderableObjectTechniquesSceneRendererCommand( TreeNode( i ) );
         m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
@@ -106,15 +107,12 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
       }
       else if ( TagName == "set_render_target" )
       {
-        //PENDIENTE LAS DYNAMICS TEXTURE
-        // CXMLTreeNode  TreeNodeAux = TreeNode(i)["set_render_target"];
         CSceneRendererCommand* SetRenderTarget = new CSetRenderTargetSceneRendererCommand( TreeNode( i ) );
         m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
                                              SetRenderTarget );
       }
       else if ( TagName == "render_scene" )
       {
-        //PENDIENTE
         CSceneRendererCommand* RenderScene = new CRenderSceneSceneRendererCommand( TreeNode( i ) );
         m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
                                              RenderScene );
@@ -197,6 +195,20 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
         CSceneRendererCommand* Present = new CPresentSceneRendererCommand( TreeNode( i ) );
         m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
                                              Present );
+      }
+      else if ( TagName == "enable_alpha_blend" )
+      {
+        CSceneRendererCommand* l_EnableAlphaBlend = new CEnableAlphaBlendSceneRendererCommand( TreeNode(
+              i ) );
+        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
+                                             l_EnableAlphaBlend );
+      }
+      else if ( TagName == "disable_alpha_blend" )
+      {
+        CSceneRendererCommand* l_DisableAlphaBlend = new CDisableAlphaBlendSceneRendererCommand( TreeNode(
+              i ) );
+        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
+                                             l_DisableAlphaBlend );
       }
     }
   }

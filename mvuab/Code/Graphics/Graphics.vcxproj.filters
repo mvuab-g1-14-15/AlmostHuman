@@ -189,6 +189,12 @@
     <ClCompile Include="RenderableObject\RenderableObjectsLayersManager.cpp">
       <Filter>RenderableObject</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -387,6 +393,12 @@
     </ClInclude>
     <ClInclude Include="RenderableObject\RenderableObjectsLayersManager.h">
       <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -48,9 +48,11 @@
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableZTestSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableZWriteSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DrawQuadRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\EnableZTestSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\EnableZWriteSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\EndRenderSceneRendererCommand.cpp" />
@@ -117,9 +119,11 @@
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableZTestSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableZWriteSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DrawQuadRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\EnableZTestSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\EnableZWriteSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\EndRenderSceneRendererCommand.h" />
