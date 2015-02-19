@@ -78,6 +78,7 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
 }
 void CRenderableObjectsLayersManager::Reload()
 {
+    Destroy();
     Load(m_FileName);
 }
 void CRenderableObjectsLayersManager::Update()

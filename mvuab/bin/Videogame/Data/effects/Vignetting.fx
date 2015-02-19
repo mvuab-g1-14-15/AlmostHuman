@@ -1,6 +1,5 @@
-#include "vertex_types.fxh"
+
 #include "samplers.fxh"
-#include "globals.fxh"
 
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
