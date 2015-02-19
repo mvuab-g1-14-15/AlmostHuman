@@ -40,17 +40,29 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
 
     for ( int i = 0; i < count; ++i )
     {
-      const std::string & TagName = TreeNode( i ).GetName();
+      CXMLTreeNode& l_PoolNode = TreeNode( i );
+      const std::string& TagName = l_PoolNode.GetName();
 
       if ( TagName == "pool_renderable_object_technique" )
       {
-        /*CEffectManager::GetSingletonPtr()->
-        CRenderableObjectTechnique(const std::string &Name, CEffectTechnique *EffectTechnique);*/
-        //GetResource(
-
-
         CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique
-          = new CPoolRenderableObjectTechnique( TreeNode( i ) );
+          = new CPoolRenderableObjectTechnique( l_PoolNode );
+        int count = l_PoolNode.GetNumChildren();
+
+        for ( int j = 0; j < count; ++j )
+        {
+          const std::string& SubTagName = l_PoolNode( j ).GetName();
+
+          if ( SubTagName == "default_technique" )
+          {
+            const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType( l_PoolNode(
+                j ).GetIntProperty( "vertex_type", 0 ) );
+            const std::string& l_TechniqueName = l_PoolNode( j ).GetPszProperty( "technique", "" );
+            InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
+            PoolRenderableObjectTechnique->AddElement( l_VertexTypeStr, l_TechniqueName,
+                GetResource( l_VertexTypeStr ) );
+          }
+        }
 
         m_PoolRenderableObjectTechniques.AddResource( PoolRenderableObjectTechnique->GetName(),
             PoolRenderableObjectTechnique );
@@ -64,18 +76,22 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
   }
 }
 
-std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameByVertexType( uint32 VertexType )
+std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameByVertexType(
+  uint32 VertexType )
 {
   std::stringstream l_VertexType;
   l_VertexType << "DefaultROTTechnique_" << VertexType;
   return l_VertexType.str();
 }
 
-void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName, const std::string& TechniqueName )
+void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName,
+    const std::string& TechniqueName )
 {
-  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName, CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
-  if(!AddResource(ROTName, l_RenderableObjectTechnique))
-      CHECKED_DELETE(l_RenderableObjectTechnique);
+  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
+      CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+
+  if ( !AddResource( ROTName, l_RenderableObjectTechnique ) )
+    CHECKED_DELETE( l_RenderableObjectTechnique );
 }
 
 void CRenderableObjectTechniqueManager::ReLoad()
