@@ -18,6 +18,7 @@ CEnableAlphaBlendSceneRendererCommand::~CEnableAlphaBlendSceneRendererCommand()
 void  CEnableAlphaBlendSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
   GM.EnableAlphaBlend();
+  GM.EnableAlphaTest(); //TODO RAUL Split las sentenciqas en comandos separados
   GM.SetSrcBlend( m_SrcBlend );
   GM.SetDstBlend( m_DstBlend );
 }

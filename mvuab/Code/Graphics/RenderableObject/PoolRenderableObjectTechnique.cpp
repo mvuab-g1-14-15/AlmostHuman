@@ -2,29 +2,34 @@
 #include "Effects\EffectManager.h"
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include <sstream>
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode ) : CName(
-    TreeNode.GetPszProperty( "name", "" ) )
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode ) 
+  : CName( TreeNode.GetPszProperty( "name", "" ) )
 {
-  std::string nameProperty = "";
-  std::string l_Name = TreeNode.GetPszProperty( "name" );
-  size_t count = TreeNode.GetNumChildren();
-
-  for ( size_t i = 0; i < count; ++i )
+  int count = TreeNode.GetNumChildren();
+  for ( int j = 0; j < count; ++j )
   {
-    nameProperty = TreeNode( i ).GetName();
+	  CXMLTreeNode & l_CurrentSubNode = TreeNode( j );
+    const std::string & SubTagName = l_CurrentSubNode.GetName();
 
-    if ( nameProperty == "default_technique" )
+    if ( SubTagName == "default_technique" )
     {
-      size_t l_VertexType = TreeNode( i ).GetIntProperty( "vertex_type", 0 );
-      std::string l_TechniqueName =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
-          l_VertexType );
-      std::string l_Technique = TreeNode( i ).GetPszProperty( "technique", "" );
-      CRenderableObjectTechnique* l_ROT =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource(
-          l_TechniqueName );
-      AddElement( l_TechniqueName, l_Technique, l_ROT );
+      int l_VertexType = l_CurrentSubNode.GetIntProperty( "vertex_type", 0 );
+      std::stringstream l_VertexTypeStr;
+		  l_VertexTypeStr << "DefaultROTTechnique_" << l_VertexType;
+      const std::string & l_TechniqueName = l_CurrentSubNode.GetPszProperty( "technique", "" );
+      CRenderableObjectTechniqueManager *l_ROTM=CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+      CRenderableObjectTechnique* l_ROT = 
+        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
+
+      if(l_ROT==NULL)
+      {
+        l_ROT=new CRenderableObjectTechnique(l_TechniqueName, CEffectManager::GetSingletonPtr()->GetResource( l_TechniqueName));
+        l_ROTM->AddResource(l_TechniqueName, l_ROT);
+      }
+
+      AddElement( l_VertexTypeStr.str(), l_TechniqueName, l_ROT );
     }
   }
 }

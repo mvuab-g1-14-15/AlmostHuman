@@ -62,8 +62,9 @@ TMultiRenderTargetPixel mainPS(VertexPS IN) : COLOR
 {
 	TMultiRenderTargetPixel OUT = (TMultiRenderTargetPixel)0;
 	
-	float4 l_Albedo = float4( (float3)tex2D(S0LinearSampler, IN.UV), 1.0f);
-	float4 l_Ambient = float4( (float3)g_AmbientLight, 1.0f);
+	float3 l_Diffuse = (float3)tex2D(S0LinearSampler, IN.UV);
+	float4 l_Albedo = float4( l_Diffuse, 1.0f);
+	float4 l_Ambient = float4( (float3)g_AmbientLight*l_Diffuse, 1.0f);
 	float4 l_Normal = float4(Normal2Texture(normalize(IN.Normal)), 0.0f);
 	float4 l_Depth = IN.Pos.x/IN.Pos.y;
 	

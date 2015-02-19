@@ -9,6 +9,7 @@
 	
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
+	return float4(0,1,0,1);
 	float4 Albedo = tex2D(S0PointSampler, UV); //Albedo (float3) + (float) SpecularFactor
 	float4 Ambient = tex2D(S1PointSampler, UV); //AmbientLight (float3) + (float) SpecularPow
 	float4 Normal = tex2D(S2PointSampler, UV); //Normal (float3) + (float) Not used
