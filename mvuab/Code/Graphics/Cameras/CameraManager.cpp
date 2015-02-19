@@ -15,7 +15,7 @@ void CCameraManager::Init()
   CCamera* l_pFPSCamera = new CCameraFPShooter();
   std::string name_Cameraplayer = "player";
   AddResource( name_Cameraplayer, l_pFPSCamera );
-  CCameraKeyController*  l_pkeyController = new CCameraKeyController();
+  //CCameraKeyController*  l_pkeyController = new CCameraKeyController();
 
   /*if ( l_pkeyController->LoadXML( "./Data/camera.xml" ) )
   {

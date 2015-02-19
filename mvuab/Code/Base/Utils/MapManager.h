@@ -27,16 +27,17 @@ public:
             return m_Resources[Name];
         }
     }
-    virtual void AddResource(const std::string &Name, T *Resource)
+
+    virtual bool AddResource(const std::string &Name, T *Resource)
     {
         if( m_Resources.find(Name) != m_Resources.end() )
         {
             CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::AddResource->(%s)", Name.c_str() );
+            return false;
         }
-        else
-        {
-            m_Resources[Name] = Resource;
-        }
+        
+        m_Resources[Name] = Resource;
+        return true;
     }
 
     void Destroy()

@@ -81,12 +81,11 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
   return l_VertexType.str();
 }
 
-void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName,
-    const std::string& TechniqueName )
+void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName, const std::string& TechniqueName )
 {
-  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
-      CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
-  AddResource( ROTName, l_RenderableObjectTechnique );
+  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName, CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+  if(!AddResource(ROTName, l_RenderableObjectTechnique))
+      CHECKED_DELETE(l_RenderableObjectTechnique);
 }
 
 void CRenderableObjectTechniqueManager::ReLoad()
