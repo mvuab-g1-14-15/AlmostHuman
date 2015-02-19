@@ -3,8 +3,7 @@
 #include "GraphicsManager.h"
 #include "Texture\TextureManager.h"
 
-CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
-  CXMLTreeNode& atts ): CSceneRendererCommand( atts )
+CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& atts ): CSceneRendererCommand( atts )
 {
   CGraphicsManager* gm = CGraphicsManager::GetSingletonPtr();
 
@@ -19,19 +18,28 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
       if ( TagName == "dynamic_texture" )
       {
         std::string l_Name = atts( i ).GetPszProperty( "name", "" );
+
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-        bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer",
-                           true );
+        bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", true );
+
         std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
-        CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ?
-                                              ( CTexture::TFormatType )3 : ( CTexture::TFormatType )0;
+        CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 : ( CTexture::TFormatType )0;
+
         uint32 l_Width, l_Height;
         gm->GetWidthAndHeight( l_Width, l_Height );
+
         CTexture* l_Texture = new CTexture();
-        l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET,
-                           CTexture::DEFAULT, l_iFormatType );
-		CTextureManager::GetSingletonPtr()->AddResource(l_Name, l_Texture);
-        AddStageTexture( l_StageId, l_Texture );
+        l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT, l_iFormatType );
+
+		if(CTextureManager::GetSingletonPtr()->AddResource(l_Name, l_Texture))
+        {
+            AddStageTexture( l_StageId, l_Texture );
+        }
+        else
+        {
+            AddStageTexture(l_StageId, CTextureManager::GetSingletonPtr()->GetResource(l_Name));
+            CHECKED_DELETE(l_Texture);
+        }
       }
 
       if ( TagName == "texture" )
@@ -54,6 +62,10 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
 
 CStagedTexturedRendererCommand::~CStagedTexturedRendererCommand()
 {
+    //for(std::vector<CKGStageTexture>::iterator it = m_StageTextures.begin(); it != m_StageTextures.end(); ++it)
+        //CHECKED_DELETE(it);
+
+    //m_StageTextures.clear();
 }
 
 void CStagedTexturedRendererCommand::ActivateTextures()
@@ -62,8 +74,7 @@ void CStagedTexturedRendererCommand::ActivateTextures()
     m_StageTextures[i].m_Texture->Activate( m_StageTextures[i].m_StageId );
 }
 
-void CStagedTexturedRendererCommand::AddStageTexture( int StageId,
-    CTexture* Texture )
+void CStagedTexturedRendererCommand::AddStageTexture( int StageId, CTexture* Texture )
 {
   CKGStageTexture StageTexture = CKGStageTexture( StageId, Texture );
   m_StageTextures.push_back( StageTexture );
