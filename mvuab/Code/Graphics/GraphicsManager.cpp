@@ -641,8 +641,8 @@ void CGraphicsManager::EnableAlphaBlend()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
   // render el quad de difuminacion....
-  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  //m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+  //m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
   //// render el quad de difuminacion....
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
@@ -912,7 +912,8 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
 
   if ( Texture != NULL )
     Texture->Activate( StageId );
-//    Texture->Activate( 0 );
+
+  //    Texture->Activate( 0 );
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
 
@@ -944,14 +945,14 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
   }
 }
 
-void CGraphicsManager::SetSrcBlend(const std::string & BlendState )
+void CGraphicsManager::SetSrcBlend( const std::string& BlendState )
 {
-  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, ToD3DBlendEnum(BlendState) );
+  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, ToD3DBlendEnum( BlendState ) );
 }
 
-void CGraphicsManager::SetDstBlend(const std::string & BlendState )
+void CGraphicsManager::SetDstBlend( const std::string& BlendState )
 {
-  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, ToD3DBlendEnum(BlendState) );
+  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, ToD3DBlendEnum( BlendState ) );
 }
 
 D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )

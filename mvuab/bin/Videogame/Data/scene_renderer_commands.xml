@@ -32,7 +32,7 @@
 		<texture stage_id="2" name="NormalMapTexture"/>
 		<texture stage_id="3" name="DepthMapTexture"/>
 	</render_deferred_shading>
-	<enable_alpha_blend/>
+	<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 	<capture_frame_buffer>
 		<dynamic_texture stage_id="0" name="CaptureFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
