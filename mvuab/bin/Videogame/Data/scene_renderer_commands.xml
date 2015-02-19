@@ -30,7 +30,7 @@
 		<texture stage_id="1" name="DiffuseMapTexture"/>
 		<texture stage_id="2" name="LightMapTexture"/>
 	</render_draw_quad>
-	<!--
+	
 	<set_pool_renderable_objects_technique pool="render_deferred_technique"/>
 	<render_deferred_shading>
 		<texture stage_id="0" name="DiffuseMapTexture"/>
@@ -38,7 +38,7 @@
 		<texture stage_id="2" name="NormalMapTexture"/>
 		<texture stage_id="3" name="DepthMapTexture"/>
 	</render_deferred_shading>
-	-->
+	
 	<!--
 	<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 	<capture_frame_buffer>
@@ -53,7 +53,18 @@
 	<disable_alpha_blend/>
 	-->
 	
-
+	<capture_frame_buffer>
+		<dynamic_texture stage_id="0" name="CaptureFrameBuffer0" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+	<set_pool_renderable_objects_technique pool="Blur"/>
+	<render_draw_quad active="true">
+		<texture stage_id="0" name="CaptureFrameBuffer0"/>
+		<texture stage_id="1" name="CaptureFrameBufferPrevious"/>
+	</render_draw_quad>
+	
+	<capture_frame_buffer>
+		<dynamic_texture stage_id="0" name="CaptureFrameBufferPrevious" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
 	<!--end pre_render-->
 	<end_scene/>
 	<present/>

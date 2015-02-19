@@ -3,8 +3,7 @@
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode ) : CName(
-    TreeNode.GetPszProperty( "name", "" ) )
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode& TreeNode) : CName(TreeNode.GetPszProperty("name", ""))
 {
   std::string nameProperty = "";
   std::string l_Name = TreeNode.GetPszProperty( "name" );
@@ -17,13 +16,11 @@ CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& Tr
     if ( nameProperty == "default_technique" )
     {
       size_t l_VertexType = TreeNode( i ).GetIntProperty( "vertex_type", 0 );
-      std::string l_TechniqueName =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
-          l_VertexType );
+      std::string l_TechniqueName = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(l_VertexType);
+
       std::string l_Technique = TreeNode( i ).GetPszProperty( "technique", "" );
-      CRenderableObjectTechnique* l_ROT =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource(
-          l_TechniqueName );
+      CRenderableObjectTechnique* l_ROT = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource(l_TechniqueName);
+
       AddElement( l_TechniqueName, l_Technique, l_ROT );
     }
   }
@@ -39,17 +36,18 @@ void CPoolRenderableObjectTechnique::Destroy()
   for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
     CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
   
-  if(m_RenderableObjectTechniqueElements.size() != 0) m_RenderableObjectTechniqueElements.clear();
+  m_RenderableObjectTechniqueElements.clear();
 }
 
-void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
-    const std::string& TechniqueName,
-    CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager )
+void CPoolRenderableObjectTechnique::AddElement( const std::string& Name, const std::string& TechniqueName, CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager )
 {
-  CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement =
-    new CPoolRenderableObjectTechniqueElement( Name,
-        CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ),
-        ROTOnRenderableObjectTechniqueManager );
+  CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement = new CPoolRenderableObjectTechniqueElement
+  ( 
+        Name, 
+        CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ), 
+        ROTOnRenderableObjectTechniqueManager
+  );
+
   m_RenderableObjectTechniqueElements.push_back( PoolRenderableObjectTechniqueElement );
 }
 
@@ -65,8 +63,10 @@ void CPoolRenderableObjectTechnique::Apply()
 }
 
 CPoolRenderableObjectTechnique::CPoolRenderableObjectTechniqueElement::CPoolRenderableObjectTechniqueElement
-( const std::string& Name, CEffectTechnique* EffectTechnique,
-  CRenderableObjectTechnique* OnRenderableObjectTechniqueManager )
+    ( 
+        const std::string& Name, CEffectTechnique* EffectTechnique,
+        CRenderableObjectTechnique* OnRenderableObjectTechniqueManager
+    )
 {
   m_RenderableObjectTechnique = CRenderableObjectTechnique( Name, EffectTechnique );
   m_OnRenderableObjectTechniqueManager = OnRenderableObjectTechniqueManager;

@@ -32,11 +32,12 @@ void CStaticMesh::Destroy()
 {
   // Clear the references to the vector of textures
   m_Textures.clear();
+  m_VertexTypes.clear();
 
-  for ( std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin();
-        it != m_RVs.end(); ++it )
+  for ( std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it )
     CHECKED_DELETE( *it );
 
+  m_RenderableObjectTechniques.clear();
   m_RVs.clear();
 }
 
@@ -287,23 +288,19 @@ void CStaticMesh::Render( CGraphicsManager* GM )
 
 bool CStaticMesh::GetRenderableObjectTechnique()
 {
-  CRenderableObjectTechniqueManager* l_ROTM =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+  CRenderableObjectTechniqueManager* l_ROTM = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
   bool l_Ok = true;
 
   for ( size_t i = 0; i < m_VertexTypes.size(); ++i )
   {
     if ( m_RenderableObjectTechniqueName == "" )
-      m_RenderableObjectTechniqueName = l_ROTM->GetRenderableObjectTechniqueNameByVertexType(
-                                          m_VertexTypes[i] );
+      m_RenderableObjectTechniqueName = l_ROTM->GetRenderableObjectTechniqueNameByVertexType( m_VertexTypes[i] );
 
     CRenderableObjectTechnique* l_ROT = l_ROTM->GetResource( m_RenderableObjectTechniqueName );
-    m_RenderableObjectTechniques.push_back( l_ROT );
+    if( l_ROT) m_RenderableObjectTechniques.push_back( l_ROT );
 
     if ( l_ROT == NULL )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                             "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh",
-                                             m_RenderableObjectTechniqueName.c_str() );
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh", m_RenderableObjectTechniqueName.c_str() );
 
     l_Ok = l_Ok && l_ROT != NULL;
   }
