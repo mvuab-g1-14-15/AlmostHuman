@@ -911,7 +911,7 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
   m_pD3DDevice->SetFVF( SCREEN_COLOR_VERTEX::GetFVF() );
 
   if ( Texture != NULL )
-    Texture->Activate( StageId );
+    Texture->Activate( 0 );
 
   //    Texture->Activate( 0 );
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );

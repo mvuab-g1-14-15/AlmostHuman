@@ -17,8 +17,7 @@ CDrawQuadRendererCommand::~CDrawQuadRendererCommand()
 
 void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
-  for ( size_t i = 0; i < m_StageTextures.size()  ; ++i )
-  {
+	ActivateTextures();
     const std::string& l_EffectTechName =
       CEffectManager::GetSingletonPtr()->GetTechniqueEffectNameByVertexDefault(
         SCREEN_COLOR_VERTEX::GetVertexType() );
@@ -30,12 +29,11 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
     if ( l_EffectTech )
     {
       GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
-          m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[i].m_StageId );//TODO MIRAR SI ES NECESARIO PASAR EL STAGEID
+          m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[0].m_StageId );//TODO MIRAR SI ES NECESARIO PASAR EL STAGEID
     }
     else
     {
       GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
-                                            m_StageTextures[i].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[i].m_StageId );
+                                            m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[0].m_StageId );
     }
-  }
 }
