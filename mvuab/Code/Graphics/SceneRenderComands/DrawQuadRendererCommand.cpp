@@ -6,6 +6,10 @@
 #include <windef.h>
 #include "RenderableVertex\VertexTypes.h"
 
+#ifdef _DEBUG
+  #include <sstream>
+#endif
+
 CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts ):
   CStagedTexturedRendererCommand( atts )
 {
@@ -18,6 +22,12 @@ CDrawQuadRendererCommand::~CDrawQuadRendererCommand()
 void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
   ActivateTextures();
+
+#ifdef _DEBUG
+  if(false) // DEBUG
+    DebugTextures();
+#endif
+
   const std::string& l_EffectTechName =
     CEffectManager::GetSingletonPtr()->GetTechniqueEffectNameByVertexDefault(
       SCREEN_COLOR_VERTEX::GetVertexType() );

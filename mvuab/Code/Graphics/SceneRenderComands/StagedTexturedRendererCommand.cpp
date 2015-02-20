@@ -3,6 +3,10 @@
 #include "GraphicsManager.h"
 #include "Texture\TextureManager.h"
 
+#ifdef _DEBUG
+#include <sstream>
+#endif
+
 CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& atts ): CSceneRendererCommand( atts )
 {
   CGraphicsManager* gm = CGraphicsManager::GetSingletonPtr();
@@ -78,4 +82,17 @@ void CStagedTexturedRendererCommand::AddStageTexture( int StageId, CTexture* Tex
 {
   CKGStageTexture StageTexture = CKGStageTexture( StageId, Texture );
   m_StageTextures.push_back( StageTexture );
+}
+
+void CStagedTexturedRendererCommand::DebugTextures()
+{
+#ifdef _DEBUG
+  for ( size_t i = 0; i < m_StageTextures.size(); ++i )
+  {
+    std::string l_TextureName = "CDrawQuadRendererCommand_" + GetName() + "_";
+    std::stringstream l_CompletedTextureName;
+    l_CompletedTextureName << l_TextureName << i;
+    m_StageTextures[i].m_Texture->Save(l_CompletedTextureName.str());
+  }
+#endif
 }

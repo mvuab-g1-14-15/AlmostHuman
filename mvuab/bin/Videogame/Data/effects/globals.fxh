@@ -50,13 +50,44 @@ float 		g_Bump = 10.0;
 
 
 // Functions
+
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
 {
 	float l_DistanceToLight = length(LightToPixelDirection);
 	return 1.0 - saturate((l_DistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
 }
+
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {	
 	float3 l_LightDirection = normalize(g_LightsDirection[i]);
     return 1.0-saturate((cos(g_LightsAngle[i])-dot(-LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+}
+
+float3 Normal2Texture(float3 Normal)
+{
+	return Normal*0.5+0.5;
+}
+
+float3 Texture2Normal(float3 Color)
+{
+	return (Color-0.5)*2;
+}
+
+float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV )
+{
+	// Get the depth value for this pixel
+	// Get x/w and y/w from the viewport position
+	float x = UV.x * 2 - 1;
+	float y = (1 - UV.y) * 2 - 1;
+	float4 l_ProjectedPos = float4(x, y, ZDepthView, 1.0);
+	// Transform by the inverse projection matrix
+	float4 l_PositionVS = mul(l_ProjectedPos, g_ProjectionInverseMatrix);
+	// Divide by w to get the view-space position
+	return l_PositionVS.xyz / l_PositionVS.w;
+}
+
+float3 GetPositionFromZDepthView(float ZDepthView, float2 UV )
+{
+	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV);
+	return mul(float4(l_PositionView,1.0), g_ViewInverseMatrix).xyz;
 }
