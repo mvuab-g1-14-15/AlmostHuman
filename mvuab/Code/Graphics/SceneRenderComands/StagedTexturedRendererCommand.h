@@ -28,6 +28,7 @@ protected:
   };
 
   std::vector<CKGStageTexture>    m_StageTextures;
+  void DebugTextures();
 public:
   CStagedTexturedRendererCommand( CXMLTreeNode& atts );
   virtual ~CStagedTexturedRendererCommand();
