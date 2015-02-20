@@ -3,10 +3,13 @@
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
-CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesSceneRendererCommand(CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
+CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesSceneRendererCommand(
+  CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
 {
-  CRenderableObjectTechniqueManager* l_ROTManager = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
-  m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(atts.GetPszProperty( "pool", ""));
+  CRenderableObjectTechniqueManager* l_ROTManager =
+    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+  m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
+                                      atts.GetPszProperty( "pool", "" ) );
 }
 
 CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSceneRendererCommand()
