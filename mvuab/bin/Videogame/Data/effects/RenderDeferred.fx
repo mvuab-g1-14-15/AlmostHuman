@@ -20,7 +20,6 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	float3 l_Position = mul( float4(l_WorldPosition.xyz,1.0), g_ViewMatrix ).xyz;
 	
 	//RETURN DEBUG
-	return float4(l_Normal,1);
 	float4 l_LightContrib;
 	
 	if(g_LightsEnabled[0] == 1) 
@@ -48,17 +47,18 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 		l_LightContrib = float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
 	}
 	
-	return l_LightContrib;
+	return 0.15*l_LightContrib*l_LightContrib;
 }
 
 technique RenderDeferredTechnique {
 	pass p0 {
-		/*
+		
 		AlphaBlendEnable = true;
 		BlendOp=Add;
 		SrcBlend = one;
 		DestBlend = one;
-		*/
+		
+		VertexShader = null;
 		PixelShader = compile ps_3_0 mainPS();
 	}
 }
