@@ -340,34 +340,34 @@ bool CEffect::SetLight( size_t i_light )
   memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   CLight* l_pCurrentLight = l_pLightManager->GetLight( i_light );
-  m_LightsEnabled[i_light] = ( BOOL )l_pCurrentLight == NULL ? 0 : 1;
+  m_LightsEnabled[0] = ( BOOL )l_pCurrentLight == NULL ? 0 : 1;
 
   if ( l_pCurrentLight != NULL )
   {
     CLight::TLightType l_LightType = l_pCurrentLight->GetType();
-    m_LightsType[i_light] = static_cast<int>( l_LightType );
-    m_LightsStartRangeAttenuation[i_light] =
+    m_LightsType[0] = static_cast<int>( l_LightType );
+    m_LightsStartRangeAttenuation[0] =
       l_pCurrentLight->GetStartRangeAttenuation();
-    m_LightsEndRangeAttenuation[i_light] =
+    m_LightsEndRangeAttenuation[0] =
       l_pCurrentLight->GetEndRangeAttenuation();
-    m_LightsPosition[i_light] = l_pCurrentLight->GetPosition();
+    m_LightsPosition[0] = l_pCurrentLight->GetPosition();
     Math::CColor l_Color = l_pCurrentLight->GetColor();
-    m_LightsColor[i_light] = Math::Vect3f( l_Color.GetRed() / 255.0f,
-                                           l_Color.GetGreen() / 255.0f, l_Color.GetBlue() / 255.0f );
+    m_LightsColor[0] = Math::Vect3f( l_Color.GetRed() / 255.0f,
+                                     l_Color.GetGreen() / 255.0f, l_Color.GetBlue() / 255.0f );
 
     if ( l_LightType == CLight::DIRECTIONAL )
     {
       CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*>
           ( l_pCurrentLight );
-      m_LightsDirection[i_light] = l_pDirectionalLight->GetDirection();
+      m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
     }
     else
       if ( l_LightType == CLight::SPOT )
       {
         CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
-        m_LightsDirection[i_light] = l_SpotLight->GetDirection();
-        m_LightsAngle[i_light] = l_SpotLight->GetAngle();
-        m_LightsFallOff[i_light] = l_SpotLight->GetFallOff();
+        m_LightsDirection[0] = l_SpotLight->GetDirection();
+        m_LightsAngle[0] = l_SpotLight->GetAngle();
+        m_LightsFallOff[0] = l_SpotLight->GetFallOff();
       }
 
     //Begin the render of the shadow
