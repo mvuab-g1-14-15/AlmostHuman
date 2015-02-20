@@ -17,23 +17,23 @@ CDrawQuadRendererCommand::~CDrawQuadRendererCommand()
 
 void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
-	ActivateTextures();
-    const std::string& l_EffectTechName =
-      CEffectManager::GetSingletonPtr()->GetTechniqueEffectNameByVertexDefault(
-        SCREEN_COLOR_VERTEX::GetVertexType() );
-    CEffectTechnique* l_EffectTech = CEffectManager::GetSingletonPtr()->GetResource( l_EffectTechName );
-    uint32 width, height;
-    GM.GetWidthAndHeight( width, height );
-    RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
+  ActivateTextures();
+  const std::string& l_EffectTechName =
+    CEffectManager::GetSingletonPtr()->GetTechniqueEffectNameByVertexDefault(
+      SCREEN_COLOR_VERTEX::GetVertexType() );
+  CEffectTechnique* l_EffectTech = CEffectManager::GetSingletonPtr()->GetResource( l_EffectTechName );
+  uint32 width, height;
+  GM.GetWidthAndHeight( width, height );
+  RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
 
-    if ( l_EffectTech )
-    {
-      GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
-          m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[0].m_StageId );//TODO MIRAR SI ES NECESARIO PASAR EL STAGEID
-    }
-    else
-    {
-      GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
-                                            m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f, m_StageTextures[0].m_StageId );
-    }
+  if ( l_EffectTech )
+  {
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
+        m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+  }
+  else
+  {
+    GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
+                                          m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+  }
 }

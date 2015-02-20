@@ -9,7 +9,7 @@
 	
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
-	return float4(0,1,0,1);
+	//return float4(0,1,0,1);
 	float4 Albedo = tex2D(S0PointSampler, UV); //Albedo (float3) + (float) SpecularFactor
 	float4 Ambient = tex2D(S1PointSampler, UV); //AmbientLight (float3) + (float) SpecularPow
 	float4 Normal = tex2D(S2PointSampler, UV); //Normal (float3) + (float) Not used
@@ -26,8 +26,8 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	float4 l_TextureColor = float4(Albedo.xyz, 1.0);
 	
 	return l_PixelColor * l_TextureColor;
-	/*
-	for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
+	
+	/*for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
 		if(g_LightsEnabled[i] == 1) 
         {

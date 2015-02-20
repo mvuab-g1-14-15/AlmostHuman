@@ -21,8 +21,11 @@ CDeferredShadingSceneRendererCommand::CDeferredShadingSceneRendererCommand(
   CXMLTreeNode& atts )
   : CStagedTexturedRendererCommand( atts )
 {
-	std::string l_TechniqueName = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType( SCREEN_COLOR_VERTEX::GetVertexType());
-	m_RenderableObjectTechnique = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource(l_TechniqueName);
+  std::string l_TechniqueName =
+    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
+      SCREEN_COLOR_VERTEX::GetVertexType() );
+  m_RenderableObjectTechnique =
+    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
 }
 
 CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
@@ -52,7 +55,7 @@ void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
     {
       l_ET->GetEffect()->SetLight( i );
       GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1,
-          1, 0 );
+          1 );
     }
   }
 }
