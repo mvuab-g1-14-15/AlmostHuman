@@ -176,11 +176,17 @@ bool CEffectTechnique::SetupLights()
     LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
     CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
 
-    if ( !m_Effect->SetLights( m_NumOfLights ) )
+    // Check the number of lights
+    // If the technique is rendering a deferred shader the lights has been setted up
+    // in the command, therfore check here the light number in order to not reset the values
+    if ( m_NumOfLights > 1 )
     {
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                             "CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
-      return false;
+      if ( !m_Effect->SetLights( m_NumOfLights ) )
+      {
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                               "CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
+        return false;
+      }
     }
 
     if ( l_Effect->SetBoolArray( m_Effect->GetLightEnabledParameter(), &m_Effect->GetLightsEnabled()[0],

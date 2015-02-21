@@ -1,4 +1,6 @@
+#include "vertex_types.fxh"
 #include "samplers.fxh"
+#include "globals.fxh"
 
 float4 BlurPS(in float2 UV : TEXCOORD0) : COLOR
 {	

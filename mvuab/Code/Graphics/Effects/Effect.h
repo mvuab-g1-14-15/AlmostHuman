@@ -141,5 +141,6 @@ private: // Methods
                                D3DXHANDLE& a_Handle );
   bool LoadEffect();
   void Unload();
+  void ResetLightsHandle();
 };
 #endif // EFFECT_H

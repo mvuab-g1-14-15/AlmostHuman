@@ -36,8 +36,10 @@ void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
   ActivateTextures();
 #ifdef _DEBUG
-  if(false) // DEBUG
+
+  if ( false ) // DEBUG
     DebugTextures();
+
 #endif
   SetLightsData( GM );
 }

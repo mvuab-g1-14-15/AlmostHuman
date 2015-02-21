@@ -68,6 +68,15 @@ struct TNORMAL_T1_VERTEX {
 	float2 	UV 			: TEXCOORD0;
 };
 
+struct TNORMAL_T1_VERTEX_PS
+{
+    float4 HPosition 		: POSITION;
+	float3 Normal 			: NORMAL;
+	float2 UV 				: TEXCOORD0;
+	float4 WorldPosition 	: TEXCOORD1;
+	float3 WorldNormal 		: TEXCOORD2;
+};
+
 struct TT2_DIFF_VERTEX {
 	float3 	Position	: POSITION;
     float4 	Color 		: COLOR0;
@@ -106,4 +115,12 @@ struct CAL3D_HW_VERTEX {
     //float4 	Binormal 	: BINORMAL0;
     float3 	Normal 		: NORMAL;
 	float2 	UV 			: TEXCOORD0;
+};
+
+struct TMultiRenderTargetPixel
+{
+	float4 Albedo 	: COLOR0; //Albedo (float3) + (float) SpecularFactor
+	float4 Ambient  : COLOR1; //AmbientLight (float3) + (float) SpecularPow
+	float4 Normal   : COLOR2; //Normal (float3) + (float) Not used
+	float4 Depth    : COLOR3; //Depth (float4)
 };
