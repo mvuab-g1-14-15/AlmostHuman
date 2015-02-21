@@ -21,7 +21,7 @@
 		<default_technique vertex_type="1104" technique="VignettingTechnique"/>
 	</pool_renderable_object_technique>
 	
-	<pool_renderable_object_technique name="Blur">
+	<pool_renderable_object_technique name="Blur_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="BlurTechnique"/>
 	</pool_renderable_object_technique>
 	

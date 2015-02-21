@@ -2,8 +2,8 @@
 
 float4 BlurPS(in float2 UV : TEXCOORD0) : COLOR
 {	
-	float l_Diff = 0.8;
-	float4 l_Color = tex2D(S0LinearSampler, UV) * l_Diff  + tex2D(S0LinearSampler, UV) * (1 - l_Diff);
+	float l_Diff = 0.2;
+	float4 l_Color = tex2D(S0LinearSampler, UV) * l_Diff  + tex2D(S1LinearSampler, UV) * (1 - l_Diff);
 	
 	return l_Color;
 }
