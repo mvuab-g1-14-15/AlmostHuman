@@ -97,7 +97,14 @@ float CalcAttenuation(float actual, float start, float end)
 	return saturate((actual-start)/(end-start));
 }
 
-float4 CalcLinearFog(float Depth, float StartFog, float EndFog, float4 FogColor)
+float4 CalcLinearFog(float Depth, float StartFog, float EndFog, float4 FogColor, float4 FragColor)
 {
-	return float4(FogColor.xyz, FogColor.a*(1.0-CalcAttenuation(Depth, StartFog, EndFog)));
+    float l_FogFactor = 1.0 - CalcAttenuation(Depth, StartFog, EndFog);
+    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
+}
+
+float4 CalcExpFog(float Depth, float dz, float4 FogColor, float4 FragColor)
+{
+    float l_FogFactor =  1.0 - saturate(1 - exp(-Depth * dz));
+    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
 }

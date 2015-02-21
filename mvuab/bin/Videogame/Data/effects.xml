@@ -37,5 +37,5 @@
 	<technique name="InitRenderDeferredTechnique" effect="InitRenderDeferredEffect"/>
 	<technique name="VignettingTechnique" effect="VignettingEffect"/>
 	<technique name="BlurTechnique" effect="BlurEffect"/>
-	<technique name="FOGTechnique" effect="FOGEffect" use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
+	<technique name="FOGTechnique" effect="FOGEffect" use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true"/>
 </effects>
