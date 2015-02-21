@@ -3,12 +3,16 @@
 
 float4 LensFlarePS(in float2 UV : TEXCOORD0) : COLOR
 {
-	float l_Depth = tex2D(S1PointSampler, UV).x;
-	float3 l_ScreenColor = tex2D(S0PointSampler, UV).xyz;
-	float l_SumChannels = l_ScreenColor.x+l_ScreenColor.y+l_ScreenColor.z;
-	float l_GreyColor = l_SumChannels/3;
-	float l_Spec = l_GreyColor == 1;
-	return float4(l_Spec*l_Depth, l_Spec*l_Depth, l_Spec*l_Depth, 1);
+	float2 LightPos = float2(0,0);
+	float2 vecPixelLight = normalize(UV-LightPos);
+	float2 vecCenterLight = normalize(float2(0.5,0.5)-LightPos);
+	
+	float2 diff = vecCenterLight-vecPixelLight;
+	
+	float4 l_Color = float4(0,0,0,1);
+	if (diff.x < 0.02 && diff.x > 0.005)
+		l_Color = float4(1,1,1,1);
+	return l_Color;
 }
 
 technique LensFlareS1Technique
