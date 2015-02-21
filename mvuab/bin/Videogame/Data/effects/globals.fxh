@@ -91,3 +91,13 @@ float3 GetPositionFromZDepthView(float ZDepthView, float2 UV )
 	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV);
 	return mul(float4(l_PositionView,1.0), g_ViewInverseMatrix).xyz;
 }
+
+float CalcAttenuation(float actual, float start, float end)
+{
+	return saturate((actual-start)/(end-start));
+}
+
+float4 CalcLinearFog(float Depth, float StartFog, float EndFog, float4 FogColor)
+{
+	return float4(FogColor.xyz, FogColor.a*(1.0-CalcAttenuation(Depth, StartFog, EndFog)));
+}
