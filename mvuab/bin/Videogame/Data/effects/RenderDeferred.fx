@@ -47,7 +47,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 		l_LightContrib = float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
 	}
 	
-	return 0.15*l_LightContrib*l_LightContrib;
+	return l_LightContrib*0.15;
 }
 
 technique RenderDeferredTechnique {

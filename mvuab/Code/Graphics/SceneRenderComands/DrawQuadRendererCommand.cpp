@@ -45,6 +45,8 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
   GM.GetWidthAndHeight( width, height );
   RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
 
+  l_EffectTech->GetEffect()->SetLight( 0 );
+
   if ( l_EffectTech )
   {
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,

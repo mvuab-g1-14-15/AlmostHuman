@@ -29,4 +29,12 @@
 		<default_technique vertex_type="1104" technique="FOGTechnique"/>
 	</pool_renderable_object_technique>
 	
+	<pool_renderable_object_technique name="Lens_Flare_step1_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="LensFlareS1Technique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Lens_Flare_step2_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="LensFlareS2Technique"/>
+	</pool_renderable_object_technique>
+	
 </renderable_object_techniques>
