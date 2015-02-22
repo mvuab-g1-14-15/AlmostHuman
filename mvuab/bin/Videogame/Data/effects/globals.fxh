@@ -22,10 +22,9 @@ float4x4 g_ViewProjMatrix 		 								    : ViewProjection;
 
 float4 g_DebugColor													: DebugColor;
 
-
-float4x4 g_ShadowProjectionMatrix									: ShadowProjection;
-float4x4 g_LightViewMatrix 		 									: LightView;
-float4x4 g_ViewToLightProjMatrix 		 						    : ViewToLightProjection;
+float4x4 	g_ShadowProjectionMatrix								: ShadowProjection;
+float4x4 	g_LightViewMatrix 		 								: LightView;
+float4x4 	g_ViewToLightProjMatrix 							    : ViewToLightProjection;
 
 int 		g_LightsType[MAX_LIGHTS_BY_SHADER]						: LightsTypes;
 bool		g_LightsEnabled[MAX_LIGHTS_BY_SHADER]					: LightsEnabled;
@@ -44,36 +43,67 @@ float3	    g_CameraPosition										: CameraPosition;
 float 		g_DeltaTime												: DeltaTime;
 
 float4	 	g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
-float 		g_SpecularExponent=100;
+float 		g_SpecularExponent = 100.0f;
+float 		g_SpecularFactor = 20.0f;
 
 float 		g_Bump = 10.0;
 
-//------------------ Bloom -----------------------------
-/*float2		g_HalfPixel		: HALF_PIXEL;
-texture	g_SceneTexture	: SCENE_TEXTURE;
-float		g_BloomThreshold	: BLOOM_THRESHOLD;
-            
-float2		g_SampleOffsets[SAMPLE_COUNT]		: SAMPLE_OFFSETS;
-float		g_SampleWeights[SAMPLE_COUNT]		: SAMPLE_WEIGHTS;
-    
-texture	g_GaussianBlurTexture				: GAUSSIAN_TEXTURE;
-float		g_BloomIntensity		: BLOOM_INTENSITY;
-float		g_BaseIntensity		: BASE_INTENSITY;
-float		g_BloomSaturation		: BLOOM_SATURATION;
-float		g_BaseSaturation		: BASE_SATURATION;
-texture	g_PostBloomTexture	: POST_BLOOM_TEXTURE;*/
-
-//---------------- END BLOOM --------------------------
-
-
 // Functions
+
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
 {
 	float l_DistanceToLight = length(LightToPixelDirection);
 	return 1.0 - saturate((l_DistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
 }
+
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {	
 	float3 l_LightDirection = normalize(g_LightsDirection[i]);
     return 1.0-saturate((cos(g_LightsAngle[i])-dot(-LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+}
+
+float3 Normal2Texture(float3 Normal)
+{
+	return Normal*0.5+0.5;
+}
+
+float3 Texture2Normal(float3 Color)
+{
+	return (Color-0.5)*2;
+}
+
+float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV, float4x4 InverseProjectionMatrix)
+{
+	// Get the depth value for this pixel
+	// Get x/w and y/w from the viewport position
+	float x = UV.x * 2 - 1;
+	float y = (1 - UV.y) * 2 - 1;
+	float4 l_ProjectedPos = float4(x, y, ZDepthView, 1.0);
+	// Transform by the inverse projection matrix
+	float4 l_PositionVS = mul(l_ProjectedPos, InverseProjectionMatrix);
+	// Divide by w to get the view-space position
+	return l_PositionVS.xyz / l_PositionVS.w;
+}
+
+float3 GetPositionFromZDepthView(float ZDepthView, float2 UV, float4x4 InverseViewMatrix, float4x4 InverseProjectionMatrix)
+{
+	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV, InverseProjectionMatrix);
+	return mul(float4(l_PositionView,1.0), InverseViewMatrix).xyz;
+}
+
+float CalcAttenuation(float actual, float start, float end)
+{
+	return saturate((actual-start)/(end-start));
+}
+
+float4 CalcLinearFog(float Depth, float StartFog, float EndFog, float4 FogColor, float4 FragColor)
+{
+    float l_FogFactor = 1.0 - CalcAttenuation(Depth, StartFog, EndFog);
+    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
+}
+
+float4 CalcExpFog(float Depth, float dz, float4 FogColor, float4 FragColor)
+{
+    float l_FogFactor =  1.0 - saturate(1 - exp(-Depth * dz));
+    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
 }

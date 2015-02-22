@@ -4,7 +4,7 @@ CSceneRendererCommand::CSceneRendererCommand( CXMLTreeNode& atts )
 {
   if ( atts.Exists() )
   {
-    SetName( atts.GetPszKeyword( "name", atts.GetName() ) );
+    SetName( atts.GetPszProperty( "name", atts.GetName() ) );
     SetVisible( atts.GetBoolProperty( "active", false ) );
   }
 }

@@ -148,22 +148,21 @@ void CEffectTechnique::SetupMatrices()
 
   if ( m_UseInverseProjMatrix )
   {
-    if ( !m_Effect->SetProjectionMatrix( l_pEffectManager->GetProjectionMatrix().GetInverted(), true ) )
+    if ( !m_Effect->SetInverseProjectionMatrix( l_pEffectManager->GetProjectionMatrix() ) )
       CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
                                              "CEffectTechnique::SetupMatrices->Error Setting Inverse Projection Matrix" );
   }
 
   if ( m_UseInverseViewMatrix )
   {
-    if ( !m_Effect->SetViewMatrix( l_pEffectManager->GetViewMatrix().GetInverted().GetTransposed(),
-                                   true ) )
+    if ( !m_Effect->SetInverseViewMatrix( l_pEffectManager->GetViewMatrix() ) )
       CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
                                              "CEffectTechnique::SetupMatrices->Error Setting Inverse View Matrix" );
   }
 
   if ( m_UseInverseWorldMatrix )
   {
-    if ( !m_Effect->SetWorldMatrix( l_pEffectManager->GetWorldMatrix().GetInverted(), true ) )
+    if ( !m_Effect->SetInverseWorldMatrix( l_pEffectManager->GetWorldMatrix() ) )
       CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
                                              "CEffectTechnique::SetupMatrices->Error Setting Inverse World Matrix" );
   }
@@ -176,11 +175,17 @@ bool CEffectTechnique::SetupLights()
     LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
     CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
 
-    if ( !m_Effect->SetLights( m_NumOfLights ) )
+    // Check the number of lights
+    // If the technique is rendering a deferred shader the lights has been setted up
+    // in the command, therfore check here the light number in order to not reset the values
+    if ( m_NumOfLights > 1 )
     {
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                             "CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
-      return false;
+      if ( !m_Effect->SetLights( m_NumOfLights ) )
+      {
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                               "CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
+        return false;
+      }
     }
 
     if ( l_Effect->SetBoolArray( m_Effect->GetLightEnabledParameter(), &m_Effect->GetLightsEnabled()[0],

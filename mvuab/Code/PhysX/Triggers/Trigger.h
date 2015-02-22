@@ -12,7 +12,7 @@ class CPhysicActor;
 
 class CTrigger : public CName
 {
-private:
+public:
   enum TEventType
   {
     ENTER = 0,
@@ -20,14 +20,12 @@ private:
     STAY
   };
 
-public:
   CTrigger( const CXMLTreeNode& Node );
   virtual ~CTrigger();
   void Release();
   void Destroy();
-  std::string& GetEnter();
-  std::string& GetStay();
-  std::string& GetLeave();
+  std::string GetLUAByName( unsigned int Type );
+
 private: // Members
 
 

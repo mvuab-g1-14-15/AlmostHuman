@@ -20,9 +20,12 @@ public:
   bool SetLights( size_t NumOfLights );
   bool SetLight( size_t i_light );
   bool SetCameraPosition( Math::Vect3f CameraPosition );
-  bool SetWorldMatrix( const Math::Mat44f& Matrix, bool Inverse = false );
-  bool SetViewMatrix( const Math::Mat44f& Matrix, bool Inverse = false );
-  bool SetProjectionMatrix( const Math::Mat44f& Matrix, bool Inverse = false );
+  bool SetWorldMatrix( const Math::Mat44f& Matrix );
+  bool SetViewMatrix( const Math::Mat44f& Matrix );
+  bool SetProjectionMatrix( const Math::Mat44f& Matrix );
+  bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
+  bool SetInverseViewMatrix( const Math::Mat44f& Matrix );
+  bool SetInverseProjectionMatrix( const Math::Mat44f& Matrix );
   bool SetWorldViewMatrix( const Math::Mat44f& Matrix );
   bool SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix );
   bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
@@ -177,5 +180,6 @@ private: // Methods
                                D3DXHANDLE& a_Handle );
   bool LoadEffect();
   void Unload();
+  void ResetLightsHandle();
 };
 #endif // EFFECT_H

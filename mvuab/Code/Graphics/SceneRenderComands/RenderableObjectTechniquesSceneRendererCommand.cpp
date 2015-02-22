@@ -4,19 +4,16 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
 CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesSceneRendererCommand(
-  CXMLTreeNode& atts )
-  : CSceneRendererCommand( atts )
+  CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
 {
   CRenderableObjectTechniqueManager* l_ROTManager =
     CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
-  const std::string& l_PoolName = atts.GetPszProperty( "pool", "" );
   m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
-                                      l_PoolName );
+                                      atts.GetPszProperty( "pool", "" ) );
 }
 
 CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSceneRendererCommand()
 {
-  m_PoolRenderableObjectTechnique->Destroy();
 }
 
 void CRenderableObjectTechniquesSceneRendererCommand::Execute( CGraphicsManager& GM )

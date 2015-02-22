@@ -74,8 +74,6 @@ CGraphicsManager::CGraphicsManager() :
   m_SphereMesh = 0;
   m_BoxMesh = 0;
   m_CylinderMesh = 0;
-  m_IBQuad = 0;
-  m_VBQuad = 0;
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -565,37 +563,6 @@ void CGraphicsManager::SetTransform( Math::Mat44f& m )
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( m );
 }
 
-
-void CGraphicsManager::CreateQuadBuffers()
-{
-  Math::CColor color = Math::colBLACK;
-
-  uint16 indices[4] = { 0, 1, 2, 3 };
-
-  TT1_DIFF_VERTEX vertices[4] =
-  {
-    {  1.f, -1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 1.f, 1.f }
-    , { -1.f, -1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 0.f, 1.f }
-    , { -1.f, 1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 0.f, 0.f }
-    , {  1.f, 1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 1.f, 0.f }
-  };
-
-  //Create the Vertex Buffer and Index Buffer
-  void* l_Data = NULL;
-  UINT l_Length = sizeof( TT1_DIFF_VERTEX ) * 4;
-  m_pD3DDevice->CreateVertexBuffer( l_Length, 0, TT1_DIFF_VERTEX::GetFVF(), D3DPOOL_DEFAULT, &m_VBQuad, NULL );
-  m_VBQuad->Lock( 0, l_Length, &l_Data, 0 );
-  memcpy( l_Data, &vertices, l_Length );
-  m_VBQuad->Unlock();
-
-  l_Length = sizeof( uint16 ) * 4;
-  m_pD3DDevice->CreateIndexBuffer( l_Length, 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_IBQuad, NULL );
-  m_IBQuad->Lock( 0, l_Length, &l_Data, 0 );
-  memcpy( l_Data, &indices, l_Length );
-  m_IBQuad->Unlock();
-}
-
-
 //La posicion y el (w,h) esta en pixeles
 //La posicion y el (w,h) esta en pixeles
 void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
@@ -624,38 +591,6 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v,
                                         sizeof( SCREEN_COLOR_VERTEX ) );
 }
-
-
-void CGraphicsManager::DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique )
-{
-  EffectTechnique->BeginRender();
-  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-
-  if ( l_Effect != NULL )
-  {
-    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
-    UINT l_NumPasses = 0;
-
-    if ( SUCCEEDED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
-    {
-      m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
-      m_pD3DDevice->SetStreamSource( 0, m_VBQuad, 0, sizeof( SCREEN_COLOR_VERTEX ) );
-      m_pD3DDevice->SetIndices( m_IBQuad );
-
-      for ( UINT iPass = 0; iPass < l_NumPasses; ++iPass )
-      {
-        l_Effect->BeginPass( iPass );
-        m_pD3DDevice->DrawIndexedPrimitive( D3DPT_TRIANGLEFAN, 0, 0,
-                                            static_cast<UINT>( 4 ), 0, static_cast<UINT>( 2 ) );
-        l_Effect->EndPass();
-      }
-
-      l_Effect->End();
-    }
-  }
-}
-
-
 void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment,
     Math::Vect2i& finalPos )
 {
@@ -706,8 +641,8 @@ void CGraphicsManager::EnableAlphaBlend()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
   // render el quad de difuminacion....
-  m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  //m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+  //m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
   //// render el quad de difuminacion....
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
@@ -780,12 +715,6 @@ void CGraphicsManager::GetWidthAndHeight( uint32& w, uint32& h )
 {
   w = m_uWidth;
   h = m_uHeight;
-}
-
-void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
-{
-  m_uWidth =  _Width;
-  m_uHeight = _Height;
 }
 
 void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, float32 h,
@@ -970,7 +899,7 @@ void CGraphicsManager::DrawTeapot()
 }
 
 void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
-    CTexture* Texture, float U0, float V0, float U1, float V1, size_t StageId )
+    CTexture* Texture, float U0, float V0, float U1, float V1 )
 {
   SCREEN_COLOR_VERTEX v[4] =
   {
@@ -982,15 +911,14 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
   m_pD3DDevice->SetFVF( SCREEN_COLOR_VERTEX::GetFVF() );
 
   if ( Texture != NULL )
-    Texture->Activate( StageId );
+    Texture->Activate( 0 );
 
-  //    Texture->Activate( 0 );
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
 
 void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
   CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
-  float U0, float V0, float U1, float V1, size_t StageId )
+  float U0, float V0, float U1, float V1 )
 {
   if ( EffectTechnique == NULL )
     return;
@@ -1008,7 +936,7 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
     for ( UINT iPass = 0; iPass < l_NumPasses; iPass++ )
     {
       l_Effect->BeginPass( iPass );
-      DrawColoredQuad2DTexturedInPixels( Rect, Color, Texture, U0, V0, U1, V1, StageId );
+      DrawColoredQuad2DTexturedInPixels( Rect, Color, Texture, U0, V0, U1, V1 );
       l_Effect->EndPass();
     }
 

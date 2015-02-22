@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <scene_renderer_commands>
 	<!--pre_render-->
 	<begin_scene/>
-	
+	<capture_frame_buffer>
+		<dynamic_texture stage_id="0" name="PrevFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
 	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
 	<set_render_target name="deferred_multiple_render_target">
 		<dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
@@ -13,39 +14,64 @@
 	<clear_scene color="true" depth="true" stencil="true"/>
 	<enable_z_write/>
 	<enable_z_test/>
+	<set_matrices/>
 	<render_scene layer="solid" active="true"/>
 	<unset_render_target render_target="deferred_multiple_render_target"/>
 	
+	<!--
 	<enable_z_write/>
 	<enable_z_test/>
-	<set_matrices/>
-	<render_scene layer="solid" active="true"/>
+	<render_scene layer="alpha_blend_objects" active="true"/>
+	-->
 	
-	<set_pool_renderable_objects_technique pool="init_deferred_technique"/>
-	<draw_quad>
+	<set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
+	<render_draw_quad active="true">
 		<texture stage_id="0" name="LightMapTexture"/>
-	</draw_quad>
-	<set_pool_renderable_objects_technique pool="render_deferred_technique"/>
+	</render_draw_quad>
+	<!--<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>-->
+	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
 	<render_deferred_shading>
 		<texture stage_id="0" name="DiffuseMapTexture"/>
 		<texture stage_id="1" name="LightMapTexture"/>
 		<texture stage_id="2" name="NormalMapTexture"/>
 		<texture stage_id="3" name="DepthMapTexture"/>
 	</render_deferred_shading>
-	<enable_alpha_blend/>
+	
 	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="CaptureFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
-	<set_pool_renderable_objects_technique pool="VignettingAndNoise"/>
-	<render_draw_quad name="noise_and_vignetting_scene_effect" active="true">
-		<texture stage_id="0" name="CaptureFrameBuffer"/>
-		<texture stage_id="1" name="vignetting.tga"/>
-		<texture stage_id="2" name="noise2d.png"/>
+	<!--<set_render_target name="lens_flare_target">
+		<dynamic_texture stage_id="0" name="LensFlareS1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</set_render_target>-->
+	<set_pool_renderable_objects_technique pool="Lens_Flare_step1_pool_renderable_object_technique"/>
+	<render_draw_quad active="true">
+		<texture stage_id="0" name="ActualFrameBuffer"/>
+		<texture stage_id="1" name="DepthMapTexture"/>
 	</render_draw_quad>
-	<disable_alpha_blend/>
+	<!--<unset_render_target render_target="lens_flare_target"/>
+	<set_pool_renderable_objects_technique pool="Lens_Flare_step2_pool_renderable_object_technique"/>
+	<render_draw_quad active="true">
+		<texture stage_id="0" name="LensFlareS1"/>
+	</render_draw_quad>-->
 	
+	<!--<capture_frame_buffer>
+		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+	<set_pool_renderable_objects_technique pool="FOG_pool_renderable_object_technique"/>
+	<render_draw_quad active="true">
+		<texture stage_id="0" name="ActualFrameBuffer"/>
+		<texture stage_id="1" name="DepthMapTexture"/>
+	</render_draw_quad>-->
 	
-
+	<!--<capture_frame_buffer>
+		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+	<set_pool_renderable_objects_technique pool="Blur_pool_renderable_object_technique"/>
+	<render_draw_quad active="true">
+		<texture stage_id="0" name="ActualFrameBuffer"/>
+		<texture stage_id="1" name="PrevFrameBuffer"/>
+	</render_draw_quad>-->
+	<!--<disable_alpha_blend/>-->
 	<!--end pre_render-->
 	<end_scene/>
 	<present/>

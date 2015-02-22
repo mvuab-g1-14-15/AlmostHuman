@@ -2,31 +2,11 @@
 #include "Effects\EffectManager.h"
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include <sstream>
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode ) : CName(
-    TreeNode.GetPszProperty( "name", "" ) )
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode )
+  : CName( TreeNode.GetPszProperty( "name", "" ) )
 {
-  std::string nameProperty = "";
-  std::string l_Name = TreeNode.GetPszProperty( "name" );
-  size_t count = TreeNode.GetNumChildren();
-
-  for ( size_t i = 0; i < count; ++i )
-  {
-    nameProperty = TreeNode( i ).GetName();
-
-    if ( nameProperty == "default_technique" )
-    {
-      size_t l_VertexType = TreeNode( i ).GetIntProperty( "vertex_type", 0 );
-      std::string l_TechniqueName =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
-          l_VertexType );
-      std::string l_Technique = TreeNode( i ).GetPszProperty( "technique", "" );
-      CRenderableObjectTechnique* l_ROT =
-        CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource(
-          l_TechniqueName );
-      AddElement( l_TechniqueName, l_Technique, l_ROT );
-    }
-  }
 }
 
 CPoolRenderableObjectTechnique::~CPoolRenderableObjectTechnique()
@@ -38,8 +18,8 @@ void CPoolRenderableObjectTechnique::Destroy()
 {
   for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
     CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
-  
-  if(m_RenderableObjectTechniqueElements.size() != 0) m_RenderableObjectTechniqueElements.clear();
+
+  if ( m_RenderableObjectTechniqueElements.size() != 0 ) m_RenderableObjectTechniqueElements.clear();
 }
 
 void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
@@ -55,12 +35,13 @@ void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
 
 void CPoolRenderableObjectTechnique::Apply()
 {
-  size_t l_Count = m_RenderableObjectTechniqueElements.size();
+  CRenderableObjectTechniqueManager* l_ROTM = CRenderableObjectTechniqueManager::GetSingletonPtr();
 
-  for ( size_t i = 0; i < l_Count; ++i )
+  for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
   {
-    m_RenderableObjectTechniqueElements[i]->m_OnRenderableObjectTechniqueManager->SetEffectTechnique(
-      m_RenderableObjectTechniqueElements[i]->m_RenderableObjectTechnique.GetEffectTechnique() );
+    CPoolRenderableObjectTechniqueElement* l_CurrentElement = m_RenderableObjectTechniqueElements[i];
+    CRenderableObjectTechnique* l_ROT = l_CurrentElement->m_OnRenderableObjectTechniqueManager;
+    l_ROT->SetEffectTechnique( l_CurrentElement->m_RenderableObjectTechnique.GetEffectTechnique() );
   }
 }
 

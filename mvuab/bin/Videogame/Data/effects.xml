@@ -7,7 +7,7 @@
 	<default_technique vertex_type="415" technique="Cal3DTechnique"/>
 	<default_technique vertex_type="531" technique="CubeReflectionTechnique"/>
 	<!--<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>-->
-	<default_technique vertex_type="1104" technique="VignettingTechnique"/>
+	<default_technique vertex_type="1104" technique="InitRenderDeferredTechnique"/>
 		
 	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
 	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
@@ -21,6 +21,10 @@
 	<effect name="RenderDeferredEffect" file="data/effects/RenderDeferred.fx"/>
 	<effect name="InitRenderDeferredEffect" file="data/effects/InitRenderDeferred.fx"/>
 	<effect name="VignettingEffect" file="data/effects/Vignetting.fx"/>
+	<effect name="BlurEffect" file="data/effects/Blur.fx"/>
+	<effect name="FOGEffect" file="data/effects/FOG.fx"/>
+	<effect name="LensFlareS1Effect" file="data/effects/LensFlareS1.fx"/>
+	<effect name="LensFlareS2Effect" file="data/effects/LensFlareS2.fx"/>
 
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
@@ -31,7 +35,11 @@
 	<technique name="MultiLightsLightMapTechnique" effect="MultiLightsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	<technique name="DrawQuadSampler0Technique" effect="DrawQuad"/>
-	<technique name="RenderDeferredTechnique" effect="RenderDeferredEffect"/>
+	<technique name="RenderDeferredTechnique" effect="RenderDeferredEffect" use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1"/>
 	<technique name="InitRenderDeferredTechnique" effect="InitRenderDeferredEffect"/>
 	<technique name="VignettingTechnique" effect="VignettingEffect"/>
+	<technique name="BlurTechnique" effect="BlurEffect"/>
+	<technique name="FOGTechnique" effect="FOGEffect" use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true"/>
+	<technique name="LensFlareS1Technique" effect="LensFlareS1Effect"/>
+	<technique name="LensFlareS2Technique" effect="LensFlareS2Effect"/>
 </effects>

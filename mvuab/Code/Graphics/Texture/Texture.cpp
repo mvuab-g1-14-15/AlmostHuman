@@ -173,9 +173,17 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   LPDIRECT3DSURFACE9 l_RenderTarget, l_Surface;
   m_Texture->GetSurfaceLevel( 0, &l_Surface );
-  l_Device->GetRenderTarget( IdStage, &l_RenderTarget );
-  l_Device->StretchRect( l_RenderTarget, NULL, l_Surface, NULL, D3DTEXF_NONE );
-  l_RenderTarget->Release();
+
+  if ( D3D_OK == l_Device->GetRenderTarget( IdStage, &l_RenderTarget ) )
+  {
+    l_Device->StretchRect( l_RenderTarget, NULL, l_Surface, NULL, D3DTEXF_NONE );
+    l_RenderTarget->Release();
+  }
+  else
+  {
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                           "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
+  }
 }
 
 CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& FormatType )
@@ -205,7 +213,8 @@ bool CTexture::Save( const std::string& FileName )
   // t.UnsetAsRenderTarget();
   // t.Save("t");
   assert( m_Texture != NULL );
-  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/" + FileName + ".bmp" ).c_str(), D3DXIFF_BMP,
+  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".bmp" ).c_str(),
+                                      D3DXIFF_BMP,
                                       m_Texture, 0 );
   assert( hr == D3D_OK );
   return hr == D3D_OK;

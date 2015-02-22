@@ -40,37 +40,40 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
 
     for ( int i = 0; i < count; ++i )
     {
-      std::string TagName = TreeNode( i ).GetName();
+      CXMLTreeNode& l_PoolNode = TreeNode( i );
+      const std::string& TagName = l_PoolNode.GetName();
 
       if ( TagName == "pool_renderable_object_technique" )
       {
-        CXMLTreeNode  SubTreeNode = TreeNode( i );
-        int SubCount = SubTreeNode.GetNumChildren();
+        CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique
+          = new CPoolRenderableObjectTechnique( l_PoolNode );
+        int count = l_PoolNode.GetNumChildren();
 
-        for ( int j = 0; j < SubCount; ++j )
+        for ( int j = 0; j < count; ++j )
         {
-          std::string SubTagName = SubTreeNode( j ).GetName();
+          const std::string& SubTagName = l_PoolNode( j ).GetName();
 
           if ( SubTagName == "default_technique" )
           {
-            std::string  l_ROTName = GetRenderableObjectTechniqueNameByVertexType( SubTreeNode(
-                                       j ).GetIntProperty( "vertex_type", 0 ) );
-            const std::string& l_Technique = SubTreeNode( j ).GetPszProperty( "technique", "" );
-            //if ( 0 == GetResource( l_Technique ) )
-            InsertRenderableObjectTechnique( l_ROTName, l_Technique );
+            const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType( l_PoolNode(
+                j ).GetIntProperty( "vertex_type", 0 ) );
+            const std::string& l_TechniqueName = l_PoolNode( j ).GetPszProperty( "technique", "" );
+            InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
+            PoolRenderableObjectTechnique->AddElement( l_VertexTypeStr, l_TechniqueName,
+                GetResource( l_VertexTypeStr ) );
           }
         }
 
-        CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(
-          TreeNode( i ) );
         m_PoolRenderableObjectTechniques.AddResource( PoolRenderableObjectTechnique->GetName(),
             PoolRenderableObjectTechnique );
       }
     }
   }
   else
+  {
     CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
                                            "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", FileName.c_str() );
+  }
 }
 
 std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameByVertexType(
@@ -86,7 +89,9 @@ void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const s
 {
   CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
       CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
-  AddResource( ROTName, l_RenderableObjectTechnique );
+
+  if ( !AddResource( ROTName, l_RenderableObjectTechnique ) )
+    CHECKED_DELETE( l_RenderableObjectTechnique );
 }
 
 void CRenderableObjectTechniqueManager::ReLoad()

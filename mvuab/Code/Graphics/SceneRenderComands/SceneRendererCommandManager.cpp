@@ -28,6 +28,7 @@
 #include "GraphicsManager.h"
 
 #include <Windows.h>
+#include <sstream>
 
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
@@ -45,7 +46,10 @@ void CSceneRendererCommandManager::CleanUp()
 }
 std::string CSceneRendererCommandManager::GetNextName()
 {
-  return "";//No lo entiendo
+  std::stringstream l_Str;
+  l_Str << "default_scene_renderer_command_";
+  l_Str << m_SceneRendererCommands.GetResourcesVector().size();
+  return l_Str.str();
 }
 
 bool CSceneRendererCommandManager::Load( const std::string& FileName )
@@ -74,157 +78,211 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
       {
         CBeginRenderSceneRendererCommand* BeginRender = new CBeginRenderSceneRendererCommand( TreeNode(
               i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             BeginRender );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             BeginRender ) )
+          CHECKED_DELETE( BeginRender );
       }
       else if ( TagName == "clear_scene" )
       {
         CClearSceneRendererCommand* ClearScene = new CClearSceneRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             ClearScene );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             ClearScene ) )
+          CHECKED_DELETE( ClearScene );
       }
       else if ( TagName == "enable_z_write" )
       {
         CEnableZWriteSceneRendererCommand* EnableZWrite = new CEnableZWriteSceneRendererCommand( TreeNode(
               i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             EnableZWrite );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             EnableZWrite ) )
+          CHECKED_DELETE( EnableZWrite );
       }
       else if ( TagName == "enable_z_test" )
       {
         CEnableZTestSceneRendererCommand* EnableZTest = new CEnableZTestSceneRendererCommand( TreeNode(
               i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             EnableZTest );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             EnableZTest ) )
+          CHECKED_DELETE( EnableZTest );
       }
       else if ( TagName == "set_matrices" )
       {
         CSetMatricesSceneRendererCommand* SetupMatrices = new CSetMatricesSceneRendererCommand( TreeNode(
               i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             SetupMatrices );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             SetupMatrices ) )
+          CHECKED_DELETE( SetupMatrices );
       }
       else if ( TagName == "set_pool_renderable_objects_technique" )
       {
         CRenderableObjectTechniquesSceneRendererCommand* SetPoolRenderableObjectTechnique = new
         CRenderableObjectTechniquesSceneRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             SetPoolRenderableObjectTechnique );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             SetPoolRenderableObjectTechnique ) )
+          CHECKED_DELETE( SetPoolRenderableObjectTechnique );
       }
       else if ( TagName == "set_render_target" )
       {
         CSetRenderTargetSceneRendererCommand* SetRenderTarget = new CSetRenderTargetSceneRendererCommand(
           TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             SetRenderTarget );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             SetRenderTarget ) )
+          CHECKED_DELETE( SetRenderTarget );
       }
       else if ( TagName == "render_scene" )
       {
         CRenderSceneSceneRendererCommand* RenderScene = new CRenderSceneSceneRendererCommand( TreeNode(
               i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderScene );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderScene ) )
+          CHECKED_DELETE( RenderScene );
       }
       else if ( TagName == "unset_render_target" )
       {
         CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
-          dynamic_cast<CSetRenderTargetSceneRendererCommand*>
-          ( m_SceneRendererCommands.GetResource( TreeNode( i ).GetPszProperty( "render_target",
-              TagName.c_str() ) ) );
+          dynamic_cast<CSetRenderTargetSceneRendererCommand*>( m_SceneRendererCommands.GetResource( TreeNode(
+                i ).GetPszProperty( "render_target", "" ) ) );
         CUnsetRenderTargetSceneRendererCommand* UnsetRenderTarget = new
-        CUnsetRenderTargetSceneRendererCommand(
-          SetRenderTargetSceneRendererCommand, TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             UnsetRenderTarget );
+        CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             UnsetRenderTarget ) )
+          CHECKED_DELETE( UnsetRenderTarget );
       }
       else if ( TagName == "disable_z_write" )
       {
         CDisableZWriteSceneRendererCommand* DisableZWrite = new CDisableZWriteSceneRendererCommand(
           TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             DisableZWrite );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             DisableZWrite ) )
+          CHECKED_DELETE( DisableZWrite );
       }
       else if ( TagName == "render_draw_quad" )
       {
         CDrawQuadRendererCommand* DrawQuad = new CDrawQuadRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             DrawQuad );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             DrawQuad ) )
+          CHECKED_DELETE( DrawQuad );
       }
       else if ( TagName == "capture_frame_buffer" )
       {
         CCaptureFrameBufferSceneRendererCommand* CaptureFrameBuffer = new
-        CCaptureFrameBufferSceneRendererCommand( TreeNode(
-              i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             CaptureFrameBuffer );
+        CCaptureFrameBufferSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             CaptureFrameBuffer ) )
+          CHECKED_DELETE( CaptureFrameBuffer );
       }
       else if ( TagName == "end_scene" )
       {
         CEndRenderSceneRendererCommand* EndScene = new CEndRenderSceneRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             EndScene );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             EndScene ) )
+          CHECKED_DELETE( EndScene );
       }
       else if ( TagName == "render_deferred_shading" )
       {
         CDeferredShadingSceneRendererCommand* RenderDeferredShading = new
-        CDeferredShadingSceneRendererCommand( TreeNode(
-                                                i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderDeferredShading );
+        CDeferredShadingSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderDeferredShading ) )
+          CHECKED_DELETE( RenderDeferredShading );
       }
       else if ( TagName == "render_debug_scene" )
       {
         //PENDIENTE ATRIBUTOS layer no se como tratarlo
         CRenderDebugSceneSceneRendererCommand* RenderDebugScene = new CRenderDebugSceneSceneRendererCommand(
-          TreeNode(
-            i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderDebugScene );
+          TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderDebugScene ) )
+          CHECKED_DELETE( RenderDebugScene );
       }
       else if ( TagName == "render_debug_lights" )
       {
-        CRenderDebugLightsSceneRendererCommand* RenderDebugScene = new
-        CRenderDebugLightsSceneRendererCommand( TreeNode(
-            i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderDebugScene );
+        CRenderDebugLightsSceneRendererCommand* RenderDebugLights = new
+        CRenderDebugLightsSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderDebugLights ) )
+          CHECKED_DELETE( RenderDebugLights );
       }
       else if ( TagName == "render_debug_shadow_maps" )
       {
         //PENDIENTE ATRIBUTOS screen_width y screen_height que hacer con ellos
         CRenderDebugShadowMapsSceneRendererCommand* RenderDebugShadowMaps = new
-        CRenderDebugShadowMapsSceneRendererCommand(
-          TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderDebugShadowMaps );
+        CRenderDebugShadowMapsSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderDebugShadowMaps ) )
+          CHECKED_DELETE( RenderDebugShadowMaps );
       }
       else if ( TagName == "render_gui" )
       {
         CRenderGUISceneRendererCommand* RenderGUI = new CRenderGUISceneRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             RenderGUI );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             RenderGUI ) )
+          CHECKED_DELETE( RenderGUI );
       }
       else if ( TagName == "present" )
       {
         CPresentSceneRendererCommand* Present = new CPresentSceneRendererCommand( TreeNode( i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             Present );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             Present ) )
+          CHECKED_DELETE( Present );
       }
       else if ( TagName == "enable_alpha_blend" )
       {
         CEnableAlphaBlendSceneRendererCommand* l_EnableAlphaBlend = new
-        CEnableAlphaBlendSceneRendererCommand( TreeNode(
-            i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             l_EnableAlphaBlend );
+        CEnableAlphaBlendSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             l_EnableAlphaBlend ) )
+          CHECKED_DELETE( l_EnableAlphaBlend );
       }
       else if ( TagName == "disable_alpha_blend" )
       {
         CDisableAlphaBlendSceneRendererCommand* l_DisableAlphaBlend = new
-        CDisableAlphaBlendSceneRendererCommand( TreeNode(
-            i ) );
-        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
-                                             l_DisableAlphaBlend );
+        CDisableAlphaBlendSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ),
+             l_DisableAlphaBlend ) )
+          CHECKED_DELETE( l_DisableAlphaBlend );
       }
       else if ( TagName == "bloom_process" )
       {
