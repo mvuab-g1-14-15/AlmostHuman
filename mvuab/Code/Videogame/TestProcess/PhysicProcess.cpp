@@ -56,7 +56,8 @@ void GetFilesFromPath( const std::string& Path,
 
 CPhysicProcess::CPhysicProcess() : CProcess(),
   m_Speed( 0.1f ),
-  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false )
+  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false ),
+  m_Salir( false ), m_Time( 0 )
 
 {
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
@@ -64,6 +65,8 @@ CPhysicProcess::CPhysicProcess() : CProcess(),
   CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
   unsigned short debug = VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
   int i = 0;
+  m_pPUD = new CPhysicUserData( "Box6" );
+  m_pPhysicActor = new CPhysicActor( m_pPUD );
 }
 bool done = false;
 
@@ -84,6 +87,8 @@ CPhysicProcess::~CPhysicProcess()
 
   m_vPUD.clear();
   CHECKED_DELETE( m_TriggerManager );
+  CHECKED_DELETE( m_pPUD );
+  CHECKED_DELETE( m_pPhysicActor );
 }
 
 void CPhysicProcess::Update()
@@ -221,6 +226,15 @@ void CPhysicProcess::Update()
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
   p_Grenade->Update();
+
+  if ( m_Salir && ( m_Time >= 1 ) )
+  {
+    CCore::GetSingletonPtr()->GetPhysicsManager()->ReleasePhysicActor( m_pPhysicActor );
+    m_Salir = false;
+    m_Time = 0;
+  }
+  else if ( m_Salir )
+    m_Time += deltaTime;
 }
 
 void CPhysicProcess::Init()
@@ -252,8 +266,8 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colBLACK );
   m_vPUD.push_back( l_PUD );
   l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 4,
-                               0 ) );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0,
+                               4, 0 ) );
   l_pPhysicActor->CreateBody( 1.0f );
   l_PM->AddPhysicActor( l_pPhysicActor );
   m_vPA.push_back( l_pPhysicActor );
@@ -267,7 +281,7 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colBLACK );
   m_vPUD.push_back( l_PUD );
   l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, -1.5f,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, 0,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
@@ -276,7 +290,7 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colBLACK );
   m_vPUD.push_back( l_PUD );
   l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( 7, -1.5f,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( 7, 0,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
@@ -315,13 +329,8 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_TriggerEvent = l_Trigger->GetEnter();
-
-  if ( l_TriggerEvent != "" )
-  {
-    //Hacer lo que deba hacer el script
-  }
-
+  std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
 void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
@@ -331,13 +340,8 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_TriggerEvent = l_Trigger->GetLeave();
-
-  if ( l_TriggerEvent != "" )
-  {
-    //Hacer lo que deba hacer el script
-  }
-
+  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
 void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
@@ -347,12 +351,7 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_TriggerEvent = l_Trigger->GetStay();
-
-  if ( l_TriggerEvent != "" )
-  {
-    //Hacer lo que deba hacer el script
-  }
-
+  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }

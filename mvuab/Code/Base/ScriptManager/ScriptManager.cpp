@@ -3,6 +3,8 @@
 #include "ScriptManager\FunctionsToRegister\CoreFunctions.h"
 #include "ScriptManager\FunctionsToRegister\GraphicsFunctions.h"
 #include "ScriptManager\FunctionsToRegister\InputFunctions.h"
+#include "ScriptManager\FunctionsToRegister\PhysXFunctions.h"
+#include "ScriptManager\FunctionsToRegister\VideogameFunctions.h"
 #include <string>
 #include <iostream>
 
@@ -19,76 +21,74 @@
 using namespace luabind;
 
 
-CScriptManager::CScriptManager() : m_LuaPath("")
+CScriptManager::CScriptManager() : m_LuaPath( "" )
 {
 }
 
 CScriptManager::~CScriptManager()
 {
-	Destroy();
+  Destroy();
 }
 
 void CScriptManager::Initialize()
 {
-	m_LS = luaL_newstate();
-
-	luaL_openlibs(m_LS);
-	luabind::open(m_LS);
-
-	RegisterLUAFunctions();
+  m_LS = luaL_newstate();
+  luaL_openlibs( m_LS );
+  luabind::open( m_LS );
+  RegisterLUAFunctions();
 }
 
 void CScriptManager::Destroy()
 {
-	lua_close(m_LS);
+  lua_close( m_LS );
 }
 
 void CScriptManager::Reload()
 {
-	m_LuaFiles.clear();
-	m_LuaInitFiles.clear();
-
-	Destroy();
-
-	Initialize();
-	Load(m_LuaPath);
+  m_LuaFiles.clear();
+  m_LuaInitFiles.clear();
+  Destroy();
+  Initialize();
+  Load( m_LuaPath );
 }
 
-void CScriptManager::Load(const std::string &Path)
+void CScriptManager::Load( const std::string& Path )
 {
-	m_LuaPath = Path;
-	baseUtils::GetFilesFromPath(m_LuaPath, "lua", m_LuaFiles );
-	baseUtils::GetFilesFromPath(m_LuaPath+"init/", "lua", m_LuaInitFiles );
+  m_LuaPath = Path;
+  baseUtils::GetFilesFromPath( m_LuaPath, "lua", m_LuaFiles );
+  baseUtils::GetFilesFromPath( m_LuaPath + "init/", "lua", m_LuaInitFiles );
+  TVectorLuaFiles::iterator it = m_LuaInitFiles.begin(), it_end = m_LuaInitFiles.end();
 
-	TVectorLuaFiles::iterator it = m_LuaInitFiles.begin(), it_end = m_LuaInitFiles.end();
-	for (; it != it_end; ++it)
-		RunFile(m_LuaPath+"init/"+(*it));
+  for ( ; it != it_end; ++it )
+    RunFile( m_LuaPath + "init/" + ( *it ) );
 }
 
-void CScriptManager::RunCode(const std::string &Code)
+void CScriptManager::RunCode( const std::string& Code )
 {
-	if(luaL_dostring(m_LS,Code.c_str()))
-	{
-		const char *l_Str = lua_tostring(m_LS, -1);		
-		assert(l_Str);
-		std::cout << l_Str << std::endl << std::endl;
-	}
+  if ( luaL_dostring( m_LS, Code.c_str() ) )
+  {
+    const char* l_Str = lua_tostring( m_LS, -1 );
+    assert( l_Str );
+    std::cout << l_Str << std::endl << std::endl;
+  }
 }
 
-void CScriptManager::RunFile(const std::string &FileName)
+void CScriptManager::RunFile( const std::string& FileName )
 {
-	if(luaL_dofile(m_LS, FileName.c_str()))
-	{
-		const char *l_Str = lua_tostring(m_LS, -1);
-		assert(l_Str);
-		std::cout << l_Str << std::endl << std::endl;
-	}
+  if ( luaL_dofile( m_LS, FileName.c_str() ) )
+  {
+    const char* l_Str = lua_tostring( m_LS, -1 );
+    assert( l_Str );
+    std::cout << l_Str << std::endl << std::endl;
+  }
 }
 
 void CScriptManager::RegisterLUAFunctions()
 {
-	registerBase(m_LS);
-	registerCore(m_LS);
-	registerGraphics(m_LS);
-	registerInputs(m_LS);
+  registerBase( m_LS );
+  registerCore( m_LS );
+  registerGraphics( m_LS );
+  registerInputs( m_LS );
+  registerPhysX( m_LS );
+  registerVideogame( m_LS );
 }

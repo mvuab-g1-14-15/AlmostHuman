@@ -3,6 +3,7 @@
 
 #include "Engine.h"
 #include "Core.h"
+#include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "Language\LanguageManager.h"
@@ -15,6 +16,9 @@
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "ScriptManager\ScriptManager.h"
+#include "Cameras\CameraManager.h"
+#include "Lights\LightManager.h"
+#include "PhysicsManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -23,6 +27,6 @@
 
 using namespace luabind;
 
-void registerCore(lua_State *m_LS);
+void registerCore( lua_State* m_LS );
 
 #endif
