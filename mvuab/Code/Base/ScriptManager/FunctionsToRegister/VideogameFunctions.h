@@ -1,6 +1,5 @@
-#ifndef PHYSXFUNCTIONS_H
-#define PHYSXFUNCTIONS_H
-
+#ifndef VIDEOGAMEFUNCTIOS_H
+#define VIDEOGAMEFUNCTIOS_H
 
 extern "C"
 {
@@ -16,6 +15,7 @@ extern "C"
 
 using namespace luabind;
 
-void registerPhysX( lua_State* m_LS );
+void registerVideogame( lua_State* m_LS );
+
 
 #endif

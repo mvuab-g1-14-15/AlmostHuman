@@ -14,9 +14,9 @@ CCamera::CCamera()
     m_ZFar(1000.0f),
     m_Enable(true)
 {
-  float w = CCore::GetSingletonPtr()->GetScreenWidth();
-  float h = CCore::GetSingletonPtr()->GetScreenHeight();
-  m_aspect_ratio = w / h;
+  unsigned int w = CCore::GetSingletonPtr()->GetScreenWidth();
+  unsigned int h = CCore::GetSingletonPtr()->GetScreenHeight();
+  m_aspect_ratio = (float) w / (float) h;
 }
 
 CCamera::~CCamera()

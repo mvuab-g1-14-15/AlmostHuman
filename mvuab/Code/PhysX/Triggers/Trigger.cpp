@@ -5,6 +5,7 @@
 #include "PhysicsManager.h"
 #include "Utils\Defines.h"
 #include "Core.h"
+#include "Logger\Logger.h"
 
 CTrigger::CTrigger( const CXMLTreeNode& Node )
   : CName( Node.GetPszProperty( "name", "unknown" ) )
@@ -41,14 +42,13 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
     l_PM->AddPhysicActor( m_PhysicActor );
   }
-  else
-    if ( l_sType == "sphere" )
-    {
-      m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
-      m_PhysicActor->ActivateAllTriggers();
-      CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-      l_PM->AddPhysicActor( m_PhysicActor );
-    }
+  else if ( l_sType == "sphere" )
+  {
+    m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
+    m_PhysicActor->ActivateAllTriggers();
+    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    l_PM->AddPhysicActor( m_PhysicActor );
+  }
 
   if ( l_sType == "" )
     CHECKED_DELETE( m_PhysicActor );
@@ -74,15 +74,28 @@ void CTrigger::Destroy()
   CHECKED_DELETE( m_PhysicUserData );
 }
 
-std::string& CTrigger::GetEnter()
+std::string CTrigger::GetLUAByName( unsigned int Type )
 {
-  return m_Enter.second;
-};
-std::string& CTrigger::GetStay()
-{
-  return m_Stay.second;
-};
-std::string& CTrigger::GetLeave()
-{
-  return m_Leave.second;
+  std::string l_Return;
+
+  switch ( Type )
+  {
+  case ENTER:
+    l_Return = m_Enter.second;
+    break;
+
+  case LEAVE:
+    l_Return = m_Leave.second;
+    break;
+
+  case STAY:
+    l_Return = m_Stay.second;
+    break;
+
+  default:
+    l_Return = "";
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "GetLUABYName (Trigger) Type error" );
+  }
+
+  return l_Return;
 };
