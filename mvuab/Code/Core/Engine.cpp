@@ -32,9 +32,9 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-  CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
-  srcm->Execute();
-  return;
+  //CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
+  //srcm->Execute();
+  //return;
   //// Obtain an instance to the graphics manager
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
@@ -44,7 +44,6 @@ void CEngine::Render()
   m_pProcess->Render();
   m_pLogRender->Render();
   //pGraphicsManager->RenderCursor();
-
 #if _DEBUG
   pGraphicsManager->DisableZBuffering();
   pGraphicsManager->EnableAlphaBlend();

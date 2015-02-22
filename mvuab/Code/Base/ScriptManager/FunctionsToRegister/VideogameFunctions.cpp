@@ -25,14 +25,11 @@ void registerVideogame( lua_State* m_LS )
   [
     class_<CPhysicProcess, CProcess, CPhysicTriggerReport>( "CPhysicProcess" )
     .def( constructor<>() )
-    /*.property( "m_Salir", &CPhysicProcess::SetSalir, &CPhysicProcess::GetSalir )
-    .property( "m_PhysicActor", &CPhysicProcess::SetPhysicActor, &CPhysicProcess::GetPhysicActor )
-    .property( "m_PUD", &CPhysicProcess::SetPUD, &CPhysicProcess::GetPUD )*/
     .def( "SetSalir",  &CPhysicProcess::SetSalir )
-    .def( "GetSalir",  &CPhysicProcess::GetSalir )
-    .def( "SetPhysicActor", &CPhysicProcess::SetPhysicActor )
-    .def( "GetPhysicActor", &CPhysicProcess::GetPhysicActor )
-    .def( "SetPUD", &CPhysicProcess::SetPUD )
-    .def( "GetPUD", &CPhysicProcess::GetPUD )
+    .def( "GetNewPhysicActor", &CPhysicProcess::GetNewPhysicActor )
+    .def( "GetNewPUD", &CPhysicProcess::GetNewPUD )
+    .def( "GetLastPUDInserted", &CPhysicProcess::GetLastPUDInserted )
+    .def( "AddPhysicActorVector", &CPhysicProcess::AddPhysicActorVector )
+    .def( "AddPudVector", &CPhysicProcess::AddPudVector )
   ];
 }

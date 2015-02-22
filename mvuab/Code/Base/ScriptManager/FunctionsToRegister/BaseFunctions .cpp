@@ -8,6 +8,7 @@
 #include "Math\Matrix44.h"
 #include "Math\Matrix34.h"
 #include "Math\Vector3.h"
+#include "Math\Vector4.h"
 #include "Utils\Visible.h"
 #include "Utils\Name.h"
 #include "Timer\Timer.h"
@@ -16,6 +17,7 @@
 #include "Math\MathTypes.h"
 #include "Utils\Types.h"
 #include "Math\Color.h"
+#include "Utils\TemplatedVectorMapManager.h"
 
 using namespace luabind;
 
@@ -46,6 +48,18 @@ void registerBase( lua_State* m_LS )
     .def_readwrite( "z", &Math::Vect3f::z )
     .def( "CrossProduct", &Math::Vect3f::CrossProduct )
     .def( "Normalize", &DA_Normalize )
+  ];
+  module( m_LS )
+  [
+    class_<Math::Vect4f>( "Vect4f" )
+    .def( constructor<float, float, float, float>() )
+    .def( constructor<const Math::Vect4f&>() )
+    .def( constructor<float>() )
+    .def( constructor<>() )
+    .def_readwrite( "x", &Math::Vect4f::x )
+    .def_readwrite( "y", &Math::Vect4f::y )
+    .def_readwrite( "z", &Math::Vect4f::z )
+    .def_readwrite( "w", &Math::Vect4f::w )
   ];
   module( m_LS )
   [
@@ -121,5 +135,7 @@ void registerBase( lua_State* m_LS )
   [
     class_<Math::CColor>( "CColor" )
     .def( constructor<float, float, float, float>() )
+    .def( constructor<>() )
+    .def( constructor<const Math::Vect4f&>() )
   ];
 }

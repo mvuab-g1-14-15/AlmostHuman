@@ -26,8 +26,8 @@ private:
   bool                            m_PaintAll;
   std::vector<CPhysicActor*>     m_vPA;
   std::vector<CPhysicUserData*>  m_vPUD;
-  CPhysicActor*                   m_pPhysicActor;
-  CPhysicUserData*                m_pPUD;
+  /*CPhysicActor*                   m_pPhysicActor;
+  CPhysicUserData*                m_pPUD;*/
   CPhysicSphericalJoint*          m_PSJ;
   CPhysicRevoluteJoint*           m_PRJ;
   CTriggerManager*                m_TriggerManager;
@@ -44,8 +44,13 @@ public:
   virtual void RenderDebugInfo();
   GET_SET( bool, Salir );
   GET_SET( float, Time );
-  GET_SET_PTR( CPhysicActor, PhysicActor );
-  GET_SET_PTR( CPhysicUserData, PUD );
+  CPhysicUserData*    GetNewPUD( const std::string& Name );
+  CPhysicActor*       GetNewPhysicActor( CPhysicUserData* PUD );
+  void                AddPudVector( CPhysicUserData* PUD );
+  void                AddPhysicActorVector( CPhysicActor* PA );
+  CPhysicUserData*    GetLastPUDInserted();
+  /*GET_SET_PTR( CPhysicActor, PhysicActor );
+  GET_SET_PTR( CPhysicUserData, PUD );*/
   void    OnEnter( CPhysicUserData* _Entity_Trigger1,
                    CPhysicUserData* _Other_Shape );
   void    OnLeave( CPhysicUserData* _Entity_Trigger1,

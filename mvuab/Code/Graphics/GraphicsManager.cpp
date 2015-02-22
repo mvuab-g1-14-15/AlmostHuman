@@ -455,7 +455,7 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
+    CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
