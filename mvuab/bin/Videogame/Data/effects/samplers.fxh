@@ -15,6 +15,16 @@ sampler S0LinearClampSampler : register (s0)=sampler_state
 	AddressV = Clamp;
 };
 
+sampler S1LinearClampSampler : register (s1)=sampler_state
+{ 
+	MipFilter = LINEAR; 
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
 sampler S1PointSampler : register (s1)=sampler_state
 { 
 	MipFilter = POINT; 
