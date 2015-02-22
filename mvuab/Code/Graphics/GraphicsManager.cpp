@@ -74,6 +74,8 @@ CGraphicsManager::CGraphicsManager() :
   m_SphereMesh = 0;
   m_BoxMesh = 0;
   m_CylinderMesh = 0;
+  m_IBQuad = 0;
+  m_VBQuad = 0;
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -455,7 +457,7 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
@@ -992,4 +994,65 @@ D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
     return D3DBLEND_FORCE_DWORD;
 
   return D3DBLEND_ZERO;
+}
+
+void CGraphicsManager::CreateQuadBuffers()
+{
+  Math::CColor color = Math::colBLACK;
+  uint16 indices[4] = { 0, 1, 2, 3 };
+  TT1_DIFF_VERTEX vertices[4] =
+  {
+    {  1.f, -1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 1.f, 1.f }
+    , { -1.f, -1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 0.f, 1.f }
+    , { -1.f, 1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 0.f, 0.f }
+    , {  1.f, 1.f, 0.0f, D3DCOLOR_COLORVALUE( color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() ), 1.f, 0.f }
+  };
+  //Create the Vertex Buffer and Index Buffer
+  void* l_Data = NULL;
+  UINT l_Length = sizeof( TT1_DIFF_VERTEX ) * 4;
+  m_pD3DDevice->CreateVertexBuffer( l_Length, 0, TT1_DIFF_VERTEX::GetFVF(), D3DPOOL_DEFAULT,
+                                    &m_VBQuad, NULL );
+  m_VBQuad->Lock( 0, l_Length, &l_Data, 0 );
+  memcpy( l_Data, &vertices, l_Length );
+  m_VBQuad->Unlock();
+  l_Length = sizeof( uint16 ) * 4;
+  m_pD3DDevice->CreateIndexBuffer( l_Length, 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_IBQuad, NULL );
+  m_IBQuad->Lock( 0, l_Length, &l_Data, 0 );
+  memcpy( l_Data, &indices, l_Length );
+  m_IBQuad->Unlock();
+}
+
+void CGraphicsManager::DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique )
+{
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+
+  if ( l_Effect != NULL )
+  {
+    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+    UINT l_NumPasses = 0;
+
+    if ( SUCCEEDED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
+    {
+      m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
+      m_pD3DDevice->SetStreamSource( 0, m_VBQuad, 0, sizeof( SCREEN_COLOR_VERTEX ) );
+      m_pD3DDevice->SetIndices( m_IBQuad );
+
+      for ( UINT iPass = 0; iPass < l_NumPasses; ++iPass )
+      {
+        l_Effect->BeginPass( iPass );
+        m_pD3DDevice->DrawIndexedPrimitive( D3DPT_TRIANGLEFAN, 0, 0,
+                                            static_cast<UINT>( 4 ), 0, static_cast<UINT>( 2 ) );
+        l_Effect->EndPass();
+      }
+
+      l_Effect->End();
+    }
+  }
+}
+
+void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
+{
+  m_uWidth =  _Width;
+  m_uHeight = _Height;
 }

@@ -41,6 +41,7 @@ public:
   void EnableZBuffering();
   void DisableZBuffering();
   void GetWidthAndHeight( uint32& w, uint32& h );
+  void SetWidthAndHeight( uint32 w, uint32 h );
   void RenderCursor();
   void Clear();
   void Clear( bool target, bool zbuffer, bool stencil, u_int mask );
@@ -87,6 +88,7 @@ public:
   void DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h,
                         Math::CColor& backGroundColor,
                         uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor );
+  void DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique );
   void DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, float32 h,
                      uint32 Aristas,
                      Math::CColor Color, bool drawCover );
@@ -99,6 +101,7 @@ public:
                    const Math::Vect3f& dl,
                    const Math::Vect3f& dr, Math::CColor color );
   void DrawTeapot();
+  void CreateQuadBuffers();
 
   //TODO AÑADIDO STAGEID NO SE SI ES NECESARIO, POR DEFECTO SIEMPRE PONE 0
 
@@ -131,6 +134,8 @@ private: // Members
   LPD3DXMESH              m_BoxMesh;
   LPD3DXMESH              m_CylinderMesh;
   LPD3DXMESH              m_TeapotMesh;
+  LPDIRECT3DVERTEXBUFFER9 m_VBQuad;
+  LPDIRECT3DINDEXBUFFER9  m_IBQuad;
 
 private: // Methods
   void GetWindowRect( HWND hwnd );
