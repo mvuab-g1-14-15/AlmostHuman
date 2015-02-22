@@ -60,6 +60,17 @@ public:
 
   GET_SET( D3DXHANDLE, DebugColor );
 
+  GET_SET( D3DXHANDLE, SceneTextureParameter );
+  GET_SET( D3DXHANDLE, BloomThresholdParameter );
+  GET_SET( D3DXHANDLE, SampleOffsetsParameter );
+  GET_SET( D3DXHANDLE, SampleWeightsParameter );
+  GET_SET( D3DXHANDLE, GaussianBlurTextureParameter );
+  GET_SET( D3DXHANDLE, BloomIntensityParameter );
+  GET_SET( D3DXHANDLE, BaseIntensityParameter );
+  GET_SET( D3DXHANDLE, BloomSaturationParameter );
+  GET_SET( D3DXHANDLE, BaseSaturationParameter );
+  GET_SET( D3DXHANDLE, PostBloomTextureParameter );
+
   GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
 
@@ -133,6 +144,31 @@ private: // Members
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
+
+  D3DXHANDLE m_SceneTextureParameter;
+  D3DXHANDLE m_BloomThresholdParameter;
+  D3DXHANDLE m_SampleOffsetsParameter;
+  D3DXHANDLE m_SampleWeightsParameter;
+  D3DXHANDLE m_GaussianBlurTextureParameter;
+  D3DXHANDLE m_BloomIntensityParameter;
+  D3DXHANDLE m_BaseIntensityParameter;
+  D3DXHANDLE m_BloomSaturationParameter;
+  D3DXHANDLE m_BaseSaturationParameter;
+  D3DXHANDLE m_PostBloomTextureParameter;
+
+  /*
+  SceneTextureParameter );
+  BloomThresholdParameter );
+  SampleOffsetsParameter );
+  SampleWeightsParameter );
+  GaussianBlurTextureParameter );
+  BloomIntensityParameter );
+  BaseIntensityParameter );
+  BloomSaturationParameter );
+  BaseSaturationParameter );
+  PostBloomTextureParameter );
+  */
+
 
 private: // Methods
   void  SetNullParameters();

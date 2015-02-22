@@ -41,6 +41,7 @@ public:
   void EnableZBuffering();
   void DisableZBuffering();
   void GetWidthAndHeight( uint32& w, uint32& h );
+  void SetWidthAndHeight( uint32 w, uint32 h );
   void RenderCursor();
   void Clear();
   void Clear( bool target, bool zbuffer, bool stencil, u_int mask );
@@ -52,8 +53,8 @@ public:
   void EnableAlphaTest();
   void DisableAlphaTest();
   void SetBlendOP();
-  void SetSrcBlend(const std::string & BlendState );
-  void SetDstBlend(const std::string & BlendState );
+  void SetSrcBlend( const std::string& BlendState );
+  void SetDstBlend( const std::string& BlendState );
 
   // Getters and setters
   const LPDIRECT3DDEVICE9 GetDevice() const
@@ -82,6 +83,9 @@ public:
   void DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
                    ETypeAlignment alignment,
                    Math::CColor color = Math::colBLUE );
+
+  void DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique );
+
   void GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay,
                Math::Vect3f& dirRay );
   void DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h,
@@ -99,8 +103,10 @@ public:
                    const Math::Vect3f& dl,
                    const Math::Vect3f& dr, Math::CColor color );
   void DrawTeapot();
+  void CreateQuadBuffers();
 
-//TODO AÑADIDO STAGEID NO SE SI ES NECESARIO, POR DEFECTO SIEMPRE PONE 0
+
+  //TODO AÑADIDO STAGEID NO SE SI ES NECESARIO, POR DEFECTO SIEMPRE PONE 0
 
   void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
       CTexture* Texture, float U0, float V0, float U1, float V1, size_t StageId );
@@ -131,6 +137,9 @@ private: // Members
   LPD3DXMESH              m_BoxMesh;
   LPD3DXMESH              m_CylinderMesh;
   LPD3DXMESH              m_TeapotMesh;
+
+  LPDIRECT3DVERTEXBUFFER9 m_VBQuad;
+  LPDIRECT3DINDEXBUFFER9  m_IBQuad;
 
 private: // Methods
   void GetWindowRect( HWND hwnd );

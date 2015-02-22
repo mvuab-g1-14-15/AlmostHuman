@@ -14,54 +14,55 @@ class CEffect;
 class CEffectManager : public CMapManager<CEffectTechnique>, public CSingleton<CEffectManager>
 {
 public:
-    CEffectManager();
-    ~CEffectManager();
+  CEffectManager();
+  ~CEffectManager();
 
-    const Math::Mat44f & GetWorldMatrix() const;
-    const Math::Mat44f & GetProjectionMatrix() const;
-    const Math::Mat44f & GetViewMatrix() const;
-    const Math::Mat44f & GetViewProjectionMatrix();
-    const Math::Vect3f & GetCameraEye();
-    const Math::Mat44f & GetLightViewMatrix() const;
-    const Math::Mat44f & GetShadowProjectionMatrix();
+  const Math::Mat44f& GetWorldMatrix() const;
+  const Math::Mat44f& GetProjectionMatrix() const;
+  const Math::Mat44f& GetViewMatrix() const;
+  const Math::Mat44f& GetViewProjectionMatrix();
+  const Math::Vect3f& GetCameraEye();
+  const Math::Mat44f& GetLightViewMatrix() const;
+  const Math::Mat44f& GetShadowProjectionMatrix();
 
-    void ActivateCamera( const Math::Mat44f &ViewMatrix, const Math::Mat44f &ProjectionMatrix, const Math::Vect3f &CameraEye);
-    
-	void SetWorldMatrix(const Math::Mat44f &Matrix);
-    void SetProjectionMatrix(const Math::Mat44f &Matrix);
-    void SetViewMatrix(const Math::Mat44f &Matrix);
-    void SetViewProjectionMatrix(const Math::Mat44f &ViewProjectionMatrix);
+  void ActivateCamera( const Math::Mat44f& ViewMatrix, const Math::Mat44f& ProjectionMatrix,
+                       const Math::Vect3f& CameraEye );
 
-    void SetLightViewMatrix(const Math::Mat44f &Matrix);
-    void SetShadowProjectionMatrix(const Math::Mat44f &Matrix);
-    void SetCameraEye(const Math::Vect3f &CameraEye);
+  void SetWorldMatrix( const Math::Mat44f& Matrix );
+  void SetProjectionMatrix( const Math::Mat44f& Matrix );
+  void SetViewMatrix( const Math::Mat44f& Matrix );
+  void SetViewProjectionMatrix( const Math::Mat44f& ViewProjectionMatrix );
 
-    void Load(const std::string &FileName);
-    void Reload();
+  void SetLightViewMatrix( const Math::Mat44f& Matrix );
+  void SetShadowProjectionMatrix( const Math::Mat44f& Matrix );
+  void SetCameraEye( const Math::Vect3f& CameraEye );
 
-    std::string GetTechniqueEffectNameByVertexDefault(unsigned short VertexType);
-    size_t GetMaxLights() const;
-    CEffect * GetEffect(const std::string &Name);
+  void Load( const std::string& FileName );
+  void Reload();
 
-    void CleanUp();
+  std::string GetTechniqueEffectNameByVertexDefault( unsigned short VertexType );
+  size_t GetMaxLights() const;
+  CEffect* GetEffect( const std::string& Name );
+
+  void CleanUp();
 
 private: // Members
-    typedef std::map<int,std::string> TDefaultTechniqueEffectMap;
-    TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
-    
-    Math::Mat44f m_WorldMatrix;
-    Math::Mat44f m_ProjectionMatrix;
-    Math::Mat44f m_ViewMatrix;
-    Math::Mat44f m_ViewProjectionMatrix;
+  typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
+  TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
 
-    Math::Mat44f m_LightViewMatrix;
-    Math::Mat44f m_ShadowProjectionMatrix;
+  Math::Mat44f m_WorldMatrix;
+  Math::Mat44f m_ProjectionMatrix;
+  Math::Mat44f m_ViewMatrix;
+  Math::Mat44f m_ViewProjectionMatrix;
 
-    Math::Vect3f m_CameraEye;
-    
-    CMapManager<CEffect> m_Effects;
+  Math::Mat44f m_LightViewMatrix;
+  Math::Mat44f m_ShadowProjectionMatrix;
 
-    std::string     m_Filename;
+  Math::Vect3f m_CameraEye;
+
+  CMapManager<CEffect> m_Effects;
+
+  std::string     m_Filename;
 
 private: // Methods
 };

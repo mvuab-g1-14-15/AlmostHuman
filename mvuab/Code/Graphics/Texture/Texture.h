@@ -36,9 +36,10 @@ protected:
   //Members
   LPDIRECT3DTEXTURE9 m_Texture;
   std::string m_FileName;
+  uint32  m_Width;
+  uint32  m_Height;
+
   //TODO ALEX No estoy seguro de si va en protected o private (pag 26 Advanced Shaders) y de como se trabaja con esto...
-  size_t m_Width;
-  size_t m_Height;
   IDirect3DSurface9* m_OldRenderTarget;
   IDirect3DSurface9* m_DepthStencilRenderTargetTexture;
   IDirect3DSurface9* m_OldDepthStencilRenderTarget;
@@ -53,6 +54,22 @@ public:
   virtual ~CTexture();
 
   const std::string& GetFileName() const;
+
+  LPDIRECT3DTEXTURE9  GetDXTexture() const
+  {
+    return m_Texture;
+  }
+
+  uint32  GetWidth() const
+  {
+    return m_Width;
+  }
+
+  uint32  GetHeight() const
+  {
+    return m_Height;
+  }
+
   bool Load( const std::string& FileName );
   bool Save( const std::string& FileName );
 

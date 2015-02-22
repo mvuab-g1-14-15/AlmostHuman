@@ -28,7 +28,17 @@ CEffect::CEffect()
     m_LightsEndRangeAttenuationParameter( 0 ),
     m_CameraPositionParameter( 0 ),
     m_BonesParameter( 0 ),
-    m_TimeParameter( 0 )
+    m_TimeParameter( 0 ),
+    m_SceneTextureParameter( 0 ),
+    m_BloomThresholdParameter( 0 ),
+    m_SampleOffsetsParameter( 0 ),
+    m_SampleWeightsParameter( 0 ),
+    m_GaussianBlurTextureParameter( 0 ),
+    m_BloomIntensityParameter( 0 ),
+    m_BaseIntensityParameter( 0 ),
+    m_BloomSaturationParameter( 0 ),
+    m_BaseSaturationParameter( 0 ),
+    m_PostBloomTextureParameter( 0 )
 {
   memset( m_LightsEnabled,                 0,
           sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
@@ -72,7 +82,28 @@ CEffect::CEffect( const std::string& EffectName )
   m_LightsEndRangeAttenuationParameter( 0 ),
   m_CameraPositionParameter( 0 ),
   m_BonesParameter( 0 ),
-  m_TimeParameter( 0 )
+  m_TimeParameter( 0 ),
+  m_SceneTextureParameter( 0 ),
+  m_BloomThresholdParameter( 0 ),
+  m_SampleOffsetsParameter( 0 ),
+  m_SampleWeightsParameter( 0 ),
+  m_GaussianBlurTextureParameter( 0 ),
+  m_BloomIntensityParameter( 0 ),
+  m_BaseIntensityParameter( 0 ),
+  m_BloomSaturationParameter( 0 ),
+  m_BaseSaturationParameter( 0 ),
+  m_PostBloomTextureParameter( 0 )
+  /*  GET_SET( D3DXHANDLE, m_SceneTextureParameter );
+  GET_SET( D3DXHANDLE, m_BloomThresholdParameter );
+  GET_SET( D3DXHANDLE, m_SampleOffsetsParameter );
+  GET_SET( D3DXHANDLE, m_SampleWeightsParameter );
+  GET_SET( D3DXHANDLE, m_GaussianBlurTextureParameter );
+  GET_SET( D3DXHANDLE, m_BloomIntensityParameter );
+  GET_SET( D3DXHANDLE, m_BaseIntensityParameter );
+  GET_SET( D3DXHANDLE, m_BloomSaturationParameter );
+  GET_SET( D3DXHANDLE, m_BaseSaturationParameter );
+  GET_SET( D3DXHANDLE, m_PostBloomTextureParameter );*/
+
 {
   SetName( EffectName );
   memset( m_LightsEnabled,                 0,
@@ -122,6 +153,16 @@ void CEffect::SetNullParameters()
   m_CameraPositionParameter = 0;
   m_BonesParameter = 0;
   m_TimeParameter = 0;
+  m_SceneTextureParameter = 0;
+  m_BloomThresholdParameter = 0;
+  m_SampleOffsetsParameter = 0;
+  m_SampleWeightsParameter = 0;
+  m_GaussianBlurTextureParameter  = 0;
+  m_BloomIntensityParameter = 0;
+  m_BaseIntensityParameter = 0;
+  m_BloomSaturationParameter = 0;
+  m_BaseSaturationParameter = 0;
+  m_PostBloomTextureParameter = 0;
   memset( m_LightsEnabled,                 0,
           sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsType,                    0,
@@ -303,14 +344,13 @@ bool CEffect::SetLights( size_t NumOfLights )
             ( l_pCurrentLight );
         m_LightsDirection[i] = l_pDirectionalLight->GetDirection();
       }
-      else
-        if ( l_LightType == CLight::SPOT )
-        {
-          CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
-          m_LightsDirection[i] = l_SpotLight->GetDirection();
-          m_LightsAngle[i] = l_SpotLight->GetAngle();
-          m_LightsFallOff[i] = l_SpotLight->GetFallOff();
-        }
+      else if ( l_LightType == CLight::SPOT )
+      {
+        CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
+        m_LightsDirection[i] = l_SpotLight->GetDirection();
+        m_LightsAngle[i] = l_SpotLight->GetAngle();
+        m_LightsFallOff[i] = l_SpotLight->GetFallOff();
+      }
 
       //Begin the render of the shadow
       l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
@@ -361,14 +401,13 @@ bool CEffect::SetLight( size_t i_light )
           ( l_pCurrentLight );
       m_LightsDirection[i_light] = l_pDirectionalLight->GetDirection();
     }
-    else
-      if ( l_LightType == CLight::SPOT )
-      {
-        CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
-        m_LightsDirection[i_light] = l_SpotLight->GetDirection();
-        m_LightsAngle[i_light] = l_SpotLight->GetAngle();
-        m_LightsFallOff[i_light] = l_SpotLight->GetFallOff();
-      }
+    else if ( l_LightType == CLight::SPOT )
+    {
+      CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
+      m_LightsDirection[i_light] = l_SpotLight->GetDirection();
+      m_LightsAngle[i_light] = l_SpotLight->GetAngle();
+      m_LightsFallOff[i_light] = l_SpotLight->GetFallOff();
+    }
 
     //Begin the render of the shadow
     l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );

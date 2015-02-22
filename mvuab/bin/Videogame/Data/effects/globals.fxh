@@ -48,6 +48,23 @@ float 		g_SpecularExponent=100;
 
 float 		g_Bump = 10.0;
 
+//------------------ Bloom -----------------------------
+/*float2		g_HalfPixel		: HALF_PIXEL;
+texture	g_SceneTexture	: SCENE_TEXTURE;
+float		g_BloomThreshold	: BLOOM_THRESHOLD;
+            
+float2		g_SampleOffsets[SAMPLE_COUNT]		: SAMPLE_OFFSETS;
+float		g_SampleWeights[SAMPLE_COUNT]		: SAMPLE_WEIGHTS;
+    
+texture	g_GaussianBlurTexture				: GAUSSIAN_TEXTURE;
+float		g_BloomIntensity		: BLOOM_INTENSITY;
+float		g_BaseIntensity		: BASE_INTENSITY;
+float		g_BloomSaturation		: BLOOM_SATURATION;
+float		g_BaseSaturation		: BASE_SATURATION;
+texture	g_PostBloomTexture	: POST_BLOOM_TEXTURE;*/
+
+//---------------- END BLOOM --------------------------
+
 
 // Functions
 float DistanceAttenuation( int i, float3 LightToPixelDirection )

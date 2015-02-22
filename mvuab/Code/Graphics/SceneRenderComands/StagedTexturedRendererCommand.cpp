@@ -30,7 +30,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
         CTexture* l_Texture = new CTexture();
         l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET,
                            CTexture::DEFAULT, l_iFormatType );
-		CTextureManager::GetSingletonPtr()->AddResource(l_Name, l_Texture);
+        CTextureManager::GetSingletonPtr()->AddResource( l_Name, l_Texture );
         AddStageTexture( l_StageId, l_Texture );
       }
 
@@ -38,13 +38,15 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(
       {
         const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-        CTexture* l_Texture = CTextureManager::GetSingletonPtr()->GetTexture( l_Name );
+        CTextureManager* l_TM = CTextureManager::GetSingletonPtr();
+        CTexture* l_Texture = l_TM->GetTexture( l_Name );
 
-		if(!l_Texture)
-		{
-			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str());
-			continue;
-		}
+        if ( !l_Texture )
+        {
+          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                                 "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str() );
+          continue;
+        }
 
         AddStageTexture( l_StageId, l_Texture );
       }

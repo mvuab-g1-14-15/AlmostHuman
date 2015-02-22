@@ -21,12 +21,14 @@
 #include "SceneRenderComands\SetMatricesSceneRendererCommand.h"
 #include "SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h"
 #include "SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h"
+#include "SceneRenderComands\BloomSceneRenderCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
 #include "GraphicsManager.h"
 
 #include <Windows.h>
+
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
 {
@@ -223,6 +225,14 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
             i ) );
         m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
                                              l_DisableAlphaBlend );
+      }
+      else if ( TagName == "bloom_process" )
+      {
+        CBloomSceneRenderCommand* l_BloomSceneRender = new
+        CBloomSceneRenderCommand( TreeNode(
+                                    i ) );
+        m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name", TagName.c_str() ),
+                                             l_BloomSceneRender );
       }
     }
   }

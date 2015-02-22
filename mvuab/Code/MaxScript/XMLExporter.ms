@@ -178,8 +178,9 @@ fn ExportTextureFile AllObj DestPath =
 			actualObj = newObj[1]
 
 			filename = filenameFromPath actualObj.material.diffuseMap.filename
-			DestTexturePath = DestPath + filename
+			DestTexturePath = DestPath +"\\"+ filename
 			
+			format "Texture % copied on: % \n" Obj.material.diffuseMap.filename DestTexturePath
 			copyFile Obj.material.diffuseMap.filename DestTexturePath
 		)
 		catch

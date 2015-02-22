@@ -3,9 +3,23 @@
 #include "GraphicsManager.h"
 #include "Logger\Logger.h"
 
+/*
+
+IDirect3DSurface9* m_OldRenderTarget;
+IDirect3DSurface9* m_DepthStencilRenderTargetTexture;
+IDirect3DSurface9* m_OldDepthStencilRenderTarget;
+IDirect3DSurface9* m_RenderTargetTexture;
+*/
+
 CTexture::CTexture()
   : m_Texture( 0 )
   , m_FileName( "" )
+  , m_Width( 0 )
+  , m_Height( 0 )
+  , m_OldRenderTarget( 0 )
+  , m_DepthStencilRenderTargetTexture( 0 )
+  , m_OldDepthStencilRenderTarget( 0 )
+  , m_RenderTargetTexture( 0 )
 {
 }
 
@@ -168,18 +182,15 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
 {
   if ( FormatType == "R32F" )
     return R32F;
+  else if ( FormatType == "A8R8G8B8" )
+    return A8R8G8B8;
+  else if ( FormatType == "R8G8B8" )
+    return R8G8B8;
+  else if ( FormatType == "X8R8G8B8" )
+    return X8R8G8B8;
   else
-    if ( FormatType == "A8R8G8B8" )
-      return A8R8G8B8;
-    else
-      if ( FormatType == "R8G8B8" )
-        return R8G8B8;
-      else
-        if ( FormatType == "X8R8G8B8" )
-          return X8R8G8B8;
-        else
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Format Type '%s' not recognized",
-                                                 FormatType.c_str() );
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Format Type '%s' not recognized",
+                                           FormatType.c_str() );
 
   return A8R8G8B8;
 }

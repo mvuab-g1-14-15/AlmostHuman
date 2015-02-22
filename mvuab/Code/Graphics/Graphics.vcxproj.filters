@@ -195,6 +195,12 @@
     <ClCompile Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\BloomProcessSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\BloomSceneRenderCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -398,6 +404,12 @@
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\BloomProcessSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\BloomSceneRenderCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

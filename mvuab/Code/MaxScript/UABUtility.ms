@@ -47,6 +47,7 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		--export Mesh
 		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
+		local TexturesDir = PathLabel.text + "\\textures"		--poner parametrico
 		--Check if exist dir, if not mkdir
 		DoesFolderExist MeshDir
 		
@@ -61,7 +62,14 @@ utility UABUtility "UAB Utility" width:162 height:325
 				l_ObjectMesh.InitFromMaxObject Obj
 				l_ObjectMesh.WriteToFile file
 				fclose file
+				
 			)
+			
+			if CopyTexturesCheckBox.checked then
+				(
+					DoesFolderExist TexturesDir
+					ExportTextureFile selection TexturesDir
+				)
 		)
 		else
 		(
@@ -125,7 +133,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 		(
 			DoesFolderExist TexturesDir
 			ExportTextureFile geometry TexturesDir
-			format "Textures copied on: % \n" TexturesDir
 		)
 	
 		--selec all objects
@@ -181,7 +188,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 		(
 			DoesFolderExist TexturesDir
 			ExportTextureFile geometry TexturesDir
-			format "Textures copied on: % \n" TexturesDir
 		)
 	
 		--selec all objects
