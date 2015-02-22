@@ -436,7 +436,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       Math::CColor color = physicUserData->GetColor();
       //Math::CColor  color = colRED;
       _RM->DrawBox( boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
-      //_RM->DrawCube(boxDim.y*2,color);
+      //_RM->DrawCube( boxDim.y * 2, color );
     }
     break;
 

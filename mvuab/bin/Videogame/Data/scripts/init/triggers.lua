@@ -1,31 +1,34 @@
+core = Singleton_Core.get_singleton()
+physicManager = core:GetPhysicsManager()
+engine = Singleton_Engine.get_singleton()
 function OnEnter()
-	core = Singleton_Core.get_singleton()
-	physicManager = core:GetPhysicsManager()
-	engine = Singleton_Engine.get_singleton()
 	process = engine:GetProcess()
-	--physicUserData = process:GetPUD()
-	--physicUserData:SetName("Box6")
-	--physicUserData:SetPaint(true)
-	color = CColor(0,1,0,1)
-	--physicUserData:SetColor(color)
-	--physicActor = process:GetPhysicActor()
-	--physicActor = CPhysicActor(physicUserData)
-	--physicActor:AddPlaneShape(Vect3f( -1, 0, 0), 15, 0)
-	--physicManager:AddPhysicActor(physicActor)
+	physicUserData = process:GetNewPUD("Box6")
+	physicUserData:SetColor(0,1,0,1)
+	physicUserData:SetPaint(true)
+	process:AddPudVector(physicUserData)
+	physicActor = process:GetNewPhysicActor(physicUserData)
+	physicActor:AddBoxShape(Vect3f( 1, 1, 1), Vect3f( 5, 8, 5), Vect3f( 0, 0, 0), Vect3f( 0, 0, 0))
+	physicActor:CreateBody(1, 0.5, 0.5)
+	process:AddPhysicActorVector(physicActor)
+	physicManager:AddPhysicActor(physicActor)
+
+end
+
+function OnLeave(other_shape)
+	process = engine:GetProcess()
+	process:SetSalir(true)
+	physicActor = physicManager:GetActor(other_shape)
+	physicUserData = physicActor:GetUserData()
+	physicUserData:SetColor(1,1,0,1)
+end
+
+function OnStay(other_shape)
+	process = engine:GetProcess()
+	physicUserData = process:GetLastPUDInserted()
+	physicUserData:SetColor(1,0,0,1)
 	
-	--process:SetPhysicActor(physicActor)
-end
-
-function OnLeave()
-	engine = Singleton_Engine.get_singleton()
-	process = engine:GetProcess()
-	--process:SetSalir(true)
-end
-
-function OnStay()
-	engine = Singleton_Engine.get_singleton()
-	process = engine:GetProcess()
-	--physicUserData = process:GetPUD()
-	color = CColor(1,0,0,1)
-	--physicUserData:SetColor(color)
+	physicActor2 = physicManager:GetActor(other_shape)
+	physicUserData2 = physicActor2:GetUserData()
+	physicUserData2:SetColor(0,1,1,1)
 end

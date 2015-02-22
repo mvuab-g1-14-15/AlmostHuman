@@ -65,8 +65,6 @@ CPhysicProcess::CPhysicProcess() : CProcess(),
   CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
   unsigned short debug = VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
   int i = 0;
-  m_pPUD = new CPhysicUserData( "Box6" );
-  m_pPhysicActor = new CPhysicActor( m_pPUD );
 }
 bool done = false;
 
@@ -87,8 +85,8 @@ CPhysicProcess::~CPhysicProcess()
 
   m_vPUD.clear();
   CHECKED_DELETE( m_TriggerManager );
-  CHECKED_DELETE( m_pPUD );
-  CHECKED_DELETE( m_pPhysicActor );
+  /*CHECKED_DELETE( m_pPUD );
+  CHECKED_DELETE( m_pPhysicActor );*/
 }
 
 void CPhysicProcess::Update()
@@ -159,8 +157,8 @@ void CPhysicProcess::Update()
       m_vPUD.push_back( l_PhysicUserData );
       CPhysicActor* l_Actor = new CPhysicActor( l_PhysicUserData );
       //If don't want box, you can remove this line
-      l_Actor->AddBoxShape( Math::Vect3f( 0.05f, 0.05f, 0.05f ),
-                            l_CurrentCamera->GetPos(), Math::Vect3f( 0, 0, 0 ) );
+      l_Actor->AddBoxShapeHardcoded( Math::Vect3f( 0.05f, 0.05f, 0.05f ),
+                                     l_CurrentCamera->GetPos(), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0, 0 ) );
       l_Actor->CreateBody( 1.0f );
       // Add at the end allways it needs to have a shape
       l_PM->AddPhysicActor( l_Actor );
@@ -229,7 +227,7 @@ void CPhysicProcess::Update()
 
   if ( m_Salir && ( m_Time >= 1 ) )
   {
-    CCore::GetSingletonPtr()->GetPhysicsManager()->ReleasePhysicActor( m_pPhysicActor );
+    CCore::GetSingletonPtr()->GetPhysicsManager()->ReleasePhysicActor( m_vPA[m_vPA.size() - 1] );
     m_Salir = false;
     m_Time = 0;
   }
@@ -263,7 +261,7 @@ void CPhysicProcess::Init()
   //Ejercicio 2 - Puente levadiso
   l_PUD = new CPhysicUserData( "Box2" );
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
+  l_PUD->SetColor( colWHITE );
   m_vPUD.push_back( l_PUD );
   l_pPhysicActor = new CPhysicActor( l_PUD );
   l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0,
@@ -278,7 +276,7 @@ void CPhysicProcess::Init()
   l_PM->AddPhysicRevoluteJoint( m_PRJ );
   l_PUD = new CPhysicUserData( "Box3" );
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
+  l_PUD->SetColor( 1, 0, 0, 1 );
   m_vPUD.push_back( l_PUD );
   l_pPhysicActor = new CPhysicActor( l_PUD );
   l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, 0,
@@ -329,7 +327,22 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+  //Get method name
+  std::string l_LuaCode1 = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+  //Parseo para saber si tiene o no argumentos
+  std::string l_Other_ShapeName = _Other_Shape->GetName();
+  std::ostringstream codeCat;
+  size_t count = l_LuaCode1.find( ")" );
+  size_t count2 = l_LuaCode1.find( "(" );
+  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
+
+  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
+    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
+  else
+    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
+
+  std::string l_LuaCode( codeCat.str() );
+  //Ejecutar código
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
@@ -340,7 +353,22 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+  //Get method name
+  std::string l_LuaCode1 = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+  //Parseo para saber si tiene o no argumentos
+  std::string l_Other_ShapeName = _Other_Shape->GetName();
+  std::ostringstream codeCat;
+  size_t count = l_LuaCode1.find( ")" );
+  size_t count2 = l_LuaCode1.find( "(" );
+  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
+
+  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
+    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
+  else
+    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
+
+  std::string l_LuaCode( codeCat.str() );
+  //Ejecutar código
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
@@ -351,7 +379,44 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
                           _Entity_Trigger1->GetName() );
-  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
+  //Get method name
+  std::string l_LuaCode1 = l_Trigger->GetLUAByName( CTrigger::STAY );
+  //Parseo para saber si tiene o no argumentos
+  std::string l_Other_ShapeName = _Other_Shape->GetName();
+  std::ostringstream codeCat;
+  size_t count = l_LuaCode1.find( ")" );
+  size_t count2 = l_LuaCode1.find( "(" );
+  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
+
+  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
+    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
+  else
+    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
+
+  std::string l_LuaCode( codeCat.str() );
+  //Ejecutar código
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
+}
+
+CPhysicUserData* CPhysicProcess::GetNewPUD( const std::string& Name )
+{
+  return new CPhysicUserData( Name );
+}
+CPhysicActor* CPhysicProcess::GetNewPhysicActor( CPhysicUserData* PUD )
+{
+  return new CPhysicActor( PUD );
+}
+
+void CPhysicProcess::AddPudVector( CPhysicUserData* PUD )
+{
+  m_vPUD.push_back( PUD );
+}
+void CPhysicProcess::AddPhysicActorVector( CPhysicActor* PA )
+{
+  m_vPA.push_back( PA );
+}
+CPhysicUserData* CPhysicProcess::GetLastPUDInserted()
+{
+  return m_vPUD[m_vPUD.size() - 1];
 }

@@ -25,7 +25,9 @@ void registerPhysX( lua_State* m_LS )
   [
     class_<CPhysicUserData, CName>( "CPhysicUserData" )
     .def( constructor<const std::string&>() )
-    .def( "SetColor", &CPhysicUserData::SetColor )
+    .def( "SetColor", ( void ( CPhysicUserData::* )( const float, const float, const float,
+                        const float ) ) &CPhysicUserData::SetColor )
+    .def( "GetColor", &CPhysicUserData::GetColor )
     .def( "SetPaint", &CPhysicUserData::SetPaint )
     .def( "SetName", &CPhysicUserData::SetName )
     .def( "GetActor", &CPhysicUserData::GetActor )
@@ -38,9 +40,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetUserData", &CPhysicActor::GetUserData )
     .def( "CreateBody", &CPhysicActor::CreateBody )
     .def( "AddSphereShape", &CPhysicActor::AddSphereShape )
-    .def( "AddBoxShape", ( void ( CPhysicActor::* )( const Math::Vect3f&, const Math::Vect3f&,
-                           const Math::Vect3f&, const Math::Vect3f&, NxCCDSkeleton*, uint32 ) )
-          &CPhysicActor::AddBoxShape )
+    .def( "AddBoxShape", &CPhysicActor::AddBoxShapeHardcoded )
     .def( "AddPlaneShape", &CPhysicActor::AddPlaneShape )
     .def( "AddMeshShape", &CPhysicActor::AddMeshShape )
     .def( "AddCapsuleShape", &CPhysicActor::AddCapsuleShape )
@@ -64,6 +64,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "Done", &CPhysicsManager::Done )
     .def( "Reload", &CPhysicsManager::Reload )
     .def( "ReloadXML", &CPhysicsManager::ReloadXML )
+    //Gets
     .def( "GetActor", &CPhysicsManager::GetActor )
   ];
 }

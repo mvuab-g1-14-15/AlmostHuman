@@ -44,7 +44,6 @@ void CEngine::Render()
   m_pProcess->Render();
   m_pLogRender->Render();
   //pGraphicsManager->RenderCursor();
-
 #if _DEBUG
   pGraphicsManager->DisableZBuffering();
   pGraphicsManager->EnableAlphaBlend();
