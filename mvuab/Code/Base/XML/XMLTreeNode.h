@@ -50,29 +50,29 @@ public:
 
   // To get properties from xml file
   int                               GetIntProperty( const char* _pszKey, int _iDefault = 0,
-      bool warningDefault = true ) const;
+      bool warningDefault = false ) const;
   float32                           GetFloatProperty( const char* _pszKey, float32 _fDefault = 0.0,
-      bool warningDefault = true ) const;
+      bool warningDefault = false ) const;
   bool                              GetBoolProperty( const char* _pszKey, bool _bDefault = false,
-      bool warningDefault = true ) const;
+      bool warningDefault = false ) const;
   const char*                       GetPszProperty( const char* _pszKey,
-      const char* _pszDefault = NULL, bool warningDefault = true ) const;
+      const char* _pszDefault = NULL, bool warningDefault = false ) const;
   std::string                       GetPszISOProperty( const char* _pszKey,
-      const char* _pszDefault = NULL,    bool warningDefault = true ) const;
+      const char* _pszDefault = NULL,    bool warningDefault = false ) const;
   Math::Vect2f                      GetVect2fProperty( const char* _pszKey,
-      const Math::Vect2f& _Default, bool warningDefault = true ) const;
+      const Math::Vect2f& _Default, bool warningDefault = false ) const;
   Math::Vect3f                      GetVect3fProperty( const char* _pszKey,
-      const Math::Vect3f& _Default, bool warningDefault = true ) const;
+      const Math::Vect3f& _Default, bool warningDefault = false ) const;
   Math::Vect4f                      GetVect4fProperty( const char* _pszKey,
-      const Math::Vect4f& _Default, bool warningDefault = true ) const;
+      const Math::Vect4f& _Default, bool warningDefault = false ) const;
   Math::Vect2i                      GetVect2iProperty( const char* _pszKey,
-      const Math::Vect2i& _Default, bool warningDefault = true ) const;
+      const Math::Vect2i& _Default, bool warningDefault = false ) const;
   Math::Vect3i                      GetVect3iProperty( const char* _pszKey,
-      const Math::Vect3i& _Default, bool warningDefault = true ) const;
+      const Math::Vect3i& _Default, bool warningDefault = false ) const;
   Math::Vect4i                      GetVect4iProperty( const char* _pszKey,
-      const Math::Vect4i& _Default, bool warningDefault = true ) const;
+      const Math::Vect4i& _Default, bool warningDefault = false ) const;
   Math::CColor                      GetCColorProperty( const char* _pszKey,
-      const Math::CColor& _Default, bool warningDefault = true ) const;
+      const Math::CColor& _Default, bool warningDefault = false ) const;
 
   // To get keywords from xml file
   int GetIntKeyword( const char* _pszKey, int _iDefault = 0 ) const;

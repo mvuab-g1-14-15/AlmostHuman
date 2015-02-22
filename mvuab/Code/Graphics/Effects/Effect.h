@@ -117,6 +117,24 @@ public:
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap,
                                bool UseDynamicShadowmap );
 
+  bool UseNormal() const
+  {
+    return m_UseNormal;
+  }
+  void SetUseNormal( bool val )
+  {
+    m_UseNormal = val;
+  }
+
+  bool UseReflection() const
+  {
+    return m_UseReflection;
+  }
+  void SetUseReflection( bool val )
+  {
+    m_UseReflection = val;
+  }
+
 private: // Members
   std::string m_FileName;
   LPD3DXEFFECT m_Effect;
@@ -158,6 +176,10 @@ private: // Members
   D3DXHANDLE m_BloomSaturationParameter;
   D3DXHANDLE m_BaseSaturationParameter;
   D3DXHANDLE m_PostBloomTextureParameter;
+
+  bool     m_UseNormal;
+
+  bool     m_UseReflection;
 
   /*
   SceneTextureParameter );

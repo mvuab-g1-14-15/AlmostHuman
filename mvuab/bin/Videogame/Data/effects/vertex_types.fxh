@@ -34,6 +34,16 @@ struct TNORMAL_TAN_BI_T1_VERTEX {
 	float2 	UV 			: TEXCOORD0;
 };
 
+struct TNORMAL_TAN_BI_T1_VERTEX_PS
+{
+    float4 HPosition 		: POSITION;
+    float2 UV 				: TEXCOORD0;
+    float3 Normal 			: TEXCOORD1;
+	float4 WorldPosition 	: TEXCOORD2;
+	float4 WorldTangent		: TEXCOORD3;
+    float4 WorldBinormal 	: TEXCOORD4;
+};
+
 struct TNORMAL_T2_DIFF_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;

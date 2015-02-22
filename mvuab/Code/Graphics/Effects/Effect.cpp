@@ -30,24 +30,7 @@ CEffect::CEffect()
     m_BonesParameter( 0 ),
     m_TimeParameter( 0 )
 {
-  memset( m_LightsEnabled,                 0,
-          sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType,                    0,
-          sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle,                   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff,                 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation,   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation,     0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition,                0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection,               0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor,                   0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  ResetLightsHandle();
 }
 
 CEffect::CEffect( const std::string& EffectName )
@@ -75,24 +58,7 @@ CEffect::CEffect( const std::string& EffectName )
   m_TimeParameter( 0 )
 {
   SetName( EffectName );
-  memset( m_LightsEnabled,                 0,
-          sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType,                    0,
-          sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle,                   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff,                 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation,   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation,     0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition,                0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection,               0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor,                   0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  ResetLightsHandle();
 }
 
 CEffect::~CEffect()
@@ -122,24 +88,7 @@ void CEffect::SetNullParameters()
   m_CameraPositionParameter = 0;
   m_BonesParameter = 0;
   m_TimeParameter = 0;
-  memset( m_LightsEnabled,                 0,
-          sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType,                    0,
-          sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle,                   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff,                 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation,   0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation,     0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition,                0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection,               0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor,                   0,
-          sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  ResetLightsHandle();
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName,
@@ -174,11 +123,6 @@ bool CEffect::LoadEffect()
   //dwShaderFlags |= D3DXSHADER_NO_PRESHADER;
   dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
   LPD3DXBUFFER l_ErrorBuffer = 0;
-  D3DXMACRO pDefines [2];
-  pDefines[0].Name = "_NORMAL_MAP";
-  pDefines[0].Definition = "TRUE";
-  pDefines[1].Name = "_SELF_ILLUM";
-  pDefines[1].Definition = "TRUE";
   HRESULT l_HR = D3DXCreateEffectFromFile(
                    l_Device,
                    m_FileName.c_str(),
@@ -188,8 +132,8 @@ bool CEffect::LoadEffect()
                    0, // LPD3DXEFFECTPOOL pPool,
                    &m_Effect,
                    &l_ErrorBuffer );
+  //assert( l_HR == S_OK );
 
-  //assert(l_HR == S_OK );
   if ( l_ErrorBuffer )
   {
     CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
@@ -203,18 +147,12 @@ bool CEffect::LoadEffect()
   // Get the references to the handlers inside the effect
   GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
   GetParameterBySemantic( ViewMatrixParameterStr, m_ViewMatrixParameter );
-  GetParameterBySemantic( ProjectionMatrixParameterStr,
-                          m_ProjectionMatrixParameter );
-  GetParameterBySemantic( InverseWorldMatrixParameterStr,
-                          m_InverseWorldMatrixParameter );
-  GetParameterBySemantic( InverseViewMatrixParameterStr,
-                          m_InverseViewMatrixParameter );
-  GetParameterBySemantic( InverseProjectionMatrixParameterStr,
-                          m_InverseProjectionMatrixParameter );
-  GetParameterBySemantic( WorldViewMatrixParameterStr,
-                          m_WorldViewMatrixParameter );
-  GetParameterBySemantic( ViewProjectionMatrixParameterStr,
-                          m_ViewProjectionMatrixParameter );
+  GetParameterBySemantic( ProjectionMatrixParameterStr, m_ProjectionMatrixParameter );
+  GetParameterBySemantic( InverseWorldMatrixParameterStr, m_InverseWorldMatrixParameter );
+  GetParameterBySemantic( InverseViewMatrixParameterStr, m_InverseViewMatrixParameter );
+  GetParameterBySemantic( InverseProjectionMatrixParameterStr, m_InverseProjectionMatrixParameter );
+  GetParameterBySemantic( WorldViewMatrixParameterStr, m_WorldViewMatrixParameter );
+  GetParameterBySemantic( ViewProjectionMatrixParameterStr, m_ViewProjectionMatrixParameter );
   GetParameterBySemantic( WorldViewProjectionMatrixParameterStr,
                           m_WorldViewProjectionMatrixParameter );
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
@@ -222,8 +160,7 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
-  GetParameterBySemantic( LightsDirectionParameterStr,
-                          m_LightsDirectionParameter );
+  GetParameterBySemantic( LightsDirectionParameterStr, m_LightsDirectionParameter );
   GetParameterBySemantic( LightsAngleParameterStr, m_LightsAngleParameter );
   GetParameterBySemantic( LightsColorParameterStr, m_LightsColorParameter );
   GetParameterBySemantic( LightsFallOffParameterStr, m_LightsFallOffParameter );
@@ -264,7 +201,6 @@ D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
 bool CEffect::SetLights( size_t NumOfLights )
 {
   ResetLightsHandle();
-  // Obtain the manager of lights
   CLightManager* l_pLightManager = CLightManager::GetSingletonPtr();
 
   for ( size_t i = 0; i < NumOfLights; ++i )
@@ -281,7 +217,8 @@ bool CEffect::SetLights( size_t NumOfLights )
       m_LightsPosition[i] = l_pCurrentLight->GetPosition();
       Math::CColor l_Color = l_pCurrentLight->GetColor();
       m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() / 255.0f,
-                                       l_Color.GetGreen() / 255.0f, l_Color.GetBlue() / 255.0f );
+                                       l_Color.GetGreen() / 255.0f,
+                                       l_Color.GetBlue() / 255.0f );
 
       if ( l_LightType == CLight::DIRECTIONAL )
       {

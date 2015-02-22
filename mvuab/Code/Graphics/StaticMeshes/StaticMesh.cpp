@@ -79,51 +79,36 @@ bool CStaticMesh::Load( const std::string& FileName )
 
     if ( l_VertexType == TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexType() )
       l_TypeSize = sizeof( TNORMAL_TAN_BI_T2_DIFF_VERTEX );
-    else
-      if ( l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
-        l_TypeSize = sizeof( TNORMAL_TAN_BI_T1_DIFF_VERTEX );
-      else
-        if ( l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType() )
-          l_TypeSize = sizeof( TNORMAL_TAN_BI_T2_VERTEX );
-        else
-          if ( l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType() )
-            l_TypeSize = sizeof( TNORMAL_TAN_BI_T1_VERTEX );
-          else
-            if ( l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType() )
-              l_TypeSize = sizeof( TNORMAL_T2_DIFF_VERTEX );
-            else
-              if ( l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType() )
-                l_TypeSize = sizeof( TNORMAL_T1_DIFF_VERTEX );
-              else
-                if ( l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType() )
-                  l_TypeSize = sizeof( TNORMAL_DIFF_VERTEX );
-                else
-                  if ( l_VertexType == TNORMAL_T2_VERTEX::GetVertexType() )
-                    l_TypeSize = sizeof( TNORMAL_T2_VERTEX );
-                  else
-                    if ( l_VertexType == TNORMAL_T1_VERTEX::GetVertexType() )
-                      l_TypeSize = sizeof( TNORMAL_T1_VERTEX );
-                    else
-                      if ( l_VertexType == TT2_DIFF_VERTEX::GetVertexType() )
-                        l_TypeSize = sizeof( TT2_DIFF_VERTEX );
-                      else
-                        if ( l_VertexType == TT1_DIFF_VERTEX::GetVertexType() )
-                          l_TypeSize = sizeof( TT1_DIFF_VERTEX );
-                        else
-                          if ( l_VertexType == TDIFF_VERTEX::GetVertexType() )
-                            l_TypeSize = sizeof( TDIFF_VERTEX );
-                          else
-                            if ( l_VertexType == TT2_VERTEX::GetVertexType() )
-                              l_TypeSize = sizeof( TT2_VERTEX );
-                            else
-                              if ( l_VertexType == TT1_VERTEX::GetVertexType() )
-                                l_TypeSize = sizeof( TT1_VERTEX );
-                              else
-                                if ( l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType() )
-                                  l_TypeSize = sizeof( TNORMAL_TAN_BI_DIFF_VERTEX );
-                                else
-                                  if ( l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType() )
-                                    l_TypeSize = sizeof( TNORMAL_T1_REFLECTION_VERTEX );
+    else if ( l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_TAN_BI_T1_DIFF_VERTEX );
+    else if ( l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_TAN_BI_T2_VERTEX );
+    else if ( l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_TAN_BI_T1_VERTEX );
+    else if ( l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_T2_DIFF_VERTEX );
+    else if ( l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_T1_DIFF_VERTEX );
+    else if ( l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_DIFF_VERTEX );
+    else if ( l_VertexType == TNORMAL_T2_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_T2_VERTEX );
+    else if ( l_VertexType == TNORMAL_T1_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_T1_VERTEX );
+    else if ( l_VertexType == TT2_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TT2_DIFF_VERTEX );
+    else if ( l_VertexType == TT1_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TT1_DIFF_VERTEX );
+    else if ( l_VertexType == TDIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TDIFF_VERTEX );
+    else if ( l_VertexType == TT2_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TT2_VERTEX );
+    else if ( l_VertexType == TT1_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TT1_VERTEX );
+    else if ( l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_TAN_BI_DIFF_VERTEX );
+    else if ( l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType() )
+      l_TypeSize = sizeof( TNORMAL_T1_REFLECTION_VERTEX );
 
     // Obtain all the textures if any
     unsigned short l_numTexturas = 0;
@@ -164,74 +149,59 @@ bool CStaticMesh::Load( const std::string& FileName )
     if ( l_VertexType == TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexType() )
       l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-    else
-      if ( l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
-        l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-            l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-      else
-        if ( l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType() )
-        {
-          CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
-                                    l_TypeSize, 0, 12, 24, 36, 48 );
-          l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-              l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-        }
-        else
-          if ( l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType() )
-          {
-            CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
-                                      l_TypeSize, 0, 12, 24, 36, 48 );
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-                l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-          }
-          else
-            if ( l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType() )
-              l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-                  l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-            else
-              if ( l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType() )
-                l_RV = new CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-                    l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-              else
-                if ( l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType() )
-                  l_RV = new CIndexedVertexs<TNORMAL_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                      l_IdxAddress, l_VrtexCount, l_IdxCount );
-                else
-                  if ( l_VertexType == TNORMAL_T2_VERTEX::GetVertexType() )
-                    l_RV = new CIndexedVertexs<TNORMAL_T2_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                        l_IdxAddress, l_VrtexCount, l_IdxCount );
-                  else
-                    if ( l_VertexType == TNORMAL_T1_VERTEX::GetVertexType() )
-                      l_RV = new CIndexedVertexs<TNORMAL_T1_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                          l_IdxAddress, l_VrtexCount, l_IdxCount );
-                    else
-                      if ( l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType() )
-                        l_RV = new CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-                            l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
-                      else
-                        if ( l_VertexType == TT2_DIFF_VERTEX::GetVertexType() )
-                          l_RV = new CIndexedVertexs<TT2_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                              l_IdxAddress, l_VrtexCount, l_IdxCount );
-                        else
-                          if ( l_VertexType == TT1_DIFF_VERTEX::GetVertexType() )
-                            l_RV = new CIndexedVertexs<TT1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                                l_IdxAddress, l_VrtexCount, l_IdxCount );
-                          else
-                            if ( l_VertexType == TDIFF_VERTEX::GetVertexType() )
-                              l_RV = new CIndexedVertexs<TDIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                                  l_IdxAddress, l_VrtexCount, l_IdxCount );
-                            else
-                              if ( l_VertexType == TT2_VERTEX::GetVertexType() )
-                                l_RV = new CIndexedVertexs<TT2_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                                                                        l_IdxAddress, l_VrtexCount, l_IdxCount );
-                              else
-                                if ( l_VertexType == TT1_VERTEX::GetVertexType() )
-                                  l_RV = new CIndexedVertexs<TT1_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
-                                                                          l_IdxAddress, l_VrtexCount, l_IdxCount );
-                                else
-                                  if ( l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType() )
-                                    l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
-                                        l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType() )
+    {
+      CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
+                                l_TypeSize, 0, 12, 24, 36, 48 );
+      l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    }
+    else if ( l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType() )
+    {
+      CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
+                                l_TypeSize, 0, 12, 28, 44, 60 );
+      l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    }
+    else if ( l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_T2_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_T2_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_T1_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_T1_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TT2_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TT2_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TT1_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TT1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TDIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TDIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+          l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TT2_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TT2_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+                                              l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TT1_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TT1_VERTEX>( CGraphicsManager::GetSingletonPtr(), l_VtxsAddress,
+                                              l_IdxAddress, l_VrtexCount, l_IdxCount );
+    else if ( l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType() )
+      l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+          l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
 
     // Check the renderable object
     if ( l_RV ) m_RVs.push_back( l_RV );
@@ -288,19 +258,24 @@ void CStaticMesh::Render( CGraphicsManager* GM )
 
 bool CStaticMesh::GetRenderableObjectTechnique()
 {
-  CRenderableObjectTechniqueManager* l_ROTM = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+  CRenderableObjectTechniqueManager* l_ROTM =
+    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
   bool l_Ok = true;
 
   for ( size_t i = 0; i < m_VertexTypes.size(); ++i )
   {
     if ( m_RenderableObjectTechniqueName == "" )
-      m_RenderableObjectTechniqueName = l_ROTM->GetRenderableObjectTechniqueNameByVertexType( m_VertexTypes[i] );
+      m_RenderableObjectTechniqueName = l_ROTM->GetRenderableObjectTechniqueNameByVertexType(
+                                          m_VertexTypes[i] );
 
     CRenderableObjectTechnique* l_ROT = l_ROTM->GetResource( m_RenderableObjectTechniqueName );
-    if( l_ROT) m_RenderableObjectTechniques.push_back( l_ROT );
+
+    if ( l_ROT ) m_RenderableObjectTechniques.push_back( l_ROT );
 
     if ( l_ROT == NULL )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh", m_RenderableObjectTechniqueName.c_str() );
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                             "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh",
+                                             m_RenderableObjectTechniqueName.c_str() );
 
     l_Ok = l_Ok && l_ROT != NULL;
   }
