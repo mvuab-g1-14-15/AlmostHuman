@@ -40,19 +40,19 @@
 	<capture_frame_buffer>
 		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
-	<set_render_target name="lens_flare_target">
+	<!--<set_render_target name="lens_flare_target">
 		<dynamic_texture stage_id="0" name="LensFlareS1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</set_render_target>
+	</set_render_target>-->
 	<set_pool_renderable_objects_technique pool="Lens_Flare_step1_pool_renderable_object_technique"/>
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="ActualFrameBuffer"/>
 		<texture stage_id="1" name="DepthMapTexture"/>
 	</render_draw_quad>
-	<unset_render_target render_target="lens_flare_target"/>
+	<!--<unset_render_target render_target="lens_flare_target"/>
 	<set_pool_renderable_objects_technique pool="Lens_Flare_step2_pool_renderable_object_technique"/>
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="LensFlareS1"/>
-	</render_draw_quad>
+	</render_draw_quad>-->
 	
 	<!--<capture_frame_buffer>
 		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
