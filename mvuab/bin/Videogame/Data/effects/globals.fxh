@@ -22,10 +22,9 @@ float4x4 g_ViewProjMatrix 		 								    : ViewProjection;
 
 float4 g_DebugColor													: DebugColor;
 
-
-float4x4 g_ShadowProjectionMatrix									: ShadowProjection;
-float4x4 g_LightViewMatrix 		 									: LightView;
-float4x4 g_ViewToLightProjMatrix 		 						    : ViewToLightProjection;
+float4x4 	g_ShadowProjectionMatrix								: ShadowProjection;
+float4x4 	g_LightViewMatrix 		 								: LightView;
+float4x4 	g_ViewToLightProjMatrix 							    : ViewToLightProjection;
 
 int 		g_LightsType[MAX_LIGHTS_BY_SHADER]						: LightsTypes;
 bool		g_LightsEnabled[MAX_LIGHTS_BY_SHADER]					: LightsEnabled;
@@ -73,7 +72,7 @@ float3 Texture2Normal(float3 Color)
 	return (Color-0.5)*2;
 }
 
-float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV )
+float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV, float4x4 InverseProjectionMatrix)
 {
 	// Get the depth value for this pixel
 	// Get x/w and y/w from the viewport position
@@ -81,15 +80,15 @@ float3 GetPositionFromZDepthViewInViewCoordinates(float ZDepthView, float2 UV )
 	float y = (1 - UV.y) * 2 - 1;
 	float4 l_ProjectedPos = float4(x, y, ZDepthView, 1.0);
 	// Transform by the inverse projection matrix
-	float4 l_PositionVS = mul(l_ProjectedPos, g_ProjectionInverseMatrix);
+	float4 l_PositionVS = mul(l_ProjectedPos, InverseProjectionMatrix);
 	// Divide by w to get the view-space position
 	return l_PositionVS.xyz / l_PositionVS.w;
 }
 
-float3 GetPositionFromZDepthView(float ZDepthView, float2 UV )
+float3 GetPositionFromZDepthView(float ZDepthView, float2 UV, float4x4 InverseViewMatrix, float4x4 InverseProjectionMatrix)
 {
-	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV);
-	return mul(float4(l_PositionView,1.0), g_ViewInverseMatrix).xyz;
+	float3 l_PositionView=GetPositionFromZDepthViewInViewCoordinates(ZDepthView, UV, InverseProjectionMatrix);
+	return mul(float4(l_PositionView,1.0), InverseViewMatrix).xyz;
 }
 
 float CalcAttenuation(float actual, float start, float end)

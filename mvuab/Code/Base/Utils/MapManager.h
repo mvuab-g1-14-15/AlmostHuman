@@ -11,46 +11,42 @@ template<class T>
 class CMapManager
 {
 protected:
-    typedef std::map<std::string, T*> TMapResource;
-    TMapResource m_Resources;
+  typedef std::map<std::string, T*> TMapResource;
+  TMapResource m_Resources;
 
 public:
-    virtual T * GetResource(const std::string &Name)
+  virtual T* GetResource( const std::string& Name )
+  {
+    if ( m_Resources.find( Name ) == m_Resources.end() )
     {
-        if( m_Resources.find(Name) == m_Resources.end() )
-        {
-            CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::GetResource->(%s)", Name.c_str() );
-            return 0;
-        }
-        else
-        {
-            return m_Resources[Name];
-        }
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CMapManager::GetResource->(%s)", Name.c_str() );
+      return 0;
+    }
+    else
+      return m_Resources[Name];
+  }
+
+  virtual bool AddResource( const std::string& Name, T* Resource )
+  {
+    if ( m_Resources.find( Name ) != m_Resources.end() )
+    {
+      //CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::AddResource->(%s)", Name.c_str() );
+      return false;
     }
 
-    virtual bool AddResource(const std::string &Name, T *Resource)
-    {
-        if( m_Resources.find(Name) != m_Resources.end() )
-        {
-            CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::AddResource->(%s)", Name.c_str() );
-            return false;
-        }
-        
-        m_Resources[Name] = Resource;
-        return true;
-    }
+    m_Resources[Name] = Resource;
+    return true;
+  }
 
-    void Destroy()
-    {
-        std::map<std::string, T*>::iterator itb = m_Resources.begin(), ite = m_Resources.end();
-        
-        for(; itb != ite; ++itb)
-        {
-            CHECKED_DELETE(itb->second);
-        }
+  void Destroy()
+  {
+    std::map<std::string, T*>::iterator itb = m_Resources.begin(), ite = m_Resources.end();
 
-        m_Resources.clear();
-    }
+    for ( ; itb != ite; ++itb )
+      CHECKED_DELETE( itb->second );
+
+    m_Resources.clear();
+  }
 };
 
 #endif //INC_MAP_MANAGER_H_
