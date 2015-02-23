@@ -4,6 +4,7 @@
 
 #include <d3dx9.h>
 #include <string>
+#include <vector>
 #include "Math\Matrix44.h"
 #include "Effects\Defines.h"
 #include "Utils\Name.h"
@@ -134,6 +135,14 @@ public:
   {
     m_UseReflection = val;
   }
+  bool UseSelfIlum() const
+  {
+    return m_UseSelfIlum;
+  }
+  void SetUseSelfIlum( bool val )
+  {
+    m_UseSelfIlum = val;
+  }
 
 private: // Members
   std::string m_FileName;
@@ -177,9 +186,10 @@ private: // Members
   D3DXHANDLE m_BaseSaturationParameter;
   D3DXHANDLE m_PostBloomTextureParameter;
 
+  // Flags to compile the shader
   bool     m_UseNormal;
-
   bool     m_UseReflection;
+  bool     m_UseSelfIlum;
 
   /*
   SceneTextureParameter );

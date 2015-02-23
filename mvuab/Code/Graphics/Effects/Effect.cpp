@@ -6,6 +6,7 @@
 #include "Lights/LightManager.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/SpotLight.h"
+#include <sstream>
 
 CEffect::CEffect()
   : m_FileName( "" ),
@@ -115,6 +116,36 @@ void CEffect::GetParameterBySemantic( const char* SemanticName,
 
 bool CEffect::LoadEffect()
 {
+  // Setup the defines for compiling the effect
+  std::stringstream s;
+
+  std::vector<D3DXMACRO> defines;
+  // USE_NORMAL macro
+  s << "#define USE_NORMAL " << int(m_UseNormal);
+  std::string l_NormalMapStr = s.str();
+  s.str("");
+  D3DXMACRO l_NormalMapMacro = { "USE_NORMAL_MAP_MACRO", l_NormalMapStr.c_str() };
+  defines.push_back(l_NormalMapMacro);
+  s.clear();
+
+  // USE_REFLECTION macro
+  s << "#define USE_REFLECTION " << int(m_UseReflection);
+  std::string l_ReflectionStr = s.str();
+  s.str("");
+  D3DXMACRO l_ReflectionMacro = { "USE_REFLECTION_MACRO", l_ReflectionStr.c_str() };
+  defines.push_back(l_ReflectionMacro);
+
+  // USE_SELF_ILUM macro
+  s << "#define USE_SELF_ILUM " << int(m_UseSelfIlum);
+  std::string l_SelfIlumStr = s.str();
+  s.str("");
+  D3DXMACRO l_SelfIlumMacro = { "USE_SELF_ILUM_MACRO", l_SelfIlumStr.c_str() };
+  defines.push_back(l_SelfIlumMacro);
+
+  // Define a null macro in order to say the shader that the macro is finished
+  D3DXMACRO null = { NULL, NULL };
+  defines.push_back(null);
+
   // Obtain the device from the graphics manager and load the effect
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   DWORD dwShaderFlags = 0;
@@ -126,7 +157,7 @@ bool CEffect::LoadEffect()
   HRESULT l_HR = D3DXCreateEffectFromFile(
                    l_Device,
                    m_FileName.c_str(),
-                   0, // [CONST D3DXMACRO* pDefines,] pDefines,
+                   &defines[0], // [CONST D3DXMACRO* pDefines,] pDefines,
                    0, // LPD3DXINCLUDE pInclude,
                    dwShaderFlags,
                    0, // LPD3DXEFFECTPOOL pPool,
