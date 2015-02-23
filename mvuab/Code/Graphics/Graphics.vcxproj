@@ -45,8 +45,6 @@
     <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\BloomProcessSceneRendererCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\BloomSceneRenderCommand.cpp" />
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp" />
@@ -118,8 +116,6 @@
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
     <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h" />
-    <ClInclude Include="SceneRenderComands\BloomProcessSceneRendererCommand.h" />
-    <ClInclude Include="SceneRenderComands\BloomSceneRenderCommand.h" />
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h" />
