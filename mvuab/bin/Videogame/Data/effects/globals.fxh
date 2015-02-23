@@ -48,6 +48,12 @@ float 		g_SpecularFactor = 20.0f;
 
 float 		g_Bump = 10.0;
 
+float 		g_FogStar											: FogStart;
+float 		g_FogEnd											: FogEnd;
+
+float 		g_FodExp											: FogExp;
+int 		g_FogFun											: FogFun;
+
 // Functions
 
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
@@ -99,11 +105,18 @@ float CalcAttenuation(float actual, float start, float end)
 float4 CalcLinearFog(float Depth, float StartFog, float EndFog, float4 FogColor, float4 FragColor)
 {
     float l_FogFactor = 1.0 - CalcAttenuation(Depth, StartFog, EndFog);
-    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
+	return float4(l_FogFactor * FragColor.rgb + (1.0 - l_FogFactor) * FogColor.rgb, FragColor.a);
 }
 
 float4 CalcExpFog(float Depth, float dz, float4 FogColor, float4 FragColor)
 {
     float l_FogFactor =  1.0 - saturate(1 - exp(-Depth * dz));
-    return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
+    return float4(l_FogFactor * FragColor.rgb + (1.0 - l_FogFactor) * FogColor.rgb, FragColor.a);
+}
+
+float4 CalcGroundFog(float4 FogColor, float4 FragColor, float depth, float3 rayOri, float3 rayDir)
+{
+	float a = 0.1, b = 0.1;
+    float fogAmount = a * exp(-rayOri.y * b) * (1.0 - exp(-depth * rayDir.y * b)) / rayDir.y;
+    return float4((1- fogAmount) * FragColor.rgb + fogAmount * FogColor.rgb, FragColor.a);
 }

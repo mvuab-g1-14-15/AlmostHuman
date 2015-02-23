@@ -29,7 +29,11 @@ CEffect::CEffect()
     m_LightsEndRangeAttenuationParameter( 0 ),
     m_CameraPositionParameter( 0 ),
     m_BonesParameter( 0 ),
-    m_TimeParameter( 0 )
+    m_TimeParameter( 0 ),
+    m_FogStart(0),
+	m_FogEnd(0),
+	m_FogExp(0),
+	m_FogFun(0)
 {
   ResetLightsHandle();
 }
@@ -56,7 +60,11 @@ CEffect::CEffect( const std::string& EffectName )
   m_LightsEndRangeAttenuationParameter( 0 ),
   m_CameraPositionParameter( 0 ),
   m_BonesParameter( 0 ),
-  m_TimeParameter( 0 )
+  m_TimeParameter( 0 ),
+  m_FogStart(0),
+  m_FogEnd(0),
+  m_FogExp(0),
+  m_FogFun(0)
 {
   SetName( EffectName );
   ResetLightsHandle();
@@ -89,6 +97,12 @@ void CEffect::SetNullParameters()
   m_CameraPositionParameter = 0;
   m_BonesParameter = 0;
   m_TimeParameter = 0;
+
+  m_FogStart = 0;
+  m_FogEnd = 0;
+  m_FogExp = 0;
+  m_FogFun = 0;
+
   ResetLightsHandle();
 }
 
@@ -184,10 +198,8 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( InverseProjectionMatrixParameterStr, m_InverseProjectionMatrixParameter );
   GetParameterBySemantic( WorldViewMatrixParameterStr, m_WorldViewMatrixParameter );
   GetParameterBySemantic( ViewProjectionMatrixParameterStr, m_ViewProjectionMatrixParameter );
-  GetParameterBySemantic( WorldViewProjectionMatrixParameterStr,
-                          m_WorldViewProjectionMatrixParameter );
-  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
-                          m_ViewToLightProjectionMatrixParameter );
+  GetParameterBySemantic( WorldViewProjectionMatrixParameterStr,m_WorldViewProjectionMatrixParameter );
+  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
@@ -195,14 +207,19 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( LightsAngleParameterStr, m_LightsAngleParameter );
   GetParameterBySemantic( LightsColorParameterStr, m_LightsColorParameter );
   GetParameterBySemantic( LightsFallOffParameterStr, m_LightsFallOffParameter );
-  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr,
-                          m_LightsStartRangeAttenuationParameter );
-  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,
-                          m_LightsEndRangeAttenuationParameter );
+  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr,m_LightsStartRangeAttenuationParameter );
+  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,m_LightsEndRangeAttenuationParameter );
   GetParameterBySemantic( CameraPositionParameterStr, m_CameraPositionParameter );
   GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
   GetParameterBySemantic( TimeParameterStr, m_TimeParameter );
   GetParameterBySemantic( DebugColorStr, m_DebugColor );
+
+  GetParameterBySemantic(FogStartStr, m_FogStart);
+  GetParameterBySemantic(FogEndStr, m_FogEnd);
+
+  GetParameterBySemantic(FogExpStr, m_FogExp);
+  GetParameterBySemantic(FogFunStr, m_FogFun);
+
   return true;
 }
 

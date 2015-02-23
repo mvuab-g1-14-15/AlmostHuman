@@ -75,6 +75,11 @@ public:
   GET_SET( D3DXHANDLE, BaseSaturationParameter );
   GET_SET( D3DXHANDLE, PostBloomTextureParameter );
 
+  GET_SET( D3DXHANDLE, FogStart );
+  GET_SET( D3DXHANDLE, FogEnd );
+  GET_SET( D3DXHANDLE, FogExp );
+  GET_SET( D3DXHANDLE, FogFun );
+
   GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
 
@@ -185,6 +190,12 @@ private: // Members
   D3DXHANDLE m_BloomSaturationParameter;
   D3DXHANDLE m_BaseSaturationParameter;
   D3DXHANDLE m_PostBloomTextureParameter;
+
+  // Fog information
+  D3DXHANDLE m_FogStart;
+  D3DXHANDLE m_FogEnd;
+  D3DXHANDLE m_FogExp;
+  D3DXHANDLE m_FogFun;
 
   // Flags to compile the shader
   bool     m_UseNormal;

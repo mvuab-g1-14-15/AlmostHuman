@@ -29,4 +29,10 @@ const char BonesParameterStr[] = "Bones";
 const char TimeParameterStr[] = "DeltaTime";
 const char DebugColorStr[] = "DebugColor";
 
+const char FogStartStr[] = "FogStart";
+const char FogEndStr[] = "FogEnd";
+
+const char FogExpStr[] = "FogExp";
+const char FogFunStr[] = "FogFun";
+
 #endif //EFFECTS_DEFINES_H
