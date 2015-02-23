@@ -22,11 +22,14 @@ CEffectTechnique::CEffectTechnique( CXMLTreeNode& node )
     m_UseWorldViewMatrix( node.GetBoolProperty( "use_world_view_matrix", false ) ),
     m_UseWorldViewProjectionMatrix( node.GetBoolProperty( "use_world_view_projection_matrix", false ) ),
     m_UseViewProjectionMatrix( node.GetBoolProperty( "use_view_projection_matrix", false ) ),
-    m_UseViewToLightProjectionMatrix( node.GetBoolProperty( "use_view_to_light_projection_matrix",
-                                      false ) ),
+    m_UseViewToLightProjectionMatrix( node.GetBoolProperty( "use_view_to_light_projection_matrix", false ) ),
     m_UseTime( node.GetBoolProperty( "use_time", false ) ),
     m_UseDebugColor( node.GetBoolProperty( "use_debug_color", false ) ),
     m_NumOfLights( node.GetIntProperty( "num_of_lights", 0 ) ),
+    m_FogStart(node.GetFloatProperty("fog_start", 0)),
+	m_FogEnd(node.GetFloatProperty("fog_end", 0)),
+	m_FogExp(node.GetFloatProperty("fog_exp", 0)),
+	m_FogFun(node.GetIntProperty("fog_fun", 1)),
     m_DebugColor( Math::colWHITE )
 {
   m_Effect = CEffectManager::GetSingletonPtr()->GetEffect( m_EffectName );
@@ -69,6 +72,27 @@ bool CEffectTechnique::BeginRender()
   {
     l_Handle = m_Effect->GetTimeParameter();
     l_Effect->SetFloat( l_Handle, deltaTime );
+  }
+
+  if(m_FogFun == 2)
+  {
+	  l_Handle = m_Effect->GetFogStart();
+	  l_Effect->SetFloat( l_Handle, m_FogStart );
+
+	  l_Handle = m_Effect->GetFogEnd();
+	  l_Effect->SetFloat( l_Handle, m_FogEnd );
+
+	  l_Handle = m_Effect->GetFogFun();
+	  l_Effect->SetFloat( l_Handle, m_FogFun );
+  }
+
+  if(m_FogFun == 1 || m_FogFun == 3)
+  {
+	  l_Handle = m_Effect->GetFogExp();
+	  l_Effect->SetFloat( l_Handle, m_FogExp );
+
+	  l_Handle = m_Effect->GetFogFun();
+	  l_Effect->SetFloat( l_Handle, m_FogFun );
   }
 
   SetupMatrices();

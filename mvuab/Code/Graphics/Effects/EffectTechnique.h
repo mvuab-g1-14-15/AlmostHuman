@@ -41,6 +41,11 @@ private: // Members
     bool                        m_UseTime;
 	bool						m_UseDebugColor;
 
+    float						m_FogStart;
+	float						m_FogEnd;
+	float						m_FogExp;
+	int 						m_FogFun;
+
     CEffect                    *m_Effect;
     D3DXHANDLE                  m_D3DTechnique;
     std::string                 m_TechniqueName;
