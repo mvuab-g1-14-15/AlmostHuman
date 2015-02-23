@@ -14,6 +14,7 @@ class CPhysicUserData;
 class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
 class CTriggerManager;
+class CPhysicController;
 
 class CPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
@@ -33,6 +34,7 @@ private:
   CTriggerManager*                m_TriggerManager;
   bool                            m_Salir;
   float                            m_Time;
+  CPhysicController*				m_PhysicController;
 
 public:
   CPhysicProcess();
@@ -57,6 +59,8 @@ public:
                    CPhysicUserData* _Other_Shape );
   void    OnStay( CPhysicUserData* _Entity_Trigger1,
                   CPhysicUserData* _Other_Shape );
+
+  void InitSceneCharacterController();
 
 
 };

@@ -45,6 +45,7 @@
 #include "Lights\LightManager.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "Actor\PhysicController.h"
 
 #include <d3dx9.h>
 #include "SceneRenderComands\SceneRendererCommandManager.h"
@@ -63,6 +64,12 @@ CPhysicProcess::CPhysicProcess() : CProcess(),
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
   //  Math::Vect3f(0.0f,2.0f,0.0f) );
   CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
+  CPhysicUserData* userData = new CPhysicUserData("CharacterController");
+  userData->SetPaint(true);
+  userData->SetColor(colWHITE);
+  m_vPUD.push_back(userData);
+
+  m_PhysicController = new CPhysicController(1, 2, 0.2f, 0.5f, 0.5f, ECollisionGroup::ECG_PLAYER, userData, Math::Vect3f(8.0f, 8.0f, 8.0f));
   unsigned short debug = VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
   int i = 0;
 }
@@ -72,8 +79,8 @@ CPhysicProcess::~CPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
   CHECKED_DELETE( p_Grenade );
-  CHECKED_DELETE( m_PRJ );
-  CHECKED_DELETE( m_PSJ );
+  //CHECKED_DELETE( m_PRJ );
+  //CHECKED_DELETE( m_PSJ );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -87,6 +94,7 @@ CPhysicProcess::~CPhysicProcess()
   CHECKED_DELETE( m_TriggerManager );
   /*CHECKED_DELETE( m_pPUD );
   CHECKED_DELETE( m_pPhysicActor );*/
+  CHECKED_DELETE( m_PhysicController);
 }
 
 void CPhysicProcess::Update()
@@ -215,11 +223,38 @@ void CPhysicProcess::Update()
       l_PUD->SetColor( colRED );
   }
 
-  if ( pActionManager->DoAction( "LeftBridge" ) )
-    m_PRJ->ActiveMotor( -200 );
+  Math::Vect3f l_Direction = Math::Vect3f(0.0f, 0.0f, 0.0f);
+  float  l_Yaw = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetYaw();
+  if ( pActionManager->DoAction( "Forward" ) )
+  {
+	  l_Direction += Math::Vect3f(Math::Utils::Cos(l_Yaw), 0.0f, Math::Utils::Sin(l_Yaw));
+  }
+    //m_PRJ->ActiveMotor( -200 );
 
-  if ( pActionManager->DoAction( "RightBridge" ) )
-    m_PRJ->ActiveMotor( 200 );
+  if ( pActionManager->DoAction( "Backward" ) )
+  {
+	  l_Direction -= Math::Vect3f(Math::Utils::Cos(l_Yaw), 0.0f, Math::Utils::Sin(l_Yaw));
+  }
+
+  if ( pActionManager->DoAction( "Left" ) )
+  {
+	  l_Direction += Math::Vect3f(Math::Utils::Cos(l_Yaw+Math::pi32/2), 0.0f, Math::Utils::Sin(l_Yaw+Math::pi32/2));
+  }
+    //m_PRJ->ActiveMotor( -200 );
+
+  if ( pActionManager->DoAction( "Right" ) )
+  {
+	  l_Direction -= Math::Vect3f(Math::Utils::Cos(l_Yaw+Math::pi32/2), 0.0f, Math::Utils::Sin(l_Yaw+Math::pi32/2));
+  }
+
+  if (l_Direction != Math::Vect3f(0.0f, 0.0f, 0.0f))
+  {
+	l_Direction = l_Direction.GetNormalized();
+  }
+
+  m_PhysicController->Move(l_Direction*0.1f,deltaTime);
+
+    //m_PRJ->ActiveMotor( 200 );
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
@@ -235,6 +270,59 @@ void CPhysicProcess::Update()
     m_Time += deltaTime;
 }
 
+void CPhysicProcess::InitSceneCharacterController()
+{
+  //Scene Character Controller
+  //Step1
+  CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+
+  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0, 0 ) );
+
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Step2
+  l_PUD = new CPhysicUserData( "BoxCharacter1" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0, 0 ) );
+
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Step3
+  l_PUD = new CPhysicUserData( "BoxCharacter1" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0, 0 ) );
+
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Plano Inclinado TODO
+  l_PUD = new CPhysicUserData( "Rampa" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3, 0, 0 ),
+                               Math::Vect3f( 0, 0, 1.3 ) );
+
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+}
+
 void CPhysicProcess::Init()
 {
   m_TriggerManager = new CTriggerManager();
@@ -242,58 +330,72 @@ void CPhysicProcess::Init()
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
   p_Grenade->Start();
-  //Ejercicio 1 - Pendulo
+  ////Ejercicio 1 - Pendulo
+  //CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  //m_PSJ = new CPhysicSphericalJoint();
+  //CPhysicUserData* l_PUD = new CPhysicUserData( "Box" );
+  //l_PUD->SetPaint( true );
+  //l_PUD->SetColor( colBLACK );
+  //m_vPUD.push_back( l_PUD );
+  //CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+  //l_pPhysicActor->AddSphereShape( 0.4f, Math::Vect3f( 10, 4, 6 ) );
+  //l_pPhysicActor->CreateBody( 1.0f );
+  //m_vPA.push_back( l_pPhysicActor );
+  //l_PM->AddPhysicActor( l_pPhysicActor );
+  //l_pPhysicActor->AddVelocityAtPos( Math::Vect3f( 10, 0, 6 ), Math::Vect3f( 10, 4,
+  //                                  6 ), 10 );
+  //m_PSJ->SetInfo( Math::Vect3f( 5, 4, 6 ), l_pPhysicActor );
+  //l_PM->AddPhysicSphericalJoint( m_PSJ );
+  ////Ejercicio 2 - Puente levadiso
+  //l_PUD = new CPhysicUserData( "Box2" );
+  //l_PUD->SetPaint( true );
+  //l_PUD->SetColor( colWHITE );
+  //m_vPUD.push_back( l_PUD );
+  //l_pPhysicActor = new CPhysicActor( l_PUD );
+  //l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0,
+  //                             4, 0 ) );
+  //l_pPhysicActor->CreateBody( 1.0f );
+  //l_PM->AddPhysicActor( l_pPhysicActor );
+  //m_vPA.push_back( l_pPhysicActor );
+  //m_PRJ = new CPhysicRevoluteJoint();
+  //m_PRJ->SetInfo( Math::Vect3f( 0, 0, -1 ), Math::Vect3f( 0, 0, 0 ),
+  //                l_pPhysicActor );
+  //m_PRJ->SetMotor( 20, 5.f );
+  //l_PM->AddPhysicRevoluteJoint( m_PRJ );
+  //l_PUD = new CPhysicUserData( "Box3" );
+  //l_PUD->SetPaint( true );
+  //l_PUD->SetColor( 1, 0, 0, 1 );
+  //m_vPUD.push_back( l_PUD );
+  //l_pPhysicActor = new CPhysicActor( l_PUD );
+  //l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, 0,
+  //                             0 ) );
+  //m_vPA.push_back( l_pPhysicActor );
+  //l_PM->AddPhysicActor( l_pPhysicActor );
+  //l_PUD = new CPhysicUserData( "Box4" );
+  //l_PUD->SetPaint( true );
+  //l_PUD->SetColor( colBLACK );
+  //m_vPUD.push_back( l_PUD );
+  //l_pPhysicActor = new CPhysicActor( l_PUD );
+  //l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( 7, 0,
+  //                             0 ) );
+  //m_vPA.push_back( l_pPhysicActor );
+  //l_PM->AddPhysicActor( l_pPhysicActor );
+  ////Asigno el TriggerReport en el physicManager a esta clase
+  //l_PM->SetTriggerReport( this );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  m_PSJ = new CPhysicSphericalJoint();
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Box" );
+  l_PM->AddPhysicController(m_PhysicController);
+
+  CPhysicUserData* l_PUD = new CPhysicUserData( "Box5" );
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
+  l_PUD->SetColor( colMAGENTA );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddSphereShape( 0.4f, Math::Vect3f( 10, 4, 6 ) );
-  l_pPhysicActor->CreateBody( 1.0f );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  l_pPhysicActor->AddVelocityAtPos( Math::Vect3f( 10, 0, 6 ), Math::Vect3f( 10, 4,
-                                    6 ), 10 );
-  m_PSJ->SetInfo( Math::Vect3f( 5, 4, 6 ), l_pPhysicActor );
-  l_PM->AddPhysicSphericalJoint( m_PSJ );
-  //Ejercicio 2 - Puente levadiso
-  l_PUD = new CPhysicUserData( "Box2" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0,
-                               4, 0 ) );
-  l_pPhysicActor->CreateBody( 1.0f );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-  m_PRJ = new CPhysicRevoluteJoint();
-  m_PRJ->SetInfo( Math::Vect3f( 0, 0, -1 ), Math::Vect3f( 0, 0, 0 ),
-                  l_pPhysicActor );
-  m_PRJ->SetMotor( 20, 5.f );
-  l_PM->AddPhysicRevoluteJoint( m_PRJ );
-  l_PUD = new CPhysicUserData( "Box3" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( 1, 0, 0, 1 );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, 0,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 100, 0.2, 100 ), Math::Vect3f( 0, 0,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
-  l_PUD = new CPhysicUserData( "Box4" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( 7, 0,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  //Asigno el TriggerReport en el physicManager a esta clase
-  l_PM->SetTriggerReport( this );
+
+  InitSceneCharacterController();
 }
 
 void CPhysicProcess::Render()
