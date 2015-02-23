@@ -42,7 +42,7 @@
 	<technique name="VignettingTechnique" effect="VignettingEffect"/>
 	<technique name="BlurTechnique" effect="BlurEffect"/>
 	<technique name="FOGTechnique" effect="FOGEffect" use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true"/>
-	<technique name="LensFlareS1Technique" effect="LensFlareS1Effect"/>
+	<technique name="LensFlareS1Technique" effect="LensFlareS1Effect" use_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
 	<technique name="LensFlareS2Technique" effect="LensFlareS2Effect"/>
 	
 	<technique name="BloomFilter" effect="BloomEffect"/>
