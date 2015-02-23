@@ -1,3 +1,6 @@
+#if !defined( GLOBALS_FXH )
+#define GLOBALS_FXH
+
 #define MAX_LIGHTS_BY_SHADER 4
 #define MAXBONES 29
 
@@ -107,3 +110,13 @@ float4 CalcExpFog(float Depth, float dz, float4 FogColor, float4 FragColor)
     float l_FogFactor =  1.0 - saturate(1 - exp(-Depth * dz));
     return l_FogFactor * FragColor + (1.0 - l_FogFactor) * FogColor;
 }
+
+float3 CalcNewNormal(float3 Tn, float3 Bn, float4 Color, float3 Normal)
+{
+	float3 l_NewNormal = Normal;
+	float3 l_Bump = g_Bump*(Color.rgb - float3(0.5,0.5,0.5));
+	l_NewNormal = Normal + l_Bump.x*Tn + l_Bump.y*Bn;
+	return normalize(l_NewNormal);
+}
+
+#endif // !defined( GLOBALS_FXH )

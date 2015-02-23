@@ -118,40 +118,34 @@ bool CEffect::LoadEffect()
 {
   // Setup the defines for compiling the effect
   std::stringstream s;
-
   std::vector<D3DXMACRO> defines;
-  // USE_NORMAL macro
-  s << "#define USE_NORMAL " << int(m_UseNormal);
-  std::string l_NormalMapStr = s.str();
-  s.str("");
-  D3DXMACRO l_NormalMapMacro = { "USE_NORMAL_MAP_MACRO", l_NormalMapStr.c_str() };
-  defines.push_back(l_NormalMapMacro);
-  s.clear();
 
-  // USE_REFLECTION macro
-  s << "#define USE_REFLECTION " << int(m_UseReflection);
-  std::string l_ReflectionStr = s.str();
-  s.str("");
-  D3DXMACRO l_ReflectionMacro = { "USE_REFLECTION_MACRO", l_ReflectionStr.c_str() };
-  defines.push_back(l_ReflectionMacro);
+  if ( m_UseNormal )
+  {
+    D3DXMACRO l_NormalMapMacro = { "USE_NORMAL", ""};
+    defines.push_back( l_NormalMapMacro );
+  }
 
-  // USE_SELF_ILUM macro
-  s << "#define USE_SELF_ILUM " << int(m_UseSelfIlum);
-  std::string l_SelfIlumStr = s.str();
-  s.str("");
-  D3DXMACRO l_SelfIlumMacro = { "USE_SELF_ILUM_MACRO", l_SelfIlumStr.c_str() };
-  defines.push_back(l_SelfIlumMacro);
+  if ( m_UseReflection )
+  {
+    D3DXMACRO l_ReflectionMacro = { "USE_REFLECTION", ""};
+    defines.push_back( l_ReflectionMacro );
+  }
+
+  if ( m_UseSelfIlum )
+  {
+    D3DXMACRO l_ReflectionMacro = { "USE_SELF_ILUM", ""};
+    defines.push_back( l_ReflectionMacro );
+  }
 
   // Define a null macro in order to say the shader that the macro is finished
   D3DXMACRO null = { NULL, NULL };
-  defines.push_back(null);
+  defines.push_back( null );
 
   // Obtain the device from the graphics manager and load the effect
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   DWORD dwShaderFlags = 0;
-  //dwShaderFlags |= D3DXSHADER_FORCE_VS_SOFTWARE_NOOPT;
-  //dwShaderFlags |= D3DXSHADER_FORCE_PS_SOFTWARE_NOOPT;
-  //dwShaderFlags |= D3DXSHADER_NO_PRESHADER;
+
   dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
   LPD3DXBUFFER l_ErrorBuffer = 0;
   HRESULT l_HR = D3DXCreateEffectFromFile(
@@ -211,24 +205,20 @@ void CEffect::Unload()
   SetNullParameters();
   CHECKED_RELEASE( m_Effect );
 }
-
 bool CEffect::Load( const std::string& FileName )
 {
   m_FileName = FileName;
   return LoadEffect();
 }
-
 bool CEffect::Reload()
 {
   Unload();
   return Load( m_FileName );
 }
-
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
 {
   return ( m_Effect ) ? m_Effect->GetTechniqueByName( TechniqueName.c_str() ) : 0;
 }
-
 bool CEffect::SetLights( size_t NumOfLights )
 {
   ResetLightsHandle();
@@ -272,7 +262,6 @@ bool CEffect::SetLights( size_t NumOfLights )
 
   return true;
 }
-
 bool CEffect::SetLight( size_t i_light )
 {
   ResetLightsHandle();
@@ -311,7 +300,6 @@ bool CEffect::SetLight( size_t i_light )
   l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
   return true;
 }
-
 bool CEffect::SetCameraPosition( Math::Vect3f CameraPosition )
 {
   float32 l_Camera[3];
@@ -321,67 +309,56 @@ bool CEffect::SetCameraPosition( Math::Vect3f CameraPosition )
   return ( m_Effect->SetFloatArray( m_CameraPositionParameter, l_Camera,
                                     3 ) == S_OK );
 }
-
 bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_WorldMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_ViewMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_ProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetInverseWorldMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_InverseWorldMatrixParameter,
                                 &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_InverseViewMatrixParameter,
                                 &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_InverseProjectionMatrixParameter,
                                 &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_WorldViewMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_WorldViewProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_ViewProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
 {
   return ( m_Effect->SetMatrix( m_ViewToLightProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-
 void CEffect::SetShadowMapParameters( bool UseShadowMaskTexture, bool
                                       UseStaticShadowmap, bool UseDynamicShadowmap )
 {
@@ -392,7 +369,6 @@ void CEffect::SetShadowMapParameters( bool UseShadowMaskTexture, bool
   m_Effect->SetBool( m_UseDynamicShadowmapParameter, UseDynamicShadowmap ? TRUE
                      : FALSE );
 }
-
 void CEffect::ResetLightsHandle()
 {
   //Reset all the lights of the effect

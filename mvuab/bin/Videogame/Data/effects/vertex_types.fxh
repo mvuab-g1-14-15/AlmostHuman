@@ -1,3 +1,6 @@
+#if !defined( VERTEX_TYPES_FXH )
+#define VERTEX_TYPES_FXH 
+
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
@@ -34,16 +37,6 @@ struct TNORMAL_TAN_BI_T1_VERTEX {
 	float2 	UV 			: TEXCOORD0;
 };
 
-struct TNORMAL_TAN_BI_T1_VERTEX_PS
-{
-    float4 HPosition 		: POSITION;
-    float2 UV 				: TEXCOORD0;
-    float3 Normal 			: TEXCOORD1;
-	float4 WorldPosition 	: TEXCOORD2;
-	float4 WorldTangent		: TEXCOORD3;
-    float4 WorldBinormal 	: TEXCOORD4;
-};
-
 struct TNORMAL_T2_DIFF_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
@@ -76,15 +69,6 @@ struct TNORMAL_T1_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;
 	float2 	UV 			: TEXCOORD0;
-};
-
-struct TNORMAL_T1_VERTEX_PS
-{
-    float4 HPosition 		: POSITION;
-	float3 Normal 			: NORMAL;
-	float2 UV 				: TEXCOORD0;
-	float4 WorldPosition 	: TEXCOORD1;
-	float3 WorldNormal 		: TEXCOORD2;
 };
 
 struct TT2_DIFF_VERTEX {
@@ -134,3 +118,32 @@ struct TMultiRenderTargetPixel
 	float4 Normal   : COLOR2; //Normal (float3) + (float) Not used
 	float4 Depth    : COLOR3; //Depth (float4)
 };
+
+struct TNORMAL_TAN_BI_T1_VERTEX_PS
+{
+    float4 HPosition 		: POSITION;
+	float3 Normal 			: NORMAL;
+    float2 UV 				: TEXCOORD0;
+	float4 WorldPosition 	: TEXCOORD1;
+	float4 WorldTangent		: TEXCOORD2;
+    float4 WorldBinormal 	: TEXCOORD3;
+};
+
+struct TNORMAL_T1_VERTEX_PS
+{
+    float4 HPosition 		: POSITION;
+	float3 Normal 			: NORMAL;
+	float2 UV 				: TEXCOORD0;
+	float4 WorldPosition 	: TEXCOORD1;
+	float3 WorldNormal 		: TEXCOORD2;
+};
+
+struct TNORMAL_T2_VERTEX_PS {
+    float4 HPosition 		: POSITION;
+	float3 Normal 			: NORMAL;
+    float2 UV 				: TEXCOORD0;
+	float2 UV2 				: TEXCOORD1;
+	float3 WorldPosition 	: TEXCOORD2;
+};
+
+#endif // !defined( VERTEX_TYPES_FXH )
