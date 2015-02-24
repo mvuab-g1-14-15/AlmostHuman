@@ -26,6 +26,11 @@
 		<default_technique vertex_type="1104" technique="BlurTechnique"/>
 	</pool_renderable_object_technique>
 	
+	<pool_renderable_object_technique name="Gaussian_blur_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="GaussianBlur"/>
+	</pool_renderable_object_technique>
+	
+	
 	<pool_renderable_object_technique name="FOG_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="FOGTechnique"/>
 	</pool_renderable_object_technique>
