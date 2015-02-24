@@ -6,7 +6,7 @@
 #include "Lights/LightManager.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/SpotLight.h"
-#include <sstream>
+#include "Utils/BaseUtils.h"
 
 CEffect::CEffect()
   : m_FileName( "" ),
@@ -137,31 +137,24 @@ void CEffect::GetParameterBySemantic( const char* SemanticName,
 
 bool CEffect::LoadEffect()
 {
-  // Setup the defines for compiling the effect
-  std::stringstream s;
   std::vector<D3DXMACRO> defines;
+  std::vector<std::string>::iterator itb( m_MacrosVector.begin() ) , ite( m_MacrosVector.end() );
 
-  if ( m_UseNormal )
+  // Used to avoid memory leaks
+  std::vector<char*> v_char;
+
+  for ( ; itb != ite; ++itb )
   {
-    D3DXMACRO l_NormalMapMacro = { "USE_NORMAL", ""};
-    defines.push_back( l_NormalMapMacro );
+    char* cstr = new char[( *itb ).length() + 1];
+    strcpy( cstr, ( *itb ).c_str() );
+    D3DXMACRO l_NewMacro = {cstr, ""};
+    defines.push_back( l_NewMacro );
+    v_char.push_back( cstr );
   }
 
-  if ( m_UseReflection )
-  {
-    D3DXMACRO l_ReflectionMacro = { "USE_REFLECTION", ""};
-    defines.push_back( l_ReflectionMacro );
-  }
-
-  if ( m_UseSelfIlum )
-  {
-    D3DXMACRO l_ReflectionMacro = { "USE_SELF_ILUM", ""};
-    defines.push_back( l_ReflectionMacro );
-  }
-
-  // Define a null macro in order to say the shader that the macro is finished
   D3DXMACRO null = { NULL, NULL };
   defines.push_back( null );
+
   // Obtain the device from the graphics manager and load the effect
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   DWORD dwShaderFlags = 0;
@@ -177,6 +170,14 @@ bool CEffect::LoadEffect()
                    &m_Effect,
                    &l_ErrorBuffer );
   //assert( l_HR == S_OK );
+
+  // Free the macros
+  std::vector<char*>::iterator itb_macro( v_char.begin() ), ite_macros( v_char.end() );
+
+  for ( ; itb_macro != ite_macros; ++itb_macro )
+    delete []( *itb_macro );
+
+  defines.clear();
 
   if ( l_ErrorBuffer )
   {
@@ -231,16 +232,16 @@ void CEffect::Unload()
   SetNullParameters();
   CHECKED_RELEASE( m_Effect );
 }
-bool CEffect::Load( const std::string& FileName )
+
+bool CEffect::Load( CXMLTreeNode& EffectNode )
 {
-  m_FileName = FileName;
+  m_FileName = EffectNode.GetPszProperty( "file", "no_file" );
+  std::string l_MacrosStr = EffectNode.GetPszProperty( "macros", "" );
+  m_MacrosVector = baseUtils::split( l_MacrosStr, ':' );
+
   return LoadEffect();
 }
-bool CEffect::Reload()
-{
-  Unload();
-  return Load( m_FileName );
-}
+
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
 {
   return ( m_Effect ) ? m_Effect->GetTechniqueByName( TechniqueName.c_str() ) : 0;

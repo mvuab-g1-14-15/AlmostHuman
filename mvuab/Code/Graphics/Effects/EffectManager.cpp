@@ -151,11 +151,8 @@ void CEffectManager::Load( const std::string& FileName )
     {
       const std::string& l_EffectName = l_CurrentNode.GetPszProperty( "name" );
       CEffect* l_pEffect = new CEffect( l_EffectName );
-      l_pEffect->SetUseNormal( l_CurrentNode.GetBoolProperty( "normal", false ) );
-      l_pEffect->SetUseReflection( l_CurrentNode.GetBoolProperty( "reflection", false ) );
-      l_pEffect->SetUseSelfIlum( l_CurrentNode.GetBoolProperty( "self_ilum", false ) );
 
-      if ( !l_pEffect->Load( l_CurrentNode.GetPszProperty( "file" ) ) )
+      if ( !l_pEffect->Load( l_CurrentNode ) )
       {
         std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
         CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );

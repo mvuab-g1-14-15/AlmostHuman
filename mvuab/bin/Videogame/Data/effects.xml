@@ -53,10 +53,10 @@
 	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
 	<technique name="GenerateGBufferDebugTechnique" effect="GenerateGBufferDebug" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
-	<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx" normal="true"/>
+	<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx" macros="USE_NORMAL"/>
 	<technique name="GenerateGBufferNormalTechnique" effect="GenerateGBufferNormal" use_world_matrix="true" use_world_view_projection_matrix="true"/>
-	<effect name="GenerateGBufferSelfIllum" file="data/effects/GenerateGBuffer.fx" self_ilum="true"/>
+	<effect name="GenerateGBufferSelfIllum" file="data/effects/GenerateGBuffer.fx" macros="USE_SELF_ILUM"/>
 	<technique name="GenerateGBufferSelfIllumTechnique" effect="GenerateGBufferSelfIllum" use_world_matrix="true" use_world_view_projection_matrix="true"/>
-	<effect name="GenerateGBufferSelfIllumNormal" file="data/effects/GenerateGBuffer.fx" self_ilum="true" normal="true"/>
+	<effect name="GenerateGBufferSelfIllumNormal" file="data/effects/GenerateGBuffer.fx" macros="USE_SELF_ILUM:USE_NORMAL"/>
 	<technique name="GenerateGBufferSelfIllumNormalTechnique" effect="GenerateGBufferSelfIllumNormal" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 </effects>

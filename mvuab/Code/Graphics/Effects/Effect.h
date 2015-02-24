@@ -9,6 +9,7 @@
 #include "Effects\Defines.h"
 #include "Utils\Name.h"
 #include "Utils\Defines.h"
+#include "XML\XMLTreeNode.h"
 
 class CLight;
 
@@ -32,8 +33,8 @@ public:
   bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-  bool Load( const std::string& FileName );
-  bool Reload();
+  bool Load( CXMLTreeNode& EffectNode );
+
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
 
@@ -125,31 +126,7 @@ public:
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap,
                                bool UseDynamicShadowmap );
 
-  bool UseNormal() const
-  {
-    return m_UseNormal;
-  }
-  void SetUseNormal( bool val )
-  {
-    m_UseNormal = val;
-  }
 
-  bool UseReflection() const
-  {
-    return m_UseReflection;
-  }
-  void SetUseReflection( bool val )
-  {
-    m_UseReflection = val;
-  }
-  bool UseSelfIlum() const
-  {
-    return m_UseSelfIlum;
-  }
-  void SetUseSelfIlum( bool val )
-  {
-    m_UseSelfIlum = val;
-  }
 
 private: // Members
   std::string m_FileName;
@@ -204,9 +181,7 @@ private: // Members
   D3DXHANDLE m_Offsets;
 
   // Flags to compile the shader
-  bool     m_UseNormal;
-  bool     m_UseReflection;
-  bool     m_UseSelfIlum;
+  std::vector<std::string> m_MacrosVector;
 
   /*
   SceneTextureParameter );
