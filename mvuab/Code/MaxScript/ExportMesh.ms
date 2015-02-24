@@ -63,14 +63,6 @@ struct SMaterial
 				-- Load the texture 1
 				local l_Texture1FileName = mat.diffuseMap.filename
 				m_Texture1.FromMaxTexture l_Texture1FileName
-
-				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
-				(
-					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
-					-- Load the texture 2
-					local l_Texture2FileName = mat.selfIllumMap.filename
-					m_Texture2.FromMaxTexture l_Texture2FileName
-				)
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -78,6 +70,14 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureBumpMappingFileName = mat.bumpMap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+				)
+				
+				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
+				(
+					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
+					-- Load the texture 2
+					local l_Texture2FileName = mat.selfIllumMap.filename
+					m_Texture2.FromMaxTexture l_Texture2FileName
 				)
 				
 				if mat.reflectionMapEnable == true AND classOf(mat.reflectionMap) == BitmapTexture then

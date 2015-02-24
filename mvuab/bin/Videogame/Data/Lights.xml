@@ -1,11 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
   <light type="omni" name="Spot001" pos="0.0 0.0 0.0" color="255.0 255.0 255.0" att_start_range="10.0" att_end_range="20.0" dir="0.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot002" pos="-40.0 6.0 0.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot003" pos="0.0 6.0 40.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="0.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot004" pos="0.0 6.0 -40.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="-1.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot005" pos="0.0 6.0 -20.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="-1.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot006" pos="10.0 6.0 -10.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="-1.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot007" pos="-20.0 6.0 -20.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="-1.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
-  <light type="omni" name="Spot008" pos="-40.0 6.0 -20.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="-1.0 -1.0 0.0" angle="10.0" fall_off="15.0" render_shadows="false" />
 </lights>

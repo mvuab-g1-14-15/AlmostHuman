@@ -155,7 +155,7 @@ bool CStaticMesh::Load( const std::string& FileName )
     else if ( l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType() )
     {
       CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
-                                l_TypeSize, 0, 12, 24, 36, 48 );
+                                l_TypeSize, 0, 12, 28, 44, 60 );
       l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>( CGraphicsManager::GetSingletonPtr(),
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
     }

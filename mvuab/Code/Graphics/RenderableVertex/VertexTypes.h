@@ -148,7 +148,7 @@ struct TNORMAL_TAN_BI_DIFF_VERTEX
 struct TNORMAL_TAN_BI_T2_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tanx, tany, tanz, tanw;
   float bx, by, bz, bw;
   float tu, tv;

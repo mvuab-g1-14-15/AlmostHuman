@@ -54,6 +54,7 @@ struct SVertex
 			WriteFloat file m_Normal.x
 			WriteFloat file m_Normal.z
 			WriteFloat file m_Normal.y
+			WriteFloat file 0
 			
 			if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 			(
@@ -61,11 +62,13 @@ struct SVertex
 				WriteFloat file m_Tan.x
 				WriteFloat file m_Tan.y
 				WriteFloat file m_Tan.z
+				WriteFloat file 0
 				
 				--format "\tBinormal: (%, %, %)\n" m_Binormal.x m_Binormal.y m_Binormal.z
 				WriteFloat file m_Binormal.x
 				WriteFloat file m_Binormal.y
 				WriteFloat file m_Binormal.z
+				WriteFloat file 0
 			)
 			
 			if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
