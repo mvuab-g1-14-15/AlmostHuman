@@ -30,6 +30,8 @@ CEffect::CEffect()
     m_CameraPositionParameter( 0 ),
     m_BonesParameter( 0 ),
     m_TimeParameter( 0 ),
+    m_UseDebugColor( 0 ),
+    m_DebugColor( 0 ),
     m_FogStart( 0 ),
     m_FogEnd( 0 ),
     m_FogExp( 0 ),
@@ -41,36 +43,37 @@ CEffect::CEffect()
 }
 
 CEffect::CEffect( const std::string& EffectName )
-  :
-  m_FileName( "" ),
-  m_Effect( 0 ),
-  m_WorldMatrixParameter( 0 ),
-  m_ViewMatrixParameter( 0 ),
-  m_ProjectionMatrixParameter( 0 ),
-  m_WorldViewMatrixParameter( 0 ),
-  m_ViewProjectionMatrixParameter( 0 ),
-  m_WorldViewProjectionMatrixParameter( 0 ),
-  m_ViewToLightProjectionMatrixParameter( 0 ),
-  m_LightEnabledParameter( 0 ),
-  m_LightsTypeParameter( 0 ),
-  m_LightsPositionParameter( 0 ),
-  m_LightsDirectionParameter( 0 ),
-  m_LightsAngleParameter( 0 ),
-  m_LightsColorParameter( 0 ),
-  m_LightsFallOffParameter( 0 ),
-  m_LightsStartRangeAttenuationParameter( 0 ),
-  m_LightsEndRangeAttenuationParameter( 0 ),
-  m_CameraPositionParameter( 0 ),
-  m_BonesParameter( 0 ),
-  m_TimeParameter( 0 ),
-  m_FogStart( 0 ),
-  m_FogEnd( 0 ),
-  m_FogExp( 0 ),
-  m_FogFun( 0 ),
-  m_Weights( 0 ),
-  m_Offsets( 0 )
+  : CName( EffectName ),
+    m_FileName( "" ),
+    m_Effect( 0 ),
+    m_WorldMatrixParameter( 0 ),
+    m_ViewMatrixParameter( 0 ),
+    m_ProjectionMatrixParameter( 0 ),
+    m_WorldViewMatrixParameter( 0 ),
+    m_ViewProjectionMatrixParameter( 0 ),
+    m_WorldViewProjectionMatrixParameter( 0 ),
+    m_ViewToLightProjectionMatrixParameter( 0 ),
+    m_LightEnabledParameter( 0 ),
+    m_LightsTypeParameter( 0 ),
+    m_LightsPositionParameter( 0 ),
+    m_LightsDirectionParameter( 0 ),
+    m_LightsAngleParameter( 0 ),
+    m_LightsColorParameter( 0 ),
+    m_LightsFallOffParameter( 0 ),
+    m_LightsStartRangeAttenuationParameter( 0 ),
+    m_LightsEndRangeAttenuationParameter( 0 ),
+    m_CameraPositionParameter( 0 ),
+    m_BonesParameter( 0 ),
+    m_TimeParameter( 0 ),
+    m_UseDebugColor( 0 ),
+    m_DebugColor( 0 ),
+    m_FogStart( 0 ),
+    m_FogEnd( 0 ),
+    m_FogExp( 0 ),
+    m_FogFun( 0 ),
+    m_Weights( 0 ),
+    m_Offsets( 0 )
 {
-  SetName( EffectName );
   ResetLightsHandle();
 }
 
@@ -213,6 +216,7 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
   GetParameterBySemantic( TimeParameterStr, m_TimeParameter );
   GetParameterBySemantic( DebugColorStr, m_DebugColor );
+  GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );
   GetParameterBySemantic( FogStartStr, m_FogStart );
   GetParameterBySemantic( FogEndStr, m_FogEnd );
   GetParameterBySemantic( FogExpStr, m_FogExp );

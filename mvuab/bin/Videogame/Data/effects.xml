@@ -51,6 +51,8 @@
 	<!-- Effects of GenerateGBuffer -->
 	<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
 	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
+	<technique name="GenerateGBufferDebugTechnique" effect="GenerateGBufferDebug" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
 	<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx" normal="true"/>
 	<technique name="GenerateGBufferNormalTechnique" effect="GenerateGBufferNormal" use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	

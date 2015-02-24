@@ -178,6 +178,7 @@ private: // Members
   D3DXHANDLE m_BonesParameter;
   D3DXHANDLE m_TimeParameter;
   D3DXHANDLE m_DebugColor;
+  D3DXHANDLE m_UseDebugColor;
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;

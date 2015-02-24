@@ -23,7 +23,8 @@ float4x4 g_WorldInverseMatrix 		 								: WorldInverse;
 float4x4 g_WorldViewMatrix 		 								    : WorldView;
 float4x4 g_ViewProjMatrix 		 								    : ViewProjection;
 
-float4 g_DebugColor													: DebugColor;
+bool	g_UseDebugColor												: UseDebugColor;
+float4  g_DebugColor												: DebugColor;
 
 float4x4 	g_ShadowProjectionMatrix								: ShadowProjection;
 float4x4 	g_LightViewMatrix 		 								: LightView;

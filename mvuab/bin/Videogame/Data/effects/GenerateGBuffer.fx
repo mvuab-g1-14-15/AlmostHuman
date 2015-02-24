@@ -26,9 +26,10 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 {
 	TMultiRenderTargetPixel OUT=(TMultiRenderTargetPixel)0;
 	float4 l_DiffuseColor = tex2D(S0LinearSampler,IN.UV);
-	if(l_DiffuseColor.a<0.5)
-		clip(-1);
-
+	
+	if(g_UseDebugColor)
+		l_DiffuseColor = float4(1,0,0,0);
+		
 	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
 
 #if defined( USE_SELF_ILUM )

@@ -16,6 +16,7 @@
 	<enable_z_test/>
 	<set_matrices/>
 	<render_scene layer="solid" active="true"/>
+	<render_debug_lights render="true"/>
 	<unset_render_target render_target="deferred_multiple_render_target"/>
 	
 	<!--
@@ -48,7 +49,7 @@
 		<texture stage_id="0" name="ActualFrameBuffer"/>
 	</render_draw_quad> -->
 	
-	<!-- FILTER BLOOM -->
+	<!-- FILTER BLOOM 
 	<set_render_target name="GenerateBrightPassRenderTarget">
 		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
      </set_render_target>
@@ -56,9 +57,9 @@
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="ActualFrameBuffer"/>
 	</render_draw_quad>
-	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
+	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>-->
 	
-	<!-- GAUSSIAN BLUR BLOOM -->
+	<!-- GAUSSIAN BLUR BLOOM
 	<set_render_target name="GenerateGaussianBlurTarget">
 			<dynamic_texture stage_id="0" name="GaussianBlurTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</set_render_target>
@@ -66,14 +67,14 @@
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="FilterBrightTexture"/>
 	</render_draw_quad>
-	<unset_render_target render_target="GenerateGaussianBlurTarget"/>
+	<unset_render_target render_target="GenerateGaussianBlurTarget"/> -->
 	
-	<!--  COMBINE BLOOM -->
+	<!--  COMBINE BLOOM 
     <set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="GaussianBlurTexture"/>
 		<texture stage_id="1" name="ActualFrameBuffer"/>
-	</render_draw_quad>
+	</render_draw_quad> -->
 
 	
 	<!-- FILTER BLOOM -->
@@ -149,6 +150,7 @@
 	</render_draw_quad>-->
 	<!--<disable_alpha_blend/>-->
 	<!--end pre_render-->
+	
 	<end_scene/>
 	<present/>
 </scene_renderer_commands>

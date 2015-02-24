@@ -10,10 +10,13 @@ class CGraphicsManager;
 
 class CRenderDebugLightsSceneRendererCommand : public CSceneRendererCommand
 {
-    public:
-        CRenderDebugLightsSceneRendererCommand(CXMLTreeNode &atts);
-        ~ CRenderDebugLightsSceneRendererCommand();
+public:
+  CRenderDebugLightsSceneRendererCommand( CXMLTreeNode& atts );
+  ~ CRenderDebugLightsSceneRendererCommand();
 
-        void Execute(CGraphicsManager &GM);
+  void Execute( CGraphicsManager& GM );
+private:
+
+  bool m_RenderLights;
 };
 #endif

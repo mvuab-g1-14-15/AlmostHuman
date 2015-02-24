@@ -28,6 +28,7 @@ const char CameraPositionParameterStr[] = "CameraPosition";
 const char BonesParameterStr[] = "Bones";
 const char TimeParameterStr[] = "DeltaTime";
 const char DebugColorStr[] = "DebugColor";
+const char UseDebugColorStr[] = "UseDebugColor";
 
 const char FogStartStr[] = "FogStart";
 const char FogEndStr[] = "FogEnd";
