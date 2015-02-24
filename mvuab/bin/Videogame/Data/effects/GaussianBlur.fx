@@ -29,7 +29,7 @@ float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
 	
 	for (int i = 0; i < MAX_STEPS; i++)
 	{
-		offset[i] = GaussianValue(texCoord, 6.0);
+		offset[i] = GaussianValue(texCoord, 4.0);
 		weight[i] = GaussianValue(texCoord, 3.0);
 	}
 	
