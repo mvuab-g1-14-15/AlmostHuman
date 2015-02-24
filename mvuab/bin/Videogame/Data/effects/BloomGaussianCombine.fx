@@ -3,8 +3,8 @@
 #include "globals.fxh"
 
 // Shader parameters
-float Threshold = 0.15;				// Get the threshold of what brightness level we want to glow
-float BloomIntensity = 1.5;			// Controls the Intensity of the bloom texture
+float Threshold = 0.7;				// Get the threshold of what brightness level we want to glow
+float BloomIntensity = 0.5;			// Controls the Intensity of the bloom texture
 float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
 float BloomSaturation = 0.5	;		// Saturation amount on bloom
 float OriginalSaturation = 0.9;		// Saturation amount on original texture
@@ -16,7 +16,9 @@ float OriginalSaturation = 0.9;		// Saturation amount on original texture
 float4 FilterBloomPS( in float2 Tex : TEXCOORD0 ) : COLOR0
 {
     float4 Color = tex2D(S0LinearClampSampler, Tex);
-	//return float4(1,0,0,1);
+	if(Color.x > Threshold && Color.y > Threshold && Color.z > Threshold) return Color;
+	else return float4(0.0, 0.0, 0.0, 1.0);
+	
     // Get the bright areas that is brighter than Threshold and return it.
     return saturate((Color - Threshold) / (1 - Threshold));
 }

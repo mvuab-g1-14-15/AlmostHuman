@@ -7,42 +7,26 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-#define MAX_STEPS 10
-#define PI 3.14159265359
-
-float offset[MAX_STEPS];
-float weight[MAX_STEPS];
-
-float GaussianValue(float2 UV, float sigma)
-{
-	float g = (1.0 / (2 * PI * sigma * sigma)) * exp(-((UV.x * UV.x + UV.y * UV.y) / (2 * sigma * sigma)));
-	return g;
-}
 
 //-----------------------------------------------------------------------------
 // Pixel Shaders.
 //-----------------------------------------------------------------------------
 
+float2 l_OffsetTexture=float2(1/800.0, 1/600.0);
+float g_GaussianOffsets[5]={0.0, 1.0, 2.0, 3.0, 4.0};
+float g_GaussianWeights[5]={0.2270270270, 0.1945945946, 0.1216216216, 0.0540540541, 0.0162162162};
+
 float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
 {
-    float3 color = float3(0.0f, 0.0f, 0.0f);
+	float3 color=float3(0,0,0);
 	
-	for (int i = 0; i < MAX_STEPS; i++)
-	{
-		offset[i] = GaussianValue(texCoord, 4.0);
-		weight[i] = GaussianValue(texCoord, 3.0);
-	}
+	color += tex2D(S0LinearClampSampler, texCoord) * 0.204164;
+	color += tex2D(S0LinearClampSampler, texCoord+l_OffsetTexture*1.407333) * 0.304005;
+	color += tex2D(S0LinearClampSampler, texCoord-l_OffsetTexture*1.407333) * 0.304005;
+	color += tex2D(S0LinearClampSampler, texCoord+l_OffsetTexture*3.294215) * 0.093913;
+	color += tex2D(S0LinearClampSampler, texCoord-l_OffsetTexture*3.294215) * 0.093913;
 	
-	for (int i = 0; i < MAX_STEPS; i++)
-	{
-		color += tex2D(S0LinearSampler, texCoord + float2(offset[i], 0.0)).xyz * weight[i];
-		color += tex2D(S0LinearSampler, texCoord - float2(offset[i], 0.0)).xyz * weight[i];
-		
-		color += tex2D(S0LinearSampler, texCoord + float2(0.0, offset[i])).xyz * weight[i];
-		color += tex2D(S0LinearSampler, texCoord - float2(0.0, offset[i])).xyz * weight[i];
-	}
-
-    return float4(color, 1.0);
+	return float4(color, 1.0);
 }
 
 //-----------------------------------------------------------------------------
@@ -53,6 +37,6 @@ technique GaussianBlur
 {
     pass
     {
-        PixelShader = compile ps_2_0 PS_GaussianBlur();
+        PixelShader = compile ps_3_0 PS_GaussianBlur();
     }
 }

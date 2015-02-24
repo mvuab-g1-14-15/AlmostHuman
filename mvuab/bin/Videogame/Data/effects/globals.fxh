@@ -136,4 +136,10 @@ float3 CalcNewNormal(float3 Tn, float3 Bn, float4 Color, float3 Normal)
 	return normalize(l_NewNormal);
 }
 
+float GaussianValue(float2 UV, float sigma)
+{
+	float g = (1.0 / (2 * PI * sigma * sigma)) * exp(-((UV.x * UV.x + UV.y * UV.y) / (2 * sigma * sigma)));
+	return g;
+}
+
 #endif // !defined( GLOBALS_FXH )
