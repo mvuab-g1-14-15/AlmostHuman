@@ -3,35 +3,11 @@
 #include "globals.fxh"
 
 // Shader parameters
-
-float Threshold = 0.15;				// Get the threshold of what brightness level we want to glow
+float Threshold = 0.8;				// Get the threshold of what brightness level we want to glow
 float BloomIntensity = 1.5;			// Controls the Intensity of the bloom texture
 float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
 float BloomSaturation = 0.5	;		// Saturation amount on bloom
 float OriginalSaturation = 0.9;		// Saturation amount on original texture
-
-//-----------------------------------------------------------------------------
-// 								GaussianBlur
-//-----------------------------------------------------------------------------
-float4 GaussianBlur( float2 Tex : TEXCOORD0 ) : COLOR0
-{
-
-    float4 color = (float4)0;
-    
-    float Coefficients[21] = 
-    {0.000272337, 0.00089296, 0.002583865, 0.00659813, 0.014869116,0.029570767, 
-	0.051898313, 0.080381679, 0.109868729, 0.132526984,0.14107424,0.132526984, 
-	0.109868729, 0.080381679, 0.051898313, 0.029570767,0.014869116, 0.00659813, 0.002583865, 0.00089296, 
-	0.000272337};
-    
-	for(int Index = 0; Index < 21; Index++)
-    {
-        color += tex2D(S0LinearClampSampler, float2(Tex.x, Tex.y + (Index - 10))) * Coefficients[Index];
-    }
-    return color;
-
-}
-
 
 //-----------------------------------------------------------------------------
 // 								FilterBloom
@@ -40,7 +16,7 @@ float4 GaussianBlur( float2 Tex : TEXCOORD0 ) : COLOR0
 float4 FilterBloomPS( in float2 Tex : TEXCOORD0 ) : COLOR0
 {
     float4 Color = tex2D(S0LinearClampSampler, Tex);
-	
+	//return float4(1,0,0,1);
     // Get the bright areas that is brighter than Threshold and return it.
     return saturate((Color - Threshold) / (1 - Threshold));
 }
@@ -77,7 +53,6 @@ float4 FinalBloomPS(float2 texCoord : TEXCOORD0) : COLOR0
     return originalColor + bloomColor;
 }
 
-
 technique BloomFilter
 {
     pass p0
@@ -87,17 +62,6 @@ technique BloomFilter
         ZEnable = false;
     }
 }
-
-
-technique GaussianBlurTechnique
-{
-    pass p0
-    {
-        ZEnable = false;
-		PixelShader = compile ps_3_0 GaussianBlur();
-    }
-}
-
 
 technique CombineBloomTechnique
 {

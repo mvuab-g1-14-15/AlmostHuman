@@ -25,6 +25,7 @@
 	<effect name="LensFlareS1Effect" file="data/effects/LensFlareS1.fx"/>
 	<effect name="LensFlareS2Effect" file="data/effects/LensFlareS2.fx"/>
 	<effect name="BloomEffect" file="data/effects/BloomGaussianCombine.fx"/>
+	<effect name="GaussianBlurEffect" file="data/effects/GaussianBlur.fx"/>
 	
 	<technique name="DefaultTechnique" effect="DefaultEffect" use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
@@ -43,10 +44,8 @@
 	<technique name="LensFlareS2Technique" effect="LensFlareS2Effect"/>
 	
 	<technique name="BloomFilter" effect="BloomEffect"/>
-	<technique name="GaussianBlurTechnique" effect="BloomEffect"/>
 	<technique name="CombineBloomTechnique" effect="BloomEffect"/>
 	
-	<effect name="GaussianBlurEffect" file="data/effects/GaussianBlur.fx"/>
 	<technique name="GaussianBlur" effect="GaussianBlurEffect"/>
 	
 	<!-- Effects of GenerateGBuffer -->
