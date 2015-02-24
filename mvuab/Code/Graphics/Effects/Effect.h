@@ -79,6 +79,8 @@ public:
   GET_SET( D3DXHANDLE, FogEnd );
   GET_SET( D3DXHANDLE, FogExp );
   GET_SET( D3DXHANDLE, FogFun );
+  GET_SET( D3DXHANDLE, Weights );
+  GET_SET( D3DXHANDLE, Offsets );
 
   GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
@@ -196,6 +198,9 @@ private: // Members
   D3DXHANDLE m_FogEnd;
   D3DXHANDLE m_FogExp;
   D3DXHANDLE m_FogFun;
+  //Weights & Offsets
+  D3DXHANDLE m_Weights;
+  D3DXHANDLE m_Offsets;
 
   // Flags to compile the shader
   bool     m_UseNormal;

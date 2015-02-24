@@ -35,6 +35,18 @@
         return m_##PARAMETER_NAME; \
     }
 
+#define GET_SET_ARRAY(TYPE, PARAMETER_NAME, SIZE) \
+  void Set##PARAMETER_NAME(TYPE PARAMETER_NAME##[]) \
+    { \
+      for (int i = 0; i < SIZE; ++i)\
+      {\
+        m_##PARAMETER_NAME##[i] = PARAMETER_NAME##[i];\
+      }\
+    } \
+    TYPE##* Get##PARAMETER_NAME() \
+    { \
+        return m_##PARAMETER_NAME; \
+    }
 #define DIRECTINPUT_VERSION     0x0800
 
 #define CHECKED_DELETE(x)       if(x != NULL){ delete x; x = NULL; }

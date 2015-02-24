@@ -57,6 +57,9 @@ float 		g_FogEnd											: FogEnd;
 float 		g_FodExp											: FogExp;
 int 		g_FogFun											: FogFun;
 
+float		g_Weight[5]											: Weight;
+float		g_Offset[5]											: Offset;
+
 // Functions
 
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
