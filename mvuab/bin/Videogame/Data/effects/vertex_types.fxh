@@ -146,4 +146,36 @@ struct TNORMAL_T2_VERTEX_PS {
 	float3 WorldPosition 	: TEXCOORD2;
 };
 
+struct UBER_VERTEX_VS {
+	float3 	Position	: POSITION;
+    float3 	Normal 		: NORMAL;
+	float2 	UV 			: TEXCOORD0;
+#if defined( USE_NORMAL )
+	float3 	Tangent 	: TANGENT0;
+    float3 	Binormal 	: BINORMAL0;
+#endif
+#if defined( USE_SELF_ILUM )
+	float2 UV2 		    : TEXCOORD1;
+#endif
+};
+
+struct UBER_VERTEX_PS
+{
+    float4 HPosition 		: POSITION;
+	float3 Normal 			: NORMAL;
+	float2 UV 				: TEXCOORD0;
+	float4 WorldPosition 	: TEXCOORD1;
+	float3 WorldNormal 		: TEXCOORD2;
+	
+#if defined( USE_NORMAL )
+	float4 WorldTangent		: TEXCOORD3;
+    float4 WorldBinormal 	: TEXCOORD4;
+	#if defined( USE_SELF_ILUM )
+		float2 UV2 				: TEXCOORD5;
+	#endif
+#elif defined( USE_SELF_ILUM )
+	float2 UV2 				: TEXCOORD3;
+#endif 
+};
+
 #endif // !defined( VERTEX_TYPES_FXH )

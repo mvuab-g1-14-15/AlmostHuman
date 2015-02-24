@@ -1,3 +1,6 @@
+#if !defined( SAMPLERS_FXH )
+#define SAMPLERS_FXH 
+
 sampler S0PointSampler : register (s0)=sampler_state
 { 
 	MipFilter = POINT; 
@@ -324,3 +327,4 @@ sampler ShadowMapTextureDynamicSampler : register( s6 ) = sampler_state
 	AddressU = Clamp;
 	AddressV = Clamp;
 };
+#endif // !defined( SAMPLERS_FXH )
