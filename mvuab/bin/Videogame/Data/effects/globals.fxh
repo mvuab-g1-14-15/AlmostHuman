@@ -61,6 +61,9 @@ int 		g_FogFun											: FogFun;
 float		g_Weight[5]											: Weight;
 float		g_Offset[5]											: Offset;
 
+int			g_TextureWidth										: TextureWidth;
+int			g_TextureHeight										: TextureHeight;
+
 // Functions
 
 float DistanceAttenuation( int i, float3 LightToPixelDirection )

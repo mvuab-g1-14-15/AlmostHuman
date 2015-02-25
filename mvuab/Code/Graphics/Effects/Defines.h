@@ -35,7 +35,8 @@ const char FogEndStr[] = "FogEnd";
 
 const char FogExpStr[] = "FogExp";
 const char FogFunStr[] = "FogFun";
-const char WeightsStr[] = "Weight";
-const char OffsetsStr[] = "Offset";
+
+const char TextureWidthStr[] = "TextureWidth";
+const char TextureHeightStr[] = "TextureHeight";
 
 #endif //EFFECTS_DEFINES_H

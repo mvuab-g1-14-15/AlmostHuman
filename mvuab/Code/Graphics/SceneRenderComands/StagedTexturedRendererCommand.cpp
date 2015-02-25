@@ -24,13 +24,21 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& att
         std::string l_Name = atts( i ).GetPszProperty( "name", "" );
 
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-        bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", true );
+        bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
+		
+		uint32 l_Width, l_Height;
+		if(!l_WidthAsFB)
+		{
+			l_Width = atts( i ).GetIntProperty("width", 0);
+			l_Height = atts( i ).GetIntProperty("height", 0);
+		}
+		else
+		{
+			gm->GetWidthAndHeight( l_Width, l_Height );
+		}
 
         std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
         CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 : ( CTexture::TFormatType )0;
-
-        uint32 l_Width, l_Height;
-        gm->GetWidthAndHeight( l_Width, l_Height );
 
         CTexture* l_Texture = new CTexture();
         l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT, l_iFormatType );

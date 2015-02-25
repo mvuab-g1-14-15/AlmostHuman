@@ -37,8 +37,8 @@ CEffect::CEffect()
     m_FogEnd( 0 ),
     m_FogExp( 0 ),
     m_FogFun( 0 ),
-    m_Weights( 0 ),
-    m_Offsets( 0 )
+	m_HeightTexture( 0 ),
+	m_WidthTexture( 0 )
 {
   ResetLightsHandle();
 }
@@ -72,8 +72,8 @@ CEffect::CEffect( const std::string& EffectName )
     m_FogEnd( 0 ),
     m_FogExp( 0 ),
     m_FogFun( 0 ),
-    m_Weights( 0 ),
-    m_Offsets( 0 )
+	m_HeightTexture( 0 ),
+	m_WidthTexture( 0 )
 {
   ResetLightsHandle();
 }
@@ -121,8 +121,8 @@ void CEffect::SetNullParameters()
   m_FogEnd = 0;
   m_FogExp = 0;
   m_FogFun = 0;
-  m_Weights = 0;
-  m_Offsets = 0;
+  m_HeightTexture = 0;
+  m_WidthTexture = 0;
   ResetLightsHandle();
 }
 
@@ -209,8 +209,8 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( FogEndStr, m_FogEnd );
   GetParameterBySemantic( FogExpStr, m_FogExp );
   GetParameterBySemantic( FogFunStr, m_FogFun );
-  GetParameterBySemantic( WeightsStr, m_Weights );
-  GetParameterBySemantic( OffsetsStr, m_Offsets );
+  GetParameterBySemantic( TextureHeightStr, m_HeightTexture);
+  GetParameterBySemantic( TextureWidthStr, m_WidthTexture );
   return true;
 }
 

@@ -65,11 +65,6 @@
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
 	
-	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
-		<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
-	</technique>
-	
 	<technique name="GenerateGBufferNormalTechnique" vertex_type="31">
 		<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx">
 			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>

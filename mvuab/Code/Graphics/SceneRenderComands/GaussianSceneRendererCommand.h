@@ -11,6 +11,7 @@ class CGraphicsManager;
 class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 {
 private:
+	std::string m_NameTechnique;
   int    m_nIteration;
   uint32 m_Width;
   uint32 m_Height;
