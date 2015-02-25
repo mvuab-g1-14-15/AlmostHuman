@@ -172,6 +172,7 @@ bool CEffect::LoadEffect()
                                            "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(),
                                            l_ErrorBuffer->GetBufferPointer() );
     CHECKED_RELEASE( l_ErrorBuffer );
+	assert(false);
     return false;
   }
 

@@ -23,6 +23,11 @@
 		<effect name="BlurEffect" file="data/effects/Blur.fx"/>
 		<handles/>
 	</technique>
+	
+	<technique name="SobelTechnique" vertex_type="1104">
+		<effect name="SobelEffect" file="data/effects/Sobel.fx"/>
+		<handles/>
+	</technique>
 
 	<technique name="FOGTechnique" vertex_type="1104">
 		<effect name="FOGEffect" file="data/effects/FOG.fx"/>
