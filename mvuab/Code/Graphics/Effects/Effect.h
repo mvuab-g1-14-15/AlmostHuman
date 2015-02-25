@@ -126,8 +126,6 @@ public:
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap,
                                bool UseDynamicShadowmap );
 
-
-
 private: // Members
   std::string m_FileName;
   LPD3DXEFFECT m_Effect;
@@ -180,8 +178,12 @@ private: // Members
   D3DXHANDLE m_Weights;
   D3DXHANDLE m_Offsets;
 
-  // Flags to compile the shader
-  std::vector<std::string> m_MacrosVector;
+  // To avoid memory leaks
+  std::vector<char*> m_NamesMacrosChar;
+  std::vector<char*> m_DescriptionsMacrosChar;
+
+  // The macros to compile the effect
+  std::vector<D3DXMACRO> m_Defines;
 
   /*
   SceneTextureParameter );

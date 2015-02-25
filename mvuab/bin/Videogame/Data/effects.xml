@@ -1,62 +1,98 @@
 <effects>
-	<default_technique vertex_type="19" technique="GenerateGBufferTechnique"/>
-	<default_technique vertex_type="31" technique="GenerateGBufferNormalTechnique"/>
-	<default_technique vertex_type="51" technique="MultiLightsLightMapTechnique"/>
-	<default_technique vertex_type="63" technique="MultiLightsNormalsLightMapTechnique"/>
-	<default_technique vertex_type="233" technique="DefaultTechnique"/>
-	<default_technique vertex_type="415" technique="Cal3DTechnique"/>
-	<default_technique vertex_type="531" technique="CubeReflectionTechnique"/>
-	<!--<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>-->
-	<default_technique vertex_type="1104" technique="BloomFilter"/>
-		
-	<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
-	<effect name="Cal3DEffect" file="data/effects/Cal3D.fx"/>
-	<effect name="MultiLightsEffect" file="data/effects/MultiLights.fx"/>
-	<effect name="MultiLightsNormalEffect" file="data/effects/MultiLightsNormals.fx"/>
-	<effect name="MultiLightsNormalsLightMapEffect" file="data/effects/MultiLightsNormalsLightMap.fx"/>
-	<effect name="CubeReflectionEffect" file="data/effects/CubeReflection.fx"/>
-	<effect name="MultiLightsLightMapEffect" file="data/effects/MultiLightsLightMap.fx"/>
-	<effect name="DrawQuad" file="data/effects/DrawQuad.fx"/>
-	<effect name="RenderDeferredEffect" file="data/effects/RenderDeferred.fx"/>
-	<effect name="InitRenderDeferredEffect" file="data/effects/InitRenderDeferred.fx"/>
-	<effect name="VignettingEffect" file="data/effects/Vignetting.fx"/>
-	<effect name="BlurEffect" file="data/effects/Blur.fx"/>
-	<effect name="FOGEffect" file="data/effects/FOG.fx"/>
-	<effect name="LensFlareS1Effect" file="data/effects/LensFlareS1.fx"/>
-	<effect name="LensFlareS2Effect" file="data/effects/LensFlareS2.fx"/>
-	<effect name="BloomEffect" file="data/effects/BloomGaussianCombine.fx"/>
-	<effect name="GaussianBlurEffect" file="data/effects/GaussianBlur.fx"/>
+	<technique name="DrawQuadSampler0Technique" vertex_type="1104">
+		<effect name="DrawQuad" file="data/effects/DrawQuad.fx"/>
+		<handles/>
+	</technique>
+
+	<technique name="RenderDeferredTechnique" vertex_type="1104">
+		<effect name="RenderDeferredEffect" file="data/effects/RenderDeferred.fx"/>
+		<handles use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1"/>
+	</technique>
 	
-	<technique name="DefaultTechnique" effect="DefaultEffect" use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="Cal3DTechnique" effect="Cal3DEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
-	<technique name="MultiLightsTechnique" effect="MultiLightsEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="MultiLightsNormalTechnique" effect="MultiLightsNormalEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="MultiLightsNormalsLightMapTechnique" effect="MultiLightsNormalsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="CubeReflectionTechnique" effect="CubeReflectionEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="MultiLightsLightMapTechnique" effect="MultiLightsLightMapEffect" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
-	<technique name="DrawQuadSampler0Technique" effect="DrawQuad"/>
-	<technique name="RenderDeferredTechnique" effect="RenderDeferredEffect" use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1"/>
-	<technique name="InitRenderDeferredTechnique" effect="InitRenderDeferredEffect"/>
-	<technique name="VignettingTechnique" effect="VignettingEffect"/>
-	<technique name="BlurTechnique" effect="BlurEffect"/>
-	<technique name="FOGTechnique" effect="FOGEffect" use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
-	<technique name="LensFlareS1Technique" effect="LensFlareS1Effect" use_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
-	<technique name="LensFlareS2Technique" effect="LensFlareS2Effect"/>
+	<technique name="InitRenderDeferredTechnique" vertex_type="1104">
+		<effect name="InitRenderDeferredEffect" file="data/effects/InitRenderDeferred.fx"/>
+		<handles/>
+	</technique>
 	
-	<technique name="BloomFilter" effect="BloomEffect"/>
-	<technique name="CombineBloomTechnique" effect="BloomEffect"/>
+	<technique name="VignettingTechnique" vertex_type="1104">
+		<effect name="VignettingEffect" file="data/effects/Vignetting.fx"/>
+		<handles/>
+	</technique>
 	
-	<technique name="GaussianBlur" effect="GaussianBlurEffect"/>
+	<technique name="BlurTechnique" vertex_type="1104">
+		<effect name="BlurEffect" file="data/effects/Blur.fx"/>
+		<handles/>
+	</technique>
+
+	<technique name="FOGTechnique" vertex_type="1104">
+		<effect name="FOGEffect" file="data/effects/FOG.fx"/>
+		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
+	</technique>
 	
+	<technique name="LensFlareS1Technique" vertex_type="1104">
+		<effect name="LensFlareS1Effect" file="data/effects/LensFlareS1.fx"/>
+		<handles use_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
+	</technique>
+	
+	<technique name="LensFlareS2Technique" vertex_type="1104">
+		<effect name="LensFlareS2Effect" file="data/effects/LensFlareS2.fx"/>
+		<handles/>
+	</technique>
+	
+	<technique name="BloomFilter" vertex_type="1104">
+		<effect name="BloomEffect" file="data/effects/BloomGaussianCombine.fx"/>
+		<handles/>
+	</technique>
+	
+	<technique name="CombineBloomTechnique" vertex_type="1104">
+		<effect name="BloomEffect" file="data/effects/BloomGaussianCombine.fx"/>
+		<handles/>
+	</technique>
+	
+	<technique name="GaussianBlur" vertex_type="1104">
+		<effect name="GaussianBlurEffect" file="data/effects/GaussianBlur.fx"/>
+		<handles/>
+	</technique>
+
 	<!-- Effects of GenerateGBuffer -->
-	<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
-	<technique name="GenerateGBufferTechnique" effect="GenerateGBuffer" use_world_matrix="true" use_world_view_projection_matrix="true"/>
-	<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
-	<technique name="GenerateGBufferDebugTechnique" effect="GenerateGBufferDebug" use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true"/>
-	<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx" macros="USE_NORMAL"/>
-	<technique name="GenerateGBufferNormalTechnique" effect="GenerateGBufferNormal" use_world_matrix="true" use_world_view_projection_matrix="true"/>
-	<effect name="GenerateGBufferSelfIllum" file="data/effects/GenerateGBuffer.fx" macros="USE_SELF_ILUM"/>
-	<technique name="GenerateGBufferSelfIllumTechnique" effect="GenerateGBufferSelfIllum" use_world_matrix="true" use_world_view_projection_matrix="true"/>
-	<effect name="GenerateGBufferSelfIllumNormal" file="data/effects/GenerateGBuffer.fx" macros="USE_SELF_ILUM:USE_NORMAL"/>
-	<technique name="GenerateGBufferSelfIllumNormalTechnique" effect="GenerateGBufferSelfIllumNormal" use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	<technique name="GenerateGBufferTechnique" vertex_type="19">
+		<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
+	</technique>
+	
+	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
+		<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
+	</technique>
+	
+	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
+		<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
+	</technique>
+	
+	<technique name="GenerateGBufferNormalTechnique" vertex_type="19">
+		<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
+			<define name="USE_SELF_ILUM" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
+	</technique>
+	
+	<technique name="GenerateGBufferSelfIllumTechnique" vertex_type="19">
+		<effect name="GenerateGBufferSelfIllum" file="data/effects/GenerateGBuffer.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
+			<define name="USE_SELF_ILUM" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
+	</technique>
+	
+	<technique name="GenerateGBufferSelfIllumNormalTechnique" vertex_type="19">
+		<effect name="GenerateGBufferSelfIllumNormal" file="data/effects/GenerateGBuffer.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
+			<define name="USE_SELF_ILUM" description=""/>
+			<define name="USE_NORMAL" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
+	</technique>
+	
 </effects>

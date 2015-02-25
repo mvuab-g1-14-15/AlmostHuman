@@ -7,36 +7,37 @@
 #include "Timer\Timer.h"
 #include "Logger\Logger.h"
 
-CEffectTechnique::CEffectTechnique( CXMLTreeNode& node )
-  : m_TechniqueName( node.GetPszProperty( "name", "" ) ),
-    m_EffectName( node.GetPszProperty( "effect", "" ) ),
-    m_UseCameraPosition( node.GetBoolProperty( "use_camera_position", false ) ),
-    m_UseInverseProjMatrix( node.GetBoolProperty( "use_inverse_projection_matrix", false ) ),
-    m_UseInverseViewMatrix( node.GetBoolProperty( "use_inverse_view_matrix", false ) ),
-    m_UseInverseWorldMatrix( node.GetBoolProperty( "use_inverse_world_matrix", false ) ),
-    m_UseLights( node.GetBoolProperty( "use_lights", false ) ),
-    m_UseLightAmbientColor( node.GetBoolProperty( "use_light_ambient_color", false ) ),
-    m_UseProjMatrix( node.GetBoolProperty( "use_projection_matrix", false ) ),
-    m_UseViewMatrix( node.GetBoolProperty( "use_view_matrix", false ) ),
-    m_UseWorldMatrix( node.GetBoolProperty( "use_world_matrix", false ) ),
-    m_UseWorldViewMatrix( node.GetBoolProperty( "use_world_view_matrix", false ) ),
-    m_UseWorldViewProjectionMatrix( node.GetBoolProperty( "use_world_view_projection_matrix", false ) ),
-    m_UseViewProjectionMatrix( node.GetBoolProperty( "use_view_projection_matrix", false ) ),
-    m_UseViewToLightProjectionMatrix( node.GetBoolProperty( "use_view_to_light_projection_matrix",
+CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
+                                    CXMLTreeNode& HandlesNode )
+  : m_TechniqueName( TechniqueName ),
+    m_EffectName( EffectName ),
+    m_UseCameraPosition( HandlesNode.GetBoolProperty( "use_camera_position", false ) ),
+    m_UseInverseProjMatrix( HandlesNode.GetBoolProperty( "use_inverse_projection_matrix", false ) ),
+    m_UseInverseViewMatrix( HandlesNode.GetBoolProperty( "use_inverse_view_matrix", false ) ),
+    m_UseInverseWorldMatrix( HandlesNode.GetBoolProperty( "use_inverse_world_matrix", false ) ),
+    m_UseLights( HandlesNode.GetBoolProperty( "use_lights", false ) ),
+    m_UseLightAmbientColor( HandlesNode.GetBoolProperty( "use_light_ambient_color", false ) ),
+    m_UseProjMatrix( HandlesNode.GetBoolProperty( "use_projection_matrix", false ) ),
+    m_UseViewMatrix( HandlesNode.GetBoolProperty( "use_view_matrix", false ) ),
+    m_UseWorldMatrix( HandlesNode.GetBoolProperty( "use_world_matrix", false ) ),
+    m_UseWorldViewMatrix( HandlesNode.GetBoolProperty( "use_world_view_matrix", false ) ),
+    m_UseWorldViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_world_view_projection_matrix", false ) ),
+    m_UseViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_projection_matrix", false ) ),
+    m_UseViewToLightProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix",
                                       false ) ),
-    m_UseTime( node.GetBoolProperty( "use_time", false ) ),
-    m_UseDebugColor( node.GetBoolProperty( "use_debug_color", false ) ),
-    m_NumOfLights( node.GetIntProperty( "num_of_lights", 0 ) ),
-    m_FogStart( node.GetFloatProperty( "fog_start", 0 ) ),
-    m_FogEnd( node.GetFloatProperty( "fog_end", 0 ) ),
-    m_FogExp( node.GetFloatProperty( "fog_exp", 0 ) ),
-    m_FogFun( node.GetIntProperty( "fog_fun", 1 ) ),
+    m_UseTime( HandlesNode.GetBoolProperty( "use_time", false ) ),
+    m_UseDebugColor( HandlesNode.GetBoolProperty( "use_debug_color", false ) ),
+    m_NumOfLights( HandlesNode.GetIntProperty( "num_of_lights", 0 ) ),
+    m_FogStart( HandlesNode.GetFloatProperty( "fog_start", 0 ) ),
+    m_FogEnd( HandlesNode.GetFloatProperty( "fog_end", 0 ) ),
+    m_FogExp( HandlesNode.GetFloatProperty( "fog_exp", 0 ) ),
+    m_FogFun( HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
     m_DebugColor( Math::colWHITE )
 {
-  Math::Vect3f l_Weight3 = node.GetVect3fProperty( "weight3", Math::Vect3f( 0, 0, 0 ) );
-  Math::Vect2f l_Weight2 = node.GetVect2fProperty( "weight2", Math::Vect2f( 0, 0 ) );
-  Math::Vect3f l_Offset3 = node.GetVect3fProperty( "offset3", Math::Vect3f( 0, 0, 0 ) );
-  Math::Vect2f l_Offset2 = node.GetVect2fProperty( "offset2", Math::Vect2f( 0, 0 ) );
+  Math::Vect3f l_Weight3 = HandlesNode.GetVect3fProperty( "weight3", Math::Vect3f( 0, 0, 0 ) );
+  Math::Vect2f l_Weight2 = HandlesNode.GetVect2fProperty( "weight2", Math::Vect2f( 0, 0 ) );
+  Math::Vect3f l_Offset3 = HandlesNode.GetVect3fProperty( "offset3", Math::Vect3f( 0, 0, 0 ) );
+  Math::Vect2f l_Offset2 = HandlesNode.GetVect2fProperty( "offset2", Math::Vect2f( 0, 0 ) );
   m_Weight[0] = l_Weight3.x;
   m_Weight[1] = l_Weight3.y;
   m_Weight[2] = l_Weight3.z;
