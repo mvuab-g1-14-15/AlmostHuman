@@ -13,8 +13,7 @@ class CEffect;
 class CEffectTechnique
 {
 public:
-  CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
-                    CXMLTreeNode& HandlesNode );
+  CEffectTechnique( CXMLTreeNode& node );
   virtual ~CEffectTechnique();
 
   inline CEffect* GetEffect() const

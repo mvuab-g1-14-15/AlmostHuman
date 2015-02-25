@@ -81,18 +81,6 @@ CEffect::CEffect( const std::string& EffectName )
 CEffect::~CEffect()
 {
   CHECKED_RELEASE( m_Effect );
-
-  for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )
-    delete m_NamesMacrosChar[i];
-
-  m_NamesMacrosChar.clear();
-
-  for ( size_t i = 0; i < m_DescriptionsMacrosChar.size(); ++i )
-    delete m_DescriptionsMacrosChar[i];
-
-  m_DescriptionsMacrosChar.clear();
-
-  m_Defines.clear();
 }
 
 void CEffect::SetNullParameters()
@@ -150,6 +138,24 @@ void CEffect::GetParameterBySemantic( const char* SemanticName,
 
 bool CEffect::LoadEffect()
 {
+  std::vector<D3DXMACRO> defines;
+  std::vector<std::string>::iterator itb( m_MacrosVector.begin() ) , ite( m_MacrosVector.end() );
+
+  // Used to avoid memory leaks
+  std::vector<char*> v_char;
+
+  for ( ; itb != ite; ++itb )
+  {
+    char* cstr = StringUtils::ToCharPtr( *itb );
+    strcpy( cstr, ( *itb ).c_str() );
+    D3DXMACRO l_NewMacro = {cstr, ""};
+    defines.push_back( l_NewMacro );
+    v_char.push_back( cstr );
+  }
+
+  D3DXMACRO null = { NULL, NULL };
+  defines.push_back( null );
+
   // Obtain the device from the graphics manager and load the effect
   LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
   DWORD dwShaderFlags = 0;
@@ -158,13 +164,21 @@ bool CEffect::LoadEffect()
   HRESULT l_HR = D3DXCreateEffectFromFile(
                    l_Device,
                    m_FileName.c_str(),
-                   &m_Defines[0], // [CONST D3DXMACRO* pDefines,] pDefines,
+                   &defines[0], // [CONST D3DXMACRO* pDefines,] pDefines,
                    0, // LPD3DXINCLUDE pInclude,
                    dwShaderFlags,
                    0, // LPD3DXEFFECTPOOL pPool,
                    &m_Effect,
                    &l_ErrorBuffer );
   //assert( l_HR == S_OK );
+
+  // Free the macros
+  std::vector<char*>::iterator itb_macro( v_char.begin() ), ite_macros( v_char.end() );
+
+  for ( ; itb_macro != ite_macros; ++itb_macro )
+    delete []( *itb_macro );
+
+  defines.clear();
 
   if ( l_ErrorBuffer )
   {
@@ -223,25 +237,8 @@ void CEffect::Unload()
 bool CEffect::Load( CXMLTreeNode& EffectNode )
 {
   m_FileName = EffectNode.GetPszProperty( "file", "no_file" );
-
-  for ( int j = 0; j < EffectNode.GetNumChildren(); j++ )
-  {
-    CXMLTreeNode& l_CurrentSubNode = EffectNode( j );
-    const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-    if ( l_TagName == "define" )
-    {
-      char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "name", "no_name" ) );
-      m_NamesMacrosChar.push_back( cstr_name );
-      char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "description", "no_description" ) );
-      m_DescriptionsMacrosChar.push_back( cstr_desc );
-      D3DXMACRO macro = { cstr_name, cstr_desc };
-      m_Defines.push_back( macro );
-    }
-  }
-
-  D3DXMACRO null = { NULL, NULL };
-  m_Defines.push_back( null );
+  std::string l_MacrosStr = EffectNode.GetPszProperty( "macros", "" );
+  m_MacrosVector = StringUtils::Split( l_MacrosStr, ':' );
 
   return LoadEffect();
 }
