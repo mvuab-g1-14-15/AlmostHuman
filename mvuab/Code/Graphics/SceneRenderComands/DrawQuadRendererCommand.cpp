@@ -38,7 +38,6 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
       SCREEN_COLOR_VERTEX::GetVertexType() );
   CRenderableObjectTechnique* l_ROT =
     CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_EffectTechName );
-  l_ROT->GetEffectTechnique();
 
   CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
   uint32 width, height;
