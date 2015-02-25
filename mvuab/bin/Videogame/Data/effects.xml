@@ -70,15 +70,15 @@
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
 	
-	<technique name="GenerateGBufferNormalTechnique" vertex_type="19">
+	<technique name="GenerateGBufferNormalTechnique" vertex_type="31">
 		<effect name="GenerateGBufferNormal" file="data/effects/GenerateGBuffer.fx">
 			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
-			<define name="USE_SELF_ILUM" description=""/>
+			<define name="USE_NORMAL" description=""/>
 		</effect>
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
 	</technique>
 	
-	<technique name="GenerateGBufferSelfIllumTechnique" vertex_type="19">
+	<technique name="GenerateGBufferSelfIllumTechnique" vertex_type="51">
 		<effect name="GenerateGBufferSelfIllum" file="data/effects/GenerateGBuffer.fx">
 			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
 			<define name="USE_SELF_ILUM" description=""/>
@@ -86,7 +86,7 @@
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
 	</technique>
 	
-	<technique name="GenerateGBufferSelfIllumNormalTechnique" vertex_type="19">
+	<technique name="GenerateGBufferSelfIllumNormalTechnique" vertex_type="63">
 		<effect name="GenerateGBufferSelfIllumNormal" file="data/effects/GenerateGBuffer.fx">
 			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
 			<define name="USE_SELF_ILUM" description=""/>

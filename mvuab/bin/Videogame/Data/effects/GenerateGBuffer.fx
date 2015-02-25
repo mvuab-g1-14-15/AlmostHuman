@@ -33,19 +33,20 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
 	
 #if defined( USE_SELF_ILUM )
-	#if defined( USE_NORMAL )
-		l_DiffuseColor = l_DiffuseColor*tex2D(S2LinearSampler, IN.UV2);
-	#else
-		l_DiffuseColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
-	#endif
+	l_DiffuseColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
 #endif
 
 	OUT.Ambient=float4(l_DiffuseColor.xyz*g_AmbientLight, g_SpecularExponent );
 
 #if defined( USE_NORMAL )
+	#if defined( USE_SELF_ILUM )
+		float4 l_TexNormal = tex2D(S2LinearSampler,IN.UV);
+	#else
+		float4 l_TexNormal = tex2D(S1LinearSampler,IN.UV);
+	#endif
 	float3 l_Normal = CalcNewNormal( normalize(IN.WorldTangent), 
 									 normalize(IN.WorldBinormal),
-									 tex2D(S1LinearSampler,IN.UV),
+									 l_TexNormal,
 									 normalize(IN.Normal));
 #else
 	float3 l_Normal = normalize(IN.Normal);
@@ -57,17 +58,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	return OUT;
 }
 
-#if defined( USE_NORMAL )
-	#if defined( USE_SELF_ILUM )
-	technique GenerateGBufferSelfIllumNormalTechnique
-	#else
-	technique GenerateGBufferNormalTechnique
-	#endif
-#elif defined( USE_SELF_ILUM )
-technique GenerateGBufferSelfIlumTechnique
-#else
-technique GenerateGBufferTechnique
-#endif
+technique TECHNIQUE_NAME
 {
 	pass p0
 	{
