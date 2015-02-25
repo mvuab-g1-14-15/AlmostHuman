@@ -75,6 +75,7 @@
     <ClInclude Include="Utils\MapManager.h" />
     <ClInclude Include="Utils\Name.h" />
     <ClInclude Include="Utils\SingletonPattern.h" />
+    <ClInclude Include="Utils\StringUtils.h" />
     <ClInclude Include="Utils\TemplatedVectorMapManager.h" />
     <ClInclude Include="Utils\Types.h" />
     <ClInclude Include="Utils\Visible.h" />

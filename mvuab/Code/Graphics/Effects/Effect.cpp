@@ -1,12 +1,13 @@
 #include "Effect.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
-#include "Logger\Logger.h"
 #include "GraphicsManager.h"
-#include "Lights/LightManager.h"
 #include "Lights/DirectionalLight.h"
+#include "Lights/LightManager.h"
 #include "Lights/SpotLight.h"
+#include "Logger\Logger.h"
 #include "Utils/BaseUtils.h"
+#include "Utils/StringUtils.h"
 
 CEffect::CEffect()
   : m_FileName( "" ),
@@ -145,7 +146,7 @@ bool CEffect::LoadEffect()
 
   for ( ; itb != ite; ++itb )
   {
-    char* cstr = new char[( *itb ).length() + 1];
+    char* cstr = StringUtils::ToCharPtr( *itb );
     strcpy( cstr, ( *itb ).c_str() );
     D3DXMACRO l_NewMacro = {cstr, ""};
     defines.push_back( l_NewMacro );
@@ -237,7 +238,7 @@ bool CEffect::Load( CXMLTreeNode& EffectNode )
 {
   m_FileName = EffectNode.GetPszProperty( "file", "no_file" );
   std::string l_MacrosStr = EffectNode.GetPszProperty( "macros", "" );
-  m_MacrosVector = baseUtils::split( l_MacrosStr, ':' );
+  m_MacrosVector = StringUtils::Split( l_MacrosStr, ':' );
 
   return LoadEffect();
 }

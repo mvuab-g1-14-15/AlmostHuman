@@ -231,6 +231,9 @@
     <ClInclude Include="ScriptManager\FunctionsToRegister\VideogameFunctions.h">
       <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\StringUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

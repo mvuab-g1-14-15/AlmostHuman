@@ -1,8 +1,10 @@
 #include "Logger.h"
 #include "Utils/BaseUtils.h"
+#include "Utils/StringUtils.h"
 
 #include <iostream>
 #include <windows.h> // WinApi header
+
 
 CLogger::CLogger()
   : m_uLinesCount( 1 )
@@ -81,8 +83,8 @@ bool CLogger::SaveLogsInFile()
   std::string l_sPathFile    = "";
   uint32 day, month, year, hour, minute, second;
   baseUtils::GetDate( day, month, year, hour, minute, second );
-  baseUtils::FormatSrting( l_sPathFile, "%s_(%d-%d-%d)_(%dh-%dm-%ds).txt", m_sPathFile.c_str(), day, month, year, hour,
-                           minute, second );
+  StringUtils::Format( l_sPathFile, "%s_(%d-%d-%d)_(%dh-%dm-%ds).txt", m_sPathFile.c_str(), day, month, year, hour,
+                       minute, second );
 
 
   fopen_s( &file, l_sPathFile.c_str(), "w" );
@@ -99,7 +101,7 @@ bool CLogger::SaveLogsInFile()
       //Recorremos todos los logs y vamos rellenando el
       SLog new_log = *it;
       std::string number;
-      baseUtils::FormatSrting( l_sPathFile, "%d", new_log.m_uLogLine );
+      StringUtils::Format( l_sPathFile, "%d", new_log.m_uLogLine );
 
 
       report += number;
