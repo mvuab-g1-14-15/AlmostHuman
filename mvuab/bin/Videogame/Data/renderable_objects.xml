@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <layer name="" />
-  <MeshInstance name="Cofre_low" core="Cofre_low" pos="-13.0852 0.0 0.0" yaw="3.52952e-006" pitch="0.0" roll="1.34253e-006" scale="0.479031 0.479031 0.479031" layer="" />
+  <layer name="solid" />
+  <MeshInstance name="Box001" core="Box001" pos="-13.0852 0.0 0.0" yaw="3.52952e-006" pitch="0.0" roll="1.34253e-006" scale="0.479031 0.479031 0.479031" layer="solid" />
 </RenderableObjects>

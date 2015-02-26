@@ -918,9 +918,7 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
 
-void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
-  CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
-  float U0, float V0, float U1, float V1 )
+void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0, float V0, float U1, float V1 )
 {
   if ( EffectTechnique == NULL )
     return;
@@ -932,6 +930,7 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
   {
     m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
     l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+
     UINT l_NumPasses;
     l_Effect->Begin( &l_NumPasses, 0 );
 
