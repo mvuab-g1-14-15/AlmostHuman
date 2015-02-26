@@ -33,7 +33,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
 	
 #if defined( USE_SELF_ILUM )
-	l_DiffuseColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
+	l_DiffuseColor = l_DiffuseColor+tex2D(S1LinearSampler, IN.UV2);
 #endif
 
 	OUT.Ambient=float4(l_DiffuseColor.xyz*g_AmbientLight, g_SpecularExponent );
