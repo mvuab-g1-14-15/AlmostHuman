@@ -7,7 +7,8 @@
 #include <sstream>
 #endif
 
-CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& atts ): CSceneRendererCommand( atts )
+CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& atts ):
+  CSceneRendererCommand( atts )
 {
   CGraphicsManager* gm = CGraphicsManager::GetSingletonPtr();
 
@@ -22,35 +23,31 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& att
       if ( TagName == "dynamic_texture" )
       {
         std::string l_Name = atts( i ).GetPszProperty( "name", "" );
-
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
         bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
-		
-		uint32 l_Width, l_Height;
-		if(!l_WidthAsFB)
-		{
-			l_Width = atts( i ).GetIntProperty("width", 0);
-			l_Height = atts( i ).GetIntProperty("height", 0);
-		}
-		else
-		{
-			gm->GetWidthAndHeight( l_Width, l_Height );
-		}
+        uint32 l_Width, l_Height;
 
-        std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
-        CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 : ( CTexture::TFormatType )0;
-
-        CTexture* l_Texture = new CTexture();
-        l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT, l_iFormatType );
-
-		if(CTextureManager::GetSingletonPtr()->AddResource(l_Name, l_Texture))
+        if ( !l_WidthAsFB )
         {
-            AddStageTexture( l_StageId, l_Texture );
+          l_Width = atts( i ).GetIntProperty( "width", 0 );
+          l_Height = atts( i ).GetIntProperty( "height", 0 );
         }
         else
+          gm->GetWidthAndHeight( l_Width, l_Height );
+
+        std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
+        CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 :
+                                              ( CTexture::TFormatType )0;
+        CTexture* l_Texture = new CTexture();
+        l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT,
+                           l_iFormatType );
+
+        if ( CTextureManager::GetSingletonPtr()->AddResource( l_Name, l_Texture ) )
+          AddStageTexture( l_StageId, l_Texture );
+        else
         {
-            AddStageTexture(l_StageId, CTextureManager::GetSingletonPtr()->GetResource(l_Name));
-            CHECKED_DELETE(l_Texture);
+          AddStageTexture( l_StageId, CTextureManager::GetSingletonPtr()->GetResource( l_Name ) );
+          CHECKED_DELETE( l_Texture );
         }
       }
 
@@ -60,11 +57,12 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& att
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
         CTexture* l_Texture = CTextureManager::GetSingletonPtr()->GetTexture( l_Name );
 
-		if(!l_Texture)
-		{
-			CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str());
-			continue;
-		}
+        if ( !l_Texture )
+        {
+          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+                                                 "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str() );
+          continue;
+        }
 
         AddStageTexture( l_StageId, l_Texture );
       }
@@ -74,10 +72,12 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand(CXMLTreeNode& att
 
 CStagedTexturedRendererCommand::~CStagedTexturedRendererCommand()
 {
-    //for(std::vector<CKGStageTexture>::iterator it = m_StageTextures.begin(); it != m_StageTextures.end(); ++it)
-        //CHECKED_DELETE(it);
+  //TODO SCALAR DELETING DESTRUCTOR (AL TENER VARIAS REFERENCIAS DE UNA MISMA TEXTURA EN DISTINTOS COMMANDS (UNO BORRA Y EL OTRO LO INTENTA BORRAR DE NUEVO)
+  /*for ( std::vector<CKGStageTexture>::iterator it = m_StageTextures.begin();
+        it != m_StageTextures.end(); ++it )
+    CHECKED_DELETE( it->m_Texture );
 
-    //m_StageTextures.clear();
+  m_StageTextures.clear();*/
 }
 
 void CStagedTexturedRendererCommand::ActivateTextures()
@@ -95,12 +95,14 @@ void CStagedTexturedRendererCommand::AddStageTexture( int StageId, CTexture* Tex
 void CStagedTexturedRendererCommand::DebugTextures()
 {
 #ifdef _DEBUG
+
   for ( size_t i = 0; i < m_StageTextures.size(); ++i )
   {
     std::string l_TextureName = "CDrawQuadRendererCommand_" + GetName() + "_";
     std::stringstream l_CompletedTextureName;
     l_CompletedTextureName << l_TextureName << i;
-    m_StageTextures[i].m_Texture->Save(l_CompletedTextureName.str());
+    m_StageTextures[i].m_Texture->Save( l_CompletedTextureName.str() );
   }
+
 #endif
 }
