@@ -13,9 +13,9 @@ float OriginalSaturation = 0.9;		// Saturation amount on original texture
 // 								FilterBloom
 //-----------------------------------------------------------------------------
 
-float4 FilterBloomPS( in float2 Tex : TEXCOORD0 ) : COLOR0
+float4 FilterBloomPS( in float2 Tex : TEXCOORD0 ) : COLOR
 {
-    float4 Color = tex2D(S0LinearClampSampler, Tex);
+	float4 Color = tex2D(S0LinearClampSampler, Tex);
 	if(Color.x > Threshold && Color.y > Threshold && Color.z > Threshold) return Color;
 	else return float4(0.0, 0.0, 0.0, 1.0);
 	

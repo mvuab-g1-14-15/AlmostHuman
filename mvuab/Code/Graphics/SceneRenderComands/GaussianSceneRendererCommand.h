@@ -3,17 +3,18 @@
 #pragma once
 
 
-#include "SceneRenderComands\SceneRendererCommand.h"
+#include "SceneRenderComands\StagedTexturedRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
 
-class CGaussianSceneRendererCommand : public CSceneRendererCommand
+class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 {
 private:
-  std::string m_NameTechnique;
-  float m_Weight[5];
-  float m_Offset[5];
+	std::string m_NameTechnique;
+  int    m_nIteration;
+  uint32 m_Width;
+  uint32 m_Height;
 public:
   CGaussianSceneRendererCommand( CXMLTreeNode& atts );
   ~ CGaussianSceneRendererCommand();

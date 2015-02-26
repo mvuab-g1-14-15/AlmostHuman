@@ -6,6 +6,7 @@
 #include "Core.h"
 #include "Timer\Timer.h"
 #include "Logger\Logger.h"
+#include "GraphicsManager.h"
 
 CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
                                     CXMLTreeNode& HandlesNode )
@@ -32,22 +33,11 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     m_FogEnd( HandlesNode.GetFloatProperty( "fog_end", 0 ) ),
     m_FogExp( HandlesNode.GetFloatProperty( "fog_exp", 0 ) ),
     m_FogFun( HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
-    m_DebugColor( Math::colWHITE )
+    m_DebugColor( Math::colWHITE ),
+	m_UseTextureSizesGaussian(HandlesNode.GetBoolProperty("use_texture_size", false) ),
+	m_TextureHeight( HandlesNode.GetIntProperty( "texture_height", 0 ) ),
+	m_TextureWidth( HandlesNode.GetIntProperty( "texture_width", 0 ) )
 {
-  Math::Vect3f l_Weight3 = HandlesNode.GetVect3fProperty( "weight3", Math::Vect3f( 0, 0, 0 ) );
-  Math::Vect2f l_Weight2 = HandlesNode.GetVect2fProperty( "weight2", Math::Vect2f( 0, 0 ) );
-  Math::Vect3f l_Offset3 = HandlesNode.GetVect3fProperty( "offset3", Math::Vect3f( 0, 0, 0 ) );
-  Math::Vect2f l_Offset2 = HandlesNode.GetVect2fProperty( "offset2", Math::Vect2f( 0, 0 ) );
-  m_Weight[0] = l_Weight3.x;
-  m_Weight[1] = l_Weight3.y;
-  m_Weight[2] = l_Weight3.z;
-  m_Weight[3] = l_Weight2.x;
-  m_Weight[4] = l_Weight2.y;
-  m_Offset[0] = l_Offset3.x;
-  m_Offset[1] = l_Offset3.y;
-  m_Offset[2] = l_Offset3.z;
-  m_Offset[3] = l_Offset2.x;
-  m_Offset[4] = l_Offset2.y;
   m_Effect = CEffectManager::GetSingletonPtr()->GetEffect( m_EffectName );
   m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( m_TechniqueName ) : 0;
 }
@@ -108,21 +98,21 @@ bool CEffectTechnique::BeginRender()
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
 
-  float l_CheckDefault[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
-  bool UseWeightOffset = false;
-
-  for ( size_t i = 0; i < 5; ++i )
+  if( m_UseTextureSizesGaussian )
   {
-    if ( m_Weight[i] != l_CheckDefault[i] || m_Offset[i] != l_CheckDefault[i] )
-      UseWeightOffset = true;
+	l_Handle = m_Effect->GetHeightTexture();
+	l_Effect->SetInt( l_Handle, m_TextureHeight);
+	l_Handle = m_Effect->GetWidthTexture();
+	l_Effect->SetInt( l_Handle, m_TextureWidth ); 
   }
-
-  if ( UseWeightOffset )
+  else
   {
-    l_Handle = m_Effect->GetWeights();
-    l_Effect->SetFloatArray( l_Handle, m_Weight, 5 );
-    l_Handle = m_Effect->GetOffsets();
-    l_Effect->SetFloatArray( l_Handle, m_Offset, 5 );
+	uint32 l_Height, l_Width;
+	CGraphicsManager::GetSingletonPtr()->GetWidthAndHeight(l_Width, l_Height);
+	l_Handle = m_Effect->GetHeightTexture();
+	l_Effect->SetInt( l_Handle, l_Height);
+	l_Handle = m_Effect->GetWidthTexture();
+	l_Effect->SetInt( l_Handle, l_Width );  
   }
 
   SetupMatrices();

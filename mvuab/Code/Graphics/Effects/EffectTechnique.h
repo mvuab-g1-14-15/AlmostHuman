@@ -28,8 +28,8 @@ public:
   {
     return m_D3DTechnique;
   }
-  GET_SET_ARRAY( float, Weight, 5 );
-  GET_SET_ARRAY( float, Offset, 5 );
+  GET_SET(uint32, TextureHeight);
+  GET_SET(uint32, TextureWidth);
   void SetDebugColor( Math::CColor color = Math::colWHITE );
 
 private: // Members
@@ -49,13 +49,14 @@ private: // Members
   bool                        m_UseViewToLightProjectionMatrix;
   bool                        m_UseTime;
   bool                        m_UseDebugColor;
+  bool						  m_UseTextureSizesGaussian;
 
+  uint32					  m_TextureHeight;
+  uint32					  m_TextureWidth;
   float                       m_FogStart;
   float                       m_FogEnd;
   float                       m_FogExp;
   int                         m_FogFun;
-  float                       m_Weight[5];
-  float                       m_Offset[5];
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;
   std::string                 m_TechniqueName;

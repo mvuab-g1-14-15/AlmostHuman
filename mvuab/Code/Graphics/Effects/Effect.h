@@ -80,8 +80,8 @@ public:
   GET_SET( D3DXHANDLE, FogEnd );
   GET_SET( D3DXHANDLE, FogExp );
   GET_SET( D3DXHANDLE, FogFun );
-  GET_SET( D3DXHANDLE, Weights );
-  GET_SET( D3DXHANDLE, Offsets );
+  GET_SET( D3DXHANDLE, HeightTexture );
+  GET_SET( D3DXHANDLE, WidthTexture );
 
   GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
@@ -174,9 +174,9 @@ private: // Members
   D3DXHANDLE m_FogEnd;
   D3DXHANDLE m_FogExp;
   D3DXHANDLE m_FogFun;
-  //Weights & Offsets
-  D3DXHANDLE m_Weights;
-  D3DXHANDLE m_Offsets;
+  //Width & Height Textures
+  D3DXHANDLE m_HeightTexture;
+  D3DXHANDLE m_WidthTexture;
 
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;

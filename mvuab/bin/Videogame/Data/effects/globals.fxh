@@ -61,6 +61,9 @@ int 		g_FogFun											: FogFun;
 float		g_Weight[5]											: Weight;
 float		g_Offset[5]											: Offset;
 
+int			g_TextureWidth										: TextureWidth;
+int			g_TextureHeight										: TextureHeight;
+
 // Functions
 
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
@@ -140,6 +143,20 @@ float GaussianValue(float2 UV, float sigma)
 {
 	float g = (1.0 / (2 * PI * sigma * sigma)) * exp(-((UV.x * UV.x + UV.y * UV.y) / (2 * sigma * sigma)));
 	return g;
+}
+
+float4 GaussianBlur(sampler2D tex, float2 texCoord)
+{
+	float3 l_Color = float3(0.0, 0.0, 0.0);
+	float2 l_OffsetTexture = float2(1 / 800.0, 1 / 600.0);
+	
+	l_Color += tex2D(tex, texCoord) * 0.204164;
+	l_Color += tex2D(tex, texCoord + l_OffsetTexture * 1.407333) * 0.304005;
+	l_Color += tex2D(tex, texCoord - l_OffsetTexture * 1.407333) * 0.304005;
+	l_Color += tex2D(tex, texCoord + l_OffsetTexture * 3.294215) * 0.093913;
+	l_Color += tex2D(tex, texCoord - l_OffsetTexture * 3.294215) * 0.093913;
+	
+	return float4(l_Color, 1.0);
 }
 
 #endif // !defined( GLOBALS_FXH )

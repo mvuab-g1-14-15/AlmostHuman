@@ -23,6 +23,11 @@
 		<effect name="BlurEffect" file="data/effects/Blur.fx"/>
 		<handles/>
 	</technique>
+	
+	<technique name="SobelTechnique" vertex_type="1104">
+		<effect name="SobelEffect" file="data/effects/Sobel.fx"/>
+		<handles/>
+	</technique>
 
 	<technique name="FOGTechnique" vertex_type="1104">
 		<effect name="FOGEffect" file="data/effects/FOG.fx"/>
@@ -58,11 +63,6 @@
 	<technique name="GenerateGBufferTechnique" vertex_type="19">
 		<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
-	</technique>
-	
-	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
-		<effect name="GenerateGBufferDebug" file="data/effects/GenerateGBuffer.fx"/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
 	
 	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
