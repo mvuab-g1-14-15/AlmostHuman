@@ -13,8 +13,7 @@ class CEffect;
 class CEffectTechnique
 {
 public:
-  CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
-                    CXMLTreeNode& HandlesNode );
+  CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName, CXMLTreeNode& HandlesNode );
   virtual ~CEffectTechnique();
 
   inline CEffect* GetEffect() const
@@ -28,9 +27,11 @@ public:
   {
     return m_D3DTechnique;
   }
-  GET_SET(uint32, TextureHeight);
-  GET_SET(uint32, TextureWidth);
+
   void SetDebugColor( Math::CColor color = Math::colWHITE );
+
+  void ToggleWidthAndHeight(bool active = false);
+  void SetTextureSize(unsigned int width, unsigned int height);
 
 private: // Members
   bool                        m_UseCameraPosition;
@@ -53,6 +54,7 @@ private: // Members
 
   uint32					  m_TextureHeight;
   uint32					  m_TextureWidth;
+
   float                       m_FogStart;
   float                       m_FogEnd;
   float                       m_FogExp;

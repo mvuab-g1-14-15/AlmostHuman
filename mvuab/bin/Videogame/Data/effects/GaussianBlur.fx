@@ -2,14 +2,13 @@
 // http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling/
 // http://dev.theomader.com/gaussian-kernel-calculator/
 
-#include "vertex_types.fxh"
 #include "samplers.fxh"
 #include "globals.fxh"
 
 float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
-{   
+{
 	float3 l_Color = float3(0.0, 0.0, 0.0);
-	float2 l_OffsetTexture = float2(1/800.0, 1/600.0);   
+	float2 l_OffsetTexture = float2(1.0 / g_TextureWidth, 1.0 / g_TextureHeight);   
 	
 	l_Color += tex2D(S0LinearClampSampler, texCoord) * 0.204164;
     

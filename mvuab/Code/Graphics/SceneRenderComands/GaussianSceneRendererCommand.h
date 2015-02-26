@@ -10,15 +10,18 @@ class CGraphicsManager;
 
 class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 {
-private:
-	std::string m_NameTechnique;
-  int    m_nIteration;
-  uint32 m_Width;
-  uint32 m_Height;
-public:
-  CGaussianSceneRendererCommand( CXMLTreeNode& atts );
-  ~ CGaussianSceneRendererCommand();
+    private:
+        std::string m_NameTechnique;
+        unsigned int m_nIteration;
+        bool m_TextureAsFB;
+        
+        unsigned int m_Width;
+        unsigned int m_Height;
 
-  void Execute( CGraphicsManager& GM );
+    public:
+        CGaussianSceneRendererCommand( CXMLTreeNode& atts );
+        ~ CGaussianSceneRendererCommand();
+        
+        void Execute( CGraphicsManager& GM );
 };
 #endif

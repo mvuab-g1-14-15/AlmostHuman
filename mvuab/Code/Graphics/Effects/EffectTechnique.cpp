@@ -47,6 +47,17 @@ CEffectTechnique::~CEffectTechnique()
   m_Effect = 0;
 }
 
+void CEffectTechnique::ToggleWidthAndHeight(bool active)
+{
+    m_UseTextureSizesGaussian = active;
+}
+
+void CEffectTechnique::SetTextureSize(unsigned int width, unsigned int height)
+{
+    m_TextureHeight = height;
+    m_TextureWidth = width;
+}
+
 bool CEffectTechnique::BeginRender()
 {
   if ( !m_Effect )
@@ -54,8 +65,7 @@ bool CEffectTechnique::BeginRender()
 
   // Obtain the direct x effect
   LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
-  CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
-  D3DXHANDLE l_Handle;
+  D3DXHANDLE l_Handle = NULL;
 
   if ( m_UseCameraPosition )
   {
@@ -98,22 +108,11 @@ bool CEffectTechnique::BeginRender()
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
 
-  if( m_UseTextureSizesGaussian )
-  {
-	l_Handle = m_Effect->GetHeightTexture();
-	l_Effect->SetInt( l_Handle, m_TextureHeight);
-	l_Handle = m_Effect->GetWidthTexture();
-	l_Effect->SetInt( l_Handle, m_TextureWidth ); 
-  }
-  else
-  {
-	uint32 l_Height, l_Width;
-	CGraphicsManager::GetSingletonPtr()->GetWidthAndHeight(l_Width, l_Height);
-	l_Handle = m_Effect->GetHeightTexture();
-	l_Effect->SetInt( l_Handle, l_Height);
-	l_Handle = m_Effect->GetWidthTexture();
-	l_Effect->SetInt( l_Handle, l_Width );  
-  }
+  
+  l_Handle = m_Effect->GetHeightTexture();
+  l_Effect->SetInt( l_Handle, m_TextureHeight);
+  l_Handle = m_Effect->GetWidthTexture();
+  l_Effect->SetInt( l_Handle, m_TextureWidth );
 
   SetupMatrices();
   SetupLights();

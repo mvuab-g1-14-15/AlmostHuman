@@ -126,26 +126,26 @@ void CEffect::SetNullParameters()
   ResetLightsHandle();
 }
 
-void CEffect::GetParameterBySemantic( const std::string& SemanticName,
-                                      D3DXHANDLE& a_Handle )
+void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
 {
   a_Handle = m_Effect->GetParameterBySemantic( 0, SemanticName.c_str() );
 
   if ( !a_Handle )
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(),
-                                           m_FileName.c_str() );
+  {
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(), m_FileName.c_str() );
+    assert(false);
+  }
 }
 
-void CEffect::GetParameterBySemantic( const char* SemanticName,
-                                      D3DXHANDLE& a_Handle )
+void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle )
 {
   a_Handle = m_Effect->GetParameterBySemantic( 0, SemanticName );
 
   if ( !a_Handle )
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName,
-                                           m_FileName.c_str() );
+  {
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName, m_FileName.c_str() );
+    assert(false);
+  }
 }
 
 bool CEffect::LoadEffect()
@@ -168,9 +168,7 @@ bool CEffect::LoadEffect()
 
   if ( l_ErrorBuffer )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(),
-                                           l_ErrorBuffer->GetBufferPointer() );
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(),l_ErrorBuffer->GetBufferPointer() );
     CHECKED_RELEASE( l_ErrorBuffer );
 	assert(false);
     return false;
@@ -186,10 +184,8 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( InverseProjectionMatrixParameterStr, m_InverseProjectionMatrixParameter );
   GetParameterBySemantic( WorldViewMatrixParameterStr, m_WorldViewMatrixParameter );
   GetParameterBySemantic( ViewProjectionMatrixParameterStr, m_ViewProjectionMatrixParameter );
-  GetParameterBySemantic( WorldViewProjectionMatrixParameterStr,
-                          m_WorldViewProjectionMatrixParameter );
-  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
-                          m_ViewToLightProjectionMatrixParameter );
+  GetParameterBySemantic( WorldViewProjectionMatrixParameterStr, m_WorldViewProjectionMatrixParameter );
+  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr, m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
@@ -197,10 +193,8 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( LightsAngleParameterStr, m_LightsAngleParameter );
   GetParameterBySemantic( LightsColorParameterStr, m_LightsColorParameter );
   GetParameterBySemantic( LightsFallOffParameterStr, m_LightsFallOffParameter );
-  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr,
-                          m_LightsStartRangeAttenuationParameter );
-  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,
-                          m_LightsEndRangeAttenuationParameter );
+  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr, m_LightsStartRangeAttenuationParameter );
+  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr, m_LightsEndRangeAttenuationParameter );
   GetParameterBySemantic( CameraPositionParameterStr, m_CameraPositionParameter );
   GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
   GetParameterBySemantic( TimeParameterStr, m_TimeParameter );
@@ -408,10 +402,8 @@ void CEffect::ResetLightsHandle()
   memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation, 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation, 0,
-          sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );

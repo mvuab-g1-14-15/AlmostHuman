@@ -202,8 +202,8 @@ private: // Members
 private: // Methods
   void  SetNullParameters();
   void GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle );
-  void GetParameterBySemantic( const std::string& SemanticName,
-                               D3DXHANDLE& a_Handle );
+  void GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle );
+
   bool LoadEffect();
   void Unload();
   void ResetLightsHandle();
