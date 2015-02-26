@@ -1,9 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="BoxLightMapNormal" filename="\meshes\BoxLightMapNormal.mesh" />
-  <static_mesh name="Plane001" filename="\meshes\Plane001.mesh" />
-  <static_mesh name="BoxDef" filename="\meshes\BoxDef.mesh" />
-  <static_mesh name="SphereDef" filename="\meshes\SphereDef.mesh" />
-  <static_mesh name="Pyramid001" filename="\meshes\Pyramid001.mesh" />
-  <static_mesh name="BoxLightMap" filename="\meshes\BoxLightMap.mesh" />
+  <static_mesh name="Cofre_low" filename="\meshes\Cofre_low.mesh" />
 </static_meshes>

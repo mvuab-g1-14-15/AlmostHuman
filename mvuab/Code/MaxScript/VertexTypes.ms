@@ -43,14 +43,14 @@ struct SVertex
 		)
 		else
 		(
-			/*format "Vertex info:\n"
+			format "Vertex info:\n"
 			format "\tType % \n" m_Type
-			format "\tPos: (%, %, %)\n" m_Position.x m_Position.z m_Position.y*/
+			format "\tPos: (%, %, %)\n" m_Position.x m_Position.z m_Position.y
 			WriteFloat file m_Position.x
 			WriteFloat file m_Position.z
 			WriteFloat file m_Position.y
 			
-			--format "\tNormal: (%, %, %)\n" m_Normal.x m_Normal.z m_Normal.y
+			format "\tNormal: (%, %, %)\n" m_Normal.x m_Normal.z m_Normal.y
 			WriteFloat file m_Normal.x
 			WriteFloat file m_Normal.z
 			WriteFloat file m_Normal.y
@@ -58,13 +58,13 @@ struct SVertex
 			
 			if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 			(
-				--format "\tTangencial: (%, %, %)\n" m_Tan.x m_Tan.y m_Tan.z
+				format "\tTangencial: (%, %, %)\n" m_Tan.x m_Tan.y m_Tan.z
 				WriteFloat file m_Tan.x
 				WriteFloat file m_Tan.y
 				WriteFloat file m_Tan.z
 				WriteFloat file 0
 				
-				--format "\tBinormal: (%, %, %)\n" m_Binormal.x m_Binormal.y m_Binormal.z
+				format "\tBinormal: (%, %, %)\n" m_Binormal.x m_Binormal.y m_Binormal.z
 				WriteFloat file m_Binormal.x
 				WriteFloat file m_Binormal.y
 				WriteFloat file m_Binormal.z
@@ -73,21 +73,21 @@ struct SVertex
 			
 			if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 			(
-				--format "\tUV1: (%, %)\n" m_UV.x m_UV.y
+				format "\tUV1: (%, %)\n" m_UV.x m_UV.y
 				WriteFloat file m_UV.x
 				WriteFloat file m_UV.y
 			)
 			
 			if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
 			(
-				--format "\tUV2: (%, %)\n" m_UV2.x m_UV2.y
+				format "\tUV2: (%, %)\n" m_UV2.x m_UV2.y
 				WriteFloat file m_UV2.x
 				WriteFloat file m_UV2.y
 			)
 			
 			if ((bit.and m_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 			(
-				--format "\t Color: (%)\n" m_Color
+				format "\t Color: (%)\n" m_Color
 				WriteFloat file m_Color
 			)
 		)

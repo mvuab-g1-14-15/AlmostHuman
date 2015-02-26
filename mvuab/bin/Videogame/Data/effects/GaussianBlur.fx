@@ -13,8 +13,6 @@
 //-----------------------------------------------------------------------------
 
 float2 l_OffsetTexture=float2(1/800.0, 1/600.0);
-float g_GaussianOffsets[5]={0.0, 1.0, 2.0, 3.0, 4.0};
-float g_GaussianWeights[5]={0.2270270270, 0.1945945946, 0.1216216216, 0.0540540541, 0.0162162162};
 
 float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
 {
