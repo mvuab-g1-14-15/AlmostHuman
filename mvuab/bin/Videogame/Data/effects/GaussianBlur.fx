@@ -6,8 +6,6 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-#define SIZE 0
-
 float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
 {   
 	float3 l_Color = float3(0.0, 0.0, 0.0);

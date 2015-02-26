@@ -279,7 +279,7 @@ struct TNORMAL_DIFF_VERTEX
 struct TNORMAL_T2_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tu, tv;
   float tu2, tv2;
 

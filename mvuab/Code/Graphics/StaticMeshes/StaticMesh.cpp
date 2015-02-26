@@ -204,7 +204,8 @@ bool CStaticMesh::Load( const std::string& FileName )
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
 
     // Check the renderable object
-    if ( l_RV ) m_RVs.push_back( l_RV );
+    if ( l_RV )
+      m_RVs.push_back( l_RV );
 
     free( l_VtxsAddress );
     free( l_IdxAddress );

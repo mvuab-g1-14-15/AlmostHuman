@@ -27,8 +27,8 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
-			----format "Texture name: %\n" m_Name
-			----format "Texture length: %\n" m_Name.count
+			--format "Texture name: %\n" m_Name
+			--format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
 		)
@@ -195,7 +195,7 @@ struct SVertexBuffer
 		--format "Writing BV\n"
 		local l_NumVertex = m_VertexList.count 
 		WriteShort file l_NumVertex #unsigned
-		--format "Vtx count: %\n" l_NumVertex
+		format "Vtx count: %\n" l_NumVertex
 		for iVertex in m_VertexList do
 		(
 			iVertex.WriteToFile file
@@ -218,7 +218,7 @@ struct SIndexBuffer
 		--format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
 		WriteShort file l_NumIds #unsigned
-		--format "Idx count: %\n" l_NumIds
+		format "Idx count: %\n" l_NumIds
 		for iIndex in m_IndexList do
 		(
 			WriteShort file iIndex #unsigned
@@ -322,7 +322,7 @@ struct SMesh
             	)
 				catch
 				(
-					format "Error while exporting submaterial %.\n" l_MaterialId
+					--format "Error while exporting submaterial %.\n" l_MaterialId
 				)
 			)
 		)
@@ -361,7 +361,7 @@ struct SMesh
 				l_MaterialId = 1
 			)
 			
-			----format "Material Name: %\n" l_MaterialNameById
+			--format "Material Name: %\n" l_MaterialNameById
 			
 			-- Check if the material is found
 			if m_MaterialsHashTable.ContainsKey l_MaterialId == true then
@@ -416,7 +416,6 @@ struct SMesh
 					l_NewVertex1.m_UV = point2 TUV1Map1.x (1.0 - TUV1Map1.y)
 					l_NewVertex2.m_UV = point2 TUV1Map2.x (1.0 - TUV1Map2.y)
 					l_NewVertex3.m_UV = point2 TUV1Map3.x (1.0 - TUV1Map3.y)
-
 				)
 			
 				if ((bit.and l_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
@@ -476,7 +475,7 @@ struct SMesh
 	
 	fn InitFromMaxObject Obj =
 	(
-		format "Mesh: % \n" Obj.name
+		--format "Mesh: % \n" Obj.name
 		actualObj = copy Obj
 		convertToMesh actualObj 
 		
@@ -485,7 +484,7 @@ struct SMesh
 		
 		if delete actualObj != 1 then
 		(
-			format "% not deleted, please delete the object manually\n" actualObj
+			--format "% not deleted, please delete the object manually\n" actualObj
 		)
 	),
 	

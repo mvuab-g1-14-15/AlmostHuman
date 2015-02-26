@@ -1,10 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <layer name="solid" />
-  <MeshInstance name="Plane001" core="Plane001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="BoxDef" core="BoxDef" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="SphereDef" core="SphereDef" pos="10.0 1.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Pyramid001" core="Pyramid001" pos="10.0 0.0 20.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="BoxLightMap" core="BoxLightMap" pos="10.0 0.0 10.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="BoxLightMapNormal" core="BoxLightMapNormal" pos="12.0 0.0 10.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <layer name="" />
+  <MeshInstance name="Cofre_low" core="Cofre_low" pos="-13.0852 0.0 0.0" yaw="3.52952e-006" pitch="0.0" roll="1.34253e-006" scale="0.479031 0.479031 0.479031" layer="" />
 </RenderableObjects>
