@@ -174,6 +174,7 @@ private: // Members
   D3DXHANDLE m_FogEnd;
   D3DXHANDLE m_FogExp;
   D3DXHANDLE m_FogFun;
+
   //Width & Height Textures
   D3DXHANDLE m_HeightTexture;
   D3DXHANDLE m_WidthTexture;
