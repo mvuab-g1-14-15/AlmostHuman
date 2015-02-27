@@ -106,6 +106,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 		for Obj in AllObj do
 		(
 			local instance_obj;
+			
 			if findItem unique_instances Obj != 0 then
 				instance_obj = Obj
 			else
@@ -118,10 +119,6 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 						if findItem unique_instances ref_obj != 0 then
 							instance_obj = ref_obj
 					)
-				)
-				else
-				(
-					instance_obj = Obj
 				)
 			)
 		
