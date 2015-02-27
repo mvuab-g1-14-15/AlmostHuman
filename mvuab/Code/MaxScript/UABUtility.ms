@@ -1,22 +1,38 @@
 fileIn "ExportMesh.ms"
 fileIn "XMLExporter.ms"
 fileIn "Cinematics.ms"
+filein "RNMUtils.ms"
 		
-utility UABUtility "UAB Utility" width:162 height:325
+utility UABUtility "UAB Utility" width:163 height:600
 (
 	button SetPathButton "Set Path" pos:[13,9] width:127 height:30
-	label PathLabel "" pos:[15,49] width:132 height:52
-	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,106] width:79 height:25
-	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,132] width:94 height:25
-	dropdownList LevelList "" pos:[13,157] width:135 height:21
-	GroupBox ExportGroup "Export" pos:[11,178] width:141 height:112
-	button LightsButton "Lights" pos:[21,193] width:57 height:17
-	button MeshButton "Mesh" pos:[85,193] width:57 height:17
-	button CinematicsButton "Cinematics" pos:[83,215] width:57 height:17
-	button CameraButon "Camera" pos:[21,215] width:57 height:17
-	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,240] width:124 height:17
-	button SceneButton "Scene" pos:[18,263] width:124 height:17
-	button SetProperties "Set Properties" pos:[21,301] width:98 height:19
+	label PathLabel "" pos:[15,44] width:132 height:29
+	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,84] width:79 height:25
+	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,110] width:94 height:25
+	dropdownList LevelList "" pos:[13,135] width:135 height:21
+	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:112
+	button LightsButton "Lights" pos:[21,171] width:57 height:17
+	button MeshButton "Mesh" pos:[85,171] width:57 height:17
+	button CinematicsButton "Cinematics" pos:[83,193] width:57 height:17
+	button CameraButon "Camera" pos:[21,193] width:57 height:17
+	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,218] width:124 height:17
+	button SceneButton "Scene" pos:[18,241] width:124 height:17
+	button SetProperties "Set Properties" pos:[37,568] width:82 height:17
+	
+	GroupBox grp9 "Generate RNM" pos:[10,286] width:141 height:112
+		button Xbtn "Generate X" pos:[15,310] width:124 height:17
+		button Ybtn "Generate Y" pos:[15,340] width:124 height:17
+		button Zbtn "Generate Z" pos:[15,370] width:124 height:17
+
+
+	GroupBox grp10 "Set RNM Texture" pos:[4,411] width:145 height:150
+		button LightmapXBtn "X" pos:[10,434] width:32 height:17
+		label LightmapXLabel "" pos:[46,433] width:94 height:20
+		button LightmapYBtn "Y" pos:[10,464] width:32 height:17
+		label LightmapYLabel "" pos:[46,465] width:94 height:20
+		button LightmapZBtn "Z" pos:[10,494] width:32 height:17
+		label LightmapZLabel "" pos:[46,491] width:94 height:20
+		button ApplyBtn "Apply" pos:[23,530] width:124 height:17
 
 	on UABUtility open do
 	(
@@ -36,7 +52,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 		local LightDir = PathLabel.text + "\\lights.xml"		--poner parametrico
 		ExportLights LightDir
 	)
-	
 	on MeshButton pressed do
 	(		
 		if PathLabel.text == "" then
@@ -51,10 +66,19 @@ utility UABUtility "UAB Utility" width:162 height:325
 		--Check if exist dir, if not mkdir
 		DoesFolderExist MeshDir
 		
+		local UniqueInstanceArray = GetUniqueInstances()
+		
+		if UniqueInstanceArray.count == 0 then 
+		(
+			format "Empty selection. Select any object \n"
+			return -1
+		)
+		
 		--poner parametrico
 		if selection.count > 0 then 
 		(
-			for Obj in selection do
+							
+			for Obj in UniqueInstanceArray do
 			(
 				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
 				local file = fopen filename "wb"
@@ -62,7 +86,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 				l_ObjectMesh.InitFromMaxObject Obj
 				l_ObjectMesh.WriteToFile file
 				fclose file
-				
 			)
 			
 			if CopyTexturesCheckBox.checked then
@@ -76,6 +99,19 @@ utility UABUtility "UAB Utility" width:162 height:325
 			format "Empty selection. Select any object \n"
 			return -1
 		)
+	)
+	on CinematicsButton pressed do
+	(		
+		if PathLabel.text == "" then
+		(
+			format "Destination Path undefined, please choose a path \n"
+			return -1 
+		)
+		
+		CinematicsDir = PathLabel.text + "\\cinematics.xml"
+		nFrames = 5
+		
+		ExportCinematicObjects nFrames CinematicsDir
 	)
 	on CameraButon pressed do
 	(		
@@ -92,21 +128,6 @@ utility UABUtility "UAB Utility" width:162 height:325
 		
 		ExportKeyCamera nFrames isCycle isReverse cameraDir
 	)
-	
-	on CinematicsButton pressed do
-	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
-		
-		CinematicsDir = PathLabel.text + "\\cinematics.xml"
-		nFrames = 5
-		
-		ExportCinematicObjects nFrames CinematicsDir
-	)
-	
 	on StaticMeshManagerButton pressed do
 	(		
 		if PathLabel.text == "" then
@@ -138,7 +159,15 @@ utility UABUtility "UAB Utility" width:162 height:325
 		--selec all objects
 		if ExportMeshCheckBox.checked then
 		(
-			for Obj in geometry do
+			local UniqueInstanceArray = GetUniqueInstances()
+		
+			if UniqueInstanceArray.count == 0 then 
+			(
+				format "Empty selection. Select any object \n"
+				return -1
+			)
+			
+			for Obj in UniqueInstanceArray do
 			(
 				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
 				local file = fopen filename "wb"
@@ -193,8 +222,15 @@ utility UABUtility "UAB Utility" width:162 height:325
 		--selec all objects
 		if ExportMeshCheckBox.checked then
 		(
-			--poner parametrico
-			for Obj in geometry do
+			local UniqueInstanceArray = GetUniqueInstances()
+		
+			if UniqueInstanceArray.count == 0 then 
+			(
+				format "Empty selection. Select any object \n"
+				return -1
+			)
+			
+			for Obj in UniqueInstanceArray do
 			(
 				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
 				local file = fopen filename "wb"
@@ -208,39 +244,41 @@ utility UABUtility "UAB Utility" width:162 height:325
 		)
 		
 	)
+	
+	on Xbtn pressed  do
+	(
+		SetRNMAxis $ (color 231 127 201)
+	)
+	
+	on Ybtn pressed  do
+	(
+		SetRNMAxis $ (color 75 217 201)
+	)
+	
+	on Zbtn pressed  do
+	(
+		SetRNMAxis $ (color 75 37 201)
+	)
+	
+	on LightmapXBtn pressed do
+	(
+		setLightmapOn LightmapXLabel
+	)
+	on LightmapYBtn pressed do
+	(
+		setLightmapOn LightmapYLabel
+	)
+	on LightmapZBtn pressed do
+	(
+		setLightmapOn LightmapZLabel
+	)
+	on ApplyBtn pressed do
+	(
+		ApplyRNMToObj $
+	)
+	
 	on SetProperties pressed do
 	(
-		--fileIn "UABSetProperties.ms"
 		createDialog UABSetProperties
 	)
-	on btn8 pressed do
-	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
-		
-		--export Mesh
-		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
-		--Check if exist dir, if not mkdir
-		DoesFolderExist MeshDir
-		
-		--poner parametrico
-		if selection.count > 0 then 
-		(
-			for Obj in selection do
-			(
-				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-				ExportMesh Obj filename
-			)
-		)
-		else
-		(
-			format "Empty selection. Select any object \n"
-			return -1
-		)
-	)
 )
-
-
