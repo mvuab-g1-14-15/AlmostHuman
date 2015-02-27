@@ -228,8 +228,10 @@ bool CEffect::Load( CXMLTreeNode& EffectNode )
     {
       char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "name", "no_name" ) );
       m_NamesMacrosChar.push_back( cstr_name );
+
       char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "description", "no_description" ) );
       m_DescriptionsMacrosChar.push_back( cstr_desc );
+
       D3DXMACRO macro = { cstr_name, cstr_desc };
       m_Defines.push_back( macro );
     }
