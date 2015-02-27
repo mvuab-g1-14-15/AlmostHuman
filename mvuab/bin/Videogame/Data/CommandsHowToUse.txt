@@ -19,6 +19,10 @@
     </render_draw_quad>
 =============================================================================================================================================================
     GAUSSIAN BLUR
+    <capture_frame_buffer>
+        <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </capture_frame_buffer>
+    
     <gaussian nIteration="1" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
         <texture stage_id="0" name="ActualFrameBuffer"/>
     </gaussian>
@@ -32,6 +36,7 @@
     <capture_frame_buffer>
         <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
+    
     <set_pool_renderable_objects_technique pool="FOG_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="ActualFrameBuffer"/>
@@ -66,6 +71,10 @@
     </render_draw_quad>
 =============================================================================================================================================================
     FILTER BLOOM
+    <capture_frame_buffer>
+        <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </capture_frame_buffer>
+    
     <set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="ActualFrameBuffer"/>
