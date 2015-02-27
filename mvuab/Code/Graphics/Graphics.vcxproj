@@ -58,6 +58,7 @@
     <ClCompile Include="SceneRenderComands\EndRenderSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\GaussianSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="SceneRenderComands\EndRenderSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\GaussianSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h" />

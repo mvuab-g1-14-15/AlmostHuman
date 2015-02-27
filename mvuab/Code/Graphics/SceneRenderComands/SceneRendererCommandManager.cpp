@@ -22,6 +22,7 @@
 #include "SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h"
 #include "SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h"
 #include "SceneRenderComands\GaussianSceneRendererCommand.h"
+#include "SceneRenderComands\LensOfFlareRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -291,6 +292,14 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
         if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
              GetNextName().c_str() ), l_Gaussian ) )
           CHECKED_DELETE( l_Gaussian );
+      }
+      else if ( TagName == "lens_of_flare" )
+      {
+        CLensOfFlareRendererCommand* l_LensOfFlareCmd = new CLensOfFlareRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ), l_LensOfFlareCmd ) )
+          CHECKED_DELETE( l_LensOfFlareCmd );
       }
     }
   }

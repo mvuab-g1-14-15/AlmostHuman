@@ -15,6 +15,7 @@
 #include "Core.h"
 #include "RenderableVertex/VertexTypes.h"
 #include "Texture/Texture.h"
+#include "Fonts/FontManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -484,7 +485,7 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
     return;
 
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource("GenerateGBufferDebugTechnique");
+    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
@@ -918,7 +919,9 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
 
-void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0, float V0, float U1, float V1 )
+void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
+  CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0,
+  float V0, float U1, float V1 )
 {
   if ( EffectTechnique == NULL )
     return;
@@ -1054,4 +1057,41 @@ void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
 {
   m_uWidth =  _Width;
   m_uHeight = _Height;
+}
+
+Math::Vect2i CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
+{
+  D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
+  D3DVIEWPORT9 pViewport;
+  m_pD3DDevice->GetTransform( D3DTS_PROJECTION, &projectionMatrix );
+  m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
+  m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
+  m_pD3DDevice->GetViewport( &pViewport );
+
+  D3DXVECTOR3 l_OutPosition;
+  D3DXVECTOR3 modPos( Point.x, Point.y, Point.z );
+  D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
+                   &worldMatrix );
+
+  // To Debug uncomment this line
+  //CFontManager::GetSingletonPtr()->DrawDefaultText( textPos.x, textPos.y, Math::colWHITE, "Light" );
+
+  return Math::Vect2i( int( Math::Utils::Round( l_OutPosition.y ) ),
+                       int( Math::Utils::Round( l_OutPosition.z ) ) );
+}
+
+Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2i Point )
+{
+  D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
+  D3DVIEWPORT9 pViewport;
+  m_pD3DDevice->GetTransform( D3DTS_PROJECTION, &projectionMatrix );
+  m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
+  m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
+  m_pD3DDevice->GetViewport( &pViewport );
+
+  D3DXVECTOR3 l_OutPosition;
+  D3DXVECTOR3 modPos( Point.x, Point.y, 0 );
+  D3DXVec3Unproject( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
+                     &worldMatrix );
+  return Math::Vect3f();
 }

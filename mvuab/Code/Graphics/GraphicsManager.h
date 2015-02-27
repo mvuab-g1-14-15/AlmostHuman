@@ -55,6 +55,8 @@ public:
   void SetBlendOP();
   void SetSrcBlend( const std::string& BlendState );
   void SetDstBlend( const std::string& BlendState );
+  Math::Vect2i ToScreenCoordinates( Math::Vect3f Point );
+  Math::Vect3f ToWorldCoordinates( Math::Vect2i Point );
 
   // Getters and setters
   const LPDIRECT3DDEVICE9 GetDevice() const
