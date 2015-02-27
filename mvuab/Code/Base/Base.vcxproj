@@ -53,6 +53,7 @@
     <ClInclude Include="Math\Matrix33.h" />
     <ClInclude Include="Math\Matrix34.h" />
     <ClInclude Include="Math\Matrix44.h" />
+    <ClInclude Include="Math\Ray.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />

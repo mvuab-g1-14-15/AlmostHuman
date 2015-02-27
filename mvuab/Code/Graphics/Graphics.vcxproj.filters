@@ -198,6 +198,9 @@
     <ClCompile Include="SceneRenderComands\GaussianSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -404,6 +407,9 @@
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\GaussianSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

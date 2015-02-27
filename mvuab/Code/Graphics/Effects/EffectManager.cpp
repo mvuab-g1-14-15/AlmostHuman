@@ -173,8 +173,10 @@ void CEffectManager::Load( const std::string& FileName )
             CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
             CHECKED_DELETE( l_pEffect );
           }
-          else
-            m_Effects.AddResource( l_EffectName, l_pEffect );
+          else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
+          {
+              CHECKED_DELETE( l_pEffect );
+          }
         }
         else if ( l_TagName == "handles" )
           l_HandlesNode = l_CurrentSubNode;

@@ -30,7 +30,7 @@ public:
 
   void SetDebugColor( Math::CColor color = Math::colWHITE );
 
-  void ToggleWidthAndHeight(bool active = false);
+  void SetUseResolution(bool active = false);
   void SetTextureSize(unsigned int width, unsigned int height);
 
 private: // Members

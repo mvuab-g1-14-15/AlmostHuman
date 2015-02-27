@@ -47,7 +47,7 @@ CEffectTechnique::~CEffectTechnique()
   m_Effect = 0;
 }
 
-void CEffectTechnique::ToggleWidthAndHeight(bool active)
+void CEffectTechnique::SetUseResolution(bool active)
 {
     m_UseTextureSizesGaussian = active;
 }
@@ -94,8 +94,10 @@ bool CEffectTechnique::BeginRender()
   {
     l_Handle = m_Effect->GetFogStart();
     l_Effect->SetFloat( l_Handle, m_FogStart );
+
     l_Handle = m_Effect->GetFogEnd();
     l_Effect->SetFloat( l_Handle, m_FogEnd );
+
     l_Handle = m_Effect->GetFogFun();
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
@@ -104,15 +106,19 @@ bool CEffectTechnique::BeginRender()
   {
     l_Handle = m_Effect->GetFogExp();
     l_Effect->SetFloat( l_Handle, m_FogExp );
+
     l_Handle = m_Effect->GetFogFun();
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
 
-  
-  l_Handle = m_Effect->GetHeightTexture();
-  l_Effect->SetInt( l_Handle, m_TextureHeight);
-  l_Handle = m_Effect->GetWidthTexture();
-  l_Effect->SetInt( l_Handle, m_TextureWidth );
+  if(m_UseTextureSizesGaussian)
+  {
+      l_Handle = m_Effect->GetHeightTexture();
+      l_Effect->SetInt( l_Handle, m_TextureHeight);
+      
+      l_Handle = m_Effect->GetWidthTexture();
+      l_Effect->SetInt( l_Handle, m_TextureWidth );
+  }
 
   SetupMatrices();
   SetupLights();

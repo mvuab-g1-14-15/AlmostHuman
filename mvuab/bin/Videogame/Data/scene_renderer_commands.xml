@@ -1,206 +1,53 @@
 <scene_renderer_commands>
-	<!--pre_render-->
-	<begin_scene/>
-	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="PrevFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
-	<set_render_target name="deferred_multiple_render_target">
-		<dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-		<dynamic_texture stage_id="1" name="LightMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-		<dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-		<dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F"/>
-	</set_render_target>
-	<clear_scene color="true" depth="true" stencil="true"/>
-	<enable_z_write/>
-	<enable_z_test/>
-	<set_matrices/>
-	<render_scene layer="solid" active="true"/>
-	<render_debug_lights render="true"/>
-	<unset_render_target render_target="deferred_multiple_render_target"/>
-	
-	<!--
-	<enable_z_write/>
-	<enable_z_test/>
-	<render_scene layer="alpha_blend_objects" active="true"/>
-	-->
-	
-	<set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="LightMapTexture"/>
-	</render_draw_quad>
-	<!--<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>-->
-	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
-	<render_deferred_shading>
-		<texture stage_id="0" name="DiffuseMapTexture"/>
-		<texture stage_id="1" name="LightMapTexture"/>
-		<texture stage_id="2" name="NormalMapTexture"/>
-		<texture stage_id="3" name="DepthMapTexture"/>
-	</render_deferred_shading>
-    
+    <!--pre_render-->
+    <begin_scene/>
     <capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
+        <dynamic_texture stage_id="0" name="PrevFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </capture_frame_buffer>
     
-    <gaussian nIteration="3" technique="GaussianBlur" texture_width_as_frame_buffer="true" width="100.0" height="100.0">
-        <texture stage_id="0" name="ActualFrameBuffer"/>
-    </gaussian>
+    <set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
+    <set_render_target name="deferred_multiple_render_target">
+        <dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+        <dynamic_texture stage_id="1" name="LightMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+        <dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+        <dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F"/>
+    </set_render_target>
+    
+    <clear_scene color="true" depth="true" stencil="true"/>
+    <enable_z_write/>
+    <enable_z_test/>
+    <set_matrices/>
+    <render_scene layer="solid" active="true"/>
+    <render_debug_lights render="true"/>
+    <unset_render_target render_target="deferred_multiple_render_target"/>
     
     <!--
-    <capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-    
-    <set_pool_renderable_objects_technique pool="draw_quad_sampler_0_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>
+    <enable_z_write/>
+    <enable_z_test/>
+    <render_scene layer="alpha_blend_objects" active="true"/>
     -->
-	
-    <!--GAUSSIAN BLUR
-	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
     
-    <set_pool_renderable_objects_technique pool="Gaussian_blur_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>
+    <set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="0" name="LightMapTexture"/>
+    </render_draw_quad>
     
-    SOBEL FILTER
-    <capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
+    <!--<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>-->
+    <set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
+    <render_deferred_shading>
+        <texture stage_id="0" name="DiffuseMapTexture"/>
+        <texture stage_id="1" name="LightMapTexture"/>
+        <texture stage_id="2" name="NormalMapTexture"/>
+        <texture stage_id="3" name="DepthMapTexture"/>
+    </render_deferred_shading>
+	
+	<lens_of_flare>
+		<texture stage_id="0" name="DiffuseMapTexture"/>
+	</lens_of_flare>
     
-    <set_pool_renderable_objects_technique pool="Sobel_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>-->
-		
-		
-	<!--FILTER BLOOM
-	<set_render_target name="GenerateBrightPassRenderTarget">
-		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-     </set_render_target>
-	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>
-	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>	
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="FilterBrightTexture"/>
-	</render_draw_quad>  -->
-	
-		
-	<!-- GAUSSIAN
-	<gaussian nIteration="4" technique="GaussianBlur">
-		<texture stage_id="0" name="FilterBrightTexture"/>
-		<dynamic_texture stage_id="0" name="FinalTexture" width="512" height="512" format_type="A8R8G8B8"/>
-		<dynamic_texture stage_id="1" name="TempTexture"  width="512" height="512" format_type="A8R8G8B8"/>
-	</gaussian>  -->
-	
-	<!--FILTER BLOOM
-	<set_render_target name="GenerateBrightPassRenderTarget">
-		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-     </set_render_target>
-	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>
-	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
-	
-	GAUSSIAN BLUR BLOOM
-	<set_render_target name="GenerateGaussianBlurTarget">
-			<dynamic_texture stage_id="0" name="GaussianBlurTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</set_render_target>
-	<set_pool_renderable_objects_technique pool="Gaussian_blur_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="FilterBrightTexture"/>
-	</render_draw_quad>
-	<unset_render_target render_target="GenerateGaussianBlurTarget"/>
-	
-	 COMBINE BLOOM
-    <set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="GaussianBlurTexture"/>
-		<texture stage_id="1" name="ActualFrameBuffer"/>
-	</render_draw_quad> -->
-
-	
-	<!-- FILTER BLOOM -->
-	
-	<!--
-	<set_render_target name="GenerateBrightPassRenderTarget">
-		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-     </set_render_target>
-	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-	</render_draw_quad>
-	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>-->
-	
-<!--
-	<set_render_target name="lens_flare_target">
-		<dynamic_texture stage_id="0" name="LensFlareS1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</set_render_target>
-	<set_pool_renderable_objects_technique pool="Lens_Flare_step1_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-		<texture stage_id="1" name="DepthMapTexture"/>
-	</render_draw_quad>
--->
-	
-	<!-- GAUSSIAN BLUR BLOOM -->
-<!--
-	<set_render_target name="GenerateGaussianBlurTarget">
-			<dynamic_texture stage_id="0" name="GaussianBlurTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</set_render_target>
-	<set_pool_renderable_objects_technique pool="Bloom_step2_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="FilterBrightTexture"/>
-	</render_draw_quad>
-	<unset_render_target render_target="GenerateGaussianBlurTarget"/>
--->
-	<!--  COMBINE BLOOM -->
-<!--
-    <set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="GaussianBlurTexture"/>
-		<texture stage_id="1" name="ActualFrameBuffer"/>
-	</render_draw_quad>
--->
-
-<!--
-	<unset_render_target render_target="lens_flare_target"/>
-	<set_pool_renderable_objects_technique pool="Lens_Flare_step2_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="LensFlareS1"/>
-	</render_draw_quad>
--->
-
-	<!-- Fog -->
-<!--
-	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-	<set_pool_renderable_objects_technique pool="FOG_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-		<texture stage_id="1" name="DepthMapTexture"/>
-	</render_draw_quad>
--->
-	
-	<!--<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-	<set_pool_renderable_objects_technique pool="Blur_pool_renderable_object_technique"/>
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
-		<texture stage_id="1" name="PrevFrameBuffer"/>
-	</render_draw_quad>-->
-	<!--<disable_alpha_blend/>-->
-	<!--end pre_render-->
-	
-	<end_scene/>
-	<present/>
+    <!--<disable_alpha_blend/>-->
+    <!--end pre_render-->
+    
+    <end_scene/>
+    <present/>
 </scene_renderer_commands>

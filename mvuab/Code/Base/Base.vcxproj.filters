@@ -234,6 +234,9 @@
     <ClInclude Include="Utils\StringUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Ray.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">
