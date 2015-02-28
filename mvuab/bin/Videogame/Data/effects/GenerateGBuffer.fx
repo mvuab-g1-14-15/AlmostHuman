@@ -27,6 +27,9 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	TMultiRenderTargetPixel OUT=(TMultiRenderTargetPixel)0;
 	float4 l_DiffuseColor = tex2D(S0LinearSampler,IN.UV);
 	
+	if(l_DiffuseColor.a<0.5)//Ajustar
+		clip(-1);
+	
 	if(g_UseDebugColor)
 		l_DiffuseColor = float4(1,0,0,0);
 		
@@ -34,8 +37,11 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	
 #if defined( USE_SELF_ILUM )
 	l_DiffuseColor = l_DiffuseColor+tex2D(S1LinearSampler, IN.UV2);
+#elif defined( USE_RNM )
+	float3 l_LightMap = GetRadiosityNormalMapBySamplers(FaceNn, FaceNormal, FaceTangent, FaceBinormal, IN.UV2, S2LinearSampler, S3LinearSampler, S4LinearSampler);
+	l_DiffuseColor = l_DiffuseColor + l_LightMap;
 #endif
-
+	
 	OUT.Ambient=float4(l_DiffuseColor.xyz*g_AmbientLight, g_SpecularExponent );
 
 #if defined( USE_NORMAL )

@@ -40,15 +40,6 @@
         <texture stage_id="2" name="NormalMapTexture"/>
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
-	
-	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
-	<lens_of_flare>
-		<texture stage_id="0" name="nova.png"/>
-		<texture stage_id="1" name="extendring.png"/>
-		<texture stage_id="2" name="hexangle.png"/>
-		<texture stage_id="3" name="hexagon.png"/>
-		<texture stage_id="4" name="starring.png"/>
-	</lens_of_flare>
     
     <!--<disable_alpha_blend/>-->
     <!--end pre_render-->
