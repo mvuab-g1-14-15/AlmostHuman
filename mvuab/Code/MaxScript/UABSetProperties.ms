@@ -13,7 +13,7 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	checkbox GenerateCheckPhysics "Generate" pos:[262,110] width:66 height:13
 	checkbox LayerCheckPhysics "Layer" pos:[262,138] width:62 height:13
 	dropdownList GenerateListPhysics "" pos:[347,106] width:123 height:21 enabled:false items:#("triangle_mesh", "convex_shape", "box_shape", "sphere_shape", "plane_shape", "capsule_shape")
-	dropdownList LayerListPhysics "" pos:[347,138] width:123 height:21 enabled:false
+	dropdownList LayerListPhysics "" pos:[347,138] width:123 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
 	
 	GroupBox LogicGroup "Logic" pos:[258,17] width:223 height:69
 	checkbox GenerateCheckLogic "Generate" pos:[261,35] width:66 height:13
@@ -22,7 +22,7 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[21,216] width:217 height:17
 	checkbox WorldTransformCheckBox "Don't export world transform" pos:[21,240] width:217 height:17
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[21,184] width:91 height:17
-	edittext edt4 "" pos:[112,184] width:120 height:19
+	edittext LinkedToBoneEditText "" pos:[112,184] width:120 height:19
 	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[21,268] width:217 height:17
 	label lbl7 "Technique" pos:[21,152] width:64 height:18
 	edittext LineEditTechnique "" pos:[112,152] width:120 height:19
@@ -245,44 +245,60 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		if ((classof  Obj)==ObjectSet)==false then
 		(
 			--------RENDER---------
+			--ADD/UPDATE EXPORT CHECKBOX
+			SetPropertyCheck Obj "export_check_render" ExportCheckRender
 			--ADD/UPDATE PROPERTY EXPORT
-			SetPropertyCheckList  Obj "export_render" ExportCheckRender ExportListRender
-			--ADD/UPDATE PROPERTY VISIBLE
+			SetPropertyCheckList Obj "export_render" ExportCheckRender ExportListRender
+			--ADD/UPDATE VISIBLE
 			SetPropertyCheck Obj "visible_render" VisibleCheckRender
-			--ADD/UPDATE PROPERTY LAYER
+			--ADD/UPDATE LAYER CHECKBOX
+			SetPropertyCheck Obj "layer_check_render" LayerCheckRender
+			--ADD/UPDATE LAYER
 			SetPropertyCheckList Obj "layer_render" LayerCheckRender LayerListRender
-			--ADD/UPDATE PROPERTY ANIMATION MODEL
+			--ADD/UPDATE ANIMATE MODEL
 			SetPropertyEditText Obj "anim_model" AnimModelEditText
-			--------PHYSICS---------
-			--ADD/UPDATE PROPERTY GENERATE
-			SetPropertyCheckList Obj "generate_physics" GenerateCheckPhysics GenerateListPhysics
-			--ADD/UPDATE PROPERTY LAYER
-			SetPropertyCheckList Obj "layer_physics" LayerCheckPhysics LayerListPhysics
-			--------LOGIC---------
-			--ADD/UPDATE PROPERTY GENERATE
-			SetPropertyCheckList Obj "generate_logic" GenerateCheckLogic GenerateListLogic
+			--ADD/UPDATE TECHNIQUE
+			SetPropertyEditText Obj "technique" LineEditTechnique
+			--ADD/UPDATE LINKED CHECKBOX
+			SetPropertyCheck Obj "linked_to_bone_check" LinkedToBoneCheckBox
+			--ADD/UPDATE LINKED
+			SetPropertyEditText Obj "linked_to_bone" LinkedToBoneEditText
 			--ADD/UPDATE PROPERTY CAMERA VISIBILITY
 			SetPropertyCheck Obj "camera_visibility" CameraVisibilityCheckBox
 			--ADD/UPDATE PROPERTY WORLD TRANSFORM
 			SetPropertyCheck Obj "world_transform" WorldTransformCheckBox
-			--ADD/UPDATE PROPERTY LINKED TO BONE
-			SetPropertyCheck Obj "linked_to_bone" LinkedToBoneCheckBox
-			--ADD/UPDATE PROPERTY edt4
-			SetPropertyEditText Obj "edt4" edt4
-			--ADD/UPDATE PROPERTY EXPORT TO CINEMATICS
+			--ADD/UPDATE EXPORT CINEMATICS CHECKBOX
 			SetPropertyCheck Obj "export_to_cinematics" ExportToCinematicsCheckbox
-			--ADD/UPDATE PROPERTY LINE EDIT TECHNIQUE
-			SetPropertyEditText Obj "line_edit_technique" LineEditTechnique
+			--------PHYSICS---------
+			--ADD/UPDATE GENERATE CHECKBOX
+			SetPropertyCheck Obj "generate_check_physics" GenerateCheckPhysics
+			--ADD/UPDATE GENERATE
+			SetPropertyCheckList Obj "generate_physics" GenerateCheckPhysics GenerateListPhysics
+			--ADD/UPDATE LAYER CHECKBOX
+			SetPropertyCheck Obj "layer_check_physics" LayerCheckPhysics
+			--ADD/UPDATE LAYER
+			SetPropertyCheckList Obj "layer_physics" LayerCheckPhysics LayerListPhysics
+			--------LOGIC---------
+			--ADD/UPDATE GENERATE CHECKBOX
+			SetPropertyCheck Obj "generate_check_logic" GenerateCheckLogic
+			--ADD/UPDATE GENERATE
+			SetPropertyCheckList Obj "generate_logic" GenerateCheckLogic GenerateListLogic
 			--ADD/UPDATE PROPERTY SHOW NORMAL
 			SetPropertyCheck Obj "show_normal" ShowNormalCheck
+			--------EVENTS---------
+			--ADD/UPDATE PROPERTY GENERATE EVENTS CHECKBOX
+			SetPropertyCheck Obj "generate_events_check" GenerateEventsCheckBox
 			--ADD/UPDATE PROPERTY GENERATE EVENTS
 			SetPropertyCheckList Obj "generate_events" GenerateEventsCheckBox GenerateEventsComboBox
+			--------TRAKS---------
 			--ADD/UPDATE PROPERTY GENERATE TRACKS
 			SetPropertyCheck Obj "generate_tracks" GenerateTracksCheckBox
+			--------CAMERAS---------
 			--ADD/UPDATE PROPERTY CYCLE CAMERA
 			SetPropertyCheck Obj "cycle_camera" CycleCameraCheckBox
 			--ADD/UPDATE PROPERTY REVERSE CAMERA
 			SetPropertyCheck Obj "reverse_camera" ReverseCameraCheckBox
+			--------LIGHTS---------
 			--ADD/UPDATE PROPERTY EXPORT LIGHTS
 			SetPropertyCheck Obj "export_lights" ExportLightsCheckBox
 			ObjAnterior=Obj
@@ -292,44 +308,60 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			for i=1 to Obj.count do
 			(
 				--------RENDER---------
+				--ADD/UPDATE EXPORT CHECKBOX
+				SetPropertyCheck Obj[i] "export_check_render" ExportCheckRender
 				--ADD/UPDATE PROPERTY EXPORT
 				SetPropertyCheckList Obj[i] "export_render" ExportCheckRender ExportListRender
 				--ADD/UPDATE VISIBLE
 				SetPropertyCheck Obj[i] "visible_render" VisibleCheckRender
+				--ADD/UPDATE LAYER CHECKBOX
+				SetPropertyCheck Obj[i] "layer_check_render" LayerCheckRender
 				--ADD/UPDATE LAYER
 				SetPropertyCheckList Obj[i] "layer_render" LayerCheckRender LayerListRender
 				--ADD/UPDATE ANIMATE MODEL
 				SetPropertyEditText Obj[i] "anim_model" AnimModelEditText
-				--------PHYSICS---------
-				--ADD/UPDATE GENERATE
-				SetPropertyCheckList Obj[i] "generate_physics" GenerateCheckPhysics GenerateListPhysics
-				--ADD/UPDATE LAYER
-				SetPropertyCheckList Obj[i] "layer_physics" LayerCheckPhysics LayerListPhysics
-				--------LOGIC---------
-				--ADD/UPDATE GENERATE
-				SetPropertyCheckList Obj[i] "generate_logic" GenerateCheckLogic GenerateListLogic
+				--ADD/UPDATE TECHNIQUE
+				SetPropertyEditText Obj[i] "technique" LineEditTechnique
+				--ADD/UPDATE LINKED CHECKBOX
+				SetPropertyCheck Obj[i] "linked_to_bone_check" LinkedToBoneCheckBox
+				--ADD/UPDATE LINKED
+				SetPropertyEditText Obj[i] "linked_to_bone" LinkedToBoneEditText
 				--ADD/UPDATE PROPERTY CAMERA VISIBILITY
 				SetPropertyCheck Obj[i] "camera_visibility" CameraVisibilityCheckBox
 				--ADD/UPDATE PROPERTY WORLD TRANSFORM
 				SetPropertyCheck Obj[i] "world_transform" WorldTransformCheckBox
-				--ADD/UPDATE PROPERTY LINKED TO BONE
-				SetPropertyCheck Obj[i] "linked_to_bone" LinkedToBoneCheckBox
-				--ADD/UPDATE PROPERTY edt4
-				SetPropertyEditText Obj[i] "edt4" edt4
-				--ADD/UPDATE PROPERTY EXPORT TO CINEMATICS
+				--ADD/UPDATE EXPORT CINEMATICS CHECKBOX
 				SetPropertyCheck Obj[i] "export_to_cinematics" ExportToCinematicsCheckbox
-				--ADD/UPDATE PROPERTY LINE EDIT TECHNIQUE
-				SetPropertyEditText Obj[i] "line_edit_technique" LineEditTechnique
+				--------PHYSICS---------
+				--ADD/UPDATE GENERATE CHECKBOX
+				SetPropertyCheck Obj[i] "generate_check_physics" GenerateCheckPhysics
+				--ADD/UPDATE GENERATE
+				SetPropertyCheckList Obj[i] "generate_physics" GenerateCheckPhysics GenerateListPhysics
+				--ADD/UPDATE LAYER CHECKBOX
+				SetPropertyCheck Obj[i] "layer_check_physics" LayerCheckPhysics
+				--ADD/UPDATE LAYER
+				SetPropertyCheckList Obj[i] "layer_physics" LayerCheckPhysics LayerListPhysics
+				--------LOGIC---------
+				--ADD/UPDATE GENERATE CHECKBOX
+				SetPropertyCheck Obj[i] "generate_check_logic" GenerateCheckLogic
+				--ADD/UPDATE GENERATE
+				SetPropertyCheckList Obj[i] "generate_logic" GenerateCheckLogic GenerateListLogic
 				--ADD/UPDATE PROPERTY SHOW NORMAL
 				SetPropertyCheck Obj[i] "show_normal" ShowNormalCheck
+				--------EVENTS---------
+				--ADD/UPDATE PROPERTY GENERATE EVENTS CHECKBOX
+				SetPropertyCheck Obj[i] "generate_events_check" GenerateEventsCheckBox
 				--ADD/UPDATE PROPERTY GENERATE EVENTS
 				SetPropertyCheckList Obj[i] "generate_events" GenerateEventsCheckBox GenerateEventsComboBox
+				--------TRAKS---------
 				--ADD/UPDATE PROPERTY GENERATE TRACKS
 				SetPropertyCheck Obj[i] "generate_tracks" GenerateTracksCheckBox
+				--------CAMERAS---------
 				--ADD/UPDATE PROPERTY CYCLE CAMERA
 				SetPropertyCheck Obj[i] "cycle_camera" CycleCameraCheckBox
 				--ADD/UPDATE PROPERTY REVERSE CAMERA
 				SetPropertyCheck Obj[i] "reverse_camera" ReverseCameraCheckBox
+				--------LIGHTS---------
 				--ADD/UPDATE PROPERTY EXPORT LIGHTS
 				SetPropertyCheck Obj[i] "export_lights" ExportLightsCheckBox
 				ObjAnterior=Obj[i]
@@ -350,11 +382,17 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		if ((classof $)==ObjectSet)==false then
 		(
 			--------RENDER---------
+			--OBTAIN PROPERTY EXPORT CHECKBOX
+			Property=getUserProp $ "export_check_render"
+			GetPropertyCheckBox Property VisibleCheckRender
 			--OBTAIN PROPERTY EXPORT
 			Property=getUserProp $ "export_render"
 			GetPropertyCheckList Property ExportCheckRender ExportListRender
 			--OBTAIN PROPERTY VISIBLE
 			Property=getUserProp $ "visible_render"
+			GetPropertyCheckBox Property VisibleCheckRender
+			--OBTAIN PROPERTY LAYER CHECKBOX
+			Property=getUserProp $ "layer_check_render"
 			GetPropertyCheckBox Property VisibleCheckRender
 			--OBTAIN PROPERTY LAYER
 			Property=getUserProp $ "layer_render"
@@ -362,50 +400,66 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			--OBTAIN PROPERTY ANIMATION MODEL
 			Property=getUserProp $ "anim_model"
 			GetPropertyEditText Property AnimModelEditText
-			--------PHYSICS---------
-			--OBTAIN GENERATE
-			Property=getUserProp $ "generate_physics"
-			GetPropertyCheckList Property GenerateCheckPhysics GenerateListPhysics
-			--OBTAIN LAYER
-			Property=getUserProp $ "layer_physics"
-			GetPropertyCheckList Property LayerCheckPhysics LayerListPhysics
-			--------LOGIC---------
-			--OBTAIN GENERATE
-			Property=getUserProp $ "generate_logic"
-			GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
+			--OBTAIN LINE EDIT TECHNIQUE
+			Property=getUserProp $ "technique"
+			GetPropertyEditText Property LineEditTechnique
+			--OBTAIN LINKED TO BONE
+			Property=getUserProp $ "linked_to_bone_check"
+			GetPropertyCheckBox Property LinkedToBoneCheckBox
+			--OBTAIN edt4
+			Property=getUserProp $ "linked_to_bone" 
+			GetPropertyEditText Property LinkedToBoneEditText
 			--OBTAIN CAMERA VISIBILITY
 			Property=getUserProp $ "camera_visibility"
 			GetPropertyCheckBox Property CameraVisibilityCheckBox
 			--OBTAIN WORLD TRANSFORM
 			Property=getUserProp $ "world_transform"
 			GetPropertyCheckBox Property WorldTransformCheckBox
-			--OBTAIN LINKED TO BONE
-			Property=getUserProp $ "linked_to_bone"
-			GetPropertyCheckBox Property LinkedToBoneCheckBox
-			--OBTAIN edt4
-			Property=getUserProp $ "edt4"
-			GetPropertyEditText Property edt4
 			--OBTAIN EXPORT TO CINEMATICS
 			Property=getUserProp $ "export_to_cinematics"
 			GetPropertyCheckBox Property ExportToCinematicsCheckbox
-			--OBTAIN LINE EDIT TECHNIQUE
-			Property=getUserProp $ "line_edit_technique"
-			GetPropertyEditText Property LineEditTechnique
+			--------PHYSICS---------
+			--OBTAIN GENERATE CHECKBOX
+			Property=getUserProp $ "generate_check_physics"
+			GetPropertyCheckBox Property GenerateCheckPhysics
+			--OBTAIN GENERATE
+			Property=getUserProp $ "generate_physics"
+			GetPropertyCheckList Property GenerateCheckPhysics GenerateListPhysics
+			--OBTAIN GENERATE CHECKBOX
+			Property=getUserProp $ "layer_check_physics"
+			GetPropertyCheckBox Property LayerCheckPhysics
+			--OBTAIN LAYER
+			Property=getUserProp $ "layer_physics"
+			GetPropertyCheckList Property LayerCheckPhysics LayerListPhysics
+			--------LOGIC---------
+			--OBTAIN GENERATE CHECKBOX
+			Property=getUserProp $ "generate_check_logic"
+			GetPropertyCheckBox Property GenerateCheckLogic
+			--OBTAIN GENERATE
+			Property=getUserProp $ "generate_logic"
+			GetPropertyCheckList Property GenerateCheckLogic GenerateListLogic
 			--OBTAIN SHOW NORMAL
 			Property=getUserProp $ "show_normal"
 			GetPropertyCheckBox Property ShowNormalCheck
+			--------EVENTS---------
+			--OBTAIN GENERATE EVENTS CHECKBOX
+			Property=getUserProp $ "generate_events_check"
+			GetPropertyCheckBox Property GenerateEventsCheckBox
 			--OBTAIN GENERATE EVENTS
 			Property=getUserProp $ "generate_events"
 			GetPropertyCheckList Property GenerateEventsCheckBox GenerateEventsComboBox
+			--------TRAKS---------
 			--OBTAIN GENERATE TRACKS
 			Property=getUserProp $ "generate_tracks"
 			GetPropertyCheckBox Property GenerateTracksCheckBox
+			--------CAMERAS---------
 			--OBTAIN CYCLE CAMERA
 			Property=getUserProp $ "cycle_camera"
 			GetPropertyCheckBox Property CycleCameraCheckBox
 			--OBTAIN REVERSE CAMERA
 			Property=getUserProp $ "reverse_camera"
 			GetPropertyCheckBox Property ReverseCameraCheckBox
+			--------LIGHTS---------
 			--OBTAIN EXPORT LIGHTS
 			Property=getUserProp $ "export_lights"
 			GetPropertyCheckBox Property ExportLightsCheckBox
@@ -418,7 +472,6 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	)
 	on SetButton pressed do
 	(
-		format "El objeto es %\n" ObjAnterior
 		if ObjAnterior!=undefined then
 		(
 			if ObjAnterior!=$ then
@@ -440,4 +493,5 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		
 	)
 )
---createDialog UABSetProperties
+
+createDialog UABSetProperties
