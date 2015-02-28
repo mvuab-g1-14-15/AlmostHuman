@@ -30,13 +30,21 @@ CEffect::CEffect()
     m_LightsEndRangeAttenuationParameter( 0 ),
     m_CameraPositionParameter( 0 ),
     m_BonesParameter( 0 ),
-    m_TimeParameter( 0 ),
+   
     m_UseDebugColor( 0 ),
     m_DebugColor( 0 ),
+    
+    // Timers
+    m_TimeParameter( 0 ),
+    m_DeltaTimeParameter( 0 ),
+
+    // Fog
     m_FogStart( 0 ),
     m_FogEnd( 0 ),
     m_FogExp( 0 ),
     m_FogFun( 0 ),
+
+    // Texture
 	m_HeightTexture( 0 ),
 	m_WidthTexture( 0 )
 {
@@ -65,13 +73,21 @@ CEffect::CEffect( const std::string& EffectName )
     m_LightsEndRangeAttenuationParameter( 0 ),
     m_CameraPositionParameter( 0 ),
     m_BonesParameter( 0 ),
-    m_TimeParameter( 0 ),
+    
     m_UseDebugColor( 0 ),
     m_DebugColor( 0 ),
+
+    // Timers
+    m_TimeParameter( 0 ),
+    m_DeltaTimeParameter( 0 ),
+
+    // Fog
     m_FogStart( 0 ),
     m_FogEnd( 0 ),
     m_FogExp( 0 ),
     m_FogFun( 0 ),
+
+    // Texture
 	m_HeightTexture( 0 ),
 	m_WidthTexture( 0 )
 {
@@ -116,13 +132,21 @@ void CEffect::SetNullParameters()
   m_LightsEndRangeAttenuationParameter = 0;
   m_CameraPositionParameter = 0;
   m_BonesParameter = 0;
+
+  // Timers
   m_TimeParameter = 0;
+  m_DeltaTimeParameter = 0;
+
+  // Fog
   m_FogStart = 0;
   m_FogEnd = 0;
   m_FogExp = 0;
   m_FogFun = 0;
+
+  // Texture
   m_HeightTexture = 0;
   m_WidthTexture = 0;
+
   ResetLightsHandle();
 }
 

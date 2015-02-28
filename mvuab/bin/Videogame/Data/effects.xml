@@ -28,9 +28,14 @@
 		<effect name="SobelEffect" file="data/effects/Sobel.fx"/>
 		<handles/>
 	</technique>
+    
+    <technique name="PerlinNoiseTechnique" vertex_type="1104">
+		<effect name="PerlinNoiseEffect" file="data/effects/PerlinNoise.fx"/>
+		<handles use_time="true" use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
+	</technique>
 
-	<technique name="FOGTechnique" vertex_type="1104">
-		<effect name="FOGEffect" file="data/effects/FOG.fx"/>
+	<technique name="FogTechnique" vertex_type="1104">
+		<effect name="FogEffect" file="data/effects/Fog.fx"/>
 		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
 	</technique>
 	

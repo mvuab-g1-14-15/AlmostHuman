@@ -26,7 +26,10 @@ const char LightsStartRangeAttenuationParameterStr[] = "LightsStartAngle";
 const char LightsEndRangeAttenuationParameterStr[] = "LightsEndAngle";
 const char CameraPositionParameterStr[] = "CameraPosition";
 const char BonesParameterStr[] = "Bones";
-const char TimeParameterStr[] = "DeltaTime";
+
+const char TimeParameterStr[] = "Time";
+const char DeltaTimeParameterStr[] = "DeltaTime";
+
 const char DebugColorStr[] = "DebugColor";
 const char UseDebugColorStr[] = "UseDebugColor";
 

@@ -1,4 +1,6 @@
+// http://www.noisemachine.com/talk1/index.html
 // http://www.kamend.com/2012/06/perlin-noise-and-glsl/
+// http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 // http://alaingalvan.tumblr.com/post/92065579169/github-project-3d-perlin-noise-dependancy
 
 #include "samplers.fxh"
@@ -113,7 +115,7 @@ float turb(float3 P, float3 rep, float lacunarity, float gain)
     float sc = 1.0;
     float totalgain = 1.0;
     
-    for (float i = 0.0; i < 6.0; i++)
+    for (int i = 0; i < 6; i++)
     {
         sum += totalgain * pnoise(P * sc, rep);
         sc *= lacunarity;
@@ -124,11 +126,11 @@ float turb(float3 P, float3 rep, float lacunarity, float gain)
 
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
-    float t = turb(float3(UV.x, UV.y, g_Time), float3(1.3, 1.2, 2.0), 3, 0.6);
+    float t = turb(float3(UV.x, UV.y, g_Time * 0.09), float3(1.3, 1.2, 2.0), 3, 0.6);
     return tex2D(S0LinearSampler, UV) * float4(t, t, t, t);
 }
 
-technique DrawQuadSampler0Technique
+technique PerlinNoiseTechnique
 {
     pass p0
     {

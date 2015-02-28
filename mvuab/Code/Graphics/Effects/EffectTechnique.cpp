@@ -8,33 +8,44 @@
 #include "Logger\Logger.h"
 #include "GraphicsManager.h"
 
-CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
-                                    CXMLTreeNode& HandlesNode )
+CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName, CXMLTreeNode& HandlesNode )
   : m_TechniqueName( TechniqueName ),
     m_EffectName( EffectName ),
     m_UseCameraPosition( HandlesNode.GetBoolProperty( "use_camera_position", false ) ),
     m_UseInverseProjMatrix( HandlesNode.GetBoolProperty( "use_inverse_projection_matrix", false ) ),
     m_UseInverseViewMatrix( HandlesNode.GetBoolProperty( "use_inverse_view_matrix", false ) ),
     m_UseInverseWorldMatrix( HandlesNode.GetBoolProperty( "use_inverse_world_matrix", false ) ),
-    m_UseLights( HandlesNode.GetBoolProperty( "use_lights", false ) ),
-    m_UseLightAmbientColor( HandlesNode.GetBoolProperty( "use_light_ambient_color", false ) ),
+
+
     m_UseProjMatrix( HandlesNode.GetBoolProperty( "use_projection_matrix", false ) ),
     m_UseViewMatrix( HandlesNode.GetBoolProperty( "use_view_matrix", false ) ),
     m_UseWorldMatrix( HandlesNode.GetBoolProperty( "use_world_matrix", false ) ),
     m_UseWorldViewMatrix( HandlesNode.GetBoolProperty( "use_world_view_matrix", false ) ),
     m_UseWorldViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_world_view_projection_matrix", false ) ),
     m_UseViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_projection_matrix", false ) ),
-    m_UseViewToLightProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix",
-                                      false ) ),
-    m_UseTime( HandlesNode.GetBoolProperty( "use_time", false ) ),
-    m_UseDebugColor( HandlesNode.GetBoolProperty( "use_debug_color", false ) ),
+    m_UseViewToLightProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix", false ) ),
+
+    // Lights
     m_NumOfLights( HandlesNode.GetIntProperty( "num_of_lights", 0 ) ),
+    m_UseLights( HandlesNode.GetBoolProperty( "use_lights", false ) ),
+    m_UseLightAmbientColor( HandlesNode.GetBoolProperty( "use_light_ambient_color", false ) ),
+    
+    // Debug
+    m_UseDebugColor( HandlesNode.GetBoolProperty( "use_debug_color", false ) ),
+    m_DebugColor( Math::colWHITE ),
+    
+    // Timers
+    m_UseTime( HandlesNode.GetBoolProperty( "use_time", false ) ),
+    m_UseDeltaTime(HandlesNode.GetBoolProperty( "use_delta_time", false )), 
+
+    // Fog
     m_FogStart( HandlesNode.GetFloatProperty( "fog_start", 0 ) ),
     m_FogEnd( HandlesNode.GetFloatProperty( "fog_end", 0 ) ),
     m_FogExp( HandlesNode.GetFloatProperty( "fog_exp", 0 ) ),
     m_FogFun( HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
-    m_DebugColor( Math::colWHITE ),
-	m_UseTextureSizesGaussian(HandlesNode.GetBoolProperty("use_texture_size", false) ),
+
+    // Texture
+	m_UseTextureSizes( HandlesNode.GetBoolProperty("use_texture_size", false) ),
 	m_TextureHeight( HandlesNode.GetIntProperty( "texture_height", 0 ) ),
 	m_TextureWidth( HandlesNode.GetIntProperty( "texture_width", 0 ) )
 {
@@ -47,9 +58,9 @@ CEffectTechnique::~CEffectTechnique()
   m_Effect = 0;
 }
 
-void CEffectTechnique::SetUseResolution(bool active)
+void CEffectTechnique::SetUseTextureSize(bool active)
 {
-    m_UseTextureSizesGaussian = active;
+    m_UseTextureSizes = active;
 }
 
 void CEffectTechnique::SetTextureSize(unsigned int width, unsigned int height)
@@ -66,7 +77,7 @@ bool CEffectTechnique::BeginRender()
   // Obtain the direct x effect
   LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
   D3DXHANDLE l_Handle = NULL;
-
+   
   if ( m_UseCameraPosition )
   {
     Math::Vect3f l_CameraEye = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
@@ -82,12 +93,6 @@ bool CEffectTechnique::BeginRender()
     l_DebugColor[2] = m_DebugColor.GetBlue();
     l_DebugColor[3] = m_DebugColor.GetAlpha();
     l_Effect->SetFloatArray( l_Handle, l_DebugColor, sizeof( float ) * 4 );
-  }
-
-  if ( m_UseTime )
-  {
-    l_Handle = m_Effect->GetTimeParameter();
-    l_Effect->SetFloat( l_Handle, deltaTime );
   }
 
   if ( m_FogFun == 2 )
@@ -111,13 +116,25 @@ bool CEffectTechnique::BeginRender()
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
 
-  if(m_UseTextureSizesGaussian)
+  if(m_UseTextureSizes)
   {
       l_Handle = m_Effect->GetHeightTexture();
       l_Effect->SetInt( l_Handle, m_TextureHeight);
       
       l_Handle = m_Effect->GetWidthTexture();
       l_Effect->SetInt( l_Handle, m_TextureWidth );
+  }
+
+  if(m_UseTime)
+  {
+    l_Handle = m_Effect->GetTimeParameter();
+    l_Effect->SetFloat( l_Handle, CCore::GetSingletonPtr()->GetTimer()->GetTime() );
+  }
+
+  if(m_UseDeltaTime)
+  {
+    l_Handle = m_Effect->GetDeltaTimeParameter();
+    l_Effect->SetFloat( l_Handle, CCore::GetSingletonPtr()->GetTimer()->GetElapsedTime());
   }
 
   SetupMatrices();
