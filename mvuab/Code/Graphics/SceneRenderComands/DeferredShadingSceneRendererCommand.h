@@ -5,18 +5,15 @@
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
-class CRenderableObjectTechnique;
 
 class CDeferredShadingSceneRendererCommand : public CStagedTexturedRendererCommand
 {
-	private:
-        CRenderableObjectTechnique  *m_RenderableObjectTechnique;
+private:
+  void SetLightsData( CGraphicsManager& GM );
+public:
+  CDeferredShadingSceneRendererCommand( CXMLTreeNode& atts );
+  ~CDeferredShadingSceneRendererCommand();
 
-        void SetLightsData(CGraphicsManager &GM);
-    public:
-        CDeferredShadingSceneRendererCommand(CXMLTreeNode &atts);
-        ~CDeferredShadingSceneRendererCommand();
-
-        void Execute(CGraphicsManager &GM);
+  void Execute( CGraphicsManager& GM );
 };
 #endif

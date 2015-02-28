@@ -10,6 +10,7 @@
 #include <vector>
 
 class CGraphicsManager;
+class CRenderableObjectTechnique;
 
 class CStagedTexturedRendererCommand : public CSceneRendererCommand
 {
@@ -28,6 +29,8 @@ protected:
   };
 
   std::vector<CKGStageTexture>    m_StageTextures;
+  CRenderableObjectTechnique*  m_RenderableObjectTechnique;
+
   void DebugTextures();
 public:
   CStagedTexturedRendererCommand( CXMLTreeNode& atts );

@@ -11,6 +11,10 @@
 	<pool_renderable_object_technique name="draw_quad_sampler_0_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
 	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="lens_flare_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="LensFlareTechnique"/>
+	</pool_renderable_object_technique>
     
     <pool_renderable_object_technique name="Perlin_noise_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="PerlinNoiseTechnique"/>
@@ -42,14 +46,6 @@
 	
 	<pool_renderable_object_technique name="Fog_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="FogTechnique"/>
-	</pool_renderable_object_technique>
-	
-	<pool_renderable_object_technique name="Lens_Flare_step1_pool_renderable_object_technique">
-		<default_technique vertex_type="1104" technique="LensFlareS1Technique"/>
-	</pool_renderable_object_technique>
-	
-	<pool_renderable_object_technique name="Lens_Flare_step2_pool_renderable_object_technique">
-		<default_technique vertex_type="1104" technique="LensFlareS2Technique"/>
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="Bloom_step1_pool_renderable_object_technique">

@@ -39,13 +39,8 @@
 		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
 	</technique>
 	
-	<technique name="LensFlareS1Technique" vertex_type="1104">
-		<effect name="LensFlareS1Effect" file="data/effects/LensFlareS1.fx"/>
-		<handles use_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
-	</technique>
-	
-	<technique name="LensFlareS2Technique" vertex_type="1104">
-		<effect name="LensFlareS2Effect" file="data/effects/LensFlareS2.fx"/>
+	<technique name="LensFlareTechnique" vertex_type="1104">
+		<effect name="LensFlareEffect" file="data/effects/LensFlare.fx"/>
 		<handles/>
 	</technique>
 	

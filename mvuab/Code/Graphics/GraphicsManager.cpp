@@ -1059,7 +1059,7 @@ void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
   m_uHeight = _Height;
 }
 
-Math::Vect2i CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
+Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
   D3DVIEWPORT9 pViewport;
@@ -1074,13 +1074,13 @@ Math::Vect2i CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
                    &worldMatrix );
 
   // To Debug uncomment this line
-  //CFontManager::GetSingletonPtr()->DrawDefaultText( textPos.x, textPos.y, Math::colWHITE, "Light" );
+  //CFontManager::GetSingletonPtr()->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
+  // "Light" );
 
-  return Math::Vect2i( int( Math::Utils::Round( l_OutPosition.y ) ),
-                       int( Math::Utils::Round( l_OutPosition.z ) ) );
+  return Math::Vect2f( l_OutPosition.x , l_OutPosition.y );
 }
 
-Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2i Point )
+Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
   D3DVIEWPORT9 pViewport;
