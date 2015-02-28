@@ -44,13 +44,13 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
     l_Color = Saturation(l_Color, g_Saturation);
     l_Color = ContrastBrightness(l_Color, g_Constrast, g_Brightness);
     
-	return float4(l_Color, 1.0);
+    return float4(l_Color, 1.0);
 }
 
 technique DrawQuadSampler0Technique
 {
-	pass p0
+    pass p0
     {
-		PixelShader = compile ps_3_0 mainPS();
-	}
+        PixelShader = compile ps_3_0 mainPS();
+    }
 }
