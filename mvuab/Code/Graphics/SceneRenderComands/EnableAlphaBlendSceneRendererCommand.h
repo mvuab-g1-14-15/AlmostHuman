@@ -1,5 +1,5 @@
-#ifndef ENABLEZ_ALPHA_BLEND_SCENE_RENDERER_COMMAND_
-#define ENABLEZ_ALPHA_BLEND_SCENE_RENDERER_COMMAND_
+#ifndef ENABLE_ALPHA_BLEND_SCENE_RENDERER_COMMAND_
+#define ENABLE_ALPHA_BLEND_SCENE_RENDERER_COMMAND_
 #pragma once
 
 
@@ -10,9 +10,6 @@ class CGraphicsManager;
 
 class CEnableAlphaBlendSceneRendererCommand : public CSceneRendererCommand
 {
-private:
-  std::string m_SrcBlend;
-  std::string m_DstBlend;
 public:
   CEnableAlphaBlendSceneRendererCommand( CXMLTreeNode& atts );
   ~ CEnableAlphaBlendSceneRendererCommand();

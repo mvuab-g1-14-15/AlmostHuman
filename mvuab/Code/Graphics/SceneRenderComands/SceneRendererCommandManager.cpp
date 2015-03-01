@@ -23,6 +23,9 @@
 #include "SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h"
 #include "SceneRenderComands\GaussianSceneRendererCommand.h"
 #include "SceneRenderComands\LensOfFlareRendererCommand.h"
+#include "SceneRenderComands\DisableAlphaTestSceneRendererCommand.h"
+#include "SceneRenderComands\EnableAlphaTestSceneRendererCommand.h"
+#include "SceneRenderComands\SetBlendSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -300,6 +303,32 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
         if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
              GetNextName().c_str() ), l_LensOfFlareCmd ) )
           CHECKED_DELETE( l_LensOfFlareCmd );
+      }
+      else if ( TagName == "enable_alpha_test" )
+      {
+        CEnableAlphaTestSceneRendererCommand* l_EnableAlphaTestCmd = new
+        CEnableAlphaTestSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ), l_EnableAlphaTestCmd ) )
+          CHECKED_DELETE( l_EnableAlphaTestCmd );
+      }
+      else if ( TagName == "set_blend" )
+      {
+        CSetBlendSceneRendererCommand* l_SetBlendCmd = new CSetBlendSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ), l_SetBlendCmd ) )
+          CHECKED_DELETE( l_SetBlendCmd );
+      }
+      else if ( TagName == "disable_alpha_test" )
+      {
+        CDisableAlphaTestSceneRendererCommand* l_DisableAlphaTestCmd = new
+        CDisableAlphaTestSceneRendererCommand( TreeNode( i ) );
+
+        if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
+             GetNextName().c_str() ), l_DisableAlphaTestCmd ) )
+          CHECKED_DELETE( l_DisableAlphaTestCmd );
       }
     }
   }

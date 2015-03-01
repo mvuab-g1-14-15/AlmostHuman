@@ -108,3 +108,14 @@
         <texture stage_id="0" name="ActualFrameBuffer"/>
     </render_draw_quad>
 =============================================================================================================================================================
+ENABLE ALPHA BLEND
+<enable_alpha_blend/>
+DISABLE ALPHA BLEND
+<disable_alpha_blend/>
+ENABLE ALPHA TEST
+<enable_alpha_test/>
+DISABLE ALPHA TEST
+<disable_alpha_test/>
+SET BLEND
+<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
+=============================================================================================================================================================
