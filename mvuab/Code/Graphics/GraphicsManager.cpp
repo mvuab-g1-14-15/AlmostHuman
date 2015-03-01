@@ -933,7 +933,6 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
   {
     m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
     l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
-
     UINT l_NumPasses;
     l_Effect->Begin( &l_NumPasses, 0 );
 
@@ -1067,16 +1066,13 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
   m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
   m_pD3DDevice->GetViewport( &pViewport );
-
   D3DXVECTOR3 l_OutPosition;
   D3DXVECTOR3 modPos( Point.x, Point.y, Point.z );
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
                    &worldMatrix );
-
   // To Debug uncomment this line
   //CFontManager::GetSingletonPtr()->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
   // "Light" );
-
   return Math::Vect2f( l_OutPosition.x , l_OutPosition.y );
 }
 
@@ -1088,7 +1084,6 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
   m_pD3DDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
   m_pD3DDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
   m_pD3DDevice->GetViewport( &pViewport );
-
   D3DXVECTOR3 l_OutPosition;
   D3DXVECTOR3 modPos( Point.x, Point.y, 0 );
   D3DXVec3Unproject( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,

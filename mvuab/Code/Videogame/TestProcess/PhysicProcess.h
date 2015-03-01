@@ -34,7 +34,7 @@ private:
   CTriggerManager*                m_TriggerManager;
   bool                            m_Salir;
   float                            m_Time;
-  CPhysicController*				m_PhysicController;
+  CPhysicController*        m_PhysicController;
 
 public:
   CPhysicProcess();
@@ -61,6 +61,7 @@ public:
                   CPhysicUserData* _Other_Shape );
 
   void InitSceneCharacterController();
+  void InitScenePhysicsSamplers();
 
 
 };

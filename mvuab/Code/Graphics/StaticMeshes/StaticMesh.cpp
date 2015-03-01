@@ -208,7 +208,6 @@ bool CStaticMesh::Load( const std::string& FileName )
     {
       CalcTangentsAndBinormals( l_VtxsAddress, ( unsigned short* )l_IdxAddress, l_VrtexCount, l_IdxCount,
                                 l_TypeSize, 0, 12, 28, 44, 60 );
-
       l_RV = new CIndexedVertexs<TRNM_VERTEX>( CGraphicsManager::GetSingletonPtr(),
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
     }
@@ -259,11 +258,6 @@ void CStaticMesh::Render( CGraphicsManager* GM )
     }
     else
       CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "No technique in file %s", m_FileName.c_str() );
-
-    /*CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
-    unsigned short l_VertexType = m_RVs[i]->GetVertexType();
-    std::string l_EffectName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault( l_VertexType );
-    m_RVs[i]->Render( GM, l_pEffectManager->GetResource( l_EffectName ) );*/
   }
 }
 
