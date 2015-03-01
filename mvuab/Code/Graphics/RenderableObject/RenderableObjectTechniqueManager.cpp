@@ -26,9 +26,8 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
 
   if ( !l_File.LoadFile( FileName.c_str() ) )
   {
-    std::string err = "ERROR reading the file " + FileName;
-    MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
-    exit( EXIT_FAILURE ); // TODO RAUL
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "ERROR reading the file %s", FileName.c_str() );
+    return;
   }
 
   m_FileName = FileName;
