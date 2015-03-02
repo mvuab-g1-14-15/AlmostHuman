@@ -201,6 +201,15 @@
     <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\EnableAlphaTestSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\SetBlendSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -410,6 +419,15 @@
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\EnableAlphaTestSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\SetBlendSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,7 +44,9 @@ float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDire
 
 float3x4    g_Bones[MAXBONES]                                       : Bones;
 float3      g_CameraPosition                                        : CameraPosition;
+
 float       g_DeltaTime                                             : DeltaTime;
+float       g_Time                                                  : Time;
 
 float4      g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
 float       g_SpecularExponent = 100.0f;

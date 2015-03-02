@@ -23,7 +23,7 @@
         <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
     
-    <gaussian nIteration="1" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
+    <gaussian nIteration="1" technique="GaussianBlur" texture_width_as_frame_buffer="true" width="1366" height="768">
         <texture stage_id="0" name="ActualFrameBuffer"/>
     </gaussian>
     
@@ -37,7 +37,7 @@
         <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
     
-    <set_pool_renderable_objects_technique pool="FOG_pool_renderable_object_technique"/>
+    <set_pool_renderable_objects_technique pool="Fog_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="ActualFrameBuffer"/>
         <texture stage_id="1" name="DepthMapTexture"/>
@@ -54,21 +54,16 @@
     </render_draw_quad>
 =============================================================================================================================================================
     LENS FLARE
-    <set_render_target name="lens_flare_target">
-        <dynamic_texture stage_id="0" name="LensFlareS1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    </set_render_target>
-    
-    <set_pool_renderable_objects_technique pool="Lens_Flare_step1_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="ActualFrameBuffer"/>
-        <texture stage_id="1" name="DepthMapTexture"/>
-    </render_draw_quad>
-
-    <unset_render_target render_target="lens_flare_target"/>
-    <set_pool_renderable_objects_technique pool="Lens_Flare_step2_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="LensFlareS1"/>
-    </render_draw_quad>
+	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+	<lens_of_flare>
+		<texture stage_id="0" name="nova.png"/>
+		<texture stage_id="1" name="extendring.png"/>
+		<texture stage_id="2" name="hexangle.png"/>
+		<texture stage_id="3" name="hexagon.png"/>
+		<texture stage_id="4" name="starring.png"/>
+		<texture stage_id="5" name="star.png"/>
+		<texture stage_id="6" name="extend.png"/>
+	</lens_of_flare>
 =============================================================================================================================================================
     FILTER BLOOM
     <capture_frame_buffer>
@@ -102,4 +97,25 @@
         <texture stage_id="0" name="GaussianBloomFilterBuffer"/>
         <texture stage_id="1" name="ActualFrameBuffer"/>
     </render_draw_quad>
+=============================================================================================================================================================
+    PERLIN NOISE
+    <capture_frame_buffer>
+        <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </capture_frame_buffer>
+    
+    <set_pool_renderable_objects_technique pool="Perlin_noise_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="0" name="ActualFrameBuffer"/>
+    </render_draw_quad>
+=============================================================================================================================================================
+ENABLE ALPHA BLEND
+<enable_alpha_blend/>
+DISABLE ALPHA BLEND
+<disable_alpha_blend/>
+ENABLE ALPHA TEST
+<enable_alpha_test/>
+DISABLE ALPHA TEST
+<disable_alpha_test/>
+SET BLEND
+<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 =============================================================================================================================================================

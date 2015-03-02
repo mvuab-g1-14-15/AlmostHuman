@@ -18,7 +18,7 @@ float4 FogPS(in float2 UV : TEXCOORD0) : COLOR
 	else return CalcGroundFog(l_FogColor, l_Diffuse, l_DistanceFromCameraToPixel, g_CameraPosition, normalize(l_Position - g_CameraPosition));
 }
 
-technique FOGTechnique
+technique FogTechnique
 {
 	pass p0
 	{

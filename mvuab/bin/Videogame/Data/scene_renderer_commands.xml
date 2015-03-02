@@ -40,10 +40,6 @@
         <texture stage_id="2" name="NormalMapTexture"/>
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
-	
-	<lens_of_flare>
-		<texture stage_id="0" name="DiffuseMapTexture"/>
-	</lens_of_flare>
     
     <!--<disable_alpha_blend/>-->
     <!--end pre_render-->

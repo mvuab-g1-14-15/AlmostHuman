@@ -17,6 +17,8 @@ CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts 
     , m_nIteration(atts.GetIntProperty("nIteration", 0))
     , m_NameTechnique(atts.GetPszProperty("technique","no_tech"))
 {
+    CEffectTechnique *l_Technique = CEffectManager::GetSingletonPtr()->GetResource(m_NameTechnique);
+    l_Technique->SetUseTextureSize(true);
 
     if(atts.GetBoolProperty("texture_width_as_frame_buffer", true))
     {
@@ -48,7 +50,6 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager& GM )
 
     l_Technique = CEffectManager::GetSingletonPtr()->GetResource(m_NameTechnique);
     l_Technique->SetTextureSize(m_Width, m_Height);
-    l_Technique->SetUseResolution(true);
 
 	for(size_t i = 0; i < m_nIteration; ++i)
 	{
@@ -56,8 +57,6 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager& GM )
          GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_Technique, l_Rect, Math::CColor::CColor(), m_pAuxTexture[i % 2], 0.0f, 0.0f, 1.0f, 1.0f );
 	     m_pAuxTexture[(i + 1) % 2]->UnsetAsRenderTarget(0);
     }
-
-    l_Technique->SetUseResolution(false);
 
     unsigned int w = 0, h = 0;
     GM.GetWidthAndHeight(w, h);

@@ -7,6 +7,7 @@
 CTimer::CTimer (uint32 avgSamples)
     : m_uSamples(avgSamples)
     , m_DeltaTime(0.0f)
+    , m_fTime(0.0f)
     , m_dLastTime(0)
     , m_FPS(0.0f)
     , m_fFPSTime(0.0f)
@@ -33,21 +34,25 @@ void CTimer::Update( void )
 {
     //-----Actualizacion de los valores FPS y ElpasedTime-----
     //Calculo de la diferencia de tiempo (m_fElpasedTime)
-    float64  l_dCurTime = timeGetTime();
+    float32  l_dCurTime = timeGetTime();
 
     if( m_dLastTime == 0 ) 
         m_dLastTime = l_dCurTime;
 
     m_Deltas[m_uIndex] = (float32)((l_dCurTime - m_dLastTime) * 0.001);
-    m_dLastTime    = l_dCurTime;
+    m_dLastTime = l_dCurTime;
+
 
     float32 d = 0;
     for(unsigned int j=0; j<m_uSamples; j++)
     {
             d += m_Deltas[j];
     }
+
     d /= (float32)m_uSamples;
     m_DeltaTime = d;
+
+    m_fTime += m_DeltaTime;
     m_uIndex = (++m_uIndex) % m_uSamples;
 
     //Calculo de los frames por segundo (m_FPS)

@@ -61,7 +61,6 @@ public:
 
   GET_SET( D3DXHANDLE, CameraPositionParameter );
   GET_SET( D3DXHANDLE, BonesParameter );
-  GET_SET( D3DXHANDLE, TimeParameter );
 
   GET_SET( D3DXHANDLE, DebugColor );
 
@@ -76,10 +75,17 @@ public:
   GET_SET( D3DXHANDLE, BaseSaturationParameter );
   GET_SET( D3DXHANDLE, PostBloomTextureParameter );
 
+  // Timers
+  GET_SET( D3DXHANDLE, TimeParameter );
+  GET_SET( D3DXHANDLE, DeltaTimeParameter );
+
+  // Fog
   GET_SET( D3DXHANDLE, FogStart );
   GET_SET( D3DXHANDLE, FogEnd );
   GET_SET( D3DXHANDLE, FogExp );
   GET_SET( D3DXHANDLE, FogFun );
+
+  // Texture
   GET_SET( D3DXHANDLE, HeightTexture );
   GET_SET( D3DXHANDLE, WidthTexture );
 
@@ -123,8 +129,7 @@ public:
     return m_LightsColor;
   }
 
-  void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap,
-                               bool UseDynamicShadowmap );
+  void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
 
 private: // Members
   std::string m_FileName;
@@ -151,7 +156,7 @@ private: // Members
              m_LightsEndRangeAttenuationParameter;
   D3DXHANDLE m_CameraPositionParameter;
   D3DXHANDLE m_BonesParameter;
-  D3DXHANDLE m_TimeParameter;
+
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
   D3DXHANDLE m_UseShadowMaskTextureParameter;
@@ -168,6 +173,10 @@ private: // Members
   D3DXHANDLE m_BloomSaturationParameter;
   D3DXHANDLE m_BaseSaturationParameter;
   D3DXHANDLE m_PostBloomTextureParameter;
+
+  // Timers
+  D3DXHANDLE m_TimeParameter;
+  D3DXHANDLE m_DeltaTimeParameter;
 
   // Fog information
   D3DXHANDLE m_FogStart;

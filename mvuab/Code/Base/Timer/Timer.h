@@ -22,7 +22,10 @@ public:
         ~CTimer();
 
         void Update();
+
         float32 GetElapsedTime() const { return m_DeltaTime; }
+        float32 GetTime() const { return m_fTime; }
+
         float32 GetFPS() const { return m_FPS; }
         float32 GetMaxFPS() const { return m_MaxFps; }
         float32 GetMinFPS() const { return m_MinFps; }
@@ -35,6 +38,7 @@ private:
         float32         m_MaxFps;
         float32         m_fLastFps;
         float32         m_fFPSTime;
+        float32         m_fTime;
         float64         m_dLastTime;
         uint32          m_NumberFPSCount;
         float32*        m_Deltas;               // array of instant delta times

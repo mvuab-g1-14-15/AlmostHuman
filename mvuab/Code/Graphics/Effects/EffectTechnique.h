@@ -30,7 +30,7 @@ public:
 
   void SetDebugColor( Math::CColor color = Math::colWHITE );
 
-  void SetUseResolution(bool active = false);
+  void SetUseTextureSize(bool active = false);
   void SetTextureSize(unsigned int width, unsigned int height);
 
 private: // Members
@@ -38,9 +38,7 @@ private: // Members
   bool                        m_UseInverseProjMatrix;
   bool                        m_UseInverseViewMatrix;
   bool                        m_UseInverseWorldMatrix;
-  bool                        m_UseLights;
-  int32                       m_NumOfLights;
-  bool                        m_UseLightAmbientColor;
+ 
   bool                        m_UseProjMatrix;
   bool                        m_UseViewMatrix;
   bool                        m_UseWorldMatrix;
@@ -48,23 +46,36 @@ private: // Members
   bool                        m_UseWorldViewProjectionMatrix;
   bool                        m_UseViewProjectionMatrix;
   bool                        m_UseViewToLightProjectionMatrix;
-  bool                        m_UseTime;
+  
+  // Debug
   bool                        m_UseDebugColor;
-  bool						  m_UseTextureSizesGaussian;
+  Math::CColor                m_DebugColor;
+  
+  // Lights
+  int32                       m_NumOfLights;
+  bool                        m_UseLights;
+  bool                        m_UseLightAmbientColor;
 
+  // Textures
+  bool						  m_UseTextureSizes;
   uint32					  m_TextureHeight;
   uint32					  m_TextureWidth;
 
+  // Timers
+  bool                        m_UseTime;
+  bool                        m_UseDeltaTime;
+
+  // Fog
   float                       m_FogStart;
   float                       m_FogEnd;
   float                       m_FogExp;
   int                         m_FogFun;
+
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;
   std::string                 m_TechniqueName;
   std::string                 m_EffectName;
 
-  Math::CColor        m_DebugColor;
 private: // Methods
   void SetupMatrices();
   bool SetupLights();

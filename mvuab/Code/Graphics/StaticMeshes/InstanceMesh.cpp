@@ -2,7 +2,7 @@
 #include "InstanceMesh.h"
 #include "Core.h"
 #include "StaticMeshManager.h"
-
+#include "XML\XMLTreeNode.h"
 
 CInstanceMesh::CInstanceMesh( const std::string& Name,
                               const std::string& CoreName ): m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
@@ -14,6 +14,11 @@ CInstanceMesh::CInstanceMesh( const std::string& Name,
 
   SetName( Name );
 }
+CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts )
+  : CRenderableObject( atts )
+{
+}
+
 
 CInstanceMesh::~CInstanceMesh()
 {

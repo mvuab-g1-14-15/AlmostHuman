@@ -3,15 +3,18 @@
 #pragma once
 
 
-#include "SceneRenderComands\StagedTexturedRendererCommand.h"
+#include "SceneRenderComands\DrawQuadRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
+class CLight;
 
-class CLensOfFlareRendererCommand :  public CStagedTexturedRendererCommand
+class CLensOfFlareRendererCommand :  public CDrawQuadRendererCommand
 {
 public:
   CLensOfFlareRendererCommand( CXMLTreeNode& atts );
   void Execute( CGraphicsManager& GM );
+private:
+  CLight* GetSun();
 };
 #endif
