@@ -6,6 +6,7 @@
 #include "Cameras\CameraManager.h"
 #include "Utils\LogRender.h"
 #include "Timer\Timer.h"
+#include "PhysicsManager.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -32,11 +33,12 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-  CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
+  /*CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
   srcm->Execute();
-  return;
+  CPhysicsManager::GetSingletonPtr()->DebugRender(GraphicsInstance);
+  return;*/
   //// Obtain an instance to the graphics manager
-  CGraphicsManager* pGraphicsManager = GraphicsInstance;
+  CGraphicsManager* pGraphicsManager =GraphicsInstance ;
   //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
   pGraphicsManager->BeginRender();
   pGraphicsManager->SetupMatrices();

@@ -111,6 +111,8 @@ CPhysicController::~CPhysicController()
 	CHECKED_DELETE ( m_pPhXCapsuleControllerDesc );
 	CHECKED_DELETE ( m_pPhXBoxControllerDesc );
 	CHECKED_DELETE ( m_pReport );
+  // TODO RAUL CHECK THIS AFTER DELETING TEST PROCESS
+  // CHECKED_DELETE ( m_pUserData );
 }
 
 // -----------------------------------------

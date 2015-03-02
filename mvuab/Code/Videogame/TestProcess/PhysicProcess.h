@@ -15,6 +15,7 @@ class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
 class CTriggerManager;
 class CPhysicController;
+class CCharacter;
 
 class CPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
@@ -35,6 +36,7 @@ private:
   bool                            m_Salir;
   float                            m_Time;
   CPhysicController*        m_PhysicController;
+  CCharacter*               m_Character;
 
 public:
   CPhysicProcess();
