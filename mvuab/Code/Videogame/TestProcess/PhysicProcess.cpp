@@ -84,6 +84,11 @@ CPhysicProcess::~CPhysicProcess()
     CHECKED_DELETE( m_vPUD[i] );
 
   m_vPUD.clear();
+
+  for ( size_t i = 0; i < m_vCharacter.size(); ++i )
+    CHECKED_DELETE( m_vCharacter[i] );
+
+  m_vCharacter.clear();
   CHECKED_DELETE( m_TriggerManager );
   /*CHECKED_DELETE( m_pPUD );
   CHECKED_DELETE( m_pPhysicActor );*/
@@ -525,5 +530,7 @@ CPhysicController*  CPhysicProcess::GetNewController(float _fRadius, float _fHei
 
 CCharacter* CPhysicProcess::GetNewCharacter(const std::string &Name)
 {
-	return new CCharacter(Name);
+	CCharacter* l_Character = new CCharacter(Name);
+	m_vCharacter.push_back(l_Character);
+	return l_Character;
 }

@@ -36,6 +36,7 @@ private:
   CTriggerManager*                m_TriggerManager;
   bool                            m_Salir;
   float                            m_Time;
+  std::vector<CCharacter*> m_vCharacter;
   CPhysicController*        m_PhysicController;
   //CCharacter*               m_Character;
 
