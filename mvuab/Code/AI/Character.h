@@ -17,15 +17,18 @@ class CCharacter : public CName
 public:
 	CCharacter(const std::string& Name);
 	~CCharacter();
+	virtual void Init();
 	virtual void Init(CXMLTreeNode& Node);
 	virtual void Update();
 	virtual void Render();
+	GET_SET(Math::Vect3f, TargetPosition);
 protected:
 	virtual ECollisionGroup GetCollisionGroup();
 	virtual CPhysicUserData* GetPhysicsUserData();
 private: // Members
 	std::string m_AIPath;
 	CPhysicController* m_PController;
+	Math::Vect3f m_TargetPosition;
 
 private: // Methods
 	void ExecuteAI();

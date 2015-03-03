@@ -4,7 +4,7 @@
 #include "Utils\PhysicUserData.h"
 #include "Reports\PhysicTriggerReport.h"
 #include "Process.h"
-
+#include "Character.h"
 extern "C"
 {
 #include "lua.h"
@@ -31,5 +31,7 @@ void registerVideogame( lua_State* m_LS )
     .def( "GetLastPUDInserted", &CPhysicProcess::GetLastPUDInserted )
     .def( "AddPhysicActorVector", &CPhysicProcess::AddPhysicActorVector )
     .def( "AddPudVector", &CPhysicProcess::AddPudVector )
+	.def( "GetNewController", &CPhysicProcess::GetNewController)
+	.def( "GetNewCharacter", &CPhysicProcess::GetNewCharacter)
   ];
 }

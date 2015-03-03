@@ -5,6 +5,7 @@
 #include "ScriptManager\FunctionsToRegister\InputFunctions.h"
 #include "ScriptManager\FunctionsToRegister\PhysXFunctions.h"
 #include "ScriptManager\FunctionsToRegister\VideogameFunctions.h"
+#include "ScriptManager\FunctionsToRegister\AIFunctions.h"
 #include <string>
 #include <iostream>
 
@@ -91,4 +92,5 @@ void CScriptManager::RegisterLUAFunctions()
   registerInputs( m_LS );
   registerPhysX( m_LS );
   registerVideogame( m_LS );
+  registerAI(m_LS);
 }

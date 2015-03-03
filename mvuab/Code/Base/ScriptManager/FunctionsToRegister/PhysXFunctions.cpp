@@ -73,8 +73,10 @@ void registerPhysX( lua_State* m_LS )
   ];
   module( m_LS ) [
     class_<CPhysicController>( "CPhysicController" )
+	.def( constructor<float, float, float, float, float, ECollisionGroup, CPhysicUserData*, const Math::Vect3f&, float>() )
     .def( "Move", &CPhysicController::Move )
     .def( "Jump", &CPhysicController::Jump )
     .def( "GetPosition", &CPhysicController::GetPosition )
   ];
 }
+

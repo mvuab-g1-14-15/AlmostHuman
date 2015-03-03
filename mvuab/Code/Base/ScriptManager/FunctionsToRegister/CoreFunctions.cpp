@@ -52,17 +52,6 @@ void registerCore( lua_State* m_LS )
   [
     class_<CProcess>( "CProcess" )
   ];
-  /*module( m_LS )
-  [
-    class_<CPhysicProcess, CProcess, CPhysicTriggerReport>( "CPhysicProcess" )
-    .def( constructor<>() )
-    .def( "SetSalir",  &CPhysicProcess::SetSalir )
-    .def( "GetSalir",  &CPhysicProcess::GetSalir )
-    .def( "SetPhysicActor", &CPhysicProcess::SetPhysicActor )
-    .def( "GetPhysicActor", &CPhysicProcess::GetPhysicActor )
-    .def( "SetPUD", &CPhysicProcess::SetPUD )
-    .def( "GetPUD", &CPhysicProcess::GetPUD )
-  ];*/
   module( m_LS )
   [
     class_<CEngine>( "CEngine" )

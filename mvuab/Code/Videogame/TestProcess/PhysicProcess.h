@@ -8,6 +8,7 @@
 #include "Math\Vector3.h"
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\Defines.h"
+#include "PhysicsDefs.h"
 
 class CPhysicActor;
 class CPhysicUserData;
@@ -36,7 +37,7 @@ private:
   bool                            m_Salir;
   float                            m_Time;
   CPhysicController*        m_PhysicController;
-  CCharacter*               m_Character;
+  //CCharacter*               m_Character;
 
 public:
   CPhysicProcess();
@@ -50,6 +51,9 @@ public:
   GET_SET( float, Time );
   CPhysicUserData*    GetNewPUD( const std::string& Name );
   CPhysicActor*       GetNewPhysicActor( CPhysicUserData* PUD );
+  CPhysicController*  GetNewController(float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset,
+				ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity);
+  CCharacter* GetNewCharacter(const std::string &Name);
   void                AddPudVector( CPhysicUserData* PUD );
   void                AddPhysicActorVector( CPhysicActor* PA );
   CPhysicUserData*    GetLastPUDInserted();

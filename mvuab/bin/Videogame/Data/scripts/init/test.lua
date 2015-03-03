@@ -17,6 +17,10 @@ function init()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	physic_manager = core:GetPhysicsManager()
+	engine = Singleton_Engine.get_singleton()
+	process = engine:GetProcess()
+	character_patrol = process:GetNewCharacter("Player")
+	character_patrol:Init()
 	initialized = true
 end
 
@@ -31,6 +35,7 @@ function update()
 	if enable == true then
 		move_player( dt )
 		move_light( dt )
+		character_patrol:Update()
 	end
 end
 
@@ -72,6 +77,8 @@ function move_player( dt )
 	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
 		move( flag_speed, forward, strafe, dt )
+	else
+		move( flag_speed, 0, 0, dt )
 	end
 	if action_manager:DoAction("MoveBackward") then
 		forward = forward - 1
@@ -79,6 +86,8 @@ function move_player( dt )
 	elseif action_manager:DoAction("MoveForward") then
 		forward = forward + 1
 		move( flag_speed, forward, strafe, dt )
+	else
+		move( flag_speed, 0, 0, dt )
 	end
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
@@ -107,8 +116,10 @@ function move( flag_speed, forward, strafe, dt )
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
 	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
-	addPos:Normalize()
-	
+	if (addPos.x != 0 && addPos.z !=0) then
+		addPos:Normalize()
+	end
+	core:trace("hola")
     constant = dt * g_ForwardSpeed;
 	
 	if flag_speed == 1 then

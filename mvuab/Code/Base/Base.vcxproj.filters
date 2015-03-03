@@ -109,6 +109,9 @@
     <ClCompile Include="ScriptManager\FunctionsToRegister\VideogameFunctions.cpp">
       <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\AIFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -236,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Math\Ray.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
