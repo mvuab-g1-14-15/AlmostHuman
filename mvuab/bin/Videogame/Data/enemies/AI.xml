@@ -1,0 +1,71 @@
+<state_machine>
+        <state name="inicial">
+                <on_enter>      
+                        <action  funcion="set_idle_animation"/>
+                </on_enter>
+                <on_exit>      
+                </on_exit>
+                <update time="1.0f">
+                        <action  funcion="inicial"/>
+                </update>
+        </state>
+        <state name="parado">
+                <on_enter>      
+                        <action  funcion="set_idle_animation"/>
+                </on_enter>
+                <on_exit>      
+                </on_exit>
+                <update time="0.5f">
+                        <action  funcion="parado"/>
+                </update>
+        </state>
+        <state name="andar_a_wp">
+                <on_enter>
+                        <action  funcion="set_walk_animation"/>
+                </on_enter>
+                <on_exit>
+                </on_exit>
+                <update time = "2.0f">
+                        <action  funcion="andar_a_wp"/>
+                </update>
+        </state>
+        <state name="next_wp">
+                <on_enter>
+                        <action  funcion="next_wp"/>
+                </on_enter>
+                <on_exit>
+                </on_exit>
+                <update>                
+                </update>
+        </state>
+        <state name="perseguir">
+                <on_enter>
+                        <action  funcion="set_correr_animation"/>
+                </on_enter>
+                <on_exit>
+                </on_exit>
+                <update time = "2.0f">
+                        <action funcion = "perseguir"/>                      
+                </update>
+        </state>
+        <state name="atacar">
+                <on_enter>
+                        <action  funcion="set_idle_attack_animation"/>
+                </on_enter>
+                <on_exit>
+                </on_exit>
+                <update time = "5.0f">
+                        <action funcion="atacar"/>                    
+                </update>
+        </state>
+        <state name="death">
+                <on_enter>      
+                        <action  funcion="death"/>
+                </on_enter>
+                <on_exit>      
+                </on_exit>
+                <update time="2.0f">
+                        <action  funcion="death"/>
+                </update>
+        </state>
+</state_machine>

@@ -12,9 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="StateMachine\Action.cpp" />
+    <ClCompile Include="StateMachine\State.cpp" />
+    <ClCompile Include="StateMachine\StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="StateMachine\Action.h" />
+    <ClInclude Include="StateMachine\State.h" />
+    <ClInclude Include="StateMachine\StateMachine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8CA6E100-80A6-49E6-88F3-D9EEC6BB8C6D}</ProjectGuid>

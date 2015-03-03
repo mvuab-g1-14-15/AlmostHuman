@@ -4,7 +4,7 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-#define NUM_SAMPLES 1
+#define NUM_SAMPLES 100
 
 float g_SDecay = 0.96815;
 float g_SExposure = 0.2;

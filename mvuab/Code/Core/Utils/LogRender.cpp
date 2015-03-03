@@ -110,6 +110,7 @@ void CLogRender::SetVisible( bool flag )
 void CLogRender::ToggleVisibility()
 {
   SetVisible( !m_bIsVisible );
+  //TODO Jaume Save Logger to file
 }
 
 void CLogRender::Render( Math::CColor color )

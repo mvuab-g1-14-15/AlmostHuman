@@ -36,9 +36,9 @@ enum ELOG_LEVEL
 struct SLog
 {
   std::string     m_sLogText;
-  ELOG_LEVEL m_eLogLevel;
-  unsigned int m_uLogLine;
-  bool m_bLineFeed;
+  ELOG_LEVEL      m_eLogLevel;
+  unsigned int    m_uLogLine;
+  bool            m_bLineFeed;
 };
 //------------------------------------------------------------
 
