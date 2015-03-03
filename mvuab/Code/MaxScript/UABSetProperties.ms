@@ -1,4 +1,4 @@
-rollout UABSetProperties "UABSetProperties" width:509 height:351
+rollout UABSetProperties "UABSetProperties" width:511 height:607
 (
 	GroupBox RenderGroup "Render" pos:[16,16] width:226 height:280
 	checkbox ExportCheckRender "Export" pos:[21,37] width:61 height:17
@@ -36,79 +36,34 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	GroupBox GBCameras "Cameras" pos:[257,256] width:226 height:40
 	checkbox CycleCameraCheckBox "Cycle" pos:[265,274] width:66 height:13
 	checkbox ReverseCameraCheckBox "Reverse" pos:[350,270] width:123 height:21
-	GroupBox GBLights "Lights" pos:[256,303] width:226 height:40
-	checkbox ExportLightsCheckBox "Export" pos:[265,323] width:66 height:13
+	
+	--  LIGHTS	
+	GroupBox GBLights "Lights" pos:[256,303] width:226 height:279
+	
+		--Shadow Map
+		label lbl8 "ShadowMapFormatType" pos:[261,326] width:120 height:18
+		edittext ShadowMapFormatType "" pos:[383,326] width:90 height:19
+		label lbl9 "ShadowMapHeight" pos:[261,346] width:120 height:18
+		edittext ShadowMapHeight "" pos:[383,346] width:90 height:19
+		label lbl10 "ShadowMapWidth" pos:[261,366] width:120 height:18
+		edittext ShadowMapWidth "" pos:[383,366] width:90 height:19
+		checkbox ExportGenerateShadowMap "Generate Shadow Map" pos:[300,401] width:150 height:13
+
+		--Static Shadow Map
+		label lbl11 "ShadowMapWidth" pos:[261,426] width:120 height:18
+		edittext StaticShadowMapFormatType "" pos:[383,426] width:90 height:19
+		label lbl12 "StaticShadowMapHeight" pos:[261,446] width:120 height:18
+		edittext StaticShadowMapHeight "" pos:[383,446] width:90 height:19
+		label lbl13 "StaticShadowMapWidth" pos:[261,466] width:120 height:18
+		edittext StaticShadowMapWidth "" pos:[383,466] width:90 height:19
+		checkbox ExportGenerateStaticShadowMap "Generate Static Shadow Map" pos:[301,506] width:150 height:13
+		
+		checkbox ExportLightsCheckBox "Export Light" pos:[270,552] width:66 height:13
 	
 	button GetButton "Get" pos:[16,311] width:112 height:29
 	button SetButton "Set" pos:[134,311] width:108 height:29
 	
 	--ENABLE OR DISABLE DROPLISTDOWN
-	on ExportCheckRender changed theState do
-	(
-			if (ExportCheckRender.checked)==true then
-			(
-				ExportListRender.enabled=true
-			)
-			else
-			(
-				ExportListRender.enabled=false
-			)
-	)
-	on LayerCheckRender changed theState do
-	(
-			if (LayerCheckRender.checked)==true then
-			(
-				LayerListRender.enabled=true
-			)
-			else
-			(
-				LayerListRender.enabled=false
-			)
-	)
-	on GenerateCheckPhysics changed theState do
-	(
-			if (GenerateCheckPhysics.checked)==true then
-			(
-				GenerateListPhysics.enabled=true
-			)
-			else
-			(
-				GenerateListPhysics.enabled=false
-			)
-	)
-	on LayerCheckPhysics changed theState do
-	(
-			if (LayerCheckPhysics.checked)==true then
-			(				
-				LayerListPhysics.enabled=true
-			)
-			else
-			(
-				LayerListPhysics.enabled=false
-			)
-	)
-	on GenerateCheckLogic changed theState do
-	(
-			if (GenerateCheckLogic.checked)==true then
-			(
-				GenerateListLogic.enabled=true
-			)
-			else
-			(
-				GenerateListLogic.enabled=false
-			)
-	)
-	on GenerateEventsCheckBox changed theState do
-	(
-			if (GenerateEventsCheckBox.checked)==true then
-			(
-				GenerateEventsComboBox.enabled=true
-			)
-			else
-			(
-				GenerateEventsComboBox.enabled=false
-			)
-	)
 	
 	
 	
@@ -166,7 +121,7 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 		(
 			if aProperty!=undefined then
 			(
-				EditText.text=aProperty
+				EditText.text=aProperty as String
 			)
 		)
 		else
@@ -298,9 +253,23 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			SetPropertyCheck Obj "cycle_camera" CycleCameraCheckBox
 			--ADD/UPDATE PROPERTY REVERSE CAMERA
 			SetPropertyCheck Obj "reverse_camera" ReverseCameraCheckBox
+			
 			--------LIGHTS---------
-			--ADD/UPDATE PROPERTY EXPORT LIGHTS
-			SetPropertyCheck Obj "export_lights" ExportLightsCheckBox
+				--Shadow Map SET 
+				SetPropertyEditText Obj "Shadow_Map_Format_Type" ShadowMapFormatType
+				SetPropertyEditText Obj "Shadow_Map_Height" ShadowMapHeight
+				SetPropertyEditText Obj "Shadow_Map_Width" ShadowMapWidth
+				SetPropertyCheck Obj "export_shadow_map" ExportGenerateShadowMap
+				
+				-- Static Shadow Map SET 
+				SetPropertyEditText Obj "Static_Shadow_Map_Format_Type" StaticShadowMapFormatType
+				SetPropertyEditText Obj "Static_Shadow_Map_Height" StaticShadowMapHeight
+				SetPropertyEditText Obj "Static_Shadow_Map_Width" StaticShadowMapWidth
+				SetPropertyCheck Obj "export_static_shadow_map" ExportGenerateStaticShadowMap
+				
+				--ADD/UPDATE PROPERTY EXPORT LIGHTS
+				SetPropertyCheck Obj "export_lights" ExportLightsCheckBox
+				
 			ObjAnterior=Obj
 		)
 		else
@@ -362,6 +331,18 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 				--ADD/UPDATE PROPERTY REVERSE CAMERA
 				SetPropertyCheck Obj[i] "reverse_camera" ReverseCameraCheckBox
 				--------LIGHTS---------
+					--Shadow Map SET 
+					SetPropertyEditText Obj[i] "Shadow_Map_Format_Type" ShadowMapFormatType
+					SetPropertyEditText Obj[i] "Shadow_Map_Height" ShadowMapHeight
+					SetPropertyEditText Obj[i] "Shadow_Map_Width" ShadowMapWidth
+					SetPropertyCheck Obj[i] "export_shadow_map" ExportGenerateShadowMap
+					
+					-- Static Shadow Map SET 
+					SetPropertyEditText Obj[i] "Static_Shadow_Map_Format_Type" StaticShadowMapFormatType
+					SetPropertyEditText Obj[i] "Static_Shadow_Map_Height" StaticShadowMapHeight
+					SetPropertyEditText Obj[i] "Static_Shadow_Map_Width" StaticShadowMapWidth
+					SetPropertyCheck Obj[i] "export_static_shadow_map" ExportGenerateStaticShadowMap
+				
 				--ADD/UPDATE PROPERTY EXPORT LIGHTS
 				SetPropertyCheck Obj[i] "export_lights" ExportLightsCheckBox
 				ObjAnterior=Obj[i]
@@ -376,6 +357,72 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
 	
+	on ExportCheckRender changed theState do
+	(
+			if (ExportCheckRender.checked)==true then
+			(
+				ExportListRender.enabled=true
+			)
+			else
+			(
+				ExportListRender.enabled=false
+			)
+	)
+	on LayerCheckRender changed theState do
+	(
+			if (LayerCheckRender.checked)==true then
+			(
+				LayerListRender.enabled=true
+			)
+			else
+			(
+				LayerListRender.enabled=false
+			)
+	)
+	on GenerateCheckPhysics changed theState do
+	(
+			if (GenerateCheckPhysics.checked)==true then
+			(
+				GenerateListPhysics.enabled=true
+			)
+			else
+			(
+				GenerateListPhysics.enabled=false
+			)
+	)
+	on LayerCheckPhysics changed theState do
+	(
+			if (LayerCheckPhysics.checked)==true then
+			(				
+				LayerListPhysics.enabled=true
+			)
+			else
+			(
+				LayerListPhysics.enabled=false
+			)
+	)
+	on GenerateCheckLogic changed theState do
+	(
+			if (GenerateCheckLogic.checked)==true then
+			(
+				GenerateListLogic.enabled=true
+			)
+			else
+			(
+				GenerateListLogic.enabled=false
+			)
+	)
+	on GenerateEventsCheckBox changed theState do
+	(
+			if (GenerateEventsCheckBox.checked)==true then
+			(
+				GenerateEventsComboBox.enabled=true
+			)
+			else
+			(
+				GenerateEventsComboBox.enabled=false
+			)
+	)
 	on GetButton pressed do
 	(
 		local Property
@@ -460,6 +507,26 @@ rollout UABSetProperties "UABSetProperties" width:509 height:351
 			Property=getUserProp $ "reverse_camera"
 			GetPropertyCheckBox Property ReverseCameraCheckBox
 			--------LIGHTS---------
+			--Shadow Map GET 
+			Property=getUserProp $ "Shadow_Map_Format_Type" 
+			GetPropertyEditText Property ShadowMapFormatType
+			Property=getUserProp $ "Shadow_Map_Height" 
+			GetPropertyEditText Property ShadowMapHeight
+			Property=getUserProp $ "Shadow_Map_Width" 
+			GetPropertyEditText Property ShadowMapWidth
+			Property=getUserProp $ "export_shadow_map"
+			GetPropertyCheckBox Property ExportGenerateShadowMap
+			
+			--Static Shadow Map GET 
+			Property=getUserProp $ "Static_Shadow_Map_Format_Type" 
+			GetPropertyEditText Property StaticShadowMapFormatType
+			Property=getUserProp as String $ "Static_Shadow_Map_Height" 
+			GetPropertyEditText Property StaticShadowMapHeight
+			Property=getUserProp as String $ "Static_Shadow_Map_Width" 
+			GetPropertyEditText Property StaticShadowMapWidth
+			Property=getUserProp $ "export_static_shadow_map"
+			GetPropertyCheckBox Property ExportGenerateStaticShadowMap
+		
 			--OBTAIN EXPORT LIGHTS
 			Property=getUserProp $ "export_lights"
 			GetPropertyCheckBox Property ExportLightsCheckBox
