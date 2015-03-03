@@ -472,14 +472,14 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
       total = m * translation;
       _RM->SetTransform( total );
-      //  _RM->DrawSphere(radius, MAX_ARISTAS, color);
-      _RM->DrawCapsule( radius, height, 10, color );
+      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      //_RM->DrawCapsule( radius, height, 10, color );
       //_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
       translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
       total = m * translation;
       _RM->SetTransform( total );
+      _RM->DrawSphere( radius, color, MAX_ARISTAS );
 
-      //  _RM->DrawSphere(radius, MAX_ARISTAS, color);
       //_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
       /* By XMA */
       for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )

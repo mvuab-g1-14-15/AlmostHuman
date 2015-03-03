@@ -244,7 +244,7 @@ void CPhysicProcess::Update()
     m_PhysicController->Jump( 50 );
 
   //TODO CHARACTERCONTROLLER Descomentar para que la camara siga al character controller
-  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );
+  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
   p_Grenade->Update();
@@ -378,9 +378,9 @@ void CPhysicProcess::Init()
       userData, l_Pos );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
   l_PM->AddPhysicController( m_PhysicController );
-  m_Character = new CCharacter("Player");
+  m_Character = new CCharacter( "Player" );
   CXMLTreeNode l_node;
-  m_Character->Init(l_node);
+  m_Character->Init( l_node );
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
   l_PUD->SetColor( colMAGENTA );
@@ -390,7 +390,6 @@ void CPhysicProcess::Init()
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
-
   InitSceneCharacterController();
 }
 

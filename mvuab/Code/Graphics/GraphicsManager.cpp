@@ -741,10 +741,10 @@ void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, M
   D3DXMATRIX translation1, translation2;
   D3DXMatrixTranslation( &translation1, 0.f, h * 0.5f, 0.f );
   m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation1 );
-  //DrawSphere(radius, Color, Aristas, mode, HALF_TOP);
+  DrawSphere( radius, Color, Aristas );
   D3DXMatrixTranslation( &translation2, 0.f, -h * 0.5f, 0.f );
   m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
-  //DrawSphere(radius, Color, Aristas, mode, HALF_BOTTOM);
+  DrawSphere( radius, Color, Aristas );
 }
 
 void CGraphicsManager::DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& up,
