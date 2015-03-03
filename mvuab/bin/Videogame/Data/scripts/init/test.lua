@@ -16,7 +16,7 @@ function init()
 	cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
-	
+	physic_manager = core:GetPhysicsManager()
 	initialized = true
 end
 
@@ -90,12 +90,18 @@ function move_player( dt )
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
 		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController");
+	local character_controller = character_controller_UserData:GetController();
+	if action_manager:DoAction("Jump") then
+		character_controller:Jump(50)
+	end
 end
 
 function move( flag_speed, forward, strafe, dt )
 	local current_camera = camera_manager:GetCurrentCamera();
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController");
+	local character_controller = character_controller_UserData:GetController();
 	local Yaw = current_camera:GetYaw()
-	local Pitch = current_camera:GetPitch()
 	local cam_pos = current_camera:GetPos()
 	
 	local addPos = Vect3f(0, 0, 0)
@@ -110,7 +116,8 @@ function move( flag_speed, forward, strafe, dt )
 	end
 	
     addPos = addPos * constant;
-	current_camera:SetPos((cam_pos + addPos))
+	character_controller:Move(addPos, dt)
+	current_camera:SetPos(character_controller:GetPosition())
 	
 end
 

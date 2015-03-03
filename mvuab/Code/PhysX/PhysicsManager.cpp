@@ -571,6 +571,7 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
   if ( nxActor != NULL )
   {
     nxActor->userData = _pActor->GetUserData();
+    m_vUD.push_back( _pActor->GetUserData() );
     _pActor->CreateActor( nxActor );
     l_bIsOK = true;
   }
@@ -793,6 +794,7 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
   {
     _pController->CreateController( l_NxController, m_pScene );
     l_NxController->getActor()->userData = _pController->GetUserData();
+    m_vUD.push_back( _pController->GetUserData() );
     //NxShape*const* shape = nxController->getActor()->getShapes();
     //shape[0]->setGroup(controller->);
     l_NxController->getActor()->getShapes()[0]->setGroup( _Group );
@@ -1324,4 +1326,15 @@ int CPhysicsManager::AddMaterial( float restitution, float staticFriction, float
   l_MatDesc.dynamicFriction = dynamicFriction;
   l_MatDesc.restitutionCombineMode = NxCombineMode::NX_CM_AVERAGE;
   return m_pScene->createMaterial( l_MatDesc )->getMaterialIndex();
+}
+
+CPhysicUserData* CPhysicsManager::GetUserData( const std::string& name )
+{
+  std::vector<CPhysicUserData*>::iterator it = m_vUD.begin();
+
+  for ( ; it != m_vUD.end(); ++it )
+    if ( ( *it )->GetName() == name )
+      return *it;
+
+  return 0;
 }

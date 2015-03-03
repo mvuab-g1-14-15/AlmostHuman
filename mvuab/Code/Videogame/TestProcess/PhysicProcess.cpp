@@ -218,33 +218,32 @@ void CPhysicProcess::Update()
       l_PUD->SetColor( colRED );
   }
 
-  Math::Vect3f l_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-  float  l_Yaw = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetYaw();
+  /* Math::Vect3f l_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
+   float  l_Yaw = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetYaw();
 
-  if ( pActionManager->DoAction( "MoveForward" ) )
-    l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
+   if ( pActionManager->DoAction( "MoveForward" ) )
+     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
 
-  if ( pActionManager->DoAction( "MoveBackward" ) )
-    l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
+   if ( pActionManager->DoAction( "MoveBackward" ) )
+     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
 
-  if ( pActionManager->DoAction( "MoveLeft" ) )
-    l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                 Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
+   if ( pActionManager->DoAction( "MoveLeft" ) )
+     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
+                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
 
-  if ( pActionManager->DoAction( "MoveRight" ) )
-    l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                 Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
+   if ( pActionManager->DoAction( "MoveRight" ) )
+     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
+                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
 
-  if ( l_Direction != Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
-    l_Direction = l_Direction.GetNormalized();
+   if ( l_Direction != Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
+     l_Direction = l_Direction.GetNormalized();
 
-  m_PhysicController->Move( l_Direction * 0.05f, deltaTime );
+   m_PhysicController->Move( l_Direction * 0.05f, deltaTime );
 
-  if ( pActionManager->DoAction( "Jump" ) )
-    m_PhysicController->Jump( 50 );
-
+   if ( pActionManager->DoAction( "Jump" ) )
+     m_PhysicController->Jump( 50 );*/
   //TODO CHARACTERCONTROLLER Descomentar para que la camara siga al character controller
-  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );
+  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
   p_Grenade->Update();
@@ -374,7 +373,7 @@ void CPhysicProcess::Init()
   userData->SetColor( colWHITE );
   m_vPUD.push_back( userData );
   Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
-  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECollisionGroup::ECG_PLAYER,
+  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
   l_PM->AddPhysicController( m_PhysicController );
@@ -386,7 +385,7 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colMAGENTA );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 100, 0.2, 100 ), Math::Vect3f( 0, 0,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 100, 0.2f, 100 ), Math::Vect3f( 0, 0,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );

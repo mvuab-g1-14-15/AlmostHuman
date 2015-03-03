@@ -1,6 +1,7 @@
 #include "PhysXFunctions.h"
 #include "Utils\PhysicUserData.h"
 #include "Actor\PhysicActor.h"
+#include "Actor\PhysicController.h"
 #include "PhysicsManager.h"
 #include "Utils\Name.h"
 
@@ -32,12 +33,13 @@ void registerPhysX( lua_State* m_LS )
     .def( "SetName", &CPhysicUserData::SetName )
     .def( "GetActor", &CPhysicUserData::GetActor )
     .def( "GetName", &CPhysicUserData::GetName )
+    .def( "GetController", &CPhysicUserData::GetController )
   ];
   module( m_LS )
   [
     class_<CPhysicActor>( "CPhysicActor" )
     .def( constructor<CPhysicUserData*>() )
-    .def( "GetUserData", &CPhysicActor::GetUserData )
+    //.def( "GetUserData", &CPhysicActor::GetUserData )
     .def( "CreateBody", &CPhysicActor::CreateBody )
     .def( "AddSphereShape", &CPhysicActor::AddSphereShape )
     .def( "AddBoxShape", &CPhysicActor::AddBoxShapeHardcoded )
@@ -66,5 +68,13 @@ void registerPhysX( lua_State* m_LS )
     .def( "ReloadXML", &CPhysicsManager::ReloadXML )
     //Gets
     .def( "GetActor", &CPhysicsManager::GetActor )
+    .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
+          &CPhysicsManager::GetUserData )
+  ];
+  module( m_LS ) [
+    class_<CPhysicController>( "CPhysicController" )
+    .def( "Move", &CPhysicController::Move )
+    .def( "Jump", &CPhysicController::Jump )
+    .def( "GetPosition", &CPhysicController::GetPosition )
   ];
 }

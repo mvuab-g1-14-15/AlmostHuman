@@ -264,6 +264,7 @@ private:
   m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
   std::vector<CPhysicActor*>       m_vActors;     // para guardar los Actors del CreateMeshFromXML
   std::map<std::string, unsigned int>    m_vIds;    // para guardar los id's del vector de actors
+  std::vector<CPhysicUserData*> m_vUD;
 };
 
 #endif //__PHYSX_MANAGER_CLASS_H__
