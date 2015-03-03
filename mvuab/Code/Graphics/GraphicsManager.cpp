@@ -457,13 +457,16 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
   if ( FAILED( D3DXCreateBox( m_pD3DDevice, SizeX, SizeY, SizeZ, &m_BoxMesh, 0 ) ) )
     return;
 
-  CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
+
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
   UINT l_NumPasses = 0;
+
   l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
 
   if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) ) return;
