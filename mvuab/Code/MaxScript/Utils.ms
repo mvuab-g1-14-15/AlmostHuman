@@ -28,6 +28,7 @@ fn DoesFolderExist f create:true =
 	allInsts = #()
 	for obj in geometry do
 	(
+		format " Objeto geometrico %" obj
 		if (InstanceMgr.GetInstances obj &instances) > 1 do
 		(
 			if findItem allInsts obj == 0 do

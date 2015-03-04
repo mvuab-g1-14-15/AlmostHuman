@@ -52,6 +52,7 @@ utility UABUtility "UAB Utility" width:163 height:600
 		local LightDir = PathLabel.text + "\\lights.xml"		--poner parametrico
 		ExportLights LightDir
 	)
+	
 	on MeshButton pressed do
 	(		
 		if PathLabel.text == "" then
@@ -67,6 +68,8 @@ utility UABUtility "UAB Utility" width:163 height:600
 		DoesFolderExist MeshDir
 		
 		local UniqueInstanceArray = GetUniqueInstances()
+		
+		format "UniqueInstancesArray % \n" UniqueInstanceArray 
 		
 		if UniqueInstanceArray.count == 0 then 
 		(

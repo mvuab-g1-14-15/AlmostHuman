@@ -99,7 +99,15 @@ struct SMaterial
 			else
 			(
 				m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
-				m_Color = bit.shift mat.diffuse.r 24 + bit.shift mat.diffuse.g 16 + bit.shift mat.diffuse.b 8 + mat.diffuse.a
+				
+				m_ColorAlpha = bit.and mat.diffuse.a 0xFF
+				m_ColorRed = bit.and mat.diffuse.r 0xFF
+				m_ColorGreen = bit.and mat.diffuse.g 0xFF
+				m_ColorBlue = bit.and mat.diffuse.b 0xFF
+				
+				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
+				
+				
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -115,13 +123,18 @@ struct SMaterial
 	
 	fn FromMaxUndefinedMaterial Obj =
 	(
+		
+		format "FromMaxUndefinedMaterial % %" Obj.name  Obj
+		
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 		m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
-		m_ColorAlpha = ""
-		m_ColorRed = ""
-		m_ColorGreen = ""
-		m_ColorBlue = ""
-		m_Color = bit.shift (bit.and Obj.wirecolor.a 0xFF) 24+ bit.shift Obj.wirecolor.r 16 + bit.shift Obj.wirecolor.g 8 + Obj.wirecolor.b
+		
+		m_ColorAlpha = bit.and Obj.wirecolor.a 0xFF
+		m_ColorRed = bit.and Obj.wirecolor.r 0xFF
+		m_ColorGreen = bit.and Obj.wirecolor.g 0xFF
+		m_ColorBlue = bit.and Obj.wirecolor.b 0xFF
+				
+		m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
 	),
 	
 	fn WriteToFile file =
@@ -334,9 +347,10 @@ struct SMesh
             	)
 				catch
 				(
-					--format "Error while exporting submaterial %.\n" l_MaterialId
+					--format "ErrorInitFromMaxObject while exporting submaterial %.\n" l_MaterialId
 				)
-			))
+			)
+		)
 		else if (classof l_Material == Standardmaterial) then
 		(
 			--format "Single Material Object\n"
@@ -499,15 +513,19 @@ struct SMesh
 	fn InitFromMaxObject Obj =
 	(
 		--format "Mesh: % \n" Obj.name
-		actualObj = copy Obj
-		convertToMesh actualObj 
+		/*actualObj = copy Obj
+		convertToMesh actualObj */
 		
+		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+		actualObj = newObj[1]
+		convertToMesh actualObj
+
 		CreateSubMeshes actualObj
 		CreateBuffers actualObj
 		
 		if delete actualObj != 1 then
 		(
-			--format "% not deleted, please delete the object manually\n" actualObj
+			format "% not deleted, please delete the object manually\n" actualObj
 		)
 	),
 	

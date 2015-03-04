@@ -120,6 +120,8 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 							instance_obj = ref_obj
 					)
 				)
+				else
+					instance_obj = Obj
 			)
 		
 			local l_Yaw = GetYaw Obj.transform as string
