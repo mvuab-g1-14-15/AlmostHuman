@@ -8,6 +8,20 @@ CState::CState( const std::string& Name ) : CName( Name )
 
 CState::~CState()
 {
+  for ( size_t i = 0; i < m_OnEnterActions.size(); ++i )
+    CHECKED_DELETE( m_OnEnterActions[i] );
+
+  m_OnEnterActions.clear();
+
+  for ( size_t i = 0; i < m_OnExitActions.size(); ++i )
+    CHECKED_DELETE( m_OnExitActions[i] );
+
+  m_OnExitActions.clear();
+
+  for ( size_t i = 0; i < m_UpdateActions.size(); ++i )
+    CHECKED_DELETE( m_UpdateActions[i] );
+
+  m_UpdateActions.clear();
 }
 
 bool CState::Load( CXMLTreeNode& Node)
