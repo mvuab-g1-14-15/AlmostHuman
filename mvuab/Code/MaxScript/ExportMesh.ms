@@ -55,7 +55,7 @@ struct SMaterial
 	(
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 
-		if material != undefined then
+		if mat != undefined then
 		(
 			if mat.diffuseMapEnable == true AND classOf(mat.diffuseMap) == BitmapTexture then
 			(
@@ -110,6 +110,18 @@ struct SMaterial
 				)
 			)
 		)
+		
+	),
+	
+	fn FromMaxUndefinedMaterial Obj =
+	(
+		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
+		m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
+		m_ColorAlpha = ""
+		m_ColorRed = ""
+		m_ColorGreen = ""
+		m_ColorBlue = ""
+		m_Color = bit.shift (bit.and Obj.wirecolor.a 0xFF) 24+ bit.shift Obj.wirecolor.r 16 + bit.shift Obj.wirecolor.g 8 + Obj.wirecolor.b
 	),
 	
 	fn WriteToFile file =
@@ -324,9 +336,8 @@ struct SMesh
 				(
 					--format "Error while exporting submaterial %.\n" l_MaterialId
 				)
-			)
-		)
-		else
+			))
+		else if (classof l_Material == Standardmaterial) then
 		(
 			--format "Single Material Object\n"
          	local l_NewSubMesh = SSubMesh()
@@ -337,6 +348,17 @@ struct SMesh
 			local l_MaterialId = 1
 			local l_MaterialName = l_Material.name as string
 			m_MaterialsHashTable.Add l_MaterialId l_MaterialName
+		)
+		else 
+		(
+			local l_NewSubMesh = SSubMesh()
+            l_NewSubMesh.m_Material.FromMaxUndefinedMaterial Obj
+			--format "Material Name: %\n" l_Material.name
+			append m_SubMeshes l_NewSubMesh
+			--format "Submesh: %\n" m_SubMeshes
+			local l_MaterialId = 1
+			local l_MaterialName = Obj.name as string
+			m_MaterialsHashTable.Add l_MaterialId l_MaterialName	
 		)
 	),
 	
@@ -453,9 +475,9 @@ struct SMesh
 				(
 					--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
 					l_Color = 0
-					l_NewVertex1.m_Color = l_Color
-					l_NewVertex2.m_Color = l_Color
-					l_NewVertex3.m_Color = l_Color
+					l_NewVertex1.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+					l_NewVertex2.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+					l_NewVertex3.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
 				)
 		
 				-- Add the new vertex
@@ -468,6 +490,7 @@ struct SMesh
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
 			)
+			
 		)	
 		
 		--format "% submeshes found on the object\n" m_SubMeshes.count

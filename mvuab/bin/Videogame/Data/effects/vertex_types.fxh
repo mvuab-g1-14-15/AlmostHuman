@@ -1,6 +1,12 @@
 #if !defined( VERTEX_TYPES_FXH )
 #define VERTEX_TYPES_FXH 
 
+struct TNORMAL_COLOR {
+    float3 Position     : POSITION;
+    float3 Normal       : NORMAL;
+    float4 Color        : COLOR;
+};
+
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX {
 	float3 	Position	: POSITION;
     float3 	Normal 		: NORMAL;

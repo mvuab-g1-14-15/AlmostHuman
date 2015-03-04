@@ -6,7 +6,8 @@ global VERTEX_TYPE_TEXTURE1 	= 0x0010
 global VERTEX_TYPE_TEXTURE2 	= 0x0020
 global VERTEX_TYPE_DIFFUSE 		= 0x0040
 global VERTEX_TYPE_REFLECTION	= 0x0200
-global VERTEX_TYPE_SKYBOX = 0x1000
+global VERTEX_TYPE_SKYBOX       = 0x1000
+global VERTEX_TYPE_COLOR        = 0x4000
 
 struct SVertex
 (
@@ -29,7 +30,8 @@ struct SVertex
 		--convert UV
 		format "% % " m_UV.x m_UV.y to:l_Text
 		--convert Color
-		format "%" m_Color to:l_Text
+		--format "%" m_Color #unsigned to:l_Text
+		format "%" (formattedprint m_Color format:"x") to:l_Text  
 		return (l_Text as string)
 	),
 	

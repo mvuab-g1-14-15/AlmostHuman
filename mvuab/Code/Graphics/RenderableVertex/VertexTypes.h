@@ -38,31 +38,8 @@ G N T B D T1 T2
 #define VERTEX_TYPE_SCREEN_GEOMETRY     1 << 10 //1024
 #define VERTEX_TYPE_SCREEN              1 << 11 // 2048
 #define VERTEX_TYPE_SKYBOX              1 << 12 // 4096
-#define VERTEX_TYPE_RNM                 1 << 13 // 4096
+#define VERTEX_TYPE_RNM                 1 << 13 // 8192
 
-// COLOR VERTEX
-#define VERTEX_TYPE_RGB                 1 << 14
-#define VERTEX_TYPE_RGBA                1 << 15
-
-struct T_NORMAL_COLOR
-{
-    float  x,  y,  z;
-    float nx, ny, nz;
-    float  r,  g,  b, a;
-    
-    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-    
-    static inline unsigned short GetVertexType()
-    {
-        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_RGBA;
-    }
-    
-    static inline unsigned int GetFVF()
-    {
-        return 0;
-    }
-};
 
 struct T_SKYBOX_VERTEX
 {
