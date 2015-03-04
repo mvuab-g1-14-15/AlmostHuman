@@ -51,6 +51,8 @@
 #include <d3dx9.h>
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
+#include "StateMachine\StateMachine.h"
+
 CGrenade* p_Grenade;
 
 void GetFilesFromPath( const std::string& Path,
@@ -395,6 +397,8 @@ void CPhysicProcess::Init()
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
   //InitSceneCharacterController();
+
+  CStateMachine* l_StateMachine = new CStateMachine("Data/enemies/AI.xml");
 }
 
 void CPhysicProcess::Render()

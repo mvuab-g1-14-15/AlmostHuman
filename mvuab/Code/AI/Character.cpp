@@ -8,7 +8,9 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 
-CCharacter::CCharacter( const std::string& Name ) : CName( Name )
+CCharacter::CCharacter( const std::string& Name )
+	: CName( Name )
+	, m_Speed( 0.02f )
 {
 }
 
@@ -34,9 +36,8 @@ void CCharacter::Update()
   l_Interpolator3D.SetValues( l_Direction, l_DessiredDirection, 1.0f, Math::FUNC_CONSTANT );
   Math::Vect3f l_LookAt;
   l_Interpolator3D.Update( 1, l_LookAt );
-  Math::Vect3f l_d = l_LookAt - l_Direction;
-  m_PController->SetYaw( l_Yaw - Math::Utils::ATan2( l_d.z, l_d.x ) * 0.04f );
-  m_PController->Move( l_LookAt * 0.05f, deltaTime );
+  m_PController->SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
+  m_PController->Move( l_LookAt.GetNormalized() * m_Speed, deltaTime );
   CRenderableObject* l_Box =
     CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource( "solid" )->GetResource( "Pyramid001" );
   l_Box->SetPosition( m_PController->GetPosition() + Vect3f( 0, 2, 0 ) );

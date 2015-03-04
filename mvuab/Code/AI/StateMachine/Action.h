@@ -2,19 +2,17 @@
 #define ACTION_H
 #pragma once
 
-#include "Utils\Name.h"
 #include "XML\XMLTreeNode.h"
 #include <string>
 
-class CAction: public CName
+class CAction
 {
 public:
-	CAction(const std::string& Name);
+	CAction(CXMLTreeNode &Node);
 	~CAction();
-	virtual bool Load(CXMLTreeNode &Node);
 	virtual void Execute();
 protected:
-	std::string m_LuaFuntion;
+	std::string m_LuaFunction;
 private: // Members
 private: // Methods
 };

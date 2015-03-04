@@ -1,6 +1,9 @@
 #include "Action.h"
+#include "ScriptManager\ScriptManager.h"
+#include "Core.h"
 
-CAction::CAction( const std::string& Name ) : CName( Name )
+CAction::CAction( CXMLTreeNode &Node )
+  : m_LuaFunction( Node.GetPszProperty("function", "no_function") )
 {
 }
 
@@ -8,11 +11,7 @@ CAction::~CAction()
 {
 }
 
-bool CAction::Load(CXMLTreeNode &Node)
-{
-	return true;
-}
-
 void CAction::Execute()
 {
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode(m_LuaFunction);
 }

@@ -5,6 +5,7 @@
 
 CStateMachine::CStateMachine( const std::string& Name ) : CName( Name )
 {
+  Load(Name);
 }
 
 CStateMachine::~CStateMachine()
@@ -23,7 +24,7 @@ bool CStateMachine::Load(const std::string& FileName)
     return false;
   }
 
-  CXMLTreeNode  TreeNode = l_File["state_machine"];
+  CXMLTreeNode TreeNode = l_File["state_machine"];
 
   if ( TreeNode.Exists() )
   {

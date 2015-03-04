@@ -30,6 +30,8 @@ private: // Members
 	CPhysicController* m_PController;
 	Math::Vect3f m_TargetPosition;
 
+	float m_Speed;
+
 private: // Methods
 	void ExecuteAI();
 };

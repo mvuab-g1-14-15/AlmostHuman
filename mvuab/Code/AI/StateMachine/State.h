@@ -6,6 +6,10 @@
 #include <string>
 #include "XML\XMLTreeNode.h"
 
+#include <vector>
+
+class CAction;
+
 class CState : public CName
 {
 public:
@@ -14,6 +18,9 @@ public:
 	virtual bool Load( CXMLTreeNode& Node);
 protected:
 private: // Members
+	std::vector<CAction*> m_OnEnterActions;
+	std::vector<CAction*> m_OnExitActions;
+	std::vector<CAction*> m_UpdateActions;
 private: // Methods
 };
 
