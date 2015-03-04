@@ -2,8 +2,9 @@
 #define Grenade_H
 
 #include <string>
-
+#include <vector>
 class CPhysicActor;
+class CPhysicUserData;
 //class CStaticMesh;
 
 class CGrenade
@@ -13,6 +14,9 @@ class CGrenade
     float m_ForceMin;
     float m_ForceMax;
     float m_Force;
+    std::vector<CPhysicUserData*> m_vPhysicUserData;
+    CPhysicUserData* m_PhysicUserData;
+    std::vector<CPhysicActor*> m_vActor;
     CPhysicActor* m_Actor;
     //CStaticMesh* m_StaticMesh;
     std::string m_MeshName;

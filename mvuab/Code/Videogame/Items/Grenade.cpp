@@ -27,7 +27,15 @@ CGrenade::CGrenade(float a_TimeAux, float a_ForceMin, float a_ForceMax, float a_
 
 CGrenade::~CGrenade()
 {
- 
+   for ( size_t i = 0; i < m_vPhysicUserData.size(); ++i )
+    CHECKED_DELETE( m_vPhysicUserData[i] );
+
+  m_vPhysicUserData.clear();
+
+  for ( size_t i = 0; i < m_vActor.size(); ++i )
+    CHECKED_DELETE( m_vActor[i] );
+
+  m_vActor.clear();
 }
 
 void CGrenade::Start()
@@ -42,11 +50,13 @@ void CGrenade::Update()
     CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
     if( l_CurrentCamera && !m_GrenadeThrown )
     {
-      CPhysicUserData* l_PhysicUserData = new CPhysicUserData("Grenade");
-      l_PhysicUserData->SetPaint(true);
-      m_Actor = new CPhysicActor(l_PhysicUserData);
+      m_PhysicUserData = new CPhysicUserData("Grenade");
+      m_PhysicUserData->SetPaint(true);
+      m_vPhysicUserData.push_back(m_PhysicUserData);
+      m_Actor = new CPhysicActor(m_PhysicUserData);
       m_Actor->AddSphereShape(0.1f,l_CurrentCamera->GetPos(),Math::Vect3f(0,0,0));
       m_Actor->CreateBody(1.0f);
+      m_vActor.push_back(m_Actor);
 
       // Add at the end always it needs to have a shape
       l_PM->AddPhysicActor(m_Actor);
@@ -71,8 +81,11 @@ void CGrenade::Update()
       for(; itb != ite ; ++itb )
       {
         CPhysicUserData* l_Data = *itb;
-        CPhysicActor* l_Actor = l_Data->GetActor();
-        l_Actor->SetLinearVelocity( ( l_Actor->GetPosition() - l_GrenadePosition ) * 10.f );
+        if(l_Data->GetActor() != NULL)
+        {
+          CPhysicActor* l_Actor = l_Data->GetActor();
+          l_Actor->SetLinearVelocity( ( l_Actor->GetPosition() - l_GrenadePosition ) * 10.f );
+        }
       }
 
       // To throw a new grenade

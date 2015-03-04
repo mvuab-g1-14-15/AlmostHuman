@@ -399,6 +399,7 @@ void CPhysicProcess::Init()
   //InitSceneCharacterController();
 
   CStateMachine* l_StateMachine = new CStateMachine("Data/enemies/AI.xml");
+  CHECKED_DELETE(l_StateMachine);
 }
 
 void CPhysicProcess::Render()

@@ -10,6 +10,7 @@ CStateMachine::CStateMachine( const std::string& Name ) : CName( Name )
 
 CStateMachine::~CStateMachine()
 {
+  Destroy();
 }
 
 bool CStateMachine::Load(const std::string& FileName)
@@ -37,10 +38,16 @@ bool CStateMachine::Load(const std::string& FileName)
 
       if ( TagName == "state" )
       {
-        CState* l_State = new CState(l_CurrentNode.GetPszProperty("name", "no_name"));
+        const std::string& l_Name = l_CurrentNode.GetPszProperty("name", "no_name");
+        CState* l_State = new CState(l_Name);
         if(!l_State->Load(l_CurrentNode))
         {
           CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "CStateMachine::Error loading state %s", l_State->GetName().c_str() );
+          CHECKED_DELETE(l_State);
+        }
+        if(!AddResource(l_Name, l_State))
+        {
+          CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
           CHECKED_DELETE(l_State);
         }
       }

@@ -4,9 +4,11 @@
 
 #include "Utils\Defines.h"
 #include "Utils\Name.h"
+#include "Utils\MapManager.h"
+#include "State.h"
 #include <string>
 
-class CStateMachine : public CName
+class CStateMachine : public CName, CMapManager<CState>
 {
 public:
 	CStateMachine(const std::string& Name);
@@ -18,6 +20,7 @@ protected: // Members
 protected: // Methods
 private: // Members
 	std::string m_FileName;
+  
 private: // Methods
 };
 
