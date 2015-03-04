@@ -111,6 +111,8 @@ bool CStaticMesh::Load( const std::string& FileName )
       l_TypeSize = sizeof( TNORMAL_T1_REFLECTION_VERTEX );
     else if ( l_VertexType == TRNM_VERTEX::GetVertexType() )
       l_TypeSize = sizeof( TRNM_VERTEX );
+    else if ( l_VertexType == T_NORMAL_COLOR::GetVertexType() )
+        l_TypeSize = sizeof(T_NORMAL_COLOR);
 
     // Obtain all the textures if any
     unsigned short l_numTexturas = 0;
@@ -211,6 +213,8 @@ bool CStaticMesh::Load( const std::string& FileName )
       l_RV = new CIndexedVertexs<TRNM_VERTEX>( CGraphicsManager::GetSingletonPtr(),
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
     }
+    else if (l_VertexType == T_NORMAL_COLOR::GetVertexType() )
+        l_RV = new CIndexedVertexs<T_NORMAL_COLOR>(CGraphicsManager::GetSingletonPtr(), l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
 
     // Check the renderable object
     if ( l_RV )
