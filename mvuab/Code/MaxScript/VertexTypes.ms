@@ -30,8 +30,11 @@ struct SVertex
 		--convert UV
 		format "% % " m_UV.x m_UV.y to:l_Text
 		--convert Color
+		
+		format "% % % %" bit.and m_Color 0xFF000000 bit.and m_Color 0x00FF0000 bit.and m_Color 0x0000FF00 bit.and m_Color 0x000000FF 
+		
 		--format "%" m_Color #unsigned to:l_Text
-		format "%" (formattedprint m_Color format:"x") to:l_Text  
+		--format "%" (formattedprint m_Color format:"x") to:l_Text  
 		return (l_Text as string)
 	),
 	
@@ -89,8 +92,9 @@ struct SVertex
 			
 			if ((bit.and m_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 			(
-				format "\t Color: (%)\n" m_Color
-				WriteFloat file m_Color
+				format "Color (%) \n" (formattedprint m_Color format:"x")
+				
+				WriteLong file m_Color #unsigned
 			)
 		)
 	)
