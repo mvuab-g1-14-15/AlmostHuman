@@ -32,10 +32,11 @@ void CCharacter::Update()
   Math::Vect3f l_DessiredDirection = ( m_TargetPosition - l_Position ).GetNormalized();
   Math::CLerpAnimator3D l_Interpolator3D;
   l_Interpolator3D.SetValues( l_Direction, l_DessiredDirection, 1.0f, Math::FUNC_CONSTANT );
-  Math::Vect3f l_Eye;
-  l_Interpolator3D.Update( 1, l_Eye );
-  m_PController->SetYaw( Math::Utils::ASin( l_Eye.y ) );
-  m_PController->Move( l_Eye * 0.05f, deltaTime );
+  Math::Vect3f l_LookAt;
+  l_Interpolator3D.Update( 1, l_LookAt );
+  Math::Vect3f l_d = l_LookAt - l_Direction;
+  m_PController->SetYaw( l_Yaw - Math::Utils::ATan2( l_d.z, l_d.x ) * 0.04f );
+  m_PController->Move( l_LookAt * 0.05f, deltaTime );
   CRenderableObject* l_Box =
     CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource( "solid" )->GetResource( "Pyramid001" );
   l_Box->SetPosition( m_PController->GetPosition() + Vect3f( 0, 2, 0 ) );
@@ -55,11 +56,11 @@ void CCharacter::Init()
                                          2.0,
                                          GetCollisionGroup(),
                                          GetPhysicsUserData(),
-                                         Math::Vect3f( 10, 4.0, 10 ),
+                                         Math::Vect3f( -10, 4.0, -10 ),
                                          -10.0 );
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
-  m_TargetPosition = Math::Vect3f( -10, 0.0f, 10 );
+  m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
 }
 void CCharacter::Init( CXMLTreeNode& Node )
 {
