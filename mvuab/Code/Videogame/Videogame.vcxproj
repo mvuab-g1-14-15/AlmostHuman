@@ -87,11 +87,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemies\BossEnemy.cpp" />
-    <ClCompile Include="Enemies\EasyEnemy.cpp" />
-    <ClCompile Include="Enemies\Enemy.cpp" />
-    <ClCompile Include="Enemies\EnemyManager.cpp" />
-    <ClCompile Include="Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="Items\Grenade.cpp" />
     <ClCompile Include="ScriptedController\ScriptedController.cpp" />
     <ClCompile Include="TestProcess.cpp">
@@ -106,11 +101,6 @@
     <ClCompile Include="videogame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemies\BossEnemy.h" />
-    <ClInclude Include="Enemies\EasyEnemy.h" />
-    <ClInclude Include="Enemies\Enemy.h" />
-    <ClInclude Include="Enemies\EnemyManager.h" />
-    <ClInclude Include="Enemies\PatrolEnemy.h" />
     <ClInclude Include="Items\Grenade.h" />
     <ClInclude Include="ScriptedController\ScriptedController.h" />
     <ClInclude Include="TestProcess.h">

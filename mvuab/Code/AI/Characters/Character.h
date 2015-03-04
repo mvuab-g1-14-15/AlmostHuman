@@ -22,6 +22,8 @@ public:
 	virtual void Update();
 	virtual void Render();
 	GET_SET(Math::Vect3f, TargetPosition);
+	GET_SET(float32, Speed);
+	GET_SET(float32, Life);
 protected:
 	virtual ECollisionGroup GetCollisionGroup();
 	virtual CPhysicUserData* GetPhysicsUserData();
@@ -30,7 +32,8 @@ private: // Members
 	CPhysicController* m_PController;
 	Math::Vect3f m_TargetPosition;
 
-	float m_Speed;
+	float32				m_Speed;
+	float32             m_Life;
 
 private: // Methods
 	void ExecuteAI();

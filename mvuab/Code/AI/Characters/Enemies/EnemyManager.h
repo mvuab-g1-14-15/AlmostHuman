@@ -21,7 +21,7 @@ public:
     CEnemyManager();
     ~CEnemyManager();
 
-    void Update(float32 deltaTime);
+    void Update();
     void Render();
     void Init(const std::string &Filename);
     void Reload();

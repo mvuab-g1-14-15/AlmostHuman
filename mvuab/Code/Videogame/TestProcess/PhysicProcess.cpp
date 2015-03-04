@@ -46,7 +46,7 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "Actor\PhysicController.h"
-#include "Character.h"
+#include "Characters\Character.h"
 
 #include <d3dx9.h>
 #include "SceneRenderComands\SceneRendererCommandManager.h"

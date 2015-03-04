@@ -11,6 +11,7 @@
 CCharacter::CCharacter( const std::string& Name )
 	: CName( Name )
 	, m_Speed( 0.02f )
+	, m_Life( 0.0f )
 {
 }
 

@@ -7,6 +7,8 @@
 #include "Utils\Defines.h"
 #include <map>
 #include "Utils\Types.h"
+#include "Timer\Timer.h"
+#include "Core.h"
 
 typedef CEnemy * (*CreateEnemyFn)(CXMLTreeNode &);
 
@@ -28,10 +30,11 @@ void CEnemyManager::Destroy()
     m_Enemies.clear();
 }
 
-void CEnemyManager::Update(float32 deltaTime)
+void CEnemyManager::Update()
 {
+
     for(size_t i=0;i<m_Enemies.size();++i)
-        m_Enemies[i]->Update(deltaTime);
+        m_Enemies[i]->Update();
 }
 
 void CEnemyManager::Render()
@@ -64,18 +67,6 @@ void CEnemyManager::Init(const std::string &Filename)
             if(l_Name=="enemy")
             {
                 const std::string &l_Type=m(i).GetPszProperty("type");
-                /*CEnemy *l_Enemy=NULL;
-            
-                if(l_Type=="easy")
-                    l_Enemy=new CEasyEnemy(m(i));
-                else if(l_Type=="patrol")
-                    l_Enemy=new CPatrolEnemy(m(i));
-                else if(l_Type=="boss")
-                    l_Enemy=new CBossEnemy(m(i));
-                if(l_Enemy!=NULL)
-                    m_Enemies.push_back(l_Enemy);
-                else
-                    printf("Enemy with type '%s' not correctly created", l_Type.c_str());*/
                 std::map<std::string, CreateEnemyFn>::iterator it=l_CreateEnemiesFnsMap.find(l_Type);
                 if(it!=l_CreateEnemiesFnsMap.end())
                     m_Enemies.push_back(it->second(m(i)));
@@ -97,20 +88,3 @@ CEnemy * CEnemyManager::CreateTemplatedEnemy(CXMLTreeNode &XMLTreeNode)
 {
     return new T(XMLTreeNode);
 }
-
-/*CEnemy * CEnemyManager::CreateEasyEnemy(CXMLTreeNode &XMLTreeNode)
-{
-    return new CEasyEnemy(XMLTreeNode);
-}
-
-CEnemy * CEnemyManager::CreateBossEnemy(CXMLTreeNode &XMLTreeNode)
-{
-    return new CBossEnemy(XMLTreeNode);
-}
-
-CEnemy * CEnemyManager::CreatePatrolEnemy(CXMLTreeNode &XMLTreeNode)
-{
-    return new CPatrolEnemy(XMLTreeNode);
-}
-
-*/
