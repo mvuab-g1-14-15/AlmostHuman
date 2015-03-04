@@ -5,6 +5,8 @@
 #include "Math\LerpAnimator3D.h"
 #include "Timer\Timer.h"
 #include "Core.h"
+#include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
 
 CCharacter::CCharacter( const std::string& Name ) : CName( Name )
 {
@@ -32,7 +34,12 @@ void CCharacter::Update()
   l_Interpolator3D.SetValues( l_Direction, l_DessiredDirection, 1.0f, Math::FUNC_CONSTANT );
   Math::Vect3f l_Eye;
   l_Interpolator3D.Update( 1, l_Eye );
+  m_PController->SetYaw( Math::Utils::ASin( l_Eye.y ) );
   m_PController->Move( l_Eye * 0.05f, deltaTime );
+  CRenderableObject* l_Box =
+    CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource( "solid" )->GetResource( "Pyramid001" );
+  l_Box->SetPosition( m_PController->GetPosition() + Vect3f( 0, 2, 0 ) );
+  l_Box->SetYaw( m_PController->GetYaw() );
 }
 
 void CCharacter::Render()
@@ -48,27 +55,26 @@ void CCharacter::Init()
                                          2.0,
                                          GetCollisionGroup(),
                                          GetPhysicsUserData(),
-                                         Math::Vect3f( 0, 4.0, 0 ),
+                                         Math::Vect3f( 10, 4.0, 10 ),
                                          -10.0 );
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
-  m_TargetPosition = Math::Vect3f(10, 0.0f, 10 );
+  m_TargetPosition = Math::Vect3f( -10, 0.0f, 10 );
 }
 void CCharacter::Init( CXMLTreeNode& Node )
 {
-  m_AIPath = Node.GetPszProperty("lua_path","no_path");
-  m_PController = new CPhysicController( Node.GetFloatProperty("radius",2.0),
-                       Node.GetFloatProperty("height",2.0),
-                       Node.GetFloatProperty("slope",2.0),
-                       Node.GetFloatProperty("skin_width",2.0),
-                       Node.GetFloatProperty("step",2.0),
-                       GetCollisionGroup(), GetPhysicsUserData(),
-                       Node.GetVect3fProperty("initial_position", Math::Vect3f(0,4.0,0)),
-                       Node.GetFloatProperty("gravity",10.0) );
-                      
+  m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
+  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 2.0 ),
+                                         Node.GetFloatProperty( "height", 2.0 ),
+                                         Node.GetFloatProperty( "slope", 2.0 ),
+                                         Node.GetFloatProperty( "skin_width", 2.0 ),
+                                         Node.GetFloatProperty( "step", 2.0 ),
+                                         GetCollisionGroup(), GetPhysicsUserData(),
+                                         Node.GetVect3fProperty( "initial_position", Math::Vect3f( 0, 4.0, 0 ) ),
+                                         Node.GetFloatProperty( "gravity", 10.0 ) );
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
-  m_TargetPosition = Math::Vect3f(10, 0.0f, 10 );
+  m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
 }
 
 ECollisionGroup CCharacter::GetCollisionGroup()

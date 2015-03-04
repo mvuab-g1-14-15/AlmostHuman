@@ -41,15 +41,17 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
     
-    SCATTERED LIGHT
-    <capture_frame_buffer>
-        <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    </capture_frame_buffer>
-    
-    <set_pool_renderable_objects_technique pool="Scattered_Light_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="ActualFrameBuffer"/>
-    </render_draw_quad>
+   
+    <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+	<lens_of_flare>
+		<texture stage_id="0" name="nova.png"/>
+		<texture stage_id="1" name="extendring.png"/>
+		<texture stage_id="2" name="hexangle.png"/>
+		<texture stage_id="3" name="hexagon.png"/>
+		<texture stage_id="4" name="starring.png"/>
+		<texture stage_id="5" name="star.png"/>
+		<texture stage_id="6" name="extend.png"/>
+	</lens_of_flare>
     
     <!--<disable_alpha_blend/>-->
     <!--end pre_render-->

@@ -39,12 +39,12 @@ protected:
   uint32  m_Width;
   uint32  m_Height;
 
-  //TODO ALEX No estoy seguro de si va en protected o private (pag 26 Advanced Shaders) y de como se trabaja con esto...
+
   IDirect3DSurface9* m_OldRenderTarget;
   IDirect3DSurface9* m_DepthStencilRenderTargetTexture;
   IDirect3DSurface9* m_OldDepthStencilRenderTarget;
   IDirect3DSurface9* m_RenderTargetTexture;
-  //FIN TODO
+
   //Methods
   virtual bool LoadFile();
   void Unload();

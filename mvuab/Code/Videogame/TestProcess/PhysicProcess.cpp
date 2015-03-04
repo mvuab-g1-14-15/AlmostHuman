@@ -382,9 +382,9 @@ void CPhysicProcess::Init()
       userData, l_Pos );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
   l_PM->AddPhysicController( m_PhysicController );
- /* m_Character = new CCharacter( "Player" );
-  CXMLTreeNode l_node;
-  m_Character->Init( l_node );*/
+  /* m_Character = new CCharacter( "Player" );
+   CXMLTreeNode l_node;
+   m_Character->Init( l_node );*/
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
   l_PUD->SetColor( colMAGENTA );
@@ -522,15 +522,18 @@ CPhysicUserData* CPhysicProcess::GetLastPUDInserted()
   return m_vPUD[m_vPUD.size() - 1];
 }
 
-CPhysicController*  CPhysicProcess::GetNewController(float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset,
-				ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity)
+CPhysicController*  CPhysicProcess::GetNewController( float _fRadius, float _fHeight, float _fSlope,
+    float _fSkinwidth, float _fStepOffset,
+    ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
+    float _fGravity )
 {
-	return new CPhysicController(_fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset,_uiCollisionGroups, _pUserData, _vPos, _fGravity);
+  return new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset,
+                                _uiCollisionGroups, _pUserData, _vPos, _fGravity );
 }
 
-CCharacter* CPhysicProcess::GetNewCharacter(const std::string &Name)
+CCharacter* CPhysicProcess::GetNewCharacter( const std::string& Name )
 {
-	CCharacter* l_Character = new CCharacter(Name);
-	m_vCharacter.push_back(l_Character);
-	return l_Character;
+  CCharacter* l_Character = new CCharacter( Name );
+  m_vCharacter.push_back( l_Character );
+  return l_Character;
 }

@@ -105,8 +105,6 @@ public:
   void DrawTeapot();
   void CreateQuadBuffers();
 
-  //TODO AÑADIDO STAGEID NO SE SI ES NECESARIO, POR DEFECTO SIEMPRE PONE 0
-
   void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
       CTexture* Texture, float U0, float V0, float U1, float V1 );
 

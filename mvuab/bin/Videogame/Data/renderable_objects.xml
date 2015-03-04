@@ -12,4 +12,6 @@
   <MeshInstance name="Box008" core="Box008" pos="25.0 0.0 25.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Plane002" core="Plane002" pos="-25.0 5.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box009" core="Box009" pos="0.0 0.0 50.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Pyramid001" core="Pyramid001" pos="0.0 0.0 50.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  Pyramid001
 </RenderableObjects>
