@@ -4,7 +4,7 @@
 #include "Utils\PhysicUserData.h"
 #include "Reports\PhysicTriggerReport.h"
 #include "Process.h"
-#include "Character.h"
+#include "Characters/Character.h"
 extern "C"
 {
 #include "lua.h"

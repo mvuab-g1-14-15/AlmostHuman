@@ -10,13 +10,14 @@
 
 class CEnemy : public CCharacter
 {
-protected:
-    
 public:
-    CEnemy(CXMLTreeNode &Node);
-    virtual ~CEnemy();
-    virtual void Update();
-	virtual void Render();
+  typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
+  CEnemy(CXMLTreeNode &Node);
+  virtual ~CEnemy();
+  virtual void Update(){};
+  virtual void Render(){};
+protected:
+  EEnemyType m_Type;
 };
 
 #endif

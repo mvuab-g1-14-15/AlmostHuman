@@ -23,6 +23,7 @@
 #include "PhysicsManager.h"
 //#include "Triggers\TriggerManager.h"
 #include "Actor\PhysicActor.h"
+#include "Characters\Enemies\EnemyManager.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -68,6 +69,7 @@ CCore::CCore() :
   m_pLightManager( new CLightManager() ),
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pPhysicsManager( new CPhysicsManager() ),
+  m_pEnemyManager( new CEnemyManager() ),
   //m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
@@ -103,6 +105,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pPhysicsManager );
+  CHECKED_DELETE( m_pEnemyManager );
   // CHECKED_DELETE( m_pTriggerManager );
 }
 
@@ -285,6 +288,7 @@ void CCore::InitManagers()
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
   m_pPhysicsManager->Init();
+  m_pEnemyManager->Init("Data/enemies/enemies.xml");
 }
 
 void CCore::Trace( const std::string& TraceStr )

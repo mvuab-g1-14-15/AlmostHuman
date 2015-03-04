@@ -3,6 +3,7 @@
 
 #include "Types.h"
 #include <assert.h>
+#include "Logger\Logger.h"
 
 // MACROS
 #define GET_SET(TYPE, PARAMETER_NAME) \
@@ -57,5 +58,9 @@
 #define EngineInstance      CEngine::GetSingletonPtr()
 #define GraphicsInstance    CGraphicsManager::GetSingletonPtr()
 #define SoundInstance       CSoundManager::GetSingletonPtr()
+
+#define LOG_ERROR_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, x )
+#define LOG_WARNING_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x )
+#define LOG_INFO_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x )
 
 #endif

@@ -6,17 +6,37 @@
 #include <vector>
 #include <string>
 #include "Utils\Types.h"
+#include "Utils\MapManager.h"
+#include "Enemy.h"
 
 class CEnemy;
 class CXMLTreeNode;
+class CStateMachine;
 
-class CEnemyManager
+class CEnemyManager : public CMapManager<CEnemy>
 {
 private:
-    std::vector<CEnemy*>                m_Enemies;
-    std::string                            m_Filename;
     
+    class CCoreEnemy
+    {
+      public:
+      CCoreEnemy(){}
+      CEnemy::EEnemyType m_EnemyType;
+      float32 m_Life;
+      float32 m_RespawnTime;
+      float32 m_TimeToShoot;
+      float32 m_ShootAccuracy;
+      std::string m_StateMachineName;
+      std::string m_StateMachineFileName;
+    };
+
+    std::string                  m_Filename;
+    CMapManager<CStateMachine>   m_StateMachines;
+    CMapManager<CCoreEnemy>      m_CoreEnemies;
     void Destroy();
+    void AddNewStateMachine( const std::string &Name, const std::string &SMFileName );
+    void AddNewCoreEnemy( CXMLTreeNode& Node );
+    void AddNewEnemy( CXMLTreeNode& Node );
 public:
     CEnemyManager();
     ~CEnemyManager();
@@ -25,10 +45,6 @@ public:
     void Render();
     void Init(const std::string &Filename);
     void Reload();
-
-    /*static CEnemy * CreateEasyEnemy(CXMLTreeNode &XMLTreeNode);
-    static CEnemy * CreateBossEnemy(CXMLTreeNode &XMLTreeNode);
-    static CEnemy * CreatePatrolEnemy(CXMLTreeNode &XMLTreeNode);*/
     template<class T>
     static CEnemy * CreateTemplatedEnemy(CXMLTreeNode &XMLTreeNode);
 };

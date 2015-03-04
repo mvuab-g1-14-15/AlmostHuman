@@ -32,6 +32,8 @@ class CTimer;
 class CConsole;
 class CSceneRendererCommandManager;
 class CPhysicsManager;
+class CEnemyManager;
+
 //class CTriggerManager;
 
 class CCore : public CSingleton<CCore>
@@ -81,6 +83,7 @@ private:
   CEffectManager*                     m_pEffectManager;
   CLightManager*                      m_pLightManager;
   CSceneRendererCommandManager*       m_pSceneRendererCommandManager;
+  CEnemyManager*                      m_pEnemyManager;
   CPhysicsManager*                    m_pPhysicsManager;
   //CTriggerManager*                    m_pTriggerManager;
   CTimer*                             m_pTimer;

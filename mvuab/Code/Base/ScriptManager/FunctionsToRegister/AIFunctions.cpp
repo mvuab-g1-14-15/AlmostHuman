@@ -5,7 +5,7 @@
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
-#include "Character.h"
+#include "Characters/Character.h"
 
 
 using namespace luabind;
