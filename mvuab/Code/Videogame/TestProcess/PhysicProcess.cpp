@@ -406,7 +406,7 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colMAGENTA );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 100, 0.2f, 100 ), Math::Vect3f( 0, 0,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.2f, 1000 ), Math::Vect3f( 0, 0,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );

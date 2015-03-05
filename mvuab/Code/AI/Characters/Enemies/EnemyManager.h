@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <string>
+#include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Utils\MapManager.h"
 #include "Enemy.h"
@@ -33,6 +34,9 @@ private:
     std::string                  m_Filename;
     CMapManager<CStateMachine>   m_StateMachines;
     CMapManager<CCoreEnemy>      m_CoreEnemies;
+
+    CEnemy*                  m_ActualEnemy;
+
     void Destroy();
     void AddNewStateMachine( const std::string &Name, const std::string &SMFileName );
     void AddNewCoreEnemy( CXMLTreeNode& Node );
@@ -47,6 +51,8 @@ public:
     void Reload();
     template<class T>
     static CEnemy * CreateTemplatedEnemy(CXMLTreeNode &XMLTreeNode);
+
+    GET_SET(CEnemy*, ActualEnemy);
 };
 
 #endif

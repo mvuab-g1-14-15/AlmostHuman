@@ -1,71 +1,30 @@
 <state_machine>
-        <state name="inicial">
-                <on_enter>      
-                        <action  function="set_idle_animation"/>
-                </on_enter>
-                <on_exit>      
-                </on_exit>
-                <update time="1.0f">
-                        <action  function="inicial"/>
-                </update>
-        </state>
-        <state name="parado">
-                <on_enter>      
-                        <action  function="set_idle_animation"/>
-                </on_enter>
-                <on_exit>      
-                </on_exit>
-                <update time="0.5f">
-                        <action  function="parado"/>
-                </update>
-        </state>
-        <state name="andar_a_wp">
-                <on_enter>
-                        <action  function="set_walk_animation"/>
-                </on_enter>
-                <on_exit>
-                </on_exit>
-                <update time = "2.0f">
-                        <action  function="andar_a_wp"/>
-                </update>
-        </state>
-        <state name="next_wp">
-                <on_enter>
-                        <action  function="next_wp"/>
-                </on_enter>
-                <on_exit>
-                </on_exit>
-                <update>                
-                </update>
-        </state>
-        <state name="perseguir">
-                <on_enter>
-                        <action  function="set_correr_animation"/>
-                </on_enter>
-                <on_exit>
-                </on_exit>
-                <update time = "2.0f">
-                        <action function = "perseguir"/>                      
-                </update>
-        </state>
-        <state name="atacar">
-                <on_enter>
-                        <action  function="set_idle_attack_animation"/>
-                </on_enter>
-                <on_exit>
-                </on_exit>
-                <update time = "5.0f">
-                        <action function="atacar"/>                    
-                </update>
-        </state>
-        <state name="death">
-                <on_enter>      
-                        <action  function="death"/>
-                </on_enter>
-                <on_exit>      
-                </on_exit>
-                <update time="2.0f">
-                        <action  function="death"/>
-                </update>
-        </state>
+	<state name="inicial">
+		<on_enter>      
+			<action function="set_initial_waypoint"/>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="change_state"/>
+		</update>
+	</state>
+	<state name="andando">
+		<on_enter>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="change_state"/>
+		</update>
+	</state>
+	<state name="parado">
+		<on_enter>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="change_state"/>
+		</update>
+	</state>
 </state_machine>

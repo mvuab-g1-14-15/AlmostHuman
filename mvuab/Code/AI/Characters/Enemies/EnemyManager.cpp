@@ -34,7 +34,10 @@ void CEnemyManager::Update()
 {
 	TMapResource::iterator it = m_Resources.begin();
 	for( ; it != m_Resources.end(); ++it)
+  {
+    m_ActualEnemy = it->second;
 		it->second->Update();
+  }
 }
 
 void CEnemyManager::Render()

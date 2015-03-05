@@ -8,7 +8,7 @@
 #include "State.h"
 #include <string>
 
-class CStateMachine : public CName, CMapManager<CState>
+class CStateMachine : public CName, public CMapManager<CState>
 {
 public:
 	CStateMachine(const std::string& Name);
