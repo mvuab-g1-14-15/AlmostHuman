@@ -52,6 +52,7 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
 #include "StateMachine\StateMachine.h"
+#include "Graph\Graph.h"
 
 CGrenade* p_Grenade;
 
@@ -100,6 +101,16 @@ CPhysicProcess::~CPhysicProcess()
 
 void CPhysicProcess::Update()
 {
+    /*
+    CGraph l_Graph;
+    l_Graph.Parse("./Data/graph1.xml");
+
+    unsigned int a = l_Graph.GetArcWeight(0, 3);
+    unsigned int b = l_Graph.GetArcWeight(4, 1);
+
+    Math::Vect3f v = l_Graph.GetNodeInfo(4);
+    */
+
   //m_Character->Update();
   m_Amount +=  0.01f;
   m_Angle  += deltaTime * 0.05f;

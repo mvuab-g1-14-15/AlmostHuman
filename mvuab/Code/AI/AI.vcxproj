@@ -17,6 +17,7 @@
     <ClCompile Include="Characters\Enemies\Enemy.cpp" />
     <ClCompile Include="Characters\Enemies\EnemyManager.cpp" />
     <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp" />
+    <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="StateMachine\Action.cpp" />
     <ClCompile Include="StateMachine\State.cpp" />
     <ClCompile Include="StateMachine\StateMachine.cpp" />
@@ -28,6 +29,7 @@
     <ClInclude Include="Characters\Enemies\Enemy.h" />
     <ClInclude Include="Characters\Enemies\EnemyManager.h" />
     <ClInclude Include="Characters\Enemies\PatrolEnemy.h" />
+    <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="StateMachine\Action.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
