@@ -1,8 +1,8 @@
 #include "EasyEnemy.h"
 #include <stdio.h>
 
-CEasyEnemy::CEasyEnemy(CXMLTreeNode &Node)
-: CEnemy(Node)
+CEasyEnemy::CEasyEnemy( CXMLTreeNode& Node )
+  : CEnemy( Node )
 {
 }
 
@@ -11,12 +11,12 @@ CEasyEnemy::~CEasyEnemy()
 {
 }
 
-void CEasyEnemy::Update(float32 deltaTime)
+void CEasyEnemy::Update( float32 deltaTime )
 {
-    printf("Updating CEasyEnemy");
+  printf( "Updating CEasyEnemy" );
 }
 
 void CEasyEnemy::Render()
 {
-    printf("Rendering CEasyEnemy");
+  printf( "Rendering CEasyEnemy" );
 }

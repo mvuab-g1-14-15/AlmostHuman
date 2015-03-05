@@ -7,19 +7,24 @@
 #include "Core.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "PhysicsManager.h"
 
 CCharacter::CCharacter( const std::string& Name )
-	: CName( Name )
-	, m_Speed( 0.02f )
-	, m_Life( 0.0f )
+  : CName( Name )
+  , m_Speed( 0.02f )
+  , m_Life( 0.0f )
+  , m_init( false )
 {
 }
 
 CCharacter::~CCharacter()
 {
-  CPhysicUserData* l_PUD = m_PController->GetUserData();
-  CHECKED_DELETE( l_PUD );
-  CHECKED_DELETE( m_PController );
+  if ( m_init )
+  {
+    CPhysicUserData* l_PUD = m_PController->GetUserData();
+    CHECKED_DELETE( l_PUD );
+    CHECKED_DELETE( m_PController );
+  }
 }
 
 void CCharacter::ExecuteAI()
@@ -28,6 +33,17 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
+  CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
+  CPhysicController* l_CharacterController = l_PUD->GetController();
+  Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_PController->GetPosition();
+  float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
+  l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
+
+  if ( l_Cantidad < 10.0f )
+    SetTargetPosition( l_CharacterController->GetPosition() );
+  else
+    SetTargetPosition( Math::Vect3f( 10, 0.0f, 10 ) );
+
   Math::Vect3f l_Position = m_PController->GetPosition();
   float l_Yaw = m_PController->GetYaw();
   Math::Vect3f l_Direction( Math::Utils::Cos( l_Yaw ) , 0.0f, Math::Utils::Sin( l_Yaw ) );
@@ -63,6 +79,7 @@ void CCharacter::Init()
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
   m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
+  m_init = true;
 }
 void CCharacter::Init( CXMLTreeNode& Node )
 {

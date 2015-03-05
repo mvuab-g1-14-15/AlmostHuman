@@ -15,28 +15,29 @@ class CPhysicUserData;
 class CCharacter : public CName
 {
 public:
-	CCharacter(const std::string& Name);
-	~CCharacter();
-	virtual void Init();
-	virtual void Init(CXMLTreeNode& Node);
-	virtual void Update();
-	virtual void Render();
-	GET_SET(Math::Vect3f, TargetPosition);
-	GET_SET(float32, Speed);
-	GET_SET(float32, Life);
+  CCharacter( const std::string& Name );
+  ~CCharacter();
+  virtual void Init();
+  virtual void Init( CXMLTreeNode& Node );
+  virtual void Update();
+  virtual void Render();
+  GET_SET( Math::Vect3f, TargetPosition );
+  GET_SET( float32, Speed );
+  GET_SET( float32, Life );
 protected:
-	virtual ECollisionGroup GetCollisionGroup();
-	virtual CPhysicUserData* GetPhysicsUserData();
+  virtual ECollisionGroup GetCollisionGroup();
+  virtual CPhysicUserData* GetPhysicsUserData();
 private: // Members
-	std::string m_AIPath;
-	CPhysicController* m_PController;
-	Math::Vect3f m_TargetPosition;
+  std::string m_AIPath;
+  CPhysicController* m_PController;
+  Math::Vect3f m_TargetPosition;
 
-	float32				m_Speed;
-	float32             m_Life;
+  float32       m_Speed;
+  float32             m_Life;
+  bool m_init;
 
 private: // Methods
-	void ExecuteAI();
+  void ExecuteAI();
 };
 
 #endif // CHARACTER_H
