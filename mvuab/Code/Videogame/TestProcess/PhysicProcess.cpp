@@ -173,30 +173,33 @@ void CPhysicProcess::Update()
     if ( l_CurrentCamera )
     {
       CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-      CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "RayCast" );
+      CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "Disparo" );
+	  l_PhysicUserData->SetColor(colRED);
       l_PhysicUserData->SetPaint( true );
       m_vPUD.push_back( l_PhysicUserData );
       CPhysicActor* l_Actor = new CPhysicActor( l_PhysicUserData );
       //If don't want box, you can remove this line
+	  CPhysicController* l_PC = l_PM->GetUserData("CharacterController")->GetController();
       l_Actor->AddBoxShapeHardcoded( Math::Vect3f( 0.05f, 0.05f, 0.05f ),
-                                     l_CurrentCamera->GetPos(), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0, 0 ) );
+                                     l_PC->GetPosition(), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0, 0 ) );
       l_Actor->CreateBody( 1.0f );
       // Add at the end allways it needs to have a shape
       l_PM->AddPhysicActor( l_Actor );
       m_vPA.push_back( l_Actor );
-      l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() *
+	  Math::Vect3f l_Direction( Math::Utils::Cos( l_PC->GetYaw() ) , 0.0f, Math::Utils::Sin( l_PC->GetYaw() ) );
+      l_Actor->SetLinearVelocity( l_Direction.GetNormalized() *
                                   20.0f );
       SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
       uint32 mask = 1 << ECG_ESCENE;
       //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
       CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(
-                                 l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(),
+                                 l_PC->GetPosition(), l_Direction.GetNormalized(),
                                  mask, l_SCollisionInfo, 40.0f );
 
-      if ( l_PUD )
+      /*if ( l_PUD )
         std::string l_Object = l_PUD->GetName();
       else
-        std::string l_Object = "";
+        std::string l_Object = "";*/
     }
   }
 

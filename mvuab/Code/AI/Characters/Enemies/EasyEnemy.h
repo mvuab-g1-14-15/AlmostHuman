@@ -10,8 +10,8 @@ class CEasyEnemy : public CEnemy
 public:
     CEasyEnemy(CXMLTreeNode &Node);
     ~CEasyEnemy();
-
-    void Update(float32 deltaTime);
+	void Init(){};
+    void Update();
     void Render();
 };
 

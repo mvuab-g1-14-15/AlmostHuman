@@ -22,6 +22,7 @@
 #include "TestProcess\PhysicProcess.h"
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
+#include "Characters\Enemies\EnemyManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>

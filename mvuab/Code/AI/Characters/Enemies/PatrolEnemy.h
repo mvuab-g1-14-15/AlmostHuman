@@ -14,8 +14,8 @@ private:
 public:
     CPatrolEnemy(CXMLTreeNode &Node);
     ~CPatrolEnemy();
-
-    void Update(float32 deltaTime);
+	void Init();
+    void Update();
     void Render();
 };
 

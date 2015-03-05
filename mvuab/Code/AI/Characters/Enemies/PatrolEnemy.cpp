@@ -11,14 +11,17 @@ CPatrolEnemy::~CPatrolEnemy( void )
 {
 }
 
-void CPatrolEnemy::Update( float32 deltaTime )
+void CPatrolEnemy::Init()
+{
+	CCharacter::Init();
+}
+
+void CPatrolEnemy::Update( )
 {
   CCharacter::Update();
-  printf( "Updating CPatrolEnemy" );
 }
 
 void CPatrolEnemy::Render()
 {
   CCharacter::Render();
-  printf( "Rendering CPatrolEnemy" );
 }

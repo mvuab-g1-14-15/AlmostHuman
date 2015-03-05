@@ -7,7 +7,11 @@
 
 #include "Characters/Character.h"
 #include "Characters\Enemies\Enemy.h"
+#include "Characters\Enemies\PatrolEnemy.h"
+#include "Characters\Enemies\BossEnemy.h"
+#include "Characters\Enemies\EasyEnemy.h"
 #include "Characters\Enemies\EnemyManager.h"
+#include "Utils\MapManager.h"
 #include "XML\XMLTreeNode.h"
 
 
@@ -19,22 +23,48 @@ void registerAI( lua_State* m_LS )
   [
     class_<CCharacter>( "CCharacter" )
     .def( constructor<const std::string&>() )
-    .def( "SetTargetPosition", &CCharacter::SetTargetPosition )
-    .def( "Init", ( void( CCharacter::* )( void ) )&CCharacter::Init )
-    .def( "Update", &CCharacter::Update )
-    .def( "Render", &CCharacter::Render )
+    .def( "setTargetPosition", &CCharacter::SetTargetPosition )
+    .def( "init", ( void( CCharacter::* )( void ) )&CCharacter::Init )
+    .def( "update", &CCharacter::Update )
+    .def( "render", &CCharacter::Render )
+  ];
+  module( m_LS )
+  [
+    class_<CEnemy, CCharacter>( "CEnemy" )
   ];
 
   module( m_LS )
   [
-    class_<CEnemy>( "CEnemy" )
-    .def( constructor<CXMLTreeNode&>() )
-    .def( "update", &CEnemy::Update )
-    .def( "render", &CEnemy::Render )
+    class_<CPatrolEnemy, CEnemy>( "CPatrolEnemy" )
+    .def( constructor<CXMLTreeNode &>() )
+	.def( "init", &CPatrolEnemy::Init )
+    .def( "update", &CPatrolEnemy::Update )
+    .def( "render", &CPatrolEnemy::Render )
   ];
   module( m_LS )
   [
-    class_<CEnemyManager>( "CEnemyManager" )
+    class_<CBossEnemy, CEnemy>( "CBossEnemy" )
+    .def( constructor<CXMLTreeNode &>() )
+	.def( "init", &CBossEnemy::Init )
+    .def( "update", &CBossEnemy::Update )
+    .def( "render", &CBossEnemy::Render )
+  ];
+  module( m_LS )
+  [
+    class_<CEasyEnemy, CEnemy>( "CEasyEnemy" )
+    .def( constructor<CXMLTreeNode &>() )
+	.def( "init", &CEasyEnemy::Init )
+    .def( "update", &CEasyEnemy::Update )
+    .def( "render", &CEasyEnemy::Render )
+  ];
+  
+  module( m_LS )
+  [
+    class_<CMapManager<CEnemy>>( "CMapManagerCEnemy" )
+  ];
+  module( m_LS )
+  [
+	class_<CEnemyManager, CMapManager<CEnemy>>( "CEnemyManager" )
     .def( constructor<>() )
     .def( "getEnemy", &CEnemyManager::GetResource )
   ];

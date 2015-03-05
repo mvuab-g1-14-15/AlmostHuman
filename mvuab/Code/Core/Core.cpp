@@ -130,6 +130,7 @@ void CCore::Update()
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
   m_pPhysicsManager->Update( deltaTime );
+  m_pEnemyManager->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();

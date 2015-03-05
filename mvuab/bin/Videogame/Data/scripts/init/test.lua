@@ -17,10 +17,17 @@ function init()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	physic_manager = core:GetPhysicsManager()
-	engine = Singleton_Engine.get_singleton()
-	process = engine:GetProcess()
-	character_patrol = process:GetNewCharacter("Player")
-	character_patrol:Init()
+	
+	
+	--engine = Singleton_Engine.get_singleton()
+	--process = engine:GetProcess()
+	--character_patrol = process:GetNewCharacter("Player")
+	--character_patrol:init()
+	
+	--enemy_manager = core:GetEnemyManager()
+	--enemy_patrol = enemy_manager:getEnemy("Enemy6")
+	--enemy_patrol:init()
+	
 	initialized = true
 end
 
@@ -35,7 +42,6 @@ function update()
 	if enable == true then
 		move_player( dt )
 		move_light( dt )
-		character_patrol:Update()
 	end
 end
 
@@ -99,8 +105,10 @@ function move_player( dt )
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
 		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
-	local character_controller_UserData = physic_manager:GetUserData("CharacterController");
-	local character_controller = character_controller_UserData:GetController();
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController")
+	local character_controller = character_controller_UserData:GetController()
+	local Yaw = current_camera:GetYaw()
+	character_controller:SetYaw(Yaw)
 	if action_manager:DoAction("Jump") then
 		character_controller:Jump(50)
 	end
@@ -127,6 +135,7 @@ function move( flag_speed, forward, strafe, dt )
 	
     addPos = addPos * constant;
 	character_controller:Move(addPos, dt)
+	character_controller:SetYaw(Yaw)
 	current_camera:SetPos(character_controller:GetPosition())
 	
 end

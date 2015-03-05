@@ -138,4 +138,5 @@ void registerBase( lua_State* m_LS )
     .def( constructor<>() )
     .def( constructor<const Math::Vect4f&>() )
   ];
+
 }

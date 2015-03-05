@@ -11,12 +11,11 @@ CEasyEnemy::~CEasyEnemy()
 {
 }
 
-void CEasyEnemy::Update( float32 deltaTime )
+void CEasyEnemy::Update( )
 {
-  printf( "Updating CEasyEnemy" );
+  CCharacter::Update();
 }
 
 void CEasyEnemy::Render()
 {
-  printf( "Rendering CEasyEnemy" );
 }

@@ -14,8 +14,9 @@ public:
   typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
   CEnemy(CXMLTreeNode &Node);
   virtual ~CEnemy();
-  virtual void Update(){};
-  virtual void Render(){};
+  virtual void Init() = 0;
+  virtual void Update() = 0;
+  virtual void Render() = 0;
 protected:
   EEnemyType m_Type;
 };

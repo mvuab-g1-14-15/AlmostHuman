@@ -11,12 +11,11 @@ CBossEnemy::~CBossEnemy(void)
 {
 }
 
-void CBossEnemy::Update(float32 deltaTime)
+void CBossEnemy::Update()
 {
-    printf("Updating bossenemy");
+	CCharacter::Update();
 }
 
 void CBossEnemy::Render()
 {
-    printf("Rendering bossenemy");
 }

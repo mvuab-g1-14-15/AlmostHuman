@@ -90,11 +90,12 @@ void CCharacter::Init( CXMLTreeNode& Node )
                                          Node.GetFloatProperty( "skin_width", 2.0 ),
                                          Node.GetFloatProperty( "step", 2.0 ),
                                          GetCollisionGroup(), GetPhysicsUserData(),
-                                         Node.GetVect3fProperty( "initial_position", Math::Vect3f( 0, 4.0, 0 ) ),
-                                         Node.GetFloatProperty( "gravity", 10.0 ) );
+                                         Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
+                                         Node.GetFloatProperty( "gravity", -10.0 ) );
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
   m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
+  m_init = true;
 }
 
 ECollisionGroup CCharacter::GetCollisionGroup()

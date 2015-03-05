@@ -32,6 +32,9 @@ void CEnemyManager::Destroy()
 
 void CEnemyManager::Update()
 {
+	TMapResource::iterator it = m_Resources.begin();
+	for( ; it != m_Resources.end(); ++it)
+		it->second->Update();
 }
 
 void CEnemyManager::Render()
@@ -131,18 +134,17 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 
   if ( lCoreEnemy )
   {
-    CEnemy* lEnemy = 0;
 
     if ( lType == "easy" )
     {
-      lEnemy = new CEasyEnemy( Node );
+      CEasyEnemy* lEnemy = new CEasyEnemy( Node );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
     }
     else if ( lType == "patroll" )
     {
-      lEnemy = new CPatrolEnemy( Node );
+      CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
@@ -151,7 +153,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     }
     else if ( lType == "boss" )
     {
-      lEnemy = new CBossEnemy( Node );
+      CBossEnemy* lEnemy = new CBossEnemy( Node );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
