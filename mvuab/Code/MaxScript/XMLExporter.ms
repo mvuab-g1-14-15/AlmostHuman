@@ -124,9 +124,12 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 					instance_obj = Obj
 			)
 		
-			local l_Yaw = GetYaw Obj.transform as string
-			local l_Pitch = GetPitch Obj.transform as string
-			local l_Roll = GetRoll Obj.transform as string
+			local lRotation = Obj.rotation 
+			local l_Yaw = GetYaw lRotation as string
+			local l_Pitch = GetPitch lRotation as string
+			local l_Roll = GetRoll lRotation as string
+			
+			format "Rotation: % % % % \n" (lRotation as eulerangles)  l_Yaw l_Pitch l_Roll 
 			
 			local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
 			-- append the new node MeshInstance to the root node RenderableObjects

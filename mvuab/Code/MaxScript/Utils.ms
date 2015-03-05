@@ -1,15 +1,15 @@
-fn GetYaw transform =
+fn GetYaw rot =
 (
-	return (transform as eulerangles).z
+	return degToRad((rot as eulerangles).z)
 )
 
-fn GetPitch transform =
+fn GetPitch rot =
 (
-	return (transform as eulerangles).x
+	return degToRad((rot as eulerangles).y)
 )
-fn GetRoll transform =
+fn GetRoll rot =
 (
-	return (transform as eulerangles).y
+	return degToRad((rot as eulerangles).x)
 )
 	
 fn DoesFolderExist f create:true =
