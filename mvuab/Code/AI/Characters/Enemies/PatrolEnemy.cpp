@@ -1,22 +1,24 @@
 #include "PatrolEnemy.h"
 #include <stdio.h>
 
-CPatrolEnemy::CPatrolEnemy(CXMLTreeNode &Node)
-: CEnemy(Node)
+CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node )
+  : CEnemy( Node )
 {
 }
 
 
-CPatrolEnemy::~CPatrolEnemy(void)
+CPatrolEnemy::~CPatrolEnemy( void )
 {
 }
 
-void CPatrolEnemy::Update(float32 deltaTime)
+void CPatrolEnemy::Update( float32 deltaTime )
 {
-    printf("Updating CPatrolEnemy");
+  CCharacter::Update();
+  printf( "Updating CPatrolEnemy" );
 }
 
 void CPatrolEnemy::Render()
 {
-    printf("Rendering CPatrolEnemy");
+  CCharacter::Render();
+  printf( "Rendering CPatrolEnemy" );
 }

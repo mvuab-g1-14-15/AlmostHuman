@@ -134,6 +134,7 @@ public:
   GET_SET_PTR( CLightManager, LightManager );
   GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager );
   GET_SET_PTR( CPhysicsManager, PhysicsManager );
+  GET_SET_PTR( CEnemyManager, EnemyManager );
   //GET_SET_PTR( CTriggerManager, TriggerManager );
   GET_SET_PTR( CTimer, Timer );
 };

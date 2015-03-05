@@ -79,6 +79,7 @@ void registerCore( lua_State* m_LS )
     .def( "GetCameraManager", &CCore::GetCameraManager )
     .def( "GetTimer", &CCore::GetTimer )
     .def( "GetPhysicsManager", &CCore::GetPhysicsManager )
+    .def( "GetEnemyManager", &CCore::GetEnemyManager )
     //Getter Variables
     .def( "GetAnimatedModelsPath", &CCore::GetAnimatedModelsPath )
     .def( "GetConfigPath", &CCore::GetConfigPath )
