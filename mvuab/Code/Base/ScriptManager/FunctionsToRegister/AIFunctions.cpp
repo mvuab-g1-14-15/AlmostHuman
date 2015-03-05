@@ -24,6 +24,7 @@ void registerAI( lua_State* m_LS )
     class_<CCharacter>( "CCharacter" )
     .def( constructor<const std::string&>() )
     .def( "setTargetPosition", &CCharacter::SetTargetPosition )
+    .def( "SetTargetPositionOriginal", &CCharacter::SetTargetPositionOriginal )
     .def( "init", ( void( CCharacter::* )( void ) )&CCharacter::Init )
     .def( "update", &CCharacter::Update )
     .def( "render", &CCharacter::Render )
@@ -31,6 +32,7 @@ void registerAI( lua_State* m_LS )
   module( m_LS )
   [
     class_<CEnemy, CCharacter>( "CEnemy" )
+    .def("ChangeState", &CEnemy::ChangeState)
   ];
 
   module( m_LS )
@@ -67,5 +69,6 @@ void registerAI( lua_State* m_LS )
 	class_<CEnemyManager, CMapManager<CEnemy>>( "CEnemyManager" )
     .def( constructor<>() )
     .def( "getEnemy", &CEnemyManager::GetResource )
+    .def( "GetActualEnemy", &CEnemyManager::GetActualEnemy )
   ];
 }

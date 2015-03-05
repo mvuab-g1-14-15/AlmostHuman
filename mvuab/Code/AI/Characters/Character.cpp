@@ -39,10 +39,10 @@ void CCharacter::Update()
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
-  if ( l_Cantidad < 10.0f )
+  if ( l_Cantidad < 30.0f )
     SetTargetPosition( l_CharacterController->GetPosition() );
   else
-    SetTargetPosition( Math::Vect3f( 10, 0.0f, 10 ) );
+    SetTargetPosition( m_TargetPositionOriginal );
 
   Math::Vect3f l_Position = m_PController->GetPosition();
   float l_Yaw = m_PController->GetYaw();
@@ -95,6 +95,7 @@ void CCharacter::Init( CXMLTreeNode& Node )
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
   m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
+  m_TargetPositionOriginal = m_TargetPosition;
   m_init = true;
 }
 

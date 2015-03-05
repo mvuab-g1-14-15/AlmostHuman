@@ -22,6 +22,7 @@ public:
   virtual void Update();
   virtual void Render();
   GET_SET( Math::Vect3f, TargetPosition );
+  GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
   GET_SET( float32, Life );
 protected:
@@ -31,7 +32,7 @@ private: // Members
   std::string m_AIPath;
   CPhysicController* m_PController;
   Math::Vect3f m_TargetPosition;
-
+  Math::Vect3f m_TargetPositionOriginal;
   float32       m_Speed;
   float32             m_Life;
   bool m_init;

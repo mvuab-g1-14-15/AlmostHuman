@@ -5,6 +5,7 @@
 #include "Utils\Name.h"
 #include <string>
 #include "XML\XMLTreeNode.h"
+#include "Utils\Defines.h"
 
 #include <vector>
 
@@ -16,6 +17,11 @@ public:
 	CState(const std::string& Name);
 	~CState();
 	virtual bool Load( CXMLTreeNode& Node);
+
+  GET_SET(std::vector<CAction*>, OnEnterActions);
+  GET_SET(std::vector<CAction*>, OnExitActions);
+  GET_SET(std::vector<CAction*>, UpdateActions);
+
 protected:
 private: // Members
 	std::vector<CAction*> m_OnEnterActions;

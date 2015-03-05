@@ -8,17 +8,27 @@
 #include "XML\XMLTreeNode.h"
 #include "Characters\Character.h"
 
+#include <string>
+
+class CStateMachine;
+
 class CEnemy : public CCharacter
 {
 public:
   typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
   CEnemy(CXMLTreeNode &Node);
   virtual ~CEnemy();
-  virtual void Init() = 0;
-  virtual void Update() = 0;
-  virtual void Render() = 0;
+  virtual void Init();
+  virtual void Update();
+  virtual void Render();
+
+  void ChangeState(std::string NewState);
 protected:
   EEnemyType m_Type;
+
+  // State Machine instance
+  CStateMachine* m_pStateMachine;
+  std::string m_CurrentState;
 };
 
 #endif
