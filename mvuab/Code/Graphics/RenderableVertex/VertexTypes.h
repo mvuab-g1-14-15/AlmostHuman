@@ -40,7 +40,6 @@ G N T B D T1 T2
 #define VERTEX_TYPE_SKYBOX              1 << 12 // 4096
 #define VERTEX_TYPE_RNM                 1 << 13 // 8192
 
-
 struct T_SKYBOX_VERTEX
 {
   float x, y, z;
@@ -258,7 +257,7 @@ struct TNORMAL_DIFF_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  unsigned long color;
+  unsigned int color;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
@@ -274,7 +273,7 @@ struct TNORMAL_DIFF_VERTEX
 
   static inline unsigned int GetFVF()
   {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
+    return 0;//D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
   }
 };
 

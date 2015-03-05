@@ -104,4 +104,9 @@
 		<effect name="DefaultEffect" file="data/effects/DefaultEffect.fx"/>
 		<handles use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	</technique>
+    
+     <technique name="ColorTechnique" vertex_type="67">
+		<effect name="ColorEffect" file="data/effects/Color.fx"/>
+		<handles use_world_view_projection_matrix="true" />
+	</technique>
 </effects>

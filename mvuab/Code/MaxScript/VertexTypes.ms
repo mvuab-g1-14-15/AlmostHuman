@@ -59,10 +59,12 @@ struct SVertex
 			WriteFloat file m_Normal.x
 			WriteFloat file m_Normal.z
 			WriteFloat file m_Normal.y
-			WriteFloat file 0
+			
 			
 			if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 			(
+				WriteFloat file 0
+				
 				format "\tTangencial: (%, %, %)\n" m_Tan.x m_Tan.y m_Tan.z
 				WriteFloat file m_Tan.x
 				WriteFloat file m_Tan.y

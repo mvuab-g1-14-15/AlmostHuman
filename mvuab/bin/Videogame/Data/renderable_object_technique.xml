@@ -59,5 +59,9 @@
 	<pool_renderable_object_technique name="Bloom_step3_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="CombineBloomTechnique"/>
 	</pool_renderable_object_technique>
+    
+    <pool_renderable_object_technique name="Color_pool_renderable_object_technique">
+		<default_technique vertex_type="67" technique="ColorTechnique"/>
+	</pool_renderable_object_technique>
 	
 </renderable_object_techniques>
