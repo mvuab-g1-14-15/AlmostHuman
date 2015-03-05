@@ -1,0 +1,15 @@
+<graph>
+	<node id="0" pos="1 0 0"/>
+	<node id="1" pos="2 0 0"/>
+	<node id="2" pos="3 0 0"/>
+	<node id="3" pos="4 0 0"/>
+	<node id="4" pos="5 0 0"/>
+	<weight src="0" dst="3" value="8"/>
+	<weight src="0" dst="1" value="2"/>
+	<weight src="1" dst="0" value="4"/>
+	<weight src="1" dst="3" value="5"/>
+	<weight src="1" dst="2" value="2"/>
+	<weight src="2" dst="4" value="4"/>
+	<weight src="3" dst="4" value="8"/>
+	<weight src="4" dst="1" value="1"/>
+</graph>

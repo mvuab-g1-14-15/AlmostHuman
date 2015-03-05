@@ -14,6 +14,9 @@
     <Filter Include="Characters\Enemies">
       <UniqueIdentifier>{4d9bf2f5-32aa-45d8-b220-f32ad7b2e2a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graph">
+      <UniqueIdentifier>{3c61283d-3465-4a1d-b97c-4c5772dc98c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -43,6 +46,9 @@
     <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp">
       <Filter>Characters\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Graph\Graph.cpp">
+      <Filter>Graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -71,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Characters\Enemies\EnemyManager.h">
       <Filter>Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\Graph.h">
+      <Filter>Graph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
