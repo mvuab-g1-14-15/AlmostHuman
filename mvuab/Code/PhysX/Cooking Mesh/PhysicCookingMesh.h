@@ -44,10 +44,10 @@ public:
 	NxTriangleMesh*				GetPhysicMesh		(const std::string& name);
 	size_t						GetNumMeshes		() { return m_TriangleMeshes.size(); }		// Added by XMA
 
-
-	bool						CreatePhysicMesh	( const std::string& _BinFilename, const std::string& _NameMesh );
-	bool						CreatePhysicMesh	( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_NameMesh );
-	bool						SavePhysicMesh		( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_BinFilename );
+	bool						LoadMesh			(const std::string& FileName,const std::string& NameMesh);
+	bool						CreatePhysicMesh	( const std::string& _BinFilename, const std::string& _NameMesh);
+	bool						CreatePhysicMesh	( const std::vector<Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_NameMesh );
+	bool						SavePhysicMesh		( const std::vector<Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_BinFilename );
 	bool						CreateMeshFromASE	( std::string _FileName, std::string _Name );
 	bool						CookClothMesh		( const NxClothMeshDesc& _Desc, NxStream& _Stream);
 
@@ -56,7 +56,7 @@ public:
 	void						ReleasePhysicMesh   (const std::string& name);
 
 private:
-	bool						ReadMeshFromASE		( std::string _FileName, std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces );
+	bool						ReadMeshFromASE		( std::string _FileName, std::vector<Vect3f>& _Vertices, std::vector<unsigned int>& _Faces );
 //	void						Release				( void );
 
 private:
