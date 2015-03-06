@@ -1,4 +1,4 @@
-<state_machine>
+<state_machine name="easy">
 	<state name="inicial">
 		<on_enter>      
 			<action function="set_initial_waypoint"/>

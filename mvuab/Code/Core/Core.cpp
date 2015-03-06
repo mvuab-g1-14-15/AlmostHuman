@@ -21,7 +21,7 @@
 #include "Timer\Timer.h"
 #include "Console\Console.h"
 #include "PhysicsManager.h"
-//#include "Triggers\TriggerManager.h"
+#include "Triggers\TriggerManager.h"
 #include "Actor\PhysicActor.h"
 #include "Characters\Enemies\EnemyManager.h"
 
@@ -44,6 +44,7 @@ CCore::CCore() :
   m_EffectsPath( "" ),
   m_LightsPath( "" ),
   m_SceneRendererCommandPath( "" ),
+  m_TriggersPath( "" ),
   m_ScreenWidth( 800 ),
   m_ScreenHeight( 600 ),
   m_WindowXPos( 0 ),
@@ -70,7 +71,7 @@ CCore::CCore() :
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pPhysicsManager( new CPhysicsManager() ),
   m_pEnemyManager( new CEnemyManager() ),
-  //m_pTriggerManager( new CTriggerManager() ),
+  m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) )
 {
@@ -106,7 +107,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pPhysicsManager );
   CHECKED_DELETE( m_pEnemyManager );
-  // CHECKED_DELETE( m_pTriggerManager );
+  CHECKED_DELETE( m_pTriggerManager );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -176,87 +177,72 @@ void CCore::LoadXml()
         m_ScreenWidth = TreeNode( i ).GetIntProperty( "width" );
         m_ScreenHeight = TreeNode( i ).GetIntProperty( "height" );
       }
-      else
-        if ( TagName == "window_position" )
+      else if ( TagName == "window_position" )
+      {
+        m_WindowXPos = TreeNode( i ).GetIntProperty( "x_pos", 0 );
+        m_WindowYPos = TreeNode( i ).GetIntProperty( "y_pos", 0 );
+      }
+      else if ( TagName == "render_mode" )
+        m_FullScreenMode = TreeNode( i ).GetBoolProperty( "fullscreen_mode", false );
+      else if ( TagName == "mouse" )
+      {
+        m_ExclusiveModeInMouse = TreeNode(
+                                   i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
+        m_DrawPointerMouse = TreeNode( i ).GetBoolProperty( "draw_pointer_mouse",
+                             false );
+      }
+      else if ( TagName == "GUI" )
+        m_GUIPath = std::string( TreeNode( i ).GetPszProperty( "init_gui_path", "" ) );
+      else if ( TagName == "sound" )
+        m_SoundPath = std::string( TreeNode( i ).GetPszProperty( "init_sound_path",
+                                   "" ) );
+      else if ( TagName == "fonts" )
+        m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
+      else if ( TagName == "input" )
+        m_InputPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "languages" )
+      {
+        m_CurrentLanguage = std::string( TreeNode(
+                                           i ).GetPszProperty( "current_language", "" ) );
+        CXMLTreeNode  SubTreeNode = l_File["languages"];
+
+        if ( SubTreeNode.Exists() )
         {
-          m_WindowXPos = TreeNode( i ).GetIntProperty( "x_pos", 0 );
-          m_WindowYPos = TreeNode( i ).GetIntProperty( "y_pos", 0 );
+          int countLan = SubTreeNode.GetNumChildren();
+
+          for ( int lans = 0; lans < countLan; ++lans )
+          {
+            std::string TagName = SubTreeNode( lans ).GetName();
+
+            if ( TagName == "language" )
+              m_v_languages.push_back( std::string( SubTreeNode(
+                                                      lans ).GetPszProperty( "path", "" ) ) );
+          }
         }
-        else
-          if ( TagName == "render_mode" )
-            m_FullScreenMode = TreeNode( i ).GetBoolProperty( "fullscreen_mode", false );
-          else
-            if ( TagName == "mouse" )
-            {
-              m_ExclusiveModeInMouse = TreeNode(
-                                         i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
-              m_DrawPointerMouse = TreeNode( i ).GetBoolProperty( "draw_pointer_mouse",
-                                   false );
-            }
-            else
-              if ( TagName == "GUI" )
-                m_GUIPath = std::string( TreeNode( i ).GetPszProperty( "init_gui_path", "" ) );
-              else
-                if ( TagName == "sound" )
-                  m_SoundPath = std::string( TreeNode( i ).GetPszProperty( "init_sound_path",
-                                             "" ) );
-                else
-                  if ( TagName == "fonts" )
-                    m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
-                  else
-                    if ( TagName == "input" )
-                      m_InputPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-                    else
-                      if ( TagName == "languages" )
-                      {
-                        m_CurrentLanguage = std::string( TreeNode(
-                                                           i ).GetPszProperty( "current_language", "" ) );
-                        CXMLTreeNode  SubTreeNode = l_File["languages"];
 
-                        if ( SubTreeNode.Exists() )
-                        {
-                          int countLan = SubTreeNode.GetNumChildren();
-
-                          for ( int lans = 0; lans < countLan; ++lans )
-                          {
-                            std::string TagName = SubTreeNode( lans ).GetName();
-
-                            if ( TagName == "language" )
-                              m_v_languages.push_back( std::string( SubTreeNode(
-                                                                      lans ).GetPszProperty( "path", "" ) ) );
-                          }
-                        }
-
-                        m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
-                      }
-                      else
-                        if ( TagName == "animated_models" )
-                          m_AnimatedModelsPath = std::string( TreeNode( i ).GetPszProperty( "path",
-                                                              "" ) );
-                        else
-                          if ( TagName == "static_meshes" )
-                            m_StaticMeshesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-                          else
-                            if ( TagName == "renderable_objects" )
-                              m_RenderableObjectsPath = std::string( TreeNode( i ).GetPszProperty( "path",
-                                                                     "" ) );
-                            else
-                              if ( TagName == "renderable_object_technique" )
-                                m_RenderableObjectTechniquePath = std::string( TreeNode(
-                                                                    i ).GetPszProperty( "path", "" ) );
-                              else
-                                if ( TagName == "lua" )
-                                  m_LuaRunPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-                                else
-                                  if ( TagName == "effects" )
-                                    m_EffectsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-                                  else
-                                    if ( TagName == "lights" )
-                                      m_LightsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
-                                    else
-                                      if ( TagName == "scene_renderer_commands" )
-                                        m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path",
-                                                                     "" ) );
+        m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
+      }
+      else if ( TagName == "animated_models" )
+        m_AnimatedModelsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                            "" ) );
+      else if ( TagName == "static_meshes" )
+        m_StaticMeshesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "renderable_objects" )
+        m_RenderableObjectsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                               "" ) );
+      else if ( TagName == "renderable_object_technique" )
+        m_RenderableObjectTechniquePath = std::string( TreeNode(
+                                            i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "lua" )
+        m_LuaRunPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "effects" )
+        m_EffectsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "lights" )
+        m_LightsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "scene_renderer_commands" )
+        m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "triggers" )
+        m_TriggersPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
     }
   }
 }
@@ -289,7 +275,8 @@ void CCore::InitManagers()
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
   m_pPhysicsManager->Init();
-  m_pEnemyManager->Init("Data/enemies/enemies.xml");
+  m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
+  m_pTriggerManager->LoadXML( m_TriggersPath );
 }
 
 void CCore::Trace( const std::string& TraceStr )

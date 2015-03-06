@@ -32,11 +32,12 @@ void CEnemyManager::Destroy()
 
 void CEnemyManager::Update()
 {
-	TMapResource::iterator it = m_Resources.begin();
-	for( ; it != m_Resources.end(); ++it)
+  TMapResource::iterator it = m_Resources.begin();
+
+  for ( ; it != m_Resources.end(); ++it )
   {
     m_ActualEnemy = it->second;
-		it->second->Update();
+    it->second->Update();
   }
 }
 
@@ -141,6 +142,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     if ( lType == "easy" )
     {
       CEasyEnemy* lEnemy = new CEasyEnemy( Node );
+      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
@@ -148,6 +150,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     else if ( lType == "patroll" )
     {
       CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
+      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
@@ -157,6 +160,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     else if ( lType == "boss" )
     {
       CBossEnemy* lEnemy = new CBossEnemy( Node );
+      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
 
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );

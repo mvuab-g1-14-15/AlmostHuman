@@ -27,7 +27,10 @@
     <ClCompile Include="TestProcess\PhysicProcess.cpp">
       <Filter>TestProcess</Filter>
     </ClCompile>
-    <ClCompile Include="TestProcess\TestProcessPhysicxMaterial.cpp">
+    <ClCompile Include="TestProcess\PhysicMaterial.cpp">
+      <Filter>TestProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="TestProcess\PlayerPhysicProcess.cpp">
       <Filter>TestProcess</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,7 +45,10 @@
     <ClInclude Include="TestProcess\PhysicProcess.h">
       <Filter>TestProcess</Filter>
     </ClInclude>
-    <ClInclude Include="TestProcess\TestProcessPhysicxMaterial.h">
+    <ClInclude Include="TestProcess\PhysicMaterial.h">
+      <Filter>TestProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="TestProcess\PlayerPhysicProcess.h">
       <Filter>TestProcess</Filter>
     </ClInclude>
   </ItemGroup>

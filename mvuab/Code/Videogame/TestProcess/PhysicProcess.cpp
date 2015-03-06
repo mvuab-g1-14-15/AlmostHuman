@@ -1,82 +1,57 @@
 #include "PhysicProcess.h"
-#include "Utils\Defines.h"
+#include "Items\Grenade.h"
+
+//BASE
+#include "Timer\Timer.h"
+#include "Logger\Logger.h"
+#include "Utils\BaseUtils.h"
+#include "Fonts\FontManager.h"
+#include "ScriptManager\ScriptManager.h"
+
+//CORE
+#include "Core.h"
+
+//GRAPHICS
 #include "GraphicsManager.h"
+#include "Lights\LightManager.h"
+#include "Cameras\CameraManager.h"
+#include "Effects\EffectManager.h"
+#include "StaticMeshes\StaticMeshManager.h"
+#include "RenderableVertex\IndexedVertexs.h"
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
+
+//INPUT
 #include "InputManager.h"
 #include "ActionManager.h"
-#include "Fonts\FontManager.h"
-#include "Object3D.h"
-#include "Math\Matrix44.h"
-#include "Logger\Logger.h"
-#include "Utils\LogRender.h"
-#include "Utils\Defines.h"
-#include "Math\AABB.h"
-#include "Core.h"
-#include "Utils\BaseUtils.h"
-#include "Timer\Timer.h"
 #include "Periphericals\Mouse.h"
 
-#include "ScriptManager\ScriptManager.h"
-#include "StaticMeshes\StaticMeshManager.h"
-#include "StaticMeshes\InstanceMesh.h"
-#include "StaticMeshes\StaticMesh.h"
-
-#include "RenderableVertex\RenderableVertex.h"
-#include "RenderableVertex\IndexedVertexs.h"
-#include "RenderableVertex\VertexTypes.h"
-#include "Texture\Texture.h"
-
-#include "StaticMeshes\StaticMesh.h"
-#include "Cameras\CameraFPShooter.h"
-#include "Cameras\CameraManager.h"
-
-#include "Effects\EffectManager.h"
-#include "RenderableVertex\VertexTypes.h"
-
+//PHYSX
 #include "PhysicsManager.h"
+#include "Triggers\Trigger.h"
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
-
-#include "Items\Grenade.h"
-#include "Joints\PhysicSphericalJoint.h"
-#include "Joints\PhysicRevoluteJoint.h"
-#include "Reports\PhysicTriggerReport.h"
 #include "Triggers\TriggerManager.h"
-#include "Triggers\Trigger.h"
-#include "Lights\LightManager.h"
-#include "RenderableObject\RenderableObjectTechniqueManager.h"
-#include "RenderableObject\RenderableObjectsLayersManager.h"
-#include "Actor\PhysicController.h"
-#include "Characters\Character.h"
+#include "Joints\PhysicRevoluteJoint.h"
+#include "Joints\PhysicSphericalJoint.h"
+#include "Reports\PhysicTriggerReport.h"
 
-#include <d3dx9.h>
-#include "SceneRenderComands\SceneRendererCommandManager.h"
 
-#include "StateMachine\StateMachine.h"
-#include "Graph\Graph.h"
 
-CGrenade* p_Grenade;
 
-void GetFilesFromPath( const std::string& Path,
-                       std::vector<std::string>& _OutFiles );
+
 
 CPhysicProcess::CPhysicProcess() : CProcess(),
-  m_Speed( 0.1f ),
-  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false ),
   m_Salir( false ), m_Time( 0 )
 
 {
-  //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
-  //  Math::Vect3f(0.0f,2.0f,0.0f) );
-  //CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
 }
-bool done = false;
 
 CPhysicProcess::~CPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
-  CHECKED_DELETE( p_Grenade );
-  //CHECKED_DELETE( m_PRJ );
-  //CHECKED_DELETE( m_PSJ );
+  CHECKED_DELETE( m_Grenade );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -88,33 +63,13 @@ CPhysicProcess::~CPhysicProcess()
 
   m_vPUD.clear();
 
-  for ( size_t i = 0; i < m_vCharacter.size(); ++i )
-    CHECKED_DELETE( m_vCharacter[i] );
-
-  m_vCharacter.clear();
-  CHECKED_DELETE( m_TriggerManager );
-  /*CHECKED_DELETE( m_pPUD );
-  CHECKED_DELETE( m_pPhysicActor );*/
-  CHECKED_DELETE( m_PhysicController );
-  //CHECKED_DELETE( m_Character );
 }
 
 void CPhysicProcess::Update()
 {
-    /*
-    CGraph l_Graph;
-    l_Graph.Parse("./Data/graph1.xml");
-
-    unsigned int a = l_Graph.GetArcWeight(0, 3);
-    unsigned int b = l_Graph.GetArcWeight(4, 1);
-
-    Math::Vect3f v = l_Graph.GetNodeInfo(4);
-    */
-
-  //m_Character->Update();
-  m_Amount +=  0.01f;
-  m_Angle  += deltaTime * 0.05f;
-  m_AngleMoon += deltaTime * 0.05f;
+  /////////////////////////////////////////////////////////////
+  ////////////      RELOADS ACTIONS           /////////////////
+  /////////////////////////////////////////////////////////////
   CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
@@ -137,34 +92,10 @@ void CPhysicProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-  if ( pActionManager->DoAction( "SaveActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->SaveXML( "Data/Prueba.xml" );
 
-  if ( pActionManager->DoAction( "SetActionToInput" ) )
-  {
-    std::vector<S_INPUT_ACTION> vecInputAction;
-    S_INPUT_ACTION sInputAction;
-    sInputAction.m_DeviceType = IDV_KEYBOARD;
-    sInputAction.m_EventType = EVENT_DOWN_UP;
-    sInputAction.m_Code = KEY_H;
-    sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-    sInputAction.m_sEventType = "EVENT_DOWN_UP";
-    sInputAction.m_sCode = "KEY_H";
-    vecInputAction.push_back( sInputAction );
-    sInputAction.m_DeviceType = IDV_KEYBOARD;
-    sInputAction.m_EventType = EVENT_DOWN;
-    sInputAction.m_Code = KEY_LCTRL;
-    sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-    sInputAction.m_sEventType = "EVENT_DOWN";
-    sInputAction.m_sCode = "KEY_LCTRL";
-    vecInputAction.push_back( sInputAction );
-    CCore::GetSingletonPtr()->GetActionManager()->SetAction( "SaveActionToInput",
-        vecInputAction );
-  }
-
-  //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-  //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
-  //RAYCAST
+  /////////////////////////////////////////////////////////////
+  ////////////      RAYCAST (DISPARO)         /////////////////
+  /////////////////////////////////////////////////////////////
   if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
   {
     CCamera* l_CurrentCamera =
@@ -174,19 +105,19 @@ void CPhysicProcess::Update()
     {
       CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
       CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "Disparo" );
-	  l_PhysicUserData->SetColor(colRED);
+      l_PhysicUserData->SetColor( colRED );
       l_PhysicUserData->SetPaint( true );
       m_vPUD.push_back( l_PhysicUserData );
       CPhysicActor* l_Actor = new CPhysicActor( l_PhysicUserData );
       //If don't want box, you can remove this line
-	  CPhysicController* l_PC = l_PM->GetUserData("CharacterController")->GetController();
+      CPhysicController* l_PC = l_PM->GetUserData( "CharacterController" )->GetController();
       l_Actor->AddBoxShapeHardcoded( Math::Vect3f( 0.05f, 0.05f, 0.05f ),
                                      l_PC->GetPosition(), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0, 0 ) );
       l_Actor->CreateBody( 1.0f );
       // Add at the end allways it needs to have a shape
       l_PM->AddPhysicActor( l_Actor );
       m_vPA.push_back( l_Actor );
-	  Math::Vect3f l_Direction( Math::Utils::Cos( l_PC->GetYaw() ) , 0.0f, Math::Utils::Sin( l_PC->GetYaw() ) );
+      Math::Vect3f l_Direction( Math::Utils::Cos( l_PC->GetYaw() ) , 0.0f, Math::Utils::Sin( l_PC->GetYaw() ) );
       l_Actor->SetLinearVelocity( l_Direction.GetNormalized() *
                                   20.0f );
       SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
@@ -195,18 +126,12 @@ void CPhysicProcess::Update()
       CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(
                                  l_PC->GetPosition(), l_Direction.GetNormalized(),
                                  mask, l_SCollisionInfo, 40.0f );
-
-      /*if ( l_PUD )
-        std::string l_Object = l_PUD->GetName();
-      else
-        std::string l_Object = "";*/
     }
   }
 
-  CCamera* l_CurrentCamera =
-    CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-  //Enable or disable Current camera
+  //////////////////////////////////////////////////////////////////
+  ////////////      Enable or disable Current camera    ////////////
+  //////////////////////////////////////////////////////////////////
   if ( pActionManager->DoAction( "DisableCamera" ) )
   {
     CCamera* l_CurrentCamera =
@@ -221,9 +146,13 @@ void CPhysicProcess::Update()
     }
   }
 
-  //Draw actor with color red
+  //////////////////////////////////////////////////////////////////
+  ////////////        Draw Actor with color red         ////////////
+  //////////////////////////////////////////////////////////////////
+  //
   if ( pActionManager->DoAction( "DrawActor" ) )
   {
+    CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
     Vect2i l_PosMouse =
       CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
     Vect3f l_Pos, l_Dir;
@@ -239,36 +168,20 @@ void CPhysicProcess::Update()
       l_PUD->SetColor( colRED );
   }
 
-  /* Math::Vect3f l_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-   float  l_Yaw = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetYaw();
 
-   if ( pActionManager->DoAction( "MoveForward" ) )
-     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
-
-   if ( pActionManager->DoAction( "MoveBackward" ) )
-     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
-
-   if ( pActionManager->DoAction( "MoveLeft" ) )
-     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
-
-   if ( pActionManager->DoAction( "MoveRight" ) )
-     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
-
-   if ( l_Direction != Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
-     l_Direction = l_Direction.GetNormalized();
-
-   m_PhysicController->Move( l_Direction * 0.05f, deltaTime );
-
-   if ( pActionManager->DoAction( "Jump" ) )
-     m_PhysicController->Jump( 50 );*/
-  //TODO CHARACTERCONTROLLER Descomentar para que la camara siga al character controller
-  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-  //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
-  p_Grenade->Update();
 
+  //Change gravity
+  //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
+
+  //////////////////////////////////////////////////////
+  ////////////        UPDATE GRENADE        ////////////
+  //////////////////////////////////////////////////////
+  m_Grenade->Update();
+
+  //////////////////////////////////////////////////////
+  ////////////        TEST TRIGGER.LUA       ///////////
+  //////////////////////////////////////////////////////
   if ( m_Salir && ( m_Time >= 1 ) )
   {
     CCore::GetSingletonPtr()->GetPhysicsManager()->ReleasePhysicActor( m_vPA[m_vPA.size() - 1] );
@@ -277,54 +190,21 @@ void CPhysicProcess::Update()
   }
   else if ( m_Salir )
     m_Time += deltaTime;
+
+
+  //////////////////////////////////////////////////////
+  ////////////          MOVE BRIDGE          ///////////
+  //////////////////////////////////////////////////////
+  if ( pActionManager->DoAction( "LeftBridge" ) )
+    m_PRJ->ActiveMotor( -200 );
+
+  if ( pActionManager->DoAction( "RightBridge" ) )
+    m_PRJ->ActiveMotor( 200 );
 }
 
-void CPhysicProcess::InitSceneCharacterController()
-{
-  //Scene Character Controller
-  //Step1
-  CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0,
-                               0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-  //Step2
-  l_PUD = new CPhysicUserData( "BoxCharacter2" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0,
-                               0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-  //Step3
-  l_PUD = new CPhysicUserData( "BoxCharacter3" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0,
-                               0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-  //Plano Inclinado TODO
-  l_PUD = new CPhysicUserData( "Rampa" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3,
-                               0, 0 ),
-                               Math::Vect3f( 0, 0, 1.3f ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-}
-
+//////////////////////////////////////////////////////////////////////////////////////
+////////////        INICIALIZACIÓN DE LA ESCENA PARA EL TEST DE JOINTS     ///////////
+//////////////////////////////////////////////////////////////////////////////////////
 void CPhysicProcess::InitScenePhysicsSamplers()
 {
   //Ejercicio 1 - Pendulo
@@ -377,52 +257,31 @@ void CPhysicProcess::InitScenePhysicsSamplers()
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
-  //Asigno el TriggerReport en el physicManager a esta clase
-  l_PM->SetTriggerReport( this );
 }
 
 void CPhysicProcess::Init()
 {
-  m_TriggerManager = new CTriggerManager();
-  m_TriggerManager->LoadXML( "Data/triggers.xml" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  p_Grenade->Start();
-  //Create CharacterController
-  CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
-  userData->SetPaint( true );
-  userData->SetColor( colWHITE );
-  m_vPUD.push_back( userData );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
-  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
-      userData, l_Pos );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  l_PM->AddPhysicController( m_PhysicController );
-  /* m_Character = new CCharacter( "Player" );
-   CXMLTreeNode l_node;
-   m_Character->Init( l_node );*/
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colMAGENTA );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.2f, 1000 ), Math::Vect3f( 0, 0,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  //InitSceneCharacterController();
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////        SET THIS CLASS FOR GENERATE EVENTS TRIGGER       ///////////
+  ////////////////////////////////////////////////////////////////////////////////
 
-  CStateMachine* l_StateMachine = new CStateMachine("Data/enemies/AI.xml");
-  CHECKED_DELETE(l_StateMachine);
+  l_PM->SetTriggerReport( this );
+
+  ////////////////////////////////////////////////////
+  ////////////        CREATE GRENADE       ///////////
+  ////////////////////////////////////////////////////
+  m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
+
+  InitScenePhysicsSamplers();
 }
 
 void CPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
-  p_Grenade->Render();
-  /*pGraphicsManager->DrawAxis(5);
-  pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);*/
-  //pGraphicsManager->DrawTeapot();
+  m_Grenade->Render();
+
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
@@ -440,30 +299,35 @@ void CPhysicProcess::RenderDebugInfo()
   CProcess::RenderDebugInfo();
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+////////////   Método para pasarle el nombre del shape por parametro     /////////////
+//////////////////////////////////////////////////////////////////////////////////////
+std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
+{
+  std::ostringstream codeCat;
+  size_t count = LuaCode.find( ")" );
+  size_t count2 = LuaCode.find( "(" );
+  std::string l_LuaCode2 = LuaCode.substr( 0, count );
+
+  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
+    codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")";
+  else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
+    codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << ")";
+
+  return codeCat.str();
+}
 void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                               CPhysicUserData* _Other_Shape )
 {
   std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
-                          _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+
+
   //Get method name
-  std::string l_LuaCode1 = l_Trigger->GetLUAByName( l_Trigger->ENTER );
-  //Parseo para saber si tiene o no argumentos
-  std::string l_Other_ShapeName = _Other_Shape->GetName();
-  std::ostringstream codeCat;
-  size_t count = l_LuaCode1.find( ")" );
-  size_t count2 = l_LuaCode1.find( "(" );
-  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
-
-  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
-    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
-  else
-    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
-
-  std::string l_LuaCode( codeCat.str() );
-  //Ejecutar código
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
+  std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+  std::string l_NameShape = _Other_Shape->GetName();
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
 void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
@@ -471,25 +335,11 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
 {
   std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
-                          _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
   //Get method name
-  std::string l_LuaCode1 = l_Trigger->GetLUAByName( CTrigger::LEAVE );
-  //Parseo para saber si tiene o no argumentos
-  std::string l_Other_ShapeName = _Other_Shape->GetName();
-  std::ostringstream codeCat;
-  size_t count = l_LuaCode1.find( ")" );
-  size_t count2 = l_LuaCode1.find( "(" );
-  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
-
-  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
-    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
-  else
-    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
-
-  std::string l_LuaCode( codeCat.str() );
-  //Ejecutar código
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
+  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+  std::string l_NameShape = _Other_Shape->GetName();
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
 void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
@@ -497,25 +347,11 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
 {
   std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = m_TriggerManager->GetTriggerByName(
-                          _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
   //Get method name
-  std::string l_LuaCode1 = l_Trigger->GetLUAByName( CTrigger::STAY );
-  //Parseo para saber si tiene o no argumentos
-  std::string l_Other_ShapeName = _Other_Shape->GetName();
-  std::ostringstream codeCat;
-  size_t count = l_LuaCode1.find( ")" );
-  size_t count2 = l_LuaCode1.find( "(" );
-  std::string l_LuaCode2 = l_LuaCode1.substr( 0, count );
-
-  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro
-    codeCat << l_LuaCode2 << "'" << l_Other_ShapeName.c_str() << "'" << ")";
-  else
-    codeCat << l_LuaCode2 << "," << "'" << l_Other_ShapeName.c_str() << ")";
-
-  std::string l_LuaCode( codeCat.str() );
-  //Ejecutar código
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( l_LuaCode );
+  std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
+  std::string l_NameShape = _Other_Shape->GetName();
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
   CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }
 
@@ -539,20 +375,4 @@ void CPhysicProcess::AddPhysicActorVector( CPhysicActor* PA )
 CPhysicUserData* CPhysicProcess::GetLastPUDInserted()
 {
   return m_vPUD[m_vPUD.size() - 1];
-}
-
-CPhysicController*  CPhysicProcess::GetNewController( float _fRadius, float _fHeight, float _fSlope,
-    float _fSkinwidth, float _fStepOffset,
-    ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
-    float _fGravity )
-{
-  return new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset,
-                                _uiCollisionGroups, _pUserData, _vPos, _fGravity );
-}
-
-CCharacter* CPhysicProcess::GetNewCharacter( const std::string& Name )
-{
-  CCharacter* l_Character = new CCharacter( Name );
-  m_vCharacter.push_back( l_Character );
-  return l_Character;
 }

@@ -13,12 +13,12 @@ CPatrolEnemy::~CPatrolEnemy( void )
 
 void CPatrolEnemy::Init()
 {
-	CCharacter::Init();
+  CCharacter::Init();
 }
 
 void CPatrolEnemy::Update( )
 {
-  CCharacter::Update();
+  CEnemy::Update();
 }
 
 void CPatrolEnemy::Render()
