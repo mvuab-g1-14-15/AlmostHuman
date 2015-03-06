@@ -15,4 +15,7 @@
 *.db
 *.sdf
 *.suo
-*Boost/
+*3DSMaxFiles/
+*Docs/
+*Tools/
+*3rdParty/
