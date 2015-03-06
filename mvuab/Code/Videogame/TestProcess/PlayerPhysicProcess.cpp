@@ -246,15 +246,13 @@ void CPlayerPhysicProcess::Init()
   if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   {
     l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+    m_vPUD.push_back(l_pPhysicUserDataASEMesh);
     l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
     l_AseMeshActor->AddMeshShape( l_pMeshes->GetPhysicMesh( "Escenario" ), Vect3f( 0, 0, 0 ) );
     //m_AseMeshActor->CreateBody ( 10.f );
     CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+    m_vPA.push_back(l_AseMeshActor);
   }
-
-  l_pMeshes     = NULL;
-  l_pPhysicUserDataASEMesh = NULL;
-  l_AseMeshActor    = NULL;
 
 }
 
