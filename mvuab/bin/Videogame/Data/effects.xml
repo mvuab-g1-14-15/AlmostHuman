@@ -107,6 +107,6 @@
     
      <technique name="ColorTechnique" vertex_type="67">
 		<effect name="ColorEffect" file="data/effects/Color.fx"/>
-		<handles use_world_view_projection_matrix="true" />
+		<handles use_world_view_projection_matrix="true" use_world_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true" />
 	</technique>
 </effects>

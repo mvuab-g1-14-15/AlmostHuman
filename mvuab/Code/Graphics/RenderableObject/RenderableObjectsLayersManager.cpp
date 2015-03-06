@@ -64,9 +64,9 @@ void CRenderableObjectsLayersManager::Load(const std::string &FileName)
                 const std::string	&l_Physics = TreeNode(i).GetPszProperty("physics_type", "");*/
                 CInstanceMesh* l_InstanceMesh = new CInstanceMesh(l_Name, l_Core);
                 l_InstanceMesh->SetPosition(l_Pos);
-                l_InstanceMesh->SetYaw( Math::Utils::Deg2Rad(l_Yaw));
-                l_InstanceMesh->SetPitch( Math::Utils::Deg2Rad(l_Pitch));
-                l_InstanceMesh->SetRoll(Math::Utils::Deg2Rad(l_Roll));
+                l_InstanceMesh->SetYaw(l_Yaw);
+                l_InstanceMesh->SetPitch(l_Pitch);
+                l_InstanceMesh->SetRoll(l_Roll);
                 l_InstanceMesh->SetScale(l_Scale);  
 				if(!RenderableObjectManager->AddResource(l_Name,l_InstanceMesh))
 				{
