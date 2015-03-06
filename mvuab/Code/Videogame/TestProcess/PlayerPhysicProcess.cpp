@@ -228,15 +228,34 @@ void CPlayerPhysicProcess::Init()
 
   //InitSceneCharacterController();
 
-  // Create physic escene with ASE file
-  CPhysicCookingMesh* l_PCM = new CPhysicCookingMesh();
-  l_PCM->Init( l_PM->GetPhysicsSDK(), 0 );
-  l_PCM->CreateMeshFromASE( "Data/a.ASE", "Escenario" );
+  //   // Create physic escene with ASE file
+  //   CPhysicCookingMesh* l_PCM = new CPhysicCookingMesh();
+  //   l_PCM->Init( l_PM->GetPhysicsSDK(), 0 );
+  //   l_PCM->CreateMeshFromASE( "Data/a.ASE", "Escenario" );
+  //
+  //   CPhysicUserData* l_PUD2 = new CPhysicUserData( "Plane" );
+  //   CPhysicActor* l_pActor = new CPhysicActor( l_PUD2 );
+  //   //l_pActor3->AddMeshShape(CORE->GetPhysicsManager()->GetCookingMesh()->GetPhysicMesh("Malla_Fisicas"),Vect3f(-24.7306, 2.7749, -3.29779));
+  //   l_pActor->AddMeshShape( l_PCM->GetPhysicMesh( "Escenario" ), Vect3f( 0, -5, 0 ) );
 
-  CPhysicUserData* l_PUD2 = new CPhysicUserData( "Plane" );
-  CPhysicActor* l_pActor = new CPhysicActor( l_PUD2 );
-  //l_pActor3->AddMeshShape(CORE->GetPhysicsManager()->GetCookingMesh()->GetPhysicMesh("Malla_Fisicas"),Vect3f(-24.7306, 2.7749, -3.29779));
-  l_pActor->AddMeshShape( l_PCM->GetPhysicMesh( "Escenario" ), Vect3f( 0, -5, 0 ) );
+  CPhysicUserData* l_pPhysicUserDataASEMesh;
+  CPhysicActor*  l_AseMeshActor;
+
+  CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+
+  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  {
+    l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+    l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+    l_AseMeshActor->AddMeshShape( l_pMeshes->GetPhysicMesh( "Escenario" ), Vect3f( 0, 0, 0 ) );
+    //m_AseMeshActor->CreateBody ( 10.f );
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+  }
+
+  l_pMeshes     = NULL;
+  l_pPhysicUserDataASEMesh = NULL;
+  l_AseMeshActor    = NULL;
+
 }
 
 void CPlayerPhysicProcess::Render()

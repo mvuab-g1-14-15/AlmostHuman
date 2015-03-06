@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="Floor" filename="\meshes\Floor.mesh" />
-  <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
-  <static_mesh name="Box002" filename="\meshes\Box002.mesh" />
-  <static_mesh name="Box003" filename="\meshes\Box003.mesh" />
-  <static_mesh name="Box004" filename="\meshes\Box004.mesh" />
-  <static_mesh name="Box008" filename="\meshes\Box008.mesh" />
-  <static_mesh name="Plane002" filename="\meshes\Plane002.mesh" />
-  <static_mesh name="Box009" filename="\meshes\Box009.mesh" />
-  <static_mesh name="Pyramid001" filename="\meshes\Pyramid001.mesh" />
-  
+  <static_mesh name="OilTank008" filename="\meshes\OilTank008.mesh" />
+  <static_mesh name="Plane013" filename="\meshes\Plane013.mesh" />
+  <static_mesh name="OilTank009" filename="\meshes\OilTank009.mesh" />
+  <static_mesh name="OilTank010" filename="\meshes\OilTank010.mesh" />
+  <static_mesh name="OilTank011" filename="\meshes\OilTank011.mesh" />
+  <static_mesh name="Plane014" filename="\meshes\Plane014.mesh" />
+  <static_mesh name="OilTank012" filename="\meshes\OilTank012.mesh" />
+  <static_mesh name="OilTank013" filename="\meshes\OilTank013.mesh" />
+  <static_mesh name="OilTank014" filename="\meshes\OilTank014.mesh" />
+  <static_mesh name="Box059" filename="\meshes\Box059.mesh" />
+  <static_mesh name="Box060" filename="\meshes\Box060.mesh" />
+  <static_mesh name="Box061" filename="\meshes\Box061.mesh" />
+  <static_mesh name="Box063" filename="\meshes\Box063.mesh" />
 </static_meshes>

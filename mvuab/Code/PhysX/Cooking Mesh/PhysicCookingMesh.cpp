@@ -1,25 +1,25 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 #include <string>
 
-#include "Logger\Logger.h"
+#include "Logger/Logger.h"
 
 //---PhysX includes----
 #undef min
 #undef max
 #include "NxPhysics.h"
 #include "NxCooking.h"
-#include "Utils\PhysicUserAllocator.h"
+#include "Utils/PhysicUserAllocator.h"
 #include "PhysXLoader.h"
-#include "Utils\PhysicStream.h"
-#include "Utils\PhysicASELoader.h"
-#include "Cooking Mesh\PhysicCookingMesh.h"
+#include "Utils/PhysicStream.h"
+#include "Utils/PhysicASELoader.h"
+#include "Cooking Mesh/PhysicCookingMesh.h"
 //--------------------------
 
 #include "Utils/Defines.h"
 
 #if defined( _DEBUG )
-#include "Memory/MemLeaks.h"
-#endif
+#include "Memory\MemLeaks.h"
+#endif //defined(_DEBUG)
 
 //----------------------------------------------------------------------------
 // Init data
@@ -96,14 +96,6 @@ void CPhysicCookingMesh::Release( void )
   CHECKED_DELETE( m_pMyAllocator );
 }
 
-void CPhysicCookingMesh::ReleasePhysicMesh( const std::string& name )
-{
-  VecMeshes::iterator it = m_TriangleMeshes.find( name );
-
-  if ( it != m_TriangleMeshes.end() )
-    m_TriangleMeshes.erase( it );
-}
-
 NxTriangleMesh* CPhysicCookingMesh::GetPhysicMesh( const std::string& _Name )
 {
   VecMeshes::iterator it = m_TriangleMeshes.find( _Name );
@@ -136,73 +128,10 @@ bool CPhysicCookingMesh::CreatePhysicMesh( const std::string& _Bin_Filename,
   return isOk;
 }
 
-bool CPhysicCookingMesh::LoadMesh( const std::string& FileName, const std::string& NameMesh )
-{
-  bool l_loaded = true;
-  CPhysicUserStream* UserStream = new CPhysicUserStream( FileName.c_str(), true );
-  u_int l_Header = UserStream->readWord();
-  std::vector<Math::Vect3f> l_Vtxs;
-  std::vector<u_int> l_Index;
-  u_short test;
 
-  if ( !0x55ff & l_Header )
-  {
-    std::string l_msg = "Header not found (physixmesh)" + FileName;
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, l_msg.c_str() );
-    l_loaded = false;
-  }
-  else
-  {
-    u_short l_VertexCount = UserStream->readWord();
-    test = l_VertexCount;
-
-    if ( l_VertexCount <= 0 )
-    {
-      std::string l_msg = "Vertex not found (physixmesh)" + FileName;
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, l_msg.c_str() );
-      l_loaded = false;
-    }
-    else
-    {
-      for ( u_short i = 0; i < l_VertexCount; i++ )
-      {
-        Math::Vect3f l_vtx;
-        l_vtx.x = UserStream->readFloat();
-        l_vtx.y = UserStream->readFloat();
-        l_vtx.z = UserStream->readFloat();
-        l_Vtxs.push_back( l_vtx );
-      }
-
-      u_short l_IndexCount = UserStream->readWord();
-
-      for ( u_short i = 0; i < l_IndexCount; i++ )
-      {
-        u_int l_indx = UserStream->readDword();
-        l_Index.push_back( l_indx );
-      }
-    }
-  }
-
-  u_int l_Footer = UserStream->readWord();
-
-  if ( l_Footer & 0xff55 )
-  {
-    CreatePhysicMesh( l_Vtxs, l_Index, NameMesh );
-    CHECKED_DELETE( UserStream );
-    return l_loaded;
-  }
-  else
-  {
-    std::string l_msg =  "Physic Mesh: " + FileName + "cargada incorrectamente";
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, l_msg.c_str() );
-    CHECKED_DELETE( UserStream );
-    return false;
-  }
-}
 //----------------------------------------------------------------------------
 // Creating a PhysicMesh from a buffer
 //----------------------------------------------------------------------------
-
 bool CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Vect3f>& _Vertices,
     const std::vector<uint32>& _Faces, const std::string& _NameMesh )
 {
@@ -282,8 +211,7 @@ bool CPhysicCookingMesh::CookClothMesh( const NxClothMeshDesc& desc, NxStream& s
 // Load the ASE File thought ASE Loader
 //----------------------------------------------------------------------------
 bool CPhysicCookingMesh::ReadMeshFromASE( std::string _FileName,
-    std::vector<Math::Vect3f>& _Vertices,
-    std::vector<unsigned int>& _Faces )
+    std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces )
 {
   bool l_bOK = CPhysicASELoader::ReadMeshFromASE( _FileName, _Vertices, _Faces );
   return l_bOK;
@@ -309,4 +237,12 @@ bool CPhysicCookingMesh::CreateMeshFromASE( std::string _FileName, std::string _
                                            _FileName );
     return false;
   }
+}
+
+void CPhysicCookingMesh::ReleasePhysicMesh( const std::string& name )
+{
+  VecMeshes::iterator it = m_TriangleMeshes.find( name );
+
+  if ( it != m_TriangleMeshes.end() )
+    m_TriangleMeshes.erase( it );
 }
