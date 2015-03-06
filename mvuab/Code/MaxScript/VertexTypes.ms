@@ -7,7 +7,6 @@ global VERTEX_TYPE_TEXTURE2 	= 0x0020
 global VERTEX_TYPE_DIFFUSE 		= 0x0040
 global VERTEX_TYPE_REFLECTION	= 0x0200
 global VERTEX_TYPE_SKYBOX       = 0x1000
-global VERTEX_TYPE_COLOR        = 0x4000
 
 struct SVertex
 (
@@ -94,8 +93,7 @@ struct SVertex
 			
 			if ((bit.and m_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
 			(
-				format "Color (%) \n" (formattedprint m_Color format:"x")
-				
+				format "\tColor (%) \n" (formattedprint m_Color format:"x")
 				WriteLong file m_Color #unsigned
 			)
 		)

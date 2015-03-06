@@ -138,10 +138,12 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
 			l_NewMeshInstanceNode.AddAttributeAsString "core" instance_obj.name
 			l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+			
 			l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
 			l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
 			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
-			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" Obj.Scale
+		
+			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
 			--l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
 			if (getUserProp Obj "layer_render") == undefined then
 			(
