@@ -12,7 +12,7 @@
 class CPhysicController;
 class CPhysicUserData;
 
-class CCharacter : public CName
+class CCharacter : public CObject3D, public CName
 {
 public:
   CCharacter( const std::string& Name );
