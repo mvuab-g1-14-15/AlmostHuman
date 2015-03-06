@@ -63,7 +63,7 @@ CCore::CCore() :
   m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
   m_pRenderableObjectsLayersManager( new CRenderableObjectsLayersManager() ),
   m_pRenderableObjectTechniqueManager( new CRenderableObjectTechniqueManager() ),
-  m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
+  //m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
   m_pScriptManager( new CScriptManager() ),
   m_pCameraManager( new CCameraManager() ),
   m_pEffectManager( new CEffectManager() ),
@@ -97,7 +97,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
   CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
-  CHECKED_DELETE( m_pAnimatedModelsManager );
+  //CHECKED_DELETE( m_pAnimatedModelsManager );
   CHECKED_DELETE( m_pTextureManager );
   CHECKED_DELETE( m_pCameraManager );
   CHECKED_DELETE( m_pEffectManager );
@@ -264,7 +264,7 @@ void CCore::InitManagers()
   m_pStaticMeshManager->Load( m_StaticMeshesPath );
   m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
   m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
-  m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
+  //m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
   //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
   m_pCameraManager->Init();
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
