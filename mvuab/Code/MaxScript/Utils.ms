@@ -5,11 +5,11 @@ fn GetYaw rot =
 
 fn GetPitch rot =
 (
-	return degToRad((rot as eulerangles).y)
+	return degToRad((rot as eulerangles).x)
 )
 fn GetRoll rot =
 (
-	return degToRad((rot as eulerangles).x)
+	return degToRad((rot as eulerangles).y)
 )
 	
 fn DoesFolderExist f create:true =
