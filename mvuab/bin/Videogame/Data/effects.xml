@@ -109,4 +109,10 @@
 		<effect name="ColorEffect" file="data/effects/Color.fx"/>
 		<handles use_world_view_projection_matrix="true" />
 	</technique>
+	
+	<technique name="ShadowMapTechnique" vertex_type="19">
+		<effect name="ShadowMapEffect" file="data/effects/ShadowMap.fx"/>
+		<handles use_world_view_projection_matrix="true" />
+	</technique>
+	
 </effects>

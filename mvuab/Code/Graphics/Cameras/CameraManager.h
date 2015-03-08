@@ -26,7 +26,10 @@ public:
   void Update();
 
   CCamera* GetCamera( const std::string& name );
-  GET_SET_PTR( CCamera, CurrentCamera );
+  CCamera* GetCurrentCamera( )
+  {
+    return m_pCurrentCamera;
+  }
   void SetCurrentCamera( const std::string& name );
   std::string GetCurrentCameraName();
 

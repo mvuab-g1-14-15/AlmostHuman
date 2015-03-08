@@ -8,7 +8,8 @@
 #include "Logger\Logger.h"
 #include "GraphicsManager.h"
 
-CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName, CXMLTreeNode& HandlesNode )
+CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
+                                    CXMLTreeNode& HandlesNode )
   : m_TechniqueName( TechniqueName ),
     m_EffectName( EffectName ),
     m_UseCameraPosition( HandlesNode.GetBoolProperty( "use_camera_position", false ) ),
@@ -21,22 +22,24 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     m_UseViewMatrix( HandlesNode.GetBoolProperty( "use_view_matrix", false ) ),
     m_UseWorldMatrix( HandlesNode.GetBoolProperty( "use_world_matrix", false ) ),
     m_UseWorldViewMatrix( HandlesNode.GetBoolProperty( "use_world_view_matrix", false ) ),
-    m_UseWorldViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_world_view_projection_matrix", false ) ),
+    m_UseWorldViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_world_view_projection_matrix",
+                                    false ) ),
     m_UseViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_projection_matrix", false ) ),
-    m_UseViewToLightProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix", false ) ),
+    m_UseViewToLightProjectionMatrix(
+      HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix", false ) ),
 
     // Lights
     m_NumOfLights( HandlesNode.GetIntProperty( "num_of_lights", 0 ) ),
     m_UseLights( HandlesNode.GetBoolProperty( "use_lights", false ) ),
     m_UseLightAmbientColor( HandlesNode.GetBoolProperty( "use_light_ambient_color", false ) ),
-    
+
     // Debug
     m_UseDebugColor( HandlesNode.GetBoolProperty( "use_debug_color", false ) ),
     m_DebugColor( Math::colWHITE ),
-    
+
     // Timers
     m_UseTime( HandlesNode.GetBoolProperty( "use_time", false ) ),
-    m_UseDeltaTime(HandlesNode.GetBoolProperty( "use_delta_time", false )), 
+    m_UseDeltaTime( HandlesNode.GetBoolProperty( "use_delta_time", false ) ),
 
     // Fog
     m_FogStart( HandlesNode.GetFloatProperty( "fog_start", 0 ) ),
@@ -45,9 +48,9 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     m_FogFun( HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
 
     // Texture
-	m_UseTextureSizes( HandlesNode.GetBoolProperty("use_texture_size", false) ),
-	m_TextureHeight( HandlesNode.GetIntProperty( "texture_height", 0 ) ),
-	m_TextureWidth( HandlesNode.GetIntProperty( "texture_width", 0 ) )
+    m_UseTextureSizes( HandlesNode.GetBoolProperty( "use_texture_size", false ) ),
+    m_TextureHeight( HandlesNode.GetIntProperty( "texture_height", 0 ) ),
+    m_TextureWidth( HandlesNode.GetIntProperty( "texture_width", 0 ) )
 {
   m_Effect = CEffectManager::GetSingletonPtr()->GetEffect( m_EffectName );
   m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( m_TechniqueName ) : 0;
@@ -58,15 +61,15 @@ CEffectTechnique::~CEffectTechnique()
   m_Effect = 0;
 }
 
-void CEffectTechnique::SetUseTextureSize(bool active)
+void CEffectTechnique::SetUseTextureSize( bool active )
 {
-    m_UseTextureSizes = active;
+  m_UseTextureSizes = active;
 }
 
-void CEffectTechnique::SetTextureSize(unsigned int width, unsigned int height)
+void CEffectTechnique::SetTextureSize( unsigned int width, unsigned int height )
 {
-    m_TextureHeight = height;
-    m_TextureWidth = width;
+  m_TextureHeight = height;
+  m_TextureWidth = width;
 }
 
 bool CEffectTechnique::BeginRender()
@@ -77,7 +80,7 @@ bool CEffectTechnique::BeginRender()
   // Obtain the direct x effect
   LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
   D3DXHANDLE l_Handle = NULL;
-   
+
   if ( m_UseCameraPosition )
   {
     Math::Vect3f l_CameraEye = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
@@ -116,25 +119,25 @@ bool CEffectTechnique::BeginRender()
     l_Effect->SetInt( l_Handle, m_FogFun );
   }
 
-  if(m_UseTextureSizes)
+  if ( m_UseTextureSizes )
   {
-      l_Handle = m_Effect->GetHeightTexture();
-      l_Effect->SetInt( l_Handle, m_TextureHeight);
-      
-      l_Handle = m_Effect->GetWidthTexture();
-      l_Effect->SetInt( l_Handle, m_TextureWidth );
+    l_Handle = m_Effect->GetHeightTexture();
+    l_Effect->SetInt( l_Handle, m_TextureHeight );
+
+    l_Handle = m_Effect->GetWidthTexture();
+    l_Effect->SetInt( l_Handle, m_TextureWidth );
   }
 
-  if(m_UseTime)
+  if ( m_UseTime )
   {
     l_Handle = m_Effect->GetTimeParameter();
     l_Effect->SetFloat( l_Handle, CCore::GetSingletonPtr()->GetTimer()->GetTime() );
   }
 
-  if(m_UseDeltaTime)
+  if ( m_UseDeltaTime )
   {
     l_Handle = m_Effect->GetDeltaTimeParameter();
-    l_Effect->SetFloat( l_Handle, CCore::GetSingletonPtr()->GetTimer()->GetElapsedTime());
+    l_Effect->SetFloat( l_Handle, CCore::GetSingletonPtr()->GetTimer()->GetElapsedTime() );
   }
 
   SetupMatrices();
@@ -242,8 +245,8 @@ bool CEffectTechnique::SetupLights()
     CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
 
     // Check the number of lights
-    // If the technique is rendering a deferred shader the lights has been setted up
-    // in the command, therfore check here the light number in order to not reset the values
+    // If the technique is rendering a deferred shader the lights has been set up
+    // in the command, therefore check here the light number in order to not reset the values
     if ( m_NumOfLights > 1 )
     {
       if ( !m_Effect->SetLights( m_NumOfLights ) )

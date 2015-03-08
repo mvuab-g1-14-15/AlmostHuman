@@ -16,17 +16,6 @@ function init()
 	cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
-	physic_manager = core:GetPhysicsManager()
-	
-	
-	--engine = Singleton_Engine.get_singleton()
-	--process = engine:GetProcess()
-	--character_patrol = process:GetNewCharacter("Player")
-	--character_patrol:init()
-	
-	--enemy_manager = core:GetEnemyManager()
-	--enemy_patrol = enemy_manager:getEnemy("Enemy6")
-	--enemy_patrol:init()
 	
 	initialized = true
 end
@@ -83,8 +72,6 @@ function move_player( dt )
 	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
 		move( flag_speed, forward, strafe, dt )
-	else
-		move( flag_speed, 0, 0, dt )
 	end
 	if action_manager:DoAction("MoveBackward") then
 		forward = forward - 1
@@ -92,8 +79,6 @@ function move_player( dt )
 	elseif action_manager:DoAction("MoveForward") then
 		forward = forward + 1
 		move( flag_speed, forward, strafe, dt )
-	else
-		move( flag_speed, 0, 0, dt )
 	end
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
@@ -105,28 +90,19 @@ function move_player( dt )
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
 		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
-	local character_controller_UserData = physic_manager:GetUserData("CharacterController")
-	local character_controller = character_controller_UserData:GetController()
-	local Yaw = current_camera:GetYaw()
-	character_controller:SetYaw(Yaw)
-	if action_manager:DoAction("Jump") then
-		character_controller:Jump(50)
-	end
 end
 
 function move( flag_speed, forward, strafe, dt )
 	local current_camera = camera_manager:GetCurrentCamera();
-	local character_controller_UserData = physic_manager:GetUserData("CharacterController");
-	local character_controller = character_controller_UserData:GetController();
 	local Yaw = current_camera:GetYaw()
+	local Pitch = current_camera:GetPitch()
 	local cam_pos = current_camera:GetPos()
 	
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
 	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
-	if (not addPos.x == 0 or not addPos.z == 0) then
-		addPos:Normalize()
-	end
+	addPos:Normalize()
+	
     constant = dt * g_ForwardSpeed;
 	
 	if flag_speed == 1 then
@@ -134,9 +110,7 @@ function move( flag_speed, forward, strafe, dt )
 	end
 	
     addPos = addPos * constant;
-	character_controller:Move(addPos, dt)
-	character_controller:SetYaw(Yaw)
-	current_camera:SetPos(character_controller:GetPosition())
+	current_camera:SetPos((cam_pos + addPos))
 	
 end
 

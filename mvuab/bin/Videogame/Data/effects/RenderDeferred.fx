@@ -43,7 +43,19 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 		float3 l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[0] * l_SpecularFactor;
 		l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
 	}
-		
+	
+	/*float3 vPos = mul( float4(l_WorldPosition.xyz,1.0), g_ViewMatrix ).xyz;
+	float4 PosLight = mul( float4(vPos, 1.0), g_ViewToLightProjMatrix );
+	
+	float2 ShadowTexC = 0.5 * PosLight.xy / PosLight.w + float2( 0.5, 0.5 );
+	ShadowTexC.y = 1.0f - ShadowTexC.y;
+	
+	float LightAmount = (tex2D( ShadowMapTextureSampler, ShadowTexC ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;
+	// 1 – Píxel iluminado
+	// 0 – Píxel en sombra
+	
+	return l_PixelColor * LightAmount;
+	*/
 	return l_PixelColor;
 }
 

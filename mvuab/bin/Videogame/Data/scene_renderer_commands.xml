@@ -1,10 +1,16 @@
 <scene_renderer_commands>
     <!--pre_render-->
     <begin_scene/>
-    <capture_frame_buffer>
+	
+	<capture_frame_buffer>
         <dynamic_texture stage_id="0" name="PrevFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
+	
+	<!--generate the shadow maps
+	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
+	<generate_shadow_maps /> -->
     
+	<!--generate the deferred textures-->
     <set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
     <set_render_target name="deferred_multiple_render_target">
         <dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
@@ -45,12 +51,6 @@
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	<lens_of_flare>
 		<texture stage_id="0" name="nova.png"/>
-		<texture stage_id="1" name="extendring.png"/>
-		<texture stage_id="2" name="hexangle.png"/>
-		<texture stage_id="3" name="hexagon.png"/>
-		<texture stage_id="4" name="starring.png"/>
-		<texture stage_id="5" name="star.png"/>
-		<texture stage_id="6" name="extend.png"/>
 	</lens_of_flare>
     
     <!--<disable_alpha_blend/>-->

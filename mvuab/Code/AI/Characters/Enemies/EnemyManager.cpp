@@ -32,11 +32,12 @@ void CEnemyManager::Destroy()
 
 void CEnemyManager::Update()
 {
-	TMapResource::iterator it = m_Resources.begin();
-	for( ; it != m_Resources.end(); ++it)
+  TMapResource::iterator it = m_Resources.begin();
+
+  for ( ; it != m_Resources.end(); ++it )
   {
     m_ActualEnemy = it->second;
-		it->second->Update();
+    it->second->Update();
   }
 }
 

@@ -10,11 +10,6 @@
 
 class CSceneRendererCommandManager : public CSingleton<CSceneRendererCommandManager>
 {
-private:
-  CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
-
-  void CleanUp();
-  std::string GetNextName();
 public:
   CSceneRendererCommandManager();
   ~ CSceneRendererCommandManager();
@@ -24,7 +19,10 @@ public:
   bool Execute();
 
 private:
+  CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
   std::string m_FileName;
 
+  void CleanUp();
+  std::string GetNextName();
 };
 #endif

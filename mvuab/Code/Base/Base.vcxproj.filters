@@ -243,6 +243,12 @@
     <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h">
       <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\MacroRepeat.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ObjectFactory.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">
