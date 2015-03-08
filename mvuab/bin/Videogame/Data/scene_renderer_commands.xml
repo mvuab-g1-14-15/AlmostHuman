@@ -6,9 +6,9 @@
         <dynamic_texture stage_id="0" name="PrevFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
 	
-	<!--generate the shadow maps
+	<!--generate the shadow maps -->
 	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
-	<generate_shadow_maps /> -->
+	<generate_shadow_maps/>
     
 	<!--generate the deferred textures-->
     <set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>

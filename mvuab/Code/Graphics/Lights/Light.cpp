@@ -23,6 +23,7 @@ CLight::CLight( const CXMLTreeNode& node )
   , m_ProjectionShadowMap( Math:: m44fIDENTITY )
   , m_DynamicShadowMap( 0 )
   , m_StaticShadowMap( 0 )
+  , m_ShadowMaskTexture( 0 )
 {
   m_Position = node.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) );
 
@@ -34,7 +35,7 @@ CLight::CLight( const CXMLTreeNode& node )
                      node.GetPszProperty( "shadow_map_format_type", "" ) );
     size_t l_Width = node.GetIntProperty( "shadow_map_width", 0 );
     size_t l_Height = node.GetIntProperty( "shadow_map_height", 0 );
-    m_DynamicShadowMap->Create( "Dynamic", l_Width, l_Height, 1,
+    m_DynamicShadowMap->Create( "Light_Dynamic", l_Width, l_Height, 0,
                                 CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
@@ -46,7 +47,7 @@ CLight::CLight( const CXMLTreeNode& node )
                      node.GetPszProperty( "static_shadow_map_format_type", "" ) );
     size_t l_Width = node.GetIntProperty( "static_shadow_map_width", 0 );
     size_t l_Height = node.GetIntProperty( "static_shadow_map_height", 0 );
-    m_StaticShadowMap->Create( "Static", l_Width, l_Height, 1,
+    m_StaticShadowMap->Create( "Light_Static", l_Width, l_Height, 0,
                                CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
@@ -67,11 +68,13 @@ CLight::CLight( const CXMLTreeNode& node )
     if ( !l_ROM )
       continue;
 
-    if ( node( i ).GetName() == "static" )
+    const std::string& TagName = node( i ).GetName() ;
+
+    if ( TagName == "static" )
       m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
 
-    if ( node( i ).GetName()  == "dynamic" )
-      m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
+    //if ( TagName == "dynamic" )
+    //  m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
   }
 }
 

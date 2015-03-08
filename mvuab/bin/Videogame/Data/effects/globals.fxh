@@ -66,6 +66,10 @@ float       g_Offset[5]                                         : Offset;
 int         g_TextureWidth                                      : TextureWidth;
 int         g_TextureHeight                                     : TextureHeight;
 
+bool g_UseShadowMaskTexture 									: UseShadowMaskTexture;
+bool g_UseShadowMapStatic 										: UseStaticShadowMap;
+bool g_UseShadowMapDynamic 										: UseDynamicShadowMap;
+
 // Functions
 
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
