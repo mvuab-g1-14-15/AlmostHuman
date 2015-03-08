@@ -75,11 +75,11 @@ fn ExportRenderableObjects filenameXML RenderableObjects =
 				l_NewLightNode.AddAttributeCoordinate "pos" l_Pos
 				
 				-- Get the angles of the object
-				local l_Yaw = GetYaw iRenderableObject.transform
+				local l_Yaw = GetYaw iRenderableObject.rotation
 				l_NewLightNode.AddAttributeFloat "yaw" l_Yaw
-				local l_Pitch = GetPitch iRenderableObject.transform
+				local l_Pitch = GetPitch iRenderableObject.rotation
 				l_NewLightNode.AddAttributeFloat "pitch" l_Pitch
-				local l_Roll = GetRoll iRenderableObject.transform
+				local l_Roll = GetRoll iRenderableObject.rotation
 				l_NewLightNode.AddAttributeFloat "roll" l_Roll
 				
 				-- Get the scale of the object

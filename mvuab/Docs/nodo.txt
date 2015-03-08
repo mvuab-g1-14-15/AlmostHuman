@@ -1,5 +1,5 @@
 Meter nodo inicial en lista de nodos abiertos
-- Mientras no encontrado nodo final y  hasta nodos en la lista de abiertos
+- Mientras no encontrado nodo final y  hasta nodos.size>0 en la lista de abiertos
 	- visitar siguiente nodo
 - Si he encontrado el nodo final --> recorrer los nodos desde inicio hasta destino, por los punteros a los padres
 

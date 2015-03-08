@@ -11,8 +11,7 @@ CObject3D::CObject3D( CXMLTreeNode& atts )
   m_fRoll = atts.GetFloatProperty( "roll", 0.0f );
 }
 
-CObject3D::CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll,
-                      Math::Vect3f scale )
+CObject3D::CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll, Math::Vect3f scale )
   : m_Position( pos )
   , m_fYaw( yaw )
   , m_fPitch( pitch )
@@ -45,6 +44,6 @@ Math::Mat44f CObject3D::GetTransform()
   rotationY.SetFromAngleY( m_fYaw );
   rotationZ.SetFromAngleZ( m_fRoll );
   //World = Scale * Rotation * Translation
-  world = translation * scale * ( rotationY * rotationX * rotationZ );
+  world = translation * scale * ( rotationX * rotationY * rotationZ );
   return world;
 }

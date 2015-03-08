@@ -33,8 +33,7 @@ class CConsole;
 class CSceneRendererCommandManager;
 class CPhysicsManager;
 class CEnemyManager;
-
-//class CTriggerManager;
+class CTriggerManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -63,6 +62,7 @@ private:
   std::string                     m_EffectsPath;
   std::string                     m_LightsPath;
   std::string           m_SceneRendererCommandPath;
+  std::string                     m_TriggersPath;
   std::vector<std::string>        m_v_languages;
 
   // Managers
@@ -85,7 +85,7 @@ private:
   CSceneRendererCommandManager*       m_pSceneRendererCommandManager;
   CEnemyManager*                      m_pEnemyManager;
   CPhysicsManager*                    m_pPhysicsManager;
-  //CTriggerManager*                    m_pTriggerManager;
+  CTriggerManager*                    m_pTriggerManager;
   CTimer*                             m_pTimer;
   CConsole*                           m_pConsole;
   void LoadXml();
@@ -135,7 +135,7 @@ public:
   GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager );
   GET_SET_PTR( CPhysicsManager, PhysicsManager );
   GET_SET_PTR( CEnemyManager, EnemyManager );
-  //GET_SET_PTR( CTriggerManager, TriggerManager );
+  GET_SET_PTR( CTriggerManager, TriggerManager );
   GET_SET_PTR( CTimer, Timer );
 };
 

@@ -1,58 +1,34 @@
 #include "TestProcess.h"
-#include "Utils\Defines.h"
-#include "GraphicsManager.h"
-#include "InputManager.h"
-#include "ActionManager.h"
+
+//BASE
 #include "Fonts\FontManager.h"
-#include "Object3D.h"
-#include "Math\Matrix44.h"
 #include "Logger\Logger.h"
-#include "Utils\LogRender.h"
-#include "Utils\Defines.h"
-#include "Math\AABB.h"
-#include "Core.h"
-#include "Utils\BaseUtils.h"
-#include "Timer\Timer.h"
-#include "Periphericals\Mouse.h"
-
 #include "ScriptManager\ScriptManager.h"
-#include "StaticMeshes\StaticMeshManager.h"
-#include "StaticMeshes\InstanceMesh.h"
-#include "StaticMeshes\StaticMesh.h"
 
-#include "RenderableVertex\RenderableVertex.h"
-#include "RenderableVertex\IndexedVertexs.h"
-#include "RenderableVertex\VertexTypes.h"
-#include "Texture\Texture.h"
+//CORE
+#include "Core.h"
 
-#include "StaticMeshes\StaticMesh.h"
-#include "Cameras\CameraFPShooter.h"
+//GRAPHICS
+#include "GraphicsManager.h"
+#include "Lights\LightManager.h"
 #include "Cameras\CameraManager.h"
-
 #include "Effects\EffectManager.h"
 #include "RenderableVertex\VertexTypes.h"
+#include "StaticMeshes\StaticMeshManager.h"
+#include "RenderableVertex\IndexedVertexs.h"
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
 
-#include "PhysicsManager.h"
-#include "Actor\PhysicActor.h"
-#include "Utils/PhysicUserData.h"
-
-#include <d3dx9.h>
-
-#include "Items\Grenade.h"
-#include "Joints\PhysicSphericalJoint.h"
-#include "Joints\PhysicRevoluteJoint.h"
-#include "Reports\PhysicTriggerReport.h"
+//INPUT
+#include "InputManager.h"
+#include "ActionManager.h"
 
 
 
-CGrenade* p_Grenade;
 
-void GetFilesFromPath( const std::string& Path,
-                       std::vector<std::string>& _OutFiles );
 
-CTestProcess::CTestProcess() : CProcess(),
-  m_Speed( 0.1f ),
-  m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false )
+CTestProcess::CTestProcess() : CProcess()
 
 {
   //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
@@ -62,31 +38,17 @@ CTestProcess::CTestProcess() : CProcess(),
                          VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1 |
                          VERTEX_TYPE_DIFFUSE;
 }
-bool done = false;
 
 CTestProcess::~CTestProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
-  CHECKED_DELETE( p_Grenade );
-  CHECKED_DELETE( m_PRJ );
-  CHECKED_DELETE( m_PSJ );
-
-  for ( size_t i = 0; i < m_vPA.size(); ++i )
-    CHECKED_DELETE( m_vPA[i] );
-
-  m_vPA.clear();
-
-  for ( size_t i = 0; i < m_vPUD.size(); ++i )
-    CHECKED_DELETE( m_vPUD[i] );
-
-  m_vPUD.clear();
 }
 
 void CTestProcess::Update()
 {
-  m_Amount +=  0.01f;
-  m_Angle  += deltaTime * 0.05f;
-  m_AngleMoon += deltaTime * 0.05f;
+  /////////////////////////////////////////////////////////////
+  ////////////      RELOADS ACTIONS           /////////////////
+  /////////////////////////////////////////////////////////////
   CActionManager* pActionManager = CActionManager::GetSingletonPtr();
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
@@ -96,14 +58,28 @@ void CTestProcess::Update()
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
-    CCore::GetSingletonPtr()->GetEffectManager()->Reload();
+  {
+    // NOTE this must be in this order
+    CEffectManager::GetSingletonPtr()->Reload();
+    CLightManager::GetSingletonPtr()->ReLoad();
+    CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
+    CStaticMeshManager::GetSingletonPtr()->Reload();
+    CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
+    CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
+  }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
+  /////////////////////////////////////////////////////////////
+  ////////////      SAVE ACTIONS IN FILE      /////////////////
+  /////////////////////////////////////////////////////////////
   if ( pActionManager->DoAction( "SaveActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->SaveXML( "Data/Prueba.xml" );
 
+  ///////////////////////////////////////////////////////////////////
+  ////////////      Cambiar el código de una acción      ////////////
+  ///////////////////////////////////////////////////////////////////
   if ( pActionManager->DoAction( "SetActionToInput" ) )
   {
     std::vector<S_INPUT_ACTION> vecInputAction;
@@ -126,154 +102,19 @@ void CTestProcess::Update()
         vecInputAction );
   }
 
-  //CTPSCamera* pTPSCam = dynamic_cast<CTPSCamera*>(m_pCamera);
-  //if(pTPSCam) pTPSCam->AddZoom(delta.z * m_Speed);
-  //RAYCAST
-  if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
-  {
-    CCamera* l_CurrentCamera =
-      CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-    if ( l_CurrentCamera )
-    {
-      CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-      CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "RayCast" );
-      l_PhysicUserData->SetPaint( true );
-      m_vPUD.push_back( l_PhysicUserData );
-      CPhysicActor* l_Actor = new CPhysicActor( l_PhysicUserData );
-      //If don't want box, you can remove this line
-      l_Actor->AddBoxShape( Math::Vect3f( 0.05f, 0.05f, 0.05f ),
-                            l_CurrentCamera->GetPos(), Math::Vect3f( 0, 0, 0 ) );
-      l_Actor->CreateBody( 1.0f );
-      // Add at the end allways it needs to have a shape
-      l_PM->AddPhysicActor( l_Actor );
-      m_vPA.push_back( l_Actor );
-      l_Actor->SetLinearVelocity( l_CurrentCamera->GetDirection().GetNormalized() *
-                                  20.0f );
-      SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
-      uint32 mask = 1 << ECG_ESCENE;
-      //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
-      CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot(
-                                 l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(),
-                                 mask, l_SCollisionInfo, 40.0f );
-
-      if ( l_PUD )
-        std::string l_Object = l_PUD->GetName();
-      else
-        std::string l_Object = "";
-    }
-  }
-
-  CCamera* l_CurrentCamera =
-    CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-  //Enable or disable Current camera
-  if ( pActionManager->DoAction( "DisableCamera" ) )
-  {
-    CCamera* l_CurrentCamera =
-      CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-    if ( l_CurrentCamera )
-    {
-      if ( l_CurrentCamera->GetEnable() )
-        l_CurrentCamera->SetEnable( false );
-      else
-        l_CurrentCamera->SetEnable( true );
-    }
-  }
-
-  //Draw actor with color red
-  if ( pActionManager->DoAction( "DrawActor" ) )
-  {
-    Vect2i l_PosMouse =
-      CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
-    Vect3f l_Pos, l_Dir;
-    CGraphicsManager::GetSingletonPtr()->GetRay( l_PosMouse, l_Pos, l_Dir );
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-    SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
-    uint32 mask = 1 << ECG_ESCENE;
-    CPhysicUserData* l_PUD = l_PM->RaycastClosestActor( l_CurrentCamera->GetPos(),
-                             l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo );
-
-    //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
-    if ( l_PUD )
-      l_PUD->SetColor( colRED );
-  }
-
-  if ( pActionManager->DoAction( "LeftBridge" ) )
-    m_PRJ->ActiveMotor( -200 );
-
-  if ( pActionManager->DoAction( "RightBridge" ) )
-    m_PRJ->ActiveMotor( 200 );
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-  //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
-  p_Grenade->Update();
 }
 
 void CTestProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  p_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  p_Grenade->Start();
-  //Ejercicio 1 - Pendulo
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  m_PSJ = new CPhysicSphericalJoint();
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Box" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddSphereShape( 0.4f, Math::Vect3f( 10, 4, 6 ) );
-  l_pPhysicActor->CreateBody( 1.0f );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  l_pPhysicActor->AddVelocityAtPos( Math::Vect3f( 10, 0, 6 ), Math::Vect3f( 10, 4,
-                                    6 ), 10 );
-  m_PSJ->SetInfo( Math::Vect3f( 5, 4, 6 ), l_pPhysicActor );
-  l_PM->AddPhysicSphericalJoint( m_PSJ );
-  //Ejercicio 2 - Puente levadiso
-  l_PUD = new CPhysicUserData( "Box2" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.2f, 4, 1 ), Math::Vect3f( 0, 4,
-                               0 ) );
-  l_pPhysicActor->CreateBody( 1.0f );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
-  m_PRJ = new CPhysicRevoluteJoint();
-  m_PRJ->SetInfo( Math::Vect3f( 0, 0, -1 ), Math::Vect3f( 0, 0, 0 ),
-                  l_pPhysicActor );
-  m_PRJ->SetMotor( 20, 5.f );
-  l_PM->AddPhysicRevoluteJoint( m_PRJ );
-  l_PUD = new CPhysicUserData( "Box3" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( -7, -1.5f,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  l_PUD = new CPhysicUserData( "Box4" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1, 1, 1 ), Math::Vect3f( 7, -1.5f,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
-  //Añado un TriggerReport
-  l_PM->SetTriggerReport( this );
 }
 
 void CTestProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
-  p_Grenade->Render();
+
   /*pGraphicsManager->DrawAxis(5);
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);*/
   //pGraphicsManager->DrawTeapot();
@@ -292,26 +133,4 @@ void CTestProcess::Render()
 void CTestProcess::RenderDebugInfo()
 {
   CProcess::RenderDebugInfo();
-}
-
-void CTestProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
-                            CPhysicUserData* _Other_Shape )
-{
-  std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
-                      _Entity_Trigger1->GetName();
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
-}
-void CTestProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
-                            CPhysicUserData* _Other_Shape )
-{
-  std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
-                      _Entity_Trigger1->GetName();
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
-}
-void CTestProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
-                           CPhysicUserData* _Other_Shape )
-{
-  std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
-                      _Entity_Trigger1->GetName();
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
 }

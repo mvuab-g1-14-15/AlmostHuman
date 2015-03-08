@@ -16,12 +16,12 @@
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Actor\PhysicActor.h"
+#include "Trigger.h"
 
 // Forward declarations
 class CPhysicUserData;
 //class CXMLTreeNode;
 //class ItemCore;
-class CTrigger;
 
 class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>
 {

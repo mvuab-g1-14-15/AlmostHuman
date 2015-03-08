@@ -1,17 +1,22 @@
-fn GetYaw rot =
-(
-	return degToRad((rot as eulerangles).z)
-)
 
 fn GetPitch rot =
 (
-	return degToRad((rot as eulerangles).y)
+	local a = QuatToEuler2(rot)
+	return degToRad(a.x)
 )
+
+fn GetYaw rot =
+(
+	local a = QuatToEuler2(rot)
+	return degToRad(a.z)
+)
+
 fn GetRoll rot =
 (
-	return degToRad((rot as eulerangles).x)
+	local a = QuatToEuler2(rot)
+	return degToRad(a.y)
 )
-	
+
 fn DoesFolderExist f create:true =
 (
 	local val

@@ -14,6 +14,7 @@
 #include "Utils\GPUStatics.h"
 #include "Console\Console.h"
 #include "TestProcess\PhysicProcess.h"
+#include "TestProcess\PlayerPhysicProcess.h"
 
 #include <iostream>
 
@@ -96,7 +97,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                               wc.hInstance, NULL );
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
     //pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
-    pEngine->Init( new CPhysicProcess(), "./Data/config.xml", hWnd );
+    //pEngine->Init( new CPhysicProcess(), "./Data/config.xml", hWnd );
+    pEngine->Init( new CPlayerPhysicProcess(), "./Data/config.xml", hWnd );
     SetWindowPos( hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(),
                   CCore::GetSingletonPtr()->GetWindowYPos(),
                   CCore::GetSingletonPtr()->GetScreenWidth(),

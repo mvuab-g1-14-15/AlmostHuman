@@ -1,5 +1,6 @@
 #include "VideogameFunctions.h"
 #include "TestProcess\PhysicProcess.h"
+#include "TestProcess\PlayerPhysicProcess.h"
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
 #include "Reports\PhysicTriggerReport.h"
@@ -31,7 +32,17 @@ void registerVideogame( lua_State* m_LS )
     .def( "GetLastPUDInserted", &CPhysicProcess::GetLastPUDInserted )
     .def( "AddPhysicActorVector", &CPhysicProcess::AddPhysicActorVector )
     .def( "AddPudVector", &CPhysicProcess::AddPudVector )
-	.def( "GetNewController", &CPhysicProcess::GetNewController)
-	.def( "GetNewCharacter", &CPhysicProcess::GetNewCharacter)
+  ];
+  module( m_LS )
+  [
+    class_<CPlayerPhysicProcess, CProcess>( "CPlayerPhysicProcess" )
+    .def( constructor<>() )
+    .def( "GetNewPhysicActor", &CPlayerPhysicProcess::GetNewPhysicActor )
+    .def( "GetNewPUD", &CPlayerPhysicProcess::GetNewPUD )
+    .def( "GetLastPUDInserted", &CPlayerPhysicProcess::GetLastPUDInserted )
+    .def( "AddPhysicActorVector", &CPlayerPhysicProcess::AddPhysicActorVector )
+    .def( "AddPudVector", &CPlayerPhysicProcess::AddPudVector )
+    .def( "GetNewController", &CPlayerPhysicProcess::GetNewController )
+    .def( "GetNewCharacter", &CPlayerPhysicProcess::GetNewCharacter )
   ];
 }

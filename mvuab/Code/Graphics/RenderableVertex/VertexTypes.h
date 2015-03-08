@@ -261,6 +261,7 @@ struct TNORMAL_DIFF_VERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE( s_VertexDeclaration );
@@ -273,7 +274,7 @@ struct TNORMAL_DIFF_VERTEX
 
   static inline unsigned int GetFVF()
   {
-    return 0;//D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
+    return 0; //D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
   }
 };
 

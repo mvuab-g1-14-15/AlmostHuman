@@ -6,7 +6,7 @@
 
 CInstanceMesh::CInstanceMesh( const std::string& Name,
                               const std::string& CoreName ): m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
-                                      CoreName ) )
+                                      CoreName ) ), CRenderableObject()
 {
   if ( !m_pStaticMesh )
     CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
@@ -15,7 +15,8 @@ CInstanceMesh::CInstanceMesh( const std::string& Name,
   SetName( Name );
 }
 CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts )
-  : CRenderableObject( atts )
+  : CRenderableObject( atts ), m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
+        atts.GetPszProperty( "core", "no_staticMesh" ) ) )
 {
 }
 
