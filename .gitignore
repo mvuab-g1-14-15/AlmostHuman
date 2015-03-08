@@ -16,4 +16,4 @@
 *.sdf
 *.suo
 *Boost/
-lib
+*bin/lib/
