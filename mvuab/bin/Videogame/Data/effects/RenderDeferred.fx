@@ -72,17 +72,13 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 							  lerps.y );
 	// 1 – Píxel iluminado
 	// 0 – Píxel en sombra
-	
+
 	return l_PixelColor * LightAmount;
 }
 
 technique RenderDeferredTechnique {
 	pass p0 {
-		
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
+
 		
 		VertexShader = null;
 		PixelShader = compile ps_3_0 mainPS();

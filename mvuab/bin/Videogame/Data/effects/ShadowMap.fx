@@ -2,27 +2,37 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-void VertShadow(float4 Pos : POSITION, float3 Normal : NORMAL, out float4 oPos : POSITION, out float2 Depth : TEXCOORD0 )
+//-----------------------------------------------------------------------------
+// Vertex Shader: VertShadow
+// Desc: Process vertex for the shadow map
+//-----------------------------------------------------------------------------
+void VertShadow( float4 Pos : POSITION,
+                 float3 Normal : NORMAL,
+                 out float4 oPos : POSITION,
+                 out float2 Depth : TEXCOORD0 )
 {
-	//
-	// Compute the projected coordinates
-	//
-	oPos = mul( Pos, g_WorldViewProj );
-	//
-	// Store z and w in our spare texcoord
-	//
-	Depth.xy = oPos.zw;
+    //
+    // Compute the projected coordinates
+    //
+    oPos = mul( Pos, g_WorldViewProj );
+
+    //
+    // Store z and w in our spare texcoord
+    //
+    Depth.xy = oPos.zw;
 }
 
-float4 PixShadow( float2 Depth : TEXCOORD0) : COLOR
+//-----------------------------------------------------------------------------
+// Pixel Shader: PixShadow
+// Desc: Process pixel for the shadow map
+//-----------------------------------------------------------------------------
+void PixShadow( float2 Depth : TEXCOORD0,
+                out float4 Color : COLOR )
 {
-	//
-	// Depth is z / w
-	//
-	// 1 – Píxel iluminado
-	// 0 – Píxel en sombra
-	return Depth.x / Depth.y;
-	
+    //
+    // Depth is z / w
+    //
+    Color = Depth.x / Depth.y;
 }
 
 technique ShadowMapTechnique
