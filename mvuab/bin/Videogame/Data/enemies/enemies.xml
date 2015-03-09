@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <enemies>
-	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/Enemies/AI-easy.xml"/>
-	<core_enemy type="patroll" life="75" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/Enemies/AI-patroll.xml"/>
-	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/Enemies/AI-boss.xml"/>
+	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
+	<core_enemy type="patroll" life="75" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
+	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy1" type="easy" pos="5.0 2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy2" type="easy" pos="5.0 -42.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy3" type="easy" pos="-5.0 2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy4" type="easy" pos="5.0 -23.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy5" type="easy" pos="5.0 -2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy6" type="patroll" pos="35.0 2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy7" type="patroll" pos="25.0 2.0 3.0" yaw="0.0"/>
 	<enemy name="Enemy8" type="patroll" pos="15.0 2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy9" type="boss" pos="50.0 12.0 -33.0" yaw="0.0"/>
 </enemies>

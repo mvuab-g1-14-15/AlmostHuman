@@ -151,7 +151,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     {
       CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
       lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-
+      lEnemy->Init();
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
 

@@ -47,6 +47,10 @@ public:
 
     m_Resources.clear();
   }
+  virtual TMapResource& GetResourcesMap()
+  {
+    return m_Resources;
+  }
 };
 
 #endif //INC_MAP_MANAGER_H_

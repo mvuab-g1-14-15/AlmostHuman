@@ -131,7 +131,7 @@ void CCore::Update()
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
   m_pPhysicsManager->Update( deltaTime );
-  //m_pEnemyManager->Update();
+  m_pEnemyManager->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
@@ -275,7 +275,7 @@ void CCore::InitManagers()
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
   m_pPhysicsManager->Init();
-  //m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
+  m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
 }
 

@@ -4,27 +4,31 @@
 			<action function="set_initial_waypoint"/>
 		</on_enter>
 		<on_exit>
+			<action function="change_state"/>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			
 		</update>
 	</state>
+	
 	<state name="andando">
 		<on_enter>
 		</on_enter>
 		<on_exit>
+			<action function="change_state"/>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			<action function="andar"/>
 		</update>
 	</state>
 	<state name="parado">
 		<on_enter>
 		</on_enter>
 		<on_exit>
+			<action function="change_state"/>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			<action function="esperar"/>
 		</update>
 	</state>
 </state_machine>

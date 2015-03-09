@@ -50,6 +50,8 @@ bool CStateMachine::Load(const std::string& FileName)
           CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
           CHECKED_DELETE(l_State);
         }
+        else
+            m_StateName.push_back(l_Name);
       }
     }
   }
