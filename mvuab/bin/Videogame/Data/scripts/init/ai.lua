@@ -33,14 +33,15 @@ function andar()
 	local enemy_pos = enemy:GetPosition()
 	local vector_distx = targetPosition.x - enemy_pos.x
 	local vector_distz = targetPosition.z - enemy_pos.z
-	if (vector_distz < 0.01 and vector_distz > -0.01) or (vector_distx < 0.01 and vector_distx > -0.01)  then
+	if (vector_distz < 0.2 and vector_distz > -0.2) and (vector_distx < 0.2 and vector_distx > -0.2)  then
 		local currentPoint = enemy:GetCurrentPoint()
-		if currentPoint == (enemy:getCount()-1) then
+		if currentPoint == (enemy:getCount()) then
 			enemy:SetExit(true)
 		else
+			
+			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
+			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
 			enemy:SetCurrentPoint(currentPoint+1)
-			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
-			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
 		end
 	end
 end
