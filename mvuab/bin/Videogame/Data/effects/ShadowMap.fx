@@ -22,6 +22,7 @@ float4 PixShadow( float2 Depth : TEXCOORD0) : COLOR
 	// 1 – Píxel iluminado
 	// 0 – Píxel en sombra
 	return Depth.x / Depth.y;
+	
 }
 
 technique ShadowMapTechnique

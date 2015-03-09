@@ -27,8 +27,9 @@ fn ExportLights filenameXML =
 		local l_LightsCount = 0;
 		for iLight in lights do
 		(
-			try
-			(
+			--try
+			--(
+				format "Class Light :%\n" classof iLight
 				if classof iLight != Targetobject and 
 				   classof iLight != freeDirect and
 				   classof iLight != freeSpot
@@ -56,7 +57,7 @@ fn ExportLights filenameXML =
 					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
 					l_NewLightNode.AddAttributeFloat "att_start_range" iLight.farAttenStart
 					l_NewLightNode.AddAttributeFloat "att_end_range" iLight.farAttenEnd
-					--TODO: Ask Jordi
+					/*
 					l_NewLightNode.AddAttributeFloat "generate_shadow_map" "true"
 					l_NewLightNode.AddAttributeFloat "shadow_map_format_type" "R32F"
 					l_NewLightNode.AddAttributeFloat "shadow_map_width" iLight.shadowgenerator.mapsize
@@ -66,6 +67,7 @@ fn ExportLights filenameXML =
 					l_NewLightNode.AddAttributeFloat "static_shadow_map_width" iLight.shadowgenerator.mapsize
 					l_NewLightNode.AddAttributeFloat "static_shadow_map_height" iLight.shadowgenerator.mapsize
 					l_NewLightNode.AddAttributeFloat "shadow_texture_mask" iLight.shadowProjectorMap.filename
+					*/
 							
 					--add the specific data for each light
 					if classof iLight == TargetDirectionallight then
@@ -85,11 +87,11 @@ fn ExportLights filenameXML =
 					)
 					l_LightsCount = l_LightsCount + 1
 				)
-			)
-			catch
-			(
-				format "Error Light % would not be exported\n" l_LightName
-			)
+			--)
+			--catch
+			--(
+				--format "Error Light % would not be exported\n" l_LightName
+			--)
 		)
 		format "% Lights have been exported to %\n" l_LightsCount filenameXML
 		return xDoc.PrettySaveXML()

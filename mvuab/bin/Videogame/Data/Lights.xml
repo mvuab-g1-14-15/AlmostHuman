@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-	<light name="L_ShadowMap" type="targetSpot" render_shadows="true" pos="-27.4278 3.58882 1.89463" dir="-0.0270699 -0.998305 -0.0515123" color="0.0 0.0 0.0" angle="1.76984" fall_off="1.89725" att_start_range="0.76104" att_end_range="25.9082" intensity="0.5" enabled="true" generate_shadow_map="true" shadow_map_format_type="R32F" shadow_map_width="1024" shadow_map_height="1024" generate_static_shadow_map="false" static_shadow_map_format_type="R32F" static_shadow_map_width="1024" static_shadow_map_height="1024">
+  <light type="targetSpot" name="Spot001" pos="-5.0 5.0 0.0" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="5.0 -5.0 0.0" angle="43.0" fall_off="45.0" render_shadows="true" intensity="0.5" enabled="true" generate_shadow_map="true" shadow_map_format_type="R32F" shadow_map_width="1024" shadow_map_height="1024" generate_static_shadow_map="true" static_shadow_map_format_type="R32F" static_shadow_map_width="1024" static_shadow_map_height="1024">
 		<static renderable_objects_manager="solid"/>
 		<dynamic renderable_objects_manager="solid"/>
 	</light>
