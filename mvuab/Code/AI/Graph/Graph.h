@@ -26,6 +26,8 @@ class CGraph
 
         unsigned int GetArcWeight(unsigned int n1, unsigned n2);
         void AddArcWeight(unsigned int n1, unsigned int n2, unsigned int v);
+
+        unsigned int GetSize() { return m_NodeInfo.size(); };
 };
 
 #endif

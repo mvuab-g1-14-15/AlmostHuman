@@ -146,6 +146,7 @@ void CCore::Render()
   m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
   m_pPhysicsManager->DebugRender( m_pGraphicsManager );
+  m_pEnemyManager->Render();
 }
 
 void CCore::LoadXml()

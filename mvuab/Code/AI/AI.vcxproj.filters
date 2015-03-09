@@ -17,6 +17,9 @@
     <Filter Include="Graph">
       <UniqueIdentifier>{3c61283d-3465-4a1d-b97c-4c5772dc98c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PathFinding">
+      <UniqueIdentifier>{e5139f7d-30a7-4dc9-857b-e727b75ad4a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -49,6 +52,12 @@
     <ClCompile Include="Graph\Graph.cpp">
       <Filter>Graph</Filter>
     </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>PathFinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -80,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="Graph\Graph.h">
       <Filter>Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.h">
+      <Filter>PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>PathFinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,10 +5,10 @@ tiempoDeEspera = 0
 function set_initial_waypoint()
 	enemy = Enemy_Manager:GetActualEnemy()
 	local m_WaypointPoint = VectorWaypoints(enemy:GetWaypoints())
-	m_WaypointPoint:push_back(Vect3f(10,0,10))
-    m_WaypointPoint:push_back(Vect3f(10,0,-10))
-    m_WaypointPoint:push_back(Vect3f(-10,0,-10))
-    m_WaypointPoint:push_back(Vect3f(-10,0,10))
+	m_WaypointPoint:push_back(Vect3f(10,-8,10))
+    m_WaypointPoint:push_back(Vect3f(10,-8,-10))
+    m_WaypointPoint:push_back(Vect3f(-10,-8,-10))
+    m_WaypointPoint:push_back(Vect3f(-10,-8,10))
 	enemy:SetWaypoints(m_WaypointPoint)
 	enemy:SetCurrentPoint(0)
 	enemy:SetExit(true)
@@ -20,7 +20,7 @@ function change_state()
 	local m_VectorNameState = VectorStates(enemy:getStateMachine():GetStateName())
 	local posicion = m_VectorNameState:getIdByResource(m_CurrentState)
 	if posicion == (m_VectorNameState:size()-1) then
-		enemy:ChangeState(m_VectorNameState:getResource(0))
+		enemy:ChangeState(m_VectorNameState:getResource(1))
 	else
 		enemy:ChangeState(m_VectorNameState:getResource(posicion+1))
 	end
@@ -33,14 +33,17 @@ function andar()
 	local enemy_pos = enemy:GetPosition()
 	local vector_distx = targetPosition.x - enemy_pos.x
 	local vector_distz = targetPosition.z - enemy_pos.z
-	if (vector_distz < 0.2 and vector_distz > -0.2) and (vector_distx < 0.2 and vector_distx > -0.2)  then
+	if (vector_distz < 0.1 and vector_distz > -0.1) and (vector_distx < 0.1 and vector_distx > -0.1)  then
 		local currentPoint = enemy:GetCurrentPoint()
-		if currentPoint == (enemy:getCount()) then
+		if currentPoint+1 == (enemy:getCount()) then
 			enemy:SetExit(true)
+		else if currentPoint+1 == 1 then
+			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(0))
+			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(0))
+			enemy:SetCurrentPoint(currentPoint+1)
 		else
-			
-			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
-			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
+			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
+			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
 	end
@@ -53,8 +56,6 @@ function esperar()
 	if tiempoDeEspera > 2 then
 		enemy:SetExit(true)
 		tiempoDeEspera = 0
-		m_WaypointPoint = VectorWaypoints(enemy:GetWaypoints())
-		m_WaypointPoint:clear()
-		enemy:SetWaypoints(m_WaypointPoint)
+		enemy:SetCurrentPoint(0)
 	end
 end

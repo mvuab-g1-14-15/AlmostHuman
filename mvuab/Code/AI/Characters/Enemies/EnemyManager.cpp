@@ -43,6 +43,12 @@ void CEnemyManager::Update()
 
 void CEnemyManager::Render()
 {
+  TMapResource::iterator it = m_Resources.begin();
+
+  for ( ; it != m_Resources.end(); ++it )
+  {
+    it->second->Render();
+  }
 }
 
 void CEnemyManager::Init( const std::string& Filename )

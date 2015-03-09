@@ -37,6 +37,9 @@ private: // Members
   float32             m_Life;
   bool m_init;
 
+  float m_Height;
+  float m_Radius;
+
 private: // Methods
   void ExecuteAI();
 };
