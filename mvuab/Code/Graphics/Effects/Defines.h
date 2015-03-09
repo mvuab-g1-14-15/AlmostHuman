@@ -42,4 +42,10 @@ const char FogFunStr[] = "FogFun";
 const char TextureWidthStr[] = "TextureWidth";
 const char TextureHeightStr[] = "TextureHeight";
 
+
+// Shadow handles
+const char UseShadowMaskTextureStr[] = "UseShadowMaskTexture";
+const char UseShadowStaticStr[] = "UseStaticShadowMap";
+const char UseShadowDynamicStr[] = "UseDynamicShadowMap";
+
 #endif //EFFECTS_DEFINES_H
