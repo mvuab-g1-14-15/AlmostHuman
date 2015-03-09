@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Characters\Character.cpp" />
     <ClCompile Include="Characters\Enemies\BossEnemy.cpp" />
     <ClCompile Include="Characters\Enemies\EasyEnemy.cpp" />
@@ -19,13 +18,12 @@
     <ClCompile Include="Characters\Enemies\EnemyManager.cpp" />
     <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="Graph\Graph.cpp" />
-    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Pathfinding\AStar.cpp" />
     <ClCompile Include="StateMachine\Action.cpp" />
     <ClCompile Include="StateMachine\State.cpp" />
     <ClCompile Include="StateMachine\StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AStar.h" />
     <ClInclude Include="Characters\Character.h" />
     <ClInclude Include="Characters\Enemies\BossEnemy.h" />
     <ClInclude Include="Characters\Enemies\EasyEnemy.h" />
@@ -33,7 +31,7 @@
     <ClInclude Include="Characters\Enemies\EnemyManager.h" />
     <ClInclude Include="Characters\Enemies\PatrolEnemy.h" />
     <ClInclude Include="Graph\Graph.h" />
-    <ClInclude Include="Node.h" />
+    <ClInclude Include="Pathfinding\AStar.h" />
     <ClInclude Include="StateMachine\Action.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />

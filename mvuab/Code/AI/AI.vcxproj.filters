@@ -52,10 +52,7 @@
     <ClCompile Include="Graph\Graph.cpp">
       <Filter>Graph</Filter>
     </ClCompile>
-    <ClCompile Include="AStar.cpp">
-      <Filter>PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
+    <ClCompile Include="Pathfinding\AStar.cpp">
       <Filter>PathFinding</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,10 +87,7 @@
     <ClInclude Include="Graph\Graph.h">
       <Filter>Graph</Filter>
     </ClInclude>
-    <ClInclude Include="AStar.h">
-      <Filter>PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="Pathfinding\AStar.h">
       <Filter>PathFinding</Filter>
     </ClInclude>
   </ItemGroup>

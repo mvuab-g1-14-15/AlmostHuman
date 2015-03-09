@@ -5,14 +5,13 @@
 
 #include <vector>
 
-class Node;
 class CGraph;
 
 class CAStar
 {
 public:
   //std::vector<Node*> nodos;
-  CGraph* grafo;
+  CGraph* m_Graph;
 
   CAStar();
   ~CAStar();
@@ -20,7 +19,7 @@ public:
   void Init();
   void Render();
 
-  std::vector<Node*> GetPath(Math::Vect3f posicion_inicial, Math::Vect3f posicion_final);
+  std::vector<Math::Vect3f> GetPath( Math::Vect3f posicion_inicial, Math::Vect3f posicion_final );
 };
 
 #endif //_A_STAR_H

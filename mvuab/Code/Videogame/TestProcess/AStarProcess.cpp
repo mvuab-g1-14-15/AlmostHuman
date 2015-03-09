@@ -3,7 +3,7 @@
 //AI
 #include "Graph\Graph.h"
 #include "Characters\Character.h"
-#include "AStar.h"
+#include "Pathfinding\AStar.h"
 
 //BASE
 #include "Logger\Logger.h"
@@ -36,21 +36,11 @@ CAStarProcess::CAStarProcess() : CProcess()
 
 CAStarProcess::~CAStarProcess()
 {
-  CHECKED_DELETE(m_AStarScene);
+  CHECKED_DELETE( m_AStarScene );
 }
 
 void CAStarProcess::Update()
 {
-  /*
-  CGraph l_Graph;
-  l_Graph.Parse("./Data/graph1.xml");
-
-  unsigned int a = l_Graph.GetArcWeight(0, 3);
-  unsigned int b = l_Graph.GetArcWeight(4, 1);
-
-  Math::Vect3f v = l_Graph.GetNodeInfo(4);
-  */
-
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
@@ -76,12 +66,7 @@ void CAStarProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-
- 
-
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,31 +74,37 @@ void CAStarProcess::Update()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void CAStarProcess::InitSceneCharacterController()
 {
-     
+
 }
 
 void CAStarProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
- 
+
   m_AStarScene = new CAStar();
   m_AStarScene->Init();
+
+  m_Path = m_AStarScene->GetPath( Math::Vect3f( 6, 0, -6 ), Math::Vect3f( 6, 0, 6 ) );
 }
 
 void CAStarProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
+
   m_AStarScene->Render();
+  Math::Mat44f m;
+  std::vector<Math::Vect3f>::iterator it = m_Path.begin(),
+                                      it_end = m_Path.end();
+
+  for ( ; it != it_end - 1; ++it )
+  {
+    Math::Vect3f l_ActualPoint = *it;
+    Math::Vect3f l_NextPoint = *( it + 1 );
+
+    pGraphicsManager->DrawLine( l_ActualPoint, l_NextPoint, Math::colMAGENTA );
+  }
+
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
-  // START: TO DELETE LATER IF IS NOT NECESSARY,
-  unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
-  unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
-  unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
-  CGPUStatics::GetSingletonPtr()->SetToZero();
-  CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText( 300, 0,
-      Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
-      d );
-  // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CAStarProcess::RenderDebugInfo()
