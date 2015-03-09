@@ -8,6 +8,7 @@
 	<node id="6" pos="0 0 -5"/>
 	<node id="7" pos="-5 0 5"/>
 	<node id="8" pos="5 0 -5"/>
+	
 	<weight src="0" dst="1" value="1"/>
 	<weight src="1" dst="2" value="1"/>
 	<weight src="2" dst="3" value="1"/>
@@ -17,4 +18,14 @@
 	<weight src="6" dst="5" value="1"/>
 	<weight src="7" dst="0" value="1"/>
 	<weight src="8" dst="6" value="1"/>
+	
+	<weight src="1" dst="0" value="1"/>
+	<weight src="2" dst="1" value="1"/>
+	<weight src="3" dst="2" value="1"/>
+	<weight src="0" dst="3" value="1"/>
+	<weight src="5" dst="4" value="1"/>
+	<weight src="0" dst="5" value="1"/>
+	<weight src="5" dst="6" value="1"/>
+	<weight src="0" dst="7" value="1"/>
+	<weight src="6" dst="8" value="1"/>
 </graph>
