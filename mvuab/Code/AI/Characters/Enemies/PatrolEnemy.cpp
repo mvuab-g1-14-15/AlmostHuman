@@ -4,7 +4,7 @@
 #include "Core.h"
 
 CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node )
-    : CEnemy( Node ), m_CurrentPoint(0)
+  : CEnemy( Node ), m_CurrentPoint( 0 )
 {
 }
 
@@ -15,7 +15,6 @@ CPatrolEnemy::~CPatrolEnemy( void )
 
 void CPatrolEnemy::Init()
 {
-  CCharacter::Init();
 }
 
 void CPatrolEnemy::Update( )

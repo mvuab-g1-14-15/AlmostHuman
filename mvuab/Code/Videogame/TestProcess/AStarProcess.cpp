@@ -41,6 +41,7 @@ CAStarProcess::CAStarProcess() : CProcess()
 CAStarProcess::~CAStarProcess()
 {
   CHECKED_DELETE( m_pAStarScene );
+
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
 
@@ -80,6 +81,7 @@ void CAStarProcess::Update()
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
+
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
 }
 
@@ -109,15 +111,15 @@ void CAStarProcess::Init()
 
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colMAGENTA );
+  l_PUD->SetColor( colBLACK );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, -2.0f, 1000 ), Math::Vect3f( 0, 0,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -0.5f,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
 
-  m_PointInicial = Math::Vect3f( -6, 0, 6 );
+  m_PointInicial = Math::Vect3f( 6, 0, -6 );
   m_PointFinal = Math::Vect3f( 6, 0, 6 );
   m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
 }
@@ -130,7 +132,7 @@ void CAStarProcess::Render()
   Math::Mat44f m;
   std::vector<Math::Vect3f>::iterator it = m_Path.begin(),
                                       it_end = m_Path.end();
-  
+
 
   for ( ; it != it_end - 1; ++it )
   {

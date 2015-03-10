@@ -32,8 +32,8 @@ function update()
 	if enable == true then
 		--move_player( dt )
 		move_light( dt )
-		move_point_inicial( dt )
-		move_point_final ( dt )
+		--move_point_inicial( dt )
+		--move_point_final ( dt )
 	end
 end
 
