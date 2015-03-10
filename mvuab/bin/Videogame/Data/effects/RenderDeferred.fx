@@ -73,7 +73,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	// 1 – Píxel iluminado
 	// 0 – Píxel en sombra
 
-	return l_PixelColor * LightAmount;
+	return float4(l_PixelColor.xyz * sourcevals[0], 1.0);
 }
 
 technique RenderDeferredTechnique {

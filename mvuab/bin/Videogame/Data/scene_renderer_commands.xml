@@ -1,10 +1,14 @@
 <scene_renderer_commands>
-    <!--pre_render-->	
+    <!--pre_render-->
 	<!--generate the shadow maps -->
 	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
 	<generate_shadow_maps/>
 	
+	<clear_scene color="true" depth="true" stencil="true"/>
 	<begin_scene/>
+	<enable_z_write/>
+    <enable_z_test/>
+	<disable_alpha_blend/>
 	
 	<!--generate the deferred textures-->
     <set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
@@ -22,6 +26,9 @@
     <render_scene layer="solid" active="true"/>
     <render_debug_lights render="true"/>
     <unset_render_target render_target="deferred_multiple_render_target"/>
+	
+	<disable_z_write/>
+    <disable_z_test/>
     
     <!--
     <enable_z_write/>
@@ -43,7 +50,6 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
     
-   
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	<lens_of_flare>
 		<texture stage_id="0" name="nova.png"/>

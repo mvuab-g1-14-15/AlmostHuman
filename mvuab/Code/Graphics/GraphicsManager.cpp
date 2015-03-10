@@ -108,24 +108,9 @@ void CGraphicsManager::BeginScene()
 
 void CGraphicsManager::BeginRender()
 {
-#ifdef _DEBUG // Clear the backbuffer to a blue color in a Debug mode
-  uint32 red        = ( uint32 )( m_BackbufferColor_debug.GetRed() * 255 );
-  uint32 green    = ( uint32 )( m_BackbufferColor_debug.GetGreen() * 255 );
-  uint32 blue        = ( uint32 )( m_BackbufferColor_debug.GetBlue() * 255 );
-  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ,
-                       D3DCOLOR_XRGB( red, green, blue ),
-                       1.0f, 0 );
-#else // Clear the backbuffer to a black color in a Release mode
-  uint32 red        = ( uint32 )( m_BackbufferColor_release.GetRed() * 255 );
-  uint32 green    = ( uint32 )( m_BackbufferColor_release.GetGreen() * 255 );
-  uint32 blue        = ( uint32 )( m_BackbufferColor_release.GetBlue() * 255 );
-  m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER ,
-                       D3DCOLOR_XRGB( red, green, blue ),
-                       1.0f, 0 );
-#endif
   // Begin the scene
   HRESULT hr = m_pD3DDevice->BeginScene();
-  assert( SUCCEEDED( hr ) );
+  //assert( SUCCEEDED( hr ) );
   m_pD3DDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
   m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
   m_pD3DDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
