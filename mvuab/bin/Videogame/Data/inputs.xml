@@ -144,4 +144,8 @@
 	<action name="RightBridge">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_RIGHT"/>
     </action>
+	
+	<action name="Crouch">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_C"/>
+    </action>
 </Actions>

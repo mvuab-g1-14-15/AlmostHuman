@@ -77,6 +77,9 @@ void registerPhysX( lua_State* m_LS )
     .def( "Move", &CPhysicController::Move )
     .def( "Jump", &CPhysicController::Jump )
     .def( "GetPosition", &CPhysicController::GetPosition )
+    .def( "SetPosition", &CPhysicController::SetPosition )
     .def( "SetYaw", &CPhysicController::SetYaw )
+    .def( "SetHeight", &CPhysicController::SetHeight )
+    .def( "GetHeight", &CPhysicController::GetHeight )
   ];
 }
