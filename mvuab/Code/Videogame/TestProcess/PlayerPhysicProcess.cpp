@@ -240,21 +240,57 @@ void CPlayerPhysicProcess::Init()
   CPhysicActor*  l_AseMeshActor;
 
   CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+  CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
 
-  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
+
+  std::map<std::string, CStaticMesh*>::iterator it = l_MeshMap.begin(), it_end = l_MeshMap.end();
+
+  std::vector<std::vector<Math::Vect3f>> l_AllVB;
+  std::vector<std::vector<uint32>> l_AllIB;
+
+  for ( ; it != it_end; ++it )
+  {
+    CStaticMesh* l_StaticMesh = it->second;
+    std::vector<Math::Vect3f> l_VB = l_StaticMesh->GetVB();
+    std::vector<uint32> l_IB = l_StaticMesh->GetIB();
+
+    l_AllVB.push_back( l_VB );
+    l_AllIB.push_back( l_IB );
+
+  }
+
+  l_pMeshes->CreatePhysicMesh( "Escenario", l_AllVB, l_AllIB );
+
+  l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+  l_pPhysicUserDataASEMesh->SetPaint( true );
+  l_pPhysicUserDataASEMesh->SetColor( colRED );
+  l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+  m_vPUD.push_back( l_pPhysicUserDataASEMesh );
+
+  VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
+
+  for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+  m_vPA.push_back( l_AseMeshActor );
+
+
+  /*if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   {
     l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
     m_vPUD.push_back( l_pPhysicUserDataASEMesh );
     l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
-	VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
-	for(VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++)
-		l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+  VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
+  for(VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++)
+    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
     //m_AseMeshActor->CreateBody ( 10.f );
     CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
     m_vPA.push_back( l_AseMeshActor );
-  }
+  }*/
 
 }
 

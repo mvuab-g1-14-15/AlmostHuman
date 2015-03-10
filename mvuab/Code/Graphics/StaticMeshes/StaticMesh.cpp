@@ -162,10 +162,6 @@ bool CStaticMesh::Load( const std::string& FileName )
     //Vector para physx
     for ( int i = 0; i < l_IdxCount; i++ )
     {
-      /*uint32* l_IdxPointer = ( uint32* )l_IdxAddress;
-      uint32 l_Idx = *l_IdxPointer;
-      m_IB.push_back( l_Idx );
-      l_AuxIdxAddress += sizeof( uint32 );*/
       uint32 l_Idx = l_Indexs[i] + 0;
       m_IB.push_back( l_Idx );
     }
