@@ -3,6 +3,7 @@
 
 #include "GraphicsManager.h"
 #include "Core.h"
+#include <algorithm>
 
 CAStar::CAStar()
 {
@@ -116,40 +117,63 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
   float h = 0;
   float g = 0;
 
-  while ( l_Visited.size() < m_Graph->GetSize() && !l_PathFound )
-  {
-    std::map<unsigned int, unsigned int> l_Neighbours;
-    l_Neighbours = m_Graph->GetArcs( l_ActualNode );
+  std::vector<unsigned int> l_ClosedSet;
+  std::vector<unsigned int> l_OpenSet;
+  l_OpenSet.push_back(l_ActualNode);
+  std::map<unsigned int, unsigned int> l_CameFrom;
 
+  std::map<unsigned int, float> l_GScore;
+  std::map<unsigned int, float> l_FScore;
+
+  l_GScore[l_ActualNode] = 0;
+  l_FScore[l_ActualNode] = l_GScore[l_ActualNode] + m_Graph->GetNodeInfo( l_ActualNode ).Distance( final_pos );
+
+  while (l_OpenSet.size() > 0)
+  {
+    l_ActualNode = l_OpenSet[0];
+    for (unsigned int i = 1; i<l_OpenSet.size(); ++i)
+    {
+      if (l_FScore[l_OpenSet[i]] < l_FScore[l_ActualNode])
+        l_ActualNode = l_OpenSet[i];
+    }
+    if (l_ActualNode == last_point)
+    {
+      path.push_back(m_Graph->GetNodeInfo(l_ActualNode));
+      while (l_CameFrom.find(l_ActualNode) != l_CameFrom.end())
+      {
+        l_ActualNode = l_CameFrom[l_ActualNode];
+        path.push_back(m_Graph->GetNodeInfo( l_ActualNode ));
+      }
+      path.push_back( m_Graph->GetNodeInfo( last_point ) );
+
+      path.push_back( final_pos );
+      return path;
+    }
+    l_OpenSet.erase(std::remove(l_OpenSet.begin(), l_OpenSet.end(), l_ActualNode), l_OpenSet.end());
+    l_ClosedSet.push_back(l_ActualNode);
+
+    std::map<unsigned int, unsigned int> l_Neighbours = m_Graph->GetArcs( l_ActualNode );
     std::map<unsigned int, unsigned int>::iterator it = l_Neighbours.begin(),
                                                    it_end = l_Neighbours.end();
-    float l_F = 9999999999;
-    unsigned int l_NextNode;
-
     for ( ; it != it_end; ++it )
     {
-      float l_H = h + m_Graph->GetNodeInfo( l_ActualNode ).Distance( m_Graph->GetNodeInfo( it->first ) );
-      float l_G = m_Graph->GetNodeInfo( l_ActualNode ).Distance( final_pos );
+      unsigned int l_ActualNeighbour = it->first;
+      if (std::find(l_ClosedSet.begin(), l_ClosedSet.end(), l_ActualNeighbour) != l_ClosedSet.end())
+        continue;
+      float l_ActualGScore = l_GScore[l_ActualNode] + m_Graph->GetNodeInfo( l_ActualNode ).Distance( m_Graph->GetNodeInfo( l_ActualNeighbour ) );
 
-      if ( l_H + l_G < l_F )
+      if (std::find(l_OpenSet.begin(), l_OpenSet.end(), l_ActualNeighbour) == l_OpenSet.end() || l_ActualGScore < l_GScore[l_ActualNeighbour])
       {
-        l_F = l_H + l_G;
-        l_NextNode = it->first;
+        l_CameFrom[l_ActualNeighbour] = l_ActualNode;
+        l_GScore[l_ActualNeighbour] = l_ActualGScore;
+        l_FScore[l_ActualNeighbour] = l_GScore[l_ActualNeighbour] + m_Graph->GetNodeInfo( l_ActualNeighbour ).Distance( final_pos );
+        if (std::find(l_OpenSet.begin(), l_OpenSet.end(), l_ActualNeighbour) == l_OpenSet.end())
+          l_OpenSet.push_back(l_ActualNeighbour);
       }
     }
-
-    l_Visited.push_back( l_ActualNode );
-    l_ActualNode = l_NextNode;
-
-    if ( l_ActualNode == last_point )
-      l_PathFound = true;
   }
 
-  for ( unsigned int i = 1; i < l_Visited.size() - 1; ++i )
-    path.push_back( m_Graph->GetNodeInfo( i ) );
-
-  path.push_back( m_Graph->GetNodeInfo( last_point ) );
-
-  path.push_back( final_pos );
+  //Path not found
+  CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "Path not found in AStar");
   return path;
 }
