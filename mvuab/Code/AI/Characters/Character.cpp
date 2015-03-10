@@ -10,7 +10,7 @@
 #include "PhysicsManager.h"
 
 CCharacter::CCharacter( const std::string& Name )
-  : CName( Name )
+  : CName( Name ), CObject3D()
   , m_Speed( 0.06f )
   , m_Life( 0.0f )
   , m_init( false )
@@ -33,7 +33,7 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-     CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
+     /*CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
      CPhysicController* l_CharacterController = l_PUD->GetController();
      Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_PController->GetPosition();
      float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
@@ -42,7 +42,7 @@ void CCharacter::Update()
      if ( l_Cantidad < 30.0f )
        SetTargetPosition( l_CharacterController->GetPosition() );
      else
-       SetTargetPosition( m_TargetPositionOriginal );
+       SetTargetPosition( m_TargetPositionOriginal );*/
 
      Math::Vect3f l_Position = m_PController->GetPosition();
      float l_Yaw = m_PController->GetYaw();
@@ -108,10 +108,11 @@ void CCharacter::Init( CXMLTreeNode& Node )
                                          GetCollisionGroup(), GetPhysicsUserData(),
                                          Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
                                          Node.GetFloatProperty( "gravity", -10.0 ) );
+  
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
-  m_TargetPosition = Math::Vect3f( 10, 0.0f, 10 );
-  m_TargetPositionOriginal = m_TargetPosition;
+  SetPosition(m_PController->GetPosition());
+  SetTargetPosition(m_PController->GetPosition());
   m_init = true;
 }
 

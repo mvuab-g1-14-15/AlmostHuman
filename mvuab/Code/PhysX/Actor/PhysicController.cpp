@@ -67,6 +67,7 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
     l_Report;         // Es crida quan el controler colisiona
   m_pPhXCapsuleControllerDesc->interactionFlag  =
     NXIF_INTERACTION_USE_FILTER;  // Diu si el controler colisiona amb altres controlers
+  CObject3D::SetPosition(_vPos);
 }
 
 CPhysicController::CPhysicController( Math::Vect3f _Dim, float _fSlope, float _fSkinwidth,

@@ -32,6 +32,7 @@ bool CStaticMeshManager::Load(const std::string &FileName)
 
     for(int i = 0; i < node.GetNumChildren(); i++)
     {
+		//TODO - CHECK THE TAG NAME
         std::string name = node(i).GetPszProperty("name", "no_name");
         std::string file = node(i).GetPszProperty("filename", "no_file");
         file = "Data" + file;

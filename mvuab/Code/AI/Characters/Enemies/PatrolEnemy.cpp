@@ -32,7 +32,7 @@ void CPatrolEnemy::Render()
 
   CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
 
-  std::vector<Vect3f>::iterator it = m_Waypoints.begin(),
+  /*std::vector<Vect3f>::iterator it = m_Waypoints.begin(),
                                 it_end = m_Waypoints.end();
   for (; it!=it_end; ++it)
   {
@@ -46,5 +46,5 @@ void CPatrolEnemy::Render()
   m.SetIdentity();
   l_GM->SetTransform(m);
 
-  l_GM->DrawLine(GetPosition(), m_Waypoints[m_CurrentPoint]);
+  l_GM->DrawLine(GetPosition(), m_Waypoints[m_CurrentPoint]);*/
 }

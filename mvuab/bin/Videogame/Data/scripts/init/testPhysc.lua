@@ -16,6 +16,7 @@ function init()
 	cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
+	physic_manager = core:GetPhysicsManager()
 	
 	initialized = true
 end
@@ -29,9 +30,10 @@ function update()
 	local current_camera = camera_manager:GetCurrentCamera();
 	local enable = current_camera:GetEnable();
 	if enable == true then
-		move_player( dt )
+		--move_player( dt )
 		move_light( dt )
-		move_point( dt )
+		move_point_inicial( dt )
+		move_point_final ( dt )
 	end
 end
 
@@ -73,14 +75,20 @@ function move_player( dt )
 	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
 		move( flag_speed, forward, strafe, dt )
+	else
+		move( flag_speed, 0, 0, dt )
 	end
+	
 	if action_manager:DoAction("MoveBackward") then
 		forward = forward - 1
 		move( flag_speed, forward, strafe, dt )
 	elseif action_manager:DoAction("MoveForward") then
 		forward = forward + 1
 		move( flag_speed, forward, strafe, dt )
+	else
+		move( flag_speed, 0, 0, dt )
 	end
+	
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
 	local current_camera = camera_manager:GetCurrentCamera();
@@ -91,9 +99,20 @@ function move_player( dt )
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
 		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
+	
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController")
+	local character_controller = character_controller_UserData:GetController()
+	local Yaw = current_camera:GetYaw()
+	character_controller:SetYaw(Yaw)
+	if action_manager:DoAction("Jump") then
+		character_controller:Jump(50)
+	end
 end
 
 function move( flag_speed, forward, strafe, dt )
+
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController");
+	local character_controller = character_controller_UserData:GetController();
 	local current_camera = camera_manager:GetCurrentCamera();
 	local Yaw = current_camera:GetYaw()
 	local Pitch = current_camera:GetPitch()
@@ -102,7 +121,9 @@ function move( flag_speed, forward, strafe, dt )
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
 	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
-	addPos:Normalize()
+	if (not addPos.x == 0 or not addPos.z == 0) then
+		addPos:Normalize()
+	end
 	
     constant = dt * g_ForwardSpeed;
 	
@@ -111,33 +132,50 @@ function move( flag_speed, forward, strafe, dt )
 	end
 	
     addPos = addPos * constant;
-	current_camera:SetPos((cam_pos + addPos))
+	character_controller:Move(addPos, dt)
+	character_controller:SetYaw(Yaw)
+	current_camera:SetPos(character_controller:GetPosition())
 	
 end
 
-function move_point( dt )
-	local current_light = process:GetLight(0);
-	local pos = current_light:GetPosition()
+function move_point_inicial( dt )
+	process = Singleton_Engine.get_singleton():GetProcess()
+	local pointPos = process:GetPointInicial();
 	
 	local addPos = Vect3f(0, 0, 0)
 	
 	if action_manager:DoAction("Left") then
-		addPos.x = 1 * dt * g_Speed
-	elseif action_manager:DoAction("Right") then
-		addPos.x = - 1 * dt * g_Speed
-	end
-	if action_manager:DoAction("Backward") then
 		addPos.z = 1 * dt * g_Speed
-	elseif action_manager:DoAction("Forward") then
+	elseif action_manager:DoAction("Right") then
 		addPos.z = -1 * dt * g_Speed
 	end
-	if action_manager:DoAction("MoveUp") then
-		addPos.y = 1 * dt * g_Speed
-	elseif action_manager:DoAction("MoveDown") then
-		addPos.y = -1 * dt * g_Speed
+	if action_manager:DoAction("Backward") then
+		addPos.x = - 1 * dt * g_Speed
+	elseif action_manager:DoAction("Forward") then
+		addPos.x = 1 * dt * g_Speed
 	end
 	
-	current_light:SetPosition(pos+addPos)
+	process:SetPointInicial(pointPos+addPos)
+end
+
+function move_point_final( dt )
+	process = Singleton_Engine.get_singleton():GetProcess()
+	local pointPos = process:GetPointFinal();
+	
+	local addPos = Vect3f(0, 0, 0)
+	
+	if action_manager:DoAction("MoveLeft") then
+		addPos.z = 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveRight") then
+		addPos.z = -1 * dt * g_Speed
+	end
+	if action_manager:DoAction("MoveBackward") then
+		addPos.x = - 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveForward") then
+		addPos.x = 1 * dt * g_Speed
+	end
+	
+	process:SetPointFinal(pointPos+addPos)
 end
 
 function render()

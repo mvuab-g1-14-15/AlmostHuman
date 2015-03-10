@@ -4,8 +4,10 @@
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
 #include "Reports\PhysicTriggerReport.h"
+#include "TestProcess\AStarProcess.h"
 #include "Process.h"
 #include "Characters/Character.h"
+#include "Pathfinding\AStar.h"
 extern "C"
 {
 #include "lua.h"
@@ -44,5 +46,15 @@ void registerVideogame( lua_State* m_LS )
     .def( "AddPudVector", &CPlayerPhysicProcess::AddPudVector )
     .def( "GetNewController", &CPlayerPhysicProcess::GetNewController )
     .def( "GetNewCharacter", &CPlayerPhysicProcess::GetNewCharacter )
+  ];
+  module( m_LS )
+  [
+	class_<CAStarProcess, CProcess>( "CAStarProcess" )
+    .def( constructor<>() )
+	.def( "GetPointInicial", &CAStarProcess::GetPointInicial )
+    .def( "SetPointInicial", &CAStarProcess::SetPointInicial )
+	.def( "GetPointFinal", &CAStarProcess::GetPointFinal )
+    .def( "SetPointFinal", &CAStarProcess::SetPointFinal )
+	.def( "GetAStarScene", &CAStarProcess::GetAStarScene)
   ];
 }
