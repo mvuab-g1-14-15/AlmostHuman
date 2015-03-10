@@ -147,48 +147,48 @@ void CPlayerPhysicProcess::Update()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPlayerPhysicProcess::InitSceneCharacterController()
 {
-     //Scene Character Controller
-     //Step1
-     CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Step2
-     l_PUD = new CPhysicUserData( "BoxCharacter2" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Step3
-     l_PUD = new CPhysicUserData( "BoxCharacter3" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Plano Inclinado TODO
-     l_PUD = new CPhysicUserData( "Rampa" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3,
-                                  0, 0 ),
-                                  Math::Vect3f( 0, 0, 1.3f ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
+  //Scene Character Controller
+  //Step1
+  CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0,
+                               0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+  //Step2
+  l_PUD = new CPhysicUserData( "BoxCharacter2" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0,
+                               0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+  //Step3
+  l_PUD = new CPhysicUserData( "BoxCharacter3" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0,
+                               0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+  //Plano Inclinado TODO
+  l_PUD = new CPhysicUserData( "Rampa" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3,
+                               0, 0 ),
+                               Math::Vect3f( 0, 0, 1.3f ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
 }
 
 void CPlayerPhysicProcess::Init()
@@ -238,21 +238,21 @@ void CPlayerPhysicProcess::Init()
   //   //l_pActor3->AddMeshShape(CORE->GetPhysicsManager()->GetCookingMesh()->GetPhysicMesh("Malla_Fisicas"),Vect3f(-24.7306, 2.7749, -3.29779));
   //   l_pActor->AddMeshShape( l_PCM->GetPhysicMesh( "Escenario" ), Vect3f( 0, -5, 0 ) );
 
-  //CPhysicUserData* l_pPhysicUserDataASEMesh;
-  //CPhysicActor*  l_AseMeshActor;
+  CPhysicUserData* l_pPhysicUserDataASEMesh;
+  CPhysicActor*  l_AseMeshActor;
 
-  //CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+  CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
 
-  //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
-  //{
-  //  l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-  //  m_vPUD.push_back(l_pPhysicUserDataASEMesh);
-  //  l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-  //  l_AseMeshActor->AddMeshShape( l_pMeshes->GetPhysicMesh( "Escenario" ), Vect3f( 0, 0, 0 ) );
-  //  //m_AseMeshActor->CreateBody ( 10.f );
-  //  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
-  //  m_vPA.push_back(l_AseMeshActor);
-  //}
+  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  {
+    l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+    m_vPUD.push_back( l_pPhysicUserDataASEMesh );
+    l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+    l_AseMeshActor->AddMeshShape( l_pMeshes->GetPhysicMesh( "Escenario" ), Vect3f( 0, 0, 0 ) );
+    //m_AseMeshActor->CreateBody ( 10.f );
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+    m_vPA.push_back( l_AseMeshActor );
+  }
 
 }
 
