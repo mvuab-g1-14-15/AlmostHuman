@@ -19,6 +19,9 @@
 	<weight src="7" dst="0" value="1"/>
 	<weight src="8" dst="6" value="1"/>
 	
+	<weight src="0" dst="2" value="1"/>
+	<weight src="2" dst="0" value="1"/>
+	
 	<weight src="1" dst="0" value="1"/>
 	<weight src="2" dst="1" value="1"/>
 	<weight src="3" dst="2" value="1"/>

@@ -108,14 +108,7 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
   }
 
   path.push_back( m_Graph->GetNodeInfo( first_point ) );
-
-  std::vector<unsigned int> l_Visited;
   unsigned int l_ActualNode = first_point;
-
-  bool l_PathFound = false;
-
-  float h = 0;
-  float g = 0;
 
   std::vector<unsigned int> l_ClosedSet;
   std::vector<unsigned int> l_OpenSet;
