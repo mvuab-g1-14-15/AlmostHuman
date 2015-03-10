@@ -4,16 +4,18 @@ local g_HalfPi = 3.141618 * 0.5
 local g_ForwardSpeed = 5
 local g_StrafeSpeed = 6
 local g_Speed = 5
+local g_Flag_agacharse = 0
+local g_Levantado = 1
 
 function init()
 	core = Singleton_Core.get_singleton()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
-	renderable_objects_manager = core:GetRenderableObjectsManager()
+	--renderable_objects_manager = core:GetRenderableObjectsManager()
 	camera_manager = core:GetCameraManager()
 	light_manager = core:GetLightManager()
-	cinematic=renderable_objects_manager:CreateCinematic("Data/cinematic.xml")
-	cinematic:Stop()
+	--cinematic=renderable_objects_manager:CreateCinematic("Data/cinematic.xml")
+	--cinematic:Stop()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	physic_manager = core:GetPhysicsManager()
@@ -27,8 +29,8 @@ function update()
 	end
 	
 	local dt = timer:GetElapsedTime()
-	local current_camera = camera_manager:GetCurrentCamera();
-	local enable = current_camera:GetEnable();
+	local current_camera = camera_manager:GetCurrentCamera()
+	local enable = current_camera:GetEnable()
 	if enable == true then
 		move_player( dt )
 		move_light( dt )
@@ -37,8 +39,7 @@ end
 
 function move_light( dt )
 	local current_light = light_manager:GetLight(0);
-	local pos = current_light:GetPosition()
-	
+	local pos = current_light:GetPosition()	
 	local addPos = Vect3f(0, 0, 0)
 	
 	if action_manager:DoAction("Left") then
@@ -64,8 +65,19 @@ function move_player( dt )
 	flag_speed = 0
     forward = 0
     strafe = 0
+	
 	if action_manager:DoAction("Run") then
 		flag_speed = 1
+	end
+	if action_manager:DoAction("Crouch") then
+		if g_Flag_agacharse == 1 then
+			g_Flag_agacharse = 0
+			g_ForwardSpeed = g_ForwardSpeed*4
+		else
+			g_Flag_agacharse = 1
+			g_Levantado = 0
+			g_ForwardSpeed = g_ForwardSpeed/4
+		end
 	end
 	if action_manager:DoAction("MoveLeft") then
 		strafe = strafe + 1;
@@ -125,7 +137,7 @@ function move( flag_speed, forward, strafe, dt )
 	
     constant = dt * g_ForwardSpeed;
 	
-	if flag_speed == 1 then
+	if flag_speed == 1 and  g_Flag_agacharse == 0 then
         constant = constant * g_Speed;
 	end
 	
@@ -133,6 +145,21 @@ function move( flag_speed, forward, strafe, dt )
 	character_controller:Move(addPos, dt)
 	character_controller:SetYaw(Yaw)
 	current_camera:SetPos(character_controller:GetPosition())
+	local size = character_controller:GetHeight()
+	local posicion = Vect3f(current_camera:GetPos())
+	if g_Flag_agacharse == 1 then
+		posicion.y = posicion.y - 2
+		size = size/2
+	elseif g_Levantado == 0 then
+		posicion.y = posicion.y + 2
+		size = size*2
+		g_Levantado = 1
+		character_controller:SetPosition(posicion)
+	end
+	
+	character_controller:SetHeight(size)
+	current_camera:SetPos(posicion)
+	
 	
 end
 
