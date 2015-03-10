@@ -31,6 +31,7 @@ function update()
 	if enable == true then
 		move_player( dt )
 		move_light( dt )
+		move_point( dt )
 	end
 end
 
@@ -112,6 +113,31 @@ function move( flag_speed, forward, strafe, dt )
     addPos = addPos * constant;
 	current_camera:SetPos((cam_pos + addPos))
 	
+end
+
+function move_point( dt )
+	local current_light = process:GetLight(0);
+	local pos = current_light:GetPosition()
+	
+	local addPos = Vect3f(0, 0, 0)
+	
+	if action_manager:DoAction("Left") then
+		addPos.x = 1 * dt * g_Speed
+	elseif action_manager:DoAction("Right") then
+		addPos.x = - 1 * dt * g_Speed
+	end
+	if action_manager:DoAction("Backward") then
+		addPos.z = 1 * dt * g_Speed
+	elseif action_manager:DoAction("Forward") then
+		addPos.z = -1 * dt * g_Speed
+	end
+	if action_manager:DoAction("MoveUp") then
+		addPos.y = 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveDown") then
+		addPos.y = -1 * dt * g_Speed
+	end
+	
+	current_light:SetPosition(pos+addPos)
 end
 
 function render()
