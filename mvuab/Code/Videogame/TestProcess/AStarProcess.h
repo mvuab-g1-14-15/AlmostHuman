@@ -15,12 +15,13 @@ class CAStarProcess : public CProcess
 {
 private:
   CAStar* m_AStarScene;
-
+  Math::Vect3f m_PointInicial;
   std::vector<Math::Vect3f> m_Path;
 
 public:
   CAStarProcess();
   virtual ~CAStarProcess();
+  GET_SET(Math::Vect3f, PointInicial);
 
   virtual void Init();
   virtual void Update();

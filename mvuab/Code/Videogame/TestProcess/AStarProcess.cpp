@@ -83,10 +83,14 @@ void CAStarProcess::Init()
 
   m_AStarScene = new CAStar();
   m_AStarScene->Init();
-
-  m_Path = m_AStarScene->GetPath( Math::Vect3f( 6, 0, -6 ), Math::Vect3f( 6, 0, 6 ) );
+  m_PointInicial = Math::Vect3f( -6, 0, 6 );
+  m_Path = m_AStarScene->GetPath( m_PointInicial, Math::Vect3f( 6, 0, 6 ) );
 }
 
+void CAStarProcess::Update()
+{
+  m_Path = m_AStarScene->GetPath( m_PointInicial, Math::Vect3f( 6, 0, 6 ) );
+}
 void CAStarProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
