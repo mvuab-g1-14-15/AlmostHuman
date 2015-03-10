@@ -111,7 +111,7 @@ bool CStaticMesh::Load( const std::string& FileName )
       l_TypeSize = sizeof( TNORMAL_T1_REFLECTION_VERTEX );
     else if ( l_VertexType == TRNM_VERTEX::GetVertexType() )
       l_TypeSize = sizeof( TRNM_VERTEX );
-    
+
     // Obtain all the textures if any
     unsigned short l_numTexturas = 0;
     std::fread( &l_numTexturas, sizeof( unsigned short int ), 1, l_pFile );
@@ -140,11 +140,37 @@ bool CStaticMesh::Load( const std::string& FileName )
     std::fread( &l_VrtexCount, sizeof( unsigned short int ), 1, l_pFile );
     void* l_VtxsAddress = ( void* ) malloc( l_TypeSize * l_VrtexCount );
     std::fread( l_VtxsAddress, l_TypeSize * l_VrtexCount, 1, l_pFile );
+
+    unsigned char* l_AuxVtxAddress = ( unsigned char* )l_VtxsAddress;
+
+    for ( int i = 0; i < l_VrtexCount; i++ )
+    {
+      Math::Vect3f* l_VtxPointer = ( Math::Vect3f* )l_AuxVtxAddress;
+      Math::Vect3f l_Vtx = *l_VtxPointer;
+      m_VB.push_back( l_Vtx );
+      l_AuxVtxAddress += l_TypeSize;
+    }
+
     // Reading index buffer
     unsigned short l_IdxCount = 0;
     std::fread( &l_IdxCount, sizeof( unsigned short ), 1, l_pFile );
     void* l_IdxAddress = malloc( sizeof( unsigned short int ) * l_IdxCount );
     std::fread( l_IdxAddress, sizeof( unsigned short int ) * l_IdxCount, 1, l_pFile );
+
+    uint16* l_Indexs = ( uint16* )( l_IdxAddress );
+
+    //Vector para physx
+    for ( int i = 0; i < l_IdxCount; i++ )
+    {
+      /*uint32* l_IdxPointer = ( uint32* )l_IdxAddress;
+      uint32 l_Idx = *l_IdxPointer;
+      m_IB.push_back( l_Idx );
+      l_AuxIdxAddress += sizeof( uint32 );*/
+      uint32 l_Idx = l_Indexs[i] + 0;
+      m_IB.push_back( l_Idx );
+    }
+
+
     // Now create the renderable vertex
     CRenderableVertexs* l_RV = NULL;
 
@@ -211,7 +237,7 @@ bool CStaticMesh::Load( const std::string& FileName )
       l_RV = new CIndexedVertexs<TRNM_VERTEX>( CGraphicsManager::GetSingletonPtr(),
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
     }
-  
+
     // Check the renderable object
     if ( l_RV )
       m_RVs.push_back( l_RV );

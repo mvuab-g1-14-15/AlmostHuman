@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <layer name="solid" />
-  <MeshInstance name="Box001" core="Box001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Plane001" core="Plane001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="OilTank008" core="OilTank008" pos="-36.9611 -12.471 15.6331" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="Plane013" core="Plane013" pos="-34.7163 -11.4871 6.34664" yaw="3.14159" pitch="1.5708" roll="-1.50996e-007" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="OilTank009" core="OilTank009" pos="-43.539 -12.471 26.4049" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="4.73367 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="OilTank010" core="OilTank010" pos="-36.8824 -12.471 19.8886" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="OilTank011" core="OilTank011" pos="-44.1435 -12.471 19.8886" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="Plane014" core="Plane014" pos="-34.7163 -11.4871 5.8279" yaw="3.14159" pitch="1.5708" roll="-1.50996e-007" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="OilTank012" core="OilTank012" pos="-44.2222 -12.471 15.6331" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="OilTank013" core="OilTank013" pos="-36.7928 -12.471 11.3766" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="OilTank014" core="OilTank014" pos="-44.0539 -12.471 11.3766" yaw="0.0" pitch="1.5708" roll="-1.5708" scale="2.37828 2.5093 2.5093" layer="solid" />
+  <MeshInstance name="Box059" core="Box059" pos="-40.1646 -7.3332 18.4712" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box060" core="Box060" pos="-33.0741 -9.39546 28.8339" yaw="1.5708" pitch="-0.846483" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box061" core="Box061" pos="-33.0145 -10.0 29.5707" yaw="0.00872665" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box063" core="Box063" pos="-37.7228 -13.6209 29.6015" yaw="0.0" pitch="0.0" roll="-0.698132" scale="1.0 1.0 1.0" layer="solid" />
 </RenderableObjects>
