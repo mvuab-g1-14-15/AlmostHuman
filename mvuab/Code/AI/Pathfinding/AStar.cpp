@@ -107,7 +107,7 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
       last_point = i;
   }
 
-  path.push_back( m_Graph->GetNodeInfo( first_point ) );
+  //path.push_back( m_Graph->GetNodeInfo( first_point ) );
   unsigned int l_ActualNode = first_point;
 
   std::vector<unsigned int> l_ClosedSet;
@@ -131,13 +131,17 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
     }
     if (l_ActualNode == last_point)
     {
-      path.push_back(m_Graph->GetNodeInfo(l_ActualNode));
+      std::vector<Math::Vect3f> l_path;
+      l_path.push_back(m_Graph->GetNodeInfo(l_ActualNode));
       while (l_CameFrom.find(l_ActualNode) != l_CameFrom.end())
       {
         l_ActualNode = l_CameFrom[l_ActualNode];
-        path.push_back(m_Graph->GetNodeInfo( l_ActualNode ));
+        l_path.push_back(m_Graph->GetNodeInfo( l_ActualNode ));
       }
-      path.push_back( m_Graph->GetNodeInfo( last_point ) );
+      for (int i=l_path.size()-1; i>=0; --i)
+        path.push_back(l_path[i]);
+
+      //path.push_back( m_Graph->GetNodeInfo( last_point ) );
 
       path.push_back( final_pos );
       return path;
