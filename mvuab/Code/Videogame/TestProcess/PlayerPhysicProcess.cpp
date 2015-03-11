@@ -93,6 +93,7 @@ void CPlayerPhysicProcess::Update()
     CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
     CStaticMeshManager::GetSingletonPtr()->Reload();
     CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
+	CLightManager::GetSingletonPtr()->ReLoad();
     CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
   }
 

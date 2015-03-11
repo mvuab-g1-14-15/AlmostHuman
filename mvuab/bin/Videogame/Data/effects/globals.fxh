@@ -8,7 +8,7 @@
 #define DIR_LIGHT   1
 #define SPOT_LIGHT  2
 
-#define SHADOW_EPSILON 0.00005f
+#define SHADOW_EPSILON 0.001f
 
 #define PI          3.14159265359
 #define Deg2Rad(x)  (x * PI / 180.0)
