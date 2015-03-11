@@ -1,5 +1,6 @@
 #include "PlayerPhysicProcess.h"
 #include "Items\Grenade.h"
+#include "Items\Blaster.h"
 
 //AI
 #include "Graph\Graph.h"
@@ -45,6 +46,7 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
   CHECKED_DELETE( m_Grenade );
+  CHECKED_DELETE( m_Blaster );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -138,6 +140,20 @@ void CPlayerPhysicProcess::Update()
 
 
   //////////////////////////////////////////////////////
+  ////////////        DISPARO               ////////////
+  //////////////////////////////////////////////////////
+
+  if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
+  {
+    CCamera* l_CurrentCamera =
+      CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+
+    if ( l_CurrentCamera )
+      m_Blaster->Update();
+  }
+
+
+  //////////////////////////////////////////////////////
   ////////////        UPDATE GRENADE        ////////////
   //////////////////////////////////////////////////////
   m_Grenade->Update();
@@ -200,6 +216,7 @@ void CPlayerPhysicProcess::Init()
   ////////////        CREATE GRENADE       ///////////
   ////////////////////////////////////////////////////
   m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
 
   /////////////////////////////////////////////////////////////////
   ////////////        CREATE CHARACTERCONTROLLER        ///////////
