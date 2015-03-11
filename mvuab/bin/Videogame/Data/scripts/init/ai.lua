@@ -4,11 +4,11 @@ tiempoDeEspera = 0
 
 function set_initial_waypoint()
 	enemy = Enemy_Manager:GetActualEnemy()
-	local process = Singleton_Engine.get_singleton():GetProcess()
-	local enemyPosition = Vect3f(enemy:GetPosition())
-	enemyPosition.y = 0
-	local m_WaypointPoint = VectorWaypoints(process:GetAStarScene():GetPath(enemyPosition, Vect3f(6, 0, 6)))
-	enemy:SetWaypoints(m_WaypointPoint)
+	--local process = Singleton_Engine.get_singleton():GetProcess()
+	--local enemyPosition = Vect3f(enemy:GetPosition())
+	--enemyPosition.y = 0
+	--local m_WaypointPoint = VectorWaypoints(process:GetAStarScene():GetPath(enemyPosition, Vect3f(6, 0, 6)))
+	--enemy:SetWaypoints(m_WaypointPoint)
 	enemy:SetCurrentPoint(0)
 	enemy:SetExit(true)
 end

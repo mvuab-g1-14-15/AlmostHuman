@@ -5,6 +5,7 @@
 
 CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node )
   : CEnemy( Node ), m_CurrentPoint( 0 )
+  , m_RouteId(Node.GetIntProperty("route", -1))
 {
 }
 
