@@ -728,7 +728,24 @@ void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, 
                                    &m_CylinderMesh, 0 ) ) )
     return;
 
-  m_CylinderMesh->DrawSubset( 0 );
+  CEffectTechnique* EffectTechnique =
+    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  EffectTechnique->SetDebugColor( Color );
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+  UINT l_NumPasses = 0;
+  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+
+  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) ) return;
+
+  for ( UINT b = 0; b < l_NumPasses; ++b )
+  {
+    l_Effect->BeginPass( b );
+    m_CylinderMesh->DrawSubset( 0 );
+    l_Effect->EndPass();
+  }
+
+  l_Effect->End();
   CHECKED_RELEASE( m_CylinderMesh );
 }
 
