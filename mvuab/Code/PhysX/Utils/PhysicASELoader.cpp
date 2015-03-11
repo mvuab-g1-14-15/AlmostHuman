@@ -17,8 +17,7 @@ char* CPhysicASELoader::TrimFront(char* c)
 }
 
 
-bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Math::Vect3f>&vertices,
-																			 std::vector<uint32>& faces ) 
+bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces ) 
 {
 	FILE* f = NULL;
 	fopen_s(&f, fileName.c_str(), "rb");
@@ -27,6 +26,9 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Math::
 		//TODO....printf("File not found: %s\n", filename.c_str());
 		return false;
 	}
+
+	std::vector<Math::Vect3f> vertices;
+	std::vector<unsigned int> faces;
 
 	char line[512];
 	int linenbr = 0;
@@ -37,6 +39,12 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Math::
 		if (!strncmp(l, "*MESH {", 7)) 
 		{
 			ReadMeshFromASE_aux(f, vertices, faces);
+
+			_Vertices.push_back(vertices);
+			_Faces.push_back(faces);
+
+			vertices.clear();
+			faces.clear();
 		} 
 		else 
 		{
@@ -47,11 +55,12 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<Math::
 	return true;
 };
 
-void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f>&vertices, std::vector<uint32>& faces ) 
+void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f> &vertices, std::vector<uint32> &faces ) 
 {
 	char line[512];
 	int nbVertices = 0;
 	int nbFaces = 0;
+
 	while(true)
 	{
 		fgets(line, 512, f);
