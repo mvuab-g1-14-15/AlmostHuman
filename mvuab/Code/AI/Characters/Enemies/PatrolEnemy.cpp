@@ -11,6 +11,7 @@ CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node )
 
 CPatrolEnemy::~CPatrolEnemy( void )
 {
+  //Destroy();
 }
 
 void CPatrolEnemy::Init()

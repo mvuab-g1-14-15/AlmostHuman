@@ -19,6 +19,11 @@ CCharacter::CCharacter( const std::string& Name )
 
 CCharacter::~CCharacter()
 {
+  Destroy();
+}
+
+void CCharacter::Destroy()
+{
   if ( m_init )
   {
     CPhysicUserData* l_PUD = m_PController->GetUserData();

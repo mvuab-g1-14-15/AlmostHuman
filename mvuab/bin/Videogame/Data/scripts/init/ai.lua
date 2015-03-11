@@ -1,7 +1,7 @@
 core = Singleton_Core.get_singleton()
 Enemy_Manager = core:GetEnemyManager()
-physicManager = core:GetPhysicsManager()
 tiempoDeEspera = 0
+
 function set_initial_waypoint()
 	enemy = Enemy_Manager:GetActualEnemy()
 	local process = Singleton_Engine.get_singleton():GetProcess()
@@ -32,11 +32,11 @@ function andar()
 	local vector_distz = targetPosition.z - enemy_pos.z
 	if (vector_distz < 0.1 and vector_distz > -0.1) and (vector_distx < 0.1 and vector_distx > -0.1)  then
 		local currentPoint = enemy:GetCurrentPoint()
+		enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
+		enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint))
 		if currentPoint+1 == (enemy:getCount()) then
 			enemy:SetExit(true)
-		else
-			enemy:setTargetPosition(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
-			enemy:SetTargetPositionOriginal(VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint+1))
+		else	
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
 	end

@@ -449,7 +449,7 @@ void CGraphicsManager::DrawCube( float32 Size )
 
 void CGraphicsManager::DrawCube( float32 Size, Math::CColor Color )
 {
-  DrawBox( Size, Size, Size, Math::colWHITE );
+  DrawBox( Size, Size, Size, Color );
 }
 
 void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color )

@@ -21,6 +21,7 @@ public:
   virtual void Init( CXMLTreeNode& Node );
   virtual void Update();
   virtual void Render();
+  void Destroy();
   GET_SET( Math::Vect3f, TargetPosition );
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );

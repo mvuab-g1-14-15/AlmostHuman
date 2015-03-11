@@ -82,7 +82,7 @@ void CAStarProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ void CAStarProcess::InitSceneCharacterController()
 
 void CAStarProcess::Init()
 {
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
   m_pAStarScene = new CAStar();
   m_pAStarScene->Init();
@@ -111,10 +111,10 @@ void CAStarProcess::Init()
 
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colBLACK );
+  l_PUD->SetColor( colWHITE );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -0.5f,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -3.0f,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
@@ -153,7 +153,7 @@ void CAStarProcess::Render()
   m.SetIdentity();
   pGraphicsManager->SetTransform(m);*/
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
 }
 
 void CAStarProcess::RenderDebugInfo()
