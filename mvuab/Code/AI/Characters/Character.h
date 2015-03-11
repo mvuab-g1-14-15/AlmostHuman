@@ -21,6 +21,7 @@ public:
   virtual void Init( CXMLTreeNode& Node );
   virtual void Update();
   virtual void Render();
+  void Destroy();
   GET_SET( Math::Vect3f, TargetPosition );
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
@@ -36,6 +37,9 @@ private: // Members
   float32       m_Speed;
   float32             m_Life;
   bool m_init;
+
+  float m_Height;
+  float m_Radius;
 
 private: // Methods
   void ExecuteAI();

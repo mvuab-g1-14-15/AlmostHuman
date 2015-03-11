@@ -26,8 +26,8 @@ CEnemyManager::~CEnemyManager()
 void CEnemyManager::Destroy()
 {
   m_CoreEnemies.Destroy();
-  m_StateMachines.Destroy();
   CMapManager::Destroy();
+  m_StateMachines.Destroy();
 }
 
 void CEnemyManager::Update()
@@ -43,6 +43,10 @@ void CEnemyManager::Update()
 
 void CEnemyManager::Render()
 {
+  TMapResource::iterator it = m_Resources.begin();
+
+  for ( ; it != m_Resources.end(); ++it )
+    it->second->Render();
 }
 
 void CEnemyManager::Init( const std::string& Filename )
@@ -151,7 +155,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     {
       CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
       lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-      lEnemy->Init();
+
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
 

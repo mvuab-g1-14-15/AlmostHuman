@@ -146,6 +146,7 @@ void CCore::Render()
   m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
   m_pPhysicsManager->DebugRender( m_pGraphicsManager );
+  m_pEnemyManager->Render();
 }
 
 void CCore::LoadXml()
@@ -270,7 +271,10 @@ void CCore::InitManagers()
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
                                Math::Vect3f( 15.0f, 2.0f, 0.0f ),
                                Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
-  m_pCameraManager->SetCurrentCamera( "TestProcessCam" );
+  m_pCameraManager->NewCamera( CCamera::FirstPerson, "Plane",
+                               Math::Vect3f( 0.0f, 15.0f, 0.0f ),
+                               Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
+  m_pCameraManager->SetCurrentCamera( "Plane" );
   m_pScriptManager->Initialize();
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );

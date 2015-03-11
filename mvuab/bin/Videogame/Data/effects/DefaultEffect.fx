@@ -22,6 +22,7 @@ VertexPS mainVS(TNORMAL_T1_VERTEX IN)
 
 float4 mainPS(VertexPS IN) : COLOR
 {	
+	return g_DebugColor;
 	// Obtain the normal of the face and the position
 	float3 l_Normal= normalize(IN.Normal);
 				

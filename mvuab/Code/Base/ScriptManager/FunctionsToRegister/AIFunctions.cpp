@@ -17,6 +17,7 @@
 #include "Object3D.h"
 #include <vector>
 #include "Math\Vector3.h"
+#include "Pathfinding\AStar.h"
 
 using namespace luabind;
 using namespace Math;
@@ -127,4 +128,11 @@ void registerAI( lua_State* m_LS )
     .def( "getEnemy", &CEnemyManager::GetResource )
     .def( "GetActualEnemy", &CEnemyManager::GetActualEnemy )
   ];
+  module( m_LS )
+  [
+    class_<CAStar>( "CAStar" )
+    .def( constructor<>() )
+    .def( "GetPath", &CAStar::GetPath )
+  ];
+
 }

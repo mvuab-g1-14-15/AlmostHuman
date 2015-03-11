@@ -32,8 +32,10 @@ function update()
 	local current_camera = camera_manager:GetCurrentCamera()
 	local enable = current_camera:GetEnable()
 	if enable == true then
-		move_player( dt )
+		--move_player( dt )
 		move_light( dt )
+		--move_point_inicial( dt )
+		--move_point_final ( dt )
 	end
 end
 
@@ -161,6 +163,46 @@ function move( flag_speed, forward, strafe, dt )
 	current_camera:SetPos(posicion)
 	
 	
+end
+
+function move_point_inicial( dt )
+	process = Singleton_Engine.get_singleton():GetProcess()
+	local pointPos = process:GetPointInicial();
+	
+	local addPos = Vect3f(0, 0, 0)
+	
+	if action_manager:DoAction("Left") then
+		addPos.z = 1 * dt * g_Speed
+	elseif action_manager:DoAction("Right") then
+		addPos.z = -1 * dt * g_Speed
+	end
+	if action_manager:DoAction("Backward") then
+		addPos.x = - 1 * dt * g_Speed
+	elseif action_manager:DoAction("Forward") then
+		addPos.x = 1 * dt * g_Speed
+	end
+	
+	process:SetPointInicial(pointPos+addPos)
+end
+
+function move_point_final( dt )
+	process = Singleton_Engine.get_singleton():GetProcess()
+	local pointPos = process:GetPointFinal();
+	
+	local addPos = Vect3f(0, 0, 0)
+	
+	if action_manager:DoAction("MoveLeft") then
+		addPos.z = 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveRight") then
+		addPos.z = -1 * dt * g_Speed
+	end
+	if action_manager:DoAction("MoveBackward") then
+		addPos.x = - 1 * dt * g_Speed
+	elseif action_manager:DoAction("MoveForward") then
+		addPos.x = 1 * dt * g_Speed
+	end
+	
+	process:SetPointFinal(pointPos+addPos)
 end
 
 function render()
