@@ -44,7 +44,7 @@ void CCharacter::Update()
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
-  if ( l_Cantidad < 5.0f )
+  if ( l_Cantidad < 50.0f )
     SetTargetPosition( l_CharacterController->GetPosition() );
   else
     SetTargetPosition( m_TargetPositionOriginal );
@@ -111,8 +111,8 @@ void CCharacter::Init()
 void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
-  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 0.5f ),
-                                         Node.GetFloatProperty( "height", 2.0f ),
+  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 4.0f ),
+                                         Node.GetFloatProperty( "height", 12.0f ),
                                          Node.GetFloatProperty( "slope", 0.2f ),
                                          Node.GetFloatProperty( "skin_width", 0.5f ),
                                          Node.GetFloatProperty( "step", 0.5f ),
@@ -139,7 +139,7 @@ CPhysicUserData* CCharacter::GetPhysicsUserData()
   CPhysicUserData* l_PUD = new CPhysicUserData( l_UserDataName );
   // TODO CHECK THIS
   l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
+  l_PUD->SetColor( Math::CColor(0.3, 0.3, 0.3, 1) );
   // TODO CHECK THIS
   return l_PUD;
 }

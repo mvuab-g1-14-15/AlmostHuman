@@ -455,27 +455,43 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
       Math::CColor color = physicUserData->GetColor();
-      translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
-      total = m * translation;
-      _RM->SetTransform( total );
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+
+	Math::Mat44f t;
+	t.RotByAngleX(3.1415/2);
+	_RM->SetTransform(m*t);
+	_RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false);
+	t.SetIdentity();
+	t.Translate(Math::Vect3f(0,height*0.5f,0));
+	_RM->SetTransform(m*t);
+	_RM->DrawSphere(radius, color, MAX_ARISTAS);
+	t.SetIdentity();
+	t.Translate(Math::Vect3f(0,-height*0.5f,0));
+	_RM->SetTransform(m*t);
+	_RM->DrawSphere(radius, color, MAX_ARISTAS);
+	t.SetIdentity();
+	_RM->SetTransform(m*t);
+
+      //translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
+      //total = m * translation;
+      //_RM->SetTransform( total );
+      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
       //_RM->DrawCapsule( radius, height, 10, color );
       //_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
-      translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
+      /*translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
       total = m * translation;
-      _RM->SetTransform( total );
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      _RM->SetTransform( total );*/
+      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
 
       //_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
       /* By XMA */
-      for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )
-      {
-        translation.Translate( Math::Vect3f( 0.f, h, 0.f ) );
-        total = m * translation;
-        _RM->SetTransform( total );
-        /*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
-        else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
-      }
+      //for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )
+      //{
+      //  translation.Translate( Math::Vect3f( 0.f, h, 0.f ) );
+      //  total = m * translation;
+      //  _RM->SetTransform( total );
+      //  /*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
+      //  else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
+      //}
 
       //_RM->DrawCylinder(radius, MAX_ARISTAS, -height, color); // By XMA
     }

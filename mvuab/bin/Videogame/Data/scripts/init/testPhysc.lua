@@ -117,7 +117,7 @@ function move_player( dt )
 	local Yaw = current_camera:GetYaw()
 	character_controller:SetYaw(Yaw)
 	if action_manager:DoAction("Jump") then
-		character_controller:Jump(150)
+		character_controller:Jump(75)
 	end
 end
 
@@ -146,21 +146,21 @@ function move( flag_speed, forward, strafe, dt )
     addPos = addPos * constant;
 	character_controller:Move(addPos, dt)
 	character_controller:SetYaw(Yaw)
-	current_camera:SetPos(character_controller:GetPosition())
+	local position = Vect3f(character_controller:GetPosition())
+	position.y = position.y + (character_controller:GetHeight()/2)
 	local size = character_controller:GetHeight()
-	local posicion = Vect3f(current_camera:GetPos())
 	if g_Flag_agacharse == 1 then
-		posicion.y = posicion.y - 2
+		position.y = position.y - 2
 		size = size/2
 	elseif g_Levantado == 0 then
-		posicion.y = posicion.y + 2
+		position.y = position.y + 2
 		size = size*2
 		g_Levantado = 1
-		character_controller:SetPosition(posicion)
+		character_controller:SetPosition(position)
 	end
 	
 	character_controller:SetHeight(size)
-	current_camera:SetPos(posicion)
+	current_camera:SetPos(position)
 	
 	
 end

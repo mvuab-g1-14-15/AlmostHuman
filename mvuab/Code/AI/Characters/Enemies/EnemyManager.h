@@ -34,6 +34,7 @@ private:
   std::string                  m_Filename;
   CMapManager<CStateMachine>   m_StateMachines;
   CMapManager<CCoreEnemy>      m_CoreEnemies;
+  std::map<unsigned int, std::vector<Math::Vect3f>> m_Routes;
 
   CEnemy*                  m_ActualEnemy;
 
@@ -41,6 +42,7 @@ private:
   void AddNewStateMachine( const std::string& Name, const std::string& SMFileName );
   void AddNewCoreEnemy( CXMLTreeNode& Node );
   void AddNewEnemy( CXMLTreeNode& Node );
+  void AddNewRoute( CXMLTreeNode& Node );
 public:
   CEnemyManager();
   ~CEnemyManager();

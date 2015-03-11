@@ -223,13 +223,14 @@ void CPlayerPhysicProcess::Init()
   /////////////////////////////////////////////////////////////////
   CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
   userData->SetPaint( true );
-  userData->SetColor( colWHITE );
+  userData->SetColor( colRED );
   m_vPUD.push_back( userData );
-  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( Math::Vect3f( -143, 51, -87 ) );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
-  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
+  
+  Math::Vect3f l_Pos = Math::Vect3f( -143, 58, -87 );
+  m_PhysicController = new CPhysicController( 2, 12, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
   l_PM->AddPhysicController( m_PhysicController );
+  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos(Math::Vect3f(l_Pos.x, l_Pos.y + (m_PhysicController->GetHeight()/2), l_Pos.z)  );
 
 
   //InitSceneCharacterController();
@@ -325,9 +326,6 @@ void CPlayerPhysicProcess::Render()
       Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
       d );
   // END: TO DELETE LATER IF IS NOT NECESSARY
-
-
-  pGraphicsManager->DrawCapsule( 10.0, 20.0 );
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()
