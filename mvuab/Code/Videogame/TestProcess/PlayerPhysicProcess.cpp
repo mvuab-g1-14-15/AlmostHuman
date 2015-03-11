@@ -211,18 +211,6 @@ void CPlayerPhysicProcess::Init()
       userData, l_Pos );
   l_PM->AddPhysicController( m_PhysicController );
 
-  ////////////////////////////////////////////////////
-  ////////////        CREATE PLANE       /////////////
-  ////////////////////////////////////////////////////
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colMAGENTA );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, -12.0f, 1000 ), Math::Vect3f( 0, 0,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
 
   //InitSceneCharacterController();
 
@@ -242,7 +230,7 @@ void CPlayerPhysicProcess::Init()
   CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
   CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
 
-  std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
+ /* std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
 
   std::map<std::string, CStaticMesh*>::iterator it = l_MeshMap.begin(), it_end = l_MeshMap.end();
 
@@ -274,10 +262,10 @@ void CPlayerPhysicProcess::Init()
     l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
-  m_vPA.push_back( l_AseMeshActor );
+  m_vPA.push_back( l_AseMeshActor );*/
 
 
-  /*if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   {
     l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
     m_vPUD.push_back( l_pPhysicUserDataASEMesh );
@@ -290,7 +278,7 @@ void CPlayerPhysicProcess::Init()
     //m_AseMeshActor->CreateBody ( 10.f );
     CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
     m_vPA.push_back( l_AseMeshActor );
-  }*/
+  }
 
 }
 
