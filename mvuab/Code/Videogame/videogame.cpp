@@ -99,8 +99,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
     //pEngine->Init( new CVideogameProcess(), "./Data/config.xml", hWnd );
     //pEngine->Init( new CTestProcess(), "./Data/config.xml", hWnd );
     //pEngine->Init( new CPhysicProcess(), "./Data/config.xml", hWnd );
-    //pEngine->Init( new CPlayerPhysicProcess(), "./Data/config.xml", hWnd );
-    pEngine->Init( new CAStarProcess(), "./Data/config.xml", hWnd );
+    pEngine->Init( new CPlayerPhysicProcess(), "./Data/config.xml", hWnd );
+   // pEngine->Init( new CAStarProcess(), "./Data/config.xml", hWnd );
     SetWindowPos( hWnd, 0, CCore::GetSingletonPtr()->GetWindowXPos(),
                   CCore::GetSingletonPtr()->GetWindowYPos(),
                   CCore::GetSingletonPtr()->GetScreenWidth(),
