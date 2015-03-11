@@ -225,25 +225,20 @@ void CPlayerPhysicProcess::Init()
   userData->SetPaint( true );
   userData->SetColor( colRED );
   m_vPUD.push_back( userData );
-  
-  Math::Vect3f l_Pos = Math::Vect3f( -143, 58, -87 );
-  m_PhysicController = new CPhysicController( 2, 12, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
+  //Sala 1
+  //Math::Vect3f l_Pos = Math::Vect3f( 0, 2, 1);
+  //Sala sigilo
+  //Math::Vect3f l_Pos = Math::Vect3f( -0.66, 0, 17 );
+  //Sala disparo
+  //Math::Vect3f l_Pos = Math::Vect3f( 40, -15, -8);
+  //Sala cadena montaje
+  //Math::Vect3f l_Pos = Math::Vect3f( 141, 35, -17);
+  //Sala hangar
+  Math::Vect3f l_Pos = Math::Vect3f( 104, 22, 198);
+  m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
   l_PM->AddPhysicController( m_PhysicController );
   CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos(Math::Vect3f(l_Pos.x, l_Pos.y + (m_PhysicController->GetHeight()/2), l_Pos.z)  );
-
-
-  //InitSceneCharacterController();
-
-  //   // Create physic escene with ASE file
-  //   CPhysicCookingMesh* l_PCM = new CPhysicCookingMesh();
-  //   l_PCM->Init( l_PM->GetPhysicsSDK(), 0 );
-  //   l_PCM->CreateMeshFromASE( "Data/a.ASE", "Escenario" );
-  //
-  //   CPhysicUserData* l_PUD2 = new CPhysicUserData( "Plane" );
-  //   CPhysicActor* l_pActor = new CPhysicActor( l_PUD2 );
-  //   //l_pActor3->AddMeshShape(CORE->GetPhysicsManager()->GetCookingMesh()->GetPhysicMesh("Malla_Fisicas"),Vect3f(-24.7306, 2.7749, -3.29779));
-  //   l_pActor->AddMeshShape( l_PCM->GetPhysicMesh( "Escenario" ), Vect3f( 0, -5, 0 ) );
 
   CPhysicUserData* l_pPhysicUserDataASEMesh;
   CPhysicActor*  l_AseMeshActor;
@@ -289,6 +284,7 @@ void CPlayerPhysicProcess::Init()
   if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   {
     l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+    l_pPhysicUserDataASEMesh->SetColor(Math::colBLACK);
     m_vPUD.push_back( l_pPhysicUserDataASEMesh );
     l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
@@ -315,7 +311,7 @@ void CPlayerPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
-  m_pAStarScene->Render();
+  //m_pAStarScene->Render();
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
@@ -326,6 +322,8 @@ void CPlayerPhysicProcess::Render()
       Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
       d );
   // END: TO DELETE LATER IF IS NOT NECESSARY
+
+  m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()

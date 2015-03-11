@@ -36,6 +36,9 @@
     <ClCompile Include="TestProcess\AStarProcess.cpp">
       <Filter>TestProcess</Filter>
     </ClCompile>
+    <ClCompile Include="Items\Blaster.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestProcess.h" />
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="TestProcess\AStarProcess.h">
       <Filter>TestProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Blaster.h">
+      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
