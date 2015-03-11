@@ -21,8 +21,6 @@ void CPatrolEnemy::Init()
 void CPatrolEnemy::Update( )
 {
   CEnemy::Update();
-  /*SetTargetPosition(m_Waypoints[m_CurrentPoint]);
-  SetTargetPositionOriginal(m_Waypoints[m_CurrentPoint]);*/
   CCharacter::Update();
 }
 

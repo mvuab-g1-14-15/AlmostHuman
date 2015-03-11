@@ -41,7 +41,6 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
   , m_uCollisionGroups( _uiCollisionGroups )
   , m_bUseGravity( true )
   , m_Type( ::CAPSULE )
-  , CObject3D()
 
 {
   assert( _pUserData );

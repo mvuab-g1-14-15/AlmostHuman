@@ -131,7 +131,7 @@ void CCore::Update()
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
   m_pPhysicsManager->Update( deltaTime );
-  //m_pEnemyManager->Update();
+  m_pEnemyManager->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
@@ -274,12 +274,12 @@ void CCore::InitManagers()
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "Plane",
                                Math::Vect3f( 0.0f, 15.0f, 0.0f ),
                                Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
-  m_pCameraManager->SetCurrentCamera( "Plane" );
+  m_pCameraManager->SetCurrentCamera( "TestProcessCam" );
   m_pScriptManager->Initialize();
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
   m_pPhysicsManager->Init();
-  //m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
+  m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
 }
 

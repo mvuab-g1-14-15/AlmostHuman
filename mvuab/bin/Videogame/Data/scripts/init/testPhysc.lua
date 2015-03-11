@@ -32,7 +32,7 @@ function update()
 	local current_camera = camera_manager:GetCurrentCamera()
 	local enable = current_camera:GetEnable()
 	if enable == true then
-		--move_player( dt )
+		move_player( dt )
 		move_light( dt )
 		--move_point_inicial( dt )
 		--move_point_final ( dt )

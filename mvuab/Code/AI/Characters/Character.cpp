@@ -38,16 +38,16 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-  /*CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
+  CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
   CPhysicController* l_CharacterController = l_PUD->GetController();
   Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_PController->GetPosition();
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
-  if ( l_Cantidad < 30.0f )
+  if ( l_Cantidad < 5.0f )
     SetTargetPosition( l_CharacterController->GetPosition() );
   else
-    SetTargetPosition( m_TargetPositionOriginal );*/
+    SetTargetPosition( m_TargetPositionOriginal );
 
   Math::Vect3f l_Position = m_PController->GetPosition();
   float l_Yaw = m_PController->GetYaw();
@@ -111,11 +111,11 @@ void CCharacter::Init()
 void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
-  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 1.0f ),
-                                         Node.GetFloatProperty( "height", 1.0f ),
-                                         Node.GetFloatProperty( "slope", 2.0f ),
-                                         Node.GetFloatProperty( "skin_width", 2.0f ),
-                                         Node.GetFloatProperty( "step", 2.0f ),
+  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 0.5f ),
+                                         Node.GetFloatProperty( "height", 2.0f ),
+                                         Node.GetFloatProperty( "slope", 0.2f ),
+                                         Node.GetFloatProperty( "skin_width", 0.5f ),
+                                         Node.GetFloatProperty( "step", 0.5f ),
                                          GetCollisionGroup(), GetPhysicsUserData(),
                                          Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
                                          Node.GetFloatProperty( "gravity", -10.0f ) );
@@ -123,7 +123,8 @@ void CCharacter::Init( CXMLTreeNode& Node )
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
   SetPosition( m_PController->GetPosition() );
-  SetTargetPosition( m_PController->GetPosition() );
+  SetTargetPosition( m_PController->GetPosition() );  
+  SetTargetPositionOriginal( m_PController->GetPosition() );
   m_init = true;
 }
 

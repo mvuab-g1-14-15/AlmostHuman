@@ -52,7 +52,7 @@ CAStarProcess::~CAStarProcess()
 
   m_vPUD.clear();
 
-  //CHECKED_DELETE(m_PhysicController);
+  CHECKED_DELETE(m_PhysicController);
 }
 
 void CAStarProcess::Update()
@@ -82,7 +82,7 @@ void CAStarProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,21 +100,21 @@ void CAStarProcess::Init()
   m_pAStarScene = new CAStar();
   m_pAStarScene->Init();
 
-  /*CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
+  CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
   userData->SetPaint( true );
   userData->SetColor( colWHITE );
   m_vPUD.push_back( userData );
   Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
   m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
-  l_PM->AddPhysicController( m_PhysicController );*/
+  l_PM->AddPhysicController( m_PhysicController );
 
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
   l_PUD->SetColor( colWHITE );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -3.0f,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -0.5f,
                                0 ) );
   m_vPA.push_back( l_pPhysicActor );
   l_PM->AddPhysicActor( l_pPhysicActor );
@@ -153,7 +153,7 @@ void CAStarProcess::Render()
   m.SetIdentity();
   pGraphicsManager->SetTransform(m);*/
 
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
 }
 
 void CAStarProcess::RenderDebugInfo()
