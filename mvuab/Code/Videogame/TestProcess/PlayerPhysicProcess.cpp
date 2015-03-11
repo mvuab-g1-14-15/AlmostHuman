@@ -4,6 +4,7 @@
 //AI
 #include "Graph\Graph.h"
 #include "Characters\Character.h"
+#include "Pathfinding\AStar.h"
 
 //BASE
 #include "Logger\Logger.h"
@@ -60,6 +61,7 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
   m_vCharacter.clear();
   CHECKED_DELETE( m_PhysicController );
+  CHECKED_DELETE( m_pAStarScene );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -206,6 +208,7 @@ void CPlayerPhysicProcess::Init()
   userData->SetPaint( true );
   userData->SetColor( colWHITE );
   m_vPUD.push_back( userData );
+  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos(Math::Vect3f(-143, 51, -87));
   Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
   m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
@@ -280,13 +283,20 @@ void CPlayerPhysicProcess::Init()
     m_vPA.push_back( l_AseMeshActor );
   }
 
+  m_pAStarScene = new CAStar();
+  m_pAStarScene->Init();
+
+  m_PointInicial = Math::Vect3f( 6, 0, -6 );
+  m_PointFinal = Math::Vect3f( 6, 0, 6 );
+  m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
+
 }
 
 void CPlayerPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
-
+  m_pAStarScene->Render();
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();

@@ -1,34 +1,49 @@
 <graph>
-	<node id="0" pos="0 0 0"/>
-	<node id="1" pos="5 0 0"/>
-	<node id="2" pos="5 0 5"/>
-	<node id="3" pos="0 0 5"/>
-	<node id="4" pos="-5 0 0"/>
-	<node id="5" pos="-5 0 -5"/>
-	<node id="6" pos="0 0 -5"/>
-	<node id="7" pos="-5 0 5"/>
-	<node id="8" pos="5 0 -5"/>
+	<node id="0" pos="25 -34 72"/>
+	<node id="1" pos="-54 -34 72"/>
+	<node id="2" pos="-147 -34 72"/>
+	<node id="3" pos="25 -34 11"/>
+	<node id="4" pos="-54 -34 11"/>
+	<node id="5" pos="-147 -34 11"/>
+	<node id="6" pos="25 -34 -49"/>
+	<node id="7" pos="-54 -34 -49"/>
+	<node id="8" pos="-147 -34 -49"/>
+	<node id="9" pos="25 -34 -115"/>
+	<node id="10" pos="-54 -34 -115"/>
+	<node id="11" pos="-147 -34 -115"/>
 	
+	<weight src="0" dst="5" value="1"/>
 	<weight src="0" dst="1" value="1"/>
+	<weight src="1" dst="0" value="1"/>
+	<weight src="1" dst="4" value="1"/>
 	<weight src="1" dst="2" value="1"/>
+	<weight src="2" dst="1" value="1"/>
 	<weight src="2" dst="3" value="1"/>
-	<weight src="3" dst="0" value="1"/>
+	<weight src="3" dst="2" value="1"/>
+	<weight src="3" dst="4" value="1"/>
+	<weight src="3" dst="8" value="1"/>
+	<weight src="4" dst="1" value="1"/>
+	<weight src="4" dst="3" value="1"/>
+	<weight src="4" dst="7" value="1"/>
 	<weight src="4" dst="5" value="1"/>
+	<weight src="5" dst="4" value="1"/>
+	<weight src="5" dst="6" value="1"/>
 	<weight src="5" dst="0" value="1"/>
 	<weight src="6" dst="5" value="1"/>
-	<weight src="7" dst="0" value="1"/>
-	<weight src="8" dst="6" value="1"/>
-	
-	<weight src="0" dst="2" value="1"/>
-	<weight src="2" dst="0" value="1"/>
-	
-	<weight src="1" dst="0" value="1"/>
-	<weight src="2" dst="1" value="1"/>
-	<weight src="3" dst="2" value="1"/>
-	<weight src="0" dst="3" value="1"/>
-	<weight src="5" dst="4" value="1"/>
-	<weight src="0" dst="5" value="1"/>
-	<weight src="5" dst="6" value="1"/>
-	<weight src="0" dst="7" value="1"/>
-	<weight src="6" dst="8" value="1"/>
+	<weight src="6" dst="7" value="1"/>
+	<weight src="6" dst="11" value="1"/>	
+	<weight src="7" dst="4" value="1"/>
+	<weight src="7" dst="6" value="1"/>
+	<weight src="7" dst="8" value="1"/>
+	<weight src="7" dst="10" value="1"/>
+	<weight src="8" dst="7" value="1"/>
+	<weight src="8" dst="9" value="1"/>
+	<weight src="8" dst="3" value="1"/>
+	<weight src="9" dst="8" value="1"/>
+	<weight src="9" dst="10" value="1"/>
+	<weight src="10" dst="7" value="1"/>
+	<weight src="10" dst="9" value="1"/>
+	<weight src="10" dst="11" value="1"/>
+	<weight src="11" dst="10" value="1"/>
+	<weight src="11" dst="6" value="1"/>
 </graph>

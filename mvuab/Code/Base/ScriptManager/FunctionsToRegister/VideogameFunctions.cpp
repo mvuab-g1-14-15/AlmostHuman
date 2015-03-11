@@ -46,6 +46,11 @@ void registerVideogame( lua_State* m_LS )
     .def( "AddPudVector", &CPlayerPhysicProcess::AddPudVector )
     .def( "GetNewController", &CPlayerPhysicProcess::GetNewController )
     .def( "GetNewCharacter", &CPlayerPhysicProcess::GetNewCharacter )
+	.def( "GetPointInicial", &CPlayerPhysicProcess::GetPointInicial )
+    .def( "SetPointInicial", &CPlayerPhysicProcess::SetPointInicial )
+	.def( "GetPointFinal", &CPlayerPhysicProcess::GetPointFinal )
+    .def( "SetPointFinal", &CPlayerPhysicProcess::SetPointFinal )
+	.def( "GetAStarScene", &CPlayerPhysicProcess::GetAStarScene)
   ];
   module( m_LS )
   [

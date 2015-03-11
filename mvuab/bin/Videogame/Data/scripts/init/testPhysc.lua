@@ -117,7 +117,7 @@ function move_player( dt )
 	local Yaw = current_camera:GetYaw()
 	character_controller:SetYaw(Yaw)
 	if action_manager:DoAction("Jump") then
-		character_controller:Jump(50)
+		character_controller:Jump(150)
 	end
 end
 

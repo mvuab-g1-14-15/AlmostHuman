@@ -5,5 +5,6 @@
 	<core_enemy type="patroll" life="75" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy8" type="patroll" pos="6 3 -6" yaw="0.0"/>
+	<enemy name="Enemy1" type="patroll" pos="6 3 -6" yaw="0.0"/>
+	<enemy name="Enemy2" type="patroll" pos="6 3 -6" yaw="0.0"/>
 </enemies>
