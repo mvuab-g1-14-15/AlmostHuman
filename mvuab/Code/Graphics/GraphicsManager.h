@@ -35,7 +35,7 @@ public:
   void EndScene();
   void EndRender();
   void SetTransform( D3DXMATRIX& matrix );
-  void SetTransform( Math::Mat44f& matrix );
+  void SetTransform(const Math::Mat44f& matrix );
   void EnableAlphaBlend();
   void DisableAlphaBlend();
   void EnableZBuffering();

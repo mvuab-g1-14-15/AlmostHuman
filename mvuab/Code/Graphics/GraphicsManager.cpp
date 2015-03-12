@@ -553,7 +553,7 @@ void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 
-void CGraphicsManager::SetTransform( Math::Mat44f& m )
+void CGraphicsManager::SetTransform(const Math::Mat44f& m )
 {
   D3DXMATRIX aux
   (

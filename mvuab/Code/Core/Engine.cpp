@@ -26,8 +26,13 @@ CEngine::~CEngine()
 
 void CEngine::Update()
 {
+  // Update Time (EEEPC 1215B): 6.5ms
   m_pCore->Update();
+  
+  // Update Time (EEEPC 1215B): 5.0ms
   m_pProcess->Update();
+ 
+  // Update Time (EEEPC 1215B): 0.4ms
   m_pLogRender->Update();
 }
 
@@ -36,15 +41,21 @@ void CEngine::Render()
   /*CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
   srcm->Execute();
   return;*/
-  //// Obtain an instance to the graphics manager
+
   CGraphicsManager* pGraphicsManager = GraphicsInstance ;
-  //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
   pGraphicsManager->BeginRender();
   pGraphicsManager->SetupMatrices();
+
+  // Render Time (EEEPC 1215B): 4.5ms
   m_pCore->Render();
+
+  // Render Time (EEEPC 1215B): 15.5ms
   m_pProcess->Render();
+    
+  // Render Time (EEEPC 1215B): 1.0ms
   m_pLogRender->Render();
-  //pGraphicsManager->RenderCursor();
+  
+   // Render Time (EEEPC 1215B): 1.7ms
 #if _DEBUG
   pGraphicsManager->DisableZBuffering();
   pGraphicsManager->EnableAlphaBlend();
