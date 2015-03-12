@@ -38,6 +38,9 @@
 #include "Actor\PhysicController.h"
 #include "Cooking Mesh\PhysicCookingMesh.h"
 
+
+#include <algorithm>
+
 CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 {
 }
@@ -88,9 +91,13 @@ void CPlayerPhysicProcess::Update()
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
   {
+    // CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "reload()" );
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+    //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   }
+
+  if ( pActionManager->DoAction( "ChangeRoom" ) )
+    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
@@ -363,4 +370,18 @@ CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, floa
 {
   m_vController.push_back( new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset, ECG_PLAYER, _pUserData, _vPos, _fGravity ) );
   return m_vController[ m_vController.size() - 1 ];
+}
+
+void              CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
+{
+  std::vector<CPhysicController*>::iterator it = std::find( m_vController.begin(), m_vController.end(), PUD->GetController() );
+
+  if ( it != m_vController.end() )
+  {
+    CHECKED_DELETE( *it );
+    std::vector<CPhysicUserData*>::iterator itPUD = std::find( m_vPUD.begin(), m_vPUD.end(), PUD );
+
+    if ( itPUD != m_vPUD.end() )
+      CHECKED_DELETE( *itPUD );
+  }
 }

@@ -51,6 +51,7 @@ public:
   void                AddPudVector( CPhysicUserData* PUD );
   void                AddPhysicActorVector( CPhysicActor* PA );
   CPhysicUserData*    GetLastPUDInserted();
+  void                DeleteController( CPhysicUserData* PUD );
 
   void InitSceneCharacterController();
 

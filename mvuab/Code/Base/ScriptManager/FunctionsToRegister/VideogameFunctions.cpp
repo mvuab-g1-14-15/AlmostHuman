@@ -50,6 +50,7 @@ void registerVideogame( lua_State* m_LS )
     .def( "GetPointFinal", &CPlayerPhysicProcess::GetPointFinal )
     .def( "SetPointFinal", &CPlayerPhysicProcess::SetPointFinal )
     .def( "GetAStarScene", &CPlayerPhysicProcess::GetAStarScene )
+    .def( "DeleteController", &CPlayerPhysicProcess::DeleteController )
   ];
   module( m_LS )
   [

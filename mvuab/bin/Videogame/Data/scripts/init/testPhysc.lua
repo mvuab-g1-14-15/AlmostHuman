@@ -6,6 +6,7 @@ local g_StrafeSpeed = 6
 local g_Speed = 5
 local g_Flag_agacharse = 0
 local g_Levantado = 1
+initialized = false
 
 function init()
 	core = Singleton_Core.get_singleton()
@@ -24,7 +25,16 @@ function init()
 	local PUD_Player = process:GetNewPUD("CharacterController")
 	PUD_Player:SetColor(1,0,0,1)
 	PUD_Player:SetPaint(true)
+	--Sala 1
+	--local position = Vect3f( 0, 2, 1)
+	--Sala sigilo
+	--local position = Vect3f( -0.66, 0, 17 )
+	--Sala disparo
+	--local position = Vect3f( 40, -15, -8)
+	--Sala cadena montaje
 	local position = Vect3f( 141, 35, -17 )
+	--Sala hangar
+	--local position = Vect3f( 104, 22, 198 )
 	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.5, 0.5, PUD_Player, position, -10)
 	physic_manager:AddPhysicController(PlayerController)
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
@@ -220,4 +230,21 @@ function render()
 	--graphics_manager:DrawCube(1)
 	t:SetIdentity()
 	graphics_manager:SetTransform(t)
+end
+
+function cambiar_sala()
+	--Sala 1
+	local position = Vect3f( 0, 2, 1)
+	--Sala sigilo
+	--local position = Vect3f( -0.66, 0, 17 )
+	--Sala disparo
+	--local position = Vect3f( 40, -15, -8)
+	--Sala cadena montaje
+	--local position = Vect3f( 141, 35, -17 )
+	--Sala hangar
+	--local position = Vect3f( 104, 22, 198 )
+	local character_controller_UserData = physic_manager:GetUserData("CharacterController")
+	local character_controller = character_controller_UserData:GetController()
+	character_controller:SetPosition(position)
+	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (character_controller:GetHeight()/2), position.z))
 end

@@ -148,4 +148,7 @@
 	<action name="Crouch">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_C"/>
     </action>
+	<action name="ChangeRoom">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
 </Actions>
