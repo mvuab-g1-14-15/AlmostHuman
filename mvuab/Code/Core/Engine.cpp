@@ -38,11 +38,9 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-  /*CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
-  srcm->Execute();
-  return;*/
+  m_pCore->GetSceneRendererCommandManager()->Execute();
 
-  CGraphicsManager* pGraphicsManager = GraphicsInstance ;
+  /*CGraphicsManager* pGraphicsManager = GraphicsInstance ;
   pGraphicsManager->BeginRender();
   pGraphicsManager->SetupMatrices();
 
@@ -63,7 +61,7 @@ void CEngine::Render()
   pGraphicsManager->DisableAlphaBlend();
   pGraphicsManager->EnableZBuffering();
 #endif
-  pGraphicsManager->EndRender();
+  pGraphicsManager->EndRender();*/
 }
 
 void CEngine::Init( CProcess* apProcess, const std::string& aConfigPath, HWND aWindowId )

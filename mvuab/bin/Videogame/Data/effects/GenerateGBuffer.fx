@@ -19,6 +19,10 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 	OUT.UV2 = IN.UV2;
 #endif
 
+#if defined( USE_DIFFUSE_COLOR )
+	OUT.Color = IN.Color;
+#endif
+
     return OUT;
 }
 
@@ -27,11 +31,15 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	TMultiRenderTargetPixel OUT=(TMultiRenderTargetPixel)0;
 	float4 l_DiffuseColor = tex2D(S0LinearSampler,IN.UV);
 	
-	if(l_DiffuseColor.a<0.5)//Ajustar
-		clip(-1);
-	
 	if(g_UseDebugColor)
 		l_DiffuseColor = float4(1,0,0,0);
+		
+#if defined( USE_DIFFUSE_COLOR )
+		l_DiffuseColor = IN.Color;
+#endif
+
+	if(l_DiffuseColor.a<0.5)
+		clip(-1);
 		
 	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
 	
