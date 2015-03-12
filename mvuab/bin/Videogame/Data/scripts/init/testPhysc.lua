@@ -19,7 +19,15 @@ function init()
 	timer = core:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	physic_manager = core:GetPhysicsManager()
-	
+	--Create PlayerController
+	process = Singleton_Engine.get_singleton():GetProcess()
+	local PUD_Player = process:GetNewPUD("CharacterController")
+	PUD_Player:SetColor(1,0,0,1)
+	PUD_Player:SetPaint(true)
+	local position = Vect3f( 141, 35, -17 )
+	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.5, 0.5, PUD_Player, position, -10)
+	physic_manager:AddPhysicController(PlayerController)
+	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
 	initialized = true
 end
 

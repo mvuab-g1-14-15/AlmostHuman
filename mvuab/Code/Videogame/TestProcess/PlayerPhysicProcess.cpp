@@ -58,11 +58,11 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
   m_vPUD.clear();
 
-  for ( size_t i = 0; i < m_vCharacter.size(); ++i )
-    CHECKED_DELETE( m_vCharacter[i] );
+  for ( size_t i = 0; i < m_vController.size(); ++i )
+    CHECKED_DELETE( m_vController[i] );
 
-  m_vCharacter.clear();
-  CHECKED_DELETE( m_PhysicController );
+  m_vController.clear();
+  //CHECKED_DELETE( m_PhysicController );
   CHECKED_DELETE( m_pAStarScene );
 }
 
@@ -87,7 +87,10 @@ void CPlayerPhysicProcess::Update()
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
+  {
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  }
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
@@ -221,24 +224,24 @@ void CPlayerPhysicProcess::Init()
   /////////////////////////////////////////////////////////////////
   ////////////        CREATE CHARACTERCONTROLLER        ///////////
   /////////////////////////////////////////////////////////////////
-  CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
-  userData->SetPaint( true );
-  userData->SetColor( colRED );
-  m_vPUD.push_back( userData );
-  //Sala 1
-  //Math::Vect3f l_Pos = Math::Vect3f( 0, 2, 1);
-  //Sala sigilo
-  //Math::Vect3f l_Pos = Math::Vect3f( -0.66, 0, 17 );
-  //Sala disparo
+  //CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
+  //userData->SetPaint( true );
+  //userData->SetColor( colRED );
+  //m_vPUD.push_back( userData );
+  ////Sala 1
+  ////Math::Vect3f l_Pos = Math::Vect3f( 0, 2, 1);
+  ////Sala sigilo
+  ////Math::Vect3f l_Pos = Math::Vect3f( -0.66, 0, 17 );
+  ////Sala disparo
   //Math::Vect3f l_Pos = Math::Vect3f( 40, -15, -8);
-  //Sala cadena montaje
-  //Math::Vect3f l_Pos = Math::Vect3f( 141, 35, -17);
-  //Sala hangar
-  Math::Vect3f l_Pos = Math::Vect3f( 104, 22, 198);
-  m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
-      userData, l_Pos );
-  l_PM->AddPhysicController( m_PhysicController );
-  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos(Math::Vect3f(l_Pos.x, l_Pos.y + (m_PhysicController->GetHeight()/2), l_Pos.z)  );
+  ////Sala cadena montaje
+  ////Math::Vect3f l_Pos = Math::Vect3f( 141, 35, -17 );
+  ////Sala hangar
+  ////Math::Vect3f l_Pos = Math::Vect3f( 104, 22, 198);
+  //m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
+  //    userData, l_Pos );
+  //l_PM->AddPhysicController( m_PhysicController );
+  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
 
   CPhysicUserData* l_pPhysicUserDataASEMesh;
   CPhysicActor*  l_AseMeshActor;
@@ -284,7 +287,7 @@ void CPlayerPhysicProcess::Init()
   if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   {
     l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-    l_pPhysicUserDataASEMesh->SetColor(Math::colBLACK);
+    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
     m_vPUD.push_back( l_pPhysicUserDataASEMesh );
     l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
@@ -333,11 +336,13 @@ void CPlayerPhysicProcess::RenderDebugInfo()
 
 CPhysicUserData* CPlayerPhysicProcess::GetNewPUD( const std::string& Name )
 {
-  return new CPhysicUserData( Name );
+  m_vPUD.push_back( new CPhysicUserData( Name ) );
+  return m_vPUD[m_vPUD.size() - 1];
 }
 CPhysicActor* CPlayerPhysicProcess::GetNewPhysicActor( CPhysicUserData* PUD )
 {
-  return new CPhysicActor( PUD );
+  m_vPA.push_back( new CPhysicActor( PUD ) );
+  return m_vPA[m_vPA.size() - 1];
 }
 
 void CPlayerPhysicProcess::AddPudVector( CPhysicUserData* PUD )
@@ -353,19 +358,9 @@ CPhysicUserData* CPlayerPhysicProcess::GetLastPUDInserted()
   return m_vPUD[m_vPUD.size() - 1];
 }
 
-CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, float _fHeight,
-    float _fSlope,
-    float _fSkinwidth, float _fStepOffset,
-    ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
-    float _fGravity )
+CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset,
+    CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity )
 {
-  return new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset,
-                                _uiCollisionGroups, _pUserData, _vPos, _fGravity );
-}
-
-CCharacter* CPlayerPhysicProcess::GetNewCharacter( const std::string& Name )
-{
-  CCharacter* l_Character = new CCharacter( Name );
-  m_vCharacter.push_back( l_Character );
-  return l_Character;
+  m_vController.push_back( new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset, ECG_PLAYER, _pUserData, _vPos, _fGravity ) );
+  return m_vController[ m_vController.size() - 1 ];
 }
