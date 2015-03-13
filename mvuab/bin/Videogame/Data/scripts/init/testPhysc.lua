@@ -1,12 +1,20 @@
 local cinematic=nil
 local g_Pi = 3.141618
 local g_HalfPi = 3.141618 * 0.5
+
 local g_ForwardSpeed = 5
 local g_StrafeSpeed = 6
+
 local g_Speed = 5
 local g_Flag_agacharse = 0
+
 local g_Levantado = 1
 local g_Room = 1
+
+local g_MoveDt = 0.0
+local g_InMove = false
+local g_MoveTo = Vect3f()
+
 initialized = false
 
 function init()
@@ -130,6 +138,69 @@ function move_player( dt )
 	if action_manager:DoAction("Jump") then
 		character_controller:Jump(75)
 	end
+    
+    if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT") then
+        local l_Pos = current_camera:GetPos()
+        
+        if g_InMove == false then
+            local l_Dir     = current_camera:GetDirection()
+            local l_Up      = current_camera:GetVecUp()
+
+            g_MoveTo = l_Dir ^ l_Up
+            g_MoveTo = l_Pos - g_MoveTo;
+            
+            g_InMove = true
+        end
+		
+        if g_InMove then
+            if g_MoveDt >= 1.0 then
+                g_MoveDt = 1.0
+            end
+            
+            l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
+            g_MoveDt = g_MoveDt + 1.0 * dt
+            
+            current_camera:SetPos(l_Pos)
+        end
+	end
+
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT") then
+		local l_Pos = current_camera:GetPos()
+        
+        if g_InMove == false then
+            local l_Dir     = current_camera:GetDirection()
+            local l_Up      = current_camera:GetVecUp()
+
+            g_MoveTo = l_Dir ^ l_Up
+            g_MoveTo = l_Pos + g_MoveTo;
+            
+            g_InMove = true
+        end
+		
+        if g_InMove then
+            if g_MoveDt >= 1.0 then
+                g_MoveDt = 1.0
+            end
+            
+            l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
+            g_MoveDt = g_MoveDt + 1.0 * dt
+            
+            current_camera:SetPos(l_Pos)
+        end
+	end
+    
+    if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT_SETZERO") then
+        g_MoveDt = 0.0
+		g_InMove = false
+        g_MoveTo = Vect3f()
+	end
+    
+    if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT_SETZERO") then
+        g_MoveDt = 0.0
+		g_InMove = false
+        g_MoveTo = Vect3f()
+	end
+    
 end
 
 function move( flag_speed, forward, strafe, dt )
