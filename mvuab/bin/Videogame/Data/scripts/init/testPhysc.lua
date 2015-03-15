@@ -14,6 +14,8 @@ local g_Room = 1
 local g_MoveDt = 0.0
 local g_InMove = false
 local g_MoveTo = Vect3f()
+local g_Rotar = true
+local g_Angle = 1
 
 initialized = false
 
@@ -38,7 +40,7 @@ function init()
 	local position = rooms[g_Room]
 	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.5, 0.5, PUD_Player, position, -10)
 	physic_manager:AddPhysicController(PlayerController)
-	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
+	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/3), position.z))
 	initialized = true
 end
 
@@ -131,17 +133,17 @@ function move_player( dt )
 		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
 	end
 	
+	--Update Yaw
 	local character_controller_UserData = physic_manager:GetUserData("CharacterController")
 	local character_controller = character_controller_UserData:GetController()
-	local Yaw = current_camera:GetYaw()
-	character_controller:SetYaw(Yaw)
+	character_controller:SetYaw(current_camera:GetYaw())
+	
 	if action_manager:DoAction("Jump") then
 		character_controller:Jump(75)
 	end
     
     if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT") then
         local l_Pos = current_camera:GetPos()
-        
         if g_InMove == false then
             local l_Dir     = current_camera:GetDirection()
             local l_Up      = current_camera:GetVecUp()
@@ -159,14 +161,19 @@ function move_player( dt )
             
             l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
             g_MoveDt = g_MoveDt + 1.0 * dt
-            
+			
+			if g_Rotar then
+				g_Rotar = false
+				character_controller:SetRotation(-g_Angle)
+			end
+			
             current_camera:SetPos(l_Pos)
         end
 	end
 
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT") then
 		local l_Pos = current_camera:GetPos()
-        
+		
         if g_InMove == false then
             local l_Dir     = current_camera:GetDirection()
             local l_Up      = current_camera:GetVecUp()
@@ -184,7 +191,11 @@ function move_player( dt )
             
             l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
             g_MoveDt = g_MoveDt + 1.0 * dt
-            
+			if g_Rotar then
+				g_Rotar = false
+				character_controller:SetRotation(g_Angle)
+			end
+			
             current_camera:SetPos(l_Pos)
         end
 	end
@@ -193,12 +204,16 @@ function move_player( dt )
         g_MoveDt = 0.0
 		g_InMove = false
         g_MoveTo = Vect3f()
+		character_controller:SetRotation(g_Angle)
+		g_Rotar = true
 	end
     
     if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT_SETZERO") then
         g_MoveDt = 0.0
 		g_InMove = false
         g_MoveTo = Vect3f()
+		character_controller:SetRotation(-g_Angle)
+		g_Rotar = true
 	end
     
 end
@@ -229,13 +244,13 @@ function move( flag_speed, forward, strafe, dt )
 	character_controller:Move(addPos, dt)
 	character_controller:SetYaw(Yaw)
 	local position = Vect3f(character_controller:GetPosition())
-	position.y = position.y + (character_controller:GetHeight()/2)
+	position.y = position.y + (character_controller:GetHeight()/3)
 	local size = character_controller:GetHeight()
 	if g_Flag_agacharse == 1 then
-		position.y = position.y - 2
+		position.y = position.y - 1
 		size = size/2
 	elseif g_Levantado == 0 then
-		position.y = position.y + 2
+		position.y = position.y + 1
 		size = size*2
 		g_Levantado = 1
 		character_controller:SetPosition(position)
