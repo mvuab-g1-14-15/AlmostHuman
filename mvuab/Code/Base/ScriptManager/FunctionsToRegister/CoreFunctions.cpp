@@ -8,7 +8,6 @@
 #include "Language\LanguageManager.h"
 #include "Fonts\FontManager.h"
 #include "ActionManager.h"
-#include "Utils\DebugWindowManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "AnimatedModels\AnimatedModelsManager.h"

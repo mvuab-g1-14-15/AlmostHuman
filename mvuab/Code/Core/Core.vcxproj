@@ -14,20 +14,12 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Process.cpp" />
-    <ClCompile Include="Utils\CameraDebugWindow.cpp" />
-    <ClCompile Include="Utils\DebugWindow.cpp" />
-    <ClCompile Include="Utils\DebugWindowManager.cpp" />
-    <ClCompile Include="Utils\FPSDebugWindow.cpp" />
     <ClCompile Include="Utils\LogRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Process.h" />
-    <ClInclude Include="Utils\CameraDebugWindow.h" />
-    <ClInclude Include="Utils\DebugWindow.h" />
-    <ClInclude Include="Utils\DebugWindowManager.h" />
-    <ClInclude Include="Utils\FPSDebugWindow.h" />
     <ClInclude Include="Utils\LogRender.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

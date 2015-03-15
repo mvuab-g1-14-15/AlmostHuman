@@ -6,7 +6,6 @@
 #include "Language\LanguageManager.h"
 #include "Fonts\FontManager.h"
 #include "ActionManager.h"
-#include "Utils\DebugWindowManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "AnimatedModels\AnimatedModelsManager.h"
@@ -58,7 +57,6 @@ CCore::CCore() :
   m_pLanguageManager( new CLanguageManager() ),
   m_pFontManager( new CFontManager() ),
   m_pActionManager( new CActionManager() ),
-  m_pDebugWindowManager( new CDebugWindowManager() ),
   m_pStaticMeshManager( new CStaticMeshManager() ),
   m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
   m_pRenderableObjectsLayersManager( new CRenderableObjectsLayersManager() ),
@@ -92,7 +90,6 @@ CCore::~CCore()
   CHECKED_DELETE( m_pActionManager );
   CHECKED_DELETE( m_pFontManager );
   CHECKED_DELETE( m_pLanguageManager );
-  CHECKED_DELETE( m_pDebugWindowManager );
   CHECKED_DELETE( m_pStaticMeshManager );
   CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
@@ -126,7 +123,6 @@ void CCore::Update()
   m_pGraphicsManager->Update();
   m_pInputManager->Update();
   m_pActionManager->Update();
-  m_pDebugWindowManager->Update();
   //m_pRenderableObjectsManager->Update();
   m_pRenderableObjectsLayersManager->Update();
   m_pCameraManager->Update();
@@ -140,7 +136,6 @@ void CCore::Update()
 void CCore::Render()
 {
   m_pGraphicsManager->Render();
-  m_pDebugWindowManager->Render();
   //m_pRenderableObjectsManager->Render();
   m_pRenderableObjectsLayersManager->Render();
   m_pCameraManager->RenderCameras();

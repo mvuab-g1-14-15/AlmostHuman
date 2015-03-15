@@ -1075,3 +1075,8 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
                      &worldMatrix );
   return Math::Vect3f();
 }
+
+uint32 CGraphicsManager::GetWindowHeight()
+{
+  return m_uHeight;
+}
