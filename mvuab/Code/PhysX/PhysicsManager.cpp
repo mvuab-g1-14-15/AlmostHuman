@@ -110,9 +110,12 @@ bool CPhysicsManager::Init( void )
       if ( m_bIsOk )
       {
         CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:", m_InitParams.m_StaticFriction_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:", m_InitParams.m_DynamicFriction_DefMat );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:",
+                                               m_InitParams.m_Restitution_DefMat );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
+                                               m_InitParams.m_StaticFriction_DefMat );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
+                                               m_InitParams.m_DynamicFriction_DefMat );
         CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> ----END PhsX Settings---" );
         // Set default material
         //TODO: Borrar líneas
@@ -456,20 +459,20 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
       Math::CColor color = physicUserData->GetColor();
 
-	Math::Mat44f t;
-	t.RotByAngleX(3.1415/2);
-	_RM->SetTransform(m*t);
-	_RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false);
-	t.SetIdentity();
-	t.Translate(Math::Vect3f(0,height*0.5f,0));
-	_RM->SetTransform(m*t);
-	_RM->DrawSphere(radius, color, MAX_ARISTAS);
-	t.SetIdentity();
-	t.Translate(Math::Vect3f(0,-height*0.5f,0));
-	_RM->SetTransform(m*t);
-	_RM->DrawSphere(radius, color, MAX_ARISTAS);
-	t.SetIdentity();
-	_RM->SetTransform(m*t);
+      Mat44f t;
+      t.RotByAngleX( 3.1415 / 2 );
+      _RM->SetTransform( m * t );
+      _RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false );
+      t.SetIdentity();
+      t.Translate( Math::Vect3f( 0, height * 0.5f, 0 ) );
+      _RM->SetTransform( m * t );
+      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      t.SetIdentity();
+      t.Translate( Math::Vect3f( 0, -height * 0.5f, 0 ) );
+      _RM->SetTransform( m * t );
+      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      t.SetIdentity();
+      _RM->SetTransform( m * t );
 
       //translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
       //total = m * translation;
