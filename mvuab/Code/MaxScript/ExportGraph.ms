@@ -19,11 +19,12 @@ fn ExportGraphXML filenameXML =
 			local PrevKnot = -1
 			for k = 1 to (numknots spl s) do
 			(
-				local l_KnotPos = (getKnotPoint spl s k) as String
+				local l_KnotPos = (getKnotPoint spl s k)
+				local l_KnotPosStr = (getKnotPoint spl s k) as String
 				
-				if (m_MapNodes.ContainsKey (l_KnotPos)) == false then
+				if (m_MapNodes.ContainsKey (l_KnotPosStr)) == false then
 				(
-					m_MapNodes.Add l_KnotPos count
+					m_MapNodes.Add l_KnotPosStr count
 					format "Node not found, appending at id %\n" count
 					if PrevKnot != -1 then
 					(
@@ -39,7 +40,7 @@ fn ExportGraphXML filenameXML =
 				)
 				else
 				(
-					l_Id = m_MapNodes.Item[l_KnotPos]
+					l_Id = m_MapNodes.Item[l_KnotPosStr]
 					format "Node found, id %\n" l_Id
 					if PrevKnot != -1 then
 					append m_NodeConnection[l_Id] PrevKnot
@@ -78,7 +79,9 @@ fn ExportGraphXML filenameXML =
 		local l_NewGraphNode = xDoc.getNewNode "node"
 		l_RootNode.AppendNode l_NewGraphNode
 		l_NewGraphNode.AddAttributeFloat "id" i
-		l_NewGraphNode.AddAttributeAsString "pos" m_Nodes[i]
+
+		local l_Pos = point3 m_Nodes[i].x m_Nodes[i].z m_Nodes[i].y
+		l_NewGraphNode.AddAttributeCoordinate "pos" l_Pos
 		
 		format "Node: %\n" m_Nodes[i]
 		for l_arc in m_Arcs[i] do

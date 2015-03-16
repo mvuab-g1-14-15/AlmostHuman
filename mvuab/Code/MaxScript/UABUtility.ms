@@ -37,13 +37,6 @@ utility UABUtility "UAB Utility" width:163 height:600
 	button ApplyBtn "Apply" pos:[23,530] width:124 height:17
 
 	
-	
-	
-	
-	
-	
-	
-	
 	on UABUtility open do
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
@@ -131,6 +124,7 @@ utility UABUtility "UAB Utility" width:163 height:600
 	)
 	on GraphButton pressed do
 	(
+		format " PathLabel % \n" PathLabel.text
 		IsEmptyDestPath PathLabel.text
 		
 		GraphDir = PathLabel.text + "\\graph.xml"

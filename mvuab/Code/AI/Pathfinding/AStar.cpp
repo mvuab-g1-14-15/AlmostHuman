@@ -17,7 +17,7 @@ CAStar::~CAStar()
 void CAStar::Init()
 {
   m_Graph = new CGraph();
-  m_Graph->Parse( "Data/graph1.xml" );
+  m_Graph->Parse( "Data/graph.xml" );
 }
 
 void CAStar::Render()

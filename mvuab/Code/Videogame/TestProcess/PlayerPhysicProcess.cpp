@@ -321,7 +321,7 @@ void CPlayerPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
-  //m_pAStarScene->Render();
+  m_pAStarScene->Render();
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();

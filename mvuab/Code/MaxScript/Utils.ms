@@ -86,7 +86,7 @@ fn GetUniqueInstances =
 
 fn IsEmptyDestPath SrcPath =
 (
-	if SrcPath.text == "" then
+	if SrcPath == "" then
 	(
 		format "Destination Path undefined, please choose a path \n"
 		return -1 
