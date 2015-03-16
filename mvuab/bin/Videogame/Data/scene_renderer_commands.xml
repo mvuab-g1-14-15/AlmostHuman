@@ -1,15 +1,15 @@
 <scene_renderer_commands>
-    <!--pre_render-->
-	<!--generate the shadow maps -->
+    <!--pre_render-->	
+	<!--generate the shadow maps-->
 	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
-	<generate_shadow_maps/>
+	<generate_shadow_maps/> 
 	
 	<clear_scene color="true" depth="true" stencil="true"/>
 	<begin_scene/>
 	<enable_z_write/>
-    <enable_z_test/>
+	<enable_z_test/>
 	<disable_alpha_blend/>
-	
+
 	<!--generate the deferred textures-->
     <set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
     <set_render_target name="deferred_multiple_render_target">
@@ -20,11 +20,15 @@
     </set_render_target>
     
     <clear_scene color="true" depth="true" stencil="true"/>
+    <set_matrices/>
+	<disable_alpha_blend/>
+	<disable_alpha_test/>
     <enable_z_write/>
     <enable_z_test/>
-    <set_matrices/>
     <render_scene layer="solid" active="true"/>
+	<!--
     <render_debug_lights render="true"/>
+	-->
     <unset_render_target render_target="deferred_multiple_render_target"/>
 	
 	<disable_z_write/>
@@ -35,14 +39,17 @@
     <enable_z_test/>
     <render_scene layer="alpha_blend_objects" active="true"/>
     -->
-    
+    <disable_alpha_blend/>
+	<disable_z_write/>
+    <disable_z_test/>
     <set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="LightMapTexture"/>
     </render_draw_quad>
     
-    <!--<enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>-->
-    <set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
+    <enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
+	
+	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
     <render_deferred_shading>
         <texture stage_id="0" name="DiffuseMapTexture"/>
         <texture stage_id="1" name="LightMapTexture"/>
@@ -50,16 +57,10 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
     
-	<!--
-    <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
-	<lens_of_flare>
-		<texture stage_id="0" name="nova.png"/>
-	</lens_of_flare>
-    -->
-    <!--<disable_alpha_blend/>-->
+    <disable_alpha_blend/>
     <!--end pre_render-->
     
-	<render_developer_info/>
+    <render_developer_info/>
 	
     <end_scene/>
     <present/>

@@ -26,8 +26,8 @@ CEnemyManager::~CEnemyManager()
 void CEnemyManager::Destroy()
 {
   m_CoreEnemies.Destroy();
-  m_StateMachines.Destroy();
   CMapManager::Destroy();
+  m_StateMachines.Destroy();
 }
 
 void CEnemyManager::Update()
@@ -43,6 +43,10 @@ void CEnemyManager::Update()
 
 void CEnemyManager::Render()
 {
+  TMapResource::iterator it = m_Resources.begin();
+
+  for ( ; it != m_Resources.end(); ++it )
+    it->second->Render();
 }
 
 void CEnemyManager::Init( const std::string& Filename )
@@ -78,6 +82,10 @@ void CEnemyManager::Init( const std::string& Filename )
         AddNewCoreEnemy( m( i ) );
         //<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine="AI.xml"/>
       }
+	  else if( l_TagName == "route" )
+	  {
+		  AddNewRoute( m( i ) );
+	  }
     }
   }
 }
@@ -151,7 +159,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     {
       CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
       lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-      lEnemy->Init();
+	  lEnemy->SetWaypoints(m_Routes[lEnemy->GetRouteId()]);
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
 
@@ -161,7 +169,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     {
       CBossEnemy* lEnemy = new CBossEnemy( Node );
       lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-
+	  
       if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
         CHECKED_DELETE( lEnemy );
 
@@ -170,4 +178,20 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
   }
   else
     LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
+}
+
+void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
+{
+	const size_t l_Id = Node.GetIntProperty( "id", -1 );
+	int count = Node.GetNumChildren();
+	std::vector<Math::Vect3f> l_Route;
+    for ( int i = 0; i < count; ++i )
+    {
+		const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty("value", Math::Vect3f(0,-99999999,0));
+	    if ( l_Point != Math::Vect3f(0,-99999999,0) )
+			l_Route.push_back(l_Point);
+		else
+			LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
+	}
+	m_Routes[l_Id]=l_Route;
 }

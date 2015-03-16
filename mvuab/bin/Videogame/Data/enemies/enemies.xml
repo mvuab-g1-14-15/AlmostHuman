@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <enemies>
-
+	<route id="0">
+		<point value="25 -34 72"/>
+		<point value="-54 -34 72"/>
+		<point value="-54 -34 11"/>
+		<point value="-147 -34 11"/>
+		<point value="-147 -34 72"/>
+		<point value="-54 -34 72"/>
+		<point value="-54 -34 11"/>
+		<point value="25 -34 11"/>
+	</route>
+	<route id="1">
+		<point value="-147 -34 -115"/>
+		<point value="25 -34 -115"/>
+		<point value="25 -34 -49"/>
+		<point value="-147 -34 -49"/>
+	</route>
 	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
 	<core_enemy type="patroll" life="75" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy8" type="patroll" pos="15.0 2.0 3.0" yaw="0.0"/>
+	<enemy name="Enemy1" type="patroll" route="0" pos="27 -26 80" yaw="0.0"/>
+	<enemy name="Enemy2" type="patroll" route="1" pos="-150 -26 -118" yaw="0.0"/>
 </enemies>

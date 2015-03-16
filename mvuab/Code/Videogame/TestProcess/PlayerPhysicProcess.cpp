@@ -1,9 +1,11 @@
 #include "PlayerPhysicProcess.h"
 #include "Items\Grenade.h"
+#include "Items\Blaster.h"
 
 //AI
 #include "Graph\Graph.h"
 #include "Characters\Character.h"
+#include "Pathfinding\AStar.h"
 
 //BASE
 #include "Logger\Logger.h"
@@ -36,6 +38,9 @@
 #include "Actor\PhysicController.h"
 #include "Cooking Mesh\PhysicCookingMesh.h"
 
+
+#include <algorithm>
+
 CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 {
 }
@@ -44,6 +49,7 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
   CHECKED_DELETE( m_Grenade );
+  CHECKED_DELETE( m_Blaster );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -55,11 +61,12 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
   m_vPUD.clear();
 
-  for ( size_t i = 0; i < m_vCharacter.size(); ++i )
-    CHECKED_DELETE( m_vCharacter[i] );
+  for ( size_t i = 0; i < m_vController.size(); ++i )
+    CHECKED_DELETE( m_vController[i] );
 
-  m_vCharacter.clear();
-  CHECKED_DELETE( m_PhysicController );
+  m_vController.clear();
+  //CHECKED_DELETE( m_PhysicController );
+  CHECKED_DELETE( m_pAStarScene );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -83,7 +90,14 @@ void CPlayerPhysicProcess::Update()
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
+  {
+    // CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "reload()" );
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  }
+
+  if ( pActionManager->DoAction( "ChangeRoom" ) )
+    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
@@ -137,6 +151,20 @@ void CPlayerPhysicProcess::Update()
 
 
   //////////////////////////////////////////////////////
+  ////////////        DISPARO               ////////////
+  //////////////////////////////////////////////////////
+
+  if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
+  {
+    CCamera* l_CurrentCamera =
+      CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+
+    if ( l_CurrentCamera )
+      m_Blaster->Update();
+  }
+
+
+  //////////////////////////////////////////////////////
   ////////////        UPDATE GRENADE        ////////////
   //////////////////////////////////////////////////////
   m_Grenade->Update();
@@ -148,48 +176,46 @@ void CPlayerPhysicProcess::Update()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPlayerPhysicProcess::InitSceneCharacterController()
 {
-     //Scene Character Controller
-     //Step1
-     CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Step2
-     l_PUD = new CPhysicUserData( "BoxCharacter2" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Step3
-     l_PUD = new CPhysicUserData( "BoxCharacter3" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0,
-                                  0 ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
-     //Plano Inclinado TODO
-     l_PUD = new CPhysicUserData( "Rampa" );
-     l_PUD->SetPaint( true );
-     l_PUD->SetColor( colWHITE );
-     m_vPUD.push_back( l_PUD );
-     l_pPhysicActor = new CPhysicActor( l_PUD );
-     l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3,
-                                  0, 0 ),
-                                  Math::Vect3f( 0, 0, 1.3f ) );
-     CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-     m_vPA.push_back( l_pPhysicActor );
+  //Scene Character Controller
+  //Step1
+  CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0, 0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Step2
+  l_PUD = new CPhysicUserData( "BoxCharacter2" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0, 0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Step3
+  l_PUD = new CPhysicUserData( "BoxCharacter3" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0, 0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
+
+  //Plano Inclinado TODO
+  l_PUD = new CPhysicUserData( "Rampa" );
+  l_PUD->SetPaint( true );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
 }
 
 void CPlayerPhysicProcess::Init()
@@ -201,59 +227,94 @@ void CPlayerPhysicProcess::Init()
   ////////////        CREATE GRENADE       ///////////
   ////////////////////////////////////////////////////
   m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
 
   /////////////////////////////////////////////////////////////////
   ////////////        CREATE CHARACTERCONTROLLER        ///////////
   /////////////////////////////////////////////////////////////////
-  CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
-  userData->SetPaint( true );
-  userData->SetColor( colWHITE );
-  m_vPUD.push_back( userData );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
-  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
-      userData, l_Pos );
-  l_PM->AddPhysicController( m_PhysicController );
+  //CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
+  //userData->SetPaint( true );
+  //userData->SetColor( colRED );
+  //m_vPUD.push_back( userData );
+  ////Sala 1
+  ////Math::Vect3f l_Pos = Math::Vect3f( 0, 2, 1);
+  ////Sala sigilo
+  ////Math::Vect3f l_Pos = Math::Vect3f( -0.66, 0, 17 );
+  ////Sala disparo
+  //Math::Vect3f l_Pos = Math::Vect3f( 40, -15, -8);
+  ////Sala cadena montaje
+  ////Math::Vect3f l_Pos = Math::Vect3f( 141, 35, -17 );
+  ////Sala hangar
+  ////Math::Vect3f l_Pos = Math::Vect3f( 104, 22, 198);
+  //m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
+  //    userData, l_Pos );
+  //l_PM->AddPhysicController( m_PhysicController );
+  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
 
-  ////////////////////////////////////////////////////
-  ////////////        CREATE PLANE       /////////////
-  ////////////////////////////////////////////////////
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colMAGENTA );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, -12.0f, 1000 ), Math::Vect3f( 0, 0,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
+  CPhysicUserData* l_pPhysicUserDataASEMesh;
+  CPhysicActor*  l_AseMeshActor;
 
-  //InitSceneCharacterController();
+  CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+  CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
 
-  //   // Create physic escene with ASE file
-  //   CPhysicCookingMesh* l_PCM = new CPhysicCookingMesh();
-  //   l_PCM->Init( l_PM->GetPhysicsSDK(), 0 );
-  //   l_PCM->CreateMeshFromASE( "Data/a.ASE", "Escenario" );
-  //
-  //   CPhysicUserData* l_PUD2 = new CPhysicUserData( "Plane" );
-  //   CPhysicActor* l_pActor = new CPhysicActor( l_PUD2 );
-  //   //l_pActor3->AddMeshShape(CORE->GetPhysicsManager()->GetCookingMesh()->GetPhysicMesh("Malla_Fisicas"),Vect3f(-24.7306, 2.7749, -3.29779));
-  //   l_pActor->AddMeshShape( l_PCM->GetPhysicMesh( "Escenario" ), Vect3f( 0, -5, 0 ) );
+  /* std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
 
-  //CPhysicUserData* l_pPhysicUserDataASEMesh;
-  //CPhysicActor*  l_AseMeshActor;
+   std::map<std::string, CStaticMesh*>::iterator it = l_MeshMap.begin(), it_end = l_MeshMap.end();
 
-  //CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+   std::vector<std::vector<Math::Vect3f>> l_AllVB;
+   std::vector<std::vector<uint32>> l_AllIB;
 
-  //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
-  //{
-  //  l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-  //  m_vPUD.push_back(l_pPhysicUserDataASEMesh);
-  //  l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-  //  l_AseMeshActor->AddMeshShape( l_pMeshes->GetPhysicMesh( "Escenario" ), Vect3f( 0, 0, 0 ) );
-  //  //m_AseMeshActor->CreateBody ( 10.f );
-  //  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
-  //  m_vPA.push_back(l_AseMeshActor);
-  //}
+   for ( ; it != it_end; ++it )
+   {
+     CStaticMesh* l_StaticMesh = it->second;
+     std::vector<Math::Vect3f> l_VB = l_StaticMesh->GetVB();
+     std::vector<uint32> l_IB = l_StaticMesh->GetIB();
+
+     l_AllVB.push_back( l_VB );
+     l_AllIB.push_back( l_IB );
+
+   }
+
+   l_pMeshes->CreatePhysicMesh( "Escenario", l_AllVB, l_AllIB );
+
+   l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+   l_pPhysicUserDataASEMesh->SetPaint( true );
+   l_pPhysicUserDataASEMesh->SetColor( colRED );
+   l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+   m_vPUD.push_back( l_pPhysicUserDataASEMesh );
+
+   VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
+
+   for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+     l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+   m_vPA.push_back( l_AseMeshActor );*/
+
+
+  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  {
+    l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+    m_vPUD.push_back( l_pPhysicUserDataASEMesh );
+    l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+    VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
+
+    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+      l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+    //m_AseMeshActor->CreateBody ( 10.f );
+    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+    m_vPA.push_back( l_AseMeshActor );
+  }
+
+  m_pAStarScene = new CAStar();
+  m_pAStarScene->Init();
+
+  m_PointInicial = Math::Vect3f( 6, 0, -6 );
+  m_PointFinal = Math::Vect3f( 6, 0, 6 );
+  m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
 
 }
 
@@ -261,7 +322,7 @@ void CPlayerPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
-
+  m_pAStarScene->Render();
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
@@ -272,6 +333,8 @@ void CPlayerPhysicProcess::Render()
       Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
       d );
   // END: TO DELETE LATER IF IS NOT NECESSARY
+
+  m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()
@@ -281,11 +344,13 @@ void CPlayerPhysicProcess::RenderDebugInfo()
 
 CPhysicUserData* CPlayerPhysicProcess::GetNewPUD( const std::string& Name )
 {
-  return new CPhysicUserData( Name );
+  m_vPUD.push_back( new CPhysicUserData( Name ) );
+  return m_vPUD[m_vPUD.size() - 1];
 }
 CPhysicActor* CPlayerPhysicProcess::GetNewPhysicActor( CPhysicUserData* PUD )
 {
-  return new CPhysicActor( PUD );
+  m_vPA.push_back( new CPhysicActor( PUD ) );
+  return m_vPA[m_vPA.size() - 1];
 }
 
 void CPlayerPhysicProcess::AddPudVector( CPhysicUserData* PUD )
@@ -301,19 +366,23 @@ CPhysicUserData* CPlayerPhysicProcess::GetLastPUDInserted()
   return m_vPUD[m_vPUD.size() - 1];
 }
 
-CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, float _fHeight,
-    float _fSlope,
-    float _fSkinwidth, float _fStepOffset,
-    ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
-    float _fGravity )
+CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth, float _fStepOffset,
+    CPhysicUserData* _pUserData, const Math::Vect3f& _vPos, float _fGravity )
 {
-  return new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset,
-                                _uiCollisionGroups, _pUserData, _vPos, _fGravity );
+  m_vController.push_back( new CPhysicController( _fRadius, _fHeight, _fSlope, _fSkinwidth, _fStepOffset, ECG_PLAYER, _pUserData, _vPos, _fGravity ) );
+  return m_vController[ m_vController.size() - 1 ];
 }
 
-CCharacter* CPlayerPhysicProcess::GetNewCharacter( const std::string& Name )
+void              CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
 {
-  CCharacter* l_Character = new CCharacter( Name );
-  m_vCharacter.push_back( l_Character );
-  return l_Character;
+  std::vector<CPhysicController*>::iterator it = std::find( m_vController.begin(), m_vController.end(), PUD->GetController() );
+
+  if ( it != m_vController.end() )
+  {
+    CHECKED_DELETE( *it );
+    std::vector<CPhysicUserData*>::iterator itPUD = std::find( m_vPUD.begin(), m_vPUD.end(), PUD );
+
+    if ( itPUD != m_vPUD.end() )
+      CHECKED_DELETE( *itPUD );
+  }
 }

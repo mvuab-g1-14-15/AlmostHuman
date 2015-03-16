@@ -434,7 +434,7 @@ void CGraphicsManager::DrawCube( float32 Size )
 
 void CGraphicsManager::DrawCube( float32 Size, Math::CColor Color )
 {
-  DrawBox( Size, Size, Size, Math::colWHITE );
+  DrawBox( Size, Size, Size, Color );
 }
 
 void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color )
@@ -443,7 +443,7 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
@@ -469,8 +469,8 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
   if ( FAILED( D3DXCreateSphere( m_pD3DDevice, Radius, Aristas, Aristas, &m_SphereMesh, 0 ) ) )
     return;
 
-  CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
@@ -538,7 +538,7 @@ void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 
-void CGraphicsManager::SetTransform( Math::Mat44f& m )
+void CGraphicsManager::SetTransform(const Math::Mat44f& m )
 {
   D3DXMATRIX aux
   (
@@ -713,23 +713,55 @@ void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, 
                                    &m_CylinderMesh, 0 ) ) )
     return;
 
-  m_CylinderMesh->DrawSubset( 0 );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  EffectTechnique->SetDebugColor( Color );
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+  UINT l_NumPasses = 0;
+  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+
+  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) ) return;
+
+  for ( UINT b = 0; b < l_NumPasses; ++b )
+  {
+    l_Effect->BeginPass( b );
+    m_CylinderMesh->DrawSubset( 0 );
+    l_Effect->EndPass();
+  }
+
+  l_Effect->End();
   CHECKED_RELEASE( m_CylinderMesh );
 }
 
 void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, Math::CColor Color )
 {
-  D3DXMATRIX matrix;
-  D3DXMatrixIdentity( &matrix );
-  m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
-  DrawCylinder( radius, radius, h, Aristas, Color, true );
-  D3DXMATRIX translation1, translation2;
-  D3DXMatrixTranslation( &translation1, 0.f, h * 0.5f, 0.f );
-  m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation1 );
-  DrawSphere( radius, Color, Aristas );
-  D3DXMatrixTranslation( &translation2, 0.f, -h * 0.5f, 0.f );
-  m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
-  DrawSphere( radius, Color, Aristas );
+  //D3DXMATRIX matrix;
+  //D3DXMatrixIdentity( &matrix );
+  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+  //DrawCylinder( radius, radius, h-radius*2, Aristas, Color, true );
+  //D3DXMATRIX translation1, translation2;
+  //D3DXMatrixTranslation( &translation1, 0.f, h * 0.5f, 0.f );
+  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation1 );
+  //DrawSphere( radius, Color, Aristas );
+  //D3DXMatrixTranslation( &translation2, 0.f, -h * 0.5f, 0.f );
+  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
+  //DrawSphere( radius, Color, Aristas );
+
+	Math::Mat44f t;
+	t.RotByAngleX(3.1415/2);
+	SetTransform(t);
+	DrawCylinder( radius, radius, h, Aristas, Color, false);
+	t.SetIdentity();
+	t.Translate(Math::Vect3f(0,h*0.5f,0));
+	SetTransform(t);
+	DrawSphere(radius, Color, Aristas);
+	t.SetIdentity();
+	t.Translate(Math::Vect3f(0,-h*0.5f,0));
+	SetTransform(t);
+	DrawSphere(radius, Color, Aristas);
+	t.SetIdentity();
+	SetTransform(t);
 }
 
 void CGraphicsManager::DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& up,

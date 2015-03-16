@@ -2,6 +2,7 @@ fileIn "ExportMesh.ms"
 fileIn "XMLExporter.ms"
 fileIn "Cinematics.ms"
 filein "RNMUtils.ms"
+filein "ExportGraph.ms"
 		
 utility UABUtility "UAB Utility" width:163 height:600
 (
@@ -10,30 +11,32 @@ utility UABUtility "UAB Utility" width:163 height:600
 	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,84] width:79 height:25
 	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,110] width:94 height:25
 	dropdownList LevelList "" pos:[13,135] width:135 height:21
-	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:112
+	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:127
 	button LightsButton "Lights" pos:[21,171] width:57 height:17
 	button MeshButton "Mesh" pos:[85,171] width:57 height:17
 	button CinematicsButton "Cinematics" pos:[83,193] width:57 height:17
-	button CameraButon "Camera" pos:[21,193] width:57 height:17
-	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,218] width:124 height:17
-	button SceneButton "Scene" pos:[18,241] width:124 height:17
+	button CameraButon "Camera" pos:[21,192] width:57 height:17
+	button GraphButton "Graph" pos:[19,213] width:124 height:17
+	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,234] width:124 height:17
+	button SceneButton "Scene" pos:[18,257] width:124 height:17
 	button SetProperties "Set Properties" pos:[37,568] width:82 height:17
 	
 	GroupBox grp9 "Generate RNM" pos:[10,286] width:141 height:112
-		button Xbtn "Generate X" pos:[15,310] width:124 height:17
-		button Ybtn "Generate Y" pos:[15,340] width:124 height:17
-		button Zbtn "Generate Z" pos:[15,370] width:124 height:17
+	button Xbtn "Generate X" pos:[15,310] width:124 height:17
+	button Ybtn "Generate Y" pos:[15,340] width:124 height:17
+	button Zbtn "Generate Z" pos:[15,370] width:124 height:17
 
 
 	GroupBox grp10 "Set RNM Texture" pos:[4,411] width:145 height:150
-		button LightmapXBtn "X" pos:[10,434] width:32 height:17
-		label LightmapXLabel "" pos:[46,433] width:94 height:20
-		button LightmapYBtn "Y" pos:[10,464] width:32 height:17
-		label LightmapYLabel "" pos:[46,465] width:94 height:20
-		button LightmapZBtn "Z" pos:[10,494] width:32 height:17
-		label LightmapZLabel "" pos:[46,491] width:94 height:20
-		button ApplyBtn "Apply" pos:[23,530] width:124 height:17
+	button LightmapXBtn "X" pos:[10,434] width:32 height:17
+	label LightmapXLabel "" pos:[46,433] width:94 height:20
+	button LightmapYBtn "Y" pos:[10,464] width:32 height:17
+	label LightmapYLabel "" pos:[46,465] width:94 height:20
+	button LightmapZBtn "Z" pos:[10,494] width:32 height:17
+	label LightmapZLabel "" pos:[46,491] width:94 height:20
+	button ApplyBtn "Apply" pos:[23,530] width:124 height:17
 
+	
 	on UABUtility open do
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
@@ -52,14 +55,10 @@ utility UABUtility "UAB Utility" width:163 height:600
 		local LightDir = PathLabel.text + "\\lights.xml"		--poner parametrico
 		ExportLights LightDir
 	)
-	
 	on MeshButton pressed do
 	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
+		
+		IsEmptyDestPath PathLabel.text
 		
 		--export Mesh
 		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
@@ -105,11 +104,7 @@ utility UABUtility "UAB Utility" width:163 height:600
 	)
 	on CinematicsButton pressed do
 	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
+		IsEmptyDestPath PathLabel.text
 		
 		CinematicsDir = PathLabel.text + "\\cinematics.xml"
 		nFrames = 5
@@ -118,11 +113,7 @@ utility UABUtility "UAB Utility" width:163 height:600
 	)
 	on CameraButon pressed do
 	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
+		IsEmptyDestPath PathLabel.text
 		
 		cameraDir = PathLabel.text + "\\camera.xml"
 		nFrames = 5
@@ -131,13 +122,19 @@ utility UABUtility "UAB Utility" width:163 height:600
 		
 		ExportKeyCamera nFrames isCycle isReverse cameraDir
 	)
+	on GraphButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		GraphDir = PathLabel.text + "\\graph.xml"
+		
+		ExportGraphXML GraphDir
+		
+	)
 	on StaticMeshManagerButton pressed do
 	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
+		IsEmptyDestPath PathLabel.text
 		
 		local rootDir = PathLabel.text --poner parametrico
 		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
@@ -185,11 +182,7 @@ utility UABUtility "UAB Utility" width:163 height:600
 	)
 	on SceneButton pressed do
 	(		
-		if PathLabel.text == "" then
-		(
-			format "Destination Path undefined, please choose a path \n"
-			return -1 
-		)
+		IsEmptyDestPath PathLabel.text
 		
 		local rootDir = PathLabel.text		--poner parametrico
 		local fileSrcRenderableXML = rootDir + "\\renderable_objects.xml"
@@ -247,22 +240,22 @@ utility UABUtility "UAB Utility" width:163 height:600
 		)
 		
 	)
-	
-	on Xbtn pressed  do
+	on SetProperties pressed do
+	(
+		createDialog UABSetProperties
+	)
+	on Xbtn pressed do
 	(
 		SetRNMAxis $ (color 231 127 201)
 	)
-	
-	on Ybtn pressed  do
+	on Ybtn pressed do
 	(
 		SetRNMAxis $ (color 75 217 201)
 	)
-	
-	on Zbtn pressed  do
+	on Zbtn pressed do
 	(
 		SetRNMAxis $ (color 75 37 201)
 	)
-	
 	on LightmapXBtn pressed do
 	(
 		setLightmapOn LightmapXLabel
@@ -278,10 +271,5 @@ utility UABUtility "UAB Utility" width:163 height:600
 	on ApplyBtn pressed do
 	(
 		ApplyRNMToObj $
-	)
-	
-	on SetProperties pressed do
-	(
-		createDialog UABSetProperties
 	)
 )

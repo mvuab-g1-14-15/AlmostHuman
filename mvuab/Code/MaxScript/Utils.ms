@@ -83,3 +83,13 @@ fn GetUniqueInstances =
 	--print uniqueInstance
 	return uniqueInstance
 )
+
+fn IsEmptyDestPath SrcPath =
+(
+	if SrcPath == "" then
+	(
+		format "Destination Path undefined, please choose a path \n"
+		return -1 
+	)
+)
+	

@@ -201,7 +201,7 @@ public:
                                         const Vector3<T>& vBasisY,
                                         const Vector3<T>& vBasisZ,
                                         const Vector3<T>& Pos);
-    inline Matrix44<T>& SetFromBasis     (const Vector3<T>& vBasisX,
+  inline Matrix44<T>& SetFromBasis     (const Vector3<T>& vBasisX,
                                                                                 const Vector3<T>& vBasisY,
                                                                                 const Vector3<T>& vBasisZ);
   inline Matrix44<T>& SetFromAngleX    (const T angleX);
@@ -238,10 +238,10 @@ public:
 
   // Acceso
   inline Vector4<T>        GetRow                  (int i) const;
-  inline Vector4<T>                 GetColum                (int i) const;
-  inline Vector3<T>                 GetVectorBasis          (int i) const;
-    inline T                                 GetVectorBasisLength    (int i) const;
-  inline Vector3<T>                 GetPosBasis             () const;
+  inline Vector4<T>        GetColum                (int i) const;
+  inline Vector3<T>        GetVectorBasis          (int i) const;
+  inline T                 GetVectorBasisLength    (int i) const;
+  inline Vector3<T>        GetPosBasis             () const;
   inline void              GetBasis                (Vector3<T>& vBasisX,
                                                     Vector3<T>& vBasisY,
                                                     Vector3<T>& vBasisZ,
@@ -318,7 +318,7 @@ public:
   inline Vector3<T> GetTransformPoint     (const Vector3<T>& vector) const;
   void              TransformArrayVectors (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
   void              TransformArrayPoints  (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
-    D3DXMATRIX        GetD3DXMatrix         ( ) const;
+  D3DXMATRIX        GetD3DXMatrix         ( ) const;
 
 
   // Operaciones especiales con matrices

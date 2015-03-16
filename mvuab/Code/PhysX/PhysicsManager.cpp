@@ -47,7 +47,7 @@ using namespace Math;
 CPhysicsManager::CPhysicsManager( void )
   : m_szConfigFileName( "" )
   , m_bIsOk( false )
-  , m_bDebugRenderMode( true )
+  , m_bDebugRenderMode( false )
   , m_pPhysicsSDK( NULL )
   , m_pScene( NULL )
   , m_pControllerManager( NULL )
@@ -71,23 +71,19 @@ bool CPhysicsManager::Init( void )
 
   if ( m_bIsOk )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                           "PhysicsManager:: Inicializando la libreria PhysX" );
+    CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: Inicializando la libreria PhysX" );
     // Initialize PhysicsSDK
     NxPhysicsSDKDesc l_SDK_Desc;
     NxSDKCreateError errorCode = NXCE_NO_ERROR;
-    m_pPhysicsSDK = NxCreatePhysicsSDK( NX_PHYSICS_SDK_VERSION, m_pMyAllocator, NULL, l_SDK_Desc,
-                                        &errorCode );
+    m_pPhysicsSDK = NxCreatePhysicsSDK( NX_PHYSICS_SDK_VERSION, m_pMyAllocator, NULL, l_SDK_Desc, &errorCode );
     //m_InitParams.m_fSkinWidth = 0.01f; //TODO: Borrar la línea
     m_bIsOk = ( m_pPhysicsSDK != NULL );
 
     if ( m_bIsOk )
     {
       CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: Creado el PhysXSDK" );
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                             "PhysicsManager:: -------PhsX Settings---" );
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                             "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---" );
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
       m_pPhysicsSDK->setParameter( NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth );
       //CODI PER PRINTAR INFO DELS JOINTS
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_ACTOR_AXES, 1 );
@@ -96,8 +92,7 @@ bool CPhysicsManager::Init( void )
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_WORLD_AXES, 1 );
       m_pPhysicsSDK->setParameter( NX_CONTINUOUS_CD, 1 );
       // Create a scene
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                             "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity );
+      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity );
       NxSceneDesc sceneDesc;
       sceneDesc.gravity = NxVec3( 0.0f, m_InitParams.m_fGravity, 0.0f );
       sceneDesc.simType = NX_SIMULATION_HW;
@@ -114,18 +109,14 @@ bool CPhysicsManager::Init( void )
 
       if ( m_bIsOk )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                               "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                               "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                               "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:",
+                                               m_InitParams.m_Restitution_DefMat );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
                                                m_InitParams.m_StaticFriction_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                               "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
                                                m_InitParams.m_DynamicFriction_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                               "PhysicsManager::Init-> ----END PhsX Settings---" );
+        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> ----END PhsX Settings---" );
         // Set default material
         //TODO: Borrar líneas
         //m_InitParams.m_Restitution_DefMat = 0.5f;
@@ -141,15 +132,13 @@ bool CPhysicsManager::Init( void )
 
         if ( m_bIsOk )
         {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                                 "PhysicsManager::Init-> Creado el controlador de caracteres" );
+          CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Creado el controlador de caracteres" );
           m_pCookingMesh = new CPhysicCookingMesh();
           assert( m_pCookingMesh );
           m_bIsOk = m_pCookingMesh->Init( m_pPhysicsSDK, m_pMyAllocator );
 
           if ( m_bIsOk )
-            CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                                   "PhysicsManager::Init-> Creado el CookingMesh" );
+            CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Creado el CookingMesh" );
         }// isOk m_pControllerManager?
       }//isOk m_pScene?
     }//isOk m_pPhysicsSDK ?
@@ -469,27 +458,43 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
       Math::CColor color = physicUserData->GetColor();
-      translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
-      total = m * translation;
-      _RM->SetTransform( total );
+
+      Mat44f t;
+      t.RotByAngleX( 3.1415 / 2 );
+      _RM->SetTransform( m * t );
+      _RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false );
+      t.SetIdentity();
+      t.Translate( Math::Vect3f( 0, height * 0.5f, 0 ) );
+      _RM->SetTransform( m * t );
       _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      t.SetIdentity();
+      t.Translate( Math::Vect3f( 0, -height * 0.5f, 0 ) );
+      _RM->SetTransform( m * t );
+      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      t.SetIdentity();
+      _RM->SetTransform( m * t );
+
+      //translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
+      //total = m * translation;
+      //_RM->SetTransform( total );
+      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
       //_RM->DrawCapsule( radius, height, 10, color );
       //_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
-      translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
+      /*translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
       total = m * translation;
-      _RM->SetTransform( total );
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      _RM->SetTransform( total );*/
+      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
 
       //_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
       /* By XMA */
-      for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )
-      {
-        translation.Translate( Math::Vect3f( 0.f, h, 0.f ) );
-        total = m * translation;
-        _RM->SetTransform( total );
-        /*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
-        else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
-      }
+      //for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )
+      //{
+      //  translation.Translate( Math::Vect3f( 0.f, h, 0.f ) );
+      //  total = m * translation;
+      //  _RM->SetTransform( total );
+      //  /*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
+      //  else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
+      //}
 
       //_RM->DrawCylinder(radius, MAX_ARISTAS, -height, color); // By XMA
     }

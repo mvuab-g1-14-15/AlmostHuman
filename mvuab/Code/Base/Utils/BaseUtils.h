@@ -72,6 +72,24 @@ inline void GetFilesFromPath( const std::string& Path, const std::string& Extens
   }
 }
 
+namespace TIMER_VAR
+{
+  static LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 };
+}
+
+inline void TIMER_START()
+{
+  QueryPerformanceCounter(&TIMER_VAR::g_lastTime); QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
+}
+
+inline void TIMER_STOP()
+{
+  QueryPerformanceCounter(&TIMER_VAR::g_actualTime); QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
+  double t = (double) (TIMER_VAR::g_actualTime.QuadPart - TIMER_VAR::g_lastTime.QuadPart) / (double) TIMER_VAR::g_timeFreq.QuadPart;
+
+  printf("%time: %f\n", (float) t * 1000.0f);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } //namespace baseUtils
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
