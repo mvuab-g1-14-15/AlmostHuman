@@ -1343,3 +1343,35 @@ CPhysicUserData* CPhysicsManager::GetUserData( const std::string& name )
 
   return 0;
 }
+
+std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radiusSphere,
+    const Math::Vect3f& posSphere )
+{
+  EShapesType shapeType = ALL_SHAPES;
+  uint32 impactMask =0xffffffff;
+  // Check the scene
+  assert( m_pScene );
+  std::set<CPhysicUserData*> l_ImpactObjects;
+  NxSphere l_CollisionSphere( NxVec3( posSphere.x, posSphere.y, posSphere.z ), radiusSphere );
+  // Get the total of shapes in the scene
+  NxU32 nbShapes = m_pScene->getTotalNbShapes();
+  // Create a buffer at least the size of NxShape * nbShapes and clear the buffer
+  NxShape** l_CollisionShapes = new NxShape* [nbShapes];
+  memset( l_CollisionShapes, 0, sizeof( NxShape* ) * nbShapes );
+  NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_CollisionSphere,
+                               ( NxShapesType )shapeType, nbShapes, l_CollisionShapes, NULL, impactMask, NULL, true );
+
+  for ( NxU32 i = 0; i < l_NumShapesCollision; ++i )
+  {
+    if ( l_CollisionShapes[i] )
+    {
+      NxActor* l_pActor = &( l_CollisionShapes[i]->getActor() );
+      CPhysicUserData* l_pPhysicObject = ( CPhysicUserData* ) l_pActor->userData;
+      assert( l_pPhysicObject );  // A PhyX object has been registered without ID
+      l_ImpactObjects.insert( l_pPhysicObject );
+    }
+  }
+
+  delete []l_CollisionShapes;
+  return l_ImpactObjects;
+}

@@ -5,6 +5,7 @@
 #include "PhysicsManager.h"
 #include "Utils\Name.h"
 
+#include <set>
 
 extern "C"
 {
@@ -24,6 +25,22 @@ bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* Ph
 {
   return PhysicManager->AddPhysicController( PhysicController );
 }
+
+template<class T>
+size_t set_getIdByResource(std::set<T>& vec, T val)
+{
+	std::set<T>::iterator it = vec.begin()
+						 ,it_end = vec.end();
+
+	size_t i = 0;
+    for( ; it != it_end ; ++it)
+	{
+       if( *it == val)
+            return i;
+	   ++i;
+	}
+    return 0;
+} 
 
 void registerPhysX( lua_State* m_LS )
 {
@@ -46,7 +63,7 @@ void registerPhysX( lua_State* m_LS )
     .def( constructor<CPhysicUserData*>() )
     //.def( "GetUserData", &CPhysicActor::GetUserData )
     .def( "CreateBody", &CPhysicActor::CreateBody )
-    .def( "AddSphereShape", &CPhysicActor::AddSphereShape )
+    .def( "AddSphereShape", &CPhysicActor::AddSphereShapeHardcoded )
     .def( "AddBoxShape", &CPhysicActor::AddBoxShapeHardcoded )
     .def( "AddPlaneShape", &CPhysicActor::AddPlaneShape )
     .def( "AddMeshShape", &CPhysicActor::AddMeshShape )
@@ -56,6 +73,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddAcelerationAtPos", &CPhysicActor::AddAcelerationAtPos )
     //.def( "AddForceAtPos", &CPhysicActor::AddForceAtPos )
     .def( "AddTorque", &CPhysicActor::AddTorque )
+	.def( "SetGlobalPosition", &CPhysicActor::SetGlobalPosition )
   ];
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
@@ -77,6 +95,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetActor", &CPhysicsManager::GetActor )
     .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
           &CPhysicsManager::GetUserData )
+	.def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
 
   ];
   module( m_LS ) [
@@ -90,5 +109,12 @@ void registerPhysX( lua_State* m_LS )
     .def( "SetHeight", &CPhysicController::SetHeight )
     .def( "GetHeight", &CPhysicController::GetHeight )
     .def( "SetRotation", &CPhysicController::SetRotation )
+  ];
+
+  module( m_LS ) [
+    class_<std::set<CPhysicUserData*>>( "ListaPUD" )
+	.def( constructor<std::set<CPhysicUserData*>>() )
+	.def( "size", &std::set<CPhysicUserData*>::size )
+	.def( "getIdByResource", &set_getIdByResource<CPhysicUserData*> )
   ];
 }

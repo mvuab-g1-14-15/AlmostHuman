@@ -714,3 +714,28 @@ void CPhysicActor::SetCollisionGroup( uint32 _uiGroup ) //NxCollisionGroup group
   while ( nShapes-- )
     shapes[nShapes]->setGroup( _uiGroup );
 }
+
+void CPhysicActor::AddSphereShapeHardcoded( float radius, const Math::Vect3f& _vGlobalPos,
+                                   const Math::Vect3f& localPos )
+{
+  NxCCDSkeleton* skeleton = 0;
+  uint32 _uiGroup = 0;
+  assert( m_pPhXActorDesc );
+  // Add a sphere shape to the actor descriptor
+  NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
+  assert( sphereDesc );
+  sphereDesc->group = _uiGroup;
+  sphereDesc->materialIndex = m_MaterialIndex;
+  m_vSphereDesc.push_back( sphereDesc );
+  sphereDesc->radius = radius;
+  sphereDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
+  m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
+
+  if ( skeleton != NULL )
+  {
+    sphereDesc->ccdSkeleton = skeleton;
+    sphereDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
+  }
+
+  m_pPhXActorDesc->shapes.pushBack( sphereDesc );
+}

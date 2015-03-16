@@ -115,7 +115,7 @@ public:
       std::vector<CPhysicUserData*> impactObjects, float _fPower );
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                 float _fEffectRadius, float _fPower );
-
+   std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere);
   //----Update
   void          Update( float _ElapsedTime );
   void          WaitForSimulation();
