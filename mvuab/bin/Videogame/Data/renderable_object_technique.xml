@@ -6,6 +6,7 @@
 		<default_technique vertex_type="31"	technique="GenerateGBufferNormalTechnique"/>
 		<default_technique vertex_type="51"	technique="GenerateGBufferSelfIllumTechnique"/>
 		<default_technique vertex_type="63"	technique="GenerateGBufferSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="67"	technique="GenerateGBufferDiffuseTechnique"/>
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="shadow_map_pool_renderable_object_technique">

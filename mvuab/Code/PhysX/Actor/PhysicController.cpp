@@ -41,6 +41,7 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
   , m_uCollisionGroups( _uiCollisionGroups )
   , m_bUseGravity( true )
   , m_Type( ::CAPSULE )
+  , m_bRotado( false )
 
 {
   assert( _pUserData );
@@ -55,17 +56,17 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
   m_pPhXCapsuleControllerDesc->radius       = m_fRadiusControler;
   m_pPhXCapsuleControllerDesc->height       = m_fHeightControler;
   m_pUserData->SetRadius( m_fRadiusControler );
-  // Dona la pendent màxima que pot pujar. 0 ho desactiva. En funció del cosinus angle. Per defecte 0.707
+  // La pendiente máxima que puede subir. 0 lo desactiva. En función del coseno ángulo. Por defecto 0707
   m_pPhXCapsuleControllerDesc->slopeLimit     = cosf( NxMath::degToRad( m_fSlopeLimitControler ) );
   m_pPhXCapsuleControllerDesc->skinWidth      =
-    m_fSkinWidthControler;  // Dona l'amplada de la pell. Permet donar un marxe per evitar càlculs excesius. Defecte : 0.1
+    m_fSkinWidthControler;  // La anchura de la piel. Permite dar un marche para evitar cálculos excesivos. Defecto: 0.1
   m_pPhXCapsuleControllerDesc->stepOffset     =
-    m_fStepOffsetControler; // Alçada màxima que el controler pot pujar. Massa petit + costa de pujar obstacles. Defecte : 0.5
-  m_pPhXCapsuleControllerDesc->upDirection    = NX_Y;           // Direcció cap al cel
+    m_fStepOffsetControler; // Altura máxima que el controler puede subir. Demasiado pequeño + costa de subir obstáculos. Defecto: 0.5
+  m_pPhXCapsuleControllerDesc->upDirection    = NX_Y;           // Dirección hacia el cielo
   m_pPhXCapsuleControllerDesc->callback     =
-    l_Report;         // Es crida quan el controler colisiona
+    l_Report;         // Se llama cuando el controler colisiona
   m_pPhXCapsuleControllerDesc->interactionFlag  =
-    NXIF_INTERACTION_USE_FILTER;  // Diu si el controler colisiona amb altres controlers
+    NXIF_INTERACTION_USE_FILTER;  // Dice si el controler colisiona con otros controlers
 }
 
 CPhysicController::CPhysicController( Math::Vect3f _Dim, float _fSlope, float _fSkinwidth,
@@ -330,4 +331,69 @@ NxControllerDesc* CPhysicController::GetPhXControllerDesc( void )
   };
 
   return l_Controler;
+}
+
+void   CPhysicController::SetRotation( float _fAngle )
+{
+  NxActor* l_Actor = m_pPhXController->getActor();
+  NxShape* const* shapes;
+  shapes = l_Actor->getShapes();
+  NxShape* shape = shapes[0];
+  NxF32 m_aux[16];
+  shape->getGlobalPose().getColumnMajor44( m_aux );
+
+  //Guardo la posición original porque si rotas dos angulos, pierdes la rotación original
+  if ( m_bRotado == false )
+    for ( int i = 0; i < 15; ++i )
+      m_RotacionOriginal[i] = m_aux[i];
+
+  //Paso toda la información de la shape a una matriz para trabajar con ella
+  Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
+            m_aux[1], m_aux[5], m_aux[9], m_aux[13],
+            m_aux[2], m_aux[6], m_aux[10], m_aux[14],
+            m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+
+  //Calcular la dirección a la que está mirando el controlador y rotarlo 90 grados
+  float l_Yaw = GetYaw();
+  Math::Vect3f l_Direction( Math::Utils::Cos( l_Yaw ) , 0.0f, Math::Utils::Sin( l_Yaw ) );
+  l_Direction = l_Direction.RotateY( 90 );
+  l_Direction = l_Direction.Normalize();
+  float n = l_Direction.Length();
+
+  if ( ( l_Direction.x > 0 && l_Direction.z > 0 ) || ( l_Direction.x < 0 && l_Direction.z < 0 ) )
+    m.RotByAngleX( _fAngle );
+  else
+    m.RotByAngleZ( _fAngle );
+
+  NxMat34 l_m;
+
+  m_aux[0] = m.m00;
+  m_aux[4] = m.m01;
+  m_aux[8] = m.m02;
+  m_aux[12] = m.m03;
+  m_aux[1] = m.m10;
+  m_aux[5] = m.m11;
+  m_aux[9] = m.m12;
+  m_aux[13] = m.m13;
+  m_aux[2] = m.m20;
+  m_aux[6] = m.m21;
+  m_aux[10] = m.m22;
+  m_aux[14] = m.m23;
+  m_aux[3] = m.m30;
+  m_aux[7] = m.m31;
+  m_aux[11] = m.m32;
+  m_aux[15] = m.m33;
+
+  if ( m_bRotado )
+  {
+    m_bRotado = false;
+    l_m.setColumnMajor44( m_RotacionOriginal );
+  }
+  else
+  {
+    m_bRotado = true;
+    l_m.setColumnMajor44( m_aux );
+  }
+
+  shape->setGlobalPose( l_m );
 }

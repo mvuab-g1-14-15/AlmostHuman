@@ -457,8 +457,8 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
   if ( FAILED( D3DXCreateBox( m_pD3DDevice, SizeX, SizeY, SizeZ, &m_BoxMesh, 0 ) ) )
     return;
 
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
@@ -553,7 +553,7 @@ void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 
-void CGraphicsManager::SetTransform( Math::Mat44f& m )
+void CGraphicsManager::SetTransform(const Math::Mat44f& m )
 {
   D3DXMATRIX aux
   (

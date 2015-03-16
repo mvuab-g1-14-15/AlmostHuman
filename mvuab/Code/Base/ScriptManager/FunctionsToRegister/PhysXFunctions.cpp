@@ -20,6 +20,11 @@ extern "C"
 
 using namespace luabind;
 
+bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* PhysicController )
+{
+  return PhysicManager->AddPhysicController( PhysicController );
+}
+
 void registerPhysX( lua_State* m_LS )
 {
   module( m_LS )
@@ -59,8 +64,10 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddPhysicActor", &CPhysicsManager::AddPhysicActor )
     .def( "AddPhysicRevoluteJoint", &CPhysicsManager::AddPhysicRevoluteJoint )
     .def( "AddPhysicSphericalJoint", &CPhysicsManager::AddPhysicSphericalJoint )
+    .def( "AddPhysicController", &Add_PhysicController )
     //Release
     .def( "ReleasePhysicActor", &CPhysicsManager::ReleasePhysicActor )
+    .def( "ReleasePhysicController", &CPhysicsManager::ReleasePhysicController )
     .def( "Load", &CPhysicsManager::Load )
     .def( "Init", &CPhysicsManager::Init )
     .def( "Done", &CPhysicsManager::Done )
@@ -70,6 +77,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetActor", &CPhysicsManager::GetActor )
     .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
           &CPhysicsManager::GetUserData )
+
   ];
   module( m_LS ) [
     class_<CPhysicController>( "CPhysicController" )
@@ -81,5 +89,6 @@ void registerPhysX( lua_State* m_LS )
     .def( "SetYaw", &CPhysicController::SetYaw )
     .def( "SetHeight", &CPhysicController::SetHeight )
     .def( "GetHeight", &CPhysicController::GetHeight )
+    .def( "SetRotation", &CPhysicController::SetRotation )
   ];
 }

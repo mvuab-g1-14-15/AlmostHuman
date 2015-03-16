@@ -143,7 +143,7 @@ void CCore::Render()
   m_pDebugWindowManager->Render();
   //m_pRenderableObjectsManager->Render();
   m_pRenderableObjectsLayersManager->Render();
-  m_pCameraManager->RenderCameras();
+  //m_pCameraManager->RenderCameras();
   m_pLightManager->Render();
   m_pPhysicsManager->DebugRender( m_pGraphicsManager );
   m_pEnemyManager->Render();

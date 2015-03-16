@@ -275,6 +275,16 @@ void CPhysicProcess::Init()
   m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
 
   InitScenePhysicsSamplers();
+
+	CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
+	l_PUD->SetPaint( false );
+	l_PUD->SetColor( colWHITE );
+	m_vPUD.push_back( l_PUD );
+	CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+	l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.1, 1000 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
+	0 ) );
+	CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+	m_vPA.push_back( l_pPhysicActor );
 }
 
 void CPhysicProcess::Render()

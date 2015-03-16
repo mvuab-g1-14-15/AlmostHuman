@@ -18,12 +18,14 @@ class CXMLTreeNode;
 class CObject3D
 {
 protected:
+  Math::Mat44f   m_Transform;
   Math::Vect3f   m_Position;
   Math::Vect3f   m_Scale;
 
   float32       m_fYaw;
   float32       m_fPitch;
   float32       m_fRoll;
+
 public:
   CObject3D();
   CObject3D( CXMLTreeNode& atts );
@@ -55,7 +57,11 @@ public:
   {
     return m_Scale;
   }
-  Math::Mat44f GetTransform();
+
+  const Math::Mat44f &GetTransform() 
+  { 
+      return m_Transform; 
+  }
 
   //---Set Functions
   void SetPosition( const Math::Vect3f& pos )
@@ -78,6 +84,8 @@ public:
   {
     m_Scale = scale;
   }
+
+  void MakeTransform();
 };
 
 #endif //INC_CORE_H_
