@@ -32,7 +32,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	float4 l_DiffuseColor = tex2D(S0LinearSampler,IN.UV);
 	
 	if(g_UseDebugColor)
-		l_DiffuseColor = float4(1,0,0,0);
+		l_DiffuseColor = g_DebugColor;
 		
 #if defined( USE_DIFFUSE_COLOR )
 		l_DiffuseColor = IN.Color;

@@ -433,6 +433,11 @@ void CEffect::SetShadowMapParameters( bool UseShadowMaskTexture, bool
   m_Effect->SetBool( m_UseDynamicShadowmapParameter, UseDynamicShadowmap ? TRUE
                      : FALSE );
 }
+
+void CEffect::SetUseDebugColor( bool aUse )
+{
+	m_Effect->SetBool( m_UseDebugColor, aUse ? TRUE : FALSE );
+}
 void CEffect::ResetLightsHandle()
 {
   //Reset all the lights of the effect

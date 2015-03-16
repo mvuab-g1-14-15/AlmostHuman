@@ -40,8 +40,9 @@ void CEngine::Render()
 {
   m_pCore->GetSceneRendererCommandManager()->Execute();
 
-  m_pProcess->Render();
-  /*CGraphicsManager* pGraphicsManager = GraphicsInstance ;
+	m_pProcess->Render();
+	/*
+  CGraphicsManager* pGraphicsManager = GraphicsInstance ;
   pGraphicsManager->BeginRender();
   pGraphicsManager->SetupMatrices();
 
