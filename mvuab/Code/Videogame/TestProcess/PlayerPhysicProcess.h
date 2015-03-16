@@ -20,7 +20,6 @@ class CAStar;
 class CPlayerPhysicProcess : public CProcess
 {
 private:
-  CAStar*           m_pAStarScene;
   Math::Vect3f          m_PointInicial;
   Math::Vect3f          m_PointFinal;
   std::vector<Math::Vect3f>   m_Path;
@@ -41,7 +40,6 @@ public:
   virtual void Render();
   virtual void RenderDebugInfo();
 
-  GET_SET_PTR( CAStar, AStarScene );
   GET_SET( Math::Vect3f, PointInicial );
   GET_SET( Math::Vect3f, PointFinal );
   CPhysicUserData*    GetNewPUD( const std::string& Name );

@@ -66,7 +66,7 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
   m_vController.clear();
   //CHECKED_DELETE( m_PhysicController );
-  CHECKED_DELETE( m_pAStarScene );
+  CHECKED_DELETE( m_AStar );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -308,12 +308,12 @@ void CPlayerPhysicProcess::Init()
     m_vPA.push_back( l_AseMeshActor );
   }
 
-  m_pAStarScene = new CAStar();
-  m_pAStarScene->Init();
+  m_AStar = new CAStar();
+  m_AStar->Init();
 
   m_PointInicial = Math::Vect3f( 6, 0, -6 );
   m_PointFinal = Math::Vect3f( 6, 0, 6 );
-  m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
+  m_Path = m_AStar->GetPath( m_PointInicial, m_PointFinal );
 
 }
 
@@ -321,7 +321,7 @@ void CPlayerPhysicProcess::Render()
 {
   CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
-  m_pAStarScene->Render();
+  m_AStar->Render();
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();

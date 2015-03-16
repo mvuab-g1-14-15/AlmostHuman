@@ -13,6 +13,11 @@ public:
   //std::vector<Node*> nodos;
   CGraph* m_Graph;
 
+  CGraph* GetGraph() const
+  {
+	  return m_Graph;
+  }
+
   CAStar();
   ~CAStar();
 

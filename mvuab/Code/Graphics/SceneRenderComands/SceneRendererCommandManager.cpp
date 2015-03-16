@@ -26,6 +26,7 @@
 #include "SceneRenderComands\DisableAlphaTestSceneRendererCommand.h"
 #include "SceneRenderComands\EnableAlphaTestSceneRendererCommand.h"
 #include "SceneRenderComands\SetBlendSceneRendererCommand.h"
+#include "SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h"
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
@@ -115,6 +116,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderSceneSceneRendererCommand>( ) );
   CommandFactory.Register( "render_debug_lights",
                            Type2Type<CRenderDebugLightsSceneRendererCommand>( ) );
+  CommandFactory.Register( "render_astar",
+                           Type2Type<CAStarGraphDrawerSceneRendererCommand>() );
 
   CXMLTreeNode l_File;
 
