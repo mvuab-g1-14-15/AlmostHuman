@@ -143,60 +143,11 @@ function move_player( dt )
 	end
     
     if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT") then
-        local l_Pos = Vect3f(current_camera:GetPos())
-		pos = l_Pos
-		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.55, l_Pos - current_camera:GetDirection()/10))
-		if l_listaPUD:size() == 0 then 
-			if g_InMove == false then
-				local l_Dir     = current_camera:GetDirection()
-				local l_Up      = current_camera:GetVecUp()
-
-				g_MoveTo = l_Dir ^ l_Up
-				g_MoveTo = l_Pos - g_MoveTo;
-				
-				g_InMove = true
-			end
-			
-			if g_InMove then
-				if g_MoveDt >= 1.0 then
-					g_MoveDt = 1.0
-				end
-				
-				l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
-				g_MoveDt = g_MoveDt + 1.0 * dt
-				
-				current_camera:SetPos(l_Pos)
-			end
-		end
+        LeanOut(-1, dt)
 	end
 
 	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT") then
-		local l_Pos = Vect3f(current_camera:GetPos())
-	--l_Pos.y = l_Pos.y + 4.0
-		pos = l_Pos
-		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.55, l_Pos - current_camera:GetDirection()/10))
-		if l_listaPUD:size() == 0 then 
-			if g_InMove == false then
-				local l_Dir     = current_camera:GetDirection()
-				local l_Up      = current_camera:GetVecUp()
-
-				g_MoveTo = l_Dir ^ l_Up
-				g_MoveTo = l_Pos + g_MoveTo;
-				
-				g_InMove = true
-			end
-			
-			if g_InMove then
-				if g_MoveDt >= 1.0 then
-					g_MoveDt = 1.0
-				end
-				
-				l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
-				g_MoveDt = g_MoveDt + 1.0 * dt
-				
-				current_camera:SetPos(l_Pos)
-			end
-		end
+		LeanOut(1, dt)
 	end
     
     if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT_SETZERO") then
@@ -319,4 +270,39 @@ function cambiar_sala()
 	local character_controller = character_controller_UserData:GetController()
 	character_controller:SetPosition(position)
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (character_controller:GetHeight()/2), position.z))
+end
+
+function LeanOut(direction, dt)
+	current_camera = camera_manager:GetCurrentCamera()
+	local l_Pos = Vect3f(current_camera:GetPos())
+	pos = l_Pos
+	
+	local l_Dir     = current_camera:GetDirection()
+	local l_Up      = current_camera:GetVecUp()
+			
+	l_BallPos = l_Dir ^ l_Up
+	l_BallPos:Normalize()
+	l_BallPos = l_BallPos/10;
+	l_BallPos = direction * l_BallPos + l_Pos - current_camera:GetDirection()/10;
+	local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.50, l_BallPos))
+	if l_listaPUD:size() == 0 then 
+		if g_InMove == false then
+
+			g_MoveTo = l_Dir ^ l_Up
+			g_MoveTo = l_Pos + direction * g_MoveTo;
+			
+			g_InMove = true
+		end
+		
+		if g_InMove then
+			if g_MoveDt >= 1.0 then
+				g_MoveDt = 1.0
+			end
+			
+			l_Pos = l_Pos + (g_MoveTo - l_Pos) * g_MoveDt
+			g_MoveDt = g_MoveDt + 1.0 * dt
+			
+			current_camera:SetPos(l_Pos)
+		end
+	end
 end
