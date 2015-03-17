@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <enemies>
 	<route id="0">
-		<point value="25 -34 72"/>
-		<point value="-54 -34 72"/>
-		<point value="-54 -34 11"/>
-		<point value="-147 -34 11"/>
-		<point value="-147 -34 72"/>
-		<point value="-54 -34 72"/>
-		<point value="-54 -34 11"/>
-		<point value="25 -34 11"/>
+		<point value="8.79347 -12.877 27.8505"/>
+		<point value="14.8798 -12.6875 28.0447"/>
+		<point value="14.8163 -12.6875 33.6648"/>
+		<point value="8.85904 -12.8968 33.6317"/>
 	</route>
 	<route id="1">
-		<point value="-147 -34 -115"/>
-		<point value="25 -34 -115"/>
-		<point value="25 -34 -49"/>
-		<point value="-147 -34 -49"/>
+		<point value="2.06659 -12.6875 19.0217"/>
+		<point value="2.06659 -12.6875 23.6482"/>
+		<point value="8.70689 -12.8773 23.4127"/>
+		<point value="2.06659 -12.6875 23.6482"/>
 	</route>
 	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
 	<core_enemy type="patroll" life="75" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy1" type="patroll" route="0" pos="27 -26 80" yaw="0.0"/>
-	<enemy name="Enemy2" type="patroll" route="1" pos="-150 -26 -118" yaw="0.0"/>
+	<enemy name="Enemy1" type="patroll" route="0" pos="8.79347 -12.877 27.8505" yaw="0.0"/>
+	<enemy name="Enemy2" type="patroll" route="1" pos="2.06659 -12.6875 19.0217" yaw="0.0"/>
 </enemies>

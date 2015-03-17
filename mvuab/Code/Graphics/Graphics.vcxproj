@@ -65,6 +65,7 @@
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />
@@ -205,7 +207,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

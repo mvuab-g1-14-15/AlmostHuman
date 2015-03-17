@@ -39,7 +39,7 @@ void CAStar::Render()
                                                    it_end = l_Arcs.end();
 
     for ( ; it != it_end; ++it )
-      l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colWHITE );
+      l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colGREEN );
   }
 }
 

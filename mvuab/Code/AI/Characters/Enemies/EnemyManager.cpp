@@ -52,13 +52,6 @@ void CEnemyManager::Render()
 void CEnemyManager::Init( const std::string& Filename )
 {
   std::map<std::string, CreateEnemyFn> l_CreateEnemiesFnsMap;
-  /*l_CreateEnemiesFnsMap["easy"]=CreateTemplatedEnemy<CEasyEnemy>;
-  l_CreateEnemiesFnsMap["boss"]=CreateTemplatedEnemy<CBossEnemy>;
-  l_CreateEnemiesFnsMap["patrol"]=CreateTemplatedEnemy<CPatrolEnemy>;
-
-  std::map<std::string, CreateEnemyFn>::iterator it=l_CreateEnemiesFnsMap.find(l_Type);
-  if(it!=l_CreateEnemiesFnsMap.end())
-  */
   m_Filename = Filename;
   CXMLTreeNode l_File;
 

@@ -28,6 +28,7 @@
 #include "SceneRenderComands\SetBlendSceneRendererCommand.h"
 #include "SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h"
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
+#include "SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -118,7 +119,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderDebugLightsSceneRendererCommand>( ) );
   CommandFactory.Register( "render_astar",
                            Type2Type<CAStarGraphDrawerSceneRendererCommand>() );
-
+  CommandFactory.Register( "render_debug_physics",
+                           Type2Type<CRenderDebugPhysicsSceneRendererCommand>() );
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( FileName.c_str() ) )

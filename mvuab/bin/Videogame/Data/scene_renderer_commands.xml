@@ -24,6 +24,7 @@
     <render_scene layer="solid" active="true"/>
 	<!--<render_debug_lights render="true"/>-->
 	<render_astar/>
+	<render_debug_physics/>
 	<!--
     <render_debug_lights render="true"/>
 	-->

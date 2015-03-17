@@ -41,6 +41,8 @@ void CEngine::Render()
   m_pCore->GetSceneRendererCommandManager()->Execute();
 
 	m_pProcess->Render();
+
+  m_pCore->Render();
 	/*
   CGraphicsManager* pGraphicsManager = GraphicsInstance ;
   pGraphicsManager->BeginRender();

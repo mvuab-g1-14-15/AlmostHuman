@@ -44,7 +44,7 @@ void CCharacter::Update()
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
-  if ( l_Cantidad < 50.0f )
+  if ( l_Cantidad < 1.0f )
     SetTargetPosition( l_CharacterController->GetPosition() );
   else
     SetTargetPosition( m_TargetPositionOriginal );
@@ -80,21 +80,22 @@ void CCharacter::Update()
 
 void CCharacter::Render()
 {
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+ /* CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
   Mat44f m;
   m.Translate( m_Position );
   m.RotByAnglesYXZ( GetYaw(), GetPitch(), GetRoll() );
   l_GM->SetTransform( m );
-  //l_GM->DrawCapsule(m_Radius, m_Height);
+  l_GM->DrawCapsule(m_Radius, m_Height);
   l_GM->DrawAxis( 1 );
   m.SetIdentity();
   l_GM->SetTransform( m );
+  */
 }
 
 void CCharacter::Init()
 {
-  m_Height = 2.0f;
-  m_Radius = 0.5f;
+  m_Height = 1.0f;
+  m_Radius = 0.2f;
   m_PController = new CPhysicController( m_Radius,
                                          m_Height,
                                          2.0f,
@@ -104,6 +105,7 @@ void CCharacter::Init()
                                          GetPhysicsUserData(),
                                          Math::Vect3f( -10, 0.0, 10 ),
                                          -10.0 );
+  m_PController->GetUserData()->SetPaint(false);
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
   l_PM->AddPhysicController( m_PController );
   m_init = true;
@@ -111,10 +113,10 @@ void CCharacter::Init()
 void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
-  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 4.0f ),
-                                         Node.GetFloatProperty( "height", 12.0f ),
+  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 0.2f ),
+                                         Node.GetFloatProperty( "height", 1.0f ),
                                          Node.GetFloatProperty( "slope", 0.2f ),
-                                         Node.GetFloatProperty( "skin_width", 0.5f ),
+                                         Node.GetFloatProperty( "skin_width", 0.01f ),
                                          Node.GetFloatProperty( "step", 0.5f ),
                                          GetCollisionGroup(), GetPhysicsUserData(),
                                          Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),

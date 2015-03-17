@@ -47,7 +47,7 @@ using namespace Math;
 CPhysicsManager::CPhysicsManager( void )
   : m_szConfigFileName( "" )
   , m_bIsOk( false )
-  , m_bDebugRenderMode( false )
+  , m_bDebugRenderMode( true )
   , m_pPhysicsSDK( NULL )
   , m_pScene( NULL )
   , m_pControllerManager( NULL )
@@ -391,7 +391,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
   //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
   assert( physicUserData );
 
-  if ( !physicUserData->GetPaint() )
+  if ( !physicUserData->GetPaint() || physicUserData->GetName() == "CharacterController" )
     return;
 
   NxShape* const* shapes = _pActor->getShapes();
@@ -764,12 +764,12 @@ bool CPhysicsManager::ReleasePhysicFixedJoint( CPhysicFixedJoint* _pJoint )
   return true;
 }
 
-bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, EControleType _Tipus,
-    ECollisionGroup _Group )
+bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, EControleType _Tipus, ECollisionGroup _Group )
 {
   assert( _pController != NULL );
   assert( m_pScene != NULL );
   assert( m_pControllerManager != NULL );
+
   bool l_bIsOK = false;
   NxController* l_NxController = _pController->GetPhXController();
   assert( l_NxController == NULL );  //Nos aseguramos que no hayan registrado ya un actor en la escena
