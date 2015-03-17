@@ -38,7 +38,7 @@ function init()
 	PUD_Player:SetPaint(true)
 	rooms = {Vect3f( 0, 2, 1 ), Vect3f( 8, -10, 18 ), Vect3f( 40, -15, -8), Vect3f( 141, 35, -17 ), Vect3f( 104, 22, 198 )}
 	local position = rooms[g_Room]
-	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.5, 0.5, PUD_Player, position, -10)
+	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.1, 0.5, PUD_Player, position, -10)
 	physic_manager:AddPhysicController(PlayerController)
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
 	initialized = true
@@ -142,11 +142,11 @@ function move_player( dt )
 		character_controller:Jump(75)
 	end
     
-    if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT") then
+    if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT") then
         local l_Pos = Vect3f(current_camera:GetPos())
 		pos = l_Pos
-		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.8, l_Pos))
-		if l_listaPUD:size() == 1 then 
+		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.55, l_Pos - current_camera:GetDirection()/10))
+		if l_listaPUD:size() == 0 then 
 			if g_InMove == false then
 				local l_Dir     = current_camera:GetDirection()
 				local l_Up      = current_camera:GetVecUp()
@@ -170,12 +170,12 @@ function move_player( dt )
 		end
 	end
 
-	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_RIGHT") then
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ASS_LEFT") then
 		local l_Pos = Vect3f(current_camera:GetPos())
 	--l_Pos.y = l_Pos.y + 4.0
 		pos = l_Pos
-		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.8, l_Pos))
-		if l_listaPUD:size() == 1 then 
+		local l_listaPUD = ListaPUD(physic_manager:OverlapSphere(0.55, l_Pos - current_camera:GetDirection()/10))
+		if l_listaPUD:size() == 0 then 
 			if g_InMove == false then
 				local l_Dir     = current_camera:GetDirection()
 				local l_Up      = current_camera:GetVecUp()
@@ -301,12 +301,12 @@ function move_point_final( dt )
 end
 
 function render()
-	local t = Mat44f()
-	t:SetPos(pos)
-	graphics_manager:SetTransform(t)
-	graphics_manager:DrawSphere(0.2)
-	t:SetIdentity()
-	graphics_manager:SetTransform(t)
+	--local t = Mat44f()
+	--t:SetPos(pos)
+	--graphics_manager:SetTransform(t)
+	--graphics_manager:DrawSphere(0.2)
+	--t:SetIdentity()
+	--graphics_manager:SetTransform(t)
 end
 
 function cambiar_sala()

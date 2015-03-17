@@ -1348,7 +1348,8 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
     const Math::Vect3f& posSphere )
 {
   EShapesType shapeType = ALL_SHAPES;
-  uint32 impactMask =0xffffffff;
+  
+  uint32 impactMask = 1 << ECG_ESCENE;
   // Check the scene
   assert( m_pScene );
   std::set<CPhysicUserData*> l_ImpactObjects;
