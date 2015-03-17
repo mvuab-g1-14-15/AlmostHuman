@@ -121,7 +121,9 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
             doIt = doIt && m_pInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
         else if(current_action.m_EventType == EVENT_UP_DOWN)
             doIt = doIt && m_pInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
-        else 
+		else if(current_action.m_EventType == EVENT_NOTHING && current_action.m_AxisType != AXIS_NOTHING)
+			doIt = true;
+		else
             doIt = false;
 
     }
