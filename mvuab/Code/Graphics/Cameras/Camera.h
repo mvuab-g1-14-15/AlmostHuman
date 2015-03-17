@@ -14,7 +14,7 @@ class CCamera : public CName
 
 public:
 
-    enum Type{ FREE = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
+    enum Type{ Free = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
     
     CCamera();
     virtual ~CCamera();

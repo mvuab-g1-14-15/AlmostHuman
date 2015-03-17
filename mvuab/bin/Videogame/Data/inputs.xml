@@ -111,11 +111,11 @@
     </action>
 	
 	<action name="MoveYaw">
-	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
+	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X"/>
     </action>
 	
 	<action name="MovePitch">
-   	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
+   	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y"/>
     </action>
 	
 	<action name="Run">
@@ -164,7 +164,12 @@
 	<action name="Crouch">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_C"/>
     </action>
+	
 	<action name="ChangeRoom">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
+	
+	<action name="ChangeCamera">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F"/>
     </action>
 </Actions>

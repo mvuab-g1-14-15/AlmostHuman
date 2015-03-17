@@ -1,5 +1,6 @@
 #include "CameraManager.h"
 #include "CameraFPShooter.h"
+#include "CameraFree.h"
 #include "CameraCinematical.h"
 #include "GraphicsManager.h"
 #include "CameraKeyController.h"
@@ -77,6 +78,10 @@ void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string& name,
   case CCamera::Cinematical:
     //new_l_pNewCameracamera =new CCameraFPShooter();
     break;
+  case CCamera::Free:
+	l_pNewCamera = new CCameraFree();
+	break;
+
   }
 
   assert( l_pNewCamera );

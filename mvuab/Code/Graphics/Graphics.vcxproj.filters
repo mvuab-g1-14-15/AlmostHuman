@@ -210,6 +210,9 @@
     <ClCompile Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="Cameras\CameraFree.cpp">
+      <Filter>Cameras</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -429,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraFree.h">
+      <Filter>Cameras</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

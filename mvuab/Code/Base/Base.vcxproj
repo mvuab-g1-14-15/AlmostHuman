@@ -44,6 +44,7 @@
     <ClInclude Include="Exceptions\Exception.h" />
     <ClInclude Include="Language\LanguageManager.h" />
     <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="LuaEnumBinder.h" />
     <ClInclude Include="Math\AABB.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\LerpAnimator1D.h" />

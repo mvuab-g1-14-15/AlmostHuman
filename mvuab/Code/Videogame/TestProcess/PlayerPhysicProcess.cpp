@@ -99,6 +99,13 @@ void CPlayerPhysicProcess::Update()
   if ( pActionManager->DoAction( "ChangeRoom" ) )
     CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );
 
+  if ( pActionManager->DoAction( "ChangeCamera" ) )
+  {
+	  if( "FreeCam" == CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCameraName())
+		  CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera("TestProcessCam");
+	  else
+		  CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera("FreeCam");
+  }
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order

@@ -249,6 +249,9 @@
     <ClInclude Include="Utils\ObjectFactory.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="LuaEnumBinder.h">
+      <Filter>ScriptManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">
