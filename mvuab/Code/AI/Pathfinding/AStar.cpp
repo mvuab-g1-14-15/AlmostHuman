@@ -26,12 +26,11 @@ void CAStar::Render()
 
   for ( unsigned int i = 0; i < m_Graph->GetSize(); ++i )
   {
-    Math::Vect3f pos = m_Graph->GetNodeInfo( i );
-
+	Math::Vect3f pos(m_Graph->GetNodeInfo(i));
     Math::Mat44f m;
-    m.Translate( pos );
+	m.Translate(pos);
     l_GM->SetTransform( m );
-    l_GM->DrawCube( 0.3f, Math::colBLACK );
+    l_GM->DrawCube( 0.3f, Math::colORANGE );
     m.SetIdentity();
     l_GM->SetTransform( m );
 
@@ -40,7 +39,7 @@ void CAStar::Render()
                                                    it_end = l_Arcs.end();
 
     for ( ; it != it_end; ++it )
-      l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colBLUE );
+      l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colGREEN );
   }
 }
 

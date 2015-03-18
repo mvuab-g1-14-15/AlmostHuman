@@ -1,49 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <graph>
-  <node id="1" pos="8.79347 27.8505 -12.877" />
+  <node id="1" pos="8.79347 -12.877 27.8505" />
   <weight src="1" dst="6" value="1" />
   <weight src="1" dst="2" value="1" />
   <weight src="1" dst="4" value="1" />
   <weight src="1" dst="7" value="1" />
-  <node id="2" pos="2.09893 28.077 -12.6875" />
+  <node id="2" pos="2.09893 -12.6875 28.077" />
   <weight src="2" dst="1" value="1" />
   <weight src="2" dst="11" value="1" />
   <weight src="2" dst="3" value="1" />
-  <node id="3" pos="2.06659 33.4771 -12.877" />
+  <node id="3" pos="2.06659 -12.877 33.4771" />
   <weight src="3" dst="2" value="1" />
   <weight src="3" dst="4" value="1" />
-  <node id="4" pos="8.85904 33.6317 -12.8968" />
+  <node id="4" pos="8.85904 -12.8968 33.6317" />
   <weight src="4" dst="3" value="1" />
   <weight src="4" dst="1" value="1" />
   <weight src="4" dst="5" value="1" />
-  <node id="5" pos="14.8163 33.6648 -12.6875" />
+  <node id="5" pos="14.8163 -12.6875 33.6648" />
   <weight src="5" dst="4" value="1" />
   <weight src="5" dst="6" value="1" />
-  <node id="6" pos="14.8798 28.0447 -12.6875" />
+  <node id="6" pos="14.8798 -12.6875 28.0447" />
   <weight src="6" dst="1" value="1" />
   <weight src="6" dst="5" value="1" />
   <weight src="6" dst="8" value="1" />
-  <node id="7" pos="8.70689 23.4127 -12.8773" />
+  <node id="7" pos="8.70689 -12.8773 23.4127" />
   <weight src="7" dst="1" value="1" />
   <weight src="7" dst="10" value="1" />
   <weight src="7" dst="8" value="1" />
   <weight src="7" dst="11" value="1" />
-  <node id="8" pos="15.0325 23.7703 -12.6875" />
+  <node id="8" pos="15.0325 -12.6875 23.7703" />
   <weight src="8" dst="6" value="1" />
   <weight src="8" dst="7" value="1" />
   <weight src="8" dst="9" value="1" />
-  <node id="9" pos="14.8184 18.8826 -12.6875" />
+  <node id="9" pos="14.8184 -12.6875 18.8826" />
   <weight src="9" dst="8" value="1" />
   <weight src="9" dst="10" value="1" />
-  <node id="10" pos="8.66377 18.8269 -12.6875" />
+  <node id="10" pos="8.66377 -12.6875 18.8269" />
   <weight src="10" dst="7" value="1" />
   <weight src="10" dst="9" value="1" />
   <weight src="10" dst="12" value="1" />
-  <node id="11" pos="2.06659 23.6482 -12.6875" />
+  <node id="11" pos="2.06659 -12.6875 23.6482" />
   <weight src="11" dst="2" value="1" />
   <weight src="11" dst="7" value="1" />
   <weight src="11" dst="12" value="1" />
-  <node id="12" pos="2.06659 19.0217 -12.6875" />
+  <node id="12" pos="2.06659 -12.6875 19.0217" />
   <weight src="12" dst="10" value="1" />
   <weight src="12" dst="11" value="1" />
 </graph>

@@ -63,6 +63,7 @@ public:
   GET_SET( D3DXHANDLE, BonesParameter );
 
   GET_SET( D3DXHANDLE, DebugColor );
+  GET_SET( D3DXHANDLE, UseDebugColor );
 
   GET_SET( D3DXHANDLE, SceneTextureParameter );
   GET_SET( D3DXHANDLE, BloomThresholdParameter );
@@ -130,6 +131,7 @@ public:
   }
 
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
+  void SetUseDebugColor( bool aUse );
 
 private: // Members
   std::string m_FileName;

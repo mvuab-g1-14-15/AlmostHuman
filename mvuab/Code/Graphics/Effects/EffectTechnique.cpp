@@ -87,6 +87,7 @@ bool CEffectTechnique::BeginRender()
     m_Effect->SetCameraPosition( l_CameraEye );
   }
 
+  m_Effect->SetUseDebugColor(false);
   if ( m_UseDebugColor )
   {
     l_Handle = m_Effect->GetDebugColor();
@@ -96,6 +97,7 @@ bool CEffectTechnique::BeginRender()
     l_DebugColor[2] = m_DebugColor.GetBlue();
     l_DebugColor[3] = m_DebugColor.GetAlpha();
     l_Effect->SetFloatArray( l_Handle, l_DebugColor, sizeof( float ) * 4 );
+	m_Effect->SetUseDebugColor(true);
   }
 
   if ( m_FogFun == 2 )

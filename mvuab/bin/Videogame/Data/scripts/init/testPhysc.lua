@@ -35,7 +35,7 @@ function init()
 	PUD_Player:SetPaint(true)
 	rooms = {Vect3f( 0, 2, 1 ), Vect3f( 8, -10, 18 ), Vect3f( 40, -15, -8), Vect3f( 141, 35, -17 ), Vect3f( 104, 22, 198 )}
 	local position = rooms[g_Room]
-	local PlayerController = process:GetNewController(0.4, 2, 0.2, 0.1, 0.5, PUD_Player, position, -10)
+	local PlayerController = process:GetNewController(0.4, 2, 0.01, 0.01, 0.01, PUD_Player, position, -10)
 	physic_manager:AddPhysicController(PlayerController)
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
 	initialized = true

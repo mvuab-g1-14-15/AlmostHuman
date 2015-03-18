@@ -11,6 +11,11 @@ fn ExportGraphXML filenameXML =
 
 	spl = selection[1]
 
+	/*local l_Transform = spl.transform
+	local matrix=(spl.transform.rotation*spl.objectoffsetrot) as matrix3
+	matrix.pos=spl.transform.pos
+	local InvTransform=inverse matrix	*/
+	
 	if classOf spl == SplineShape or classOf spl == line then
 	(
 		local count = 1
@@ -67,7 +72,7 @@ fn ExportGraphXML filenameXML =
 
 	xDoc = XMLDocument filenameXML
 	--create the base node and append the node to the document
-	local l_RootNode = xDoc.getNewNode "Graph"
+	local l_RootNode = xDoc.getNewNode "graph"
 	xDoc.AppendNode l_RootNode
 
 	format "RAW Data:\n"
@@ -79,8 +84,8 @@ fn ExportGraphXML filenameXML =
 		local l_NewGraphNode = xDoc.getNewNode "node"
 		l_RootNode.AppendNode l_NewGraphNode
 		l_NewGraphNode.AddAttributeFloat "id" i
-
-		local l_Pos = point3 m_Nodes[i].x m_Nodes[i].z m_Nodes[i].y
+		
+		local l_Pos = point3 m_Nodes[i].x m_Nodes[i].y m_Nodes[i].z
 		l_NewGraphNode.AddAttributeCoordinate "pos" l_Pos
 		
 		format "Node: %\n" m_Nodes[i]

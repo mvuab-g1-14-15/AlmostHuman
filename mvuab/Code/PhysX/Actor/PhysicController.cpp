@@ -133,10 +133,10 @@ void CPhysicController::SetPosition( const Math::Vect3f& pos )
 {
   if ( m_pPhXController != NULL )
   {
-    NxExtendedVec3 position;
+    NxExtendedVec3 position = m_pPhXController->getPosition();
     position.x = pos.x;
     position.y = pos.y;
-    position.z = pos.z;
+	position.z = pos.z;
     m_pPhXController->setPosition( position );
   }
   else if ( m_pPhXBoxControllerDesc != NULL )
@@ -169,7 +169,7 @@ Math::Vect3f CPhysicController::GetPosition()
   if ( m_pPhXController != NULL )
   {
     // Parche Jordi!!
-    //NxExtendedVec3 tmp = m_pPhXController->getPosition();
+    //NxExtendedVec3 tmp1 = m_pPhXController->getPosition();
     NxExtendedVec3 tmp = m_pPhXController->getDebugPosition();
     vec.x = ( float )tmp.x;
     vec.y = ( float )tmp.y;
@@ -206,6 +206,8 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
 
   if ( m_bUseGravity )
     l_fDirectionY += ( m_fGravity * _ElapsedTime );
+
+  //l_fDirectionY = 0;
 
   NxVec3 l_Direction( _vDirection.x, l_fDirectionY, _vDirection.z );
   NxF32 sharpness = 1.0f;

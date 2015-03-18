@@ -5,13 +5,14 @@
 #include "Utils\Defines.h"
 
 class CCamera;
+class CAStar;
 
 class CProcess
 {
 protected:
   CCamera*    m_pCamera;
-  float32        m_FPS;
   uint8        m_LastLineInDebug;
+  CAStar*		m_AStar;
 public:
   CProcess();
   CProcess( CCamera* ap_Camera );
@@ -23,9 +24,10 @@ public:
   virtual void RenderDebugInfo();
 
   GET_SET_PTR( CCamera, Camera );
-  GET_SET( float32, FPS );
-
-
+  CAStar* GetAStar() const
+  {
+	  return m_AStar;
+  }
 };
 
 #endif // PROCESS_H

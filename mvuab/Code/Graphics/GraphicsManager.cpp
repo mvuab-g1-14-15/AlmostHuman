@@ -81,6 +81,7 @@ CGraphicsManager::CGraphicsManager() :
 
 CGraphicsManager::~CGraphicsManager()
 {
+  CHECKED_RELEASE( m_SphereMesh );
   Release();
 }
 
@@ -318,6 +319,7 @@ bool CGraphicsManager::Init( HWND hWnd, bool fullscreenMode, uint32 widthScreen,
   }
 
   D3DXCreateTeapot( m_pD3DDevice, &m_TeapotMesh, 0 );
+  D3DXCreateSphere( m_pD3DDevice, 0.2, 10, 10, &m_SphereMesh, 0 );
   return m_bIsOk;
 }
 
@@ -458,7 +460,7 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
     return;
 
   //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
@@ -481,11 +483,8 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
 
 void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Aristas )
 {
-  if ( FAILED( D3DXCreateSphere( m_pD3DDevice, Radius, Aristas, Aristas, &m_SphereMesh, 0 ) ) )
-    return;
-
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
@@ -502,7 +501,6 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
   }
 
   l_Effect->End();
-  CHECKED_RELEASE( m_SphereMesh );
 }
 
 void CGraphicsManager::DrawCircle( float32 Radius, Math::CColor Color, int32 Aristas )
@@ -728,8 +726,8 @@ void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, 
                                    &m_CylinderMesh, 0 ) ) )
     return;
 
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
   EffectTechnique->SetDebugColor( Color );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
