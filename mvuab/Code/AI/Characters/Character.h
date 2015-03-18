@@ -31,7 +31,7 @@ protected:
   virtual CPhysicUserData* GetPhysicsUserData();
 private: // Members
   std::string m_AIPath;
-  CPhysicController* m_PController;
+  CPhysicController* mController;
   Math::Vect3f m_TargetPosition;
   Math::Vect3f m_TargetPositionOriginal;
   float32       m_Speed;

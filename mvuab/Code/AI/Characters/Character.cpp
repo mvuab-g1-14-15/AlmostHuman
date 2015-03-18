@@ -26,9 +26,9 @@ void CCharacter::Destroy()
 {
   if ( m_init )
   {
-    CPhysicUserData* l_PUD = m_PController->GetUserData();
+    CPhysicUserData* l_PUD = mController->GetUserData();
     CHECKED_DELETE( l_PUD );
-    CHECKED_DELETE( m_PController );
+    CHECKED_DELETE( mController );
   }
 }
 
@@ -40,7 +40,7 @@ void CCharacter::Update()
 {
   CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
   CPhysicController* l_CharacterController = l_PUD->GetController();
-  Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_PController->GetPosition();
+  Math::Vect3f l_Distance = l_CharacterController->GetPosition() - mController->GetPosition();
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
@@ -49,8 +49,8 @@ void CCharacter::Update()
   else
     SetTargetPosition( m_TargetPositionOriginal );
 
-  Math::Vect3f l_Position = m_PController->GetPosition();
-  float l_Yaw = m_PController->GetYaw();
+  Math::Vect3f l_Position = mController->GetPosition();
+  float l_Yaw = mController->GetYaw();
   Math::Vect3f l_Direction( Math::Utils::Cos( l_Yaw ) , 0.0f, Math::Utils::Sin( l_Yaw ) );
   l_Direction = l_Direction.GetNormalized();
   Math::Vect3f l_DessiredDirection = m_TargetPosition - l_Position;
@@ -63,19 +63,19 @@ void CCharacter::Update()
   l_Interpolator3D.SetValues( l_Direction, l_DessiredDirection, 1.0f, Math::FUNC_CONSTANT );
   Math::Vect3f l_LookAt;
   l_Interpolator3D.Update( 1, l_LookAt );
-  m_PController->SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
+  mController->SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
   SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
 
   if ( l_LookAt != Math::Vect3f( 0, 0, 0 ) )
     l_LookAt = l_LookAt.GetNormalized();
 
   float n = l_LookAt.Length();
-  m_PController->Move( l_LookAt * m_Speed, deltaTime );
-  SetPosition( m_PController->GetPosition() );
+  mController->Move( l_LookAt * m_Speed, deltaTime );
+  SetPosition( mController->GetPosition() );
   /* CRenderableObject* l_Box =
      CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource( "solid" )->GetResource( "Pyramid001" );
-   l_Box->SetPosition( m_PController->GetPosition() + Vect3f( 0, 2, 0 ) );
-   l_Box->SetYaw( m_PController->GetYaw() );*/
+   l_Box->SetPosition( mController->GetPosition() + Vect3f( 0, 2, 0 ) );
+   l_Box->SetYaw( mController->GetYaw() );*/
 }
 
 void CCharacter::Render()
@@ -96,7 +96,7 @@ void CCharacter::Init()
 {
   m_Height = 1.0f;
   m_Radius = 0.2f;
-  m_PController = new CPhysicController( m_Radius,
+  mController = new CPhysicController( m_Radius,
                                          m_Height,
                                          2.0f,
                                          2.0f,
@@ -105,15 +105,15 @@ void CCharacter::Init()
                                          GetPhysicsUserData(),
                                          Math::Vect3f( -10, 0.0, 10 ),
                                          -10.0 );
-  m_PController->GetUserData()->SetPaint(false);
+  mController->GetUserData()->SetPaint(false);
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
-  l_PM->AddPhysicController( m_PController );
+  l_PM->AddPhysicController( mController );
   m_init = true;
 }
 void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
-  m_PController = new CPhysicController( Node.GetFloatProperty( "radius", 0.2f ),
+  mController = new CPhysicController( Node.GetFloatProperty( "radius", 0.2f ),
                                          Node.GetFloatProperty( "height", 1.0f ),
                                          Node.GetFloatProperty( "slope", 0.2f ),
                                          Node.GetFloatProperty( "skin_width", 0.01f ),
@@ -123,10 +123,10 @@ void CCharacter::Init( CXMLTreeNode& Node )
                                          Node.GetFloatProperty( "gravity", -10.0f ) );
 
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
-  l_PM->AddPhysicController( m_PController );
-  SetPosition( m_PController->GetPosition() );
-  SetTargetPosition( m_PController->GetPosition() );  
-  SetTargetPositionOriginal( m_PController->GetPosition() );
+  l_PM->AddPhysicController( mController );
+  SetPosition( mController->GetPosition() );
+  SetTargetPosition( mController->GetPosition() );  
+  SetTargetPositionOriginal( mController->GetPosition() );
   m_init = true;
 }
 

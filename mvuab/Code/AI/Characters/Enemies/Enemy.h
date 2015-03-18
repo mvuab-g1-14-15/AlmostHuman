@@ -16,7 +16,7 @@ class CEnemy : public CCharacter
 {
 public:
   typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
-  CEnemy( CXMLTreeNode& Node );
+  CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
   virtual ~CEnemy();
   virtual void Init();
   virtual void Update();

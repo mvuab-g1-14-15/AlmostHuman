@@ -5,10 +5,12 @@
 
 #pragma once
 
+class CStateMachine;
+
 class CBossEnemy : public CEnemy
 {
 public:
-    CBossEnemy(CXMLTreeNode &Node);
+    CBossEnemy(CXMLTreeNode &Node, CStateMachine* aStateMachine);
     ~CBossEnemy();
 	void Init(){};
     void Update();

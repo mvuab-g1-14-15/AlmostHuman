@@ -44,7 +44,7 @@ public:
     , m_ColorPhysicObject( colWHITE )
     , m_pEntity( 0 )
     , m_pActor( 0 )
-    , m_pController( 0 )
+    , mController( 0 )
     , m_eFlags( _eflags )
     , m_uiCollisionGroup( _uiGrup )
     , m_myCollisionGroup( _uiGrup )
@@ -55,7 +55,7 @@ public:
   {
     m_pActor = NULL;
     m_pEntity = NULL;
-    m_pController = NULL;
+    mController = NULL;
   }
 
   void            SetPaint( bool _bFlag )
@@ -81,7 +81,7 @@ public:
   };
   void            SetController( CPhysicController* _pController )
   {
-    m_pController = _pController;
+    mController = _pController;
   };
   void            SetRadius( float _Radius )
   {
@@ -115,7 +115,7 @@ public:
   };
   inline CPhysicController* GetController() const
   {
-    return m_pController;
+    return mController;
   };
   inline float        GetRadius() const
   {
@@ -146,7 +146,7 @@ private:
   bool        m_bPaintPhysicObject;
   Math::CColor        m_ColorPhysicObject;
   CPhysicActor*   m_pActor;
-  CPhysicController*  m_pController;
+  CPhysicController*  mController;
   CObject3D*      m_pEntity;
   EUserDataFlag   m_eFlags;
   ECollisionGroup   m_uiCollisionGroup;

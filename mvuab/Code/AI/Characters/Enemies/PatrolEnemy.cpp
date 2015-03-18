@@ -3,8 +3,8 @@
 #include "GraphicsManager.h"
 #include "Core.h"
 
-CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node )
-  : CEnemy( Node ), m_CurrentPoint( 0 )
+CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
+  : CEnemy( Node, aStateMachine ), m_CurrentPoint( 0 )
   , m_RouteId(Node.GetIntProperty("route", -1))
 {
 }

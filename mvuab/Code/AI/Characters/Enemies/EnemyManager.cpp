@@ -51,8 +51,8 @@ void CEnemyManager::Render()
 
 void CEnemyManager::Init( const std::string& Filename )
 {
-  std::map<std::string, CreateEnemyFn> l_CreateEnemiesFnsMap;
   m_Filename = Filename;
+  RegisterEnemies();
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_Filename.c_str() ) )
@@ -137,40 +137,28 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
   const std::string& lType = Node.GetPszProperty( "type" );
   CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
-  if ( lCoreEnemy )
+  if ( !lCoreEnemy )
   {
-
-    if ( lType == "easy" )
-    {
-      CEasyEnemy* lEnemy = new CEasyEnemy( Node );
-      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-
-      if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
-        CHECKED_DELETE( lEnemy );
-    }
-    else if ( lType == "patroll" )
-    {
-      CPatrolEnemy* lEnemy = new CPatrolEnemy( Node );
-      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-	  lEnemy->SetWaypoints(m_Routes[lEnemy->GetRouteId()]);
-      if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
-        CHECKED_DELETE( lEnemy );
-
-      //lCoreEnemy->m_EnemyType = CEnemy::ePatroll;
-    }
-    else if ( lType == "boss" )
-    {
-      CBossEnemy* lEnemy = new CBossEnemy( Node );
-      lEnemy->SetStateMachine( m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName ) );
-	  
-      if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
-        CHECKED_DELETE( lEnemy );
-
-      //lCoreEnemy->m_EnemyType = CEnemy::eBoss;
-    }
+	LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
   }
-  else
-    LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
+
+  CStateMachine* lStateMachine = m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName );
+  if ( !lStateMachine )
+  {
+	LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) );
+  }
+
+  CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
+
+  CPatrolEnemy *lPatrolEnemy =  dynamic_cast<CPatrolEnemy*>(lEnemy);
+  if(lPatrolEnemy)
+	  lPatrolEnemy->SetWaypoints(m_Routes[lPatrolEnemy->GetRouteId()]);
+
+  if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
+  {
+	  LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
+      CHECKED_DELETE( lEnemy );
+  }
 }
 
 void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
@@ -187,4 +175,11 @@ void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
 			LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
 	}
 	m_Routes[l_Id]=l_Route;
+}
+
+void CEnemyManager::RegisterEnemies()
+{
+	EnemyFactory.Register( "easy", Type2Type<CEasyEnemy>( ) );
+	EnemyFactory.Register( "patroll", Type2Type<CPatrolEnemy>( ) );
+	EnemyFactory.Register( "boss", Type2Type<CBossEnemy>( ) );
 }

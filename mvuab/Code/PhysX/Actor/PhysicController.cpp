@@ -1,5 +1,3 @@
-#define __DONT_INCLUDE_MEM_LEAKS__
-//#include "Utils\Base.h"
 #include "Core.h"
 #include "Actor\PhysicController.h"
 
@@ -15,15 +13,7 @@
 #include "Actor\PhysicController.h"
 #include "PhysicsManager.h"
 #include "Reports\PhysicsControllerHitReport.h"
-//---------------------//
 
-//#if defined (_DEBUG)
-//#include "Memory\MemLeaks.h"
-//#endif
-
-// -----------------------------------------
-//      CONSTRUCTORS / DESTRUCTOR
-// -----------------------------------------
 CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSlope,
                                       float _fSkinwidth, float _fStepOffset
                                       , ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
