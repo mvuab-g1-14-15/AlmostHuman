@@ -56,13 +56,13 @@
     LENS FLARE
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <lens_of_flare>
-        <texture stage_id="0" name="nova.png"/>
-        <texture stage_id="1" name="extendring.png"/>
-        <texture stage_id="2" name="hexangle.png"/>
-        <texture stage_id="3" name="hexagon.png"/>
-        <texture stage_id="4" name="starring.png"/>
-        <texture stage_id="5" name="star.png"/>
-        <texture stage_id="6" name="extend.png"/>
+        <texture stage_id="0" name="./Data/textures/nova.png"/>
+        <texture stage_id="1" name="./Data/textures/extendring.png"/>
+        <texture stage_id="2" name="./Data/textures/hexangle.png"/>
+        <texture stage_id="3" name="./Data/textures/hexagon.png"/>
+        <texture stage_id="4" name="./Data/textures/starring.png"/>
+        <texture stage_id="5" name="./Data/textures/star.png"/>
+        <texture stage_id="6" name="./Data/textures/extend.png"/>
     </lens_of_flare>
 =============================================================================================================================================================
     FILTER BLOOM

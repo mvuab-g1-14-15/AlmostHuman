@@ -54,7 +54,7 @@
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	
 	<lens_of_flare>
-		<texture stage_id="0" name="nova.png"/>
+		<texture stage_id="0" name="./Data/textures/nova.png"/>
 	</lens_of_flare>
 	-->
 	
