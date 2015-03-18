@@ -553,7 +553,7 @@ void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 
-void CGraphicsManager::SetTransform(const Math::Mat44f& m )
+void CGraphicsManager::SetTransform( const Math::Mat44f& m )
 {
   D3DXMATRIX aux
   (
@@ -763,20 +763,20 @@ void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, M
   //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
   //DrawSphere( radius, Color, Aristas );
 
-	Math::Mat44f t;
-	t.RotByAngleX(3.1415/2);
-	SetTransform(t);
-	DrawCylinder( radius, radius, h, Aristas, Color, false);
-	t.SetIdentity();
-	t.Translate(Math::Vect3f(0,h*0.5f,0));
-	SetTransform(t);
-	DrawSphere(radius, Color, Aristas);
-	t.SetIdentity();
-	t.Translate(Math::Vect3f(0,-h*0.5f,0));
-	SetTransform(t);
-	DrawSphere(radius, Color, Aristas);
-	t.SetIdentity();
-	SetTransform(t);
+  Math::Mat44f t;
+  t.RotByAngleX( 3.1415 / 2 );
+  SetTransform( t );
+  DrawCylinder( radius, radius, h, Aristas, Color, false );
+  t.SetIdentity();
+  t.Translate( Math::Vect3f( 0, h * 0.5f, 0 ) );
+  SetTransform( t );
+  DrawSphere( radius, Color, Aristas );
+  t.SetIdentity();
+  t.Translate( Math::Vect3f( 0, -h * 0.5f, 0 ) );
+  SetTransform( t );
+  DrawSphere( radius, Color, Aristas );
+  t.SetIdentity();
+  SetTransform( t );
 }
 
 void CGraphicsManager::DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& up,
@@ -810,10 +810,44 @@ void CGraphicsManager::DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& u
 }
 
 void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Math::Vect3f& ur,
-                   const Math::Vect3f& dl,
-                   const Math::Vect3f& dr, CEffectTechnique* EffectTechnique )
+    const Math::Vect3f& dl,
+    const Math::Vect3f& dr, const Math::Vect3f& n, CEffectTechnique* EffectTechnique, CTexture* Texture )
 {
   // TODO
+  if ( EffectTechnique == NULL )
+    return;
+
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+
+  if ( l_Effect != NULL )
+  {
+    m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
+    l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+    UINT l_NumPasses;
+    l_Effect->Begin( &l_NumPasses, 0 );
+
+    for ( UINT iPass = 0; iPass < l_NumPasses; iPass++ )
+    {
+      l_Effect->BeginPass( iPass );
+      TT1_N_VERTEX v[4] =
+      {
+        { ul.x, ul.y, ul.z, n.x, n.y, n.z, 0, 0, 1},
+        { dl.x, dl.y, dl.z, n.x, n.y, n.z, 0, 1, 1},
+        { ur.x, ur.y, ur.z, n.x, n.y, n.z, 0, 1, 0},
+        { dr.x, dr.y, dr.z, n.x, n.y, n.z, 0, 0, 0}
+      };
+      m_pD3DDevice->SetFVF( TT1_N_VERTEX::GetFVF() );
+
+      if ( Texture != NULL )
+        Texture->Activate( 0 );
+
+      m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( TT1_N_VERTEX ) );
+      l_Effect->EndPass();
+    }
+
+    l_Effect->End();
+  }
 }
 
 void CGraphicsManager::DrawIcoSphere()

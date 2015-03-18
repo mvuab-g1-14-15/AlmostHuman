@@ -470,6 +470,30 @@ struct TT1_VERTEX
   }
 };
 
+struct TT1_N_VERTEX
+{
+  float x, y, z;
+  float nx, ny, nz, nw;
+  float tu, tv;
+
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_NORMAL;
+  }
+
+  static inline unsigned int GetFVF()
+  {
+    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_NORMAL;
+  }
+};
+
 struct CAL3D_HW_VERTEX
 {
   float x, y, z;
