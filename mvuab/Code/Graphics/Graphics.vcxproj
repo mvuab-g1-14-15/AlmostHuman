@@ -14,6 +14,7 @@
     <ClCompile Include="AnimatedModels\AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
+    <ClCompile Include="Billboard\Billboard.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Cameras\CameraCinematical.cpp" />
     <ClCompile Include="Cameras\CameraFPShooter.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\RenderParticulesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommandManager.cpp" />
@@ -91,6 +93,7 @@
     <ClInclude Include="AnimatedModels\AnimatedCoreModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
+    <ClInclude Include="Billboard\Billboard.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Cameras\CameraCinematical.h" />
     <ClInclude Include="Cameras\CameraFPShooter.h" />
@@ -151,6 +154,7 @@
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\RenderParticulesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommandManager.h" />

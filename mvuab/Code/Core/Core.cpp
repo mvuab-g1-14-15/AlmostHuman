@@ -23,6 +23,7 @@
 #include "Triggers\TriggerManager.h"
 #include "Actor\PhysicActor.h"
 #include "Characters\Enemies\EnemyManager.h"
+#include "Billboard\Billboard.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -71,7 +72,8 @@ CCore::CCore() :
   m_pEnemyManager( new CEnemyManager() ),
   m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
-  m_pConsole( new CConsole( TRUE ) )
+  m_pConsole( new CConsole( TRUE ) ),
+  m_pBillboard( new CBillboard() )
 {
   m_pConsole->RedirectToConsole( 0 );
   // test stdio
@@ -105,6 +107,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pPhysicsManager );
   CHECKED_DELETE( m_pEnemyManager );
   CHECKED_DELETE( m_pTriggerManager );
+  CHECKED_DELETE( m_pBillboard );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -128,6 +131,7 @@ void CCore::Update()
   m_pCameraManager->Update();
   m_pPhysicsManager->Update( deltaTime );
   m_pEnemyManager->Update();
+  m_pBillboard->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
@@ -279,6 +283,8 @@ void CCore::InitManagers()
   m_pPhysicsManager->Init();
   m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
+
+  m_pBillboard->Init(Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/BARK5.jpg");
 }
 
 void CCore::Trace( const std::string& TraceStr )

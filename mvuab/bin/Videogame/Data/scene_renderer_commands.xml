@@ -60,6 +60,7 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
     
+	<render_particules/>
 	<!--
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	

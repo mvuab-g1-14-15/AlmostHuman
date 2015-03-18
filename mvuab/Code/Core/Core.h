@@ -33,6 +33,7 @@ class CSceneRendererCommandManager;
 class CPhysicsManager;
 class CEnemyManager;
 class CTriggerManager;
+class CBillboard;
 
 class CCore : public CSingleton<CCore>
 {
@@ -86,6 +87,7 @@ private:
   CTriggerManager*                    m_pTriggerManager;
   CTimer*                             m_pTimer;
   CConsole*                           m_pConsole;
+  CBillboard*						  m_pBillboard;
   void LoadXml();
   void InitManagers();
 
@@ -135,6 +137,7 @@ public:
   GET_SET_PTR( CEnemyManager, EnemyManager );
   GET_SET_PTR( CTriggerManager, TriggerManager );
   GET_SET_PTR( CTimer, Timer );
+  GET_SET_PTR( CBillboard, Billboard );
 };
 
 #endif // GRAPHICS_MANAGER_H

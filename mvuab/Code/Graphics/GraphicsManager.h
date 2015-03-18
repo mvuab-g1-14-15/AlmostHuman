@@ -35,7 +35,7 @@ public:
   void EndScene();
   void EndRender();
   void SetTransform( D3DXMATRIX& matrix );
-  void SetTransform(const Math::Mat44f& matrix );
+  void SetTransform( const Math::Mat44f& matrix );
   void EnableAlphaBlend();
   void DisableAlphaBlend();
   void EnableZBuffering();
@@ -102,8 +102,11 @@ public:
   void DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& ur,
                    const Math::Vect3f& dl,
                    const Math::Vect3f& dr, Math::CColor color );
-  void DrawHalfLowerSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
-  void DrawHalfUpperSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
+  void DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Math::Vect3f& ur,
+                                const Math::Vect3f& dl,
+                                const Math::Vect3f& dr, const Math::Vect3f& n, CEffectTechnique* EffectTechnique, CTexture* Texture );
+  void DrawHalfLowerSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
+  void DrawHalfUpperSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
 
   void DrawTeapot();
   void CreateQuadBuffers();

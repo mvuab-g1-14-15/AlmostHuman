@@ -222,6 +222,12 @@
     <ClCompile Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="Billboard\Billboard.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderParticulesSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -454,6 +460,12 @@
     <ClInclude Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
+    <ClInclude Include="Billboard\Billboard.h">
+      <Filter>Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderParticulesSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -488,6 +500,9 @@
     </Filter>
     <Filter Include="StaticMeshes">
       <UniqueIdentifier>{5c5324d5-4c2d-48ae-b6af-fddbe48f4f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard">
+      <UniqueIdentifier>{d076ecc9-bf12-4d5f-bf66-5728db8f7a2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
