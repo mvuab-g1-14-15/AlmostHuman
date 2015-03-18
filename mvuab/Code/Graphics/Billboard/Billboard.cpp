@@ -54,7 +54,8 @@ void CBillboard::Update()
     N_VectRight=VectUp^VectDir
     a=pos + n_VectorUP*size/2 -N_VectRight*size/2;*/
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
-    Math::Vect3f l_vRight = l_Camera->GetDirection().Normalize()^l_Camera->GetVecUp().Normalize();
+    Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
+    Math::Vect3f l_vRight = ( -l_Pos2Cam.Normalize() ) ^ l_Camera->GetVecUp().Normalize();
     l_vRight.Normalize();
     float halfSize = m_Size / 2;
     Math::Vect3f l_newUP( l_Camera->GetVecUp().Normalize()*halfSize );
@@ -107,8 +108,9 @@ void CBillboard::Render()
     CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
 
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
+    Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
 
-    GraphicsInstance->DrawQuad3DWithTechnique( m_PosA, m_PosB, m_PosC, m_PosD, -l_Camera->GetDirection().Normalize(), EffectTechnique, m_Texture );
+    GraphicsInstance->DrawQuad3DWithTechnique( m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique, m_Texture );
 
     //GraphicsInstance->GetDevice()->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 6, 2,l_Indexes,D3DFMT_INDEX16, l_Points, sizeof( TT1_VERTEX ) );
     //GraphicsInstance->DisableAlphaBlend();

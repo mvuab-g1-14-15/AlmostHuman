@@ -39,6 +39,7 @@
 #include <Windows.h>
 #include <sstream>
 #include "Utils\ObjectFactory.h"
+#include "RenderParticulesSceneRendererCommand.h"
 
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
@@ -127,6 +128,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderDebugPhysicsSceneRendererCommand>() );
   CommandFactory.Register( "render_developer_info",
                            Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
+  CommandFactory.Register( "render_particules",
+                           Type2Type<CRenderParticulesSceneRendererCommand>( ) );
 
   CXMLTreeNode l_File;
 
@@ -165,9 +168,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
         Command = CommandFactory.Create( TagName.c_str(), TreeNode( i ) );
 
       if ( !Command )
-      {
-		  LOG_ERROR_APPLICATION("Comand %s not found in the factory of commands!", TagName.c_str());
-      }
+        LOG_ERROR_APPLICATION( "Comand %s not found in the factory of commands!", TagName.c_str() );
       else
       {
         if ( !m_SceneRendererCommands.AddResource( TreeNode( i ).GetPszProperty( "name",
