@@ -8,8 +8,10 @@
 //-----------------------------------------------------------------------------
 void VertShadow( float4 Pos : POSITION,
                  float3 Normal : NORMAL,
+				 float2 UV : TEXCOORD0,
                  out float4 oPos : POSITION,
-                 out float2 Depth : TEXCOORD0 )
+                 out float2 Depth : TEXCOORD0, 
+				out float2 oUV : TEXCOORD1 )
 {
     //
     // Compute the projected coordinates
@@ -20,6 +22,7 @@ void VertShadow( float4 Pos : POSITION,
     // Store z and w in our spare texcoord
     //
     Depth.xy = oPos.zw;
+	oUV=UV;
 }
 
 //-----------------------------------------------------------------------------
@@ -27,12 +30,14 @@ void VertShadow( float4 Pos : POSITION,
 // Desc: Process pixel for the shadow map
 //-----------------------------------------------------------------------------
 void PixShadow( float2 Depth : TEXCOORD0,
+				float2 UV : TEXCOORD1,
                 out float4 Color : COLOR )
 {
     //
     // Depth is z / w
     //
     Color = Depth.x / Depth.y;
+	//Color=tex2D(S0LinearSampler, UV);
 }
 
 technique ShadowMapTechnique

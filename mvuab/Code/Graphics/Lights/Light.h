@@ -75,6 +75,7 @@ public:
   void SetType( const TLightType Type );
   TLightType GetType() const;
   virtual void Render() = 0;
+  void ReloadLayers();
 
   virtual void SetShadowMap( CGraphicsManager* GM ) = 0;
   //GET/SET

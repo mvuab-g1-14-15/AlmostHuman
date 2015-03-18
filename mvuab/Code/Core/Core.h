@@ -18,7 +18,6 @@ class CLanguageManager;
 class CFontManager;
 class CActionManager;
 class CTextureManager;
-class CDebugWindowManager;
 class CStaticMeshManager;
 class CRenderableObjectsManager;
 class CRenderableObjectsLayersManager;
@@ -71,7 +70,6 @@ private:
   CLanguageManager*                   m_pLanguageManager;
   CFontManager*                       m_pFontManager;
   CActionManager*                     m_pActionManager;
-  CDebugWindowManager*                m_pDebugWindowManager;
   CStaticMeshManager*                 m_pStaticMeshManager;
   CRenderableObjectsManager*          m_pRenderableObjectsManager;
   CRenderableObjectsLayersManager*    m_pRenderableObjectsLayersManager;

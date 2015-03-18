@@ -207,10 +207,25 @@ void CEffectTechnique::SetupMatrices()
   {
     Math::Mat44f l_ViewToLightProjectionMatrix = l_pEffectManager->GetViewMatrix();
     l_ViewToLightProjectionMatrix.Invert();
-    l_ViewToLightProjectionMatrix = l_pEffectManager->GetLightViewMatrix() *
+	l_ViewToLightProjectionMatrix.SetIdentity();
+
+	//l_ViewToLightProjectionMatrix = l_pEffectManager->GetLightViewMatrix()*l_pEffectManager->GetShadowProjectionMatrix();
+	l_ViewToLightProjectionMatrix = l_pEffectManager->GetShadowProjectionMatrix()*l_pEffectManager->GetLightViewMatrix();
+    
+    /*l_ViewToLightProjectionMatrix = l_pEffectManager->GetShadowProjectionMatrix() *
                                     l_ViewToLightProjectionMatrix;
-    l_ViewToLightProjectionMatrix = l_pEffectManager->GetShadowProjectionMatrix() *
-                                    l_ViewToLightProjectionMatrix;
+
+	l_ViewToLightProjectionMatrix = l_pEffectManager->GetLightViewMatrix() *
+                                    l_ViewToLightProjectionMatrix;*/
+
+
+
+		/*Mat44f l_ViewToLightProjectionMatrix=l_pEffectManager->GetViewMatrix();
+		l_ViewToLightProjectionMatrix.Invert();
+		l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix*l_pEffectManager->GetLightViewMatrix();
+		l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix*l_pEffectManager->GetShadowProjectionMatrix();*/
+//l_Effect->SetMatrix(m_Effect->m_ViewToLightProjectionMatrixParameter, &l_ViewToLightProjectionMatrix.GetD3DXMatrix());
+
 
     if ( !m_Effect->SetViewToLightMatrix( l_ViewToLightProjectionMatrix ) )
       CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,

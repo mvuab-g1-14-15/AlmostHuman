@@ -115,6 +115,8 @@ public:
     CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
     float U0, float V0, float U1, float V1 );
 
+  uint32 GetWindowHeight();
+
 
 private: // Members
   HWND

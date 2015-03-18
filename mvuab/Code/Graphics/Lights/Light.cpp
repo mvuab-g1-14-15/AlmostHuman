@@ -35,7 +35,7 @@ CLight::CLight( const CXMLTreeNode& node )
                      node.GetPszProperty( "shadow_map_format_type", "" ) );
     size_t l_Width = node.GetIntProperty( "shadow_map_width", 0 );
     size_t l_Height = node.GetIntProperty( "shadow_map_height", 0 );
-    m_DynamicShadowMap->Create( "Light_Dynamic", l_Width, l_Height, 0,
+    m_DynamicShadowMap->Create( "Light_Dynamic", l_Width, l_Height, 1,
                                 CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
@@ -47,7 +47,7 @@ CLight::CLight( const CXMLTreeNode& node )
                      node.GetPszProperty( "static_shadow_map_format_type", "" ) );
     size_t l_Width = node.GetIntProperty( "static_shadow_map_width", 0 );
     size_t l_Height = node.GetIntProperty( "static_shadow_map_height", 0 );
-    m_StaticShadowMap->Create( "Light_Static", l_Width, l_Height, 0,
+    m_StaticShadowMap->Create( "Light_Static", l_Width, l_Height, 1,
                                CTexture::RENDERTARGET, CTexture::DEFAULT, l_FormatType );
   }
 
@@ -208,7 +208,7 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
     // To write into the texture of the static shadow map
     m_StaticShadowMap->SetAsRenderTarget();
     GM->BeginRender();
-    GM->Clear( true, true, true, 0xffffffff );
+    GM->Clear( true, true, false, 0x000000ff );
 
     for ( size_t i = 0; i < m_StaticShadowMapRenderableObjectsManagers.size(); ++i )
       m_StaticShadowMapRenderableObjectsManagers[i]->Render();
@@ -264,4 +264,14 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect* Effect )
                                     m_GenerateStaticShadowMap, m_GenerateDynamicShadowMap &&
                                     m_DynamicShadowMapRenderableObjectsManagers.size() != 0 );
   }
+}
+
+void CLight::ReloadLayers()
+{
+	/*CRenderableObjectsManager* l_ROM =
+	CoreInstance->GetRenderableObjectsLayersManager()->GetResource( "solid" );
+
+	if ( !l_ROM )
+		m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
+	*/
 }

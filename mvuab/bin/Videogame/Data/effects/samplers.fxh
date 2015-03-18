@@ -313,11 +313,11 @@ samplerCUBE S7CubeAnisotropicSampler : register (s7)=sampler_state
 
 sampler ShadowMapTextureSampler : register( s5 ) = sampler_state
 {
-	MipFilter = LINEAR;
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	AddressU = Clamp;
-	AddressV = Clamp;
+	MinFilter = Point;
+    MagFilter = Point;
+    MipFilter = Point;
+    AddressU = Clamp;
+    AddressV = Clamp;
 };
 sampler ShadowMapTextureDynamicSampler : register( s6 ) = sampler_state
 {

@@ -50,6 +50,7 @@
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableZTestSceneRendererCommand.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableAlphaBlendSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableZTestSceneRendererCommand.h" />

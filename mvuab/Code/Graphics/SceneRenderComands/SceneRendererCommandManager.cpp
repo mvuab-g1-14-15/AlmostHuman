@@ -29,6 +29,8 @@
 #include "SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h"
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
 #include "SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h"
+#include "SceneRenderComands\DeveloperInfoSceneRendererCommand.h"
+#include "SceneRenderComands\DisableZTestSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -83,6 +85,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CSetRenderTargetSceneRendererCommand>( ) );
   CommandFactory.Register( "disable_z_write",
                            Type2Type<CDisableZWriteSceneRendererCommand>( ) );
+  CommandFactory.Register( "disable_z_test",
+                           Type2Type<CDisableZTestSceneRendererCommand>( ) );
   CommandFactory.Register( "render_draw_quad",
                            Type2Type<CDrawQuadRendererCommand>( ) );
   CommandFactory.Register( "capture_frame_buffer",
@@ -121,6 +125,9 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CAStarGraphDrawerSceneRendererCommand>() );
   CommandFactory.Register( "render_debug_physics",
                            Type2Type<CRenderDebugPhysicsSceneRendererCommand>() );
+  CommandFactory.Register( "render_developer_info",
+                           Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
+
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( FileName.c_str() ) )
@@ -159,8 +166,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
 
       if ( !Command )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CStaticMesh::Load No se ha podido abrir \"%s\"!",
-                                               TagName.c_str() );
+		  LOG_ERROR_APPLICATION("Comand %s not found in the factory of commands!", TagName.c_str());
       }
       else
       {

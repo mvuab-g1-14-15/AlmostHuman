@@ -81,11 +81,15 @@ void CSpotLight::SetShadowMap( CGraphicsManager* GM )
         Math::Vect3f l_Cross = Math::v3fY ^ m_Direction;
         Math::Vect3f l_VUpV3f = m_Direction ^ l_Cross;
         l_VUP = D3DXVECTOR3(l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z);
+		
     }
-
+	l_VUP.x=0.0f;
+	l_VUP.y=1.0f;
+	l_VUP.z=0.0f;
+	D3DXVec3Normalize(&l_VUP, &l_VUP);
     D3DXMatrixLookAtLH(&l_View, &l_Eye, &l_LookAt, &l_VUP);
     m_ViewShadowMap = Math::Mat44f(l_View);
-    D3DXMatrixPerspectiveFovLH(&l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation);
+	D3DXMatrixPerspectiveFovLH(&l_Projection, Math::Utils::Deg2Rad(m_FallOff), 1.0f, 1.0f, m_EndRangeAttenuation);
     m_ProjectionShadowMap = Math::Mat44f(l_Projection);
 
     CEffectManager *l_EffectManager = CEffectManager::GetSingletonPtr();
