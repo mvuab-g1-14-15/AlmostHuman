@@ -809,6 +809,13 @@ void CGraphicsManager::DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& u
                                         sizeof( CUSTOMVERTEX ) );
 }
 
+void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Math::Vect3f& ur,
+                   const Math::Vect3f& dl,
+                   const Math::Vect3f& dr, CEffectTechnique* EffectTechnique )
+{
+  // TODO
+}
+
 void CGraphicsManager::DrawIcoSphere()
 {
   const float32 X = 0.525731112119133606f;

@@ -102,6 +102,9 @@ public:
   void DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& ur,
                    const Math::Vect3f& dl,
                    const Math::Vect3f& dr, Math::CColor color );
+  void DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Math::Vect3f& ur,
+                   const Math::Vect3f& dl,
+                   const Math::Vect3f& dr, CEffectTechnique* EffectTechnique );
   void DrawHalfLowerSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
   void DrawHalfUpperSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
 
