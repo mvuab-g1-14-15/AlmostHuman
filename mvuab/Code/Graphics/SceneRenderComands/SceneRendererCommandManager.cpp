@@ -27,6 +27,7 @@
 #include "SceneRenderComands\EnableAlphaTestSceneRendererCommand.h"
 #include "SceneRenderComands\SetBlendSceneRendererCommand.h"
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
+#include "SceneRenderComands\RenderParticulesSceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -115,6 +116,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderSceneSceneRendererCommand>( ) );
   CommandFactory.Register( "render_debug_lights",
                            Type2Type<CRenderDebugLightsSceneRendererCommand>( ) );
+  CommandFactory.Register( "render_particules",
+                           Type2Type<CRenderParticulesSceneRendererCommand>( ) );
 
   CXMLTreeNode l_File;
 
