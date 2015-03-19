@@ -32,6 +32,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{350e3c8d-e5ce-48c8-9f64-58ca3b53b1eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{4996e572-7dc6-4744-963d-07c33f3bf288}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Triggers\Trigger.cpp">
@@ -88,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp">
       <Filter>PhysicMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles\Particle.cpp">
+      <Filter>Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="PhysicMaterial\PhysicMaterial.h">
       <Filter>PhysicMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\Particle.h">
+      <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
