@@ -50,7 +50,7 @@ CPhysicsManager::CPhysicsManager( void )
   , m_bDebugRenderMode( false )
   , m_pPhysicsSDK( NULL )
   , m_pScene( NULL )
-  , m_pControllerManager( NULL )
+  , mControllerManager( NULL )
   , m_pMyAllocator( NULL )
   , m_pCookingMesh( NULL )
   , m_InitParams( )
@@ -127,8 +127,8 @@ bool CPhysicsManager::Init( void )
         defaultMaterial->setStaticFriction( m_InitParams.m_StaticFriction_DefMat );
         defaultMaterial->setDynamicFriction( m_InitParams.m_DynamicFriction_DefMat );
         // Create a controllerManager
-        m_pControllerManager = NxCreateControllerManager( m_pMyAllocator );
-        m_bIsOk = ( m_pControllerManager != NULL );
+        mControllerManager = NxCreateControllerManager( m_pMyAllocator );
+        m_bIsOk = ( mControllerManager != NULL );
 
         if ( m_bIsOk )
         {
@@ -139,7 +139,7 @@ bool CPhysicsManager::Init( void )
 
           if ( m_bIsOk )
             CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Creado el CookingMesh" );
-        }// isOk m_pControllerManager?
+        }// isOk mControllerManager?
       }//isOk m_pScene?
     }//isOk m_pPhysicsSDK ?
   }//isOk m_pMyAllocator ?
@@ -185,10 +185,10 @@ void CPhysicsManager::Release( void )
   ReleaseAllActors();
   CHECKED_DELETE( m_pCookingMesh );
 
-  if ( m_pControllerManager != NULL )
+  if ( mControllerManager != NULL )
   {
-    m_pControllerManager->purgeControllers();
-    NxReleaseControllerManager( m_pControllerManager );
+    mControllerManager->purgeControllers();
+    NxReleaseControllerManager( mControllerManager );
   }
 
   if ( m_pScene != NULL )
@@ -333,7 +333,7 @@ bool CPhysicsManager::LoadXML( void )
 void CPhysicsManager::Update( float _ElapsedTime )
 {
   assert( m_pScene != NULL );
-  assert( m_pControllerManager != NULL );
+  assert( mControllerManager != NULL );
   // Start simulation (non blocking)
   m_pScene->simulate( _ElapsedTime );
   // Fetch simulation results
@@ -351,7 +351,7 @@ void CPhysicsManager::WaitForSimulation( void )
   m_pScene->getTiming( l_MaxTimestep, l_MaxIter, l_Method, &l_NumSubSteps );
 
   if ( l_NumSubSteps )
-    m_pControllerManager->updateControllers();
+    mControllerManager->updateControllers();
 }
 
 void CPhysicsManager::AddGravity( Math::Vect3f g )
@@ -473,30 +473,6 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       _RM->DrawSphere( radius, color, MAX_ARISTAS );
       t.SetIdentity();
       _RM->SetTransform( m * t );
-
-      //translation.Translate( Math::Vect3f( 0.f, ( height * 0.5f ), 0.f ) );
-      //total = m * translation;
-      //_RM->SetTransform( total );
-      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
-      //_RM->DrawCapsule( radius, height, 10, color );
-      //_RM->DrawHalfSupSphere(radius, MAX_ARISTAS, color); // By XMA
-      /*translation.Translate( Math::Vect3f( 0.f, -( height * 0.5f ), 0.f ) );
-      total = m * translation;
-      _RM->SetTransform( total );*/
-      //_RM->DrawSphere( radius, color, MAX_ARISTAS );
-
-      //_RM->DrawHalfInfSphere(radius, MAX_ARISTAS, color); // By XMA
-      /* By XMA */
-      //for ( float h = -( height * 0.5f ); h <= ( height * 0.5f ); h += ( height * 0.125f ) )
-      //{
-      //  translation.Translate( Math::Vect3f( 0.f, h, 0.f ) );
-      //  total = m * translation;
-      //  _RM->SetTransform( total );
-      //  /*if(h < 0.f) _RM->DrawCylinderCircs2(radius, MAX_ARISTAS, color);
-      //  else _RM->DrawCylinderCircs1(radius, MAX_ARISTAS, color);*/
-      //}
-
-      //_RM->DrawCylinder(radius, MAX_ARISTAS, -height, color); // By XMA
     }
     break;
 
@@ -768,7 +744,7 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
 {
   assert( _pController != NULL );
   assert( m_pScene != NULL );
-  assert( m_pControllerManager != NULL );
+  assert( mControllerManager != NULL );
 
   bool l_bIsOK = false;
   NxController* l_NxController = _pController->GetPhXController();
@@ -781,7 +757,7 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
     NxControllerDesc* l_NxControllerDesc = NULL;
     l_NxControllerDesc = _pController->GetPhXControllerDesc();
     assert( l_NxControllerDesc != NULL );
-    l_NxController = m_pControllerManager->createController( m_pScene, *l_NxControllerDesc );
+    l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
     break;
   }
 
@@ -790,12 +766,12 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
     NxControllerDesc* l_NxControllerDesc = NULL;
     l_NxControllerDesc = _pController->GetPhXControllerDesc();
     assert( l_NxControllerDesc != NULL );
-    l_NxController = m_pControllerManager->createController( m_pScene, *l_NxControllerDesc );
+    l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
     break;
   }
   }
 
-  if ( m_pControllerManager != NULL )
+  if ( mControllerManager != NULL )
   {
     _pController->CreateController( l_NxController, m_pScene );
     l_NxController->getActor()->userData = _pController->GetUserData();
@@ -815,12 +791,12 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
 bool CPhysicsManager::ReleasePhysicController( CPhysicController* _pController )
 {
   assert( _pController != NULL );
-  assert( m_pControllerManager != NULL );
+  assert( mControllerManager != NULL );
   bool l_bIsOk = false;
   NxController* l_NxController = _pController->GetPhXController();
 
   if ( l_NxController != NULL )
-    m_pControllerManager->releaseController( *l_NxController );
+    mControllerManager->releaseController( *l_NxController );
 
   //TODO!!!!
   return true;

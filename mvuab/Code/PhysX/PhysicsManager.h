@@ -1,16 +1,6 @@
-//----------------------------------------------------------------------------------
-// CPhysicsManager class
-// Author: Enric Vergara
-// Changed: Jordi Arenas
-// Description:
-// This secures availability of the necessary physic functions.
-// It internally uses the PhysX library.
-//----------------------------------------------------------------------------------
-
-#pragma once
-
 #ifndef __PHYSX_MANAGER_CLASS_H__
 #define __PHYSX_MANAGER_CLASS_H__
+#pragma once
 
 #include <vector>
 #include <string>
@@ -23,9 +13,6 @@
 #include "PhysicsDefs.h"
 #include "Utils\SingletonPattern.h"
 
-//#include "Script/ScriptRegister.h"
-
-//---Forward Declarations---//
 class NxPhysicsSDK;
 class NxScene;
 class NxActor;
@@ -43,12 +30,32 @@ class CPhysicRevoluteJoint;
 class CPhysicTriggerReport;
 class CPhysicUserAllocator;
 class CPhysicUserData;
-//class CScriptManager;
 class CGameEntity;
 class CGraphicsManager;
 //--------------------------
 
 using namespace Math;
+
+/*
+enum EShapeType
+	{
+	eSHAPE_PLANE = 0,
+	eSHAPE_SPHERE,
+	eSHAPE_BOX,
+	eSHAPE_CAPSULE,
+	eSHAPE_WHEEL,
+	eSHAPE_CONVEX,
+	eSHAPE_MESH,
+	eSHAPE_HEIGHTFIELD
+};
+
+struct TActorInfo
+{
+	EShapeType mType;
+	float32 mRadious;
+	Vect3f mPosition;
+}
+*/
 
 class CPhysicsManager : public CSingleton<CPhysicsManager>
 {
@@ -79,6 +86,7 @@ public:
   void          DrawActor( NxActor* actor, CGraphicsManager* _RM );
 
   //--- Add/Release Actors
+  //CPhysicActor* RegisterPhysicActor( const std::string & aName, TActorInfo
   bool          AddPhysicActor( CPhysicActor* _pActor );
   bool          ReleasePhysicActor( CPhysicActor* _pActor );
 
@@ -245,7 +253,7 @@ private:
   //---PhysX------------------------------
   NxPhysicsSDK*     m_pPhysicsSDK;
   NxScene*        m_pScene;
-  NxControllerManager*  m_pControllerManager;
+  NxControllerManager*  mControllerManager;
   CPhysicUserAllocator* m_pMyAllocator;
   CPhysicCookingMesh*   m_pCookingMesh;
   SPhysicsInitParams    m_InitParams;

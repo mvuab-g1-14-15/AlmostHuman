@@ -6,10 +6,11 @@
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
 
-CEnemy::CEnemy( CXMLTreeNode& Node )
+CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
   , m_OnEnter( true )
   , m_OnExit( false )
+  , m_pStateMachine( aStateMachine )
 {
   CCharacter::Init( Node );
 }

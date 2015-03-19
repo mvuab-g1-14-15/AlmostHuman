@@ -9,6 +9,7 @@
 #include "Utils\Types.h"
 #include "Utils\MapManager.h"
 #include "Enemy.h"
+#include "Utils\ObjectFactory.h"
 
 class CEnemy;
 class CXMLTreeNode;
@@ -43,6 +44,9 @@ private:
   void AddNewCoreEnemy( CXMLTreeNode& Node );
   void AddNewEnemy( CXMLTreeNode& Node );
   void AddNewRoute( CXMLTreeNode& Node );
+
+  ObjectFactory2<CEnemy, CXMLTreeNode, CStateMachine*, std::string > EnemyFactory;
+  void RegisterEnemies();
 public:
   CEnemyManager();
   ~CEnemyManager();
@@ -53,7 +57,6 @@ public:
   void Reload();
   template<class T>
   static CEnemy* CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode );
-
   GET_SET( CEnemy*, ActualEnemy );
 };
 

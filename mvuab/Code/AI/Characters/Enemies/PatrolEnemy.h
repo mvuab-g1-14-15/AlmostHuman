@@ -8,6 +8,8 @@
 #include "Enemy.h"
 #include "Utils\Defines.h"
 
+class CStateMachine;
+
 class CPatrolEnemy : public CEnemy
 {
 private:
@@ -15,7 +17,7 @@ private:
   int                                          m_CurrentPoint;
   size_t									   m_RouteId;
 public:
-  CPatrolEnemy( CXMLTreeNode& Node );
+  CPatrolEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
   ~CPatrolEnemy();
   void Init();
   void Update();

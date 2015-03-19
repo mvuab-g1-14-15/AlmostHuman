@@ -1,8 +1,8 @@
 #include "BossEnemy.h"
 #include <stdio.h>
 
-CBossEnemy::CBossEnemy(CXMLTreeNode &Node)
-: CEnemy(Node)
+CBossEnemy::CBossEnemy(CXMLTreeNode &Node, CStateMachine* aStateMachine)
+: CEnemy(Node, aStateMachine)
 {
 }
 

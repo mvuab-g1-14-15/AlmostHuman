@@ -1,8 +1,8 @@
 #include "EasyEnemy.h"
 #include <stdio.h>
 
-CEasyEnemy::CEasyEnemy( CXMLTreeNode& Node )
-  : CEnemy( Node )
+CEasyEnemy::CEasyEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
+  : CEnemy( Node, aStateMachine )
 {
 }
 
