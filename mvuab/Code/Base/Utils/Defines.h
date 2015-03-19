@@ -63,4 +63,6 @@
 #define LOG_WARNING_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x )
 #define LOG_INFO_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x )
 
+#define ASSERT(expr, msg) assert(expr && msg)
+
 #endif

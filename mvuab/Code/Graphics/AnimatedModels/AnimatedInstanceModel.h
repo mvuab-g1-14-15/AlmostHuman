@@ -6,6 +6,7 @@ class CAnimatedCoreModel;
 class CEffectTechnique;
 class CTexture;
 class CXMLTreeNode;
+class CRenderableObjectTechnique;
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
@@ -28,6 +29,7 @@ private:
   float32 m_LodLevel;
   float32 m_BlendTime;
   float32 m_ChangeAnimation;
+  CRenderableObjectTechnique*  m_RenderableObjectTechnique;
 
   void LoadTextures();
 

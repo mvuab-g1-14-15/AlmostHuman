@@ -62,7 +62,7 @@ CCore::CCore() :
   m_pRenderableObjectsManager( new CRenderableObjectsManager() ),
   m_pRenderableObjectsLayersManager( new CRenderableObjectsLayersManager() ),
   m_pRenderableObjectTechniqueManager( new CRenderableObjectTechniqueManager() ),
-  //m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
+  m_pAnimatedModelsManager( new CAnimatedModelsManager() ),
   m_pScriptManager( new CScriptManager() ),
   m_pCameraManager( new CCameraManager() ),
   m_pEffectManager( new CEffectManager() ),
@@ -255,9 +255,9 @@ void CCore::InitManagers()
   m_pFontManager->LoadTTFs( m_FontsPath );
   m_pRenderableObjectTechniqueManager->Load( m_RenderableObjectTechniquePath );
   m_pStaticMeshManager->Load( m_StaticMeshesPath );
+  m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
   m_pRenderableObjectsLayersManager->Load( m_RenderableObjectsPath );
   m_pSceneRendererCommandManager->Load( m_SceneRendererCommandPath );
-  //m_pAnimatedModelsManager->Load( m_AnimatedModelsPath );
   //m_pRenderableObjectsManager->Load(m_RenderableObjectsPath);
   m_pCameraManager->Init();
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
