@@ -40,9 +40,12 @@
 
 
 #include <algorithm>
+#include "RenderableVertex\VertexTypes.h"
 
 CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 {
+   unsigned short i = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
+           VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
 }
 
 CPlayerPhysicProcess::~CPlayerPhysicProcess()

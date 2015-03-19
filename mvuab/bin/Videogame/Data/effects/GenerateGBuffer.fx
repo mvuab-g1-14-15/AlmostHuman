@@ -10,6 +10,15 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
     OUT.WorldPosition=OUT.HPosition;
 
+#if defined( USE_CAL3D_HW )
+	float3 l_Normal  = normalize(IN.Normal).xyz;
+	float3 l_Tangent = IN.Tangent;
+	CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal, l_Tangent);
+	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
+	float4 l_WorldPosition = float4(l_Position, 1.0);
+	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
+#endif
+
 #if defined( USE_NORMAL )
 	OUT.WorldTangent = float4( mul(IN.Tangent.xyz, (float3x3)g_WorldMatrix), 1.0);
 	OUT.WorldBinormal = float4(mul(IN.Binormal.xyz, (float3x3)g_WorldMatrix),1.0);

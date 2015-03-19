@@ -168,4 +168,54 @@ float4 GaussianBlur(sampler2D tex, float2 texCoord, int sz)
     return float4(l_Color, 1.0);
 }
 
+float3 CalcAnimtedPos(float4 Position, float4 Indices, float4 Weight)
+{
+	float3 l_Position = 0;
+	
+	l_Position  = mul(g_Bones[Indices.x], Position) * Weight.x;
+	l_Position += mul(g_Bones[Indices.y], Position) * Weight.y;
+	l_Position += mul(g_Bones[Indices.z], Position) * Weight.z;
+	l_Position += mul(g_Bones[Indices.w], Position) * Weight.w;
+	
+	return l_Position;
+}
+
+void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, float4 Weight, out float3 OutNormal, out float3 OutTangent)
+{
+	OutNormal  = 0;
+	OutTangent = 0;
+	float3x3 m;
+	
+	m[0].xyz = g_Bones[Indices.x][0].xyz;
+	m[1].xyz = g_Bones[Indices.x][1].xyz;
+	m[2].xyz = g_Bones[Indices.x][2].xyz;
+	
+	OutNormal  += mul(m, Normal.xyz)* Weight.x;
+	OutTangent += mul(m, Tangent.xyz)* Weight.x;
+	
+	m[0].xyz = g_Bones[Indices.y][0].xyz;
+	m[1].xyz = g_Bones[Indices.y][1].xyz;
+	m[2].xyz = g_Bones[Indices.y][2].xyz;
+	
+	OutNormal  += mul(m, Normal.xyz)* Weight.y;
+	OutTangent += mul(m, Tangent.xyz)* Weight.y;
+	
+	m[0].xyz = g_Bones[Indices.z][0].xyz;
+	m[1].xyz = g_Bones[Indices.z][1].xyz;
+	m[2].xyz = g_Bones[Indices.z][2].xyz;
+	
+	OutNormal += mul(m, Normal.xyz)* Weight.z;
+	OutTangent += mul(m, Tangent.xyz)* Weight.z;
+	
+	m[0].xyz = g_Bones[Indices.w][0].xyz;
+	m[1].xyz = g_Bones[Indices.w][1].xyz;
+	m[2].xyz = g_Bones[Indices.w][2].xyz;
+	
+	OutNormal  += mul(m, Normal.xyz)* Weight.w;
+	OutTangent += mul(m, Tangent.xyz)* Weight.w;
+	
+	OutNormal  = normalize(OutNormal);
+	OutTangent = normalize(OutTangent);
+}
+
 #endif // !defined( GLOBALS_FXH )

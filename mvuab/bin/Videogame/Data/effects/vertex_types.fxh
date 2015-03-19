@@ -187,6 +187,11 @@ struct UBER_VERTEX_PS
 #elif defined( USE_DIFFUSE_COLOR )
 	float4 Color			: TEXCOORD3;
 #endif
+
+#if defined( USE_CAL3D_HW )
+	float4 Weight   		: BLENDWEIGHT0;
+	float4 Indices  		: BLENDINDICES0;
+#endif
 };
 
 #endif // !defined( VERTEX_TYPES_FXH )
