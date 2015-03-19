@@ -26,6 +26,7 @@
     <ClCompile Include="Joints\PhysicRevoluteJoint.cpp" />
     <ClCompile Include="Joints\PhysicSphericalJoint.cpp" />
     <ClCompile Include="Jump\Jump.cpp" />
+    <ClCompile Include="Particles\Particle.cpp" />
     <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Reports\PhysicCollisionReport.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Joints\PhysicRevoluteJoint.h" />
     <ClInclude Include="Joints\PhysicSphericalJoint.h" />
     <ClInclude Include="Jump\Jump.h" />
+    <ClInclude Include="Particles\Particle.h" />
     <ClInclude Include="PhysicMaterial\PhysicMaterial.h" />
     <ClInclude Include="PhysicsDefs.h" />
     <ClInclude Include="PhysicsManager.h" />
