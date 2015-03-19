@@ -1,7 +1,9 @@
 #include "RenderableObjectsLayersManager.h"
 #include "StaticMeshes\InstanceMesh.h"
+#include "AnimatedModels\AnimatedInstanceModel.h"
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
+    : m_DefaultRenderableObjectManager(0)
 {
 
 }
@@ -35,34 +37,47 @@ void CRenderableObjectsLayersManager::Load( const std::string& FileName )
 
     for ( int i = 0; i < count; ++i )
     {
-      const std::string& TagName = TreeNode( i ).GetName();
+      const std::string& lTagName = TreeNode( i ).GetName();
+      const std::string& lName = TreeNode( i ).GetPszProperty( "name", "" );
 
-      if ( TagName == "layer" && TreeNode( i ).GetBoolProperty( "default", false ) )
+      if ( lTagName == "layer" ) 
       {
-        m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
-
-        if ( !AddResource( TreeNode( i ).GetPszProperty( "name", "" ), m_DefaultRenderableObjectManager ) )
-          CHECKED_DELETE( m_DefaultRenderableObjectManager );
+          if( TreeNode( i ).GetBoolProperty( "default", false ) )
+          {
+              m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+              if ( !AddResource( lName, m_DefaultRenderableObjectManager ) )
+                  CHECKED_DELETE( m_DefaultRenderableObjectManager );
+          }
+          else
+          {
+              CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+              if ( !AddResource( lName, RenderableObjectManager ) )
+                  CHECKED_DELETE( RenderableObjectManager );
+          }
       }
-      else if ( TagName == "layer" )
+      else 
       {
-        CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+          CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( TreeNode( i ) );
+          ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
+          if ( lTagName == "MeshInstance" )
+          {
+            CInstanceMesh* l_InstanceMesh = new CInstanceMesh( TreeNode( i ) );
+            if ( !lRenderableObjectManager->AddResource( lName, l_InstanceMesh ) )
+            {
+                LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", lName.c_str() );
+                CHECKED_DELETE( l_InstanceMesh );
+            }
+          }
+          else if ( lTagName == "AnimatedInstance" )
+          {
+            CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( TreeNode( i ) );
 
-        if ( !AddResource( TreeNode( i ).GetPszProperty( "name", "" ), RenderableObjectManager ) )
-          CHECKED_DELETE( RenderableObjectManager );
-      }
-
-      if ( TagName == "MeshInstance" )
-      {
-        CRenderableObjectsManager* RenderableObjectManager = GetRenderableObjectManager( TreeNode( i ) );
-        const std::string& l_Name = TreeNode( i ).GetPszProperty( "name", "" );
-        /*const bool      &l_Visible = TreeNode(i).GetBoolProperty("visible", false);
-        const bool      &l_CreatePhysics = TreeNode(i).GetBoolProperty("create_physics", false);
-        const std::string &l_Physics = TreeNode(i).GetPszProperty("physics_type", "");*/
-        CInstanceMesh* l_InstanceMesh = new CInstanceMesh( TreeNode( i ) );
-
-        if ( !RenderableObjectManager->AddResource( l_Name, l_InstanceMesh ) )
-          CHECKED_DELETE( l_InstanceMesh );
+            if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
+            {
+                LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
+                CHECKED_DELETE( l_AnimatedInstance );
+            }
+          }
       }
     }
   }

@@ -2,6 +2,7 @@
 #include "AnimatedModelsManager.h"
 #include "AnimatedCoreModel.h"
 
+#include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "RenderableVertex\VertexTypes.h"
 #include "Texture\TextureManager.h"
 
@@ -35,8 +36,22 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
   //m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
 }
 CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
-  : CRenderableObject( atts )
+  : CRenderableObject( atts  )
+  , m_CalModel( 0 )
+  , m_AnimatedCoreModel( CAnimatedModelsManager::GetSingletonPtr()->GetCore( atts.GetPszProperty("core", "" ) ) )
+  , m_BlendTime( 0.3f )
+  , m_LodLevel( 1.0f )
+  , m_CurrentAnimationId( 5 )
+  , m_NumVtxs( 0 )
+  , m_NumFaces( 0 )
+  , m_pIB( 0 )
+  , m_pVB( 0 )
+  , m_ChangeAnimation( 0 )
 {
+    std::string l_TechniqueName =
+        CRenderableObjectTechniqueManager::GetSingletonPtr()->GetRenderableObjectTechniqueNameByVertexType(
+      CAL3D_HW_VERTEX::GetVertexType() );
+    m_RenderableObjectTechnique = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
 }
 CAnimatedInstanceModel::~CAnimatedInstanceModel()
 {
@@ -51,12 +66,13 @@ void CAnimatedInstanceModel::Render()
 
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
-  // If shaders are reloaded pointers are changing so we have to ask again for the technique
-  m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(
-                         CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(
-                           CAL3D_HW_VERTEX::GetVertexType() ) );
+  if ( !m_RenderableObjectTechnique )
+    return;
 
-  if ( NULL == m_pEffectTechnique )
+  // If shaders are reloaded pointers are changing so we have to ask again for the technique
+  m_pEffectTechnique = m_RenderableObjectTechnique->GetEffectTechnique();
+
+  if (!m_pEffectTechnique )
     return;
 
   CCore::GetSingletonPtr()->GetEffectManager()->SetWorldMatrix( GetTransform() );
@@ -216,6 +232,7 @@ void CAnimatedInstanceModel::Initialize()
   }*/
   BlendCycle( 0, 1.0f, 0.0f );
   m_CalModel->update( 0.0f );
+
   // Load Vertex and Index buffers
   CGraphicsManager* GM = CGraphicsManager::GetSingletonPtr();
   LPDIRECT3DDEVICE9 l_pD3DDevice = GM->GetDevice();

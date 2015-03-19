@@ -42,7 +42,7 @@ void CAnimatedCoreModel::Destroy()
 
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 {
-    assert(m_CalCoreModel);
+    ASSERT(m_CalCoreModel, "Cal Core Model not found");
     std::string &MeshFullPath = m_Path + Filename;
     int err = m_CalCoreModel->loadCoreMesh( MeshFullPath );
     return ( err == -1 ) ? false : true;
@@ -50,15 +50,13 @@ bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
 
 bool CAnimatedCoreModel::LoadSkeleton(const std::string &Filename)
 {
-    assert(m_CalCoreModel);
-    std::string &SkeletonFullPath = m_Path + Filename;
-    return m_CalCoreModel->loadCoreSkeleton(SkeletonFullPath);
+    ASSERT(m_CalCoreModel, "Cal Core Model not found");
+    return m_CalCoreModel->loadCoreSkeleton(m_Path + Filename);
 }
 bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::string &Filename)
 {
-    assert( m_CalCoreModel != NULL );
-    std::string &AnimationFullPath = m_Path + Filename;
-    int id = m_CalCoreModel->loadCoreAnimation(AnimationFullPath, Name);
+    ASSERT(m_CalCoreModel, "Cal Core Model not found");
+    int id = m_CalCoreModel->loadCoreAnimation(m_Path + Filename, Name);
     if( id == -1 )
         return false;
 
@@ -116,15 +114,10 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
-    CTexture *t = CTextureManager::GetSingletonPtr()->GetTexture(Filename);
-
+    CTexture *t = CTextureManager::GetSingletonPtr()->GetTexture( m_Path + Filename);
     if(t)
-    {
         m_TextureVector.push_back(t);
-        return true;
-    }
-
-    return false;
+    return (t != 0);
 }
 
 const std::string & CAnimatedCoreModel::GetTextureName( size_t id )
