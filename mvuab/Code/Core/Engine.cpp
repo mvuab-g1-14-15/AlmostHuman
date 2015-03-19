@@ -26,46 +26,14 @@ CEngine::~CEngine()
 
 void CEngine::Update()
 {
-  // Update Time (EEEPC 1215B): 6.5ms
   m_pCore->Update();
-  
-  // Update Time (EEEPC 1215B): 5.0ms
   m_pProcess->Update();
- 
-  // Update Time (EEEPC 1215B): 0.4ms
   m_pLogRender->Update();
 }
 
 void CEngine::Render()
 {
-  m_pCore->GetSceneRendererCommandManager()->Execute();
-
-	m_pProcess->Render();
-
-  m_pCore->Render();
-	/*
-  CGraphicsManager* pGraphicsManager = GraphicsInstance ;
-  pGraphicsManager->BeginRender();
-  pGraphicsManager->SetupMatrices();
-
-  // Render Time (EEEPC 1215B): 4.5ms
-  m_pCore->Render();
-
-  // Render Time (EEEPC 1215B): 15.5ms
-  m_pProcess->Render();
-    
-  // Render Time (EEEPC 1215B): 1.0ms
-  m_pLogRender->Render();
-  
-   // Render Time (EEEPC 1215B): 1.7ms
-#if _DEBUG
-  pGraphicsManager->DisableZBuffering();
-  pGraphicsManager->EnableAlphaBlend();
-  m_pProcess->RenderDebugInfo();
-  pGraphicsManager->DisableAlphaBlend();
-  pGraphicsManager->EnableZBuffering();
-#endif
-  pGraphicsManager->EndRender();*/
+    m_pCore->GetSceneRendererCommandManager()->Execute();
 }
 
 void CEngine::Init( CProcess* apProcess, const std::string& aConfigPath, HWND aWindowId )

@@ -123,14 +123,14 @@ void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
 void CCore::Update()
 {
   m_pTimer->Update();
-  m_pGraphicsManager->Update();
+
   m_pInputManager->Update();
   m_pActionManager->Update();
-  //m_pRenderableObjectsManager->Update();
-  m_pRenderableObjectsLayersManager->Update();
-  m_pCameraManager->Update();
+
   m_pPhysicsManager->Update( deltaTime );
   m_pEnemyManager->Update();
+
+  m_pCameraManager->Update();
   m_pBillboard->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
@@ -139,13 +139,6 @@ void CCore::Update()
 
 void CCore::Render()
 {
-  m_pGraphicsManager->Render();
-  //m_pRenderableObjectsManager->Render();
-  m_pRenderableObjectsLayersManager->Render();
-  //m_pCameraManager->RenderCameras();
-  m_pLightManager->Render();
-  m_pPhysicsManager->DebugRender( m_pGraphicsManager );
-  m_pEnemyManager->Render();
 }
 
 void CCore::LoadXml()

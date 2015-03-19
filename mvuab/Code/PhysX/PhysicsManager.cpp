@@ -47,7 +47,7 @@ using namespace Math;
 CPhysicsManager::CPhysicsManager( void )
   : m_szConfigFileName( "" )
   , m_bIsOk( false )
-  , m_bDebugRenderMode( true )
+  , m_bDebugRenderMode( false )
   , m_pPhysicsSDK( NULL )
   , m_pScene( NULL )
   , m_pControllerManager( NULL )
