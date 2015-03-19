@@ -25,7 +25,7 @@ CParticle::CParticle(float sz, float timer, const Math::Vect3f &Color, const Mat
     m_Color = Color;
     m_Position = Position;
 
-    m_Velocity = m_Velocity;
+    m_Velocity = Velocity;
     m_Aceleration = Aceleration;
 }
 
@@ -105,5 +105,5 @@ void CParticle::Update(float dt)
     Math::Vect3f l_OldVel = m_Velocity;
     
     m_Velocity += m_Aceleration * dt;
-    m_Position += (m_Velocity * l_OldVel) / 2.0f * dt;
+    m_Position += (m_Velocity + l_OldVel) / 2.0f * dt;
 }
