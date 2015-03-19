@@ -11,6 +11,7 @@
 #include "Core.h"
 #include "StateMachine\StateMachine.h"
 #include "Utils\Defines.h"
+#include "StaticMeshes\StaticMeshManager.h"
 
 typedef CEnemy* ( *CreateEnemyFn )( CXMLTreeNode& );
 
@@ -79,6 +80,7 @@ void CEnemyManager::Init( const std::string& Filename )
 	  {
 		  AddNewRoute( m( i ) );
 	  }
+	
     }
   }
 }
@@ -150,7 +152,10 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 
   CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
 
-  CPatrolEnemy *lPatrolEnemy =  dynamic_cast<CPatrolEnemy*>(lEnemy);
+  lEnemy->AddMesh(Node.GetPszProperty("mesh","default_mesh"));
+
+  CPatrolEnemy *lPatrolEnemy = dynamic_cast<CPatrolEnemy*>(lEnemy);
+  
   if(lPatrolEnemy)
 	  lPatrolEnemy->SetWaypoints(m_Routes[lPatrolEnemy->GetRouteId()]);
 

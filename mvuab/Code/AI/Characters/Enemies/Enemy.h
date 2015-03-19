@@ -11,6 +11,7 @@
 #include <string>
 
 class CStateMachine;
+class CStaticMesh;
 
 class CEnemy : public CCharacter
 {
@@ -22,10 +23,12 @@ public:
   virtual void Update();
   virtual void Render();
   GET_SET_PTR( CStateMachine, StateMachine );
+  GET_SET_PTR( CStaticMesh, StaticMesh );
   GET_SET( std::vector<std::string>, NameStates );
   GET_SET( std::string, CurrentState);
   GET_SET( bool, OnExit );
   void ChangeState( std::string NewState );
+  void AddMesh(std::string);
 protected:
   EEnemyType m_Type;
   bool m_OnEnter;
@@ -34,6 +37,7 @@ protected:
   CStateMachine* m_pStateMachine;
   std::string m_CurrentState;
   std::vector<std::string> m_NameStates;
+  CStaticMesh* m_pStaticMesh;
 };
 
 #endif

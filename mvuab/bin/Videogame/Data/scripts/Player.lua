@@ -20,6 +20,10 @@ function CPlayer:AddLife(life)
     self.m_Life = self.m_Life + life
 end
 
+function CPlayer:MakeDamage(life)
+    self.m_Life = self.m_Life - life
+end
+
 function CPlayer:Update()
 	local l_ActionManager = Singleton_Core.get_singleton():GetActionManager()
     local l_Dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()

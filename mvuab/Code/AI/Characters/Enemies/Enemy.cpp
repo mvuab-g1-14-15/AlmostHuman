@@ -5,12 +5,14 @@
 #include "Core.h"
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
+#include "StaticMeshes\StaticMeshManager.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
   , m_OnEnter( true )
   , m_OnExit( false )
   , m_pStateMachine( aStateMachine )
+  , m_pStaticMesh( NULL )
 {
   CCharacter::Init( Node );
 }
@@ -57,4 +59,9 @@ void CEnemy::Init()
 
 void CEnemy::Render()
 {
+}
+
+void CEnemy::AddMesh( std::string Name)
+{
+	m_pStaticMesh = CStaticMeshManager::GetSingletonPtr()->GetResource(Name);
 }

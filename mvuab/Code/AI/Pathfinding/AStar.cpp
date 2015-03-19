@@ -30,7 +30,7 @@ void CAStar::Render()
     Math::Mat44f m;
 	m.Translate(pos);
     l_GM->SetTransform( m );
-    l_GM->DrawCube( 0.3f, Math::colORANGE );
+    l_GM->DrawCube( 0.1f, Math::colORANGE );
     m.SetIdentity();
     l_GM->SetTransform( m );
 
