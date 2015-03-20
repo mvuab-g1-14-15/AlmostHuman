@@ -91,4 +91,5 @@
   <static_mesh name="StraightStair007" filename="\meshes\StraightStair007.mesh" />
   <static_mesh name="StraightStair008" filename="\meshes\StraightStair008.mesh" />
   <static_mesh name="Plane012" filename="\meshes\Plane012.mesh" />
+  <static_mesh name="enemy_low_patrol" filename="\meshes\enemy_low_patrol.mesh" />
 </static_meshes>

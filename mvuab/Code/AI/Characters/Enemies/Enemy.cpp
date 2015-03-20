@@ -1,18 +1,22 @@
 #include "Enemy.h"
+#include "Utils\Defines.h"
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
 #include "ScriptManager\ScriptManager.h"
 #include "Core.h"
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
-#include "StaticMeshes\StaticMeshManager.h"
+#include "StaticMeshes\InstanceMesh.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject\RenderableObject.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
   , m_OnEnter( true )
   , m_OnExit( false )
   , m_pStateMachine( aStateMachine )
-  , m_pStaticMesh( NULL )
+  , m_pRenderableObject( NULL )
 {
   CCharacter::Init( Node );
 }
@@ -46,6 +50,13 @@ void CEnemy::Update()
 
   for ( ; it != it_end; ++it )
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
+
+	m_pRenderableObject->SetPosition(m_Position);
+	m_pRenderableObject->SetYaw(m_fYaw);
+	m_pRenderableObject->SetPitch(m_fPitch);
+	m_pRenderableObject->SetRoll(m_fRoll);
+
+	m_pRenderableObject->MakeTransform();
 }
 
 void CEnemy::ChangeState( std::string NewState )
@@ -61,7 +72,15 @@ void CEnemy::Render()
 {
 }
 
-void CEnemy::AddMesh( std::string Name)
+void CEnemy::AddMesh(std::string MeshName)
 {
-	m_pStaticMesh = CStaticMeshManager::GetSingletonPtr()->GetResource(Name);
+	CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource("solid");
+
+	m_pRenderableObject = l_ROM->GetResource(MeshName);
+	m_pRenderableObject->SetPosition(m_Position);
+	m_pRenderableObject->SetYaw(m_fYaw);
+	m_pRenderableObject->SetPitch(m_fPitch);
+	m_pRenderableObject->SetRoll(m_fRoll);
+
+	m_pRenderableObject->MakeTransform();
 }
