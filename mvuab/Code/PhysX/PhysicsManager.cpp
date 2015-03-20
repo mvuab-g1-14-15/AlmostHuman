@@ -58,7 +58,7 @@ CPhysicsManager::CPhysicsManager( void )
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        Métodos principales
 // -----------------------------------------
 //----------------------------------------------------------------------------
 // Init data
@@ -85,7 +85,7 @@ bool CPhysicsManager::Init( void )
       CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---" );
       CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
       m_pPhysicsSDK->setParameter( NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth );
-      //CODI PER PRINTAR INFO DELS JOINTS
+      //Código para pintar la información de los Joints
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_ACTOR_AXES, 1 );
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_LIMITS, 1 );
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_LOCAL_AXES, 1 );
@@ -98,7 +98,7 @@ bool CPhysicsManager::Init( void )
       sceneDesc.simType = NX_SIMULATION_HW;
       m_pScene = m_pPhysicsSDK->createScene( sceneDesc );
 
-      // Si no va per Harware busco per software
+      // Si no va por Hardware busco por software
       if ( !m_pScene )
       {
         sceneDesc.simType = NX_SIMULATION_SW;
@@ -242,7 +242,7 @@ void CPhysicsManager::ReleaseElement( const std::string& _ase )
 
 
 //----------------------------------------------------------------------------
-// Load : Per carregar un fitxer XML amb tots els scrits
+// Load : Para cargar un archivo XML con todos los scripts
 //----------------------------------------------------------------------------
 bool CPhysicsManager::Load( const std::string& _PhysXConfig )
 {
@@ -254,7 +254,7 @@ bool CPhysicsManager::Load( const std::string& _PhysXConfig )
 }
 
 //----------------------------------------------------------------------------
-// Reload : Per recarregar el XML
+// Reload : Para recargar el XML
 //----------------------------------------------------------------------------
 bool CPhysicsManager::Reload( void )
 {
@@ -279,7 +279,7 @@ bool CPhysicsManager::ReloadXML( const std::string& FileName )
 }
 
 //----------------------------------------------------------------------------
-// LoadXML : Carrega realment el XML
+// LoadXML : Carga el XML
 //----------------------------------------------------------------------------
 bool CPhysicsManager::LoadXML( void )
 {
@@ -324,11 +324,11 @@ bool CPhysicsManager::LoadXML( void )
 
 
 // -----------------------------------------
-//          MÈTODES
+//          MÉTODOS
 // -----------------------------------------
 
 //----------------------------------------------------------------------------
-// Update : Per actualitzar l'escena i realitzar les físiques i simulacions
+// Update : Para actualizar la escena y realizar las físicas y simulaciones
 //----------------------------------------------------------------------------
 void CPhysicsManager::Update( float _ElapsedTime )
 {
@@ -362,7 +362,7 @@ void CPhysicsManager::AddGravity( Math::Vect3f g )
 }
 
 //----------------------------------------------------------------------------------------
-// Debug Render : dibuixa cada un dels actors trobats a l'escena si estem en mode debug
+// Debug Render : dibuja cada uno de los actores encontrados en la escena si estamos en modo debug
 //----------------------------------------------------------------------------------------
 void CPhysicsManager::DebugRender( CGraphicsManager* _RM )
 {
@@ -382,7 +382,7 @@ void CPhysicsManager::DebugRender( CGraphicsManager* _RM )
 }
 
 //----------------------------------------------------------------------------
-// DrawActor : Dibuixa l'actor en mode debug
+// DrawActor : Dibuja el actor en modo debug
 //----------------------------------------------------------------------------
 void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
 {
@@ -397,6 +397,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
   NxShape* const* shapes = _pActor->getShapes();
   NxU32 nShapes = _pActor->getNbShapes();
 
+  Mat44f m;
   while ( nShapes-- )
   {
     switch ( shapes[nShapes]->getType() )
@@ -416,7 +417,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       NxVec3 pos = shapes[nShapes]->getGlobalPosition();
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-      Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
+      m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
                 m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                 m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                 m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
@@ -433,7 +434,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     {
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-      Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
+      m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
                 m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                 m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                 m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
@@ -448,12 +449,10 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     {
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-      Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
+      m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
                 m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                 m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                 m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
-      Mat44f translation, total;
-      translation.SetIdentity();
       _RM->SetTransform( m );
       const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
@@ -498,7 +497,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       Math::CColor color = physicUserData->GetColor();
       NxF32 m_aux[16];
       mesh->getGlobalPose().getColumnMajor44( m_aux );
-      Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
+      m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
                 m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                 m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                 m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
@@ -537,7 +536,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
 }
 
 //----------------------------------------------------------------------------
-// AddPhysicActor : Afegeix un actor a l'escena de PhysX
+// AddPhysicActor : Añade un actor en la escena de PhysX
 //----------------------------------------------------------------------------
 bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
 {
@@ -564,7 +563,7 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
 }
 
 //----------------------------------------------------------------------------
-// ReleasePhysicActor : Alliberem un actor de l'escena de PhysX
+// ReleasePhysicActor : Liberamos un actor de la escena de PhysX
 //----------------------------------------------------------------------------
 bool CPhysicsManager::ReleasePhysicActor( CPhysicActor* _pActor )
 {
@@ -598,7 +597,7 @@ bool CPhysicsManager::ReleasePhysicActor( CPhysicActor* _pActor )
 }
 
 //----------------------------------------------------------------------------
-// ReleaseAllActors : Alliberem tots els actors de l'escena de PhysX
+// ReleaseAllActors : Liberamos todos los actores de la escena de PhysX
 //----------------------------------------------------------------------------
 bool CPhysicsManager::ReleaseAllActors( void )  //EUserDataFlag _eFlags )
 {
@@ -636,7 +635,7 @@ bool CPhysicsManager::ReleaseAllActors( void )  //EUserDataFlag _eFlags )
 }
 
 //----------------------------------------------------------------------------
-// AddPhysicSphericalJoint : Afegim un joint esféric a l'escena
+// AddPhysicSphericalJoint : Añadimos un joint esférico en la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::AddPhysicSphericalJoint( CPhysicSphericalJoint* _Joint )
 {
@@ -658,7 +657,7 @@ bool CPhysicsManager::AddPhysicSphericalJoint( CPhysicSphericalJoint* _Joint )
 }
 
 //----------------------------------------------------------------------------
-// ReleasePhysicSphericalJoint : Alliberem un joint esféric de l'escena
+// ReleasePhysicSphericalJoint : Liberamos un joint esférica de la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::ReleasePhysicSphericalJoint( CPhysicSphericalJoint* _Joint )
 {
@@ -671,7 +670,7 @@ bool CPhysicsManager::ReleasePhysicSphericalJoint( CPhysicSphericalJoint* _Joint
 }
 
 //----------------------------------------------------------------------------
-// AddPhysicRevoluteJoint : Afegim un joint de tipus visagre de porta a l'escena
+// AddPhysicRevoluteJoint : Añadimos un joint de tipo bisagras de puerta a la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::AddPhysicRevoluteJoint( CPhysicRevoluteJoint* _pJoint )
 {
@@ -693,7 +692,7 @@ bool CPhysicsManager::AddPhysicRevoluteJoint( CPhysicRevoluteJoint* _pJoint )
 }
 
 //----------------------------------------------------------------------------
-// ReleasePhysicRevoluteJoint : Alliberem un joint de bisagre de l'escena
+// ReleasePhysicRevoluteJoint : Liberamos un joint de bisagra de la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::ReleasePhysicRevoluteJoint( CPhysicRevoluteJoint* _Joint )
 {
@@ -706,7 +705,7 @@ bool CPhysicsManager::ReleasePhysicRevoluteJoint( CPhysicRevoluteJoint* _Joint )
 }
 
 //----------------------------------------------------------------------------
-// AddPhysicFixedJoint : Afegim un joint de premsa, com un amortiguador a l'escena
+// AddPhysicFixedJoint : Añadimos un joint de prensa, como un amortiguador en la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::AddPhysicFixedJoint( CPhysicFixedJoint* _pJoint )
 {
@@ -728,7 +727,7 @@ bool CPhysicsManager::AddPhysicFixedJoint( CPhysicFixedJoint* _pJoint )
 }
 
 //----------------------------------------------------------------------------
-// ReleasePhysicFixedJoint : Alliberem un joint fixe de l'escena
+// ReleasePhysicFixedJoint : Liberamos un joint fijo de la escena
 //----------------------------------------------------------------------------
 bool CPhysicsManager::ReleasePhysicFixedJoint( CPhysicFixedJoint* _pJoint )
 {

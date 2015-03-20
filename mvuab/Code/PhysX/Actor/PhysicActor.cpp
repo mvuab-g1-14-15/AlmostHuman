@@ -37,7 +37,7 @@ CPhysicActor::~CPhysicActor( void )
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        MÉTODOS PRINCIPALES
 // -----------------------------------------
 void CPhysicActor::Destroy( void )
 {
@@ -121,7 +121,7 @@ void CPhysicActor::Destroy( void )
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        MÉTODOS PRINCIPALES
 // -----------------------------------------
 
 void CPhysicActor::CreateActor( NxActor* _pActor )
@@ -160,7 +160,7 @@ void CPhysicActor::CreateSphereTrigger( const Math::Vect3f& _vGlobalPos, const f
 }
 
 // -----------------------------------------
-//          MÈTODES
+//          MÉTODOS
 // -----------------------------------------
 
 void CPhysicActor::AddTorque( const Math::Vect3f _vTorque )
@@ -641,7 +641,7 @@ void CPhysicActor::SetContactReportThreshold( float _fThreshold )
 void CPhysicActor::SetRotation( const Math::Vect3f& _vRot )
 {
   assert( m_pPhXActor );
-  //no va bé, només rota de 0 a pi i repeteix.
+  //no va bien, sólo rota de 0 a pi y repite.
   //angles between -pi and pi
   Math::Vect3f l_vRot = _vRot;
 
