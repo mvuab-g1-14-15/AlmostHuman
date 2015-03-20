@@ -5,7 +5,7 @@ CParticleEmitter::CParticleEmitter()
 {
     srand(time(0));
 
-    m_Particles.resize(200);
+    m_Particles.resize(2);
     m_TimeToLive = 0.0f;
 
     m_Position = Math::Vect3f(0.0f, 0.0f, 0.0f);
@@ -34,6 +34,11 @@ void CParticleEmitter::Render()
     }
 }
 
+void CParticleEmitter::SetAcceleration(const Math::Vect3f &Acceleration)
+{
+    m_Acceleration = Acceleration;
+}
+
 void CParticleEmitter::SetDirection(const Math::Vect3f &Direction)
 {
     m_Direction = Direction;
@@ -58,11 +63,11 @@ void CParticleEmitter::Generate()
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
         it->SetPosition(m_Position);
-        it->SetAceleration(Math::Vect3f(0.0f, -9.87f, 0.0f));
+        it->SetAcceleration(m_Acceleration);
         it->SetVelocity(m_Direction + Math::Vect3f(rand() % 5, rand() % 5, rand() % 5));
 
         it->SetIsAlive(true);
-        it->SetTimeToLive(m_TimeToLive + (float)(rand() % 500));
+        it->SetTimeToLive(m_TimeToLive +  (rand() % 5) / 10.0f);
     }
 }
 
@@ -73,7 +78,7 @@ void CParticleEmitter::NewParticle()
     if(it == m_Particles.end()) return;
     
     it->SetPosition(m_Position);
-    it->SetAceleration(Math::Vect3f(0.0f, -9.87f, 0.0f));
+    it->SetAcceleration(m_Acceleration);
     it->SetVelocity(m_Direction + Math::Vect3f(rand() % 5, 0.0f, rand() % 5));
     
     it->SetIsAlive(true);

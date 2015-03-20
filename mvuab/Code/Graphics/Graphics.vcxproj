@@ -65,6 +65,7 @@
     <ClCompile Include="SceneRenderComands\GaussianSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp" />
@@ -72,7 +73,6 @@
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\RenderParticulesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommandManager.cpp" />
@@ -147,6 +147,7 @@
     <ClInclude Include="SceneRenderComands\GaussianSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h" />
@@ -154,7 +155,6 @@
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />
-    <ClInclude Include="SceneRenderComands\RenderParticulesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommandManager.h" />

@@ -27,8 +27,11 @@
     <enable_z_test/>
     <render_scene layer="solid" active="true"/>
 	<!--<render_debug_lights render="true"/>-->
+	
+	<render_particules />
 	<render_astar/>
 	<render_debug_physics/>
+	
 	<!--
     <render_debug_lights render="true"/>
 	-->
@@ -73,7 +76,6 @@
     <!--end pre_render-->
     
     <render_developer_info/>
-	
     <end_scene/>
     <present/>
 </scene_renderer_commands>

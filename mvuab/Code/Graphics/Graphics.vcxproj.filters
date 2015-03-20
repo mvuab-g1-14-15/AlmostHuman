@@ -212,7 +212,7 @@
     </ClCompile>
     <ClCompile Include="Cameras\CameraFree.cpp">
       <Filter>Cameras</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
@@ -225,7 +225,7 @@
     <ClCompile Include="Billboard\Billboard.cpp">
       <Filter>Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderComands\RenderParticulesSceneRendererCommand.cpp">
+    <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
   </ItemGroup>
@@ -450,7 +450,7 @@
     </ClInclude>
     <ClInclude Include="Cameras\CameraFree.h">
       <Filter>Cameras</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
@@ -463,7 +463,7 @@
     <ClInclude Include="Billboard\Billboard.h">
       <Filter>Billboard</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderComands\RenderParticulesSceneRendererCommand.h">
+    <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

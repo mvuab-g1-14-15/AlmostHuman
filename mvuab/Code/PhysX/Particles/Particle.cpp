@@ -13,7 +13,7 @@ CParticle::CParticle()
     m_Position = Math::Vect3f(0.0f, 0.0f, 0.0f);
 
     m_Velocity = Math::Vect3f(0.0f, 0.0f, 0.0f);
-    m_Aceleration = Math::Vect3f(0.0f, 0.0f, 0.0f);
+    m_Acceleration = Math::Vect3f(0.0f, 0.0f, 0.0f);
 }
 
 CParticle::CParticle(float sz, float timer, const Math::Vect3f &Color, const Math::Vect3f &Position, const Math::Vect3f &Velocity, const Math::Vect3f &Aceleration)
@@ -27,7 +27,7 @@ CParticle::CParticle(float sz, float timer, const Math::Vect3f &Color, const Mat
     m_Position = Position;
 
     m_Velocity = Velocity;
-    m_Aceleration = Aceleration;
+    m_Acceleration = Aceleration;
 }
 
 void CParticle::SetColor(const Math::Vect3f &Color)
@@ -45,9 +45,9 @@ void CParticle::SetVelocity(const Math::Vect3f &Velocity)
     m_Velocity = Velocity;
 }
 
-void CParticle::SetAceleration(const Math::Vect3f &Aceleration)
+void CParticle::SetAcceleration(const Math::Vect3f &Acceleration)
 {
-    m_Aceleration = Aceleration;
+    m_Acceleration = Acceleration;
 } 
 
 void CParticle::SetTimeToLive(float Time)
@@ -55,7 +55,7 @@ void CParticle::SetTimeToLive(float Time)
     LARGE_INTEGER l_Freq = { 0 }, l_ActualTime = { 0 };
     QueryPerformanceCounter(&l_ActualTime);  QueryPerformanceFrequency(&l_Freq);
 
-    m_TimeToLive = Time + l_ActualTime.QuadPart / l_Freq.QuadPart * 1000.0f;
+    m_TimeToLive = Time + l_ActualTime.QuadPart / l_Freq.QuadPart;
 }
 
 void CParticle::SetIsAlive(bool isAlive)
@@ -78,9 +78,9 @@ const Math::Vect3f &CParticle::GetVelocity()
     return m_Velocity;
 }
 
-const Math::Vect3f &CParticle::GetAceleration()
+const Math::Vect3f &CParticle::GetAcceleration()
 {
-    return m_Aceleration;
+    return m_Acceleration;
 }
 
 float CParticle::GetTimeToLive()
@@ -100,19 +100,19 @@ void CParticle::Update(float dt)
     LARGE_INTEGER l_Freq = { 0 }, l_ActualTime = { 0 };
     QueryPerformanceCounter(&l_ActualTime);  QueryPerformanceFrequency(&l_Freq);
 
-    float l_Time = l_ActualTime.QuadPart / l_Freq.QuadPart * 1000.0f;
+    float l_Time = l_ActualTime.QuadPart / l_Freq.QuadPart;
     m_IsAlive = (m_TimeToLive - l_Time > 0.0f) ? true : false;
 
     Math::Vect3f l_OldVel = m_Velocity;
     
-    m_Velocity += m_Aceleration * dt;
+    m_Velocity += m_Acceleration * dt;
     m_Position += (m_Velocity + l_OldVel) / 2.0f * dt;
 
-    m_Billboard.Init(m_Position, 1, "");
+    m_Billboard.Init(m_Position, 1, "Data/textures/BARK5.jpg");
     m_Billboard.Update();
 }
 
 void CParticle::Render()
 {
-    m_Billboard.Render();
+    if(m_IsAlive) m_Billboard.Render();
 }

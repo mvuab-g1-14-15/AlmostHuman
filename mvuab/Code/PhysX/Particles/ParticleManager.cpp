@@ -31,13 +31,14 @@ bool CParticleManager::Init(const std::string &path)
         CParticleEmitter l_Emitter;
 
 
-        l_Emitter.SetTimeToLive(l_Node.GetFloatProperty("time", 0.0f));
-        l_Emitter.SetPosition(l_Node.GetVect3fProperty("pos", Math::Vect3f()));
-        l_Emitter.SetVelocity(l_Node.GetVect3fProperty("vel", Math::Vect3f()));
-        l_Emitter.SetDirection(l_Node.GetVect3fProperty("dir", Math::Vect3f()));
+        l_Emitter.SetTimeToLive(l_Node(i).GetFloatProperty("time", 0.0f));
+        l_Emitter.SetAcceleration(l_Node(i).GetVect3fProperty("acc", Math::Vect3f()));
+        l_Emitter.SetPosition(l_Node(i).GetVect3fProperty("pos", Math::Vect3f()));
+        l_Emitter.SetVelocity(l_Node(i).GetVect3fProperty("vel", Math::Vect3f()));
+        l_Emitter.SetDirection(l_Node(i).GetVect3fProperty("dir", Math::Vect3f()));
 
         l_Emitter.Generate();
-        m_Emitters.push_back(std::move(l_Emitter));
+        m_Emitters.push_back(l_Emitter);
         
     }
 

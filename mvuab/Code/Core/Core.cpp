@@ -24,6 +24,7 @@
 #include "Actor\PhysicActor.h"
 #include "Characters\Enemies\EnemyManager.h"
 #include "Billboard\Billboard.h"
+#include "Particles\ParticleManager.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -73,7 +74,8 @@ CCore::CCore() :
   m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) ),
-  m_pBillboard( new CBillboard() )
+  m_pBillboard( new CBillboard() ),
+  m_pParticleManager( new CParticleManager() )
 {
   m_pConsole->RedirectToConsole( 0 );
   // test stdio
@@ -131,6 +133,8 @@ void CCore::Update()
   m_pEnemyManager->Update();
 
   m_pCameraManager->Update();
+
+  m_pParticleManager->Update(deltaTime);
   m_pBillboard->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
@@ -278,6 +282,7 @@ void CCore::InitManagers()
   m_pTriggerManager->LoadXML( m_TriggersPath );
 
   m_pBillboard->Init(Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/BARK5.jpg");
+  m_pParticleManager->Init("Data/particles.xml");
 }
 
 void CCore::Trace( const std::string& TraceStr )

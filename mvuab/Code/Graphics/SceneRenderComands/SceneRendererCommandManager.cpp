@@ -31,6 +31,7 @@
 #include "SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h"
 #include "SceneRenderComands\DeveloperInfoSceneRendererCommand.h"
 #include "SceneRenderComands\DisableZTestSceneRendererCommand.h"
+#include "SceneRenderComands\ParticleRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -39,7 +40,6 @@
 #include <Windows.h>
 #include <sstream>
 #include "Utils\ObjectFactory.h"
-#include "RenderParticulesSceneRendererCommand.h"
 
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
@@ -129,7 +129,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
   CommandFactory.Register( "render_developer_info",
                            Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
   CommandFactory.Register( "render_particules",
-                           Type2Type<CRenderParticulesSceneRendererCommand>( ) );
+                            Type2Type<CParticleRenderCommand>( ) );
 
   CXMLTreeNode l_File;
 

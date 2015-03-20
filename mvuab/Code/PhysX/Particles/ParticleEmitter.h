@@ -13,18 +13,21 @@ class CParticleEmitter
         std::vector<CParticle> m_Particles;
         float m_TimeToLive;
 
+        Math::Vect3f m_Acceleration;
         Math::Vect3f m_Direction;
         Math::Vect3f m_Position;
         Math::Vect3f m_Velocity;
+
 
     public:
         CParticleEmitter    ();
         ~CParticleEmitter   ();
 
-        void SetDirection   (const Math::Vect3f &Direction);
-        void SetPosition    (const Math::Vect3f &Position);
-        void SetVelocity    (const Math::Vect3f &Velocity);
-        void SetTimeToLive  (float timeToLive);
+        void SetAcceleration    (const Math::Vect3f &Acceleration);
+        void SetDirection       (const Math::Vect3f &Direction);
+        void SetPosition        (const Math::Vect3f &Position);
+        void SetVelocity        (const Math::Vect3f &Velocity);
+        void SetTimeToLive      (float timeToLive);
 
 
         void Update             (float dt);

@@ -18,7 +18,7 @@ class CParticle
         Math::Vect3f m_Position;
 
         Math::Vect3f m_Velocity;
-        Math::Vect3f m_Aceleration;
+        Math::Vect3f m_Acceleration;
 
     public:
         CParticle ();
@@ -33,8 +33,8 @@ class CParticle
         void SetVelocity                    (const Math::Vect3f &Velocity);
         const Math::Vect3f &GetVelocity     ();
 
-        void SetAceleration                 (const Math::Vect3f &Aceleration);
-        const Math::Vect3f &GetAceleration  ();
+        void SetAcceleration                 (const Math::Vect3f &Acceleration);
+        const Math::Vect3f &GetAcceleration ();
 
         void SetTimeToLive                  (float Time);
         float GetTimeToLive                 ();
