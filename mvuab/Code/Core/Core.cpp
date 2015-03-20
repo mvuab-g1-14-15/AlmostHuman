@@ -96,7 +96,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
   CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
-  //CHECKED_DELETE( m_pAnimatedModelsManager );
+  CHECKED_DELETE( m_pAnimatedModelsManager );
   CHECKED_DELETE( m_pTextureManager );
   CHECKED_DELETE( m_pCameraManager );
   CHECKED_DELETE( m_pEffectManager );
