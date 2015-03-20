@@ -102,12 +102,10 @@ CPhysicController::~CPhysicController()
   CHECKED_DELETE( m_pPhXCapsuleControllerDesc );
   CHECKED_DELETE( m_pPhXBoxControllerDesc );
   CHECKED_DELETE( m_pReport );
-  // TODO RAUL CHECK THIS AFTER DELETING TEST PROCESS
-  // CHECKED_DELETE ( m_pUserData );
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        MÉTODOS PRINCIPALS
 // -----------------------------------------
 void CPhysicController::CreateController( NxController* _pController, NxScene* _pScene )
 {
@@ -126,23 +124,21 @@ void CPhysicController::SetPosition( const Math::Vect3f& pos )
     NxExtendedVec3 position = m_pPhXController->getPosition();
     position.x = pos.x;
     position.y = pos.y;
-	position.z = pos.z;
+	  position.z = pos.z;
     m_pPhXController->setPosition( position );
   }
+  //TODO MIRAR SI FUNCIONA ALGUNA VEZ
   else if ( m_pPhXBoxControllerDesc != NULL )
   {
-    if ( GetType() == ::BOX )
-    {
       m_pPhXBoxControllerDesc->position.x = pos.x;
       m_pPhXBoxControllerDesc->position.y = pos.y;
       m_pPhXBoxControllerDesc->position.z = pos.z;
-    }
-    else
-    {
-      m_pPhXCapsuleControllerDesc->position.x = pos.x;
-      m_pPhXCapsuleControllerDesc->position.y = pos.y;
-      m_pPhXCapsuleControllerDesc->position.z = pos.z;
-    }
+  }
+  else if ( m_pPhXCapsuleControllerDesc != NULL )
+  {
+    m_pPhXCapsuleControllerDesc->position.x = pos.x;
+    m_pPhXCapsuleControllerDesc->position.y = pos.y;
+    m_pPhXCapsuleControllerDesc->position.z = pos.z;
   }
   else
     return;
@@ -165,6 +161,7 @@ Math::Vect3f CPhysicController::GetPosition()
     vec.y = ( float )tmp.y;
     vec.z = ( float )tmp.z;
   }
+  //TODO MIRAR SI FUNCIONA ALGUNA VEZ
   else if ( m_pPhXBoxControllerDesc != NULL )
   {
     if ( GetType() == ::BOX )

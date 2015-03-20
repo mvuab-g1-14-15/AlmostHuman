@@ -39,7 +39,6 @@ function init()
 	physic_manager:AddPhysicController(PlayerController)
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
 	initialized = true
-	core:trace("lua_init_ok");
 end
 
 function update()
@@ -53,8 +52,6 @@ function update()
 	if enable == true then
 		move_player( dt )
 		move_light( dt )
-		--move_point_inicial( dt )
-		--move_point_final ( dt )
 	end
 end
 
@@ -104,16 +101,13 @@ function move_player( dt )
 	if action_manager:DoAction("MoveLeft") then
 		strafe = strafe + 1;
 		if( CameraType.Free.value == current_camera:GetCameraType() ) then 
-			core:trace("FreeCamera if");
 			moveFree( flag_speed, forward, strafe, dt )	
 		else
-			core:trace("TestProcessCam if");
 			move( flag_speed, forward, strafe, dt )
 		end
 	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
 		if( CameraType.Free.value == current_camera:GetCameraType() ) then 
-			core:trace("FreeCamera if");
 			moveFree( flag_speed, forward, strafe, dt )	
 		else
 			move( flag_speed, forward, strafe, dt )
@@ -261,46 +255,6 @@ function moveFree( flag_speed, forward, strafe, dt )
 	
     addPos = addPos * constant;
 	current_camera:SetPos((cam_pos + addPos))
-end
-
-function move_point_inicial( dt )
-	process = Singleton_Engine.get_singleton():GetProcess()
-	local pointPos = process:GetPointInicial();
-	
-	local addPos = Vect3f(0, 0, 0)
-	
-	if action_manager:DoAction("Left") then
-		addPos.z = 1 * dt * g_Speed
-	elseif action_manager:DoAction("Right") then
-		addPos.z = -1 * dt * g_Speed
-	end
-	if action_manager:DoAction("Backward") then
-		addPos.x = - 1 * dt * g_Speed
-	elseif action_manager:DoAction("Forward") then
-		addPos.x = 1 * dt * g_Speed
-	end
-	
-	process:SetPointInicial(pointPos+addPos)
-end
-
-function move_point_final( dt )
-	process = Singleton_Engine.get_singleton():GetProcess()
-	local pointPos = process:GetPointFinal();
-	
-	local addPos = Vect3f(0, 0, 0)
-	
-	if action_manager:DoAction("MoveLeft") then
-		addPos.z = 1 * dt * g_Speed
-	elseif action_manager:DoAction("MoveRight") then
-		addPos.z = -1 * dt * g_Speed
-	end
-	if action_manager:DoAction("MoveBackward") then
-		addPos.x = - 1 * dt * g_Speed
-	elseif action_manager:DoAction("MoveForward") then
-		addPos.x = 1 * dt * g_Speed
-	end
-	
-	process:SetPointFinal(pointPos+addPos)
 end
 
 function render()
