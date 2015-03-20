@@ -137,6 +137,8 @@ void CCore::Update()
   m_pParticleManager->Update(deltaTime);
   m_pBillboard->Update();
 
+  m_pRenderableObjectsLayersManager->GetResource("solid")->Update();
+
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
 }

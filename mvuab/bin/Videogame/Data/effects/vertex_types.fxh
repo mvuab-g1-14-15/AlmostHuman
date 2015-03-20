@@ -159,12 +159,17 @@ struct UBER_VERTEX_VS {
 	float4 Color		: COLOR;
 #endif
 	float2 	UV 			: TEXCOORD0;
-#if defined( USE_NORMAL )
+#if defined( USE_NORMAL ) || defined( USE_CAL3D_HW )
 	float3 	Tangent 	: TANGENT0;
     float3 	Binormal 	: BINORMAL0;
 #endif
 #if defined( USE_SELF_ILUM )
 	float2 UV2 		    : TEXCOORD1;
+#endif
+
+#if defined( USE_CAL3D_HW )
+	float4 Weight   : BLENDWEIGHT0;
+	float4 Indices  : BLENDINDICES0;
 #endif
 };
 
@@ -175,8 +180,13 @@ struct UBER_VERTEX_PS
 	float2 UV 				: TEXCOORD0;
 	float4 WorldPosition 	: TEXCOORD1;
 	float3 WorldNormal 		: TEXCOORD2;
-	
-#if defined( USE_NORMAL )
+
+#if defined( USE_CAL3D_HW )
+	float4 Weight   		: BLENDWEIGHT0;
+	float4 Indices  		: BLENDINDICES0;
+#endif
+
+#if defined( USE_NORMAL ) || defined( USE_CAL3D_HW )
 	float4 WorldTangent		: TEXCOORD3;
     float4 WorldBinormal 	: TEXCOORD4;
 	#if defined( USE_SELF_ILUM )
@@ -186,11 +196,6 @@ struct UBER_VERTEX_PS
 	float2 UV2 				: TEXCOORD3;
 #elif defined( USE_DIFFUSE_COLOR )
 	float4 Color			: TEXCOORD3;
-#endif
-
-#if defined( USE_CAL3D_HW )
-	float4 Weight   		: BLENDWEIGHT0;
-	float4 Indices  		: BLENDINDICES0;
 #endif
 };
 

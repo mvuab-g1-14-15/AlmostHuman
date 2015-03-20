@@ -5,19 +5,29 @@
 UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 {
 	UBER_VERTEX_PS OUT=(UBER_VERTEX_PS)0;
-    OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
-    OUT.UV=IN.UV;
-    OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
-    OUT.WorldPosition=OUT.HPosition;
-
+    
 #if defined( USE_CAL3D_HW )
 	float3 l_Normal  = normalize(IN.Normal).xyz;
-	float3 l_Tangent = IN.Tangent;
+	float3 l_Tangent = IN.Tangent.xyz;
+	
 	CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal, l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
 	float4 l_WorldPosition = float4(l_Position, 1.0);
+	
 	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
+	OUT.WorldNormal = normalize(mul(l_Normal, g_WorldMatrix));
+	
+	OUT.WorldTangent = float4(normalize(mul(l_Tangent, (float3x3)g_WorldMatrix)), 0.0);
+	OUT.WorldBinormal = float4(mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix), 0.0);
+	
+	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProj );
+#else
+	OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
+    OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
+    OUT.WorldPosition=OUT.HPosition;
 #endif
+
+	OUT.UV=IN.UV;
 
 #if defined( USE_NORMAL )
 	OUT.WorldTangent = float4( mul(IN.Tangent.xyz, (float3x3)g_WorldMatrix), 1.0);

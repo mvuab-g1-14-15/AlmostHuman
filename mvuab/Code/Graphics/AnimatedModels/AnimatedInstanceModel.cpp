@@ -41,17 +41,18 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
   , m_AnimatedCoreModel( CAnimatedModelsManager::GetSingletonPtr()->GetCore( atts.GetPszProperty("core", "" ) ) )
   , m_BlendTime( 0.3f )
   , m_LodLevel( 1.0f )
-  , m_CurrentAnimationId( 5 )
+  , m_CurrentAnimationId( 1 )
   , m_NumVtxs( 0 )
   , m_NumFaces( 0 )
   , m_pIB( 0 )
   , m_pVB( 0 )
-  , m_ChangeAnimation( 0 )
+  , m_ChangeAnimation(  )
 {
     std::string l_TechniqueName =
         CRenderableObjectTechniqueManager::GetSingletonPtr()->GetRenderableObjectTechniqueNameByVertexType(
       CAL3D_HW_VERTEX::GetVertexType() );
     m_RenderableObjectTechnique = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
+    Initialize();
 }
 CAnimatedInstanceModel::~CAnimatedInstanceModel()
 {

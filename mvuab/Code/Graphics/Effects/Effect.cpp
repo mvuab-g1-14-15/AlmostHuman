@@ -191,18 +191,18 @@ bool CEffect::LoadEffect()
                    0, // LPD3DXEFFECTPOOL pPool,
                    &m_Effect,
                    &l_ErrorBuffer );
-  //assert( l_HR == S_OK );
+
+  ASSERT( l_HR == S_OK, "Error loading the effect" );
 
   if ( l_ErrorBuffer )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffect::Error creating effect '%s':\n%s",
-                                           m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
-    CHECKED_RELEASE( l_ErrorBuffer );
-    assert( false );
-    return false;
+      LOG_ERROR_APPLICATION( "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+      CHECKED_RELEASE( l_ErrorBuffer );
+      return false;
   }
 
-  assert( m_Effect );
+  ASSERT( m_Effect, "Null Effect" );
+
   // Get the references to the handlers inside the effect
   GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
   GetParameterBySemantic( ViewMatrixParameterStr, m_ViewMatrixParameter );

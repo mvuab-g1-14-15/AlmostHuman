@@ -59,9 +59,9 @@
 #define GraphicsInstance    CGraphicsManager::GetSingletonPtr()
 #define SoundInstance       CSoundManager::GetSingletonPtr()
 
-#define LOG_ERROR_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, x )
-#define LOG_WARNING_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x )
-#define LOG_INFO_APPLICATION( x ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x )
+#define LOG_ERROR_APPLICATION( x, ... ) CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, x, __VA_ARGS__ )
+#define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x, __VA_ARGS__ )
+#define LOG_INFO_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x, __VA_ARGS__ )
 
 #define ASSERT(expr, msg) assert(expr && msg)
 

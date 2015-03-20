@@ -142,14 +142,14 @@ bool CAnimatedCoreModel::Load()
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(m_FileName.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+        LOG_ERROR_APPLICATION( "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
         return false;
     }
 
     CXMLTreeNode node = newFile["animated_model"];
     if(!node.Exists())
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::Load Tag \"%s\" no existe",  "static_meshes");
+        LOG_ERROR_APPLICATION( "CAnimatedCoreModel::Load Tag \"%s\" no existe",  "static_meshes");
         return false;
     }
 
@@ -163,7 +163,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &textureFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadTexture(textureFilename))
             {
-                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadTexture No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadTexture No se puede abrir \"%s\"!", m_FileName.c_str());
             }
         }
         else if( TagName == "skeleton" )
@@ -171,7 +171,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &skeletonFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadSkeleton(skeletonFilename))
             {
-                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
             }
         }
         else if( TagName == "mesh" )
@@ -179,7 +179,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &meshFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadMesh(meshFilename))
             {
-                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
             }
         }
         else if( TagName == "animation" )
@@ -188,7 +188,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &name = node(i).GetPszProperty("name", "no_name");
             if(!LoadAnimation(name, animationFilename))
             {
-                CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
             }
         }
     }
