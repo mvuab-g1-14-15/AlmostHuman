@@ -26,6 +26,14 @@ void CParticleEmitter::Update(float dt)
     }
 }
 
+void CParticleEmitter::Render()
+{
+    for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
+    {
+        it->Render();
+    }
+}
+
 void CParticleEmitter::SetDirection(const Math::Vect3f &Direction)
 {
     m_Direction = Direction;

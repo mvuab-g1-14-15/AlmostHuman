@@ -28,6 +28,8 @@ class CParticleEmitter
 
 
         void Update             (float dt);
+        void Render             ();
+
         void Generate           ();
         void NewParticle        ();
 };

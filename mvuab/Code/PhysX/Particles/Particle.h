@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Math\Vector3.h"
+#include "Billboard\Billboard.h"
 
 class CParticle
 {
@@ -11,6 +12,7 @@ class CParticle
         float m_TimeToLive;
 
         bool  m_IsAlive;
+        CBillboard  m_Billboard;
 
         Math::Vect3f m_Color;
         Math::Vect3f m_Position;
@@ -41,6 +43,7 @@ class CParticle
         bool GetIsAlive                     ();
 
         void Update                         (float dt);
+        void Render                         ();
 };
 
 #endif

@@ -44,3 +44,19 @@ bool CParticleManager::Init(const std::string &path)
     l_XML.Done();
     return true;
 }
+
+void CParticleManager::Update(float dt)
+{
+    for(std::vector<CParticleEmitter>::iterator it = m_Emitters.begin(); it != m_Emitters.end(); ++it)
+    {
+        it->Update(dt);
+    }
+}
+
+void CParticleManager::Render()
+{
+    for(std::vector<CParticleEmitter>::iterator it = m_Emitters.begin(); it != m_Emitters.end(); ++it)
+    {
+        it->Render();
+    }
+}

@@ -7,6 +7,7 @@ CParticle::CParticle()
     m_TimeToLive = 0.0;
 
     m_IsAlive = false;
+    m_Billboard.Init(Math::Vect3f(0.0f, 0.0f, 0.0f), 1, "");
 
     m_Color = Math::Vect3f(1.0f, 1.0f, 1.0f);
     m_Position = Math::Vect3f(0.0f, 0.0f, 0.0f);
@@ -106,4 +107,12 @@ void CParticle::Update(float dt)
     
     m_Velocity += m_Aceleration * dt;
     m_Position += (m_Velocity + l_OldVel) / 2.0f * dt;
+
+    m_Billboard.Init(m_Position, 1, "");
+    m_Billboard.Update();
+}
+
+void CParticle::Render()
+{
+    m_Billboard.Render();
 }

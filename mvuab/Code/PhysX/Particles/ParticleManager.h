@@ -17,6 +17,9 @@ class CParticleManager
         ~CParticleManager   ();
 
         bool Init           (const std::string &path);
+        void Update         (float dt);
+        void Render         ();
+
 };
 
 #endif
