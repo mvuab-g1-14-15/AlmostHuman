@@ -1,5 +1,4 @@
 #include "GraphicsFunctions.h"
-#include "LuaEnumBinder.h"
 
 #include "Texture\Texture.h"
 #include "Texture\TextureManager.h"
@@ -21,6 +20,7 @@
 #include "Lights\LightManager.h"
 #include "Lights\OmniLight.h"
 
+#include "PhysicsDefs.h"
 #include "Math\Matrix44.h"
 
 extern "C"
@@ -185,13 +185,6 @@ void registerGraphics( lua_State* m_LS )
     .def( "AddYaw", &CCamera::AddYaw )
     .def( "AddPitch", &CCamera::AddPitch )
   ];
-
-  add_enum_to_lua( m_LS, "CameraType",
-	  "Free", CCamera::Free,
-	  "TPS", CCamera::ThirdPerson, 
-	  "FPS", CCamera::FirstPerson,
-	  "Spherical", CCamera::Spherical,
-	  "Cinematical", CCamera::Cinematical, 0 );
 
   module( m_LS )
   [
