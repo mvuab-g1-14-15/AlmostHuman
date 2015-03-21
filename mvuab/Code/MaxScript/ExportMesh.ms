@@ -14,6 +14,7 @@ struct STexture
 	
 	fn FromMaxTexture textureFileName =
 	(
+		format "Texture name: %\n" textureFileName
 		m_Name = filenameFromPath textureFileName
 		m_Path = getFilenamePath textureFileName
 	),
@@ -27,7 +28,7 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
-			--format "Texture name: %\n" m_Name
+			format "Texture name: %\n" m_Name
 			--format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
@@ -49,6 +50,9 @@ struct SMaterial
 	m_TextureBump  = STexture(),
 	m_TextureReflection = STexture(),
 	m_TextureSkyBox = STexture(),
+	m_TexturesRadiosityColor0 = STexture(),
+	m_TexturesRadiosityColor1 = STexture(),
+	m_TexturesRadiosityColor2 = STexture(),
 	m_Color = 0,
 	
 	fn FromMaxMaterial mat =
@@ -74,10 +78,27 @@ struct SMaterial
 				
 				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
 				(
+					format "SelfIlum\n"
 					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
 					-- Load the texture 2
-					local l_Texture2FileName = mat.selfIllumMap.filename
-					m_Texture2.FromMaxTexture l_Texture2FileName
+					local lSelfIlumMaterial = mat.selfIllumMap
+					if (classof lSelfIlumMaterial ==Multi_Sub_Map) then 
+					(
+						m_Type = (bit.or m_Type VERTEX_TYPE_RNM)
+						local l_TextureColor0FileName = lSelfIlumMaterial.id_0_color_shader.filename
+						local l_TextureColor1FileName = lSelfIlumMaterial.id_1_color_shader.filename
+						local l_TextureColor2FileName = lSelfIlumMaterial.id_2_color_shader.filename
+						format "Radiosity % % %\n" l_TextureColor0FileName l_TextureColor1FileName l_TextureColor2FileName
+						m_TexturesRadiosityColor0.FromMaxTexture l_TextureColor0FileName
+						m_TexturesRadiosityColor1.FromMaxTexture l_TextureColor1FileName
+						m_TexturesRadiosityColor2.FromMaxTexture l_TextureColor2FileName
+					)
+					else
+					(
+						local l_Texture2FileName = lSelfIlumMaterial.filename
+						m_Texture2.FromMaxTexture l_Texture2FileName
+					)
+					
 				)
 				
 				if mat.reflectionMapEnable == true AND classOf(mat.reflectionMap) == BitmapTexture then
@@ -124,7 +145,7 @@ struct SMaterial
 	fn FromMaxUndefinedMaterial Obj =
 	(
 		
-		format "FromMaxUndefinedMaterial % %" Obj.name  Obj
+		--format "FromMaxUndefinedMaterial % %" Obj.name  Obj
 		
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 		m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)

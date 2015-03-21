@@ -4,9 +4,9 @@ fileIn "Cinematics.ms"
 filein "RNMUtils.ms"
 filein "ExportGraph.ms"
 		
-utility UABUtility "UAB Utility" width:163 height:600
+utility UABUtility "UAB Utility" width:163 height:500
 (
-	button SetPathButton "Set Path" pos:[13,9] width:127 height:30
+	button SetPathButton "Select Path" pos:[13,9] width:127 height:30
 	label PathLabel "" pos:[15,44] width:132 height:29
 	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,84] width:79 height:25
 	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,110] width:94 height:25
@@ -19,23 +19,22 @@ utility UABUtility "UAB Utility" width:163 height:600
 	button GraphButton "Graph" pos:[19,213] width:124 height:17
 	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,234] width:124 height:17
 	button SceneButton "Scene" pos:[18,257] width:124 height:17
-	button SetProperties "Set Properties" pos:[37,568] width:82 height:17
 	
 	GroupBox grp9 "Generate RNM" pos:[10,286] width:141 height:112
 	button Xbtn "Generate X" pos:[15,310] width:124 height:17
 	button Ybtn "Generate Y" pos:[15,340] width:124 height:17
 	button Zbtn "Generate Z" pos:[15,370] width:124 height:17
-
-
-	GroupBox grp10 "Set RNM Texture" pos:[4,411] width:145 height:150
-	button LightmapXBtn "X" pos:[10,434] width:32 height:17
+	
+	GroupBox SetRNM "Set RNM Texture" pos:[10,410] width:141 height:75
+	button LightmapXBtn "X" pos:[20,434] width:34 height:17
 	label LightmapXLabel "" pos:[46,433] width:94 height:20
-	button LightmapYBtn "Y" pos:[10,464] width:32 height:17
+	button LightmapYBtn "Y" pos:[65,434] width:34 height:17
 	label LightmapYLabel "" pos:[46,465] width:94 height:20
-	button LightmapZBtn "Z" pos:[10,494] width:32 height:17
+	button LightmapZBtn "Z" pos:[105,434] width:34 height:17
 	label LightmapZLabel "" pos:[46,491] width:94 height:20
-	button ApplyBtn "Apply" pos:[23,530] width:124 height:17
-
+	button ApplyBtn "Apply" pos:[20,460] width:120 height:17
+	
+	button SetProperties "Set Properties" pos:[10,500] width:141 height:17
 	
 	on UABUtility open do
 	(
