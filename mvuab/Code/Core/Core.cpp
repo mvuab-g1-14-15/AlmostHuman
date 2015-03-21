@@ -110,6 +110,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pEnemyManager );
   CHECKED_DELETE( m_pTriggerManager );
   CHECKED_DELETE( m_pBillboard );
+  CHECKED_DELETE( m_pParticleManager );
 }
 
 void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
@@ -134,10 +135,10 @@ void CCore::Update()
 
   m_pCameraManager->Update();
 
-  m_pParticleManager->Update(deltaTime);
+  m_pParticleManager->Update( deltaTime );
   m_pBillboard->Update();
 
-  m_pRenderableObjectsLayersManager->GetResource("solid")->Update();
+  m_pRenderableObjectsLayersManager->GetResource( "solid" )->Update();
 
   if ( m_pActionManager->DoAction( "ClearConsole" ) )
     m_pConsole->Clear();
@@ -283,8 +284,8 @@ void CCore::InitManagers()
   m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
 
-  m_pBillboard->Init(Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/BARK5.jpg");
-  m_pParticleManager->Init("Data/particles.xml");
+  m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/BARK5.jpg" );
+  m_pParticleManager->Init( "Data/particles.xml" );
 }
 
 void CCore::Trace( const std::string& TraceStr )
