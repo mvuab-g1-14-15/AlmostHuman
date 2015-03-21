@@ -12,5 +12,8 @@ class CDeveloperInfoSceneRenderCommand: public CSceneRendererCommand
 public:
   CDeveloperInfoSceneRenderCommand( CXMLTreeNode& atts );
   void Execute( CGraphicsManager& GM );
+private:
+  Math::CColor m_Quad2dColor;
+  Math::CColor m_Quad2dEdgeColor;
 };
 #endif

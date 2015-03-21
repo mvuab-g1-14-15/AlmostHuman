@@ -65,11 +65,8 @@ bool CFontManager::LoadTTFs( const std::string& pathFile )
 
   if ( !parser.LoadFile( pathFile.c_str() ) )
   {
-    std::string msg_error =
-      "CGraphicsManager::LoadFonts->Error al intentar leer el archivo de configuracion: "
-      + pathFile;
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
-    //throw CException(__FILE__, __LINE__, msg_error);
+    LOG_ERROR_APPLICATION( "Error Loading fonts configuration file %s", pathFile.c_str() );
+    return false;
   }
 
   m_sPathFile = pathFile;
@@ -85,14 +82,14 @@ bool CFontManager::LoadTTFs( const std::string& pathFile )
 
     for ( int i = 0; i < count; ++i )
     {
-      std::string fontId    = m( i ).GetPszProperty( "id" );
-      std::string name        = m( i ).GetPszProperty( "name" );
-      std::string file        = m( i ).GetPszProperty( "file" );
-      uint8 size                    = m( i ).GetIntProperty( "size", 10 );
-      bool bold                        = m( i ).GetBoolProperty( "bold", false );
-      bool italica                = m( i ).GetBoolProperty( "italica", false );
-      bool _default                = m( i ).GetBoolProperty( "default", false );
-      std::vector<std::string>::iterator it            = m_vTTFsFiles.begin();
+      std::string fontId = m( i ).GetPszProperty( "id" );
+      std::string name = m( i ).GetPszProperty( "name" );
+      std::string file = m( i ).GetPszProperty( "file" );
+      uint8 size = m( i ).GetIntProperty( "size", 10 );
+      bool bold = m( i ).GetBoolProperty( "bold", false );
+      bool italica = m( i ).GetBoolProperty( "italica", false );
+      bool _default = m( i ).GetBoolProperty( "default", false );
+      std::vector<std::string>::iterator it = m_vTTFsFiles.begin();
       std::vector<std::string>::iterator itEnd    = m_vTTFsFiles.end();
       bool exist = false;
 
@@ -114,16 +111,11 @@ bool CFontManager::LoadTTFs( const std::string& pathFile )
         {
           m_vTTFsFiles.push_back( file );
           m_TTFs[fontId] = CreateFont( size, bold, italica, name, _default );
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION,
-                                                 "LoadFonts:: Add font %s (file:%s,size:%d,bold:%d,italica:%d,default:%d),",
-                                                 fontId.c_str(), file.c_str(), size, bold, italica, _default );
+          LOG_INFO_APPLICATION( "LoadFonts:: Add font %s (file:%s,size:%d,bold:%d,italica:%d,default:%d),",
+                                fontId.c_str(), file.c_str(), size, bold, italica, _default );
         }
         else
-        {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                                 "LoadFonts:: no se ha podido añadir el ttf file: %s", file.c_str() );
-          //CCore::GetSingletonPtr()->SetAssetError(ASSET_ERROR_TTF);
-        }
+          LOG_ERROR_APPLICATION( "LoadFonts:: no se ha podido añadir el ttf file: %s", file.c_str() );
       }
     }
   }

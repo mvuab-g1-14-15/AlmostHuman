@@ -7,37 +7,28 @@
 #include "Cameras\CameraManager.h"
 #include "Utils\GPUStatics.h"
 
-CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
+CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode& atts )
+  : CSceneRendererCommand( atts )
+  , m_Quad2dColor( 0.2f, 0.2f, 0.2f, 0.7f )
+  , m_Quad2dEdgeColor( Math::colWHITE )
 {
 }
 
 void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
 {
   CFontManager* FM = CFontManager::GetSingletonPtr();
-  // Put show all the information of the FPS
+  int32 FontId = FM->GetTTF_Id( "Consolas" );
   uint32 width, height;
   GM.GetWidthAndHeight( width, height );
-  Math::Vect2i WindowPosition( 10, height - 120 );
-  RECT l_Rect = { 5, height - 140, 200, 200 };
-  WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colGREEN, "FPS %5.2f", FPS );
   CCamera* lCurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-  if ( lCurrentCamera )
-  {
-    Math::Vect3f lPosition = lCurrentCamera->GetPos();
-    WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colYELLOW,
-                        "Position < %5.2f %5.2f %5.2f > ", lPosition.x, lPosition.y, lPosition.z );
-    Math::Vect3f lTarget = lCurrentCamera->GetLookAt();
-    WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colYELLOW,
-                        "Target < %5.2f %5.2f %5.2f > ", lTarget.x, lTarget.y, lTarget.z );
-  }
-
+  Math::Vect3f lPosition = lCurrentCamera->GetPos();
+  Math::Vect3f lTarget = lCurrentCamera->GetLookAt();
+  int32 lFontHeight = FM->SizeY( "FPS", FontId );
   CGPUStatics* GPU = CGPUStatics::GetSingletonPtr();
-  WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colRED,
-                      "Objects %d", GPU->GetDrawCount() );
-  WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colRED,
-                      "Vertices %d", GPU->GetVertexCount() );
-  WindowPosition.y += FM->DrawDefaultText( WindowPosition.x, WindowPosition.y, Math::colRED,
-                      "Faces %d", GPU->GetFacesCount() );
+  GM.DrawRectangle2D( Math::Vect2i( 5, 7 ), width - 10, lFontHeight + 5, m_Quad2dColor, 2, 2, m_Quad2dEdgeColor );
+  FM->DrawTextA( 8, 10, Math::colWHITE, FontId,
+                 "Stats: FPS <%5.2f> Cam<%5.2f %5.2f %5.2f> Look<%5.2f %5.2f %5.2f> Objs<%d> Vtxs<%d> Tri<%d> Faces<%d>",
+                 FPS, lPosition.x, lPosition.y, lPosition.z, lTarget.x, lTarget.y, lTarget.z, GPU->GetDrawCount(),
+                 GPU->GetVertexCount(), uint32( GPU->GetVertexCount() / 3 ), GPU->GetFacesCount() );
   GPU->SetToZero();
 }
