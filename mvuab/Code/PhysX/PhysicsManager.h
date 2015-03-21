@@ -12,6 +12,7 @@
 #include "Utils\Name.h"
 #include "PhysicsDefs.h"
 #include "Utils\SingletonPattern.h"
+#include "Utils\MapManager.h"
 
 class NxPhysicsSDK;
 class NxScene;
@@ -38,26 +39,26 @@ using namespace Math;
 
 /*
 enum EShapeType
-	{
-	eSHAPE_PLANE = 0,
-	eSHAPE_SPHERE,
-	eSHAPE_BOX,
-	eSHAPE_CAPSULE,
-	eSHAPE_WHEEL,
-	eSHAPE_CONVEX,
-	eSHAPE_MESH,
-	eSHAPE_HEIGHTFIELD
+  {
+  eSHAPE_PLANE = 0,
+  eSHAPE_SPHERE,
+  eSHAPE_BOX,
+  eSHAPE_CAPSULE,
+  eSHAPE_WHEEL,
+  eSHAPE_CONVEX,
+  eSHAPE_MESH,
+  eSHAPE_HEIGHTFIELD
 };
 
 struct TActorInfo
 {
-	EShapeType mType;
-	float32 mRadious;
-	Vect3f mPosition;
+  EShapeType mType;
+  float32 mRadious;
+  Vect3f mPosition;
 }
 */
 
-class CPhysicsManager : public CSingleton<CPhysicsManager>
+class CPhysicsManager : public CSingleton<CPhysicsManager>, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>
 {
 public:
   //--- Init and End protocols------------------------------------------
@@ -92,11 +93,16 @@ public:
 
   bool          ReleaseAllActors();         //EUserDataFlag _eFlags );
 
+  bool          AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color = Math::colBLACK,
+                          bool Paint = true, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO,
+                          NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
   //--- Add/Release CharacterControllers
   bool          AddPhysicController( CPhysicController* _pController,
                                      EControleType _Tipus = ::CAPSULE, ECollisionGroup _Group = ::ECG_ENEMY );
   bool          ReleasePhysicController( CPhysicController* _pController );
 
+  bool CPhysicsManager::AddController( const std::string& Name, float radius = 0.2f, float height = 1, float slope = 0.2f, float skin_width = 0.01f,
+                                       float step = 0.5f, Math::Vect3f pos = Math::Vect3f( 0, 4.0, 0 ), ECollisionGroup ColliusionGroup = ECG_PLAYER, float gravity = -10 );
   ////--- Add/Release Joints
   bool          AddPhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
   bool          ReleasePhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
@@ -123,7 +129,7 @@ public:
       std::vector<CPhysicUserData*> impactObjects, float _fPower );
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                 float _fEffectRadius, float _fPower );
-   std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere);
+  std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere );
   //----Update
   void          Update( float _ElapsedTime );
   void          WaitForSimulation();
@@ -268,9 +274,8 @@ private:
   m_bDistancesSheres;     // dice si dibuja las esferas de las distancias de detección, etc
 
   // Físicas escenario
-  std::vector<CPhysicUserData*>
-  m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
-  std::vector<CPhysicActor*>       m_vActors;     // para guardar los Actors del CreateMeshFromXML
+  std::vector<CPhysicUserData*>          m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
+  std::vector<CPhysicActor*>             m_vActors;     // para guardar los Actors del CreateMeshFromXML
   std::map<std::string, unsigned int>    m_vIds;    // para guardar los id's del vector de actors
   std::vector<CPhysicUserData*> m_vUD;
 };

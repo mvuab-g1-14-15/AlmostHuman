@@ -209,7 +209,7 @@ void CPhysicProcess::InitScenePhysicsSamplers()
 {
   //Ejercicio 1 - Pendulo
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  m_PSJ = new CPhysicSphericalJoint();
+
   CPhysicUserData* l_PUD = new CPhysicUserData( "Box" );
   l_PUD->SetPaint( true );
   l_PUD->SetColor( colBLACK );
@@ -221,6 +221,7 @@ void CPhysicProcess::InitScenePhysicsSamplers()
   l_PM->AddPhysicActor( l_pPhysicActor );
   l_pPhysicActor->AddVelocityAtPos( Math::Vect3f( 10, 0, 6 ), Math::Vect3f( 10, 4,
                                     6 ), 10 );
+  m_PSJ = new CPhysicSphericalJoint();
   m_PSJ->SetInfo( Math::Vect3f( 5, 4, 6 ), l_pPhysicActor );
   l_PM->AddPhysicSphericalJoint( m_PSJ );
   //Ejercicio 2 - Puente levadiso
@@ -276,15 +277,15 @@ void CPhysicProcess::Init()
 
   InitScenePhysicsSamplers();
 
-	CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
-	l_PUD->SetPaint( false );
-	l_PUD->SetColor( colWHITE );
-	m_vPUD.push_back( l_PUD );
-	CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-	l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.1, 1000 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
-	0 ) );
-	CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-	m_vPA.push_back( l_pPhysicActor );
+  CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
+  l_PUD->SetPaint( false );
+  l_PUD->SetColor( colWHITE );
+  m_vPUD.push_back( l_PUD );
+  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.1, 1000 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
+                               0 ) );
+  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+  m_vPA.push_back( l_pPhysicActor );
 }
 
 void CPhysicProcess::Render()

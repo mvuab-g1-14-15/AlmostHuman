@@ -5,9 +5,11 @@ local g_HalfPi = 3.141618 * 0.5
 local g_ForwardSpeed = 2.5
 
 local g_Speed = 2.5
-local g_Flag_agacharse = 0
 
-local g_Levantado = 1
+local g_bFlag_agacharse = 0
+local g_bLevantado = 1
+local g_fHeight
+
 local g_Room = 1
 
 local g_MoveDt = 0.0
@@ -30,13 +32,16 @@ function init()
 	physic_manager = core:GetPhysicsManager()
 	--Create PlayerController
 	process = Singleton_Engine.get_singleton():GetProcess()
-	local PUD_Player = process:GetNewPUD("CharacterController")
-	PUD_Player:SetColor(1,0,0,1)
-	PUD_Player:SetPaint(true)
+	--local PUD_Player = process:GetNewPUD("CharacterController")
+	--PUD_Player:SetColor(1,0,0,1)
+	--PUD_Player:SetPaint(true)
 	rooms = {Vect3f( 0, 2, 1 ), Vect3f( 8, -10, 18 ), Vect3f( 40, -15, -8), Vect3f( 141, 35, -17 ), Vect3f( 104, 22, 198 )}
 	local position = rooms[g_Room]
-	local PlayerController = process:GetNewController(0.4, 2, 0.01, 0.01, 0.01, PUD_Player, position, -10)
-	physic_manager:AddPhysicController(PlayerController)
+	--local PlayerController = process:GetNewController(0.4, 2, 0.01, 0.01, 0.01, PUD_Player, position, -10)
+	g_fHeight = 2
+	--physic_manager:AddPhysicController(PlayerController)
+	physic_manager:AddController("CharacterController", 0.4, 2, 0.01, 0.01, 0.01, position, CollisionGroup.ECG_PLAYER.value, -10)
+	local PlayerController = physic_manager:GetController("CharacterController")
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (PlayerController:GetHeight()/2), position.z))
 	initialized = true
 end
@@ -89,12 +94,12 @@ function move_player( dt )
 		flag_speed = 1
 	end
 	if action_manager:DoAction("Crouch") then
-		if g_Flag_agacharse == 1 then
-			g_Flag_agacharse = 0
+		if g_bFlag_agacharse == 1 then
+			g_bFlag_agacharse = 0
 			g_ForwardSpeed = g_ForwardSpeed*4
 		else
-			g_Flag_agacharse = 1
-			g_Levantado = 0
+			g_bFlag_agacharse = 1
+			g_bLevantado = 1
 			g_ForwardSpeed = g_ForwardSpeed/4
 		end
 	end
@@ -204,7 +209,7 @@ function move( flag_speed, forward, strafe, dt )
 	
     constant = dt * g_ForwardSpeed;
 	
-	if flag_speed == 1 and  g_Flag_agacharse == 0 then
+	if flag_speed == 1 and  g_bFlag_agacharse == 0 then
         constant = constant * g_Speed;
 	end
 	
@@ -212,20 +217,25 @@ function move( flag_speed, forward, strafe, dt )
 	character_controller:Move(addPos, dt)
 	character_controller:SetYaw(Yaw)
 	
-	local position = Vect3f(character_controller:GetPosition())
-	position.y = position.y + (character_controller:GetHeight()/2)
-	local size = character_controller:GetHeight()
-	if g_Flag_agacharse == 1 then
-		position.y = position.y - 1
-		size = size/2
-	elseif g_Levantado == 0 then
-		position.y = position.y + 1
-		size = size*2
-		g_Levantado = 1
-		character_controller:SetPosition(position)
+	--local position = Vect3f(character_controller:GetPosition())
+	--position.y = position.y + (character_controller:GetHeight()/2)
+	--local size = character_controller:GetHeight()
+	if g_bFlag_agacharse == 1 and g_bLevantado == 1 then
+		character_controller:UpdateCharacterExtents(false, g_fHeight/2)
+		g_bLevantado = 0
+		--position.y = position.y - 1
+		--size = size/2
+	elseif g_bLevantado == 0 and g_bFlag_agacharse == 0 then
+		character_controller:UpdateCharacterExtents(true, g_fHeight/2)
+		--position.y = position.y + 1
+		--size = size*2
+		g_bLevantado = 1
+		--character_controller:SetPosition(position)
 	end
 	
-	character_controller:SetHeight(size)
+	--character_controller:SetHeight(size)
+	local position = Vect3f(character_controller:GetPosition())
+	position.y = position.y + (character_controller:GetHeight()/2)
 	current_camera:SetPos(position)
 	
 end
@@ -249,7 +259,7 @@ function moveFree( flag_speed, forward, strafe, dt )
 	
     constant = dt * l_ForwardSpeed;
 	
-	if flag_speed == 1 and  g_Flag_agacharse == 0 then
+	if flag_speed == 1 and  g_bFlag_agacharse == 0 then
         constant = constant * l_Speed;
 	end
 	

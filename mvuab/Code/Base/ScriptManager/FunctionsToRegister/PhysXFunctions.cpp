@@ -87,7 +87,6 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddPhysicRevoluteJoint", &CPhysicsManager::AddPhysicRevoluteJoint )
     .def( "AddPhysicSphericalJoint", &CPhysicsManager::AddPhysicSphericalJoint )
     .def( "AddPhysicController", &Add_PhysicController )
-    .def( "AddActor", ( bool ( CPhysicsManager::* )( const std::string&, const Math::CColor&, bool ) )&CPhysicsManager::AddActor )
     .def( "AddActor", ( bool ( CPhysicsManager::* )( const std::string&, std::string&, const Math::Vect3f&, const Math::CColor&,
                         bool, const Math::Vect3f&, const Math::Vect3f&, const Math::Vect3f&,
                         NxCCDSkeleton*, uint32 ) )&CPhysicsManager::AddActor )

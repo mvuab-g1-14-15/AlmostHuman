@@ -47,7 +47,7 @@ using namespace Math;
 CPhysicsManager::CPhysicsManager( void )
   : m_szConfigFileName( "" )
   , m_bIsOk( false )
-  , m_bDebugRenderMode( false )
+  , m_bDebugRenderMode( true )
   , m_pPhysicsSDK( NULL )
   , m_pScene( NULL )
   , mControllerManager( NULL )
@@ -171,6 +171,8 @@ void CPhysicsManager::Done()
   {
     Release();
     /* By XMA */
+    CMapManager<CPhysicActor>::Destroy();
+    CMapManager<CPhysicController>::Destroy();
     ReleaseVectors();
     /**********/
     m_bIsOk = false;
@@ -218,6 +220,11 @@ void CPhysicsManager::ReleaseVectors()
     CHECKED_DELETE( m_vActors[i] );
 
   m_vActors.clear();
+
+  for ( size_t i = 0; i < m_vUD.size(); ++i )
+    CHECKED_DELETE( m_vUD[i] );
+
+  m_vUD.clear();
 }
 
 void CPhysicsManager::ReleaseToReload()
@@ -398,6 +405,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
   NxU32 nShapes = _pActor->getNbShapes();
 
   Mat44f m;
+
   while ( nShapes-- )
   {
     switch ( shapes[nShapes]->getType() )
@@ -418,9 +426,9 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
       m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+                  m_aux[1], m_aux[5], m_aux[9], m_aux[13],
+                  m_aux[2], m_aux[6], m_aux[10], m_aux[14],
+                  m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
       _RM->SetTransform( m );
       NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
       Math::CColor color = physicUserData->GetColor();
@@ -435,9 +443,9 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
       m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+                  m_aux[1], m_aux[5], m_aux[9], m_aux[13],
+                  m_aux[2], m_aux[6], m_aux[10], m_aux[14],
+                  m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
       _RM->SetTransform( m );
       NxReal radius = shapes[nShapes]->isSphere()->getRadius();
       Math::CColor color = physicUserData->GetColor();
@@ -450,16 +458,16 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       NxF32 m_aux[16];
       shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
       m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+                  m_aux[1], m_aux[5], m_aux[9], m_aux[13],
+                  m_aux[2], m_aux[6], m_aux[10], m_aux[14],
+                  m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
       _RM->SetTransform( m );
       const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
       Math::CColor color = physicUserData->GetColor();
 
       Mat44f t;
-      t.RotByAngleX( 3.1415 / 2 );
+      t.RotByAngleX( 3.1415f / 2 );
       _RM->SetTransform( m * t );
       _RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false );
       t.SetIdentity();
@@ -498,9 +506,9 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       NxF32 m_aux[16];
       mesh->getGlobalPose().getColumnMajor44( m_aux );
       m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+                  m_aux[1], m_aux[5], m_aux[9], m_aux[13],
+                  m_aux[2], m_aux[6], m_aux[10], m_aux[14],
+                  m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
       _RM->SetTransform( m );
       Math::Vect3f a, b, c;
 
@@ -551,7 +559,6 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
   if ( nxActor != NULL )
   {
     nxActor->userData = _pActor->GetUserData();
-    m_vUD.push_back( _pActor->GetUserData() );
     _pActor->CreateActor( nxActor );
     l_bIsOK = true;
   }
@@ -774,7 +781,6 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
   {
     _pController->CreateController( l_NxController, m_pScene );
     l_NxController->getActor()->userData = _pController->GetUserData();
-    m_vUD.push_back( _pController->GetUserData() );
     //NxShape*const* shape = nxController->getActor()->getShapes();
     //shape[0]->setGroup(controller->);
     l_NxController->getActor()->getShapes()[0]->setGroup( _Group );
@@ -1323,7 +1329,7 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
     const Math::Vect3f& posSphere )
 {
   EShapesType shapeType = ALL_SHAPES;
-  
+
   uint32 impactMask = 1 << ECG_ESCENE;
   // Check the scene
   assert( m_pScene );
@@ -1350,4 +1356,66 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
 
   delete []l_CollisionShapes;
   return l_ImpactObjects;
+}
+
+bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color,
+                                bool Paint, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vLocalPos, const Math::Vect3f& rotation,
+                                NxCCDSkeleton* _pSkeleton, uint32 _uiGroup )
+{
+  CPhysicUserData* l_UserData = new CPhysicUserData( Name );
+  l_UserData->SetColor( Color );
+  l_UserData->SetPaint( Paint );
+  CPhysicActor* l_Actor = new CPhysicActor( l_UserData );
+
+  if ( Type == "Box" )
+    l_Actor->AddBoxShape( _vDimension, _vGlobalPos, _vLocalPos, rotation, _pSkeleton, _uiGroup );
+  else if ( Type == "Sphere" )
+    l_Actor->AddSphereShape( _vDimension.x, _vGlobalPos, _vLocalPos, _pSkeleton, _uiGroup );
+  else if ( Type == "Capsule" )
+    l_Actor->AddCapsuleShape( _vDimension.x, _vDimension.y, _vGlobalPos, _vLocalPos, _pSkeleton, _uiGroup );
+  else if ( Type == "Plane" )
+    l_Actor->AddPlaneShape( _vGlobalPos, _vDimension.x, _uiGroup );
+
+  if ( !CMapManager<CPhysicActor>::GetResource( Name ) )
+  {
+    if ( AddPhysicActor( l_Actor ) )
+    {
+      CMapManager<CPhysicActor>::AddResource( Name, l_Actor );
+      m_vUD.push_back( l_UserData );
+      return true;
+    }
+    else
+    {
+      CHECKED_DELETE( l_UserData );
+      CHECKED_DELETE( l_Actor );
+    }
+  }
+
+  return false;
+}
+
+bool CPhysicsManager::AddController( const std::string& Name, float radius, float height, float slope, float skin_width, float step,
+                                     Math::Vect3f pos,
+                                     ECollisionGroup ColliusionGroup, float gravity )
+{
+  CPhysicUserData* l_UserData = new CPhysicUserData( Name );
+  CPhysicController* l_Controller = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup, l_UserData, pos,
+      gravity );
+
+  if ( !CMapManager<CPhysicController>::GetResource( Name ) )
+  {
+    if ( AddPhysicController( l_Controller ) )
+    {
+      CMapManager<CPhysicController>::AddResource( Name, l_Controller );
+      m_vUD.push_back( l_UserData );
+      return true;
+    }
+    else
+    {
+      CHECKED_DELETE( l_UserData );
+      CHECKED_DELETE( l_Controller );
+    }
+  }
+
+  return false;
 }
