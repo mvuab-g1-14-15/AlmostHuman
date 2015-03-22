@@ -44,8 +44,8 @@
 
 CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 {
-   unsigned short i = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
-           VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
+  unsigned short i = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
+                     VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
 }
 
 CPlayerPhysicProcess::~CPlayerPhysicProcess()
@@ -104,11 +104,12 @@ void CPlayerPhysicProcess::Update()
 
   if ( pActionManager->DoAction( "ChangeCamera" ) )
   {
-	  if( "FreeCam" == CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCameraName())
-		  CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera("TestProcessCam");
-	  else
-		  CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera("FreeCam");
+    if ( "FreeCam" == CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCameraName() )
+      CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera( "TestProcessCam" );
+    else
+      CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera( "FreeCam" );
   }
+
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
@@ -117,7 +118,7 @@ void CPlayerPhysicProcess::Update()
     CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
     CStaticMeshManager::GetSingletonPtr()->Reload();
     CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
-	CLightManager::GetSingletonPtr()->ReLoad();
+    CLightManager::GetSingletonPtr()->ReLoad();
     CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
   }
 
@@ -188,44 +189,25 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
 {
   //Scene Character Controller
   //Step1
-  CPhysicUserData* l_PUD = new CPhysicUserData( "BoxCharacter1" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 1, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 0, 0, 0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
+  std::string l_Type = "Box";
+  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ), v3fZERO,
+      v3fZERO, 0, 0 );
 
   //Step2
-  l_PUD = new CPhysicUserData( "BoxCharacter2" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 2, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 4, 0, 0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
+  l_Type = "Box";
+  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
+      Math::Vect3f( 4, 0, 0 ), v3fZERO, 0, 0 );
 
   //Step3
-  l_PUD = new CPhysicUserData( "BoxCharacter3" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 2, 3, 2 ), Math::Vect3f( 0, 0, 5 ), Math::Vect3f( 8, 0, 0 ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
+  l_Type = "Box";
+  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
+      Math::Vect3f( 8, 0, 0 ), v3fZERO, 0, 0 );
 
   //Plano Inclinado TODO
-  l_PUD = new CPhysicUserData( "Rampa" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 0.5f, 10, 4 ), Math::Vect3f( 0, 0, -5 ), Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ) );
-  CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
-  m_vPA.push_back( l_pPhysicActor );
+  l_Type = "Box";
+  CPhysicsManager::GetSingletonPtr()->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
+      Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
+
 }
 
 void CPlayerPhysicProcess::Init()
@@ -325,7 +307,7 @@ void CPlayerPhysicProcess::Init()
   m_PointInicial = Math::Vect3f( 6, 0, -6 );
   m_PointFinal = Math::Vect3f( 6, 0, 6 );
   m_Path = m_AStar->GetPath( m_PointInicial, m_PointFinal );
-
+  InitSceneCharacterController();
 }
 
 void CPlayerPhysicProcess::Render()

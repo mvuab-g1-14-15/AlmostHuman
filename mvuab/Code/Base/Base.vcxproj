@@ -23,6 +23,7 @@
     <ClCompile Include="ScriptManager\FunctionsToRegister\AIFunctions.cpp" />
     <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp" />
     <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp" />
+    <ClCompile Include="ScriptManager\FunctionsToRegister\EnumDefinitions.cpp" />
     <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp" />
     <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp" />
     <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h" />
     <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h" />
     <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h" />
+    <ClInclude Include="ScriptManager\FunctionsToRegister\EnumDefinitions.h" />
     <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h" />
     <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h" />
     <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h" />

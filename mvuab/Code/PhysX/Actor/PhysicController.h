@@ -84,7 +84,6 @@ public:
   }
   void            SetRadius( float _fRadius );
 
-  void            SetRotation( float _fAngle );
   ECollisionGroup       GetColisionGroup( void ) const
   {
     return m_uCollisionGroups;
@@ -141,7 +140,6 @@ private:
   NxController*         m_pPhXController;
   NxScene*            m_pPhXScene;
 
-  NxF32               m_RotacionOriginal[16];
 };
 
 #endif //__INC_PHYSIC_CONTROLLER_H__

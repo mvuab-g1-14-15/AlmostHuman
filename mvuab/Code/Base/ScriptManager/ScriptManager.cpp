@@ -1,11 +1,12 @@
 #include "ScriptManager.h"
-#include "ScriptManager\FunctionsToRegister\BaseFunctions.h"
-#include "ScriptManager\FunctionsToRegister\CoreFunctions.h"
-#include "ScriptManager\FunctionsToRegister\GraphicsFunctions.h"
-#include "ScriptManager\FunctionsToRegister\InputFunctions.h"
-#include "ScriptManager\FunctionsToRegister\PhysXFunctions.h"
-#include "ScriptManager\FunctionsToRegister\VideogameFunctions.h"
-#include "ScriptManager\FunctionsToRegister\AIFunctions.h"
+#include "FunctionsToRegister\BaseFunctions.h"
+#include "FunctionsToRegister\CoreFunctions.h"
+#include "FunctionsToRegister\GraphicsFunctions.h"
+#include "FunctionsToRegister\InputFunctions.h"
+#include "FunctionsToRegister\PhysXFunctions.h"
+#include "FunctionsToRegister\VideogameFunctions.h"
+#include "FunctionsToRegister\AIFunctions.h"
+#include "FunctionsToRegister\EnumDefinitions.h"
 #include <string>
 #include <iostream>
 
@@ -92,5 +93,6 @@ void CScriptManager::RegisterLUAFunctions()
   registerInputs( m_LS );
   registerPhysX( m_LS );
   registerVideogame( m_LS );
-  registerAI(m_LS);
+  registerAI( m_LS );
+  registerEnum( m_LS );
 }

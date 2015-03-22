@@ -4,6 +4,7 @@
 #include "Actor\PhysicController.h"
 #include "PhysicsManager.h"
 #include "Utils\Name.h"
+#include "PhysicsDefs.h"
 
 #include <set>
 
@@ -27,20 +28,23 @@ bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* Ph
 }
 
 template<class T>
-size_t set_getIdByResource(std::set<T>& vec, T val)
+size_t set_getIdByResource( std::set<T>& vec, T val )
 {
-	std::set<T>::iterator it = vec.begin()
-						 ,it_end = vec.end();
+  std::set<T>::iterator it = vec.begin()
+                             , it_end = vec.end();
 
-	size_t i = 0;
-    for( ; it != it_end ; ++it)
-	{
-       if( *it == val)
-            return i;
-	   ++i;
-	}
-    return 0;
-} 
+  size_t i = 0;
+
+  for ( ; it != it_end ; ++it )
+  {
+    if ( *it == val )
+      return i;
+
+    ++i;
+  }
+
+  return 0;
+}
 
 void registerPhysX( lua_State* m_LS )
 {
@@ -73,7 +77,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddAcelerationAtPos", &CPhysicActor::AddAcelerationAtPos )
     //.def( "AddForceAtPos", &CPhysicActor::AddForceAtPos )
     .def( "AddTorque", &CPhysicActor::AddTorque )
-	.def( "SetGlobalPosition", &CPhysicActor::SetGlobalPosition )
+    .def( "SetGlobalPosition", &CPhysicActor::SetGlobalPosition )
   ];
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
@@ -83,6 +87,10 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddPhysicRevoluteJoint", &CPhysicsManager::AddPhysicRevoluteJoint )
     .def( "AddPhysicSphericalJoint", &CPhysicsManager::AddPhysicSphericalJoint )
     .def( "AddPhysicController", &Add_PhysicController )
+    .def( "AddActor", ( bool ( CPhysicsManager::* )( const std::string&, std::string&, const Math::Vect3f&, const Math::CColor&,
+                        bool, const Math::Vect3f&, const Math::Vect3f&, const Math::Vect3f&,
+                        NxCCDSkeleton*, uint32 ) )&CPhysicsManager::AddActor )
+    .def( "AddController", &CPhysicsManager::AddController )
     //Release
     .def( "ReleasePhysicActor", &CPhysicsManager::ReleasePhysicActor )
     .def( "ReleasePhysicController", &CPhysicsManager::ReleasePhysicController )
@@ -95,7 +103,9 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetActor", &CPhysicsManager::GetActor )
     .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
           &CPhysicsManager::GetUserData )
-	.def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
+    .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
+    .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
+    .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
 
   ];
   module( m_LS ) [
@@ -108,13 +118,13 @@ void registerPhysX( lua_State* m_LS )
     .def( "SetYaw", &CPhysicController::SetYaw )
     .def( "SetHeight", &CPhysicController::SetHeight )
     .def( "GetHeight", &CPhysicController::GetHeight )
-    .def( "SetRotation", &CPhysicController::SetRotation )
+    .def( "UpdateCharacterExtents", &CPhysicController::UpdateCharacterExtents )
   ];
 
   module( m_LS ) [
     class_<std::set<CPhysicUserData*>>( "ListaPUD" )
-	.def( constructor<std::set<CPhysicUserData*>>() )
-	.def( "size", &std::set<CPhysicUserData*>::size )
-	.def( "getIdByResource", &set_getIdByResource<CPhysicUserData*> )
+    .def( constructor<std::set<CPhysicUserData*>>() )
+    .def( "size", &std::set<CPhysicUserData*>::size )
+    .def( "getIdByResource", &set_getIdByResource<CPhysicUserData*> )
   ];
 }

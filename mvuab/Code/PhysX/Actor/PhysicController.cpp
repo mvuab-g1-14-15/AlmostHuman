@@ -124,15 +124,15 @@ void CPhysicController::SetPosition( const Math::Vect3f& pos )
     NxExtendedVec3 position = m_pPhXController->getPosition();
     position.x = pos.x;
     position.y = pos.y;
-	  position.z = pos.z;
+    position.z = pos.z;
     m_pPhXController->setPosition( position );
   }
-  //TODO MIRAR SI FUNCIONA ALGUNA VEZ
+  //TODO ASK MIRAR SI FUNCIONA ALGUNA VEZ
   else if ( m_pPhXBoxControllerDesc != NULL )
   {
-      m_pPhXBoxControllerDesc->position.x = pos.x;
-      m_pPhXBoxControllerDesc->position.y = pos.y;
-      m_pPhXBoxControllerDesc->position.z = pos.z;
+    m_pPhXBoxControllerDesc->position.x = pos.x;
+    m_pPhXBoxControllerDesc->position.y = pos.y;
+    m_pPhXBoxControllerDesc->position.z = pos.z;
   }
   else if ( m_pPhXCapsuleControllerDesc != NULL )
   {
@@ -161,7 +161,7 @@ Math::Vect3f CPhysicController::GetPosition()
     vec.y = ( float )tmp.y;
     vec.z = ( float )tmp.z;
   }
-  //TODO MIRAR SI FUNCIONA ALGUNA VEZ
+  //TODO ASK MIRAR SI FUNCIONA ALGUNA VEZ
   else if ( m_pPhXBoxControllerDesc != NULL )
   {
     if ( GetType() == ::BOX )
@@ -320,69 +320,4 @@ NxControllerDesc* CPhysicController::GetPhXControllerDesc( void )
   };
 
   return l_Controler;
-}
-
-void   CPhysicController::SetRotation( float _fAngle )
-{
-  NxActor* l_Actor = m_pPhXController->getActor();
-  NxShape* const* shapes;
-  shapes = l_Actor->getShapes();
-  NxShape* shape = shapes[0];
-  NxF32 m_aux[16];
-  shape->getGlobalPose().getColumnMajor44( m_aux );
-
-  //Guardo la posición original porque si rotas dos angulos, pierdes la rotación original
-  if ( m_bRotado == false )
-    for ( int i = 0; i < 15; ++i )
-      m_RotacionOriginal[i] = m_aux[i];
-
-  //Paso toda la información de la shape a una matriz para trabajar con ella
-  Mat44f m( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-            m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-            m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-            m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
-
-  //Calcular la dirección a la que está mirando el controlador y rotarlo 90 grados
-  float l_Yaw = GetYaw();
-  Math::Vect3f l_Direction( Math::Utils::Cos( l_Yaw ) , 0.0f, Math::Utils::Sin( l_Yaw ) );
-  l_Direction = l_Direction.RotateY( 90 );
-  l_Direction = l_Direction.Normalize();
-  float n = l_Direction.Length();
-
-  if ( ( l_Direction.x > 0 && l_Direction.z > 0 ) || ( l_Direction.x < 0 && l_Direction.z < 0 ) )
-    m.RotByAngleX( _fAngle );
-  else
-    m.RotByAngleZ( _fAngle );
-
-  NxMat34 l_m;
-
-  m_aux[0] = m.m00;
-  m_aux[4] = m.m01;
-  m_aux[8] = m.m02;
-  m_aux[12] = m.m03;
-  m_aux[1] = m.m10;
-  m_aux[5] = m.m11;
-  m_aux[9] = m.m12;
-  m_aux[13] = m.m13;
-  m_aux[2] = m.m20;
-  m_aux[6] = m.m21;
-  m_aux[10] = m.m22;
-  m_aux[14] = m.m23;
-  m_aux[3] = m.m30;
-  m_aux[7] = m.m31;
-  m_aux[11] = m.m32;
-  m_aux[15] = m.m33;
-
-  if ( m_bRotado )
-  {
-    m_bRotado = false;
-    l_m.setColumnMajor44( m_RotacionOriginal );
-  }
-  else
-  {
-    m_bRotado = true;
-    l_m.setColumnMajor44( m_aux );
-  }
-
-  shape->setGlobalPose( l_m );
 }

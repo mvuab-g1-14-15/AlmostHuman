@@ -51,12 +51,12 @@ void CEnemy::Update()
   for ( ; it != it_end; ++it )
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 
-	m_pRenderableObject->SetPosition(m_Position);
-	m_pRenderableObject->SetYaw(m_fYaw);
-	m_pRenderableObject->SetPitch(m_fPitch);
-	m_pRenderableObject->SetRoll(m_fRoll);
+  m_pRenderableObject->SetPosition( m_Position );
+  m_pRenderableObject->SetYaw( m_fYaw );
+  m_pRenderableObject->SetPitch( m_fPitch );
+  m_pRenderableObject->SetRoll( m_fRoll );
 
-	m_pRenderableObject->MakeTransform();
+  m_pRenderableObject->MakeTransform();
 }
 
 void CEnemy::ChangeState( std::string NewState )
@@ -72,15 +72,17 @@ void CEnemy::Render()
 {
 }
 
-void CEnemy::AddMesh(std::string MeshName)
+void CEnemy::AddMesh( std::string MeshName )
 {
-	CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource("solid");
+  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "solid" );
 
-	m_pRenderableObject = l_ROM->GetResource(MeshName);
-	m_pRenderableObject->SetPosition(m_Position);
-	m_pRenderableObject->SetYaw(m_fYaw);
-	m_pRenderableObject->SetPitch(m_fPitch);
-	m_pRenderableObject->SetRoll(m_fRoll);
+  m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
+  l_ROM->AddResource( m_Name, m_pRenderableObject );
+  m_pRenderableObject->SetPosition( m_Position );
+  m_pRenderableObject->SetYaw( m_fYaw );
+  m_pRenderableObject->SetPitch( m_fPitch );
+  m_pRenderableObject->SetRoll( m_fRoll );
+  m_pRenderableObject->SetScale( Math::Vect3f( 0.005f ) );
 
-	m_pRenderableObject->MakeTransform();
+  m_pRenderableObject->MakeTransform();
 }
