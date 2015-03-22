@@ -24,22 +24,25 @@ void CAStar::Render()
 {
   CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
 
-  for ( unsigned int i = 0; i < m_Graph->GetSize(); ++i )
-  {
-	Math::Vect3f pos(m_Graph->GetNodeInfo(i));
-    Math::Mat44f m;
-	m.Translate(pos);
-    l_GM->SetTransform( m );
-    l_GM->DrawCube( 0.1f, Math::colORANGE );
-    m.SetIdentity();
-    l_GM->SetTransform( m );
+  if ( m_Graph->GetSize() == 0 )
+    return;
 
+  Math::Vect3f lCurrentPoint = m_Graph->GetNodeInfo( 0 );
+  l_GM->DrawCube( lCurrentPoint, 0.1f, Math::colORANGE );
+
+  for ( unsigned int i = 1; i < m_Graph->GetSize(); ++i )
+  {
+    Math::Vect3f pos( m_Graph->GetNodeInfo( i ) );
+    l_GM->DrawCube( pos, 0.1f, Math::colORANGE );
     std::map<unsigned int, unsigned int> l_Arcs = m_Graph->GetArcs( i );
     std::map<unsigned int, unsigned int>::iterator it = l_Arcs.begin(),
                                                    it_end = l_Arcs.end();
 
-    for ( ; it != it_end; ++it )
-      l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colGREEN );
+    if ( i == 1 )
+    {
+      for ( ; it != it_end; ++it )
+        l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colGREEN );
+    }
   }
 }
 
@@ -88,10 +91,8 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
 {
   std::vector<Math::Vect3f> path;
   path.push_back( init_pos );
-
   unsigned int first_point = 0,
                last_point = 0;
-
   float l_ActualNodeDistance;
 
   for ( unsigned int i = 1; i < m_Graph->GetSize(); ++i )
@@ -109,15 +110,12 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
 
   //path.push_back( m_Graph->GetNodeInfo( first_point ) );
   unsigned int l_ActualNode = first_point;
-
   std::vector<unsigned int> l_ClosedSet;
   std::vector<unsigned int> l_OpenSet;
   l_OpenSet.push_back( l_ActualNode );
   std::map<unsigned int, unsigned int> l_CameFrom;
-
   std::map<unsigned int, float> l_GScore;
   std::map<unsigned int, float> l_FScore;
-
   l_GScore[l_ActualNode] = 0;
   l_FScore[l_ActualNode] = l_GScore[l_ActualNode] + m_Graph->GetNodeInfo( l_ActualNode ).Distance( final_pos );
 
@@ -146,14 +144,12 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
         path.push_back( l_path[i] );
 
       //path.push_back( m_Graph->GetNodeInfo( last_point ) );
-
       path.push_back( final_pos );
       return path;
     }
 
     l_OpenSet.erase( std::remove( l_OpenSet.begin(), l_OpenSet.end(), l_ActualNode ), l_OpenSet.end() );
     l_ClosedSet.push_back( l_ActualNode );
-
     std::map<unsigned int, unsigned int> l_Neighbours = m_Graph->GetArcs( l_ActualNode );
     std::map<unsigned int, unsigned int>::iterator it = l_Neighbours.begin(),
                                                    it_end = l_Neighbours.end();
@@ -165,13 +161,16 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
       if ( std::find( l_ClosedSet.begin(), l_ClosedSet.end(), l_ActualNeighbour ) != l_ClosedSet.end() )
         continue;
 
-      float l_ActualGScore = l_GScore[l_ActualNode] + m_Graph->GetNodeInfo( l_ActualNode ).Distance( m_Graph->GetNodeInfo( l_ActualNeighbour ) );
+      float l_ActualGScore = l_GScore[l_ActualNode] + m_Graph->GetNodeInfo( l_ActualNode ).Distance( m_Graph->GetNodeInfo(
+                               l_ActualNeighbour ) );
 
-      if ( std::find( l_OpenSet.begin(), l_OpenSet.end(), l_ActualNeighbour ) == l_OpenSet.end() || l_ActualGScore < l_GScore[l_ActualNeighbour] )
+      if ( std::find( l_OpenSet.begin(), l_OpenSet.end(), l_ActualNeighbour ) == l_OpenSet.end() ||
+           l_ActualGScore < l_GScore[l_ActualNeighbour] )
       {
         l_CameFrom[l_ActualNeighbour] = l_ActualNode;
         l_GScore[l_ActualNeighbour] = l_ActualGScore;
-        l_FScore[l_ActualNeighbour] = l_GScore[l_ActualNeighbour] + m_Graph->GetNodeInfo( l_ActualNeighbour ).Distance( final_pos );
+        l_FScore[l_ActualNeighbour] = l_GScore[l_ActualNeighbour] + m_Graph->GetNodeInfo( l_ActualNeighbour ).Distance(
+                                        final_pos );
 
         if ( std::find( l_OpenSet.begin(), l_OpenSet.end(), l_ActualNeighbour ) == l_OpenSet.end() )
           l_OpenSet.push_back( l_ActualNeighbour );

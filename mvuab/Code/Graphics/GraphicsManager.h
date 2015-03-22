@@ -73,6 +73,7 @@ public:
   void DrawPlane( float32 Size, const Math::Vect3f& normal, float32 distance,
                   Math::CColor Color = Math::colWHITE, int GridX = 10, int32 GridZ = 10 );
   void DrawCube( float32 Size, Math::CColor Color );
+  void DrawCube( const Math::Vect3f& aPosition, float32 Size, const Math::CColor aColor = Math::colWHITE );
   void DrawCube( float32 Size );
   void DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ,
                 Math::CColor Color = Math::colWHITE );

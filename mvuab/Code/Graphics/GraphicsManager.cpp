@@ -429,16 +429,25 @@ void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, floa
   }
 }
 
+void CGraphicsManager::DrawCube( const Math::Vect3f& aPosition, float32 Size,
+                                 const Math::CColor aColor )
+{
+  Math::Mat44f m;
+  m.Translate( aPosition );
+  SetTransform( m );
+  DrawBox( Size, Size, Size, aColor );
+  m.SetIdentity();
+  SetTransform( m );
+}
+
 void CGraphicsManager::DrawCube( float32 Size )
 {
   DrawBox( Size, Size, Size, Math::colWHITE );
 }
-
 void CGraphicsManager::DrawCube( float32 Size, Math::CColor Color )
 {
   DrawBox( Size, Size, Size, Color );
 }
-
 void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color )
 {
   if ( FAILED( D3DXCreateBox( m_pD3DDevice, SizeX, SizeY, SizeZ, &m_BoxMesh, 0 ) ) )
@@ -465,7 +474,6 @@ void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Mat
   l_Effect->End();
   CHECKED_RELEASE( m_BoxMesh );
 }
-
 void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Aristas )
 {
   CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
@@ -487,7 +495,6 @@ void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Ari
 
   l_Effect->End();
 }
-
 void CGraphicsManager::DrawCircle( float32 Radius, Math::CColor Color, int32 Aristas )
 {
   DWORD sphere_color_aux = Color.GetUint32Argb();
@@ -515,10 +522,24 @@ void CGraphicsManager::DrawCircle( float32 Radius, Math::CColor Color, int32 Ari
     m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 1, v, sizeof( CUSTOMVERTEX ) );
   }
 }
-
 void CGraphicsManager::DrawLine( const Math::Vect3f& PosA, const Math::Vect3f& PosB,
                                  Math::CColor Color )
 {
+  /*
+  Math::Vect3f lDirectionCylinder( 0.0f, 0.0f, 1.0f );
+  Math::Vect3f lDirectionLine =  PosA - PosB;
+  float32 lDistance = lDirectionLine.Length();
+  lDirectionLine.Normalize();
+  float32 lAngle = Math::Utils::ACos( lDirectionCylinder.DotProduct( lDirectionLine ) );
+  Math::Mat44f m;
+  m.Translate( PosA );
+  Math::Mat44f m2;
+  m2.Translate( Math::Vect3f( 0.0f, 0.0f, lDistance * 0.5 ) );
+  SetTransform( m );
+  DrawCylinder( 0.01, 0.01, ( PosA - PosB ).Length(), 10, Color, true );
+  m.SetIdentity();
+  SetTransform( m2 * m );
+  */
   DWORD color_aux = Color.GetUint32Argb();
   CUSTOMVERTEX v[2] =
   {
@@ -529,13 +550,11 @@ void CGraphicsManager::DrawLine( const Math::Vect3f& PosA, const Math::Vect3f& P
   m_pD3DDevice->SetFVF( CUSTOMVERTEX::getFlags() );
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 1, v, sizeof( CUSTOMVERTEX ) );
 }
-
 void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
 {
   m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
-
 void CGraphicsManager::SetTransform( const Math::Mat44f& m )
 {
   D3DXMATRIX aux
@@ -548,7 +567,6 @@ void CGraphicsManager::SetTransform( const Math::Mat44f& m )
   m_pD3DDevice->SetTransform( D3DTS_WORLD, &aux );
   CEffectManager::GetSingletonPtr()->SetWorldMatrix( m );
 }
-
 //La posicion y el (w,h) esta en pixeles
 //La posicion y el (w,h) esta en pixeles
 void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
@@ -622,7 +640,6 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
   break;
   }
 }
-
 void CGraphicsManager::EnableAlphaBlend()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
@@ -634,22 +651,18 @@ void CGraphicsManager::EnableAlphaBlend()
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
   m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE );
 }
-
 void CGraphicsManager::DisableAlphaBlend()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
-
 void CGraphicsManager::EnableZBuffering()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
 }
-
 void CGraphicsManager::DisableZBuffering()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
-
 void CGraphicsManager::GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay,
                                Math::Vect3f& dirRay )
 {
@@ -673,7 +686,6 @@ void CGraphicsManager::GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRa
   dirRay.y = ray_dir.y;
   dirRay.z = ray_dir.z;
 }
-
 void CGraphicsManager::DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h,
                                         Math::CColor& backGroundColor,
                                         uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor )
@@ -696,13 +708,11 @@ void CGraphicsManager::DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint3
   pos_aux.x = pos.x + w;
   DrawQuad2D( pos_aux, edge_w, h + ( 2 * edge_w ), UPPER_LEFT, edgeColor );
 }
-
 void CGraphicsManager::GetWidthAndHeight( uint32& w, uint32& h )
 {
   w = m_uWidth;
   h = m_uHeight;
 }
-
 void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, float32 h,
                                      uint32 Aristas,
                                      Math::CColor Color, bool drawCover )
@@ -731,7 +741,6 @@ void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, 
   l_Effect->End();
   CHECKED_RELEASE( m_CylinderMesh );
 }
-
 void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, Math::CColor Color )
 {
   //D3DXMATRIX matrix;
@@ -745,7 +754,6 @@ void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, M
   //D3DXMatrixTranslation( &translation2, 0.f, -h * 0.5f, 0.f );
   //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
   //DrawSphere( radius, Color, Aristas );
-
   Math::Mat44f t;
   t.RotByAngleX( 3.1415 / 2 );
   SetTransform( t );
@@ -761,7 +769,6 @@ void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, M
   t.SetIdentity();
   SetTransform( t );
 }
-
 void CGraphicsManager::DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& up,
                                    const Math::Vect3f& right,
                                    float32 w, float32 h, Math::CColor color )
@@ -773,7 +780,6 @@ void CGraphicsManager::DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& 
   down_right    = pos - up * h * 0.5f + right * w * 0.5f;
   DrawQuad3D( upper_left, upper_right, down_left, down_right, color );
 }
-
 void CGraphicsManager::DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& ur,
                                    const Math::Vect3f& dl,
                                    const Math::Vect3f& dr, Math::CColor color )
@@ -791,7 +797,6 @@ void CGraphicsManager::DrawQuad3D( const Math::Vect3f& ul, const Math::Vect3f& u
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v,
                                         sizeof( CUSTOMVERTEX ) );
 }
-
 void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Math::Vect3f& ur,
     const Math::Vect3f& dl,
     const Math::Vect3f& dr, const Math::Vect3f& n, CEffectTechnique* EffectTechnique, CTexture* Texture )
@@ -832,7 +837,6 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
     l_Effect->End();
   }
 }
-
 void CGraphicsManager::DrawIcoSphere()
 {
   const float32 X = 0.525731112119133606f;
@@ -865,7 +869,6 @@ void CGraphicsManager::DrawIcoSphere()
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 12, 20, indices, D3DFMT_INDEX16, v,
                                         sizeof( CUSTOMVERTEX ) );
 }
-
 void CGraphicsManager::RenderCursor()
 {
   D3DXMATRIX mat;
@@ -895,47 +898,38 @@ void CGraphicsManager::RenderCursor()
   m_pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
-
 void CGraphicsManager::EnableAlphaTest()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, TRUE );
 }
-
 void CGraphicsManager::DisableAlphaTest()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
 }
-
 void CGraphicsManager::SetBlendOP()
 {
   m_pD3DDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
 }
-
 void CGraphicsManager::EnableZTest()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
 }
-
 void CGraphicsManager::DisableZTest()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, FALSE );
 }
-
 void CGraphicsManager::EnableZWrite()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
 }
-
 void CGraphicsManager::DisableZWrite()
 {
   m_pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, FALSE );
 }
-
 void CGraphicsManager::Present()
 {
   m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
-
 void CGraphicsManager::DrawTeapot()
 {
   CEffectTechnique* EffectTechnique =
@@ -956,7 +950,6 @@ void CGraphicsManager::DrawTeapot()
 
   l_Effect->End();
 }
-
 void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color,
     CTexture* Texture, float U0, float V0, float U1, float V1 )
 {
@@ -974,7 +967,6 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColo
 
   m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( SCREEN_COLOR_VERTEX ) );
 }
-
 void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
   CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0,
   float V0, float U1, float V1 )
@@ -1002,17 +994,14 @@ void CGraphicsManager::DrawColoredQuad2DTexturedInPixelsByEffectTechnique(
     l_Effect->End();
   }
 }
-
 void CGraphicsManager::SetSrcBlend( const std::string& BlendState )
 {
   m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, ToD3DBlendEnum( BlendState ) );
 }
-
 void CGraphicsManager::SetDstBlend( const std::string& BlendState )
 {
   m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, ToD3DBlendEnum( BlendState ) );
 }
-
 D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
 {
   if ( BlendState == "One" )
@@ -1052,7 +1041,6 @@ D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
 
   return D3DBLEND_ZERO;
 }
-
 void CGraphicsManager::CreateQuadBuffers()
 {
   Math::CColor color = Math::colBLACK;
@@ -1078,7 +1066,6 @@ void CGraphicsManager::CreateQuadBuffers()
   memcpy( l_Data, &indices, l_Length );
   m_IBQuad->Unlock();
 }
-
 void CGraphicsManager::DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique )
 {
   EffectTechnique->BeginRender();
@@ -1107,13 +1094,11 @@ void CGraphicsManager::DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique*
     }
   }
 }
-
 void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
 {
   m_uWidth =  _Width;
   m_uHeight = _Height;
 }
-
 Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
@@ -1131,7 +1116,6 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   // "Light" );
   return Math::Vect2f( l_OutPosition.x , l_OutPosition.y );
 }
-
 Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
@@ -1146,7 +1130,6 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
                      &worldMatrix );
   return Math::Vect3f();
 }
-
 uint32 CGraphicsManager::GetWindowHeight()
 {
   return m_uHeight;
