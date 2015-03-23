@@ -25,6 +25,10 @@ public:
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
   GET_SET( float32, Life );
+  void AddDamage(float32 aDamage)
+  {
+	m_Life -= aDamage;
+  }
 protected:
   virtual ECollisionGroup GetCollisionGroup();
 private: // Members

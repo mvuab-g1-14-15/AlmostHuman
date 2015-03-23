@@ -4,6 +4,12 @@
 #include "StaticMeshManager.h"
 #include "XML\XMLTreeNode.h"
 
+#include "Core.h"
+#include "Cameras/Camera.h"
+#include "Cameras/Frustum.h"
+#include "Cameras/CameraManager.h"
+#include "Math\AABB.h"
+
 CInstanceMesh::CInstanceMesh( const std::string& Name,
                               const std::string& CoreName ): m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
                                       CoreName ) ), CRenderableObject()
@@ -27,11 +33,17 @@ CInstanceMesh::~CInstanceMesh()
 
 void CInstanceMesh::Render()
 {
-  CGraphicsManager::GetSingletonPtr()->SetTransform( GetTransform() );
-
   if ( m_pStaticMesh )
-    m_pStaticMesh->Render( CGraphicsManager::GetSingletonPtr() );
-
-  Math::Mat44f t;
-  CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+  {
+    Math::Mat44f lTransform = GetTransform();
+    CGraphicsManager::GetSingletonPtr()->SetTransform( lTransform );
+    Math::AABB3f laabb = m_pStaticMesh->GetAABB();
+    CFrustum lCameraFrustum = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetFrustum();
+    Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+    // TODO: Fix the frustum culling
+    //if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z), laabb.GetRadius()) )
+      m_pStaticMesh->Render( CGraphicsManager::GetSingletonPtr() );
+    Math::Mat44f t;
+    CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+  }
 }

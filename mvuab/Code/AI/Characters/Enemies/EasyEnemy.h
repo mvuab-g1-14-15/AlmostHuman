@@ -15,7 +15,5 @@ public:
     void Update();
     void Render();
 };
-
-
 #endif
 

@@ -82,6 +82,7 @@ void registerPhysX( lua_State* m_LS )
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
     .def( "RaycastClosestActor", &CPhysicsManager::RaycastClosestActor )
+	.def( "RaycastClosestActorName", &CPhysicsManager::RaycastClosestActorName )
     //Adds
     .def( "AddPhysicActor", &CPhysicsManager::AddPhysicActor )
     .def( "AddPhysicRevoluteJoint", &CPhysicsManager::AddPhysicRevoluteJoint )

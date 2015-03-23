@@ -543,6 +543,7 @@ struct SMesh
 
 		CreateSubMeshes actualObj
 		CreateBuffers actualObj
+		m_AABB.CalculateFromObject actualObj
 		
 		if delete actualObj != 1 then
 		(

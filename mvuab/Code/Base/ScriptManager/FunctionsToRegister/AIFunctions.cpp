@@ -54,6 +54,7 @@ void registerAI( lua_State* m_LS )
     .def( "update", &CCharacter::Update )
     .def( "render", &CCharacter::Render )
     .def( "GetPosition", &CCharacter::GetPosition )
+	.def( "AddDamage", &CCharacter::AddDamage )	
   ];
   module( m_LS )
   [

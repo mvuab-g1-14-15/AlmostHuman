@@ -1,8 +1,8 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 
-#include "Assert.h"
 #include "PhysicsManager.h"
 #include "XML\XMLTreeNode.h"
+#include "Utils\Defines.h"
 ////#include "Utils\Base.h"
 
 ////----PhysX Includes-------------
@@ -931,6 +931,35 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
   actor->addForceAtLocalPos( l_vDirectionVec * coeff, NxVec3( 0, 0, 0 ), NX_IMPULSE, true );
   return impactObject;
 }
+
+
+std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,	uint32 impactMask)
+{
+	//NxUserRaycastReport::ALL_SHAPES
+	ASSERT( m_pScene != NULL ,"NULL SCENE");
+
+	NxRay ray;
+	ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
+	ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
+	NxRaycastHit hit;
+	NxShape* closestShape = NULL;
+
+	closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, 0xffffffff, ( NxReal ) FLT_MAX );
+
+	if ( !closestShape )
+	{
+	//No hemos tocado a ningún objeto físico de la escena.
+	return NULL;
+	}
+
+	NxActor* actor = &closestShape->getActor();
+	CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+	
+	ASSERT( impactObject,"NO IMPACTOBJECT");
+
+	return impactObject->GetName();
+}
+
 
 std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
     const Math::Vect3f& posSphere,
