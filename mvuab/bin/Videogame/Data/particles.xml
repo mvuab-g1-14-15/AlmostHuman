@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-	<emmiter pos="0.0 2.0 1.0" dir="0.0 1.0 0.0" vel="0.0 0.2 0.0" acc="0.0 0.0 0.0" time="10" />
+	<emmiter pos="0.0 2.0 1.0" dir="0.0 1.0 0.0" vel="0.0 0.002 0.0" acc="0.0 0.0 0.0" time="10" num="200" />
 </emitters>

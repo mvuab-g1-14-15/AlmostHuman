@@ -37,9 +37,8 @@ bool CParticleManager::Init(const std::string &path)
         l_Emitter.SetVelocity(l_Node(i).GetVect3fProperty("vel", Math::Vect3f()));
         l_Emitter.SetDirection(l_Node(i).GetVect3fProperty("dir", Math::Vect3f()));
 
-        l_Emitter.Generate();
+        l_Emitter.Generate(l_Node(i).GetIntProperty("num", 0));
         m_Emitters.push_back(l_Emitter);
-        
     }
 
     l_XML.Done();

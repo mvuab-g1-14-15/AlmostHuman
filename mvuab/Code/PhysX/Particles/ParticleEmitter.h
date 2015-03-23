@@ -33,7 +33,7 @@ class CParticleEmitter
         void Update             (float dt);
         void Render             ();
 
-        void Generate           ();
+        void Generate           (unsigned int numParticles);
         void NewParticle        ();
 };
 

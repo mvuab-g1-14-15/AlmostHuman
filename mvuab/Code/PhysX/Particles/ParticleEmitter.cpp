@@ -1,11 +1,11 @@
 #include "ParticleEmitter.h"
-#include <time.h>
+#include "Utils/BaseUtils.h"
+
+#include <omp.h>
 
 CParticleEmitter::CParticleEmitter()
 {
-    srand(time(0));
-
-    m_Particles.resize(2);
+    m_Particles.resize(0);
     m_TimeToLive = 0.0f;
 
     m_Position = Math::Vect3f(0.0f, 0.0f, 0.0f);
@@ -20,9 +20,13 @@ CParticleEmitter::~CParticleEmitter()
 
 void CParticleEmitter::Update(float dt)
 {
-    for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
+    CParticle *p = &m_Particles[0];
+    omp_set_num_threads(2);
+
+    #pragma omp parallel for
+    for(int i = 0; i < m_Particles.size(); i++)
     {
-        it->Update(dt);
+        (p + i)->Update(dt);
     }
 }
 
@@ -58,17 +62,24 @@ void CParticleEmitter::SetTimeToLive(float timeToLive)
     m_TimeToLive = timeToLive;
 }
 
-void CParticleEmitter::Generate()
+void CParticleEmitter::Generate(unsigned int numParticles)
 {
+    m_Particles.resize(numParticles);
+
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
+        float l_RandX = rand() % 2 - 1.0f;
+        float l_RandY = rand() % 2 - 1.0f;
+        float l_RandZ = rand() % 2 - 1.0f;
+
         it->SetPosition(m_Position);
         it->SetAcceleration(m_Acceleration);
-        it->SetVelocity(m_Direction + Math::Vect3f(rand() % 5, rand() % 5, rand() % 5));
+        it->SetVelocity(m_Direction + Math::Vect3f(l_RandX, l_RandY, l_RandZ));
 
         it->SetIsAlive(true);
-        it->SetTimeToLive(m_TimeToLive +  (rand() % 5) / 10.0f);
+        it->SetTimeToLive(m_TimeToLive + (float) (rand() % 3 + (-2)));
     }
+    RAND_MAX;
 }
 
 void CParticleEmitter::NewParticle()
@@ -79,8 +90,8 @@ void CParticleEmitter::NewParticle()
     
     it->SetPosition(m_Position);
     it->SetAcceleration(m_Acceleration);
-    it->SetVelocity(m_Direction + Math::Vect3f(rand() % 5, 0.0f, rand() % 5));
+    it->SetVelocity(m_Direction + Math::Vect3f((float) (rand() % 3 + (-2)), 0.0f, (float) (rand() % 3 + (-2))));
     
     it->SetIsAlive(true);
-    it->SetTimeToLive(m_TimeToLive + (float)(rand() % 500));
+    it->SetTimeToLive(m_TimeToLive + (float) (rand() % 3 + (-2)));
 }

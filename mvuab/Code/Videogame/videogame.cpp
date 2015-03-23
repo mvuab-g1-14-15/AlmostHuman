@@ -18,6 +18,7 @@
 #include "TestProcess\AStarProcess.h"
 
 #include <iostream>
+#include <ctime>
 
 #if _DEBUG
 #include "Memory\MemLeaks.h"
@@ -88,6 +89,10 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
     // Register the window class
     WNDCLASSEX wc = {    sizeof( WNDCLASSEX ), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle( NULL ), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
     RegisterClassEx( &wc );
+    
+    // For random number generation
+    srand(time(0));
+
     // Optain the engine instance
     CGPUStatics* gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
