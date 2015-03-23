@@ -32,6 +32,9 @@ bool CParticleManager::Init(const std::string &path)
 
 
         l_Emitter.SetTimeToLive(l_Node(i).GetFloatProperty("time", 0.0f));
+        l_Emitter.SetMax(l_Node(i).GetIntProperty("max", 0));
+        l_Emitter.SetMin(l_Node(i).GetIntProperty("min", 0));
+
         l_Emitter.SetAcceleration(l_Node(i).GetVect3fProperty("acc", Math::Vect3f()));
         l_Emitter.SetPosition(l_Node(i).GetVect3fProperty("pos", Math::Vect3f()));
         l_Emitter.SetVelocity(l_Node(i).GetVect3fProperty("vel", Math::Vect3f()));

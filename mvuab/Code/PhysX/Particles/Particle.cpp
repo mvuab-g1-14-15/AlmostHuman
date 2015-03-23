@@ -106,7 +106,7 @@ void CParticle::Update(float dt)
     Math::Vect3f l_OldVel = m_Velocity;
     
     m_Velocity += m_Acceleration * dt;
-    m_Position += (m_Velocity + l_OldVel) / 2.0f * dt;
+    m_Position += ((m_Velocity + l_OldVel) / 2.0f) * dt;
 
     m_Billboard.Init(m_Position, 0.1, "Data/textures/BARK5.jpg");
     m_Billboard.Update();
