@@ -1,9 +1,12 @@
+#define NOMINMAX
+
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
 #include "Types.h"
 #include <assert.h>
 #include "Logger\Logger.h"
+#include <Windows.h>
 
 // MACROS
 #define GET_SET(TYPE, PARAMETER_NAME) \
@@ -63,6 +66,26 @@
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x, __VA_ARGS__ )
 #define LOG_INFO_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x, __VA_ARGS__ )
 
-#define ASSERT(expr, msg) assert(expr && msg)
+#define ASSERT(expr, msg) \
+{\
+  static char s_text[199] = ""; \
+  if ( !( expr ) ) \
+  {\
+    static int callIt = 1; \
+    if ( callIt )\
+    { \
+      wsprintf( s_text, "Expression: %s\nMessage: ( %s )\nFile '%s' Line %d\nOk:Continue\nCancel:Do not show more asserts", #expr, #msg, __FILE__, __LINE__ ); \
+      switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_OKCANCEL ) ) \
+      {\
+        case IDCANCEL: \
+        { \
+          callIt = 0; \
+          _asm { int 3 } \
+          break;\
+        } \
+      } \
+    } \
+  } \
+} \
 
 #endif
