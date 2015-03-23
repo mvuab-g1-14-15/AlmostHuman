@@ -6,7 +6,11 @@
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "Math\MathTypes.h"
 #include "Cinematics\Cinematic.h"
+
 #include "Core.h"
+#include "Cameras/Camera.h"
+#include "Cameras/Frustum.h"
+#include "Cameras/CameraManager.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager()
 {
@@ -73,8 +77,11 @@ void CRenderableObjectsManager::CleanUp()
 
 void CRenderableObjectsManager::Render()
 {
+  CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
+
   for ( unsigned int i = 0; i < m_ResourcesVector.size(); ++i )
-    m_ResourcesVector[i]->Render();
+      if(l_CM->GetCurrentCamera()->GetFrustum().BoxVisibleByVertexs(&m_ResourcesVector[i]->GetPosition()))
+          m_ResourcesVector[i]->Render();
 }
 
 void CRenderableObjectsManager::Update()

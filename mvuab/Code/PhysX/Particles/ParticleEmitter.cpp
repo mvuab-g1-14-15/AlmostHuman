@@ -1,6 +1,11 @@
 #include "ParticleEmitter.h"
 #include "Utils/BaseUtils.h"
 
+#include "Core.h"
+#include "Cameras/Camera.h"
+#include "Cameras/Frustum.h"
+#include "Cameras/CameraManager.h"
+
 #include <omp.h>
 
 CParticleEmitter::CParticleEmitter()
@@ -32,9 +37,11 @@ void CParticleEmitter::Update(float dt)
 
 void CParticleEmitter::Render()
 {
+    CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
-        it->Render();
+        if(l_CM->GetCurrentCamera()->GetFrustum().BoxVisibleByVertexs(&it->GetPosition()))
+            it->Render();
     }
 }
 

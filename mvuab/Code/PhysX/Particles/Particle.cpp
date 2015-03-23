@@ -68,7 +68,7 @@ const Math::Vect3f &CParticle::GetColor()
     return m_Color;
 }
 
-const Math::Vect3f &CParticle::GetPostion()
+const Math::Vect3f &CParticle::GetPosition()
 {
     return m_Position;
 }

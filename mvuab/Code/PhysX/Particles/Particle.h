@@ -28,7 +28,7 @@ class CParticle
         const Math::Vect3f &GetColor        ();
 
         void SetPosition                    (const Math::Vect3f &Position);
-        const Math::Vect3f &GetPostion      ();
+        const Math::Vect3f &GetPosition     ();
 
         void SetVelocity                    (const Math::Vect3f &Velocity);
         const Math::Vect3f &GetVelocity     ();
