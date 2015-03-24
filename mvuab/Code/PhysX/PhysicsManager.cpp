@@ -943,7 +943,8 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
 	ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
 
 	NxRaycastHit hit;
-	NxShape* closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, 0xffffffff, ( NxReal ) FLT_MAX );
+	NxShape* closestShape = NULL;
+	closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
 
 	if ( !closestShape )
 	{
