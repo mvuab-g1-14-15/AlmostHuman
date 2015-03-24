@@ -810,7 +810,7 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
 
   if ( l_Effect != NULL )
   {
-    m_pD3DDevice->SetVertexDeclaration( SCREEN_COLOR_VERTEX::GetVertexDeclaration() );
+    m_pD3DDevice->SetVertexDeclaration( TT1_N_VERTEX::GetVertexDeclaration() );
     l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
     UINT l_NumPasses;
     l_Effect->Begin( &l_NumPasses, 0 );
@@ -822,8 +822,8 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
       {
         { ul.x, ul.y, ul.z, n.x, n.y, n.z, 0, 0, 1},
         { dl.x, dl.y, dl.z, n.x, n.y, n.z, 0, 1, 1},
-        { ur.x, ur.y, ur.z, n.x, n.y, n.z, 0, 1, 0},
-        { dr.x, dr.y, dr.z, n.x, n.y, n.z, 0, 0, 0}
+        { ur.x, ur.y, ur.z, n.x, n.y, n.z, 0, 0, 0},
+        { dr.x, dr.y, dr.z, n.x, n.y, n.z, 0, 1, 0}
       };
       m_pD3DDevice->SetFVF( TT1_N_VERTEX::GetFVF() );
 

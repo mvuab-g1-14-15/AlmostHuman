@@ -71,41 +71,15 @@ void CBillboard::Render()
   if ( m_Active )
   {
     //GraphicsInstance->EnableAlphaBlend();
-    TT1_VERTEX l_Points[4];
-    u_short l_Indexes[6] = {0, 2, 1, 1, 2, 3};
-
-    l_Points[0].x = m_PosA.x;
-    l_Points[0].y = m_PosA.y;
-    l_Points[0].z = m_PosA.z;
-    l_Points[0].tu = 0.0f;
-    l_Points[0].tv = 1.0f;
-
-    l_Points[1].x = m_PosB.x;
-    l_Points[1].y = m_PosB.y;
-    l_Points[1].z = m_PosB.z;
-    l_Points[1].tu = 1.0f;
-    l_Points[1].tv = 1.0f;
-
-    l_Points[2].x = m_PosC.x;
-    l_Points[2].y = m_PosC.y;
-    l_Points[2].z = m_PosC.z;
-    l_Points[2].tu = 0.0f;
-    l_Points[2].tv = 0.0f;
-
-    l_Points[3].x = m_PosD.x;
-    l_Points[3].y = m_PosD.y;
-    l_Points[3].z = m_PosD.z;
-    l_Points[3].tu = 1.0f;
-    l_Points[3].tv = 0.0f;
 
     Math::Mat44f l_Mat;
     l_Mat.SetIdentity();
     GraphicsInstance->SetTransform( l_Mat );
 
-    GraphicsInstance->GetDevice()->SetTexture( 0, m_Texture->GetDXTexture() );
-    GraphicsInstance->GetDevice()->SetFVF( TT1_VERTEX::GetFVF() );
+    //GraphicsInstance->GetDevice()->SetTexture( 0, m_Texture->GetDXTexture() );
+    //GraphicsInstance->GetDevice()->SetFVF( TT1_VERTEX::GetFVF() );
 
-    CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+    CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
 
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
     Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
@@ -119,7 +93,7 @@ void CBillboard::Render()
 
 void CBillboard::SetTexture( std::string Texture )
 {
-  m_Texture = CoreInstance->GetTextureManager()->GetResource( Texture );
+  m_Texture = CoreInstance->GetTextureManager()->GetTexture( Texture );
 }
 CTexture* CBillboard::GetTexture()
 {
