@@ -29,6 +29,7 @@
     <ClCompile Include="Particles\Particle.cpp" />
     <ClCompile Include="Particles\ParticleEmitter.cpp" />
     <ClCompile Include="Particles\ParticleManager.cpp" />
+    <ClCompile Include="Particles\SphereEmitter.cpp" />
     <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Reports\PhysicCollisionReport.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Particles\Particle.h" />
     <ClInclude Include="Particles\ParticleEmitter.h" />
     <ClInclude Include="Particles\ParticleManager.h" />
+    <ClInclude Include="Particles\SphereEmitter.h" />
     <ClInclude Include="PhysicMaterial\PhysicMaterial.h" />
     <ClInclude Include="PhysicsDefs.h" />
     <ClInclude Include="PhysicsManager.h" />

@@ -4,49 +4,40 @@
 #include "Math\Vector3.h"
 #include "Particle.h"
 
-
 #include <vector>
 
 class CParticleEmitter
 {
-    private:
+    protected:
         std::vector<CParticle> m_Particles;
-        float m_TimeToLive;
+        
+        float m_MinSpeed;
+        float m_MaxSpeed;
 
-        float m_ActualTime;
-        float m_PrevTime;
-
-
-        unsigned int m_Rand;
-        unsigned int m_Min;
-        unsigned int m_Max;
+        float m_MinLifetime;
+        float m_MaxLifetime;
 
         Math::Vect3f m_Acceleration;
         Math::Vect3f m_Direction;
         Math::Vect3f m_Position;
         Math::Vect3f m_Velocity;
 
-        unsigned int GetNumActiveParticles  ();
-        void         NewParticle            (std::vector<CParticle>::iterator it);
-
-
     public:
         CParticleEmitter    ();
         ~CParticleEmitter   ();
 
         void SetAcceleration    (const Math::Vect3f &Acceleration);
+        void SetVelocity        (const Math::Vect3f &Velocity);
+
         void SetDirection       (const Math::Vect3f &Direction);
         void SetPosition        (const Math::Vect3f &Position);
-        void SetVelocity        (const Math::Vect3f &Velocity);
-        void SetTimeToLive      (float timeToLive);
-
-        void SetMin             (unsigned int min);
-        void SetMax             (unsigned int max);
+        
+        void SetTimeToLive      (float min, float max);
 
         void Update             (float dt);
         void Render             ();
 
-        void Generate           (unsigned int numParticles);
+        virtual void Generate  (unsigned int l_NumParticles) = 0;
 };
 
 #endif
