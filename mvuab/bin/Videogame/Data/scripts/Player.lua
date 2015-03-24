@@ -1,5 +1,5 @@
 
-class 'CPlayer'
+class "CPlayer"
 
 function CPlayer:__init()
     self.m_Life = 100.0
@@ -10,10 +10,15 @@ function CPlayer:__init()
 
     local l_Process = Singleton_Engine.get_singleton():GetProcess()
     local l_PhysicManager = Singleton_Core.get_singleton():GetPhysicsManager()
-	l_PhysicManager:AddController("CharacterController", 0.4, 2, 0.2, 0.5, 0.5, Vect3f(0, 2, 1), CollisionGroup.ECG_PLAYER.value, -10.0)
+	
+	self.rooms = {Vect3f( 0, 2, 1 ), Vect3f( 8, -10, 18 ), Vect3f( 40, -15, -8), Vect3f( 141, 35, -17 ), Vect3f( 104, 22, 198 )}
+	self.g_Room = 1
+	local position = self.rooms[self.g_Room]
+	
+	l_PhysicManager:AddController("CharacterController", 0.4, 2, 0.2, 0.5, 0.5, position, CollisionGroup.ECG_PLAYER.value, -10.0)
 
-    self.m_CharacterController = l_PhysicManager:GetUserData("CharacterController"):GetController()
-    Singleton_Core.get_singleton():trace("Hello CPlayer INIT")
+    self.m_CharacterController = l_PhysicManager:GetController("CharacterController")
+	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (self.m_CharacterController:GetHeight()*2/3), position.z))
 end
 
 function CPlayer:ModifyLife(life)
@@ -41,19 +46,34 @@ function CPlayer:Update()
     
     if l_ActionManager:DoAction("MoveLeft") then
         l_Strafe = 1
-        CPlayer.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
+        self:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
 	elseif l_ActionManager:DoAction("MoveRight") then
         l_Strafe = -1
-        CPlayer.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
+        self:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     end
     
 	if l_ActionManager:DoAction("MoveBackward") then
-        l_Forward = 1
-        CPlayer.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
-	elseif l_ActionManager:DoAction("MoveForward") then
         l_Forward = -1
-        CPlayer.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
+        self:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
+	elseif l_ActionManager:DoAction("MoveForward") then
+        l_Forward = 1
+        self:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     end
+	
+	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
+	local value=""
+	local current_camera = camera_manager:GetCurrentCamera();
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
+		current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+	end
+	local current_camera = camera_manager:GetCurrentCamera();
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
+		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+	end
+	
+	if l_ActionManager:DoAction("ChangeRoom") then
+		self:CambiarSala()
+	end
 end
 
 function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
@@ -67,20 +87,30 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     
 	if (not l_AddPos.x == 0 or not l_AddPos.z == 0) then l_AddPos:Normalize() end
     --l_AddPos = if l_Run then self.m_RunSpeed elseif l_Crouch then self.m_CrouchSpeed else self.m_WalkSpeed end
-
-    l_AddPos = l_AddPos * self.m_WalkSpeed
-    --if l_Run then
-    --    l_AddPos = l_AddPos * self.m_RunSpeed
-    --elseif l_Crouch then  
-    --    l_AddPos = l_AddPos * self.m_CrouchSpeed
-    --else
-    --    l_AddPos = l_AddPos * self.m_WalkSpeed
-    --end
-
-    self.m_CharacterController:Move(l_AddPos, l_dt)
+	
+    
+    if l_Run == true then
+        l_AddPos = l_AddPos * self.m_RunSpeed * l_Dt
+    elseif l_Crouch == true then  
+        l_AddPos = l_AddPos * self.m_CrouchSpeed * l_Dt
+    else
+        l_AddPos = l_AddPos * self.m_WalkSpeed * l_Dt
+    end
+	
+    self.m_CharacterController:Move(l_AddPos, l_Dt)
     self.m_CharacterController:SetYaw(Yaw)
     
     local l_position = Vect3f(self.m_CharacterController:GetPosition())
-	l_position.y = l_position.y + (self.m_CharacterController:GetHeight() / 2)
+	l_position.y = l_position.y + (self.m_CharacterController:GetHeight()*2/3)
 	l_Camera:SetPos(l_position)
+end
+
+function CPlayer:CambiarSala()
+	self.g_Room = self.g_Room + 1
+	if(self.g_Room > 5) then
+		self.g_Room = 1
+	end
+	local position = self.rooms[self.g_Room]
+	self.m_CharacterController:SetPosition(position)
+	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (self.m_CharacterController:GetHeight()/2), position.z))
 end

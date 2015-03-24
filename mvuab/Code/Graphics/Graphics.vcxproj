@@ -81,6 +81,7 @@
     <ClCompile Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\StagedTexturedRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp" />
     <ClCompile Include="StaticMeshes\InstanceMesh.cpp" />
     <ClCompile Include="StaticMeshes\StaticMesh.cpp" />
     <ClCompile Include="StaticMeshes\StaticMeshManager.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\StagedTexturedRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h" />
     <ClInclude Include="StaticMeshes\InstanceMesh.h" />
     <ClInclude Include="StaticMeshes\StaticMesh.h" />
     <ClInclude Include="StaticMeshes\StaticMeshManager.h" />

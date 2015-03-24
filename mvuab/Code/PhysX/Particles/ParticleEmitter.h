@@ -4,50 +4,40 @@
 #include "Math\Vector3.h"
 #include "Particle.h"
 
-
 #include <vector>
 
 class CParticleEmitter
 {
-private:
-  std::vector<CParticle> m_Particles;
-  float m_TimeToLive;
+    protected:
+        std::vector<CParticle> m_Particles;
+        
+        float m_MinSpeed;
+        float m_MaxSpeed;
 
-  float m_ActualTime;
-  float m_PrevTime;
+        float m_MinLifetime;
+        float m_MaxLifetime;
 
+        Math::Vect3f m_Acceleration;
+        Math::Vect3f m_Direction;
+        Math::Vect3f m_Position;
+        Math::Vect3f m_Velocity;
 
-  unsigned int m_Rand;
-  unsigned int m_Min;
-  unsigned int m_Max;
+    public:
+        CParticleEmitter    ();
+        ~CParticleEmitter   ();
 
-  Math::Vect3f m_Acceleration;
-  Math::Vect3f m_Direction;
-  Math::Vect3f m_Position;
-  Math::Vect3f m_Velocity;
-  std::string m_TextureName;
-  unsigned int GetNumActiveParticles();
-  void         NewParticle( std::vector<CParticle>::iterator it );
+        void SetAcceleration    (const Math::Vect3f &Acceleration);
+        void SetVelocity        (const Math::Vect3f &Velocity);
 
+        void SetDirection       (const Math::Vect3f &Direction);
+        void SetPosition        (const Math::Vect3f &Position);
+        
+        void SetTimeToLive      (float min, float max);
 
-public:
-  CParticleEmitter();
-  ~CParticleEmitter();
+        void Update             (float dt);
+        void Render             ();
 
-  void SetAcceleration( const Math::Vect3f& Acceleration );
-  void SetDirection( const Math::Vect3f& Direction );
-  void SetPosition( const Math::Vect3f& Position );
-  void SetVelocity( const Math::Vect3f& Velocity );
-  void SetTimeToLive( float timeToLive );
-
-  void SetMin( unsigned int min );
-  void SetMax( unsigned int max );
-
-  void Update( float dt );
-  void Render();
-
-  void Generate( unsigned int numParticles );
-  void SetTextureName( std::string TextureName );
+        virtual void Generate  (unsigned int l_NumParticles) = 0;
 };
 
 #endif

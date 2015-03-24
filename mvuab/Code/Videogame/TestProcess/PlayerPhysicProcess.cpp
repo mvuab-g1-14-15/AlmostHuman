@@ -99,8 +99,8 @@ void CPlayerPhysicProcess::Update()
     //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   }
 
-  if ( pActionManager->DoAction( "ChangeRoom" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );
+ /* if ( pActionManager->DoAction( "ChangeRoom" ) )
+    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );*/
 
   if ( pActionManager->DoAction( "ChangeCamera" ) )
   {
@@ -158,8 +158,8 @@ void CPlayerPhysicProcess::Update()
   CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );*/
 
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
 
 
   //////////////////////////////////////////////////////
@@ -213,8 +213,8 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
 
 void CPlayerPhysicProcess::Init()
 {
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
   ////////////////////////////////////////////////////

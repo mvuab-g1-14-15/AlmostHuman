@@ -10,7 +10,7 @@
 class CParticleManager
 {
     private:
-        std::vector<CParticleEmitter> m_Emitters;
+        std::vector<CParticleEmitter *> m_Emitters;
 
     public:
         CParticleManager    ();
