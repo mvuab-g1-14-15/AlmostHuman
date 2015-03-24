@@ -46,7 +46,7 @@ function CPlayer:Update()
     if l_ActionManager:DoAction("MoveLeft") then
         l_Strafe = 1
         self.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
-	else if l_ActionManager:DoAction("MoveRight") then
+	elseif l_ActionManager:DoAction("MoveRight") then
         l_Strafe = -1
         self.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     end
@@ -54,7 +54,7 @@ function CPlayer:Update()
 	if l_ActionManager:DoAction("MoveBackward") then
         l_Forward = 1
         self.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
-	else if l_ActionManager:DoAction("MoveForward") then
+	elseif l_ActionManager:DoAction("MoveForward") then
         l_Forward = -1
         self.Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     end
@@ -73,7 +73,16 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
 	l_AddPos.z =  l_Forward * math.sin(Yaw) + l_Strafe * math.sin(Yaw + g_HalfPi)
     
 	if (not l_AddPos.x == 0 or not l_AddPos.z == 0) then l_AddPos:Normalize() end
-    l_AddPos = if l_Run then self.m_RunSpeed else if l_Crouch then self.m_CrouchSpeed else self.m_WalkSpeed end
+    --l_AddPos = if l_Run then self.m_RunSpeed elseif l_Crouch then self.m_CrouchSpeed else self.m_WalkSpeed end
+
+    if l_Run then
+        l_AddPos = self.m_RunSpeed
+    elseif l_Crouch then  
+        l_AddPos = self.m_CrouchSpeed
+    else
+        l_AddPos = self.m_WalkSpeed
+    end
+
     
     l_CharacterController:Move(l_AddPos, l_dt)
     l_CharacterController:SetYaw(Yaw)
