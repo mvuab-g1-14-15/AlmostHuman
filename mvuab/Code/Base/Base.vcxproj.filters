@@ -258,6 +258,9 @@
     <ClInclude Include="ScriptManager\FunctionsToRegister\EnumDefinitions.h">
       <Filter>ScriptManager\FunctionsToRegister</Filter>
     </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

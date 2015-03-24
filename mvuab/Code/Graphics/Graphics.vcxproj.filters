@@ -228,6 +228,9 @@
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -464,6 +467,9 @@
       <Filter>Billboard</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>
