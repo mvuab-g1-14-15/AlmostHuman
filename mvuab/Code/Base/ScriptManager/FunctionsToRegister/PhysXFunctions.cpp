@@ -27,6 +27,12 @@ bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* Ph
   return PhysicManager->AddPhysicController( PhysicController );
 }
 
+void Move_PhysicController( CPhysicController* PhysicController, const Math::Vect3f &Direction, float Dt )
+{
+	const Math::Vect3f &DirectionConst = Direction;
+	PhysicController->Move( DirectionConst, Dt);
+}
+
 template<class T>
 size_t set_getIdByResource( std::set<T>& vec, T val )
 {
@@ -112,7 +118,8 @@ void registerPhysX( lua_State* m_LS )
   module( m_LS ) [
     class_<CPhysicController>( "CPhysicController" )
     .def( constructor<float, float, float, float, float, ECollisionGroup, CPhysicUserData*, const Math::Vect3f&, float>() )
-    .def( "Move", &CPhysicController::Move )
+    .def( "Move", ( void ( CPhysicController::* )( const Math::Vect3f&, float ) )&CPhysicController::Move )
+	//.def( "Move", &Move_PhysicController )
     .def( "Jump", &CPhysicController::Jump )
     .def( "GetPosition", &CPhysicController::GetPosition )
     .def( "SetPosition", &CPhysicController::SetPosition )

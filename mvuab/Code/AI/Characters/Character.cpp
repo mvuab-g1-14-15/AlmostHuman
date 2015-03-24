@@ -12,7 +12,7 @@
 CCharacter::CCharacter( const std::string& Name )
   : CName( Name ), CObject3D()
   , m_Speed( 0.06f )
-  , m_Life( 0.0f )
+  , m_Life( 20.0f )
 {
 }
 
@@ -106,5 +106,5 @@ void CCharacter::Init( CXMLTreeNode& Node )
 
 ECollisionGroup CCharacter::GetCollisionGroup()
 {
-  return ECG_PLAYER;
+	return ECG_ENEMY;
 }
