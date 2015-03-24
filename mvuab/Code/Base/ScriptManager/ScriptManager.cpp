@@ -57,12 +57,16 @@ void CScriptManager::Reload()
 void CScriptManager::Load( const std::string& Path )
 {
   m_LuaPath = Path;
-  baseUtils::GetFilesFromPath( m_LuaPath, "lua", m_LuaFiles );
+  baseUtils::GetFilesFromPath( m_LuaPath + "/", "lua", m_LuaFiles );
   baseUtils::GetFilesFromPath( m_LuaPath + "init/", "lua", m_LuaInitFiles );
-  TVectorLuaFiles::iterator it = m_LuaInitFiles.begin(), it_end = m_LuaInitFiles.end();
+  TVectorLuaFiles::iterator it = m_LuaFiles.begin(), it_end = m_LuaFiles.end();
+  TVectorLuaFiles::iterator it_init = m_LuaInitFiles.begin(), it_init_end = m_LuaInitFiles.end();
 
   for ( ; it != it_end; ++it )
-    RunFile( m_LuaPath + "init/" + ( *it ) );
+    RunFile( m_LuaPath + ( *it ) );
+
+  for ( ; it_init != it_init_end ; ++it_init )
+    RunFile( m_LuaPath + "init/" + ( *it_init ) );
 }
 
 void CScriptManager::RunCode( const std::string& Code )
