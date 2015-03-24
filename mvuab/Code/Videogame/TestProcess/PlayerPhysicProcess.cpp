@@ -158,8 +158,8 @@ void CPlayerPhysicProcess::Update()
   CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );*/
 
 
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
 
 
   //////////////////////////////////////////////////////
@@ -214,7 +214,7 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
 void CPlayerPhysicProcess::Init()
 {
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
+  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
   ////////////////////////////////////////////////////
@@ -314,20 +314,10 @@ void CPlayerPhysicProcess::Init()
 
 void CPlayerPhysicProcess::Render()
 {
-  CGraphicsManager* pGraphicsManager = GraphicsInstance;
   m_Grenade->Render();
   m_AStar->Render();
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
-  // START: TO DELETE LATER IF IS NOT NECESSARY,
-  unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
-  unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
-  unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
-  CGPUStatics::GetSingletonPtr()->SetToZero();
-  CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText( 300, 0,
-      Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
-      d );
-  // END: TO DELETE LATER IF IS NOT NECESSARY
 
+  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
   m_Blaster->Render();
 }
 
@@ -367,7 +357,7 @@ CPhysicController*  CPlayerPhysicProcess::GetNewController( float _fRadius, floa
   return m_vController[ m_vController.size() - 1 ];
 }
 
-void              CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
+void CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
 {
   std::vector<CPhysicController*>::iterator it = std::find( m_vController.begin(), m_vController.end(), PUD->GetController() );
 
