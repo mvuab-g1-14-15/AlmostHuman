@@ -18,7 +18,10 @@ class CSphereEmitter : public CParticleEmitter
 
     public:
         CSphereEmitter    ();
-        ~CSphereEmitter   ();
+        virtual ~CSphereEmitter   ();
+
+		void Update             (float dt);
+		void Render             ();
 
         void Generate (unsigned int l_NumParticles);
         void NewParticleSphere(CParticle* l_Particle);

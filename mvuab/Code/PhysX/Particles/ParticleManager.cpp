@@ -2,6 +2,8 @@
 #include "SphereEmitter.h"
 #include "Utils\Defines.h"
 
+#include "Core.h"
+
 CParticleManager::CParticleManager()
 {
 }
@@ -53,6 +55,15 @@ bool CParticleManager::Init(const std::string &path)
         Math::Vect3f l_Velocity = l_Node(i).GetVect3fProperty("Velocity", Math::Vect3f());
         l_Emitter->SetVelocity(l_Velocity);
 
+		std::string l_TextureName = l_Node(i).GetPszProperty("Texture", "");
+		l_Emitter->SetTextureName(l_TextureName);
+
+		size_t l_Min = l_Node(i).GetIntProperty("Min", 0);
+		l_Emitter->SetMin(l_Min);
+
+		size_t l_Max = l_Node(i).GetIntProperty("Max", 0);
+		l_Emitter->SetMin(l_Max);
+
         if(l_EmitterType == "Sphere")
         {
             Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());
@@ -67,6 +78,7 @@ bool CParticleManager::Init(const std::string &path)
 
         l_Emitter->Generate(l_Node(i).GetIntProperty("NumParticles", 0));
         m_Emitters.push_back(l_Emitter);
+
     }
 
     l_XML.Done();

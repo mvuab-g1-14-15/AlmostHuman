@@ -284,7 +284,7 @@ void CCore::InitManagers()
   m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
 
-  m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/BARK5.jpg" );
+  m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/smoke.png" );
   m_pParticleManager->Init( "Data/particles.xml" );
 }
 

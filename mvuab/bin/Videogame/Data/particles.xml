@@ -4,13 +4,16 @@
         EmitterType="Sphere"
         LifeTime="3.0 5.0"
         Position="0.0 2.0 1.0"
-        Velocity="5.0 10.0 5.0"
-        Acceleration="0.0 -9.81 0.0"
+        Velocity="1.0 2.0 1.0"
+        Acceleration="0.0 0.0 0.0"
         
         Radius="0.1 0.5"
-        Pitch="0.0 180.0"
+        Pitch="60.0 120.0"
         Yaw="0.0 360.0"
         
         NumParticles="200"
+		min="10" 
+		max="50"
+		Texture="Data/textures/smoke.png"
     />
 </emitters>

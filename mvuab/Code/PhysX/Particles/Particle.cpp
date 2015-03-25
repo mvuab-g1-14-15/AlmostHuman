@@ -117,7 +117,7 @@ void CParticle::Update( float dt )
   m_Velocity += m_Acceleration * dt;
   m_Position += ( ( m_Velocity + l_OldVel ) / 2.0f ) * dt;
 
-  m_Billboard.Init( m_Position, 0.1f, m_TextureName );
+  m_Billboard.Init( m_Position, 0.6f, m_TextureName );
   m_Billboard.Update();
 }
 

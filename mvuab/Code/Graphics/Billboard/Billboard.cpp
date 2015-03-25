@@ -79,7 +79,7 @@ void CBillboard::Render()
     //GraphicsInstance->GetDevice()->SetTexture( 0, m_Texture->GetDXTexture() );
     //GraphicsInstance->GetDevice()->SetFVF( TT1_VERTEX::GetFVF() );
 
-    CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+    CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
 
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
     Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
