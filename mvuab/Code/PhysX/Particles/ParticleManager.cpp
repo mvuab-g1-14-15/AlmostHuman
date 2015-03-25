@@ -53,9 +53,6 @@ bool CParticleManager::Init(const std::string &path)
         Math::Vect3f l_Velocity = l_Node(i).GetVect3fProperty("Velocity", Math::Vect3f());
         l_Emitter->SetVelocity(l_Velocity);
 
-        Math::Vect3f l_Direction = l_Node(i).GetVect3fProperty("Direction", Math::Vect3f());
-        l_Emitter->SetDirection(l_Direction.Normalize());
-
         if(l_EmitterType == "Sphere")
         {
             Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());

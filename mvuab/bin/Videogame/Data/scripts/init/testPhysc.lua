@@ -199,9 +199,6 @@ function move( flag_speed, forward, strafe, dt )
 	
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
-	if( CameraType.Free.value == current_camera:GetCameraType() ) then 
-		addPos.y =  forward * ( math.sin(Pitch) )
-	end
 	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
 	if (not addPos.x == 0 or not addPos.z == 0) then
 		addPos:Normalize()

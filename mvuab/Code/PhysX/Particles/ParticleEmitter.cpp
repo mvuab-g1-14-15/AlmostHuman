@@ -12,8 +12,8 @@ CParticleEmitter::CParticleEmitter()
 {
     m_Particles.resize(0);
 
-    m_MinSpeed = 0;
-    m_MaxSpeed = 0;
+    /*m_MinSpeed = 0;
+    m_MaxSpeed = 0;*/
     
     m_MinLifetime = 0;
     m_MaxLifetime = 0;
@@ -47,8 +47,8 @@ void CParticleEmitter::Render()
     CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
-        D3DXVECTOR3 l_Pos = D3DXVECTOR3(it->GetPosition().x, it->GetPosition().y, it->GetPosition().z);
-        if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, 0.05f))
+       // D3DXVECTOR3 l_Pos = D3DXVECTOR3(it->GetPosition().x, it->GetPosition().y, it->GetPosition().z);
+        //if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, 0.05f))
             it->Render();
     }
 }

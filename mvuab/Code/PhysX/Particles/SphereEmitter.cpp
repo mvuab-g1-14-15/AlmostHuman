@@ -53,13 +53,16 @@ void CSphereEmitter::NewParticleSphere(CParticle *l_Particle)
     float l_Radius = baseUtils::RandRange(m_MinimumRadius, m_MaximumRadius);
     float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
 
-    float x = sinf(l_Yaw) * cosf(l_Pitch);
-    float y = sinf(l_Yaw) * sinf(l_Pitch);
-    float z = cosf(l_Pitch);
+    float x =  Math::Utils::Cos(l_Yaw) *  Math::Utils::Cos(l_Yaw + Math::pi32 * 0.5f);
+    float y =  Math::Utils::Sin(l_Pitch);
+    float z =   Math::Utils::Sin(l_Yaw) + Math::Utils::Sin(l_Yaw + Math::pi32 * 0.5f);
 
     Math::Vect3f l_Vector = Math::Vect3f(x, y, z).Normalize();
+	l_Vector.x *= m_Velocity.x;
+	l_Vector.y *= m_Velocity.y;
+	l_Vector.z *= m_Velocity.z;
 
-    l_Particle->SetVelocity(l_Vector * m_Velocity);
+    l_Particle->SetVelocity(l_Vector);
     l_Particle->SetAcceleration(m_Acceleration);
 
     l_Particle->SetPosition(m_Position);

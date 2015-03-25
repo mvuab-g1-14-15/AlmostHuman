@@ -4,8 +4,7 @@
         EmitterType="Sphere"
         LifeTime="3.0 5.0"
         Position="0.0 2.0 1.0"
-        Velocity="0.0 10.0 0.0"
-        Direction="0.0 1.0 0.0"
+        Velocity="5.0 10.0 5.0"
         Acceleration="0.0 -9.81 0.0"
         
         Radius="0.1 0.5"

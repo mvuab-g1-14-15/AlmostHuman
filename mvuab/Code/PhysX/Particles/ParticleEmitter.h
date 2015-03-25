@@ -11,8 +11,8 @@ class CParticleEmitter
     protected:
         std::vector<CParticle> m_Particles;
         
-        float m_MinSpeed;
-        float m_MaxSpeed;
+       /* float m_MinSpeed;
+        float m_MaxSpeed;*/
 
         float m_MinLifetime;
         float m_MaxLifetime;
