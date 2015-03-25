@@ -84,6 +84,8 @@ CCore::CCore() :
   m_pConsole->SetMaxLinesInWindow( 25 );
   WORD x = m_pConsole->SetAttributes( FOREGROUND_BLUE | BACKGROUND_GREEN, 2 );
   m_pConsole->SetAttributes( x );
+  m_pConsole->SetSize( 1000, 1000 );
+  //m_pConsole->MoveConsole( 0, 0 );
 }
 
 CCore::~CCore()
