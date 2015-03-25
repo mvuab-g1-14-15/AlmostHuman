@@ -26,6 +26,7 @@ class CConsole
         short GetMaxLinesInWindow ();
 		void  SetSize(int w, int h);
 		void  MoveConsole( int x, int y );
+		void SetFullSize();
 
     //Methods
         void RedirectToConsole (WORD wFlags);

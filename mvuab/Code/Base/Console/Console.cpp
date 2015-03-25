@@ -90,6 +90,15 @@ void CConsole::MoveConsole( int x, int y )
 	Recalculate();
 }
 
+void CConsole::SetFullSize()
+{
+	const HWND hDesktop = GetDesktopWindow();
+	RECT desktop;
+    // Get the size of screen to the variable desktop
+    GetWindowRect(hDesktop, &desktop);
+	int i = 0;
+}
+
 void CConsole::Recalculate()
 {
 	HWND console = GetConsoleWindow();
