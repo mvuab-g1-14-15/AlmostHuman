@@ -1,19 +1,19 @@
 #include "ParticleEmitter.h"
 #include "Utils/BaseUtils.h"
 
-#include "Core.h"
-#include "Cameras/Camera.h"
-#include "Cameras/Frustum.h"
-#include "Cameras/CameraManager.h"
 
-#include <omp.h>
 
 CParticleEmitter::CParticleEmitter()
 {
     m_Particles.resize(0);
 
-    m_MinSpeed = 0;
-    m_MaxSpeed = 0;
+    /*m_MinSpeed = 0;
+    m_MaxSpeed = 0;*/
+	m_Max = 0;
+	m_Min = 0;
+	
+	m_ActualTime = 0.0f;
+	m_PrevTime = 0.0f;
     
     m_MinLifetime = 0;
     m_MaxLifetime = 0;
@@ -26,28 +26,6 @@ CParticleEmitter::CParticleEmitter()
 CParticleEmitter::~CParticleEmitter()
 {
     m_Particles.clear();
-}
-
-void CParticleEmitter::Update(float dt)
-{
-    CParticle *p = &m_Particles[0];
-    omp_set_num_threads(2);
-
-    #pragma omp parallel for
-    for(int i = 0; i < m_Particles.size(); i++)
-    {
-        (p + i)->Update(dt);
-    }
-}
-
-void CParticleEmitter::Render()
-{
-    CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
-    for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
-    {
-        if(l_CM->GetCurrentCamera()->GetFrustum().BoxVisibleByVertexs(&it->GetPosition()))
-            it->Render();
-    }
 }
 
 void CParticleEmitter::SetAcceleration(const Math::Vect3f &Acceleration)

@@ -52,8 +52,8 @@
         <texture stage_id="0" name="LightMapTexture"/>
     </render_draw_quad>
     
-    <enable_alpha_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
-	
+    <enable_alpha_blend/>
+	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
     <render_deferred_shading>
         <texture stage_id="0" name="DiffuseMapTexture"/>
@@ -62,6 +62,7 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
     
+	
 	<render_particules/>
 	
     <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>

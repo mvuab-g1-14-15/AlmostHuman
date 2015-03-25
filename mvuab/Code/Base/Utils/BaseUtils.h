@@ -90,6 +90,26 @@ inline void TIMER_STOP()
   printf("%time: %f\n", (float) t * 1000.0f);
 }
 
+inline float Random()
+{
+    return rand() / (float)RAND_MAX;
+}
+
+inline float RandRange( float fMin, float fMax )
+{
+    if ( fMin > fMax ) std::swap( fMin, fMax );
+    return ( Random() * ( fMax - fMin ) ) + fMin;
+}
+
+inline Math::Vect3f RandUnitVec()
+{
+    float x = ( Random() * 2.0f ) - 1.0f;
+    float y = ( Random() * 2.0f ) - 1.0f;
+    float z = ( Random() * 2.0f ) - 1.0f;
+
+    return Math::Vect3f(x, y, z).Normalize();
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } //namespace baseUtils
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

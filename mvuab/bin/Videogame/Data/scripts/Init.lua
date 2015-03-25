@@ -23,5 +23,10 @@ function update_gameplay()
 	end
 	
 	g_Blaster:Update()
-	g_Player:Update()
+	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then 
+		UpdateFree()
+	else
+		g_Player:Update()
+	end
+	
 end

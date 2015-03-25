@@ -810,7 +810,7 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
 
   if ( l_Effect != NULL )
   {
-    m_pD3DDevice->SetVertexDeclaration( TT1_N_VERTEX::GetVertexDeclaration() );
+    m_pD3DDevice->SetVertexDeclaration( TNORMAL_T1_VERTEX::GetVertexDeclaration() );
     l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
     UINT l_NumPasses;
     l_Effect->Begin( &l_NumPasses, 0 );
@@ -818,19 +818,19 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
     for ( UINT iPass = 0; iPass < l_NumPasses; iPass++ )
     {
       l_Effect->BeginPass( iPass );
-      TT1_N_VERTEX v[4] =
+      TNORMAL_T1_VERTEX v[4] =
       {
-        { ul.x, ul.y, ul.z, n.x, n.y, n.z, 0, 0, 1},
-        { dl.x, dl.y, dl.z, n.x, n.y, n.z, 0, 1, 1},
-        { ur.x, ur.y, ur.z, n.x, n.y, n.z, 0, 0, 0},
-        { dr.x, dr.y, dr.z, n.x, n.y, n.z, 0, 1, 0}
+        { ul.x, ul.y, ul.z, n.x, n.y, n.z, 0, 1},
+        { dl.x, dl.y, dl.z, n.x, n.y, n.z, 0, 0},
+        { ur.x, ur.y, ur.z, n.x, n.y, n.z, 1, 1},
+        { dr.x, dr.y, dr.z, n.x, n.y, n.z, 1, 0}
       };
-      m_pD3DDevice->SetFVF( TT1_N_VERTEX::GetFVF() );
+      m_pD3DDevice->SetFVF( TNORMAL_T1_VERTEX::GetFVF() );
 
       if ( Texture != NULL )
         Texture->Activate( 0 );
 
-      m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( TT1_N_VERTEX ) );
+      m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, v, sizeof( TNORMAL_T1_VERTEX ) );
       l_Effect->EndPass();
     }
 
