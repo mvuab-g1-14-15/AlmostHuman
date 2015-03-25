@@ -4,7 +4,7 @@
 CParticle::CParticle()
 {
   m_Size = 1.0f;
-  m_TimeToLive = 0.0;
+  m_LifeTime = 0.0;
 
   m_IsAlive = false;
   m_Billboard.Init( Math::Vect3f( 0.0f, 0.0f, 0.0f ), 1, "" );
@@ -20,7 +20,7 @@ CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Ma
                       const Math::Vect3f& Aceleration )
 {
   m_Size = sz;
-  m_TimeToLive = timer;
+  m_LifeTime = timer;
 
   m_IsAlive = false;
 
@@ -51,13 +51,13 @@ void CParticle::SetAcceleration( const Math::Vect3f& Acceleration )
   m_Acceleration = Acceleration;
 }
 
-void CParticle::SetTimeToLive( float Time )
+void CParticle::SetLifeTime( float Time )
 {
   LARGE_INTEGER l_Freq = { 0 }, l_ActualTime = { 0 };
   QueryPerformanceCounter( &l_ActualTime );
   QueryPerformanceFrequency( &l_Freq );
 
-  m_TimeToLive = Time + l_ActualTime.QuadPart / l_Freq.QuadPart;
+  m_LifeTime = Time + l_ActualTime.QuadPart / l_Freq.QuadPart;
 }
 
 void CParticle::SetIsAlive( bool isAlive )
@@ -91,9 +91,9 @@ const Math::Vect3f& CParticle::GetAcceleration()
   return m_Acceleration;
 }
 
-float CParticle::GetTimeToLive()
+float CParticle::GetLifeTime()
 {
-  return m_TimeToLive;
+  return m_LifeTime;
 }
 
 bool CParticle::GetIsAlive()
@@ -109,15 +109,15 @@ void CParticle::Update( float dt )
   QueryPerformanceCounter( &l_ActualTime );
   QueryPerformanceFrequency( &l_Freq );
 
-  float l_Time = l_ActualTime.QuadPart / l_Freq.QuadPart;
-  m_IsAlive = ( m_TimeToLive - l_Time > 0.0f ) ? true : false;
+  float l_Time = (float) l_ActualTime.QuadPart / (float) l_Freq.QuadPart;
+  m_IsAlive = ( m_LifeTime - l_Time > 0.0f ) ? true : false;
 
   Math::Vect3f l_OldVel = m_Velocity;
 
   m_Velocity += m_Acceleration * dt;
   m_Position += ( ( m_Velocity + l_OldVel ) / 2.0f ) * dt;
 
-  m_Billboard.Init( m_Position, 0.1, m_TextureName );
+  m_Billboard.Init( m_Position, 0.1f, m_TextureName );
   m_Billboard.Update();
 }
 

@@ -30,6 +30,8 @@ CParticleEmitter::~CParticleEmitter()
 
 void CParticleEmitter::Update(float dt)
 {
+    if(m_Particles.size() == 0) return;
+
     CParticle *p = &m_Particles[0];
     omp_set_num_threads(2);
 
@@ -45,7 +47,8 @@ void CParticleEmitter::Render()
     CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
-        if(l_CM->GetCurrentCamera()->GetFrustum().BoxVisibleByVertexs(&it->GetPosition()))
+        D3DXVECTOR3 l_Pos = D3DXVECTOR3(it->GetPosition().x, it->GetPosition().y, it->GetPosition().z);
+        if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, 0.05f))
             it->Render();
     }
 }

@@ -1,4 +1,5 @@
 #include "SphereEmitter.h"
+#include "Utils/BaseUtils.h"
 
 CSphereEmitter::CSphereEmitter()
 {
@@ -40,34 +41,28 @@ void CSphereEmitter::Generate (unsigned int l_NumParticles)
 
     for(unsigned int i = 0; i < l_NumParticles; ++i)
     {
-        
-
-
+        NewParticleSphere(&m_Particles[i]);
     }
 }
 
 void CSphereEmitter::NewParticleSphere(CParticle *l_Particle)
 {
+    float l_Pitch = Math::Utils::Deg2Rad(baseUtils::RandRange(m_MinPitch, m_MaxPitch));
+    float l_Yaw = Math::Utils::Deg2Rad(baseUtils::RandRange(m_MinPitch, m_MaxYaw));
 
-    /*float inclination = Math::Utils::Deg2Rad( RandRange( MinInclination, MaxInclination ) );
-    float azimuth = glm::radians( RandRange( MinAzimuth, MaxAzimuth ) );
+    float l_Radius = baseUtils::RandRange(m_MinimumRadius, m_MaximumRadius);
+    float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
 
-    float radius = RandRange( MinimumRadius, MaximumRadius );
-    float speed = RandRange( MinSpeed, MaxSpeed );
-    float lifetime = RandRange( MinLifetime, MaxLifetime );
+    float x = sinf(l_Yaw) * cosf(l_Pitch);
+    float y = sinf(l_Yaw) * sinf(l_Pitch);
+    float z = cosf(l_Pitch);
 
-    float sInclination = sinf( inclination );
+    Math::Vect3f l_Vector = Math::Vect3f(x, y, z).Normalize();
 
-    float X = sInclination * cosf( azimuth );
-    float Y = sInclination * sinf( azimuth );
-    float Z = cosf( inclination );
+    l_Particle->SetVelocity(l_Vector * m_Velocity);
+    l_Particle->SetAcceleration(m_Acceleration);
 
-    glm::vec3 vector( X, Y, Z );
-
-    particle.m_Position = ( vector * radius ) + Origin;
-    particle.m_Velocity = vector * speed;
-
-    particle.m_fLifeTime = lifetime;
-    particle.m_fAge = 0;*/
-
+    l_Particle->SetPosition(m_Position);
+    l_Particle->SetLifeTime(l_LifeTime);
+    l_Particle->SetIsAlive(true);
 }

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-	<emmiter pos="0.0 2.0 1.0" dir="0.0 11.0 0.0" vel="0.0 11.0 0.0" acc="0.0 -9.8 0.0" time="3" num="200" min="10" max="50" texture="Data/textures/2513a2e328c724ef9b79413026fdbdf1.jpg"/>
+    <emmiter 
+        EmitterType="Sphere"
+        LifeTime="3.0 5.0"
+        Position="0.0 2.0 1.0"
+        Velocity="0.0 10.0 0.0"
+        Direction="0.0 1.0 0.0"
+        Acceleration="0.0 -9.81 0.0"
+        
+        Radius="0.1 0.5"
+        Pitch="0.0 180.0"
+        Yaw="0.0 360.0"
+        
+        NumParticles="200"
+    />
 </emitters>

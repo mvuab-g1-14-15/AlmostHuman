@@ -39,10 +39,9 @@ bool CParticleManager::Init(const std::string &path)
         CParticleEmitter *l_Emitter = NULL;
 
         std::string l_EmitterType = l_Node(i).GetPszProperty("EmitterType", "Sphere");
-
         if(l_EmitterType == "Sphere") l_Emitter =  new CSphereEmitter();
 
-        Math::Vect2f l_TimeToLive = l_Node(i).GetVect2fProperty("TimeToLive", Math::Vect2f());
+        Math::Vect2f l_TimeToLive = l_Node(i).GetVect2fProperty("LifeTime", Math::Vect2f());
         l_Emitter->SetTimeToLive(l_TimeToLive.x, l_TimeToLive.y);
        
         Math::Vect3f l_Acceleration = l_Node(i).GetVect3fProperty("Acceleration", Math::Vect3f());
@@ -81,7 +80,7 @@ void CParticleManager::Update(float dt)
 {
     for(std::vector<CParticleEmitter *>::iterator it = m_Emitters.begin(); it != m_Emitters.end(); ++it)
     {
-        //(*it)->Update(dt);
+        (*it)->Update(dt);
     }
 }
 
@@ -89,6 +88,6 @@ void CParticleManager::Render()
 {
     for(std::vector<CParticleEmitter *>::iterator it = m_Emitters.begin(); it != m_Emitters.end(); ++it)
     {
-        //(*it)->Render();
+        (*it)->Render();
     }
 }

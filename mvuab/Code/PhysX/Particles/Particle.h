@@ -9,7 +9,7 @@ class CParticle
 {
 private:
   float m_Size;
-  float m_TimeToLive;
+  float m_LifeTime;
 
   bool  m_IsAlive;
   CBillboard  m_Billboard;
@@ -20,6 +20,7 @@ private:
   Math::Vect3f m_Velocity;
   Math::Vect3f m_Acceleration;
   std::string m_TextureName;
+
 public:
   CParticle();
   CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity,
@@ -39,8 +40,8 @@ public:
   void SetAcceleration( const Math::Vect3f& Acceleration );
   const Math::Vect3f& GetAcceleration();
 
-  void SetTimeToLive( float Time );
-  float GetTimeToLive();
+  void SetLifeTime( float Time );
+  float GetLifeTime();
 
   void SetIsAlive( bool isAlive );
   bool GetIsAlive();
