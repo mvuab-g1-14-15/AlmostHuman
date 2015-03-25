@@ -42,7 +42,7 @@ public:
 
   //---- Main Functions ------------------------------------------------
   void            Move( const Math::Vect3f& _vDirection, float _fElapsedTime );
-  void            Jump( float _fAmmount );
+  void Jump( float _fAmmount, float height );
   void            CreateController( NxController* _pController, NxScene* _PScene );
 
   //---- Functions -----------------------------------------------------

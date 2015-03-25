@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="enemy_low_patrol" filename="\meshes\enemy_low_patrol.mesh" />
   <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
   <static_mesh name="Box002" filename="\meshes\Box002.mesh" />
   <static_mesh name="Box003" filename="\meshes\Box003.mesh" />
@@ -7,7 +8,6 @@
   <static_mesh name="Box004" filename="\meshes\Box004.mesh" />
   <static_mesh name="Plane004" filename="\meshes\Plane004.mesh" />
   <static_mesh name="Cylinder001" filename="\meshes\Cylinder001.mesh" />
-  <static_mesh name="Box005" filename="\meshes\Box005.mesh" />
   <static_mesh name="Box007" filename="\meshes\Box007.mesh" />
   <static_mesh name="Box008" filename="\meshes\Box008.mesh" />
   <static_mesh name="Box009" filename="\meshes\Box009.mesh" />
@@ -22,8 +22,6 @@
   <static_mesh name="Plane005" filename="\meshes\Plane005.mesh" />
   <static_mesh name="Box017" filename="\meshes\Box017.mesh" />
   <static_mesh name="Box018" filename="\meshes\Box018.mesh" />
-  <static_mesh name="StraightStair001" filename="\meshes\StraightStair001.mesh" />
-  <static_mesh name="StraightStair002" filename="\meshes\StraightStair002.mesh" />
   <static_mesh name="OilTank001" filename="\meshes\OilTank001.mesh" />
   <static_mesh name="OilTank002" filename="\meshes\OilTank002.mesh" />
   <static_mesh name="OilTank003" filename="\meshes\OilTank003.mesh" />
@@ -91,5 +89,7 @@
   <static_mesh name="StraightStair007" filename="\meshes\StraightStair007.mesh" />
   <static_mesh name="StraightStair008" filename="\meshes\StraightStair008.mesh" />
   <static_mesh name="Plane012" filename="\meshes\Plane012.mesh" />
-  <static_mesh name="enemy_low_patrol" filename="\meshes\enemy_low_patrol.mesh" />
+  <static_mesh name="Sphere001" filename="\meshes\Sphere001.mesh" />
+  <static_mesh name="StraightStair009" filename="\meshes\StraightStair009.mesh" />
+
 </static_meshes>

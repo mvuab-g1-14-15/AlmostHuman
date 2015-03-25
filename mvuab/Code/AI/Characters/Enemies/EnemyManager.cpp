@@ -136,7 +136,7 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 {
-  const std::string& lType = Node.GetPszProperty( "type" );
+   const std::string& lType = Node.GetPszProperty( "type" );
   CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
   if ( !lCoreEnemy )
