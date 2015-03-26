@@ -23,8 +23,7 @@ private:
 
 public:
   CParticle();
-  CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity,
-             const Math::Vect3f& Aceleration );
+  CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
 
   void SetTextureName( std::string TextureName );
 
@@ -42,6 +41,9 @@ public:
 
   void SetLifeTime( float Time );
   float GetLifeTime();
+
+  void SetSize( float sz );
+  float GetSize();
 
   void SetIsAlive( bool isAlive );
   bool GetIsAlive();

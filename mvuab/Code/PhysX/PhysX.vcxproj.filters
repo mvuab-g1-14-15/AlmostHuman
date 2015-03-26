@@ -104,6 +104,9 @@
     <ClCompile Include="Particles\SphereEmitter.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Particles\CubeEmitter.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -184,6 +187,9 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Particles\SphereEmitter.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\CubeEmitter.h">
       <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>

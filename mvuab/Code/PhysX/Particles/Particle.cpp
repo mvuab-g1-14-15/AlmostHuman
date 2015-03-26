@@ -1,6 +1,11 @@
 #include "Particle.h"
 #include <Windows.h>
 
+#include "Core.h"
+#include "Cameras/Camera.h"
+#include "Cameras/Frustum.h"
+#include "Cameras/CameraManager.h"
+
 CParticle::CParticle()
 {
   m_Size = 1.0f;
@@ -16,8 +21,7 @@ CParticle::CParticle()
   m_Acceleration = Math::Vect3f( 0.0f, 0.0f, 0.0f );
 }
 
-CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity,
-                      const Math::Vect3f& Aceleration )
+CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity,  const Math::Vect3f& Aceleration )
 {
   m_Size = sz;
   m_LifeTime = timer;
@@ -60,6 +64,11 @@ void CParticle::SetLifeTime( float Time )
   m_LifeTime = Time + l_ActualTime.QuadPart / l_Freq.QuadPart;
 }
 
+void CParticle::SetSize( float sz )
+{
+    m_Size = sz;
+}
+
 void CParticle::SetIsAlive( bool isAlive )
 {
   m_IsAlive = isAlive;
@@ -96,6 +105,11 @@ float CParticle::GetLifeTime()
   return m_LifeTime;
 }
 
+float CParticle::GetSize()
+{
+    return m_Size;
+}
+
 bool CParticle::GetIsAlive()
 {
   return m_IsAlive;
@@ -117,11 +131,17 @@ void CParticle::Update( float dt )
   m_Velocity += m_Acceleration * dt;
   m_Position += ( ( m_Velocity + l_OldVel ) / 2.0f ) * dt;
 
-  m_Billboard.Init( m_Position, 0.6f, m_TextureName );
+  m_Billboard.Init( m_Position, m_Size, m_TextureName );
   m_Billboard.Update();
 }
 
 void CParticle::Render()
 {
-  if ( m_IsAlive ) m_Billboard.Render();
+    if(!m_IsAlive) return;
+
+    CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
+    D3DXVECTOR3 l_Pos = D3DXVECTOR3(m_Position.x, m_Position.y, m_Position.z);
+
+    if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, m_Size))
+        m_Billboard.Render();
 }
