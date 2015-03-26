@@ -33,12 +33,20 @@ void CEnemyManager::Destroy()
 
 void CEnemyManager::Update()
 {
-  TMapResource::iterator it = m_Resources.begin();
+  TMapResource::iterator itr = m_Resources.begin();
 
-  for ( ; it != m_Resources.end(); ++it )
+  while ( itr != m_Resources.end() )
   {
-    m_ActualEnemy = it->second;
-    it->second->Update();
+    m_ActualEnemy = itr->second;
+    m_ActualEnemy->Update();
+
+    if ( m_ActualEnemy->GetLife() <= 0 )
+    {
+      CHECKED_DELETE( m_ActualEnemy );
+      m_Resources.erase( itr++ );
+    }
+    else
+      ++itr;
   }
 }
 
@@ -76,11 +84,9 @@ void CEnemyManager::Init( const std::string& Filename )
         AddNewCoreEnemy( m( i ) );
         //<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine="AI.xml"/>
       }
-	  else if( l_TagName == "route" )
-	  {
-		  AddNewRoute( m( i ) );
-	  }
-	
+      else if ( l_TagName == "route" )
+        AddNewRoute( m( i ) );
+
     }
   }
 }
@@ -136,55 +142,56 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 {
-   const std::string& lType = Node.GetPszProperty( "type" );
+  const std::string& lType = Node.GetPszProperty( "type" );
   CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
   if ( !lCoreEnemy )
-  {
-	LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
-  }
+    LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
 
   CStateMachine* lStateMachine = m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName );
+
   if ( !lStateMachine )
-  {
-	LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) );
-  }
+    LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) );
 
   CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
 
-  lEnemy->AddMesh(Node.GetPszProperty("mesh","default_mesh"));
+  lEnemy->AddMesh( Node.GetPszProperty( "mesh", "default_mesh" ) );
+  lEnemy->SetLife( m_CoreEnemies.GetResource( lType )->m_Life );
 
-  CPatrolEnemy *lPatrolEnemy = dynamic_cast<CPatrolEnemy*>(lEnemy);
-  
-  if(lPatrolEnemy)
-	  lPatrolEnemy->SetWaypoints(m_Routes[lPatrolEnemy->GetRouteId()]);
+  CPatrolEnemy* lPatrolEnemy = dynamic_cast<CPatrolEnemy*>( lEnemy );
+
+  if ( lPatrolEnemy )
+    lPatrolEnemy->SetWaypoints( m_Routes[lPatrolEnemy->GetRouteId()] );
 
   if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
   {
-	  LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
-      CHECKED_DELETE( lEnemy );
+    LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
+    CHECKED_DELETE( lEnemy );
   }
 }
 
 void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
 {
-	const size_t l_Id = Node.GetIntProperty( "id", -1 );
-	int count = Node.GetNumChildren();
-	std::vector<Math::Vect3f> l_Route;
-    for ( int i = 0; i < count; ++i )
-    {
-		const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty("value", Math::Vect3f(0,-99999999,0));
-	    if ( l_Point != Math::Vect3f(0,-99999999,0) )
-			l_Route.push_back(l_Point);
-		else
-			LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
-	}
-	m_Routes[l_Id]=l_Route;
+  const size_t l_Id = Node.GetIntProperty( "id", -1 );
+  int count = Node.GetNumChildren();
+  std::vector<Math::Vect3f> l_Route;
+
+  for ( int i = 0; i < count; ++i )
+  {
+    const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty( "value", Math::Vect3f( 0, -99999999, 0 ) );
+
+    if ( l_Point != Math::Vect3f( 0, -99999999, 0 ) )
+      l_Route.push_back( l_Point );
+    else
+      LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
+  }
+
+  m_Routes[l_Id] = l_Route;
 }
 
 void CEnemyManager::RegisterEnemies()
 {
-	EnemyFactory.Register( "easy", Type2Type<CEasyEnemy>( ) );
-	EnemyFactory.Register( "patroll", Type2Type<CPatrolEnemy>( ) );
-	EnemyFactory.Register( "boss", Type2Type<CBossEnemy>( ) );
+  EnemyFactory.Register( "easy", Type2Type<CEasyEnemy>( ) );
+  EnemyFactory.Register( "patroll", Type2Type<CPatrolEnemy>( ) );
+  EnemyFactory.Register( "boss", Type2Type<CBossEnemy>( ) );
 }
