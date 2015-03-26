@@ -191,12 +191,12 @@ bool CEffect::LoadEffect()
                    0, // LPD3DXEFFECTPOOL pPool,
                    &m_Effect,
                    &l_ErrorBuffer );
-
-  ASSERT( l_HR == S_OK, "Error loading the effect" );
-
   if ( l_ErrorBuffer )
   {
-      LOG_ERROR_APPLICATION( "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+	  std::string lErrorMsg;
+	  StringUtils::Format( lErrorMsg, "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+	  LOG_ERROR_APPLICATION( lErrorMsg.c_str() );
+	  ASSERT( l_HR == S_OK, lErrorMsg.c_str );
       CHECKED_RELEASE( l_ErrorBuffer );
       return false;
   }

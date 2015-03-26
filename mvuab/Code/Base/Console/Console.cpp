@@ -4,6 +4,7 @@
 #include <io.h>
 #include <wincon.h>
 #include "console.h"
+#include "Utils\Defines.h"
 
 #include <iostream>
 #include <fstream>
@@ -15,35 +16,40 @@ using namespace std;
 BOOL CConsole::sm_bConsole = FALSE;
 
 CConsole::CConsole()
-    {
-    //default constructor.
-    m_bRedirected = FALSE; // this is the right place to set this before this
-    m_sNumColumns = 0;
-    m_sNumLines = 0;
-    m_sMaxLines = 0;
-    m_wAttrib = 0;
-    }
+	: m_bRedirected(FALSE)
+    , m_sNumColumns( 0 )
+    , m_sNumLines( 0 )
+    , m_sMaxLines( 0 ) 
+    , m_wAttrib( 0 )
+	, mX( 0 )
+	, mY( 0 )
+	, mWidth( 1200 )
+	, mHeight( 600 )
+{
+}
 
 CConsole::CConsole(BOOL bCreateConsole)
-    {
-    m_bRedirected = FALSE; // this is the right place to set this before this
-    m_sNumColumns = 0;
-    m_sNumLines = 0;
-    m_sMaxLines = 0;
-    m_wAttrib = 0;
+	: m_bRedirected(FALSE)
+    , m_sNumColumns( 0 )
+    , m_sNumLines( 0 )
+    , m_sMaxLines( 0 ) 
+    , m_wAttrib( 0 )
+	, mX( 0 )
+	, mY( 0 )
+	, mWidth( 1200 )
+	, mHeight( 600 )
+{
     if (bCreateConsole)
         CreateConsole ();
-    //I dont see any reason for not having bCreateConsole false But eh
-    }
-
+}
 
 CConsole::~CConsole()
-    {
-    DestroyConsole (); //We need to remove the Console
-    }
+{
+    DestroyConsole ();
+}
 
 BOOL CConsole::CreateConsole ()
-    {
+{
     if (sm_bConsole == TRUE) // we have already created a console
         {
         return FALSE;
@@ -65,10 +71,41 @@ BOOL CConsole::CreateConsole ()
         m_sMaxLines  = (short) GetSettings (SC_MAXLINES);
         m_wAttrib = GetSettings (SC_ATTRIB);
         m_dwError = 0; // Lets keep this zero for the time being.
+		Recalculate();
         return TRUE;
         }
+}
 
-    }
+void CConsole::SetSize( int w, int h )
+{
+	mWidth = w;
+	mHeight = h;
+	Recalculate();
+}
+
+void CConsole::MoveConsole( int x, int y )
+{
+	mX = x;
+	mY = y;
+	Recalculate();
+}
+
+void CConsole::SetFullSize()
+{
+	const HWND hDesktop = GetDesktopWindow();
+	RECT desktop;
+    // Get the size of screen to the variable desktop
+    GetWindowRect(hDesktop, &desktop);
+	int i = 0;
+}
+
+void CConsole::Recalculate()
+{
+	HWND console = GetConsoleWindow();
+	RECT ConsoleRect;
+	GetWindowRect(console, &ConsoleRect); 
+	MoveWindow(console, mX, mY, mWidth, mHeight, TRUE);
+}
 
 BOOL CConsole::DestroyConsole ()
     {

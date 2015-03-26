@@ -1,8 +1,6 @@
 #ifndef __CONSOLE_H__
 #define __CONSOLE_H__
 
-
-
 //Some defines we will be requiring
 #define SC_LINES    0x0001
 #define SC_COLUMNS  0x0002
@@ -26,6 +24,9 @@ class CConsole
         WORD SetAttributes (WORD wAttrib,short NumChars = 0);
         short SetMaxLinesInWindow (short maxLines);
         short GetMaxLinesInWindow ();
+		void  SetSize(int w, int h);
+		void  MoveConsole( int x, int y );
+		void SetFullSize();
 
     //Methods
         void RedirectToConsole (WORD wFlags);
@@ -48,6 +49,11 @@ class CConsole
         short m_sMaxLines;
         DWORD m_dwError;
         static BOOL sm_bConsole;
+		int mX;
+		int mY;
+		int mWidth;
+		int mHeight;
+		void Recalculate();
 
 };
 #endif //__CONSOLE_H__

@@ -1,9 +1,6 @@
 #include "SphereEmitter.h"
 #include "Utils/BaseUtils.h"
-#include "Core.h"
-#include "Cameras/Camera.h"
-#include "Cameras/Frustum.h"
-#include "Cameras/CameraManager.h"
+
 
 #include <omp.h>
 
@@ -72,6 +69,7 @@ void CSphereEmitter::NewParticleSphere(CParticle *l_Particle)
     l_Particle->SetAcceleration(m_Acceleration);
 
 	l_Particle->SetTextureName(m_TextureName);
+    l_Particle->SetSize(l_Radius);
 
     l_Particle->SetPosition(m_Position);
     l_Particle->SetLifeTime(l_LifeTime);
@@ -92,35 +90,28 @@ void CSphereEmitter::Update(float dt)
     }
 
 	m_ActualTime += dt;
+    if ( m_ActualTime < 1.0f )
+    {
+        m_Rand = rand() % ( m_Max - m_Min + 1 ) + m_Min;
+        m_ActualTime = 0.0f;
+    }
 
-  if ( m_ActualTime >= 1.0f )
-  {
-    m_Rand = rand() % ( m_Max - m_Min + 1 ) + m_Min;
-    m_PrevTime = m_ActualTime;
-    m_ActualTime = 0.0f;
-  }
+    for(m_Rand; m_Rand > 0; --m_Rand)
+    {
+        std::vector<CParticle>::iterator it = m_Particles.begin();
 
-  if ( m_PrevTime > 0.0f )
-  {
-    m_PrevTime -= dt;
-    std::vector<CParticle>::iterator it = m_Particles.begin();
+        for ( ; it != m_Particles.end() && it->GetIsAlive(); ++it );
+        if ( it == m_Particles.end() ) return;
 
-    for ( ; it != m_Particles.end() && it->GetIsAlive(); ++it );
-
-    if ( it == m_Particles.end() ) return;
-
-    NewParticleSphere( it._Ptr );
-  }
+        NewParticleSphere( it._Ptr );
+    }
 }
 
 
 void CSphereEmitter::Render()
 {
-    CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
     for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
     {
-       // D3DXVECTOR3 l_Pos = D3DXVECTOR3(it->GetPosition().x, it->GetPosition().y, it->GetPosition().z);
-        //if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, 0.05f))
-            it->Render();
+        it->Render();
     }
 }

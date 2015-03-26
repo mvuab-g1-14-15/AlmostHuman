@@ -12,10 +12,18 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 	
 	CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal, l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
+	
+	// Modify the x coordinate ( symmetry )
+	l_Position.x = -l_Position.x;
 	float4 l_WorldPosition = float4(l_Position, 1.0);
 	
 	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
-	OUT.WorldNormal = normalize(mul(l_Normal, g_WorldMatrix));
+	
+	
+	OUT.Normal = normalize(mul(l_Normal, g_WorldMatrix));
+	OUT.WorldNormal = OUT.Normal;
+	
+	l_Normal = l_Normal* -1;
 	
 	OUT.WorldTangent = float4(normalize(mul(l_Tangent, (float3x3)g_WorldMatrix)), 0.0);
 	OUT.WorldBinormal = float4(mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix), 0.0);
@@ -95,6 +103,10 @@ technique TECHNIQUE_NAME
 {
 	pass p0
 	{
+#if defined( USE_CAL3D_HW )
+		CullMode = NONE;
+#endif
+	
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();
 	}

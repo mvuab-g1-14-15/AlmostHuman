@@ -1,8 +1,6 @@
 #include "ParticleManager.h"
 #include "SphereEmitter.h"
-#include "Utils\Defines.h"
-
-#include "Core.h"
+#include "CubeEmitter.h"
 
 CParticleManager::CParticleManager()
 {
@@ -41,10 +39,12 @@ bool CParticleManager::Init(const std::string &path)
         CParticleEmitter *l_Emitter = NULL;
 
         std::string l_EmitterType = l_Node(i).GetPszProperty("EmitterType", "Sphere");
+
         if(l_EmitterType == "Sphere") l_Emitter =  new CSphereEmitter();
+        else if(l_EmitterType == "Cube") l_Emitter =  new CCubeEmitter();
 
         Math::Vect2f l_TimeToLive = l_Node(i).GetVect2fProperty("LifeTime", Math::Vect2f());
-        l_Emitter->SetTimeToLive(l_TimeToLive.x, l_TimeToLive.y);
+        l_Emitter->SetLifeTime(l_TimeToLive.x, l_TimeToLive.y);
        
         Math::Vect3f l_Acceleration = l_Node(i).GetVect3fProperty("Acceleration", Math::Vect3f());
         l_Emitter->SetAcceleration(l_Acceleration);
@@ -74,6 +74,20 @@ bool CParticleManager::Init(const std::string &path)
 
             Math::Vect2f l_Pitch = l_Node(i).GetVect2fProperty("Pitch", Math::Vect2f());
             ((CSphereEmitter *) l_Emitter)->SetPitch(l_Pitch.x, l_Pitch.y);
+        }
+        else if(l_EmitterType == "Cube")
+        {
+            Math::Vect2f l_Depth = l_Node(i).GetVect2fProperty("Depth", Math::Vect2f());
+            ((CCubeEmitter *) l_Emitter)->SetDepth(l_Depth.x, l_Depth.y);
+
+            Math::Vect2f l_Width = l_Node(i).GetVect2fProperty("Width", Math::Vect2f());
+            ((CCubeEmitter *) l_Emitter)->SetWidth(l_Width.x, l_Width.y);
+
+            Math::Vect2f l_Height = l_Node(i).GetVect2fProperty("Height", Math::Vect2f());
+            ((CCubeEmitter *) l_Emitter)->SetHeight(l_Height.x, l_Height.y);
+
+            Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());
+            ((CCubeEmitter *) l_Emitter)->SetRadius(l_Radius.x, l_Radius.y);
         }
 
         l_Emitter->Generate(l_Node(i).GetIntProperty("NumParticles", 0));

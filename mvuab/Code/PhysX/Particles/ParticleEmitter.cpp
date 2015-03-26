@@ -7,13 +7,10 @@ CParticleEmitter::CParticleEmitter()
 {
     m_Particles.resize(0);
 
-    /*m_MinSpeed = 0;
-    m_MaxSpeed = 0;*/
 	m_Max = 0;
 	m_Min = 0;
 	
 	m_ActualTime = 0.0f;
-	m_PrevTime = 0.0f;
     
     m_MinLifetime = 0;
     m_MaxLifetime = 0;
@@ -47,7 +44,7 @@ void CParticleEmitter::SetVelocity(const Math::Vect3f &Velocity)
     m_Velocity = Velocity;
 }
 
-void CParticleEmitter::SetTimeToLive(float min, float max)
+void CParticleEmitter::SetLifeTime(float min, float max)
 {
     m_MinLifetime = min;
     m_MaxLifetime =  max;
