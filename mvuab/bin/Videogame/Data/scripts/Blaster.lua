@@ -17,6 +17,7 @@ function CBlaster:Shoot()
 	if lEnemy ~= nil then
 		local damage = CBlaster:CalculateDamage( Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera():GetPos(), lEnemy:GetPosition() );
 		lEnemy:AddDamage( damage )
+		Singleton_Core.get_singleton():trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
 end
 

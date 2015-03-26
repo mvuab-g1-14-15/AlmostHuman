@@ -53,7 +53,7 @@ public:
 
     l_ID = m_ResourcesMap[Name].m_Id;
     m_ResourcesMap.erase( it );
-    m_ResourcesVector.erase( l_ID );
+    m_ResourcesVector.erase( m_ResourcesVector.begin() + l_ID );
 
     for ( uint16 i = static_cast<uint16>( l_ID ); i < m_ResourcesVector.size();
           ++i )
@@ -83,8 +83,8 @@ public:
   {
     if ( m_ResourcesMap.find( Name ) != m_ResourcesMap.end() ) return false;
 
-    m_ResourcesVector.push_back( Resource );
     CMapResourceValue l_Resource( Resource, m_ResourcesVector.size() );
+    m_ResourcesVector.push_back( Resource );
     m_ResourcesMap[Name] = l_Resource;
     return true;
   }

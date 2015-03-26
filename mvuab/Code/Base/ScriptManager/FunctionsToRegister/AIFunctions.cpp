@@ -22,24 +22,25 @@
 using namespace luabind;
 using namespace Math;
 template<class T>
-void vector_add(std::vector<T>& vec, T val)
+void vector_add( std::vector<T>& vec, T val )
 {
-    vec.push_back(val);
+  vec.push_back( val );
 }
 template<class T>
-size_t vector_getIdByResource(std::vector<T>& vec, T val)
+size_t vector_getIdByResource( std::vector<T>& vec, T val )
 {
-    for(size_t i = 0 ; i < vec.size(); ++i)
-       if( vec[i] == val)
-            return i;
-    return 0;
-} 
+  for ( size_t i = 0 ; i < vec.size(); ++i )
+    if ( vec[i] == val )
+      return i;
+
+  return 0;
+}
 
 template<class T>
-T vector_get(std::vector<T>& vec, size_t i)
+T vector_get( std::vector<T>& vec, size_t i )
 {
-    return vec[i];
-} 
+  return vec[i];
+}
 
 void registerAI( lua_State* m_LS )
 {
@@ -54,39 +55,40 @@ void registerAI( lua_State* m_LS )
     .def( "update", &CCharacter::Update )
     .def( "render", &CCharacter::Render )
     .def( "GetPosition", &CCharacter::GetPosition )
-	.def( "AddDamage", &CCharacter::AddDamage )	
+    .def( "AddDamage", &CCharacter::AddDamage )
   ];
   module( m_LS )
   [
-    class_<std::vector<std::string>>( "VectorStates")
-    .def(constructor<std::vector<std::string>>())
-    .def("getResource", &vector_get<std::string>)
-    .def("getIdByResource", &vector_getIdByResource<std::string>)
-    .def("size", &std::vector<std::string>::size)
+    class_<std::vector<std::string>>( "VectorStates" )
+    .def( constructor<std::vector<std::string>>() )
+    .def( "getResource", &vector_get<std::string> )
+    .def( "getIdByResource", &vector_getIdByResource<std::string> )
+    .def( "size", &std::vector<std::string>::size )
   ];
   module( m_LS )
   [
     class_<CStateMachine, CName, CMapManager<CState>>( "CStateMachine" )
-    .def( "GetStateName", &CStateMachine::GetStateName)
+    .def( "GetStateName", &CStateMachine::GetStateName )
   ];
   module( m_LS )
   [
     class_<CEnemy, CCharacter>( "CEnemy" )
     .def( "ChangeState", &CEnemy::ChangeState )
-    .def( "SetExit", &CEnemy::SetOnExit)
-    .def( "getNameState", &CEnemy::GetNameStates)
-    .def( "getCurrentState", &CEnemy::GetCurrentState)
-    .def( "getStateMachine", &CEnemy::GetStateMachine)
+    .def( "SetExit", &CEnemy::SetOnExit )
+    .def( "getNameState", &CEnemy::GetNameStates )
+    .def( "getCurrentState", &CEnemy::GetCurrentState )
+    .def( "getStateMachine", &CEnemy::GetStateMachine )
+    .def( "GetLife", &CEnemy::GetLife )
   ];
-  
+
   module( m_LS )
   [
-    class_<std::vector<Vect3f>>( "VectorWaypoints")
-    .def(constructor<std::vector<Vect3f>>())
-    .def("GetCount", &std::vector<Vect3f>::size)
-    .def("push_back",&vector_add<Vect3f>)
-    .def("getResource", &vector_get<Vect3f>)
-    .def("clear", &std::vector<Vect3f>::clear)
+    class_<std::vector<Vect3f>>( "VectorWaypoints" )
+    .def( constructor<std::vector<Vect3f>>() )
+    .def( "GetCount", &std::vector<Vect3f>::size )
+    .def( "push_back", &vector_add<Vect3f> )
+    .def( "getResource", &vector_get<Vect3f> )
+    .def( "clear", &std::vector<Vect3f>::clear )
   ];
   module( m_LS )
   [
@@ -95,11 +97,11 @@ void registerAI( lua_State* m_LS )
     .def( "init", &CPatrolEnemy::Init )
     .def( "update", &CPatrolEnemy::Update )
     .def( "render", &CPatrolEnemy::Render )
-    .def( "GetWaypoints", &CPatrolEnemy::GetWaypoints)
-    .def( "SetWaypoints", &CPatrolEnemy::SetWaypoints)
-    .def( "GetCurrentPoint", &CPatrolEnemy::GetCurrentPoint)
-    .def( "SetCurrentPoint", &CPatrolEnemy::SetCurrentPoint)
-    .def( "getCount", &CPatrolEnemy::getCount)
+    .def( "GetWaypoints", &CPatrolEnemy::GetWaypoints )
+    .def( "SetWaypoints", &CPatrolEnemy::SetWaypoints )
+    .def( "GetCurrentPoint", &CPatrolEnemy::GetCurrentPoint )
+    .def( "SetCurrentPoint", &CPatrolEnemy::SetCurrentPoint )
+    .def( "getCount", &CPatrolEnemy::getCount )
   ];
   module( m_LS )
   [
