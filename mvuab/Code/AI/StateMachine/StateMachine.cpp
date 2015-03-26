@@ -21,7 +21,7 @@ bool CStateMachine::Load(const std::string& FileName)
 
   if ( !l_File.LoadFile( m_FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CStateMachine::Load()->Reading the file %s", FileName.c_str() );
+    LOG_ERROR_APPLICATION( "CStateMachine::Load()->Reading the file %s", FileName.c_str() );
     return false;
   }
 
@@ -42,12 +42,12 @@ bool CStateMachine::Load(const std::string& FileName)
         CState* l_State = new CState(l_Name);
         if(!l_State->Load(l_CurrentNode))
         {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "CStateMachine::Error loading state %s", l_State->GetName().c_str() );
+          LOG_WARNING_APPLICATION( "CStateMachine::Error loading state %s", l_State->GetName().c_str() );
           CHECKED_DELETE(l_State);
         }
         if(!AddResource(l_Name, l_State))
         {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
+          LOG_WARNING_APPLICATION( "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
           CHECKED_DELETE(l_State);
         }
         else
@@ -57,7 +57,7 @@ bool CStateMachine::Load(const std::string& FileName)
   }
   else
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", FileName.c_str() );
   }
 

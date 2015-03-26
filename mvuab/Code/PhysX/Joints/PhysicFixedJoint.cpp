@@ -34,7 +34,7 @@ void CPhysicFixedJoint::SetInfo( CPhysicActor* actorA,  CPhysicActor* actorB )
 {
   if ( actorA == NULL )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CPhysicFixedJoint:: El primer actor pasado como argumento no puede ser null" );
+    LOG_ERROR_APPLICATION( "CPhysicFixedJoint:: El primer actor pasado como argumento no puede ser null" );
     return;
   }
 

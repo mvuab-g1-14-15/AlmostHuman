@@ -56,7 +56,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 	)
 	on MeshButton pressed do
 	(		
-		
+		format "Mesh button pressed\n"
 		IsEmptyDestPath PathLabel.text
 		
 		--export Mesh
@@ -78,16 +78,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		--poner parametrico
 		if selection.count > 0 then 
 		(
-							
-			for Obj in UniqueInstanceArray do
-			(
-				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-				local file = fopen filename "wb"
-				local l_ObjectMesh = SMesh()
-				l_ObjectMesh.InitFromMaxObject Obj
-				l_ObjectMesh.WriteToFile file
-				fclose file
-			)
+			ExportSelectedObjectsMeshes UniqueInstanceArray MeshDir
 			
 			if CopyTexturesCheckBox.checked then
 				(
@@ -225,17 +216,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 				return -1
 			)
 			
-			for Obj in UniqueInstanceArray do
-			(
-				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-				local file = fopen filename "wb"
-				local l_ObjectMesh = SMesh()
-				l_ObjectMesh.InitFromMaxObject Obj
-				l_ObjectMesh.WriteToFile file
-				fclose file
-			)
-			
-			format "Meshes copied on: % \n" MeshDir
+			ExportSelectedObjectsMeshes UniqueInstanceArray MeshDir
 		)
 		
 	)

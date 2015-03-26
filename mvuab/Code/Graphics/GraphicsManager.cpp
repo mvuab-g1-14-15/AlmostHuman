@@ -297,7 +297,7 @@ bool CGraphicsManager::Init( HWND hWnd, bool fullscreenMode, uint32 widthScreen,
     if ( !m_bIsOk )
     {
       std::string msg_error = "Rendermanager::Init-> Error al inicializar Direct3D";
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
+      LOG_ERROR_APPLICATION( msg_error.c_str() );
       Release();
       throw CException( __FILE__, __LINE__, msg_error );
     }
@@ -398,7 +398,7 @@ void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, floa
   }
   else
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "drawplane: ALL VALUES = 0" );
+    LOG_ERROR_APPLICATION( "drawplane: ALL VALUES = 0" );
     std::string l_msgerror = "Error, se genero un logger con la informacion";
     throw CException( __FILE__, __LINE__, l_msgerror );
   }
@@ -634,7 +634,7 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
 
   default:
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "RenderManager:: Se está intentado renderizar un quad2d con una alineacion desconocida" );
   }
   break;

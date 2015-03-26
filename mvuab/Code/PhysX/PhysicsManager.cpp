@@ -147,7 +147,7 @@ bool CPhysicsManager::Init( void )
   if ( !m_bIsOk )
   {
     std::string msg_error = "PhysicsManager::Init-> Error en la inicializacion de PhysX";
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
+    LOG_ERROR_APPLICATION( msg_error.c_str() );
     Release();
     //throw CException ( __FILE__, __LINE__, msg_error ); TODO
   }
@@ -1294,7 +1294,7 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "ERROR loading the file %s.\n", FileName );
+    LOG_WARNING_APPLICATION( "ERROR loading the file %s.\n", FileName );
     return false;
   }
 

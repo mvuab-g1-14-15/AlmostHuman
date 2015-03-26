@@ -181,7 +181,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
   }
   else
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
   }
 }
@@ -197,7 +197,7 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
   else if ( FormatType == "X8R8G8B8" )
     return X8R8G8B8;
   else
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Format Type '%s' not recognized",
+    LOG_ERROR_APPLICATION( "Format Type '%s' not recognized",
                                            FormatType.c_str() );
 
   return A8R8G8B8;

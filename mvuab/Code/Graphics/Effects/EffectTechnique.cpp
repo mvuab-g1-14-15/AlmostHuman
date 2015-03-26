@@ -161,21 +161,19 @@ void CEffectTechnique::SetupMatrices()
   if ( m_UseProjMatrix )
   {
     if ( !m_Effect->SetProjectionMatrix( l_pEffectManager->GetProjectionMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting Projection Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting Projection Matrix" );
   }
 
   if ( m_UseViewMatrix )
   {
     if ( !m_Effect->SetViewMatrix( l_pEffectManager->GetViewMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting View Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting View Matrix" );
   }
 
   if ( m_UseWorldMatrix )
   {
     if ( !m_Effect->SetWorldMatrix( l_pEffectManager->GetWorldMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
+      LOG_WARNING_APPLICATION(
                                              "CEffectTechnique::SetupMatrices->Error Setting World Matrix" );
   }
 
@@ -183,24 +181,21 @@ void CEffectTechnique::SetupMatrices()
   {
     if ( !m_Effect->SetWorldViewMatrix( l_pEffectManager->GetViewMatrix()
                                         *l_pEffectManager->GetWorldMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting World-View Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting World-View Matrix" );
   }
 
   if ( m_UseWorldViewProjectionMatrix )
   {
     if ( !m_Effect->SetWorldViewProjectionMatrix( l_pEffectManager->GetProjectionMatrix()
          *l_pEffectManager->GetViewMatrix()*l_pEffectManager->GetWorldMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting World-View-Projection Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting World-View-Projection Matrix" );
   }
 
   if ( m_UseViewProjectionMatrix )
   {
     if ( !m_Effect->SetViewProjectionMatrix( l_pEffectManager->GetProjectionMatrix()
          *l_pEffectManager->GetViewMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting View-Projection Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting View-Projection Matrix" );
   }
 
   if ( m_UseViewToLightProjectionMatrix )
@@ -208,49 +203,29 @@ void CEffectTechnique::SetupMatrices()
     Math::Mat44f l_ViewToLightProjectionMatrix = l_pEffectManager->GetViewMatrix();
     l_ViewToLightProjectionMatrix.Invert();
 	l_ViewToLightProjectionMatrix.SetIdentity();
-
-	//l_ViewToLightProjectionMatrix = l_pEffectManager->GetLightViewMatrix()*l_pEffectManager->GetShadowProjectionMatrix();
 	l_ViewToLightProjectionMatrix = l_pEffectManager->GetShadowProjectionMatrix()*l_pEffectManager->GetLightViewMatrix();
-    
-    /*l_ViewToLightProjectionMatrix = l_pEffectManager->GetShadowProjectionMatrix() *
-                                    l_ViewToLightProjectionMatrix;
-
-	l_ViewToLightProjectionMatrix = l_pEffectManager->GetLightViewMatrix() *
-                                    l_ViewToLightProjectionMatrix;*/
-
-
-
-		/*Mat44f l_ViewToLightProjectionMatrix=l_pEffectManager->GetViewMatrix();
-		l_ViewToLightProjectionMatrix.Invert();
-		l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix*l_pEffectManager->GetLightViewMatrix();
-		l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix*l_pEffectManager->GetShadowProjectionMatrix();*/
-//l_Effect->SetMatrix(m_Effect->m_ViewToLightProjectionMatrixParameter, &l_ViewToLightProjectionMatrix.GetD3DXMatrix());
 
 
     if ( !m_Effect->SetViewToLightMatrix( l_ViewToLightProjectionMatrix ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting View To Light Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting View To Light Matrix" );
   }
 
   if ( m_UseInverseProjMatrix )
   {
     if ( !m_Effect->SetInverseProjectionMatrix( l_pEffectManager->GetProjectionMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting Inverse Projection Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting Inverse Projection Matrix" );
   }
 
   if ( m_UseInverseViewMatrix )
   {
     if ( !m_Effect->SetInverseViewMatrix( l_pEffectManager->GetViewMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting Inverse View Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting Inverse View Matrix" );
   }
 
   if ( m_UseInverseWorldMatrix )
   {
     if ( !m_Effect->SetInverseWorldMatrix( l_pEffectManager->GetWorldMatrix() ) )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupMatrices->Error Setting Inverse World Matrix" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupMatrices->Error Setting Inverse World Matrix" );
   }
 }
 
@@ -268,56 +243,46 @@ bool CEffectTechnique::SetupLights()
     {
       if ( !m_Effect->SetLights( m_NumOfLights ) )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                               "CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
+        LOG_ERROR_APPLICATION("CEffectTechnique::SetupLights->Setting the num of lights to %d", m_NumOfLights );
         return false;
       }
     }
 
     if ( l_Effect->SetBoolArray( m_Effect->GetLightEnabledParameter(), &m_Effect->GetLightsEnabled()[0],
                                  MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights enabled" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights enabled" );
 
     if ( l_Effect->SetIntArray( m_Effect->GetLightsTypeParameter(), m_Effect->GetLightsType(),
                                 MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights types" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights types" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsAngleParameter(), m_Effect->GetLightsAngle(),
                                   MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights  angle parameters" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights  angle parameters" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsFallOffParameter(), m_Effect->GetLightsFallOff(),
                                   MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights fall of parameters" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights fall of parameters" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsStartRangeAttenuationParameter(),
                                   &m_Effect->GetLightsStartRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting start range" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting start range" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsEndRangeAttenuationParameter(),
                                   &m_Effect->GetLightsEndRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting end range" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting end range" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsPositionParameter(),
                                   &m_Effect->GetLightsPosition()[0].x, MAX_LIGHTS_BY_SHADER * 3 ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights position" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights position" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsDirectionParameter(),
                                   &m_Effect->GetLightsDirection()[0].x, MAX_LIGHTS_BY_SHADER * 3 ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights position" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights position" );
 
     if ( l_Effect->SetFloatArray( m_Effect->GetLightsColorParameter(), &m_Effect->GetLightsColor()[0].x,
                                   MAX_LIGHTS_BY_SHADER * 3 ) != S_OK )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CEffectTechnique::SetupLights->Error Setting lights colors" );
+      LOG_WARNING_APPLICATION("CEffectTechnique::SetupLights->Error Setting lights colors" );
   }
 
   if ( m_UseLightAmbientColor )

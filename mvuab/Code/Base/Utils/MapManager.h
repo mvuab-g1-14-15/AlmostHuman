@@ -19,7 +19,7 @@ public:
   {
     if ( m_Resources.find( Name ) == m_Resources.end() )
     {
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CMapManager::GetResource->(%s)", Name.c_str() );
+      LOG_ERROR_APPLICATION( "CMapManager::GetResource->(%s)", Name.c_str() );
       return 0;
     }
     else

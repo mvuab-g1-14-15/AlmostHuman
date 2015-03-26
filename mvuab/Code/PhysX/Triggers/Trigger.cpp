@@ -94,7 +94,7 @@ std::string CTrigger::GetLUAByName( unsigned int Type )
 
   default:
     l_Return = "";
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "GetLUABYName (Trigger) Type error" );
+    LOG_ERROR_APPLICATION( "GetLUABYName (Trigger) Type error" );
   }
 
   return l_Return;

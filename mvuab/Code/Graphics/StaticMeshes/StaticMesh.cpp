@@ -49,7 +49,7 @@ bool CStaticMesh::Load( const std::string& FileName )
 
   if ( 0 == l_pFile )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CStaticMesh::Load No se ha podido abrir \"%s\"!",
+    LOG_ERROR_APPLICATION( "CStaticMesh::Load No se ha podido abrir \"%s\"!",
                                            FileName.c_str() );
     return ( false );
   }
@@ -59,7 +59,7 @@ bool CStaticMesh::Load( const std::string& FileName )
 
   if ( l_header != 0x55ff )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CStaticMesh::Load Header incorrecto!" );
+    LOG_ERROR_APPLICATION( "CStaticMesh::Load Header incorrecto!" );
     std::fclose( l_pFile );
     return ( false );
   }
@@ -251,7 +251,7 @@ bool CStaticMesh::Load( const std::string& FileName )
 
   if ( l_footer != 0xff55 )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CStaticMesh::Load Footer incorrecto!" );
+    LOG_ERROR_APPLICATION( "CStaticMesh::Load Footer incorrecto!" );
     std::fclose( l_pFile );
     return ( false );
   }
@@ -276,7 +276,7 @@ void CStaticMesh::Render( CGraphicsManager* GM )
         if ( m_RenderableObjectTechniques[i] != NULL )
             m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
         else
-            CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "No technique in file %s", m_FileName.c_str() );
+            LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
     }
 }
 
@@ -297,7 +297,7 @@ bool CStaticMesh::GetRenderableObjectTechnique()
     if ( l_ROT ) m_RenderableObjectTechniques.push_back( l_ROT );
 
     if ( l_ROT == NULL )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+      LOG_ERROR_APPLICATION(
                                              "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh",
                                              m_RenderableObjectTechniqueName.c_str() );
 

@@ -15,7 +15,7 @@ CInstanceMesh::CInstanceMesh( const std::string& Name,
                                       CoreName ) ), CRenderableObject()
 {
   if ( !m_pStaticMesh )
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" );
 
   SetName( Name );

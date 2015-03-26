@@ -59,7 +59,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
 
         if ( !l_Texture )
         {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+          LOG_ERROR_APPLICATION(
                                                  "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str() );
           continue;
         }

@@ -12,6 +12,6 @@ CGUITexture::~CGUITexture()
 
 bool CGUITexture::LoadFile()
 {
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CGUITexture::LoadFile" );
+  LOG_ERROR_APPLICATION( "CGUITexture::LoadFile" );
   return false;
 }

@@ -230,13 +230,13 @@ bool CPhysicCookingMesh::CreateMeshFromASE( std::string _FileName, std::string _
       return true;
     else
     {
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s",
+      LOG_ERROR_APPLICATION( "Error al leer la mesh del fichero ASE: %s",
                                              _FileName );
       return false;
     }
   else
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "Error al leer la mesh del fichero ASE: %s",
+    LOG_ERROR_APPLICATION( "Error al leer la mesh del fichero ASE: %s",
                                            _FileName );
     return false;
   }

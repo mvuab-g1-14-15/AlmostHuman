@@ -1,10 +1,10 @@
 #include "XMLTreeNode.h"
 #include "Assert.h"
 #include "Logger\Logger.h"
+#include "Utils\Defines.h"
 
 // Defines
 #define MY_ENCODING "ISO-8859-1"
-
 
 //----------------------------------------------------------------------------
 // Finalize data
@@ -218,8 +218,7 @@ int CXMLTreeNode::GetIntProperty( const char* _pszKey, int _iDefault, bool warni
     iRet = atoi( ( const char* )value );
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>", _iDefault,
+      LOG_WARNING_APPLICATION( "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>", _iDefault,
                                              _pszKey );
 
   xmlFree( value );
@@ -239,8 +238,7 @@ float32 CXMLTreeNode::GetFloatProperty( const char* _pszKey, float32 _fDefault,
     fRet = static_cast<float32>( atof( ( const char* )value ) );
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::Getfloat32Property se ha utilizado el valor por defecto:%f para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::Getfloat32Property se ha utilizado el valor por defecto:%f para el tag <%s>",
                                              _fDefault, _pszKey );
 
   xmlFree( value );
@@ -267,8 +265,7 @@ bool CXMLTreeNode::GetBoolProperty( const char* _pszKey, bool _bDefault, bool wa
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>", _bDefault,
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>", _bDefault,
                                              _pszKey );
 
   xmlFree( value );
@@ -288,8 +285,7 @@ const char* CXMLTreeNode::GetPszProperty( const char* _pszKey, const char* _pszD
     pszRet = ( const char* )value;
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
                                              _pszDefault, _pszKey );
 
   return pszRet;
@@ -316,8 +312,7 @@ std::string CXMLTreeNode::GetPszISOProperty( const char* _pszKey, const char* _p
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
                                              _pszDefault, _pszKey );
 
   return szRet;
@@ -339,8 +334,7 @@ Math::Vect2f CXMLTreeNode::GetVect2fProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",
                                              _Default.x, _Default.y, _pszKey );
 
   xmlFree( value );
@@ -363,8 +357,7 @@ Math::Vect3f CXMLTreeNode::GetVect3fProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",
                                              _Default.x, _Default.y, _Default.z, _pszKey );
 
   xmlFree( value );
@@ -387,8 +380,7 @@ Math::Vect4f CXMLTreeNode::GetVect4fProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",
                                              _Default.x, _Default.y, _Default.z, _Default.w, _pszKey );
 
   xmlFree( value );
@@ -411,8 +403,7 @@ Math::Vect2i CXMLTreeNode::GetVect2iProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>",
                                              _Default.x, _Default.y, _pszKey );
 
   xmlFree( value );
@@ -435,8 +426,7 @@ Math::Vect3i CXMLTreeNode::GetVect3iProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",
                                              _Default.x, _Default.y, _Default.z, _pszKey );
 
   xmlFree( value );
@@ -459,8 +449,7 @@ Math::Vect4i CXMLTreeNode::GetVect4iProperty( const char* _pszKey, const Math::V
   }
   else
     if ( warningDefault )
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING,
-                                             "CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>",
+      LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>",
                                              _Default.x, _Default.y, _Default.z, _Default.w, _pszKey );
 
   xmlFree( value );

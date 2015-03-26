@@ -20,7 +20,7 @@ bool CCubedTexture::LoadFile()
 
   if ( l_HR != D3D_OK )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CCubedTexture::LoadFile error al cargar %s\n",
+    LOG_ERROR_APPLICATION( "CCubedTexture::LoadFile error al cargar %s\n",
                                            m_FileName );
     return false;
   }

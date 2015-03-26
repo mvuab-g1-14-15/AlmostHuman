@@ -156,7 +156,7 @@ void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDL
 
   if ( !a_Handle )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(),
                                            m_FileName.c_str() );
     assert( false );
@@ -169,7 +169,7 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
 
   if ( !a_Handle )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName, m_FileName.c_str() );
     assert( false );
   }
@@ -333,7 +333,7 @@ bool CEffect::SetLight( size_t i_light )
 
   if ( !l_pCurrentLight )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "CEffect::SetLight->The light %d was not found in the light manager\n", ( int )i_light );
     return false;
   }

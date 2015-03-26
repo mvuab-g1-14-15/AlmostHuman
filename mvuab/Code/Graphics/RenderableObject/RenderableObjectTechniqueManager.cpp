@@ -26,7 +26,7 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
 
   if ( !l_File.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "ERROR reading the file %s", FileName.c_str() );
+    LOG_ERROR_APPLICATION( "ERROR reading the file %s", FileName.c_str() );
     return;
   }
 
@@ -70,7 +70,7 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
   }
   else
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", FileName.c_str() );
   }
 }

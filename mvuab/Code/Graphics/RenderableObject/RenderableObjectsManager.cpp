@@ -23,7 +23,7 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "CStaticMeshManager::Load --> Error loading XML %s.", FileName.c_str() );
     return false;
   }
@@ -32,7 +32,7 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 
   if ( !m.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "CStaticMeshManager::Load --> Error reading %s, static_mesh_manager no existeix.",
                                            FileName.c_str() );
     return false;

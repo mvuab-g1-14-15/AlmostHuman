@@ -127,7 +127,7 @@ void CEffectManager::Load( const std::string& FileName )
 
   if ( !newFile.LoadFile( m_Filename.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Load No se puede abrir \"%s\"!",
+    LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",
                                            m_Filename.c_str() );
     return;
   }
@@ -137,7 +137,7 @@ void CEffectManager::Load( const std::string& FileName )
 
   if ( !l_Node.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Load Tag \"%s\" no existe",
+    LOG_ERROR_APPLICATION( "CEffectManager::Load Tag \"%s\" no existe",
                                            "effects" );
     return;
   }
@@ -170,7 +170,7 @@ void CEffectManager::Load( const std::string& FileName )
           if ( !l_pEffect->Load( l_CurrentSubNode ) )
           {
             std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-            CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
+            LOG_ERROR_APPLICATION( msg_error.c_str() );
             CHECKED_DELETE( l_pEffect );
           }
           else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
@@ -186,7 +186,7 @@ void CEffectManager::Load( const std::string& FileName )
 
       if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Error adding the new effect technique \"%s\ with effect \"%s\"!", l_TechniquetName.c_str(), l_EffectName.c_str() );
+        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique \"%s\ with effect \"%s\"!", l_TechniquetName.c_str(), l_EffectName.c_str() );
         CHECKED_DELETE( l_NewTechnique );
       }
 

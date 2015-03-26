@@ -22,7 +22,7 @@ bool CLightManager::Load( const std::string& FileName )
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CLightManager::Load --> Error loading XML %s.",
+    LOG_ERROR_APPLICATION( "CLightManager::Load --> Error loading XML %s.",
                                            FileName.c_str() );
     return false;
   }
@@ -32,7 +32,7 @@ bool CLightManager::Load( const std::string& FileName )
 
   if ( !m.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
+    LOG_ERROR_APPLICATION(
                                            "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
     return false;
   }

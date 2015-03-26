@@ -23,8 +23,7 @@ bool CTriggerManager::LoadXML( const std::string& FileName )
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "CTriggerManager::LoadXML=> ERROR loading the file %s.\n", FileName.c_str() );
+    LOG_ERROR_APPLICATION( "CTriggerManager::LoadXML=> ERROR loading the file %s.\n", FileName.c_str() );
     return false;
   }
 

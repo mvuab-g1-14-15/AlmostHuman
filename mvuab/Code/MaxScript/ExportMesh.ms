@@ -537,6 +537,11 @@ struct SMesh
 		/*actualObj = copy Obj
 		convertToMesh actualObj */
 		
+		if  classof Obj == SplineShape then
+		(
+			throw "SplineShape =>" Obj.name
+		)
+		
 		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 		actualObj = newObj[1]
 		convertToMesh actualObj

@@ -66,9 +66,8 @@ fn GetReferences =
 fn GetUniqueInstances = 
 (
 	local uniqueInstance = #()
-	for obj in geometry do
+	for obj in selection do
 	(
-		
 		if (InstanceMgr.GetInstances obj &instances) > 1 then
 		(
 			if findItem uniqueInstance instances[1] == 0 do
@@ -91,5 +90,27 @@ fn IsEmptyDestPath SrcPath =
 		format "Destination Path undefined, please choose a path \n"
 		return -1 
 	)
+)
+
+fn ExportSelectedObjectsMeshes aListObjects MeshDir =
+(
+	for Obj in aListObjects do
+	(
+		try
+		(
+			filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+			local file = fopen filename "wb"
+			local l_ObjectMesh = SMesh()
+			l_ObjectMesh.InitFromMaxObject Obj
+			l_ObjectMesh.WriteToFile file
+			fclose file
+		)
+		catch
+		(
+			format "%\n" (getCurrentException())
+		)
+	)
+	
+	format "Check the meshes directory: % \n" MeshDir
 )
 	

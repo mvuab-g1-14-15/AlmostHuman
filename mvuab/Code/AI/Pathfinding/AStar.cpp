@@ -179,6 +179,6 @@ CAStar::GetPath( Math::Vect3f init_pos, Math::Vect3f final_pos )
   }
 
   //Path not found
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, "Path not found in AStar" );
+  LOG_WARNING_APPLICATION( "Path not found in AStar" );
   return path;
 }
