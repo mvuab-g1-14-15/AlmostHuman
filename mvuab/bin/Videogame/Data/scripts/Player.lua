@@ -1,8 +1,7 @@
 
 class "CPlayer"
 
-function CPlayer:__init()
-    
+function CPlayer:__init() 
     self.m_Life = 100.0
     self.m_RunSpeed = 15.0
     self.m_WalkSpeed = 10.0
@@ -13,6 +12,12 @@ function CPlayer:__init()
 
     self.m_Crouch = false
     self.m_Up = true
+    
+    -- Camera shake
+    self.m_Amplitude = 0.05
+    self.m_ElapsedTime = 0.0
+    self.m_ModAmplitude = -0.01
+    self.m_StartAmplitude = self.m_Amplitude
 
     -- Setting roooms
     self.rooms = {Vect3f( 0, 2, 1 ), Vect3f( 8, -10, 18 ), Vect3f( 40, -15, -8), Vect3f( 141, 35, -17 ), Vect3f( 104, 22, 198 )}
@@ -29,6 +34,7 @@ function CPlayer:__init()
 
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
 
+    math.randomseed(os.time())
     core:trace("Character Initialized")
 end
 
@@ -54,7 +60,7 @@ end
 function CPlayer:Update()
     local l_Dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()
        
-    local l_Run = false   
+    local l_Run = false     
     local l_Strafe = 0
     local l_Forward = 0
     
@@ -133,9 +139,36 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     m_CharacterController:Move(l_AddPos, l_Dt)
     m_CharacterController:SetYaw(Yaw)
 
-    local l_position = Vect3f(m_CharacterController:GetPosition())
-	l_position.y = l_position.y + (m_CharacterController:GetHeight()*2/3)
-	l_Camera:SetPos(l_position)
+    local l_Position = Vect3f(m_CharacterController:GetPosition())
+	l_Position.y = l_Position.y + (m_CharacterController:GetHeight()*2/3)
+    
+    l_Position = self:CameraShake(l_Position, l_Dt)
+	l_Camera:SetPos(l_Position)
+end
+
+function CPlayer:CameraShake(l_Position, l_Dt)
+    self.m_ElapsedTime = self.m_ElapsedTime + l_Dt;
+    self.m_Amplitude = self.m_Amplitude + self.m_ModAmplitude * l_Dt;
+    
+    local l_Camera = Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera()
+    local l_Pitch = l_Camera:GetPitch()
+    local l_Yaw = l_Camera:GetYaw()
+    
+    l_Pitch = math.sin(self.m_ElapsedTime) * self.m_Amplitude
+    l_Yaw = math.sin(self.m_ElapsedTime) * self.m_Amplitude
+    
+    l_Camera:AddPitch(l_Pitch)
+    l_Camera:AddYaw(l_Yaw)
+ 
+    --l_Position.x =  l_Position.x + math.sin(self.m_ElapsedTime) * self.m_Amplitude;
+    --l_Position.y =  l_Position.y + math.sin(self.m_ElapsedTime) * self.m_Amplitude;
+    --l_Position.z =  l_Position.z + math.sin(self.m_ElapsedTime) * self.m_Amplitude;
+    
+    if(self.m_Amplitude < 0.0 or self.m_Amplitude > self.m_StartAmplitude) then
+        self.m_ModAmplitude = -1 * self.m_ModAmplitude
+    end
+    
+    return l_Position
 end
 
 function CPlayer:CambiarSala()

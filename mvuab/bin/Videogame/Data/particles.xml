@@ -28,7 +28,7 @@
         Width="10.0 50.0"
         Height="10.0 50.0"
         
-        NumParticles="200"
+        NumParticles="0"
 		Min="10" Max="50"
 		Texture="Data/textures/smoke.png"
     />
