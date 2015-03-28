@@ -97,6 +97,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pActionManager );
   CHECKED_DELETE( m_pFontManager );
   CHECKED_DELETE( m_pLanguageManager );
+  CHECKED_DELETE( m_pEnemyManager );
   CHECKED_DELETE( m_pStaticMeshManager );
   CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
@@ -110,7 +111,6 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pPhysicsManager );
-  CHECKED_DELETE( m_pEnemyManager );
   CHECKED_DELETE( m_pTriggerManager );
   CHECKED_DELETE( m_pBillboard );
   CHECKED_DELETE( m_pParticleManager );

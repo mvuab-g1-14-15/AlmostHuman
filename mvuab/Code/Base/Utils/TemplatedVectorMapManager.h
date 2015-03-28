@@ -51,6 +51,8 @@ public:
 
     if ( it == m_ResourcesMap.end() ) return;
 
+    CHECKED_DELETE( it->second.m_Value );
+
     l_ID = m_ResourcesMap[Name].m_Id;
     m_ResourcesMap.erase( it );
     m_ResourcesVector.erase( m_ResourcesVector.begin() + l_ID );
