@@ -20,18 +20,6 @@
     <ClCompile Include="Math\LerpAnimator3D.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
     <ClCompile Include="Memory\MemLeaks.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\AIFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\EnumDefinitions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\VideogameFunctions.cpp" />
-    <ClCompile Include="ScriptManager\ScriptManager.cpp" />
     <ClCompile Include="Timer\CountDownTimer.cpp" />
     <ClCompile Include="Timer\Timer.cpp" />
     <ClCompile Include="XML\Example.cpp">
@@ -45,7 +33,6 @@
     <ClInclude Include="Exceptions\Exception.h" />
     <ClInclude Include="Language\LanguageManager.h" />
     <ClInclude Include="Logger\Logger.h" />
-    <ClInclude Include="LuaEnumBinder.h" />
     <ClInclude Include="Math\AABB.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\LerpAnimator1D.h" />
@@ -62,18 +49,6 @@
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Memory\MemLeaks.h" />
     <ClInclude Include="Quaternion.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\EnumDefinitions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\VideogameFunctions.h" />
-    <ClInclude Include="ScriptManager\ScriptManager.h" />
     <ClInclude Include="Timer\CountDownTimer.h" />
     <ClInclude Include="Timer\Timer.h" />
     <ClInclude Include="Utils\BaseUtils.h" />
@@ -151,7 +126,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\Code\Base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -172,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\Code\Base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -35,7 +35,7 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
     if(it1 == m_mActions.end())
         return(false);
 
-    VecInputs vector = m_mActions[action];
+    VecInputs vector = it1->second;
     VecInputs::iterator itb = vector.begin(), ite = vector.end();
 
     bool doIt = true;

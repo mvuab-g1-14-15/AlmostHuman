@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ScriptManager">
+      <UniqueIdentifier>{9820696e-7072-4253-aa04-af399cdfa49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager\FunctionsToRegister">
+      <UniqueIdentifier>{fcbeafd7-7e18-4756-8de4-a446fbd9e9fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ScriptManager\ScriptManager.h">
+      <Filter>ScriptManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\VideogameFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\EnumDefinitions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ScriptManager\ScriptManager.cpp">
+      <Filter>ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\VideogameFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\EnumDefinitions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager\FunctionsToRegister\AIFunctions.cpp">
+      <Filter>ScriptManager\FunctionsToRegister</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

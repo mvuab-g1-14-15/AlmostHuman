@@ -47,7 +47,7 @@ inline std::vector<std::string> Split( const std::string& s, char delim )
 inline char* ToCharPtr( const std::string& s )
 {
   char* cstr = new char[s.length() + 1];
-  strcpy( cstr, s.c_str() );
+  strcpy_s(cstr, s.length() + 1, s.c_str() );
   return cstr;
 }
 

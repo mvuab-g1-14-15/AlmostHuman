@@ -178,9 +178,9 @@ void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
 
   for ( int i = 0; i < count; ++i )
   {
-    const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty( "value", Math::Vect3f( 0, -99999999, 0 ) );
+    const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty( "value", Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) );
 
-    if ( l_Point != Math::Vect3f( 0, -99999999, 0 ) )
+    if ( l_Point != Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) )
       l_Route.push_back( l_Point );
     else
       LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
