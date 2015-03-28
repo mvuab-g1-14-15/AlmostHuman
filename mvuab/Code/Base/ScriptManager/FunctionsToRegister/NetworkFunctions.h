@@ -1,4 +1,0 @@
-#ifndef NETWORKFUNCTIONS_H
-#define NETWORKFUNCTIONS_H
-
-#endif
