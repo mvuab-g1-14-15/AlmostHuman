@@ -2,7 +2,7 @@
 #include "Utils\Defines.h"
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 #include "Core.h"
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
@@ -76,7 +76,7 @@ void CEnemy::Render()
 
 void CEnemy::AddMesh( std::string MeshName )
 {
-  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "solid" );
+  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
 
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );
@@ -84,7 +84,6 @@ void CEnemy::AddMesh( std::string MeshName )
   m_pRenderableObject->SetYaw( m_fYaw );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
-  m_pRenderableObject->SetScale( Math::Vect3f( 0.005f ) );
 
   m_pRenderableObject->MakeTransform();
 }

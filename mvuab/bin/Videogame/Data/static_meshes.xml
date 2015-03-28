@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="Logan" filename="\meshes\Logan.mesh" />
+  <static_mesh name="enemy_android" filename="\meshes\enemy_android.mesh" />
   <static_mesh name="enemy_low_patrol" filename="\meshes\enemy_low_patrol.mesh" />
   <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
   <static_mesh name="Box002" filename="\meshes\Box002.mesh" />
@@ -91,5 +93,4 @@
   <static_mesh name="Plane012" filename="\meshes\Plane012.mesh" />
   <static_mesh name="Sphere001" filename="\meshes\Sphere001.mesh" />
   <static_mesh name="StraightStair009" filename="\meshes\StraightStair009.mesh" />
-
 </static_meshes>

@@ -33,6 +33,7 @@
 #include "SceneRenderComands\DisableZTestSceneRendererCommand.h"
 #include "SceneRenderComands\ParticleRendererCommand.h"
 #include "SceneRenderComands\WeaponTargetRendererCommand.h"
+#include "SceneRenderComands\RenderDebugCamerasCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -130,9 +131,11 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
   CommandFactory.Register( "render_developer_info",
                            Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
   CommandFactory.Register( "render_particules",
-                            Type2Type<CParticleRenderCommand>( ) );
+                           Type2Type<CParticleRenderCommand>( ) );
   CommandFactory.Register( "render_weapon_target",
-                            Type2Type<CWeaponTargetRendererCommand>( ) );
+                           Type2Type<CWeaponTargetRendererCommand>( ) );
+  CommandFactory.Register( "render_debug_cameras",
+                           Type2Type<CRenderDebugCamerasCommand>( ) );
 
   CXMLTreeNode l_File;
 

@@ -231,6 +231,9 @@
     <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderDebugCamerasCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -470,6 +473,9 @@
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderDebugCamerasCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

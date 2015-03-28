@@ -68,6 +68,7 @@
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\RenderDebugCamerasCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\RenderDebugCamerasCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />

@@ -27,12 +27,23 @@ function CPlayer:__init()
     --Init Manager
     self:InitManagers()
 
-	m_PhysicManager:AddController("CharacterController", 0.4, self.m_Height, 0.2, 0.5, 0.5, position, CollisionGroup.ECG_PLAYER.value, -10.0)
+	m_PhysicManager:AddController("Logan", 0.4, self.m_Height, 0.2, 0.5, 0.5, position, CollisionGroup.ECG_PLAYER.value, -10.0)
 
     --Init Controllers
     self:InitControllers()
 
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
+	
+	self.m_pRenderableObject = CInstanceMesh("Logan", "Logan");
+	m_ROM:AddResource("Logan", self.m_pRenderableObject)
+	
+	l_pos = m_CharacterController:GetPosition()
+	l_pos.y = l_pos.y - 1.4
+	self.m_pRenderableObject:SetPosition( l_pos );
+	self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 );
+	self.m_pRenderableObject:SetScale( Vect3f(0.09) );
+
+	self.m_pRenderableObject:MakeTransform();
 
     math.randomseed(os.time())
     core:trace("Character Initialized")
@@ -44,12 +55,14 @@ function CPlayer:InitManagers()
     m_Process = Singleton_Engine.get_singleton():GetProcess()
     m_ActionManager = Singleton_Core.get_singleton():GetActionManager()
     m_CameraManager = Singleton_Core.get_singleton():GetCameraManager()
+	l_ROLM = Singleton_Core.get_singleton():GetRenderableObjectsLayersManager()
+	m_ROM = l_ROLM:GetResource("characters")
 end
 
 function CPlayer:InitControllers()
     Singleton_Core.get_singleton():trace("Init Controllers")
-    m_CharacterController = m_PhysicManager:GetController("CharacterController")
-    m_UserDataCharacterController = m_PhysicManager:GetUserData("CharacterController")
+    m_CharacterController = m_PhysicManager:GetController("Logan")
+    m_UserDataCharacterController = m_PhysicManager:GetUserData("Logan")
     m_CharacterController = m_UserDataCharacterController:GetController()
 end
 
@@ -113,6 +126,13 @@ function CPlayer:Update()
 	if m_ActionManager:DoAction("ChangeRoom") then
 		self:CambiarSala()
 	end
+	
+	l_pos = m_CharacterController:GetPosition()
+	l_pos.y = l_pos.y - 1.45
+	self.m_pRenderableObject:SetPosition( l_pos );
+	self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 );
+
+	self.m_pRenderableObject:MakeTransform();
 end
 
 function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
@@ -142,8 +162,11 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
     local l_Position = Vect3f(m_CharacterController:GetPosition())
 	l_Position.y = l_Position.y + (m_CharacterController:GetHeight()*2/3)
     
+	local l_Yaw = m_CharacterController:GetYaw()
+	local l_LookAt = Vect3f(math.cos(l_Yaw) + math.cos(l_Yaw + 3.141618 * 0.5), 0, math.sin(l_Yaw) + math.sin(l_Yaw + 3.141618 * 0.5))
+	l_LookAt:Normalize()
     l_Position = self:CameraShake(l_Position, l_Dt)
-	l_Camera:SetPos(l_Position)
+	l_Camera:SetPos(l_Position + l_LookAt*0.1)
 end
 
 function CPlayer:CameraShake(l_Position, l_Dt)

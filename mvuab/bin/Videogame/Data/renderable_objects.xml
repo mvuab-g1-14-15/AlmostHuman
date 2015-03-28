@@ -91,4 +91,5 @@
   <MeshInstance name="Plane012" core="Plane012" pos="193.867 6.06884 511.268" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Sphere001" core="Sphere001" pos="104.582 22.6539 198.798" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="StraightStair009" core="StraightStair009" pos="14.0963 -13.3454 37.9198" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <layer name="characters" />
 </RenderableObjects>

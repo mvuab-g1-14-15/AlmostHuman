@@ -23,7 +23,7 @@ bool CLightManager::Load( const std::string& FileName )
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "CLightManager::Load --> Error loading XML %s.",
-                                           FileName.c_str() );
+                           FileName.c_str() );
     return false;
   }
 
@@ -33,7 +33,7 @@ bool CLightManager::Load( const std::string& FileName )
   if ( !m.Exists() )
   {
     LOG_ERROR_APPLICATION(
-                                           "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
+      "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
     return false;
   }
 
@@ -52,22 +52,20 @@ bool CLightManager::Load( const std::string& FileName )
         if ( !AddResource( l_Light->GetName(), l_Light ) )
           delete l_Light;
       }
-      else
-        if ( l_Type == "omni" )
-        {
-          COmniLight* l_Light = new COmniLight( m( i ) );
+      else if ( l_Type == "omni" )
+      {
+        COmniLight* l_Light = new COmniLight( m( i ) );
 
-          if ( !AddResource( l_Light->GetName(), l_Light ) )
-            delete l_Light;
-        }
-        else
-          if ( l_Type == "targetSpot" )
-          {
-            CSpotLight* l_Light = new CSpotLight( m( i ) );
+        if ( !AddResource( l_Light->GetName(), l_Light ) )
+          delete l_Light;
+      }
+      else if ( l_Type == "targetSpot" )
+      {
+        CSpotLight* l_Light = new CSpotLight( m( i ) );
 
-            if ( !AddResource( l_Light->GetName(), l_Light ) )
-              delete l_Light;
-          }
+        if ( !AddResource( l_Light->GetName(), l_Light ) )
+          delete l_Light;
+      }
     }
   }
 

@@ -22,7 +22,7 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-  CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "CharacterController" );
+  CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "Logan" );
   CPhysicController* l_CharacterController = l_PUD->GetController();
   Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_Controller->GetPosition();
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
@@ -106,5 +106,5 @@ void CCharacter::Init( CXMLTreeNode& Node )
 
 ECollisionGroup CCharacter::GetCollisionGroup()
 {
-	return ECG_ENEMY;
+  return ECG_ENEMY;
 }

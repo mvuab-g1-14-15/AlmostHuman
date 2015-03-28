@@ -24,7 +24,7 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
     LOG_ERROR_APPLICATION(
-                                           "CStaticMeshManager::Load --> Error loading XML %s.", FileName.c_str() );
+      "CStaticMeshManager::Load --> Error loading XML %s.", FileName.c_str() );
     return false;
   }
 
@@ -33,8 +33,8 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
   if ( !m.Exists() )
   {
     LOG_ERROR_APPLICATION(
-                                           "CStaticMeshManager::Load --> Error reading %s, static_mesh_manager no existeix.",
-                                           FileName.c_str() );
+      "CStaticMeshManager::Load --> Error reading %s, static_mesh_manager no existeix.",
+      FileName.c_str() );
     return false;
   }
 
@@ -73,7 +73,11 @@ void CRenderableObjectsManager::CleanUp()
 void CRenderableObjectsManager::Render()
 {
   for ( unsigned int i = 0; i < m_ResourcesVector.size(); ++i )
-          m_ResourcesVector[i]->Render();
+  {
+    std::string name = m_ResourcesVector[i]->GetName();
+
+    m_ResourcesVector[i]->Render();
+  }
 }
 
 void CRenderableObjectsManager::Update()
