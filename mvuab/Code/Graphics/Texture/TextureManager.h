@@ -13,10 +13,10 @@
 class CTextureManager : public CMapManager<CTexture>, public CSingleton<CTextureManager>
 {
 public:
-    CTextureManager();
-    ~CTextureManager();
-    void Reload ();
-    CTexture* GetTexture(const std::string fileName );
+  CTextureManager();
+  ~CTextureManager();
+  void Reload();
+  CTexture* GetTexture( const std::string& fileName );
 };
 
 #endif //INC_TEXTURE_MANAGER_H

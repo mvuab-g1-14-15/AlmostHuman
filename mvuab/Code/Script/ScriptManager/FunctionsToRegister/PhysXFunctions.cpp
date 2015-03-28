@@ -27,10 +27,10 @@ bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* Ph
   return PhysicManager->AddPhysicController( PhysicController );
 }
 
-void Move_PhysicController( CPhysicController* PhysicController, const Math::Vect3f &Direction, float Dt )
+void Move_PhysicController( CPhysicController* PhysicController, const Math::Vect3f& Direction, float Dt )
 {
-	const Math::Vect3f &DirectionConst = Direction;
-	PhysicController->Move( DirectionConst, Dt);
+  const Math::Vect3f& DirectionConst = Direction;
+  PhysicController->Move( DirectionConst, Dt );
 }
 
 template<class T>
@@ -88,7 +88,7 @@ void registerPhysX( lua_State* m_LS )
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
     .def( "RaycastClosestActor", &CPhysicsManager::RaycastClosestActor )
-	.def( "RaycastClosestActorName", &CPhysicsManager::RaycastClosestActorName )
+    .def( "RaycastClosestActorName", &CPhysicsManager::RaycastClosestActorName )
     //Adds
     .def( "AddPhysicActor", &CPhysicsManager::AddPhysicActor )
     .def( "AddPhysicRevoluteJoint", &CPhysicsManager::AddPhysicRevoluteJoint )
@@ -116,14 +116,13 @@ void registerPhysX( lua_State* m_LS )
 
   ];
   module( m_LS ) [
-    class_<CPhysicController>( "CPhysicController" )
+    class_<CPhysicController, CObject3D>( "CPhysicController" )
     .def( constructor<float, float, float, float, float, ECollisionGroup, CPhysicUserData*, const Math::Vect3f&, float>() )
     .def( "Move", ( void ( CPhysicController::* )( const Math::Vect3f&, float ) )&CPhysicController::Move )
-	//.def( "Move", &Move_PhysicController )
+    //.def( "Move", &Move_PhysicController )
     .def( "Jump", &CPhysicController::Jump )
     .def( "GetPosition", &CPhysicController::GetPosition )
     .def( "SetPosition", &CPhysicController::SetPosition )
-    .def( "SetYaw", &CPhysicController::SetYaw )
     .def( "SetHeight", &CPhysicController::SetHeight )
     .def( "GetHeight", &CPhysicController::GetHeight )
     .def( "UpdateCharacterExtents", &CPhysicController::UpdateCharacterExtents )

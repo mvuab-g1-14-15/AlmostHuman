@@ -17,7 +17,7 @@ void CTextureManager::Reload()
     itb->second->Reload();
 }
 
-CTexture* CTextureManager::GetTexture( const std::string fileName )
+CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
   if ( m_Resources.find( fileName ) == m_Resources.end() )
   {

@@ -5,6 +5,7 @@
 
 #include "RenderableObject\RenderableObject.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject/RenderableObjectsLayersManager.h"
 #include "Utils\Name.h"
 #include "Math\Color.h"
 
@@ -34,9 +35,9 @@ extern "C"
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
+#include "StaticMeshes/InstanceMesh.h"
 
 using namespace luabind;
-
 
 void registerGraphics( lua_State* m_LS )
 {
@@ -54,6 +55,8 @@ void registerGraphics( lua_State* m_LS )
     .def( "SetRoll", &CObject3D::SetRoll )
     .def( "SetPitch", &CObject3D::SetPitch )
     .def( "SetPosition", &CObject3D::SetPosition )
+    .def( "SetScale", &CObject3D::SetScale )
+    .def( "MakeTransform", &CObject3D::MakeTransform )
   ];
   module( m_LS )
   [
@@ -93,6 +96,20 @@ void registerGraphics( lua_State* m_LS )
   module( m_LS )
   [
     class_<CRenderableObject, bases<CObject3D, CName>>( "CRenderableObject" )
+  ];
+  module( m_LS )
+  [
+    class_<CInstanceMesh, CRenderableObject>( "CInstanceMesh" )
+    .def( constructor<const std::string&, const std::string&>() )
+  ];
+  module( m_LS )
+  [
+    class_<CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CTemplatedVectorMapManagerCRenderableObjectManager" )
+  ];
+  module( m_LS )
+  [
+    class_<CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CRenderableObjectsManager" )
+    .def( "GetResource", &CRenderableObjectsLayersManager::GetResource )
   ];
   module( m_LS )
   [

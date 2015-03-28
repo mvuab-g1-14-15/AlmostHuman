@@ -13,6 +13,7 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "ScriptManager\ScriptManager.h"
 #include "Cameras\CameraManager.h"
 #include "Lights\LightManager.h"
@@ -75,6 +76,7 @@ void registerCore( lua_State* m_LS )
     .def( "GetRenderableObjectsManager", &CCore::GetRenderableObjectsManager )
     .def( "GetScriptManager", &CCore::GetScriptManager )
     .def( "GetStaticMeshManager", &CCore::GetStaticMeshManager )
+    .def( "GetRenderableObjectsLayersManager", &CCore::GetRenderableObjectsLayersManager )
     .def( "GetTextureManager", &CCore::GetTextureManager )
     .def( "GetCameraManager", &CCore::GetCameraManager )
     .def( "GetTimer", &CCore::GetTimer )

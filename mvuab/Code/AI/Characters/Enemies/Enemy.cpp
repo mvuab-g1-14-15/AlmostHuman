@@ -2,7 +2,7 @@
 #include "Utils\Defines.h"
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
-#include "ScriptManager.h"
+#include "ScriptManager/ScriptManager.h"
 #include "Core.h"
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
