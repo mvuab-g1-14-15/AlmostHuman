@@ -23,7 +23,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "solid" );
+  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
 }
 
