@@ -39,8 +39,17 @@ extern "C"
 
 using namespace luabind;
 
+CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
+{
+  return new CInstanceMesh( Name, CoreName );
+}
+
 void registerGraphics( lua_State* m_LS )
 {
+  module( m_LS )
+  [
+    def( "CreateInstanceMesh", &CreateInstanceMesh )
+  ];
   module( m_LS )
   [
     class_<CObject3D>( "CObject3D" )
@@ -100,7 +109,6 @@ void registerGraphics( lua_State* m_LS )
   module( m_LS )
   [
     class_<CInstanceMesh, CRenderableObject>( "CInstanceMesh" )
-    .def( constructor<const std::string&, const std::string&>() )
   ];
   module( m_LS )
   [

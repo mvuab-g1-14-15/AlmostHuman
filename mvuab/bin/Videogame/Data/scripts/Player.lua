@@ -34,7 +34,7 @@ function CPlayer:__init()
 
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
 	
-	self.m_pRenderableObject = CInstanceMesh("Logan", "Logan");
+	self.m_pRenderableObject = CreateInstanceMesh("Logan", "Logan");
 	m_ROM:AddResource("Logan", self.m_pRenderableObject)
 	l_pos = m_CharacterController:GetPosition()
 	l_pos.y = l_pos.y - 1.4
