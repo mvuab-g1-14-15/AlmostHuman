@@ -15,7 +15,7 @@
 #include "Timer\Timer.h"
 #include "Periphericals\Mouse.h"
 
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 #include "StaticMeshes\StaticMeshManager.h"
 #include "StaticMeshes\InstanceMesh.h"
 #include "StaticMeshes\StaticMesh.h"

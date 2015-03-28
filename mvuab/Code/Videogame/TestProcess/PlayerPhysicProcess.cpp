@@ -11,7 +11,7 @@
 #include "Logger\Logger.h"
 #include "Utils\Defines.h"
 #include "Fonts\FontManager.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 
 //CORE
 #include "Core.h"

@@ -1,5 +1,5 @@
 #include "Action.h"
-#include "ScriptManager/ScriptManager.h"
+#include "ScriptManager.h"
 #include "Core.h"
 
 CAction::CAction( CXMLTreeNode& Node )

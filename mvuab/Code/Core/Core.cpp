@@ -13,7 +13,7 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 #include "Cameras\CameraManager.h"
 #include "Effects\EffectManager.h"
 #include "Lights\LightManager.h"
