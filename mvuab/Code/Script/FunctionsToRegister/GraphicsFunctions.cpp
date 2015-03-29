@@ -211,7 +211,7 @@ void registerGraphics( lua_State* m_LS )
     class_<CCameraManager>( "CCameraManager" )
     .def( constructor<>() )
     .def( "GetCamera", &CCameraManager::GetCamera )
-    //.def("SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
+    .def( "SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
     .def( "GetCurrentCamera", &CCameraManager::GetCurrentCamera )
     .def( "NewCamera", &CCameraManager::NewCamera )
     .def( "DeleteCamera", &CCameraManager::DeleteCamera )

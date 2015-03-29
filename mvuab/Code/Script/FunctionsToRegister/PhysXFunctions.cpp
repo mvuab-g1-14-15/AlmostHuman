@@ -5,6 +5,7 @@
 #include "PhysicsManager.h"
 #include "Utils\Name.h"
 #include "PhysicsDefs.h"
+#include "Utils\Defines.h"
 
 #include <set>
 
@@ -50,6 +51,12 @@ size_t set_getIdByResource( std::set<T>& vec, T val )
   }
 
   return 0;
+}
+
+template<class T>
+void removeResource( T val )
+{
+  CHECKED_DELETE(val);
 }
 
 void registerPhysX( lua_State* m_LS )
@@ -98,18 +105,20 @@ void registerPhysX( lua_State* m_LS )
                         bool, const Math::Vect3f&, const Math::Vect3f&, const Math::Vect3f&,
                         NxCCDSkeleton*, uint32 ) )&CPhysicsManager::AddActor )
     .def( "AddController", &CPhysicsManager::AddController )
+    .def( "AddMesh", &CPhysicsManager::AddMesh )
     //Release
     .def( "ReleasePhysicActor", &CPhysicsManager::ReleasePhysicActor )
     .def( "ReleasePhysicController", &CPhysicsManager::ReleasePhysicController )
+    .def( "RemoveUserData", &removeResource<CPhysicUserData*> )
     .def( "Load", &CPhysicsManager::Load )
     .def( "Init", &CPhysicsManager::Init )
     .def( "Done", &CPhysicsManager::Done )
     .def( "Reload", &CPhysicsManager::Reload )
     .def( "ReloadXML", &CPhysicsManager::ReloadXML )
     //Gets
-    .def( "GetActor", &CPhysicsManager::GetActor )
     .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
           &CPhysicsManager::GetUserData )
+
     .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
     .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )

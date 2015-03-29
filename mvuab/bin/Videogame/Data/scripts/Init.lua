@@ -28,5 +28,5 @@ function update_gameplay()
 	else
 		g_Player:Update()
 	end
-	
+	CheckLevel()
 end
