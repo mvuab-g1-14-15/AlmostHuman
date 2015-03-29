@@ -60,13 +60,13 @@ public:
     for ( uint16 i = static_cast<uint16>( l_ID ); i < m_ResourcesVector.size();
           ++i )
     {
-      T* l_TElement = m_ResourcesVector[l_ID];
+      T* l_TElement = m_ResourcesVector[i];
       TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
 
       while ( l_ItMap->second.m_Value != l_TElement )
         ++l_ItMap;
 
-      l_ItMap->second.m_Id = l_ID;
+      l_ItMap->second.m_Id = i;
     }
   }
 
