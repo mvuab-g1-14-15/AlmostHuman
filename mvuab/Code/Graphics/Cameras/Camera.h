@@ -6,12 +6,12 @@
 #include "Math\Vector3.h"
 #include "Frustum.h"
 #include "Utils\Name.h"
+#include "Object3D.h"
 
 #include <d3dx9.h>
 
-class CCamera : public CName
+class CCamera : public CName, public CObject3D
 {
-
 public:
 
     enum Type{ Free = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
@@ -30,20 +30,17 @@ public:
     D3DXMATRIX  GetMatrixProj( void );
 
     GET_SET( Type, CameraType )
-    GET_SET( float32, Yaw )
-    GET_SET( float32, Pitch )
     GET_SET( float32, ZNear )
     GET_SET( float32, ZFar )
-    GET_SET( float32, aspect_ratio )
+    GET_SET( float32, AspectRatio )
     GET_SET( bool, Enable )
-    GET_SET_REF( Math::Vect3f, Pos )
     
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
-    void    AddYaw( float32 radian ){ m_Yaw += D3DXToRadian(radian); }
-    void    AddPitch( float32 radian ){ m_Pitch += D3DXToRadian(radian); }
-    void    AddZf( float32 amount ){ m_ZNear += amount; }
-    void    AddFov( float32 delta_fov ){ m_fov_radians += delta_fov; }
-    void    AddViewD( float32 amount ){ if( m_view_d + amount > 1) m_view_d += amount; }
+    void    AddYaw( float32 aRadian );
+    void    AddPitch( float32 aRadian );
+    void    AddZf( float32 aAmount );
+    void    AddFov( float32 aAmont );
+    void    AddViewD( float32 aAmount );
 
     // Frustum methods
     GET_SET( CFrustum, Frustum );
@@ -51,13 +48,9 @@ public:
 
 protected:
 
-    Math::Vect3f       m_Pos;
-    float32            m_Yaw;
-    float32            m_Pitch;
-
     float32            m_view_d;
-    float32            m_fov_radians;
-    float32            m_aspect_ratio;
+    float32            m_FovInRadians;
+    float32            m_AspectRatio;
     float32            m_ZNear;
     float32            m_ZFar;
 

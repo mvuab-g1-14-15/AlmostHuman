@@ -5,18 +5,16 @@
 #include "Core.h"
 
 CCamera::CCamera()
-  : m_Pos(),
-    m_Yaw( 0.0f ),
-    m_Pitch( 0.0f ),
-    m_view_d( 2.0f ),
-    m_fov_radians( Math::Utils::Deg2Rad( 50.0f ) ),
-    m_ZNear( 0.1f ),
-    m_ZFar( 1000.0f ),
-    m_Enable( true )
+  : CObject3D()
+  , m_view_d( 2.0f )
+  , m_FovInRadians( Math::Utils::Deg2Rad( 50.0f ) )
+  , m_ZNear( 0.1f )
+  , m_ZFar( 1000.0f )
+  , m_Enable( true )
 {
   unsigned int w = CCore::GetSingletonPtr()->GetScreenWidth();
   unsigned int h = CCore::GetSingletonPtr()->GetScreenHeight();
-  m_aspect_ratio = ( float ) w / ( float ) h;
+  m_AspectRatio = ( float ) w / ( float ) h;
 }
 
 CCamera::~CCamera()
@@ -27,7 +25,7 @@ D3DXMATRIX CCamera::GetMatrixView( void )
 {
   Math::Vect3f& l_LookAt = GetLookAt();
   Math::Vect3f& l_UpVec = GetVecUp();
-  D3DXVECTOR3 d3dxPos( m_Pos.x, m_Pos.y, m_Pos.z );
+  D3DXVECTOR3 d3dxPos( m_Position.x, m_Position.y, m_Position.z );
   D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
   D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
   D3DXMatrixLookAtLH( &m_view, &d3dxPos, &d3dxTarget, &d3dxUp );
@@ -36,7 +34,7 @@ D3DXMATRIX CCamera::GetMatrixView( void )
 
 D3DXMATRIX CCamera::GetMatrixProj( void )
 {
-  D3DXMatrixPerspectiveFovLH( &m_proj, m_fov_radians, m_aspect_ratio, m_ZNear, m_ZFar );
+  D3DXMatrixPerspectiveFovLH( &m_proj, m_FovInRadians, m_AspectRatio, m_ZNear, m_ZFar );
   return m_proj;
 }
 
@@ -60,15 +58,15 @@ void CCamera::RenderCamera( LPDIRECT3DDEVICE9 device )
 
   //---------PINTAMOS EL FRUSTUM-------------//
   D3DXMATRIX translation2;
-  D3DXVECTOR3 eye( m_Pos.x, m_Pos.y, m_Pos.z );
+  D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
   D3DXMatrixTranslation( &translation, eye.x , eye.y , eye.z );
 
   D3DXMATRIX rotation;
   D3DXMATRIX rotation2;
 
 
-  D3DXMatrixRotationY( &rotation,  -m_Yaw );
-  D3DXMatrixRotationZ( &rotation2, +m_Pitch );
+  D3DXMatrixRotationY( &rotation,  - m_fYaw );
+  D3DXMatrixRotationZ( &rotation2, + m_fPitch );
 
   matrix = rotation2 * rotation * translation;
 
@@ -89,11 +87,11 @@ void CCamera::RenderCamera( LPDIRECT3DDEVICE9 device )
 
   float32 d = m_view_d;
 
-  float32 h_near = m_ZNear * tan( m_fov_radians * 0.5f );
-  float32 k_near = h_near * m_aspect_ratio;
+  float32 h_near = m_ZNear * tan( m_FovInRadians * 0.5f );
+  float32 k_near = h_near * m_AspectRatio;
 
-  float32 h_far = d * tan( m_fov_radians * 0.5f );
-  float32 k_far = h_far * m_aspect_ratio;
+  float32 h_far = d * tan( m_FovInRadians * 0.5f );
+  float32 k_far = h_far * m_AspectRatio;
 
   pts[ 0 ].loc = D3DXVECTOR3( 0, 0, 0 );
   pts[ 0 ].color = 0xffffffff;
@@ -174,4 +172,27 @@ void CCamera::RenderCamera( LPDIRECT3DDEVICE9 device )
 void CCamera::UpdateFrustum( D3DXMATRIX ViewProjectionMatrix )
 {
   m_Frustum.Update( ViewProjectionMatrix );
+}
+
+void CCamera::AddYaw( float32 aRadian )
+{
+  m_fYaw += D3DXToRadian(aRadian); 
+}
+void CCamera::AddPitch( float32 aRadian )
+{
+  m_fPitch += D3DXToRadian(aRadian);
+}
+void CCamera::AddZf( float32 aAmont )
+{
+  m_ZNear += aAmont;
+}
+void CCamera::AddFov( float32 aDeltaFov )
+{
+  m_FovInRadians += aDeltaFov;
+}
+
+void CCamera::AddViewD( float32 aAmount )
+{
+  if( m_view_d + aAmount > 1)
+    m_view_d += aAmount;
 }

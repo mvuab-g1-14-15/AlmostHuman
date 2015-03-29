@@ -192,7 +192,7 @@ void CGraphicsManager::SetupMatrices()
   }
   else
   {
-    l_CameraPosition = l_CurrentCamera->GetPos();
+    l_CameraPosition = l_CurrentCamera->GetPosition();
     l_matView        = l_CurrentCamera->GetMatrixView();
     l_matProject     = l_CurrentCamera->GetMatrixProj();
     l_CurrentCamera->UpdateFrustum( l_matView * l_matProject );

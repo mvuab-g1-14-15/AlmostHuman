@@ -83,7 +83,7 @@ void CBlaster::Update()
                                l_PC->GetPosition(), l_Direction.GetNormalized(),
                                mask, l_SCollisionInfo, 40.0f );
 
-    Math::Vect3f l_CurrentPos = l_CurrentCamera->GetPos();
+    Math::Vect3f l_CurrentPos = l_CurrentCamera->GetPosition();
     Math::Vect3f l_Stride = l_CurrentCamera->GetDirection().CrossProduct( l_CurrentCamera->GetVecUp() ).GetNormalized();
     Math::Vect3f l_Pos = l_CurrentPos - l_Stride*0.04f;
     l_Pos.y -= 0.02f;

@@ -88,7 +88,7 @@ void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string& name,
   Math::Vect3f d = LookAt - Eye;
   l_pNewCamera->SetYaw( Math::Utils::ATan2( d.z, d.x ) );
   l_pNewCamera->SetPitch( Math::Utils::ATan2( d.y, Math::Utils::Sqrt( d.z * d.z + d.x * d.x ) ) );
-  l_pNewCamera->SetPos( Eye );
+  l_pNewCamera->SetPosition( Eye );
   l_pNewCamera->SetName( name );
   AddResource( name, l_pNewCamera );
 }

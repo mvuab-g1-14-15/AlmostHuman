@@ -13,7 +13,7 @@ public:
     ~CCameraCinematical();
     void    Update( );
         
-    Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Pos;}
+    Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Position;}
 
     void SetLookAt( const Math::Vect3f & LookAt  ){m_LookAt = LookAt;}
     Math::Vect3f GetLookAt( void ) const;

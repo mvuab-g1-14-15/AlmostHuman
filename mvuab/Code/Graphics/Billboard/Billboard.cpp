@@ -54,7 +54,7 @@ void CBillboard::Update()
     N_VectRight=VectUp^VectDir
     a=pos + n_VectorUP*size/2 -N_VectRight*size/2;*/
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
-    Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
+    Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
     Math::Vect3f l_vRight = ( -l_Pos2Cam.Normalize() ) ^ l_Camera->GetVecUp().Normalize();
     l_vRight.Normalize();
     float halfSize = m_Size / 2;
@@ -82,7 +82,7 @@ void CBillboard::Render()
     CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
 
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
-    Math::Vect3f l_Pos2Cam = l_Camera->GetPos() - m_Position;
+    Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
 
     GraphicsInstance->DrawQuad3DWithTechnique( m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique, m_Texture );
 

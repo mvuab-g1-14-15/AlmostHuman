@@ -104,7 +104,7 @@ void CAStarProcess::Init()
   userData->SetPaint( true );
   userData->SetColor( colWHITE );
   m_vPUD.push_back( userData );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPos();
+  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPosition();
   m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
   l_PM->AddPhysicController( m_PhysicController );

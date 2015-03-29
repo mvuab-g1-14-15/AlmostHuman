@@ -1,4 +1,5 @@
 #include "GraphicsFunctions.h"
+#include "luabind_macros.h"
 
 #include "Texture\Texture.h"
 #include "Texture\TextureManager.h"
@@ -44,12 +45,19 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
   return new CInstanceMesh( Name, CoreName );
 }
 
+void registerCameras( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register Cameras" );
+
+}
+
 void registerGraphics( lua_State* m_LS )
 {
   module( m_LS )
   [
     def( "CreateInstanceMesh", &CreateInstanceMesh )
   ];
+
   module( m_LS )
   [
     class_<CObject3D>( "CObject3D" )
@@ -196,21 +204,20 @@ void registerGraphics( lua_State* m_LS )
     .def( "GetCameraType", &CCamera::GetCameraType )
     .def( "GetZNear", &CCamera::GetZNear )
     .def( "GetZFar", &CCamera::GetZFar )
-    .def( "GetAspectRatio", &CCamera::Getaspect_ratio )
-    .def( "GetPos", &CCamera::GetPos )
+    .def( "GetAspectRatio", &CCamera::GetAspectRatio )
+    .def( "GetPos", &CCamera::GetPosition )
     .def( "GetEnable", &CCamera::GetEnable )
     .def( "SetPitch", &CCamera::SetPitch )
     .def( "SetYaw", &CCamera::SetYaw )
     .def( "SetCameraType", &CCamera::SetCameraType )
     .def( "SetZNear", &CCamera::SetZNear )
     .def( "SetZFar", &CCamera::SetZFar )
-    .def( "SetAspectRatio", &CCamera::Setaspect_ratio )
-    .def( "SetPos", &CCamera::SetPos )
+    .def( "SetAspectRatio", &CCamera::SetAspectRatio )
+    .def( "SetPos", &CCamera::SetPosition )
     .def( "SetEnable", &CCamera::SetEnable )
     .def( "AddYaw", &CCamera::AddYaw )
     .def( "AddPitch", &CCamera::AddPitch )
   ];
-
   module( m_LS )
   [
     class_<CCameraInfo>( "CCameraInfo" )

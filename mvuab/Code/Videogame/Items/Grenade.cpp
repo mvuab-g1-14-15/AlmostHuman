@@ -54,7 +54,7 @@ void CGrenade::Update()
       m_PhysicUserData->SetPaint(true);
       m_vPhysicUserData.push_back(m_PhysicUserData);
       m_Actor = new CPhysicActor(m_PhysicUserData);
-      m_Actor->AddSphereShape(0.1f,l_CurrentCamera->GetPos(),Math::Vect3f(0,0,0));
+      m_Actor->AddSphereShape(0.1f,l_CurrentCamera->GetPosition(),Math::Vect3f(0,0,0));
       m_Actor->CreateBody(1.0f);
       m_vActor.push_back(m_Actor);
 

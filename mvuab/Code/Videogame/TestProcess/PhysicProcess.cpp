@@ -160,7 +160,7 @@ void CPhysicProcess::Update()
     CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
     SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
     uint32 mask = 1 << ECG_ESCENE;
-    CPhysicUserData* l_PUD = l_PM->RaycastClosestActor( l_CurrentCamera->GetPos(),
+    CPhysicUserData* l_PUD = l_PM->RaycastClosestActor( l_CurrentCamera->GetPosition(),
                              l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo );
 
     //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
