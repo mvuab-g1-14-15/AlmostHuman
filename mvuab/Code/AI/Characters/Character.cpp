@@ -28,7 +28,7 @@ void CCharacter::Update()
   float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
   l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
 
-  if ( l_Cantidad < 1.0f )
+  if ( l_Cantidad < 5.0f )
     SetTargetPosition( l_CharacterController->GetPosition() );
   else
     SetTargetPosition( m_TargetPositionOriginal );

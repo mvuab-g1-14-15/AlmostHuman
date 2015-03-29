@@ -304,6 +304,7 @@ void CPlayerPhysicProcess::Init()
   //  m_vPA.push_back( l_AseMeshActor );
   //}
 
+  //Add Escenario
   if( !CCore::GetSingletonPtr()->GetPhysicsManager()->AddMesh("Data/a.ASE", "Escenario") )
       LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 
