@@ -34,22 +34,28 @@ function CPlayer:__init()
 
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
 	
-	core:trace("1")
 	self.m_pRenderableObject = CInstanceMesh("Logan", "Logan");
-	core:trace("2")
+	
 	m_ROM:AddResource("Logan", self.m_pRenderableObject)
-		core:trace("2.2")
+	
 	l_pos = m_CharacterController:GetPosition()
-		core:trace("3")
+
 	l_pos.y = l_pos.y - 1.4
 	self.m_pRenderableObject:SetPosition( l_pos );
-		core:trace("4")
+	
 	self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 );
-		core:trace("5")
+	
 	self.m_pRenderableObject:SetScale( Vect3f(0.09) );
-	core:trace("6")
+	
 	self.m_pRenderableObject:MakeTransform();
 
+	self.m_MoveDt = 0.0
+	self.m_InMove = false
+	self.m_MoveTo = Vect3f()
+	self.m_LeanOut = false
+	self.m_Side = 1
+	self.m_LeanOutEnable = true
+	
     math.randomseed(os.time())
     core:trace("Character Initialized")
 end
@@ -76,68 +82,101 @@ function CPlayer:ModifyLife(life)
 end
 
 function CPlayer:Update()
-    local l_Dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()
-       
-    local l_Run = false     
-    local l_Strafe = 0
-    local l_Forward = 0
-    
-    
-    if m_ActionManager:DoAction("Run") then
-		l_Run = true
-	end
-    
-    if m_ActionManager:DoAction("Crouch") then
-        if self.m_Crouch == true then
-            self.m_Crouch = false
-        else
-            self.m_Crouch = true
-        end
-        self:Crouch()
-	end
+	local l_Dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()
 
-    if m_ActionManager:DoAction("MoveLeft") then
-        l_Strafe = 1
-        self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
-	elseif m_ActionManager:DoAction("MoveRight") then
-        l_Strafe = -1
-        self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
-	elseif m_ActionManager:DoAction("MoveBackward") then
-        l_Forward = -1
-        self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
-	elseif m_ActionManager:DoAction("MoveForward") then
-        l_Forward = 1
-        self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
-    else
-        self:Move(l_Run, self.m_Crouch, 0, 0, l_Dt)
-    end
+	if self.m_LeanOut == true then
+		self:LeanOut(self.m_Side, l_Dt)
+		local diferencia = Vect3f(m_CameraManager:GetCurrentCamera():GetPos()) - Vect3f(m_CharacterController:GetPosition())
+		if ((diferencia.x < 0.25 and diferencia.x > -0.25) and (diferencia.z < 0.25 and diferencia.z > -0.25)) then
+			self.m_LeanOut = false
+			self.m_MoveDt = 0.0
+			self.m_InMove = false
+			self.m_MoveTo = Vect3f()
+		end
+	else
+		if m_ActionManager:DoAction("ASS_LEFT_SETZERO") then
+			self.m_LeanOut = true
+			self.m_Side = -1
+			self.m_MoveDt = 0.0
+			self.m_InMove = false
+			self.m_MoveTo = Vect3f()
+			self.m_LeanOutEnable = true
+		elseif m_ActionManager:DoAction("ASS_RIGHT_SETZERO") then
+			self.m_LeanOut = true
+			self.m_Side = 1
+			self.m_MoveDt = 0.0
+			self.m_InMove = false
+			self.m_MoveTo = Vect3f()
+			self.m_LeanOutEnable = true
+		else
+			local l_Run = false     
+			local l_Strafe = 0
+			local l_Forward = 0
+			
+			if m_ActionManager:DoAction("Run") then
+				l_Run = true
+			end
+			
+			if m_ActionManager:DoAction("Crouch") then
+				if self.m_Crouch == true then
+					self.m_Crouch = false
+				else
+					self.m_Crouch = true
+				end
+				self:Crouch()
+			end
 
-	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
-	local value=""
-	local current_camera = camera_manager:GetCurrentCamera();
-    
-	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
-		current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
-	end
-	local current_camera = camera_manager:GetCurrentCamera();
-	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
-		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
-	end
-	
-    if action_manager:DoAction("Jump") then
-        self:Jump(4)
-    end
+			if m_ActionManager:DoAction("MoveLeft") then
+				l_Strafe = 1
+				self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
+			elseif m_ActionManager:DoAction("MoveRight") then
+				l_Strafe = -1
+				self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
+			elseif m_ActionManager:DoAction("MoveBackward") then
+				l_Forward = -1
+				self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
+			elseif m_ActionManager:DoAction("MoveForward") then
+				l_Forward = 1
+				self:Move(l_Run, self.m_Crouch, l_Forward, l_Strafe, l_Dt)
+			else
+				self:Move(l_Run, self.m_Crouch, 0, 0, l_Dt)
+			end
 
-	if m_ActionManager:DoAction("ChangeRoom") then
-		self:CambiarSala()
-	end
-	
-	l_pos = m_CharacterController:GetPosition()
-	l_pos.y = l_pos.y - 1.45
-	self.m_pRenderableObject:SetPosition( l_pos );
-	self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 );
+			local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
+			local value=""
+			local current_camera = camera_manager:GetCurrentCamera();
+			
+			if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
+				current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+			end
+			local current_camera = camera_manager:GetCurrentCamera();
+			if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
+				current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+			end
+			
+			if action_manager:DoAction("Jump") then
+				self:Jump(4)
+			end
 
-	self.m_pRenderableObject:MakeTransform();
+			if m_ActionManager:DoAction("ChangeRoom") then
+				self:CambiarSala()
+			end
+			
+			l_pos = m_CharacterController:GetPosition()
+			l_pos.y = l_pos.y - 1.45
+			self.m_pRenderableObject:SetPosition( l_pos )
+			self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 )
+
+			self.m_pRenderableObject:MakeTransform()
+			if self.m_LeanOutEnable == true then
+				if m_ActionManager:DoAction("ASS_RIGHT") then
+					self:LeanOut(-1, l_Dt)
+				elseif m_ActionManager:DoAction("ASS_LEFT") then
+					self:LeanOut(1, l_Dt)
+				end
+			end
+		end
+	end
 end
 
 function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
@@ -172,6 +211,8 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
 	l_LookAt:Normalize()
     l_Position = self:CameraShake(l_Position, l_Dt)
 	l_Camera:SetPos(l_Position + l_LookAt*0.1)
+	
+	
 end
 
 function CPlayer:CameraShake(l_Position, l_Dt)
@@ -222,4 +263,74 @@ function CPlayer:Crouch()
         m_CharacterController:UpdateCharacterExtents(true, self.m_Height/2)
     end
 
+end
+
+function CPlayer:LeanOut(direction, l_Dt)
+	current_camera = m_CameraManager:GetCurrentCamera()
+	local l_Pos = current_camera:GetPos()
+	
+	local l_Dir     = current_camera:GetDirection()
+	local l_Up      = current_camera:GetVecUp()
+			
+	l_BallPos = l_Dir ^ l_Up
+	l_BallPos:Normalize()
+	l_BallPos = l_BallPos/10
+	l_BallPos = direction * l_BallPos + l_Pos - current_camera:GetDirection()/5
+
+	local l_PUD = ListaPUD(m_PhysicManager:OverlapSphere(1, l_BallPos))
+	
+	if l_PUD:size() == 0 then 
+	
+		
+		if self.m_InMove == false then
+			self.m_MoveTo = l_Dir ^ l_Up
+			self.m_MoveTo = l_Pos + direction * self.m_MoveTo
+			self.m_InMove = true
+		end
+		
+		if self.m_InMove then
+			if self.m_MoveDt >= 1.0 then
+				self.m_MoveDt = 1.0
+			end
+			local l_PosRO = l_Pos + (self.m_MoveTo - l_Pos) * (self.m_MoveDt*0.8)
+			l_Pos = l_Pos + (self.m_MoveTo - l_Pos) * self.m_MoveDt
+			self.m_MoveDt = self.m_MoveDt + l_Dt
+			
+			current_camera:SetPos(l_Pos)
+			
+			l_PosRO.y = l_PosRO.y - 1.45 - (m_CharacterController:GetHeight()*2/3)
+			self.m_pRenderableObject:SetPosition( l_PosRO )
+			self.m_pRenderableObject:MakeTransform()
+			
+		end
+	elseif (self.m_MoveDt > 0) == true then
+		Singleton_Core.get_singleton():trace("he entrado en tu ojete")
+		--self.m_InMove = false
+		self.m_MoveDt = self.m_MoveDt - l_Dt
+		--self.m_MoveTo = Vect3f()
+		if self.m_InMove == false then
+
+				self.m_MoveTo = l_Dir ^ l_Up
+				self.m_MoveTo = l_Pos + 1.5*direction * self.m_MoveTo * (-1)
+				self.m_InMove = true
+		end
+			
+		if self.m_InMove then
+				if self.m_MoveDt >= 1.0 then
+					self.m_MoveDt = 1.0
+				end
+				local l_PosRO = l_Pos + (self.m_MoveTo - l_Pos) * (self.m_MoveDt*0.8)
+				l_Pos = l_Pos + (self.m_MoveTo - l_Pos) * self.m_MoveDt
+				self.m_MoveDt = self.m_MoveDt - l_Dt
+				
+				current_camera:SetPos(l_Pos)
+				
+				l_PosRO.y = l_PosRO.y - 1.45 - (m_CharacterController:GetHeight()*2/3)
+				self.m_pRenderableObject:SetPosition( l_PosRO )
+				self.m_pRenderableObject:MakeTransform()
+				
+		end
+		self.m_LeanOutEnable = false
+	end
+	
 end

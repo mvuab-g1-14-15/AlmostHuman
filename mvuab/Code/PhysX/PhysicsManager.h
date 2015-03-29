@@ -125,8 +125,7 @@ public:
       uint32 impactMask);
   std::set<CPhysicUserData*> OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere,
       EShapesType shapeType = ALL_SHAPES , uint32 impactMask = 0xffffffff );
-  void          OverlapSphereActor( float radiusSphere, const Math::Vect3f& posSphere,
-                                    std::vector<CPhysicUserData*>& impactObjects, uint32 impactMask );
+  std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask );
   void          OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
       std::vector<CPhysicUserData*> impactObjects, float _fPower );
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,

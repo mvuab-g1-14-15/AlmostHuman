@@ -111,6 +111,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
           &CPhysicsManager::GetUserData )
     .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
+    .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
 
@@ -133,5 +134,11 @@ void registerPhysX( lua_State* m_LS )
     .def( constructor<std::set<CPhysicUserData*>>() )
     .def( "size", &std::set<CPhysicUserData*>::size )
     .def( "getIdByResource", &set_getIdByResource<CPhysicUserData*> )
+  ];
+
+  module( m_LS ) [
+    class_<std::vector<CPhysicUserData*>>( "vPUD" )
+    .def( constructor<std::vector<CPhysicUserData*>>() )
+    .def( "size", &std::vector<CPhysicUserData*>::size )
   ];
 }

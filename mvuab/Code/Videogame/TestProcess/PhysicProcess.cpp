@@ -282,7 +282,7 @@ void CPhysicProcess::Init()
   l_PUD->SetColor( colWHITE );
   m_vPUD.push_back( l_PUD );
   CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.1, 1000 ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
+  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000.0f, 0.1f, 1000.0f ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
                                0 ) );
   CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
   m_vPA.push_back( l_pPhysicActor );
