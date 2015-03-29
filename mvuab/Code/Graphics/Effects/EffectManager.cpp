@@ -186,7 +186,7 @@ void CEffectManager::Load( const std::string& FileName )
 
       if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
       {
-        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique \"%s\ with effect \"%s\"!", l_TechniquetName.c_str(), l_EffectName.c_str() );
+        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
         CHECKED_DELETE( l_NewTechnique );
       }
 

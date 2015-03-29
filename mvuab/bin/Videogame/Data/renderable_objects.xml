@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <layer name="solid" />
+  <AnimatedInstance name="enemy1" core="enemy1" pos="200.0 -11.0 360.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
+  <AnimatedInstance name="enemy2" core="enemy1" pos="180.0 -11.0 360.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
+  <AnimatedInstance name="enemy3" core="enemy1" pos="190.0 -11.0 360.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
+  <AnimatedInstance name="enemy12" core="enemy1" pos="200.0 -11.0 350.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
+  <AnimatedInstance name="enemy22" core="enemy1" pos="180.0 -11.0 350.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
+  <AnimatedInstance name="enemy32" core="enemy1" pos="190.0 -11.0 350.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="3.0 3.0 3.0" layer="solid"/>
   <MeshInstance name="Box001" core="Box001" pos="0.368208 0.126118 0.171552" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box002" core="Box002" pos="-4.66925 0.226796 6.17845" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box003" core="Box003" pos="-0.0507338 0.052019 2.18572" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />

@@ -94,9 +94,13 @@ void CConsole::SetFullSize()
 {
 	const HWND hDesktop = GetDesktopWindow();
 	RECT desktop;
-    // Get the size of screen to the variable desktop
-    GetWindowRect(hDesktop, &desktop);
-	int i = 0;
+  // Get the size of screen to the variable desktop
+  GetWindowRect(hDesktop, &desktop);
+  mX = desktop.left;
+  mY = desktop.top;
+  mWidth = desktop.right - desktop.left;
+  mHeight = desktop.bottom - desktop.top;
+  Recalculate();
 }
 
 void CConsole::Recalculate()

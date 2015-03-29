@@ -24,8 +24,8 @@ CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
   m_fPitch = Math::Utils::ATan2( l_Direction.y,
                                  Math::Utils::Sqrt( l_Direction.z * l_Direction.z + l_Direction.x *
                                      l_Direction.x ) );
-  m_OrthoShadowMapSize.x = node.GetIntProperty( "shadow_map_width", 0 );
-  m_OrthoShadowMapSize.y = node.GetIntProperty( "shadow_map_height", 0 );
+  m_OrthoShadowMapSize.x = node.GetFloatProperty( "shadow_map_width", 0 );
+  m_OrthoShadowMapSize.y = node.GetFloatProperty( "shadow_map_height", 0 );
   SetType( CLight::DIRECTIONAL );
 }
 
