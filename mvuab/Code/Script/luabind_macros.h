@@ -8,6 +8,13 @@
 #ifndef __LUABIND_MACROS_H__
 #define __LUABIND_MACROS_H__
 
+#define LUA_BEGIN_DECLARATION( LS ) luabind::module( LS ) [
+#define LUA_END_DECLARATION ];
+
+#define LUA_DECLARE_CLASS( CL )                       luabind::class_< CL >( #CL )
+#define LUA_DECLARE_DERIVED_CLASS( CL, BASE )         luabind::class_< CL, BASE >( #CL )
+#define LUA_DECLARE_DERIVED_CLASS2( CL, BASE, BASE1 ) luabind::class_< CL, bases< BASE, BASE1 > >( #CL )
+
 #ifdef _HAS_LUA_BIND_
 
 #include <lua.hpp>

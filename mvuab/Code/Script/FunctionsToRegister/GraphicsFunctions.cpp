@@ -48,7 +48,30 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
 void registerCameras( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Cameras" );
-
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS2( CCamera, CName, CObject3D )
+    .def( "GetDirection", &CCamera::GetDirection )
+    .def( "GetLookAt", &CCamera::GetLookAt )
+    .def( "GetVecUp", &CCamera::GetVecUp )
+    .def( "GetPitch", &CCamera::GetPitch )
+    .def( "GetYaw", &CCamera::GetYaw )
+    .def( "GetCameraType", &CCamera::GetCameraType )
+    .def( "GetZNear", &CCamera::GetZNear )
+    .def( "GetZFar", &CCamera::GetZFar )
+    .def( "GetAspectRatio", &CCamera::GetAspectRatio )
+    .def( "GetPos", &CCamera::GetPosition )
+    .def( "GetEnable", &CCamera::GetEnable )
+    .def( "SetPitch", &CCamera::SetPitch )
+    .def( "SetYaw", &CCamera::SetYaw )
+    .def( "SetCameraType", &CCamera::SetCameraType )
+    .def( "SetZNear", &CCamera::SetZNear )
+    .def( "SetZFar", &CCamera::SetZFar )
+    .def( "SetAspectRatio", &CCamera::SetAspectRatio )
+    .def( "SetPos", &CCamera::SetPosition )
+    .def( "SetEnable", &CCamera::SetEnable )
+    .def( "AddYaw", &CCamera::AddYaw )
+    .def( "AddPitch", &CCamera::AddPitch )
+  LUA_END_DECLARATION
 }
 
 void registerGraphics( lua_State* m_LS )
