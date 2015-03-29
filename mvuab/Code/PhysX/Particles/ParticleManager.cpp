@@ -113,6 +113,7 @@ void CParticleManager::Update( float dt )
     {
       if ( m_Emitters[i]->GetTime() >= m_Emitters[i]->GetEmitterLifeTime() )
       {
+        CHECKED_DELETE( m_Emitters[i] );
         m_Emitters.erase( m_Emitters.begin() + i );
         continue;
       }
