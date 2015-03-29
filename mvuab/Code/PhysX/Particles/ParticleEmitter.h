@@ -9,43 +9,50 @@
 
 class CParticleEmitter
 {
-    protected:
-        std::vector<CParticle> m_Particles;
-		
-		unsigned int m_Rand;
-		unsigned int m_Min;
-		unsigned int m_Max;
+protected:
+  std::vector<CParticle> m_Particles;
 
-        float m_MinLifetime;
-        float m_MaxLifetime;
-		float m_ActualTime;
+  unsigned int m_Rand;
+  unsigned int m_Min;
+  unsigned int m_Max;
 
-        Math::Vect3f m_Acceleration;
-        Math::Vect3f m_Direction;
-        Math::Vect3f m_Position;
-        Math::Vect3f m_Velocity;
+  float m_MinLifetime;
+  float m_MaxLifetime;
+  float m_ActualTime;
 
-		std::string m_TextureName;
+  float m_Time;
 
-    public:
-        CParticleEmitter    ();
-        virtual ~CParticleEmitter   ();
+  Math::Vect3f m_Acceleration;
+  Math::Vect3f m_Direction;
+  Math::Vect3f m_Position;
+  Math::Vect3f m_Velocity;
 
-        void SetAcceleration    (const Math::Vect3f &Acceleration);
-        void SetVelocity        (const Math::Vect3f &Velocity);
+  std::string m_TextureName;
+  bool m_Active;
 
-        void SetDirection       (const Math::Vect3f &Direction);
-        void SetPosition        (const Math::Vect3f &Position);
-        
-        void SetLifeTime        (float min, float max);
+  float m_EmitterLifeTime;
+public:
+  CParticleEmitter();
+  virtual ~CParticleEmitter();
 
-		GET_SET(std::string, TextureName);
-		GET_SET(size_t, Min);
-		GET_SET(size_t, Max);
+  void SetAcceleration( const Math::Vect3f& Acceleration );
+  void SetVelocity( const Math::Vect3f& Velocity );
 
-        virtual void Generate  (unsigned int l_NumParticles) = 0;
-        virtual void Update    (float dt) = 0;
-        virtual void Render    () = 0;
+  void SetDirection( const Math::Vect3f& Direction );
+  void SetPosition( const Math::Vect3f& Position );
+
+  void SetLifeTime( float min, float max );
+
+  GET_SET( std::string, TextureName );
+  GET_SET( size_t, Min );
+  GET_SET( size_t, Max );
+  GET_SET( bool, Active );
+  GET_SET( float, EmitterLifeTime );
+  GET_SET( float, Time );
+
+  virtual void Generate( unsigned int l_NumParticles ) = 0;
+  virtual void Update( float dt ) = 0;
+  virtual void Render() = 0;
 };
 
 #endif

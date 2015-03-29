@@ -9,17 +9,17 @@
 
 class CParticleManager
 {
-    private:
-        std::vector<CParticleEmitter *> m_Emitters;
+private:
+  std::vector<CParticleEmitter*> m_Emitters;
 
-    public:
-        CParticleManager    ();
-        ~CParticleManager   ();
+public:
+  CParticleManager();
+  ~CParticleManager();
 
-        bool Init           (const std::string &path);
-        void Update         (float dt);
-        void Render         ();
-
+  bool Init( const std::string& path );
+  void Update( float dt );
+  void Render();
+  void AddEmitter( CParticleEmitter* l_Emitter );
 };
 
 #endif

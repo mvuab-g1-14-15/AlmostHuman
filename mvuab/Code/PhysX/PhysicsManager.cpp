@@ -25,6 +25,8 @@
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\PhysicUserAllocator.h"
 #include "Utils\PhysicUserData.h"
+#include "Particles\SphereEmitter.h"
+#include "Particles\ParticleManager.h"
 ////--------------------------------
 
 #include "Utils\Defines.h"
@@ -37,6 +39,7 @@
 #if defined(_DEBUG)
 #include "Memory\MemLeaks.h"
 #endif
+#include "Core.h"
 
 // -----------------------------------------
 //      CONSTRUCTOR/DESTRUCTOR
@@ -933,31 +936,51 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
 }
 
 
-std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay, uint32 impactMask)
+std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay, uint32 impactMask )
 {
-	//NxUserRaycastReport::ALL_SHAPES
-	ASSERT( m_pScene != NULL ,"NULL SCENE");
+  //NxUserRaycastReport::ALL_SHAPES
+  ASSERT( m_pScene != NULL , "NULL SCENE" );
 
-	NxRay ray;
-	ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
-	ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
+  NxRay ray;
+  ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
+  ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
 
-	NxRaycastHit hit;
-	NxShape* closestShape = NULL;
-	closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
+  NxRaycastHit hit;
+  NxShape* closestShape = NULL;
+  closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
 
-	if ( !closestShape )
-	{
-	    //No hemos tocado a ningún objeto físico de la escena.
-        return std::string("");
-	}
+  if ( !closestShape )
+  {
+    //No hemos tocado a ningún objeto físico de la escena.
+    return std::string( "" );
+  }
 
-	NxActor* actor = &closestShape->getActor();
-	CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
-	
-	ASSERT( impactObject,"NO IMPACTOBJECT");
+  //Particulas en el punto de impacto
+  CSphereEmitter* l_Emitter = new CSphereEmitter();
+  l_Emitter->SetActive( true );
+  l_Emitter->SetEmitterLifeTime( 1.0f );
+  l_Emitter->SetLifeTime( 0.5f, 1.0f );
+  l_Emitter->SetAcceleration( Vect3f( 0.0f ) );
+  Math::Vect3f pos( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
+  l_Emitter->SetPosition( pos );
+  l_Emitter->SetVelocity( Vect3f( 1.0f ) );
+  l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
+  l_Emitter->SetMin( 5 );
+  l_Emitter->SetMin( 10 );
+  l_Emitter->SetRadius( 0.1f, 0.2f );
+  l_Emitter->SetYaw( 0, 360 );
+  l_Emitter->SetPitch( 0, 360 );
 
-	return impactObject->GetName();
+  l_Emitter->Generate( 20 );
+
+  CCore::GetSingletonPtr()->GetParticleManager()->AddEmitter( l_Emitter );
+
+  NxActor* actor = &closestShape->getActor();
+  CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+
+  ASSERT( impactObject, "NO IMPACTOBJECT" );
+
+  return impactObject->GetName();
 }
 
 
@@ -977,7 +1000,7 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
   NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_CollisionSphere,
                                ( NxShapesType )shapeType, nbShapes, l_CollisionShapes, NULL, impactMask );
 
-  
+
   for ( NxU32 i = 0; i < l_NumShapesCollision; ++i )
   {
     if ( l_CollisionShapes[i] )
@@ -988,7 +1011,7 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
       l_ImpactObjects.insert( l_pPhysicObject );
     }
   }
-  
+
 
   delete []l_CollisionShapes;
   return l_ImpactObjects;
@@ -1008,6 +1031,7 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
   NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_WorldSphere, NX_ALL_SHAPES, nbShapes,
                                shapes, NULL, _uiImpactMask, NULL, true );
   std::vector<CPhysicUserData*> _ImpactObjects;
+
   for ( NxU32 i = 0; i < nbShapes; ++i )
   {
     if ( shapes[i] != NULL )
