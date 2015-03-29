@@ -25,15 +25,16 @@ public:
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
   GET_SET( float32, Life );
-  void AddDamage(float32 aDamage)
+  void AddDamage( float32 aDamage )
   {
-	m_Life -= aDamage;
+    m_Life -= aDamage;
   }
 protected:
   virtual ECollisionGroup GetCollisionGroup();
+
+  CPhysicController*    m_Controller;
 private: // Members
   std::string           m_AIPath;
-  CPhysicController*    m_Controller;
   Math::Vect3f          m_TargetPosition;
   Math::Vect3f          m_TargetPositionOriginal;
   float32               m_Speed;

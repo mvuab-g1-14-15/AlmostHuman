@@ -1474,33 +1474,34 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
 
   return false;
 }
-bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name)
+bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name )
 {
-     if ( m_pCookingMesh->CreateMeshFromASE( Path, Name ) )
-     {
-        CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
-        l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-        CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+  if ( m_pCookingMesh->CreateMeshFromASE( Path, Name ) )
+  {
+    CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
+    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+    CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
-        VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
+    VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
 
-        for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-          l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+      l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
-        if ( !CMapManager<CPhysicActor>::GetResource( Name ) )
-        {
-            if ( AddPhysicActor( l_AseMeshActor ) )
-            {
-              CMapManager<CPhysicActor>::AddResource( Name, l_AseMeshActor );
-              m_vUD.push_back( l_pPhysicUserDataASEMesh );
-              return true;
-            }
-            else
-            {
-              CHECKED_DELETE( l_pPhysicUserDataASEMesh );
-              CHECKED_DELETE( l_AseMeshActor );
-            }
-        }
+    if ( !CMapManager<CPhysicActor>::GetResource( Name ) )
+    {
+      if ( AddPhysicActor( l_AseMeshActor ) )
+      {
+        CMapManager<CPhysicActor>::AddResource( Name, l_AseMeshActor );
+        m_vUD.push_back( l_pPhysicUserDataASEMesh );
+        return true;
+      }
+      else
+      {
+        CHECKED_DELETE( l_pPhysicUserDataASEMesh );
+        CHECKED_DELETE( l_AseMeshActor );
+      }
     }
-     return false;
+  }
+
+  return false;
 }

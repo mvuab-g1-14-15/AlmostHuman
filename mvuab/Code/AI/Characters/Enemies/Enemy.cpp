@@ -10,6 +10,7 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObject.h"
+#include "Actor\PhysicController.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
@@ -53,7 +54,9 @@ void CEnemy::Update()
   for ( ; it != it_end; ++it )
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 
-  m_pRenderableObject->SetPosition( m_Position );
+  Vect3f l_Pos = m_Position;
+  l_Pos.y -= m_Controller->GetHeight() / 2;
+  m_pRenderableObject->SetPosition( l_Pos );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
@@ -80,7 +83,9 @@ void CEnemy::AddMesh( std::string MeshName )
 
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );
-  m_pRenderableObject->SetPosition( m_Position );
+  Vect3f l_Pos = m_Position;
+  l_Pos.y -= m_Controller->GetHeight() / 2;
+  m_pRenderableObject->SetPosition( l_Pos );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
