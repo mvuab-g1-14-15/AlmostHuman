@@ -1,4 +1,5 @@
 #define NOMINMAX
+#define _CRT_SECURE_NO_WARNINGS
 
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
