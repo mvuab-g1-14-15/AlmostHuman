@@ -245,11 +245,7 @@ void CPlayerPhysicProcess::Init()
   //l_PM->AddPhysicController( m_PhysicController );
   //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
 
-  CPhysicUserData* l_pPhysicUserDataASEMesh;
-  CPhysicActor*  l_AseMeshActor;
-
-  CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
-  CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
+ 
 
   /* std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
 
@@ -285,23 +281,31 @@ void CPlayerPhysicProcess::Init()
    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
    m_vPA.push_back( l_AseMeshActor );*/
 
+  //CPhysicUserData* l_pPhysicUserDataASEMesh;
+  //CPhysicActor*  l_AseMeshActor;
 
-  if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
-  {
-    l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-    m_vPUD.push_back( l_pPhysicUserDataASEMesh );
-    l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+  //CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+  //CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
 
-    VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
+  //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
+  //{
+  //  l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+  //  l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+  //  m_vPUD.push_back( l_pPhysicUserDataASEMesh );
+  //  l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
-    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-      l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+  //  VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
 
-    //m_AseMeshActor->CreateBody ( 10.f );
-    CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
-    m_vPA.push_back( l_AseMeshActor );
-  }
+  //  for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+  //    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+  //  //m_AseMeshActor->CreateBody ( 10.f );
+  //  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+  //  m_vPA.push_back( l_AseMeshActor );
+  //}
+
+  if( !CCore::GetSingletonPtr()->GetPhysicsManager()->AddMesh("Data/a.ASE", "Escenario") )
+      LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 
   m_AStar = new CAStar();
   m_AStar->Init();
