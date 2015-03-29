@@ -14,7 +14,7 @@
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 #include "Cameras\CameraManager.h"
 #include "Lights\LightManager.h"
 #include "PhysicsManager.h"

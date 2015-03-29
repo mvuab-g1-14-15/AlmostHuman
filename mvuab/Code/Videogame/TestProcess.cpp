@@ -3,7 +3,7 @@
 //BASE
 #include <Fonts\FontManager.h>
 #include "Logger\Logger.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 
 //CORE
 #include "Core.h"

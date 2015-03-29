@@ -11,32 +11,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ScriptManager\FunctionsToRegister\AIFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\BaseFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\CoreFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\EnumDefinitions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\GuiFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\InputFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\NetworkFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\PhysXFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\SoundFunctions.h" />
-    <ClInclude Include="ScriptManager\FunctionsToRegister\VideogameFunctions.h" />
-    <ClInclude Include="ScriptManager\ScriptManager.h" />
+    <ClCompile Include="FunctionsToRegister\AIFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\BaseFunctions .cpp" />
+    <ClCompile Include="FunctionsToRegister\CoreFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\EnumDefinitions.cpp" />
+    <ClCompile Include="FunctionsToRegister\GraphicsFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\GuiFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\InputFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\NetworkFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\PhysXFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\SoundFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\VideogameFunctions.cpp" />
+    <ClCompile Include="ScriptManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ScriptManager\FunctionsToRegister\AIFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\BaseFunctions .cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\CoreFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\EnumDefinitions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\GraphicsFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\GuiFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\InputFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\NetworkFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\PhysXFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\SoundFunctions.cpp" />
-    <ClCompile Include="ScriptManager\FunctionsToRegister\VideogameFunctions.cpp" />
-    <ClCompile Include="ScriptManager\ScriptManager.cpp" />
+    <ClInclude Include="FunctionsToRegister\AIFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\BaseFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\CoreFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\EnumDefinitions.h" />
+    <ClInclude Include="FunctionsToRegister\GraphicsFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\GuiFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\InputFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\NetworkFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\PhysXFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\SoundFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\VideogameFunctions.h" />
+    <ClInclude Include="luabind_macros.h" />
+    <ClInclude Include="ScriptManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7F37DFD9-6E92-4002-A157-E6A660B045FF}</ProjectGuid>

@@ -9,7 +9,7 @@
 #include "Logger\Logger.h"
 #include "Utils\Defines.h"
 #include "Fonts\FontManager.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 
 //CORE
 #include "Core.h"
@@ -52,7 +52,7 @@ CAStarProcess::~CAStarProcess()
 
   m_vPUD.clear();
 
-  CHECKED_DELETE(m_PhysicController);
+  CHECKED_DELETE( m_PhysicController );
 }
 
 void CAStarProcess::Update()

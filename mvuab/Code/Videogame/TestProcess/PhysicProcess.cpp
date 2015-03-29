@@ -6,7 +6,7 @@
 #include "Logger\Logger.h"
 #include "Utils\BaseUtils.h"
 #include "Fonts\FontManager.h"
-#include "ScriptManager\ScriptManager.h"
+#include "ScriptManager.h"
 
 //CORE
 #include "Core.h"

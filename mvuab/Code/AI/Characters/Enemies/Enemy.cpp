@@ -2,7 +2,7 @@
 #include "Utils\Defines.h"
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
-#include "ScriptManager/ScriptManager.h"
+#include "ScriptManager.h"
 #include "Core.h"
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
@@ -23,7 +23,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "solid" );
+  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
 }
 
@@ -54,7 +54,7 @@ void CEnemy::Update()
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 
   m_pRenderableObject->SetPosition( m_Position );
-  m_pRenderableObject->SetYaw( m_fYaw );
+  m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
 
@@ -81,7 +81,7 @@ void CEnemy::AddMesh( std::string MeshName )
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );
   m_pRenderableObject->SetPosition( m_Position );
-  m_pRenderableObject->SetYaw( m_fYaw );
+  m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
 

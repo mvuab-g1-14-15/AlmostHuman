@@ -34,19 +34,15 @@ function CPlayer:__init()
 
 	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
 	
-	self.m_pRenderableObject = CInstanceMesh("Logan", "Logan");
-	
-	m_ROM:AddResource("Logan", self.m_pRenderableObject)
-	
-	l_pos = m_CharacterController:GetPosition()
 
+	self.m_pRenderableObject = CreateInstanceMesh("Logan", "Logan");
+	m_ROM:AddResource("Logan", self.m_pRenderableObject)
+	l_pos = m_CharacterController:GetPosition()
 	l_pos.y = l_pos.y - 1.4
 	self.m_pRenderableObject:SetPosition( l_pos );
-	
 	self.m_pRenderableObject:SetYaw( -m_CharacterController:GetYaw() -1.57 );
-	
 	self.m_pRenderableObject:SetScale( Vect3f(0.09) );
-	
+
 	self.m_pRenderableObject:MakeTransform();
 
 	self.m_MoveDt = 0.0
