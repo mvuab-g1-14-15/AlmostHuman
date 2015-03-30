@@ -20,11 +20,10 @@ public:
     virtual ~CCamera();
 
     void            RenderCamera( LPDIRECT3DDEVICE9 device);
-    virtual void    Update( ) = 0;
-
-    virtual Math::Vect3f GetDirection( void ) const = 0;
-    virtual Math::Vect3f GetLookAt( void ) const = 0;
-    virtual Math::Vect3f GetVecUp( void ) const = 0;
+    virtual void    Update( );
+    virtual Math::Vect3f GetDirection( void ) const;
+    virtual Math::Vect3f GetLookAt( void ) const;
+    virtual Math::Vect3f GetVecUp( void ) const;
 
     D3DXMATRIX GetMatrixView( void );
     D3DXMATRIX  GetMatrixProj( void );

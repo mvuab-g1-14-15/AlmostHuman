@@ -295,7 +295,7 @@ bool CEffect::SetLights( size_t NumOfLights )
 
     if ( l_pCurrentLight != NULL )
     {
-      CLight::TLightType l_LightType = l_pCurrentLight->GetType();
+      CLight::ELightType l_LightType = l_pCurrentLight->GetType();
       m_LightsType[i] = static_cast<int>( l_LightType );
       m_LightsStartRangeAttenuation[i] = l_pCurrentLight->GetStartRangeAttenuation();
       m_LightsEndRangeAttenuation[i] = l_pCurrentLight->GetEndRangeAttenuation();
@@ -339,7 +339,7 @@ bool CEffect::SetLight( size_t i_light )
   }
 
   m_LightsEnabled[0] = ( BOOL )l_pCurrentLight == NULL ? 0 : 1;
-  CLight::TLightType l_LightType = l_pCurrentLight->GetType();
+  CLight::ELightType l_LightType = l_pCurrentLight->GetType();
   m_LightsType[0] = static_cast<int>( l_LightType );
   m_LightsStartRangeAttenuation[0] = l_pCurrentLight->GetStartRangeAttenuation();
   m_LightsEndRangeAttenuation[0] = l_pCurrentLight->GetEndRangeAttenuation();

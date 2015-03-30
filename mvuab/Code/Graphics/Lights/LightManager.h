@@ -14,11 +14,12 @@ class CLightManager : public CTemplatedVectorMapManager<CLight>, public CSinglet
 public:
   CLightManager();
   ~CLightManager();
-  bool Load( const std::string& FileName );
+  bool    Load( const std::string& FileName );
+  size_t  GetLightCount();
   CLight* GetLight( size_t at );
-  void Render();
-  void GenerateShadowMap( CGraphicsManager* GM );
-  bool ReLoad();
+  void    Render();
+  void    GenerateShadowMap( CGraphicsManager* GM );
+  bool    ReLoad();
 private:
   std::string m_Filename;
 };

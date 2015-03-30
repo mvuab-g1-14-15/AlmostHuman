@@ -76,8 +76,9 @@ void CCubeEmitter::Update(float dt)
     CParticle *p = &m_Particles[0];
     omp_set_num_threads(2);
 
+    int lNumParticles = m_Particles.size();
     #pragma omp parallel for
-    for(int i = 0; i < m_Particles.size(); i++)
+    for ( int i = 0; i < lNumParticles; ++i )
     {
         (p + i)->Update(dt);
     }

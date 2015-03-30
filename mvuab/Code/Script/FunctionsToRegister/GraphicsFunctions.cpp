@@ -48,126 +48,113 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
 void registerCameras( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Cameras" );
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // CAMERA MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CCameraManager )
+    LUA_DECLARE_METHOD( CCameraManager, GetCamera )
+    LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )
+    LUA_DECLARE_METHOD( CCameraManager, GetCurrentCamera )
+    LUA_DECLARE_METHOD( CCameraManager, NewCamera )
+    LUA_DECLARE_METHOD( CCameraManager, DeleteCamera )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // CAMERA
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS2( CCamera, CName, CObject3D )
-    .def( "GetDirection", &CCamera::GetDirection )
-    .def( "GetLookAt", &CCamera::GetLookAt )
-    .def( "GetVecUp", &CCamera::GetVecUp )
-    .def( "GetPitch", &CCamera::GetPitch )
-    .def( "GetYaw", &CCamera::GetYaw )
-    .def( "GetCameraType", &CCamera::GetCameraType )
-    .def( "GetZNear", &CCamera::GetZNear )
-    .def( "GetZFar", &CCamera::GetZFar )
-    .def( "GetAspectRatio", &CCamera::GetAspectRatio )
-    .def( "GetPos", &CCamera::GetPosition )
-    .def( "GetEnable", &CCamera::GetEnable )
-    .def( "SetPitch", &CCamera::SetPitch )
-    .def( "SetYaw", &CCamera::SetYaw )
-    .def( "SetCameraType", &CCamera::SetCameraType )
-    .def( "SetZNear", &CCamera::SetZNear )
-    .def( "SetZFar", &CCamera::SetZFar )
-    .def( "SetAspectRatio", &CCamera::SetAspectRatio )
-    .def( "SetPos", &CCamera::SetPosition )
-    .def( "SetEnable", &CCamera::SetEnable )
-    .def( "AddYaw", &CCamera::AddYaw )
-    .def( "AddPitch", &CCamera::AddPitch )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_METHOD( CCamera, GetDirection )
+    LUA_DECLARE_METHOD( CCamera, GetLookAt )
+    LUA_DECLARE_METHOD( CCamera, GetVecUp )
+    LUA_DECLARE_METHOD( CCamera, GetZFar )
+    LUA_DECLARE_METHOD( CCamera, GetDirection )
+    LUA_DECLARE_METHOD( CCamera, GetZNear )
+    LUA_DECLARE_METHOD( CCamera, GetAspectRatio )
+    LUA_DECLARE_METHOD( CCamera, GetEnable )
+    LUA_DECLARE_METHOD( CCamera, SetCameraType )
+    LUA_DECLARE_METHOD( CCamera, GetCameraType )
+    LUA_DECLARE_METHOD( CCamera, SetZNear )
+    LUA_DECLARE_METHOD( CCamera, SetZFar )
+    LUA_DECLARE_METHOD( CCamera, SetAspectRatio )
+    LUA_DECLARE_METHOD( CCamera, SetEnable )
+    LUA_DECLARE_METHOD( CCamera, AddYaw )
+    LUA_DECLARE_METHOD( CCamera, AddPitch )
   LUA_END_DECLARATION
 }
 
-void registerGraphics( lua_State* m_LS )
+void registerObject3D( lua_State * aLuaState )
 {
-  module( m_LS )
+  ASSERT( aLuaState, "LuaState error in Register Cameras" );
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // OBJECT 3D
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CObject3D )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_CTOR_4( CObject3D, const Math::Vect3f&, float, float, float )
+    LUA_DECLARE_METHOD( CObject3D, GetYaw )
+    LUA_DECLARE_METHOD( CObject3D, SetYaw )
+    LUA_DECLARE_METHOD( CObject3D, GetPitch )
+    LUA_DECLARE_METHOD( CObject3D, SetPitch )
+    LUA_DECLARE_METHOD( CObject3D, GetRoll )
+    LUA_DECLARE_METHOD( CObject3D, SetRoll )
+    LUA_DECLARE_METHOD( CObject3D, GetPosition )
+    LUA_DECLARE_METHOD( CObject3D, SetPosition )
+    LUA_DECLARE_METHOD( CObject3D, GetTransform )
+    LUA_DECLARE_METHOD( CObject3D, MakeTransform )
+    LUA_DECLARE_METHOD( CObject3D, SetScale )
+    LUA_DECLARE_METHOD( CObject3D, GetScale )
+  LUA_END_DECLARATION
+}
+
+void registerGraphics( lua_State* aLuaState )
+{
+  registerObject3D( aLuaState );
+  registerCameras( aLuaState );
+
+  module( aLuaState )
   [
     def( "CreateInstanceMesh", &CreateInstanceMesh )
   ];
 
-  module( m_LS )
-  [
-    class_<CObject3D>( "CObject3D" )
-    .def( constructor<const Math::Vect3f&, float, float, float>() )
-    .def( constructor<>() )
-    .def( "GetYaw", &CObject3D::GetYaw )
-    .def( "GetRoll", &CObject3D::GetRoll )
-    .def( "GetPitch", &CObject3D::GetPitch )
-    .def( "GetPosition", &CObject3D::GetPosition )
-    .def( "GetTransform", &CObject3D::GetTransform )
-    .def( "SetYaw", &CObject3D::SetYaw )
-    .def( "SetRoll", &CObject3D::SetRoll )
-    .def( "SetPitch", &CObject3D::SetPitch )
-    .def( "SetPosition", &CObject3D::SetPosition )
-    .def( "SetScale", &CObject3D::SetScale )
-    .def( "MakeTransform", &CObject3D::MakeTransform )
-  ];
-  module( m_LS )
-  [
-    class_<CLight, CObject3D>( "CLight" )
-    .def( "GetPosition", &CObject3D::GetPosition )
-    .def( "SetPosition", &CObject3D::SetPosition )
-  ];
-  module( m_LS )
-  [
-    class_<CLightManager>( "CLightManager" )
-    .def( constructor<>() )
-    .def( "GetLight", &CLightManager::GetLight )
-  ];
-  module( m_LS )
-  [
-    class_<COmniLight, bases<CLight, CObject3D>>( "COmniLight" )
-    .def( constructor<>() )
-  ];
-  module( m_LS )
-  [
-    class_<CTextureManager>( "CTextureManager" )
-    .def( constructor<>() )
-    .def( "GetTexture", &CTextureManager::GetTexture ) //TODO: Ask Jordi
-    .def( "AddResource", &CTextureManager::AddResource )
-    .def( "GetResource", &CTextureManager::GetResource )
-    .def( "Reload", &CTextureManager::Reload )
-  ];
-  module( m_LS )
-  [
-    class_<CTexture>( "CTexture" )
-    .def( constructor<>() )
-    .def( "GetFileName", &CTexture::GetFileName )
-    .def( "Load", &CTexture::Load )
-    .def( "Reload", &CTexture::Reload )
-    .def( "Activate" , &CTexture::Activate )
-  ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CRenderableObject, bases<CObject3D, CName>>( "CRenderableObject" )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CInstanceMesh, CRenderableObject>( "CInstanceMesh" )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CTemplatedVectorMapManagerCRenderableObjectManager" )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CRenderableObjectsManager" )
     .def( "GetResource", &CRenderableObjectsLayersManager::GetResource )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CTemplatedVectorMapManager<CRenderableObject>>( "CTemplatedVectorMapManagerCRenderableObject" )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject>>( "CRenderableObjectsManager" )
     .def( constructor<>() )
     .def( "Update", &CRenderableObjectsManager::Update )
     .def( "Render", &CRenderableObjectsManager::Render )
-    /*.def("AddMeshInstance", &CRenderableObjectsManager::AddMeshInstance)
-    .def("AddAnimatedInstanceModel", &CRenderableObjectsManager::AddAnimatedInstanceModel)*/
     .def( "CleanUp", &CRenderableObjectsManager::CleanUp )
     .def( "Load", &CRenderableObjectsManager::Load )
     .def( "AddResource", &CRenderableObjectsManager::AddResource )
     .def( "CreateCinematic", &CRenderableObjectsManager::CreateCinematic )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CGraphicsManager>( "CGraphicsManager" )
     .def( constructor<>() )
@@ -206,53 +193,14 @@ void registerGraphics( lua_State* m_LS )
   ];
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  module( m_LS )
-  [
-    class_<CCameraManager>( "CCameraManager" )
-    .def( constructor<>() )
-    .def( "GetCamera", &CCameraManager::GetCamera )
-    .def( "SetCurrentCamera", &CCameraManager::SetCurrentCamera) // Ask Jordi
-    .def( "GetCurrentCamera", &CCameraManager::GetCurrentCamera )
-    .def( "NewCamera", &CCameraManager::NewCamera )
-    .def( "DeleteCamera", &CCameraManager::DeleteCamera )
-  ];
-  module( m_LS )
-  [
-    class_<CCamera, CName>( "CCamera" )
-    .def( "GetDirection", &CCamera::GetDirection )
-    .def( "GetLookAt", &CCamera::GetLookAt )
-    .def( "GetVecUp", &CCamera::GetVecUp )
-    .def( "GetPitch", &CCamera::GetPitch )
-    .def( "GetYaw", &CCamera::GetYaw )
-    .def( "GetCameraType", &CCamera::GetCameraType )
-    .def( "GetZNear", &CCamera::GetZNear )
-    .def( "GetZFar", &CCamera::GetZFar )
-    .def( "GetAspectRatio", &CCamera::GetAspectRatio )
-    .def( "GetPos", &CCamera::GetPosition )
-    .def( "GetEnable", &CCamera::GetEnable )
-    .def( "SetPitch", &CCamera::SetPitch )
-    .def( "SetYaw", &CCamera::SetYaw )
-    .def( "SetCameraType", &CCamera::SetCameraType )
-    .def( "SetZNear", &CCamera::SetZNear )
-    .def( "SetZFar", &CCamera::SetZFar )
-    .def( "SetAspectRatio", &CCamera::SetAspectRatio )
-    .def( "SetPos", &CCamera::SetPosition )
-    .def( "SetEnable", &CCamera::SetEnable )
-    .def( "AddYaw", &CCamera::AddYaw )
-    .def( "AddPitch", &CCamera::AddPitch )
-  ];
-  module( m_LS )
-  [
-    class_<CCameraInfo>( "CCameraInfo" )
-    .def( "SetLookAt", &CCameraInfo::SetLookAt )
-  ];
+
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CCinematicPlayer>( "CCinematicPlayer" )
   ];
-  module( m_LS )
+  module( aLuaState )
   [
     class_<CCinematic, bases<CRenderableObject, CCinematicPlayer>>( "CCinematic" )
     .def( constructor<const std::string&>() )

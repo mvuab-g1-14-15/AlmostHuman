@@ -1,12 +1,5 @@
-/*
- * luabind_macros.h
- *
- *  Created on: May 1, 2012
- *      Author: jschober
- */
-
-#ifndef __LUABIND_MACROS_H__
-#define __LUABIND_MACROS_H__
+#ifndef __LUA_MACROS_H__
+#define __LUA_MACROS_H__
 
 #define LUA_BEGIN_DECLARATION( LS ) luabind::module( LS ) [
 #define LUA_END_DECLARATION ];
@@ -14,6 +7,21 @@
 #define LUA_DECLARE_CLASS( CL )                       luabind::class_< CL >( #CL )
 #define LUA_DECLARE_DERIVED_CLASS( CL, BASE )         luabind::class_< CL, BASE >( #CL )
 #define LUA_DECLARE_DERIVED_CLASS2( CL, BASE, BASE1 ) luabind::class_< CL, bases< BASE, BASE1 > >( #CL )
+
+#define LUA_DECLARE_DEFAULT_CTOR                           .def(luabind::constructor<>())
+#define LUA_DECLARE_CTOR_1( CL, P1 )                       .def(luabind::constructor<P1>())
+#define LUA_DECLARE_CTOR_2( CL, P1, P2 )                   .def(luabind::constructor<P1,P2>())
+#define LUA_DECLARE_CTOR_3( CL, P1, P2, P3 )               .def(luabind::constructor<P1,P2,P3>())
+#define LUA_DECLARE_CTOR_4( CL, P1, P2, P3, P4 )           .def(luabind::constructor<P1,P2,P3,P4>())
+#define LUA_DECLARE_CTOR_5( CL, P1, P2, P3, P4, P5 )       .def(luabind::constructor<P1,P2,P3,P4,P5>())
+#define LUA_DECLARE_CTOR_6( CL, P1, P2, P3, P4, P5, P6 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6>())
+
+#define LUA_DECLARE_METHOD( CL, NAME )                .def( #NAME, &CL::NAME )
+#define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, PROTO )
+
+#define LUA_BEGIN_ENUM( CL, NAME )                    .enum_( #NAME )[
+#define LUA_ENUM_VALUE( NAME, VAL )                   luabind::value( #NAME, VAL )
+#define LUA_END_ENUM( )                               ]
 
 #ifdef _HAS_LUA_BIND_
 
@@ -65,4 +73,4 @@
 
 #endif // _HAS_LUA_BIND_
 
-#endif /* LUABIND_MACROS_H_ */
+#endif /* LUA_MACROS_H_ */

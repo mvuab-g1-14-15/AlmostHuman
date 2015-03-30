@@ -585,31 +585,6 @@ void CPhysicActor::GetMat44( Mat44f& matrix ) const
   matrix.m33 = m_aux[15];
 }
 
-Math::Mat44f& CPhysicActor::GetMat44() const
-{
-  Math::Mat44f matrix;
-  assert( m_pPhXActor );
-  NxF32 m_aux[16];
-  m_pPhXActor->getGlobalPose().getColumnMajor44( m_aux );
-  matrix.m00 = m_aux[0];
-  matrix.m01 = m_aux[4];
-  matrix.m02 = m_aux[8];
-  matrix.m03 = m_aux[12];
-  matrix.m10 = m_aux[1];
-  matrix.m11 = m_aux[5];
-  matrix.m12 = m_aux[9];
-  matrix.m13 = m_aux[13];
-  matrix.m20 = m_aux[2];
-  matrix.m21 = m_aux[6];
-  matrix.m22 = m_aux[10];
-  matrix.m23 = m_aux[14];
-  matrix.m30 = m_aux[3];
-  matrix.m31 = m_aux[7];
-  matrix.m32 = m_aux[11];
-  matrix.m33 = m_aux[15];
-  return matrix;
-}
-
 Mat33f CPhysicActor::GetInertiaTensor( void )
 {
   if ( m_pPhXActor )

@@ -32,7 +32,7 @@ function CPlayer:__init()
     --Init Controllers
     self:InitControllers()
 
-	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
+	camera_manager:GetCurrentCamera():SetPosition(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()*2/3), position.z))
 	
 
 	self.m_pRenderableObject = CreateInstanceMesh("Logan", "Logan");
@@ -82,7 +82,7 @@ function CPlayer:Update()
 
 	if self.m_LeanOut == true then
 		self:LeanOut(self.m_Side, l_Dt)
-		local diferencia = Vect3f(m_CameraManager:GetCurrentCamera():GetPos()) - Vect3f(m_CharacterController:GetPosition())
+		local diferencia = Vect3f(m_CameraManager:GetCurrentCamera():GetPosition()) - Vect3f(m_CharacterController:GetPosition())
 		if ((diferencia.x < 0.25 and diferencia.x > -0.25) and (diferencia.z < 0.25 and diferencia.z > -0.25)) then
 			self.m_LeanOut = false
 			self.m_MoveDt = 0.0
@@ -206,7 +206,7 @@ function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
 	local l_LookAt = Vect3f(math.cos(l_Yaw) + math.cos(l_Yaw + 3.141618 * 0.5), 0, math.sin(l_Yaw) + math.sin(l_Yaw + 3.141618 * 0.5))
 	l_LookAt:Normalize()
     l_Position = self:CameraShake(l_Position, l_Dt)
-	l_Camera:SetPos(l_Position + l_LookAt*0.1)
+	l_Camera:SetPosition(l_Position + l_LookAt*0.1)
 	
 	
 end
@@ -243,7 +243,7 @@ function CPlayer:CambiarSala()
 	end
 	local position = self.rooms[self.g_Room]
 	m_CharacterController:SetPosition(position)
-	camera_manager:GetCurrentCamera():SetPos(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()/2), position.z))
+	camera_manager:GetCurrentCamera():SetPosition(Vect3f(position.x, position.y + (m_CharacterController:GetHeight()/2), position.z))
 end
 
 function CPlayer:Jump(amount)
@@ -263,7 +263,7 @@ end
 
 function CPlayer:LeanOut(direction, l_Dt)
 	current_camera = m_CameraManager:GetCurrentCamera()
-	local l_Pos = current_camera:GetPos()
+	local l_Pos = current_camera:GetPosition()
 	
 	local l_Dir     = current_camera:GetDirection()
 	local l_Up      = current_camera:GetVecUp()
@@ -292,7 +292,7 @@ function CPlayer:LeanOut(direction, l_Dt)
 			l_Pos = l_Pos + (self.m_MoveTo - l_Pos) * self.m_MoveDt
 			self.m_MoveDt = self.m_MoveDt + l_Dt
 			
-			current_camera:SetPos(l_Pos)
+			current_camera:SetPosition(l_Pos)
 			
 			l_PosRO.y = l_PosRO.y - 1.45 - (m_CharacterController:GetHeight()*2/3)
 			self.m_pRenderableObject:SetPosition( l_PosRO )
@@ -319,7 +319,7 @@ function CPlayer:LeanOut(direction, l_Dt)
 				l_Pos = l_Pos + (self.m_MoveTo - l_Pos) * self.m_MoveDt
 				self.m_MoveDt = self.m_MoveDt - l_Dt
 				
-				current_camera:SetPos(l_Pos)
+				current_camera:SetPosition(l_Pos)
 				
 				l_PosRO.y = l_PosRO.y - 1.45 - (m_CharacterController:GetHeight()*2/3)
 				self.m_pRenderableObject:SetPosition( l_PosRO )

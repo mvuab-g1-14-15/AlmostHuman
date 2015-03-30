@@ -82,17 +82,16 @@ void CLensOfFlareRendererCommand::Execute( CGraphicsManager& GM )
     Math::Vect2f l_FlarePoint = l_SunInScreen + l_Displacement;
 
     // The biggest must be the sun
-    float32 l_FlareSize = ( i == 0 ) ? 150 :  100  - ( i * 20 ) ;
+    float32 l_FlareSize = ( i == 0 ) ? 150.0f :  100.0f  - ( i * 20.0f ) ;
 
     if ( l_FlareSize < 1 )
       continue;
 
     // Obtain the rect in screen space of the flare
-    long left = l_FlarePoint.x - l_FlareSize;
-
-    long top = l_FlarePoint.y - l_FlareSize;
-    long bottom = l_FlarePoint.y  + l_FlareSize;
-    long right = l_FlarePoint.x + l_FlareSize;
+    long left     = (long) (l_FlarePoint.x - l_FlareSize);
+    long top      = (long) (l_FlarePoint.y - l_FlareSize);
+    long bottom   = (long) (l_FlarePoint.y  + l_FlareSize);
+    long right    = (long) (l_FlarePoint.x + l_FlareSize);
     RECT l_Rect = { left, top, right, bottom };
 
     // Modify the color of the flares with the light color

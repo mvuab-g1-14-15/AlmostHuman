@@ -304,7 +304,7 @@ bool CGraphicsManager::Init( HWND hWnd, bool fullscreenMode, uint32 widthScreen,
   }
 
   D3DXCreateTeapot( m_pD3DDevice, &m_TeapotMesh, 0 );
-  D3DXCreateSphere( m_pD3DDevice, 0.2, 10, 10, &m_SphereMesh, 0 );
+  D3DXCreateSphere( m_pD3DDevice, 0.2f, 10, 10, &m_SphereMesh, 0 );
   return m_bIsOk;
 }
 
@@ -743,19 +743,8 @@ void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, 
 }
 void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, Math::CColor Color )
 {
-  //D3DXMATRIX matrix;
-  //D3DXMatrixIdentity( &matrix );
-  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
-  //DrawCylinder( radius, radius, h-radius*2, Aristas, Color, true );
-  //D3DXMATRIX translation1, translation2;
-  //D3DXMatrixTranslation( &translation1, 0.f, h * 0.5f, 0.f );
-  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation1 );
-  //DrawSphere( radius, Color, Aristas );
-  //D3DXMatrixTranslation( &translation2, 0.f, -h * 0.5f, 0.f );
-  //m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation2 );
-  //DrawSphere( radius, Color, Aristas );
   Math::Mat44f t;
-  t.RotByAngleX( 3.1415 / 2 );
+  t.RotByAngleX( Math::half_pi32 );
   SetTransform( t );
   DrawCylinder( radius, radius, h, Aristas, Color, false );
   t.SetIdentity();

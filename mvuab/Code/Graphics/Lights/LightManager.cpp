@@ -88,6 +88,11 @@ CLight* CLightManager::GetLight( size_t at )
   return GetResourceById( at );
 }
 
+size_t  CLightManager::GetLightCount()
+{
+  return m_ResourcesVector.size();
+}
+
 void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
 {
   TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();

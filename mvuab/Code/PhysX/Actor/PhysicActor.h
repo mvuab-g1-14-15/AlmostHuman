@@ -142,7 +142,6 @@ public:
 
   //---Get Info-------
   void        GetMat44( Mat44f& _mMatrix ) const;
-  Mat44f&       GetMat44() const;
   void        SetMat44( const Mat44f& _mMatrix );
   void        MoveGlobalPoseMat44( const Mat44f& _mMatrix );
 

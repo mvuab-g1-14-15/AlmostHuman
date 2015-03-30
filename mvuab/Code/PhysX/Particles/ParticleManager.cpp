@@ -107,7 +107,7 @@ bool CParticleManager::Init( const std::string& path )
 
 void CParticleManager::Update( float dt )
 {
-  for ( int i = 0; i < m_Emitters.size();  ++i )
+  for ( size_t i = 0; i < m_Emitters.size();  ++i )
   {
     if ( m_Emitters[i]->GetEmitterLifeTime() != -1 )
     {

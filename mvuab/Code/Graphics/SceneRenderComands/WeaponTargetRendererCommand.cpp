@@ -31,11 +31,11 @@ void CWeaponTargetRendererCommand::Execute( CGraphicsManager& GM )
   GM.GetWidthAndHeight( width, height );
   Math::Vect2f l_ScreenMiddlePoint( float32( width / 2 ), float32( height / 2 ) );
   
-  long left = l_ScreenMiddlePoint.x - mGizmoSize;
-  long top = l_ScreenMiddlePoint.y - mGizmoSize;
-  long bottom = l_ScreenMiddlePoint.y  + mGizmoSize;
-  long right = l_ScreenMiddlePoint.x + mGizmoSize;
-  RECT l_Rect = { left, top, right, bottom };
+  long left     = (long) (l_ScreenMiddlePoint.x - mGizmoSize);
+  long top      = (long) (l_ScreenMiddlePoint.y - mGizmoSize);
+  long bottom   = (long) (l_ScreenMiddlePoint.y + mGizmoSize);
+  long right    = (long) (l_ScreenMiddlePoint.x + mGizmoSize);
+  RECT l_Rect   = { left, top, right, bottom };
 
   CEffectTechnique* l_EffectTech =  m_RenderableObjectTechnique->GetEffectTechnique();
   // Modify the color of the flares with the light color

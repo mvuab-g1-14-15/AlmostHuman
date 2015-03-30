@@ -94,7 +94,7 @@ float CLight::GetIntensity() const
   return m_Intensity;
 }
 
-void CLight::SetType( const TLightType Type )
+void CLight::SetType( const ELightType Type )
 {
   m_Type = Type;
 }
@@ -134,7 +134,7 @@ bool CLight::RenderShadows() const
   return false;
 }
 
-CLight::TLightType CLight::GetType() const
+CLight::ELightType CLight::GetType() const
 {
   return m_Type;
 }
@@ -264,14 +264,4 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect* Effect )
                                     m_GenerateStaticShadowMap, m_GenerateDynamicShadowMap &&
                                     m_DynamicShadowMapRenderableObjectsManagers.size() != 0 );
   }
-}
-
-void CLight::ReloadLayers()
-{
-	/*CRenderableObjectsManager* l_ROM =
-	CoreInstance->GetRenderableObjectsLayersManager()->GetResource( "solid" );
-
-	if ( !l_ROM )
-		m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
-	*/
 }

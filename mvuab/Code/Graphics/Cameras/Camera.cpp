@@ -21,6 +21,26 @@ CCamera::~CCamera()
 {
 }
 
+void CCamera::Update( )
+{
+
+}
+
+Math::Vect3f CCamera::GetDirection( void ) const
+{
+  return Math::Vect3f();
+}
+
+Math::Vect3f CCamera::GetLookAt( void ) const
+{
+  return Math::Vect3f();
+}
+
+Math::Vect3f CCamera::GetVecUp( void ) const
+{
+  return Math::Vect3f();
+}
+
 D3DXMATRIX CCamera::GetMatrixView( void )
 {
   Math::Vect3f& l_LookAt = GetLookAt();

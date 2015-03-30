@@ -1365,7 +1365,7 @@ int CPhysicsManager::AddMaterial( float restitution, float staticFriction, float
   l_MatDesc.restitution = restitution;
   l_MatDesc.staticFriction = staticFriction;
   l_MatDesc.dynamicFriction = dynamicFriction;
-  l_MatDesc.restitutionCombineMode = NxCombineMode::NX_CM_AVERAGE;
+  l_MatDesc.restitutionCombineMode = NxCombineMode(0);
   return m_pScene->createMaterial( l_MatDesc )->getMaterialIndex();
 }
 

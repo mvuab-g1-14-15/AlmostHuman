@@ -91,9 +91,9 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
     RegisterClassEx( &wc );
     
     // For random number generation
-    srand(time(0));
+    srand((unsigned int)time(0));
 
-    // Optain the engine instance
+    // Obtain the engine instance
     CGPUStatics* gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
     CEngine* pEngine = new CEngine();
