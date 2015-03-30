@@ -274,7 +274,7 @@ void CCore::InitManagers()
                                Math::Vect3f( 15.0f, 2.0f, 0.0f ),
                                Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
   m_pCameraManager->NewCamera( CCamera::Free, "FreeCam",
-                               Math::Vect3f( 12.28, -16.75, 12.75 ),
+                               Math::Vect3f( 12.28f, -16.75f, 12.75f ),
                                Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "Plane",
                                Math::Vect3f( 0.0f, 15.0f, 0.0f ),

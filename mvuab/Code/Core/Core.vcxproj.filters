@@ -16,6 +16,7 @@
     <ClCompile Include="Utils\LogRender.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="EngineConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
@@ -24,5 +25,6 @@
     <ClInclude Include="Utils\LogRender.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="EngineConfig.h" />
   </ItemGroup>
 </Project>
