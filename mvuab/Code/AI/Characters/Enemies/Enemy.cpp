@@ -11,6 +11,7 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObject.h"
 #include "Actor\PhysicController.h"
+#include "PhysicsManager.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
@@ -26,6 +27,7 @@ CEnemy::~CEnemy()
 {
   CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
+  CPhysicsManager::GetSingletonPtr()->ReleasePhysicController( m_Controller );
 }
 
 void CEnemy::Update()
