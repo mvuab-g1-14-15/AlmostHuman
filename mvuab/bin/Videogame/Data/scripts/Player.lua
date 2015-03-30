@@ -143,11 +143,11 @@ function CPlayer:Update()
 			local current_camera = camera_manager:GetCurrentCamera();
 			
 			if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
-				current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+				current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * l_Dt * 30.0 );
 			end
 			local current_camera = camera_manager:GetCurrentCamera();
 			if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
-				current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * l_Dt * 100.0 );
+				current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * l_Dt * 30.0 );
 			end
 			
 			if action_manager:DoAction("Jump") then

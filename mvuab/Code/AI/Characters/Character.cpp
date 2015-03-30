@@ -91,8 +91,8 @@ void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
   CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
-  l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.2f ),
-                       Node.GetFloatProperty( "height", 1.0f ),
+  l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.4f ),
+                       Node.GetFloatProperty( "height", 2.5f ),
                        Node.GetFloatProperty( "slope", 0.2f ),
                        Node.GetFloatProperty( "skin_width", 0.01f ),
                        Node.GetFloatProperty( "step", 0.5f ),

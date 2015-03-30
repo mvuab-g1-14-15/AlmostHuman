@@ -38,7 +38,7 @@ fn GetAABB Obj =
 		l_maxPoint.z = GetMax l_maxPoint.z Coord3.z
 	)
 	
-	format "Points Min % and Max % and num faces %\n" l_minPoint l_maxPoint l_nFaces
+	--format "Points Min % and Max % and num faces %\n" l_minPoint l_maxPoint l_nFaces
 	
 	return #(l_minPoint, l_maxPoint)
 )

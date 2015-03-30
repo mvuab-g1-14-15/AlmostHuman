@@ -14,7 +14,7 @@ struct STexture
 	
 	fn FromMaxTexture textureFileName =
 	(
-		format "Texture name: %\n" textureFileName
+		--format "Texture name: %\n" textureFileName
 		m_Name = filenameFromPath textureFileName
 		m_Path = getFilenamePath textureFileName
 	),
@@ -78,7 +78,7 @@ struct SMaterial
 				
 				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
 				(
-					format "SelfIlum\n"
+					--format "SelfIlum\n"
 					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
 					-- Load the texture 2
 					local lSelfIlumMaterial = mat.selfIllumMap
@@ -88,7 +88,7 @@ struct SMaterial
 						local l_TextureColor0FileName = lSelfIlumMaterial.id_0_color_shader.filename
 						local l_TextureColor1FileName = lSelfIlumMaterial.id_1_color_shader.filename
 						local l_TextureColor2FileName = lSelfIlumMaterial.id_2_color_shader.filename
-						format "Radiosity % % %\n" l_TextureColor0FileName l_TextureColor1FileName l_TextureColor2FileName
+						--format "Radiosity % % %\n" l_TextureColor0FileName l_TextureColor1FileName l_TextureColor2FileName
 						m_TexturesRadiosityColor0.FromMaxTexture l_TextureColor0FileName
 						m_TexturesRadiosityColor1.FromMaxTexture l_TextureColor1FileName
 						m_TexturesRadiosityColor2.FromMaxTexture l_TextureColor2FileName
@@ -139,12 +139,11 @@ struct SMaterial
 				)
 			)
 		)
-		
+		--format "Vertex Type: %\n" m_Type
 	),
 	
 	fn FromMaxUndefinedMaterial Obj =
 	(
-		
 		--format "FromMaxUndefinedMaterial % %" Obj.name  Obj
 		
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
@@ -222,6 +221,7 @@ struct SVertexBuffer
 	(
 		local l_VertexStr = vertex.GetAsString()
 		local l_VertexIdx = 1
+		--format "\t -- Vertex Str: %\n" l_VertexStr
 		if (m_VertexIdMap.ContainsKey (l_VertexStr)) == false then
 		(
 			append m_VertexList vertex
@@ -561,17 +561,41 @@ struct SMesh
 	(
 		--format "Write to file\n"
 		WriteShort file 0x55ff #unsigned
-		WriteShort file m_SubMeshes.count #unsigned--Write number of materials
+		--WriteShort file m_SubMeshes.count #unsigned--Write number of materials
 	
+		local counter = 0
+		for iSubMesh in m_SubMeshes do
+		(
+			if IsSubmeshComplete iSubMesh then
+			(
+				counter = counter + 1
+			)
+		)
+		WriteShort file counter #unsigned--Write number of materials
+		format "Submeshes: %\n" counter
+		
 		for iSubMesh in m_SubMeshes do
 		(
 			--format "Current Submesh%\n" iSubMesh
-			iSubMesh.WriteToFile file
+			if IsSubmeshComplete iSubMesh then
+			(
+				--format "--------------m_Material: %\n" iSubMesh.m_Material
+				iSubMesh.WriteToFile file
+			)
 		)
 		
 		m_AABB.WriteToFile file
 	
 		WriteShort file 0xff55 #unsigned
+		format "Footer writed!\n"
 	)
 )
 
+fn IsSubmeshComplete subMesh =
+(
+	local nVertex = subMesh.m_VB.m_VertexList.count
+	local nIndex = subMesh.m_IB.m_IndexList.count
+	
+	format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
+	return nVertex != 0 and nIndex != 0
+)
