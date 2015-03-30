@@ -50,7 +50,7 @@ bool CStaticMesh::Load( const std::string& FileName )
   if ( 0 == l_pFile )
   {
     LOG_ERROR_APPLICATION( "CStaticMesh::Load No se ha podido abrir \"%s\"!",
-                                           FileName.c_str() );
+                           FileName.c_str() );
     return ( false );
   }
 
@@ -126,7 +126,7 @@ bool CStaticMesh::Load( const std::string& FileName )
       ZeroMemory( textureName, sizeof( char )* l_TextureLength );
       std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
       // Get the texture from the texture manager
-      CTexture* t = CTextureManager::GetSingletonPtr()->GetTexture( textureName );
+      CTexture* t = CTextureManager::GetSingletonPtr()->GetTexture( "Data/textures/" + std::string( textureName ) );
 
       if ( t )
         l_Texture.push_back( t );
@@ -267,17 +267,17 @@ bool CStaticMesh::ReLoad()
 }
 
 void CStaticMesh::Render( CGraphicsManager* GM )
-{    
-    for ( unsigned int i = 0; i < m_RVs.size(); ++i )
-    {
-        for ( unsigned int j = 0; j < m_Textures[i].size(); ++j )
-            m_Textures[i][j]->Activate( j );
-        
-        if ( m_RenderableObjectTechniques[i] != NULL )
-            m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
-        else
-            LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
-    }
+{
+  for ( unsigned int i = 0; i < m_RVs.size(); ++i )
+  {
+    for ( unsigned int j = 0; j < m_Textures[i].size(); ++j )
+      m_Textures[i][j]->Activate( j );
+
+    if ( m_RenderableObjectTechniques[i] != NULL )
+      m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
+    else
+      LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
+  }
 }
 
 bool CStaticMesh::GetRenderableObjectTechnique()
@@ -298,8 +298,8 @@ bool CStaticMesh::GetRenderableObjectTechnique()
 
     if ( l_ROT == NULL )
       LOG_ERROR_APPLICATION(
-                                             "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh",
-                                             m_RenderableObjectTechniqueName.c_str() );
+        "Error trying to GetRenderableObjectTechnique '%s' on CStaticMesh",
+        m_RenderableObjectTechniqueName.c_str() );
 
     l_Ok = l_Ok && l_ROT != NULL;
   }
