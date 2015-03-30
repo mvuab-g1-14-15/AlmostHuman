@@ -70,7 +70,7 @@ CCore::CCore() :
   m_pLightManager( new CLightManager() ),
   m_pSceneRendererCommandManager( new CSceneRendererCommandManager() ),
   m_pPhysicsManager( new CPhysicsManager() ),
- // m_pEnemyManager( new CEnemyManager() ),
+  m_pEnemyManager( new CEnemyManager() ),
   m_pTriggerManager( new CTriggerManager() ),
   m_pTimer( new CTimer( 30 ) ),
   m_pConsole( new CConsole( TRUE ) ),
@@ -97,7 +97,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pActionManager );
   CHECKED_DELETE( m_pFontManager );
   CHECKED_DELETE( m_pLanguageManager );
-  //CHECKED_DELETE( m_pEnemyManager );
+  CHECKED_DELETE( m_pEnemyManager );
   CHECKED_DELETE( m_pStaticMeshManager );
   CHECKED_DELETE( m_pRenderableObjectsManager );
   CHECKED_DELETE( m_pRenderableObjectsLayersManager );
@@ -134,7 +134,7 @@ void CCore::Update()
   m_pActionManager->Update();
 
   m_pPhysicsManager->Update( deltaTime );
-  //m_pEnemyManager->Update();
+  m_pEnemyManager->Update();
 
   m_pCameraManager->Update();
 
@@ -284,7 +284,7 @@ void CCore::InitManagers()
   m_pScriptManager->Load( m_LuaRunPath );
   m_pLightManager->Load( m_LightsPath );
   m_pPhysicsManager->Init();
- // m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
+  m_pEnemyManager->Init( "Data/enemies/enemies.xml" );
   m_pTriggerManager->LoadXML( m_TriggersPath );
 
   m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, "Data/textures/smoke.png" );
