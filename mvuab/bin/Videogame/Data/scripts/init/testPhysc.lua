@@ -244,7 +244,7 @@ function moveFree( flag_speed, forward, strafe, dt )
 	local current_camera = camera_manager:GetCurrentCamera();
 	local Yaw = current_camera:GetYaw()
 	local Pitch = current_camera:GetPitch()
-	local cam_pos = current_camera:GetPos()
+	local cam_pos = current_camera:GetPosition()
 	
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
@@ -261,7 +261,7 @@ function moveFree( flag_speed, forward, strafe, dt )
 	end
 	
     addPos = addPos * constant;
-	current_camera:SetPos((cam_pos + addPos))
+	current_camera:SetPosition((cam_pos + addPos))
 end
 
 function render()
