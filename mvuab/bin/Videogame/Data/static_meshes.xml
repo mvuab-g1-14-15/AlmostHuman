@@ -1,29 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="Logan" filename="\meshes\Logan.mesh" />
   <static_mesh name="enemy_android" filename="\meshes\enemy_android.mesh" />
-  <static_mesh name="enemy_low_patrol" filename="\meshes\enemy_low_patrol.mesh" />
-  <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
-  <static_mesh name="Box002" filename="\meshes\Box002.mesh" />
-  <static_mesh name="Box003" filename="\meshes\Box003.mesh" />
-  <static_mesh name="Plane002" filename="\meshes\Plane002.mesh" />
-  <static_mesh name="Box004" filename="\meshes\Box004.mesh" />
-  <static_mesh name="Plane004" filename="\meshes\Plane004.mesh" />
-  <static_mesh name="Cylinder001" filename="\meshes\Cylinder001.mesh" />
-  <static_mesh name="Box007" filename="\meshes\Box007.mesh" />
-  <static_mesh name="Box008" filename="\meshes\Box008.mesh" />
-  <static_mesh name="Box009" filename="\meshes\Box009.mesh" />
-  <static_mesh name="Box010" filename="\meshes\Box010.mesh" />
-  <static_mesh name="Box011" filename="\meshes\Box011.mesh" />
-  <static_mesh name="Box012" filename="\meshes\Box012.mesh" />
-  <static_mesh name="Box013" filename="\meshes\Box013.mesh" />
-  <static_mesh name="Box014" filename="\meshes\Box014.mesh" />
-  <static_mesh name="Box015" filename="\meshes\Box015.mesh" />
-  <static_mesh name="Tube002" filename="\meshes\Tube002.mesh" />
-  <static_mesh name="Box016" filename="\meshes\Box016.mesh" />
   <static_mesh name="Plane005" filename="\meshes\Plane005.mesh" />
   <static_mesh name="Box017" filename="\meshes\Box017.mesh" />
-  <static_mesh name="Box018" filename="\meshes\Box018.mesh" />
+  <static_mesh name="Box018a" filename="\meshes\Box018a.mesh" />
+  <static_mesh name="StraightStair001" filename="\meshes\StraightStair001.mesh" />
+  <static_mesh name="StraightStair002" filename="\meshes\StraightStair002.mesh" />
   <static_mesh name="OilTank001" filename="\meshes\OilTank001.mesh" />
   <static_mesh name="OilTank002" filename="\meshes\OilTank002.mesh" />
   <static_mesh name="OilTank003" filename="\meshes\OilTank003.mesh" />
@@ -33,12 +15,10 @@
   <static_mesh name="OilTank007" filename="\meshes\OilTank007.mesh" />
   <static_mesh name="Plane006" filename="\meshes\Plane006.mesh" />
   <static_mesh name="Box019" filename="\meshes\Box019.mesh" />
-  <static_mesh name="Box020" filename="\meshes\Box020.mesh" />
   <static_mesh name="Plane007" filename="\meshes\Plane007.mesh" />
   <static_mesh name="Plane008" filename="\meshes\Plane008.mesh" />
   <static_mesh name="Box021" filename="\meshes\Box021.mesh" />
   <static_mesh name="Plane009" filename="\meshes\Plane009.mesh" />
-  <static_mesh name="Box022" filename="\meshes\Box022.mesh" />
   <static_mesh name="Cylinder002" filename="\meshes\Cylinder002.mesh" />
   <static_mesh name="StraightStair003" filename="\meshes\StraightStair003.mesh" />
   <static_mesh name="Gengon001" filename="\meshes\Gengon001.mesh" />
@@ -91,6 +71,34 @@
   <static_mesh name="StraightStair007" filename="\meshes\StraightStair007.mesh" />
   <static_mesh name="StraightStair008" filename="\meshes\StraightStair008.mesh" />
   <static_mesh name="Plane012" filename="\meshes\Plane012.mesh" />
-  <static_mesh name="Sphere001" filename="\meshes\Sphere001.mesh" />
-  <static_mesh name="StraightStair009" filename="\meshes\StraightStair009.mesh" />
+  <static_mesh name="taulell" filename="\meshes\taulell.mesh" />
+  <static_mesh name="Bombona" filename="\meshes\Bombona.mesh" />
+  <static_mesh name="Armari_2" filename="\meshes\Armari_2.mesh" />
+  <static_mesh name="Tauleta_2" filename="\meshes\Tauleta_2.mesh" />
+  <static_mesh name="base_carga" filename="\meshes\base_carga.mesh" />
+  <static_mesh name="Tube002" filename="\meshes\Tube002.mesh" />
+  <static_mesh name="Aixeta" filename="\meshes\Aixeta.mesh" />
+  <static_mesh name="Focus_1" filename="\meshes\Focus_1.mesh" />
+  <static_mesh name="Taula_operacions" filename="\meshes\Taula_operacions.mesh" />
+  <static_mesh name="alcohol" filename="\meshes\alcohol.mesh" />
+  <static_mesh name="Alcohol_2" filename="\meshes\Alcohol_2.mesh" />
+  <static_mesh name="caixa_1" filename="\meshes\caixa_1.mesh" />
+  <static_mesh name="caixa_2" filename="\meshes\caixa_2.mesh" />
+  <static_mesh name="ampolla_1" filename="\meshes\ampolla_1.mesh" />
+  <static_mesh name="Focus_002" filename="\meshes\Focus_002.mesh" />
+  <static_mesh name="Tube001" filename="\meshes\Tube001.mesh" />
+  <static_mesh name="ampolla_002" filename="\meshes\ampolla_002.mesh" />
+  <static_mesh name="ampolla_003" filename="\meshes\ampolla_003.mesh" />
+  <static_mesh name="Tauleta" filename="\meshes\Tauleta.mesh" />
+  <static_mesh name="Rodes" filename="\meshes\Rodes.mesh" />
+  <static_mesh name="Oscilograma" filename="\meshes\Oscilograma.mesh" />
+  <static_mesh name="Cone001" filename="\meshes\Cone001.mesh" />
+  <static_mesh name="tuberia" filename="\meshes\tuberia.mesh" />
+  <static_mesh name="Object002" filename="\meshes\Object002.mesh" />
+  <static_mesh name="Box018" filename="\meshes\Box018.mesh" />
+  <static_mesh name="Cylinder001" filename="\meshes\Cylinder001.mesh" />
+  <static_mesh name="Armari_004" filename="\meshes\Armari_004.mesh" />
+  <static_mesh name="Box019a" filename="\meshes\Box019a.mesh" />
+  <static_mesh name="Tauleta001" filename="\meshes\Tauleta001.mesh" />
+  <static_mesh name="Rodes001" filename="\meshes\Rodes001.mesh" />
 </static_meshes>
