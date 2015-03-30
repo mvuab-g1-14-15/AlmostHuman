@@ -83,6 +83,26 @@ fn GetUniqueInstances =
 	return uniqueInstance
 )
 
+fn GetUniqueInstancesScene = 
+(
+	local uniqueInstance = #()
+	for obj in geometry do
+	(
+		if (InstanceMgr.GetInstances obj &instances) > 1 then
+		(
+			if findItem uniqueInstance instances[1] == 0 do
+				append uniqueInstance instances[1]
+		)
+		else
+		(
+			append uniqueInstance obj
+		)
+	)
+    --allInsts.wirecolor = green
+	--print uniqueInstance
+	return uniqueInstance
+)
+
 fn IsEmptyDestPath SrcPath =
 (
 	if SrcPath == "" then
@@ -96,6 +116,7 @@ fn ExportSelectedObjectsMeshes aListObjects MeshDir =
 (
 	for Obj in aListObjects do
 	(
+		format "Object name: %\n" Obj.name
 		try
 		(
 			filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico

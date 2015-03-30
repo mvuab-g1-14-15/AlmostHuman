@@ -31,10 +31,10 @@ struct SVertex
 		format "% % " m_UV.x m_UV.y to:l_Text
 		--convert Color
 		
-		format "% % % %" bit.and m_Color 0xFF000000 bit.and m_Color 0x00FF0000 bit.and m_Color 0x0000FF00 bit.and m_Color 0x000000FF 
+		--format "% % % %" bit.and m_Color 0xFF000000 bit.and m_Color 0x00FF0000 bit.and m_Color 0x0000FF00 bit.and m_Color 0x000000FF 
 		
-		--format "%" m_Color #unsigned to:l_Text
-		--format "%" (formattedprint m_Color format:"x") to:l_Text  
+		format "%" m_Color #unsigned to:l_Text
+		format "%" (formattedprint m_Color format:"x") to:l_Text  
 		return (l_Text as string)
 	),
 	

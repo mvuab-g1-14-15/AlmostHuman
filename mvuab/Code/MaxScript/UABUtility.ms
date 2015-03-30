@@ -40,7 +40,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 	(
 		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
 		LevelList.items=levels
-		PathLabel.text = "D:\Master"
+		PathLabel.text = "E:\Master"
 	)
 	on SetPathButton pressed do
 	(
@@ -67,7 +67,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		
 		local UniqueInstanceArray = GetUniqueInstances()
 		
-		format "UniqueInstancesArray % \n" UniqueInstanceArray 
+		--format "UniqueInstancesArray % \n" UniqueInstanceArray 
 		
 		if UniqueInstanceArray.count == 0 then 
 		(
@@ -149,7 +149,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		--selec all objects
 		if ExportMeshCheckBox.checked then
 		(
-			local UniqueInstanceArray = GetUniqueInstances()
+			local UniqueInstanceArray = GetUniqueInstancesScene()
 		
 			if UniqueInstanceArray.count == 0 then 
 			(

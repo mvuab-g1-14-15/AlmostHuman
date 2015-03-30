@@ -182,7 +182,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
   else
   {
     LOG_ERROR_APPLICATION(
-                                           "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
+      "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
   }
 }
 
@@ -198,7 +198,7 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
     return X8R8G8B8;
   else
     LOG_ERROR_APPLICATION( "Format Type '%s' not recognized",
-                                           FormatType.c_str() );
+                           FormatType.c_str() );
 
   return A8R8G8B8;
 }

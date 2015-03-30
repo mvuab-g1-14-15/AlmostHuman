@@ -59,7 +59,8 @@ bool CStaticMesh::Load( const std::string& FileName )
 
   if ( l_header != 0x55ff )
   {
-    LOG_ERROR_APPLICATION( "CStaticMesh::Load Header incorrecto!" );
+    std::string error_msg = "CStaticMesh::" + m_FileName + " Load Header incorrecto!";
+    LOG_ERROR_APPLICATION( error_msg.c_str() );
     std::fclose( l_pFile );
     return ( false );
   }
@@ -251,7 +252,8 @@ bool CStaticMesh::Load( const std::string& FileName )
 
   if ( l_footer != 0xff55 )
   {
-    LOG_ERROR_APPLICATION( "CStaticMesh::Load Footer incorrecto!" );
+    std::string error_msg = "CStaticMesh::" + m_FileName + " Load Footer incorrecto!";
+    LOG_ERROR_APPLICATION( error_msg.c_str() );
     std::fclose( l_pFile );
     return ( false );
   }
