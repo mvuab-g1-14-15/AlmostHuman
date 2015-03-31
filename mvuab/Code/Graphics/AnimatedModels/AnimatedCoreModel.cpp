@@ -82,6 +82,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 		}
 	}
 
+    CHECKED_DELETE(m_CalHardwareModel);
 	m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
 	unsigned short *l_Idxs = new unsigned short[m_NumFaces*3];
 	CAL3D_HW_VERTEX *l_Vtxs = new CAL3D_HW_VERTEX[m_NumFaces*3];
@@ -104,6 +105,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     //En caso de utilizar NormalMap
     CalcTangentsAndBinormals(l_Vtxs, (unsigned short *) l_Idxs, m_NumVtxs, m_NumFaces*3, sizeof(CAL3D_HW_VERTEX), 0, 44, 60, 76, 92);
     
+    CHECKED_DELETE(m_RenderableVertexs);
     m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
     delete []l_Vtxs; 
     delete []l_Idxs;
