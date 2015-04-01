@@ -41,6 +41,8 @@ CGaussianSceneRendererCommand::~CGaussianSceneRendererCommand()
 
 void CGaussianSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+    if(m_nIteration <= 0) return;
+
     RECT l_Rect = { 0, 0, m_Width, m_Height };
     CEffectTechnique *l_Technique = CEffectManager::GetSingletonPtr()->GetResource("DrawQuadSampler0Technique");
 
