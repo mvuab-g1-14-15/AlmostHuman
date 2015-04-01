@@ -17,7 +17,7 @@
 #define LUA_DECLARE_CTOR_6( CL, P1, P2, P3, P4, P5, P6 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6>())
 
 #define LUA_DECLARE_METHOD( CL, NAME )                .def( #NAME, &CL::NAME )
-#define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, PROTO )
+#define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, (PROTO) &CL::NAME )
 
 #define LUA_BEGIN_ENUM( CL, NAME )                    .enum_( #NAME )[
 #define LUA_ENUM_VALUE( NAME, VAL )                   luabind::value( #NAME, VAL )

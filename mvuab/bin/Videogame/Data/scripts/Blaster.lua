@@ -15,7 +15,7 @@ function CBlaster:Shoot()
 	local lEnemy = self:GetEnemyFromRay()
     
 	if lEnemy ~= nil then
-		local damage = CBlaster:CalculateDamage( Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera():GetPosition(), lEnemy:GetPosition() );
+		local damage = CBlaster:CalculateDamage( camera_manager:GetCurrentCamera():GetPosition(), lEnemy:GetPosition() );
 		lEnemy:AddDamage( damage )
 		Singleton_Core.get_singleton():trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
@@ -34,8 +34,8 @@ function CBlaster:ApplyDamage(l_EnemyName, damage)
 end
 
 function CBlaster:GetEnemyFromRay()
-	local l_OriRay = Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera():GetPosition()
-	local l_DirRay = Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera():GetDirection()
+	local l_OriRay = camera_manager:GetCurrentCamera():GetPosition()
+	local l_DirRay = camera_manager:GetCurrentCamera():GetDirection()
     l_DirRay:Normalize()
 	local l_ImpactMask = 2 ^ CollisionGroup.ECG_ENEMY.value
 	local l_EnemyName = Singleton_Core.get_singleton():GetPhysicsManager():RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)

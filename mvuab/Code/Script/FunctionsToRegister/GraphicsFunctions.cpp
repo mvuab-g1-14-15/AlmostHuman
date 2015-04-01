@@ -54,6 +54,7 @@ void registerCameras( lua_State* aLuaState )
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CCameraManager )
+    LUA_DECLARE_DEFAULT_CTOR
     LUA_DECLARE_METHOD( CCameraManager, GetCamera )
     LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )
     LUA_DECLARE_METHOD( CCameraManager, GetCurrentCamera )
@@ -67,7 +68,7 @@ void registerCameras( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS2( CCamera, CName, CObject3D )
     LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CCamera, GetDirection )
+    LUA_DECLARE_METHOD_PROTO( CCamera, GetDirection, Math::Vect3f( CCamera::* )( void ) )
     LUA_DECLARE_METHOD( CCamera, GetLookAt )
     LUA_DECLARE_METHOD( CCamera, GetVecUp )
     LUA_DECLARE_METHOD( CCamera, GetZFar )
