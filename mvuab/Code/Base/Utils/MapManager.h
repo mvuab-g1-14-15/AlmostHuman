@@ -10,47 +10,50 @@
 template<class T>
 class CMapManager
 {
-protected:
-  typedef std::map<std::string, T*> TMapResource;
-  TMapResource m_Resources;
+    protected:
+        typedef std::map<std::string, T*> TMapResource;
+        TMapResource m_Resources;
 
-public:
-  virtual T* GetResource( const std::string& Name )
-  {
-    if ( m_Resources.find( Name ) == m_Resources.end() )
-    {
-      LOG_ERROR_APPLICATION( "CMapManager::GetResource->(%s)", Name.c_str() );
-      return 0;
-    }
-    else
-      return m_Resources[Name];
-  }
+    public:
+        virtual T* GetResource( const std::string& Name )
+        {
+            TMapResource::iterator it = m_Resources.find( Name );
 
-  virtual bool AddResource( const std::string& Name, T* Resource )
-  {
-    if ( m_Resources.find( Name ) != m_Resources.end() )
-    {
-      //CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::AddResource->(%s)", Name.c_str() );
-      return false;
-    }
+            if ( it == m_Resources.end() )
+            {
+                LOG_ERROR_APPLICATION( "CMapManager::GetResource->(%s)", Name.c_str() );
+                return 0;
+            }
+    
+            return it->second;
+        }
+        
+        virtual bool AddResource( const std::string& Name, T* Resource )
+        {
+            if ( m_Resources.find( Name ) != m_Resources.end() )
+            {
+                //CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CMapManager::AddResource->(%s)", Name.c_str() );
+                return false;
+            }
+            
+            m_Resources[Name] = Resource;
+            return true;
+        }
+        
+        void Destroy()
+        {
+            TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
 
-    m_Resources[Name] = Resource;
-    return true;
-  }
-
-  void Destroy()
-  {
-    std::map<std::string, T*>::iterator itb = m_Resources.begin(), ite = m_Resources.end();
-
-    for ( ; itb != ite; ++itb )
-      CHECKED_DELETE( itb->second );
-
-    m_Resources.clear();
-  }
-  virtual TMapResource& GetResourcesMap()
-  {
-    return m_Resources;
-  }
+            for ( ; itb != ite; ++itb )
+                CHECKED_DELETE( itb->second );
+            
+            m_Resources.clear();
+        }
+        
+        virtual TMapResource& GetResourcesMap()
+        {
+            return m_Resources;
+        }
 };
 
 #endif //INC_MAP_MANAGER_H_
