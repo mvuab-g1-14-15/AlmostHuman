@@ -2,6 +2,107 @@
 #include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
 
+CEngineConfig::CEngineConfig( const std::string& aCfg )
+{
+  CXMLTreeNode l_File;
+
+  if ( !l_File.LoadFile( aCfg.c_str() ) )
+  {
+    std::string err = "ERROR reading the file " + m_ConfigPath;
+    MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
+    exit( EXIT_FAILURE );
+  }
+
+  CXMLTreeNode  TreeNode = l_File["config"];
+
+  if ( TreeNode.Exists() )
+  {
+    int count = TreeNode.GetNumChildren();
+
+    for ( int i = 0; i < count; ++i )
+    {
+      std::string TagName = TreeNode( i ).GetName();
+
+      if ( TagName == "screen_resolution" )
+      {
+        m_ScreenWidth = TreeNode( i ).GetIntProperty( "width" );
+        m_ScreenHeight = TreeNode( i ).GetIntProperty( "height" );
+      }
+      else if ( TagName == "window_position" )
+      {
+        m_WindowXPos = TreeNode( i ).GetIntProperty( "x_pos", 0 );
+        m_WindowYPos = TreeNode( i ).GetIntProperty( "y_pos", 0 );
+      }
+      else if ( TagName == "render_mode" )
+        m_FullScreenMode = TreeNode( i ).GetBoolProperty( "fullscreen_mode", false );
+      else if ( TagName == "mouse" )
+      {
+        m_ExclusiveModeInMouse = TreeNode(
+                                   i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
+        m_DrawPointerMouse = TreeNode( i ).GetBoolProperty( "draw_pointer_mouse",
+                             false );
+      }
+      else if ( TagName == "GUI" )
+        m_GUIPath = std::string( TreeNode( i ).GetPszProperty( "init_gui_path", "" ) );
+      else if ( TagName == "sound" )
+        m_SoundPath = std::string( TreeNode( i ).GetPszProperty( "init_sound_path",
+                                   "" ) );
+      else if ( TagName == "fonts" )
+        m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
+      else if ( TagName == "input" )
+        m_InputPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "languages" )
+      {
+        m_CurrentLanguage = std::string( TreeNode(
+                                           i ).GetPszProperty( "current_language", "" ) );
+        CXMLTreeNode  SubTreeNode = l_File["languages"];
+
+        if ( SubTreeNode.Exists() )
+        {
+          int countLan = SubTreeNode.GetNumChildren();
+
+          for ( int lans = 0; lans < countLan; ++lans )
+          {
+            std::string TagName = SubTreeNode( lans ).GetName();
+
+            if ( TagName == "language" )
+              m_Languages.push_back( std::string( SubTreeNode(
+                                                      lans ).GetPszProperty( "path", "" ) ) );
+          }
+        }
+
+        m_FontsPath = std::string( TreeNode( i ).GetPszProperty( "fonts_path", "" ) );
+      }
+      else if ( TagName == "animated_models" )
+        m_AnimatedModelsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                            "" ) );
+      else if ( TagName == "static_meshes" )
+        m_StaticMeshesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "renderable_objects" )
+        m_RenderableObjectsPath = std::string( TreeNode( i ).GetPszProperty( "path",
+                                               "" ) );
+      else if ( TagName == "renderable_object_technique" )
+        m_RenderableObjectTechniquePath = std::string( TreeNode(
+                                            i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "lua" )
+        m_LuaRunPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "effects" )
+        m_EffectsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "lights" )
+        m_LightsPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "scene_renderer_commands" )
+        m_SceneRendererCommandPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "triggers" )
+        m_TriggersPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "enemies" )
+        m_EnemiesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "particles" )
+        m_ParticlesPath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+      else if ( TagName == "billboardTexture" )
+        m_BillboardTexturePath = std::string( TreeNode( i ).GetPszProperty( "path", "" ) );
+    }
+  }
+}
 /*
 bool CEngineConfig::CEngineConfig::FullScreenMode() const 
 { return m_FullScreenMode; }

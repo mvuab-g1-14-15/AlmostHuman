@@ -6,6 +6,9 @@
 #include "Utils/Defines.h"
 #include "XML/XMLTreeNode.h"
 
+#include <vector>
+#include <string>
+
 class CEngineConfig : public CSingleton<CEngineConfig>
 {
 private:
@@ -31,12 +34,44 @@ private:
   std::string                     m_LightsPath;
   std::string                     m_SceneRendererCommandPath;  
   std::string                     m_TriggersPath;
+  std::string                     m_EnemiesPath;
+  std::string                     m_ParticlesPath;
+  std::string                     m_BillboardTexturePath;
+
   std::vector<std::string>        m_Languages;
 public:
-  CEngineConfig( const CXMLTreeNode& aCfg );
-  ~CEngineConfig();
+  CEngineConfig( const std::string& aCfg );
+  virtual ~CEngineConfig(){ }
 
-  bool FullScreenMode() const;
+  GET_SET( bool , FullScreenMode );
+  GET_SET( bool , ExclusiveModeInMouse );
+  GET_SET( bool , DrawPointerMouse );
+  GET_SET( uint32 , ScreenWidth );
+  GET_SET( uint32 , ScreenHeight );
+  GET_SET( uint32 , WindowXPos );
+  GET_SET( uint32 , WindowYPos );
+  GET_SET( std::vector<std::string> , Languages );
+  GET_SET( std::string , CurrentLanguage );
+  GET_SET( std::string , ConfigPath );
+  GET_SET( std::string , GUIPath );
+  GET_SET( std::string , SoundPath );
+  GET_SET( std::string , FontsPath );
+  GET_SET( std::string , InputPath );
+  GET_SET( std::string , StaticMeshesPath   );
+  GET_SET( std::string , RenderableObjectsPath );
+  GET_SET( std::string , RenderableObjectTechniquePath );
+  GET_SET( std::string , AnimatedModelsPath );
+  GET_SET( std::string , LuaRunPath );
+  GET_SET( std::string , EffectsPath );
+  GET_SET( std::string , LightsPath );
+  GET_SET( std::string , SceneRendererCommandPath );
+  GET_SET( std::string , TriggersPath );
+  GET_SET( std::string , EnemiesPath );
+  GET_SET( std::string , ParticlesPath );
+  GET_SET( std::string , BillboardTexturePath );
+
+
+  /*bool FullScreenMode() const;
   void FullScreenMode(bool val);
   bool ExclusiveModeInMouse() const;
   void ExclusiveModeInMouse(bool val);
@@ -81,7 +116,7 @@ public:
   std::string TriggersPath() const;
   void TriggersPath(std::string val);
   std::vector<std::string> Languages() const;
-  void Languages(std::vector<std::string> val);
+  void Languages(std::vector<std::string> val);*/
 };
 
 #endif // ENGINE_CONFIG_H

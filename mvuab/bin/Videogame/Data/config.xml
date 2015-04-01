@@ -22,4 +22,7 @@
 	<effects path="Data/effects.xml"/>
 	<lights path="Data/lights.xml"/>
 	<scene_renderer_commands path="Data/scene_renderer_commands.xml"/>
+	<enemies path="Data/enemies/enemies.xml"/>
+	<particles path="Data/particles.xml"/>
+	<billboardTexture path="Data/textures/smoke.png"/>
 </config>

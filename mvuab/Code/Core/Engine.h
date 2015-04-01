@@ -10,6 +10,7 @@
 
 class CCore;
 class CLogRender;
+class CEngineConfig;
 
 class CEngine: public CSingleton<CEngine>
 {
@@ -23,11 +24,13 @@ public:
   // Getters and setters
   GET_SET_PTR( CCore, Core );
   GET_SET_PTR( CProcess, Process );
+  GET_SET_PTR( CEngineConfig, EngineConfig );
 
 private:
   CCore*              m_pCore;
   CLogRender*         m_pLogRender;
   CProcess*           m_pProcess;
+  CEngineConfig*      m_pEngineConfig;
 };
 
 #endif // ENGINE_H
