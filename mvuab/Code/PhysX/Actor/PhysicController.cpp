@@ -217,7 +217,7 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
   mask |= 1 << ECG_LIMITS;
   m_pPhXController->move( l_Direction , mask, 0.000001f, collisionFlags, sharpness );
 
-  if ( ( collisionFlags & NXCC_COLLISION_DOWN && m_Jump.GetVelocity() < 0 ) || ( collisionFlags & NXCC_COLLISION_UP ) )
+  if ( ( collisionFlags & NXCC_COLLISION_DOWN && heightDelta <= 0 ) || ( collisionFlags & NXCC_COLLISION_UP ) )
     m_Jump.StopJump();
 
   NxExtendedVec3 tmp;
