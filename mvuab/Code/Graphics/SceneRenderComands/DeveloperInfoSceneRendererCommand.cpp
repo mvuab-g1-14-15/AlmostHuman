@@ -16,6 +16,7 @@ CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode
 
 void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
 {
+#ifdef _DEBUG
   CFontManager* FM = CFontManager::GetSingletonPtr();
   int32 FontId = FM->GetTTF_Id( "Consolas" );
   uint32 width, height;
@@ -31,4 +32,5 @@ void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
                  FPS, lPosition.x, lPosition.y, lPosition.z, lTarget.x, lTarget.y, lTarget.z, GPU->GetDrawCount(),
                  GPU->GetVertexCount(), uint32( GPU->GetVertexCount() / 3 ), GPU->GetFacesCount() );
   GPU->SetToZero();
+#endif
 }
