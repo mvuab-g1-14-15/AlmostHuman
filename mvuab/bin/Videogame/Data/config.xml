@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <config>
 	<screen_resolution width="1280" height="720"/> 
-	<window_position x_pos="100" y_pos="100"/>
-	<render_mode fullscreen_mode="false"/>          
-	<console_logger activateConsole="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
+	<window_position x="0" y="0"/>
+	<window_size width="1280" height="720" fullscreen_mode ="false" fit_desktop="true"/>
+	<console_logger activate_console="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="true" />
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
 	<sound init_sound_path="./Data/Sounds/LaberynthSounds.xml"/>

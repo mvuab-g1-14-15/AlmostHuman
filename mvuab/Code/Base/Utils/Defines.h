@@ -35,7 +35,7 @@
     { \
         m_##PARAMETER_NAME=PARAMETER_NAME; \
     } \
-    const TYPE & Get##PARAMETER_NAME() \
+    const TYPE & Get##PARAMETER_NAME() const \
     { \
         return m_##PARAMETER_NAME; \
     }
@@ -90,3 +90,5 @@
 } \
 
 #endif
+
+#define FATAL_ERROR(msg) ::MessageBox( NULL, #msg, "Fatal Error", MB_ICONEXCLAMATION | MB_OK ); ::exit( EXIT_FAILURE );
