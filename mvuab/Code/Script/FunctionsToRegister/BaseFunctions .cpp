@@ -19,6 +19,8 @@
 #include "Math\Color.h"
 #include "Utils\TemplatedVectorMapManager.h"
 
+#include <sstream>
+
 using namespace luabind;
 
 void DA_Normalize( Math::Vect3f* vector3 )
@@ -26,9 +28,18 @@ void DA_Normalize( Math::Vect3f* vector3 )
   vector3->Normalize( Math::One<float32>() );
 }
 
-Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f* mat, const Math::Vect3f & vec)
+Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f* mat, const Math::Vect3f& vec )
 {
-    return (*mat) * vec;
+  return ( *mat ) * vec;
+}
+
+std::string Vect3f2String( Math::Vect3f* vector3 )
+{
+  std::ostringstream ss;
+  ss << "(" << vector3->x << ", " << vector3->y << ", " << vector3->z << ")";
+  std::string s( ss.str() );
+
+  return s;
 }
 
 void registerBase( lua_State* m_LS )
@@ -50,6 +61,10 @@ void registerBase( lua_State* m_LS )
     .def( const_self / float() )
     .def( float() * const_self )
     .def( float() / const_self )
+    .def( const_self + float() )
+    .def( const_self - float() )
+    .def( float() + const_self )
+    .def( float() - const_self )
     .def( - const_self )
 
     .def_readwrite( "x", &Math::Vect3f::x )
@@ -58,6 +73,8 @@ void registerBase( lua_State* m_LS )
 
     .def( "CrossProduct", &Math::Vect3f::CrossProduct )
     .def( "Normalize", &DA_Normalize )
+
+    .def( "ToString", &Vect3f2String )
   ];
   module( m_LS )
   [
@@ -76,7 +93,7 @@ void registerBase( lua_State* m_LS )
   [
     class_<Math::Mat44f>( "Mat44f" )
     .def( constructor<>() )
-    .def("Mul", DA_MulMat44fVect3f)
+    .def( "Mul", DA_MulMat44fVect3f )
 
     .def( "SetRotByAngleX", &Math::Mat44f::SetRotByAngleX )
     .def( "SetRotByAngleY", &Math::Mat44f::SetRotByAngleY )

@@ -29,4 +29,9 @@ function update_gameplay()
 		g_Player:Update()
 	end
 	CheckLevel()
+	
+	if action_manager:DoAction("ChangeRoom") then
+	local newPosition = ChangeRoom()
+		g_Player:SetPosition(newPosition)
+	end
 end

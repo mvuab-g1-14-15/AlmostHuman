@@ -34,6 +34,13 @@ void Move_PhysicController( CPhysicController* PhysicController, const Math::Vec
   PhysicController->Move( DirectionConst, Dt );
 }
 
+float RaycastDistance( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask )
+{
+  SCollisionInfo hit_info;
+  PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info );
+  return hit_info.m_fDistance;
+}
+
 template<class T>
 size_t set_getIdByResource( std::set<T>& vec, T val )
 {
@@ -56,7 +63,7 @@ size_t set_getIdByResource( std::set<T>& vec, T val )
 template<class T>
 void removeResource( T val )
 {
-  CHECKED_DELETE(val);
+  CHECKED_DELETE( val );
 }
 
 void registerPhysX( lua_State* m_LS )
@@ -123,7 +130,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
-
+    .def( "RaycastDistance", &RaycastDistance )
   ];
   module( m_LS ) [
     class_<CPhysicController, CObject3D>( "CPhysicController" )
