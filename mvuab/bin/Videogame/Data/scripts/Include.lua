@@ -16,3 +16,7 @@ function OverlapSphere(radius, position)
 	local l_PUD = physic_manager:OverlapSphere(radius, position)
 	return l_PUD:size() > 0
 end
+
+function CheckVector(vector)
+	return not (vector.x == 0 and vector.y == 0 and vector.z == 0)
+end

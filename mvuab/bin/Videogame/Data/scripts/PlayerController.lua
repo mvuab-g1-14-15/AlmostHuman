@@ -24,6 +24,15 @@ function CPlayerController:__init()
 	self.TimeCrouch = 0.2
 	self.ActualTimeCrouch = 0.2
 	
+	--Counters
+	self.ShakeValueVertical = 0.0
+	self.ShakeValueHorizontal = 0.0
+	
+	self.ShakeVerticalSpeed = 4.0
+	self.ShakeHorizontalSpeed = 3.0
+	self.ShakeVerticalAmplitude = 0.01
+	self.ShakeHorizontalAmplitude = 0.01
+	
 	self.TimeLeanOut = 0.15
 	self.ActualTimeLeanOut = 0.15
 	
@@ -50,7 +59,7 @@ function CPlayerController:Update()
 		l_Speed = l_Speed / 3.0
 	end
 	if self.Run then
-		l_Speed = l_Speed * 2
+		l_Speed = l_Speed * 2.0
 	end
 	
 	local l_Velocity = self.Direction * l_Speed
@@ -92,7 +101,31 @@ function CPlayerController:Update()
 		self.LeanOut = 0
 		self.ActualTimeLeanOut = self.TimeLeanOut
 	end
-			
+	
+	local l_Up = l_PlayerCamera:GetVecUp()
+	
+	local l_ShakeVerticalSpeed = self.ShakeHorizontalSpeed
+	local l_ShakeHorizontalSpeed = self.ShakeHorizontalSpeed
+	local l_ShakeVerticalAmplitude = self.ShakeVerticalAmplitude
+	local l_ShakeHorizontalAmplitude = self.ShakeHorizontalAmplitude
+	
+	if self.Crouch then
+		l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
+		l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
+		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 1.5
+		l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 1.5
+	end
+	if self.Run then
+		l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 1.3
+		l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 1.3
+		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
+		l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
+	end
+	
+	self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
+	self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
+	l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * self.Side * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * l_Up * math.cos(self.ShakeValueHorizontal)
+	
 	l_PlayerCamera:SetPosition(l_CameraPosition)
 end
 
