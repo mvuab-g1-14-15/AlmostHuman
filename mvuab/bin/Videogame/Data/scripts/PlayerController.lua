@@ -107,19 +107,21 @@ function CPlayerController:Update()
 	local l_ShakeVerticalSpeed = self.ShakeHorizontalSpeed
 	local l_ShakeHorizontalSpeed = self.ShakeHorizontalSpeed
 	local l_ShakeVerticalAmplitude = self.ShakeVerticalAmplitude
-	local l_ShakeHorizontalAmplitude = self.ShakeHorizontalAmplitude
-	
-	if self.Crouch then
-		l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
-		l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
-		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 1.5
-		l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 1.5
-	end
-	if self.Run then
-		l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 1.3
-		l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 1.3
-		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
-		l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
+	local l_ShakeHorizontalAmplitude = self.ShakeHorizontalAmplitude	
+	if CheckVector(self.Direction) then
+		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 4.0
+		if self.Crouch then
+			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
+			l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
+			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 1.5
+			l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 1.5
+		end
+		if self.Run then
+			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 1.3
+			l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 1.3
+			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
+			l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
+		end
 	end
 	
 	self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
