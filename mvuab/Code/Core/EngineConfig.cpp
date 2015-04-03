@@ -18,15 +18,9 @@ CEngineConfig::CEngineConfig()
   , m_LightsPath( "" )
   , m_SceneRendererCommandPath( "" )
   , m_TriggersPath( "" )
-  , m_ScreenWidth( 800 )
-  , m_ScreenHeight( 600 )
-  , m_WindowXPos( 0 )
-  , m_WindowYPos( 0 )
   , m_FullScreenMode( false )
   , m_ExclusiveModeInMouse( false )
   , m_DrawPointerMouse( false )
-  , m_ResolutionWidth( 0 )
-  , m_ResolutionHeight( 0 )
   , m_FitDesktop( false )
 {
 }
@@ -63,23 +57,26 @@ void CEngineConfig::Load( const std::string& aCfg )
 
     if ( lTagName == "console_logger" )
       m_EnableConsole = lTreeNode( i ).GetBoolProperty( "activate_console", false );
+    else if ( lTagName == "window_properties" )
+    {
+      m_ScreenResolution  = lTreeNode( i ).GetVect2iProperty( "resolution" , Math::Vect2i( 800, 600 ));
+      m_ScreenSize        = lTreeNode( i ).GetVect2iProperty( "size", Math::Vect2i( 800, 600 ) );
+      m_ScreenPosition    = lTreeNode( i ).GetVect2iProperty( "position", Math::Vect2i( 0, 0 ) );
+      
+      const std::string& lMode = lTreeNode( i ).GetPszProperty( "mode" );
+      // Switch the modes of the screen
+      m_FullScreenMode  = ( lMode == "full_screen" );
+      m_FitDesktop      = ( lMode == "fit_desktop" );
+      m_Windowed        = ( lMode == "windowed"    );
 
-    if ( lTagName == "screen_resolution" )
-    {
-      m_ResolutionWidth = lTreeNode( i ).GetIntProperty( "width" );
-      m_ResolutionHeight = lTreeNode( i ).GetIntProperty( "height" );
-    }
-    else if ( lTagName == "window_position" )
-    {
-      m_WindowXPos = lTreeNode( i ).GetIntProperty( "x", 0 );
-      m_WindowYPos = lTreeNode( i ).GetIntProperty( "y", 0 );
-    }
-    else if ( lTagName == "window_size" )
-    {
-      m_ScreenWidth       = lTreeNode( i ).GetIntProperty( "width" );
-      m_ScreenHeight      = lTreeNode( i ).GetIntProperty( "height" );
-      m_FullScreenMode    = lTreeNode( i ).GetBoolProperty( "fullscreen_mode", false );
-      m_FitDesktop        = lTreeNode( i ).GetBoolProperty( "fit_desktop", false );
+      if( lMode == "" )
+      {
+        LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'");
+        m_FitDesktop = true;
+      }
+
+      // Get the refresh rate
+      m_RefreshRate = lTreeNode( i ).GetIntProperty( "refresh_rate", 60 );
     }
     else if ( lTagName == "mouse" )
     {
@@ -156,9 +153,39 @@ bool CEngineConfig::GetEnableConsole()
 #else
   return false;
 #endif
-};
+}
 
 void CEngineConfig::SetEnableConsole( bool a_EnableConsole )
 {
   m_EnableConsole = a_EnableConsole;
-};
+}
+
+  const Math::Vect2i& CEngineConfig::GetScreenResolution() const
+  {
+    return m_ScreenResolution;
+  }
+
+  void CEngineConfig::SetScreenResolution( const Math::Vect2i & aVec )
+  {
+    m_ScreenResolution = aVec;
+  }
+
+  const Math::Vect2i& CEngineConfig::GetScreenPosition() const
+  {
+    return m_ScreenPosition;
+  }
+
+  void CEngineConfig::SetScreenPosition( const Math::Vect2i & aVec )
+  {
+    m_ScreenPosition = aVec;
+  }
+
+  const Math::Vect2i& CEngineConfig::GetScreenSize() const
+  {
+    return m_ScreenSize;
+  }
+
+  void CEngineConfig::SetScreenSize( const Math::Vect2i & aVec )
+  {
+    m_ScreenSize = aVec;
+  }

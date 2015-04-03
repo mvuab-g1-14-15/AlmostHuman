@@ -16,18 +16,25 @@ public:
   virtual ~CEngineConfig();
   void Load( const std::string& aCfg );
 
-  GET_SET( bool , FullScreenMode );
   bool GetEnableConsole();
   void SetEnableConsole( bool a_EnableConsole );
+
+  const Math::Vect2i& GetScreenResolution() const;
+  void SetScreenResolution( const Math::Vect2i & aVec );
+
+  const Math::Vect2i& GetScreenPosition() const;
+  void SetScreenPosition( const Math::Vect2i & aVec );
+
+  const Math::Vect2i& GetScreenSize() const;
+  void SetScreenSize( const Math::Vect2i & aVec );
+
+  GET_SET( uint32 , RefreshRate );
+  GET_SET( bool , FullScreenMode );
+  GET_SET( bool , Windowed );
   GET_SET( bool , ExclusiveModeInMouse );
+  GET_SET( HWND , WindowId );
   GET_SET( bool , DrawPointerMouse );
   GET_SET( bool , FitDesktop );
-  GET_SET( uint32 , ScreenWidth );
-  GET_SET( uint32 , ScreenHeight );
-  GET_SET( uint32 , WindowXPos );
-  GET_SET( uint32 , WindowYPos );
-  GET_SET( uint32 , ResolutionWidth );
-  GET_SET( uint32 , ResolutionHeight );
   GET_SET_REF( std::vector<std::string> , Languages );
   GET_SET_REF( std::string , CurrentLanguage );
   GET_SET_REF( std::string , ConfigPath );
@@ -51,15 +58,15 @@ public:
 private:
   bool                            m_EnableConsole;
   bool                            m_FullScreenMode;
+  bool                            m_FitDesktop;
+  bool                            m_Windowed;
   bool                            m_ExclusiveModeInMouse;
   bool                            m_DrawPointerMouse;
-  bool                            m_FitDesktop;
-  uint32                          m_ResolutionWidth;
-  uint32                          m_ResolutionHeight;
-  uint32                          m_ScreenWidth;
-  uint32                          m_ScreenHeight;
-  uint32                          m_WindowXPos;
-  uint32                          m_WindowYPos;
+  HWND                            m_WindowId;
+  Math::Vect2i                    m_ScreenResolution;
+  Math::Vect2i                    m_ScreenSize;
+  Math::Vect2i                    m_ScreenPosition;
+  uint32                          m_RefreshRate;
   std::string                     m_CurrentLanguage;
   std::string                     m_ConfigPath;
   std::string                     m_GUIPath;
