@@ -14,7 +14,6 @@
 #include "SceneRenderComands\EndRenderSceneRendererCommand.h"
 #include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
 #include "SceneRenderComands\RenderDebugSceneSceneRendererCommand.h"
-#include "SceneRenderComands\RenderDebugLightsSceneRendererCommand.h"
 #include "SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h"
 #include "SceneRenderComands\RenderGUISceneRendererCommand.h"
 #include "SceneRenderComands\PresentSceneRendererCommand.h"
@@ -26,14 +25,12 @@
 #include "SceneRenderComands\DisableAlphaTestSceneRendererCommand.h"
 #include "SceneRenderComands\EnableAlphaTestSceneRendererCommand.h"
 #include "SceneRenderComands\SetBlendSceneRendererCommand.h"
-#include "SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h"
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
-#include "SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h"
 #include "SceneRenderComands\DeveloperInfoSceneRendererCommand.h"
 #include "SceneRenderComands\DisableZTestSceneRendererCommand.h"
 #include "SceneRenderComands\ParticleRendererCommand.h"
 #include "SceneRenderComands\WeaponTargetRendererCommand.h"
-#include "SceneRenderComands\RenderDebugCamerasCommand.h"
+#include "SceneRenderComands\RenderDebugCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -122,28 +119,23 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CDisableAlphaTestSceneRendererCommand>( ) );
   CommandFactory.Register( "render_scene",
                            Type2Type<CRenderSceneSceneRendererCommand>( ) );
-  CommandFactory.Register( "render_debug_lights",
-                           Type2Type<CRenderDebugLightsSceneRendererCommand>( ) );
-  CommandFactory.Register( "render_astar",
-                           Type2Type<CAStarGraphDrawerSceneRendererCommand>() );
-  CommandFactory.Register( "render_debug_physics",
-                           Type2Type<CRenderDebugPhysicsSceneRendererCommand>() );
+#ifdef _DEBUG
   CommandFactory.Register( "render_developer_info",
                            Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
+#endif
   CommandFactory.Register( "render_particules",
                            Type2Type<CParticleRenderCommand>( ) );
   CommandFactory.Register( "render_weapon_target",
                            Type2Type<CWeaponTargetRendererCommand>( ) );
-  CommandFactory.Register( "render_debug_cameras",
-                           Type2Type<CRenderDebugCamerasCommand>( ) );
+  CommandFactory.Register( "render_debug",
+                           Type2Type<CRenderDebugCommand>( ) );
 
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( FileName.c_str() ) )
   {
-    std::string err = "ERROR reading the file " + FileName;
-    MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
-    exit( EXIT_FAILURE );
+    std::string lMsgError = "Error reading the file " + FileName;
+    FATAL_ERROR( lMsgError.c_str() );
   }
 
   m_FileName = FileName;
@@ -155,7 +147,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
 
     for ( int i = 0; i < count; ++i )
     {
-      std::string TagName = TreeNode( i ).GetName();
+      const std::string& TagName = TreeNode( i ).GetName();
 
       if ( TagName == "comment" )
         continue;

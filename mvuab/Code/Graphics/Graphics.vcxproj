@@ -46,7 +46,6 @@
     <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
-    <ClCompile Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp" />
@@ -68,9 +67,7 @@
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\RenderDebugCamerasCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp" />
-    <ClCompile Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\RenderDebugCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
@@ -130,7 +127,6 @@
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
-    <ClInclude Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h" />
@@ -152,9 +148,7 @@
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
-    <ClInclude Include="SceneRenderComands\RenderDebugCamerasCommand.h" />
-    <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h" />
-    <ClInclude Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\RenderDebugCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />

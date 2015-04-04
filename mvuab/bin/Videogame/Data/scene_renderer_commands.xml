@@ -27,12 +27,7 @@
     <enable_z_test/>
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<!--<render_debug_lights render="true"/>-->
-	<!--<render_debug_cameras render="true"/>-->
-	
-	<render_astar/>
-	<render_debug_physics/>
-	
+	<render_debug render_lights="true" render_physics="true" render_cameras="true" render_graph="true"/>
 	<render_particules/>
 	
 
