@@ -2,35 +2,32 @@
 class 'CBlaster'
 
 function CBlaster:__init()
-    self.m_TimePressed = 0.0
-    self.m_MaxTimePressed = 5 
-    Singleton_Core.get_singleton():trace("Hello CBlaster INIT")
+    self.TimePressed = 0.0
+    self.MaxTimePressed = 3.0
+	
+	self.BaseDamage = 5.0
+	self.MaxDamage = 20.0
+	
+    core:trace("Blaster initialized")
 end
 
-function CBlaster:CalculateDamage( aOriShoot, aEnemyPosition )
-    return 10;
+function CBlaster:CalculateDamage()
+    local l_Percentage = self.TimePressed / self.MaxTimePressed
+	local damage = (1 - l_Percentage) * self.BaseDamage + l_Percentage * self.MaxDamage
+	if l_Percentage == 1 then
+		damage = self.MaxDamage + self.MaxDamage / 2.0
+	end
+	return damage
 end
 
 function CBlaster:Shoot()
 	local lEnemy = self:GetEnemyFromRay()
     
 	if lEnemy ~= nil then
-		local damage = CBlaster:CalculateDamage( camera_manager:GetCurrentCamera():GetPosition(), lEnemy:GetPosition() );
+		local damage = self:CalculateDamage()
 		lEnemy:AddDamage( damage )
-		Singleton_Core.get_singleton():trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
+		core:trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
-end
-
-function CBlaster:IsMaxTime()
-	if( m_TimePressed > m_MaxTimePressed) then 
-		return true 
-	else 
-		return false 
-	end
-end
-
-function CBlaster:ApplyDamage(l_EnemyName, damage)
-	local l_enemy = Singleton_Core.get_singleton():GetEnemyManager():getEnemy(l_EnemyName)
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -38,15 +35,20 @@ function CBlaster:GetEnemyFromRay()
 	local l_DirRay = camera_manager:GetCurrentCamera():GetDirection()
     l_DirRay:Normalize()
 	local l_ImpactMask = 2 ^ CollisionGroup.ECG_ENEMY.value
-	local l_EnemyName = Singleton_Core.get_singleton():GetPhysicsManager():RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
-    Singleton_Core.get_singleton():trace(l_EnemyName)
-    return Singleton_Core.get_singleton():GetEnemyManager():getEnemy(l_EnemyName)
+	local l_EnemyName = physic_manager:RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
+    return enemy_manager:getEnemy(l_EnemyName)
 end
 
 function CBlaster:Update()
-	local l_ActionManager = Singleton_Core.get_singleton():GetActionManager()
-    
-    if l_ActionManager:DoAction("Shoot") then
-		CBlaster:Shoot()
+    if action_manager:DoAction("Shoot") then
+		if self.TimePressed < self.MaxTimePressed then
+			self.TimePressed = self.TimePressed + timer:GetElapsedTime()
+		else
+			self.TimePressed = self.MaxTimePressed
+		end
+	end
+    if action_manager:DoAction("ShootUp") then
+		self:Shoot()
+		self.TimePressed = 0.0
 	end
 end

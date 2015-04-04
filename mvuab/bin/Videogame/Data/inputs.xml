@@ -122,6 +122,10 @@
   <action name="ShootUp">
  	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP"  Code="MOUSE_BUTTON_LEFT"/>
   </action>
+  
+  <action name="Shoot">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+  </action>
 	
 	<action name="RightMouseButtonPressed">
    	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>

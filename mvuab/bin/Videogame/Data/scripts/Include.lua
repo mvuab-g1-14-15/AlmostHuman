@@ -6,6 +6,7 @@ camera_manager = core:GetCameraManager()
 --light_manager = core:GetLightManager()
 timer = core:GetTimer()
 physic_manager = core:GetPhysicsManager()
+enemy_manager = core:GetEnemyManager()
 process = Singleton_Engine.get_singleton():GetProcess()
 
 -- Global Variables

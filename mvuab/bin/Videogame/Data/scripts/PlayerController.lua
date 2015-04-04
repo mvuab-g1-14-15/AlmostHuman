@@ -129,6 +129,9 @@ function CPlayerController:Update()
 	self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
 	l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * l_Up * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * self.Side * math.cos(self.ShakeValueHorizontal)
 	
+	--Move the camera outside de capsule of the controller
+	l_CameraPosition = l_CameraPosition + self.Forward * self.Radius
+	
 	l_PlayerCamera:SetPosition(l_CameraPosition)
 end
 
