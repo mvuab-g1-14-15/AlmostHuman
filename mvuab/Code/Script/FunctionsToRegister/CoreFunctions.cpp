@@ -23,6 +23,7 @@
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
 #include "Characters\Enemies\EnemyManager.h"
+#include "Gizmos\GizmosManager.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -82,6 +83,7 @@ void registerCore( lua_State* m_LS )
         .def( "GetTimer", &CCore::GetTimer )
         .def( "GetPhysicsManager", &CCore::GetPhysicsManager )
         .def( "GetEnemyManager", &CCore::GetEnemyManager )
+        .def( "GetGizmosManager", &CCore::GetGizmosManager )
         //Getter Singleton
         .def( "GetSingleton", &CCore::GetSingleton )
         .def( "GetSingletonPtr", &CCore::GetSingletonPtr )

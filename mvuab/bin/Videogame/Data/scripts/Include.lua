@@ -7,6 +7,7 @@ camera_manager = core:GetCameraManager()
 timer = core:GetTimer()
 physic_manager = core:GetPhysicsManager()
 enemy_manager = core:GetEnemyManager()
+gizmos_manager = core:GetGizmosManager()
 process = Singleton_Engine.get_singleton():GetProcess()
 
 -- Global Variables
@@ -37,7 +38,7 @@ end
 function GetPlayerPosition()
 	local l_Player = physic_manager:GetController("Player")
 	local l_Position =  l_Player:GetPosition()
-	l_Position.y = l_Position.y  + l_Player:GetHeight() / 2.0
+	--l_Position.y = l_Position.y - l_Player:GetHeight() / 2.0
 	return l_Position
 end
 
@@ -46,14 +47,15 @@ function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition();
 	
 	-- The raycast collision with the capsule of the enemy, must check that
-	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight() + 0.1
+	l_EnemyPos.y = l_EnemyPos.y + 0.1
+	l_PlayerPos.y = l_PlayerPos.y - 0.1
 	
 	local l_Direction = l_PlayerPos - l_EnemyPos
-	local l_Distance = l_Direction:Length()
 	l_Direction:Normalize()
 	
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	
+	-- The impact mask is not used
 	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
 	
 	core:trace("Group: " .. l_CollisionGroup)

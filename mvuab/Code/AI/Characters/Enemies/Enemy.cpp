@@ -35,6 +35,16 @@ CEnemy::~CEnemy()
   CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
   CPhysicsManager::GetSingletonPtr()->ReleasePhysicController( m_Controller );
+
+  CGizmosManager* l_GizmosManager = CCore::GetSingletonPtr()->GetGizmosManager();
+  std::ostringstream ss;
+  ss << GetName() << "HeadGizmo";
+  std::string l_GizmoName( ss.str() );
+  CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
+  if (l_Gizmo)
+  {
+    l_GizmosManager->RemoveResource(l_GizmoName);
+  }
 }
 
 void CEnemy::Update()
@@ -71,7 +81,7 @@ void CEnemy::Update()
   m_Position = m_Controller->GetPosition();
   m_Position.y -=  m_Controller->GetHeight() / 2.0f;
   m_pRenderableObject->SetPosition( m_Position );
-  m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
+  m_pRenderableObject->SetYaw( - m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
 
@@ -88,12 +98,12 @@ void CEnemy::Update()
   if (l_Gizmo)
   {
     l_Gizmo->SetPosition(l_Pos);
-    l_Gizmo->SetYaw(m_fYaw - Math::pi32 * 0.5f);
+    l_Gizmo->SetYaw(- m_fYaw - Math::pi32 * 0.5f);
     l_Gizmo->SetPitch(m_fPitch);
   }
   else
   {
-    l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, m_fYaw - Math::pi32 * 0.5f, m_fPitch);
+    l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, - m_fYaw - Math::pi32 * 0.5f, m_fPitch);
     CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.4f, 0.0f, 0.0f), 0.0f, 0.0f, Math::colRED);
     l_Gizmo->AddElement(l_Element);
     l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.4f, 0.0f), 0.0f, 0.0f, Math::colGREEN);

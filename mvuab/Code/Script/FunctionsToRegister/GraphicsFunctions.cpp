@@ -48,6 +48,11 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
   return new CInstanceMesh( Name, CoreName );
 }
 
+CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color)
+{
+  return new CGizmoElement( (CGizmoElement::EGizmoElementType) type, size, position, yaw, pitch, color );
+}
+
 void registerCameras( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Cameras" );
@@ -143,6 +148,7 @@ void registerGizmos( lua_State * aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
     LUA_DECLARE_METHOD(CGizmosManager, CreateGizmoElement)
+    //.def( "CreateGizmoElement", &CreateGizmoElement )
     LUA_DECLARE_METHOD( CGizmosManager, CreateGizmo)
   LUA_END_DECLARATION
 }

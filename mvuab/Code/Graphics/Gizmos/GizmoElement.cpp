@@ -35,7 +35,7 @@ void CGizmoElement::Render( Math::Mat44f transform )
   CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
 
   Math::Mat44f t = GetTransform();
-  l_GM->SetTransform( t * transform );
+  l_GM->SetTransform( transform * t );
 
   if ( m_Type == eCube )
     l_GM->DrawCube( m_Size, m_Color );

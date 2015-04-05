@@ -133,6 +133,20 @@ function CPlayerController:Update()
 	l_CameraPosition = l_CameraPosition + self.Forward * self.Radius
 	
 	l_PlayerCamera:SetPosition(l_CameraPosition)
+	
+	self:MakeGizmo()
+end
+
+function CPlayerController:MakeGizmo()
+	local Gizmo = gizmos_manager:GetResource("PlayerGizmo")
+	if Gizmo == nil then
+		Gizmo = gizmos_manager:CreateGizmo("PlayerGizmo", self.Position, 0.0, 0.0)
+		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, Vect3f(0.0), 0.0, 0.0, CColor(0.0, 0.0, 1.0, 1.0))
+		Gizmo:AddElement(GizmoElement)
+		gizmos_manager:AddResource("PlayerGizmo", Gizmo)
+	else
+		Gizmo:SetPosition(self.Position)
+	end
 end
 
 function CPlayerController:SetPosition(position)
@@ -206,6 +220,14 @@ function CPlayerController:UpdateInput()
 		self.Run = false
 	end
 	if action_manager:DoAction("Crouch") then
+		if self.Crouch then
+			self.CharacterController:SetHeight(self.CharacterController:GetHeight() / 2.0)
+		else
+			local l_Position = self.CharacterController:GetPosition()
+			l_Position.y = l_Position.y + self.CharacterController:GetHeight() / 2.0
+			self.CharacterController:SetPosition(l_Position)
+			self.CharacterController:SetHeight(self.CharacterController:GetHeight() * 2.0)
+		end
 		self.Crouch = not self.Crouch
 		self.ActualTimeCrouch = 0.0
 	end

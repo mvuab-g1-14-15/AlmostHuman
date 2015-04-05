@@ -48,7 +48,10 @@ ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f positi
 {
   SCollisionInfo hit_info;
   CPhysicUserData* l_PUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info);
-  return l_PUD->GetMyCollisionGroup();
+  if (l_PUD)
+    return l_PUD->GetMyCollisionGroup();
+  else
+    return (ECollisionGroup)-1;
 }
 
 template<class T>
