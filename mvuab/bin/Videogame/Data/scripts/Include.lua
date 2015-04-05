@@ -26,6 +26,7 @@ end
 function PlayerDistance(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()
+	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
@@ -35,27 +36,31 @@ end
 
 function GetPlayerPosition()
 	local l_Player = physic_manager:GetController("Player")
-	return l_Player:GetPosition()
+	local l_Position =  l_Player:GetPosition()
+	l_Position.y = l_Position.y  + l_Player:GetHeight() / 2.0
+	return l_Position
 end
 
 function PlayerVisibility(enemy)
 	local l_PlayerPos = GetPlayerPosition()
-	local l_EnemyPos = enemy:GetPosition()
+	local l_EnemyPos = enemy:GetPosition();
 	
 	-- The raycast collision with the capsule of the enemy, must check that
 	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight() + 0.1
 	
 	local l_Direction = l_PlayerPos - l_EnemyPos
+	local l_Distance = l_Direction:Length()
 	l_Direction:Normalize()
 	
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	
-	local l_DistanceRaycast = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, l_ImpactMask)
-	local l_PlayerRealDistance = PlayerDistance(enemy)
+	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
 	
-	if l_DistanceRaycast < l_PlayerRealDistance then
-		return false
-	else
+	core:trace("Group: " .. l_CollisionGroup)
+	
+	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
 		return true
+	else
+		return false
 	end
 end

@@ -34,11 +34,21 @@ void Move_PhysicController( CPhysicController* PhysicController, const Math::Vec
   PhysicController->Move( DirectionConst, Dt );
 }
 
-float RaycastDistance( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask )
+float RaycastDistance( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask, float maxDist )
 {
   SCollisionInfo hit_info;
-  PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info );
+  if (!PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist ))
+  {
+    return 0.0f;
+  }
   return hit_info.m_fDistance;
+}
+
+ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask )
+{
+  SCollisionInfo hit_info;
+  CPhysicUserData* l_PUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info);
+  return l_PUD->GetMyCollisionGroup();
 }
 
 template<class T>
@@ -131,6 +141,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
     .def( "RaycastDistance", &RaycastDistance )
+    .def( "RaycastType", &RaycastType )
   ];
   module( m_LS ) [
     class_<CPhysicController, CObject3D>( "CPhysicController" )
