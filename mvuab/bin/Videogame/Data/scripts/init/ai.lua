@@ -8,22 +8,26 @@ end
 function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	local l_CurrentState = enemy:getCurrentState()
-	local l_NextState
+	local l_NextState = l_CurrentState
 	core:trace("Current state: " .. l_CurrentState)
+	
+	local l_DistanceToPlayer = PlayerDistance(enemy)
+	local l_PlayerInSight = PlayerVisibility(enemy)
+	
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end
 	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" then
-		if PlayerDistance(enemy) <= 5 and PlayerVisibility(enemy) then
+		if l_DistanceToPlayer <= 8 and l_PlayerInSight then
 			l_NextState = "perseguir"
 		end
 	end
 	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
-		if PlayerDistance(enemy) < 2 and PlayerVisibility(enemy) then
+		if l_DistanceToPlayer < 4 and l_PlayerInSight then
 			l_NextState = "atacar"
 		end
 	end
-	if PlayerDistance(enemy) > 5 or not PlayerVisibility(enemy) then
+	if l_DistanceToPlayer > 5 or not l_PlayerInSight then
 		l_NextState = "andando"
 	end
 	if l_NextState ~= l_CurrentState then

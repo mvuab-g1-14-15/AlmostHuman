@@ -28,6 +28,7 @@ function PlayerDistance(enemy)
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
+	--core:trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -43,9 +44,11 @@ function PlayerVisibility(enemy)
 	local l_Direction = l_PlayerPos - l_EnemyPos
 	l_Direction:Normalize()
 	
-	local l_Distance = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, 0xffffffff)
+	local l_DistanceRaycast = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, 0xffffffff)
+	local l_PlayerRealDistance = PlayerDistance(enemy)
 	
-	if l_Distance < PlayerDistance(enemy) then
+	-- At the l_DistanceRaycast must add the radius of the player capsule
+	if l_DistanceRaycast + 0.4 < l_PlayerRealDistance then
 		return false
 	else
 		return true
