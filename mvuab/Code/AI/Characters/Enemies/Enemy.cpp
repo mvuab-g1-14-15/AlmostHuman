@@ -88,13 +88,19 @@ void CEnemy::Update()
   if (l_Gizmo)
   {
     l_Gizmo->SetPosition(l_Pos);
-    l_Gizmo->SetYaw(m_fYaw);
+    l_Gizmo->SetYaw(m_fYaw - Math::pi32 * 0.5f);
     l_Gizmo->SetPitch(m_fPitch);
   }
   else
   {
-    l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, m_fYaw, m_fPitch);
-    CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f), 0.0f, 0.0f);
+    l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, m_fYaw - Math::pi32 * 0.5f, m_fPitch);
+    CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.4f, 0.0f, 0.0f), 0.0f, 0.0f, Math::colRED);
+    l_Gizmo->AddElement(l_Element);
+    l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.4f, 0.0f), 0.0f, 0.0f, Math::colGREEN);
+    l_Gizmo->AddElement(l_Element);
+    l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.0f, 0.4f), 0.0f, 0.0f, Math::colBLUE);
+    l_Gizmo->AddElement(l_Element);
+    l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eSphere, 0.2f, Math::Vect3f(0.0f), 0.0f, 0.0f);
     l_Gizmo->AddElement(l_Element);
     l_GizmosManager->AddResource(l_GizmoName, l_Gizmo);
   }

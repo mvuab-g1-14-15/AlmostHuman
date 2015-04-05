@@ -18,7 +18,7 @@ public:
   void Update();
   void Render();
 
-  CGizmoElement* CreateGizmoElement( CGizmoElement::EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch );
+  CGizmoElement* CreateGizmoElement( CGizmoElement::EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color = Math::colWHITE );
   CGizmo* CreateGizmo( std::string name, Math::Vect3f position, float yaw, float pitch );
 };
 
