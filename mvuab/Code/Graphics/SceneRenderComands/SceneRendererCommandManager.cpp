@@ -34,6 +34,7 @@
 #include "SceneRenderComands\ParticleRendererCommand.h"
 #include "SceneRenderComands\WeaponTargetRendererCommand.h"
 #include "SceneRenderComands\RenderDebugCamerasCommand.h"
+#include "SceneRenderComands\RenderGizmosCommand.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Core.h"
@@ -136,6 +137,8 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CWeaponTargetRendererCommand>( ) );
   CommandFactory.Register( "render_debug_cameras",
                            Type2Type<CRenderDebugCamerasCommand>( ) );
+  CommandFactory.Register( "render_gizmos",
+                           Type2Type<CRenderGizmosCommand>( ) );
 
   CXMLTreeNode l_File;
 

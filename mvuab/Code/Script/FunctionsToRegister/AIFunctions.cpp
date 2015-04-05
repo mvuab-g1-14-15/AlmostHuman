@@ -46,7 +46,7 @@ void registerAI( lua_State* m_LS )
 {
   module( m_LS )
   [
-    class_<CCharacter, CObject3D>( "CCharacter" )
+    class_<CCharacter, bases<CObject3D, CName>>( "CCharacter" )
     .def( constructor<const std::string&>() )
     .def( "setTargetPosition", &CCharacter::SetTargetPosition )
     .def( "getTargetPosition", &CCharacter::GetTargetPosition )
@@ -54,8 +54,10 @@ void registerAI( lua_State* m_LS )
     .def( "init", ( void( CCharacter::* )( void ) )&CCharacter::Init )
     .def( "update", &CCharacter::Update )
     .def( "render", &CCharacter::Render )
-    .def( "GetPosition", &CCharacter::GetPosition )
     .def( "AddDamage", &CCharacter::AddDamage )
+    .def( "Move", &CCharacter::Move )
+    .def( "GetPosition", &CCharacter::GetPosition )
+    .def( "GetHeight", &CCharacter::GetHeight )
   ];
   module( m_LS )
   [

@@ -11,6 +11,7 @@ process = Singleton_Engine.get_singleton():GetProcess()
 
 -- Global Variables
 g_CameraSensibility = 30.0
+g_HalfPi = 1.57079632679
 
 -- Global Functions
 function OverlapSphere(radius, position)
@@ -41,14 +42,18 @@ function PlayerVisibility(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()
 	
+	-- The raycast collision with the capsule of the enemy, must check that
+	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight() + 0.1
+	
 	local l_Direction = l_PlayerPos - l_EnemyPos
 	l_Direction:Normalize()
 	
-	local l_DistanceRaycast = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, 0xffffffff)
+	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
+	
+	local l_DistanceRaycast = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, l_ImpactMask)
 	local l_PlayerRealDistance = PlayerDistance(enemy)
 	
-	-- At the l_DistanceRaycast must add the radius of the player capsule
-	if l_DistanceRaycast + 0.4 < l_PlayerRealDistance then
+	if l_DistanceRaycast < l_PlayerRealDistance then
 		return false
 	else
 		return true

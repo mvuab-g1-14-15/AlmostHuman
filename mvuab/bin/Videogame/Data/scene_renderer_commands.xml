@@ -30,6 +30,8 @@
 	<!--<render_debug_lights render="true"/>-->
 	<!--<render_debug_cameras render="true"/>-->
 	
+	<render_gizmos render="true"/>
+		
 	<render_astar/>
 	<render_debug_physics/>
 	

@@ -76,7 +76,18 @@ void CScriptManager::RunCode( const std::string& Code )
   {
     const char* l_Str = lua_tostring( m_LS, -1 );
     assert( l_Str );
-    LOG_ERROR_APPLICATION( "CScriptManager::RunCode\n\tCode: '%s'\n\tError: '%s'\n", Code.c_str(), l_Str );
+
+    std::ostringstream ss;
+    ss << "CScriptManager::RunCode\n\tCode: '" << Code << "'\n\tError: '" << l_Str << "'\n";
+    std::string message = ss.str();
+
+    LOG_ERROR_APPLICATION( message.c_str() );
+
+    ASSERT(false, message);
+
+#ifdef _DEBUG
+    Reload();
+#endif
   }
 }
 
@@ -86,7 +97,18 @@ void CScriptManager::RunFile( const std::string& FileName )
   {
     const char* l_Str = lua_tostring( m_LS, -1 );
     assert( l_Str );
-    LOG_ERROR_APPLICATION( "CScriptManager::RunFile\n\tFile: '%s'\n\tError: '%s'\n", FileName.c_str(), l_Str );
+
+    std::ostringstream ss;
+    ss << "CScriptManager::RunFile\n\tFile: '" << FileName << "'\n\tError: '" << l_Str << "'\n";
+    std::string message = ss.str();
+
+    LOG_ERROR_APPLICATION( message.c_str() );
+
+    ASSERT(false, message);
+
+#ifdef _DEBUG
+    Reload();
+#endif
   }
 }
 

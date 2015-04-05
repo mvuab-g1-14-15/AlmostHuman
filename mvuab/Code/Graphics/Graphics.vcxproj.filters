@@ -234,6 +234,18 @@
     <ClCompile Include="SceneRenderComands\RenderDebugCamerasCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderGizmosCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\GizmosManager.cpp">
+      <Filter>Gizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\Gizmo.cpp">
+      <Filter>Gizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\GizmoElement.cpp">
+      <Filter>Gizmos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -478,6 +490,18 @@
     <ClInclude Include="SceneRenderComands\RenderDebugCamerasCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderGizmosCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\GizmosManager.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\Gizmo.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\GizmoElement.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -515,6 +539,9 @@
     </Filter>
     <Filter Include="Billboard">
       <UniqueIdentifier>{d076ecc9-bf12-4d5f-bf66-5728db8f7a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gizmos">
+      <UniqueIdentifier>{03e11d5f-aead-4c2e-9bc1-da6cff311a00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -33,17 +33,26 @@ Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f* mat, const Math::Vect3f& vec )
   return ( *mat ) * vec;
 }
 
-std::string Vect3f2String( Math::Vect3f* vector3 )
+std::string Vect3f2String( Math::Vect3f vector3 )
 {
   std::ostringstream ss;
-  ss << "(" << vector3->x << ", " << vector3->y << ", " << vector3->z << ")";
+  ss << "(" << vector3.x << ", " << vector3.y << ", " << vector3.z << ")";
   std::string s( ss.str() );
 
   return s;
 }
 
+int BitOr(int a, int b)
+{
+  return a | b;
+}
+
 void registerBase( lua_State* m_LS )
 {
+  module( m_LS )
+  [
+    def("BitOr", &BitOr)
+  ];
   module( m_LS )
   [
     class_<Math::Vect3f>( "Vect3f" )

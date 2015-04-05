@@ -21,6 +21,9 @@ public:
   virtual void Init( CXMLTreeNode& Node );
   virtual void Update();
   virtual void Render();
+
+  void Move( Math::Vect3f, float);
+
   GET_SET( Math::Vect3f, TargetPosition );
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
@@ -29,6 +32,13 @@ public:
   {
     m_Life -= aDamage;
   }
+
+  Math::Vect3f GetPosition()
+  {
+    return m_Position;
+  }
+
+  float GetHeight();
 protected:
   virtual ECollisionGroup GetCollisionGroup();
 

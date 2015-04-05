@@ -35,6 +35,7 @@ class CEnemyManager;
 class CTriggerManager;
 class CBillboard;
 class CParticleManager;
+class CGizmosManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -67,6 +68,7 @@ class CCore : public CSingleton<CCore>
         CConsole*                           m_pConsole;
         CBillboard*                         m_pBillboard;
         CParticleManager*                   m_pParticleManager;
+        CGizmosManager*                     m_pGizmosManager;
         void CreateManagers();
         void InitManagers();
 
@@ -106,6 +108,7 @@ class CCore : public CSingleton<CCore>
         GET_SET_PTR( CTimer, Timer );
         GET_SET_PTR( CBillboard, Billboard );
         GET_SET_PTR( CParticleManager, ParticleManager );
+        GET_SET_PTR( CGizmosManager, GizmosManager);
 };
 
 #endif // GRAPHICS_MANAGER_H

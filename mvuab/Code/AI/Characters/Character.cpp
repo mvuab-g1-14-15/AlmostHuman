@@ -70,3 +70,13 @@ ECollisionGroup CCharacter::GetCollisionGroup()
 {
   return ECG_ENEMY;
 }
+
+void CCharacter::Move(Math::Vect3f direction, float dt)
+{
+  m_Controller->Move(direction, dt);
+}
+
+float CCharacter::GetHeight()
+{
+  return m_Controller->GetHeight();
+}

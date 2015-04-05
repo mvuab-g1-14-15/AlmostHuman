@@ -9,11 +9,17 @@ function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	local l_CurrentState = enemy:getCurrentState()
 	local l_NextState = l_CurrentState
-	core:trace("Current state: " .. l_CurrentState)
+	--core:trace("Current state: " .. l_CurrentState)
 	
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
+	core:trace("Distance to player: " .. l_DistanceToPlayer)
+	if l_PlayerInSight then
+		core:trace("Is viewing player: true")
+	else
+		core:trace("Is viewing player: false")
+	end
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end
@@ -36,23 +42,37 @@ function check_next_state()
 end
 
 function andar()
+	local dt = timer:GetElapsedTime()
 	enemy = enemy_manager:GetActualEnemy()
-	local targetPosition = enemy:getTargetPosition()
 	
-	local enemy_pos = enemy:GetPosition()
-	local vector_distx = targetPosition.x - enemy_pos.x
-	local vector_distz = targetPosition.z - enemy_pos.z
-	if (vector_distz < 0.1 and vector_distz > -0.1) and (vector_distx < 0.1 and vector_distx > -0.1)  then
+	local l_TargetPos = enemy:getTargetPosition()
+	l_TargetPos.y = 0.0
+	local l_EnemyPos = enemy:GetPosition()
+	l_EnemyPos.y = 0.0
+	
+	local l_DistanceVector = l_TargetPos - l_EnemyPos
+	
+	if l_DistanceVector:Length() < 0.1  then
 		local currentPoint = enemy:GetCurrentPoint()
 		local lTargetPosition = VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint)
 		enemy:setTargetPosition(lTargetPosition)
 		enemy:SetTargetPositionOriginal(lTargetPosition)
 		if currentPoint+1 == (enemy:getCount()) then
-			enemy:SetExit(true)
-		else	
+			enemy:SetCurrentPoint(0)
+		else
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
 	end
+	
+	if CheckVector(l_DistanceVector) then
+		l_DistanceVector:Normalize()
+	end
+	
+	local l_Yaw = math.atan2( l_DistanceVector.z, l_DistanceVector.x)
+	enemy:SetYaw(l_Yaw)
+	
+	l_DistanceVector = l_DistanceVector * 0.05
+	enemy:Move(l_DistanceVector, dt)
 end
 
 function esperar()

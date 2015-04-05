@@ -25,6 +25,7 @@
 #include "Characters\Enemies\EnemyManager.h"
 #include "Billboard\Billboard.h"
 #include "Particles\ParticleManager.h"
+#include "Gizmos\GizmosManager.h"
 #include "EngineConfig.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
@@ -55,6 +56,7 @@ CCore::CCore()
   , m_pConsole( 0 )
   , m_pBillboard( 0 )
   , m_pParticleManager( 0 )
+  , m_pGizmosManager( 0 )
 {
 }
 
@@ -83,6 +85,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTriggerManager );
   CHECKED_DELETE( m_pBillboard );
   CHECKED_DELETE( m_pParticleManager );
+  CHECKED_DELETE( m_pGizmosManager );
   CHECKED_DELETE( m_pConsole );
 }
 
@@ -108,6 +111,9 @@ void CCore::Update()
   m_pCameraManager->Update();
 
   m_pParticleManager->Update( deltaTime );
+
+  m_pGizmosManager->Update();
+
   m_pBillboard->Update();
 
   m_pRenderableObjectsLayersManager->GetResource( "solid" )->Update();
@@ -151,6 +157,7 @@ void CCore::CreateManagers()
   m_pTimer = new CTimer( 30 );
   m_pBillboard = new CBillboard( );
   m_pParticleManager = new CParticleManager();
+  m_pGizmosManager = new CGizmosManager();
 }
 
 void CCore::InitManagers()
@@ -203,6 +210,7 @@ void CCore::InitManagers()
 
   m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, l_EngineConfig->GetBillboardTexturePath() );
   m_pParticleManager->Init( l_EngineConfig->GetParticlesPath() );
+  m_pGizmosManager->Init();
 }
 
 void CCore::Trace( const std::string& TraceStr )

@@ -13,6 +13,11 @@
 #include "Actor\PhysicController.h"
 #include "PhysicsManager.h"
 
+#include <sstream>
+#include "Gizmos\Gizmo.h"
+#include "Gizmos\GizmoElement.h"
+#include "Gizmos\GizmosManager.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
   , m_CurrentState( "inicial" )
@@ -63,15 +68,36 @@ void CEnemy::Update()
   for ( ; it != it_end; ++it )
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 
-  Vect3f l_Pos = m_Position;
   m_Position = m_Controller->GetPosition();
-  m_Position.y -=  m_Controller->GetHeight();
+  m_Position.y -=  m_Controller->GetHeight() / 2.0f;
   m_pRenderableObject->SetPosition( m_Position );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
 
   m_pRenderableObject->MakeTransform();
+
+  Math::Vect3f l_Pos = m_Position;
+  l_Pos.y += m_Controller->GetHeight();
+
+  CGizmosManager* l_GizmosManager = CCore::GetSingletonPtr()->GetGizmosManager();
+  std::ostringstream ss;
+  ss << GetName() << "HeadGizmo";
+  std::string l_GizmoName( ss.str() );
+  CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
+  if (l_Gizmo)
+  {
+    l_Gizmo->SetPosition(l_Pos);
+    l_Gizmo->SetYaw(m_fYaw);
+    l_Gizmo->SetPitch(m_fPitch);
+  }
+  else
+  {
+    l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, m_fYaw, m_fPitch);
+    CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f), 0.0f, 0.0f);
+    l_Gizmo->AddElement(l_Element);
+    l_GizmosManager->AddResource(l_GizmoName, l_Gizmo);
+  }
 }
 
 void CEnemy::ChangeState( std::string NewState )
@@ -94,7 +120,7 @@ void CEnemy::AddMesh( std::string MeshName )
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );
   m_Position = m_Controller->GetPosition();
-  m_Position.y -=  m_Controller->GetHeight();
+  m_Position.y -=  m_Controller->GetHeight() / 2.0f;
   m_pRenderableObject->SetPosition( m_Position );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );

@@ -32,6 +32,9 @@
     <ClCompile Include="Effects\EffectManager.cpp" />
     <ClCompile Include="Effects\EffectTechnique.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Gizmos\Gizmo.cpp" />
+    <ClCompile Include="Gizmos\GizmoElement.cpp" />
+    <ClCompile Include="Gizmos\GizmosManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Lights\DirectionalLight.cpp" />
     <ClCompile Include="Lights\Light.cpp" />
@@ -73,6 +76,7 @@
     <ClCompile Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\RenderGizmosCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp" />
@@ -114,6 +118,9 @@
     <ClInclude Include="Effects\Defines.h" />
     <ClInclude Include="Effects\EffectTechnique.h" />
     <ClInclude Include="Fonts\FontManager.h" />
+    <ClInclude Include="Gizmos\Gizmo.h" />
+    <ClInclude Include="Gizmos\GizmoElement.h" />
+    <ClInclude Include="Gizmos\GizmosManager.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Lights\DirectionalLight.h" />
     <ClInclude Include="Lights\Light.h" />
@@ -157,6 +164,7 @@
     <ClInclude Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\RenderGizmosCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommand.h" />

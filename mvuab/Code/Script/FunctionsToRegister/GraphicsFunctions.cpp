@@ -37,6 +37,9 @@ extern "C"
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 #include "StaticMeshes/InstanceMesh.h"
+#include "Gizmos/GizmoElement.h"
+#include "Gizmos/Gizmo.h"
+#include "Gizmos/GizmosManager.h"
 
 using namespace luabind;
 
@@ -97,7 +100,7 @@ void registerObject3D( lua_State * aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CObject3D )
     LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_CTOR_4( CObject3D, const Math::Vect3f&, float, float, float )
+    LUA_DECLARE_CTOR_4( const Math::Vect3f&, float, float, float )
     LUA_DECLARE_METHOD( CObject3D, GetYaw )
     LUA_DECLARE_METHOD( CObject3D, SetYaw )
     LUA_DECLARE_METHOD( CObject3D, GetPitch )
@@ -113,10 +116,42 @@ void registerObject3D( lua_State * aLuaState )
   LUA_END_DECLARATION
 }
 
+void registerGizmos( lua_State * aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register Gizmos" );
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // OBJECT 3D
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CGizmoElement, CObject3D )
+    LUA_DECLARE_CTOR_5(CGizmoElement::EGizmoElementType, float, Math::Vect3f, float, float)
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS2( CGizmo, CObject3D, CName )
+    LUA_DECLARE_CTOR_4(std::string, Math::Vect3f, float, float)
+    LUA_DECLARE_METHOD( CGizmo, AddElement )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CGizmo> )
+    LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, GetResource )
+    LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, AddResource )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
+    LUA_DECLARE_METHOD(CGizmosManager, CreateGizmoElement)
+    LUA_DECLARE_METHOD( CGizmosManager, CreateGizmo)
+  LUA_END_DECLARATION
+}
+
 void registerGraphics( lua_State* aLuaState )
 {
   registerObject3D( aLuaState );
   registerCameras( aLuaState );
+  registerGizmos( aLuaState );
 
   module( aLuaState )
   [
