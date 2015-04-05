@@ -213,8 +213,11 @@ bool CTexture::Save( const std::string& FileName )
   // t.UnsetAsRenderTarget();
   // t.Save("t");
   assert( m_Texture != NULL );
-  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".tga" ).c_str(),
+  /*HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".tga" ).c_str(),
                                       D3DXIFF_TGA,
+                                      m_Texture, 0 );*/
+  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(),
+    D3DXIFF_PNG,
                                       m_Texture, 0 );
   assert( hr == D3D_OK );
   return hr == D3D_OK;

@@ -74,7 +74,7 @@ CLight::CLight( const CXMLTreeNode& node )
       m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
 
     if ( TagName == "dynamic" )
-        m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
+      m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
   }
 }
 
@@ -210,15 +210,13 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
     GM->BeginRender();
     GM->Clear( true, true, false, 0x000000ff );
 
-    for ( size_t i = 0; i < m_StaticShadowMapRenderableObjectsManagers.size(); ++i )
+    for ( size_t i = 0, lROMSize = m_StaticShadowMapRenderableObjectsManagers.size(); i < lROMSize; ++i )
       m_StaticShadowMapRenderableObjectsManagers[i]->Render();
 
-    //m_MustUpdateStaticShadowMap = false;
     GM->EndRender();
     m_StaticShadowMap->UnsetAsRenderTarget();
-
-    if( false )
-        m_StaticShadowMap->Save( "static_shadow_map" );
+    m_MustUpdateStaticShadowMap = false;
+    m_StaticShadowMap->Save( "static_shadow_map" );
   }
 
   if ( !m_DynamicShadowMapRenderableObjectsManagers.empty() )

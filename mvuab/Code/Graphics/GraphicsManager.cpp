@@ -212,15 +212,25 @@ void CGraphicsManager::SetupMatrices()
 
 bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
 {
+  LOG_INFO_APPLICATION( "Init of Graphics Manager" );
+
   m_WindowId = hWnd;
   Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
 
   mWidth = lScreenResolution.x;
   mHeight = lScreenResolution.y;
 
+  mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
+
+  if ( mDirectXObject == NULL )
+  {
+    LOG_ERROR_APPLICATION( "Error of Direct3DCreate9( D3D_SDK_VERSION )");
+    return false;
+  }
+
   bool lOk = ( aEngineConfig->GetFullScreenMode() ) ? CreateFullScreenMode(aEngineConfig) : CreateWindowedMode(aEngineConfig);
 
-  if ( lOk )
+  if ( false )
   {
     // Turn off culling, so we see the front and back of the triangle
     mDirectXDevice->SetSamplerState( 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
@@ -239,13 +249,14 @@ bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
     mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
     // Turn off D3D lighting, since we are providing our own vertex colors
     mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-    D3DXCreateTeapot( mDirectXDevice, &m_TeapotMesh, 0 );
-    D3DXCreateSphere( mDirectXDevice, 0.2f, 10, 10, &m_SphereMesh, 0 );
   }
   else
   {
-    FATAL_ERROR("The DirectX has not been init!!!");
+    //FATAL_ERROR("The DirectX has not been init!!!");
   }
+
+  D3DXCreateTeapot( mDirectXDevice, &m_TeapotMesh, 0 );
+  D3DXCreateSphere( mDirectXDevice, 0.2f, 10, 10, &m_SphereMesh, 0 );
 
   /*
   if ( !aEngineConfig->GetFitDesktop() )
@@ -270,16 +281,39 @@ bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
   return lOk;
 }
 
-bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
+DWORD CGraphicsManager::GetBehaviorFlags()
 {
-  mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
+  DWORD dwBehaviorFlags = 0;
 
-  if ( mDirectXObject == NULL )
+  //
+  // Do we support hardware vertex processing? if so, use it.
+  // If not, downgrade to software.
+  //
+  D3DCAPS9 d3dCaps;
+
+  if ( FAILED( mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT,
+               D3DDEVTYPE_HAL, &d3dCaps ) ) )
   {
-    // TO DO: Respond to failure of Direct3DCreate8
-    return false;
+    LOG_ERROR_APPLICATION( "Error getting the device caps" );
+    return dwBehaviorFlags;
   }
 
+  if ( d3dCaps.VertexProcessingCaps != 0 )
+  {
+    dwBehaviorFlags |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
+    LOG_INFO_APPLICATION( "D3DCREATE_HARDWARE_VERTEXPROCESSING" );
+  }
+  else
+  {
+    dwBehaviorFlags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+    LOG_INFO_APPLICATION( "D3DCREATE_SOFTWARE_VERTEXPROCESSING" );
+  }
+
+  return dwBehaviorFlags;
+}
+
+bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
+{
   //
   // For the default adapter, examine all of its display modes to see if any
   // of them can give us the hardware support we desire.
@@ -297,7 +331,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
     if ( FAILED( mDirectXObject->EnumAdapterModes( D3DADAPTER_DEFAULT,
                  D3DFMT_X8R8G8B8, nMode, &d3ddm ) ) )
     {
-      // TO DO: Respond to failure of EnumAdapterModes
+      LOG_ERROR_APPLICATION( "Error of AdapterModes");
       return false;
     }
 
@@ -321,7 +355,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
 
   if ( bDesiredAdapterModeFound == false )
   {
-    // TO DO: Handle lack of support for desired adapter mode...
+    LOG_ERROR_APPLICATION( "The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)", lRefreshRate, lScreenResolution.x, lScreenResolution.y );
     return false;
   }
 
@@ -336,7 +370,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
                D3DFMT_X8R8G8B8,
                FALSE ) ) )
   {
-    // TO DO: Handle lack of support for a 32-bit back buffer...
+    LOG_ERROR_APPLICATION( "This adapter has no support for  a 32 bit back buffer ");
     return false;
   }
 
@@ -348,29 +382,12 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
                D3DRTYPE_SURFACE,
                D3DFMT_D16 ) ) )
   {
-    // TO DO: Handle lack of support for a 16-bit z-buffer...
+    LOG_ERROR_APPLICATION( "This adapter has no support for a 16 bit back buffer ");
     return false;
   }
 
-  //
-  // Do we support hardware vertex processing? if so, use it.
-  // If not, downgrade to software.
-  //
-  D3DCAPS9 d3dCaps;
-
-  if ( FAILED( mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT,
-               D3DDEVTYPE_HAL, &d3dCaps ) ) )
-  {
-    // TO DO: Respond to failure of GetDeviceCaps
-    return false;
-  }
-
-  DWORD flags = 0;
-
-  if ( d3dCaps.VertexProcessingCaps != 0 )
-    flags = D3DCREATE_HARDWARE_VERTEXPROCESSING;
-  else
-    flags = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+  // Get the flags of the behaviour
+  DWORD dwBehaviorFlags = GetBehaviorFlags();
 
   //
   // Everything checks out - create a simple, full-screen device.
@@ -392,10 +409,10 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
 
-  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, flags, &d3dpp, &mDirectXDevice );
+  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp, &mDirectXDevice );
   if( FAILED( hr ) )
   {
-    // TO DO: Respond to failure of CreateDevice
+    LOG_ERROR_APPLICATION( "Error creating the device" );
     return false;
   }
 
@@ -404,14 +421,6 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
 
 bool CGraphicsManager::CreateWindowedMode(CEngineConfig* aEngineConfig)
 {
-  mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
-
-  if ( mDirectXObject == NULL )
-  {
-    // TO DO: Respond to failure of Direct3DCreate8
-    return false;
-  }
-
   D3DDISPLAYMODE d3ddm;
 
   if ( FAILED( mDirectXObject->GetAdapterDisplayMode( D3DADAPTER_DEFAULT, &d3ddm ) ) )
@@ -431,25 +440,8 @@ bool CGraphicsManager::CreateWindowedMode(CEngineConfig* aEngineConfig)
       return false;
   }
 
-  //
-  // Do we support hardware vertex processing? if so, use it.
-  // If not, downgrade to software.
-  //
-  D3DCAPS9 d3dCaps;
-
-  if ( FAILED( mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT,
-               D3DDEVTYPE_HAL, &d3dCaps ) ) )
-  {
-    // TO DO: Respond to failure of GetDeviceCaps
-    return false;
-  }
-
-  DWORD dwBehaviorFlags = 0;
-
-  if ( d3dCaps.VertexProcessingCaps != 0 )
-    dwBehaviorFlags |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
-  else
-    dwBehaviorFlags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+  // Get the flags of the behaviour
+  DWORD dwBehaviorFlags = GetBehaviorFlags();
 
   //
   // Everything checks out - create a simple, windowed device.
@@ -466,7 +458,7 @@ bool CGraphicsManager::CreateWindowedMode(CEngineConfig* aEngineConfig)
   if ( FAILED( mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId,
                dwBehaviorFlags, &d3dpp, &mDirectXDevice ) ) )
   {
-    // TO DO: Respond to failure of CreateDevice
+    LOG_ERROR_APPLICATION( "Error creating the device" );
     return false;
   }
 

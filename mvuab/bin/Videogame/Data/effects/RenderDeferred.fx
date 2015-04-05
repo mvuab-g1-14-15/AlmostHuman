@@ -29,7 +29,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	{
 		float3 l_Normal 			= normalize(l_WorldNormal);
 		float3 l_LightDirection 	= normalize(l_WorldPosition-g_LightsPosition[0]);
-		float l_Attenuation 		= 1; //DistanceAttenuation(0, l_LightDirection );
+		float l_Attenuation 		= DistanceAttenuation(0, l_LightDirection );
 		if(DIR_LIGHT == g_LightsType[0])
 		{
 			l_LightDirection = normalize(g_LightsDirection[0]);

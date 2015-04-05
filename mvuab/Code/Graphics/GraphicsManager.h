@@ -153,6 +153,7 @@ private: // Methods
                            Math::Vect2i& finalPos );
   D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
 
+  DWORD GetBehaviorFlags();
   bool CreateFullScreenMode( CEngineConfig* aEngineConfig );
   bool CreateWindowedMode( CEngineConfig* aEngineConfig );
 };
