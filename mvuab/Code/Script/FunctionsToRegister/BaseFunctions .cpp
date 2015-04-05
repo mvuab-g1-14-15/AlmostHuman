@@ -73,6 +73,7 @@ void registerBase( lua_State* m_LS )
 
     .def( "CrossProduct", &Math::Vect3f::CrossProduct )
     .def( "Normalize", &DA_Normalize )
+    .def("Length", &Math::Vect3f::Length)
 
     .def( "ToString", &Vect3f2String )
   ];

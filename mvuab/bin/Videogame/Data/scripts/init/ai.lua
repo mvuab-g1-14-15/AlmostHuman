@@ -1,32 +1,38 @@
-core = Singleton_Core.get_singleton()
-Enemy_Manager = core:GetEnemyManager()
 tiempoDeEspera = 0
 
 function set_initial_waypoint()
-	enemy = Enemy_Manager:GetActualEnemy()
-	--local process = Singleton_Engine.get_singleton():GetProcess()
-	--local enemyPosition = Vect3f(enemy:GetPosition())
-	--enemyPosition.y = 0
-	--local m_WaypointPoint = VectorWaypoints(process:GetAStarScene():GetPath(enemyPosition, Vect3f(6, 0, 6)))
-	--enemy:SetWaypoints(m_WaypointPoint)
+	enemy = enemy_manager:GetActualEnemy()
 	enemy:SetCurrentPoint(0)
-	enemy:SetExit(true)
 end
 
-function change_state()
-	enemy = Enemy_Manager:GetActualEnemy()
-	local m_CurrentState = enemy:getCurrentState()
-	local m_VectorNameState = VectorStates(enemy:getStateMachine():GetStateName())
-	local posicion = m_VectorNameState:getIdByResource(m_CurrentState)
-	if posicion == (m_VectorNameState:size()-1) then
-		enemy:ChangeState(m_VectorNameState:getResource(1))
-	else
-		enemy:ChangeState(m_VectorNameState:getResource(posicion+1))
+function check_next_state()
+	enemy = enemy_manager:GetActualEnemy()
+	local l_CurrentState = enemy:getCurrentState()
+	local l_NextState
+	core:trace("Current state: " .. l_CurrentState)
+	if l_CurrentState == "inicial" then
+		l_NextState = "andando"
+	end
+	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" then
+		if PlayerDistance(enemy) <= 5 and PlayerVisibility(enemy) then
+			l_NextState = "perseguir"
+		end
+	end
+	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
+		if PlayerDistance(enemy) < 2 and PlayerVisibility(enemy) then
+			l_NextState = "atacar"
+		end
+	end
+	if PlayerDistance(enemy) > 5 or not PlayerVisibility(enemy) then
+		l_NextState = "andando"
+	end
+	if l_NextState ~= l_CurrentState then
+		enemy:ChangeState(l_NextState)
 	end
 end
 
 function andar()
-	enemy = Enemy_Manager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	local targetPosition = enemy:getTargetPosition()
 	
 	local enemy_pos = enemy:GetPosition()
@@ -46,7 +52,7 @@ function andar()
 end
 
 function esperar()
-	enemy = Enemy_Manager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	local timer = core:GetTimer()
 	tiempoDeEspera = tiempoDeEspera + timer:GetElapsedTime()
 	if tiempoDeEspera > 2 then
@@ -54,4 +60,10 @@ function esperar()
 		tiempoDeEspera = 0
 		enemy:SetCurrentPoint(0)
 	end
+end
+
+function atacar()
+end
+
+function perseguir()
 end

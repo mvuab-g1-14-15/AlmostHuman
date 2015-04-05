@@ -36,6 +36,7 @@ protected:
   // State Machine instance
   CStateMachine* m_pStateMachine;
   std::string m_CurrentState;
+  std::string m_NextState;
   std::vector<std::string> m_NameStates;
   CRenderableObject* m_pRenderableObject;
 };

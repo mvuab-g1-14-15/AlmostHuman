@@ -4,7 +4,7 @@ class "CPlayerController"
 
 function CPlayerController:__init()
 	self.Position = Vect3f(0.0)
-	self.Height = 2.0
+	self.Height = 1.8
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
@@ -36,7 +36,7 @@ function CPlayerController:__init()
 	self.TimeLeanOut = 0.15
 	self.ActualTimeLeanOut = 0.15
 	
-	physic_manager:AddController("Player", self.Radius, self.Height, 0.2, 0.5, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -9.8)
+	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 0.2, 0.5, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -9.8)
 	self.CharacterController = physic_manager:GetController("Player")
 	core:trace("Player Controller initialized")
 end

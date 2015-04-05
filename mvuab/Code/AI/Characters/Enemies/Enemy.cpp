@@ -14,7 +14,9 @@
 #include "PhysicsManager.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
-  : CCharacter( Node.GetPszProperty( "name", "no_name" ) ), m_CurrentState( "inicial" )
+  : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
+  , m_CurrentState( "inicial" )
+  , m_NextState( "inicial" )
   , m_OnEnter( true )
   , m_OnExit( false )
   , m_pStateMachine( aStateMachine )
@@ -33,12 +35,15 @@ CEnemy::~CEnemy()
 void CEnemy::Update()
 {
   CScriptManager* l_SM = CCore::GetSingletonPtr()->GetScriptManager();
+
+  if (m_CurrentState != m_NextState)
+    m_OnExit = true;
+
   CState* l_State = m_pStateMachine->GetResource( m_CurrentState );
   std::vector<CAction*> l_Actions;
 
   if ( m_OnEnter )
   {
-    m_OnExit = false;
     l_Actions = l_State->GetOnEnterActions();
     m_OnEnter = false;
   }
@@ -46,6 +51,8 @@ void CEnemy::Update()
   {
     l_Actions = l_State->GetOnExitActions();
     m_OnEnter = true;
+    m_OnExit = false;
+    m_CurrentState = m_NextState;
   }
   else
     l_Actions = l_State->GetUpdateActions();
@@ -57,8 +64,9 @@ void CEnemy::Update()
     l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 
   Vect3f l_Pos = m_Position;
-  l_Pos.y -= m_Controller->GetHeight() / 2;
-  m_pRenderableObject->SetPosition( l_Pos );
+  m_Position = m_Controller->GetPosition();
+  m_Position.y -=  m_Controller->GetHeight();
+  m_pRenderableObject->SetPosition( m_Position );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );
@@ -68,7 +76,7 @@ void CEnemy::Update()
 
 void CEnemy::ChangeState( std::string NewState )
 {
-  m_CurrentState = NewState;
+  m_NextState = NewState;
 }
 
 void CEnemy::Init()
@@ -85,9 +93,9 @@ void CEnemy::AddMesh( std::string MeshName )
 
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );
-  Vect3f l_Pos = m_Position;
-  l_Pos.y -= m_Controller->GetHeight() / 2;
-  m_pRenderableObject->SetPosition( l_Pos );
+  m_Position = m_Controller->GetPosition();
+  m_Position.y -=  m_Controller->GetHeight();
+  m_pRenderableObject->SetPosition( m_Position );
   m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
   m_pRenderableObject->SetPitch( m_fPitch );
   m_pRenderableObject->SetRoll( m_fRoll );

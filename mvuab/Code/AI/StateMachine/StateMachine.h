@@ -11,18 +11,16 @@
 class CStateMachine : public CName, public CMapManager<CState>
 {
 public:
-	CStateMachine(const std::string& Name);
-	~CStateMachine();
-	bool Load(const std::string& FileName);
-	bool ReLoad();
-	void CleanUp();
-    GET_SET(std::vector<std::string>, StateName);
+  CStateMachine( const std::string& Name );
+  ~CStateMachine();
+  bool Load( const std::string& FileName );
+  bool ReLoad();
+  void CleanUp();
 protected: // Members
 protected: // Methods
 private: // Members
-	std::string m_FileName;
-    std::vector<std::string> m_StateName;
-  
+  std::string m_FileName;
+
 private: // Methods
 };
 

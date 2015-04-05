@@ -59,16 +59,12 @@ void registerAI( lua_State* m_LS )
   ];
   module( m_LS )
   [
-    class_<std::vector<std::string>>( "VectorStates" )
-    .def( constructor<std::vector<std::string>>() )
-    .def( "getResource", &vector_get<std::string> )
-    .def( "getIdByResource", &vector_getIdByResource<std::string> )
-    .def( "size", &std::vector<std::string>::size )
+    class_<CMapManager<CState>>("CMapManagerCState")
+    .def("GetResource", &CMapManager<CState>::GetResource)
   ];
   module( m_LS )
   [
-    class_<CStateMachine, CName, CMapManager<CState>>( "CStateMachine" )
-    .def( "GetStateName", &CStateMachine::GetStateName )
+    class_<CStateMachine, bases<CName, CMapManager<CState>>>( "CStateMachine" )
   ];
   module( m_LS )
   [

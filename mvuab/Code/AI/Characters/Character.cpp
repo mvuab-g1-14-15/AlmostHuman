@@ -22,44 +22,6 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-  CPhysicUserData* l_PUD = CPhysicsManager::GetSingletonPtr()->GetUserData( "Player" );
-  CPhysicController* l_CharacterController = l_PUD->GetController();
-  Math::Vect3f l_Distance = l_CharacterController->GetPosition() - m_Controller->GetPosition();
-  float l_Cantidad = ( Math::Utils::Pow2( l_Distance ) ).x;
-  l_Cantidad = Math::Utils::Sqrt( l_Cantidad );
-
-  if ( l_Cantidad < 5.0f )
-    SetTargetPosition( l_CharacterController->GetPosition() );
-  else
-    SetTargetPosition( m_TargetPositionOriginal );
-
-  Math::Vect3f l_Position = m_Controller->GetPosition();
-  float l_Yaw = m_Controller->GetYaw();
-  Math::Vect3f l_Direction( Math::Utils::Cos( l_Yaw ) , 0.0f, Math::Utils::Sin( l_Yaw ) );
-  l_Direction = l_Direction.GetNormalized();
-  Math::Vect3f l_DessiredDirection = m_TargetPosition - l_Position;
-  l_DessiredDirection.y = 0;
-
-  if ( l_DessiredDirection != Math::Vect3f( 0, 0, 0 ) )
-    l_DessiredDirection = l_DessiredDirection.GetNormalized();
-
-  Math::CLerpAnimator3D l_Interpolator3D;
-  l_Interpolator3D.SetValues( l_Direction, l_DessiredDirection, 1.0f, Math::FUNC_CONSTANT );
-  Math::Vect3f l_LookAt;
-  l_Interpolator3D.Update( 1, l_LookAt );
-  m_Controller->SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
-  SetYaw( Math::Utils::ATan2( l_LookAt.z, l_LookAt.x ) );
-
-  if ( l_LookAt != Math::Vect3f( 0, 0, 0 ) )
-    l_LookAt = l_LookAt.GetNormalized();
-
-  float n = l_LookAt.Length();
-  m_Controller->Move( l_LookAt * m_Speed, deltaTime );
-  SetPosition( m_Controller->GetPosition() );
-  /* CRenderableObject* l_Box =
-     CCore::GetSingletonPtr()->GetRenderableObjectsLayersManager()->GetResource( "solid" )->GetResource( "Pyramid001" );
-   l_Box->SetPosition( m_Controller->GetPosition() + Vect3f( 0, 2, 0 ) );
-   l_Box->SetYaw( m_Controller->GetYaw() );*/
 }
 
 void CCharacter::Render()

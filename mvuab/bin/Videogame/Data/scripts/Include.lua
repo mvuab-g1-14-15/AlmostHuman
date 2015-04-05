@@ -21,3 +21,33 @@ end
 function CheckVector(vector)
 	return not (vector.x == 0 and vector.y == 0 and vector.z == 0)
 end
+
+function PlayerDistance(enemy)
+	local l_PlayerPos = GetPlayerPosition()
+	local l_EnemyPos = enemy:GetPosition()
+	
+	local l_DistanceVector = l_PlayerPos - l_EnemyPos
+	
+	return l_DistanceVector:Length()
+end
+
+function GetPlayerPosition()
+	local l_Player = physic_manager:GetController("Player")
+	return l_Player:GetPosition()
+end
+
+function PlayerVisibility(enemy)
+	local l_PlayerPos = GetPlayerPosition()
+	local l_EnemyPos = enemy:GetPosition()
+	
+	local l_Direction = l_PlayerPos - l_EnemyPos
+	l_Direction:Normalize()
+	
+	local l_Distance = physic_manager:RaycastDistance(l_EnemyPos, l_Direction, 0xffffffff)
+	
+	if l_Distance < PlayerDistance(enemy) then
+		return false
+	else
+		return true
+	end
+end
