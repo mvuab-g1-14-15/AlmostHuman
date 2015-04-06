@@ -27,19 +27,10 @@
     <enable_z_test/>
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<!--<render_debug_lights render="true"/>-->
-	<!--<render_debug_cameras render="true"/>-->
-	
+	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/>
 		
-	<render_astar/>
-	<render_debug_physics/>
-	
 	<render_particules/>
-	
-
-    <render_debug_lights render="true"/>
-
     <unset_render_target render_target="deferred_multiple_render_target"/>
 	
 	<disable_z_write/>

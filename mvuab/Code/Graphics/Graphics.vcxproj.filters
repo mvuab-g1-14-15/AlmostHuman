@@ -144,9 +144,6 @@
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp">
-      <Filter>SceneRenderComands</Filter>
-    </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
@@ -213,12 +210,6 @@
     <ClCompile Include="Cameras\CameraFree.cpp">
       <Filter>Cameras</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.cpp">
-      <Filter>SceneRenderComands</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.cpp">
-      <Filter>SceneRenderComands</Filter>
-    </ClCompile>
     <ClCompile Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
@@ -231,7 +222,7 @@
     <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderComands\RenderDebugCamerasCommand.cpp">
+    <ClCompile Include="SceneRenderComands\RenderDebugCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderGizmosCommand.cpp">
@@ -400,9 +391,6 @@
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h">
-      <Filter>SceneRenderComands</Filter>
-    </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
@@ -469,12 +457,6 @@
     <ClInclude Include="Cameras\CameraFree.h">
       <Filter>Cameras</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderComands\AStarGraphDrawerSceneRendererCommand.h">
-      <Filter>SceneRenderComands</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneRenderComands\RenderDebugPhysicsSceneRendererCommand.h">
-      <Filter>SceneRenderComands</Filter>
-    </ClInclude>
     <ClInclude Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
@@ -487,7 +469,7 @@
     <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderComands\RenderDebugCamerasCommand.h">
+    <ClInclude Include="SceneRenderComands\RenderDebugCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderGizmosCommand.h">

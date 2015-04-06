@@ -89,7 +89,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pConsole );
 }
 
-void CCore::Init( const std::string& aConfigPath, HWND aWindowId )
+void CCore::Init( HWND aWindowId )
 {
   // Obtain the path of the configuration file and parse it
   m_WindowId = aWindowId;
@@ -177,8 +177,7 @@ void CCore::InitManagers()
 
   m_pGraphicsManager->Init( m_WindowId, l_EngineConfig );
   m_pEffectManager->Load( l_EngineConfig->GetEffectsPath() );
-  m_pInputManager->Init( m_WindowId, Math::Vect2i( l_EngineConfig->GetScreenWidth(),
-                         l_EngineConfig->GetScreenHeight() ), l_EngineConfig->GetExclusiveModeInMouse() );
+  m_pInputManager->Init( m_WindowId, l_EngineConfig->GetScreenSize(), l_EngineConfig->GetExclusiveModeInMouse() );
   m_pActionManager->Init( l_EngineConfig->GetInputPath(), m_pInputManager );
   m_pLanguageManager->SetXmlPaths( l_EngineConfig->GetLanguages() );
   m_pLanguageManager->LoadXMLs();

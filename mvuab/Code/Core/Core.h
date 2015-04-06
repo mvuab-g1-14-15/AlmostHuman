@@ -76,7 +76,7 @@ class CCore : public CSingleton<CCore>
         CCore();
         ~CCore();
 
-        void Init( const std::string& aConfigPath, HWND aWindowId );
+        void Init( HWND aWindowId );
         void Update();
         void Render();
 
