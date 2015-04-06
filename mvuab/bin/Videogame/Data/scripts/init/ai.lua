@@ -16,9 +16,9 @@ function check_next_state()
 	
 	--core:trace("Distance to player: " .. l_DistanceToPlayer)
 	if l_PlayerInSight then
-		core:trace("Is viewing player: true")
+		--core:trace("Is viewing player: true")
 	else
-		core:trace("Is viewing player: false")
+		--core:trace("Is viewing player: false")
 	end
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"

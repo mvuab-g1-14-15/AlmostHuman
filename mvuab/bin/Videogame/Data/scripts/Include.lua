@@ -60,7 +60,7 @@ function PlayerVisibility(enemy)
 	-- The impact mask is not used
 	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
 	
-	core:trace("Group: " .. l_CollisionGroup)
+	--core:trace("Group: " .. l_CollisionGroup)
 	
 	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
 		return true
