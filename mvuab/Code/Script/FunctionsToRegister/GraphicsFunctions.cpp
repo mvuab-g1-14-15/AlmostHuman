@@ -195,6 +195,7 @@ void registerGraphics( lua_State* aLuaState )
     .def( "Load", &CRenderableObjectsManager::Load )
     .def( "AddResource", &CRenderableObjectsManager::AddResource )
     .def( "CreateCinematic", &CRenderableObjectsManager::CreateCinematic )
+    .def( "GetResource", &CRenderableObjectsManager::GetResource )
   ];
   module( aLuaState )
   [

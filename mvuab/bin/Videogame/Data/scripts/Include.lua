@@ -8,6 +8,8 @@ timer = core:GetTimer()
 physic_manager = core:GetPhysicsManager()
 enemy_manager = core:GetEnemyManager()
 gizmos_manager = core:GetGizmosManager()
+renderable_objects_layer_manager = core:GetRenderableObjectsLayersManager()
+renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
 process = Singleton_Engine.get_singleton():GetProcess()
 
 -- Global Variables

@@ -49,6 +49,7 @@ function CPlayerController:Update()
 	self:CalculateDirectionVectors(l_PlayerCamera)
 	
 	self:UpdateCamera(l_PlayerCamera, dt)
+	self.CharacterController:SetYaw(l_PlayerCamera:GetYaw())
 	
 	self:UpdateInput()
 	
@@ -141,7 +142,7 @@ function CPlayerController:MakeGizmo()
 	local Gizmo = gizmos_manager:GetResource("PlayerGizmo")
 	if Gizmo == nil then
 		Gizmo = gizmos_manager:CreateGizmo("PlayerGizmo", self.Position, 0.0, 0.0)
-		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, Vect3f(0.0), 0.0, 0.0, CColor(0.0, 0.0, 1.0, 1.0))
+		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.05, Vect3f(0.0), 0.0, 0.0, CColor(0.0, 0.0, 1.0, 1.0))
 		Gizmo:AddElement(GizmoElement)
 		gizmos_manager:AddResource("PlayerGizmo", Gizmo)
 	else
@@ -152,6 +153,18 @@ end
 function CPlayerController:SetPosition(position)
 	self.Position = position
 	self.CharacterController:SetPosition(position)
+end
+
+function CPlayerController:GetPosition()
+	return self.Position
+end
+
+function CPlayerController:GetHeight()
+	return self.CharacterController:GetHeight()
+end
+
+function CPlayerController:GetYaw()
+	return self.CharacterController:GetYaw()
 end
 
 function CPlayerController:UpdateTimers(dt)
@@ -168,21 +181,28 @@ function CPlayerController:UpdateTimers(dt)
 end
 
 function CPlayerController:UpdateCamera(camera, dt)
+	local delta = 0.1
 	if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
 		camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
 	end
 	if action_manager_lua_wrapper:DoAction(action_manager, "MovePitch") then
 		camera:AddPitch( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+		if camera:GetPitch() > g_HalfPi - delta then
+			camera:SetPitch(g_HalfPi - delta)
+		end
+		if camera:GetPitch() < -g_HalfPi + delta then
+			camera:SetPitch(-g_HalfPi + delta)
+		end 
 	end
 end
 
 function CPlayerController:CalculateDirectionVectors(l_PlayerCamera)
 	self.Forward = l_PlayerCamera:GetDirection()
-	local l_Up = l_PlayerCamera:GetVecUp()
-	self.Side = self.Forward ^ l_Up
 	self.Forward.y = 0.0
-	self.Side.y = 0.0
 	self.Forward:Normalize()
+	local l_Up = Vect3f(0.0, 1.0, 0.0)
+	self.Side = self.Forward ^ l_Up
+	self.Side.y = 0.0
 	self.Side:Normalize()
 end
 
