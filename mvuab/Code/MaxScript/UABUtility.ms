@@ -51,40 +51,32 @@ utility UABUtility "UAB Utility" width:163 height:500
 	on LightsButton pressed do
 	(
 		--export lights
-		local LightDir = PathLabel.text + "\\lights.xml"		--poner parametrico
+		local LightDir = PathLabel.text + "\\lights.xml"
 		ExportLights LightDir
 	)
 	on MeshButton pressed do
 	(		
-		format "Mesh button pressed\n"
 		IsEmptyDestPath PathLabel.text
 		
 		--export Mesh
-		local MeshDir = PathLabel.text + "\\meshes"		--poner parametrico
-		local TexturesDir = PathLabel.text + "\\textures"		--poner parametrico
-		--Check if exist dir, if not mkdir
+		local MeshDir = PathLabel.text + "\\meshes"
+		local TexturesDir = PathLabel.text + "\\textures"		
+
 		DoesFolderExist MeshDir
 		
 		local UniqueInstanceArray = GetUniqueInstances()
+		IsEmptyInstanceArray UniqueInstanceArray
 		
-		--format "UniqueInstancesArray % \n" UniqueInstanceArray 
-		
-		if UniqueInstanceArray.count == 0 then 
-		(
-			format "Empty selection. Select any object \n"
-			return -1
-		)
-		
-		--poner parametrico
 		if selection.count > 0 then 
 		(
-			ExportSelectedObjectsMeshes UniqueInstanceArray MeshDir
+			GenerateMeshes UniqueInstanceArray MeshDir
 			
 			if CopyTexturesCheckBox.checked then
-				(
-					DoesFolderExist TexturesDir
-					ExportTextureFile selection TexturesDir
-				)
+			(
+				DoesFolderExist TexturesDir
+				ExportTextureFile selection TexturesDir
+			)
+		
 		)
 		else
 		(
@@ -150,24 +142,8 @@ utility UABUtility "UAB Utility" width:163 height:500
 		if ExportMeshCheckBox.checked then
 		(
 			local UniqueInstanceArray = GetUniqueInstancesScene()
-		
-			if UniqueInstanceArray.count == 0 then 
-			(
-				format "Empty selection. Select any object \n"
-				return -1
-			)
-			
-			for Obj in UniqueInstanceArray do
-			(
-				filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-				local file = fopen filename "wb"
-				local l_ObjectMesh = SMesh()
-				l_ObjectMesh.InitFromMaxObject Obj
-				l_ObjectMesh.WriteToFile file
-				fclose file
-			)
-			
-			format "Meshes copied on: % \n" MeshDir
+			IsEmptyInstanceArray UniqueInstanceArray
+			GenerateMeshes UniqueInstanceArray MeshDir
 		)
 	)
 	on SceneButton pressed do
@@ -181,10 +157,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		
 		select $*
-		
-		--Check if exist dir, if not mkdir
-		--DoesFolderExist rootDir
-		
+
 		if fileSrcMeshXML != undefined then
 		(
 			DoesFolderExist MeshDir
@@ -198,31 +171,24 @@ utility UABUtility "UAB Utility" width:163 height:500
 			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
 		)
 		
-		--selec all objects
 		if CopyTexturesCheckBox.checked then
 		(
 			DoesFolderExist TexturesDir
 			ExportTextureFile geometry TexturesDir
 		)
-	
-		--selec all objects
+		
 		if ExportMeshCheckBox.checked then
 		(
-			local UniqueInstanceArray = GetUniqueInstances()
-		
-			if UniqueInstanceArray.count == 0 then 
-			(
-				format "Empty selection. Select any object \n"
-				return -1
-			)
+			local UniqueInstanceArray = GetUniqueInstancesScene()
+			IsEmptyInstanceArray UniqueInstanceArray
 			
-			ExportSelectedObjectsMeshes UniqueInstanceArray MeshDir
+			GenerateMeshes UniqueInstanceArray MeshDir
 		)
 		
 	)
 	on SetProperties pressed do
 	(
-		createDialog UABSetProperties
+		filein "UABSetProperties.ms"
 	)
 	on Xbtn pressed do
 	(

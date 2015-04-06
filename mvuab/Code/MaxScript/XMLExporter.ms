@@ -44,8 +44,8 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 --export de la class
 fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
-	--try
-	--(
+	try
+	(
 		local unique_instances = GetUniqueInstances()
 		
 		-- create the document and set the filename
@@ -59,9 +59,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			format "Empty selection. Select any object \n"
 			return -1
 		)
-		
-		--TODO: Petan los layers
-		
+
 		local layers=#()
 
 		for Obj in AllObj do
@@ -156,11 +154,11 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			
 			
 		)
-	--)
-	--catch
-	--(
-		--format "Error generating renderable object\n"
-	--)
+	)
+	catch
+	(
+		format "Error generating renderable object\n"
+	)
 	return xDoc.PrettySaveXML()
 )
 
@@ -193,4 +191,19 @@ fn ExportTextureFile AllObj DestPath =
 		)
 		delete newObj
 	)		
+)
+
+function GenerateMeshes aObjects MeshDir =
+(
+	for Obj in aObjects do
+	(
+		filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+		local file = fopen filename "wb"
+		local l_ObjectMesh = SMesh()
+		l_ObjectMesh.InitFromMaxObject Obj
+		l_ObjectMesh.WriteToFile file
+		fclose file
+	)
+	
+	format "Meshes copied on: % \n" MeshDir	
 )

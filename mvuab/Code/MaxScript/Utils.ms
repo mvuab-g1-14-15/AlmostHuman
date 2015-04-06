@@ -53,7 +53,6 @@ fn GetNodeReferences node =
 
 fn GetReferences = 
 (
-	--if nodes == unsupplied do nodes = getCurrentSelection()
 	local refnodes = #()
 	for node in geometry where findItem refnodes node == 0 do 
 	(
@@ -63,6 +62,7 @@ fn GetReferences =
 	return refnodes
 )
 	
+/* Method to extract core instances from selection (loops all selected objects of scene) */
 fn GetUniqueInstances = 
 (
 	local uniqueInstance = #()
@@ -78,11 +78,9 @@ fn GetUniqueInstances =
 			append uniqueInstance obj
 		)
 	)
-    --allInsts.wirecolor = green
-	--print uniqueInstance
 	return uniqueInstance
 )
-
+/* Method to extract core instances from scene (loops all geometry of scene) */
 fn GetUniqueInstancesScene = 
 (
 	local uniqueInstance = #()
@@ -98,8 +96,6 @@ fn GetUniqueInstancesScene =
 			append uniqueInstance obj
 		)
 	)
-    --allInsts.wirecolor = green
-	--print uniqueInstance
 	return uniqueInstance
 )
 
@@ -112,26 +108,13 @@ fn IsEmptyDestPath SrcPath =
 	)
 )
 
-fn ExportSelectedObjectsMeshes aListObjects MeshDir =
+fn IsEmptyInstanceArray UniqueInstanceArray =
 (
-	for Obj in aListObjects do
+	if UniqueInstanceArray.count == 0 then 
 	(
-		format "Object name: %\n" Obj.name
-		try
-		(
-			filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
-			local file = fopen filename "wb"
-			local l_ObjectMesh = SMesh()
-			l_ObjectMesh.InitFromMaxObject Obj
-			l_ObjectMesh.WriteToFile file
-			fclose file
-		)
-		catch
-		(
-			format "%\n" (getCurrentException())
-		)
+		format "Empty selection. Select any object \n"
+		return -1
 	)
-	
-	format "Check the meshes directory: % \n" MeshDir
 )
+
 	
