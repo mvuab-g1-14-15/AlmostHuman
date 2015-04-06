@@ -66,38 +66,41 @@ public:
 
   // Basic Primitives
   void DrawAxis( float32 Size );
+
   void DrawIcoSphere();
-  void DrawGrid( float32 Size, Math::CColor Color = Math::colWHITE,
-                 int GridX = 10,
-                 int32 GridZ = 10 );
-  void DrawPlane( float32 Size, const Math::Vect3f& normal, float32 distance,
-                  Math::CColor Color = Math::colWHITE, int GridX = 10, int32 GridZ = 10 );
-  void DrawCube( float32 Size, Math::CColor Color );
-  void DrawCube( const Math::Vect3f& aPosition, float32 Size,
-                 const Math::CColor aColor = Math::colWHITE );
-  void DrawCube( float32 Size );
-  void DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ,
+
+  void DrawCube( const Math::Vect3f& aPosition, float32 Size, Math::CColor Color );
+  void DrawCube( const Math::Mat44f& aTransform, float32 Size, const Math::CColor aColor = Math::colWHITE );
+  void DrawBox( const Math::Vect3f& aPosition, float32 SizeX, float32 SizeY, float32 SizeZ,
                 Math::CColor Color = Math::colWHITE );
-  void DrawCircle( float32 Radius, Math::CColor Color = Math::colWHITE,
+  void DrawBox( const Math::Mat44f& aTransform, float32 SizeX, float32 SizeY, float32 SizeZ,
+                Math::CColor Color = Math::colWHITE );
+  void DrawSphere( const Math::Vect3f& aPosition, float32 Radius, Math::CColor Color = Math::colWHITE,
                    int32 Aristas = 10 );
-  void DrawSphere( float32 Radius, Math::CColor Color = Math::colWHITE,
+  void DrawSphere( const Math::Mat44f& aTransform, float32 Radius, Math::CColor Color = Math::colWHITE,
+                   int32 Aristas = 10 );
+  void DrawCylinder( const Math::Vect3f& aPosition, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas,
+                     Math::CColor Color, bool drawCover );
+  void DrawCylinder( const Math::Mat44f& aTransform, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas,
+                     Math::CColor Color, bool drawCover );
+  void DrawCapsule( const Math::Vect3f& aPosition, float32 radius, float32 h, uint32 Aristas = 10,
+                    Math::CColor Color = Math::colWHITE );
+
+  void DrawGrid( float32 Size, Math::CColor Color = Math::colWHITE, int GridX = 10, int32 GridZ = 10 );
+  void DrawPlane( float32 Size, const Math::Vect3f& normal, float32 distance, Math::CColor Color = Math::colWHITE,
+                  int GridX = 10, int32 GridZ = 10 );
+  void DrawCircle( float32 Radius, Math::CColor Color = Math::colWHITE,
                    int32 Aristas = 10 );
   void DrawLine( const Math::Vect3f& PosA, const Math::Vect3f& PosB,
                  Math::CColor Color = Math::colWHITE );
   void DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h,
                    ETypeAlignment alignment,
                    Math::CColor color = Math::colBLUE );
-  void GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay,
-               Math::Vect3f& dirRay );
+  void GetRay( const Math::Vect2i& mousePos, Math::Vect3f& posRay, Math::Vect3f& dirRay );
   void DrawRectangle2D( const Math::Vect2i& pos, uint32 w, uint32 h,
                         Math::CColor& backGroundColor,
                         uint32 edge_w, uint32 edge_h, Math::CColor& edgeColor );
   void DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique* EffectTechnique );
-  void DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, float32 h,
-                     uint32 Aristas,
-                     Math::CColor Color, bool drawCover );
-  void DrawCapsule( float32 radius, float32 h, uint32 Aristas = 10,
-                    Math::CColor Color = Math::colWHITE );
   void DrawQuad3D( const Math::Vect3f& pos, const Math::Vect3f& up,
                    const Math::Vect3f& right,
                    float32 w, float32 h, Math::CColor color = Math::colBLUE );
@@ -121,26 +124,17 @@ public:
     CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
     float U0, float V0, float U1, float V1 );
 
-  uint32 GetWindowHeight();
-
-
 private: // Members
-  HWND
-  m_WindowId;                      // 3D render window handle
-  LPDIRECT3D9             mDirectXObject;                          // direct3d interface
-  LPDIRECT3DDEVICE9       mDirectXDevice;                    // direct3d device
-  uint32
-  mWidth;                        // width of the client windows
-  uint32
-  mHeight;                       // height of the client windows
-  Math::CColor
-  m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode
-  Math::CColor
-  m_BackbufferColor_release;       // Clear the backbuffer with this color in release mode
+  HWND                    m_WindowId;                      // 3D render window handle
+  LPDIRECT3D9             mDirectXObject;                  // direct3d interface
+  LPDIRECT3DDEVICE9       mDirectXDevice;                  // direct3d device
+  uint32                  mWidth;                          // width of the client windows
+  uint32                  mHeight;                         // height of the client windows
+  Math::CColor            m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode
+  Math::CColor            m_BackbufferColor_release;       // Clear the backbuffer with this color in release mode
   LPDIRECT3DSURFACE9      m_pBackBuffer;
   bool                    m_bPaintSolid;
-  bool
-  mOk;                         // Initialization boolean control
+  bool                    mOk;                             // Initialization boolean control
   LPD3DXMESH              m_SphereMesh;
   LPD3DXMESH              m_BoxMesh;
   LPD3DXMESH              m_CylinderMesh;
@@ -156,6 +150,7 @@ private: // Methods
   DWORD GetBehaviorFlags();
   bool CreateFullScreenMode( CEngineConfig* aEngineConfig );
   bool CreateWindowedMode( CEngineConfig* aEngineConfig );
+  void RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh , Math::CColor aColor );
 };
 
 #endif // GRAPHICS_MANAGER_H

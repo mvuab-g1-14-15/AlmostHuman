@@ -69,24 +69,22 @@ CPhysicsManager::CPhysicsManager( void )
 bool CPhysicsManager::Init( void )
 {
   m_pMyAllocator = new CPhysicUserAllocator;
-  assert( m_pMyAllocator );
+  LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
   m_bIsOk = ( m_pMyAllocator != NULL );
 
   if ( m_bIsOk )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: Inicializando la libreria PhysX" );
     // Initialize PhysicsSDK
     NxPhysicsSDKDesc l_SDK_Desc;
     NxSDKCreateError errorCode = NXCE_NO_ERROR;
     m_pPhysicsSDK = NxCreatePhysicsSDK( NX_PHYSICS_SDK_VERSION, m_pMyAllocator, NULL, l_SDK_Desc, &errorCode );
-    //m_InitParams.m_fSkinWidth = 0.01f; //TODO: Borrar la línea
     m_bIsOk = ( m_pPhysicsSDK != NULL );
 
     if ( m_bIsOk )
     {
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: Creado el PhysXSDK" );
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---" );
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
+      LOG_INFO_APPLICATION( "PhysicsManager:: Creado el PhysXSDK" );
+      LOG_INFO_APPLICATION( "PhysicsManager:: -------PhsX Settings---" );
+      LOG_INFO_APPLICATION( "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
       m_pPhysicsSDK->setParameter( NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth );
       //Código para pintar la información de los Joints
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_ACTOR_AXES, 1 );
@@ -95,7 +93,7 @@ bool CPhysicsManager::Init( void )
       m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_WORLD_AXES, 1 );
       m_pPhysicsSDK->setParameter( NX_CONTINUOUS_CD, 1 );
       // Create a scene
-      CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity );
+      LOG_INFO_APPLICATION( "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity );
       NxSceneDesc sceneDesc;
       sceneDesc.gravity = NxVec3( 0.0f, m_InitParams.m_fGravity, 0.0f );
       sceneDesc.simType = NX_SIMULATION_HW;
@@ -112,14 +110,13 @@ bool CPhysicsManager::Init( void )
 
       if ( m_bIsOk )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->Restitution %f:",
-                                               m_InitParams.m_Restitution_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
-                                               m_InitParams.m_StaticFriction_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
-                                               m_InitParams.m_DynamicFriction_DefMat );
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> ----END PhsX Settings---" );
+        LOG_INFO_APPLICATION( "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
+        LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
+        LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
+                              m_InitParams.m_StaticFriction_DefMat );
+        LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
+                              m_InitParams.m_DynamicFriction_DefMat );
+        LOG_INFO_APPLICATION( "PhysicsManager::Init-> ----END PhsX Settings---" );
         // Set default material
         //TODO: Borrar líneas
         //m_InitParams.m_Restitution_DefMat = 0.5f;
@@ -135,13 +132,13 @@ bool CPhysicsManager::Init( void )
 
         if ( m_bIsOk )
         {
-          CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Creado el controlador de caracteres" );
+          LOG_INFO_APPLICATION( "PhysicsManager::Init-> Creado el controlador de caracteres" );
           m_pCookingMesh = new CPhysicCookingMesh();
           assert( m_pCookingMesh );
           m_bIsOk = m_pCookingMesh->Init( m_pPhysicsSDK, m_pMyAllocator );
 
           if ( m_bIsOk )
-            CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, "PhysicsManager::Init-> Creado el CookingMesh" );
+            LOG_INFO_APPLICATION( "PhysicsManager::Init-> Creado el CookingMesh" );
         }// isOk mControllerManager?
       }//isOk m_pScene?
     }//isOk m_pPhysicsSDK ?
@@ -152,7 +149,6 @@ bool CPhysicsManager::Init( void )
     std::string msg_error = "PhysicsManager::Init-> Error en la inicializacion de PhysX";
     LOG_ERROR_APPLICATION( msg_error.c_str() );
     Release();
-    //throw CException ( __FILE__, __LINE__, msg_error ); TODO
   }
 
   /*Precompilation Directives*/
@@ -391,23 +387,18 @@ void CPhysicsManager::DebugRender( CGraphicsManager* _RM )
   }
 }
 
-//----------------------------------------------------------------------------
-// DrawActor : Dibuja el actor en modo debug
-//----------------------------------------------------------------------------
 void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
 {
-  CPhysicUserData* physicUserData = NULL;
-  physicUserData = ( CPhysicUserData* ) _pActor->userData;
-  //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
-  assert( physicUserData );
+  CPhysicUserData* physicUserData = ( CPhysicUserData* ) _pActor->userData;
+  ASSERT( physicUserData, "Registering a phyxs object without user data" );
 
   if ( !physicUserData->GetPaint() || physicUserData->GetName() == "CharacterController" )
     return;
 
   NxShape* const* shapes = _pActor->getShapes();
   NxU32 nShapes = _pActor->getNbShapes();
-
   Mat44f m;
+  Math::CColor color = physicUserData->GetColor();
 
   while ( nShapes-- )
   {
@@ -415,7 +406,6 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     {
     case NX_SHAPE_PLANE:
     {
-      Math::CColor color = colBLACK;
       float distance = shapes[nShapes]->isPlane()->getPlane().d;
       NxVec3 normal =  shapes[nShapes]->isPlane()->getPlane().normal;
       Math::Vect3f n( normal.x, normal.y, normal.z );
@@ -432,12 +422,8 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
                   m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                   m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                   m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
-      _RM->SetTransform( m );
       NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
-      Math::CColor color = physicUserData->GetColor();
-      //Math::CColor  color = colRED;
-      _RM->DrawBox( boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
-      //_RM->DrawCube( boxDim.y * 2, color );
+      _RM->DrawBox( m, boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
     }
     break;
 
@@ -449,10 +435,9 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
                   m_aux[1], m_aux[5], m_aux[9], m_aux[13],
                   m_aux[2], m_aux[6], m_aux[10], m_aux[14],
                   m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
-      _RM->SetTransform( m );
       NxReal radius = shapes[nShapes]->isSphere()->getRadius();
       Math::CColor color = physicUserData->GetColor();
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      _RM->DrawSphere( m, radius, color, MAX_ARISTAS );
     }
     break;
 
@@ -468,19 +453,16 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
       const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
       const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
       Math::CColor color = physicUserData->GetColor();
-
       Mat44f t;
       t.RotByAngleX( 3.1415f / 2 );
-      _RM->SetTransform( m * t );
-      _RM->DrawCylinder( radius, radius, height, MAX_ARISTAS, color, false );
+      _RM->DrawCylinder( m * t, radius, radius, height, MAX_ARISTAS, color, false );
       t.SetIdentity();
       t.Translate( Math::Vect3f( 0, height * 0.5f, 0 ) );
-      _RM->SetTransform( m * t );
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
       t.SetIdentity();
       t.Translate( Math::Vect3f( 0, -height * 0.5f, 0 ) );
       _RM->SetTransform( m * t );
-      _RM->DrawSphere( radius, color, MAX_ARISTAS );
+      _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
       t.SetIdentity();
       _RM->SetTransform( m * t );
     }
@@ -749,12 +731,12 @@ bool CPhysicsManager::ReleasePhysicFixedJoint( CPhysicFixedJoint* _pJoint )
   return true;
 }
 
-bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, EControleType _Tipus, ECollisionGroup _Group )
+bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, EControleType _Tipus,
+    ECollisionGroup _Group )
 {
   assert( _pController != NULL );
   assert( m_pScene != NULL );
   assert( mControllerManager != NULL );
-
   bool l_bIsOK = false;
   NxController* l_NxController = _pController->GetPhXController();
   assert( l_NxController == NULL );  //Nos aseguramos que no hayan registrado ya un actor en la escena
@@ -937,15 +919,14 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
 }
 
 
-std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay, uint32 impactMask )
+std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
+    uint32 impactMask )
 {
   //NxUserRaycastReport::ALL_SHAPES
   ASSERT( m_pScene != NULL , "NULL SCENE" );
-
   NxRay ray;
   ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
   ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
-
   NxRaycastHit hit;
   NxShape* closestShape = NULL;
   closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
@@ -971,16 +952,11 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
   l_Emitter->SetRadius( 0.1f, 0.2f );
   l_Emitter->SetYaw( 0, 360 );
   l_Emitter->SetPitch( 0, 360 );
-
   l_Emitter->Generate( 20 );
-
   CCore::GetSingletonPtr()->GetParticleManager()->AddEmitter( l_Emitter );
-
   NxActor* actor = &closestShape->getActor();
   CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
-
   ASSERT( impactObject, "NO IMPACTOBJECT" );
-
   return impactObject->GetName();
 }
 
@@ -1001,7 +977,6 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
   NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_CollisionSphere,
                                ( NxShapesType )shapeType, nbShapes, l_CollisionShapes, NULL, impactMask );
 
-
   for ( NxU32 i = 0; i < l_NumShapesCollision; ++i )
   {
     if ( l_CollisionShapes[i] )
@@ -1013,13 +988,13 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
     }
   }
 
-
   delete []l_CollisionShapes;
   return l_ImpactObjects;
 }
 
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere,
+    const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
 {
   assert( m_pScene );
   NxSphere l_WorldSphere( NxVec3( _vPosSphere.x, _vPosSphere.y, _vPosSphere.z ), _fRadiusSphere );
@@ -1366,7 +1341,7 @@ int CPhysicsManager::AddMaterial( float restitution, float staticFriction, float
   l_MatDesc.restitution = restitution;
   l_MatDesc.staticFriction = staticFriction;
   l_MatDesc.dynamicFriction = dynamicFriction;
-  l_MatDesc.restitutionCombineMode = NxCombineMode(0);
+  l_MatDesc.restitutionCombineMode = NxCombineMode( 0 );
   return m_pScene->createMaterial( l_MatDesc )->getMaterialIndex();
 }
 
@@ -1385,7 +1360,6 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
     const Math::Vect3f& posSphere )
 {
   EShapesType shapeType = ALL_SHAPES;
-
   uint32 impactMask = 1 << ECG_ESCENE;
   // Check the scene
   assert( m_pScene );
@@ -1414,7 +1388,8 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
   return l_ImpactObjects;
 }
 
-bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color,
+bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension,
+                                const Math::CColor& Color,
                                 bool Paint, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vLocalPos, const Math::Vect3f& rotation,
                                 NxCCDSkeleton* _pSkeleton, uint32 _uiGroup )
 {
@@ -1450,12 +1425,14 @@ bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, cons
   return false;
 }
 
-bool CPhysicsManager::AddController( const std::string& Name, float radius, float height, float slope, float skin_width, float step,
+bool CPhysicsManager::AddController( const std::string& Name, float radius, float height, float slope, float skin_width,
+                                     float step,
                                      Math::Vect3f pos,
                                      ECollisionGroup ColliusionGroup, float gravity )
 {
   CPhysicUserData* l_UserData = new CPhysicUserData( Name );
-  CPhysicController* l_Controller = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup, l_UserData, pos,
+  CPhysicController* l_Controller = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
+      l_UserData, pos,
       gravity );
 
   if ( !CMapManager<CPhysicController>::GetResource( Name ) )
@@ -1482,7 +1459,6 @@ bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name 
     CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
     l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
     CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-
     VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
 
     for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )

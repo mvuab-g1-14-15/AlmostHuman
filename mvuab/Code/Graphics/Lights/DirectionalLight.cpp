@@ -41,55 +41,50 @@ Math::Vect3f CDirectionalLight::GetDirection() const
 
 void CDirectionalLight::Render()
 {
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  D3DXMATRIX matrix = GetTransform().GetD3DXMatrix();
-  D3DXMATRIX translation;
-  D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
-  D3DXMatrixTranslation( &translation, eye.x , eye.y , eye.z );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawSphere( 0.5f, Math::colGREEN );
-  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawLine( m_Position, m_Position + m_Direction.GetNormalized() * 5.0f,
-                              Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.1f, 0.25f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.2f, 0.22f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.3f, 0.20f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.4f, 0.18f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.5f, 0.15f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.6f, 0.12f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.7f, 0.1f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.8f, 0.08f, Math::colGREEN );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.9f, 0.05f, Math::colGREEN );
 }
 
 void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
 {
-	D3DXMATRIX l_View;
-	D3DXMATRIX l_Ortho;
+  D3DXMATRIX l_View;
+  D3DXMATRIX l_Ortho;
+  D3DXVECTOR3 l_Eye( m_Position.x, m_Position.y, m_Position.z );
+  m_Direction.Normalize();
+  Vect3f l_LookAtV3f = m_Position + m_Direction;
+  D3DXVECTOR3 l_LookAt( l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z );
+  D3DXVECTOR3 l_VUP;
+  float l_Value = v3fY * l_LookAtV3f;
 
-	D3DXVECTOR3 l_Eye(m_Position.x, m_Position.y, m_Position.z);
-	m_Direction.Normalize();
-	Vect3f l_LookAtV3f = m_Position + m_Direction;
+  if ( ( v3fY * m_Direction ) > 0.995f || ( v3fNEGY * m_Direction ) > 0.995f )
+  {
+    Vect3f l_Cross = v3fX ^ m_Direction;
+    Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+    l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+  }
+  else
+  {
+    Vect3f l_Cross = v3fY ^ m_Direction;
+    Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+    l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+  }
 
-	D3DXVECTOR3 l_LookAt(l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z);
-	D3DXVECTOR3 l_VUP;
-
-	float l_Value = v3fY*l_LookAtV3f;
-	if ((v3fY*m_Direction)> 0.995f || (v3fNEGY*m_Direction)>0.995f)
-	{
-			Vect3f l_Cross = v3fX ^ m_Direction;
-			Vect3f l_VUpV3f = m_Direction ^ l_Cross;
-			l_VUP = D3DXVECTOR3(l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z);
-	}
-	else
-	{
-			Vect3f l_Cross = v3fY ^ m_Direction;
-			Vect3f l_VUpV3f = m_Direction ^ l_Cross;
-			l_VUP = D3DXVECTOR3(l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z);
-	}
-	//l_VUP = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-
-	D3DXMatrixLookAtLH(&l_View, &l_Eye, &l_LookAt, &l_VUP);
-	m_ViewShadowMap = Mat44f(l_View);
-	D3DXMatrixOrthoLH(&l_Ortho, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 0.1f, m_EndRangeAttenuation);
-	m_ProjectionShadowMap = Mat44f(l_Ortho);
-
-	CEffectManager *l_EffectManager = CEffectManager::GetSingletonPtr();
-	l_EffectManager->ActivateCamera(m_ViewShadowMap, m_ProjectionShadowMap, m_Position);
-
-	LPDIRECT3DDEVICE9 lDevice = CGraphicsManager::GetSingletonPtr()->GetDevice();
-	lDevice->SetTransform( D3DTS_VIEW, &l_View );
-	lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
+  //l_VUP = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+  D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
+  m_ViewShadowMap = Mat44f( l_View );
+  D3DXMatrixOrthoLH( &l_Ortho, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 0.1f, m_EndRangeAttenuation );
+  m_ProjectionShadowMap = Mat44f( l_Ortho );
+  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
+  l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+  LPDIRECT3DDEVICE9 lDevice = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  lDevice->SetTransform( D3DTS_VIEW, &l_View );
+  lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
 }

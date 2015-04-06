@@ -15,13 +15,7 @@ COmniLight::COmniLight( ) : CLight( )
 
 void COmniLight::Render()
 {
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  D3DXMATRIX matrix;
-  D3DXMatrixTranslation( &matrix, m_Position.x, m_Position.y, m_Position.z );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawSphere( 0.5f, Math::colRED );
-  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-  GraphicsInstance->SetTransform( matrix );
+  GraphicsInstance->DrawSphere( m_Position, 0.2f, Math::colRED );
 }
 
 void COmniLight::SetShadowMap( CGraphicsManager* GM )

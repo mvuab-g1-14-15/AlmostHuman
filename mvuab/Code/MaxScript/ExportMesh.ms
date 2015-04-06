@@ -4,9 +4,6 @@ fileIn "CalculateNormals.ms"
 
 clearListener()
 
---Set amount of mem allocation 200MB
---heapSize = 200000000L
-
 struct STexture
 (
 	m_Name = "",

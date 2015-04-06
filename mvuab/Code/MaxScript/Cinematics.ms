@@ -6,13 +6,19 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
 	try 
 	(
+		if cameras.count == 0 then
+		(
+			format "No cameras in the scene \n"
+			return -1 
+		)
+		
 		-- create the document and set the filename
 		xDoc = XMLDocument filenameXML
 		
 		--create the base node and append the node to the document
 		local l_RootNode = xDoc.getNewNode "camera"
 		xDoc.AppendNode l_RootNode
-		
+				
 		for EachCamera in cameras do
 		(
 			if(classof EachCamera == targetcamera) then 

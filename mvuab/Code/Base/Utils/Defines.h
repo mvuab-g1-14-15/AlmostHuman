@@ -67,28 +67,48 @@
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x, __VA_ARGS__ )
 #define LOG_INFO_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, x, __VA_ARGS__ )
 
+#ifdef _DEBUG
+
 #define ASSERT(expr, msg) \
-{\
-  static char s_text[199] = ""; \
-  if ( !( expr ) ) \
   {\
-    static int callIt = 1; \
-    if ( callIt )\
-    { \
-      wsprintf( s_text, "Expression: %s\nMessage: ( %s )\nFile '%s' Line %d\nOk:Continue\nCancel:Do not show more asserts", #expr, #msg, __FILE__, __LINE__ ); \
-      switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_OKCANCEL ) ) \
-      {\
-        case IDCANCEL: \
-        { \
-          callIt = 0; \
-          _asm { int 3 } \
-          break;\
+    static char s_text[199] = ""; \
+    if ( !( expr ) ) \
+    {\
+      static int callIt = 1; \
+      if ( callIt )\
+      { \
+        wsprintf( s_text, "Expression: %s\nMessage: ( %s )\nFile '%s' Line %d\nOk:Continue\nCancel:Do not show more asserts", #expr, #msg, __FILE__, __LINE__ ); \
+        switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_ICONEXCLAMATION | MB_OKCANCEL ) ) \
+        {\
+          case IDCANCEL: \
+          { \
+            callIt = 0; \
+            _asm { int 3 } \
+            break;\
+          } \
         } \
       } \
     } \
-  } \
-} \
+  }\
+
+#else
+
+#define ASSERT(expr, msg) assert( expr && msg );
 
 #endif
 
-#define FATAL_ERROR(msg) ::MessageBox( NULL, #msg, "Fatal Error", MB_ICONEXCLAMATION | MB_OK ); ::exit( EXIT_FAILURE );
+#define FATAL_ERROR(msg) \
+  {\
+    static char s_text[199] = ""; \
+    wsprintf( s_text, "Message: ( %s )\nFile '%s' Line %d", #msg, __FILE__, __LINE__ ); \
+    switch ( ::MessageBox( NULL, s_text, "FATAL ERROR", MB_ICONERROR | MB_OK ) ) \
+    {\
+      case IDOK: \
+      { \
+        ::exit( EXIT_FAILURE ); \
+        break;\
+      } \
+    } \
+  }\
+
+#endif

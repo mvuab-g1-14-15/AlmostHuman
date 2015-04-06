@@ -44,21 +44,16 @@ float CSpotLight::GetFallOff() const
 
 void CSpotLight::Render()
 {
-  Math::Mat44f translation;
-  translation.Translate( m_Position );
-  GraphicsInstance->SetTransform( translation );
-  GraphicsInstance->DrawSphere( 0.2f, Math::colYELLOW );
-  GraphicsInstance->SetTransform( Math::Mat44f() );
-  GraphicsInstance->DrawCube( m_Position + m_Direction.GetNormalized() * 0.8f, 0.05f,
-                              Math::colYELLOW );
-  GraphicsInstance->DrawCube( m_Position + m_Direction.GetNormalized() * 0.6f, 0.05f,
-                              Math::colYELLOW );
-  GraphicsInstance->DrawCube( m_Position + m_Direction.GetNormalized() * 0.4f, 0.05f,
-                              Math::colYELLOW );
-  GraphicsInstance->DrawCube( m_Position + m_Direction.GetNormalized() * 0.2f, 0.05f,
-                              Math::colYELLOW );
-  GraphicsInstance->DrawCube( m_Position + m_Direction.GetNormalized() * 0.1f, 0.05f,
-                              Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.1f, 0.25f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.2f, 0.22f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.3f, 0.20f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.4f, 0.18f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.5f, 0.15f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.6f, 0.12f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.7f, 0.1f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.8f, 0.08f, Math::colYELLOW );
+  GraphicsInstance->DrawSphere( m_Position + m_Direction.GetNormalized() * 0.9f, 0.05f, Math::colYELLOW );
 }
 
 void CSpotLight::SetShadowMap( CGraphicsManager* GM )

@@ -66,7 +66,6 @@ std::string CSceneRendererCommandManager::GetNextName()
 bool CSceneRendererCommandManager::Load( const std::string& FileName )
 {
   ObjectFactory1<CSceneRendererCommand, CXMLTreeNode, std::string > CommandFactory;
-
   // Register all the commands with the object factory class
   CommandFactory.Register( "begin_scene",
                            Type2Type<CBeginRenderSceneRendererCommand>( ) );
@@ -132,12 +131,11 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderDebugCommand>( ) );
   CommandFactory.Register( "render_gizmos",
                            Type2Type<CRenderGizmosCommand>( ) );
-
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( FileName.c_str() ) )
   {
-    std::string lMsgError = "Error reading the file " + FileName;
+    const std::string& lMsgError = "Error reading the file " + FileName;
     FATAL_ERROR( lMsgError.c_str() );
   }
 
