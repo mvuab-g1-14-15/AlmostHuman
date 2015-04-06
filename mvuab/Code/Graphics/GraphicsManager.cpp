@@ -63,7 +63,6 @@ struct VERTEX2
   }
 };
 
-
 CGraphicsManager::CGraphicsManager()
   : mWidth( 0 )
   , mHeight( 0 )
@@ -83,7 +82,6 @@ CGraphicsManager::CGraphicsManager()
 
 CGraphicsManager::~CGraphicsManager()
 {
-  CHECKED_RELEASE( m_SphereMesh );
   Release();
 }
 
@@ -212,79 +210,72 @@ void CGraphicsManager::SetupMatrices()
 
 bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
 {
-  LOG_INFO_APPLICATION( "Init of Graphics Manager" );
-
   m_WindowId = hWnd;
   Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
-
   mWidth = lScreenResolution.x;
   mHeight = lScreenResolution.y;
-
   mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
 
   if ( mDirectXObject == NULL )
   {
-    LOG_ERROR_APPLICATION( "Error of Direct3DCreate9( D3D_SDK_VERSION )");
+    LOG_ERROR_APPLICATION( "Error of Direct3DCreate9( D3D_SDK_VERSION )" );
     return false;
   }
 
-  bool lOk = ( aEngineConfig->GetFullScreenMode() ) ? CreateFullScreenMode(aEngineConfig) : CreateWindowedMode(aEngineConfig);
+  // Choose a way of creating the device from the configuration of the engine
+  mOk = ( aEngineConfig->GetFullScreenMode() ) ? CreateFullScreenMode( aEngineConfig ) : CreateWindowedMode(
+          aEngineConfig );
 
-  if ( false )
-  {
-    // Turn off culling, so we see the front and back of the triangle
-    mDirectXDevice->SetSamplerState( 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetSamplerState( 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetSamplerState( 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetSamplerState( 1, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetSamplerState( 1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetSamplerState( 1, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR );
-    mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
-    mDirectXDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
-    mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
-    mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
-    mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
-    mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
-    mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
-    mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
-    // Turn off D3D lighting, since we are providing our own vertex colors
-    mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-  }
-  else
-  {
-    //FATAL_ERROR("The DirectX has not been init!!!");
-  }
+  if ( !mOk )
+    FATAL_ERROR( "GraphicsManager::The DirectX has not been init!!!" );
 
-  D3DXCreateTeapot( mDirectXDevice, &m_TeapotMesh, 0 );
-  D3DXCreateSphere( mDirectXDevice, 0.2f, 10, 10, &m_SphereMesh, 0 );
+  LOG_INFO_APPLICATION( "Init of Graphics Manager Ok" );
+  // Turn off culling, so we see the front and back of the triangle
+  mDirectXDevice->SetSamplerState( 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetSamplerState( 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetSamplerState( 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetSamplerState( 1, D3DSAMP_MINFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetSamplerState( 1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetSamplerState( 1, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR );
+  mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
+  mDirectXDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
+  mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
+  mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
+  mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
+  // Turn off D3D lighting, since we are providing our own vertex colors
+  mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
+  Math::Vect2i lWindowPosition    = aEngineConfig->GetScreenPosition();
+  Math::Vect2i lWindowSize        = aEngineConfig->GetScreenSize();
+  Math::Vect2i lWindowResolution  = aEngineConfig->GetScreenResolution();
+  LOG_INFO_APPLICATION( "GraphicsManager::Window created in (%d,%d) with size (%d,%d) and resolution(%d,%d)",
+                        lWindowPosition.x, lWindowPosition.y,
+                        lWindowSize.x, lWindowSize.y,
+                        lWindowResolution.x, lWindowResolution.y );
 
-  /*
-  if ( !aEngineConfig->GetFitDesktop() )
-  {
-    LOG_INFO_APPLICATION( "GraphicsManager::Window created in (%d,%d) with size (%d,%d) and resolution(%d,%d)",
-                          aEngineConfig->GetWindowXPos(), aEngineConfig->GetWindowYPos(), aEngineConfig->GetScreenWidth(),
-                          aEngineConfig->GetScreenHeight(), aEngineConfig->GetResolutionWidth(),
-                          aEngineConfig->GetResolutionHeight() );
-    MoveWindow( m_WindowId,  aEngineConfig->GetWindowXPos(),  aEngineConfig->GetWindowYPos(),
-                aEngineConfig->GetScreenWidth(), aEngineConfig->GetScreenHeight(), TRUE );
-  }
-  else
-  {
-    LOG_INFO_APPLICATION( "GraphicsManager::The window will fit the desktop" );
-    const HWND hDesktop = GetDesktopWindow();
-    RECT desktop;
-    GetWindowRect( hDesktop, &desktop );
-    MoveWindow( m_WindowId,  desktop.top,  desktop.left, desktop.right, desktop.bottom, TRUE );
-  }
+  //
+  // Create the default meshes
+  //
+  if ( FAILED( D3DXCreateTeapot( mDirectXDevice, &m_TeapotMesh, 0 ) ) )
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the teapot" );
 
-  */
-  return lOk;
+  if ( D3DXCreateSphere( mDirectXDevice, 1.0f, 10, 10, &m_SphereMesh, 0 ) )
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the sphere" );
+
+  if ( FAILED( D3DXCreateBox( mDirectXDevice, 1.0f, 1.0f, 1.0f, &m_BoxMesh, 0 ) ) )
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the box" );
+
+  if ( FAILED( D3DXCreateCylinder( mDirectXDevice, 1.0f, 1.0f, 1.0f, 10, 10, &m_CylinderMesh, 0 ) ) )
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the cylinder" );
+
+  return mOk;
 }
 
 DWORD CGraphicsManager::GetBehaviorFlags()
 {
   DWORD dwBehaviorFlags = 0;
-
   //
   // Do we support hardware vertex processing? if so, use it.
   // If not, downgrade to software.
@@ -294,19 +285,19 @@ DWORD CGraphicsManager::GetBehaviorFlags()
   if ( FAILED( mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT,
                D3DDEVTYPE_HAL, &d3dCaps ) ) )
   {
-    LOG_ERROR_APPLICATION( "Error getting the device caps" );
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error getting the device caps" );
     return dwBehaviorFlags;
   }
 
   if ( d3dCaps.VertexProcessingCaps != 0 )
   {
     dwBehaviorFlags |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
-    LOG_INFO_APPLICATION( "D3DCREATE_HARDWARE_VERTEXPROCESSING" );
+    LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_HARDWARE_VERTEXPROCESSING" );
   }
   else
   {
     dwBehaviorFlags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-    LOG_INFO_APPLICATION( "D3DCREATE_SOFTWARE_VERTEXPROCESSING" );
+    LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_SOFTWARE_VERTEXPROCESSING" );
   }
 
   return dwBehaviorFlags;
@@ -331,12 +322,13 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
     if ( FAILED( mDirectXObject->EnumAdapterModes( D3DADAPTER_DEFAULT,
                  D3DFMT_X8R8G8B8, nMode, &d3ddm ) ) )
     {
-      LOG_ERROR_APPLICATION( "Error of AdapterModes");
+      LOG_ERROR_APPLICATION( "GraphicsManager::Error of AdapterModes" );
       return false;
     }
 
     // Does this adapter mode support a mode of the given configuration
     Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
+
     if ( d3ddm.Width != lScreenResolution.x || d3ddm.Height != lScreenResolution.y )
       continue;
 
@@ -355,7 +347,8 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
 
   if ( bDesiredAdapterModeFound == false )
   {
-    LOG_ERROR_APPLICATION( "The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)", lRefreshRate, lScreenResolution.x, lScreenResolution.y );
+    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)",
+                           lRefreshRate, lScreenResolution.x, lScreenResolution.y );
     return false;
   }
 
@@ -370,7 +363,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
                D3DFMT_X8R8G8B8,
                FALSE ) ) )
   {
-    LOG_ERROR_APPLICATION( "This adapter has no support for  a 32 bit back buffer ");
+    LOG_ERROR_APPLICATION( "GraphicsManager::This adapter has no support for  a 32 bit back buffer " );
     return false;
   }
 
@@ -382,13 +375,12 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
                D3DRTYPE_SURFACE,
                D3DFMT_D16 ) ) )
   {
-    LOG_ERROR_APPLICATION( "This adapter has no support for a 16 bit back buffer ");
+    LOG_ERROR_APPLICATION( "GraphicsManager::This adapter has no support for a 16 bit back buffer " );
     return false;
   }
 
   // Get the flags of the behaviour
   DWORD dwBehaviorFlags = GetBehaviorFlags();
-
   //
   // Everything checks out - create a simple, full-screen device.
   //
@@ -408,18 +400,19 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.FullScreen_RefreshRateInHz  = lRefreshRate;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
+  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
+               &mDirectXDevice );
 
-  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp, &mDirectXDevice );
-  if( FAILED( hr ) )
+  if ( FAILED( hr ) )
   {
-    LOG_ERROR_APPLICATION( "Error creating the device" );
+    LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the device" );
     return false;
   }
 
   return true;
 }
 
-bool CGraphicsManager::CreateWindowedMode(CEngineConfig* aEngineConfig)
+bool CGraphicsManager::CreateWindowedMode( CEngineConfig* aEngineConfig )
 {
   D3DDISPLAYMODE d3ddm;
 
@@ -442,7 +435,6 @@ bool CGraphicsManager::CreateWindowedMode(CEngineConfig* aEngineConfig)
 
   // Get the flags of the behaviour
   DWORD dwBehaviorFlags = GetBehaviorFlags();
-
   //
   // Everything checks out - create a simple, windowed device.
   //
@@ -581,72 +573,44 @@ void CGraphicsManager::DrawPlane( float32 size, const Math::Vect3f& normal, floa
 void CGraphicsManager::DrawCube( const Math::Vect3f& aPosition, float32 Size,
                                  const Math::CColor aColor )
 {
-  Math::Mat44f m;
-  m.Translate( aPosition );
-  SetTransform( m );
-  DrawBox( Size, Size, Size, aColor );
-  m.SetIdentity();
-  SetTransform( m );
+  DrawBox( aPosition, Size, Size, Size, aColor );
 }
 
-void CGraphicsManager::DrawCube( float32 Size )
+void CGraphicsManager::DrawCube( const Math::Mat44f& aTransform, float32 Size,
+                                 const Math::CColor aColor )
 {
-  DrawBox( Size, Size, Size, Math::colWHITE );
+  DrawBox( aTransform, Size, Size, Size, aColor );
 }
-void CGraphicsManager::DrawCube( float32 Size, Math::CColor Color )
+
+void CGraphicsManager::DrawBox( const Math::Vect3f& aPosition, float32 SizeX, float32 SizeY, float32 SizeZ,
+                                Math::CColor Color )
 {
-  DrawBox( Size, Size, Size, Color );
+  Math::Mat44f transform;
+  transform.Translate( aPosition );
+  DrawBox( transform, SizeX, SizeY, SizeZ, Color );
 }
-void CGraphicsManager::DrawBox( float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color )
+
+void CGraphicsManager::DrawBox( const Math::Mat44f& aTransform, float32 SizeX, float32 SizeY, float32 SizeZ,
+                                Math::CColor Color )
 {
-  if ( FAILED( D3DXCreateBox( mDirectXDevice, SizeX, SizeY, SizeZ, &m_BoxMesh, 0 ) ) )
-    return;
-
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
-  // Set the debug color
-  EffectTechnique->SetDebugColor( Color );
-  EffectTechnique->BeginRender();
-  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-  UINT l_NumPasses = 0;
-  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
-
-  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
-    return;
-
-  for ( UINT b = 0; b < l_NumPasses; ++b )
-  {
-    l_Effect->BeginPass( b );
-    m_BoxMesh->DrawSubset( 0 );
-    l_Effect->EndPass();
-  }
-
-  l_Effect->End();
-  CHECKED_RELEASE( m_BoxMesh );
+  Math::Mat44f lTransform;
+  lTransform.Scale( SizeX, SizeY, SizeZ );
+  RenderMesh( aTransform * lTransform, m_BoxMesh, Color );
 }
-void CGraphicsManager::DrawSphere( float32 Radius, Math::CColor Color, int32 Aristas )
+
+void CGraphicsManager::DrawSphere( const Math::Vect3f& aPosition, float32 Radius, Math::CColor Color, int32 Aristas )
 {
-  CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  EffectTechnique->SetDebugColor( Color );
-  EffectTechnique->BeginRender();
-  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-  UINT l_NumPasses = 0;
-  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+  Math::Mat44f transform;
+  transform.Translate( aPosition );
+  transform.Scale( Radius, Radius, Radius );
+  DrawSphere( transform, Radius, Color, Aristas );
+}
 
-  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
-    return;
-
-  for ( UINT b = 0; b < l_NumPasses; ++b )
-  {
-    l_Effect->BeginPass( b );
-    m_SphereMesh->DrawSubset( 0 );
-    l_Effect->EndPass();
-  }
-
-  l_Effect->End();
+void CGraphicsManager::DrawSphere( const Math::Mat44f& aTransform, float32 Radius, Math::CColor Color, int32 Aristas )
+{
+  Math::Mat44f lTransform;
+  lTransform.Scale( Radius, Radius, Radius );
+  RenderMesh( aTransform * lTransform, m_SphereMesh, Color );
 }
 void CGraphicsManager::DrawCircle( float32 Radius, Math::CColor Color, int32 Aristas )
 {
@@ -866,50 +830,39 @@ void CGraphicsManager::GetWidthAndHeight( uint32& w, uint32& h )
   w = mWidth;
   h = mHeight;
 }
-void CGraphicsManager::DrawCylinder( float32 Top_Radius, float32 Bottom_Radius, float32 h,
-                                     uint32 Aristas,
-                                     Math::CColor Color, bool drawCover )
+
+void CGraphicsManager::DrawCylinder( const Math::Mat44f& aTransform, float32 Top_Radius, float32 Bottom_Radius,
+                                     float32 h, uint32 Aristas, Math::CColor Color, bool drawCover )
 {
-  if ( FAILED( D3DXCreateCylinder( mDirectXDevice, Top_Radius, Bottom_Radius, h, Aristas, Aristas,
-                                   &m_CylinderMesh, 0 ) ) )
-    return;
-
-  CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  EffectTechnique->SetDebugColor( Color );
-  EffectTechnique->BeginRender();
-  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
-  UINT l_NumPasses = 0;
-  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
-
-  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
-    return;
-
-  for ( UINT b = 0; b < l_NumPasses; ++b )
-  {
-    l_Effect->BeginPass( b );
-    m_CylinderMesh->DrawSubset( 0 );
-    l_Effect->EndPass();
-  }
-
-  l_Effect->End();
-  CHECKED_RELEASE( m_CylinderMesh );
+  Math::Mat44f lTransform;
+  lTransform.Scale( 0, Top_Radius, h );
+  RenderMesh( aTransform * lTransform, m_CylinderMesh, Color );
 }
-void CGraphicsManager::DrawCapsule( float32 radius, float32 h, uint32 Aristas, Math::CColor Color )
+
+void CGraphicsManager::DrawCylinder( const Math::Vect3f& aPosition, float32 Top_Radius, float32 Bottom_Radius,
+                                     float32 h, uint32 Aristas, Math::CColor Color, bool drawCover )
+{
+  Math::Mat44f transform;
+  transform.Translate( aPosition );
+  transform.Scale( 0, Top_Radius, h );
+  DrawCylinder( transform, Top_Radius, Bottom_Radius, h, Aristas, Color, drawCover );
+}
+
+void CGraphicsManager::DrawCapsule( const Math::Vect3f& aPosition, float32 radius, float32 h, uint32 Aristas,
+                                    Math::CColor Color )
 {
   Math::Mat44f t;
   t.RotByAngleX( Math::half_pi32 );
   SetTransform( t );
-  DrawCylinder( radius, radius, h, Aristas, Color, false );
+  DrawCylinder( aPosition, radius, radius, h, Aristas, Color, false );
   t.SetIdentity();
   t.Translate( Math::Vect3f( 0, h * 0.5f, 0 ) );
   SetTransform( t );
-  DrawSphere( radius, Color, Aristas );
+  DrawSphere( aPosition, radius, Color, Aristas );
   t.SetIdentity();
   t.Translate( Math::Vect3f( 0, -h * 0.5f, 0 ) );
   SetTransform( t );
-  DrawSphere( radius, Color, Aristas );
+  DrawSphere( aPosition, radius, Color, Aristas );
   t.SetIdentity();
   SetTransform( t );
 }
@@ -1240,11 +1193,13 @@ void CGraphicsManager::DrawQuad2DTexturedInPixelsInFullScreen( CEffectTechnique*
     }
   }
 }
+
 void CGraphicsManager::SetWidthAndHeight( uint32 _Width, uint32 _Height )
 {
   mWidth =  _Width;
   mHeight = _Height;
 }
+
 Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
@@ -1276,7 +1231,30 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
                      &worldMatrix );
   return Math::Vect3f();
 }
-uint32 CGraphicsManager::GetWindowHeight()
+
+template <class T>
+void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh, Math::CColor aColor )
 {
-  return mHeight;
+  SetTransform( aTransform );
+  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  // Set the debug color
+  EffectTechnique->SetDebugColor( aColor );
+  EffectTechnique->BeginRender();
+  LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+  UINT l_NumPasses = 0;
+  l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
+
+  if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
+    return;
+
+  for ( UINT b = 0; b < l_NumPasses; ++b )
+  {
+    l_Effect->BeginPass( b );
+    aMesh->DrawSubset( 0 );
+    l_Effect->EndPass();
+  }
+
+  l_Effect->End();
+  SetTransform( Math::Mat44f() );
 }

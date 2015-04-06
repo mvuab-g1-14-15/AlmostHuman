@@ -58,100 +58,93 @@ CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, 
 void registerCameras( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Cameras" );
-
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // CAMERA MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CCameraManager )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CCameraManager, GetCamera )
-    LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )
-    LUA_DECLARE_METHOD( CCameraManager, GetCurrentCamera )
-    LUA_DECLARE_METHOD( CCameraManager, NewCamera )
-    LUA_DECLARE_METHOD( CCameraManager, DeleteCamera )
+  LUA_DECLARE_CLASS( CCameraManager )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD( CCameraManager, GetCamera )
+  LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )
+  LUA_DECLARE_METHOD( CCameraManager, GetCurrentCamera )
+  LUA_DECLARE_METHOD( CCameraManager, NewCamera )
+  LUA_DECLARE_METHOD( CCameraManager, DeleteCamera )
   LUA_END_DECLARATION
-
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // CAMERA
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS2( CCamera, CName, CObject3D )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD_PROTO( CCamera, GetDirection, Math::Vect3f( CCamera::* )( void ) )
-    LUA_DECLARE_METHOD( CCamera, GetLookAt )
-    LUA_DECLARE_METHOD( CCamera, GetVecUp )
-    LUA_DECLARE_METHOD( CCamera, GetZFar )
-    LUA_DECLARE_METHOD( CCamera, GetDirection )
-    LUA_DECLARE_METHOD( CCamera, GetZNear )
-    LUA_DECLARE_METHOD( CCamera, GetAspectRatio )
-    LUA_DECLARE_METHOD( CCamera, GetEnable )
-    LUA_DECLARE_METHOD( CCamera, SetCameraType )
-    LUA_DECLARE_METHOD( CCamera, GetCameraType )
-    LUA_DECLARE_METHOD( CCamera, SetZNear )
-    LUA_DECLARE_METHOD( CCamera, SetZFar )
-    LUA_DECLARE_METHOD( CCamera, SetAspectRatio )
-    LUA_DECLARE_METHOD( CCamera, SetEnable )
-    LUA_DECLARE_METHOD( CCamera, AddYaw )
-    LUA_DECLARE_METHOD( CCamera, AddPitch )
+  LUA_DECLARE_DERIVED_CLASS2( CCamera, CName, CObject3D )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD_PROTO( CCamera, GetDirection, Math::Vect3f( CCamera::* )( void ) )
+  LUA_DECLARE_METHOD( CCamera, GetLookAt )
+  LUA_DECLARE_METHOD( CCamera, GetVecUp )
+  LUA_DECLARE_METHOD( CCamera, GetZFar )
+  LUA_DECLARE_METHOD( CCamera, GetDirection )
+  LUA_DECLARE_METHOD( CCamera, GetZNear )
+  LUA_DECLARE_METHOD( CCamera, GetAspectRatio )
+  LUA_DECLARE_METHOD( CCamera, GetEnable )
+  LUA_DECLARE_METHOD( CCamera, SetCameraType )
+  LUA_DECLARE_METHOD( CCamera, GetCameraType )
+  LUA_DECLARE_METHOD( CCamera, SetZNear )
+  LUA_DECLARE_METHOD( CCamera, SetZFar )
+  LUA_DECLARE_METHOD( CCamera, SetAspectRatio )
+  LUA_DECLARE_METHOD( CCamera, SetEnable )
+  LUA_DECLARE_METHOD( CCamera, AddYaw )
+  LUA_DECLARE_METHOD( CCamera, AddPitch )
   LUA_END_DECLARATION
 }
 
-void registerObject3D( lua_State * aLuaState )
+void registerObject3D( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Cameras" );
-
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // OBJECT 3D
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CObject3D )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_CTOR_4( const Math::Vect3f&, float, float, float )
-    LUA_DECLARE_METHOD( CObject3D, GetYaw )
-    LUA_DECLARE_METHOD( CObject3D, SetYaw )
-    LUA_DECLARE_METHOD( CObject3D, GetPitch )
-    LUA_DECLARE_METHOD( CObject3D, SetPitch )
-    LUA_DECLARE_METHOD( CObject3D, GetRoll )
-    LUA_DECLARE_METHOD( CObject3D, SetRoll )
-    LUA_DECLARE_METHOD( CObject3D, GetPosition )
-    LUA_DECLARE_METHOD( CObject3D, SetPosition )
-    LUA_DECLARE_METHOD( CObject3D, GetTransform )
-    LUA_DECLARE_METHOD( CObject3D, MakeTransform )
-    LUA_DECLARE_METHOD( CObject3D, SetScale )
-    LUA_DECLARE_METHOD( CObject3D, GetScale )
+  LUA_DECLARE_CLASS( CObject3D )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_CTOR_4( const Math::Vect3f&, float, float, float )
+  LUA_DECLARE_METHOD( CObject3D, GetYaw )
+  LUA_DECLARE_METHOD( CObject3D, SetYaw )
+  LUA_DECLARE_METHOD( CObject3D, GetPitch )
+  LUA_DECLARE_METHOD( CObject3D, SetPitch )
+  LUA_DECLARE_METHOD( CObject3D, GetRoll )
+  LUA_DECLARE_METHOD( CObject3D, SetRoll )
+  LUA_DECLARE_METHOD( CObject3D, GetPosition )
+  LUA_DECLARE_METHOD( CObject3D, SetPosition )
+  LUA_DECLARE_METHOD( CObject3D, GetTransform )
+  LUA_DECLARE_METHOD( CObject3D, MakeTransform )
+  LUA_DECLARE_METHOD( CObject3D, SetScale )
+  LUA_DECLARE_METHOD( CObject3D, GetScale )
   LUA_END_DECLARATION
 }
 
-void registerGizmos( lua_State * aLuaState )
+void registerGizmos( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Gizmos" );
-
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // OBJECT 3D
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CGizmoElement, CObject3D )
-    LUA_DECLARE_CTOR_5(CGizmoElement::EGizmoElementType, float, Math::Vect3f, float, float)
+  LUA_DECLARE_DERIVED_CLASS( CGizmoElement, CObject3D )
+  LUA_DECLARE_CTOR_5( CGizmoElement::EGizmoElementType, float, Math::Vect3f, float, float )
   LUA_END_DECLARATION
-
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS2( CGizmo, CObject3D, CName )
-    LUA_DECLARE_CTOR_4(std::string, Math::Vect3f, float, float)
-    LUA_DECLARE_METHOD( CGizmo, AddElement )
+  LUA_DECLARE_DERIVED_CLASS2( CGizmo, CObject3D, CName )
+  LUA_DECLARE_CTOR_4( std::string, Math::Vect3f, float, float )
+  LUA_DECLARE_METHOD( CGizmo, AddElement )
   LUA_END_DECLARATION
-
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CGizmo> )
-    LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, GetResource )
-    LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, AddResource )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CGizmo> )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, GetResource )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, AddResource )
   LUA_END_DECLARATION
-
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
-    LUA_DECLARE_METHOD(CGizmosManager, CreateGizmoElement)
-    //.def( "CreateGizmoElement", &CreateGizmoElement )
-    LUA_DECLARE_METHOD( CGizmosManager, CreateGizmo)
+  LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
+  LUA_DECLARE_METHOD( CGizmosManager, CreateGizmoElement )
+  //.def( "CreateGizmoElement", &CreateGizmoElement )
+  LUA_DECLARE_METHOD( CGizmosManager, CreateGizmo )
   LUA_END_DECLARATION
 }
 
@@ -160,12 +153,10 @@ void registerGraphics( lua_State* aLuaState )
   registerObject3D( aLuaState );
   registerCameras( aLuaState );
   registerGizmos( aLuaState );
-
   module( aLuaState )
   [
     def( "CreateInstanceMesh", &CreateInstanceMesh )
   ];
-
   module( aLuaState )
   [
     class_<CRenderableObject, bases<CObject3D, CName>>( "CRenderableObject" )
@@ -207,12 +198,8 @@ void registerGraphics( lua_State* aLuaState )
     .def( "DisableAlphaBlend", &CGraphicsManager::DisableAlphaBlend )
     .def( "DisableZBuffering", &CGraphicsManager::DisableZBuffering )
     .def( "DrawAxis", &CGraphicsManager::DrawAxis )
-    .def( "DrawBox", &CGraphicsManager::DrawBox )
-    //.def("DrawCamera", &CGraphicsManager::DrawCamera)
     .def( "DrawCapsule", &CGraphicsManager::DrawCapsule )
     .def( "DrawCircle", &CGraphicsManager::DrawCircle )
-    .def( "DrawCube", ( void( CGraphicsManager::* )( float32 ) ) &CGraphicsManager::DrawCube )
-    .def( "DrawCylinder", &CGraphicsManager::DrawCylinder )
     .def( "DrawGrid", &CGraphicsManager::DrawGrid )
     .def( "DrawIcoSphere", &CGraphicsManager::DrawIcoSphere )
     .def( "DrawLine", &CGraphicsManager::DrawLine )
@@ -220,7 +207,6 @@ void registerGraphics( lua_State* aLuaState )
     .def( "DrawQuad2D", &CGraphicsManager::DrawQuad2D )
     //.def("DrawQuad3D", &CGraphicsManager::DrawQuad3D)
     .def( "DrawRectangle2D", &CGraphicsManager::DrawRectangle2D )
-    .def( "DrawSphere", &CGraphicsManager::DrawSphere )
     .def( "EnableAlphaBlend", &CGraphicsManager::EnableAlphaBlend )
     .def( "EnableZBuffering", &CGraphicsManager::EnableZBuffering )
     .def( "EndRender", &CGraphicsManager::EndRender )
@@ -238,7 +224,6 @@ void registerGraphics( lua_State* aLuaState )
   ];
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   module( aLuaState )
@@ -253,9 +238,8 @@ void registerGraphics( lua_State* aLuaState )
     .def( "Play", &CCinematic::Play )
     .def( "Pause", &CCinematic::Pause )
   ];
-
   module( aLuaState )
   [
-    class_<CLightManager>("CLightManager")
+    class_<CLightManager>( "CLightManager" )
   ];
 }
