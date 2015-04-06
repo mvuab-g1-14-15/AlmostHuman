@@ -1232,7 +1232,7 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
   return Math::Vect3f();
 }
 
-template <class T>
+//template <class T>
 void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh, Math::CColor aColor )
 {
   SetTransform( aTransform );
