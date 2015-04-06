@@ -253,4 +253,9 @@ void registerGraphics( lua_State* aLuaState )
     .def( "Play", &CCinematic::Play )
     .def( "Pause", &CCinematic::Pause )
   ];
+
+  module( aLuaState )
+  [
+    class_<CLightManager>("CLightManager")
+  ];
 }
