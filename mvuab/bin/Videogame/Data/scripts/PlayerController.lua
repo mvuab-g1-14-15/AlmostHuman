@@ -13,16 +13,25 @@ function CPlayerController:__init()
 	self.Forward = Vect3f(0.0)
 	self.Side = Vect3f(0.0)
 	
+	self.InitialYaw = 0.0
+	
 	--States
 	self.Run = false
 	self.Crouch = false
 	self.Shooting = false
 	self.LeanOut = 0
 	self.PrevLeanOut = 0
+	self.YawMoved = false
 	
 	--Timers
 	self.TimeCrouch = 0.2
 	self.ActualTimeCrouch = 0.2
+	
+	self.TimeLeanOut = 0.15
+	self.ActualTimeLeanOut = 0.15
+	
+	self.TimeMoveYaw = 0.15
+	self.ActualTimeMoveYaw= 0.15
 	
 	--Counters
 	self.ShakeValueVertical = 0.0
@@ -32,9 +41,6 @@ function CPlayerController:__init()
 	self.ShakeHorizontalSpeed = 3.0
 	self.ShakeVerticalAmplitude = 0.01
 	self.ShakeHorizontalAmplitude = 0.01
-	
-	self.TimeLeanOut = 0.15
-	self.ActualTimeLeanOut = 0.15
 	
 	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 0.2, 0.5, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -9.8)
 	self.CharacterController = physic_manager:GetController("Player")
@@ -49,7 +55,25 @@ function CPlayerController:Update()
 	self:CalculateDirectionVectors(l_PlayerCamera)
 	
 	self:UpdateCamera(l_PlayerCamera, dt)
-	self.CharacterController:SetYaw(l_PlayerCamera:GetYaw())
+	
+	--Yaw smooth movement
+	local l_CameraYaw = l_PlayerCamera:GetYaw()
+	local l_Yaw = self.CharacterController:GetYaw()
+	
+	if l_CameraYaw == l_Yaw then
+		self.YawMoved = false
+	end
+	if self.YawMoved then
+		local l_Percentage = self.ActualTimeMoveYaw / self.TimeMoveYaw
+		local l_Initial = l_Yaw
+		local l_Final = l_CameraYaw
+		local l_ActualYaw = (1.0 - l_Percentage) * l_Initial + l_Percentage * l_Final
+		self.CharacterController:SetYaw(l_ActualYaw)
+		self.ActualTimeMoveYaw = self.ActualTimeMoveYaw + dt
+		if self.ActualTimeMoveYaw > self.TimeMoveYaw then
+			self.ActualTimeMoveYaw = self.TimeMoveYaw
+		end
+	end
 	
 	self:UpdateInput()
 	
@@ -184,6 +208,12 @@ function CPlayerController:UpdateCamera(camera, dt)
 	local delta = 0.1
 	if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
 		camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+		if not self.YawMoved and math.abs(action_manager_lua_wrapper.amount) < 2 then
+			self.YawMoved = true
+			self.ActualTimeMoveYaw = 0.0
+		else
+			self.InitialYaw = camera:GetYaw()
+		end
 	end
 	if action_manager_lua_wrapper:DoAction(action_manager, "MovePitch") then
 		camera:AddPitch( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
