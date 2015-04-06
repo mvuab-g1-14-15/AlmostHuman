@@ -6,7 +6,7 @@ local g_StrafeSpeed = 6
 local g_Speed = 5
 
 function init()
-	core = Singleton_Core.get_singleton()
+	core = CCore.GetSingletonPtr()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
 	renderable_objects_manager = core:GetRenderableObjectsManager()
@@ -117,7 +117,7 @@ function move( flag_speed, forward, strafe, dt )
 end
 
 function move_point_inicial( dt )
-	process = Singleton_Engine.get_singleton():GetProcess()
+	process = CEngine.GetSingletonPtr():GetProcess()
 	local pointPos = process:GetPointInicial();
 	
 	local addPos = Vect3f(0, 0, 0)
@@ -137,7 +137,7 @@ function move_point_inicial( dt )
 end
 
 function move_point_final( dt )
-	process = Singleton_Engine.get_singleton():GetProcess()
+	process = CEngine.GetSingletonPtr():GetProcess()
 	local pointPos = process:GetPointFinal();
 	
 	local addPos = Vect3f(0, 0, 0)

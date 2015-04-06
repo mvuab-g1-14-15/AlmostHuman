@@ -23,7 +23,7 @@ public:
   void Update();
   void Render();
 
-  int getCount()
+  int GetCount()
   {
     return m_Waypoints.size();
   }

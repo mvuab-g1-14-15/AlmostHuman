@@ -1,6 +1,6 @@
-core = Singleton_Core.get_singleton()
+core = CCore.GetSingletonPtr()
 physicManager = core:GetPhysicsManager()
-engine = Singleton_Engine.get_singleton()
+engine = CEngine.GetSingletonPtr()
 function OnEnter()
 	process = engine:GetProcess()
 	physicUserData = process:GetNewPUD("Box6")

@@ -53,21 +53,21 @@ function CPlayer:__init()
 	self.m_LeanOutEnable = true
 	
     math.randomseed(os.time())
-    core:trace("Character Initialized")
+    core:Trace("Character Initialized")
 end
 
 function CPlayer:InitManagers()
-    Singleton_Core.get_singleton():trace("Init Managers")
-    m_PhysicManager = Singleton_Core.get_singleton():GetPhysicsManager()
-    m_Process = Singleton_Engine.get_singleton():GetProcess()
-    m_ActionManager = Singleton_Core.get_singleton():GetActionManager()
-    m_CameraManager = Singleton_Core.get_singleton():GetCameraManager()
-	l_ROLM = Singleton_Core.get_singleton():GetRenderableObjectsLayersManager()
+    CCore.GetSingletonPtr():Trace("Init Managers")
+    m_PhysicManager = CCore.GetSingletonPtr():GetPhysicsManager()
+    m_Process = CEngine.GetSingletonPtr():GetProcess()
+    m_ActionManager = CCore.GetSingletonPtr():GetActionManager()
+    m_CameraManager = CCore.GetSingletonPtr():GetCameraManager()
+	l_ROLM = CCore.GetSingletonPtr():GetRenderableObjectsLayersManager()
 	m_ROM = l_ROLM:GetResource("characters")
 end
 
 function CPlayer:InitControllers()
-    Singleton_Core.get_singleton():trace("Init Controllers")
+    CCore.GetSingletonPtr():Trace("Init Controllers")
     m_CharacterController = m_PhysicManager:GetController("Logan")
     m_UserDataCharacterController = m_PhysicManager:GetUserData("Logan")
     m_CharacterController = m_UserDataCharacterController:GetController()
@@ -78,7 +78,7 @@ function CPlayer:ModifyLife(life)
 end
 
 function CPlayer:Update()
-	local l_Dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()
+	local l_Dt = CCore.GetSingletonPtr():GetTimer():GetElapsedTime()
 
 	if self.m_LeanOut == true then
 		self:LeanOut(self.m_Side, l_Dt)
@@ -176,8 +176,8 @@ function CPlayer:Update()
 end
 
 function CPlayer:Move(l_Run, l_Crouch, l_Forward, l_Strafe, l_Dt)
-    --local l_Camera = Singleton_Core.get_singleton():GetCameraManager():GetCamera("<!-- Poner_Camara_Player -->")
-    local l_Camera = Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera()
+    --local l_Camera = CCore.GetSingletonPtr():GetCameraManager():GetCamera("<!-- Poner_Camara_Player -->")
+    local l_Camera = CCore.GetSingletonPtr():GetCameraManager():GetCurrentCamera()
     local Yaw = l_Camera:GetYaw()
     
     local l_AddPos = Vect3f(0, 0, 0)    
@@ -215,7 +215,7 @@ function CPlayer:CameraShake(l_Position, l_Dt)
     self.m_ElapsedTime = self.m_ElapsedTime + l_Dt;
     self.m_Amplitude = self.m_Amplitude + self.m_ModAmplitude * l_Dt;
     
-    local l_Camera = Singleton_Core.get_singleton():GetCameraManager():GetCurrentCamera()
+    local l_Camera = CCore.GetSingletonPtr():GetCameraManager():GetCurrentCamera()
     local l_Pitch = l_Camera:GetPitch()
     local l_Yaw = l_Camera:GetYaw()
     
@@ -247,12 +247,12 @@ function CPlayer:CambiarSala()
 end
 
 function CPlayer:Jump(amount)
-    --Singleton_Core.get_singleton():trace("Jump")
+    --CCore.GetSingletonPtr():Trace("Jump")
     m_CharacterController:Jump(amount, m_CharacterController:GetPosition().y)
 end
 
 function CPlayer:Crouch()
-    --Singleton_Core.get_singleton():trace("Crouch" .. (self.m_Crouch and 1 or 0))
+    --CCore.GetSingletonPtr():Trace("Crouch" .. (self.m_Crouch and 1 or 0))
     if self.m_Crouch == true then
         m_CharacterController:UpdateCharacterExtents(false, self.m_Height/2)
     elseif self.m_Crouch == false then
@@ -300,7 +300,7 @@ function CPlayer:LeanOut(direction, l_Dt)
 			
 		end
 	elseif (self.m_MoveDt > 0) == true then
-		Singleton_Core.get_singleton():trace("he entrado en tu ojete")
+		CCore.GetSingletonPtr():Trace("he entrado en tu ojete")
 		--self.m_InMove = false
 		self.m_MoveDt = self.m_MoveDt - l_Dt
 		--self.m_MoveTo = Vect3f()

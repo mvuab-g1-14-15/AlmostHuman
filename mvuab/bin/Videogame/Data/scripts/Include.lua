@@ -1,16 +1,14 @@
-core = Singleton_Core.get_singleton()
+core = CCore.GetSingletonPtr()
 action_manager = core:GetActionManager()
 action_manager_lua_wrapper = CActionManagerLuaWrapper()
-graphics_manager = core:GetGraphicsManager()
 camera_manager = core:GetCameraManager()
-light_manager = core:GetLightManager()
 timer = core:GetTimer()
 physic_manager = core:GetPhysicsManager()
 enemy_manager = core:GetEnemyManager()
 gizmos_manager = core:GetGizmosManager()
 renderable_objects_layer_manager = core:GetRenderableObjectsLayersManager()
 renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
-process = Singleton_Engine.get_singleton():GetProcess()
+process = CEngine.GetSingletonPtr():GetProcess()
 
 -- Global Variables
 g_CameraSensibility = 30.0
@@ -33,7 +31,7 @@ function PlayerDistance(enemy)
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
-	--core:trace("Player distance: " .. l_DistanceVector:Length())
+	--core:Trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -60,7 +58,7 @@ function PlayerVisibility(enemy)
 	-- The impact mask is not used
 	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
 	
-	--core:trace("Group: " .. l_CollisionGroup)
+	--core:Trace("Group: " .. l_CollisionGroup)
 	
 	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
 		return true

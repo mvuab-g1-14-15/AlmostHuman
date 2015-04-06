@@ -18,6 +18,7 @@
 #include <vector>
 #include "Math\Vector3.h"
 #include "Pathfinding\AStar.h"
+#include "luabind_macros.h"
 
 using namespace luabind;
 using namespace Math;
@@ -42,98 +43,74 @@ T vector_get( std::vector<T>& vec, size_t i )
   return vec[i];
 }
 
-void registerAI( lua_State* m_LS )
-{
-  module( m_LS )
-  [
-    class_<CCharacter, bases<CObject3D, CName>>( "CCharacter" )
-    .def( constructor<const std::string&>() )
-    .def( "setTargetPosition", &CCharacter::SetTargetPosition )
-    .def( "getTargetPosition", &CCharacter::GetTargetPosition )
-    .def( "SetTargetPositionOriginal", &CCharacter::SetTargetPositionOriginal )
-    .def( "init", ( void( CCharacter::* )( void ) )&CCharacter::Init )
-    .def( "update", &CCharacter::Update )
-    .def( "render", &CCharacter::Render )
-    .def( "AddDamage", &CCharacter::AddDamage )
-    .def( "Move", &CCharacter::Move )
-    .def( "GetPosition", &CCharacter::GetPosition )
-    .def( "GetHeight", &CCharacter::GetHeight )
-  ];
-  module( m_LS )
-  [
-    class_<CMapManager<CState>>("CMapManagerCState")
-    .def("GetResource", &CMapManager<CState>::GetResource)
-  ];
-  module( m_LS )
-  [
-    class_<CStateMachine, bases<CName, CMapManager<CState>>>( "CStateMachine" )
-  ];
-  module( m_LS )
-  [
-    class_<CEnemy, CCharacter>( "CEnemy" )
-    .def( "ChangeState", &CEnemy::ChangeState )
-    .def( "SetExit", &CEnemy::SetOnExit )
-    .def( "getNameState", &CEnemy::GetNameStates )
-    .def( "getCurrentState", &CEnemy::GetCurrentState )
-    .def( "getStateMachine", &CEnemy::GetStateMachine )
-    .def( "GetLife", &CEnemy::GetLife )
-  ];
 
-  module( m_LS )
+void registerCharacters( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register Characters" );
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // CHARACTER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS2( CCharacter, CObject3D, CName )
+    LUA_DECLARE_CTOR_1( const std::string& )
+    LUA_DECLARE_METHOD( CCharacter, GetHeight )
+    LUA_DECLARE_METHOD( CCharacter, GetTargetPosition )
+    LUA_DECLARE_METHOD( CCharacter, SetTargetPosition )
+    LUA_DECLARE_METHOD( CCharacter, SetTargetPositionOriginal )
+    LUA_DECLARE_METHOD( CCharacter, AddDamage )
+    LUA_DECLARE_METHOD( CCharacter, Move )
+    LUA_DECLARE_METHOD( CCharacter, GetPosition )
+  LUA_END_DECLARATION
+}
+
+void registerEnemies( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register Enemies" );
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ENEMY
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CEnemy, CCharacter )
+    LUA_DECLARE_METHOD( CEnemy, ChangeState )
+    LUA_DECLARE_METHOD( CEnemy, SetOnExit )
+    LUA_DECLARE_METHOD( CEnemy, GetCurrentState )
+    LUA_DECLARE_METHOD( CEnemy, GetLife )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CMapManager<CEnemy> )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // PATROL ENEMY
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CPatrolEnemy, CEnemy )
+    LUA_DECLARE_METHOD( CPatrolEnemy, GetWaypoints )
+    LUA_DECLARE_METHOD( CPatrolEnemy, GetCurrentPoint )
+    LUA_DECLARE_METHOD( CPatrolEnemy, SetCurrentPoint )
+    LUA_DECLARE_METHOD( CPatrolEnemy, GetCount )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ENEMY MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
+    LUA_DECLARE_METHOD( CEnemyManager, GetResource )
+    LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
+  LUA_END_DECLARATION
+}
+void registerAI( lua_State* aLuaState )
+{
+  registerCharacters( aLuaState );
+  registerEnemies( aLuaState );
+
+  module( aLuaState )
   [
     class_<std::vector<Vect3f>>( "VectorWaypoints" )
     .def( constructor<std::vector<Vect3f>>() )
-    .def( "GetCount", &std::vector<Vect3f>::size )
-    .def( "push_back", &vector_add<Vect3f> )
-    .def( "getResource", &vector_get<Vect3f> )
-    .def( "clear", &std::vector<Vect3f>::clear )
-  ];
-  module( m_LS )
-  [
-    class_<CPatrolEnemy, CEnemy>( "CPatrolEnemy" )
-    .def( constructor<CXMLTreeNode&, CStateMachine*>() )
-    .def( "init", &CPatrolEnemy::Init )
-    .def( "update", &CPatrolEnemy::Update )
-    .def( "render", &CPatrolEnemy::Render )
-    .def( "GetWaypoints", &CPatrolEnemy::GetWaypoints )
-    .def( "SetWaypoints", &CPatrolEnemy::SetWaypoints )
-    .def( "GetCurrentPoint", &CPatrolEnemy::GetCurrentPoint )
-    .def( "SetCurrentPoint", &CPatrolEnemy::SetCurrentPoint )
-    .def( "getCount", &CPatrolEnemy::getCount )
-  ];
-  module( m_LS )
-  [
-    class_<CBossEnemy, CEnemy>( "CBossEnemy" )
-    .def( constructor<CXMLTreeNode&, CStateMachine*>() )
-    .def( "init", &CBossEnemy::Init )
-    .def( "update", &CBossEnemy::Update )
-    .def( "render", &CBossEnemy::Render )
-  ];
-  module( m_LS )
-  [
-    class_<CEasyEnemy, CEnemy>( "CEasyEnemy" )
-    .def( constructor<CXMLTreeNode&, CStateMachine*>() )
-    .def( "init", &CEasyEnemy::Init )
-    .def( "update", &CEasyEnemy::Update )
-    .def( "render", &CEasyEnemy::Render )
-  ];
-
-  module( m_LS )
-  [
-    class_<CMapManager<CEnemy>>( "CMapManagerCEnemy" )
-  ];
-  module( m_LS )
-  [
-    class_<CEnemyManager, CMapManager<CEnemy>>( "CEnemyManager" )
-    .def( constructor<>() )
-    .def( "getEnemy", &CEnemyManager::GetResource )
-    .def( "GetActualEnemy", &CEnemyManager::GetActualEnemy )
-  ];
-  module( m_LS )
-  [
-    class_<CAStar>( "CAStar" )
-    .def( constructor<>() )
-    .def( "GetPath", &CAStar::GetPath )
+    .def( "GetResource", &vector_get<Vect3f> )
   ];
 
 }

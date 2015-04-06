@@ -8,7 +8,7 @@ function CBlaster:__init()
 	self.BaseDamage = 5.0
 	self.MaxDamage = 20.0
 	
-    core:trace("Blaster initialized")
+    core:Trace("Blaster initialized")
 end
 
 function CBlaster:CalculateDamage()
@@ -26,7 +26,7 @@ function CBlaster:Shoot()
 	if lEnemy ~= nil then
 		local damage = self:CalculateDamage()
 		lEnemy:AddDamage( damage )
-		core:trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
+		core:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
 end
 
@@ -36,7 +36,7 @@ function CBlaster:GetEnemyFromRay()
     l_DirRay:Normalize()
 	local l_ImpactMask = 2 ^ CollisionGroup.ECG_ENEMY.value
 	local l_EnemyName = physic_manager:RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
-    return enemy_manager:getEnemy(l_EnemyName)
+    return enemy_manager:GetResource(l_EnemyName)
 end
 
 function CBlaster:Update()

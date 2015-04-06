@@ -128,7 +128,7 @@ void registerGizmos( lua_State * aLuaState )
   ASSERT( aLuaState, "LuaState error in Register Gizmos" );
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // OBJECT 3D
+  // GIZMOS
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CGizmoElement, CObject3D )
@@ -155,107 +155,78 @@ void registerGizmos( lua_State * aLuaState )
   LUA_END_DECLARATION
 }
 
+void registerGraphicsManager( lua_State * aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register GraphicsManager" );
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // GRAPHICS MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CGraphicsManager )
+    LUA_DECLARE_DEFAULT_CTOR
+  LUA_END_DECLARATION
+}
+
+void registerRenderableObject( lua_State * aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register RenderableObjects" );
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // RENDERABLE OBJECT
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_END_DECLARATION
+  
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // RENDERABLE OBJECTS MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject> )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_METHOD( CRenderableObjectsManager, GetResource )
+    LUA_DECLARE_METHOD( CRenderableObjectsManager, AddResource )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObjectsManager> )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // RENDERABLE OBJECTS MANAGER LAYERS
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager> )
+    LUA_DECLARE_METHOD( CRenderableObjectsLayersManager, GetResource )
+  LUA_END_DECLARATION
+}
+
+void registerStaticMesh( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register StaticMesh" );
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // INSTANCE MESH
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CInstanceMesh, CRenderableObject )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_END_DECLARATION
+}
+
 void registerGraphics( lua_State* aLuaState )
 {
   registerObject3D( aLuaState );
   registerCameras( aLuaState );
   registerGizmos( aLuaState );
-
-  module( aLuaState )
-  [
-    def( "CreateInstanceMesh", &CreateInstanceMesh )
-  ];
-
-  module( aLuaState )
-  [
-    class_<CRenderableObject, bases<CObject3D, CName>>( "CRenderableObject" )
-  ];
-  module( aLuaState )
-  [
-    class_<CInstanceMesh, CRenderableObject>( "CInstanceMesh" )
-  ];
-  module( aLuaState )
-  [
-    class_<CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CTemplatedVectorMapManagerCRenderableObjectManager" )
-  ];
-  module( aLuaState )
-  [
-    class_<CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager>>( "CRenderableObjectsManager" )
-    .def( "GetResource", &CRenderableObjectsLayersManager::GetResource )
-  ];
-  module( aLuaState )
-  [
-    class_<CTemplatedVectorMapManager<CRenderableObject>>( "CTemplatedVectorMapManagerCRenderableObject" )
-  ];
-  module( aLuaState )
-  [
-    class_<CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject>>( "CRenderableObjectsManager" )
-    .def( constructor<>() )
-    .def( "Update", &CRenderableObjectsManager::Update )
-    .def( "Render", &CRenderableObjectsManager::Render )
-    .def( "CleanUp", &CRenderableObjectsManager::CleanUp )
-    .def( "Load", &CRenderableObjectsManager::Load )
-    .def( "AddResource", &CRenderableObjectsManager::AddResource )
-    .def( "CreateCinematic", &CRenderableObjectsManager::CreateCinematic )
-    .def( "GetResource", &CRenderableObjectsManager::GetResource )
-  ];
-  module( aLuaState )
-  [
-    class_<CGraphicsManager>( "CGraphicsManager" )
-    .def( constructor<>() )
-    .def( "BeginRender", &CGraphicsManager::BeginRender )
-    .def( "DisableAlphaBlend", &CGraphicsManager::DisableAlphaBlend )
-    .def( "DisableZBuffering", &CGraphicsManager::DisableZBuffering )
-    .def( "DrawAxis", &CGraphicsManager::DrawAxis )
-    .def( "DrawBox", &CGraphicsManager::DrawBox )
-    //.def("DrawCamera", &CGraphicsManager::DrawCamera)
-    .def( "DrawCapsule", &CGraphicsManager::DrawCapsule )
-    .def( "DrawCircle", &CGraphicsManager::DrawCircle )
-    .def( "DrawCube", ( void( CGraphicsManager::* )( float32 ) ) &CGraphicsManager::DrawCube )
-    .def( "DrawCylinder", &CGraphicsManager::DrawCylinder )
-    .def( "DrawGrid", &CGraphicsManager::DrawGrid )
-    .def( "DrawIcoSphere", &CGraphicsManager::DrawIcoSphere )
-    .def( "DrawLine", &CGraphicsManager::DrawLine )
-    .def( "DrawPlane", &CGraphicsManager::DrawPlane )
-    .def( "DrawQuad2D", &CGraphicsManager::DrawQuad2D )
-    //.def("DrawQuad3D", &CGraphicsManager::DrawQuad3D)
-    .def( "DrawRectangle2D", &CGraphicsManager::DrawRectangle2D )
-    .def( "DrawSphere", &CGraphicsManager::DrawSphere )
-    .def( "EnableAlphaBlend", &CGraphicsManager::EnableAlphaBlend )
-    .def( "EnableZBuffering", &CGraphicsManager::EnableZBuffering )
-    .def( "EndRender", &CGraphicsManager::EndRender )
-    //.def("GetCurrentCamera", &CGraphicsManager::GetCurrentCamera)
-    .def( "GetDevice", &CGraphicsManager::GetDevice )
-    .def( "GetRay", &CGraphicsManager::GetRay )
-    .def( "GetWidthAndHeight", &CGraphicsManager::GetWidthAndHeight )
-    .def( "Init", &CGraphicsManager::Init )
-    .def( "Release", &CGraphicsManager::Release )
-    .def( "Render", &CGraphicsManager::Render )
-    .def( "RenderCursor", &CGraphicsManager::RenderCursor )
-    //.def( "SetTransform", ( void( CGraphicsManager::* )(const Math::Mat44f& ) ) &CGraphicsManager::SetTransform )
-    .def( "SetupMatrices", &CGraphicsManager::SetupMatrices )
-    .def( "Update", &CGraphicsManager::Update )
-  ];
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  module( aLuaState )
-  [
-    class_<CCinematicPlayer>( "CCinematicPlayer" )
-  ];
-  module( aLuaState )
-  [
-    class_<CCinematic, bases<CRenderableObject, CCinematicPlayer>>( "CCinematic" )
-    .def( constructor<const std::string&>() )
-    .def( "Stop", &CCinematic::Stop )
-    .def( "Play", &CCinematic::Play )
-    .def( "Pause", &CCinematic::Pause )
-  ];
-
-  module( aLuaState )
-  [
-    class_<CLightManager>("CLightManager")
-  ];
+  registerGraphicsManager( aLuaState );
+  registerRenderableObject( aLuaState );
+  registerStaticMesh( aLuaState );
 }

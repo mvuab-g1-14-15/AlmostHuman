@@ -1,5 +1,5 @@
 function UpdateFree()
-	dt = Singleton_Core.get_singleton():GetTimer():GetElapsedTime()
+	dt = CCore.GetSingletonPtr():GetTimer():GetElapsedTime()
 	local current_camera = camera_manager:GetCurrentCamera()
 	flag_speed = 0
     forward = 0

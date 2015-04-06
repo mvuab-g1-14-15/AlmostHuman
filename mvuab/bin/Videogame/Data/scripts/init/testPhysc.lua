@@ -19,7 +19,7 @@ local g_MoveTo = Vect3f()
 initialized = false
 
 function init()
-	core = Singleton_Core.get_singleton()
+	core = CCore.GetSingletonPtr()
 	action_manager = core:GetActionManager()
 	graphics_manager = core:GetGraphicsManager()
 	--renderable_objects_manager = core:GetRenderableObjectsManager()
@@ -31,7 +31,7 @@ function init()
 	pos = Vect3f(0, 0, 0)
 	physic_manager = core:GetPhysicsManager()
 	--Create PlayerController
-	process = Singleton_Engine.get_singleton():GetProcess()
+	process = CEngine.GetSingletonPtr():GetProcess()
 	--local PUD_Player = process:GetNewPUD("CharacterController")
 	--PUD_Player:SetColor(1,0,0,1)
 	--PUD_Player:SetPaint(true)

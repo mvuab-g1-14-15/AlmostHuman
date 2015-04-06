@@ -7,18 +7,18 @@ end
 
 function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
-	local l_CurrentState = enemy:getCurrentState()
+	local l_CurrentState = enemy:GetCurrentState()
 	local l_NextState = l_CurrentState
-	--core:trace("Current state: " .. l_CurrentState)
+	--core:Trace("Current state: " .. l_CurrentState)
 	
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
-	--core:trace("Distance to player: " .. l_DistanceToPlayer)
+	--core:Trace("Distance to player: " .. l_DistanceToPlayer)
 	if l_PlayerInSight then
-		--core:trace("Is viewing player: true")
+		--core:Trace("Is viewing player: true")
 	else
-		--core:trace("Is viewing player: false")
+		--core:Trace("Is viewing player: false")
 	end
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
@@ -45,7 +45,7 @@ function andar()
 	local dt = timer:GetElapsedTime()
 	enemy = enemy_manager:GetActualEnemy()
 	
-	local l_TargetPos = enemy:getTargetPosition()
+	local l_TargetPos = enemy:GetTargetPosition()
 	l_TargetPos.y = 0.0
 	local l_EnemyPos = enemy:GetPosition()
 	l_EnemyPos.y = 0.0
@@ -54,10 +54,10 @@ function andar()
 	
 	if l_DistanceVector:Length() < 0.1  then
 		local currentPoint = enemy:GetCurrentPoint()
-		local lTargetPosition = VectorWaypoints(enemy:GetWaypoints()):getResource(currentPoint)
-		enemy:setTargetPosition(lTargetPosition)
+		local lTargetPosition = VectorWaypoints(enemy:GetWaypoints()):GetResource(currentPoint)
+		enemy:SetTargetPosition(lTargetPosition)
 		enemy:SetTargetPositionOriginal(lTargetPosition)
-		if currentPoint+1 == (enemy:getCount()) then
+		if currentPoint+1 == (enemy:GetCount()) then
 			enemy:SetCurrentPoint(0)
 		else
 			enemy:SetCurrentPoint(currentPoint+1)
@@ -80,7 +80,7 @@ function esperar()
 	local timer = core:GetTimer()
 	tiempoDeEspera = tiempoDeEspera + timer:GetElapsedTime()
 	if tiempoDeEspera > 2 then
-		enemy:SetExit(true)
+		enemy:SetOnExit(true)
 		tiempoDeEspera = 0
 		enemy:SetCurrentPoint(0)
 	end

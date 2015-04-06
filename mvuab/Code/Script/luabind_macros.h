@@ -19,10 +19,15 @@
 #define LUA_DECLARE_METHOD( CL, NAME )                .def( #NAME, &CL::NAME )
 #define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, (PROTO) &CL::NAME )
 
-#define LUA_BEGIN_ENUM( NAME )                    .enum_( #NAME )[
+#define LUA_DECLARE_METHOD_WITHOUT_CLASS( NAME )      def( #NAME, &NAME )
+
+#define LUA_BEGIN_ENUM( NAME )                        .enum_( #NAME )[
 #define LUA_ENUM_VALUE( NAME, VAL )                   luabind::value( #NAME, VAL )
 #define LUA_END_ENUM( )                               ]
 
+#define LUA_BEGIN_SCOPE                               .scope [
+#define LUA_DECLARE_METHOD_SCOPE( CL, NAME )          def( #NAME, &CL::NAME )
+#define LUA_END_SCOPE                                 ]
 #ifdef _HAS_LUA_BIND_
 
 #include <lua.hpp>

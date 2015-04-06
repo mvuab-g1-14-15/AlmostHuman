@@ -25,69 +25,64 @@
 #include "Characters\Enemies\EnemyManager.h"
 #include "Gizmos\GizmosManager.h"
 
+#include "luabind_macros.h"
+
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
 using namespace luabind;
-
-void registerCore( lua_State* m_LS )
+void registerProcess( lua_State* aLuaState)
 {
-    module( m_LS )
-    [
-        class_<CSingleton<CCore>>( "Singleton_Core" )
-        .scope
-        [
-            def( "get_singleton", &CSingleton<CCore>::GetSingletonPtr )
-        ]
-    ];
-    module( m_LS )
-    [
-        class_<CSingleton<CEngine>>( "Singleton_Engine" )
-        .scope
-        [
-            def( "get_singleton", &CSingleton<CEngine>::GetSingletonPtr )
-        ]
-    ];
-    module( m_LS )
-    [
-        class_<CProcess>( "CProcess" )
-    ];
-    module( m_LS )
-    [
-        class_<CEngine>( "CEngine" )
-        .def( "GetProcess", &CEngine::GetProcess )
-    ];
-    module( m_LS )
-    [
-        class_<CCore>( "CCore" )
-        //Methods
-        .def( "Init", &CCore::Init )
-        .def( "Update", &CCore::Update )
-        .def( "Render", &CCore::Render )
-        //Getter Managers
-        .def( "GetActionManager", &CCore::GetActionManager )
-        .def( "GetLightManager", &CCore::GetLightManager )
-        .def( "GetAnimatedModelsManager", &CCore::GetAnimatedModelsManager )
-        .def( "GetFontManager", &CCore::GetFontManager )
-        .def( "GetGraphicsManager", &CCore::GetGraphicsManager )
-        .def( "GetInputManager", &CCore::GetInputManager )
-        .def( "GetLanguageManager", &CCore::GetLanguageManager )
-        .def( "GetRenderableObjectsManager", &CCore::GetRenderableObjectsManager )
-        .def( "GetScriptManager", &CCore::GetScriptManager )
-        .def( "GetStaticMeshManager", &CCore::GetStaticMeshManager )
-        .def( "GetRenderableObjectsLayersManager", &CCore::GetRenderableObjectsLayersManager )
-        .def( "GetTextureManager", &CCore::GetTextureManager )
-        .def( "GetCameraManager", &CCore::GetCameraManager )
-        .def( "GetTimer", &CCore::GetTimer )
-        .def( "GetPhysicsManager", &CCore::GetPhysicsManager )
-        .def( "GetEnemyManager", &CCore::GetEnemyManager )
-        .def( "GetGizmosManager", &CCore::GetGizmosManager )
-        //Getter Singleton
-        .def( "GetSingleton", &CCore::GetSingleton )
-        .def( "GetSingletonPtr", &CCore::GetSingletonPtr )
-        // Other
-        .def( "trace", &CCore::Trace )
-    ];
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CProcess )
+  LUA_END_DECLARATION
+}
+
+void registerEngine( lua_State* aLuaState)
+{
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CSingleton<CEngine> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
+    LUA_DECLARE_METHOD( CEngine, GetProcess )
+    LUA_BEGIN_SCOPE
+        LUA_DECLARE_METHOD_SCOPE(CEngine, GetSingletonPtr )
+    LUA_END_SCOPE
+  LUA_END_DECLARATION
+}
+
+void registerCores( lua_State* aLuaState )
+{
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CSingleton<CCore> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CCore, CSingleton<CCore> )
+    LUA_DECLARE_METHOD( CCore, GetActionManager )
+    LUA_DECLARE_METHOD( CCore, GetLightManager )
+    LUA_DECLARE_METHOD( CCore, GetGraphicsManager )
+    LUA_DECLARE_METHOD( CCore, GetRenderableObjectsManager )
+    LUA_DECLARE_METHOD( CCore, GetRenderableObjectsLayersManager )
+    LUA_DECLARE_METHOD( CCore, GetCameraManager )
+    LUA_DECLARE_METHOD( CCore, GetTimer )
+    LUA_DECLARE_METHOD( CCore, GetPhysicsManager )
+    LUA_DECLARE_METHOD( CCore, GetEnemyManager )
+    LUA_DECLARE_METHOD( CCore, GetGizmosManager )
+    LUA_DECLARE_METHOD( CCore, Trace )
+    LUA_BEGIN_SCOPE
+        LUA_DECLARE_METHOD_SCOPE(CCore, GetSingletonPtr )
+    LUA_END_SCOPE
+  LUA_END_DECLARATION
+}
+
+void registerCore( lua_State* aLuaState )
+{
+    registerProcess( aLuaState );
+    registerEngine( aLuaState );
+    registerCores( aLuaState );
 }
