@@ -13,7 +13,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 		local l_RootNode = xDoc.getNewNode "static_meshes"
 		xDoc.AppendNode l_RootNode
 		
-		local UniqueInstanceArray = GetUniqueInstances()
+		local UniqueInstanceArray = GetUniqueInstancesScene()
 				
 		if UniqueInstanceArray.count == 0 then 
 		(
@@ -175,22 +175,110 @@ fn ExportTextureFile AllObj DestPath =
 	(
 		try
 		(
-			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-			convertToMesh newObj
-			actualObj = newObj[1]
+			local l_MaterialTexture = ""
+			local l_MaterialTextureFilename = ""
+			local l_ActualMaterial = ""
 
-			filename = filenameFromPath actualObj.material.diffuseMap.filename
-			DestTexturePath = DestPath +"\\"+ filename
-			
-			format "Texture % copied on: % \n" Obj.material.diffuseMap.filename DestTexturePath
-			copyFile Obj.material.diffuseMap.filename DestTexturePath
+			if Obj.material != undefined then
+			(
+				local l_Material = Obj.material
+				if classof l_Material == Standardmaterial then
+				(
+					l_Material = #(l_Material)
+					format "Object % Standard Material \n" l_Material
+				)
+				
+				local l_NumMaterials = l_Material.count
+				for iMaterial=1 to l_NumMaterials do
+				(
+					l_ActualMaterial = l_Material[iMaterial]
+					format "ActualMaterial % \n" l_ActualMaterial.name
+					
+					if l_ActualMaterial.diffuseMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.diffuseMap.filename
+						l_MaterialTexture = l_ActualMaterial.diffuseMap.filename
+						format "DiffuseMap \n"
+					)else if l_ActualMaterial.bumpMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.bumpMap.normal_map.filename
+						l_MaterialTexture = l_ActualMaterial.bumpMap.normal_map.filename
+						format "bumpMap \n"
+					)			
+					else if l_ActualMaterial.ambientMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.ambientMap.filename
+						l_MaterialTexture = l_ActualMaterial.ambientMap.filename
+						format "ambientMap \n"
+					)
+					else if  l_ActualMaterial.displacementMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.displacementMap.filename
+						l_MaterialTexture = l_ActualMaterial.displacementMap.filename
+						format "displacementMap \n"
+					)
+					else if  l_ActualMaterial.filterMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.filterMap.filename
+						l_MaterialTexture = l_ActualMaterial.filterMap.filename
+						format "filterMap \n"
+					)
+					else if l_ActualMaterial.glossinessMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.glossinessMap.filename
+						l_MaterialTexture = l_ActualMaterial.glossinessMap.filename
+						format "glossinessMap \n"
+					)
+					else if  l_ActualMaterial.opacityMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.opacityMap.filename
+						l_MaterialTexture = l_ActualMaterial.opacityMap.filename
+						format "opacityMap \n"
+					)
+					else if  l_ActualMaterial.reflectionMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.reflectionMap.filename
+						l_MaterialTexture = l_ActualMaterial.reflectionMap.filename
+						format "reflectionMap \n"
+					)
+					else if l_ActualMaterial.refractionMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.refractionMap.filename
+						l_MaterialTexture = l_ActualMaterial.refractionMap.filename
+						format "refractionMap \n"
+					)
+					else if  l_ActualMaterial.selfIllumMap != undefined then
+					(
+						-- TODO: RNM
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.selfIllumMap.filename
+						l_MaterialTexture = l_ActualMaterial.selfIllumMap.filenameformat 
+						format "selfIllumMap \n"
+					)
+					else if  l_ActualMaterial.specularMap != undefined then
+					(
+						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.specularMap.filename
+						l_MaterialTexture = l_ActualMaterial.specularMap.filename
+						format "specularMap \n"
+					)
+					
+					DestTexturePath = DestPath +"\\"+ l_MaterialTextureFilename
+					if copyFile l_MaterialTexture DestTexturePath then
+					(
+						format "Texture % copied on: % \n" l_MaterialTexture DestTexturePath
+					)
+					else
+					(
+						format "Texture % FAILED TO COPY on: % \n" l_MaterialTexture DestTexturePath
+					)
+					
+				)
+			)
+			)
 		)
 		catch
 		(
 			format "Error while exporting object\n"
-		)
-		delete newObj
-	)		
+		)	
 )
 
 function GenerateMeshes aObjects MeshDir =
