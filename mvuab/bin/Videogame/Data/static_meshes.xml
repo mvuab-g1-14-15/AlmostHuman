@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="Plane001" filename="\meshes\Plane001.mesh" />
+  <static_mesh name="Box001" filename="\meshes\Box001.mesh" />
+  <static_mesh name="Sphere001" filename="\meshes\Sphere001.mesh" />
   <static_mesh name="Player" filename="\meshes\Player.mesh" />
   <static_mesh name="enemy_android" filename="\meshes\enemy_android.mesh" />
   <static_mesh name="Plane005" filename="\meshes\Plane005.mesh" />

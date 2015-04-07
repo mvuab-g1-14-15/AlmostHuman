@@ -241,6 +241,7 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
+  GetParameterBySemantic( LightsIntensityParameterStr, m_LightsIntensityParameter);
   return true;
 }
 
@@ -304,6 +305,7 @@ bool CEffect::SetLights( size_t NumOfLights )
       m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() / 255.0f,
                                        l_Color.GetGreen() / 255.0f,
                                        l_Color.GetBlue() / 255.0f );
+	  m_LightsIntensity[i] = l_pCurrentLight->GetIntensity();
 
       if ( l_LightType == CLight::DIRECTIONAL )
       {
@@ -441,13 +443,14 @@ void CEffect::SetUseDebugColor( bool aUse )
 void CEffect::ResetLightsHandle()
 {
   //Reset all the lights of the effect
-  memset( m_LightsEnabled, 0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEnabled,					0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsType,						0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsAngle,					0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsIntensity,				0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsFallOff,					0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation,	0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation,		0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsPosition,					0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsDirection,				0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsColor,					0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
 }

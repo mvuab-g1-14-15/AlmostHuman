@@ -22,6 +22,7 @@ const char LightsDirectionParameterStr[] = "LightsDirections";
 const char LightsAngleParameterStr[] = "LightsAngles";
 const char LightsFallOffParameterStr[] = "LightsFallOffs";
 const char LightsColorParameterStr[] = "LightsColors";
+const char LightsIntensityParameterStr[] = "LightsIntensity";
 const char LightsStartRangeAttenuationParameterStr[] = "LightsStartAngle";
 const char LightsEndRangeAttenuationParameterStr[] = "LightsEndAngle";
 const char CameraPositionParameterStr[] = "CameraPosition";

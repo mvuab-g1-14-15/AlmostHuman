@@ -58,6 +58,7 @@ public:
   GET_SET( D3DXHANDLE, LightsFallOffParameter );
   GET_SET( D3DXHANDLE, LightsStartRangeAttenuationParameter );
   GET_SET( D3DXHANDLE, LightsEndRangeAttenuationParameter );
+  GET_SET( D3DXHANDLE, LightsIntensityParameter );
 
   GET_SET( D3DXHANDLE, CameraPositionParameter );
   GET_SET( D3DXHANDLE, BonesParameter );
@@ -138,6 +139,7 @@ private: // Members
   LPD3DXEFFECT m_Effect;
   BOOL m_LightsEnabled[MAX_LIGHTS_BY_SHADER];
   int32 m_LightsType[MAX_LIGHTS_BY_SHADER];
+  float32 m_LightsIntensity[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsAngle[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsFallOff[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER];
@@ -155,7 +157,7 @@ private: // Members
              m_LightsPositionParameter, m_LightsDirectionParameter, m_LightsAngleParameter,
              m_LightsColorParameter;
   D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter,
-             m_LightsEndRangeAttenuationParameter;
+             m_LightsEndRangeAttenuationParameter, m_LightsIntensityParameter;
   D3DXHANDLE m_CameraPositionParameter;
   D3DXHANDLE m_BonesParameter;
 
