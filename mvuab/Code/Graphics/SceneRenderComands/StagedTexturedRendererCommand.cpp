@@ -1,6 +1,7 @@
 #include "SceneRenderComands\StagedTexturedRendererCommand.h"
 #include "Texture\Texture.h"
 #include "GraphicsManager.h"
+#include "Core.h"
 #include "Texture\TextureManager.h"
 
 #ifdef _DEBUG
@@ -10,7 +11,7 @@
 CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& atts ):
   CSceneRendererCommand( atts )
 {
-  CGraphicsManager* gm = CGraphicsManager::GetSingletonPtr();
+  CGraphicsManager* gm = GraphicsInstance;
 
   if ( atts.Exists() )
   {

@@ -1,4 +1,5 @@
 #include "Effect.h"
+#include "Core.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
 #include "GraphicsManager.h"
@@ -178,7 +179,7 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
 bool CEffect::LoadEffect()
 {
   // Obtain the device from the graphics manager and load the effect
-  LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
   DWORD dwShaderFlags = 0;
   dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
   LPD3DXBUFFER l_ErrorBuffer = 0;

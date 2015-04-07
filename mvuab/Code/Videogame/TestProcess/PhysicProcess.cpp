@@ -70,7 +70,7 @@ void CPhysicProcess::Update()
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
@@ -81,7 +81,7 @@ void CPhysicProcess::Update()
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
-    CEffectManager::GetSingletonPtr()->Reload();
+    EffectManagerInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
     CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
     CStaticMeshManager::GetSingletonPtr()->Reload();
@@ -90,7 +90,7 @@ void CPhysicProcess::Update()
   }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    ActionManagerInstance->Reload();
 
 
   /////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ void CPhysicProcess::Update()
     Vect2i l_PosMouse =
       CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
     Vect3f l_Pos, l_Dir;
-    CGraphicsManager::GetSingletonPtr()->GetRay( l_PosMouse, l_Pos, l_Dir );
+    GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );
     CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
     SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
     uint32 mask = 1 << ECG_ESCENE;

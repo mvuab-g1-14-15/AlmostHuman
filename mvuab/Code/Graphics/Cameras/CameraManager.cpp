@@ -5,6 +5,7 @@
 #include "GraphicsManager.h"
 #include "CameraKeyController.h"
 #include "Timer\Timer.h"
+#include "Core.h"
 
 CCameraManager::CCameraManager() : m_RenderCameras( true )
 {
@@ -109,7 +110,7 @@ void CCameraManager::RenderCameras()
 
   if ( m_RenderCameras )
   {
-    LPDIRECT3DDEVICE9 l_pDirectXDevice = CGraphicsManager::GetSingletonPtr()->GetDevice();
+    LPDIRECT3DDEVICE9 l_pDirectXDevice = GraphicsInstance->GetDevice();
     TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
 
     for ( ; itb != ite; ++itb )

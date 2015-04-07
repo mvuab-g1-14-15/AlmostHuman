@@ -11,7 +11,8 @@ CEffectManager::CEffectManager()
     m_LightViewMatrix( Math::m44fIDENTITY ),
     m_ShadowProjectionMatrix( Math::m44fIDENTITY ),
     m_CameraEye( Math::v3fZERO ),
-    m_Filename( "" )
+    m_Filename( "" ),
+	CManager()
 {
 }
 
@@ -118,7 +119,7 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
   SetCameraEye( CameraEye );
 }
 
-void CEffectManager::Load( const std::string& FileName )
+void CEffectManager::Init( const std::string& FileName )
 {
   // Obtain the filename
   m_Filename = FileName;
@@ -200,5 +201,5 @@ void CEffectManager::Reload()
 {
   CleanUp();
   Destroy();
-  Load( m_Filename );
+  Init( m_Filename );
 }

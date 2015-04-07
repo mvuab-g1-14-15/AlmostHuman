@@ -26,7 +26,7 @@ void CCharacter::Update()
 
 void CCharacter::Render()
 {
-  /* CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  /* CGraphicsManager* l_GM = GraphicsInstance;
    Mat44f m;
    m.Translate( m_Position );
    m.RotByAnglesYXZ( GetYaw(), GetPitch(), GetRoll() );

@@ -43,7 +43,7 @@ void CBlaster::Start()
 
 void CBlaster::Update()
 {
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
   CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
@@ -103,7 +103,7 @@ void CBlaster::Update()
     m_BlasterShoot = true;
   }
 
-  // if ( CActionManager::GetSingletonPtr()->DoAction( "LeftMouseButtonPressed" ) )
+  // if ( ActionManagerInstance->DoAction( "LeftMouseButtonPressed" ) )
 }
 
 void CBlaster::Render()
@@ -113,7 +113,7 @@ void CBlaster::Render()
     return;
 
   // Get the graphics manager
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
 
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
@@ -121,7 +121,7 @@ void CBlaster::Render()
 
   // Set the identity
   Math::Mat44f t;
-  CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+  GraphicsInstance->SetTransform( t );
 
   l_GM->DrawLine(m_InitialPos, m_FinalPos, Math::colORANGE );
 }

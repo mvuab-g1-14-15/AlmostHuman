@@ -1,4 +1,5 @@
 #include "SpotLight.h"
+#include "Core.h"
 #include "GraphicsManager.h"
 #include "Effects\EffectManager.h"
 
@@ -89,6 +90,6 @@ void CSpotLight::SetShadowMap( CGraphicsManager* GM )
   D3DXMatrixPerspectiveFovLH( &l_Projection, Math::Utils::Deg2Rad( m_FallOff ), 1.0f, 1.0f,
                               m_EndRangeAttenuation );
   m_ProjectionShadowMap = Math::Mat44f( l_Projection );
-  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
+  CEffectManager* l_EffectManager = EffectManagerInstance;
   l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
 }

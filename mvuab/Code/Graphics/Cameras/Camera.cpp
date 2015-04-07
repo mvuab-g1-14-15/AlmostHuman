@@ -13,7 +13,7 @@ CCamera::CCamera()
   , m_Enable( true )
 {
   uint32 w, h;
-  CGraphicsManager::GetSingletonPtr()->GetWidthAndHeight( w, h );
+  GraphicsInstance->GetWidthAndHeight( w, h );
   m_AspectRatio = ( float ) w / ( float ) h;
 }
 

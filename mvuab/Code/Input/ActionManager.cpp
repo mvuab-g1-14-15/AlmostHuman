@@ -1,9 +1,10 @@
 #include "ActionManager.h"
 #include "XML\XMLTreeNode.h"
+#include "Core.h"
 
 #include <Windows.h>
 
-CActionManager::CActionManager()
+CActionManager::CActionManager(): CManager()
 {
 }
 
@@ -16,9 +17,9 @@ void CActionManager::Destroy()
 {
     m_mActions.clear();
 }
-void CActionManager::Init( const std::string &xmlFile, CInputManager *a_pInputManager )
+void CActionManager::Init( const std::string &xmlFile )
 {
-    m_pInputManager = a_pInputManager;
+    m_pInputManager = InputManagerInstance;
     m_ActionsPath = xmlFile;
     LoadXML();
 }

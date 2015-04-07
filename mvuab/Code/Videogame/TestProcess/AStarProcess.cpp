@@ -60,7 +60,7 @@ void CAStarProcess::Update()
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
@@ -71,7 +71,7 @@ void CAStarProcess::Update()
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
-    CEffectManager::GetSingletonPtr()->Reload();
+    EffectManagerInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
     CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
     CStaticMeshManager::GetSingletonPtr()->Reload();
@@ -80,7 +80,7 @@ void CAStarProcess::Update()
   }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    ActionManagerInstance->Reload();
 
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
 }

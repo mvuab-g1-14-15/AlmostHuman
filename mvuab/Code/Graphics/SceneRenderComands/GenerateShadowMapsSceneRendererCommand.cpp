@@ -1,4 +1,5 @@
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
+#include "Core.h"
 #include "GraphicsManager.h"
 #include "Lights/LightManager.h"
 

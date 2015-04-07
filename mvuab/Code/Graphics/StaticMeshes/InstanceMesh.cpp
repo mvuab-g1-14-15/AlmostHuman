@@ -15,8 +15,7 @@ CInstanceMesh::CInstanceMesh( const std::string& Name,
                                       CoreName ) ), CRenderableObject()
 {
   if ( !m_pStaticMesh )
-    LOG_ERROR_APPLICATION(
-                                           "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" );
+    LOG_ERROR_APPLICATION( "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" );
 
   SetName( Name );
 }
@@ -36,14 +35,14 @@ void CInstanceMesh::Render()
   if ( m_pStaticMesh )
   {
     Math::Mat44f lTransform = GetTransform();
-    CGraphicsManager::GetSingletonPtr()->SetTransform( lTransform );
+    GraphicsInstance->SetTransform( lTransform );
     Math::AABB3f laabb = m_pStaticMesh->GetAABB();
     CFrustum lCameraFrustum = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetFrustum();
     Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
     // TODO: Fix the frustum culling
     //if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z), laabb.GetRadius()) )
-      m_pStaticMesh->Render( CGraphicsManager::GetSingletonPtr() );
+      m_pStaticMesh->Render( GraphicsInstance );
     Math::Mat44f t;
-    CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+    GraphicsInstance->SetTransform( t );
   }
 }

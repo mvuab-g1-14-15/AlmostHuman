@@ -175,10 +175,10 @@ void CCore::InitManagers()
     m_pConsole->SetFullSize();
   }
 
-  m_pGraphicsManager->Init( m_WindowId, l_EngineConfig );
-  m_pEffectManager->Load( l_EngineConfig->GetEffectsPath() );
-  m_pInputManager->Init( m_WindowId, l_EngineConfig->GetScreenSize(), l_EngineConfig->GetExclusiveModeInMouse() );
-  m_pActionManager->Init( l_EngineConfig->GetInputPath(), m_pInputManager );
+  m_pGraphicsManager->Init( "" );
+  m_pEffectManager->Init( l_EngineConfig->GetEffectsPath() );
+  m_pInputManager->Init( "" );
+  m_pActionManager->Init( l_EngineConfig->GetInputPath() );
   m_pLanguageManager->SetXmlPaths( l_EngineConfig->GetLanguages() );
   m_pLanguageManager->LoadXMLs();
   m_pLanguageManager->SetCurrentLanguage( l_EngineConfig->GetCurrentLanguage() );

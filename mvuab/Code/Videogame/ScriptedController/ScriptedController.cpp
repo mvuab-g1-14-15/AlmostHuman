@@ -28,5 +28,5 @@ void CScriptedController::Update()
 
 void CScriptedController::Render()
 {
-  CCore::GetSingletonPtr()->GetGraphicsManager()->DrawCube( GetTransform(), 1.0f );
+  GraphicsInstance->DrawCube( GetTransform(), 1.0f );
 }

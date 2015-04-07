@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include "Utils\Defines.h"
 #include "GraphicsManager.h"
+#include "Core.h"
 #include "Logger\Logger.h"
 
 /*
@@ -31,7 +32,7 @@ CTexture::~CTexture()
 bool CTexture::LoadFile()
 {
   HRESULT l_Res = D3DXCreateTextureFromFile(
-                    CGraphicsManager::GetSingletonPtr()->GetDevice(),
+                    GraphicsInstance->GetDevice(),
                     m_FileName.c_str(), &m_Texture );
   return ( l_Res == S_OK );
 }
@@ -60,7 +61,7 @@ bool CTexture::Reload()
 
 void CTexture::Activate( size_t StageId )
 {
-  CGraphicsManager::GetSingletonPtr()->GetDevice()->SetTexture( StageId,
+  GraphicsInstance->GetDevice()->SetTexture( StageId,
       m_Texture );
 }
 
@@ -117,7 +118,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
   }
 
   // Obtain the device from the graphics manager
-  const LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  const LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
   HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool,
                                         &m_Texture, NULL );
   assert( hr == D3D_OK );
@@ -137,13 +138,13 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
 
 void CTexture::Deactivate( size_t Stage )
 {
-  CGraphicsManager::GetSingletonPtr()->GetDevice()->SetTexture( ( DWORD )Stage,
+  GraphicsInstance->GetDevice()->SetTexture( ( DWORD )Stage,
       NULL );
 }
 
 bool CTexture::SetAsRenderTarget( size_t IdStage )
 {
-  LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
   l_Device->GetRenderTarget( ( DWORD )IdStage, &m_OldRenderTarget );
 
   if ( FAILED( m_Texture->GetSurfaceLevel( 0, &m_RenderTargetTexture ) ) )
@@ -161,7 +162,7 @@ bool CTexture::SetAsRenderTarget( size_t IdStage )
 
 void CTexture::UnsetAsRenderTarget( size_t IdStage )
 {
-  LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
   l_Device->SetDepthStencilSurface( m_OldDepthStencilRenderTarget );
   CHECKED_RELEASE( m_OldDepthStencilRenderTarget );
   l_Device->SetRenderTarget( IdStage, m_OldRenderTarget );
@@ -170,7 +171,7 @@ void CTexture::UnsetAsRenderTarget( size_t IdStage )
 
 void CTexture::CaptureFrameBuffer( size_t IdStage )
 {
-  LPDIRECT3DDEVICE9 l_Device = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
   LPDIRECT3DSURFACE9 l_RenderTarget, l_Surface;
   m_Texture->GetSurfaceLevel( 0, &l_Surface );
 

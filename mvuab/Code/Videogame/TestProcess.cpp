@@ -49,7 +49,7 @@ void CTestProcess::Update()
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
@@ -60,7 +60,7 @@ void CTestProcess::Update()
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
-    CEffectManager::GetSingletonPtr()->Reload();
+    EffectManagerInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
     CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
     CStaticMeshManager::GetSingletonPtr()->Reload();
@@ -69,13 +69,13 @@ void CTestProcess::Update()
   }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    ActionManagerInstance->Reload();
 
   /////////////////////////////////////////////////////////////
   ////////////      SAVE ACTIONS IN FILE      /////////////////
   /////////////////////////////////////////////////////////////
   if ( pActionManager->DoAction( "SaveActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->SaveXML( "Data/Prueba.xml" );
+    ActionManagerInstance->SaveXML( "Data/Prueba.xml" );
 
   ///////////////////////////////////////////////////////////////////
   ////////////      Cambiar el código de una acción      ////////////
@@ -98,7 +98,7 @@ void CTestProcess::Update()
     sInputAction.m_sEventType = "EVENT_DOWN";
     sInputAction.m_sCode = "KEY_LCTRL";
     vecInputAction.push_back( sInputAction );
-    CCore::GetSingletonPtr()->GetActionManager()->SetAction( "SaveActionToInput",
+    ActionManagerInstance->SetAction( "SaveActionToInput",
         vecInputAction );
   }
 

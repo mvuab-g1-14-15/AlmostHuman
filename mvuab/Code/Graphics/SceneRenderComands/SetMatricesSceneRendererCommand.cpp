@@ -14,5 +14,5 @@ CSetMatricesSceneRendererCommand::~CSetMatricesSceneRendererCommand()
 
 void CSetMatricesSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	CCore::GetSingletonPtr()->GetGraphicsManager()->SetupMatrices();
+	GraphicsInstance->SetupMatrices();
 }

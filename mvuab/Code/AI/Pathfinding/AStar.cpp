@@ -22,7 +22,7 @@ void CAStar::Init()
 
 void CAStar::Render()
 {
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
 
   if ( m_Graph->GetSize() == 0 )
     return;

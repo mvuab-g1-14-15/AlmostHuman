@@ -1,4 +1,5 @@
 #include "DirectionalLight.h"
+#include "Core.h"
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
 #include "Effects\EffectManager.h"
@@ -82,9 +83,9 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
   m_ViewShadowMap = Mat44f( l_View );
   D3DXMatrixOrthoLH( &l_Ortho, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 0.1f, m_EndRangeAttenuation );
   m_ProjectionShadowMap = Mat44f( l_Ortho );
-  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
+  CEffectManager* l_EffectManager = EffectManagerInstance;
   l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
-  LPDIRECT3DDEVICE9 lDevice = CGraphicsManager::GetSingletonPtr()->GetDevice();
+  LPDIRECT3DDEVICE9 lDevice = GraphicsInstance->GetDevice();
   lDevice->SetTransform( D3DTS_VIEW, &l_View );
   lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
 }

@@ -77,6 +77,7 @@ CGraphicsManager::CGraphicsManager()
   , m_VBQuad( 0 )
   , mDirectXDevice( 0 )
   , mDirectXObject( 0 )
+  , CManager()
 {
 }
 
@@ -203,14 +204,15 @@ void CGraphicsManager::SetupMatrices()
   mDirectXDevice->SetTransform( D3DTS_VIEW, &l_matView );
   mDirectXDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
   // Set the new parameters to the effect manager
-  CEffectManager::GetSingletonPtr()->ActivateCamera( Math::Mat44f( l_matView ),
+  EffectManagerInstance->ActivateCamera( Math::Mat44f( l_matView ),
       Math::Mat44f( l_matProject ),
       l_CameraPosition );
 }
 
-bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
-{
-  m_WindowId = hWnd;
+void CGraphicsManager::Init( const std::string& Path)
+{ 
+  CEngineConfig* aEngineConfig = CEngineConfig::GetSingletonPtr();  
+  m_WindowId = aEngineConfig->GetWindowId();
   Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
   mWidth = lScreenResolution.x;
   mHeight = lScreenResolution.y;
@@ -219,7 +221,7 @@ bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
   if ( mDirectXObject == NULL )
   {
     LOG_ERROR_APPLICATION( "Error of Direct3DCreate9( D3D_SDK_VERSION )" );
-    return false;
+    return;
   }
 
   // Choose a way of creating the device from the configuration of the engine
@@ -270,7 +272,7 @@ bool CGraphicsManager::Init( HWND hWnd, CEngineConfig* aEngineConfig )
   if ( FAILED( D3DXCreateCylinder( mDirectXDevice, 1.0f, 1.0f, 1.0f, 10, 10, &m_CylinderMesh, 0 ) ) )
     LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the cylinder" );
 
-  return mOk;
+  //return mOk;
 }
 
 DWORD CGraphicsManager::GetBehaviorFlags()
@@ -670,7 +672,7 @@ void CGraphicsManager::DrawLine( const Math::Vect3f& PosA, const Math::Vect3f& P
 void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
 {
   mDirectXDevice->SetTransform( D3DTS_WORLD, &matrix );
-  CEffectManager::GetSingletonPtr()->SetWorldMatrix( Math::Mat44f( matrix ) );
+  EffectManagerInstance->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 void CGraphicsManager::SetTransform( const Math::Mat44f& m )
 {
@@ -682,7 +684,7 @@ void CGraphicsManager::SetTransform( const Math::Mat44f& m )
     m.m03, m.m13, m.m23, m.m33
   );
   mDirectXDevice->SetTransform( D3DTS_WORLD, &aux );
-  CEffectManager::GetSingletonPtr()->SetWorldMatrix( m );
+  EffectManagerInstance->SetWorldMatrix( m );
 }
 //La posicion y el (w,h) esta en pixeles
 //La posicion y el (w,h) esta en pixeles
@@ -977,7 +979,7 @@ void CGraphicsManager::RenderCursor()
   mDirectXDevice->SetTransform( D3DTS_WORLD, &mat );
   VERTEX2 Vertex[3];
   Math::Vect2i l_MousePosition;
-  CInputManager::GetSingletonPtr()->GetPosition( IDV_MOUSE, l_MousePosition );
+  InputManagerInstance->GetPosition( IDV_MOUSE, l_MousePosition );
   Vertex[0].pos = D3DXVECTOR3( ( float )( l_MousePosition.x ), ( float )( l_MousePosition.y ), 0.0f );
   Vertex[0].d = 0xFFFF0000;
   Vertex[2].pos = D3DXVECTOR3( ( float )( l_MousePosition.x ), ( float )( l_MousePosition.y ), 0.0f );
@@ -1031,7 +1033,7 @@ void CGraphicsManager::Present()
 void CGraphicsManager::DrawTeapot()
 {
   CEffectTechnique* EffectTechnique =
-    CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+    EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
   EffectTechnique->BeginRender();
   LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
   UINT l_NumPasses = 0;
@@ -1236,8 +1238,8 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
 void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh, Math::CColor aColor )
 {
   SetTransform( aTransform );
-  //CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "DefaultTechnique" );
-  CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferDebugTechnique" );
+  //CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "DefaultTechnique" );
+  CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
   // Set the debug color
   EffectTechnique->SetDebugColor( aColor );
   EffectTechnique->BeginRender();

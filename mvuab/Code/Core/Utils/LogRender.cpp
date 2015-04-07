@@ -67,7 +67,7 @@ void CLogRender::Update()
 
 
   // Process the inputs
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ShowHideLogRender" ) )
     SetVisible( !m_bIsVisible );
@@ -115,7 +115,7 @@ void CLogRender::ToggleVisibility()
 
 void CLogRender::Render( Math::CColor color )
 {
-  CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
+  CGraphicsManager* renderManager = GraphicsInstance;
   CFontManager* fm = CFontManager::GetSingletonPtr();
   CLogger* pLogger = CLogger::GetSingletonPtr()->GetSingletonPtr();
 

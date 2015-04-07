@@ -33,7 +33,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
 {
   SetName( Name );
   Initialize();
-  //m_pEffectTechnique = CCore::GetSingletonPtr()->GetEffectManager()->GetResource(CCore::GetSingletonPtr()->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
+  //m_pEffectTechnique = EffectManagerInstance->GetResource(EffectManagerInstance->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
 }
 CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
   : CRenderableObject( atts  )
@@ -61,7 +61,7 @@ CAnimatedInstanceModel::~CAnimatedInstanceModel()
 
 void CAnimatedInstanceModel::Render()
 {
-  CGraphicsManager::GetSingleton().SetTransform( GetTransform() );
+  GraphicsInstance->SetTransform( GetTransform() );
   RenderModelByHardware();
 }
 
@@ -76,7 +76,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
   if (!m_pEffectTechnique )
     return;
 
-  CCore::GetSingletonPtr()->GetEffectManager()->SetWorldMatrix( GetTransform() );
+  EffectManagerInstance->SetWorldMatrix( GetTransform() );
   CEffect* l_pEffect = m_pEffectTechnique->GetEffect();
 
   if ( NULL == l_pEffect )
@@ -121,7 +121,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
     //m_NormalTextureList[0]->Activate(1);
     m_AnimatedCoreModel->GetRenderableVertexs()->Render
     (
-      CCore::GetSingletonPtr()->GetGraphicsManager(),
+      GraphicsInstance,
       m_pEffectTechnique,
       l_pCalHardwareModel->getBaseVertexIndex(),
       0,
@@ -134,7 +134,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 
 void CAnimatedInstanceModel::RenderModelBySoftware()
 {
-  CGraphicsManager* RM = CGraphicsManager::GetSingletonPtr();
+  CGraphicsManager* RM = GraphicsInstance;
   // get the renderer of the model
   CalRenderer* l_pCalRenderer = m_CalModel->getRenderer();
 
@@ -237,7 +237,7 @@ void CAnimatedInstanceModel::Initialize()
   m_CalModel->update( 0.0f );
 
   // Load Vertex and Index buffers
-  CGraphicsManager* GM = CGraphicsManager::GetSingletonPtr();
+  CGraphicsManager* GM = GraphicsInstance;
   LPDIRECT3DDEVICE9 l_pD3DDevice = GM->GetDevice();
 
   // Create vertex buffer

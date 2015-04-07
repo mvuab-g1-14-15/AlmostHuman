@@ -247,7 +247,7 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect* Effect )
 {
   if ( m_GenerateDynamicShadowMap )
   {
-    CEffectManager* l_EM = CCore::GetSingletonPtr()->GetEffectManager();
+    CEffectManager* l_EM = EffectManagerInstance;
     l_EM->SetLightViewMatrix( m_ViewShadowMap );
     l_EM->SetShadowProjectionMatrix( m_ProjectionShadowMap );
 

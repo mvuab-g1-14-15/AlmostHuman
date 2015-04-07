@@ -52,7 +52,7 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     m_TextureHeight( HandlesNode.GetIntProperty( "texture_height", 0 ) ),
     m_TextureWidth( HandlesNode.GetIntProperty( "texture_width", 0 ) )
 {
-  m_Effect = CEffectManager::GetSingletonPtr()->GetEffect( m_EffectName );
+  m_Effect = EffectManagerInstance->GetEffect( m_EffectName );
   m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( m_TechniqueName ) : 0;
 }
 
@@ -146,14 +146,14 @@ bool CEffectTechnique::BeginRender()
 
 bool CEffectTechnique::Refresh()
 {
-  m_Effect = CEffectManager::GetSingletonPtr()->GetEffect( m_EffectName );
+  m_Effect = EffectManagerInstance->GetEffect( m_EffectName );
   m_D3DTechnique = m_Effect->GetTechniqueByName( m_TechniqueName );
   return ( m_Effect != 0 && m_D3DTechnique != 0 );
 }
 
 void CEffectTechnique::SetupMatrices()
 {
-  CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
+  CEffectManager* l_pEffectManager = EffectManagerInstance;
 
   if ( m_UseProjMatrix )
   {
@@ -231,7 +231,7 @@ bool CEffectTechnique::SetupLights()
   if ( m_UseLights )
   {
     LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
-    CEffectManager* l_pEffectManager = CEffectManager::GetSingletonPtr();
+    CEffectManager* l_pEffectManager = EffectManagerInstance;
 
     // Check the number of lights
     // If the technique is rendering a deferred shader the lights has been set up

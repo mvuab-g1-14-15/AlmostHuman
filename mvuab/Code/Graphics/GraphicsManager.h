@@ -6,7 +6,7 @@
 #include <d3dx9.h>
 #include "d3dx9shape.h"
 
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 #include "Utils\Defines.h"
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
@@ -17,7 +17,7 @@ class CEffectTechnique;
 class CTexture;
 class CEngineConfig;
 
-class CGraphicsManager : public CSingleton<CGraphicsManager>
+class CGraphicsManager : public CManager
 {
 public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
@@ -25,7 +25,7 @@ public:
   CGraphicsManager();
   ~CGraphicsManager();
 
-  bool Init( HWND hWnd, CEngineConfig* aEngineConfig );
+  void Init( const std::string& Path );
   void Update();
   void Render();
   void Release();

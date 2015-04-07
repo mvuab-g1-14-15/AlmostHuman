@@ -45,7 +45,7 @@ void CGrenade::Start()
 void CGrenade::Update()
 {
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  if( CActionManager::GetSingletonPtr()->DoAction("ThrowGrenade") )
+  if( ActionManagerInstance->DoAction("ThrowGrenade") )
   {
     CCamera * l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
     if( l_CurrentCamera && !m_GrenadeThrown )
@@ -102,7 +102,7 @@ void CGrenade::Render()
     return;
 
   // Get the graphics manager
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
 
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 
@@ -110,5 +110,5 @@ void CGrenade::Render()
 
   // Set the identity
   Math::Mat44f t;
-  CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+  GraphicsInstance->SetTransform( t );
 }

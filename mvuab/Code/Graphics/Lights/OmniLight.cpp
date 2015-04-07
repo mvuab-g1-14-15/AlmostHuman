@@ -1,5 +1,5 @@
 #include "OmniLight.h"
-
+#include "Core.h"
 #include "XML/XMLTreeNode.h"
 #include "GraphicsManager.h"
 

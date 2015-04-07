@@ -28,7 +28,7 @@ void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
 {
   CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement =
     new CPoolRenderableObjectTechniqueElement( Name,
-        CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ),
+        EffectManagerInstance->GetResource( TechniqueName ),
         ROTOnRenderableObjectTechniqueManager );
   m_RenderableObjectTechniqueElements.push_back( PoolRenderableObjectTechniqueElement );
 }

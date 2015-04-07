@@ -69,7 +69,7 @@ void CPhysicMaterial::Update()
   m_Angle  += deltaTime * 0.05f;
   m_AngleMoon += deltaTime * 0.05f;
 
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
     CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
@@ -78,13 +78,13 @@ void CPhysicMaterial::Update()
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
-    CCore::GetSingletonPtr()->GetEffectManager()->Reload();
+    EffectManagerInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    ActionManagerInstance->Reload();
 
   if ( pActionManager->DoAction( "SaveActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->SaveXML( "Data/Prueba.xml" );
+    ActionManagerInstance->SaveXML( "Data/Prueba.xml" );
 
   if ( pActionManager->DoAction( "SetActionToInput" ) )
   {
@@ -104,7 +104,7 @@ void CPhysicMaterial::Update()
     sInputAction.m_sEventType = "EVENT_DOWN";
     sInputAction.m_sCode = "KEY_LCTRL";
     vecInputAction.push_back( sInputAction );
-    CCore::GetSingletonPtr()->GetActionManager()->SetAction( "SaveActionToInput", vecInputAction );
+    ActionManagerInstance->SetAction( "SaveActionToInput", vecInputAction );
   }
 
   //RAYCAST
@@ -163,7 +163,7 @@ void CPhysicMaterial::Update()
     Vect2i l_PosMouse = CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
     Vect3f l_Pos, l_Dir;
 
-    CGraphicsManager::GetSingletonPtr()->GetRay( l_PosMouse, l_Pos, l_Dir );
+    GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );
 
     CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
 

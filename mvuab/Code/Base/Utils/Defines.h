@@ -58,10 +58,13 @@
 #define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
 #define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
 
-#define CoreInstance        CCore::GetSingletonPtr()
-#define EngineInstance      CEngine::GetSingletonPtr()
-#define GraphicsInstance    CGraphicsManager::GetSingletonPtr()
-#define SoundInstance       CSoundManager::GetSingletonPtr()
+#define CoreInstance			CCore::GetSingletonPtr()
+#define EngineInstance			CEngine::GetSingletonPtr()
+#define GraphicsInstance		CCore::GetSingletonPtr()->GetGraphicsManager()
+#define SoundInstance			CSoundManager::GetSingletonPtr()
+#define EffectManagerInstance	CCore::GetSingletonPtr()->GetEffectManager()
+#define InputManagerInstance	CCore::GetSingletonPtr()->GetInputManager()
+#define ActionManagerInstance	CCore::GetSingletonPtr()->GetActionManager()
 
 #define LOG_ERROR_APPLICATION( x, ... ) CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, x, __VA_ARGS__ )
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( ELL_WARNING, x, __VA_ARGS__ )

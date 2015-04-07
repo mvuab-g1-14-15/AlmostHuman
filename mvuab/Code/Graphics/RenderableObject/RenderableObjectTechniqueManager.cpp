@@ -1,5 +1,6 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "Utils\MapManager.h"
+#include "Core.h"
 #include "Effects\EffectManager.h"
 
 #include <map>
@@ -87,7 +88,7 @@ void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const s
     const std::string& TechniqueName )
 {
   CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
-      CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+      EffectManagerInstance->GetResource( TechniqueName ) );
 
   if ( !AddResource( ROTName, l_RenderableObjectTechnique ) )
     CHECKED_DELETE( l_RenderableObjectTechnique );

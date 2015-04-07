@@ -24,24 +24,24 @@ class CMouse;
 class CKeyboard;
 class CGamePad;
 //-------------------------
-
+#include "Utils\Manager.h"
 #include "Math\Vector2.h"
 #include "Math\Vector3.h"
 
-class CInputManager : public CSingleton<CInputManager>
+class CInputManager : public CManager
 {
 public:
     // Init and End protocols
-    CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL), m_bActiveMouse(true) {}
+    CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL), m_bActiveMouse(true), CManager() {}
     virtual ~CInputManager() { Done(); }  
 
-    bool                  Init            (HWND, const Math::Vect2i& screenRes, bool exclusiveModeinMouse);
+    void                  Init            ( const std::string& path );
     void                  Done            ();
     bool                  IsOk            () const { return m_bIsOk; }
 
     // Poll input devices
-    HRESULT              Update            ();        
-
+    void              Update            ();        
+	void			  Render			(){};
 
     //--Query Input Data and States--------
     HRESULT            GetPosition                                    (INPUT_DEVICE_TYPE, Math::Vect2i&);        // will work for mouse and joystick only

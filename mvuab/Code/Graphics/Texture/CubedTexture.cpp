@@ -15,7 +15,7 @@ CCubedTexture::~CCubedTexture()
 
 bool CCubedTexture::LoadFile()
 {
-  HRESULT l_HR = D3DXCreateCubeTextureFromFile( CGraphicsManager::GetSingletonPtr()->GetDevice(),
+  HRESULT l_HR = D3DXCreateCubeTextureFromFile( GraphicsInstance->GetDevice(),
                  ( "./Data/textures/" + m_FileName ).c_str(), &m_CubeTexture );
 
   if ( l_HR != D3D_OK )
@@ -30,5 +30,5 @@ bool CCubedTexture::LoadFile()
 
 void CCubedTexture::Activate( size_t StageId )
 {
-  CGraphicsManager::GetSingletonPtr()->GetDevice()->SetTexture( StageId, m_CubeTexture );
+  GraphicsInstance->GetDevice()->SetTexture( StageId, m_CubeTexture );
 }

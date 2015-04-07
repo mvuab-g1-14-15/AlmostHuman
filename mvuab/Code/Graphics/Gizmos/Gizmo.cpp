@@ -43,7 +43,7 @@ void CGizmo::Update()
 
 void CGizmo::Render()
 {
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
 
   Math::Mat44f t = GetTransform();
 

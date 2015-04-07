@@ -4,6 +4,7 @@
 #include "Periphericals\Mouse.h"
 #include "Utils\Defines.h"
 #include "Logger\Logger.h"
+#include "EngineConfig.h"
 
 #include <string>
 
@@ -40,10 +41,11 @@ void CInputManager::Release ()
 // If present joystick will also be initialized, but is not mandatory.
 //-> IN: HWND      - handle to main application window
 //----------------------------------------------------------------------------
-bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveModeinMouse)
+void CInputManager::Init ( const std::string& path )
 {
     HRESULT hr;
-    m_hWndMain = hWnd;
+	CEngineConfig* l_EngineConfig = CEngineConfig::GetSingletonPtr();
+	m_hWndMain = l_EngineConfig->GetWindowId();
 
     CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: calling initialization");
 
@@ -58,22 +60,22 @@ bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusi
         m_pGamePad    = new CGamePad;
 
         // initialize all input device objects
-        m_bIsOk = m_pKB->Init(m_pDI, hWnd);
+        m_bIsOk = m_pKB->Init(m_pDI, m_hWndMain);
         if (m_bIsOk)
         {
-            m_bIsOk    = m_pMouse->Init(m_pDI, hWnd, screenRes, exclusiveModeinMouse);
+			m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, l_EngineConfig->GetScreenResolution(), l_EngineConfig->GetExclusiveModeInMouse());
 
             if (m_bIsOk)
             {
-                m_bIsOk = m_pGamePad->Init(screenRes);
+                m_bIsOk = m_pGamePad->Init(l_EngineConfig->GetScreenResolution());
                 m_pGamePad->Update();
                 if (m_pGamePad->IsConnected() )
                 {
-                    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: GamePad is connected");
+                    LOG_INFO_APPLICATION("InputManager:: GamePad is connected");
                 }
                 else
                 {
-                    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: GamePad is not connected");
+                    LOG_INFO_APPLICATION("InputManager:: GamePad is not connected");
                 }
             }
 
@@ -87,7 +89,7 @@ bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusi
         //throw CException(__FILE__, __LINE__, msg_error);
     }
 
-    return m_bIsOk;
+    //return m_bIsOk;
 } 
 
 
@@ -123,16 +125,16 @@ bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
 //----------------------------------------------------------------------------
 // Update all input devices
 //----------------------------------------------------------------------------
-HRESULT CInputManager::Update(void)
+void CInputManager::Update(void)
 {
     HRESULT hr;
 
-    if (!IsOk()) return E_FAIL;
+    if (!IsOk()) LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", E_FAIL);//return E_FAIL;
 
     if (m_pKB) 
     {
         if ( FAILED( hr=m_pKB->Update() ) )
-            return hr;
+            LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr);//return hr;
     }
 
     if (m_pMouse) 
@@ -140,7 +142,7 @@ HRESULT CInputManager::Update(void)
         if( m_bActiveMouse )
         {
             if ( FAILED( hr=m_pMouse->Update() ) )
-                return hr;
+                LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr);//return hr;
         }
     }
 
@@ -149,7 +151,7 @@ HRESULT CInputManager::Update(void)
         m_pGamePad->Update();
     }
 
-    return S_OK;
+    //return S_OK;
 }
 
 //----------------------------------------------------------------------------

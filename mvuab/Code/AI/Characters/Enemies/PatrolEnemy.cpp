@@ -29,7 +29,7 @@ void CPatrolEnemy::Render()
 {
   CCharacter::Render();
 
-  CGraphicsManager* l_GM = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* l_GM = GraphicsInstance;
 
   /*std::vector<Vect3f>::iterator it = m_Waypoints.begin(),
                                 it_end = m_Waypoints.end();

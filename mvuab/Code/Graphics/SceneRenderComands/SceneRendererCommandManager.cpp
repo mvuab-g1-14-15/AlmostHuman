@@ -182,7 +182,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
 
 bool CSceneRendererCommandManager::Execute()
 {
-  CGraphicsManager* gm = CCore::GetSingletonPtr()->GetGraphicsManager();
+  CGraphicsManager* gm = GraphicsInstance;
   std::vector<CSceneRendererCommand*>::iterator it =
     m_SceneRendererCommands.GetResourcesVector().begin(),
     it_end = m_SceneRendererCommands.GetResourcesVector().end();

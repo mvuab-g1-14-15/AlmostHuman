@@ -40,7 +40,7 @@ void CBillboard::Init( Math::Vect3f Position, float Size, std::string Texture )
 
   // TODO Copy the  indices and de v into the idxaddres and vtx adress
 
-  mRV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>( CGraphicsManager::GetSingletonPtr(),
+  mRV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>( GraphicsInstance,
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
   */
 }
@@ -79,7 +79,7 @@ void CBillboard::Render()
     //GraphicsInstance->GetDevice()->SetTexture( 0, m_Texture->GetDXTexture() );
     //GraphicsInstance->GetDevice()->SetFVF( TT1_VERTEX::GetFVF() );
 
-    CEffectTechnique* EffectTechnique = CEffectManager::GetSingletonPtr()->GetResource( "GenerateGBufferTechnique" );
+    CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "GenerateGBufferTechnique" );
 
     CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
     Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;

@@ -13,7 +13,7 @@
 #include "Utils\Name.h"
 #include "Timer\Timer.h"
 #include "Logger\Logger.h"
-
+#include "Utils\Manager.h"
 #include "Math\MathTypes.h"
 #include "Utils\Types.h"
 #include "Math\Color.h"
@@ -177,4 +177,8 @@ void registerBase( lua_State* m_LS )
     .def( constructor<const Math::Vect4f&>() )
   ];
 
+  module( m_LS )
+  [
+    class_<CManager>( "CManager" )
+  ];
 }
