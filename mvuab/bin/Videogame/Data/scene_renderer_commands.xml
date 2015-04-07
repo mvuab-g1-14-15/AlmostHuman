@@ -6,8 +6,11 @@
 	
 	<clear_scene color="true" depth="true" stencil="true"/>
 	<begin_scene/>
-	<enable_z_write/>
+	
 	<enable_z_test/>
+	<enable_z_write/>
+	
+	<disable_alpha_test/>
 	<disable_alpha_blend/>
 
 	<!--generate the deferred textures-->
@@ -21,10 +24,8 @@
     
     <clear_scene color="true" depth="true" stencil="true"/>
     <set_matrices/>
-	<disable_alpha_blend/>
-	<disable_alpha_test/>
-    <enable_z_write/>
-    <enable_z_test/>
+	
+
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
@@ -32,18 +33,10 @@
 		
 	<render_particules/>
     <unset_render_target render_target="deferred_multiple_render_target"/>
-	
-	<disable_z_write/>
-    <disable_z_test/>
     
-    <!--
-    <enable_z_write/>
-    <enable_z_test/>
-    <render_scene layer="alpha_blend_objects" active="true"/>
-    -->
-    <disable_alpha_blend/>
 	<disable_z_write/>
     <disable_z_test/>
+	
     <set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="LightMapTexture"/>
@@ -51,6 +44,7 @@
     
     <enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
+	
 	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
     <render_deferred_shading>
         <texture stage_id="0" name="DiffuseMapTexture"/>
@@ -59,45 +53,10 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
 	
-    <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	<render_weapon_target size="20">
 		<texture stage_id="0" name="./Data/textures/mirilla.png"/>
 	</render_weapon_target>
-	
-	<!--FILTER BLOOM
-<capture_frame_buffer>
-    <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-</capture_frame_buffer>
-
-<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
-<render_draw_quad active="true">
-    <texture stage_id="0" name="ActualFrameBuffer"/>
-</render_draw_quad>
-
-<capture_frame_buffer>
-    <dynamic_texture stage_id="0" name="BloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-</capture_frame_buffer>
-
- <gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
-    <texture stage_id="0" name="BloomFilterBuffer"/>
-</gaussian>
-
-<set_pool_renderable_objects_technique pool="draw_quad_sampler_0_pool_renderable_object_technique"/>
-<render_draw_quad active="true">
-    <texture stage_id="0" name="BloomFilterBuffer"/>
-</render_draw_quad>
-
-<capture_frame_buffer>
-    <dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-</capture_frame_buffer>
-
-<set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>
-<render_draw_quad active="true">
-    <texture stage_id="0" name="GaussianBloomFilterBuffer"/>
-    <texture stage_id="1" name="ActualFrameBuffer"/>
-</render_draw_quad>
-		FILTER BLOOM-->
-    <disable_alpha_blend/>
     <!--end pre_render-->
     
     <render_developer_info/>
