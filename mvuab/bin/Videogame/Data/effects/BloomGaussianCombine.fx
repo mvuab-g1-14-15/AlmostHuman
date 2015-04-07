@@ -5,9 +5,9 @@
 #include "globals.fxh"
 
 // Shader parameters
-float Threshold = 0.25;				// Get the threshold of what brightness level we want to glow
+float Threshold = 0.5;				// Get the threshold of what brightness level we want to glow
 
-float BloomIntensity = 2;			// Controls the Intensity of the bloom texture
+float BloomIntensity = 0.8;			// Controls the Intensity of the bloom texture
 float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
 
 float BloomSaturation = 1.5	;		// Saturation amount on bloom
