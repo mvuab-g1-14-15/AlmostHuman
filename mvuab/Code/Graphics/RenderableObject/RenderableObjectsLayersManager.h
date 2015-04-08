@@ -5,23 +5,23 @@
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "XML\XMLTreeNode.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 
 class CGraphicsManager;
 
 class CRenderableObjectsLayersManager : public
   CTemplatedVectorMapManager<CRenderableObjectsManager>,
-  public CSingleton< CRenderableObjectsLayersManager >
+  public CManager
 {
 private:
-  std::string m_FileName;
   CRenderableObjectsManager* m_DefaultRenderableObjectManager;
   CRenderableObjectsManager* GetRenderableObjectManager( CXMLTreeNode& Node );
 public:
   CRenderableObjectsLayersManager();
+  CRenderableObjectsLayersManager( CXMLTreeNode& atts);
   ~CRenderableObjectsLayersManager();
   void Destroy();
-  void Load( const std::string& FileName );
+  void Init();
   void Reload();
   void Update();
   void Render();

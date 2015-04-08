@@ -21,7 +21,7 @@
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
     const std::string& CoreName ) :
   m_CalModel( 0 ),
-  m_AnimatedCoreModel( CAnimatedModelsManager::GetSingletonPtr()->GetCore( CoreName ) ),
+  m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) ),
   m_BlendTime( 0.3f ),
   m_LodLevel( 1.0f ),
   m_CurrentAnimationId( 5 ),
@@ -38,7 +38,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
 CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
   : CRenderableObject( atts  )
   , m_CalModel( 0 )
-  , m_AnimatedCoreModel( CAnimatedModelsManager::GetSingletonPtr()->GetCore( atts.GetPszProperty("core", "" ) ) )
+  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( atts.GetPszProperty("core", "" ) ) )
   , m_BlendTime( 0.3f )
   , m_LodLevel( 1.0f )
   , m_CurrentAnimationId( 1 )
@@ -49,9 +49,9 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
   , m_ChangeAnimation(  )
 {
     std::string l_TechniqueName =
-        CRenderableObjectTechniqueManager::GetSingletonPtr()->GetRenderableObjectTechniqueNameByVertexType(
+        ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(
       CAL3D_HW_VERTEX::GetVertexType() );
-    m_RenderableObjectTechnique = CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
+    m_RenderableObjectTechnique = ROTMInstance->GetResource( l_TechniqueName );
     Initialize();
 }
 CAnimatedInstanceModel::~CAnimatedInstanceModel()

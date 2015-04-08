@@ -116,7 +116,7 @@ void CLogRender::ToggleVisibility()
 void CLogRender::Render( Math::CColor color )
 {
   CGraphicsManager* renderManager = GraphicsInstance;
-  CFontManager* fm = CFontManager::GetSingletonPtr();
+  CFontManager* fm = FontInstance;
   CLogger* pLogger = CLogger::GetSingletonPtr()->GetSingletonPtr();
 
   if ( m_bIsVisible )

@@ -81,6 +81,14 @@ CGraphicsManager::CGraphicsManager()
 {
 }
 
+CGraphicsManager::CGraphicsManager( CXMLTreeNode &atts )
+  : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA DE XML DE LAS VARIABLES
+	*/
+}
+
 CGraphicsManager::~CGraphicsManager()
 {
   Release();
@@ -209,9 +217,9 @@ void CGraphicsManager::SetupMatrices()
       l_CameraPosition );
 }
 
-void CGraphicsManager::Init( const std::string& Path)
+void CGraphicsManager::Init()
 { 
-  CEngineConfig* aEngineConfig = CEngineConfig::GetSingletonPtr();  
+  CEngineConfig* aEngineConfig = EngineConfigInstance;  
   m_WindowId = aEngineConfig->GetWindowId();
   Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
   mWidth = lScreenResolution.x;
@@ -1215,7 +1223,7 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
                    &worldMatrix );
   // To Debug uncomment this line
-  //CFontManager::GetSingletonPtr()->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
+  //FontInstance->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
   // "Light" );
   return Math::Vect2f( l_OutPosition.x , l_OutPosition.y );
 }

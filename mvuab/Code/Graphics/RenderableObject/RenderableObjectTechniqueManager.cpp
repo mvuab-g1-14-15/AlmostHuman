@@ -2,14 +2,23 @@
 #include "Utils\MapManager.h"
 #include "Core.h"
 #include "Effects\EffectManager.h"
+#include "EngineConfig.h"
 
 #include <map>
 #include <sstream>
 
 CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager()
+: CManager()
 {
 }
 
+CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager( CXMLTreeNode& atts)
+	:CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA XML
+	*/
+}
 CRenderableObjectTechniqueManager::~CRenderableObjectTechniqueManager()
 {
   Destroy();
@@ -21,17 +30,16 @@ void CRenderableObjectTechniqueManager::Destroy()
   CMapManager::Destroy();
 }
 
-void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
+void CRenderableObjectTechniqueManager::Init()
 {
   CXMLTreeNode l_File;
-
-  if ( !l_File.LoadFile( FileName.c_str() ) )
+  mConfigPath = EngineConfigInstance->GetRenderableObjectTechniquePath();
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
   {
-    LOG_ERROR_APPLICATION( "ERROR reading the file %s", FileName.c_str() );
+    LOG_ERROR_APPLICATION( "ERROR reading the file %s", mConfigPath.c_str() );
     return;
   }
 
-  m_FileName = FileName;
   CXMLTreeNode  TreeNode = l_File["renderable_object_techniques"];
 
   if ( TreeNode.Exists() )
@@ -71,8 +79,7 @@ void CRenderableObjectTechniqueManager::Load( const std::string& FileName )
   }
   else
   {
-    LOG_ERROR_APPLICATION(
-                                           "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", FileName.c_str() );
+    LOG_ERROR_APPLICATION( "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", mConfigPath.c_str() );
   }
 }
 
@@ -97,5 +104,5 @@ void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const s
 void CRenderableObjectTechniqueManager::ReLoad()
 {
   Destroy();
-  Load( m_FileName );
+  Init();
 }

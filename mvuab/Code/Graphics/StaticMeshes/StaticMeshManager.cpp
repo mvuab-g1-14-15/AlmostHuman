@@ -2,8 +2,15 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "ActionManager.h"
+#include "EngineConfig.h"
 
-CStaticMeshManager::CStaticMeshManager() : m_FileName("")
+CStaticMeshManager::CStaticMeshManager() : CManager()
+{
+}
+
+
+CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts)
+: CManager(atts)
 {
 }
 
@@ -12,22 +19,22 @@ CStaticMeshManager::~CStaticMeshManager()
     Destroy();
 }
 
-bool CStaticMeshManager::Load(const std::string &FileName)
+void CStaticMeshManager::Init()
 {
-    m_FileName = FileName;
+	mConfigPath = EngineConfigInstance->GetStaticMeshesPath();
     
     CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_FileName.c_str()))
+    if (!newFile.LoadFile(mConfigPath.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-        return false;
+		LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
+        return;
     }
 
     CXMLTreeNode node = newFile["static_meshes"];
     if(!node.Exists())
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
-        return false;
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
+        return;
     }
 
     for(int i = 0; i < node.GetNumChildren(); i++)
@@ -46,11 +53,11 @@ bool CStaticMeshManager::Load(const std::string &FileName)
             AddResource(name, l_StaticMesh);
     }
     
-    return true;
+	//return true;
 }
 
-bool CStaticMeshManager::Reload()
+void CStaticMeshManager::Reload()
 {
     Destroy();
-    return Load(m_FileName);
+    Init();
 }

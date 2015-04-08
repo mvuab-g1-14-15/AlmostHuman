@@ -11,7 +11,7 @@
 #include "Math\AABB.h"
 
 CInstanceMesh::CInstanceMesh( const std::string& Name,
-                              const std::string& CoreName ): m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
+                              const std::string& CoreName ): m_pStaticMesh( SMeshMInstance->GetResource(
                                       CoreName ) ), CRenderableObject()
 {
   if ( !m_pStaticMesh )
@@ -20,7 +20,7 @@ CInstanceMesh::CInstanceMesh( const std::string& Name,
   SetName( Name );
 }
 CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts )
-  : CRenderableObject( atts ), m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
+  : CRenderableObject( atts ), m_pStaticMesh( SMeshMInstance->GetResource(
         atts.GetPszProperty( "core", "no_staticMesh" ) ) )
 {
 }

@@ -2,6 +2,7 @@
 #include "Effect.h"
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
+#include "EngineConfig.h"
 
 CEffectManager::CEffectManager()
   : m_WorldMatrix( Math::m44fIDENTITY ),
@@ -16,6 +17,13 @@ CEffectManager::CEffectManager()
 {
 }
 
+CEffectManager::CEffectManager( CXMLTreeNode &atts)
+  : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA DE XML
+	*/
+}
 CEffectManager::~CEffectManager()
 {
   CleanUp();
@@ -119,10 +127,10 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
   SetCameraEye( CameraEye );
 }
 
-void CEffectManager::Init( const std::string& FileName )
+void CEffectManager::Init()
 {
   // Obtain the filename
-  m_Filename = FileName;
+	m_Filename = EngineConfigInstance->GetEffectsPath();
   // Check if the file exist
   CXMLTreeNode newFile;
 
@@ -201,5 +209,5 @@ void CEffectManager::Reload()
 {
   CleanUp();
   Destroy();
-  Init( m_Filename );
+  Init();
 }

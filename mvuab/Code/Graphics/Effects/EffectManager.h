@@ -15,6 +15,7 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
 {
 public:
   CEffectManager();
+  CEffectManager( CXMLTreeNode &atts);
   ~CEffectManager();
 
   const Math::Mat44f& GetWorldMatrix() const;
@@ -37,7 +38,7 @@ public:
   void SetShadowProjectionMatrix( const Math::Mat44f& Matrix );
   void SetCameraEye( const Math::Vect3f& CameraEye );
 
-  void Init( const std::string& FileName );
+  void Init();
   void Reload();
 
   void Update() {};

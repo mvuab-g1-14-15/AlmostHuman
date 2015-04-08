@@ -1,11 +1,20 @@
 #include "RenderableObjectsLayersManager.h"
 #include "StaticMeshes\InstanceMesh.h"
 #include "AnimatedModels\AnimatedInstanceModel.h"
+#include "EngineConfig.h"
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
-    : m_DefaultRenderableObjectManager(0)
+    : m_DefaultRenderableObjectManager(0), CManager()
 {
 
+}
+
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(CXMLTreeNode& atts)
+    : m_DefaultRenderableObjectManager(0), CManager(atts)
+{
+	/* TODO RAUL
+	LECTURA XML
+	*/
 }
 
 CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
@@ -16,14 +25,14 @@ void CRenderableObjectsLayersManager::Destroy()
 {
   CTemplatedVectorMapManager::Destroy();
 }
-void CRenderableObjectsLayersManager::Load( const std::string& FileName )
+void CRenderableObjectsLayersManager::Init()
 {
-  m_FileName = FileName;
+  mConfigPath = EngineConfigInstance->GetRenderableObjectsPath();
   CXMLTreeNode l_File;
 
-  if ( !l_File.LoadFile( m_FileName.c_str() ) )
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
   {
-    std::string err = "ERROR reading the file " + FileName;
+    std::string err = "ERROR reading the file " + mConfigPath;
 
     MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
     exit( EXIT_FAILURE );
@@ -85,7 +94,7 @@ void CRenderableObjectsLayersManager::Load( const std::string& FileName )
 void CRenderableObjectsLayersManager::Reload()
 {
   Destroy();
-  Load( m_FileName );
+  Init();
 }
 void CRenderableObjectsLayersManager::Update()
 {

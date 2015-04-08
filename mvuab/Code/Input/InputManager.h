@@ -33,9 +33,10 @@ class CInputManager : public CManager
 public:
     // Init and End protocols
     CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL), m_bActiveMouse(true), CManager() {}
+	CInputManager( CXMLTreeNode &atts );
     virtual ~CInputManager() { Done(); }  
 
-    void                  Init            ( const std::string& path );
+    void                  Init            ();
     void                  Done            ();
     bool                  IsOk            () const { return m_bIsOk; }
 

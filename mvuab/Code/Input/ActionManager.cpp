@@ -1,11 +1,20 @@
 #include "ActionManager.h"
 #include "XML\XMLTreeNode.h"
 #include "Core.h"
+#include "EngineConfig.h"
 
 #include <Windows.h>
 
 CActionManager::CActionManager(): CManager()
 {
+}
+
+CActionManager::CActionManager( CXMLTreeNode& atts )
+ : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA XML
+	*/
 }
 
 CActionManager::~CActionManager()
@@ -17,10 +26,10 @@ void CActionManager::Destroy()
 {
     m_mActions.clear();
 }
-void CActionManager::Init( const std::string &xmlFile )
+void CActionManager::Init( )
 {
     m_pInputManager = InputManagerInstance;
-    m_ActionsPath = xmlFile;
+    m_ActionsPath = EngineConfigInstance->GetInputPath();
     LoadXML();
 }
 

@@ -34,10 +34,10 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 #endif
 
   std::string l_EffectTechName =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
+    ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(
       SCREEN_COLOR_VERTEX::GetVertexType() );
   CRenderableObjectTechnique* l_ROT =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_EffectTechName );
+    ROTMInstance->GetResource( l_EffectTechName );
 
   CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
   uint32 width, height;

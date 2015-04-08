@@ -3,12 +3,18 @@
 #include "AnimatedInstanceModel.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
+#include "EngineConfig.h"
 
 CAnimatedModelsManager::CAnimatedModelsManager()
+: CManager()
 {
 	CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
 
+CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts)
+	: CManager(atts)
+{
+}
 CAnimatedModelsManager::~CAnimatedModelsManager()
 {
     Destroy();
@@ -41,21 +47,21 @@ CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &
     return 0;
 }
 
-void CAnimatedModelsManager::Load(const std::string &Filename)
+void CAnimatedModelsManager::Init()
 {
-    m_FileName = Filename;
+	mConfigPath = EngineConfigInstance->GetAnimatedModelsPath();
     
     CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_FileName.c_str()))
+    if (!newFile.LoadFile(mConfigPath.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+        LOG_ERROR_APPLICATION("CAnimatedModelManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
         return;
     }
 
     CXMLTreeNode node = newFile["animated_models"];
     if(!node.Exists())
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CAnimatedModelManager::Load Tag \"%s\" no existe",  "animated_models");
+        LOG_ERROR_APPLICATION("CAnimatedModelManager::Load Tag \"%s\" no existe",  "animated_models");
         return;
     }
 

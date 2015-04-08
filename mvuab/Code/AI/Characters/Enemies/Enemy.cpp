@@ -32,7 +32,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
+  CRenderableObjectsManager* l_ROM = ROMLInstance->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
   CPhysicsManager::GetSingletonPtr()->ReleasePhysicController( m_Controller );
 
@@ -131,7 +131,7 @@ void CEnemy::Render()
 
 void CEnemy::AddMesh( std::string MeshName )
 {
-  CRenderableObjectsManager* l_ROM = CRenderableObjectsLayersManager::GetSingletonPtr()->GetResource( "characters" );
+  CRenderableObjectsManager* l_ROM = ROMLInstance->GetResource( "characters" );
 
   m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   l_ROM->AddResource( m_Name, m_pRenderableObject );

@@ -1,0 +1,9 @@
+<managers>
+	<graphics_manager file_config=".Data/config.xml"/>
+	<input_manager file_config=".Data/config.xml"/>
+	<action_manager file_config=".Data/config.xml"/>
+	<effects_manager file_config=".Data/config.xml"/>
+	<lights_manager file_config=".Data/config.xml"/>
+	<static_mesh_manager file_config=".Data/config.xml"/>
+	<phisics_manager file_config=".Data/config.xml"/>
+</managers>

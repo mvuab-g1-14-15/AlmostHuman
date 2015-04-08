@@ -15,6 +15,7 @@
 
 //CORE
 #include "Core.h"
+#include "EngineConfig.h"
 
 //GRAPHICS
 #include "GraphicsManager.h"
@@ -90,7 +91,7 @@ void CPlayerPhysicProcess::Update()
   CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
+    SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
   {
@@ -115,11 +116,11 @@ void CPlayerPhysicProcess::Update()
     // NOTE this must be in this order
     EffectManagerInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
-    CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
-    CStaticMeshManager::GetSingletonPtr()->Reload();
-    CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
+    ROTMInstance->ReLoad();
+    SMeshMInstance->Reload();
+    ROMLInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
-    CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
+    SRCMInstance->ReLoad();
   }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
@@ -285,7 +286,7 @@ void CPlayerPhysicProcess::Init()
   //CPhysicActor*  l_AseMeshActor;
 
   //CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
-  //CStaticMeshManager* l_StaticMeshManager = CCore::GetSingletonPtr()->GetStaticMeshManager();
+  //CStaticMeshManager* l_StaticMeshManager = SMeshMInstance;
 
   //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
   //{

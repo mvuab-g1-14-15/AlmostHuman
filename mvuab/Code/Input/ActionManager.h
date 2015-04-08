@@ -36,9 +36,10 @@ class CActionManager : public CManager
 {
 public:
     CActionManager  ();
+	CActionManager  ( CXMLTreeNode& atts );
     ~CActionManager ();
 
-    void Init       ( const std::string &xmlFile );
+    void Init       ( );
  
     bool Reload     ();
     bool LoadXML    ();

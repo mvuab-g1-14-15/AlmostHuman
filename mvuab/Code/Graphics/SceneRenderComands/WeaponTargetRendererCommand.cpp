@@ -10,16 +10,17 @@
 #include "Effects\Effect.h"
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
+#include "Core.h"
 
 CWeaponTargetRendererCommand::CWeaponTargetRendererCommand( CXMLTreeNode& atts ) 
 	: CDrawQuadRendererCommand( atts )
 	, mGizmoSize(atts.GetIntProperty("size", 20 ))
 {
   std::string l_TechniqueName =
-    CRenderableObjectTechniqueManager::GetSingletonPtr()->GetRenderableObjectTechniqueNameByVertexType(
+    ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(
       SCREEN_COLOR_VERTEX::GetVertexType() );
   m_RenderableObjectTechnique =
-    CRenderableObjectTechniqueManager::GetSingletonPtr()->GetResource( l_TechniqueName );
+    ROTMInstance->GetResource( l_TechniqueName );
 }
 
 void CWeaponTargetRendererCommand::Execute( CGraphicsManager& GM )

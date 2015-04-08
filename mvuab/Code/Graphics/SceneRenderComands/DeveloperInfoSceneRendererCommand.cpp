@@ -16,7 +16,7 @@ CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode
 
 void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
 {
-  CFontManager* FM = CFontManager::GetSingletonPtr();
+  CFontManager* FM = FontInstance;
   int32 FontId = FM->GetTTF_Id( "Consolas" );
   uint32 width, height;
   GM.GetWidthAndHeight( width, height );

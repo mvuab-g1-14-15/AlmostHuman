@@ -285,7 +285,7 @@ void CStaticMesh::Render( CGraphicsManager* GM )
 bool CStaticMesh::GetRenderableObjectTechnique()
 {
   CRenderableObjectTechniqueManager* l_ROTM =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+    ROTMInstance;
   bool l_Ok = true;
 
   for ( size_t i = 0; i < m_VertexTypes.size(); ++i )

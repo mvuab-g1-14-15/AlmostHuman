@@ -130,7 +130,7 @@ void CCore::Render()
 }
 void CCore::CreateManagers()
 {
-  CEngineConfig* lEngineConfig = CEngineConfig::GetSingletonPtr();
+  CEngineConfig* lEngineConfig = EngineConfigInstance;
 
   if ( lEngineConfig->GetEnableConsole() )
     m_pConsole = new CConsole( TRUE );
@@ -162,7 +162,7 @@ void CCore::CreateManagers()
 
 void CCore::InitManagers()
 {
-  CEngineConfig* l_EngineConfig = CEngineConfig::GetSingletonPtr();
+  CEngineConfig* l_EngineConfig = EngineConfigInstance;
 
   if ( l_EngineConfig->GetEnableConsole() )
   {
@@ -175,20 +175,17 @@ void CCore::InitManagers()
     m_pConsole->SetFullSize();
   }
 
-  m_pGraphicsManager->Init( "" );
-  m_pEffectManager->Init( l_EngineConfig->GetEffectsPath() );
-  m_pInputManager->Init( "" );
-  m_pActionManager->Init( l_EngineConfig->GetInputPath() );
-  m_pLanguageManager->SetXmlPaths( l_EngineConfig->GetLanguages() );
-  m_pLanguageManager->LoadXMLs();
-  m_pLanguageManager->SetCurrentLanguage( l_EngineConfig->GetCurrentLanguage() );
-  m_pFontManager->Init( m_pGraphicsManager );
-  m_pFontManager->LoadTTFs( l_EngineConfig->GetFontsPath() );
-  m_pRenderableObjectTechniqueManager->Load( l_EngineConfig->GetRenderableObjectTechniquePath() );
-  m_pStaticMeshManager->Load( l_EngineConfig->GetStaticMeshesPath() );
-  m_pAnimatedModelsManager->Load( l_EngineConfig->GetAnimatedModelsPath() );
-  m_pRenderableObjectsLayersManager->Load( l_EngineConfig->GetRenderableObjectsPath() );
-  m_pSceneRendererCommandManager->Load( l_EngineConfig->GetSceneRendererCommandPath() );
+  m_pGraphicsManager->Init();
+  m_pEffectManager->Init();
+  m_pInputManager->Init();
+  m_pActionManager->Init();
+  m_pLanguageManager->Init();
+  m_pFontManager->Init();
+  m_pRenderableObjectTechniqueManager->Init();
+  m_pStaticMeshManager->Init();
+  m_pAnimatedModelsManager->Init();
+  m_pRenderableObjectsLayersManager->Init();
+  m_pSceneRendererCommandManager->Init();
   m_pCameraManager->Init();
   m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
                                Math::Vect3f( 15.0f, 2.0f, 0.0f ),

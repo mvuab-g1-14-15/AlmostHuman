@@ -35,7 +35,7 @@ void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
 
 void CPoolRenderableObjectTechnique::Apply()
 {
-  CRenderableObjectTechniqueManager* l_ROTM = CRenderableObjectTechniqueManager::GetSingletonPtr();
+  CRenderableObjectTechniqueManager* l_ROTM = ROTMInstance;
 
   for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
   {

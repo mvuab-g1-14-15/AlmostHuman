@@ -4,16 +4,20 @@
 
 #include <string>
 #include "Utils\SingletonPattern.h"
+#include "XML/XMLTreeNode.h"
 
 
 class CManager
 {
 public:
-  CManager(){};
-  virtual ~CManager(){};
-  virtual void Init( const std::string& Path) = 0;
+  CManager(){}
+  CManager( const CXMLTreeNode &atts) : mConfigPath(atts.GetPszProperty( "config_file", "" )) {}
+  virtual ~CManager(){}
+  virtual void Init() = 0;
   virtual void Update() = 0;
   virtual void Render() = 0;
+protected:
+	std::string mConfigPath;
 };
 
 #endif // MANAGER_H

@@ -128,7 +128,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
    }
 
     Math::Vect2i lScreenPosition = lEngineConfig->GetScreenPosition();
-    Math::Vect2i lScreenResolution = lEngineConfig->GetScreenResolution();
+	Math::Vect2i lScreenSize	 = lEngineConfig->GetScreenSize();
     HWND hWnd = CreateWindow
                 (
                   APPLICATION_NAME,
@@ -136,8 +136,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                   WS_OVERLAPPEDWINDOW,
                   lScreenPosition.x,
                   lScreenPosition.y,
-                  lScreenResolution.x,
-                  lScreenResolution.y,
+                  lScreenSize.x,
+                  lScreenSize.y,
                   NULL,
                   NULL,
                   wc.hInstance,

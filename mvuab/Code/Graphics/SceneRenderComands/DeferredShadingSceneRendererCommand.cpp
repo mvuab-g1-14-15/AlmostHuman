@@ -22,10 +22,10 @@ CDeferredShadingSceneRendererCommand::CDeferredShadingSceneRendererCommand(
   : CStagedTexturedRendererCommand( atts )
 {
   std::string l_TechniqueName =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
+    ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(
       SCREEN_COLOR_VERTEX::GetVertexType() );
   m_RenderableObjectTechnique =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_TechniqueName );
+    ROTMInstance->GetResource( l_TechniqueName );
 }
 
 CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()

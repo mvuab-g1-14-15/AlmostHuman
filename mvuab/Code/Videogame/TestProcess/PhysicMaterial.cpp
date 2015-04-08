@@ -72,7 +72,7 @@ void CPhysicMaterial::Update()
   CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
+    SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
@@ -229,7 +229,7 @@ void CPhysicMaterial::Render()
   unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
   unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
   CGPUStatics::GetSingletonPtr()->SetToZero();
-  CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText( 300, 0, Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f, d );
+  FontInstance->DrawDefaultText( 300, 0, Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f, d );
   // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 

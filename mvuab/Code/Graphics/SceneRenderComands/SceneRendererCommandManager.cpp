@@ -33,7 +33,7 @@
 #include "SceneRenderComands\RenderDebugCommand.h"
 #include "SceneRenderComands\RenderGizmosCommand.h"
 #include "XML\XMLTreeNode.h"
-
+#include "EngineConfig.h"
 #include "Core.h"
 #include "GraphicsManager.h"
 
@@ -43,7 +43,16 @@
 
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
+: CManager()
 {
+}
+
+CSceneRendererCommandManager::CSceneRendererCommandManager(CXMLTreeNode& atts)
+: CManager(atts)
+{
+	/*TODO RAUL
+	LEER XML
+	*/
 }
 
 CSceneRendererCommandManager::~CSceneRendererCommandManager()
@@ -63,7 +72,7 @@ std::string CSceneRendererCommandManager::GetNextName()
   return l_Str.str();
 }
 
-bool CSceneRendererCommandManager::Load( const std::string& FileName )
+void CSceneRendererCommandManager::Init()
 {
   ObjectFactory1<CSceneRendererCommand, CXMLTreeNode, std::string > CommandFactory;
   // Register all the commands with the object factory class
@@ -133,13 +142,15 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
                            Type2Type<CRenderGizmosCommand>( ) );
   CXMLTreeNode l_File;
 
-  if ( !l_File.LoadFile( FileName.c_str() ) )
+  mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();
+
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
   {
-    const std::string& lMsgError = "Error reading the file " + FileName;
+    const std::string& lMsgError = "Error reading the file " + mConfigPath;
     FATAL_ERROR( lMsgError.c_str() );
   }
 
-  m_FileName = FileName;
+  
   CXMLTreeNode  TreeNode = l_File["scene_renderer_commands"];
 
   if ( TreeNode.Exists() )
@@ -177,7 +188,7 @@ bool CSceneRendererCommandManager::Load( const std::string& FileName )
     }
   }
 
-  return true;
+//  return true;
 }
 
 bool CSceneRendererCommandManager::Execute()
@@ -193,8 +204,8 @@ bool CSceneRendererCommandManager::Execute()
   return true;
 }
 
-bool CSceneRendererCommandManager::ReLoad()
+void CSceneRendererCommandManager::ReLoad()
 {
   CleanUp();
-  return Load( m_FileName );
+  Init();
 }

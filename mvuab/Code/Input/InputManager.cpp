@@ -8,6 +8,14 @@
 
 #include <string>
 
+
+CInputManager::CInputManager( CXMLTreeNode &atts)
+  : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA XML
+	*/
+}
 //----------------------------------------------------------------------------
 // Finalize data
 //----------------------------------------------------------------------------
@@ -41,11 +49,10 @@ void CInputManager::Release ()
 // If present joystick will also be initialized, but is not mandatory.
 //-> IN: HWND      - handle to main application window
 //----------------------------------------------------------------------------
-void CInputManager::Init ( const std::string& path )
+void CInputManager::Init ()
 {
     HRESULT hr;
-	CEngineConfig* l_EngineConfig = CEngineConfig::GetSingletonPtr();
-	m_hWndMain = l_EngineConfig->GetWindowId();
+	m_hWndMain = EngineConfigInstance->GetWindowId();
 
     CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: calling initialization");
 
@@ -63,11 +70,11 @@ void CInputManager::Init ( const std::string& path )
         m_bIsOk = m_pKB->Init(m_pDI, m_hWndMain);
         if (m_bIsOk)
         {
-			m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, l_EngineConfig->GetScreenResolution(), l_EngineConfig->GetExclusiveModeInMouse());
+			m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, EngineConfigInstance->GetScreenResolution(), EngineConfigInstance->GetExclusiveModeInMouse());
 
             if (m_bIsOk)
             {
-                m_bIsOk = m_pGamePad->Init(l_EngineConfig->GetScreenResolution());
+                m_bIsOk = m_pGamePad->Init(EngineConfigInstance->GetScreenResolution());
                 m_pGamePad->Update();
                 if (m_pGamePad->IsConnected() )
                 {

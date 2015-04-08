@@ -23,9 +23,10 @@ public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
 
   CGraphicsManager();
+  CGraphicsManager( CXMLTreeNode &atts );
   ~CGraphicsManager();
 
-  void Init( const std::string& Path );
+  void Init();
   void Update();
   void Render();
   void Release();

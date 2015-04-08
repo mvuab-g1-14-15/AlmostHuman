@@ -63,7 +63,7 @@ void CAStarProcess::Update()
   CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
+    SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
     CCore::GetSingletonPtr()->GetScriptManager()->Reload();
@@ -73,10 +73,10 @@ void CAStarProcess::Update()
     // NOTE this must be in this order
     EffectManagerInstance->Reload();
     CLightManager::GetSingletonPtr()->ReLoad();
-    CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
-    CStaticMeshManager::GetSingletonPtr()->Reload();
-    CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
-    CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
+    ROTMInstance->ReLoad();
+    SMeshMInstance->Reload();
+    ROMLInstance->Reload();
+    SRCMInstance->ReLoad();
   }
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )

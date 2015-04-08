@@ -7,7 +7,7 @@ CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesScen
   CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
 {
   CRenderableObjectTechniqueManager* l_ROTManager =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager();
+    ROTMInstance;
   m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
                                       atts.GetPszProperty( "pool", "" ) );
 }
