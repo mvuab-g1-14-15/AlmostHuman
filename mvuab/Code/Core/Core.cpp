@@ -31,6 +31,7 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
 #include <iostream>
+#include "SoundManager.h"
 
 CCore::CCore()
   : m_pTextureManager( 0 )
@@ -87,6 +88,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pParticleManager );
   CHECKED_DELETE( m_pGizmosManager );
   CHECKED_DELETE( m_pConsole );
+  CHECKED_DELETE( m_pSoundManager );
 }
 
 void CCore::Init( HWND aWindowId )
@@ -115,6 +117,8 @@ void CCore::Update()
   m_pGizmosManager->Update();
 
   m_pBillboard->Update();
+
+  m_pSoundManager->Update( m_pTimer->GetElapsedTime() );
 
   m_pRenderableObjectsLayersManager->GetResource( "solid" )->Update();
 
@@ -158,6 +162,7 @@ void CCore::CreateManagers()
   m_pBillboard = new CBillboard( );
   m_pParticleManager = new CParticleManager();
   m_pGizmosManager = new CGizmosManager();
+  m_pSoundManager = new CSoundManager();
 }
 
 void CCore::InitManagers()
@@ -210,6 +215,7 @@ void CCore::InitManagers()
   m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, l_EngineConfig->GetBillboardTexturePath() );
   m_pParticleManager->Init( l_EngineConfig->GetParticlesPath() );
   m_pGizmosManager->Init();
+  m_pSoundManager->Init( l_EngineConfig->GetSoundPath() );
 }
 
 void CCore::Trace( const std::string& TraceStr )
