@@ -41,16 +41,6 @@ void CEngine::Render()
     //m_pCore->GetSceneRendererCommandManager()->Execute();
     //m_RenderNow = m_RenderTime;
 
-    m_RenderTime = m_pCore->GetTimer()->GetElapsedTime();
-    float l_OldTime = timeGetTime() * 0.001f;
-
-    while(m_RenderTime < m_RenderTarget)
-    {
-        float l_newTime = timeGetTime() * 0.001f;
-        m_RenderTime += l_newTime - l_OldTime;
-        l_OldTime = l_newTime;
-    }
-
     m_pCore->GetSceneRendererCommandManager()->Execute();
 }
 
