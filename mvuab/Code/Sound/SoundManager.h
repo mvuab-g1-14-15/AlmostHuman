@@ -68,23 +68,23 @@ class CSoundManager : public CSingleton<CSoundManager>
         bool    PlayAction3D    (const std::string& action, const Math::Vect3f& position);
         
         //-----SOURCE FUNCTIONS----------------------------
-        unsigned int	CreateSource        (); 
-        bool            DeleteSource        (unsigned int source);
+        int 	CreateSource        (); 
+        bool    DeleteSource        (unsigned int source);
 
-        bool            PlaySource2D        (unsigned int source, const std::string& action, bool loop);
-        bool            PlaySource3D        (unsigned int source, const std::string& action, bool loop);
+        bool    PlaySource2D        (unsigned int source, const std::string& action, bool loop);
+        bool    PlaySource3D        (unsigned int source, const std::string& action, bool loop);
 
-        bool            PauseSource         (unsigned int source);
-        bool            StopSource          (unsigned int source);
+        bool    PauseSource         (unsigned int source);
+        bool    StopSource          (unsigned int source);
 
-        bool            SetSourceGain       (unsigned int source, float inGain);
-        bool            GetSourceGain       (unsigned int source, float& outGain);
+        bool    SetSourceGain       (unsigned int source, float inGain);
+        bool    GetSourceGain       (unsigned int source, float& outGain);
 
-        bool            SetSourcePosition   (unsigned int source, const Math::Vect3f& inPosition);
-        bool            GetSourcePosition   (unsigned int source, Math::Vect3f& outPosition);
+        bool    SetSourcePosition   (unsigned int source, const Math::Vect3f& inPosition);
+        bool    GetSourcePosition   (unsigned int source, Math::Vect3f& outPosition);
 
-        bool            SetSourceVelocity   (unsigned int source, const Math::Vect3f& inVelocity);
-        bool            GetSourceVelocity   (unsigned int source, Math::Vect3f& outVelocity);
+        bool    SetSourceVelocity   (unsigned int source, const Math::Vect3f& inVelocity);
+        bool    GetSourceVelocity   (unsigned int source, Math::Vect3f& outVelocity);
         
         //-----LISTENER FUNCTIONS-------------------------
         void    SetListenerPosition     (const Math::Vect3f& inPosition);

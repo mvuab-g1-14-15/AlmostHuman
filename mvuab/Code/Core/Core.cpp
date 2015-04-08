@@ -105,12 +105,12 @@ void CCore::Update()
   m_pInputManager->Update();
   m_pActionManager->Update();
 
-  m_pPhysicsManager->Update( deltaTime );
+  m_pPhysicsManager->Update( m_pTimer->GetElapsedTime() );
   m_pEnemyManager->Update();
 
   m_pCameraManager->Update();
 
-  m_pParticleManager->Update( deltaTime );
+  m_pParticleManager->Update( m_pTimer->GetElapsedTime() );
 
   m_pGizmosManager->Update();
 

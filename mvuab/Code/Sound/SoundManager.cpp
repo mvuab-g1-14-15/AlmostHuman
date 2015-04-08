@@ -30,15 +30,22 @@ bool CSoundManager::LoadSounds(const std::string &l_XmlPath)
     CXMLTreeNode xmlNodes = newFile["sounds"];
     if(!xmlNodes.Exists())
     {
-        LOG_ERROR_APPLICATION("CSoundManager::Load Can't read tag sounds");
+        LOG_ERROR_APPLICATION("CSoundManager::Load Can't read tag sounds\n");
         newFile.Done();
         return false;
     }
 
     for(int i = 0; i < xmlNodes.GetNumChildren(); ++i)
     {
-        std::string l_SoundName(xmlNodes(i).GetPszProperty("name", "no_name"));
-        std::string l_SoundPath(xmlNodes(i).GetPszProperty("path", "no_path"));
+        std::string l_SoundName(xmlNodes(i).GetPszProperty("name", ""));
+        std::string l_SoundPath(xmlNodes(i).GetPszProperty("path", ""));
+
+        if(l_SoundName != "" && l_SoundPath != "")
+        {
+            tIdBuffer buffer;
+            if(_loadSound(l_SoundPath, buffer)) m_Buffers.insert(std::pair<tAction, tIdBuffer>(l_SoundName, buffer));
+            else LOG_ERROR_APPLICATION("CSoundManager::Load Can't load sound: %s\n", l_SoundName.c_str());
+        }
     }
 
     newFile.Done();
@@ -52,74 +59,224 @@ void CSoundManager::Update(float delatTime)
 
 void CSoundManager::Reset()
 {
+    Stop();
+    _clear();
 }
 
 void CSoundManager::Pause()
 {
+    for(unsigned int i = 0; i < m_Sources.size(); ++i)
+    {
+        alSourcePause(m_Sources[i].m_uSource);
+    }
 }
 
 void CSoundManager::Stop()
 {
+    for(unsigned int i = 0; i < m_Sources.size(); ++i)
+    {
+        alSourceStop(m_Sources[i].m_uSource);
+    }
 }
 
 void CSoundManager::SetGain(float gain)
 {
+    alListenerf(AL_GAIN, gain);
 }
 
 float CSoundManager::GetGain()
 {
-    return 0.0f;
+    float l_Gain = 0.0f;
+    alGetListenerf(AL_GAIN, &l_Gain);
+
+    return l_Gain;
 }
 
 //---------ACTION FUNCTIONS-------------------------------
 bool CSoundManager::PlayAction2D(const std::string& action)
 {
+    if(!m_bSoundON) return false;
+
+    std::map<tAction, tIdBuffer>::iterator it = m_Buffers.find(action);
+
+    if(it == m_Buffers.end())
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlayAction2D Action %s not found\n", action.c_str());
+        return false;
+    }
+
+    int l_SourceIndex = _getSource(false);
+    if(l_SourceIndex < 0) return false;
+
+    ALfloat l_SourcePosition[3] = { 0.0f, 0.0f, 0.0f };
+    ALfloat l_SourceVelocity[3] = { 0.0f, 0.0f, 0.0f };
+
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_BUFFER, it->second);
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_SOURCE_RELATIVE, AL_TRUE);
+
+    alSourcef (m_Sources[l_SourceIndex].m_uSource, AL_PITCH, 1.0);
+    alSourcef (m_Sources[l_SourceIndex].m_uSource, AL_GAIN, 1.0);
+
+    alSourcefv(m_Sources[l_SourceIndex].m_uSource, AL_POSITION, l_SourcePosition);
+    alSourcefv(m_Sources[l_SourceIndex].m_uSource, AL_VELOCITY, l_SourceVelocity);
+
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_LOOPING, AL_FALSE);
+    alSourcePlay(m_Sources[l_SourceIndex].m_uSource);
+
+
     return true;
 }
 
 bool CSoundManager::PlayAction3D(const std::string& action, const Math::Vect3f& position)
 {
+    if(!m_bSoundON) return false;
+
+    std::map<tAction, tIdBuffer>::iterator it = m_Buffers.find(action);
+
+    if(it == m_Buffers.end())
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlayAction3D Action %s not found\n", action.c_str());
+        return false;
+    }
+    
+    int l_SourceIndex = _getSource(false);
+    if(l_SourceIndex < 0) return false;
+
+     ALfloat l_SourcePosition[3] = { position.x, position.y, position.z };
+     ALfloat l_SourceVelocity[3] = { 0.0f, 0.0f, 0.0f };
+
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_BUFFER, it->second);
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_SOURCE_RELATIVE, AL_TRUE);
+
+    alSourcef (m_Sources[l_SourceIndex].m_uSource, AL_PITCH, 1.0);
+    alSourcef (m_Sources[l_SourceIndex].m_uSource, AL_GAIN, 1.0);
+
+    alSourcefv(m_Sources[l_SourceIndex].m_uSource, AL_POSITION, l_SourcePosition);
+    alSourcefv(m_Sources[l_SourceIndex].m_uSource, AL_VELOCITY, l_SourceVelocity);
+
+    alSourcei (m_Sources[l_SourceIndex].m_uSource, AL_LOOPING, AL_FALSE);
+    alSourcePlay(m_Sources[l_SourceIndex].m_uSource);
+
     return true;
 }
 		
 //-----SOURCE FUNCTIONS----------------------------
-uint32 CSoundManager::CreateSource()
+int CSoundManager::CreateSource()
 {
-    return 0;
+    tInfoSource l_SourceInfo;
+    alGenSources(1, &l_SourceInfo.m_uSource);
+
+    if(alGetError() != AL_NO_ERROR)
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::_getSource Can't create a new source\n");
+        return -1;
+    }
+
+    l_SourceInfo.m_bReserved = true;
+    m_Sources.push_back(l_SourceInfo);
+
+    return m_Sources.size() - 1;
 }
 
 bool CSoundManager::DeleteSource(uint32 source)
 {
+    if(source >= m_Sources.size()) return false;
+
+    StopSource(source);
+    m_Sources[source].m_bReserved = false;
+
     return true;
 }
 
 bool CSoundManager::PlaySource2D(uint32 source, const std::string& action, bool loop)
 {
+    std::map<tAction, tIdBuffer>::iterator it = m_Buffers.find(action);
+
+    if(it == m_Buffers.end())
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlaySource2D Action %s not found\n", action.c_str());
+        return false;
+    }
+
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false))
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlaySource2D Index out of bound or source not reserved\n", action.c_str());
+        return false;
+    }
+
+    ALfloat l_SourcePosition[3] = { 0.0f, 0.0f, 0.0f };
+    ALfloat l_SourceVelocity[3] = { 0.0f, 0.0f, 0.0f };
+    ALboolean l_Loop = (loop) ? AL_TRUE : AL_FALSE;
+
+    alSourcei (m_Sources[source].m_uSource, AL_BUFFER, it->second);
+    alSourcei (m_Sources[source].m_uSource, AL_SOURCE_RELATIVE, AL_TRUE);
+
+    alSourcef (m_Sources[source].m_uSource, AL_PITCH, 1.0);
+    alSourcef (m_Sources[source].m_uSource, AL_GAIN, 1.0);
+
+    alSourcefv(m_Sources[source].m_uSource, AL_POSITION, l_SourcePosition);
+    alSourcefv(m_Sources[source].m_uSource, AL_VELOCITY, l_SourceVelocity);
+
+    alSourcei (m_Sources[source].m_uSource, AL_LOOPING, AL_FALSE);
+    alSourcePlay(m_Sources[source].m_uSource);
+
     return true;
 }
 
 bool CSoundManager::PlaySource3D(uint32 source, const std::string& action, bool loop)
 {
+    std::map<tAction, tIdBuffer>::iterator it = m_Buffers.find(action);
+
+    if(it == m_Buffers.end())
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlaySource3D Action %s not found\n", action.c_str());
+        return false;
+    }
+
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false))
+    {
+        LOG_ERROR_APPLICATION("CSoundManager::PlaySource3D Index out of bound or source not reserved\n", action.c_str());
+        return false;
+    }
+
+    ALfloat l_SourcePosition[3] = { 0.0f, 0.0f, 0.0f };
+    ALfloat l_SourceVelocity[3] = { 0.0f, 0.0f, 0.0f };
+    ALboolean l_Loop = (loop) ? AL_TRUE : AL_FALSE;
+
     return true;
 }
 
 bool CSoundManager::PauseSource(uint32 source)
 {
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false)) return false;
+    alSourcePause(m_Sources[source].m_uSource);
+
     return true;
 }
 
 bool CSoundManager::StopSource(uint32 source)
 {
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false)) return false;
+    alSourceStop(m_Sources[source].m_uSource);
+
     return true;
 }
 
 bool CSoundManager::SetSourceGain(uint32 source, float inGain)
 {
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false)) return false;
+    alSourcef(m_Sources[source].m_uSource, AL_GAIN, inGain);
+
     return true;
 }
 
 bool CSoundManager::GetSourceGain(uint32 source, float& outGain)
 {
+    outGain = 0.0f;
+
+    if(!((source < m_Sources.size()) ? m_Sources[source].m_bReserved : false)) return false;
+    alGetSourcef(m_Sources[source].m_uSource, AL_GAIN, &outGain);
+
     return true;
 }
 
@@ -191,7 +348,7 @@ bool CSoundManager::_initAL()
     if ((error = alcGetError(pDevice)) != ALC_NO_ERROR)
     {
         std::string description = "Can't create openAL context (" + _getALErrorString(error) + ")";
-        LOG_ERROR_APPLICATION("CSoundManager::_initAL %s", description.c_str());
+        LOG_ERROR_APPLICATION("CSoundManager::_initAL %s\n", description.c_str());
         return false;
     }
     
@@ -238,7 +395,7 @@ bool CSoundManager::_loadSound(const std::string& file, tIdBuffer& buffer)
     {    
         alDeleteBuffers(1,&buffer);
         std::string description = "Error: Can't create openAL Buffer (" + _getALErrorString(error)  + ")";
-        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s", description.c_str());
+        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s\n", description.c_str());
 
         return false;
     }
@@ -249,7 +406,7 @@ bool CSoundManager::_loadSound(const std::string& file, tIdBuffer& buffer)
     {
         alDeleteBuffers(1, &buffer);
         std::string description = "Error: Can't open file " + file;
-        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s", description.c_str());
+        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s\n", description.c_str());
         
         return false;
     }
@@ -268,7 +425,7 @@ bool CSoundManager::_loadSound(const std::string& file, tIdBuffer& buffer)
     {   	 
         alDeleteBuffers(1, &buffer);
         std::string description = "Error: Can't load sound file " + file + " (" + _getALErrorString(error)  + ")";
-        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s", description.c_str());
+        LOG_ERROR_APPLICATION("CSoundManager::_loadSound %s\n", description.c_str());
         
         return false;
     }   	 
@@ -300,7 +457,20 @@ void CSoundManager::_clear()
 
 int CSoundManager::_getSource(bool reserved)
 {
-    return 0;
+    for(unsigned int i = 0; i < m_Sources.size(); ++i)
+    {
+        if(m_Sources[i].m_bReserved) continue;
+
+        ALint l_SourceState = 0;
+        alGetSourcei(m_Sources[i].m_uSource, AL_SOURCE_STATE, &l_SourceState);
+
+        if(l_SourceState == AL_PLAYING) continue;
+
+        m_Sources[i].m_bReserved = reserved;
+        return i;
+    }
+
+    return -1;
 }
 
 void Release()
