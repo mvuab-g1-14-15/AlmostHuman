@@ -36,7 +36,6 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 		}
 		else if(SPOT_LIGHT == g_LightsType[0])
 		{	
-			l_LightDirection = normalize(g_LightsDirection[0]);
 			l_Attenuation = l_Attenuation * SpotAttenuation(0, l_LightDirection);
 		}
 		
