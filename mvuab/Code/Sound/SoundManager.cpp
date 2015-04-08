@@ -212,7 +212,7 @@ bool CSoundManager::PlaySource2D( uint32 source, const std::string& action, bool
     return false;
   }
 
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) )
+  if ( !( ( source < m_Sources.size() ) ? ( m_Sources[source].m_bReserved ) ? false : true : false ) )
   {
     LOG_ERROR_APPLICATION( "CSoundManager::PlaySource2D Index out of bound or source not reserved\n", action.c_str() );
     return false;
@@ -247,7 +247,7 @@ bool CSoundManager::PlaySource3D( uint32 source, const std::string& action, bool
     return false;
   }
 
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) )
+  if ( !( ( source < m_Sources.size() ) ? ( m_Sources[source].m_bReserved ) ? false : true : false ) )
   {
     LOG_ERROR_APPLICATION( "CSoundManager::PlaySource3D Index out of bound or source not reserved\n", action.c_str() );
     return false;
@@ -260,40 +260,45 @@ bool CSoundManager::PlaySource3D( uint32 source, const std::string& action, bool
   return true;
 }
 
-bool CSoundManager::PauseSource( uint32 source )
+bool CSoundManager::PauseSource( uint32 _Source )
 {
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) ) return false;
+  if ( !( _Source < m_Sources.size() && m_Sources[_Source].m_bReserved ) )
+    return false;
 
-  alSourcePause( m_Sources[source].m_uSource );
+  alSourcePause( m_Sources[_Source].m_uSource );
 
   return true;
 }
 
-bool CSoundManager::StopSource( uint32 source )
+bool CSoundManager::StopSource( uint32 _Source )
 {
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) ) return false;
+  if ( !( _Source < m_Sources.size() && m_Sources[_Source].m_bReserved ) )
+    return false;
 
-  alSourceStop( m_Sources[source].m_uSource );
+  alSourceStop( m_Sources[_Source
+                         ].m_uSource );
 
   return true;
 }
 
-bool CSoundManager::SetSourceGain( uint32 source, float inGain )
+bool CSoundManager::SetSourceGain( uint32 _Source, float inGain )
 {
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) ) return false;
+  if ( !( _Source < m_Sources.size() && m_Sources[_Source].m_bReserved ) )
+    return false;
 
-  alSourcef( m_Sources[source].m_uSource, AL_GAIN, inGain );
+  alSourcef( m_Sources[_Source].m_uSource, AL_GAIN, inGain );
 
   return true;
 }
 
-bool CSoundManager::GetSourceGain( uint32 source, float& outGain )
+bool CSoundManager::GetSourceGain( uint32 _Source, float& outGain )
 {
   outGain = 0.0f;
 
-  if ( !( ( source < m_Sources.size() ) ? m_Sources[source].m_bReserved : false ) ) return false;
+  if ( !( _Source < m_Sources.size() && m_Sources[_Source].m_bReserved ) )
+    return false;
 
-  alGetSourcef( m_Sources[source].m_uSource, AL_GAIN, &outGain );
+  alGetSourcef( m_Sources[_Source].m_uSource, AL_GAIN, &outGain );
 
   return true;
 }

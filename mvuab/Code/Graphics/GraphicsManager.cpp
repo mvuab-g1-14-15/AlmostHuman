@@ -400,7 +400,6 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.FullScreen_RefreshRateInHz  = lRefreshRate;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
-  d3dpp.PresentationInterval		= D3DPRESENT_INTERVAL_IMMEDIATE;
   HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
                &mDirectXDevice );
 
