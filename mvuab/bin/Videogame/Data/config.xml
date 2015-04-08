@@ -24,4 +24,5 @@
 	<enemies path="Data/enemies/enemies.xml"/>
 	<particles path="Data/particles.xml"/>
 	<billboardTexture path="Data/textures/smoke.png"/>
+    <maxfps fps="30.0"/>
 </config>

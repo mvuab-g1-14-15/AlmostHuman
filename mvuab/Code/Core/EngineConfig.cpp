@@ -22,6 +22,7 @@ CEngineConfig::CEngineConfig()
   , m_ExclusiveModeInMouse( false )
   , m_DrawPointerMouse( false )
   , m_FitDesktop( false )
+  , m_MaxFps(30.0)
 {
 }
 
@@ -143,6 +144,8 @@ void CEngineConfig::Load( const std::string& aCfg )
       m_ParticlesPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
     else if ( lTagName == "billboardTexture" )
       m_BillboardTexturePath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
+    else if ( lTagName == "maxfps" )
+        m_MaxFps = lTreeNode(i).GetFloatProperty("fps", 30.0f);
   }
 }
 
