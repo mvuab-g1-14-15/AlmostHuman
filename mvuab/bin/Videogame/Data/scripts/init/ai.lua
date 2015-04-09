@@ -71,7 +71,7 @@ function andar()
 	local l_Yaw = math.atan2( l_DistanceVector.z, l_DistanceVector.x)
 	enemy:SetYaw(l_Yaw)
 	
-	l_DistanceVector = l_DistanceVector * 0.05
+	l_DistanceVector = l_DistanceVector
 	enemy:Move(l_DistanceVector, dt)
 end
 
@@ -108,6 +108,6 @@ function perseguir()
 	local l_Yaw = math.atan2( l_DistanceVector.z, l_DistanceVector.x)
 	enemy:SetYaw(l_Yaw)
 	
-	l_DistanceVector = l_DistanceVector * 0.05
+	l_DistanceVector = l_DistanceVector
 	enemy:Move(l_DistanceVector, dt)
 end

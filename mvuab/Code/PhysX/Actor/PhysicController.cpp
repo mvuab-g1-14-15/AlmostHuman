@@ -32,6 +32,7 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
   , m_bUseGravity( true )
   , m_Type( ::CAPSULE )
   , m_bRotado( false )
+  , m_fVelocity( 0.0f )
 
 {
   assert( _pUserData );
@@ -75,6 +76,7 @@ CPhysicController::CPhysicController( Math::Vect3f _Dim, float _fSlope, float _f
   , m_uCollisionGroups( _uiCollisionGroups )
   , m_bUseGravity( true )
   , m_Type( ::BOX )
+  , m_fVelocity( 0.0f )
 
 {
   assert( _pUserData );
@@ -192,22 +194,31 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
   float l_fDirectionY = _vDirection.y;
 
   if ( m_bUseGravity )
-    l_fDirectionY += ( m_fGravity * _ElapsedTime );
+  {
+      float l_OldVel = m_fVelocity;
+      m_fVelocity += (m_fGravity * _ElapsedTime);
+      l_fDirectionY += ((m_fVelocity + l_OldVel) * 0.5f) * _ElapsedTime;
+  }
 
   //l_fDirectionY = 0;
 
   NxVec3 l_Direction( _vDirection.x, l_fDirectionY, _vDirection.z );
+  l_Direction *= _ElapsedTime;
   NxF32 sharpness = 1.0f;
   NxU32 collisionFlags = 0;
+  NxU32 collisionFlagsPre = 0;
   //NxU32 Collision = 0;
+  
+  /*
   float heightDelta = m_Jump.GetHeight( _ElapsedTime );
 
   if ( heightDelta != 0.f )
   {
     l_Direction.y += heightDelta;
-    /*l_Direction.x *= 0.3f;
-    l_Direction.z *= 0.3f;*/
+    l_Direction.x *= 0.3f;
+    l_Direction.z *= 0.3f;
   }
+  */
 
   int mask = 1 << ECG_PLAYER;
   mask |= 1 << ECG_DYNAMIC_OBJECTS;
@@ -215,10 +226,22 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
   mask |= 1 << ECG_ESCENE;
   mask |= 1 << ECG_ENEMY;
   mask |= 1 << ECG_LIMITS;
-  m_pPhXController->move( l_Direction , mask, 0.000001f, collisionFlags, sharpness );
 
-  if ( ( collisionFlags & NXCC_COLLISION_DOWN && heightDelta <= 0 ) || ( collisionFlags & NXCC_COLLISION_UP ) )
-    m_Jump.StopJump();
+  m_pPhXController->move( NxVec3(0.0f, -0.01f, 0.0f) , mask, 0.000001f, collisionFlagsPre, sharpness );
+  if( collisionFlagsPre & NXCC_COLLISION_DOWN)
+    m_pPhXController->move( l_Direction, mask, 0.000001f, collisionFlags, sharpness );
+  else
+  {
+      l_Direction.x = 0.0f;
+      l_Direction.z = 0.0f;
+      m_pPhXController->move( l_Direction, mask, 0.000001f, collisionFlags, sharpness );
+  }
+
+  //if ( ( collisionFlags & NXCC_COLLISION_DOWN && heightDelta <= 0 ) || ( collisionFlags & NXCC_COLLISION_UP ) )
+  //  m_Jump.StopJump();
+
+  if( collisionFlags & NXCC_COLLISION_DOWN)
+      m_fVelocity = 0.0f;
 
   NxExtendedVec3 tmp;
   tmp = m_pPhXController->getDebugPosition();
