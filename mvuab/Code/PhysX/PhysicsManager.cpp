@@ -155,7 +155,7 @@ bool CPhysicsManager::Init( void )
   //#if defined( _DEBUG )
   //#define USE_DEBUGGER
   //#ifdef USE_DEBUGGER
-  //m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect( "127.0.0.1" );
+  m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect( "127.0.0.1" );
   //#endif
   //#endif
   return m_bIsOk;
