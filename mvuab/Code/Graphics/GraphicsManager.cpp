@@ -315,7 +315,6 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
   int nMaxAdapterModes = mDirectXObject->GetAdapterModeCount( D3DADAPTER_DEFAULT,
                          D3DFMT_X8R8G8B8 );
-  uint32 lRefreshRate = aEngineConfig->GetRefreshRate();
 
   for ( nMode = 0; nMode < nMaxAdapterModes; ++nMode )
   {
@@ -336,10 +335,6 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
     if ( d3ddm.Format != D3DFMT_X8R8G8B8 )
       continue;
 
-    // Does this adapter mode support a refresh rate of 75 MHz?
-    if ( d3ddm.RefreshRate != lRefreshRate )
-      continue;
-
     // We found a match!
     bDesiredAdapterModeFound = true;
     break;
@@ -347,8 +342,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
 
   if ( bDesiredAdapterModeFound == false )
   {
-    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)",
-                           lRefreshRate, lScreenResolution.x, lScreenResolution.y );
+    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8, and a resolution of (%d,%d)", lScreenResolution.x, lScreenResolution.y );
     return false;
   }
 

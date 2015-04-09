@@ -75,9 +75,6 @@ void CEngineConfig::Load( const std::string& aCfg )
         LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'");
         m_FitDesktop = true;
       }
-
-      // Get the refresh rate
-      m_RefreshRate = lTreeNode( i ).GetIntProperty( "refresh_rate", 60 );
     }
     else if ( lTagName == "mouse" )
     {
