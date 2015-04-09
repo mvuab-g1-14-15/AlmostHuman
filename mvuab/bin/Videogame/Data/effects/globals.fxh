@@ -49,7 +49,7 @@ float       g_DeltaTime                                             : DeltaTime;
 float       g_Time                                                  : Time;
 
 float4      g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
-float       g_SpecularExponent = 100.0f;
+float       g_SpecularExponent = 20.0f;
 float       g_SpecularFactor = 20.0f;
 
 float       g_Bump = 10.0;
