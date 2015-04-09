@@ -87,6 +87,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pParticleManager );
   CHECKED_DELETE( m_pGizmosManager );
   CHECKED_DELETE( m_pConsole );
+  Destroy();
 }
 
 void CCore::Init( HWND aWindowId )
@@ -130,9 +131,7 @@ void CCore::Render()
 }
 void CCore::CreateManagers()
 {
-  CEngineConfig* lEngineConfig = EngineConfigInstance;
-
-  if ( lEngineConfig->GetEnableConsole() )
+  if ( EngineConfigInstance->GetEnableConsole() )
     m_pConsole = new CConsole( TRUE );
 
   m_pTextureManager = new CTextureManager( );

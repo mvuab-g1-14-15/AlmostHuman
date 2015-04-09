@@ -10,6 +10,8 @@
 #include "Utils\SingletonPattern.h"
 #include "Utils\Defines.h"
 #include "Math\Vector3.h"
+#include "Utils\TemplatedVectorMapManager.h"
+#include "Utils\Manager.h"
 
 // Forward declarations
 class CGraphicsManager;
@@ -37,7 +39,7 @@ class CBillboard;
 class CParticleManager;
 class CGizmosManager;
 
-class CCore : public CSingleton<CCore>
+class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManager>
 {
     private:
 
