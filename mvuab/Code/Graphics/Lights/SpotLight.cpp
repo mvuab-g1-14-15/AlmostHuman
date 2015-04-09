@@ -16,8 +16,8 @@ typedef struct CUSTOMVERTEXLIGHT
 
 CSpotLight::CSpotLight( CXMLTreeNode node )
     : CDirectionalLight( node )
-    , m_Angle( node.GetFloatProperty( "angle", 0 ) )
-    , m_FallOff( node.GetFloatProperty( "fall_off", 0 ) )
+    , m_Angle( Math::Utils::Deg2Rad( node.GetFloatProperty( "angle", 0 ) ))
+    , m_FallOff( Math::Utils::Deg2Rad( node.GetFloatProperty( "fall_off", 0 )))
 {
     SetType( CLight::SPOT );
 }
@@ -86,8 +86,7 @@ void CSpotLight::SetShadowMap( CGraphicsManager* GM )
     D3DXVec3Normalize( &l_VUP, &l_VUP );
     D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
     m_ViewShadowMap = Math::Mat44f( l_View );
-    D3DXMatrixPerspectiveFovLH( &l_Projection, Math::Utils::Deg2Rad( m_FallOff ), 1.0f, 1.0f,
-                                m_EndRangeAttenuation );
+    D3DXMatrixPerspectiveFovLH( &l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation );
     m_ProjectionShadowMap = Math::Mat44f( l_Projection );
     CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
     l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
