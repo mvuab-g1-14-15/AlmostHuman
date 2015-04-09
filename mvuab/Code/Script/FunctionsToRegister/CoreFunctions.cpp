@@ -24,6 +24,7 @@
 #include "Utils\PhysicUserData.h"
 #include "Characters\Enemies\EnemyManager.h"
 #include "Gizmos\GizmosManager.h"
+#include "Particles\ParticleManager.h"
 
 #include "luabind_macros.h"
 
@@ -73,6 +74,7 @@ void registerCores( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CCore, GetPhysicsManager )
     LUA_DECLARE_METHOD( CCore, GetEnemyManager )
     LUA_DECLARE_METHOD( CCore, GetGizmosManager )
+    LUA_DECLARE_METHOD( CCore, GetParticleManager )
     LUA_DECLARE_METHOD( CCore, Trace )
     LUA_BEGIN_SCOPE
         LUA_DECLARE_METHOD_SCOPE(CCore, GetSingletonPtr )

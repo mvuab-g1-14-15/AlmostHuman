@@ -83,6 +83,8 @@ void CCubeEmitter::Update(float dt)
         (p + i)->Update(dt);
     }
 
+    m_Time += dt;
+
     m_ActualTime += dt;
     if ( m_ActualTime < 1.0f )
     {
