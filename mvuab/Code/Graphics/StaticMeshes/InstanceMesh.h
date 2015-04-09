@@ -13,16 +13,16 @@ class CXMLTreeNode;
 
 class CInstanceMesh : public CRenderableObject
 {
-private:
-  CStaticMesh* m_pStaticMesh;
+    private:
+        CStaticMesh *m_pStaticMesh;
 
-public:
-  CInstanceMesh( const std::string& Name, const std::string& CoreName );
-  CInstanceMesh( CXMLTreeNode& atts );
-  ~CInstanceMesh();
-
-  void Render();
-  GET_SET( CStaticMesh*, pStaticMesh );
+    public:
+        CInstanceMesh(const std::string& Name, const std::string &CoreName);
+        CInstanceMesh(CXMLTreeNode& atts);
+        ~CInstanceMesh();
+        
+        void Render();
+        GET_SET(CStaticMesh*, pStaticMesh);
 };
 
 #endif //INC_INSTANCE_MESH_H_
