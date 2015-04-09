@@ -390,16 +390,17 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.Windowed                    = FALSE;
   d3dpp.EnableAutoDepthStencil      = TRUE;
   d3dpp.AutoDepthStencilFormat      = D3DFMT_D24S8;
-  d3dpp.SwapEffect                  = D3DSWAPEFFECT_FLIP;
-  d3dpp.BackBufferCount             = 2;
+  d3dpp.SwapEffect                  = D3DSWAPEFFECT_DISCARD;
+  d3dpp.BackBufferCount             = 1;
   d3dpp.BackBufferWidth             = lScreenResolution.x;
   d3dpp.BackBufferHeight            = lScreenResolution.y;
   d3dpp.BackBufferFormat            = D3DFMT_X8R8G8B8;
-  d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_IMMEDIATE;
+  d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_ONE;
   d3dpp.Flags                       = 0;//D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
-  d3dpp.FullScreen_RefreshRateInHz  = lRefreshRate;
+  d3dpp.FullScreen_RefreshRateInHz  = D3DPRESENT_RATE_DEFAULT;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
+
   HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
                &mDirectXDevice );
 
