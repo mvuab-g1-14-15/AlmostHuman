@@ -8,26 +8,26 @@
 #include "Core.h"
 
 CCameraManager::CCameraManager() : m_RenderCameras( true )
+	, CManager()
 {
 }
 
+CCameraManager::CCameraManager( CXMLTreeNode &atts)
+	: m_RenderCameras( true ), CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA XML
+	*/
+}
 void CCameraManager::Init()
 {
-  //---Por defecto insertamos la camara del player----
-  CCamera* l_pFPSCamera = new CCameraFPShooter();
-  std::string name_Cameraplayer = "player";
-  AddResource( name_Cameraplayer, l_pFPSCamera );
-  //CCameraKeyController*  l_pkeyController = new CCameraKeyController();
-
-  /*if ( l_pkeyController->LoadXML( "./Data/camera.xml" ) )
-  {
-    CCamera* l_pCinematicalCamera = new CCameraCinematical( l_pkeyController );
-    std::string name_CameraCinematical = "cinematical";
-    AddResource( name_CameraCinematical, l_pCinematicalCamera );
-    SetCurrentCamera( name_CameraCinematical );
-  }
-  else*/
-    SetCurrentCamera( name_Cameraplayer );
+  NewCamera( CCamera::FirstPerson, "TestProcessCam",
+                               Math::Vect3f( 15.0f, 2.0f, 0.0f ),
+                               Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
+  NewCamera( CCamera::Free, "FreeCam",
+                               Math::Vect3f( 12.28f, -16.75f, 12.75f ),
+                               Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
+  SetCurrentCamera( "TestProcessCam" );
 }
 
 CCameraManager::~CCameraManager()
@@ -104,7 +104,7 @@ void CCameraManager::DeleteCamera( const std::string& name )
     m_Resources.erase( name );
 }
 
-void CCameraManager::RenderCameras()
+void CCameraManager::Render()
 {
 #ifdef _DEBUG
 

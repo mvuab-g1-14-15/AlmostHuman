@@ -55,7 +55,7 @@ CLight::CLight( const CXMLTreeNode& node )
 
   if ( l_ShadowMaskTextureFile != "" )
   {
-    m_ShadowMaskTexture = CTextureManager::GetSingletonPtr()->GetTexture( l_ShadowMaskTextureFile );
+    m_ShadowMaskTexture = TextureMInstance->GetTexture( l_ShadowMaskTextureFile );
     assert( m_ShadowMaskTexture );
   }
 

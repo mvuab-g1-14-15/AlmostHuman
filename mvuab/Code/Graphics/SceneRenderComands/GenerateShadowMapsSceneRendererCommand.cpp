@@ -15,5 +15,5 @@ CGenerateShadowMapsSceneRendererCommand::~CGenerateShadowMapsSceneRendererComman
 
 void CGenerateShadowMapsSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-  CLightManager::GetSingletonPtr()->GenerateShadowMap( GraphicsInstance );
+  LightMInstance->GenerateShadowMap( GraphicsInstance );
 }

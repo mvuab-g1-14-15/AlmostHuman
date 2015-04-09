@@ -1,9 +1,21 @@
 #include "ParticleManager.h"
+#include "Timer\Timer.h"
+#include "Core.h"
+#include "EngineConfig.h"
 #include "SphereEmitter.h"
 #include "CubeEmitter.h"
 
 CParticleManager::CParticleManager()
+	:CManager()
 {
+}
+
+CParticleManager::CParticleManager(CXMLTreeNode& atts)
+	: CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA XML
+	*/
 }
 
 CParticleManager::~CParticleManager()
@@ -18,14 +30,14 @@ CParticleManager::~CParticleManager()
   m_Emitters.clear();
 }
 
-bool CParticleManager::Init( const std::string& path )
+void CParticleManager::Init()
 {
   CXMLTreeNode l_XML;
-
-  if ( !l_XML.LoadFile( path.c_str() ) )
+  mConfigPath = EngineConfigInstance->GetParticlesPath();
+  if ( !l_XML.LoadFile( mConfigPath.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "CParticleManager::Init Can't load XML file" );
-    return false;
+    return;
   }
 
   CXMLTreeNode l_Node = l_XML["emitters"];
@@ -34,7 +46,7 @@ bool CParticleManager::Init( const std::string& path )
   {
     LOG_ERROR_APPLICATION( "CParticleManager::Init Can't find node \"emitters\"" );
     l_XML.Done();
-    return false;
+    return;
   }
 
   for ( int i = 0; i < l_Node.GetNumChildren(); ++i )
@@ -102,10 +114,10 @@ bool CParticleManager::Init( const std::string& path )
   }
 
   l_XML.Done();
-  return true;
+  //return true;
 }
 
-void CParticleManager::Update( float dt )
+void CParticleManager::Update()
 {
   for ( size_t i = 0; i < m_Emitters.size();  ++i )
   {
@@ -120,7 +132,7 @@ void CParticleManager::Update( float dt )
     }
 
     if ( m_Emitters[i]->GetActive() )
-      m_Emitters[i]->Update( dt );
+      m_Emitters[i]->Update( deltaTime );
   }
 }
 

@@ -5,16 +5,29 @@
 #include "SpotLight.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
-
+#include "EngineConfig.h"
 CLightManager::CLightManager()
-  : m_Filename( "" )
+  : CManager()
 {
+}
+
+CLightManager::CLightManager(CXMLTreeNode& atts)
+  : CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA DE XML
+	*/
 }
 
 CLightManager::~CLightManager()
 {
 }
 
+void CLightManager::Init()
+{
+	mConfigPath = EngineConfigInstance->GetLightsPath();
+	Load(mConfigPath);
+}
 bool CLightManager::Load( const std::string& FileName )
 {
   CXMLTreeNode newFile;
@@ -27,7 +40,7 @@ bool CLightManager::Load( const std::string& FileName )
     return false;
   }
 
-  m_Filename = FileName;
+  mConfigPath = FileName;
   m = newFile["lights"];
 
   if ( !m.Exists() )
@@ -104,5 +117,5 @@ void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
 bool CLightManager::ReLoad()
 {
   Destroy();
-  return Load( m_Filename );
+  return Load( mConfigPath );
 }

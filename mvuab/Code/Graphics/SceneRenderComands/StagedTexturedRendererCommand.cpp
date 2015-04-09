@@ -43,11 +43,11 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
         l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT,
                            l_iFormatType );
 
-        if ( CTextureManager::GetSingletonPtr()->AddResource( l_Name, l_Texture ) )
+        if ( TextureMInstance->AddResource( l_Name, l_Texture ) )
           AddStageTexture( l_StageId, l_Texture );
         else
         {
-          AddStageTexture( l_StageId, CTextureManager::GetSingletonPtr()->GetResource( l_Name ) );
+          AddStageTexture( l_StageId, TextureMInstance->GetResource( l_Name ) );
           CHECKED_DELETE( l_Texture );
         }
       }
@@ -56,7 +56,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
       {
         const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
         int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-        CTexture* l_Texture = CTextureManager::GetSingletonPtr()->GetTexture( l_Name );
+        CTexture* l_Texture = TextureMInstance->GetTexture( l_Name );
 
         if ( !l_Texture )
         {

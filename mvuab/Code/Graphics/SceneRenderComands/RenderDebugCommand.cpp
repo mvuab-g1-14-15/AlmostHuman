@@ -4,6 +4,7 @@
 #include "PathFinding\AStar.h"
 #include "Lights\LightManager.h"
 #include "Engine.h"
+#include "Core.h"
 #include "PhysicsManager.h"
 
 CRenderDebugCommand::CRenderDebugCommand( CXMLTreeNode& atts )
@@ -22,10 +23,10 @@ CRenderDebugCommand::~CRenderDebugCommand()
 void CRenderDebugCommand::Execute( CGraphicsManager& GM )
 {
   if ( m_RenderCameras )
-    CCameraManager::GetSingletonPtr()->RenderCameras();
+    CameraMInstance->Render();
 
   if ( m_RenderLights )
-    CLightManager::GetSingletonPtr()->Render();
+    LightMInstance->Render();
 
   if ( m_RenderGraph )
   {
@@ -36,5 +37,5 @@ void CRenderDebugCommand::Execute( CGraphicsManager& GM )
   }
 
   if ( m_RenderPhysics )
-    CPhysicsManager::GetSingletonPtr()->DebugRender( &GM );
+    PhysXMInstance->Render();
 }

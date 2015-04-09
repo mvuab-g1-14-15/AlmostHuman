@@ -105,12 +105,12 @@ void CCore::Update()
   m_pInputManager->Update();
   m_pActionManager->Update();
 
-  m_pPhysicsManager->Update( deltaTime );
+  m_pPhysicsManager->Update( );
   m_pEnemyManager->Update();
 
   m_pCameraManager->Update();
 
-  m_pParticleManager->Update( deltaTime );
+  m_pParticleManager->Update();
 
   m_pGizmosManager->Update();
 
@@ -187,25 +187,14 @@ void CCore::InitManagers()
   m_pRenderableObjectsLayersManager->Init();
   m_pSceneRendererCommandManager->Init();
   m_pCameraManager->Init();
-  m_pCameraManager->NewCamera( CCamera::FirstPerson, "TestProcessCam",
-                               Math::Vect3f( 15.0f, 2.0f, 0.0f ),
-                               Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
-  m_pCameraManager->NewCamera( CCamera::Free, "FreeCam",
-                               Math::Vect3f( 12.28f, -16.75f, 12.75f ),
-                               Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
-  m_pCameraManager->NewCamera( CCamera::FirstPerson, "Plane",
-                               Math::Vect3f( 0.0f, 15.0f, 0.0f ),
-                               Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
-  m_pCameraManager->SetCurrentCamera( "TestProcessCam" );
-  m_pScriptManager->Initialize();
-  m_pScriptManager->Load( l_EngineConfig->GetLuaRunPath() );
-  m_pLightManager->Load( l_EngineConfig->GetLightsPath() );
+  m_pScriptManager->Init();
+  m_pLightManager->Init();
   m_pPhysicsManager->Init();
-  m_pEnemyManager->Init( l_EngineConfig->GetEnemiesPath() );
-  m_pTriggerManager->LoadXML( l_EngineConfig->GetTriggersPath() );
+  m_pEnemyManager->Init();
+  m_pTriggerManager->Init();
 
-  m_pBillboard->Init( Math::Vect3f( 0, 2, 1 ), 2, l_EngineConfig->GetBillboardTexturePath() );
-  m_pParticleManager->Init( l_EngineConfig->GetParticlesPath() );
+  m_pBillboard->Init();
+  m_pParticleManager->Init();
   m_pGizmosManager->Init();
 }
 

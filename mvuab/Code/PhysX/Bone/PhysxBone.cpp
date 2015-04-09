@@ -100,7 +100,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
   l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
   l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
-  CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  CPhysicsManager* l_pPM = PhysXMInstance;
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
   m_vMiddlePoint = l_fMiddlePoint;
@@ -137,7 +137,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
   l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Math::Vect3f(0.0f), false);
   l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Math::Vect3f(0.0f), false);
 
-  CPhysicsManager* l_pPM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  CPhysicsManager* l_pPM = PhysXMInstance;
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
   m_vMiddlePoint = l_fMiddlePoint;

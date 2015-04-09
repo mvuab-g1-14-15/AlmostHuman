@@ -127,7 +127,7 @@ bool CStaticMesh::Load( const std::string& FileName )
       ZeroMemory( textureName, sizeof( char )* l_TextureLength );
       std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
       // Get the texture from the texture manager
-      CTexture* t = CTextureManager::GetSingletonPtr()->GetTexture( "Data/textures/" + std::string( textureName ) );
+      CTexture* t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
 
       if ( t )
         l_Texture.push_back( t );

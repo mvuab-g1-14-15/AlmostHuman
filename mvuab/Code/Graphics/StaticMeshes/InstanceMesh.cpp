@@ -37,7 +37,7 @@ void CInstanceMesh::Render()
     Math::Mat44f lTransform = GetTransform();
     GraphicsInstance->SetTransform( lTransform );
     Math::AABB3f laabb = m_pStaticMesh->GetAABB();
-    CFrustum lCameraFrustum = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetFrustum();
+    CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
     // TODO: Fix the frustum culling
     //if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z), laabb.GetRadius()) )

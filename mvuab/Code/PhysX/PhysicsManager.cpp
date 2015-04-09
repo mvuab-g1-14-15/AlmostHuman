@@ -30,7 +30,7 @@
 ////--------------------------------
 
 #include "Utils\Defines.h"
-
+#include "Timer\Timer.h"
 #include "GraphicsManager.h"
 //#include "Utils\Exception.h"
 #include "Logger\Logger.h"
@@ -57,6 +57,21 @@ CPhysicsManager::CPhysicsManager( void )
   , m_pMyAllocator( NULL )
   , m_pCookingMesh( NULL )
   , m_InitParams( )
+  , CManager()
+{
+}
+
+CPhysicsManager::CPhysicsManager(CXMLTreeNode& atts )
+  : m_szConfigFileName( "" )
+  , m_bIsOk( false )
+  , m_bDebugRenderMode( false )
+  , m_pPhysicsSDK( NULL )
+  , m_pScene( NULL )
+  , mControllerManager( NULL )
+  , m_pMyAllocator( NULL )
+  , m_pCookingMesh( NULL )
+  , m_InitParams( )
+  , CManager(atts)
 {
 }
 
@@ -66,7 +81,7 @@ CPhysicsManager::CPhysicsManager( void )
 //----------------------------------------------------------------------------
 // Init data
 //----------------------------------------------------------------------------
-bool CPhysicsManager::Init( void )
+void CPhysicsManager::Init()
 {
   m_pMyAllocator = new CPhysicUserAllocator;
   LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
@@ -158,7 +173,7 @@ bool CPhysicsManager::Init( void )
   //m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect( "127.0.0.1" );
   //#endif
   //#endif
-  return m_bIsOk;
+  //return m_bIsOk;
 }
 
 //----------------------------------------------------------------------------
@@ -336,12 +351,12 @@ bool CPhysicsManager::LoadXML( void )
 //----------------------------------------------------------------------------
 // Update : Para actualizar la escena y realizar las físicas y simulaciones
 //----------------------------------------------------------------------------
-void CPhysicsManager::Update( float _ElapsedTime )
+void CPhysicsManager::Update()
 {
   assert( m_pScene != NULL );
   assert( mControllerManager != NULL );
   // Start simulation (non blocking)
-  m_pScene->simulate( _ElapsedTime );
+  m_pScene->simulate( deltaTime );
   // Fetch simulation results
   m_pScene->flushStream( );
   m_pScene->fetchResults( NX_RIGID_BODY_FINISHED,  true );
@@ -370,7 +385,7 @@ void CPhysicsManager::AddGravity( Math::Vect3f g )
 //----------------------------------------------------------------------------------------
 // Debug Render : dibuja cada uno de los actores encontrados en la escena si estamos en modo debug
 //----------------------------------------------------------------------------------------
-void CPhysicsManager::DebugRender( CGraphicsManager* _RM )
+void CPhysicsManager::Render()
 {
   assert( m_pScene != NULL );
 
@@ -383,7 +398,7 @@ void CPhysicsManager::DebugRender( CGraphicsManager* _RM )
   while ( nbActors-- )
   {
     NxActor* l_pActor = *l_pActors++;
-    DrawActor( l_pActor, _RM );
+	DrawActor( l_pActor, GraphicsInstance );
   }
 }
 
@@ -953,7 +968,7 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
   l_Emitter->SetYaw( 0, 360 );
   l_Emitter->SetPitch( 0, 360 );
   l_Emitter->Generate( 20 );
-  CCore::GetSingletonPtr()->GetParticleManager()->AddEmitter( l_Emitter );
+  ParticleMInstance->AddEmitter( l_Emitter );
   NxActor* actor = &closestShape->getActor();
   CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
   ASSERT( impactObject, "NO IMPACTOBJECT" );

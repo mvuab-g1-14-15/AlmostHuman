@@ -39,14 +39,14 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
   {
     m_PhysicActor->CreateBoxTrigger( m_Position, m_Size, m_Group );
     m_PhysicActor->ActivateAllTriggers();
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    CPhysicsManager* l_PM = PhysXMInstance;
     l_PM->AddPhysicActor( m_PhysicActor );
   }
   else if ( l_sType == "sphere" )
   {
     m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
     m_PhysicActor->ActivateAllTriggers();
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    CPhysicsManager* l_PM = PhysXMInstance;
     l_PM->AddPhysicActor( m_PhysicActor );
   }
 
@@ -68,7 +68,7 @@ void CTrigger::Release()
 
 void CTrigger::Destroy()
 {
-  // CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  // CPhysicsManager* l_PM = PhysXMInstance;
   // l_PM->ReleasePhysicActor( m_PhysicUserData->GetActor() );
   CHECKED_DELETE( m_PhysicActor );
   CHECKED_DELETE( m_PhysicUserData );

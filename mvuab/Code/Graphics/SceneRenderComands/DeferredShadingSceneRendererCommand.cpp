@@ -47,7 +47,7 @@ void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
 
 void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
 {
-  CLightManager* l_LightManager = CCore::GetSingletonPtr()->GetLightManager();
+  CLightManager* l_LightManager = LightMInstance;
   uint32 l_Width, l_Height;
   GM.GetWidthAndHeight( l_Width, l_Height );
   RECT l_Rect = { 0, 0, ( long )l_Width, ( long )l_Height};

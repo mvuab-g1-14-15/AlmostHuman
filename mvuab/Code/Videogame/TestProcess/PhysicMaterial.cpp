@@ -48,9 +48,9 @@ CPhysicMaterial::CPhysicMaterial() : CProcess(),
   m_Speed( 0.1f ),
   m_Amount( 0.0f ), m_Angle( 0.0f ),  m_AngleMoon( 0.0f ), m_PaintAll( false )
 {
-  CCameraManager::GetSingletonPtr()->NewCamera( CCamera::FirstPerson, "TestProcessCam", Math::Vect3f( -15.0f, 2.0f, 0.0f ),
+  CameraMInstance->NewCamera( CCamera::FirstPerson, "TestProcessCam", Math::Vect3f( -15.0f, 2.0f, 0.0f ),
       Math::Vect3f( 0.0f, 2.0f, 0.0f ) );
-  CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
+  CameraMInstance->SetCurrentCamera( "TestProcessCam" );
 
   unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1 |
                          VERTEX_TYPE_DIFFUSE;
@@ -75,7 +75,7 @@ void CPhysicMaterial::Update()
     SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    ScriptMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
     EffectManagerInstance->Reload();
@@ -110,11 +110,11 @@ void CPhysicMaterial::Update()
   //RAYCAST
   if ( pActionManager->DoAction( "ShootRayCast" ) )
   {
-    CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+    CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
     if ( l_CurrentCamera )
     {
-      CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+      CPhysicsManager* l_PM = PhysXMInstance;
       CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "RayCast" );
       l_PhysicUserData->SetPaint( true );
       CPhysicActor* l_Actor = new CPhysicActor( l_PhysicUserData );
@@ -143,11 +143,11 @@ void CPhysicMaterial::Update()
 
   }
 
-  CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+  CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
   if ( pActionManager->DoAction( "DisableCamera" ) )
   {
-    CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+    CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
     if ( l_CurrentCamera )
     {
@@ -165,7 +165,7 @@ void CPhysicMaterial::Update()
 
     GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );
 
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    CPhysicsManager* l_PM = PhysXMInstance;
 
     SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
     uint32 mask = 1 << ECG_ESCENE;
@@ -179,15 +179,15 @@ void CPhysicMaterial::Update()
       l_PUD->SetColor( colRED );
   }
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  ScriptMInstance->RunCode( "update()" );
 
 }
 
 void CPhysicMaterial::Init()
 {
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  ScriptMInstance->RunCode( "init()" );
 
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  CPhysicsManager* l_PM = PhysXMInstance;
 
   CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
   l_PUD->SetPaint( true );
@@ -222,7 +222,7 @@ void CPhysicMaterial::Render()
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);*/
   //pGraphicsManager->DrawTeapot();
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  ScriptMInstance->RunCode( "render()" );
 
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();

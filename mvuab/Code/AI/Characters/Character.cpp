@@ -42,7 +42,7 @@ void CCharacter::Init()
 {
   m_Height = 1.0f;
   m_Radius = 0.2f;
-  CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
+  CPhysicsManager* l_PM = PhysXMInstance;
   l_PM->AddController( m_Name, m_Radius, m_Height, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(), -10.0 );
   m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
   SetPosition( m_Controller->GetPosition() );
@@ -52,7 +52,7 @@ void CCharacter::Init()
 void CCharacter::Init( CXMLTreeNode& Node )
 {
   m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
-  CPhysicsManager* l_PM = CPhysicsManager::GetSingletonPtr();
+  CPhysicsManager* l_PM = PhysXMInstance;
   l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.4f ),
                        Node.GetFloatProperty( "height", 2.5f ),
                        Node.GetFloatProperty( "slope", 0.2f ),

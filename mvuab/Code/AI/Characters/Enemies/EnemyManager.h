@@ -8,6 +8,7 @@
 #include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Utils\MapManager.h"
+#include "Utils\Manager.h"
 #include "Enemy.h"
 #include "Utils\ObjectFactory.h"
 
@@ -15,7 +16,7 @@ class CEnemy;
 class CXMLTreeNode;
 class CStateMachine;
 
-class CEnemyManager : public CMapManager<CEnemy>
+class CEnemyManager : public CMapManager<CEnemy>, public CManager
 {
 private:
 
@@ -32,7 +33,6 @@ private:
     std::string m_StateMachineFileName;
   };
 
-  std::string                  m_Filename;
   CMapManager<CStateMachine>   m_StateMachines;
   CMapManager<CCoreEnemy>      m_CoreEnemies;
   std::map<unsigned int, std::vector<Math::Vect3f>> m_Routes;
@@ -49,11 +49,12 @@ private:
   void RegisterEnemies();
 public:
   CEnemyManager();
+  CEnemyManager(CXMLTreeNode& atts);
   ~CEnemyManager();
 
   void Update();
   void Render();
-  void Init( const std::string& Filename );
+  void Init();
   void Reload();
   template<class T>
   static CEnemy* CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode );

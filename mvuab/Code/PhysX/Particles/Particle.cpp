@@ -12,7 +12,9 @@ CParticle::CParticle()
   m_LifeTime = 0.0;
 
   m_IsAlive = false;
-  m_Billboard.Init( Math::Vect3f( 0.0f, 0.0f, 0.0f ), 1, "" );
+  m_Billboard.SetPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
+  m_Billboard.SetSize( 1 );
+  m_Billboard.SetTexture( "" );
 
   m_Color = Math::Vect3f( 1.0f, 1.0f, 1.0f );
   m_Position = Math::Vect3f( 0.0f, 0.0f, 0.0f );
@@ -130,8 +132,10 @@ void CParticle::Update( float dt )
 
   m_Velocity += m_Acceleration * dt;
   m_Position += ( ( m_Velocity + l_OldVel ) / 2.0f ) * dt;
-
-  m_Billboard.Init( m_Position, m_Size, m_TextureName );
+  m_Billboard.SetPosition( m_Position );
+  m_Billboard.SetSize( m_Size );
+  m_Billboard.SetTexture( m_TextureName );
+  m_Billboard.Init();
   m_Billboard.Update();
 }
 
@@ -139,7 +143,7 @@ void CParticle::Render()
 {
     if(!m_IsAlive) return;
 
-    CCameraManager *l_CM = CCore::GetSingletonPtr()->GetCameraManager();
+    CCameraManager *l_CM = CameraMInstance;
     D3DXVECTOR3 l_Pos = D3DXVECTOR3(m_Position.x, m_Position.y, m_Position.z);
 
     if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, m_Size))

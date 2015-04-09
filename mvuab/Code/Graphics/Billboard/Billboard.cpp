@@ -8,10 +8,28 @@
 #include "Math\Matrix44.h"
 #include "RenderableVertex\VertexTypes.h"
 #include "Effects\EffectManager.h"
+#include "EngineConfig.h"
 
 CBillboard::CBillboard() : CName()
+  , m_Position( Math::Vect3f( 0, 2, 1 ) )
+  , m_Size( 2 )
+  , m_Active( true )
+  , m_Texture ( TextureMInstance->GetTexture( EngineConfigInstance->GetBillboardTexturePath() ) )
+  , CManager() 
 {
+}
 
+CBillboard::CBillboard(CXMLTreeNode& atts)
+  :CName()
+  , m_Position( Math::Vect3f( 0, 2, 1 ) )
+  , m_Size( 2 )
+  , m_Active( true )
+  , m_Texture ( TextureMInstance->GetTexture( EngineConfigInstance->GetBillboardTexturePath() ) )
+  , CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA XML
+	*/
 }
 
 CBillboard::~CBillboard()
@@ -19,13 +37,8 @@ CBillboard::~CBillboard()
 }
 
 
-void CBillboard::Init( Math::Vect3f Position, float Size, std::string Texture )
+void CBillboard::Init()
 {
-  m_Position = Position;
-  m_Size = Size;
-  m_Active = true;
-  m_Texture = CoreInstance->GetTextureManager()->GetTexture( Texture );
-
   /*
   unsigned short indices[6] = {0, 2, 1, 1, 2, 3};
   TT1_VERTEX v[4] =
@@ -53,7 +66,7 @@ void CBillboard::Update()
     orientar a la camara (producto vectorial direccion i sumar VectUP) [normalizados]
     N_VectRight=VectUp^VectDir
     a=pos + n_VectorUP*size/2 -N_VectRight*size/2;*/
-    CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
+    CCamera* l_Camera = CameraMInstance->GetCurrentCamera();
     Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
     Math::Vect3f l_vRight = ( -l_Pos2Cam.Normalize() ) ^ l_Camera->GetVecUp().Normalize();
     l_vRight.Normalize();
@@ -81,7 +94,7 @@ void CBillboard::Render()
 
     CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "GenerateGBufferTechnique" );
 
-    CCamera* l_Camera = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera();
+    CCamera* l_Camera = CameraMInstance->GetCurrentCamera();
     Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
 
     GraphicsInstance->DrawQuad3DWithTechnique( m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique, m_Texture );
@@ -93,7 +106,7 @@ void CBillboard::Render()
 
 void CBillboard::SetTexture( std::string Texture )
 {
-  m_Texture = CoreInstance->GetTextureManager()->GetTexture( Texture );
+  m_Texture = TextureMInstance->GetTexture( Texture );
 }
 CTexture* CBillboard::GetTexture()
 {

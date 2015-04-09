@@ -34,9 +34,9 @@ CEnemy::~CEnemy()
 {
   CRenderableObjectsManager* l_ROM = ROMLInstance->GetResource( "characters" );
   l_ROM->RemoveResource( m_Name );
-  CPhysicsManager::GetSingletonPtr()->ReleasePhysicController( m_Controller );
+  PhysXMInstance->ReleasePhysicController( m_Controller );
 
-  CGizmosManager* l_GizmosManager = CCore::GetSingletonPtr()->GetGizmosManager();
+  CGizmosManager* l_GizmosManager = GizmosMInstance;
   std::ostringstream ss;
   ss << GetName() << "HeadGizmo";
   std::string l_GizmoName( ss.str() );
@@ -49,7 +49,7 @@ CEnemy::~CEnemy()
 
 void CEnemy::Update()
 {
-  CScriptManager* l_SM = CCore::GetSingletonPtr()->GetScriptManager();
+  CScriptManager* l_SM = ScriptMInstance;
 
   if (m_CurrentState != m_NextState)
     m_OnExit = true;
@@ -90,7 +90,7 @@ void CEnemy::Update()
   Math::Vect3f l_Pos = m_Position;
   l_Pos.y += m_Controller->GetHeight();
 
-  CGizmosManager* l_GizmosManager = CCore::GetSingletonPtr()->GetGizmosManager();
+  CGizmosManager* l_GizmosManager = GizmosMInstance;
   std::ostringstream ss;
   ss << GetName() << "HeadGizmo";
   std::string l_GizmoName( ss.str() );

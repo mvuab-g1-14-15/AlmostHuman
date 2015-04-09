@@ -11,6 +11,8 @@
 #include <iostream>
 
 #include "Utils/BaseUtils.h"
+#include "Utils\Defines.h"
+#include "EngineConfig.h"
 
 #include <assert.h>
 
@@ -23,7 +25,12 @@
 using namespace luabind;
 
 
-CScriptManager::CScriptManager() : m_LuaPath( "" )
+CScriptManager::CScriptManager() : CManager()
+{
+}
+
+CScriptManager::CScriptManager(CXMLTreeNode& atts)
+	: CManager(atts)
 {
 }
 
@@ -32,12 +39,13 @@ CScriptManager::~CScriptManager()
   Destroy();
 }
 
-void CScriptManager::Initialize()
+void CScriptManager::Init()
 {
   m_LS = luaL_newstate();
   luaL_openlibs( m_LS );
   luabind::open( m_LS );
   RegisterLUAFunctions();
+  Load();
 }
 
 void CScriptManager::Destroy()
@@ -50,24 +58,23 @@ void CScriptManager::Reload()
   m_LuaFiles.clear();
   m_LuaInitFiles.clear();
   Destroy();
-  Initialize();
-  Load( m_LuaPath );
+  Init();
 }
 
-void CScriptManager::Load( const std::string& Path )
+void CScriptManager::Load()
 {
-  m_LuaPath = Path;
-  baseUtils::GetFilesFromPath( m_LuaPath, "lua", m_LuaFiles );
-  baseUtils::GetFilesFromPath( m_LuaPath + "init/", "lua", m_LuaInitFiles );
+  mConfigPath = EngineConfigInstance->GetLuaRunPath();
+  baseUtils::GetFilesFromPath( mConfigPath, "lua", m_LuaFiles );
+  baseUtils::GetFilesFromPath( mConfigPath + "init/", "lua", m_LuaInitFiles );
 
   TVectorLuaFiles::iterator it = m_LuaFiles.begin(), it_end = m_LuaFiles.end();
   TVectorLuaFiles::iterator it_init = m_LuaInitFiles.begin(), it_init_end = m_LuaInitFiles.end();
 
   for ( ; it_init != it_init_end ; ++it_init )
-    RunFile( m_LuaPath + "init/" + ( *it_init ) );
+    RunFile( mConfigPath + "init/" + ( *it_init ) );
 
   for ( ; it != it_end; ++it )
-    RunFile( m_LuaPath + ( *it ) );
+    RunFile( mConfigPath + ( *it ) );
 }
 
 void CScriptManager::RunCode( const std::string& Code )

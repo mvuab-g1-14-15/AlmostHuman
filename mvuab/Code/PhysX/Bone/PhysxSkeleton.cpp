@@ -297,7 +297,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
     //l_pSphericalJoint->SetInfoComplete(l_vJointPoint,l_vAxis,l_pActor1,l_pActor2);
     l_pSphericalJoint->SetInfoRagdoll(l_pJointInfo,l_pActor1,l_pActor2);
   }
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+  PhysXMInstance->AddPhysicSphericalJoint(l_pSphericalJoint);
   m_vSphericalJoints.push_back(l_pSphericalJoint);
 
 	return true;
@@ -332,7 +332,7 @@ bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
     l_pFixedJoint->SetInfo(l_pActor1,l_pActor2);
   }
 
-  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
+  PhysXMInstance->AddPhysicFixedJoint(l_pFixedJoint);
   m_vFixedJoints.push_back(l_pFixedJoint);
 
 	return true;

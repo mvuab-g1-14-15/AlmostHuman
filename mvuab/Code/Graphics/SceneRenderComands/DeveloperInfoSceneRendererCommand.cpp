@@ -20,7 +20,7 @@ void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
   int32 FontId = FM->GetTTF_Id( "Consolas" );
   uint32 width, height;
   GM.GetWidthAndHeight( width, height );
-  CCamera* lCurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+  CCamera* lCurrentCamera = CameraMInstance->GetCurrentCamera();
   Math::Vect3f lPosition = lCurrentCamera->GetPosition();
   Math::Vect3f lTarget = lCurrentCamera->GetLookAt();
   int32 lFontHeight = FM->SizeY( "FPS", FontId );

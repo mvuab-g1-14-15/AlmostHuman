@@ -44,13 +44,13 @@ void CBlaster::Start()
 void CBlaster::Update()
 {
   CGraphicsManager* l_GM = GraphicsInstance;
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  CPhysicsManager* l_PM = PhysXMInstance;
 
-  CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+  CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
   if ( l_CurrentCamera )
   {
-    //CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    //CPhysicsManager* l_PM = PhysXMInstance;
     //CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "Disparo" );
     //l_PhysicUserData->SetColor( colRED );
     //l_PhysicUserData->SetPaint( true );
@@ -112,16 +112,14 @@ void CBlaster::Render()
   if ( !m_BlasterShoot )
     return;
 
+  
+  PhysXMInstance->Render( );
   // Get the graphics manager
+  
   CGraphicsManager* l_GM = GraphicsInstance;
-
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-
-  l_PM->DebugRender( l_GM );
-
   // Set the identity
   Math::Mat44f t;
-  GraphicsInstance->SetTransform( t );
+  l_GM->SetTransform( t );
 
   l_GM->DrawLine(m_InitialPos, m_FinalPos, Math::colORANGE );
 }

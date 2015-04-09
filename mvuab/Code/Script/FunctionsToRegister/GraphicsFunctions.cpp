@@ -62,7 +62,7 @@ void registerCameras( lua_State* aLuaState )
   // CAMERA MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CCameraManager )
+  LUA_DECLARE_DERIVED_CLASS( CCameraManager, CManager )
   LUA_DECLARE_DEFAULT_CTOR
   LUA_DECLARE_METHOD( CCameraManager, GetCamera )
   LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )

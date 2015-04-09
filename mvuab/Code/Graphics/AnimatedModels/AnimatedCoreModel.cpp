@@ -11,6 +11,7 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableVertex\IndexedVertexs.h"
 
+#include "Core.h"
 #define MAXBONES 29
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) : 
@@ -116,7 +117,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
-    CTexture *t = CTextureManager::GetSingletonPtr()->GetTexture( m_Path + Filename);
+    CTexture *t = TextureMInstance->GetTexture( m_Path + Filename);
     if(t)
         m_TextureVector.push_back(t);
     return (t != 0);

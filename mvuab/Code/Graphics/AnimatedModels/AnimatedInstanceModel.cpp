@@ -312,8 +312,7 @@ void CAnimatedInstanceModel::LoadTextures()
 {
   for ( size_t i = 0; i < m_AnimatedCoreModel->GetNumTextures(); ++i )
   {
-    CTexture* l_Texture = CTextureManager::GetSingleton().GetTexture(
-                            m_AnimatedCoreModel->GetTextureName( i ) );
+	CTexture* l_Texture = TextureMInstance->GetTexture( m_AnimatedCoreModel->GetTextureName( i ) );
     m_Textures.push_back( l_Texture );
   }
 }

@@ -4,22 +4,26 @@
 #include "Utils\Name.h"
 #include "Utils\Defines.h"
 #include "Math\Vector3.h"
+#include "Utils\Manager.h"
 //---Forward Declarations--
 class CTexture;
 //-------------------------
 
 class CRenderableVertexs;
-class CBillboard : public CName
+class CBillboard : public CName, public CManager
 {
 public:
 	CBillboard();
+	CBillboard(CXMLTreeNode& atts);
 	~CBillboard();
-	void Init(Math::Vect3f Position, float Size, std::string Texture);
+	void Init();
 	void Update();
 	void Render();
 
 	void SetTexture(std::string Texture);
 	CTexture* GetTexture();
+	GET_SET(float, Size);
+	GET_SET(Math::Vect3f, Position);
 private:
 	CTexture*			m_Texture;
 	float				m_Size;

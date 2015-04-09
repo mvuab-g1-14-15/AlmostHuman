@@ -95,31 +95,31 @@ void CPlayerPhysicProcess::Update()
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
   {
-    // CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "reload()" );
-    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
-    //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+    // ScriptMInstance->RunCode( "reload()" );
+    ScriptMInstance->Reload();
+    //ScriptMInstance->RunCode( "init()" );
   }
 
  /* if ( pActionManager->DoAction( "ChangeRoom" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "cambiar_sala()" );*/
+    ScriptMInstance->RunCode( "cambiar_sala()" );*/
 
   if ( pActionManager->DoAction( "ChangeCamera" ) )
   {
-    if ( "FreeCam" == CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCameraName() )
-      CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera( "TestProcessCam" );
+    if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
+      CameraMInstance->SetCurrentCamera( "TestProcessCam" );
     else
-      CCore::GetSingletonPtr()->GetCameraManager()->SetCurrentCamera( "FreeCam" );
+      CameraMInstance->SetCurrentCamera( "FreeCam" );
   }
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
     EffectManagerInstance->Reload();
-    CLightManager::GetSingletonPtr()->ReLoad();
+    LightMInstance->ReLoad();
     ROTMInstance->ReLoad();
     SMeshMInstance->Reload();
     ROMLInstance->Reload();
-    CLightManager::GetSingletonPtr()->ReLoad();
+    LightMInstance->ReLoad();
     SRCMInstance->ReLoad();
   }
 
@@ -132,7 +132,7 @@ void CPlayerPhysicProcess::Update()
   ////////////////////////////////////////////////////////////////////
 
   /* Math::Vect3f l_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-   float  l_Yaw = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetYaw();
+   float  l_Yaw = CameraMInstance->GetCurrentCamera()->GetYaw();
 
    if ( pActionManager->DoAction( "MoveForward" ) )
      l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
@@ -156,11 +156,11 @@ void CPlayerPhysicProcess::Update()
    if ( pActionManager->DoAction( "Jump" ) )
      m_PhysicController->Jump( 50 );
   //TODO CHARACTERCONTROLLER Descomentar para que la camara siga al character controller
-  CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );*/
+  CameraMInstance->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );*/
 
 
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
+  //ScriptMInstance->RunCode( "update()" );
+  ScriptMInstance->RunCode( "update_gameplay()" );
 
 
   //////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ void CPlayerPhysicProcess::Update()
   if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
   {
     CCamera* l_CurrentCamera =
-      CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+      CameraMInstance->GetCurrentCamera();
 
     if ( l_CurrentCamera )
       m_Blaster->Update();
@@ -192,31 +192,31 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
   //Scene Character Controller
   //Step1
   std::string l_Type = "Box";
-  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ), v3fZERO,
+  PhysXMInstance->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ), v3fZERO,
       v3fZERO, 0, 0 );
 
   //Step2
   l_Type = "Box";
-  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
+  PhysXMInstance->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
       Math::Vect3f( 4, 0, 0 ), v3fZERO, 0, 0 );
 
   //Step3
   l_Type = "Box";
-  CPhysicsManager::GetSingletonPtr()->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
+  PhysXMInstance->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
       Math::Vect3f( 8, 0, 0 ), v3fZERO, 0, 0 );
 
   //Plano Inclinado TODO
   l_Type = "Box";
-  CPhysicsManager::GetSingletonPtr()->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
+  PhysXMInstance->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
       Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
 
 }
 
 void CPlayerPhysicProcess::Init()
 {
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  //ScriptMInstance->RunCode( "init()" );
+  ScriptMInstance->RunCode( "load_gameplay()" );
+  CPhysicsManager* l_PM = PhysXMInstance;
 
   ////////////////////////////////////////////////////
   ////////////        CREATE GRENADE       ///////////
@@ -244,7 +244,7 @@ void CPlayerPhysicProcess::Init()
   //m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
   //    userData, l_Pos );
   //l_PM->AddPhysicController( m_PhysicController );
-  //CCameraManager::GetSingletonPtr()->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
+  //CameraMInstance->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
 
  
 
@@ -279,13 +279,13 @@ void CPlayerPhysicProcess::Init()
    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
      l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
-   CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+   PhysXMInstance->AddPhysicActor( l_AseMeshActor );
    m_vPA.push_back( l_AseMeshActor );*/
 
   //CPhysicUserData* l_pPhysicUserDataASEMesh;
   //CPhysicActor*  l_AseMeshActor;
 
-  //CPhysicCookingMesh* l_pMeshes = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCookingMesh();
+  //CPhysicCookingMesh* l_pMeshes = PhysXMInstance->GetCookingMesh();
   //CStaticMeshManager* l_StaticMeshManager = SMeshMInstance;
 
   //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
@@ -301,12 +301,12 @@ void CPlayerPhysicProcess::Init()
   //    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
   //  //m_AseMeshActor->CreateBody ( 10.f );
-  //  CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor( l_AseMeshActor );
+  //  PhysXMInstance->AddPhysicActor( l_AseMeshActor );
   //  m_vPA.push_back( l_AseMeshActor );
   //}
 
   //Add Escenario
-  if( !CCore::GetSingletonPtr()->GetPhysicsManager()->AddMesh("Data/a.ASE", "Escenario") )
+  if( !PhysXMInstance->AddMesh("Data/a.ASE", "Escenario") )
       LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 
   m_AStar = new CAStar();
@@ -323,7 +323,7 @@ void CPlayerPhysicProcess::Render()
   m_Grenade->Render();
   m_AStar->Render();
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  ScriptMInstance->RunCode( "render()" );
   m_Blaster->Render();
 }
 

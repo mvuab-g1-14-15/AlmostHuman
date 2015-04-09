@@ -3,21 +3,22 @@
 
 #include "XML\XMLTreeNode.h"
 #include "ParticleEmitter.h"
-
+#include "Utils\Manager.h"
 #include <string>
 #include <vector>
 
-class CParticleManager
+class CParticleManager: public CManager
 {
 private:
   std::vector<CParticleEmitter*> m_Emitters;
 
 public:
   CParticleManager();
+  CParticleManager(CXMLTreeNode& atts);
   ~CParticleManager();
 
-  bool Init( const std::string& path );
-  void Update( float dt );
+  void Init();
+  void Update();
   void Render();
   void AddEmitter( CParticleEmitter* l_Emitter );
 };

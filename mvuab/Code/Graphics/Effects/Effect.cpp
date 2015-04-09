@@ -287,7 +287,7 @@ D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
 bool CEffect::SetLights( size_t NumOfLights )
 {
   ResetLightsHandle();
-  CLightManager* l_pLightManager = CLightManager::GetSingletonPtr();
+  CLightManager* l_pLightManager = LightMInstance;
 
   for ( size_t i = 0; i < NumOfLights; ++i )
   {
@@ -330,7 +330,7 @@ bool CEffect::SetLights( size_t NumOfLights )
 bool CEffect::SetLight( size_t i_light )
 {
   ResetLightsHandle();
-  CLight* l_pCurrentLight = CLightManager::GetSingletonPtr()->GetLight( i_light );
+  CLight* l_pCurrentLight = LightMInstance->GetLight( i_light );
 
   if ( !l_pCurrentLight )
   {

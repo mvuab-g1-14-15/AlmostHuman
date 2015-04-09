@@ -66,13 +66,13 @@ void CAStarProcess::Update()
     SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    ScriptMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
     EffectManagerInstance->Reload();
-    CLightManager::GetSingletonPtr()->ReLoad();
+    LightMInstance->ReLoad();
     ROTMInstance->ReLoad();
     SMeshMInstance->Reload();
     ROMLInstance->Reload();
@@ -82,7 +82,7 @@ void CAStarProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     ActionManagerInstance->Reload();
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  ScriptMInstance->RunCode( "update()" );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,8 +95,8 @@ void CAStarProcess::InitSceneCharacterController()
 
 void CAStarProcess::Init()
 {
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+  //ScriptMInstance->RunCode( "init()" );
+  CPhysicsManager* l_PM = PhysXMInstance;
   m_pAStarScene = new CAStar();
   m_pAStarScene->Init();
 
@@ -104,7 +104,7 @@ void CAStarProcess::Init()
   userData->SetPaint( true );
   userData->SetColor( colWHITE );
   m_vPUD.push_back( userData );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPosition();
+  Math::Vect3f l_Pos = CameraMInstance->GetCurrentCamera()->GetPosition();
   m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
       userData, l_Pos );
   l_PM->AddPhysicController( m_PhysicController );
@@ -153,7 +153,7 @@ void CAStarProcess::Render()
   m.SetIdentity();
   pGraphicsManager->SetTransform(m);*/
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  ScriptMInstance->RunCode( "render()" );
 }
 
 void CAStarProcess::RenderDebugInfo()

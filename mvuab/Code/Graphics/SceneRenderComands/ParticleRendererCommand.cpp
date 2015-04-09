@@ -9,5 +9,5 @@ CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRen
 
 void CParticleRenderCommand::Execute( CGraphicsManager& GM )
 {
-    CCore::GetSingletonPtr()->GetParticleManager()->Render();
+    ParticleMInstance->Render();
 }

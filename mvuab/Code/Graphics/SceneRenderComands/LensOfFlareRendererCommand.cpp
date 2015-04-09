@@ -113,8 +113,8 @@ void CLensOfFlareRendererCommand::Execute( CGraphicsManager& GM )
 
 CLight* CLensOfFlareRendererCommand::GetSun()
 {
-  CLight* l_Sun = CLightManager::GetSingletonPtr()->GetLight( 0 );
-  CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+  CLight* l_Sun = LightMInstance->GetLight( 0 );
+  CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
   Math::Vect3f l_SunPosition = l_Sun->GetPosition();
 

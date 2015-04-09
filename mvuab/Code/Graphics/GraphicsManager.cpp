@@ -188,7 +188,7 @@ void CGraphicsManager::SetupMatrices()
   D3DXMATRIX l_matView;
   D3DXMATRIX l_matProject;
   // Obtain the current camera from the camera manager
-  CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+  CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
 
   //Set default view and projection matrix
   if ( !l_CurrentCamera )

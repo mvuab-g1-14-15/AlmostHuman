@@ -93,7 +93,7 @@ bool CPhysXObjManager::Reload()
 				assert(pxObj);
 
 				pxObj->m_Type = type;
-				pxObj->m_Group = CCore::GetSingletonPtr()->GetPhysicsManager()->GetCollisionGroup(groupName);
+				pxObj->m_Group = PhysXMInstance->GetCollisionGroup(groupName);
 				pxObj->SetName(name);
 				pxObj->SetPosition(pos);
 				pxObj->SetYaw(yaw);
@@ -125,7 +125,7 @@ bool CPhysXObjManager::Reload()
 
 					l_MeshActor->AddBoxShape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
 
-					CCore::GetSingletonPtr()->GetPhysicsManager()->AddPhysicActor(l_MeshActor);
+					PhysXMInstance->AddPhysicActor(l_MeshActor);
 				}
 			}
 		}

@@ -10,13 +10,22 @@
 #include "Timer\Timer.h"
 #include "Core.h"
 #include "StateMachine\StateMachine.h"
-#include "Utils\Defines.h"
 #include "StaticMeshes\StaticMeshManager.h"
+#include "EngineConfig.h"
 
 typedef CEnemy* ( *CreateEnemyFn )( CXMLTreeNode& );
 
 CEnemyManager::CEnemyManager()
+	: CManager()
 {
+}
+
+CEnemyManager::CEnemyManager(CXMLTreeNode& atts)
+	: CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA XML
+	*/
 }
 
 CEnemyManager::~CEnemyManager()
@@ -58,14 +67,14 @@ void CEnemyManager::Render()
     it->second->Render();
 }
 
-void CEnemyManager::Init( const std::string& Filename )
+void CEnemyManager::Init()
 {
-  m_Filename = Filename;
+  mConfigPath = EngineConfigInstance->GetEnemiesPath();
   RegisterEnemies();
   CXMLTreeNode l_File;
 
-  if ( !l_File.LoadFile( m_Filename.c_str() ) )
-    printf( "File '%s' not correctly loaded", Filename.c_str() );
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+    printf( "File '%s' not correctly loaded", mConfigPath.c_str() );
 
   CXMLTreeNode  m = l_File["enemies"];
 
@@ -94,7 +103,7 @@ void CEnemyManager::Init( const std::string& Filename )
 void CEnemyManager::Reload()
 {
   Destroy();
-  Init( m_Filename );
+  Init();
 }
 
 template<class T>

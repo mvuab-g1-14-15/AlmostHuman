@@ -13,5 +13,5 @@ CAction::~CAction()
 
 void CAction::Execute()
 {
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( m_LuaFunction );
+  ScriptMInstance->RunCode( m_LuaFunction );
 }

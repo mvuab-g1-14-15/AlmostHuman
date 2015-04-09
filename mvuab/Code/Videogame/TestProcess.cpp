@@ -31,9 +31,9 @@
 CTestProcess::CTestProcess() : CProcess()
 
 {
-  //CCameraManager::GetSingletonPtr()->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
+  //CameraMInstance->NewCamera(CCamera::FirstPerson, "TestProcessCam", Math::Vect3f(-15.0f,2.0f,0.0f),
   //  Math::Vect3f(0.0f,2.0f,0.0f) );
-  CCameraManager::GetSingletonPtr()->SetCurrentCamera( "TestProcessCam" );
+  CameraMInstance->SetCurrentCamera( "TestProcessCam" );
   unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL |
                          VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1 |
                          VERTEX_TYPE_DIFFUSE;
@@ -55,13 +55,13 @@ void CTestProcess::Update()
     SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    ScriptMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order
     EffectManagerInstance->Reload();
-    CLightManager::GetSingletonPtr()->ReLoad();
+    LightMInstance->ReLoad();
     ROTMInstance->ReLoad();
     SMeshMInstance->Reload();
     ROMLInstance->Reload();
@@ -103,12 +103,12 @@ void CTestProcess::Update()
   }
 
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+  ScriptMInstance->RunCode( "update()" );
 }
 
 void CTestProcess::Init()
 {
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
+  ScriptMInstance->RunCode( "init()" );
 }
 
 void CTestProcess::Render()
@@ -118,7 +118,7 @@ void CTestProcess::Render()
   /*pGraphicsManager->DrawAxis(5);
   pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);*/
   //pGraphicsManager->DrawTeapot();
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+  ScriptMInstance->RunCode( "render()" );
   // START: TO DELETE LATER IF IS NOT NECESSARY,
   unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
   unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();

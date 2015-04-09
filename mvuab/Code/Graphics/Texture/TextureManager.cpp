@@ -1,9 +1,14 @@
 #include "TextureManager.h"
 
 CTextureManager::CTextureManager()
+	:CManager()
 {
 }
 
+CTextureManager::CTextureManager(CXMLTreeNode& atts)
+	:CManager(atts)
+{
+}
 CTextureManager::~CTextureManager()
 {
   Destroy();

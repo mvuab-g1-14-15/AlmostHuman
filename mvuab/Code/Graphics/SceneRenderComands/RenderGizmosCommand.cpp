@@ -18,7 +18,7 @@ void CRenderGizmosCommand::Execute( CGraphicsManager& GM )
 {
   if ( m_RenderGizmos )
   {
-    CGizmosManager* l_GM = CCore::GetSingletonPtr()->GetGizmosManager();
+    CGizmosManager* l_GM = GizmosMInstance;
     l_GM->Render();
   }
 }

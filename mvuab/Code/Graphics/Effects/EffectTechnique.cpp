@@ -83,7 +83,7 @@ bool CEffectTechnique::BeginRender()
 
   if ( m_UseCameraPosition )
   {
-    Math::Vect3f l_CameraEye = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPosition();
+    Math::Vect3f l_CameraEye = CameraMInstance->GetCurrentCamera()->GetPosition();
     m_Effect->SetCameraPosition( l_CameraEye );
   }
 

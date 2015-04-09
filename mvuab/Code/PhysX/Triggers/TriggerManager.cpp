@@ -6,19 +6,32 @@
 #include "Logger\Logger.h"
 #include "Core.h"
 #include "Trigger.h"
+#include "EngineConfig.h"
 
-CTriggerManager::CTriggerManager(): m_FileName( "" )
+CTriggerManager::CTriggerManager()
+	: CManager()
 {
 }
 
+CTriggerManager::CTriggerManager(CXMLTreeNode& atts)
+	: CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA XML
+	*/
+}
 CTriggerManager::~CTriggerManager()
 {
   Clear();
 }
 
+void CTriggerManager::Init()
+{
+	LoadXML(EngineConfigInstance->GetTriggersPath());
+}
 bool CTriggerManager::LoadXML( const std::string& FileName )
 {
-  m_FileName = FileName;
+  mConfigPath = FileName;
   CXMLTreeNode newFile;
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
@@ -50,10 +63,10 @@ bool CTriggerManager::LoadXML( const std::string& FileName )
 
 bool CTriggerManager::Reload()
 {
-  if ( m_FileName != "" )
+  if ( mConfigPath != "" )
   {
     Clear();
-    return LoadXML( m_FileName );
+    return LoadXML( mConfigPath );
   }
 
   return false;
