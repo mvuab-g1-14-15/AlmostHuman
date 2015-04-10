@@ -7,85 +7,78 @@
 
 
 CLogger::CLogger()
-    : m_uLinesCount( 1 )
-    , m_uCapacity( CAPACITY )
-    , m_eLogLevel( ELL_INFORMATION )
-    , m_bErrors( false )
-    , m_bWarnings( false )
+    : m_eLogLevel( eLogInfo )
     , m_sPathFile( "Logs/" )
 {
-    m_vLogs.reserve( m_uCapacity );
 }
 
-void CLogger::AddNewLog( ELOG_LEVEL ll, const char* format, ... )
+void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, long line, const char* format, ... )
 {
-    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-    va_list args;
-    char* buffer;
-    va_start( args, format );
-    int len = _vscprintf( format, args ) + 1;
-    buffer = ( char* )malloc( len * sizeof( char ) );
-    vsprintf_s( buffer, len, format, args );
-
     if ( ll >= m_eLogLevel )
     {
+        va_list args;
+        char* buffer;
+        va_start( args, format );
+        int len = _vscprintf( format, args ) + 1;
+        buffer = ( char* )malloc( len * sizeof( char ) );
+        vsprintf_s( buffer, len, format, args );
+
         SLog newLog;
         newLog.m_bLineFeed    = false;
-        newLog.m_sLogText        = buffer;
+        newLog.m_sLogText     = buffer;
         newLog.m_eLogLevel    = ll;
-        newLog.m_uLogLine = m_uLinesCount;
-        m_uLinesCount++;
+        newLog.m_class        = class_str;
+        newLog.m_File         = file;
+        newLog.m_Line         = line;
 
+        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
         switch ( ll )
         {
-            case ELL_INFORMATION:
+            case eLogInfo:
                 {
                     SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
                 }
                 break;
 
-            case ELL_WARNING:
+            case eLogWarning:
                 {
                     SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-                    m_bWarnings = true;
                 }
                 break;
 
-            case ELL_ERROR:
+            case eLogError:
                 {
                     SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY );
-                    m_bErrors = true;
                 }
                 break;
         }
 
-        if ( m_vLogs.size() == m_uCapacity )
-        {
-            //Tenemos que sacar el log más antiguo:
-            std::vector<SLog>::iterator it = m_vLogs.begin();
-            m_vLogs.erase( it );
-        }
+        std::string lStr("]["), lCopyClassStr(newLog.m_class);
+        lCopyClassStr.insert(5, lStr);
+        std::cout <<
+                  "----------------------------------------------------------------------------------------------------------------------------------\n";
+        std::cout << "[" << lCopyClassStr << "]" << std::endl << "[File][" << file << "]" << std::endl << "[Line][" << line <<
+                  "]" << std::endl << "[Message]" << newLog.m_sLogText << std::endl;
+        std::cout <<
+                  "----------------------------------------------------------------------------------------------------------------------------------\n";
 
-        std::cout << newLog.m_sLogText << std::endl << std::endl;
+        // Add new log to the vector
         m_vLogs.push_back( newLog );
-    }
 
-    delete buffer;
+        delete buffer;
+    }
 }
 
-//TODO: Grabar la informacion de dia y hora
 bool CLogger::SaveLogsInFile()
 {
     bool isOk = false;
     FILE* file = NULL;
-
 
     std::string l_sPathFile    = "";
     uint32 day, month, year, hour, minute, second;
     baseUtils::GetDate( day, month, year, hour, minute, second );
     StringUtils::Format( l_sPathFile, "%s_(%d-%d-%d)_(%dh-%dm-%ds).txt", m_sPathFile.c_str(), day, month, year, hour,
                          minute, second );
-
 
     fopen_s( &file, l_sPathFile.c_str(), "w" );
     std::string report = l_sPathFile;
@@ -101,8 +94,6 @@ bool CLogger::SaveLogsInFile()
             //Recorremos todos los logs y vamos rellenando el
             SLog new_log = *it;
             std::string number;
-            StringUtils::Format( l_sPathFile, "%d", new_log.m_uLogLine );
-
 
             report += number;
 
@@ -110,21 +101,21 @@ bool CLogger::SaveLogsInFile()
 
             switch ( new_log.m_eLogLevel )
             {
-                case ELL_INFORMATION:
+                case eLogInfo:
                     {
                         report += "[INFORMATION]";
                     }
                     break;
 
-                case ELL_WARNING:
+                case eLogWarning:
                     {
-                        report += "[  WARNING  ]";
+                        report += "[WARNING]";
                     }
                     break;
 
-                case ELL_ERROR:
+                case eLogError:
                     {
-                        report += "[___ERROR___]";
+                        report += "[ERROR]";
                     }
             }
 
@@ -138,9 +129,6 @@ bool CLogger::SaveLogsInFile()
         fclose( file );
         isOk = true;
     }
-
-    if ( isOk )
-    { AddNewLog( ELL_INFORMATION, "El log ha sido guardado correctamente en un fichero fisico" ); }
 
     return isOk;
 }

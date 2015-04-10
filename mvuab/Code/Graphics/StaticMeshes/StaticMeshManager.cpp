@@ -15,24 +15,24 @@ CStaticMeshManager::~CStaticMeshManager()
 bool CStaticMeshManager::Load(const std::string &FileName)
 {
     m_FileName = FileName;
-    
+
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(m_FileName.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", m_FileName.c_str());
         return false;
     }
 
     CXMLTreeNode node = newFile["static_meshes"];
     if(!node.Exists())
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes" );
         return false;
     }
 
     for(int i = 0; i < node.GetNumChildren(); i++)
     {
-		//TODO - CHECK THE TAG NAME
+        //TODO - CHECK THE TAG NAME
         std::string name = node(i).GetPszProperty("name", "no_name");
         std::string file = node(i).GetPszProperty("filename", "no_file");
         file = "Data" + file;
@@ -43,9 +43,9 @@ bool CStaticMeshManager::Load(const std::string &FileName)
             CHECKED_DELETE(l_StaticMesh);
         }
         else
-            AddResource(name, l_StaticMesh);
+        { AddResource(name, l_StaticMesh); }
     }
-    
+
     return true;
 }
 

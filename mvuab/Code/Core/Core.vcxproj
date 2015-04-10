@@ -15,14 +15,12 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineConfig.cpp" />
     <ClCompile Include="Process.cpp" />
-    <ClCompile Include="Utils\LogRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineConfig.h" />
     <ClInclude Include="Process.h" />
-    <ClInclude Include="Utils\LogRender.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{834F4205-3E56-4ADB-9947-6EFAFA980FA3}</ProjectGuid>
