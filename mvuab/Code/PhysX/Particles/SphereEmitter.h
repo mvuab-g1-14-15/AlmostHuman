@@ -16,6 +16,10 @@ class CSphereEmitter : public CParticleEmitter
         float m_MinPitch;
         float m_MaxPitch;
 
+        float m_Rand;
+        float m_RandMin;
+        float m_RandMax;
+
     public:
         CSphereEmitter();
         virtual ~CSphereEmitter();
@@ -26,6 +30,7 @@ class CSphereEmitter : public CParticleEmitter
         void Generate(unsigned int l_NumParticles);
         void NewParticle(CParticle *l_Particle);
         
+        void SetRandom(float min, float max);
         void SetRadius(float min, float max);
         void SetPitch(float min, float max);
         void SetYaw(float min, float max);

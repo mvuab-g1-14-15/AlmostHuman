@@ -4,9 +4,6 @@
 CParticleEmitter::CParticleEmitter()
 {
     m_Particles.resize( 0 );
-    
-    m_RandMax = 0;
-    m_RandMin = 0;
 
     m_MinLifetime = 0;
     m_MaxLifetime = 0;
@@ -52,16 +49,6 @@ void CParticleEmitter::SetLifeTime( float min, float max )
 void CParticleEmitter::SetEmitterLifeTime(float LifeTime)
 {
     m_EmitterLifeTime = LifeTime;
-}
-
-void CParticleEmitter::SetMin(float Min)
-{
-    m_RandMin = Min;
-}
-
-void CParticleEmitter::SetMax(float Max)
-{
-    m_RandMax = Max;
 }
 
 float CParticleEmitter::GetActive()

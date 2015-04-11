@@ -945,8 +945,7 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
     l_Emitter->SetPosition( pos );
     l_Emitter->SetVelocity( Vect3f( 1.0f ) );
     l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
-    l_Emitter->SetMin( 5 );
-    l_Emitter->SetMin( 10 );
+    l_Emitter->SetRandom( 5.0f, 10.0f );
     l_Emitter->SetRadius( 0.1f, 0.2f );
     l_Emitter->SetYaw( 0, 360 );
     l_Emitter->SetPitch( 0, 360 );

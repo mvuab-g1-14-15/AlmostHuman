@@ -1,7 +1,6 @@
 #include "SphereEmitter.h"
 #include "Utils/BaseUtils.h"
 
-
 #include <omp.h>
 
 CSphereEmitter::CSphereEmitter()
@@ -18,6 +17,12 @@ CSphereEmitter::CSphereEmitter()
 
 CSphereEmitter::~CSphereEmitter()
 {
+}
+
+void CSphereEmitter::SetRandom(float Min, float Max)
+{
+    m_RandMin = Min;
+    m_RandMax = Max;
 }
 
 void CSphereEmitter::SetRadius(float min, float max)
@@ -80,23 +85,21 @@ void CSphereEmitter::Update(float dt)
 {
     if(m_Particles.size() == 0) return;
     if(!m_Active) return;
+
+    m_ActualTime += dt;
+    if(m_EmitterLifeTime > 0.0f && m_EmitterLifeTime < m_ActualTime) m_Active = false;
     
     int lNumParticles = m_Particles.size();
     CParticle* p = &m_Particles[0];
-    omp_set_num_threads( 2 );
+    omp_set_num_threads(2);
 
     #pragma omp parallel for
-    for ( int i = 0; i < lNumParticles; ++i )
-        ( p + i )->Update( dt );
-    
-    m_ActualTime += dt;
-    m_EmitterLifeTime += dt;
-    
-    if(m_ActualTime < 1.0f)
+    for(int i = 0; i < lNumParticles; ++i)
     {
-        m_Rand = baseUtils::RandRange(m_RandMin, m_RandMax);
-        m_ActualTime = 0.0f;
+        (p + i)->Update(dt);
     }
+    
+    m_Rand = baseUtils::RandRange(m_RandMin, m_RandMax);
     
     for(m_Rand; m_Rand > 0; --m_Rand)
     {
@@ -106,8 +109,6 @@ void CSphereEmitter::Update(float dt)
         if ( it == m_Particles.end() ) return;
         NewParticle(it._Ptr);
     }
-
-    if(m_EmitterLifeTime > 0.0f && m_EmitterLifeTime < m_ActualTime) m_Active = false;
 }
 
 

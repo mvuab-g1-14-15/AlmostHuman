@@ -31,7 +31,7 @@ bool CParticleManager::Init( const std::string& path )
     {
         LOG_ERROR_APPLICATION( "CParticleManager::Init Can't find node \"emitters\"" );
         l_XML.Done(); return false;
-  }
+    }
     
     for(int i = 0; i < l_Node.GetNumChildren(); ++i)
     {
@@ -59,12 +59,6 @@ bool CParticleManager::Init( const std::string& path )
         std::string l_TextureName = l_Node(i).GetPszProperty("Texture", "");
         l_Emitter->SetTextureName(l_TextureName);
         
-        float l_Min = l_Node(i).GetFloatProperty("Min", 0);
-        l_Emitter->SetMin(l_Min);
-        
-        float l_Max = l_Node(i).GetFloatProperty("Max", 0);
-        l_Emitter->SetMin(l_Max);
-        
         if(l_EmitterType == "Sphere")
         {
             Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());
@@ -75,6 +69,9 @@ bool CParticleManager::Init( const std::string& path )
             
             Math::Vect2f l_Pitch = l_Node(i).GetVect2fProperty("Pitch", Math::Vect2f());
             ((CSphereEmitter *) l_Emitter)->SetPitch(l_Pitch.x, l_Pitch.y);
+
+            Math::Vect2f l_Rand = l_Node(i).GetVect2fProperty("Random", Math::Vect2f());
+            ((CSphereEmitter *) l_Emitter)->SetRandom(l_Rand.x, l_Rand.y);
         }
         else if(l_EmitterType == "Cube")
         {
@@ -89,6 +86,9 @@ bool CParticleManager::Init( const std::string& path )
             
             Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());
             ((CCubeEmitter *) l_Emitter)->SetRadius(l_Radius.x, l_Radius.y);
+
+            Math::Vect2f l_Rand = l_Node(i).GetVect2fProperty("Random", Math::Vect2f());
+            ((CCubeEmitter *) l_Emitter)->SetRandom(l_Rand.x, l_Rand.y);
         }
         
         l_Emitter->Generate(l_Node(i).GetIntProperty("NumParticles", 0));
@@ -101,7 +101,7 @@ bool CParticleManager::Init( const std::string& path )
 
 void CParticleManager::Update( float dt )
 {
-    for(size_t i = 0; i < m_Emitters.size(); ++i)
+    for(unsigned int i = 0; i < m_Emitters.size(); ++i)
     {
         if(m_Emitters[i]->GetActive())
         {
@@ -109,9 +109,8 @@ void CParticleManager::Update( float dt )
         }
         else
         {
-            //CHECKED_DELETE(m_Emitters[i]);
-            //m_Emitters.erase(m_Emitters.begin() + i);
-            //break;
+            CHECKED_DELETE(m_Emitters[i]);
+            m_Emitters.erase(m_Emitters.begin() + i);
         }
     }
 }

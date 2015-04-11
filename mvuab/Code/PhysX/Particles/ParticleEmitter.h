@@ -1,8 +1,8 @@
 #ifndef _PARTICLE_EMITTER_H
 #define _PARTICLE_EMITTER_H
 
-#include "Math\Vector3.h"
 #include "Particle.h"
+#include "Math\Vector3.h"
 #include "Utils\Defines.h"
 
 #include <vector>
@@ -11,10 +11,6 @@ class CParticleEmitter
 {
     protected:
         std::vector<CParticle> m_Particles;
-        
-        float m_Rand;
-        float m_RandMin;
-        float m_RandMax;
         
         float m_MinLifetime;
         float m_MaxLifetime;
@@ -47,9 +43,6 @@ class CParticleEmitter
 
         void SetLifeTime(float min, float max);
         void SetEmitterLifeTime(float LifeTime);
-
-        void SetMin(float Min);
-        void SetMax(float Max);
 
         virtual void Generate( unsigned int l_NumParticles ) = 0;
         virtual void Update( float dt ) = 0;
