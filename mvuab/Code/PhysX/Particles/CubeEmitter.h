@@ -27,7 +27,7 @@ class CCubeEmitter : public CParticleEmitter
 		void Render             ();
 
         void Generate (unsigned int l_NumParticles);
-        void NewParticleSphere(CParticle* l_Particle);
+        void NewParticle(CParticle* l_Particle);
 
         void SetDepth(float min, float max);
         void SetWidth(float min, float max);
