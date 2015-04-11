@@ -41,7 +41,7 @@ function CBlaster:GetEnemyFromRay()
 end
 
 function CBlaster:CreateParticles(position, direction)
-	l_Emitter = CCubeEmitter()
+	l_Emitter = particle_manager:CreateCubeEmitter()
 	
 	l_Emitter:SetActive( true )
     l_Emitter:SetEmitterLifeTime( 1 )

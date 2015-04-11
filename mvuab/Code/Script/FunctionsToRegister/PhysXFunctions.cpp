@@ -181,6 +181,7 @@ void registerPhysX( lua_State* m_LS )
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_CLASS( CParticleManager )
     LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
+    LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( m_LS )

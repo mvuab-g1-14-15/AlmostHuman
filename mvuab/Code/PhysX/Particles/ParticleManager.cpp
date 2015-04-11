@@ -141,3 +141,8 @@ void CParticleManager::AddEmitter( CParticleEmitter* Emitter )
 {
   m_Emitters.push_back( Emitter );
 }
+
+CCubeEmitter* CParticleManager::CreateCubeEmitter()
+{
+  return new CCubeEmitter();
+}
