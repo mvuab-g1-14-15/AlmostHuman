@@ -14,9 +14,6 @@ CLightManager::CLightManager()
 CLightManager::CLightManager(CXMLTreeNode& atts)
   : CManager(atts)
 {
-	/*TODO RAUL
-	PONER LECTURA DE XML
-	*/
 }
 
 CLightManager::~CLightManager()
@@ -25,13 +22,12 @@ CLightManager::~CLightManager()
 
 void CLightManager::Init()
 {
-	mConfigPath = EngineConfigInstance->GetLightsPath();
+	//mConfigPath = EngineConfigInstance->GetLightsPath();
 	Load(mConfigPath);
 }
 bool CLightManager::Load( const std::string& FileName )
 {
   CXMLTreeNode newFile;
-  CXMLTreeNode m;
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
@@ -41,6 +37,7 @@ bool CLightManager::Load( const std::string& FileName )
   }
 
   mConfigPath = FileName;
+  CXMLTreeNode m;
   m = newFile["lights"];
 
   if ( !m.Exists() )

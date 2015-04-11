@@ -12,9 +12,6 @@ CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(CXMLTreeNode& atts)
     : m_DefaultRenderableObjectManager(0), CManager(atts)
 {
-	/* TODO RAUL
-	LECTURA XML
-	*/
 }
 
 CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
@@ -27,7 +24,7 @@ void CRenderableObjectsLayersManager::Destroy()
 }
 void CRenderableObjectsLayersManager::Init()
 {
-  mConfigPath = EngineConfigInstance->GetRenderableObjectsPath();
+  //mConfigPath = EngineConfigInstance->GetRenderableObjectsPath();
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( mConfigPath.c_str() ) )

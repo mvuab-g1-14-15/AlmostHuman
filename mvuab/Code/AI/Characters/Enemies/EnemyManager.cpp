@@ -69,7 +69,7 @@ void CEnemyManager::Render()
 
 void CEnemyManager::Init()
 {
-  mConfigPath = EngineConfigInstance->GetEnemiesPath();
+  //mConfigPath = EngineConfigInstance->GetEnemiesPath();
   RegisterEnemies();
   CXMLTreeNode l_File;
 

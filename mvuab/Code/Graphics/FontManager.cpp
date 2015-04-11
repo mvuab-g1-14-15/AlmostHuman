@@ -9,10 +9,6 @@
 CFontManager::CFontManager( CXMLTreeNode& atts)
 	: CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA XML
-	*/
-
 }
 
 void CFontManager::Done()
@@ -35,7 +31,7 @@ void CFontManager::Init()
     //Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
     CreateFont( 17, true, false, "Times New Roman" );
   }
-  LoadTTFs(EngineConfigInstance->GetFontsPath());
+  LoadTTFs(mConfigPath);
   //return m_bIsOk;
 }
 void CFontManager::Release()
@@ -62,8 +58,8 @@ void CFontManager::Release()
 
 bool CFontManager::ReloadTTFs()
 {
-  if ( m_sPathFile != "" )
-    return LoadTTFs( m_sPathFile );
+  if ( mConfigPath != "" )
+    return LoadTTFs( mConfigPath );
 
   return false;
 }

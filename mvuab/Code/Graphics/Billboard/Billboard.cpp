@@ -14,7 +14,6 @@ CBillboard::CBillboard() : CName()
   , m_Position( Math::Vect3f( 0, 2, 1 ) )
   , m_Size( 2 )
   , m_Active( true )
-  , m_Texture ( TextureMInstance->GetTexture( EngineConfigInstance->GetBillboardTexturePath() ) )
   , CManager() 
 {
 }
@@ -24,12 +23,9 @@ CBillboard::CBillboard(CXMLTreeNode& atts)
   , m_Position( Math::Vect3f( 0, 2, 1 ) )
   , m_Size( 2 )
   , m_Active( true )
-  , m_Texture ( TextureMInstance->GetTexture( EngineConfigInstance->GetBillboardTexturePath() ) )
   , CManager(atts)
 {
-	/*TODO RAUL
-	PONER LECTURA XML
-	*/
+    
 }
 
 CBillboard::~CBillboard()
@@ -56,6 +52,7 @@ void CBillboard::Init()
   mRV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>( GraphicsInstance,
           l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount );
   */
+   m_Texture = TextureMInstance->GetTexture(mConfigPath );
 }
 
 void CBillboard::Update()

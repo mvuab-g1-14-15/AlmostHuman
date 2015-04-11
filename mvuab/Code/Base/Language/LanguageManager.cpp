@@ -14,15 +14,36 @@ CLanguageManager::CLanguageManager()
 CLanguageManager::CLanguageManager( CXMLTreeNode& atts )
 	: CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA DE XML
-	*/
+  CXMLTreeNode l_File;
+
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+  {
+    std::string err = "Error reading the configuration file of the engine" + mConfigPath;
+    FATAL_ERROR( err.c_str() );
+  }
+  
+  m_sCurrentLanguage = std::string( l_File.GetPszProperty( "current_language", "" ) );
+
+  CXMLTreeNode  TreeNode = l_File["languages"];
+  std::vector<std::string> l_Languages;
+  if ( TreeNode.Exists() )
+  {
+      int countLan = TreeNode.GetNumChildren();
+      for ( int lans = 0; lans < countLan; ++lans )
+      {
+          std::string TagName = TreeNode( lans ).GetName();
+
+          if ( TagName == "language" )
+          l_Languages.push_back( std::string( TreeNode( lans ).GetPszProperty( "path", "" ) ) );
+      }
+  }
+  if ( l_Languages.size() > 0 )
+    SetXmlPaths( l_Languages );
 }
 void CLanguageManager::Init()
 {
-	SetXmlPaths( EngineConfigInstance->GetLanguages() );
 	LoadXMLs();
-	SetCurrentLanguage( EngineConfigInstance->GetCurrentLanguage() );
+	SetCurrentLanguage( m_sCurrentLanguage );
 }
 void CLanguageManager::LoadXMLs ()
 {

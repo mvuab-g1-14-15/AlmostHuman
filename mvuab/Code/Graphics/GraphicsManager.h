@@ -142,6 +142,13 @@ private: // Members
   LPD3DXMESH              m_TeapotMesh;
   LPDIRECT3DVERTEXBUFFER9 m_VBQuad;
   LPDIRECT3DINDEXBUFFER9  m_IBQuad;
+  Math::Vect2i            m_ScreenResolution;
+  Math::Vect2i            m_ScreenSize;
+  Math::Vect2i            m_ScreenPosition;
+  bool                    m_FullScreenMode;
+  bool                    m_FitDesktop;
+  bool                    m_Windowed;
+  int                     m_RefreshRate;
 
 private: // Methods
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment,
@@ -149,8 +156,8 @@ private: // Methods
   D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
 
   DWORD GetBehaviorFlags();
-  bool CreateFullScreenMode( CEngineConfig* aEngineConfig );
-  bool CreateWindowedMode( CEngineConfig* aEngineConfig );
+  bool CreateFullScreenMode();
+  bool CreateWindowedMode();
   void RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh , Math::CColor aColor );
 };
 

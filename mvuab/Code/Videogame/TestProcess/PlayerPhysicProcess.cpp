@@ -12,6 +12,7 @@
 #include "Utils\Defines.h"
 #include "Fonts\FontManager.h"
 #include "ScriptManager.h"
+#include "Utils\Manager.h"
 
 //CORE
 #include "Core.h"

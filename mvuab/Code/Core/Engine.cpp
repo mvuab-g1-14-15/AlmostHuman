@@ -35,7 +35,7 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-  m_pCore->GetSceneRendererCommandManager()->Execute();
+  SRCMInstance->Execute();
 }
 
 void CEngine::ProcessInputs()
@@ -53,7 +53,7 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
   if ( aEngineConfig )
   {
     // Init the core of the engine
-    m_pCore->Init( aEngineConfig->GetWindowId() );
+    m_pCore->Init();
     // Init the videogame
     m_pProcess->Init();
   }

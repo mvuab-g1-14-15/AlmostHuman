@@ -130,14 +130,14 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 void CEffectManager::Init()
 {
   // Obtain the filename
-	m_Filename = EngineConfigInstance->GetEffectsPath();
+	//m_Filename = EngineConfigInstance->GetEffectsPath();
   // Check if the file exist
   CXMLTreeNode newFile;
 
-  if ( !newFile.LoadFile( m_Filename.c_str() ) )
+  if ( !newFile.LoadFile( mConfigPath.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",
-                                           m_Filename.c_str() );
+                                           mConfigPath.c_str() );
     return;
   }
 

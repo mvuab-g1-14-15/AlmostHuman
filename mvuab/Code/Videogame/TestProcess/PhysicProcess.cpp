@@ -154,7 +154,7 @@ void CPhysicProcess::Update()
   {
     CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
     Vect2i l_PosMouse =
-      CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
+      InputManagerInstance->GetMouse()->GetPosition();
     Vect3f l_Pos, l_Dir;
     GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );
     CPhysicsManager* l_PM = PhysXMInstance;
@@ -332,7 +332,7 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
 {
   std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
 
 
   //Get method name
@@ -346,7 +346,7 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
 {
   std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
   //Get method name
   std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
   std::string l_NameShape = _Other_Shape->GetName();
@@ -358,7 +358,7 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
 {
   std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
-  CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+  CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
   //Get method name
   std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
   std::string l_NameShape = _Other_Shape->GetName();

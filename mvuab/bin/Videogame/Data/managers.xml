@@ -1,9 +1,23 @@
 <managers>
-	<graphics_manager file_config=".Data/config.xml"/>
-	<input_manager file_config=".Data/config.xml"/>
-	<action_manager file_config=".Data/config.xml"/>
-	<effects_manager file_config=".Data/config.xml"/>
-	<lights_manager file_config=".Data/config.xml"/>
-	<static_mesh_manager file_config=".Data/config.xml"/>
-	<phisics_manager file_config=".Data/config.xml"/>
+	<texture_manager file_config="no_name"/>
+	<graphics_manager file_config="Data/windows.xml"/>
+	<effect_manager file_config="Data/effects.xml"/>
+	<input_manager file_config="no_name"/>
+	<action_manager file_config="Data/inputs.xml"/>
+	<language_manager file_config="Data/language.xml"/>
+	<font_manager file_config="Data/fonts/fonts.xml"/>
+	<renderable_technique_manager file_config="Data/renderable_object_technique.xml"/>
+	<static_mesh_manager file_config="Data/static_meshes.xml"/>
+	<animated_manager file_config="Data/animated_models.xml"/>
+	<renderable_manager_layer file_config="Data/renderable_objects.xml"/>
+	<scene_render_command_manager file_config="Data/scene_renderer_commands.xml"/>
+	<camera_manager file_config="no_name"/>
+	<script_manager file_config="Data/scripts/"/>
+	<light_manager file_config="Data/lights.xml"/>
+	<physics_manager file_config="no_name"/>
+	<enemy_manager file_config="Data/enemies/enemies.xml"/>
+	<trigger_manager file_config="Data/triggers.xml"/>
+	<billboard file_config="Data/textures/smoke.png"/>
+	<particle_manager file_config="Data/particles.xml"/>
+	<gizmos_manager file_config="no_name"/>
 </managers>

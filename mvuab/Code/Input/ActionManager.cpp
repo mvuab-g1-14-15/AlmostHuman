@@ -12,9 +12,6 @@ CActionManager::CActionManager(): CManager()
 CActionManager::CActionManager( CXMLTreeNode& atts )
  : CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA XML
-	*/
 }
 
 CActionManager::~CActionManager()
@@ -29,7 +26,6 @@ void CActionManager::Destroy()
 void CActionManager::Init( )
 {
     m_pInputManager = InputManagerInstance;
-    m_ActionsPath = EngineConfigInstance->GetInputPath();
     LoadXML();
 }
 
@@ -144,9 +140,9 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
 bool CActionManager::LoadXML()
 {
     CXMLTreeNode l_File;
-    if(false == l_File.LoadFile(m_ActionsPath.c_str()))
+    if(false == l_File.LoadFile(mConfigPath.c_str()))
     {
-        std::string err = "ERROR reading the file " + m_ActionsPath;
+        std::string err = "ERROR reading the file " + mConfigPath;
 
         MessageBox(NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK);
         exit(EXIT_FAILURE);

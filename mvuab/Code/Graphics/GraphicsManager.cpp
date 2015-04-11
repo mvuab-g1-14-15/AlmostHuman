@@ -82,11 +82,48 @@ CGraphicsManager::CGraphicsManager()
 }
 
 CGraphicsManager::CGraphicsManager( CXMLTreeNode &atts )
-  : CManager(atts)
+  : mWidth( 0 )
+  , mHeight( 0 )
+  , m_BackbufferColor_debug( Math::colBLUE )
+  , m_BackbufferColor_release( Math::colBLACK )
+  , m_bPaintSolid( true )
+  , m_TeapotMesh( 0 )
+  , m_CylinderMesh( 0 )
+  , m_SphereMesh( 0 )
+  , m_BoxMesh( 0 )
+  , m_IBQuad( 0 )
+  , m_VBQuad( 0 )
+  , mDirectXDevice( 0 )
+  , mDirectXObject( 0 )
+  , CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA DE XML DE LAS VARIABLES
-	*/
+    CXMLTreeNode l_File;
+
+    if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+    {
+        std::string err = "Error reading the configuration file of the engine" + mConfigPath;
+        FATAL_ERROR( err.c_str() );
+    }
+
+    CXMLTreeNode lTreeNode = l_File["window_properties"];
+    m_ScreenResolution  = lTreeNode.GetVect2iProperty( "resolution" , Math::Vect2i( 800, 600 ));
+    m_ScreenSize        = lTreeNode.GetVect2iProperty( "size", Math::Vect2i( 800, 600 ) );
+    m_ScreenPosition    = lTreeNode.GetVect2iProperty( "position", Math::Vect2i( 0, 0 ) );
+      
+    const std::string& lMode = lTreeNode.GetPszProperty( "mode" );
+    // Switch the modes of the screen
+    m_FullScreenMode  = ( lMode == "full_screen" );
+    m_FitDesktop      = ( lMode == "fit_desktop" );
+    m_Windowed        = ( lMode == "windowed"    );
+
+    if( lMode == "" )
+    {
+    LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'");
+    m_FitDesktop = true;
+    }
+
+    // Get the refresh rate
+    m_RefreshRate = lTreeNode.GetIntProperty( "refresh_rate", 60 );
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -221,9 +258,9 @@ void CGraphicsManager::Init()
 { 
   CEngineConfig* aEngineConfig = EngineConfigInstance;  
   m_WindowId = aEngineConfig->GetWindowId();
-  Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
-  mWidth = lScreenResolution.x;
-  mHeight = lScreenResolution.y;
+  /*Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();*/
+  mWidth = m_ScreenResolution.x;
+  mHeight = m_ScreenResolution.y;
   mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
 
   if ( mDirectXObject == NULL )
@@ -233,8 +270,7 @@ void CGraphicsManager::Init()
   }
 
   // Choose a way of creating the device from the configuration of the engine
-  mOk = ( aEngineConfig->GetFullScreenMode() ) ? CreateFullScreenMode( aEngineConfig ) : CreateWindowedMode(
-          aEngineConfig );
+  mOk = ( m_FullScreenMode ) ? CreateFullScreenMode() : CreateWindowedMode();
 
   if ( !mOk )
     FATAL_ERROR( "GraphicsManager::The DirectX has not been init!!!" );
@@ -257,13 +293,13 @@ void CGraphicsManager::Init()
   mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
   // Turn off D3D lighting, since we are providing our own vertex colors
   mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-  Math::Vect2i lWindowPosition    = aEngineConfig->GetScreenPosition();
+  /*Math::Vect2i lWindowPosition    = aEngineConfig->GetScreenPosition();
   Math::Vect2i lWindowSize        = aEngineConfig->GetScreenSize();
-  Math::Vect2i lWindowResolution  = aEngineConfig->GetScreenResolution();
+  Math::Vect2i lWindowResolution  = aEngineConfig->GetScreenResolution();*/
   LOG_INFO_APPLICATION( "GraphicsManager::Window created in (%d,%d) with size (%d,%d) and resolution(%d,%d)",
-                        lWindowPosition.x, lWindowPosition.y,
-                        lWindowSize.x, lWindowSize.y,
-                        lWindowResolution.x, lWindowResolution.y );
+                        m_ScreenPosition.x, m_ScreenPosition.y,
+                        m_ScreenSize.x, m_ScreenSize.y,
+                        m_ScreenResolution.x, m_ScreenResolution.y );
 
   //
   // Create the default meshes
@@ -313,7 +349,7 @@ DWORD CGraphicsManager::GetBehaviorFlags()
   return dwBehaviorFlags;
 }
 
-bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
+bool CGraphicsManager::CreateFullScreenMode()
 {
   //
   // For the default adapter, examine all of its display modes to see if any
@@ -322,10 +358,8 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   int nMode = 0;
   D3DDISPLAYMODE d3ddm;
   bool bDesiredAdapterModeFound = false;
-  Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
   int nMaxAdapterModes = mDirectXObject->GetAdapterModeCount( D3DADAPTER_DEFAULT,
                          D3DFMT_X8R8G8B8 );
-  uint32 lRefreshRate = aEngineConfig->GetRefreshRate();
 
   for ( nMode = 0; nMode < nMaxAdapterModes; ++nMode )
   {
@@ -337,9 +371,8 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
     }
 
     // Does this adapter mode support a mode of the given configuration
-    Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
 
-    if ( d3ddm.Width != lScreenResolution.x || d3ddm.Height != lScreenResolution.y )
+    if ( d3ddm.Width != m_ScreenResolution.x || d3ddm.Height != m_ScreenResolution.y )
       continue;
 
     // Does this adapter mode support a 32-bit RGB pixel format?
@@ -347,7 +380,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
       continue;
 
     // Does this adapter mode support a refresh rate of 75 MHz?
-    if ( d3ddm.RefreshRate != lRefreshRate )
+    if ( d3ddm.RefreshRate != m_RefreshRate )
       continue;
 
     // We found a match!
@@ -358,7 +391,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   if ( bDesiredAdapterModeFound == false )
   {
     LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)",
-                           lRefreshRate, lScreenResolution.x, lScreenResolution.y );
+                           m_RefreshRate, m_ScreenResolution.x, m_ScreenResolution.y );
     return false;
   }
 
@@ -402,12 +435,12 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.AutoDepthStencilFormat      = D3DFMT_D24S8;
   d3dpp.SwapEffect                  = D3DSWAPEFFECT_DISCARD;
   d3dpp.BackBufferCount             = 1;
-  d3dpp.BackBufferWidth             = lScreenResolution.x;
-  d3dpp.BackBufferHeight            = lScreenResolution.y;
+  d3dpp.BackBufferWidth             = m_ScreenResolution.x;
+  d3dpp.BackBufferHeight            = m_ScreenResolution.y;
   d3dpp.BackBufferFormat            = D3DFMT_X8R8G8B8;
   d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_IMMEDIATE;
   d3dpp.Flags                       = 0;//D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
-  d3dpp.FullScreen_RefreshRateInHz  = lRefreshRate;
+  d3dpp.FullScreen_RefreshRateInHz  = m_RefreshRate;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
   HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
@@ -422,7 +455,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   return true;
 }
 
-bool CGraphicsManager::CreateWindowedMode( CEngineConfig* aEngineConfig )
+bool CGraphicsManager::CreateWindowedMode()
 {
   D3DDISPLAYMODE d3ddm;
 

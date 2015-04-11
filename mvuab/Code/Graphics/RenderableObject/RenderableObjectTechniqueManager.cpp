@@ -15,9 +15,6 @@ CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager()
 CRenderableObjectTechniqueManager::CRenderableObjectTechniqueManager( CXMLTreeNode& atts)
 	:CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA XML
-	*/
 }
 CRenderableObjectTechniqueManager::~CRenderableObjectTechniqueManager()
 {
@@ -33,7 +30,7 @@ void CRenderableObjectTechniqueManager::Destroy()
 void CRenderableObjectTechniqueManager::Init()
 {
   CXMLTreeNode l_File;
-  mConfigPath = EngineConfigInstance->GetRenderableObjectTechniquePath();
+  //mConfigPath = EngineConfigInstance->GetRenderableObjectTechniquePath();
   if ( !l_File.LoadFile( mConfigPath.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "ERROR reading the file %s", mConfigPath.c_str() );

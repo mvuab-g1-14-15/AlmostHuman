@@ -33,93 +33,34 @@
 #include <iostream>
 
 CCore::CCore()
-  : m_pTextureManager( 0 )
-  , m_pGraphicsManager( 0 )
-  , m_pInputManager( 0 )
-  , m_pLanguageManager( 0 )
-  , m_pFontManager( 0 )
-  , m_pActionManager( 0 )
-  , m_pStaticMeshManager( 0 )
-  , m_pRenderableObjectsManager( 0 )
-  , m_pRenderableObjectsLayersManager( 0 )
-  , m_pRenderableObjectTechniqueManager( 0 )
-  , m_pAnimatedModelsManager( 0 )
-  , m_pScriptManager( 0 )
-  , m_pCameraManager( 0 )
-  , m_pEffectManager( 0 )
-  , m_pLightManager( 0 )
-  , m_pSceneRendererCommandManager( 0 )
-  , m_pPhysicsManager( 0 )
-  , m_pEnemyManager( 0 )
-  , m_pTriggerManager( 0 )
-  , m_pTimer( 0 )
+  : m_pTimer( 0 )
   , m_pConsole( 0 )
-  , m_pBillboard( 0 )
-  , m_pParticleManager( 0 )
-  , m_pGizmosManager( 0 )
 {
 }
 
 CCore::~CCore()
 {
-  CHECKED_DELETE( m_pScriptManager );
-  CHECKED_DELETE( m_pGraphicsManager );
-  CHECKED_DELETE( m_pInputManager );
-  CHECKED_DELETE( m_pActionManager );
-  CHECKED_DELETE( m_pFontManager );
-  CHECKED_DELETE( m_pLanguageManager );
-  CHECKED_DELETE( m_pEnemyManager );
-  CHECKED_DELETE( m_pStaticMeshManager );
-  CHECKED_DELETE( m_pRenderableObjectsManager );
-  CHECKED_DELETE( m_pRenderableObjectsLayersManager );
-  CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
-  CHECKED_DELETE( m_pAnimatedModelsManager );
-  CHECKED_DELETE( m_pTextureManager );
-  CHECKED_DELETE( m_pCameraManager );
-  CHECKED_DELETE( m_pEffectManager );
-  CHECKED_DELETE( m_pLightManager );
-  CHECKED_DELETE( m_pSceneRendererCommandManager );
+  Destroy();
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
-  CHECKED_DELETE( m_pPhysicsManager );
-  CHECKED_DELETE( m_pTriggerManager );
-  CHECKED_DELETE( m_pBillboard );
-  CHECKED_DELETE( m_pParticleManager );
-  CHECKED_DELETE( m_pGizmosManager );
-  CHECKED_DELETE( m_pConsole );
-  Destroy();
 }
 
-void CCore::Init( HWND aWindowId )
+void CCore::Init()
 {
   // Obtain the path of the configuration file and parse it
-  m_WindowId = aWindowId;
-
   CreateManagers();
   InitManagers();
 }
 
 void CCore::Update()
 {
+  TVectorResources::iterator it = m_ResourcesVector.begin(),
+                              it_end = m_ResourcesVector.end();
+  for(;it!=it_end;++it)
+        (*it)->Update();
   m_pTimer->Update();
 
-  m_pInputManager->Update();
-  m_pActionManager->Update();
-
-  m_pPhysicsManager->Update( );
-  m_pEnemyManager->Update();
-
-  m_pCameraManager->Update();
-
-  m_pParticleManager->Update();
-
-  m_pGizmosManager->Update();
-
-  m_pBillboard->Update();
-
-  m_pRenderableObjectsLayersManager->GetResource( "solid" )->Update();
-
-  if ( m_pActionManager->DoAction( "ClearConsole" ) )
+  if ( ActionManagerInstance->DoAction( "ClearConsole" ) )
   {
     if ( m_pConsole )
       m_pConsole->Clear();
@@ -128,35 +69,95 @@ void CCore::Update()
 
 void CCore::Render()
 {
+    SRCMInstance->Execute();
 }
 void CCore::CreateManagers()
 {
   if ( EngineConfigInstance->GetEnableConsole() )
     m_pConsole = new CConsole( TRUE );
-
-  m_pTextureManager = new CTextureManager( );
-  m_pGraphicsManager = new CGraphicsManager( );
-  m_pInputManager = new CInputManager( );
-  m_pLanguageManager = new CLanguageManager( );
-  m_pFontManager = new CFontManager( );
-  m_pActionManager = new CActionManager( );
-  m_pStaticMeshManager = new CStaticMeshManager( );
-  m_pRenderableObjectsManager = new CRenderableObjectsManager( );
-  m_pRenderableObjectsLayersManager = new CRenderableObjectsLayersManager( );
-  m_pRenderableObjectTechniqueManager = new CRenderableObjectTechniqueManager( );
-  m_pAnimatedModelsManager = new CAnimatedModelsManager( );
-  m_pScriptManager = new CScriptManager( );
-  m_pCameraManager = new CCameraManager( );
-  m_pEffectManager = new CEffectManager( );
-  m_pLightManager = new CLightManager( );
-  m_pSceneRendererCommandManager = new CSceneRendererCommandManager( );
-  m_pPhysicsManager = new CPhysicsManager( );
-  m_pEnemyManager = new CEnemyManager( );
-  m_pTriggerManager = new CTriggerManager( );
   m_pTimer = new CTimer( 30 );
-  m_pBillboard = new CBillboard( );
-  m_pParticleManager = new CParticleManager();
-  m_pGizmosManager = new CGizmosManager();
+
+  ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
+  // Register all the commands with the object factory class
+  ManagerFactory.Register( "texture_manager",
+                            Type2Type<CTextureManager>( ) );
+  ManagerFactory.Register( "graphics_manager", 
+                            Type2Type<CGraphicsManager>( ) );
+  ManagerFactory.Register( "input_manager",
+                           Type2Type<CInputManager>( ) );
+  ManagerFactory.Register( "languague_manager",
+                           Type2Type<CLanguageManager>( ) );
+  ManagerFactory.Register( "font_manager",
+                           Type2Type<CFontManager>( ) );
+  ManagerFactory.Register( "action_manager",
+                            Type2Type<CActionManager>( ) );
+  ManagerFactory.Register( "static_mesh_manager",
+                            Type2Type<CStaticMeshManager>( ) );
+  ManagerFactory.Register( "effect_manager",
+                           Type2Type<CEffectManager>( ) );
+  ManagerFactory.Register( "renderable_manager_layer",
+                           Type2Type<CRenderableObjectsLayersManager>( ) );
+  ManagerFactory.Register( "renderable_technique_manager",
+                           Type2Type<CRenderableObjectTechniqueManager>( ) );
+  ManagerFactory.Register( "animated_manager",
+                           Type2Type<CAnimatedModelsManager>( ) );
+  ManagerFactory.Register( "script_manager",
+                           Type2Type<CScriptManager>( ) );
+  ManagerFactory.Register( "camera_manager",
+                           Type2Type<CCameraManager>( ) );
+  ManagerFactory.Register( "light_manager",
+                           Type2Type<CLightManager>( ) );
+  ManagerFactory.Register( "scene_render_command_manager",
+                           Type2Type<CSceneRendererCommandManager>( ) );
+  ManagerFactory.Register( "physics_manager",
+                           Type2Type<CPhysicsManager>( ) );
+  ManagerFactory.Register( "enemy_manager",
+                           Type2Type<CEnemyManager>( ) );
+  ManagerFactory.Register( "trigger_manager",
+                           Type2Type<CTriggerManager>( ) );
+  ManagerFactory.Register( "billboard",
+                           Type2Type<CBillboard>( ) );
+  ManagerFactory.Register( "particle_manager",
+                           Type2Type<CParticleManager>( ) );
+  ManagerFactory.Register( "gizmos_manager",
+                           Type2Type<CGizmosManager>( ) );
+  CXMLTreeNode l_File;
+  //TODO RAUL
+  std::string l_ManagerPath= EngineConfigInstance->GetManagersPath();
+
+  if ( !l_File.LoadFile( l_ManagerPath.c_str() ) )
+  {
+    const std::string& lMsgError = "Error reading the file " + l_ManagerPath;
+    FATAL_ERROR( lMsgError.c_str() );
+  }
+
+  
+  CXMLTreeNode  TreeNode = l_File["managers"];
+
+  if ( TreeNode.Exists() )
+  {
+    int count = TreeNode.GetNumChildren();
+
+    for ( int i = 0; i < count; ++i )
+    {
+      const std::string& TagName = TreeNode( i ).GetName();
+
+      if ( TagName == "comment" )
+        continue;
+
+      CManager* Manager = 0;
+
+      Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
+
+      if ( !Manager )
+        LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
+      else
+      {
+        if ( !AddResource( TagName.c_str() , Manager ) )
+          CHECKED_DELETE( Manager );
+      }
+    }
+  }
 }
 
 void CCore::InitManagers()
@@ -174,27 +175,10 @@ void CCore::InitManagers()
     m_pConsole->SetFullSize();
   }
 
-  m_pGraphicsManager->Init();
-  m_pEffectManager->Init();
-  m_pInputManager->Init();
-  m_pActionManager->Init();
-  m_pLanguageManager->Init();
-  m_pFontManager->Init();
-  m_pRenderableObjectTechniqueManager->Init();
-  m_pStaticMeshManager->Init();
-  m_pAnimatedModelsManager->Init();
-  m_pRenderableObjectsLayersManager->Init();
-  m_pSceneRendererCommandManager->Init();
-  m_pCameraManager->Init();
-  m_pScriptManager->Init();
-  m_pLightManager->Init();
-  m_pPhysicsManager->Init();
-  m_pEnemyManager->Init();
-  m_pTriggerManager->Init();
-
-  m_pBillboard->Init();
-  m_pParticleManager->Init();
-  m_pGizmosManager->Init();
+  TVectorResources::iterator it = m_ResourcesVector.begin(),
+                             it_end = m_ResourcesVector.end();
+  for(;it!=it_end;++it)
+      (*it)->Init();
 }
 
 void CCore::Trace( const std::string& TraceStr )

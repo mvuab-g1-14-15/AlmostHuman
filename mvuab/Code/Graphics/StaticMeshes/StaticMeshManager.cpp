@@ -21,7 +21,7 @@ CStaticMeshManager::~CStaticMeshManager()
 
 void CStaticMeshManager::Init()
 {
-	mConfigPath = EngineConfigInstance->GetStaticMeshesPath();
+	//mConfigPath = EngineConfigInstance->GetStaticMeshesPath();
     
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(mConfigPath.c_str()))

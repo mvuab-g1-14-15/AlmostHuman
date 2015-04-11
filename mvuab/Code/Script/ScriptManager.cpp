@@ -63,7 +63,7 @@ void CScriptManager::Reload()
 
 void CScriptManager::Load()
 {
-  mConfigPath = EngineConfigInstance->GetLuaRunPath();
+  //mConfigPath = EngineConfigInstance->GetLuaRunPath();
   baseUtils::GetFilesFromPath( mConfigPath, "lua", m_LuaFiles );
   baseUtils::GetFilesFromPath( mConfigPath + "init/", "lua", m_LuaInitFiles );
 
@@ -112,10 +112,10 @@ void CScriptManager::RunFile( const std::string& FileName )
     LOG_ERROR_APPLICATION( message.c_str() );
 
     ASSERT(false, message);
-
-#ifdef _DEBUG
-    Reload();
-#endif
+//TODO WTF ESTO NO TIENE SENTIDO ALGUNO...
+//#ifdef _DEBUG
+//    Reload();
+//#endif
   }
 }
 

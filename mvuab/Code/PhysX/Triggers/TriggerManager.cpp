@@ -16,9 +16,6 @@ CTriggerManager::CTriggerManager()
 CTriggerManager::CTriggerManager(CXMLTreeNode& atts)
 	: CManager(atts)
 {
-	/*TODO RAUL
-	PONER LECTURA XML
-	*/
 }
 CTriggerManager::~CTriggerManager()
 {
@@ -27,7 +24,7 @@ CTriggerManager::~CTriggerManager()
 
 void CTriggerManager::Init()
 {
-	LoadXML(EngineConfigInstance->GetTriggersPath());
+    LoadXML(mConfigPath);
 }
 bool CTriggerManager::LoadXML( const std::string& FileName )
 {

@@ -20,6 +20,7 @@
 #define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, (PROTO) &CL::NAME )
 
 #define LUA_DECLARE_METHOD_WITHOUT_CLASS( NAME )      def( #NAME, &NAME )
+#define LUA_DECLARE_METHOD_WITHOUT_CLASS1( NAME )      def( #NAME, NAME )
 
 #define LUA_BEGIN_ENUM( NAME )                        .enum_( #NAME )[
 #define LUA_ENUM_VALUE( NAME, VAL )                   luabind::value( #NAME, VAL )

@@ -32,18 +32,22 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-  CRenderableObjectsManager* l_ROM = ROMLInstance->GetResource( "characters" );
-  l_ROM->RemoveResource( m_Name );
-  PhysXMInstance->ReleasePhysicController( m_Controller );
-
-  CGizmosManager* l_GizmosManager = GizmosMInstance;
-  std::ostringstream ss;
-  ss << GetName() << "HeadGizmo";
-  std::string l_GizmoName( ss.str() );
-  CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
-  if (l_Gizmo)
+  
+  if ( GetLife() <= 0 )
   {
-    l_GizmosManager->RemoveResource(l_GizmoName);
+      CRenderableObjectsManager* l_ROM = ROMLInstance->GetResource( "characters" );
+      l_ROM->RemoveResource( m_Name );
+      PhysXMInstance->ReleasePhysicController( m_Controller );
+
+      CGizmosManager* l_GizmosManager = GizmosMInstance;
+      std::ostringstream ss;
+      ss << GetName() << "HeadGizmo";
+      std::string l_GizmoName( ss.str() );
+      CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
+      if (l_Gizmo)
+      {
+        l_GizmosManager->RemoveResource(l_GizmoName);
+      }
   }
 }
 

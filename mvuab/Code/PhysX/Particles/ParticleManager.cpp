@@ -13,9 +13,6 @@ CParticleManager::CParticleManager()
 CParticleManager::CParticleManager(CXMLTreeNode& atts)
 	: CManager(atts)
 {
-	/*TODO RAUL
-	PONER LECTURA XML
-	*/
 }
 
 CParticleManager::~CParticleManager()
@@ -33,7 +30,7 @@ CParticleManager::~CParticleManager()
 void CParticleManager::Init()
 {
   CXMLTreeNode l_XML;
-  mConfigPath = EngineConfigInstance->GetParticlesPath();
+  //mConfigPath = EngineConfigInstance->GetParticlesPath();
   if ( !l_XML.LoadFile( mConfigPath.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "CParticleManager::Init Can't load XML file" );

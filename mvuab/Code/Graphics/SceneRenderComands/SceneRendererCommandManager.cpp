@@ -142,7 +142,7 @@ void CSceneRendererCommandManager::Init()
                            Type2Type<CRenderGizmosCommand>( ) );
   CXMLTreeNode l_File;
 
-  mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();
+  //mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();
 
   if ( !l_File.LoadFile( mConfigPath.c_str() ) )
   {

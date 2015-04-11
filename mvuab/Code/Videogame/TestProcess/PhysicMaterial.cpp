@@ -160,7 +160,7 @@ void CPhysicMaterial::Update()
 
   if ( pActionManager->DoAction( "DrawActor" ) )
   {
-    Vect2i l_PosMouse = CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
+    Vect2i l_PosMouse = InputManagerInstance->GetMouse()->GetPosition();
     Vect3f l_Pos, l_Dir;
 
     GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );

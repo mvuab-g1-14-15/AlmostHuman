@@ -48,9 +48,7 @@ CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &
 }
 
 void CAnimatedModelsManager::Init()
-{
-	mConfigPath = EngineConfigInstance->GetAnimatedModelsPath();
-    
+{    
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(mConfigPath.c_str()))
     {

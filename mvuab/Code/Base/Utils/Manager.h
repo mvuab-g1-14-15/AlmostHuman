@@ -11,7 +11,7 @@ class CManager
 {
 public:
   CManager(){}
-  CManager( const CXMLTreeNode &atts) : mConfigPath(atts.GetPszProperty( "config_file", "" )) {}
+  CManager( const CXMLTreeNode &atts) : mConfigPath(atts.GetPszProperty( "file_config", "" )) {}
   virtual ~CManager(){}
   virtual void Init() = 0;
   virtual void Update() = 0;

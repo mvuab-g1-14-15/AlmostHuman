@@ -63,7 +63,7 @@ CLight::CLight( const CXMLTreeNode& node )
   {
     const std::string& l_Layer = node( i ).GetPszProperty( "renderable_objects_manager", "" );
     CRenderableObjectsManager* l_ROM =
-      CoreInstance->GetRenderableObjectsLayersManager()->GetResource( l_Layer );
+      ROMLInstance->GetResource( l_Layer );
 
     if ( !l_ROM )
       continue;

@@ -3,6 +3,7 @@
 #include "CinematicObjectKeyFrame.h"
 #include "Core.h"
 #include "RenderableObject/RenderableObjectsManager.h"
+#include "RenderableObject/RenderableObjectsLayersManager.h"
 #include "GraphicsManager.h"
 #include "Math\LerpAnimator3D.h"
 #include "Math\LerpAnimator1D.h"
@@ -14,7 +15,7 @@ CCinematicObject::CCinematicObject(CXMLTreeNode &atts)
 {
 	std::string resource = atts.GetPszProperty("resource", "");
 
-	m_RenderableObject = CCore::GetSingletonPtr()->GetRenderableObjectsManager()->GetResource(resource);
+    m_RenderableObject = ROMLInstance->GetResource("solid")->GetResource(resource);
 
 	for(int i=0;i<atts.GetNumChildren();++i)
 		m_CinematicObjectKeyFrames.push_back(new CCinematicObjectKeyFrame(atts(i)));
