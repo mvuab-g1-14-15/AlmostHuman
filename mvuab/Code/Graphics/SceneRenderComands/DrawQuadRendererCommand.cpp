@@ -8,6 +8,7 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "RenderableObject\RenderableObjectTechnique.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 #ifdef _DEBUG
 #include <sstream>

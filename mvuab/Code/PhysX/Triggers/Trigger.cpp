@@ -6,6 +6,7 @@
 #include "Utils\Defines.h"
 #include "Core.h"
 #include "Logger\Logger.h"
+#include "EngineManagers.h"
 
 CTrigger::CTrigger( const CXMLTreeNode& Node )
   : CName( Node.GetPszProperty( "name", "unknown" ) )

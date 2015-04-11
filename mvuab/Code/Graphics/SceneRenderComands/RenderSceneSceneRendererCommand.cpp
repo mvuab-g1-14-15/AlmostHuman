@@ -3,6 +3,7 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "GraphicsManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {

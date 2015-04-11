@@ -9,6 +9,7 @@
 #include "Logger\Logger.h"
 #include "Utils/BaseUtils.h"
 #include "Utils/StringUtils.h"
+#include "EngineManagers.h"
 
 CEffect::CEffect()
   : m_FileName( "" ),

@@ -3,6 +3,7 @@
 #include "Logger\Logger.h"
 #include "Core.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 CCubedTexture::CCubedTexture()
   : CTexture()

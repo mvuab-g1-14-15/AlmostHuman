@@ -11,6 +11,7 @@
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CLensOfFlareRendererCommand::CLensOfFlareRendererCommand( CXMLTreeNode& atts ) :
   CDrawQuadRendererCommand( atts )

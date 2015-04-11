@@ -7,6 +7,7 @@
 #include "Core.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "EngineManagers.h"
 
 
 CCharacter::CCharacter( const std::string& Name )

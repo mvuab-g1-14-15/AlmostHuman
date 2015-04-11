@@ -27,6 +27,7 @@
 #include "Particles\ParticleManager.h"
 #include "Gizmos\GizmosManager.h"
 #include "EngineConfig.h"
+#include "EngineManagers.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
@@ -35,6 +36,7 @@
 CCore::CCore()
   : m_pTimer( 0 )
   , m_pConsole( 0 )
+  , m_pEngineManagers( 0 )
 {
 }
 
@@ -43,6 +45,7 @@ CCore::~CCore()
   Destroy();
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
+  CHECKED_DELETE( m_pEngineManagers );
 }
 
 void CCore::Init()
@@ -76,7 +79,7 @@ void CCore::CreateManagers()
   if ( EngineConfigInstance->GetEnableConsole() )
     m_pConsole = new CConsole( TRUE );
   m_pTimer = new CTimer( 30 );
-
+  m_pEngineManagers = new CEngineManagers();
   ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
   // Register all the commands with the object factory class
   ManagerFactory.Register( "texture_manager",
@@ -158,6 +161,7 @@ void CCore::CreateManagers()
       }
     }
   }
+  m_pEngineManagers->Init();
 }
 
 void CCore::InitManagers()

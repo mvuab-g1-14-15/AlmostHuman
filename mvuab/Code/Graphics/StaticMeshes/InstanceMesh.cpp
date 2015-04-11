@@ -9,6 +9,7 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 #include "Math\AABB.h"
+#include "EngineManagers.h"
 
 CInstanceMesh::CInstanceMesh( const std::string& Name,
                               const std::string& CoreName ): m_pStaticMesh( SMeshMInstance->GetResource(

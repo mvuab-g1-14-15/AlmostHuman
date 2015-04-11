@@ -35,6 +35,7 @@
 //#include "Utils\Exception.h"
 #include "Logger\Logger.h"
 ////#include "Utils\Base.h"
+#include "EngineManagers.h"
 
 #if defined(_DEBUG)
 #include "Memory\MemLeaks.h"

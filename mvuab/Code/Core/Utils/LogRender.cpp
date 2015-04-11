@@ -8,6 +8,7 @@
 #include "Timer\Timer.h"
 #include "Utils\BaseUtils.h"
 #include "Utils\StringUtils.h"
+#include "EngineManagers.h"
 
 #include <windows.h>
 #include <vector>

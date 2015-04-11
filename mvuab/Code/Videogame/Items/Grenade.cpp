@@ -11,6 +11,7 @@
 #include "ActionManager.h"
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
+#include "EngineManagers.h"
 
 #include <string>
 

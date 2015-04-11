@@ -2,6 +2,7 @@
 #include "GraphicsManager.h"
 #include "Gizmos/GizmosManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CRenderGizmosCommand::CRenderGizmosCommand( CXMLTreeNode& atts )
   : CSceneRendererCommand( atts )

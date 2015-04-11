@@ -13,6 +13,7 @@
 #include "RenderableVertex\RenderableVertex.h"
 #include "Core.h"
 #include "Timer\Timer.h"
+#include "EngineManagers.h"
 
 #include "XML\XMLTreeNode.h"
 

@@ -9,6 +9,7 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "Effects\EffectManager.h"
 #include "EngineConfig.h"
+#include "EngineManagers.h"
 
 CBillboard::CBillboard() : CName()
   , m_Position( Math::Vect3f( 0, 2, 1 ) )

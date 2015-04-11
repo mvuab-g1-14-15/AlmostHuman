@@ -2,6 +2,7 @@
 #include "Effects\EffectManager.h"
 #include "Core.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include "EngineManagers.h"
 #include <sstream>
 
 CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode )

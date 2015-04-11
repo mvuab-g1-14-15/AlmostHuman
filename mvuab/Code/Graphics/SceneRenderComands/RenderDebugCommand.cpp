@@ -6,6 +6,7 @@
 #include "Engine.h"
 #include "Core.h"
 #include "PhysicsManager.h"
+#include "EngineManagers.h"
 
 CRenderDebugCommand::CRenderDebugCommand( CXMLTreeNode& atts )
   : CSceneRendererCommand( atts )

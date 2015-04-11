@@ -7,6 +7,7 @@
 
 //CORE
 #include "Core.h"
+#include "EngineManagers.h"
 
 //GRAPHICS
 #include "GraphicsManager.h"

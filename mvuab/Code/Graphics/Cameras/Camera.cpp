@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "Utils/BaseUtils.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CCamera::CCamera()
   : CObject3D()

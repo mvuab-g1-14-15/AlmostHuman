@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "GraphicsManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CEnemy( Node, aStateMachine ), m_CurrentPoint( 0 )

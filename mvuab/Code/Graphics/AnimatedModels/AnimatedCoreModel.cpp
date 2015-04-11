@@ -12,6 +12,7 @@
 #include "RenderableVertex\IndexedVertexs.h"
 
 #include "Core.h"
+#include "EngineManagers.h"
 #define MAXBONES 29
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) : 

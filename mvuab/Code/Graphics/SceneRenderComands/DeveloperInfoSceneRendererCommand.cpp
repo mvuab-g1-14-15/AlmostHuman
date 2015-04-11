@@ -6,6 +6,7 @@
 #include "Cameras\Camera.h"
 #include "Cameras\CameraManager.h"
 #include "Utils\GPUStatics.h"
+#include "EngineManagers.h"
 
 CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode& atts )
   : CSceneRendererCommand( atts )

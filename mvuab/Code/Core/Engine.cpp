@@ -8,7 +8,7 @@
 #include "Timer\Timer.h"
 #include "PhysicsManager.h"
 #include "EngineConfig.h"
-#include "EngineConfig.h"
+#include "EngineManagers.h"
 
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 

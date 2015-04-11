@@ -1,6 +1,7 @@
 #include "OmniLight.h"
 #include "Core.h"
 #include "XML/XMLTreeNode.h"
+#include "EngineManagers.h"
 #include "GraphicsManager.h"
 
 COmniLight::COmniLight( CXMLTreeNode node ) : CLight( node )

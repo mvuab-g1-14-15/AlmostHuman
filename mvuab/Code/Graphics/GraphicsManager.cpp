@@ -17,6 +17,7 @@
 #include "Texture/Texture.h"
 #include "Fonts/FontManager.h"
 #include "EngineConfig.h"
+#include "EngineManagers.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX

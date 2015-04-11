@@ -17,6 +17,7 @@
 #include "Gizmos\Gizmo.h"
 #include "Gizmos\GizmoElement.h"
 #include "Gizmos\GizmosManager.h"
+#include "EngineManagers.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetPszProperty( "name", "no_name" ) )

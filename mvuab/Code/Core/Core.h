@@ -16,6 +16,7 @@
 // Forward declarations
 class CTimer;
 class CConsole;
+class CEngineManagers;
 
 class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManager>
 {
@@ -26,6 +27,7 @@ class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManag
         // Managers
         CTimer*                             m_pTimer;
         CConsole*                           m_pConsole;
+        CEngineManagers*                    m_pEngineManagers;
 
         void CreateManagers();
         void InitManagers();

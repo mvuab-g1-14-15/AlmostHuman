@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 #include "Effects\EffectManager.h"
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)

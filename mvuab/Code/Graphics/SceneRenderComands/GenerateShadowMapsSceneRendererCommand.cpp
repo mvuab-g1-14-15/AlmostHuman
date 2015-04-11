@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "GraphicsManager.h"
 #include "Lights/LightManager.h"
+#include "EngineManagers.h"
 
 CGenerateShadowMapsSceneRendererCommand::CGenerateShadowMapsSceneRendererCommand(
   CXMLTreeNode& atts )

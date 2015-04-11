@@ -11,6 +11,7 @@
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CWeaponTargetRendererCommand::CWeaponTargetRendererCommand( CXMLTreeNode& atts ) 
 	: CDrawQuadRendererCommand( atts )

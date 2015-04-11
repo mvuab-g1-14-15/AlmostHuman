@@ -1,6 +1,7 @@
 #include "Action.h"
 #include "ScriptManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CAction::CAction( CXMLTreeNode& Node )
   : m_LuaFunction( Node.GetPszProperty( "function", "no_function" ) )

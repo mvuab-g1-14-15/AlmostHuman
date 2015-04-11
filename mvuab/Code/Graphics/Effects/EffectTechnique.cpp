@@ -7,6 +7,7 @@
 #include "Timer\Timer.h"
 #include "Logger\Logger.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
                                     CXMLTreeNode& HandlesNode )

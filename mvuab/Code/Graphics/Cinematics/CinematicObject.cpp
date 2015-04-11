@@ -10,6 +10,7 @@
 #include "Math\MathTypes.h"
 #include "Math\Vector3.h"
 #include "Utils\BaseUtils.h"
+#include "EngineManagers.h"
 
 CCinematicObject::CCinematicObject(CXMLTreeNode &atts)
 {

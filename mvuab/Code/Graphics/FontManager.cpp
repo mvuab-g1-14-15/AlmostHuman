@@ -5,6 +5,7 @@
 #include "Logger\Logger.h"
 #include "EngineConfig.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CFontManager::CFontManager( CXMLTreeNode& atts)
 	: CManager(atts)

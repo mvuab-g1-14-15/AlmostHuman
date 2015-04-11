@@ -6,6 +6,7 @@
 #include "CameraKeyController.h"
 #include "Timer\Timer.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CCameraManager::CCameraManager() : m_RenderCameras( true )
 	, CManager()

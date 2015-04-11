@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "Core.h"
 #include "Texture\TextureManager.h"
+#include "EngineManagers.h"
 
 #ifdef _DEBUG
 #include <sstream>

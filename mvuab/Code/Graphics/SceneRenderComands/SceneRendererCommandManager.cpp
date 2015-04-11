@@ -36,6 +36,7 @@
 #include "EngineConfig.h"
 #include "Core.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 #include <Windows.h>
 #include <sstream>

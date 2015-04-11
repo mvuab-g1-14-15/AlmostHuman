@@ -2,6 +2,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Core.h"
 #include "EngineConfig.h"
+#include "EngineManagers.h"
 
 #include <Windows.h>
 

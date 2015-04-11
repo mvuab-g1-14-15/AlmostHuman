@@ -10,6 +10,7 @@
 
 #include "GraphicsManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts ) : CStagedTexturedRendererCommand( atts )
     , m_Width(atts.GetIntProperty("width", 0))

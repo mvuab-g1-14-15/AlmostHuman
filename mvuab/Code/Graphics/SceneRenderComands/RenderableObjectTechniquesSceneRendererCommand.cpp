@@ -1,6 +1,7 @@
 #include "SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h"
 #include "GraphicsManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
 CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesSceneRendererCommand(

@@ -6,6 +6,7 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "SceneRenderComands\DeferredShadingSceneRendererCommand.h"
 #include "RenderableVertex\VertexTypes.h"
+#include "EngineManagers.h"
 
 #include <string>
 /*

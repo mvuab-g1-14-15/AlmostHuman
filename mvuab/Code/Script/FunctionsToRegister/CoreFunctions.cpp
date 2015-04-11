@@ -24,6 +24,7 @@
 #include "Utils\PhysicUserData.h"
 #include "Characters\Enemies\EnemyManager.h"
 #include "Gizmos\GizmosManager.h"
+#include "EngineManagers.h"
 
 #include "luabind_macros.h"
 

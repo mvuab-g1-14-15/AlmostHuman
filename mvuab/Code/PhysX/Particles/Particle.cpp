@@ -5,6 +5,7 @@
 #include "Cameras/Camera.h"
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
+#include "EngineManagers.h"
 
 CParticle::CParticle()
 {

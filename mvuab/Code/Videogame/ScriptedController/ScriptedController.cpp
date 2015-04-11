@@ -3,6 +3,7 @@
 
 #include "GraphicsManager.h"
 #include "Core.h"
+#include "EngineManagers.h"
 
 CScriptedController::CScriptedController()
 {

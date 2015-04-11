@@ -14,6 +14,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineConfig.cpp" />
+    <ClCompile Include="EngineManagers.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Utils\LogRender.cpp" />
   </ItemGroup>
@@ -21,6 +22,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineConfig.h" />
+    <ClInclude Include="EngineManagers.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="Utils\LogRender.h" />
   </ItemGroup>

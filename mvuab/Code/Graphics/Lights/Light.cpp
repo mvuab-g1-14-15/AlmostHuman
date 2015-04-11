@@ -7,6 +7,7 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "Texture\Texture.h"
+#include "EngineManagers.h"
 #include "Texture\TextureManager.h"
 #include <string>
 

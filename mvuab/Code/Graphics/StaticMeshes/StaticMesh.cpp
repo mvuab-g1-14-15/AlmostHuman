@@ -12,6 +12,7 @@
 
 #include "Math/AABB.h"
 
+#include "EngineManagers.h"
 #include "Effects/EffectManager.h"
 
 #include "Core.h"

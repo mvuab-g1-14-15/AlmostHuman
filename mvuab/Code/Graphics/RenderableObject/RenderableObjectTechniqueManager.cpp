@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Effects\EffectManager.h"
 #include "EngineConfig.h"
+#include "EngineManagers.h"
 
 #include <map>
 #include <sstream>

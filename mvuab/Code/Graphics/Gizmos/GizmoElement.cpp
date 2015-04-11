@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 #include "Math/Vector3.h"
 #include "Math/Matrix44.h"

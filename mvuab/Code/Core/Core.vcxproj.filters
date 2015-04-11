@@ -17,6 +17,7 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="EngineConfig.cpp" />
+    <ClCompile Include="EngineManagers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
@@ -26,5 +27,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="EngineConfig.h" />
+    <ClInclude Include="EngineManagers.h" />
   </ItemGroup>
 </Project>

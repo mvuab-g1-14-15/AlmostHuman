@@ -1,6 +1,6 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "GraphicsManager.h"
-#include "Core.h"
+#include "EngineManagers.h"
 
 LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_T2_DIFF_VERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 TNORMAL_TAN_BI_DIFF_VERTEX::s_VertexDeclaration = 0;

@@ -4,6 +4,7 @@
 #include "Core.h"
 #include "PhysXObjManager.h"
 #include "PhysicsManager.h"
+#include "EngineManagers.h"
 
 ////----PhysX Includes-------------
 #undef min
