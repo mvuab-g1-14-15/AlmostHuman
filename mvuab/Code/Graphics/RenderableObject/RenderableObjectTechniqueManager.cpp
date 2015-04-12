@@ -75,10 +75,8 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
 void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName, const std::string& TechniqueName )
 {
     CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName, CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
-    TMapResource::iterator it = m_Resources.find(ROTName);
-    if(it == m_Resources.end() )
-        AddResource(ROTName, l_RenderableObjectTechnique);
-    else
+    
+    if(!AddResource(ROTName, l_RenderableObjectTechnique) )
         CHECKED_DELETE(l_RenderableObjectTechnique);
 }
 
