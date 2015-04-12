@@ -1,20 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{00cbddc7-0d5a-4638-b30c-d00e67441314}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="AkDefaultIOHookBlocking.cpp" />
+    <ClCompile Include="AkDefaultIOHookDeferred.cpp" />
     <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Sound\ISound.cpp">
-      <Filter>Sound</Filter>
+    <ClCompile Include="WWSoundManager.cpp" />
+    <ClCompile Include="Common\AkDefaultLowLevelIODispatcher.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\AkFileLocationBase.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\AkFilePackage.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\AkFilePackageLUT.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AkDefaultIOHookBlocking.h" />
+    <ClInclude Include="AkDefaultIOHookDeferred.h" />
+    <ClInclude Include="AkFileHelpers.h" />
+    <ClInclude Include="AkFilePackageLowLevelIOBlocking.h" />
+    <ClInclude Include="AkFilePackageLowLevelIODeferred.h" />
+    <ClInclude Include="AkSoundEngineExports.h" />
     <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Sound\ISound.h">
-      <Filter>Sound</Filter>
+    <ClInclude Include="WWSoundManager.h" />
+    <ClInclude Include="Common\AkDefaultLowLevelIODispatcher.h">
+      <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Common\AkFileLocationBase.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\AkFilePackage.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\AkFilePackageLowLevelIO.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\AkFilePackageLUT.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\AkMultipleFileLocation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{7366a9b4-1851-4593-9184-4915455bc793}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common\AkFilePackageLowLevelIO.inl">
+      <Filter>Common</Filter>
+    </None>
+    <None Include="Common\AkMultipleFileLocation.inl">
+      <Filter>Common</Filter>
+    </None>
   </ItemGroup>
 </Project>

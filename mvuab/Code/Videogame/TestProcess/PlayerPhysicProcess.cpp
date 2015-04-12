@@ -187,9 +187,9 @@ void CPlayerPhysicProcess::Init()
   //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  CSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+  //CSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
 
-  uint32 l_source1 =  l_SM->CreateSource();
+  /*uint32 l_source1 =  l_SM->CreateSource();
   l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
   l_SM->SetSourceGain( l_source1, 100.0f );
 
@@ -207,6 +207,7 @@ void CPlayerPhysicProcess::Init()
 
   //l_SM->PlayAction2D( "test" );
   l_SM->PlaySource2D( l_source3 , "test", true );
+  */
 
   ////////////////////////////////////////////////////
   ////////////        CREATE GRENADE       ///////////

@@ -36,7 +36,7 @@ class CTriggerManager;
 class CBillboard;
 class CParticleManager;
 class CGizmosManager;
-class CSoundManager;
+class CWWSoundManager;
 
 class CCore : public CSingleton<CCore>
 {
@@ -70,7 +70,7 @@ private:
   CBillboard*                         m_pBillboard;
   CParticleManager*                   m_pParticleManager;
   CGizmosManager*                     m_pGizmosManager;
-  CSoundManager*                      m_pSoundManager;
+  CWWSoundManager*                    m_pSoundManager;
   void CreateManagers();
   void InitManagers();
 
@@ -111,7 +111,7 @@ public:
   GET_SET_PTR( CBillboard, Billboard );
   GET_SET_PTR( CParticleManager, ParticleManager );
   GET_SET_PTR( CGizmosManager, GizmosManager );
-  GET_SET_PTR( CSoundManager, SoundManager );
+  GET_SET_PTR( CWWSoundManager, SoundManager );
 };
 
 #endif // GRAPHICS_MANAGER_H
