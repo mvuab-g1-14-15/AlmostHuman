@@ -44,25 +44,25 @@
 
 
 CPhysicProcess::CPhysicProcess() : CProcess(),
-  m_Salir( false ), m_Time( 0 )
+    m_Salir( false ), m_Time( 0 )
 
 {
 }
 
 CPhysicProcess::~CPhysicProcess()
 {
-  CLogger::GetSingletonPtr()->SaveLogsInFile();
-  CHECKED_DELETE( m_Grenade );
+    CLogger::GetSingletonPtr()->SaveLogsInFile();
+    CHECKED_DELETE( m_Grenade );
 
-  for ( size_t i = 0; i < m_vPA.size(); ++i )
-    CHECKED_DELETE( m_vPA[i] );
+    for ( size_t i = 0; i < m_vPA.size(); ++i )
+    { CHECKED_DELETE( m_vPA[i] ); }
 
-  m_vPA.clear();
+    m_vPA.clear();
 
-  for ( size_t i = 0; i < m_vPUD.size(); ++i )
-    CHECKED_DELETE( m_vPUD[i] );
+    for ( size_t i = 0; i < m_vPUD.size(); ++i )
+    { CHECKED_DELETE( m_vPUD[i] ); }
 
-  m_vPUD.clear();
+    m_vPUD.clear();
 
 }
 
@@ -137,14 +137,6 @@ void CPhysicProcess::Update()
   {
     CCamera* l_CurrentCamera =
       CameraMInstance->GetCurrentCamera();
-
-    if ( l_CurrentCamera )
-    {
-      if ( l_CurrentCamera->GetEnable() )
-        l_CurrentCamera->SetEnable( false );
-      else
-        l_CurrentCamera->SetEnable( true );
-    }
   }
 
   //////////////////////////////////////////////////////////////////
@@ -308,7 +300,7 @@ void CPhysicProcess::Render()
 
 void CPhysicProcess::RenderDebugInfo()
 {
-  CProcess::RenderDebugInfo();
+    CProcess::RenderDebugInfo();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -316,17 +308,18 @@ void CPhysicProcess::RenderDebugInfo()
 //////////////////////////////////////////////////////////////////////////////////////
 std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
 {
-  std::ostringstream codeCat;
-  size_t count = LuaCode.find( ")" );
-  size_t count2 = LuaCode.find( "(" );
-  std::string l_LuaCode2 = LuaCode.substr( 0, count );
+    std::ostringstream codeCat;
+    size_t count = LuaCode.find( ")" );
+    size_t count2 = LuaCode.find( "(" );
+    std::string l_LuaCode2 = LuaCode.substr( 0, count );
 
-  if ( ( count - count2 ) == 1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
-    codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")";
-  else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
-    codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << ")";
+    if ( ( count - count2 ) ==
+            1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
+    { codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")"; }
+    else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
+    { codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << ")"; }
 
-  return codeCat.str();
+    return codeCat.str();
 }
 void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                               CPhysicUserData* _Other_Shape )
@@ -340,7 +333,7 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
   std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
   std::string l_NameShape = _Other_Shape->GetName();
   ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
+  LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                               CPhysicUserData* _Other_Shape )
@@ -352,7 +345,7 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
   std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
   std::string l_NameShape = _Other_Shape->GetName();
   ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
+  LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                              CPhysicUserData* _Other_Shape )
@@ -364,27 +357,27 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
   std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
   std::string l_NameShape = _Other_Shape->GetName();
   ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-  CLogger::GetSingletonPtr()->AddNewLog( ELL_INFORMATION, l_Msg.c_str() );
+  LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 
 CPhysicUserData* CPhysicProcess::GetNewPUD( const std::string& Name )
 {
-  return new CPhysicUserData( Name );
+    return new CPhysicUserData( Name );
 }
 CPhysicActor* CPhysicProcess::GetNewPhysicActor( CPhysicUserData* PUD )
 {
-  return new CPhysicActor( PUD );
+    return new CPhysicActor( PUD );
 }
 
 void CPhysicProcess::AddPudVector( CPhysicUserData* PUD )
 {
-  m_vPUD.push_back( PUD );
+    m_vPUD.push_back( PUD );
 }
 void CPhysicProcess::AddPhysicActorVector( CPhysicActor* PA )
 {
-  m_vPA.push_back( PA );
+    m_vPA.push_back( PA );
 }
 CPhysicUserData* CPhysicProcess::GetLastPUDInserted()
 {
-  return m_vPUD[m_vPUD.size() - 1];
+    return m_vPUD[m_vPUD.size() - 1];
 }

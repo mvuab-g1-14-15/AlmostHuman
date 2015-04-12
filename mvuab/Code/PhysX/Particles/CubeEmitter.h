@@ -19,6 +19,11 @@ class CCubeEmitter : public CParticleEmitter
         float m_MinDepth;
         float m_MaxDepth;
 
+        float m_Rand;
+        float m_RandMin;
+        float m_RandMax;
+        float m_EmitteTime;
+
     public:
         CCubeEmitter    ();
         virtual ~CCubeEmitter   ();
@@ -27,12 +32,13 @@ class CCubeEmitter : public CParticleEmitter
 		void Render             ();
 
         void Generate (unsigned int l_NumParticles);
-        void NewParticleSphere(CParticle* l_Particle);
+        void NewParticle(CParticle* l_Particle);
 
         void SetDepth(float min, float max);
         void SetWidth(float min, float max);
         void SetHeight(float min, float max);
         void SetRadius(float min, float max);
+        void SetRandom(float min, float max);
 };
 
 #endif

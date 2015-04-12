@@ -127,6 +127,8 @@ private:
   float             m_fSkinWidthControler;
   float             m_fStepOffsetControler;
 
+  float				m_fVelocity;
+
   Math::Vect3f              m_vExtensio;
 
   EControleType         m_Type;

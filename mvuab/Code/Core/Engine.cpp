@@ -4,7 +4,6 @@
 #include "Core.h"
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
-#include "Utils\LogRender.h"
 #include "Timer\Timer.h"
 #include "PhysicsManager.h"
 #include "EngineConfig.h"
@@ -13,48 +12,56 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
 CEngine::CEngine()
-  : m_pCore( new CCore() )
-  , m_pLogRender( new CLogRender() )
-  , m_pProcess( 0 )
+    : m_pCore( new CCore() )
+    , m_pProcess( 0 )
 {
 }
 
 CEngine::~CEngine()
 {
-  CHECKED_DELETE( m_pCore );
-  CHECKED_DELETE( m_pProcess );
-  CHECKED_DELETE( m_pLogRender );
+    CHECKED_DELETE( m_pCore );
+    CHECKED_DELETE( m_pProcess );
 }
 
 void CEngine::Update()
 {
-  m_pCore->Update();
-  m_pProcess->Update();
-  m_pLogRender->Update();
+    m_pCore->Update();
+    m_pProcess->Update();
 }
 
 void CEngine::Render()
 {
   SRCMInstance->Execute();
+    //m_RenderNow -= m_pCore->GetTimer()->GetElapsedTime();
+    //if(m_RenderNow > 0.0f) return;
+
+    //m_pCore->GetSceneRendererCommandManager()->Execute();
+    //m_RenderNow = m_RenderTime;
 }
 
 void CEngine::ProcessInputs()
 {
-  // TODO: Decirle al action manager que procese los inputs
+    // TODO: Decirle al action manager que procese los inputs
 }
 
 void CEngine::SetRunnigProcess( CProcess* aProcess )
 {
-  m_pProcess = aProcess;
+    m_pProcess = aProcess;
 }
 
 void CEngine::Init( CEngineConfig* aEngineConfig )
 {
-  if ( aEngineConfig )
-  {
-    // Init the core of the engine
-    m_pCore->Init();
-    // Init the videogame
-    m_pProcess->Init();
-  }
+    m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
+
+    if ( aEngineConfig )
+    {
+        // Init the core of the engine
+        m_pCore->Init();
+
+        // Init the videogame
+        m_pProcess->Init();
+
+        // Set render time
+        m_RenderTime = m_RenderTarget = 1.0f / aEngineConfig->GetMaxFps();
+    }
 }

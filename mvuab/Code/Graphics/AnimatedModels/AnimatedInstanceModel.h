@@ -1,3 +1,6 @@
+#ifndef ANIMATED_INSTANCE_MODEL_H
+#define ANIMATED_INSTANCE_MODEL_H
+#pragma once
 #include "RenderableObject/RenderableObject.h"
 #include "cal3d/cal3d.h"
 #include "Utils/Name.h"
@@ -55,3 +58,5 @@ public:
   bool IsCycleAnimationActive( uint32 Id ) const;
   bool IsActionAnimationActive( uint32 Id ) const;
 };
+
+#endif

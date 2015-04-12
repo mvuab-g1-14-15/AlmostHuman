@@ -8,6 +8,7 @@ enemy_manager = GetEnemyManager()
 gizmos_manager = GetGizmosManager()
 renderable_objects_layer_manager = GetRenderableObjectsLayersManager()
 renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
+particle_manager = GetParticleManager()
 process = CEngine.GetSingletonPtr():GetProcess()
 
 -- Global Variables

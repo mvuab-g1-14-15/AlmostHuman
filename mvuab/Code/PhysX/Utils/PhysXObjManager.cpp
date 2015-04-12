@@ -9,10 +9,10 @@
 ////----PhysX Includes-------------
 #undef min
 #undef max
-/*#include "NxPhysics.h"
-#include "NxControllerManager.h"
-#include "NxCapsuleController.h"
-#include "NxActor.h"*/
+/*  #include "NxPhysics.h"
+    #include "NxControllerManager.h"
+    #include "NxCapsuleController.h"
+    #include "NxActor.h"*/
 #include "PhysicsManager.h"
 #include "Actor/PhysicActor.h"
 #include "Reports/PhysicTriggerReport.h"
@@ -21,42 +21,42 @@
 ////--------------------------------
 
 #if defined(_DEBUG)
-#include "Memory\MemLeaks.h"
+    #include "Memory\MemLeaks.h"
 #endif
 
 #include "Utils\Name.h"
 
 CPhysXObjManager::CPhysXObjManager()
-	: m_Filename("")
+    : m_Filename("")
 {
 
 }
 
 CPhysXObjManager::~CPhysXObjManager()
 {
-	CleanUp();
+    CleanUp();
 }
 
 void CPhysXObjManager::CleanUp()
 {
-	this->Destroy();
+    this->Destroy();
 }
 
 
 bool CPhysXObjManager::Load( const std::string& filename )
 {
-	m_Filename = filename;
+    m_Filename = filename;
 
-	return Reload();
+    return Reload();
 }
 
 bool CPhysXObjManager::Reload()
 {
-	CXMLTreeNode newFile;
+CXMLTreeNode newFile;
 	if (!newFile.LoadFile(m_Filename.c_str()))
 	{
-		std::string msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
-		CLogger::GetSingletonPtr()->AddNewLog(ELL_ERROR, msg_error.c_str());
+		std::string &msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
+		LOG_ERROR_APPLICATION(msg_error.c_str());
 		return false;
 	}
 
@@ -65,7 +65,7 @@ bool CPhysXObjManager::Reload()
 	{
 		uint16 l_Count = l_xml.GetNumChildren();
 
-		for(uint16 i=0; i<l_Count; ++i)
+		for(uint16 i = 0; i < l_Count; ++i)
 		{
 			std::string l_Type = l_xml(i).GetName();
 

@@ -28,7 +28,7 @@ public:
   const Math::Vect2i& GetScreenSize() const;
   void SetScreenSize( const Math::Vect2i & aVec );
 
-  GET_SET( uint32 , RefreshRate );
+  GET_SET( float, MaxFps);
   GET_SET( bool , FullScreenMode );
   GET_SET( bool , Windowed );
   GET_SET( bool , ExclusiveModeInMouse );
@@ -51,7 +51,7 @@ private:
   Math::Vect2i                    m_ScreenResolution;
   Math::Vect2i                    m_ScreenSize;
   Math::Vect2i                    m_ScreenPosition;
-  uint32                          m_RefreshRate;
+  float                           m_MaxFps;
   std::string                     m_ConfigPath;
   std::string                     m_GUIPath;
   std::string                     m_SoundPath;

@@ -36,62 +36,55 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 		}
 		else if(SPOT_LIGHT == g_LightsType[0])
 		{	
-			l_LightDirection = normalize(g_LightsDirection[0]);
-			l_Attenuation = l_Attenuation * SpotAttenuation(0, l_LightDirection);
+			l_Attenuation = l_Attenuation * SpotAttenuation(0, -l_LightDirection);
 		}
 		
 		float3 l_Hn=normalize(normalize(g_CameraPosition-l_WorldPosition)-l_LightDirection);
 		float3 l_DiffuseContrib = l_DiffuseColor*saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[0];
-		float3 l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[0];
+		float3 l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[0] * l_SpecularFactor;
 		l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
 	}
 	
-	if( g_UseShadowMaskTexture )
-	{
-		float3 vPos = mul( float4(l_WorldPosition.xyz,1.0), g_ViewMatrix ).xyz;
-		float4 PosLight = mul( float4(vPos, 1.0), g_ViewToLightProjMatrix );
+	//float3 vPos = mul( float4(l_WorldPosition.xyz,1.0), g_ViewMatrix ).xyz;
+	float4 PosLight = mul( float4(l_WorldPosition.xyz, 1.0), g_ViewToLightProjMatrix );
 	
-		//transform from RT space to texture space.
-		float2 ShadowTexC = 0.5 * PosLight.xy / PosLight.w + float2( 0.5, 0.5 );
-		ShadowTexC.y = 1.0f - ShadowTexC.y;
+	//transform from RT space to texture space.
+    float2 ShadowTexC = 0.5 * PosLight.xy / PosLight.w + float2( 0.5, 0.5 );
+    ShadowTexC.y = 1.0f - ShadowTexC.y;
 
-		// transform to texel space
-		float2 texelpos = SMAP_SIZE * ShadowTexC;
+	// transform to texel space
+	float2 texelpos = SMAP_SIZE * ShadowTexC;
 	
-		// Determine the lerp amounts           
-		float2 lerps = frac( texelpos );
+	// Determine the lerp amounts           
+	float2 lerps = frac( texelpos );
 
-		// 1 – Píxel iluminado
-		// 0 – Píxel en sombra
-		float LightAmount = 1;
-		if( g_UseShadowMapStatic )
-		{
-			float sourcevals[4];
-			sourcevals[0] = (tex2D( ShadowMapTextureSampler, ShadowTexC ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[1] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 0) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[2] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(0, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[3] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
+	//read in bilerp stamp, doing the shadow checks
+	float sourcevals[4];
+	sourcevals[0] = (tex2D( ShadowMapTextureSampler, ShadowTexC ) + SHADOW_EPSILON) < (PosLight.z / PosLight.w)? 0.5f: 1.0f;  
+	sourcevals[1] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 0) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.5f: 1.0f;  
+	sourcevals[2] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(0, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.5f: 1.0f;  
+	sourcevals[3] = (tex2D( ShadowMapTextureSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.5f: 1.0f;  
 	
-			LightAmount =  LightAmount * (  lerp( lerp( sourcevals[0], sourcevals[1], lerps.x ),
-											lerp( sourcevals[2], sourcevals[3], lerps.x ), lerps.y ) );
-		}
-		
-		if( g_UseShadowMapDynamic )
-		{
-			float sourcevals[4];
-			sourcevals[0] = (tex2D( ShadowMapTextureDynamicSampler, ShadowTexC ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[1] = (tex2D( ShadowMapTextureDynamicSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 0) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[2] = (tex2D( ShadowMapTextureDynamicSampler, ShadowTexC + float2(0, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
-			sourcevals[3] = (tex2D( ShadowMapTextureDynamicSampler, ShadowTexC + float2(1.0/SMAP_SIZE, 1.0/SMAP_SIZE) ) + SHADOW_EPSILON < PosLight.z / PosLight.w)? 0.0f: 1.0f;  
+	// lerp between the shadow values to calculate our light amount
+	float LightAmount = lerp( lerp( sourcevals[0], sourcevals[1], lerps.x ),
+							  lerp( sourcevals[2], sourcevals[3], lerps.x ),
+							  lerps.y );
+							  
+	//sourcevals[0]=1.0;
 	
-			LightAmount =  LightAmount * ( lerp( lerp( sourcevals[0], sourcevals[1], lerps.x ),
-										   lerp( sourcevals[2], sourcevals[3], lerps.x ), lerps.y ) );
-		}
-
-		l_PixelColor = l_PixelColor * LightAmount;
-	}
-	
-	return l_PixelColor;
+	// 1 – Píxel iluminado
+	// 0 – Píxel en sombra
+	//return float4(l_PixelColor.xyz,1.0);
+	if(ShadowTexC.x<0.0 || ShadowTexC.x>1.0 || ShadowTexC.y<0.0 || ShadowTexC.y>1.0)
+		//sourcevals[0]=1.0;
+		LightAmount=1.0;
+	//	return float4(1,0,0,0.1);	
+	/*else
+		return float4(0,1,0,0.1);*/
+		//return tex2D( ShadowMapTextureSampler, ShadowTexC );
+		//l_PixelColor.xyz=float3(1,1,1);
+	//return float4(ShadowTexC.y, 0, 0, 1);
+	return float4(l_PixelColor.xyz * LightAmount, 1.0);
 }
 
 technique RenderDeferredTechnique {

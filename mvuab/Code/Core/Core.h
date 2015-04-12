@@ -17,10 +17,11 @@
 class CTimer;
 class CConsole;
 class CEngineManagers;
+class CSoundManager;
 
 class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManager>
 {
-    private:
+private:
 
         // Configuration
 
@@ -28,24 +29,26 @@ class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManag
         CTimer*                             m_pTimer;
         CConsole*                           m_pConsole;
         CEngineManagers*                    m_pEngineManagers;
+        CSoundManager*                      m_pSoundManager;
 
         void CreateManagers();
         void InitManagers();
 
-    public:
-        CCore();
-        ~CCore();
+public:
+  CCore();
+  ~CCore();
 
-        void Init();
-        void Update();
-        void Render();
+  void Init();
+  void Update();
+  void Render();
 
-        // Methods that trace Lua
-        void Trace( const std::string& TraceStr );
+  // Methods that trace Lua
+  void Trace( const std::string& TraceStr );
 
 
-        // Getters and setters
-        GET_SET_PTR( CTimer, Timer );
+  // Getters and setters
+  GET_SET_PTR( CTimer, Timer );
+  GET_SET_PTR( CSoundManager, SoundManager );
 };
 
 #endif // GRAPHICS_MANAGER_H

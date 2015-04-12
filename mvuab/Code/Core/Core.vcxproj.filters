@@ -5,17 +5,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{78fccc1e-839b-4398-bf25-e92dd41bdec8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Process.cpp" />
-    <ClCompile Include="Utils\LogRender.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="EngineConfig.cpp" />
     <ClCompile Include="EngineManagers.cpp" />
   </ItemGroup>
@@ -23,9 +17,6 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Process.h" />
-    <ClInclude Include="Utils\LogRender.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="EngineConfig.h" />
     <ClInclude Include="EngineManagers.h" />
   </ItemGroup>

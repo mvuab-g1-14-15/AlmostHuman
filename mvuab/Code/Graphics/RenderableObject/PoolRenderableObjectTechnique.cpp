@@ -5,27 +5,22 @@
 #include "EngineManagers.h"
 #include <sstream>
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique( CXMLTreeNode& TreeNode )
-  : CName( TreeNode.GetPszProperty( "name", "" ) )
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode& TreeNode) : CName(TreeNode.GetPszProperty("name", ""))
 {
 }
 
 CPoolRenderableObjectTechnique::~CPoolRenderableObjectTechnique()
 {
-  Destroy();
+    Destroy();
 }
 
 void CPoolRenderableObjectTechnique::Destroy()
 {
-  for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
-    CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
-
-  if ( m_RenderableObjectTechniqueElements.size() != 0 ) m_RenderableObjectTechniqueElements.clear();
+    for (size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i ) CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
+    if (m_RenderableObjectTechniqueElements.size() != 0) m_RenderableObjectTechniqueElements.clear();
 }
 
-void CPoolRenderableObjectTechnique::AddElement( const std::string& Name,
-    const std::string& TechniqueName,
-    CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager )
+void CPoolRenderableObjectTechnique::AddElement(const std::string& Name, const std::string& TechniqueName, CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager)
 {
   CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement =
     new CPoolRenderableObjectTechniqueElement( Name,
@@ -46,10 +41,8 @@ void CPoolRenderableObjectTechnique::Apply()
   }
 }
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechniqueElement::CPoolRenderableObjectTechniqueElement
-( const std::string& Name, CEffectTechnique* EffectTechnique,
-  CRenderableObjectTechnique* OnRenderableObjectTechniqueManager )
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechniqueElement::CPoolRenderableObjectTechniqueElement(const std::string& Name, CEffectTechnique* EffectTechnique, CRenderableObjectTechnique* OnRenderableObjectTechniqueManager)
 {
-  m_RenderableObjectTechnique = CRenderableObjectTechnique( Name, EffectTechnique );
-  m_OnRenderableObjectTechniqueManager = OnRenderableObjectTechniqueManager;
+    m_RenderableObjectTechnique = CRenderableObjectTechnique(Name, EffectTechnique);
+    m_OnRenderableObjectTechniqueManager = OnRenderableObjectTechniqueManager;
 }

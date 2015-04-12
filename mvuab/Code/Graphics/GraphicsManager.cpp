@@ -380,10 +380,6 @@ bool CGraphicsManager::CreateFullScreenMode()
     if ( d3ddm.Format != D3DFMT_X8R8G8B8 )
       continue;
 
-    // Does this adapter mode support a refresh rate of 75 MHz?
-    if ( d3ddm.RefreshRate != m_RefreshRate )
-      continue;
-
     // We found a match!
     bDesiredAdapterModeFound = true;
     break;
@@ -391,8 +387,7 @@ bool CGraphicsManager::CreateFullScreenMode()
 
   if ( bDesiredAdapterModeFound == false )
   {
-    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8 a refresh rate of %d, and a resolution of (%d,%d)",
-                           m_RefreshRate, m_ScreenResolution.x, m_ScreenResolution.y );
+    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8, and a resolution of (%d,%d)", m_ScreenResolution.x, m_ScreenResolution.y );
     return false;
   }
 
@@ -441,9 +436,10 @@ bool CGraphicsManager::CreateFullScreenMode()
   d3dpp.BackBufferFormat            = D3DFMT_X8R8G8B8;
   d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_IMMEDIATE;
   d3dpp.Flags                       = 0;//D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
-  d3dpp.FullScreen_RefreshRateInHz  = m_RefreshRate;
+  d3dpp.FullScreen_RefreshRateInHz  = D3DPRESENT_RATE_DEFAULT;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
+
   HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
                &mDirectXDevice );
 

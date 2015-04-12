@@ -8,7 +8,7 @@
 CAnimatedModelsManager::CAnimatedModelsManager()
 : CManager()
 {
-	CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
+    CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
 
 CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts)
@@ -26,8 +26,8 @@ CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, co
 
     // Check if the core model is already in memory
     if(!l_pAnimatedCoreModel)
-        l_pAnimatedCoreModel = AddNewCore(Name,Path);
-    
+    { l_pAnimatedCoreModel = AddNewCore(Name, Path); }
+
     assert(l_pAnimatedCoreModel);
 
     return l_pAnimatedCoreModel;
@@ -35,11 +35,11 @@ CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name, co
 
 CAnimatedCoreModel * CAnimatedModelsManager::GetCore(const std::string &Name)
 {
-  CAnimatedCoreModel * l_pAnimatedCoreModel = GetResource(Name);
+    CAnimatedCoreModel * l_pAnimatedCoreModel = GetResource(Name);
 
-  assert(l_pAnimatedCoreModel);
+    assert(l_pAnimatedCoreModel);
 
-  return l_pAnimatedCoreModel;
+    return l_pAnimatedCoreModel;
 }
 
 CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &Name)
@@ -67,21 +67,21 @@ void CAnimatedModelsManager::Init()
     {
         const std::string &name = node(i).GetPszProperty("name", "no_name");
         const std::string &path = node(i).GetPszProperty("path", "no_file");
-        AddNewCore(name,path);
+        AddNewCore(name, path);
     }
 }
 
 CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string &Name, const std::string &Path )
 {
-   CAnimatedCoreModel *l_pAnimatedCoreModel = new CAnimatedCoreModel(Name);
-   if(!l_pAnimatedCoreModel->Load(Path))
-   {
-       CHECKED_DELETE(l_pAnimatedCoreModel);
-   }
-   else
-   {
-       AddResource(Name, l_pAnimatedCoreModel);
-   }
+    CAnimatedCoreModel *l_pAnimatedCoreModel = new CAnimatedCoreModel(Name);
+    if(!l_pAnimatedCoreModel->Load(Path))
+    {
+        CHECKED_DELETE(l_pAnimatedCoreModel);
+    }
+    else
+    {
+        AddResource(Name, l_pAnimatedCoreModel);
+    }
 
-   return l_pAnimatedCoreModel;
+    return l_pAnimatedCoreModel;
 }

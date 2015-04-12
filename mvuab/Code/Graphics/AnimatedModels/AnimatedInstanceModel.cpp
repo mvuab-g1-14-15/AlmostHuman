@@ -30,7 +30,8 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
   m_NumFaces( 0 ),
   m_pIB( 0 ),
   m_pVB( 0 ),
-  m_ChangeAnimation( 0 )
+  m_ChangeAnimation( 0 ),
+  CRenderableObject()
 {
   SetName( Name );
   Initialize();

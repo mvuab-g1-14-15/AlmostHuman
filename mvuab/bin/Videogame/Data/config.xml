@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <config>
 	<!-- available modes for window=full_screen, windowed, fit_desktop -->
-	<window_properties resolution="1280 720" position="0 0" mode="fit_desktop" refresh_rate="60" size="1280 720"/>
+	<window_properties resolution="1280 720" position="0 0" mode="fit_desktop" size="1280 720"/>
 	<console_logger activate_console="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="true" />
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
-	<sound init_sound_path="./Data/Sounds/LaberynthSounds.xml"/>
-	<process init_process="LaberynthGame"/>
 	<managers path="Data/managers.xml"/>
+	<sound init_sound_path="./Data/sounds.xml"/>
+    	<maxfps fps="10.0"/>
 </config>

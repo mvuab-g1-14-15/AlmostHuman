@@ -25,6 +25,7 @@
 #include "Characters\Enemies\EnemyManager.h"
 #include "Gizmos\GizmosManager.h"
 #include "EngineManagers.h"
+#include "Particles\ParticleManager.h"
 
 #include "luabind_macros.h"
 
@@ -65,6 +66,10 @@ CGizmosManager* GetGizmosManager()
     return GizmosMInstance;
 }
 
+CParticleManager* GetParticleManager()
+{
+    return ParticleMInstance;
+}
 void registerProcess( lua_State* aLuaState)
 {
   LUA_BEGIN_DECLARATION( aLuaState )
@@ -95,16 +100,7 @@ void registerCores( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CCore, CSingleton<CCore> )
-    /*LUA_DECLARE_METHOD( CCore, GetActionManager )
-    LUA_DECLARE_METHOD( CCore, GetLightManager )
-    LUA_DECLARE_METHOD( CCore, GetGraphicsManager )
-    LUA_DECLARE_METHOD( CCore, GetRenderableObjectsManager )
-    LUA_DECLARE_METHOD( CCore, GetRenderableObjectsLayersManager )
-    LUA_DECLARE_METHOD( CCore, GetCameraManager )*/
     LUA_DECLARE_METHOD( CCore, GetTimer )
-    /*LUA_DECLARE_METHOD( CCore, GetPhysicsManager )
-    LUA_DECLARE_METHOD( CCore, GetEnemyManager )
-    LUA_DECLARE_METHOD( CCore, GetGizmosManager )*/
     LUA_DECLARE_METHOD( CCore, Trace )
     LUA_BEGIN_SCOPE
         LUA_DECLARE_METHOD_SCOPE(CCore, GetSingletonPtr )
@@ -136,6 +132,10 @@ void registerManagers( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager)
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager)
   LUA_END_DECLARATION
 }
 

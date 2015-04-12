@@ -5,6 +5,22 @@
 
 CCubeEmitter::CCubeEmitter()
 {
+    float m_MinimumRadius = 0.0f;
+    float m_MaximumRadius = 0.0f;
+
+    float m_MinWidth = 0.0f;
+    float m_MaxWidth = 0.0f;
+
+    float m_MinHeight = 0.0f;
+    float m_MaxHeight = 0.0f;
+
+    float m_MinDepth = 0.0f;
+    float m_MaxDepth = 0.0f;
+
+    float m_Rand    = 0.0f;
+    float m_RandMin = 0.0f;
+    float m_RandMax = 0.0f;
+    float m_EmitteTime = 0.0f;
 }
 
 CCubeEmitter::~CCubeEmitter()
@@ -35,17 +51,24 @@ void CCubeEmitter::SetRadius(float min, float max)
     m_MaximumRadius = max;
 }
 
-void CCubeEmitter::Generate (unsigned int l_NumParticles)
+void CCubeEmitter::SetRandom(float Min, float Max)
+{
+    m_RandMin = Min;
+    m_RandMax = Max;
+}
+
+void CCubeEmitter::Generate(unsigned int l_NumParticles)
 {
     m_Particles.resize(l_NumParticles);
+    m_Rand = m_EmitteTime = 0.0f;
 
     for(unsigned int i = 0; i < l_NumParticles; ++i)
     {
-        NewParticleSphere(&m_Particles[i]);
+        //NewParticle(&m_Particles[i]);
     }
 }
 
-void CCubeEmitter::NewParticleSphere(CParticle *l_Particle)
+void CCubeEmitter::NewParticle(CParticle *l_Particle)
 {
     float l_Radius = baseUtils::RandRange(m_MinimumRadius, m_MaximumRadius);
     float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
@@ -57,13 +80,11 @@ void CCubeEmitter::NewParticleSphere(CParticle *l_Particle)
     Math::Vect3f l_Vector = Math::Vect3f(x, y, z);
     l_Particle->SetPosition(l_Vector);
     
-
     l_Particle->SetVelocity(m_Velocity);
     l_Particle->SetAcceleration(m_Acceleration);
 
     l_Particle->SetTextureName(m_TextureName);
     l_Particle->SetSize(l_Radius);
-
 
     l_Particle->SetLifeTime(l_LifeTime);
     l_Particle->SetIsAlive(true);
@@ -72,35 +93,39 @@ void CCubeEmitter::NewParticleSphere(CParticle *l_Particle)
 void CCubeEmitter::Update(float dt)
 {
     if(m_Particles.size() == 0) return;
+    if(!m_Active) return;
 
+    m_ActualTime += dt;
+    if(m_EmitterLifeTime > 0.0f && m_EmitterLifeTime < m_ActualTime) m_Active = false;
+
+    int lNumParticles = m_Particles.size();
     CParticle *p = &m_Particles[0];
     omp_set_num_threads(2);
 
-    int lNumParticles = m_Particles.size();
     #pragma omp parallel for
-    for ( int i = 0; i < lNumParticles; ++i )
+    for(int i = 0; i < lNumParticles; ++i)
     {
         (p + i)->Update(dt);
     }
 
-    m_ActualTime += dt;
-    if ( m_ActualTime < 1.0f )
+    m_EmitteTime += dt;
+    if(m_EmitteTime >= 1.0f)
     {
-        m_Rand = rand() % ( m_Max - m_Min + 1 ) + m_Min;
-        m_ActualTime = 0.0f;
+        m_Rand += baseUtils::RandRange(m_RandMin, m_RandMax);
+        m_EmitteTime = 0.0f;
     }
 
-    for(m_Rand; m_Rand > 0; --m_Rand)
+    CParticle *l_Particle = &m_Particles[0];
+    int l_NewRand = (int) std::ceilf(m_Rand * dt);
+
+    for(int i = 0; i < lNumParticles && l_NewRand > 0; ++i)
     {
-        std::vector<CParticle>::iterator it = m_Particles.begin();
+        if((l_Particle + i)->GetIsAlive()) continue;
 
-        for ( ; it != m_Particles.end() && it->GetIsAlive(); ++it );
-        if ( it == m_Particles.end() ) return;
-
-        NewParticleSphere( it._Ptr );
+        NewParticle(l_Particle + i);
+        l_NewRand--; m_Rand--;
     }
 }
-
 
 void CCubeEmitter::Render()
 {

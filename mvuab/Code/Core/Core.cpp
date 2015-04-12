@@ -32,6 +32,7 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
 #include <iostream>
+#include "SoundManager.h"
 
 CCore::CCore()
   : m_pTimer( 0 )
@@ -46,6 +47,7 @@ CCore::~CCore()
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
   CHECKED_DELETE( m_pEngineManagers );
+  CHECKED_DELETE( m_pSoundManager );
 }
 
 void CCore::Init()
@@ -62,6 +64,8 @@ void CCore::Update()
   for(;it!=it_end;++it)
         (*it)->Update();
   m_pTimer->Update();
+  
+  m_pSoundManager->Update( m_pTimer->GetElapsedTime() );
 
   if ( ActionManagerInstance->DoAction( "ClearConsole" ) )
   {
@@ -79,6 +83,7 @@ void CCore::CreateManagers()
   if ( EngineConfigInstance->GetEnableConsole() )
     m_pConsole = new CConsole( TRUE );
   m_pTimer = new CTimer( 30 );
+  m_pSoundManager = new CSoundManager();
   m_pEngineManagers = new CEngineManagers();
   ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
   // Register all the commands with the object factory class
@@ -178,6 +183,8 @@ void CCore::InitManagers()
     m_pConsole->SetAttributes( x );
     m_pConsole->SetFullSize();
   }
+
+  m_pSoundManager->Init( EngineConfigInstance->GetSoundPath() );
 
   TVectorResources::iterator it = m_ResourcesVector.begin(),
                              it_end = m_ResourcesVector.end();

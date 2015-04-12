@@ -31,16 +31,16 @@ void CInputManager::Done ()
 //----------------------------------------------------------------------------
 // Free memory
 //----------------------------------------------------------------------------
-void CInputManager::Release () 
+void CInputManager::Release ()
 {
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: shutting down DirectInput");
+    LOG_INFO_APPLICATION("InputManager:: shutting down DirectInput");
 
     CHECKED_DELETE(m_pKB);
     CHECKED_DELETE(m_pMouse);
     CHECKED_DELETE(m_pGamePad);
     CHECKED_RELEASE(m_pDI);
 
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: offline (ok)");
+    LOG_INFO_APPLICATION("InputManager:: offline (ok)");
 }
 
 
@@ -54,11 +54,11 @@ void CInputManager::Init ()
     HRESULT hr;
 	m_hWndMain = EngineConfigInstance->GetWindowId();
 
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "InputManager:: calling initialization");
+    LOG_INFO_APPLICATION("InputManager:: calling initialization");
 
     // create main DirectInput object
-    m_bIsOk = !FAILED (hr = DirectInput8Create(    GetModuleHandle(NULL), DIRECTINPUT_VERSION, 
-        IID_IDirectInput8, (void**)&m_pDI, NULL));
+    m_bIsOk = !FAILED (hr = DirectInput8Create(    GetModuleHandle(NULL), DIRECTINPUT_VERSION,
+                            IID_IDirectInput8, (void**)&m_pDI, NULL));
     if (m_bIsOk)
     {
         // create all input device objects
@@ -107,7 +107,7 @@ void CInputManager::Init ()
 //----------------------------------------------------------------------------
 bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
 {
-    
+
     switch (device)
     {
         case IDV_GAMEPAD1:
@@ -117,15 +117,15 @@ bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
             return m_pGamePad->IsConnected(1);
             break;
         case IDV_GAMEPAD3:
-      return m_pGamePad->IsConnected(2);
-        break;
+            return m_pGamePad->IsConnected(2);
+            break;
         case IDV_GAMEPAD4:
-      return m_pGamePad->IsConnected(3);
-        break;
+            return m_pGamePad->IsConnected(3);
+            break;
         default:
             return false;
     }
-} 
+}
 
 
 
@@ -138,13 +138,13 @@ void CInputManager::Update(void)
 
     if (!IsOk()) LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", E_FAIL);//return E_FAIL;
 
-    if (m_pKB) 
+    if (m_pKB)
     {
         if ( FAILED( hr=m_pKB->Update() ) )
             LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr);//return hr;
     }
 
-    if (m_pMouse) 
+    if (m_pMouse)
     {
         if( m_bActiveMouse )
         {
@@ -153,7 +153,7 @@ void CInputManager::Update(void)
         }
     }
 
-    if (m_pGamePad) 
+    if (m_pGamePad)
     {
         m_pGamePad->Update();
     }
@@ -164,7 +164,7 @@ void CInputManager::Update(void)
 //----------------------------------------------------------------------------
 // If mouse or joystick return current position.
 //----------------------------------------------------------------------------
-HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Math::Vect2i& pos) 
+HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Math::Vect2i& pos)
 {
     switch (idType)
     {
@@ -173,25 +173,25 @@ HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Math::Vect2i& pos)
             return S_OK;
             break;
         case IDV_GAMEPAD1:
-            m_pGamePad->GetPosition(pos,0);
+            m_pGamePad->GetPosition(pos, 0);
             return true;
             break;
         case IDV_GAMEPAD2:
-            m_pGamePad->GetPosition(pos,1);
+            m_pGamePad->GetPosition(pos, 1);
             return true;
             break;
         case IDV_GAMEPAD3:
-      m_pGamePad->GetPosition(pos,2);
+            m_pGamePad->GetPosition(pos, 2);
             return true;
-        break;
+            break;
         case IDV_GAMEPAD4:
-      m_pGamePad->GetPosition(pos,3);
+            m_pGamePad->GetPosition(pos, 3);
             return true;
             break;
         default:
             return E_FAIL;
     }
-} 
+}
 
 
 //----------------------------------------------------------------------------
@@ -202,20 +202,20 @@ bool CInputManager::GetGamePadLeftThumbDeflection(float32 *pfX, float32 *pfY, IN
     switch (device)
     {
         case IDV_GAMEPAD1:
-            return m_pGamePad->GetLeftThumbDeflection(pfX,pfY,0);
+            return m_pGamePad->GetLeftThumbDeflection(pfX, pfY, 0);
             break;
         case IDV_GAMEPAD2:
-            return m_pGamePad->GetLeftThumbDeflection(pfX,pfY,1);
+            return m_pGamePad->GetLeftThumbDeflection(pfX, pfY, 1);
             break;
         case IDV_GAMEPAD3:
-      return m_pGamePad->GetLeftThumbDeflection(pfX,pfY,2);
-        break;
+            return m_pGamePad->GetLeftThumbDeflection(pfX, pfY, 2);
+            break;
         case IDV_GAMEPAD4:
-      return m_pGamePad->GetLeftThumbDeflection(pfX,pfY,3);
-        break;
+            return m_pGamePad->GetLeftThumbDeflection(pfX, pfY, 3);
+            break;
         default:
             return false;
-    }  
+    }
 }
 
 bool CInputManager::GetGamePadRightThumbDeflection(float32 *pfX, float32 *pfY, INPUT_DEVICE_TYPE device)
@@ -223,17 +223,17 @@ bool CInputManager::GetGamePadRightThumbDeflection(float32 *pfX, float32 *pfY, I
     switch (device)
     {
         case IDV_GAMEPAD1:
-            return m_pGamePad->GetRightThumbDeflection(pfX,pfY,0);
+            return m_pGamePad->GetRightThumbDeflection(pfX, pfY, 0);
             break;
         case IDV_GAMEPAD2:
-            return m_pGamePad->GetRightThumbDeflection(pfX,pfY,1);
+            return m_pGamePad->GetRightThumbDeflection(pfX, pfY, 1);
             break;
         case IDV_GAMEPAD3:
-      return m_pGamePad->GetRightThumbDeflection(pfX,pfY,2);
-        break;
+            return m_pGamePad->GetRightThumbDeflection(pfX, pfY, 2);
+            break;
         case IDV_GAMEPAD4:
-      return m_pGamePad->GetRightThumbDeflection(pfX,pfY,3);
-        break;
+            return m_pGamePad->GetRightThumbDeflection(pfX, pfY, 3);
+            break;
         default:
             return false;
     }
@@ -244,17 +244,17 @@ bool CInputManager::GetGamePadDeltaTriggers(float32 *pfLeft, float32 *pfRight, I
     switch (device)
     {
         case IDV_GAMEPAD1:
-            return m_pGamePad->GetDeltaTriggers(pfLeft,pfRight,0);
+            return m_pGamePad->GetDeltaTriggers(pfLeft, pfRight, 0);
             break;
         case IDV_GAMEPAD2:
-            return m_pGamePad->GetDeltaTriggers(pfLeft,pfRight,1);
+            return m_pGamePad->GetDeltaTriggers(pfLeft, pfRight, 1);
             break;
         case IDV_GAMEPAD3:
-      return m_pGamePad->GetDeltaTriggers(pfLeft,pfRight,2);
-        break;
+            return m_pGamePad->GetDeltaTriggers(pfLeft, pfRight, 2);
+            break;
         case IDV_GAMEPAD4:
-      return m_pGamePad->GetDeltaTriggers(pfLeft,pfRight,3);
-        break;
+            return m_pGamePad->GetDeltaTriggers(pfLeft, pfRight, 3);
+            break;
         default:
             return false;
     }
@@ -265,17 +265,17 @@ void    CInputManager::SetGamePadLeftMotorSpeed (uint32 speed, INPUT_DEVICE_TYPE
     switch (device)
     {
         case IDV_GAMEPAD1:
-            m_pGamePad->SetLeftMotorSpeed(speed,0);
+            m_pGamePad->SetLeftMotorSpeed(speed, 0);
             break;
         case IDV_GAMEPAD2:
-            m_pGamePad->SetLeftMotorSpeed(speed,1);
+            m_pGamePad->SetLeftMotorSpeed(speed, 1);
             break;
         case IDV_GAMEPAD3:
-      m_pGamePad->SetLeftMotorSpeed(speed,2);
-        break;
+            m_pGamePad->SetLeftMotorSpeed(speed, 2);
+            break;
         case IDV_GAMEPAD4:
-      m_pGamePad->SetLeftMotorSpeed(speed,3);
-        break;
+            m_pGamePad->SetLeftMotorSpeed(speed, 3);
+            break;
     }
 }
 
@@ -284,25 +284,25 @@ void    CInputManager::SetGamePadRightMotorSpeed (uint32 speed, INPUT_DEVICE_TYP
     switch (device)
     {
         case IDV_GAMEPAD1:
-            m_pGamePad->SetRightMotorSpeed(speed,0);
+            m_pGamePad->SetRightMotorSpeed(speed, 0);
             break;
         case IDV_GAMEPAD2:
-            m_pGamePad->SetRightMotorSpeed(speed,1);
+            m_pGamePad->SetRightMotorSpeed(speed, 1);
             break;
         case IDV_GAMEPAD3:
-      m_pGamePad->SetRightMotorSpeed(speed,2);
-        break;
+            m_pGamePad->SetRightMotorSpeed(speed, 2);
+            break;
         case IDV_GAMEPAD4:
-      m_pGamePad->SetRightMotorSpeed(speed,3);
-        break;
+            m_pGamePad->SetRightMotorSpeed(speed, 3);
+            break;
     }
 }
 
 //----------------------------------------------------------------------------
 // Return the change of mouse cursor since last call to Update().
 //----------------------------------------------------------------------------
-const Math::Vect3i& CInputManager::GetMouseDelta(void) 
-{ 
+const Math::Vect3i& CInputManager::GetMouseDelta(void)
+{
     return m_pMouse->GetMouseDelta();
 }
 
@@ -314,27 +314,27 @@ bool CInputManager::IsDown(INPUT_DEVICE_TYPE idType, uint32 nBtn)
 {
     bool result = false;
 
-  switch(idType)
-  {
-    case IDV_MOUSE:
-      result = m_pMouse->IsDown(nBtn);
-      break;
-    case IDV_KEYBOARD:
-      result = m_pKB->IsDown(nBtn);
-      break;
+    switch(idType)
+    {
+        case IDV_MOUSE:
+            result = m_pMouse->IsDown(nBtn);
+            break;
+        case IDV_KEYBOARD:
+            result = m_pKB->IsDown(nBtn);
+            break;
         case IDV_GAMEPAD1:
-            result = m_pGamePad->IsDown(nBtn,0);
+            result = m_pGamePad->IsDown(nBtn, 0);
             break;
         case IDV_GAMEPAD2:
-            result = m_pGamePad->IsDown(nBtn,1);
+            result = m_pGamePad->IsDown(nBtn, 1);
             break;
         case IDV_GAMEPAD3:
-      result =  m_pGamePad->IsDown(nBtn,2);
-        break;
+            result =  m_pGamePad->IsDown(nBtn, 2);
+            break;
         case IDV_GAMEPAD4:
-      result = m_pGamePad->IsDown(nBtn,3);
-        break;
-  }
+            result = m_pGamePad->IsDown(nBtn, 3);
+            break;
+    }
 
     return result;
 }
@@ -344,75 +344,75 @@ bool CInputManager::IsDown(INPUT_DEVICE_TYPE idType, uint32 nBtn)
 //----------------------------------------------------------------------------
 bool CInputManager::IsDownUp(INPUT_DEVICE_TYPE idType, uint32 nBtn)
 {
-     bool result = false;
+    bool result = false;
 
-  switch(idType)
-  {
-    case IDV_MOUSE:
-      result = m_pMouse->IsDownUp(nBtn);
-      break;
-    case IDV_KEYBOARD:
-      result = m_pKB->IsDownUp(nBtn);
-      break;
-    case IDV_GAMEPAD1:
-            result = m_pGamePad->IsDownUp(nBtn,0);
+    switch(idType)
+    {
+        case IDV_MOUSE:
+            result = m_pMouse->IsDownUp(nBtn);
+            break;
+        case IDV_KEYBOARD:
+            result = m_pKB->IsDownUp(nBtn);
+            break;
+        case IDV_GAMEPAD1:
+            result = m_pGamePad->IsDownUp(nBtn, 0);
             break;
         case IDV_GAMEPAD2:
-            result = m_pGamePad->IsDownUp(nBtn,1);
+            result = m_pGamePad->IsDownUp(nBtn, 1);
             break;
         case IDV_GAMEPAD3:
-      result = m_pGamePad->IsDownUp(nBtn,2);
-        break;
+            result = m_pGamePad->IsDownUp(nBtn, 2);
+            break;
         case IDV_GAMEPAD4:
-      result = m_pGamePad->IsDownUp(nBtn,3);
-        break;
-  }
+            result = m_pGamePad->IsDownUp(nBtn, 3);
+            break;
+    }
 
     return result;
-} 
+}
 
 //----------------------------------------------------------------------------
 // Ask about button/key state for mouse, joytsick or keyboard.
 //----------------------------------------------------------------------------
 bool CInputManager::IsUpDown(INPUT_DEVICE_TYPE idType, uint32 nBtn)
 {
-     bool result = false;
+    bool result = false;
 
-  switch(idType)
-  {
-    case IDV_MOUSE:
-      result = m_pMouse->IsUpDown(nBtn);
-      break;
-    case IDV_KEYBOARD:
-      result = m_pKB->IsUpDown(nBtn);
-      break;
-    case IDV_GAMEPAD1:
-            result = m_pGamePad->IsUpDown(nBtn,0);
+    switch(idType)
+    {
+        case IDV_MOUSE:
+            result = m_pMouse->IsUpDown(nBtn);
+            break;
+        case IDV_KEYBOARD:
+            result = m_pKB->IsUpDown(nBtn);
+            break;
+        case IDV_GAMEPAD1:
+            result = m_pGamePad->IsUpDown(nBtn, 0);
             break;
         case IDV_GAMEPAD2:
-            result = m_pGamePad->IsUpDown(nBtn,1);
+            result = m_pGamePad->IsUpDown(nBtn, 1);
             break;
         case IDV_GAMEPAD3:
-      result = m_pGamePad->IsUpDown(nBtn,2);
-        break;
+            result = m_pGamePad->IsUpDown(nBtn, 2);
+            break;
         case IDV_GAMEPAD4:
-      result = m_pGamePad->IsUpDown(nBtn,3);
-        break;
-  }
+            result = m_pGamePad->IsUpDown(nBtn, 3);
+            break;
+    }
 
     return result;
-} 
+}
 
 
 int32 CInputManager::Scan2ascii (uint32 scancode, uint16* result)
 {
-   static HKL layout=GetKeyboardLayout(0);
-   static uint8 State[256];
+    static HKL layout = GetKeyboardLayout(0);
+    static uint8 State[256];
 
-   if (GetKeyboardState(State)==FALSE)
-      return 0;
-   uint32 vk=MapVirtualKeyEx(scancode,1,layout);
-   return ToAsciiEx(vk,scancode,State,result,0,layout);
+    if (GetKeyboardState(State) == FALSE)
+    { return 0; }
+    uint32 vk = MapVirtualKeyEx(scancode, 1, layout);
+    return ToAsciiEx(vk, scancode, State, result, 0, layout);
 }
 
 
@@ -440,17 +440,17 @@ int32 CInputManager::Scan2ascii (uint32 scancode, uint16* result)
 //                        "Muestra todas las funciones de esta clase"),
 //                        &CScriptRegister::Help)
 //
-//            .def(    CScriptRegister::PushFunctionName("isDown","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn", 
+//            .def(    CScriptRegister::PushFunctionName("isDown","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn",
 //                        "Informa si se esta presionando un boton de un disp. de entrada (0:keyb,1:joys,2:mouse)"),
 //                        &CInputManager::IsDown)
 //
-//            .def(    CScriptRegister::PushFunctionName("isDownUp","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn", 
+//            .def(    CScriptRegister::PushFunctionName("isDownUp","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn",
 //                        "Informa si se justo ahora se ha despresionado un boton de un disp. de entrada (0:keyb,1:joys,2:mouse)"),
 //                        &CInputManager::IsDownUp)
 //
-//            .def(    CScriptRegister::PushFunctionName("isUpDown","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn", 
+//            .def(    CScriptRegister::PushFunctionName("isUpDown","bool","INPUT_DEVICE_TYPE idType, uint32 nBtn",
 //                        "Informa si se justo ahora se ha presionado un boton de un disp. de entrada (0:keyb,1:joys,2:mouse)"),
-//                        &CInputManager::IsUpDown)                        
+//                        &CInputManager::IsUpDown)
 //
 //        ];
 //}

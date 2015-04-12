@@ -1,13 +1,13 @@
 #include "Language\LanguageManager.h"
 #include "xml/XMLTreeNode.h"
+
 //#include "Exceptions/Exception.h"
 #include "Logger/Logger.h"
 #include "Utils\Defines.h"
 #include "EngineConfig.h"
 
-
 CLanguageManager::CLanguageManager()
-:m_sCurrentLanguage("")
+    : m_sCurrentLanguage("")
 {}
 
 
@@ -73,17 +73,11 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
     if (!parser.LoadFile(pathFile.c_str()))
     {
         std::string msg_error = "LanguageManager::LoadXML->Error al intentar leer el archivo de lenguaje: " + pathFile;
-        LOG_ERROR_APPLICATION( msg_error.c_str() );
-        //throw CException(__FILE__, __LINE__, msg_error);
+        LOG_ERROR_APPLICATION(msg_error.c_str());
     }
 
-    /*<Language id="english">
-        <literal id="xfiles"  font="X-Files"  color="0.5 0.5 0.5 0.5" value="Hi World"/>
-        <literal id="xfiles"  font="X-Files"  color="0.1 0.1 0.1 0.8" value="Exit"/>  
-    </Language>*/
+    LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Parseando fichero de lenguaje: %s", pathFile.c_str());
 
-    LOG_INFO_APPLICATION("LanguageManager::LoadXML-> Parseando fichero de lenguaje: %s", pathFile.c_str());
-    
     CXMLTreeNode  m = parser["Language"];
     std::string id_language    = m.GetPszProperty("id");
     TLanguage language;
@@ -94,15 +88,17 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
         {
             //for each literal:
             SLiteral l_literal;
-            
+
             std::string id            = m(i).GetPszProperty("id");
             l_literal.m_sFontId    = m(i).GetPszProperty("font");
-            Math::Vect4f vecColor            = m(i).GetVect4fProperty("color", Math::Vect4f(0.f,0.f,0.f,0.f));    
-            l_literal.m_value        = m(i).GetPszISOProperty("value", "nothing");    
+            Math::Vect4f vecColor            = m(i).GetVect4fProperty("color", Math::Vect4f(0.f, 0.f, 0.f, 0.f));
+            l_literal.m_value        = m(i).GetPszISOProperty("value", "nothing");
             l_literal.m_cColor    = Math::CColor(vecColor.x, vecColor.y, vecColor.z, vecColor.w);
-            language.insert(std::pair<std::string,SLiteral>(id, l_literal));
-            LOG_INFO_APPLICATION("LanguageManager::LoadXML-> Añadido literal(%s,%s,[%f,%f,%f,%f],%s)", 
-                                                  id.c_str(), l_literal.m_sFontId.c_str(),vecColor.x,vecColor.y,vecColor.z,vecColor.w, l_literal.m_value.c_str());
+
+            language.insert(std::pair<std::string, SLiteral>(id, l_literal));
+            LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Añadido literal(%s,%s,[%f,%f,%f,%f],%s)", id.c_str(),
+                                  l_literal.m_sFontId.c_str(), vecColor.x, vecColor.y, vecColor.z, vecColor.w, l_literal.m_value.c_str());
+
         }
     }
     if (m_Languages.find(id_language) != m_Languages.end())
@@ -114,7 +110,7 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
     {
         m_Languages.insert(std::pair<std::string, TLanguage>(id_language, language));
     }
-    
+
 }
 
 void CLanguageManager::SetXmlFile (const std::string& pathFile)
@@ -138,7 +134,7 @@ void CLanguageManager::SetXmlFile (const std::string& pathFile)
         m_vXML_Files.push_back(pathFile);
         LOG_INFO_APPLICATION( "LanguageManager::SetXmlFile-> Se ha añadido el xml: %s", pathFile.c_str());
     }
-    
+
 }
 
 bool CLanguageManager::GetLiteral (const std::string& id, SLiteral& sliteral) const
@@ -154,7 +150,7 @@ bool CLanguageManager::GetLiteral (const std::string& id, SLiteral& sliteral) co
             return true;
         }
     }
-    
+
     return false;
 }
 

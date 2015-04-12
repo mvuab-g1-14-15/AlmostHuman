@@ -11,8 +11,9 @@ CEngineConfig::CEngineConfig()
   , m_GUIPath( "" )
   , m_SoundPath( "" )
   , m_ManagersPath( "" )
-{  
-}  
+  , m_MaxFps(30.0)
+{
+}
 
 CEngineConfig::~CEngineConfig()
 {
@@ -63,9 +64,6 @@ void CEngineConfig::Load( const std::string& aCfg )
         LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'");
         m_FitDesktop = true;
       }
-
-      // Get the refresh rate
-      m_RefreshRate = lTreeNode( i ).GetIntProperty( "refresh_rate", 60 );
     }
     else if ( lTagName == "mouse" )
     {
@@ -81,6 +79,8 @@ void CEngineConfig::Load( const std::string& aCfg )
                                  "" ) );
     else if ( lTagName == "managers" )
       m_ManagersPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
+    else if ( lTagName == "maxfps" )
+        m_MaxFps = lTreeNode(i).GetFloatProperty("fps", 30.0f);
   }
 }
 

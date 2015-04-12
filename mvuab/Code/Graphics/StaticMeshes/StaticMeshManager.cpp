@@ -21,8 +21,6 @@ CStaticMeshManager::~CStaticMeshManager()
 
 void CStaticMeshManager::Init()
 {
-	//mConfigPath = EngineConfigInstance->GetStaticMeshesPath();
-    
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(mConfigPath.c_str()))
     {
@@ -39,7 +37,7 @@ void CStaticMeshManager::Init()
 
     for(int i = 0; i < node.GetNumChildren(); i++)
     {
-		//TODO - CHECK THE TAG NAME
+        //TODO - CHECK THE TAG NAME
         std::string name = node(i).GetPszProperty("name", "no_name");
         std::string file = node(i).GetPszProperty("filename", "no_file");
         file = "Data" + file;
@@ -50,9 +48,9 @@ void CStaticMeshManager::Init()
             CHECKED_DELETE(l_StaticMesh);
         }
         else
-            AddResource(name, l_StaticMesh);
+        { AddResource(name, l_StaticMesh); }
     }
-    
+
 	//return true;
 }
 

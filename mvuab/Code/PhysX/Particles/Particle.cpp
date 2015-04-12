@@ -137,6 +137,7 @@ void CParticle::Update( float dt )
   m_Billboard.SetSize( m_Size );
   m_Billboard.SetTexture( m_TextureName );
   m_Billboard.Init();
+
   m_Billboard.Update();
 }
 

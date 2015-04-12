@@ -41,6 +41,9 @@
 #include "Actor\PhysicController.h"
 #include "Cooking Mesh\PhysicCookingMesh.h"
 
+//SOUND
+#include "SoundManager.h"
+
 
 #include <algorithm>
 #include "RenderableVertex\VertexTypes.h"
@@ -105,6 +108,7 @@ void CPlayerPhysicProcess::Update()
  /* if ( pActionManager->DoAction( "ChangeRoom" ) )
     ScriptMInstance->RunCode( "cambiar_sala()" );*/
 
+
   if ( pActionManager->DoAction( "ChangeCamera" ) )
   {
     if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
@@ -127,38 +131,6 @@ void CPlayerPhysicProcess::Update()
 
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     ActionManagerInstance->Reload();
-
-
-  ////////////////////////////////////////////////////////////////////
-  ////////////        UPDATE CHARACTER CONTROLLER         ////////////
-  ////////////////////////////////////////////////////////////////////
-
-  /* Math::Vect3f l_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-   float  l_Yaw = CameraMInstance->GetCurrentCamera()->GetYaw();
-
-   if ( pActionManager->DoAction( "MoveForward" ) )
-     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
-
-   if ( pActionManager->DoAction( "MoveBackward" ) )
-     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw ), 0.0f, Math::Utils::Sin( l_Yaw ) );
-
-   if ( pActionManager->DoAction( "MoveLeft" ) )
-     l_Direction += Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
-
-   if ( pActionManager->DoAction( "MoveRight" ) )
-     l_Direction -= Math::Vect3f( Math::Utils::Cos( l_Yaw + Math::pi32 / 2 ), 0.0f,
-                                  Math::Utils::Sin( l_Yaw + Math::pi32 / 2 ) );
-
-   if ( l_Direction != Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
-     l_Direction = l_Direction.GetNormalized();
-
-   m_PhysicController->Move( l_Direction * 0.05f, deltaTime );
-
-   if ( pActionManager->DoAction( "Jump" ) )
-     m_PhysicController->Jump( 50 );
-  //TODO CHARACTERCONTROLLER Descomentar para que la camara siga al character controller
-  CameraMInstance->GetCurrentCamera()->SetPos( m_PhysicController->GetPosition() );*/
 
 
   //ScriptMInstance->RunCode( "update()" );
@@ -219,70 +191,26 @@ void CPlayerPhysicProcess::Init()
   //ScriptMInstance->RunCode( "init()" );
   ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
+  CSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
 
-  ////////////////////////////////////////////////////
-  ////////////        CREATE GRENADE       ///////////
-  ////////////////////////////////////////////////////
-  m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
+  uint32 l_source1 =  l_SM->CreateSource();
+  l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
+  l_SM->SetSourceGain( l_source1, 100.0f );
 
-  /////////////////////////////////////////////////////////////////
-  ////////////        CREATE CHARACTERCONTROLLER        ///////////
-  /////////////////////////////////////////////////////////////////
-  //CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
-  //userData->SetPaint( true );
-  //userData->SetColor( colRED );
-  //m_vPUD.push_back( userData );
-  ////Sala 1
-  ////Math::Vect3f l_Pos = Math::Vect3f( 0, 2, 1);
-  ////Sala sigilo
-  ////Math::Vect3f l_Pos = Math::Vect3f( -0.66, 0, 17 );
-  ////Sala disparo
-  //Math::Vect3f l_Pos = Math::Vect3f( 40, -15, -8);
-  ////Sala cadena montaje
-  ////Math::Vect3f l_Pos = Math::Vect3f( 141, 35, -17 );
-  ////Sala hangar
-  ////Math::Vect3f l_Pos = Math::Vect3f( 104, 22, 198);
-  //m_PhysicController = new CPhysicController( 0.4f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
-  //    userData, l_Pos );
-  //l_PM->AddPhysicController( m_PhysicController );
-  //CameraMInstance->GetCurrentCamera()->SetPos( Math::Vect3f( l_Pos.x, l_Pos.y + ( m_PhysicController->GetHeight() / 2 ), l_Pos.z ) );
+  uint32 l_source2 =  l_SM->CreateSource();
+  l_SM->SetSourcePosition( l_source2, Math::Vect3f( 5.0 ) );
+  l_SM->SetSourceGain( l_source2, 100.0f );
 
- 
+  uint32 l_source3 =  l_SM->CreateSource();
+  l_SM->SetSourcePosition( l_source3, Math::Vect3f( 5.0 ) );
+  l_SM->SetSourceGain( l_source3, 100.0f );
 
-  /* std::map<std::string, CStaticMesh*> l_MeshMap = l_StaticMeshManager->GetResourcesMap();
+  l_SM->SetListenerPosition( Math::Vect3f( 0.0 ) );
+  l_SM->SetListenerOrientation( CameraMInstance->GetCurrentCamera()->GetDirection(),
+                                CameraMInstance->GetCurrentCamera()->GetVecUp() );
 
-   std::map<std::string, CStaticMesh*>::iterator it = l_MeshMap.begin(), it_end = l_MeshMap.end();
-
-   std::vector<std::vector<Math::Vect3f>> l_AllVB;
-   std::vector<std::vector<uint32>> l_AllIB;
-
-   for ( ; it != it_end; ++it )
-   {
-     CStaticMesh* l_StaticMesh = it->second;
-     std::vector<Math::Vect3f> l_VB = l_StaticMesh->GetVB();
-     std::vector<uint32> l_IB = l_StaticMesh->GetIB();
-
-     l_AllVB.push_back( l_VB );
-     l_AllIB.push_back( l_IB );
-
-   }
-
-   l_pMeshes->CreatePhysicMesh( "Escenario", l_AllVB, l_AllIB );
-
-   l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-   l_pPhysicUserDataASEMesh->SetPaint( true );
-   l_pPhysicUserDataASEMesh->SetColor( colRED );
-   l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-   m_vPUD.push_back( l_pPhysicUserDataASEMesh );
-
-   VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
-
-   for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-     l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-   PhysXMInstance->AddPhysicActor( l_AseMeshActor );
-   m_vPA.push_back( l_AseMeshActor );*/
+  //l_SM->PlayAction2D( "test" );
+  l_SM->PlaySource2D( l_source3 , "test", true );
 
   //CPhysicUserData* l_pPhysicUserDataASEMesh;
   //CPhysicActor*  l_AseMeshActor;
@@ -310,6 +238,12 @@ void CPlayerPhysicProcess::Init()
   //Add Escenario
   if( !PhysXMInstance->AddMesh("Data/a.ASE", "Escenario") )
       LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
+
+  ////////////////////////////////////////////////////
+  ////////////        CREATE GRENADE       ///////////
+  ////////////////////////////////////////////////////
+  m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
+  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
 
   m_AStar = new CAStar();
   m_AStar->Init();

@@ -11,7 +11,6 @@
 class CRenderableObjectTechniqueManager : public CMapManager<CRenderableObjectTechnique>,
   public CManager
 {
-
 public:
   CRenderableObjectTechniqueManager();
   CRenderableObjectTechniqueManager( CXMLTreeNode& atts);

@@ -7,6 +7,9 @@
 #include <string>
 #include <vector>
 
+
+class CCubeEmitter;
+
 class CParticleManager: public CManager
 {
 private:
@@ -21,6 +24,8 @@ public:
   void Update();
   void Render();
   void AddEmitter( CParticleEmitter* l_Emitter );
+
+  CCubeEmitter* CreateCubeEmitter();
 };
 
 #endif

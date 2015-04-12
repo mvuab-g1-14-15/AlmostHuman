@@ -7,6 +7,12 @@
 #include "PhysicsDefs.h"
 #include "Utils\Defines.h"
 
+#include "Particles\ParticleManager.h"
+#include "Particles\ParticleEmitter.h"
+#include "Particles\CubeEmitter.h"
+
+#include "luabind_macros.h"
+
 #include <set>
 
 extern "C"
@@ -171,4 +177,34 @@ void registerPhysX( lua_State* m_LS )
     .def( constructor<std::vector<CPhysicUserData*>>() )
     .def( "size", &std::vector<CPhysicUserData*>::size )
   ];
+
+  LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_CLASS( CParticleManager )
+    LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
+    LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_CLASS( CParticleEmitter )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetActive )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetAcceleration )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetDirection )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetPosition )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
+    LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
+    LUA_DECLARE_METHOD( CParticleEmitter, Generate )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_DERIVED_CLASS( CCubeEmitter, CParticleEmitter )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
+    LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
+    LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
+    LUA_DECLARE_METHOD( CCubeEmitter, SetRadius )
+    LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
+    LUA_DECLARE_METHOD( CCubeEmitter, SetTextureName )
+  LUA_END_DECLARATION
 }

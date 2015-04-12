@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-    <emmiter 
+    <!--
+	<emmiter 
         EmitterType="Sphere"
         LifeTime="3.0 5.0"
         Position="0.0 2.0 1.0"
@@ -32,4 +33,5 @@
 		Min="10" Max="50"
 		Texture="Data/textures/smoke.png"
     />
+	-->
 </emitters>
