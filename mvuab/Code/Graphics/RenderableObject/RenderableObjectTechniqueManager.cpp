@@ -82,11 +82,10 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
 
 void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName, const std::string& TechniqueName )
 {
-  CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
-      EffectManagerInstance->GetResource( TechniqueName ) );
-
-  if ( !AddResource( ROTName, l_RenderableObjectTechnique ) )
-    CHECKED_DELETE( l_RenderableObjectTechnique );
+    CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName, CEffectManager::GetSingletonPtr()->GetResource( TechniqueName ) );
+    
+    if(!AddResource(ROTName, l_RenderableObjectTechnique) )
+        CHECKED_DELETE(l_RenderableObjectTechnique);
 }
 
 void CRenderableObjectTechniqueManager::ReLoad()
