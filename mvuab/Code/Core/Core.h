@@ -19,7 +19,7 @@ class CConsole;
 class CEngineManagers;
 class CSoundManager;
 
-class CCore : public CSingleton<CCore>, public CTemplatedVectorMapManager<CManager>
+class CCore : public CSingleton<CCore>//, public CTemplatedVectorMapManager<CManager>
 {
 private:
 
@@ -28,7 +28,7 @@ private:
         // Managers
         CTimer*                             m_pTimer;
         CConsole*                           m_pConsole;
-        CEngineManagers*                    m_pEngineManagers;
+        //CEngineManagers*                    m_pEngineManagers;
         CSoundManager*                      m_pSoundManager;
 
         void CreateManagers();

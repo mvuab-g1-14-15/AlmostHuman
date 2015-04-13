@@ -108,11 +108,11 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
     // Obtain the engine instance
     CGPUStatics* gpu = new CGPUStatics();
     CLogger* pLogger = new CLogger();
-    CEngine* pEngine = new CEngine();
     // Read the configuration of the engine
     CEngineConfig* lEngineConfig = new CEngineConfig();
     lEngineConfig->Load( "./Data/config.xml" );
-
+    
+    CEngine* pEngine = new CEngine();
    DWORD style;
    if ( lEngineConfig->GetFullScreenMode() || lEngineConfig->GetFitDesktop() )
     {

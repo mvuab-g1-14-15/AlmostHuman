@@ -74,6 +74,8 @@ CEngineManagers::~CEngineManagers()
   CHECKED_DELETE( m_pBillboard );
   CHECKED_DELETE( m_pParticleManager );
   CHECKED_DELETE( m_pGizmosManager );*/
+   //TODO ALEX
+    // Release();
 }
 
 void CEngineManagers::Init()
@@ -179,6 +181,11 @@ void CEngineManagers::Init()
     m_pBillboard = dynamic_cast<CBillboard*>(GetResource("billboard"));
     m_pParticleManager = dynamic_cast<CParticleManager*>(GetResource("particle_manager"));
     m_pGizmosManager = dynamic_cast<CGizmosManager*>(GetResource("gizmos_manager"));
+
+    TVectorResources::iterator it = m_ResourcesVector.begin(),
+                              it_end = m_ResourcesVector.end();
+    for(;it!=it_end;++it)
+        (*it)->Init();
 }
 
 void CEngineManagers::Update()

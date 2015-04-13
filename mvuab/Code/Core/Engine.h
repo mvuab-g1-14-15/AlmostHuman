@@ -11,6 +11,7 @@
 class CCore;
 class CLogRender;
 class CEngineConfig;
+class CEngineManagers;
 
 class CEngine: public CSingleton<CEngine>
 {
@@ -28,11 +29,13 @@ class CEngine: public CSingleton<CEngine>
         // Getters and setters
         GET_SET_PTR( CCore, Core );
         GET_SET_PTR( CProcess, Process );
+        GET_SET_PTR( CEngineManagers, EngineManagers );
 
     private:
         CCore*              m_pCore;
         CProcess*           m_pProcess;
         CLogRender*         m_pLogRender;
+        CEngineManagers*    m_pEngineManagers;
 
         float               m_RenderTime;
         float               m_RenderTarget;

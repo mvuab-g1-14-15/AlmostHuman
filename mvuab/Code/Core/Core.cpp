@@ -37,16 +37,16 @@
 CCore::CCore()
   : m_pTimer( 0 )
   , m_pConsole( 0 )
-  , m_pEngineManagers( 0 )
+ // , m_pEngineManagers( 0 )
 {
 }
 
 CCore::~CCore()
 {
-  Destroy();
+ // Destroy();
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
-  CHECKED_DELETE( m_pEngineManagers );
+  //CHECKED_DELETE( m_pEngineManagers );
   CHECKED_DELETE( m_pSoundManager );
 }
 
@@ -59,10 +59,7 @@ void CCore::Init()
 
 void CCore::Update()
 {
-  TVectorResources::iterator it = m_ResourcesVector.begin(),
-                              it_end = m_ResourcesVector.end();
-  for(;it!=it_end;++it)
-        (*it)->Update();
+    //m_pEngineManagers->Update();
   m_pTimer->Update();
   
   m_pSoundManager->Update( m_pTimer->GetElapsedTime() );
@@ -77,7 +74,7 @@ void CCore::Update()
 void CCore::Render()
 {
     SRCMInstance->Execute();
-    m_pEngineManagers->Render();
+    //m_pEngineManagers->Render();
 }
 void CCore::CreateManagers()
 {
@@ -85,7 +82,7 @@ void CCore::CreateManagers()
         CreateConsole();
     m_pTimer = new CTimer( 30 );
     m_pSoundManager = new CSoundManager();
-    m_pEngineManagers = new CEngineManagers( EngineConfigInstance->GetManagersPath() );
+    //m_pEngineManagers = new CEngineManagers( EngineConfigInstance->GetManagersPath() );
 }
 
 void CCore::CreateConsole()
@@ -102,7 +99,7 @@ void CCore::CreateConsole()
 
 void CCore::InitManagers()
 {
-  m_pEngineManagers->Init();
+  //m_pEngineManagers->Init();
   m_pSoundManager->Init( EngineConfigInstance->GetSoundPath() );
 }
 

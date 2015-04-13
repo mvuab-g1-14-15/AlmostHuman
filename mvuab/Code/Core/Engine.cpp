@@ -12,7 +12,8 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 
 CEngine::CEngine()
-    : m_pCore( new CCore() )
+    : m_pCore( new CCore() )    
+    , m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
     , m_pProcess( 0 )
 {
 }
@@ -20,12 +21,14 @@ CEngine::CEngine()
 CEngine::~CEngine()
 {
     CHECKED_DELETE( m_pCore );
+    CHECKED_DELETE( m_pEngineManagers );
     CHECKED_DELETE( m_pProcess );
 }
 
 void CEngine::Update()
 {
     m_pCore->Update();
+    m_pEngineManagers->Update();
     m_pProcess->Update();
 }
 
@@ -55,8 +58,12 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
 
     if ( aEngineConfig )
     {
+
         // Init the core of the engine
         m_pCore->Init();
+
+        // Init the managers of the engine
+        m_pEngineManagers->Init();
 
         // Init the videogame
         m_pProcess->Init();
