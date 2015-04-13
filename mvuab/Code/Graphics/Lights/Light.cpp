@@ -26,9 +26,6 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_StaticShadowMap( 0 )
     , m_ShadowMaskTexture( 0 )
 {
-    //TODO ALEX
-  m_Position = node.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) );
-
   if ( m_GenerateDynamicShadowMap )
   {
     m_DynamicShadowMap = new CTexture();

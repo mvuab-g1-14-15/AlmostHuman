@@ -88,8 +88,7 @@ void CSpotLight::SetShadowMap( CGraphicsManager* GM )
   D3DXVec3Normalize( &l_VUP, &l_VUP );
   D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
   m_ViewShadowMap = Math::Mat44f( l_View );
-  D3DXMatrixPerspectiveFovLH( &l_Projection, Math::Utils::Deg2Rad( m_FallOff ), 1.0f, 1.0f,
-                              m_EndRangeAttenuation );
+  D3DXMatrixPerspectiveFovLH( &l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation );
   m_ProjectionShadowMap = Math::Mat44f( l_Projection );
   CEffectManager* l_EffectManager = EffectManagerInstance;
   l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );

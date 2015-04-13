@@ -148,18 +148,6 @@ void registerGizmos( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
-void registerGraphicsManager( lua_State * aLuaState )
-{
-  ASSERT( aLuaState, "LuaState error in Register GraphicsManager" );
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // GRAPHICS MANAGER
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CGraphicsManager )
-    LUA_DECLARE_DEFAULT_CTOR
-  LUA_END_DECLARATION
-}
-
 void registerRenderableObject( lua_State * aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register RenderableObjects" );
@@ -220,7 +208,6 @@ void registerGraphics( lua_State* aLuaState )
   registerObject3D( aLuaState );
   registerCameras( aLuaState );
   registerGizmos( aLuaState );
-  registerGraphicsManager( aLuaState );
   registerRenderableObject( aLuaState );
   registerStaticMesh( aLuaState );
 }

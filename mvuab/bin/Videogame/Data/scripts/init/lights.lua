@@ -8,7 +8,6 @@ local g_Speed = 5
 function init()
 	core = CCore.GetSingletonPtr()
 	action_manager = core:GetActionManager()
-	graphics_manager = core:GetGraphicsManager()
 	light_manager = core:GetLightManager()
 	renderable_objects_manager = core:GetRenderableObjectsManager()
 	camera_manager = core:GetCameraManager()

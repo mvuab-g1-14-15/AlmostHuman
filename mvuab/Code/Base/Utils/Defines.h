@@ -58,9 +58,9 @@
 #define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
 #define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
 
-#define CoreInstance			CCore::GetSingletonPtr()
-#define EngineInstance			CEngine::GetSingletonPtr()
-#define GraphicsInstance		CEngineManagers::GetSingletonPtr()->GetGraphicsManager()
+#define CoreInstance        CCore::GetSingletonPtr()
+#define EngineInstance      CEngine::GetSingletonPtr()
+#define GraphicsInstance    CEngineManagers::GetSingletonPtr()->GetGraphicsManager()
 #define SoundInstance			CSoundManager::GetSingletonPtr()
 #define EffectManagerInstance	CEngineManagers::GetSingletonPtr()->GetEffectManager()
 #define InputManagerInstance	CEngineManagers::GetSingletonPtr()->GetInputManager()

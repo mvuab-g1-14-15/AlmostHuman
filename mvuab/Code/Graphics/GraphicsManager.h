@@ -6,12 +6,12 @@
 #include <d3dx9.h>
 #include "d3dx9shape.h"
 
-#include "Utils\Manager.h"
 #include "Utils\Defines.h"
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
 #include "Cameras\Frustum.h"
 #include <string>
+#include "Utils\Manager.h"
 
 class CEffectTechnique;
 class CTexture;
@@ -22,11 +22,10 @@ class CGraphicsManager : public CManager
 public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
 
-  CGraphicsManager();
-  CGraphicsManager( CXMLTreeNode &atts );
+  CGraphicsManager( const CXMLTreeNode& atts );
   ~CGraphicsManager();
 
-  void Init();
+  virtual void Init();
   void Update();
   void Render();
   void Release();
@@ -43,7 +42,6 @@ public:
   void DisableZBuffering();
   void GetWidthAndHeight( uint32& w, uint32& h );
   void SetWidthAndHeight( uint32 w, uint32 h );
-  void RenderCursor();
   void Clear();
   void Clear( bool target, bool zbuffer, bool stencil, u_int mask );
   void EnableZTest();
@@ -142,13 +140,6 @@ private: // Members
   LPD3DXMESH              m_TeapotMesh;
   LPDIRECT3DVERTEXBUFFER9 m_VBQuad;
   LPDIRECT3DINDEXBUFFER9  m_IBQuad;
-  Math::Vect2i            m_ScreenResolution;
-  Math::Vect2i            m_ScreenSize;
-  Math::Vect2i            m_ScreenPosition;
-  bool                    m_FullScreenMode;
-  bool                    m_FitDesktop;
-  bool                    m_Windowed;
-  int                     m_RefreshRate;
 
 private: // Methods
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment,
@@ -156,8 +147,8 @@ private: // Methods
   D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
 
   DWORD GetBehaviorFlags();
-  bool CreateFullScreenMode();
-  bool CreateWindowedMode();
+  bool CreateFullScreenMode( CEngineConfig* aEngineConfig );
+  bool CreateWindowedMode( CEngineConfig* aEngineConfig );
   void RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh , Math::CColor aColor );
 };
 

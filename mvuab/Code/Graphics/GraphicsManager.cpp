@@ -1,10 +1,11 @@
-#include "GraphicsManager.h"
+ï»¿#include "GraphicsManager.h"
 #include "Utils\Defines.h"
 #include "Math\MathTypes.h"
 #include "Logger\Logger.h"
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
 #include "Math\Vector3.h"
+#include "EngineManagers.h"
 #include <malloc.h>
 #include <vector>
 #include "Exceptions\Exception.h"
@@ -17,7 +18,6 @@
 #include "Texture/Texture.h"
 #include "Fonts/FontManager.h"
 #include "EngineConfig.h"
-#include "EngineManagers.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -41,18 +41,6 @@ typedef struct CUSTOMVERTEX2
   }
 } CUSTOMVERTEX2;
 
-// struct SCREEN_COLOR_VERTEX
-// {
-//   float x, y, z, w;
-//   DWORD color;
-//   float u, v;
-//
-//   static unsigned int getFlags()
-//   {
-//     return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
-//   }
-// };
-
 struct VERTEX2
 {
   D3DXVECTOR3    pos;
@@ -64,8 +52,9 @@ struct VERTEX2
   }
 };
 
-CGraphicsManager::CGraphicsManager()
-  : mWidth( 0 )
+CGraphicsManager::CGraphicsManager( const CXMLTreeNode& atts )
+  : CManager(atts)
+  , mWidth( 0 )
   , mHeight( 0 )
   , m_BackbufferColor_debug( Math::colBLUE )
   , m_BackbufferColor_release( Math::colBLACK )
@@ -78,53 +67,7 @@ CGraphicsManager::CGraphicsManager()
   , m_VBQuad( 0 )
   , mDirectXDevice( 0 )
   , mDirectXObject( 0 )
-  , CManager()
 {
-}
-
-CGraphicsManager::CGraphicsManager( CXMLTreeNode &atts )
-  : mWidth( 0 )
-  , mHeight( 0 )
-  , m_BackbufferColor_debug( Math::colBLUE )
-  , m_BackbufferColor_release( Math::colBLACK )
-  , m_bPaintSolid( true )
-  , m_TeapotMesh( 0 )
-  , m_CylinderMesh( 0 )
-  , m_SphereMesh( 0 )
-  , m_BoxMesh( 0 )
-  , m_IBQuad( 0 )
-  , m_VBQuad( 0 )
-  , mDirectXDevice( 0 )
-  , mDirectXObject( 0 )
-  , CManager(atts)
-{
-    CXMLTreeNode l_File;
-
-    if ( !l_File.LoadFile( mConfigPath.c_str() ) )
-    {
-        std::string err = "Error reading the configuration file of the engine" + mConfigPath;
-        FATAL_ERROR( err.c_str() );
-    }
-
-    CXMLTreeNode lTreeNode = l_File["window_properties"];
-    m_ScreenResolution  = lTreeNode.GetVect2iProperty( "resolution" , Math::Vect2i( 800, 600 ));
-    m_ScreenSize        = lTreeNode.GetVect2iProperty( "size", Math::Vect2i( 800, 600 ) );
-    m_ScreenPosition    = lTreeNode.GetVect2iProperty( "position", Math::Vect2i( 0, 0 ) );
-      
-    const std::string& lMode = lTreeNode.GetPszProperty( "mode" );
-    // Switch the modes of the screen
-    m_FullScreenMode  = ( lMode == "full_screen" );
-    m_FitDesktop      = ( lMode == "fit_desktop" );
-    m_Windowed        = ( lMode == "windowed"    );
-
-    if( lMode == "" )
-    {
-    LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'");
-    m_FitDesktop = true;
-    }
-
-    // Get the refresh rate
-    m_RefreshRate = lTreeNode.GetIntProperty( "refresh_rate", 60 );
 }
 
 CGraphicsManager::~CGraphicsManager()
@@ -255,13 +198,12 @@ void CGraphicsManager::SetupMatrices()
       l_CameraPosition );
 }
 
-void CGraphicsManager::Init()
-{ 
-  CEngineConfig* aEngineConfig = EngineConfigInstance;  
-  m_WindowId = aEngineConfig->GetWindowId();
-  /*Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();*/
-  mWidth = m_ScreenResolution.x;
-  mHeight = m_ScreenResolution.y;
+void CGraphicsManager::Init( )
+{
+  m_WindowId = EngineConfigInstance->GetWindowId();
+  Math::Vect2i lScreenResolution = EngineConfigInstance->GetScreenResolution();
+  mWidth = lScreenResolution.x;
+  mHeight = lScreenResolution.y;
   mDirectXObject = Direct3DCreate9( D3D_SDK_VERSION );
 
   if ( mDirectXObject == NULL )
@@ -271,7 +213,8 @@ void CGraphicsManager::Init()
   }
 
   // Choose a way of creating the device from the configuration of the engine
-  mOk = ( m_FullScreenMode ) ? CreateFullScreenMode() : CreateWindowedMode();
+  mOk = ( EngineConfigInstance->GetFullScreenMode() ) ? CreateFullScreenMode( EngineConfigInstance ) 
+        : CreateWindowedMode( EngineConfigInstance );
 
   if ( !mOk )
     FATAL_ERROR( "GraphicsManager::The DirectX has not been init!!!" );
@@ -294,13 +237,13 @@ void CGraphicsManager::Init()
   mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
   // Turn off D3D lighting, since we are providing our own vertex colors
   mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-  /*Math::Vect2i lWindowPosition    = aEngineConfig->GetScreenPosition();
-  Math::Vect2i lWindowSize        = aEngineConfig->GetScreenSize();
-  Math::Vect2i lWindowResolution  = aEngineConfig->GetScreenResolution();*/
+  Math::Vect2i lWindowPosition    = EngineConfigInstance->GetScreenPosition();
+  Math::Vect2i lWindowSize        = EngineConfigInstance->GetScreenSize();
+  Math::Vect2i lWindowResolution  = EngineConfigInstance->GetScreenResolution();
   LOG_INFO_APPLICATION( "GraphicsManager::Window created in (%d,%d) with size (%d,%d) and resolution(%d,%d)",
-                        m_ScreenPosition.x, m_ScreenPosition.y,
-                        m_ScreenSize.x, m_ScreenSize.y,
-                        m_ScreenResolution.x, m_ScreenResolution.y );
+                        lWindowPosition.x, lWindowPosition.y,
+                        lWindowSize.x, lWindowSize.y,
+                        lWindowResolution.x, lWindowResolution.y );
 
   //
   // Create the default meshes
@@ -316,8 +259,6 @@ void CGraphicsManager::Init()
 
   if ( FAILED( D3DXCreateCylinder( mDirectXDevice, 1.0f, 1.0f, 1.0f, 10, 10, &m_CylinderMesh, 0 ) ) )
     LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the cylinder" );
-
-  //return mOk;
 }
 
 DWORD CGraphicsManager::GetBehaviorFlags()
@@ -350,7 +291,7 @@ DWORD CGraphicsManager::GetBehaviorFlags()
   return dwBehaviorFlags;
 }
 
-bool CGraphicsManager::CreateFullScreenMode()
+bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
 {
   //
   // For the default adapter, examine all of its display modes to see if any
@@ -359,6 +300,7 @@ bool CGraphicsManager::CreateFullScreenMode()
   int nMode = 0;
   D3DDISPLAYMODE d3ddm;
   bool bDesiredAdapterModeFound = false;
+  Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
   int nMaxAdapterModes = mDirectXObject->GetAdapterModeCount( D3DADAPTER_DEFAULT,
                          D3DFMT_X8R8G8B8 );
 
@@ -372,8 +314,9 @@ bool CGraphicsManager::CreateFullScreenMode()
     }
 
     // Does this adapter mode support a mode of the given configuration
+    Math::Vect2i lScreenResolution = aEngineConfig->GetScreenResolution();
 
-    if ( d3ddm.Width != m_ScreenResolution.x || d3ddm.Height != m_ScreenResolution.y )
+    if ( d3ddm.Width != lScreenResolution.x || d3ddm.Height != lScreenResolution.y )
       continue;
 
     // Does this adapter mode support a 32-bit RGB pixel format?
@@ -387,7 +330,7 @@ bool CGraphicsManager::CreateFullScreenMode()
 
   if ( bDesiredAdapterModeFound == false )
   {
-    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8, and a resolution of (%d,%d)", m_ScreenResolution.x, m_ScreenResolution.y );
+    LOG_ERROR_APPLICATION( "GraphicsManager::The adapter does not have a Format of D3DFMT_X8R8G8B8, and a resolution of (%d,%d)", lScreenResolution.x, lScreenResolution.y );
     return false;
   }
 
@@ -431,10 +374,10 @@ bool CGraphicsManager::CreateFullScreenMode()
   d3dpp.AutoDepthStencilFormat      = D3DFMT_D24S8;
   d3dpp.SwapEffect                  = D3DSWAPEFFECT_DISCARD;
   d3dpp.BackBufferCount             = 1;
-  d3dpp.BackBufferWidth             = m_ScreenResolution.x;
-  d3dpp.BackBufferHeight            = m_ScreenResolution.y;
+  d3dpp.BackBufferWidth             = lScreenResolution.x;
+  d3dpp.BackBufferHeight            = lScreenResolution.y;
   d3dpp.BackBufferFormat            = D3DFMT_X8R8G8B8;
-  d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_IMMEDIATE;
+  d3dpp.PresentationInterval        = D3DPRESENT_INTERVAL_ONE;
   d3dpp.Flags                       = 0;//D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
   d3dpp.FullScreen_RefreshRateInHz  = D3DPRESENT_RATE_DEFAULT;
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
@@ -452,7 +395,7 @@ bool CGraphicsManager::CreateFullScreenMode()
   return true;
 }
 
-bool CGraphicsManager::CreateWindowedMode()
+bool CGraphicsManager::CreateWindowedMode( CEngineConfig* aEngineConfig )
 {
   D3DDISPLAYMODE d3ddm;
 
@@ -791,9 +734,9 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
 
   default:
   {
-    LOG_ERROR_APPLICATION(
-      "GraphicsManager:: Se está intentado renderizar un quad2d con una alineacion desconocida" );
+    LOG_ERROR_APPLICATION( "The Quad 2d is has an unknown align" );
   }
+
   break;
   }
 }
@@ -1007,35 +950,7 @@ void CGraphicsManager::DrawIcoSphere()
   mDirectXDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 12, 20, indices, D3DFMT_INDEX16, v,
                                           sizeof( CUSTOMVERTEX ) );
 }
-void CGraphicsManager::RenderCursor()
-{
-  D3DXMATRIX mat;
-  D3DXMatrixOrthoRH( &mat, ( float )mWidth, ( float )mHeight, -1.0f, 1.0f );
-  mDirectXDevice->SetTransform( D3DTS_PROJECTION, &mat );
-  D3DXMatrixIdentity( &mat );
-  mDirectXDevice->SetTransform( D3DTS_VIEW, &mat );
-  mDirectXDevice->SetTransform( D3DTS_WORLD, &mat );
-  VERTEX2 Vertex[3];
-  Math::Vect2i l_MousePosition;
-  InputManagerInstance->GetPosition( IDV_MOUSE, l_MousePosition );
-  Vertex[0].pos = D3DXVECTOR3( ( float )( l_MousePosition.x ), ( float )( l_MousePosition.y ), 0.0f );
-  Vertex[0].d = 0xFFFF0000;
-  Vertex[2].pos = D3DXVECTOR3( ( float )( l_MousePosition.x ), ( float )( l_MousePosition.y ), 0.0f );
-  Vertex[2].d = 0xFFFF0000;
-  Vertex[1].pos = D3DXVECTOR3( ( float )( l_MousePosition.x ), ( float )( l_MousePosition.y ), 0.0f );
-  Vertex[1].d = 0xFFFF0000;
-  mDirectXDevice->SetFVF( VERTEX2::getFlags() );
-  mDirectXDevice->SetTexture( 0, NULL );
-  mDirectXDevice->SetRenderState( D3DRS_ALPHATESTENABLE, TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_SRCBLEND , D3DBLEND_SRCALPHA );
-  mDirectXDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-  mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-  mDirectXDevice->DrawPrimitiveUP( D3DPT_TRIANGLELIST, 1, ( void* ) Vertex, sizeof( VERTEX2 ) );
-  mDirectXDevice->SetRenderState( D3DRS_LIGHTING, TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
-  mDirectXDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
-}
+
 void CGraphicsManager::EnableAlphaTest()
 {
   mDirectXDevice->SetRenderState( D3DRS_ALPHATESTENABLE, TRUE );
@@ -1253,7 +1168,7 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
                    &worldMatrix );
   // To Debug uncomment this line
-  //FontInstance->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
+  //CFontManager::GetSingletonPtr()->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
   // "Light" );
   return Math::Vect2f( l_OutPosition.x , l_OutPosition.y );
 }

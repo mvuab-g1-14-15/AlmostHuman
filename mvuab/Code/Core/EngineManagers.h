@@ -2,9 +2,11 @@
 #define ENGINE_MANAGER_H
 #pragma once
 
-#include "Utils/SingletonPattern.h"
 #include "Utils/Defines.h"
+#include "Utils\TemplatedVectorMapManager.h"
 #include "XML/XMLTreeNode.h"
+#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 
 #include <vector>
 #include <string>
@@ -32,12 +34,17 @@ class CParticleManager;
 class CGizmosManager;                  
 class CTextureManager;                 
 
-class CEngineManagers : public CSingleton<CEngineManagers>
+class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
 public:
-  CEngineManagers();
+  CEngineManagers( const std::string & aPath );
   virtual ~CEngineManagers();
-  void Init();
+  virtual void Init();
+  virtual void Update();
+  virtual void Render();
+
+  void Release();
+
   GET_SET_PTR( CGraphicsManager, GraphicsManager)
   GET_SET_PTR( CEffectManager, EffectManager)
   GET_SET_PTR( CInputManager, InputManager)
@@ -60,7 +67,6 @@ public:
   GET_SET_PTR( CGizmosManager, GizmosManager)
   GET_SET_PTR( CTextureManager, TextureManager)
 
-
 private:
   CGraphicsManager*                     m_pGraphicsManager;
   CEffectManager*                       m_pEffectManager;
@@ -82,7 +88,9 @@ private:
   CBillboard*                           m_pBillboard;                       
   CParticleManager*                     m_pParticleManager;                 
   CGizmosManager*                       m_pGizmosManager;                   
-  CTextureManager*                      m_pTextureManager;                  
+  CTextureManager*                      m_pTextureManager;
+
+  std::string                           m_ManagersPath;
 };
 
 #endif // ENGINE_MANAGER_H

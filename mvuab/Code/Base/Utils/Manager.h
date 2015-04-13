@@ -3,7 +3,6 @@
 #pragma once
 
 #include <string>
-#include "Utils\SingletonPattern.h"
 #include "XML/XMLTreeNode.h"
 
 
@@ -17,7 +16,7 @@ public:
   virtual void Update() = 0;
   virtual void Render() = 0;
 protected:
-	std::string mConfigPath;
+  std::string mConfigPath;
 };
 
 #endif // MANAGER_H
