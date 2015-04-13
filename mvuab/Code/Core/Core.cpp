@@ -80,101 +80,99 @@ void CCore::Render()
 }
 void CCore::CreateManagers()
 {
-  if ( EngineConfigInstance->GetEnableConsole() )
-    m_pConsole = new CConsole( TRUE );
-  m_pTimer = new CTimer( 30 );
-  m_pSoundManager = new CSoundManager();
-  m_pEngineManagers = new CEngineManagers();
-  ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
-  // Register all the commands with the object factory class
-  ManagerFactory.Register( "texture_manager",
-                            Type2Type<CTextureManager>( ) );
-  ManagerFactory.Register( "graphics_manager", 
-                            Type2Type<CGraphicsManager>( ) );
-  ManagerFactory.Register( "input_manager",
-                           Type2Type<CInputManager>( ) );
-  ManagerFactory.Register( "languague_manager",
-                           Type2Type<CLanguageManager>( ) );
-  ManagerFactory.Register( "font_manager",
-                           Type2Type<CFontManager>( ) );
-  ManagerFactory.Register( "action_manager",
-                            Type2Type<CActionManager>( ) );
-  ManagerFactory.Register( "static_mesh_manager",
-                            Type2Type<CStaticMeshManager>( ) );
-  ManagerFactory.Register( "effect_manager",
-                           Type2Type<CEffectManager>( ) );
-  ManagerFactory.Register( "renderable_manager_layer",
-                           Type2Type<CRenderableObjectsLayersManager>( ) );
-  ManagerFactory.Register( "renderable_technique_manager",
-                           Type2Type<CRenderableObjectTechniqueManager>( ) );
-  ManagerFactory.Register( "animated_manager",
-                           Type2Type<CAnimatedModelsManager>( ) );
-  ManagerFactory.Register( "script_manager",
-                           Type2Type<CScriptManager>( ) );
-  ManagerFactory.Register( "camera_manager",
-                           Type2Type<CCameraManager>( ) );
-  ManagerFactory.Register( "light_manager",
-                           Type2Type<CLightManager>( ) );
-  ManagerFactory.Register( "scene_render_command_manager",
-                           Type2Type<CSceneRendererCommandManager>( ) );
-  ManagerFactory.Register( "physics_manager",
-                           Type2Type<CPhysicsManager>( ) );
-  ManagerFactory.Register( "enemy_manager",
-                           Type2Type<CEnemyManager>( ) );
-  ManagerFactory.Register( "trigger_manager",
-                           Type2Type<CTriggerManager>( ) );
-  ManagerFactory.Register( "billboard",
-                           Type2Type<CBillboard>( ) );
-  ManagerFactory.Register( "particle_manager",
-                           Type2Type<CParticleManager>( ) );
-  ManagerFactory.Register( "gizmos_manager",
-                           Type2Type<CGizmosManager>( ) );
-  CXMLTreeNode l_File;
-  //TODO RAUL
-  std::string l_ManagerPath= EngineConfigInstance->GetManagersPath();
+    if ( EngineConfigInstance->GetEnableConsole() )
+        CreateConsole();
+    m_pTimer = new CTimer( 30 );
+    m_pSoundManager = new CSoundManager();
+    m_pEngineManagers = new CEngineManagers();
+    ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
+    // Register all the commands with the object factory class
+    ManagerFactory.Register( "texture_manager",
+                              Type2Type<CTextureManager>( ) );
+    ManagerFactory.Register( "graphics_manager", 
+                              Type2Type<CGraphicsManager>( ) );
+    ManagerFactory.Register( "input_manager",
+                             Type2Type<CInputManager>( ) );
+    ManagerFactory.Register( "languague_manager",
+                             Type2Type<CLanguageManager>( ) );
+    ManagerFactory.Register( "font_manager",
+                             Type2Type<CFontManager>( ) );
+    ManagerFactory.Register( "action_manager",
+                              Type2Type<CActionManager>( ) );
+    ManagerFactory.Register( "static_mesh_manager",
+                              Type2Type<CStaticMeshManager>( ) );
+    ManagerFactory.Register( "effect_manager",
+                             Type2Type<CEffectManager>( ) );
+    ManagerFactory.Register( "renderable_manager_layer",
+                             Type2Type<CRenderableObjectsLayersManager>( ) );
+    ManagerFactory.Register( "renderable_technique_manager",
+                             Type2Type<CRenderableObjectTechniqueManager>( ) );
+    ManagerFactory.Register( "animated_manager",
+                             Type2Type<CAnimatedModelsManager>( ) );
+    ManagerFactory.Register( "script_manager",
+                             Type2Type<CScriptManager>( ) );
+    ManagerFactory.Register( "camera_manager",
+                             Type2Type<CCameraManager>( ) );
+    ManagerFactory.Register( "light_manager",
+                             Type2Type<CLightManager>( ) );
+    ManagerFactory.Register( "scene_render_command_manager",
+                             Type2Type<CSceneRendererCommandManager>( ) );
+    ManagerFactory.Register( "physics_manager",
+                             Type2Type<CPhysicsManager>( ) );
+    ManagerFactory.Register( "enemy_manager",
+                             Type2Type<CEnemyManager>( ) );
+    ManagerFactory.Register( "trigger_manager",
+                             Type2Type<CTriggerManager>( ) );
+    ManagerFactory.Register( "billboard",
+                             Type2Type<CBillboard>( ) );
+    ManagerFactory.Register( "particle_manager",
+                             Type2Type<CParticleManager>( ) );
+    ManagerFactory.Register( "gizmos_manager",
+                             Type2Type<CGizmosManager>( ) );
+    CXMLTreeNode l_File;
+    //TODO RAUL
+    std::string l_ManagerPath= EngineConfigInstance->GetManagersPath();
 
-  if ( !l_File.LoadFile( l_ManagerPath.c_str() ) )
-  {
-    const std::string& lMsgError = "Error reading the file " + l_ManagerPath;
-    FATAL_ERROR( lMsgError.c_str() );
-  }
+    if ( !l_File.LoadFile( l_ManagerPath.c_str() ) )
+    {
+      const std::string& lMsgError = "Error reading the file " + l_ManagerPath;
+      FATAL_ERROR( lMsgError.c_str() );
+    }
 
   
-  CXMLTreeNode  TreeNode = l_File["managers"];
+    CXMLTreeNode  TreeNode = l_File["managers"];
 
-  if ( TreeNode.Exists() )
-  {
-    int count = TreeNode.GetNumChildren();
-
-    for ( int i = 0; i < count; ++i )
+    if ( TreeNode.Exists() )
     {
-      const std::string& TagName = TreeNode( i ).GetName();
+      int count = TreeNode.GetNumChildren();
 
-      if ( TagName == "comment" )
-        continue;
-
-      CManager* Manager = 0;
-
-      Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
-
-      if ( !Manager )
-        LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
-      else
+      for ( int i = 0; i < count; ++i )
       {
-        if ( !AddResource( TagName.c_str() , Manager ) )
-          CHECKED_DELETE( Manager );
+        const std::string& TagName = TreeNode( i ).GetName();
+
+        if ( TagName == "comment" )
+          continue;
+
+        CManager* Manager = 0;
+
+        Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
+
+        if ( !Manager )
+          LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
+        else
+        {
+          if ( !AddResource( TagName.c_str() , Manager ) )
+            CHECKED_DELETE( Manager );
+        }
       }
     }
-  }
-  m_pEngineManagers->Init();
+    
+    m_pEngineManagers->Init();
 }
 
-void CCore::InitManagers()
+void CCore::CreateConsole()
 {
-  CEngineConfig* l_EngineConfig = EngineConfigInstance;
-
-  if ( l_EngineConfig->GetEnableConsole() )
-  {
+    m_pConsole = new CConsole( TRUE );
     m_pConsole->RedirectToConsole( 0 );
     m_pConsole->SetNumberOfLines( 800 );
     m_pConsole->SetNumberOfColumns( 132 );
@@ -182,8 +180,10 @@ void CCore::InitManagers()
     WORD x = m_pConsole->SetAttributes( FOREGROUND_BLUE, 2 );
     m_pConsole->SetAttributes( x );
     m_pConsole->SetFullSize();
-  }
+}
 
+void CCore::InitManagers()
+{
   m_pSoundManager->Init( EngineConfigInstance->GetSoundPath() );
 
   TVectorResources::iterator it = m_ResourcesVector.begin(),

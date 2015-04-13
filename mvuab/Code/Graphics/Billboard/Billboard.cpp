@@ -11,22 +11,12 @@
 #include "EngineConfig.h"
 #include "EngineManagers.h"
 
-CBillboard::CBillboard() : CName()
-  , m_Position( Math::Vect3f( 0, 2, 1 ) )
-  , m_Size( 2 )
-  , m_Active( true )
-  , CManager() 
+CBillboard::CBillboard() : CName(), m_Position( Math::Vect3f( 0, 2, 1 ) ) , m_Size( 2 ) , m_Active( true ), CManager() 
 {
 }
 
-CBillboard::CBillboard(CXMLTreeNode& atts)
-  :CName()
-  , m_Position( Math::Vect3f( 0, 2, 1 ) )
-  , m_Size( 2 )
-  , m_Active( true )
-  , CManager(atts)
+CBillboard::CBillboard(CXMLTreeNode& atts) : CName(), m_Position( Math::Vect3f( 0, 2, 1 ) ), m_Size( 2 ), m_Active( true ), CManager(atts)
 {
-    
 }
 
 CBillboard::~CBillboard()

@@ -33,6 +33,7 @@ private:
 
         void CreateManagers();
         void InitManagers();
+		void CreateConsole();
 
 public:
   CCore();

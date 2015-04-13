@@ -70,6 +70,7 @@ void CParticle::SetLifeTime( float Time )
 void CParticle::SetSize( float sz )
 {
     m_Size = sz;
+	m_Billboard.SetSize(sz);
 }
 
 void CParticle::SetIsAlive( bool isAlive )
@@ -132,12 +133,9 @@ void CParticle::Update( float dt )
   Math::Vect3f l_OldVel = m_Velocity;
 
   m_Velocity += m_Acceleration * dt;
-  m_Position += ( ( m_Velocity + l_OldVel ) / 2.0f ) * dt;
-  m_Billboard.SetPosition( m_Position );
-  m_Billboard.SetSize( m_Size );
-  m_Billboard.SetTexture( m_TextureName );
-  m_Billboard.Init();
+  m_Position += ( ( m_Velocity + l_OldVel ) * 0.5f ) * dt;
 
+  m_Billboard.SetPosition( m_Position );
   m_Billboard.Update();
 }
 

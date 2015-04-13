@@ -64,7 +64,7 @@ void CCubeEmitter::Generate(unsigned int l_NumParticles)
 
     for(unsigned int i = 0; i < l_NumParticles; ++i)
     {
-        //NewParticle(&m_Particles[i]);
+        NewParticle(&m_Particles[i]);
     }
 }
 
