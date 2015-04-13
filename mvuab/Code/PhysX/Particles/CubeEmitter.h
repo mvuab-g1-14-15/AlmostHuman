@@ -7,9 +7,6 @@
 class CCubeEmitter : public CParticleEmitter
 {
     private:
-        float m_MinimumRadius;
-        float m_MaximumRadius;
-
         float m_MinWidth;
         float m_MaxWidth;
 
@@ -19,13 +16,9 @@ class CCubeEmitter : public CParticleEmitter
         float m_MinDepth;
         float m_MaxDepth;
 
-        float m_Rand;
-        float m_RandMin;
-        float m_RandMax;
-        float m_EmitteTime;
 
     public:
-        CCubeEmitter    ();
+        CCubeEmitter			();
         virtual ~CCubeEmitter   ();
 
 		void Update             (float dt);
@@ -37,8 +30,7 @@ class CCubeEmitter : public CParticleEmitter
         void SetDepth(float min, float max);
         void SetWidth(float min, float max);
         void SetHeight(float min, float max);
-        void SetRadius(float min, float max);
-        void SetRandom(float min, float max);
+		void SetRandom(float min, float max);
 };
 
 #endif

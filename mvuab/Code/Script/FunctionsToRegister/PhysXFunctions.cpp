@@ -193,7 +193,9 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
     LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
     LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
     LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
     LUA_DECLARE_METHOD( CParticleEmitter, Generate )
   LUA_END_DECLARATION
 
@@ -203,7 +205,6 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
-    LUA_DECLARE_METHOD( CCubeEmitter, SetRadius )
     LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
     LUA_DECLARE_METHOD( CCubeEmitter, SetTextureName )
   LUA_END_DECLARATION
