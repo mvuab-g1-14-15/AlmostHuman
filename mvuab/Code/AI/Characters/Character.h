@@ -37,6 +37,7 @@ public:
   {
     return m_Position;
   }
+  float GetRadius();
 
   float GetHeight();
 protected:
