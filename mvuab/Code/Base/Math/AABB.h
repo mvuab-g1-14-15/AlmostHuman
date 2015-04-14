@@ -39,19 +39,19 @@ public:
 
     inline float32 GetHeight() const
     {
-        return MaxPnt.y-MinPnt.y;
+        return MaxPnt.y - MinPnt.y;
     }
     
     // What is the center of the smallest sphere that will enclose this AABB?
     inline Vector3<T> GetCenter() const
     {
-        return (MaxPnt+MinPnt)/2;
+        return (MaxPnt + MinPnt) * 0.5f;
     }
     
     // What is the radius of the smallest sphere that will enclose this AABB?
     inline float32 GetRadius() const
     {
-        return ((MaxPnt-MinPnt)/2).Length();
+        return (MaxPnt - MinPnt).Length() * 0.5f;
     }
 
 public:

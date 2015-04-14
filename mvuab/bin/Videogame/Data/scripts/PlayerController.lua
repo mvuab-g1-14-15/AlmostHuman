@@ -237,25 +237,20 @@ function CPlayerController:CalculateDirectionVectors(l_PlayerCamera)
 end
 
 function CPlayerController:UpdateInput()
-	local l_AnyDirectionPress = false
 	self.Direction = Vect3f(0.0)
 	if action_manager:DoAction("MoveForward") then
 		self.Direction = self.Direction + self.Forward
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveBackward") then
 		self.Direction = self.Direction - self.Forward
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveLeft") then
 		self.Direction = self.Direction + self.Side
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveRight") then
 		self.Direction = self.Direction - self.Side
-		l_AnyDirectionPress = true
 	end
-	if l_AnyDirectionPress then
+	if CheckVector(self.Direction) then
 		self.Direction:Normalize()
 	end
 	if action_manager:DoAction("ShootDown") then

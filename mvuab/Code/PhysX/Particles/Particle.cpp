@@ -146,6 +146,6 @@ void CParticle::Render()
     CCameraManager *l_CM = CameraMInstance;
     D3DXVECTOR3 l_Pos = D3DXVECTOR3(m_Position.x, m_Position.y, m_Position.z);
 
-    if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, m_Size))
+    if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, m_Size * 0.5f))
         m_Billboard.Render();
 }

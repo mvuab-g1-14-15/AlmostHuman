@@ -53,6 +53,7 @@ void CParticleManager::Init()
         
         l_Emitter->SetActive(true);
         l_Emitter->SetEmitterLifeTime(-1);
+		l_Emitter->SetTimeToEmit(1.0f);
         
         Math::Vect2f l_TimeToLive = l_Node(i).GetVect2fProperty("LifeTime", Math::Vect2f());
         l_Emitter->SetLifeTime( l_TimeToLive.x, l_TimeToLive.y );
@@ -65,6 +66,9 @@ void CParticleManager::Init()
         
         Math::Vect3f l_Velocity = l_Node(i).GetVect3fProperty("Velocity", Math::Vect3f());
         l_Emitter->SetVelocity(l_Velocity);
+
+		 Math::Vect2f l_Size = l_Node(i).GetVect2fProperty("Size", Math::Vect2f());
+		 l_Emitter->SetSize(l_Size.x, l_Size.y);
         
         std::string l_TextureName = l_Node(i).GetPszProperty("Texture", "");
         l_Emitter->SetTextureName(l_TextureName);
@@ -93,9 +97,6 @@ void CParticleManager::Init()
             
             Math::Vect2f l_Height = l_Node(i).GetVect2fProperty("Height", Math::Vect2f());
             ((CCubeEmitter *) l_Emitter )->SetHeight(l_Height.x, l_Height.y);
-            
-            Math::Vect2f l_Radius = l_Node(i).GetVect2fProperty("Radius", Math::Vect2f());
-            ((CCubeEmitter *) l_Emitter)->SetRadius(l_Radius.x, l_Radius.y);
 
             Math::Vect2f l_Rand = l_Node(i).GetVect2fProperty("Random", Math::Vect2f());
             ((CCubeEmitter *) l_Emitter)->SetRandom(l_Rand.x, l_Rand.y);

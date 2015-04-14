@@ -273,12 +273,12 @@ fn ExportTextureFile AllObj DestPath =
 					
 				)
 			)
-			)
-		)
+		)	
 		catch
 		(
 			format "Error while exporting object\n"
 		)	
+	)
 )
 
 function GenerateMeshes aObjects MeshDir =

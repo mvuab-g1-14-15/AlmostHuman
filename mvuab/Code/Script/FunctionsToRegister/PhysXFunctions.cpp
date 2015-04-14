@@ -55,7 +55,10 @@ ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f positi
   SCollisionInfo hit_info;
   CPhysicUserData* l_PUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info);
   if (l_PUD)
-    return l_PUD->GetMyCollisionGroup();
+	  if (l_PUD->GetController())
+		return l_PUD->GetController()->GetColisionGroup();
+	  else
+		  return l_PUD->GetMyCollisionGroup();
   else
     return (ECollisionGroup)-1;
 }
@@ -193,7 +196,9 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
     LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
     LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
     LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
     LUA_DECLARE_METHOD( CParticleEmitter, Generate )
   LUA_END_DECLARATION
 
@@ -203,7 +208,6 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
-    LUA_DECLARE_METHOD( CCubeEmitter, SetRadius )
     LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
     LUA_DECLARE_METHOD( CCubeEmitter, SetTextureName )
   LUA_END_DECLARATION

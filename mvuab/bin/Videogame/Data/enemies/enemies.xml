@@ -33,7 +33,9 @@
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
 	<enemy name="Enemy1" type="patroll" route="0" pos="8.79347 -10.877 27.8505" yaw="0.0" mesh="enemy_android"/>
-	<!--<enemy name="Enemy2" type="patroll" route="1" pos="2.06659 -10.6875 19.0217" yaw="0.0" mesh="enemy_android"/>
+	<!--
+	<enemy name="Enemy2" type="patroll" route="1" pos="2.06659 -10.6875 19.0217" yaw="0.0" mesh="enemy_android"/>
 	<enemy name="Enemy3" type="patroll" route="2" pos="9.15 -11.50 -32.65" yaw="0.0" mesh="enemy_android"/>
-	<enemy name="Enemy4" type="patroll" route="3" pos="50.40 -17.40 -25.60" yaw="0.0" mesh="enemy_android"/>-->
+	<enemy name="Enemy4" type="patroll" route="3" pos="50.40 -17.40 -25.60" yaw="0.0" mesh="enemy_android"/>
+	-->
 </enemies>

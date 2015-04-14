@@ -5,9 +5,6 @@
 
 CCubeEmitter::CCubeEmitter()
 {
-    float m_MinimumRadius = 0.0f;
-    float m_MaximumRadius = 0.0f;
-
     float m_MinWidth = 0.0f;
     float m_MaxWidth = 0.0f;
 
@@ -16,11 +13,6 @@ CCubeEmitter::CCubeEmitter()
 
     float m_MinDepth = 0.0f;
     float m_MaxDepth = 0.0f;
-
-    float m_Rand    = 0.0f;
-    float m_RandMin = 0.0f;
-    float m_RandMax = 0.0f;
-    float m_EmitteTime = 0.0f;
 }
 
 CCubeEmitter::~CCubeEmitter()
@@ -45,12 +37,6 @@ void CCubeEmitter::SetHeight(float min, float max)
     m_MaxHeight = max;
 }
 
-void CCubeEmitter::SetRadius(float min, float max)
-{
-    m_MinimumRadius = min;
-    m_MaximumRadius = max;
-}
-
 void CCubeEmitter::SetRandom(float Min, float Max)
 {
     m_RandMin = Min;
@@ -60,17 +46,16 @@ void CCubeEmitter::SetRandom(float Min, float Max)
 void CCubeEmitter::Generate(unsigned int l_NumParticles)
 {
     m_Particles.resize(l_NumParticles);
-    m_Rand = m_EmitteTime = 0.0f;
 
-    for(unsigned int i = 0; i < l_NumParticles; ++i)
+    /*for(unsigned int i = 0; i < l_NumParticles; ++i)
     {
         NewParticle(&m_Particles[i]);
-    }
+    }*/
 }
 
 void CCubeEmitter::NewParticle(CParticle *l_Particle)
 {
-    float l_Radius = baseUtils::RandRange(m_MinimumRadius, m_MaximumRadius);
+    float l_Radius = baseUtils::RandRange(m_MinimumSize, m_MaximumSize);
     float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
 
     float x = baseUtils::RandRange(m_Position.x - m_MinWidth  * 0.5f, m_Position.x + m_MaxWidth  * 0.5f);
@@ -95,24 +80,25 @@ void CCubeEmitter::Update(float dt)
     if(m_Particles.size() == 0) return;
     if(!m_Active) return;
 
-    m_ActualTime += dt;
-    if(m_EmitterLifeTime > 0.0f && m_EmitterLifeTime < m_ActualTime) m_Active = false;
+    m_EmitterLifeTime -= dt;
+    if(m_EmitterLifeTime < 0.0f) 
+		m_Active = false;
 
     int lNumParticles = m_Particles.size();
     CParticle *p = &m_Particles[0];
-    omp_set_num_threads(2);
 
+    omp_set_num_threads(2);
     #pragma omp parallel for
     for(int i = 0; i < lNumParticles; ++i)
     {
         (p + i)->Update(dt);
     }
 
-    m_EmitteTime += dt;
-    if(m_EmitteTime >= 1.0f)
+	m_ActualTime += dt;
+	if(m_ActualTime >= m_TimeToEmit)
     {
-        m_Rand += baseUtils::RandRange(m_RandMin, m_RandMax);
-        m_EmitteTime = 0.0f;
+        m_Rand = baseUtils::RandRange(m_RandMin, m_RandMax);
+        m_ActualTime = 0.0f;
     }
 
     CParticle *l_Particle = &m_Particles[0];

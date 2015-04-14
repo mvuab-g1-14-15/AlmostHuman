@@ -47,17 +47,15 @@ function PlayerVisibility(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition();
 	
-	-- The raycast collision with the capsule of the enemy, must check that
-	l_EnemyPos.y = l_EnemyPos.y + 0.1
-	l_PlayerPos.y = l_PlayerPos.y - 0.1
-	
 	local l_Direction = l_PlayerPos - l_EnemyPos
-	l_Direction:Normalize()
+	if CheckVector(l_Direction) then
+		l_Direction:Normalize()
+	end
 	
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	
 	-- The impact mask is not used
-	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
+	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos + l_Direction * enemy:GetRadius(), l_Direction, l_ImpactMask)
 	
 	--core:Trace("Group: " .. l_CollisionGroup)
 	
