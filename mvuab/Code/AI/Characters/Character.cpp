@@ -80,3 +80,8 @@ float CCharacter::GetHeight()
 {
   return m_Controller->GetHeight();
 }
+
+float CCharacter::GetRadius()
+{
+	return m_Controller->GetRadius();
+}
