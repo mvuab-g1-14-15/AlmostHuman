@@ -80,8 +80,9 @@ void CCubeEmitter::Update(float dt)
     if(m_Particles.size() == 0) return;
     if(!m_Active) return;
 
-    m_ActualTime += dt;
-    if(m_EmitterLifeTime > 0.0f && m_EmitterLifeTime < m_ActualTime) m_Active = false;
+    m_EmitterLifeTime -= dt;
+    if(m_EmitterLifeTime < 0.0f) 
+		m_Active = false;
 
     int lNumParticles = m_Particles.size();
     CParticle *p = &m_Particles[0];
