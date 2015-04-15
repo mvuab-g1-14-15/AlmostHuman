@@ -12,9 +12,9 @@
 
 #include "Math\Vector3.h"
 #include "Math\LerpAnimator1D.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 
-class CSoundManager : public CSingleton<CSoundManager>
+class CSoundManager : public CManager
 {
 private:
   typedef struct
@@ -36,7 +36,6 @@ private:
   void        Release();
   std::string _getALErrorString( ALenum err );
 
-  std::string m_XmlPath;
   bool        m_bSoundON;
   bool        m_bPause;
 
@@ -45,10 +44,13 @@ private:
   std::vector<tInfoSource>                    m_Sources;
 
 public:
-  CSoundManager();
+  CSoundManager( const CXMLTreeNode& atts );
   ~CSoundManager();
 
-  bool Init( const std::string& l_XmlPath );
+  virtual void Init();
+  virtual void Update(){}
+  virtual void Render(){}
+
   bool Reload();
 
   //-----------GENERAL FUNCTIONS---------------------

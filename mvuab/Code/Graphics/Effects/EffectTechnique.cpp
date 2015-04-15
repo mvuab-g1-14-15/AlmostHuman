@@ -43,10 +43,11 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     m_UseDeltaTime( HandlesNode.GetBoolProperty( "use_delta_time", false ) ),
 
     // Fog
+    m_UseFog( HandlesNode.GetBoolProperty( "use_fog", false ) ),
     m_FogStart( HandlesNode.GetFloatProperty( "fog_start", 0 ) ),
     m_FogEnd( HandlesNode.GetFloatProperty( "fog_end", 0 ) ),
     m_FogExp( HandlesNode.GetFloatProperty( "fog_exp", 0 ) ),
-    m_FogFun( HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
+    m_FogFun( (EFogFunction)HandlesNode.GetIntProperty( "fog_fun", 1 ) ),
 
     // Texture
     m_UseTextureSizes( HandlesNode.GetBoolProperty( "use_texture_size", false ) ),
@@ -102,23 +103,7 @@ bool CEffectTechnique::BeginRender()
     m_Effect->SetUseDebugColor( true );
   }
 
-  if ( m_FogFun == 2 )
-  {
-    l_Handle = m_Effect->GetFogStart();
-    l_Effect->SetFloat( l_Handle, m_FogStart );
-    l_Handle = m_Effect->GetFogEnd();
-    l_Effect->SetFloat( l_Handle, m_FogEnd );
-    l_Handle = m_Effect->GetFogFun();
-    l_Effect->SetInt( l_Handle, m_FogFun );
-  }
-
-  if ( m_FogFun == 1 || m_FogFun == 3 )
-  {
-    l_Handle = m_Effect->GetFogExp();
-    l_Effect->SetFloat( l_Handle, m_FogExp );
-    l_Handle = m_Effect->GetFogFun();
-    l_Effect->SetInt( l_Handle, m_FogFun );
-  }
+  m_Effect->SetFog( m_UseFog, m_FogStart, m_FogEnd, m_FogExp, m_FogFun );
 
   if ( m_UseTextureSizes )
   {

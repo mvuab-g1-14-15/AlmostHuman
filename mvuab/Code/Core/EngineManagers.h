@@ -12,27 +12,28 @@
 #include <string>
 
 //Forward declaration
-class CGraphicsManager;                
-class CEffectManager;                  
-class CInputManager;                   
-class CActionManager;                  
-class CLanguageManager;                
-class CFontManager;                    
+class CGraphicsManager;
+class CEffectManager;
+class CInputManager;
+class CActionManager;
+class CLanguageManager;
+class CFontManager;
 class CRenderableObjectTechniqueManager;
 class CStaticMeshManager;
 class CAnimatedModelsManager;
 class CRenderableObjectsLayersManager;
-class CSceneRendererCommandManager;    
-class CCameraManager;                  
-class CScriptManager;                  
-class CLightManager;                 
-class CPhysicsManager;                 
-class CEnemyManager;                  
-class CTriggerManager;                 
-class CBillboard;                     
-class CParticleManager;                
-class CGizmosManager;                  
-class CTextureManager;                 
+class CSceneRendererCommandManager;
+class CCameraManager;
+class CScriptManager;
+class CLightManager;
+class CPhysicsManager;
+class CEnemyManager;
+class CTriggerManager;
+class CBillboard;
+class CParticleManager;
+class CGizmosManager;
+class CTextureManager;
+class CSoundManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -45,7 +46,6 @@ public:
 
   void Release();
 
-  GET_SET_PTR( CGraphicsManager, GraphicsManager)
   GET_SET_PTR( CEffectManager, EffectManager)
   GET_SET_PTR( CInputManager, InputManager)
   GET_SET_PTR( CActionManager, ActionManager)
@@ -67,28 +67,32 @@ public:
   GET_SET_PTR( CGizmosManager, GizmosManager)
   GET_SET_PTR( CTextureManager, TextureManager)
 
+  CSoundManager*    GetSoundManager() const;
+  CGraphicsManager* GetGraphicsManager() const;
+
 private:
   CGraphicsManager*                     m_pGraphicsManager;
   CEffectManager*                       m_pEffectManager;
   CInputManager*                        m_pInputManager;
-  CActionManager*                       m_pActionManager;                  
-  CLanguageManager*                     m_pLanguageManager;                 
-  CFontManager*                         m_pFontManager;              
+  CActionManager*                       m_pActionManager;
+  CLanguageManager*                     m_pLanguageManager;
+  CFontManager*                         m_pFontManager;
   CRenderableObjectTechniqueManager*    m_pRenderableObjectTechniqueManager;
-  CStaticMeshManager*                   m_pStaticMeshManager;               
-  CAnimatedModelsManager*               m_pAnimatedModelsManager;         
-  CRenderableObjectsLayersManager*      m_pRenderableObjectsLayersManager;  
-  CSceneRendererCommandManager*         m_pSceneRendererCommandManager;      
-  CCameraManager*                       m_pCameraManager;                 
-  CScriptManager*                       m_pScriptManager;                  
-  CLightManager*                        m_pLightManager;                    
-  CPhysicsManager*                      m_pPhysicsManager;                  
-  CEnemyManager*                        m_pEnemyManager;                    
-  CTriggerManager*                      m_pTriggerManager;                  
-  CBillboard*                           m_pBillboard;                       
-  CParticleManager*                     m_pParticleManager;                 
-  CGizmosManager*                       m_pGizmosManager;                   
+  CStaticMeshManager*                   m_pStaticMeshManager;
+  CAnimatedModelsManager*               m_pAnimatedModelsManager;
+  CRenderableObjectsLayersManager*      m_pRenderableObjectsLayersManager;
+  CSceneRendererCommandManager*         m_pSceneRendererCommandManager;
+  CCameraManager*                       m_pCameraManager;
+  CScriptManager*                       m_pScriptManager;
+  CLightManager*                        m_pLightManager;
+  CPhysicsManager*                      m_pPhysicsManager;
+  CEnemyManager*                        m_pEnemyManager;
+  CTriggerManager*                      m_pTriggerManager;
+  CBillboard*                           m_pBillboard;
+  CParticleManager*                     m_pParticleManager;
+  CGizmosManager*                       m_pGizmosManager;
   CTextureManager*                      m_pTextureManager;
+  CSoundManager*                        m_pSoundManager;
 
   std::string                           m_ManagersPath;
 };

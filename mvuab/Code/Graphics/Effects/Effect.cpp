@@ -10,6 +10,7 @@
 #include "Utils/BaseUtils.h"
 #include "Utils/StringUtils.h"
 #include "EngineManagers.h"
+#include "Effects\Defines.h"
 
 CEffect::CEffect()
   : m_FileName( "" ),
@@ -195,10 +196,10 @@ bool CEffect::LoadEffect()
                    &l_ErrorBuffer );
   if ( l_ErrorBuffer )
   {
-	  std::string lErrorMsg;
-	  StringUtils::Format( lErrorMsg, "CEffect::Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
-	  LOG_ERROR_APPLICATION( lErrorMsg.c_str() );
-	  ASSERT( l_HR == S_OK, lErrorMsg.c_str );
+      std::string lErrorMsg;
+      StringUtils::Format( lErrorMsg, "Error creating effect '%s':\n%s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+      LOG_ERROR_APPLICATION( lErrorMsg.c_str() );
+      ASSERT( l_HR == S_OK, lErrorMsg.c_str );
       CHECKED_RELEASE( l_ErrorBuffer );
       return false;
   }
@@ -243,6 +244,7 @@ bool CEffect::LoadEffect()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
+  GetParameterBySemantic( UseFogStr, m_UseFog );
   return true;
 }
 
@@ -425,8 +427,12 @@ bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
   return ( m_Effect->SetMatrix( m_ViewToLightProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-void CEffect::SetShadowMapParameters( bool UseShadowMaskTexture, bool
-                                      UseStaticShadowmap, bool UseDynamicShadowmap )
+void CEffect::SetShadowMapParameters
+( 
+    bool UseShadowMaskTexture,
+    bool UseStaticShadowmap,
+    bool UseDynamicShadowmap
+)
 {
   m_Effect->SetBool( m_UseShadowMaskTextureParameter, UseShadowMaskTexture ?
                      TRUE : FALSE );
@@ -440,16 +446,33 @@ void CEffect::SetUseDebugColor( bool aUse )
 {
 	m_Effect->SetBool( m_UseDebugColor, aUse ? TRUE : FALSE );
 }
+
+void CEffect::SetFog
+( 
+    bool aUseFog,
+    float32 aFogStart,
+    float32 aFogEnd,
+    float32 aFogExponent,
+    EFogFunction aFogFun
+)
+{
+  m_Effect->SetBool ( m_UseFog,     aUseFog ? TRUE : FALSE );
+  m_Effect->SetInt  ( m_FogFun,     (int) aFogFun );
+  m_Effect->SetFloat( m_FogStart,   aFogStart );
+  m_Effect->SetFloat( m_FogEnd,     aFogEnd );
+  m_Effect->SetFloat( m_FogExp,     aFogExponent );
+}
+
 void CEffect::ResetLightsHandle()
 {
   //Reset all the lights of the effect
-  memset( m_LightsEnabled, 0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsType, 0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsAngle, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsFallOff, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsStartRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsEndRangeAttenuation, 0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsPosition, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsDirection, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
-  memset( m_LightsColor, 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEnabled,                  0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsType,                     0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsAngle,                    0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsFallOff,                  0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsStartRangeAttenuation,    0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsEndRangeAttenuation,      0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsPosition,                 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsDirection,                0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsColor,                    0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
 }

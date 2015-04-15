@@ -191,7 +191,7 @@ void CPlayerPhysicProcess::Init()
   //ScriptMInstance->RunCode( "init()" );
   ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
-  CSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+  CSoundManager* l_SM = SoundMan;
 
   uint32 l_source1 =  l_SM->CreateSource();
   l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );

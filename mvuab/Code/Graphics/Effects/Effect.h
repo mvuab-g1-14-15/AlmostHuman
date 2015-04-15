@@ -80,12 +80,6 @@ public:
   GET_SET( D3DXHANDLE, TimeParameter );
   GET_SET( D3DXHANDLE, DeltaTimeParameter );
 
-  // Fog
-  GET_SET( D3DXHANDLE, FogStart );
-  GET_SET( D3DXHANDLE, FogEnd );
-  GET_SET( D3DXHANDLE, FogExp );
-  GET_SET( D3DXHANDLE, FogFun );
-
   // Texture
   GET_SET( D3DXHANDLE, HeightTexture );
   GET_SET( D3DXHANDLE, WidthTexture );
@@ -131,6 +125,7 @@ public:
   }
 
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
+  void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
   void SetUseDebugColor( bool aUse );
 
 private: // Members
@@ -145,17 +140,23 @@ private: // Members
   Math::Vect3f m_LightsPosition[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
+
   D3DXHANDLE m_WorldMatrixParameter, m_ViewMatrixParameter,
              m_ProjectionMatrixParameter, m_InverseProjectionMatrixParameter,
              m_InverseViewMatrixParameter, m_InverseWorldMatrixParameter;
+
   D3DXHANDLE m_WorldViewMatrixParameter, m_ViewProjectionMatrixParameter,
              m_WorldViewProjectionMatrixParameter;
+
   D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
+
   D3DXHANDLE m_LightEnabledParameter, m_LightsTypeParameter,
              m_LightsPositionParameter, m_LightsDirectionParameter, m_LightsAngleParameter,
              m_LightsColorParameter;
+
   D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter,
              m_LightsEndRangeAttenuationParameter;
+
   D3DXHANDLE m_CameraPositionParameter;
   D3DXHANDLE m_BonesParameter;
 
@@ -181,6 +182,7 @@ private: // Members
   D3DXHANDLE m_DeltaTimeParameter;
 
   // Fog information
+  D3DXHANDLE m_UseFog;
   D3DXHANDLE m_FogStart;
   D3DXHANDLE m_FogEnd;
   D3DXHANDLE m_FogExp;
@@ -196,20 +198,6 @@ private: // Members
 
   // The macros to compile the effect
   std::vector<D3DXMACRO> m_Defines;
-
-  /*
-  SceneTextureParameter );
-  BloomThresholdParameter );
-  SampleOffsetsParameter );
-  SampleWeightsParameter );
-  GaussianBlurTextureParameter );
-  BloomIntensityParameter );
-  BaseIntensityParameter );
-  BloomSaturationParameter );
-  BaseSaturationParameter );
-  PostBloomTextureParameter );
-  */
-
 
 private: // Methods
   void  SetNullParameters();

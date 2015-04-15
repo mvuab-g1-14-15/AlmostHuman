@@ -54,21 +54,22 @@ float       g_SpecularFactor = 20.0f;
 
 float       g_Bump = 10.0;
 
-float       g_FogStar                                           : FogStart;
-float       g_FogEnd                                            : FogEnd;
+bool		g_UseFog												: UseFog;
+float       g_FogStar                                           	: FogStart;
+float       g_FogEnd                                            	: FogEnd;
+float       g_FodExp                                            	: FogExp;
+int         g_FogFun                                            	: FogFun;
 
-float       g_FodExp                                            : FogExp;
-int         g_FogFun                                            : FogFun;
+float       g_Weight[5]                                         	: Weight;
+float       g_Offset[5]                                         	: Offset;
 
-float       g_Weight[5]                                         : Weight;
-float       g_Offset[5]                                         : Offset;
+int         g_TextureWidth                                      	: TextureWidth;
+int         g_TextureHeight                                     	: TextureHeight;
 
-int         g_TextureWidth                                      : TextureWidth;
-int         g_TextureHeight                                     : TextureHeight;
-
-bool g_UseShadowMaskTexture 									: UseShadowMaskTexture;
-bool g_UseShadowMapStatic 										: UseStaticShadowMap;
-bool g_UseShadowMapDynamic 										: UseDynamicShadowMap;
+bool g_UseShadowMaskTexture 										: UseShadowMaskTexture;
+bool g_UseShadowMapStatic 											: UseStaticShadowMap;
+bool g_UseShadowMapDynamic 											: UseDynamicShadowMap;
+int  g_ShadowMapTextureSize											: ShadowMapTextureSize;
 
 // Functions
 

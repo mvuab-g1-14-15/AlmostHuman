@@ -1,7 +1,7 @@
 <managers>
+	<graphics_manager file_config=""/>
 	<texture_manager file_config="no_name"/>
-	<graphics_manager file_config="Data/windows.xml"/>
-	<effect_manager file_config="Data/effects.xml"/>
+	<effect_manager file_config="Data/effects/effects.xml"/>
 	<input_manager file_config="no_name"/>
 	<action_manager file_config="Data/inputs.xml"/>
 	<language_manager file_config="Data/language.xml"/>
@@ -20,4 +20,5 @@
 	<billboard file_config="Data/textures/smoke.png"/>
 	<particle_manager file_config="Data/particles.xml"/>
 	<gizmos_manager file_config="no_name"/>
+	<sound_manager file_config ="./Data/sounds.xml"/>
 </managers>

@@ -46,8 +46,6 @@ CCore::~CCore()
  // Destroy();
   CHECKED_DELETE( m_pTimer );
   CHECKED_DELETE( m_pConsole );
-  //CHECKED_DELETE( m_pEngineManagers );
-  CHECKED_DELETE( m_pSoundManager );
 }
 
 void CCore::Init()
@@ -74,15 +72,12 @@ void CCore::Update()
 void CCore::Render()
 {
     SRCMInstance->Execute();
-    //m_pEngineManagers->Render();
 }
 void CCore::CreateManagers()
 {
     if ( EngineConfigInstance->GetEnableConsole() )
         CreateConsole();
     m_pTimer = new CTimer( 30 );
-    m_pSoundManager = new CSoundManager();
-    //m_pEngineManagers = new CEngineManagers( EngineConfigInstance->GetManagersPath() );
 }
 
 void CCore::CreateConsole()
@@ -99,8 +94,6 @@ void CCore::CreateConsole()
 
 void CCore::InitManagers()
 {
-  //m_pEngineManagers->Init();
-  m_pSoundManager->Init( EngineConfigInstance->GetSoundPath() );
 }
 
 void CCore::Trace( const std::string& TraceStr )

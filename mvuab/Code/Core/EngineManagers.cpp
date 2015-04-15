@@ -23,6 +23,7 @@
 #include "Cameras\CameraManager.h"
 #include "Fonts\FontManager.h"
 #include "Language\LanguageManager.h"
+#include "SoundManager.h"
 #include "Utils\ObjectFactory.h"
 
 CEngineManagers::CEngineManagers( const std::string & aPath )
@@ -53,34 +54,12 @@ CEngineManagers::CEngineManagers( const std::string & aPath )
 
 CEngineManagers::~CEngineManagers()
 {
- /* CHECKED_DELETE( m_pScriptManager );
-  CHECKED_DELETE( m_pGraphicsManager );
-  CHECKED_DELETE( m_pInputManager );
-  CHECKED_DELETE( m_pActionManager );
-  CHECKED_DELETE( m_pFontManager );
-  CHECKED_DELETE( m_pLanguageManager );
-  CHECKED_DELETE( m_pEnemyManager );
-  CHECKED_DELETE( m_pStaticMeshManager );
-  CHECKED_DELETE( m_pRenderableObjectsLayersManager );
-  CHECKED_DELETE( m_pRenderableObjectTechniqueManager );
-  CHECKED_DELETE( m_pAnimatedModelsManager );
-  CHECKED_DELETE( m_pTextureManager );
-  CHECKED_DELETE( m_pCameraManager );
-  CHECKED_DELETE( m_pEffectManager );
-  CHECKED_DELETE( m_pLightManager );
-  CHECKED_DELETE( m_pSceneRendererCommandManager );
-  CHECKED_DELETE( m_pPhysicsManager );
-  CHECKED_DELETE( m_pTriggerManager );
-  CHECKED_DELETE( m_pBillboard );
-  CHECKED_DELETE( m_pParticleManager );
-  CHECKED_DELETE( m_pGizmosManager );*/
-   //TODO ALEX
-    // Release();
+    Release();
 }
 
 void CEngineManagers::Init()
 {
-      ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
+    ObjectFactory1<CManager, CXMLTreeNode, std::string > ManagerFactory;
     // Register all the commands with the object factory class
     ManagerFactory.Register( "texture_manager",
                               Type2Type<CTextureManager>( ) );
@@ -126,6 +105,8 @@ void CEngineManagers::Init()
                              Type2Type<CGizmosManager>( ) );
     ManagerFactory.Register( "language_manager",
                              Type2Type<CLanguageManager>( ) );
+    ManagerFactory.Register( "sound_manager",
+                             Type2Type<CSoundManager>( ) );
 
     CXMLTreeNode l_File;
 
@@ -160,54 +141,69 @@ void CEngineManagers::Init()
       }
     }
 
-    m_pScriptManager = dynamic_cast<CScriptManager*>(GetResource("script_manager"));
-    m_pGraphicsManager = dynamic_cast<CGraphicsManager*>(GetResource("graphics_manager"));
-    m_pInputManager = dynamic_cast<CInputManager*>(GetResource("input_manager"));
-    m_pActionManager = dynamic_cast<CActionManager*>(GetResource("action_manager"));
-    m_pFontManager = dynamic_cast<CFontManager*>(GetResource("font_manager"));
-    m_pLanguageManager = dynamic_cast<CLanguageManager*>(GetResource("language_manager"));
-    m_pEnemyManager = dynamic_cast<CEnemyManager*>(GetResource("enemy_manager"));
+    m_pScriptManager    = dynamic_cast<CScriptManager*>(GetResource("script_manager"));
+    m_pGraphicsManager  = dynamic_cast<CGraphicsManager*>(GetResource("graphics_manager"));
+    m_pInputManager     = dynamic_cast<CInputManager*>(GetResource("input_manager"));
+    m_pActionManager    = dynamic_cast<CActionManager*>(GetResource("action_manager"));
+    m_pFontManager      = dynamic_cast<CFontManager*>(GetResource("font_manager"));
+    m_pLanguageManager  = dynamic_cast<CLanguageManager*>(GetResource("language_manager"));
+    m_pEnemyManager     = dynamic_cast<CEnemyManager*>(GetResource("enemy_manager"));
     m_pStaticMeshManager = dynamic_cast<CStaticMeshManager*>(GetResource("static_mesh_manager"));
     m_pRenderableObjectsLayersManager = dynamic_cast<CRenderableObjectsLayersManager*>(GetResource("renderable_manager_layer"));
     m_pRenderableObjectTechniqueManager = dynamic_cast<CRenderableObjectTechniqueManager*>(GetResource("renderable_technique_manager"));
     m_pAnimatedModelsManager = dynamic_cast<CAnimatedModelsManager*>(GetResource("animated_manager"));
-    m_pTextureManager = dynamic_cast<CTextureManager*>(GetResource("texture_manager"));
-    m_pCameraManager = dynamic_cast<CCameraManager*>(GetResource("camera_manager"));
-    m_pEffectManager = dynamic_cast<CEffectManager*>(GetResource("effect_manager"));
-    m_pLightManager = dynamic_cast<CLightManager*>(GetResource("light_manager"));
+    m_pTextureManager   = dynamic_cast<CTextureManager*>(GetResource("texture_manager"));
+    m_pCameraManager    = dynamic_cast<CCameraManager*>(GetResource("camera_manager"));
+    m_pEffectManager    = dynamic_cast<CEffectManager*>(GetResource("effect_manager"));
+    m_pLightManager     = dynamic_cast<CLightManager*>(GetResource("light_manager"));
     m_pSceneRendererCommandManager = dynamic_cast<CSceneRendererCommandManager*>(GetResource("scene_render_command_manager"));
-    m_pPhysicsManager = dynamic_cast<CPhysicsManager*>(GetResource("physics_manager"));
-    m_pTriggerManager = dynamic_cast<CTriggerManager*>(GetResource("trigger_manager"));
-    m_pBillboard = dynamic_cast<CBillboard*>(GetResource("billboard"));
-    m_pParticleManager = dynamic_cast<CParticleManager*>(GetResource("particle_manager"));
-    m_pGizmosManager = dynamic_cast<CGizmosManager*>(GetResource("gizmos_manager"));
-
-    TVectorResources::iterator it = m_ResourcesVector.begin(),
-                              it_end = m_ResourcesVector.end();
-    for(;it!=it_end;++it)
-        (*it)->Init();
+    m_pPhysicsManager   = dynamic_cast<CPhysicsManager*>(GetResource("physics_manager"));
+    m_pTriggerManager   = dynamic_cast<CTriggerManager*>(GetResource("trigger_manager"));
+    m_pBillboard        = dynamic_cast<CBillboard*>(GetResource("billboard"));
+    m_pParticleManager  = dynamic_cast<CParticleManager*>(GetResource("particle_manager"));
+    m_pGizmosManager    = dynamic_cast<CGizmosManager*>(GetResource("gizmos_manager"));
+    m_pSoundManager     = dynamic_cast<CSoundManager*>(GetResource("sound_manager"));
+    
+    //
+    // Init managers
+    //
+    for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ;lItb!=lIte; ++lItb)
+        (*lItb)->Init();
 }
 
 void CEngineManagers::Update()
 {
-  TVectorResources::iterator it = m_ResourcesVector.begin(),
-                              it_end = m_ResourcesVector.end();
-  for(;it!=it_end;++it)
-        (*it)->Update();
+  for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ;lItb!=lIte; ++lItb)
+        (*lItb)->Update();
 }
 
 void CEngineManagers::Render()
 {
-  TVectorResources::iterator it = m_ResourcesVector.begin(),
-                              it_end = m_ResourcesVector.end();
-  for(;it!=it_end;++it)
-        (*it)->Render();
+  for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ;lItb!=lIte; ++lItb)
+        (*lItb)->Render();
 }
 
 void CEngineManagers::Release()
 {
-  TVectorResources::iterator it = m_ResourcesVector.begin(),
-                             it_end = m_ResourcesVector.end();
-  for(;it!=it_end;--it_end)
-    CHECKED_DELETE(*(--it_end));
+    /*
+  typedef TVectorResources::iterator TResourceVectorIterator;
+  TResourceVectorIterator lItb = m_ResourcesVector.begin(),
+                          lIte = m_ResourcesVector.end();
+  std::reverse_iterator< TResourceVectorIterator > until( lItb ),
+                                                   from( lIte );
+    while( until != from )
+        CHECKED_DELETE(*from++);
+    */
+}
+
+CSoundManager* CEngineManagers::GetSoundManager() const
+{
+    ASSERT( m_pSoundManager, "Null sound manager");
+    return m_pSoundManager;
+}
+
+CGraphicsManager* CEngineManagers::GetGraphicsManager() const
+{
+    ASSERT( m_pGraphicsManager, "Null graphics manager");
+    return m_pGraphicsManager;
 }
