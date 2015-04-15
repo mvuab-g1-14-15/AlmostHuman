@@ -14,6 +14,7 @@ process = CEngine.GetSingletonPtr():GetProcess()
 -- Global Variables
 g_CameraSensibility = 30.0
 g_HalfPi = 1.57079632679
+g_Pi = 3.141592
 
 -- Global Functions
 function OverlapSphere(radius, position)
@@ -44,8 +45,15 @@ function GetPlayerPosition()
 end
 
 function PlayerVisibility(enemy)
+	local l_EnemyPos = enemy:GetPosition()
+	local l_EnemyDir = enemy:GetDirection()
+	
+	l_ViewingPlayer = physic_manager:PlayerInSight(5, 45, l_EnemyPos, l_EnemyDir)
+
+	return l_ViewingPlayer
+--[[
 	local l_PlayerPos = GetPlayerPosition()
-	local l_EnemyPos = enemy:GetPosition();
+	local l_EnemyPos = enemy:GetPosition()
 	
 	local l_Direction = l_PlayerPos - l_EnemyPos
 	if CheckVector(l_Direction) then
@@ -64,4 +72,5 @@ function PlayerVisibility(enemy)
 	else
 		return false
 	end
+]]
 end

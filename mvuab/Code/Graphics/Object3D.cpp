@@ -1,6 +1,7 @@
 #include "Object3D.h"
 #include "XML\XMLTreeNode.h"
 
+#pragma warning( disable : 4172 )
 
 CObject3D::CObject3D( const CXMLTreeNode& atts )
     : m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) ) )
@@ -47,3 +48,9 @@ void CObject3D::MakeTransform()
     m_Transform = translation * scale * ( rotationX * rotationY * rotationZ );
 }
 
+const Math::Vect3f& CObject3D::GetDirection() const
+{
+	Math::Vect3f l_Direction( Math::Utils::Cos( m_fYaw ) * Math::Utils::Cos( m_fPitch ), Math::Utils::Sin( m_fPitch ),
+							Math::Utils::Sin( m_fYaw ) * Math::Utils::Cos( m_fPitch ) );
+	return l_Direction;
+}	

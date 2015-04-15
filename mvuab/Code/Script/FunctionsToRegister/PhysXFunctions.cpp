@@ -11,6 +11,8 @@
 #include "Particles\ParticleEmitter.h"
 #include "Particles\CubeEmitter.h"
 
+#include "EngineManagers.h"
+
 #include "luabind_macros.h"
 
 #include <set>
@@ -88,6 +90,21 @@ void removeResource( T val )
   CHECKED_DELETE( val );
 }
 
+bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction)
+{
+	std::vector<CPhysicUserData*> l_UserDatas = PhysicManager->OverlapConeActor(_Distance, _Angle, _Position, _Direction, 0xffffffff);
+	std::vector<CPhysicUserData*>::iterator it = l_UserDatas.begin(),
+											it_end = l_UserDatas.end();
+	for( ; it!=it_end; ++it)
+	{
+		CPhysicUserData* l_UserData = *it;
+		std::string name = l_UserData->GetName();
+		if (name == "Player")
+			return true;
+	}
+	return false;
+}
+
 void registerPhysX( lua_State* m_LS )
 {
   module( m_LS )
@@ -154,6 +171,8 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
     .def( "RaycastDistance", &RaycastDistance )
     .def( "RaycastType", &RaycastType )
+	.def( "OverlapConeActor", &CPhysicsManager::OverlapConeActor )
+	.def ("PlayerInSight", &PlayerInSight )
   ];
   module( m_LS ) [
     class_<CPhysicController, CObject3D>( "CPhysicController" )

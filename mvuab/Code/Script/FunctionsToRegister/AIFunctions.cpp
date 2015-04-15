@@ -61,6 +61,7 @@ void registerCharacters( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CCharacter, AddDamage )
     LUA_DECLARE_METHOD( CCharacter, Move )
     LUA_DECLARE_METHOD( CCharacter, GetPosition )
+	LUA_DECLARE_METHOD( CCharacter, GetDirection )
   LUA_END_DECLARATION
 }
 

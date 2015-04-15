@@ -1053,6 +1053,33 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     return _ImpactObjects;
 }
 
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle,
+	const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
+{
+	std::vector<CPhysicUserData*> l_Result;
+	std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor(_Distance, _Position, _uiImpactMask);
+
+	float lenSq2 = _Direction.x*_Direction.x + _Direction.y*_Direction.y + _Direction.z*_Direction.z;
+
+	std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin(),
+											it_end = l_OverlapSphere.end();
+	for( ; it!=it_end; ++it)
+	{
+		CPhysicUserData* l_UserData = *it;
+		Math::Vect3f l_ActorPos = l_UserData->GetActor()->GetPosition();
+		Math::Vect3f l_VectToActor = l_ActorPos - _Position;
+		l_VectToActor.Normalize();
+
+		float dot = l_VectToActor.DotProduct(_Direction);
+		float lenSq1 = l_VectToActor.x*l_VectToActor.x + l_VectToActor.y*l_VectToActor.y + l_VectToActor.z*l_VectToActor.z;
+		float angle = acos(dot/sqrt(lenSq1 * lenSq2));
+
+		if (angle < _Angle)
+			l_Result.push_back(l_UserData);
+	}
+	return l_Result;
+}
+
 void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
         std::vector<CPhysicUserData*> impactObjects, float _fPower )
 {
