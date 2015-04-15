@@ -12,18 +12,17 @@
 #include "Math\AABB.h"
 #include "EngineManagers.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& Name,
-                              const std::string& CoreName ): m_pStaticMesh( SMeshMInstance->GetResource(
-                                      CoreName ) ), CRenderableObject()
+CInstanceMesh::CInstanceMesh( const std::string& Name, const std::string& CoreName ) 
+    : m_pStaticMesh( SMeshMInstance->GetResource(CoreName ) ), CRenderableObject()
 {
   if ( !m_pStaticMesh )
     LOG_ERROR_APPLICATION( "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" );
-    SetName( Name );
+  
+  SetName( Name );
 }
 
 CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts )
-  : CRenderableObject( atts ), m_pStaticMesh( SMeshMInstance->GetResource(
-        atts.GetPszProperty( "core", "no_staticMesh" ) ) )
+  : CRenderableObject( atts ), m_pStaticMesh( SMeshMInstance->GetResource(atts.GetPszProperty( "core", "no_staticMesh" ) ) )
 {
 }
 
@@ -39,11 +38,14 @@ void CInstanceMesh::Render()
     Math::Mat44f lTransform = GetTransform();
     GraphicsInstance->SetTransform( lTransform );
     Math::AABB3f laabb = m_pStaticMesh->GetAABB();
+
     CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+
     // TODO: Fix the frustum culling
-    //if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z), laabb.GetRadius()) )
-      m_pStaticMesh->Render( GraphicsInstance );
+    if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z), laabb.GetRadius()) )
+        m_pStaticMesh->Render( GraphicsInstance );
+
     Math::Mat44f t;
     GraphicsInstance->SetTransform( t );
 }
