@@ -7,6 +7,7 @@
 #include "Core.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "..\Sound\WWSoundManager.h"
 
 
 CCharacter::CCharacter( const std::string& Name )
@@ -22,6 +23,11 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
+  if ( m_Name == "Enemy1" )
+  {
+    CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+    l_SM->SetGameObjectPosition( "TestGameObject3d", m_Position, GetDirection() );
+  }
 }
 
 void CCharacter::Render()
@@ -71,9 +77,9 @@ ECollisionGroup CCharacter::GetCollisionGroup()
   return ECG_ENEMY;
 }
 
-void CCharacter::Move(Math::Vect3f direction, float dt)
+void CCharacter::Move( Math::Vect3f direction, float dt )
 {
-  m_Controller->Move(direction, dt);
+  m_Controller->Move( direction, dt );
 }
 
 float CCharacter::GetHeight()

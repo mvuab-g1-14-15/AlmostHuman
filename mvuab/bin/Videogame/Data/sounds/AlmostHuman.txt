@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3038207054	Shoot			\Default Work Unit\Shoot	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Shoot Test\RS2_FAST_IMPACT_WEAPONRY_013_B		258060
+

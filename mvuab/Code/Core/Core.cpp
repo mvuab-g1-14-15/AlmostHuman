@@ -218,6 +218,7 @@ void CCore::InitManagers()
   m_pParticleManager->Init( l_EngineConfig->GetParticlesPath() );
   m_pGizmosManager->Init();
   m_pSoundManager->Init();
+  m_pSoundManager->Load( l_EngineConfig->GetSoundPath() );
 }
 
 void CCore::Trace( const std::string& TraceStr )

@@ -5,7 +5,7 @@
 	<console_logger activate_console="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="true" />
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
-	<sound init_sound_path="./Data/sounds.xml"/>
+	<sound init_sound_path="Data/sounds.xml"/>
 	<languages current_language="castellano">
 		<language path="Data/lan/castellano.xml"/>
 		<language path="Data/lan/catalan.xml"/>

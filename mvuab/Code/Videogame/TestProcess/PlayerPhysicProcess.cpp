@@ -40,6 +40,7 @@
 
 //SOUND
 #include "SoundManager.h"
+#include "WWSoundManager.h"
 
 
 #include <algorithm>
@@ -77,6 +78,8 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
 void CPlayerPhysicProcess::Update()
 {
+
+
   /*
   CGraph l_Graph;
   l_Graph.Parse("./Data/graph1.xml");
@@ -86,6 +89,9 @@ void CPlayerPhysicProcess::Update()
 
   Math::Vect3f v = l_Graph.GetNodeInfo(4);
   */
+
+
+
 
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
@@ -128,7 +134,17 @@ void CPlayerPhysicProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
+  if ( pActionManager->DoAction( "Shoot" ) )
+  {
+    CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+    l_SM->PauseEvent( "Shoot", "TestGameObject3d" );
+  }
 
+  CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+  l_SM->SetListenerPosition( CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetPosition(),
+                             CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetDirection(),
+                             CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetVecUp() );
+  //l_SM->SetGameObjectPosition( "TestGameObject3d", Vect3f( 0.0f, 0.0f, 0.0f ), Vect3f( 0.0f, 0.0f, 0.0f ) );
   //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
 
@@ -226,6 +242,9 @@ void CPlayerPhysicProcess::Init()
   m_PointFinal = Math::Vect3f( 6, 0, 6 );
   m_Path = m_AStar->GetPath( m_PointInicial, m_PointFinal );
   InitSceneCharacterController();
+
+  CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+  l_SM->PlayEvent( "SHOOT", "TestGameObject3d" );
 }
 
 void CPlayerPhysicProcess::Render()
