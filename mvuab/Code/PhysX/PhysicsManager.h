@@ -133,6 +133,9 @@ public:
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                 float _fEffectRadius, float _fPower );
   std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere );
+
+	std::vector<CPhysicUserData*> OverlapConeActor( float _Distance, float _Angle,
+	const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask );
   //----Update
   void          Update();
   void          WaitForSimulation();

@@ -12,7 +12,7 @@ function CGrenade:__init()
     self.Velocity = Vect3f()
     self.Acceleration = Vect3f(0.0, -9.81, 0.0)
     
-    self.ThrowAnle = 30.0 * 3.141592 / 180.0
+    self.ThrowAngle = 30.0 * g_Pi / 180.0
     self.Throwed = false
 	
     core:Trace("CGrenade initialized")
@@ -35,7 +35,7 @@ function CGrenade:Throw()
     self.Velocity = camera_manager:GetCurrentCamera():GetDirection() * 10.0
     
     self.Throwed = true
-    self.TimeToExplode()
+    self:TimeToExplode()
 end
 
 function CGrenade:TimeToExplode()
@@ -58,5 +58,5 @@ function CGrenade:Update()
     self.Velocity = self.Velocity + self.Acceleration * dt
     self.Position = self.Position + self.Velocity * dt
     
-    self.TimeToExplode()
+    self:TimeToExplode()
 end
