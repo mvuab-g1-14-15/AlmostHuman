@@ -2,14 +2,16 @@ fn GetAABB Obj =
 (
 	local l_minPoint = point3 999999999999999999 999999999999999999 999999999999999999
 	local l_maxPoint = point3 -999999999999999999 -999999999999999999 -999999999999999999
+	
 	local l_nFaces = getNumFaces Obj
+	local InvTransform = inverse Obj.transform
 	
 	for iFaces = 1 to l_nFaces do
 	(
 		local IdxsFace=getFace Obj iFaces
-		local Coord1=getVert Obj IdxsFace.x
-		local Coord3=getVert Obj IdxsFace.y
-		local Coord2=getVert Obj IdxsFace.z
+		local Coord1 = (getVert Obj IdxsFace.x) * InvTransform
+		local Coord3 = (getVert Obj IdxsFace.y) * InvTransform
+		local Coord2 = (getVert Obj IdxsFace.z) * InvTransform
 		
 		-- Look for min point
 		l_minPoint.x = GetMin l_minPoint.x Coord1.x
