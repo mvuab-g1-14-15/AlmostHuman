@@ -7,49 +7,47 @@
 
 class CParticle
 {
-private:
-  float m_Size;
-  float m_LifeTime;
+    private:
+        float m_LifeTime;
+        float m_SphereRadius;
 
-  bool  m_IsAlive;
-  CBillboard  m_Billboard;
+        bool  m_IsAlive;
+        CBillboard  m_Billboard;
 
-  Math::Vect3f m_Color;
-  Math::Vect3f m_Position;
+        Math::Vect3f m_Color;
+        Math::Vect3f m_Position;
 
-  Math::Vect3f m_Velocity;
-  Math::Vect3f m_Acceleration;
-  std::string m_TextureName;
+        Math::Vect3f m_Velocity;
+        Math::Vect3f m_Acceleration;
 
-public:
-  CParticle();
-  CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
 
-  void SetTextureName( std::string TextureName );
+    public:
+        CParticle();
+        CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
 
-  void SetColor( const Math::Vect3f& Color );
-  const Math::Vect3f& GetColor();
+        void SetTextureName( std::string TextureName );
+        void SetSize( float sx, float sy );
 
-  void SetPosition( const Math::Vect3f& Position );
-  const Math::Vect3f& GetPosition();
+        void SetColor( const Math::Vect3f& Color );
+        const Math::Vect3f& GetColor();
 
-  void SetVelocity( const Math::Vect3f& Velocity );
-  const Math::Vect3f& GetVelocity();
+        void SetPosition( const Math::Vect3f& Position );
+        const Math::Vect3f& GetPosition();
 
-  void SetAcceleration( const Math::Vect3f& Acceleration );
-  const Math::Vect3f& GetAcceleration();
+        void SetVelocity( const Math::Vect3f& Velocity );
+        const Math::Vect3f& GetVelocity();
 
-  void SetLifeTime( float Time );
-  float GetLifeTime();
+        void SetAcceleration( const Math::Vect3f& Acceleration );
+        const Math::Vect3f& GetAcceleration();
 
-  void SetSize( float sz );
-  float GetSize();
+        void SetLifeTime( float Time );
+        float GetLifeTime();
 
-  void SetIsAlive( bool isAlive );
-  bool GetIsAlive();
+        void SetIsAlive( bool isAlive );
+        bool GetIsAlive();
 
-  void Update( float dt );
-  void Render();
+        void Update( float dt );
+        void Render();
 };
 
 #endif
