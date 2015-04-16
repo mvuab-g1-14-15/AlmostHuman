@@ -74,7 +74,7 @@ void CSphereEmitter::NewParticle(CParticle* l_Particle)
     l_Particle->SetAcceleration(m_Acceleration);
     
     l_Particle->SetTextureName(m_TextureName);
-    l_Particle->SetSize(l_Radius);
+    l_Particle->SetSize(l_Radius, l_Radius);
     
     l_Particle->SetPosition(m_Position);
     l_Particle->SetLifeTime(l_LifeTime);
