@@ -141,6 +141,8 @@ void CSceneRendererCommandManager::Init()
                            Type2Type<CRenderDebugCommand>( ) );
   CommandFactory.Register( "render_gizmos",
                            Type2Type<CRenderGizmosCommand>( ) );
+  CommandFactory.Register( "render_gui",
+                            Type2Type<CRenderGUISceneRendererCommand>( ) );
   CXMLTreeNode l_File;
 
   //mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();

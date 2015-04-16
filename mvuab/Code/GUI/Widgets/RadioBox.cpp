@@ -29,11 +29,11 @@ void CRadioBox::Render ()
 {
 	if( CGuiElement::m_bIsVisible)
 	{
-		//if (m_pBackGroundTexture)
-		//{
-		//	//TODO RAUL
-		//	GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
-		//}
+		if (m_pBackGroundTexture)
+		{
+			//TODO RAUL
+		GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
+		}
 
 		uint32 cont_init = m_uBlockCheckButton * (m_uColumns*m_uRows);
 		uint32 cont_end = m_uColumns*m_uRows;

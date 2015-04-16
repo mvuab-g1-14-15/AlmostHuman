@@ -50,9 +50,9 @@ void CImage::Render ()
 			if (m_bIsQuadrant)
 				h = CGuiElement::m_uWidth;
 			//TODO RAUL
-			//if (texture)
+			if (texture)
 				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,w, h,  CGraphicsManager::UPPER_LEFT, texture, m_eFlip);
-			//else
+			else
 				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h,  CGraphicsManager::UPPER_LEFT, m_Color);
 		}
 

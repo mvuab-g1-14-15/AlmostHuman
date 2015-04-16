@@ -35,7 +35,7 @@ void CDialogBox::Render	()
 		if (m_pBackGroundTexture)
 		{
 			//TODO RAUL CREAR METODO DRAWQUAD2D CON TEXTURA
-		//		GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
+				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
 		}
 		else
 		{

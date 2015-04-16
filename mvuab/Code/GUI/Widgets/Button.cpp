@@ -52,7 +52,7 @@ void CButton::Render	()
 			if (m_pOverTexture)
 			{
 //TODO RAUL
-                //				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOverTexture);
+                				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOverTexture);
 			}
 			else
 			{

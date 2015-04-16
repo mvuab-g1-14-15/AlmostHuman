@@ -84,6 +84,7 @@
 #define GizmosMInstance			CEngineManagers::GetSingletonPtr()->GetGizmosManager()
 #define TextureMInstance		CEngineManagers::GetSingletonPtr()->GetTextureManager()
 #define SoundMan                CEngineManagers::GetSingletonPtr()->GetSoundManager()
+#define GUIInstance             CEngineManagers::GetSingletonPtr()->GetGUIManager()
 
 #define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
