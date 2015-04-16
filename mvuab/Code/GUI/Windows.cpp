@@ -96,7 +96,7 @@ void CWindows::Update ()
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL SCRIPT
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
 		ScriptMInstance->RunCode(m_sLuaCode_OnUpdateWindows);
 	}
 
@@ -141,7 +141,7 @@ void CWindows::Update ()
 		(*revIt_aux)->Update();
 	}
 
-	IsKeyDown(InputManagerInstance);
+	IsKeyDown();
 }
 
 
@@ -181,7 +181,7 @@ void CWindows::LoadWindows( void )
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL SCRIPT
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
 		ScriptMInstance->RunCode(m_sLuaCode_OnLoadWindows);
 	}
 	
@@ -202,12 +202,12 @@ void CWindows::SaveWindows( void )
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL SCRIPT
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
-		ScriptMInstance->RunScript(m_sLuaCode_OnSaveWindows);
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
+		ScriptMInstance->RunCode(m_sLuaCode_OnSaveWindows);
 	}
 }
 
-void CWindows::IsKeyDown( CInputManager* InputManagerInstance )
+void CWindows::IsKeyDown()
 {
 	if (m_sLuaCode_OnKeyDown.compare(""))
 	{
@@ -216,8 +216,8 @@ void CWindows::IsKeyDown( CInputManager* InputManagerInstance )
 		{
 			//Lanzar acción en Lua:
 			//TODO RAUL SCRIPT
-			//CScriptManager* scriptManager = CORE->GetScriptManager();
-			ScriptMInstance->RunScript(m_sLuaCode_OnKeyDown);
+			////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
+			ScriptMInstance->RunCode(m_sLuaCode_OnKeyDown);
 		}
 	}
 }
@@ -683,15 +683,15 @@ void	CWindows::_LoadImage(CImage* image, CXMLTreeNode& pNewNode, const Math::Vec
 	image->SetBackGround(backGround);
 	if( flip.compare("FLIP_X") == 0)
 	{
-		image->SetFlip(FLIP_X);
+		image->SetFlip(CGraphicsManager::FLIP_X);
 	}
 	else if (flip.compare("FLIP_Y") == 0)
 	{
-		image->SetFlip(FLIP_Y);
+		image->SetFlip(CGraphicsManager::FLIP_Y);
 	}
 	else
 	{
-		image->SetFlip(NONE_FLIP);
+		image->SetFlip(CGraphicsManager::NONE_FLIP);
 	}
 	int count = pNewNode.GetNumChildren();
 	for (int j = 0; j < count; ++j)

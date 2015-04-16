@@ -47,7 +47,7 @@ public:
 	bool								IsReturnPress					();
 
 private:
-	void								ProcessNewEntries			(CInputManager* inputManager);
+	void								ProcessNewEntries			();
 	void								Remove1character			();
 
 private:

@@ -25,6 +25,7 @@
 #include "Language\LanguageManager.h"
 #include "SoundManager.h"
 #include "Utils\ObjectFactory.h"
+//#include "GUIManager.h"
 
 CEngineManagers::CEngineManagers( const std::string & aPath )
   : m_ManagersPath( aPath )
@@ -49,6 +50,7 @@ CEngineManagers::CEngineManagers( const std::string & aPath )
   , m_pBillboard( 0 )
   , m_pParticleManager( 0 )
   , m_pGizmosManager( 0 )
+ // , m_pGUIManager( 0 )
 {  
 }  
 
@@ -107,7 +109,8 @@ void CEngineManagers::Init()
                              Type2Type<CLanguageManager>( ) );
     ManagerFactory.Register( "sound_manager",
                              Type2Type<CSoundManager>( ) );
-
+   // ManagerFactory.Register( "gui_manager",
+      //                       Type2Type<CGUIManager>( ) );
     CXMLTreeNode l_File;
 
     if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
@@ -163,6 +166,7 @@ void CEngineManagers::Init()
     m_pParticleManager  = dynamic_cast<CParticleManager*>(GetResource("particle_manager"));
     m_pGizmosManager    = dynamic_cast<CGizmosManager*>(GetResource("gizmos_manager"));
     m_pSoundManager     = dynamic_cast<CSoundManager*>(GetResource("sound_manager"));
+    //m_pGUIManager       = dynamic_cast<CGUIManager*>(GetResource("gui_manager"));
     
     //
     // Init managers

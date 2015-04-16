@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "Math\Vector2.h"
 
 //---Forward Declarations---
 class CTexture;
@@ -51,7 +52,7 @@ public:
 	void	SaveWindows					();
 
 private:
-	void	IsKeyDown						(CInputManager* InputManagerInstance);	
+	void	IsKeyDown						();	
 
 	void	LoadButton					(CButton* button, CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
 	void	LoadCheckButton			(CCheckButton* checkButton, CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);

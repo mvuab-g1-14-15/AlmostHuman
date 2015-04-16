@@ -16,6 +16,7 @@
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "TextBox.h"
+#include "Utils\Manager.h"
 
 //---Forward Declarations---
 class CPointerMouse;
@@ -38,21 +39,22 @@ struct TransitionEffect
 };
 //---------------------------------------------------------------------------
 
-class CGUIManager
+class CGUIManager : public CManager
 {
 
 public:
 	// Init and End protocols
 	CGUIManager(const Math::Vect2i& resolution);
+	CGUIManager(const CXMLTreeNode& atts);
 	virtual ~CGUIManager() {Done();}  
 
 
-	bool								Init											(const std::string& initGuiXML);
+	void								Init											();
 	void								Done											();
 	bool								IsOk											() const																						{ return m_bIsOk; }
 	void								Render										();
 	void								RenderPointerMouse				();
-	void								Update										(float elapsedTime);
+	void								Update										();
 	void								SetScreenResolution				(const Math::Vect2i& resolution);
 	bool								LoadGuiFiles							(const std::string& pathWindows);
 	bool								ReloadGuiFiles						();
@@ -99,8 +101,8 @@ public:
 
 private:
 	void								Release										();
-	void								RenderTransitionEffect		(CGraphicsInstance *GraphicsInstance);
-	bool								UpdateTransitionEffect		(float elapsedTime);
+	void								RenderTransitionEffect		();
+	bool								UpdateTransitionEffect		();
 
 private:
 	Math::Vect2i															m_ScreenResolution;

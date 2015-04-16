@@ -21,7 +21,7 @@ class CGraphicsManager : public CManager
 {
 public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
-  typedef enum { NONE_FLIP } ETypeFlip;
+  typedef enum { FLIP_X, FLIP_Y, NONE_FLIP } ETypeFlip;
   CGraphicsManager( const CXMLTreeNode& atts );
   ~CGraphicsManager();
 

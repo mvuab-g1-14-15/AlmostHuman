@@ -4,8 +4,10 @@
 #include "InputManager.h"
 #include "Texture/Texture.h"
 #include "GraphicsManager.h"
-#include "FontManager.h"
+#include "Fonts/FontManager.h"
 #include "EngineManagers.h"
+#include "Core.h"
+#include "Timer\Timer.h"
 
 //---Constructor
 CEditableTextBox::CEditableTextBox(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
@@ -48,11 +50,11 @@ void CEditableTextBox::Render ()
 {
 	if (CGuiElement::m_bIsVisible)
 	{
-		CFontManager* fm = CORE->GetFontManager();
 		
 		if (m_pBackGroundTexture)
 		{
-			GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
+			//TODO RAUL
+            //GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pBackGroundTexture);
 		}
 		else
 		{
@@ -60,7 +62,7 @@ void CEditableTextBox::Render ()
 		}
 			
 		Math::Vect2i pos;
-		uint32 sizeY = fm->SizeY("X",m_uFontID);
+        uint32 sizeY = FontInstance->SizeY("X",m_uFontID);
 		pos.x = CGuiElement::m_Position.x + (uint32)m_fWidthMargin;
 		pos.y = CGuiElement::m_Position.y + (uint32)(CGuiElement::m_uHeight*0.5f - sizeY*0.5);
 		if( CGuiElement::m_bIsActive )
@@ -70,19 +72,19 @@ void CEditableTextBox::Render ()
 			if( m_uCursorPos > m_sBuffer.size() )
 			{
 				total_text = m_sBuffer + m_sFocusObject;
-				fm->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, total_text.c_str());
+				FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, total_text.c_str());
 			}
 			else
 			{
 				total_text = m_sBuffer.substr(0, m_uCursorPos);
 				total_text = total_text + m_sFocusObject;
 				total_text = total_text + m_sBuffer.substr(m_uCursorPos);
-				fm->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, total_text.c_str());
+				FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, total_text.c_str());
 			}
 		}
 		else
 		{
-			fm->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sBuffer.c_str());
+			FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sBuffer.c_str());
 		}
 
 		//Finalmente renderizamos el texto:
@@ -137,7 +139,7 @@ void CEditableTextBox::Update()
 		}
 		else
 		{
-			ProcessNewEntries(InputManagerInstance);
+			ProcessNewEntries();
 		}
 
 		if( InputManagerInstance->IsUpDown(IDV_KEYBOARD, KEY_RETURN) )
@@ -148,10 +150,10 @@ void CEditableTextBox::Update()
 
 		if( InputManagerInstance->IsDown(IDV_KEYBOARD, KEY_BACK) )
 		{
-			m_BackTime1 += elapsedTime;
+			m_BackTime1 += deltaTime;
 			if (m_BackTime1 > 0.7f)
 			{
-				m_BackTime2 += elapsedTime;
+				m_BackTime2 += deltaTime;
 				if (m_BackTime2 > 0.05f)
 				{
 					Remove1character();
@@ -175,7 +177,7 @@ void CEditableTextBox::Update()
 
 	
 		
-		m_fTimeCount += elapsedTime;
+		m_fTimeCount += deltaTime;
 		if( m_fTimeCount > m_fTime )
 		{
 			if( !m_sFocusObject.compare(" ") )
@@ -188,7 +190,7 @@ void CEditableTextBox::Update()
 	}// End if (CGuiElement::m_bFocus)
 
 	std::string temp = m_sBuffer+m_sFocusObject;
-	CFontManager* fm = CORE->GetFontManager();
+    CFontManager* fm = FontInstance;
 	uint32 sizeX = fm->SizeX(temp.c_str(), m_uFontID) + (uint32)(2*m_fWidthMargin);
 	if (sizeX > CGuiElement::m_uWidth)
 	{
@@ -217,14 +219,14 @@ bool CEditableTextBox::IsReturnPress ()
 		return false;
 }
 
-void CEditableTextBox::ProcessNewEntries (CInputManager* inputManager)
+void CEditableTextBox::ProcessNewEntries ()
 {
 	uint32 index= 237;
 	for(uint32 cont = 0; cont<=index; cont++)
 	{
-		if( inputManager->IsUpDown(IDV_KEYBOARD, cont))
+		if( InputManagerInstance->IsUpDown(IDV_KEYBOARD, cont))
 		{
-			if( inputManager->Scan2ascii(cont, m_Result))
+			if( InputManagerInstance->Scan2ascii(cont, m_Result))
 			{
 					std::string aux = m_sBuffer.substr(0, m_uCursorPos);
 					aux += char(m_Result[0]);

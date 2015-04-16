@@ -34,6 +34,7 @@ class CParticleManager;
 class CGizmosManager;
 class CTextureManager;
 class CSoundManager;
+class CGUIManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -66,6 +67,7 @@ public:
   GET_SET_PTR( CParticleManager, ParticleManager)
   GET_SET_PTR( CGizmosManager, GizmosManager)
   GET_SET_PTR( CTextureManager, TextureManager)
+  //GET_SET_PTR( CGUIManager, GUIManager)
 
   CSoundManager*    GetSoundManager() const;
   CGraphicsManager* GetGraphicsManager() const;
@@ -93,6 +95,7 @@ private:
   CGizmosManager*                       m_pGizmosManager;
   CTextureManager*                      m_pTextureManager;
   CSoundManager*                        m_pSoundManager;
+  //CGUIManager*                          m_pGUIManager;
 
   std::string                           m_ManagersPath;
 };

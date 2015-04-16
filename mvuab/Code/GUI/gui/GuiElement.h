@@ -12,11 +12,9 @@
 #include <string>
 #include <vector>
 #include <assert.h>
-//---Forward Declarations---
-class CRenderManager;
-class CFontManager;
-class CInputManager;
-//--------------------------
+#include "Utils/Types.h"
+#include "Math\Vector2.h"
+
 
 class CGuiElement
 {

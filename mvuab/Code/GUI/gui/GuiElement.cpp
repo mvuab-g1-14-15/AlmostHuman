@@ -1,11 +1,12 @@
-#include "__PCH_GUI.h"
+#include "../__PCH_GUI.h"
 
 #include "GuiElement.h"
-#include "Core/Core.h"
-#include "Script/ScriptManager.h"
+#include "Core.h"
+#include "ScriptManager.h"
 #include "Language/LanguageManager.h"
-#include "Graphics/RenderManager.h"
-#include "Graphics/FontManager.h"
+#include "GraphicsManager.h"
+#include "Fonts/FontManager.h"
+#include "EngineManagers.h"
 
 CGuiElement::CGuiElement(	uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent, 
 												 Math::Vect2f position_percent, TypeGuiElement type, std::string lit, uint32 textHeightOffset,
@@ -163,8 +164,9 @@ void CGuiElement::OnLoadValue( void )
 	if( m_sLuaCode_OnLoadValue.compare("") != 0)
 	{
 		//Ejecutar el código Lua:
-		CScriptManager * scriptManager = CORE->GetScriptManager();
-		scriptManager->RunScript(m_sLuaCode_OnLoadValue);
+		//TODO RAUL
+        //CScriptManager * scriptManager = CORE->GetScriptManager();
+        ScriptMInstance->RunCode(m_sLuaCode_OnLoadValue);
 	}
 }
 
@@ -173,13 +175,14 @@ void CGuiElement::OnSaveValue( void )
 	if( m_sLuaCode_OnSaveValue.compare("") != 0)
 	{
 		//Ejecutar el código Lua:
-		CScriptManager * scriptManager = CORE->GetScriptManager();
-		scriptManager->RunScript(m_sLuaCode_OnSaveValue);
+		//TODO RAUL
+        //CScriptManager * scriptManager = CORE->GetScriptManager();
+		ScriptMInstance->RunCode(m_sLuaCode_OnSaveValue);
 	}
 }
 
 
-void CGuiElement::Render (CRenderManager* render, CFontManager* fm)
+void CGuiElement::Render ()
 {
 	if (m_bIsVisible)
 	{
@@ -189,13 +192,13 @@ void CGuiElement::Render (CRenderManager* render, CFontManager* fm)
 		while(it!=itEnd)
 		{
 			CGuiElement* guiElement = *it;
-			guiElement->Render(render, fm);
+			guiElement->Render();
 			it++;
 		}
 	}//if (m_sLiteral != "")
 }
 
-void CGuiElement::RenderText (CRenderManager* render, CFontManager* fm)
+void CGuiElement::RenderText ()
 {
 	if (m_bIsVisible)
 	{
@@ -205,13 +208,13 @@ void CGuiElement::RenderText (CRenderManager* render, CFontManager* fm)
 			uint32 posX = CGuiElement::m_Position.x + m_uTextWidthOffset;
 			uint32 posY = CGuiElement::m_Position.y + m_uTextHeightOffset;
 
-			fm->DrawLiteral(posX, posY, m_sLiteral);
+            FontInstance->DrawLiteral(posX, posY, m_sLiteral);
 		}//if (m_sLiteral != "")
 
 	}//if (m_bIsVisible)
 }
 
-void CGuiElement::Update (CInputManager* input, float elapsedTime)
+void CGuiElement::Update ()
 {
 	if (m_bIsVisible && m_bIsActive)
 	{
@@ -221,7 +224,7 @@ void CGuiElement::Update (CInputManager* input, float elapsedTime)
 		while(it!=itEnd)
 		{
 			CGuiElement* guiElement = *it;
-			guiElement->Update(input, elapsedTime);
+			guiElement->Update();
 			it++;
 		}
 	}

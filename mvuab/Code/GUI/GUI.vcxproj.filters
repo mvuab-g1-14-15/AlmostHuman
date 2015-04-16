@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="gui">
       <UniqueIdentifier>{ad12bb67-6414-4ee7-9a1c-587e5c2f4783}</UniqueIdentifier>
     </Filter>
@@ -25,7 +21,7 @@
     <ClCompile Include="StaticText.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Windows.cpp" />
-    <ClCompile Include="GuiElement.cpp">
+    <ClCompile Include="gui\GuiElement.cpp">
       <Filter>gui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +40,7 @@
     <ClInclude Include="StaticText.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Windows.h" />
-    <ClInclude Include="GuiElement.h">
+    <ClInclude Include="gui\GuiElement.h">
       <Filter>gui</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "GraphicsManager.h"
 #include "Logger/Logger.h"
 #include "EngineManagers.h"
+#include "ScriptManager.h"
 
 
 //---Constructor
@@ -50,7 +51,8 @@ void CButton::Render	()
 		case BS_OVER:
 			if (m_pOverTexture)
 			{
-				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOverTexture);
+//TODO RAUL
+                //				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOverTexture);
 			}
 			else
 			{
@@ -60,7 +62,8 @@ void CButton::Render	()
 		case BS_CLICKED:
 			if (m_pClickedTexture)
 			{
-				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pClickedTexture);
+				//TODO RAUL
+                //GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pClickedTexture);
 			}
 			else
 			{
@@ -76,7 +79,8 @@ void CButton::Render	()
 		{
 			if (m_pDeactivatedTexture)
 			{
-				GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pDeactivatedTexture);
+				//TODO RAUL
+                //GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pDeactivatedTexture);
 			}
 			else
 			{
@@ -171,8 +175,8 @@ void CButton::OnClickedButton( void )
 	if (m_sLuaCode_OnClicked.compare(""))
 	{
 		//Lanzar acción en Lua:
-		CScriptManager* scriptManager = CORE->GetScriptManager();
-		scriptManager->RunScript(m_sLuaCode_OnClicked);
+		//TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
+		ScriptMInstance->RunCode(m_sLuaCode_OnClicked);
 	}
 }
 
@@ -181,8 +185,8 @@ void CButton::OnOverButton( void )
 	if (m_sLuaCode_OnOver.compare(""))
 	{
 		//Lanzar acción en Lua:
-		CScriptManager* scriptManager = CORE->GetScriptManager();
-		scriptManager->RunScript(m_sLuaCode_OnOver);
+		//TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
+        ScriptMInstance->RunCode(m_sLuaCode_OnOver);
 	}
 }
 

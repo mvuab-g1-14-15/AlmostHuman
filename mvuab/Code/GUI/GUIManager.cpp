@@ -22,6 +22,9 @@
 #include "RadioBox.h"
 #include "Slider.h"
 #include "Statictext.h"
+#include "EngineConfig.h"
+#include "Core.h"
+#include "Timer\Timer.h"
 //-------------------------
 
 
@@ -29,12 +32,14 @@
 // Constructor
 //----------------------------------------------------------------------------
 CGUIManager::CGUIManager(const Math::Vect2i& resolution)
-: m_sCurrentWindows("Main.xml")
+: 
+CManager()
+, m_sCurrentWindows("Main.xml")
 , m_TextBox(NULL)
 , m_PointerMouse(NULL)
 , m_bRenderError(false)
 , m_bUpdateError(false)
-, m_ScreenResolution(resolution)
+, m_ScreenResolution(EngineConfigInstance->GetScreenResolution())
 , m_bIsOk(false)
 , m_bLoadedGuiFiles(false)
 , m_sLastLoadpathGUI_XML("")
@@ -42,6 +47,23 @@ CGUIManager::CGUIManager(const Math::Vect2i& resolution)
 , m_bVisiblePointerMouse(true)
 {}
 
+
+CGUIManager::CGUIManager(const CXMLTreeNode& atts)
+: 
+CManager(atts)
+, m_sCurrentWindows("Main.xml")
+, m_TextBox(NULL)
+, m_PointerMouse(NULL)
+, m_bRenderError(false)
+, m_bUpdateError(false)
+, m_ScreenResolution(EngineConfigInstance->GetScreenResolution())
+, m_bIsOk(false)
+, m_bLoadedGuiFiles(false)
+, m_sLastLoadpathGUI_XML("")
+, m_bFirstUpdate(true)
+, m_bVisiblePointerMouse(true)
+{
+}
 //----------------------------------------------------------------------------
 // Finalize data
 //----------------------------------------------------------------------------
@@ -79,7 +101,7 @@ void CGUIManager::Release ()
 //----------------------------------------------------------------------------
 // Init
 //----------------------------------------------------------------------------
-bool CGUIManager::Init (const std::string& initGuiXML)
+void CGUIManager::Init ()
 {
 	
 	m_bIsOk = false;
@@ -87,9 +109,9 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 	LOG_INFO_APPLICATION("GUIManager:: calling initialization");
 
 	CXMLTreeNode parser;
-	if (!parser.LoadFile(initGuiXML.c_str()))
+    if (!parser.LoadFile(mConfigPath.c_str()))
 	{
-		std::string msg_error = "CGUIManager::Init-> Error al leer el archivo de configuracion GUI: " + initGuiXML;
+		std::string msg_error = "CGUIManager::Init-> Error al leer el archivo de configuracion GUI: " + mConfigPath;
 		LOG_ERROR_APPLICATION(msg_error.c_str());
 		throw CException(__FILE__, __LINE__, msg_error);
 	}
@@ -110,7 +132,7 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 		}
 		else
 		{
-			std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <GuiFiles> del archivo de configuracion GUI: " + initGuiXML;
+			std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <GuiFiles> del archivo de configuracion GUI: " + mConfigPath;
 			LOG_ERROR_APPLICATION(msg_error.c_str());
 			throw CException(__FILE__, __LINE__, msg_error);
 		}
@@ -156,7 +178,7 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 			}
 			else
 			{
-				std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <TextBox> del archivo de configuracion GUI: " + initGuiXML;
+				std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <TextBox> del archivo de configuracion GUI: " + mConfigPath;
 				LOG_ERROR_APPLICATION(msg_error.c_str());
 				throw CException(__FILE__, __LINE__, msg_error);
 			}
@@ -181,7 +203,7 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 			}
 			else
 			{
-				std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <PointerMouse> del archivo de configuracion GUI: " + initGuiXML;
+				std::string msg_error = "CGUIManager::Init-> Error al intentar leer el tag <PointerMouse> del archivo de configuracion GUI: " + mConfigPath;
 				LOG_ERROR_APPLICATION(msg_error.c_str());
 				throw CException(__FILE__, __LINE__, msg_error);
 			}
@@ -201,7 +223,7 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 		LOG_INFO_APPLICATION("CSoundManager:: online (ok)");
 	}
 
-	return m_bIsOk;
+	//return m_bIsOk;
 
 }
 
@@ -220,7 +242,7 @@ void CGUIManager::Render ()
 			{
 				CWindows * currentWindows = it->second;
 				currentWindows->Render();
-				RenderTransitionEffect(GraphicsInstance);
+				RenderTransitionEffect();
 				m_bRenderError = false;
 			}
 			else
@@ -242,16 +264,16 @@ void CGUIManager::Render ()
 }
 
 
-void	CGUIManager::RenderPointerMouse	(CGraphicsInstance *GraphicsInstance, CFontManager* fontManager)
+void	CGUIManager::RenderPointerMouse	()
 {
 	if(m_bVisiblePointerMouse)
-			m_PointerMouse->Render(GraphicsInstance, fontManager);
+			m_PointerMouse->Render();
 }
 //----------------------------------------------------------------------------
 // Update
 //----------------------------------------------------------------------------
 
-void CGUIManager::Update (float elapsedTime)
+void CGUIManager::Update ()
 {
 	if (m_bIsOk)
 	{
@@ -271,8 +293,6 @@ void CGUIManager::Update (float elapsedTime)
 			m_bFirstUpdate = false;
 		}
 
-		CInputManager* InputManagerInstance = InputManagerInstance;
-
 		m_PointerMouse->Update();
 
 		m_TextBox->Update();
@@ -285,7 +305,7 @@ void CGUIManager::Update (float elapsedTime)
 			if( it != m_WindowsMap.end() )
 			{
 				CWindows * currentWindow = it->second;
-				if (!UpdateTransitionEffect(elapsedTime))
+				if (!UpdateTransitionEffect())
 				{
 					currentWindow->Update();
 				}
@@ -303,7 +323,7 @@ void CGUIManager::Update (float elapsedTime)
 	}
 }
 
-void CGUIManager::RenderTransitionEffect(CGraphicsInstance *GraphicsInstance)
+void CGUIManager::RenderTransitionEffect()
 {
 	if (m_sTransitionEffect.m_bDoEffect)
 	{
@@ -340,11 +360,11 @@ void CGUIManager::RenderTransitionEffect(CGraphicsInstance *GraphicsInstance)
 	}
 }
 
-bool CGUIManager::UpdateTransitionEffect (float elapsedTime)
+bool CGUIManager::UpdateTransitionEffect ()
 {
 	if (m_sTransitionEffect.m_bDoEffect)
 	{
-		m_sTransitionEffect.m_fTimeCounter += elapsedTime;
+		m_sTransitionEffect.m_fTimeCounter += deltaTime;
 
 		if (!m_sTransitionEffect.m_bActiveWindows && m_sTransitionEffect.m_fTimeCounter > m_sTransitionEffect.m_fTransitionTime*0.5f)
 		{

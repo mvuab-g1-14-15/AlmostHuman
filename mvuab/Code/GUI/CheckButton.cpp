@@ -22,7 +22,7 @@ CCheckButton::CCheckButton(	uint32 windowsHeight, uint32 windowsWidth, float hei
 , m_sLuaCode_OnOver("")
 , m_OnColor(Math::colGREEN)
 , m_OffColor(Math::colRED)
-, m_DeactivatedColor(colYELLOW)
+, m_DeactivatedColor(Math::colYELLOW)
 {
 	if (isOn)
 		m_eState = CBS_ON;
@@ -44,7 +44,8 @@ void CCheckButton::Render ()
 			{
 				if (m_pOnTexture)
 				{
-					GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOnTexture);
+                    //TODO RAUL
+					//GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOnTexture);
 				}
 				else
 				{
@@ -55,7 +56,8 @@ void CCheckButton::Render ()
 			{
 				if (m_pOnTexture)
 				{
-					GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOffTexture);
+                    //TODO RAUL
+					//GraphicsInstance->DrawQuad2D(CGuiElement::m_Position,CGuiElement::m_uWidth,CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_pOffTexture);
 				}
 				else
 				{
@@ -160,7 +162,7 @@ void CCheckButton::OnCheckOn ()
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
 		ScriptMInstance->RunCode(m_sLuaCode_OnCheckOn);
 	}
 }
@@ -174,7 +176,7 @@ void CCheckButton::OnCheckOff ()
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
 		ScriptMInstance->RunCode(m_sLuaCode_OnCheckOff);
 	}
 }
@@ -185,7 +187,7 @@ void CCheckButton::OnOverButton ()
 	{
 		//Lanzar acción en Lua:
 		//TODO RAUL
-		//CScriptManager* scriptManager = CORE->GetScriptManager();
+		////TODO RAUL SCRIPT//CScriptManager* scriptManager = CORE->GetScriptManager();
 		ScriptMInstance->RunCode(m_sLuaCode_OnOver);
 	}
 }

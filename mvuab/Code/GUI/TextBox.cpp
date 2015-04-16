@@ -25,7 +25,7 @@ void CTextBox::Render ()
 
 	if (CGuiElement::m_bIsVisible)
 	{
-		CDialogBox::Render(GraphicsInstance, FontInstance);
+		CDialogBox::Render();
 		//Pintamos el texto
 		FontInstance->DrawText(	CGuiElement::m_Position.x+20, CGuiElement::m_Position.y + (uint32)(CGuiElement::m_uHeight*0.4f), 
 									m_TextColor, m_uFontID, m_sMessage.c_str());
