@@ -167,7 +167,7 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
   m_lowLevelIO->SetBasePath( L"./Data/sounds/" );
 
   AkBankID bankID;
-  m_ObjectId = 0;
+  m_ObjectId = 2;
 
   CXMLTreeNode l_File;
 
@@ -220,6 +220,8 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
                                    StrGameObject2dName.c_str() );
             return false;
           }
+
+
         }
       }
       else if ( TagName == "GameObject3d" )
@@ -233,8 +235,6 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
 
         m_GameObjectMap[StrGameObject3dName.c_str()] =  ++m_ObjectId;
 
-        SetGameObjectPosition( StrGameObject3dName.c_str(), PosGameObject3d, DirGameObject3d );
-
         if ( StrRegisteredGameObject3d == "true" )
         {
           AKRESULT l_AkResult =  RegisterGameObject( StrGameObject3dName.c_str() );
@@ -246,6 +246,8 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
             return false;
           }
         }
+
+        SetGameObjectPosition( StrGameObject3dName.c_str(), PosGameObject3d, DirGameObject3d );
       }
 
       if ( TagName == "InitEvent" )
