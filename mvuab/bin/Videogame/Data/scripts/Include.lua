@@ -46,9 +46,11 @@ end
 
 function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition()
-	local l_EnemyDir = enemy:GetDirection()
+	local l_EnemyDir = enemy:GetRenderableObject():GetDirection()
 	
-	l_ViewingPlayer = physic_manager:PlayerInSight(5, 45, l_EnemyPos, l_EnemyDir)
+	--core:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
+	
+	l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
 
 	return l_ViewingPlayer
 --[[

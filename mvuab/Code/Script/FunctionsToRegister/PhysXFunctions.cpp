@@ -92,14 +92,15 @@ void removeResource( T val )
 
 bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction)
 {
-	std::vector<CPhysicUserData*> l_UserDatas = PhysicManager->OverlapConeActor(_Distance, _Angle, _Position, _Direction, 0xffffffff);
-	std::vector<CPhysicUserData*>::iterator it = l_UserDatas.begin(),
+	const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapConeActor(_Distance, _Angle, _Position, _Direction, 0xffffffff);
+	std::vector<CPhysicUserData*>::const_iterator it = l_UserDatas.begin(),
 											it_end = l_UserDatas.end();
 	for( ; it!=it_end; ++it)
 	{
 		CPhysicUserData* l_UserData = *it;
-		std::string name = l_UserData->GetName();
-		if (name == "Player")
+		CPhysicController* l_Controller = l_UserData->GetController();
+		std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
+		if ( name == "Player")
 			return true;
 	}
 	return false;

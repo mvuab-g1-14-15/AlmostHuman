@@ -1011,7 +1011,9 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
 {
     assert( m_pScene );
     NxSphere l_WorldSphere( NxVec3( _vPosSphere.x, _vPosSphere.y, _vPosSphere.z ), _fRadiusSphere );
-    NxU32 nbShapes = m_pScene->getNbDynamicShapes();
+	//NxU32 nbShapes = m_pScene->getNbActors();
+	// Hardcoded to get all the possible objects
+	NxU32 nbShapes( 1024 );
     NxShape** shapes = new NxShape* [nbShapes];
 
     for ( NxU32 i = 0; i < nbShapes; i++ )
@@ -1066,7 +1068,17 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
 	for( ; it!=it_end; ++it)
 	{
 		CPhysicUserData* l_UserData = *it;
-		Math::Vect3f l_ActorPos = l_UserData->GetActor()->GetPosition();
+		CPhysicController* l_Controller = l_UserData->GetController();
+		CPhysicActor* l_Actor = l_UserData->GetActor();
+
+		Math::Vect3f l_ActorPos;
+		if (l_Controller)
+			l_ActorPos = l_Controller->GetPosition();
+		else if (l_Actor)
+			l_ActorPos = l_Actor->GetPosition();
+		else
+			continue;
+
 		Math::Vect3f l_VectToActor = l_ActorPos - _Position;
 		l_VectToActor.Normalize();
 
