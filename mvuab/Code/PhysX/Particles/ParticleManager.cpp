@@ -1,17 +1,18 @@
 #include "ParticleManager.h"
 #include "Timer\Timer.h"
 #include "Core.h"
+
 #include "EngineConfig.h"
 #include "SphereEmitter.h"
+#include "TrailEmitter.h"
 #include "CubeEmitter.h"
 
-CParticleManager::CParticleManager()
-	:CManager()
+
+CParticleManager::CParticleManager() :CManager()
 {
 }
 
-CParticleManager::CParticleManager(CXMLTreeNode& atts)
-	: CManager(atts)
+CParticleManager::CParticleManager(CXMLTreeNode& atts) : CManager(atts)
 {
 }
 
@@ -139,7 +140,12 @@ void CParticleManager::AddEmitter( CParticleEmitter *Emitter)
     m_Emitters.push_back(Emitter);
 }
 
-CCubeEmitter* CParticleManager::CreateCubeEmitter()
+CCubeEmitter *CParticleManager::CreateCubeEmitter()
 {
-  return new CCubeEmitter();
+    return new CCubeEmitter();
+}
+
+CTrailEmitter *CParticleManager::CreateTrailEmitter()
+{
+    return new CTrailEmitter();
 }
