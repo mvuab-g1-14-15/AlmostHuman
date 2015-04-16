@@ -1213,3 +1213,104 @@ void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMe
   l_Effect->End();
   SetTransform( Math::Mat44f() );
 }
+
+//void CGraphicsManager::DrawQuad2D (const Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, SRectangle2D& coordText)
+//{
+//	Vect2i finalPos = pos;
+//	CalculateAlignment(w, h, alignment,finalPos);
+//
+//	// finalPos = [0] 
+//	//
+//	//  [0]------[2]
+//	//   |        |
+//	//   |        |
+//	//   |        |
+//	//  [1]------[3]
+//	
+//	Vect2f coord_text[4];
+//	coord_text[0].x = coordText.m_vBottomLeft.x;	
+//	coord_text[0].y = coordText.m_vTopRight.y;
+//	coord_text[1]		= coordText.m_vBottomLeft;
+//	coord_text[2]		= coordText.m_vTopRight;
+//	coord_text[3].x = coordText.m_vTopRight.x;
+//	coord_text[3].y = coordText.m_vTopRight.y;
+//			
+//	unsigned short indices[6]={0,2,1,1,2,3};
+//	SCREEN_TEXTURE_VERTEX v[4] =
+//	{
+//			{ (float)finalPos.x,		(float)finalPos.y,		0.f,1.f, coord_text[0].x,	coord_text[0].y} //(x,y) sup_esq.
+//		,	{ (float)finalPos.x,		(float)finalPos.y+h,	0.f,1.f, coord_text[1].x,	coord_text[1].y} //(x,y) inf_esq.
+//		, { (float)finalPos.x+w,	(float)finalPos.y,		0.f,1.f, coord_text[2].x,	coord_text[2].y} //(x,y) sup_dr.
+//		,	{ (float)finalPos.x+w,	(float)finalPos.y+h,	0.f,1.f, coord_text[3].x,	coord_text[3].y} //(x,y) inf_dr.
+//	};
+//
+//	m_pD3DDevice->SetFVF( SCREEN_TEXTURE_VERTEX::getFlags() );
+//	m_pD3DDevice->SetTexture(0, texture->GetD3DXTexture() );
+//	m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2,indices,D3DFMT_INDEX16, v, sizeof( SCREEN_TEXTURE_VERTEX ) );
+//}
+
+void CGraphicsManager::DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, ETypeFlip flip)
+{
+	Math::Vect2i finalPos = pos;
+	CalculateAlignment(w, h, alignment,finalPos);
+
+	// finalPos = [0] 
+	//
+	//  [0]------[2]
+	//   |        |
+	//   |        |
+	//   |        |
+	//  [1]------[3]
+	
+	Math::Vect2f coord_text[4];
+	uint32 w_aux, h_aux;
+	switch(flip)
+	{
+	case NONE_FLIP:
+		coord_text[0].x = 0.f;	coord_text[0].y = 0.f;
+		coord_text[1].x = 0.f;	coord_text[1].y = 1.f;
+		coord_text[2].x = 1.f;	coord_text[2].y = 0.f;
+		coord_text[3].x = 1.f;	coord_text[3].y = 1.f;
+		break;
+	case FLIP_X:
+		//Pintamos primero el quad de la izquierda:
+		w_aux = (uint32)(w*0.5);
+		DrawQuad2D(finalPos, w_aux, h, UPPER_LEFT, texture, NONE_FLIP);
+		finalPos.x += w_aux;
+		w = w - w_aux;
+		coord_text[0].x = 0.99f;	coord_text[0].y = 0.f;
+		coord_text[1].x = 0.99f;	coord_text[1].y = 1.f;
+		coord_text[2].x = 0.f;		coord_text[2].y = 0.f;
+		coord_text[3].x = 0.f;		coord_text[3].y = 1.f;
+		break;
+	case FLIP_Y:
+		h_aux = (uint32)(h*0.5);
+		DrawQuad2D(finalPos, w, h_aux, UPPER_LEFT, texture, NONE_FLIP);
+		finalPos.y += h_aux + 1;
+		h = h - h_aux -1;
+		coord_text[0].x = 1.f;	coord_text[0].y = 0.f;
+		coord_text[1].x = 1.f;	coord_text[1].y = 1.f;
+		coord_text[2].x = 0.f;	coord_text[2].y = 0.f;
+		coord_text[3].x = 0.f;	coord_text[3].y = 1.f;
+		break;
+	default:
+		{
+			LOG_ERROR_APPLICATION("Manager:: Se está intentado renderizar un quad2d con un flip desconocido");
+		}
+		
+	}
+	
+	
+	unsigned short indices[6]={0,2,1,1,2,3};
+	SCREEN_TEXTURE_VERTEX v[4] =
+	{
+			{ (float)finalPos.x,		(float)finalPos.y,		0.f,1.f, coord_text[0].x,	coord_text[0].y} //(x,y) sup_esq.
+		,	{ (float)finalPos.x,		(float)finalPos.y+h,	0.f,1.f, coord_text[1].x,	coord_text[1].y} //(x,y) inf_esq.
+		, { (float)finalPos.x+w,	(float)finalPos.y,		0.f,1.f, coord_text[2].x,	coord_text[2].y} //(x,y) sup_dr.
+		,	{ (float)finalPos.x+w,	(float)finalPos.y+h,	0.f,1.f, coord_text[3].x,	coord_text[3].y} //(x,y) inf_dr.
+	};
+
+	GetDevice()->SetFVF( SCREEN_TEXTURE_VERTEX::GetFVF() );
+	GetDevice()->SetTexture(0, texture->GetDXTexture() );
+	GetDevice()->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2,indices,D3DFMT_INDEX16, v, sizeof( SCREEN_TEXTURE_VERTEX ) );
+}

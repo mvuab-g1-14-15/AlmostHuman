@@ -90,8 +90,9 @@ void CScriptManager::RunCode( const std::string& Code )
 
     LOG_ERROR_APPLICATION( message.c_str() );
 
-    ASSERT(false, message);
+    ASSERT(false, "Running lua code");
 
+// AlexJenci cheat mode
 #ifdef _DEBUG
     Reload();
 #endif

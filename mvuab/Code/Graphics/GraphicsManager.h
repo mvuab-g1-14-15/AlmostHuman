@@ -21,7 +21,7 @@ class CGraphicsManager : public CManager
 {
 public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
-  typedef enum { FLIP_X, FLIP_Y, NONE_FLIP } ETypeFlip;
+  typedef enum { NONE_FLIP, FLIP_X, FLIP_Y} ETypeFlip;
   CGraphicsManager( const CXMLTreeNode& atts );
   ~CGraphicsManager();
 
@@ -112,6 +112,9 @@ public:
                                 CTexture* Texture );
   void DrawHalfLowerSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
   void DrawHalfUpperSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
+
+  //void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, SRectangle2D& coordText);
+  void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, ETypeFlip flip = NONE_FLIP);
 
   void DrawTeapot();
   void CreateQuadBuffers();

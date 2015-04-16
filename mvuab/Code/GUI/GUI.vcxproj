@@ -11,44 +11,41 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="CheckButton.cpp" />
-    <ClCompile Include="DialogBox.cpp" />
-    <ClCompile Include="dummy.cpp" />
-    <ClCompile Include="EditableTextBox.cpp" />
+    <ClCompile Include="GuiElement\GuiElement.cpp" />
     <ClCompile Include="GUIManager.cpp" />
-    <ClCompile Include="gui\GuiElement.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="PointerMouse.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
-    <ClCompile Include="RadioBox.cpp" />
-    <ClCompile Include="Slider.cpp" />
-    <ClCompile Include="StaticText.cpp" />
-    <ClCompile Include="TextBox.cpp" />
-    <ClCompile Include="Windows.cpp" />
-    <ClCompile Include="__PCH_GUI.cpp" />
+    <ClCompile Include="MousePointer\PointerMouse.cpp" />
+    <ClCompile Include="Widgets\Button.cpp" />
+    <ClCompile Include="Widgets\CheckButton.cpp" />
+    <ClCompile Include="Widgets\DialogBox.cpp" />
+    <ClCompile Include="Widgets\EditableTextBox.cpp" />
+    <ClCompile Include="Widgets\Image.cpp" />
+    <ClCompile Include="Widgets\ProgressBar.cpp" />
+    <ClCompile Include="Widgets\RadioBox.cpp" />
+    <ClCompile Include="Widgets\Slider.cpp" />
+    <ClCompile Include="Widgets\StaticText.cpp" />
+    <ClCompile Include="Widgets\TextBox.cpp" />
+    <ClCompile Include="Window\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="CheckButton.h" />
-    <ClInclude Include="DialogBox.h" />
-    <ClInclude Include="EditableTextBox.h" />
+    <ClInclude Include="GuiElement\GuiElement.h" />
     <ClInclude Include="GUIManager.h" />
-    <ClInclude Include="gui\GuiElement.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="PointerMouse.h" />
-    <ClInclude Include="ProgressBar.h" />
-    <ClInclude Include="RadioBox.h" />
-    <ClInclude Include="Slider.h" />
-    <ClInclude Include="StaticText.h" />
-    <ClInclude Include="TextBox.h" />
-    <ClInclude Include="Windows.h" />
-    <ClInclude Include="__PCH_GUI.h" />
+    <ClInclude Include="MousePointer\PointerMouse.h" />
+    <ClInclude Include="Widgets\Button.h" />
+    <ClInclude Include="Widgets\CheckButton.h" />
+    <ClInclude Include="Widgets\DialogBox.h" />
+    <ClInclude Include="Widgets\EditableTextBox.h" />
+    <ClInclude Include="Widgets\Image.h" />
+    <ClInclude Include="Widgets\ProgressBar.h" />
+    <ClInclude Include="Widgets\RadioBox.h" />
+    <ClInclude Include="Widgets\Slider.h" />
+    <ClInclude Include="Widgets\StaticText.h" />
+    <ClInclude Include="Widgets\TextBox.h" />
+    <ClInclude Include="Window\Windows.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0C7A6F39-A4DF-4B75-B0B1-E48DCA700307}</ProjectGuid>
+    <ProjectGuid>{BBD0BA00-2E9B-4699-AADA-FB87F9F62E81}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GUI</RootNamespace>
+    <RootNamespace>Gui</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,8 +86,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Script;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,6 +107,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

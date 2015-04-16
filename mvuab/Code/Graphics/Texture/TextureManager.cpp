@@ -36,6 +36,7 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
     if ( !t->Load( fileName ) )
     {
       CHECKED_DELETE( t );
+	  LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
       return 0;
     }
 

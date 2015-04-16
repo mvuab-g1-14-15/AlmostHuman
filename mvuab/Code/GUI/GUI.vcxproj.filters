@@ -1,47 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="gui">
-      <UniqueIdentifier>{ad12bb67-6414-4ee7-9a1c-587e5c2f4783}</UniqueIdentifier>
+    <Filter Include="GuiElement">
+      <UniqueIdentifier>{188b7db0-258a-45eb-bc4a-a0f8eeea1515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{9949af92-c5a7-4a8f-b4d4-8bc52383c9f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Widgets">
+      <UniqueIdentifier>{34191a56-736d-48eb-8779-6f975d7c6412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MousePointer">
+      <UniqueIdentifier>{190beebc-bb1f-4a53-9df1-3696b1345eea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dummy.cpp" />
-    <ClCompile Include="__PCH_GUI.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="CheckButton.cpp" />
-    <ClCompile Include="DialogBox.cpp" />
-    <ClCompile Include="EditableTextBox.cpp" />
+    <ClCompile Include="GuiElement\GuiElement.cpp">
+      <Filter>GuiElement</Filter>
+    </ClCompile>
     <ClCompile Include="GUIManager.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="PointerMouse.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
-    <ClCompile Include="RadioBox.cpp" />
-    <ClCompile Include="Slider.cpp" />
-    <ClCompile Include="StaticText.cpp" />
-    <ClCompile Include="TextBox.cpp" />
-    <ClCompile Include="Windows.cpp" />
-    <ClCompile Include="gui\GuiElement.cpp">
-      <Filter>gui</Filter>
+    <ClCompile Include="Window\Windows.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Button.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\CheckButton.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\DialogBox.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\EditableTextBox.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Image.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\ProgressBar.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\RadioBox.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Slider.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\StaticText.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\TextBox.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="MousePointer\PointerMouse.cpp">
+      <Filter>MousePointer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__PCH_GUI.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="CheckButton.h" />
-    <ClInclude Include="DialogBox.h" />
-    <ClInclude Include="EditableTextBox.h" />
+    <ClInclude Include="GuiElement\GuiElement.h">
+      <Filter>GuiElement</Filter>
+    </ClInclude>
     <ClInclude Include="GUIManager.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="PointerMouse.h" />
-    <ClInclude Include="ProgressBar.h" />
-    <ClInclude Include="RadioBox.h" />
-    <ClInclude Include="Slider.h" />
-    <ClInclude Include="StaticText.h" />
-    <ClInclude Include="TextBox.h" />
-    <ClInclude Include="Windows.h" />
-    <ClInclude Include="gui\GuiElement.h">
-      <Filter>gui</Filter>
+    <ClInclude Include="Window\Windows.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\TextBox.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Button.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\CheckButton.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\DialogBox.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\EditableTextBox.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Image.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\ProgressBar.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\RadioBox.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Slider.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\StaticText.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="MousePointer\PointerMouse.h">
+      <Filter>MousePointer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
