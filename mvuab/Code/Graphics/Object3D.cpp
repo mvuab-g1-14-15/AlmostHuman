@@ -48,7 +48,7 @@ void CObject3D::MakeTransform()
     m_Transform = translation * scale * ( rotationX * rotationY * rotationZ );
 }
 
-const Math::Vect3f& CObject3D::GetDirection() const
+Math::Vect3f CObject3D::GetDirection() const
 {
 	Math::Vect3f l_Direction( Math::Utils::Cos( m_fYaw ) * Math::Utils::Cos( m_fPitch ), Math::Utils::Sin( m_fPitch ),
 							Math::Utils::Sin( m_fYaw ) * Math::Utils::Cos( m_fPitch ) );

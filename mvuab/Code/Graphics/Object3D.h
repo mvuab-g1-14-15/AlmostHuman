@@ -50,7 +50,7 @@ class CObject3D
         {
             return m_fPitch;
         }
-		const Math::Vect3f& GetDirection() const;
+		Math::Vect3f GetDirection() const;
         const Math::Vect3f& GetPosition() const
         {
             return m_Position;
