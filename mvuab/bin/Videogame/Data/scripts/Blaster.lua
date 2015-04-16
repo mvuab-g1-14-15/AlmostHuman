@@ -41,25 +41,25 @@ function CBlaster:GetEnemyFromRay()
 end
 
 function CBlaster:CreateParticles(position, direction)
-	l_Emitter = particle_manager:CreateCubeEmitter()
+	l_Emitter = particle_manager:CreateTrailEmitter()
 	l_Emitter:SetTextureName( "Data/textures/red_smoke.png" )
 	
 	l_Emitter:SetActive( true )
-    l_Emitter:SetEmitterLifeTime( 10 )
-    l_Emitter:SetLifeTime( 1.0, 5.0 )
+    l_Emitter:SetEmitterLifeTime(10)
+    l_Emitter:SetLifeTime(1.0, 5.0)
 	l_Emitter:SetTimeToEmit(0.1);
 	
-    l_Emitter:SetAcceleration( Vect3f(0.0) )
-    l_Emitter:SetPosition( position )
-    l_Emitter:SetVelocity( direction )
+    l_Emitter:SetAcceleration(Vect3f(0.0))
+    l_Emitter:SetPosition(position)
+    l_Emitter:SetVelocity(direction)
     
-	l_Emitter:SetDepth( 0, 0 )
-    l_Emitter:SetWidth( 0, 0 )
-    l_Emitter:SetHeight( 0, 0 )
+	l_Emitter:SetSize(0.1, 0.5)
+    l_Emitter:SetPitch(0.0, 180.0)
+    l_Emitter:SetYaw(0.0, 360.0)
 	
-	l_Emitter:SetSize( 0.1, 0.1 )
-	l_Emitter:SetRandom( 1, 5 )
-    l_Emitter:Generate(100)
+	l_Emitter:SetSize(0.1, 1.0)
+	l_Emitter:SetRandom(1, 5)
+    l_Emitter:Generate(1)
 	particle_manager:AddEmitter( l_Emitter )
 end
 
