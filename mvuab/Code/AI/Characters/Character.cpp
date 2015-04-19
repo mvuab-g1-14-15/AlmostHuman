@@ -23,11 +23,6 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-  if ( m_Name == "Enemy1" )
-  {
-    CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
-    l_SM->SetGameObjectPosition( "TestGameObject3d", m_Position, GetDirection() );
-  }
 }
 
 void CCharacter::Render()

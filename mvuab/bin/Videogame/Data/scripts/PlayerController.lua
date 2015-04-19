@@ -50,12 +50,9 @@ end
 function CPlayerController:Update()
 	local dt = timer:GetElapsedTime()
 
-	sound_manager:SetListenerPosition(self.GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
-
 	--local l_PlayerCamera = camera_manager:GetCamera("TestProcessCam")
 	local l_PlayerCamera = camera_manager:GetCurrentCamera()
 	self:CalculateDirectionVectors(l_PlayerCamera)
-	
 	self:UpdateCamera(l_PlayerCamera, dt)
 	
 	--Yaw smooth movement
@@ -80,6 +77,8 @@ function CPlayerController:Update()
 	self:UpdateInput()
 	
 	self:UpdateTimers(dt)
+
+	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
 	
 	local l_Speed = self.Speed
 	if self.Crouch then
@@ -262,7 +261,7 @@ function CPlayerController:UpdateInput()
 	end
 	if action_manager:DoAction("ShootDown") then
 		self.Shooting = true
-		sound_manager:PlayEvent( "Shoot", "TestGameObject3d" )
+		sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
 	end
 	if action_manager:DoAction("ShootUp") then
 		self.Shooting = false

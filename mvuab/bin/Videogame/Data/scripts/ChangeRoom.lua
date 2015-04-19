@@ -6,5 +6,6 @@ function ChangeRoom()
 	if g_ActualRoom > #g_Rooms then
 		g_ActualRoom = 1
 	end
+	sound_manager:PlayEvent("Open_Close_Door_Event","TestGameObject3d")
 	return g_Rooms[g_ActualRoom]
 end

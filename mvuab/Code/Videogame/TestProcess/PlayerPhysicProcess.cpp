@@ -134,18 +134,6 @@ void CPlayerPhysicProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     CCore::GetSingletonPtr()->GetActionManager()->Reload();
 
-  if ( pActionManager->DoAction( "Shoot" ) )
-  {
-    CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
-    l_SM->PauseEvent( "Shoot", "TestGameObject3d" );
-  }
-
-  CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
-  //   l_SM->SetListenerPosition( CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetPosition(),
-  //                              CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetDirection(),
-  //                              CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetVecUp() );
-  //l_SM->SetGameObjectPosition( "TestGameObject3d", Vect3f( 0.0f, 0.0f, 0.0f ), Vect3f( 0.0f, 0.0f, 0.0f ) );
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );
 
 
@@ -202,8 +190,7 @@ void CPlayerPhysicProcess::Init()
 {
   //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "load_gameplay()" );
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  //CSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
+
 
   /*uint32 l_source1 =  l_SM->CreateSource();
   l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
@@ -242,9 +229,6 @@ void CPlayerPhysicProcess::Init()
   m_PointFinal = Math::Vect3f( 6, 0, 6 );
   m_Path = m_AStar->GetPath( m_PointInicial, m_PointFinal );
   InitSceneCharacterController();
-
-  CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
-  l_SM->PlayEvent( "SHOOT", "TestGameObject3d" );
 }
 
 void CPlayerPhysicProcess::Render()
