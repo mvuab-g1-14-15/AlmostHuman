@@ -1,6 +1,8 @@
 #ifndef SCRIPTMANAGER_H
 #define SCRIPTMANAGER_H
 
+#include "Utils\Manager.h"
+#include "XML\XMLTreeNode.h"
 #include <string>
 #include <vector>
 
@@ -11,27 +13,30 @@ extern "C"
 	#include "lauxlib.h"
 }
 
-class CScriptManager
+class CScriptManager : public CManager
 {
 	private:
 		lua_State	*m_LS;
 		typedef std::vector<std::string> TVectorLuaFiles;
 		TVectorLuaFiles m_LuaFiles;
 		TVectorLuaFiles m_LuaInitFiles;
-		std::string		m_LuaPath;
 
 	public:
 		CScriptManager();
+		CScriptManager(CXMLTreeNode& atts);
 		~CScriptManager();
 
-		void Initialize();
+		void Init();
 		void Destroy();
 		void Reload();
+
+		void Update(){}
+		void Render(){}
 
 		void RunCode(const std::string &Code);
 		void RunFile(const std::string &FileName);
 
-		void Load(const std::string &XMLFile);
+		void Load();
 
 		lua_State * GetLuaState() const {return m_LS;}
 		void RegisterLUAFunctions();

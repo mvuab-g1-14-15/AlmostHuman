@@ -180,6 +180,9 @@
     <ClInclude Include="Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\Manager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

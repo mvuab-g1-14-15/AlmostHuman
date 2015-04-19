@@ -120,3 +120,7 @@ SET BLEND
     <render_draw_quad active="true">
         <texture stage_id="0" name="ActualFrameBuffer"/>
     </render_draw_quad>
+	
+	<render_gizmos render="true"/>
+	
+	<render_gui render="true"/>

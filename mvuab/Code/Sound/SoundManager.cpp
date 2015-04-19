@@ -1,47 +1,42 @@
 ﻿#include "SoundManager.h"
 #include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
-#include "Core.h"
+
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
+#include "EngineManagers.h"
 
 #include "alc.h"
 #include "alut.h"
 
-
-
-CSoundManager::CSoundManager()
+CSoundManager::CSoundManager(const CXMLTreeNode& atts ) : CManager(atts)
 {
     _initAL();
-    m_XmlPath = "";
 }
 
 CSoundManager::~CSoundManager()
 {
     _finalizeAL();
-    m_XmlPath.clear();
 }
 
-bool CSoundManager::Init( const std::string& l_XmlPath )
+void CSoundManager::Init()
 {
-    m_XmlPath = l_XmlPath;
-
     CXMLTreeNode newFile;
 
-    if ( !newFile.LoadFile( l_XmlPath.c_str() ) )
+    if ( !newFile.LoadFile( mConfigPath.c_str() ) )
     {
-        LOG_ERROR_APPLICATION( "CSoundManager::Load Can't open %s\n", l_XmlPath.c_str() );
+        LOG_ERROR_APPLICATION( "Load Can't open %s\n", mConfigPath.c_str() );
         newFile.Done();
-        return false;
+        return;
     }
 
     CXMLTreeNode xmlNodes = newFile["sounds"];
 
     if ( !xmlNodes.Exists() )
     {
-        LOG_ERROR_APPLICATION( "CSoundManager::Load Can't read tag sounds\n" );
+        LOG_ERROR_APPLICATION( "Load Can't read tag sounds\n" );
         newFile.Done();
-        return false;
+        return;
     }
 
     for ( int i = 0; i < xmlNodes.GetNumChildren(); ++i )
@@ -54,24 +49,27 @@ bool CSoundManager::Init( const std::string& l_XmlPath )
             tIdBuffer buffer;
 
             if ( _loadSound( l_SoundPath, buffer ) )
-            { m_Buffers[l_SoundName] = buffer; }
+            {
+                m_Buffers[l_SoundName] = buffer;
+            }
             else
-            { LOG_ERROR_APPLICATION( "CSoundManager::Load Can't load sound: %s\n", l_SoundName.c_str() ); }
+            {
+                LOG_ERROR_APPLICATION( "Load Can't load sound: %s\n", l_SoundName.c_str() );
+            }
         }
     }
 
     newFile.Done();
-    return true;
+    LOG_INFO_APPLICATION( "Init ok!" );
 }
 
 //-----------GENERAL FUNCTIONS---------------------
-void CSoundManager::Update( float _ElapsedTime )
+void CSoundManager::Update( )
 {
-    Math::Vect3f l_Orientation =
-        CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetDirection().GetNormalized();
-    Math::Vect3f l_Up = CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetVecUp().GetNormalized();
+    Math::Vect3f l_Orientation = CameraMInstance->GetCurrentCamera()->GetDirection().GetNormalized();
+    Math::Vect3f l_Up = CameraMInstance->GetCurrentCamera()->GetVecUp().GetNormalized();
     SetListenerOrientation( -l_Orientation, l_Up );
-    SetListenerPosition( CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetPosition() );
+    SetListenerPosition( CameraMInstance->GetCurrentCamera()->GetPosition() );
 }
 
 void CSoundManager::Reset()

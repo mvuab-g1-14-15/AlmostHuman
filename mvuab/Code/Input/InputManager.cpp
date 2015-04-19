@@ -4,9 +4,18 @@
 #include "Periphericals\Mouse.h"
 #include "Utils\Defines.h"
 #include "Logger\Logger.h"
+#include "EngineConfig.h"
 
 #include <string>
 
+
+CInputManager::CInputManager( CXMLTreeNode &atts)
+    : CManager(atts)
+{
+    /*  TODO RAUL
+        PONER LECTURA XML
+    */
+}
 //----------------------------------------------------------------------------
 // Finalize data
 //----------------------------------------------------------------------------
@@ -40,10 +49,10 @@ void CInputManager::Release ()
 // If present joystick will also be initialized, but is not mandatory.
 //-> IN: HWND      - handle to main application window
 //----------------------------------------------------------------------------
-bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveModeinMouse)
+void CInputManager::Init ()
 {
     HRESULT hr;
-    m_hWndMain = hWnd;
+    m_hWndMain = EngineConfigInstance->GetWindowId();
 
     LOG_INFO_APPLICATION("InputManager:: calling initialization");
 
@@ -58,14 +67,15 @@ bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusi
         m_pGamePad    = new CGamePad;
 
         // initialize all input device objects
-        m_bIsOk = m_pKB->Init(m_pDI, hWnd);
+        m_bIsOk = m_pKB->Init(m_pDI, m_hWndMain);
         if (m_bIsOk)
         {
-            m_bIsOk    = m_pMouse->Init(m_pDI, hWnd, screenRes, exclusiveModeinMouse);
+            m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, EngineConfigInstance->GetScreenResolution(),
+                                        EngineConfigInstance->GetExclusiveModeInMouse());
 
             if (m_bIsOk)
             {
-                m_bIsOk = m_pGamePad->Init(screenRes);
+                m_bIsOk = m_pGamePad->Init(EngineConfigInstance->GetScreenResolution());
                 m_pGamePad->Update();
                 if (m_pGamePad->IsConnected() )
                 {
@@ -87,7 +97,7 @@ bool CInputManager::Init (HWND hWnd, const Math::Vect2i& screenRes, bool exclusi
         //throw CException(__FILE__, __LINE__, msg_error);
     }
 
-    return m_bIsOk;
+    //return m_bIsOk;
 }
 
 
@@ -123,16 +133,16 @@ bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
 //----------------------------------------------------------------------------
 // Update all input devices
 //----------------------------------------------------------------------------
-HRESULT CInputManager::Update(void)
+void CInputManager::Update(void)
 {
     HRESULT hr;
 
-    if (!IsOk()) { return E_FAIL; }
+    if (!IsOk()) { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", E_FAIL); }//return E_FAIL;
 
     if (m_pKB)
     {
         if ( FAILED( hr = m_pKB->Update() ) )
-        { return hr; }
+        { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr); }//return hr;
     }
 
     if (m_pMouse)
@@ -140,7 +150,7 @@ HRESULT CInputManager::Update(void)
         if( m_bActiveMouse )
         {
             if ( FAILED( hr = m_pMouse->Update() ) )
-            { return hr; }
+            { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr); }//return hr;
         }
     }
 
@@ -149,7 +159,7 @@ HRESULT CInputManager::Update(void)
         m_pGamePad->Update();
     }
 
-    return S_OK;
+    //return S_OK;
 }
 
 //----------------------------------------------------------------------------

@@ -5,16 +5,20 @@
 #include <d3dx9.h>
 #include <vector>
 #include <map>
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 #include "Utils\MapManager.h"
 #include "Texture.h"
 #include "CubedTexture.h"
 
-class CTextureManager : public CMapManager<CTexture>, public CSingleton<CTextureManager>
+class CTextureManager : public CMapManager<CTexture>, public CManager
 {
 public:
   CTextureManager();
+  CTextureManager(CXMLTreeNode& atts);
   ~CTextureManager();
+  void Init(){}
+  void Update(){}
+  void Render(){}
   void Reload();
   CTexture* GetTexture( const std::string& fileName );
 };

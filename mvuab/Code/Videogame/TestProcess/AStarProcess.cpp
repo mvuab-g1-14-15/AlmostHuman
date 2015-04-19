@@ -12,7 +12,8 @@
 #include "ScriptManager.h"
 
 //CORE
-#include "Core.h"
+
+#include "EngineManagers.h"
 
 //GRAPHICS
 #include "GraphicsManager.h"
@@ -40,49 +41,49 @@ CAStarProcess::CAStarProcess() : CProcess()
 
 CAStarProcess::~CAStarProcess()
 {
-  CHECKED_DELETE( m_pAStarScene );
+    CHECKED_DELETE( m_pAStarScene );
 
-  for ( size_t i = 0; i < m_vPA.size(); ++i )
-    CHECKED_DELETE( m_vPA[i] );
+    for ( size_t i = 0; i < m_vPA.size(); ++i )
+    { CHECKED_DELETE( m_vPA[i] ); }
 
-  m_vPA.clear();
+    m_vPA.clear();
 
-  for ( size_t i = 0; i < m_vPUD.size(); ++i )
-    CHECKED_DELETE( m_vPUD[i] );
+    for ( size_t i = 0; i < m_vPUD.size(); ++i )
+    { CHECKED_DELETE( m_vPUD[i] ); }
 
-  m_vPUD.clear();
+    m_vPUD.clear();
 
-  CHECKED_DELETE( m_PhysicController );
+    CHECKED_DELETE( m_PhysicController );
 }
 
 void CAStarProcess::Update()
 {
-  /////////////////////////////////////////////////////////////
-  ////////////      RELOADS ACTIONS           /////////////////
-  /////////////////////////////////////////////////////////////
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+    /////////////////////////////////////////////////////////////
+    ////////////      RELOADS ACTIONS           /////////////////
+    /////////////////////////////////////////////////////////////
+    CActionManager* pActionManager = ActionManagerInstance;
 
-  if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload();
+    if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
+    { SMeshMInstance->Reload(); }
 
-  if ( pActionManager->DoAction( "ReloadLUA" ) )
-    CCore::GetSingletonPtr()->GetScriptManager()->Reload();
+    if ( pActionManager->DoAction( "ReloadLUA" ) )
+    { ScriptMInstance->Reload(); }
 
-  if ( pActionManager->DoAction( "ReloadShaders" ) )
-  {
-    // NOTE this must be in this order
-    CEffectManager::GetSingletonPtr()->Reload();
-    CLightManager::GetSingletonPtr()->ReLoad();
-    CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
-    CStaticMeshManager::GetSingletonPtr()->Reload();
-    CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
-    CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
-  }
+    if ( pActionManager->DoAction( "ReloadShaders" ) )
+    {
+        // NOTE this must be in this order
+        EffectManagerInstance->Reload();
+        LightMInstance->ReLoad();
+        ROTMInstance->ReLoad();
+        SMeshMInstance->Reload();
+        ROLMInstance->Reload();
+        SRCMInstance->ReLoad();
+    }
 
-  if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    CCore::GetSingletonPtr()->GetActionManager()->Reload();
+    if ( pActionManager->DoAction( "ReloadActionToInput" ) )
+    { ActionManagerInstance->Reload(); }
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+    ScriptMInstance->RunCode( "update()" );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,68 +96,68 @@ void CAStarProcess::InitSceneCharacterController()
 
 void CAStarProcess::Init()
 {
-  //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-  CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
-  m_pAStarScene = new CAStar();
-  m_pAStarScene->Init();
+    //ScriptMInstance->RunCode( "init()" );
+    CPhysicsManager* l_PM = PhysXMInstance;
+    m_pAStarScene = new CAStar();
+    m_pAStarScene->Init();
 
-  CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
-  userData->SetPaint( true );
-  userData->SetColor( colWHITE );
-  m_vPUD.push_back( userData );
-  Math::Vect3f l_Pos = CCameraManager::GetSingletonPtr()->GetCurrentCamera()->GetPosition();
-  m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
-      userData, l_Pos );
-  l_PM->AddPhysicController( m_PhysicController );
+    CPhysicUserData* userData = new CPhysicUserData( "CharacterController" );
+    userData->SetPaint( true );
+    userData->SetColor( colWHITE );
+    m_vPUD.push_back( userData );
+    Math::Vect3f l_Pos = CameraMInstance->GetCurrentCamera()->GetPosition();
+    m_PhysicController = new CPhysicController( 0.5f, 2, 0.2f, 0.5f, 0.5f, ECG_PLAYER,
+            userData, l_Pos );
+    l_PM->AddPhysicController( m_PhysicController );
 
-  CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
-  l_PUD->SetPaint( true );
-  l_PUD->SetColor( colWHITE );
-  m_vPUD.push_back( l_PUD );
-  CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
-  l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -0.5f,
-                               0 ) );
-  m_vPA.push_back( l_pPhysicActor );
-  l_PM->AddPhysicActor( l_pPhysicActor );
+    CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
+    l_PUD->SetPaint( true );
+    l_PUD->SetColor( colWHITE );
+    m_vPUD.push_back( l_PUD );
+    CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
+    l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000, 0.0f, 1000 ), Math::Vect3f( 0, -0.5f,
+                                 0 ) );
+    m_vPA.push_back( l_pPhysicActor );
+    l_PM->AddPhysicActor( l_pPhysicActor );
 
-  m_PointInicial = Math::Vect3f( 6, 0, -6 );
-  m_PointFinal = Math::Vect3f( 6, 0, 6 );
-  m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
+    m_PointInicial = Math::Vect3f( 6, 0, -6 );
+    m_PointFinal = Math::Vect3f( 6, 0, 6 );
+    m_Path = m_pAStarScene->GetPath( m_PointInicial, m_PointFinal );
 }
 
 void CAStarProcess::Render()
 {
-  CGraphicsManager* pGraphicsManager = GraphicsInstance;
+    CGraphicsManager* pGraphicsManager = GraphicsInstance;
 
-  m_pAStarScene->Render();
-  Math::Mat44f m;
-  std::vector<Math::Vect3f>::iterator it = m_Path.begin(),
-                                      it_end = m_Path.end();
+    m_pAStarScene->Render();
+    Math::Mat44f m;
+    std::vector<Math::Vect3f>::iterator it = m_Path.begin(),
+                                        it_end = m_Path.end();
 
 
-  for ( ; it != it_end - 1; ++it )
-  {
-    Math::Vect3f l_ActualPoint = *it;
-    Math::Vect3f l_NextPoint = *( it + 1 );
+    for ( ; it != it_end - 1; ++it )
+    {
+        Math::Vect3f l_ActualPoint = *it;
+        Math::Vect3f l_NextPoint = *( it + 1 );
 
-    pGraphicsManager->DrawLine( l_ActualPoint, l_NextPoint, Math::colMAGENTA );
-  }
+        pGraphicsManager->DrawLine( l_ActualPoint, l_NextPoint, Math::colMAGENTA );
+    }
 
-  /*m.SetIdentity();
-  m.Translate(m_PointInicial);
-  pGraphicsManager->SetTransform(m);
-  pGraphicsManager->DrawCube(0.2f, Math::colGREEN);
-  m.SetIdentity();
-  m.Translate(m_PointFinal);
-  pGraphicsManager->SetTransform(m);
-  pGraphicsManager->DrawCube(0.2f, Math::colRED);
-  m.SetIdentity();
-  pGraphicsManager->SetTransform(m);*/
+    /*  m.SetIdentity();
+        m.Translate(m_PointInicial);
+        pGraphicsManager->SetTransform(m);
+        pGraphicsManager->DrawCube(0.2f, Math::colGREEN);
+        m.SetIdentity();
+        m.Translate(m_PointFinal);
+        pGraphicsManager->SetTransform(m);
+        pGraphicsManager->DrawCube(0.2f, Math::colRED);
+        m.SetIdentity();
+        pGraphicsManager->SetTransform(m);*/
 
-  CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+    ScriptMInstance->RunCode( "render()" );
 }
 
 void CAStarProcess::RenderDebugInfo()
 {
-  CProcess::RenderDebugInfo();
+    CProcess::RenderDebugInfo();
 }

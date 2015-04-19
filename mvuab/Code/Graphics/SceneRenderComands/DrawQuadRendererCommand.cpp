@@ -7,14 +7,15 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "RenderableObject\RenderableObjectTechnique.h"
-#include "Core.h"
+
+#include "EngineManagers.h"
 
 #ifdef _DEBUG
-#include <sstream>
+    #include <sstream>
 #endif
 
 CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts ):
-  CStagedTexturedRendererCommand( atts )
+    CStagedTexturedRendererCommand( atts )
 {
 }
 
@@ -24,36 +25,38 @@ CDrawQuadRendererCommand::~CDrawQuadRendererCommand()
 
 void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
-  ActivateTextures();
+    ActivateTextures();
 
-#ifdef _DEBUG
+    #ifdef _DEBUG
 
-  if ( false ) // DEBUG
-    DebugTextures();
+    if ( false ) // DEBUG
+    { DebugTextures(); }
 
-#endif
+    #endif
 
-  std::string l_EffectTechName =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetRenderableObjectTechniqueNameByVertexType(
-      SCREEN_COLOR_VERTEX::GetVertexType() );
-  CRenderableObjectTechnique* l_ROT =
-    CCore::GetSingletonPtr()->GetRenderableObjectTechniqueManager()->GetResource( l_EffectTechName );
+    CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
 
-  CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
-  uint32 width, height;
-  GM.GetWidthAndHeight( width, height );
-  RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
+    const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(
+            SCREEN_COLOR_VERTEX::GetVertexType() );
 
-  l_EffectTech->GetEffect()->SetLight( 0 );
+    CRenderableObjectTechnique* l_ROT =
+        lROTM->GetResource( l_EffectTechName );
 
-  if ( l_EffectTech )
-  {
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
-        m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
-  }
-  else
-  {
-    GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
-                                          m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
-  }
+    CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
+    uint32 width, height;
+    GM.GetWidthAndHeight( width, height );
+    RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
+
+    l_EffectTech->GetEffect()->SetLight( 0 );
+
+    if ( l_EffectTech )
+    {
+        GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_EffectTech, l_Rect, m_Color,
+                m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+    }
+    else
+    {
+        GM.DrawColoredQuad2DTexturedInPixels( l_Rect, m_Color,
+                                              m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+    }
 }

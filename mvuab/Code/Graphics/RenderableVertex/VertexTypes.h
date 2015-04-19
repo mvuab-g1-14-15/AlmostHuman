@@ -547,6 +547,27 @@ struct SCREEN_COLOR_VERTEX
   }
 };
 
+struct SCREEN_TEXTURE_VERTEX
+{
+  float x, y, z, w;
+  float u, v;
+
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_TEXTURE1;
+  }
+  static unsigned int GetFVF()
+  {
+    return ( D3DFVF_XYZRHW | D3DFVF_TEX1 );
+  }
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+};
+
 struct TRNM_VERTEX
 {
   float x, y, z;

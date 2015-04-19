@@ -2,6 +2,7 @@
 #include "Effect.h"
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
+#include "EngineConfig.h"
 
 CEffectManager::CEffectManager()
   : m_WorldMatrix( Math::m44fIDENTITY ),
@@ -11,10 +12,18 @@ CEffectManager::CEffectManager()
     m_LightViewMatrix( Math::m44fIDENTITY ),
     m_ShadowProjectionMatrix( Math::m44fIDENTITY ),
     m_CameraEye( Math::v3fZERO ),
-    m_Filename( "" )
+    m_Filename( "" ),
+	CManager()
 {
 }
 
+CEffectManager::CEffectManager( CXMLTreeNode &atts)
+  : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA DE XML
+	*/
+}
 CEffectManager::~CEffectManager()
 {
   CleanUp();
@@ -118,17 +127,17 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
   SetCameraEye( CameraEye );
 }
 
-void CEffectManager::Load( const std::string& FileName )
+void CEffectManager::Init()
 {
   // Obtain the filename
-  m_Filename = FileName;
+	//m_Filename = EngineConfigInstance->GetEffectsPath();
   // Check if the file exist
   CXMLTreeNode newFile;
 
-  if ( !newFile.LoadFile( m_Filename.c_str() ) )
+  if ( !newFile.LoadFile( mConfigPath.c_str() ) )
   {
     LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",
-                                           m_Filename.c_str() );
+                                           mConfigPath.c_str() );
     return;
   }
 
@@ -200,5 +209,5 @@ void CEffectManager::Reload()
 {
   CleanUp();
   Destroy();
-  Load( m_Filename );
+  Init();
 }

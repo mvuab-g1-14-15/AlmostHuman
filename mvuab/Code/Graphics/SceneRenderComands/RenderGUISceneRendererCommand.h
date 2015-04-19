@@ -7,11 +7,13 @@
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
+class CGUIManager;
 
 class CRenderGUISceneRendererCommand: public CSceneRendererCommand
 {
 	private:
-//		CGUI	*m_GUI;
+		CGUIManager	*m_GUI;
+        bool         m_RenderGui;
     public:
         CRenderGUISceneRendererCommand(CXMLTreeNode &atts);
         ~ CRenderGUISceneRendererCommand();

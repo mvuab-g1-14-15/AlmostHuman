@@ -1,8 +1,16 @@
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "RenderableObjectsLayersManager.h"
 #include "StaticMeshes\InstanceMesh.h"
+#include "AnimatedModels\AnimatedInstanceModel.h"
+#include "EngineConfig.h"
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager() : m_DefaultRenderableObjectManager(0)
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
+    : m_DefaultRenderableObjectManager(0), CManager()
+{
+}
+
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(CXMLTreeNode& atts)
+    : m_DefaultRenderableObjectManager(0), CManager(atts)
 {
 }
 
@@ -15,77 +23,78 @@ void CRenderableObjectsLayersManager::Destroy()
     CTemplatedVectorMapManager::Destroy();
 }
 
-void CRenderableObjectsLayersManager::Load( const std::string& FileName )
+void CRenderableObjectsLayersManager::Init()
 {
-    m_FileName = FileName;
-    CXMLTreeNode l_File;
-    
-    if (!l_File.LoadFile(m_FileName.c_str()))
-    {
-        std::string err = "ERROR reading the file " + FileName;
-        MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
-        exit( EXIT_FAILURE );
-    }
-    
-    CXMLTreeNode  TreeNode = l_File["RenderableObjects"];
-    if (!TreeNode.Exists()) return;
+  CXMLTreeNode l_File;
 
-    for (int i = 0; i < TreeNode.GetNumChildren(); ++i)
-    {
-        const std::string& lTagName = TreeNode( i ).GetName();
-        const std::string& lName = TreeNode( i ).GetPszProperty("name", "");
-        
-        if (lTagName == "layer") 
-        {
-            if(TreeNode( i ).GetBoolProperty("default", false))
-            {
-                m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
-                if (!AddResource( lName, m_DefaultRenderableObjectManager)) 
-                {
-                    LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                    CHECKED_DELETE( m_DefaultRenderableObjectManager );
-                }
-            }
-            else
-            {
-                CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
-                if (!AddResource(lName, RenderableObjectManager))
-                {
-                    LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                    CHECKED_DELETE( RenderableObjectManager );
-                }
-            }
-        }
-        else 
-        {
-            CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager(TreeNode(i));
-            ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
-            
-            if (lTagName == "MeshInstance")
-            {
-                CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
-                if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
-                {
-                    LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
-                    CHECKED_DELETE(l_InstanceMesh);
-                }
-            }
-            else if (lTagName == "AnimatedInstance")
-            {
-                CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(TreeNode(i));
-                if (!lRenderableObjectManager->AddResource(lName, l_AnimatedInstance))
-                {
-                    LOG_ERROR_APPLICATION("Error adding animated mesh %s!", lName.c_str());
-                    CHECKED_DELETE(l_AnimatedInstance);
-                }
-            }
-        }
-    }
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+  {
+    std::string err = "ERROR reading the file " + mConfigPath;
+
+    MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
+    exit( EXIT_FAILURE );
+  }
+
+  CXMLTreeNode  TreeNode = l_File["RenderableObjects"];
+
+  if (!TreeNode.Exists()) return;
+  
+  for (int i = 0; i < TreeNode.GetNumChildren(); ++i)
+  {
+      const std::string& lTagName = TreeNode( i ).GetName();
+      const std::string& lName = TreeNode( i ).GetPszProperty("name", "");
+          
+      if (lTagName == "layer") 
+      {
+          if(TreeNode( i ).GetBoolProperty("default", false))
+          {
+              m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+              if (!AddResource( lName, m_DefaultRenderableObjectManager)) 
+              {
+                  LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
+                  CHECKED_DELETE( m_DefaultRenderableObjectManager );
+              }
+          }
+          else
+          {
+              CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+              if (!AddResource(lName, RenderableObjectManager))
+              {
+                  LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
+                  CHECKED_DELETE( RenderableObjectManager );
+              }
+          }
+      }
+      else 
+      {
+          CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager(TreeNode(i));
+          ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
+              
+          if (lTagName == "MeshInstance")
+          {
+              CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
+              if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
+              {
+                  LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
+                  CHECKED_DELETE(l_InstanceMesh);
+              }
+          }
+          else if (lTagName == "AnimatedInstance")
+          {
+              CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(TreeNode(i));
+              if (!lRenderableObjectManager->AddResource(lName, l_AnimatedInstance))
+              {
+                  LOG_ERROR_APPLICATION("Error adding animated mesh %s!", lName.c_str());
+                  CHECKED_DELETE(l_AnimatedInstance);
+              }
+          }
+      }
+  }
 }
 void CRenderableObjectsLayersManager::Reload()
 {
-    Destroy();
-    Load( m_FileName );
+  Destroy();
+  Init();
 }
 void CRenderableObjectsLayersManager::Update()
 {

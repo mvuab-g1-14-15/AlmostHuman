@@ -1,7 +1,8 @@
 #include "SceneRenderComands\SetMatricesSceneRendererCommand.h"
 
-#include "Core.h"
+
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 CSetMatricesSceneRendererCommand::CSetMatricesSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {
@@ -9,10 +10,10 @@ CSetMatricesSceneRendererCommand::CSetMatricesSceneRendererCommand(CXMLTreeNode 
 
 CSetMatricesSceneRendererCommand::~CSetMatricesSceneRendererCommand()
 {
-    
+
 }
 
 void CSetMatricesSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	CCore::GetSingletonPtr()->GetGraphicsManager()->SetupMatrices();
+    GraphicsInstance->SetupMatrices();
 }

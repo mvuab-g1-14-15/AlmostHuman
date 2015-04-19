@@ -7,6 +7,8 @@
 #include "Math/Color.h"
 #include <string>
 #include "Utils\Defines.h"
+#include "Utils\Types.h"
+#include "Effects\Defines.h"
 
 class CEffect;
 
@@ -57,19 +59,20 @@ private: // Members
   bool                        m_UseLightAmbientColor;
 
   // Textures
-  bool						  m_UseTextureSizes;
-  uint32					  m_TextureHeight;
-  uint32					  m_TextureWidth;
+  bool                        m_UseTextureSizes;
+  uint32                      m_TextureHeight;
+  uint32                      m_TextureWidth;
 
   // Timers
   bool                        m_UseTime;
   bool                        m_UseDeltaTime;
 
   // Fog
+  bool                        m_UseFog;
   float                       m_FogStart;
   float                       m_FogEnd;
   float                       m_FogExp;
-  int                         m_FogFun;
+  EFogFunction                m_FogFun;
 
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;

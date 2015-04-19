@@ -3,8 +3,17 @@
 #include "Gizmos/GizmoElement.h"
 
 CGizmosManager::CGizmosManager()
+  :CManager()
 {
 
+}
+
+CGizmosManager::CGizmosManager(CXMLTreeNode& atts)
+  :CManager(atts)
+{
+	/*TODO RAUL
+	PONER LECTURA XML
+	*/
 }
 
 CGizmosManager::~CGizmosManager()

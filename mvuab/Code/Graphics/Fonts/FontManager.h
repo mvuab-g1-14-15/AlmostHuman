@@ -14,23 +14,23 @@
 #include <d3dx9.h>
 #include <vector>
 #include <map>
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 
 //---Forward Declarations--
 class CGraphicsManager;
 //-------------------------
 
-class CFontManager : public CSingleton<CFontManager>
+class CFontManager : public CManager
 {
 public:
   //--- Init and End protocols------------------------------------------
-  CFontManager(): m_bIsOk( false ), m_sPathFile( "" ) {}
+  CFontManager(): m_bIsOk( false ), m_sPathFile( "" ), CManager() {}
+  CFontManager( CXMLTreeNode& atts);
   virtual ~CFontManager()
   {
     Done();
   }
 
-  bool                    Init( CGraphicsManager* rm );
   void                    Done();
   bool                    IsOk() const
   {
@@ -38,6 +38,8 @@ public:
   }
 
   void Init();
+  void Update(){}
+  void Render(){}
   bool ReloadTTFs();
   bool LoadTTFs( const std::string& pathFile );
   int32 GetTTF_Id( const std::string& name );

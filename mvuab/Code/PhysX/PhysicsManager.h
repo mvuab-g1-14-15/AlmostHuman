@@ -11,7 +11,7 @@
 #include "Math\Vector3.h"
 #include "Utils\Name.h" 
 #include "PhysicsDefs.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 #include "Utils\MapManager.h"
 
 class NxPhysicsSDK;
@@ -58,11 +58,12 @@ struct TActorInfo
 }
 */
 
-class CPhysicsManager : public CSingleton<CPhysicsManager>, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>
+class CPhysicsManager : public CManager, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>
 {
 public:
   //--- Init and End protocols------------------------------------------
   CPhysicsManager();
+  CPhysicsManager(CXMLTreeNode& atts);
   virtual         ~CPhysicsManager()
   {
     Done();
@@ -71,7 +72,7 @@ public:
   void          AddGravity( Math::Vect3f g );
 
   //---- Main Functions ---------------------------------------
-  bool          Init();
+  void          Init();
   void          Done();
   bool          IsOk() const
   {
@@ -83,7 +84,7 @@ public:
   bool          CreateMeshFromXML( const std::string& FileName );
 
   //--- Rendering Stuff:
-  void          DebugRender( CGraphicsManager* _RM );
+  void          Render();
   void          DrawActor( NxActor* actor, CGraphicsManager* _RM );
 
   //--- Add/Release Actors
@@ -132,8 +133,11 @@ public:
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                 float _fEffectRadius, float _fPower );
   std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere );
+
+	std::vector<CPhysicUserData*> OverlapConeActor( float _Distance, float _Angle,
+	const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask );
   //----Update
-  void          Update( float _ElapsedTime );
+  void          Update();
   void          WaitForSimulation();
 
   ////--- Create CCDSkeleton

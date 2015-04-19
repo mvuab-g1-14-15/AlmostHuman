@@ -1,17 +1,18 @@
 #ifndef GIZMOS_MANAGER_H
 #define GIZMOS_MANAGER_H
 
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 #include "Utils\Defines.h"
 
 #include "Utils/TemplatedVectorMapManager.h"
 #include "Gizmo.h"
 #include "GizmoElement.h"
 
-class CGizmosManager : public CSingleton<CGizmosManager>, public CTemplatedVectorMapManager<CGizmo>
+class CGizmosManager : public CManager, public CTemplatedVectorMapManager<CGizmo>
 {
 public:
   CGizmosManager();
+  CGizmosManager(CXMLTreeNode& atts);
   virtual ~CGizmosManager();
 
   void Init();

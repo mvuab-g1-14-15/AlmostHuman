@@ -3,25 +3,14 @@
 #include "XML\XMLTreeNode.h"
 
 CEngineConfig::CEngineConfig()
-  : m_CurrentLanguage( "" )
-  , m_ConfigPath( "" )
-  , m_GUIPath( "" )
-  , m_SoundPath( "" )
-  , m_FontsPath( "" )
-  , m_InputPath( "" )
-  , m_StaticMeshesPath( "" )
-  , m_RenderableObjectsPath( "" )
-  , m_RenderableObjectTechniquePath( "" )
-  , m_AnimatedModelsPath( "" )
-  , m_LuaRunPath( "" )
-  , m_EffectsPath( "" )
-  , m_LightsPath( "" )
-  , m_SceneRendererCommandPath( "" )
-  , m_TriggersPath( "" )
-  , m_FullScreenMode( false )
+  : m_FullScreenMode( false )
   , m_ExclusiveModeInMouse( false )
   , m_DrawPointerMouse( false )
   , m_FitDesktop( false )
+  , m_ConfigPath( "" )
+  , m_GUIPath( "" )
+  , m_SoundPath( "" )
+  , m_ManagersPath( "" )
   , m_MaxFps(30.0)
 {
 }
@@ -88,59 +77,8 @@ void CEngineConfig::Load( const std::string& aCfg )
     else if ( lTagName == "sound" )
       m_SoundPath = std::string( lTreeNode( i ).GetPszProperty( "init_sound_path",
                                  "" ) );
-    else if ( lTagName == "fonts" )
-      m_FontsPath = std::string( lTreeNode( i ).GetPszProperty( "fonts_path", "" ) );
-    else if ( lTagName == "input" )
-      m_InputPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "languages" )
-    {
-      m_CurrentLanguage = std::string( lTreeNode(
-                                         i ).GetPszProperty( "current_language", "" ) );
-      CXMLTreeNode  SubTreeNode = l_File["languages"];
-
-      if ( SubTreeNode.Exists() )
-      {
-        int countLan = SubTreeNode.GetNumChildren();
-
-        for ( int lans = 0; lans < countLan; ++lans )
-        {
-          std::string TagName = SubTreeNode( lans ).GetName();
-
-          if ( TagName == "language" )
-            m_Languages.push_back( std::string( SubTreeNode(
-                                                  lans ).GetPszProperty( "path", "" ) ) );
-        }
-      }
-
-      m_FontsPath = std::string( lTreeNode( i ).GetPszProperty( "fonts_path", "" ) );
-    }
-    else if ( lTagName == "animated_models" )
-      m_AnimatedModelsPath = std::string( lTreeNode( i ).GetPszProperty( "path",
-                                          "" ) );
-    else if ( lTagName == "static_meshes" )
-      m_StaticMeshesPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "renderable_objects" )
-      m_RenderableObjectsPath = std::string( lTreeNode( i ).GetPszProperty( "path",
-                                             "" ) );
-    else if ( lTagName == "renderable_object_technique" )
-      m_RenderableObjectTechniquePath = std::string( lTreeNode(
-                                          i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "lua" )
-      m_LuaRunPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "effects" )
-      m_EffectsPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "lights" )
-      m_LightsPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "scene_renderer_commands" )
-      m_SceneRendererCommandPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "triggers" )
-      m_TriggersPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "enemies" )
-      m_EnemiesPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "particles" )
-      m_ParticlesPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "billboardTexture" )
-      m_BillboardTexturePath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
+    else if ( lTagName == "managers" )
+      m_ManagersPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
     else if ( lTagName == "maxfps" )
         m_MaxFps = lTreeNode(i).GetFloatProperty("fps", 30.0f);
   }

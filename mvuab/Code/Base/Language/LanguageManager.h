@@ -11,6 +11,7 @@
 
 #include "Math/Color.h"
 #include "Utils/SingletonPattern.h"
+#include "Utils\Manager.h"
 #include <vector>
 #include <map>
 
@@ -22,17 +23,20 @@ struct SLiteral
 };
 
 
-class CLanguageManager : public CSingleton<CLanguageManager>
+class CLanguageManager : public CManager
 {
 public:
     CLanguageManager();
+	CLanguageManager( CXMLTreeNode& atts );
     virtual ~CLanguageManager(void) {/*Nothing*/;}
-
+	void Init();
     void LoadXMLs();
     void SetXmlFile(const std::string& pathFile);
     void SetXmlPaths(const std::vector<std::string>&    a_v_languages );
     bool GetLiteral(const std::string& id, SLiteral& sliteral) const;
     void SetCurrentLanguage(const std::string& id);
+	void Update(){}
+	void Render(){}
     
 private:
     void                        LoadXML                            (const std::string& pathFile);

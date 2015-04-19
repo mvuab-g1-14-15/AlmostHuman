@@ -9,16 +9,16 @@ function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	local l_CurrentState = enemy:GetCurrentState()
 	local l_NextState = l_CurrentState
-	--core:Trace("Current state: " .. l_CurrentState)
+	--engine:Trace("Current state: " .. l_CurrentState)
 	
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
-	--core:Trace("Distance to player: " .. l_DistanceToPlayer)
+	--engine:Trace("Distance to player: " .. l_DistanceToPlayer)
 	if l_PlayerInSight then
-		--core:Trace("Is viewing player: true")
+		engine:Trace("Is viewing player: true")
 	else
-		--core:Trace("Is viewing player: false")
+		engine:Trace("Is viewing player: false")
 	end
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
@@ -77,7 +77,7 @@ end
 
 function esperar()
 	enemy = enemy_manager:GetActualEnemy()
-	local timer = core:GetTimer()
+	local timer = engine:GetTimer()
 	tiempoDeEspera = tiempoDeEspera + timer:GetElapsedTime()
 	if tiempoDeEspera > 2 then
 		enemy:SetOnExit(true)

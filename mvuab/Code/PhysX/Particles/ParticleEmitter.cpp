@@ -5,8 +5,14 @@ CParticleEmitter::CParticleEmitter()
 {
     m_Particles.resize( 0 );
 
-    m_MinLifetime = 0;
-    m_MaxLifetime = 0;
+    m_MinLifetime = 0.0f;
+    m_MaxLifetime = 0.0f;
+	m_TimeToEmit = 0.0f;
+
+	m_Rand = 0.0f;
+	m_RandMin = 0.0f;
+    m_RandMax = 0.0f;
+
 
     m_Position = Math::Vect3f( 0.0f, 0.0f, 0.0f );
     m_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
@@ -44,6 +50,22 @@ void CParticleEmitter::SetLifeTime( float min, float max )
 {
     m_MinLifetime = min;
     m_MaxLifetime =  max;
+}
+
+void CParticleEmitter::SetSize(float min, float max)
+{
+    m_MinimumSize = min;
+    m_MaximumSize = max;
+}
+
+void CParticleEmitter::SetTimeToEmit(float Time)
+{
+	m_TimeToEmit = Time;
+}
+
+float CParticleEmitter::GetTimeToEmit()
+{
+	return m_TimeToEmit;
 }
 
 void CParticleEmitter::SetEmitterLifeTime(float LifeTime)

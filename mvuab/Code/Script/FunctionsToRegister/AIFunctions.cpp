@@ -18,6 +18,8 @@
 #include <vector>
 #include "Math\Vector3.h"
 #include "Pathfinding\AStar.h"
+#include "RenderableObject\RenderableObject.h"
+
 #include "luabind_macros.h"
 
 using namespace luabind;
@@ -53,13 +55,15 @@ void registerCharacters( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS2( CCharacter, CObject3D, CName )
     LUA_DECLARE_CTOR_1( const std::string& )
-    LUA_DECLARE_METHOD( CCharacter, GetHeight )
+	LUA_DECLARE_METHOD( CCharacter, GetHeight )
+	LUA_DECLARE_METHOD( CCharacter, GetRadius )
     LUA_DECLARE_METHOD( CCharacter, GetTargetPosition )
     LUA_DECLARE_METHOD( CCharacter, SetTargetPosition )
     LUA_DECLARE_METHOD( CCharacter, SetTargetPositionOriginal )
     LUA_DECLARE_METHOD( CCharacter, AddDamage )
     LUA_DECLARE_METHOD( CCharacter, Move )
     LUA_DECLARE_METHOD( CCharacter, GetPosition )
+	LUA_DECLARE_METHOD( CCharacter, GetDirection )
   LUA_END_DECLARATION
 }
 
@@ -75,6 +79,7 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, SetOnExit )
     LUA_DECLARE_METHOD( CEnemy, GetCurrentState )
     LUA_DECLARE_METHOD( CEnemy, GetLife )
+	LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

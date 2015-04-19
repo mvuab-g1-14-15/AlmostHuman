@@ -44,7 +44,7 @@ function CPlayerController:__init()
 	
 	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 0.2, 0.5, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
-	core:Trace("Player Controller initialized")
+	engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()
@@ -238,25 +238,20 @@ function CPlayerController:CalculateDirectionVectors(l_PlayerCamera)
 end
 
 function CPlayerController:UpdateInput()
-	local l_AnyDirectionPress = false
 	self.Direction = Vect3f(0.0)
 	if action_manager:DoAction("MoveForward") then
 		self.Direction = self.Direction + self.Forward
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveBackward") then
 		self.Direction = self.Direction - self.Forward
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveLeft") then
 		self.Direction = self.Direction + self.Side
-		l_AnyDirectionPress = true
 	end
 	if action_manager:DoAction("MoveRight") then
 		self.Direction = self.Direction - self.Side
-		l_AnyDirectionPress = true
 	end
-	if l_AnyDirectionPress then
+	if CheckVector(self.Direction) then
 		self.Direction:Normalize()
 	end
 	if action_manager:DoAction("ShootDown") then

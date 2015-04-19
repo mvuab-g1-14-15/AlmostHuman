@@ -5,6 +5,8 @@
 #include <wincon.h>
 #include "console.h"
 #include "Utils\Defines.h"
+#include "ActionManager.h"
+#include "EngineManagers.h"
 
 #include <iostream>
 #include <fstream>
@@ -15,8 +17,9 @@
 
 BOOL CConsole::sm_bConsole = FALSE;
 
-CConsole::CConsole()
-    : m_bRedirected(FALSE)
+CConsole::CConsole( const CXMLTreeNode & atts )
+    : CManager(atts)
+    , m_bRedirected(FALSE)
     , m_sNumColumns( 0 )
     , m_sNumLines( 0 )
     , m_sMaxLines( 0 )
@@ -25,24 +28,56 @@ CConsole::CConsole()
     , mY( 0 )
     , mWidth( 1200 )
     , mHeight( 600 )
+    , mConsoleNode( atts )
 {
 }
 
-CConsole::CConsole(BOOL bCreateConsole)
-    : m_bRedirected(FALSE)
-    , m_sNumColumns( 0 )
-    , m_sNumLines( 0 )
-    , m_sMaxLines( 0 )
-    , m_wAttrib( 0 )
-    , mX( 0 )
-    , mY( 0 )
-    , mWidth( 1200 )
-    , mHeight( 600 )
+void CConsole::Init()
 {
-    if (bCreateConsole)
+    const std::string & lNodeName = mConsoleNode.GetName();
+    ASSERT( lNodeName == "console" , "Incorrect node for creating the console");
+
+    // Redirect all the stuff to the console
+    m_bRedirected = TRUE;
+
+    // Create the console
+    if( CreateConsole() == FALSE )
     {
-        CreateConsole ();
+        ASSERT(false, "Error creating the console");
     }
+
+    SetMaxLinesInWindow( mConsoleNode.GetIntProperty("max_lines_in_window", 10 ) );
+    SetNumberOfLines(mConsoleNode.GetIntProperty("lines", 10 ) );
+    SetNumberOfColumns(mConsoleNode.GetIntProperty("columns", 10 ) );
+
+    // Redirect all to the console
+    RedirectToConsole( 0 );
+
+    // Set the user properties to the console
+    if( mConsoleNode.GetBoolProperty("full_size", false ) )
+    {
+        SetFullSize();
+    }
+    else
+    {
+        const Math::Vect2i& lSize = mConsoleNode.GetVect2iProperty("size", Math::Vect2i(0, 0));
+        ASSERT(lSize.x != 0, "The console width is 0" );
+        ASSERT(lSize.y != 0, "The console height is 0" );
+        SetSize( lSize.x, lSize.y );
+    }
+}
+
+void CConsole::Update()
+{
+    if ( ActionManagerInstance->DoAction( "ClearConsole" ) )
+    {
+        Clear();
+    }
+}
+
+void CConsole::Render()
+{
+
 }
 
 CConsole::~CConsole()

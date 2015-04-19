@@ -5,16 +5,17 @@
 #include "Math\Matrix44.h"
 #include "Effects\Defines.h"
 #include "Utils\MapManager.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 #include <string.h>
 
 class CEffectTechnique;
 class CEffect;
 
-class CEffectManager : public CMapManager<CEffectTechnique>, public CSingleton<CEffectManager>
+class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
 {
 public:
   CEffectManager();
+  CEffectManager( CXMLTreeNode &atts);
   ~CEffectManager();
 
   const Math::Mat44f& GetWorldMatrix() const;
@@ -37,8 +38,11 @@ public:
   void SetShadowProjectionMatrix( const Math::Mat44f& Matrix );
   void SetCameraEye( const Math::Vect3f& CameraEye );
 
-  void Load( const std::string& FileName );
+  void Init();
   void Reload();
+
+  void Update() {};
+  void Render() {};
 
   std::string GetTechniqueEffectNameByVertexDefault( unsigned short VertexType );
   size_t GetMaxLights() const;

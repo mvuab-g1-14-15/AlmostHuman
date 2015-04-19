@@ -1,5 +1,5 @@
 #include "Light.h"
-#include "Core.h"
+
 #include "Effects\Effect.h"
 #include "Effects\EffectManager.h"
 #include "GraphicsManager.h"
@@ -7,6 +7,7 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "Texture\Texture.h"
+#include "EngineManagers.h"
 #include "Texture\TextureManager.h"
 #include <string>
 
@@ -53,7 +54,7 @@ CLight::CLight( const CXMLTreeNode& node )
 
     if ( l_ShadowMaskTextureFile != "" )
     {
-        m_ShadowMaskTexture = CTextureManager::GetSingletonPtr()->GetTexture( l_ShadowMaskTextureFile );
+        m_ShadowMaskTexture = TextureMInstance->GetTexture( l_ShadowMaskTextureFile );
         assert( m_ShadowMaskTexture );
     }
 
@@ -61,7 +62,7 @@ CLight::CLight( const CXMLTreeNode& node )
     {
         const std::string& l_Layer = node( i ).GetPszProperty( "renderable_objects_manager", "" );
         CRenderableObjectsManager* l_ROM =
-            CoreInstance->GetRenderableObjectsLayersManager()->GetResource( l_Layer );
+            ROLMInstance->GetResource( l_Layer );
 
         if ( !l_ROM )
         { continue; }
@@ -245,7 +246,7 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect* Effect )
 {
     if ( m_GenerateDynamicShadowMap )
     {
-        CEffectManager* l_EM = CCore::GetSingletonPtr()->GetEffectManager();
+        CEffectManager* l_EM = EffectManagerInstance;
         l_EM->SetLightViewMatrix( m_ViewShadowMap );
         l_EM->SetShadowProjectionMatrix( m_ProjectionShadowMap );
 

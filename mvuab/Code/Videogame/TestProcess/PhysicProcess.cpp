@@ -9,7 +9,8 @@
 #include "ScriptManager.h"
 
 //CORE
-#include "Core.h"
+
+#include "EngineManagers.h"
 
 //GRAPHICS
 #include "GraphicsManager.h"
@@ -70,27 +71,27 @@ void CPhysicProcess::Update()
     /////////////////////////////////////////////////////////////
     ////////////      RELOADS ACTIONS           /////////////////
     /////////////////////////////////////////////////////////////
-    CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+    CActionManager* pActionManager = ActionManagerInstance;
 
     if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    { CCore::GetSingletonPtr()->GetStaticMeshManager()->Reload(); }
+    { SMeshMInstance->Reload(); }
 
     if ( pActionManager->DoAction( "ReloadLUA" ) )
-    { CCore::GetSingletonPtr()->GetScriptManager()->Reload(); }
+    { ScriptMInstance->Reload(); }
 
     if ( pActionManager->DoAction( "ReloadShaders" ) )
     {
         // NOTE this must be in this order
-        CEffectManager::GetSingletonPtr()->Reload();
-        CLightManager::GetSingletonPtr()->ReLoad();
-        CRenderableObjectTechniqueManager::GetSingletonPtr()->ReLoad();
-        CStaticMeshManager::GetSingletonPtr()->Reload();
-        CRenderableObjectsLayersManager::GetSingletonPtr()->Reload();
-        CSceneRendererCommandManager::GetSingletonPtr()->ReLoad();
+        EffectManagerInstance->Reload();
+        LightMInstance->ReLoad();
+        ROTMInstance->ReLoad();
+        SMeshMInstance->Reload();
+        ROLMInstance->Reload();
+        SRCMInstance->ReLoad();
     }
 
     if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    { CCore::GetSingletonPtr()->GetActionManager()->Reload(); }
+    { ActionManagerInstance->Reload(); }
 
 
     /////////////////////////////////////////////////////////////
@@ -99,11 +100,11 @@ void CPhysicProcess::Update()
     if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
     {
         CCamera* l_CurrentCamera =
-            CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+            CameraMInstance->GetCurrentCamera();
 
         if ( l_CurrentCamera )
         {
-            CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+            CPhysicsManager* l_PM = PhysXMInstance;
             CPhysicUserData* l_PhysicUserData = new CPhysicUserData( "Disparo" );
             l_PhysicUserData->SetColor( colRED );
             l_PhysicUserData->SetPaint( true );
@@ -135,15 +136,7 @@ void CPhysicProcess::Update()
     if ( pActionManager->DoAction( "DisableCamera" ) )
     {
         CCamera* l_CurrentCamera =
-            CCameraManager::GetSingletonPtr()->GetCurrentCamera();
-
-        if ( l_CurrentCamera )
-        {
-            if ( l_CurrentCamera->GetEnable() )
-            { l_CurrentCamera->SetEnable( false ); }
-            else
-            { l_CurrentCamera->SetEnable( true ); }
-        }
+            CameraMInstance->GetCurrentCamera();
     }
 
     //////////////////////////////////////////////////////////////////
@@ -152,12 +145,12 @@ void CPhysicProcess::Update()
     //
     if ( pActionManager->DoAction( "DrawActor" ) )
     {
-        CCamera* l_CurrentCamera = CCameraManager::GetSingletonPtr()->GetCurrentCamera();
+        CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
         Vect2i l_PosMouse =
-            CCore::GetSingletonPtr()->GetInputManager()->GetMouse()->GetPosition();
+            InputManagerInstance->GetMouse()->GetPosition();
         Vect3f l_Pos, l_Dir;
-        CGraphicsManager::GetSingletonPtr()->GetRay( l_PosMouse, l_Pos, l_Dir );
-        CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+        GraphicsInstance->GetRay( l_PosMouse, l_Pos, l_Dir );
+        CPhysicsManager* l_PM = PhysXMInstance;
         SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
         uint32 mask = 1 << ECG_ESCENE;
         CPhysicUserData* l_PUD = l_PM->RaycastClosestActor( l_CurrentCamera->GetPosition(),
@@ -169,10 +162,10 @@ void CPhysicProcess::Update()
     }
 
 
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
+    ScriptMInstance->RunCode( "update()" );
 
     //Change gravity
-    //CCore::GetSingletonPtr()->GetPhysicsManager()->AddGravity(Math::Vect3f(0,1*deltaTime,0));
+    //PhysXMInstance->AddGravity(Math::Vect3f(0,1*deltaTime,0));
 
     //////////////////////////////////////////////////////
     ////////////        UPDATE GRENADE        ////////////
@@ -184,7 +177,7 @@ void CPhysicProcess::Update()
     //////////////////////////////////////////////////////
     if ( m_Salir && ( m_Time >= 1 ) )
     {
-        CCore::GetSingletonPtr()->GetPhysicsManager()->ReleasePhysicActor( m_vPA[m_vPA.size() - 1] );
+        PhysXMInstance->ReleasePhysicActor( m_vPA[m_vPA.size() - 1] );
         m_Salir = false;
         m_Time = 0;
     }
@@ -208,7 +201,7 @@ void CPhysicProcess::Update()
 void CPhysicProcess::InitScenePhysicsSamplers()
 {
     //Ejercicio 1 - Pendulo
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    CPhysicsManager* l_PM = PhysXMInstance;
 
     CPhysicUserData* l_PUD = new CPhysicUserData( "Box" );
     l_PUD->SetPaint( true );
@@ -262,8 +255,8 @@ void CPhysicProcess::InitScenePhysicsSamplers()
 
 void CPhysicProcess::Init()
 {
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "init()" );
-    CPhysicsManager* l_PM = CCore::GetSingletonPtr()->GetPhysicsManager();
+    ScriptMInstance->RunCode( "init()" );
+    CPhysicsManager* l_PM = PhysXMInstance;
     ////////////////////////////////////////////////////////////////////////////////
     ////////////        SET THIS CLASS FOR GENERATE EVENTS TRIGGER       ///////////
     ////////////////////////////////////////////////////////////////////////////////
@@ -284,7 +277,7 @@ void CPhysicProcess::Init()
     CPhysicActor* l_pPhysicActor = new CPhysicActor( l_PUD );
     l_pPhysicActor->AddBoxShape( Math::Vect3f( 1000.0f, 0.1f, 1000.0f ), Math::Vect3f( 0, 0, 0 ), Math::Vect3f( 0, 0,
                                  0 ) );
-    CPhysicsManager::GetSingletonPtr()->AddPhysicActor( l_pPhysicActor );
+    PhysXMInstance->AddPhysicActor( l_pPhysicActor );
     m_vPA.push_back( l_pPhysicActor );
 }
 
@@ -293,15 +286,15 @@ void CPhysicProcess::Render()
     CGraphicsManager* pGraphicsManager = GraphicsInstance;
     m_Grenade->Render();
 
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "render()" );
+    ScriptMInstance->RunCode( "render()" );
     // START: TO DELETE LATER IF IS NOT NECESSARY,
     unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
     unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
     unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
     CGPUStatics::GetSingletonPtr()->SetToZero();
-    CCore::GetSingletonPtr()->GetFontManager()->DrawDefaultText( 300, 0,
-            Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
-            d );
+    FontInstance->DrawDefaultText( 300, 0,
+                                   Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
+                                   d );
     // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
@@ -333,13 +326,13 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
 {
     std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
-    CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
 
 
     //Get method name
     std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
     std::string l_NameShape = _Other_Shape->GetName();
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+    ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
@@ -347,11 +340,11 @@ void CPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
 {
     std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
-    CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
     std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
     std::string l_NameShape = _Other_Shape->GetName();
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+    ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
@@ -359,11 +352,11 @@ void CPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
 {
     std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
-    CTrigger* l_Trigger = CCore::GetSingletonPtr()->GetTriggerManager()->GetTriggerByName( _Entity_Trigger1->GetName() );
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
     std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
     std::string l_NameShape = _Other_Shape->GetName();
-    CCore::GetSingletonPtr()->GetScriptManager()->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+    ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
 }
 

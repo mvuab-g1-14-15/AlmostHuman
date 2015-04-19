@@ -1,7 +1,8 @@
 #include "SceneRenderComands\ParticleRendererCommand.h"
 #include "Particles\ParticleManager.h"
 #include "GraphicsManager.h"
-#include "Core.h"
+
+#include "EngineManagers.h"
 
 CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
 {
@@ -9,5 +10,5 @@ CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRen
 
 void CParticleRenderCommand::Execute( CGraphicsManager& GM )
 {
-    CCore::GetSingletonPtr()->GetParticleManager()->Render();
+    ParticleMInstance->Render();
 }

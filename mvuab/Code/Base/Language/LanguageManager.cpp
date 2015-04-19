@@ -1,12 +1,50 @@
 #include "Language\LanguageManager.h"
 #include "xml/XMLTreeNode.h"
-#include "Utils/Defines.h"
+
+//#include "Exceptions/Exception.h"
+#include "Logger/Logger.h"
+#include "Utils\Defines.h"
+#include "EngineConfig.h"
 
 CLanguageManager::CLanguageManager()
     : m_sCurrentLanguage("")
 {}
 
 
+CLanguageManager::CLanguageManager( CXMLTreeNode& atts )
+	: CManager(atts)
+{
+  CXMLTreeNode l_File;
+
+  if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+  {
+    std::string err = "Error reading the configuration file of the engine" + mConfigPath;
+    FATAL_ERROR( err.c_str() );
+  }
+  
+  m_sCurrentLanguage = std::string( l_File.GetPszProperty( "current_language", "" ) );
+
+  CXMLTreeNode  TreeNode = l_File["languages"];
+  std::vector<std::string> l_Languages;
+  if ( TreeNode.Exists() )
+  {
+      int countLan = TreeNode.GetNumChildren();
+      for ( int lans = 0; lans < countLan; ++lans )
+      {
+          std::string TagName = TreeNode( lans ).GetName();
+
+          if ( TagName == "language" )
+          l_Languages.push_back( std::string( TreeNode( lans ).GetPszProperty( "path", "" ) ) );
+      }
+  }
+  if ( l_Languages.size() > 0 )
+    SetXmlPaths( l_Languages );
+}
+void CLanguageManager::Init()
+{
+	LoadXMLs();
+	SetCurrentLanguage( m_sCurrentLanguage );
+}
 void CLanguageManager::LoadXMLs ()
 {
     //Tener en cuenta que se puede hacer un reload!
@@ -37,6 +75,7 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
         std::string msg_error = "LanguageManager::LoadXML->Error al intentar leer el archivo de lenguaje: " + pathFile;
         LOG_ERROR_APPLICATION(msg_error.c_str());
     }
+
     LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Parseando fichero de lenguaje: %s", pathFile.c_str());
 
     CXMLTreeNode  m = parser["Language"];
@@ -55,15 +94,17 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
             Math::Vect4f vecColor            = m(i).GetVect4fProperty("color", Math::Vect4f(0.f, 0.f, 0.f, 0.f));
             l_literal.m_value        = m(i).GetPszISOProperty("value", "nothing");
             l_literal.m_cColor    = Math::CColor(vecColor.x, vecColor.y, vecColor.z, vecColor.w);
+
             language.insert(std::pair<std::string, SLiteral>(id, l_literal));
             LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Añadido literal(%s,%s,[%f,%f,%f,%f],%s)", id.c_str(),
                                   l_literal.m_sFontId.c_str(), vecColor.x, vecColor.y, vecColor.z, vecColor.w, l_literal.m_value.c_str());
+
         }
     }
     if (m_Languages.find(id_language) != m_Languages.end())
     {
-        LOG_WARNING_APPLICATION("LanguageManager::LoadXML-> EYa se ha registrado un language con identificador %s",
-                                id_language.c_str());
+        //Ya está registrado el identificador id_language
+        LOG_WARNING_APPLICATION( "LanguageManager::LoadXML-> EYa se ha registrado un language con identificador %s", id_language.c_str());
     }
     else
     {
@@ -91,7 +132,7 @@ void CLanguageManager::SetXmlFile (const std::string& pathFile)
     if (!exist)
     {
         m_vXML_Files.push_back(pathFile);
-        LOG_INFO_APPLICATION("LanguageManager::SetXmlFile-> Se ha añadido el xml: %s", pathFile.c_str());
+        LOG_INFO_APPLICATION( "LanguageManager::SetXmlFile-> Se ha añadido el xml: %s", pathFile.c_str());
     }
 
 }
@@ -123,7 +164,7 @@ void CLanguageManager::SetCurrentLanguage (const std::string& id)
     }
     else
     {
-        LOG_INFO_APPLICATION( "LanguageManager::SetCurrentLanguage-> El language %s no esta registrado", id.c_str());
+        LOG_WARNING_APPLICATION( "LanguageManager::SetCurrentLanguage-> El language %s no esta registrado", id.c_str());
     }
 }
 

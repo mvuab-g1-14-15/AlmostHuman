@@ -6,26 +6,26 @@
 #include <d3dx9.h>
 #include "d3dx9shape.h"
 
-#include "Utils\SingletonPattern.h"
 #include "Utils\Defines.h"
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
 #include "Cameras\Frustum.h"
 #include <string>
+#include "Utils\Manager.h"
 
 class CEffectTechnique;
 class CTexture;
 class CEngineConfig;
 
-class CGraphicsManager : public CSingleton<CGraphicsManager>
+class CGraphicsManager : public CManager
 {
 public:
   typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT } ETypeAlignment;
-
-  CGraphicsManager();
+  typedef enum { NONE_FLIP, FLIP_X, FLIP_Y} ETypeFlip;
+  CGraphicsManager( const CXMLTreeNode& atts );
   ~CGraphicsManager();
 
-  bool Init( HWND hWnd, CEngineConfig* aEngineConfig );
+  virtual void Init();
   void Update();
   void Render();
   void Release();
@@ -42,7 +42,6 @@ public:
   void DisableZBuffering();
   void GetWidthAndHeight( uint32& w, uint32& h );
   void SetWidthAndHeight( uint32 w, uint32 h );
-  void RenderCursor();
   void Clear();
   void Clear( bool target, bool zbuffer, bool stencil, u_int mask );
   void EnableZTest();
@@ -113,6 +112,9 @@ public:
                                 CTexture* Texture );
   void DrawHalfLowerSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
   void DrawHalfUpperSphere( const Math::Vect3f& Pos, float radius, uint32 edges, Math::CColor color );
+
+  //void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, SRectangle2D& coordText);
+  void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, ETypeFlip flip = NONE_FLIP);
 
   void DrawTeapot();
   void CreateQuadBuffers();

@@ -2,6 +2,7 @@
 
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "Utils\Manager.h"
 
 extern "C"
 {
@@ -36,7 +37,7 @@ void registerInputs( lua_State* m_LS )
 {
   module( m_LS )
   [
-    class_<CInputManager>( "CInputManager" )
+    class_<CInputManager, CManager>( "CInputManager" )
     .def( constructor<>() )
 
     .def( "IsDown", &CInputManager::IsDown )

@@ -15,6 +15,7 @@
 #include <map>
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\TemplatedVectorMapManager.h"
+#include "Utils\Manager.h"
 #include "Actor\PhysicActor.h"
 #include "Trigger.h"
 
@@ -23,16 +24,19 @@ class CPhysicUserData;
 //class CXMLTreeNode;
 //class ItemCore;
 
-class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>
+class CTriggerManager : public CTemplatedVectorMapManager<CTrigger>, public CManager
 {
 private: // Members
-  std::string                                     m_FileName;
 private: // Methods
 
 public:
   CTriggerManager();
+  CTriggerManager(CXMLTreeNode& atts);
   ~CTriggerManager();
 
+  void								  Init();
+  void								  Update(){}
+  void								  Render(){}
   bool                                LoadXML( const std::string& FileName );
   bool                                Reload();
   bool                                ReloadXML( const std::string& FileName );

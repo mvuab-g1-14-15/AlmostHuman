@@ -4,26 +4,27 @@
 
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "Utils\TemplatedVectorMapManager.h"
-#include "Utils\SingletonPattern.h"
 #include "XML\XMLTreeNode.h"
+#include "Utils\Manager.h"
 
-class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRenderableObjectsManager>, public CSingleton< CRenderableObjectsLayersManager >
+class CGraphicsManager;
+
+class CRenderableObjectsLayersManager : public
+  CTemplatedVectorMapManager<CRenderableObjectsManager>,
+  public CManager
 {
-    private:
-        std::string m_FileName;
-        CRenderableObjectsManager *m_DefaultRenderableObjectManager;
-        CRenderableObjectsManager *GetRenderableObjectManager( CXMLTreeNode& Node );
-
-    public:
-        CRenderableObjectsLayersManager();
-        ~CRenderableObjectsLayersManager();
-
-        void Load( const std::string& FileName );
-        void Reload();
-        void Destroy();
-
-        void Update();
-        void Render();
-        void Render( const std::string& LayerName );
+private:
+  CRenderableObjectsManager* m_DefaultRenderableObjectManager;
+  CRenderableObjectsManager* GetRenderableObjectManager( CXMLTreeNode& Node );
+public:
+  CRenderableObjectsLayersManager();
+  CRenderableObjectsLayersManager( CXMLTreeNode& atts);
+  ~CRenderableObjectsLayersManager();
+  void Destroy();
+  void Init();
+  void Reload();
+  void Update();
+  void Render();
+  void Render( const std::string& LayerName );
 };
 #endif

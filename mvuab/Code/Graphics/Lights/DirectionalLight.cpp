@@ -1,7 +1,12 @@
 #include "DirectionalLight.h"
+
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 #include "Effects\EffectManager.h"
+
+#include "Cameras\Camera.h"
+#include "Cameras\CameraManager.h"
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
@@ -54,10 +59,13 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
     D3DXMATRIX l_View;
     D3DXMATRIX l_Ortho;
     D3DXVECTOR3 l_Eye( m_Position.x, m_Position.y, m_Position.z );
+
     m_Direction.Normalize();
     Vect3f l_LookAtV3f = m_Position + m_Direction;
+
     D3DXVECTOR3 l_LookAt( l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z );
     D3DXVECTOR3 l_VUP;
+
     float l_Value = v3fY * l_LookAtV3f;
 
     if ( ( v3fY * m_Direction ) > 0.995f || ( v3fNEGY * m_Direction ) > 0.995f )
@@ -73,14 +81,19 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
         l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
     }
 
-    //l_VUP = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+
     D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
     m_ViewShadowMap = Mat44f( l_View );
+
     D3DXMatrixOrthoLH( &l_Ortho, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 0.1f, m_EndRangeAttenuation );
     m_ProjectionShadowMap = Mat44f( l_Ortho );
-    CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
+
+    CEffectManager* l_EffectManager = EffectManagerInstance;
     l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
-    LPDIRECT3DDEVICE9 lDevice = CGraphicsManager::GetSingletonPtr()->GetDevice();
+
+    CEngineManagers::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->UpdateFrustum(l_View * l_Ortho);
+
+    LPDIRECT3DDEVICE9 lDevice = GraphicsInstance->GetDevice();
     lDevice->SetTransform( D3DTS_VIEW, &l_View );
     lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
 }

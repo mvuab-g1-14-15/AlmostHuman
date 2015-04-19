@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 
+#include "Utils\Manager.h"
 #include "InputDefs.h"
 #include "InputManager.h"
 #include "Utils\SingletonPattern.h"
@@ -31,13 +32,14 @@ typedef struct S_INPUT_ACTION
 
 typedef std::vector<S_INPUT_ACTION> VecInputs;
 
-class CActionManager : public CSingleton<CActionManager>
+class CActionManager : public CManager
 {
 public:
     CActionManager  ();
+	CActionManager  ( CXMLTreeNode& atts );
     ~CActionManager ();
 
-    void Init       ( const std::string &xmlFile, CInputManager *a_pInputManager );
+    void Init       ( );
  
     bool Reload     ();
     bool LoadXML    ();
@@ -49,6 +51,7 @@ public:
     void SetAction  (const std::string &action, VecInputs &a_vInputs);
 
     void Update     ();
+	void Render		(){};
     void Destroy    ();
 private:
     typedef std::map<std::string, std::vector<S_INPUT_ACTION>> MapActions;

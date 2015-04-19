@@ -1,20 +1,21 @@
-core = CCore.GetSingletonPtr()
-action_manager = core:GetActionManager()
+engine = CEngine.GetSingletonPtr()
+action_manager = GetActionManager()
 action_manager_lua_wrapper = CActionManagerLuaWrapper()
-camera_manager = core:GetCameraManager()
-timer = core:GetTimer()
-physic_manager = core:GetPhysicsManager()
-enemy_manager = core:GetEnemyManager()
-gizmos_manager = core:GetGizmosManager()
-particle_manager = core:GetParticleManager()
-sound_manager = core:GetSoundManager()
-renderable_objects_layer_manager = core:GetRenderableObjectsLayersManager()
+camera_manager = GetCameraManager()
+timer = engine:GetTimer()
+physic_manager = GetPhysicsManager()
+enemy_manager = GetEnemyManager()
+gizmos_manager = GetGizmosManager()
+renderable_objects_layer_manager = GetRenderableObjectsLayersManager()
+sound_manager = GetSoundManager()
 renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
+particle_manager = GetParticleManager()
 process = CEngine.GetSingletonPtr():GetProcess()
 
 -- Global Variables
 g_CameraSensibility = 30.0
 g_HalfPi = 1.57079632679
+g_Pi = 3.141592
 
 -- Global Functions
 function OverlapSphere(radius, position)
@@ -33,7 +34,7 @@ function PlayerDistance(enemy)
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
-	--core:Trace("Player distance: " .. l_DistanceVector:Length())
+	--engine:Trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -45,26 +46,34 @@ function GetPlayerPosition()
 end
 
 function PlayerVisibility(enemy)
-	local l_PlayerPos = GetPlayerPosition()
-	local l_EnemyPos = enemy:GetPosition();
+	local l_EnemyPos = enemy:GetPosition()
+	local l_EnemyDir = enemy:GetRenderableObject():GetDirection()
 	
-	-- The raycast collision with the capsule of the enemy, must check that
-	l_EnemyPos.y = l_EnemyPos.y + 0.1
-	l_PlayerPos.y = l_PlayerPos.y - 0.1
+	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
+	
+	l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
+
+	return l_ViewingPlayer
+--[[
+	local l_PlayerPos = GetPlayerPosition()
+	local l_EnemyPos = enemy:GetPosition()
 	
 	local l_Direction = l_PlayerPos - l_EnemyPos
-	l_Direction:Normalize()
+	if CheckVector(l_Direction) then
+		l_Direction:Normalize()
+	end
 	
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	
 	-- The impact mask is not used
-	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos, l_Direction, l_ImpactMask)
+	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos + l_Direction * enemy:GetRadius(), l_Direction, l_ImpactMask)
 	
-	--core:Trace("Group: " .. l_CollisionGroup)
+	--engine:Trace("Group: " .. l_CollisionGroup)
 	
 	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
 		return true
 	else
 		return false
 	end
+]]
 end

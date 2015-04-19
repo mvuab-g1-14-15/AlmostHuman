@@ -9,7 +9,10 @@
 
 #include "Particles\ParticleManager.h"
 #include "Particles\ParticleEmitter.h"
+#include "Particles\TrailEmitter.h"
 #include "Particles\CubeEmitter.h"
+
+#include "EngineManagers.h"
 
 #include "luabind_macros.h"
 
@@ -55,7 +58,10 @@ ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f positi
   SCollisionInfo hit_info;
   CPhysicUserData* l_PUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info);
   if (l_PUD)
-    return l_PUD->GetMyCollisionGroup();
+	  if (l_PUD->GetController())
+		return l_PUD->GetController()->GetColisionGroup();
+	  else
+		  return l_PUD->GetMyCollisionGroup();
   else
     return (ECollisionGroup)-1;
 }
@@ -83,6 +89,22 @@ template<class T>
 void removeResource( T val )
 {
   CHECKED_DELETE( val );
+}
+
+bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction)
+{
+	const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapConeActor(_Distance, _Angle, _Position, _Direction, 0xffffffff);
+	std::vector<CPhysicUserData*>::const_iterator it = l_UserDatas.begin(),
+											it_end = l_UserDatas.end();
+	for( ; it!=it_end; ++it)
+	{
+		CPhysicUserData* l_UserData = *it;
+		CPhysicController* l_Controller = l_UserData->GetController();
+		std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
+		if ( name == "Player")
+			return true;
+	}
+	return false;
 }
 
 void registerPhysX( lua_State* m_LS )
@@ -151,6 +173,8 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
     .def( "RaycastDistance", &RaycastDistance )
     .def( "RaycastType", &RaycastType )
+	.def( "OverlapConeActor", &CPhysicsManager::OverlapConeActor )
+	.def ("PlayerInSight", &PlayerInSight )
   ];
   module( m_LS ) [
     class_<CPhysicController, CObject3D>( "CPhysicController" )
@@ -182,6 +206,7 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_CLASS( CParticleManager )
     LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
     LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
+    LUA_DECLARE_METHOD( CParticleManager, CreateTrailEmitter )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( m_LS )
@@ -193,7 +218,9 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
     LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
     LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
     LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
+	LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
     LUA_DECLARE_METHOD( CParticleEmitter, Generate )
   LUA_END_DECLARATION
 
@@ -203,8 +230,16 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
-    LUA_DECLARE_METHOD( CCubeEmitter, SetRadius )
     LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
     LUA_DECLARE_METHOD( CCubeEmitter, SetTextureName )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_DERIVED_CLASS( CTrailEmitter, CParticleEmitter )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_METHOD( CTrailEmitter, SetSize )
+    LUA_DECLARE_METHOD( CTrailEmitter, SetPitch )
+    LUA_DECLARE_METHOD( CTrailEmitter, SetYaw )
+    LUA_DECLARE_METHOD( CTrailEmitter, SetRandom )
   LUA_END_DECLARATION
 }
