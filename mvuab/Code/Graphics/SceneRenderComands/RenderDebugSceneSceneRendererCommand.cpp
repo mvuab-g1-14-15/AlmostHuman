@@ -5,18 +5,19 @@
 #include "Core.h"
 #include "EngineManagers.h"
 
-CRenderDebugSceneSceneRendererCommand::CRenderDebugSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
+CRenderDebugSceneSceneRendererCommand::CRenderDebugSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(
+        atts)
 {
-	const std::string &l_LayerName = atts.GetPszProperty("layer", "");
-	m_Layer = ROMLInstance->GetResource(l_LayerName);
+    const std::string &l_LayerName = atts.GetPszProperty("layer", "");
+    m_Layer = ROLMInstance->GetResource(l_LayerName);
 }
 
 CRenderDebugSceneSceneRendererCommand::~CRenderDebugSceneSceneRendererCommand()
 {
-	CHECKED_DELETE(m_Layer);
+    CHECKED_DELETE(m_Layer);
 }
 
 void CRenderDebugSceneSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	m_Layer->Render();
+    m_Layer->Render();
 }

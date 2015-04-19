@@ -35,38 +35,35 @@
 #include "SoundManager.h"
 
 CCore::CCore()
-  : m_pTimer( 0 )
-  , m_pConsole( 0 )
- // , m_pEngineManagers( 0 )
+    : m_pTimer( 0 )
+    , m_pConsole( 0 )
+      // , m_pEngineManagers( 0 )
 {
 }
 
 CCore::~CCore()
 {
- // Destroy();
-  CHECKED_DELETE( m_pTimer );
-  CHECKED_DELETE( m_pConsole );
+    // Destroy();
+    CHECKED_DELETE( m_pTimer );
+    CHECKED_DELETE( m_pConsole );
 }
 
 void CCore::Init()
 {
-  // Obtain the path of the configuration file and parse it
-  CreateManagers();
-  InitManagers();
+    // Obtain the path of the configuration file and parse it
+    CreateManagers();
+    InitManagers();
 }
 
 void CCore::Update()
 {
     //m_pEngineManagers->Update();
-  m_pTimer->Update();
-  
-  m_pSoundManager->Update( m_pTimer->GetElapsedTime() );
-
-  if ( ActionManagerInstance->DoAction( "ClearConsole" ) )
-  {
-    if ( m_pConsole )
-      m_pConsole->Clear();
-  }
+    m_pTimer->Update();
+    if ( ActionManagerInstance->DoAction( "ClearConsole" ) )
+    {
+        if ( m_pConsole )
+        { m_pConsole->Clear(); }
+    }
 }
 
 void CCore::Render()
@@ -76,7 +73,7 @@ void CCore::Render()
 void CCore::CreateManagers()
 {
     if ( EngineConfigInstance->GetEnableConsole() )
-        CreateConsole();
+    { CreateConsole(); }
     m_pTimer = new CTimer( 30 );
 }
 
@@ -98,8 +95,8 @@ void CCore::InitManagers()
 
 void CCore::Trace( const std::string& TraceStr )
 {
-  HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-  SetConsoleTextAttribute( hConsole,
-                           FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-  std::cout << TraceStr << std::endl << std::endl;
+    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute( hConsole,
+                             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+    std::cout << TraceStr << std::endl << std::endl;
 }

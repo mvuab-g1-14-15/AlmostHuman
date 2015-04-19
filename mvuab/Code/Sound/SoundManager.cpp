@@ -64,10 +64,9 @@ void CSoundManager::Init()
 }
 
 //-----------GENERAL FUNCTIONS---------------------
-void CSoundManager::Update( float _ElapsedTime )
+void CSoundManager::Update( )
 {
-    Math::Vect3f l_Orientation =
-        CameraMInstance->GetCurrentCamera()->GetDirection().GetNormalized();
+    Math::Vect3f l_Orientation = CameraMInstance->GetCurrentCamera()->GetDirection().GetNormalized();
     Math::Vect3f l_Up = CameraMInstance->GetCurrentCamera()->GetVecUp().GetNormalized();
     SetListenerOrientation( -l_Orientation, l_Up );
     SetListenerPosition( CameraMInstance->GetCurrentCamera()->GetPosition() );

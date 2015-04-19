@@ -38,66 +38,64 @@ class CGUIManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
-public:
-  CEngineManagers( const std::string & aPath );
-  virtual ~CEngineManagers();
-  virtual void Init();
-  virtual void Update();
-  virtual void Render();
+    public:
+        CEngineManagers( const std::string & aPath );
+        virtual ~CEngineManagers();
+        virtual void Init();
+        virtual void Update();
+        virtual void Render();
 
-  void Release();
+        void Release();
 
-  GET_SET_PTR( CEffectManager, EffectManager)
-  GET_SET_PTR( CInputManager, InputManager)
-  GET_SET_PTR( CActionManager, ActionManager)
-  GET_SET_PTR( CLanguageManager, LanguageManager)
-  GET_SET_PTR( CFontManager, FontManager)
-  GET_SET_PTR( CRenderableObjectTechniqueManager, RenderableObjectTechniqueManager)
-  GET_SET_PTR( CStaticMeshManager, StaticMeshManager)
-  GET_SET_PTR( CAnimatedModelsManager, AnimatedModelsManager)
-  GET_SET_PTR( CRenderableObjectsLayersManager, RenderableObjectsLayersManager)
-  GET_SET_PTR( CSceneRendererCommandManager, SceneRendererCommandManager)
-  GET_SET_PTR( CCameraManager, CameraManager)
-  GET_SET_PTR( CScriptManager, ScriptManager)
-  GET_SET_PTR( CLightManager, LightManager)
-  GET_SET_PTR( CPhysicsManager, PhysicsManager)
-  GET_SET_PTR( CEnemyManager, EnemyManager)
-  GET_SET_PTR( CTriggerManager, TriggerManager)
-  GET_SET_PTR( CBillboard , Billboard )
-  GET_SET_PTR( CParticleManager, ParticleManager)
-  GET_SET_PTR( CGizmosManager, GizmosManager)
-  GET_SET_PTR( CTextureManager, TextureManager)
-  GET_SET_PTR( CGUIManager, GUIManager)
+        CGraphicsManager*                 GetGraphicsManager()      const;
+        CEffectManager*                   GetEffectsManager()       const;
+        CInputManager*                    GetInputManager() const;
+        CActionManager*                   GetActionManager() const;
+        CLanguageManager*                 GetLanguageManager() const;
+        CFontManager*                     GetFontManager() const;
+        CRenderableObjectsLayersManager*  GetROLManager() const;
+        CStaticMeshManager*               GetStaticMeshManager() const;
+        CRenderableObjectTechniqueManager*GetROTManager() const;
+        CAnimatedModelsManager*           GetAnimatedModelsManager() const;
+        CSceneRendererCommandManager*     GetSceneRendererCmdManager() const;
+        CCameraManager*                   GetCameraManager() const;
+        CScriptManager*                   GetScriptManager() const;
+        CLightManager*                    GetLightManager() const;
+        CPhysicsManager*                  GetPhysicsManager() const;
+        CEnemyManager*                    GetEnemyManager() const;
+        CTriggerManager*                  GetTriggerManager() const;
+        CParticleManager *                GetParticleManager() const;
+        CGizmosManager *                  GetGizmosManager() const;
+        CTextureManager *                 GetTextureManager() const;
+        CSoundManager *                   GetSoundManager() const;
+        CGUIManager *                     GetGUIManager() const;
 
-  CSoundManager*    GetSoundManager() const;
-  CGraphicsManager* GetGraphicsManager() const;
+    private:
+        CGraphicsManager *                     m_pGraphicsManager;
+        CEffectManager *                       m_pEffectManager;
+        CInputManager *                        m_pInputManager;
+        CActionManager *                       m_pActionManager;
+        CLanguageManager *                     m_pLanguageManager;
+        CFontManager *                         m_pFontManager;
+        CRenderableObjectTechniqueManager *    m_pRenderableObjectTechniqueManager;
+        CStaticMeshManager *                   m_pStaticMeshManager;
+        CAnimatedModelsManager *               m_pAnimatedModelsManager;
+        CRenderableObjectsLayersManager *      m_pRenderableObjectsLayersManager;
+        CSceneRendererCommandManager *         m_pSceneRendererCommandManager;
+        CCameraManager *                       m_pCameraManager;
+        CScriptManager *                       m_pScriptManager;
+        CLightManager *                        m_pLightManager;
+        CPhysicsManager *                      m_pPhysicsManager;
+        CEnemyManager *                        m_pEnemyManager;
+        CTriggerManager *                      m_pTriggerManager;
+        CBillboard *                           m_pBillboard;
+        CParticleManager *                     m_pParticleManager;
+        CGizmosManager *                       m_pGizmosManager;
+        CTextureManager *                      m_pTextureManager;
+        CSoundManager *                        m_pSoundManager;
+        CGUIManager *                          m_pGUIManager;
 
-private:
-  CGraphicsManager*                     m_pGraphicsManager;
-  CEffectManager*                       m_pEffectManager;
-  CInputManager*                        m_pInputManager;
-  CActionManager*                       m_pActionManager;
-  CLanguageManager*                     m_pLanguageManager;
-  CFontManager*                         m_pFontManager;
-  CRenderableObjectTechniqueManager*    m_pRenderableObjectTechniqueManager;
-  CStaticMeshManager*                   m_pStaticMeshManager;
-  CAnimatedModelsManager*               m_pAnimatedModelsManager;
-  CRenderableObjectsLayersManager*      m_pRenderableObjectsLayersManager;
-  CSceneRendererCommandManager*         m_pSceneRendererCommandManager;
-  CCameraManager*                       m_pCameraManager;
-  CScriptManager*                       m_pScriptManager;
-  CLightManager*                        m_pLightManager;
-  CPhysicsManager*                      m_pPhysicsManager;
-  CEnemyManager*                        m_pEnemyManager;
-  CTriggerManager*                      m_pTriggerManager;
-  CBillboard*                           m_pBillboard;
-  CParticleManager*                     m_pParticleManager;
-  CGizmosManager*                       m_pGizmosManager;
-  CTextureManager*                      m_pTextureManager;
-  CSoundManager*                        m_pSoundManager;
-  CGUIManager*                          m_pGUIManager;
-
-  std::string                           m_ManagersPath;
+        std::string                           m_ManagersPath;
 };
 
 #endif // ENGINE_MANAGER_H

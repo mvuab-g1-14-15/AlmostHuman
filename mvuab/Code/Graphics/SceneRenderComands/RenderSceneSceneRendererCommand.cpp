@@ -7,8 +7,8 @@
 
 CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {
-	const std::string &l_LayerName = atts.GetPszProperty("layer", "");
-	m_Layer = ROMLInstance->GetResource(l_LayerName);
+    const std::string &l_LayerName = atts.GetPszProperty("layer", "");
+    m_Layer = ROLMInstance->GetResource(l_LayerName);
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
@@ -17,5 +17,5 @@ CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
 
 void CRenderSceneSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-	m_Layer->Render();
+    m_Layer->Render();
 }
