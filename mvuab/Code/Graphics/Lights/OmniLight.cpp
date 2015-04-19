@@ -4,6 +4,10 @@
 #include "EngineManagers.h"
 #include "GraphicsManager.h"
 
+#include "Cameras\Camera.h"
+#include "Cameras\CameraManager.h"
+
+
 COmniLight::COmniLight( CXMLTreeNode node ) : CLight( node )
 {
   SetType( CLight::OMNI );
