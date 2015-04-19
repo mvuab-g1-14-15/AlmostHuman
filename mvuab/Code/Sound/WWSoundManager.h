@@ -16,25 +16,27 @@
 #include <AK/SoundEngine/Common/AkStreamMgrModule.h>
 #include "AkSoundEngineExports.h"
 #include "AkDefaultIOHookBlocking.h"
-
-#include "Utils/SingletonPattern.h"
+#include "XML\XMLTreeNode.h"
+#include "Utils/Manager.h"
 #include "Utils/BaseUtils.h"
 #include <map>
 #include "Math/Vector3.h"
 
-class CWWSoundManager : public CSingleton<CWWSoundManager>
+class CWWSoundManager : public CManager
 {
 public:
   //----Init and End protocols------------------------------------
   CWWSoundManager() {}
+  CWWSoundManager( const CXMLTreeNode& atts );
   virtual ~CWWSoundManager()
   {
     Done();
   }
-  bool  Init();
+  void  Init();
+  void  Update();
   void  Done();
 
-  void Render();
+  void Render() {}
   bool Load( const std::string& xmlFile );
 
   void SetGamePaused( bool in_Paused )
@@ -67,7 +69,6 @@ private:
 
   CAkDefaultIOHookBlocking* m_lowLevelIO;
   std::map<std::string, AkGameObjectID> m_GameObjectMap;
-  std::string m_Filename;
   bool m_GamePaused;
   AkGameObjectID m_ObjectId;
 };

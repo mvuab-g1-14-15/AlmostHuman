@@ -7,6 +7,7 @@
 #include "FunctionsToRegister\VideogameFunctions.h"
 #include "FunctionsToRegister\AIFunctions.h"
 #include "FunctionsToRegister\EnumDefinitions.h"
+#include "FunctionsToRegister\SoundFunctions.h"
 #include <string>
 #include <iostream>
 
@@ -29,8 +30,8 @@ CScriptManager::CScriptManager() : CManager()
 {
 }
 
-CScriptManager::CScriptManager(CXMLTreeNode& atts)
-	: CManager(atts)
+CScriptManager::CScriptManager( CXMLTreeNode& atts )
+  : CManager( atts )
 {
 }
 
@@ -90,9 +91,9 @@ void CScriptManager::RunCode( const std::string& Code )
 
     LOG_ERROR_APPLICATION( message.c_str() );
 
-    ASSERT(false, "Running lua code");
+    ASSERT( false, "Running lua code" );
 
-// AlexJenci cheat mode
+    // AlexJenci cheat mode
 #ifdef _DEBUG
     Reload();
 #endif
@@ -112,11 +113,11 @@ void CScriptManager::RunFile( const std::string& FileName )
 
     LOG_ERROR_APPLICATION( message.c_str() );
 
-    ASSERT(false, message);
-//TODO WTF ESTO NO TIENE SENTIDO ALGUNO...
-//#ifdef _DEBUG
-//    Reload();
-//#endif
+    ASSERT( false, message );
+    //TODO WTF ESTO NO TIENE SENTIDO ALGUNO...
+    //#ifdef _DEBUG
+    //    Reload();
+    //#endif
   }
 }
 
@@ -130,4 +131,5 @@ void CScriptManager::RegisterLUAFunctions()
   registerVideogame( m_LS );
   registerAI( m_LS );
   registerEnum( m_LS );
+  registerSound( m_LS );
 }

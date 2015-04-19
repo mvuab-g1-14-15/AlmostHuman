@@ -26,6 +26,7 @@
 #include "Gizmos\GizmosManager.h"
 #include "EngineManagers.h"
 #include "Particles\ParticleManager.h"
+#include "WWSoundManager.h"
 
 #include "luabind_macros.h"
 
@@ -38,96 +39,106 @@ using namespace luabind;
 
 CActionManager* GetActionManager()
 {
-    return ActionManagerInstance;
+  return ActionManagerInstance;
 }
 
 CCameraManager* GetCameraManager()
 {
-    return CameraMInstance;
+  return CameraMInstance;
 }
 
 CPhysicsManager* GetPhysicsManager()
 {
-    return PhysXMInstance;
+  return PhysXMInstance;
 }
 
 CEnemyManager* GetEnemyManager()
 {
-    return EnemyMInstance;
+  return EnemyMInstance;
 }
 
 CRenderableObjectsLayersManager* GetRenderableObjectsLayersManager()
 {
-    return ROLMInstance;
+  return ROLMInstance;
 }
 
 CGizmosManager* GetGizmosManager()
 {
-    return GizmosMInstance;
+  return GizmosMInstance;
 }
 
 CParticleManager* GetParticleManager()
 {
-    return ParticleMInstance;
-}
-void registerProcess( lua_State* aLuaState)
-{
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CProcess )
-    LUA_END_DECLARATION
+  return ParticleMInstance;
 }
 
-void registerEngine( lua_State* aLuaState)
+CWWSoundManager* GetSoundManager()
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CSingleton<CEngine> )
-    LUA_END_DECLARATION
+  return SoundMan;
+}
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
-    LUA_DECLARE_METHOD( CEngine, GetProcess )
-    LUA_DECLARE_METHOD( CEngine, GetTimer )
-    LUA_DECLARE_METHOD( CEngine, Trace )
-    LUA_BEGIN_SCOPE
-    LUA_DECLARE_METHOD_SCOPE(CEngine, GetSingletonPtr )
-    LUA_END_SCOPE
-    LUA_END_DECLARATION
+void registerProcess( lua_State* aLuaState )
+{
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CProcess )
+  LUA_END_DECLARATION
+}
+
+void registerEngine( lua_State* aLuaState )
+{
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CSingleton<CEngine> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
+  LUA_DECLARE_METHOD( CEngine, GetProcess )
+  LUA_DECLARE_METHOD( CEngine, GetTimer )
+  LUA_DECLARE_METHOD( CEngine, Trace )
+  LUA_BEGIN_SCOPE
+  LUA_DECLARE_METHOD_SCOPE( CEngine, GetSingletonPtr )
+  LUA_END_SCOPE
+  LUA_END_DECLARATION
 }
 
 void registerManagers( lua_State* aLuaState )
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetActionManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetActionManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCameraManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCameraManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetEnemyManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetEnemyManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetRenderableObjectsLayersManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetRenderableObjectsLayersManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager)
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSoundManager )
+  LUA_END_DECLARATION
 }
 
 void registerCore( lua_State* aLuaState )
 {
-    registerProcess( aLuaState );
-    registerEngine( aLuaState );
-    registerManagers( aLuaState );
+  registerProcess( aLuaState );
+  registerEngine( aLuaState );
+  registerManagers( aLuaState );
 }

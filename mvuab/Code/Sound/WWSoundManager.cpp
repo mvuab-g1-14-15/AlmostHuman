@@ -57,7 +57,11 @@ void VirtualFreeHook(
 #endif
 }
 
+CWWSoundManager::CWWSoundManager( const CXMLTreeNode& atts )
+  : CManager( atts )
+{
 
+}
 
 void CWWSoundManager::Done()
 {
@@ -77,7 +81,7 @@ void CWWSoundManager::Done()
 }
 
 
-bool CWWSoundManager::Init()
+void CWWSoundManager::Init()
 {
 
   AkMemSettings memSettings;
@@ -86,7 +90,7 @@ bool CWWSoundManager::Init()
   if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success )
   {
     assert( ! "Could not create the memory manager." );
-    return false;
+    return;
   }
 
   AkStreamMgrSettings stmSettings;
@@ -97,7 +101,7 @@ bool CWWSoundManager::Init()
   if ( !AK::StreamMgr::Create( stmSettings ) )
   {
     assert( ! "Could not create the Streaming Manager" );
-    return false;
+    return;
   }
 
   AkDeviceSettings deviceSettings;
@@ -110,7 +114,7 @@ bool CWWSoundManager::Init()
   if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success )
   {
     assert( ! "Could not create the streaming device and Low-Level I/O system" );
-    return false;
+    return;
   }
 
   AkInitSettings initSettings;
@@ -121,7 +125,7 @@ bool CWWSoundManager::Init()
   if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success )
   {
     assert( ! "Could not initialize the Sound Engine." );
-    return false;
+    return;
   }
 
   AkMusicSettings musicInit;
@@ -130,7 +134,7 @@ bool CWWSoundManager::Init()
   if ( AK::MusicEngine::Init( &musicInit ) != AK_Success )
   {
     assert( ! "Could not initialize the Music Engine." );
-    return false;
+    return;
   }
 
   AK::SoundEngine::RegisterAllPlugins();
@@ -146,15 +150,15 @@ bool CWWSoundManager::Init()
   if ( AK::Comm::Init( commSettings ) != AK_Success )
   {
     assert( ! "Could not initialize communication." );
-    return false;
+    return;
   }
 
 #endif // AK_OPTIMIZED
 
-  return true;
+  Load( mConfigPath );
 }
 
-void CWWSoundManager::Render()
+void CWWSoundManager::Update()
 {
   AK::SoundEngine::RenderAudio();
 }
