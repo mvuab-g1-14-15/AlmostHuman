@@ -7,6 +7,7 @@
 #include "FunctionsToRegister\VideogameFunctions.h"
 #include "FunctionsToRegister\AIFunctions.h"
 #include "FunctionsToRegister\EnumDefinitions.h"
+#include "FunctionsToRegister\SoundFunctions.h"
 #include <string>
 #include <iostream>
 
@@ -83,7 +84,7 @@ void CScriptManager::RunCode( const std::string& Code )
 
     LOG_ERROR_APPLICATION( message.c_str() );
 
-    ASSERT(false, message);
+    ASSERT( false, message );
 
 #ifdef _DEBUG
     Reload();
@@ -104,7 +105,7 @@ void CScriptManager::RunFile( const std::string& FileName )
 
     LOG_ERROR_APPLICATION( message.c_str() );
 
-    ASSERT(false, message);
+    ASSERT( false, message );
 
 #ifdef _DEBUG
     Reload();
@@ -122,4 +123,5 @@ void CScriptManager::RegisterLUAFunctions()
   registerVideogame( m_LS );
   registerAI( m_LS );
   registerEnum( m_LS );
+  registerSound( m_LS );
 }

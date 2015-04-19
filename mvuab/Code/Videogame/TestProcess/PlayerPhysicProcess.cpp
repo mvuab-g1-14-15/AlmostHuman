@@ -141,9 +141,9 @@ void CPlayerPhysicProcess::Update()
   }
 
   CWWSoundManager* l_SM = CCore::GetSingletonPtr()->GetSoundManager();
-  l_SM->SetListenerPosition( CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetPosition(),
-                             CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetDirection(),
-                             CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetVecUp() );
+  //   l_SM->SetListenerPosition( CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetPosition(),
+  //                              CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetDirection(),
+  //                              CCore::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->GetVecUp() );
   //l_SM->SetGameObjectPosition( "TestGameObject3d", Vect3f( 0.0f, 0.0f, 0.0f ), Vect3f( 0.0f, 0.0f, 0.0f ) );
   //CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update()" );
   CCore::GetSingletonPtr()->GetScriptManager()->RunCode( "update_gameplay()" );

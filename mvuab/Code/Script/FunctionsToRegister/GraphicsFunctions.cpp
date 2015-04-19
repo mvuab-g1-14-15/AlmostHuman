@@ -148,45 +148,45 @@ void registerGizmos( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
-void registerGraphicsManager( lua_State * aLuaState )
+void registerGraphicsManager( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register GraphicsManager" );
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // GRAPHICS MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CGraphicsManager )
-    LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_CLASS( CGraphicsManager )
+  LUA_DECLARE_DEFAULT_CTOR
   LUA_END_DECLARATION
 }
 
-void registerRenderableObject( lua_State * aLuaState )
+void registerRenderableObject( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register RenderableObjects" );
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // RENDERABLE OBJECT
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
+  LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
   LUA_END_DECLARATION
-  
+
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // RENDERABLE OBJECTS MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject> )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CRenderableObjectsManager, GetResource )
-    LUA_DECLARE_METHOD( CRenderableObjectsManager, AddResource )
+  LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD( CRenderableObjectsManager, GetResource )
+  LUA_DECLARE_METHOD( CRenderableObjectsManager, AddResource )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObjectsManager> )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObjectsManager> )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,8 +194,8 @@ void registerRenderableObject( lua_State * aLuaState )
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager> )
-    LUA_DECLARE_METHOD( CRenderableObjectsLayersManager, GetResource )
+  LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager> )
+  LUA_DECLARE_METHOD( CRenderableObjectsLayersManager, GetResource )
   LUA_END_DECLARATION
 }
 
@@ -207,11 +207,11 @@ void registerStaticMesh( lua_State* aLuaState )
   // INSTANCE MESH
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CInstanceMesh, CRenderableObject )
+  LUA_DECLARE_DERIVED_CLASS( CInstanceMesh, CRenderableObject )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
   LUA_END_DECLARATION
 }
 

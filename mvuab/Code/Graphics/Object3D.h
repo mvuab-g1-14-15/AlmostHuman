@@ -51,7 +51,7 @@ public:
     return m_fPitch;
   }
 
-  const Math::Vect3f& GetDirection() const;
+  const Math::Vect3f GetDirection() const;
 
   const Math::Vect3f& GetPosition() const
   {
