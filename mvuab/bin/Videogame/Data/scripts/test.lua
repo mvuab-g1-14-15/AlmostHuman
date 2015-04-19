@@ -6,14 +6,14 @@ local g_StrafeSpeed = 6
 local g_Speed = 5
 
 function init()
-	core = CCore.GetSingletonPtr()
-	action_manager = core:GetActionManager()
-	renderable_objects_manager = core:GetRenderableObjectsManager()
-	camera_manager = core:GetCameraManager()
-	light_manager = core:GetLightManager()
+	engine = CCore.GetSingletonPtr()
+	action_manager = GetActionManager()
+	renderable_objects_manager = GetRenderableObjectsManager()
+	camera_manager = GetCameraManager()
+	light_manager = GetLightManager()
 	cinematic=renderable_objects_manager:CreateCinematic("Data/cinematic.xml")
 	cinematic:Stop()
-	timer = core:GetTimer()
+	timer = engine:GetTimer()
 	pos = Vect3f(0, 0, 0)
 	
 	initialized = true

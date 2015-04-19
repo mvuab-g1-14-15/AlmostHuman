@@ -10,11 +10,11 @@
 
 
 CInputManager::CInputManager( CXMLTreeNode &atts)
-  : CManager(atts)
+    : CManager(atts)
 {
-	/* TODO RAUL
-	PONER LECTURA XML
-	*/
+    /*  TODO RAUL
+        PONER LECTURA XML
+    */
 }
 //----------------------------------------------------------------------------
 // Finalize data
@@ -52,7 +52,7 @@ void CInputManager::Release ()
 void CInputManager::Init ()
 {
     HRESULT hr;
-	m_hWndMain = EngineConfigInstance->GetWindowId();
+    m_hWndMain = EngineConfigInstance->GetWindowId();
 
     LOG_INFO_APPLICATION("InputManager:: calling initialization");
 
@@ -70,7 +70,8 @@ void CInputManager::Init ()
         m_bIsOk = m_pKB->Init(m_pDI, m_hWndMain);
         if (m_bIsOk)
         {
-			m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, EngineConfigInstance->GetScreenResolution(), EngineConfigInstance->GetExclusiveModeInMouse());
+            m_bIsOk    = m_pMouse->Init(m_pDI, m_hWndMain, EngineConfigInstance->GetScreenResolution(),
+                                        EngineConfigInstance->GetExclusiveModeInMouse());
 
             if (m_bIsOk)
             {
@@ -97,7 +98,7 @@ void CInputManager::Init ()
     }
 
     //return m_bIsOk;
-} 
+}
 
 
 
@@ -136,20 +137,20 @@ void CInputManager::Update(void)
 {
     HRESULT hr;
 
-    if (!IsOk()) LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", E_FAIL);//return E_FAIL;
+    if (!IsOk()) { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", E_FAIL); }//return E_FAIL;
 
     if (m_pKB)
     {
-        if ( FAILED( hr=m_pKB->Update() ) )
-            LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr);//return hr;
+        if ( FAILED( hr = m_pKB->Update() ) )
+        { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr); }//return hr;
     }
 
     if (m_pMouse)
     {
         if( m_bActiveMouse )
         {
-            if ( FAILED( hr=m_pMouse->Update() ) )
-                LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr);//return hr;
+            if ( FAILED( hr = m_pMouse->Update() ) )
+            { LOG_ERROR_APPLICATION("Error in CInputManager::Update --> %s", hr); }//return hr;
         }
     }
 

@@ -4,11 +4,11 @@
 #include "xml/XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "EngineConfig.h"
-#include "Core.h"
+
 #include "EngineManagers.h"
 
 CFontManager::CFontManager( CXMLTreeNode& atts)
-	: CManager(atts)
+    : CManager(atts)
 {
 }
 
@@ -23,17 +23,17 @@ void CFontManager::Done()
 
 void CFontManager::Init()
 {
-  LOG_INFO_APPLICATION( "CFontManager:: Inicializando FontManager" );
-  m_pD3DDevice = GraphicsInstance->GetDevice();
-  m_bIsOk = ( m_pD3DDevice != NULL );
+    LOG_INFO_APPLICATION( "CFontManager:: Inicializando FontManager" );
+    m_pD3DDevice = GraphicsInstance->GetDevice();
+    m_bIsOk = ( m_pD3DDevice != NULL );
 
-  if ( m_bIsOk )
-  {
-    //Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
-    CreateFont( 17, true, false, "Times New Roman" );
-  }
-  LoadTTFs(mConfigPath);
-  //return m_bIsOk;
+    if ( m_bIsOk )
+    {
+        //Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
+        CreateFont( 17, true, false, "Times New Roman" );
+    }
+    LoadTTFs(mConfigPath);
+    //return m_bIsOk;
 }
 void CFontManager::Release()
 {
@@ -59,8 +59,8 @@ void CFontManager::Release()
 
 bool CFontManager::ReloadTTFs()
 {
-  if ( mConfigPath != "" )
-    return LoadTTFs( mConfigPath );
+    if ( mConfigPath != "" )
+    { return LoadTTFs( mConfigPath ); }
 
     return false;
 }
@@ -223,8 +223,8 @@ uint32 CFontManager::DrawText( uint32 x, uint32 y, Math::CColor color,
 
 uint32 CFontManager::DrawLiteral( uint32 x, uint32 y, const std::string& s_lit )
 {
-  CLanguageManager* languageM = LanguageInstance;
-  SLiteral lit;
+    CLanguageManager* languageM = LanguageInstance;
+    SLiteral lit;
 
     if ( languageM->GetLiteral( s_lit, lit ) )
     {

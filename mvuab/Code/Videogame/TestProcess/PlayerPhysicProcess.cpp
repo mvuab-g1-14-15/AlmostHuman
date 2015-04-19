@@ -15,7 +15,7 @@
 #include "Utils\Manager.h"
 
 //CORE
-#include "Core.h"
+
 #include "EngineConfig.h"
 #include "EngineManagers.h"
 

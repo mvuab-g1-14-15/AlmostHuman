@@ -2,7 +2,7 @@
 #define COREFUNCTIONS_H
 
 #include "Engine.h"
-#include "Core.h"
+
 #include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"

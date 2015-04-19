@@ -11,7 +11,7 @@
 #include "Effects\Effect.h"
 
 #include "RenderableVertex\RenderableVertex.h"
-#include "Core.h"
+
 #include "Timer\Timer.h"
 #include "EngineManagers.h"
 

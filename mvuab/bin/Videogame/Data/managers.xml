@@ -1,4 +1,5 @@
 <managers>
+	<console lines="800" columns="130" max_lines_in_window="25" foreground_color="black" full_size="true" size="1000 800"/>
 	<graphics_manager file_config=""/>
 	<texture_manager file_config="no_name"/>
 	<effect_manager file_config="Data/effects/effects.xml"/>

@@ -44,7 +44,7 @@ function CPlayerController:__init()
 	
 	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 0.2, 0.5, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
-	core:Trace("Player Controller initialized")
+	engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()

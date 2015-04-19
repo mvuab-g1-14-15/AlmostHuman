@@ -1,7 +1,7 @@
 #include "CoreFunctions.h"
 
 #include "Engine.h"
-#include "Core.h"
+
 #include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
@@ -86,24 +86,10 @@ void registerEngine( lua_State* aLuaState)
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
     LUA_DECLARE_METHOD( CEngine, GetProcess )
+    LUA_DECLARE_METHOD( CEngine, GetTimer )
+    LUA_DECLARE_METHOD( CEngine, Trace )
     LUA_BEGIN_SCOPE
     LUA_DECLARE_METHOD_SCOPE(CEngine, GetSingletonPtr )
-    LUA_END_SCOPE
-    LUA_END_DECLARATION
-}
-
-void registerCores( lua_State* aLuaState )
-{
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CSingleton<CCore> )
-    LUA_END_DECLARATION
-
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CCore, CSingleton<CCore> )
-    LUA_DECLARE_METHOD( CCore, GetTimer )
-    LUA_DECLARE_METHOD( CCore, Trace )
-    LUA_BEGIN_SCOPE
-    LUA_DECLARE_METHOD_SCOPE(CCore, GetSingletonPtr )
     LUA_END_SCOPE
     LUA_END_DECLARATION
 }
@@ -143,6 +129,5 @@ void registerCore( lua_State* aLuaState )
 {
     registerProcess( aLuaState );
     registerEngine( aLuaState );
-    registerCores( aLuaState );
     registerManagers( aLuaState );
 }

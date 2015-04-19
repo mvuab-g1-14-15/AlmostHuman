@@ -2,7 +2,7 @@
 #include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
 #include "GraphicsManager.h"
-#include "Core.h"
+
 #include "ScriptManager.h"
 #include "Texture\TextureManager.h"
 #include "Gizmos\GizmosManager.h"
@@ -26,6 +26,7 @@
 #include "SoundManager.h"
 #include "Utils\ObjectFactory.h"
 #include "GUIManager.h"
+#include "Console/Console.h"
 
 CEngineManagers::CEngineManagers( const std::string & aPath )
     : m_ManagersPath( aPath )
@@ -111,6 +112,8 @@ void CEngineManagers::Init()
                              Type2Type<CSoundManager>( ) );
     ManagerFactory.Register( "gui_manager",
                              Type2Type<CGUIManager>( ) );
+    ManagerFactory.Register( "console",
+                             Type2Type<CConsole>( ) );
     CXMLTreeNode l_File;
 
     if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )

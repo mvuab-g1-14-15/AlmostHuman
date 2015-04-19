@@ -1,7 +1,7 @@
 #include "XML\XMLTreeNode.h"
 //#include "Base.h"
 #include "Logger\Logger.h"
-#include "Core.h"
+
 #include "PhysXObjManager.h"
 #include "PhysicsManager.h"
 #include "EngineManagers.h"
@@ -52,89 +52,89 @@ bool CPhysXObjManager::Load( const std::string& filename )
 
 bool CPhysXObjManager::Reload()
 {
-CXMLTreeNode newFile;
-	if (!newFile.LoadFile(m_Filename.c_str()))
-	{
-		std::string &msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
-		LOG_ERROR_APPLICATION(msg_error.c_str());
-		return false;
-	}
+    CXMLTreeNode newFile;
+    if (!newFile.LoadFile(m_Filename.c_str()))
+    {
+        std::string &msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
+        LOG_ERROR_APPLICATION(msg_error.c_str());
+        return false;
+    }
 
-	CXMLTreeNode l_xml = newFile["physx_objs"];
-	if( l_xml.Exists() )
-	{
-		uint16 l_Count = l_xml.GetNumChildren();
+    CXMLTreeNode l_xml = newFile["physx_objs"];
+    if( l_xml.Exists() )
+    {
+        uint16 l_Count = l_xml.GetNumChildren();
 
-		for(uint16 i = 0; i < l_Count; ++i)
-		{
-			std::string l_Type = l_xml(i).GetName();
+        for(uint16 i = 0; i < l_Count; ++i)
+        {
+            std::string l_Type = l_xml(i).GetName();
 
-			if( l_Type == "physx_obj" )
-			{
-				std::string name = l_xml(i).GetPszProperty("name", "", true);
-				int type = l_xml(i).GetIntProperty("type", 0, true);
-				Math::Vect3f pos = l_xml(i).GetVect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
-				float yaw = l_xml(i).GetFloatProperty("yaw", 0.0f, true);
-				float pitch = l_xml(i).GetFloatProperty("pitch", 0.0f, true);
-				float roll = l_xml(i).GetFloatProperty("roll", 0.0f, true);
-				std::string groupName = l_xml(i).GetPszProperty("group", "ECG_ESCENE", true);
-				bool activeStart = l_xml(i).GetBoolProperty("active_startup", false, true);
+            if( l_Type == "physx_obj" )
+            {
+                std::string name = l_xml(i).GetPszProperty("name", "", true);
+                int type = l_xml(i).GetIntProperty("type", 0, true);
+                Math::Vect3f pos = l_xml(i).GetVect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
+                float yaw = l_xml(i).GetFloatProperty("yaw", 0.0f, true);
+                float pitch = l_xml(i).GetFloatProperty("pitch", 0.0f, true);
+                float roll = l_xml(i).GetFloatProperty("roll", 0.0f, true);
+                std::string groupName = l_xml(i).GetPszProperty("group", "ECG_ESCENE", true);
+                bool activeStart = l_xml(i).GetBoolProperty("active_startup", false, true);
 
-				TPhysXObj* pxObj = NULL;
-				
-				if(type == PHYSX_OBJ_BOX)
-				{
-					TPhysXObjBox* pxBox = new TPhysXObjBox();
+                TPhysXObj* pxObj = NULL;
 
-					pxBox->m_Dimensions = l_xml(i).GetVect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
+                if(type == PHYSX_OBJ_BOX)
+                {
+                    TPhysXObjBox* pxBox = new TPhysXObjBox();
 
-					pxObj = pxBox;
-				}
+                    pxBox->m_Dimensions = l_xml(i).GetVect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
 
-				assert(pxObj);
+                    pxObj = pxBox;
+                }
 
-				pxObj->m_Type = type;
-				pxObj->m_Group = PhysXMInstance->GetCollisionGroup(groupName);
-				pxObj->SetName(name);
-				pxObj->SetPosition(pos);
-				pxObj->SetYaw(yaw);
-				pxObj->SetPitch(pitch);
-				pxObj->SetRoll(roll);
+                assert(pxObj);
 
-				/*bool isOk = */this->AddResource(name, pxObj);
-				//assert(isOk);
+                pxObj->m_Type = type;
+                pxObj->m_Group = PhysXMInstance->GetCollisionGroup(groupName);
+                pxObj->SetName(name);
+                pxObj->SetPosition(pos);
+                pxObj->SetYaw(yaw);
+                pxObj->SetPitch(pitch);
+                pxObj->SetRoll(roll);
 
-				if(activeStart)
-				{
-					CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( pxObj->GetName()  );
+                /*bool isOk = */this->AddResource(name, pxObj);
+                //assert(isOk);
 
-					l_pPhysicUserDataMesh->SetGroup(static_cast<ECollisionGroup>(pxObj->m_Group));
+                if(activeStart)
+                {
+                    CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( pxObj->GetName()  );
 
-					Math::Vect3f rotationVect = v3fZERO;
+                    l_pPhysicUserDataMesh->SetGroup(static_cast<ECollisionGroup>(pxObj->m_Group));
 
-					rotationVect.x = Math::Utils::Deg2Rad(pxObj->GetPitch());
-					rotationVect.y = Math::Utils::Deg2Rad(pxObj->GetYaw());
-					rotationVect.z = Math::Utils::Deg2Rad(pxObj->GetRoll());
+                    Math::Vect3f rotationVect = v3fZERO;
 
-					TPhysXObjBox* pxBox = static_cast<TPhysXObjBox*>(pxObj);
+                    rotationVect.x = Math::Utils::Deg2Rad(pxObj->GetPitch());
+                    rotationVect.y = Math::Utils::Deg2Rad(pxObj->GetYaw());
+                    rotationVect.z = Math::Utils::Deg2Rad(pxObj->GetRoll());
 
-					Math::Vect3f size = pxBox->m_Dimensions;
-					size /= 2;
-					
-					CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
-					l_pPhysicUserDataMesh->SetPaint (true);
+                    TPhysXObjBox* pxBox = static_cast<TPhysXObjBox*>(pxObj);
 
-					l_MeshActor->AddBoxShape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
+                    Math::Vect3f size = pxBox->m_Dimensions;
+                    size /= 2;
 
-					PhysXMInstance->AddPhysicActor(l_MeshActor);
-				}
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
+                    CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
+                    l_pPhysicUserDataMesh->SetPaint (true);
 
-	return true;
+                    l_MeshActor->AddBoxShape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
+
+                    PhysXMInstance->AddPhysicActor(l_MeshActor);
+                }
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
 }

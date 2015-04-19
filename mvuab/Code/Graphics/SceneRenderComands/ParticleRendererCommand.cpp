@@ -1,7 +1,7 @@
 #include "SceneRenderComands\ParticleRendererCommand.h"
 #include "Particles\ParticleManager.h"
 #include "GraphicsManager.h"
-#include "Core.h"
+
 #include "EngineManagers.h"
 
 CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRendererCommand( atts )

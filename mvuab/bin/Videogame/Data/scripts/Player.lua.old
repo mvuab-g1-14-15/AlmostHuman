@@ -53,7 +53,7 @@ function CPlayer:__init()
 	self.m_LeanOutEnable = true
 	
     math.randomseed(os.time())
-    core:Trace("Character Initialized")
+    engine:Trace("Character Initialized")
 end
 
 function CPlayer:InitManagers()

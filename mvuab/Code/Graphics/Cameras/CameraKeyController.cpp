@@ -3,7 +3,7 @@
 #include "Logger\Logger.h"
 #include "CameraKey.h"
 #include "CameraInfo.h"
-#include "Core.h"
+
 #include "Timer/Timer.h"
 #include "Utils/BaseUtils.h"
 #include "Math\LerpAnimator3D.h"

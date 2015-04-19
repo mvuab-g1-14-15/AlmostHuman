@@ -1,7 +1,7 @@
 #include "CinematicObject.h"
 #include "XML/XMLTreeNode.h"
 #include "CinematicObjectKeyFrame.h"
-#include "Core.h"
+
 #include "RenderableObject/RenderableObjectsManager.h"
 #include "RenderableObject/RenderableObjectsLayersManager.h"
 #include "GraphicsManager.h"

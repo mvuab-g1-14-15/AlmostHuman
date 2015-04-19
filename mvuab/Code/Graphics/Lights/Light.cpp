@@ -1,5 +1,5 @@
 #include "Light.h"
-#include "Core.h"
+
 #include "Effects\Effect.h"
 #include "Effects\EffectManager.h"
 #include "GraphicsManager.h"

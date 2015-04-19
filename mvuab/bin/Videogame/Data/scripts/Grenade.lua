@@ -15,7 +15,7 @@ function CGrenade:__init()
     self.ThrowAngle = 30.0 * g_Pi / 180.0
     self.Throwed = false
 	
-    core:Trace("CGrenade initialized")
+    engine:Trace("CGrenade initialized")
 end
 
 function CGrenade:CalculateDamage()

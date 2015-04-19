@@ -10,7 +10,7 @@ CStaticMeshManager::CStaticMeshManager() : CManager()
 
 
 CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts)
-: CManager(atts)
+    : CManager(atts)
 {
 }
 
@@ -24,7 +24,7 @@ void CStaticMeshManager::Init()
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(mConfigPath.c_str()))
     {
-		LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
         return;
     }
 
@@ -50,8 +50,6 @@ void CStaticMeshManager::Init()
         else
         { AddResource(name, l_StaticMesh); }
     }
-
-	//return true;
 }
 
 void CStaticMeshManager::Reload()

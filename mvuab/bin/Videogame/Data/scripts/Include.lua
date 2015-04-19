@@ -1,8 +1,8 @@
-core = CCore.GetSingletonPtr()
+engine = CEngine.GetSingletonPtr()
 action_manager = GetActionManager()
 action_manager_lua_wrapper = CActionManagerLuaWrapper()
 camera_manager = GetCameraManager()
-timer = core:GetTimer()
+timer = engine:GetTimer()
 physic_manager = GetPhysicsManager()
 enemy_manager = GetEnemyManager()
 gizmos_manager = GetGizmosManager()
@@ -33,7 +33,7 @@ function PlayerDistance(enemy)
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
-	--core:Trace("Player distance: " .. l_DistanceVector:Length())
+	--engine:Trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -48,7 +48,7 @@ function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition()
 	local l_EnemyDir = enemy:GetRenderableObject():GetDirection()
 	
-	--core:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
+	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
 	
 	l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
 
@@ -67,7 +67,7 @@ function PlayerVisibility(enemy)
 	-- The impact mask is not used
 	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos + l_Direction * enemy:GetRadius(), l_Direction, l_ImpactMask)
 	
-	--core:Trace("Group: " .. l_CollisionGroup)
+	--engine:Trace("Group: " .. l_CollisionGroup)
 	
 	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
 		return true

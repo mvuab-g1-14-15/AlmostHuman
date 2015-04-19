@@ -1,16 +1,16 @@
 #include "SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h"
 #include "GraphicsManager.h"
-#include "Core.h"
+
 #include "EngineManagers.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
 CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesSceneRendererCommand(
-  CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
+    CXMLTreeNode& atts ) : CSceneRendererCommand( atts )
 {
-  CRenderableObjectTechniqueManager* l_ROTManager =
-    ROTMInstance;
-  m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
-                                      atts.GetPszProperty( "pool", "" ) );
+    CRenderableObjectTechniqueManager* l_ROTManager =
+        ROTMInstance;
+    m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
+                                          atts.GetPszProperty( "pool", "" ) );
 }
 
 CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSceneRendererCommand()
@@ -19,5 +19,5 @@ CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSce
 
 void CRenderableObjectTechniquesSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-  m_PoolRenderableObjectTechnique->Apply();
+    m_PoolRenderableObjectTechnique->Apply();
 }

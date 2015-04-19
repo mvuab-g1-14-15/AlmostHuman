@@ -3,7 +3,7 @@
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
 #include "ScriptManager.h"
-#include "Core.h"
+
 #include "StateMachine\Action.h"
 #include "Utils\MapManager.h"
 #include "StaticMeshes\InstanceMesh.h"

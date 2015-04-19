@@ -40,7 +40,7 @@
 #if defined(_DEBUG)
     #include "Memory\MemLeaks.h"
 #endif
-#include "Core.h"
+
 
 // -----------------------------------------
 //      CONSTRUCTOR/DESTRUCTOR
@@ -49,30 +49,30 @@
 using namespace Math;
 
 CPhysicsManager::CPhysicsManager( void )
-  : m_szConfigFileName( "" )
-  , m_bIsOk( false )
-  , m_bDebugRenderMode( false )
-  , m_pPhysicsSDK( NULL )
-  , m_pScene( NULL )
-  , mControllerManager( NULL )
-  , m_pMyAllocator( NULL )
-  , m_pCookingMesh( NULL )
-  , m_InitParams( )
-  , CManager()
+    : m_szConfigFileName( "" )
+    , m_bIsOk( false )
+    , m_bDebugRenderMode( false )
+    , m_pPhysicsSDK( NULL )
+    , m_pScene( NULL )
+    , mControllerManager( NULL )
+    , m_pMyAllocator( NULL )
+    , m_pCookingMesh( NULL )
+    , m_InitParams( )
+    , CManager()
 {
 }
 
 CPhysicsManager::CPhysicsManager(CXMLTreeNode& atts )
-  : m_szConfigFileName( "" )
-  , m_bIsOk( false )
-  , m_bDebugRenderMode( false )
-  , m_pPhysicsSDK( NULL )
-  , m_pScene( NULL )
-  , mControllerManager( NULL )
-  , m_pMyAllocator( NULL )
-  , m_pCookingMesh( NULL )
-  , m_InitParams( )
-  , CManager(atts)
+    : m_szConfigFileName( "" )
+    , m_bIsOk( false )
+    , m_bDebugRenderMode( false )
+    , m_pPhysicsSDK( NULL )
+    , m_pScene( NULL )
+    , mControllerManager( NULL )
+    , m_pMyAllocator( NULL )
+    , m_pCookingMesh( NULL )
+    , m_InitParams( )
+    , CManager(atts)
 {
 }
 
@@ -352,13 +352,13 @@ bool CPhysicsManager::LoadXML( void )
 //----------------------------------------------------------------------------
 void CPhysicsManager::Update()
 {
-  assert( m_pScene != NULL );
-  assert( mControllerManager != NULL );
-  // Start simulation (non blocking)
-  m_pScene->simulate( deltaTime );
-  // Fetch simulation results
-  m_pScene->flushStream( );
-  m_pScene->fetchResults( NX_RIGID_BODY_FINISHED,  true );
+    assert( m_pScene != NULL );
+    assert( mControllerManager != NULL );
+    // Start simulation (non blocking)
+    m_pScene->simulate( deltaTime );
+    // Fetch simulation results
+    m_pScene->flushStream( );
+    m_pScene->fetchResults( NX_RIGID_BODY_FINISHED,  true );
 }
 
 void CPhysicsManager::WaitForSimulation( void )
@@ -394,11 +394,11 @@ void CPhysicsManager::Render()
     int nbActors = m_pScene->getNbActors();
     NxActor** l_pActors = m_pScene->getActors();
 
-  while ( nbActors-- )
-  {
-    NxActor* l_pActor = *l_pActors++;
-	DrawActor( l_pActor, GraphicsInstance );
-  }
+    while ( nbActors-- )
+    {
+        NxActor* l_pActor = *l_pActors++;
+        DrawActor( l_pActor, GraphicsInstance );
+    }
 }
 
 void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
@@ -936,41 +936,41 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
 std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
         uint32 impactMask )
 {
-//NxUserRaycastReport::ALL_SHAPES
-  ASSERT( m_pScene != NULL , "NULL SCENE" );
-  NxRay ray;
-  ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
-  ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
-  NxRaycastHit hit;
-  NxShape* closestShape = NULL;
-  closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
+    //NxUserRaycastReport::ALL_SHAPES
+    ASSERT( m_pScene != NULL , "NULL SCENE" );
+    NxRay ray;
+    ray.dir =  NxVec3( dirRay.x, dirRay.y, dirRay.z );
+    ray.orig = NxVec3( oriRay.x, oriRay.y, oriRay.z );
+    NxRaycastHit hit;
+    NxShape* closestShape = NULL;
+    closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, impactMask, ( NxReal ) FLT_MAX );
 
-  if ( !closestShape )
-  {
-    //No hemos tocado a ningún objeto físico de la escena.
-    return std::string( "" );
-  }
+    if ( !closestShape )
+    {
+        //No hemos tocado a ningún objeto físico de la escena.
+        return std::string( "" );
+    }
 
-  //Particulas en el punto de impacto
-  CSphereEmitter* l_Emitter = new CSphereEmitter();
-  l_Emitter->SetActive( true );
-  l_Emitter->SetEmitterLifeTime( 1.0f );
-  l_Emitter->SetLifeTime( 0.5f, 1.0f );
-  l_Emitter->SetAcceleration( Vect3f( 0.0f ) );
-  Math::Vect3f pos( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
-  l_Emitter->SetPosition( pos );
-  l_Emitter->SetVelocity( Vect3f( 1.0f ) );
-  l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
-  l_Emitter->SetRandom( 5.0f, 10.0f );
-  l_Emitter->SetRadius( 0.1f, 0.2f );
-  l_Emitter->SetYaw( 0, 360 );
-  l_Emitter->SetPitch( 0, 360 );
-  l_Emitter->Generate( 20 );
-  ParticleMInstance->AddEmitter( l_Emitter );
-  NxActor* actor = &closestShape->getActor();
-  CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
-  ASSERT( impactObject, "NO IMPACTOBJECT" );
-  return impactObject->GetName();
+    //Particulas en el punto de impacto
+    CSphereEmitter* l_Emitter = new CSphereEmitter();
+    l_Emitter->SetActive( true );
+    l_Emitter->SetEmitterLifeTime( 1.0f );
+    l_Emitter->SetLifeTime( 0.5f, 1.0f );
+    l_Emitter->SetAcceleration( Vect3f( 0.0f ) );
+    Math::Vect3f pos( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
+    l_Emitter->SetPosition( pos );
+    l_Emitter->SetVelocity( Vect3f( 1.0f ) );
+    l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
+    l_Emitter->SetRandom( 5.0f, 10.0f );
+    l_Emitter->SetRadius( 0.1f, 0.2f );
+    l_Emitter->SetYaw( 0, 360 );
+    l_Emitter->SetPitch( 0, 360 );
+    l_Emitter->Generate( 20 );
+    ParticleMInstance->AddEmitter( l_Emitter );
+    NxActor* actor = &closestShape->getActor();
+    CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+    ASSERT( impactObject, "NO IMPACTOBJECT" );
+    return impactObject->GetName();
 }
 
 
@@ -1011,9 +1011,9 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
 {
     assert( m_pScene );
     NxSphere l_WorldSphere( NxVec3( _vPosSphere.x, _vPosSphere.y, _vPosSphere.z ), _fRadiusSphere );
-	//NxU32 nbShapes = m_pScene->getNbActors();
-	// Hardcoded to get all the possible objects
-	NxU32 nbShapes( 1024 );
+    //NxU32 nbShapes = m_pScene->getNbActors();
+    // Hardcoded to get all the possible objects
+    NxU32 nbShapes( 1024 );
     NxShape** shapes = new NxShape* [nbShapes];
 
     for ( NxU32 i = 0; i < nbShapes; i++ )
@@ -1056,40 +1056,41 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
 }
 
 std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle,
-	const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
+        const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
 {
-	std::vector<CPhysicUserData*> l_Result;
-	std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor(_Distance, _Position, _uiImpactMask);
+    std::vector<CPhysicUserData*> l_Result;
+    std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor(_Distance, _Position, _uiImpactMask);
 
-	float lenSq2 = _Direction.x*_Direction.x + _Direction.y*_Direction.y + _Direction.z*_Direction.z;
+    float lenSq2 = _Direction.x * _Direction.x + _Direction.y * _Direction.y + _Direction.z * _Direction.z;
 
-	std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin(),
-											it_end = l_OverlapSphere.end();
-	for( ; it!=it_end; ++it)
-	{
-		CPhysicUserData* l_UserData = *it;
-		CPhysicController* l_Controller = l_UserData->GetController();
-		CPhysicActor* l_Actor = l_UserData->GetActor();
+    std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin(),
+                                            it_end = l_OverlapSphere.end();
+    for( ; it != it_end; ++it)
+    {
+        CPhysicUserData* l_UserData = *it;
+        CPhysicController* l_Controller = l_UserData->GetController();
+        CPhysicActor* l_Actor = l_UserData->GetActor();
 
-		Math::Vect3f l_ActorPos;
-		if (l_Controller)
-			l_ActorPos = l_Controller->GetPosition();
-		else if (l_Actor)
-			l_ActorPos = l_Actor->GetPosition();
-		else
-			continue;
+        Math::Vect3f l_ActorPos;
+        if (l_Controller)
+        { l_ActorPos = l_Controller->GetPosition(); }
+        else if (l_Actor)
+        { l_ActorPos = l_Actor->GetPosition(); }
+        else
+        { continue; }
 
-		Math::Vect3f l_VectToActor = l_ActorPos - _Position;
-		l_VectToActor.Normalize();
+        Math::Vect3f l_VectToActor = l_ActorPos - _Position;
+        l_VectToActor.Normalize();
 
-		float dot = l_VectToActor.DotProduct(_Direction);
-		float lenSq1 = l_VectToActor.x*l_VectToActor.x + l_VectToActor.y*l_VectToActor.y + l_VectToActor.z*l_VectToActor.z;
-		float angle = acos(dot/sqrt(lenSq1 * lenSq2));
+        float dot = l_VectToActor.DotProduct(_Direction);
+        float lenSq1 = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z *
+                       l_VectToActor.z;
+        float angle = acos(dot / sqrt(lenSq1 * lenSq2));
 
-		if (angle < _Angle)
-			l_Result.push_back(l_UserData);
-	}
-	return l_Result;
+        if (angle < _Angle)
+        { l_Result.push_back(l_UserData); }
+    }
+    return l_Result;
 }
 
 void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,

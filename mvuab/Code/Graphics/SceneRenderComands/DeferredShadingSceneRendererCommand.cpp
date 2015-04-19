@@ -1,4 +1,4 @@
-#include "Core.h"
+
 #include "Effects\Effect.h"
 #include "GraphicsManager.h"
 #include "Lights\LightManager.h"

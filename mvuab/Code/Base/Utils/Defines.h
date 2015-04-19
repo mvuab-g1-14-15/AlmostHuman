@@ -100,7 +100,7 @@
             static int callIt = 1; \
             if ( callIt )\
             { \
-                wsprintf( s_text, "Expression: %s\nMessage: ( %s )\nFile '%s' Line %d\nOk:Continue\nCancel:Do not show more asserts", #expr, #msg, __FILE__, __LINE__ ); \
+                wsprintf( s_text, "Expression: %s\nMessage: %s \nFile '%s' Line %d\nOk:Ignore\nCancel:Break", #expr, #msg, __FILE__, __LINE__ ); \
                 switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_ICONEXCLAMATION | MB_OKCANCEL ) ) \
                 {\
                     case IDCANCEL: \

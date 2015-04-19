@@ -8,7 +8,7 @@ function CBlaster:__init()
 	self.BaseDamage = 5.0
 	self.MaxDamage = 20.0
 	
-    core:Trace("Blaster initialized")
+    engine:Trace("Blaster initialized")
 end
 
 function CBlaster:CalculateDamage()
@@ -26,7 +26,7 @@ function CBlaster:Shoot()
 	if lEnemy ~= nil then
 		local damage = self:CalculateDamage()
 		lEnemy:AddDamage( damage )
-		core:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
+		engine:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
 end
 

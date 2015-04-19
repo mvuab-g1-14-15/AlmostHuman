@@ -1,5 +1,5 @@
 #include "SpotLight.h"
-#include "Core.h"
+
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 #include "Effects\EffectManager.h"
@@ -89,19 +89,19 @@ void CSpotLight::SetShadowMap( CGraphicsManager* GM )
         l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
     }
 
-  l_VUP.x = 0.0f;
-  l_VUP.y = 1.0f;
-  l_VUP.z = 0.0f;
+    l_VUP.x = 0.0f;
+    l_VUP.y = 1.0f;
+    l_VUP.z = 0.0f;
 
-  D3DXVec3Normalize( &l_VUP, &l_VUP );
-  D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
-  m_ViewShadowMap = Math::Mat44f( l_View );
+    D3DXVec3Normalize( &l_VUP, &l_VUP );
+    D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
+    m_ViewShadowMap = Math::Mat44f( l_View );
 
-  D3DXMatrixPerspectiveFovLH( &l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation );
-  m_ProjectionShadowMap = Math::Mat44f( l_Projection );
+    D3DXMatrixPerspectiveFovLH( &l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation );
+    m_ProjectionShadowMap = Math::Mat44f( l_Projection );
 
-  CEffectManager* l_EffectManager = EffectManagerInstance;
-  l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+    CEffectManager* l_EffectManager = EffectManagerInstance;
+    l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
 
-  CEngineManagers::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->UpdateFrustum(l_View * l_Projection);
+    CEngineManagers::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->UpdateFrustum(l_View * l_Projection);
 }

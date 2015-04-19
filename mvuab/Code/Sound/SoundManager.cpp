@@ -1,7 +1,7 @@
 ﻿#include "SoundManager.h"
 #include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
-#include "Core.h"
+
 #include "Cameras\CameraManager.h"
 #include "Cameras\Camera.h"
 #include "EngineManagers.h"

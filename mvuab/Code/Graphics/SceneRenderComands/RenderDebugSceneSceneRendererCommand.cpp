@@ -2,7 +2,7 @@
 #include "GraphicsManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
-#include "Core.h"
+
 #include "EngineManagers.h"
 
 CRenderDebugSceneSceneRendererCommand::CRenderDebugSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(
