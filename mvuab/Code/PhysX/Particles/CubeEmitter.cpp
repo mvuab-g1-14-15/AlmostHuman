@@ -43,19 +43,18 @@ void CCubeEmitter::SetRandom(float Min, float Max)
     m_RandMax = Max;
 }
 
-void CCubeEmitter::Generate(unsigned int l_NumParticles)
+void CCubeEmitter::Generate(unsigned int l_NumParticles, bool l_Generate)
 {
     m_Particles.resize(l_NumParticles);
 
-    /*for(unsigned int i = 0; i < l_NumParticles; ++i)
+    for(unsigned int i = 0; i < l_NumParticles && l_Generate; ++i)
     {
         NewParticle(&m_Particles[i]);
-    }*/
+    }
 }
 
 void CCubeEmitter::NewParticle(CParticle *l_Particle)
 {
-    float l_Radius = baseUtils::RandRange(m_MinimumSize, m_MaximumSize);
     float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
 
     float x = baseUtils::RandRange(m_Position.x - m_MinWidth  * 0.5f, m_Position.x + m_MaxWidth  * 0.5f);
@@ -69,7 +68,7 @@ void CCubeEmitter::NewParticle(CParticle *l_Particle)
     l_Particle->SetAcceleration(m_Acceleration);
 
     l_Particle->SetTextureName(m_TextureName);
-    l_Particle->SetSize(l_Radius, l_Radius);
+    l_Particle->SetSize(m_SizeX, m_SizeY);
 
     l_Particle->SetLifeTime(l_LifeTime);
     l_Particle->SetIsAlive(true);

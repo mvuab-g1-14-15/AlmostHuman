@@ -11,6 +11,7 @@ CParticle::CParticle()
 {
     m_LifeTime = 0.0;
     m_SphereRadius = 0.0f;
+    m_Transforms.SetIdentity();
 
     m_Billboard.SetPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
     m_Billboard.SetSize(0.1f, 0.1f);
@@ -28,6 +29,7 @@ CParticle::CParticle()
 CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position,
                       const Math::Vect3f& Velocity,  const Math::Vect3f& Aceleration )
 {
+    m_Transforms.SetIdentity();
     m_SphereRadius = 0.0f;
     m_LifeTime = timer;
     m_IsAlive = false;
@@ -115,6 +117,11 @@ bool CParticle::GetIsAlive()
     return m_IsAlive;
 }
 
+void CParticle::SetTransform(const Math::Mat44f &l_Transform)
+{
+    m_Transforms = l_Transform;
+}
+
 void CParticle::Update( float dt )
 {
     if ( !m_IsAlive ) { return; }
@@ -132,7 +139,7 @@ void CParticle::Update( float dt )
     m_Position += ( ( m_Velocity + l_OldVel ) * 0.5f ) * dt;
 
     m_Billboard.SetPosition( m_Position );
-    m_Billboard.Update();
+    m_Billboard.Update(m_Transforms);
 }
 
 void CParticle::Render()

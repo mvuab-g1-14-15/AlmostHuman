@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Math\Vector3.h"
+#include "Math\Matrix44.h"
 #include "Billboard\Billboard.h"
 
 class CParticle
@@ -12,7 +13,7 @@ class CParticle
         float m_SphereRadius;
 
         bool  m_IsAlive;
-        CBillboard  m_Billboard;
+        CBillboard m_Billboard;
 
         Math::Vect3f m_Color;
         Math::Vect3f m_Position;
@@ -20,11 +21,15 @@ class CParticle
         Math::Vect3f m_Velocity;
         Math::Vect3f m_Acceleration;
 
+        Math::Mat44f m_Transforms;
+
 
     public:
         CParticle();
         CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
 
+        void SetTransform(const Math::Mat44f &l_Transform);
+        
         void SetTextureName( std::string TextureName );
         void SetSize( float sx, float sy );
 

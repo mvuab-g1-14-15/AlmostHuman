@@ -4,7 +4,6 @@
 
 #include "EngineConfig.h"
 #include "SphereEmitter.h"
-#include "TrailEmitter.h"
 #include "CubeEmitter.h"
 
 
@@ -145,7 +144,7 @@ CCubeEmitter *CParticleManager::CreateCubeEmitter()
     return new CCubeEmitter();
 }
 
-CTrailEmitter *CParticleManager::CreateTrailEmitter()
+CSphereEmitter *CParticleManager::CreateSphereEmitter()
 {
-    return new CTrailEmitter();
+    return new CSphereEmitter();
 }

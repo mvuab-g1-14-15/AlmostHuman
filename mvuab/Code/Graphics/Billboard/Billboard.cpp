@@ -29,6 +29,34 @@ void CBillboard::Init()
     m_Texture = TextureMInstance->GetTexture(mConfigPath);
 }
 
+void CBillboard::Update(const Math::Mat44f &l_Transform)
+{
+    if(!m_Active) { return; }
+
+    /*
+        Calcular A,B,C,D del rectangulo.
+        orientar a la camara (producto vectorial direccion i sumar VectUP) [normalizados]
+        N_VectRight=VectUp^VectDir
+        a=pos + n_VectorUP*size/2 -N_VectRight*size/2;
+    */
+
+    CCamera* l_Camera = CameraMInstance->GetCurrentCamera();
+
+    Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
+    Math::Vect3f l_vRight = l_Transform * ((-l_Pos2Cam.Normalize()) ^ l_Camera->GetVecUp().Normalize()).Normalize();
+
+    float halfSizeY = m_SizeY * 0.5f;
+    float halfSizeX = m_SizeX * 0.5f;
+
+    Math::Vect3f l_newRight(l_vRight * halfSizeX);
+    Math::Vect3f l_newUP = l_Transform * (l_Camera->GetVecUp().Normalize() * halfSizeY);
+
+    m_PosA = (m_Position + l_newUP - l_newRight);
+    m_PosB = (m_Position + l_newUP + l_newRight);
+    m_PosC = (m_Position - l_newUP - l_newRight);
+    m_PosD = (m_Position - l_newUP + l_newRight);
+}
+
 void CBillboard::Update()
 {
     if(!m_Active) { return; }
@@ -51,10 +79,10 @@ void CBillboard::Update()
     Math::Vect3f l_newRight(l_vRight * halfSizeX);
     Math::Vect3f l_newUP(l_Camera->GetVecUp().Normalize() * halfSizeY);
 
-    m_PosA = m_Position + l_newUP - l_newRight;
-    m_PosB = m_Position + l_newUP + l_newRight;
-    m_PosC = m_Position - l_newUP - l_newRight;
-    m_PosD = m_Position - l_newUP + l_newRight;
+    m_PosA = (m_Position + l_newUP - l_newRight);
+    m_PosB = (m_Position + l_newUP + l_newRight);
+    m_PosC = (m_Position - l_newUP - l_newRight);
+    m_PosD = (m_Position - l_newUP + l_newRight);
 }
 
 void CBillboard::Render()
@@ -69,8 +97,7 @@ void CBillboard::Render()
     Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
 
     CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource("GenerateGBufferTechnique");
-    GraphicsInstance->DrawQuad3DWithTechnique(m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique,
-            m_Texture);
+    GraphicsInstance->DrawQuad3DWithTechnique(m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique, m_Texture);
 }
 
 void CBillboard::SetSize(float sx, float sy)

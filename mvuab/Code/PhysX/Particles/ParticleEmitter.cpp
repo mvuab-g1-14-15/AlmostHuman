@@ -19,6 +19,7 @@ CParticleEmitter::CParticleEmitter()
     m_Velocity = Math::Vect3f( 0.0f, 0.0f, 0.0f );
 
     m_Active = true;
+    m_Orientate = false;
     m_ActualTime = 0.0f;
 }
 
@@ -52,10 +53,10 @@ void CParticleEmitter::SetLifeTime( float min, float max )
     m_MaxLifetime =  max;
 }
 
-void CParticleEmitter::SetSize(float min, float max)
+void CParticleEmitter::SetSize(float sx, float sy)
 {
-    m_MinimumSize = min;
-    m_MaximumSize = max;
+    m_SizeX = sx;
+    m_SizeY = sy;
 }
 
 void CParticleEmitter::SetTimeToEmit(float Time)
@@ -86,4 +87,9 @@ void CParticleEmitter::SetActive(bool Active)
 void CParticleEmitter::SetTextureName(const std::string &Texture)
 {
     m_TextureName = Texture;
+}
+
+void CParticleEmitter::SetOrientate(bool l_Orientate)
+{
+    m_Orientate = l_Orientate;
 }

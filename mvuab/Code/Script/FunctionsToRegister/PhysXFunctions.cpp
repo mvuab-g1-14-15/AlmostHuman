@@ -9,7 +9,7 @@
 
 #include "Particles\ParticleManager.h"
 #include "Particles\ParticleEmitter.h"
-#include "Particles\TrailEmitter.h"
+#include "Particles\SphereEmitter.h"
 #include "Particles\CubeEmitter.h"
 
 #include "EngineManagers.h"
@@ -206,7 +206,7 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_CLASS( CParticleManager )
     LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
     LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
-    LUA_DECLARE_METHOD( CParticleManager, CreateTrailEmitter )
+    LUA_DECLARE_METHOD( CParticleManager, CreateSphereEmitter )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( m_LS )
@@ -222,6 +222,7 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
 	LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
     LUA_DECLARE_METHOD( CParticleEmitter, Generate )
+     LUA_DECLARE_METHOD( CParticleEmitter, SetOrientate )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( m_LS )
@@ -231,15 +232,14 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
     LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
     LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
-    LUA_DECLARE_METHOD( CCubeEmitter, SetTextureName )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( m_LS )
-    LUA_DECLARE_DERIVED_CLASS( CTrailEmitter, CParticleEmitter )
+    LUA_DECLARE_DERIVED_CLASS( CSphereEmitter, CParticleEmitter )
     LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CTrailEmitter, SetSize )
-    LUA_DECLARE_METHOD( CTrailEmitter, SetPitch )
-    LUA_DECLARE_METHOD( CTrailEmitter, SetYaw )
-    LUA_DECLARE_METHOD( CTrailEmitter, SetRandom )
+    LUA_DECLARE_METHOD( CSphereEmitter, SetRandom )
+    LUA_DECLARE_METHOD( CSphereEmitter, SetRadius )
+    LUA_DECLARE_METHOD( CSphereEmitter, SetPitch )
+    LUA_DECLARE_METHOD( CSphereEmitter, SetYaw )
   LUA_END_DECLARATION
 }

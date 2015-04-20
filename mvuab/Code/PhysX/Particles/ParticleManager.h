@@ -9,7 +9,7 @@
 #include <vector>
 
 class CCubeEmitter;
-class CTrailEmitter;
+class CSphereEmitter;
 
 class CParticleManager: public CManager
 {
@@ -26,8 +26,8 @@ class CParticleManager: public CManager
         void Render();
         void AddEmitter(CParticleEmitter *l_Emitter);
 
-        CCubeEmitter *CreateCubeEmitter();
-        CTrailEmitter *CreateTrailEmitter();
+        CCubeEmitter    *CreateCubeEmitter();
+        CSphereEmitter  *CreateSphereEmitter();
 };
 
 #endif

@@ -3,8 +3,10 @@
 
 #include "Utils\Name.h"
 #include "Utils\Defines.h"
-#include "Math\Vector3.h"
 #include "Utils\Manager.h"
+
+#include "Math\Vector3.h"
+#include "Math\Matrix44.h"
 
 //---Forward Declarations--
 class CTexture;
@@ -20,8 +22,10 @@ class CBillboard : public CName, public CManager
 	    ~CBillboard();
 
 	    void Init();
-	    void Update();
-	    void Render();
+        void Render();
+
+        void Update(const Math::Mat44f &l_Transform);
+        void Update();
 
 	    void SetTexture(std::string Texture);
 	    CTexture* GetTexture();

@@ -3,6 +3,7 @@
 
 #include "Particle.h"
 #include "Math\Vector3.h"
+#include "Math\Matrix44.h"
 #include "Utils\Defines.h"
 
 #include <vector>
@@ -15,12 +16,12 @@ class CParticleEmitter
         float m_MinLifetime;
         float m_MaxLifetime;
 
-		float m_MinimumSize;
-        float m_MaximumSize;
-
         float m_EmitterLifeTime;
 		float m_TimeToEmit;
         float m_ActualTime;
+
+        float m_SizeX;
+        float m_SizeY;
 
 		float m_Rand;
         float m_RandMin;
@@ -32,6 +33,7 @@ class CParticleEmitter
         Math::Vect3f m_Velocity;
         
         bool m_Active;
+        bool m_Orientate;
         std::string m_TextureName;
               
     public:
@@ -50,7 +52,7 @@ class CParticleEmitter
         float GetActive();
         void SetActive(bool Active);
 
-        void SetLifeTime(float min, float max);
+        void SetLifeTime(float sx, float sy);
         void SetEmitterLifeTime(float LifeTime);
 
 		void SetTimeToEmit(float Time);
@@ -59,7 +61,9 @@ class CParticleEmitter
 		void SetSize(float min, float max);
 		float GetSize();
 
-        virtual void Generate( unsigned int l_NumParticles ) = 0;
+        void SetOrientate(bool l_Orientate);
+
+        virtual void Generate( unsigned int l_NumParticles, bool l_Generate = true ) = 0;
         virtual void Update( float dt ) = 0;
         virtual void Render() = 0;
 };
