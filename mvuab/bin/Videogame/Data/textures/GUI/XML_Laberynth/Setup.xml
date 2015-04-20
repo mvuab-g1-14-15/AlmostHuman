@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Windows OnLoadWindows="source = _soundM:createSource()
-                        _soundM:playSource2D(source,'loop',true)
-                        getGameLaberynth():setInBoardSettings(true)"
-         OnSaveWindows="_soundM:stopSource(source)
-                        _soundM:deleteSource(source)
-                        getGameLaberynth():setInBoardSettings(false)"
-         OnUpdateWindows="if getCore():isEndTimer('setup_destello1',10)== true then                            
-                            _guiM:playImage('setup_destello1',0.1,false)
-                          end
-                          
-                          if getCore():isEndTimer('setup_destello2',12)== true then                            
-                            _guiM:playImage('setup_destello2',0.1,false)
-                          end
-                          
-                          if getCore():isEndTimer('setup_destello3',20)== true then                            
-                            _guiM:playImage('setup_destello3',0.1,false)
-                          end">
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
 
   <Image name="setup_fondo_left" posx="0.00" posy="0.00" height="100.00" width="50.0" visible="true" active="true"
          default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="true">
@@ -23,7 +9,7 @@
   </Image>
 
   <Image name="setup_fondo_right" posx="50.0" posy="0.00" height="100.00" width="50.00" visible="true" active="true"
-         default="img1" OnLoadValue="" OnSaveValue="" flip="FLIP_Y" backGround="true">
+         default="img1" OnLoadValue="" OnSaveValue="" flip="FLIP_X" backGround="true">
     <texture name="img1" name_texture="Data/textures/GUI/Textures_LaberynthGame/f_helpa.png"/>
   </Image>
 
@@ -46,9 +32,9 @@
      quad="Data/textures/GUI/Textures_LaberynthGame/gui_sliderback.png"
      OnOverAction=""
      OnClickedAction=""
-     OnChangeValue="_soundM:setGain(_guiM:getStateSlider('Volume'))"
-     OnSaveValue="_soundM:setGain(_guiM:getStateSlider('Volume'))"
-     OnLoadValue="_guiM:setStateSlider('Volume',_soundM:getGain())"/>
+     OnChangeValue=""
+     OnSaveValue=""
+     OnLoadValue=""/>
 
   <Image name="setup_visibleWebCam" posx="15.0" posy="30.00" height="5.0" width="20.00" visible="true" active="true"
          default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
@@ -90,9 +76,9 @@
      quad="Data/textures/GUI/Textures_LaberynthGame/gui_sliderback.png"
      OnOverAction=""
      OnClickedAction=""
-     OnChangeValue="getGameLaberynth():setForceRJ1(_guiM:getStateSlider('setup_SliderForce1'))"
-     OnSaveValue="getGameLaberynth():setForceRJ1(_guiM:getStateSlider('setup_SliderForce1'))"
-     OnLoadValue="_guiM:setStateSlider('setup_SliderForce1',getGameLaberynth():getForceRJ1())"/>
+     OnChangeValue=""
+     OnSaveValue=""
+     OnLoadValue=""/>
 
   <Image name="setup_Force2" posx="5.0" posy="52.00" height="6.00" width="25.00" visible="true" active="true"
         default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
@@ -107,14 +93,14 @@
      quad="Data/textures/GUI/Textures_LaberynthGame/gui_sliderback.png"
      OnOverAction=""
      OnClickedAction=""
-     OnChangeValue="getGameLaberynth():setForceRJ2(_guiM:getStateSlider('setup_SliderForce2'))"
-     OnSaveValue="getGameLaberynth():setForceRJ2(_guiM:getStateSlider('setup_SliderForce2'))"
-     OnLoadValue="_guiM:setStateSlider('setup_SliderForce2',getGameLaberynth():getForceRJ2())"/>
+     OnChangeValue=""
+     OnSaveValue=""
+     OnLoadValue=""/>
 
   <RadioBox name="Level" posx="16" posy="63" height="15" width="25" default_checkButton="level_1" visible="true" active="true"
       texture_back="" columns="2" rows="2" OnCheckOn="" OnCheckOff="" OnOverButton=""
-      OnSaveValue="getGameLaberynth():setLevel( _guiM:getButtonCheckInRadioBox('Level') )"
-      OnLoadValue="_guiM:setButtonCheckInRadioBox('Level', getGameLaberynth():getLevel())">
+      OnSaveValue=""
+      OnLoadValue="">
 
     <texture name="level_1"
              on="Data/textures/GUI/Textures_LaberynthGame/gui_level1_on.png"
@@ -199,7 +185,6 @@
       texture_over="Data/textures/GUI/Textures_LaberynthGame/back_over.png"
       texture_clicked="Data/textures/GUI/Textures_LaberynthGame/back_press.png"
       texture_deactivated="Data/textures/GUI/Textures_LaberynthGame/back_normal.png"
-      OnClickedAction=" _guiM:popWindows()
-                        _soundM:playAction2D('guiBack')"
-      OnOverAction="_soundM:playAction2D('guiOver')"/>
+      OnClickedAction="IrAMain()"
+      OnOverAction=""/>
 </Windows>

@@ -62,6 +62,7 @@ CGUIManager::CGUIManager(const CXMLTreeNode& atts)
     , m_sLastLoadpathGUI_XML("")
     , m_bFirstUpdate(true)
     , m_bVisiblePointerMouse(true)
+	, m_Console( 0 )
 {
 }
 //----------------------------------------------------------------------------
@@ -94,6 +95,7 @@ void CGUIManager::Release ()
 
     CHECKED_DELETE(m_TextBox);
     CHECKED_DELETE(m_PointerMouse);
+	CHECKED_DELETE(m_Console);
 
     LOG_INFO_APPLICATION("GUIManager:: offline (ok)");
 }
@@ -231,7 +233,8 @@ void CGUIManager::Init ()
         }//END if (m_bIsOk)
 
     } //END if (!parser.LoadFile(initGuiXML.c_str()))
-
+	m_Console = new CEditableTextBox(10, 10, 20, 20, Math::Vect2f(1,1));
+	m_Console->SetVisible(false);
     if (!m_bIsOk)
     {
         Release();
@@ -276,7 +279,9 @@ void CGUIManager::Render ()
         //Siempre los últimos en pintarse
         assert(m_TextBox);
         m_TextBox->Render();
-
+		RenderPointerMouse();
+		assert(m_Console);
+		m_Console->Render();
 
     }//END if (m_bIsOk)
 }
@@ -315,6 +320,7 @@ void CGUIManager::Update ()
 
         m_TextBox->Update();
 
+		m_Console->Update();
 
         if( !m_TextBox->IsVisible() && m_bLoadedGuiFiles)
         {
@@ -907,6 +913,12 @@ bool CGUIManager::PrevBlockInRadioBox(  const std::string& inNameRadioBox )
                               inNameRadioBox.c_str());
     }
     return false;
+}
+
+void CGUIManager::Reload()
+{
+	Release();
+	Init();
 }
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
