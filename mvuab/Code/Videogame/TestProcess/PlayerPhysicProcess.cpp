@@ -44,7 +44,9 @@
 //SOUND
 #include "SoundManager.h"
 
-#include "EngineManagers.h"
+//GUI
+#include "GUIManager.h"
+
 
 #include <algorithm>
 #include "RenderableVertex\VertexTypes.h"
@@ -105,7 +107,9 @@ void CPlayerPhysicProcess::Update()
     ScriptMInstance->Reload();
     //ScriptMInstance->RunCode( "init()" );
   }
-
+  if ( pActionManager->DoAction( "ReloadGUI" ) )
+	  GUIInstance->Reload();
+  
   /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
       ScriptMInstance->RunCode( "cambiar_sala()" );*/
 

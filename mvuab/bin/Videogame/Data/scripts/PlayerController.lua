@@ -256,7 +256,7 @@ function CPlayerController:UpdateInput()
 	end
 	if action_manager:DoAction("ShootDown") then
 		self.Shooting = true
-		sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+		--sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
 	end
 	if action_manager:DoAction("ShootUp") then
 		self.Shooting = false

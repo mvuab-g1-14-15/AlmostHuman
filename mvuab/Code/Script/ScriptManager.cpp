@@ -8,6 +8,7 @@
 #include "FunctionsToRegister\AIFunctions.h"
 #include "FunctionsToRegister\EnumDefinitions.h"
 #include "FunctionsToRegister\SoundFunctions.h"
+#include "FunctionsToRegister\GuiFunctions.h"
 #include <string>
 #include <iostream>
 
@@ -132,4 +133,5 @@ void CScriptManager::RegisterLUAFunctions()
   registerAI( m_LS );
   registerEnum( m_LS );
   registerSound( m_LS );
+  registerGUI( m_LS );
 }

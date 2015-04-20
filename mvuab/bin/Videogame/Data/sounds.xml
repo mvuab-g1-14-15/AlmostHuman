@@ -2,6 +2,7 @@
 <sounds>
 	<Bank name="Init.bnk"/>
 	<Bank name="AlmostHuman.bnk"/>
+	<GameObject2d name="GUI" register="true"/>
 	<GameObject2d name="Iris" register="true"/>
 	<GameObject2d name="TestGameObject2d" register="true"/>
 	<GameObject3d name="TestGameObject3d" register="true" pos="0 0 0" dir="0 0 0"/>

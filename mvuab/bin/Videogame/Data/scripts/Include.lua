@@ -11,6 +11,7 @@ renderable_objects_manager_characters = renderable_objects_layer_manager:GetReso
 particle_manager = GetParticleManager()
 sound_manager = GetSoundManager()
 process = CEngine.GetSingletonPtr():GetProcess()
+gui_manager = GetGUIManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0
