@@ -8,6 +8,8 @@
 #include "XML\XMLTreeNode.h"
 #include <string>
 
+class CStaticMesh;
+
 class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 {
     public:
@@ -15,9 +17,12 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 		CStaticMeshManager( CXMLTreeNode& atts);
         ~ CStaticMeshManager ();
 
-		void Init();
-		void Update(){}
-		void Render(){}
+		virtual void Init();
+		virtual void Update(){}
+		virtual void Render(){}
         void Reload();
+	
+		const CStaticMesh* GetStaticMesh( const std::string & aName ) const;
+
 };
 #endif

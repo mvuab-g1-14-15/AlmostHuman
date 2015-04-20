@@ -18,6 +18,8 @@
     <ClCompile Include="Characters\Enemies\EnemyManager.cpp" />
     <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="Graph\Graph.cpp" />
+    <ClCompile Include="NavMesh\NavMesh.cpp" />
+    <ClCompile Include="NavMesh\NavMeshManager.cpp" />
     <ClCompile Include="Pathfinding\AStar.cpp" />
     <ClCompile Include="recastnavigation\DebugUtils\DebugDraw.cpp" />
     <ClCompile Include="recastnavigation\DebugUtils\DetourDebugDraw.cpp" />
@@ -59,6 +61,8 @@
     <ClInclude Include="Characters\Enemies\EnemyManager.h" />
     <ClInclude Include="Characters\Enemies\PatrolEnemy.h" />
     <ClInclude Include="Graph\Graph.h" />
+    <ClInclude Include="NavMesh\NavMesh.h" />
+    <ClInclude Include="NavMesh\NavMeshManager.h" />
     <ClInclude Include="Pathfinding\AStar.h" />
     <ClInclude Include="recastnavigation\DebugUtils\DebugDraw.h" />
     <ClInclude Include="recastnavigation\DebugUtils\DetourDebugDraw.h" />

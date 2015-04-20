@@ -26,6 +26,19 @@ template<class T> class CMapManager
     
             return it->second;
         }
+
+		virtual T* GetConstResource(const std::string &Name) const
+        {
+            TMapResource::const_iterator it = m_Resources.find(Name);
+
+            if (it == m_Resources.end())
+            {
+                LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
+                return 0;
+            }
+    
+            return it->second;
+        }
         
         virtual bool AddResource(const std::string& Name, T *Resource)
         {

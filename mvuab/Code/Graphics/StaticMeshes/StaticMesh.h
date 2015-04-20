@@ -35,9 +35,9 @@ class CStaticMesh
         CStaticMesh();
         ~CStaticMesh();
         
-        GET_SET(std::vector<CRenderableVertexs *>, RVs);
-        GET_SET(std::vector<Math::Vect3f>, VB);
-        GET_SET(std::vector<uint32>, IB);
+        GET_SET_REF(std::vector<CRenderableVertexs *>, RVs);
+		GET_SET_REF(std::vector<Math::Vect3f>, VB);
+        GET_SET_REF(std::vector<uint32>, IB);
         
         bool Load( const std::string& FileName );
         bool ReLoad();

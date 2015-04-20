@@ -38,6 +38,9 @@
     <Filter Include="recastnavigation\Recast">
       <UniqueIdentifier>{902de044-87e3-42d0-b29c-75e4ae5b0ee2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NavMesh">
+      <UniqueIdentifier>{241e7762-a566-404c-bd09-25730df357f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -157,6 +160,12 @@
     <ClCompile Include="recastnavigation\Recast\RecastRegion.cpp">
       <Filter>recastnavigation\Recast</Filter>
     </ClCompile>
+    <ClCompile Include="NavMesh\NavMesh.cpp">
+      <Filter>NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="NavMesh\NavMeshManager.cpp">
+      <Filter>NavMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -263,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="recastnavigation\Recast\RecastAssert.h">
       <Filter>recastnavigation\Recast</Filter>
+    </ClInclude>
+    <ClInclude Include="NavMesh\NavMesh.h">
+      <Filter>NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="NavMesh\NavMeshManager.h">
+      <Filter>NavMesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

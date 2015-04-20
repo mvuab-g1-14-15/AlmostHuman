@@ -48,7 +48,9 @@ void CStaticMeshManager::Init()
             CHECKED_DELETE(l_StaticMesh);
         }
         else
-        { AddResource(name, l_StaticMesh); }
+        {
+			AddResource(name, l_StaticMesh);
+		}
     }
 }
 
@@ -57,3 +59,14 @@ void CStaticMeshManager::Reload()
     Destroy();
     Init();
 }
+
+const CStaticMesh* CStaticMeshManager::GetStaticMesh( const std::string & aName ) const
+{
+	CStaticMesh* lStaticMesh = GetConstResource( aName );
+
+	if( !lStaticMesh )
+		LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
+
+	return lStaticMesh;
+}
+

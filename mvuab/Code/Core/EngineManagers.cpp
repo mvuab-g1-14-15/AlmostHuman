@@ -27,6 +27,7 @@
 #include "GUIManager.h"
 #include "Console/Console.h"
 #include "WWSoundManager.h"
+#include "NavMesh\NavMeshManager.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
   : m_ManagersPath( aPath )
@@ -53,6 +54,7 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
   , m_pGizmosManager( 0 )
   , m_pGUIManager( 0 )
   , m_pSoundManager( 0 )
+  , m_pNavMeshManager( 0 )
 {
 }
 
@@ -115,6 +117,8 @@ void CEngineManagers::Init()
                            Type2Type<CGUIManager>( ) );
   ManagerFactory.Register( "console",
                            Type2Type<CConsole>( ) );
+  ManagerFactory.Register( "nav_mesh_manager",
+                           Type2Type<CNavMeshManager>( ) );
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
@@ -332,4 +336,10 @@ CGUIManager* CEngineManagers::GetGUIManager() const
 {
   ASSERT( m_pGUIManager, "Null gui manager" );
   return m_pGUIManager;
+}
+
+CNavMeshManager* CEngineManagers::GetNavMeshManager() const
+{
+	ASSERT( m_pNavMeshManager, "Null nav mesh manager" );
+	return m_pNavMeshManager;
 }
