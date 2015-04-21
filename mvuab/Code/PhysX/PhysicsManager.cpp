@@ -963,12 +963,15 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
     l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
     l_Emitter->SetRandom( 5.0f, 10.0f );
     l_Emitter->SetRadius( 0.1f, 0.2f );
-    l_Emitter->SetYaw( 0, 360 );
-    l_Emitter->SetPitch( 0, 360 );
-    l_Emitter->Generate( 20 );
+    l_Emitter->SetSize(0.1f, 0.1f);
+    l_Emitter->SetYaw( 0.0f, 180.0f );
+    l_Emitter->SetPitch( 0.0f, 360.0f );
+    l_Emitter->Generate( 20, true );
     ParticleMInstance->AddEmitter( l_Emitter );
+
     NxActor* actor = &closestShape->getActor();
     CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+
     ASSERT( impactObject, "NO IMPACTOBJECT" );
     return impactObject->GetName();
 }
