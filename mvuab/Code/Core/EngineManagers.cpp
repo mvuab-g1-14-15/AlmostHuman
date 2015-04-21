@@ -178,6 +178,7 @@ void CEngineManagers::Init()
   m_pGizmosManager    = dynamic_cast<CGizmosManager*>( GetResource( "gizmos_manager" ) );
   m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );
   m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
+  m_pNavMeshManager   = dynamic_cast<CNavMeshManager*>( GetResource( "nav_mesh_manager" ) );
 
   //
   // Init managers

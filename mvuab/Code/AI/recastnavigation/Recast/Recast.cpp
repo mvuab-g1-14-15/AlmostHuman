@@ -327,9 +327,9 @@ int rcGetHeightFieldSpanCount(rcContext* ctx, rcHeightfield& hf)
 bool rcBuildCompactHeightfield(rcContext* ctx, const int walkableHeight, const int walkableClimb,
 							   rcHeightfield& hf, rcCompactHeightfield& chf)
 {
-	rcAssert(ctx);
+	//rcAssert(ctx);
 	
-	ctx->startTimer(RC_TIMER_BUILD_COMPACTHEIGHTFIELD);
+	//ctx->startTimer(RC_TIMER_BUILD_COMPACTHEIGHTFIELD);
 	
 	const int w = hf.width;
 	const int h = hf.height;
@@ -457,7 +457,7 @@ bool rcBuildCompactHeightfield(rcContext* ctx, const int walkableHeight, const i
 				 tooHighNeighbour, MAX_LAYERS);
 	}
 		
-	ctx->stopTimer(RC_TIMER_BUILD_COMPACTHEIGHTFIELD);
+	//ctx->stopTimer(RC_TIMER_BUILD_COMPACTHEIGHTFIELD);
 	
 	return true;
 }

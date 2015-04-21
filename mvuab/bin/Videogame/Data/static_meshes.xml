@@ -35,7 +35,7 @@
   <static_mesh name="Cylinder003" filename="\meshes\Cylinder003.mesh" />
   <static_mesh name="Cylinder004" filename="\meshes\Cylinder004.mesh" />
   <static_mesh name="Plane011" filename="\meshes\Plane011.mesh" />
-  <static_mesh name="Box027" filename="\meshes\Box027.mesh" />
+  <static_mesh name="Box027" filename="\meshes\Box027.mesh" navigable="true"/>
   <static_mesh name="Box028" filename="\meshes\Box028.mesh" />
   <static_mesh name="Box030" filename="\meshes\Box030.mesh" />
   <static_mesh name="Box031" filename="\meshes\Box031.mesh" />

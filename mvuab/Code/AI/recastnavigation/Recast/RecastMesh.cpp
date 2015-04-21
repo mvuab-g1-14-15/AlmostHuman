@@ -981,9 +981,9 @@ static bool removeVertex(rcContext* ctx, rcPolyMesh& mesh, const unsigned short 
 /// @see rcAllocPolyMesh, rcContourSet, rcPolyMesh, rcConfig
 bool rcBuildPolyMesh(rcContext* ctx, rcContourSet& cset, const int nvp, rcPolyMesh& mesh)
 {
-	rcAssert(ctx);
+	//rcAssert(ctx);
 	
-	ctx->startTimer(RC_TIMER_BUILD_POLYMESH);
+	//ctx->startTimer(RC_TIMER_BUILD_POLYMESH);
 
 	rcVcopy(mesh.bmin, cset.bmin);
 	rcVcopy(mesh.bmax, cset.bmax);
@@ -1293,7 +1293,7 @@ bool rcBuildPolyMesh(rcContext* ctx, rcContourSet& cset, const int nvp, rcPolyMe
 		ctx->log(RC_LOG_ERROR, "rcBuildPolyMesh: The resulting mesh has too many polygons %d (max %d). Data can be corrupted.", mesh.npolys, 0xffff);
 	}
 	
-	ctx->stopTimer(RC_TIMER_BUILD_POLYMESH);
+	//ctx->stopTimer(RC_TIMER_BUILD_POLYMESH);
 	
 	return true;
 }
@@ -1301,12 +1301,12 @@ bool rcBuildPolyMesh(rcContext* ctx, rcContourSet& cset, const int nvp, rcPolyMe
 /// @see rcAllocPolyMesh, rcPolyMesh
 bool rcMergePolyMeshes(rcContext* ctx, rcPolyMesh** meshes, const int nmeshes, rcPolyMesh& mesh)
 {
-	rcAssert(ctx);
+	//rcAssert(ctx);
 	
 	if (!nmeshes || !meshes)
 		return true;
 
-	ctx->startTimer(RC_TIMER_MERGE_POLYMESH);
+	//ctx->startTimer(RC_TIMER_MERGE_POLYMESH);
 
 	mesh.nvp = meshes[0]->nvp;
 	mesh.cs = meshes[0]->cs;
@@ -1474,14 +1474,14 @@ bool rcMergePolyMeshes(rcContext* ctx, rcPolyMesh** meshes, const int nmeshes, r
 		ctx->log(RC_LOG_ERROR, "rcMergePolyMeshes: The resulting mesh has too many polygons %d (max %d). Data can be corrupted.", mesh.npolys, 0xffff);
 	}
 	
-	ctx->stopTimer(RC_TIMER_MERGE_POLYMESH);
+	//ctx->stopTimer(RC_TIMER_MERGE_POLYMESH);
 	
 	return true;
 }
 
 bool rcCopyPolyMesh(rcContext* ctx, const rcPolyMesh& src, rcPolyMesh& dst)
 {
-	rcAssert(ctx);
+	//rcAssert(ctx);
 	
 	// Destination must be empty.
 	rcAssert(dst.verts == 0);

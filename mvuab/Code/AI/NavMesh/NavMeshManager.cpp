@@ -42,6 +42,8 @@ void CNavMeshManager::Init()
 			m_NavMesh->AddMesh( lStaticMeshManager->GetStaticMesh( lName ) );
 		}
     }
+
+	m_NavMesh->Calculate();
 }
 
 void CNavMeshManager::Update()

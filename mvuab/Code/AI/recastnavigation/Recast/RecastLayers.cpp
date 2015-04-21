@@ -85,9 +85,9 @@ bool rcBuildHeightfieldLayers(rcContext* ctx, rcCompactHeightfield& chf,
 							  const int borderSize, const int walkableHeight,
 							  rcHeightfieldLayerSet& lset)
 {
-	rcAssert(ctx);
+	//rcAssert(ctx);
 	
-	ctx->startTimer(RC_TIMER_BUILD_LAYERS);
+	//ctx->startTimer(RC_TIMER_BUILD_LAYERS);
 	
 	const int w = chf.width;
 	const int h = chf.height;
@@ -447,7 +447,7 @@ bool rcBuildHeightfieldLayers(rcContext* ctx, rcCompactHeightfield& chf,
 	// No layers, return empty.
 	if (layerId == 0)
 	{
-		ctx->stopTimer(RC_TIMER_BUILD_LAYERS);
+		//ctx->stopTimer(RC_TIMER_BUILD_LAYERS);
 		return true;
 	}
 	
@@ -612,7 +612,7 @@ bool rcBuildHeightfieldLayers(rcContext* ctx, rcCompactHeightfield& chf,
 			layer->miny = layer->maxy = 0;
 	}
 	
-	ctx->stopTimer(RC_TIMER_BUILD_LAYERS);
+	//ctx->stopTimer(RC_TIMER_BUILD_LAYERS);
 	
 	return true;
 }

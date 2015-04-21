@@ -39,6 +39,7 @@
     <ClCompile Include="recastnavigation\Detour\DetourNavMeshBuilder.cpp" />
     <ClCompile Include="recastnavigation\Detour\DetourNavMeshQuery.cpp" />
     <ClCompile Include="recastnavigation\Detour\DetourNode.cpp" />
+    <ClCompile Include="recastnavigation\RecastDemo\ChunkyTriMesh.cpp" />
     <ClCompile Include="recastnavigation\Recast\Recast.cpp" />
     <ClCompile Include="recastnavigation\Recast\RecastAlloc.cpp" />
     <ClCompile Include="recastnavigation\Recast\RecastArea.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="recastnavigation\Detour\DetourNavMeshQuery.h" />
     <ClInclude Include="recastnavigation\Detour\DetourNode.h" />
     <ClInclude Include="recastnavigation\Detour\DetourStatus.h" />
+    <ClInclude Include="recastnavigation\RecastDemo\ChunkyTriMesh.h" />
     <ClInclude Include="recastnavigation\Recast\Recast.h" />
     <ClInclude Include="recastnavigation\Recast\RecastAlloc.h" />
     <ClInclude Include="recastnavigation\Recast\RecastAssert.h" />

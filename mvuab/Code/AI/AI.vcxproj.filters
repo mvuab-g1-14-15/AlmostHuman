@@ -41,6 +41,9 @@
     <Filter Include="NavMesh">
       <UniqueIdentifier>{241e7762-a566-404c-bd09-25730df357f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="recastnavigation\RecastDemo">
+      <UniqueIdentifier>{2a4f86e9-01fa-4bb7-96f3-953ee83e6770}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -166,6 +169,9 @@
     <ClCompile Include="NavMesh\NavMeshManager.cpp">
       <Filter>NavMesh</Filter>
     </ClCompile>
+    <ClCompile Include="recastnavigation\RecastDemo\ChunkyTriMesh.cpp">
+      <Filter>recastnavigation\RecastDemo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -278,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="NavMesh\NavMeshManager.h">
       <Filter>NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="recastnavigation\RecastDemo\ChunkyTriMesh.h">
+      <Filter>recastnavigation\RecastDemo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
