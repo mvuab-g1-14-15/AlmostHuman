@@ -29,7 +29,6 @@ class CLightManager;
 class CPhysicsManager;
 class CEnemyManager;
 class CTriggerManager;
-class CBillboard;
 class CParticleManager;
 class CGizmosManager;
 class CTextureManager;
@@ -88,7 +87,6 @@ private:
   CPhysicsManager*                       m_pPhysicsManager;
   CEnemyManager*                         m_pEnemyManager;
   CTriggerManager*                       m_pTriggerManager;
-  CBillboard*                            m_pBillboard;
   CParticleManager*                      m_pParticleManager;
   CGizmosManager*                        m_pGizmosManager;
   CTextureManager*                       m_pTextureManager;

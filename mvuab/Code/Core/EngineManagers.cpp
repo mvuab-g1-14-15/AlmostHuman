@@ -14,7 +14,6 @@
 #include "ActionManager.h"
 #include "Effects\EffectManager.h"
 #include "Particles\ParticleManager.h"
-#include "Billboard\Billboard.h"
 #include "Lights\LightManager.h"
 #include "Triggers\TriggerManager.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
@@ -48,7 +47,6 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
   , m_pPhysicsManager( 0 )
   , m_pEnemyManager( 0 )
   , m_pTriggerManager( 0 )
-  , m_pBillboard( 0 )
   , m_pParticleManager( 0 )
   , m_pGizmosManager( 0 )
   , m_pGUIManager( 0 )
@@ -101,8 +99,6 @@ void CEngineManagers::Init()
                            Type2Type<CEnemyManager>( ) );
   ManagerFactory.Register( "trigger_manager",
                            Type2Type<CTriggerManager>( ) );
-  ManagerFactory.Register( "billboard",
-                           Type2Type<CBillboard>( ) );
   ManagerFactory.Register( "particle_manager",
                            Type2Type<CParticleManager>( ) );
   ManagerFactory.Register( "gizmos_manager",
@@ -169,7 +165,6 @@ void CEngineManagers::Init()
                                    ( GetResource( "scene_render_command_manager" ) );
   m_pPhysicsManager   = dynamic_cast<CPhysicsManager*>( GetResource( "physics_manager" ) );
   m_pTriggerManager   = dynamic_cast<CTriggerManager*>( GetResource( "trigger_manager" ) );
-  m_pBillboard        = dynamic_cast<CBillboard*>( GetResource( "billboard" ) );
   m_pParticleManager  = dynamic_cast<CParticleManager*>( GetResource( "particle_manager" ) );
   m_pGizmosManager    = dynamic_cast<CGizmosManager*>( GetResource( "gizmos_manager" ) );
   m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );

@@ -58,7 +58,6 @@
 #define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
 #define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
 
-#define CoreInstance            CCore::GetSingletonPtr()
 #define EngineInstance          CEngine::GetSingletonPtr()
 #define GraphicsInstance        CEngineManagers::GetSingletonPtr()->GetGraphicsManager()
 #define SoundInstance           CSoundManager::GetSingletonPtr()
@@ -79,7 +78,6 @@
 #define PhysXMInstance          CEngineManagers::GetSingletonPtr()->GetPhysicsManager()
 #define EnemyMInstance          CEngineManagers::GetSingletonPtr()->GetEnemyManager()
 #define TriggersMInstance       CEngineManagers::GetSingletonPtr()->GetTriggerManager()
-//#define BillBoardInstance       CEngineManagers::GetSingletonPtr()->GetBillboard()
 #define ParticleMInstance       CEngineManagers::GetSingletonPtr()->GetParticleManager()
 #define GizmosMInstance         CEngineManagers::GetSingletonPtr()->GetGizmosManager()
 #define TextureMInstance        CEngineManagers::GetSingletonPtr()->GetTextureManager()
