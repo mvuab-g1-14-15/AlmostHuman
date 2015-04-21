@@ -15,6 +15,9 @@
 #include "Timer\Timer.h"
 #include "EngineManagers.h"
 
+#include "ActionManager.h"
+#include "Utils\Defines.h"
+
 #include "XML\XMLTreeNode.h"
 
 #define MAXBONES 29
@@ -211,7 +214,18 @@ void CAnimatedInstanceModel::RenderModelBySoftware()
 
 void CAnimatedInstanceModel::Update()
 {
-    m_CalModel->update( deltaTime );
+    if( ActionManagerInstance->DoAction( "ChangeAnimation" ) )
+    {
+        uint32 lCount = m_AnimatedCoreModel->GetAnimationsCount();
+        m_CurrentAnimationId++;
+
+        if( m_CurrentAnimationId > lCount )
+            m_CurrentAnimationId = 0;
+
+        ExecuteAction( m_CurrentAnimationId, 1.f, 1.f );
+    }
+    else
+        m_CalModel->update( deltaTime );
 }
 
 void CAnimatedInstanceModel::Initialize()

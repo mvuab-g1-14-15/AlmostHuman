@@ -66,7 +66,7 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &aName, const std::stri
 
     if( lLoadedOk )
     {
-        if( m_AnimationsMap.find( aName ) == m_AnimationsMap.end() )
+        if( m_AnimationsMap.find( aName ) != m_AnimationsMap.end() )
         {
             LOG_ERROR_APPLICATION( "Adding twice the animation %s", aName.c_str() );
         }
@@ -227,7 +227,24 @@ bool CAnimatedCoreModel::Load()
 
 int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
 {
-    return 0;
+    int lAnimationId = INT_MAX;
+
+    TAnimationsIdMap::const_iterator lItFind = m_AnimationsMap.find( AnimationName );
+    if( lItFind == m_AnimationsMap.end() )
+    {
+        LOG_ERROR_APPLICATION( "Unknown animation %s", AnimationName.c_str() );
+    }
+    else
+    {
+        lAnimationId = lItFind->second;
+    }
+
+    return lAnimationId;
+}
+
+int CAnimatedCoreModel::GetAnimationsCount()
+{
+    return m_AnimationsMap.size();
 }
 
 CalCoreModel *CAnimatedCoreModel::GetCoreModel( )

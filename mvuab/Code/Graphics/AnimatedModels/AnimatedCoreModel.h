@@ -33,6 +33,7 @@ class CAnimatedCoreModel : public CName
         bool Load               (const std::string &Path);
         bool LoadVertexBuffer   (CGraphicsManager *RM);
 
+        int     GetAnimationsCount();
         int     GetAnimationId  (const std::string &AnimationName) const;
         size_t  GetNumTextures  ();
 
@@ -44,7 +45,8 @@ protected:
         CalHardwareModel                *m_CalHardwareModel;
         CRenderableVertexs              *m_RenderableVertexs;
 
-        std::map<std::string, uint16>   m_AnimationsMap;
+        typedef std::map<std::string, uint16> TAnimationsIdMap;
+        TAnimationsIdMap                m_AnimationsMap;
         std::string                     m_FileName;
         std::string                     m_Path;
 
