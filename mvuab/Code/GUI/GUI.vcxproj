@@ -16,6 +16,7 @@
     <ClCompile Include="MousePointer\PointerMouse.cpp" />
     <ClCompile Include="Widgets\Button.cpp" />
     <ClCompile Include="Widgets\CheckButton.cpp" />
+    <ClCompile Include="Widgets\ConsoleGUI.cpp" />
     <ClCompile Include="Widgets\DialogBox.cpp" />
     <ClCompile Include="Widgets\EditableTextBox.cpp" />
     <ClCompile Include="Widgets\Image.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="MousePointer\PointerMouse.h" />
     <ClInclude Include="Widgets\Button.h" />
     <ClInclude Include="Widgets\CheckButton.h" />
+    <ClInclude Include="Widgets\ConsoleGUI.h" />
     <ClInclude Include="Widgets\DialogBox.h" />
     <ClInclude Include="Widgets\EditableTextBox.h" />
     <ClInclude Include="Widgets\Image.h" />

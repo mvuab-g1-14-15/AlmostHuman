@@ -51,6 +51,7 @@ public:
 	bool								IsActive							() const 											{return m_bIsActive;}
 
 	void								SetVisible						(bool flag) 									{m_bIsVisible = flag;}
+	bool								GetVisible						() 									{return m_bIsVisible;}
 	void								SetActive							(bool flag) 									{m_bIsActive = flag;}
 
 	uint32							GetWidth							() const 											{return m_uWidth;}

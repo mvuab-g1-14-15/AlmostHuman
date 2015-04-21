@@ -23,6 +23,7 @@
 #include "Widgets\Slider.h"
 #include "Widgets\Statictext.h"
 #include "EngineConfig.h"
+#include "Widgets\ConsoleGUI.h"
 
 #include "Timer\Timer.h"
 //-------------------------
@@ -219,7 +220,7 @@ void CGUIManager::Init()
 
         CTexture* texture_pointer = textureM->GetTexture( texture );
 
-        m_PointerMouse  = new CPointerMouse( m_ScreenResolution.x, m_ScreenResolution.y, h, w, Math::Vect2f( posx, posy ) );
+        m_PointerMouse  = new CPointerMouse( m_ScreenResolution.y, m_ScreenResolution.x, h, w, Math::Vect2f( posx, posy ) );
         assert( m_PointerMouse );
         m_PointerMouse->SetTexture( texture_pointer, "default" );
         m_PointerMouse->SetActiveTexture( "default" );
@@ -239,7 +240,7 @@ void CGUIManager::Init()
 
   } //END if (!parser.LoadFile(initGuiXML.c_str()))
 
-  m_Console = new CEditableTextBox( 30, 200, 100, 100, Math::Vect2f( 500, 10 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false, true );
+  m_Console = new CConsoleGUI(  m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false, true );
 
   if ( !m_bIsOk )
     Release();
@@ -282,9 +283,9 @@ void CGUIManager::Render()
     //Siempre los últimos en pintarse
     assert( m_TextBox );
     m_TextBox->Render();
-    RenderPointerMouse();
     assert( m_Console );
     m_Console->Render();
+    RenderPointerMouse();
 
   }//END if (m_bIsOk)
 }
