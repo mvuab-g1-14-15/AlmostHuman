@@ -13,6 +13,7 @@
 #include <string>
 #include <list>
 #include "GuiElement\GuiElement.h"
+#include "Utils/Defines.h"
 
 #include "Math/Color.h"
 
@@ -46,6 +47,9 @@ public:
 	void								AddBuffer							(const std::string& buffer) {m_sBuffer += buffer; }
 	bool								IsReturnPress					();
 
+	GET_SET(std::string, sFocusObject)
+	GET_SET(bool, bShift)
+	GET_SET(uint8, uCursorPos)
 private:
 	void								ProcessNewEntries			();
 	void								Remove1character			();

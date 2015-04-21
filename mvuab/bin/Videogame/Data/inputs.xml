@@ -12,6 +12,7 @@
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_Q"/>
     </action>
 	
+	
 	<action name="LeanOutRightDown">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_E"/>
     </action>
@@ -206,5 +207,17 @@
 	<action name="ChangeEffects">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LSHIFT"/>
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
+	
+	<action name="ConsolaGUI">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_L"/>
+    </action>
+	
+	<action name="ForwardGUI">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_UP"/>
+    </action>
+	
+	<action name="BackwarGUI">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_DOWN"/>
     </action>
 </Actions>

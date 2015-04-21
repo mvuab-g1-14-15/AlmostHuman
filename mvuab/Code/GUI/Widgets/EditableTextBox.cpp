@@ -102,9 +102,6 @@ void CEditableTextBox::Update()
 {
   std::string buffer_prev = m_sBuffer;
 
-  if ( InputManagerInstance->IsUpDown( IDV_KEYBOARD, KEY_L ) )
-    SetVisible( true );
-
   if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
   {
     Math::Vect2i mousePosition;
@@ -197,12 +194,6 @@ void CEditableTextBox::Update()
 
   if ( sizeX > CGuiElement::m_uWidth )
     m_sBuffer = buffer_prev;
-
-  if ( IsReturnPress() )
-  {
-    ScriptMInstance->RunCode( m_sBuffer );
-    m_sBuffer = "";
-  }
 }
 
 void CEditableTextBox::Remove1character()

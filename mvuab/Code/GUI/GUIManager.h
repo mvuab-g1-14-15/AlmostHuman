@@ -22,7 +22,7 @@
 class CPointerMouse;
 class CGuiElement;
 class CWindows;
-class CEditableTextBox;
+class CConsoleGUI;
 //--------------------------
 
 //----------Declaracion de nuevos tipos------------------------------------
@@ -118,7 +118,7 @@ private:
 	bool																m_bUpdateError;
 	CPointerMouse*											m_PointerMouse;
 	CTextBox*														m_TextBox;
-	CEditableTextBox*												m_Console;
+	CConsoleGUI*												m_Console;
 	bool																m_bLoadedGuiFiles;
 	std::string													m_sLastLoadpathGUI_XML;
 	TransitionEffect										m_sTransitionEffect;

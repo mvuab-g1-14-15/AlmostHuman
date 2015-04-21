@@ -55,6 +55,9 @@
     <ClCompile Include="MousePointer\PointerMouse.cpp">
       <Filter>MousePointer</Filter>
     </ClCompile>
+    <ClCompile Include="Widgets\ConsoleGUI.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GuiElement\GuiElement.h">
@@ -96,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="MousePointer\PointerMouse.h">
       <Filter>MousePointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\ConsoleGUI.h">
+      <Filter>Widgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
