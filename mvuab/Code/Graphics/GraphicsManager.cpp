@@ -908,6 +908,7 @@ void CGraphicsManager::DrawQuad3DWithTechnique( const Math::Vect3f& ul, const Ma
                 { dr.x, dr.y, dr.z, n.x, n.y, n.z, 1, 0}
             };
             mDirectXDevice->SetFVF( TNORMAL_T1_VERTEX::GetFVF() );
+            mDirectXDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
             if ( Texture != NULL )
             { Texture->Activate( 0 ); }
