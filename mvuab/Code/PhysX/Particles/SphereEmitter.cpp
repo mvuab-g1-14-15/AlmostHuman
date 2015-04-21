@@ -67,26 +67,13 @@ void CSphereEmitter::NewParticle(CParticle* l_Particle)
     float z =  Math::Utils::Sin(l_Yaw) + Math::Utils::Sin(l_Yaw + Math::pi32 * 0.5f);
     
     Math::Vect3f l_Vector = Math::Vect3f(x, y, z).Normalize();
-
-    float l_AngleX = acosf(l_Vector.DotProduct(Math::Vect3f(1.0f, 0.0f, 0.0f)));
-    float l_AngleY = acosf(l_Vector.DotProduct(Math::Vect3f(0.0f, 1.0f, 0.0f)));
-    float l_AngleZ = acosf(l_Vector.DotProduct(Math::Vect3f(0.0f, 0.0f, 1.0f)));
-
-    l_Vector.x *= m_Velocity.x;
-    l_Vector.y *= m_Velocity.y;
-    l_Vector.z *= m_Velocity.z;
-
-    Math::Mat44f l_RotMat; l_RotMat.SetIdentity(); 
-    l_RotMat.RotByAnglesYXZ(l_AngleY, l_AngleX, l_AngleZ);
-    l_Particle->SetTransform(l_RotMat);
-    
-    l_Particle->SetVelocity(l_Vector);
     l_Particle->SetAcceleration(m_Acceleration);
+    l_Particle->SetVelocity(l_Vector);
     
     l_Particle->SetTextureName(m_TextureName);
     l_Particle->SetSize(m_SizeX, m_SizeY);
     
-    l_Particle->SetPosition(m_Position);
+    l_Particle->SetPosition(m_Position + l_Radius);
     l_Particle->SetLifeTime(l_LifeTime);
     l_Particle->SetIsAlive(true);
 }
@@ -97,8 +84,7 @@ void CSphereEmitter::Update(float dt)
     if(!m_Active) return;
 
     m_EmitterLifeTime -= dt;
-    if(m_EmitterLifeTime < 0.0f) 
-		m_Active = false;
+    if(m_EmitterLifeTime < 0.0f) m_Active = false;
 
     int lNumParticles = m_Particles.size();
     CParticle *p = &m_Particles[0];

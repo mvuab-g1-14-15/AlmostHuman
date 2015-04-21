@@ -45,6 +45,8 @@ void CParticleManager::Init()
 
     for(int i = 0; i < l_Node.GetNumChildren(); ++i)
     {
+        if(l_Node.IsComment()) continue;
+
         CParticleEmitter *l_Emitter = NULL;
         std::string l_EmitterType = l_Node( i ).GetPszProperty( "EmitterType", "Sphere" );
 
