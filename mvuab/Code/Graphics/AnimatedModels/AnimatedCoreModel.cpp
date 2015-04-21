@@ -10,20 +10,19 @@
 #include "GraphicsManager.h"
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableVertex\IndexedVertexs.h"
-
-
 #include "EngineManagers.h"
+
 #define MAXBONES 29
 
-CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name) :
-    CName(),
-    m_Path(""),
-    m_FileName(""),
-    m_CalHardwareModel(0),
-    m_RenderableVertexs(0),
-    m_CalCoreModel(new CalCoreModel(Name)),
-    m_NumFaces(0),
-    m_NumVtxs(0)
+CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name)
+	: CName( Name )
+    , m_Path("")
+    , m_FileName("")
+    , m_CalHardwareModel(0)
+    , m_RenderableVertexs(0)
+    , m_CalCoreModel(new CalCoreModel(Name))
+    , m_NumFaces(0)
+    , m_NumVtxs(0)
 {
 }
 
@@ -55,15 +54,29 @@ bool CAnimatedCoreModel::LoadSkeleton(const std::string &Filename)
     ASSERT(m_CalCoreModel, "Cal Core Model not found");
     return m_CalCoreModel->loadCoreSkeleton(m_Path + Filename);
 }
-bool CAnimatedCoreModel::LoadAnimation(const std::string &Name, const std::string &Filename)
+bool CAnimatedCoreModel::LoadAnimation(const std::string &aName, const std::string &aFilename)
 {
     ASSERT(m_CalCoreModel, "Cal Core Model not found");
-    int id = m_CalCoreModel->loadCoreAnimation(m_Path + Filename, Name);
-    if( id == -1 )
-    { return false; }
 
-    m_AnimationsMap[Name] = id;
-    return true;
+    bool lLoadedOk( true );
+    
+    int lId = m_CalCoreModel->loadCoreAnimation(m_Path + aFilename, aName);
+    
+    lLoadedOk = lLoadedOk && bool( lId != -1 );
+
+    if( lLoadedOk )
+    {
+        if( m_AnimationsMap.find( aName ) == m_AnimationsMap.end() )
+        {
+            LOG_ERROR_APPLICATION( "Adding twice the animation %s", aName.c_str() );
+        }
+        else
+        {
+            m_AnimationsMap[aName] = lId;
+        }
+    }
+
+    return lLoadedOk;
 }
 
 bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
@@ -105,8 +118,19 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     m_NumFaces = m_CalHardwareModel->getTotalFaceCount();
 
     //En caso de utilizar NormalMap
-    CalcTangentsAndBinormals(l_Vtxs, (unsigned short *) l_Idxs, m_NumVtxs, m_NumFaces * 3, sizeof(CAL3D_HW_VERTEX), 0, 44,
-                             60, 76, 92);
+    CalcTangentsAndBinormals
+        (
+            l_Vtxs, 
+            (unsigned short *) l_Idxs, 
+            m_NumVtxs, 
+            m_NumFaces * 3, 
+            sizeof(CAL3D_HW_VERTEX), 
+            0, 
+            44,
+            60, 
+            76, 
+            92
+        );
 
     CHECKED_DELETE(m_RenderableVertexs);
     m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
@@ -168,7 +192,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &textureFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadTexture(textureFilename))
             {
-                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadTexture No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadTexture No se puede abrir %s!", m_FileName.c_str());
             }
         }
         else if( TagName == "skeleton" )
@@ -176,7 +200,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &skeletonFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadSkeleton(skeletonFilename))
             {
-                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadSkeleton No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadSkeleton No se puede abrir %s!", m_FileName.c_str());
             }
         }
         else if( TagName == "mesh" )
@@ -184,7 +208,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &meshFilename = node(i).GetPszProperty("file", "no_file");
             if(!LoadMesh(meshFilename))
             {
-                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadMesh No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadMesh No se puede abrir %s!", m_FileName.c_str());
             }
         }
         else if( TagName == "animation" )
@@ -193,7 +217,7 @@ bool CAnimatedCoreModel::Load()
             const std::string &name = node(i).GetPszProperty("name", "no_name");
             if(!LoadAnimation(name, animationFilename))
             {
-                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadAnimation No se puede abrir \"%s\"!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadAnimation No se puede abrir %s!", m_FileName.c_str());
             }
         }
     }

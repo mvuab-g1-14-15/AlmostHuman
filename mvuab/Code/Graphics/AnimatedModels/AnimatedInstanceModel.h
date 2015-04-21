@@ -13,7 +13,29 @@ class CRenderableObjectTechnique;
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
-private:
+public:
+  CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName );
+  CAnimatedInstanceModel( CXMLTreeNode& atts );
+  ~CAnimatedInstanceModel();
+
+  void Initialize();
+  void Destroy();
+  void Render();
+
+  void RenderModelBySoftware();
+  void RenderModelByHardware();
+
+  void Update();
+  void ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f,
+                      bool AutoLock = true );
+
+  void BlendCycle( uint32 Id, float32 Weight, float32 DelayIn );
+  void ClearCycle( uint32 Id, float32 DelayOut );
+
+  bool IsCycleAnimationActive( uint32 Id ) const;
+  bool IsActionAnimationActive( uint32 Id ) const;
+
+  private:
   CalModel*       m_CalModel;
   CEffectTechnique*   m_pEffectTechnique;
   CAnimatedCoreModel* m_AnimatedCoreModel;
@@ -36,27 +58,6 @@ private:
 
   void LoadTextures();
 
-public:
-  CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName );
-  CAnimatedInstanceModel( CXMLTreeNode& atts );
-  ~CAnimatedInstanceModel();
-
-  void Initialize();
-  void Destroy();
-  void Render();
-
-  void RenderModelBySoftware();
-  void RenderModelByHardware();
-
-  void Update();
-  void ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f,
-                      bool AutoLock = true );
-
-  void BlendCycle( uint32 Id, float32 Weight, float32 DelayIn );
-  void ClearCycle( uint32 Id, float32 DelayOut );
-
-  bool IsCycleAnimationActive( uint32 Id ) const;
-  bool IsActionAnimationActive( uint32 Id ) const;
 };
 
 #endif

@@ -108,11 +108,11 @@
     </action>
 	
 	<action name="MoveUp">
-   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_I"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
 	
 	<action name="MoveDown">
-   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_O"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_E"/>
     </action>
 	
 	<action name="Jump">

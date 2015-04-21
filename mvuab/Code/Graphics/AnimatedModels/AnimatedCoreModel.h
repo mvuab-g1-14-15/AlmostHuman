@@ -19,7 +19,24 @@ class CTexture;
 
 class CAnimatedCoreModel : public CName
 {
-    protected:
+    public:
+        CAnimatedCoreModel(const std::string &Name);
+        ~CAnimatedCoreModel();
+
+        CalCoreModel        *GetCoreModel           ();
+        CalHardwareModel    *GetCalHardwareModel    ();
+        CRenderableVertexs  *GetRenderableVertexs   ();
+
+        const   std::string & GetTextureName    (size_t id);
+        void    ActivateTextures                ();
+
+        bool Load               (const std::string &Path);
+        bool LoadVertexBuffer   (CGraphicsManager *RM);
+
+        int     GetAnimationId  (const std::string &AnimationName) const;
+        size_t  GetNumTextures  ();
+
+protected:
         typedef std::vector<CTexture *> TTextureVector;
         TTextureVector                  m_TextureVector;
 
@@ -34,8 +51,7 @@ class CAnimatedCoreModel : public CName
         int                             m_NumVtxs;
         int                             m_NumFaces;
 
-
-    private:
+private:
         void Destroy();
         bool Reload();
         bool Load();
@@ -46,22 +62,7 @@ class CAnimatedCoreModel : public CName
         bool LoadAnimation  (const std::string &Name, const std::string &Filename);
         void LoadTextures   ();
 
-    public:
-        CAnimatedCoreModel(const std::string &Name);
-        ~CAnimatedCoreModel();
 
-        CalCoreModel        *GetCoreModel           ();
-        CalHardwareModel    *GetCalHardwareModel    ();
-        CRenderableVertexs  *GetRenderableVertexs   ();
-
-        const   std::string & GetTextureName    (size_t id);
-	    void    ActivateTextures                ();
-
-        bool Load               (const std::string &Path);
-        bool LoadVertexBuffer   (CGraphicsManager *RM);
-
-        int     GetAnimationId  (const std::string &AnimationName) const;
-        size_t  GetNumTextures  ();
 };
 
 #endif

@@ -50,7 +50,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
     , m_pVB( 0 )
     , m_ChangeAnimation(  )
 {
-    CRenderableObjectTechniqueManager* lROT = ROTMInstance;
+     CRenderableObjectTechniqueManager* lROT = ROTMInstance;
     const std::string & l_TechniqueName =
         lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
     m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
@@ -216,15 +216,19 @@ void CAnimatedInstanceModel::Update()
 
 void CAnimatedInstanceModel::Initialize()
 {
-    assert( m_AnimatedCoreModel );
+    ASSERT( m_AnimatedCoreModel, "Invalid CalCoreModel" );
+
     // Create the calcoremodel
     CalCoreModel* l_CalCoreModel = m_AnimatedCoreModel->GetCoreModel();
     m_CalModel = new CalModel( l_CalCoreModel );
+
     // attach all meshes to the model
     uint16 l_CoreMeshCount = l_CalCoreModel->getCoreMeshCount();
 
     for ( uint16 meshId = 0; meshId < l_CoreMeshCount; ++meshId )
-    { m_CalModel->attachMesh( meshId ); }
+    {
+        m_CalModel->attachMesh( meshId );
+    }
 
     // set the material set of the whole model
     //m_CalModel->setMaterialSet(0);
@@ -235,6 +239,7 @@ void CAnimatedInstanceModel::Initialize()
         l_Weight = 0.0f;
         l_DelayIn = m_BlendTime;
         }*/
+
     BlendCycle( 0, 1.0f, 0.0f );
     m_CalModel->update( 0.0f );
 

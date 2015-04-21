@@ -6,15 +6,17 @@
 #include "EngineConfig.h"
 
 CAnimatedModelsManager::CAnimatedModelsManager()
-: CManager()
+    : CManager()
 {
     CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
 
-CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts)
-	: CManager(atts)
+CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts) 
+    : CManager(atts)
 {
+    CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
+
 CAnimatedModelsManager::~CAnimatedModelsManager()
 {
     Destroy();

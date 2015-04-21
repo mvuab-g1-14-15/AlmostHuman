@@ -4,6 +4,7 @@ function UpdateFree()
 	flag_speed = 0
     forward = 0
     strafe = 0
+	vertical = 0;
 	
 	if action_manager:DoAction("Run") then
 		flag_speed = 1
@@ -11,23 +12,25 @@ function UpdateFree()
 	
 	if action_manager:DoAction("MoveLeft") then
 		strafe = strafe + 1;
-		moveFree( flag_speed, forward, strafe, dt )
 	elseif action_manager:DoAction("MoveRight") then
 		strafe = strafe - 1;
-		moveFree( flag_speed, forward, strafe, dt )
-	else
-		moveFree( flag_speed, 0, 0, dt )	 
-	end
+	end		
 	
 	if action_manager:DoAction("MoveBackward") then
 		forward = forward - 1
-		moveFree( flag_speed, forward, strafe, dt )	
 	elseif action_manager:DoAction("MoveForward") then
 		forward = forward + 1
-		moveFree( flag_speed, forward, strafe, dt )	
-	else
-		moveFree( flag_speed, 0, 0, dt )	
 	end
+	
+	if action_manager:DoAction("MoveUp") then
+		engine:Trace("MoveUp")
+		vertical = vertical + 1
+	elseif action_manager:DoAction("MoveDown") then
+		vertical =  vertical - 1
+		engine:Trace("MoveDown")
+	end
+	
+	moveFree( flag_speed, forward, strafe, vertical, dt )
 	
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
@@ -41,7 +44,7 @@ function UpdateFree()
 	end
 end
 
-function moveFree( flag_speed, forward, strafe, dt )
+function moveFree( flag_speed, forward, strafe, vertical, dt )
 	local l_ForwardSpeed = 7
 
 	local l_Speed = 6
@@ -52,7 +55,7 @@ function moveFree( flag_speed, forward, strafe, dt )
 	
 	local addPos = Vect3f(0, 0, 0)
 	addPos.x =  forward * ( math.cos(Yaw) ) + strafe * (  math.cos(Yaw + g_HalfPi) )
-	addPos.y =  forward * ( math.sin(Pitch) )
+	addPos.y =  forward * ( math.sin(Pitch) ) + vertical;
 	addPos.z =  forward * ( math.sin(Yaw) ) + strafe  * ( math.sin(Yaw + g_HalfPi) )
 	if (not addPos.x == 0 or not addPos.z == 0) then
 		addPos:Normalize()
