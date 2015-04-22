@@ -3,8 +3,10 @@
 #pragma once
 
 #include "StaticMesh.h"
+
 #include "Utils\MapManager.h"
-#include "Utils/Manager.h"
+#include "Utils\Manager.h"
+
 #include "XML\XMLTreeNode.h"
 #include <string>
 
@@ -13,11 +15,12 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
     public:
         CStaticMeshManager();
 		CStaticMeshManager( CXMLTreeNode& atts);
-        ~ CStaticMeshManager ();
+        ~CStaticMeshManager ();
 
-		void Init();
 		void Update(){}
 		void Render(){}
+
+        void Init();
         void Reload();
 };
 #endif

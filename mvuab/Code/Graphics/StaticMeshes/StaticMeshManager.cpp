@@ -2,21 +2,32 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "ActionManager.h"
+
+#include "EngineManagers.h"
 #include "EngineConfig.h"
+
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 
 CStaticMeshManager::CStaticMeshManager() : CManager()
 {
 }
 
 
-CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts)
-    : CManager(atts)
+CStaticMeshManager::CStaticMeshManager(CXMLTreeNode& atts) : CManager(atts)
 {
 }
 
 CStaticMeshManager::~CStaticMeshManager()
 {
-    Destroy();
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    for (TMapResource::iterator it = m_Resources.begin(); it != m_Resources.end(); ++it)
+    { l_AllocatorManger->m_pFreeListAllocator->MakeDelete(it->second); }
+
+    m_Resources.clear();
 }
 
 void CStaticMeshManager::Init()
@@ -35,6 +46,8 @@ void CStaticMeshManager::Init()
         return;
     }
 
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
     for(int i = 0; i < node.GetNumChildren(); i++)
     {
         //TODO - CHECK THE TAG NAME
@@ -42,13 +55,9 @@ void CStaticMeshManager::Init()
         std::string file = node(i).GetPszProperty("filename", "no_file");
         file = "Data" + file;
 
-        CStaticMesh *l_StaticMesh = new CStaticMesh();
-        if(!l_StaticMesh->Load(file))
-        {
-            CHECKED_DELETE(l_StaticMesh);
-        }
-        else
-        { AddResource(name, l_StaticMesh); }
+        CStaticMesh *l_StaticMesh = (CStaticMesh *) l_AllocatorManger->m_pFreeListAllocator->MakeNew<CStaticMesh>();
+        if(!l_StaticMesh->Load(file)) { l_AllocatorManger->m_pFreeListAllocator->Deallocate(l_StaticMesh); }
+        else { AddResource(name, l_StaticMesh); }
     }
 }
 
