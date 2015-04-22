@@ -11,12 +11,12 @@
 
 //---Constructor
 CConsoleGUI::CConsoleGUI( uint32 windowsHeight, uint32 windowsWidth, float height_precent,
-                                    float witdh_percent,
-                                    const Math::Vect2f position_percent, Math::CColor textColor, uint32 fontID,
-                                    std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
-                                    bool isVisible,  bool isActive )
+                          float witdh_percent,
+                          const Math::Vect2f position_percent, Math::CColor textColor, uint32 fontID,
+                          std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
+                          bool isVisible,  bool isActive )
   : CEditableTextBox( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, textColor, fontID, lit,
-                 textHeightOffset, textWidthOffset, isVisible, isActive )
+                      textHeightOffset, textWidthOffset, isVisible, isActive )
 
 {
 }
@@ -28,7 +28,7 @@ CConsoleGUI::~CConsoleGUI()
 //---------------Interfaz de GuiElement----------------------
 void CConsoleGUI::Render()
 {
-	CEditableTextBox::Render();
+  CEditableTextBox::Render();
 }
 
 void CConsoleGUI::Update()
