@@ -19,6 +19,10 @@
     <ClCompile Include="Math\LerpAnimator2D.cpp" />
     <ClCompile Include="Math\LerpAnimator3D.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
+    <ClCompile Include="Memory\Allocator.cpp" />
+    <ClCompile Include="Memory\AllocatorManager.cpp" />
+    <ClCompile Include="Memory\FreeListAllocator.cpp" />
+    <ClCompile Include="Memory\LinearAllocator.cpp" />
     <ClCompile Include="Memory\MemLeaks.cpp" />
     <ClCompile Include="Timer\CountDownTimer.cpp" />
     <ClCompile Include="Timer\Timer.cpp" />
@@ -47,6 +51,10 @@
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />
+    <ClInclude Include="Memory\Allocator.h" />
+    <ClInclude Include="Memory\AllocatorManager.h" />
+    <ClInclude Include="Memory\FreeListAllocator.h" />
+    <ClInclude Include="Memory\LinearAllocator.h" />
     <ClInclude Include="Memory\MemLeaks.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Timer\CountDownTimer.h" />

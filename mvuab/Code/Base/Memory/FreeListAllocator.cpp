@@ -80,7 +80,7 @@ void CFreeListAllocator::Deallocate(void *l_MemAddress)
         l_FreeBlock = l_FreeBlock->m_Next;
     }
 
-    if(l_PrevBlock == nullptr)
+    if(l_PrevBlock == 0)
     {
         l_PrevBlock = (FreeBlock*) l_BlockStart;
         l_PrevBlock->m_Size = l_AllocHeader->m_Size;
