@@ -4,6 +4,8 @@
 #include "EngineManagers.h"
 #include "NavMesh\NavMesh.h"
 
+#include "GraphicsManager.h"
+
 CNavMeshManager::CNavMeshManager(const CXMLTreeNode& atts)
 	: CManager(atts)
 {
@@ -23,7 +25,7 @@ void CNavMeshManager::Init()
         return;
     }
 
-    CXMLTreeNode node = newFile["static_meshes"];
+    CXMLTreeNode node = newFile["RenderableObjects"];
     if(!node.Exists())
     {
         LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
@@ -34,12 +36,17 @@ void CNavMeshManager::Init()
 	CStaticMeshManager* lStaticMeshManager = SMeshMInstance;
     for(int i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i)
     {
-        const std::string & lName = node(i).GetPszProperty("name", "no_name");
-		const bool lIsNavigable = node(i).GetBoolProperty("navigable", false);
-		
-		if( lIsNavigable )
+		const std::string& TagName = node( i ).GetName();
+		if ( TagName == "MeshInstance" )
 		{
-			m_NavMesh->AddMesh( lStaticMeshManager->GetStaticMesh( lName ) );
+			const std::string & lName = node(i).GetPszProperty("core", "no_name");
+			const bool lIsNavigable = node(i).GetBoolProperty("navigable", false);
+			const Math::Vect3f lPos = node(i).GetVect3fProperty("pos", Math::Vect3f( 0.0f ));
+		
+			if( lIsNavigable )
+			{
+				m_NavMesh->AddMesh( lPos, lStaticMeshManager->GetStaticMesh( lName ) );
+			}
 		}
     }
 
@@ -52,4 +59,7 @@ void CNavMeshManager::Update()
 
 void CNavMeshManager::Render()
 {
+	Math::Mat44f t;
+	t.Translate(m_NavMesh->m_Pos);
+	CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->DrawBox(t, m_NavMesh->m_sizeX, m_NavMesh->m_sizeY, m_NavMesh->m_sizeZ);
 }

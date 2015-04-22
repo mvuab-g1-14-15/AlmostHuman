@@ -2,7 +2,7 @@
 <RenderableObjects>
   <layer name="solid" />
   <layer name="characters" />
- <MeshInstance name="Plane005" core="Plane005" pos="-0.742174 0.567575 8.02221" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Plane005" core="Plane005" pos="-0.742174 0.567575 8.02221" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" navigable="true"/>
   <MeshInstance name="Box017" core="Box017" pos="-0.724966 0.155752 8.9113" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box018a" core="Box018a" pos="6.85809 -7.3332 28.6068" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="StraightStair001" core="StraightStair001" pos="12.5857 -8.85577 37.861" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -61,7 +61,7 @@
   <MeshInstance name="Box054" core="Box054" pos="71.7778 37.4239 78.8592" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box055" core="Box055" pos="199.862 24.9834 89.6218" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box056" core="Box056" pos="199.864 -3.92362 244.085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="enemy_low" core="enemy_low" pos="137.639 -12.2677 279.882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="enemy_low" core="enemy_low" pos="137.639 -12.2677 279.882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid"/>
   <MeshInstance name="enemy_low001" core="enemy_low001" pos="137.639 -12.2677 356.542" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="enemy_low002" core="enemy_low002" pos="137.639 -12.2677 431.513" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="enemy_low003" core="enemy_low003" pos="258.622 -12.2677 440.328" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />

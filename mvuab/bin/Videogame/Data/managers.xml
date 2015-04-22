@@ -23,5 +23,5 @@
 	<gizmos_manager file_config="no_name"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<gui_manager file_config="Data/gui.xml"/>
-	<nav_mesh_manager file_config="Data/static_meshes.xml"/>
+	<nav_mesh_manager file_config="Data/renderable_objects.xml"/>
 </managers>

@@ -16,9 +16,15 @@ public:
 	CNavMesh();
 	~CNavMesh();
 
-	void AddMesh( const CStaticMesh* aStaticMesh );
+	void AddMesh( Math::Vect3f, const CStaticMesh* aStaticMesh );
 
 	void Calculate();
+
+	float m_sizeX;
+	float m_sizeY;
+	float m_sizeZ;
+
+	Math::Vect3f m_Pos;
 
 private:
 	std::vector<CRenderableVertexs*> m_RVs;

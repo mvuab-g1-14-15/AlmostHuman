@@ -20,7 +20,7 @@ CNavMesh::~CNavMesh()
 
 }
 
-void CNavMesh::AddMesh( const CStaticMesh* aStaticMesh )
+void CNavMesh::AddMesh( Math::Vect3f aPos, const CStaticMesh* aStaticMesh )
 {
 	ASSERT( aStaticMesh, "Adding a null static mesh to the nav mesh" );
 
@@ -32,7 +32,7 @@ void CNavMesh::AddMesh( const CStaticMesh* aStaticMesh )
 												  it_end = l_VB.end();
 		for (; it!=it_end; ++it)
 		{
-			const Math::Vect3f & point = *it;
+			const Math::Vect3f & point = *it + aPos;
 			m_VB.push_back(point.x);
 			m_VB.push_back(point.y);
 			m_VB.push_back(point.z);
@@ -666,4 +666,16 @@ bool Sample_SoloMesh::handleBuild()
 	m_chf = 0;
 	rcFreeContourSet(m_cset);
 	m_cset = 0;
+
+	m_sizeX = m_pmesh->bmax[0] - m_pmesh->bmin[0];
+	m_sizeY = m_pmesh->bmax[1] - m_pmesh->bmin[1];
+	m_sizeZ = m_pmesh->bmax[2] - m_pmesh->bmin[2];
+
+	m_Pos = Math::Vect3f( 0.0f );
+	for (int i = 0; i<m_pmesh->nverts*3; i+=3)
+	{
+		m_Pos.x += m_pmesh->verts[i] / m_pmesh->nverts;
+		m_Pos.y += m_pmesh->verts[i+1] / m_pmesh->nverts;
+		m_Pos.z += m_pmesh->verts[i+2] / m_pmesh->nverts;
+	}
 }
