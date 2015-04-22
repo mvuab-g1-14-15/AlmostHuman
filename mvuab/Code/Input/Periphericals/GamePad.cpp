@@ -21,14 +21,13 @@ void CGamePad::Update()
 {
     for( uint32 i = 0; i < MAX_CONTROLLERS; i++ )
   {
-
         m_Controllers[i].m_bConnected = (XInputGetState(i, &m_Controllers[i].m_pState) == ERROR_SUCCESS);
- 
+
       if(m_Controllers[i].m_bConnected)
       {
         if(m_bDeadZoneOn)
         {
-            // Zero value if thumbsticks are within the dead zone 
+            // Zero value if thumbsticks are within the dead zone
             if( m_Controllers[i].m_pState.Gamepad.sThumbLX < INPUT_DEADZONE && m_Controllers[i].m_pState.Gamepad.sThumbLX > -INPUT_DEADZONE )
                     {
                 m_Controllers[i].m_pState.Gamepad.sThumbLX = 0;
@@ -89,7 +88,7 @@ void CGamePad::SetLeftMotorSpeed (uint32 speed, uint32 idController)
         {
             speed = 65535;
         }
-        
+
         m_Controllers[idController].m_vibration.wLeftMotorSpeed = speed;
     }
 }
@@ -103,7 +102,7 @@ void CGamePad::SetRightMotorSpeed (uint32 speed, uint32 idController)
         {
             speed = 65535;
         }
-        
+
         m_Controllers[idController].m_vibration.wRightMotorSpeed = speed;
     }
 }
@@ -166,7 +165,7 @@ bool CGamePad::IsUpDown(uint32 nBtn, uint32 idController)
         else
         {
             return false;
-        }    
+        }
     }
     else
     {
@@ -194,7 +193,7 @@ bool CGamePad::GetRightThumbDeflection(float32 *pfX, float32 *pfY, uint32 idCont
     if(idController < MAX_CONTROLLERS)
     {
         if(m_Controllers[idController].m_bConnected)
-        {    
+        {
             (*pfX) = m_Controllers[idController].m_pState.Gamepad.sThumbRX;
             (*pfY) = m_Controllers[idController].m_pState.Gamepad.sThumbRY;
 
@@ -233,8 +232,7 @@ bool CGamePad::GetDeltaTriggers(float32 *pfLeft, float32 *pfRight, uint32 idCont
     }
 }
 
-
-uint32 CGamePad::GetButtonsPressed (uint32 idController)    const 
+uint32 CGamePad::GetButtonsPressed (uint32 idController)    const
 {
     if(idController < MAX_CONTROLLERS)
     {
@@ -249,6 +247,6 @@ void CGamePad::GetPosition (Math::Vect2i &pos, uint32 idController)
 {
     if(idController < MAX_CONTROLLERS)
     {
-        pos = m_Controllers[idController].m_Pos; 
+        pos = m_Controllers[idController].m_Pos;
     }
 }

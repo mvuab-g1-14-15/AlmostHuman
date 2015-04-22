@@ -16,4 +16,3 @@ class CAllocatorManager
         CLinearAllocator    *m_pLinearAllocator;
         CFreeListAllocator  *m_pFreeListAllocator;
 };
-

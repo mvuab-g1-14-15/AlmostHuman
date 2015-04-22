@@ -38,18 +38,18 @@ void CRenderableObjectsLayersManager::Init()
   CXMLTreeNode  TreeNode = l_File["RenderableObjects"];
 
   if (!TreeNode.Exists()) return;
-  
+
   for (int i = 0; i < TreeNode.GetNumChildren(); ++i)
   {
       const std::string& lTagName = TreeNode( i ).GetName();
       const std::string& lName = TreeNode( i ).GetPszProperty("name", "");
-          
-      if (lTagName == "layer") 
+
+      if (lTagName == "layer")
       {
           if(TreeNode( i ).GetBoolProperty("default", false))
           {
               m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
-              if (!AddResource( lName, m_DefaultRenderableObjectManager)) 
+              if (!AddResource( lName, m_DefaultRenderableObjectManager))
               {
                   LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
                   CHECKED_DELETE( m_DefaultRenderableObjectManager );
@@ -65,11 +65,11 @@ void CRenderableObjectsLayersManager::Init()
               }
           }
       }
-      else 
+      else
       {
           CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager(TreeNode(i));
           ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
-              
+
           if (lTagName == "MeshInstance")
           {
               CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));

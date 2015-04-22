@@ -95,7 +95,6 @@ void CEnemyManager::Init()
             }
             else if ( l_TagName == "route" )
             { AddNewRoute( m( i ) ); }
-
         }
     }
 }

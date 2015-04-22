@@ -1,7 +1,6 @@
 #include "Particle.h"
 #include <Windows.h>
 
-
 #include "EngineManagers.h"
 #include "Cameras/Camera.h"
 #include "Cameras/Frustum.h"

@@ -20,25 +20,25 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 {
     CXMLTreeNode newFile;
     CXMLTreeNode m;
-    
+
     if ( !newFile.LoadFile( FileName.c_str() ) )
     {
         LOG_ERROR_APPLICATION( "CRenderableObjectsManager::Load --> Error loading XML %s.", FileName.c_str() );
         return false;
     }
-    
+
     m = newFile["RenderableObjects"];
     if ( !m.Exists() )
     {
         LOG_ERROR_APPLICATION( "CRenderableObjectsManager::Load --> RenderableObjects tag not found in the file %s", FileName.c_str());
         return false;
     }
-    
+
     for ( int i = 0; i < m.GetNumChildren(); ++i )
     {
         const std::string& l_TagName = m( i ).GetName();
         const std::string& l_Name = m( i ).GetPszProperty( "name", "" );
-        
+
         if ( l_TagName == "MeshInstance" )
         {
             CInstanceMesh* l_InstanceMesh = new CInstanceMesh( m( i ) );
@@ -50,7 +50,7 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
             if ( !AddResource( l_Name, l_AnimatedInstance ) ) CHECKED_DELETE( l_AnimatedInstance );
         }
     }
-    
+
     //CCinematic* l_CinematicInstance = new CCinematic("Data/cinematic.xml");
     //l_CinematicInstance->Play(true);
     //AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);

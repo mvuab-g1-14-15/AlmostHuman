@@ -18,7 +18,6 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
       m_UseInverseViewMatrix( HandlesNode.GetBoolProperty( "use_inverse_view_matrix", false ) ),
       m_UseInverseWorldMatrix( HandlesNode.GetBoolProperty( "use_inverse_world_matrix", false ) ),
 
-
       m_UseProjMatrix( HandlesNode.GetBoolProperty( "use_projection_matrix", false ) ),
       m_UseViewMatrix( HandlesNode.GetBoolProperty( "use_view_matrix", false ) ),
       m_UseWorldMatrix( HandlesNode.GetBoolProperty( "use_world_matrix", false ) ),

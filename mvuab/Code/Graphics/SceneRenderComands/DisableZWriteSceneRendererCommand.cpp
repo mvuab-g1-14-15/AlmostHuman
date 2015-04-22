@@ -7,7 +7,6 @@ CDisableZWriteSceneRendererCommand::CDisableZWriteSceneRendererCommand(CXMLTreeN
 
 CDisableZWriteSceneRendererCommand::~CDisableZWriteSceneRendererCommand()
 {
-    
 }
 void CDisableZWriteSceneRendererCommand::Execute(CGraphicsManager &GM)
 {

@@ -9,7 +9,6 @@
 #ifndef INC_PHYSIC_REVOLUTE_JOINT_H_
 #define INC_PHYSIC_REVOLUTE_JOINT_H_
 
-
 #include "Math\Vector3.h"
 
 //---Forward Declarations---
@@ -26,14 +25,13 @@ public:
 
 	void					CreateJoint				( NxJoint* joint );
 	void					SetInfo					( const Math::Vect3f& axis, const Math::Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB = 0 );
-													  
+
 	void					SetMotor				( float maxForce, float veltarget, bool limit=false, float limHigh=0.f, float limLow=0.f );
 	void					ActiveMotor				( float velocity );
 
 	//---Get PhsX Info---
 	NxJoint*				GetPhXJoint				( void ) const		{ return m_pJoint; }
 	NxRevoluteJointDesc*	GetPhXDescJoint			( void ) const		{ return m_pRevoluteDesc; }
-
 
 private:
 	NxJoint					*m_pJoint;

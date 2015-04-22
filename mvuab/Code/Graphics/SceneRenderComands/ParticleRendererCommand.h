@@ -9,7 +9,7 @@ class CGraphicsManager;
 class CParticleRenderCommand : public CSceneRendererCommand
 {
     protected:
-     
+
     public:
         CParticleRenderCommand(CXMLTreeNode& atts);
         virtual void Execute(CGraphicsManager& GM);

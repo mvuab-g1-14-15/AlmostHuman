@@ -2,7 +2,6 @@
 #define ENABLE_SET_BLEND_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 

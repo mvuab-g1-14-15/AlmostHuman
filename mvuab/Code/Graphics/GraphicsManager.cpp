@@ -1281,7 +1281,7 @@ void CGraphicsManager::DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, 
             coord_text[1].x = 1.0f;    coord_text[1].y = 1.f;
             coord_text[2].x = 0.f;      coord_text[2].y = 0.f;
             coord_text[3].x = 0.f;      coord_text[3].y = 1.f;
-			
+
 			/*w_aux = (uint32)(w * 0.5);
             DrawQuad2D(finalPos, w_aux, h, UPPER_LEFT, texture, NONE_FLIP);
             finalPos.x += w_aux;
@@ -1296,7 +1296,7 @@ void CGraphicsManager::DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, 
             coord_text[1].x = 0.f;  coord_text[1].y = 0.f;
             coord_text[2].x = 1.f;  coord_text[2].y = 1.f;
             coord_text[3].x = 1.f;  coord_text[3].y = 0.f;
-			
+
 			/*h_aux = (uint32)(h * 0.5);
             DrawQuad2D(finalPos, w, h_aux, UPPER_LEFT, texture, NONE_FLIP);
             finalPos.y += h_aux + 1;
@@ -1310,9 +1310,7 @@ void CGraphicsManager::DrawQuad2D (const Math::Vect2i& pos, uint32 w, uint32 h, 
             {
                 LOG_ERROR_APPLICATION("Manager:: Se está intentado renderizar un quad2d con un flip desconocido");
             }
-
     }
-
 
     unsigned short indices[6] = {0, 2, 1, 1, 2, 3};
     SCREEN_TEXTURE_VERTEX v[4] =

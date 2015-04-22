@@ -34,13 +34,12 @@
 ///           `-----------------> eje x del sistema de referencia en coordenadas del padre
 ///
 ///         En memoria los datos están contiguos por columnas:
-///                m00 m10 m20 / m01 m11 m21 / m02 m12 m22 / m03 m13 m23 
+///                m00 m10 m20 / m01 m11 m21 / m02 m12 m22 / m03 m13 m23
 /// \endverbatim
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace Math
 {
-
 template<typename T>
 class Matrix33
 {
@@ -75,13 +74,11 @@ public:
                    const Vector3<T>& ejeZ);
   inline Matrix33 (const T angleY, const T angleX, const T angleZ);
 
-
   // Reseteos parciales (traslación/rotación/escalado) y totales (a identidad, a cero)
   inline Matrix33<T>& ResetRotation    ();
   inline Matrix33<T>& ResetScale       ();
   inline Matrix33<T>& SetIdentity      ();
   inline Matrix33<T>& SetZero          ();
-
 
   // Establecimiento de datos de la matriz con reseteo previo a identidad
   inline Matrix33<T>& SetFromBasis     (const Vector3<T>& ejeX,
@@ -98,7 +95,6 @@ public:
   inline Matrix33<T>& SetFromLookAt    (const Vector3<T>& vPos, const Vector3<T>& vTarget, const Vector3<T>& vUp);
 //  inline Matrix33<T>& SetFromQuat      (const Quatn<T>& quat);
 
-
   // Modificación de una de las partes de la matriz (rotación/escalado) dejando invariable las otras
   inline Matrix33<T>& SetRotByAngleX    (const T angleX);
   inline Matrix33<T>& SetRotByAngleY    (const T angleY);
@@ -110,7 +106,6 @@ public:
   inline Matrix33<T>& SetScale          (const Matrix33<T>& mat_escala);
   inline Matrix33<T>& SetScale          (const Vector3<T>& vect_escala);
   inline Matrix33<T>& SetScale          (const T escala_x, const T escala_y, const T escala_z);
-  
 
   // Acceso
   inline Vector3<T>        GetRow                  (int i) const;
@@ -143,7 +138,6 @@ public:
   Vector3<T>   GetPitchRollYaw () const;
   Matrix33<T>& SetPitchRollYaw (const Vector3<T>& v3PitchRollYaw);
 
-
   // Operadores de aritmética de matrices
   Matrix33<T>        operator + (const Matrix33<T>& otra) const;
   Matrix33<T>        operator - (const Matrix33<T>& otra) const;
@@ -154,14 +148,12 @@ public:
   Vector3<T>         operator * (const Vector3<T>& vector) const;
   Vector3<T>         operator ^ (const Vector3<T>& vector) const;
 
-
   // Operadores aritméticos de actualización
   Matrix33<T>& operator += (const Matrix33<T>& otra);
   Matrix33<T>& operator -= (const Matrix33<T>& otra);
   Matrix33<T>& operator *= (const Matrix33<T>& otra);
   Matrix33<T>& operator *= (const T escalar);
   Matrix33<T>& operator /= (const T escalar);
-
 
   // Operadores de comparación
   inline bool operator ==       (const Matrix33<T>& otra) const;
@@ -174,7 +166,6 @@ public:
   inline Vector3<T> GetTransformVector    (const Vector3<T>& vector) const;
   void              TransformArrayVectors (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
 
-
   // Funciones de matriz: Inversión, transposición, escalado, rotación [const]
   Matrix33<T>  GetInverted         () const;
   Matrix33<T>  GetInvertedRS       () const;
@@ -185,7 +176,6 @@ public:
   Matrix33<T>  GetRotedByAnglesXZ  (const T angleX, const T angleZ) const;
   Matrix33<T>  GetRotedByAnglesYXZ (const T angleY, const T angleX, const T angleZ) const;
   Matrix33<T>  GetScaled           (const T escala_x, const T escala_y, const T escala_z) const;
-  
 
   // Funciones de matriz: Inversión, transposición, escalado, rotación [no const]
   Matrix33<T>& Invert         ();
@@ -199,10 +189,9 @@ public:
   Matrix33<T>& Scale          (const T escala_x, const T escala_y, const T escala_z);
 
   // (*)
-  Matrix33<T>& AlignYX        (const Vector3<T>& vY, const Vector3<T>& vX); 
-  Matrix33<T>& AlignYZ        (const Vector3<T>& vY, const Vector3<T>& vZ); 
+  Matrix33<T>& AlignYX        (const Vector3<T>& vY, const Vector3<T>& vX);
+  Matrix33<T>& AlignYZ        (const Vector3<T>& vY, const Vector3<T>& vZ);
   Matrix33<T>& AlignXZ        (const Vector3<T>& vX, const Vector3<T>& vZ);
-
 
   // Acceso/determinación a/de propiedades matriciales
   inline T     Determinant          () const;
@@ -212,7 +201,6 @@ public:
 
 // Fichero con las definiciones de las funciones inline
 #include "Matrix33.inl"
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 /// TIPOS DE MATRICES [3x3] CON TIPOS CONCRETOS DE DATOS
@@ -225,15 +213,14 @@ typedef Matrix33<float64>  Mat33d;
 ////////////////////////////////////////////////////////////////////////////////////////
 extern const Mat33f  m33fIDENTITY;
 extern const Mat33f  m33fZERO;
-extern const Mat33f  m33fONES; 
-                              
+extern const Mat33f  m33fONES;
+
 ////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float64
 ////////////////////////////////////////////////////////////////////////////////////////
 extern const Mat33d  m33dIDENTITY;
 extern const Mat33d  m33dZERO;
 extern const Mat33d  m33dONES;
-
 }// namespace Math
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif //_NGT_MATRIX_33_H_

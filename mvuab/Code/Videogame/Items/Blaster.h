@@ -8,7 +8,6 @@
 class CPhysicActor;
 class CPhysicUserData;
 
-
 class CBlaster
 {
 private:

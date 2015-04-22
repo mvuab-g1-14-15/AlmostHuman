@@ -17,16 +17,13 @@
 //---Forward Declarations---
 //--------------------------
 
-
 class CStaticText: public CGuiElement
 {
-
 public:
 	CStaticText(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
 								const Math::Vect2f position_percent,  std::string lit="", bool isVisible = true, bool isActive = true);
-	
-	virtual ~CStaticText() {/*NOTHING*/;}
 
+	virtual ~CStaticText() {/*NOTHING*/;}
 
 	//---------------CGuiElement Interface----------------------
 	virtual void	Render							();

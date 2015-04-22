@@ -1,11 +1,9 @@
 #include "ParticleManager.h"
 #include "Timer\Timer.h"
 
-
 #include "EngineConfig.h"
 #include "SphereEmitter.h"
 #include "CubeEmitter.h"
-
 
 CParticleManager::CParticleManager() : CManager()
 {

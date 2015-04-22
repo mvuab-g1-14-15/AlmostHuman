@@ -1,6 +1,5 @@
 #include "Gizmos/GizmoElement.h"
 
-
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 

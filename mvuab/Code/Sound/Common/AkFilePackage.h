@@ -1,14 +1,14 @@
 //////////////////////////////////////////////////////////////////////
-// 
+//
 // AkFilePackage.h
 //
-// This class represents a file package that was created with the 
-// AkFilePackager utility app (located in ($WWISESDK)/samples/FilePackager/). 
+// This class represents a file package that was created with the
+// AkFilePackager utility app (located in ($WWISESDK)/samples/FilePackager/).
 // It holds a system file handle and a look-up table (CAkFilePackageLUT).
 //
 // CAkFilePackage objects can be chained together using the ListFilePackages
 // typedef defined below.
-// 
+//
 // Copyright (c) 2007-2009 Audiokinetic Inc. / All Rights Reserved
 //
 //////////////////////////////////////////////////////////////////////
@@ -32,28 +32,28 @@ public:
 		: pNextItem( NULL ) {}
 
 	// Implement U_NEXTITEM AkListBare policy.
-	static AkForceInline T *& Get( T * in_pItem ) 
+	static AkForceInline T *& Get( T * in_pItem )
 	{
 		return in_pItem->pNextItem;
 	}
-	
+
 	T * pNextItem;
 };
 
 //-----------------------------------------------------------------------------
-// Name: CAkFilePackage 
-// Desc: Base class representing a file package (incomplete implementation). 
+// Name: CAkFilePackage
+// Desc: Base class representing a file package (incomplete implementation).
 // It holds a look-up table (CAkFilePackageLUT) and manages memory for the LUT and
-// for itself. 
+// for itself.
 //-----------------------------------------------------------------------------
 class CAkFilePackage : public CAkListAware<CAkFilePackage>
 {
 public:
 	// Package factory.
-	// Creates a memory pool to contain the header of the file package and this object. 
+	// Creates a memory pool to contain the header of the file package and this object.
 	// Returns its address.
 	template<class T_PACKAGE>
-	static T_PACKAGE * Create( 
+	static T_PACKAGE * Create(
 		const AkOSChar*		in_pszPackageName,	// Name of the file package (for memory monitoring and ID generation).
 		AkMemPoolId			in_memPoolID,		// Memory pool in which the package is created with its lookup table.
 		AkUInt32 			in_uHeaderSize,		// File package header size, including the size of the header chunk AKPK_HEADER_CHUNK_DEF_SIZE.
@@ -65,7 +65,7 @@ public:
 		AKASSERT( in_uHeaderSize > 0 );
 
 		out_pHeaderBuffer = NULL;
-		
+
 		// Create memory pool and copy header.
 		// The pool must be big enough to hold both the buffer for the LUT's header
 		// and a CAkFilePackage object.
@@ -105,7 +105,7 @@ public:
 
 		// Generate an ID.
 		AkUInt32 uPackageID = AK::SoundEngine::GetIDFromString( in_pszPackageName );
-		
+
 		// Construct a CAkFilePackage at the end of this memory region.
 		T_PACKAGE * pFilePackage = AkPlacementNew( pToRelease + out_uReservedHeaderSize ) T_PACKAGE( uPackageID, in_uHeaderSize, in_memPoolID, pToRelease, bIsInternalPool );
 		AKASSERT( pFilePackage );	// Must succeed.
@@ -145,7 +145,7 @@ protected:
 	{
 	}
 	virtual ~CAkFilePackage() {}
-	
+
 	// Helper.
 	static void ClearMemory(
 		AkMemPoolId in_poolID,			// Pool to destroy.

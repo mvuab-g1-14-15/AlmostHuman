@@ -1,5 +1,3 @@
-
-
 #include "StaticText.h"
 #include "GraphicsManager.h"
 #include "Logger/Logger.h"
@@ -11,17 +9,16 @@ CStaticText::CStaticText( uint32 windowsHeight, uint32 windowsWidth, float heigh
 : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, STATIC_TEXT, lit, 0, 0, isVisible,isActive)
 {}
 
-
 //---------------Interfaz de GuiElement----------------------
 void	CStaticText::Render ()
-{	
+{
 	if( CGuiElement::m_bIsVisible)
 	{
 		//Primero renderizamos todos los hijos que pudiera tener el Static Text:
 		CGuiElement::Render();
 
 		//Finalmente renderizamos el texto:
-		CGuiElement::RenderText();	
+		CGuiElement::RenderText();
 	}
 }
 
@@ -38,4 +35,3 @@ void CStaticText::SetLiteral( const std::string& lit)
 {
 	CGuiElement::m_sLiteral = lit;
 }
-

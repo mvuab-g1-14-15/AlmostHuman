@@ -6,7 +6,7 @@
 // Exposes basic path functions for convenience.
 // For more details on resolving file location, refer to section "File Location" inside
 // "Going Further > Overriding Managers > Streaming / Stream Manager > Low-Level I/O"
-// of the SDK documentation. 
+// of the SDK documentation.
 //
 // Copyright (c) 2006 Audiokinetic Inc. / All Rights Reserved
 //
@@ -48,40 +48,40 @@ void CAkMultipleFileLocation<OPEN_POLICY>::Term()
 		FilePath *next = p->pNextLightItem;
 		AkDelete(AK::StreamMgr::GetPoolID(), p);
 		p = next;
-	}	
+	}
 	m_Locations.Term();
 }
 
 template<class OPEN_POLICY>
-AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::Open( 
+AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::Open(
 										const AkOSChar* in_pszFileName,     // File name.
 										AkOpenMode      in_eOpenMode,       // Open mode.
 										AkFileSystemFlags * in_pFlags,      // Special flags. Can pass NULL.
 										bool			in_bOverlapped,		// Overlapped IO open
 										AkFileDesc &    out_fileDesc        // Returned file descriptor.
 										)
-{	
+{
 	for(typename AkListBareLight<FilePath>::Iterator it = m_Locations.Begin(); it != m_Locations.End();++it)
 	{
 		// Get the full file path, using path concatenation logic.
 		AkOSChar szFullFilePath[AK_MAX_PATH];
 		if ( GetFullFilePath( in_pszFileName, in_pFlags, in_eOpenMode, (*it), szFullFilePath ) == AK_Success )
 		{
-			AKRESULT res = OPEN_POLICY::Open(szFullFilePath, in_eOpenMode, in_bOverlapped, out_fileDesc);		
+			AKRESULT res = OPEN_POLICY::Open(szFullFilePath, in_eOpenMode, in_bOverlapped, out_fileDesc);
 			if (res == AK_Success)
 			{
 				//These must be set by the OpenPolicy
 				AKASSERT(out_fileDesc.hFile != NULL );
 				AKASSERT(out_fileDesc.iFileSize != 0 && (in_eOpenMode == AK_OpenModeRead || in_eOpenMode == AK_OpenModeReadWrite) || !(in_eOpenMode == AK_OpenModeRead || in_eOpenMode == AK_OpenModeReadWrite));
 				return AK_Success;
-			}			
+			}
 		}
 	}
-	return AK_Fail;    
+	return AK_Fail;
 }
 
 template<class OPEN_POLICY>
-AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::Open( 
+AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::Open(
 										AkFileID        in_fileID,          // File ID.
 										AkOpenMode      in_eOpenMode,       // Open mode.
 										AkFileSystemFlags * in_pFlags,      // Special flags. Can pass NULL.
@@ -136,7 +136,7 @@ AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::GetFullFilePath(
 
 	AKPLATFORM::SafeStrCpy( out_pszFullFilePath, in_pBasePath->szPath, AK_MAX_PATH );
     if ( in_pFlags && in_eOpenMode == AK_OpenModeRead )
-    {        
+    {
 		// Add language directory name if needed.
 		if ( in_pFlags->bIsLanguageSpecific )
 		{
@@ -154,7 +154,7 @@ AKRESULT CAkMultipleFileLocation<OPEN_POLICY>::GetFullFilePath(
 			}
 		}
 	}
-        
+
     // Append file title.
 	uiPathSize += AKPLATFORM::OsStrLen( out_pszFullFilePath );
 	if ( uiPathSize >= AK_MAX_PATH )

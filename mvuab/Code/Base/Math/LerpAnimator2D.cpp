@@ -13,7 +13,6 @@ void Math::CLerpAnimator2D::SetValues (Math::Vect2f initValue, Math::Vect2f endV
     m_eFunction            = type;
 }
 
-
 bool Math::CLerpAnimator2D::Update (float32 ElapsedTime, Math::Vect2f &value)
 {
     m_fElapsedTime += ElapsedTime;
@@ -39,7 +38,7 @@ bool Math::CLerpAnimator2D::Update (float32 ElapsedTime, Math::Vect2f &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = Math::Utils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);
         }
         break;
     case FUNC_DECREMENT:
@@ -48,8 +47,8 @@ bool Math::CLerpAnimator2D::Update (float32 ElapsedTime, Math::Vect2f &value)
         }
         break;
     }
-    
+
     value = m_vInitValue.GetLerp(m_vEndValue,mu);
-    
+
     return finish;
 }

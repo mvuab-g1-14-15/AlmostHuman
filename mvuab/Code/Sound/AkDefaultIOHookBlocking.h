@@ -106,7 +106,6 @@ class CAkDefaultIOHookBlocking : public AK::StreamMgr::IAkFileLocationResolver
   );
   void Term();
 
-
   //
   // IAkFileLocationAware interface.
   //-----------------------------------------------------------------------------
@@ -128,7 +127,6 @@ class CAkDefaultIOHookBlocking : public AK::StreamMgr::IAkFileLocationResolver
     bool 					&io_bSyncOpen,		// If true, the file must be opened synchronously. Otherwise it is left at the File Location Resolver's discretion. Return false if Open needs to be deferred.
     AkFileDesc 			&out_fileDesc        // Returned file descriptor.
   );
-
 
   //
   // IAkIOHookBlocking interface.

@@ -44,7 +44,6 @@ public:
     m_GamePaused = in_Paused;
   }
 
-
   /***************************** WWISE FUNCTIONS *****************************************/
   AKRESULT SetSwitch( std::string _Group, std::string _Gravel, std::string _KeyGameObjectMap );
   AKRESULT RegisterGameObject( std::string _KeyGameObjectMap );

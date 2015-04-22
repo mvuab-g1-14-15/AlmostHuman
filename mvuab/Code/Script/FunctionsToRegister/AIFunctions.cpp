@@ -45,7 +45,6 @@ T vector_get( std::vector<T>& vec, size_t i )
   return vec[i];
 }
 
-
 void registerCharacters( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Characters" );
@@ -117,5 +116,4 @@ void registerAI( lua_State* aLuaState )
     .def( constructor<std::vector<Vect3f>>() )
     .def( "GetResource", &vector_get<Vect3f> )
   ];
-
 }

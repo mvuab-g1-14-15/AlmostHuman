@@ -12,7 +12,6 @@ CRenderGizmosCommand::CRenderGizmosCommand( CXMLTreeNode& atts )
 
 CRenderGizmosCommand::~CRenderGizmosCommand()
 {
-
 }
 
 void CRenderGizmosCommand::Execute( CGraphicsManager& GM )

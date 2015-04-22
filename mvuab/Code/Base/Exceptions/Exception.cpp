@@ -2,7 +2,6 @@
 #include "Utils/BaseUtils.h"
 #include "Utils/StringUtils.h"
 
-
 CException::CException( const std::string& inFile, int inLine, const std::string& inMessage )
 {
   std::string line = "";

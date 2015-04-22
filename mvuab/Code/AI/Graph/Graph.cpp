@@ -33,17 +33,16 @@ unsigned int CGraph::GetArcWeight(unsigned int n1, unsigned n2)
 {
     std::map<unsigned int, std::map<unsigned int, unsigned int>>::iterator it1 = m_GraphGrid.find(n1);
     if(it1 == m_GraphGrid.end()) return 0;
-    
+
     std::map<unsigned int, unsigned int>::iterator it2 = it1->second.find(n2);
     return (it2 != it1->second.end()) ? it2->second : 0;
 }
-
 
 bool CGraph::Parse(const std::string &file)
 {
     CXMLTreeNode l_NewFile;
     if (!l_NewFile.LoadFile(file.c_str())) return false;
-    
+
     CXMLTreeNode l_TreeNode = l_NewFile["graph"];
     if (!l_TreeNode.Exists()) return false;
 
@@ -65,7 +64,7 @@ bool CGraph::Parse(const std::string &file)
             int l_Src = l_TreeNode(i).GetIntProperty("src"  , 0);
             int l_Dst = l_TreeNode(i).GetIntProperty("dst"  , 0);
             int l_Val = l_TreeNode(i).GetIntProperty("value", 0);
-            
+
             m_GraphGrid[l_Src][l_Dst] = l_Val;
         }
     }

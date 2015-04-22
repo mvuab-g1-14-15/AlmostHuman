@@ -2,7 +2,6 @@
 #define SCENE_RENDERER_COMMAND_MANAGER_
 #pragma once
 
-
 #include "Utils\TemplatedVectorMapManager.h"
 #include "SceneRendererCommand.h"
 #include <string>

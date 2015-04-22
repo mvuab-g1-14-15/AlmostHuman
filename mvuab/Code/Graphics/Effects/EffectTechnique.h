@@ -40,7 +40,7 @@ private: // Members
   bool                        m_UseInverseProjMatrix;
   bool                        m_UseInverseViewMatrix;
   bool                        m_UseInverseWorldMatrix;
- 
+
   bool                        m_UseProjMatrix;
   bool                        m_UseViewMatrix;
   bool                        m_UseWorldMatrix;
@@ -48,11 +48,11 @@ private: // Members
   bool                        m_UseWorldViewProjectionMatrix;
   bool                        m_UseViewProjectionMatrix;
   bool                        m_UseViewToLightProjectionMatrix;
-  
+
   // Debug
   bool                        m_UseDebugColor;
   Math::CColor                m_DebugColor;
-  
+
   // Lights
   int32                       m_NumOfLights;
   bool                        m_UseLights;

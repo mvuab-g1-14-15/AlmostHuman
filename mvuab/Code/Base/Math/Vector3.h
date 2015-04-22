@@ -51,7 +51,6 @@ public:
   inline Vector3( const T tx, const T ty, const T tz );
   inline Vector3( const T escalar );
 
-
   // Operadores aritméticos
   inline        Vector3<T>  operator + ( const Vector3<T>& otro ) const;
   inline        Vector3<T>  operator - ( const Vector3<T>& otro ) const;
@@ -63,7 +62,6 @@ public:
   inline        Vector3<T>& operator + ();
   inline const  Vector3<T>& operator + () const;
 
-
   // Operadores aritméticos de actualización
   inline Vector3<T>& operator += ( const Vector3<T>& otro );
   inline Vector3<T>& operator -= ( const Vector3<T>& otro );
@@ -72,22 +70,18 @@ public:
   inline Vector3<T>& operator += ( const T escalar );
   inline Vector3<T>& operator -= ( const T escalar );
 
-
   // Operadores y funciones de asignación
   inline Vector3<T>& operator()( const T tx, const T ty, const T tz );
   inline void        Set( const T tx, const T ty, const T tz );
   inline void        SetZero();
 
-
   // Coordenadas polares
   void  SetFromPolar( const T longitude, const T latitude, const T length );
   void  GetPolar( T& longitude, T& latitude, T& length ) const;
 
-
   // Producto escalar (*) y producto vectorial (^)
   inline T          operator * ( const Vector3<T>& otro ) const;
   inline Vector3<T> operator ^ ( const Vector3<T>& otro ) const;
-
 
   // Operadores y funciones de comparacion
   inline bool operator == ( const Vector3<T>& otro ) const;
@@ -97,27 +91,22 @@ public:
   inline bool IsNotEqualEpsilon( const Vector3<T>& otro,
                                  const T Epsilo = Epsilon<T>() ) const; //TODO CW quito la n para que no sea igual
 
-
   // Producto por componentes (escalado)
   inline Vector3<T>& Scale( const Vector3<T>& otro );
   inline Vector3<T>  GetScaled( const Vector3<T>& otro ) const;
-
 
   // Establecimiento condicional
   inline const Vector3<T>& SetIfMinComponents( const Vector3<T>& otro );
   inline const Vector3<T>& SetIfMaxComponents( const Vector3<T>& otro );
 
-
   // Operador de acceso []
   inline T  operator []( int i ) const;
   inline T& operator []( int i );
-
 
   // Proyecciones
   inline Vector2<T> GetProjXY() const;
   inline Vector2<T> GetProjYZ() const;
   inline Vector2<T> GetProjZX() const;
-
 
   // Funciones de la longitud
   inline Vector3<T>& Normalize( const T tk = One<T>() );
@@ -138,7 +127,6 @@ public:
   inline T           GetAngleY() const;
   inline T           GetAngleZ() const;
   inline void        GetAngles( T& angX, T& angY, T& angZ ) const;
-
 
   // Interpolación lineal
   inline Vector3<T>& Lerp( const Vector3<T>& otro, const T t );
@@ -169,7 +157,6 @@ template<typename T> inline Vector3<T> VectorMaxComponents( const Vector3<T>& un
 // Fichero con las definiciones de las funciones inline
 #include "Vector3.inl"
 
-
 ////////////////////////////////////////////////////////////////////////////////////////
 // TIPOS DE VECTORES 3D CON TIPOS CONCRETOS DE DATOS
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +165,6 @@ typedef Vector3<float64> Vect3d;
 typedef Vector3<int32>  Vect3i;
 typedef Vector3<uint32> Vect3u;
 typedef Vector3<uint16> Vect3w;
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //  CONSTANTES float32
@@ -236,7 +222,6 @@ extern const Math::Vect3i  v3iTOP;
 extern const Math::Vect3i  v3iFRONT;
 extern const Math::Vect3i  v3iRIGHT;
 extern const Math::Vect3i  v3iUNIT;
-
 } //namespace Math
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

@@ -22,7 +22,6 @@ struct SLiteral
     std::string    m_value;
 };
 
-
 class CLanguageManager : public CManager
 {
 public:
@@ -37,18 +36,16 @@ public:
     void SetCurrentLanguage(const std::string& id);
 	void Update(){}
 	void Render(){}
-    
+
 private:
     void                        LoadXML                            (const std::string& pathFile);
-    
+
 private:
     typedef std::map<std::string,SLiteral>      TLanguage;
 
     std::vector<std::string>                    m_vXML_Files;
     std::map<std::string, TLanguage>    m_Languages;
     std::string                                                m_sCurrentLanguage;
-
-
 };
 
 #endif //INC_LANGUAGE_MANAGER_H_

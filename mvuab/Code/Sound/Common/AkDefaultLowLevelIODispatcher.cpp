@@ -25,7 +25,6 @@
 #include "AkDefaultLowLevelIODispatcher.h"
 #include <AK/Tools/Common/AkAssert.h>
 
-
 CAkDefaultLowLevelIODispatcher::CAkDefaultLowLevelIODispatcher()
   : m_uNumDevices( 0 ) {
   RemoveAllDevices();
@@ -130,4 +129,3 @@ void CAkDefaultLowLevelIODispatcher::RemoveAllDevices() {
     m_arDevices[uRecord] = NULL;
   m_uNumDevices = 0;
 }
-

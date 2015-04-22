@@ -15,7 +15,7 @@ class CRenderableObjectTechnique : public CName
         CRenderableObjectTechnique();
         CRenderableObjectTechnique(const std::string &Name, CEffectTechnique *EffectTechnique);
         ~CRenderableObjectTechnique();
-        
+
         void SetEffectTechnique(CEffectTechnique *EffectTechnique){ m_EffectTechnique = EffectTechnique;}
         CEffectTechnique * GetEffectTechnique() const { return m_EffectTechnique;}
 };

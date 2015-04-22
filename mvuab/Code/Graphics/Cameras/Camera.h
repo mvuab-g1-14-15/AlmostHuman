@@ -15,7 +15,7 @@ class CCamera : public CName, public CObject3D
 public:
 
     enum Type{ Free = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
-    
+
     CCamera();
     virtual ~CCamera();
 
@@ -33,7 +33,7 @@ public:
     GET_SET( float32, ZFar )
     GET_SET( float32, AspectRatio )
     GET_SET( bool, Enable )
-    
+
     //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
     void    AddYaw( float32 aRadian );
     void    AddPitch( float32 aRadian );

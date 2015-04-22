@@ -13,12 +13,12 @@ class CPhysicCollisionReport : public NxUserContactReport
 {
 public:
 	//--- Init and End protoMath::cols------------------------------------------
-					CPhysicCollisionReport	( void ) {}	
+					CPhysicCollisionReport	( void ) {}
 	virtual			~CPhysicCollisionReport	( void ) {}
 
 	//--- NxUserContactReport Interface	----------------------------------
 	void			onContactNotify	( NxContactPair& _Pair, NxU32 _Events );
-	
+
 	//--- CPhysicContactReport Interface ---------------------------------------
 	virtual void	OnStartTouch ( CPhysicUserData* _pEntity, CPhysicUserData* _pOther_shape )					= 0;
 	virtual	void	OnTouch ( CPhysicUserData* _pEntity, CPhysicUserData* _pOther_shape )						= 0;

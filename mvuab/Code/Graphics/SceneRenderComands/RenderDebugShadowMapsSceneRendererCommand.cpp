@@ -1,6 +1,5 @@
 #include "SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h"
 
-
 CRenderDebugShadowMapsSceneRendererCommand::CRenderDebugShadowMapsSceneRendererCommand(CXMLTreeNode &atts)
     :CSceneRendererCommand(atts)
 {
@@ -8,10 +7,8 @@ CRenderDebugShadowMapsSceneRendererCommand::CRenderDebugShadowMapsSceneRendererC
 
 CRenderDebugShadowMapsSceneRendererCommand::~CRenderDebugShadowMapsSceneRendererCommand()
 {
-    
 }
 
 void CRenderDebugShadowMapsSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-
 }

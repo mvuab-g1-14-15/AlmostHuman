@@ -54,7 +54,6 @@ void CPhysxBone::Release()
     CHECKED_DELETE(m_pActor);
     CHECKED_DELETE(m_pBoneUserData);
     m_vChildListID.clear();
-
 }
 
 Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
@@ -85,9 +84,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
     l_Transform.Translate(Math::Vect3f(-l_vTranslation.x, l_vTranslation.y, l_vTranslation.z));
 
     return l_Transform;
-
 }
-
 
 //Funcions per afegir els actors de fisica.
 bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
@@ -164,17 +161,13 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     return true;
 }
 
-
 bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
 {
-
     return true;
 }
 
-
 void CPhysxBone::UpdateCal3dFromPhysx()
 {
-
     if ((m_pActor != 0) && (m_pParent != 0))
     {
         if (m_pParent->GetPhysxActor() != 0)
@@ -204,7 +197,6 @@ void CPhysxBone::UpdateCal3dFromPhysx()
             l_vMat33PhysxZ.rotZ(l_fAngleZ);
             l_vMat33Physx = l_vMat33PhysxZ * l_vMat33PhysxX * l_vMat33PhysxY;
 
-
             NxQuat l_vQuat(l_vMat33Physx);
             CalQuaternion l_vQuatRelative;
 
@@ -228,10 +220,8 @@ void CPhysxBone::UpdateCal3dFromPhysx()
             m_vMatActor.SetIdentity();
             m_vMatActor *= l_vAbsolute;
             m_vMatActor *= l_matRelativeTransformation;
-
         }
     }
-
 }
 
 void CPhysxBone::UpdatePhysxFromCal3d(const Mat44f& _mTransform)
@@ -251,4 +241,3 @@ void CPhysxBone::SetTransformAfterUpdate(const Mat44f& _mTransform)
         m_pActor->SetMat44(m_vMatActor * GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
     }
 }
-

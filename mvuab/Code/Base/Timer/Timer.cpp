@@ -36,12 +36,11 @@ void CTimer::Update( void )
     //Calculo de la diferencia de tiempo (m_fElpasedTime)
     float32  l_dCurTime = (float32) timeGetTime();
 
-    if( m_dLastTime == 0 ) 
+    if( m_dLastTime == 0 )
         m_dLastTime = l_dCurTime;
 
     m_Deltas[m_uIndex] = (float32)((l_dCurTime - m_dLastTime) * 0.001);
     m_dLastTime = l_dCurTime;
-
 
     float32 d = 0;
     for(unsigned int j=0; j<m_uSamples; j++)

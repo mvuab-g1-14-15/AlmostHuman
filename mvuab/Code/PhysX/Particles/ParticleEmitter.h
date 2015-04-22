@@ -12,7 +12,7 @@ class CParticleEmitter
 {
     protected:
         std::vector<CParticle> m_Particles;
-        
+
         float m_MinLifetime;
         float m_MaxLifetime;
 
@@ -31,21 +31,21 @@ class CParticleEmitter
         Math::Vect3f m_Direction;
         Math::Vect3f m_Position;
         Math::Vect3f m_Velocity;
-        
+
         bool m_Active;
         bool m_Orientate;
         std::string m_TextureName;
-              
+
     public:
         CParticleEmitter();
         virtual ~CParticleEmitter();
-        
+
         void SetAcceleration( const Math::Vect3f& Acceleration );
         void SetVelocity( const Math::Vect3f& Velocity );
-        
+
         void SetDirection( const Math::Vect3f& Direction );
         void SetPosition( const Math::Vect3f& Position );
-        
+
         void SetTextureName(const std::string &Texture);
 		void SetEmitterTime(float Time);
 

@@ -2,14 +2,14 @@
 //
 // AkFilePackageLowLevelIODeferred.h
 //
-// Extends the CAkDefaultIOHookDeferred low level I/O hook with File 
-// Package handling functionality. 
+// Extends the CAkDefaultIOHookDeferred low level I/O hook with File
+// Package handling functionality.
 //
-// See AkDefaultIOHookBlocking.h for details on using the deferred 
-// low level I/O hook. 
-// 
+// See AkDefaultIOHookBlocking.h for details on using the deferred
+// low level I/O hook.
+//
 // See AkFilePackageLowLevelIO.h for details on using file packages.
-// 
+//
 // Copyright (c) 2006 Audiokinetic Inc. / All Rights Reserved
 //
 //////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ public:
 	CAkFilePackageLowLevelIODeferred() {}
 	virtual ~CAkFilePackageLowLevelIODeferred() {}
 
-	// Override Cancel: The Windows platform SDK only permits cancellations of all transfers 
+	// Override Cancel: The Windows platform SDK only permits cancellations of all transfers
 	// for a given file handle. Since the packaged files share the same handle, we cannot do this.
 	virtual void Cancel(
 		AkFileDesc &			in_fileDesc,		// File descriptor.

@@ -2,7 +2,6 @@
 #define LENS_OF_FLARE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\DrawQuadRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 

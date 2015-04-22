@@ -16,20 +16,18 @@
 #include "Math\Vector3.h"
 #include "Math\MathTypes.h"
 
-
 class CMouse : public CInputDevice
 {
 public:
     // Init and End protocols
     CMouse() {}
-    virtual ~CMouse() { Done(); } 
+    virtual ~CMouse() { Done(); }
 
     bool                Init            (LPDIRECTINPUT8, HWND, const Math::Vect2i& screenRes, bool exclusiveMode);
     void                Done            ();
 
     //----CInputDevice Interface----
     virtual HRESULT        Update            ();
-
 
     //----CMouse Interface----------
     const Math::Vect3i&       GetMouseDelta            ()        const        { return m_Delta; }
@@ -53,6 +51,5 @@ private:
     Math::Vect3i                m_Delta;
     Math::Vect2i                m_ScreenResolution;
 };
-
 
 #endif // INC_MOUSE_H_

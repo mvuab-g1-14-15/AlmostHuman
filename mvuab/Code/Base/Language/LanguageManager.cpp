@@ -10,7 +10,6 @@ CLanguageManager::CLanguageManager()
     : m_sCurrentLanguage("")
 {}
 
-
 CLanguageManager::CLanguageManager( CXMLTreeNode& atts )
 	: CManager(atts)
 {
@@ -21,7 +20,7 @@ CLanguageManager::CLanguageManager( CXMLTreeNode& atts )
     std::string err = "Error reading the configuration file of the engine" + mConfigPath;
     FATAL_ERROR( err.c_str() );
   }
-  
+
   m_sCurrentLanguage = std::string( l_File.GetPszProperty( "current_language", "" ) );
 
   CXMLTreeNode  TreeNode = l_File["languages"];
@@ -98,7 +97,6 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
             language.insert(std::pair<std::string, SLiteral>(id, l_literal));
             LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Añadido literal(%s,%s,[%f,%f,%f,%f],%s)", id.c_str(),
                                   l_literal.m_sFontId.c_str(), vecColor.x, vecColor.y, vecColor.z, vecColor.w, l_literal.m_value.c_str());
-
         }
     }
     if (m_Languages.find(id_language) != m_Languages.end())
@@ -110,7 +108,6 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
     {
         m_Languages.insert(std::pair<std::string, TLanguage>(id_language, language));
     }
-
 }
 
 void CLanguageManager::SetXmlFile (const std::string& pathFile)
@@ -134,7 +131,6 @@ void CLanguageManager::SetXmlFile (const std::string& pathFile)
         m_vXML_Files.push_back(pathFile);
         LOG_INFO_APPLICATION( "LanguageManager::SetXmlFile-> Se ha añadido el xml: %s", pathFile.c_str());
     }
-
 }
 
 bool CLanguageManager::GetLiteral (const std::string& id, SLiteral& sliteral) const

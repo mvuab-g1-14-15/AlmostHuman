@@ -1,5 +1,3 @@
-
-
 #include "Utils\Defines.h"
 #include "GUIManager.h"
 #include "EngineManagers.h"
@@ -28,7 +26,6 @@
 #include "Timer\Timer.h"
 //-------------------------
 
-
 //----------------------------------------------------------------------------
 // Constructor
 //----------------------------------------------------------------------------
@@ -47,7 +44,6 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
 {}
-
 
 CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   :
@@ -108,7 +104,6 @@ void CGUIManager::Release()
 //----------------------------------------------------------------------------
 void CGUIManager::Init()
 {
-
   m_bIsOk = false;
 
   LOG_INFO_APPLICATION( "GUIManager:: calling initialization" );
@@ -235,9 +230,7 @@ void CGUIManager::Init()
       }
 
       m_bIsOk = m_TextBox && m_PointerMouse;
-
     }//END if (m_bIsOk)
-
   } //END if (!parser.LoadFile(initGuiXML.c_str()))
 
   m_Console = new CConsoleGUI(  m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false, true );
@@ -248,7 +241,6 @@ void CGUIManager::Init()
     LOG_INFO_APPLICATION( "CSoundManager:: online (ok)" );
 
   //return m_bIsOk;
-
 }
 
 //----------------------------------------------------------------------------
@@ -286,10 +278,8 @@ void CGUIManager::Render()
     assert( m_Console );
     m_Console->Render();
     RenderPointerMouse();
-
   }//END if (m_bIsOk)
 }
-
 
 void    CGUIManager::RenderPointerMouse()
 {
@@ -405,7 +395,6 @@ bool CGUIManager::UpdateTransitionEffect()
     {
       ActiveWindows( m_sTransitionEffect.m_sWindowsName );
       m_sTransitionEffect.m_bActiveWindows = true;
-
     }
 
     if ( m_sTransitionEffect.m_fTimeCounter > m_sTransitionEffect.m_fTransitionTime )
@@ -466,7 +455,6 @@ void CGUIManager::ActiveWindows( const std::string& inNameWindow )
   }
 }
 
-
 void CGUIManager::PushWindows( const std::string& inNameWindow )
 {
   std::map<std::string, CWindows*>::iterator it;
@@ -496,7 +484,6 @@ void CGUIManager::PopWindows()
   }
 }
 
-
 void CGUIManager::SetScreenResolution( const Math::Vect2i& resolution )
 {
   std::map<std::string, CGuiElement*>::iterator it( m_ElementsMap.begin() );
@@ -509,7 +496,6 @@ void CGUIManager::SetScreenResolution( const Math::Vect2i& resolution )
     guiElement->SetWindowsHeight( resolution.y );
     it++;
   }
-
 }
 
 bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
@@ -614,7 +600,6 @@ void CGUIManager::SetMessageBox( const std::string& text )
   }
 }
 
-
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
 //              Funciones para modificar los GuiElements
@@ -650,7 +635,6 @@ void CGUIManager::SetVisibleGuiElement( const std::string& inNameGuiElement, boo
 
 bool CGUIManager::GetProgressBarValue( const std::string& inNameGuiElement, float& outValue )
 {
-
   std::map<std::string, CGuiElement*>::iterator it;
   it = m_ElementsMap.find( inNameGuiElement );
 
@@ -751,7 +735,6 @@ bool CGUIManager::GetStateCheckButton( const std::string& inCheckButtonName )
   {
     CCheckButton* checkButton = ( CCheckButton* )( it->second );
     return checkButton->GetState();
-
   }
   else
   {
@@ -824,7 +807,6 @@ std::string CGUIManager::GetImage( const std::string& inImageName )
   {
     CImage* image = ( CImage* )( it->second );
     return image->GetActiveTexture();
-
   }
   else
   {
@@ -879,7 +861,6 @@ float CGUIManager::GetStateSlider( const std::string& inSliderName )
     CSlider* slider = ( CSlider* )( it->second );
     float kk = slider->GetValue();
     return slider->GetValue();
-
   }
   else
   {
@@ -889,7 +870,6 @@ float CGUIManager::GetStateSlider( const std::string& inSliderName )
 
   return 0.f;
 }
-
 
 void CGUIManager::SetLiteralInStaticText( const std::string& inStaticText, const std::string& lit )
 {
@@ -907,7 +887,6 @@ void CGUIManager::SetLiteralInStaticText( const std::string& inStaticText, const
                            inStaticText.c_str() );
   }
 }
-
 
 bool CGUIManager::NextBlockInRadioBox( const std::string& inNameRadioBox )
 {
@@ -956,9 +935,6 @@ void CGUIManager::Reload()
 }
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
-
-
-
 
 //void CGUIManager::RegisterFunctions (CScriptManager* scriptManager)
 //{

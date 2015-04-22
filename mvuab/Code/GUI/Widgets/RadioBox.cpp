@@ -23,7 +23,6 @@ CRadioBox::CRadioBox(	uint32 windowsHeight, uint32 windowsWidth, float height_pr
 	m_CheckButtons.reserve(columns*rows);
 }
 
-
 //---------------CGuiElement Interface----------------------
 void CRadioBox::Render ()
 {
@@ -43,7 +42,7 @@ void CRadioBox::Render ()
 		}
 
 		//Finalmente renderizamos el texto:
-		CGuiElement::RenderText();	
+		CGuiElement::RenderText();
 	}
 }
 void CRadioBox::Update ()
@@ -94,16 +93,16 @@ void CRadioBox::SetCheckButton (const std::string& name, CTexture* on, CTexture*
 	pos.x = m_PositionPercent.x + m_uLastButtonColumn*widthButton;
 
 	CCheckButton newCheckButton =  CCheckButton(
-		CGuiElement::m_uWindowsHeight, 
+		CGuiElement::m_uWindowsHeight,
 		CGuiElement::m_uWindowsWidth,
 		heightButton,
 		widthButton,
-		pos, 
+		pos,
 		false,
-		"", 
+		"",
 		0,
-		0, 
-		false, 
+		0,
+		false,
 		true);
 	if( name.compare(m_sDefaultButtonCheck) == 0)
 	{
@@ -166,11 +165,10 @@ void CRadioBox::SetOnCheckButton (const std::string& buttonCheck)
 			}
 			it++;
 		}
-
 	}//END if( buttonCheck.compare(m_sDefaultButtonCheck) != 0 )
 }
 
-void CRadioBox::SetCheckButtonActions (const std::string&  onCheckOn, const std::string&  onCheckOff, 
+void CRadioBox::SetCheckButtonActions (const std::string&  onCheckOn, const std::string&  onCheckOff,
 																			 const std::string&  onOverButton)
 {
 	std::vector<CCheckButton>::iterator it(m_CheckButtons.begin());

@@ -16,22 +16,22 @@ template <class T> class CTemplatedVectorMapManager
             public:
                 T*     m_Value;
                 size_t m_Id;
-                
+
                 CMapResourceValue(T* value, size_t id) : m_Value(value), m_Id(id) { }
                 CMapResourceValue() : m_Value(0), m_Id(0) { }
         };
-        
+
         typedef std::vector<T*>                          TVectorResources;
         typedef std::map<std::string, CMapResourceValue> TMapResources;
 
     protected:
         TVectorResources    m_ResourcesVector;
         TMapResources       m_ResourcesMap;
-    
+
     public:
         CTemplatedVectorMapManager() { }
         virtual ~CTemplatedVectorMapManager() { Destroy(); }
-        
+
         void RemoveResource( const std::string& Name )
         {
             TMapResources::iterator it = m_ResourcesMap.find(Name);
@@ -42,17 +42,17 @@ template <class T> class CTemplatedVectorMapManager
 
             m_ResourcesMap.erase(it);
             m_ResourcesVector.erase(m_ResourcesVector.begin() + l_ID);
-            
+
             for (size_t i =  l_ID; i < m_ResourcesVector.size();  ++i)
             {
                 T* l_TElement = m_ResourcesVector[i];
                 TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
-                
+
                 while (l_ItMap->second.m_Value != l_TElement) ++l_ItMap;
                 l_ItMap->second.m_Id = i;
             }
         }
-        
+
         virtual T* GetResourceById(size_t Id)
         {
             return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
@@ -63,31 +63,31 @@ template <class T> class CTemplatedVectorMapManager
             TMapResources::iterator it = m_ResourcesMap.find(Name );
             return (it != m_ResourcesMap.end()) ? it->second.m_Value : 0;
         }
-        
+
         virtual bool AddResource( const std::string& Name, T* Resource )
         {
             if (m_ResourcesMap.find(Name) != m_ResourcesMap.end()) return false;
-            
+
             CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
             m_ResourcesVector.push_back(Resource);
             m_ResourcesMap[Name] = l_Resource;
-            
+
             return true;
         }
-        
+
         virtual void Destroy()
         {
             for ( size_t i = 0; i < m_ResourcesVector.size() ; ++i ) CHECKED_DELETE( m_ResourcesVector[i] );
-            
+
             m_ResourcesMap.clear();
             m_ResourcesVector.clear();
         }
-        
+
         TMapResources &GetResourcesMap()
         {
             return m_ResourcesMap;
         }
-        
+
         TVectorResources &GetResourcesVector()
         {
             return m_ResourcesVector;

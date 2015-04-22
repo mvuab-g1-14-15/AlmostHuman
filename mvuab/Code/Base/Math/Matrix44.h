@@ -43,7 +43,7 @@
 /// \verbatim
 ///         En memoria los datos están contiguos por columnas:
 ///               / m00 m10 m20 m30 / m01 m11 m21 m31 / m02 m12 m22 m32 / m03 m13 m23 m33 /
-///         
+///
 ///         Esto facilita el acceso a los datos de los ejes y a la posición del sistema de referencia
 ///         en coordenadas del padre (que suelen ser importantes, ej. vectores de cámara)
 ///
@@ -56,19 +56,19 @@
 ///            | y |  como vector              | y |  como punto
 ///            | z |                           | z |
 ///                                            | 1 |
-///        
+///
 ///         Esto implica que las multiplicaciones matriz-vector se efectúan siempre en el orden
 ///         MATRIZ x VECTOR (dada una matriz 4x4 y un vector 4x1 --> obtenemos un vector 4x1, el caso
 ///         contrario, vector 4x1 por matriz 4x4, produce una matriz 4x4)
 /// \endverbatim
-/// @Note2 Producto Matriz x vector: 
-/// \verbatim   
+/// @Note2 Producto Matriz x vector:
+/// \verbatim
 ///         Hay dos tipos de producto de matriz x vector (formalmente productos de matrices), identificados
 ///         por el operador '*' y el operador '^'
 ///
 ///         ( * ) --> Producto Matriz x punto (transformación de ROTACION + TRASLACION)
-///                   Los vectores incluyen la funcionalidad del punto, por lo tanto, 
-///                   se pueden multiplicar por una matriz de 4x4, considerándolos matrices 
+///                   Los vectores incluyen la funcionalidad del punto, por lo tanto,
+///                   se pueden multiplicar por una matriz de 4x4, considerándolos matrices
 ///                   de 4x1
 ///
 ///         | m00 m01 m02 m03 |     | x |     | x*m00 + y*m01 + z*m02 + m03 |
@@ -87,7 +87,7 @@
 /// @Note3  Producto de matrices
 /// \verbatim
 ///         Dos matrices M1 y M2 se multiplican de tal forma que el resultado es una matriz con las
-///         filas de la primera y las columnas de la segunda. 
+///         filas de la primera y las columnas de la segunda.
 ///
 ///         | m00 m01 m02 m03 |     | n00 n01 n02 n03 |   | m00*n00 + m01*n10 + m02*n20 + m03*n30   ... |
 ///         | m10 m11 m12 m13 |  *  | n10 n11 n12 n13 | = |  ...                                        |
@@ -102,7 +102,7 @@
 ///         punto en coordenadas de mundo, a partir de un punto en coordenadas locales, haremos:
 ///
 ///           P(en mundo) = M(padre->mundo) * M(hijo->padre) * M(local->hijo) * P(en locales)
-/// 
+///
 ///         Si concatenamos una rotación y una traslación:
 ///           M(rotacion) * M(traslación) * P  --> el punto se traslada en locales a la posición de traslación y
 ///                                                luego rota respecto al origen del sistema local (o sea, pasa
@@ -157,12 +157,12 @@ public:
     T m00, m01, m02, m03;       // Primera 'fila'
     T m10, m11, m12, m13;       // Segunda 'fila'
     T m20, m21, m22, m23;       // Tercera 'fila'
-    T m30, m31, m32, m33;       // Cuarta  'fila' 
+    T m30, m31, m32, m33;       // Cuarta  'fila'
 #else
   T m00, m10, m20, m30;       // Primera 'columna'
   T m01, m11, m21, m31;       // Segunda 'columna'
   T m02, m12, m22, m32;       // Tercera 'columna'
-  T m03, m13, m23, m33;       // Cuarta  'columna' 
+  T m03, m13, m23, m33;       // Cuarta  'columna'
 #endif
 
 public:
@@ -186,7 +186,6 @@ public:
                    const Vector3<T>& pos);
   inline Matrix44 (const T angleY, const T angleX, const T angleZ);
 
-
   // Reseteos parciales (traslación/rotación/escalado) y totales (a identidad, a cero)
   inline Matrix44<T>& ResetTranslation   ();
   inline Matrix44<T>& ResetRotation      ();
@@ -194,7 +193,6 @@ public:
   inline Matrix44<T>& ResetRotationScale ();
   inline Matrix44<T>& SetIdentity        ();
   inline Matrix44<T>& SetZero            ();
-
 
   // Establecimiento de datos de la matriz con reseteo previo a identidad
   inline Matrix44<T>& SetFromBasis     (const Vector3<T>& vBasisX,
@@ -216,7 +214,6 @@ public:
   inline Matrix44<T>& SetFromLookAt    (const Vector3<T>& vPos, const Vector3<T>& vTarget);
   //inline Matrix44<T>& SetFromQuatPos   (const Quatn<T>& quat, const Vector3<T>& vPos);
 
-
   // Modificación de una de las partes de la matriz dejando invariable las otras
   inline Matrix44<T>& SetRotByAngleX    (const T angleX);
   inline Matrix44<T>& SetRotByAngleY    (const T angleY);
@@ -234,7 +231,6 @@ public:
   inline Matrix44<T>& SetScale        (const T escala_x, const T escala_y, const T escala_z);
   inline Matrix44<T>& SetSubMatrix33  (const Matrix33<T>& mat_sub);
   inline Matrix44<T>& SetSubMatrix34  (const Matrix34<T>& mat_sub);
-
 
   // Acceso
   inline Vector4<T>        GetRow                  (int i) const;
@@ -286,7 +282,7 @@ public:
 
   // Operadores de aritmética de matrices
   Matrix44<T>        operator + (const Matrix44<T>& otra) const;
-  Matrix44<T>        operator - (const Matrix44<T>& otra) const; 
+  Matrix44<T>        operator - (const Matrix44<T>& otra) const;
   Matrix44<T>        operator * (const Matrix44<T>& otra) const;
   Matrix44<T>        operator * (const T escalar) const;
   friend Matrix44<T> operator * (const T escalar, const Matrix44<T>& mat);
@@ -294,8 +290,7 @@ public:
   Vector3<T>         operator * (const Vector3<T>& vector) const;
   Vector3<T>         operator ^ (const Vector3<T>& vector) const;
   Vector4<T>         operator * (const Vector4<T>& vector) const;
-  
-  
+
   // Operadores aritméticos de actualización
   Matrix44<T>& operator += (const Matrix44<T>& otra);
   Matrix44<T>& operator -= (const Matrix44<T>& otra);
@@ -303,13 +298,11 @@ public:
   Matrix44<T>& operator *= (const T escalar);
   Matrix44<T>& operator /= (const T escalar);
 
-
   // Operadores de comparación
   inline bool operator ==       (const Matrix44<T>& otra) const;
   inline bool operator !=       (const Matrix44<T>& otra) const;
   inline bool IsEqualEpsilon    (const Matrix44<T>& otra, const T Epsilo = Epsilon<T>()) const;//TODO CW quito la n para que no sea igual
   inline bool IsNotEqualEpsilon (const Matrix44<T>& otra, const T Epsilo = Epsilon<T>()) const;//TODO CW quito la n para que no sea igual
-
 
   // Funciones de transformación de vectores / puntos
   inline void       TransformVector       (Vector3<T>& vector) const;
@@ -320,13 +313,12 @@ public:
   void              TransformArrayPoints  (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
   D3DXMATRIX        GetD3DXMatrix         ( ) const;
 
-
   // Operaciones especiales con matrices
   // [const]
   Matrix44<T>  GetInverted         () const;
   Matrix44<T>  GetInvertedTRS      () const;
   Matrix44<T>  GetInvertedTR       () const;
-  Matrix44<T>  GetTransposed       () const; 
+  Matrix44<T>  GetTransposed       () const;
   Matrix44<T>  GetRotedByAngleX    (const T angleX) const;
   Matrix44<T>  GetRotedByAngleY    (const T angleY) const;
   Matrix44<T>  GetRotedByAngleZ    (const T angleZ) const;
@@ -334,7 +326,6 @@ public:
   Matrix44<T>  GetRotedByAnglesYXZ (const T angleY, const T angleX, const T angleZ) const;
   Matrix44<T>  GetTranslated       (const Vector3<T>& pos) const;
   Matrix44<T>  GetScaled           (const T escala_x, const T escala_y, const T escala_z) const;
-
 
   // [no const]
   Matrix44<T>& Invert         ();
@@ -353,12 +344,10 @@ public:
   Matrix44<T>& AlignYZ        (const Vector3<T>& vY, const Vector3<T>& vZ);
   Matrix44<T>& AlignXZ        (const Vector3<T>& vX, const Vector3<T>& vZ);
 
-
   // Acceso/determinación a/de propiedades matriciales
   inline T Determinant          () const;
   bool     IsOrthogonalEpsilon  () const;
   bool     IsOrthonormalEpsilon () const;
-
 
 private:
   //inline Vector3<T>& VectorBasis (int i);

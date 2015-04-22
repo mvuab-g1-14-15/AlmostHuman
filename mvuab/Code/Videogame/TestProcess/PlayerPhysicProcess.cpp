@@ -47,7 +47,6 @@
 //GUI
 #include "GUIManager.h"
 
-
 #include <algorithm>
 #include "RenderableVertex\VertexTypes.h"
 
@@ -109,10 +108,9 @@ void CPlayerPhysicProcess::Update()
   }
   if ( pActionManager->DoAction( "ReloadGUI" ) )
 	  GUIInstance->Reload();
-  
+
   /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
       ScriptMInstance->RunCode( "cambiar_sala()" );*/
-
 
   if ( pActionManager->DoAction( "ChangeCamera" ) )
   {
@@ -137,10 +135,8 @@ void CPlayerPhysicProcess::Update()
   if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     ActionManagerInstance->Reload();
 
-
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
-
 
   //////////////////////////////////////////////////////
   ////////////        DISPARO               ////////////
@@ -155,12 +151,10 @@ void CPlayerPhysicProcess::Update()
       m_Blaster->Update();
   }
 
-
   //////////////////////////////////////////////////////
   ////////////        UPDATE GRENADE        ////////////
   //////////////////////////////////////////////////////
   m_Grenade->Update();
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +183,6 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
   l_Type = "Box";
   PhysXMInstance->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
                             Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
-
 }
 
 void CPlayerPhysicProcess::Init()

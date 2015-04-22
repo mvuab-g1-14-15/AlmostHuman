@@ -81,7 +81,6 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
         l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
     }
 
-
     D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
     m_ViewShadowMap = Mat44f( l_View );
 

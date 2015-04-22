@@ -40,8 +40,6 @@
 
 #include "Items\Grenade.h"
 
-
-
 void GetFilesFromPath( const std::string& Path, std::vector<std::string>& _OutFiles );
 
 CPhysicMaterial::CPhysicMaterial() : CProcess(),
@@ -55,7 +53,6 @@ CPhysicMaterial::CPhysicMaterial() : CProcess(),
     unsigned short debug = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
                            VERTEX_TYPE_TEXTURE1 |
                            VERTEX_TYPE_DIFFUSE;
-
 }
 bool done = false;
 
@@ -131,7 +128,6 @@ void CPhysicMaterial::Update()
             SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
             uint32 mask = 1 << ECG_ESCENE;
 
-
             //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_CurrentCamera->GetPos(), l_CurrentCamera->GetDirection().GetNormalized(), mask, l_SCollisionInfo);
             CPhysicUserData* l_PUD = l_PM->RaycastClosestActorShoot( l_CurrentCamera->GetPos(),
                                      l_CurrentCamera->GetDirection().GetNormalized(), mask,
@@ -142,7 +138,6 @@ void CPhysicMaterial::Update()
             else
             { std::string l_Object = ""; }
         }
-
     }
 
     CCamera* l_CurrentCamera = CameraMInstance->GetCurrentCamera();
@@ -172,7 +167,6 @@ void CPhysicMaterial::Update()
         SCollisionInfo& l_SCollisionInfo = SCollisionInfo::SCollisionInfo();
         uint32 mask = 1 << ECG_ESCENE;
 
-
         CPhysicUserData* l_PUD = l_PM->RaycastClosestActor( l_CurrentCamera->GetPos(),
                                  l_CurrentCamera->GetDirection().GetNormalized(), mask,
                                  l_SCollisionInfo );
@@ -183,7 +177,6 @@ void CPhysicMaterial::Update()
     }
 
     ScriptMInstance->RunCode( "update()" );
-
 }
 
 void CPhysicMaterial::Init()

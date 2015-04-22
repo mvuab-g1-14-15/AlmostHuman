@@ -1,17 +1,17 @@
 //////////////////////////////////////////////////////////////////////
-// 
+//
 // AkFilePackageLUT.h
 //
-// This class parses the header of file packages that were created with the 
+// This class parses the header of file packages that were created with the
 // AkFilePackager utility app (located in ($WWISESDK)/samples/FilePackager/),
 // and looks-up files at run-time.
-// 
-// The header of these file packages contains look-up tables that describe the 
-// internal offset of each file it references, their block size (required alignment), 
+//
+// The header of these file packages contains look-up tables that describe the
+// internal offset of each file it references, their block size (required alignment),
 // and their language. Each combination of AkFileID and Language ID is unique.
 //
-// The language was created dynamically when the package was created. The header 
-// also contains a map of language names (strings) to their ID, so that the proper 
+// The language was created dynamically when the package was created. The header
+// also contains a map of language names (strings) to their ID, so that the proper
 // language-specific version of files can be resolved. The language name that is stored
 // matches the name of the directory that is created by the Wwise Bank Manager,
 // except for the trailing slash.
@@ -48,13 +48,13 @@ public:
 // Ensure no padding is done because this structure is mapped to file content
 #pragma pack(push, 4)
 	template <class T_FILEID>
-	struct AkFileEntry 
+	struct AkFileEntry
     {
-        T_FILEID	fileID;		// File identifier. 
+        T_FILEID	fileID;		// File identifier.
 		AkUInt32	uBlockSize;	// Size of one block, required alignment (in bytes).
-		AkUInt32	uFileSize;  // File size in bytes. 
-        AkUInt32	uStartBlock;// Start block, expressed in terms of uBlockSize. 
-        AkUInt32	uLanguageID;// Language ID. AK_INVALID_LANGUAGE_ID if not language-specific. 
+		AkUInt32	uFileSize;  // File size in bytes.
+        AkUInt32	uStartBlock;// Start block, expressed in terms of uBlockSize.
+        AkUInt32	uLanguageID;// Language ID. AK_INVALID_LANGUAGE_ID if not language-specific.
     };
 #pragma pack(pop)
 
@@ -73,7 +73,7 @@ public:
 		AkFileID			in_uID,				// File ID.
 		AkFileSystemFlags * in_pFlags			// Special flags. Do not pass NULL.
 		);
-	
+
     // Find a file entry by ID with 64 bit ID.
 	const AkFileEntry<AkUInt64> * LookupFile(
 		AkUInt64			in_uID,				// File ID.
@@ -88,14 +88,14 @@ public:
 		);
 
 	// Find a soundbank ID by its name (by hashing its name)
-	AkFileID GetSoundBankID( 
+	AkFileID GetSoundBankID(
 		const AkOSChar*			in_pszBankName		// Soundbank name.
 		);
 
     // Return the id of an external file (by hashing its name in 64 bits)
-	AkUInt64 GetExternalID( 
+	AkUInt64 GetExternalID(
 		const AkOSChar*			in_pszExternalName		// External Source name.
-		);	
+		);
 
 protected:
 	static void RemoveFileExtension( AkOSChar* in_pstring );
@@ -107,7 +107,7 @@ protected:
 
 	//
 	// File LUTs.
-	// 
+	//
 	template <class T_FILEID>
 	class FileLUT
 	{
@@ -132,7 +132,6 @@ private:
 
 	AkUInt16			m_curLangID;	// Current language.
 
-
 	//
 	// Maps format.
 	//
@@ -145,7 +144,7 @@ private:
 	private:
 		struct StringEntry
 		{
-			AkUInt32	uOffset;	// Byte offset of the string in the packaged strings section, 
+			AkUInt32	uOffset;	// Byte offset of the string in the packaged strings section,
 									// from beginning of the string map.
 			AkUInt32	uID;		// ID.
 		};
@@ -158,7 +157,7 @@ private:
 
 	// SoundBanks LUT.
     FileLUT<AkFileID> *			m_pSoundBanks;
-	
+
 	// StreamedFiles LUT.
     FileLUT<AkFileID> *			m_pStmFiles;
 
@@ -183,17 +182,17 @@ const CAkFilePackageLUT::AkFileEntry<T_FILEID> * CAkFilePackageLUT::LookupFile(
 	AkInt32 uTop = 0, uBottom = in_pLut->NumFiles()-1;
 	do
 	{
-		AkInt32 uThis = ( uBottom - uTop ) / 2 + uTop; 
-		if ( pTable[ uThis ].fileID > in_uID ) 
+		AkInt32 uThis = ( uBottom - uTop ) / 2 + uTop;
+		if ( pTable[ uThis ].fileID > in_uID )
 			uBottom = uThis - 1;
-		else if ( pTable[ uThis ].fileID < in_uID ) 
+		else if ( pTable[ uThis ].fileID < in_uID )
 			uTop = uThis + 1;
 		else
 		{
 			// Correct ID. Check language.
-			if ( pTable[ uThis ].uLanguageID > uLangID ) 
+			if ( pTable[ uThis ].uLanguageID > uLangID )
 				uBottom = uThis - 1;
-			else if ( pTable[ uThis ].uLanguageID < uLangID ) 
+			else if ( pTable[ uThis ].uLanguageID < uLangID )
 				uTop = uThis + 1;
 			else
 				return pTable + uThis;

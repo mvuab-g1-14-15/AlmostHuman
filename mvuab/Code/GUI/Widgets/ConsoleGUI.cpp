@@ -1,4 +1,3 @@
-
 #include "Widgets\ConsoleGUI.h"
 #include "Widgets\EditableTextBox.h"
 #include "ActionManager.h"
@@ -66,7 +65,6 @@ void CConsoleGUI::Update()
 	}
 	if( ActionManagerInstance->DoAction( "ForwardGUI" ) )
 	{
-		
 		if (m_itActual == m_vBuffer.begin() )
 		{
 			SetBuffer((*m_itActual));
@@ -87,7 +85,6 @@ void CConsoleGUI::Update()
 	}
 	else if( ActionManagerInstance->DoAction( "BackwarGUI" ) )
 	{
-		
 		if (m_itActual == m_vBuffer.end() )
 		{
 			m_itActual = m_vBuffer.begin();
@@ -101,7 +98,3 @@ void CConsoleGUI::Update()
 		}
 	}
 }
-
-
-
-

@@ -7,7 +7,6 @@ CEnableZTestSceneRendererCommand::CEnableZTestSceneRendererCommand(CXMLTreeNode 
 
 CEnableZTestSceneRendererCommand::~CEnableZTestSceneRendererCommand()
 {
-    
 }
 
 void CEnableZTestSceneRendererCommand::Execute(CGraphicsManager &GM)

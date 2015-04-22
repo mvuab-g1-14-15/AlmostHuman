@@ -20,7 +20,7 @@ class CInstanceMesh : public CRenderableObject
         CInstanceMesh(const std::string& Name, const std::string &CoreName);
         CInstanceMesh(CXMLTreeNode& atts);
         ~CInstanceMesh();
-        
+
         void Render();
         GET_SET(CStaticMesh*, pStaticMesh);
 };

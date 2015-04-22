@@ -41,7 +41,6 @@
     #include "Memory\MemLeaks.h"
 #endif
 
-
 // -----------------------------------------
 //      CONSTRUCTOR/DESTRUCTOR
 // -----------------------------------------
@@ -262,7 +261,6 @@ void CPhysicsManager::ReleaseElement( const std::string& _ase )
     ReleasePhysicActor( m_vActors[l_id] );
 }
 
-
 //----------------------------------------------------------------------------
 // Load : Para cargar un archivo XML con todos los scripts
 //----------------------------------------------------------------------------
@@ -341,7 +339,6 @@ bool CPhysicsManager::LoadXML( void )
     */
     return true;
 }
-
 
 // -----------------------------------------
 //          MÉTODOS
@@ -932,7 +929,6 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
     return impactObject;
 }
 
-
 std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
         uint32 impactMask )
 {
@@ -976,7 +972,6 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
     return impactObject->GetName();
 }
 
-
 std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
         const Math::Vect3f& posSphere,
         EShapesType shapeType /* = NX_ALL_SHAPES  */, uint32 impactMask/* =0xffffffff */ )
@@ -1007,7 +1002,6 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
     delete []l_CollisionShapes;
     return l_ImpactObjects;
 }
-
 
 std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere,
         const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
@@ -1221,7 +1215,6 @@ void CPhysicsManager::SetCollisionReport( CPhysicCollisionReport* _Report )
     NxUserContactReport* nxContactReport = ( NxUserContactReport* ) _Report;
     m_pScene->setUserContactReport( nxContactReport );
 }
-
 
 // TODO!!
 CPhysicActor* CPhysicsManager::GetActor( std::string _ActorName )

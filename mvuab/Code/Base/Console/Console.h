@@ -42,7 +42,6 @@ class CConsole : public CManager
         BOOL ApplyAttrib (short NumChars);
         WORD GetSettings (WORD wFlags);
 
-
         //Helpers
         BOOL CreateConsole ();
         BOOL DestroyConsole ();

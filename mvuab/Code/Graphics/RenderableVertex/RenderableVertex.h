@@ -24,7 +24,7 @@ class CRenderableVertexs
 			m_VertexCount = 0;
         }
 
-        virtual ~CRenderableVertexs() 
+        virtual ~CRenderableVertexs()
         {
             CHECKED_RELEASE(m_IB);
             CHECKED_RELEASE(m_VB);
@@ -42,7 +42,7 @@ class CRenderableVertexs
 
         virtual inline unsigned short GetVertexType() const = 0;
 
-        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount) = 0; 
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount) = 0;
         virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique) = 0;
         virtual bool Render(CGraphicsManager *GM) = 0;
 

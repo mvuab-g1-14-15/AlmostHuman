@@ -1,6 +1,4 @@
-
 #pragma once
-
 
 #ifndef _PHYSX_OBJ_DEFS_H
 #define _PHYSX_OBJ_DEFS_H
@@ -27,7 +25,7 @@ struct TPhysXObj : public CObject3D, public CName
 	}
 };
 
-struct TPhysXObjBox : public TPhysXObj 
+struct TPhysXObjBox : public TPhysXObj
 {
 	Math::Vect3f m_Dimensions;
 

@@ -9,7 +9,6 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "EngineManagers.h"
 
-
 CCharacter::CCharacter( const std::string& Name )
     : CName( Name ), CObject3D()
     , m_Speed( 0.06f )

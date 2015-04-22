@@ -27,7 +27,6 @@ typedef struct S_INPUT_ACTION
     std::string             m_sAxisType;
     std::string             m_sEventType;
     std::string             m_sCode;
-
 } S_INPUT_ACTION;
 
 typedef std::vector<S_INPUT_ACTION> VecInputs;
@@ -40,7 +39,7 @@ public:
     ~CActionManager ();
 
     void Init       ( );
- 
+
     bool Reload     ();
     bool LoadXML    ();
     bool SaveXML    (const std::string &xmlFile);
@@ -63,7 +62,6 @@ private:
     INPUT_AXIS_TYPE        strAxisToCode    (const std::string &strAxis);
     INPUT_EVENT_TYPE    strEventToCode    (const std::string &strEvent);
     unsigned int        strKeyToCode    (const std::string &strKey);
-
 };
 
 #endif //ACTION_MANAGER_H

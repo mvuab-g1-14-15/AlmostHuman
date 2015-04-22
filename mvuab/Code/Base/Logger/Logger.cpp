@@ -5,7 +5,6 @@
 #include <iostream>
 #include <windows.h> // WinApi header
 
-
 CLogger::CLogger()
     : m_eLogLevel( eLogInfo )
     , m_sPathFile( "Logs/" )

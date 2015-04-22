@@ -91,7 +91,6 @@ void CAStarProcess::Update()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void CAStarProcess::InitSceneCharacterController()
 {
-
 }
 
 void CAStarProcess::Init()
@@ -133,7 +132,6 @@ void CAStarProcess::Render()
     Math::Mat44f m;
     std::vector<Math::Vect3f>::iterator it = m_Path.begin(),
                                         it_end = m_Path.end();
-
 
     for ( ; it != it_end - 1; ++it )
     {

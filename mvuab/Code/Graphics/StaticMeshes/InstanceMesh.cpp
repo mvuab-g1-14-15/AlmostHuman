@@ -2,7 +2,6 @@
 #include "XML\XMLTreeNode.h"
 #include "InstanceMesh.h"
 
-
 #include "Math\AABB.h"
 #include "GraphicsManager.h"
 
@@ -23,7 +22,6 @@ CInstanceMesh::CInstanceMesh(const std::string& Name, const std::string& CoreNam
 CInstanceMesh::CInstanceMesh(CXMLTreeNode& atts) : CRenderableObject(atts), m_pStaticMesh(SMeshMInstance->GetResource(atts.GetPszProperty("core", "no_staticMesh")))
 {
 }
-
 
 CInstanceMesh::~CInstanceMesh()
 {

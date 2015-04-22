@@ -14,8 +14,7 @@
 #ifndef INCLUDE_MEMLEAKS_H
 #define INCLUDE_MEMLEAKS_H
 
-
-#include <list> 
+#include <list>
 #include <map>
 #include <string>
 

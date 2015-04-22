@@ -1,5 +1,3 @@
-
-
 #include "ProgressBar.h"
 #include "Texture/Texture.h"
 #include "GraphicsManager.h"
@@ -8,7 +6,6 @@
 #include "EngineManagers.h"
 
 #include "Timer\Timer.h"
-
 
 CProgressBar::CProgressBar( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
                             const Math::Vect2f position_percent, std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
@@ -44,7 +41,6 @@ void CProgressBar::Render   ()
             GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
                                          CGraphicsManager::UPPER_LEFT, m_BackGroundColor);
         }
-
 
         Math::Vect2i posProgress(   (uint32)(CGuiElement::m_Position.x + (uint32)CGuiElement::m_uWidth * 0.05f),
                                     (uint32)(CGuiElement::m_Position.y + (uint32)CGuiElement::m_uHeight * 0.2f));
@@ -91,7 +87,6 @@ void CProgressBar::Update()
     }
 }
 
-
 //---------------Interfaz de ProgressBar---------------------------
 void CProgressBar::SetTextures (CTexture* background, CTexture* progress)
 {
@@ -119,7 +114,6 @@ void CProgressBar::SetProgress (float progress)
         m_fProgress = 0;
         OnComplete();
     }
-
 }
 
 void CProgressBar::OnComplete( void )
@@ -132,4 +126,3 @@ void CProgressBar::OnComplete( void )
         scriptManager->RunCode(m_sLuaCode_OnComplete);
     }
 }
-

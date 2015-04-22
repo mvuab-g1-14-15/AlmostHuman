@@ -57,7 +57,6 @@ public:
   CRenderableObjectTechnique*  m_RenderableObjectTechnique;
 
   void LoadTextures();
-
 };
 
 #endif

@@ -70,5 +70,4 @@ bool CStateMachine::ReLoad()
 
 void CStateMachine::CleanUp()
 {
-
 }

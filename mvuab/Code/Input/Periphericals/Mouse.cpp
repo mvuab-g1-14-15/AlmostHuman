@@ -82,7 +82,6 @@ bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, 
 //----------------------------------------------------------------------------
 void CMouse::Release ()
 {
-
 }
 
 /**
@@ -92,7 +91,6 @@ HRESULT CMouse::Update(void)
 {
     DIDEVICEOBJECTDATA od[BUFFER_SIZE];
     DWORD dwNumElem = BUFFER_SIZE;
-
 
     m_Delta.x = m_Delta.y = m_Delta.z = 0;
 
@@ -108,7 +106,6 @@ HRESULT CMouse::Update(void)
     // clear those
     m_bIsDownUp[0] = m_bIsDownUp[1] = m_bIsDownUp[2] = false;
     m_bIsUpDown[0] = m_bIsUpDown[1] = m_bIsUpDown[2] = false;
-
 
     // now we have 'dwNumElem' of mouse events
     for (DWORD i = 0; i < dwNumElem; i++)
@@ -205,5 +202,3 @@ HRESULT CMouse::Update(void)
 
     return S_OK;
 }
-
-

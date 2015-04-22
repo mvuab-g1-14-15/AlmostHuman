@@ -6,7 +6,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constructor versión 1
-/// Construcción sin inicialización de parámetros  
+/// Construcción sin inicialización de parámetros
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix34<T>::Matrix34 ()
@@ -200,7 +200,7 @@ inline Matrix34<T>& Matrix34<T>::SetIdentity ()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Pone a cero todas las componentes de la matriz
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetZero ()
 {
@@ -428,11 +428,10 @@ inline Matrix34<T>& Matrix34<T>::SetFromLookAt (const Vector3<T>& vPos, const Ve
 template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetFromLookAt (const Vector3<T>& vPos, const Vector3<T>& vTarget)
 {
-
     Matrix33<T> mat;
     mat.SetFromLookAt(vPos, vTarget);
     SetSubMatrix33(mat);
-  return SetPos(vPos);  
+  return SetPos(vPos);
 }
 /*
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -718,7 +717,7 @@ inline Matrix34<T>& Matrix34<T>::SetRotByQuat(const Quatn<T>& quat)
 /// Cambia la cuarta columna que representa la traslación,
 /// considerando a la matriz como una transformación afín
 /// definida por una matriz 4x4 con la última fila a [0 0 0 1]
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix34<T>& Matrix34<T>::SetPos (const T posX, const T posY, const T posZ)
 {
@@ -859,7 +858,6 @@ inline T Matrix34<T>::GetVectorBasisLength (int i) const
 #else
     return (*((Vector3<T>*)this + i)).Length();
 #endif
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -870,7 +868,7 @@ inline T Matrix34<T>::GetVectorBasisLength (int i) const
 template<typename T>
 inline Vector3<T> Matrix34<T>::GetVectorBasis (int i) const
 {
-#ifdef ROW_MAJOR_MATRICES 
+#ifdef ROW_MAJOR_MATRICES
     return Vector3<T>(((T*)this)[i],
                                         ((T*)this)[4  + i],
                                         ((T*)this)[8  + i]);
@@ -915,7 +913,6 @@ inline const Matrix33<T> Matrix34<T>::GetSubMatrix33 () const
                                             m20,       m21,       m22);
 }
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Rellena la matriz 3x3 del parámetro con la submatriz 3x3, que normalmente
 /// tiene la información de escalado y/o rotación, de la matriz actual
@@ -946,10 +943,10 @@ inline const Matrix44<T> Matrix34<T>::GetMatrix44 () const
 template<typename T>
 inline void Matrix34<T>::GetMatrix44 (Matrix44<T>& subMat) const
 {
-  subMat.m00 = m00;        subMat.m01 = m01;        subMat.m02 = m02;        subMat.m03 = m03; 
-  subMat.m10 = m10;        subMat.m11 = m11;        subMat.m12 = m12;        subMat.m13 = m13; 
-  subMat.m20 = m20;        subMat.m21 = m21;        subMat.m22 = m22;        subMat.m23 = m23; 
-  subMat.m30 = Zero<T>();  subMat.m31 = Zero<T>();  subMat.m32 = Zero<T>();  subMat.m33 = One<T>(); 
+  subMat.m00 = m00;        subMat.m01 = m01;        subMat.m02 = m02;        subMat.m03 = m03;
+  subMat.m10 = m10;        subMat.m11 = m11;        subMat.m12 = m12;        subMat.m13 = m13;
+  subMat.m20 = m20;        subMat.m21 = m21;        subMat.m22 = m22;        subMat.m23 = m23;
+  subMat.m30 = Zero<T>();  subMat.m31 = Zero<T>();  subMat.m32 = Zero<T>();  subMat.m33 = One<T>();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1043,7 +1040,7 @@ inline Matrix44<T> Matrix34<T>::Get44Scale () const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Devuelve la parte de traslación de la matriz, considerándola 
+/// Devuelve la parte de traslación de la matriz, considerándola
 /// como una transformación de traslación + rotación + escalado,
 /// como una matriz 4x4
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1192,7 +1189,7 @@ inline Matrix34<T>& Matrix34<T>::SetFromPitchRollYaw (const Vector3<T>& v3PitchR
   m10 = -sz;    m11 = cz*cx;             m12 = -cz*sx;             m13 = Zero<T>();
   m20 = sy*cz;  m21 = sy*sz*cx + cy*sx;  m22 = -sy*sz*sx + cy*cx;  m23 = Zero<T>();
 
-  return (*this);  
+  return (*this);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1205,10 +1202,9 @@ inline Matrix34<T>& Matrix34<T>::SetPitchRollYaw (const Vector3<T>& v3PitchRollY
     Matrix33<T> mat;
     mat.SetPitchRollYaw(v3PitchRollYaw);
     SetSubMatrix33(mat);
- 
+
   return (*this);
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Operador aritmético: suma de matrices
@@ -1227,7 +1223,7 @@ Matrix34<T> Matrix34<T>::operator + (const Matrix34<T>& otra) const
 template<typename T>
 Matrix34<T> Matrix34<T>::operator - (const Matrix34<T>& otra) const
 {
-  return (Matrix34<T>(m00 - otra.m00, m01 - otra.m01, m02 - otra.m02, m03 - otra.m03,  
+  return (Matrix34<T>(m00 - otra.m00, m01 - otra.m01, m02 - otra.m02, m03 - otra.m03,
                       m10 - otra.m10, m11 - otra.m11, m12 - otra.m12, m13 - otra.m13,
                       m20 - otra.m20, m21 - otra.m21, m22 - otra.m22, m23 - otra.m23));
 }
@@ -1241,7 +1237,7 @@ Matrix34<T> Matrix34<T>::operator - (const Matrix34<T>& otra) const
 ///   | m00 m01 m02 m03 |      | n00 n01 n02 n03 |
 ///   | m10 m11 m12 m13 |  *   | n10 n11 n12 n13 |    m30 = m31 = m32 = 0      m33 = 1
 ///   | m20 m21 m22 m23 |      | n20 n21 n22 n23 |    n30 = n31 = n32 = 0      n33 = 1
-///   | m30 m31 m32 m33 |      | n30 n31 n32 n33 |    
+///   | m30 m31 m32 m33 |      | n30 n31 n32 n33 |
 /// \endverbatim
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
@@ -1264,7 +1260,7 @@ Matrix34<T> Matrix34<T>::operator * (const Matrix34<T>& otra) const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Operador aritmético: producto matriz x escalar 
+/// Operador aritmético: producto matriz x escalar
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix34<T> Matrix34<T>::operator * (const T escalar) const
@@ -1280,8 +1276,8 @@ Matrix34<T> Matrix34<T>::operator * (const T escalar) const
 template<typename T>
 Matrix34<T> operator * (const T escalar, const Matrix34<T>& mat)
 {
-  return (Matrix34<T>(mat.m00 * escalar, mat.m01 * escalar, mat.m02 * escalar, mat.m03 * escalar,  
-                      mat.m10 * escalar, mat.m11 * escalar, mat.m12 * escalar, mat.m13 * escalar,  
+  return (Matrix34<T>(mat.m00 * escalar, mat.m01 * escalar, mat.m02 * escalar, mat.m03 * escalar,
+                      mat.m10 * escalar, mat.m11 * escalar, mat.m12 * escalar, mat.m13 * escalar,
                       mat.m20 * escalar, mat.m21 * escalar, mat.m22 * escalar, mat.m23 * escalar));
 }
 
@@ -1310,7 +1306,7 @@ Matrix34<T> Matrix34<T>::operator / (const T escalar) const
 #endif
 
   return (Matrix34<T>(m00 * inv_escalar, m01 * inv_escalar, m02 * inv_escalar, m03 * inv_escalar,
-                      m10 * inv_escalar, m11 * inv_escalar, m12 * inv_escalar, m13 * inv_escalar,  
+                      m10 * inv_escalar, m11 * inv_escalar, m12 * inv_escalar, m13 * inv_escalar,
                       m20 * inv_escalar, m21 * inv_escalar, m22 * inv_escalar, m23 * inv_escalar));
 }
 
@@ -1352,17 +1348,17 @@ Vector3<T> Matrix34<T>::operator ^ (const Vector3<T>& vector) const
                     vector.x * m10 + vector.y * m11 + vector.z * m12,
                     vector.x * m20 + vector.y * m21 + vector.z * m22);
 }
-  
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Operador aritmético de actualización: suma
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix34<T>& Matrix34<T>::operator += (const Matrix34<T>& otra)
 {
-  m00 += otra.m00; m01 += otra.m01; m02 += otra.m02;  m03 += otra.m03;  
+  m00 += otra.m00; m01 += otra.m01; m02 += otra.m02;  m03 += otra.m03;
   m10 += otra.m10; m11 += otra.m11; m12 += otra.m12;  m13 += otra.m13;
   m20 += otra.m20; m21 += otra.m21; m22 += otra.m22;  m23 += otra.m23;
-  
+
   return (*this);
 }
 
@@ -1372,10 +1368,10 @@ Matrix34<T>& Matrix34<T>::operator += (const Matrix34<T>& otra)
 template<typename T>
 Matrix34<T>& Matrix34<T>::operator -= (const Matrix34<T>& otra)
 {
-  m00 -= otra.m00; m01 -= otra.m01; m02 -= otra.m02;  m03 -= otra.m03;  
+  m00 -= otra.m00; m01 -= otra.m01; m02 -= otra.m02;  m03 -= otra.m03;
   m10 -= otra.m10; m11 -= otra.m11; m12 -= otra.m12;  m13 -= otra.m13;
   m20 -= otra.m20; m21 -= otra.m21; m22 -= otra.m22;  m23 -= otra.m23;
-  
+
   return (*this);
 }
 
@@ -1394,8 +1390,8 @@ Matrix34<T>& Matrix34<T>::operator *= (const Matrix34<T>& otra)
 template<typename T>
 Matrix34<T>& Matrix34<T>::operator *= (const T escalar)
 {
-  m00 *= escalar; m01 *= escalar; m02 *= escalar; m03 *= escalar; 
-  m10 *= escalar; m11 *= escalar; m12 *= escalar; m13 *= escalar; 
+  m00 *= escalar; m01 *= escalar; m02 *= escalar; m03 *= escalar;
+  m10 *= escalar; m11 *= escalar; m12 *= escalar; m13 *= escalar;
   m20 *= escalar; m21 *= escalar; m22 *= escalar; m23 *= escalar;
 
   return (*this);
@@ -1426,8 +1422,8 @@ Matrix34<T>& Matrix34<T>::operator /= (const T escalar)
 #endif
 
   m00 *= inv_escalar;  m01 *= inv_escalar;  m02 *= inv_escalar;  m03 *= inv_escalar;
-  m10 *= inv_escalar;  m11 *= inv_escalar;  m12 *= inv_escalar;  m13 *= inv_escalar;  
-  m20 *= inv_escalar;  m21 *= inv_escalar;  m22 *= inv_escalar;  m23 *= inv_escalar; 
+  m10 *= inv_escalar;  m11 *= inv_escalar;  m12 *= inv_escalar;  m13 *= inv_escalar;
+  m20 *= inv_escalar;  m21 *= inv_escalar;  m22 *= inv_escalar;  m23 *= inv_escalar;
 
   return (*this);
 }
@@ -1496,7 +1492,7 @@ inline bool Matrix34<T>::IsNotEqualEpsilon (const Matrix34<T>& otra, const T Eps
 template<typename T>
 inline void Matrix34<T>::TransformVector (Vector3<T>& vector) const
 {
-  vector = (*this) ^ vector; 
+  vector = (*this) ^ vector;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1593,7 +1589,7 @@ Matrix34<T> Matrix34<T>::GetInverted () const
         }
         //----------------------------------------------------------------------->>>
     #else
-        //-----------------------------------------------------------------------<<<  
+        //-----------------------------------------------------------------------<<<
         // Sin chequeo
         inv_det /= determinante;
         //----------------------------------------------------------------------->>>
@@ -1621,7 +1617,7 @@ Matrix34<T> Matrix34<T>::GetInverted () const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Versión que modifica la matriz
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix34<T>& Matrix34<T>::Invert ()
 {
@@ -1772,7 +1768,7 @@ void Matrix34<T>::GetInvertedTR (Matrix34<T>& retMat) const
 
   retMat.m03 = -m03*retMat.m00 - m13*retMat.m01 - m23*retMat.m02;
   retMat.m13 = -m03*retMat.m10 - m13*retMat.m11 - m23*retMat.m12;
-  retMat.m23 = -m03*retMat.m20 - m13*retMat.m21 - m23*retMat.m22;  
+  retMat.m23 = -m03*retMat.m20 - m13*retMat.m21 - m23*retMat.m22;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2087,7 +2083,7 @@ Matrix34<T>& Matrix34<T>::RotByAnglesYXZ (const T angleY, const T angleX, const 
 /// Cambia la posición de la base (traslacion), considerada la matriz como
 /// transformación afin de traslacion + rotación + escalado
 /// (versión const que devuelve una copia)
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix34<T> Matrix34<T>::GetTranslated (const Vector3<T>& pos) const
 {
@@ -2112,7 +2108,7 @@ Matrix34<T>& Matrix34<T>::Translate (const Vector3<T>& pos)
 template<typename T>
 Matrix34<T> Matrix34<T>::GetScaled (const T escala_x, const T escala_y, const T escala_z) const
 {
-  return Matrix34<T>(*this).Scale(escala_x, escala_y, escala_z);  
+  return Matrix34<T>(*this).Scale(escala_x, escala_y, escala_z);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2194,7 +2190,7 @@ Matrix34<T>& Matrix34<T>::AlignXZ (const Vector3<T>& vX, const Vector3<T>& vZ)
   return (*this);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// El determinante solo se define para matrices cuadradas pero, como en el caso del
 /// producto, podemos definir un determinante para la matriz 3x4, completando con
 /// una cuarta fila [0 0 0 1], que nos servirá si la matriz respresenta una
@@ -2210,7 +2206,7 @@ Matrix34<T>& Matrix34<T>::AlignXZ (const Vector3<T>& vX, const Vector3<T>& vZ)
 /// Coste:         [40 productos y 23 sumas]
 /// Simplificado:  [9  productos y 5 sumas]
 /// \endverbatim
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline T Matrix34<T>::Determinant () const
 {
@@ -2220,7 +2216,7 @@ inline T Matrix34<T>::Determinant () const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Devuelve true si la parte de la matriz 3x3 que representa a los vectores 
+/// Devuelve true si la parte de la matriz 3x3 que representa a los vectores
 /// de la base, considerando a la matriz como un sistema de referencia,
 /// representa una base en el espacio 3D con sus ejes ortogonales entre sí.
 /// (Utiliza un epsilon como margen de tolerancia)
@@ -2234,7 +2230,7 @@ bool Matrix34<T>::IsOrthogonalEpsilon () const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Devuelve true si la parte de la matriz 3x3 que representa a los vectores 
+/// Devuelve true si la parte de la matriz 3x3 que representa a los vectores
 /// de la base, considerando a la matriz como un sistema de referencia,
 /// representa una base en el espacio 3D con sus ejes ortogonales entre sí y
 /// con módulo 1
@@ -2244,7 +2240,7 @@ template<typename T>
 bool Matrix34<T>::IsOrthonormalEpsilon () const
 {
   return(IsOrthogonalEpsilon() &&
-         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
-         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) &&
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) &&
          Math::Utils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
 }

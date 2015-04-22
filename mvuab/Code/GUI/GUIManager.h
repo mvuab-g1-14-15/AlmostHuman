@@ -36,19 +36,16 @@ struct TransitionEffect
 	std::string						m_sWindowsName;
 	bool									m_bActiveWindows;
 	EtypeTransitionEffect	m_eType;
-
 };
 //---------------------------------------------------------------------------
 
 class CGUIManager : public CManager
 {
-
 public:
 	// Init and End protocols
 	CGUIManager(const Math::Vect2i& resolution);
 	CGUIManager(const CXMLTreeNode& atts);
-	virtual ~CGUIManager() {Done();}  
-
+	virtual ~CGUIManager() {Done();}
 
 	void								Init											();
 	void								Done											();
@@ -67,7 +64,6 @@ public:
 	void								ActiveWindowsWithEffect		(const std::string& inNameWindow, EtypeTransitionEffect type, float transitionTime );
 	void								SetVisiblePointerMouse		(bool flag)																					{m_bVisiblePointerMouse = flag;}
 	void								Reload();
-	
 
 	//----CScriptRegister interface--------------------------------------------
 	//virtual void				RegisterFunctions					(CScriptManager* scriptManager);
@@ -92,7 +88,7 @@ public:
 	float								GetStateSlider						(const std::string& inSliderName);
 
 	void								SetLiteralInStaticText		(const std::string& inStaticText, const std::string& lit);
-	
+
 	void								SetEditableTextBox				(const std::string& inEditableTextName, const std::string& text);
 	std::string					GetEditableTextBox				(const std::string& inEditableTextName);
 

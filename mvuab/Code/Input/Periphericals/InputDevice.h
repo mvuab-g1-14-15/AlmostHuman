@@ -11,7 +11,7 @@
 #define _INPUT_DEVICE_H_
 
 // Note: Defines must be included before <dinptut> because it defines the DIRECTINPUT_VERSION
-#include "Utils\Defines.h" 
+#include "Utils\Defines.h"
 #include <dinput.h>
 
 #include "InputDefs.h"
@@ -37,7 +37,6 @@ public:
     virtual const Math::Vect2i&        GetPosition        ()    { return m_Pos; }
     virtual void                SetPosition        ( const Math::Vect2i &pos ) { m_Pos = pos; }
 
-
 protected:
     virtual HRESULT         GetData            ( INPUT_DEVICE_TYPE Type, void *pData, DWORD *dwNum);
     void                    Release          ();
@@ -48,6 +47,6 @@ protected:
     LPDIRECTINPUT8                m_pDI;
     HWND                              m_hWnd;
     Math::Vect2i                                    m_Pos;
-}; 
+};
 
 #endif //_INPUT_DEVICE_H_

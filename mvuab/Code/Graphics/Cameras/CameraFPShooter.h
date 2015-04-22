@@ -4,19 +4,19 @@
 #include "Camera.h"
 #include <d3dx9math.h>
 
-class CCameraFPShooter : public CCamera 
+class CCameraFPShooter : public CCamera
 {
 public:
     CCameraFPShooter();
     ~CCameraFPShooter();
     void    Update( );
-    
+
     void    Move (    int strafe, int forward, bool flag_speed, const float32 &dt);
-        
+
     void    AddYaw( float32 radians );
     void    AddPitch( float32 radians );
     void    AddHeight( float32 amount );
-    
+
     Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Position;}
     Math::Vect3f GetLookAt( void ) const;
     Math::Vect3f GetVecUp( void ) const;
@@ -27,7 +27,7 @@ public:
     GET_SET( float32, Speed )
     GET_SET( float32, ForwardSpeed )
     GET_SET( float32, StrafeSpeed )
-    
+
 private: // Members
     float32 m_Height;
     float32 m_YawSpeed;

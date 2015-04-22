@@ -1,5 +1,3 @@
-
-
 #include "Widgets\EditableTextBox.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -53,7 +51,6 @@ void CEditableTextBox::Render()
 {
   if ( CGuiElement::m_bIsVisible )
   {
-
     if ( m_pBackGroundTexture )
     {
       //TODO RAUL
@@ -94,7 +91,6 @@ void CEditableTextBox::Render()
 
     //Finalmente renderizamos el texto:
     CGuiElement::RenderText();
-
   }//END if( CGuiElement::m_bIsVisible )
 }
 
@@ -122,7 +118,6 @@ void CEditableTextBox::Update()
 
     if ( InputManagerInstance->IsUpDown( IDV_KEYBOARD, KEY_LEFT ) )
     {
-
       if ( m_uCursorPos > 0 )
         m_uCursorPos--;
     }
@@ -172,8 +167,6 @@ void CEditableTextBox::Update()
       if ( m_uCursorPos < m_sBuffer.size() )
         m_sBuffer.erase( m_sBuffer.begin() + m_uCursorPos );
     }
-
-
 
     m_fTimeCount += deltaTime;
 
@@ -241,7 +234,3 @@ void CEditableTextBox::SetFont( Math::CColor textColor, uint32 fontID )
   m_uFontID       = fontID;
   m_TextColor = textColor;
 }
-
-
-
-

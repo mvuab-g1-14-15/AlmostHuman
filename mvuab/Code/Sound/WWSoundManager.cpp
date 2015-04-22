@@ -60,7 +60,6 @@ void VirtualFreeHook(
 CWWSoundManager::CWWSoundManager( const CXMLTreeNode& atts )
   : CManager( atts )
 {
-
 }
 
 void CWWSoundManager::Done()
@@ -80,10 +79,8 @@ void CWWSoundManager::Done()
   AK::MemoryMgr::Term();
 }
 
-
 void CWWSoundManager::Init()
 {
-
   AkMemSettings memSettings;
   memSettings.uMaxNumPools = 20;
 
@@ -109,7 +106,6 @@ void CWWSoundManager::Init()
 
   // Customize the streaming device settings here.
   m_lowLevelIO = new CAkDefaultIOHookBlocking();
-
 
   if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success )
   {
@@ -139,7 +135,6 @@ void CWWSoundManager::Init()
 
   AK::SoundEngine::RegisterAllPlugins();
 
-
 #ifndef AK_OPTIMIZED
   //
   // Initialize communications (not in release build!)
@@ -165,7 +160,6 @@ void CWWSoundManager::Update()
 
 bool CWWSoundManager::Load( const std::string& xmlFile )
 {
-
   CEngineConfig* lEngineConfig = CEngineConfig::GetSingletonPtr();
 
   m_lowLevelIO->SetBasePath( L"./Data/sounds/" );
@@ -204,11 +198,9 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
                                  StrBankName.c_str() );
           return false;
         }
-
       }
       else if ( TagName == "GameObject2d" )
       {
-
         std::string StrGameObject2dName = std::string( sounds_TreeNode( i ).GetPszProperty( "name", "" ) );
         std::string StrRegisteredGameObject2d = std::string( sounds_TreeNode( i ).GetPszProperty( "register", "" ) );
 
@@ -224,13 +216,10 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
                                    StrGameObject2dName.c_str() );
             return false;
           }
-
-
         }
       }
       else if ( TagName == "GameObject3d" )
       {
-
         std::string StrGameObject3dName = std::string( sounds_TreeNode( i ).GetPszProperty( "name", "" ) );
         std::string StrRegisteredGameObject3d = std::string( sounds_TreeNode( i ).GetPszProperty( "register", "" ) );
 
@@ -256,14 +245,11 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
 
       if ( TagName == "InitEvent" )
       {
-
         std::string l_name = std::string( sounds_TreeNode( i ).GetPszProperty( "name", "" ) );
         std::string l_gameObject = std::string( sounds_TreeNode( i ).GetPszProperty( "gameObject", "" ) );
 
         PlayEvent( l_name, l_gameObject );
-
       }
-
     }
   }
 
@@ -322,7 +308,6 @@ AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, 
   l_AKGameObjectPosition.Orientation.Y = l_GameObjectPositionNorm.y;
   l_AKGameObjectPosition.Orientation.Z = l_GameObjectPositionNorm.z;
 
-
   return AK::SoundEngine::SetPosition( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPosition );
 }
 
@@ -361,7 +346,6 @@ void CWWSoundManager::ResumeEvent( std::string _Event,  std::string _KeyGameObje
   }
 }
 
-
 void CWWSoundManager::PauseAllFromGameObject( std::string _KeyGameObjectMap )
 {
   if ( AK::SoundEngine::IsInitialized() )
@@ -396,5 +380,3 @@ void CWWSoundManager::SetGameObjectMapById( std::string _KeyGameObjectMap )
 {
   m_GameObjectMap[_KeyGameObjectMap] =  ++m_ObjectId;
 }
-
-

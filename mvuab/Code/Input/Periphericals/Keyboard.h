@@ -14,12 +14,12 @@
 #include "InputDevice.h"
 #include "Math\MathTypes.h"
 
-class CKeyboard : public CInputDevice 
+class CKeyboard : public CInputDevice
 {
 public:
     // Init and End protocols
     CKeyboard() {}
-    virtual ~CKeyboard() { Done(); } 
+    virtual ~CKeyboard() { Done(); }
 
     bool          Init            (LPDIRECTINPUT8, HWND);
     bool            IsOk                  ( void ) const { return m_bIsOk; }

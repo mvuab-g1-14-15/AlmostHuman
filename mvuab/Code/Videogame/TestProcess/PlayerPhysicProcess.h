@@ -52,8 +52,6 @@ public:
   void                DeleteController( CPhysicUserData* PUD );
 
   void InitSceneCharacterController();
-
-
 };
 
 #endif // _PLAYER_PHYSIC_PROCESS_H

@@ -17,21 +17,20 @@ public:
                         m_fEndValue(0.f), m_fTotalTime(0.f), m_eFunction(Math::FUNC_CONSTANT), m_uDegree(2) {}
 
     virtual ~CLerpAnimator1D () {/*NOTHING*/}
-    
-    void        SetValues            (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type); 
+
+    void        SetValues            (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type);
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
     bool        Update                (float32 ElapsedTime, float32 &value);
     void        Pause                    (bool flag) {m_bPause = flag;}
-    
+
 private:
     ETypeFunction    m_eFunction;
     bool            m_bPause;
     float32            m_fInitValue;
     float32            m_fEndValue;
     float32            m_fTotalTime;
-    float32             m_fElapsedTime;        
+    float32             m_fElapsedTime;
     uint32            m_uDegree;
 };
-
 } //namespace Math
 #endif //INTERPOLATION_H

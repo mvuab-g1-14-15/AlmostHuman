@@ -63,7 +63,7 @@ void CCubeEmitter::NewParticle(CParticle *l_Particle)
 
     Math::Vect3f l_Vector = Math::Vect3f(x, y, z);
     l_Particle->SetPosition(l_Vector);
-    
+
     l_Particle->SetVelocity(m_Velocity);
     l_Particle->SetAcceleration(m_Acceleration);
 
@@ -80,7 +80,7 @@ void CCubeEmitter::Update(float dt)
     if(!m_Active) return;
 
     m_EmitterLifeTime -= dt;
-    if(m_EmitterLifeTime < 0.0f) 
+    if(m_EmitterLifeTime < 0.0f)
 		m_Active = false;
 
     int lNumParticles = m_Particles.size();

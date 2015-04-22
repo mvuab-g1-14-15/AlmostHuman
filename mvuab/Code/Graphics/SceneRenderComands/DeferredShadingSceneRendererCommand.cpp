@@ -1,4 +1,3 @@
-
 #include "Effects\Effect.h"
 #include "GraphicsManager.h"
 #include "Lights\LightManager.h"
@@ -45,7 +44,6 @@ void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
     #endif
     SetLightsData( GM );
 }
-
 
 void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
 {

@@ -1,6 +1,5 @@
 #include "Blaster.h"
 
-
 #include "Timer\Timer.h"
 #include "StaticMeshes\StaticMesh.h"
 #include "Actor\PhysicActor.h"
@@ -112,7 +111,6 @@ void CBlaster::Render()
     // Why render if no grenade
     if ( !m_BlasterShoot )
     { return; }
-
 
     PhysXMInstance->Render( );
     // Get the graphics manager

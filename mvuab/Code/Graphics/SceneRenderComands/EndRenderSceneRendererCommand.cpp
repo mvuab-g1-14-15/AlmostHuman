@@ -8,7 +8,6 @@ CEndRenderSceneRendererCommand::CEndRenderSceneRendererCommand(CXMLTreeNode &att
 
 CEndRenderSceneRendererCommand::~CEndRenderSceneRendererCommand()
 {
-    
 }
 
 void CEndRenderSceneRendererCommand::Execute(CGraphicsManager &GM)

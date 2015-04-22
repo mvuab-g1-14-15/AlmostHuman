@@ -9,7 +9,7 @@
 #include "Math\Color.h"
 #include "Math\MathUtils.h"
 #include "Math\Vector3.h"
-#include "Utils\Name.h" 
+#include "Utils\Name.h"
 #include "PhysicsDefs.h"
 #include "Utils\Manager.h"
 #include "Utils\MapManager.h"
@@ -287,5 +287,3 @@ private:
 };
 
 #endif //__PHYSX_MANAGER_CLASS_H__
-
-

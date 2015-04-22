@@ -6,7 +6,6 @@ CBossEnemy::CBossEnemy(CXMLTreeNode &Node, CStateMachine* aStateMachine)
 {
 }
 
-
 CBossEnemy::~CBossEnemy(void)
 {
 }

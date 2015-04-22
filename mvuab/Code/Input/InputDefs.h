@@ -12,7 +12,7 @@
 #include "Math\MathTypes.h"
 #include <map>
 
-typedef enum INPUT_DEVICE_TYPE 
+typedef enum INPUT_DEVICE_TYPE
 {
     IDV_KEYBOARD,
     IDV_GAMEPAD1,
@@ -45,7 +45,7 @@ typedef enum INPUT_EVENT_TYPE
     EVENT_NOTHING
 };
 
-typedef enum MOUSE_BUTTON 
+typedef enum MOUSE_BUTTON
 {
     MOUSE_BUTTON_LEFT,
     MOUSE_BUTTON_RIGHT,
@@ -80,8 +80,6 @@ struct SInputInfo
 #define PAD_BUTTON_X                  0x4000
 #define PAD_BUTTON_Y                  0x8000
 //------------------------------------------
-
-
 
 //------------------------------------------
 //--- Keyboard scan codes from dinput.h ----
@@ -203,6 +201,5 @@ struct SInputInfo
 #define KEY_PAUSE           0xC5    /* Pause */
 #define KEY_SCROLL          0x46    /* Scroll Lock */
 //------------------------------------------
-
 
 #endif //INC_INPUT_DEFINES_H

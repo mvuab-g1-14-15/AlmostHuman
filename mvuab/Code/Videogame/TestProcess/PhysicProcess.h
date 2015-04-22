@@ -53,8 +53,6 @@ public:
                   CPhysicUserData* _Other_Shape );
 
   void InitScenePhysicsSamplers();
-
-
 };
 
 #endif // PHYSIC_PROCESS_H

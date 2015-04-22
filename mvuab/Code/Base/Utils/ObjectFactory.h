@@ -1,13 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 
+//
 // ObjectFactory
-// 
+//
 // The ObjectFactory class is a object factory implementation.  It allows users
 // to register and unregister classes during run-time by specifying a
 // user-defined unique identifier per class.  Instances of any registered class
 // can then be instantiated simply by calling the create method and passing the
 // proper unique identifier.
-// 
+//
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2004 Robert Geiman.
@@ -23,17 +23,14 @@
 #ifndef OBJECT_FACTORY_H
 #define OBJECT_FACTORY_H
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // This is a pragma ignores the many warnings Visual C++ 6.0 gives when using
 // the STL map container.
 ///////////////////////////////////////////////////////////////////////////////
 #pragma warning (disable: 4786)
 
-
 #include <map>
 #include "MacroRepeat.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // This is a work-around for those non-compliant compilers that do not support
@@ -45,7 +42,6 @@ struct Type2Type
 {
    typedef Type OriginalType;
 };
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Because some compilers, such as Visual C++ 6.0, do not support partial
@@ -147,7 +143,7 @@ struct Type2Type
                                                                                                             \
    protected:                                                                                               \
       std::map<UniqueIdType, CreateObjectBase*> m_object_creator;                                           \
-   };                                                                                                       
+   };
 
 MACRO_REPEAT(16, OBJECT_FACTORY)
 #undef OBJECT_FACTORY

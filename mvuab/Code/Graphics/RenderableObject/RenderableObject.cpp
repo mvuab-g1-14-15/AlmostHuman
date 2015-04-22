@@ -13,4 +13,3 @@ CRenderableObject::CRenderableObject(CXMLTreeNode &atts) : CObject3D(atts), CNam
 CRenderableObject::~CRenderableObject()
 {
 }
-

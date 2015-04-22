@@ -13,7 +13,6 @@ class CTexture;
 class CRenderableVertexs;
 //-------------------------
 
-
 class CBillboard : public CName, public CManager
 {
     public:

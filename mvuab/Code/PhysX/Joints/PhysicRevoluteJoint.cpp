@@ -51,7 +51,6 @@ void CPhysicRevoluteJoint::SetInfo  (const Math::Vect3f& axis, const Math::Vect3
     m_pRevoluteDesc->setGlobalAxis( NxVec3(axis.x, axis.y, axis.z) ); //The direction of the axis the bodies revolve around.
     m_pRevoluteDesc->setGlobalAnchor( NxVec3(anchor.x, anchor.y,
                                       anchor.z) ); //Reference point that the axis passes through.
-
 }
 
 void CPhysicRevoluteJoint::SetMotor (float maxForce, float veltarget, bool limit, float limHigh, float limLow)

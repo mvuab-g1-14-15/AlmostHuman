@@ -27,7 +27,6 @@ public:
   CPhysicTriggerReport( void ) {}
   virtual     ~CPhysicTriggerReport( void ) {}
 
-
   //--- NxUserTriggerReport Interface ----------------------------------
   void      onTrigger( NxShape& _TriggerShape, NxShape& _OtherShape,
                        NxTriggerFlag _Status );

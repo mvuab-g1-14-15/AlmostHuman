@@ -141,7 +141,6 @@ private:
   NxBoxControllerDesc*      m_pPhXBoxControllerDesc;
   NxController*         m_pPhXController;
   NxScene*            m_pPhXScene;
-
 };
 
 #endif //__INC_PHYSIC_CONTROLLER_H__

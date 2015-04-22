@@ -26,5 +26,4 @@ public:
 	void Render();
 };
 
-
 #endif // CINEMATIC_OBJECT_H

@@ -1,5 +1,3 @@
-
-
 #include "Widgets\DialogBox.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -13,7 +11,7 @@ CDialogBox::CDialogBox(	uint32 windowsHeight, uint32 windowsWidth, float height_
 : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, DIALOG_BOX, lit, textHeightOffset, textWidthOffset, isVisible, isActive)
 
 , m_bDialogClicked(false)
-, m_ButtonClose(windowsHeight, windowsWidth, buttonHeightPercent, buttonWidthPercent,  
+, m_ButtonClose(windowsHeight, windowsWidth, buttonHeightPercent, buttonWidthPercent,
 								position_percent + Math::Vect2f(witdh_percent-buttonWidthPercent,0.f), "", 0, 0, isVisible, isActive )
 , m_ButtonMove(windowsHeight, windowsWidth, buttonHeightPercent, witdh_percent-buttonWidthPercent,  position_percent, "", 0, 0, isVisible, isActive )
 , m_pBackGroundTexture(NULL)
@@ -45,9 +43,9 @@ void CDialogBox::Render	()
 		m_ButtonMove.Render();
 		m_ButtonClose.Render();
 	}
-	
+
 	//Finalmente renderizamos el texto:
-	CGuiElement::RenderText();	
+	CGuiElement::RenderText();
 }
 
 void CDialogBox::Update ()
@@ -96,7 +94,6 @@ void CDialogBox::Update ()
 		CGuiElement::CalculatePosMouse(posMouse);
 		if( m_ButtonMove.IsClicking() )
 			m_bDialogClicked = true;
-
 	}// End if( GuiElement::mIsVisible && GuiElement::mIsActive )
 }
 
@@ -115,8 +112,6 @@ void CDialogBox::SetPosition(const Math::Vect2i& pos)
 	m_ButtonClose.SetPosition( pos + Math::Vect2i((uint32)(CGuiElement::m_uWidth - m_ButtonClose.GetWidth()),0) );
 	CGuiElement::SetPosition( pos );
 }
-
-
 
 //---------------Interfaz de Button---------------------------
 void CDialogBox::SetCloseButtonTextures	(CTexture* normal, CTexture* over, CTexture* clicked, CTexture* deactivated)
@@ -140,7 +135,7 @@ void CDialogBox::SetCloseButtonColors (	const Math::CColor& normal, const Math::
 {
 	m_ButtonClose.SetColors(normal, over, clicked, deactivated);
 }
-void CDialogBox::SetMoveButtonColors (const Math::CColor& normal, const Math::CColor& over, const Math::CColor& clicked, 
+void CDialogBox::SetMoveButtonColors (const Math::CColor& normal, const Math::CColor& over, const Math::CColor& clicked,
 																			const Math::CColor& deactivated)
 {
 	m_ButtonMove.SetColors(normal, over, clicked, deactivated);
@@ -150,4 +145,3 @@ void CDialogBox::SetDialogColors (const Math::CColor& background)
 {
 	m_BackGroundColor = background;
 }
-

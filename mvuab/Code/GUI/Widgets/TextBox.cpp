@@ -1,9 +1,7 @@
-
 #include "Widgets\TextBox.h"
 #include "GraphicsManager.h"
 #include "Fonts\FontManager.h"
 #include "EngineManagers.h"
-
 
 //---Constructor
 CTextBox::CTextBox( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float width_percent,
@@ -17,10 +15,8 @@ CTextBox::CTextBox( uint32 windowsHeight, uint32 windowsWidth, float height_prec
 
 {}
 
-
 void CTextBox::Render ()
 {
-
     if (CGuiElement::m_bIsVisible)
     {
         CDialogBox::Render();
@@ -28,7 +24,6 @@ void CTextBox::Render ()
         FontInstance->DrawText( CGuiElement::m_Position.x + 20,
                                 CGuiElement::m_Position.y + (uint32)(CGuiElement::m_uHeight * 0.4f),
                                 m_TextColor, m_uFontID, m_sMessage.c_str());
-
     }
 }
 

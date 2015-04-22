@@ -10,11 +10,9 @@
 #include "Memory\AllocatorManager.h"
 #include "Memory\LinearAllocator.h"
 
-
 CStaticMeshManager::CStaticMeshManager() : CManager()
 {
 }
-
 
 CStaticMeshManager::CStaticMeshManager(CXMLTreeNode& atts) : CManager(atts)
 {

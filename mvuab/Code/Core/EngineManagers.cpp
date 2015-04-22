@@ -106,7 +106,7 @@ void CEngineManagers::Init()
         {
             const std::string& TagName = TreeNode( i ).GetName();
             if ( TagName == "comment" ) continue;
-            
+
             CManager* Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
             if(!Manager) LOG_ERROR_APPLICATION("Manager %s not found in the factory of managers!", TagName.c_str());
             else if(!AddResource(TagName.c_str() , Manager)) CHECKED_DELETE(Manager);

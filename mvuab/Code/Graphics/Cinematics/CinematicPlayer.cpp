@@ -1,6 +1,5 @@
 #include "CinematicPlayer.h"
 
-
 #include "Timer\Timer.h"
 
 CCinematicPlayer::CCinematicPlayer() :

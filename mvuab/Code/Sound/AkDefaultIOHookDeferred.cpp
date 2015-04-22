@@ -35,7 +35,6 @@
 #include <AK/SoundEngine/Common/AkMemoryMgr.h>
 #include "AkFileHelpers.h"
 
-
 // Device info.
 #define WIN32_DEFERRED_DEVICE_NAME		(L"Win32 Deferred")	// Default deferred device name.
 
@@ -43,7 +42,6 @@
 // sector size. We don't know what it is, so we choose a safe value of 4 KB (required by Xbox One, works on Windows).
 // On Windows, real sector size can be queried with ::GetDiskFreeSpace() (but you need to know the drive letter).
 #define WIN32_NO_BUFFERING_BLOCK_SIZE	(4096)
-
 
 AkMemPoolId CAkDefaultIOHookDeferred::m_poolID = AK_INVALID_POOL_ID;
 

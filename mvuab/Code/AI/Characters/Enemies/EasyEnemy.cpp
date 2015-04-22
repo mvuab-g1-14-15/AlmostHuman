@@ -6,7 +6,6 @@ CEasyEnemy::CEasyEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 {
 }
 
-
 CEasyEnemy::~CEasyEnemy()
 {
 }

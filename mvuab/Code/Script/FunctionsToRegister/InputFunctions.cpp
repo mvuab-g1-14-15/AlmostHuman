@@ -50,7 +50,6 @@ void registerInputs( lua_State* m_LS )
     class_<CActionManager>( "CActionManager" )
     .def( constructor<>() )
 
-
     .def( "LoadXML", &CActionManager::LoadXML )
     .def( "SaveXML", &CActionManager::SaveXML )
     .def( "DoAction", ( bool( CActionManager::* )( const std::string& ) ) &CActionManager::DoAction )

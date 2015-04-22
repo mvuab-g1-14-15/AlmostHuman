@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-// A progress bar is a component in a graphical user interface used to convey the progress of a 
+// A progress bar is a component in a graphical user interface used to convey the progress of a
 // task, such as a download or file transfer.
 //----------------------------------------------------------------------------------
 #pragma once
@@ -13,17 +13,15 @@
 #include "GuiElement\GuiElement.h"
 #include "Math/Color.h"
 
-
 //---Forward Declarations---
 class CTexture;
 //--------------------------
 
 class CProgressBar: public CGuiElement
 {
-
 public:
 	CProgressBar(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-								const Math::Vect2f position_percent, std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0, 
+								const Math::Vect2f position_percent, std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0,
 								bool isVisible = true, bool isActive = true);
 
 	virtual ~CProgressBar(){/*NOTHING*/;}
@@ -32,7 +30,6 @@ public:
 	virtual void	Render									();
 	virtual void	Update									();
 	virtual void	OnClickedChild					(const std::string& name) {/*NOTHING*/;}
-
 
 	//---------------CProgressBar Interface----------------------
 	void					SetTextures							(CTexture* background, CTexture* progress);

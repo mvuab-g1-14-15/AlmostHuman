@@ -16,8 +16,7 @@ char* CPhysicASELoader::TrimFront(char* c)
 	return c;
 }
 
-
-bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces ) 
+bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces )
 {
 	FILE* f = NULL;
 	fopen_s(&f, fileName.c_str(), "rb");
@@ -36,7 +35,7 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::v
 	{
 		fgets(line, 512, f);
 		char* l = TrimFront(line);
-		if (!strncmp(l, "*MESH {", 7)) 
+		if (!strncmp(l, "*MESH {", 7))
 		{
 			ReadMeshFromASE_aux(f, vertices, faces);
 
@@ -45,8 +44,8 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::v
 
 			vertices.clear();
 			faces.clear();
-		} 
-		else 
+		}
+		else
 		{
 			//printf("Line %4d: %s\n", linenbr++, l);
 		}
@@ -55,7 +54,7 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::v
 	return true;
 };
 
-void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f> &vertices, std::vector<uint32> &faces ) 
+void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f> &vertices, std::vector<uint32> &faces )
 {
 	char line[512];
 	int nbVertices = 0;
@@ -69,32 +68,30 @@ void CPhysicASELoader::ReadMeshFromASE_aux(	FILE* f, std::vector<Math::Vect3f> &
 		{
 			return;
 		}
-		else if (strstr(l, "*MESH_VERTEX_LIST {")) 
+		else if (strstr(l, "*MESH_VERTEX_LIST {"))
 		{
 			ReadVertices(f, vertices);
 		}
-		else if (strstr(l, "*MESH_FACE_LIST {")) 
+		else if (strstr(l, "*MESH_FACE_LIST {"))
 		{
 			ReadFaces(f, faces);
 		}
 	}
 }
 
-
-
-void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Math::Vect3f>& vertices ) 
+void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Math::Vect3f>& vertices )
 {
 	char line[512];
 
-	while(true) 
+	while(true)
 	{
 		fgets(line, 512, f);
 		char* l = TrimFront(line);
-		if (*l == '}') 
+		if (*l == '}')
 		{
 			return;
-		} 
-		else if (strstr(l, "*MESH_VERTEX")) 
+		}
+		else if (strstr(l, "*MESH_VERTEX"))
 		{
 			float a,b,c;
 			int i;
@@ -105,7 +102,7 @@ void CPhysicASELoader::ReadVertices( FILE* f, std::vector<Math::Vect3f>& vertice
 	}
 }
 
-void CPhysicASELoader::ReadFaces( FILE* f, std::vector<uint32>& faces ) 
+void CPhysicASELoader::ReadFaces( FILE* f, std::vector<uint32>& faces )
 {
 	char line[512];
 
@@ -113,11 +110,11 @@ void CPhysicASELoader::ReadFaces( FILE* f, std::vector<uint32>& faces )
 	{
 		fgets(line, 512, f);
 		char* l = TrimFront(line);
-		if (*l == '}') 
+		if (*l == '}')
 		{
 			return;
-		} 
-		else if (strstr(l, "*MESH_FACE")) 
+		}
+		else if (strstr(l, "*MESH_FACE"))
 		{
 			uint32 a,b,c;
 			int i;
@@ -128,4 +125,3 @@ void CPhysicASELoader::ReadFaces( FILE* f, std::vector<uint32>& faces )
 		}
 	}
 }
-

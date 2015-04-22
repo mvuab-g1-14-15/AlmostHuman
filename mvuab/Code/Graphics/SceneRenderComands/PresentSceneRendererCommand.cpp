@@ -7,7 +7,6 @@ CPresentSceneRendererCommand::CPresentSceneRendererCommand(CXMLTreeNode &atts): 
 
 CPresentSceneRendererCommand::~CPresentSceneRendererCommand()
 {
-    
 }
 
 void CPresentSceneRendererCommand::Execute(CGraphicsManager &GM)

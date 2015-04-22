@@ -2,7 +2,6 @@
 #define SET_RENDER_TARGET_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\StagedTexturedRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 

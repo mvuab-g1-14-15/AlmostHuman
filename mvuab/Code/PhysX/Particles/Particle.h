@@ -20,11 +20,10 @@ class CParticle
         Math::Vect3f m_Velocity;
         Math::Vect3f m_Acceleration;
 
-
     public:
         CParticle();
         CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
-        
+
         void SetTextureName( std::string TextureName );
         void SetSize( float sx, float sy );
 

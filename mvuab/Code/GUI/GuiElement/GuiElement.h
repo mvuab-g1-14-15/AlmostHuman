@@ -15,7 +15,6 @@
 #include "Utils/Types.h"
 #include "Math\Vector2.h"
 
-
 class CGuiElement
 {
 public:
@@ -25,23 +24,22 @@ public:
 	typedef enum {  EDITPOS, EDITSIZE, DISABLE } TypeEditMode;
 
 public:
-	CGuiElement(	uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent, 
+	CGuiElement(	uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent,
 								Math::Vect2f position_percent, TypeGuiElement type, std::string lit = "",  uint32 textHeightOffset = 0,
 								uint32 textWidthOffset = 0, bool isVisible = true, bool isActive = true );
-	
+
 	virtual ~CGuiElement() {/*Nothing*/;}
-	
+
 	virtual void				Render								();
 	virtual void				RenderText						();
 	virtual void				Update								();
 	virtual void				OnClickedChild				(const std::string& name) = 0;
-	
+
 	void								OnLoadValue						();
 	void								OnSaveValue						();
 
 	void								SetOnLoadValueAction	(const std::string& inAction) {m_sLuaCode_OnLoadValue = inAction;}
 	void								SetOnSaveValueAction	(const std::string& inAction) {m_sLuaCode_OnSaveValue = inAction;}
-
 
 	void								CalculatePosMouse			(const Math::Vect2i& mousePosition);
 
@@ -76,11 +74,9 @@ public:
 	uint32							GetTextHeightOffset		()														{return m_uTextHeightOffset;}
 	uint32							GetTextWidthOffset		()														{return m_uTextWidthOffset;}
 
-
 	void								SetParent							(CGuiElement* parent)				 	{assert(parent); m_pParent = parent;}
 	bool								AddChild							(CGuiElement* child);
 	bool								RemoveChild						(CGuiElement* child);
-
 
 	void								GainFocus							() 														{m_bFocus = true;}
 	void								LoseFocus							() 														{m_bFocus = false;}
@@ -89,7 +85,6 @@ public:
 	void								SetName								(const std::string& name)			{m_sName = name;}
 	const std::string&	GetName								() const											{return m_sName;}
 	TypeGuiElement			GetType								() const {return m_eType;}
-
 
 protected:
 

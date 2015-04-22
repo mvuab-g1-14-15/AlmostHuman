@@ -12,7 +12,7 @@
 #define INC_INPUT_MANAGER_H_
 
 // Note: Defines must be included before <dinptut> because it defines the DIRECTINPUT_VERSION
-#include "Utils\Defines.h" 
+#include "Utils\Defines.h"
 #include <dinput.h>
 
 #include "InputDefs.h"
@@ -34,14 +34,14 @@ public:
     // Init and End protocols
     CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL), m_bActiveMouse(true), CManager() {}
 	CInputManager( CXMLTreeNode &atts );
-    virtual ~CInputManager() { Done(); }  
+    virtual ~CInputManager() { Done(); }
 
     void                  Init            ();
     void                  Done            ();
     bool                  IsOk            () const { return m_bIsOk; }
 
     // Poll input devices
-    void              Update            ();        
+    void              Update            ();
 	void			  Render			(){};
 
     //--Query Input Data and States--------
@@ -52,7 +52,7 @@ public:
     bool            IsUpDown                                      (INPUT_DEVICE_TYPE, uint32);      // will work for keyboard, mouse and joystick
     bool            HasGamePad                                    (INPUT_DEVICE_TYPE device = IDV_GAMEPAD1) const;    // GamePad available?
     int32            Scan2ascii                                    (uint32 scancode, uint16* result);
-    
+
     //GamePad functions:
     bool            GetGamePadLeftThumbDeflection                (float32 *pfX, float32 *pfY, INPUT_DEVICE_TYPE device = IDV_GAMEPAD1);
     bool            GetGamePadRightThumbDeflection                (float32 *pfX, float32 *pfY, INPUT_DEVICE_TYPE device = IDV_GAMEPAD1);
@@ -68,11 +68,10 @@ public:
     //----CScriptRegister interface-------------------
     //virtual void        RegisterFunctions                                (CScriptManager* scriptManager);
 
-
 private:
     void                Release            ();
 
-private:    
+private:
     bool                m_bIsOk;          // Initialization boolean control
     bool                m_bActiveMouse;
     LPDIRECTINPUT8        m_pDI;
@@ -83,4 +82,3 @@ private:
 };
 
 #endif //INC_INPUT_MANAGER_H_
-

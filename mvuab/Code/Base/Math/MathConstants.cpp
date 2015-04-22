@@ -3,7 +3,6 @@
 #include "Math/Matrix44.h"
 #include "Math\Color.h"
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// @file
 /// @brief Constantes númericas de los distintos tipos de la librería matemática
@@ -11,7 +10,6 @@
 
 namespace Math
 {
-
 //---------
 // Math::CColor
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,7 +276,6 @@ const Vect4d  v4dMIN( -DBL_MAX, -DBL_MAX, -DBL_MAX, DBL_MAX );
 const Vect4d  v4dTOP( 0.0, 0.0, 1.0, 1.0 );
 const Vect4d  v4dFRONT( 0.0, 1.0, 0.0, 1.0 );
 const Vect4d  v4dRIGHT( 1.0, 0.0, 0.0, 1.0 );
-
 } //namespace Math
 /*
 //-------

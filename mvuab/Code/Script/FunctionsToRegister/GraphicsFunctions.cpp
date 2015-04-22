@@ -162,7 +162,7 @@ void registerRenderableObject( lua_State * aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
   LUA_END_DECLARATION
-  
+
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // RENDERABLE OBJECTS MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

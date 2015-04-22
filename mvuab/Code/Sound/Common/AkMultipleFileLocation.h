@@ -5,7 +5,7 @@
 // File location resolving: Supports multiple base paths for file access, searched in reverse order.
 // For more details on resolving file location, refer to section "File Location" inside
 // "Going Further > Overriding Managers > Streaming / Stream Manager > Low-Level I/O"
-// of the SDK documentation. 
+// of the SDK documentation.
 //
 // Copyright (c) 2014 Audiokinetic Inc. / All Rights Reserved
 //
@@ -19,7 +19,6 @@ struct AkFileSystemFlags;
 #include <AK/SoundEngine/Common/IAkStreamMgr.h>
 #include <AK/SoundEngine/Common/AkStreamMgrModule.h>
 #include <AK/Tools/Common/AkListBareLight.h>
-
 
 // This file location class supports multiple base paths for Wwise file access.
 // Each path will be searched the reverse order of the addition order until the file is found.
@@ -53,7 +52,7 @@ public:
 
 	AKRESULT AddBasePath(const AkOSChar*   in_pszBasePath);
 
-	AKRESULT Open( 
+	AKRESULT Open(
 		const AkOSChar* in_pszFileName,     // File name.
 		AkOpenMode      in_eOpenMode,       // Open mode.
 		AkFileSystemFlags * in_pFlags,      // Special flags. Can pass NULL.
@@ -61,15 +60,14 @@ public:
 		AkFileDesc &    out_fileDesc        // Returned file descriptor.
 		);
 
-	
-	AKRESULT Open( 
+	AKRESULT Open(
 		AkFileID        in_fileID,          // File ID.
 		AkOpenMode      in_eOpenMode,       // Open mode.
 		AkFileSystemFlags * in_pFlags,      // Special flags. Can pass NULL.
 		bool			in_bOverlapped,		// Overlapped IO open
 		AkFileDesc &    out_fileDesc        // Returned file descriptor.
 		);
-	
+
 	//
 	// Path resolving services.
 	// ------------------------------------------------------
@@ -83,7 +81,7 @@ public:
 		AkOpenMode			in_eOpenMode,		// File open mode (read, write, ...).
 		FilePath*			in_pBasePath,		// Base path to use
 		AkOSChar *			out_pszFullFilePath // Full file path.
-		);  
+		);
 
 protected:
 

@@ -59,9 +59,9 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &aName, const std::stri
     ASSERT(m_CalCoreModel, "Cal Core Model not found");
 
     bool lLoadedOk( true );
-    
+
     int lId = m_CalCoreModel->loadCoreAnimation(m_Path + aFilename, aName);
-    
+
     lLoadedOk = lLoadedOk && bool( lId != -1 );
 
     if( lLoadedOk )
@@ -120,15 +120,15 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     //En caso de utilizar NormalMap
     CalcTangentsAndBinormals
         (
-            l_Vtxs, 
-            (unsigned short *) l_Idxs, 
-            m_NumVtxs, 
-            m_NumFaces * 3, 
-            sizeof(CAL3D_HW_VERTEX), 
-            0, 
+            l_Vtxs,
+            (unsigned short *) l_Idxs,
+            m_NumVtxs,
+            m_NumFaces * 3,
+            sizeof(CAL3D_HW_VERTEX),
+            0,
             44,
-            60, 
-            76, 
+            60,
+            76,
             92
         );
 

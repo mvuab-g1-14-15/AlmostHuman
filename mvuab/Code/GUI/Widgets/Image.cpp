@@ -1,5 +1,3 @@
-
-
 #include "Widgets\Image.h"
 #include "Texture/Texture.h"
 #include "GraphicsManager.h"
@@ -23,7 +21,6 @@ CImage::CImage( uint32 windowsHeight, uint32 windowsWidth, float height_precent,
     , m_bIsQuadrant(false)
     , m_bIsBackGround(false)
 {}
-
 
 //---------------CGuiElement Interface----------------------
 void CImage::Render ()
@@ -60,7 +57,6 @@ void CImage::Render ()
         //Finalmente renderizamos el texto:
         CGuiElement::RenderText();
     }
-
 }
 
 void CImage::Update ()
@@ -101,5 +97,3 @@ void CImage::SetTexture (CTexture* texture, std::string name )
     m_Textures.insert( std::pair<std::string, CTexture*>(name, texture) );
     m_VecTextures.push_back(texture);
 }
-
-

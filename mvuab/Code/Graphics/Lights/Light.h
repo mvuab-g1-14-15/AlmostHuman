@@ -54,7 +54,7 @@ public:
   CTexture*           GetShadowMaskTexture() const;
   std::vector<CRenderableObjectsManager*>& GetStaticShadowMapRenderableObjectsManagers();
   std::vector<CRenderableObjectsManager*>& GetDynamicShadowMapRenderableObjectsManagers();
-  
+
   const Mat44f&       GetViewShadowMap() const;
   const Mat44f&       GetProjectionShadowMap() const;
   void                BeginRenderEffectManagerShadowMap( CEffect* Effect );

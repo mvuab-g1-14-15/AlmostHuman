@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 
+//
 // MacroRepeat
-// 
+//
 // This header provides macros for repeating code.
-// 
+//
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2004 Robert Geiman.
@@ -19,12 +19,11 @@
 #ifndef MACRO_REPEAT_H
 #define MACRO_REPEAT_H
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // The MACRO_EMPTY_SEPERATOR should be left empty, but Visual C++ 6.0 chokes on
 // passing empty defines to macros, so to get around deficiency we define this
 // macro as an empty comment section (/**/).  Note that this is NOT valid with
-// a standard compliant compiler 
+// a standard compliant compiler
 ///////////////////////////////////////////////////////////////////////////////
 #define MACRO_EMPTY_SEPERATOR /##**/
 #define MACRO_COMMA_SEPERATOR ,
@@ -32,15 +31,13 @@
 #define MACRO_BEGIN_PAREN_SEPERATOR (
 #define MACRO_END_PAREN_SEPERATOR )
 
-
 #define MACRO_EMPTY_MACRO(num)
 #define MACRO_TEMPLATE_PARAMETER(num) typename A##num
 #define MACRO_TEMPLATE_ARGUMENT(num) A##num
 #define MACRO_FUNCTION_PARAMETER(num) A##num a##num
 #define MACRO_FUNCTION_ARGUMENT(num) a##num
 
-
-#define MACRO_REPEAT_0(begin_seperator, seperator, macro, end_seperator) 
+#define MACRO_REPEAT_0(begin_seperator, seperator, macro, end_seperator)
 #define MACRO_REPEAT_1(begin_seperator, seperator, macro, end_seperator) begin_seperator macro(0) end_seperator
 #define MACRO_REPEAT_2(begin_seperator, seperator, macro, end_seperator) MACRO_REPEAT_1(begin_seperator, seperator, macro, end_seperator) seperator macro(1) end_seperator
 #define MACRO_REPEAT_3(begin_seperator, seperator, macro, end_seperator) MACRO_REPEAT_2(begin_seperator, seperator, macro, end_seperator) seperator macro(2) end_seperator
@@ -74,14 +71,11 @@
 #define MACRO_REPEAT_31(begin_seperator, seperator, macro, end_seperator) MACRO_REPEAT_30(begin_seperator, seperator, macro, end_seperator) seperator macro(30) end_seperator
 #define MACRO_REPEAT_32(begin_seperator, seperator, macro, end_seperator) MACRO_REPEAT_31(begin_seperator, seperator, macro, end_seperator) seperator macro(31) end_seperator
 
-
 #define MACRO_LIST(num, macro) MACRO_REPEAT_##num(MACRO_EMPTY_SEPERATOR, MACRO_COMMA_SEPERATOR, macro, MACRO_EMPTY_SEPERATOR)
 #define MACRO_LIST_APPEND(num, macro) MACRO_REPEAT_##num(MACRO_COMMA_SEPERATOR, MACRO_COMMA_SEPERATOR, macro, MACRO_EMPTY_SEPERATOR)
 #define MACRO_LIST_PREPEND(num, macro) MACRO_REPEAT_##num(MACRO_EMPTY_SEPERATOR, MACRO_COMMA_SEPERATOR, macro, MACRO_COMMA_SEPERATOR)
 #define MACRO_BEGIN_PAREN(num, macro) MACRO_REPEAT_##num(MACRO_BEGIN_PAREN_SEPERATOR, MACRO_EMPTY_SEPERATOR, macro, MACRO_EMPTY_SEPERATOR)
 #define MACRO_END_PAREN(num, macro) MACRO_REPEAT_##num(MACRO_END_PAREN_SEPERATOR, MACRO_EMPTY_SEPERATOR, macro, MACRO_EMPTY_SEPERATOR)
 #define MACRO_REPEAT(num, macro) MACRO_REPEAT_##num(MACRO_EMPTY_SEPERATOR, MACRO_EMPTY_SEPERATOR, macro, MACRO_EMPTY_SEPERATOR)
-
-
 
 #endif

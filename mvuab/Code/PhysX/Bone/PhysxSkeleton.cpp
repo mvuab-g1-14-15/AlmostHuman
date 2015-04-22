@@ -82,7 +82,6 @@ void CPhysxSkeleton::Release()
     m_vBones.clear();
 }
 
-
 bool CPhysxSkeleton::Load(const std::string& _szFileName)
 {
     CXMLTreeNode l_XML;
@@ -130,8 +129,6 @@ bool CPhysxSkeleton::Load(const std::string& _szFileName)
         }
     }
 
-
-
     if (!m_bRagdollActive)
     {
         SleepPhysxBones();
@@ -140,10 +137,8 @@ bool CPhysxSkeleton::Load(const std::string& _szFileName)
     return true;
 }
 
-
 CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(const std::string& _szName)
 {
-
     CPhysxBone* l_pBone = 0;
 
     for(size_t i = 0; i < m_vBones.size(); ++i)
@@ -155,17 +150,14 @@ CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(const std::string& _szName)
             l_pBone = m_vBones[i];
             return l_pBone;
         }
-
     }
 
     return 0;
 }
 
-
 //Main function pels Joints.
 bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
 {
-
     CXMLTreeNode l_XML;
     CXMLTreeNode l_XMLObjects;
     if(!l_XML.LoadFile(_szFileName.c_str()))
@@ -177,7 +169,6 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
     l_XMLObjects = l_XML(1);
 
     int l_iNumObjects = l_XMLObjects.GetNumChildren();
-
 
     for(int i = 0; i < l_iNumObjects; i++)
     {
@@ -207,9 +198,7 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
     }
 
     return true;
-
 }
-
 
 bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 {
@@ -231,14 +220,11 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
     CPhysicSphericalJoint* l_pSphericalJoint = 0;
     l_pSphericalJoint = new CPhysicSphericalJoint();
 
-
     CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
     Math::Vect3f l_vJointPoint(-l_vCalVect.x, l_vCalVect.y, l_vCalVect.z);
     l_vJointPoint = m_mTransform * l_vJointPoint;
     Math::Vect3f l_vAxis;
     CalVector l_vVect;
-
-
 
     //MES PROVES
     if (l_szDirection == "Out")
@@ -273,9 +259,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
             /*  l_vAxis = Math::Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
                 l_vAxis.Normalize();*/
         }
-
     }
-
 
     Math::Vect3f l_vAxisAux(l_vVect.x, l_vVect.y, l_vVect.z);
     l_vAxisAux = m_mTransform * l_vAxisAux;
@@ -284,8 +268,6 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
     l_pJointInfo.m_vAnchor = l_vJointPoint;
     l_pJointInfo.m_vAxis = l_vAxis;
-
-
 
     if (l_szActor2 == "NULL")
     {
@@ -303,7 +285,6 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
     return true;
 }
-
 
 bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
 {
@@ -416,8 +397,6 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
 
 void CPhysxSkeleton::InitParents()
 {
-
-
     for(size_t i = 0; i < m_vBones.size(); ++i)
     {
         if (!m_vBones[i]->IsBoneRoot())
@@ -439,20 +418,15 @@ void CPhysxSkeleton::InitParents()
             m_vBones[i]->SetParent(0);
         }
     }
-
-
 }
 
 void CPhysxSkeleton::UpdatePhysxFromCal3d()
 {
-
     for(size_t i = 0; i < m_vBones.size(); ++i)
     {
         m_vBones[i]->UpdatePhysxFromCal3d(m_mTransform);
     }
-
 }
-
 
 void CPhysxSkeleton::Update()
 {
@@ -464,9 +438,7 @@ void CPhysxSkeleton::Update()
     {
         UpdatePhysxFromCal3d();
     }
-
 }
-
 
 void CPhysxSkeleton::SetRagdollActive(bool _bRagdollActive)
 {

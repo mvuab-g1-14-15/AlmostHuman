@@ -2,7 +2,6 @@
 #define WEAPON_TARGET_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\DrawQuadRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 

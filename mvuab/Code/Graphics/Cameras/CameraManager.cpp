@@ -83,7 +83,6 @@ void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string& name,
         case CCamera::Free:
             l_pNewCamera = new CCameraFree();
             break;
-
     }
 
     assert( l_pNewCamera );
@@ -94,8 +93,6 @@ void CCameraManager::NewCamera( CCamera::Type id_cam, const std::string& name,
     l_pNewCamera->SetName( name );
     AddResource( name, l_pNewCamera );
 }
-
-
 
 void CCameraManager::DeleteCamera( const std::string& name )
 {

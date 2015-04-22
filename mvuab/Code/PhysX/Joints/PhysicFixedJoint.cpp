@@ -44,6 +44,4 @@ void CPhysicFixedJoint::SetInfo( CPhysicActor* actorA,  CPhysicActor* actorB )
     m_pFixedDesc->actor[1] = actorB->GetPhXActor();
   else
     m_pFixedDesc->actor[1] = NULL;
-
-
 }

@@ -39,7 +39,6 @@ protected:
   uint32  m_Width;
   uint32  m_Height;
 
-
   IDirect3DSurface9* m_OldRenderTarget;
   IDirect3DSurface9* m_DepthStencilRenderTargetTexture;
   IDirect3DSurface9* m_OldDepthStencilRenderTarget;

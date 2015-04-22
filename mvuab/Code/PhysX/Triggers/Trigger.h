@@ -28,7 +28,6 @@ public:
 
 private: // Members
 
-
   Math::Vect3f m_Position;
   Math::Vect3f m_Size;
   float32      m_Radius;

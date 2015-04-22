@@ -47,7 +47,6 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
 
     bool doIt = true;
 
-
     for(; itb != ite; ++itb)
     {
         S_INPUT_ACTION current_action = *itb;
@@ -132,7 +131,6 @@ bool CActionManager::DoAction(const std::string &action, float32 &amount)
         { doIt = true; }
         else
         { doIt = false; }
-
     }
 
     return(doIt);
@@ -186,13 +184,11 @@ bool CActionManager::LoadXML()
                             new_action.m_sEventType = EventTypeStr;
                             new_action.m_sAxisType = axisTypeStr;
 
-
                             if( m_mActions.find(TagName) != m_mActions.end())
                             {
                                 vector = m_mActions[TagName];
                             }
                             vector.push_back(new_action);
-
                         }
                     }
                     m_mActions[StrActionName] = vector;
@@ -421,7 +417,6 @@ INPUT_AXIS_TYPE    CActionManager::strAxisToCode (const std::string &strAxis)
     else if("AXIS_DELTA_TRIGGER_RIGHT" == strAxis) { return(AXIS_DELTA_TRIGGER_RIGHT); }
     else if("AXIS_DELTA_TRIGGER_LEFT"  == strAxis) { return(AXIS_DELTA_TRIGGER_LEFT); }
     return(AXIS_NOTHING);
-
 }
 
 bool CActionManager::Reload()

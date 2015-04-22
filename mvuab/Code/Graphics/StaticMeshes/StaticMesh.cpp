@@ -20,7 +20,6 @@
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "EngineManagers.h"
 
-
 #include <cstdio>
 
 CStaticMesh::CStaticMesh(): m_FileName( "" ), m_RenderableObjectTechniqueName( "" )
@@ -39,7 +38,7 @@ void CStaticMesh::Destroy()
     m_VertexTypes.clear();
 
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
-    for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it) 
+    for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it)
     {
         l_AllocatorManger->m_pFreeListAllocator->Deallocate(*it);
     }
@@ -177,7 +176,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         CRenderableVertexs *l_RV = NULL;
 
         if (l_VertexType == TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexType())
-        { 
+        {
             l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>));
             new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }

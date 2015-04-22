@@ -26,7 +26,6 @@
 
 using namespace luabind;
 
-
 CScriptManager::CScriptManager() : CManager()
 {
 }

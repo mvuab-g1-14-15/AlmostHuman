@@ -28,7 +28,6 @@ void CBillboard::Init()
     m_Texture = TextureMInstance->GetTexture(mConfigPath);
 }
 
-
 void CBillboard::Update()
 {
     if(!m_Active) { return; }

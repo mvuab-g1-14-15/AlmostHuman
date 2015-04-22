@@ -5,7 +5,6 @@
 CGizmosManager::CGizmosManager()
   :CManager()
 {
-
 }
 
 CGizmosManager::CGizmosManager(CXMLTreeNode& atts)
@@ -18,12 +17,10 @@ CGizmosManager::CGizmosManager(CXMLTreeNode& atts)
 
 CGizmosManager::~CGizmosManager()
 {
-
 }
 
 void CGizmosManager::Init()
 {
-
 }
 
 void CGizmosManager::Update()

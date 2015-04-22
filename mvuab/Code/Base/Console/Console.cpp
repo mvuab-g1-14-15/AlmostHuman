@@ -77,7 +77,6 @@ void CConsole::Update()
 
 void CConsole::Render()
 {
-
 }
 
 CConsole::~CConsole()
@@ -218,7 +217,6 @@ short CConsole::GetMaxLinesInWindow ()
 //But it has to do more than Allocing and Freeing consoles.
 //So here it is..
 
-
 void CConsole::RedirectToConsole (WORD wFlags)
 {
     int                        hConHandle;
@@ -234,7 +232,6 @@ void CConsole::RedirectToConsole (WORD wFlags)
     // set the screen buffer to be big enough to let us scroll text
     GetConsoleScreenBufferInfo((HANDLE)lStdHandle, &coninfo);
     SetupConsole (SC_COLUMNS | SC_LINES | SC_ATTRIB | SC_MAXLINES);
-
 
     // redirect unbuffered STDOUT to the console
 
@@ -270,7 +267,6 @@ void CConsole::RedirectToConsole (WORD wFlags)
 */
 BOOL CConsole::SetupConsole(WORD wFlags)
 {
-
     long                       lStdHandle;
     CONSOLE_SCREEN_BUFFER_INFO coninfo;
 
@@ -280,7 +276,6 @@ BOOL CConsole::SetupConsole(WORD wFlags)
     lStdHandle = (long)GetStdHandle(STD_OUTPUT_HANDLE);
     // set the screen buffer to be big enough to let us scroll text
     GetConsoleScreenBufferInfo((HANDLE)lStdHandle, &coninfo);
-
 
     if (wFlags & SC_COLUMNS || wFlags & SC_LINES) //Set up only the columns
     {
@@ -293,7 +288,6 @@ BOOL CConsole::SetupConsole(WORD wFlags)
 
         //Set the screen buffer size
         SetConsoleScreenBufferSize((HANDLE)lStdHandle, coninfo.dwSize);
-
     }
     if (wFlags & SC_ATTRIB)
     {
@@ -325,7 +319,6 @@ BOOL CConsole::SetupConsole(WORD wFlags)
                               &rect);
     }
     return TRUE;
-
 }
 
 HANDLE CConsole::GetHandle (DWORD dwFlag)
@@ -350,7 +343,6 @@ BOOL CConsole::Clear ()
     HANDLE hConsole = GetHandle (STD_OUTPUT_HANDLE);
 
     /* get the number of character cells in the current buffer */
-
 
     bSuccess = GetConsoleScreenBufferInfo( hConsole, &csbi );
     dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
@@ -432,4 +424,3 @@ WORD CConsole::GetSettings (WORD wFlags)
     }
     return 0;
 }
-

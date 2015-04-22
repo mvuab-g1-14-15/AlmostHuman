@@ -7,9 +7,9 @@
 // NO PONER INCLUDES
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// @brief Compara los valores de 2 numeros usando un epsilon y nos devuelve la relacion 
+/// @brief Compara los valores de 2 numeros usando un epsilon y nos devuelve la relacion
 ///        del primero respecto al segundo. 'a' sera igual a 'b' si:
-/// \verbatim  
+/// \verbatim
 ///                a - Epsilon < b < a + Epsilon
 ///
 ///     -------------|-----------O--X--------|------------
@@ -108,7 +108,6 @@ inline T Rad2Deg( T rad )
 {
   return ((rad * (T)180.0) / PiTimes((T)1));
 }
-
 
 //////////////////////////////////////////////////////////////////////////
 // Pone el angulo entre -Pi y Pi

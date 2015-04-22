@@ -29,7 +29,6 @@
 CPhysXObjManager::CPhysXObjManager()
     : m_Filename("")
 {
-
 }
 
 CPhysXObjManager::~CPhysXObjManager()
@@ -41,7 +40,6 @@ void CPhysXObjManager::CleanUp()
 {
     this->Destroy();
 }
-
 
 bool CPhysXObjManager::Load( const std::string& filename )
 {

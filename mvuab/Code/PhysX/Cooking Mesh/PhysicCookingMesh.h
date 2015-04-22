@@ -30,7 +30,6 @@ typedef std::map<std::string, NxTriangleMesh*> VecMeshes;
 class CPhysicCookingMesh
 {
 public:
-  
 
 public:
   //--- Init and End protocols
@@ -47,10 +46,8 @@ public:
     return m_bIsOk;
   }
 
-
   NxTriangleMesh*       GetPhysicMesh( const std::string& name );
   const VecMeshes		&GetMeshes() { return m_TriangleMeshes; }
-
 
   bool            CreatePhysicMesh( const std::string& _BinFilename, const std::string& _NameMesh );
 

@@ -7,7 +7,6 @@ CDisableZTestSceneRendererCommand::CDisableZTestSceneRendererCommand(CXMLTreeNod
 
 CDisableZTestSceneRendererCommand::~CDisableZTestSceneRendererCommand()
 {
-    
 }
 
 void CDisableZTestSceneRendererCommand::Execute(CGraphicsManager &GM)

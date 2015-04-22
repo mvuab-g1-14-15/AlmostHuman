@@ -21,7 +21,6 @@ CEngineConfig::~CEngineConfig()
 
 void CEngineConfig::Load( const std::string& aCfg )
 {
-
   m_ConfigPath = aCfg;
   CXMLTreeNode l_File;
 
@@ -52,7 +51,7 @@ void CEngineConfig::Load( const std::string& aCfg )
       m_ScreenResolution  = lTreeNode( i ).GetVect2iProperty( "resolution" , Math::Vect2i( 800, 600 ));
       m_ScreenSize        = lTreeNode( i ).GetVect2iProperty( "size", Math::Vect2i( 800, 600 ) );
       m_ScreenPosition    = lTreeNode( i ).GetVect2iProperty( "position", Math::Vect2i( 0, 0 ) );
-      
+
       const std::string& lMode = lTreeNode( i ).GetPszProperty( "mode" );
       // Switch the modes of the screen
       m_FullScreenMode  = ( lMode == "full_screen" );

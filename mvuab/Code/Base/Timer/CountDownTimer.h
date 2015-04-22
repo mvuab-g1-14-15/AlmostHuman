@@ -19,9 +19,9 @@ public:
 
     void    SetTime                                    (float32 TotalTime, bool automaticReset = false);
     void    Reset                                        ()                { m_fElapsedTime    = 0.f; }
-    bool    Update                                    (float32 deltaTime); 
+    bool    Update                                    (float32 deltaTime);
     bool    Finished                                ();
-    
+
     float32    GetTotalTime                        () const    {return m_fTotalTime;}
     float32    GetElapsedTime                    () const    {return m_fElapsedTime;}
     float32    GetLeftoverTime                    () const    {return m_fTotalTime - m_fElapsedTime;}

@@ -38,11 +38,6 @@
 #include "Joints\PhysicSphericalJoint.h"
 #include "Reports\PhysicTriggerReport.h"
 
-
-
-
-
-
 CPhysicProcess::CPhysicProcess() : CProcess(),
     m_Salir( false ), m_Time( 0 )
 
@@ -63,7 +58,6 @@ CPhysicProcess::~CPhysicProcess()
     { CHECKED_DELETE( m_vPUD[i] ); }
 
     m_vPUD.clear();
-
 }
 
 void CPhysicProcess::Update()
@@ -92,7 +86,6 @@ void CPhysicProcess::Update()
 
     if ( pActionManager->DoAction( "ReloadActionToInput" ) )
     { ActionManagerInstance->Reload(); }
-
 
     /////////////////////////////////////////////////////////////
     ////////////      RAYCAST (DISPARO)         /////////////////
@@ -161,7 +154,6 @@ void CPhysicProcess::Update()
         { l_PUD->SetColor( colRED ); }
     }
 
-
     ScriptMInstance->RunCode( "update()" );
 
     //Change gravity
@@ -183,7 +175,6 @@ void CPhysicProcess::Update()
     }
     else if ( m_Salir )
     { m_Time += deltaTime; }
-
 
     //////////////////////////////////////////////////////
     ////////////          MOVE BRIDGE          ///////////
@@ -327,7 +318,6 @@ void CPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
     std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
-
 
     //Get method name
     std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );

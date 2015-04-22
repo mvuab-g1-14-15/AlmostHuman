@@ -12,7 +12,7 @@ public:
     ~CVisible()
 	{
 	}
-	
+
 	bool GetVisible(){return m_Visible;}
 	void SetVisible( bool visible ){ m_Visible = visible; }
 

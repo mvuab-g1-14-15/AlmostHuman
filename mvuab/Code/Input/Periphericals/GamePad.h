@@ -15,7 +15,6 @@
 #include "Math/Vector3.h"
 #include "Math\MathTypes.h"
 
-
 //-------------Declaracion de nuevos tipos-----------
 struct PAD_CONTROLLER
 {
@@ -52,7 +51,7 @@ class CGamePad
     bool                      GetLeftThumbDeflection    (float32 *pfX, float32 *pfY, uint32 idController = 0);
     bool                      GetRightThumbDeflection   (float32 *pfX, float32 *pfY, uint32 idController = 0);
     bool                      GetDeltaTriggers          (float32 *pfLeft, float32 *pfRight, uint32 idController = 0);
-    uint32                     GetButtonsPressed         (uint32 idController = 0)    const; 
+    uint32                     GetButtonsPressed         (uint32 idController = 0)    const;
         void                        GetPosition                                (Math::Vect2i &pos, uint32 idController = 0);
 
   private:

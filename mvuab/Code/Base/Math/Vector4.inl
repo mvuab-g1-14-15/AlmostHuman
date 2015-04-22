@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------
 // Vector4 inline
 /// Definiciones de funciones inline de la clase 'Vector4'
-/// Este fichero es realmente parte de la cabecera 'Vector4.h' 
+/// Este fichero es realmente parte de la cabecera 'Vector4.h'
 //-----------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Costructor versión 1
-/// Construcción sin inicialización de parámetros  
+/// Construcción sin inicialización de parámetros
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Vector4<T>::Vector4 ()
 {
 }
-  
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constructor versión 2
 /// Constructor de copia
@@ -38,7 +38,7 @@ inline Vector4<T>::Vector4 (const Vector3<T>& otro)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constructor versión 4
-/// Constructor a partir de un Vector 3D y un escalar para la componente 'w' 
+/// Constructor a partir de un Vector 3D y un escalar para la componente 'w'
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Vector4<T>::Vector4 (const Vector3<T>& otro, const T tw)
@@ -106,7 +106,7 @@ inline Vector4<T> Vector4<T>::operator * (const T escalar) const
   return (Vector4<T>(x * escalar,
                      y * escalar,
                      z * escalar,
-                     w * escalar)); 
+                     w * escalar));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ inline Vector4<T> Vector4<T>::operator / (const T escalar) const
     retVector.z *= inv_escalar;
     retVector.w *= inv_escalar;
   }
-  
+
   return retVector;
   //-------------------------------------------------------->>>
 #else
@@ -139,7 +139,7 @@ inline Vector4<T> Vector4<T>::operator / (const T escalar) const
   return (Vector4<T>(x * inv_escalar,
                      y * inv_escalar,
                      z * inv_escalar,
-                     w * inv_escalar)); 
+                     w * inv_escalar));
   //-------------------------------------------------------->>>
 #endif
 }
@@ -204,12 +204,12 @@ inline Vector4<T> Vector4<T>::operator - () const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Operador aritmético: signo positivo 
+/// Operador aritmético: signo positivo
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Vector4<T>& Vector4<T>::operator + ()
 {
-  return (*this); 
+  return (*this);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,7 +222,7 @@ inline const Vector4<T>& Vector4<T>::operator + () const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Función externa operador aritmético: producto escalar x vector 
+/// Función externa operador aritmético: producto escalar x vector
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Vector4<T> operator * (const T escalar, const Vector4<T>& otro)
@@ -230,7 +230,7 @@ inline Vector4<T> operator * (const T escalar, const Vector4<T>& otro)
   return (Vector4<T>(escalar * otro.x,
                      escalar * otro.y,
                      escalar * otro.z,
-                     escalar * otro.w)); 
+                     escalar * otro.w));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@ inline Vector4<T> operator / (const T escalar, const Vector4<T>& otro)
   return (Vector4<T>(escalar / otro.x,
                      escalar / otro.y,
                      escalar / otro.z,
-                     escalar / otro.w)); 
+                     escalar / otro.w));
   //-------------------------------------------------------->>>
 #endif
 }
@@ -347,8 +347,8 @@ inline Vector4<T>& Vector4<T>::operator /= (const T escalar)
   z *= inv_escalar;
   w *= inv_escalar;
   //----------------------------------------------------->>>
-#endif 
-  
+#endif
+
   return (*this);
 }
 
@@ -405,7 +405,7 @@ inline void Vector4<T>::Set (const T tx, const T ty, const T tz, const T tw)
   z = tz;
   w = tw;
 }
- 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Establece el vector a  [0, 0, 0, 0]
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -596,14 +596,14 @@ inline Vector4<T>& Vector4<T>::Normalize (const T tk)
 #else
   //--------------------------------------------<<<
   // Sin chequeo
-  T aux = tk / Lenght(); 
+  T aux = tk / Lenght();
   x *= aux;
   y *= aux;
   z *= aux;
   w *= aux;
   //-------------------------------------------->>>
 #endif
-  
+
   return (*this);
 }
 
@@ -624,7 +624,7 @@ inline T Vector4<T>::Length () const
 {
   return ((T)sqrt(x * x + y * y + z * z + w * w));
 }
-  
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Longitud al cuadrado
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

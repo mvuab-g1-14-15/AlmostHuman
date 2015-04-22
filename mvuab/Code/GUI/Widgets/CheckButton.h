@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-// A checkbutton is used when you need to specify a persistent binary condition. An example might be to turn on/off 
+// A checkbutton is used when you need to specify a persistent binary condition. An example might be to turn on/off
 // the grid associated with the axes of a plot.
 //----------------------------------------------------------------------------------
 #pragma once
@@ -14,14 +14,12 @@
 #include "GuiElement\GuiElement.h"
 #include "Math/Color.h"
 
-
 //---Forward Declarations---
 class CTexture;
 //--------------------------
 
 class CCheckButton: public CGuiElement
 {
-
 private:
 	typedef enum ECheckButtonState { CBS_ON, CBS_OFF };
 
@@ -37,7 +35,6 @@ public:
 	virtual void	Update							();
 	virtual void	OnClickedChild			(const std::string& name) {/*NOTHING*/;}
 
-	
 	//---------------CCheckButton Interface----------------------
 	void					SetTextures					(CTexture* on, CTexture* off, CTexture* deactivated );
 	void					SetLiteral					(const std::string& lit) {m_sLiteral = lit;}

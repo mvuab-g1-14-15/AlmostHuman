@@ -1,6 +1,5 @@
 #include "RenderableObject\RenderableObjectTechnique.h"
 
-
 CRenderableObjectTechnique::CRenderableObjectTechnique()
 {
 }

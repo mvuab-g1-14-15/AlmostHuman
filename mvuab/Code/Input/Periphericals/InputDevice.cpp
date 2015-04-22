@@ -31,7 +31,6 @@ void CInputDevice::Done()
     }
 }
 
-
 /**
     Release the object.
 */
@@ -51,7 +50,6 @@ void CInputDevice::Release( void )
 */
 HRESULT CInputDevice::CrankUp(REFGUID rguid, LPCDIDATAFORMAT pdf, bool exclusiveMode)
 {
-
     DWORD dwFlags = DISCL_FOREGROUND;
 
     if (exclusiveMode)
@@ -95,7 +93,6 @@ HRESULT CInputDevice::CrankUp(REFGUID rguid, LPCDIDATAFORMAT pdf, bool exclusive
     return S_OK;
 }
 
-
 /**
     Get the state or data from the device object.
     -> IN: ZFXINPUTDEV - keyboard, mouse or joystick
@@ -121,7 +118,6 @@ HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData, DWORD *pdwNum
 
         hr = m_pDevice->GetDeviceState((DWORD)size, pData);
     }
-
 
     if (FAILED(hr))
     {

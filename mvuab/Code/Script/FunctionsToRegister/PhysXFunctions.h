@@ -1,7 +1,6 @@
 #ifndef PHYSXFUNCTIONS_H
 #define PHYSXFUNCTIONS_H
 
-
 extern "C"
 {
 #include "lua.h"

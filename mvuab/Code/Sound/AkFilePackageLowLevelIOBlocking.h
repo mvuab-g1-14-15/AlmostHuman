@@ -2,14 +2,14 @@
 //
 // AkFilePackageLowLevelIOBlocking.h
 //
-// Extends the CAkDefaultIOHookBlocking low level I/O hook with File 
-// Package handling functionality. 
+// Extends the CAkDefaultIOHookBlocking low level I/O hook with File
+// Package handling functionality.
 //
-// See AkDefaultIOHookBlocking.h for details on using the blocking 
-// low level I/O hook. 
-// 
+// See AkDefaultIOHookBlocking.h for details on using the blocking
+// low level I/O hook.
+//
 // See AkFilePackageLowLevelIO.h for details on using file packages.
-// 
+//
 // Copyright (c) 2006 Audiokinetic Inc. / All Rights Reserved
 //
 //////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@
 #include "../Common/AkFilePackageLowLevelIO.h"
 #include "AkDefaultIOHookBlocking.h"
 
-class CAkFilePackageLowLevelIOBlocking 
+class CAkFilePackageLowLevelIOBlocking
 	: public CAkFilePackageLowLevelIO<CAkDefaultIOHookBlocking>
 {
 public:

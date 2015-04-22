@@ -15,7 +15,6 @@ class CFrustum;
 
 class CCameraManager : public CMapManager<CCamera>, public CManager
 {
-
 public:
 
   CCameraManager();
@@ -44,7 +43,6 @@ private:
 
   bool        m_RenderCameras;
   CCamera*    m_pCurrentCamera;
-
 };
 
 #endif // INC_CAMERAMANAGER_H_

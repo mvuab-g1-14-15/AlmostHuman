@@ -81,7 +81,6 @@ void CTriggerManager::Clear()
     Destroy();
 }
 
-
 void CTriggerManager::Release()
 {
     TVectorResources::iterator itb = m_ResourcesVector.begin();

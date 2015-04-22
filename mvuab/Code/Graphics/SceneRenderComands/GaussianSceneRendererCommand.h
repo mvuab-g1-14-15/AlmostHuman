@@ -2,7 +2,6 @@
 #define GAUSSIAN_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\StagedTexturedRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
@@ -17,16 +16,14 @@ class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 
         std::string m_NameTechnique;
         unsigned int m_nIteration;
-        
+
         unsigned int m_Width;
         unsigned int m_Height;
-
-        
 
     public:
         CGaussianSceneRendererCommand( CXMLTreeNode& atts );
         ~ CGaussianSceneRendererCommand();
-        
+
         void Execute( CGraphicsManager& GM );
 };
 #endif

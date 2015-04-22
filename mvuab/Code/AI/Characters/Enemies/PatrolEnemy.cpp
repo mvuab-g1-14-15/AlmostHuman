@@ -10,7 +10,6 @@ CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 {
 }
 
-
 CPatrolEnemy::~CPatrolEnemy( void )
 {
     //Destroy();

@@ -1,6 +1,4 @@
-
 #pragma once
-
 
 #ifndef _PHYSX_OBJ_MANAGER_H
 #define _PHYSX_OBJ_MANAGER_H
@@ -17,7 +15,7 @@ private:
 public:
 	CPhysXObjManager();
 	virtual ~CPhysXObjManager();
-	
+
 	bool			Load					(const std::string& filename);
 	bool			Reload					();
 	void			CleanUp					();

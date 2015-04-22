@@ -1,5 +1,3 @@
-
-
 #include "Slider.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -7,7 +5,6 @@
 #include "Logger/Logger.h"
 #include "EngineManagers.h"
 #include "ScriptManager.h"
-
 
 CSlider::CSlider(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
 									const Math::Vect2f position_percent,  float buttonWidthPercent, float buttonHeightPercent,
@@ -24,8 +21,6 @@ CSlider::CSlider(	uint32 windowsHeight, uint32 windowsWidth, float height_precen
 	position.y = position_percent.y + height_precent*0.5f - buttonHeightPercent*0.5f;
 	m_Button.SetPositionPercent(position);
 }
-
-
 
 //---------------Interfaz de GuiElement----------------------
 void CSlider::Render	()
@@ -50,7 +45,7 @@ void CSlider::Render	()
 		m_Button.Render();
 
 		//Finalmente renderizamos el texto:
-		CGuiElement::RenderText();	
+		CGuiElement::RenderText();
 	}
 }
 
@@ -60,7 +55,7 @@ void CSlider::Update()
 	{
 		//Primero actualizamos todos los hijos que pudiera tener el checkButton:
 		CGuiElement::Update();
-		
+
 		m_Button.Update(  );
 		Math::Vect2i mousePosition;
 		InputManagerInstance->GetPosition(IDV_MOUSE, mousePosition);
@@ -115,12 +110,10 @@ void CSlider::Update()
 		}
 		else //else ( m_Button.IsClicking() )
 		{
-			m_bStart_to_Move = false;		
+			m_bStart_to_Move = false;
 		}
-
 	}//END if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
 }
-
 
 //---------------Interfaz de Slider---------------------------
 void CSlider::SetValue( float value )

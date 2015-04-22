@@ -4,7 +4,6 @@
 #include "Utils/Defines.h"
 #include <assert.h>
 
-
 using namespace luabind;
 
 void registerGUI( lua_State* aLuaState )

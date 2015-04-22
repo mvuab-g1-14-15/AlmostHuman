@@ -27,7 +27,7 @@ private:
 
 public:
 	CImage( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-					const Math::Vect2f position_percent, std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0, 
+					const Math::Vect2f position_percent, std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0,
 					bool isVisible = true, bool isActive = true);
 
 	virtual ~CImage() {/*NOTHING*/;}
@@ -36,7 +36,6 @@ public:
 	virtual void	Render									();
 	virtual void	Update									();
 	virtual void	OnClickedChild					(const std::string& name) {/*NOTHING*/;}
-
 
 	//---------------CImage Interface---------------------------
 	void					SetTexture							(CTexture* texture, std::string name );
@@ -48,8 +47,6 @@ public:
 	bool					IsQuadrant							() const {return m_bIsQuadrant;}
 	void					SetQuadrant							(bool flag) {m_bIsQuadrant = flag;}
 	void					SetBackGround						(bool flag) {m_bIsBackGround=flag;}
-
-
 
 private:
 	tTexturesMap		m_Textures;

@@ -15,7 +15,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace Math {
 namespace Utils {
-
 template  <typename T>          inline  T     Sqrt    (T _val)                  { return (T)sqrt(_val); }
 template  <typename T>          inline  T     Sin     (T _ang)                  { return (T)sin (_ang); }
 template  <typename T>          inline  T     Cos     (T _ang)                  { return (T)cos (_ang); }
@@ -98,7 +97,6 @@ inline bool IsPowerOf2(uint32 n)
     }
 }
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Comparación de magnitudes con un epsilon de margen de error
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +104,7 @@ inline bool IsPowerOf2(uint32 n)
 /// Devuelve: 1 --> A es mayor, 0 --> son iguales,  -1 --> A es menor
 template<typename TA, typename TB> inline int  Compare      (const TA& a, const TB& b, const TA epsilon = Epsilon<TA>());
 
-/// true si las magnitudes son iguales con un epsilon de margen de error 
+/// true si las magnitudes son iguales con un epsilon de margen de error
 template<typename T>               inline bool EqualEpsilon (const T a, const T b, const T epsilon = Epsilon<T>());
 
 /// true si la magnitud es cero con un epsilon de margen de tolerancia
@@ -118,12 +116,10 @@ template<typename T>               inline bool EqualRelatEpsilon (const T a, con
 /// Igual que 'ZeroEpsilon pero con un epsilon relativo a la magnitud del valor
 template<typename T>               inline bool ZeroRelatEpsilon (const T a, const T epsilon = Epsilon<T>());
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Número PI multiplicado por una magnitud
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T> inline T PiTimes (T _times = 1.f);
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Conversión de grados a radianes / radianes a grados
@@ -138,10 +134,7 @@ inline void CanonizeAngle (float32& fAngle);
 
 // Fichero con las definiciones de las funciones inline
 #include "MathUtils.inl"
-
-
 } //namespace Utils
-
 } //namespace Math
 
-#endif 
+#endif

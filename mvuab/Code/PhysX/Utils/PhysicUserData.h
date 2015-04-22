@@ -140,7 +140,6 @@ public:
     return m_eFlags;
   }
 
-
 private:
   float       m_fRadius;
   bool        m_bPaintPhysicObject;

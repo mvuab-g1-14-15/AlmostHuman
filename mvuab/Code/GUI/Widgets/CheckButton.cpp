@@ -1,5 +1,3 @@
-
-
 #include "Widgets\CheckButton.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -7,7 +5,6 @@
 #include "Logger/Logger.h"
 #include "ScriptManager.h"
 #include "EngineManagers.h"
-
 
 //---Constructor
 CCheckButton::CCheckButton(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
@@ -78,14 +75,12 @@ void CCheckButton::Render ()
 		}
 
 		//Finalmente renderizamos el texto:
-		CGuiElement::RenderText();	
-
+		CGuiElement::RenderText();
 	} //END if( CGuiElement::m_bIsVisible )
 }
 
 void CCheckButton::Update ()
 {
-
 	if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
 	{
 		//Primero actualizamos todos los hijos que pudiera tener el checkButton:
@@ -94,7 +89,7 @@ void CCheckButton::Update ()
 		Math::Vect2i mousePosition;
 		InputManagerInstance->GetPosition(IDV_MOUSE, mousePosition);
 		CGuiElement::CalculatePosMouse(mousePosition);
-		
+
 		if( CGuiElement::IsInside() )
 		{
 			if( CGuiElement::IsOver() )
@@ -140,7 +135,7 @@ void CCheckButton::SetColors (const Math::CColor& on, const Math::CColor& off, c
 
 void CCheckButton::SetOnCheckOnAction (const std::string& inAction)
 {
-	m_sLuaCode_OnCheckOn = inAction;	
+	m_sLuaCode_OnCheckOn = inAction;
 }
 
 void CCheckButton::SetOnCheckOffAction (const std::string& inAction)

@@ -63,8 +63,6 @@ private:
         bool LoadTexture    (const std::string &Filename);
         bool LoadAnimation  (const std::string &Name, const std::string &Filename);
         void LoadTextures   ();
-
-
 };
 
 #endif

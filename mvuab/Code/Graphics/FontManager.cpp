@@ -241,7 +241,6 @@ uint32 CFontManager::DrawLiteral( uint32 x, uint32 y, const std::string& s_lit )
                             s_lit.c_str() );
 }
 
-
 uint32 CFontManager::SizeX( const char* format, uint32 idFont )
 {
     va_list args;

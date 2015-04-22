@@ -20,13 +20,11 @@ class CPhysicMaterial
 {
 public:
 	//--- Init and End protocols------------------------------------------
-	CPhysicMaterial	(float restitution, float staticFriction, float dynamicFriction); 
+	CPhysicMaterial	(float restitution, float staticFriction, float dynamicFriction);
 	~CPhysicMaterial	();
-
 
 private:
   NxMaterial* m_Material;
-
 };
 
 #endif //__PHYSIC_MATERIAL_CLASS_H__

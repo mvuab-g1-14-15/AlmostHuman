@@ -2,7 +2,6 @@
 #define RENDER_DEBUG_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 
@@ -21,6 +20,5 @@ private:
   bool m_RenderLights;
   bool m_RenderPhysics;
   bool m_RenderGraph;
-
 };
 #endif

@@ -2,7 +2,6 @@
 #define SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "Utils\Name.h"
 #include "Utils\Visible.h"
 #include "XML\XMLTreeNode.h"

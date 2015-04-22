@@ -17,7 +17,7 @@ public:
     AABB(const Vector3<T>& min, const Vector3<T>& max) : MinPnt(min) , MaxPnt(max)
     {
     }
-    
+
     const AABB operator*(const Vector3<T>& s) const
     {
         MinPnt.x *= s.x;
@@ -41,13 +41,13 @@ public:
     {
         return MaxPnt.y - MinPnt.y;
     }
-    
+
     // What is the center of the smallest sphere that will enclose this AABB?
     inline Vector3<T> GetCenter() const
     {
         return (MaxPnt + MinPnt) * 0.5f;
     }
-    
+
     // What is the radius of the smallest sphere that will enclose this AABB?
     inline float32 GetRadius() const
     {
@@ -67,6 +67,5 @@ typedef AABB<float64>   AABB3d;
 typedef AABB<int32>     AABB3i;
 typedef AABB<uint32>    AABB3u;
 typedef AABB<uint16>    AABB3w;
-
 } //namespace Math
 #endif //AABB_H

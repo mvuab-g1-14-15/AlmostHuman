@@ -135,7 +135,6 @@ bool CSoundManager::PlayAction2D( const std::string& action )
     alSourcei( m_Sources[l_SourceIndex].m_uSource, AL_LOOPING, AL_FALSE );
     alSourcePlay( m_Sources[l_SourceIndex].m_uSource );
 
-
     return true;
 }
 
@@ -334,7 +333,6 @@ bool CSoundManager::GetSourcePosition( uint32 _Source, Math::Vect3f& _outPositio
 
 bool CSoundManager::SetSourceVelocity( uint32 _Source, const Math::Vect3f& _inVelocity )
 {
-
     if ( _Source < m_Sources.size() && m_Sources[_Source].m_bReserved )
     {
         ALfloat vel[3];
@@ -419,14 +417,12 @@ void CSoundManager::FadeIn( uint32 _Source, float _Time )
 
     if ( GetSourceGain( _Source, l_Gain ) )
     {
-
         while ( _Time  > 0 )
         {
             l_Gain += 0.1f;
             _Time  -= 0.2f;
             SetSourceGain( _Source, l_Gain );
         }
-
     }
     else
     { LOG_INFO_APPLICATION( "SoundManager:: FadeIn Source Failed" ); }
@@ -439,19 +435,16 @@ void CSoundManager::FadeOut( uint32 _Source, float _Time )
 
     if ( GetSourceGain( _Source, l_Gain ) )
     {
-
         while ( _Time  > 0 )
         {
             l_Gain -= 0.1f;
             _Time  -= 0.2f;
             SetSourceGain( _Source, l_Gain );
         }
-
     }
     else
     { LOG_INFO_APPLICATION( "SoundManager:: FadeIn Source Failed" ); }
 }
-
 
 //-----PRIVATE FUNCTIONS-------------------------
 bool CSoundManager::_initAL()
@@ -516,7 +509,6 @@ bool CSoundManager::_loadSound( const std::string& file, tIdBuffer& buffer )
 
     ALvoid* data;
     ALboolean loop;
-
 
     // Load wav data into buffers.
     alGenBuffers( 1, &buffer );
@@ -611,4 +603,3 @@ std::string _getALErrorString( ALenum err )
 {
     return "";
 }
-

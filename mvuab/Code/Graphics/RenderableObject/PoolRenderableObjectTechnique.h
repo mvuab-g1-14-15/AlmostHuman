@@ -9,13 +9,12 @@
 
 #include <vector>
 
-
 class CPoolRenderableObjectTechnique : public CName
 {
     public:
         CPoolRenderableObjectTechnique(CXMLTreeNode &TreeNode);
         virtual ~CPoolRenderableObjectTechnique();
-        
+
         void AddElement(const std::string &Name, const std::string &TechniqueName, CRenderableObjectTechnique *ROTOnRenderableObjectTechniqueManager);
         void Destroy();
         void Apply();
@@ -28,7 +27,7 @@ class CPoolRenderableObjectTechnique : public CName
                 CRenderableObjectTechnique *m_OnRenderableObjectTechniqueManager;
                 CPoolRenderableObjectTechniqueElement(const std::string &Name, CEffectTechnique *EffectTechnique, CRenderableObjectTechnique *OnRenderableObjectTechniqueManager);
         };
-        
+
         std::vector<CPoolRenderableObjectTechniqueElement *> m_RenderableObjectTechniqueElements;
 };
 

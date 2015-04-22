@@ -107,9 +107,6 @@ NxStream& CPhysicUserStream::storeBuffer(const void* buffer, NxU32 size)
 	return *this;
 }
 
-
-
-
 CPhysicMemoryWriteBuffer::CPhysicMemoryWriteBuffer() : currentSize(0), maxSize(0), data(NULL)
 {
 }
@@ -170,7 +167,6 @@ NxStream& CPhysicMemoryWriteBuffer::storeBuffer(const void* buffer, NxU32 size)
 	currentSize += size;
 	return *this;
 }
-
 
 CPhysicMemoryReadBuffer::CPhysicMemoryReadBuffer(const NxU8* data) : buffer(data)
 {

@@ -8,7 +8,6 @@
 class CAnimatedInstanceModel;
 class CAnimatedCoreModel;
 
-
 class CAnimatedModelsManager : public CMapManager<CAnimatedCoreModel>, public CManager
 {
 public:

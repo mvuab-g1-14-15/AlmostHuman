@@ -8,7 +8,6 @@
 static char _vFile[MEMORY_FILE_COUNT][MEMORY_FILE_LENGTH];
 static unsigned int _nFile( 0 );
 
-
 bool MemLeaks::MemoryBegin()
 {
   //Si se ponen threads hay que bloquear este acceso con un mute    x

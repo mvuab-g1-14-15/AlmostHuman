@@ -102,7 +102,6 @@ class CSoundManager : public CManager
         void    GetListenerOrientation( Math::Vect3f& outAt, Math::Vect3f& outUp );
         void    FadeIn( uint32 Source, float Time );
         void    FadeOut( uint32 _Source, float _Time );
-
 };
 
 #endif // SOUND_MANAGER_H

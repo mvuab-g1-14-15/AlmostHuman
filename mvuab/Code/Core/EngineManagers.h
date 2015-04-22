@@ -41,13 +41,13 @@ class CEngineManagers : public CTemplatedVectorMapManager<CManager>, public CSin
     public:
         CEngineManagers( const std::string& aPath );
         virtual ~CEngineManagers();
-        
+
         virtual void Update();
         virtual void Render();
-        
+
         virtual void Init();
         void Release();
-        
+
         CGraphicsManager*                   GetGraphicsManager()            const;
         CEffectManager*                     GetEffectsManager()             const;
         CInputManager*                      GetInputManager()               const;

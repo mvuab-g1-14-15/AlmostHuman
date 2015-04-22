@@ -1,6 +1,5 @@
 #include "Grenade.h"
 
-
 #include "Timer\Timer.h"
 #include "StaticMeshes\StaticMesh.h"
 #include "Actor\PhysicActor.h"
@@ -102,7 +101,6 @@ void CGrenade::Render()
     // Why render if no grenade
     if( !m_GrenadeThrown )
     { return; }
-
 
     PhysXMInstance->Render();
 

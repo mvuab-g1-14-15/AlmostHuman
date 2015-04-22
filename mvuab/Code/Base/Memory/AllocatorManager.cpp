@@ -29,5 +29,3 @@ CAllocatorManager::~CAllocatorManager()
     free(m_pLinearAllocatorMem);
     free(m_pFreeListAllocatorMem);
 }
-
-

@@ -1,7 +1,5 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 
-
-
 #include "NxPhysics.h"
 #include "Utils\PhysicUserAllocator.h"
 
@@ -12,7 +10,6 @@
 
 #define MEMBLOCKSTART 64
 static const size_t g_pointerMarker = (size_t)0xbadbad00deadbabeLL;
-
 
 CPhysicUserAllocator::CPhysicUserAllocator()
 : mNbAllocatedBytes(0)
@@ -157,7 +154,6 @@ void* CPhysicUserAllocator::mallocDEBUG(size_t size, const char* file, int line,
 	// Insert the allocated block in the debug memory block list
 	if(mMemBlockList)
 	{
-
 		mMemBlockList[mMemBlockFirstFree] = (size_t)ptr;
 		blockStart[4] = mMemBlockFirstFree;
 		mMemBlockUsed++;
@@ -303,7 +299,7 @@ void* CPhysicUserAllocator::realloc(void* memory, size_t size)
 	mNbReallocs++;
 
 	*(((size_t*)ptr2)+1) = size;
-	if(ptr == ptr2) 
+	if(ptr == ptr2)
 	{
 		UnlockAlloc();
 		return memory;
@@ -315,7 +311,6 @@ void* CPhysicUserAllocator::realloc(void* memory, size_t size)
 
 	return ((size_t*)ptr2)+2;
 #endif
-
 }
 
 void CPhysicUserAllocator::free(void* memory)
@@ -329,8 +324,6 @@ void CPhysicUserAllocator::free(void* memory)
 	LockAlloc();
 
 #ifdef _DEBUG
-
-
 
 	size_t* ptr = ((size_t*)memory)-6;
 	if(ptr[0] != g_pointerMarker)

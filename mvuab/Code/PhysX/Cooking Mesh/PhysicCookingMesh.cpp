@@ -35,7 +35,6 @@ CPhysicCookingMesh::CPhysicCookingMesh( void )
 
 bool CPhysicCookingMesh::Init( NxPhysicsSDK* _pPhysicSDK, CPhysicUserAllocator* _pMyAllocator )
 {
-
   m_pPhysicSDK  = _pPhysicSDK;
   m_pMyAllocator  = new CPhysicUserAllocator();
   assert( m_pPhysicSDK && m_pMyAllocator );
@@ -128,7 +127,6 @@ bool CPhysicCookingMesh::CreatePhysicMesh( const std::string& _Bin_Filename, con
   return isOk;
 }
 
-
 //----------------------------------------------------------------------------
 // Creating a PhysicMesh from a buffer
 //----------------------------------------------------------------------------
@@ -148,29 +146,29 @@ bool CPhysicCookingMesh::CreatePhysicMesh(std::string _NameMesh, std::vector<std
 			NxTriangleMeshDesc triangleMeshDesc;
 			triangleMeshDesc.numVertices      = ( NxU32 ) _Vertices[i].size();
 			triangleMeshDesc.numTriangles     = ( NxU32 ) _Faces[i].size() / 3;
-			
+
 			triangleMeshDesc.pointStrideBytes     = sizeof( Math::Vect3f );
 			triangleMeshDesc.triangleStrideBytes  = 3 * sizeof( uint32 );
-			
+
 			triangleMeshDesc.points         = &_Vertices[i][0].x;
 			triangleMeshDesc.triangles      = &_Faces[i][0];
 			triangleMeshDesc.flags          = 0;
-			
+
 			assert( m_pCooking ); //by if the flies...
-			
+
 			CPhysicMemoryWriteBuffer buf;
-			
+
 			if ( m_pCooking->NxCookTriangleMesh( triangleMeshDesc, buf ) )
 			{
 				NxTriangleMesh* l_TriangleMesh = NULL;
 				l_TriangleMesh = m_pPhysicSDK->createTriangleMesh( CPhysicMemoryReadBuffer(buf.data) );
-				
+
 				isOk = ( l_TriangleMesh != NULL );
 				if ( isOk ) m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
 			}
 		}
 	}
-	
+
 	return isOk;
 }
 
@@ -209,7 +207,6 @@ bool CPhysicCookingMesh::CookClothMesh( const NxClothMeshDesc& desc, NxStream& s
   isOk = m_pCooking->NxCookClothMesh( desc, stream );
   return isOk;
 }
-
 
 //----------------------------------------------------------------------------
 // Load the ASE File thought ASE Loader

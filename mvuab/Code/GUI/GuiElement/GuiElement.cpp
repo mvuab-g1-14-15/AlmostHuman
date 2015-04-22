@@ -37,7 +37,6 @@ CGuiElement::CGuiElement(   uint32 windowsHeight, uint32 windowsWidth, float hei
     m_Position.y    = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
 }
 
-
 void CGuiElement::SetWindowsWidth (uint32   w)
 {
     m_uWindowsWidth = w;
@@ -180,7 +179,6 @@ void CGuiElement::OnSaveValue( void )
     }
 }
 
-
 void CGuiElement::Render ()
 {
     if (m_bIsVisible)
@@ -209,7 +207,6 @@ void CGuiElement::RenderText ()
 
             FontInstance->DrawLiteral(posX, posY, m_sLiteral);
         }//if (m_sLiteral != "")
-
     }//if (m_bIsVisible)
 }
 

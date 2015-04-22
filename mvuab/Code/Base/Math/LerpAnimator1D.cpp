@@ -2,7 +2,6 @@
 #include "Math\MathUtils.h"
 #include <assert.h>
 
-
 void Math::CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type)
 {
     assert( totalTime > 0);
@@ -13,7 +12,6 @@ void Math::CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, floa
     m_fElapsedTime = 0.f;
     m_eFunction = type;
 }
-
 
 bool Math::CLerpAnimator1D::Update (float32 ElapsedTime, float32 &value)
 {
@@ -40,7 +38,7 @@ bool Math::CLerpAnimator1D::Update (float32 ElapsedTime, float32 &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = Math::Utils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);
         }
         break;
     case FUNC_DECREMENT:

@@ -64,7 +64,6 @@ HRESULT CKeyboard::Update(void)
     return S_OK;
 }
 
-
 /**
     Check if the given key is pressed. Use WinAPI VK_ defines here.
 */

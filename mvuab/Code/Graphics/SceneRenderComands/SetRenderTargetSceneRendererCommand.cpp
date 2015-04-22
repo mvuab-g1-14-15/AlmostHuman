@@ -1,6 +1,5 @@
 #include "SceneRenderComands\SetRenderTargetSceneRendererCommand.h"
 
-
 CSetRenderTargetSceneRendererCommand::CSetRenderTargetSceneRendererCommand( CXMLTreeNode& atts )
   : CStagedTexturedRendererCommand( atts )
 {

@@ -34,7 +34,7 @@ public:
   void              SetTransformAfterUpdate(const Mat44f& _mTransform);
   CBoundingBox      ComputeBoundingBox();
 
-  bool              IsRagdollActive()                     {return m_bRagdollActive;};  
+  bool              IsRagdollActive()                     {return m_bRagdollActive;};
   //void              ActivateRagdoll()                     {m_bRagdollActive = true;};
   //void              ActivateCal3d()                       {m_bRagdollActive = false;};
   void              SetRagdollActive(bool _bRagdollActive);
@@ -48,7 +48,6 @@ public:
   void              SetContactReportThreshold(float _fThreshold);
 
   void Update();
-
 
 private:
   //Funcions per inicialitzar el esquelet corresponent
@@ -75,5 +74,4 @@ private:
   CObject3D*							m_pEntity;
 };
 
-#endif 
-
+#endif

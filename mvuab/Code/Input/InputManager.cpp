@@ -8,7 +8,6 @@
 
 #include <string>
 
-
 CInputManager::CInputManager( CXMLTreeNode &atts)
     : CManager(atts)
 {
@@ -42,7 +41,6 @@ void CInputManager::Release ()
 
     LOG_INFO_APPLICATION("InputManager:: offline (ok)");
 }
-
 
 //----------------------------------------------------------------------------
 // Initializes at least keyboard and mouse, otherwise returns error.
@@ -86,7 +84,6 @@ void CInputManager::Init ()
                     LOG_INFO_APPLICATION("InputManager:: GamePad is not connected");
                 }
             }
-
         }
     }
 
@@ -100,15 +97,12 @@ void CInputManager::Init ()
     //return m_bIsOk;
 }
 
-
-
 //----------------------------------------------------------------------------
 // Query if a Joystick is active and ready or not. Also returns
 // Joytsicks name if any was found.
 //----------------------------------------------------------------------------
 bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
 {
-
     switch (device)
     {
         case IDV_GAMEPAD1:
@@ -127,8 +121,6 @@ bool CInputManager::HasGamePad (INPUT_DEVICE_TYPE device) const
             return false;
     }
 }
-
-
 
 //----------------------------------------------------------------------------
 // Update all input devices
@@ -193,7 +185,6 @@ HRESULT CInputManager::GetPosition( INPUT_DEVICE_TYPE idType, Math::Vect2i& pos)
             return E_FAIL;
     }
 }
-
 
 //----------------------------------------------------------------------------
 // If GamePad return current intensity on axes.
@@ -307,7 +298,6 @@ const Math::Vect3i& CInputManager::GetMouseDelta(void)
     return m_pMouse->GetMouseDelta();
 }
 
-
 //----------------------------------------------------------------------------
 // Ask about button state.
 //----------------------------------------------------------------------------
@@ -404,7 +394,6 @@ bool CInputManager::IsUpDown(INPUT_DEVICE_TYPE idType, uint32 nBtn)
     return result;
 }
 
-
 int32 CInputManager::Scan2ascii (uint32 scancode, uint16* result)
 {
     static HKL layout = GetKeyboardLayout(0);
@@ -415,7 +404,6 @@ int32 CInputManager::Scan2ascii (uint32 scancode, uint16* result)
     uint32 vk = MapVirtualKeyEx(scancode, 1, layout);
     return ToAsciiEx(vk, scancode, State, result, 0, layout);
 }
-
 
 //----------------------------------------------------------------------------
 // LUA BIND

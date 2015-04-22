@@ -25,7 +25,6 @@
     #include "Memory\MemLeaks.h"
 #endif
 
-
 #define APPLICATION_NAME    "ALMOST HUMAN"
 
 void ShowErrorMessage( const std::string& message )
@@ -42,7 +41,6 @@ void ShowErrorMessage( const std::string& message )
     MessageBox( 0, end_message.c_str(), "FlostiProject Report",
                 MB_OK | MB_ICONERROR );
 }
-
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()

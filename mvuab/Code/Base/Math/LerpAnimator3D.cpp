@@ -2,7 +2,6 @@
 #include "Utils\Defines.h"
 #include <cmath>
 
-
 void Math::CLerpAnimator3D::SetValues (Math::Vect3f initValue, Math::Vect3f endValue, float32 totalTime, ETypeFunction type)
 {
     assert( totalTime > 0);
@@ -13,7 +12,6 @@ void Math::CLerpAnimator3D::SetValues (Math::Vect3f initValue, Math::Vect3f endV
     m_fElapsedTime    = 0.f;
     m_eFunction            = type;
 }
-
 
 bool Math::CLerpAnimator3D::Update (float32 ElapsedTime, Math::Vect3f &value)
 {
@@ -40,7 +38,7 @@ bool Math::CLerpAnimator3D::Update (float32 ElapsedTime, Math::Vect3f &value)
         break;
     case FUNC_INCREMENT:
         {
-            mu = Math::Utils::PowN(mu,m_uDegree);            
+            mu = Math::Utils::PowN(mu,m_uDegree);
         }
         break;
     case FUNC_DECREMENT:
@@ -49,8 +47,8 @@ bool Math::CLerpAnimator3D::Update (float32 ElapsedTime, Math::Vect3f &value)
         }
         break;
     }
-    
+
     value = m_vInitValue.GetLerp(m_vEndValue,mu);
-    
+
     return finish;
 }

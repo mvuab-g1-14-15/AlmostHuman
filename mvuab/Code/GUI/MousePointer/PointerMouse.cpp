@@ -1,12 +1,9 @@
-
-
 #include "MousePointer\PointerMouse.h"
 #include "Texture/Texture.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "EngineManagers.h"
 #include "Timer\Timer.h"
-
 
 //---Constructor
 CPointerMouse::CPointerMouse(   uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
@@ -21,7 +18,6 @@ CPointerMouse::CPointerMouse(   uint32 windowsHeight, uint32 windowsWidth, float
     , m_Alignment(CGraphicsManager::CENTER)
     , m_bIsQuadrant(false)
 {}
-
 
 //---------------CGuiElement Interface----------------------
 void CPointerMouse::Render ()
@@ -69,16 +65,12 @@ void CPointerMouse::Update ()
                 m_fCounter = 0.f;
             }
         }//END if (m_bAnimated)
-
     }//END if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
 }
 
 //---------------CImage Interface----------------------
 
-
 void CPointerMouse::SetTexture (CTexture* texture, std::string name )
 {
     m_Textures.insert( std::pair<std::string, CTexture*>(name, texture) );
 }
-
-

@@ -2,7 +2,6 @@
 #define REMDERABLE_OBJECT_TECHNIQUES_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "RenderableObject\PoolRenderableObjectTechnique.h"
 #include <string>

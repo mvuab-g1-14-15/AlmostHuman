@@ -9,13 +9,10 @@
 #ifndef INC_PHYSIC_STREAM_H
 #define INC_PHYSIC_STREAM_H
 
-
-
 #include "NxStream.h"
 
 class CPhysicUserStream : public NxStream
 {
-
 public:
 
 	CPhysicUserStream(const char* filename, bool load);
@@ -38,11 +35,8 @@ public:
 	FILE*			fp;
 };
 
-
-
 class CPhysicMemoryWriteBuffer : public NxStream
 {
-
 public:
 	CPhysicMemoryWriteBuffer();
 	virtual	~CPhysicMemoryWriteBuffer();
@@ -69,7 +63,6 @@ public:
 
 class CPhysicMemoryReadBuffer : public NxStream
 {
-
 public:
 	CPhysicMemoryReadBuffer(const NxU8* data);
 	virtual	~CPhysicMemoryReadBuffer();

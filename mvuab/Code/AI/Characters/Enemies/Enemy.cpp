@@ -33,7 +33,6 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-
     if ( GetLife() <= 0 )
     {
         CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );

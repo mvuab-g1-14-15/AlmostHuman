@@ -103,6 +103,5 @@ extern const Math::CColor colMAGENTA;
 extern const Math::CColor colYELLOW;
 extern const Math::CColor colCYAN;
 extern const Math::CColor colORANGE;
-
 } // namespace Math
 #endif

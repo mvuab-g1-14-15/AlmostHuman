@@ -36,7 +36,7 @@
 ///           `-----------------> eje x del sistema de referencia en coordenadas del padre
 ///
 ///         En memoria los datos están contiguos por columnas:
-///                m00 m10 m20 / m01 m11 m21 / m02 m12 m22 / m03 m13 m23 
+///                m00 m10 m20 / m01 m11 m21 / m02 m12 m22 / m03 m13 m23
 /// \endverbatim
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,8 +81,6 @@ public:
                    const Vector3<T>& pos);
   inline Matrix34 (const T angleY, const T angleX, const T angleZ);
 
- 
-
   // Reseteos parciales (traslación/rotación/escalado) y totales (a identidad, a cero)
   inline Matrix34<T>& ResetTranslation   ();
   inline Matrix34<T>& ResetRotation      ();
@@ -90,7 +88,6 @@ public:
   inline Matrix34<T>& ResetRotationScale ();
   inline Matrix34<T>& SetIdentity        ();
   inline Matrix34<T>& SetZero            ();
-
 
   // Establecimiento de datos de la matriz con reseteo previo a identidad
   inline Matrix34<T>& SetFromBasis       (const Vector3<T>& ejeX,
@@ -114,7 +111,6 @@ public:
   inline Matrix34<T>& SetFromLookAt    (const Vector3<T>& vPos, const Vector3<T>& vTarget);
 //  inline Matrix34<T>& SetFromQuatPos   (const Quatn<T>& quat, const Vector3<T>& vPos);
 
-
   // Modificación de una de las partes de la matriz (rotación/traslación/escalado) dejando invariable las otras
   inline Matrix34<T>& SetRotByAngleX    (const T angleX);
   inline Matrix34<T>& SetRotByAngleY    (const T angleY);
@@ -133,8 +129,7 @@ public:
 
   inline Matrix34<T>& SetSubMatrix33 (const Matrix33<T>& mat_sub);
 
-
-  // Acceso  
+  // Acceso
   inline Vector3<T>                 GetVectorBasis           (int i) const;
     inline T                                 GetVectorBasisLength    (int i) const;
   inline Vector3<T>                 GetPosBasis              () const;
@@ -178,18 +173,16 @@ public:
          Matrix34<T>& SetFromPitchRollYaw (const Vector3<T>& v3PitchRollYaw);
   inline Matrix34<T>& SetPitchRollYaw     (const Vector3<T>& v3PitchRollYaw);
 
-
   // Operadores de aritmética de matrices
   Matrix34<T>        operator + (const Matrix34<T>& otra) const;
-  Matrix34<T>        operator - (const Matrix34<T>& otra) const; 
+  Matrix34<T>        operator - (const Matrix34<T>& otra) const;
   Matrix34<T>        operator * (const Matrix34<T>& otra) const;
   Matrix34<T>        operator * (const T escalar) const;
   friend Matrix34<T> operator * (const T escalar, const Matrix34<T>& mat);
   Matrix34<T>        operator / (const T escalar) const;
   Vector3<T>         operator * (const Vector3<T>& vector) const;
   Vector3<T>         operator ^ (const Vector3<T>& vector) const;
-  
-  
+
   // Operadores aritméticos de actualización
   Matrix34<T>& operator += (const Matrix34<T>& otra);
   Matrix34<T>& operator -= (const Matrix34<T>& otra);
@@ -197,13 +190,11 @@ public:
   Matrix34<T>& operator *= (const T escalar);
   Matrix34<T>& operator /= (const T escalar);
 
-
   // Operadores de comparación
   inline bool operator ==       (const Matrix34<T>& otra) const;
   inline bool operator !=       (const Matrix34<T>& otra) const;
   inline bool IsEqualEpsilon    (const Matrix34<T>& otra, const T Epsilo = Epsilon<T>()) const; //TODO CW quito la n para que no sea igual
   inline bool IsNotEqualEpsilon (const Matrix34<T>& otra, const T Epsilo = Epsilon<T>()) const; //TODO CW quito la n para que no sea igual
-
 
   // Funciones de transformación de vectores / puntos
   inline void       TransformVector       (Vector3<T>& vector) const;
@@ -212,7 +203,6 @@ public:
   inline Vector3<T> GetTransformPoint     (const Vector3<T>& vector) const;
   void              TransformArrayVectors (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
   void              TransformArrayPoints  (int iElements, Vector3<T>* pVecOUT, Vector3<T>* pVecIN) const;
-
 
   // Operaciones especiales con matrices
   // [const]
@@ -245,7 +235,6 @@ public:
 
   // [const modificando el parámetro]
   void GetInvertedTR (Matrix34<T>& retMat) const;
-  
 
   // Acceso/determinación a/de propiedades matriciales
   inline T Determinant          () const;
@@ -253,13 +242,11 @@ public:
   bool     IsOrthonormalEpsilon () const;
 
 private:
-  
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Fichero con las definiciones de las funciones inline
 #include "Matrix34.inl"
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// TIPOS DE MATRICES [3x4] CON TIPOS CONCRETOS DE DATOS
@@ -280,7 +267,6 @@ extern const Mat34f  m34fONES;
 extern const Mat34d  m34dIDENTITY;
 extern const Mat34d  m34dZERO;
 extern const Mat34d  m34dONES;
-
 } // Namespace Math
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

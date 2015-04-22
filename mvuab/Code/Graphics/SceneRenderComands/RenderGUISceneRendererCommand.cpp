@@ -6,12 +6,10 @@ CRenderGUISceneRendererCommand::CRenderGUISceneRendererCommand(CXMLTreeNode &att
     : CSceneRendererCommand(atts)
     , m_RenderGui( atts.GetBoolProperty("render", false) )
 {
-
 }
 
 CRenderGUISceneRendererCommand::~CRenderGUISceneRendererCommand()
 {
-    
 }
 
 void CRenderGUISceneRendererCommand::Execute(CGraphicsManager &GM)

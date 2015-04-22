@@ -7,7 +7,6 @@
 #include "Cameras\Camera.h"
 #include "Cameras\CameraManager.h"
 
-
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
 {

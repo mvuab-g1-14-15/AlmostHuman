@@ -7,7 +7,6 @@
 
 #include <vector>
 
-
 class CTestProcess : public CProcess
 {
 private:

@@ -50,10 +50,7 @@ void CPhysicSphericalJoint::SetInfo (const Math::Vect3f& anchor, CPhysicActor* a
         m_pSphericalDesc->actor[1] = NULL;
     }
 
-
     m_pSphericalDesc->setGlobalAnchor(pos);
-
-
 
 }
 
@@ -79,8 +76,6 @@ void CPhysicSphericalJoint::SetInfoComplete (const Math::Vect3f& anchor, const M
     {
         m_pSphericalDesc->actor[1] = NULL;
     }
-
-
 
     //LIMITS PELS TWIST!!!!!!! (gir de munyeca)
     m_pSphericalDesc->flags |= NX_SJF_TWIST_LIMIT_ENABLED;
@@ -115,10 +110,7 @@ void CPhysicSphericalJoint::SetInfoComplete (const Math::Vect3f& anchor, const M
 
     m_pSphericalDesc->setGlobalAnchor(pos);
     m_pSphericalDesc->setGlobalAxis(axis);
-
-
 }
-
 
 void CPhysicSphericalJoint::SetInfoRagdoll  (SSphericalLimitInfo _sInfo, CPhysicActor* actorA,  CPhysicActor* actorB)
 {
@@ -143,8 +135,6 @@ void CPhysicSphericalJoint::SetInfoRagdoll  (SSphericalLimitInfo _sInfo, CPhysic
         m_pSphericalDesc->actor[1] = NULL;
     }
 
-
-
     //LIMITS PELS TWIST!!!!!!! (gir de munyeca)
     if (_sInfo.TwistLimit)
     {
@@ -156,7 +146,6 @@ void CPhysicSphericalJoint::SetInfoRagdoll  (SSphericalLimitInfo _sInfo, CPhysic
 
         m_pSphericalDesc->twistLimit.low.hardness = 0.5f;
         m_pSphericalDesc->twistLimit.high.hardness = 0.5f;
-
     }
 
     //Es pot push pero al retornar, com mes petit es el valor, menys espai recorre.
@@ -203,5 +192,4 @@ void CPhysicSphericalJoint::SetInfoRagdoll  (SSphericalLimitInfo _sInfo, CPhysic
 
     m_pSphericalDesc->setGlobalAnchor(pos);
     m_pSphericalDesc->setGlobalAxis(axis);
-
 }

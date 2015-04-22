@@ -11,7 +11,7 @@ CAnimatedModelsManager::CAnimatedModelsManager()
     CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
 }
 
-CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts) 
+CAnimatedModelsManager::CAnimatedModelsManager(CXMLTreeNode& atts)
     : CManager(atts)
 {
     CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
@@ -50,7 +50,7 @@ CAnimatedInstanceModel * CAnimatedModelsManager::GetInstance(const std::string &
 }
 
 void CAnimatedModelsManager::Init()
-{    
+{
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(mConfigPath.c_str()))
     {

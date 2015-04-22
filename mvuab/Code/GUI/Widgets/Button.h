@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-// A button is typically used when you want an immediate action to occur when the user presses the button. 
+// A button is typically used when you want an immediate action to occur when the user presses the button.
 // An example might be a button to quit the application.
 //----------------------------------------------------------------------------------
 #pragma once
@@ -20,9 +20,8 @@ class CTexture;
 
 class CButton: public CGuiElement
 {
-
 private:
-	
+
 	typedef enum EButtonState { BS_NORMAL, BS_OVER, BS_CLICKED };
 
 public:
@@ -30,7 +29,7 @@ public:
 	CButton(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
 						const Math::Vect2f position_percent, std::string lit="", uint32 textHeightOffset=0,
 						uint32 textWidthOffsetbool=0, bool isVisible = true, bool isActive = true);
-	
+
 	virtual ~CButton() {/*NOTHING*/;}
 
 	//---------------CGuiElement Interface----------------------
@@ -51,7 +50,7 @@ public:
 private:
 	EButtonState	m_eState;
 	std::string		m_sLuaCode_OnClicked;
-	std::string		m_sLuaCode_OnOver;	
+	std::string		m_sLuaCode_OnOver;
 	CTexture*			m_pNormalTexture;
 	CTexture*			m_pOverTexture;
 	CTexture*			m_pClickedTexture;

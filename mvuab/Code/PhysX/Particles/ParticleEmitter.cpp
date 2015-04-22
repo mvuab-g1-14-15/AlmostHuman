@@ -13,7 +13,6 @@ CParticleEmitter::CParticleEmitter()
 	m_RandMin = 0.0f;
     m_RandMax = 0.0f;
 
-
     m_Position = Math::Vect3f( 0.0f, 0.0f, 0.0f );
     m_Direction = Math::Vect3f( 0.0f, 0.0f, 0.0f );
     m_Velocity = Math::Vect3f( 0.0f, 0.0f, 0.0f );

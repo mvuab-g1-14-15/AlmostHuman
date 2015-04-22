@@ -42,7 +42,6 @@
 #include <sstream>
 #include "Utils\ObjectFactory.h"
 
-
 CSceneRendererCommandManager::CSceneRendererCommandManager()
     : CManager()
 {
@@ -152,7 +151,6 @@ void CSceneRendererCommandManager::Init()
         const std::string& lMsgError = "Error reading the file " + mConfigPath;
         FATAL_ERROR( lMsgError.c_str() );
     }
-
 
     CXMLTreeNode  TreeNode = l_File["scene_renderer_commands"];
 

@@ -6,7 +6,6 @@
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
-
 using namespace luabind;
 
 void registerAI(lua_State *m_LS);

@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-// Clase 
+// Clase
 //----------------------------------------------------------------------------------
 #pragma once
 #ifndef INC_FRUSTUM_H_
@@ -12,7 +12,7 @@
 #include <d3dx9math.h>
 #include "Math/Vector3.h"
 
-class CFrustum 
+class CFrustum
 {
 public:
     void    Update( const D3DXMATRIX &viewproj );

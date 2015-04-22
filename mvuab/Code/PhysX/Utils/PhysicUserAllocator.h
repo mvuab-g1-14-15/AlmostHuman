@@ -53,7 +53,6 @@ public:
 	void		LockAlloc		(){}
 	void		UnlockAlloc		(){}
 #endif
-
 };
 
 #endif //INC_PHYSIC_USERA_ALLOCATOR_H

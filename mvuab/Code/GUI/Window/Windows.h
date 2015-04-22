@@ -39,7 +39,6 @@ class CStaticText;
 
 class CWindows
 {
-
 public:
 	CWindows(): m_sLuaCode_OnKeyDown (""), m_uInputKeyDown(0), m_sLuaCode_OnUpdateWindows(""), m_sWindowsName(""),
 							m_sLuaCode_OnLoadWindows(""), m_sLuaCode_OnSaveWindows("") {}
@@ -58,7 +57,7 @@ public:
 	void	SaveWindows					();
 
 private:
-	void	IsKeyDown						();	
+	void	IsKeyDown						();
 
 	CButton*			LoadButton					( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
 	CCheckButton*		LoadCheckButton			( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);

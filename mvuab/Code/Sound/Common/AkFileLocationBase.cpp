@@ -27,7 +27,6 @@
 
 #include "AkFileHelpers.h"
 
-
 #define MAX_NUMBER_STRING_SIZE      (10)    // 4G
 #define ID_TO_STRING_FORMAT_BANK    AKTEXT("%u.bnk")
 #define ID_TO_STRING_FORMAT_WEM     AKTEXT("%u.wem")
@@ -39,7 +38,6 @@ const TYPE& AkTemplMax( const TYPE& in_left, const TYPE& in_right )
 {
   return ( in_left < in_right ) ? in_right : in_left;
 }
-
 
 CAkFileLocationBase::CAkFileLocationBase()
 {
@@ -121,7 +119,6 @@ AKRESULT CAkFileLocationBase::GetFullFilePath(
     // you should modify this section to handle your FileIDs properly.
     /*if (in_pFlags->uCompanyID == AKCOMPANYID_AUDIOKINETIC_EXTERNAL)
     {
-
     }*/
 
     // Add language directory name if needed.
@@ -221,7 +218,6 @@ AKRESULT CAkFileLocationBase::GetFullFilePath(
   // you should modify this section to handle your FileIDs properly.
   /*if (in_pFlags->uCompanyID == AKCOMPANYID_AUDIOKINETIC_EXTERNAL)
   {
-
   }*/
 
   // Add language directory name if needed.
@@ -305,4 +301,3 @@ AKRESULT CAkFileLocationBase::SetAudioSrcPath(
   AKPLATFORM::SafeStrCpy( m_szAudioSrcPath, in_pszAudioSrcPath, AK_MAX_PATH );
   return AK_Success;
 }
-

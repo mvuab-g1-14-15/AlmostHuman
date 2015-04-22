@@ -6,7 +6,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Constructor versión 1
-/// Construcción sin inicialización de parámetros  
+/// Construcción sin inicialización de parámetros
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix33<T>::Matrix33()
@@ -58,13 +58,13 @@ inline Matrix33<T>::Matrix33 (const Vector3<T>& ejeX,
 template<typename T>
 inline Matrix33<T>::Matrix33 (const T angleY, const T angleX, const T angleZ)
 {
-  SetFromAnglesYXZ(angleY, angleX, angleZ); 
+  SetFromAnglesYXZ(angleY, angleX, angleZ);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Elimina la rotación de la matriz, considerándola como una transformación
 /// afín ROTACION + ESCALADO. El escalado se mantiene invariable
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline Matrix33<T>& Matrix33<T>::ResetRotation ()
 {
@@ -100,7 +100,7 @@ inline Matrix33<T>& Matrix33<T>::ResetScale ()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Cambia los datos de la matriz por los de una 'matriz identidad'
-/// \verbatim  
+/// \verbatim
 ///   | 1 0 0 |
 ///   | 0 1 0 |
 ///   | 0 0 1 |
@@ -282,7 +282,7 @@ inline Matrix33<T>& Matrix33<T>::SetFromAnglesXZ (const T angleX, const T angleZ
 ///   | sen z    cos z    0 | * | 0    cos x   -sen x  | = | sen z     cos z * cos x    -cos z * sen x |
 ///   | 0        0        1 |   | 0    sen x    cos x  |   |  0        sen x             cos x         |
 ///
-///   | cos z  -sen z * cos x   sen z * sen x |   |  cos y    0     sin y  |   | cz*cy - sz*sx*sy    -sz*cx    cz*sy + sz*sx*cy |  
+///   | cos z  -sen z * cos x   sen z * sen x |   |  cos y    0     sin y  |   | cz*cy - sz*sx*sy    -sz*cx    cz*sy + sz*sx*cy |
 ///   | sen z   cos z * cos x  -cos z * sen x | * |  0        1     0      | = | sz*cy + cz*sx*sy     cz*cx    sz*sy - cz*sx*cy |
 ///   |  0      sen x           cos x         |   | -sin y    0     cos y  |   | -cx*sy                sx      cx*cy            |
 /// \endverbatim
@@ -368,7 +368,7 @@ inline Matrix33<T>& Matrix33<T>::SetFromLookAt (const Vector3<T>& vPos, const Ve
   Vector3<T> vRight_eje_X = vUp ^ vLookAt_eje_Z;
   vRight_eje_X.Normalize();
   Vector3<T> vUP_eje_Y = vLookAt_eje_Z ^ vRight_eje_X;
-  
+
   SetFromBasis(vRight_eje_X, vUP_eje_Y, vLookAt_eje_Z);
   return (*this);
 }
@@ -779,7 +779,6 @@ inline T Matrix33<T>::GetVectorBasisLength (int i) const
 #else
     return (*((Vector3<T>*)this + i)).Length();
 #endif
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -922,7 +921,7 @@ void Matrix33<T>::GetAnglesYXZ(T& angleY, T& angleX, T& angleZ) const
 {
   angleY = Math::Utils::ATan2(-m20, m22);
   angleX = Math::Utils::ASin(m21);
-  angleZ = Math::Utils::ATan2(-m01, m11); 
+  angleZ = Math::Utils::ATan2(-m01, m11);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -955,7 +954,7 @@ T Matrix33<T>::GetAngleY() const
 template<typename T>
 T Matrix33<T>::GetAngleZ() const
 {
-  return Math::Utils::ATan2(-m01, m11); 
+  return Math::Utils::ATan2(-m01, m11);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1032,21 +1031,21 @@ Vector3<T> Matrix33<T>::GetPitchRollYaw () const
 /// Las matrices de rotación con el ángulo de parámetro se encadenan al revés:
 ///  (-Y)(-Z)(X)
 /// \verbatim
-/// |  cos (-y)  0   sin (-y) |   | cos (-z)  -sen (-z) 0 |   | 1    0        0      |   
+/// |  cos (-y)  0   sin (-y) |   | cos (-z)  -sen (-z) 0 |   | 1    0        0      |
 /// |  0         1   0        | * | sen (-z)   cos (-z) 0 | * | 0    cos x   -sen x  | =
-/// | -sin (-y)  0   cos (-y) |   | 0          0        1 |   | 0    sen x    cos x  |   
+/// | -sin (-y)  0   cos (-y) |   | 0          0        1 |   | 0    sen x    cos x  |
 ///
-/// | cos y   0  -sin y |   |  cos z   sen z   0 |   | 1    0        0      |   
+/// | cos y   0  -sin y |   |  cos z   sen z   0 |   | 1    0        0      |
 /// | 0       1   0     | * | -sen z   cos z   0 | * | 0    cos x   -sen x  |  =
-/// | sin y   0   cos y |   |  0       0       1 |   | 0    sen x    cos x  |   
+/// | sin y   0   cos y |   |  0       0       1 |   | 0    sen x    cos x  |
 ///
 /// | cy*cz   cy*sz  -sy |   | 1  0    0  |
-/// | -sz      cz     0  | * | 0  cx  -sx | = 
+/// | -sz      cz     0  | * | 0  cx  -sx | =
 /// | sy*cz   sy*sz  cy  |   | 0  sx   cx |
 ///
 /// | cy*cz    cy*sz*cx - sy*sx     -cy*sz*sx - sy*cx  |
 /// |  -sz      cz*cx                  -cz*sx          |
-/// | sy*cz    sy*sz*cx + cy*sx     -sy*sz*sx + cy*cx  | 
+/// | sy*cz    sy*sz*cx + cy*sx     -sy*sz*sx + cy*cx  |
 /// \endverbatim
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
@@ -1073,7 +1072,6 @@ Matrix33<T> Matrix33<T>::operator + (const Matrix33<T>& otra) const
   return Matrix33<T>(m00 + otra.m00, m01 + otra.m01, m02 + otra.m02,
                      m10 + otra.m10, m11 + otra.m11, m12 + otra.m12,
                      m20 + otra.m20, m21 + otra.m21, m22 + otra.m22);
-                      
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1112,7 +1110,7 @@ Matrix33<T> Matrix33<T>::operator * (const Matrix33<T>& otra) const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Operador aritmético: producto matriz x escalar 
+/// Operador aritmético: producto matriz x escalar
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix33<T> Matrix33<T>::operator * (const T escalar) const
@@ -1130,7 +1128,7 @@ Matrix33<T> operator * (const T escalar, const Matrix33<T>& mat)
 {
   return (Matrix33<T>(mat.m00 * escalar, mat.m01 * escalar, mat.m02 * escalar,
                       mat.m10 * escalar, mat.m11 * escalar, mat.m12 * escalar,
-                      mat.m20 * escalar, mat.m21 * escalar, mat.m22 * escalar)); 
+                      mat.m20 * escalar, mat.m21 * escalar, mat.m22 * escalar));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1189,7 +1187,7 @@ Matrix33<T>& Matrix33<T>::operator += (const Matrix33<T>& otra)
   m00 += otra.m00; m01 += otra.m01; m02 += otra.m02;
   m10 += otra.m10; m11 += otra.m11; m12 += otra.m12;
   m20 += otra.m20; m21 += otra.m21; m22 += otra.m22;
-  
+
   return (*this);
 }
 
@@ -1202,7 +1200,7 @@ Matrix33<T>& Matrix33<T>::operator -= (const Matrix33<T>& otra)
   m00 -= otra.m00; m01 -= otra.m01; m02 -= otra.m02;
   m10 -= otra.m10; m11 -= otra.m11; m12 -= otra.m12;
   m20 -= otra.m20; m21 -= otra.m21; m22 -= otra.m22;
-  
+
   return (*this);
 }
 
@@ -1257,7 +1255,7 @@ Matrix33<T>& Matrix33<T>::operator /= (const T escalar)
   m20 *= inv_escalar;  m21 *= inv_escalar;  m22 *= inv_escalar;
   //---------------------------------------------------------------------------->>>
 #endif
- 
+
   return (*this);
 }
 
@@ -1292,7 +1290,7 @@ inline bool Matrix33<T>::IsEqualEpsilon (const Matrix33<T>& otra, const T Epsilo
     {
       bIgual = false;
       break;
-    }   
+    }
   }
 
   return bIgual;
@@ -1360,7 +1358,7 @@ Matrix33<T> Matrix33<T>::GetInverted () const
   }
   //----------------------------------------------------------------------->>>
 #else
-  //-----------------------------------------------------------------------<<<  
+  //-----------------------------------------------------------------------<<<
   // Sin chequeo
   inv_det /= determinante;
   //----------------------------------------------------------------------->>>
@@ -1498,7 +1496,7 @@ Matrix33<T> Matrix33<T>::GetRotedByAngleX (const T angleX) const
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Versión no const que modifica la matriz
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template<typename T> 
+template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAngleX (const T angleX)
 {
     Vector2<T> v;
@@ -1577,7 +1575,7 @@ Matrix33<T>& Matrix33<T>::RotByAngleY (const T angleY)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix33<T> Matrix33<T>::GetRotedByAngleZ (const T angleZ) const
-{ 
+{
   return Matrix33<T>(*this).RotByAngleZ(angleZ);
 }
 
@@ -1609,7 +1607,7 @@ Matrix33<T>& Matrix33<T>::RotByAngleZ (const T angleZ)
     v.Rotate(angleZ);
     m02 = v.x;
     m12 = v.y;
-  
+
   return (*this);
 }
 
@@ -1618,7 +1616,7 @@ Matrix33<T>& Matrix33<T>::RotByAngleZ (const T angleZ)
 /// luego de 'AngleZ' radianes alrededor del eje Z, del sistema de referencia del padre
 /// (versión const que devuelve una matriz copia)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template<typename T> 
+template<typename T>
 Matrix33<T> Matrix33<T>::GetRotedByAnglesXZ (const T angleX, const T angleZ) const
 {
   return Matrix33<T>(*this).RotByAnglesXZ(angleX, angleZ);
@@ -1691,7 +1689,7 @@ Matrix33<T>& Matrix33<T>::RotByAnglesXZ (const T angleX, const T angleZ)
 /// alrededor del eje Z, del sistema de referencia del padre
 /// (versión const que devuelve una matriz copia)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template<typename T> 
+template<typename T>
 Matrix33<T> Matrix33<T>::GetRotedByAnglesYXZ (const T angleY, const T angleX, const T angleZ) const
 {
   return Matrix33<T>(*this).RotByAnglesYXZ(angleY, angleX, angleZ);
@@ -1702,7 +1700,7 @@ Matrix33<T> Matrix33<T>::GetRotedByAnglesYXZ (const T angleY, const T angleX, co
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 Matrix33<T>& Matrix33<T>::RotByAnglesYXZ (const T angleY, const T angleX, const T angleZ)
-{    
+{
     Vector2<T> v;
 
     ////////////
@@ -1791,7 +1789,7 @@ Matrix33<T>& Matrix33<T>::RotByAnglesYXZ (const T angleY, const T angleX, const 
 template<typename T>
 Matrix33<T> Matrix33<T>::GetScaled (const T escala_x, const T escala_y, const T escala_z) const
 {
-  return Matrix33<T>(*this).Scale(escala_x, escala_y, escala_z);  
+  return Matrix33<T>(*this).Scale(escala_x, escala_y, escala_z);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1877,8 +1875,8 @@ Matrix33<T>& Matrix33<T>::AlignXZ (const Vector3<T>& vX, const Vector3<T>& vZ)
 /// Calcula el determinante de la matriz. Para una matriz 3x3 es un escalar definido como:
 /// \verbatim
 ///   | m00 m01 m02 |
-///   | m10 m11 m12 | = m00*m11*m22 + m10*m21*m02 + m01*m12*m20 - m02*m11*m20 - m01*m10*m22 - m12*m21*m00 = 
-///   | m20 m21 m22 |   
+///   | m10 m11 m12 | = m00*m11*m22 + m10*m21*m02 + m01*m12*m20 - m02*m11*m20 - m01*m10*m22 - m12*m21*m00 =
+///   | m20 m21 m22 |
 ///                     m00*(m11*m22 - m12*21) - m01*(m10*m22 - m12*m20) + m02*(m10*m21 - m11*m20)
 ///
 /// Coste: [9 productos y 5 sumas]
@@ -1912,20 +1910,20 @@ template<typename T>
 bool Matrix33<T>::IsOrthonormalEpsilon () const
 {
   return(IsOrthogonalEpsilon() &&
-         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) && 
-         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) && 
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(0).SquaredLength(), One<T>()) &&
+         Math::Utils::EqualEpsilon<T>(GetVectorBasis(1).SquaredLength(), One<T>()) &&
          Math::Utils::EqualEpsilon<T>(GetVectorBasis(2).SquaredLength(), One<T>()));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Transformación del vector pasado en el parámetro. Equivalente al producto de matriz x vector 3D.
 /// Equivalente a produto de matrices [3 3]x[3 1]. Equivalente a una transformación de ROTACION.
-/// [ver notas en el operador '*', producto por vector]                     
+/// [ver notas en el operador '*', producto por vector]
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 inline void Matrix33<T>::TransformVector (Vector3<T>& vector) const
 {
-  vector = (*this) * vector; 
+  vector = (*this) * vector;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

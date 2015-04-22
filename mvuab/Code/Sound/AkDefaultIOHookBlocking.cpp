@@ -33,7 +33,6 @@
 #include "AkDefaultIOHookBlocking.h"
 #include "AkFileHelpers.h"
 
-
 #define WIN32_BLOCKING_DEVICE_NAME		(AKTEXT("Win32 Blocking"))	// Default blocking device name.
 
 CAkDefaultIOHookBlocking::CAkDefaultIOHookBlocking()
@@ -267,7 +266,6 @@ AkUInt32 CAkDefaultIOHookBlocking::GetBlockSize(
   // No constraint on block size (file seeking).
   return 1;
 }
-
 
 // Returns a description for the streaming device above this low-level hook.
 void CAkDefaultIOHookBlocking::GetDeviceDesc(

@@ -18,7 +18,6 @@ class CalSkeleton;
 //class CGameEntity;
 class CObject3D;
 
-
 class CPhysxBone :
   public CName//,
   //public CBaseControl
@@ -44,8 +43,7 @@ public:
   void                SetParent(CPhysxBone* _pParent)        {m_pParent = _pParent;};
   const Mat44f&       GetTransform()                         {return m_vMatActor;};
   void                SetTransformAfterUpdate(const Mat44f& _mTransform);
-  
-  
+
   //bool                IsBoneRoot()                           {return m_bRoot;};
   //static Mat44f       GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
@@ -54,7 +52,6 @@ public:
   bool				        AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity);
   bool				        AddCapsuleActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity);
 
-  
 private:
 
   CPhysxBone*         m_pParent;

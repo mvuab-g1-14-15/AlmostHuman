@@ -14,7 +14,6 @@
 #include "Math/Color.h"
 #include <map>
 
-
 //---Forward Declarations---
 class CTexture;
 //--------------------------
@@ -35,7 +34,6 @@ public:
 	virtual void	Update									();
 	virtual void	OnClickedChild					(const std::string& name) {/*NOTHING*/;}
 
-
 	//---------------CPointerMouse Interface--------------------
 	void					SetTexture							(CTexture* texture, std::string name );
 	void					SetActiveTexture				(const std::string& inName) {m_sActiveTexture = inName;}
@@ -43,7 +41,6 @@ public:
 	void					SetAlignment						(CGraphicsManager::ETypeAlignment alignment) {m_Alignment=alignment;}
 	bool					IsQuadrant							() const {return m_bIsQuadrant;}
 	void					SetQuadrant							(bool flag) {m_bIsQuadrant = flag;}
-
 
 private:
 	tTexturesMap		m_Textures;

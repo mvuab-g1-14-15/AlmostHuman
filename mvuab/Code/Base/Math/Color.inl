@@ -15,9 +15,9 @@ inline CColor& Math::CColor::Clamp()
 ///
 inline uint32 Math::CColor::GetUint32Argb () const
 {
-    return  (uint32)(float32ToByte(m_Color[3])<<24) 
+    return  (uint32)(float32ToByte(m_Color[3])<<24)
         + (float32ToByte(m_Color[0])<<16)
-        + (float32ToByte(m_Color[1])<<8) 
+        + (float32ToByte(m_Color[1])<<8)
         +  float32ToByte(m_Color[2]);
 }
 
@@ -26,9 +26,9 @@ inline uint32 Math::CColor::GetUint32Argb () const
 ///
 inline uint32 Math::CColor::GetUint32Abgr () const
 {
-    return  (uint32)(float32ToByte(m_Color[3])<<24) 
+    return  (uint32)(float32ToByte(m_Color[3])<<24)
         + (float32ToByte(m_Color[2])<<16)
-        + (float32ToByte(m_Color[1])<<8) 
+        + (float32ToByte(m_Color[1])<<8)
         +  float32ToByte(m_Color[0]);
 }
 
@@ -54,20 +54,19 @@ inline void  Math::CColor::SetUint32Abgr (int32 abgr)
     m_Color[0] = ByteTofloat32(static_cast<uint8>(0xff&(abgr    ))); // red
 }
 
-
 // Funci??n de utilidad para convertir una componente de color en coma flotante a su versi??n de un byte (0..255)
-inline uint8 CColor::float32ToByte(float32 fValue) const 
-{ 
-  int i = static_cast<int>(0xff * fValue); 
-    i = Math::Utils::Clamp(i, 0, 0xff); 
+inline uint8 CColor::float32ToByte(float32 fValue) const
+{
+  int i = static_cast<int>(0xff * fValue);
+    i = Math::Utils::Clamp(i, 0, 0xff);
 
-  return static_cast<uint8>(i); 
+  return static_cast<uint8>(i);
 }
 
 // Funci??n de utilidad para convertir un byte con una componente de color (0..255) a componente float32 (0.0..1.0)
-inline float32 Math::CColor::ByteTofloat32 (uint8 uValue) const 
-{ 
-  return static_cast<float32>(uValue)/255.0f; 
+inline float32 Math::CColor::ByteTofloat32 (uint8 uValue) const
+{
+  return static_cast<float32>(uValue)/255.0f;
 }
 
 inline Math::CColor& Math::CColor::Lerp(const Math::CColor& other, float32 f)
@@ -77,7 +76,7 @@ inline Math::CColor& Math::CColor::Lerp(const Math::CColor& other, float32 f)
     return *this;
 }
 
-// Operadores aritméticos   
+// Operadores aritméticos
 inline Math::CColor Math::CColor::operator + (const Math::CColor& otro)    const
 {
     return Math::CColor(otro.m_Color + m_Color);
@@ -101,11 +100,11 @@ inline Math::CColor Math::CColor::operator * (float32 escalar) const
     return Math::CColor(m_Color * escalar);
 }
 
-// Operadores aritméticos de actualización   
+// Operadores aritméticos de actualización
 inline Math::CColor& Math::CColor::operator += (const Math::CColor& otro)
 {
     m_Color += otro.m_Color;
-    
+
     return (*this);
 }
 

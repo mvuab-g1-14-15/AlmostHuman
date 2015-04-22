@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-//A slider is used to set a numerical value in a defined range. Clicking in the body of the slider moves the slider 
+//A slider is used to set a numerical value in a defined range. Clicking in the body of the slider moves the slider
 // about 10% by default. Clicking in the end-arrows moves it 1%. Dragging the bar changes the slider value.
 //----------------------------------------------------------------------------------
 #pragma once
@@ -20,7 +20,6 @@ class CTexture;
 
 class CSlider: public CGuiElement
 {
-
 public:
 	CSlider(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
 						const Math::Vect2f position_percent,  float buttonWidthPercent, float buttonHeightPercent,
@@ -29,12 +28,10 @@ public:
 
 	virtual ~CSlider() {/*NOTHING*/;}
 
-
 	//---------------CGuiElement Interface----------------------
 	virtual void	Render									();
 	virtual void	Update									();
 	virtual void	OnClickedChild					(const std::string& name) {/*NOTHING*/;}
-
 
 	//---------------CSlider Interface---------------------------
 	void					SetValue								(float value);
@@ -47,7 +44,7 @@ public:
 	void					SetBackGroundTexture		(CTexture* background);
 	void					SetBackGroundColor			(const Math::CColor& background, float alpha = 1.f);
 	void					OnChangeValue						();
-	
+
 private:
 	std::string		m_sLuaCode_OnChangeValue;
 	CTexture*			m_pBackGroundTexture;

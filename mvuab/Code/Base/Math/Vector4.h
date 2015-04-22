@@ -5,7 +5,6 @@
 #ifndef __VECTOR4_H__
 #define __VECTOR4_H__
 
-
 #include "MathTypes.h"
 #include "MathUtils.h"
 #include "Vector2.h"
@@ -22,13 +21,13 @@ public:
   // DATOS PUBLICOS
   //------------------
   T x, y, z, w;
-  
+
 public:
   //------------------
   // DATOS PUBLICOS
   //------------------
 
-  // Construcción   
+  // Construcción
   inline Vector4 ();
   inline Vector4 (const Vector4<T>& otro);
   inline Vector4 (const Vector3<T>& otro);
@@ -36,8 +35,7 @@ public:
   inline Vector4 (const T tx, const T ty, const T tz, const T tw);
   inline Vector4 (const T escalar);
 
-
-  // Operadores aritméticos   
+  // Operadores aritméticos
   inline        Vector4<T>  operator + (const Vector4<T>& otro) const;
   inline        Vector4<T>  operator - (const Vector4<T>& otro) const;
   inline        Vector4<T>  operator * (const T escalar) const;
@@ -48,8 +46,7 @@ public:
   inline        Vector4<T>& operator + ();
   inline const  Vector4<T>& operator + () const;
 
-
-  // Operadores aritméticos de actualización   
+  // Operadores aritméticos de actualización
   inline Vector4<T>& operator += (const Vector4<T>& otro);
   inline Vector4<T>& operator -= (const Vector4<T>& otro);
   inline Vector4<T>& operator *= (const T escalar);
@@ -57,17 +54,14 @@ public:
   inline Vector4<T>& operator += (const T escalar);
   inline Vector4<T>& operator -= (const T escalar);
 
-
   // Operadores y funciones de asignación
   //inline Vector4<T>& operator =  (const Vector4<T>& otro);
   inline Vector4<T>& operator () (const T tx, const T ty, const T tz, const T tw);
   inline void        Set         (const T tx, const T ty, const T tz, const T tw);
   inline void        SetZero     ();
-  
 
   // Producto escalar (*)
   inline T operator * (const Vector4<T>& otro) const;
-
 
   // Operadores y funciones de comparacion
   inline bool operator ==       (const Vector4<T>& otro) const;
@@ -75,23 +69,19 @@ public:
   inline bool IsEqualEpsilon    (const Vector4<T>& otro) const;
   inline bool IsNotEqualEpsilon (const Vector4<T>& otro) const;
 
-
   // Producto por componentes (escalado)
   inline Vector2<T>& Scale     (const Vector2<T>& otro);
   inline Vector2<T>  GetScaled (const Vector2<T>& otro) const;
-
 
   // Establecimiento condicional
   inline const Vector2<T>& SetIfMinComponents (const Vector2<T>& otro);
   inline const Vector2<T>& SetIfMaxComponents (const Vector2<T>& otro);
 
-
   // Operador de acceso []
   inline T  operator [] (int i) const;
   inline T& operator [] (int i);
 
-
-  // Funciones de la longitud 
+  // Funciones de la longitud
   inline Vector4<T>& Normalize     (const T tk = One<T>());
   inline Vector4<T>  GetNormalized () const;
   inline T           Length        () const;
@@ -110,7 +100,6 @@ template<typename T> inline Vector4<T>  operator * (const T escalar, const Vecto
 template<typename T> inline Vector4<T>  operator / (const T escalar, const Vector4<T>& otro);
 template<typename T> inline Vector4<T>  operator + (const T escalar, const Vector4<T>& otro);
 template<typename T> inline Vector4<T>  operator - (const T escalar, const Vector4<T>& otro);
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Fichero con las definiciones de las funciones inline
@@ -165,13 +154,11 @@ extern const Vect4d  v4dMIN;
 extern const Vect4d  v4dTOP;
 extern const Vect4d  v4dFRONT;
 extern const Vect4d  v4dRIGHT;
-
 } //namespace Math
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // CONSTANTES INT
 ////////////////////////////////////////////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

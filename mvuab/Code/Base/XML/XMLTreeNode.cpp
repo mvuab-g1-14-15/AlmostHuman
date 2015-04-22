@@ -205,7 +205,6 @@ xmlChar* CXMLTreeNode::GetProperty( const char* _pszKey ) const
   return value;
 }
 
-
 //----------------------------------------------------------------------------
 // Returns an integer param if found. Else a default value
 //----------------------------------------------------------------------------
@@ -456,7 +455,6 @@ Math::Vect4i CXMLTreeNode::GetVect4iProperty( const char* _pszKey, const Math::V
   return l_V4i;
 }
 
-
 //----------------------------------------------------------------------------
 // Returns an keyword from the tree from a given key
 //----------------------------------------------------------------------------
@@ -583,7 +581,6 @@ bool CXMLTreeNode::StartNewFile( const char* _pszFileName )
   Release();
   return false;
 }
-
 
 //----------------------------------------------------------------------------
 // Finished a file and saves it
@@ -824,7 +821,6 @@ bool CXMLTreeNode::WriteBoolProperty( const char* _pszKey, bool _bValue )
 
   return false;
 }
-
 
 //----------------------------------------------------------------------------
 // Writes a Math::Vect2f property

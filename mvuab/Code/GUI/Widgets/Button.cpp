@@ -1,5 +1,3 @@
-
-
 #include "Widgets\Button.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -7,7 +5,6 @@
 #include "Logger/Logger.h"
 #include "EngineManagers.h"
 #include "ScriptManager.h"
-
 
 //---Constructor
 CButton::CButton (	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
@@ -26,7 +23,6 @@ CButton::CButton (	uint32 windowsHeight, uint32 windowsWidth, float height_prece
 , m_ClickedColor(Math::colRED)
 , m_DeactivatedColor(Math::colYELLOW)
 {}
-
 
 //---------------Interfaz de GuiElement----------------------
 void CButton::Render	()
@@ -89,8 +85,7 @@ void CButton::Render	()
 		}
 
 		//Finalmente renderizamos el texto:
-		CGuiElement::RenderText();	
-
+		CGuiElement::RenderText();
 	}//END if( CGuiElement::m_bIsVisible )
 }
 
@@ -114,7 +109,7 @@ void CButton::Update()
 			{
 				OnOverButton();
 			}
-			
+
 			if (InputManagerInstance->IsUpDown(IDV_MOUSE,MOUSE_BUTTON_LEFT) ||
 				 (InputManagerInstance->IsDown(IDV_MOUSE,MOUSE_BUTTON_LEFT) && m_eState == BS_CLICKED ) )
 			{
@@ -189,5 +184,3 @@ void CButton::OnOverButton( void )
         ScriptMInstance->RunCode(m_sLuaCode_OnOver);
 	}
 }
-
-

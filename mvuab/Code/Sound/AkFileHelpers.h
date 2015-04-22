@@ -175,7 +175,6 @@ class CAkFileHelpers {
     if (fileAttributes & FILE_ATTRIBUTE_DIRECTORY)
       return AK_Success;   // this is a directory!
 
-
     return AK_Fail;    // this is not a directory!
   }
 };

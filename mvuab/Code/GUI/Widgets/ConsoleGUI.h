@@ -3,7 +3,7 @@
 // Author: Enric Vergara
 //
 // Description:
-// Editable text may be modified by the user by clicking the field and typing. An editable text field seems 
+// Editable text may be modified by the user by clicking the field and typing. An editable text field seems
 // to be limited to one line. You could use an editable field to allow the user to enter a function to be plotted.
 //----------------------------------------------------------------------------------
 #pragma once
@@ -21,11 +21,10 @@
 
 class CConsoleGUI: public CEditableTextBox
 {
-
 public:
 	CConsoleGUI(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-										const Math::Vect2f position_percent, Math::CColor textColor = Math::colBLACK, uint32 fontID = 0, 
-										std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0, 
+										const Math::Vect2f position_percent, Math::CColor textColor = Math::colBLACK, uint32 fontID = 0,
+										std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0,
 										bool isVisible = true, bool isActive = true);
 
 	virtual ~CConsoleGUI();

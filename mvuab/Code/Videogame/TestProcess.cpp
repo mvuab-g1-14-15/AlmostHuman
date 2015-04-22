@@ -25,10 +25,6 @@
 #include "InputManager.h"
 #include "ActionManager.h"
 
-
-
-
-
 CTestProcess::CTestProcess() : CProcess()
 
 {
@@ -102,7 +98,6 @@ void CTestProcess::Update()
         ActionManagerInstance->SetAction( "SaveActionToInput",
                                           vecInputAction );
     }
-
 
     ScriptMInstance->RunCode( "update()" );
 }

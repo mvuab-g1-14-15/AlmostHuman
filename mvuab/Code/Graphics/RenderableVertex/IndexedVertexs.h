@@ -72,7 +72,6 @@ public:
 
   virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount )
   {
-
     LARGE_INTEGER l_timeFreq, l_lastTime, l_actualTime;
     QueryPerformanceCounter(&l_lastTime); QueryPerformanceFrequency(&l_timeFreq);
 
@@ -86,7 +85,7 @@ public:
         QueryPerformanceCounter(&l_actualTime); QueryPerformanceFrequency(&l_timeFreq);
         double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
         CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-        
+
         return false;
     }
 
@@ -97,7 +96,7 @@ public:
     l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
     l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
     l_Device->SetIndices( m_IB );
-    
+
     for ( UINT b = 0; b < l_NumPasses; ++b )
     {
       l_Effect->BeginPass( b );
@@ -130,7 +129,7 @@ public:
         QueryPerformanceCounter(&l_actualTime); QueryPerformanceFrequency(&l_timeFreq);
         double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
         CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-        
+
         return false;
     }
 
@@ -141,7 +140,7 @@ public:
     l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
     l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
     l_Device->SetIndices( m_IB );
-    
+
     for ( UINT b = 0; b < l_NumPasses; ++b )
     {
       l_Effect->BeginPass( b );

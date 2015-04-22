@@ -16,7 +16,6 @@ class CCubeEmitter : public CParticleEmitter
         float m_MinDepth;
         float m_MaxDepth;
 
-
     public:
         CCubeEmitter			();
         virtual ~CCubeEmitter   ();

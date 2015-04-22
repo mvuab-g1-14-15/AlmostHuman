@@ -16,20 +16,19 @@
 
 class CJump
 {
-
     public:
         CJump();
         ~CJump(){ }
-    
+
         void  StartJump   ( float v0, float m_height );
         void  StopJump    ();
-        
+
         float GetHeight   ( float elapsedTime );
         float GetVelocity () { return m_fV0; }
 
     private:
         bool  m_bJump;
-        
+
         float m_fV0;
         float m_height;
         float m_fJumpTime;

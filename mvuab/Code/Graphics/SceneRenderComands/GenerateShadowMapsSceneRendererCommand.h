@@ -2,7 +2,6 @@
 #define GENERATE_SHADOW_MAPS_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 

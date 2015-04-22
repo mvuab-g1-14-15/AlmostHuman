@@ -15,7 +15,6 @@
 #ifndef INC_DIALOG_BOX_H
 #define INC_DIALOG_BOX_H
 
-
 #include "GuiElement\GuiElement.h"
 #include "Widgets\Button.h"
 #include "Math/Color.h"
@@ -25,13 +24,12 @@ class CTexture;
 //--------------------------
 class CDialogBox: public CGuiElement
 {
-
 public:
 	CDialogBox(	uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
 							const Math::Vect2f position_percent,  float buttonWidthPercent, float buttonHeightPercent,
-							std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0, 
+							std::string lit="", uint32 textHeightOffset=0, uint32 textWidthOffset=0,
 							bool isVisible = true, bool isActive = true);
-	
+
 	virtual ~CDialogBox() {/*NOTHING*/;}
 
 	//---------------CGuiElement Interface----------------------
@@ -43,10 +41,10 @@ public:
 	//---------------CDialogBox Interface----------------------
 	void					SetCloseButtonTextures	(CTexture* normal, CTexture* over, CTexture* clicked, CTexture* deactivated);
 	void					SetMoveButtonTextures		(CTexture* normal, CTexture* over, CTexture* clicked, CTexture* deactivated);
-	void					SetDialogTexture				(CTexture* background);	
+	void					SetDialogTexture				(CTexture* background);
 	void					SetCloseButtonColors		(const Math::CColor& normal, const Math::CColor& over, const Math::CColor& clicked, const Math::CColor& deactivated);
 	void					SetMoveButtonColors			(const Math::CColor& normal, const Math::CColor& over, const Math::CColor& clicked, const Math::CColor& deactivated);
-	void					SetDialogColors					(const Math::CColor& background);	
+	void					SetDialogColors					(const Math::CColor& background);
 
 private:
 	bool			m_bDialogClicked;
@@ -56,11 +54,10 @@ private:
 	Math::CColor		m_BackGroundColor;
 	bool			m_bStart_to_Move;
 	Math::Vect2i		m_PreviousPosMouse;
-	
+
 protected:
 	float			m_fButtonHeight;	// Es el % del mHeight
 	float			m_fButtonWidth;		// Es el % del mWidth;
-
 };
 
 #endif //INC_DIALOG_BOX_H

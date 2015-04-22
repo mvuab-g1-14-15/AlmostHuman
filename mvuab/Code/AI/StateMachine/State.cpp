@@ -32,14 +32,14 @@ bool CState::Load( CXMLTreeNode& Node)
   {
     CXMLTreeNode& l_CurrentNode = Node( i );
     const std::string& TagName = l_CurrentNode.GetName();
-    
+
     if ( TagName == "on_enter" )
     {
       for ( int j = 0; j < l_CurrentNode.GetNumChildren(); ++j )
 			{
         CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
 		    const std::string& ActualTagName = l_CurrentSubNode.GetName();
-        
+
         if ( ActualTagName == "action" )
         {
 		      CAction* l_Action = new CAction(l_CurrentSubNode);

@@ -16,7 +16,6 @@
 
 class CTimer
 {
-
     public:
 
         CTimer(uint32 avgSamples);
