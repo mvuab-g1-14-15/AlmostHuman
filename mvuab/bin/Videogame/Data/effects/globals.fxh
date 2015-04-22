@@ -13,6 +13,9 @@
 #define PI          3.14159265359
 #define Deg2Rad(x)  (x * PI / 180.0)
 
+//
+// Matrices
+//
 float4x4 g_WorldViewProj                                            : WorldViewProjection;
 float4x4 g_ViewMatrix                                               : View;
 float4x4 g_ViewInverseMatrix                                        : ViewInverse;
@@ -23,37 +26,64 @@ float4x4 g_WorldInverseMatrix                                       : WorldInver
 float4x4 g_WorldViewMatrix                                          : WorldView;
 float4x4 g_ViewProjMatrix                                           : ViewProjection;
 
+//
+// Debug semantics
+//
 bool    g_UseDebugColor                                             : UseDebugColor;
 float4  g_DebugColor                                                : DebugColor;
 
+//
+// Shadow map stuff
+//
 float4x4    g_ShadowProjectionMatrix                                : ShadowProjection;
 float4x4    g_LightViewMatrix                                       : LightView;
 float4x4    g_ViewToLightProjMatrix                                 : ViewToLightProjection;
+bool 		g_UseShadowMaskTexture 								    : UseShadowMaskTexture;
+bool 		g_UseShadowMapStatic 									: UseStaticShadowMap;
+bool 		g_UseShadowMapDynamic 									: UseDynamicShadowMap;
+int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
 
+//
+// Camera data
+//
+float3      g_CameraPosition                                        : CameraPosition;
+float3      g_CameraUp                                        		: CameraUp;
+float3      g_CameraLeft                                        	: CameraLeft;
+float3      g_CameraLookAt                                          : CameraLookAt;
+
+//
+// Lights data
+//
 int         g_LightsType[MAX_LIGHTS_BY_SHADER]                      : LightsTypes;
 bool        g_LightsEnabled[MAX_LIGHTS_BY_SHADER]                   : LightsEnabled;
-
 float       g_LightsAngle[MAX_LIGHTS_BY_SHADER]                     : LightsAngles;
+float       g_LightsIntensity[MAX_LIGHTS_BY_SHADER]                 : LightsIntensity;
 float       g_LightsFallOff[MAX_LIGHTS_BY_SHADER]                   : LightsFallOffs;
 float       g_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER]       : LightsEndAngle;
 float       g_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER]     : LightsStartAngle;
-
 float3      g_LightsColor[MAX_LIGHTS_BY_SHADER]                     : LightsColors;
 float3      g_LightsPosition[MAX_LIGHTS_BY_SHADER]                  : LightsPositions;
 float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDirections;
+float       g_SpecularExponent 	= 20.0f;
+float       g_SpecularFactor 	= 20.0f;
+float4      g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
 
+//
+// Cal3D parameters
+//
 float3x4    g_Bones[MAXBONES]                                       : Bones;
-float3      g_CameraPosition                                        : CameraPosition;
 
+//
+// Time data
+//
 float       g_DeltaTime                                             : DeltaTime;
 float       g_Time                                                  : Time;
 
-float4      g_AmbientLight = float4(0.35, 0.35, 0.35, 1.0);
-float       g_SpecularExponent = 20.0f;
-float       g_SpecularFactor = 20.0f;
-
 float       g_Bump = 10.0;
 
+//
+// Fog data
+//
 bool		g_UseFog												: UseFog;
 float       g_FogStar                                           	: FogStart;
 float       g_FogEnd                                            	: FogEnd;
@@ -63,16 +93,22 @@ int         g_FogFun                                            	: FogFun;
 float       g_Weight[5]                                         	: Weight;
 float       g_Offset[5]                                         	: Offset;
 
+//
+// 2D texture parameters
+//
 int         g_TextureWidth                                      	: TextureWidth;
 int         g_TextureHeight                                     	: TextureHeight;
 
-bool g_UseShadowMaskTexture 										: UseShadowMaskTexture;
-bool g_UseShadowMapStatic 											: UseStaticShadowMap;
-bool g_UseShadowMapDynamic 											: UseDynamicShadowMap;
-int  g_ShadowMapTextureSize											: ShadowMapTextureSize;
+//
+// Window size
+//
+int         g_WindowWidth                                      		: WindowWidth;
+int         g_WindowHeight                                     		: WindowHeight;
 
+
+//
 // Functions
-
+//
 float DistanceAttenuation( int i, float3 LightToPixelDirection )
 {
     float l_DistanceToLight = length(LightToPixelDirection);

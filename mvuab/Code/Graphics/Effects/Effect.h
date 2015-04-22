@@ -16,7 +16,6 @@ class CLight;
 class CEffect: public CName
 {
 public:
-  CEffect();
   CEffect( const std::string& EffectName );
   ~CEffect();
   bool SetLights( size_t NumOfLights );
@@ -126,7 +125,7 @@ public:
 
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
   void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
-  void SetUseDebugColor( bool aUse );
+  void SetDebugColor( bool aUse, const Math::CColor aColor );
 
 private: // Members
   std::string m_FileName;
@@ -162,6 +161,11 @@ private: // Members
 
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
+
+  //
+  // Shadow map handles
+  //
+  D3DXHANDLE m_ShadowMapTextureSizeParameter;
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
@@ -191,6 +195,10 @@ private: // Members
   //Width & Height Textures
   D3DXHANDLE m_HeightTexture;
   D3DXHANDLE m_WidthTexture;
+
+  //Width & Height window
+  D3DXHANDLE m_HeightWindow;
+  D3DXHANDLE m_WidthWindow;
 
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;
