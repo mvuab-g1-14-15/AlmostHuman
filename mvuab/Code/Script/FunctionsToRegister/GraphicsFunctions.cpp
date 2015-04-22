@@ -36,16 +36,30 @@ extern "C"
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
+
 #include "StaticMeshes/InstanceMesh.h"
-#include "Gizmos/GizmoElement.h"
+
 #include "Gizmos/Gizmo.h"
+#include "Gizmos/GizmoElement.h"
 #include "Gizmos/GizmosManager.h"
+
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+#include "EngineConfig.h"
+#include "EngineManagers.h"
 
 using namespace luabind;
 
-CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
+CInstanceMesh *CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
 {
-  return new CInstanceMesh( Name, CoreName );
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CInstanceMesh *l_InstanceMesh = (CInstanceMesh *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CInstanceMesh), __alignof(CInstanceMesh));
+    new (l_InstanceMesh) CInstanceMesh(Name, CoreName);
+
+    return l_InstanceMesh;
 }
 
 /*

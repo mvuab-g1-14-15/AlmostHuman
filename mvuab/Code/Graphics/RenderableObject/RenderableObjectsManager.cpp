@@ -1,11 +1,21 @@
 #include "RenderableObjectsManager.h"
 #include "RenderableObject.h"
+
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
+
 #include "StaticMeshes\InstanceMesh.h"
 #include "AnimatedModels\AnimatedInstanceModel.h"
+
 #include "Math\MathTypes.h"
 #include "Cinematics\Cinematic.h"
+
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+#include "EngineConfig.h"
+#include "EngineManagers.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager()
 {
@@ -59,7 +69,14 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 
 void CRenderableObjectsManager::CleanUp()
 {
-    Destroy();
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    for(unsigned int i =  0; i < m_ResourcesVector.size(); ++i)
+    {
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
+    }
+
+    m_ResourcesMap.clear();
+    m_ResourcesVector.clear();
 }
 
 void CRenderableObjectsManager::Render()
@@ -91,7 +108,11 @@ void CRenderableObjectsManager::Update()
 
 CCinematic* CRenderableObjectsManager::CreateCinematic( const std::string& FileName )
 {
-    CCinematic* l_Cinematic = new CCinematic( FileName );
-    AddResource( l_Cinematic->GetName(), l_Cinematic );
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CCinematic *l_Cinematic = (CCinematic *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CCinematic), __alignof(CCinematic));
+    new (l_Cinematic) CCinematic(FileName);
+
+    AddResource(l_Cinematic->GetName(), l_Cinematic);
     return l_Cinematic;
 }
