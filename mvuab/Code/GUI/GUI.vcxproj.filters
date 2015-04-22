@@ -58,6 +58,9 @@
     <ClCompile Include="Widgets\ConsoleGUI.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="Widgets\Map.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GuiElement\GuiElement.h">
@@ -101,6 +104,9 @@
       <Filter>MousePointer</Filter>
     </ClInclude>
     <ClInclude Include="Widgets\ConsoleGUI.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Map.h">
       <Filter>Widgets</Filter>
     </ClInclude>
   </ItemGroup>

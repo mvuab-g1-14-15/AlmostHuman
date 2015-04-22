@@ -14,6 +14,7 @@
 #include <assert.h>
 #include "Utils/Types.h"
 #include "Math\Vector2.h"
+#include "Utils/Defines.h"
 
 
 class CGuiElement
@@ -90,7 +91,8 @@ public:
 	const std::string&	GetName								() const											{return m_sName;}
 	TypeGuiElement			GetType								() const {return m_eType;}
 
-
+	GET_SET(uint32, uWindowsWidth)
+	GET_SET(uint32, uWindowsHeight)
 protected:
 
 	float											m_fWidthPercent;					//% del Ancho del GuiElement respecto el size del Window

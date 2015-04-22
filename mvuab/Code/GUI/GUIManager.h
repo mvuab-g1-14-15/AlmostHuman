@@ -23,6 +23,7 @@ class CPointerMouse;
 class CGuiElement;
 class CWindows;
 class CConsoleGUI;
+class CMap;
 //--------------------------
 
 //----------Declaracion de nuevos tipos------------------------------------
@@ -123,6 +124,7 @@ private:
 	std::string													m_sLastLoadpathGUI_XML;
 	TransitionEffect										m_sTransitionEffect;
 	bool																m_bFirstUpdate;
+	CMap*													m_Map;
 };
 
 #endif //INC_GUI_MANAGER_H
