@@ -3,11 +3,13 @@ class 'CBlaster'
 
 function CBlaster:__init()
     self.TimePressed = 0.0
-    self.MaxTimePressed = 3.0
+    self.MaxTimePressed = 5.0
 	
 	self.BaseDamage = 5.0
 	self.MaxDamage = 20.0
 	
+	self.IsAcumulatorSound = false
+
     engine:Trace("Blaster initialized")
 end
 
@@ -66,13 +68,24 @@ end
 function CBlaster:Update()
     if action_manager:DoAction("Shoot") then
 		if self.TimePressed < self.MaxTimePressed then
+			--Implementar soot acumulado
 			self.TimePressed = self.TimePressed + timer:GetElapsedTime()
 		else
 			self.TimePressed = self.MaxTimePressed
 		end
+		if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
+			sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
+			self.IsAcumulatorSound = true
+		end
 	end
     if action_manager:DoAction("ShootUp") then
 		self:Shoot()
+		if self.TimePressed < (self.MaxTimePressed * 0.1) then
+			sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+		else
+			sound_manager:PlayEvent( "Shoot_Long_Shoot_Event", "TestGameObject2d" )
+		end
 		self.TimePressed = 0.0
+		self.IsAcumulatorSound = false
 	end
 end
