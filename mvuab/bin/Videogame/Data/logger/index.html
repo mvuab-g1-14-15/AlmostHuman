@@ -24,23 +24,16 @@
         <input type="button" value="Content" class="Content Button" onclick="hide_class('Content')"/>
         <input type="button" value="System" class="System Button" onclick="hide_class('System')"/>
         <input type="button" value="Input" class="Input Button" onclick="hide_class('Input')"/>
-        <!--
-        <input type="button" value="Replay" class="Replay Button" onclick="hide_class('Replay')"/>
-        <input type="button" value="Networking" class="Networking Button" onclick="hide_class('Networking')"/>
-        <input type="button" value="NetworkServer" class="NetworkServer Button" onclick="hide_class('NetworkServer')"/>
-        <input type="button" value="NetworkClient" class="NetworkClient Button" onclick="hide_class('NetworkClient')"/>
-        <input type="button" value="Terrain" class="Terrain Button" onclick="hide_class('Terrain')"/>
-        <input type="button" value="Log" class="Log Button" onclick="hide_class('Log')"/>
-        <input type="button" value="Assert" class="Assert Button" onclick="hide_class('Assert')"/>
-        -->  
+
         <br />
     </div>
-    <div id="action_panel">
-        <input type="button" value="Reload" class="reload" onclick="reload()">
 
+        <h1 class="title">LOGGER ENGINE</h1>
+        <h4 style="text-align:center;">Click on buttons to toggle visability. Click on STACK buttons to toggle visibility of stack traces.</h4>
+
+    <div id="actionpanel">
+                <button name="button" class="reload" onclick="Reload()">LOAD / RELOAD</button>      
     </div>
-        <h1 class="date">12/30/2010 4:57:31 PM Windows 7</h1>
-        <p>Click on buttons to toggle visability. Click on STACK buttons to toggle visibility of stack traces.</p>
 
         <div id="logger_wrapper"></div>
 

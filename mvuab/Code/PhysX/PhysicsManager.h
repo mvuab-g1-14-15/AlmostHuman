@@ -1,16 +1,6 @@
-//----------------------------------------------------------------------------------
-// CPhysicsManager class
-// Author: Enric Vergara
-// Changed: Jordi Arenas
-// Description:
-// This secures availability of the necessary physic functions.
-// It internally uses the PhysX library.
-//----------------------------------------------------------------------------------
-
-#pragma once
-
 #ifndef __PHYSX_MANAGER_CLASS_H__
 #define __PHYSX_MANAGER_CLASS_H__
+#pragma once
 
 #include <vector>
 #include <string>
@@ -19,13 +9,11 @@
 #include "Math\Color.h"
 #include "Math\MathUtils.h"
 #include "Math\Vector3.h"
-#include "Utils\Name.h"
+#include "Utils\Name.h" 
 #include "PhysicsDefs.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
+#include "Utils\MapManager.h"
 
-//#include "Script/ScriptRegister.h"
-
-//---Forward Declarations---//
 class NxPhysicsSDK;
 class NxScene;
 class NxActor;
@@ -43,18 +31,39 @@ class CPhysicRevoluteJoint;
 class CPhysicTriggerReport;
 class CPhysicUserAllocator;
 class CPhysicUserData;
-//class CScriptManager;
 class CGameEntity;
 class CGraphicsManager;
 //--------------------------
 
 using namespace Math;
 
-class CPhysicsManager : public CSingleton<CPhysicsManager>
+/*
+enum EShapeType
+  {
+  eSHAPE_PLANE = 0,
+  eSHAPE_SPHERE,
+  eSHAPE_BOX,
+  eSHAPE_CAPSULE,
+  eSHAPE_WHEEL,
+  eSHAPE_CONVEX,
+  eSHAPE_MESH,
+  eSHAPE_HEIGHTFIELD
+};
+
+struct TActorInfo
+{
+  EShapeType mType;
+  float32 mRadious;
+  Vect3f mPosition;
+}
+*/
+
+class CPhysicsManager : public CManager, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>
 {
 public:
   //--- Init and End protocols------------------------------------------
   CPhysicsManager();
+  CPhysicsManager(CXMLTreeNode& atts);
   virtual         ~CPhysicsManager()
   {
     Done();
@@ -63,7 +72,7 @@ public:
   void          AddGravity( Math::Vect3f g );
 
   //---- Main Functions ---------------------------------------
-  bool          Init();
+  void          Init();
   void          Done();
   bool          IsOk() const
   {
@@ -75,20 +84,27 @@ public:
   bool          CreateMeshFromXML( const std::string& FileName );
 
   //--- Rendering Stuff:
-  void          DebugRender( CGraphicsManager* _RM );
+  void          Render();
   void          DrawActor( NxActor* actor, CGraphicsManager* _RM );
 
   //--- Add/Release Actors
+  //CPhysicActor* RegisterPhysicActor( const std::string & aName, TActorInfo
   bool          AddPhysicActor( CPhysicActor* _pActor );
   bool          ReleasePhysicActor( CPhysicActor* _pActor );
 
   bool          ReleaseAllActors();         //EUserDataFlag _eFlags );
 
+  bool          AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color = Math::colBLACK,
+                          bool Paint = true, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO,
+                          NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+  bool          AddMesh( const std::string& Path, const std::string& Name);
   //--- Add/Release CharacterControllers
   bool          AddPhysicController( CPhysicController* _pController,
                                      EControleType _Tipus = ::CAPSULE, ECollisionGroup _Group = ::ECG_ENEMY );
   bool          ReleasePhysicController( CPhysicController* _pController );
 
+  bool CPhysicsManager::AddController( const std::string& Name, float radius = 0.2f, float height = 1, float slope = 0.2f, float skin_width = 0.01f,
+                                       float step = 0.5f, Math::Vect3f pos = Math::Vect3f( 0, 4.0, 0 ), ECollisionGroup ColliusionGroup = ECG_PLAYER, float gravity = -10 );
   ////--- Add/Release Joints
   bool          AddPhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
   bool          ReleasePhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
@@ -107,17 +123,21 @@ public:
       uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
   CPhysicUserData*    RaycastClosestActorShoot( const Math::Vect3f posRay, const Math::Vect3f& dirRay,
       uint32 impactMask, SCollisionInfo& info, float _fPower );
+  std::string  RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
+      uint32 impactMask);
   std::set<CPhysicUserData*> OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere,
       EShapesType shapeType = ALL_SHAPES , uint32 impactMask = 0xffffffff );
-  void          OverlapSphereActor( float radiusSphere, const Math::Vect3f& posSphere,
-                                    std::vector<CPhysicUserData*>& impactObjects, uint32 impactMask );
+  std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask );
   void          OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
       std::vector<CPhysicUserData*> impactObjects, float _fPower );
   void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                 float _fEffectRadius, float _fPower );
+  std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere );
 
+	std::vector<CPhysicUserData*> OverlapConeActor( float _Distance, float _Angle,
+	const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask );
   //----Update
-  void          Update( float _ElapsedTime );
+  void          Update();
   void          WaitForSimulation();
 
   ////--- Create CCDSkeleton
@@ -245,7 +265,7 @@ private:
   //---PhysX------------------------------
   NxPhysicsSDK*     m_pPhysicsSDK;
   NxScene*        m_pScene;
-  NxControllerManager*  m_pControllerManager;
+  NxControllerManager*  mControllerManager;
   CPhysicUserAllocator* m_pMyAllocator;
   CPhysicCookingMesh*   m_pCookingMesh;
   SPhysicsInitParams    m_InitParams;
@@ -260,10 +280,10 @@ private:
   m_bDistancesSheres;     // dice si dibuja las esferas de las distancias de detección, etc
 
   // Físicas escenario
-  std::vector<CPhysicUserData*>
-  m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
-  std::vector<CPhysicActor*>       m_vActors;     // para guardar los Actors del CreateMeshFromXML
+  std::vector<CPhysicUserData*>          m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
+  std::vector<CPhysicActor*>             m_vActors;     // para guardar los Actors del CreateMeshFromXML
   std::map<std::string, unsigned int>    m_vIds;    // para guardar los id's del vector de actors
+  std::vector<CPhysicUserData*> m_vUD;
 };
 
 #endif //__PHYSX_MANAGER_CLASS_H__

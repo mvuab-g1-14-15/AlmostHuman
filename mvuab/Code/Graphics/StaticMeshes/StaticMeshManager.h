@@ -4,20 +4,20 @@
 
 #include "StaticMesh.h"
 #include "Utils\MapManager.h"
-#include "Utils/SingletonPattern.h"
-
+#include "Utils/Manager.h"
+#include "XML\XMLTreeNode.h"
 #include <string>
 
-class CStaticMeshManager : public CMapManager<CStaticMesh>, public CSingleton<CStaticMeshManager>
+class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 {
-    protected:
-        std::string m_FileName;
-
     public:
         CStaticMeshManager();
+		CStaticMeshManager( CXMLTreeNode& atts);
         ~ CStaticMeshManager ();
 
-        bool Load(const std::string &FileName);
-        bool Reload();
+		void Init();
+		void Update(){}
+		void Render(){}
+        void Reload();
 };
 #endif

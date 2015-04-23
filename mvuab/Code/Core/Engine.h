@@ -8,26 +8,39 @@
 #include "Utils\Defines.h"
 #include "Process.h"
 
-class CCore;
+class CTimer;
 class CLogRender;
+class CEngineConfig;
+class CEngineManagers;
 
 class CEngine: public CSingleton<CEngine>
 {
-public:
-  CEngine();
-  ~CEngine();
-  void Init( CProcess* apProcess, const std::string& aConfigPath, HWND aWindowId );
-  void Update();
-  void Render();
+    public:
+        CEngine();
+        ~CEngine();
 
-  // Getters and setters
-  GET_SET_PTR( CCore, Core );
-  GET_SET_PTR( CProcess, Process );
+        void Init( CEngineConfig* aEngineConfig );
+        void SetRunnigProcess(CProcess* aProcess);
 
-private:
-  CCore*              m_pCore;
-  CLogRender*         m_pLogRender;
-  CProcess*           m_pProcess;
+        void ProcessInputs();
+        void Update();
+        void Render();
+
+        // Getters and setters
+        GET_SET_PTR( CProcess, Process );
+        GET_SET_PTR( CTimer, Timer );
+        GET_SET_PTR( CEngineManagers, EngineManagers );
+
+        void Trace( const std::string& TraceStr );
+
+    private:
+        CProcess*           m_pProcess;
+        CLogRender*         m_pLogRender;
+        CEngineManagers*    m_pEngineManagers;
+        CTimer*             m_pTimer;
+
+        float               m_RenderTime;
+        float               m_RenderTarget;
 };
 
 #endif // ENGINE_H

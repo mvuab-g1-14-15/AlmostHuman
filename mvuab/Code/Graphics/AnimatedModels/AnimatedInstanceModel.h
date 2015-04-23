@@ -1,3 +1,6 @@
+#ifndef ANIMATED_INSTANCE_MODEL_H
+#define ANIMATED_INSTANCE_MODEL_H
+#pragma once
 #include "RenderableObject/RenderableObject.h"
 #include "cal3d/cal3d.h"
 #include "Utils/Name.h"
@@ -6,31 +9,10 @@ class CAnimatedCoreModel;
 class CEffectTechnique;
 class CTexture;
 class CXMLTreeNode;
+class CRenderableObjectTechnique;
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
-private:
-  CalModel*       m_CalModel;
-  CEffectTechnique*   m_pEffectTechnique;
-  CAnimatedCoreModel* m_AnimatedCoreModel;
-
-  LPDIRECT3DVERTEXBUFFER9 m_pVB;
-  int m_VBCursor;
-
-  std::vector<CTexture*> m_Textures;
-  LPDIRECT3DINDEXBUFFER9  m_pIB;
-  int m_IBCursor;
-
-  uint32 m_NumVtxs;
-  uint32 m_NumFaces;
-  uint32 m_CurrentAnimationId;
-
-  float32 m_LodLevel;
-  float32 m_BlendTime;
-  float32 m_ChangeAnimation;
-
-  void LoadTextures();
-
 public:
   CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName );
   CAnimatedInstanceModel( CXMLTreeNode& atts );
@@ -52,4 +34,30 @@ public:
 
   bool IsCycleAnimationActive( uint32 Id ) const;
   bool IsActionAnimationActive( uint32 Id ) const;
+
+  private:
+  CalModel*       m_CalModel;
+  CEffectTechnique*   m_pEffectTechnique;
+  CAnimatedCoreModel* m_AnimatedCoreModel;
+
+  LPDIRECT3DVERTEXBUFFER9 m_pVB;
+  int m_VBCursor;
+
+  std::vector<CTexture*> m_Textures;
+  LPDIRECT3DINDEXBUFFER9  m_pIB;
+  int m_IBCursor;
+
+  uint32 m_NumVtxs;
+  uint32 m_NumFaces;
+  uint32 m_CurrentAnimationId;
+
+  float32 m_LodLevel;
+  float32 m_BlendTime;
+  float32 m_ChangeAnimation;
+  CRenderableObjectTechnique*  m_RenderableObjectTechnique;
+
+  void LoadTextures();
+
 };
+
+#endif

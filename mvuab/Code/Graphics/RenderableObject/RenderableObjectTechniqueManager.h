@@ -6,17 +6,19 @@
 #include "RenderableObject\PoolRenderableObjectTechnique.h"
 #include "Utils\MapManager.h"
 #include "Utils\Name.h"
-#include "Utils\SingletonPattern.h"
+#include "Utils\Manager.h"
 
 class CRenderableObjectTechniqueManager : public CMapManager<CRenderableObjectTechnique>,
-  public CSingleton<CRenderableObjectTechniqueManager >
+  public CManager
 {
-
 public:
   CRenderableObjectTechniqueManager();
+  CRenderableObjectTechniqueManager( CXMLTreeNode& atts);
   virtual ~CRenderableObjectTechniqueManager();
   void Destroy();
-  void Load( const std::string& FileName );
+  void Init();
+  void Update(){}
+  void Render(){}
   void ReLoad();
   std::string GetRenderableObjectTechniqueNameByVertexType( uint32 VertexType );
   CMapManager<CPoolRenderableObjectTechnique>& GetPoolRenderableObjectTechniques()
@@ -25,7 +27,6 @@ public:
   }
 private:
   CMapManager<CPoolRenderableObjectTechnique> m_PoolRenderableObjectTechniques;
-  std::string m_FileName;
 private:
   void InsertRenderableObjectTechnique( const std::string& ROTName,
                                         const std::string& TechniqueName );

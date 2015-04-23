@@ -1,17 +1,22 @@
-fn GetYaw transform =
+
+fn GetPitch rot =
 (
-	return (transform as eulerangles).z
+	local a = QuatToEuler2(rot)
+	return degToRad(a.x)
 )
 
-fn GetPitch transform =
+fn GetYaw rot =
 (
-	return (transform as eulerangles).x
+	local a = QuatToEuler2(rot)
+	return degToRad(a.z)
 )
-fn GetRoll transform =
+
+fn GetRoll rot =
 (
-	return (transform as eulerangles).y
+	local a = QuatToEuler2(rot)
+	return degToRad(a.y)
 )
-	
+
 fn DoesFolderExist f create:true =
 (
 	local val
@@ -28,6 +33,7 @@ fn DoesFolderExist f create:true =
 	allInsts = #()
 	for obj in geometry do
 	(
+		format " Objeto geometrico %" obj
 		if (InstanceMgr.GetInstances obj &instances) > 1 do
 		(
 			if findItem allInsts obj == 0 do
@@ -47,7 +53,6 @@ fn GetNodeReferences node =
 
 fn GetReferences = 
 (
-	--if nodes == unsupplied do nodes = getCurrentSelection()
 	local refnodes = #()
 	for node in geometry where findItem refnodes node == 0 do 
 	(
@@ -57,12 +62,12 @@ fn GetReferences =
 	return refnodes
 )
 	
+/* Method to extract core instances from selection (loops all selected objects of scene) */
 fn GetUniqueInstances = 
 (
 	local uniqueInstance = #()
-	for obj in geometry do
+	for obj in selection do
 	(
-		
 		if (InstanceMgr.GetInstances obj &instances) > 1 then
 		(
 			if findItem uniqueInstance instances[1] == 0 do
@@ -73,7 +78,43 @@ fn GetUniqueInstances =
 			append uniqueInstance obj
 		)
 	)
-    --allInsts.wirecolor = green
-	--print uniqueInstance
 	return uniqueInstance
 )
+/* Method to extract core instances from scene (loops all geometry of scene) */
+fn GetUniqueInstancesScene = 
+(
+	local uniqueInstance = #()
+	for obj in geometry do
+	(
+		if (InstanceMgr.GetInstances obj &instances) > 1 then
+		(
+			if findItem uniqueInstance instances[1] == 0 do
+				append uniqueInstance instances[1]
+		)
+		else
+		(
+			append uniqueInstance obj
+		)
+	)
+	return uniqueInstance
+)
+
+fn IsEmptyDestPath SrcPath =
+(
+	if SrcPath == "" then
+	(
+		format "Destination Path undefined, please choose a path \n"
+		return -1 
+	)
+)
+
+fn IsEmptyInstanceArray UniqueInstanceArray =
+(
+	if UniqueInstanceArray.count == 0 then 
+	(
+		format "Empty selection. Select any object \n"
+		return -1
+	)
+)
+
+	

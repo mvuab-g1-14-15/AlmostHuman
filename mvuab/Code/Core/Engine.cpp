@@ -1,63 +1,73 @@
 #include "Engine.h"
 #include "Utils\Defines.h"
 #include "Process.h"
-#include "Core.h"
+
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
-#include "Utils\LogRender.h"
 #include "Timer\Timer.h"
-
+#include "PhysicsManager.h"
+#include "EngineConfig.h"
+#include "EngineManagers.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
+#include <iostream>
 
-CEngine::CEngine() :
-  m_pCore( new CCore() ),
-  m_pLogRender( new CLogRender() ),
-  m_pProcess( 0 )
+CEngine::CEngine()
+    : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
+    , m_pProcess( 0 )
+    , m_pTimer( new CTimer( 30 ) )
 {
 }
 
 CEngine::~CEngine()
 {
-  CHECKED_DELETE( m_pCore );
-  CHECKED_DELETE( m_pProcess );
-  CHECKED_DELETE( m_pLogRender );
+    CHECKED_DELETE( m_pEngineManagers );
+    CHECKED_DELETE( m_pProcess );
+    CHECKED_DELETE( m_pTimer );
 }
 
 void CEngine::Update()
 {
-  m_pCore->Update();
-  m_pProcess->Update();
-  m_pLogRender->Update();
+    m_pEngineManagers->Update();
+    m_pProcess->Update();
+    m_pTimer->Update();
 }
 
 void CEngine::Render()
 {
-  CSceneRendererCommandManager* srcm = CCore::GetSingletonPtr()->GetSceneRendererCommandManager();
-  srcm->Execute();
-  return;
-  //// Obtain an instance to the graphics manager
-  CGraphicsManager* pGraphicsManager = GraphicsInstance;
-  //pGraphicsManager->GetDevice()->Clear(0, 0, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
-  pGraphicsManager->BeginRender();
-  pGraphicsManager->SetupMatrices();
-  m_pCore->Render();
-  m_pProcess->Render();
-  m_pLogRender->Render();
-  //pGraphicsManager->RenderCursor();
-#if _DEBUG
-  pGraphicsManager->DisableZBuffering();
-  pGraphicsManager->EnableAlphaBlend();
-  m_pProcess->RenderDebugInfo();
-  pGraphicsManager->DisableAlphaBlend();
-  pGraphicsManager->EnableZBuffering();
-#endif
-  pGraphicsManager->EndRender();
+    SRCMInstance->Execute();
 }
 
-void CEngine::Init( CProcess* apProcess, const std::string& aConfigPath, HWND aWindowId )
+void CEngine::ProcessInputs()
 {
-  m_pCore->Init( aConfigPath, aWindowId );
-  m_pLogRender->SetLinePerPage( 20 );
-  m_pProcess = apProcess;
-  m_pProcess->Init();
+    // TODO: Decirle al action manager que procese los inputs
+}
+
+void CEngine::SetRunnigProcess( CProcess* aProcess )
+{
+    m_pProcess = aProcess;
+}
+
+void CEngine::Init( CEngineConfig* aEngineConfig )
+{
+    m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
+
+    if ( aEngineConfig )
+    {
+        // Init the managers of the engine
+        m_pEngineManagers->Init();
+
+        // Init the videogame
+        m_pProcess->Init();
+
+        // Set render time
+        m_RenderTime = m_RenderTarget = 1.0f / aEngineConfig->GetMaxFps();
+    }
+}
+
+void CEngine::Trace( const std::string& TraceStr )
+{
+    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute( hConsole,
+                             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+    std::cout << TraceStr << std::endl << std::endl;
 }

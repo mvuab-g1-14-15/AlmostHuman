@@ -1,40 +1,32 @@
-#ifndef PHYSIC_PROCESS_H
-#define PHYSIC_PROCESS_H
+#ifndef _PHYSIC_PROCESS_H
+#define _PHYSIC_PROCESS_H
 #pragma once
 
 #include "Process.h"
-#include <vector>
+#include "PhysicsDefs.h"
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
-#include "Reports\PhysicTriggerReport.h"
 #include "Utils\Defines.h"
+#include "Reports\PhysicTriggerReport.h"
+
+#include <vector>
 
 class CPhysicActor;
 class CPhysicUserData;
 class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
-class CTriggerManager;
-class CPhysicController;
+class CGrenade;
 
 class CPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
 private:
-  float32                         m_Speed;
-  float32                         m_Amount;
-  float32                         m_Angle;
-  float32                         m_AngleMoon;
-  Math::Vect2i                    m_LastMousePoint;
-  bool                            m_PaintAll;
-  std::vector<CPhysicActor*>     m_vPA;
-  std::vector<CPhysicUserData*>  m_vPUD;
-  /*CPhysicActor*                   m_pPhysicActor;
-  CPhysicUserData*                m_pPUD;*/
+  std::vector<CPhysicActor*>      m_vPA;
+  std::vector<CPhysicUserData*>   m_vPUD;
   CPhysicSphericalJoint*          m_PSJ;
   CPhysicRevoluteJoint*           m_PRJ;
-  CTriggerManager*                m_TriggerManager;
   bool                            m_Salir;
-  float                            m_Time;
-  CPhysicController*				m_PhysicController;
+  float                           m_Time;
+  CGrenade*                       m_Grenade;
 
 public:
   CPhysicProcess();
@@ -60,7 +52,7 @@ public:
   void    OnStay( CPhysicUserData* _Entity_Trigger1,
                   CPhysicUserData* _Other_Shape );
 
-  void InitSceneCharacterController();
+  void InitScenePhysicsSamplers();
 
 
 };

@@ -72,6 +72,44 @@ inline void GetFilesFromPath( const std::string& Path, const std::string& Extens
   }
 }
 
+namespace TIMER_VAR
+{
+  static LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 };
+}
+
+inline void TIMER_START()
+{
+  QueryPerformanceCounter(&TIMER_VAR::g_lastTime); QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
+}
+
+inline void TIMER_STOP()
+{
+  QueryPerformanceCounter(&TIMER_VAR::g_actualTime); QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
+  double t = (double) (TIMER_VAR::g_actualTime.QuadPart - TIMER_VAR::g_lastTime.QuadPart) / (double) TIMER_VAR::g_timeFreq.QuadPart;
+
+  printf("%time: %f\n", (float) t * 1000.0f);
+}
+
+inline float Random()
+{
+    return rand() / (float)RAND_MAX;
+}
+
+inline float RandRange( float fMin, float fMax )
+{
+    if ( fMin > fMax ) std::swap( fMin, fMax );
+    return ( Random() * ( fMax - fMin ) ) + fMin;
+}
+
+inline Math::Vect3f RandUnitVec()
+{
+    float x = ( Random() * 2.0f ) - 1.0f;
+    float y = ( Random() * 2.0f ) - 1.0f;
+    float z = ( Random() * 2.0f ) - 1.0f;
+
+    return Math::Vect3f(x, y, z).Normalize();
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } //namespace baseUtils
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

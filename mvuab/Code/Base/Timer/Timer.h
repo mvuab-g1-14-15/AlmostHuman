@@ -7,16 +7,17 @@
 //      - FPS: los frames por segundo a que va la aplicacion
 //      - deltaTime: el tiempor que ha pasado dsd la ultima llamad a Update
 //----------------------------------------------------------------------------------
-#pragma once 
+#pragma once
 #ifndef INC_TIMERMANAGER_H_
 #define INC_TIMERMANAGER_H_
 
 #include "Utils\Types.h"
+#include "Engine.h"
 
 class CTimer
 {
 
-public:
+    public:
 
         CTimer(uint32 avgSamples);
         ~CTimer();
@@ -30,7 +31,7 @@ public:
         float32 GetMaxFPS() const { return m_MaxFps; }
         float32 GetMinFPS() const { return m_MinFps; }
 
-private:
+    private:
 
         float32         m_DeltaTime;            // deltaTime
         float32         m_FPS;                  // FPS
@@ -46,9 +47,9 @@ private:
         uint32          m_uIndex;               // current array position
 };
 
-#define deltaTime CCore::GetSingletonPtr()->GetTimer()->GetElapsedTime()
-#define FPS       CCore::GetSingletonPtr()->GetTimer()->GetFPS()
-#define MinFPS    CCore::GetSingletonPtr()->GetTimer()->GetMinFPS()
-#define MaxFPS    CCore::GetSingletonPtr()->GetTimer()->GetMaxFPS()
+#define deltaTime CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime()
+#define FPS       CEngine::GetSingletonPtr()->GetTimer()->GetFPS()
+#define MinFPS    CEngine::GetSingletonPtr()->GetTimer()->GetMinFPS()
+#define MaxFPS    CEngine::GetSingletonPtr()->GetTimer()->GetMaxFPS()
 
 #endif //INC_TIMERMANAGER_H_

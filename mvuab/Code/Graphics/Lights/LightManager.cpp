@@ -5,9 +5,14 @@
 #include "SpotLight.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
-
+#include "EngineConfig.h"
 CLightManager::CLightManager()
-  : m_Filename( "" )
+  : CManager()
+{
+}
+
+CLightManager::CLightManager(CXMLTreeNode& atts)
+  : CManager(atts)
 {
 }
 
@@ -15,25 +20,30 @@ CLightManager::~CLightManager()
 {
 }
 
+void CLightManager::Init()
+{
+	//mConfigPath = EngineConfigInstance->GetLightsPath();
+	Load(mConfigPath);
+}
 bool CLightManager::Load( const std::string& FileName )
 {
   CXMLTreeNode newFile;
-  CXMLTreeNode m;
 
   if ( !newFile.LoadFile( FileName.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CLightManager::Load --> Error loading XML %s.",
-                                           FileName.c_str() );
+    LOG_ERROR_APPLICATION( "CLightManager::Load --> Error loading XML %s.",
+                           FileName.c_str() );
     return false;
   }
 
-  m_Filename = FileName;
+  mConfigPath = FileName;
+  CXMLTreeNode m;
   m = newFile["lights"];
 
   if ( !m.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
+    LOG_ERROR_APPLICATION(
+      "CLightManager::Load --> Error reading %s, lights no existeix.", FileName.c_str() );
     return false;
   }
 
@@ -52,22 +62,20 @@ bool CLightManager::Load( const std::string& FileName )
         if ( !AddResource( l_Light->GetName(), l_Light ) )
           delete l_Light;
       }
-      else
-        if ( l_Type == "omni" )
-        {
-          COmniLight* l_Light = new COmniLight( m( i ) );
+      else if ( l_Type == "omni" )
+      {
+        COmniLight* l_Light = new COmniLight( m( i ) );
 
-          if ( !AddResource( l_Light->GetName(), l_Light ) )
-            delete l_Light;
-        }
-        else
-          if ( l_Type == "targetSpot" )
-          {
-            CSpotLight* l_Light = new CSpotLight( m( i ) );
+        if ( !AddResource( l_Light->GetName(), l_Light ) )
+          delete l_Light;
+      }
+      else if ( l_Type == "targetSpot" )
+      {
+        CSpotLight* l_Light = new CSpotLight( m( i ) );
 
-            if ( !AddResource( l_Light->GetName(), l_Light ) )
-              delete l_Light;
-          }
+        if ( !AddResource( l_Light->GetName(), l_Light ) )
+          delete l_Light;
+      }
     }
   }
 
@@ -90,6 +98,11 @@ CLight* CLightManager::GetLight( size_t at )
   return GetResourceById( at );
 }
 
+size_t  CLightManager::GetLightCount()
+{
+  return m_ResourcesVector.size();
+}
+
 void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
 {
   TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
@@ -101,5 +114,5 @@ void CLightManager::GenerateShadowMap( CGraphicsManager* GM )
 bool CLightManager::ReLoad()
 {
   Destroy();
-  return Load( m_Filename );
+  return Load( mConfigPath );
 }

@@ -8,6 +8,7 @@
 #include "Timer\Timer.h"
 #include "Utils\BaseUtils.h"
 #include "Utils\StringUtils.h"
+#include "EngineManagers.h"
 
 #include <windows.h>
 #include <vector>
@@ -67,7 +68,7 @@ void CLogRender::Update()
 
 
   // Process the inputs
-  CActionManager* pActionManager = CActionManager::GetSingletonPtr();
+  CActionManager* pActionManager = ActionManagerInstance;
 
   if ( pActionManager->DoAction( "ShowHideLogRender" ) )
     SetVisible( !m_bIsVisible );
@@ -110,12 +111,13 @@ void CLogRender::SetVisible( bool flag )
 void CLogRender::ToggleVisibility()
 {
   SetVisible( !m_bIsVisible );
+  //TODO Jaume Save Logger to file
 }
 
 void CLogRender::Render( Math::CColor color )
 {
-  CGraphicsManager* renderManager = CGraphicsManager::GetSingletonPtr();
-  CFontManager* fm = CFontManager::GetSingletonPtr();
+  CGraphicsManager* renderManager = GraphicsInstance;
+  CFontManager* fm = FontInstance;
   CLogger* pLogger = CLogger::GetSingletonPtr()->GetSingletonPtr();
 
   if ( m_bIsVisible )

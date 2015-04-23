@@ -16,7 +16,6 @@ class CLight;
 class CEffect: public CName
 {
 public:
-  CEffect();
   CEffect( const std::string& EffectName );
   ~CEffect();
   bool SetLights( size_t NumOfLights );
@@ -63,6 +62,7 @@ public:
   GET_SET( D3DXHANDLE, BonesParameter );
 
   GET_SET( D3DXHANDLE, DebugColor );
+  GET_SET( D3DXHANDLE, UseDebugColor );
 
   GET_SET( D3DXHANDLE, SceneTextureParameter );
   GET_SET( D3DXHANDLE, BloomThresholdParameter );
@@ -78,12 +78,6 @@ public:
   // Timers
   GET_SET( D3DXHANDLE, TimeParameter );
   GET_SET( D3DXHANDLE, DeltaTimeParameter );
-
-  // Fog
-  GET_SET( D3DXHANDLE, FogStart );
-  GET_SET( D3DXHANDLE, FogEnd );
-  GET_SET( D3DXHANDLE, FogExp );
-  GET_SET( D3DXHANDLE, FogFun );
 
   // Texture
   GET_SET( D3DXHANDLE, HeightTexture );
@@ -130,6 +124,8 @@ public:
   }
 
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
+  void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
+  void SetDebugColor( bool aUse, const Math::CColor aColor );
 
 private: // Members
   std::string m_FileName;
@@ -143,22 +139,33 @@ private: // Members
   Math::Vect3f m_LightsPosition[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
+
   D3DXHANDLE m_WorldMatrixParameter, m_ViewMatrixParameter,
              m_ProjectionMatrixParameter, m_InverseProjectionMatrixParameter,
              m_InverseViewMatrixParameter, m_InverseWorldMatrixParameter;
+
   D3DXHANDLE m_WorldViewMatrixParameter, m_ViewProjectionMatrixParameter,
              m_WorldViewProjectionMatrixParameter;
+
   D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
+
   D3DXHANDLE m_LightEnabledParameter, m_LightsTypeParameter,
              m_LightsPositionParameter, m_LightsDirectionParameter, m_LightsAngleParameter,
              m_LightsColorParameter;
+
   D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter,
              m_LightsEndRangeAttenuationParameter;
+
   D3DXHANDLE m_CameraPositionParameter;
   D3DXHANDLE m_BonesParameter;
 
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
+
+  //
+  // Shadow map handles
+  //
+  D3DXHANDLE m_ShadowMapTextureSizeParameter;
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
@@ -179,6 +186,7 @@ private: // Members
   D3DXHANDLE m_DeltaTimeParameter;
 
   // Fog information
+  D3DXHANDLE m_UseFog;
   D3DXHANDLE m_FogStart;
   D3DXHANDLE m_FogEnd;
   D3DXHANDLE m_FogExp;
@@ -188,26 +196,16 @@ private: // Members
   D3DXHANDLE m_HeightTexture;
   D3DXHANDLE m_WidthTexture;
 
+  //Width & Height window
+  D3DXHANDLE m_HeightWindow;
+  D3DXHANDLE m_WidthWindow;
+
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;
   std::vector<char*> m_DescriptionsMacrosChar;
 
   // The macros to compile the effect
   std::vector<D3DXMACRO> m_Defines;
-
-  /*
-  SceneTextureParameter );
-  BloomThresholdParameter );
-  SampleOffsetsParameter );
-  SampleWeightsParameter );
-  GaussianBlurTextureParameter );
-  BloomIntensityParameter );
-  BaseIntensityParameter );
-  BloomSaturationParameter );
-  BaseSaturationParameter );
-  PostBloomTextureParameter );
-  */
-
 
 private: // Methods
   void  SetNullParameters();

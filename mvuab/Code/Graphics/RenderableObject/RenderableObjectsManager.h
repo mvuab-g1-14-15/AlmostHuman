@@ -9,22 +9,21 @@ class CCinematic;
 
 class CRenderableObjectsManager : public CTemplatedVectorMapManager<CRenderableObject>
 {
-private:
+    private:
 
+    public:
+        CRenderableObjectsManager();
+        ~CRenderableObjectsManager();
+        
+        void Update();
+        void Render();
+        
+        /*CRenderableObject * AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Math::Vect3f &Position);
+        CRenderableObject * AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Math::Vect3f &Position);*/
+        
+         void CleanUp();
+         bool Load( const std::string& FileName );
 
-public:
-  CRenderableObjectsManager();
-  ~CRenderableObjectsManager();
-
-  void Update();
-  void Render();
-
-  /*CRenderableObject * AddMeshInstance(const std::string &CoreMeshName, const std::string &InstanceName, const Math::Vect3f &Position);
-  CRenderableObject * AddAnimatedInstanceModel(const std::string &CoreModelName, const std::string &InstanceModelName, const Math::Vect3f &Position);*/
-  CCinematic* CreateCinematic( const std::string& FileName );
-
-  void CleanUp();
-  bool Load( const std::string& FileName );
-
-  CRenderableObject* GetInstance( const std::string& Name ) const;
+        CCinematic* CreateCinematic(const std::string& FileName);
+        CRenderableObject* GetInstance(const std::string& Name) const;
 };

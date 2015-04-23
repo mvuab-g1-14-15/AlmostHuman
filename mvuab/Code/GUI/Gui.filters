@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FunctionsToRegister">
+      <UniqueIdentifier>{ad1ed464-9e55-4778-a77c-c27f89e1bad2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FunctionsToRegister\AIFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\BaseFunctions .cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\CoreFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\EnumDefinitions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\GraphicsFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\GuiFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\InputFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\NetworkFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\PhysXFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\SoundFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionsToRegister\VideogameFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FunctionsToRegister\AIFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\BaseFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\CoreFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\EnumDefinitions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\GraphicsFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\GuiFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\InputFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\NetworkFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\PhysXFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\SoundFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionsToRegister\VideogameFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="luabind_macros.h" />
+    <ClInclude Include="ScriptManager.h" />
+  </ItemGroup>
+</Project>

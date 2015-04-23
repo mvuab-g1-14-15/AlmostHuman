@@ -144,9 +144,6 @@
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.cpp">
-      <Filter>SceneRenderComands</Filter>
-    </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
@@ -209,6 +206,36 @@
     </ClCompile>
     <ClCompile Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraFree.cpp">
+      <Filter>Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard\Billboard.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderDebugCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\RenderGizmosCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\GizmosManager.cpp">
+      <Filter>Gizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\Gizmo.cpp">
+      <Filter>Gizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos\GizmoElement.cpp">
+      <Filter>Gizmos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,9 +391,6 @@
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderComands\RenderDebugLightsSceneRendererCommand.h">
-      <Filter>SceneRenderComands</Filter>
-    </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
@@ -430,6 +454,36 @@
     <ClInclude Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
+    <ClInclude Include="Cameras\CameraFree.h">
+      <Filter>Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DeveloperInfoSceneRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\Billboard.h">
+      <Filter>Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderDebugCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\RenderGizmosCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\GizmosManager.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\Gizmo.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmos\GizmoElement.h">
+      <Filter>Gizmos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -464,6 +518,12 @@
     </Filter>
     <Filter Include="StaticMeshes">
       <UniqueIdentifier>{5c5324d5-4c2d-48ae-b6af-fddbe48f4f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard">
+      <UniqueIdentifier>{d076ecc9-bf12-4d5f-bf66-5728db8f7a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gizmos">
+      <UniqueIdentifier>{03e11d5f-aead-4c2e-9bc1-da6cff311a00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

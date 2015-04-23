@@ -51,10 +51,6 @@ technique DrawQuadSampler0Technique
 {
     pass p0
     {
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
         PixelShader = compile ps_3_0 mainPS();
     }
 }

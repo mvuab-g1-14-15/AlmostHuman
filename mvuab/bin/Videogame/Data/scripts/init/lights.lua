@@ -6,9 +6,8 @@ local g_StrafeSpeed = 6
 local g_Speed = 5
 
 function init()
-	core = Singleton_Core.get_singleton()
+	core = CCore.GetSingletonPtr()
 	action_manager = core:GetActionManager()
-	graphics_manager = core:GetGraphicsManager()
 	light_manager = core:GetLightManager()
 	renderable_objects_manager = core:GetRenderableObjectsManager()
 	camera_manager = core:GetCameraManager()
@@ -28,8 +27,6 @@ function update()
 	
 	local addPos = Vect3f(0, 0, 0)
 	
-	addPos:Normalize()
-	
 	if action_manager:DoAction("Left") then
 		addPos.x =  1
 	elseif action_manager:DoAction("Right") then
@@ -47,10 +44,12 @@ function update()
 		addPos.y =  -1
 	end
 	
+	if (not addPos.x == 0 or not addPos.y == 0 or not addPos.z == 0) then 
+		addPos:Normalize()
+	end
+	
 	pos = current_light:GetPosition()
 	current_light:SetPosition( pos + addPos )
-	
-	core:trace("hola")
 	
 end
 

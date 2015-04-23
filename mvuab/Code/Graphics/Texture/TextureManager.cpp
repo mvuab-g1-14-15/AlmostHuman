@@ -1,9 +1,14 @@
 #include "TextureManager.h"
 
 CTextureManager::CTextureManager()
+	:CManager()
 {
 }
 
+CTextureManager::CTextureManager(CXMLTreeNode& atts)
+	:CManager(atts)
+{
+}
 CTextureManager::~CTextureManager()
 {
   Destroy();
@@ -17,7 +22,7 @@ void CTextureManager::Reload()
     itb->second->Reload();
 }
 
-CTexture* CTextureManager::GetTexture( const std::string fileName )
+CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
   if ( m_Resources.find( fileName ) == m_Resources.end() )
   {
@@ -31,6 +36,7 @@ CTexture* CTextureManager::GetTexture( const std::string fileName )
     if ( !t->Load( fileName ) )
     {
       CHECKED_DELETE( t );
+	  LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
       return 0;
     }
 

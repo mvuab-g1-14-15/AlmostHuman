@@ -1,80 +1,107 @@
 #include "SpotLight.h"
+
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 #include "Effects\EffectManager.h"
+
+#include "Cameras\Camera.h"
+#include "Cameras\CameraManager.h"
+
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
 {
-  float x, y, z;
-  DWORD color;
+    float x, y, z;
+    DWORD color;
 
-  static unsigned int getFlags()
-  {
-    return ( D3DFVF_CUSTOMVERTEXLIGHT );
-  }
+    static unsigned int getFlags()
+    {
+        return ( D3DFVF_CUSTOMVERTEXLIGHT );
+    }
 } CUSTOMVERTEXLIGHT;
 
 CSpotLight::CSpotLight( CXMLTreeNode node )
-  : CDirectionalLight( node )
-  , m_Angle( node.GetFloatProperty( "angle", 0 ) )
-  , m_FallOff( node.GetFloatProperty( "fall_off", 0 ) )
+    : CDirectionalLight( node )
+    , m_Angle( Math::Utils::Deg2Rad( node.GetFloatProperty( "angle", 0 ) ))
+    , m_FallOff( Math::Utils::Deg2Rad( node.GetFloatProperty( "fall_off", 0 )))
 {
-  SetType( CLight::SPOT );
+    SetType( CLight::SPOT );
 }
 
 void CSpotLight::SetFallOff( const float FallOff )
 {
-  m_FallOff = FallOff;
+    m_FallOff = FallOff;
 }
 
 void CSpotLight::SetAngle( const float Angle )
 {
-  m_Angle = Angle;
+    m_Angle = Angle;
 }
 
 float CSpotLight::GetAngle() const
 {
-  return m_Angle;
+    return m_Angle;
 }
 
 float CSpotLight::GetFallOff() const
 {
-  return m_FallOff;
+    return m_FallOff;
 }
 
 void CSpotLight::Render()
 {
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  D3DXMATRIX matrix = GetTransform().GetD3DXMatrix();
-  D3DXMATRIX translation;
-  D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
-  D3DXMatrixTranslation( &translation, eye.x , eye.y , eye.z );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawSphere( 0.5f, Math::colMAGENTA );
-  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawLine( m_Position, m_Position + m_Direction.GetNormalized() * 5.0f,
-                              Math::colMAGENTA );
+    GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.1f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.2f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.3f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.4f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.5f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.6f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.7f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.8f, 0.08f, Math::colYELLOW );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.9f, 0.08f, Math::colYELLOW );
 }
 
 void CSpotLight::SetShadowMap( CGraphicsManager* GM )
 {
-  // Calculate the View Matrix of the light
-  D3DXVECTOR3 d3dxPos( m_Position.x, m_Position.y, m_Position.z );
-  Math::Vect3f& l_LookAt = m_Position + m_Direction.GetNormalized();
-  D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
-  // Create the up vector with the ideal vector up of the word
-  Math::Vect3f l_UpVec( 0.0f, 1.0f, 0.0f );
-  const Math::Vect3f& l_SideVec = m_Direction.GetNormalized().CrossProduct( l_UpVec );
-  l_UpVec = m_Direction.CrossProduct( l_SideVec );
-  D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
-  D3DXMATRIX l_ViewD3DX;
-  D3DXMatrixLookAtLH( &l_ViewD3DX, &d3dxPos, &d3dxTarget, &d3dxUp );
-  m_ViewShadowMap = Math::Mat44f( l_ViewD3DX );
-  D3DXMATRIX l_PerspectiveD3DX;
-  D3DXMatrixPerspectiveFovLH( &l_PerspectiveD3DX, m_FallOff, 1.0f, 1.0f,
-                              m_EndRangeAttenuation );
-  m_ProjectionShadowMap = Math::Mat44f( l_PerspectiveD3DX );
-  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
-  l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+    D3DXMATRIX l_View;
+    D3DXMATRIX l_Projection;
+    D3DXVECTOR3 l_Eye( m_Position.x, m_Position.y, m_Position.z );
+
+    m_Direction.Normalize();
+    Vect3f l_LookAtV3f = m_Position + m_Direction;
+
+    D3DXVECTOR3 l_LookAt( l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z );
+    D3DXVECTOR3 l_VUP;
+
+    float l_Value = Math::v3fY * l_LookAtV3f;
+
+    if ( ( Math::v3fY * m_Direction ) > 0.995f || ( Math::v3fNEGY * m_Direction ) > 0.995f )
+    {
+        Math::Vect3f l_Cross = v3fX ^ m_Direction;
+        Math::Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+    }
+    else
+    {
+        Math::Vect3f l_Cross = Math::v3fY ^ m_Direction;
+        Math::Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+    }
+
+    l_VUP.x = 0.0f;
+    l_VUP.y = 1.0f;
+    l_VUP.z = 0.0f;
+
+    D3DXVec3Normalize( &l_VUP, &l_VUP );
+    D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
+    m_ViewShadowMap = Math::Mat44f( l_View );
+
+    D3DXMatrixPerspectiveFovLH( &l_Projection, m_FallOff, 1.0f, 1.0f, m_EndRangeAttenuation );
+    m_ProjectionShadowMap = Math::Mat44f( l_Projection );
+
+    CEffectManager* l_EffectManager = EffectManagerInstance;
+    l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+
+    CEngineManagers::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->UpdateFrustum(l_View * l_Projection);
 }

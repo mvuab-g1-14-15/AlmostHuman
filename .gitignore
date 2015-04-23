@@ -15,4 +15,6 @@
 *.db
 *.sdf
 *.suo
-*Boost/
+*3rdParty/
+*bin/lib/
+WwiseProject

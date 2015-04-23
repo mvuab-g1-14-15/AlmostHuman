@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<emitters>
+    <!--
+	<emmiter 
+        EmitterType="Sphere"
+        LifeTime="3.0 5.0"
+        Position="0.0 2.0 1.0"
+        Velocity="1.0 2.0 1.0"
+        Acceleration="1.0 0.0 0.0"
+        
+        Radius="0.1 0.5"
+        Pitch="60.0 120.0"
+        Yaw="0.0 360.0"
+        
+        NumParticles="0"
+		Min="10" Max="50"
+		Texture="Data/textures/smoke.png"
+    />
+    
+    <emmiter 
+        EmitterType="Cube"
+        LifeTime="3.0 5.0"
+        Position="0.0 2.0 1.0"
+        Velocity="1.0 2.0 1.0"
+        Acceleration="1.0 0.0 0.0"
+        
+        Radius="0.1 0.5"
+        Depth="10.0 50.0"
+        Width="10.0 50.0"
+        Height="10.0 50.0"
+        
+        NumParticles="0"
+		Min="10" Max="50"
+		Texture="Data/textures/smoke.png"
+    />
+	-->
+</emitters>

@@ -54,49 +54,41 @@
     </render_draw_quad>
 =============================================================================================================================================================
     LENS FLARE
-	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
-	<lens_of_flare>
-		<texture stage_id="0" name="nova.png"/>
-		<texture stage_id="1" name="extendring.png"/>
-		<texture stage_id="2" name="hexangle.png"/>
-		<texture stage_id="3" name="hexagon.png"/>
-		<texture stage_id="4" name="starring.png"/>
-		<texture stage_id="5" name="star.png"/>
-		<texture stage_id="6" name="extend.png"/>
-	</lens_of_flare>
+    <set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+    <lens_of_flare>
+        <texture stage_id="0" name="./Data/textures/nova.png"/>
+        <texture stage_id="1" name="./Data/textures/extendring.png"/>
+        <texture stage_id="2" name="./Data/textures/hexangle.png"/>
+        <texture stage_id="3" name="./Data/textures/hexagon.png"/>
+        <texture stage_id="4" name="./Data/textures/starring.png"/>
+        <texture stage_id="5" name="./Data/textures/star.png"/>
+        <texture stage_id="6" name="./Data/textures/extend.png"/>
+    </lens_of_flare>
 =============================================================================================================================================================
     FILTER BLOOM
     <capture_frame_buffer>
         <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
-    
+
     <set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="ActualFrameBuffer"/>
     </render_draw_quad>
-    
+
     <capture_frame_buffer>
         <dynamic_texture stage_id="0" name="BloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
     </capture_frame_buffer>
     
-     <gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
+    <gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
         <texture stage_id="0" name="BloomFilterBuffer"/>
     </gaussian>
     
-    <set_pool_renderable_objects_technique pool="draw_quad_sampler_0_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="BloomFilterBuffer"/>
-    </render_draw_quad>
-    
-    <capture_frame_buffer>
-        <dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    </capture_frame_buffer>
-    
     <set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
-        <texture stage_id="0" name="GaussianBloomFilterBuffer"/>
+        <texture stage_id="0" name="BloomFilterBuffer"/>
         <texture stage_id="1" name="ActualFrameBuffer"/>
     </render_draw_quad>
+    FILTER BLOOM
 =============================================================================================================================================================
     PERLIN NOISE
     <capture_frame_buffer>
@@ -119,3 +111,16 @@ DISABLE ALPHA TEST
 SET BLEND
 <set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 =============================================================================================================================================================
+    SCATTERED LIGHT
+    <capture_frame_buffer>
+        <dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </capture_frame_buffer>
+    
+    <set_pool_renderable_objects_technique pool="Scattered_Light_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="0" name="ActualFrameBuffer"/>
+    </render_draw_quad>
+	
+	<render_gizmos render="true"/>
+	
+	<render_gui render="true"/>

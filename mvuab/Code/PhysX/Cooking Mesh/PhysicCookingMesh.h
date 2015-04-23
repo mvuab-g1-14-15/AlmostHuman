@@ -25,47 +25,54 @@ class NxClothMeshDesc;
 //--------------------------
 
 using namespace std;
+typedef std::map<std::string, NxTriangleMesh*> VecMeshes;
 
 class CPhysicCookingMesh
 {
 public:
-	typedef std::map<std::string,NxTriangleMesh*> VecMeshes;
+  
 
 public:
-	//--- Init and End protocols	
-								CPhysicCookingMesh	( void );
-								~CPhysicCookingMesh	( void )			{ Done(); }
+  //--- Init and End protocols
+  CPhysicCookingMesh( void );
+  ~CPhysicCookingMesh( void )
+  {
+    Done();
+  }
 
-	bool						Init				( NxPhysicsSDK* physicSDK, CPhysicUserAllocator* myAllocator );
-	void						Done				( void );
-	bool						IsOk				( void ) const { return m_bIsOk; }
+  bool            Init( NxPhysicsSDK* physicSDK, CPhysicUserAllocator* myAllocator );
+  void            Done( void );
+  bool            IsOk( void ) const
+  {
+    return m_bIsOk;
+  }
 
 
-	NxTriangleMesh*				GetPhysicMesh		(const std::string& name);
-	size_t						GetNumMeshes		() { return m_TriangleMeshes.size(); }		// Added by XMA
+  NxTriangleMesh*       GetPhysicMesh( const std::string& name );
+  const VecMeshes		&GetMeshes() { return m_TriangleMeshes; }
 
 
-	bool						CreatePhysicMesh	( const std::string& _BinFilename, const std::string& _NameMesh );
-	bool						CreatePhysicMesh	( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_NameMesh );
-	bool						SavePhysicMesh		( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string &_BinFilename );
-	bool						CreateMeshFromASE	( std::string _FileName, std::string _Name );
-	bool						CookClothMesh		( const NxClothMeshDesc& _Desc, NxStream& _Stream);
+  bool            CreatePhysicMesh( const std::string& _BinFilename, const std::string& _NameMesh );
 
-	/* Movido desde private por XMA */
-	void						Release				( void );
-	void						ReleasePhysicMesh   (const std::string& name);
+  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces );
+  bool            SavePhysicMesh( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string& _BinFilename );
+
+  bool            CreateMeshFromASE( std::string _FileName, std::string _Name );
+  bool            CookClothMesh( const NxClothMeshDesc& _Desc, NxStream& _Stream );
+
+  void            Release( void );
+  bool            ReadMeshFromASE( std::string _FileName, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces );
+  void            ReleasePhysicMesh( const std::string& name );
 
 private:
-	bool						ReadMeshFromASE		( std::string _FileName, std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces );
-//	void						Release				( void );
 
-private:
+  bool						m_bIsOk;
 
-	bool						m_bIsOk;
-	NxPhysicsSDK*				m_pPhysicSDK;
-	CPhysicUserAllocator*		m_pMyAllocator;
-	NxCookingInterface*			m_pCooking;
-	VecMeshes					m_TriangleMeshes;
+  NxPhysicsSDK*				m_pPhysicSDK;
+  CPhysicUserAllocator*		m_pMyAllocator;
+
+  NxCookingInterface*		m_pCooking;
+  VecMeshes					m_TriangleMeshes;
 };
 
 #endif // INC_PHYSIC_COOKING_MESH_H_

@@ -1,21 +1,29 @@
-
-#include "InstanceMesh.h"
-#include "Core.h"
 #include "StaticMeshManager.h"
 #include "XML\XMLTreeNode.h"
+#include "InstanceMesh.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& Name,
-                              const std::string& CoreName ): m_pStaticMesh( CStaticMeshManager::GetSingletonPtr()->GetResource(
-                                      CoreName ) )
+
+#include "Math\AABB.h"
+#include "GraphicsManager.h"
+
+#include "Cameras/Camera.h"
+#include "Cameras/Frustum.h"
+#include "Cameras/CameraManager.h"
+#include "Math\AABB.h"
+#include "EngineManagers.h"
+
+CInstanceMesh::CInstanceMesh( const std::string& Name, const std::string& CoreName )
+    : m_pStaticMesh( SMeshMInstance->GetResource(CoreName ) ), CRenderableObject()
 {
-  if ( !m_pStaticMesh )
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR,
-                                           "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" );
+    if ( !m_pStaticMesh )
+    { LOG_ERROR_APPLICATION( "CInstanceMesh::CInstanceMesh No se puede instanciar m_pStaticMesh" ); }
 
-  SetName( Name );
+    SetName( Name );
 }
+
 CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts )
-  : CRenderableObject( atts )
+    : CRenderableObject( atts ), m_pStaticMesh( SMeshMInstance->GetResource(atts.GetPszProperty( "core",
+            "no_staticMesh" ) ) )
 {
 }
 
@@ -26,11 +34,20 @@ CInstanceMesh::~CInstanceMesh()
 
 void CInstanceMesh::Render()
 {
-  CGraphicsManager::GetSingletonPtr()->SetTransform( GetTransform() );
+    if (!m_pStaticMesh) { return; }
 
-  if ( m_pStaticMesh )
-    m_pStaticMesh->Render( CGraphicsManager::GetSingletonPtr() );
+    Math::Mat44f lTransform = GetTransform();
+    GraphicsInstance->SetTransform( lTransform );
+    Math::AABB3f laabb = m_pStaticMesh->GetAABB();
 
-  Math::Mat44f t;
-  CGraphicsManager::GetSingletonPtr()->SetTransform( t );
+    CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+
+    // TODO: Fix the frustum culling
+    if(lCameraFrustum.SphereVisible( D3DXVECTOR3(lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z),
+                                     laabb.GetRadius()) )
+    { m_pStaticMesh->Render( GraphicsInstance ); }
+
+    Math::Mat44f t;
+    GraphicsInstance->SetTransform( t );
 }

@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------
 void CMouse::Done ()
 {
-    CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Mouse:: releasing mouse");
+    LOG_INFO_APPLICATION("Mouse:: releasing mouse");
     if (IsOk())
     {
         Release();
@@ -18,9 +18,9 @@ void CMouse::Done ()
 }
 
 /**
-* Initializes the mouse device
+    Initializes the mouse device
 */
-bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveMode) 
+bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, bool exclusiveMode)
 {
     bool bIsOk = Inherited::Init(pDI, hWnd);
     m_ScreenResolution = screenRes;
@@ -28,14 +28,12 @@ bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, 
     if (bIsOk)
     {
         // clear out structs for mouse buttons
-        memset(m_bIsDown,  0, sizeof(bool)*3);
-        memset(m_bIsUpDown, 0, sizeof(bool)*3);
-        memset(m_bIsDownUp, 0, sizeof(bool)*3);
+        memset(m_bIsDown,  0, sizeof(bool) * 3);
+        memset(m_bIsUpDown, 0, sizeof(bool) * 3);
+        memset(m_bIsDownUp, 0, sizeof(bool) * 3);
         m_Pos.x = m_Pos.y = 0;
 
-
-
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Mouse:: crancking up mouse");
+        LOG_INFO_APPLICATION("Mouse:: crancking up mouse");
         bIsOk = !FAILED(CrankUp(GUID_SysMouse, &c_dfDIMouse, exclusiveMode));
 
         if (bIsOk)
@@ -64,7 +62,7 @@ bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, 
                     {
                         // acquire the device to make it work
                         m_pDevice->Acquire();
-                        CLogger::GetSingletonPtr()->AddNewLog(ELL_INFORMATION, "Mouse:: mouse online");
+                        LOG_INFO_APPLICATION("Mouse:: mouse online");
                     }
                 }
             }
@@ -77,7 +75,7 @@ bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Math::Vect2i& screenRes, 
     }
 
     return bIsOk;
-} 
+}
 
 //----------------------------------------------------------------------------
 // Free memory
@@ -88,7 +86,7 @@ void CMouse::Release ()
 }
 
 /**
-* Update all input devices
+    Update all input devices
 */
 HRESULT CMouse::Update(void)
 {
@@ -101,7 +99,7 @@ HRESULT CMouse::Update(void)
     ZeroMemory(&od[0], sizeof(DIDEVICEOBJECTDATA)*BUFFER_SIZE);
 
     // try to get the data from the mouse
-    if (FAILED(GetData(IDV_MOUSE, &od[0], &dwNumElem))) 
+    if (FAILED(GetData(IDV_MOUSE, &od[0], &dwNumElem)))
     {
         //Log("InputManager ERROR:: GetData(Mouse) failed");
         return E_FAIL;
@@ -113,93 +111,99 @@ HRESULT CMouse::Update(void)
 
 
     // now we have 'dwNumElem' of mouse events
-    for (DWORD i=0; i<dwNumElem; i++)
+    for (DWORD i = 0; i < dwNumElem; i++)
     {
         switch (od[i].dwOfs)
         {
             // MOVEMENT
-        case DIMOFS_X: 
-         {
-             m_Pos.x += od[i].dwData;
-             m_Delta.x = od[i].dwData;
+            case DIMOFS_X:
+                {
+                    m_Pos.x += od[i].dwData;
+                    m_Delta.x = od[i].dwData;
 
-             if (m_Pos.x < 0)
-                 m_Pos.x = 0;
-             else if (m_Pos.x > m_ScreenResolution.x)
-                 m_Pos.x = m_ScreenResolution.x;
-         } 
-         break;
-
-        case DIMOFS_Y: 
-         {
-             m_Pos.y += od[i].dwData;
-             m_Delta.y = od[i].dwData;
-
-             if (m_Pos.y < 0)
-                 m_Pos.y = 0;
-             else if (m_Pos.y > m_ScreenResolution.y)
-                 m_Pos.y = m_ScreenResolution.y;
-         } 
-         break;
-
-        case DIMOFS_Z: 
-         {
-             m_Delta.z = od[i].dwData;
-         } 
-         break;
-
-         // BUTTON STATES
-        case DIMOFS_BUTTON0:
-         {
-             if (od[i].dwData & 0x80) {
-                 if (!m_bIsDown[0])
-                     m_bIsUpDown[0] = true;
-                 m_bIsDown[0] = true;
-             }
-             else {
-                 if (m_bIsDown[0])
-                     m_bIsDownUp[0] = true;
-
-                 m_bIsDown[0] = false;
-             }
-         }
-         break;
-
-        case DIMOFS_BUTTON1:
-         {
-             if (od[i].dwData & 0x80){
-                 if (!m_bIsDown[1])
-                     m_bIsUpDown[1] = true;
-                 m_bIsDown[1] = true;
-             }
-             else {
-                 if (m_bIsDown[1])
-                     m_bIsDownUp[1] = true;
-
-                 m_bIsDown[1] = false;
-             }
-         }
-         break;
-
-        case DIMOFS_BUTTON2:
-         {
-             if (od[i].dwData & 0x80){
-                 if (!m_bIsDown[2])
-                     m_bIsUpDown[2] = true;
-                 m_bIsDown[2] = true;
-             }
-             else {
-                 if (m_bIsDown[2])
-                     m_bIsDownUp[2] = true;
-
-                 m_bIsDown[2] = false;
+                    if (m_Pos.x < 0)
+                    { m_Pos.x = 0; }
+                    else if (m_Pos.x > m_ScreenResolution.x)
+                    { m_Pos.x = m_ScreenResolution.x; }
                 }
-         }
-         break;
+                break;
+
+            case DIMOFS_Y:
+                {
+                    m_Pos.y += od[i].dwData;
+                    m_Delta.y = od[i].dwData;
+
+                    if (m_Pos.y < 0)
+                    { m_Pos.y = 0; }
+                    else if (m_Pos.y > m_ScreenResolution.y)
+                    { m_Pos.y = m_ScreenResolution.y; }
+                }
+                break;
+
+            case DIMOFS_Z:
+                {
+                    m_Delta.z = od[i].dwData;
+                }
+                break;
+
+            // BUTTON STATES
+            case DIMOFS_BUTTON0:
+                {
+                    if (od[i].dwData & 0x80)
+                    {
+                        if (!m_bIsDown[0])
+                        { m_bIsUpDown[0] = true; }
+                        m_bIsDown[0] = true;
+                    }
+                    else
+                    {
+                        if (m_bIsDown[0])
+                        { m_bIsDownUp[0] = true; }
+
+                        m_bIsDown[0] = false;
+                    }
+                }
+                break;
+
+            case DIMOFS_BUTTON1:
+                {
+                    if (od[i].dwData & 0x80)
+                    {
+                        if (!m_bIsDown[1])
+                        { m_bIsUpDown[1] = true; }
+                        m_bIsDown[1] = true;
+                    }
+                    else
+                    {
+                        if (m_bIsDown[1])
+                        { m_bIsDownUp[1] = true; }
+
+                        m_bIsDown[1] = false;
+                    }
+                }
+                break;
+
+            case DIMOFS_BUTTON2:
+                {
+                    if (od[i].dwData & 0x80)
+                    {
+                        if (!m_bIsDown[2])
+                        { m_bIsUpDown[2] = true; }
+                        m_bIsDown[2] = true;
+                    }
+                    else
+                    {
+                        if (m_bIsDown[2])
+                        { m_bIsDownUp[2] = true; }
+
+                        m_bIsDown[2] = false;
+                    }
+                }
+                break;
         }; // END switch (od[i].dwOfs)
     } // END for (DWORD i=0; i<dwNumElem; i++)
 
     return S_OK;
-} 
+}
 
 

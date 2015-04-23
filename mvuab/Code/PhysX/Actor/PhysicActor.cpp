@@ -37,7 +37,7 @@ CPhysicActor::~CPhysicActor( void )
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        MÉTODOS PRINCIPALES
 // -----------------------------------------
 void CPhysicActor::Destroy( void )
 {
@@ -121,7 +121,7 @@ void CPhysicActor::Destroy( void )
 }
 
 // -----------------------------------------
-//        MÈTODES PRINCIPALS
+//        MÉTODOS PRINCIPALES
 // -----------------------------------------
 
 void CPhysicActor::CreateActor( NxActor* _pActor )
@@ -160,7 +160,7 @@ void CPhysicActor::CreateSphereTrigger( const Math::Vect3f& _vGlobalPos, const f
 }
 
 // -----------------------------------------
-//          MÈTODES
+//          MÉTODOS
 // -----------------------------------------
 
 void CPhysicActor::AddTorque( const Math::Vect3f _vTorque )
@@ -585,31 +585,6 @@ void CPhysicActor::GetMat44( Mat44f& matrix ) const
   matrix.m33 = m_aux[15];
 }
 
-Math::Mat44f& CPhysicActor::GetMat44() const
-{
-  Math::Mat44f matrix;
-  assert( m_pPhXActor );
-  NxF32 m_aux[16];
-  m_pPhXActor->getGlobalPose().getColumnMajor44( m_aux );
-  matrix.m00 = m_aux[0];
-  matrix.m01 = m_aux[4];
-  matrix.m02 = m_aux[8];
-  matrix.m03 = m_aux[12];
-  matrix.m10 = m_aux[1];
-  matrix.m11 = m_aux[5];
-  matrix.m12 = m_aux[9];
-  matrix.m13 = m_aux[13];
-  matrix.m20 = m_aux[2];
-  matrix.m21 = m_aux[6];
-  matrix.m22 = m_aux[10];
-  matrix.m23 = m_aux[14];
-  matrix.m30 = m_aux[3];
-  matrix.m31 = m_aux[7];
-  matrix.m32 = m_aux[11];
-  matrix.m33 = m_aux[15];
-  return matrix;
-}
-
 Mat33f CPhysicActor::GetInertiaTensor( void )
 {
   if ( m_pPhXActor )
@@ -641,7 +616,7 @@ void CPhysicActor::SetContactReportThreshold( float _fThreshold )
 void CPhysicActor::SetRotation( const Math::Vect3f& _vRot )
 {
   assert( m_pPhXActor );
-  //no va bé, només rota de 0 a pi i repeteix.
+  //no va bien, sólo rota de 0 a pi y repite.
   //angles between -pi and pi
   Math::Vect3f l_vRot = _vRot;
 
@@ -713,4 +688,29 @@ void CPhysicActor::SetCollisionGroup( uint32 _uiGroup ) //NxCollisionGroup group
 
   while ( nShapes-- )
     shapes[nShapes]->setGroup( _uiGroup );
+}
+
+void CPhysicActor::AddSphereShapeHardcoded( float radius, const Math::Vect3f& _vGlobalPos,
+                                   const Math::Vect3f& localPos )
+{
+  NxCCDSkeleton* skeleton = 0;
+  uint32 _uiGroup = 0;
+  assert( m_pPhXActorDesc );
+  // Add a sphere shape to the actor descriptor
+  NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
+  assert( sphereDesc );
+  sphereDesc->group = _uiGroup;
+  sphereDesc->materialIndex = m_MaterialIndex;
+  m_vSphereDesc.push_back( sphereDesc );
+  sphereDesc->radius = radius;
+  sphereDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
+  m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
+
+  if ( skeleton != NULL )
+  {
+    sphereDesc->ccdSkeleton = skeleton;
+    sphereDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
+  }
+
+  m_pPhXActorDesc->shapes.pushBack( sphereDesc );
 }

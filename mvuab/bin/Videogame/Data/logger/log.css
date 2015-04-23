@@ -19,6 +19,13 @@ h1 {
 padding-top: 3em;
 }
 
+.title
+{
+	padding-top: 3em;
+	text-align: center;
+	font-size: 24px;
+}
+
 body {
 font-family:"Calibri";
 padding-top: 0;
@@ -31,10 +38,26 @@ padding:4px;
 border-radius:5px;
 margin:2px;
 display:block;
+
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+-moz-column-count: 2; /* Firefox */
+column-count: 2;
+
+-webkit-column-gap: 10px; /* Chrome, Safari, Opera */
+-moz-column-gap: 10px; /* Firefox */
+column-gap: 10px;
+
 }
 
-img{
-float: none;
+pre
+{
+	font-family:"Calibri";
+}
+
+img
+{
+float: left;
+margin: 5px;
 }
 
 span{
@@ -150,7 +173,7 @@ background-color:#99ffcc;
 }
 
 .Input {
-background-color:#ffcc00;
+background-color:#ff9966;
 }
 
 .Button {
@@ -179,4 +202,21 @@ background-color:#ffcc00;
 {
 	background-image: url("img/info.png");
     background-color: #cccccc;
+}
+
+#actionpanel
+{
+	text-align: center;
+}
+
+#actionpanel .reload
+{
+	width: 20%;
+	font-size: 18px;
+	border: 5px;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 10px;
+	cursor: hand;
+	font-weight: bold;
 }

@@ -93,8 +93,8 @@ CAL3D_HW_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
 	OUT.WorldNormal = normalize(mul(l_Normal, g_WorldMatrix));
 	
-	OUT.WorldTangent = normalize(mul(l_Tangent, g_WorldMatrix));
-	OUT.WorldBinormal = mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix);
+	OUT.WorldTangent = float4(normalize(mul(l_Tangent, (float3x3)g_WorldMatrix)), 0.0);
+	OUT.WorldBinormal = float4(mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix), 0.0);
 	
 	OUT.UV = IN.TexCoord.xy;
 	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProj );

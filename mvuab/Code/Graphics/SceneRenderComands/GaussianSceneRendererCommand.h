@@ -7,11 +7,13 @@
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
+class CEffectTechnique;
 
 class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 {
     private:
         CTexture *m_pAuxTexture[2];
+        CEffectTechnique *m_Technique;
 
         std::string m_NameTechnique;
         unsigned int m_nIteration;

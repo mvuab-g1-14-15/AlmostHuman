@@ -2,6 +2,7 @@
 #include "Effect.h"
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
+#include "EngineConfig.h"
 
 CEffectManager::CEffectManager()
   : m_WorldMatrix( Math::m44fIDENTITY ),
@@ -11,10 +12,18 @@ CEffectManager::CEffectManager()
     m_LightViewMatrix( Math::m44fIDENTITY ),
     m_ShadowProjectionMatrix( Math::m44fIDENTITY ),
     m_CameraEye( Math::v3fZERO ),
-    m_Filename( "" )
+    m_Filename( "" ),
+	CManager()
 {
 }
 
+CEffectManager::CEffectManager( CXMLTreeNode &atts)
+  : CManager(atts)
+{
+	/* TODO RAUL
+	PONER LECTURA DE XML
+	*/
+}
 CEffectManager::~CEffectManager()
 {
   CleanUp();
@@ -118,17 +127,17 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
   SetCameraEye( CameraEye );
 }
 
-void CEffectManager::Load( const std::string& FileName )
+void CEffectManager::Init()
 {
   // Obtain the filename
-  m_Filename = FileName;
+	//m_Filename = EngineConfigInstance->GetEffectsPath();
   // Check if the file exist
   CXMLTreeNode newFile;
 
-  if ( !newFile.LoadFile( m_Filename.c_str() ) )
+  if ( !newFile.LoadFile( mConfigPath.c_str() ) )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Load No se puede abrir \"%s\"!",
-                                           m_Filename.c_str() );
+    LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",
+                                           mConfigPath.c_str() );
     return;
   }
 
@@ -137,7 +146,7 @@ void CEffectManager::Load( const std::string& FileName )
 
   if ( !l_Node.Exists() )
   {
-    CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Load Tag \"%s\" no existe",
+    LOG_ERROR_APPLICATION( "CEffectManager::Load Tag \"%s\" no existe",
                                            "effects" );
     return;
   }
@@ -170,7 +179,7 @@ void CEffectManager::Load( const std::string& FileName )
           if ( !l_pEffect->Load( l_CurrentSubNode ) )
           {
             std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-            CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, msg_error.c_str() );
+            LOG_ERROR_APPLICATION( msg_error.c_str() );
             CHECKED_DELETE( l_pEffect );
           }
           else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
@@ -186,7 +195,7 @@ void CEffectManager::Load( const std::string& FileName )
 
       if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
       {
-        CLogger::GetSingletonPtr()->AddNewLog( ELL_ERROR, "CEffectManager::Error adding the new effect technique \"%s\ with effect \"%s\"!", l_TechniquetName.c_str(), l_EffectName.c_str() );
+        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
         CHECKED_DELETE( l_NewTechnique );
       }
 
@@ -200,5 +209,5 @@ void CEffectManager::Reload()
 {
   CleanUp();
   Destroy();
-  Load( m_Filename );
+  Init();
 }

@@ -2,10 +2,19 @@
 <renderable_object_techniques>
 
 	<pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
-		<default_technique vertex_type="19"	technique="GenerateGBufferTechnique"/>
-		<default_technique vertex_type="31"	technique="GenerateGBufferNormalTechnique"/>
-		<default_technique vertex_type="51"	technique="GenerateGBufferSelfIllumTechnique"/>
-		<default_technique vertex_type="63"	technique="GenerateGBufferSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="19"		technique="GenerateGBufferTechnique"/>
+		<default_technique vertex_type="31"		technique="GenerateGBufferNormalTechnique"/>
+		<default_technique vertex_type="51"		technique="GenerateGBufferSelfIllumTechnique"/>
+		<default_technique vertex_type="63"		technique="GenerateGBufferSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="67"		technique="GenerateGBufferDiffuseTechnique"/>
+		<default_technique vertex_type="415" 	technique="GenerateGBufferCal3DTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="shadow_map_pool_renderable_object_technique">
+		<default_technique vertex_type="19"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="31"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="51"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="63"	technique="ShadowMapTechnique"/>
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="draw_quad_sampler_0_pool_renderable_object_technique">
@@ -18,6 +27,10 @@
     
     <pool_renderable_object_technique name="Perlin_noise_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="PerlinNoiseTechnique"/>
+	</pool_renderable_object_technique>
+    
+    <pool_renderable_object_technique name="Scattered_Light_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="ScatteredLightTechnique"/>
 	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="init_deferred_technique_pool_renderable_object_technique">

@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
-	<action name="ShootRayCast">
-   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_SPACE"/>
+    <action name="LeanOutLeft">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
+	
+	<action name="LeanOutRight">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_E"/>
+    </action>
+	
+    <action name="LeanOutLeftDown">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_Q"/>
+    </action>
+	
+	<action name="LeanOutRightDown">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_E"/>
+    </action>
+	
+	<action name="LeanOutLeftUp">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_Q"/>
+    </action>
+	
+	<action name="LeanOutRightUp">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_E"/>
+    </action>
+    
+    <action name="ASS_LEFT_SETZERO">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_Q"/>
+    </action>
+	
+	<action name="ASS_RIGHT_SETZERO">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_E"/>
+    </action>
+
 	<action name="ThrowGrenade">
    	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_G"/>
     </action>
@@ -48,6 +77,10 @@
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F11"/>
     </action>
 	
+	<action name="ReloadGUI">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F8"/>
+    </action>
+	
 	<action name="SaveActionToInput">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_S"/>
 	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
@@ -75,27 +108,39 @@
     </action>
 	
 	<action name="MoveUp">
-   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_E"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
 	
 	<action name="MoveDown">
-   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_E"/>
     </action>
- 
-    <action name="LeftMouseButtonPressed">
-   	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+	
+	<action name="Jump">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_SPACE"/>
     </action>
+  
+  <action name="ShootDown">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+  </action>
+  
+  <action name="ShootUp">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP"  Code="MOUSE_BUTTON_LEFT"/>
+  </action>
+  
+  <action name="Shoot">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+  </action>
 	
 	<action name="RightMouseButtonPressed">
    	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
     </action>
 	
 	<action name="MoveYaw">
-	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
+	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X"/>
     </action>
 	
 	<action name="MovePitch">
-   	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
+   	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y"/>
     </action>
 	
 	<action name="Run">
@@ -139,5 +184,43 @@
 	
 	<action name="RightBridge">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_RIGHT"/>
+    </action>
+	
+	<action name="Crouch">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_C"/>
+    </action>
+	
+	<action name="ChangeRoom">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
+	
+	<action name="ChangeCamera">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F"/>
+    </action>
+	
+	<action name="ChangeVolumetria">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LSHIFT"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_1"/>
+    </action>
+	
+	<action name="ChangeEffects">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LSHIFT"/>
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
+	
+	<action name="ChangeAnimation">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_P"/>
+    </action>
+	
+	<action name="ConsolaGUI">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_L"/>
+    </action>
+	
+	<action name="ForwardGUI">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_UP"/>
+    </action>
+	
+	<action name="BackwarGUI">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_DOWN"/>
     </action>
 </Actions>

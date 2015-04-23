@@ -1,75 +1,99 @@
 #include "DirectionalLight.h"
+
 #include "Math\Vector3.h"
 #include "GraphicsManager.h"
+#include "EngineManagers.h"
 #include "Effects\EffectManager.h"
+
+#include "Cameras\Camera.h"
+#include "Cameras\CameraManager.h"
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEXLIGHT
 {
-  float x, y, z;
-  DWORD color;
+    float x, y, z;
+    DWORD color;
 
-  static unsigned int getFlags()
-  {
-    return ( D3DFVF_CUSTOMVERTEXLIGHT );
-  }
+    static unsigned int getFlags()
+    {
+        return ( D3DFVF_CUSTOMVERTEXLIGHT );
+    }
 } CUSTOMVERTEXLIGHT;
 
 CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
-  : CLight( node )
-  , m_Direction( node.GetVect3fProperty( "dir", Math::Vect3f( 0, 0, 0 ) ) )
+    : CLight( node )
 {
-  Math::Vect3f l_Direction = m_Direction.GetNormalized();
-  m_fYaw = -Math::Utils::ATan2( l_Direction.z, l_Direction.x );
-  m_fPitch = Math::Utils::ATan2( l_Direction.y,
-                                 Math::Utils::Sqrt( l_Direction.z * l_Direction.z + l_Direction.x *
-                                     l_Direction.x ) );
-  SetType( CLight::DIRECTIONAL );
+    const Math::Vect3f& lLookAt = node.GetVect3fProperty( "look_at", Math::Vect3f( 0, 0, 0 ) );
+    m_Direction = (lLookAt - m_Position).GetNormalized();
+    m_OrthoShadowMapSize.x = node.GetFloatProperty( "shadow_map_width", 0 );
+    m_OrthoShadowMapSize.y = node.GetFloatProperty( "shadow_map_height", 0 );
+    SetType( CLight::DIRECTIONAL );
 }
 
 void CDirectionalLight::SetDirection( const Math::Vect3f& Direction )
 {
-  m_Direction = Direction;
+    m_Direction = Direction;
 }
 
 Math::Vect3f CDirectionalLight::GetDirection() const
 {
-  return m_Direction;
+    return m_Direction;
 }
 
 void CDirectionalLight::Render()
 {
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  D3DXMATRIX matrix = GetTransform().GetD3DXMatrix();
-  D3DXMATRIX translation;
-  D3DXVECTOR3 eye( m_Position.x, m_Position.y, m_Position.z );
-  D3DXMatrixTranslation( &translation, eye.x , eye.y , eye.z );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawSphere( 0.5f, Math::colGREEN );
-  D3DXMatrixTranslation( &matrix, 0, 0, 0 );
-  GraphicsInstance->SetTransform( matrix );
-  GraphicsInstance->DrawLine( m_Position, m_Position + m_Direction.GetNormalized() * 5.0f,
-                              Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.1f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.2f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.3f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.4f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.5f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.6f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.7f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.8f, 0.08f, Math::colGREEN );
+    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.9f, 0.08f, Math::colGREEN );
 }
 
 void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
 {
-  // Calculate the View Matrix of the light
-  D3DXVECTOR3 d3dxPos( m_Position.x, m_Position.y, m_Position.z );
-  Math::Vect3f& l_LookAt = m_Position + m_Direction.GetNormalized();
-  D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
-  // Create the up vector with the ideal vector up of the word
-  Math::Vect3f l_UpVec( 0.0f, 1.0f, 0.0f );
-  const Math::Vect3f& l_SideVec = m_Direction.GetNormalized().CrossProduct( l_UpVec );
-  l_UpVec = m_Direction.CrossProduct( l_SideVec );
-  D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
-  D3DXMATRIX l_ViewD3DX;
-  D3DXMatrixLookAtLH( &l_ViewD3DX, &d3dxPos, &d3dxTarget, &d3dxUp );
-  m_ViewShadowMap = Math::Mat44f( l_ViewD3DX );
-  D3DXMATRIX l_OrthoD3DX;
-  D3DXMatrixOrthoLH( &l_OrthoD3DX, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 1.0f,
-                     m_EndRangeAttenuation );
-  m_ProjectionShadowMap = Math::Mat44f( l_OrthoD3DX );
-  CEffectManager* l_EffectManager = CEffectManager::GetSingletonPtr();
-  l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+    D3DXMATRIX l_View;
+    D3DXMATRIX l_Ortho;
+    D3DXVECTOR3 l_Eye( m_Position.x, m_Position.y, m_Position.z );
+
+    m_Direction.Normalize();
+    Vect3f l_LookAtV3f = m_Position + m_Direction;
+
+    D3DXVECTOR3 l_LookAt( l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z );
+    D3DXVECTOR3 l_VUP;
+
+    float l_Value = v3fY * l_LookAtV3f;
+
+    if ( ( v3fY * m_Direction ) > 0.995f || ( v3fNEGY * m_Direction ) > 0.995f )
+    {
+        Vect3f l_Cross = v3fX ^ m_Direction;
+        Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+    }
+    else
+    {
+        Vect3f l_Cross = v3fY ^ m_Direction;
+        Vect3f l_VUpV3f = m_Direction ^ l_Cross;
+        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+    }
+
+
+    D3DXMatrixLookAtLH( &l_View, &l_Eye, &l_LookAt, &l_VUP );
+    m_ViewShadowMap = Mat44f( l_View );
+
+    D3DXMatrixOrthoLH( &l_Ortho, m_OrthoShadowMapSize.x, m_OrthoShadowMapSize.y, 0.1f, m_EndRangeAttenuation );
+    m_ProjectionShadowMap = Mat44f( l_Ortho );
+
+    CEffectManager* l_EffectManager = EffectManagerInstance;
+    l_EffectManager->ActivateCamera( m_ViewShadowMap, m_ProjectionShadowMap, m_Position );
+
+    CEngineManagers::GetSingletonPtr()->GetCameraManager()->GetCurrentCamera()->UpdateFrustum(l_View * l_Ortho);
+
+    LPDIRECT3DDEVICE9 lDevice = GraphicsInstance->GetDevice();
+    lDevice->SetTransform( D3DTS_VIEW, &l_View );
+    lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
 }

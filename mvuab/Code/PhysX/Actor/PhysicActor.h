@@ -90,6 +90,7 @@ public:
   //AddShape Functions hardcoded
   void AddBoxShapeHardcoded( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO,
                              const Math::Vect3f& localPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO );
+  void AddSphereShapeHardcoded( float radius, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO );
   //---Activate---
   void        Activate( bool _bActivate );
   void        SetKinematic( bool _bValue );
@@ -141,7 +142,6 @@ public:
 
   //---Get Info-------
   void        GetMat44( Mat44f& _mMatrix ) const;
-  Mat44f&       GetMat44() const;
   void        SetMat44( const Mat44f& _mMatrix );
   void        MoveGlobalPoseMat44( const Mat44f& _mMatrix );
 

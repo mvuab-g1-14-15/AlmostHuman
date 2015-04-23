@@ -1,10 +1,12 @@
 #include "SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h"
+
 #include "GraphicsManager.h"
 #include "Lights/LightManager.h"
+#include "EngineManagers.h"
 
 CGenerateShadowMapsSceneRendererCommand::CGenerateShadowMapsSceneRendererCommand(
-  CXMLTreeNode& atts )
-  : CSceneRendererCommand( atts )
+    CXMLTreeNode& atts )
+    : CSceneRendererCommand( atts )
 {
 }
 
@@ -14,5 +16,5 @@ CGenerateShadowMapsSceneRendererCommand::~CGenerateShadowMapsSceneRendererComman
 
 void CGenerateShadowMapsSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-  CLightManager::GetSingletonPtr()->GenerateShadowMap( GraphicsInstance );
+    LightMInstance->GenerateShadowMap( GraphicsInstance );
 }

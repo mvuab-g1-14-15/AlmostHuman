@@ -4,9 +4,6 @@ fileIn "CalculateNormals.ms"
 
 clearListener()
 
---Set amount of mem allocation 200MB
---heapSize = 200000000L
-
 struct STexture
 (
 	m_Name = "",
@@ -14,6 +11,7 @@ struct STexture
 	
 	fn FromMaxTexture textureFileName =
 	(
+		--format "Texture name: %\n" textureFileName
 		m_Name = filenameFromPath textureFileName
 		m_Path = getFilenamePath textureFileName
 	),
@@ -27,7 +25,7 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
-			--format "Texture name: %\n" m_Name
+			format "Texture name: %\n" m_Name
 			--format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
@@ -49,13 +47,16 @@ struct SMaterial
 	m_TextureBump  = STexture(),
 	m_TextureReflection = STexture(),
 	m_TextureSkyBox = STexture(),
+	m_TexturesRadiosityColor0 = STexture(),
+	m_TexturesRadiosityColor1 = STexture(),
+	m_TexturesRadiosityColor2 = STexture(),
 	m_Color = 0,
 	
 	fn FromMaxMaterial mat =
 	(
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 
-		if material != undefined then
+		if mat != undefined then
 		(
 			if mat.diffuseMapEnable == true AND classOf(mat.diffuseMap) == BitmapTexture then
 			(
@@ -74,10 +75,27 @@ struct SMaterial
 				
 				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
 				(
+					--format "SelfIlum\n"
 					m_Type = (bit.or m_Type VERTEX_TYPE_TEXTURE2)
 					-- Load the texture 2
-					local l_Texture2FileName = mat.selfIllumMap.filename
-					m_Texture2.FromMaxTexture l_Texture2FileName
+					local lSelfIlumMaterial = mat.selfIllumMap
+					if (classof lSelfIlumMaterial ==Multi_Sub_Map) then 
+					(
+						m_Type = (bit.or m_Type VERTEX_TYPE_RNM)
+						local l_TextureColor0FileName = lSelfIlumMaterial.id_0_color_shader.filename
+						local l_TextureColor1FileName = lSelfIlumMaterial.id_1_color_shader.filename
+						local l_TextureColor2FileName = lSelfIlumMaterial.id_2_color_shader.filename
+						--format "Radiosity % % %\n" l_TextureColor0FileName l_TextureColor1FileName l_TextureColor2FileName
+						m_TexturesRadiosityColor0.FromMaxTexture l_TextureColor0FileName
+						m_TexturesRadiosityColor1.FromMaxTexture l_TextureColor1FileName
+						m_TexturesRadiosityColor2.FromMaxTexture l_TextureColor2FileName
+					)
+					else
+					(
+						local l_Texture2FileName = lSelfIlumMaterial.filename
+						m_Texture2.FromMaxTexture l_Texture2FileName
+					)
+					
 				)
 				
 				if mat.reflectionMapEnable == true AND classOf(mat.reflectionMap) == BitmapTexture then
@@ -99,7 +117,15 @@ struct SMaterial
 			else
 			(
 				m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
-				m_Color = bit.shift mat.diffuse.r 24 + bit.shift mat.diffuse.g 16 + bit.shift mat.diffuse.b 8 + mat.diffuse.a
+				
+				m_ColorAlpha = bit.and mat.diffuse.a 0xFF
+				m_ColorRed = bit.and mat.diffuse.r 0xFF
+				m_ColorGreen = bit.and mat.diffuse.g 0xFF
+				m_ColorBlue = bit.and mat.diffuse.b 0xFF
+				
+				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
+				
+				
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -110,6 +136,22 @@ struct SMaterial
 				)
 			)
 		)
+		--format "Vertex Type: %\n" m_Type
+	),
+	
+	fn FromMaxUndefinedMaterial Obj =
+	(
+		--format "FromMaxUndefinedMaterial % %" Obj.name  Obj
+		
+		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
+		m_Type = (bit.or m_Type VERTEX_TYPE_DIFFUSE)
+		
+		m_ColorAlpha = bit.and Obj.wirecolor.a 0xFF
+		m_ColorRed = bit.and Obj.wirecolor.r 0xFF
+		m_ColorGreen = bit.and Obj.wirecolor.g 0xFF
+		m_ColorBlue = bit.and Obj.wirecolor.b 0xFF
+				
+		m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
 	),
 	
 	fn WriteToFile file =
@@ -176,6 +218,7 @@ struct SVertexBuffer
 	(
 		local l_VertexStr = vertex.GetAsString()
 		local l_VertexIdx = 1
+		--format "\t -- Vertex Str: %\n" l_VertexStr
 		if (m_VertexIdMap.ContainsKey (l_VertexStr)) == false then
 		(
 			append m_VertexList vertex
@@ -322,11 +365,11 @@ struct SMesh
             	)
 				catch
 				(
-					--format "Error while exporting submaterial %.\n" l_MaterialId
+					--format "ErrorInitFromMaxObject while exporting submaterial %.\n" l_MaterialId
 				)
 			)
 		)
-		else
+		else if (classof l_Material == Standardmaterial) then
 		(
 			--format "Single Material Object\n"
          	local l_NewSubMesh = SSubMesh()
@@ -337,6 +380,17 @@ struct SMesh
 			local l_MaterialId = 1
 			local l_MaterialName = l_Material.name as string
 			m_MaterialsHashTable.Add l_MaterialId l_MaterialName
+		)
+		else 
+		(
+			local l_NewSubMesh = SSubMesh()
+            l_NewSubMesh.m_Material.FromMaxUndefinedMaterial Obj
+			--format "Material Name: %\n" l_Material.name
+			append m_SubMeshes l_NewSubMesh
+			--format "Submesh: %\n" m_SubMeshes
+			local l_MaterialId = 1
+			local l_MaterialName = Obj.name as string
+			m_MaterialsHashTable.Add l_MaterialId l_MaterialName	
 		)
 	),
 	
@@ -453,9 +507,9 @@ struct SMesh
 				(
 					--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
 					l_Color = 0
-					l_NewVertex1.m_Color = l_Color
-					l_NewVertex2.m_Color = l_Color
-					l_NewVertex3.m_Color = l_Color
+					l_NewVertex1.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+					l_NewVertex2.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+					l_NewVertex3.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
 				)
 		
 				-- Add the new vertex
@@ -468,6 +522,7 @@ struct SMesh
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
 				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
 			)
+			
 		)	
 		
 		--format "% submeshes found on the object\n" m_SubMeshes.count
@@ -476,15 +531,25 @@ struct SMesh
 	fn InitFromMaxObject Obj =
 	(
 		--format "Mesh: % \n" Obj.name
-		actualObj = copy Obj
-		convertToMesh actualObj 
+		/*actualObj = copy Obj
+		convertToMesh actualObj */
 		
+		if  classof Obj == SplineShape then
+		(
+			throw "SplineShape =>" Obj.name
+		)
+		
+		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+		actualObj = newObj[1]
+		convertToMesh actualObj
+
 		CreateSubMeshes actualObj
 		CreateBuffers actualObj
+		m_AABB.CalculateFromObject actualObj
 		
 		if delete actualObj != 1 then
 		(
-			--format "% not deleted, please delete the object manually\n" actualObj
+			format "% not deleted, please delete the object manually\n" actualObj
 		)
 	),
 	
@@ -493,17 +558,41 @@ struct SMesh
 	(
 		--format "Write to file\n"
 		WriteShort file 0x55ff #unsigned
-		WriteShort file m_SubMeshes.count #unsigned--Write number of materials
+		--WriteShort file m_SubMeshes.count #unsigned--Write number of materials
 	
+		local counter = 0
+		for iSubMesh in m_SubMeshes do
+		(
+			if IsSubmeshComplete iSubMesh then
+			(
+				counter = counter + 1
+			)
+		)
+		WriteShort file counter #unsigned--Write number of materials
+		format "Submeshes: %\n" counter
+		
 		for iSubMesh in m_SubMeshes do
 		(
 			--format "Current Submesh%\n" iSubMesh
-			iSubMesh.WriteToFile file
+			if IsSubmeshComplete iSubMesh then
+			(
+				--format "--------------m_Material: %\n" iSubMesh.m_Material
+				iSubMesh.WriteToFile file
+			)
 		)
 		
 		m_AABB.WriteToFile file
 	
 		WriteShort file 0xff55 #unsigned
+		format "Footer writed!\n"
 	)
 )
 
+fn IsSubmeshComplete subMesh =
+(
+	local nVertex = subMesh.m_VB.m_VertexList.count
+	local nIndex = subMesh.m_IB.m_IndexList.count
+	
+	format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
+	return nVertex != 0 and nIndex != 0
+)

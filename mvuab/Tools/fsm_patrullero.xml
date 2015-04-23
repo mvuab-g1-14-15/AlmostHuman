@@ -1,0 +1,42 @@
+
+<fsm name="patrullero">
+	<state name="andar_a_wp">
+		<on_enter>
+			<action name="run_lua" value="fasdlfjas.lua"/>
+			<action name="play_animation" value="andar" param="1.0"/>
+			<action name="play_sound" value="pasos.ogg"/>
+		</on_enter>
+		<on_exit>
+			<action name="stop_animation" value="andar"/>
+			<action name="stop_sound" value="pasos.ogg"/>
+		</on_exit>
+		<update seconds="1">
+			<if compare="equal" var1="25" var2="$distance_to_player">
+				<action name="change_state" value="perseguir"/>
+			</if>
+			<if float_var="distance_to_wp" compare="less_than" value="1">
+				<action name="next_wp"/>
+			</if>
+		</update>
+	</state>
+	<state name="perseguir">
+		<on_enter>
+			<action name="play_animation" value="correr" param="1.0"/>
+			<action name="play_sound" value="correr.ogg"/>
+		</on_enter>
+		<on_exit>
+			<action name="stop_animation" value="andar"/>
+			<action name="stop_sound" value="pasos.ogg"/>
+		</on_exit>
+		<update>
+		</update>
+	</state>
+	<state name="atacar">
+		<on_enter>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+		</update>
+	</state>
+</fsm>

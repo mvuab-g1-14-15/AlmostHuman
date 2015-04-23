@@ -25,20 +25,20 @@ G N T B D T1 T2
 #include <d3dx9.h>
 #include "Utils\Defines.h"
 
-#define VERTEX_TYPE_GEOMETRY               1 << 0 // 1
-#define VERTEX_TYPE_NORMAL                  1 << 1 // 2
-#define VERTEX_TYPE_TANGENT                 1 << 2 // 4
-#define VERTEX_TYPE_BINORMAL              1 << 3 // 8
-#define VERTEX_TYPE_TEXTURE1                1 << 4 // 16
-#define VERTEX_TYPE_TEXTURE2                1 << 5 // 32
-#define VERTEX_TYPE_DIFFUSE                   1 << 6 // 64
-#define VERTEX_TYPE_WEIGHT                   1 << 7 // 128
-#define VERTEX_TYPE_INDICES                   1 << 8 // 256
-#define VERTEX_TYPE_REFLECTION             1 << 9 // 512
-#define VERTEX_TYPE_SCREEN_GEOMETRY 1 << 10 //1024
-#define VERTEX_TYPE_SCREEN                   1 << 11 // 2048
-#define VERTEX_TYPE_SKYBOX                  1 << 12 // 4096
-#define VERTEX_TYPE_RNM                       1 << 13 // 4096
+#define VERTEX_TYPE_GEOMETRY            1 << 0 // 1
+#define VERTEX_TYPE_NORMAL              1 << 1 // 2
+#define VERTEX_TYPE_TANGENT             1 << 2 // 4
+#define VERTEX_TYPE_BINORMAL            1 << 3 // 8
+#define VERTEX_TYPE_TEXTURE1            1 << 4 // 16
+#define VERTEX_TYPE_TEXTURE2            1 << 5 // 32
+#define VERTEX_TYPE_DIFFUSE             1 << 6 // 64
+#define VERTEX_TYPE_WEIGHT              1 << 7 // 128
+#define VERTEX_TYPE_INDICES             1 << 8 // 256
+#define VERTEX_TYPE_REFLECTION          1 << 9 // 512
+#define VERTEX_TYPE_SCREEN_GEOMETRY     1 << 10 //1024
+#define VERTEX_TYPE_SCREEN              1 << 11 // 2048
+#define VERTEX_TYPE_SKYBOX              1 << 12 // 4096
+#define VERTEX_TYPE_RNM                 1 << 13 // 8192
 
 struct T_SKYBOX_VERTEX
 {
@@ -257,10 +257,11 @@ struct TNORMAL_DIFF_VERTEX
 {
   float x, y, z;
   float nx, ny, nz;
-  unsigned long color;
+  unsigned int color;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE( s_VertexDeclaration );
@@ -273,7 +274,7 @@ struct TNORMAL_DIFF_VERTEX
 
   static inline unsigned int GetFVF()
   {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
+    return 0; //D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
   }
 };
 
@@ -469,6 +470,30 @@ struct TT1_VERTEX
   }
 };
 
+struct TT1_N_VERTEX
+{
+  float x, y, z;
+  float nx, ny, nz, nw;
+  float tu, tv;
+
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_NORMAL;
+  }
+
+  static inline unsigned int GetFVF()
+  {
+    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_NORMAL;
+  }
+};
+
 struct CAL3D_HW_VERTEX
 {
   float x, y, z;
@@ -513,6 +538,27 @@ struct SCREEN_COLOR_VERTEX
   static unsigned int GetFVF()
   {
     return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
+  }
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+};
+
+struct SCREEN_TEXTURE_VERTEX
+{
+  float x, y, z, w;
+  float u, v;
+
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_TEXTURE1;
+  }
+  static unsigned int GetFVF()
+  {
+    return ( D3DFVF_XYZRHW | D3DFVF_TEX1 );
   }
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();

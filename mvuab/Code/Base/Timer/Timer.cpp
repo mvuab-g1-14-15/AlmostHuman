@@ -34,7 +34,7 @@ void CTimer::Update( void )
 {
     //-----Actualizacion de los valores FPS y ElpasedTime-----
     //Calculo de la diferencia de tiempo (m_fElpasedTime)
-    float32  l_dCurTime = timeGetTime();
+    float32  l_dCurTime = (float32) timeGetTime();
 
     if( m_dLastTime == 0 ) 
         m_dLastTime = l_dCurTime;

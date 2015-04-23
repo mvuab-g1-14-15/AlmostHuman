@@ -43,10 +43,7 @@ float4 SobelPS(in float2 UV : TEXCOORD0) : COLOR
 technique SobelTechnique
 {
 	pass p0
-	{
-		AlphaBlendEnable = false;
-		CullMode = CCW;
-		
+	{		
 		PixelShader = compile ps_3_0 SobelPS();
 	}
 }
