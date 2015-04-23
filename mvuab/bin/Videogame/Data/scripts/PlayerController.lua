@@ -78,6 +78,7 @@ function CPlayerController:Update()
 	
 	self:UpdateTimers(dt)
 
+	--Set Listenr Postion 
 	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
 	
 	local l_Speed = self.Speed
@@ -256,7 +257,6 @@ function CPlayerController:UpdateInput()
 	end
 	if action_manager:DoAction("ShootDown") then
 		self.Shooting = true
-		--sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
 	end
 	if action_manager:DoAction("ShootUp") then
 		self.Shooting = false

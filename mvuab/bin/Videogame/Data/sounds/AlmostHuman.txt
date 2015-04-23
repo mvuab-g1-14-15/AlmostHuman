@@ -1,9 +1,11 @@
 Event	ID	Name			Wwise Object Path	Notes
 	186343927	Play_Youwin			\GUI\Play_Youwin	
+	401192514	Shoot_Long_Shoot_Event			\Default Work Unit\Shoot_Long_Shoot_Event	
 	426840996	Play_Init			\GUI\Play_Init	
 	474386569	Play_Next			\GUI\Play_Next	
 	847470298	Open_Close_Door_Event			\Default Work Unit\Open_Close_Door_Event	
 	1292086503	Play_Back			\GUI\Play_Back	
+	2054452452	Acumulator_Long_Shoot_Event			\Default Work Unit\Acumulator_Long_Shoot_Event	
 	2348692292	Play_Over			\GUI\Play_Over	
 	2454594115	Play_Help			\GUI\Play_Help	
 	2513968146	Play_LoopGen			\GUI\Play_LoopGen	
@@ -12,15 +14,17 @@ Event	ID	Name			Wwise Object Path	Notes
 	3552663155	Play_Cash			\GUI\Play_Cash	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Shoot Test\RS2_FAST_IMPACT_WEAPONRY_013_B		258060
+	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Short Shoot\RS2_FAST_IMPACT_WEAPONRY_013_B		258060
 	45634969	gui_back	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_back_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_back		4730
 	193371772	gui_next	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_next_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_next		4986
 	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Open_Close_Door		323156
 	444784154	gameOver	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\gameOver_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gameOver		80356
 	482623365	loop-gen	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		2822464
 	507701302	gui_over	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		4986
+	834326531	Acumlator Long Shoot	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_Db_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Long Shoot\Acumlator Long Shoot		806016
 	869195930	youwin	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		50676
 	937521952	Init	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		136104
+	1011438371	Shooting Long shoot	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Long Shoot\Shooting Long shoot		280920
 	1048744211	help	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		2945704
 	1049674178	cash	C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\WwiseProject\AlmostHuman\.cache\Windows\SFX\cash_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\cash		15078
 
