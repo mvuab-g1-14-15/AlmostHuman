@@ -72,8 +72,8 @@ void CGuiElement::SetPositionPercent (const Math::Vect2f& pos)
 void    CGuiElement::SetPosition (const Math::Vect2i& pos)
 {
     m_Position = pos;
-    m_PositionPercent.x = (float) (pos.x / m_uWindowsWidth) * 100;
-    m_PositionPercent.y = (float) (pos.y / m_uWindowsHeight) * 100;
+    m_PositionPercent.x = (float) ((float)pos.x / (float)m_uWindowsWidth) * 100;
+    m_PositionPercent.y = (float) ((float)pos.y / (float) m_uWindowsHeight) * 100;
 }
 
 void CGuiElement::CalculatePosMouse( const Math::Vect2i& mousePosition )

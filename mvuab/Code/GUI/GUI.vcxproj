@@ -20,6 +20,7 @@
     <ClCompile Include="Widgets\DialogBox.cpp" />
     <ClCompile Include="Widgets\EditableTextBox.cpp" />
     <ClCompile Include="Widgets\Image.cpp" />
+    <ClCompile Include="Widgets\Map.cpp" />
     <ClCompile Include="Widgets\ProgressBar.cpp" />
     <ClCompile Include="Widgets\RadioBox.cpp" />
     <ClCompile Include="Widgets\Slider.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Widgets\DialogBox.h" />
     <ClInclude Include="Widgets\EditableTextBox.h" />
     <ClInclude Include="Widgets\Image.h" />
+    <ClInclude Include="Widgets\Map.h" />
     <ClInclude Include="Widgets\ProgressBar.h" />
     <ClInclude Include="Widgets\RadioBox.h" />
     <ClInclude Include="Widgets\Slider.h" />
