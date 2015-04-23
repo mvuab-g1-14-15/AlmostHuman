@@ -58,9 +58,6 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
 
         // Init the videogame
         m_pProcess->Init();
-
-        // Set render time
-        m_RenderTime = m_RenderTarget = 1.0f / aEngineConfig->GetMaxFps();
     }
 }
 
