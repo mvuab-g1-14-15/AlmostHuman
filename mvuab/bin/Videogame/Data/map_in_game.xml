@@ -11,10 +11,11 @@
 	pos_1_1_3d_map=""
 	>
 	
-	<!--x="" 
-	y="" 
-	width="" 
-	height="" 
+	<!--
+	x="" posicion en pantall de marco en X
+	y="" posicion en pantall de marco en Y
+	width="" anchura del marco en pantall
+	height="" altura del marco en pantall
 	texture_marco=""  marco mapa 
 	texture_map=""    textura del mapa 
 	width_map=""      ancho del mapa en la textura 0 ... 1
