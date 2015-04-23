@@ -8,12 +8,6 @@
     <Filter Include="StateMachine">
       <UniqueIdentifier>{41914ad3-f53b-4bc4-bf4c-bcc7de574342}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Characters">
-      <UniqueIdentifier>{dc8f024c-b331-4f6a-90c8-0b9e0fe5bd97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Characters\Enemies">
-      <UniqueIdentifier>{4d9bf2f5-32aa-45d8-b220-f32ad7b2e2a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graph">
       <UniqueIdentifier>{3c61283d-3465-4a1d-b97c-4c5772dc98c5}</UniqueIdentifier>
     </Filter>
@@ -31,24 +25,6 @@
     <ClCompile Include="StateMachine\StateMachine.cpp">
       <Filter>StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="Characters\Character.cpp">
-      <Filter>Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Characters\Enemies\BossEnemy.cpp">
-      <Filter>Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Characters\Enemies\EasyEnemy.cpp">
-      <Filter>Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Characters\Enemies\Enemy.cpp">
-      <Filter>Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Characters\Enemies\EnemyManager.cpp">
-      <Filter>Characters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp">
-      <Filter>Characters\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Graph\Graph.cpp">
       <Filter>Graph</Filter>
     </ClCompile>
@@ -65,24 +41,6 @@
     </ClInclude>
     <ClInclude Include="StateMachine\StateMachine.h">
       <Filter>StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Character.h">
-      <Filter>Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Enemies\BossEnemy.h">
-      <Filter>Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Enemies\PatrolEnemy.h">
-      <Filter>Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Enemies\EasyEnemy.h">
-      <Filter>Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Enemies\Enemy.h">
-      <Filter>Characters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters\Enemies\EnemyManager.h">
-      <Filter>Characters\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Graph\Graph.h">
       <Filter>Graph</Filter>

@@ -74,6 +74,7 @@ void CLanguageManager::LoadXML(const std::string& pathFile)
     {
         std::string msg_error = "LanguageManager::LoadXML->Error al intentar leer el archivo de lenguaje: " + pathFile;
         LOG_ERROR_APPLICATION(msg_error.c_str());
+        return;
     }
 
     LOG_INFO_APPLICATION( "LanguageManager::LoadXML-> Parseando fichero de lenguaje: %s", pathFile.c_str());

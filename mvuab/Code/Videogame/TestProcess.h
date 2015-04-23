@@ -19,7 +19,6 @@ public:
   virtual void Init();
   virtual void Update();
   virtual void Render();
-  virtual void RenderDebugInfo();
 };
 
 #endif // TEST_PROCESS_H

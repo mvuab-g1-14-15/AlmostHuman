@@ -1,6 +1,0 @@
-<animated_models>
-	<animated_model name="paladin" path="Data/animated_models/paladin/"/>
-	<animated_model name="thug" path="Data/animated_models/thug/"/>
-	<animated_model name="chucky" path="Data/animated_models/chucky/"/>
-	<animated_model name="enemy1" path="Data/animated_models/enemy1/"/>
-</animated_models>

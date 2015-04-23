@@ -6,7 +6,6 @@
 #include "Utils\Defines.h"
 #include "Engine.h"
 #include "EngineConfig.h"
-#include "VideogameProcess.h"
 #include "TestProcess.h"
 #include "Utils\Defines.h"
 #include <string>
@@ -14,9 +13,8 @@
 
 #include "Utils\GPUStatics.h"
 #include "Console\Console.h"
-#include "TestProcess\PhysicProcess.h"
-#include "TestProcess\PlayerPhysicProcess.h"
-#include "TestProcess\AStarProcess.h"
+
+#include "TestProcess.h"
 
 #include <iostream>
 #include <ctime>
@@ -145,7 +143,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                     );
 
         lEngineConfig->SetWindowId( hWnd );
-        pEngine->SetRunnigProcess( new CPlayerPhysicProcess() );
+        pEngine->SetRunnigProcess( new CTestProcess() );
         pEngine->Init( lEngineConfig );
         ShowWindow( hWnd, SW_SHOWDEFAULT );
         UpdateWindow( hWnd );

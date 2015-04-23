@@ -88,35 +88,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Items\Blaster.cpp" />
-    <ClCompile Include="Items\Grenade.cpp" />
-    <ClCompile Include="ScriptedController\ScriptedController.cpp" />
     <ClCompile Include="TestProcess.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="TestProcess\AStarProcess.cpp" />
-    <ClCompile Include="TestProcess\PhysicProcess.cpp" />
-    <ClCompile Include="TestProcess\PhysicMaterial.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TestProcess\PlayerPhysicProcess.cpp" />
     <ClCompile Include="videogame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Items\Blaster.h" />
-    <ClInclude Include="Items\Grenade.h" />
-    <ClInclude Include="ScriptedController\ScriptedController.h" />
     <ClInclude Include="TestProcess.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="TestProcess\AStarProcess.h" />
-    <ClInclude Include="TestProcess\PhysicProcess.h" />
-    <ClInclude Include="TestProcess\PhysicMaterial.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="TestProcess\PlayerPhysicProcess.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
