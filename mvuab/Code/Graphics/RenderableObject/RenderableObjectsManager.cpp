@@ -93,6 +93,27 @@ void CRenderableObjectsManager::Update()
     for (unsigned int i = 0; i < m_ResourcesVector.size(); ++i) m_ResourcesVector[i]->Update();
 }
 
+void CRenderableObjectsManager::RemoveResource(const std::string &l_Name)
+{
+    TMapResources::iterator it = m_ResourcesMap.find(l_Name);
+    if ( it == m_ResourcesMap.end() ) return;
+
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    l_AllocatorManager->m_pFreeListAllocator->MakeDelete(it->second.m_Value);
+    unsigned int l_ID = it->second.m_Id;
+
+    m_ResourcesMap.erase(it);
+    m_ResourcesVector.erase(m_ResourcesVector.begin() + l_ID);
+
+    for (size_t i =  l_ID; i < m_ResourcesVector.size();  ++i)
+    {
+        TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
+
+        while (l_ItMap->second.m_Value != m_ResourcesVector[i]) ++l_ItMap;
+        l_ItMap->second.m_Id = i;
+    }
+}
+
 //CRenderableObject* CRenderableObjectsManager::AddMeshInstance( const std::string& CoreMeshName,
 //    const std::string& InstanceName, const Math::Vect3f& Position )
 //{
