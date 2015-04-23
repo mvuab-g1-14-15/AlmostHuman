@@ -208,12 +208,14 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
         // To write into the texture of the static shadow map
         m_StaticShadowMap->SetAsRenderTarget();
         GM->BeginRender();
-        GM->Clear( true, true, false, 0x000000ff );
+        GM->Clear( true, true, true, 0xffffffff );
 
         for ( size_t i = 0, lROMSize = m_StaticShadowMapRenderableObjectsManagers.size(); i < lROMSize; ++i )
         { m_StaticShadowMapRenderableObjectsManagers[i]->Render(); }
 
         GM->EndRender();
+
+        // GM->GetDevice()->EndScene();
         m_StaticShadowMap->UnsetAsRenderTarget();
         m_MustUpdateStaticShadowMap = false;
         m_StaticShadowMap->Save( "static_shadow_map" );
@@ -229,6 +231,7 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
         { m_DynamicShadowMapRenderableObjectsManagers[i]->Render(); }
 
         GM->EndRender();
+        //GM->GetDevice()->EndScene();
         m_DynamicShadowMap->UnsetAsRenderTarget();
     }
 }

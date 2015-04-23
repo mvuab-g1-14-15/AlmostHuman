@@ -292,8 +292,7 @@ void CAnimatedInstanceModel::Destroy()
     CHECKED_RELEASE( m_pIB );
 }
 
-void CAnimatedInstanceModel::ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut,
-        float32 WeightTarget, bool AutoLock )
+void CAnimatedInstanceModel::ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget, bool AutoLock )
 {
     m_CalModel->getMixer()->executeAction( Id, DelayIn, DelayOut, WeightTarget, AutoLock );
 }

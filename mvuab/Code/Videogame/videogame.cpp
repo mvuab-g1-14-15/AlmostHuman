@@ -131,7 +131,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                     (
                         APPLICATION_NAME,
                         APPLICATION_NAME,
-                        WS_OVERLAPPEDWINDOW,
+                        style,
                         lScreenPosition.x,
                         lScreenPosition.y,
                         lScreenSize.x,

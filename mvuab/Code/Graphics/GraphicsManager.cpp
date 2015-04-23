@@ -160,7 +160,7 @@ void CGraphicsManager::EndRender()
 {
     mDirectXDevice->EndScene();
     // Present the backbuffer contents to the display
-    mDirectXDevice->Present( NULL, NULL, NULL, NULL );
+    //mDirectXDevice->Present( NULL, NULL, NULL, NULL );
 }
 
 void CGraphicsManager::SetupMatrices()
@@ -368,7 +368,8 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
     // Everything checks out - create a simple, full-screen device.
     //
     D3DPRESENT_PARAMETERS d3dpp;
-    memset( &d3dpp, 0, sizeof( d3dpp ) );
+    memset(&d3dpp, 0, sizeof(d3dpp));
+
     d3dpp.hDeviceWindow               = m_WindowId;
     d3dpp.Windowed                    = FALSE;
     d3dpp.EnableAutoDepthStencil      = TRUE;
