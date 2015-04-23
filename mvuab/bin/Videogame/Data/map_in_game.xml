@@ -1,0 +1,53 @@
+<map_in_game 
+	x="" 
+	y="" 
+	width="" 
+	height="" 
+	texture_marco="" 
+	texture_map=""   
+	width_map=""     
+	height_map=""    
+	pos_0_0_3d_map=""
+	pos_1_1_3d_map=""
+	>
+	
+	<!--x="" 
+	y="" 
+	width="" 
+	height="" 
+	texture_marco=""  marco mapa 
+	texture_map=""    textura del mapa 
+	width_map=""      ancho del mapa en la textura 0 ... 1
+	height_map=""     alto del mapa en la textura 0 ... 1
+	pos_0_0_3d_map=""  posición 0,0 del mapa en el escenario 3d
+	pos_1_1_3d_map=""  posición 1,1 del mapa en el escenario 3d
+	-->
+	<!-- formula para calcular posición 2d de la posición 3d Math::Vect2f(( pos.x - a.x) / (b.x - a.x) , (pos.y - a.y) / (b.y - a.y) );
+	
+	//  [a]------[2]
+    //   |        |
+    //   |   pos  |
+    //   |        |
+    //  [1]------[b]
+	-->
+	<offset_position get_position_script="get_player_position()"/>
+	<mark name="player" texture="player_mark.tga" width="" height="" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+	<!--
+	<mark name="item_0" texture="item_mark.tga" get_position_script="get_item_position(0)" orientation="get_item_orientation()"/>
+	<mark name="item_1" texture="item_mark.tga" get_position_script="get_item_position(1)" orientation="get_item_orientation()"/>
+	<mark name="item_2" texture="item_mark.tga" get_position_script="get_item_position('name_item')" orientation="get_item_orientation()"/>
+	-->
+	<mark name="item_3" texture="item_mark.tga" get_position_script="get_item_position(3)" orientation=""/>
+</map_in_game>
+
+
+
+get_map_in_game():add_mark_texture("texture_mar.tga", "get_item_position(3)", "get_item_orientation(3)")
+
+function get_item_position(id_name)
+	return get_engine():get_renderable_objects_manager("solid"):get_renderable_objet(id_name):get_position()
+end
+
+function get_player_position()
+	return get_player():get_yaw()+deg_2_rad(90)
+end
