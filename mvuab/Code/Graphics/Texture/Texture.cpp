@@ -32,9 +32,7 @@ CTexture::~CTexture()
 
 bool CTexture::LoadFile()
 {
-    HRESULT l_Res = D3DXCreateTextureFromFile(
-                        GraphicsInstance->GetDevice(),
-                        m_FileName.c_str(), &m_Texture );
+    HRESULT l_Res = D3DXCreateTextureFromFile(GraphicsInstance->GetDevice(), m_FileName.c_str(), &m_Texture);
     return ( l_Res == S_OK );
 }
 
@@ -52,6 +50,7 @@ bool CTexture::Load( const std::string& FileName )
 {
     SetName( FileName );
     m_FileName = FileName;
+
     return LoadFile();
 }
 bool CTexture::Reload()
@@ -62,8 +61,7 @@ bool CTexture::Reload()
 
 void CTexture::Activate( size_t StageId )
 {
-    GraphicsInstance->GetDevice()->SetTexture( StageId,
-            m_Texture );
+    GraphicsInstance->GetDevice()->SetTexture(StageId, m_Texture);
 }
 
 bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
@@ -127,8 +125,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
 
     if ( l_CreateDepthStencilSurface )
     {
-        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE,
-                                             &m_DepthStencilRenderTargetTexture, NULL );
+        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_DepthStencilRenderTargetTexture, NULL );
         assert( m_DepthStencilRenderTargetTexture != NULL );
     }
 
@@ -139,8 +136,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
 
 void CTexture::Deactivate( size_t Stage )
 {
-    GraphicsInstance->GetDevice()->SetTexture( ( DWORD )Stage,
-            NULL );
+    GraphicsInstance->GetDevice()->SetTexture((DWORD)Stage, NULL);
 }
 
 bool CTexture::SetAsRenderTarget( size_t IdStage )
@@ -164,8 +160,10 @@ bool CTexture::SetAsRenderTarget( size_t IdStage )
 void CTexture::UnsetAsRenderTarget( size_t IdStage )
 {
     LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+
     l_Device->SetDepthStencilSurface( m_OldDepthStencilRenderTarget );
     CHECKED_RELEASE( m_OldDepthStencilRenderTarget );
+
     l_Device->SetRenderTarget( IdStage, m_OldRenderTarget );
     CHECKED_RELEASE( m_OldRenderTarget );
 }
@@ -183,8 +181,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
     }
     else
     {
-        LOG_ERROR_APPLICATION(
-            "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
+        LOG_ERROR_APPLICATION("Texture::CaptureFrameBuffer: Error capturing the frame buffer");
     }
 }
 
@@ -199,8 +196,7 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
     else if ( FormatType == "X8R8G8B8" )
     { return X8R8G8B8; }
     else
-        LOG_ERROR_APPLICATION( "Format Type '%s' not recognized",
-                               FormatType.c_str() );
+    { LOG_ERROR_APPLICATION("Format Type '%s' not recognized",FormatType.c_str()); }
 
     return A8R8G8B8;
 }
@@ -215,12 +211,8 @@ bool CTexture::Save( const std::string& FileName )
     // t.UnsetAsRenderTarget();
     // t.Save("t");
     assert( m_Texture != NULL );
-    /*  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".tga" ).c_str(),
-                                        D3DXIFF_TGA,
-                                        m_Texture, 0 );*/
-    HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(),
-                                        D3DXIFF_PNG,
-                                        m_Texture, 0 );
+    /*  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".tga" ).c_str(), D3DXIFF_TGA, m_Texture, 0 );*/
+    HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture, 0 );
     assert( hr == D3D_OK );
     return hr == D3D_OK;
 }

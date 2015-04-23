@@ -56,8 +56,7 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager& GM )
     for(size_t i = 0; i < m_nIteration; ++i)
     {
         m_pAuxTexture[(i + 1) % 2]->SetAsRenderTarget(0);
-        GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(m_Technique, l_Rect, Math::CColor::CColor(), m_pAuxTexture[i % 2],
-                0.0f, 0.0f, 1.0f, 1.0f );
+        GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(m_Technique, l_Rect, Math::CColor::CColor(), m_pAuxTexture[i % 2], 0.0f, 0.0f, 1.0f, 1.0f );
         m_pAuxTexture[(i + 1) % 2]->UnsetAsRenderTarget(0);
     }
 

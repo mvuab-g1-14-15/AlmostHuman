@@ -1,73 +1,78 @@
 #include "SceneRenderComands\StagedTexturedRendererCommand.h"
-#include "Texture\Texture.h"
-#include "GraphicsManager.h"
 
 #include "Texture\TextureManager.h"
+#include "Texture\Texture.h"
+
+#include "GraphicsManager.h"
 #include "EngineManagers.h"
+
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 
 #ifdef _DEBUG
     #include <sstream>
 #endif
 
-CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& atts ):
-    CSceneRendererCommand( atts )
+CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& atts ): CSceneRendererCommand( atts )
 {
-    CGraphicsManager* gm = GraphicsInstance;
+    CGraphicsManager *gm = GraphicsInstance;
 
-    if ( atts.Exists() )
+    if(!atts.Exists()) return;
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    
+    for ( int i = 0; i < atts.GetNumChildren(); ++i )
     {
-        int count = atts.GetNumChildren();
-
-        for ( int i = 0; i < count; ++i )
+        const std::string& TagName = atts(i).GetName();
+        if(TagName == "dynamic_texture")
         {
-            const std::string& TagName = atts( i ).GetName();
-
-            if ( TagName == "dynamic_texture" )
+            std::string l_Name = atts( i ).GetPszProperty("name", "");
+            int l_StageId = atts( i ).GetIntProperty("stage_id", -1);
+            bool l_WidthAsFB = atts( i ).GetBoolProperty("texture_width_as_frame_buffer", false);
+            uint32 l_Width = 0, l_Height = 0;
+            
+            if(!l_WidthAsFB)
             {
-                std::string l_Name = atts( i ).GetPszProperty( "name", "" );
-                int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-                bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
-                uint32 l_Width, l_Height;
-
-                if ( !l_WidthAsFB )
-                {
-                    l_Width = atts( i ).GetIntProperty( "width", 0 );
-                    l_Height = atts( i ).GetIntProperty( "height", 0 );
-                }
-                else
-                { gm->GetWidthAndHeight( l_Width, l_Height ); }
-
-                std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
-                CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 :
-                                                      ( CTexture::TFormatType )0;
-                CTexture* l_Texture = new CTexture();
-                l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT,
-                                   l_iFormatType );
-
-                if ( TextureMInstance->AddResource( l_Name, l_Texture ) )
-                { AddStageTexture( l_StageId, l_Texture ); }
-                else
-                {
-                    AddStageTexture( l_StageId, TextureMInstance->GetResource( l_Name ) );
-                    CHECKED_DELETE( l_Texture );
-                }
+                l_Width = atts(i).GetIntProperty("width", 0);
+                l_Height = atts(i).GetIntProperty("height", 0);
             }
-
-            if ( TagName == "texture" )
+            else
             {
-                const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
-                int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
-                CTexture* l_Texture = TextureMInstance->GetTexture( l_Name );
-
-                if ( !l_Texture )
-                {
-                    LOG_ERROR_APPLICATION(
-                        "CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str() );
-                    continue;
-                }
-
-                AddStageTexture( l_StageId, l_Texture );
+                gm->GetWidthAndHeight(l_Width, l_Height); 
             }
+            
+            std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
+            CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? (CTexture::TFormatType) 3 : (CTexture::TFormatType) 0;
+            
+            CTexture *l_Texture = l_AllocatorManger->m_pFreeListAllocator->MakeNew<CTexture>();
+            l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT, l_iFormatType );
+            
+            if(TextureMInstance->AddResource(l_Name, l_Texture))
+            {
+                AddStageTexture(l_StageId, l_Texture);
+            }
+            else
+            {
+                AddStageTexture(l_StageId, TextureMInstance->GetResource(l_Name));
+                l_AllocatorManger->m_pFreeListAllocator->MakeDelete(l_Texture);
+            }
+        }
+        
+        if(TagName == "texture")
+        {
+            const std::string &l_Name = atts(i).GetPszProperty("name", "");
+            int l_StageId = atts(i).GetIntProperty("stage_id", -1);
+            
+            CTexture *l_Texture = TextureMInstance->GetTexture(l_Name);
+
+            if(!l_Texture)
+            {
+                LOG_ERROR_APPLICATION("CStagedTexturedRendererCommand::Constructor: Error loading Texture \"%s\".", l_Name.c_str());
+                continue;
+            }
+            
+            AddStageTexture(l_StageId, l_Texture);
         }
     }
 }

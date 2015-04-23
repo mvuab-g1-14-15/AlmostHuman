@@ -33,16 +33,16 @@ CStaticMesh::~CStaticMesh()
 
 void CStaticMesh::Destroy()
 {
-    // Clear the references to the vector of textures
-    m_Textures.clear();
-    m_VertexTypes.clear();
 
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it)
     {
-        l_AllocatorManger->m_pFreeListAllocator->Deallocate(*it);
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete(*it);
+        (*it) = 0;
     }
-    //{ CHECKED_DELETE( *it ); }
+
+    m_VertexTypes.clear();
+    m_Textures.clear();
 
     m_RenderableObjectTechniques.clear();
     m_RVs.clear();
@@ -137,7 +137,7 @@ bool CStaticMesh::Load( const std::string& FileName )
             ZeroMemory(textureName, sizeof(char) * l_TextureLength);
 
             std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
-            CTexture* t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
+            CTexture *t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
             if (t) { l_Texture.push_back(t); }
 
             free( textureName );

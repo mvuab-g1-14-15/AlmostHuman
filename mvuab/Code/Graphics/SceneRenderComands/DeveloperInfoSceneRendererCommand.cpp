@@ -54,11 +54,12 @@ void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
     if(l_MemUsage >= 1024)
     {
         l_MemUsage /= 1024;
-        l_Ext = "BB";
+        l_Ext = "GB";
     }
 
     int32 lFontHeight = FM->SizeY( "FPS", FontId );
     CGPUStatics* GPU = CGPUStatics::GetSingletonPtr();
+
     GM.DrawRectangle2D( Math::Vect2i( 5, 7 ), width - 10, lFontHeight + 5, m_Quad2dColor, 2, 2, m_Quad2dEdgeColor );
     FM->DrawTextA( 8, 10, Math::colWHITE, FontId,
                    "Stats: FPS <%5.2f> Cam<%5.2f %5.2f %5.2f> Look<%5.2f %5.2f %5.2f> Objs<%d> Vtxs<%d> Tri<%d> Faces<%d> Mem<%d %s>",
