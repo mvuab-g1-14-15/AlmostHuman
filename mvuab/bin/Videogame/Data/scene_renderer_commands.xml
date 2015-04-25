@@ -28,7 +28,7 @@
 
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
+	<render_debug render_lights="false" render_physics="false" render_cameras="false" render_graph="false"/>
 	<render_gizmos render="true"/>
 	
 	<render_particules/>
@@ -53,12 +53,6 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
 	
-	
-	
-	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
-	<render_weapon_target size="20">
-		<texture stage_id="0" name="./Data/textures/mirilla.png"/>
-	</render_weapon_target>
 	<!--GUI
 	<render_gui render="true"/>	
 	-->

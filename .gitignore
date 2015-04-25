@@ -18,3 +18,6 @@
 *3rdParty/
 *bin/lib/
 WwiseProject
+mvuab/bin/lib/cal3d_d.dll
+mvuab/bin/lib/cal3d_d.exp
+mvuab/UABEngine.opensdf
