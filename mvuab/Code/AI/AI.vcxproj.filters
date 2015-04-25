@@ -14,6 +14,12 @@
     <Filter Include="PathFinding">
       <UniqueIdentifier>{e5139f7d-30a7-4dc9-857b-e727b75ad4a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entity-Component-System">
+      <UniqueIdentifier>{71e2c28d-832b-4533-a9e4-d01fe93edade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity-Component-System\Systems">
+      <UniqueIdentifier>{1f105f5e-ff09-4fb7-8cb0-50a2c576c922}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -31,6 +37,9 @@
     <ClCompile Include="Pathfinding\AStar.cpp">
       <Filter>PathFinding</Filter>
     </ClCompile>
+    <ClCompile Include="Entity-Component-System\Systems\Movement.cpp">
+      <Filter>Entity-Component-System\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -47,6 +56,12 @@
     </ClInclude>
     <ClInclude Include="Pathfinding\AStar.h">
       <Filter>PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity-Component-System\Components.h">
+      <Filter>Entity-Component-System</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity-Component-System\Systems\Movement.h">
+      <Filter>Entity-Component-System\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
