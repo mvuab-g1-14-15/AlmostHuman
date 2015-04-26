@@ -7,7 +7,7 @@
 	<action_manager file_config="Data/inputs.xml"/>
 	<language_manager file_config="Data/language.xml"/>
 	<font_manager file_config="Data/fonts/fonts.xml"/>
-	<renderable_technique_manager file_config="Data/renderable_object_technique.xml"/>
+	<renderable_technique_manager file_config="Data/effects/effects_pools.xml"/>
 	<static_mesh_manager file_config="Data/static_meshes.xml"/>
 	<animated_manager file_config="Data/animated_models.xml"/>
 	<renderable_manager_layer file_config="Data/renderable_objects.xml"/>

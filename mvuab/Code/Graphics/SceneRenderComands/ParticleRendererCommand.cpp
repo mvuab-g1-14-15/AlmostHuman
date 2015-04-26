@@ -10,5 +10,5 @@ CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRen
 
 void CParticleRenderCommand::Execute( CGraphicsManager& GM )
 {
-    ParticleMInstance->Render();
+    //ParticleMInstance->Render();
 }

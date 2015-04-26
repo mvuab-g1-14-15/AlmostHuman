@@ -109,16 +109,15 @@ int         g_WindowHeight                                     		: WindowHeight;
 //
 // Functions
 //
-float DistanceAttenuation( int i, float3 LightToPixelDirection )
+float DistanceAttenuation( int i, float3 aDistanceToLight )
 {
-    float l_DistanceToLight = length(LightToPixelDirection);
-    return 1.0 - saturate((l_DistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
+    return 1.0 - saturate((aDistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
 }
 
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {   
     float3 l_LightDirection = normalize(g_LightsDirection[i]);
-    return 1.0-saturate((cos(g_LightsAngle[i])-dot(-LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+    return 1.0-saturate((cos(g_LightsAngle[i])-dot(LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
 }
 
 float3 Normal2Texture(float3 Normal)

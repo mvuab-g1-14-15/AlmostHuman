@@ -2,6 +2,10 @@
 #define GRAPHICS_MANAGER_H
 #pragma once
 
+#ifdef _DEBUG
+    #define D3D_DEBUG_INFO
+#endif
+
 #include <Windows.h>
 #include <d3dx9.h>
 #include "d3dx9shape.h"
@@ -70,36 +74,51 @@ class CGraphicsManager : public CManager
 
         void DrawCube(const Math::Vect3f &aPosition, float32 Size, Math::CColor Color);
         void DrawCube(const Math::Mat44f &aTransform, float32 Size, const Math::CColor aColor = Math::colWHITE);
-        void DrawBox(const Math::Vect3f &aPosition, float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color = Math::colWHITE);
-        void DrawBox(const Math::Mat44f &aTransform, float32 SizeX, float32 SizeY, float32 SizeZ, Math::CColor Color = Math::colWHITE);
+        void DrawBox(const Math::Vect3f &aPosition, float32 SizeX, float32 SizeY, float32 SizeZ,
+                     Math::CColor Color = Math::colWHITE);
+        void DrawBox(const Math::Mat44f &aTransform, float32 SizeX, float32 SizeY, float32 SizeZ,
+                     Math::CColor Color = Math::colWHITE);
         void DrawSphere(const Math::Vect3f &aPosition, float32 Radius, Math::CColor Color = Math::colWHITE, int32 Aristas = 10);
-        void DrawSphere(const Math::Mat44f &aTransform, float32 Radius, Math::CColor Color = Math::colWHITE, int32 Aristas = 10);
-        void DrawCylinder(const Math::Vect3f &aPosition, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, Math::CColor Color, bool drawCover);
-        void DrawCylinder(const Math::Mat44f &aTransform, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas, Math::CColor Color, bool drawCover);
-        void DrawCapsule(const Math::Vect3f &aPosition, float32 radius, float32 h, uint32 Aristas = 10, Math::CColor Color = Math::colWHITE);
+        void DrawSphere(const Math::Mat44f &aTransform, float32 Radius, Math::CColor Color = Math::colWHITE,
+                        int32 Aristas = 10);
+        void DrawCylinder(const Math::Vect3f &aPosition, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas,
+                          Math::CColor Color, bool drawCover);
+        void DrawCylinder(const Math::Mat44f &aTransform, float32 Top_Radius, float32 Bottom_Radius, float32 h, uint32 Aristas,
+                          Math::CColor Color, bool drawCover);
+        void DrawCapsule(const Math::Vect3f &aPosition, float32 radius, float32 h, uint32 Aristas = 10,
+                         Math::CColor Color = Math::colWHITE);
 
         void DrawGrid(float32 Size, Math::CColor Color = Math::colWHITE, int GridX = 10, int32 GridZ = 10);
-        void DrawPlane(float32 Size, const Math::Vect3f &normal, float32 distance, Math::CColor Color = Math::colWHITE, int GridX = 10, int32 GridZ = 10);
+        void DrawPlane(float32 Size, const Math::Vect3f &normal, float32 distance, Math::CColor Color = Math::colWHITE,
+                       int GridX = 10, int32 GridZ = 10);
         void DrawCircle(float32 Radius, Math::CColor Color = Math::colWHITE, int32 Aristas = 10);
         void DrawLine(const Math::Vect3f &PosA, const Math::Vect3f &PosB, Math::CColor Color = Math::colWHITE);
-        void DrawQuad2D(const Math::Vect2i &pos, uint32 w, uint32 h, ETypeAlignment alignment, Math::CColor color = Math::colBLUE);
+        void DrawQuad2D(const Math::Vect2i &pos, uint32 w, uint32 h, ETypeAlignment alignment,
+                        Math::CColor color = Math::colBLUE);
         void GetRay(const Math::Vect2i &mousePos, Math::Vect3f &posRay, Math::Vect3f &dirRay);
-        void DrawRectangle2D(const Math::Vect2i &pos, uint32 w, uint32 h, Math::CColor &backGroundColor, uint32 edge_w, uint32 edge_h, Math::CColor &edgeColor);
+        void DrawRectangle2D(const Math::Vect2i &pos, uint32 w, uint32 h, Math::CColor &backGroundColor, uint32 edge_w,
+                             uint32 edge_h, Math::CColor &edgeColor);
         void DrawQuad2DTexturedInPixelsInFullScreen(CEffectTechnique *EffectTechnique);
-        void DrawQuad3D(const Math::Vect3f &pos, const Math::Vect3f &up, const Math::Vect3f &right, float32 w, float32 h, Math::CColor color = Math::colBLUE);
-        void DrawQuad3D(const Math::Vect3f &ul, const Math::Vect3f &ur, const Math::Vect3f &dl, const Math::Vect3f &dr, Math::CColor color);
-        void DrawQuad3DWithTechnique(const Math::Vect3f &ul, const Math::Vect3f &ur, const Math::Vect3f &dl, const Math::Vect3f &dr, const Math::Vect3f &n, CEffectTechnique *EffectTechnique, CTexture *Texture);
+        void DrawQuad3D(const Math::Vect3f &pos, const Math::Vect3f &up, const Math::Vect3f &right, float32 w, float32 h,
+                        Math::CColor color = Math::colBLUE);
+        void DrawQuad3D(const Math::Vect3f &ul, const Math::Vect3f &ur, const Math::Vect3f &dl, const Math::Vect3f &dr,
+                        Math::CColor color);
+        void DrawQuad3DWithTechnique(const Math::Vect3f &ul, const Math::Vect3f &ur, const Math::Vect3f &dl,
+                                     const Math::Vect3f &dr, const Math::Vect3f &n, CEffectTechnique *EffectTechnique, CTexture *Texture);
         void DrawHalfLowerSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
         void DrawHalfUpperSphere(const Math::Vect3f &Pos, float radius, uint32 edges, Math::CColor color);
 
         //void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, SRectangle2D& coordText);
-        void DrawQuad2D(const Math::Vect2i &pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture *texture, ETypeFlip flip = NONE_FLIP);
+        void DrawQuad2D(const Math::Vect2i &pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture *texture,
+                        ETypeFlip flip = NONE_FLIP);
 
         void DrawTeapot();
         void CreateQuadBuffers();
 
-        void CGraphicsManager::DrawColoredQuad2DTexturedInPixels(RECT Rect, Math::CColor &Color, CTexture *Texture, float U0, float V0, float U1, float V1);
-        void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique *EffectTechnique, RECT Rect, Math::CColor Color, CTexture *Texture, float U0, float V0, float U1, float V1);
+        void CGraphicsManager::DrawColoredQuad2DTexturedInPixels(RECT Rect, Math::CColor &Color, CTexture *Texture, float U0,
+                float V0, float U1, float V1);
+        void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique *EffectTechnique, RECT Rect,
+                Math::CColor Color, CTexture *Texture, float U0, float V0, float U1, float V1);
 
     private: // Members
         HWND                    m_WindowId;                      // 3D render window handle

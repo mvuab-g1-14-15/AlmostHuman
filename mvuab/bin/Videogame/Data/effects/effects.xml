@@ -63,6 +63,11 @@
 		<effect name="GaussianBlurEffect" file="data/effects/GaussianBlur.fx"/>
 		<handles/>
 	</technique>
+	
+	<technique name="BillboardTechnique">
+		<effect name="BillboardEffect" file="data/effects/BillboardEffect.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" />
+	</technique>
 
 	<!-- Effects of GenerateGBuffer -->
 	<technique name="GenerateGBufferTechnique" vertex_type="19">

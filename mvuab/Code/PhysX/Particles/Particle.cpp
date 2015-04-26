@@ -6,6 +6,7 @@
 #include "Cameras/Camera.h"
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
+#include "Texture/TextureManager.h"
 
 CParticle::CParticle()
 {
@@ -13,7 +14,7 @@ CParticle::CParticle()
     m_SphereRadius = 0.0f;
 
     m_Billboard.SetPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
-    m_Billboard.SetSize(0.1f, 0.1f);
+    m_Billboard.SetSize( Math::Vect2f( 0.1f, 0.1f ));
 
     m_IsAlive = false;
 
@@ -24,7 +25,8 @@ CParticle::CParticle()
     m_Acceleration = Math::Vect3f( 0.0f, 0.0f, 0.0f );
 }
 
-CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity,  const Math::Vect3f& Aceleration )
+CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position,
+                      const Math::Vect3f& Velocity,  const Math::Vect3f& Aceleration )
 {
     m_SphereRadius = 0.0f;
     m_LifeTime = timer;
@@ -70,7 +72,7 @@ void CParticle::SetLifeTime( float Time )
 void CParticle::SetSize( float sx, float sy)
 {
     m_SphereRadius = ((sx > sy) ? sx : sy) * 0.5f;
-    m_Billboard.SetSize(sx, sy);
+    m_Billboard.SetSize( Math::Vect2f(sx, sy ));
 }
 
 void CParticle::SetIsAlive( bool isAlive )
@@ -80,7 +82,12 @@ void CParticle::SetIsAlive( bool isAlive )
 
 void CParticle::SetTextureName( std::string TextureName )
 {
-    m_Billboard.SetTexture(TextureName);
+    CTexture* lTexture = TextureMInstance->GetTexture(TextureName);
+
+    if( !lTexture )
+    { LOG_ERROR_APPLICATION("Error setting the texture to the particle, the texture %s does not exist!!!", TextureName.c_str()); }
+
+    m_Billboard.SetTexture(lTexture);
 }
 
 const Math::Vect3f& CParticle::GetColor()
