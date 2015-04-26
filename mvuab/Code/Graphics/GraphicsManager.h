@@ -2,6 +2,10 @@
 #define GRAPHICS_MANAGER_H
 #pragma once
 
+#ifdef _DEBUG
+    #define D3D_DEBUG_INFO
+#endif
+
 #include <Windows.h>
 #include <d3dx9.h>
 #include "d3dx9shape.h"

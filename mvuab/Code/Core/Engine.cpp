@@ -35,6 +35,7 @@ void CEngine::Update()
 void CEngine::Render()
 {
     SRCMInstance->Execute();
+    m_pProcess->Render();
 }
 
 void CEngine::ProcessInputs()

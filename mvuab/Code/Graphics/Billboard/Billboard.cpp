@@ -7,15 +7,22 @@
 #include "GraphicsManager.h"
 
 #include "RenderableVertex\VertexTypes.h"
+#include "RenderableVertex\RenderableVertex.h"
+#include "RenderableVertex\IndexedVertexs.h"
 #include "Effects\EffectManager.h"
 #include "EngineManagers.h"
 #include "EngineConfig.h"
 
-CBillboard::CBillboard() : CName(), m_Position(Math::Vect3f()), m_SizeX(0.1f), m_SizeY(0.1f), m_Active(true), CManager()
-{
-}
 
-CBillboard::CBillboard(CXMLTreeNode& atts) : CName(), m_Position(Math::Vect3f()), m_SizeX(0.1f), m_SizeY(0.1f), m_Active(true), CManager(atts)
+CRenderableVertexs* CBillboard::sRV = 0;
+
+CBillboard::CBillboard()
+    : CName()
+    , CObject3D()
+    , mSize()
+    , m_Active(true)
+    , m_Texture(0)
+    , mTechnique(0)
 {
 }
 
@@ -23,72 +30,130 @@ CBillboard::~CBillboard()
 {
 }
 
-void CBillboard::Init()
+bool CBillboard::Init( const CXMLTreeNode& atts )
 {
-    m_Texture = TextureMInstance->GetTexture(mConfigPath);
+    bool lOk( true );
+
+    SetName( atts.GetPszProperty("name", "unknown") );
+
+    // If there is no geometry create the geometry
+    if(!sRV)
+    {
+        CreateBillBoardGeometry();
+    }
+
+    lOk = lOk && CObject3D::Init(atts);
+
+
+    mSize = atts.GetVect2fProperty("size", Math::Vect2f(1.0f, 1.0f) );
+    m_Active = atts.GetBoolProperty("enabled", false );
+
+    // Get the texture of the billboard
+    m_Texture = TextureMInstance->GetTexture( atts.GetPszProperty("texture") );
+    lOk = lOk && ( m_Texture != 0 );
+
+    // Get the technique of the billboard
+    mTechnique = EffectManagerInstance->GetEffectTechnique(atts.GetPszProperty("technique") );
+    lOk = lOk && ( mTechnique != 0 );
+
+    // Check if all is ok and modify the state of the active
+    m_Active = m_Active && lOk;
+
+    return lOk;
+}
+
+bool CBillboard::Init
+(
+    const std::string&  aName,
+    const Math::Vect3f& aPosition,
+    const Math::Vect2f& aSize,
+    const std::string & aTextureName,
+    const std::string & aTechniqueName,
+    bool                aActive
+)
+{
+    bool lOk( true );
+
+    SetName( aName );
+
+    // If there is no geometry create the geometry
+    if(!sRV)
+    {
+        CreateBillBoardGeometry();
+    }
+
+    m_Position = aPosition;
+    mSize      = aSize;
+    m_Active   = aActive;
+
+    // Get the texture of the billboard
+    m_Texture = TextureMInstance->GetTexture( aTextureName );
+    lOk = lOk && ( m_Texture != 0 );
+
+    // Get the technique of the billboard
+    mTechnique = EffectManagerInstance->GetEffectTechnique( aTechniqueName );
+    lOk = lOk && ( mTechnique != 0 );
+
+    // Check if all is ok and modify the state of the active
+    //m_Active = m_Active && lOk;
+
+    MakeTransform();
+
+    return lOk;
 }
 
 
 void CBillboard::Update()
 {
-    if(!m_Active) { return; }
-
-    /*
-        Calcular A,B,C,D del rectangulo.
-        orientar a la camara (producto vectorial direccion i sumar VectUP) [normalizados]
-        N_VectRight=VectUp^VectDir
-        a=pos + n_VectorUP*size/2 -N_VectRight*size/2;
-    */
-
-    CCamera* l_Camera = CameraMInstance->GetCurrentCamera();
-
-    Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
-    Math::Vect3f l_vRight = ((-l_Pos2Cam.Normalize()) ^ l_Camera->GetVecUp().Normalize()).Normalize();
-
-    float halfSizeY = m_SizeY * 0.5f;
-    float halfSizeX = m_SizeX * 0.5f;
-
-    Math::Vect3f l_newRight(l_vRight * halfSizeX);
-    Math::Vect3f l_newUP(l_Camera->GetVecUp().Normalize() * halfSizeY);
-
-    m_PosA = m_Position + l_newUP - l_newRight;
-    m_PosB = m_Position + l_newUP + l_newRight;
-    m_PosC = m_Position - l_newUP - l_newRight;
-    m_PosD = m_Position - l_newUP + l_newRight;
 }
 
 void CBillboard::Render()
 {
-    if(!m_Active) { return; }
-
-    Math::Mat44f l_Mat;
-    l_Mat.SetIdentity();
-    GraphicsInstance->SetTransform(l_Mat);
-
-    CCamera* l_Camera = CameraMInstance->GetCurrentCamera();
-    Math::Vect3f l_Pos2Cam = l_Camera->GetPosition() - m_Position;
-
-    CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource("GenerateGBufferTechnique");
-    GraphicsInstance->DrawQuad3DWithTechnique(m_PosA, m_PosB, m_PosC, m_PosD, l_Pos2Cam.Normalize(), EffectTechnique, m_Texture);
+    if(m_Active)
+    {
+        CGraphicsManager* lGM = GraphicsInstance;
+        lGM->SetTransform( GetTransform() );
+        sRV->Render(lGM, mTechnique);
+        lGM->SetTransform( Math::Mat44f() );
+    }
 }
 
-void CBillboard::SetSize(float sx, float sy)
+const Math::Vect2f & CBillboard::GetSize() const
 {
-    m_SizeX = sx;
-    m_SizeY = sy;
+    return mSize;
 }
 
-void CBillboard::SetPosition(Math::Vect3f l_Pos)
-{
-    m_Position = l_Pos;
-}
-
-void CBillboard::SetTexture(std::string Texture)
-{
-    m_Texture = TextureMInstance->GetTexture(Texture);
-}
-
-CTexture *CBillboard::GetTexture()
+const CTexture * CBillboard::GetTexture() const
 {
     return m_Texture;
+}
+
+void CBillboard::SetTexture(const CTexture* aTexture)
+{
+    m_Texture = const_cast<CTexture*>(aTexture);
+}
+
+void CBillboard::SetSize(const Math::Vect2f & aSize )
+{
+    mSize = aSize;
+}
+
+void CBillboard::CreateBillBoardGeometry()
+{
+    ASSERT(sRV == 0, "The billboard geometry is already initialized");
+
+    const uint32 lIdxCount = 6;
+    const uint32 lVtxCount = 4;
+
+    TT1_VERTEX lVtx[lVtxCount] =
+    {
+        {  -0.5f, 0.0f, -0.5f, 0, 0 },    // vertex 0
+        {  -0.5f, 0.0f,  0.5f, 0, 1 },    // vertex 1
+        {   0.5f, 0.0f,  0.5f, 1, 1 },    // vertex 2
+        {   0.5f, 0.0f, -0.5f, 1, 0 }     // vertex 3
+    };
+
+    unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
+
+    sRV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
 }
