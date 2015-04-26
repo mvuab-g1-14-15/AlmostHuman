@@ -1,43 +1,82 @@
 #include "Widgets\Map.h"
 #include "EngineManagers.h"
 #include "Texture\TextureManager.h"
+#include "GraphicsManager.h"
+#include "Cameras\CameraManager.h"
+#include "Object3D.h"
 
 //---Constructor
 CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
             const Math::Vect2f position_percent, std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
             bool isVisible, bool isActive )
-  : CImage( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, lit,
-            textHeightOffset, textWidthOffset, isVisible, isActive )
-  , m_Character( new CImage( ( windowsHeight * ( uint32 )height_precent / 100 )+( windowsHeight * ( uint32 )position_percent.y / 100 ),
-                             ( windowsWidth * ( uint32 )witdh_percent / 100 )+( windowsWidth * ( uint32 )position_percent.x / 100 ), 5, 5, Math::Vect2f( 50, 50 ), "Character",
-                             textHeightOffset, textWidthOffset, isVisible, isActive ) )
+  : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, IMAGE, lit, textHeightOffset, textWidthOffset, isVisible,
+                 isActive )
 {
-  float porcentajeWidth = m_Character->GetPositionPercent().x + ( ( position_percent.x / 100 * windowsWidth ) / m_Character->GetuWindowsWidth() * 100 /
-                          2 );
-  float porcentajeHeight = m_Character->GetPositionPercent().y + ( ( position_percent.y / 100 * windowsHeight ) / m_Character->GetuWindowsHeight() *
-                           100 / 2 );
-  porcentajeWidth -= m_Character->GetWidthPercent() / 2;
-  porcentajeHeight -= m_Character->GetHeightPercent() / 2;
-  m_Character->SetPositionPercent( Math::Vect2f( porcentajeWidth, porcentajeHeight ) );
-  m_Character->SetTexture( TextureMInstance->GetTexture( "data/textures/nova.png" ), "character" );
-  m_Character->SetActiveTexture( "character" );
+  m_Map = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/metal_plain.jpg" );
+  m_Player = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/flecha.png" );
+  m_Camara = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/punto.png" );
+  //m_SizeWorld3D = Math::Vect2f( 100.f, 100.f ); // Unidades totales del grid (mundo 3D) en X & Z
 }
 
 CMap::~CMap()
 {
-  CHECKED_DELETE( m_Character );
+
 }
 //---------------CGuiElement Interface----------------------
 void CMap::Render()
 {
-  CImage::Render();
-  m_Character->Render();
+  if ( CGuiElement::m_bIsVisible )
+  {
+    //Primero renderizamos todos los hijos que pudiera tener el Button:
+    CGuiElement::Render();
+
+    //Renderizamos el fondo del mapa o radar
+    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Map );
+    //Math::Vect2i pos = CGuiElement::m_Position;
+    // Cálculo posición del Player en píxeles de mapa según su size & posición normalizada
+    float deltaX = m_posNPlayer.x * ( float )m_uWidth;
+    float deltaY = m_posNPlayer.y * ( float )m_uHeight;
+    // Posición de pintado = posición de pintado del mapa en píxeles de pantalla + deltaXY
+    Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )deltaX, ( uint32 )deltaY );
+    //Renderizamos la posición del player
+    Math::Vect2f up( cos( CameraMInstance->GetCurrentCamera()->GetYaw() ), sin( CameraMInstance->GetCurrentCamera()->GetYaw() ) );
+    Math::Vect2i int_UP = Math::Vect2i( ( int )( up.x * -17 ), ( int )( up.y * -17 ) );
+    //GraphicsInstance->DrawQuad2D( l_drawPos + int_UP, 40, 40, CameraMInstance->GetCurrentCamera()->GetYaw(), CGraphicsManager::CENTER, m_Camara );
+    GraphicsInstance->DrawQuad2D( l_drawPos, 20, 20, -CameraMInstance->GetCurrentCamera()->GetYaw() + Math::PI_32_VALUE, CGraphicsManager::CENTER,
+                                  m_Player );
+
+
+    //Pintamos el boton del slider
+    //  m_Button.Render(GraphicsManager, fm);
+  }
 }
 
 void CMap::Update()
 {
-  CImage::Update();
-  m_Character->Update();
+  if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+  {
+    m_posNPlayer = NormalizePlayerPos( CameraMInstance->GetCurrentCamera()->GetPosition().x,
+                                       CameraMInstance->GetCurrentCamera()->GetPosition().z );
+  }
 }
 
+Math::Vect2f CMap::NormalizePlayerPos( float x, float z )
+{
+  // Mapeo de [-50,50] 3D a [0,1] Mapa/radar
+  Math::Vect2f pos;
+  pos.y = 1 - ( ( x + 50 ) / 100 );
+  pos.x = 1 - ( ( z + 50 ) / 100 );
 
+  // Control del player respecto a los límites del mapa/radar
+  if ( pos.x < 0.f ) pos.x = 0.f;
+  else if ( pos.x > 1.f ) pos.x = 1.f;
+
+  if ( pos.y < 0.f ) pos.y = 0.f;
+  else if ( pos.y > 1.f ) pos.y = 1.f;
+
+  return pos;
+}
+
+void  CMap::OnClickedChild( const std::string& name )
+{
+}

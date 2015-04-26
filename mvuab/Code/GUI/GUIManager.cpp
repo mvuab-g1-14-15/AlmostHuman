@@ -243,14 +243,16 @@ void CGUIManager::Init()
     }//END if (m_bIsOk)
 
   } //END if (!parser.LoadFile(initGuiXML.c_str()))
-  
-  
+
+
   //CONSOLA GUI LUA
-  m_Console = new CConsoleGUI(  m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false, true );
-  
-  m_Map = new CMap(1000, 1000, 30, 30, Math::Vect2f( 0, 5 ));
-  m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
-  m_Map->SetActiveTexture("mapa");
+  m_Console = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false,
+                               true );
+
+  m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 0, 5 ) );
+
+  /*m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
+  m_Map->SetActiveTexture("mapa");*/
   if ( !m_bIsOk )
     Release();
   else
@@ -294,8 +296,8 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_Console );
     m_Console->Render();
-	assert( m_Map );
-	m_Map->Render();
+    assert( m_Map );
+    m_Map->Render();
     RenderPointerMouse();
 
   }//END if (m_bIsOk)
@@ -339,7 +341,7 @@ void CGUIManager::Update()
 
     m_Console->Update();
 
-	m_Map->Update();
+    m_Map->Update();
 
     if ( !m_TextBox->IsVisible() && m_bLoadedGuiFiles )
     {

@@ -9,16 +9,17 @@
 #include "Utils\MapManager.h"
 #include "Texture.h"
 #include "CubedTexture.h"
+#include "GUITexture.h"
 
 class CTextureManager : public CMapManager<CTexture>, public CManager
 {
 public:
   CTextureManager();
-  CTextureManager(CXMLTreeNode& atts);
+  CTextureManager( CXMLTreeNode& atts );
   ~CTextureManager();
-  void Init(){}
-  void Update(){}
-  void Render(){}
+  void Init() {}
+  void Update() {}
+  void Render() {}
   void Reload();
   CTexture* GetTexture( const std::string& fileName );
 };
