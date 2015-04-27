@@ -227,4 +227,8 @@
 	<action name="BackwarGUI">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_DOWN"/>
     </action>
+	
+	<action name="ThrowGrenade">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_G"/>
+    </action>
 </Actions>

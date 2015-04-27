@@ -978,8 +978,7 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
 }
 
 
-std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
-        const Math::Vect3f& posSphere,
+std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere,
         EShapesType shapeType /* = NX_ALL_SHAPES  */, uint32 impactMask/* =0xffffffff */ )
 {
     // Check the scene
@@ -1010,8 +1009,7 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere,
 }
 
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere,
-        const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
 {
     assert( m_pScene );
     NxSphere l_WorldSphere( NxVec3( _vPosSphere.x, _vPosSphere.y, _vPosSphere.z ), _fRadiusSphere );
@@ -1023,8 +1021,7 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     for ( NxU32 i = 0; i < nbShapes; i++ )
         shapes[i] = NULL;
 
-    NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_WorldSphere, NX_ALL_SHAPES, nbShapes,
-                                 shapes, NULL, _uiImpactMask, NULL, true );
+    NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_WorldSphere, NX_ALL_SHAPES, nbShapes, shapes, NULL, _uiImpactMask, NULL, true );
     std::vector<CPhysicUserData*> _ImpactObjects;
 
     for ( NxU32 i = 0; i < nbShapes; ++i )
@@ -1059,8 +1056,25 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     return _ImpactObjects;
 }
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle,
-        const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereController( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
+{
+    std::vector<CPhysicUserData*> l_Result;
+    std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor( _fRadiusSphere, _vPosSphere, _uiImpactMask );
+
+    for(std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin() ; it != l_OverlapSphere.end(); ++it)
+    {
+        CPhysicUserData* l_UserData = *it;
+        CPhysicController* l_Controller = l_UserData->GetController();
+
+        if(l_Controller)
+            l_Result.push_back(l_UserData);
+
+    }
+
+    return l_Result;
+}
+
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
 {
     std::vector<CPhysicUserData*> l_Result;
     std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor( _Distance, _Position, _uiImpactMask );
@@ -1100,8 +1114,7 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
     return l_Result;
 }
 
-void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
-        std::vector<CPhysicUserData*> impactObjects, float _fPower )
+void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower )
 {
     assert( m_pScene );
     NxSphere worldSphere( NxVec3( posSphere.x, posSphere.y, posSphere.z ), radiusSphere );
