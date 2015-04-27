@@ -18,6 +18,9 @@ class CBillboard : public CName, public CObject3D
         CBillboard();
         virtual ~CBillboard();
 
+		static void CreateBillBoardGeometry();
+		static void DestroyBillBoardGeometry();
+
         bool Init(const CXMLTreeNode& atts);
         bool Init
         (
@@ -43,8 +46,7 @@ class CBillboard : public CName, public CObject3D
         Math::Vect2f        mSize;
         bool                m_Active;
 
-        static CRenderableVertexs* sRV;
-        void CreateBillBoardGeometry();
+		static CRenderableVertexs* sRV;
 };
 
 #endif //_BILLBOARD_H

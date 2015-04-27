@@ -64,6 +64,9 @@ void registerCharacters( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CCharacter, Move )
     LUA_DECLARE_METHOD( CCharacter, GetPosition )
 	LUA_DECLARE_METHOD( CCharacter, GetDirection )
+	LUA_DECLARE_METHOD( CCharacter, GetTimeToShoot )
+	LUA_DECLARE_METHOD( CCharacter, GetMaxTimeToShoot )
+	LUA_DECLARE_METHOD( CCharacter, SetTimeToShoot )
   LUA_END_DECLARATION
 }
 

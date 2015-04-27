@@ -35,7 +35,7 @@
 CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   :
   CManager()
-  , m_sCurrentWindows( "Main.xml" )
+  , m_sCurrentWindows( "HUD.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -54,7 +54,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
 CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   :
   CManager( atts )
-  , m_sCurrentWindows( "Main.xml" )
+  , m_sCurrentWindows( "HUD.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -292,13 +292,13 @@ void CGUIManager::Render()
     }//END if (m_bLoadedGuiFiles)
 
     //Siempre los últimos en pintarse
-    assert( m_TextBox );
+    /*assert( m_TextBox );
     m_TextBox->Render();
     assert( m_Console );
     m_Console->Render();
     assert( m_Map );
     m_Map->Render();
-    RenderPointerMouse();
+    RenderPointerMouse();*/
 
   }//END if (m_bIsOk)
 }
@@ -544,7 +544,7 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
 
   m_WindowsMap.clear();
   m_ElementsMap.clear();
-  m_sCurrentWindows = "Main.xml";
+  m_sCurrentWindows = "HUD.xml";
 
   WIN32_FIND_DATA FindFileData;
   HANDLE hFind;
@@ -629,6 +629,17 @@ void CGUIManager::SetMessageBox( const std::string& text )
   }
 }
 
+CWindows*	CGUIManager::GetWindow(const std::string& NameWindow)
+{
+	std::map<std::string, CWindows*>::iterator it;
+	it = m_WindowsMap.find( NameWindow );
+
+	if ( it != m_WindowsMap.end() )
+	{
+		return it->second;
+	}
+	return 0;
+}
 
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------

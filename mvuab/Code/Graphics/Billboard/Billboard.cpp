@@ -36,14 +36,7 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
 
     SetName( atts.GetPszProperty("name", "unknown") );
 
-    // If there is no geometry create the geometry
-    if(!sRV)
-    {
-        CreateBillBoardGeometry();
-    }
-
     lOk = lOk && CObject3D::Init(atts);
-
 
     mSize = atts.GetVect2fProperty("size", Math::Vect2f(1.0f, 1.0f) );
     m_Active = atts.GetBoolProperty("enabled", false );
@@ -55,9 +48,6 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
     // Get the technique of the billboard
     mTechnique = EffectManagerInstance->GetEffectTechnique(atts.GetPszProperty("technique") );
     lOk = lOk && ( mTechnique != 0 );
-
-    // Check if all is ok and modify the state of the active
-    m_Active = m_Active && lOk;
 
     return lOk;
 }
@@ -93,11 +83,6 @@ bool CBillboard::Init
     // Get the technique of the billboard
     mTechnique = EffectManagerInstance->GetEffectTechnique( aTechniqueName );
     lOk = lOk && ( mTechnique != 0 );
-
-    // Check if all is ok and modify the state of the active
-    //m_Active = m_Active && lOk;
-
-    MakeTransform();
 
     return lOk;
 }
@@ -156,4 +141,10 @@ void CBillboard::CreateBillBoardGeometry()
     unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
     sRV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
+}
+
+void CBillboard::DestroyBillBoardGeometry()
+{
+	ASSERT(sRV != 0, "The billboard geometry is already initialized");
+	CHECKED_DELETE(sRV);
 }

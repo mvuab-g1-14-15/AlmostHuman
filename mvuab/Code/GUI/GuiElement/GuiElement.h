@@ -36,6 +36,8 @@ public:
 	virtual void				RenderText						();
 	virtual void				Update								();
 	virtual void				OnClickedChild				(const std::string& name) = 0;
+
+	virtual void				SetProgress(float) {};
 	
 	void								OnLoadValue						();
 	void								OnSaveValue						();
