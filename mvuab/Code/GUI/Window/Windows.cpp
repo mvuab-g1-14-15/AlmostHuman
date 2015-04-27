@@ -300,7 +300,8 @@ bool CWindows::LoadXML( const std::string &xmlGuiFile, const Math::Vect2i& scree
 				else if (tagName.compare("ProgressBar")==0)
 				{
 					CProgressBar* new_progressBar = NULL;
-					new_progressBar = LoadProgressBar(pNewNode,screenResolution, textureM);		
+					new_progressBar = LoadProgressBar(pNewNode,screenResolution, textureM);
+					new_progressBar->SetProgress(0.0f);
 					AddGuiElement(new_progressBar);
 				} 
 				else if (tagName.compare("StaticText")==0)
@@ -762,9 +763,22 @@ CStaticText*	CWindows::LoadStaticText(CXMLTreeNode& pNewNode, const Math::Vect2i
 	float h							= pNewNode.GetFloatProperty("height", 50.f);
 	bool visible					= pNewNode.GetBoolProperty("visible", true);
 	bool activated					= pNewNode.GetBoolProperty("active", true);
-	const std::string & l_literal	= pNewNode.GetPszProperty("Literal", "");
+	const std::string & l_literal	= pNewNode.GetPszProperty("literal", "");
 	
 	CStaticText* staticText = new CStaticText(screenResolution.y, screenResolution.x, h, w, Math::Vect2f(posx,posy), l_literal, visible, activated);
 	staticText->SetName(name);
 	return staticText;
+}
+
+CGuiElement* CWindows::GetElement(const std::string& NameElement)
+{
+	std::vector<CGuiElement*>::iterator it(m_GuiElementsVector.begin());
+	std::vector<CGuiElement*>::iterator itEnd(m_GuiElementsVector.end());	
+	while (it != itEnd)
+	{
+		if((*it)->GetName() == NameElement )
+			return (*it);
+		++it;
+	}
+	return 0;
 }

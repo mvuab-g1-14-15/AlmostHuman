@@ -14,6 +14,8 @@ CCharacter::CCharacter( const std::string& Name )
     : CName( Name ), CObject3D()
     , m_Speed( 0.06f )
     , m_Life( 20.0f )
+	, m_TimeToShoot( 0.0f )
+	, m_MaxTimeToShoot( 2.0f )
 {
 }
 
@@ -23,6 +25,7 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
+	m_TimeToShoot += deltaTime;
 }
 
 void CCharacter::Render()

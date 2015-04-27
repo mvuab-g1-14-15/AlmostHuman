@@ -50,6 +50,7 @@ public:
 	bool	AddGuiElement				(CGuiElement * inGuiElement);
 	bool	ReleaseGuiElement		(const std::string & name);
 	void	SetName							(const std::string& name) {m_sWindowsName = name;}
+	CGuiElement* GetElement(const std::string& NameElement);
 
 	//--- PARSERFILE FUNCTION ---
 	bool	LoadXML							(const std::string &xmlGuiFile, const Math::Vect2i& screenResolution);
@@ -71,12 +72,12 @@ private:
 	CStaticText*		LoadStaticText			( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
 
 private:
-	std::vector<CGuiElement*>	m_GuiElementsVector;
+	std::vector<CGuiElement*>				m_GuiElementsVector;
 	std::string								m_sLuaCode_OnSaveWindows;
 	std::string								m_sLuaCode_OnLoadWindows;
 	std::string								m_sLuaCode_OnKeyDown;
 	std::string								m_sLuaCode_OnUpdateWindows;
-	uint32										m_uInputKeyDown;
+	uint32									m_uInputKeyDown;
 	std::string								m_sWindowsName;
 };
 
