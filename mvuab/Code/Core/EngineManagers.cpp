@@ -24,6 +24,7 @@
 #include "Language\LanguageManager.h"
 #include "Utils\ObjectFactory.h"
 #include "GUIManager.h"
+#include "Billboard\BillboardManager.h"
 #include "Console/Console.h"
 #include "WWSoundManager.h"
 
@@ -111,6 +112,8 @@ void CEngineManagers::Init()
                            Type2Type<CGUIManager>( ) );
   ManagerFactory.Register( "console",
                            Type2Type<CConsole>( ) );
+  ManagerFactory.Register( "billboard_manager",
+                           Type2Type<CBillboardManager>( ) );
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )

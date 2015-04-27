@@ -237,6 +237,9 @@
     <ClCompile Include="Gizmos\GizmoElement.cpp">
       <Filter>Gizmos</Filter>
     </ClCompile>
+    <ClCompile Include="Billboard\BillboardManager.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -483,6 +486,9 @@
     </ClInclude>
     <ClInclude Include="Gizmos\GizmoElement.h">
       <Filter>Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\BillboardManager.h">
+      <Filter>Billboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

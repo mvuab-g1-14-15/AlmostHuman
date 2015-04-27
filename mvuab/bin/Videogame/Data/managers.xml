@@ -18,6 +18,7 @@
 	<physics_manager file_config="no_name"/>
 	<enemy_manager file_config="Data/enemies/enemies.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
+	<billboard_manager file_config="Data/billboards.xml"/>
 	<particle_manager file_config="Data/particles.xml"/>
 	<gizmos_manager file_config="no_name"/>
 	<sound_manager file_config ="Data/sounds.xml"/>

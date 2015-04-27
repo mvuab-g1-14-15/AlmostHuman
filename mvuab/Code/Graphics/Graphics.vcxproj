@@ -15,6 +15,7 @@
     <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
     <ClCompile Include="Billboard\Billboard.cpp" />
+    <ClCompile Include="Billboard\BillboardManager.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Cameras\CameraCinematical.cpp" />
     <ClCompile Include="Cameras\CameraFPShooter.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
     <ClInclude Include="Billboard\Billboard.h" />
+    <ClInclude Include="Billboard\BillboardManager.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Cameras\CameraCinematical.h" />
     <ClInclude Include="Cameras\CameraFPShooter.h" />
