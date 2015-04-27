@@ -32,6 +32,7 @@
 #include "SceneRenderComands\WeaponTargetRendererCommand.h"
 #include "SceneRenderComands\RenderDebugCommand.h"
 #include "SceneRenderComands\RenderGizmosCommand.h"
+#include "SceneRenderComands\BillboardRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -143,6 +144,8 @@ void CSceneRendererCommandManager::Init()
                              Type2Type<CRenderGizmosCommand>( ) );
     CommandFactory.Register( "render_gui",
                              Type2Type<CRenderGUISceneRendererCommand>( ) );
+	CommandFactory.Register( "render_billboards",
+                             Type2Type<CBillboardRenderCommand>( ) );
     CXMLTreeNode l_File;
 
     //mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();
@@ -152,7 +155,6 @@ void CSceneRendererCommandManager::Init()
         const std::string& lMsgError = "Error reading the file " + mConfigPath;
         FATAL_ERROR( lMsgError.c_str() );
     }
-
 
     CXMLTreeNode  TreeNode = l_File["scene_renderer_commands"];
 

@@ -14,6 +14,10 @@ CBillboardManager::~CBillboardManager()
 
 void CBillboardManager::Render()
 {
+	for( TMapResource::iterator lItb = m_Resources.begin(), lIte = m_Resources.end(); lItb != lIte; ++lItb )
+	{
+		lItb->second->Render();
+	}
 }
 
 void CBillboardManager::Update()

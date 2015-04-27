@@ -34,6 +34,7 @@ class CGizmosManager;
 class CTextureManager;
 class CWWSoundManager;
 class CGUIManager;
+class CBillboardManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -68,6 +69,7 @@ public:
   CTextureManager*                  GetTextureManager() const;
   CWWSoundManager*                  GetSoundManager() const;
   CGUIManager*                      GetGUIManager() const;
+  CBillboardManager*				GetBillboardManager() const;
 
 private:
   CGraphicsManager*                      m_pGraphicsManager;
@@ -92,6 +94,7 @@ private:
   CTextureManager*                       m_pTextureManager;
   CWWSoundManager*                       m_pSoundManager;
   CGUIManager*                           m_pGUIManager;
+  CBillboardManager*				     m_BillboardManager;
 
   std::string                           m_ManagersPath;
 };

@@ -13,6 +13,14 @@
 #define PI          3.14159265359
 #define Deg2Rad(x)  (x * PI / 180.0)
 
+struct Camera
+{
+	float3 mPosition;
+	float3 mDirection;
+	float3 mRight;
+	float3 mUp;
+};
+
 //
 // Matrices
 //
@@ -252,6 +260,15 @@ void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, fl
 	
 	OutNormal  = normalize(OutNormal);
 	OutTangent = normalize(OutTangent);
+}
+
+Camera GetCurrentCamera()
+{
+	Camera cam;
+	cam.mUp 	  	= g_ViewInverseMatrix[1].xyz;
+	cam.mRight 	  	= g_ViewInverseMatrix[2].xyz;
+	cam.mPosition 	= g_ViewInverseMatrix[3].xyz;
+	cam.mDirection 	= g_ViewInverseMatrix[2].xyz;
 }
 
 #endif // !defined( GLOBALS_FXH )
