@@ -66,12 +66,6 @@ bool CBillboard::Init
 
     SetName( aName );
 
-    // If there is no geometry create the geometry
-    if(!sRV)
-    {
-        CreateBillBoardGeometry();
-    }
-
     m_Position = aPosition;
     mSize      = aSize;
     m_Active   = aActive;
@@ -98,6 +92,7 @@ void CBillboard::Render()
     {
         CGraphicsManager* lGM = GraphicsInstance;
         lGM->SetTransform( GetTransform() );
+		m_Texture->Activate(0);
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }

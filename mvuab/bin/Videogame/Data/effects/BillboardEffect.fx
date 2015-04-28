@@ -5,16 +5,24 @@
 TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 {
 	TT1_VERTEX_PS OUT=(TT1_VERTEX_PS)0;
-    
-	OUT.Position		= mul(float4(IN.Position, 1.0), g_WorldViewProj);
-    OUT.WorldPosition	= OUT.Position;
+    float3 rightVector = normalize(float3(g_ViewMatrix[0][0], g_ViewMatrix[1][0], g_ViewMatrix[2][0] ));
+	float3 upVector = normalize(float3(g_ViewMatrix[0][1], g_ViewMatrix[1][1], g_ViewMatrix[2][1] ));
+	
+	float3 position 	= IN.Position.x*rightVector+IN.Position.z*upVector;
+	OUT.Position		= mul( float4( position.xyz, 1), g_WorldViewProj);
+	
+	OUT.Normal			= cross( rightVector, upVector );
+	OUT.WorldPosition	= OUT.Position;
+	OUT.WorldTangent	= float4( rightVector.xyz, 1);
+	OUT.WorldBinormal	= float4( upVector.xyz, 1);
+	
 	OUT.UV				= IN.UV;
     return OUT;
 }
 
 float4 mainPS(TT1_VERTEX_PS IN) : COLOR
 {
-	return float4(1, 0, 0, 1);
+	return tex2D(S0PointSampler, IN.UV);//float4(1, 0, 0, 1);
 }
 
 technique BillboardTechnique
