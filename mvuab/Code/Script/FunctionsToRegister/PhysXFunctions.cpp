@@ -152,6 +152,28 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddTorque", &CPhysicActor::AddTorque )
     .def( "SetGlobalPosition", &CPhysicActor::SetGlobalPosition )
   ];
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // PHYSICS MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ /* LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_CLASS( CPhysicsManager )
+    LUA_DECLARE_METHOD( CPhysicsManager, RaycastClosestActor )
+    LUA_DECLARE_METHOD( CPhysicsManager, RaycastClosestActorName )
+    LUA_DECLARE_METHOD( CPhysicsManager, AddPhysicActor )
+	LUA_DECLARE_METHOD( CPhysicsManager, AddPhysicRevoluteJoint )
+    LUA_DECLARE_METHOD( CPhysicsManager, AddPhysicSphericalJoint )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateSphereEmitter )
+	LUA_DECLARE_METHOD( CPhysicsManager, AddEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateCubeEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateSphereEmitter )
+	LUA_DECLARE_METHOD( CPhysicsManager, AddEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateCubeEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateSphereEmitter )
+	LUA_DECLARE_METHOD( CPhysicsManager, AddEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateCubeEmitter )
+    LUA_DECLARE_METHOD( CPhysicsManager, CreateSphereEmitter )
+  LUA_END_DECLARATION*/
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
     .def( "RaycastClosestActor", &CPhysicsManager::RaycastClosestActor )
@@ -189,18 +211,32 @@ void registerPhysX( lua_State* m_LS )
 	.def( "OverlapConeActor", &CPhysicsManager::OverlapConeActor )
 	.def ("PlayerInSight", &PlayerInSight )
   ];
-  module( m_LS ) [
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // PHYSICCONTROLLER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( m_LS )
+	  LUA_DECLARE_DERIVED_CLASS( CPhysicController, CObject3D )
+	  LUA_DECLARE_CTOR_9(float, float, float, float, float, ECollisionGroup, CPhysicUserData*, const Math::Vect3f&, float)
+	  LUA_DECLARE_METHOD_PROTO(CPhysicController, Move, void ( CPhysicController::* )( const Math::Vect3f&, float ) )
+	  LUA_DECLARE_METHOD(CPhysicController, Jump)
+	  LUA_DECLARE_METHOD(CPhysicController, GetPosition)
+	  LUA_DECLARE_METHOD(CPhysicController, SetPosition)
+	  LUA_DECLARE_METHOD(CPhysicController, SetHeight)
+	  LUA_DECLARE_METHOD(CPhysicController, GetHeight)
+	  LUA_DECLARE_METHOD(CPhysicController, UpdateCharacterExtents)
+ LUA_END_DECLARATION
+  /*module( m_LS ) [
     class_<CPhysicController, CObject3D>( "CPhysicController" )
     .def( constructor<float, float, float, float, float, ECollisionGroup, CPhysicUserData*, const Math::Vect3f&, float>() )
     .def( "Move", ( void ( CPhysicController::* )( const Math::Vect3f&, float ) )&CPhysicController::Move )
-    //.def( "Move", &Move_PhysicController )
     .def( "Jump", &CPhysicController::Jump )
     .def( "GetPosition", &CPhysicController::GetPosition )
     .def( "SetPosition", &CPhysicController::SetPosition )
     .def( "SetHeight", &CPhysicController::SetHeight )
     .def( "GetHeight", &CPhysicController::GetHeight )
     .def( "UpdateCharacterExtents", &CPhysicController::UpdateCharacterExtents )
-  ];
+  ];*/
 
   module( m_LS ) [
     class_<std::set<CPhysicUserData*>>( "ListaPUD" )
@@ -216,6 +252,9 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetResource", &vector_get<CPhysicUserData*> )
   ];
 
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // PARTICLE MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_CLASS( CParticleManager )
     LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
@@ -223,6 +262,9 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CParticleManager, CreateSphereEmitter )
   LUA_END_DECLARATION
 
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // PARTICLE EMITTER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_CLASS( CParticleEmitter )
     LUA_DECLARE_METHOD( CParticleEmitter, SetActive )
@@ -239,6 +281,9 @@ void registerPhysX( lua_State* m_LS )
      LUA_DECLARE_METHOD( CParticleEmitter, SetOrientate )
   LUA_END_DECLARATION
 
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // CUBE EMITTER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_DERIVED_CLASS( CCubeEmitter, CParticleEmitter )
     LUA_DECLARE_DEFAULT_CTOR
@@ -248,6 +293,9 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
   LUA_END_DECLARATION
 
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // SPHERE EMITTER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_DERIVED_CLASS( CSphereEmitter, CParticleEmitter )
     LUA_DECLARE_DEFAULT_CTOR

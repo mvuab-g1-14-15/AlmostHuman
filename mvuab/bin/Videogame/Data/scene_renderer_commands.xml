@@ -25,12 +25,10 @@
     <clear_scene color="true" depth="true" stencil="true"/>
     <set_matrices/>
 	
-
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/>
-	
 	<render_particules/>
     <unset_render_target render_target="deferred_multiple_render_target"/>
     
@@ -53,7 +51,9 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
 	
+	<enable_z_test/>
 	<render_billboards/>
+    <disable_z_test/>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	<render_weapon_target size="20">

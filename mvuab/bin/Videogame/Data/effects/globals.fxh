@@ -125,7 +125,7 @@ float DistanceAttenuation( int i, float3 aDistanceToLight )
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {   
     float3 l_LightDirection = normalize(g_LightsDirection[i]);
-    return 1.0-saturate((cos(g_LightsAngle[i])-dot(LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+    return 1.0-saturate((cos(g_LightsAngle[i]/2)-dot(LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
 }
 
 float3 Normal2Texture(float3 Normal)

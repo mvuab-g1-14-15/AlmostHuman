@@ -66,7 +66,7 @@
 	
 	<technique name="BillboardTechnique">
 		<effect name="BillboardEffect" file="data/effects/BillboardEffect.fx"/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
 	</technique>
 
 	<!-- Effects of GenerateGBuffer -->

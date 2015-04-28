@@ -15,6 +15,9 @@
 #define LUA_DECLARE_CTOR_4( P1, P2, P3, P4 )           .def(luabind::constructor<P1,P2,P3,P4>())
 #define LUA_DECLARE_CTOR_5( P1, P2, P3, P4, P5 )       .def(luabind::constructor<P1,P2,P3,P4,P5>())
 #define LUA_DECLARE_CTOR_6( P1, P2, P3, P4, P5, P6 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6>())
+#define LUA_DECLARE_CTOR_7( P1, P2, P3, P4, P5, P6, P7 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6,P7>())
+#define LUA_DECLARE_CTOR_8( P1, P2, P3, P4, P5, P6, P7, P8 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6,P7,P8>())
+#define LUA_DECLARE_CTOR_9( P1, P2, P3, P4, P5, P6, P7, P8, P9 )   .def(luabind::constructor<P1,P2,P3,P4,P5,P6,P7,P8,P9>())
 
 #define LUA_DECLARE_METHOD( CL, NAME )                .def( #NAME, &CL::NAME )
 #define LUA_DECLARE_METHOD_PROTO( CL, NAME, PROTO )   .def( #NAME, (PROTO) &CL::NAME )
