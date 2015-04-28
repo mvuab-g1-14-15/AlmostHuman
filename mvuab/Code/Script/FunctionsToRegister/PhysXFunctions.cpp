@@ -113,14 +113,19 @@ bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle
 	return false;
 }
 
+bool AddGrenade(CPhysicsManager* PhysicManager, const std::string &name, const std::string &group, const Math::Vect3f& dimensions)
+{
+    //PhysicManager->AddActor(name, group, dimensions,
+    return true;
+}
+
 void registerPhysX( lua_State* m_LS )
 {
   module( m_LS )
   [
     class_<CPhysicUserData, CName>( "CPhysicUserData" )
     .def( constructor<const std::string&>() )
-    .def( "SetColor", ( void ( CPhysicUserData::* )( const float, const float, const float,
-                        const float ) ) &CPhysicUserData::SetColor )
+    .def( "SetColor", ( void ( CPhysicUserData::* )( const float, const float, const float, const float ) ) &CPhysicUserData::SetColor )
     .def( "GetColor", &CPhysicUserData::GetColor )
     .def( "SetPaint", &CPhysicUserData::SetPaint )
     .def( "SetName", &CPhysicUserData::SetName )
@@ -143,6 +148,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "AddVelocityAtPos", &CPhysicActor::AddVelocityAtPos )
     .def( "AddAcelerationAtPos", &CPhysicActor::AddAcelerationAtPos )
     //.def( "AddForceAtPos", &CPhysicActor::AddForceAtPos )
+    .def( "GetPosition", &CPhysicActor::GetPosition )
     .def( "AddTorque", &CPhysicActor::AddTorque )
     .def( "SetGlobalPosition", &CPhysicActor::SetGlobalPosition )
   ];
@@ -175,7 +181,7 @@ void registerPhysX( lua_State* m_LS )
 
     .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
     .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
-     .def( "OverlapSphereController", &CPhysicsManager::OverlapSphereController)
+    .def( "OverlapSphereController", &CPhysicsManager::OverlapSphereController)
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
     .def( "RaycastDistance", &RaycastDistance )

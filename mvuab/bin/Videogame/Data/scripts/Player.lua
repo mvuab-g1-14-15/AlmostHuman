@@ -31,7 +31,7 @@ function CPlayer:Update()
 
 	self.RenderableObject:MakeTransform();
 	
-	engine:Trace( "Player life: " .. self.Life )
+	--engine:Trace( "Player life: " .. self.Life )
 end
 
 function CPlayer:SetPosition(position)

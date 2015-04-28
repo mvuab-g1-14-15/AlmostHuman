@@ -357,32 +357,27 @@ void CPhysicActor::Activate( bool _bActivate )
   }
 }
 
-void CPhysicActor::AddImpulseAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos,
-                                    float _fPower, bool _bLocal )
+void CPhysicActor::AddImpulseAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_IMPULSE, _bLocal );
 }
 
-void CPhysicActor::AddVelocityAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos,
-                                     float _fPower, bool _bLocal )
+void CPhysicActor::AddVelocityAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_VELOCITY_CHANGE, _bLocal );
 }
 
-void CPhysicActor::AddAcelerationAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos,
-                                        float _fPower, bool _bLocal )
+void CPhysicActor::AddAcelerationAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_ACCELERATION, _bLocal );
 }
 
-void CPhysicActor::AddForceAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos,
-                                  float _fPower, bool _bLocal )
+void CPhysicActor::AddForceAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, bool _bLocal )
 {
   AddForceAtPos( _vDirection, _vPos, _fPower, NX_FORCE, _bLocal );
 }
 
-void CPhysicActor::AddForceAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos,
-                                  float _fPower, NxForceMode _sForceMode, bool _bLocal )
+void CPhysicActor::AddForceAtPos( const Math::Vect3f& _vDirection, const Math::Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal )
 {
   if ( m_pPhXActor )
   {

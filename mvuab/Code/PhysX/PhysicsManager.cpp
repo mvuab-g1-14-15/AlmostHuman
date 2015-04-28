@@ -1461,8 +1461,7 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
     return l_ImpactObjects;
 }
 
-bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension,
-                                const Math::CColor& Color,
+bool CPhysicsManager::AddActor( const std::string& Name, std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color,
                                 bool Paint, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vLocalPos, const Math::Vect3f& rotation,
                                 NxCCDSkeleton* _pSkeleton, uint32 _uiGroup )
 {

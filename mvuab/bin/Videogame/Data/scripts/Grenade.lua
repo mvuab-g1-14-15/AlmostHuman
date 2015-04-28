@@ -2,47 +2,27 @@
 class 'CGrenade'
 
 function CGrenade:__init()
-    self.TimeToExplode = 0.0
     self.MaxDamage = 80.0
     
     self.MinDistantce = 1.0
 	self.MaxDistantce = 5.0
-    
-    self.Position = Vect3f()
-    self.Velocity = Vect3f()
-    self.Acceleration = Vect3f(0.0, -9.81, 0.0)
-    
-    self.ThrowAngle = 30.0 * g_Pi / 180.0
 	
 	self.Exploded = false
     self.Throwed = false
 end
 
 function CGrenade:CalculateDamage(l_DistanceToEnemy)
-    return self.MaxDamage * ( 1.0 - math.max(0.0, ( l_DistanceToEnemy - self.MinDistantce ) / (self.MaxDistantce - self.MinDistantce ) ) )
+    return self.MaxDamage * (1.0 - math.max(0.0, (l_DistanceToEnemy - self.MinDistantce) / (self.MaxDistantce - self.MinDistantce)))
 end
 
 function CGrenade:Throw()
-    self.Position = camera_manager:GetCurrentCamera():GetPosition()
-    self.Velocity = camera_manager:GetCurrentCamera():GetDirection() * 1.0
-    
-    self.Throwed = true
-    self:TimeToBoom()
-end
-
-function CGrenade:TimeToBoom()
-    self.TimeToExplode = self.TimeToExplode - timer:GetElapsedTime()
-    
-    if(self.TimeToExplode <= 0.0) then
-		l_PhysXActors = vPUD(physic_manager:OverlapSphereController(self.MaxDistantce, self.Position, 2 ^ 2))
-		l_Size = l_PhysXActors:size()
-		self.Exploded = true
-		
-		for i = 1, l_Size do
-			l_Enemy = enemy_manager:GetResource(l_PhysXActors:GetResource(i - 1):GetName())
-			engine:Trace("Damage: " .. self:CalculateDamage((self.Position - l_Enemy:GetPosition()):Length()))
-		end		
-    end
+	--engine:Trace("hola "..(bit32.lshift(1,2)).." "..(bit32.lshift(1,4)))
+	physic_manager:AddActor("Grenade", "Sphere", Vect3f(0.1, 0.1, 0.1), CColor(1.0, 1.0, 1.0), false, self.Position, Vect3f(), Vect3f(), nil, 2 ^ 0)
+	
+	self.Actor = physic_manager:GetActor("Grenade")
+	self.Actor:AddImpulseAtPos(camera_manager:GetCurrentCamera():GetDirection(), camera_manager:GetCurrentCamera():GetPosition(), 3.0, true)
+	
+	self.Throwed = true
 end
 
 function CGrenade:Update()
@@ -58,10 +38,19 @@ function CGrenade:Update()
 	if self.Exploded then
 		return
 	end
-    
-	l_Dt = timer:GetElapsedTime()
-    self.Velocity = self.Velocity + self.Acceleration * l_Dt
-    self.Position = self.Position + self.Velocity * l_Dt
-    
-    self:TimeToBoom()
+	
+	if not action_manager:DoAction("ExplodeGrenade") then
+		return
+	end
+	
+	engine:Trace("Granada booom")
+	
+	l_PhysXActors = vPUD(physic_manager:OverlapSphereController(self.MaxDistantce, self.Position, 2 ^ 2))
+	l_Size = l_PhysXActors:size()
+	self.Exploded = true
+	
+	for i = 1, l_Size do
+		l_Enemy = enemy_manager:GetResource(l_PhysXActors:GetResource(i - 1):GetName())
+		l_Enemy:AddDamage(self:CalculateDamage((self.Actor:GetPosition() - l_Enemy:GetPosition()):Length()))
+	end		
 end
