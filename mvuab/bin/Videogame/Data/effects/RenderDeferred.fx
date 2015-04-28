@@ -24,20 +24,25 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	if(g_LightsEnabled[0] == 1) 
 	{
 		float3 l_Normal 			= normalize(l_WorldNormal);
-		float3 l_LightDirection 	= normalize(l_WorldPosition-g_LightsPosition[0]);
-		float l_Attenuation 		= DistanceAttenuation(0, l_LightDirection );
+		float3 l_LightVector		= l_WorldPosition-g_LightsPosition[0];
+		float  l_Length 			= length( l_LightVector );
+		float3 l_LightDirection 	= l_LightVector / l_Length;
+		float  l_Attenuation 		= DistanceAttenuation(0, l_Length );
 		if(DIR_LIGHT == g_LightsType[0])
 		{
 			l_LightDirection = normalize(g_LightsDirection[0]);
 		}
 		else if(SPOT_LIGHT == g_LightsType[0])
 		{	
-			l_Attenuation = l_Attenuation * SpotAttenuation(0, -l_LightDirection);
+			l_Attenuation = l_Attenuation * SpotAttenuation(0, l_LightDirection);
 		}
 		
 		float3 l_Hn = normalize(normalize(g_CameraPosition-l_WorldPosition)-l_LightDirection);
+		
 		float3 l_DiffuseContrib = l_DiffuseColor*saturate(dot(l_Normal,-l_LightDirection)) * l_Attenuation * g_LightsColor[0];
+		
 		float3 l_SpecularContrib = pow(saturate(dot(l_Normal,l_Hn)),g_SpecularExponent) * l_Attenuation * g_LightsColor[0] * l_SpecularFactor;
+		
 		l_PixelColor = l_PixelColor + float4( l_DiffuseContrib + l_SpecularContrib, 1.0);
 	}
 	

@@ -101,7 +101,16 @@ struct TT2_VERTEX {
     float2 	UV2 		: TEXCOORD1;
 };
 
-struct TT1_VERTEX {
+struct TT1_VERTEX_PS{
+	float4 Position 		: POSITION;
+    float2 UV 				: TEXCOORD0;
+	float3 Normal 			: NORMAL;
+	float4 WorldPosition 	: TEXCOORD1;
+	float4 WorldTangent		: TEXCOORD2;
+    float4 WorldBinormal 	: TEXCOORD3;
+};
+
+struct TT1_VERTEX_VS{
 	float3 	Position	: POSITION;
 	float2 	UV 			: TEXCOORD0;
 };

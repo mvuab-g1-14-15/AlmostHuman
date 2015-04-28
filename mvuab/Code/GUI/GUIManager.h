@@ -69,7 +69,7 @@ public:
 	void								SetVisiblePointerMouse		(bool flag)																					{m_bVisiblePointerMouse = flag;}
 	void								Reload();
 	
-
+	CWindows*							GetWindow(const std::string& NameWindow);
 	//----CScriptRegister interface--------------------------------------------
 	//virtual void				RegisterFunctions					(CScriptManager* scriptManager);
 

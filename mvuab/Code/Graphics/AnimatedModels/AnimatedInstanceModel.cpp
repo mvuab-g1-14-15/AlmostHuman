@@ -140,69 +140,65 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 void CAnimatedInstanceModel::RenderModelBySoftware()
 {
     CGraphicsManager* RM = GraphicsInstance;
-    // get the renderer of the model
     CalRenderer* l_pCalRenderer = m_CalModel->getRenderer();
 
-    // begin the rendering loop
-    if ( !l_pCalRenderer->beginRendering() )
+    if(!l_pCalRenderer->beginRendering())
     { return; }
 
     m_VBCursor = 0;
     m_IBCursor = 0;
+
     DWORD dwVBLockFlags = D3DLOCK_NOOVERWRITE;
     DWORD dwIBLockFlags = D3DLOCK_NOOVERWRITE;
     LPDIRECT3DDEVICE9 l_pD3DDevice = RM->GetDevice();
-    l_pD3DDevice->SetStreamSource( 0, m_pVB, 0, sizeof( TNORMAL_T1_VERTEX ) );
-    l_pD3DDevice->SetFVF( TNORMAL_T1_VERTEX::GetFVF() );
-    l_pD3DDevice->SetIndices( m_pIB );
-    // get the number of meshes
+
+    l_pD3DDevice->SetStreamSource(0, m_pVB, 0, sizeof(TNORMAL_T1_VERTEX));
+    l_pD3DDevice->SetFVF(TNORMAL_T1_VERTEX::GetFVF());
+    l_pD3DDevice->SetIndices(m_pIB);
+
     uint32 meshCount = l_pCalRenderer->getMeshCount();
-
-    // render all meshes of the model
-    for ( uint32 meshId = 0; meshId < meshCount; ++meshId )
+    for(uint32 meshId = 0; meshId < meshCount; ++meshId)
     {
-        // get the number of submeshes
-        uint32 submeshCount = l_pCalRenderer->getSubmeshCount( meshId );
-
-        // render all submeshes of the mesh
-        for ( uint32 submeshId = 0; submeshId < submeshCount; ++submeshId )
+        uint32 submeshCount = l_pCalRenderer->getSubmeshCount(meshId);
+        for(uint32 submeshId = 0; submeshId < submeshCount; ++submeshId)
         {
-            // select mesh and submesh for further data access
-            if ( false == l_pCalRenderer->selectMeshSubmesh( meshId, submeshId ) )
+            if(false == l_pCalRenderer->selectMeshSubmesh(meshId, submeshId))
             { continue; }
 
-            if ( m_VBCursor + l_pCalRenderer->getVertexCount() >= 30000 )
+            if(m_VBCursor + l_pCalRenderer->getVertexCount() >= 30000)
             {
                 m_VBCursor = 0;
                 dwVBLockFlags = D3DLOCK_DISCARD;
             }
 
-            if ( m_IBCursor + l_pCalRenderer->getFaceCount() >= 50000 )
+            if(m_IBCursor + l_pCalRenderer->getFaceCount() >= 50000)
             {
                 m_IBCursor = 0;
                 dwIBLockFlags = D3DLOCK_DISCARD;
             }
 
-            // Get vertexbuffer from the model
-            TNORMAL_T1_VERTEX* pVertices;
-            m_pVB->Lock( m_VBCursor * sizeof( TNORMAL_T1_VERTEX ),
-                         l_pCalRenderer->getVertexCount()*sizeof( TNORMAL_T1_VERTEX ), ( void** )&pVertices, dwVBLockFlags );
-            int vertexCount = l_pCalRenderer->getVerticesNormalsAndTexCoords( &pVertices->x );
+            TNORMAL_T1_VERTEX *pVertices = 0;
+            CalIndex *meshFaces = 0;
+            int faceCount = 0;
+
+            m_pVB->Lock(m_VBCursor * sizeof(TNORMAL_T1_VERTEX), l_pCalRenderer->getVertexCount()*sizeof(TNORMAL_T1_VERTEX), (void **) &pVertices, dwVBLockFlags);
+                int vertexCount = l_pCalRenderer->getVerticesNormalsAndTexCoords(&pVertices->x);
             m_pVB->Unlock();
-            CalIndex* meshFaces;
-            int faceCount;
-            m_pIB->Lock( m_IBCursor * 3 * sizeof( CalIndex ),
-                         l_pCalRenderer->getFaceCount() * 3 * sizeof( CalIndex ), ( void** )&meshFaces, dwIBLockFlags );
-            faceCount = l_pCalRenderer->getFaces( meshFaces );
+
+            
+            m_pIB->Lock(m_IBCursor * 3 * sizeof(CalIndex), l_pCalRenderer->getFaceCount() * 3 * sizeof(CalIndex), (void **) &meshFaces, dwIBLockFlags);
+                faceCount = l_pCalRenderer->getFaces(meshFaces);
             m_pIB->Unlock();
+
             l_pD3DDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
-            // Activate textures
-            //m_AnimatedCoreModel->ActivateTextures();
-            m_Textures[meshId]->Activate( 0 );
-            l_pD3DDevice->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, m_VBCursor, 0, vertexCount, m_IBCursor * 3,
-                                                faceCount );
+            
+            m_Textures[meshId]->Activate(0);
+            m_AnimatedCoreModel->ActivateTextures();
+            l_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, m_VBCursor, 0, vertexCount, m_IBCursor * 3, faceCount);
+
             m_VBCursor += vertexCount;
             m_IBCursor += faceCount;
+
             dwIBLockFlags = D3DLOCK_NOOVERWRITE;
             dwVBLockFlags = D3DLOCK_NOOVERWRITE;
         }
@@ -210,22 +206,6 @@ void CAnimatedInstanceModel::RenderModelBySoftware()
 
     // end the rendering
     l_pCalRenderer->endRendering();
-}
-
-void CAnimatedInstanceModel::Update()
-{
-    if( ActionManagerInstance->DoAction( "ChangeAnimation" ) )
-    {
-        uint32 lCount = m_AnimatedCoreModel->GetAnimationsCount();
-        m_CurrentAnimationId++;
-
-        if( m_CurrentAnimationId > lCount )
-            m_CurrentAnimationId = 0;
-
-        ExecuteAction( m_CurrentAnimationId, 1.f, 1.f );
-    }
-    else
-        m_CalModel->update( deltaTime );
 }
 
 void CAnimatedInstanceModel::Initialize()
@@ -292,41 +272,59 @@ void CAnimatedInstanceModel::Destroy()
     CHECKED_RELEASE( m_pIB );
 }
 
-void CAnimatedInstanceModel::ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut,
-        float32 WeightTarget, bool AutoLock )
+void CAnimatedInstanceModel::Update()
 {
-    m_CalModel->getMixer()->executeAction( Id, DelayIn, DelayOut, WeightTarget, AutoLock );
-}
-
-void CAnimatedInstanceModel::BlendCycle( uint32 Id, float32 Weight, float32 DelayIn )
-{
-    m_CalModel->getMixer()->blendCycle( Id, Weight, DelayIn );
-}
-
-void CAnimatedInstanceModel::ClearCycle( uint32 Id, float32 DelayOut )
-{
-    m_CalModel->getMixer()->clearCycle( Id, DelayOut );
-}
-
-bool CAnimatedInstanceModel::IsCycleAnimationActive( uint32 Id ) const
-{
-    CalCoreAnimation* l_pAnimation = m_AnimatedCoreModel->GetCoreModel()->getCoreAnimation( Id );
-    const std::list<CalAnimationCycle*>& l_AnimList = m_CalModel->getMixer()->getAnimationCycle();
-    std::list<CalAnimationCycle*>::const_iterator itb = l_AnimList.begin(), ite = l_AnimList.end();
-
-    for ( ; itb != ite; ++itb )
+    if( ActionManagerInstance->DoAction( "ChangeAnimation" ) )
     {
-        if ( ( *itb )->getCoreAnimation() == l_pAnimation )
+        ClearCycle(m_CurrentAnimationId, 0.1f);
+        m_CurrentAnimationId = (m_CurrentAnimationId + 1) %  m_AnimatedCoreModel->GetAnimationsCount();
+        BlendCycle(m_CurrentAnimationId, 1.0f, 0.5f);
+    }
+    else
+    {
+        m_CalModel->update(deltaTime);
+    }
+}
+
+void CAnimatedInstanceModel::ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget, bool AutoLock)
+{
+    m_CalModel->getMixer()->executeAction(Id, DelayIn, DelayOut, WeightTarget, AutoLock);
+}
+
+void CAnimatedInstanceModel::RemoveAction(uint32 Id)
+{
+    m_CalModel->getMixer()->removeAction(Id);
+}
+
+void CAnimatedInstanceModel::BlendCycle(uint32 Id, float32 Weight, float32 DelayIn)
+{
+    m_CalModel->getMixer()->blendCycle(Id, Weight, DelayIn);
+}
+
+void CAnimatedInstanceModel::ClearCycle(uint32 Id, float32 DelayOut)
+{
+    m_CalModel->getMixer()->clearCycle(Id, DelayOut);
+}
+
+bool CAnimatedInstanceModel::IsCycleAnimationActive(uint32 Id) const
+{
+    CalCoreAnimation *l_pAnimation = m_AnimatedCoreModel->GetCoreModel()->getCoreAnimation( Id );
+    const std::list<CalAnimationCycle *> &l_AnimList = m_CalModel->getMixer()->getAnimationCycle();
+    std::list<CalAnimationCycle *>::const_iterator itb = l_AnimList.begin(), ite = l_AnimList.end();
+
+    for(; itb != ite; ++itb)
+    {
+        if((*itb)->getCoreAnimation() == l_pAnimation)
         { return true; }
     }
 
     return false;
 }
 
-bool CAnimatedInstanceModel::IsActionAnimationActive( uint32 Id ) const
+bool CAnimatedInstanceModel::IsActionAnimationActive(uint32 Id) const
 {
-    const std::vector<CalAnimation*>& l_AnimVect = m_CalModel->getMixer()->getAnimationVector();
-    return ( l_AnimVect[Id] != NULL );
+    const std::vector<CalAnimation *> &l_AnimVect = m_CalModel->getMixer()->getAnimationVector();
+    return l_AnimVect[Id] != NULL;
 }
 
 void CAnimatedInstanceModel::LoadTextures()

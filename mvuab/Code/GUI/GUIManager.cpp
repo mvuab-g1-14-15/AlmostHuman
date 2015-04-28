@@ -35,7 +35,7 @@
 CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   :
   CManager()
-  , m_sCurrentWindows( "Main.xml" )
+  , m_sCurrentWindows( "HUD.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -54,7 +54,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
 CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   :
   CManager( atts )
-  , m_sCurrentWindows( "Main.xml" )
+  , m_sCurrentWindows( "HUD.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -243,14 +243,16 @@ void CGUIManager::Init()
     }//END if (m_bIsOk)
 
   } //END if (!parser.LoadFile(initGuiXML.c_str()))
-  
-  
+
+
   //CONSOLA GUI LUA
-  m_Console = new CConsoleGUI(  m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false, true );
-  
-  m_Map = new CMap(1000, 1000, 30, 30, Math::Vect2f( 0, 5 ));
-  m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
-  m_Map->SetActiveTexture("mapa");
+  m_Console = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 4, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "Prueba", 2U, 2U, false,
+                               true );
+
+  m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 0, 5 ) );
+
+  /*m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
+  m_Map->SetActiveTexture("mapa");*/
   if ( !m_bIsOk )
     Release();
   else
@@ -290,13 +292,13 @@ void CGUIManager::Render()
     }//END if (m_bLoadedGuiFiles)
 
     //Siempre los últimos en pintarse
-    assert( m_TextBox );
+    /*assert( m_TextBox );
     m_TextBox->Render();
     assert( m_Console );
     m_Console->Render();
-	assert( m_Map );
-	m_Map->Render();
-    RenderPointerMouse();
+    assert( m_Map );
+    m_Map->Render();
+    RenderPointerMouse();*/
 
   }//END if (m_bIsOk)
 }
@@ -339,7 +341,7 @@ void CGUIManager::Update()
 
     m_Console->Update();
 
-	m_Map->Update();
+    m_Map->Update();
 
     if ( !m_TextBox->IsVisible() && m_bLoadedGuiFiles )
     {
@@ -542,7 +544,7 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
 
   m_WindowsMap.clear();
   m_ElementsMap.clear();
-  m_sCurrentWindows = "Main.xml";
+  m_sCurrentWindows = "HUD.xml";
 
   WIN32_FIND_DATA FindFileData;
   HANDLE hFind;
@@ -627,6 +629,17 @@ void CGUIManager::SetMessageBox( const std::string& text )
   }
 }
 
+CWindows*	CGUIManager::GetWindow(const std::string& NameWindow)
+{
+	std::map<std::string, CWindows*>::iterator it;
+	it = m_WindowsMap.find( NameWindow );
+
+	if ( it != m_WindowsMap.end() )
+	{
+		return it->second;
+	}
+	return 0;
+}
 
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------

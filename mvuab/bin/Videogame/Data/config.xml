@@ -7,5 +7,4 @@
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
 	<managers path="Data/managers.xml"/>
 	<sound init_sound_path="./Data/sounds.xml"/>
-	<maxfps fps="10.0"/>
 </config>

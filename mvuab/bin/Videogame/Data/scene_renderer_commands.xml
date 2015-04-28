@@ -53,15 +53,14 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
 	
-	
+	<render_billboards/>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
 	<render_weapon_target size="20">
 		<texture stage_id="0" name="./Data/textures/mirilla.png"/>
 	</render_weapon_target>
-	<!--GUI
-	<render_gui render="true"/>	
-	-->
+
+	<render_gui render="true"/>
     <!--end pre_render-->
     
     <render_developer_info/>

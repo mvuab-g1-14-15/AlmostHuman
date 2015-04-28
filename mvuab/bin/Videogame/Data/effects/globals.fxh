@@ -13,6 +13,14 @@
 #define PI          3.14159265359
 #define Deg2Rad(x)  (x * PI / 180.0)
 
+struct Camera
+{
+	float3 mPosition;
+	float3 mDirection;
+	float3 mRight;
+	float3 mUp;
+};
+
 //
 // Matrices
 //
@@ -109,16 +117,15 @@ int         g_WindowHeight                                     		: WindowHeight;
 //
 // Functions
 //
-float DistanceAttenuation( int i, float3 LightToPixelDirection )
+float DistanceAttenuation( int i, float3 aDistanceToLight )
 {
-    float l_DistanceToLight = length(LightToPixelDirection);
-    return 1.0 - saturate((l_DistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
+    return 1.0 - saturate((aDistanceToLight-g_LightsStartRangeAttenuation[i])/(g_LightsEndRangeAttenuation[i]-g_LightsStartRangeAttenuation[i]));
 }
 
 float SpotAttenuation( int i, float3 LightToPixelDirection )
 {   
     float3 l_LightDirection = normalize(g_LightsDirection[i]);
-    return 1.0-saturate((cos(g_LightsAngle[i])-dot(-LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
+    return 1.0-saturate((cos(g_LightsAngle[i])-dot(LightToPixelDirection,l_LightDirection))/(cos(g_LightsAngle[i]/2)-cos(g_LightsFallOff[i]/2)));
 }
 
 float3 Normal2Texture(float3 Normal)
@@ -253,6 +260,15 @@ void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, fl
 	
 	OutNormal  = normalize(OutNormal);
 	OutTangent = normalize(OutTangent);
+}
+
+Camera GetCurrentCamera()
+{
+	Camera cam;
+	cam.mUp 	  	= g_ViewInverseMatrix[1].xyz;
+	cam.mRight 	  	= g_ViewInverseMatrix[2].xyz;
+	cam.mPosition 	= g_ViewInverseMatrix[3].xyz;
+	cam.mDirection 	= g_ViewInverseMatrix[2].xyz;
 }
 
 #endif // !defined( GLOBALS_FXH )

@@ -3,49 +3,50 @@
 
 #include "Utils\Name.h"
 #include "Utils\Defines.h"
-#include "Utils\Manager.h"
+#include "Object3D.h"
 
 #include "Math\Vector3.h"
 #include "Math\Matrix44.h"
 
-//---Forward Declarations--
 class CTexture;
 class CRenderableVertexs;
-//-------------------------
+class CEffectTechnique;
 
-
-class CBillboard : public CName, public CManager
+class CBillboard : public CName, public CObject3D
 {
     public:
-	    CBillboard();
-	    CBillboard(CXMLTreeNode& atts);
-	    ~CBillboard();
+        CBillboard();
+        virtual ~CBillboard();
 
-	    void Init();
+		static void CreateBillBoardGeometry();
+		static void DestroyBillBoardGeometry();
+
+        bool Init(const CXMLTreeNode& atts);
+        bool Init
+        (
+            const std::string   &aName,
+            const Math::Vect3f  &aPosition,
+            const Math::Vect2f  &aSize,
+            const std::string   &aTextureName,
+            const std::string   &aTechniqueName,
+            bool                 aActive = true
+        );
+
         void Render();
-
-        void Update(const Math::Mat44f &l_Transform);
         void Update();
 
-	    void SetTexture(std::string Texture);
-	    CTexture* GetTexture();
+        const CTexture*       GetTexture() const;
+        const Math::Vect2f &  GetSize() const;
 
-	    void SetSize(float sx, float sy);
-        void SetPosition(Math::Vect3f l_Pos);
-
+        void SetTexture(const CTexture *aTexture);
+        void SetSize(const Math::Vect2f & aSize );
     private:
-	    CTexture*			m_Texture;
-        CRenderableVertexs* m_RV;
+        CTexture*           m_Texture;
+        CEffectTechnique*   mTechnique;
+        Math::Vect2f        mSize;
+        bool                m_Active;
 
-	    Math::Vect3f		m_Position;
-	    Math::Vect3f		m_PosA;
-	    Math::Vect3f		m_PosB;
-	    Math::Vect3f		m_PosC;
-	    Math::Vect3f		m_PosD;
-
-        float				m_SizeX;
-        float               m_SizeY;
-	    bool				m_Active;
+		static CRenderableVertexs* sRV;
 };
 
 #endif //_BILLBOARD_H

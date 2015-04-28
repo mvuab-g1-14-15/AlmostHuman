@@ -27,7 +27,7 @@ CGuiElement::CGuiElement(   uint32 windowsHeight, uint32 windowsWidth, float hei
     , m_eEditMode(DISABLE)
     , m_eType(type)
     , m_z(0)
-    , m_sLiteral("")
+    , m_sLiteral(lit)
     , m_uTextHeightOffset(textHeightOffset)
     , m_uTextWidthOffset(textWidthOffset)
 {

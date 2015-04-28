@@ -83,6 +83,7 @@
 #define TextureMInstance        CEngineManagers::GetSingletonPtr()->GetTextureManager()
 #define SoundMan                CEngineManagers::GetSingletonPtr()->GetSoundManager()
 #define GUIInstance             CEngineManagers::GetSingletonPtr()->GetGUIManager()
+#define BillboardMan            CEngineManagers::GetSingletonPtr()->GetBillboardManager()
 
 #define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )

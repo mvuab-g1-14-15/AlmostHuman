@@ -117,21 +117,20 @@ public:
 
   int            AddMaterial( float restitution, float staticFriction, float dynamicFriction );
 
+
   ////--- Intersection Functions:
   //CPhysicUserData*    RaycastClosestActor       ( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info );
-  CPhysicUserData*    RaycastClosestActor( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay,
-      uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
-  CPhysicUserData*    RaycastClosestActorShoot( const Math::Vect3f posRay, const Math::Vect3f& dirRay,
-      uint32 impactMask, SCollisionInfo& info, float _fPower );
-  std::string  RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
-      uint32 impactMask);
-  std::set<CPhysicUserData*> OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere,
-      EShapesType shapeType = ALL_SHAPES , uint32 impactMask = 0xffffffff );
+  CPhysicUserData*    RaycastClosestActor( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
+  CPhysicUserData*    RaycastClosestActorShoot( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower );
+  std::string  RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay, uint32 impactMask);
+
+  std::set<CPhysicUserData*> OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere, EShapesType shapeType = ALL_SHAPES , uint32 impactMask = 0xffffffff );
   std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask );
-  void          OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
-      std::vector<CPhysicUserData*> impactObjects, float _fPower );
-  void          ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
-                                float _fEffectRadius, float _fPower );
+  std::vector<CPhysicUserData*> OverlapSphereController( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask );
+  
+  
+  void  OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower );
+  void  ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere, float _fEffectRadius, float _fPower );
   std::set<CPhysicUserData*> OverlapSphereHardcoded( float radiusSphere, const Math::Vect3f& posSphere );
 
 	std::vector<CPhysicUserData*> OverlapConeActor( float _Distance, float _Angle,

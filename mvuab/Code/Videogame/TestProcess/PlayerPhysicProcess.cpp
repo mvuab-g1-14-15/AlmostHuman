@@ -29,6 +29,7 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
+#include "Billboard\Billboard.h"
 
 //INPUTS
 #include "InputManager.h"
@@ -79,6 +80,7 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
   m_vController.clear();
   //CHECKED_DELETE( m_PhysicController );
   CHECKED_DELETE( m_AStar );
+  CHECKED_DELETE( m_Billboard );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -107,9 +109,10 @@ void CPlayerPhysicProcess::Update()
     ScriptMInstance->Reload();
     //ScriptMInstance->RunCode( "init()" );
   }
+
   if ( pActionManager->DoAction( "ReloadGUI" ) )
-	  GUIInstance->Reload();
-  
+    GUIInstance->Reload();
+
   /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
       ScriptMInstance->RunCode( "cambiar_sala()" );*/
 
@@ -168,27 +171,29 @@ void CPlayerPhysicProcess::Update()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPlayerPhysicProcess::InitSceneCharacterController()
 {
-  //Scene Character Controller
-  //Step1
-  std::string l_Type = "Box";
-  PhysXMInstance->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ),
-                            v3fZERO,
-                            v3fZERO, 0, 0 );
+  /*
+      //Scene Character Controller
+      //Step1
+      std::string l_Type = "Box";
+      PhysXMInstance->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ),
+                          v3fZERO,
+                          v3fZERO, 0, 0 );
 
-  //Step2
-  l_Type = "Box";
-  PhysXMInstance->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
-                            Math::Vect3f( 4, 0, 0 ), v3fZERO, 0, 0 );
+      //Step2
+      l_Type = "Box";
+      PhysXMInstance->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
+                          Math::Vect3f( 4, 0, 0 ), v3fZERO, 0, 0 );
 
-  //Step3
-  l_Type = "Box";
-  PhysXMInstance->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
-                            Math::Vect3f( 8, 0, 0 ), v3fZERO, 0, 0 );
+      //Step3
+      l_Type = "Box";
+      PhysXMInstance->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
+                          Math::Vect3f( 8, 0, 0 ), v3fZERO, 0, 0 );
 
-  //Plano Inclinado TODO
-  l_Type = "Box";
-  PhysXMInstance->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
-                            Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
+      //Plano Inclinado TODO
+      l_Type = "Box";
+      PhysXMInstance->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
+                          Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
+  */
 
 }
 
@@ -197,22 +202,28 @@ void CPlayerPhysicProcess::Init()
   //ScriptMInstance->RunCode( "init()" );
   ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
-  /*CWWSoundManager* l_SM = SoundMan;
 
-  uint32 l_source1 =  l_SM->CreateSource();
-  l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
-  l_SM->SetSourceGain( l_source1, 100.0f );
+  m_Billboard = new CBillboard();
 
-  uint32 l_source2 =  l_SM->CreateSource();
-  l_SM->SetSourcePosition( l_source2, Math::Vect3f( 5.0 ) );
-  l_SM->SetSourceGain( l_source2, 100.0f );
+  m_Billboard->Init( "billboard", Math::Vect3f( -3.42f, 1.43f, 2.66f ), Math::Vect2f( 2.0f, 2.0f ), "a",
+                     "BillboardTechnique", true );
 
-  uint32 l_source3 =  l_SM->CreateSource();
-  l_SM->SetSourcePosition( l_source3, Math::Vect3f( 5.0 ) );
-  l_SM->SetSourceGain( l_source3, 100.0f );
+  /*  CWWSoundManager* l_SM = SoundMan;
 
-  l_SM->SetListenerPosition( Math::Vect3f( 0.0 ) );
-  l_SM->SetListenerOrientation( CameraMInstance->GetCurrentCamera()->GetDirection(),
+      uint32 l_source1 =  l_SM->CreateSource();
+      l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
+      l_SM->SetSourceGain( l_source1, 100.0f );
+
+      uint32 l_source2 =  l_SM->CreateSource();
+      l_SM->SetSourcePosition( l_source2, Math::Vect3f( 5.0 ) );
+      l_SM->SetSourceGain( l_source2, 100.0f );
+
+      uint32 l_source3 =  l_SM->CreateSource();
+      l_SM->SetSourcePosition( l_source3, Math::Vect3f( 5.0 ) );
+      l_SM->SetSourceGain( l_source3, 100.0f );
+
+      l_SM->SetListenerPosition( Math::Vect3f( 0.0 ) );
+      l_SM->SetListenerOrientation( CameraMInstance->GetCurrentCamera()->GetDirection(),
                                 CameraMInstance->GetCurrentCamera()->GetVecUp() );
   */
   //l_SM->PlayAction2D( "test" );
@@ -262,11 +273,11 @@ void CPlayerPhysicProcess::Init()
 
 void CPlayerPhysicProcess::Render()
 {
-  m_Grenade->Render();
-  m_AStar->Render();
+  //m_Grenade->Render();
+  //  m_AStar->Render();
+  m_Billboard->Render();
 
-  ScriptMInstance->RunCode( "render()" );
-  m_Blaster->Render();
+  //    m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()

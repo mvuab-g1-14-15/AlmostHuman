@@ -28,6 +28,9 @@ public:
   GET_SET( Math::Vect3f, TargetPositionOriginal );
   GET_SET( float32, Speed );
   GET_SET( float32, Life );
+  GET_SET( float, TimeToShoot );
+  GET_SET( float, MaxTimeToShoot );
+
   void AddDamage( float32 aDamage )
   {
     m_Life -= aDamage;
@@ -50,6 +53,9 @@ private: // Members
   Math::Vect3f          m_TargetPositionOriginal;
   float32               m_Speed;
   float32               m_Life;
+
+  float m_TimeToShoot;
+  float m_MaxTimeToShoot;
 
   float m_Height;
   float m_Radius;

@@ -190,6 +190,10 @@
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_C"/>
     </action>
 	
+	<action name="LyingDown">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_X"/>
+    </action>
+	
 	<action name="ChangeRoom">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
     </action>
@@ -222,5 +226,9 @@
 	
 	<action name="BackwarGUI">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_DOWN"/>
+    </action>
+	
+	<action name="ThrowGrenade">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_G"/>
     </action>
 </Actions>

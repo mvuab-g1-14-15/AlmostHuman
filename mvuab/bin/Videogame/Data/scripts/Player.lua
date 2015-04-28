@@ -17,6 +17,8 @@ function CPlayer:__init()
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi);
 
 	self.RenderableObject:MakeTransform();
+	
+	self.Life = 100.0
 end
 
 function CPlayer:Update()
@@ -28,8 +30,18 @@ function CPlayer:Update()
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi);
 
 	self.RenderableObject:MakeTransform();
+	
+	engine:Trace( "Player life: " .. self.Life )
 end
 
 function CPlayer:SetPosition(position)
 	self.PlayerController:SetPosition(position)
+end
+
+function CPlayer:AddDamage(amount)
+	self.Life = self.Life - amount
+end
+
+function CPlayer:GetLife()
+	return self.Life
 end

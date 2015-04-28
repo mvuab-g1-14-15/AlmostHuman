@@ -87,7 +87,11 @@ function esperar()
 end
 
 function atacar()
-	perseguir()
+	enemy = enemy_manager:GetActualEnemy()
+	if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
+		g_Player:AddDamage(5)
+		enemy:SetTimeToShoot(0.0)
+	end
 end
 
 function perseguir()

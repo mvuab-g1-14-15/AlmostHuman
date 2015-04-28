@@ -24,6 +24,7 @@
 #include "Language\LanguageManager.h"
 #include "Utils\ObjectFactory.h"
 #include "GUIManager.h"
+#include "Billboard\BillboardManager.h"
 #include "Console/Console.h"
 #include "WWSoundManager.h"
 
@@ -111,6 +112,8 @@ void CEngineManagers::Init()
                            Type2Type<CGUIManager>( ) );
   ManagerFactory.Register( "console",
                            Type2Type<CConsole>( ) );
+  ManagerFactory.Register( "billboard_manager",
+                           Type2Type<CBillboardManager>( ) );
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
@@ -169,6 +172,7 @@ void CEngineManagers::Init()
   m_pGizmosManager    = dynamic_cast<CGizmosManager*>( GetResource( "gizmos_manager" ) );
   m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );
   m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
+  m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
 
   //
   // Init managers
@@ -201,6 +205,12 @@ CWWSoundManager* CEngineManagers::GetSoundManager() const
 {
   ASSERT( m_pSoundManager, "Null sound manager" );
   return m_pSoundManager;
+}
+
+CBillboardManager* CEngineManagers::GetBillboardManager() const
+{
+  ASSERT( m_BillboardManager, "Null billboard manager" );
+  return m_BillboardManager;
 }
 
 CGraphicsManager* CEngineManagers::GetGraphicsManager() const

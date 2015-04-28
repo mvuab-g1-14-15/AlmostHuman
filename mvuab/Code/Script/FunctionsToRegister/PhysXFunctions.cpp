@@ -91,6 +91,12 @@ void removeResource( T val )
   CHECKED_DELETE( val );
 }
 
+template<class T>
+T vector_get( std::vector<T>& vec, size_t i )
+{
+  return vec[i];
+}
+
 bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction)
 {
 	const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapConeActor(_Distance, _Angle, _Position, _Direction, 0xffffffff);
@@ -169,6 +175,7 @@ void registerPhysX( lua_State* m_LS )
 
     .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
     .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
+     .def( "OverlapSphereController", &CPhysicsManager::OverlapSphereController)
     .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
     .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
     .def( "RaycastDistance", &RaycastDistance )
@@ -200,6 +207,7 @@ void registerPhysX( lua_State* m_LS )
     class_<std::vector<CPhysicUserData*>>( "vPUD" )
     .def( constructor<std::vector<CPhysicUserData*>>() )
     .def( "size", &std::vector<CPhysicUserData*>::size )
+    .def( "GetResource", &vector_get<CPhysicUserData*> )
   ];
 
   LUA_BEGIN_DECLARATION( m_LS )

@@ -270,9 +270,9 @@ bool CAnimatedCoreModel::Reload()
 
 void CAnimatedCoreModel::ActivateTextures()
 {
-    TTextureVector::iterator itb = m_TextureVector.begin(),
-                             ite = m_TextureVector.end();
-    for( size_t i = 0; itb != ite ; ++itb, ++i )
+    TTextureVector::iterator itb = m_TextureVector.begin(), ite = m_TextureVector.end();
+
+    for(size_t i = 0; itb != ite ; ++itb, ++i)
     {
         (*itb)->Activate(i);
     }

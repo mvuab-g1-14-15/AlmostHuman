@@ -13,62 +13,64 @@ class CEffect;
 
 class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
 {
-public:
-  CEffectManager();
-  CEffectManager( CXMLTreeNode &atts);
-  ~CEffectManager();
+    public:
+        CEffectManager();
+        CEffectManager( CXMLTreeNode &atts);
+        ~CEffectManager();
 
-  const Math::Mat44f& GetWorldMatrix() const;
-  const Math::Mat44f& GetProjectionMatrix() const;
-  const Math::Mat44f& GetViewMatrix() const;
-  const Math::Mat44f& GetViewProjectionMatrix();
-  const Math::Vect3f& GetCameraEye();
-  const Math::Mat44f& GetLightViewMatrix() const;
-  const Math::Mat44f& GetShadowProjectionMatrix();
+        const Math::Mat44f& GetWorldMatrix() const;
+        const Math::Mat44f& GetProjectionMatrix() const;
+        const Math::Mat44f& GetViewMatrix() const;
+        const Math::Mat44f& GetViewProjectionMatrix();
+        const Math::Vect3f& GetCameraEye();
+        const Math::Mat44f& GetLightViewMatrix() const;
+        const Math::Mat44f& GetShadowProjectionMatrix();
 
-  void ActivateCamera( const Math::Mat44f& ViewMatrix, const Math::Mat44f& ProjectionMatrix,
-                       const Math::Vect3f& CameraEye );
+        void ActivateCamera( const Math::Mat44f& ViewMatrix, const Math::Mat44f& ProjectionMatrix,
+                             const Math::Vect3f& CameraEye );
 
-  void SetWorldMatrix( const Math::Mat44f& Matrix );
-  void SetProjectionMatrix( const Math::Mat44f& Matrix );
-  void SetViewMatrix( const Math::Mat44f& Matrix );
-  void SetViewProjectionMatrix( const Math::Mat44f& ViewProjectionMatrix );
+        void SetWorldMatrix( const Math::Mat44f& Matrix );
+        void SetProjectionMatrix( const Math::Mat44f& Matrix );
+        void SetViewMatrix( const Math::Mat44f& Matrix );
+        void SetViewProjectionMatrix( const Math::Mat44f& ViewProjectionMatrix );
 
-  void SetLightViewMatrix( const Math::Mat44f& Matrix );
-  void SetShadowProjectionMatrix( const Math::Mat44f& Matrix );
-  void SetCameraEye( const Math::Vect3f& CameraEye );
+        void SetLightViewMatrix( const Math::Mat44f& Matrix );
+        void SetShadowProjectionMatrix( const Math::Mat44f& Matrix );
+        void SetCameraEye( const Math::Vect3f& CameraEye );
 
-  void Init();
-  void Reload();
+        void Init();
+        void Reload();
 
-  void Update() {};
-  void Render() {};
+        void Update() {};
+        void Render() {};
 
-  std::string GetTechniqueEffectNameByVertexDefault( unsigned short VertexType );
-  size_t GetMaxLights() const;
-  CEffect* GetEffect( const std::string& Name );
+        std::string GetTechniqueEffectNameByVertexDefault( unsigned short VertexType );
+        size_t GetMaxLights() const;
+        CEffect* GetEffect( const std::string& Name );
 
-  void CleanUp();
+        void CleanUp();
 
-private: // Members
-  typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
-  TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
+        CEffectTechnique* GetEffectTechnique( const std::string & aName ) const;
 
-  Math::Mat44f m_WorldMatrix;
-  Math::Mat44f m_ProjectionMatrix;
-  Math::Mat44f m_ViewMatrix;
-  Math::Mat44f m_ViewProjectionMatrix;
+    private: // Members
+        typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
+        TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
 
-  Math::Mat44f m_LightViewMatrix;
-  Math::Mat44f m_ShadowProjectionMatrix;
+        Math::Mat44f m_WorldMatrix;
+        Math::Mat44f m_ProjectionMatrix;
+        Math::Mat44f m_ViewMatrix;
+        Math::Mat44f m_ViewProjectionMatrix;
 
-  Math::Vect3f m_CameraEye;
+        Math::Mat44f m_LightViewMatrix;
+        Math::Mat44f m_ShadowProjectionMatrix;
 
-  CMapManager<CEffect> m_Effects;
+        Math::Vect3f m_CameraEye;
 
-  std::string     m_Filename;
+        CMapManager<CEffect> m_Effects;
 
-private: // Methods
+        std::string     m_Filename;
+
+    private: // Methods
 };
 
 #endif // INC_EFFECT_MANAGER_H

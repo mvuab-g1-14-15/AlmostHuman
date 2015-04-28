@@ -18,6 +18,7 @@ function CPlayerController:__init()
 	--States
 	self.Run = false
 	self.Crouch = false
+	self.LyingDown = false
 	self.Shooting = false
 	self.LeanOut = 0
 	self.PrevLeanOut = 0
@@ -97,17 +98,18 @@ function CPlayerController:Update()
 	local l_CameraPosition = self.Position
 	
 	--Crouch movement
-	local l_Percentage = self.ActualTimeCrouch / self.TimeCrouch
-	local l_Initial = 0
-	local l_Final = l_CameraPosition.y
-	if self.Crouch then
-		l_Initial = l_CameraPosition.y + self.Height/2.0
-		l_Final = l_CameraPosition.y
+	if self.ActualTimeCrouch < self.TimeCrouch then	
+		local l_Percentage = self.ActualTimeCrouch / self.TimeCrouch
+		local l_Initial = 0
+		local l_Final = l_CameraPosition.y
+		if not self.Crouch and not self.LyingDown then
+			l_Initial = l_CameraPosition.y
+			l_Final = l_CameraPosition.y + 3 * self.Height/4.0
+		end
+		l_CameraPosition.y = (1.0 - l_Percentage) * l_Initial + l_Percentage * l_Final
 	else
-		l_Initial = l_CameraPosition.y
-		l_Final = l_CameraPosition.y + self.Height/2.0
+		l_CameraPosition = self.Position + self.Height/2.0
 	end
-	l_CameraPosition.y = (1.0 - l_Percentage) * l_Initial + l_Percentage * l_Final
 	
 	--Lean out movement
 	l_Percentage = self.ActualTimeLeanOut / self.TimeLeanOut
@@ -268,14 +270,19 @@ function CPlayerController:UpdateInput()
 	end
 	if action_manager:DoAction("Crouch") then
 		if self.Crouch then
-			self.CharacterController:SetHeight(self.CharacterController:GetHeight() / 2.0)
-		else
+			self.CharacterController:SetHeight(self.Height / 4.0)
+			self.LyingDown = true
+			self.Crouch = false
+		elseif self.LyingDown then
 			local l_Position = self.CharacterController:GetPosition()
-			l_Position.y = l_Position.y + self.CharacterController:GetHeight() / 2.0
+			l_Position.y = l_Position.y + self.Height / 8.0
 			self.CharacterController:SetPosition(l_Position)
-			self.CharacterController:SetHeight(self.CharacterController:GetHeight() * 2.0)
+			self.CharacterController:SetHeight(self.Height)
+			self.LyingDown = false
+		else
+			self.CharacterController:SetHeight(self.Height / 2.0)
+			self.Crouch = true
 		end
-		self.Crouch = not self.Crouch
 		self.ActualTimeCrouch = 0.0
 	end
 	

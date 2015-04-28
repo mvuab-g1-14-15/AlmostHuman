@@ -3,7 +3,7 @@
 #define INC_GUI_TEXTURE_H_
 
 #include "Texture.h"
-class CGUITexture
+class CGUITexture: public CTexture
 {
 protected:
     virtual bool LoadFile();

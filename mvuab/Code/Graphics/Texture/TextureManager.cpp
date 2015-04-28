@@ -1,12 +1,12 @@
 #include "TextureManager.h"
 
 CTextureManager::CTextureManager()
-	:CManager()
+  : CManager()
 {
 }
 
-CTextureManager::CTextureManager(CXMLTreeNode& atts)
-	:CManager(atts)
+CTextureManager::CTextureManager( CXMLTreeNode& atts )
+  : CManager( atts )
 {
 }
 CTextureManager::~CTextureManager()
@@ -30,13 +30,15 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
 
     if ( fileName.find( "Cube" ) != std::string::npos )
       t = new CCubedTexture();
+    else if ( fileName.find( "GUI" ) != std::string::npos )
+      t = new CGUITexture();
     else
       t = new CTexture();
 
     if ( !t->Load( fileName ) )
     {
       CHECKED_DELETE( t );
-	  LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
+      LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
       return 0;
     }
 
