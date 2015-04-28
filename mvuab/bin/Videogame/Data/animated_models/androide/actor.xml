@@ -1,0 +1,7 @@
+<animated_model name="enemy1">
+	<skeleton file="androide.csf"/>
+	<mesh file="androide.cmf"/>
+	<!--animation name="idle" file="idle.caf"/-->
+	<animation name="walk" file="walk.caf"/>
+	<animation name="shoot" file="shoot.caf"/>
+</animated_model>
