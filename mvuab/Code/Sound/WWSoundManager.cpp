@@ -18,6 +18,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Utils/Defines.h"
 #include "EngineConfig.h"
+#include "AK/SoundEngine/Common/AkTypes.h"
 
 namespace AK
 {
@@ -325,6 +326,32 @@ AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, 
 
   return AK::SoundEngine::SetPosition( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPosition );
 }
+
+AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
+    std::vector<Math::Vect3f> _GameObjectOrientation )
+{
+
+  AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
+  std::vector<AkSoundPosition> l_AKGameObjectPositions;
+
+  for ( int i = 0; i >= sizeof( l_AKGameObjectPositions ); ++i )
+  {
+    l_AKGameObjectPositions[i].Position.X = _GameObjectPosition[i].x;
+    l_AKGameObjectPositions[i].Position.Y = _GameObjectPosition[i].y;
+    l_AKGameObjectPositions[i].Position.Z = _GameObjectPosition[i].z;
+
+    Math::Vect3f l_GameObjectPositionNorm = _GameObjectPosition[i].GetNormalized();
+
+    l_AKGameObjectPositions[i].Orientation.X = l_GameObjectPositionNorm.x;
+    l_AKGameObjectPositions[i].Orientation.Y = l_GameObjectPositionNorm.y;
+    l_AKGameObjectPositions[i].Orientation.Z = l_GameObjectPositionNorm.z;
+  }
+
+
+  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , &l_AKGameObjectPositions[0], sizeof( l_AKGameObjectPositions ),
+         l_eMultiPositionType );
+}
+
 
 AKRESULT CWWSoundManager::SetState( std::string _Group, std::string _State )
 {

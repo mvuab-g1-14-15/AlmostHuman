@@ -52,6 +52,8 @@ public:
   AKRESULT SetState( std::string _Group, std::string _State );
   AKRESULT SetListenerPosition( Math::Vect3f _ListenerPosition, Math::Vect3f _Direction, Math::Vect3f _Up );
   AKRESULT SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation );
+  AKRESULT SetGameObjectMultiplePositions( std::string _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
+      std::vector<Math::Vect3f> _GameObjectOrientation );
 
   /***************************** BASIC OPS ***********************************************/
   AkPlayingID PlayEvent( std::string _Event, std::string _GameObjectId );
@@ -62,6 +64,7 @@ public:
 
   AkGameObjectID GetGameObjectMapById( std::string _KeyGameObjectMap );
   void SetGameObjectMapById( std::string _KeyGameObjectMap );
+
   //void PauseAllSounds();
   //void ResumeAllSounds();
 

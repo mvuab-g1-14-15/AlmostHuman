@@ -75,6 +75,11 @@ function CBlaster:Update()
 		end
 		if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 			sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
+			
+			if self.TimePressed  > self.MaxTimePressed then
+				sound_manager:PlayEvent( "Acumulator_Long_Shoot_Lopp_Event", "TestGameObject2d" )
+			end
+
 			self.IsAcumulatorSound = true
 		end
 	end
