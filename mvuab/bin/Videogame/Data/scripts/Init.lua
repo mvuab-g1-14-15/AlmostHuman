@@ -23,13 +23,6 @@ function update_gameplay()
 		load_gameplay()
 	end
 	
-<<<<<<< HEAD
-
-	
-	g_Blaster:Update()
-	g_Grenade:Update()
-=======
->>>>>>> origin/master
 	g_HUD:Update()
 	
 	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then 
