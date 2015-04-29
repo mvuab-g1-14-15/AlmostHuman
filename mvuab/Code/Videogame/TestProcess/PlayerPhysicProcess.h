@@ -16,7 +16,7 @@ class CCharacter;
 class CGrenade;
 class CBlaster;
 class CAStar;
-class CBillboard;
+//class CBillboard;
 
 class CPlayerPhysicProcess : public CProcess
 {
@@ -30,7 +30,7 @@ class CPlayerPhysicProcess : public CProcess
         CPhysicController*            m_PhysicController;
         CGrenade*                     m_Grenade;
         CBlaster*                     m_Blaster;
-        CBillboard*                   m_Billboard;
+        //CBillboard*                   m_Billboard;
         //CCharacter*               m_Character;
 
     public:

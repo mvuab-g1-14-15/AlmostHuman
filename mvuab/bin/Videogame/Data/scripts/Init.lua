@@ -1,10 +1,9 @@
-dofile("./data/scripts/Grenade.lua")
-dofile("./data/scripts/Blaster.lua")
+
 dofile("./data/scripts/Player.lua")
 
-g_Grenade = nil
 g_Blaster = nil
 g_Player = nil
+g_HUD = nil
 
 local initialized = false
 
@@ -13,8 +12,6 @@ function load_basics()
 end
 
 function load_gameplay()
-    g_Blaster = CBlaster()
-	g_Grenade = CGrenade()
     g_Player = CPlayer()
 	g_HUD = CHUD()
 	
@@ -26,19 +23,24 @@ function update_gameplay()
 		load_gameplay()
 	end
 	
-	g_HUD:Update()
+<<<<<<< HEAD
+
+	
 	g_Blaster:Update()
 	g_Grenade:Update()
+=======
+>>>>>>> origin/master
+	g_HUD:Update()
 	
 	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then 
 		UpdateFree()
 	else
 		g_Player:Update()
 	end
+	
 	CheckLevel()
 	
 	if action_manager:DoAction("ChangeRoom") then
-	local newPosition = ChangeRoom()
-		g_Player:SetPosition(newPosition)
+		g_Player:SetPosition(ChangeRoom())
 	end
 end

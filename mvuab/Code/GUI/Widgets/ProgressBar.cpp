@@ -16,7 +16,7 @@ CProgressBar::CProgressBar( uint32 windowsHeight, uint32 windowsWidth, float hei
     : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, PROGRESS_BAR, lit,
                    textHeightOffset, textWidthOffset, isVisible, isActive)
     , m_fProgress( 0.f )
-    , m_sText("Loading")
+    , m_sText(std::to_string((long double)m_fProgress))
     , m_fCountTime( 0.f )
     , m_fTimeToUpdate( 0.5f )
     , m_sLuaCode_OnComplete("")
@@ -54,7 +54,7 @@ void CProgressBar::Render   ()
         if (m_pProgressTexture)
         {
             //TODO RAUL
-            //GraphicsInstance->DrawQuad2D(posProgress,w,h, CGraphicsManager::UPPER_LEFT, m_pProgressTexture);
+            GraphicsInstance->DrawQuad2D(posProgress,w,h, CGraphicsManager::UPPER_LEFT, m_pProgressTexture);
         }
         else
         {
@@ -74,7 +74,8 @@ void CProgressBar::Update()
 {
     if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
     {
-        m_fCountTime += deltaTime;
+		m_sText = std::to_string((long double)((int)m_fProgress));
+       /* m_fCountTime += deltaTime;
         if( m_fCountTime > m_fTimeToUpdate )
         {
             m_fCountTime = 0.f;
@@ -87,7 +88,7 @@ void CProgressBar::Update()
             { m_sText = "Loading..."; }
             else if( m_sText.compare("Loading...") == 0 )
             { m_sText = "Loading"; }
-        }
+        }*/
     }
 }
 
@@ -114,11 +115,11 @@ void CProgressBar::SetFont (uint32 fontID, const Math::CColor& textColor)
 void CProgressBar::SetProgress (float progress)
 {
     m_fProgress = progress;
-    if( m_fProgress >= 100 )
+    /*if( m_fProgress >= 100 )
     {
         m_fProgress = 0;
         OnComplete();
-    }
+    }*/
 
 }
 
