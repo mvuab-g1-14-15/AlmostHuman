@@ -88,7 +88,7 @@ void CEnemy::Update()
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
     m_pRenderableObject->SetPosition( m_Position );
-    m_pRenderableObject->SetYaw( - m_fYaw - Math::pi32 * 0.5f );
+    m_pRenderableObject->SetYaw( - m_fYaw + Math::pi32 * 0.5f );
     m_pRenderableObject->SetPitch( m_fPitch );
     m_pRenderableObject->SetRoll( m_fRoll );
 
@@ -149,7 +149,7 @@ void CEnemy::AddMesh( std::string MeshName )
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
     m_pRenderableObject->SetPosition( m_Position );
-    m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
+    m_pRenderableObject->SetYaw( m_fYaw + Math::pi32 * 0.5f );
     m_pRenderableObject->SetPitch( m_fPitch );
     m_pRenderableObject->SetRoll( m_fRoll );
 

@@ -31,7 +31,6 @@ function check_next_state()
 	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 		if l_DistanceToPlayer < 4 and l_PlayerInSight then
 			l_NextState = "atacar"
-			enemy:GetAnimationModel():ChangeAnimation("shoot", 0.2, 0.2)
 		end
 	end
 	if l_DistanceToPlayer > 5 or not l_PlayerInSight then
@@ -39,7 +38,7 @@ function check_next_state()
 	end
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
-		enemy:GetAnimationModel():ChangeAnimation("walk", 0.2, 0.2)
+		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
 	end
 end
 
