@@ -19,6 +19,8 @@
 #include "Gizmos\GizmosManager.h"
 #include "EngineManagers.h"
 
+#include "AnimatedModels\AnimatedInstanceModel.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
     : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
     , m_CurrentState( "inicial" )
@@ -141,7 +143,8 @@ void CEnemy::AddMesh( std::string MeshName )
 {
     CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
 
-    m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
+    //m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
+	m_pRenderableObject = new CAnimatedInstanceModel( m_Name, MeshName );
     l_ROM->AddResource( m_Name, m_pRenderableObject );
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
@@ -151,4 +154,9 @@ void CEnemy::AddMesh( std::string MeshName )
     m_pRenderableObject->SetRoll( m_fRoll );
 
     m_pRenderableObject->MakeTransform();
+}
+
+CAnimatedInstanceModel* CEnemy::GetAnimationModel()
+{
+	return dynamic_cast<CAnimatedInstanceModel*>( m_pRenderableObject );
 }

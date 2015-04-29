@@ -19,6 +19,7 @@
 #include "Math\Vector3.h"
 #include "Pathfinding\AStar.h"
 #include "RenderableObject\RenderableObject.h"
+#include "AnimatedModels\AnimatedInstanceModel.h"
 
 #include "luabind_macros.h"
 
@@ -83,6 +84,7 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetCurrentState )
     LUA_DECLARE_METHOD( CEnemy, GetLife )
 	LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
+	LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
