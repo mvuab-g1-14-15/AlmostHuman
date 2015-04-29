@@ -30,6 +30,8 @@ extern "C"
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
+#define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
+
 using namespace luabind;
 
 bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* PhysicController )
@@ -66,35 +68,28 @@ ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f positi
     return (ECollisionGroup)-1;
 }
 
-template<class T>
-size_t set_getIdByResource( std::set<T>& vec, T val )
+template<class T> size_t set_getIdByResource( std::set<T>& vec, T val )
 {
-  std::set<T>::iterator it = vec.begin()
-                             , it_end = vec.end();
-
-  size_t i = 0;
-
-  for ( ; it != it_end ; ++it )
-  {
-    if ( *it == val )
-      return i;
-
-    ++i;
-  }
-
-  return 0;
+    std::set<T>::iterator it = vec.begin() , it_end = vec.end();
+    size_t i = 0;
+    
+    for ( ; it != it_end ; ++it )
+    {
+        if ( *it == val ) return i;
+        ++i;
+    }
+    
+    return 0;
 }
 
-template<class T>
-void removeResource( T val )
+template<class T> void removeResource( T val )
 {
-  CHECKED_DELETE( val );
+    CHECKED_DELETE( val );
 }
 
-template<class T>
-T vector_get( std::vector<T>& vec, size_t i )
+template<class T> T vector_get( std::vector<T>& vec, size_t i )
 {
-  return vec[i];
+    return vec[i];
 }
 
 bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction)
@@ -107,15 +102,20 @@ bool PlayerInSight(CPhysicsManager* PhysicManager, float _Distance, float _Angle
 		CPhysicUserData* l_UserData = *it;
 		CPhysicController* l_Controller = l_UserData->GetController();
 		std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
-		if ( name == "Player")
-			return true;
+		
+        if ( name == "Player") return true;
 	}
 	return false;
 }
 
-bool AddGrenade(CPhysicsManager* PhysicManager, const std::string &name, const std::string &group, const Math::Vect3f& dimensions)
+bool AddGrenade(CPhysicsManager* PhysicManager, const std::string &name, const std::string &group, const Math::Vect3f& dimensions, const Math::Vect3f& position, unsigned int mask)
 {
-    //PhysicManager->AddActor(name, group, dimensions,
+    return PhysicManager->AddActor
+    (
+        name, group, dimensions, Math::colWHITE, false,
+        position, Math::Vect3f(), Math::Vect3f(),
+        0, mask
+     );
     return true;
 }
 
@@ -133,6 +133,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetName", &CPhysicUserData::GetName )
     .def( "GetController", &CPhysicUserData::GetController )
   ];
+
   module( m_LS )
   [
     class_<CPhysicActor>( "CPhysicActor" )
@@ -174,6 +175,14 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CPhysicsManager, CreateCubeEmitter )
     LUA_DECLARE_METHOD( CPhysicsManager, CreateSphereEmitter )
   LUA_END_DECLARATION*/
+
+    
+
+  REGISTER_LUA_FUNCTION(m_LS, AddGrenade);
+  /*LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_END_DECLARATION*/
+
   module( m_LS ) [
     class_<CPhysicsManager>( "CPhysicsManager" )
     .def( "RaycastClosestActor", &CPhysicsManager::RaycastClosestActor )
@@ -198,9 +207,8 @@ void registerPhysX( lua_State* m_LS )
     .def( "Reload", &CPhysicsManager::Reload )
     .def( "ReloadXML", &CPhysicsManager::ReloadXML )
     //Gets
-    .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )
-          &CPhysicsManager::GetUserData )
-
+    .def( "GetUserData", ( CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) ) &CPhysicsManager::GetUserData )
+    //.def( "AddGrenade", &AddGrenade )
     .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
     .def( "OverlapSphereActor", &CPhysicsManager::OverlapSphereActor )
     .def( "OverlapSphereController", &CPhysicsManager::OverlapSphereController)

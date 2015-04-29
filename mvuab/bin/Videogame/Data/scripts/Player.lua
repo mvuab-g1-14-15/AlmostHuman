@@ -1,9 +1,18 @@
 dofile("./data/scripts/PlayerController.lua")
+dofile("./data/scripts/Blaster.lua")
+dofile("./data/scripts/Grenade.lua")
 
 class "CPlayer"
 
 function CPlayer:__init() 
 	self.PlayerController = CPlayerController()
+	
+	self.GrenadeQueue = {}
+	self.GrenadeQueue[#self.GrenadeQueue + 1] = CGrenade()
+	self.GrenadeQueue[#self.GrenadeQueue + 1] = CGrenade()
+	
+	self.Blaster = CBlaster()
+	self.Grenade = nil
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
@@ -31,6 +40,17 @@ function CPlayer:Update()
 
 	self.RenderableObject:MakeTransform();
 	
+	if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then
+       self.Grenade = table.remove(self.GrenadeQueue, 1)
+	   self.Grenade:Throw()
+    end
+	
+	if action_manager:DoAction("ExplodeGrenade") and self.Grenade ~= nil then
+		self.Grenade:Explode()
+		self.Grenade = nil
+	end
+	
+	self.Blaster:Update()
 	--engine:Trace( "Player life: " .. self.Life )
 end
 
