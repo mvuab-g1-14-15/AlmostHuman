@@ -65,3 +65,7 @@ end
 function CPlayer:GetLife()
 	return self.Life
 end
+
+function CPlayer:GetBlaster()
+	return self.Blaster
+end

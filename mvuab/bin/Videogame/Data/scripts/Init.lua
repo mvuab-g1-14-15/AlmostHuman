@@ -1,7 +1,6 @@
 
 dofile("./data/scripts/Player.lua")
 
-g_Blaster = nil
 g_Player = nil
 g_HUD = nil
 
