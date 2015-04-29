@@ -275,7 +275,7 @@ void CPlayerPhysicProcess::Render()
 {
   //m_Grenade->Render();
   //  m_AStar->Render();
-  m_Billboard->Render();
+  //m_Billboard->Render();
 
   //    m_Blaster->Render();
 }
