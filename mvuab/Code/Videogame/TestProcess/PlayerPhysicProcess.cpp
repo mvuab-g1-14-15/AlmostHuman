@@ -74,6 +74,8 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
     CHECKED_DELETE( m_vController[i] );
 
   m_vController.clear();
+
+  CHECKED_DELETE( m_AStar );
 }
 
 void CPlayerPhysicProcess::Update()
