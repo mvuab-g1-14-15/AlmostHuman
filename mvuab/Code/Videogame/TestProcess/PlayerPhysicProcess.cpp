@@ -1,6 +1,4 @@
 #include "PlayerPhysicProcess.h"
-#include "Items\Grenade.h"
-#include "Items\Blaster.h"
 
 //AI
 #include "Graph\Graph.h"
@@ -61,8 +59,6 @@ CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 CPlayerPhysicProcess::~CPlayerPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
-  CHECKED_DELETE( m_Grenade );
-  CHECKED_DELETE( m_Blaster );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -143,27 +139,6 @@ void CPlayerPhysicProcess::Update()
 
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
-
-
-  //////////////////////////////////////////////////////
-  ////////////        DISPARO               ////////////
-  //////////////////////////////////////////////////////
-
-  if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
-  {
-    CCamera* l_CurrentCamera =
-      CameraMInstance->GetCurrentCamera();
-
-    if ( l_CurrentCamera )
-      m_Blaster->Update();
-  }
-
-
-  //////////////////////////////////////////////////////
-  ////////////        UPDATE GRENADE        ////////////
-  //////////////////////////////////////////////////////
-  m_Grenade->Update();
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,12 +231,6 @@ void CPlayerPhysicProcess::Init()
   if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
     LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 
-  ////////////////////////////////////////////////////
-  ////////////        CREATE GRENADE       ///////////
-  ////////////////////////////////////////////////////
-  m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
-
   m_AStar = new CAStar();
   m_AStar->Init();
 
@@ -273,11 +242,8 @@ void CPlayerPhysicProcess::Init()
 
 void CPlayerPhysicProcess::Render()
 {
-  //m_Grenade->Render();
   //  m_AStar->Render();
   //m_Billboard->Render();
-
-  //    m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()

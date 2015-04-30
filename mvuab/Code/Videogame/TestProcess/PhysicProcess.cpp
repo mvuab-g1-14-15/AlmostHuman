@@ -1,5 +1,4 @@
 #include "PhysicProcess.h"
-#include "Items\Grenade.h"
 
 //BASE
 #include "Timer\Timer.h"
@@ -52,7 +51,6 @@ CPhysicProcess::CPhysicProcess() : CProcess(),
 CPhysicProcess::~CPhysicProcess()
 {
     CLogger::GetSingletonPtr()->SaveLogsInFile();
-    CHECKED_DELETE( m_Grenade );
 
     for ( size_t i = 0; i < m_vPA.size(); ++i )
     { CHECKED_DELETE( m_vPA[i] ); }
@@ -168,11 +166,6 @@ void CPhysicProcess::Update()
     //PhysXMInstance->AddGravity(Math::Vect3f(0,1*deltaTime,0));
 
     //////////////////////////////////////////////////////
-    ////////////        UPDATE GRENADE        ////////////
-    //////////////////////////////////////////////////////
-    m_Grenade->Update();
-
-    //////////////////////////////////////////////////////
     ////////////        TEST TRIGGER.LUA       ///////////
     //////////////////////////////////////////////////////
     if ( m_Salir && ( m_Time >= 1 ) )
@@ -263,11 +256,6 @@ void CPhysicProcess::Init()
 
     l_PM->SetTriggerReport( this );
 
-    ////////////////////////////////////////////////////
-    ////////////        CREATE GRENADE       ///////////
-    ////////////////////////////////////////////////////
-    m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-
     InitScenePhysicsSamplers();
 
     CPhysicUserData* l_PUD = new CPhysicUserData( "Plane" );
@@ -284,7 +272,6 @@ void CPhysicProcess::Init()
 void CPhysicProcess::Render()
 {
     CGraphicsManager* pGraphicsManager = GraphicsInstance;
-    m_Grenade->Render();
 
     ScriptMInstance->RunCode( "render()" );
     // START: TO DELETE LATER IF IS NOT NECESSARY,

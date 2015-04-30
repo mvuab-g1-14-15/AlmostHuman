@@ -28,8 +28,6 @@ class CPlayerPhysicProcess : public CProcess
         std::vector<CPhysicUserData*> m_vPUD;
         std::vector<CPhysicController*>      m_vController;
         CPhysicController*            m_PhysicController;
-        CGrenade*                     m_Grenade;
-        CBlaster*                     m_Blaster;
         //CBillboard*                   m_Billboard;
         //CCharacter*               m_Character;
 

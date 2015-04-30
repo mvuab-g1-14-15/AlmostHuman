@@ -5,12 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ScriptedController">
-      <UniqueIdentifier>{f6546d18-bd8b-4938-9f8b-d0c09c24532d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Items">
-      <UniqueIdentifier>{c0e8b9ad-d54e-44fa-b81d-fd5fa8e23da0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TestProcess">
       <UniqueIdentifier>{e14ca7d2-419d-4444-afe4-0d5e29f16a29}</UniqueIdentifier>
     </Filter>
@@ -18,12 +12,6 @@
   <ItemGroup>
     <ClCompile Include="videogame.cpp" />
     <ClCompile Include="TestProcess.cpp" />
-    <ClCompile Include="ScriptedController\ScriptedController.cpp">
-      <Filter>ScriptedController</Filter>
-    </ClCompile>
-    <ClCompile Include="Items\Grenade.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="TestProcess\PhysicProcess.cpp">
       <Filter>TestProcess</Filter>
     </ClCompile>
@@ -36,18 +24,9 @@
     <ClCompile Include="TestProcess\AStarProcess.cpp">
       <Filter>TestProcess</Filter>
     </ClCompile>
-    <ClCompile Include="Items\Blaster.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestProcess.h" />
-    <ClInclude Include="ScriptedController\ScriptedController.h">
-      <Filter>ScriptedController</Filter>
-    </ClInclude>
-    <ClInclude Include="Items\Grenade.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="TestProcess\PhysicProcess.h">
       <Filter>TestProcess</Filter>
     </ClInclude>
@@ -59,9 +38,6 @@
     </ClInclude>
     <ClInclude Include="TestProcess\AStarProcess.h">
       <Filter>TestProcess</Filter>
-    </ClInclude>
-    <ClInclude Include="Items\Blaster.h">
-      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
