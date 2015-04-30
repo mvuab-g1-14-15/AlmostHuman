@@ -16,9 +16,9 @@ function check_next_state()
 	
 	--engine:Trace("Distance to player: " .. l_DistanceToPlayer)
 	if l_PlayerInSight then
-		--engine:Trace("Is viewing player: true")
+		engine:Trace("Is viewing player: true")
 	else
-		--engine:Trace("Is viewing player: false")
+		engine:Trace("Is viewing player: false")
 	end
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
