@@ -22,6 +22,8 @@
 #include "Lights\LightManager.h"
 #include "Lights\OmniLight.h"
 
+#include "AnimatedModels\AnimatedInstanceModel.h"
+
 #include "PhysicsDefs.h"
 #include "Math\Matrix44.h"
 
@@ -204,6 +206,19 @@ void registerStaticMesh( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
+void registerAnimatedModels( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register StaticMesh" );
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // INSTANCE MESH
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CAnimatedInstanceModel, CRenderableObject )
+	LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimation )
+  LUA_END_DECLARATION
+}
+
 void registerGraphics( lua_State* aLuaState )
 {
   registerObject3D( aLuaState );
@@ -211,4 +226,5 @@ void registerGraphics( lua_State* aLuaState )
   registerGizmos( aLuaState );
   registerRenderableObject( aLuaState );
   registerStaticMesh( aLuaState );
+  registerAnimatedModels( aLuaState );
 }

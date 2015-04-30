@@ -43,7 +43,10 @@ void CRenderableObjectsLayersManager::Init()
   {
       const std::string& lTagName = TreeNode( i ).GetName();
       const std::string& lName = TreeNode( i ).GetPszProperty("name", "");
-          
+   
+	  if (lTagName == "comment")
+		  continue;
+
       if (lTagName == "layer") 
       {
           if(TreeNode( i ).GetBoolProperty("default", false))

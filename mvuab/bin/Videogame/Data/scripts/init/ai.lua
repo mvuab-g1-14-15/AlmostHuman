@@ -38,6 +38,7 @@ function check_next_state()
 	end
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
+		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
 	end
 end
 

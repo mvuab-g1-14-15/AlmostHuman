@@ -26,7 +26,6 @@ private:
   CPhysicRevoluteJoint*           m_PRJ;
   bool                            m_Salir;
   float                           m_Time;
-  CGrenade*                       m_Grenade;
 
 public:
   CPhysicProcess();

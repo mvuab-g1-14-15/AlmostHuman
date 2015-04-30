@@ -35,6 +35,17 @@ class CAnimatedInstanceModel : public CRenderableObject
         bool IsCycleAnimationActive(uint32 Id) const;
         bool IsActionAnimationActive(uint32 Id) const;
 
+		void ExecuteAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f, bool AutoLock = true);
+        void RemoveAction(const std::string &AnimationName);
+
+        void BlendCycle(const std::string &AnimationName, float32 Weight, float32 DelayIn);
+        void ClearCycle(const std::string &AnimationName, float32 DelayOut);
+
+        bool IsCycleAnimationActive(const std::string &AnimationName) const;
+        bool IsActionAnimationActive(const std::string &AnimationName) const;
+
+		void ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
+
     private:
         CalModel*             m_CalModel;
         CEffectTechnique*     m_pEffectTechnique;

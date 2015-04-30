@@ -19,6 +19,8 @@
 #include "Gizmos\GizmosManager.h"
 #include "EngineManagers.h"
 
+#include "AnimatedModels\AnimatedInstanceModel.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
     : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
     , m_CurrentState( "inicial" )
@@ -86,7 +88,7 @@ void CEnemy::Update()
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
     m_pRenderableObject->SetPosition( m_Position );
-    m_pRenderableObject->SetYaw( - m_fYaw - Math::pi32 * 0.5f );
+    m_pRenderableObject->SetYaw( - m_fYaw + Math::pi32 * 0.5f );
     m_pRenderableObject->SetPitch( m_fPitch );
     m_pRenderableObject->SetRoll( m_fRoll );
 
@@ -141,14 +143,20 @@ void CEnemy::AddMesh( std::string MeshName )
 {
     CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
 
-    m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
+    //m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
+	m_pRenderableObject = new CAnimatedInstanceModel( m_Name, MeshName );
     l_ROM->AddResource( m_Name, m_pRenderableObject );
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
     m_pRenderableObject->SetPosition( m_Position );
-    m_pRenderableObject->SetYaw( m_fYaw - Math::pi32 * 0.5f );
+    m_pRenderableObject->SetYaw( m_fYaw + Math::pi32 * 0.5f );
     m_pRenderableObject->SetPitch( m_fPitch );
     m_pRenderableObject->SetRoll( m_fRoll );
 
     m_pRenderableObject->MakeTransform();
+}
+
+CAnimatedInstanceModel* CEnemy::GetAnimationModel()
+{
+	return dynamic_cast<CAnimatedInstanceModel*>( m_pRenderableObject );
 }

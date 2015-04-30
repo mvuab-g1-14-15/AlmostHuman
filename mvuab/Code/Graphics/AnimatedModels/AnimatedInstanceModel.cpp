@@ -37,6 +37,10 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
     CRenderableObject()
 {
     SetName( Name );
+	CRenderableObjectTechniqueManager* lROT = ROTMInstance;
+    const std::string & l_TechniqueName =
+        lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
+    m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
     Initialize();
     //m_pEffectTechnique = EffectManagerInstance->GetResource(EffectManagerInstance->GetTechniqueEffectNameByVertexDefault(CAL3D_HW_VERTEX::GetVertexType()));
 }
@@ -274,16 +278,19 @@ void CAnimatedInstanceModel::Destroy()
 
 void CAnimatedInstanceModel::Update()
 {
-    if( ActionManagerInstance->DoAction( "ChangeAnimation" ) )
-    {
-        ClearCycle(m_CurrentAnimationId, 0.1f);
-        m_CurrentAnimationId = (m_CurrentAnimationId + 1) %  m_AnimatedCoreModel->GetAnimationsCount();
-        BlendCycle(m_CurrentAnimationId, 1.0f, 0.5f);
-    }
-    else
-    {
-        m_CalModel->update(deltaTime);
-    }
+    m_CalModel->update(deltaTime);
+}
+
+void CAnimatedInstanceModel::ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	if (l_Id != m_CurrentAnimationId)
+	{
+		ClearCycle(m_CurrentAnimationId, DelayOut);
+		BlendCycle(l_Id, 1.0f, DelayIn);
+
+        m_CurrentAnimationId = l_Id;
+	}
 }
 
 void CAnimatedInstanceModel::ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget, bool AutoLock)
@@ -334,4 +341,40 @@ void CAnimatedInstanceModel::LoadTextures()
         CTexture* l_Texture = TextureMInstance->GetTexture( m_AnimatedCoreModel->GetTextureName( i ) );
         m_Textures.push_back( l_Texture );
     }
+}
+
+void CAnimatedInstanceModel::ExecuteAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut, float32 WeightTarget, bool AutoLock)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	ExecuteAction(l_Id, DelayIn, DelayOut, WeightTarget, AutoLock);
+}
+
+void CAnimatedInstanceModel::RemoveAction(const std::string &AnimationName)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	RemoveAction(l_Id);
+}
+
+void CAnimatedInstanceModel::BlendCycle(const std::string &AnimationName, float32 Weight, float32 DelayIn)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	BlendCycle(l_Id, Weight, DelayIn);
+}
+
+void CAnimatedInstanceModel::ClearCycle(const std::string &AnimationName, float32 DelayOut)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	ClearCycle(l_Id, DelayOut);
+}
+
+bool CAnimatedInstanceModel::IsCycleAnimationActive(const std::string &AnimationName) const
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	return IsCycleAnimationActive(l_Id);
+}
+
+bool CAnimatedInstanceModel::IsActionAnimationActive(const std::string &AnimationName) const
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	return IsActionAnimationActive(l_Id);
 }

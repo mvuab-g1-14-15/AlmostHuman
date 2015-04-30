@@ -9,7 +9,10 @@ function CBlaster:__init()
 	self.MaxDamage = 20.0
 	
 	self.IsAcumulatorSound = false
-
+	
+	self.Energy = 100.0
+	self.Multiplicador = 2
+	
     engine:Trace("Blaster initialized")
 end
 
@@ -76,21 +79,30 @@ function CBlaster:Update()
 		if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 			sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
 			
-			if self.TimePressed  > self.MaxTimePressed then
-				sound_manager:PlayEvent( "Acumulator_Long_Shoot_Lopp_Event", "TestGameObject2d" )
-			end
 
 			self.IsAcumulatorSound = true
 		end
 	end
     if action_manager:DoAction("ShootUp") then
-		self:Shoot()
-		if self.TimePressed < (self.MaxTimePressed * 0.1) then
-			sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+		if self.Energy > 1 then
+			if self.TimePressed < (self.MaxTimePressed * 0.1) then
+				sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+				self.Energy = self.Energy - 1
+			else
+				sound_manager:PlayEvent( "Shoot_Long_Shoot_Event", "TestGameObject2d" )
+				self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
+				engine:Trace("Tiempo pulsado: ".. tostring(self.TimePressed).." Energia consumida: "..tostring(self.TimePressed*self.Multiplicador))
+			end
+			engine:Trace("Energia Total: ".. tostring(self.Energy))
+			self:Shoot()
 		else
-			sound_manager:PlayEvent( "Shoot_Long_Shoot_Event", "TestGameObject2d" )
+			--Sonido de no munición
 		end
 		self.TimePressed = 0.0
 		self.IsAcumulatorSound = false
 	end
+end
+
+function CBlaster:GetEnergy()
+	return self.Energy
 end

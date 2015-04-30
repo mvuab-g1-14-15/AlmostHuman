@@ -12,6 +12,7 @@
 
 class CStateMachine;
 class CRenderableObject;
+class CAnimatedInstanceModel;
 
 class CEnemy : public CCharacter
 {
@@ -29,6 +30,7 @@ public:
   GET_SET( bool, OnExit );
   void ChangeState( std::string NewState );
   void AddMesh(std::string);
+  CAnimatedInstanceModel* GetAnimationModel();
 protected:
   EEnemyType m_Type;
   bool m_OnEnter;
