@@ -286,8 +286,10 @@ void CAnimatedInstanceModel::ChangeAnimation(const std::string &AnimationName, f
 	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
 	if (l_Id != m_CurrentAnimationId)
 	{
-		ClearCycle(m_CurrentAnimationId, DelayIn);
-		BlendCycle(AnimationName, DelayIn, DelayOut);
+		ClearCycle(m_CurrentAnimationId, DelayOut);
+		BlendCycle(l_Id, 1.0f, DelayIn);
+
+        m_CurrentAnimationId = l_Id;
 	}
 }
 
