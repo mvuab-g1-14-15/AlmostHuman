@@ -27,6 +27,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
                 std::string l_Name = atts( i ).GetPszProperty( "name", "" );
                 int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
                 bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
+				bool l_CreateDepthStencilBuffer = atts( i ).GetBoolProperty( "create_depth_stencil_buffer", true );
                 uint32 l_Width, l_Height;
 
                 if ( !l_WidthAsFB )
@@ -42,7 +43,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
                                                       ( CTexture::TFormatType )0;
                 CTexture* l_Texture = new CTexture();
                 l_Texture->Create( l_Name, l_Width, l_Height, 0, CTexture::RENDERTARGET, CTexture::DEFAULT,
-                                   l_iFormatType );
+                                   l_iFormatType, l_CreateDepthStencilBuffer );
 
                 if ( TextureMInstance->AddResource( l_Name, l_Texture ) )
                 { AddStageTexture( l_StageId, l_Texture ); }

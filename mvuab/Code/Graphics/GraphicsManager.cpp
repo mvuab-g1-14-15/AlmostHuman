@@ -95,6 +95,20 @@ void CGraphicsManager::BeginScene()
 {
   HRESULT hr = mDirectXDevice->BeginScene();
   assert( SUCCEEDED( hr ) );
+
+   mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
+  mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
+  mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
+  mDirectXDevice->SetRenderState( D3DRS_DITHERENABLE, TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_SPECULARENABLE, FALSE );
+
+  if ( m_bPaintSolid )
+    mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID );
+  else
+    mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
+
 }
 
 void CGraphicsManager::BeginRender()
@@ -965,6 +979,7 @@ void CGraphicsManager::SetBlendOP()
 void CGraphicsManager::EnableZTest()
 {
   mDirectXDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
+  mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
 }
 void CGraphicsManager::DisableZTest()
 {

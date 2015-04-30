@@ -38,7 +38,7 @@ protected:
   std::string m_FileName;
   uint32  m_Width;
   uint32  m_Height;
-
+  bool m_CreateDepthStencilSurface;
 
   IDirect3DSurface9* m_OldRenderTarget;
   IDirect3DSurface9* m_DepthStencilRenderTargetTexture;
@@ -77,11 +77,11 @@ public:
   virtual void Activate( size_t StageId );
   bool Create( const std::string& Name, size_t Width, size_t Height,
                size_t MipMaps, TUsageType UsageType, TPoolType PoolType,
-               TFormatType FormatType );
+               TFormatType FormatType, bool CreateDepthStencilBuffer=true);
 
   void Deactivate( size_t Stage );
   bool SetAsRenderTarget( size_t IdStage = 0 );
-  void UnsetAsRenderTarget( size_t IdStage = 0 );
+  void UnsetAsRenderTarget( size_t IdStage = 0, bool UnsetDepthStencilBuffer=true );
   void CaptureFrameBuffer( size_t IdStage );
   CTexture::TFormatType GetFormatTypeFromString( const std::string& FormatType );
 };

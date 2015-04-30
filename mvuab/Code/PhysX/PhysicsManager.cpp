@@ -1105,7 +1105,7 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
         float dot = l_VectToActor.DotProduct( _Direction );
         float lenSq1 = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z *
                        l_VectToActor.z;
-        float angle = acos( dot / sqrt( lenSq1 * lenSq2 ) );
+		float angle = Math::Utils::Rad2Deg(acos( dot / sqrt( lenSq1 * lenSq2 ) ));
 
         if ( angle < _Angle )
             l_Result.push_back( l_UserData );

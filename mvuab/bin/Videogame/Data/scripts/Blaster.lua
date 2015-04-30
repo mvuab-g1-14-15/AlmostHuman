@@ -3,7 +3,7 @@ class 'CBlaster'
 
 function CBlaster:__init()
     self.TimePressed = 0.0
-    self.MaxTimePressed = 5.0
+    self.MaxTimePressed = 3.0
 	
 	self.BaseDamage = 5.0
 	self.MaxDamage = 20.0
@@ -40,7 +40,7 @@ function CBlaster:GetEnemyFromRay()
 	local l_DirRay = camera_manager:GetCurrentCamera():GetDirection()
     l_DirRay:Normalize()
 	self:CreateParticles(l_OriRay, l_DirRay)
-	local l_ImpactMask = 2 ^ CollisionGroup.ECG_ENEMY.value
+	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_ENEMY.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	local l_EnemyName = physic_manager:RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
     return enemy_manager:GetResource(l_EnemyName)
 end

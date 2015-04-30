@@ -74,9 +74,8 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
     CHECKED_DELETE( m_vController[i] );
 
   m_vController.clear();
-  //CHECKED_DELETE( m_PhysicController );
+
   CHECKED_DELETE( m_AStar );
-  //CHECKED_DELETE( m_Billboard );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -141,6 +140,7 @@ void CPlayerPhysicProcess::Update()
   ScriptMInstance->RunCode( "update_gameplay()" );
 }
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////        INICIALIZACIÓN DE LA ESCENA PARA EL TEST DEL CHARACTER CONTROLLER      ///////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,11 +177,6 @@ void CPlayerPhysicProcess::Init()
   //ScriptMInstance->RunCode( "init()" );
   ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
-
-  //m_Billboard = new CBillboard();
-
-  //m_Billboard->Init( "billboard", Math::Vect3f( -3.42f, 1.43f, 2.66f ), Math::Vect2f( 2.0f, 2.0f ), "a",
-  //                   "BillboardTechnique", true );
 
   /*  CWWSoundManager* l_SM = SoundMan;
 
@@ -242,8 +237,11 @@ void CPlayerPhysicProcess::Init()
 
 void CPlayerPhysicProcess::Render()
 {
+  //m_Grenade->Render();
   //  m_AStar->Render();
   //m_Billboard->Render();
+
+  //    m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()

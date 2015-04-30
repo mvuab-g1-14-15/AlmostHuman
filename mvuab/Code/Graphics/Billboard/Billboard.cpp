@@ -88,10 +88,11 @@ void CBillboard::Update()
 
 void CBillboard::Render()
 {
-    if(m_Active)
+	if(m_Active)
     {
         CGraphicsManager* lGM = GraphicsInstance;
-        lGM->SetTransform( GetTransform() );
+		lGM->SetTransform( GetTransform() );
+		lGM->DrawAxis(3.0f);
 		m_Texture->Activate(0);
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );

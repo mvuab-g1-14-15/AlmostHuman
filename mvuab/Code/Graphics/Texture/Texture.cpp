@@ -22,6 +22,7 @@ CTexture::CTexture()
     , m_DepthStencilRenderTargetTexture( 0 )
     , m_OldDepthStencilRenderTarget( 0 )
     , m_RenderTargetTexture( 0 )
+	, m_CreateDepthStencilSurface(false)
 {
 }
 
@@ -68,7 +69,7 @@ void CTexture::Activate( size_t StageId )
 
 bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
                        size_t MipMaps, TUsageType UsageType, TPoolType PoolType,
-                       TFormatType FormatType )
+                       TFormatType FormatType, bool CreateDepthStencilBuffer )
 {
     SetName( Name );
     D3DPOOL l_Pool = D3DPOOL_DEFAULT;
@@ -83,7 +84,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
             break;
 
         case RENDERTARGET:
-            l_CreateDepthStencilSurface = true;
+            l_CreateDepthStencilSurface = CreateDepthStencilBuffer;
             l_UsageType = D3DUSAGE_RENDERTARGET;
             break;
     }
@@ -117,6 +118,8 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
             l_Format = D3DFMT_R32F;
             break;
     }
+
+	m_CreateDepthStencilSurface=l_CreateDepthStencilSurface;
 
     // Obtain the device from the graphics manager
     const LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
@@ -154,18 +157,27 @@ bool CTexture::SetAsRenderTarget( size_t IdStage )
     l_Device->SetRenderTarget( ( DWORD )IdStage, m_RenderTargetTexture );
     CHECKED_RELEASE( m_RenderTargetTexture );
 
-    if ( FAILED( l_Device->GetDepthStencilSurface( &m_OldDepthStencilRenderTarget ) ) )
-    { return false; }
+	if(m_CreateDepthStencilSurface)
+	{
+		if ( FAILED( l_Device->GetDepthStencilSurface( &m_OldDepthStencilRenderTarget ) ) )
+		{ return false; }
 
-    l_Device->SetDepthStencilSurface( m_DepthStencilRenderTargetTexture );
-    return true;
+		l_Device->SetDepthStencilSurface( m_DepthStencilRenderTargetTexture );
+	}
+	return true;
 }
 
-void CTexture::UnsetAsRenderTarget( size_t IdStage )
+void CTexture::UnsetAsRenderTarget( size_t IdStage, bool UnsetDepthStencilBuffer )
 {
-    LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-    l_Device->SetDepthStencilSurface( m_OldDepthStencilRenderTarget );
-    CHECKED_RELEASE( m_OldDepthStencilRenderTarget );
+	LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+	if(m_CreateDepthStencilSurface)
+	{	
+		if(UnsetDepthStencilBuffer)
+			l_Device->SetDepthStencilSurface( m_OldDepthStencilRenderTarget );
+    
+		CHECKED_RELEASE( m_OldDepthStencilRenderTarget );
+	}
+
     l_Device->SetRenderTarget( IdStage, m_OldRenderTarget );
     CHECKED_RELEASE( m_OldRenderTarget );
 }

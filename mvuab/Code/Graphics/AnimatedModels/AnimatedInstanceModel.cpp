@@ -293,6 +293,18 @@ void CAnimatedInstanceModel::ChangeAnimation(const std::string &AnimationName, f
 	}
 }
 
+void CAnimatedInstanceModel::ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut)
+{
+	uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
+	if (l_Id != m_CurrentAnimationId)
+	{
+		ClearCycle(m_CurrentAnimationId, DelayOut);
+		ExecuteAction(l_Id, 1.0f, DelayIn);
+
+        m_CurrentAnimationId = l_Id;
+	}
+}
+
 void CAnimatedInstanceModel::ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget, bool AutoLock)
 {
     m_CalModel->getMixer()->executeAction(Id, DelayIn, DelayOut, WeightTarget, AutoLock);
