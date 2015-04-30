@@ -1,6 +1,4 @@
 #include "PlayerPhysicProcess.h"
-#include "Items\Grenade.h"
-#include "Items\Blaster.h"
 
 //AI
 #include "Graph\Graph.h"
@@ -61,8 +59,6 @@ CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
 CPlayerPhysicProcess::~CPlayerPhysicProcess()
 {
   CLogger::GetSingletonPtr()->SaveLogsInFile();
-  CHECKED_DELETE( m_Grenade );
-  CHECKED_DELETE( m_Blaster );
 
   for ( size_t i = 0; i < m_vPA.size(); ++i )
     CHECKED_DELETE( m_vPA[i] );
@@ -78,9 +74,6 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
     CHECKED_DELETE( m_vController[i] );
 
   m_vController.clear();
-  //CHECKED_DELETE( m_PhysicController );
-  CHECKED_DELETE( m_AStar );
-  CHECKED_DELETE( m_Billboard );
 }
 
 void CPlayerPhysicProcess::Update()
@@ -143,28 +136,8 @@ void CPlayerPhysicProcess::Update()
 
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
-
-
-  //////////////////////////////////////////////////////
-  ////////////        DISPARO               ////////////
-  //////////////////////////////////////////////////////
-
-  if ( pActionManager->DoAction( "LeftMouseButtonPressed" ) )
-  {
-    CCamera* l_CurrentCamera =
-      CameraMInstance->GetCurrentCamera();
-
-    if ( l_CurrentCamera )
-      m_Blaster->Update();
-  }
-
-
-  //////////////////////////////////////////////////////
-  ////////////        UPDATE GRENADE        ////////////
-  //////////////////////////////////////////////////////
-  m_Grenade->Update();
-
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////        INICIALIZACIÓN DE LA ESCENA PARA EL TEST DEL CHARACTER CONTROLLER      ///////////
@@ -202,11 +175,6 @@ void CPlayerPhysicProcess::Init()
   //ScriptMInstance->RunCode( "init()" );
   ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
-
-  m_Billboard = new CBillboard();
-
-  m_Billboard->Init( "billboard", Math::Vect3f( -3.42f, 1.43f, 2.66f ), Math::Vect2f( 2.0f, 2.0f ), "a",
-                     "BillboardTechnique", true );
 
   /*  CWWSoundManager* l_SM = SoundMan;
 
@@ -255,12 +223,6 @@ void CPlayerPhysicProcess::Init()
   //Add Escenario
   if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
     LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
-
-  ////////////////////////////////////////////////////
-  ////////////        CREATE GRENADE       ///////////
-  ////////////////////////////////////////////////////
-  m_Grenade = new CGrenade( 1.5f, 0.2f, 0.5f, 20.0f, "Grenade" );
-  m_Blaster = new CBlaster( 1.5f, 0.2f, 20.0f, "Glaster1" );
 
   m_AStar = new CAStar();
   m_AStar->Init();

@@ -3,7 +3,7 @@ class 'CBlaster'
 
 function CBlaster:__init()
     self.TimePressed = 0.0
-    self.MaxTimePressed = 5.0
+    self.MaxTimePressed = 3.0
 	
 	self.BaseDamage = 5.0
 	self.MaxDamage = 20.0
