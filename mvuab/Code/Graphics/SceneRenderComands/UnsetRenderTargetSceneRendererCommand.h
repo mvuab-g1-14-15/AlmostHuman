@@ -13,6 +13,8 @@ class CUnsetRenderTargetSceneRendererCommand: public CSceneRendererCommand
 {
     private:
         CSetRenderTargetSceneRendererCommand  *m_SetRenderTargetRendererCommand;
+
+		int m_UseDepthStencilBuffer;
     public:
         CUnsetRenderTargetSceneRendererCommand(CSetRenderTargetSceneRendererCommand *SetRenderTargetRendererCommand, CXMLTreeNode &atts); 
         ~CUnsetRenderTargetSceneRendererCommand();

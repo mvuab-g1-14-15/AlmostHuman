@@ -11,5 +11,5 @@ CClearSceneRendererCommand::CClearSceneRendererCommand( CXMLTreeNode& atts )
 
 void CClearSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-  GM.Clear( m_Color, m_Depht, m_Stencil, 0x0000ffff );
+  GM.Clear( m_Color, m_Depht, m_Stencil, D3DCOLOR_XRGB( 0, 0, 0 ) );
 }

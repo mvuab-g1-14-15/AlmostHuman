@@ -15,6 +15,6 @@ public:
   ~CSetRenderTargetSceneRendererCommand();
 
   void Execute( CGraphicsManager& GM );
-  void UnSetRenderTarget();
+  void UnSetRenderTarget(int IdSetDepthStencilBuffer=-1);
 };
 #endif

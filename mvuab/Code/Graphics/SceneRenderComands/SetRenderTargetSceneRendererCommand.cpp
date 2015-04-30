@@ -16,10 +16,10 @@ void CSetRenderTargetSceneRendererCommand::Execute( CGraphicsManager& GM )
     m_StageTextures[i].m_Texture->SetAsRenderTarget( m_StageTextures[i].m_StageId );
 }
 
-void CSetRenderTargetSceneRendererCommand::UnSetRenderTarget()
+void CSetRenderTargetSceneRendererCommand::UnSetRenderTarget(int IdSetDepthStencilBuffer)
 {
   for ( size_t i = 0; i < m_StageTextures.size()  ; ++i )
-    m_StageTextures[i].m_Texture->UnsetAsRenderTarget( m_StageTextures[i].m_StageId );
+    m_StageTextures[i].m_Texture->UnsetAsRenderTarget( m_StageTextures[i].m_StageId, IdSetDepthStencilBuffer!=i);
 
   if ( false ) // DEBUG
 		DebugTextures();
