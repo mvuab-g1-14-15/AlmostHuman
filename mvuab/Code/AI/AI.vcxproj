@@ -18,6 +18,8 @@
     <ClCompile Include="Characters\Enemies\EnemyManager.cpp" />
     <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="Graph\Graph.cpp" />
+    <ClCompile Include="MessagePassing\Blackboard.cpp" />
+    <ClCompile Include="MessagePassing\Subscriber.cpp" />
     <ClCompile Include="Pathfinding\AStar.cpp" />
     <ClCompile Include="StateMachine\Action.cpp" />
     <ClCompile Include="StateMachine\State.cpp" />
@@ -31,6 +33,9 @@
     <ClInclude Include="Characters\Enemies\EnemyManager.h" />
     <ClInclude Include="Characters\Enemies\PatrolEnemy.h" />
     <ClInclude Include="Graph\Graph.h" />
+    <ClInclude Include="MessagePassing\Blackboard.h" />
+    <ClInclude Include="MessagePassing\MessageDefines.h" />
+    <ClInclude Include="MessagePassing\Subscriber.h" />
     <ClInclude Include="Pathfinding\AStar.h" />
     <ClInclude Include="StateMachine\Action.h" />
     <ClInclude Include="StateMachine\State.h" />

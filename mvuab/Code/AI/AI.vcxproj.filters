@@ -20,6 +20,9 @@
     <Filter Include="PathFinding">
       <UniqueIdentifier>{e5139f7d-30a7-4dc9-857b-e727b75ad4a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessagePassing">
+      <UniqueIdentifier>{6950f492-9546-43a5-ab80-54d7d7088b0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine\Action.cpp">
@@ -55,6 +58,12 @@
     <ClCompile Include="Pathfinding\AStar.cpp">
       <Filter>PathFinding</Filter>
     </ClCompile>
+    <ClCompile Include="MessagePassing\Blackboard.cpp">
+      <Filter>MessagePassing</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagePassing\Subscriber.cpp">
+      <Filter>MessagePassing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -89,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="Pathfinding\AStar.h">
       <Filter>PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="MessagePassing\Blackboard.h">
+      <Filter>MessagePassing</Filter>
+    </ClInclude>
+    <ClInclude Include="MessagePassing\MessageDefines.h">
+      <Filter>MessagePassing</Filter>
+    </ClInclude>
+    <ClInclude Include="MessagePassing\Subscriber.h">
+      <Filter>MessagePassing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
