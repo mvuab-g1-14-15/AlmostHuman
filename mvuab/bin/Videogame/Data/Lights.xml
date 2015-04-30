@@ -4,4 +4,5 @@
 		<static renderable_objects_manager="solid"/>
 		<dynamic renderable_objects_manager="solid"/>
 	</light>
+	<light type="targetDirect" name="Direct001" pos="-11.3814 25.9297 22.324" color="255.0 255.0 255.0" att_start_range="80.0" att_end_range="200.0" dir="37.8897 -54.5085 -51.6751" />
 </lights>

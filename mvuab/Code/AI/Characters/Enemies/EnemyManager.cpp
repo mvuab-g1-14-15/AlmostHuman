@@ -13,6 +13,8 @@
 #include "StaticMeshes\StaticMeshManager.h"
 #include "EngineConfig.h"
 
+#include "AnimatedModels\AnimatedInstanceModel.h"
+
 typedef CEnemy* ( *CreateEnemyFn )( CXMLTreeNode& );
 
 CEnemyManager::CEnemyManager()
@@ -47,15 +49,24 @@ void CEnemyManager::Update()
     while ( itr != m_Resources.end() )
     {
         m_ActualEnemy = itr->second;
-        m_ActualEnemy->Update();
-
-        if ( m_ActualEnemy->GetLife() <= 0 )
-        {
-            CHECKED_DELETE( m_ActualEnemy );
-            m_Resources.erase( itr++ );
-        }
-        else
-        { ++itr; }
+		
+		if ( m_ActualEnemy->GetLife() > 0 )
+		{
+			m_ActualEnemy->Update();
+			++itr;
+		}
+		else
+		{
+			CAnimatedInstanceModel* l_AnimatedModel = m_ActualEnemy->GetAnimationModel();
+			l_AnimatedModel->ChangeAnimationAction("morir", 0.2f, 0.2f);
+			if ( l_AnimatedModel->IsActionAnimationActive("morir") )
+			{
+				CHECKED_DELETE( m_ActualEnemy );
+			    m_Resources.erase( itr++ );
+			}
+			else
+				++itr;
+		}
     }
 }
 

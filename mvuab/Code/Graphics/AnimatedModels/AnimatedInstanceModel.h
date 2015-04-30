@@ -45,6 +45,7 @@ class CAnimatedInstanceModel : public CRenderableObject
         bool IsActionAnimationActive(const std::string &AnimationName) const;
 
 		void ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
+		void ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
 
     private:
         CalModel*             m_CalModel;
