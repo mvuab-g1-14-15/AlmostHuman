@@ -35,7 +35,7 @@ size_t vector_getIdByResource( std::vector<T>& vec, T val )
 {
     for ( size_t i = 0 ; i < vec.size(); ++i )
         if ( vec[i] == val )
-        { return i; }
+            return i;
 
     return 0;
 }
@@ -84,7 +84,7 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetCurrentState )
     LUA_DECLARE_METHOD( CEnemy, GetLife )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
-    //LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
+    LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
     LUA_END_DECLARATION
 
     LUA_BEGIN_DECLARATION( aLuaState )
