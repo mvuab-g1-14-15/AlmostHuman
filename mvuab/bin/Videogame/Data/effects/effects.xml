@@ -64,11 +64,30 @@
 		<handles/>
 	</technique>
 	
-	<technique name="BillboardTechnique">
-		<effect name="BillboardEffect" file="data/effects/BillboardEffect.fx"/>
-		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true"/>
+	<!-- Effects of Billboards -->
+	<technique name="BillboardAlignedToCameraTechnique">
+		<effect name="BillboardEffectAlignedToCamera" file="data/effects/BillboardEffect.fx">
+			<define name="TECHNIQUE_NAME" description="BillboardAlignedToCameraTechnique"/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
-
+	
+	<technique name="BillboardAlignedToWorldUpAxisTechnique">
+		<effect name="BillboardEffectAlignedUpAxis" file="data/effects/BillboardEffect.fx">
+			<define name="TECHNIQUE_NAME" description="BillboardAlignedToWorldUpAxisTechnique"/>
+			<define name="ALIGNED_TO_UP_AXIS" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
+	<technique name="BillboardNotAlignedTechnique">
+		<effect name="BillboardEffectNotAligned" file="data/effects/BillboardEffect.fx">
+			<define name="TECHNIQUE_NAME" description="BillboardNotAlignedTechnique"/>
+			<define name="NOT_ALIGNED" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
 	<!-- Effects of GenerateGBuffer -->
 	<technique name="GenerateGBufferTechnique" vertex_type="19">
 		<effect name="GenerateGBuffer" file="data/effects/GenerateGBuffer.fx"/>

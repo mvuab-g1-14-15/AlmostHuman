@@ -88,12 +88,12 @@ void CBillboard::Update()
 
 void CBillboard::Render()
 {
-	if(m_Active)
+    if(m_Active)
     {
         CGraphicsManager* lGM = GraphicsInstance;
-		lGM->SetTransform( GetTransform() );
-		lGM->DrawAxis(3.0f);
-		m_Texture->Activate(0);
+        lGM->SetTransform( GetTransform() );
+        lGM->DrawAxis(3.0f);
+        m_Texture->Activate(0);
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }
@@ -141,6 +141,6 @@ void CBillboard::CreateBillBoardGeometry()
 
 void CBillboard::DestroyBillBoardGeometry()
 {
-	ASSERT(sRV != 0, "The billboard geometry is already initialized");
-	CHECKED_DELETE(sRV);
+    ASSERT(sRV != 0, "The billboard geometry is already initialized");
+    CHECKED_DELETE(sRV);
 }
