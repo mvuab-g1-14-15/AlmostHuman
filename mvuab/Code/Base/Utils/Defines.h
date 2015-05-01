@@ -7,6 +7,7 @@
 #include "Types.h"
 #include <assert.h>
 #include "Logger\Logger.h"
+#include "MessageHandler\MessageHandler.h"
 #include <Windows.h>
 
 // MACROS
@@ -91,46 +92,23 @@
 
 #ifdef _DEBUG
 
-#define ASSERT(expr, msg) \
+#define ASSERT(expr, msg, ... ) \
     {\
-        static char s_text[199] = ""; \
         if ( !( expr ) ) \
         {\
-            static int callIt = 1; \
-            if ( callIt )\
-            { \
-                wsprintf( s_text, "Expression: %s\nMessage: %s \nFile '%s' Line %d\nOk:Ignore\nCancel:Break", #expr, #msg, __FILE__, __LINE__ ); \
-                switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_ICONEXCLAMATION | MB_OKCANCEL ) ) \
-                {\
-                    case IDCANCEL: \
-                        { \
-                            callIt = 0; \
-                            _asm { int 3 } \
-                            break;\
-                        } \
-                } \
-            } \
+            CMessageHandler::Assert( __FILE__, __LINE__, msg, __VA_ARGS__ );\
         } \
     }\
 
 #else
 
-#define ASSERT(expr, msg) assert( expr && msg );
+#define ASSERT(expr, msg, ... ) do{ } while(0); // The compiler will delete this line in release
 
 #endif
 
-#define FATAL_ERROR(msg) \
+#define FATAL_ERROR( msg, ... ) \
     {\
-        static char s_text[199] = ""; \
-        wsprintf( s_text, "Message: ( %s )\nFile '%s' Line %d", #msg, __FILE__, __LINE__ ); \
-        switch ( ::MessageBox( NULL, s_text, "FATAL ERROR", MB_ICONERROR | MB_OK ) ) \
-        {\
-            case IDOK: \
-                { \
-                    ::exit( EXIT_FAILURE ); \
-                    break;\
-                } \
-        } \
+      CMessageHandler::FatalError( __FILE__, __LINE__, msg, __VA_ARGS__ );\
     }\
 
-#endif
+#endif // _DEFINES_H_

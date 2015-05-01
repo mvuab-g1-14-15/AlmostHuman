@@ -68,7 +68,6 @@ void CScriptManager::Load()
   //mConfigPath = EngineConfigInstance->GetLuaRunPath();
   baseUtils::GetFilesFromPath( mConfigPath, "lua", m_LuaFiles );
   baseUtils::GetFilesFromPath( mConfigPath + "init/", "lua", m_LuaInitFiles );
-
   TVectorLuaFiles::iterator it = m_LuaFiles.begin(), it_end = m_LuaFiles.end();
   TVectorLuaFiles::iterator it_init = m_LuaInitFiles.begin(), it_init_end = m_LuaInitFiles.end();
 
@@ -85,15 +84,11 @@ void CScriptManager::RunCode( const std::string& Code )
   {
     const char* l_Str = lua_tostring( m_LS, -1 );
     assert( l_Str );
-
     std::ostringstream ss;
     ss << "CScriptManager::RunCode\n\tCode: '" << Code << "'\n\tError: '" << l_Str << "'\n";
     std::string message = ss.str();
-
     LOG_ERROR_APPLICATION( message.c_str() );
-
     ASSERT( false, "Running lua code" );
-
     // AlexJenci cheat mode
 #ifdef _DEBUG
     Reload();
@@ -106,19 +101,7 @@ void CScriptManager::RunFile( const std::string& FileName )
   if ( luaL_dofile( m_LS, FileName.c_str() ) )
   {
     const char* l_Str = lua_tostring( m_LS, -1 );
-    assert( l_Str );
-
-    std::ostringstream ss;
-    ss << "CScriptManager::RunFile\n\tFile: '" << FileName << "'\n\tError: '" << l_Str << "'\n";
-    std::string message = ss.str();
-
-    LOG_ERROR_APPLICATION( message.c_str() );
-
-    ASSERT( false, message );
-    //TODO WTF ESTO NO TIENE SENTIDO ALGUNO...
-    //#ifdef _DEBUG
-    //    Reload();
-    //#endif
+    ASSERT( false, "Error running lua file: %s\n %s", FileName.c_str(), l_Str );
   }
 }
 

@@ -32,6 +32,9 @@
     <Filter Include="Console">
       <UniqueIdentifier>{1afb5b90-17a7-4b41-8432-093aabd38248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessageHandler">
+      <UniqueIdentifier>{44857ca8-0270-4a9b-9b59-a9b47f988158}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -72,6 +75,9 @@
     </ClCompile>
     <ClCompile Include="Console\Console.cpp">
       <Filter>Console</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageHandler\MessageHandler.cpp">
+      <Filter>MessageHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="Utils\Manager.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageHandler\MessageHandler.h">
+      <Filter>MessageHandler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
