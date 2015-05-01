@@ -1,0 +1,222 @@
+pre {
+	display:none;
+}
+
+a{
+	color:#ff0000;
+	background-color:#ffffff;
+	padding:3px;
+	font-size:small;
+	text-decoration: none;
+	width:10em;
+	font-weight:normal;
+	cursor: hand;
+	border-radius:4px;
+	margin-left:20px;
+}
+
+h1 {
+padding-top: 3em;
+}
+
+.title
+{
+	padding-top: 3em;
+	text-align: center;
+	font-size: 24px;
+}
+
+body {
+font-family:"Calibri";
+padding-top: 0;
+margin-top: 0;
+}
+
+p {
+font-family:"Calibri";
+padding:4px;
+border-radius:5px;
+margin:2px;
+display:block;
+
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+-moz-column-count: 2; /* Firefox */
+column-count: 2;
+
+-webkit-column-gap: 10px; /* Chrome, Safari, Opera */
+-moz-column-gap: 10px; /* Firefox */
+column-gap: 10px;
+
+}
+
+pre
+{
+	font-family:"Calibri";
+}
+
+img
+{
+float: left;
+margin: 5px;
+}
+
+span{
+	margin-right: 5px;
+	margin-left: 5px; 
+}
+
+.Header{
+position:fixed;
+background:#ffffff;
+padding-bottom:1em;
+}
+
+.Padding{
+ height:20em;
+}
+
+.time{
+float: left;
+width:10em;
+background-color:transparent;
+}
+
+.Log {
+background-color:#eeeeee;
+font-weight:bold;
+}
+
+.Warning {
+background-color:#e48625;
+color:#ffffff;
+font-weight:bold;
+}
+
+.Error {
+background-color:#ff2a2a;
+color:#ffffff;
+font-weight:bold;
+}
+
+.Assert {
+color:#e48625;
+background-color:#ffeecc;
+font-weight:bold;
+}
+
+
+.Exception {
+color:#dd0000;
+background-color:#ffdddd;
+font-weight:bold;
+}
+
+
+.Physics {
+background-color:#9999ff;]
+}
+
+.Audio {
+background-color:#aff200;
+}
+
+.Graphics {
+background-color:#ff99ff;
+}
+
+.GUI {
+background-color:#cc99ff;
+color:9000ff;
+}
+
+
+.GUIMessage {
+background-color:#9000ff;
+color:#ffffff;
+}
+
+.AI {
+background-color:#99ccff;
+}
+
+.GameLogic {
+background-color:#99ffff;
+}
+
+.System{
+background-color:#2a2aff;
+color:#ffffff;
+}
+
+.Networking {
+background-color:#99ffcc;
+}
+
+.Content {
+background-color:#ff99cc;
+}
+
+.Replay {
+background-color:#ff9966;
+}
+
+.Terrain {
+background-color:#00aa33;
+}
+
+.NetworkClient {
+background-color:#99ffcc;
+}
+
+.NetworkServer {
+background-color:#99ffcc;
+}
+
+.Input {
+background-color:#ff9966;
+}
+
+.Button {
+	display:inline;
+	width:10em;
+	border:none;
+	border-radius: 5px;
+	padding:4px;
+	margin:2px;
+	cursor: hand;
+}
+
+.level_e
+{
+	background-image: url("/img/error.png");
+    background-color: #cccccc;
+}
+
+.level_w
+{
+	background-image: url("img/warning.png");
+    background-color: #cccccc;
+}
+
+.level_i
+{
+	background-image: url("img/info.png");
+    background-color: #cccccc;
+}
+
+#actionpanel
+{
+	text-align: center;
+}
+
+#actionpanel .reload
+{
+	width: 20%;
+	font-size: 18px;
+	border: 5px;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 10px;
+	cursor: hand;
+	font-weight: bold;
+}

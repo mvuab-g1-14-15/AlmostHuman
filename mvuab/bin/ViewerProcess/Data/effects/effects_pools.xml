@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<renderable_object_techniques>
+
+	<pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
+		<default_technique vertex_type="19"		technique="GenerateGBufferTechnique"/>
+		<default_technique vertex_type="31"		technique="GenerateGBufferNormalTechnique"/>
+		<default_technique vertex_type="51"		technique="GenerateGBufferSelfIllumTechnique"/>
+		<default_technique vertex_type="63"		technique="GenerateGBufferSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="67"		technique="GenerateGBufferDiffuseTechnique"/>
+		<default_technique vertex_type="415" 	technique="GenerateGBufferCal3DTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="shadow_map_pool_renderable_object_technique">
+		<default_technique vertex_type="19"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="31"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="51"	technique="ShadowMapTechnique"/>
+		<default_technique vertex_type="63"	technique="ShadowMapTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="draw_quad_sampler_0_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="lens_flare_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="LensFlareTechnique"/>
+	</pool_renderable_object_technique>
+    
+    <pool_renderable_object_technique name="Perlin_noise_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="PerlinNoiseTechnique"/>
+	</pool_renderable_object_technique>
+    
+    <pool_renderable_object_technique name="Scattered_Light_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="ScatteredLightTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="init_deferred_technique_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="InitRenderDeferredTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="render_deferred_technique_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="RenderDeferredTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="VignettingAndNoise_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="VignettingTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Blur_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="BlurTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Gaussian_blur_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="GaussianBlur"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Sobel_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="SobelTechnique"/>
+	</pool_renderable_object_technique>	
+	
+	<pool_renderable_object_technique name="Fog_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="FogTechnique"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Bloom_step1_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="BloomFilter"/>
+	</pool_renderable_object_technique>
+	
+	<pool_renderable_object_technique name="Bloom_step3_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="CombineBloomTechnique"/>
+	</pool_renderable_object_technique>
+	
+</renderable_object_techniques>

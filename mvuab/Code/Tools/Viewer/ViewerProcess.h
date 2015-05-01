@@ -1,0 +1,42 @@
+#ifndef MESH_PROCESS_H
+#define MESH_PROCESS_H
+
+#include "Process.h"
+#include "Utils\Types.h"
+#include "Math\Vector3.h"
+
+#include <vector>
+
+class CGraphicsManager;
+class CFontManager;
+class CObject3D;
+class CAnimatedInstanceModel;
+
+class CViewerProcess: public CProcess
+{
+public:
+  CViewerProcess( void );
+  ~CViewerProcess( void );
+
+  virtual void Init();
+  virtual void Update() {};
+  virtual void Render() {};
+
+  void  DeInit();
+  void  Update( float ElapsedTime );
+
+  void  RenderScene( CGraphicsManager* GM, float ElapsedTime );
+  void  RenderScene2D( CGraphicsManager* GM, CFontManager* FM, float ElapsedTime, float FPS );
+  uint32  RenderDebugInfo( CGraphicsManager* GM, CFontManager* FM, float l_Fps );
+  std::string OpenPicker( std::string Extension );
+  void RenderModel( int wParam );
+  std::string OpenFolder();
+  bool LoadFile( S_MenuType menu );
+  void CreateLight( Math::Vect3f Position );
+  void CreateCamera( Math::Vect3f Position , std::string CameraName );
+  void Clear();
+private:
+  std::string m_FileName;
+};
+
+#endif

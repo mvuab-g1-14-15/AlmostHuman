@@ -15,32 +15,32 @@ class CEngineManagers;
 
 class CEngine: public CSingleton<CEngine>
 {
-    public:
-        CEngine();
-        ~CEngine();
+public:
+  CEngine();
+  ~CEngine();
 
-        void Init( CEngineConfig* aEngineConfig );
-        void SetRunnigProcess(CProcess* aProcess);
+  void Init( CEngineConfig* aEngineConfig );
+  void SetRunnigProcess( CProcess* aProcess );
 
-        void ProcessInputs();
-        void Update();
-        void Render();
+  void ProcessInputs();
+  void Update();
+  void Render();
 
-        // Getters and setters
-        GET_SET_PTR( CProcess, Process );
-        GET_SET_PTR( CTimer, Timer );
-        GET_SET_PTR( CEngineManagers, EngineManagers );
+  // Getters and setters
+  GET_SET_PTR( CProcess, Process );
+  GET_SET_PTR( CTimer, Timer );
+  GET_SET_PTR( CEngineManagers, EngineManagers );
 
-        void Trace( const std::string& TraceStr );
+  void Trace( const std::string& TraceStr );
 
-    private:
-        CProcess*           m_pProcess;
-        CLogRender*         m_pLogRender;
-        CEngineManagers*    m_pEngineManagers;
-        CTimer*             m_pTimer;
+private:
+  CProcess*           m_pProcess;
+  CLogRender*         m_pLogRender;
+  CEngineManagers*    m_pEngineManagers;
+  CTimer*             m_pTimer;
 
-        float               m_RenderTime;
-        float               m_RenderTarget;
+  float               m_RenderTime;
+  float               m_RenderTarget;
 };
 
 #endif // ENGINE_H

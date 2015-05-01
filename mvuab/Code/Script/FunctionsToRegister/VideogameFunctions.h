@@ -15,7 +15,7 @@ extern "C"
 
 using namespace luabind;
 
-void registerVideogame( lua_State* m_LS );
+//void registerVideogame( lua_State* m_LS );
 
 
 #endif

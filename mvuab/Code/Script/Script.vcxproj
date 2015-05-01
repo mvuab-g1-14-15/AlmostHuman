@@ -21,7 +21,9 @@
     <ClCompile Include="FunctionsToRegister\NetworkFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\PhysXFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\SoundFunctions.cpp" />
-    <ClCompile Include="FunctionsToRegister\VideogameFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\VideogameFunctions.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ScriptManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +37,9 @@
     <ClInclude Include="FunctionsToRegister\NetworkFunctions.h" />
     <ClInclude Include="FunctionsToRegister\PhysXFunctions.h" />
     <ClInclude Include="FunctionsToRegister\SoundFunctions.h" />
-    <ClInclude Include="FunctionsToRegister\VideogameFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\VideogameFunctions.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="luabind_macros.h" />
     <ClInclude Include="ScriptManager.h" />
   </ItemGroup>

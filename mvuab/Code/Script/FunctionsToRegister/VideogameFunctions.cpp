@@ -22,6 +22,7 @@ extern "C"
 
 using namespace luabind;
 
+/*
 void registerVideogame( lua_State* m_LS )
 {
   module( m_LS )
@@ -62,3 +63,5 @@ void registerVideogame( lua_State* m_LS )
     .def( "GetAStarScene", &CAStarProcess::GetAStarScene )
   ];
 }
+
+*/

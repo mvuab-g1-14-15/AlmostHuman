@@ -1,0 +1,14 @@
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+	<ProgressBar name="Life" posx="2" posy="5" height="4" width="30" visible="true" active="true"
+	texture_back="Data/textures/barBack.jpg" texture_bar="Data/textures/barLife.png"  id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	<ProgressBar name="Energy" posx="2" posy="10" height="4" width="30" visible="true" active="true"
+	texture_back="Data/textures/barBack.jpg" texture_bar="Data/textures/barEnergy.png"  id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	<StaticText name="Grenades" posx="10" posy="20" literal="HiWorld" visible="true" active="true"/>
+</Windows>

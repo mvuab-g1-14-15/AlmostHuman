@@ -129,7 +129,7 @@ void CScriptManager::RegisterLUAFunctions()
   registerGraphics( m_LS );
   registerInputs( m_LS );
   registerPhysX( m_LS );
-  registerVideogame( m_LS );
+  //registerVideogame( m_LS );
   registerAI( m_LS );
   registerEnum( m_LS );
   registerSound( m_LS );

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Language id="castellano">
+	<literal id="HiWorld" 		font="xfiles"  color="0.5 0.1 0.1 1.0" value="Hola Mundo"/>
+	<literal id="Exit"     		font="xfiles"  color="0.1 0.1 0.1 1.0" value="Salir"/>
+	<literal id="PickUp"   		font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press E to grab the item"/>
+	<literal id="puertaBruja"   font="Annabel"  color="0.1 0.1 0.1 1.0" value="The door has opened, you can now advance to the next level"/>
+	<literal id="textoItem"		font="Annabel"  color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
+	<literal id="textoPuerta"   font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
+	<literal id="textoCinematic"	font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
+	<literal id="FPS"	font="Annabel"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
+</Language>
