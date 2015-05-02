@@ -23,11 +23,9 @@ function UpdateFree()
 	end
 	
 	if action_manager:DoAction("MoveUp") then
-		engine:Trace("MoveUp")
 		vertical = vertical + 1
 	elseif action_manager:DoAction("MoveDown") then
 		vertical =  vertical - 1
-		engine:Trace("MoveDown")
 	end
 	
 	moveFree( flag_speed, forward, strafe, vertical, dt )
@@ -63,7 +61,7 @@ function moveFree( flag_speed, forward, strafe, vertical, dt )
 	
     constant = dt * l_ForwardSpeed;
 	
-	if flag_speed == 1 and  g_bFlag_agacharse == 0 then
+	if flag_speed == 1 then
         constant = constant * l_Speed;
 	end
 	

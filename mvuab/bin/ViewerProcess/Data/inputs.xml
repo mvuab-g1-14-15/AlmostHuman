@@ -137,10 +137,12 @@
 	
 	<action name="MoveYaw">
 	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X"/>
+	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
     </action>
 	
 	<action name="MovePitch">
    	 <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y"/>
+	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
     </action>
 	
 	<action name="Run">

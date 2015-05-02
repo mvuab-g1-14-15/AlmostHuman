@@ -34,9 +34,13 @@ void ShowErrorMessage( const std::string& message )
     std::string end_message = "";
 
     if ( logSaved )
-    { end_message += "Sorry, Application failed. Logs saved\n"; }
+    {
+        end_message += "Sorry, Application failed. Logs saved\n";
+    }
     else
-    { end_message += "Sorry, Application failed. Logs could not be saved\n"; }
+    {
+        end_message += "Sorry, Application failed. Logs could not be saved\n";
+    }
 
     end_message += message;
     MessageBox( 0, end_message.c_str(), "FlostiProject Report",
@@ -116,10 +120,21 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         DWORD style;
         if ( lEngineConfig->GetFullScreenMode() || lEngineConfig->GetFitDesktop() )
         {
-            // Modify the window properties with the current system desktop position and resolution
-            lEngineConfig->SetScreenPosition( Math::Vect2i(0, 0) );
-            lEngineConfig->SetScreenSize( Math::Vect2i(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)) );
-            lEngineConfig->SetScreenResolution( Math::Vect2i(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)) );
+            uint32 lTaskBarHeight = 0;
+            if( lEngineConfig->GetFitDesktop() )
+            {
+                RECT rect;
+                HWND taskBar = FindWindow("Shell_traywnd", NULL);
+                if(taskBar && GetWindowRect(taskBar, &rect))
+                {
+                    lTaskBarHeight = rect.bottom - rect.top;
+                }
+            }
+            lEngineConfig->SetScreenPosition( Math::Vect2i( 0, 0 ) );
+            lEngineConfig->SetScreenSize( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
+                                          GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
+            lEngineConfig->SetScreenResolution( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
+                                                GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
             style = WS_POPUP | WS_VISIBLE;
         }
         else

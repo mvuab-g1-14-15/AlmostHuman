@@ -33,6 +33,7 @@
 #include "SceneRenderComands\RenderDebugCommand.h"
 #include "SceneRenderComands\RenderGizmosCommand.h"
 #include "SceneRenderComands\BillboardRendererCommand.h"
+#include "SceneRenderComands\ProcessRenderRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -144,8 +145,11 @@ void CSceneRendererCommandManager::Init()
                              Type2Type<CRenderGizmosCommand>( ) );
     CommandFactory.Register( "render_gui",
                              Type2Type<CRenderGUISceneRendererCommand>( ) );
-	CommandFactory.Register( "render_billboards",
+    CommandFactory.Register( "render_billboards",
                              Type2Type<CBillboardRenderCommand>( ) );
+    CommandFactory.Register( "render_process",
+                             Type2Type<CProcessRenderRendererCommand>( ) );
+
     CXMLTreeNode l_File;
 
     //mConfigPath= EngineConfigInstance->GetSceneRendererCommandPath();

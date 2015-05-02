@@ -243,6 +243,9 @@
     <ClCompile Include="SceneRenderComands\BillboardRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\ProcessRenderRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -494,6 +497,9 @@
       <Filter>Billboard</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\BillboardRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\ProcessRenderRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>

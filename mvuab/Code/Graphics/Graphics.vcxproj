@@ -71,6 +71,7 @@
     <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\ProcessRenderRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\ProcessRenderRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.h" />

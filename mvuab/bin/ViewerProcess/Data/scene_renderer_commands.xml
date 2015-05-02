@@ -53,6 +53,7 @@
 	
 	<enable_z_test/>
 	<render_billboards/>
+	<render_process/>
     <disable_z_test/>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>

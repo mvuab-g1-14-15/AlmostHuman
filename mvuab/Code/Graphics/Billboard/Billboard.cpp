@@ -92,7 +92,6 @@ void CBillboard::Render()
     {
         CGraphicsManager* lGM = GraphicsInstance;
         lGM->SetTransform( GetTransform() );
-        lGM->DrawAxis(3.0f);
         m_Texture->Activate(0);
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
