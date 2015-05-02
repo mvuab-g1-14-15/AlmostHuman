@@ -96,7 +96,7 @@ void CGraphicsManager::BeginScene()
   HRESULT hr = mDirectXDevice->BeginScene();
   assert( SUCCEEDED( hr ) );
 
-   mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
+  mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
   mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
   mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
   mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
@@ -1392,4 +1392,44 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, 
   GetDevice()->SetTexture( 0, Texture->GetDXTexture() );
 
   GetDevice()->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v, sizeof( SCREEN_TEXTURE_VERTEX ) );
+}
+
+void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment,
+                                   CTexture* texture, float U0, float V0, float U1, float V1 )
+{
+  Math::Vect2i finalPos = pos;
+  CalculateAlignment( w, h, alignment, finalPos );
+
+  // finalPos = [0]
+  //
+  //  [0]------[2]
+  //   |        |
+  //   |        |
+  //   |        |
+  //  [1]------[3]
+
+  Math::Vect2f coord_text[4];
+
+  coord_text[0].x = U0;
+  coord_text[0].y = V0;
+  coord_text[1].x = U1;
+  coord_text[1].y = V0;
+  coord_text[2].x = U0;
+  coord_text[2].y = V1;
+  coord_text[3].x = U1;
+  coord_text[3].y = V1;
+
+  unsigned short indices[6] = {0, 2, 1, 1, 2, 3};
+  SCREEN_TEXTURE_VERTEX v[4] =
+  {
+    { ( float )finalPos.x, ( float )finalPos.y,      0.f, 1.f, coord_text[0].x,   coord_text[0].y}    //(x,y) sup_esq.
+    ,   { ( float )finalPos.x, ( float )finalPos.y + h,    0.f, 1.f, coord_text[1].x,   coord_text[1].y}    //(x,y) inf_esq.
+    , { ( float )finalPos.x + w, ( float )finalPos.y,      0.f, 1.f, coord_text[2].x,   coord_text[2].y} //(x,y) sup_dr.
+    ,   { ( float )finalPos.x + w, ( float )finalPos.y + h,    0.f, 1.f, coord_text[3].x,   coord_text[3].y} //(x,y) inf_dr.
+  };
+
+  GetDevice()->SetFVF( SCREEN_TEXTURE_VERTEX::GetFVF() );
+  GetDevice()->SetTexture( 0, texture->GetDXTexture() );
+  GetDevice()->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v,
+                                       sizeof( SCREEN_TEXTURE_VERTEX ) );
 }

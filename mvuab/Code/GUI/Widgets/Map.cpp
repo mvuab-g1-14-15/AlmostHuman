@@ -12,7 +12,7 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
   : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, IMAGE, lit, textHeightOffset, textWidthOffset, isVisible,
                  isActive )
 {
-  m_Map = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/metal_plain.jpg" );
+  m_Map = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/mapa.jpg" );
   m_Player = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/flecha.png" );
   m_Camara = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/punto.png" );
   //m_SizeWorld3D = Math::Vect2f( 100.f, 100.f ); // Unidades totales del grid (mundo 3D) en X & Z
@@ -31,18 +31,34 @@ void CMap::Render()
     CGuiElement::Render();
 
     //Renderizamos el fondo del mapa o radar
-    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Map );
+
     //Math::Vect2i pos = CGuiElement::m_Position;
     // Cálculo posición del Player en píxeles de mapa según su size & posición normalizada
     float deltaX = m_posNPlayer.x * ( float )m_uWidth;
     float deltaY = m_posNPlayer.y * ( float )m_uHeight;
     // Posición de pintado = posición de pintado del mapa en píxeles de pantalla + deltaXY
-    Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )deltaX, ( uint32 )deltaY );
+    Math::Vect2i l_drawPos = m_Position + Math::Vect2i( m_uWidth / 2, m_uHeight / 2 );
     //Renderizamos la posición del player
     Math::Vect2f up( cos( CameraMInstance->GetCurrentCamera()->GetYaw() ), sin( CameraMInstance->GetCurrentCamera()->GetYaw() ) );
     Math::Vect2i int_UP = Math::Vect2i( ( int )( up.x * -17 ), ( int )( up.y * -17 ) );
+
     //GraphicsInstance->DrawQuad2D( l_drawPos + int_UP, 40, 40, CameraMInstance->GetCurrentCamera()->GetYaw(), CGraphicsManager::CENTER, m_Camara );
-    GraphicsInstance->DrawQuad2D( l_drawPos, 20, 20, -CameraMInstance->GetCurrentCamera()->GetYaw() + Math::PI_32_VALUE, CGraphicsManager::CENTER,
+    if ( m_posNPlayer.x <= 0.15f )
+      m_posNPlayer.x = 0.15f;
+
+    if ( m_posNPlayer.x >= 0.85f )
+      m_posNPlayer.x = 0.85f;
+
+    if ( m_posNPlayer.y <= 0.1f )
+      m_posNPlayer.y = 0.1f;
+
+    if ( m_posNPlayer.y >= 0.9f )
+      m_posNPlayer.y = 0.9f;
+
+    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Map,
+                                  m_posNPlayer.x - 0.15f,
+                                  m_posNPlayer.y - 0.1f, m_posNPlayer.x + 0.15f, m_posNPlayer.y + 0.1f );
+    GraphicsInstance->DrawQuad2D( l_drawPos, 20, 20, CameraMInstance->GetCurrentCamera()->GetYaw() + Math::PI_32_VALUE, CGraphicsManager::CENTER,
                                   m_Player );
 
 

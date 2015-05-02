@@ -3,7 +3,7 @@
 #pragma once
 
 #ifdef _DEBUG
-    #define D3D_DEBUG_INFO
+#define D3D_DEBUG_INFO
 #endif
 
 #include <Windows.h>
@@ -104,11 +104,12 @@ public:
   //void DrawQuad2D(const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, SRectangle2D& coordText);
   void DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, ETypeFlip flip = NONE_FLIP );
   void DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, float yaw, ETypeAlignment alignment, CTexture* Texture );
+  void DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, ETypeAlignment alignment, CTexture* texture, float U0, float V0, float U1, float V1 );
 
   void DrawTeapot();
   void CreateQuadBuffers();
 
-  void CGraphicsManager::DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
+  void DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
   void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture,
       float U0, float V0, float U1, float V1 );
 
