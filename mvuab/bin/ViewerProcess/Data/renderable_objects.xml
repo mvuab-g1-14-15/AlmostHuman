@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <layer name="solid" />
-  <layer name="characters" />
+  <MeshInstance name="Plane001" core="Plane001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Pyramid001" core="Pyramid001" pos="34.7418 0.005 -32.0183" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Teapot001" core="Teapot001" pos="-1.66391 0.0 5.24356" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Tube001" core="Tube001" pos="8.54245 0.0 -25.8704" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box001" core="Box005" pos="-14.8254 0.0 34.0314" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box002" core="Box005" pos="-15.2101 0.996899 34.0314" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box003" core="Box005" pos="-16.0923 0.0169182 34.0314" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box004" core="Box005" pos="-17.0225 0.27766 34.0314" yaw="0.0" pitch="0.0" roll="0.610865" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box005" core="Box005" pos="-18.5503 0.00153732 34.0314" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
 </RenderableObjects>

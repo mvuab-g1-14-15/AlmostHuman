@@ -65,15 +65,21 @@ CLight::CLight( const CXMLTreeNode& node )
             ROLMInstance->GetResource( l_Layer );
 
         if ( !l_ROM )
-        { continue; }
+        {
+            continue;
+        }
 
         const std::string& TagName = node( i ).GetName() ;
 
         if ( TagName == "static" )
-        { m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM ); }
+        {
+            m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
+        }
 
         if ( TagName == "dynamic" )
-        { m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM ); }
+        {
+            m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
+        }
     }
 }
 
@@ -198,7 +204,9 @@ CLight::GetDynamicShadowMapRenderableObjectsManagers()
 void CLight::GenerateShadowMap( CGraphicsManager* GM )
 {
     if ( !m_RenderShadows )
-    { return; }
+    {
+        return;
+    }
 
     SetShadowMap( GM );
 
@@ -210,12 +218,13 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
         GM->Clear( true, true, false, 0x000000ff );
 
         for ( size_t i = 0, lROMSize = m_StaticShadowMapRenderableObjectsManagers.size(); i < lROMSize; ++i )
-        { m_StaticShadowMapRenderableObjectsManagers[i]->Render(); }
+        {
+            m_StaticShadowMapRenderableObjectsManagers[i]->Render();
+        }
 
         GM->EndRender();
         m_StaticShadowMap->UnsetAsRenderTarget();
         m_MustUpdateStaticShadowMap = false;
-        m_StaticShadowMap->Save( "static_shadow_map" );
     }
 
     if ( !m_DynamicShadowMapRenderableObjectsManagers.empty() )
@@ -225,7 +234,9 @@ void CLight::GenerateShadowMap( CGraphicsManager* GM )
         GM->Clear( true, true, true, 0xffffffff );
 
         for ( size_t i = 0; i < m_DynamicShadowMapRenderableObjectsManagers.size(); ++i )
-        { m_DynamicShadowMapRenderableObjectsManagers[i]->Render(); }
+        {
+            m_DynamicShadowMapRenderableObjectsManagers[i]->Render();
+        }
 
         GM->EndRender();
         m_DynamicShadowMap->UnsetAsRenderTarget();
@@ -251,10 +262,14 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect* Effect )
         l_EM->SetShadowProjectionMatrix( m_ProjectionShadowMap );
 
         if ( m_ShadowMaskTexture != NULL )
-        { m_ShadowMaskTexture->Activate( SHADOW_MAP_MASK_STAGE ); }
+        {
+            m_ShadowMaskTexture->Activate( SHADOW_MAP_MASK_STAGE );
+        }
 
         if ( m_GenerateStaticShadowMap )
-        { m_StaticShadowMap->Activate( STATIC_SHADOW_MAP_STAGE ); }
+        {
+            m_StaticShadowMap->Activate( STATIC_SHADOW_MAP_STAGE );
+        }
 
         m_DynamicShadowMap->Activate( DYNAMIC_SHADOW_MAP_STAGE );
         Effect->SetShadowMapParameters( m_ShadowMaskTexture != NULL,

@@ -440,7 +440,8 @@ void CViewerProcess::Update()
 void CViewerProcess::Render()
 {
     uint32 lBaseGridSize = 500;
-    GraphicsInstance->DrawGrid( float32(lBaseGridSize), colGREEN, lBaseGridSize, lBaseGridSize );
+    GraphicsInstance->DrawGrid( float32(lBaseGridSize), CColor(0.5f, 0.5f, 0.5f, 1.0f), uint32( lBaseGridSize / 3 ),
+                                uint32( lBaseGridSize / 3 ));
 }
 
 void CViewerProcess::RenderScene2D( CGraphicsManager * GM, CFontManager * FM, float ElapsedTime, float FPS )

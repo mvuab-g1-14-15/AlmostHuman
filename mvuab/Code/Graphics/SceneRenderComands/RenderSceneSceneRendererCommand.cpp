@@ -9,6 +9,8 @@ CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode 
 {
     const std::string &l_LayerName = atts.GetPszProperty("layer", "");
     m_Layer = ROLMInstance->GetResource(l_LayerName);
+
+    ASSERT(m_Layer, "Invalid layer %s", l_LayerName.c_str() );
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
