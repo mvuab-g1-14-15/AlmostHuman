@@ -76,6 +76,8 @@ void CGUIManager::Done()
 {
   if ( IsOk() )
   {
+
+    CHECKED_DELETE( m_Map );
     Release();
     m_bIsOk = false;
   }
@@ -102,7 +104,6 @@ void CGUIManager::Release()
   CHECKED_DELETE( m_TextBox );
   CHECKED_DELETE( m_PointerMouse );
   CHECKED_DELETE( m_Console );
-  CHECKED_DELETE( m_Map );
 
   LOG_INFO_APPLICATION( "GUIManager:: offline (ok)" );
 }

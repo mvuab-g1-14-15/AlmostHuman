@@ -24,6 +24,7 @@ CConsoleGUI::CConsoleGUI( uint32 windowsHeight, uint32 windowsWidth, float heigh
 
 CConsoleGUI::~CConsoleGUI()
 {
+  CEditableTextBox::~CEditableTextBox();
 }
 
 //---------------Interfaz de GuiElement----------------------

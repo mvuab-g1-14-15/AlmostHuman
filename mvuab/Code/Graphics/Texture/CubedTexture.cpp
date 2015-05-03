@@ -6,30 +6,31 @@
 #include "EngineManagers.h"
 
 CCubedTexture::CCubedTexture()
-    : CTexture()
+  : CTexture()
 {
 }
 
 CCubedTexture::~CCubedTexture()
 {
+  CTexture::~CTexture();
 }
 
 bool CCubedTexture::LoadFile()
 {
-    HRESULT l_HR = D3DXCreateCubeTextureFromFile( GraphicsInstance->GetDevice(),
-                   ( "./Data/textures/" + m_FileName ).c_str(), &m_CubeTexture );
+  HRESULT l_HR = D3DXCreateCubeTextureFromFile( GraphicsInstance->GetDevice(),
+                 ( "./Data/textures/" + m_FileName ).c_str(), &m_CubeTexture );
 
-    if ( l_HR != D3D_OK )
-    {
-        LOG_ERROR_APPLICATION( "CCubedTexture::LoadFile error al cargar %s\n",
-                               m_FileName );
-        return false;
-    }
+  if ( l_HR != D3D_OK )
+  {
+    LOG_ERROR_APPLICATION( "CCubedTexture::LoadFile error al cargar %s\n",
+                           m_FileName );
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
 void CCubedTexture::Activate( size_t StageId )
 {
-    GraphicsInstance->GetDevice()->SetTexture( StageId, m_CubeTexture );
+  GraphicsInstance->GetDevice()->SetTexture( StageId, m_CubeTexture );
 }

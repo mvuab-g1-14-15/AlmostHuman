@@ -11,16 +11,17 @@ CGUITexture::CGUITexture()
 
 CGUITexture::~CGUITexture()
 {
+  CTexture::~CTexture();
 }
 
 bool CGUITexture::LoadFile()
 {
-  HRESULT l_HR = D3DXCreateTextureFromFile( GraphicsInstance->GetDevice(), m_FileName.c_str(), &m_Texture );
+  HRESULT l_HR = D3DXCreateTextureFromFile( GraphicsInstance->GetDevice(), CTexture::m_FileName.c_str(), &m_Texture );
 
   if ( l_HR != D3D_OK )
   {
     LOG_ERROR_APPLICATION( "CGUITexture::LoadFile error al cargar %s\n",
-                           m_FileName );
+                           m_FileName.c_str() );
     return false;
   }
 
