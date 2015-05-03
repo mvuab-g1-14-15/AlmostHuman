@@ -60,6 +60,7 @@
 #define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
 
 #define EngineInstance          CEngine::GetSingletonPtr()
+#define EngineManagerInstance   CEngineManagers::GetSingletonPtr()
 #define GraphicsInstance        CEngineManagers::GetSingletonPtr()->GetGraphicsManager()
 #define SoundInstance           CSoundManager::GetSingletonPtr()
 #define EffectManagerInstance   CEngineManagers::GetSingletonPtr()->GetEffectsManager()

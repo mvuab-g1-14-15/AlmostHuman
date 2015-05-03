@@ -45,6 +45,7 @@ public:
   virtual void Update();
   virtual void Render();
 
+  void Reload();
   void Release();
 
   CGraphicsManager*                 GetGraphicsManager()      const;

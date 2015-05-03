@@ -195,10 +195,20 @@ void CEngineManagers::Render()
 
 void CEngineManagers::Release()
 {
-  for ( size_t i = m_ResourcesVector.size() - 1 ; i = 0 ; --i )
+  for ( size_t i = m_ResourcesVector.size() - 1 ; i > 0 ; --i )
   {
     CHECKED_DELETE( m_ResourcesVector[i] )
   }
+
+  CHECKED_DELETE( m_ResourcesVector[0] )
+  m_ResourcesVector.clear();
+  m_ResourcesMap.clear();
+}
+
+void CEngineManagers::Reload()
+{
+  Release();
+  Init();
 }
 
 CWWSoundManager* CEngineManagers::GetSoundManager() const
