@@ -15,6 +15,7 @@
 *.db
 *.sdf
 *.suo
+*.exp
 *3rdParty/
 *bin/lib/
 WwiseProject

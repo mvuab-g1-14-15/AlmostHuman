@@ -21,6 +21,7 @@
     <ProjectGuid>{7911C49A-7E8C-4280-8D70-EA7A76E63328}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ViewerProcess</RootNamespace>
+    <ProjectName>Viewer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
