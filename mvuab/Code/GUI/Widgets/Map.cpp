@@ -1,6 +1,8 @@
 #include "Widgets\Map.h"
 #include "EngineManagers.h"
 #include "Texture\TextureManager.h"
+#include "Texture\Texture.h"
+#include "Texture\GUITexture.h"
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
 #include "Object3D.h"
@@ -12,15 +14,15 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
   : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, IMAGE, lit, textHeightOffset, textWidthOffset, isVisible,
                  isActive )
 {
-  m_Map = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/mapa.jpg" );
+  m_Mapa = TextureMInstance->GetTexture( "Data/textures/mapa.png" );
   m_Player = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/flecha.png" );
   m_Camara = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/punto.png" );
+  m_Marco = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/marco2.png" );
   //m_SizeWorld3D = Math::Vect2f( 100.f, 100.f ); // Unidades totales del grid (mundo 3D) en X & Z
 }
 
 CMap::~CMap()
 {
-
 }
 //---------------CGuiElement Interface----------------------
 void CMap::Render()
@@ -55,9 +57,12 @@ void CMap::Render()
     if ( m_posNPlayer.y >= 0.9f )
       m_posNPlayer.y = 0.9f;
 
-    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Map,
-                                  m_posNPlayer.x - 0.15f,
-                                  m_posNPlayer.y - 0.1f, m_posNPlayer.x + 0.15f, m_posNPlayer.y + 0.1f );
+    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Mapa,
+                                  m_posNPlayer.x - 0.15f, m_posNPlayer.y - 0.1f, m_posNPlayer.x + 0.15f, m_posNPlayer.y + 0.1f );
+
+    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Marco,
+                                  0, 0, 1, 1 );
+
     GraphicsInstance->DrawQuad2D( l_drawPos, 20, 20, CameraMInstance->GetCurrentCamera()->GetYaw() + Math::PI_32_VALUE, CGraphicsManager::CENTER,
                                   m_Player );
 
