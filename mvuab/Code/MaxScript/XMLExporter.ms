@@ -46,10 +46,11 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 (
 	try
 	(
-		local unique_instances = GetUniqueInstances()
+		local unique_instances = GetUniqueInstancesScene()
 		
 		-- create the document and set the filename
 		xDoc = XMLDocument filenameXML
+		
 		--create the base node and append the node to the document
 		local l_RootNode = xDoc.getNewNode "RenderableObjects"
 		xDoc.AppendNode l_RootNode
@@ -99,42 +100,19 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 				l_RootNode.AppendNode l_NewLayerNode
 				l_NewLayerNode.AddAttributeAsString "name" layers[1]
 			)
-		)
-		
-		for Obj in AllObj do
-		(
-			local instance_obj;
 			
-			if findItem unique_instances Obj != 0 then
-				instance_obj = Obj
-			else
-			(
-				local references = GetNodeReferences Obj
-				if (references.count > 0) then
-				(
-					for ref_obj in references do
-					(
-						if findItem unique_instances ref_obj != 0 then
-							instance_obj = ref_obj
-					)
-				)
-				else
-					instance_obj = Obj
-			)
-		
+			local l_CoreName = GetObjectCore Obj unique_instances
 			local lRotation = Obj.rotation 
 			local l_Yaw = GetYaw lRotation as string
 			local l_Pitch = GetPitch lRotation as string
 			local l_Roll = GetRoll lRotation as string
-			
-			format "Rotation: % % % % \n" (lRotation as eulerangles)  l_Yaw l_Pitch l_Roll 
-			
+
 			local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
 			-- append the new node MeshInstance to the root node RenderableObjects
 			l_RootNode.AppendNode l_NewMeshInstanceNode 
 
 			l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
-			l_NewMeshInstanceNode.AddAttributeAsString "core" instance_obj.name
+			l_NewMeshInstanceNode.AddAttributeAsString "core" l_CoreName
 			l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
 			
 			l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
@@ -142,7 +120,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 		
 			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
-			--l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
+			
 			if (getUserProp Obj "layer_render") == undefined then
 			(
 				l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
@@ -151,9 +129,8 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			(
 				l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
 			)
-			
-			
-		)
+		)	
+		
 	)
 	catch
 	(
@@ -165,6 +142,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 fn ExportTextureFile AllObj DestPath = 
 (
 	
+
 	if AllObj.count == 0 then 
 	(
 		format "Empty selection. Select any object \n"

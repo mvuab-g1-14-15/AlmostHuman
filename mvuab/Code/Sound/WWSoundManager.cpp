@@ -66,7 +66,13 @@ CWWSoundManager::CWWSoundManager( const CXMLTreeNode& atts )
 
 void CWWSoundManager::Done()
 {
-  m_GameObjectMap.clear();
+
+#ifndef AK_OPTIMIZED
+  //
+  // Terminate Communication Services
+  //
+  AK::Comm::Term();
+#endif // AK_OPTIMIZED
 
   AK::MusicEngine::Term();
   AK::SoundEngine::Term();
@@ -77,8 +83,9 @@ void CWWSoundManager::Done()
   if ( AK::IAkStreamMgr::Get() )
     AK::IAkStreamMgr::Get()->Destroy();
 
-  AK::Comm::Term();
   AK::MemoryMgr::Term();
+
+  m_GameObjectMap.clear();
 }
 
 
@@ -235,9 +242,6 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
         std::string StrGameObject3dName = std::string( sounds_TreeNode( i ).GetPszProperty( "name", "" ) );
         std::string StrRegisteredGameObject3d = std::string( sounds_TreeNode( i ).GetPszProperty( "register", "" ) );
 
-        Math::Vect3f PosGameObject3d = Math::Vect3f( sounds_TreeNode( i ).GetVect3fProperty( "pos", Math::Vect3f( 0.0f, 0.0f, 0.0f ).GetNormalized() ) );
-        Math::Vect3f DirGameObject3d = Math::Vect3f( sounds_TreeNode( i ).GetVect3fProperty( "dir", Math::Vect3f( 0.0f, 0.0f, 0.0f ).GetNormalized() ) );
-
         m_GameObjectMap[StrGameObject3dName.c_str()] =  ++m_ObjectId;
 
         if ( StrRegisteredGameObject3d == "true" )
@@ -252,7 +256,30 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
           }
         }
 
-        SetGameObjectPosition( StrGameObject3dName.c_str(), PosGameObject3d, DirGameObject3d );
+        int l_NumSources = sounds_TreeNode( i ).GetNumChildren();
+        std::vector<Math::Vect3f> l_PosList( l_NumSources );
+        std::vector<Math::Vect3f> l_OrientationList( l_NumSources ) ;
+
+        if ( l_NumSources > 0 )
+        {
+          for ( int k = 0; k < l_NumSources; ++k )
+          {
+            l_PosList[k] = Math::Vect3f( sounds_TreeNode( i )( k ).GetVect3fProperty( "pos", Math::v3fZERO, false ) );
+            l_OrientationList[k] = Math::Vect3f( sounds_TreeNode( i )( k ).GetVect3fProperty( "dir", Math::v3fZERO, false ) );
+          }
+
+          std::string l_TypeSource = sounds_TreeNode( i ).GetPszISOProperty( "type", "", false );
+
+          SetGameObjectMultiplePositions( StrGameObject3dName.c_str(), l_PosList, l_OrientationList, l_TypeSource );
+
+        }
+        else
+        {
+          Math::Vect3f PosGameObject3d = Math::Vect3f( sounds_TreeNode( i ).GetVect3fProperty( "pos", Math::Vect3f( 0.0f, 0.0f, 0.0f ).GetNormalized() ) );
+          Math::Vect3f DirGameObject3d = Math::Vect3f( sounds_TreeNode( i ).GetVect3fProperty( "dir", Math::Vect3f( 0.0f, 0.0f, 0.0f ).GetNormalized() ) );
+
+          SetGameObjectPosition( StrGameObject3dName.c_str(), PosGameObject3d, DirGameObject3d );
+        }
       }
 
       if ( TagName == "InitEvent" )
@@ -328,13 +355,15 @@ AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, 
 }
 
 AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
-    std::vector<Math::Vect3f> _GameObjectOrientation )
+    std::vector<Math::Vect3f> _GameObjectOrientation, std::string _TypePos )
 {
 
-  AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
-  std::vector<AkSoundPosition> l_AKGameObjectPositions;
+  int l_NumPositions = _GameObjectPosition.size();
 
-  for ( int i = 0; i >= sizeof( l_AKGameObjectPositions ); ++i )
+  AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiSources;
+  AkSoundPosition* l_AKGameObjectPositions = new( std::nothrow ) AkSoundPosition[l_NumPositions];
+
+  for ( int i = 0; i < l_NumPositions; ++i )
   {
     l_AKGameObjectPositions[i].Position.X = _GameObjectPosition[i].x;
     l_AKGameObjectPositions[i].Position.Y = _GameObjectPosition[i].y;
@@ -347,11 +376,13 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
     l_AKGameObjectPositions[i].Orientation.Z = l_GameObjectPositionNorm.z;
   }
 
+  if ( _TypePos == "MultiSource" )
+    l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiSources;
+  else
+    l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
 
-  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , &l_AKGameObjectPositions[0], sizeof( l_AKGameObjectPositions ),
-         l_eMultiPositionType );
+  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions, l_NumPositions, l_eMultiPositionType );
 }
-
 
 AKRESULT CWWSoundManager::SetState( std::string _Group, std::string _State )
 {

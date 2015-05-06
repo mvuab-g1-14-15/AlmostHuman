@@ -13,7 +13,7 @@ end
 function load_gameplay()
     g_Player = CPlayer()
 	g_HUD = CHUD()
-	
+	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 	initialized = true
 end
 

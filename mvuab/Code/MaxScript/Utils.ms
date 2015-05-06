@@ -28,7 +28,7 @@ fn DoesFolderExist f create:true =
 	val
  )	
  
- fn GetAllInstances = 
+fn GetAllInstances = 
 (
 	allInsts = #()
 	for obj in geometry do
@@ -61,7 +61,24 @@ fn GetReferences =
 	makeUniqueArray refnodes
 	return refnodes
 )
-	
+
+function GetObjectCore obj uniqueInstanceSceneList =
+(
+	pos = findItem uniqueInstanceSceneList obj 
+	if pos != 0 then (
+		return (obj.name)
+	) else (
+		InstanceMgr.GetInstances obj &instances
+		for i = 1 to instances.count do (
+			pos = findItem uniqueInstanceSceneList instances[i]
+			if pos != 0	then (
+				return (uniqueInstanceSceneList[pos].name)
+			)
+		)
+	)
+)
+
+
 /* Method to extract core instances from selection (loops all selected objects of scene) */
 fn GetUniqueInstances = 
 (
@@ -83,20 +100,20 @@ fn GetUniqueInstances =
 /* Method to extract core instances from scene (loops all geometry of scene) */
 fn GetUniqueInstancesScene = 
 (
-	local uniqueInstance = #()
+	local uniqueInstanceScene = #()
 	for obj in geometry do
 	(
 		if (InstanceMgr.GetInstances obj &instances) > 1 then
 		(
-			if findItem uniqueInstance instances[1] == 0 do
-				append uniqueInstance instances[1]
+			if findItem uniqueInstanceScene instances[1] == 0 do
+				append uniqueInstanceScene instances[1]
 		)
 		else
 		(
-			append uniqueInstance obj
+			append uniqueInstanceScene obj
 		)
 	)
-	return uniqueInstance
+	return uniqueInstanceScene
 )
 
 fn IsEmptyDestPath SrcPath =

@@ -6,5 +6,10 @@
 	<GameObject2d name="Iris" register="true"/>
 	<GameObject2d name="TestGameObject2d" register="true"/>
 	<GameObject3d name="TestGameObject3d" register="true" pos="0 0 0" dir="0 0 0"/>
+	<GameObject3d name="Ambient" register="true" type="MultiSource">
+		<Source pos="-2.27 1.28 10.09" dir="-2.16 -1.31 -9.10"/> 
+		<Source pos="0.90 -6.07 19.90" dir="1.76 -6.25 20.38"/> 
+		<Source pos="50.46 -7.19 -6.63" dir="49.72 -7.55 -7.20"/> 
+	</GameObject3d>
 </sounds>
   
