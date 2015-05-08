@@ -361,7 +361,8 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
   int l_NumPositions = _GameObjectPosition.size();
 
   AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiSources;
-  AkSoundPosition* l_AKGameObjectPositions = new( std::nothrow ) AkSoundPosition[l_NumPositions];
+  AkSoundPosition* l_AKGameObjectPositions = ( AkSoundPosition* ) malloc( sizeof( AkSoundPosition ) * l_NumPositions );
+  ZeroMemory( l_AKGameObjectPositions, sizeof( AkSoundPosition ) * l_NumPositions );
 
   for ( int i = 0; i < l_NumPositions; ++i )
   {
@@ -381,7 +382,8 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
   else
     l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
 
-  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions, l_NumPositions, l_eMultiPositionType );
+  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions,
+         l_NumPositions, l_eMultiPositionType );
 }
 
 AKRESULT CWWSoundManager::SetState( std::string _Group, std::string _State )
