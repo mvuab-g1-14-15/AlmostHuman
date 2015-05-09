@@ -13,14 +13,6 @@
 #define PI          3.14159265359
 #define Deg2Rad(x)  (x * PI / 180.0)
 
-struct Camera
-{
-	float3 mPosition;
-	float3 mDirection;
-	float3 mRight;
-	float3 mUp;
-};
-
 //
 // Matrices
 //
@@ -29,7 +21,7 @@ float4x4 g_ViewMatrix                                               : View;
 float4x4 g_ViewInverseMatrix                                        : ViewInverse;
 float4x4 g_ProjectionInverseMatrix                                  : ProjectionInverse;
 float4x4 g_ProjectionMatrix                                         : Projection;
-float4x4 g_WorldMatrix                                              : World;
+float4x4 g_WorldMatrix                                              : WorldMatrix;
 float4x4 g_WorldInverseMatrix                                       : WorldInverse;
 float4x4 g_WorldViewMatrix                                          : WorldView;
 float4x4 g_ViewProjMatrix                                           : ViewProjection;
@@ -55,9 +47,11 @@ int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
 // Camera data
 //
 float3      g_CameraPosition                                        : CameraPosition;
-float3      g_CameraUp                                        		: CameraUp;
-float3      g_CameraLeft                                        	: CameraLeft;
-float3      g_CameraLookAt                                          : CameraLookAt;
+
+//
+// Size
+//
+float	    g_Size													: Size;
 
 //
 // Lights data
@@ -260,15 +254,6 @@ void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, fl
 	
 	OutNormal  = normalize(OutNormal);
 	OutTangent = normalize(OutTangent);
-}
-
-Camera GetCurrentCamera()
-{
-	Camera cam;
-	cam.mUp 	  	= g_ViewInverseMatrix[1].xyz;
-	cam.mRight 	  	= g_ViewInverseMatrix[2].xyz;
-	cam.mPosition 	= g_ViewInverseMatrix[3].xyz;
-	cam.mDirection 	= g_ViewInverseMatrix[2].xyz;
 }
 
 #endif // !defined( GLOBALS_FXH )

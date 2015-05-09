@@ -2,6 +2,9 @@
 #ifndef EFFECTS_DEFINES_H
 #define EFFECTS_DEFINES_H
 
+#define DECLARE_EFFECT_PARAMETER( semantic ) D3DXHANDLE m_##semantic;
+#define LINK_EFFECT_PARAMETER( parameter ) GetParameterBySemantic( #parameter, m_##parameter );
+
 //-----------------------------------------------------------------------
 #define MAX_LIGHTS_BY_SHADER 4
 //-----------------------------------------------------------------------
@@ -61,6 +64,10 @@ enum EFogFunction
   eFogGround,
   eFogFunctionCount
 };
+
+//-Size handles ----------------------------------------------------------
+const char Size[]      = "Size";
+
 
 //-Texture size handles -------------------------------------------------
 const char TextureWidthStr[] = "TextureWidth";

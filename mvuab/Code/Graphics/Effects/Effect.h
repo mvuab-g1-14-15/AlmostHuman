@@ -37,7 +37,6 @@ public:
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
 
-  GET_SET( D3DXHANDLE, WorldMatrixParameter );
   GET_SET( D3DXHANDLE, ViewMatrixParameter );
   GET_SET( D3DXHANDLE, ProjectionMatrixParameter );
   GET_SET( D3DXHANDLE, WorldViewMatrixParameter );
@@ -140,7 +139,8 @@ private: // Members
   Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
 
-  D3DXHANDLE m_WorldMatrixParameter, m_ViewMatrixParameter,
+  DECLARE_EFFECT_PARAMETER( WorldMatrix );
+  D3DXHANDLE m_ViewMatrixParameter,
              m_ProjectionMatrixParameter, m_InverseProjectionMatrixParameter,
              m_InverseViewMatrixParameter, m_InverseWorldMatrixParameter;
 
@@ -198,7 +198,11 @@ private: // Members
 
   //Width & Height window
   D3DXHANDLE m_HeightWindow;
-  D3DXHANDLE m_WidthWindow;
+  //D3DXHANDLE m_WidthWindow;
+  DECLARE_EFFECT_PARAMETER( WidthWindow )
+
+  // Size
+  D3DXHANDLE m_Size;
 
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;

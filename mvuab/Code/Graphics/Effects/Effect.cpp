@@ -16,7 +16,6 @@ CEffect::CEffect( const std::string& EffectName )
   : CName( EffectName ),
     m_FileName( "" ),
     m_Effect( 0 ),
-    m_WorldMatrixParameter( 0 ),
     m_ViewMatrixParameter( 0 ),
     m_ProjectionMatrixParameter( 0 ),
     m_WorldViewMatrixParameter( 0 ),
@@ -75,7 +74,6 @@ CEffect::~CEffect()
 void CEffect::SetNullParameters()
 {
   // Reset the parameters
-  m_WorldMatrixParameter = 0;
   m_ViewMatrixParameter = 0;
   m_ProjectionMatrixParameter = 0;
   m_WorldViewMatrixParameter = 0;
@@ -110,26 +108,15 @@ void CEffect::SetNullParameters()
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
 {
   a_Handle = m_Effect->GetParameterBySemantic( 0, SemanticName.c_str() );
-
-  if ( !a_Handle )
-  {
-    LOG_ERROR_APPLICATION(
-      "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(),
-      m_FileName.c_str() );
-    assert( false );
-  }
+  ASSERT( a_Handle, "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(),
+          m_FileName.c_str() );
 }
 
 void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle )
 {
   a_Handle = m_Effect->GetParameterBySemantic( 0, SemanticName );
-
-  if ( !a_Handle )
-  {
-    LOG_ERROR_APPLICATION(
-      "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName, m_FileName.c_str() );
-    assert( false );
-  }
+  ASSERT( a_Handle, "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName,
+          m_FileName.c_str() );
 }
 
 bool CEffect::LoadEffect()
@@ -151,18 +138,16 @@ bool CEffect::LoadEffect()
 
   if ( l_ErrorBuffer )
   {
-    std::string lErrorMsg;
-    StringUtils::Format( lErrorMsg, "Error creating effect '%s':\n%s", m_FileName.c_str(),
-                         l_ErrorBuffer->GetBufferPointer() );
-    LOG_ERROR_APPLICATION( lErrorMsg.c_str() );
-    ASSERT( l_HR == S_OK, "Error loading the effect" );
+    ASSERT( l_HR == S_OK, "Error creating effect '%s':\n%s", m_FileName.c_str(),
+            l_ErrorBuffer->GetBufferPointer() );
     CHECKED_RELEASE( l_ErrorBuffer );
     return false;
   }
 
   ASSERT( m_Effect, "Null Effect" );
   // Get the references to the handlers inside the effect
-  GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
+  LINK_EFFECT_PARAMETER( WorldMatrix );
+  //GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
   GetParameterBySemantic( ViewMatrixParameterStr, m_ViewMatrixParameter );
   GetParameterBySemantic( ProjectionMatrixParameterStr, m_ProjectionMatrixParameter );
   GetParameterBySemantic( InverseWorldMatrixParameterStr, m_InverseWorldMatrixParameter );
@@ -335,7 +320,7 @@ bool CEffect::SetCameraPosition( Math::Vect3f CameraPosition )
 }
 bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
 {
-  return ( m_Effect->SetMatrix( m_WorldMatrixParameter,
+  return ( m_Effect->SetMatrix( m_WorldMatrix,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
 bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
