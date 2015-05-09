@@ -175,7 +175,7 @@ void CPhysicProcess::Update()
         m_Time = 0;
     }
     else if ( m_Salir )
-    { m_Time += deltaTime; }
+    { m_Time += deltaTimeMacro; }
 
 
     //////////////////////////////////////////////////////

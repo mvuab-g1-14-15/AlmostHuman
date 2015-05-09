@@ -16,31 +16,38 @@ class CAnimatedInstanceModel;
 
 class CEnemy : public CCharacter
 {
-public:
-  typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
-  CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
-  virtual ~CEnemy();
-  virtual void Init();
-  virtual void Update();
-  virtual void Render();
-  GET_SET_PTR( CStateMachine, StateMachine );
-  GET_SET_PTR( CRenderableObject, RenderableObject );
-  GET_SET( std::vector<std::string>, NameStates );
-  GET_SET( std::string, CurrentState);
-  GET_SET( bool, OnExit );
-  void ChangeState( std::string NewState );
-  void AddMesh(std::string);
-  CAnimatedInstanceModel* GetAnimationModel();
-protected:
-  EEnemyType m_Type;
-  bool m_OnEnter;
-  bool m_OnExit;
-  // State Machine instance
-  CStateMachine* m_pStateMachine;
-  std::string m_CurrentState;
-  std::string m_NextState;
-  std::vector<std::string> m_NameStates;
-  CRenderableObject* m_pRenderableObject;
+    public:
+        typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
+        CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
+        
+        virtual ~CEnemy();
+        virtual void Init();
+        virtual void Update();
+        virtual void Render();
+        
+        GET_SET_PTR( CStateMachine, StateMachine );
+        GET_SET_PTR( CRenderableObject, RenderableObject );
+
+        GET_SET( std::vector<std::string>, NameStates );
+        GET_SET( std::string, CurrentState);
+        GET_SET( bool, OnExit );
+        
+        void AddMesh(std::string);
+        void ChangeState( std::string NewState );
+        CAnimatedInstanceModel* GetAnimationModel();
+
+    protected:
+        EEnemyType m_Type;
+        bool m_OnEnter;
+        bool m_OnExit;
+        
+        // State Machine instance
+        CStateMachine* m_pStateMachine;
+        std::string m_CurrentState;
+        std::string m_NextState;
+        
+        std::vector<std::string> m_NameStates;
+        CRenderableObject* m_pRenderableObject;
 };
 
 #endif

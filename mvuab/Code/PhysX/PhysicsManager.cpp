@@ -355,7 +355,7 @@ void CPhysicsManager::Update()
     assert( m_pScene != NULL );
     assert( mControllerManager != NULL );
     // Start simulation (non blocking)
-    m_pScene->simulate( deltaTime );
+    m_pScene->simulate( deltaTimeMacro );
     // Fetch simulation results
     m_pScene->flushStream( );
     m_pScene->fetchResults( NX_RIGID_BODY_FINISHED,  true );

@@ -411,7 +411,7 @@ bool CGUIManager::UpdateTransitionEffect()
 {
   if ( m_sTransitionEffect.m_bDoEffect )
   {
-    m_sTransitionEffect.m_fTimeCounter += deltaTime;
+    m_sTransitionEffect.m_fTimeCounter += deltaTimeMacro;
 
     if ( !m_sTransitionEffect.m_bActiveWindows &&
          m_sTransitionEffect.m_fTimeCounter > m_sTransitionEffect.m_fTransitionTime * 0.5f )

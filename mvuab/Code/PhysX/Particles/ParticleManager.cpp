@@ -118,7 +118,7 @@ void CParticleManager::Update()
     {
         if(m_Emitters[i]->GetActive())
         {
-            m_Emitters[i]->Update( deltaTime );
+            m_Emitters[i]->Update( deltaTimeMacro );
         }
         else
         {

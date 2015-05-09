@@ -25,7 +25,7 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-	m_TimeToShoot += deltaTime;
+	m_TimeToShoot += deltaTimeMacro;
 }
 
 void CCharacter::Render()

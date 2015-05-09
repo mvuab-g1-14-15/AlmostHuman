@@ -148,11 +148,11 @@ void CEditableTextBox::Update()
 
     if ( InputManagerInstance->IsDown( IDV_KEYBOARD, KEY_BACK ) )
     {
-      m_BackTime1 += deltaTime;
+      m_BackTime1 += deltaTimeMacro;
 
       if ( m_BackTime1 > 0.7f )
       {
-        m_BackTime2 += deltaTime;
+        m_BackTime2 += deltaTimeMacro;
 
         if ( m_BackTime2 > 0.05f )
         {
@@ -175,7 +175,7 @@ void CEditableTextBox::Update()
 
 
 
-    m_fTimeCount += deltaTime;
+    m_fTimeCount += deltaTimeMacro;
 
     if ( m_fTimeCount > m_fTime )
     {

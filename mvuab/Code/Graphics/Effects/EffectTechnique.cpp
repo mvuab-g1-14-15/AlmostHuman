@@ -113,13 +113,13 @@ bool CEffectTechnique::BeginRender()
   if ( m_UseTime )
   {
     l_Handle = m_Effect->GetTimeParameter();
-    l_Effect->SetFloat( l_Handle, deltaTime );
+    l_Effect->SetFloat( l_Handle, deltaTimeMacro );
   }
 
   if ( m_UseDeltaTime )
   {
     l_Handle = m_Effect->GetDeltaTimeParameter();
-    l_Effect->SetFloat( l_Handle, deltaTime );
+    l_Effect->SetFloat( l_Handle, deltaTimeMacro );
   }
 
   SetupMatrices();

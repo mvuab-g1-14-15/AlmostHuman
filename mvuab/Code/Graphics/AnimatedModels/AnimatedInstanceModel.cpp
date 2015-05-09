@@ -278,7 +278,7 @@ void CAnimatedInstanceModel::Destroy()
 
 void CAnimatedInstanceModel::Update()
 {
-    m_CalModel->update(deltaTime);
+    m_CalModel->update(deltaTimeMacro);
 }
 
 void CAnimatedInstanceModel::ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut)

@@ -56,7 +56,7 @@ void CPointerMouse::Update ()
 
         if (m_bAnimated)
         {
-            m_fCounter += deltaTime;
+            m_fCounter += deltaTimeMacro;
             if (m_fCounter > m_fTime)
             {
                 tTexturesMap::iterator it = m_Textures.find(m_sActiveTexture);

@@ -44,9 +44,7 @@ void CStaticMeshManager::Init()
 
         CStaticMesh *l_StaticMesh = new CStaticMesh();
         if(!l_StaticMesh->Load(file))
-        {
-            CHECKED_DELETE(l_StaticMesh);
-        }
+        { CHECKED_DELETE(l_StaticMesh); }
         else
         { AddResource(name, l_StaticMesh); }
     }

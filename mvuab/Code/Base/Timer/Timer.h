@@ -47,9 +47,9 @@ class CTimer
         uint32          m_uIndex;               // current array position
 };
 
-#define deltaTime CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime()
-#define FPS       CEngine::GetSingletonPtr()->GetTimer()->GetFPS()
-#define MinFPS    CEngine::GetSingletonPtr()->GetTimer()->GetMinFPS()
-#define MaxFPS    CEngine::GetSingletonPtr()->GetTimer()->GetMaxFPS()
+#define deltaTimeMacro  CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime()
+#define FPS             CEngine::GetSingletonPtr()->GetTimer()->GetFPS()
+#define MinFPS          CEngine::GetSingletonPtr()->GetTimer()->GetMinFPS()
+#define MaxFPS          CEngine::GetSingletonPtr()->GetTimer()->GetMaxFPS()
 
 #endif //INC_TIMERMANAGER_H_

@@ -67,7 +67,7 @@ void CImage::Update ()
 {
     if (m_bAnimated)
     {
-        m_fCounter += deltaTime;
+        m_fCounter += deltaTimeMacro;
         if (m_fCounter > m_fTimePerImage)
         {
             m_itVecTextures++;
