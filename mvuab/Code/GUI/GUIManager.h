@@ -30,13 +30,14 @@ class CMap;
 typedef enum EtypeTransitionEffect {TE_SHADOW = 0};
 struct TransitionEffect
 {
-	TransitionEffect::TransitionEffect(): m_bDoEffect(false), m_fTransitionTime(0.f), m_eType(TE_SHADOW), m_sWindowsName(""), m_fTimeCounter(0.f), m_bActiveWindows(false){}
-	bool									m_bDoEffect;
-	float									m_fTransitionTime;
-	float									m_fTimeCounter;
-	std::string						m_sWindowsName;
-	bool									m_bActiveWindows;
-	EtypeTransitionEffect	m_eType;
+  TransitionEffect::TransitionEffect(): m_bDoEffect( false ), m_fTransitionTime( 0.f ), m_eType( TE_SHADOW ), m_sWindowsName( "" ),
+    m_fTimeCounter( 0.f ), m_bActiveWindows( false ) {}
+  bool                  m_bDoEffect;
+  float                 m_fTransitionTime;
+  float                 m_fTimeCounter;
+  std::string           m_sWindowsName;
+  bool                  m_bActiveWindows;
+  EtypeTransitionEffect m_eType;
 
 };
 //---------------------------------------------------------------------------
@@ -45,86 +46,99 @@ class CGUIManager : public CManager
 {
 
 public:
-	// Init and End protocols
-	CGUIManager(const Math::Vect2i& resolution);
-	CGUIManager(const CXMLTreeNode& atts);
-	virtual ~CGUIManager() {Done();}  
+  // Init and End protocols
+  CGUIManager( const Math::Vect2i& resolution );
+  CGUIManager( const CXMLTreeNode& atts );
+  virtual ~CGUIManager()
+  {
+    Done();
+  }
 
 
-	void								Init											();
-	void								Done											();
-	bool								IsOk											() const																						{ return m_bIsOk; }
-	void								Render										();
-	void								RenderPointerMouse				();
-	void								Update										();
-	void								SetScreenResolution				(const Math::Vect2i& resolution);
-	bool								LoadGuiFiles							(const std::string& pathWindows);
-	bool								ReloadGuiFiles						();
-	void								SetMessageBox							(const std::string& text);
-	bool								IsVisibleMessage					() const																						{assert(m_TextBox); return m_TextBox->IsVisible();}
-	void								ActiveWindows							(const std::string& inNameWindow);
-  void                PushWindows               (const std::string& inNameWindow);
-  void                PopWindows                ();
-	void								ActiveWindowsWithEffect		(const std::string& inNameWindow, EtypeTransitionEffect type, float transitionTime );
-	void								SetVisiblePointerMouse		(bool flag)																					{m_bVisiblePointerMouse = flag;}
-	void								Reload();
-	
-	CWindows*							GetWindow(const std::string& NameWindow);
-	//----CScriptRegister interface--------------------------------------------
-	//virtual void				RegisterFunctions					(CScriptManager* scriptManager);
+  void                Init();
+  void                Done();
+  bool                IsOk() const
+  {
+    return m_bIsOk;
+  }
+  void                Render();
+  void                RenderPointerMouse();
+  void                Update();
+  void                SetScreenResolution( const Math::Vect2i& resolution );
+  bool                LoadGuiFiles( const std::string& pathWindows );
+  bool                ReloadGuiFiles();
+  void                SetMessageBox( const std::string& text );
+  bool                IsVisibleMessage() const
+  {
+    assert( m_TextBox );
+    return m_TextBox->IsVisible();
+  }
+  void                ActiveWindows( const std::string& inNameWindow );
+  void                PushWindows( const std::string& inNameWindow );
+  void                PopWindows();
+  void                ActiveWindowsWithEffect( const std::string& inNameWindow, EtypeTransitionEffect type, float transitionTime );
+  void                SetVisiblePointerMouse( bool flag )
+  {
+    m_bVisiblePointerMouse = flag;
+  }
+  void                Reload();
 
-	//-------Funciones para modificar los GuiElements--------------------------
-	void								SetActiveGuiElement				(const std::string& inNameGuiElement, bool flag);
-	void								SetVisibleGuiElement			(const std::string& inNameGuiElement, bool flag);
+  CWindows*             GetWindow( const std::string& NameWindow );
+  //----CScriptRegister interface--------------------------------------------
+  //virtual void        RegisterFunctions         (CScriptManager* scriptManager);
 
-	bool								GetProgressBarValue				(const std::string& inNameGuiElement, float& outValue);
-	bool								SetProgressBarValue				(const std::string& inNameGuiElement, float inValue);
+  //-------Funciones para modificar los GuiElements--------------------------
+  void                SetActiveGuiElement( const std::string& inNameGuiElement, bool flag );
+  void                SetVisibleGuiElement( const std::string& inNameGuiElement, bool flag );
 
-	bool								NextBlockInRadioBox				(const std::string& inNameRadioBox);
-	bool								PrevBlockInRadioBox				(const std::string& inNameRadioBox);
+  bool                GetProgressBarValue( const std::string& inNameGuiElement, float& outValue );
+  bool                SetProgressBarValue( const std::string& inNameGuiElement, float inValue );
 
-	std::string					GetButtonCheckInRadioBox	(const std::string& inNameRadioBox);
-	void								SetButtonCheckInRadioBox	(const std::string& inNameRadioBox, const std::string& button);
+  bool                NextBlockInRadioBox( const std::string& inNameRadioBox );
+  bool                PrevBlockInRadioBox( const std::string& inNameRadioBox );
 
-	void								SetStateCheckButton 			(const std::string& inCheckButtonName, bool state);
-	bool								GetStateCheckButton 			(const std::string& inCheckButtonName);
+  std::string         GetButtonCheckInRadioBox( const std::string& inNameRadioBox );
+  void                SetButtonCheckInRadioBox( const std::string& inNameRadioBox, const std::string& button );
 
-	void								SetStateSlider						(const std::string& inSliderName, float amount);
-	float								GetStateSlider						(const std::string& inSliderName);
+  void                SetStateCheckButton( const std::string& inCheckButtonName, bool state );
+  bool                GetStateCheckButton( const std::string& inCheckButtonName );
 
-	void								SetLiteralInStaticText		(const std::string& inStaticText, const std::string& lit);
-	
-	void								SetEditableTextBox				(const std::string& inEditableTextName, const std::string& text);
-	std::string					GetEditableTextBox				(const std::string& inEditableTextName);
+  void                SetStateSlider( const std::string& inSliderName, float amount );
+  float               GetStateSlider( const std::string& inSliderName );
 
-	void								SetImage									(const std::string& inImageName, const std::string& activeImage);
-	std::string					GetImage									(const std::string& inImageName);
-	void								PlayImage									(const std::string& inImageName, float timePerImage, bool loop);
-	//-----------------------------------------------------------------------------------------------------------//
+  void                SetLiteralInStaticText( const std::string& inStaticText, const std::string& lit );
+
+  void                SetEditableTextBox( const std::string& inEditableTextName, const std::string& text );
+  std::string         GetEditableTextBox( const std::string& inEditableTextName );
+
+  void                SetImage( const std::string& inImageName, const std::string& activeImage );
+  std::string         GetImage( const std::string& inImageName );
+  void                PlayImage( const std::string& inImageName, float timePerImage, bool loop );
+  //-----------------------------------------------------------------------------------------------------------//
 
 private:
-	void								Release										();
-	void								RenderTransitionEffect		();
-	bool								UpdateTransitionEffect		();
+  void                Release();
+  void                RenderTransitionEffect();
+  bool                UpdateTransitionEffect();
 
 private:
-	Math::Vect2i															m_ScreenResolution;
-	bool																m_bIsOk;
-	std::map<std::string, CWindows*>		m_WindowsMap;
-	std::map<std::string, CGuiElement*>	m_ElementsMap;
-	std::string													m_sCurrentWindows;
+  Math::Vect2i                              m_ScreenResolution;
+  bool                                m_bIsOk;
+  std::map<std::string, CWindows*>    m_WindowsMap;
+  std::map<std::string, CGuiElement*> m_ElementsMap;
+  std::string                         m_sCurrentWindows;
   std::vector<std::string>            m_PrevWindows;
-	bool																m_bVisiblePointerMouse;
-	bool																m_bRenderError;
-	bool																m_bUpdateError;
-	CPointerMouse*											m_PointerMouse;
-	CTextBox*														m_TextBox;
-	CConsoleGUI*												m_Console;
-	bool																m_bLoadedGuiFiles;
-	std::string													m_sLastLoadpathGUI_XML;
-	TransitionEffect										m_sTransitionEffect;
-	bool																m_bFirstUpdate;
-	CMap*													m_Map;
+  bool                                m_bVisiblePointerMouse;
+  bool                                m_bRenderError;
+  bool                                m_bUpdateError;
+  CPointerMouse*                      m_PointerMouse;
+  CTextBox*                           m_TextBox;
+  CConsoleGUI*                        m_Console;
+  bool                                m_bLoadedGuiFiles;
+  std::string                         m_sLastLoadpathGUI_XML;
+  TransitionEffect                    m_sTransitionEffect;
+  bool                                m_bFirstUpdate;
+  //CMap*                         m_Map;
 };
 
 #endif //INC_GUI_MANAGER_H

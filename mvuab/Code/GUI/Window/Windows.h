@@ -35,50 +35,55 @@ class CRadioBox;
 class CImage;
 class CProgressBar;
 class CStaticText;
+class CMap;
 //--------------------------
 
 class CWindows
 {
 
 public:
-	CWindows(): m_sLuaCode_OnKeyDown (""), m_uInputKeyDown(0), m_sLuaCode_OnUpdateWindows(""), m_sWindowsName(""),
-							m_sLuaCode_OnLoadWindows(""), m_sLuaCode_OnSaveWindows("") {}
-	virtual ~CWindows();
+  CWindows(): m_sLuaCode_OnKeyDown( "" ), m_uInputKeyDown( 0 ), m_sLuaCode_OnUpdateWindows( "" ), m_sWindowsName( "" ),
+    m_sLuaCode_OnLoadWindows( "" ), m_sLuaCode_OnSaveWindows( "" ) {}
+  virtual ~CWindows();
 
-	void	Render							();
-	void	Update							();
-	bool	AddGuiElement				(CGuiElement * inGuiElement);
-	bool	ReleaseGuiElement		(const std::string & name);
-	void	SetName							(const std::string& name) {m_sWindowsName = name;}
-	CGuiElement* GetElement(const std::string& NameElement);
+  void  Render();
+  void  Update();
+  bool  AddGuiElement( CGuiElement* inGuiElement );
+  bool  ReleaseGuiElement( const std::string& name );
+  void  SetName( const std::string& name )
+  {
+    m_sWindowsName = name;
+  }
+  CGuiElement* GetElement( const std::string& NameElement );
 
-	//--- PARSERFILE FUNCTION ---
-	bool	LoadXML							(const std::string &xmlGuiFile, const Math::Vect2i& screenResolution);
-	void	RegisterElements		(std::map<std::string,CGuiElement*>& elements);
-	void	LoadWindows					();
-	void	SaveWindows					();
-
-private:
-	void	IsKeyDown						();	
-
-	CButton*			LoadButton					( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CCheckButton*		LoadCheckButton			( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CSlider*			LoadSlider					( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CDialogBox*			LoadDialogBox				( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CEditableTextBox*	LoadEditableTextBox (CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CRadioBox*			LoadRadioBox				( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CImage*				_LoadImage					( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CProgressBar*		LoadProgressBar			( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
-	CStaticText*		LoadStaticText			( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm);
+  //--- PARSERFILE FUNCTION ---
+  bool  LoadXML( const std::string& xmlGuiFile, const Math::Vect2i& screenResolution );
+  void  RegisterElements( std::map<std::string, CGuiElement*>& elements );
+  void  LoadWindows();
+  void  SaveWindows();
 
 private:
-	std::vector<CGuiElement*>				m_GuiElementsVector;
-	std::string								m_sLuaCode_OnSaveWindows;
-	std::string								m_sLuaCode_OnLoadWindows;
-	std::string								m_sLuaCode_OnKeyDown;
-	std::string								m_sLuaCode_OnUpdateWindows;
-	uint32									m_uInputKeyDown;
-	std::string								m_sWindowsName;
+  void  IsKeyDown();
+
+  CButton*          LoadButton( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CCheckButton*     LoadCheckButton( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CSlider*          LoadSlider( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CDialogBox*       LoadDialogBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CEditableTextBox* LoadEditableTextBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CRadioBox*        LoadRadioBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CImage*           _LoadImage( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CProgressBar*     LoadProgressBar( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CStaticText*      LoadStaticText( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
+  CMap*             LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution );
+
+private:
+  std::vector<CGuiElement*>       m_GuiElementsVector;
+  std::string               m_sLuaCode_OnSaveWindows;
+  std::string               m_sLuaCode_OnLoadWindows;
+  std::string               m_sLuaCode_OnKeyDown;
+  std::string               m_sLuaCode_OnUpdateWindows;
+  uint32                  m_uInputKeyDown;
+  std::string               m_sWindowsName;
 };
 
 #endif //INC_WINDOWS_H

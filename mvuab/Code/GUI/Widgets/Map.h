@@ -21,8 +21,8 @@ private:
 
 
 public:
-  CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-        const Math::Vect2f position_percent, std::string lit = "", uint32 textHeightOffset = 0, uint32 textWidthOffset = 0,
+  CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent, const Math::Vect2f position_percent,
+        const std::string& Marco, const std::string& Map, const Math::Vect2f pos_0_0, const Math::Vect2f pos_1_1, float h_map, float w_map,
         bool isVisible = true, bool isActive = true );
 
   virtual ~CMap();
@@ -40,6 +40,9 @@ private:
   CTexture*           m_Player;  // Textura del player en el mapa
   CTexture*           m_Camara;  // Textura del player en el mapa
   Math::Vect2f        m_posNPlayer;  // Posición del Player en el mapa/radar
+  Math::Vect2f        m_MinMaxMap[2];
+  float               m_Width_Map;
+  float               m_Height_Map;
   //Math::Vect2f        m_SizeWorld3D;  // Zona del mapa que estamos cubriendo
 };
 

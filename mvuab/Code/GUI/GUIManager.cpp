@@ -47,7 +47,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
   , m_Console( 0 )
-  , m_Map( 0 )
+  //, m_Map( 0 )
 {}
 
 
@@ -66,7 +66,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
   , m_Console( 0 )
-  , m_Map( 0 )
+  // , m_Map( 0 )
 {
 }
 //----------------------------------------------------------------------------
@@ -77,7 +77,7 @@ void CGUIManager::Done()
   if ( IsOk() )
   {
 
-    CHECKED_DELETE( m_Map );
+    //    CHECKED_DELETE( m_Map );
     Release();
     m_bIsOk = false;
   }
@@ -247,7 +247,7 @@ void CGUIManager::Init()
   m_Console = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 90 ), Math::colBLACK, 0U, "", 2U, 2U, false,
                                true );
 
-  m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 68, 65 ) );
+  //m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 68, 65 ) );
 
   /*m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
   m_Map->SetActiveTexture("mapa");*/
@@ -294,8 +294,8 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_Console );
     m_Console->Render();
-    assert( m_Map );
-    m_Map->Render();
+    /*assert( m_Map );
+    m_Map->Render();*/
     //RenderPointerMouse();
 
   }//END if (m_bIsOk)
@@ -339,7 +339,7 @@ void CGUIManager::Update()
 
     m_Console->Update();
 
-    m_Map->Update();
+    //m_Map->Update();
 
     if ( !m_TextBox->IsVisible() && m_bLoadedGuiFiles )
     {

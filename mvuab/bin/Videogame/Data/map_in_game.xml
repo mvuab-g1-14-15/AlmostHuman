@@ -1,16 +1,4 @@
-<map_in_game 
-	x="" 
-	y="" 
-	width="" 
-	height="" 
-	texture_marco="" 
-	texture_map=""   
-	width_map=""     
-	height_map=""    
-	pos_0_0_3d_map=""
-	pos_1_1_3d_map=""
-	>
-	
+<map_in_game pos_in_screen="0 90" width="8" height="40" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/mapa.png" width_map="0.04" height_map="0.04" pos_0_0_3d_map="350.0 550.0"	pos_1_1_3d_map="-50.0 -80.0">	
 	<!--
 	x="" posicion en pantall de marco en X
 	y="" posicion en pantall de marco en Y

@@ -8,7 +8,6 @@
 #include "EngineManagers.h"
 #include "xml/XMLTreeNode.h"
 
-
 //---Elementos que puede contener una Windows--
 #include "Widgets\Button.h"
 #include "Widgets\CheckButton.h"
@@ -19,6 +18,7 @@
 #include "Widgets\Image.h"
 #include "Widgets\StaticText.h"
 #include "Widgets\ProgressBar.h"
+#include "Widgets\Map.h"
 //---------------------------------------------
 
 CWindows::~CWindows()
@@ -323,6 +323,12 @@ bool CWindows::LoadXML( const std::string& xmlGuiFile, const Math::Vect2i& scree
           CStaticText* new_staticText = NULL;
           new_staticText = LoadStaticText( pNewNode, screenResolution, textureM );
           AddGuiElement( new_staticText );
+        }
+        else if ( tagName.compare( "Map" ) == 0 )
+        {
+          CMap* new_Map = NULL;
+          new_Map = LoadMap( pNewNode, screenResolution );
+          AddGuiElement( new_Map );
         }
         else if ( tagName.compare( "KeyBoard_Back" ) == 0 )
         {
@@ -785,6 +791,31 @@ CStaticText*  CWindows::LoadStaticText( CXMLTreeNode& pNewNode, const Math::Vect
   CStaticText* staticText = new CStaticText( screenResolution.y, screenResolution.x, h, w, Math::Vect2f( posx, posy ), l_literal, visible, activated );
   staticText->SetName( name );
   return staticText;
+}
+
+CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution )
+{
+  //<Map name="NameMap" pos_in_screen="0 90" width="8" height="40" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/mapa.png"
+  //width_map="0.02" height_map="0.02" pos_0_0_3d_map="350.0 550.0" pos_1_1_3d_map="-50.0 -80.0" visible="true" active="true">
+  //mark name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+
+  const std::string& name           = pNewNode.GetPszProperty( "name", "Radar" );
+  const std::string& texture_marco  = pNewNode.GetPszProperty( "texture_marco", "Data/textures/GUI/Textures_Test/marco2.png" );
+  const std::string& texture_map    = pNewNode.GetPszProperty( "texture_map", "Data/textures/GUI/Textures_Test/mapa.png" );
+  Math::Vect2f pos_in_screen        = pNewNode.GetVect2fProperty( "pos_in_screen", Math::Vect2f( 0.f, 0.f ) );
+  Math::Vect2f pos_0_0_3d_map       = pNewNode.GetVect2fProperty( "pos_0_0_3d_map", Math::Vect2f( 0.f, 0.f ) );
+  Math::Vect2f pos_1_1_3d_map       = pNewNode.GetVect2fProperty( "pos_1_1_3d_map", Math::Vect2f( 0.f, 0.f ) );
+  float w                           = pNewNode.GetFloatProperty( "width", 8.f );
+  float h                           = pNewNode.GetFloatProperty( "height", 40.f );
+  float w_map                       = pNewNode.GetFloatProperty( "width_map", 0.02f );
+  float h_map                       = pNewNode.GetFloatProperty( "height_map", 0.02f );
+  bool visible                      = pNewNode.GetBoolProperty( "visible", true );
+  bool activated                    = pNewNode.GetBoolProperty( "active", true );
+
+  CMap* l_Map = new CMap( screenResolution.y, screenResolution.x, h, w, pos_in_screen, texture_marco, texture_map, pos_0_0_3d_map, pos_1_1_3d_map,
+                          h_map, w_map, visible, activated );
+
+  return l_Map;
 }
 
 CGuiElement* CWindows::GetElement( const std::string& NameElement )
