@@ -1530,6 +1530,7 @@ bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name 
     {
         CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
         l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+
         CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
         VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
 

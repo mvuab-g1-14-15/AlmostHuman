@@ -55,6 +55,8 @@ public:
   bool            CreatePhysicMesh( const std::string& _BinFilename, const std::string& _NameMesh );
 
   bool            CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces );
+  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f> &_Vertices, std::vector<unsigned int> &_Faces );
+
   bool            SavePhysicMesh( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string& _BinFilename );
 
   bool            CreateMeshFromASE( std::string _FileName, std::string _Name );

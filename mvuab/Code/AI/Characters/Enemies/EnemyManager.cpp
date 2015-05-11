@@ -215,3 +215,8 @@ void CEnemyManager::RegisterEnemies()
     EnemyFactory.Register( "patroll", Type2Type<CPatrolEnemy>( ) );
     EnemyFactory.Register( "boss", Type2Type<CBossEnemy>( ) );
 }
+
+CEnemy* CEnemyManager::GetActualEnemy()
+{
+    return m_ActualEnemy;
+}

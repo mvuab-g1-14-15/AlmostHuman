@@ -6,6 +6,9 @@
 #include "Pathfinding\AStar.h"
 
 //BASE
+#include "Utils\TemplatedVectorMapManager.h"
+#include "Utils\MapManager.h"
+
 #include "Logger\Logger.h"
 #include "Utils\Defines.h"
 #include "Fonts\FontManager.h"
@@ -230,6 +233,36 @@ void CPlayerPhysicProcess::Init()
   //}
 
   //Add Escenario
+  /*std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
+  std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
+  std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
+
+    while(l_itBegin != l_itEnd)
+    {
+        PhysXMInstance->GetCookingMesh()->CreatePhysicMesh(l_itBegin->first, l_itBegin->second->GetVB(), l_itBegin->second->GetIB());
+        l_itBegin++;
+    }
+
+    VecMeshes l_VecMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+    for (VecMeshes::iterator it = l_VecMeshes.begin(); it != l_VecMeshes.end(); it++)
+    {
+        CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData(it->first);
+        CPhysicActor* l_AseMeshActor = new CPhysicActor(l_pPhysicUserDataASEMesh);
+
+        l_AseMeshActor->AddMeshShape(it->second, Vect3f(0, 0, 0));
+        if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(it->first) != 0)
+        {
+            if(PhysXMInstance->AddPhysicActor(l_AseMeshActor))
+            {
+                PhysXMInstance->CMapManager<CPhysicActor>::AddResource( Name, l_AseMeshActor );
+            }
+            else
+            {
+                CHECKED_DELETE(l_AseMeshActor);
+            }
+        }
+    }*/
+
   if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
     LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 

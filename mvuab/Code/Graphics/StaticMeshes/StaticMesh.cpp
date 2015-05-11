@@ -11,7 +11,6 @@
 #include "StaticMesh.h"
 
 #include "Math/AABB.h"
-
 #include "Effects/EffectManager.h"
 
 
@@ -173,17 +172,13 @@ bool CStaticMesh::Load( const std::string& FileName )
         { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType())
         {
-            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28,
-                                     44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount,
-                    l_IdxCount);
+            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
+            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType())
         {
-            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28,
-                                     44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount,
-                    l_IdxCount);
+            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
+            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType())
         { l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
@@ -211,8 +206,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         {
-            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28,
-                                     44, 60);
+            CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
             l_RV = new CIndexedVertexs<TRNM_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
 

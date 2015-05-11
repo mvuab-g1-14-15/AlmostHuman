@@ -58,7 +58,7 @@ public:
   void Reload();
   template<class T>
   static CEnemy* CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode );
-  GET_SET( CEnemy*, ActualEnemy );
+  CEnemy* GetActualEnemy();
 };
 
 #endif

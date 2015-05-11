@@ -84,7 +84,7 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetCurrentState )
     LUA_DECLARE_METHOD( CEnemy, GetLife )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
-    //LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
+    LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
     LUA_END_DECLARATION
 
     LUA_BEGIN_DECLARATION( aLuaState )
