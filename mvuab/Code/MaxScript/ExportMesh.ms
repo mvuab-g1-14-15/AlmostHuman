@@ -326,6 +326,7 @@ struct SMesh
 	(
 		--format "Creating submeshes\n"
     	local l_Material = Obj.material
+		format "-->Material: %\n" l_Material
 		if classof l_Material == Multimaterial then
 		(
 			--format "Saving multimaterial object...\n"
@@ -339,7 +340,7 @@ struct SMesh
 					
 					--format "Material ID: %\n" l_MaterialId
 					
-					if l_materialId != undefined then
+					if l_MaterialId != undefined then
 					(
 						-- Check if the material is not already added
 						if m_MaterialsHashTable.ContainsKey iMaterial == false then
@@ -420,107 +421,110 @@ struct SMesh
 			-- Check if the material is found
 			if m_MaterialsHashTable.ContainsKey l_MaterialId == true then
 			(
-				local l_Type = m_SubMeshes[l_MaterialId].m_Material.m_Type
-				
-				local l_NewVertex1 = SVertex()
-				local l_NewVertex2 = SVertex()
-				local l_NewVertex3 = SVertex()
-				
-				l_NewVertex1.m_Type = l_Type
-				l_NewVertex2.m_Type = l_Type
-				l_NewVertex3.m_Type = l_Type
-              
-				-- Para coger los indices de la primera cara
-				local IdxsFace=getFace Obj iFaces
-				
-				--format "Face: %\n" IdxsFace
-				-- Para coger los vértices de la primera cara
-				local Coord1=getVert Obj IdxsFace.x*InvTransform
-				local Coord2=getVert Obj IdxsFace.y*InvTransform
-				local Coord3=getVert Obj IdxsFace.z*InvTransform
-              
-              	l_NewVertex1.m_Position = Coord1
-                l_NewVertex2.m_Position = Coord2
-                l_NewVertex3.m_Position = Coord3
-
-				local l_FaceNormal = getFaceNormal Obj iFaces
-				local l_SmoothValue = getFaceSmoothGroup Obj iFaces
-				
-				-- Para coger las normales de los vértices de la primera cara
-				local Normal1 = UABGetVertexNormal Obj IdxsFace.x l_SmoothValue l_FaceNormal
-				local Normal2 = UABGetVertexNormal Obj IdxsFace.y l_SmoothValue l_FaceNormal
-				local Normal3 = UABGetVertexNormal Obj IdxsFace.z l_SmoothValue l_FaceNormal
-              
-                --igual con normales
-                l_NewVertex1.m_Normal = Normal1
-                l_NewVertex2.m_Normal = Normal2
-                l_NewVertex3.m_Normal = Normal3
-
-				if ((bit.and l_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+				if m_SubMeshes[l_MaterialId] != undefined then
 				(
-					/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
-					conjunto de coordenadas aplicadas sobre la cara */
-					local IdxsMap = meshop.getMapFace Obj 1 iFaces
+					local l_Type = m_SubMeshes[l_MaterialId].m_Material.m_Type
 					
-					-- Para coger las coordenadas de los vértices de la primera cara
-					local TUV1Map1= meshop.getMapVert Obj 1 IdxsMap.x
-					local TUV1Map2= meshop.getMapVert Obj 1 IdxsMap.y
-					local TUV1Map3= meshop.getMapVert Obj 1 IdxsMap.z
-				
-					l_NewVertex1.m_UV = point2 TUV1Map1.x (1.0 - TUV1Map1.y)
-					l_NewVertex2.m_UV = point2 TUV1Map2.x (1.0 - TUV1Map2.y)
-					l_NewVertex3.m_UV = point2 TUV1Map3.x (1.0 - TUV1Map3.y)
-				)
-			
-				if ((bit.and l_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
-				(
-					local IdxsMap = meshop.getMapFace Obj 2 iFaces
-			  
-					-- Para coger las coordenadas de los vértices de la primera cara
-					local TUV2Map1= meshop.getMapVert Obj 2 IdxsMap.x
-					local TUV2Map2= meshop.getMapVert Obj 2 IdxsMap.y
-					local TUV2Map3= meshop.getMapVert Obj 2 IdxsMap.z
-			  
-					l_NewVertex1.m_UV2 = point2 TUV2Map1.x (1.0 - TUV2Map1.y)
-					l_NewVertex2.m_UV2 = point2 TUV2Map2.x (1.0 - TUV2Map2.y)
-					l_NewVertex3.m_UV2 = point2 TUV2Map3.x (1.0 - TUV2Map3.y)
-				)
-			
-				if (bit.and l_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
-				(
-					l_Binormal1 = point3 0 0 0
-					l_Binormal2 = point3 0 0 0
-					l_Binormal3 = point3 0 0 0
-					l_NewVertex1.m_Binormal = l_Binormal1
-					l_NewVertex2.m_Binormal = l_Binormal2
-					l_NewVertex3.m_Binormal = l_Binormal3
+					local l_NewVertex1 = SVertex()
+					local l_NewVertex2 = SVertex()
+					local l_NewVertex3 = SVertex()
 					
-					l_Tan1 = point3 0 0 0
-					l_Tan2 = point3 0 0 0
-					l_Tan3 = point3 0 0 0
-					l_NewVertex1.m_Tan = l_Tan1
-					l_NewVertex2.m_Tan = l_Tan2
-					l_NewVertex3.m_Tan = l_Tan3
-				)
-			
-				if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
-				(
-					--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
-					l_Color = 0
-					l_NewVertex1.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
-					l_NewVertex2.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
-					l_NewVertex3.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
-				)
-		
-				-- Add the new vertex
-				local l_Id1 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex1
-				local l_Id2 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex2
-				local l_Id3 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex3
+					l_NewVertex1.m_Type = l_Type
+					l_NewVertex2.m_Type = l_Type
+					l_NewVertex3.m_Type = l_Type
+				  
+					-- Para coger los indices de la primera cara
+					local IdxsFace=getFace Obj iFaces
+					
+					--format "Face: %\n" IdxsFace
+					-- Para coger los vértices de la primera cara
+					local Coord1=getVert Obj IdxsFace.x*InvTransform
+					local Coord2=getVert Obj IdxsFace.y*InvTransform
+					local Coord3=getVert Obj IdxsFace.z*InvTransform
+				  
+					l_NewVertex1.m_Position = Coord1
+					l_NewVertex2.m_Position = Coord2
+					l_NewVertex3.m_Position = Coord3
+
+					local l_FaceNormal = getFaceNormal Obj iFaces
+					local l_SmoothValue = getFaceSmoothGroup Obj iFaces
+					
+					-- Para coger las normales de los vértices de la primera cara
+					local Normal1 = UABGetVertexNormal Obj IdxsFace.x l_SmoothValue l_FaceNormal
+					local Normal2 = UABGetVertexNormal Obj IdxsFace.y l_SmoothValue l_FaceNormal
+					local Normal3 = UABGetVertexNormal Obj IdxsFace.z l_SmoothValue l_FaceNormal
+				  
+					--igual con normales
+					l_NewVertex1.m_Normal = Normal1
+					l_NewVertex2.m_Normal = Normal2
+					l_NewVertex3.m_Normal = Normal3
+
+					if ((bit.and l_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
+					(
+						/* Para coger los índices de las coordenadas de textura de la primera cara, el 1 señala al primer
+						conjunto de coordenadas aplicadas sobre la cara */
+						local IdxsMap = meshop.getMapFace Obj 1 iFaces
+						
+						-- Para coger las coordenadas de los vértices de la primera cara
+						local TUV1Map1= meshop.getMapVert Obj 1 IdxsMap.x
+						local TUV1Map2= meshop.getMapVert Obj 1 IdxsMap.y
+						local TUV1Map3= meshop.getMapVert Obj 1 IdxsMap.z
+					
+						l_NewVertex1.m_UV = point2 TUV1Map1.x (1.0 - TUV1Map1.y)
+						l_NewVertex2.m_UV = point2 TUV1Map2.x (1.0 - TUV1Map2.y)
+						l_NewVertex3.m_UV = point2 TUV1Map3.x (1.0 - TUV1Map3.y)
+					)
 				
-				-- Add the new indexes
-				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id1
-				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
-				m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
+					if ((bit.and l_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
+					(
+						local IdxsMap = meshop.getMapFace Obj 2 iFaces
+				  
+						-- Para coger las coordenadas de los vértices de la primera cara
+						local TUV2Map1= meshop.getMapVert Obj 2 IdxsMap.x
+						local TUV2Map2= meshop.getMapVert Obj 2 IdxsMap.y
+						local TUV2Map3= meshop.getMapVert Obj 2 IdxsMap.z
+				  
+						l_NewVertex1.m_UV2 = point2 TUV2Map1.x (1.0 - TUV2Map1.y)
+						l_NewVertex2.m_UV2 = point2 TUV2Map2.x (1.0 - TUV2Map2.y)
+						l_NewVertex3.m_UV2 = point2 TUV2Map3.x (1.0 - TUV2Map3.y)
+					)
+				
+					if (bit.and l_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
+					(
+						l_Binormal1 = point3 0 0 0
+						l_Binormal2 = point3 0 0 0
+						l_Binormal3 = point3 0 0 0
+						l_NewVertex1.m_Binormal = l_Binormal1
+						l_NewVertex2.m_Binormal = l_Binormal2
+						l_NewVertex3.m_Binormal = l_Binormal3
+						
+						l_Tan1 = point3 0 0 0
+						l_Tan2 = point3 0 0 0
+						l_Tan3 = point3 0 0 0
+						l_NewVertex1.m_Tan = l_Tan1
+						l_NewVertex2.m_Tan = l_Tan2
+						l_NewVertex3.m_Tan = l_Tan3
+					)
+				
+					if ((bit.and l_Type VERTEX_TYPE_DIFFUSE) == VERTEX_TYPE_DIFFUSE) then
+					(
+						--l_Color = bit.shift Obj.material[l_MaterialId].diffuse.r 24 + bit.shift Obj.material[l_MaterialId].diffuse.g 16 + bit.shift Obj.material[l_MaterialId].diffuse.b 8 + Obj.material[l_MaterialId].diffuse.a
+						l_Color = 0
+						l_NewVertex1.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+						l_NewVertex2.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+						l_NewVertex3.m_Color = m_SubMeshes[l_MaterialId].m_Material.m_Color
+					)
+			
+					-- Add the new vertex
+					local l_Id1 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex1
+					local l_Id2 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex2
+					local l_Id3 = m_SubMeshes[l_MaterialId].m_VB.AddVertex l_NewVertex3
+					
+					-- Add the new indexes
+					m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id1
+					m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id3
+					m_SubMeshes[l_MaterialId].m_IB.AddIndex l_Id2
+				)
 			)
 			
 		)	

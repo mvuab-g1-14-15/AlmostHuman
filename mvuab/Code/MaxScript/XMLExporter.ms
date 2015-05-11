@@ -261,9 +261,22 @@ fn ExportTextureFile AllObj DestPath =
 
 function GenerateMeshes aObjects MeshDir =
 (
+	local ObjectsProcessed = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
 	for Obj in aObjects do
 	(
-		filename = MeshDir +"\\"+ Obj.name + ".mesh"--poner parametrico
+		local ObjName = Obj.name
+		if (ObjectsProcessed.ContainsKey (ObjName)) == true then
+		(
+			local index = ObjectsProcessed.Item[ObjName] + 1
+			ObjectsProcessed.Remove ObjName
+			ObjectsProcessed.Add ObjName index
+			ObjName = ObjName + "_" + (index as string)
+		)
+		else
+		(
+			ObjectsProcessed.Add ObjName 0
+		)
+		filename = MeshDir +"\\"+ ObjName + ".mesh"--poner parametrico
 		local file = fopen filename "wb"
 		local l_ObjectMesh = SMesh()
 		l_ObjectMesh.InitFromMaxObject Obj
