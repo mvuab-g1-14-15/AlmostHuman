@@ -14,6 +14,7 @@
 	
 	<Map name="Radar" pos_in_screen="68 65" width="30" height="30" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/GUI/Textures_Test/mapa.png"
 	 width_map="0.02" height_map="0.02" pos_0_0_3d_map="350.0 550.0" pos_1_1_3d_map="-50.0 -80.0" visible="true" active="true">
-		<mark name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
-	</Map>
+		<mark_player name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+		<item name="door1" texture="Data/textures/GUI/Textures_Test/alcantarilla.jpg" pos_in_map="3.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+		<item name="door2" texture="Data/textures/GUI/Textures_Test/alcantarilla.jpg" pos_in_map="-2.0 6.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>	</Map>
 </Windows>

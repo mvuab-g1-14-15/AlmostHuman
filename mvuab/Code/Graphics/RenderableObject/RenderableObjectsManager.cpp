@@ -43,13 +43,11 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
     if ( l_TagName == "MeshInstance" )
     {
       CInstanceMesh* l_InstanceMesh = new CInstanceMesh( m( i ) );
-
       if ( !AddResource( l_Name, l_InstanceMesh ) ) CHECKED_DELETE( l_InstanceMesh );
     }
     else if ( l_TagName == "AnimatedInstance" )
     {
       CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( m( i ) );
-
       if ( !AddResource( l_Name, l_AnimatedInstance ) ) CHECKED_DELETE( l_AnimatedInstance );
     }
   }

@@ -52,6 +52,7 @@ void CRenderableObjectsLayersManager::Init()
           if(TreeNode( i ).GetBoolProperty("default", false))
           {
               m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+
               if (!AddResource( lName, m_DefaultRenderableObjectManager)) 
               {
                   LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
@@ -61,6 +62,7 @@ void CRenderableObjectsLayersManager::Init()
           else
           {
               CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+
               if (!AddResource(lName, RenderableObjectManager))
               {
                   LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
@@ -76,6 +78,7 @@ void CRenderableObjectsLayersManager::Init()
           if (lTagName == "MeshInstance")
           {
               CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
+
               if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
               {
                   LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
@@ -85,6 +88,7 @@ void CRenderableObjectsLayersManager::Init()
           else if (lTagName == "AnimatedInstance")
           {
               CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel(TreeNode(i));
+
               if (!lRenderableObjectManager->AddResource(lName, l_AnimatedInstance))
               {
                   LOG_ERROR_APPLICATION("Error adding animated mesh %s!", lName.c_str());

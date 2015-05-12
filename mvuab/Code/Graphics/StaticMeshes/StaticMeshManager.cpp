@@ -8,9 +8,7 @@ CStaticMeshManager::CStaticMeshManager() : CManager()
 {
 }
 
-
-CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts)
-    : CManager(atts)
+CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts) : CManager(atts)
 {
 }
 
