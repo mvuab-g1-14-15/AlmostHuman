@@ -52,10 +52,18 @@ template<class T> class CMapManager
             return true;
         }
 
+        bool Exist( const std::string& aName )
+        {
+            return m_Resources.find(aName) != m_Resources.end();
+        }
+
         void Destroy()
         {
             TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
-            for (; itb != ite; ++itb) { CHECKED_DELETE(itb->second); }
+            for (; itb != ite; ++itb)
+            {
+                CHECKED_DELETE(itb->second);
+            }
 
             m_Resources.clear();
         }

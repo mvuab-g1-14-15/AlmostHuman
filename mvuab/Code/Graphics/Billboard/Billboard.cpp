@@ -46,8 +46,10 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
     lOk = lOk && ( m_Texture != 0 );
 
     // Get the technique of the billboard
-    mTechnique = EffectManagerInstance->GetEffectTechnique(atts.GetPszProperty("technique") );
+    mTechnique = EffectManagerInstance->GetEffectTechnique( atts.GetPszProperty("technique"));
     lOk = lOk && ( mTechnique != 0 );
+
+    ASSERT(mTechnique, "Null technique %s to render the billboard!", atts.GetPszProperty("technique") )
 
     return lOk;
 }

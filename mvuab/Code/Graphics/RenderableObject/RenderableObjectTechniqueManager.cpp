@@ -81,14 +81,23 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
     return l_VertexType.str();
 }
 
-void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique( const std::string& ROTName,
-        const std::string& TechniqueName )
+void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique
+(
+    const std::string& aROTName,
+    const std::string& aTechniqueName )
 {
-    CRenderableObjectTechnique* l_RenderableObjectTechnique = new CRenderableObjectTechnique( ROTName,
-            EffectManagerInstance->GetResource( TechniqueName ) );
+    // Only store the default renderable objects techniques, therefore check if they exist before inserting them
+    if( !Exist(aROTName) )
+    {
+        CRenderableObjectTechnique* lRenderableObjectTechnique =
+            new CRenderableObjectTechnique( aROTName,
+                                            EffectManagerInstance->GetResource( aTechniqueName ) );
 
-    if(!AddResource(ROTName, l_RenderableObjectTechnique) )
-    { CHECKED_DELETE(l_RenderableObjectTechnique); }
+        if( !AddResource(aROTName, lRenderableObjectTechnique) )
+        {
+            CHECKED_DELETE(lRenderableObjectTechnique);
+        }
+    }
 }
 
 void CRenderableObjectTechniqueManager::ReLoad()

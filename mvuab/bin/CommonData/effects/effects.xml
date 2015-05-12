@@ -50,12 +50,12 @@
 	</technique>
 	
 	<technique name="BloomFilter" vertex_type="1104">
-		<effect name="BloomEffect" file="../CommonData/effects/BloomGaussianCombine.fx"/>
+		<effect name="BloomEffectFilter" file="../CommonData/effects/BloomGaussianCombine.fx"/>
 		<handles/>
 	</technique>
 	
 	<technique name="CombineBloomTechnique" vertex_type="1104">
-		<effect name="BloomEffect" file="../CommonData/effects/BloomGaussianCombine.fx"/>
+		<effect name="BloomEffectGaussianCombine" file="../CommonData/effects/BloomGaussianCombine.fx"/>
 		<handles/>
 	</technique>
 	
