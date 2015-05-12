@@ -18,7 +18,25 @@ class CTexture;
 class CMap: public CGuiElement
 {
 private:
-
+  class CItemMap
+  {
+  public:
+    std::string           m_Name;
+    CTexture*             m_Texture;
+    Math::Vect2f          m_PosInMap;
+    uint32                 m_Width;
+    uint32                 m_Height;
+    CItemMap( std::string Name, CTexture* Texture, Math::Vect2f PosInMap, uint32 Width, uint32 Height );
+  };
+  class CPlayer
+  {
+  public:
+    std::string           m_Name;
+    CTexture*             m_Texture;
+    uint32                 m_Width;
+    uint32                 m_Height;
+    CPlayer( std::string Name, CTexture* Texture, uint32 Width, uint32 Height );
+  };
 
 public:
   CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent, const Math::Vect2f position_percent,
@@ -33,16 +51,19 @@ public:
   virtual void  OnClickedChild( const std::string& name );
   Math::Vect2f  NormalizePlayerPos( float x, float z );
 
+  void AddItem( const std::string& Name, const std::string& Texture, Math::Vect2f PosInMap3D, uint32 Width, uint32 Height );
+  void AddPlayer( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height );
 
 private:
   CTexture*           m_Marco;
   CTexture*           m_Mapa;  // Textura del mapa/radar del escenario
-  CTexture*           m_Player;  // Textura del player en el mapa
+  CPlayer*            m_Player;  // Textura del player en el mapa
   CTexture*           m_Camara;  // Textura del player en el mapa
   Math::Vect2f        m_posNPlayer;  // Posición del Player en el mapa/radar
   Math::Vect2f        m_MinMaxMap[2];
   float               m_Width_Map;
   float               m_Height_Map;
+  std::vector<CItemMap*>   m_vItems;
   //Math::Vect2f        m_SizeWorld3D;  // Zona del mapa que estamos cubriendo
 };
 
