@@ -15,98 +15,105 @@ CConsoleGUI::CConsoleGUI( uint32 windowsHeight, uint32 windowsWidth, float heigh
                           float witdh_percent,
                           const Math::Vect2f position_percent, Math::CColor textColor, uint32 fontID,
                           std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
-                          bool isVisible,  bool isActive )
-  : CEditableTextBox( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, textColor, fontID, lit,
-                      textHeightOffset, textWidthOffset, isVisible, isActive )
+                          bool isVisible, bool isActive )
+    : CEditableTextBox( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, textColor, fontID,
+                        lit,
+                        textHeightOffset, textWidthOffset, isVisible, isActive )
 
 {
 }
 
 CConsoleGUI::~CConsoleGUI()
 {
-  CEditableTextBox::~CEditableTextBox();
+    CEditableTextBox::~CEditableTextBox();
 }
 
 //---------------Interfaz de GuiElement----------------------
 void CConsoleGUI::Render()
 {
-  CEditableTextBox::Render();
+    CEditableTextBox::Render();
 }
 
 void CConsoleGUI::Update()
 {
-  if ( ActionManagerInstance->DoAction( "ConsolaGUI" ) )
-  {
-    if ( GetVisible() )
-      SetVisible( false );
-    else
-      SetVisible( true );
-  }
-
-  CEditableTextBox::Update();
-
-  if ( IsReturnPress() )
-  {
-    ScriptMInstance->RunCode( GetBuffer() );
-    std::vector<std::string>::iterator it = m_vBuffer.begin()
-                                            , it_end = m_vBuffer.end();
-
-    for ( ; it != it_end; ++it )
-      if ( *it == GetBuffer() )
-        break;
-
-    if ( it == it_end )
+    if ( ActionManagerInstance->DoAction( "ConsolaGUI" ) )
     {
-      m_vBuffer.push_back( GetBuffer() );
-      m_itActual = m_vBuffer.end();
-      --m_itActual;
+        if ( GetVisible() )
+        {
+            SetVisible( false );
+        }
+        else
+        {
+            SetVisible( true );
+        }
     }
 
-    /*m_vBuffer.push_back( GetBuffer() );
-    m_itActual = m_vBuffer.end();
-    --m_itActual;*/
-    SetBuffer( "" );
-    SetsFocusObject( " " );
-    SetbShift( false );
-    SetuCursorPos( 0 );
-  }
+    CEditableTextBox::Update();
 
-  if ( ActionManagerInstance->DoAction( "ForwardGUI" ) )
-  {
+    if ( IsReturnPress() )
+    {
+        ScriptMInstance->RunCode( GetBuffer() );
+        std::vector<std::string>::iterator it = m_vBuffer.begin()
+                                                , it_end = m_vBuffer.end();
 
-    if ( m_itActual == m_vBuffer.begin() )
-    {
-      SetBuffer( ( *m_itActual ) );
-      m_itActual = m_vBuffer.end();
-      --m_itActual;
-    }
-    else if ( m_itActual == m_vBuffer.end() )
-    {
-      --m_itActual;
-      SetBuffer( ( *m_itActual ) );
-      --m_itActual;
-    }
-    else
-    {
-      SetBuffer( ( *m_itActual ) );
-      --m_itActual;
-    }
-  }
-  else if ( ActionManagerInstance->DoAction( "BackwarGUI" ) )
-  {
+        for ( ; it != it_end; ++it )
+            if ( *it == GetBuffer() )
+            {
+                break;
+            }
 
-    if ( m_itActual == m_vBuffer.end() )
-    {
-      m_itActual = m_vBuffer.begin();
-      SetBuffer( ( *m_itActual ) );
-      ++m_itActual;
+        if ( it == it_end )
+        {
+            m_vBuffer.push_back( GetBuffer() );
+            m_itActual = m_vBuffer.end();
+            --m_itActual;
+        }
+
+        /*  m_vBuffer.push_back( GetBuffer() );
+            m_itActual = m_vBuffer.end();
+            --m_itActual;*/
+        SetBuffer( "" );
+        SetsFocusObject( " " );
+        SetbShift( false );
+        SetuCursorPos( 0 );
     }
-    else
+
+    if ( ActionManagerInstance->DoAction( "ForwardGUI" ) )
     {
-      SetBuffer( ( *m_itActual ) );
-      ++m_itActual;
+
+        if ( m_itActual == m_vBuffer.begin() )
+        {
+            SetBuffer( ( *m_itActual ) );
+            m_itActual = m_vBuffer.end();
+            --m_itActual;
+        }
+        else if ( m_itActual == m_vBuffer.end() )
+        {
+            --m_itActual;
+            SetBuffer( ( *m_itActual ) );
+            --m_itActual;
+        }
+        else
+        {
+            SetBuffer( ( *m_itActual ) );
+            --m_itActual;
+        }
     }
-  }
+    else if ( ActionManagerInstance->DoAction( "BackwarGUI" ) )
+    {
+
+        if ( m_itActual == m_vBuffer.end() )
+        {
+            m_itActual = m_vBuffer.begin();
+            SetBuffer( ( *m_itActual ) );
+            ++m_itActual;
+        }
+        else
+        {
+            SetBuffer( ( *m_itActual ) );
+            ++m_itActual;
+        }
+    }
 }
 
 

@@ -6,9 +6,9 @@
 #include "Fonts/FontManager.h"
 #include "EngineManagers.h"
 
-CGuiElement::CGuiElement(   uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent,
-                            Math::Vect2f position_percent, TypeGuiElement type, std::string lit, uint32 textHeightOffset,
-                            uint32 textWidthOffset, bool isVisible, bool isActive)
+CGuiElement::CGuiElement(  uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent,
+                           Math::Vect2f position_percent, TypeGuiElement type, std::string lit, uint32 textHeightOffset,
+                           uint32 textWidthOffset, bool isVisible, bool isActive)
 
     : m_uWindowsHeight( windowsHeight )
     , m_uWindowsWidth(windowsWidth )
@@ -31,46 +31,46 @@ CGuiElement::CGuiElement(   uint32 windowsHeight, uint32 windowsWidth, float hei
     , m_uTextHeightOffset(textHeightOffset)
     , m_uTextWidthOffset(textWidthOffset)
 {
-    m_uWidth    = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
-    m_uHeight   = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
-    m_Position.x    = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
-    m_Position.y    = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
+    m_uWidth  = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
+    m_uHeight  = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
+    m_Position.x  = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
+    m_Position.y  = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
 }
 
 
-void CGuiElement::SetWindowsWidth (uint32   w)
+void CGuiElement::SetWindowsWidth (uint32  w)
 {
     m_uWindowsWidth = w;
-    m_uWidth    = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
-    m_Position.x    = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
+    m_uWidth  = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
+    m_Position.x  = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
 }
 
-void CGuiElement::SetWindowsHeight (uint32  h)
+void CGuiElement::SetWindowsHeight (uint32 h)
 {
     m_uWindowsHeight = h;
-    m_uHeight   = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
-    m_Position.y    = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
+    m_uHeight  = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
+    m_Position.y  = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
 }
 
 void CGuiElement::SetHeightPercent (float height_percent)
 {
     m_fHeightPercent = height_percent;
-    m_uHeight   = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
+    m_uHeight  = (uint32)(m_fHeightPercent * 0.01f * m_uWindowsHeight);
 }
 
 void CGuiElement::SetWidthPercent (float width_percent)
 {
     m_fWidthPercent = width_percent;
-    m_uWidth    = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
+    m_uWidth  = (uint32)(m_fWidthPercent * 0.01f * m_uWindowsWidth);
 }
 
 void CGuiElement::SetPositionPercent (const Math::Vect2f& pos)
 {
     m_PositionPercent = pos;
-    m_Position.x    = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
-    m_Position.y    = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
+    m_Position.x  = (uint32) (m_uWindowsWidth * 0.01f * m_PositionPercent.x );
+    m_Position.y  = (uint32) (m_uWindowsHeight * 0.01f * m_PositionPercent.y);
 }
-void    CGuiElement::SetPosition (const Math::Vect2i& pos)
+void  CGuiElement::SetPosition (const Math::Vect2i& pos)
 {
     m_Position = pos;
     m_PositionPercent.x = (float) ((float)pos.x / (float)m_uWindowsWidth) * 100;
@@ -81,11 +81,11 @@ void CGuiElement::CalculatePosMouse( const Math::Vect2i& mousePosition )
 {
     if( m_bIsActive && m_bIsVisible )
     {
-        //  (0,0) ________
-        //       |                  |
-        //       |GuiElement|
-        //       |                  |
-        //        ----------(m_fWidth, m_fHeight)
+        // (0,0) ________
+        //  |  |
+        //  |GuiElement|
+        //  |  |
+        // ----------(m_fWidth, m_fHeight)
 
         if( (mousePosition.x > m_Position.x) && (mousePosition.x < m_Position.x + (int32)m_uWidth) &&
                 (mousePosition.y > m_Position.y) && (mousePosition.y < m_Position.y + (int32)m_uHeight) )

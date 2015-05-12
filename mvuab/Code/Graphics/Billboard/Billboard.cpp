@@ -142,6 +142,6 @@ void CBillboard::CreateBillBoardGeometry()
 
 void CBillboard::DestroyBillBoardGeometry()
 {
-    ASSERT(sRV != 0, "The billboard geometry is already initialized");
+    ASSERT(sRV != 0, "The billboard geometry is already destroyed");
     CHECKED_DELETE(sRV);
 }

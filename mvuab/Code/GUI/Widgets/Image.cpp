@@ -49,12 +49,18 @@ void CImage::Render ()
             uint32 w = CGuiElement::m_uWidth;
             uint32 h = CGuiElement::m_uHeight;
             if (m_bIsQuadrant)
-            { h = CGuiElement::m_uWidth; }
+            {
+                h = CGuiElement::m_uWidth;
+            }
             //TODO RAUL
             if (texture)
-            { GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h,  CGraphicsManager::UPPER_LEFT, texture, m_eFlip); }
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h, CGraphicsManager::UPPER_LEFT, texture, m_eFlip);
+            }
             else
-            { GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h,  CGraphicsManager::UPPER_LEFT, m_Color); }
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h, CGraphicsManager::UPPER_LEFT, m_Color);
+            }
         }
 
         //Finalmente renderizamos el texto:
@@ -89,11 +95,11 @@ void CImage::PlayAnimation (float timePerImage, bool loop)
 {
     assert(m_Textures.size() > 0);
 
-    m_bAnimated         = true;
-    m_bLoop                 = loop;
+    m_bAnimated = true;
+    m_bLoop  = loop;
     m_fTimePerImage = timePerImage;
     m_itVecTextures = m_VecTextures.begin();
-    m_fCounter          = 0.f;
+    m_fCounter  = 0.f;
 }
 
 void CImage::SetTexture (CTexture* texture, std::string name )

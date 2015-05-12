@@ -9,8 +9,8 @@
 
 
 //---Constructor
-CPointerMouse::CPointerMouse(   uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                                const Math::Vect2f position_percent, bool isVisible, bool isActive)
+CPointerMouse::CPointerMouse(  uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
+                               const Math::Vect2f position_percent, bool isVisible, bool isActive)
     : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, IMAGE, "", 0, 0, isVisible,
                    isActive)
     , m_sActiveTexture( "default" )
