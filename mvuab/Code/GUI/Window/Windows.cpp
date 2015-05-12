@@ -815,6 +815,29 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
   CMap* l_Map = new CMap( screenResolution.y, screenResolution.x, h, w, pos_in_screen, texture_marco, texture_map, pos_0_0_3d_map, pos_1_1_3d_map,
                           h_map, w_map, visible, activated );
 
+  int count = pNewNode.GetNumChildren();
+
+  for ( int i = 0; i < count; ++i )
+  {
+    CXMLTreeNode pSubNewNode = pNewNode( i );
+    std::string NameItem    = pSubNewNode.GetPszProperty( "name", "defaultItemElement" );
+    std::string TextureItem = pSubNewNode.GetPszProperty( "texture", "no_texture" );
+    uint32 WidthItem        = pSubNewNode.GetIntProperty( "width", 50 );
+    uint32 HeightItem       = pSubNewNode.GetIntProperty( "height", 50 );
+
+    std::string tagName = pSubNewNode.GetName();
+
+    if ( tagName.compare( "item" ) == 0 )
+    {
+      Math::Vect2f pos     = pSubNewNode.GetVect2fProperty( "pos_in_map", Math::Vect2f( 0.f, 0.f ) );
+      l_Map->AddItem( NameItem, TextureItem, pos, WidthItem, HeightItem );
+    }
+
+    if ( tagName.compare( "mark_player" ) == 0 )
+      l_Map->AddPlayer( NameItem, TextureItem, WidthItem, HeightItem );
+
+  }
+
   return l_Map;
 }
 
