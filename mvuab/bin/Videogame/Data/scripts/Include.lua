@@ -1,3 +1,5 @@
+dofile("./data/scripts/IdManager.lua")
+
 engine = CEngine.GetSingletonPtr()
 action_manager = GetActionManager()
 action_manager_lua_wrapper = CActionManagerLuaWrapper()
@@ -12,6 +14,7 @@ particle_manager = GetParticleManager()
 sound_manager = GetSoundManager()
 process = CEngine.GetSingletonPtr():GetProcess()
 gui_manager = GetGUIManager()
+id_manager = CIdManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0
