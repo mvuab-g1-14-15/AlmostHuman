@@ -233,7 +233,7 @@ void CPlayerPhysicProcess::Init()
   //}
 
   //Add Escenario
-  /*std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
+  std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
   std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
   std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
 
@@ -250,21 +250,26 @@ void CPlayerPhysicProcess::Init()
         CPhysicActor* l_AseMeshActor = new CPhysicActor(l_pPhysicUserDataASEMesh);
 
         l_AseMeshActor->AddMeshShape(it->second, Vect3f(0, 0, 0));
-        if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(it->first) != 0)
+        bool oK = false;
+
+        if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(it->first) == 0)
         {
             if(PhysXMInstance->AddPhysicActor(l_AseMeshActor))
             {
-                PhysXMInstance->CMapManager<CPhysicActor>::AddResource( Name, l_AseMeshActor );
-            }
-            else
-            {
-                CHECKED_DELETE(l_AseMeshActor);
+                PhysXMInstance->CMapManager<CPhysicActor>::AddResource(it->first, l_AseMeshActor);
+                oK = TRUE;
             }
         }
-    }*/
 
-  if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
-    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
+        if(!oK)
+        {
+            CHECKED_DELETE(l_AseMeshActor);
+            CHECKED_DELETE(l_pPhysicUserDataASEMesh);
+        }
+    }
+
+  /*if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
+    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
 
   m_AStar = new CAStar();
   m_AStar->Init();
