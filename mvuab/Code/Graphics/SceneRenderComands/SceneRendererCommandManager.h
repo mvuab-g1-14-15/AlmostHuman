@@ -4,6 +4,7 @@
 
 
 #include "Utils\TemplatedVectorMapManager.h"
+#include "RenderGUISceneRendererCommand.h"
 #include "SceneRendererCommand.h"
 #include <string>
 #include "Utils/Manager.h"
@@ -12,14 +13,16 @@ class CSceneRendererCommandManager : public CManager
 {
 public:
   CSceneRendererCommandManager();
-  CSceneRendererCommandManager(CXMLTreeNode& atts);
+  CSceneRendererCommandManager( CXMLTreeNode& atts );
   ~ CSceneRendererCommandManager();
+  CRenderGUISceneRendererCommand* GetCommandGUI( );
 
   void Init();
   void ReLoad();
   bool Execute();
-  void Update(){}
-  void Render(){}
+  void Update() {}
+  void Render() {}
+
 
 private:
   CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;

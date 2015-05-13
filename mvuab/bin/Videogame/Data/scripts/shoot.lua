@@ -2,9 +2,9 @@ function shoot()
 	sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
 end
 
-function othersound()
-
-sound_manager:PlayEvent("Shoot","TestGameObject3d")
+function CargarJuego()
+engine:SetPlay(true)
+gui_manager:ActiveWindows("HUD.xml")
 end
 
 function IrASetup()

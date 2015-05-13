@@ -30,6 +30,7 @@ public:
   GET_SET_PTR( CProcess, Process );
   GET_SET_PTR( CTimer, Timer );
   GET_SET_PTR( CEngineManagers, EngineManagers );
+  GET_SET( bool, Play );
 
   void Trace( const std::string& TraceStr );
 
@@ -41,6 +42,8 @@ private:
 
   float               m_RenderTime;
   float               m_RenderTarget;
+
+  bool                m_Play;
 };
 
 #endif // ENGINE_H

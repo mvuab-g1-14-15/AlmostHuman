@@ -100,6 +100,8 @@ void registerEngine( lua_State* aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
   LUA_DECLARE_METHOD( CEngine, GetProcess )
   LUA_DECLARE_METHOD( CEngine, GetTimer )
+  LUA_DECLARE_METHOD( CEngine, GetPlay )
+  LUA_DECLARE_METHOD( CEngine, SetPlay )
   LUA_DECLARE_METHOD( CEngine, Trace )
   LUA_BEGIN_SCOPE
   LUA_DECLARE_METHOD_SCOPE( CEngine, GetSingletonPtr )
