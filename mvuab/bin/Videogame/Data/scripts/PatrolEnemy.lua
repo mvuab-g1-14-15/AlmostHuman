@@ -8,7 +8,7 @@ function CPatrolEnemyLUA:__init(waypoints)
 	
 	self.Delta = 0.01
 	
-	engine:Trace("Enemy Patrol initialized")
+	engine:Trace("CPatrolEnemyLUA: " .. self.Name .. " initialized")
 end
 
 function CPatrolEnemyLUA:Update()
