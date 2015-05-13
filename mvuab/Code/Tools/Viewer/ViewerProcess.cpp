@@ -41,7 +41,7 @@
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
 #include "Actor\PhysicController.h"
-#include "Cooking Mesh\PhysicCookingMesh.h"
+#include "CookingMesh\PhysicCookingMesh.h"
 
 //SOUND
 #include "SoundManager.h"

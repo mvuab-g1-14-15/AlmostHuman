@@ -14,7 +14,7 @@ CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts) : CManager(atts)
 
 CStaticMeshManager::~CStaticMeshManager()
 {
-    Destroy();
+    //Destroy();
 }
 
 void CStaticMeshManager::Init()
@@ -33,18 +33,21 @@ void CStaticMeshManager::Init()
         return;
     }
 
-    for(int i = 0; i < node.GetNumChildren(); i++)
+    for( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
-        //TODO - CHECK THE TAG NAME
-        std::string name = node(i).GetPszProperty("name", "no_name");
-        std::string file = node(i).GetPszProperty("filename", "no_file");
-        file = "Data" + file;
+        const std::string &lName = node(i).GetPszProperty("name", "no_name");
+        const std::string &file = "Data" + std::string( node(i).GetPszProperty("filename", "no_file") );
 
         CStaticMesh *l_StaticMesh = new CStaticMesh();
-        if(!l_StaticMesh->Load(file))
-        { CHECKED_DELETE(l_StaticMesh); }
-        else
-        { AddResource(name, l_StaticMesh); }
+        bool lLoadOk = l_StaticMesh->Load(file);
+
+        ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
+
+        l_StaticMesh->SetType( node(i).GetPszProperty("type", "static") );
+
+        // Default TODO Delete
+        if( !AddResource( lName, l_StaticMesh ) )
+            CHECKED_DELETE(l_StaticMesh);
     }
 }
 

@@ -13,7 +13,7 @@
 #include "PhysXLoader.h"
 #include "Utils/PhysicStream.h"
 #include "Utils/PhysicASELoader.h"
-#include "Cooking Mesh/PhysicCookingMesh.h"
+#include "CookingMesh/PhysicCookingMesh.h"
 //--------------------------
 
 #include "Utils/Defines.h"

@@ -7,6 +7,7 @@
 #include "Utils/Manager.h"
 #include "XML\XMLTreeNode.h"
 #include <string>
+#include "Utils\TemplatedVectorMapManager.h"
 
 class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 {

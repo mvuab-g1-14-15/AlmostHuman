@@ -18,7 +18,7 @@
 #include "Actor\PhysicActor.h"
 #include "Reports\PhysicCollisionReport.h"
 #include "Actor\PhysicController.h"
-#include "Cooking Mesh\PhysicCookingMesh.h"
+#include "CookingMesh\PhysicCookingMesh.h"
 #include "Joints\PhysicFixedJoint.h"
 #include "Joints\PhysicRevoluteJoint.h"
 #include "Joints\PhysicSphericalJoint.h"

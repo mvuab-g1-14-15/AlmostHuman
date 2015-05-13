@@ -21,7 +21,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Cooking Mesh\PhysicCookingMesh.cpp" />
+    <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp" />
     <ClCompile Include="Joints\PhysicFixedJoint.cpp" />
     <ClCompile Include="Joints\PhysicRevoluteJoint.cpp" />
     <ClCompile Include="Joints\PhysicSphericalJoint.cpp" />
@@ -53,7 +53,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Cooking Mesh\PhysicCookingMesh.h" />
+    <ClInclude Include="CookingMesh\PhysicCookingMesh.h" />
     <ClInclude Include="Joints\JointsDefs.h" />
     <ClInclude Include="Joints\PhysicFixedJoint.h" />
     <ClInclude Include="Joints\PhysicRevoluteJoint.h" />

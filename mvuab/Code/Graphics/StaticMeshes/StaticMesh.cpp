@@ -19,7 +19,10 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh(): m_FileName( "" ), m_RenderableObjectTechniqueName( "" )
+CStaticMesh::CStaticMesh()
+    : m_FileName( "" )
+    , m_RenderableObjectTechniqueName( "" )
+    , mType("static")
 {
 }
 
@@ -142,6 +145,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         void *l_VtxsAddress = (void *) malloc (l_TypeSize * l_VrtexCount);
         std::fread(l_VtxsAddress, l_TypeSize * l_VrtexCount, 1, l_pFile);
 
+        // Strider of the vertices
         unsigned char *l_AuxVtxAddress = (unsigned char *) l_VtxsAddress;
         for (int i = 0; i < l_VrtexCount; i++)
         {
@@ -159,7 +163,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         uint16 *l_Indexs = (uint16 *) l_IdxAddress;
         for ( int i = 0; i < l_IdxCount; i++ ) //Vector para physx
         {
-            uint32 l_Idx = l_Indexs[i] + 0;
+            uint32 l_Idx = l_Indexs[i];
             m_IB.push_back(l_Idx);
         }
 
@@ -271,4 +275,14 @@ bool CStaticMesh::GetRenderableObjectTechnique()
     }
 
     return l_Ok;
+}
+
+const std::string& CStaticMesh::GetType()
+{
+    return mType;
+}
+
+void CStaticMesh::SetType(const std::string& aType)
+{
+    mType = aType;
 }

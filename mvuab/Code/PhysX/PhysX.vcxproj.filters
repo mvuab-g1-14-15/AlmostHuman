@@ -14,9 +14,6 @@
     <Filter Include="Bone">
       <UniqueIdentifier>{389730b2-b60f-4137-b9a9-ab578d817daf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Cooking Mesh">
-      <UniqueIdentifier>{5af4e941-472e-4019-84aa-1f043f776773}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Joints">
       <UniqueIdentifier>{b5379f1b-f110-4ef4-80d3-adc09aec6dda}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,9 @@
     </Filter>
     <Filter Include="Particles">
       <UniqueIdentifier>{4996e572-7dc6-4744-963d-07c33f3bf288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CookingMesh">
+      <UniqueIdentifier>{5af4e941-472e-4019-84aa-1f043f776773}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,9 +55,6 @@
     </ClCompile>
     <ClCompile Include="Bone\PhysxSkeleton.cpp">
       <Filter>Bone</Filter>
-    </ClCompile>
-    <ClCompile Include="Cooking Mesh\PhysicCookingMesh.cpp">
-      <Filter>Cooking Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Joints\PhysicFixedJoint.cpp">
       <Filter>Joints</Filter>
@@ -107,6 +104,9 @@
     <ClCompile Include="Particles\CubeEmitter.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp">
+      <Filter>CookingMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -128,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="Bone\PhysxSkeleton.h">
       <Filter>Bone</Filter>
-    </ClInclude>
-    <ClInclude Include="Cooking Mesh\PhysicCookingMesh.h">
-      <Filter>Cooking Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Joints\JointsDefs.h">
       <Filter>Joints</Filter>
@@ -191,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="Particles\CubeEmitter.h">
       <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="CookingMesh\PhysicCookingMesh.h">
+      <Filter>CookingMesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

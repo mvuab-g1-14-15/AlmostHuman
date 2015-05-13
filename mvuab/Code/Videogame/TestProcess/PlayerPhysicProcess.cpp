@@ -41,7 +41,7 @@
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
 #include "Actor\PhysicController.h"
-#include "Cooking Mesh\PhysicCookingMesh.h"
+#include "CookingMesh\PhysicCookingMesh.h"
 
 //SOUND
 #include "SoundManager.h"
@@ -232,10 +232,16 @@ void CPlayerPhysicProcess::Init()
   //  m_vPA.push_back( l_AseMeshActor );
   //}
 
-  //Add Escenario
-  std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
-  std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
-  std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
+    //Add Escenario
+
+  /*
+    CRenderableObjectsLayersManager *l_ROLM = CEngineManagers::GetSingletonPtr()->GetROLManager();
+    l_ROLM->GetResourcesVector()[0]-;
+    std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
+    std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
+    std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
+
+
 
     while(l_itBegin != l_itEnd)
     {
@@ -267,9 +273,10 @@ void CPlayerPhysicProcess::Init()
             CHECKED_DELETE(l_pPhysicUserDataASEMesh);
         }
     }
+    */
 
-  /*if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
-    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
+  if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
+    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
 
   m_AStar = new CAStar();
   m_AStar->Init();

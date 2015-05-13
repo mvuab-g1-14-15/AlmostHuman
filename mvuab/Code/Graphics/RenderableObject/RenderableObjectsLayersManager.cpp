@@ -3,6 +3,10 @@
 #include "StaticMeshes\InstanceMesh.h"
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "EngineConfig.h"
+#include "Utils/Defines.h"
+#include "EngineManagers.h"
+#include "StaticMeshes/StaticMeshManager.h"
+#include "CookingMesh\PhysicCookingMesh.h"
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
     : m_DefaultRenderableObjectManager(0), CManager()
@@ -89,6 +93,8 @@ void CRenderableObjectsLayersManager::Init()
                     LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
                     CHECKED_DELETE(l_InstanceMesh);
                 }
+
+                //AddNewInstaceMesh( TreeNode(i) );
             }
             else if (lTagName == "AnimatedInstance")
             {
@@ -137,4 +143,47 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
 {
     const std::string& l_Layer = Node.GetPszProperty("layer", "");
     return (l_Layer == "") ? m_DefaultRenderableObjectManager : GetResource(l_Layer.c_str());
+}
+
+void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& )
+{
+    /*
+    const std::string& lName = atts.GetPszProperty("name", "");
+    const std::string& lCoreName = atts.GetPszProperty( "core", "unknown" );
+    ASSERT( lCoreName != "", "Null core name %s", lName.c_str() );
+
+    CInstanceMesh* l_InstanceMesh = new CInstanceMesh(lName);
+
+    CStaticMesh* lStaticMesh = SMeshMInstance->GetResource(lCoreName);
+    ASSERT( lStaticMesh, "Null static mesht %s", lCoreName.c_str() );
+
+    if( lStaticMesh )
+    {
+        bool lOk = false;
+        // Transformo IB y VB a la posicion de la instance mesh
+        if( lStaticMesh->GetType() == "static" )
+        {
+            // Add to scenary
+            push_back al sceneario de IB y VB de la static mesh
+            lOk = true;
+        }
+        else if( lStaticMesh->GetType() == "dynamic" )
+        {
+            // Rigid body
+            // Añadir el actor a la instance mesh
+
+            /*
+            // Calculate the single cooking mesh
+            CPhysicCookingMesh* lCookingMesh = PhysXMInstance->GetCookingMesh();
+            lCookingMesh->CreatePhysicMesh(l_itBegin->first, l_itBegin->second->GetVB(), l_itBegin->second->GetIB());
+            lOk = true;
+          
+        }
+    }
+
+    if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
+                {
+                    LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
+                    CHECKED_DELETE(l_InstanceMesh);
+                }*/
 }

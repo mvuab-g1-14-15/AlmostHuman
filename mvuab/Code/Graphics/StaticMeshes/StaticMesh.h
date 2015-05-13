@@ -31,6 +31,7 @@ class CStaticMesh
         
         Math::AABB3f m_AABB;
 
+        std::string mType;
     public:
         CStaticMesh();
         ~CStaticMesh();
@@ -48,6 +49,8 @@ class CStaticMesh
         Math::AABB3f GetAABB() { return m_AABB; }
         bool GetRenderableObjectTechnique();
 
+        const std::string& GetType();
+        void SetType(const std::string& aType);
 };
 
 #endif //INC_STATIC_MESH_H_
