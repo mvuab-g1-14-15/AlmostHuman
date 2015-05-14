@@ -12,7 +12,6 @@
 
 #include "StaticMeshes\StaticMeshManager.h"
 #include "CookingMesh\PhysicCookingMesh.h"
-//#include "NxTriangleMesh.h"
 
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
@@ -181,6 +180,15 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh(CXMLTreeNode &atts)
 
     NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh(l_AuxVertexBuffer, std::vector<uint32>(l_IndexBuffer));
     l_MeshActor->AddMeshShape(l_TriangleMesh, Math::Vect3f(0.0f, 0.0f, 0.0f));
+    
+    if( l_InstanceMesh->GetType() == "static" )
+    {
+    }
+    else if( l_InstanceMesh->GetType() == "dynamic" )
+    {
+        l_MeshActor->CreateBody(1.0f);
+    }
+
     bool oK = false;
     
     if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0)
@@ -194,16 +202,10 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh(CXMLTreeNode &atts)
     
     if(!oK)
     {
+        PhysXMInstance->ReleasePhysicActor(l_MeshActor);
+
         CHECKED_DELETE(l_MeshActor);
         CHECKED_DELETE(l_pPhysicUserDataASEMesh);
-    }
-    
-    if( l_InstanceMesh->GetType() == "static" )
-    {
-    }
-    else if( l_InstanceMesh->GetType() == "dynamic" )
-    {
-        //l_MeshActor->CreateBody(0.1f);
     }
     
     CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager(atts);

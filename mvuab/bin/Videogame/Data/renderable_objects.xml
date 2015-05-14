@@ -4,7 +4,8 @@
   <layer name="characters" />
   <AnimatedInstance name="paladin001" core="paladin" pos="-15.0 0.0 5.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
   <AnimatedInstance name="enemy001" core="enemy1" pos="-15.0 0.0 5.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
- <MeshInstance name="Plane005" core="Plane005" pos="-0.742174 0.567575 8.02221" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Bombona" core="Bombona" pos="0.390229 0.095945 -3.01272" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" type="dynamic" />
+  <MeshInstance name="Plane005" core="Plane005" pos="-0.742174 0.567575 8.02221" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box017" core="Box017" pos="-0.724966 0.155752 8.9113" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box018a" core="Box018a" pos="6.85809 -7.3332 28.6068" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="StraightStair001" core="StraightStair001" pos="12.5857 -8.85577 37.861" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -75,7 +76,6 @@
   <MeshInstance name="StraightStair008" core="StraightStair008" pos="86.556 4.31801 409.927" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Plane012" core="Plane012" pos="193.867 6.06884 511.268" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="taulell" core="taulell" pos="-7.15352 1.05407 1.72229" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Bombona" core="Bombona" pos="0.390229 -0.495945 -3.01272" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Armari_2" core="Armari_2" pos="-6.94728 -0.482866 -2.97587" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Tauleta_2" core="Tauleta_2" pos="-4.12531 -0.233664 3.38248" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="base_carga" core="base_carga" pos="-1.6583 -0.514729 2.41294" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />

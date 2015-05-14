@@ -14,8 +14,9 @@ class CPhysicActor;
 class CInstanceMesh : public CRenderableObject
 {
     private:
-        CStaticMesh *mStaticMesh;
-        std::string  mType;
+        std::string   mType;
+        CStaticMesh  *mStaticMesh;
+        CPhysicActor *mPhysicActor;
 
         std::vector<Math::Vect3f> m_VB;
         std::vector<uint32> m_IB;
@@ -28,6 +29,7 @@ class CInstanceMesh : public CRenderableObject
         ~CInstanceMesh();
 
         void Render();
+        void SetActor(CPhysicActor *lPhysicActor);
 
         const std::vector<Math::Vect3f> &GetVertexBuffer();
         const std::vector<uint32> &GetIndexBuffer();

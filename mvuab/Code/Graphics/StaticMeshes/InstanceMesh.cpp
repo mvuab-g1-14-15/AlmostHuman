@@ -3,6 +3,8 @@
 #include "InstanceMesh.h"
 
 #include "Math\AABB.h"
+#include "Actor\PhysicActor.h"
+
 #include "EngineManagers.h"
 #include "GraphicsManager.h"
 
@@ -43,6 +45,12 @@ void CInstanceMesh::Render()
     if (!mStaticMesh) { return; }
 
     Math::Mat44f lTransform = GetTransform();
+
+    if(mType == "dynamic")
+    {
+        //mPhysicActor->GetMat44(lTransform);
+    }
+
     GraphicsInstance->SetTransform( lTransform );
     Math::AABB3f laabb = mStaticMesh->GetAABB();
 
@@ -54,4 +62,9 @@ void CInstanceMesh::Render()
 
     Math::Mat44f t;
     GraphicsInstance->SetTransform( t );
+}
+
+void CInstanceMesh::SetActor(CPhysicActor *lPhysicActor)
+{
+    mPhysicActor = lPhysicActor;
 }

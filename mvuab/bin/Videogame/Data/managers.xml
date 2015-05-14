@@ -1,5 +1,6 @@
 <managers>
 	<console lines="800" columns="130" max_lines_in_window="25" foreground_color="black" full_size="true" size="1000 800"/>
+	<physics_manager file_config="no_name"/>
 	<graphics_manager file_config=""/>
 	<texture_manager file_config="no_name"/>
 	<effect_manager file_config="../CommonData/effects/effects.xml"/>
@@ -15,7 +16,6 @@
 	<camera_manager file_config="no_name"/>
 	<script_manager file_config="Data/scripts/"/>
 	<light_manager file_config="Data/lights.xml"/>
-	<physics_manager file_config="no_name"/>
 	<enemy_manager file_config="Data/enemies/enemies.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config="Data/billboards.xml"/>

@@ -275,8 +275,8 @@ void CPlayerPhysicProcess::Init()
     }
     */
 
-  if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
-    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );
+  /*if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
+    LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
 
   m_AStar = new CAStar();
   m_AStar->Init();
