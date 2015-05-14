@@ -31,14 +31,14 @@ class CStaticMesh
         
         Math::AABB3f m_AABB;
 
-        std::string mType;
     public:
         CStaticMesh();
         ~CStaticMesh();
         
         GET_SET(std::vector<CRenderableVertexs *>, RVs);
-        GET_SET(std::vector<Math::Vect3f>, VB);
-        GET_SET(std::vector<uint32>, IB);
+
+        const std::vector<Math::Vect3f> &GetVertexBuffer() { return m_VB; }
+        const std::vector<uint32> &GetIndexBuffer() { return m_IB; }
         
         bool Load( const std::string& FileName );
         bool ReLoad();
@@ -48,9 +48,6 @@ class CStaticMesh
         
         Math::AABB3f GetAABB() { return m_AABB; }
         bool GetRenderableObjectTechnique();
-
-        const std::string& GetType();
-        void SetType(const std::string& aType);
 };
 
 #endif //INC_STATIC_MESH_H_

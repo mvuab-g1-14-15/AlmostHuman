@@ -15,7 +15,8 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
       CRenderableObjectsManager* m_DefaultRenderableObjectManager;
       CRenderableObjectsManager* GetRenderableObjectManager( CXMLTreeNode& Node );
 
-      void AddNewInstaceMesh( const CXMLTreeNode& atts );
+      void AddNewInstaceMesh(CXMLTreeNode& atts);
+
     public:
       CRenderableObjectsLayersManager();
       CRenderableObjectsLayersManager( CXMLTreeNode& atts);

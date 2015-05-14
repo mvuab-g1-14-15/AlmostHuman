@@ -43,8 +43,6 @@ void CStaticMeshManager::Init()
 
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
 
-        l_StaticMesh->SetType( node(i).GetPszProperty("type", "static") );
-
         // Default TODO Delete
         if( !AddResource( lName, l_StaticMesh ) )
             CHECKED_DELETE(l_StaticMesh);

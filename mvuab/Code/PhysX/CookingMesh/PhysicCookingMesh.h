@@ -52,7 +52,9 @@ public:
   const VecMeshes		&GetMeshes() { return m_TriangleMeshes; }
 
 
-  bool            CreatePhysicMesh( const std::string& _BinFilename, const std::string& _NameMesh );
+  bool            CreatePhysicMesh(const std::string& _BinFilename, const std::string& _NameMesh );
+  NxTriangleMesh *CreatePhysicMesh(std::vector<Math::Vect3f> &l_VB, std::vector<uint32> &l_IB);
+
 
   bool            CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces );
   bool            CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f> &_Vertices, std::vector<unsigned int> &_Faces );

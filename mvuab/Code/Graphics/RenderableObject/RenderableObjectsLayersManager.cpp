@@ -1,12 +1,22 @@
 #include "AnimatedModels\AnimatedInstanceModel.h"
+#include "AnimatedModels\AnimatedInstanceModel.h"
+
 #include "RenderableObjectsLayersManager.h"
 #include "StaticMeshes\InstanceMesh.h"
-#include "AnimatedModels\AnimatedInstanceModel.h"
+
 #include "EngineConfig.h"
-#include "Utils/Defines.h"
+#include "Utils\Defines.h"
+
+#include "PhysicsManager.h"
 #include "EngineManagers.h"
-#include "StaticMeshes/StaticMeshManager.h"
+
+#include "StaticMeshes\StaticMeshManager.h"
 #include "CookingMesh\PhysicCookingMesh.h"
+//#include "NxTriangleMesh.h"
+
+#include "Actor\PhysicActor.h"
+#include "Utils\PhysicUserData.h"
+
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
     : m_DefaultRenderableObjectManager(0), CManager()
@@ -86,15 +96,15 @@ void CRenderableObjectsLayersManager::Init()
 
             if (lTagName == "MeshInstance")
             {
-                CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
+                /*CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
 
                 if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
                 {
                     LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
                     CHECKED_DELETE(l_InstanceMesh);
-                }
+                }*/
 
-                //AddNewInstaceMesh( TreeNode(i) );
+                AddNewInstaceMesh( TreeNode(i) );
             }
             else if (lTagName == "AnimatedInstance")
             {
@@ -145,45 +155,61 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
     return (l_Layer == "") ? m_DefaultRenderableObjectManager : GetResource(l_Layer.c_str());
 }
 
-void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& )
+void CRenderableObjectsLayersManager::AddNewInstaceMesh(CXMLTreeNode &atts)
 {
-    /*
-    const std::string& lName = atts.GetPszProperty("name", "");
-    const std::string& lCoreName = atts.GetPszProperty( "core", "unknown" );
-    ASSERT( lCoreName != "", "Null core name %s", lName.c_str() );
+    CInstanceMesh* l_InstanceMesh = new CInstanceMesh(atts);
+    l_InstanceMesh->SetType(atts.GetPszProperty("type", "static"));
+    
+    bool lOk = false;
+    string l_Name = l_InstanceMesh->GetName();
 
-    CInstanceMesh* l_InstanceMesh = new CInstanceMesh(lName);
+    const std::vector<Math::Vect3f> &l_VertexBuffer = l_InstanceMesh->GetVertexBuffer();
+    const std::vector<uint32> &l_IndexBuffer = l_InstanceMesh->GetIndexBuffer();
+    
+    int l_VecElements = l_VertexBuffer.size();
+    std::vector<Math::Vect3f> l_AuxVertexBuffer;
+    l_AuxVertexBuffer.resize(l_VertexBuffer.size());
 
-    CStaticMesh* lStaticMesh = SMeshMInstance->GetResource(lCoreName);
-    ASSERT( lStaticMesh, "Null static mesht %s", lCoreName.c_str() );
-
-    if( lStaticMesh )
+    #pragma omp parallel for
+    for(int i = 0; i < l_VecElements; ++i)
     {
-        bool lOk = false;
-        // Transformo IB y VB a la posicion de la instance mesh
-        if( lStaticMesh->GetType() == "static" )
-        {
-            // Add to scenary
-            push_back al sceneario de IB y VB de la static mesh
-            lOk = true;
-        }
-        else if( lStaticMesh->GetType() == "dynamic" )
-        {
-            // Rigid body
-            // Añadir el actor a la instance mesh
-
-            /*
-            // Calculate the single cooking mesh
-            CPhysicCookingMesh* lCookingMesh = PhysXMInstance->GetCookingMesh();
-            lCookingMesh->CreatePhysicMesh(l_itBegin->first, l_itBegin->second->GetVB(), l_itBegin->second->GetIB());
-            lOk = true;
-          
-        }
+        l_AuxVertexBuffer[i] = l_InstanceMesh->GetTransform() * l_VertexBuffer[i];
     }
 
-    if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
-                {
-                    LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
-                    CHECKED_DELETE(l_InstanceMesh);
-                }*/
+    CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData(l_Name);
+    CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataASEMesh);
+
+    NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh(l_AuxVertexBuffer, std::vector<uint32>(l_IndexBuffer));
+    l_MeshActor->AddMeshShape(l_TriangleMesh, Math::Vect3f(0.0f, 0.0f, 0.0f));
+    bool oK = false;
+    
+    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0)
+    {
+        if(PhysXMInstance->AddPhysicActor(l_MeshActor))
+        {
+            PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name, l_MeshActor);
+            oK = true;
+        }
+    }
+    
+    if(!oK)
+    {
+        CHECKED_DELETE(l_MeshActor);
+        CHECKED_DELETE(l_pPhysicUserDataASEMesh);
+    }
+    
+    if( l_InstanceMesh->GetType() == "static" )
+    {
+    }
+    else if( l_InstanceMesh->GetType() == "dynamic" )
+    {
+        //l_MeshActor->CreateBody(0.1f);
+    }
+    
+    CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager(atts);
+    if (!lRenderableObjectManager->AddResource(l_Name, l_InstanceMesh))
+    {
+        LOG_ERROR_APPLICATION("Error adding instance mesh %s!", l_Name.c_str());
+        CHECKED_DELETE(l_InstanceMesh);
+    }
 }

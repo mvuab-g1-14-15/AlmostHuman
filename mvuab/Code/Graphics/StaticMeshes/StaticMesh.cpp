@@ -19,10 +19,7 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh()
-    : m_FileName( "" )
-    , m_RenderableObjectTechniqueName( "" )
-    , mType("static")
+CStaticMesh::CStaticMesh() : m_FileName( "" ), m_RenderableObjectTechniqueName( "" )
 {
 }
 
@@ -68,6 +65,8 @@ bool CStaticMesh::Load( const std::string& FileName )
 
     unsigned short int l_SubMeshes = 0;
     std::fread(&l_SubMeshes, sizeof(unsigned short int), 1, l_pFile);
+
+    int l_MaxIndex = 0;
 
     for (unsigned int i = 0; i < l_SubMeshes; ++i)
     {
@@ -163,8 +162,13 @@ bool CStaticMesh::Load( const std::string& FileName )
         uint16 *l_Indexs = (uint16 *) l_IdxAddress;
         for ( int i = 0; i < l_IdxCount; i++ ) //Vector para physx
         {
-            uint32 l_Idx = l_Indexs[i];
+            uint32 l_Idx = l_Indexs[i] + l_MaxIndex;
             m_IB.push_back(l_Idx);
+        }
+
+        for(unsigned int i = 0; i < m_IB.size(); i++)
+        {
+            l_MaxIndex = (l_MaxIndex <= (int) m_IB[i]) ? m_IB[i] + 1 : l_MaxIndex;
         }
 
         // Now create the renderable vertex
@@ -275,14 +279,4 @@ bool CStaticMesh::GetRenderableObjectTechnique()
     }
 
     return l_Ok;
-}
-
-const std::string& CStaticMesh::GetType()
-{
-    return mType;
-}
-
-void CStaticMesh::SetType(const std::string& aType)
-{
-    mType = aType;
 }
