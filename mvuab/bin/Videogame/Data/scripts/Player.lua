@@ -69,3 +69,11 @@ end
 function CPlayer:GetBlaster()
 	return self.Blaster
 end
+
+function CPlayer:GetPosition()
+	return self.PlayerController:GetPosition()
+end
+
+function CPlayer:GetYaw()
+	return self.PlayerController:GetYaw()
+end

@@ -84,6 +84,8 @@ class CGUIManager : public CManager
         }
         void Reload();
 
+		GET_SET(bool, RenderPointer);
+
         CWindows* GetWindow( const std::string& NameWindow );
         //----CScriptRegister interface--------------------------------------------
         //virtual void RegisterFunctions (CScriptManager* scriptManager);
@@ -139,7 +141,7 @@ class CGUIManager : public CManager
         std::string  m_sLastLoadpathGUI_XML;
         TransitionEffect m_sTransitionEffect;
         bool  m_bFirstUpdate;
-        //CMap*  m_Map;
+		bool  m_RenderPointer;
 };
 
 #endif //INC_GUI_MANAGER_H
