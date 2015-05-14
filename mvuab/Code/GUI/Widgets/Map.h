@@ -26,7 +26,10 @@ private:
     Math::Vect2f  m_PosInMap;
     uint32  m_Width;
     uint32  m_Height;
-    CItemMap( std::string Name, CTexture* Texture, Math::Vect2f PosInMap, uint32 Width, uint32 Height );
+	float  m_Yaw;
+    std::string  m_PositionScript;
+    std::string  m_OrientationScript;
+    CItemMap( std::string Name, CTexture* Texture, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   };
 
   class CEnemyMap
@@ -34,20 +37,27 @@ private:
   public:
     std::string  m_Name;
     CTexture* m_Texture;
-    Math::Vect2f  m_PosInMap;
-    Math::Vect2f  m_PosIn3D;
+    Math::Vect2f  m_PosInMap; //Posición en coordenadas de textura
+    Math::Vect2f  m_PosIn3D; //Posición en 3D
     uint32  m_Width;
     uint32  m_Height;
-    CEnemyMap( std::string Name, CTexture* Texture, Math::Vect2f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height );
+	float  m_Yaw;
+    std::string  m_PositionScript;
+    std::string  m_OrientationScript;
+    CEnemyMap( std::string Name, CTexture* Texture, Math::Vect2f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   };
   class CPlayer
   {
   public:
     std::string  m_Name;
     CTexture* m_Texture;
+	Math::Vect2f m_PosPlayer;
     uint32  m_Width;
     uint32  m_Height;
-    CPlayer( std::string Name, CTexture* Texture, uint32 Width, uint32 Height );
+	float	m_Yaw;
+    std::string  m_PositionScript;
+    std::string  m_OrientationScript;
+    CPlayer( std::string Name, CTexture* Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   };
 
 public:
@@ -66,9 +76,14 @@ public:
   Math::Vect2f NormalizePlayerPos( float x, float z );
 
   void AddItem( const std::string& Name, const std::string& Texture, Math::Vect2f PosInMap3D, uint32 Width,
-                uint32 Height );
-  void AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height );
-  void AddPlayer( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height );
+                uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
+  void AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string OrientationScript );
+  void AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string  OrientationScript );
+
+  void SetPositionPlayer( Math::Vect3f position );
+  void SetYawPlayer( float yaw );
+  void SetPositionEnemy( const std::string& Name, Math::Vect3f position );
+  void SetYawEnemy( const std::string& Name, float yaw );
 
 private:
   CTexture*  m_Marco;

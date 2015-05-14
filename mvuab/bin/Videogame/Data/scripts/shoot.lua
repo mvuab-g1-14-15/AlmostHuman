@@ -5,6 +5,7 @@ end
 function CargarJuego()
 engine:SetPlay(true)
 gui_manager:ActiveWindows("HUD.xml")
+gui_manager:SetRenderPointer(false)
 end
 
 function IrASetup()

@@ -66,7 +66,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
   , m_Console( 0 )
-  // , m_Map( 0 )
+  , m_RenderPointer( true )
 {
 }
 //----------------------------------------------------------------------------
@@ -295,9 +295,8 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_Console );
     m_Console->Render();
-    /*  assert( m_Map );
-        m_Map->Render();*/
-    RenderPointerMouse();
+	if( m_RenderPointer )
+		RenderPointerMouse();
 
   }//END if (m_bIsOk)
 }

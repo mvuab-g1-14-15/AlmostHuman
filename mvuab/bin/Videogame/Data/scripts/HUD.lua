@@ -8,7 +8,7 @@ function CHUD:__init()
 	l_Energy = g_Player:GetBlaster():GetEnergy()
 	self.Energy:SetProgress(l_Energy)
 	self.Grenades = self.Window:GetElement("Grenades")
-	--self.Map = self.Window:GetElement("Map")
+	self.Map = self.Window:GetElement("Radar")
 end
 
 function CHUD:Update()
@@ -18,4 +18,23 @@ function CHUD:Update()
 	end
 	l_Energy = g_Player:GetBlaster():GetEnergy()
 	self.Energy:SetProgress(l_Energy)
+	--Actualizo la posición del controller
+end
+
+function CHUD:UpdatePositionPlayer()
+	self.Map:SetPositionPlayer(g_Player:GetPosition())
+end
+
+function CHUD:UpdateYawPlayer()
+	self.Map:SetYawPlayer(g_Player:GetYaw())
+end
+
+function CHUD:UpdatePositionEnemy(name)
+	enemy = enemy_manager:GetResource(name)
+	self.Map:SetPositionEnemy(name, enemy:GetPosition())
+end
+
+function CHUD:UpdateYawEnemy(name)
+	enemy = enemy_manager:GetResource(name)
+	self.Map:SetYawEnemy(name, enemy:GetYaw())
 end
