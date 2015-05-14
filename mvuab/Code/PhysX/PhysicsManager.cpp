@@ -952,24 +952,6 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
         return std::string( "" );
     }
 
-    //Particulas en el punto de impacto
-    CSphereEmitter* l_Emitter = new CSphereEmitter();
-    l_Emitter->SetActive( true );
-    l_Emitter->SetEmitterLifeTime( 1.0f );
-    l_Emitter->SetLifeTime( 0.5f, 1.0f );
-    l_Emitter->SetAcceleration( Vect3f( 0.0f ) );
-    Math::Vect3f pos( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
-    l_Emitter->SetPosition( pos );
-    l_Emitter->SetVelocity( Vect3f( 1.0f ) );
-    l_Emitter->SetTextureName( "Data/textures/red_smoke.png" );
-    l_Emitter->SetRandom( 5.0f, 10.0f );
-    l_Emitter->SetRadius( 0.1f, 0.2f );
-    l_Emitter->SetSize( 0.1f, 0.1f );
-    l_Emitter->SetYaw( 0.0f, 180.0f );
-    l_Emitter->SetPitch( 0.0f, 360.0f );
-    l_Emitter->Generate( 20, true );
-    ParticleMInstance->AddEmitter( l_Emitter );
-
     NxActor* actor = &closestShape->getActor();
     CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
 

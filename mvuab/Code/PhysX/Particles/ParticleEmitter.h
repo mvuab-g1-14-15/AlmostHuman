@@ -17,36 +17,16 @@ class CParticleEmitter : public CTemplatedVectorMapManager< CParticle >, public 
         virtual ~CParticleEmitter();
 
         virtual bool Init( const CXMLTreeNode& atts );
+        void		 Update( float dt );
+        void	     Render();
+		
+		virtual Math::Vect3f GetSpawnPosition() = 0;
 
-        void SetAcceleration( const Math::Vect3f& Acceleration );
-        void SetVelocity( const Math::Vect3f& Velocity );
-
-        void SetDirection( const Math::Vect3f& Direction );
-        void SetPosition( const Math::Vect3f& Position );
-
-        void SetTextureName(const std::string &Texture);
-        void SetEmitterTime(float Time);
-
-        float GetActive();
-        void SetActive(bool Active);
-
-        void SetLifeTime(float sx, float sy);
-        void SetEmitterLifeTime(float LifeTime);
-
-        void SetTimeToEmit(float Time);
-        float GetTimeToEmit();
-
-        void SetSize(float min, float max);
-        float GetSize();
-
-        void SetOrientate(bool l_Orientate);
-
-        virtual void Generate( unsigned int l_NumParticles, bool l_Generate = true ) = 0;
-        virtual void Update( float dt ) = 0;
-        virtual void Render() = 0;
+		bool IsActive();
 
     protected:
         bool                    mIsLoop;
+		bool					mIsInmortal;
         bool                    mIsActive;
         uint32                  mMaxParticles;
         uint32                  mParticlesCount;
@@ -60,31 +40,12 @@ class CParticleEmitter : public CTemplatedVectorMapManager< CParticle >, public 
         Math::Vect3f            mVelocity;
         CEffectTechnique*       mTechnique;
         std::vector<CTexture*>  mTextures;
-
-        std::vector<CParticle> m_Particles;
-
-        float m_MinLifetime;
-        float m_MaxLifetime;
-
-        float m_EmitterLifeTime;
-        float m_TimeToEmit;
-        float m_ActualTime;
-
-        float m_SizeX;
-        float m_SizeY;
-
-        float m_Rand;
-        float m_RandMin;
-        float m_RandMax;
-
-        Math::Vect3f m_Acceleration;
-        Math::Vect3f m_Direction;
-        Math::Vect3f m_Position;
-        Math::Vect3f m_Velocity;
-
-        bool m_Active;
-        bool m_Orientate;
-        std::string m_TextureName;
 };
+
+//-----------------------------------------------------------------------------------------
+inline bool CParticleEmitter::IsActive()
+{
+	return mIsActive;
+}
 
 #endif

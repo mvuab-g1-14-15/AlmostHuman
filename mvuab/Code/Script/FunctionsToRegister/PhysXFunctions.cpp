@@ -260,6 +260,7 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetResource", &vector_get<CPhysicUserData*> )
   ];
 
+  /*
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // PARTICLE MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,4 +313,5 @@ void registerPhysX( lua_State* m_LS )
     LUA_DECLARE_METHOD( CSphereEmitter, SetPitch )
     LUA_DECLARE_METHOD( CSphereEmitter, SetYaw )
   LUA_END_DECLARATION
+  */
 }

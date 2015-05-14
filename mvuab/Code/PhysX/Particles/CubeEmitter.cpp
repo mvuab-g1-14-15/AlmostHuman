@@ -1,79 +1,38 @@
 #include "CubeEmitter.h"
 #include "Utils/BaseUtils.h"
-
-#include <omp.h>
+#include "XML\XMLTreeNode.h"
 
 CCubeEmitter::CCubeEmitter()
+	: CParticleEmitter()
+	, mMinPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
+	, mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
 {
-    float m_MinWidth = 0.0f;
-    float m_MaxWidth = 0.0f;
-
-    float m_MinHeight = 0.0f;
-    float m_MaxHeight = 0.0f;
-
-    float m_MinDepth = 0.0f;
-    float m_MaxDepth = 0.0f;
 }
 
 CCubeEmitter::~CCubeEmitter()
 {
 }
 
-void CCubeEmitter::SetDepth(float min, float max)
+bool CCubeEmitter::Init( const CXMLTreeNode& atts )
 {
-    m_MinDepth = min;
-    m_MaxDepth = max;
+	bool lOk( CParticleEmitter::Init( atts ) );
+
+	if( lOk )
+	{
+		Math::Vect3f lSize = atts.GetVect3fProperty("cubic_size", Math::Vect3f());
+		mMinPnt = mPosition - lSize;
+		mMaxPnt = mPosition + lSize;
+	}
+	
+	return lOk;
 }
 
-void CCubeEmitter::SetWidth(float min, float max)
+Math::Vect3f CCubeEmitter::GetSpawnPosition()
 {
-    m_MinWidth = min;
-    m_MaxWidth = max;
+	return baseUtils::RandRange( mMinPnt, mMaxPnt );
 }
 
-void CCubeEmitter::SetHeight(float min, float max)
-{
-    m_MinHeight = min;
-    m_MaxHeight = max;
-}
-
-void CCubeEmitter::SetRandom(float Min, float Max)
-{
-    m_RandMin = Min;
-    m_RandMax = Max;
-}
-
-void CCubeEmitter::Generate(unsigned int l_NumParticles, bool l_Generate)
-{
-    m_Particles.resize(l_NumParticles);
-
-    for(unsigned int i = 0; i < l_NumParticles && l_Generate; ++i)
-    {
-        NewParticle(&m_Particles[i]);
-    }
-}
-
-void CCubeEmitter::NewParticle(CParticle *l_Particle)
-{
-    float l_LifeTime = baseUtils::RandRange(m_MinLifetime, m_MaxLifetime);
-
-    float x = baseUtils::RandRange(m_Position.x - m_MinWidth  * 0.5f, m_Position.x + m_MaxWidth  * 0.5f);
-    float y = baseUtils::RandRange(m_Position.y - m_MinHeight * 0.5f, m_Position.y + m_MaxHeight * 0.5f);
-    float z = baseUtils::RandRange(m_Position.z - m_MinDepth  * 0.5f, m_Position.z + m_MaxDepth  * 0.5f);
-
-    Math::Vect3f l_Vector = Math::Vect3f(x, y, z);
-    l_Particle->SetPosition(l_Vector);
-    
-    l_Particle->SetVelocity(m_Velocity);
-    l_Particle->SetAcceleration(m_Acceleration);
-
-    l_Particle->SetTextureName(m_TextureName);
-    l_Particle->SetSize(m_SizeX, m_SizeY);
-
-    l_Particle->SetLifeTime(l_LifeTime);
-    l_Particle->SetIsAlive(true);
-}
-
+/*
 void CCubeEmitter::Update(float dt)
 {
     if(m_Particles.size() == 0) return;
@@ -111,11 +70,4 @@ void CCubeEmitter::Update(float dt)
         l_NewRand--; m_Rand--;
     }
 }
-
-void CCubeEmitter::Render()
-{
-    for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
-    {
-        it->Render();
-    }
-}
+*/

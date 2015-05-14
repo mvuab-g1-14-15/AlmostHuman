@@ -92,6 +92,12 @@ template <class T> class CTemplatedVectorMapManager
         {
             return m_ResourcesVector;
         }
+
+		const uint32 GetResourcesCount()
+		{
+			ASSERT( m_ResourcesMap.size() == m_ResourcesVector.size(), "map size != vector size" );
+			return m_ResourcesVector.size();
+		}
 };
 
 #endif

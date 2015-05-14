@@ -5,57 +5,28 @@
 #include <omp.h>
 
 CSphereEmitter::CSphereEmitter()
+	: CParticleEmitter()
 {
-    m_MinimumRadius = 0.0f;
-    m_MaximumRadius = 0.0f;
-    
-    m_MinPitch = 0.0f;
-    m_MaxPitch = 0.0f;
-    
-    m_MinYaw = 0.0f;
-    m_MaxYaw = 0.0f;
 }
 
 CSphereEmitter::~CSphereEmitter()
 {
 }
 
-void CSphereEmitter::SetRandom(float Min, float Max)
+Math::Vect3f CSphereEmitter::GetSpawnPosition()
 {
-    m_RandMin = Min;
-    m_RandMax = Max;
+	return Math::Vect3f();
 }
 
-void CSphereEmitter::SetRadius(float min, float max)
+bool CSphereEmitter::Init( const CXMLTreeNode& atts )
 {
-    m_MinimumRadius = min;
-    m_MaximumRadius = max;
+	return CParticleEmitter::Init( atts );
 }
 
-void CSphereEmitter::SetPitch(float min, float max)
+/*
+void CSphereEmitter::NewParticle(CParticle*)
 {
-    m_MinPitch = min;
-    m_MaxPitch = max;
-}
-
-void CSphereEmitter::SetYaw(float min, float max)
-{
-    m_MinYaw = min;
-    m_MaxYaw = max;
-}
-
-void CSphereEmitter::Generate(unsigned int l_NumParticles, bool l_Generate)
-{
-    m_Particles.resize( l_NumParticles );
-    
-    for(unsigned int i = 0; i < l_NumParticles && l_Generate; ++i)
-    {
-        NewParticle(&m_Particles[i]);
-    }
-}
-
-void CSphereEmitter::NewParticle(CParticle* l_Particle)
-{
+	/*
     float l_Pitch = Math::Utils::Deg2Rad(baseUtils::RandRange(m_MinPitch, m_MaxPitch));
     float l_Yaw = Math::Utils::Deg2Rad(baseUtils::RandRange(m_MinPitch, m_MaxYaw));
     
@@ -77,49 +48,4 @@ void CSphereEmitter::NewParticle(CParticle* l_Particle)
     l_Particle->SetLifeTime(l_LifeTime);
     l_Particle->SetIsAlive(true);
 }
-
-void CSphereEmitter::Update(float dt)
-{
-    if(m_Particles.size() == 0) return;
-    if(!m_Active) return;
-
-    m_EmitterLifeTime -= dt;
-    if(m_EmitterLifeTime < 0.0f) m_Active = false;
-
-    int lNumParticles = m_Particles.size();
-    CParticle *p = &m_Particles[0];
-
-    omp_set_num_threads(2);
-    #pragma omp parallel for
-    for(int i = 0; i < lNumParticles; ++i)
-    {
-        (p + i)->Update(dt);
-    }
-
-	m_ActualTime += dt;
-	if(m_ActualTime >= m_TimeToEmit)
-    {
-        m_Rand = baseUtils::RandRange(m_RandMin, m_RandMax);
-        m_ActualTime = 0.0f;
-    }
-
-    CParticle *l_Particle = &m_Particles[0];
-    int l_NewRand = (int) std::ceilf(m_Rand * dt);
-
-    for(int i = 0; i < lNumParticles && l_NewRand > 0; ++i)
-    {
-        if((l_Particle + i)->GetIsAlive()) continue;
-
-        NewParticle(l_Particle + i);
-        l_NewRand--; m_Rand--;
-    }
-}
-
-
-void CSphereEmitter::Render()
-{
-    for(std::vector<CParticle>::iterator it = m_Particles.begin(); it != m_Particles.end(); ++it)
-    {
-        it->Render();
-    }
-}
+*/

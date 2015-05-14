@@ -4,18 +4,17 @@
 #include "XML\XMLTreeNode.h"
 #include "ParticleEmitter.h"
 #include "Utils\Manager.h"
+#include "Utils\TemplatedVectorMapManager.h"
 
 #include <string>
 #include <vector>
 
+class CParticleEmitter;
 class CCubeEmitter;
 class CSphereEmitter;
 
-class CParticleManager: public CManager
+class CParticleManager: public CManager, CTemplatedVectorMapManager<CParticleEmitter>
 {
-    private:
-        std::vector<CParticleEmitter*> m_Emitters;
-
     public:
         CParticleManager();
         CParticleManager(CXMLTreeNode& atts);
@@ -24,10 +23,6 @@ class CParticleManager: public CManager
         void Init();
         void Update();
         void Render();
-        void AddEmitter(CParticleEmitter *l_Emitter);
-
-        CCubeEmitter    *CreateCubeEmitter();
-        CSphereEmitter  *CreateSphereEmitter();
 };
 
 #endif

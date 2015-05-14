@@ -101,6 +101,15 @@ inline float RandRange( float fMin, float fMax )
     return ( Random() * ( fMax - fMin ) ) + fMin;
 }
 
+inline Math::Vect3f RandRange( Math::Vect3f aMin, Math::Vect3f aMax )
+{
+	float x = RandRange( aMin.x, aMax.x );
+	float y = RandRange( aMin.y, aMax.y );
+	float z = RandRange( aMin.z, aMax.z );
+
+	return Math::Vect3f( x, y, z);
+}
+
 inline Math::Vect3f RandUnitVec()
 {
     float x = ( Random() * 2.0f ) - 1.0f;

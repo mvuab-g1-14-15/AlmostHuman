@@ -17,11 +17,11 @@ void CMessageHandler::Assert( const char* file, long line, const char* aAssertMs
 
   if ( callIt )
   {
-    wsprintf( s_text, "%s \nFile '%s' Line %d\nOk:Ignore Cancel:Break", buffer, file, line );
+    wsprintf( s_text, "%s \nFile '%s' Line %d", buffer, file, line );
 
     switch ( ::MessageBox( NULL, s_text, "ASSERTION ERROR", MB_ICONEXCLAMATION | MB_OKCANCEL ) )
     {
-    case IDCANCEL:
+	case IDOK:
     {
       callIt = 0;
       _asm { int 3 }

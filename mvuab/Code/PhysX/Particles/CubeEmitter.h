@@ -7,30 +7,16 @@
 class CCubeEmitter : public CParticleEmitter
 {
     private:
-        float m_MinWidth;
-        float m_MaxWidth;
-
-        float m_MinHeight;
-        float m_MaxHeight;
-
-        float m_MinDepth;
-        float m_MaxDepth;
-
-
+		Math::Vect3f mMinPnt;
+		Math::Vect3f mMaxPnt;
     public:
         CCubeEmitter			();
         virtual ~CCubeEmitter   ();
 
+		virtual bool Init( const CXMLTreeNode& atts );
 		void Update             (float dt);
 		void Render             ();
-
-        void Generate (unsigned int l_NumParticles, bool l_Generate = true);
-        void NewParticle(CParticle* l_Particle);
-
-        void SetDepth(float min, float max);
-        void SetWidth(float min, float max);
-        void SetHeight(float min, float max);
-		void SetRandom(float min, float max);
+		virtual Math::Vect3f GetSpawnPosition();
 };
 
 #endif
