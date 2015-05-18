@@ -46,26 +46,26 @@ function CBlaster:GetEnemyFromRay()
 end
 
 function CBlaster:CreateParticles(position, direction)
-	l_Emitter = particle_manager:CreateSphereEmitter()
-	l_Emitter:SetTextureName( "Data/textures/red_smoke.png" )
-	
-	l_Emitter:SetActive( true )
-    l_Emitter:SetEmitterLifeTime(10)
-    l_Emitter:SetLifeTime(1.0, 5.0)
-	l_Emitter:SetTimeToEmit(0.1);
-	
-    l_Emitter:SetAcceleration(Vect3f(0.0))
-    l_Emitter:SetPosition(position)
-    l_Emitter:SetVelocity(direction)
-    
-	l_Emitter:SetSize(0.1, 0.5)
-    l_Emitter:SetPitch(0.0, 180.0)
-    l_Emitter:SetYaw(0.0, 360.0)
-	
-	l_Emitter:SetSize(0.1, 1.0)
-	l_Emitter:SetRandom(1, 1)
-    l_Emitter:Generate(1, true)
-	particle_manager:AddEmitter( l_Emitter )
+	--l_Emitter = particle_manager:CreateSphereEmitter()
+	--l_Emitter:SetTextureName( "Data/textures/red_smoke.png" )
+	--
+	--l_Emitter:SetActive( true )
+    --l_Emitter:SetEmitterLifeTime(10)
+    --l_Emitter:SetLifeTime(1.0, 5.0)
+	--l_Emitter:SetTimeToEmit(0.1);
+	--
+    --l_Emitter:SetAcceleration(Vect3f(0.0))
+    --l_Emitter:SetPosition(position)
+    --l_Emitter:SetVelocity(direction)
+    --
+	--l_Emitter:SetSize(0.1, 0.5)
+    --l_Emitter:SetPitch(0.0, 180.0)
+    --l_Emitter:SetYaw(0.0, 360.0)
+	--
+	--l_Emitter:SetSize(0.1, 1.0)
+	--l_Emitter:SetRandom(1, 1)
+    --l_Emitter:Generate(1, true)
+	--particle_manager:AddEmitter( l_Emitter )
 end
 
 function CBlaster:Update()
