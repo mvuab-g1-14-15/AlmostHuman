@@ -135,14 +135,14 @@ void CEngineManagers::Init()
       if ( TagName == "comment" )
         continue;
 
-      CManager* Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
+      CManager* lManager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
 
-      if ( !Manager )
+      if ( !lManager )
         LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
       else
       {
-        if ( !AddResource( TagName.c_str() , Manager ) )
-          CHECKED_DELETE( Manager );
+		  bool lOk = AddResource( TagName.c_str() , lManager );
+		  ASSERT( lOk, "Error adding manager %s", TagName.c_str() );
       }
     }
   }
@@ -174,9 +174,6 @@ void CEngineManagers::Init()
   m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
   m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
 
-  //
-  // Init managers
-  //
   for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
     ( *lItb )->Init();
 }

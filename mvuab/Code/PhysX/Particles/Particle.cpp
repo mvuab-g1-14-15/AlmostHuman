@@ -1,7 +1,6 @@
 #include "Particle.h"
 #include <Windows.h>
 
-
 #include "EngineManagers.h"
 #include "Cameras/Camera.h"
 #include "Cameras/Frustum.h"
@@ -9,144 +8,78 @@
 #include "Texture/TextureManager.h"
 
 CParticle::CParticle()
+	: mTime(0.0f)
+	, mLifeTime( 0.0f )
+	, mIsAlive( false )
+	, mColor( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
+	, mPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
+	, mVelocity( Math::Vect3f( 0.0f, 1.0f, 0.0f ) )
+	, mAcceleration( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
+	, mBillboard( 0 )
 {
-    m_LifeTime = 0.0;
-    m_SphereRadius = 0.0f;
 
-    m_Billboard.SetPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
-    m_Billboard.SetSize( Math::Vect2f( 0.1f, 0.1f ));
-
-    m_IsAlive = false;
-
-    m_Color = Math::Vect3f( 1.0f, 1.0f, 1.0f );
-    m_Position = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-
-    m_Velocity = Math::Vect3f( 0.0f, 0.0f, 0.0f );
-    m_Acceleration = Math::Vect3f( 0.0f, 0.0f, 0.0f );
 }
 
-CParticle::CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position,
-                      const Math::Vect3f& Velocity,  const Math::Vect3f& Aceleration )
+CParticle::~CParticle()
 {
-    m_SphereRadius = 0.0f;
-    m_LifeTime = timer;
-    m_IsAlive = false;
-
-    m_Color = Color;
-    m_Position = Position;
-
-    m_Velocity = Velocity;
-    m_Acceleration = Aceleration;
+	CHECKED_DELETE( mBillboard );
 }
 
-void CParticle::SetColor( const Math::Vect3f& Color )
+bool CParticle::Init
+( 
+	float aLifeTime, 
+	const Math::Vect3f& aColor, 
+	const Math::Vect3f& aPosition, 
+	const Math::Vect3f& aVelocity, 
+	const Math::Vect3f& aAcceleration,
+	const Math::Vect2f& aSize,
+    const std::string & aTextureName,
+    const std::string & aTechniqueName
+)
 {
-    m_Color = Color;
-}
+	mLifeTime = aLifeTime;
+	mIsAlive = true;
+	mColor = aColor;
+	mPosition = aPosition;
+	mVelocity = aVelocity;
+	mAcceleration = aAcceleration;
 
-void CParticle::SetPosition( const Math::Vect3f& Position )
-{
-    m_Position = Position;
-}
+	mBillboard = new CBillboard();
 
-void CParticle::SetVelocity( const Math::Vect3f& Velocity )
-{
-    m_Velocity = Velocity;
-}
+	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
 
-void CParticle::SetAcceleration( const Math::Vect3f& Acceleration )
-{
-    m_Acceleration = Acceleration;
-}
+	//ASSERT( lOk, "Could not init the particle")
 
-void CParticle::SetLifeTime( float Time )
-{
-    LARGE_INTEGER l_Freq = { 0 }, l_ActualTime = { 0 };
-
-    QueryPerformanceCounter(&l_ActualTime);
-    QueryPerformanceFrequency(&l_Freq);
-
-    m_LifeTime = Time + l_ActualTime.QuadPart / l_Freq.QuadPart;
-}
-
-void CParticle::SetSize( float sx, float sy)
-{
-    m_SphereRadius = ((sx > sy) ? sx : sy) * 0.5f;
-    m_Billboard.SetSize( Math::Vect2f(sx, sy ));
-}
-
-void CParticle::SetIsAlive( bool isAlive )
-{
-    m_IsAlive = isAlive;
-}
-
-void CParticle::SetTextureName( std::string TextureName )
-{
-    CTexture* lTexture = TextureMInstance->GetTexture(TextureName);
-
-    if( !lTexture )
-    { LOG_ERROR_APPLICATION("Error setting the texture to the particle, the texture %s does not exist!!!", TextureName.c_str()); }
-
-    m_Billboard.SetTexture(lTexture);
-}
-
-const Math::Vect3f& CParticle::GetColor()
-{
-    return m_Color;
-}
-
-const Math::Vect3f& CParticle::GetPosition()
-{
-    return m_Position;
-}
-
-const Math::Vect3f& CParticle::GetVelocity()
-{
-    return m_Velocity;
-}
-
-const Math::Vect3f& CParticle::GetAcceleration()
-{
-    return m_Acceleration;
-}
-
-float CParticle::GetLifeTime()
-{
-    return m_LifeTime;
-}
-
-bool CParticle::GetIsAlive()
-{
-    return m_IsAlive;
+	return lOk;
 }
 
 void CParticle::Update( float dt )
 {
-    if ( !m_IsAlive ) { return; }
+	ASSERT( mBillboard, "Null billboard for particle" );
 
-    LARGE_INTEGER l_Freq = { 0 }, l_ActualTime = { 0 };
-    QueryPerformanceCounter( &l_ActualTime );
-    QueryPerformanceFrequency( &l_Freq );
+	if( mIsAlive )
+	{
+		mTime += dt;
 
-    float l_Time = (float) l_ActualTime.QuadPart / (float) l_Freq.QuadPart;
-    m_IsAlive = ( m_LifeTime - l_Time > 0.0f ) ? true : false;
-
-    Math::Vect3f l_OldVel = m_Velocity;
-
-    m_Velocity += m_Acceleration * dt;
-    m_Position += ( ( m_Velocity + l_OldVel ) * 0.5f ) * dt;
-
-    m_Billboard.SetPosition( m_Position );
-    m_Billboard.Update();
+		if( mTime < mLifeTime )
+		{
+			Math::Vect3f l_OldVel = mVelocity;
+			mVelocity += mAcceleration * dt;
+			mPosition += ( mVelocity + l_OldVel ) * 0.5f * dt;
+			mBillboard->SetPosition( mPosition );
+			mBillboard->Update();
+		}
+		else
+		{
+			mIsAlive = false;
+		}
+	}
 }
 
 void CParticle::Render()
 {
-    if(!m_IsAlive) { return; }
-
-    CCameraManager *l_CM = CameraMInstance;
-    D3DXVECTOR3 l_Pos = D3DXVECTOR3(m_Position.x, m_Position.y, m_Position.z);
-
-    if(l_CM->GetCurrentCamera()->GetFrustum().SphereVisible(l_Pos, m_SphereRadius))
-    { m_Billboard.Render(); }
+    if( mIsAlive )
+	{
+		mBillboard->Render();
+	}
 }

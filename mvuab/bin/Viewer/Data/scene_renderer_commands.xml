@@ -30,7 +30,6 @@
     <render_scene layer="solid" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/>
-	<render_particules/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
 	
 	<!--end pre_render-->
@@ -65,6 +64,7 @@
 	<enable_z_test/>
 	
 	<render_billboards/>
+	<render_particules/>
 	<render_process/>
 	
 	<disable_z_test/>

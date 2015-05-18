@@ -7,47 +7,38 @@
 
 class CParticle
 {
-    private:
-        float m_LifeTime;
-        float m_SphereRadius;
-
-        bool  m_IsAlive;
-        CBillboard m_Billboard;
-
-        Math::Vect3f m_Color;
-        Math::Vect3f m_Position;
-
-        Math::Vect3f m_Velocity;
-        Math::Vect3f m_Acceleration;
-
-
     public:
         CParticle();
-        CParticle( float sz, float timer, const Math::Vect3f& Color, const Math::Vect3f& Position, const Math::Vect3f& Velocity, const Math::Vect3f& Aceleration );
+		virtual ~CParticle();
         
-        void SetTextureName( std::string TextureName );
-        void SetSize( float sx, float sy );
-
-        void SetColor( const Math::Vect3f& Color );
-        const Math::Vect3f& GetColor();
-
-        void SetPosition( const Math::Vect3f& Position );
-        const Math::Vect3f& GetPosition();
-
-        void SetVelocity( const Math::Vect3f& Velocity );
-        const Math::Vect3f& GetVelocity();
-
-        void SetAcceleration( const Math::Vect3f& Acceleration );
-        const Math::Vect3f& GetAcceleration();
-
-        void SetLifeTime( float Time );
-        float GetLifeTime();
-
-        void SetIsAlive( bool isAlive );
         bool GetIsAlive();
 
+		bool Init
+		( 
+			float aLifeTime, 
+			const Math::Vect3f& aColor, 
+			const Math::Vect3f& aPosition, 
+			const Math::Vect3f& aVelocity, 
+			const Math::Vect3f& aAceleration,
+			const Math::Vect2f& aSize,
+			const std::string & aTextureName,
+			const std::string & aTechniqueName
+		);
+
         void Update( float dt );
-        void Render();
+        void Render();		
+
+	private:
+		CBillboard *mBillboard;
+
+		float mTime;
+        float mLifeTime;
+		bool  mIsAlive;
+
+        Math::Vect3f mColor;
+        Math::Vect3f mPosition;
+        Math::Vect3f mVelocity;
+        Math::Vect3f mAcceleration;
 };
 
 #endif

@@ -95,6 +95,14 @@ inline float Random()
     return rand() / (float)RAND_MAX;
 }
 
+inline unsigned int RandRange( unsigned int aMin, unsigned int aMax )
+{
+    if ( aMin > aMax )
+		std::swap( aMin, aMax );
+
+	return (unsigned int)Math::Utils::Floor( Random() * ( ( aMax - aMin )  + aMin ) );
+}
+
 inline float RandRange( float fMin, float fMax )
 {
     if ( fMin > fMax ) std::swap( fMin, fMax );
@@ -108,6 +116,14 @@ inline Math::Vect3f RandRange( Math::Vect3f aMin, Math::Vect3f aMax )
 	float z = RandRange( aMin.z, aMax.z );
 
 	return Math::Vect3f( x, y, z);
+}
+
+inline Math::Vect2f RandRange( Math::Vect2f aMin, Math::Vect2f aMax )
+{
+	float x = RandRange( aMin.x, aMax.x );
+	float y = RandRange( aMin.y, aMax.y );
+
+	return Math::Vect2f( x, y );
 }
 
 inline Math::Vect3f RandUnitVec()

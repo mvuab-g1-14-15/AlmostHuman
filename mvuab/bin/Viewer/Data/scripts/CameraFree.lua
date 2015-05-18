@@ -17,8 +17,10 @@ function UpdateFree()
 	end		
 	
 	if action_manager:DoAction("MoveBackward") then
+		engine:Trace("MoveBackward")
 		forward = forward - 1
 	elseif action_manager:DoAction("MoveForward") then
+		engine:Trace("MoveForward")
 		forward = forward + 1
 	end
 	
