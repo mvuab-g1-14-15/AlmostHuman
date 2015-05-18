@@ -35,22 +35,14 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-    if ( GetLife() <= 0 )
-    {
-        CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
-        l_ROM->RemoveResource( m_Name );
-        PhysXMInstance->ReleasePhysicController( m_Controller );
-
-        CGizmosManager* l_GizmosManager = GizmosMInstance;
-        std::ostringstream ss;
-        ss << GetName() << "HeadGizmo";
-        std::string l_GizmoName( ss.str() );
-        CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
-        if (l_Gizmo)
-        {
-            l_GizmosManager->RemoveResource(l_GizmoName);
-        }
-    }
+    CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource("characters");
+    PhysXMInstance->ReleasePhysicController(m_Controller);
+    l_ROM->RemoveResource(m_Name);
+    
+    std::ostringstream ss;
+    ss << GetName() << "HeadGizmo";
+    std::string l_GizmoName(ss.str());
+    GizmosMInstance->RemoveResource(l_GizmoName);
 }
 
 void CEnemy::Update()
@@ -96,11 +88,14 @@ void CEnemy::Update()
     Math::Vect3f l_Pos = m_Position;
     l_Pos.y += m_Controller->GetHeight();
 
-    CGizmosManager* l_GizmosManager = GizmosMInstance;
+    
     std::ostringstream ss;
     ss << GetName() << "HeadGizmo";
-    std::string l_GizmoName( ss.str() );
+    std::string l_GizmoName(ss.str());
+
+    CGizmosManager* l_GizmosManager = GizmosMInstance;
     CGizmo* l_Gizmo = l_GizmosManager->GetResource(l_GizmoName);
+
     if (l_Gizmo)
     {
         l_Gizmo->SetPosition(l_Pos);
@@ -110,18 +105,19 @@ void CEnemy::Update()
     else
     {
         l_Gizmo = l_GizmosManager->CreateGizmo(l_GizmoName, l_Pos, - m_fYaw - Math::pi32 * 0.5f, m_fPitch);
-        CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.4f, 0.0f,
-                                   0.0f), 0.0f, 0.0f, Math::colRED);
+        l_GizmosManager->AddResource(l_GizmoName, l_Gizmo);
+
+        CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.4f, 0.0f, 0.0f), 0.0f, 0.0f, Math::colRED);
         l_Gizmo->AddElement(l_Element);
-        l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.4f, 0.0f), 0.0f, 0.0f,
-                    Math::colGREEN);
+
+        l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.4f, 0.0f), 0.0f, 0.0f, Math::colGREEN);
         l_Gizmo->AddElement(l_Element);
-        l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.0f, 0.4f), 0.0f, 0.0f,
-                    Math::colBLUE);
+
+        l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eCube, 0.2f, Math::Vect3f(0.0f, 0.0f, 0.4f), 0.0f, 0.0f, Math::colBLUE);
         l_Gizmo->AddElement(l_Element);
+
         l_Element = l_GizmosManager->CreateGizmoElement(CGizmoElement::eSphere, 0.2f, Math::Vect3f(0.0f), 0.0f, 0.0f);
         l_Gizmo->AddElement(l_Element);
-        l_GizmosManager->AddResource(l_GizmoName, l_Gizmo);
     }
 }
 

@@ -1,6 +1,7 @@
 <managers>
 	<console lines="800" columns="130" max_lines_in_window="25" foreground_color="black" full_size="true" size="1000 800"/>
 	<physics_manager file_config="no_name"/>
+    <gizmos_manager file_config="no_name"/>
 	<graphics_manager file_config=""/>
 	<texture_manager file_config="no_name"/>
 	<effect_manager file_config="../CommonData/effects/effects.xml"/>
@@ -20,7 +21,6 @@
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config="Data/billboards.xml"/>
 	<particle_manager file_config="Data/particles.xml"/>
-	<gizmos_manager file_config="no_name"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<gui_manager file_config="Data/gui.xml"/>
 </managers>

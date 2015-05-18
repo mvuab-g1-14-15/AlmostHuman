@@ -146,7 +146,6 @@ void registerGizmos( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
   LUA_DECLARE_METHOD( CGizmosManager, CreateGizmoElement )
-  //.def( "CreateGizmoElement", &CreateGizmoElement )
   LUA_DECLARE_METHOD( CGizmosManager, CreateGizmo )
   LUA_END_DECLARATION
 }
