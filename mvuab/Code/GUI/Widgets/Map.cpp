@@ -179,11 +179,15 @@ void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::V
 void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width,
                      uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
 {
-  Math::Vect3f PosInMap3d = EnemyMInstance->GetResource( Name )->GetPosition();
-  Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-  CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), Math::Vect2f( PosInMap3d.x, PosInMap3d.z ), l_posInMap, Width,
-                                         Height, Yaw, PositionScript, OrientationScript );
-  m_vEnemy.push_back( l_EnemyMap );
+	CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
+	if (l_Enemy)
+	{
+		Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
+		Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
+		CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), Math::Vect2f( PosInMap3d.x, PosInMap3d.z ), l_posInMap, Width,
+												Height, Yaw, PositionScript, OrientationScript );
+		m_vEnemy.push_back( l_EnemyMap );
+	}
 }
 
 void CMap::AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
