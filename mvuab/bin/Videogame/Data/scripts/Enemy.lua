@@ -13,11 +13,11 @@ function CEnemyLUA:__init(position)
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
-		self.RenderableObject = CreateInstanceMesh(self.Name, "Enemy")
+		self.RenderableObject = CreateInstanceMesh(self.Name, "enemy_android")
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
 	
-	local l_MeshPosition = self.PlayerController:GetPosition()
+	local l_MeshPosition = self.CharacterController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.CharacterController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi);
