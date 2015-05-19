@@ -15,15 +15,14 @@ CParticleEmitter::CParticleEmitter()
     , mTimeToLive(Math::Vect2f(1.0f, 1.0f))
     , mActualTime(0.0f)
     , mSize(Math::Vect2f(1.0f, 1.0f))
-    , mAcceleration(Math::Vect3f(0.0f, 0.0f, 0.0f))
+    , mAcceleration(Math::Vect2f(1.0f, 1.0f))
     , mDirection(Math::Vect3f(0.0f, 0.0f, 0.0f))
     , mPosition(Math::Vect3f(0.0f, 0.0f, 0.0f))
-    , mVelocity(Math::Vect3f(0.0f, 0.0f, 0.0f))
+    , mVelocity(Math::Vect2f(1.0f, 1.0f))
     , mTechniqueName( "" )
 	, mIsInmortal( 0 )
 	, mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
 {
-
 }
 
 CParticleEmitter::~CParticleEmitter()
@@ -39,10 +38,10 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mTimeToEmit			= atts.GetVect2fProperty("time_to_emit", Math::Vect2f(1.0f, 1.0f));
     mTimeToLive			= atts.GetVect2fProperty("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize				= atts.GetVect2fProperty("particle_size_range", 0.0f );
-    mAcceleration		= atts.GetVect3fProperty("acceleration", Math::Vect3f());
+    mAcceleration		= atts.GetVect2fProperty("acceleration",Math::Vect2f(1.0f, 1.0f));
     mDirection			= atts.GetVect3fProperty("direction", Math::Vect3f());
     mPosition			= atts.GetVect3fProperty("position", Math::Vect3f());
-    mVelocity			= atts.GetVect3fProperty("velocity", Math::Vect3f());
+    mVelocity			= atts.GetVect2fProperty("velocity", Math::Vect2f(1.0f, 1.0f));
     mTechniqueName   	= atts.GetPszProperty("technique", "none");
 	mParticlesXEmission = atts.GetVect2fProperty("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
 
@@ -88,9 +87,10 @@ void CParticleEmitter::EmitParticles()
 		if( lNewParticle->Init
 			(	baseUtils::RandRange( mTimeToLive.x, mTimeToLive.y),
 				baseUtils::RandRange( Math::Vect3f(0.0f,0.0f,0.0f) , Math::Vect3f(1.0f,1.0f,1.0f) ),
-				Math::Vect3f(0.0f,5.0f,0.0f),
-				Math::Vect3f(0.0f,1.0f,0.0f), // TODO
-				Math::Vect3f(0.0f, 1.0f, 0.0f),
+				GetSpawnPosition(),
+				baseUtils::RandRange( mVelocity.x, mVelocity.y ),
+				baseUtils::RandRange( mAcceleration.x, mAcceleration.x ),
+				mDirection,
 				baseUtils::RandRange( mSize.x, mSize.y ),
 				mTextures[ baseUtils::RandRange( (unsigned int)(0), (unsigned int)(mTextures.size()) ) ],
 				mTechniqueName

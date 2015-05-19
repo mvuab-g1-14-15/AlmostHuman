@@ -86,6 +86,7 @@ bool CBillboard::Init
 
 void CBillboard::Update()
 {
+	MakeTransform();
 }
 
 void CBillboard::Render()

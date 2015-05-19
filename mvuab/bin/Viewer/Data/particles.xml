@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-	<emitter type="cube" loop="false" active="true" max_particles="10" time_to_emit="10.0" time_to_live="5.0 10.0" particle_size_range="2 4" particles_per_emission="2 4" direction="0.0 1.0 0.0" position="0.0" velocity="1.0 2.0 1.0" cubic_size="1.0 2.0 1.0" technique="BillboardAlignedToCameraTechnique">
+	<emitter type="cube" loop="false" active="true" max_particles="20" time_to_emit="10.0" time_to_live="5.0 10.0" particle_size_range="2 4" particles_per_emission="2 4" direction="0.0 1.0 0.0" position="0.0" velocity="0.0 1.0" acceleration="0.0 1.0" cubic_size="1.0 2.0 1.0" technique="BillboardAlignedToCameraTechnique">
 		<texture name="Data/textures/particles/smoke2.png"/>
 	</emitter> 
 </emitters>

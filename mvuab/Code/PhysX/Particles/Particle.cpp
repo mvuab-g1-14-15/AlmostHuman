@@ -13,11 +13,11 @@ CParticle::CParticle()
 	, mIsAlive( false )
 	, mColor( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 	, mPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
-	, mVelocity( Math::Vect3f( 0.0f, 1.0f, 0.0f ) )
-	, mAcceleration( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
+	, mVelocity( 1.0f )
+	, mAcceleration( 0.0f )
 	, mBillboard( 0 )
+	, mDirection( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 {
-
 }
 
 CParticle::~CParticle()
@@ -30,8 +30,9 @@ bool CParticle::Init
 	float aLifeTime, 
 	const Math::Vect3f& aColor, 
 	const Math::Vect3f& aPosition, 
-	const Math::Vect3f& aVelocity, 
-	const Math::Vect3f& aAcceleration,
+	float aVelocity, 
+	float aAcceleration,
+	const Math::Vect3f& aDirecction,
 	const Math::Vect2f& aSize,
     const std::string & aTextureName,
     const std::string & aTechniqueName
@@ -43,6 +44,7 @@ bool CParticle::Init
 	mPosition = aPosition;
 	mVelocity = aVelocity;
 	mAcceleration = aAcceleration;
+	mDirection = aDirecction.GetNormalized();
 
 	mBillboard = new CBillboard();
 
@@ -57,29 +59,26 @@ void CParticle::Update( float dt )
 {
 	ASSERT( mBillboard, "Null billboard for particle" );
 
-	if( mIsAlive )
+	//if( mIsAlive )
 	{
 		mTime += dt;
 
-		if( mTime < mLifeTime )
-		{
-			Math::Vect3f l_OldVel = mVelocity;
+		//if( mTime < mLifeTime )
+		//{
+			float lVi = mVelocity;
 			mVelocity += mAcceleration * dt;
-			mPosition += ( mVelocity + l_OldVel ) * 0.5f * dt;
+			mPosition = mPosition + mDirection * ( mVelocity + lVi * 0.5f * dt );
 			mBillboard->SetPosition( mPosition );
 			mBillboard->Update();
-		}
-		else
-		{
-			mIsAlive = false;
-		}
+		//}
+		//else
+		//{
+			//mIsAlive = false;
+		//}
 	}
 }
 
 void CParticle::Render()
 {
-    if( mIsAlive )
-	{
-		mBillboard->Render();
-	}
+	mBillboard->Render();
 }

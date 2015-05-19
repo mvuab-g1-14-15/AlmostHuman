@@ -35,16 +35,8 @@ TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 
 float4 mainPS(TT1_VERTEX_PS IN) : COLOR
 {
-#if defined( NOT_ALIGNED )
-	return float4(1, 0, 0, 0.5);
-#elif defined( ALIGNED_TO_UP_AXIS )
-	return float4(0, 1, 0, 0.5);
-#else 
-	return float4(0, 0, 1, 0.5);
-#endif
-
-	//float4 l_Color=tex2D(S0PointSampler, IN.UV);
-	//return float4(l_Color.xyz*l_Color.a, l_Color.a);//float4(1, 0, 0, 1);
+	float4 l_Color=tex2D(S0PointSampler, IN.UV);
+	return float4(l_Color.xyz*l_Color.a, l_Color.a);//float4(1, 0, 0, 1);
 }
 
 technique TECHNIQUE_NAME

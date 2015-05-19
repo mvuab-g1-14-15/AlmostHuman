@@ -35,13 +35,13 @@ class CParticleEmitter :  public CName
         uint32						mParticlesCount;
 		float32						mActualTime;
         Math::Vect2f				mTimeToEmit;
+		Math::Vect2f				mAcceleration;
+		Math::Vect2f				mVelocity;
         Math::Vect2f				mSize;
 		Math::Vect2f				mTimeToLive;
 		Math::Vect2f				mParticlesXEmission;
-        Math::Vect3f				mAcceleration;
         Math::Vect3f				mDirection;
         Math::Vect3f				mPosition;
-        Math::Vect3f				mVelocity;
         std::string					mTechniqueName;
         std::vector<std::string>	mTextures;
 		std::vector<CParticle*>		mParticles;
