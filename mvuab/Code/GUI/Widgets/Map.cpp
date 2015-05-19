@@ -43,7 +43,7 @@ void CMap::Render()
     CGuiElement::Render();
 
     //Nos aseguramos que la posición del player no salga del mapa
-    if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
+   /* if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
       m_posNPlayer.x = m_Width_Map / 2;
 
     if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 2 ) ) )
@@ -53,7 +53,7 @@ void CMap::Render()
       m_posNPlayer.y = m_Height_Map / 2;
 
     if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 2 ) ) )
-      m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;
+      m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;*/
 
     //RENDER MAPA
     GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
@@ -80,7 +80,7 @@ void CMap::Render()
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vItems[i]->m_PosInMap.x - ( m_posNPlayer.x -
                                    ( m_Width_Map / 2 ) ) ) / m_Width_Map * m_uWidth ),
                                    ( uint32 )( ( m_vItems[i]->m_PosInMap.y - ( m_posNPlayer.y - ( m_Height_Map / 2 ) ) ) / m_Height_Map * m_uHeight ) );
-          GraphicsInstance->DrawQuad2D( l_drawPos, m_vItems[i]->m_Width, m_vItems[i]->m_Height, m_vItems[i]->m_Yaw, CGraphicsManager::UPPER_LEFT,
+          GraphicsInstance->DrawQuad2D( l_drawPos, m_vItems[i]->m_Width, m_vItems[i]->m_Height, CGraphicsManager::CENTER,
                                         m_vItems[i]->m_Texture );
         }
       }
@@ -108,7 +108,7 @@ void CMap::Render()
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vEnemy[i]->m_PosInMap.x - ( m_posNPlayer.x -
                                    ( m_Width_Map / 2 ) ) ) / m_Width_Map * m_uWidth ),
                                    ( uint32 )( ( m_vEnemy[i]->m_PosInMap.y - ( m_posNPlayer.y - ( m_Height_Map / 2 ) ) ) / m_Height_Map * m_uHeight ) );
-		  GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, m_vEnemy[i]->m_Yaw, CGraphicsManager::UPPER_LEFT,
+		  GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER,
                                         m_vEnemy[i]->m_Texture );
         }
       }
