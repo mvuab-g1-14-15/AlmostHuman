@@ -48,6 +48,7 @@ class CParticleEmitter :  public CName
 
 	private:
 		void EmitParticles();
+		void KillParticles();
 };
 
 //-----------------------------------------------------------------------------------------

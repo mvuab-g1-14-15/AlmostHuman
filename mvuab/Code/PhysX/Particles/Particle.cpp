@@ -59,26 +59,27 @@ void CParticle::Update( float dt )
 {
 	ASSERT( mBillboard, "Null billboard for particle" );
 
-	//if( mIsAlive )
+	if( mIsAlive )
 	{
 		mTime += dt;
 
-		//if( mTime < mLifeTime )
-		//{
+		if( mTime < mLifeTime )
+		{
 			float lVi = mVelocity;
 			mVelocity += mAcceleration * dt;
 			mPosition = mPosition + mDirection * ( mVelocity + lVi * 0.5f * dt );
 			mBillboard->SetPosition( mPosition );
 			mBillboard->Update();
-		//}
-		//else
-		//{
-			//mIsAlive = false;
-		//}
+		}
+		else
+		{
+			mIsAlive = false;
+		}
 	}
 }
 
 void CParticle::Render()
 {
-	mBillboard->Render();
+	if( mIsAlive )
+		mBillboard->Render();
 }

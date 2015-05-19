@@ -11,7 +11,7 @@ class CParticle
         CParticle();
 		virtual ~CParticle();
         
-        bool GetIsAlive();
+        bool IsAlive();
 
 		bool Init
 		( 
@@ -42,5 +42,11 @@ class CParticle
         float mVelocity;
         float mAcceleration;
 };
+
+//----------------------------------------------------------------------------------------
+inline bool CParticle::IsAlive()
+{
+	return mIsAlive;
+}
 
 #endif

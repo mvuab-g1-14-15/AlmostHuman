@@ -10,7 +10,6 @@ CParticleEmitter::CParticleEmitter()
     , mIsLoop( false )
     , mIsActive( false )
     , mMaxParticles(0)
-    , mParticlesCount(0)
     , mTimeToEmit(Math::Vect2f(1.0f, 1.0f))
     , mTimeToLive(Math::Vect2f(1.0f, 1.0f))
     , mActualTime(0.0f)
@@ -55,11 +54,14 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 		}
 	}
 
+	mParticles.reserve( mMaxParticles );
+
     return true;
 }
 
 void CParticleEmitter::Update( float dt )
 {
+	KillParticles();
 	EmitParticles();
 	for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
     { 
@@ -92,7 +94,7 @@ void CParticleEmitter::EmitParticles()
 				baseUtils::RandRange( mAcceleration.x, mAcceleration.x ),
 				mDirection,
 				baseUtils::RandRange( mSize.x, mSize.y ),
-				mTextures[ baseUtils::RandRange( (unsigned int)(0), (unsigned int)(mTextures.size()) ) ],
+				mTextures[ baseUtils::RandRange( (unsigned int)(0), (unsigned int)(mTextures.size() - 1) ) ],
 				mTechniqueName
 			) 
 		   )
@@ -104,4 +106,35 @@ void CParticleEmitter::EmitParticles()
 			CHECKED_DELETE( lNewParticle );
 		}	
 	}
+}
+
+void CParticleEmitter::KillParticles()
+{
+	for( uint32 i = 0, lParticlesCount = GetParticleCount(); i < lParticlesCount; )
+    { 
+		CParticle* lParticle = GetParticle( i );
+		if( !lParticle->IsAlive() )
+		{
+			// Obtain the last particle
+			CParticle* lBackParticle = mParticles.back();
+			
+			// Put the particle in the position of the deleted particle
+			ASSERT( i < mParticles.size(), " Killing an overflow particle");
+			mParticles[i] = lBackParticle;
+
+			// Delete the dead particle
+			CHECKED_DELETE( lParticle );
+
+			// Pop it back
+			mParticles.pop_back();
+
+			// Decrease the number of particles to be updated
+			lParticlesCount = GetParticleCount();
+		}
+		else
+		{
+			// Is ok, then next iteration
+			++i;
+		}
+    }
 }
