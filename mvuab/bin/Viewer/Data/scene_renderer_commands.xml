@@ -59,8 +59,6 @@
 	<!--
 	<clear_scene color="true" depth="true" stencil="true"/>
 	-->
-	<enable_alpha_blend/>
-	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
 	<enable_z_test/>
 	
 	<render_billboards/>

@@ -47,6 +47,10 @@ technique TECHNIQUE_NAME
 #if defined( NOT_ALIGNED )
 		
 #endif
+		AlphaBlendEnable = true;
+		BlendOp=Add;
+		SrcBlend = one;
+		DestBlend = one;
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();
 	}
