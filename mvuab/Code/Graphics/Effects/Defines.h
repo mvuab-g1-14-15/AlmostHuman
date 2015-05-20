@@ -3,7 +3,11 @@
 #define EFFECTS_DEFINES_H
 
 #define DECLARE_EFFECT_PARAMETER( semantic ) D3DXHANDLE m_##semantic;
+#define CTOR_EFFECT_PARAMETER( semantic ) m_##semantic( 0 )
+#define RESET_EFFECT_PARAMETER( semantic ) m_##semantic = 0;
 #define LINK_EFFECT_PARAMETER( parameter ) GetParameterBySemantic( #parameter, m_##parameter );
+
+#define SET_FLOAT_PARAMETER( parameter, value ) m_Effect->SetFloat( m_##parameter, value );
 
 //-----------------------------------------------------------------------
 #define MAX_LIGHTS_BY_SHADER 4

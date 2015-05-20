@@ -19,7 +19,9 @@ CRenderableVertexs* CBillboard::sRV = 0;
 CBillboard::CBillboard()
     : CName()
     , CObject3D()
-    , mSize()
+    , mSize( 1.0f )
+    , mAlpha(1.0f )
+    , mAngle( (int)Math::pi32 )
     , m_Active(true)
     , m_Texture(0)
     , mTechnique(0)
@@ -38,7 +40,7 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
 
     lOk = lOk && CObject3D::Init(atts);
 
-    mSize = atts.GetVect2fProperty("size", Math::Vect2f(1.0f, 1.0f) );
+    mSize = atts.GetFloatProperty("size", 1.0f );
     m_Active = atts.GetBoolProperty("enabled", false );
 
     // Get the texture of the billboard
@@ -58,7 +60,7 @@ bool CBillboard::Init
 (
     const std::string&  aName,
     const Math::Vect3f& aPosition,
-    const Math::Vect2f& aSize,
+    float aSize,
     const std::string & aTextureName,
     const std::string & aTechniqueName,
     bool                aActive
@@ -95,31 +97,12 @@ void CBillboard::Render()
     {
         CGraphicsManager* lGM = GraphicsInstance;
         lGM->SetTransform( GetTransform() );
-		if( m_Texture )
-			m_Texture->Activate(0);
+        if( m_Texture )
+            m_Texture->Activate(0);
+        mTechnique->SetSize( mSize );
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }
-}
-
-const Math::Vect2f & CBillboard::GetSize() const
-{
-    return mSize;
-}
-
-const CTexture * CBillboard::GetTexture() const
-{
-    return m_Texture;
-}
-
-void CBillboard::SetTexture(const CTexture* aTexture)
-{
-    m_Texture = const_cast<CTexture*>(aTexture);
-}
-
-void CBillboard::SetSize(const Math::Vect2f & aSize )
-{
-    mSize = aSize;
 }
 
 void CBillboard::CreateBillBoardGeometry()

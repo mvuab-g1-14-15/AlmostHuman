@@ -48,10 +48,10 @@ int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
 //
 float3      g_CameraPosition                                        : CameraPosition;
 
-//
-// Size
-//
 float	    g_Size													: Size;
+int	        g_Angle													: Angle;
+float	    g_Alpha													: Alpha;
+float3	    g_Color													: Color;
 
 //
 // Lights data
@@ -68,7 +68,8 @@ float3      g_LightsPosition[MAX_LIGHTS_BY_SHADER]                  : LightsPosi
 float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDirections;
 float       g_SpecularExponent 	= 20.0f;
 float       g_SpecularFactor 	= 20.0f;
-float4      g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
+//float4      g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
+float4      g_AmbientLight 		= float4(0.0, 0.0, 0.0, 1.0);
 
 //
 // Cal3D parameters

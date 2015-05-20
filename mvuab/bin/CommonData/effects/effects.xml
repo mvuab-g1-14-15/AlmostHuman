@@ -88,6 +88,14 @@
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
+	<!-- Particle Effects -->
+	<technique name="SmokeTechnique">
+		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="SmokeTechnique"/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
 	<!-- Effects of GenerateGBuffer -->
 	<technique name="GenerateGBufferTechnique" vertex_type="19">
 		<effect name="GenerateGBuffer" file="../CommonData/effects/GenerateGBuffer.fx"/>
