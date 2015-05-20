@@ -6,7 +6,7 @@ function CEnemyLUA:__init(position)
 	self.Name = "Enemy" .. id_manager:GetId()
 	
 	self.Radius = 0.4
-	self.Height = 2.0
+	self.Height = 1.8
 	
 	physic_manager:AddController(self.Name, self.Radius, self.Height/2.0, 0.2, 0.05, 0.5, position, CollisionGroup.ECG_ENEMY.value, -490)
 	self.CharacterController = physic_manager:GetController(self.Name)
