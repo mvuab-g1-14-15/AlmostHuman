@@ -16,7 +16,8 @@ utility UABUtility "UAB Utility" width:163 height:500
 	button MeshButton "Mesh" pos:[85,171] width:57 height:17
 	button CinematicsButton "Cinematics" pos:[83,193] width:57 height:17
 	button CameraButon "Camera" pos:[21,192] width:57 height:17
-	button GraphButton "Graph" pos:[19,213] width:124 height:17
+	button GraphButton "Graph" pos:[21,213] width:57 height:17
+	button RouteButton "Route" pos:[85,213] width:57 height:17
 	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,234] width:124 height:17
 	button SceneButton "Scene" pos:[18,257] width:124 height:17
 	
@@ -111,8 +112,20 @@ utility UABUtility "UAB Utility" width:163 height:500
 		
 		GraphDir = PathLabel.text + "\\graph.xml"
 		
-		ExportGraphXML GraphDir
+		local graphExporter = RouteAndGraph()
+		graphExporter.Calculate()
+		graphExporter.ExportGraphXML GraphDir
+	)
+	on RouteButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
 		
+		RouteDir = PathLabel.text + "\\route.xml"
+		
+		local graphExporter = RouteAndGraph()
+		graphExporter.Calculate()
+		graphExporter.ExportRouteXML RouteDir
 	)
 	on StaticMeshManagerButton pressed do
 	(		
