@@ -18,7 +18,6 @@ function CEnemyLUA:__init(position)
 	end
 	
 	local l_MeshPosition = self.CharacterController:GetPosition()
-	l_MeshPosition.y = l_MeshPosition.y - self.CharacterController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi);
 
@@ -33,7 +32,6 @@ end
 
 function CEnemyLUA:SetMeshTransform()
 	local l_MeshPosition = self.PlayerController:GetPosition()
-	l_MeshPosition.y = l_MeshPosition.y - self.CharacterController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi);
 
