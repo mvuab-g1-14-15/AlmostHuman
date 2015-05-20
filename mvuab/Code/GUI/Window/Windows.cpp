@@ -839,11 +839,11 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
     CXMLTreeNode pSubNewNode = pNewNode( i );
     const std::string& NameItem  = pSubNewNode.GetPszProperty( "name", "defaultItemElement" );
     const std::string& TextureItem = pSubNewNode.GetPszProperty( "texture", "no_texture" );
-	const std::string& position_script = pSubNewNode.GetPszProperty( "get_position_script", "no_script" );
-	const std::string& orientation_script = pSubNewNode.GetPszProperty( "orientation", "no_script" );
+    const std::string& position_script = pSubNewNode.GetPszProperty( "get_position_script", "no_script" );
+    const std::string& orientation_script = pSubNewNode.GetPszProperty( "orientation", "no_script" );
     uint32 WidthItem = pSubNewNode.GetIntProperty( "width", 50 );
     uint32 HeightItem  = pSubNewNode.GetIntProperty( "height", 50 );
-	float Yaw = pSubNewNode.GetFloatProperty( "yaw", 0.f );
+    float Yaw = pSubNewNode.GetFloatProperty( "yaw", 0.f );
 
     std::string tagName = pSubNewNode.GetName();
 
@@ -854,10 +854,10 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
     }
 
     if ( tagName.compare( "mark_player" ) == 0 )
-	{
-	  Math::Vect2f pos = pSubNewNode.GetVect2fProperty( "pos_in_map", Math::Vect2f( 0.f, 0.f ) );
+    {
+      Math::Vect2f pos = pSubNewNode.GetVect2fProperty( "pos_in_map", Math::Vect2f( 0.f, 0.f ) );
       l_Map->AddPlayer( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
-	}
+    }
 
     if ( tagName.compare( "enemy" ) == 0 )
       l_Map->AddEnemy( NameItem, TextureItem, WidthItem, HeightItem, Yaw, position_script, orientation_script );
