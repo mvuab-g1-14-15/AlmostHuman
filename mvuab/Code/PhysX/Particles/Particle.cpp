@@ -15,7 +15,7 @@ CParticle::CParticle()
 	, mPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 	, mVelocity( 1.0f )
 	, mAcceleration( 0.0f )
-	, mBillboard( 0 )
+	, mBillboard( new CBillboard() )
 	, mDirection( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 {
 }
@@ -38,15 +38,14 @@ bool CParticle::Init
     const std::string & aTechniqueName
 )
 {
-	mLifeTime = aLifeTime;
-	mIsAlive = true;
-	mColor = aColor;
-	mPosition = aPosition;
-	mVelocity = aVelocity;
-	mAcceleration = aAcceleration;
-	mDirection = aDirecction.GetNormalized();
-
-	mBillboard = new CBillboard();
+	mTime           = 0.0f;
+	mLifeTime       = aLifeTime;
+	mIsAlive        = true;
+	mColor          = aColor;
+	mPosition       = aPosition;
+	mVelocity       = aVelocity;
+	mAcceleration   = aAcceleration;
+	mDirection      = aDirecction.GetNormalized();
 
 	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
 
