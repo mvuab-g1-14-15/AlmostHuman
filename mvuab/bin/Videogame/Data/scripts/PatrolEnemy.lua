@@ -14,6 +14,7 @@ function CPatrolEnemyLUA:__init(waypoints)
 end
 
 function CPatrolEnemyLUA:Update()
+	CEnemyLUA.Update(self)
 	if self:IsInWaypoint() then
 		self:NextWaypoint()
 	end
