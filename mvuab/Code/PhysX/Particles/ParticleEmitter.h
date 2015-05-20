@@ -28,11 +28,12 @@ class CParticleEmitter :  public CName
 		      CParticle* GetParticle( const uint32 aIdx);
 
     protected:
+		typedef std::vector<CParticle*> TParticleContainer;
         bool						mIsLoop;
 		bool						mIsInmortal;
         bool						mIsActive;
         uint32						mMaxParticles;
-        uint32						mParticlesCount;
+        uint32						mAliveParticles;
 		float32						mActualTime;
         Math::Vect2f				mTimeToEmit;
 		Math::Vect2f				mAcceleration;
@@ -44,7 +45,8 @@ class CParticleEmitter :  public CName
         Math::Vect3f				mPosition;
         std::string					mTechniqueName;
         std::vector<std::string>	mTextures;
-		std::vector<CParticle*>		mParticles;
+		TParticleContainer		    mParticles;
+		TParticleContainer		    mDeadParticles;
 
 	private:
 		void EmitParticles();
