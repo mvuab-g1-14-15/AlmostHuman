@@ -112,9 +112,9 @@ utility UABUtility "UAB Utility" width:163 height:500
 		
 		GraphDir = PathLabel.text + "\\graph.xml"
 		
-		local RouteAndGraph
-		RouteAndGraph.Calculate()
-		RouteAndGraph.ExportGraphXML GraphDir
+		local graphExporter = RouteAndGraph()
+		graphExporter.Calculate()
+		graphExporter.ExportGraphXML GraphDir
 	)
 	on RouteButton pressed do
 	(
@@ -123,9 +123,9 @@ utility UABUtility "UAB Utility" width:163 height:500
 		
 		RouteDir = PathLabel.text + "\\route.xml"
 		
-		local RouteAndGraph
-		RouteAndGraph.Calculate()
-		RouteAndGraph.ExportRouteXML RouteDir
+		local graphExporter = RouteAndGraph()
+		graphExporter.Calculate()
+		graphExporter.ExportRouteXML RouteDir
 	)
 	on StaticMeshManagerButton pressed do
 	(		

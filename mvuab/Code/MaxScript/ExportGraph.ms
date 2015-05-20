@@ -7,6 +7,7 @@ struct RouteAndGraph
 	m_MapNodes,
 	m_NodeConnection,
 	m_Nodes,
+	m_Arcs,
 	
 	fn Calculate =
 	(
@@ -74,11 +75,11 @@ struct RouteAndGraph
 				append m_Arcs[l_Node2] l_Node1
 			)
 		)
-	)
+	),
 	
 	fn ExportGraphXML fileNameXML =
 	(
-		xDoc = XMLDocument filenameXML
+		local xDoc = XMLDocument filenameXML
 		--create the base node and append the node to the document
 		local l_RootNode = xDoc.getNewNode "graph"
 		xDoc.AppendNode l_RootNode
@@ -110,9 +111,21 @@ struct RouteAndGraph
 			)
 		)
 		return xDoc.PrettySaveXML()
-	)
-	
+	),
+		
 	fn ExportRouteXML fileNameXML =
 	(
+		local xDoc = XMLDocument filenameXML
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "route"
+		xDoc.AppendNode l_RootNode
+
+		for i = 1 to m_Nodes.count do
+		(
+			local l_NewGraphNode = xDoc.getNewNode "node"
+			l_RootNode.AppendNode l_NewGraphNode
+			l_NewGraphNode.AddAttributeCoordinate "pos" m_Nodes[i]
+		)
+		return xDoc.PrettySaveXML()
 	)
 )
