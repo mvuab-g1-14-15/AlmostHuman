@@ -9,7 +9,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	float4 NormalColor 	= tex2D(S2PointSampler, UV); //Normal (float3) + (float) Not used
 	float4 Depth 		= tex2D(S3PointSampler, UV); //Depth (float4)
 	
-	float4 	l_DiffuseColor 		= Ambient;
+	float4 	l_DiffuseColor 		= Albedo;
 	float 	l_SpecularFactor 	= Albedo.a;
 	float4 	l_NormalColor 		= tex2D(S2PointSampler, UV);
 	float	l_Depth 			= tex2D(S3LinearSampler, UV).x;

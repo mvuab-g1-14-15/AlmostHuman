@@ -69,15 +69,17 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 		clip(-1);
 		
 	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
-	
+	float3 l_AmbientColor = float3(0,0,0);
 #if defined( USE_SELF_ILUM )
-	l_DiffuseColor = l_DiffuseColor+tex2D(S1LinearSampler, IN.UV2);
+	l_AmbientColor = l_DiffuseColor+tex2D(S1LinearSampler, IN.UV2)*2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
 #elif defined( USE_RNM )
 	float3 l_LightMap = GetRadiosityNormalMapBySamplers(FaceNn, FaceNormal, FaceTangent, FaceBinormal, IN.UV2, S2LinearSampler, S3LinearSampler, S4LinearSampler);
-	l_DiffuseColor = l_DiffuseColor + l_LightMap;
+	l_AmbientColor = l_DiffuseColor * l_LightMap * 2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
+#else
+	l_AmbientColor = l_DiffuseColor.xyz * g_AmbientLight;
 #endif
 	
-	OUT.Ambient=float4(l_DiffuseColor.xyz*g_AmbientLight, g_SpecularExponent );
+	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 
 #if defined( USE_NORMAL )
 	#if defined( USE_SELF_ILUM )

@@ -33,7 +33,7 @@ bool CParticle::Init
 	float aVelocity, 
 	float aAcceleration,
 	const Math::Vect3f& aDirecction,
-	const Math::Vect2f& aSize,
+	float aSize,
     const std::string & aTextureName,
     const std::string & aTechniqueName
 )
@@ -64,6 +64,13 @@ void CParticle::Update( float dt )
 
 		if( mTime < mLifeTime )
 		{
+            /*
+            Math::CLerpAnimator1D lAlphaInterpolator;
+            lAlphaInterpolator.SetValues(A.GetFarPlane(), B.GetFarPlane(), 1.0f, Math::FUNC_CONSTANT);
+            float32 l_FarPlane;
+            l_Interpolator1D.Update(Percentage, l_FarPlane);
+            */
+
 			float lVi = mVelocity;
 			mVelocity += mAcceleration * dt;
 			mPosition = mPosition + mDirection * ( mVelocity + lVi * 0.5f * dt );
