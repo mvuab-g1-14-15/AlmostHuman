@@ -40,6 +40,9 @@
       <Filter>FunctionsToRegister</Filter>
     </ClCompile>
     <ClCompile Include="ScriptManager.cpp" />
+    <ClCompile Include="FunctionsToRegister\ScriptFunctions.cpp">
+      <Filter>FunctionsToRegister</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FunctionsToRegister\AIFunctions.h">
@@ -77,5 +80,8 @@
     </ClInclude>
     <ClInclude Include="luabind_macros.h" />
     <ClInclude Include="ScriptManager.h" />
+    <ClInclude Include="FunctionsToRegister\ScriptFunctions.h">
+      <Filter>FunctionsToRegister</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

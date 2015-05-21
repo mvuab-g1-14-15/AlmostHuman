@@ -20,6 +20,7 @@
     <ClCompile Include="FunctionsToRegister\InputFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\NetworkFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\PhysXFunctions.cpp" />
+    <ClCompile Include="FunctionsToRegister\ScriptFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\SoundFunctions.cpp" />
     <ClCompile Include="FunctionsToRegister\VideogameFunctions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -36,6 +37,7 @@
     <ClInclude Include="FunctionsToRegister\InputFunctions.h" />
     <ClInclude Include="FunctionsToRegister\NetworkFunctions.h" />
     <ClInclude Include="FunctionsToRegister\PhysXFunctions.h" />
+    <ClInclude Include="FunctionsToRegister\ScriptFunctions.h" />
     <ClInclude Include="FunctionsToRegister\SoundFunctions.h" />
     <ClInclude Include="FunctionsToRegister\VideogameFunctions.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

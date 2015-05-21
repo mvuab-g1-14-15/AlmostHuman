@@ -39,8 +39,6 @@ function CPatrolEnemyLUA:MoveToWaypoint()
 	Dir.y = 0.0
 	Dir:Normalize()
 	self.CharacterController:Move(Dir, dt)
-	
-	engine:Trace("Actual position " .. self.CharacterController:GetPosition():ToString())
 end
 
 function CPatrolEnemyLUA:IsInWaypoint()
