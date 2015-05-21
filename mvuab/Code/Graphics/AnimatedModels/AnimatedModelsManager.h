@@ -12,17 +12,19 @@ class CAnimatedCoreModel;
 class CAnimatedModelsManager : public CMapManager<CAnimatedCoreModel>, public CManager
 {
 public:
-    CAnimatedModelsManager();
-	CAnimatedModelsManager(CXMLTreeNode& atts);
-    ~CAnimatedModelsManager();
-    CAnimatedCoreModel * GetCore(const std::string &Name, const std::string &Path);
-    CAnimatedCoreModel * GetCore(const std::string &Name);
-    CAnimatedInstanceModel * GetInstance(const std::string &Name);
-	void Init();
-	void Update(){}
-	void Render(){}
+  CAnimatedModelsManager();
+  CAnimatedModelsManager( CXMLTreeNode& atts );
+  ~CAnimatedModelsManager();
+  CAnimatedCoreModel* GetCore( const std::string& Name, const std::string& Path );
+  CAnimatedCoreModel* GetCore( const std::string& Name );
+  CAnimatedInstanceModel* GetInstance( const std::string& Name );
+  void Init();
+  void Update() {}
+  void Render() {}
+
+  void Reload();
 protected:
-    CAnimatedCoreModel *AddNewCore( const std::string &Name, const std::string &Path );
+  CAnimatedCoreModel* AddNewCore( const std::string& Name, const std::string& Path );
 };
 
 #endif //ANIMATED_MODEL_MANAGER_H

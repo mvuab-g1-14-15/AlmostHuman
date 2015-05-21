@@ -9,52 +9,47 @@
 #include <AK/SoundEngine/Common/AkSoundEngine.h>
 #include <AK/MusicEngine/Common/AkMusicEngine.h>
 #include <AK/Plugin/AllPluginsRegistrationHelpers.h>
+
+#ifdef _DEBUG
 #ifndef AK_OPTIMIZED
 #include <AK/Comm/AkCommunication.h>
 #endif // AK_OPTIMIZED
+#endif
 
 #include <Windows.h>
 #include <string>
 #include "XML\XMLTreeNode.h"
 #include "Utils/Defines.h"
 #include "EngineConfig.h"
-#include "AK/SoundEngine/Common/AkTypes.h"
+//#include "AK/SoundEngine/Common/AkTypes.h"
 
-namespace AK
-{
+namespace AK {
 #ifdef WIN32
-
-void* AllocHook( size_t in_size )
-{
-  return malloc( in_size );
-}
-
-void FreeHook( void* in_ptr )
-{
-  free( in_ptr );
-}
-
-void* VirtualAllocHook(
-  void* in_pMemAddress,
-  size_t in_size,
-  DWORD in_dwAllocationType,
-  DWORD in_dwProtect
-)
-
-{
-  return VirtualAlloc( in_pMemAddress, in_size, in_dwAllocationType, in_dwProtect );
-}
-
-void VirtualFreeHook(
-  void* in_pMemAddress,
-  size_t in_size,
-  DWORD in_dwFreeType
-)
-
-{
-  VirtualFree( in_pMemAddress, in_size, in_dwFreeType );
-}
-
+  void *AllocHook( size_t in_size ) {
+    return malloc( in_size );
+  }
+  void FreeHook( void *in_ptr ) {
+    free( in_ptr );
+  }
+  // Note: VirtualAllocHook() may be used by I/O pools of the default implementation
+  // of the Stream Manager, to allow "true" unbuffered I/O (using FILE_FLAG_NO_BUFFERING
+  // - refer to the Windows SDK documentation for more details). This is NOT mandatory;
+  // you may implement it with a simple malloc().
+  void *VirtualAllocHook(
+    void *in_pMemAddress,
+    size_t in_size,
+    DWORD in_dwAllocationType,
+    DWORD in_dwProtect
+    ) {
+      return VirtualAlloc( in_pMemAddress, in_size, in_dwAllocationType, in_dwProtect );
+  }
+  void VirtualFreeHook(
+    void *in_pMemAddress,
+    size_t in_size,
+    DWORD in_dwFreeType
+    ) {
+      VirtualFree( in_pMemAddress, in_size, in_dwFreeType );
+  }
 #endif
 }
 
@@ -66,13 +61,14 @@ CWWSoundManager::CWWSoundManager( const CXMLTreeNode& atts )
 
 void CWWSoundManager::Done()
 {
-
+#ifdef _DEBUG
 #ifndef AK_OPTIMIZED
   //
   // Terminate Communication Services
   //
   AK::Comm::Term();
 #endif // AK_OPTIMIZED
+#endif
 
   AK::MusicEngine::Term();
   AK::SoundEngine::Term();
@@ -92,37 +88,48 @@ void CWWSoundManager::Done()
 void CWWSoundManager::Init()
 {
 
-  AkMemSettings memSettings;
-  memSettings.uMaxNumPools = 20;
+  //
+  // Create and initialize an instance of the default memory manager. Note
+  // that you can override the default memory manager with your own. Refer
+  // to the SDK documentation for more information.
+  //
 
-  if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success )
-  {
+  AkMemSettings memSettings;
+  memSettings.uMaxNumPools = 50;
+
+  if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success ) {
     assert( ! "Could not create the memory manager." );
-    return;
   }
+
+  //
+  // Create and initialize an instance of the default streaming manager. Note
+  // that you can override the default streaming manager with your own. Refer
+  // to the SDK documentation for more information.
+  //
 
   AkStreamMgrSettings stmSettings;
   AK::StreamMgr::GetDefaultSettings( stmSettings );
 
   // Customize the Stream Manager settings here.
 
-  if ( !AK::StreamMgr::Create( stmSettings ) )
-  {
+  if ( !AK::StreamMgr::Create( stmSettings ) ) {
     assert( ! "Could not create the Streaming Manager" );
-    return;
   }
 
+  //
+  // Create a streaming device with blocking low-level I/O handshaking.
+  // Note that you can override the default low-level I/O module with your own. Refer
+  // to the SDK documentation for more information.
+  //
   AkDeviceSettings deviceSettings;
   AK::StreamMgr::GetDefaultDeviceSettings( deviceSettings );
 
   // Customize the streaming device settings here.
   m_lowLevelIO = new CAkDefaultIOHookBlocking();
-
-
-  if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success )
-  {
+  // CAkFilePackageLowLevelIOBlocking::Init() creates a streaming device
+  // in the Stream Manager, and registers itself as the File Location Resolver.
+  if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success ) {
     assert( ! "Could not create the streaming device and Low-Level I/O system" );
-    return;
   }
 
   AkInitSettings initSettings;
@@ -130,23 +137,25 @@ void CWWSoundManager::Init()
   AK::SoundEngine::GetDefaultInitSettings( initSettings );
   AK::SoundEngine::GetDefaultPlatformInitSettings( platformInitSettings );
 
-  if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success )
-  {
+  if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success ) {
     assert( ! "Could not initialize the Sound Engine." );
-    return;
   }
+
+  //
+  // Initialize the music engine
+  // Using default initialization parameters
+  //
 
   AkMusicSettings musicInit;
   AK::MusicEngine::GetDefaultInitSettings( musicInit );
 
-  if ( AK::MusicEngine::Init( &musicInit ) != AK_Success )
-  {
+  if ( AK::MusicEngine::Init( &musicInit ) != AK_Success ) {
     assert( ! "Could not initialize the Music Engine." );
-    return;
   }
 
   AK::SoundEngine::RegisterAllPlugins();
 
+#ifdef _DEBUG
 
 #ifndef AK_OPTIMIZED
   //
@@ -154,16 +163,16 @@ void CWWSoundManager::Init()
   //
   AkCommSettings commSettings;
   AK::Comm::GetDefaultInitSettings( commSettings );
-
-  if ( AK::Comm::Init( commSettings ) != AK_Success )
-  {
+  if ( AK::Comm::Init( commSettings ) != AK_Success ) {
     assert( ! "Could not initialize communication." );
-    return;
+    //return false;
   }
-
 #endif // AK_OPTIMIZED
+#endif
 
-  Load( mConfigPath );
+
+  
+ Load( mConfigPath );
 }
 
 void CWWSoundManager::Update()

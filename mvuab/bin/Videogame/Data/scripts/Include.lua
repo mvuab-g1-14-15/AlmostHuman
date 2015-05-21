@@ -13,6 +13,7 @@ renderable_objects_manager_characters = renderable_objects_layer_manager:GetReso
 sound_manager = GetSoundManager()
 gui_manager = GetGUIManager()
 id_manager = CIdManager()
+countdowntimer_manager = GetCountDownTimerManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0

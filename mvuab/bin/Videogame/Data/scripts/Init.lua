@@ -41,4 +41,13 @@ function update_gameplay()
 	if action_manager:DoAction("ChangeRoom") then
 		g_Player:SetPosition(ChangeRoom())
 	end
+	
+		if action_manager:DoAction("ChangeCamera" ) then
+		if "FreeCam" == camera_manager:GetCurrentCameraName() then
+			g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
+			camera_manager:SetCurrentCamera( "TestProcessCam" )
+		else
+			camera_manager:SetCurrentCamera( "FreeCam" )
+		end
+	end
 end

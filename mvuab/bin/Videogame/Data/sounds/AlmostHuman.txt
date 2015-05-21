@@ -1,46 +1,24 @@
 Event	ID	Name			Wwise Object Path	Notes
-	23506888	Play_Long_Shoot			\Default Work Unit\Play_Long_Shoot	
 	186343927	Play_Youwin			\GUI\Play_Youwin	
-	401192514	Shoot_Long_Shoot_Event			\Default Work Unit\Shoot_Long_Shoot_Event	
 	426840996	Play_Init			\GUI\Play_Init	
 	474386569	Play_Next			\GUI\Play_Next	
 	847470298	Open_Close_Door_Event			\Default Work Unit\Open_Close_Door_Event	
-	1203582209	Play_Long_Ambient			\Default Work Unit\Play_Long_Ambient	
 	1292086503	Play_Back			\GUI\Play_Back	
-	2054452452	Acumulator_Long_Shoot_Event			\Default Work Unit\Acumulator_Long_Shoot_Event	
 	2348692292	Play_Over			\GUI\Play_Over	
 	2454594115	Play_Help			\GUI\Play_Help	
 	2513968146	Play_LoopGen			\GUI\Play_LoopGen	
-	3038207054	Shoot			\Default Work Unit\Shoot	
 	3174629258	Play_GameOver			\GUI\Play_GameOver	
 	3552663155	Play_Cash			\GUI\Play_Cash	
 
-Effect plug-ins	ID	Name	Type				Notes
-	1588715066	Echoes_Linear	Wwise Delay			
-
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	9188593	RS2_GHOST_MACHINE_001_Gb	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_001_Gb_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_001_Gb		1748880
-	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Short Shoot\RS2_FAST_IMPACT_WEAPONRY_013_B		258060
 	45634969	gui_back	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_back_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_back		4730
-	165869216	LongShoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\LongShoot		280920
 	193371772	gui_next	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_next_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_next		4986
-	365409162	RS2_GHOST_MACHINE_004_C	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_004_C_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_004_C		802776
 	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Open_Close_Door		323156
 	444784154	gameOver	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gameOver_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gameOver		80356
 	482623365	loop-gen	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		2822464
 	507701302	gui_over	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		4986
-	537255386	RS2_GHOST_MACHINE_010_Bb	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_010_Bb_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_010_Bb		3022544
-	539158409	RS2_GHOST_MACHINE_005_E	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_005_E_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_005_E		1298940
-	587277357	RS2_GHOST_MACHINE_007_E	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_007_E_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_007_E		1433608
-	638072447	RS2_MOOD_SOUNDS_020_Db	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MOOD_SOUNDS_020_Db_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_MOOD_SOUNDS_020_Db		1932184
-	642282758	RS2_GHOST_MACHINE_006_E	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_006_E_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_006_E		1414116
-	657274785	RS2_GHOST_MACHINE_002_B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_002_B_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_002_B		597228
-	658687937	RS2_GHOST_MACHINE_003_E	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_GHOST_MACHINE_003_E_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_GHOST_MACHINE_003_E		1311344
-	834326531	Acumlator Long Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_Db_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\Acumlator Long Shoot		806016
 	869195930	youwin	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		50676
-	917228779	ACUMULATOR_loop_Db	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_loop_Db_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\ACUMULATOR_loop_Db		66504
 	937521952	Init	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		136104
 	1048744211	help	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		2945704
 	1049674178	cash	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\cash_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\cash		15078
-	1064136465	RS2_MOOD_SOUNDS_019_D	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MOOD_SOUNDS_019_D_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\RS2_MOOD_SOUNDS_019_D		1508780
 

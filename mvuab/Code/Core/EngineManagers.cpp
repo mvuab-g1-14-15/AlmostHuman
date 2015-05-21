@@ -27,6 +27,7 @@
 #include "Billboard\BillboardManager.h"
 #include "Console/Console.h"
 #include "WWSoundManager.h"
+#include "Timer/CounTDownTimerManager.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
   : m_ManagersPath( aPath )
@@ -52,6 +53,7 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
   , m_pGizmosManager( 0 )
   , m_pGUIManager( 0 )
   , m_pSoundManager( 0 )
+  , m_pCountDownTimerManager( 0 )
 {
 }
 
@@ -114,6 +116,9 @@ void CEngineManagers::Init()
                            Type2Type<CConsole>( ) );
   ManagerFactory.Register( "billboard_manager",
                            Type2Type<CBillboardManager>( ) );
+  ManagerFactory.Register( "countdowntimer_manager",
+                           Type2Type<CCountDownTimerManager>( ) );
+
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
@@ -135,14 +140,14 @@ void CEngineManagers::Init()
       if ( TagName == "comment" )
         continue;
 
-      CManager* lManager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
+      CManager* Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
 
-      if ( !lManager )
+      if ( !Manager )
         LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
       else
       {
-		  bool lOk = AddResource( TagName.c_str() , lManager );
-		  ASSERT( lOk, "Error adding manager %s", TagName.c_str() );
+        if ( !AddResource( TagName.c_str() , Manager ) )
+          CHECKED_DELETE( Manager );
       }
     }
   }
@@ -173,7 +178,11 @@ void CEngineManagers::Init()
   m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );
   m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
   m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
+  m_pCountDownTimerManager  = dynamic_cast<CCountDownTimerManager*>( GetResource( "countdowntimer_manager" ) );
 
+  //
+  // Init managers
+  //
   for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
     ( *lItb )->Init();
 }
@@ -344,4 +353,10 @@ CGUIManager* CEngineManagers::GetGUIManager() const
 {
   ASSERT( m_pGUIManager, "Null gui manager" );
   return m_pGUIManager;
+}
+
+CCountDownTimerManager* CEngineManagers::GetCountDownTimerManager() const
+{
+  ASSERT( m_pCountDownTimerManager, "Null CountdownTimer manager" );
+  return m_pCountDownTimerManager;
 }
