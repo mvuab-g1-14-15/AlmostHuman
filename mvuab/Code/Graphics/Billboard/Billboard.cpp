@@ -56,7 +56,7 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
     return lOk;
 }
 
-/*bool CBillboard::Init
+bool CBillboard::Init
 (
     const std::string&  aName,
     const Math::Vect3f& aPosition,
@@ -83,7 +83,7 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
     lOk = lOk && ( mTechnique != 0 );
 
     return lOk;
-}*/
+}
 
 
 void CBillboard::Update()
@@ -99,7 +99,7 @@ void CBillboard::Render()
         lGM->SetTransform( GetTransform() );
         if( m_Texture )
             m_Texture->Activate(0);
-/*TODO: Alex Billboard        mTechnique->SetSize( mSize );*/
+		mTechnique->SetSize( mSize );
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }
