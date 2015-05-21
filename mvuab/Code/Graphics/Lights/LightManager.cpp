@@ -13,7 +13,9 @@ CLightManager::CLightManager()
 
 CLightManager::CLightManager(CXMLTreeNode& atts)
   : CManager(atts)
+  , mAmbientLightColor( Math::Vect3f( 0.0f,0.0f,0.0f) )
 {
+
 }
 
 CLightManager::~CLightManager()
@@ -77,6 +79,10 @@ bool CLightManager::Load( const std::string& FileName )
           delete l_Light;
       }
     }
+	else if( l_TagName == "ambient_light" )
+	{
+		mAmbientLightColor = m(i).GetVect3fProperty( "color", Math::Vect3f( 0.0f,0.0f,0.0f ) );
+	}
   }
 
   return true;

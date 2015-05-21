@@ -114,6 +114,8 @@ void CParticleEmitter::EmitParticles()
 				baseUtils::RandRange( mAcceleration.x, mAcceleration.x ),
 				mDirection,
 				baseUtils::RandRange( mSize.x, mSize.y ),
+				1.0f,
+				3.14f,
 				mTextures[ baseUtils::RandRange( (unsigned int)(0), (unsigned int)(mTextures.size() - 1) ) ],
 				mTechniqueName
 			);

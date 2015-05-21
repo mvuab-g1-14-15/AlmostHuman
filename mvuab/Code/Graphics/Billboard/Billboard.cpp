@@ -20,8 +20,8 @@ CBillboard::CBillboard()
     : CName()
     , CObject3D()
     , mSize( 1.0f )
-    /*TODO: Alex Billboard, mAlpha(1.0f )
-    , mAngle( (int)Math::pi32 )*/
+    , mAlpha(1.0f )
+    , mAngle( Math::pi32 )
     , m_Active(true)
     , m_Texture(0)
     , mTechnique(0)
@@ -61,6 +61,8 @@ bool CBillboard::Init
     const std::string&  aName,
     const Math::Vect3f& aPosition,
     float aSize,
+	float aAngle,
+	float aAlpha,
     const std::string & aTextureName,
     const std::string & aTechniqueName,
     bool                aActive
@@ -72,6 +74,8 @@ bool CBillboard::Init
 
     m_Position = aPosition;
     mSize      = aSize;
+	mAlpha	   = aAlpha;
+	mAngle	   = aAngle;
     m_Active   = aActive;
 
     // Get the texture of the billboard
@@ -99,7 +103,14 @@ void CBillboard::Render()
         lGM->SetTransform( GetTransform() );
         if( m_Texture )
             m_Texture->Activate(0);
-		mTechnique->SetSize( mSize );
+		CEffect* lEffect = mTechnique->GetEffect();
+
+		ASSERT( lEffect, "Null effect fro technique" );
+
+		lEffect->SetSize( mSize );
+		lEffect->SetAlpha( mAlpha );
+		lEffect->SetAngle( mAngle );
+
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }

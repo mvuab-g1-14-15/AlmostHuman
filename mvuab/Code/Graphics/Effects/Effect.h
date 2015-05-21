@@ -20,7 +20,7 @@ public:
   ~CEffect();
   bool SetLights( size_t NumOfLights );
   bool SetLight( size_t i_light );
-  bool SetCameraPosition( Math::Vect3f CameraPosition );
+  bool SetCameraPosition( const Math::Vect3f &CameraPosition );
   bool SetWorldMatrix( const Math::Mat44f& Matrix );
   bool SetViewMatrix( const Math::Mat44f& Matrix );
   bool SetProjectionMatrix( const Math::Mat44f& Matrix );
@@ -126,6 +126,9 @@ public:
   void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
   void SetDebugColor( bool aUse, const Math::CColor aColor );
   void SetSize( float aSize );
+  void SetAlpha( float aAlpha );
+  void SetAngle( float aAngle );
+  void SetAmbientLightColor( const Math::Vect3f& aAmbienLightColor );
 
 private: // Members
   std::string m_FileName;
@@ -144,6 +147,7 @@ private: // Members
   DECLARE_EFFECT_PARAMETER( Angle );
   DECLARE_EFFECT_PARAMETER( Alpha );
   DECLARE_EFFECT_PARAMETER( Color );
+  DECLARE_EFFECT_PARAMETER( AmbientLightColor );  
 
   DECLARE_EFFECT_PARAMETER( WorldMatrix );
   D3DXHANDLE m_ViewMatrixParameter,
