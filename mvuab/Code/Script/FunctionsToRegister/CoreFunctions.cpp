@@ -28,6 +28,7 @@
 #include "Particles\ParticleManager.h"
 #include "WWSoundManager.h"
 #include "GUIManager.h"
+#include "Timer/CountDownTimerManager.h"
 
 #include "luabind_macros.h"
 
@@ -81,6 +82,16 @@ CWWSoundManager* GetSoundManager()
 CGUIManager* GetGUIManager()
 {
   return GUIInstance;
+}
+
+CCountDownTimerManager* GetCountDownTimerManager()
+{
+  return CountDownTimerInstance;
+}
+
+CScriptManager* GetScriptManager()
+{
+  return ScriptMInstance;
 }
 
 void registerProcess( lua_State* aLuaState )
@@ -158,6 +169,14 @@ void registerManagers( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGUIManager )
+  LUA_END_DECLARATION
+  
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCountDownTimerManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScriptManager )
   LUA_END_DECLARATION
 }
 

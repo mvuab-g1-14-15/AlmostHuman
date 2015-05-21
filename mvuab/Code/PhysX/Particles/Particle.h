@@ -21,7 +21,7 @@ class CParticle
 			float aVelocity, 
 			float aAceleration,
 			const Math::Vect3f& aDirecction,
-			const Math::Vect2f& aSize,
+			float aSize,
 			const std::string & aTextureName,
 			const std::string & aTechniqueName
 		);

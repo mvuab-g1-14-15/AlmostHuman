@@ -1,4 +1,5 @@
 #include "BaseFunctions.h"
+#include "luabind_macros.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -18,10 +19,37 @@
 #include "Utils\Types.h"
 #include "Math\Color.h"
 #include "Utils\TemplatedVectorMapManager.h"
+#include "Timer\CounTDownTimerManager.h"
+
+#include "XML\XMLTreeNode.h"
 
 #include <sstream>
 
 using namespace luabind;
+
+void registerXML( lua_State* aLuaState )
+{
+	LUA_BEGIN_DECLARATION( aLuaState )
+		LUA_DECLARE_CLASS( CXMLTreeNode )
+		LUA_DECLARE_DEFAULT_CTOR
+		LUA_DECLARE_METHOD( CXMLTreeNode, Done )
+		LUA_DECLARE_METHOD( CXMLTreeNode, IsOk )
+		LUA_DECLARE_METHOD( CXMLTreeNode, LoadFile )
+		LUA_DECLARE_METHOD( CXMLTreeNode, Exists )
+		LUA_DECLARE_METHOD( CXMLTreeNode, ExistsKey )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
+
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetBoolProperty )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetPszProperty )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetVect3fProperty )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
+
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
+		LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
+	LUA_END_DECLARATION
+}
 
 void DA_Normalize( Math::Vect3f* vector3 )
 {
@@ -166,6 +194,19 @@ void registerBase( lua_State* m_LS )
   ];
   module( m_LS )
   [
+    class_<CCountDownTimerManager>( "CCountDownTimerManager" )
+    .def( constructor<>() )
+    .def( "AddTimer", &CCountDownTimerManager::AddTimer )
+    .def( "isTimerFinish", &CCountDownTimerManager::isTimerFinish )
+    .def( "SetTime", &CCountDownTimerManager::SetTime )
+    .def( "GetTime", &CCountDownTimerManager::GetTime )
+    .def( "GetElapsedTimeInPercent", &CCountDownTimerManager::GetElapsedTimeInPercent )
+    .def( "GetLeftoverTime", &CCountDownTimerManager::GetLeftoverTime )
+    .def( "GetElpasedTime", &CCountDownTimerManager::GetElpasedTime )
+    .def( "Reset", &CCountDownTimerManager::Reset )
+  ];
+  module( m_LS )
+  [
     class_<CTimer>( "CTimer" )
     .def( "GetElapsedTime", &CTimer::GetElapsedTime )
   ];
@@ -181,4 +222,6 @@ void registerBase( lua_State* m_LS )
   [
     class_<CManager>( "CManager" )
   ];
+
+  registerXML( m_LS );
 }

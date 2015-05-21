@@ -133,10 +133,52 @@ CXMLTreeNode CXMLTreeNode::operator[]( const char* _pszKey ) const
   return TreeFound;
 }
 
+CXMLTreeNode CXMLTreeNode::GetNode( const char* _pszKey ) const
+{
+  assert( _pszKey && m_pNode );
+  CXMLTreeNode TreeFound;
+
+  if ( _pszKey && m_pNode )
+    TreeFound = GetSubTree( _pszKey );
+
+  return TreeFound;
+}
+
 //----------------------------------------------------------------------------
 // Operator to get children nodes
 //----------------------------------------------------------------------------
 CXMLTreeNode CXMLTreeNode::operator()( int _iIndex ) const
+{
+  assert( _iIndex >= 0 && m_pNode );
+  CXMLTreeNode TreeFound;
+
+  if ( _iIndex >= 0 && m_pNode )
+  {
+    int iCount = 0;
+    xmlNodePtr pChildren = m_pNode->children;
+
+    while ( pChildren != NULL )
+    {
+      if ( pChildren->type != XML_TEXT_NODE )
+      {
+        if ( _iIndex == iCount )
+        {
+          TreeFound.m_pNode = pChildren;
+          TreeFound.m_pDoc = m_pDoc;
+          break;
+        }
+
+        ++iCount;
+      }
+
+      pChildren = pChildren->next;
+    }
+  }
+
+  return TreeFound;
+}
+
+CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 {
   assert( _iIndex >= 0 && m_pNode );
   CXMLTreeNode TreeFound;

@@ -15,7 +15,7 @@ CParticle::CParticle()
 	, mPosition( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 	, mVelocity( 1.0f )
 	, mAcceleration( 0.0f )
-	, mBillboard( 0 )
+	, mBillboard( new CBillboard() )
 	, mDirection( Math::Vect3f( 0.0f, 0.0f, 0.0f ) )
 {
 }
@@ -33,24 +33,23 @@ bool CParticle::Init
 	float aVelocity, 
 	float aAcceleration,
 	const Math::Vect3f& aDirecction,
-	const Math::Vect2f& aSize,
+	float aSize,
     const std::string & aTextureName,
     const std::string & aTechniqueName
 )
 {
-	mLifeTime = aLifeTime;
-	mIsAlive = true;
-	mColor = aColor;
-	mPosition = aPosition;
-	mVelocity = aVelocity;
-	mAcceleration = aAcceleration;
-	mDirection = aDirecction.GetNormalized();
-
-	mBillboard = new CBillboard();
+	mTime           = 0.0f;
+	mLifeTime       = aLifeTime;
+	mIsAlive        = true;
+	mColor          = aColor;
+	mPosition       = aPosition;
+	mVelocity       = aVelocity;
+	mAcceleration   = aAcceleration;
+	mDirection      = aDirecction.GetNormalized();
 
 	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
 
-	//ASSERT( lOk, "Could not init the particle")
+	ASSERT( lOk, "Could not init the particle")
 
 	return lOk;
 }
@@ -65,6 +64,13 @@ void CParticle::Update( float dt )
 
 		if( mTime < mLifeTime )
 		{
+            /*
+            Math::CLerpAnimator1D lAlphaInterpolator;
+            lAlphaInterpolator.SetValues(A.GetFarPlane(), B.GetFarPlane(), 1.0f, Math::FUNC_CONSTANT);
+            float32 l_FarPlane;
+            l_Interpolator1D.Update(Percentage, l_FarPlane);
+            */
+
 			float lVi = mVelocity;
 			mVelocity += mAcceleration * dt;
 			mPosition = mPosition + mDirection * ( mVelocity + lVi * 0.5f * dt );

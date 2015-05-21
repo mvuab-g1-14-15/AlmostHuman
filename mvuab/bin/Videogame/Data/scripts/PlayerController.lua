@@ -34,6 +34,8 @@ function CPlayerController:__init()
 	self.TimeMoveYaw = 0.15
 	self.ActualTimeMoveYaw= 0.15
 	
+	countdowntimer_manager:AddTimer("Footstep", 0.5, false)
+	
 	--Counters
 	self.ShakeValueVertical = 0.0
 	self.ShakeValueHorizontal = 0.0
@@ -240,6 +242,13 @@ function CPlayerController:CalculateDirectionVectors(l_PlayerCamera)
 	self.Side = self.Forward ^ l_Up
 	self.Side.y = 0.0
 	self.Side:Normalize()
+end
+
+function CPlayerController:PlayFootstep()
+	if countdowntimer_manager:isTimerFinish("Footstep") then
+		sound_manager:PlayEvent( "Logan_Footstep_Walk", "TestGameObject2d" )
+		countdowntimer_manager:Reset("Footstep")
+	end
 end
 
 function CPlayerController:UpdateInput()

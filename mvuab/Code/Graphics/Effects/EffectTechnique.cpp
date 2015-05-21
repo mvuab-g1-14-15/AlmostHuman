@@ -278,3 +278,9 @@ void CEffectTechnique::SetDebugColor( Math::CColor color )
 {
   m_DebugColor = color;
 }
+
+//------------------------------------------------------------------------------------------------------
+void CEffectTechnique::SetSize( float aSize )
+{
+    m_Effect->SetSize( aSize );
+}

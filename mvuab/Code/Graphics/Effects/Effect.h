@@ -125,6 +125,7 @@ public:
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
   void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
   void SetDebugColor( bool aUse, const Math::CColor aColor );
+  void SetSize( float aSize );
 
 private: // Members
   std::string m_FileName;
@@ -138,6 +139,11 @@ private: // Members
   Math::Vect3f m_LightsPosition[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
+
+  DECLARE_EFFECT_PARAMETER( Size  );
+  DECLARE_EFFECT_PARAMETER( Angle );
+  DECLARE_EFFECT_PARAMETER( Alpha );
+  DECLARE_EFFECT_PARAMETER( Color );
 
   DECLARE_EFFECT_PARAMETER( WorldMatrix );
   D3DXHANDLE m_ViewMatrixParameter,
@@ -200,9 +206,6 @@ private: // Members
   D3DXHANDLE m_HeightWindow;
   //D3DXHANDLE m_WidthWindow;
   DECLARE_EFFECT_PARAMETER( WidthWindow )
-
-  // Size
-  D3DXHANDLE m_Size;
 
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;

@@ -51,6 +51,11 @@ CEffect::CEffect( const std::string& EffectName )
     // Texture
     m_HeightTexture( 0 ),
     m_WidthTexture( 0 )
+
+    , CTOR_EFFECT_PARAMETER( Size )
+    , CTOR_EFFECT_PARAMETER( Angle )
+    , CTOR_EFFECT_PARAMETER( Alpha )
+    , CTOR_EFFECT_PARAMETER( Color )
 {
   ResetLightsHandle();
 }
@@ -102,6 +107,13 @@ void CEffect::SetNullParameters()
   // Texture
   m_HeightTexture = 0;
   m_WidthTexture = 0;
+
+  RESET_EFFECT_PARAMETER( Size )
+  RESET_EFFECT_PARAMETER( Angle )
+
+  RESET_EFFECT_PARAMETER( Alpha )
+  RESET_EFFECT_PARAMETER( Color )
+
   ResetLightsHandle();
 }
 
@@ -147,6 +159,11 @@ bool CEffect::LoadEffect()
   ASSERT( m_Effect, "Null Effect" );
   // Get the references to the handlers inside the effect
   LINK_EFFECT_PARAMETER( WorldMatrix );
+  LINK_EFFECT_PARAMETER( Size  );
+  LINK_EFFECT_PARAMETER( Angle );
+  LINK_EFFECT_PARAMETER( Alpha );
+  LINK_EFFECT_PARAMETER( Color );
+
   //GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
   GetParameterBySemantic( ViewMatrixParameterStr, m_ViewMatrixParameter );
   GetParameterBySemantic( ProjectionMatrixParameterStr, m_ProjectionMatrixParameter );
@@ -426,4 +443,10 @@ void CEffect::ResetLightsHandle()
   memset( m_LightsPosition,                 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsDirection,                0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsColor,                    0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+}
+
+void CEffect::SetSize( float aSize )
+{
+    HRESULT lRes = SET_FLOAT_PARAMETER( Size, aSize );
+    ASSERT( lRes == S_OK, "Error setting size");
 }

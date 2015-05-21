@@ -26,7 +26,7 @@ class CBillboard : public CName, public CObject3D
         (
             const std::string   &aName,
             const Math::Vect3f  &aPosition,
-            const Math::Vect2f  &aSize,
+            float aSize,
             const std::string   &aTextureName,
             const std::string   &aTechniqueName,
             bool                 aActive = true
@@ -35,15 +35,12 @@ class CBillboard : public CName, public CObject3D
         void Render();
         void Update();
 
-        const CTexture*       GetTexture() const;
-        const Math::Vect2f &  GetSize() const;
-
-        void SetTexture(const CTexture *aTexture);
-        void SetSize(const Math::Vect2f & aSize );
     private:
         CTexture*           m_Texture;
         CEffectTechnique*   mTechnique;
-        Math::Vect2f        mSize;
+        float               mSize;
+        int                 mAngle;
+        float               mAlpha;
         bool                m_Active;
 
 		static CRenderableVertexs* sRV;

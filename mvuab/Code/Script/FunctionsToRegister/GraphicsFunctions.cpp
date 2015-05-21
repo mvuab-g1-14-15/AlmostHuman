@@ -69,6 +69,7 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CCameraManager, GetCamera )
   LUA_DECLARE_METHOD( CCameraManager, SetCurrentCamera )
   LUA_DECLARE_METHOD( CCameraManager, GetCurrentCamera )
+  LUA_DECLARE_METHOD( CCameraManager, GetCurrentCameraName )
   LUA_DECLARE_METHOD( CCameraManager, NewCamera )
   LUA_DECLARE_METHOD( CCameraManager, DeleteCamera )
   LUA_END_DECLARATION
