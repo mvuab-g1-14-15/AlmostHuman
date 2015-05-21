@@ -79,6 +79,9 @@
     <ClCompile Include="MessageHandler\MessageHandler.cpp">
       <Filter>MessageHandler</Filter>
     </ClCompile>
+    <ClCompile Include="Timer\CountDownTimerManager.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -191,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="MessageHandler\MessageHandler.h">
       <Filter>MessageHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\CounTDownTimerManager.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

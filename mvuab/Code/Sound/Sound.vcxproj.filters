@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="AkDefaultIOHookBlocking.cpp" />
     <ClCompile Include="AkDefaultIOHookDeferred.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="WWSoundManager.cpp" />
     <ClCompile Include="Common\AkDefaultLowLevelIODispatcher.cpp">
       <Filter>Common</Filter>
@@ -25,7 +24,6 @@
     <ClInclude Include="AkFilePackageLowLevelIOBlocking.h" />
     <ClInclude Include="AkFilePackageLowLevelIODeferred.h" />
     <ClInclude Include="AkSoundEngineExports.h" />
-    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="WWSoundManager.h" />
     <ClInclude Include="Common\AkDefaultLowLevelIODispatcher.h">
       <Filter>Common</Filter>

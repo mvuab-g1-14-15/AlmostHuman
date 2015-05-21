@@ -22,7 +22,7 @@ class CBillboard : public CName, public CObject3D
 		static void DestroyBillBoardGeometry();
 
         bool Init(const CXMLTreeNode& atts);
-        bool Init
+        /*TODO: Alex Billboardbool Init
         (
             const std::string   &aName,
             const Math::Vect3f  &aPosition,
@@ -30,7 +30,7 @@ class CBillboard : public CName, public CObject3D
             const std::string   &aTextureName,
             const std::string   &aTechniqueName,
             bool                 aActive = true
-        );
+        );*/
 
         void Render();
         void Update();

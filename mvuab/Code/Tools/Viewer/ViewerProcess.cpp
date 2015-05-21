@@ -53,6 +53,7 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "Lights\OmniLight.h"
 #include "StaticMeshes\InstanceMesh.h"
+#include "AnimatedModels\AnimatedModelsManager.h"
 
 using namespace Math;
 
@@ -259,9 +260,9 @@ bool CViewerProcess::LoadFile( S_MenuType menu )
     EffectManagerInstance->Reload();
     LightMInstance->ReLoad();
     ROTMInstance->ReLoad();
-    SMeshMInstance->Reload();
+    SMeshMInstance->Destroy();
     ROLMInstance->Reload();
-    //TODO: Reload Animations
+    AnimatedMInstance->Reload();
     LightMInstance->ReLoad();
     SRCMInstance->ReLoad();
 

@@ -47,11 +47,12 @@ bool CParticle::Init
 	mAcceleration   = aAcceleration;
 	mDirection      = aDirecction.GetNormalized();
 
-	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
+	/*TODO: Alex Billboardbool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
 
-	//ASSERT( lOk, "Could not init the particle")
+	ASSERT( lOk, "Could not init the particle")
 
-	return lOk;
+	return lOk;*/
+  return false;
 }
 
 void CParticle::Update( float dt )

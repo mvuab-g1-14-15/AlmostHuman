@@ -20,8 +20,8 @@ CBillboard::CBillboard()
     : CName()
     , CObject3D()
     , mSize( 1.0f )
-    , mAlpha(1.0f )
-    , mAngle( (int)Math::pi32 )
+    /*TODO: Alex Billboard, mAlpha(1.0f )
+    , mAngle( (int)Math::pi32 )*/
     , m_Active(true)
     , m_Texture(0)
     , mTechnique(0)
@@ -56,7 +56,7 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
     return lOk;
 }
 
-bool CBillboard::Init
+/*bool CBillboard::Init
 (
     const std::string&  aName,
     const Math::Vect3f& aPosition,
@@ -83,7 +83,7 @@ bool CBillboard::Init
     lOk = lOk && ( mTechnique != 0 );
 
     return lOk;
-}
+}*/
 
 
 void CBillboard::Update()
@@ -99,7 +99,7 @@ void CBillboard::Render()
         lGM->SetTransform( GetTransform() );
         if( m_Texture )
             m_Texture->Activate(0);
-        mTechnique->SetSize( mSize );
+/*TODO: Alex Billboard        mTechnique->SetSize( mSize );*/
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
     }

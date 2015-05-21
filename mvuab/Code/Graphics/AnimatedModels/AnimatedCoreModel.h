@@ -19,50 +19,51 @@ class CTexture;
 
 class CAnimatedCoreModel : public CName
 {
-    public:
-        CAnimatedCoreModel(const std::string &Name);
-        ~CAnimatedCoreModel();
+public:
+  CAnimatedCoreModel( const std::string& Name );
+  ~CAnimatedCoreModel();
 
-        CalCoreModel        *GetCoreModel           ();
-        CalHardwareModel    *GetCalHardwareModel    ();
-        CRenderableVertexs  *GetRenderableVertexs   ();
+  CalCoreModel*        GetCoreModel();
+  CalHardwareModel*    GetCalHardwareModel();
+  CRenderableVertexs*  GetRenderableVertexs();
 
-        const   std::string & GetTextureName    (size_t id);
-        void    ActivateTextures                ();
+  const   std::string& GetTextureName( size_t id );
+  void    ActivateTextures();
 
-        bool Load               (const std::string &Path);
-        bool LoadVertexBuffer   (CGraphicsManager *RM);
+  bool Load( const std::string& Path );
+  bool LoadVertexBuffer( CGraphicsManager* RM );
 
-        int     GetAnimationsCount();
-        int     GetAnimationId  (const std::string &AnimationName) const;
-        size_t  GetNumTextures  ();
+  int     GetAnimationsCount();
+  int     GetAnimationId( const std::string& AnimationName ) const;
+  size_t  GetNumTextures();
+
+  bool Reload();
 
 protected:
-        typedef std::vector<CTexture *> TTextureVector;
-        TTextureVector                  m_TextureVector;
+  typedef std::vector<CTexture*> TTextureVector;
+  TTextureVector                  m_TextureVector;
 
-        CalCoreModel                    *m_CalCoreModel;
-        CalHardwareModel                *m_CalHardwareModel;
-        CRenderableVertexs              *m_RenderableVertexs;
+  CalCoreModel*                    m_CalCoreModel;
+  CalHardwareModel*                m_CalHardwareModel;
+  CRenderableVertexs*              m_RenderableVertexs;
 
-        typedef std::map<std::string, uint16> TAnimationsIdMap;
-        TAnimationsIdMap                m_AnimationsMap;
-        std::string                     m_FileName;
-        std::string                     m_Path;
+  typedef std::map<std::string, uint16> TAnimationsIdMap;
+  TAnimationsIdMap                m_AnimationsMap;
+  std::string                     m_FileName;
+  std::string                     m_Path;
 
-        int                             m_NumVtxs;
-        int                             m_NumFaces;
+  int                             m_NumVtxs;
+  int                             m_NumFaces;
 
 private:
-        void Destroy();
-        bool Reload();
-        bool Load();
+  void Destroy();
+  bool Load();
 
-        bool LoadMesh       (const std::string &Filename);
-        bool LoadSkeleton   (const std::string &Filename);
-        bool LoadTexture    (const std::string &Filename);
-        bool LoadAnimation  (const std::string &Name, const std::string &Filename);
-        void LoadTextures   ();
+  bool LoadMesh( const std::string& Filename );
+  bool LoadSkeleton( const std::string& Filename );
+  bool LoadTexture( const std::string& Filename );
+  bool LoadAnimation( const std::string& Name, const std::string& Filename );
+  void LoadTextures();
 
 
 };

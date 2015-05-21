@@ -18,6 +18,7 @@
 #include "Utils\Types.h"
 #include "Math\Color.h"
 #include "Utils\TemplatedVectorMapManager.h"
+#include "Timer\CounTDownTimerManager.h"
 
 #include <sstream>
 
@@ -163,6 +164,19 @@ void registerBase( lua_State* m_LS )
     .def( constructor<>() )
     .def( "SetVisible", &CVisible::SetVisible )
     .def( "GetVisible", &CVisible::GetVisible )
+  ];
+  module( m_LS )
+  [
+    class_<CCountDownTimerManager>( "CCountDownTimerManager" )
+    .def( constructor<>() )
+    .def( "AddTimer", &CCountDownTimerManager::AddTimer )
+    .def( "isTimerFinish", &CCountDownTimerManager::isTimerFinish )
+    .def( "SetTime", &CCountDownTimerManager::SetTime )
+    .def( "GetTime", &CCountDownTimerManager::GetTime )
+    .def( "GetElapsedTimeInPercent", &CCountDownTimerManager::GetElapsedTimeInPercent )
+    .def( "GetLeftoverTime", &CCountDownTimerManager::GetLeftoverTime )
+    .def( "GetElpasedTime", &CCountDownTimerManager::GetElpasedTime )
+    .def( "Reset", &CCountDownTimerManager::Reset )
   ];
   module( m_LS )
   [

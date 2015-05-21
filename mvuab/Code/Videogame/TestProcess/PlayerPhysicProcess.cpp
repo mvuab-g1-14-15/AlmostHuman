@@ -120,16 +120,7 @@ void CPlayerPhysicProcess::Update()
 
   /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
       ScriptMInstance->RunCode( "cambiar_sala()" );*/
-
-
-  if ( pActionManager->DoAction( "ChangeCamera" ) )
-  {
-    if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
-      CameraMInstance->SetCurrentCamera( "TestProcessCam" );
-    else
-      CameraMInstance->SetCurrentCamera( "FreeCam" );
-  }
-
+	  
   if ( pActionManager->DoAction( "ReloadShaders" ) )
   {
     // NOTE this must be in this order

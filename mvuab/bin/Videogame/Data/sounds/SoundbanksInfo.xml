@@ -10,50 +10,131 @@
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<SoundBanks>
+		<SoundBank Id="77978275" Language="SFX">
+			<ShortName>Ambient</ShortName>
+			<Path>Ambient.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1203582209" Name="Play_Long_Ambient"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="267654150" Language="SFX">
+					<ShortName>dark soundscapes 14.wav</ShortName>
+					<Path>SFX\dark soundscapes 14_950FF8F3.wem</Path>
+				</File>
+				<File Id="342893694" Language="SFX">
+					<ShortName>dark soundscapes 16.wav</ShortName>
+					<Path>SFX\dark soundscapes 16_950FF8F3.wem</Path>
+				</File>
+				<File Id="354184061" Language="SFX">
+					<ShortName>dark soundscapes 11.wav</ShortName>
+					<Path>SFX\dark soundscapes 11_950FF8F3.wem</Path>
+				</File>
+				<File Id="362224286" Language="SFX">
+					<ShortName>dark soundscapes 01.wav</ShortName>
+					<Path>SFX\dark soundscapes 01_950FF8F3.wem</Path>
+				</File>
+				<File Id="438075751" Language="SFX">
+					<ShortName>dark soundscapes 12.wav</ShortName>
+					<Path>SFX\dark soundscapes 12_950FF8F3.wem</Path>
+				</File>
+				<File Id="466521606" Language="SFX">
+					<ShortName>dark soundscapes 13.wav</ShortName>
+					<Path>SFX\dark soundscapes 13_950FF8F3.wem</Path>
+				</File>
+				<File Id="497909137" Language="SFX">
+					<ShortName>dark soundscapes 10.wav</ShortName>
+					<Path>SFX\dark soundscapes 10_950FF8F3.wem</Path>
+				</File>
+				<File Id="615389019" Language="SFX">
+					<ShortName>dark soundscapes 08.wav</ShortName>
+					<Path>SFX\dark soundscapes 08_950FF8F3.wem</Path>
+				</File>
+				<File Id="677139355" Language="SFX">
+					<ShortName>dark soundscapes 06.wav</ShortName>
+					<Path>SFX\dark soundscapes 06_950FF8F3.wem</Path>
+				</File>
+				<File Id="773649004" Language="SFX">
+					<ShortName>dark soundscapes 19.wav</ShortName>
+					<Path>SFX\dark soundscapes 19_950FF8F3.wem</Path>
+				</File>
+				<File Id="808935493" Language="SFX">
+					<ShortName>dark soundscapes 09.wav</ShortName>
+					<Path>SFX\dark soundscapes 09_950FF8F3.wem</Path>
+				</File>
+				<File Id="900351120" Language="SFX">
+					<ShortName>dark soundscapes 15.wav</ShortName>
+					<Path>SFX\dark soundscapes 15_950FF8F3.wem</Path>
+				</File>
+				<File Id="918214348" Language="SFX">
+					<ShortName>dark soundscapes 07.wav</ShortName>
+					<Path>SFX\dark soundscapes 07_950FF8F3.wem</Path>
+				</File>
+				<File Id="1022880071" Language="SFX">
+					<ShortName>dark soundscapes 02.wav</ShortName>
+					<Path>SFX\dark soundscapes 02_950FF8F3.wem</Path>
+				</File>
+				<File Id="1072309381" Language="SFX">
+					<ShortName>dark soundscapes 03.wav</ShortName>
+					<Path>SFX\dark soundscapes 03_950FF8F3.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="207235876" Language="SFX">
+			<ShortName>Logan</ShortName>
+			<Path>Logan.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2054452452" Name="Acumulator_Long_Shoot_Event"/>
+				<Event Id="2839381747" Name="Logan_Footstep_Walk"/>
+				<Event Id="23506888" Name="Play_Long_Shoot"/>
+				<Event Id="3038207054" Name="Shoot"/>
+				<Event Id="401192514" Name="Shoot_Long_Shoot_Event"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="28984091" Language="SFX">
+					<ShortName>RS2_FAST_IMPACT_WEAPONRY_013_B.wav</ShortName>
+					<Path>SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem</Path>
+				</File>
+				<File Id="165869216" Language="SFX">
+					<ShortName>RS2_MACHINE_MOVE_LONG_022_Bb_v(short).wav</ShortName>
+					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_DDC98EF4.wem</Path>
+				</File>
+				<File Id="834326531" Language="SFX">
+					<ShortName>ACUMULATOR_Db.wav</ShortName>
+					<Path>SFX\ACUMULATOR_Db_DDC98EF4.wem</Path>
+				</File>
+				<File Id="917228779" Language="SFX">
+					<ShortName>ACUMULATOR_loop_Db.wav</ShortName>
+					<Path>SFX\ACUMULATOR_loop_Db_8BD76F1E.wem</Path>
+				</File>
+				<File Id="1041278161" Language="SFX">
+					<ShortName>hard_sole_shoes_single_footstep_on_rough_ground.wav</ShortName>
+					<Path>SFX\hard_sole_shoes_single_footstep_on_rough_ground_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="1275829538" Language="SFX">
 			<ShortName>AlmostHuman</ShortName>
 			<Path>AlmostHuman.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2054452452" Name="Acumulator_Long_Shoot_Event"/>
 				<Event Id="847470298" Name="Open_Close_Door_Event"/>
 				<Event Id="1292086503" Name="Play_Back"/>
 				<Event Id="3552663155" Name="Play_Cash"/>
 				<Event Id="3174629258" Name="Play_GameOver"/>
 				<Event Id="2454594115" Name="Play_Help"/>
 				<Event Id="426840996" Name="Play_Init"/>
-				<Event Id="1203582209" Name="Play_Long_Ambient"/>
-				<Event Id="23506888" Name="Play_Long_Shoot"/>
 				<Event Id="2513968146" Name="Play_LoopGen"/>
 				<Event Id="474386569" Name="Play_Next"/>
 				<Event Id="2348692292" Name="Play_Over"/>
 				<Event Id="186343927" Name="Play_Youwin"/>
-				<Event Id="3038207054" Name="Shoot"/>
-				<Event Id="401192514" Name="Shoot_Long_Shoot_Event"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="9188593" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_001_Gb.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_001_Gb_DDC98EF4.wem</Path>
-				</File>
-				<File Id="28984091" Language="SFX">
-					<ShortName>RS2_FAST_IMPACT_WEAPONRY_013_B.wav</ShortName>
-					<Path>SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem</Path>
-				</File>
 				<File Id="45634969" Language="SFX">
 					<ShortName>gui_back.wav</ShortName>
 					<Path>SFX\gui_back_DDC98EF4.wem</Path>
 				</File>
-				<File Id="165869216" Language="SFX">
-					<ShortName>RS2_MACHINE_MOVE_LONG_022_Bb_v(short).wav</ShortName>
-					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_DDC98EF4.wem</Path>
-				</File>
 				<File Id="193371772" Language="SFX">
 					<ShortName>gui_next.wav</ShortName>
 					<Path>SFX\gui_next_DDC98EF4.wem</Path>
-				</File>
-				<File Id="365409162" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_004_C.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_004_C_DDC98EF4.wem</Path>
 				</File>
 				<File Id="427511858" Language="SFX">
 					<ShortName>open_close_door.wav</ShortName>
@@ -71,45 +152,9 @@
 					<ShortName>gui_over.wav</ShortName>
 					<Path>SFX\gui_over_DDC98EF4.wem</Path>
 				</File>
-				<File Id="537255386" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_010_Bb.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_010_Bb_DDC98EF4.wem</Path>
-				</File>
-				<File Id="539158409" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_005_E.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_005_E_DDC98EF4.wem</Path>
-				</File>
-				<File Id="587277357" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_007_E.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_007_E_DDC98EF4.wem</Path>
-				</File>
-				<File Id="638072447" Language="SFX">
-					<ShortName>RS2_MOOD_SOUNDS_020_Db.wav</ShortName>
-					<Path>SFX\RS2_MOOD_SOUNDS_020_Db_DDC98EF4.wem</Path>
-				</File>
-				<File Id="642282758" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_006_E.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_006_E_DDC98EF4.wem</Path>
-				</File>
-				<File Id="657274785" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_002_B.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_002_B_DDC98EF4.wem</Path>
-				</File>
-				<File Id="658687937" Language="SFX">
-					<ShortName>RS2_GHOST_MACHINE_003_E.wav</ShortName>
-					<Path>SFX\RS2_GHOST_MACHINE_003_E_DDC98EF4.wem</Path>
-				</File>
-				<File Id="834326531" Language="SFX">
-					<ShortName>ACUMULATOR_Db.wav</ShortName>
-					<Path>SFX\ACUMULATOR_Db_DDC98EF4.wem</Path>
-				</File>
 				<File Id="869195930" Language="SFX">
 					<ShortName>youwin.wav</ShortName>
 					<Path>SFX\youwin_DDC98EF4.wem</Path>
-				</File>
-				<File Id="917228779" Language="SFX">
-					<ShortName>ACUMULATOR_loop_Db.wav</ShortName>
-					<Path>SFX\ACUMULATOR_loop_Db_8BD76F1E.wem</Path>
 				</File>
 				<File Id="937521952" Language="SFX">
 					<ShortName>Init.wav</ShortName>
@@ -122,10 +167,6 @@
 				<File Id="1049674178" Language="SFX">
 					<ShortName>cash.wav</ShortName>
 					<Path>SFX\cash_DDC98EF4.wem</Path>
-				</File>
-				<File Id="1064136465" Language="SFX">
-					<ShortName>RS2_MOOD_SOUNDS_019_D.wav</ShortName>
-					<Path>SFX\RS2_MOOD_SOUNDS_019_D_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
