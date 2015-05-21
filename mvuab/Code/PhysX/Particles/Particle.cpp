@@ -34,6 +34,8 @@ bool CParticle::Init
 	float aAcceleration,
 	const Math::Vect3f& aDirecction,
 	float aSize,
+	float aAngle,
+	float aAlpha,
     const std::string & aTextureName,
     const std::string & aTechniqueName
 )
@@ -47,7 +49,7 @@ bool CParticle::Init
 	mAcceleration   = aAcceleration;
 	mDirection      = aDirecction.GetNormalized();
 
-	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aTextureName, aTechniqueName );
+	bool lOk = mBillboard->Init( "ParticleBillboard", aPosition, aSize, aAngle, aAlpha, aTextureName, aTechniqueName );
 
 	ASSERT( lOk, "Could not init the particle")
 

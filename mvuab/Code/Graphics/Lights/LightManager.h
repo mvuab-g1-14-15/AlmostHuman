@@ -23,6 +23,15 @@ public:
   void    Render();
   void    GenerateShadowMap( CGraphicsManager* GM );
   bool    ReLoad();
+  const Math::Vect3f& GetAmbientLight() const;
+private:
+	Math::Vect3f mAmbientLightColor;
 };
+
+//-----------------------------------------------------------------------------
+inline const Math::Vect3f& CLightManager::GetAmbientLight() const
+{
+	return mAmbientLightColor;
+}
 
 #endif // LIGHT_MANAGER_H

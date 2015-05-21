@@ -24,12 +24,14 @@ class CBillboard : public CName, public CObject3D
         bool Init(const CXMLTreeNode& atts);
         bool Init
         (
-            const std::string   &aName,
-            const Math::Vect3f  &aPosition,
-            float aSize,
-            const std::string   &aTextureName,
-            const std::string   &aTechniqueName,
-            bool                 aActive = true
+            const std::string&  aName,
+			const Math::Vect3f& aPosition,
+			float				aSize,
+			float				aAngle,
+			float				aAlpha,
+			const std::string & aTextureName,
+			const std::string & aTechniqueName,
+			bool                aActive = true
         );
 
         void Render();
@@ -39,7 +41,7 @@ class CBillboard : public CName, public CObject3D
         CTexture*           m_Texture;
         CEffectTechnique*   mTechnique;
         float               mSize;
-        int                 mAngle;
+        float               mAngle;
         float               mAlpha;
         bool                m_Active;
 

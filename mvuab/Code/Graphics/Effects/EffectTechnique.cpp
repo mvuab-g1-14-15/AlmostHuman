@@ -268,7 +268,7 @@ bool CEffectTechnique::SetupLights()
 
   if ( m_UseLightAmbientColor )
   {
-    // Ask Jordi
+	m_Effect->SetAmbientLightColor( LightMInstance->GetAmbientLight() );
   }
 
   return true;
@@ -277,10 +277,4 @@ bool CEffectTechnique::SetupLights()
 void CEffectTechnique::SetDebugColor( Math::CColor color )
 {
   m_DebugColor = color;
-}
-
-//------------------------------------------------------------------------------------------------------
-void CEffectTechnique::SetSize( float aSize )
-{
-    m_Effect->SetSize( aSize );
 }

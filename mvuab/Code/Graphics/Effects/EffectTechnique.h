@@ -35,8 +35,6 @@ public:
   void SetUseTextureSize(bool active = false);
   void SetTextureSize(unsigned int width, unsigned int height);
 
-  void SetSize( float aSize );
-
 private: // Members
   bool                        m_UseCameraPosition;
   bool                        m_UseInverseProjMatrix;

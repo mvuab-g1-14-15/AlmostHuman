@@ -56,6 +56,7 @@ CEffect::CEffect( const std::string& EffectName )
     , CTOR_EFFECT_PARAMETER( Angle )
     , CTOR_EFFECT_PARAMETER( Alpha )
     , CTOR_EFFECT_PARAMETER( Color )
+	, CTOR_EFFECT_PARAMETER( AmbientLightColor )
 {
   ResetLightsHandle();
 }
@@ -114,6 +115,8 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( Alpha )
   RESET_EFFECT_PARAMETER( Color )
 
+  RESET_EFFECT_PARAMETER( AmbientLightColor )
+
   ResetLightsHandle();
 }
 
@@ -163,6 +166,7 @@ bool CEffect::LoadEffect()
   LINK_EFFECT_PARAMETER( Angle );
   LINK_EFFECT_PARAMETER( Alpha );
   LINK_EFFECT_PARAMETER( Color );
+  LINK_EFFECT_PARAMETER( AmbientLightColor );
 
   //GetParameterBySemantic( WorldMatrixParameterStr, m_WorldMatrixParameter );
   GetParameterBySemantic( ViewMatrixParameterStr, m_ViewMatrixParameter );
@@ -326,7 +330,8 @@ bool CEffect::SetLight( size_t i_light )
   l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
   return true;
 }
-bool CEffect::SetCameraPosition( Math::Vect3f CameraPosition )
+
+bool CEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
 {
   float32 l_Camera[3];
   l_Camera[0] = CameraPosition.x;
@@ -449,4 +454,23 @@ void CEffect::SetSize( float aSize )
 {
     HRESULT lRes = SET_FLOAT_PARAMETER( Size, aSize );
     ASSERT( lRes == S_OK, "Error setting size");
+}
+
+void CEffect::SetAlpha( float aAlpha )
+{
+    HRESULT lRes = SET_FLOAT_PARAMETER( Alpha, aAlpha );
+    ASSERT( lRes == S_OK, "Error setting alpha");
+}
+
+void CEffect::SetAngle( float aAngle )
+{
+    HRESULT lRes = SET_FLOAT_PARAMETER( Angle, aAngle );
+    ASSERT( lRes == S_OK, "Error setting size");
+}
+
+void CEffect::SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor )
+{
+  float lAmbientColor[3] = {aAmbienLightColor.x, aAmbienLightColor.y, aAmbienLightColor.z};
+  HRESULT lRes = m_Effect->SetFloatArray( m_AmbientLightColor, lAmbientColor, 3 );
+  ASSERT( lRes == S_OK, "Error setting ambient color");
 }

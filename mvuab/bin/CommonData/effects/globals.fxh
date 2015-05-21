@@ -69,7 +69,7 @@ float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDire
 float       g_SpecularExponent 	= 20.0f;
 float       g_SpecularFactor 	= 20.0f;
 //float4      g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
-float4      g_AmbientLight 		= float4(0.0, 0.0, 0.0, 1.0);
+float3      g_AmbientLight 											: AmbientLightColor;
 
 //
 // Cal3D parameters

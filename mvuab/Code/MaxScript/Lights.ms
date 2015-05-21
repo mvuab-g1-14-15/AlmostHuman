@@ -23,13 +23,22 @@ fn ExportLights filenameXML =
 		local l_RootNode = xDoc.getNewNode "lights"
 		xDoc.AppendNode l_RootNode
 		
+		--ambient light
+		local lAmbientLightNode = xDoc.getNewNode "ambient_light"
+			
+		-- append the new node light to the root node lights
+		l_RootNode.AppendNode lAmbientLightNode
+		
+		local lAmbientColor = ambientColor
+		lAmbientLightNode.AddAttributeRGBNormalized "color" lAmbientColor
+		
 		-- iterate for all the lights and exported the allowed types into the xml file
 		local l_LightsCount = 0;
 		for iLight in lights do
 		(
-			--try
-			--(
-				format "Class Light :%\n" classof iLight
+			try
+			(
+				--format "Class Light :%\n" classof iLight
 				if classof iLight != Targetobject and 
 				   classof iLight != freeDirect and
 				   classof iLight != freeSpot
@@ -87,13 +96,14 @@ fn ExportLights filenameXML =
 					)
 					l_LightsCount = l_LightsCount + 1
 				)
-			--)
-			--catch
-			--(
-				--format "Error Light % would not be exported\n" l_LightName
-			--)
+			)
+			catch
+			(
+				format "Error Light % would not be exported\n" l_LightName
+			)
 		)
-		format "% Lights have been exported to %\n" l_LightsCount filenameXML
+		
+		format "Exported in file: '%'\n - Ambient Color '%' and '%' Lights." filenameXML lAmbientColor l_LightsCount
 		return xDoc.PrettySaveXML()
 	)
 	catch
