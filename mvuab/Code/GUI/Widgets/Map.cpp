@@ -10,6 +10,7 @@
 #include "ScriptManager.h"
 #include <vector>
 
+
 //---Constructor
 CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
             const Math::Vect2f position_percent,
@@ -23,12 +24,10 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
   , m_Height_Map( h_map )
 {
   m_Mapa = TextureMInstance->GetTexture( Map );
-  m_Player = 0;//TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/flecha.png" );
-  //m_Camara = TextureMInstance->GetTexture( "Data/textures/GUI/Textures_Test/punto.png" );
+  m_Player = 0;
   m_Marco = TextureMInstance->GetTexture( Marco );
   m_MinMaxMap[0] = pos_0_0;
   m_MinMaxMap[1] = pos_1_1;
-  //m_SizeWorld3D = Math::Vect2f( 100.f, 100.f ); // Unidades totales del grid (mundo 3D) en X & Z
 }
 
 CMap::~CMap()
@@ -43,17 +42,17 @@ void CMap::Render()
     CGuiElement::Render();
 
     //Nos aseguramos que la posición del player no salga del mapa
-    /* if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
-       m_posNPlayer.x = m_Width_Map / 2;
+    if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
+    m_posNPlayer.x = m_Width_Map / 2;
 
-     if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 2 ) ) )
-       m_posNPlayer.x = 1 - ( m_Width_Map / 2 );
+    if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 2 ) ) )
+    m_posNPlayer.x = 1 - ( m_Width_Map / 2 );
 
-     if ( m_posNPlayer.y <= m_Height_Map / 2 )
-       m_posNPlayer.y = m_Height_Map / 2;
+    if ( m_posNPlayer.y <= m_Height_Map / 2 )
+    m_posNPlayer.y = m_Height_Map / 2;
 
-     if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 2 ) ) )
-       m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;*/
+    if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 2 ) ) )
+    m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;
 
     float l_PosX0 = m_posNPlayer.x - ( m_Width_Map / 2 );
     float l_PosY0 = m_posNPlayer.y - ( m_Height_Map / 2 );
@@ -70,7 +69,8 @@ void CMap::Render()
 
 
 
-
+	
+	 
     //RENDER ITEM
     for ( size_t i = 0 ; i < m_vItems.size() ; ++i )
     {
@@ -79,8 +79,8 @@ void CMap::Render()
         if ( m_vItems[i]->m_PosInMap.y > l_PosY0  && m_vItems[i]->m_PosInMap.y < l_PosY1 )
         {
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vItems[i]->m_PosInMap.x - l_PosX0 ) / m_Width_Map * m_uWidth ),
-                                   ( uint32 )( ( m_vItems[i]->m_PosInMap.y -  l_PosY0 ) / m_Height_Map * m_uHeight ) );
-          GraphicsInstance->DrawQuad2D( l_drawPos, m_vItems[i]->m_Width, m_vItems[i]->m_Height, CGraphicsManager::UPPER_LEFT,
+                                   ( uint32 )( ( m_vItems[i]->m_PosInMap.y - l_PosY0) / m_Height_Map * m_uHeight ) );
+          GraphicsInstance->DrawQuad2D( l_drawPos, m_vItems[i]->m_Width, m_vItems[i]->m_Height, CGraphicsManager::CENTER,
                                         m_vItems[i]->m_Texture );
         }
       }
@@ -92,7 +92,7 @@ void CMap::Render()
       // Posición de pintado = posición de pintado del mapa en píxeles de pantalla
       Math::Vect2i l_drawPos = m_Position + Math::Vect2i( m_uWidth / 2, m_uHeight / 2 );
       GraphicsInstance->DrawQuad2D( l_drawPos, m_Player->m_Width, m_Player->m_Height,
-                                    -m_Player->m_Yaw - Math::pi32, CGraphicsManager::CENTER,
+                                    -m_Player->m_Yaw, CGraphicsManager::CENTER,
                                     m_Player->m_Texture );
     }
 
@@ -131,10 +131,10 @@ void CMap::Update()
 
   if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
   {
-    m_posNPlayer = NormalizePlayerPos( m_Player->m_PosPlayer.x, m_Player->m_PosPlayer.y );
+    m_posNPlayer = NormalizePlayerPos( m_Player->m_PosPlayer.x, m_Player->m_PosPlayer.z );
 
     for ( size_t i = 0 ; i < m_vEnemy.size() ; ++i )
-      m_vEnemy[i]->m_PosInMap = NormalizePlayerPos( m_vEnemy[i]->m_PosIn3D.x, m_vEnemy[i]->m_PosIn3D.y );
+      m_vEnemy[i]->m_PosInMap = NormalizePlayerPos( m_vEnemy[i]->m_PosIn3D.x, m_vEnemy[i]->m_PosIn3D.z );
   }
 }
 
@@ -164,10 +164,10 @@ void CMap::OnClickedChild( const std::string& name )
 
 }
 
-void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::Vect2f PosInMap3D, uint32 Width,
+void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::Vect3f PosInMap3D, uint32 Width,
                     uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
 {
-  Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3D.x, PosInMap3D.y );
+  Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3D.x, PosInMap3D.z );
   CItemMap* l_ItemMap = new CItemMap( Name, TextureMInstance->GetTexture( Texture ), l_posInMap, Width, Height, Yaw, PositionScript,
                                       OrientationScript );
   m_vItems.push_back( l_ItemMap );
@@ -182,13 +182,13 @@ void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32
   {
     Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
     Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-    CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), Math::Vect2f( PosInMap3d.x, PosInMap3d.z ), l_posInMap, Width,
+    CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
                                            Height, Yaw, PositionScript, OrientationScript );
     m_vEnemy.push_back( l_EnemyMap );
   }
 }
 
-void CMap::AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw,
+void CMap::AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw,
                       std::string  PositionScript, std::string  OrientationScript )
 {
   m_Player = new CPlayer( Name, TextureMInstance->GetTexture( Texture ), PosPlayer, Width, Height, Yaw, PositionScript, OrientationScript );
@@ -207,7 +207,7 @@ CMap::CItemMap::CItemMap( std::string Name, CTexture* Texture, Math::Vect2f PosI
   m_OrientationScript = OrientationScript;
 }
 
-CMap::CPlayer::CPlayer( std::string Name, CTexture* Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw,
+CMap::CPlayer::CPlayer( std::string Name, CTexture* Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw,
                         std::string  PositionScript, std::string  OrientationScript )
 {
   m_Name = Name;
@@ -220,7 +220,7 @@ CMap::CPlayer::CPlayer( std::string Name, CTexture* Texture, Math::Vect2f PosPla
   m_OrientationScript = OrientationScript;
 }
 
-CMap::CEnemyMap::CEnemyMap( std::string Name, CTexture* Texture, Math::Vect2f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw,
+CMap::CEnemyMap::CEnemyMap( std::string Name, CTexture* Texture, Math::Vect3f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw,
                             std::string  PositionScript, std::string  OrientationScript )
 {
   m_Name = Name;
@@ -236,7 +236,7 @@ CMap::CEnemyMap::CEnemyMap( std::string Name, CTexture* Texture, Math::Vect2f Po
 
 void CMap::SetPositionPlayer( Math::Vect3f position )
 {
-  m_Player->m_PosPlayer = Math::Vect2f( position.x, position.z );
+  m_Player->m_PosPlayer = position;//Math::Vect2f( position.x, position.z );
 }
 
 void CMap::SetYawPlayer( float Yaw )
@@ -250,7 +250,7 @@ void CMap::SetPositionEnemy( const std::string& Name,  Math::Vect3f position )
   {
     if ( m_vEnemy[i]->m_Name == Name )
     {
-      m_vEnemy[i]->m_PosIn3D = Math::Vect2f( position.x, position.z );
+      m_vEnemy[i]->m_PosIn3D = position;//Math::Vect2f( position.x, position.z );
       break;
     }
   }

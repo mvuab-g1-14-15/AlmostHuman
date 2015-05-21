@@ -112,6 +112,19 @@ void registerEngine( lua_State* aLuaState )
 void registerManagers( lua_State* aLuaState )
 {
   LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CSingleton<CEngineManagers> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+	  LUA_DECLARE_CLASS(CEngineManagers)
+	  LUA_DECLARE_METHOD(CEngineManagers, GetManagersPath)
+	  LUA_DECLARE_METHOD(CEngineManagers, SetManagersPath)
+	  LUA_BEGIN_SCOPE
+	  LUA_DECLARE_METHOD_SCOPE( CEngineManagers, GetSingletonPtr )
+	  LUA_END_SCOPE
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetActionManager )
   LUA_END_DECLARATION
 

@@ -88,6 +88,10 @@ void CScriptManager::RunCode( const std::string& Code )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
         ASSERT( false, "Error running lua code: %s\n %s", Code.c_str(), l_Str );
+
+#ifdef _DEBUG
+		Reload();
+#endif
     }
 }
 
@@ -97,6 +101,10 @@ void CScriptManager::RunFile( const std::string& FileName )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
         ASSERT( false, "Error running lua file: %s\n %s", FileName.c_str(), l_Str );
+
+#ifdef _DEBUG
+		Reload();
+#endif
     }
 }
 

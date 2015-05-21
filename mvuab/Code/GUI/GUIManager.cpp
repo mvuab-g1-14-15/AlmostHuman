@@ -46,7 +46,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   , m_sLastLoadpathGUI_XML( "" )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
-  , m_Console( 0 )
+  , m_pConsole( 0 )
   //, m_Map( 0 )
 {}
 
@@ -65,7 +65,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   , m_sLastLoadpathGUI_XML( "" )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
-  , m_Console( 0 )
+  , m_pConsole( 0 )
   , m_RenderPointer( true )
 {
 }
@@ -103,7 +103,7 @@ void CGUIManager::Release()
 
   CHECKED_DELETE( m_TextBox );
   CHECKED_DELETE( m_PointerMouse );
-  CHECKED_DELETE( m_Console );
+  CHECKED_DELETE( m_pConsole );
 
   LOG_INFO_APPLICATION( "GUIManager:: offline (ok)" );
 }
@@ -244,7 +244,7 @@ void CGUIManager::Init()
 
 
   //CONSOLA GUI LUA
-  m_Console = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 90 ), Math::colBLACK,
+  m_pConsole = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 90 ), Math::colBLACK,
                                0U, "", 2U, 2U, false,
                                true );
 
@@ -293,8 +293,8 @@ void CGUIManager::Render()
     //Siempre los últimos en pintarse
     assert( m_TextBox );
     m_TextBox->Render();
-    assert( m_Console );
-    m_Console->Render();
+    assert( m_pConsole );
+    m_pConsole->Render();
 	if( m_RenderPointer )
 		RenderPointerMouse();
 
@@ -337,7 +337,7 @@ void CGUIManager::Update()
 
     m_TextBox->Update();
 
-    m_Console->Update();
+    m_pConsole->Update();
 
     //m_Map->Update();
 

@@ -1412,10 +1412,10 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, 
 
   coord_text[0].x = U0;
   coord_text[0].y = V0;
-  coord_text[1].x = U1;
-  coord_text[1].y = V0;
-  coord_text[2].x = U0;
-  coord_text[2].y = V1;
+  coord_text[1].x = U0;
+  coord_text[1].y = V1;
+  coord_text[2].x = U1;
+  coord_text[2].y = V0;
   coord_text[3].x = U1;
   coord_text[3].y = V1;
 

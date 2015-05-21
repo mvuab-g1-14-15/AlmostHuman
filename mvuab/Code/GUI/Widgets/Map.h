@@ -10,6 +10,7 @@
 #define INC_MAP_H
 
 #include "GuiElement\GuiElement.h"
+#include "Math\Vector3.h"
 
 //---Forward Declarations---
 class CTexture;
@@ -38,26 +39,26 @@ private:
     std::string  m_Name;
     CTexture* m_Texture;
     Math::Vect2f  m_PosInMap; //Posición en coordenadas de textura
-    Math::Vect2f  m_PosIn3D; //Posición en 3D
+    Math::Vect3f  m_PosIn3D; //Posición en 3D
     uint32  m_Width;
     uint32  m_Height;
 	float  m_Yaw;
     std::string  m_PositionScript;
     std::string  m_OrientationScript;
-    CEnemyMap( std::string Name, CTexture* Texture, Math::Vect2f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
+    CEnemyMap( std::string Name, CTexture* Texture, Math::Vect3f PosIn3D, Math::Vect2f PosInMap, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   };
   class CPlayer
   {
   public:
     std::string  m_Name;
     CTexture* m_Texture;
-	Math::Vect2f m_PosPlayer;
+	Math::Vect3f m_PosPlayer;
     uint32  m_Width;
     uint32  m_Height;
 	float	m_Yaw;
     std::string  m_PositionScript;
     std::string  m_OrientationScript;
-    CPlayer( std::string Name, CTexture* Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
+    CPlayer( std::string Name, CTexture* Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   };
 
 public:
@@ -75,10 +76,10 @@ public:
   virtual void OnClickedChild( const std::string& name );
   Math::Vect2f NormalizePlayerPos( float x, float z );
 
-  void AddItem( const std::string& Name, const std::string& Texture, Math::Vect2f PosInMap3D, uint32 Width,
+  void AddItem( const std::string& Name, const std::string& Texture, Math::Vect3f PosInMap3D, uint32 Width,
                 uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   void AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string OrientationScript );
-  void AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect2f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string  OrientationScript );
+  void AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string  OrientationScript );
 
   void SetPositionPlayer( Math::Vect3f position );
   void SetYawPlayer( float yaw );

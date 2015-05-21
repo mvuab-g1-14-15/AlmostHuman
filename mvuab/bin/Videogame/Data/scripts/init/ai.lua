@@ -15,11 +15,11 @@ function check_next_state()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
 	--engine:Trace("Distance to player: " .. l_DistanceToPlayer)
-	if l_PlayerInSight then
+	--[[if l_PlayerInSight then
 		engine:Trace("Is viewing player: true")
 	else
 		engine:Trace("Is viewing player: false")
-	end
+	end]]
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end

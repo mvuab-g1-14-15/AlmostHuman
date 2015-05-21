@@ -14,6 +14,7 @@ function CPlayerController:__init()
 	self.Side = Vect3f(0.0)
 	
 	self.InitialYaw = 0.0
+	self.Yaw = 0.0
 	
 	--States
 	self.Run = false
@@ -57,6 +58,7 @@ function CPlayerController:Update()
 	
 	--Yaw smooth movement
 	local l_CameraYaw = l_PlayerCamera:GetYaw()
+	self.Yaw = l_CameraYaw
 	local l_Yaw = self.CharacterController:GetYaw()
 	
 	if l_CameraYaw == l_Yaw then
@@ -190,7 +192,7 @@ function CPlayerController:GetHeight()
 end
 
 function CPlayerController:GetYaw()
-	return self.CharacterController:GetYaw()
+	return self.Yaw
 end
 
 function CPlayerController:UpdateTimers(dt)
@@ -208,23 +210,25 @@ end
 
 function CPlayerController:UpdateCamera(camera, dt)
 	local delta = 0.1
-	if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
-		camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
-		if not self.YawMoved and math.abs(action_manager_lua_wrapper.amount) < 2 then
-			self.YawMoved = true
-			self.ActualTimeMoveYaw = 0.0
-		else
-			self.InitialYaw = camera:GetYaw()
+	if not g_ConsoleActivate then
+		if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
+			camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+			if not self.YawMoved and math.abs(action_manager_lua_wrapper.amount) < 2 then
+				self.YawMoved = true
+				self.ActualTimeMoveYaw = 0.0
+			else
+				self.InitialYaw = camera:GetYaw()
+			end
 		end
-	end
-	if action_manager_lua_wrapper:DoAction(action_manager, "MovePitch") then
-		camera:AddPitch( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
-		if camera:GetPitch() > g_HalfPi - delta then
-			camera:SetPitch(g_HalfPi - delta)
+		if action_manager_lua_wrapper:DoAction(action_manager, "MovePitch") then
+			camera:AddPitch( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+			if camera:GetPitch() > g_HalfPi - delta then
+				camera:SetPitch(g_HalfPi - delta)
+			end
+			if camera:GetPitch() < -g_HalfPi + delta then
+				camera:SetPitch(-g_HalfPi + delta)
+			end 
 		end
-		if camera:GetPitch() < -g_HalfPi + delta then
-			camera:SetPitch(-g_HalfPi + delta)
-		end 
 	end
 end
 
@@ -240,59 +244,61 @@ end
 
 function CPlayerController:UpdateInput()
 	self.Direction = Vect3f(0.0)
-	if action_manager:DoAction("MoveForward") then
-		self.Direction = self.Direction + self.Forward
-	end
-	if action_manager:DoAction("MoveBackward") then
-		self.Direction = self.Direction - self.Forward
-	end
-	if action_manager:DoAction("MoveLeft") then
-		self.Direction = self.Direction + self.Side
-	end
-	if action_manager:DoAction("MoveRight") then
-		self.Direction = self.Direction - self.Side
-	end
-	if CheckVector(self.Direction) then
-		self.Direction:Normalize()
-	end
-	if action_manager:DoAction("ShootDown") then
-		self.Shooting = true
-	end
-	if action_manager:DoAction("ShootUp") then
-		self.Shooting = false
-	end
-	if action_manager:DoAction("Run") then
-		self.Run = true
-	else
-		self.Run = false
-	end
-	if action_manager:DoAction("Crouch") then
-		if self.Crouch then
-			self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
-		else
-			self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+	if not g_ConsoleActivate then
+		if action_manager:DoAction("MoveForward") then
+			self.Direction = self.Direction + self.Forward
 		end
-		self.Crouch = not self.Crouch
-		self.ActualTimeCrouch = 0.0
-	end
-	
-	if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
-		if action_manager:DoAction("LeanOutLeft") then
-			self.LeanOut = 1
-			self.ActualTimeLeanOut = 0.		end
-		if action_manager:DoAction("LeanOutRight") then
-			self.LeanOut = -1
+		if action_manager:DoAction("MoveBackward") then
+			self.Direction = self.Direction - self.Forward
+		end
+		if action_manager:DoAction("MoveLeft") then
+			self.Direction = self.Direction + self.Side
+		end
+		if action_manager:DoAction("MoveRight") then
+			self.Direction = self.Direction - self.Side
+		end
+		if CheckVector(self.Direction) then
+			self.Direction:Normalize()
+		end
+		if action_manager:DoAction("ShootDown") then
+			self.Shooting = true
+		end
+		if action_manager:DoAction("ShootUp") then
+			self.Shooting = false
+		end
+		if action_manager:DoAction("Run") then
+			self.Run = true
+		else
+			self.Run = false
+		end
+		if action_manager:DoAction("Crouch") then
+			if self.Crouch then
+				self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+			else
+				self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+			end
+			self.Crouch = not self.Crouch
+			self.ActualTimeCrouch = 0.0
+		end
+		
+		if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
+			if action_manager:DoAction("LeanOutLeft") then
+				self.LeanOut = 1
+				self.ActualTimeLeanOut = 0.		end
+			if action_manager:DoAction("LeanOutRight") then
+				self.LeanOut = -1
+				self.ActualTimeLeanOut = 0.0
+			end
+		end
+		if action_manager:DoAction("LeanOutLeftUp") and self.LeanOut == 1 then
+			self.PrevLeanOut = self.LeanOut
+			self.LeanOut = 0
 			self.ActualTimeLeanOut = 0.0
 		end
-	end
-	if action_manager:DoAction("LeanOutLeftUp") and self.LeanOut == 1 then
-		self.PrevLeanOut = self.LeanOut
-		self.LeanOut = 0
-		self.ActualTimeLeanOut = 0.0
-	end
-	if action_manager:DoAction("LeanOutRightUp") and self.LeanOut == -1 then
-		self.PrevLeanOut = self.LeanOut
-		self.LeanOut = 0
-		self.ActualTimeLeanOut = 0.0
+		if action_manager:DoAction("LeanOutRightUp") and self.LeanOut == -1 then
+			self.PrevLeanOut = self.LeanOut
+			self.LeanOut = 0
+			self.ActualTimeLeanOut = 0.0
+		end
 	end
 end

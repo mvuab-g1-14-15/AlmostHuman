@@ -221,6 +221,7 @@
 	
 	<action name="ConsolaGUI">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_L"/>
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
     </action>
 	
 	<action name="ForwardGUI">

@@ -48,12 +48,13 @@
 
 //GUI
 #include "GUIManager.h"
+#include "Widgets\ConsoleGUI.h"
 
 
 #include <algorithm>
 #include "RenderableVertex\VertexTypes.h"
 
-CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess()
+CPlayerPhysicProcess::CPlayerPhysicProcess() : CProcess(), m_ConsoleActivate( false )
 {
   unsigned short i = VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
                      VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
@@ -92,59 +93,60 @@ void CPlayerPhysicProcess::Update()
 
       Math::Vect3f v = l_Graph.GetNodeInfo(4);
   */
-
+  m_ConsoleActivate = GUIInstance->GetConsole()->GetVisible();
   /////////////////////////////////////////////////////////////
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
   CActionManager* pActionManager = ActionManagerInstance;
-
-  if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    SMeshMInstance->Reload();
-
-  if ( pActionManager->DoAction( "ReloadLUA" ) )
+  if(!m_ConsoleActivate)
   {
-    // ScriptMInstance->RunCode( "reload()" );
-    ScriptMInstance->Reload();
-    //ScriptMInstance->RunCode( "init()" );
+	  if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
+		SMeshMInstance->Reload();
+
+	  if ( pActionManager->DoAction( "ReloadLUA" ) )
+	  {
+		// ScriptMInstance->RunCode( "reload()" );
+		ScriptMInstance->Reload();
+		//ScriptMInstance->RunCode( "init()" );
+	  }
+
+	  if ( pActionManager->DoAction( "ReloadGUI" ) )
+		GUIInstance->Reload();
+
+	  if ( pActionManager->DoAction( "ReloadManagers" ) )
+	  {
+		EngineManagerInstance->Reload();
+		EngineManagerInstance->Update();
+		pActionManager = ActionManagerInstance;
+	  }
+
+	  /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
+		  ScriptMInstance->RunCode( "cambiar_sala()" );*/
+
+
+	  if ( pActionManager->DoAction( "ChangeCamera" ) )
+	  {
+		if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
+		  CameraMInstance->SetCurrentCamera( "TestProcessCam" );
+		else
+		  CameraMInstance->SetCurrentCamera( "FreeCam" );
+	  }
+
+	  if ( pActionManager->DoAction( "ReloadShaders" ) )
+	  {
+		// NOTE this must be in this order
+		EffectManagerInstance->Reload();
+		LightMInstance->ReLoad();
+		ROTMInstance->ReLoad();
+		SMeshMInstance->Reload();
+		ROLMInstance->Reload();
+		LightMInstance->ReLoad();
+		SRCMInstance->ReLoad();
+	  }
+
+	  if ( pActionManager->DoAction( "ReloadActionToInput" ) )
+		ActionManagerInstance->Reload();
   }
-
-  if ( pActionManager->DoAction( "ReloadGUI" ) )
-    GUIInstance->Reload();
-
-  if ( pActionManager->DoAction( "ReloadManagers" ) )
-  {
-    EngineManagerInstance->Reload();
-    EngineManagerInstance->Update();
-    pActionManager = ActionManagerInstance;
-  }
-
-  /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
-      ScriptMInstance->RunCode( "cambiar_sala()" );*/
-
-
-  if ( pActionManager->DoAction( "ChangeCamera" ) )
-  {
-    if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
-      CameraMInstance->SetCurrentCamera( "TestProcessCam" );
-    else
-      CameraMInstance->SetCurrentCamera( "FreeCam" );
-  }
-
-  if ( pActionManager->DoAction( "ReloadShaders" ) )
-  {
-    // NOTE this must be in this order
-    EffectManagerInstance->Reload();
-    LightMInstance->ReLoad();
-    ROTMInstance->ReLoad();
-    SMeshMInstance->Reload();
-    ROLMInstance->Reload();
-    LightMInstance->ReLoad();
-    SRCMInstance->ReLoad();
-  }
-
-  if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    ActionManagerInstance->Reload();
-
 
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );

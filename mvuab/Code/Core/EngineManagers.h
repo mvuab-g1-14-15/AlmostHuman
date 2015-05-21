@@ -72,6 +72,8 @@ public:
   CGUIManager*                      GetGUIManager() const;
   CBillboardManager*        GetBillboardManager() const;
 
+  GET_SET_REF(std::string, ManagersPath);
+
 private:
   CGraphicsManager*                      m_pGraphicsManager;
   CEffectManager*                        m_pEffectManager;

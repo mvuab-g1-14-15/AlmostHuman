@@ -30,7 +30,7 @@ class CPlayerPhysicProcess : public CProcess
         CPhysicController*            m_PhysicController;
         //CBillboard*                   m_Billboard;
         //CCharacter*               m_Character;
-
+		bool					m_ConsoleActivate;
     public:
         CPlayerPhysicProcess();
         virtual ~CPlayerPhysicProcess();

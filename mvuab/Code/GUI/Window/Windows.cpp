@@ -849,13 +849,13 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
 
     if ( tagName.compare( "item" ) == 0 )
     {
-      Math::Vect2f pos = pSubNewNode.GetVect2fProperty( "pos_in_map", Math::Vect2f( 0.f, 0.f ) );
+      Math::Vect3f pos = pSubNewNode.GetVect3fProperty( "pos_in_map", Math::Vect3f( 0.f, 0.0f, 0.f ) );
       l_Map->AddItem( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
     }
 
     if ( tagName.compare( "mark_player" ) == 0 )
     {
-      Math::Vect2f pos = pSubNewNode.GetVect2fProperty( "pos_in_map", Math::Vect2f( 0.f, 0.f ) );
+      Math::Vect3f pos = pSubNewNode.GetVect3fProperty( "pos_in_map", Math::Vect3f( 0.f, 0.0f, 0.f ) );
       l_Map->AddPlayer( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
     }
 

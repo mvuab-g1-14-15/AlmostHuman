@@ -7,6 +7,7 @@
 #include "Fonts/FontManager.h"
 #include "EngineManagers.h"
 #include "ScriptManager.h"
+#include "GUIManager.h"
 
 #include "Timer\Timer.h"
 
@@ -41,10 +42,12 @@ void CConsoleGUI::Update()
         if ( GetVisible() )
         {
             SetVisible( false );
+			GUIInstance->SetRenderPointer(false);
         }
         else
         {
             SetVisible( true );
+			GUIInstance->SetRenderPointer(true);
         }
     }
 

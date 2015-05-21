@@ -16,13 +16,14 @@
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "Widgets\TextBox.h"
+#include "Widgets\ConsoleGUI.h"
 #include "Utils\Manager.h"
 
 //---Forward Declarations---
 class CPointerMouse;
 class CGuiElement;
 class CWindows;
-class CConsoleGUI;
+//class CConsoleGUI;
 class CMap;
 //--------------------------
 
@@ -117,6 +118,8 @@ class CGUIManager : public CManager
         void SetImage( const std::string& inImageName, const std::string& activeImage );
         std::string GetImage( const std::string& inImageName );
         void PlayImage( const std::string& inImageName, float timePerImage, bool loop );
+
+		GET_SET_PTR(CConsoleGUI, Console)
         //-----------------------------------------------------------------------------------------------------------//
 
     private:
@@ -136,7 +139,7 @@ class CGUIManager : public CManager
         bool  m_bUpdateError;
         CPointerMouse*  m_PointerMouse;
         CTextBox* m_TextBox;
-        CConsoleGUI*  m_Console;
+        CConsoleGUI*  m_pConsole;
         bool  m_bLoadedGuiFiles;
         std::string  m_sLastLoadpathGUI_XML;
         TransitionEffect m_sTransitionEffect;

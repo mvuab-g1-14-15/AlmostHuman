@@ -21,3 +21,8 @@ end
 function MostrarMensaje()
 	gui_manager:SetMessageBox("¿Desea salir?")
 end
+
+function ReloadGUI()
+	g_HUD = CHUD()
+	gui_manager:SetRenderPointer(true)
+end

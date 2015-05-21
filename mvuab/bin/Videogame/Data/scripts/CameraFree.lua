@@ -5,29 +5,30 @@ function UpdateFree()
     forward = 0
     strafe = 0
 	vertical = 0;
-	
-	if action_manager:DoAction("Run") then
-		flag_speed = 1
-	end
-	
-	if action_manager:DoAction("MoveLeft") then
-		strafe = strafe + 1;
-	elseif action_manager:DoAction("MoveRight") then
-		strafe = strafe - 1;
-	end		
-	
-	if action_manager:DoAction("MoveBackward") then
-		forward = forward - 1
-	elseif action_manager:DoAction("MoveForward") then
-		forward = forward + 1
-	end
-	
-	if action_manager:DoAction("MoveUp") then
-		engine:Trace("MoveUp")
-		vertical = vertical + 1
-	elseif action_manager:DoAction("MoveDown") then
-		vertical =  vertical - 1
-		engine:Trace("MoveDown")
+	if not g_ConsoleActivate then
+		if action_manager:DoAction("Run") then
+			flag_speed = 1
+		end
+		
+		if action_manager:DoAction("MoveLeft") then
+			strafe = strafe + 1;
+		elseif action_manager:DoAction("MoveRight") then
+			strafe = strafe - 1;
+		end		
+		
+		if action_manager:DoAction("MoveBackward") then
+			forward = forward - 1
+		elseif action_manager:DoAction("MoveForward") then
+			forward = forward + 1
+		end
+		
+		if action_manager:DoAction("MoveUp") then
+			engine:Trace("MoveUp")
+			vertical = vertical + 1
+		elseif action_manager:DoAction("MoveDown") then
+			vertical =  vertical - 1
+			engine:Trace("MoveDown")
+		end
 	end
 	
 	moveFree( flag_speed, forward, strafe, vertical, dt )
@@ -35,12 +36,16 @@ function UpdateFree()
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	local value=""
 	local current_camera = camera_manager:GetCurrentCamera();
-	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
-		current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+	if not g_ConsoleActivate then
+		if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
+			current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+		end
 	end
 	local current_camera = camera_manager:GetCurrentCamera();
-	if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
-		current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+	if not g_ConsoleActivate then
+		if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
+			current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+		end
 	end
 end
 

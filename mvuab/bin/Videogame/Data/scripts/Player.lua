@@ -40,14 +40,16 @@ function CPlayer:Update()
 
 	self.RenderableObject:MakeTransform();
 	
-	if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then
-       self.Grenade = table.remove(self.GrenadeQueue, 1)
-	   self.Grenade:Throw()
-    end
-	
-	if action_manager:DoAction("ExplodeGrenade") and self.Grenade ~= nil then
-		self.Grenade:Explode()
-		self.Grenade = nil
+	if not g_ConsoleActivate then
+		if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then
+		   self.Grenade = table.remove(self.GrenadeQueue, 1)
+		   self.Grenade:Throw()
+		end
+		
+		if action_manager:DoAction("ExplodeGrenade") and self.Grenade ~= nil then
+			self.Grenade:Explode()
+			self.Grenade = nil
+		end
 	end
 	
 	self.Blaster:Update()
