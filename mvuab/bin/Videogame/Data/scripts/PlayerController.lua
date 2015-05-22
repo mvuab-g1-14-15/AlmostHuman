@@ -256,15 +256,19 @@ function CPlayerController:UpdateInput()
 	if not g_ConsoleActivate then
 		if action_manager:DoAction("MoveForward") then
 			self.Direction = self.Direction + self.Forward
+			self.PlayFootstep()
 		end
 		if action_manager:DoAction("MoveBackward") then
 			self.Direction = self.Direction - self.Forward
+			self.PlayFootstep()
 		end
 		if action_manager:DoAction("MoveLeft") then
 			self.Direction = self.Direction + self.Side
+			self.PlayFootstep()
 		end
 		if action_manager:DoAction("MoveRight") then
 			self.Direction = self.Direction - self.Side
+			self.PlayFootstep()
 		end
 		if CheckVector(self.Direction) then
 			self.Direction:Normalize()

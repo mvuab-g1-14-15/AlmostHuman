@@ -3,7 +3,7 @@
 	<RootPaths>
 		<ProjectRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\</ProjectRoot>
 		<SourceFilesRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\sounds\</SoundBanksRoot>
+		<SoundBanksRoot>C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data\sounds\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
 		<ExternalSourcesOutputRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
