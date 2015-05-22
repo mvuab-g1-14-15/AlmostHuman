@@ -797,14 +797,17 @@ bool CPhysicsManager::ReleasePhysicController( CPhysicController* _pController )
 {
     assert( _pController != NULL );
     assert( mControllerManager != NULL );
+
     bool l_bIsOk = false;
     NxController* l_NxController = _pController->GetPhXController();
 
     if ( l_NxController != NULL )
+    {
         mControllerManager->releaseController( *l_NxController );
+        l_bIsOk = true;
+    }
 
-    //TODO!!!!
-    return true;
+    return l_bIsOk;
 }
 
 NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton( float size )
