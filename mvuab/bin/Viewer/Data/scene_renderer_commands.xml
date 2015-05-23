@@ -28,6 +28,7 @@
 	
 	
     <render_scene layer="solid" active="true"/>
+	<render_scene layer="characters" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>

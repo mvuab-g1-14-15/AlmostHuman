@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <layer name="solid" />
+    <layer name="characters" />
+  <AnimatedInstance name="paladin001" core="paladin" pos="-25.0 0.0 -25.0" yaw="90.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
   <MeshInstance name="Plane001" core="Plane001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Pyramid001" core="Pyramid001" pos="34.7418 0.005 -32.0183" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Teapot001" core="Teapot001" pos="-1.66391 0.0 5.24356" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />

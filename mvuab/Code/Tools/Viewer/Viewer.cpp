@@ -66,6 +66,11 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 AppendMenu( l_MenuLoad, MF_STRING, eOptionParticles, TEXT( "Particles" ) );
                 AppendMenu( l_MenuLoad, MF_STRING, eOptionLights, TEXT( "Lights" ) );
                 AppendMenu( l_MainMenu, MF_STRING, eOptionExit, TEXT( "&Exit" ) );
+
+                AppendMenu( l_TopMenu, MF_STRING, eOptionLights, TEXT( "Reload Lights" ) );
+                AppendMenu( l_TopMenu, MF_STRING, eOptionParticles, TEXT( "Reload Particles" ) );
+                AppendMenu( l_TopMenu, MF_STRING, eOptionEffect, TEXT( "Reload Effects" ) );
+
                 AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MainMenu, TEXT( "&Principal" ) );
                 AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MenuLoad, TEXT( "Reload" ) );
                 SetMenu( hWnd, l_TopMenu );

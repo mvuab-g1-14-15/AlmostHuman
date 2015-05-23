@@ -23,10 +23,10 @@
 	<mesh file="paladin_cape.cmf"/>
 	<mesh file="paladin_cape.cmf"/>
 	
+	<animation name="shoot_arrow" file="paladin_shoot_arrow.caf"/>
 	<animation name="shoot_walk" file="paladin_walk.caf"/>
 	<animation name="idle" file="paladin_idle.caf"/>
 	<animation name="shoot_wave" file="paladin_wave.caf"/>
-	<animation name="shoot_arrow" file="paladin_shoot_arrow.caf"/>
 	<animation name="shoot_sneak" file="paladin_sneak.caf"/>
 	<animation name="jog" file="paladin_jog.caf"/>
 	<animation name="shoot_strut" file="paladin_strut.caf"/>

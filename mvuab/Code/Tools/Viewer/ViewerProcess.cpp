@@ -251,6 +251,12 @@ void OnOptionLigthsClicked()
 }
 
 //---------------------------------------------------------------------------------------------------------------
+void OnOptionEffectsClicked()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------
 void CViewerProcess::OnClickedMenuOption( EMenuOption aMenuOption )
 {
     switch( aMenuOption )
@@ -269,6 +275,9 @@ void CViewerProcess::OnClickedMenuOption( EMenuOption aMenuOption )
             break;
         case eOptionLights:
             OnOptionLigthsClicked();
+            break;
+        case eOptionEffect:
+            OnOptionEffectsClicked();
             break;
         default:
             LOG_ERROR_APPLICATION("Invalid option for menu");

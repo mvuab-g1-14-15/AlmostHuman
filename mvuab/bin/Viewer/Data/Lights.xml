@@ -8,4 +8,5 @@
   </light>
   <light type="targetDirect" name="Direct001" pos="29.9612 8.3009 10.6313" color="255.0 255.0 255.0" att_start_range="10.0" att_end_range="50.0" look_at="54.647 0.0 46.4583" />
   <light type="targetSpot" name="Spot002" pos="-1.44849 13.1467 0.170654" color="255.0 255.0 255.0" att_start_range="10.0" att_end_range="50.0" look_at="0.0 0.0 0.0" angle="43.0" fall_off="45.0" render_shadows="false" />
+  <light type="targetSpot" name="Spot003" pos="-20.0 10 0 -20.0" color="255.0 255.0 255.0" att_start_range="10.0" att_end_range="50.0" look_at="-25.0 0.0 -25.0" angle="43.0" fall_off="45.0" render_shadows="false" />
 </lights>

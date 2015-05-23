@@ -18,6 +18,7 @@ typedef enum EMenuOption
     eOptionMesh,
     eOptionParticles,
     eOptionLights,
+    eOptionEffect,
     eOptionAnimatedModels,
     eOptionExit
 };
