@@ -9,11 +9,11 @@ class CSphereEmitter : public CParticleEmitter
     public:
         CSphereEmitter();
         virtual ~CSphereEmitter();
-        
-		virtual bool Init( const CXMLTreeNode& atts );
-		void Update             (float dt);
-		void Render             ();
-		virtual Math::Vect3f GetSpawnPosition();
+
+        virtual bool Init( const CXMLTreeNode& atts );
+        void Update             (float dt);
+        void Render             ();
+        virtual Math::Vect3f GetSpawnPosition();
 };
 
 #endif

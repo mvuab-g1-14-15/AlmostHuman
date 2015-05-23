@@ -12,32 +12,42 @@ class CFontManager;
 class CObject3D;
 class CAnimatedInstanceModel;
 
+typedef enum EMenuOption
+{
+    eOptionScene = 1,
+    eOptionMesh,
+    eOptionParticles,
+    eOptionAnimatedModels,
+    eOptionExit
+};
+
 class CViewerProcess: public CProcess
 {
-public:
-  CViewerProcess( void );
-  ~CViewerProcess( void );
+    public:
+        CViewerProcess( void );
+        ~CViewerProcess( void );
 
-  virtual void Init();
-  virtual void Update();
-  virtual void Render();
+        virtual void Init();
+        virtual void Update();
+        virtual void Render();
 
-  void CreateViewerCameras();
+        void OnClickedMenuOption( EMenuOption aMenuOption );
 
-  void  DeInit();
+        void CreateViewerCameras();
 
-  void  RenderScene( CGraphicsManager* GM, float ElapsedTime );
-  void  RenderScene2D( CGraphicsManager* GM, CFontManager* FM, float ElapsedTime, float FPS );
-  uint32  RenderDebugInfo( CGraphicsManager* GM, CFontManager* FM, float l_Fps );
-  std::string OpenPicker( std::string Extension );
-  void RenderModel( int wParam );
-  std::string OpenFolder();
-  bool LoadFile( S_MenuType menu );
-  void CreateLight( Math::Vect3f Position );
-  void CreateCamera( Math::Vect3f Position , std::string CameraName );
-  void Clear();
-private:
-  std::string m_FileName;
+        void  DeInit();
+
+        void  RenderScene( CGraphicsManager* GM, float ElapsedTime );
+        void  RenderScene2D( CGraphicsManager* GM, CFontManager* FM, float ElapsedTime, float FPS );
+        uint32  RenderDebugInfo( CGraphicsManager* GM, CFontManager* FM, float l_Fps );
+        std::string OpenPicker( std::string Extension );
+        void RenderModel( int wParam );
+        std::string OpenFolder();
+        void CreateLight( Math::Vect3f Position );
+        void CreateCamera( Math::Vect3f Position , std::string CameraName );
+        void Clear();
+    private:
+        std::string m_FileName;
 };
 
 #endif

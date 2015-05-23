@@ -80,7 +80,7 @@
 #define PhysXMInstance          CEngineManagers::GetSingletonPtr()->GetPhysicsManager()
 #define EnemyMInstance          CEngineManagers::GetSingletonPtr()->GetEnemyManager()
 #define TriggersMInstance       CEngineManagers::GetSingletonPtr()->GetTriggerManager()
-#define ParticleMInstance       CEngineManagers::GetSingletonPtr()->GetParticleManager()
+#define PSMan                   CEngineManagers::GetSingletonPtr()->GetParticleManager()
 #define GizmosMInstance         CEngineManagers::GetSingletonPtr()->GetGizmosManager()
 #define TextureMInstance        CEngineManagers::GetSingletonPtr()->GetTextureManager()
 #define SoundMan                CEngineManagers::GetSingletonPtr()->GetSoundManager()
@@ -112,7 +112,7 @@
 
 #define FATAL_ERROR( msg, ... ) \
     {\
-      CMessageHandler::FatalError( __FILE__, __LINE__, msg, __VA_ARGS__ );\
+        CMessageHandler::FatalError( __FILE__, __LINE__, msg, __VA_ARGS__ );\
     }\
 
 #endif // _DEFINES_H_

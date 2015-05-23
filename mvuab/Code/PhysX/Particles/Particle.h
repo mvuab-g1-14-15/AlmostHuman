@@ -9,38 +9,38 @@ class CParticle
 {
     public:
         CParticle();
-		virtual ~CParticle();
-        
+        virtual ~CParticle();
+
         bool IsAlive();
 
-		bool Init
-		( 
-			float aLifeTime, 
-			const Math::Vect3f& aColor, 
-			const Math::Vect3f& aPosition, 
-			float aVelocity, 
-			float aAceleration,
-			const Math::Vect3f& aDirecction,
-			float aSize,
-			float aAngle,
-			float aAlpha,
-			const std::string & aTextureName,
-			const std::string & aTechniqueName
-		);
+        bool Init
+        (
+            float aLifeTime,
+            const Math::Vect3f& aColor,
+            const Math::Vect3f& aPosition,
+            float aVelocity,
+            float aAceleration,
+            const Math::Vect3f& aDirecction,
+            float aSize,
+            float aAngle,
+            float aAlpha,
+            const std::string & aTextureName,
+            const std::string & aTechniqueName
+        );
 
         void Update( float dt );
-        void Render();		
+        void Render();
 
-	private:
-		CBillboard *mBillboard;
+    private:
+        CBillboard *mBillboard;
 
-		float mTime;
+        float mTime;
         float mLifeTime;
-		bool  mIsAlive;
+        bool  mIsAlive;
 
         Math::Vect3f mColor;
         Math::Vect3f mPosition;
-		Math::Vect3f mDirection;
+        Math::Vect3f mDirection;
         float mVelocity;
         float mAcceleration;
 };
@@ -48,7 +48,7 @@ class CParticle
 //----------------------------------------------------------------------------------------
 inline bool CParticle::IsAlive()
 {
-	return mIsAlive;
+    return mIsAlive;
 }
 
 #endif

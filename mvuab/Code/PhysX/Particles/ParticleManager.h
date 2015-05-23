@@ -23,6 +23,7 @@ class CParticleManager: public CManager, CTemplatedVectorMapManager<CParticleEmi
         void Init();
         void Update();
         void Render();
+        void Refresh();
 };
 
 #endif
