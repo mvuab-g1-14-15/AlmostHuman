@@ -98,56 +98,60 @@ void CPlayerPhysicProcess::Update()
   ////////////      RELOADS ACTIONS           /////////////////
   /////////////////////////////////////////////////////////////
   CActionManager* pActionManager = ActionManagerInstance;
-  if(!m_ConsoleActivate)
+
+  if ( !m_ConsoleActivate )
   {
-	  if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-		SMeshMInstance->Reload();
+    if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
+      SMeshMInstance->Reload();
 
-	  if ( pActionManager->DoAction( "ReloadLUA" ) )
-	  {
-		// ScriptMInstance->RunCode( "reload()" );
-		ScriptMInstance->Reload();
-		//ScriptMInstance->RunCode( "init()" );
-	  }
+    if ( pActionManager->DoAction( "ReloadLUA" ) )
+    {
+      // ScriptMInstance->RunCode( "reload()" );
+      ScriptMInstance->Reload();
+      //ScriptMInstance->RunCode( "init()" );
+    }
 
-	  if ( pActionManager->DoAction( "ReloadGUI" ) )
-		GUIInstance->Reload();
+    if ( pActionManager->DoAction( "ReloadGUI" ) )
+    {
+      GUIInstance->Reload();
+      ScriptMInstance->RunCode( "ReloadGUI()" );
+    }
 
-	  if ( pActionManager->DoAction( "ReloadManagers" ) )
-	  {
-		EngineManagerInstance->Reload();
-		EngineManagerInstance->Update();
-		pActionManager = ActionManagerInstance;
-	  }
+    if ( pActionManager->DoAction( "ReloadManagers" ) )
+    {
+      EngineManagerInstance->Reload();
+      EngineManagerInstance->Update();
+      pActionManager = ActionManagerInstance;
+    }
 
-	  /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
-		  ScriptMInstance->RunCode( "cambiar_sala()" );*/
+    /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
+      ScriptMInstance->RunCode( "cambiar_sala()" );*/
 
 
-	  if ( pActionManager->DoAction( "ChangeCamera" ) )
-	  {
-		if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
-		  CameraMInstance->SetCurrentCamera( "TestProcessCam" );
-		else
-		  CameraMInstance->SetCurrentCamera( "FreeCam" );
-	  }
+    if ( pActionManager->DoAction( "ChangeCamera" ) )
+    {
+      if ( "FreeCam" == CameraMInstance->GetCurrentCameraName() )
+        CameraMInstance->SetCurrentCamera( "TestProcessCam" );
+      else
+        CameraMInstance->SetCurrentCamera( "FreeCam" );
+    }
 
-	  if ( pActionManager->DoAction( "ReloadShaders" ) )
-	  {
-		// NOTE this must be in this order
-		EffectManagerInstance->Reload();
-		LightMInstance->ReLoad();
-		ROTMInstance->ReLoad();
-		SMeshMInstance->Reload();
-		ROLMInstance->Reload();
-		LightMInstance->ReLoad();
-		SRCMInstance->ReLoad();
-	  }
+    if ( pActionManager->DoAction( "ReloadShaders" ) )
+    {
+      // NOTE this must be in this order
+      EffectManagerInstance->Reload();
+      LightMInstance->ReLoad();
+      ROTMInstance->ReLoad();
+      SMeshMInstance->Reload();
+      ROLMInstance->Reload();
+      LightMInstance->ReLoad();
+      SRCMInstance->ReLoad();
+    }
 
-	  if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-		ActionManagerInstance->Reload();
+    if ( pActionManager->DoAction( "ReloadActionToInput" ) )
+      ActionManagerInstance->Reload();
   }
-  
+
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
 }
@@ -234,7 +238,7 @@ void CPlayerPhysicProcess::Init()
   //  m_vPA.push_back( l_AseMeshActor );
   //}
 
-    //Add Escenario
+  //Add Escenario
 
   /*
     CRenderableObjectsLayersManager *l_ROLM = CEngineManagers::GetSingletonPtr()->GetROLManager();
