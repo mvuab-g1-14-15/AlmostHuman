@@ -64,6 +64,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 AppendMenu( l_MenuLoad, MF_STRING, eOptionScene, TEXT( "Scene" ) );
                 AppendMenu( l_MenuLoad, MF_STRING, eOptionAnimatedModels, TEXT( "Animated models" ) );
                 AppendMenu( l_MenuLoad, MF_STRING, eOptionParticles, TEXT( "Particles" ) );
+                AppendMenu( l_MenuLoad, MF_STRING, eOptionLights, TEXT( "Lights" ) );
                 AppendMenu( l_MainMenu, MF_STRING, eOptionExit, TEXT( "&Exit" ) );
                 AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MainMenu, TEXT( "&Principal" ) );
                 AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MenuLoad, TEXT( "Reload" ) );

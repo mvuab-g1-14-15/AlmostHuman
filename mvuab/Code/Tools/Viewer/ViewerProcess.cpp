@@ -244,6 +244,11 @@ void OnOptionParticlesClicked()
     PSMan->Refresh();
 }
 
+//---------------------------------------------------------------------------------------------------------------
+void OnOptionLigthsClicked()
+{
+    LightMInstance->ReLoad();
+}
 
 //---------------------------------------------------------------------------------------------------------------
 void CViewerProcess::OnClickedMenuOption( EMenuOption aMenuOption )
@@ -261,6 +266,9 @@ void CViewerProcess::OnClickedMenuOption( EMenuOption aMenuOption )
             break;
         case eOptionParticles:
             OnOptionParticlesClicked();
+            break;
+        case eOptionLights:
+            OnOptionLigthsClicked();
             break;
         default:
             LOG_ERROR_APPLICATION("Invalid option for menu");

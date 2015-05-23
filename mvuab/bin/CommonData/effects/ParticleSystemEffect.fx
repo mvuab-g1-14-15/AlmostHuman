@@ -26,7 +26,7 @@ TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 float4 mainPS(TT1_VERTEX_PS IN) : COLOR
 {
 	float4 l_Color=tex2D(S0PointSampler, IN.UV);
-	return float4(l_Color.xyz*l_Color.a, l_Color.a);//float4(1, 0, 0, 1);
+	return float4(l_Color.xyz*l_Color.a*0.5, l_Color.a);//float4(1, 0, 0, 1);
 }
 
 technique TECHNIQUE_NAME
