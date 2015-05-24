@@ -14,6 +14,7 @@ void CMessageHandler::Assert( const char* file, long line, const char* aAssertMs
   vsprintf_s( buffer, len, aAssertMsg, args );
   static char s_text[199] = "";
   static int callIt = 1;
+  va_end(args);
 
   if ( callIt )
   {
@@ -41,6 +42,7 @@ void CMessageHandler::FatalError( const char* file, long line, const char* aAsse
   vsprintf_s( buffer, len, aAssertMsg, args );
   static char s_text[199] = "";
   static int callIt = 1;
+  va_end(args);
 
   if ( callIt )
   {

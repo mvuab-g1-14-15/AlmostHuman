@@ -1,6 +1,6 @@
 class "CEnemyLUA"
 
-function CEnemyLUA:__init(position)
+function CEnemyLUA:__init(position, state_machine)
 	self.Life = 100
 	
 	self.Name = "Enemy" .. id_manager:GetId()
@@ -22,6 +22,8 @@ function CEnemyLUA:__init(position)
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi);
 
 	self.RenderableObject:MakeTransform();
+	
+	self.Brain = CBrain("inicial", state_machine)
 	
 	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end

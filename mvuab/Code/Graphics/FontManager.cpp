@@ -187,6 +187,7 @@ uint32 CFontManager::DrawDefaultText( uint32 x, uint32 y, Math::CColor color,
   int len = _vscprintf( format, args ) + 1;
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
+  va_end(args);
   RECT rect;
   rect.left = x;
   rect.top = y;
@@ -209,6 +210,7 @@ uint32 CFontManager::DrawText( uint32 x, uint32 y, Math::CColor color,
   int len = _vscprintf( format, args ) + 1;
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
+  va_end(args);
   RECT rect;
   rect.left = x;
   rect.top = y;
@@ -251,6 +253,7 @@ uint32 CFontManager::SizeX( const char* format, uint32 idFont )
   int len = _vscprintf( format, args ) + 1;
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
+  va_end(args);
   RECT rect;
   // Calcular el tamaño del rectangulo necesario para pintar ese texto
   assert( m_Fonts.size() > idFont );
@@ -267,6 +270,7 @@ uint32 CFontManager::SizeY( const char* format, uint32 idFont )
   int len = _vscprintf( format, args ) + 1;
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
+  va_end(args);
   RECT rect;
   // Calcular el tamaño del rectangulo necesario para pintar ese texto
   assert( m_Fonts.size() > idFont );

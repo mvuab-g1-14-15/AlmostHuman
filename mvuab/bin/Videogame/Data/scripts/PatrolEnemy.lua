@@ -26,8 +26,6 @@ function CPatrolEnemyLUA:NextWaypoint()
 	if self.ActualWaypoint > #self.Waypoints then
 		self.ActualWaypoint = 1
 	end
-	
-	engine:Trace("Next waypoint is " .. self.Waypoints[self.ActualWaypoint]:ToString())
 end
 
 function CPatrolEnemyLUA:MoveToWaypoint()
@@ -39,8 +37,6 @@ function CPatrolEnemyLUA:MoveToWaypoint()
 	Dir.y = 0.0
 	Dir:Normalize()
 	self.CharacterController:Move(Dir, dt)
-	
-	engine:Trace("Actual position " .. self.CharacterController:GetPosition():ToString())
 end
 
 function CPatrolEnemyLUA:IsInWaypoint()
