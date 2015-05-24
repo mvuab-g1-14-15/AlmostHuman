@@ -3,8 +3,8 @@ dofile("./data/level2/scripts/Include.lua")
 class "CPlayerController"
 
 function CPlayerController:__init()
-	self.Position = Vect3f(-0.8, 1.05, 4.87)
-	self.Height = 1.8
+	self.Position = Vect3f(72, 1, 11)
+	self.Height = 1
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
