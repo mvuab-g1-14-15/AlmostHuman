@@ -16,7 +16,9 @@ function load_gameplay()
 	
 	--local pos = Vect3f( 0.0, 0.0, 0.0 )
 	local waypoints = {Vect3f(-2.12, 0.4, 5.19), Vect3f(3.30, 0.4, 2.94)}
-	g_Enemy = CPatrolEnemyLUA(waypoints)
+	--g_Enemy = CPatrolEnemyLUA(waypoints)
+	
+	--g_stateMachine = CStateMachineLUA("Data/enemies/AI-patroll.xml")
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 	initialized = true
@@ -34,7 +36,7 @@ function update_gameplay()
 	end
 	
 	g_HUD:Update()
-	g_Enemy:Update()
+	--g_Enemy:Update()
 	
 	CheckLevel()
 	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
