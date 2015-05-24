@@ -14,7 +14,7 @@ CStaticMeshManager::CStaticMeshManager( CXMLTreeNode& atts) : CManager(atts)
 
 CStaticMeshManager::~CStaticMeshManager()
 {
-    //Destroy();
+    Destroy();
 }
 
 void CStaticMeshManager::Init()
