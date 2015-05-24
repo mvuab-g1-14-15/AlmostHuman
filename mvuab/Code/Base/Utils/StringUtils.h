@@ -23,6 +23,7 @@ inline void Format( std::string& output, const char* format, ... )
   vsprintf_s( buffer, len, format, args );
   output = buffer;
   delete buffer;
+  va_end(args);
 }
 
 inline std::vector<std::string>& Split( const std::string& s, char delim,
