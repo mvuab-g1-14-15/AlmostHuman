@@ -21,6 +21,9 @@ function IrAMain()
 	
 end
 
+function SoundGUI()
+	sound_manager:PlayEvent("Play_Gui_Over","GUI")
+end
 function MostrarMensaje()
 	gui_manager:SetMessageBox("¿Desea salir?")
 end
