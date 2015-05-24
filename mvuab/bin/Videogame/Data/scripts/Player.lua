@@ -79,3 +79,7 @@ end
 function CPlayer:GetYaw()
 	return self.PlayerController:GetYaw()
 end
+
+function CPlayer:GetHeight()
+	return self.PlayerController:GetHeight()
+end

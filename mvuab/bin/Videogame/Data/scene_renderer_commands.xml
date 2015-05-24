@@ -33,6 +33,8 @@
 	<render_gizmos render="true"/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
 	
+	<render_gui render="true"/>
+
 	<!--end pre_render-->
 
 	<disable_z_write/>
