@@ -29,7 +29,7 @@ function update_gameplay()
 		load_gameplay()
 	end
 	
-	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then 
+	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
 		g_Player:Update()
@@ -46,12 +46,16 @@ function update_gameplay()
 		end
 	end
 	
-		if action_manager:DoAction("ChangeCamera" ) then
+	if action_manager:DoAction("ChangeCamera" ) then
 		if "FreeCam" == camera_manager:GetCurrentCameraName() then
 			g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
+			l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
 			camera_manager:SetCurrentCamera( "TestProcessCam" )
+			camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
 		else
+			l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
 			camera_manager:SetCurrentCamera( "FreeCam" )
+			camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
 		end
 	end
 end
