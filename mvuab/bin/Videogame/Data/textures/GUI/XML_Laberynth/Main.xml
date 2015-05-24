@@ -14,7 +14,7 @@
   </Image> 
 
 
-  <Image name="main_bolaGiro" posx="30.00" posy="12.00" height="25.00" width="40.00" visible="true" active="true"
+  <Image name="main_logoalmostHuman" posx="30.00" posy="12.00" height="30.00" width="40.00" visible="true" active="true"
       default="0" 
       OnLoadValue=""
       OnSaveValue=""
@@ -24,35 +24,28 @@
   </Image>
 
   
-  <Button name="Play" posx="40.00" posy="37.00" height="15.00" width="26.00" visible="true" 
-          active="true" texture_normal="Data/textures/GUI/Textures_LaberynthGame/play_normal.png"
-          texture_over="Data/textures/GUI/Textures_LaberynthGame/play_over.png"
-          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/play_press.png"
+  <Button name="Play" posx="38.00" posy="45.00" height="10.00" width="25.00" visible="true" 
+          active="true" texture_normal="Data/textures/GUI/Textures_LaberynthGame/Play.png"
+          texture_over="Data/textures/GUI/Textures_LaberynthGame/play-over.png"
+          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/play-click.png"
           texture_deactivated="Data/textures/GUI/Textures_LaberynthGame/play_press.png"
           OnClickedAction="CargarJuego()"
           OnOverAction=""/>
   
-  <Button name="Setup" posx="39.00" posy="54.00" height="10.00" width="25.00" visible="true" active="true" 
-          texture_normal="Data/textures/GUI/Textures_LaberynthGame/setup_normal.png"
-          texture_over="Data/textures/GUI/Textures_LaberynthGame/setup_over.png" 
-          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/setup_press.png"
+  <Button name="Setup" posx="38.00" posy="60.00" height="10.00" width="25.00" visible="true" active="true" 
+          texture_normal="Data/textures/GUI/Textures_LaberynthGame/setup.png"
+          texture_over="Data/textures/GUI/Textures_LaberynthGame/setup-over.png" 
+          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/setup-click.png"
           texture_deactivated= "Data/textures/GUI/Textures_LaberynthGame/setup_normal.png"
           OnClickedAction="IrASetup()"
           OnOverAction=""/>
 
-  <Button name="Credits" posx="38.00" posy="68.00" height="12.00" width="25.00" visible="true" active="true" 
-          texture_normal="Data/textures/GUI/Textures_LaberynthGame/credits_normal.png"
-          texture_over="Data/textures/GUI/Textures_LaberynthGame/credits_over.png"
-          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/credits_press.png" 
-          texture_deactivated="Data/textures/GUI/Textures_LaberynthGame/credits_normal.png"
-          OnClickedAction=""
-          OnOverAction=""/>
   
-  <Button name="Exit" posx="43.00" posy="85.00" height="10.00" width="18.00" visible="true" active="true" 
-          texture_normal="Data/textures/GUI/Textures_LaberynthGame/exit_normal.png"
-          texture_over="Data/textures/GUI/Textures_LaberynthGame/exit_over.png"
-          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/exit_press.png"
+  <Button name="Exit" posx="38.00" posy="75.00" height="10.00" width="25.00" visible="true" active="true" 
+          texture_normal="Data/textures/GUI/Textures_LaberynthGame/exit.png"
+          texture_over="Data/textures/GUI/Textures_LaberynthGame/exit-over.png"
+          texture_clicked="Data/textures/GUI/Textures_LaberynthGame/exit-click.png"
           texture_deactivated="Data/textures/GUI/Textures_LaberynthGame/exit_normal.png"
-          OnClickedAction="MostrarMensaje()"
+          OnClickedAction="SalirJuego()"
           OnOverAction=""/>
 </Windows>

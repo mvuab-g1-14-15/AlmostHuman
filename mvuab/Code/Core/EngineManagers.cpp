@@ -315,19 +315,19 @@ CLightManager* CEngineManagers::GetLightManager() const
 
 CPhysicsManager* CEngineManagers::GetPhysicsManager() const
 {
-  ASSERT( m_pPhysicsManager, "Null physics manager" );
+  //ASSERT( m_pPhysicsManager, "Null physics manager" );
   return m_pPhysicsManager;
 }
 
 CEnemyManager* CEngineManagers::GetEnemyManager() const
 {
-  ASSERT( m_pEnemyManager, "Null enemy manager" );
+  //ASSERT( m_pEnemyManager, "Null enemy manager" );
   return m_pEnemyManager;
 }
 
 CTriggerManager* CEngineManagers::GetTriggerManager() const
 {
-  ASSERT( m_pTriggerManager, "Null trigger manager" );
+  //ASSERT( m_pTriggerManager, "Null trigger manager" );
   return m_pTriggerManager;
 }
 
@@ -339,7 +339,7 @@ CParticleManager* CEngineManagers::GetParticleManager() const
 
 CGizmosManager* CEngineManagers::GetGizmosManager() const
 {
-  ASSERT( m_pGizmosManager, "Null gizmo manager" );
+  //ASSERT( m_pGizmosManager, "Null gizmo manager" );
   return m_pGizmosManager;
 }
 

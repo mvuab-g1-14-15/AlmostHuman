@@ -43,16 +43,16 @@ void CMap::Render()
 
     //Nos aseguramos que la posición del player no salga del mapa
     if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
-    m_posNPlayer.x = m_Width_Map / 2;
+      m_posNPlayer.x = m_Width_Map / 2;
 
     if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 2 ) ) )
-    m_posNPlayer.x = 1 - ( m_Width_Map / 2 );
+      m_posNPlayer.x = 1 - ( m_Width_Map / 2 );
 
     if ( m_posNPlayer.y <= m_Height_Map / 2 )
-    m_posNPlayer.y = m_Height_Map / 2;
+      m_posNPlayer.y = m_Height_Map / 2;
 
     if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 2 ) ) )
-    m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;
+      m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;
 
     float l_PosX0 = m_posNPlayer.x - ( m_Width_Map / 2 );
     float l_PosY0 = m_posNPlayer.y - ( m_Height_Map / 2 );
@@ -69,8 +69,8 @@ void CMap::Render()
 
 
 
-	
-	 
+
+
     //RENDER ITEM
     for ( size_t i = 0 ; i < m_vItems.size() ; ++i )
     {
@@ -79,7 +79,7 @@ void CMap::Render()
         if ( m_vItems[i]->m_PosInMap.y > l_PosY0  && m_vItems[i]->m_PosInMap.y < l_PosY1 )
         {
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vItems[i]->m_PosInMap.x - l_PosX0 ) / m_Width_Map * m_uWidth ),
-                                   ( uint32 )( ( m_vItems[i]->m_PosInMap.y - l_PosY0) / m_Height_Map * m_uHeight ) );
+                                   ( uint32 )( ( m_vItems[i]->m_PosInMap.y - l_PosY0 ) / m_Height_Map * m_uHeight ) );
           GraphicsInstance->DrawQuad2D( l_drawPos, m_vItems[i]->m_Width, m_vItems[i]->m_Height, CGraphicsManager::CENTER,
                                         m_vItems[i]->m_Texture );
         }
@@ -176,15 +176,18 @@ void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::V
 void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width,
                      uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
 {
-  CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
-
-  if ( l_Enemy )
+  if ( EnemyMInstance != NULL )
   {
-    Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
-    Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-    CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
-                                           Height, Yaw, PositionScript, OrientationScript );
-    m_vEnemy.push_back( l_EnemyMap );
+    CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
+
+    if ( l_Enemy )
+    {
+      Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
+      Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
+      CEnemyMap* l_EnemyMap = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
+                                             Height, Yaw, PositionScript, OrientationScript );
+      m_vEnemy.push_back( l_EnemyMap );
+    }
   }
 }
 

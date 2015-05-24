@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <layer name="solid" />
+  <layer name="characters" />
+</RenderableObjects>
