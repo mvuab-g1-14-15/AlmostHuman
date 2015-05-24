@@ -1,28 +1,26 @@
 #include "EffectManager.h"
 #include "Effect.h"
+#include "EffectPool.h"
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
 #include "EngineConfig.h"
 
 CEffectManager::CEffectManager()
-    : m_WorldMatrix( Math::m44fIDENTITY ),
-      m_ProjectionMatrix( Math::m44fIDENTITY ),
-      m_ViewMatrix( Math::m44fIDENTITY ),
-      m_ViewProjectionMatrix( Math::m44fIDENTITY ),
-      m_LightViewMatrix( Math::m44fIDENTITY ),
-      m_ShadowProjectionMatrix( Math::m44fIDENTITY ),
-      m_CameraEye( Math::v3fZERO ),
-      m_Filename( "" ),
-      CManager()
+    : CManager()
+    , mEffectPool(0)
+    , m_WorldMatrix( Math::m44fIDENTITY )
+    , m_ProjectionMatrix( Math::m44fIDENTITY )
+    , m_ViewMatrix( Math::m44fIDENTITY )
+    , m_ViewProjectionMatrix( Math::m44fIDENTITY )
+    , m_LightViewMatrix( Math::m44fIDENTITY )
+    , m_ShadowProjectionMatrix( Math::m44fIDENTITY )
+    , m_CameraEye( Math::v3fZERO )
 {
 }
 
 CEffectManager::CEffectManager( CXMLTreeNode &atts)
     : CManager(atts)
 {
-    /*  TODO RAUL
-        PONER LECTURA DE XML
-    */
 }
 CEffectManager::~CEffectManager()
 {
@@ -129,8 +127,10 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 
 void CEffectManager::Init()
 {
-    // Obtain the filename
-    //m_Filename = EngineConfigInstance->GetEffectsPath();
+    mEffectPool = new CEffectPool();
+
+    bool lOk = mEffectPool->Init();
+
     // Check if the file exist
     CXMLTreeNode newFile;
 
@@ -157,7 +157,9 @@ void CEffectManager::Init()
         const std::string& l_TagName = l_CurrentNode.GetName();
 
         if ( l_TagName == "comment" )
-        { continue; }
+        {
+            continue;
+        }
 
         if ( l_TagName == "technique" )
         {
@@ -174,7 +176,8 @@ void CEffectManager::Init()
                 if ( l_TagName == "effect" )
                 {
                     l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
-                    CEffect* l_pEffect = new CEffect( l_EffectName );
+                    CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
+                    l_pEffect = new CEffect( l_EffectName );
 
                     if ( !l_pEffect->Load( l_CurrentSubNode ) )
                     {
@@ -188,7 +191,9 @@ void CEffectManager::Init()
                     }
                 }
                 else if ( l_TagName == "handles" )
-                { l_HandlesNode = l_CurrentSubNode; }
+                {
+                    l_HandlesNode = l_CurrentSubNode;
+                }
             }
 
             CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
@@ -201,7 +206,9 @@ void CEffectManager::Init()
             }
 
             if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
-            { m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName; }
+            {
+                m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
+            }
         }
     }
 }
@@ -218,7 +225,9 @@ CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName 
     CEffectTechnique* lTech = GetConstResource(aName);
 
     if( !lTech )
-    { LOG_ERROR_APPLICATION("The technique %s does not exist!!", aName.c_str() ); }
+    {
+        LOG_ERROR_APPLICATION("The technique %s does not exist!!", aName.c_str() );
+    }
 
     return lTech;
 }

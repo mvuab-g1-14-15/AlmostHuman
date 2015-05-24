@@ -10,6 +10,7 @@
 
 class CEffectTechnique;
 class CEffect;
+class CEffectPool;
 
 class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
 {
@@ -53,6 +54,7 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         CEffectTechnique* GetEffectTechnique( const std::string & aName ) const;
 
     private: // Members
+        CEffectPool* mEffectPool;
         typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
         TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
 
@@ -67,8 +69,6 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         Math::Vect3f m_CameraEye;
 
         CMapManager<CEffect> m_Effects;
-
-        std::string     m_Filename;
 
     private: // Methods
 };

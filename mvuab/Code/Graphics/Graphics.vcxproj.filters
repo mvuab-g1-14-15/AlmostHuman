@@ -246,6 +246,9 @@
     <ClCompile Include="SceneRenderComands\ProcessRenderRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="Effects\EffectPool.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -501,6 +504,9 @@
     </ClInclude>
     <ClInclude Include="SceneRenderComands\ProcessRenderRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects\EffectPool.h">
+      <Filter>Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
