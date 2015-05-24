@@ -61,8 +61,8 @@ bool CBillboard::Init
     const std::string&  aName,
     const Math::Vect3f& aPosition,
     float aSize,
-	float aAngle,
-	float aAlpha,
+    float aAngle,
+    float aAlpha,
     const std::string & aTextureName,
     const std::string & aTechniqueName,
     bool                aActive
@@ -74,8 +74,8 @@ bool CBillboard::Init
 
     m_Position = aPosition;
     mSize      = aSize;
-	mAlpha	   = aAlpha;
-	mAngle	   = aAngle;
+    mAlpha     = aAlpha;
+    mAngle     = aAngle;
     m_Active   = aActive;
 
     // Get the texture of the billboard
@@ -92,7 +92,7 @@ bool CBillboard::Init
 
 void CBillboard::Update()
 {
-	MakeTransform();
+    MakeTransform();
 }
 
 void CBillboard::Render()
@@ -102,14 +102,16 @@ void CBillboard::Render()
         CGraphicsManager* lGM = GraphicsInstance;
         lGM->SetTransform( GetTransform() );
         if( m_Texture )
+        {
             m_Texture->Activate(0);
-		CEffect* lEffect = mTechnique->GetEffect();
+        }
+        CEffect* lEffect = mTechnique->GetEffect();
 
-		ASSERT( lEffect, "Null effect fro technique" );
+        ASSERT( lEffect, "Null effect fro technique" );
 
-		lEffect->SetSize( mSize );
-		lEffect->SetAlpha( mAlpha );
-		lEffect->SetAngle( mAngle );
+        lEffect->SetSize( mSize );
+        lEffect->SetAlpha( mAlpha );
+        lEffect->SetAngle( mAngle );
 
         sRV->Render(lGM, mTechnique);
         lGM->SetTransform( Math::Mat44f() );
