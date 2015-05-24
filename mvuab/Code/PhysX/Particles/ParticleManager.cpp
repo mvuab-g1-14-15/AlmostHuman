@@ -32,7 +32,6 @@ void CParticleManager::Init()
     if ( !l_Node.Exists() )
     {
         LOG_ERROR_APPLICATION( "CParticleManager::Init Can't find node \"emitters\"" );
-        l_XML.Done();
         return;
     }
 
