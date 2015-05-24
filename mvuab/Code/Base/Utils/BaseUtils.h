@@ -32,6 +32,7 @@ inline void  Trace( const char* format, ... )
   vsprintf_s( buffer, len, format, args );
   OutputDebugStringA( buffer );
   delete buffer;
+  va_end(args);
 }
 
 inline void TraceVect3f( const std::string& output, Math::Vect3f vector )

@@ -31,12 +31,14 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
         newLog.m_File         = file;
         newLog.m_Line         = line;
         HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+        va_end(args);
 
         switch ( ll )
         {
             case eLogInfo:
                 {
                     m_vLogs.push_back( newLog );
+                    free(buffer);
                     return;
                     SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
                 }
@@ -65,7 +67,7 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
                   "----------------------------------------------------------------------------------------------------------------------------------";
         // Add new log to the vector
         m_vLogs.push_back( newLog );
-        delete buffer;
+        free(buffer);
     }
 }
 
