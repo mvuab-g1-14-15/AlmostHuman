@@ -34,7 +34,8 @@ function CPlayerController:__init()
 	self.TimeMoveYaw = 0.15
 	self.ActualTimeMoveYaw= 0.15
 	
-	countdowntimer_manager:AddTimer("Footstep", 0.5, false)
+	self.TimeFootstep = 0.5
+	countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep, false)
 	
 	--Counters
 	self.ShakeValueVertical = 0.0
@@ -88,9 +89,14 @@ function CPlayerController:Update()
 	local l_Speed = self.Speed
 	if self.Crouch then
 		l_Speed = l_Speed / 3.0
+		countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep * 2.0, false)
 	end
 	if self.Run then
 		l_Speed = l_Speed * 2.0
+		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
+	end
+	if not self.Crouch and not self.Run then
+		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep)
 	end
 	
 	local l_Velocity = self.Direction * l_Speed
@@ -297,7 +303,8 @@ function CPlayerController:UpdateInput()
 		if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
 			if action_manager:DoAction("LeanOutLeft") then
 				self.LeanOut = 1
-				self.ActualTimeLeanOut = 0.		end
+				self.ActualTimeLeanOut = 0.01
+			end
 			if action_manager:DoAction("LeanOutRight") then
 				self.LeanOut = -1
 				self.ActualTimeLeanOut = 0.0
