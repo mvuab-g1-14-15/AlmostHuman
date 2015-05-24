@@ -35,7 +35,7 @@
 CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   :
   CManager()
-  , m_sCurrentWindows( "main.xml" )
+  , m_sCurrentWindows( "Main.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -54,7 +54,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
 CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   :
   CManager( atts )
-  , m_sCurrentWindows( "main.xml" )
+  , m_sCurrentWindows( "Main.xml" )
   , m_TextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
@@ -244,9 +244,9 @@ void CGUIManager::Init()
 
 
   //CONSOLA GUI LUA
-  m_pConsole = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 90 ), Math::colBLACK,
-                               0U, "", 2U, 2U, false,
-                               true );
+  m_pConsole = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 80 ), Math::colBLACK,
+                                0U, "", 2U, 2U, false,
+                                true );
 
   //m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 68, 65 ) );
 
@@ -295,8 +295,12 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_pConsole );
     m_pConsole->Render();
-	if( m_RenderPointer )
-		RenderPointerMouse();
+
+    if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
+      m_RenderPointer = true;
+
+    if ( m_RenderPointer )
+      RenderPointerMouse();
 
   }//END if (m_bIsOk)
 }
@@ -365,6 +369,8 @@ void CGUIManager::Update()
         }
       }
     }//END if( !m_TextBox.IsVisible() )
+
+
   }
 }
 

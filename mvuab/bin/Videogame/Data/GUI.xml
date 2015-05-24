@@ -13,5 +13,5 @@
             quad=                   "Data/textures/GUI/Textures_Test/BaseDialegBox.jpg"/>
   
   <PointerMouse posx="5" posy="5" width="5" height="5" 
-                texture="Data/textures/GUI/Textures_Test/gui_pointer_mouse.tga" isQuadrant="true"/>
+                texture="Data/textures/GUI/Textures_LaberynthGame/cursor.png" isQuadrant="true"/>
 </Gui_config>
