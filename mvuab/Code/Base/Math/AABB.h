@@ -14,11 +14,11 @@ public:
     {
     }
 
-    AABB(const Vector3<T>& min, const Vector3<T>& max) : MinPnt(min) , MaxPnt(max)
+    AABB( const Vector3<T>& min, const Vector3<T>& max ) : MinPnt( min ) , MaxPnt( max )
     {
     }
-    
-    const AABB operator*(const Vector3<T>& s) const
+
+    const AABB operator*( const Vector3<T>& s ) const
     {
         MinPnt.x *= s.x;
         MinPnt.y *= s.y;
@@ -27,31 +27,47 @@ public:
         MaxPnt.y *= s.y;
         MaxPnt.z *= s.z;
 
-        return (*this);
+        return ( *this );
     }
 
-    inline AABB operator+(const Vector3<T>& p) const
+    inline AABB operator+( const Vector3<T>& p ) const
     {
         MinPnt = p + MinPnt;
         MaxPnt = p + MaxPnt;
-        return (*this);
+        return ( *this );
     }
 
     inline float32 GetHeight() const
     {
         return MaxPnt.y - MinPnt.y;
     }
-    
+    inline float32 GetWidth() const
+    {
+        return MaxPnt.x - MinPnt.x;
+    }
+    inline float32 GetDepth() const
+    {
+        return MaxPnt.z - MinPnt.z;
+    }
+
     // What is the center of the smallest sphere that will enclose this AABB?
     inline Vector3<T> GetCenter() const
     {
-        return (MaxPnt + MinPnt) * 0.5f;
+        return ( MaxPnt + MinPnt ) * 0.5f;
     }
-    
+    inline Vector3<T> GetMin() const
+    {
+        return MinPnt;
+    }
+    inline Vector3<T> GetMax() const
+    {
+        return MaxPnt;
+    }
+
     // What is the radius of the smallest sphere that will enclose this AABB?
     inline float32 GetRadius() const
     {
-        return (MaxPnt - MinPnt).Length() * 0.5f;
+        return ( MaxPnt - MinPnt ).Length() * 0.5f;
     }
 
 public:

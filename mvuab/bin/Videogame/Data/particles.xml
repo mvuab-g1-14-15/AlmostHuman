@@ -1,37 +1,20 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-    <!--
-	<emmiter 
-        EmitterType="Sphere"
-        LifeTime="3.0 5.0"
-        Position="0.0 2.0 1.0"
-        Velocity="1.0 2.0 1.0"
-        Acceleration="1.0 0.0 0.0"
-        
-        Radius="0.1 0.5"
-        Pitch="60.0 120.0"
-        Yaw="0.0 360.0"
-        
-        NumParticles="0"
-		Min="10" Max="50"
-		Texture="Data/textures/smoke.png"
-    />
-    
-    <emmiter 
-        EmitterType="Cube"
-        LifeTime="3.0 5.0"
-        Position="0.0 2.0 1.0"
-        Velocity="1.0 2.0 1.0"
-        Acceleration="1.0 0.0 0.0"
-        
-        Radius="0.1 0.5"
-        Depth="10.0 50.0"
-        Width="10.0 50.0"
-        Height="10.0 50.0"
-        
-        NumParticles="0"
-		Min="10" Max="50"
-		Texture="Data/textures/smoke.png"
-    />
-	-->
+	<emitter 
+		type="cube" 
+		loop="false" 
+		active="true" 
+		max_particles="15" 
+		time_to_emit="10.0" 
+		time_to_live="15.0 30.0" 
+		particle_size_range="2 5" 
+		particles_per_emission="2 4" 
+		position="0.0 0.0 0.0" 
+		direction="0.0 1.0 0.5" 
+		velocity="0.0 0.01" 
+		acceleration="0.0 0.01" 
+		cubic_size="2.0 2.0 2.0" 
+		technique="SmokeTechnique">
+		<texture name="Data/textures/particles/toon_smoke.png"/>
+	</emitter> 
 </emitters>

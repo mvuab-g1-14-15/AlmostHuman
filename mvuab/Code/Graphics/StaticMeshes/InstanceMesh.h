@@ -13,28 +13,35 @@ class CPhysicActor;
 
 class CInstanceMesh : public CRenderableObject
 {
-    private:
-        std::string   mType;
-        CStaticMesh  *mStaticMesh;
-        CPhysicActor *mPhysicActor;
+private:
+    std::string   mType;
+    CStaticMesh*  mStaticMesh;
+    CPhysicActor* mPhysicActor;
 
-        std::vector<Math::Vect3f> m_VB;
-        std::vector<uint32> m_IB;
+    std::vector<Math::Vect3f> m_VB;
+    std::vector<uint32> m_IB;
 
-    public:
-        CInstanceMesh(const std::string& aName, const std::string &CoreName);
-        CInstanceMesh(const std::string& aName);
+public:
+    CInstanceMesh( const std::string& aName, const std::string& CoreName );
+    CInstanceMesh( const std::string& aName );
 
-        CInstanceMesh(CXMLTreeNode& atts);
-        ~CInstanceMesh();
+    CInstanceMesh( CXMLTreeNode& atts );
+    ~CInstanceMesh();
 
-        void Render();
-        void SetActor(CPhysicActor *lPhysicActor);
+    void Render();
+    void SetActor( CPhysicActor* lPhysicActor );
 
-        const std::vector<Math::Vect3f> &GetVertexBuffer();
-        const std::vector<uint32> &GetIndexBuffer();
+    const std::vector<Math::Vect3f>& GetVertexBuffer();
+    const std::vector<uint32>& GetIndexBuffer();
 
-        const std::string &GetType() { return mType; }
-        void SetType(const std::string &lType) { mType = lType; }
+    const std::string& GetType()
+    {
+        return mType;
+    }
+    void SetType( const std::string& lType )
+    {
+        mType = lType;
+    }
+    CStaticMesh* GetStaticMesh();
 };
 #endif //INC_INSTANCE_MESH_H_

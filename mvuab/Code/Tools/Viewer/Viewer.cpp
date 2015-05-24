@@ -99,8 +99,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 switch ( wParam )
                 {
                     case VK_ESCAPE:
-                        return OnExit(hWnd);
-                        break;
+                        PostQuitMessage(EXIT_SUCCESS);
                 }
             }
             break;

@@ -26,8 +26,6 @@ function CPatrolEnemyLUA:NextWaypoint()
 	if self.ActualWaypoint > #self.Waypoints then
 		self.ActualWaypoint = 1
 	end
-	
-	engine:Trace("Next waypoint is " .. self.Waypoints[self.ActualWaypoint]:ToString())
 end
 
 function CPatrolEnemyLUA:MoveToWaypoint()
