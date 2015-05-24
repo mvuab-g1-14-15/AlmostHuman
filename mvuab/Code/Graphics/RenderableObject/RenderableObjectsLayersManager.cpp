@@ -164,56 +164,50 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
     l_AuxVertexBuffer.resize( l_VertexBuffer.size() );
 
     #pragma omp parallel for
-
-    for ( int i = 0; i < l_VecElements; ++i )
+    for(int i = 0; i < l_VecElements; ++i)
         l_AuxVertexBuffer[i] = l_InstanceMesh->GetTransform() * l_VertexBuffer[i];
 
     CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( l_Name );
 
-    if ( l_InstanceMesh->GetType() == "dynamic" )
+    if(l_InstanceMesh->GetType() == "dynamic")
         l_pPhysicUserDataMesh->SetGroup( ECG_DYNAMIC_OBJECTS );
 
     CPhysicActor* l_MeshActor = new CPhysicActor( l_pPhysicUserDataMesh );
 
     NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_AuxVertexBuffer, std::vector<uint32>( l_IndexBuffer ) );
+    l_MeshActor->AddMeshShape(l_TriangleMesh, Math::Vect3f( 0.0f, 0.0f, 0.0f));
 
-    if ( l_InstanceMesh->GetType() == "dynamic" )
+    if(l_InstanceMesh->GetType() == "dynamic")
     {
         CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
+
         Math::AABB3f l_AABB = l_StaticMesh->GetAABB();
         Math::Vect3f l_Pos = l_InstanceMesh->GetTransform() * l_AABB.GetCenter();
-        l_Pos.y = l_AABB.GetMin().y;
-        l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
-    }
-    else
-        l_MeshActor->AddMeshShape( l_TriangleMesh, Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
 
-    if ( l_InstanceMesh->GetType() == "dynamic" )
-        l_MeshActor->CreateBody( 1.0f );
+        l_MeshActor->AddBoxShape(Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f), l_Pos);
+        l_MeshActor->CreateBody(1.0f);
+    }
 
     bool oK = false;
+    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0)
+        if(PhysXMInstance->AddPhysicActor(l_MeshActor))
+            if(PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
+                oK = true;
 
-    if ( PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 )
-    {
-        if ( PhysXMInstance->AddPhysicActor( l_MeshActor ) )
-        {
-            PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor );
-            oK = true;
-        }
-    }
-
-    if ( !oK )
+    if(!oK)
     {
         PhysXMInstance->ReleasePhysicActor( l_MeshActor );
 
         CHECKED_DELETE( l_MeshActor );
         CHECKED_DELETE( l_pPhysicUserDataMesh );
     }
+    else if ( l_InstanceMesh->GetType() == "dynamic" )
+    {
+        l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
+        l_InstanceMesh->SetActor( l_MeshActor );
+    }
     else
     {
-        if ( l_InstanceMesh->GetType() == "dynamic" )
-            l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
-
         l_InstanceMesh->SetActor( l_MeshActor );
     }
 

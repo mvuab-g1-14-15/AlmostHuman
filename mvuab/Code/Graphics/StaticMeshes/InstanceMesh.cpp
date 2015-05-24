@@ -12,17 +12,17 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ), mType( "static" )
+CInstanceMesh::CInstanceMesh(const std::string& aName) : CRenderableObject(), mStaticMesh(0) , mType("static"), mPhysicActor(0)
 {
     SetName( aName );
 }
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ), CRenderableObject(), mType( "static" )
+CInstanceMesh::CInstanceMesh(const std::string& aName, const std::string& CoreName) : mStaticMesh(SMeshMInstance->GetResource(CoreName)), CRenderableObject(), mType("static"), mPhysicActor(0)
 {
     SetName( aName );
 }
 
-CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts ) : CRenderableObject( atts ), mStaticMesh( SMeshMInstance->GetResource( atts.GetPszProperty( "core", "no_staticMesh" ) ) ), mType( "static" )
+CInstanceMesh::CInstanceMesh(CXMLTreeNode& atts) : CRenderableObject(atts), mStaticMesh( SMeshMInstance->GetResource(atts.GetPszProperty("core", "no_staticMesh"))), mType("static"), mPhysicActor(0)
 {
 }
 
@@ -47,7 +47,7 @@ void CInstanceMesh::Render()
 
     Math::Mat44f lTransform = GetTransform();
 
-    if ( mType == "dynamic" )
+    if ( mType == "dynamic" && mPhysicActor != 0)
         mPhysicActor->GetMat44( lTransform );
 
     GraphicsInstance->SetTransform( lTransform );
