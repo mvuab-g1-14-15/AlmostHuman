@@ -28,6 +28,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="XML\pugixml\pugixml.cpp" />
+    <ClCompile Include="XML\XMLDocument.cpp" />
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +70,9 @@
     <ClInclude Include="Utils\TemplatedVectorMapManager.h" />
     <ClInclude Include="Utils\Types.h" />
     <ClInclude Include="Utils\Visible.h" />
+    <ClInclude Include="XML\pugixml\pugiconfig.hpp" />
+    <ClInclude Include="XML\pugixml\pugixml.hpp" />
+    <ClInclude Include="XML\XMLDocument.h" />
     <ClInclude Include="XML\XMLTreeNode.h" />
   </ItemGroup>
   <ItemGroup>

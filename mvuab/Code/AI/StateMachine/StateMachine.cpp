@@ -1,71 +1,56 @@
 #include "StateMachine.h"
 #include "Logger\Logger.h"
 #include "XML\XMLTreeNode.h"
+#include "XML\XMLDocument.h"
 #include "State.h"
 
 CStateMachine::CStateMachine( const std::string& Name ) : CName( Name )
 {
-  Load(Name);
+    Load(Name);
 }
 
 CStateMachine::~CStateMachine()
 {
-  Destroy();
+    Destroy();
 }
 
 bool CStateMachine::Load(const std::string& FileName)
 {
-	m_FileName = FileName;
-
-	CXMLTreeNode l_File;
-
-  if ( !l_File.LoadFile( m_FileName.c_str() ) )
-  {
-    LOG_ERROR_APPLICATION( "CStateMachine::Load()->Reading the file %s", FileName.c_str() );
-    return false;
-  }
-
-  CXMLTreeNode TreeNode = l_File["state_machine"];
-
-  if ( TreeNode.Exists() )
-  {
-    int count = TreeNode.GetNumChildren();
-
-    for ( int i = 0; i < count; ++i )
+    bool lOk(true);
+    m_FileName = FileName;
+    CXMLDocument lXMLDoc( m_FileName );
+    if( lXMLDoc.Load() )
     {
-      CXMLTreeNode& l_CurrentNode = TreeNode( i );
-      const std::string& TagName = l_CurrentNode.GetName();
-
-      if ( TagName == "state" )
-      {
-        const std::string& l_Name = l_CurrentNode.GetPszProperty("name", "no_name");
-        CState* l_State = new CState(l_Name);
-        if(!l_State->Load(l_CurrentNode))
+        CXMLTreeNode lRootNode = lXMLDoc.GetNode("state_machine");
+        for( CXMLTreeNode lChildNode = lRootNode.FirstChild(); lChildNode.More(); lChildNode = lChildNode.NextChild() )
         {
-          LOG_WARNING_APPLICATION( "CStateMachine::Error loading state %s", l_State->GetName().c_str() );
-          CHECKED_DELETE(l_State);
+            const std::string & lTagName = lChildNode.GetName();
+            if ( lTagName == "state" )
+            {
+                std::string lName;
+                lOk = lOk && lChildNode.GetAttribute<std::string>("name", lName );
+                CState* l_State = new CState(lName);
+                if(!l_State->Load(lChildNode))
+                {
+                    LOG_WARNING_APPLICATION( "CStateMachine::Error loading state %s", l_State->GetName().c_str() );
+                    CHECKED_DELETE(l_State);
+                }
+                if(!AddResource(lName, l_State))
+                {
+                    LOG_WARNING_APPLICATION( "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
+                    CHECKED_DELETE(l_State);
+                }
+            }
         }
-        if(!AddResource(l_Name, l_State))
-        {
-          LOG_WARNING_APPLICATION( "CStateMachine::state is already loaded %s", l_State->GetName().c_str() );
-          CHECKED_DELETE(l_State);
-        }
-      }
     }
-  }
-  else
-  {
-    LOG_ERROR_APPLICATION(
-                                           "RenderableObjectTechniqueManager::Load->Error trying to read the file: %s", FileName.c_str() );
-  }
 
-	return true;
+    ASSERT(lOk, "Error loading the state machines");
 }
 
 bool CStateMachine::ReLoad()
 {
-	CleanUp();
-	return Load(m_FileName);
+    CleanUp();
+    return Load(m_FileName);
 }
 
 void CStateMachine::CleanUp()

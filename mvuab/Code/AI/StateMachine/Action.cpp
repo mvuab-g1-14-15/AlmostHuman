@@ -4,7 +4,7 @@
 #include "EngineManagers.h"
 
 CAction::CAction( CXMLTreeNode& Node )
-    : m_LuaFunction( Node.GetPszProperty( "function", "no_function" ) )
+    : m_LuaFunction( Node.GetAttribute<std::string>( "function" ) )
 {
 }
 

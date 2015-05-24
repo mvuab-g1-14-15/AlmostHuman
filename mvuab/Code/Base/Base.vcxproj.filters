@@ -35,6 +35,9 @@
     <Filter Include="MessageHandler">
       <UniqueIdentifier>{44857ca8-0270-4a9b-9b59-a9b47f988158}</UniqueIdentifier>
     </Filter>
+    <Filter Include="XML\pugixml">
+      <UniqueIdentifier>{30954016-9033-41b1-9ac0-8c2949fb4f8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -81,6 +84,12 @@
     </ClCompile>
     <ClCompile Include="Timer\CountDownTimerManager.cpp">
       <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLDocument.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\pugixml\pugixml.cpp">
+      <Filter>XML\pugixml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +206,15 @@
     </ClInclude>
     <ClInclude Include="Timer\CounTDownTimerManager.h">
       <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\XMLDocument.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\pugixml\pugiconfig.hpp">
+      <Filter>XML\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\pugixml\pugixml.hpp">
+      <Filter>XML\pugixml</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

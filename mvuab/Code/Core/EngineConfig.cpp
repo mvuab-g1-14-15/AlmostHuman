@@ -1,17 +1,21 @@
 #include "EngineConfig.h"
 #include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
+#include "XML\XMLDocument.h"
 
 CEngineConfig::CEngineConfig()
-  : m_FullScreenMode( false )
-  , m_ExclusiveModeInMouse( false )
-  , m_DrawPointerMouse( false )
-  , m_FitDesktop( false )
-  , m_ConfigPath( "" )
-  , m_GUIPath( "" )
-  , m_SoundPath( "" )
-  , m_ManagersPath( "" )
-  , m_DataPath( "" )
+    : m_FullScreenMode( false )
+    , m_ExclusiveModeInMouse( false )
+    , m_DrawPointerMouse( false )
+    , m_FitDesktop( false )
+    , m_ConfigPath( "" )
+    , m_GUIPath( "" )
+    , m_SoundPath( "" )
+    , m_ManagersPath( "" )
+    , m_DataPath( "" )
+    , m_ScreenResolution( Math::Vect2i( 800, 600 ) )
+    , m_ScreenSize( Math::Vect2i( 800, 600 ) )
+    , m_ScreenPosition( Math::Vect2i( 0, 0 ) )
 {
 }
 
@@ -21,105 +25,106 @@ CEngineConfig::~CEngineConfig()
 
 void CEngineConfig::Load( const std::string& aCfg )
 {
-  m_ConfigPath = aCfg;
-  CXMLTreeNode l_File;
-
-  if ( !l_File.LoadFile( aCfg.c_str() ) )
-  {
-    std::string err = "Error reading the configuration file of the engine" + m_ConfigPath;
-    FATAL_ERROR( err.c_str() );
-  }
-
-  CXMLTreeNode  lTreeNode = l_File["config"];
-
-  if ( !lTreeNode.Exists() )
-  {
-    std::string err = "Error the file" + m_ConfigPath + "does not contain the tag <config>";
-    FATAL_ERROR( err.c_str() );
-  }
-
-  int lCount = lTreeNode.GetNumChildren();
-
-  for ( int i = 0; i < lCount; ++i )
-  {
-    const std::string& lTagName = lTreeNode( i ).GetName();
-
-    if ( lTagName == "console_logger" )
-      m_EnableConsole = lTreeNode( i ).GetBoolProperty( "activate_console", false );
-
-    else if ( lTagName == "window_properties" )
+    bool lOk( true );
+    m_ConfigPath = aCfg;
+    CXMLDocument lXMLDoc( m_ConfigPath );
+    if( lXMLDoc.Load() )
     {
-      m_ScreenResolution  = lTreeNode( i ).GetVect2iProperty( "resolution" , Math::Vect2i( 800, 600 ) );
-      m_ScreenSize        = lTreeNode( i ).GetVect2iProperty( "size", Math::Vect2i( 800, 600 ) );
-      m_ScreenPosition    = lTreeNode( i ).GetVect2iProperty( "position", Math::Vect2i( 0, 0 ) );
-      const std::string& lMode = lTreeNode( i ).GetPszProperty( "mode" );
-      // Switch the modes of the screen
-      m_FullScreenMode  = ( lMode == "full_screen" );
-      m_FitDesktop      = ( lMode == "fit_desktop" );
-      m_Windowed        = ( lMode == "windowed" );
+        CXMLTreeNode lRootNode = lXMLDoc.GetNode("config");
+        for( CXMLTreeNode lChildNode = lRootNode.FirstChild(); lChildNode.More(); lChildNode = lChildNode.NextChild() )
+        {
+            const std::string & lTagName = lChildNode.GetName();
+            if ( lTagName == "console_logger" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<bool>("activate_console", m_EnableConsole );
+            }
+            else if ( lTagName == "window_properties" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<Math::Vect2i>("resolution", m_ScreenResolution );
+                lOk = lOk && lChildNode.GetAttribute<Math::Vect2i>("size", m_ScreenSize );
+                lOk = lOk && lChildNode.GetAttribute<Math::Vect2i>("position", m_ScreenPosition );
 
-      if ( lMode == "" )
-      {
-        LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'" );
-        m_FitDesktop = true;
-      }
+                std::string lMode;
+                lOk = lOk && lChildNode.GetAttribute<std::string>("mode", lMode );
+
+                // Switch the modes of the screen
+                m_FullScreenMode  = ( lMode == "full_screen" );
+                m_FitDesktop      = ( lMode == "fit_desktop" );
+                m_Windowed        = ( lMode == "windowed" );
+
+                if ( lMode == "" )
+                {
+                    LOG_ERROR_APPLICATION( "There is no mode for window, by default it would be 'fit_desktop'" );
+                    m_FitDesktop = true;
+                }
+            }
+            else if ( lTagName == "mouse" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<bool>("exclusive_mode_in_mouse", m_ExclusiveModeInMouse );
+                lOk = lOk && lChildNode.GetAttribute<bool>("draw_pointer_mouse", m_DrawPointerMouse );
+            }
+            else if ( lTagName == "GUI" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<std::string>("init_gui_path", m_GUIPath );
+            }
+            else if ( lTagName == "sound" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<std::string>("init_sound_path", m_SoundPath );
+            }
+            else if ( lTagName == "managers" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<std::string>("path", m_ManagersPath );
+            }
+            else if ( lTagName == "dataPath" )
+            {
+                lOk = lOk && lChildNode.GetAttribute<std::string>("path", m_DataPath );
+            }
+        }
     }
-    else if ( lTagName == "mouse" )
-    {
-      m_ExclusiveModeInMouse = lTreeNode( i ).GetBoolProperty( "exclusive_mode_in_mouse", false );
-      m_DrawPointerMouse = lTreeNode( i ).GetBoolProperty( "draw_pointer_mouse", false );
-    }
-    else if ( lTagName == "GUI" )
-      m_GUIPath = std::string( lTreeNode( i ).GetPszProperty( "init_gui_path", "" ) );
-    else if ( lTagName == "sound" )
-      m_SoundPath = std::string( lTreeNode( i ).GetPszProperty( "init_sound_path", "" ) );
-    else if ( lTagName == "managers" )
-      m_ManagersPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-    else if ( lTagName == "dataPath" )
-      m_DataPath = std::string( lTreeNode( i ).GetPszProperty( "path", "" ) );
-  }
+
+    ASSERT(lOk, "Error loading the engine config");
 }
 
 bool CEngineConfig::GetEnableConsole()
 {
-#ifdef _DEBUG
-  return m_EnableConsole;
-#else
-  return false;
-#endif
+    #ifdef _DEBUG
+    return m_EnableConsole;
+    #else
+    return false;
+    #endif
 }
 
 void CEngineConfig::SetEnableConsole( bool a_EnableConsole )
 {
-  m_EnableConsole = a_EnableConsole;
+    m_EnableConsole = a_EnableConsole;
 }
 
 const Math::Vect2i& CEngineConfig::GetScreenResolution() const
 {
-  return m_ScreenResolution;
+    return m_ScreenResolution;
 }
 
-void CEngineConfig::SetScreenResolution( const Math::Vect2i& aVec )
+void CEngineConfig::SetScreenResolution( const Math::Vect2i & aVec )
 {
-  m_ScreenResolution = aVec;
+    m_ScreenResolution = aVec;
 }
 
 const Math::Vect2i& CEngineConfig::GetScreenPosition() const
 {
-  return m_ScreenPosition;
+    return m_ScreenPosition;
 }
 
-void CEngineConfig::SetScreenPosition( const Math::Vect2i& aVec )
+void CEngineConfig::SetScreenPosition( const Math::Vect2i & aVec )
 {
-  m_ScreenPosition = aVec;
+    m_ScreenPosition = aVec;
 }
 
 const Math::Vect2i& CEngineConfig::GetScreenSize() const
 {
-  return m_ScreenSize;
+    return m_ScreenSize;
 }
 
-void CEngineConfig::SetScreenSize( const Math::Vect2i& aVec )
+void CEngineConfig::SetScreenSize( const Math::Vect2i & aVec )
 {
-  m_ScreenSize = aVec;
+    m_ScreenSize = aVec;
 }

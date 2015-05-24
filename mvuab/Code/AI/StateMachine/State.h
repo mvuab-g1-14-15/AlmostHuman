@@ -13,21 +13,22 @@ class CAction;
 
 class CState : public CName
 {
-public:
-	CState(const std::string& Name);
-	~CState();
-	virtual bool Load( CXMLTreeNode& Node);
+    public:
+        CState(const std::string& Name);
+        ~CState();
+        virtual bool Load( CXMLTreeNode& Node);
 
-  GET_SET(std::vector<CAction*>, OnEnterActions);
-  GET_SET(std::vector<CAction*>, OnExitActions);
-  GET_SET(std::vector<CAction*>, UpdateActions);
+        GET_SET(std::vector<CAction*>, OnEnterActions);
+        GET_SET(std::vector<CAction*>, OnExitActions);
+        GET_SET(std::vector<CAction*>, UpdateActions);
 
-protected:
-private: // Members
-	std::vector<CAction*> m_OnEnterActions;
-	std::vector<CAction*> m_OnExitActions;
-	std::vector<CAction*> m_UpdateActions;
-private: // Methods
+    protected:
+    private: // Members
+        std::vector<CAction*> m_OnEnterActions;
+        std::vector<CAction*> m_OnExitActions;
+        std::vector<CAction*> m_UpdateActions;
+    private: // Methods
+        void FillActions(  CXMLTreeNode& Node, std::vector<CAction*>& aActions );
 };
 
 #endif // CHARACTER_H
