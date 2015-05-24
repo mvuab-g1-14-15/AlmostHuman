@@ -58,9 +58,6 @@ void CInstanceMesh::Render()
 
     if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z ), laabb.GetRadius() ) )
         mStaticMesh->Render( GraphicsInstance );
-
-    Math::Mat44f t;
-    GraphicsInstance->SetTransform( t );
 }
 
 void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )
