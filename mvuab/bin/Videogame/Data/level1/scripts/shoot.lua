@@ -4,6 +4,7 @@ end
 
 function CargarJuego()
 engine:SetPlay(true)
+gui_manager:SetMessageBox("Loading ...")
 engine:SetRunnigProcess("Start Game")
 end
 
@@ -25,7 +26,7 @@ function SoundGUI()
 	sound_manager:PlayEvent("Play_Gui_Over","GUI")
 end
 function MostrarMensaje()
-	gui_manager:SetMessageBox("¿Desea salir?")
+	gui_manager:SetMessageBox("Loading ...")
 end
 
 function ReloadGUI()

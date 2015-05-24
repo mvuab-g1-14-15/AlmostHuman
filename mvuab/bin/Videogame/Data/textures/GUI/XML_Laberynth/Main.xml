@@ -38,7 +38,7 @@
           texture_clicked="Data/textures/GUI/Textures_LaberynthGame/setup-click.png"
           texture_deactivated= "Data/textures/GUI/Textures_LaberynthGame/setup_normal.png"
           OnClickedAction="IrASetup()"
-          OnOverAction=""/>
+          OnOverAction="SoundGUI()"/>
 
   
   <Button name="Exit" posx="38.00" posy="75.00" height="10.00" width="25.00" visible="true" active="true" 
@@ -47,5 +47,5 @@
           texture_clicked="Data/textures/GUI/Textures_LaberynthGame/exit-click.png"
           texture_deactivated="Data/textures/GUI/Textures_LaberynthGame/exit_normal.png"
           OnClickedAction="SalirJuego()"
-          OnOverAction=""/>
+          OnOverAction="SoundGUI()"/>
 </Windows>

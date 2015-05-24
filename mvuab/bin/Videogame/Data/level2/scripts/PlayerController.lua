@@ -4,7 +4,7 @@ class "CPlayerController"
 
 function CPlayerController:__init()
 	self.Position = Vect3f(72, 1, 11)
-	self.Height = 1
+	self.Height = 1.8
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
@@ -46,7 +46,7 @@ function CPlayerController:__init()
 	self.ShakeVerticalAmplitude = 0.01
 	self.ShakeHorizontalAmplitude = 0.01
 	
-	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 0.2, 0.05, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
+	physic_manager:AddController("Player", self.Radius, self.Height/2.0, 1, 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
 	engine:Trace("Player Controller initialized")
 end

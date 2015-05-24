@@ -2,6 +2,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	186343927	Play_Youwin			\GUI\Play_Youwin	
 	426840996	Play_Init			\GUI\Play_Init	
 	474386569	Play_Next			\GUI\Play_Next	
+	785979864	Play_Gui_Over			\Default Work Unit\Play_Gui_Over	
 	847470298	Open_Close_Door_Event			\Default Work Unit\Open_Close_Door_Event	
 	1292086503	Play_Back			\GUI\Play_Back	
 	2348692292	Play_Over			\GUI\Play_Over	

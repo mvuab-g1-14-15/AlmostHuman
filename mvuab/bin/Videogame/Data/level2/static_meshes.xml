@@ -3,15 +3,17 @@
   <static_mesh name="Parets_terra" filename="\meshes\Parets_terra.mesh" />
   <static_mesh name="barrier" filename="\meshes\barrier.mesh" />
   <static_mesh name="barrier001" filename="\meshes\barrier001.mesh" />
-  <static_mesh name="barrier003" filename="\meshes\barrier003.mesh" />
+  <static_mesh name="barrier002" filename="\meshes\barrier002.mesh" />
   <static_mesh name="Viga" filename="\meshes\Viga.mesh" />
+  <static_mesh name="Line001" filename="\meshes\Line001.mesh" />
+  <static_mesh name="Line002" filename="\meshes\Line002.mesh" />
   <static_mesh name="Llum_passadis_01" filename="\meshes\Llum_passadis_01.mesh" />
   <static_mesh name="Llum_passadis_002" filename="\meshes\Llum_passadis_002.mesh" />
   <static_mesh name="Llum_passadis_003" filename="\meshes\Llum_passadis_003.mesh" />
   <static_mesh name="Llum_passadis_004" filename="\meshes\Llum_passadis_004.mesh" />
   <static_mesh name="Llum_passadis_005" filename="\meshes\Llum_passadis_005.mesh" />
   <static_mesh name="Llum_passadis_006" filename="\meshes\Llum_passadis_006.mesh" />
-  <static_mesh name="Lampara_023" filename="\meshes\Lampara_023.mesh" />
+  <static_mesh name="Lampara_011" filename="\meshes\Lampara_011.mesh" />
   <static_mesh name="Llum_passadis_007" filename="\meshes\Llum_passadis_007.mesh" />
   <static_mesh name="Llum_passadis_008" filename="\meshes\Llum_passadis_008.mesh" />
   <static_mesh name="Llum_passadis_009" filename="\meshes\Llum_passadis_009.mesh" />
@@ -20,13 +22,17 @@
   <static_mesh name="Llum_passadis_012" filename="\meshes\Llum_passadis_012.mesh" />
   <static_mesh name="Lampara_013" filename="\meshes\Lampara_013.mesh" />
   <static_mesh name="Lampara_014" filename="\meshes\Lampara_014.mesh" />
-  <static_mesh name="Lampara_025" filename="\meshes\Lampara_025.mesh" />
-  <static_mesh name="Lampara_024" filename="\meshes\Lampara_024.mesh" />
+  <static_mesh name="Lampara_015" filename="\meshes\Lampara_015.mesh" />
+  <static_mesh name="Lampara_016" filename="\meshes\Lampara_016.mesh" />
   <static_mesh name="Lampara_017" filename="\meshes\Lampara_017.mesh" />
-  <static_mesh name="Lampara_022" filename="\meshes\Lampara_022.mesh" />
+  <static_mesh name="Lampara_018" filename="\meshes\Lampara_018.mesh" />
   <static_mesh name="Lampara_019" filename="\meshes\Lampara_019.mesh" />
-  <static_mesh name="Lampara_026" filename="\meshes\Lampara_026.mesh" />
-  <static_mesh name="Lampara_021" filename="\meshes\Lampara_021.mesh" />
+  <static_mesh name="Lampara_027" filename="\meshes\Lampara_027.mesh" />
+  <static_mesh name="Lampara_022" filename="\meshes\Lampara_022.mesh" />
+  <static_mesh name="barrier003" filename="\meshes\barrier003.mesh" />
+  <static_mesh name="Lampara_023" filename="\meshes\Lampara_023.mesh" />
+  <static_mesh name="Lampara_024" filename="\meshes\Lampara_024.mesh" />
+  <static_mesh name="Lampara_025" filename="\meshes\Lampara_025.mesh" />
   <static_mesh name="Armari_2" filename="\meshes\Armari_2.mesh" />
   <static_mesh name="Tauleta_2" filename="\meshes\Tauleta_2.mesh" />
   <static_mesh name="base_carga" filename="\meshes\base_carga.mesh" />
@@ -104,6 +110,8 @@
   <static_mesh name="Reixa013" filename="\meshes\Reixa013.mesh" />
   <static_mesh name="Cylinder004" filename="\meshes\Cylinder004.mesh" />
   <static_mesh name="Bombona" filename="\meshes\Bombona.mesh" />
+  <static_mesh name="Pot_vidre" filename="\meshes\Pot_vidre.mesh" />
+  <static_mesh name="Pot_vidre001" filename="\meshes\Pot_vidre001.mesh" />
   <static_mesh name="Pot_vidre002" filename="\meshes\Pot_vidre002.mesh" />
   <static_mesh name="manec1" filename="\meshes\manec1.mesh" />
   <static_mesh name="Estanteria_TipusA_01" filename="\meshes\Estanteria_TipusA_01.mesh" />
@@ -119,16 +127,16 @@
   <static_mesh name="Estanteria_tipusB_004" filename="\meshes\Estanteria_tipusB_004.mesh" />
   <static_mesh name="Estanteria_tipusB_005" filename="\meshes\Estanteria_tipusB_005.mesh" />
   <static_mesh name="Estanteria_tipusB_006" filename="\meshes\Estanteria_tipusB_006.mesh" />
-  <static_mesh name="barrierCIL_031" filename="\meshes\barrierCIL_031.mesh" />
-  <static_mesh name="barrierCIL_032" filename="\meshes\barrierCIL_032.mesh" />
-  <static_mesh name="barrierCIL_040" filename="\meshes\barrierCIL_040.mesh" />
-  <static_mesh name="barrierCIL_033" filename="\meshes\barrierCIL_033.mesh" />
-  <static_mesh name="barrierCIL_034" filename="\meshes\barrierCIL_034.mesh" />
-  <static_mesh name="barrierCIL_035" filename="\meshes\barrierCIL_035.mesh" />
-  <static_mesh name="barrierCIL_036" filename="\meshes\barrierCIL_036.mesh" />
-  <static_mesh name="barrierCIL_039" filename="\meshes\barrierCIL_039.mesh" />
-  <static_mesh name="barrierCIL_037" filename="\meshes\barrierCIL_037.mesh" />
-  <static_mesh name="barrierCIL_038" filename="\meshes\barrierCIL_038.mesh" />
+  <static_mesh name="barrierCIL_01" filename="\meshes\barrierCIL_01.mesh" />
+  <static_mesh name="barrierCIL_02" filename="\meshes\barrierCIL_02.mesh" />
+  <static_mesh name="barrierCIL_03" filename="\meshes\barrierCIL_03.mesh" />
+  <static_mesh name="barrierCIL_04" filename="\meshes\barrierCIL_04.mesh" />
+  <static_mesh name="barrierCIL_05" filename="\meshes\barrierCIL_05.mesh" />
+  <static_mesh name="barrierCIL_06" filename="\meshes\barrierCIL_06.mesh" />
+  <static_mesh name="barrierCIL_07" filename="\meshes\barrierCIL_07.mesh" />
+  <static_mesh name="barrierCIL_08" filename="\meshes\barrierCIL_08.mesh" />
+  <static_mesh name="barrierCIL_09" filename="\meshes\barrierCIL_09.mesh" />
+  <static_mesh name="barrierCIL_10" filename="\meshes\barrierCIL_10.mesh" />
   <static_mesh name="barrierCIL_16" filename="\meshes\barrierCIL_16.mesh" />
   <static_mesh name="barrierCIL_17" filename="\meshes\barrierCIL_17.mesh" />
   <static_mesh name="barrierCIL_18" filename="\meshes\barrierCIL_18.mesh" />
@@ -177,7 +185,7 @@
   <static_mesh name="metal_barrel023" filename="\meshes\metal_barrel023.mesh" />
   <static_mesh name="metal_barrel022" filename="\meshes\metal_barrel022.mesh" />
   <static_mesh name="metal_barrel019" filename="\meshes\metal_barrel019.mesh" />
-  <static_mesh name="metal_barrel075" filename="\meshes\metal_barrel075.mesh" />
+  <static_mesh name="metal_barrel018" filename="\meshes\metal_barrel018.mesh" />
   <static_mesh name="metal_barrel017" filename="\meshes\metal_barrel017.mesh" />
   <static_mesh name="metal_barrel016" filename="\meshes\metal_barrel016.mesh" />
   <static_mesh name="metal_barrel015" filename="\meshes\metal_barrel015.mesh" />
@@ -293,13 +301,13 @@
   <static_mesh name="metal_barrel072" filename="\meshes\metal_barrel072.mesh" />
   <static_mesh name="metal_barrel073" filename="\meshes\metal_barrel073.mesh" />
   <static_mesh name="metal_barrel074" filename="\meshes\metal_barrel074.mesh" />
-  <static_mesh name="plastic_barrel297" filename="\meshes\plastic_barrel297.mesh" />
-  <static_mesh name="plastic_barrel298" filename="\meshes\plastic_barrel298.mesh" />
-  <static_mesh name="plastic_barrel301" filename="\meshes\plastic_barrel301.mesh" />
-  <static_mesh name="plastic_barrel302" filename="\meshes\plastic_barrel302.mesh" />
-  <static_mesh name="plastic_barrel304" filename="\meshes\plastic_barrel304.mesh" />
-  <static_mesh name="plastic_barrel296" filename="\meshes\plastic_barrel296.mesh" />
-  <static_mesh name="plastic_barrel305" filename="\meshes\plastic_barrel305.mesh" />
+  <static_mesh name="plastic_barrel136" filename="\meshes\plastic_barrel136.mesh" />
+  <static_mesh name="plastic_barrel137" filename="\meshes\plastic_barrel137.mesh" />
+  <static_mesh name="plastic_barrel140" filename="\meshes\plastic_barrel140.mesh" />
+  <static_mesh name="plastic_barrel141" filename="\meshes\plastic_barrel141.mesh" />
+  <static_mesh name="plastic_barrel143" filename="\meshes\plastic_barrel143.mesh" />
+  <static_mesh name="plastic_barrel144" filename="\meshes\plastic_barrel144.mesh" />
+  <static_mesh name="plastic_barrel145" filename="\meshes\plastic_barrel145.mesh" />
   <static_mesh name="plastic_barrel287" filename="\meshes\plastic_barrel287.mesh" />
   <static_mesh name="plastic_barrel288" filename="\meshes\plastic_barrel288.mesh" />
   <static_mesh name="plastic_barrel289" filename="\meshes\plastic_barrel289.mesh" />
@@ -309,9 +317,27 @@
   <static_mesh name="plastic_barrel293" filename="\meshes\plastic_barrel293.mesh" />
   <static_mesh name="plastic_barrel294" filename="\meshes\plastic_barrel294.mesh" />
   <static_mesh name="plastic_barrel295" filename="\meshes\plastic_barrel295.mesh" />
+  <static_mesh name="plastic_barrel296" filename="\meshes\plastic_barrel296.mesh" />
+  <static_mesh name="plastic_barrel297" filename="\meshes\plastic_barrel297.mesh" />
+  <static_mesh name="plastic_barrel298" filename="\meshes\plastic_barrel298.mesh" />
   <static_mesh name="plastic_barrel299" filename="\meshes\plastic_barrel299.mesh" />
   <static_mesh name="plastic_barrel300" filename="\meshes\plastic_barrel300.mesh" />
+  <static_mesh name="plastic_barrel301" filename="\meshes\plastic_barrel301.mesh" />
+  <static_mesh name="plastic_barrel302" filename="\meshes\plastic_barrel302.mesh" />
   <static_mesh name="plastic_barrel303" filename="\meshes\plastic_barrel303.mesh" />
+  <static_mesh name="plastic_barrel304" filename="\meshes\plastic_barrel304.mesh" />
+  <static_mesh name="plastic_barrel305" filename="\meshes\plastic_barrel305.mesh" />
+  <static_mesh name="barrierCIL_031" filename="\meshes\barrierCIL_031.mesh" />
+  <static_mesh name="barrierCIL_032" filename="\meshes\barrierCIL_032.mesh" />
+  <static_mesh name="barrierCIL_033" filename="\meshes\barrierCIL_033.mesh" />
+  <static_mesh name="barrierCIL_034" filename="\meshes\barrierCIL_034.mesh" />
+  <static_mesh name="barrierCIL_035" filename="\meshes\barrierCIL_035.mesh" />
+  <static_mesh name="barrierCIL_036" filename="\meshes\barrierCIL_036.mesh" />
+  <static_mesh name="barrierCIL_037" filename="\meshes\barrierCIL_037.mesh" />
+  <static_mesh name="barrierCIL_038" filename="\meshes\barrierCIL_038.mesh" />
+  <static_mesh name="barrierCIL_039" filename="\meshes\barrierCIL_039.mesh" />
+  <static_mesh name="barrierCIL_040" filename="\meshes\barrierCIL_040.mesh" />
+  <static_mesh name="metal_barrel075" filename="\meshes\metal_barrel075.mesh" />
   <static_mesh name="metal_barrel076" filename="\meshes\metal_barrel076.mesh" />
   <static_mesh name="metal_barrel077" filename="\meshes\metal_barrel077.mesh" />
   <static_mesh name="metal_barrel078" filename="\meshes\metal_barrel078.mesh" />
@@ -379,6 +405,4 @@
   <static_mesh name="StraightStair007" filename="\meshes\StraightStair007.mesh" />
   <static_mesh name="StraightStair008" filename="\meshes\StraightStair008.mesh" />
   <static_mesh name="Plane012" filename="\meshes\Plane012.mesh" />
-  <static_mesh name="Player" filename="\meshes\Player.mesh" />
-  <static_mesh name="enemy_android" filename="\meshes\enemy_android.mesh" />
 </static_meshes>

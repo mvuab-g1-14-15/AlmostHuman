@@ -34,3 +34,7 @@ end
 function SalirJuego()
 	engine:QuitGame()
 end
+
+function SoundGUI()
+	sound_manager:PlayEvent("Play_Gui_Over","GUI")
+end

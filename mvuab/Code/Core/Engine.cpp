@@ -74,6 +74,12 @@ void CEngine::SetRunnigProcess( const std::string& aNameProcess )
 {
   if ( aNameProcess == "Start Game" )
   {
+    if ( EngineConfigInstance->GetManagersPath() == "Data/level2/managers.xml" )
+    {
+      ScriptMInstance->RunCode( "CargarJuegoFinish()" );
+      return;
+    }
+
     EngineConfigInstance->SetManagersPath( "Data/level2/managers.xml" );
     EngineManagerInstance->SetManagersPath( EngineConfigInstance->GetManagersPath() );
     //EngineManagerInstance->Reload();
