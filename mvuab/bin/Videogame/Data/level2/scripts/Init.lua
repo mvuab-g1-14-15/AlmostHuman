@@ -1,5 +1,5 @@
-dofile("./data/scripts/Player.lua")
-dofile("./data/scripts/PatrolEnemy.lua")
+dofile("./data/level2/scripts/Player.lua")
+dofile("./data/level2/scripts/PatrolEnemy.lua")
 
 g_Player = nil
 g_HUD = nil

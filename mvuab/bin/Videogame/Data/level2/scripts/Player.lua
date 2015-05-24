@@ -1,6 +1,6 @@
-dofile("./data/scripts/PlayerController.lua")
-dofile("./data/scripts/Blaster.lua")
-dofile("./data/scripts/Grenade.lua")
+dofile("./data/level2/scripts/PlayerController.lua")
+dofile("./data/level2/scripts/Blaster.lua")
+dofile("./data/level2/scripts/Grenade.lua")
 
 class "CPlayer"
 
@@ -53,6 +53,10 @@ function CPlayer:Update()
 	end
 	
 	self.Blaster:Update()
+	if self.Life <= 0 then
+		self.PlayerController:SetPosition(Respawn())
+		self.Life= 100.0
+	end
 	--engine:Trace( "Player life: " .. self.Life )
 end
 

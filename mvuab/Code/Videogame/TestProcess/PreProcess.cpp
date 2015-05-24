@@ -70,12 +70,13 @@ void CPreProcess::Update()
     SMeshMInstance->Reload();
 
   if ( pActionManager->DoAction( "ReloadLUA" ) )
-  {
     ScriptMInstance->Reload();
-  }
 
   if ( pActionManager->DoAction( "ReloadGUI" ) )
+  {
     GUIInstance->Reload();
+    ScriptMInstance->RunCode( "ReloadGUI()" );
+  }
 
   if ( pActionManager->DoAction( "ReloadManagers" ) )
   {
@@ -111,12 +112,12 @@ void CPreProcess::Update()
 
 void CPreProcess::Init()
 {
-  
+
 }
 
 void CPreProcess::Render()
 {
-  
+
 }
 
 void CPreProcess::RenderDebugInfo()

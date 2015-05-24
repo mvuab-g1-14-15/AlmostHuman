@@ -98,6 +98,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TestProcess\PlayerPhysicProcess.cpp" />
+    <ClCompile Include="TestProcess\PreProcess.cpp" />
     <ClCompile Include="videogame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TestProcess\PlayerPhysicProcess.h" />
+    <ClInclude Include="TestProcess\PreProcess.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

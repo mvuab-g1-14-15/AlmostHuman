@@ -1,4 +1,4 @@
-dofile("./data/scripts/Enemy.lua")
+dofile("./data/level2/scripts/Enemy.lua")
 
 class 'CPatrolEnemyLUA' (CEnemyLUA)
 
@@ -40,7 +40,7 @@ function CPatrolEnemyLUA:MoveToWaypoint()
 	Dir:Normalize()
 	self.CharacterController:Move(Dir, dt)
 	
-	engine:Trace("Actual position " .. self.CharacterController:GetPosition():ToString())
+	--engine:Trace("Actual position " .. self.CharacterController:GetPosition():ToString())
 end
 
 function CPatrolEnemyLUA:IsInWaypoint()
