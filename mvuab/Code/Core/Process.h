@@ -7,6 +7,17 @@
 class CCamera;
 class CAStar;
 
+typedef enum EMenuOption
+{
+    eOptionScene = 1,
+    eOptionMesh,
+    eOptionParticles,
+    eOptionLights,
+    eOptionEffect,
+    eOptionAnimatedModels,
+    eOptionExit
+};
+
 class CProcess
 {
     protected:
@@ -19,6 +30,7 @@ class CProcess
         virtual ~CProcess() {}
 
         virtual void Init() = 0;
+		void ProcessReloads();
         virtual void Update() = 0;
         virtual void Render() = 0;
         virtual void RenderDebugInfo();
@@ -28,6 +40,8 @@ class CProcess
         {
             return m_AStar;
         }
+
+		void OnClickedMenuOption( EMenuOption aMenuOption );
 };
 
 #endif // PROCESS_H

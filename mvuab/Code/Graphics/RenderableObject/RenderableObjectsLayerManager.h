@@ -8,8 +8,7 @@
 class CGraphicsManager;
 class CXMLTreeNode;
 class CRenderableObject;
-class CRenderableObjectsLayersManager : public
-	CTemplatedVectorMapManager<CRenderableObjectsManager>
+class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRenderableObjectsManager>
 {
 private:
 	std::string m_FileName;

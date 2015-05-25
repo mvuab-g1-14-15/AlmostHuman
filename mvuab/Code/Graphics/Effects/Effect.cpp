@@ -276,9 +276,9 @@ bool CEffect::SetLights( size_t NumOfLights )
             m_LightsEndRangeAttenuation[i] = l_pCurrentLight->GetEndRangeAttenuation();
             m_LightsPosition[i] = l_pCurrentLight->GetPosition();
             Math::CColor l_Color = l_pCurrentLight->GetColor();
-            m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() / 255.0f,
-                                             l_Color.GetGreen() / 255.0f,
-                                             l_Color.GetBlue() / 255.0f );
+            m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() ,
+                                             l_Color.GetGreen() ,
+                                             l_Color.GetBlue() );
 
             if ( l_LightType == CLight::DIRECTIONAL )
             {
@@ -320,8 +320,8 @@ bool CEffect::SetLight( size_t i_light )
     m_LightsEndRangeAttenuation[0] = l_pCurrentLight->GetEndRangeAttenuation();
     m_LightsPosition[0] = l_pCurrentLight->GetPosition();
     Math::CColor l_Color = l_pCurrentLight->GetColor();
-    m_LightsColor[0] = Math::Vect3f( l_Color.GetRed() / 255.0f,
-                                     l_Color.GetGreen() / 255.0f, l_Color.GetBlue() / 255.0f );
+    m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(),
+                                     l_Color.GetGreen(), l_Color.GetBlue() );
     CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( l_pCurrentLight );
 
     if ( l_pDirectionalLight )
