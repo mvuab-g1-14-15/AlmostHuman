@@ -18,6 +18,8 @@
 
 #include "Cinematics/Cinematic.h"
 #include "Cinematics/CinematicPlayer.h"
+#include "Cinematics/CinematicObjectKeyFrame.h"
+#include "Cinematics/CinematicObject.h"
 
 #include "Lights\LightManager.h"
 #include "Lights\OmniLight.h"
@@ -219,6 +221,49 @@ void registerAnimatedModels( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
+void registerCinematics( lua_State* aLuaState )
+{
+	LUA_BEGIN_DECLARATION( aLuaState )
+		LUA_DECLARE_CLASS( CCinematicPlayer )
+		LUA_DECLARE_METHOD( CCinematicPlayer, Init )
+		LUA_DECLARE_METHOD( CCinematicPlayer, Update )
+		LUA_DECLARE_METHOD( CCinematicPlayer, Stop )
+		LUA_DECLARE_METHOD( CCinematicPlayer, Play )
+		LUA_DECLARE_METHOD( CCinematicPlayer, Pause )
+		LUA_DECLARE_METHOD( CCinematicPlayer, IsFinished )
+		LUA_DECLARE_METHOD( CCinematicPlayer, GetDuration )
+		LUA_DECLARE_METHOD( CCinematicPlayer, GetTimeCurrent )
+		LUA_DECLARE_METHOD( CCinematicPlayer, OnRestartCycle )
+	LUA_END_DECLARATION
+
+	LUA_BEGIN_DECLARATION( aLuaState )
+		LUA_DECLARE_CLASS( CCinematicObject )
+		LUA_DECLARE_METHOD( CCinematicObject, IsOk )
+		LUA_DECLARE_METHOD( CCinematicObject, AddCinematicObjectKeyFrame )
+		LUA_DECLARE_METHOD( CCinematicObject, Update )
+		LUA_DECLARE_METHOD( CCinematicObject, Stop )
+		LUA_DECLARE_METHOD( CCinematicObject, OnRestartCycle )
+		LUA_DECLARE_METHOD( CCinematicObject, Render )
+	LUA_END_DECLARATION
+
+	LUA_BEGIN_DECLARATION( aLuaState )
+		LUA_DECLARE_CLASS( CCinematicObjectKeyFrame )
+		LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, GetKeyFrameTime )
+		LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, SetKeyFrameTime )
+	LUA_END_DECLARATION
+
+	LUA_BEGIN_DECLARATION( aLuaState )
+		LUA_DECLARE_CLASS( CCinematic )
+		LUA_DECLARE_METHOD( CCinematic, Stop )
+		LUA_DECLARE_METHOD( CCinematic, Play )
+		LUA_DECLARE_METHOD( CCinematic, Pause )
+		LUA_DECLARE_METHOD( CCinematic, LoadXML )
+		LUA_DECLARE_METHOD( CCinematic, AddCinematicObject )
+		LUA_DECLARE_METHOD( CCinematic, Update )
+		LUA_DECLARE_METHOD( CCinematic, Render )
+	LUA_END_DECLARATION
+}
+
 void registerGraphics( lua_State* aLuaState )
 {
   registerObject3D( aLuaState );
@@ -227,4 +272,5 @@ void registerGraphics( lua_State* aLuaState )
   registerRenderableObject( aLuaState );
   registerStaticMesh( aLuaState );
   registerAnimatedModels( aLuaState );
+  registerCinematics( aLuaState );
 }

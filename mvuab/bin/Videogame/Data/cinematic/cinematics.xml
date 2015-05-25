@@ -1,0 +1,8 @@
+<cinematics>
+	<set_transform object="" pos="0.0 0.0 0.0" />
+	<play_animation object="" animation="" />
+	<set_camera name="" pos="" />
+	<wait time="0.0" />
+	<show_dialog text="" />
+	<hide type="all" />
+</cinematics>
