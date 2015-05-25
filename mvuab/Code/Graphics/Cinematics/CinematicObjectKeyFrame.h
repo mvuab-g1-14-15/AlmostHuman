@@ -13,6 +13,7 @@ private:
 public:
 	CCinematicObjectKeyFrame(CXMLTreeNode &atts);
 	GET_SET(float, KeyFrameTime);
-};
+};
+
 
 #endif // CINEMATIC_OBJECT_KEYFRAME_H
