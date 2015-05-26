@@ -7,7 +7,7 @@
 
 //BASE
 #include "Utils\TemplatedVectorMapManager.h"
-#include "Utils\MapManager.h"
+#include "Utils\BaseUtils.h"
 
 #include "Logger\Logger.h"
 #include "Utils\Defines.h"
@@ -41,6 +41,8 @@
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
 #include "Actor\PhysicController.h"
+#include "Triggers\Trigger.h"
+#include "Triggers\TriggerManager.h"
 #include "CookingMesh\PhysicCookingMesh.h"
 
 //SOUND
@@ -184,6 +186,7 @@ void CPlayerPhysicProcess::Init()
     //ScriptMInstance->RunCode( "init()" );
     ScriptMInstance->RunCode( "load_gameplay()" );
     CPhysicsManager* l_PM = PhysXMInstance;
+	l_PM->SetTriggerReport( this );
 
     /*  CWWSoundManager* l_SM = SoundMan;
 
@@ -344,4 +347,71 @@ void CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
         if ( itPUD != m_vPUD.end() )
             CHECKED_DELETE( *itPUD );
     }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+////////////   Método para pasarle el nombre del shape por parametro     /////////////
+//////////////////////////////////////////////////////////////////////////////////////
+std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
+{
+    std::ostringstream codeCat;
+    size_t count = LuaCode.find( ")" );
+    size_t count2 = LuaCode.find( "(" );
+    std::string l_LuaCode2 = LuaCode.substr( 0, count );
+
+    if ( ( count - count2 ) ==
+            1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
+    { codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")"; }
+    else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
+    { codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << "')"; }
+
+    return codeCat.str();
+}
+void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
+                              CPhysicUserData* _Other_Shape )
+{
+    std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
+                        _Entity_Trigger1->GetName();
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
+
+	if (l_Trigger->GetbEnter())
+	{
+		//Get method name
+		std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+		std::string l_NameShape = _Other_Shape->GetName();
+		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+		LOG_INFO_APPLICATION( l_Msg.c_str() );
+	}
+}
+void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
+                              CPhysicUserData* _Other_Shape )
+{
+    std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
+                        _Entity_Trigger1->GetName();
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
+    //Get method name
+	
+	if (l_Trigger->GetbLeave())
+	{
+		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+		std::string l_NameShape = _Other_Shape->GetName();
+		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+		LOG_INFO_APPLICATION( l_Msg.c_str() );
+	}
+}
+void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
+                             CPhysicUserData* _Other_Shape )
+{
+    std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
+                        _Entity_Trigger1->GetName();
+    CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
+    //Get method name
+
+	if (l_Trigger->GetbStay())
+	{
+		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
+		std::string l_NameShape = _Other_Shape->GetName();
+		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+		LOG_INFO_APPLICATION( l_Msg.c_str() );
+	}
 }

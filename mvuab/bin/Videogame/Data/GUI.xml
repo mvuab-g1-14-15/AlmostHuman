@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Gui_config>
-  <GuiFiles path="Data/textures/GUI/XML_Laberynth"/>
+  <GuiFiles path="Data/textures/GUI/XML_Laberynth" windows_default="HUD.xml"/>
   <TextBox  posx="30" posy="30" width="35" height="35" button_width="5" button_height="5"
             buttonClose_normal=     "Data/textures/GUI/Textures_Test/CloseDialegBox.jpg"
             buttonClose_over=       "Data/textures/GUI/Textures_Test/CloseDialegBoxO.jpg"
@@ -11,7 +11,10 @@
             buttonMove_clicked=     "Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg"
             buttonMove_deactivated= "Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg"
             quad=                   "Data/textures/GUI/Textures_Test/BaseDialegBox.jpg"/>
-  
+  <Image	posx="50" posy="50" width="10" height="4" button_width="5" button_height="5"
+			default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
+    <texture name="img1" name_texture="Data/textures/GUI/Textures_LaberynthGame/CargarEnergy.png"/>
+  </Image>
   <PointerMouse posx="5" posy="5" width="5" height="5" 
                 texture="Data/textures/GUI/Textures_LaberynthGame/cursor.png" isQuadrant="true"/>
 </Gui_config>

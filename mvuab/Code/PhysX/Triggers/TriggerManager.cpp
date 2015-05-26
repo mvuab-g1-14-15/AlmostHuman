@@ -4,9 +4,10 @@
 #include "Actor\PhysicActor.h"
 #include "Utils\PhysicUserData.h"
 #include "Logger\Logger.h"
-
+#include "EngineManagers.h"
 #include "Trigger.h"
 #include "EngineConfig.h"
+#include "Utils\Defines.h"
 
 CTriggerManager::CTriggerManager()
     : CManager()
@@ -97,4 +98,11 @@ std::vector<CTrigger*> CTriggerManager::GetTriggersVector()
 CTrigger* CTriggerManager::GetTriggerByName( std::string Name )
 {
     return GetResource( Name );
+}
+
+void CTriggerManager::Render()
+{
+	TVectorResources::iterator it = m_ResourcesVector.begin(), it_end = m_ResourcesVector.end();
+	for( ; it!=it_end; ++it)
+		PhysXMInstance->DrawActor((*it)->GetPhysicActor()->GetPhXActor(), GraphicsInstance);
 }

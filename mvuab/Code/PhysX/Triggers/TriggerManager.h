@@ -36,7 +36,7 @@ public:
 
   void								  Init();
   void								  Update(){}
-  void								  Render(){}
+  void								  Render();
   bool                                LoadXML( const std::string& FileName );
   bool                                Reload();
   bool                                ReloadXML( const std::string& FileName );

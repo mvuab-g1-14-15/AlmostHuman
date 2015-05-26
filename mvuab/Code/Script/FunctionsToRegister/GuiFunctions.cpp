@@ -27,6 +27,7 @@ void registerGUI( lua_State* aLuaState )
 	  LUA_DECLARE_METHOD( CGUIManager, GetWindow )
 	  LUA_DECLARE_METHOD( CGUIManager, GetConsole )
 	  LUA_DECLARE_METHOD( CGUIManager, SetRenderPointer )
+	  LUA_DECLARE_METHOD( CGUIManager, ShowImage )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

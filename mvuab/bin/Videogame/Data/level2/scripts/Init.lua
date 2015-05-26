@@ -44,6 +44,9 @@ function update_gameplay()
 		if action_manager:DoAction("ChangeRoom") then
 			g_Player:SetPosition(ChangeRoom())
 		end
+		if action_manager:DoAction("PressR") then
+			ChargeEnergy()
+		end
 	end
 	
 	if action_manager:DoAction("ChangeCamera" ) then
