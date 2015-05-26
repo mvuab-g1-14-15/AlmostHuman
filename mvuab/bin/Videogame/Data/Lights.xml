@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
   <ambient_light color="0.5 0.5 0.5" />
-  <light type="omni" name="Omni001" pos="78.9467 -8.68069 -33.5378" color="200.0 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni001" pos="78.9467 -8.68069 -33.5378" color="0.7843137254901961 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
   <light type="omni" name="Omni002" pos="78.4691 -8.68069 -44.3338" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
   <light type="omni" name="Omni003" pos="77.3267 -8.68069 -56.5105" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
   <light type="omni" name="Omni004" pos="77.0752 -8.68069 -68.5237" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />

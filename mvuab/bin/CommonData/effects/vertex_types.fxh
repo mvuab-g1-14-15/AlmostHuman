@@ -90,6 +90,15 @@ struct TT1_DIFF_VERTEX {
 	float2 	UV 			: TEXCOORD0;
 };
 
+struct TGEOMETRY {
+	float3 	Position	: POSITION;
+};
+
+struct TGEOMETRY_PS {
+	float4 HPosition 		: POSITION;
+	float4 WorldPosition 	: TEXCOORD1;
+};
+
 struct TDIFF_VERTEX {
 	float3 	Position	: POSITION;
     float4 	Color 		: COLOR0;
