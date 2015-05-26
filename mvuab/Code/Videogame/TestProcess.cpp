@@ -47,63 +47,6 @@ CTestProcess::~CTestProcess()
 
 void CTestProcess::Update()
 {
-    /////////////////////////////////////////////////////////////
-    ////////////      RELOADS ACTIONS           /////////////////
-    /////////////////////////////////////////////////////////////
-    CActionManager* pActionManager = ActionManagerInstance;
-
-    if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    { SMeshMInstance->Reload(); }
-
-    if ( pActionManager->DoAction( "ReloadLUA" ) )
-    { ScriptMInstance->Reload(); }
-
-    if ( pActionManager->DoAction( "ReloadShaders" ) )
-    {
-        // NOTE this must be in this order
-        EffectManagerInstance->Reload();
-        LightMInstance->ReLoad();
-        ROTMInstance->ReLoad();
-        SMeshMInstance->Reload();
-        ROLMInstance->Reload();
-        SRCMInstance->ReLoad();
-    }
-
-    if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    { ActionManagerInstance->Reload(); }
-
-    /////////////////////////////////////////////////////////////
-    ////////////      SAVE ACTIONS IN FILE      /////////////////
-    /////////////////////////////////////////////////////////////
-    if ( pActionManager->DoAction( "SaveActionToInput" ) )
-    { ActionManagerInstance->SaveXML( "Data/Prueba.xml" ); }
-
-    ///////////////////////////////////////////////////////////////////
-    ////////////      Cambiar el código de una acción      ////////////
-    ///////////////////////////////////////////////////////////////////
-    if ( pActionManager->DoAction( "SetActionToInput" ) )
-    {
-        std::vector<S_INPUT_ACTION> vecInputAction;
-        S_INPUT_ACTION sInputAction;
-        sInputAction.m_DeviceType = IDV_KEYBOARD;
-        sInputAction.m_EventType = EVENT_DOWN_UP;
-        sInputAction.m_Code = KEY_H;
-        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-        sInputAction.m_sEventType = "EVENT_DOWN_UP";
-        sInputAction.m_sCode = "KEY_H";
-        vecInputAction.push_back( sInputAction );
-        sInputAction.m_DeviceType = IDV_KEYBOARD;
-        sInputAction.m_EventType = EVENT_DOWN;
-        sInputAction.m_Code = KEY_LCTRL;
-        sInputAction.m_sDeviceType = "IDV_KEYBOARD";
-        sInputAction.m_sEventType = "EVENT_DOWN";
-        sInputAction.m_sCode = "KEY_LCTRL";
-        vecInputAction.push_back( sInputAction );
-        ActionManagerInstance->SetAction( "SaveActionToInput",
-                                          vecInputAction );
-    }
-
-
     ScriptMInstance->RunCode( "update()" );
 }
 

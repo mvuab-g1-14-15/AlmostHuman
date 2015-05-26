@@ -213,11 +213,14 @@ void CEffectManager::Init()
     }
 }
 
-void CEffectManager::Reload()
+void CEffectManager::ReloadEffects()
 {
-    CleanUp();
-    Destroy();
-    Init();
+    std::map<std::string, CEffect*>& lEffectsVector = m_Effects.GetResourcesMap();
+    std::map<std::string, CEffect*>::iterator lItb = lEffectsVector.begin(), lIte = lEffectsVector.end();
+    for( ; lItb != lIte; ++lItb )
+    {
+        lItb->second->Reload();
+    }
 }
 
 CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName ) const

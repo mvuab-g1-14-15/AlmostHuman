@@ -67,17 +67,23 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
     CLogger::GetSingletonPtr()->SaveLogsInFile();
 
     for ( size_t i = 0; i < m_vPA.size(); ++i )
+    {
         CHECKED_DELETE( m_vPA[i] );
+    }
 
     m_vPA.clear();
 
     for ( size_t i = 0; i < m_vPUD.size(); ++i )
+    {
         CHECKED_DELETE( m_vPUD[i] );
+    }
 
     m_vPUD.clear();
 
     for ( size_t i = 0; i < m_vController.size(); ++i )
+    {
         CHECKED_DELETE( m_vController[i] );
+    }
 
     m_vController.clear();
 
@@ -96,54 +102,6 @@ void CPlayerPhysicProcess::Update()
         Math::Vect3f v = l_Graph.GetNodeInfo(4);
     */
     m_ConsoleActivate = GUIInstance->GetConsole()->GetVisible();
-    /////////////////////////////////////////////////////////////
-    ////////////      RELOADS ACTIONS           /////////////////
-    /////////////////////////////////////////////////////////////
-    CActionManager* pActionManager = ActionManagerInstance;
-
-    if ( !m_ConsoleActivate )
-    {
-        if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-            SMeshMInstance->Reload();
-
-        if ( pActionManager->DoAction( "ReloadLUA" ) )
-        {
-            // ScriptMInstance->RunCode( "reload()" );
-            ScriptMInstance->Reload();
-            //ScriptMInstance->RunCode( "init()" );
-        }
-
-        if ( pActionManager->DoAction( "ReloadGUI" ) )
-        {
-            GUIInstance->Reload();
-            ScriptMInstance->RunCode( "ReloadGUI()" );
-        }
-
-        if ( pActionManager->DoAction( "ReloadManagers" ) )
-        {
-            EngineManagerInstance->Reload();
-            EngineManagerInstance->Update();
-            pActionManager = ActionManagerInstance;
-        }
-
-        /*  if ( pActionManager->DoAction( "ChangeRoom" ) )
-          ScriptMInstance->RunCode( "cambiar_sala()" );*/
-
-        if ( pActionManager->DoAction( "ReloadShaders" ) )
-        {
-            // NOTE this must be in this order
-            EffectManagerInstance->Reload();
-            LightMInstance->ReLoad();
-            ROTMInstance->ReLoad();
-            SMeshMInstance->Reload();
-            ROLMInstance->Reload();
-            LightMInstance->ReLoad();
-            SRCMInstance->ReLoad();
-        }
-
-        if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-            ActionManagerInstance->Reload();
-    }
 
     //ScriptMInstance->RunCode( "update()" );
     ScriptMInstance->RunCode( "update_gameplay()" );
@@ -186,7 +144,7 @@ void CPlayerPhysicProcess::Init()
     //ScriptMInstance->RunCode( "init()" );
     ScriptMInstance->RunCode( "load_gameplay()" );
     CPhysicsManager* l_PM = PhysXMInstance;
-	l_PM->SetTriggerReport( this );
+    l_PM->SetTriggerReport( this );
 
     /*  CWWSoundManager* l_SM = SoundMan;
 
@@ -235,23 +193,23 @@ void CPlayerPhysicProcess::Init()
     //Add Escenario
 
     /*
-      CRenderableObjectsLayersManager *l_ROLM = CEngineManagers::GetSingletonPtr()->GetROLManager();
-      l_ROLM->GetResourcesVector()[0]-;
-      std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
-      std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
-      std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
+        CRenderableObjectsLayersManager *l_ROLM = CEngineManagers::GetSingletonPtr()->GetROLManager();
+        l_ROLM->GetResourcesVector()[0]-;
+        std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
+        std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
+        std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
 
 
 
-      while(l_itBegin != l_itEnd)
-      {
+        while(l_itBegin != l_itEnd)
+        {
           PhysXMInstance->GetCookingMesh()->CreatePhysicMesh(l_itBegin->first, l_itBegin->second->GetVB(), l_itBegin->second->GetIB());
           l_itBegin++;
-      }
+        }
 
-      VecMeshes l_VecMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
-      for (VecMeshes::iterator it = l_VecMeshes.begin(); it != l_VecMeshes.end(); it++)
-      {
+        VecMeshes l_VecMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+        for (VecMeshes::iterator it = l_VecMeshes.begin(); it != l_VecMeshes.end(); it++)
+        {
           CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData(it->first);
           CPhysicActor* l_AseMeshActor = new CPhysicActor(l_pPhysicUserDataASEMesh);
 
@@ -272,11 +230,11 @@ void CPlayerPhysicProcess::Init()
               CHECKED_DELETE(l_AseMeshActor);
               CHECKED_DELETE(l_pPhysicUserDataASEMesh);
           }
-      }
-      */
+        }
+    */
 
-    /*if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
-      LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
+    /*  if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
+        LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
 
     m_AStar = new CAStar();
     m_AStar->Init();
@@ -345,7 +303,9 @@ void CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
         std::vector<CPhysicUserData*>::iterator itPUD = std::find( m_vPUD.begin(), m_vPUD.end(), PUD );
 
         if ( itPUD != m_vPUD.end() )
+        {
             CHECKED_DELETE( *itPUD );
+        }
     }
 }
 
@@ -361,63 +321,67 @@ std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
 
     if ( ( count - count2 ) ==
             1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
-    { codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")"; }
+    {
+        codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")";
+    }
     else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
-    { codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << "')"; }
+    {
+        codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << "')";
+    }
 
     return codeCat.str();
 }
 void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
-                              CPhysicUserData* _Other_Shape )
+                                    CPhysicUserData* _Other_Shape )
 {
     std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
-	ASSERT(false, "Ruly mirate esto");
-	/*
-	if (l_Trigger->GetbEnter())
-	{
-		//Get method name
-		std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
-		std::string l_NameShape = _Other_Shape->GetName();
-		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-		LOG_INFO_APPLICATION( l_Msg.c_str() );
-	}
-	*/
+    ASSERT(false, "Ruly mirate esto");
+    /*
+        if (l_Trigger->GetbEnter())
+        {
+        //Get method name
+        std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
+        std::string l_NameShape = _Other_Shape->GetName();
+        ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+        LOG_INFO_APPLICATION( l_Msg.c_str() );
+        }
+    */
 }
 void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
-                              CPhysicUserData* _Other_Shape )
+                                    CPhysicUserData* _Other_Shape )
 {
     std::string l_Msg = "On Leave de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
-	ASSERT(false, "Ruly mirate esto");
-	/*
-	if (l_Trigger->GetbLeave())
-	{
-		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
-		std::string l_NameShape = _Other_Shape->GetName();
-		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-		LOG_INFO_APPLICATION( l_Msg.c_str() );
-	}
-	*/
+    ASSERT(false, "Ruly mirate esto");
+    /*
+        if (l_Trigger->GetbLeave())
+        {
+        std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
+        std::string l_NameShape = _Other_Shape->GetName();
+        ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+        LOG_INFO_APPLICATION( l_Msg.c_str() );
+        }
+    */
 }
 void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
-                             CPhysicUserData* _Other_Shape )
+                                   CPhysicUserData* _Other_Shape )
 {
     std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
-	ASSERT(false, "Ruly mirate esto");
-	/*
-	if (l_Trigger->GetbStay())
-	{
-		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
-		std::string l_NameShape = _Other_Shape->GetName();
-		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-		LOG_INFO_APPLICATION( l_Msg.c_str() );
-	}
-	*/
+    ASSERT(false, "Ruly mirate esto");
+    /*
+        if (l_Trigger->GetbStay())
+        {
+        std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
+        std::string l_NameShape = _Other_Shape->GetName();
+        ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
+        LOG_INFO_APPLICATION( l_Msg.c_str() );
+        }
+    */
 }

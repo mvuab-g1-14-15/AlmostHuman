@@ -193,6 +193,7 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
 
 bool CEffect::LoadEffect()
 {
+    bool lOk(true);
     // Obtain the device from the graphics manager and load the effect
     LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
     DWORD dwShaderFlags = 0;
@@ -201,24 +202,42 @@ bool CEffect::LoadEffect()
     HRESULT l_HR = D3DXCreateEffectFromFile(
                        l_Device,
                        m_FileName.c_str(),
-                       &m_Defines[0], // [CONST D3DXMACRO* pDefines,] pDefines,
+                       &m_Defines[0],
                        0, // LPD3DXINCLUDE pInclude,
                        dwShaderFlags,
                        0, // LPD3DXEFFECTPOOL pPool,
                        &m_Effect,
                        &l_ErrorBuffer );
 
+    std::string lErrorMsg;
     if ( l_ErrorBuffer )
     {
-        ASSERT( l_HR == S_OK, "Error creating effect '%s':\n%s", m_FileName.c_str(),
-                l_ErrorBuffer->GetBufferPointer() );
+        lOk = false;
+        StringUtils::Format( lErrorMsg, "Error creating effect '%s': \n\n %s \n", m_FileName.c_str(),
+                             l_ErrorBuffer->GetBufferPointer() );
+
+        ASSERT( l_HR == S_OK, "Error creating effect '%s': \n % s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
         CHECKED_RELEASE( l_ErrorBuffer );
-        return false;
     }
 
-    ASSERT( m_Effect, "Null Effect" );
-    LinkSemantics();
-    return true;
+    ASSERT( l_HR == S_OK, "%s", lErrorMsg.c_str() );
+
+    if( !lOk )
+    {
+        CHECKED_RELEASE( m_Effect );
+    }
+    else
+    {
+        LinkSemantics();
+    }
+
+    return lOk;
+}
+
+bool CEffect::Reload()
+{
+    Unload();
+    return LoadEffect();
 }
 
 void CEffect::Unload()
@@ -309,7 +328,7 @@ bool CEffect::SetLight( size_t i_light )
     if ( !l_pCurrentLight )
     {
         LOG_ERROR_APPLICATION(
-            "CEffect::SetLight->The light %d was not found in the light manager\n", ( int )i_light );
+            "CEffect::SetLight->The light % d was not found in the light manager\n", ( int )i_light );
         return false;
     }
 
