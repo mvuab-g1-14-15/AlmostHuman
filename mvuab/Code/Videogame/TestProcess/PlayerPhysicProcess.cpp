@@ -373,7 +373,8 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
     std::string l_Msg = "On Enter de " + _Other_Shape->GetName() + " a " +
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
-
+	ASSERT(false, "Ruly mirate esto");
+	/*
 	if (l_Trigger->GetbEnter())
 	{
 		//Get method name
@@ -382,6 +383,7 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
 		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
 		LOG_INFO_APPLICATION( l_Msg.c_str() );
 	}
+	*/
 }
 void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                               CPhysicUserData* _Other_Shape )
@@ -390,7 +392,8 @@ void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
-	
+	ASSERT(false, "Ruly mirate esto");
+	/*
 	if (l_Trigger->GetbLeave())
 	{
 		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
@@ -398,6 +401,7 @@ void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
 		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
 		LOG_INFO_APPLICATION( l_Msg.c_str() );
 	}
+	*/
 }
 void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                              CPhysicUserData* _Other_Shape )
@@ -406,7 +410,8 @@ void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                         _Entity_Trigger1->GetName();
     CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
     //Get method name
-
+	ASSERT(false, "Ruly mirate esto");
+	/*
 	if (l_Trigger->GetbStay())
 	{
 		std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
@@ -414,4 +419,5 @@ void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
 		ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
 		LOG_INFO_APPLICATION( l_Msg.c_str() );
 	}
+	*/
 }
