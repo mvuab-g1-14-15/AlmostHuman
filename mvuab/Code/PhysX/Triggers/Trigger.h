@@ -24,6 +24,9 @@ public:
   virtual ~CTrigger();
   void Release();
   void Destroy();
+
+  void Render();
+
   std::string GetLUAByName( unsigned int Type );
 
 private: // Members

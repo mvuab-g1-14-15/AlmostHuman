@@ -8,6 +8,8 @@
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
 
+#include "GraphicsManager.h"
+
 CTrigger::CTrigger( const CXMLTreeNode& Node )
     : CName( Node.GetPszProperty( "name", "unknown" ) )
     , m_Position( Node.GetVect3fProperty( "position", Math::Vect3f( 0, 0, 0 ) ) )
@@ -99,4 +101,11 @@ std::string CTrigger::GetLUAByName( unsigned int Type )
     }
 
     return l_Return;
-};
+}
+
+void CTrigger::Render()
+{
+	Math::Mat44f t;
+	t.Translate(m_Position);
+	GraphicsInstance->DrawBox(t, m_Size.x, m_Size.y, m_Size.z, m_Color);
+}

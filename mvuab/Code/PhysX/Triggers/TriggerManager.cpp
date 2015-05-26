@@ -98,3 +98,12 @@ CTrigger* CTriggerManager::GetTriggerByName( std::string Name )
 {
     return GetResource( Name );
 }
+
+void CTriggerManager::Render()
+{
+	std::vector<CTrigger*> v_triggers = GetTriggersVector();
+	std::vector<CTrigger*>::iterator it = v_triggers.begin(),
+									 it_end = v_triggers.end();
+	for (; it!=it_end; ++it)
+		(*it)->Render();
+}
