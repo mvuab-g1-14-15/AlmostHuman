@@ -19,7 +19,6 @@ CEngine::CEngine()
   , m_pProcess( 0 )
   , m_pTimer( new CTimer( 30 ) )
   , m_Play( false )
-  , m_ChangeProcess( false )
 {
 }
 
@@ -35,16 +34,6 @@ void CEngine::Update()
 
 
   m_pEngineManagers->Update();
-
-  if ( m_ChangeProcess )
-  {
-    m_pEngineManagers->Reload();
-    m_pProcess->Init();
-    ScriptMInstance->RunCode( "CargarJuegoFinish()" );
-    m_ChangeProcess = false;
-    m_pEngineManagers->Update();
-  }
-
   m_pProcess->Update();
   m_pTimer->Update();
 }
@@ -70,30 +59,6 @@ void CEngine::SetRunnigProcess( CProcess* aProcess )
   m_pProcess = aProcess;
 }
 
-void CEngine::SetRunnigProcess( const std::string& aNameProcess )
-{
-  if ( aNameProcess == "Start Game" )
-  {
-    if ( EngineConfigInstance->GetManagersPath() == "Data/level2/managers.xml" )
-    {
-      ScriptMInstance->RunCode( "CargarJuegoFinish()" );
-      return;
-    }
-
-    EngineConfigInstance->SetManagersPath( "Data/level2/managers.xml" );
-    EngineManagerInstance->SetManagersPath( EngineConfigInstance->GetManagersPath() );
-    //EngineManagerInstance->Reload();
-    m_pProcess = m_pProcessGame;
-    m_ChangeProcess = true;
-  }
-
-  if ( aNameProcess == "Change Game" )
-    m_pProcess = m_pProcessGame;
-
-  if ( aNameProcess == "Change GUI" )
-    m_pProcess = m_pPreProcess;
-
-}
 
 void CEngine::Init( CEngineConfig* aEngineConfig )
 {

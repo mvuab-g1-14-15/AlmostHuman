@@ -157,9 +157,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                 );
 
     lEngineConfig->SetWindowId( hWnd );
-    pEngine->SetRunnigProcess( new CPreProcess() );
-    pEngine->SetPreProcess( pEngine->GetProcess() );
-    pEngine->SetProcessGame( new CPlayerPhysicProcess() );
+    pEngine->SetRunnigProcess( new CPlayerPhysicProcess() );
     pEngine->Init( lEngineConfig );
     ShowWindow( hWnd, SW_SHOWDEFAULT );
     UpdateWindow( hWnd );
