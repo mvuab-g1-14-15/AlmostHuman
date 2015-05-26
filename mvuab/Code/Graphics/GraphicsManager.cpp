@@ -91,6 +91,8 @@ void CGraphicsManager::Release()
   CHECKED_RELEASE( m_BoxMesh );
   CHECKED_RELEASE( m_CylinderMesh );
   CHECKED_RELEASE( m_TeapotMesh );
+
+  DestroyShapes();
 }
 
 void CGraphicsManager::BeginScene()
@@ -1445,4 +1447,9 @@ void CGraphicsManager::InitShapes()
 {
 	// Create the box shape
 	CBoxShape::CreateGeometry();
+}
+
+void CGraphicsManager::DestroyShapes()
+{
+    CBoxShape::DestroyGeometry();
 }
