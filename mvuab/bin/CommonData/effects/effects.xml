@@ -158,4 +158,12 @@
 		<handles use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	</technique>
 	
+	<technique name="RenderForwardDebugShapeTechnique">
+		<effect name="BillboardEffectAlignedUpAxis" file="../CommonData/effects/BillboardEffect.fx">
+			<define name="TECHNIQUE_NAME" description="RenderForwardDebugShapeTechnique"/>
+			<define name="ALIGNED_TO_UP_AXIS" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
 </effects>

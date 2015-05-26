@@ -249,6 +249,9 @@
     <ClCompile Include="Effects\EffectPool.cpp">
       <Filter>Effects</Filter>
     </ClCompile>
+    <ClCompile Include="Shapes\Shapes.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -508,6 +511,9 @@
     <ClInclude Include="Effects\EffectPool.h">
       <Filter>Effects</Filter>
     </ClInclude>
+    <ClInclude Include="Shapes\Shapes.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -548,6 +554,9 @@
     </Filter>
     <Filter Include="Gizmos">
       <UniqueIdentifier>{03e11d5f-aead-4c2e-9bc1-da6cff311a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shapes">
+      <UniqueIdentifier>{486b1cb6-f701-46a4-941d-8e49c3c2b306}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
