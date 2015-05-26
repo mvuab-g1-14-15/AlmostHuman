@@ -34,6 +34,7 @@
 #include "SceneRenderComands\RenderGizmosCommand.h"
 #include "SceneRenderComands\BillboardRendererCommand.h"
 #include "SceneRenderComands\ProcessRenderRendererCommand.h"
+#include "SceneRenderComands\TriggerRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -149,6 +150,8 @@ void CSceneRendererCommandManager::Init()
                            Type2Type<CBillboardRenderCommand>( ) );
   CommandFactory.Register( "render_process",
                            Type2Type<CProcessRenderRendererCommand>( ) );
+  CommandFactory.Register( "render_triggers",
+                           Type2Type<CTriggerRenderCommand>( ) );
 
   CXMLTreeNode l_File;
 

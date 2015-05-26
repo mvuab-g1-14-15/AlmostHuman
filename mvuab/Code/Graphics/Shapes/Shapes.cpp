@@ -16,9 +16,13 @@ CRenderableVertexs* CBoxShape::sRV = 0;
 //------------------------------------------------------------------------------------------------
 CShape::CShape()
 	: CObject3D()
-	, mTechnique( 0 )
 {
 
+}
+
+void CShape::SetColor( Math::CColor aColor )
+{
+	mColor = aColor;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -45,7 +49,8 @@ void CBoxShape::Render( CEffectTechnique* aTechnique )
 	ASSERT(aTechnique, "Null technique to render the box shape");
 	CGraphicsManager* lGM = GraphicsInstance;
     lGM->SetTransform( GetTransform() );
-    sRV->Render(lGM, mTechnique);
+	aTechnique->SetDebugColor( mColor );
+    sRV->Render(lGM, aTechnique);
     lGM->SetTransform( Math::Mat44f() );
 }
 //------------------------------------------------------------------------------------------------
@@ -56,7 +61,7 @@ void CBoxShape::CreateGeometry()
     const uint32 lIdxCount = 36;
     const uint32 lVtxCount = 8;
 
-    TDIFF_VERTEX lVtx[lVtxCount] =
+    TGEOMETRY lVtx[lVtxCount] =
     {
 			{ -0.5f, 0.5f, -0.5f },
 			{ 0.5f, 0.5f, -0.5f  },
@@ -84,7 +89,7 @@ void CBoxShape::CreateGeometry()
 		2, 7, 6,
 	};
 
-    sRV = new CIndexedVertexs<TDIFF_VERTEX>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
+    sRV = new CIndexedVertexs<TGEOMETRY>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
 }
 //------------------------------------------------------------------------------------------------
 void CBoxShape::DestroyGeometry()

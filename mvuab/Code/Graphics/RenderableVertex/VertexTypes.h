@@ -62,6 +62,28 @@ struct T_SKYBOX_VERTEX
   }
 };
 
+struct TGEOMETRY
+{
+  float x, y, z;
+
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE( s_VertexDeclaration );
+  }
+
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_GEOMETRY;
+  }
+
+  static inline unsigned int GetFVF()
+  {
+    return 0;
+  }
+};
+
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
   float x, y, z;

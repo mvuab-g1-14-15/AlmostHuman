@@ -86,6 +86,7 @@
     <ClCompile Include="SceneRenderComands\SetMatricesSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\StagedTexturedRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\TriggerRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp" />
     <ClCompile Include="Shapes\Shapes.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="SceneRenderComands\SetMatricesSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SetRenderTargetSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\StagedTexturedRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\TriggerRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h" />
     <ClInclude Include="Shapes\Shapes.h" />

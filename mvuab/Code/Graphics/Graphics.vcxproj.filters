@@ -252,6 +252,9 @@
     <ClCompile Include="Shapes\Shapes.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\TriggerRendererCommand.cpp">
+      <Filter>SceneRenderComands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -513,6 +516,9 @@
     </ClInclude>
     <ClInclude Include="Shapes\Shapes.h">
       <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\TriggerRendererCommand.h">
+      <Filter>SceneRenderComands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

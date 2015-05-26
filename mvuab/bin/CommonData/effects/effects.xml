@@ -159,11 +159,10 @@
 	</technique>
 	
 	<technique name="RenderForwardDebugShapeTechnique">
-		<effect name="BillboardEffectAlignedUpAxis" file="../CommonData/effects/BillboardEffect.fx">
+		<effect name="RenderForwardDebugShapeEffect" file="../CommonData/effects/RenderForwardDebugShapeEffect.fx">
 			<define name="TECHNIQUE_NAME" description="RenderForwardDebugShapeTechnique"/>
-			<define name="ALIGNED_TO_UP_AXIS" description=""/>
 		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+		<handles use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
 	
 </effects>

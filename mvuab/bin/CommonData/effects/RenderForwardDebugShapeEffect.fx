@@ -2,52 +2,25 @@
 #include "samplers.fxh"
 #include "globals.fxh"
 
-/*
-TDIFF_VERTEX mainVS(TT1_VERTEX_VS IN)
+TGEOMETRY_PS mainVS(TGEOMETRY IN)
 {
-	TDIFF_VERTEX OUT=(TDIFF_VERTEX)0;
-
-	float3 position = float3(0,0,0);
-	
-#if defined( NOT_ALIGNED )
-	position = IN.Position;
-#else
-	float3 rightVector 	= normalize(float3(g_ViewMatrix[0][0], g_ViewMatrix[1][0], g_ViewMatrix[2][0] ));
-	float3 upVector 	= normalize(float3(g_ViewMatrix[0][1], g_ViewMatrix[1][1], g_ViewMatrix[2][1] ));
-	float3 viewVector	= normalize(float3(g_ViewMatrix[0][2], g_ViewMatrix[1][2], g_ViewMatrix[2][2] ));
-	
-	#if defined( ALIGNED_TO_UP_AXIS )
-		upVector 			= float3(0,1,0);
-	#endif
-
-	position 			= IN.Position.x*rightVector+IN.Position.z*upVector;
-	OUT.Normal			= float4( viewVector.xyz, 1);;
-	OUT.WorldTangent	= float4( rightVector.xyz, 1);
-	OUT.WorldBinormal	= float4( upVector.xyz, 1);
-#endif
-	
-	OUT.Position		= mul( float4( IN.Position.xyz, 1), g_WorldViewProj);
-	OUT.WorldPosition	= OUT.Position;
-	OUT.UV				= IN.UV;
+	TGEOMETRY_PS OUT=(TGEOMETRY_PS)0;
+	OUT.HPosition		= mul( float4( IN.Position, 1), g_WorldViewProj);
+	OUT.WorldPosition	= OUT.HPosition;
     return OUT;
 }
 
 //Dest.rgb*One + Source.rgb*One
 
-float4 mainPS(TT1_VERTEX_PS IN) : COLOR
+float4 mainPS(TGEOMETRY_PS IN) : COLOR
 {
-	float4 l_Color=tex2D(S0PointSampler, IN.UV);
-	return float4(l_Color.xyz*l_Color.a, l_Color.a);//float4(1, 0, 0, 1);
+	return float4(0.2, 0, 0, 0.5);
 }
 
 technique TECHNIQUE_NAME
 {
 	pass p0
 	{
-		CullMode = NONE;
-#if defined( NOT_ALIGNED )
-		
-#endif
 		AlphaBlendEnable = true;
 		BlendOp=Add;
 		SrcBlend = one;
@@ -56,4 +29,3 @@ technique TECHNIQUE_NAME
 		PixelShader = compile ps_3_0 mainPS();
 	}
 }
-*/

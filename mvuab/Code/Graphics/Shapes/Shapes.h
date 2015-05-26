@@ -13,9 +13,9 @@ class CShape : public CObject3D
 public:
 	CShape();
 	virtual ~CShape();
+	void SetColor( Math::CColor aColor );
 	virtual void Render( CEffectTechnique* aTechnique ) = 0;
 protected:
-	CEffectTechnique* mTechnique;
 	Math::CColor	  mColor;
 };
 
