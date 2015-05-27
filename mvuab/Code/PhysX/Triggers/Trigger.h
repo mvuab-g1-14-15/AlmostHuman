@@ -31,6 +31,10 @@ public:
 
   std::string GetLUAByName( unsigned int Type );
 
+  GET_SET( bool, bEnter );
+  GET_SET( bool, bStay );
+  GET_SET( bool, bLeave );
+
 private: // Members
 
 
@@ -47,10 +51,13 @@ private: // Members
   TTriggerEvent m_Leave;
 
   bool m_Paint;
+  bool m_bEnter;
+  bool m_bStay;
+  bool m_bLeave;
 
   CPhysicUserData*  m_PhysicUserData;
   CPhysicActor*     m_PhysicActor;
-  CShape*		    mShape;
+  CShape*       mShape;
   CEffectTechnique* mTechnique;
 
 private: // Methods
