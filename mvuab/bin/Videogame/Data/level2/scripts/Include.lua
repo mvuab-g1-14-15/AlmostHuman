@@ -51,7 +51,7 @@ end
 
 function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition()
-	local l_EnemyDir = enemy:GetRenderableObject():GetDirection()
+	local l_EnemyDir = enemy:GetDirection()
 	
 	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
 	
