@@ -79,6 +79,7 @@ ECollisionGroup CCharacter::GetCollisionGroup()
 void CCharacter::Move(Math::Vect3f direction, float dt)
 {
     m_Controller->Move(direction, dt);
+	m_Controller->SetYaw( Math::Utils::ATan2( direction.x, direction.z ) );
 }
 
 float CCharacter::GetHeight()

@@ -78,6 +78,9 @@ void CEnemy::Update()
 
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
+	SetYaw( m_Controller->GetYaw() );
+	SetPitch( m_Controller->GetPitch() );
+	SetRoll( m_Controller->GetRoll() );
     m_pRenderableObject->SetPosition( m_Position );
     m_pRenderableObject->SetYaw( m_fYaw );
     m_pRenderableObject->SetPitch( m_fPitch );
