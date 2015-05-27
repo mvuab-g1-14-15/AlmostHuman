@@ -21,7 +21,6 @@ public:
 
   void Init( CEngineConfig* aEngineConfig );
   void SetRunnigProcess( CProcess* aProcess );
-  void SetRunnigProcess( const std::string& aNameProcess );
 
   void ProcessInputs();
   void Update();
@@ -31,8 +30,6 @@ public:
 
   // Getters and setters
   GET_SET_PTR( CProcess, Process );
-  GET_SET_PTR( CProcess, PreProcess );
-  GET_SET_PTR( CProcess, ProcessGame );
   GET_SET_PTR( CTimer, Timer );
   GET_SET_PTR( CEngineManagers, EngineManagers );
   GET_SET( bool, Play );
@@ -44,13 +41,10 @@ private:
   CLogRender*         m_pLogRender;
   CEngineManagers*    m_pEngineManagers;
   CTimer*             m_pTimer;
-  CProcess*           m_pPreProcess;
-  CProcess*           m_pProcessGame;
   float               m_RenderTime;
   float               m_RenderTarget;
 
   bool                m_Play;
-  bool                m_ChangeProcess;
 };
 
 #endif // ENGINE_H

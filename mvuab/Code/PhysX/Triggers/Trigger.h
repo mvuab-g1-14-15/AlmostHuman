@@ -9,6 +9,8 @@
 class CXMLTreeNode;
 class CPhysicUserData;
 class CPhysicActor;
+class CShape;
+class CEffectTechnique;
 
 class CTrigger : public CName
 {
@@ -24,6 +26,9 @@ public:
   virtual ~CTrigger();
   void Release();
   void Destroy();
+
+  void Render();
+
   std::string GetLUAByName( unsigned int Type );
 
 private: // Members
@@ -43,8 +48,10 @@ private: // Members
 
   bool m_Paint;
 
-  CPhysicUserData* m_PhysicUserData;
-  CPhysicActor*    m_PhysicActor;
+  CPhysicUserData*  m_PhysicUserData;
+  CPhysicActor*     m_PhysicActor;
+  CShape*		    mShape;
+  CEffectTechnique* mTechnique;
 
 private: // Methods
 };

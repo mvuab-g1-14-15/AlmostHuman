@@ -19,6 +19,8 @@
 #include "Fonts/FontManager.h"
 #include "EngineConfig.h"
 
+#include "Shapes/Shapes.h"
+
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
 {
@@ -89,6 +91,8 @@ void CGraphicsManager::Release()
   CHECKED_RELEASE( m_BoxMesh );
   CHECKED_RELEASE( m_CylinderMesh );
   CHECKED_RELEASE( m_TeapotMesh );
+
+  DestroyShapes();
 }
 
 void CGraphicsManager::BeginScene()
@@ -270,6 +274,8 @@ void CGraphicsManager::Init()
 
   if ( FAILED( D3DXCreateCylinder( mDirectXDevice, 1.0f, 1.0f, 1.0f, 10, 10, &m_CylinderMesh, 0 ) ) )
     LOG_ERROR_APPLICATION( "GraphicsManager::Error creating the cylinder" );
+
+  InitShapes();
 }
 
 DWORD CGraphicsManager::GetBehaviorFlags()
@@ -1205,8 +1211,11 @@ Math::Vect3f CGraphicsManager::ToWorldCoordinates( Math::Vect2f Point )
 void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMesh, Math::CColor aColor )
 {
   SetTransform( aTransform );
-  //CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "DefaultTechnique" );
-  CEffectTechnique* EffectTechnique = EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
+
+  CEffectTechnique* EffectTechnique =  ( aColor.GetAlpha() < 1.0f ) ? 
+	  EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" ) :
+	  EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
+
   // Set the debug color
   EffectTechnique->SetDebugColor( aColor );
   EffectTechnique->BeginRender();
@@ -1432,4 +1441,15 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, 
   GetDevice()->SetTexture( 0, texture->GetDXTexture() );
   GetDevice()->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST, 0, 4, 2, indices, D3DFMT_INDEX16, v,
                                        sizeof( SCREEN_TEXTURE_VERTEX ) );
+}
+
+void CGraphicsManager::InitShapes()
+{
+	// Create the box shape
+	CBoxShape::CreateGeometry();
+}
+
+void CGraphicsManager::DestroyShapes()
+{
+    CBoxShape::DestroyGeometry();
 }

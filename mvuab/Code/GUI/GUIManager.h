@@ -23,6 +23,7 @@
 class CPointerMouse;
 class CGuiElement;
 class CWindows;
+class CImage;
 //class CConsoleGUI;
 class CMap;
 //--------------------------
@@ -119,6 +120,7 @@ class CGUIManager : public CManager
         std::string GetImage( const std::string& inImageName );
         void PlayImage( const std::string& inImageName, float timePerImage, bool loop );
 
+		void ShowImage( bool bShow);
 		GET_SET_PTR(CConsoleGUI, Console)
         //-----------------------------------------------------------------------------------------------------------//
 
@@ -129,22 +131,23 @@ class CGUIManager : public CManager
 
     private:
         Math::Vect2i   m_ScreenResolution;
-        bool  m_bIsOk;
         std::map<std::string, CWindows*>  m_WindowsMap;
         std::map<std::string, CGuiElement*> m_ElementsMap;
         std::string  m_sCurrentWindows;
+        std::string  m_sLastLoadpathGUI_XML;
         std::vector<std::string> m_PrevWindows;
+        bool  m_bIsOk;
         bool  m_bVisiblePointerMouse;
         bool  m_bRenderError;
         bool  m_bUpdateError;
+        bool  m_bFirstUpdate;
+		bool  m_RenderPointer;
+        bool  m_bLoadedGuiFiles;
         CPointerMouse*  m_PointerMouse;
         CTextBox* m_TextBox;
         CConsoleGUI*  m_pConsole;
-        bool  m_bLoadedGuiFiles;
-        std::string  m_sLastLoadpathGUI_XML;
         TransitionEffect m_sTransitionEffect;
-        bool  m_bFirstUpdate;
-		bool  m_RenderPointer;
+		CImage* m_PressButton;
 };
 
 #endif //INC_GUI_MANAGER_H

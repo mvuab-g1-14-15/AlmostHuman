@@ -12,17 +12,6 @@ class CFontManager;
 class CObject3D;
 class CAnimatedInstanceModel;
 
-typedef enum EMenuOption
-{
-    eOptionScene = 1,
-    eOptionMesh,
-    eOptionParticles,
-    eOptionLights,
-    eOptionEffect,
-    eOptionAnimatedModels,
-    eOptionExit
-};
-
 class CViewerProcess: public CProcess
 {
     public:
@@ -32,8 +21,6 @@ class CViewerProcess: public CProcess
         virtual void Init();
         virtual void Update();
         virtual void Render();
-
-        void OnClickedMenuOption( EMenuOption aMenuOption );
 
         void CreateViewerCameras();
 

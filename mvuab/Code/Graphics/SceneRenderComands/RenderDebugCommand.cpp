@@ -8,12 +8,15 @@
 #include "PhysicsManager.h"
 #include "EngineManagers.h"
 
+#include "Triggers/TriggerManager.h"
+
 CRenderDebugCommand::CRenderDebugCommand( CXMLTreeNode& atts )
   : CSceneRendererCommand( atts )
   , m_RenderCameras( atts.GetBoolProperty( "render_cameras", false ) )
   , m_RenderLights( atts.GetBoolProperty( "render_lights", false ) )
   , m_RenderPhysics( atts.GetBoolProperty( "render_physics", false ) )
   , m_RenderGraph( atts.GetBoolProperty( "render_graph", false ) )
+  , m_RenderTriggers( atts.GetBoolProperty( "render_triggers", false ) )
 {
 }
 
@@ -39,4 +42,7 @@ void CRenderDebugCommand::Execute( CGraphicsManager& GM )
 
   if ( m_RenderPhysics )
     PhysXMInstance->Render();
+
+  if ( m_RenderTriggers )
+	  TriggersMInstance->Render();
 }

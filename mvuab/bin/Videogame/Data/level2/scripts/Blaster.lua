@@ -108,3 +108,7 @@ end
 function CBlaster:GetEnergy()
 	return self.Energy
 end
+
+function CBlaster:SetEnergy(amount)
+	self.Energy = amount
+end

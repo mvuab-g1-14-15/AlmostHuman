@@ -21,6 +21,7 @@ private:
   bool m_RenderLights;
   bool m_RenderPhysics;
   bool m_RenderGraph;
+  bool m_RenderTriggers;
 
 };
 #endif

@@ -35,6 +35,7 @@ class CEffect: public CName
         bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
         bool Load( CXMLTreeNode& EffectNode );
+        bool Reload();
 
         //DirectX Methods Interface
         D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );

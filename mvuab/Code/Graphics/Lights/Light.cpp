@@ -26,6 +26,8 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_StaticShadowMap( 0 )
     , m_ShadowMaskTexture( 0 )
 {
+	ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f && m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
+
     if ( m_GenerateDynamicShadowMap )
     {
         m_DynamicShadowMap = new CTexture();

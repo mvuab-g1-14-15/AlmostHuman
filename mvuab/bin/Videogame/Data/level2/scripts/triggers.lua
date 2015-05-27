@@ -31,3 +31,15 @@ function OnStay(other_shape)
 	physicUserData2 = physicActor2:GetUserData()
 	physicUserData2:SetColor(0,1,1,1)
 end
+
+function ShowImage(other_shape)
+	gui_manager:ShowImage(true)
+end
+
+function HideImage(other_shape)
+	gui_manager:ShowImage(false)
+end
+
+function ChargeEnergy()
+	g_Player:AddEnergy(timer:GetElapsedTime())
+end

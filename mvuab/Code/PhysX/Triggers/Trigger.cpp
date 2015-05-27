@@ -1,4 +1,5 @@
 #include "Trigger.h"
+#include "EngineManagers.h"
 #include "XML\XMLTreeNode.h"
 #include "Utils\PhysicUserData.h"
 #include "Actor\PhysicActor.h"
@@ -8,6 +9,10 @@
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
 
+#include "GraphicsManager.h"
+#include "Effects/EffectManager.h"
+#include "Shapes/Shapes.h"
+
 CTrigger::CTrigger( const CXMLTreeNode& Node )
     : CName( Node.GetPszProperty( "name", "unknown" ) )
     , m_Position( Node.GetVect3fProperty( "position", Math::Vect3f( 0, 0, 0 ) ) )
@@ -15,8 +20,9 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     , m_Color( Node.GetCColorProperty( "color", Math::CColor( 0, 0, 0, 1 ) ) )
     , m_Group( Node.GetIntProperty( "group", 0 ) )
     , m_Paint( Node.GetBoolProperty( "paint", false ) )
-    , m_PhysicUserData( new CPhysicUserData( Node.GetPszProperty( "name",
-                        "unknown" ) ) )
+    , m_PhysicUserData( new CPhysicUserData( Node.GetPszProperty( "name", "unknown" ) ) )
+	, mTechnique( EffectManagerInstance->GetEffectTechnique( Node.GetPszProperty( "technique", "" ) ) )
+    , mShape( 0 )
 {
     if ( Node.GetBoolProperty( "enter_event", false ) )
         m_Enter = ( std::make_pair( ENTER, Node.GetPszProperty( "enter_script",
@@ -42,6 +48,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
         m_PhysicActor->ActivateAllTriggers();
         CPhysicsManager* l_PM = PhysXMInstance;
         l_PM->AddPhysicActor( m_PhysicActor );
+		mShape = new CBoxShape();
     }
     else if ( l_sType == "sphere" )
     {
@@ -50,6 +57,10 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
         CPhysicsManager* l_PM = PhysXMInstance;
         l_PM->AddPhysicActor( m_PhysicActor );
     }
+
+	ASSERT( mShape, "Null trigger shape");
+	ASSERT( mTechnique, "Null technique");
+	mShape->SetColor( m_Color );
 
     if ( l_sType == "" )
     { CHECKED_DELETE( m_PhysicActor ); }
@@ -99,4 +110,16 @@ std::string CTrigger::GetLUAByName( unsigned int Type )
     }
 
     return l_Return;
-};
+}
+
+void CTrigger::Render()
+{
+	if( m_Paint )
+	{
+		ASSERT( mShape, "Null shape");
+		mShape->SetPosition( m_Position );
+		mShape->SetScale( m_Size );
+		mShape->MakeTransform();
+		mShape->Render( mTechnique );
+	}
+}

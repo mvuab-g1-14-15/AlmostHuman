@@ -20,6 +20,7 @@
 class CEffectTechnique;
 class CTexture;
 class CEngineConfig;
+class CBoxShape;
 
 class CGraphicsManager : public CManager
 {
@@ -134,6 +135,8 @@ private: // Members
 private: // Methods
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i& finalPos );
   D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
+  void InitShapes();
+  void DestroyShapes();
 
   DWORD GetBehaviorFlags();
   bool CreateFullScreenMode( CEngineConfig* aEngineConfig );

@@ -6,6 +6,7 @@
 #include "PhysicsDefs.h"
 #include "Utils\Types.h"
 #include "Math\Vector3.h"
+#include "Reports\PhysicTriggerReport.h"
 
 #include <vector>
 
@@ -18,7 +19,7 @@ class CBlaster;
 class CAStar;
 //class CBillboard;
 
-class CPlayerPhysicProcess : public CProcess
+class CPlayerPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
     private:
         Math::Vect3f          m_PointInicial;
@@ -53,6 +54,13 @@ class CPlayerPhysicProcess : public CProcess
         void                DeleteController( CPhysicUserData* PUD );
 
         void InitSceneCharacterController();
+
+		void    OnEnter( CPhysicUserData* _Entity_Trigger1,
+                   CPhysicUserData* _Other_Shape );
+		void    OnLeave( CPhysicUserData* _Entity_Trigger1,
+						CPhysicUserData* _Other_Shape );
+		void    OnStay( CPhysicUserData* _Entity_Trigger1,
+						CPhysicUserData* _Other_Shape );
 
 
 };

@@ -1,19 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="1.0 1.0 1.0" />
-  <light type="omni" name="Omni001" pos="51.778 -8.68069 -81.1174" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni002" pos="51.778 -8.68069 -70.3108" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni003" pos="52.3812 -8.68069 -58.0955" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni004" pos="52.1015 -8.68069 -46.0829" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni005" pos="51.778 -8.68069 -37.1567" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni006" pos="51.778 -8.68069 -26.4047" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni007" pos="51.778 -15.8924 -26.4047" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni008" pos="51.778 -15.8924 -37.1567" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni009" pos="51.778 -15.8924 -70.3108" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni010" pos="51.778 -15.8924 -46.0829" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni011" pos="51.778 -15.8924 -58.0955" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni012" pos="51.778 -15.9112 -81.1174" color="0.847059 0.0 0.0" att_start_range="2.8676" att_end_range="4.3442" />
-  <light type="omni" name="Omni013" pos="59.3838 3.22994 -127.72" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" />
-  <light type="omni" name="Omni014" pos="48.5342 3.22994 -127.72" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" />
-  <light type="omni" name="Omni015" pos="53.4346 3.22994 -121.215" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" />
+  <ambient_light color="0.5 0.5 0.5" />
+  <light type="omni" name="Omni001" pos="78.9467 -8.68069 -33.5378" color="0.7843137254901961 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni002" pos="78.4691 -8.68069 -44.3338" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni003" pos="77.3267 -8.68069 -56.5105" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni004" pos="77.0752 -8.68069 -68.5237" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni005" pos="77.0038 -8.68069 -77.4555" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
+  <light type="omni" name="Omni006" pos="76.5286 -8.68069 -88.197" color="0.8470588235294118 0.0 0.0" att_start_range="1.8676" att_end_range="4.3442" />
 </lights>

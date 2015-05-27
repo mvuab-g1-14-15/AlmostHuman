@@ -4,10 +4,6 @@ end
 
 function CargarJuego()
 engine:SetPlay(true)
-engine:SetRunnigProcess("Start Game")
-end
-
-function CargarJuegoFinish()
 gui_manager:ActiveWindows("HUD.xml")
 gui_manager:SetRenderPointer(false)
 end

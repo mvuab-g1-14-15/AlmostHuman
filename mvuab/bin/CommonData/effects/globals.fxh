@@ -82,7 +82,7 @@ float3x4    g_Bones[MAXBONES]                                       : Bones;
 float       g_DeltaTime                                             : DeltaTime;
 float       g_Time                                                  : Time;
 
-float       g_Bump = 10.0;
+float       g_Bump = 24.0;
 
 //
 // Fog data

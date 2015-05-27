@@ -66,7 +66,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   , m_bFirstUpdate( true )
   , m_bVisiblePointerMouse( true )
   , m_pConsole( 0 )
-  , m_RenderPointer( true )
+  , m_RenderPointer( false )
 {
 }
 //----------------------------------------------------------------------------
@@ -135,7 +135,7 @@ void CGUIManager::Init()
     if ( m.Exists() )
     {
       std::string path = m.GetPszProperty( "path", "" );
-
+	  m_sCurrentWindows =  m.GetPszProperty( "windows_default", "Main.xml" );
       if ( path.compare( "" ) != 0 )
         m_bIsOk = LoadGuiFiles( path );
       else
@@ -208,6 +208,60 @@ void CGUIManager::Init()
                                 + mConfigPath;
         LOG_WARNING_APPLICATION( msg_error.c_str() );
       }
+
+	  m = parser["Image"];
+
+	  if ( m.Exists() )
+	  {
+		  float posx  = m.GetFloatProperty( "posx", 0.f );
+		  float posy  = m.GetFloatProperty( "posy", 0.f );
+		  float w  = m.GetFloatProperty( "width", 50.f );
+		  float h  = m.GetFloatProperty( "height", 50.f );
+		  bool visible = m.GetBoolProperty( "visible", false );
+		  bool activated = m.GetBoolProperty( "active", false );
+		  const std::string& name  = m.GetPszProperty( "name", "defaultGuiElement" );
+		  const std::string& default_image = m.GetPszProperty( "default", "" );
+		  const std::string& OnSaveValue  = m.GetPszProperty( "OnSaveValue", "" );
+		  const std::string& OnLoadValue  = m.GetPszProperty( "OnLoadValue", "" );
+		  const std::string& flip = m.GetPszProperty( "flip", "" );
+		  bool backGround  = m.GetBoolProperty( "backGround", false );
+		  const std::string& l_literal  = m.GetPszProperty( "Literal", "" );
+		  float widthOffsetPercent = m.GetFloatProperty( "widthOffset", 0.f );
+		  float heightOffsetPercent = m.GetFloatProperty( "heightOffset", 0.f );
+
+		  uint32 widthOffset = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
+		  uint32 heightOffset = ( uint32 )( m_ScreenResolution.y * 0.01f * heightOffsetPercent );
+
+		  m_PressButton = new CImage( m_ScreenResolution.y, m_ScreenResolution.x, h, w, Math::Vect2f( posx, posy ),
+									  l_literal, heightOffset, widthOffset, visible, activated );
+		  m_PressButton->SetName( name );
+		  m_PressButton->SetActiveTexture( default_image );
+
+		  m_PressButton->SetOnLoadValueAction( OnLoadValue );
+		  m_PressButton->SetOnSaveValueAction( OnSaveValue );
+		  m_PressButton->SetBackGround( backGround );
+
+		  if ( flip.compare( "FLIP_X" ) == 0 )
+			m_PressButton->SetFlip( CGraphicsManager::FLIP_X );
+		  else if ( flip.compare( "FLIP_Y" ) == 0 )
+			m_PressButton->SetFlip( CGraphicsManager::FLIP_Y );
+		  else
+			m_PressButton->SetFlip( CGraphicsManager::NONE_FLIP );
+
+		  for ( int j = 0, count = m.GetNumChildren(); j < count; ++j )
+		  {
+			CXMLTreeNode pTexture = m( j );
+			const std::string& tagName = pTexture.GetName();
+
+			if ( tagName.compare( "texture" ) == 0 )
+			{
+			  const std::string& name  = m( j ).GetPszProperty( "name" );
+			  const std::string& texture = m( j ).GetPszProperty( "name_texture" );
+			  CTexture* texture_image  = TextureMInstance->GetTexture( texture );
+			  m_PressButton->SetTexture( texture_image, name );
+			}
+		  }
+	  }
 
       m = parser["PointerMouse"];
 
@@ -295,6 +349,8 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_pConsole );
     m_pConsole->Render();
+	assert( m_PressButton);
+	m_PressButton->Render();
 
     if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
       m_RenderPointer = true;
@@ -549,7 +605,6 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
 
   m_WindowsMap.clear();
   m_ElementsMap.clear();
-  m_sCurrentWindows = "Main.xml";
 
   WIN32_FIND_DATA FindFileData;
   HANDLE hFind;
@@ -631,6 +686,16 @@ void CGUIManager::SetMessageBox( const std::string& text )
       m_TextBox->SetActive( true );
       m_TextBox->SetPosition( Math::Vect2i( 30, 30 ) );
     }
+  }
+}
+
+void CGUIManager::ShowImage(bool bShow )
+{
+  if ( m_bIsOk )
+  {
+    assert( m_PressButton );
+	m_PressButton->SetVisible( bShow );
+    m_PressButton->SetActive( bShow );
   }
 }
 
