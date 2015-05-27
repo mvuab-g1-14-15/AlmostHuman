@@ -134,4 +134,11 @@ fn IsEmptyInstanceArray UniqueInstanceArray =
 	)
 )
 
-	
+fn IsEmptyLevelList LevelListText =
+(
+	if LevelListText == "" then 
+	(
+		format "Empty level. Please select level to export data \n"
+		return -1
+	)
+)

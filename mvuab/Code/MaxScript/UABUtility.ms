@@ -39,7 +39,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 	
 	on UABUtility open do
 	(
-		local levels=#("","level 1","level 2", "level 3","level 4", "main menu", "select player")
+		local levels=#("level2","level1","")
 		LevelList.items=levels
 		PathLabel.text = "E:\Master"
 	)
@@ -130,9 +130,14 @@ utility UABUtility "UAB Utility" width:163 height:500
 	on StaticMeshManagerButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
+		IsEmptyLevelList LevelList.selected
 		
 		local rootDir = PathLabel.text --poner parametrico
-		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		
+		DoesFolderExist l_DirToXML
+		
+		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
 		local MeshDir = PathLabel.text + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		
@@ -162,10 +167,15 @@ utility UABUtility "UAB Utility" width:163 height:500
 	on SceneButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
+		IsEmptyLevelList LevelList.selected
 		
 		local rootDir = PathLabel.text		--poner parametrico
-		local fileSrcRenderableXML = rootDir + "\\renderable_objects.xml"
-		local fileSrcMeshXML = rootDir + "\\static_meshes.xml"
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		
+		DoesFolderExist l_DirToXML
+		
+		local fileSrcRenderableXML = l_DirToXML + "\\renderable_objects.xml"
+		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
 		local MeshDir = PathLabel.text + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		
