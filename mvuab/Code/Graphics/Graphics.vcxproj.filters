@@ -255,6 +255,30 @@
     <ClCompile Include="SceneRenderComands\TriggerRendererCommand.cpp">
       <Filter>SceneRenderComands</Filter>
     </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\CinematicsElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\HideElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\PlayAnimationElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\SetCameraElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\SetTransformElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicManager.cpp">
+      <Filter>Cinematics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -520,6 +544,30 @@
     <ClInclude Include="SceneRenderComands\TriggerRendererCommand.h">
       <Filter>SceneRenderComands</Filter>
     </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\CinematicsElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\HideElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\PlayAnimationElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\SetCameraElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\SetTransformElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\ShowDialogElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\WaitTimeElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicManager.h">
+      <Filter>Cinematics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -563,6 +611,9 @@
     </Filter>
     <Filter Include="Shapes">
       <UniqueIdentifier>{486b1cb6-f701-46a4-941d-8e49c3c2b306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cinematics\CinematicsElement">
+      <UniqueIdentifier>{dbf7c471-5c03-4f17-b4cd-3ff0e353c30b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

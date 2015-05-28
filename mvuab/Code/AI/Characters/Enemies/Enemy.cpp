@@ -21,6 +21,9 @@
 
 #include "AnimatedModels\AnimatedInstanceModel.h"
 
+#include "Triggers\Trigger.h"
+#include "Triggers\TriggerManager.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
     : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
     , m_CurrentState( "inicial" )
@@ -29,6 +32,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
     , m_OnExit( false )
     , m_pStateMachine( aStateMachine )
     , m_pRenderableObject( NULL )
+	, m_pTrigger( 0 )
 {
     CCharacter::Init( Node );
 }
@@ -88,6 +92,10 @@ void CEnemy::Update()
 
     m_pRenderableObject->MakeTransform();
 
+	Math::Vect3f pos = m_Position - GetDirection();
+	pos.y += GetHeight() / 2.0f;
+	m_pTrigger->SetPosition( pos );
+
     Math::Vect3f l_Pos = m_Position;
     l_Pos.y += m_Controller->GetHeight();
 
@@ -131,6 +139,11 @@ void CEnemy::ChangeState( std::string NewState )
 
 void CEnemy::Init()
 {
+	CCharacter::Init();
+	Math::Vect3f pos = m_Position - GetDirection()*2.0f;
+	pos.y += GetHeight() / 2.0f;
+	m_pTrigger = new CTrigger( m_Name, pos, Math::Vect3f(2.0f, 4.0f, 2.0f), Math::colORANGE, 1, true, true, false, false, "TracePhysX('En la espalda del enemigo')", "", "" );
+	TriggersMInstance->AddResource(m_Name, m_pTrigger);
 }
 
 void CEnemy::Render()
