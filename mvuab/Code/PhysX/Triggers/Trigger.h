@@ -23,6 +23,7 @@ public:
   };
 
   CTrigger( const CXMLTreeNode& Node );
+  CTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, Math::CColor color, int group, bool paint, bool bEnter, bool bStay, bool bLeave, std::string enterScript, std::string stayScript, std::string leaveScript );
   virtual ~CTrigger();
   void Release();
   void Destroy();
@@ -34,6 +35,8 @@ public:
   GET_SET( bool, bEnter );
   GET_SET( bool, bStay );
   GET_SET( bool, bLeave );
+
+  GET_SET(Math::Vect3f, Position);
 
 private: // Members
 
