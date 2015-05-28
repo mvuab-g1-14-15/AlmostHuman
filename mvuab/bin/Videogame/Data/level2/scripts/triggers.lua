@@ -43,3 +43,7 @@ end
 function ChargeEnergy()
 	g_Player:AddEnergy(5)
 end
+
+function TracePhysX(message, other_shape)
+	engine:Trace(message)
+end

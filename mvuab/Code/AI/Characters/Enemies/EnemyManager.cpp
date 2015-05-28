@@ -188,6 +188,8 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
         LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
         CHECKED_DELETE( lEnemy );
     }
+	else
+		lEnemy->Init();
 }
 
 void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )

@@ -326,7 +326,7 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
 
-  if ( l_Trigger->GetbEnter() )
+  if ( l_Trigger->GetbEnter() && _Other_Shape->GetName() == "Player")
   {
     //Get method name
     std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );

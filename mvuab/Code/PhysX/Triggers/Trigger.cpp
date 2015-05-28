@@ -72,6 +72,76 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     CHECKED_DELETE( m_PhysicActor );
 }
 
+CTrigger::CTrigger
+( 
+	std::string name, 
+	Math::Vect3f position, 
+	Math::Vect3f size, 
+	Math::CColor color, 
+	int group, 
+	bool paint, 
+	bool bEnter, 
+	bool bStay, 
+	bool bLeave, 
+	std::string enterScript, 
+	std::string stayScript, 
+	std::string leaveScript
+	)
+	: CName( name )
+	, m_Position( position )
+	, m_Size( size )
+	, m_Color( color )
+	, m_Group( group )
+	, m_Paint( paint )
+	, m_PhysicUserData( new CPhysicUserData( name ) )
+	, mTechnique( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") )
+	, mShape( 0 )
+{
+  m_bEnter = bEnter;
+
+  if ( m_bEnter )
+    m_Enter = ( std::make_pair( ENTER, enterScript ) );
+
+  m_bLeave = bLeave;
+
+  if ( m_bLeave )
+	  m_Leave = ( std::make_pair( LEAVE, leaveScript ) );
+
+  m_bStay = bStay;
+
+  if ( m_bStay )
+	  m_Stay = ( std::make_pair( STAY, stayScript ) );
+
+  m_PhysicUserData->SetPaint( m_Paint );
+  m_PhysicUserData->SetColor( m_Color );
+  m_PhysicUserData->SetGroup( ECG_TRIGGERS );
+  m_PhysicActor = new CPhysicActor( m_PhysicUserData );
+  const std::string& l_sType = "box";
+
+  if ( l_sType == "box" )
+  {
+    m_PhysicActor->CreateBoxTrigger( m_Position, m_Size, m_Group );
+    m_PhysicActor->ActivateAllTriggers();
+    CPhysicsManager* l_PM = PhysXMInstance;
+    l_PM->AddPhysicActor( m_PhysicActor );
+    mShape = new CBoxShape();
+  }
+  else if ( l_sType == "sphere" )
+  {
+    m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
+    m_PhysicActor->ActivateAllTriggers();
+    CPhysicsManager* l_PM = PhysXMInstance;
+    l_PM->AddPhysicActor( m_PhysicActor );
+  }
+
+  ASSERT( mShape, "Null trigger shape" );
+  ASSERT( mTechnique, "Null technique" );
+  mShape->SetColor( m_Color );
+
+  if ( l_sType == "" )
+    CHECKED_DELETE( m_PhysicActor );
+}
+
 CTrigger::~CTrigger()
 {
   //TODO JAUME BORRAR EL ACTOR DE LA SCENE DE PHYSICMANAGER (DIRIA YO QUE FALTABA ESTO)
