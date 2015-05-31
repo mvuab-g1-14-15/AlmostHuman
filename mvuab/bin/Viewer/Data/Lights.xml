@@ -5,6 +5,13 @@
   <light type="targetSpot" name="Spot001" pos="-23.4606 9.74805 30.3489" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-16.2957 0.0 34.3381" angle="43.0" fall_off="45.0" render_shadows="true" intensity="0.5" enabled="true" generate_shadow_map="true" shadow_map_format_type="R32F" shadow_map_width="1024" shadow_map_height="1024" generate_static_shadow_map="true" static_shadow_map_format_type="R32F" static_shadow_map_width="1024" static_shadow_map_height="1024">
   		<static renderable_objects_manager="solid"/>
 		<dynamic renderable_objects_manager="solid"/>
+		<lens_flare>
+			<texture name =""/>
+			<texture name =""/>
+			<texture name =""/>
+		</lens_flare>
+		<shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024"/>
+		<shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024"/>
   </light>
   <light type="targetDirect" name="Direct001" pos="29.9612 8.3009 10.6313" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="54.647 0.0 46.4583" />
   <light type="targetSpot" name="Spot002" pos="-1.44849 13.1467 0.170654" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="0.0 0.0 0.0" angle="43.0" fall_off="45.0" render_shadows="false" />

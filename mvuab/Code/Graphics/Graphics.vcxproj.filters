@@ -279,6 +279,12 @@
     <ClCompile Include="Cinematics\CinematicManager.cpp">
       <Filter>Cinematics</Filter>
     </ClCompile>
+    <ClCompile Include="Lights\LensFlare.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights\ShadowMap.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -567,6 +573,12 @@
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicManager.h">
       <Filter>Cinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\LensFlare.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights\ShadowMap.h">
+      <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

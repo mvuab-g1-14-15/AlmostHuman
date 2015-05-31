@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "LensFlare.h"
 
 #include "Effects\Effect.h"
 #include "Effects\EffectManager.h"
@@ -25,8 +26,10 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_DynamicShadowMap( 0 )
     , m_StaticShadowMap( 0 )
     , m_ShadowMaskTexture( 0 )
+    , mLensFlare( 0 )
 {
-	ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f && m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
+    ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
+            m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
 
     if ( m_GenerateDynamicShadowMap )
     {
@@ -60,27 +63,29 @@ CLight::CLight( const CXMLTreeNode& node )
         assert( m_ShadowMaskTexture );
     }
 
-    for ( int i = 0; i < node.GetNumChildren() ; ++i )
+    for ( int i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
-        const std::string& l_Layer = node( i ).GetPszProperty( "renderable_objects_manager", "" );
-        CRenderableObjectsManager* l_ROM =
-            ROLMInstance->GetResource( l_Layer );
+        const CXMLTreeNode& lNode = node(i);
+        const std::string & l_Layer = lNode.GetPszProperty( "renderable_objects_manager", "" );
+        CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( l_Layer );
 
-        if ( !l_ROM )
+        if ( l_ROM )
         {
-            continue;
-        }
+            const std::string& TagName = lNode.GetName() ;
 
-        const std::string& TagName = node( i ).GetName() ;
-
-        if ( TagName == "static" )
-        {
-            m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
-        }
-
-        if ( TagName == "dynamic" )
-        {
-            m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
+            if ( TagName == "static" )
+            {
+                m_StaticShadowMapRenderableObjectsManagers.push_back( l_ROM );
+            }
+            else if ( TagName == "dynamic" )
+            {
+                m_DynamicShadowMapRenderableObjectsManagers.push_back( l_ROM );
+            }
+            else if ( TagName == "lens_flare" )
+            {
+                ASSERT(!mLensFlare, "The light %s only could have one lens flare", GetName().c_str());
+                mLensFlare = new CLensFlare(lNode);
+            }
         }
     }
 }

@@ -79,25 +79,25 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
             {
                 case eLogInfo:
                     {
-                        lMsg << "[INFO]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
-                             "]" << std::endl;
+                        lMsg << "[INFO]";
                     }
                     break;
 
                 case eLogWarning:
                     {
-                        lMsg << "[WARNING]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
-                             "]" << std::endl;
+                        lMsg << "[WARNING]";
                     }
                     break;
 
                 case eLogError:
                     {
-                        lMsg << "[ERROR]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
-                             "]" << std::endl;
+                        lMsg << "[ERROR]";
                     }
                     break;
             }
+            std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
+            lMsg << "[" << lCopyClassStr << "]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
+                 "]" << std::endl;
             OutputDebugString(lMsg.str().c_str());
         }
         // Add new log to the vector

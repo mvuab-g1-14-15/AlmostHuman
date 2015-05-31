@@ -89,11 +89,6 @@
 #define TimerInstance           CEngine::GetSingletonPtr()->GetTimer()
 #define CountDownTimerInstance            CEngineManagers::GetSingletonPtr()->GetCountDownTimerManager();
 
-
-#define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-#define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-#define LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-
 #ifdef _DEBUG
 
 #define ASSERT(expr, msg, ... ) \
@@ -104,9 +99,16 @@
         } \
     }\
 
+#define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+
 #else
 
 #define ASSERT(expr, msg, ... ) do{ } while(0); // The compiler will delete this line in release
+#define LOG_ERROR_APPLICATION( x, ... ) do{ } while(0); // The compiler will delete this line in release
+#define LOG_WARNING_APPLICATION( x, ...  ) do{ } while(0); // The compiler will delete this line in release
+#define LOG_INFO_APPLICATION( x, ...  ) do{ } while(0); // The compiler will delete this line in release
 
 #endif
 

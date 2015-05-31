@@ -47,9 +47,11 @@
     <ClCompile Include="Gizmos\GizmosManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="Lights\DirectionalLight.cpp" />
+    <ClCompile Include="Lights\LensFlare.cpp" />
     <ClCompile Include="Lights\Light.cpp" />
     <ClCompile Include="Lights\LightManager.cpp" />
     <ClCompile Include="Lights\OmniLight.cpp" />
+    <ClCompile Include="Lights\ShadowMap.cpp" />
     <ClCompile Include="Lights\SpotLight.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp" />
@@ -144,9 +146,11 @@
     <ClInclude Include="Gizmos\GizmosManager.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Lights\DirectionalLight.h" />
+    <ClInclude Include="Lights\LensFlare.h" />
     <ClInclude Include="Lights\Light.h" />
     <ClInclude Include="Lights\LightManager.h" />
     <ClInclude Include="Lights\OmniLight.h" />
+    <ClInclude Include="Lights\ShadowMap.h" />
     <ClInclude Include="Lights\SpotLight.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h" />
