@@ -71,6 +71,23 @@ void registerCharacters( lua_State* aLuaState )
     LUA_END_DECLARATION
 }
 
+struct CEnemy_wrapper : CEnemy, luabind::wrap_base
+{
+    CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine* aStateMachine )
+        : CEnemy(Node, aStateMachine)
+    {}
+
+    virtual void Update()
+    {
+        call<void>("Update");
+    }
+
+    static void default_Update(CEnemy* ptr)
+    {
+        return ptr->CEnemy::Update();
+    }
+};
+
 void registerEnemies( lua_State* aLuaState )
 {
     ASSERT( aLuaState, "LuaState error in Register Enemies" );
@@ -86,6 +103,15 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
     LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
     LUA_END_DECLARATION
+
+	/*
+	module(aLuaState)
+	[
+		class_<CEnemy, CEnemy_wrapper>("CEnemy")
+			.def(constructor<CXMLTreeNode&, CStateMachine*>())
+			.def("Update", &CEnemy::Update, &CEnemy_wrapper::default_Update)
+	];
+	*/
 
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CMapManager<CEnemy> )

@@ -141,14 +141,16 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 
 fn ExportTextureFile AllObj DestPath = 
 (
-	
 
 	if AllObj.count == 0 then 
 	(
 		format "Empty selection. Select any object \n"
 		return -1
 	)
-
+		
+	l_TextureUsed = DestPath + "TextureUsed.txt"
+	file = createfile l_TextureUsed
+	
 	for Obj in AllObj do
 	(
 		try
@@ -156,6 +158,7 @@ fn ExportTextureFile AllObj DestPath =
 			local l_MaterialTexture = ""
 			local l_MaterialTextureFilename = ""
 			local l_ActualMaterial = ""
+			local l_TexturesArray =#()
 
 			if Obj.material != undefined then
 			(
@@ -163,83 +166,95 @@ fn ExportTextureFile AllObj DestPath =
 				if classof l_Material == Standardmaterial then
 				(
 					l_Material = #(l_Material)
-					format "Object % Standard Material \n" l_Material
+					--format "Object % Standard Material \n" l_Material
 				)
 				
 				local l_NumMaterials = l_Material.count
 				for iMaterial=1 to l_NumMaterials do
 				(
 					l_ActualMaterial = l_Material[iMaterial]
-					format "ActualMaterial % \n" l_ActualMaterial.name
+					--format "ActualMaterial % \n" l_ActualMaterial.name
 					
 					if l_ActualMaterial.diffuseMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.diffuseMap.filename
 						l_MaterialTexture = l_ActualMaterial.diffuseMap.filename
-						format "DiffuseMap \n"
+						--format "DiffuseMap \n"
 					)else if l_ActualMaterial.bumpMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.bumpMap.normal_map.filename
 						l_MaterialTexture = l_ActualMaterial.bumpMap.normal_map.filename
-						format "bumpMap \n"
+						--format "bumpMap \n"
 					)			
 					else if l_ActualMaterial.ambientMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.ambientMap.filename
 						l_MaterialTexture = l_ActualMaterial.ambientMap.filename
-						format "ambientMap \n"
+						--format "ambientMap \n"
 					)
 					else if  l_ActualMaterial.displacementMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.displacementMap.filename
 						l_MaterialTexture = l_ActualMaterial.displacementMap.filename
-						format "displacementMap \n"
+						--format "displacementMap \n"
 					)
 					else if  l_ActualMaterial.filterMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.filterMap.filename
 						l_MaterialTexture = l_ActualMaterial.filterMap.filename
-						format "filterMap \n"
+						--format "filterMap \n"
 					)
 					else if l_ActualMaterial.glossinessMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.glossinessMap.filename
 						l_MaterialTexture = l_ActualMaterial.glossinessMap.filename
-						format "glossinessMap \n"
+						--format "glossinessMap \n"
 					)
 					else if  l_ActualMaterial.opacityMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.opacityMap.filename
 						l_MaterialTexture = l_ActualMaterial.opacityMap.filename
-						format "opacityMap \n"
+						--format "opacityMap \n"
 					)
 					else if  l_ActualMaterial.reflectionMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.reflectionMap.filename
 						l_MaterialTexture = l_ActualMaterial.reflectionMap.filename
-						format "reflectionMap \n"
+						--format "reflectionMap \n"
 					)
 					else if l_ActualMaterial.refractionMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.refractionMap.filename
 						l_MaterialTexture = l_ActualMaterial.refractionMap.filename
-						format "refractionMap \n"
+						--format "refractionMap \n"
 					)
 					else if  l_ActualMaterial.selfIllumMap != undefined then
 					(
 						-- TODO: RNM
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.selfIllumMap.filename
 						l_MaterialTexture = l_ActualMaterial.selfIllumMap.filenameformat 
-						format "selfIllumMap \n"
+						--format "selfIllumMap \n"
 					)
 					else if  l_ActualMaterial.specularMap != undefined then
 					(
 						l_MaterialTextureFilename =filenameFromPath l_ActualMaterial.specularMap.filename
 						l_MaterialTexture = l_ActualMaterial.specularMap.filename
-						format "specularMap \n"
+						--format "specularMap \n"
+					)
+					else
+					(
+						l_MaterialTexture = "Material" + l_Material.name + " , texture " + l_ActualMaterial.name
+					)
+		
+					format "% \n" (l_MaterialTexture as string) to:file
+					
+					DestTexturePath = DestPath + l_MaterialTextureFilename
+					
+					if doesFileExist DestTexturePath then
+					(
+						deleteFile DestTexturePath
 					)
 					
-					DestTexturePath = DestPath +"\\"+ l_MaterialTextureFilename
 					if copyFile l_MaterialTexture DestTexturePath then
 					(
 						format "Texture % copied on: % \n" l_MaterialTexture DestTexturePath
@@ -256,7 +271,10 @@ fn ExportTextureFile AllObj DestPath =
 		(
 			format "Error while exporting object\n"
 		)	
+			
 	)
+	close file
+
 )
 
 function GenerateMeshes aObjects MeshDir =

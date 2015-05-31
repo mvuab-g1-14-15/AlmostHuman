@@ -41,5 +41,9 @@ function HideImage(other_shape)
 end
 
 function ChargeEnergy()
-	g_Player:AddEnergy(timer:GetElapsedTime())
+	g_Player:AddEnergy(5)
+end
+
+function TracePhysX(message, other_shape)
+	engine:Trace(message)
 end

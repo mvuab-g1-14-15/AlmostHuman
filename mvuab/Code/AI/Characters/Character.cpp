@@ -44,10 +44,10 @@ void CCharacter::Render()
 
 void CCharacter::Init()
 {
-    m_Height = 1.0f;
+    m_Height = 2.0f;
     m_Radius = 0.2f;
     CPhysicsManager* l_PM = PhysXMInstance;
-    l_PM->AddController( m_Name, m_Radius, m_Height, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(),
+    l_PM->AddController( m_Name, m_Radius, m_Height/2.0f, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(),
                          -10.0 );
     m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
     SetPosition( m_Controller->GetPosition() );
@@ -59,7 +59,7 @@ void CCharacter::Init( CXMLTreeNode& Node )
     m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
     CPhysicsManager* l_PM = PhysXMInstance;
     l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.4f ),
-                         Node.GetFloatProperty( "height", 2.5f ),
+                         Node.GetFloatProperty( "height", 2.0f )/2.0f,
                          Node.GetFloatProperty( "slope", 0.2f ),
                          Node.GetFloatProperty( "skin_width", 0.01f ),
                          Node.GetFloatProperty( "step", 0.5f ),
@@ -79,6 +79,7 @@ ECollisionGroup CCharacter::GetCollisionGroup()
 void CCharacter::Move(Math::Vect3f direction, float dt)
 {
     m_Controller->Move(direction, dt);
+	m_Controller->SetYaw( Math::Utils::ATan2( direction.x, direction.z ) );
 }
 
 float CCharacter::GetHeight()

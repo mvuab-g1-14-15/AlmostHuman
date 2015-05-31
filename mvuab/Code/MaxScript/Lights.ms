@@ -33,16 +33,15 @@ fn ExportLights filenameXML =
 		lAmbientLightNode.AddAttributeRGBNormalized "color" lAmbientColor
 		
 		-- iterate for all the lights and exported the allowed types into the xml file
-		local l_LightsCount = 0;
-		for iLight in lights do
+		local l_LightsCount = 1;
+		for iLight in selection do
 		(
 			try
 			(
-				--format "Class Light :%\n" classof iLight
-				if classof iLight != Targetobject and 
-				   classof iLight != freeDirect and
-				   classof iLight != freeSpot
-				then
+			
+			if superclassof iLight == light then
+			(	
+				if classof iLight != Targetobject and classof iLight != freeDirect and classof iLight != freeSpot  then
 				(
 					local l_LightName = iLight.name
 					--create the light node
@@ -97,9 +96,10 @@ fn ExportLights filenameXML =
 					l_LightsCount = l_LightsCount + 1
 				)
 			)
+			)
 			catch
 			(
-				format "Error Light % would not be exported\n" l_LightName
+				format "Error Light % cannot be exported\n" l_LightName
 			)
 		)
 		

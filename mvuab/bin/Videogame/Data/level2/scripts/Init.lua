@@ -6,6 +6,7 @@ g_HUD = nil
 g_ConsoleActivate = false
 local initialized = false
 
+
 function load_basics()
 	-- basic loads
 end
@@ -45,7 +46,9 @@ function update_gameplay()
 			g_Player:SetPosition(ChangeRoom())
 		end
 		if action_manager:DoAction("PressR") then
-			ChargeEnergy()
+			if gui_manager:GetPressButton():GetVisible() then
+				ChargeEnergy()
+			end
 		end
 	end
 	

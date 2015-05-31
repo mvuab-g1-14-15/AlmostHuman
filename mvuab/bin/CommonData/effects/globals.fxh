@@ -17,10 +17,10 @@
 // Matrices
 //
 float4x4 g_WorldViewProj                                            : WorldViewProjection;
-float4x4 g_ViewMatrix                                               : View;
+float4x4 g_ViewMatrix                                               : ViewMatrix;
 float4x4 g_ViewInverseMatrix                                        : ViewInverse;
 float4x4 g_ProjectionInverseMatrix                                  : ProjectionInverse;
-float4x4 g_ProjectionMatrix                                         : Projection;
+float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
 float4x4 g_WorldMatrix                                              : WorldMatrix;
 float4x4 g_WorldInverseMatrix                                       : WorldInverse;
 float4x4 g_WorldViewMatrix                                          : WorldView;

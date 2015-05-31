@@ -40,8 +40,6 @@ class CEffect: public CName
         //DirectX Methods Interface
         D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
 
-        GET_SET( D3DXHANDLE, ViewMatrixParameter );
-        GET_SET( D3DXHANDLE, ProjectionMatrixParameter );
         GET_SET( D3DXHANDLE, WorldViewMatrixParameter );
         GET_SET( D3DXHANDLE, ViewProjectionMatrixParameter );
         GET_SET( D3DXHANDLE, WorldViewProjectionMatrixParameter );
@@ -153,8 +151,13 @@ class CEffect: public CName
         DECLARE_EFFECT_PARAMETER( AmbientLightColor );
 
         DECLARE_EFFECT_PARAMETER( WorldMatrix );
-        D3DXHANDLE m_ViewMatrixParameter,
-                   m_ProjectionMatrixParameter, m_InverseProjectionMatrixParameter,
+		DECLARE_EFFECT_PARAMETER( ViewMatrix );
+		DECLARE_EFFECT_PARAMETER( ProjectionMatrix );
+		DECLARE_EFFECT_PARAMETER( InverseWorldMatrix );
+		DECLARE_EFFECT_PARAMETER( InverseViewMatrix );
+		DECLARE_EFFECT_PARAMETER( InverseProjectionMatrix );
+
+        D3DXHANDLE m_InverseProjectionMatrixParameter,
                    m_InverseViewMatrixParameter, m_InverseWorldMatrixParameter;
 
         D3DXHANDLE m_WorldViewMatrixParameter, m_ViewProjectionMatrixParameter,

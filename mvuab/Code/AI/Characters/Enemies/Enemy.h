@@ -13,6 +13,7 @@
 class CStateMachine;
 class CRenderableObject;
 class CAnimatedInstanceModel;
+class CTrigger;
 
 class CEnemy : public CCharacter
 {
@@ -48,6 +49,8 @@ class CEnemy : public CCharacter
         
         std::vector<std::string> m_NameStates;
         CRenderableObject* m_pRenderableObject;
+
+		CTrigger *m_pTrigger;
 };
 
 #endif

@@ -23,6 +23,7 @@ public:
   };
 
   CTrigger( const CXMLTreeNode& Node );
+  CTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, Math::CColor color, int group, bool paint, bool bEnter, bool bStay, bool bLeave, std::string enterScript, std::string stayScript, std::string leaveScript );
   virtual ~CTrigger();
   void Release();
   void Destroy();
@@ -30,6 +31,12 @@ public:
   void Render();
 
   std::string GetLUAByName( unsigned int Type );
+
+  GET_SET( bool, bEnter );
+  GET_SET( bool, bStay );
+  GET_SET( bool, bLeave );
+
+  GET_SET(Math::Vect3f, Position);
 
 private: // Members
 
@@ -47,10 +54,13 @@ private: // Members
   TTriggerEvent m_Leave;
 
   bool m_Paint;
+  bool m_bEnter;
+  bool m_bStay;
+  bool m_bLeave;
 
   CPhysicUserData*  m_PhysicUserData;
   CPhysicActor*     m_PhysicActor;
-  CShape*		    mShape;
+  CShape*       mShape;
   CEffectTechnique* mTechnique;
 
 private: // Methods

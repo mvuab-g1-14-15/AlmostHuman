@@ -18,6 +18,7 @@ CPatrolEnemy::~CPatrolEnemy( void )
 
 void CPatrolEnemy::Init()
 {
+	CEnemy::Init();
 }
 
 void CPatrolEnemy::Update( )

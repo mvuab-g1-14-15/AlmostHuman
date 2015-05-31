@@ -158,10 +158,6 @@ void CProcess::ProcessReloads()
     {
         OnOptionReloadGui();
     }
-    else if( lAM->DoAction("ChangeCamera") )
-    {
-        OnChangeCamera();
-    }
     else if ( lAM->DoAction( "ReloadShaders" ) )
     {
         OnOptionEffectsClicked();

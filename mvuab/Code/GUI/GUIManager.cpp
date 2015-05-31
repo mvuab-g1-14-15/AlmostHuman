@@ -135,7 +135,8 @@ void CGUIManager::Init()
     if ( m.Exists() )
     {
       std::string path = m.GetPszProperty( "path", "" );
-	  m_sCurrentWindows =  m.GetPszProperty( "windows_default", "Main.xml" );
+      m_sCurrentWindows =  m.GetPszProperty( "windows_default", "Main.xml" );
+
       if ( path.compare( "" ) != 0 )
         m_bIsOk = LoadGuiFiles( path );
       else
@@ -209,59 +210,59 @@ void CGUIManager::Init()
         LOG_WARNING_APPLICATION( msg_error.c_str() );
       }
 
-	  m = parser["Image"];
+      m = parser["Image"];
 
-	  if ( m.Exists() )
-	  {
-		  float posx  = m.GetFloatProperty( "posx", 0.f );
-		  float posy  = m.GetFloatProperty( "posy", 0.f );
-		  float w  = m.GetFloatProperty( "width", 50.f );
-		  float h  = m.GetFloatProperty( "height", 50.f );
-		  bool visible = m.GetBoolProperty( "visible", false );
-		  bool activated = m.GetBoolProperty( "active", false );
-		  const std::string& name  = m.GetPszProperty( "name", "defaultGuiElement" );
-		  const std::string& default_image = m.GetPszProperty( "default", "" );
-		  const std::string& OnSaveValue  = m.GetPszProperty( "OnSaveValue", "" );
-		  const std::string& OnLoadValue  = m.GetPszProperty( "OnLoadValue", "" );
-		  const std::string& flip = m.GetPszProperty( "flip", "" );
-		  bool backGround  = m.GetBoolProperty( "backGround", false );
-		  const std::string& l_literal  = m.GetPszProperty( "Literal", "" );
-		  float widthOffsetPercent = m.GetFloatProperty( "widthOffset", 0.f );
-		  float heightOffsetPercent = m.GetFloatProperty( "heightOffset", 0.f );
+      if ( m.Exists() )
+      {
+        float posx  = m.GetFloatProperty( "posx", 0.f );
+        float posy  = m.GetFloatProperty( "posy", 0.f );
+        float w  = m.GetFloatProperty( "width", 50.f );
+        float h  = m.GetFloatProperty( "height", 50.f );
+        bool visible = m.GetBoolProperty( "visible", false );
+        bool activated = m.GetBoolProperty( "active", false );
+        const std::string& name  = m.GetPszProperty( "name", "defaultGuiElement" );
+        const std::string& default_image = m.GetPszProperty( "default", "" );
+        const std::string& OnSaveValue  = m.GetPszProperty( "OnSaveValue", "" );
+        const std::string& OnLoadValue  = m.GetPszProperty( "OnLoadValue", "" );
+        const std::string& flip = m.GetPszProperty( "flip", "" );
+        bool backGround  = m.GetBoolProperty( "backGround", false );
+        const std::string& l_literal  = m.GetPszProperty( "Literal", "" );
+        float widthOffsetPercent = m.GetFloatProperty( "widthOffset", 0.f );
+        float heightOffsetPercent = m.GetFloatProperty( "heightOffset", 0.f );
 
-		  uint32 widthOffset = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
-		  uint32 heightOffset = ( uint32 )( m_ScreenResolution.y * 0.01f * heightOffsetPercent );
+        uint32 widthOffset = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
+        uint32 heightOffset = ( uint32 )( m_ScreenResolution.y * 0.01f * heightOffsetPercent );
 
-		  m_PressButton = new CImage( m_ScreenResolution.y, m_ScreenResolution.x, h, w, Math::Vect2f( posx, posy ),
-									  l_literal, heightOffset, widthOffset, visible, activated );
-		  m_PressButton->SetName( name );
-		  m_PressButton->SetActiveTexture( default_image );
+        m_pPressButton = new CImage( m_ScreenResolution.y, m_ScreenResolution.x, h, w, Math::Vect2f( posx, posy ),
+                                     l_literal, heightOffset, widthOffset, visible, activated );
+        m_pPressButton->SetName( name );
+        m_pPressButton->SetActiveTexture( default_image );
 
-		  m_PressButton->SetOnLoadValueAction( OnLoadValue );
-		  m_PressButton->SetOnSaveValueAction( OnSaveValue );
-		  m_PressButton->SetBackGround( backGround );
+        m_pPressButton->SetOnLoadValueAction( OnLoadValue );
+        m_pPressButton->SetOnSaveValueAction( OnSaveValue );
+        m_pPressButton->SetBackGround( backGround );
 
-		  if ( flip.compare( "FLIP_X" ) == 0 )
-			m_PressButton->SetFlip( CGraphicsManager::FLIP_X );
-		  else if ( flip.compare( "FLIP_Y" ) == 0 )
-			m_PressButton->SetFlip( CGraphicsManager::FLIP_Y );
-		  else
-			m_PressButton->SetFlip( CGraphicsManager::NONE_FLIP );
+        if ( flip.compare( "FLIP_X" ) == 0 )
+          m_pPressButton->SetFlip( CGraphicsManager::FLIP_X );
+        else if ( flip.compare( "FLIP_Y" ) == 0 )
+          m_pPressButton->SetFlip( CGraphicsManager::FLIP_Y );
+        else
+          m_pPressButton->SetFlip( CGraphicsManager::NONE_FLIP );
 
-		  for ( int j = 0, count = m.GetNumChildren(); j < count; ++j )
-		  {
-			CXMLTreeNode pTexture = m( j );
-			const std::string& tagName = pTexture.GetName();
+        for ( int j = 0, count = m.GetNumChildren(); j < count; ++j )
+        {
+          CXMLTreeNode pTexture = m( j );
+          const std::string& tagName = pTexture.GetName();
 
-			if ( tagName.compare( "texture" ) == 0 )
-			{
-			  const std::string& name  = m( j ).GetPszProperty( "name" );
-			  const std::string& texture = m( j ).GetPszProperty( "name_texture" );
-			  CTexture* texture_image  = TextureMInstance->GetTexture( texture );
-			  m_PressButton->SetTexture( texture_image, name );
-			}
-		  }
-	  }
+          if ( tagName.compare( "texture" ) == 0 )
+          {
+            const std::string& name  = m( j ).GetPszProperty( "name" );
+            const std::string& texture = m( j ).GetPszProperty( "name_texture" );
+            CTexture* texture_image  = TextureMInstance->GetTexture( texture );
+            m_pPressButton->SetTexture( texture_image, name );
+          }
+        }
+      }
 
       m = parser["PointerMouse"];
 
@@ -349,8 +350,8 @@ void CGUIManager::Render()
     m_TextBox->Render();
     assert( m_pConsole );
     m_pConsole->Render();
-	assert( m_PressButton);
-	m_PressButton->Render();
+    assert( m_pPressButton );
+    m_pPressButton->Render();
 
     if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
       m_RenderPointer = true;
@@ -689,13 +690,13 @@ void CGUIManager::SetMessageBox( const std::string& text )
   }
 }
 
-void CGUIManager::ShowImage(bool bShow )
+void CGUIManager::ShowImage( bool bShow )
 {
   if ( m_bIsOk )
   {
-    assert( m_PressButton );
-	m_PressButton->SetVisible( bShow );
-    m_PressButton->SetActive( bShow );
+    assert( m_pPressButton );
+    m_pPressButton->SetVisible( bShow );
+    m_pPressButton->SetActive( bShow );
   }
 }
 
