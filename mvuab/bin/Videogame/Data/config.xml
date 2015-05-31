@@ -2,7 +2,9 @@
 <config>
 	<!-- available modes for window=full_screen, windowed, fit_desktop -->
 	<window_properties resolution="1280 720" position="0 0" mode="windowed" size="1280 720"/>
-	<console_logger activate_console="true" log_level="INFORMATION" activate_logger="true" lines_per_page_in_logger="20"/>
+	<!-- available modes for logger console, output_window -->
+	<logger mode="output_window"/>
+	<trace mode="console"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="true" />
 	<managers path="Data/level2/managers.xml"/>
 	<sound init_sound_path="./Data/sounds.xml"/>

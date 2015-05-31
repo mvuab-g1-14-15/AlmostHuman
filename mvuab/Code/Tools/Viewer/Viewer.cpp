@@ -140,11 +140,12 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
         // Obtain the engine instance
-        CGPUStatics* gpu = new CGPUStatics();
-        CLogger* pLogger = new CLogger();
         // Read the configuration of the engine
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "Data/config.xml" );
+
+        CGPUStatics* gpu = new CGPUStatics();
+        CLogger* pLogger = new CLogger();
 
         CEngine* pEngine = new CEngine();
 

@@ -6,11 +6,15 @@
 #include <iostream>
 #include <windows.h> // WinApi header
 
+#include "EngineConfig.h"
 
 CLogger::CLogger()
     : m_eLogLevel( eLogInfo )
     , m_sPathFile( "Logs/" )
+    , mEnabledConsole( false )
 {
+    ASSERT(CEngineConfig::GetSingletonPtr(), "Null Engine config, logger must be created after");
+    mEnabledConsole = CEngineConfig::GetSingletonPtr()->GetLoggerOutputMode() == CEngineConfig::eConsole;
 }
 
 void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, long line, const char* format, ... )
@@ -30,41 +34,72 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
         newLog.m_class        = class_str;
         newLog.m_File         = file;
         newLog.m_Line         = line;
-        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
         va_end(args);
 
-        switch ( ll )
+        if( mEnabledConsole )
         {
-            case eLogInfo:
-                {
-                    m_vLogs.push_back( newLog );
-                    free(buffer);
-                    return;
-                    SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-                }
-                break;
+            HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+            switch ( ll )
+            {
+                case eLogInfo:
+                    {
+                        m_vLogs.push_back( newLog );
+                        free(buffer);
+                        return;
+                        SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+                    }
+                    break;
 
-            case eLogWarning:
-                {
-                    SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-                }
-                break;
+                case eLogWarning:
+                    {
+                        SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
+                    }
+                    break;
 
-            case eLogError:
-                {
-                    SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY );
-                }
-                break;
+                case eLogError:
+                    {
+                        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY );
+                    }
+                    break;
+            }
+
+            std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
+            lCopyClassStr.insert( 5, lStr );
+            std::cout <<
+                      "----------------------------------------------------------------------------------------------------------------------------------";
+            std::cout << "[" << lCopyClassStr << "]" << "[File][" << file << "]" << "[Line][" << line <<
+                      "]" << std::endl << "[Message]" << newLog.m_sLogText << std::endl;
+            std::cout <<
+                      "----------------------------------------------------------------------------------------------------------------------------------";
         }
+        else
+        {
+            std::stringstream lMsg;
+            switch ( ll )
+            {
+                case eLogInfo:
+                    {
+                        lMsg << "[INFO]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
+                             "]" << std::endl;
+                    }
+                    break;
 
-        std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
-        lCopyClassStr.insert( 5, lStr );
-        std::cout <<
-                  "----------------------------------------------------------------------------------------------------------------------------------";
-        std::cout << "[" << lCopyClassStr << "]" << "[File][" << file << "]" << "[Line][" << line <<
-                  "]" << std::endl << "[Message]" << newLog.m_sLogText << std::endl;
-        std::cout <<
-                  "----------------------------------------------------------------------------------------------------------------------------------";
+                case eLogWarning:
+                    {
+                        lMsg << "[WARNING]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
+                             "]" << std::endl;
+                    }
+                    break;
+
+                case eLogError:
+                    {
+                        lMsg << "[ERROR]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
+                             "]" << std::endl;
+                    }
+                    break;
+            }
+            OutputDebugString(lMsg.str().c_str());
+        }
         // Add new log to the vector
         m_vLogs.push_back( newLog );
         free(buffer);

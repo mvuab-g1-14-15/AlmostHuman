@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "EngineConfig.h"
 
 #ifndef _USE_OLD_IOSTREAMS
     using namespace std;
@@ -34,6 +35,11 @@ CConsole::CConsole( const CXMLTreeNode & atts )
 
 void CConsole::Init()
 {
+    if( !CEngineConfig::GetSingleton().GetEnableConsole() )
+    {
+        return;
+    }
+
     const std::string & lNodeName = mConsoleNode.GetName();
     ASSERT( lNodeName == "console" , "Incorrect node for creating the console");
 
@@ -151,7 +157,9 @@ void CConsole::Recalculate()
 BOOL CConsole::DestroyConsole ()
 {
     if (sm_bConsole == FALSE) //There is no console to destroy
-    { return TRUE; } //as Well return asif we deleted
+    {
+        return TRUE;    //as Well return asif we deleted
+    }
     if (!FreeConsole ())
     {
         sm_bConsole = TRUE;
@@ -227,7 +235,9 @@ void CConsole::RedirectToConsole (WORD wFlags)
     FILE                       *fp;
     //First lets see if we already have allocated a console
     if (!sm_bConsole)
-    { CreateConsole(); }
+    {
+        CreateConsole();
+    }
 
     lStdHandle = (long)GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -258,6 +268,7 @@ void CConsole::RedirectToConsole (WORD wFlags)
     fp = _fdopen( hConHandle, "w" );
     *stderr = *fp;
     setvbuf( stderr, NULL, _IONBF, 0 );
+
     // make cout, wcout, cin, wcin, wcerr, cerr, wclog and clog
     // point to console as well
     ios::sync_with_stdio();
@@ -275,7 +286,9 @@ BOOL CConsole::SetupConsole(WORD wFlags)
     CONSOLE_SCREEN_BUFFER_INFO coninfo;
 
     if (!sm_bConsole)
-    { return FALSE; } // There aint no console to set up, Duh
+    {
+        return FALSE;    // There aint no console to set up, Duh
+    }
 
     lStdHandle = (long)GetStdHandle(STD_OUTPUT_HANDLE);
     // set the screen buffer to be big enough to let us scroll text
@@ -286,10 +299,14 @@ BOOL CConsole::SetupConsole(WORD wFlags)
     {
         //Number of Columns to be set
         if (m_sNumColumns)
-        { coninfo.dwSize.X = m_sNumColumns; }
+        {
+            coninfo.dwSize.X = m_sNumColumns;
+        }
         // number of lines to be set
         if (m_sNumLines)
-        { coninfo.dwSize.Y = m_sNumLines; }
+        {
+            coninfo.dwSize.Y = m_sNumLines;
+        }
 
         //Set the screen buffer size
         SetConsoleScreenBufferSize((HANDLE)lStdHandle, coninfo.dwSize);
@@ -299,7 +316,9 @@ BOOL CConsole::SetupConsole(WORD wFlags)
     {
         //Attributes as specified
         if (m_wAttrib)
-        { coninfo.wAttributes = m_wAttrib; }
+        {
+            coninfo.wAttributes = m_wAttrib;
+        }
         //Set the Text attributes
         SetConsoleTextAttribute ((HANDLE)lStdHandle, coninfo.wAttributes);
     }
@@ -310,14 +329,22 @@ BOOL CConsole::SetupConsole(WORD wFlags)
 
         //Maximum Size of the window
         if (m_sMaxLines)
-        { rect.Bottom = m_sMaxLines; }
+        {
+            rect.Bottom = m_sMaxLines;
+        }
         else
-        { rect.Bottom = coninfo.dwMaximumWindowSize.Y; }
+        {
+            rect.Bottom = coninfo.dwMaximumWindowSize.Y;
+        }
 
         if (m_sNumColumns)
-        { rect.Right = m_sNumColumns; }
+        {
+            rect.Right = m_sNumColumns;
+        }
         else
-        { rect.Right = coninfo.dwMaximumWindowSize.X; }
+        {
+            rect.Right = coninfo.dwMaximumWindowSize.X;
+        }
         rect.Top = rect.Left = 0;
 
         //Set the console window maximum size
@@ -331,7 +358,9 @@ BOOL CConsole::SetupConsole(WORD wFlags)
 HANDLE CConsole::GetHandle (DWORD dwFlag)
 {
     if (!sm_bConsole)
-    { return (HANDLE) NULL; }
+    {
+        return (HANDLE) NULL;
+    }
     return GetStdHandle (dwFlag);
 }
 
@@ -346,7 +375,9 @@ BOOL CConsole::Clear ()
                                        the current buffer */
 
     if (!sm_bConsole)
-    { return FALSE; }
+    {
+        return FALSE;
+    }
     HANDLE hConsole = GetHandle (STD_OUTPUT_HANDLE);
 
     /* get the number of character cells in the current buffer */
@@ -354,29 +385,44 @@ BOOL CConsole::Clear ()
 
     bSuccess = GetConsoleScreenBufferInfo( hConsole, &csbi );
     dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
 
     /* fill the entire screen with blanks */
 
     bSuccess = FillConsoleOutputCharacter( hConsole, (TCHAR) ' ',
                                            dwConSize, coordScreen, &cCharsWritten );
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
 
     /* get the current text attribute */
 
     bSuccess = GetConsoleScreenBufferInfo( hConsole, &csbi );
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
 
     /* now set the buffer's attributes accordingly */
 
     bSuccess = FillConsoleOutputAttribute( hConsole, csbi.wAttributes,
                                            dwConSize, coordScreen, &cCharsWritten );
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
 
     /* put the cursor at (0, 0) */
 
     bSuccess = SetConsoleCursorPosition( hConsole, coordScreen );
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
     return TRUE;
 }
 
@@ -390,11 +436,16 @@ BOOL CConsole::ApplyAttrib (short NumChars)
     DWORD dwConSize;                 /* number of character cells in
                                        the current buffer */
     if (!sm_bConsole)
-    { return FALSE; }
+    {
+        return FALSE;
+    }
     HANDLE hConsole = GetHandle (STD_OUTPUT_HANDLE);
     bSuccess = GetConsoleScreenBufferInfo( hConsole, &csbi );
 
-    if (!bSuccess) { return bSuccess; }
+    if (!bSuccess)
+    {
+        return bSuccess;
+    }
 
     dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
     bSuccess = FillConsoleOutputAttribute( hConsole, csbi.wAttributes,
@@ -409,7 +460,9 @@ WORD CConsole::GetSettings (WORD wFlags)
     CONSOLE_SCREEN_BUFFER_INFO coninfo;
 
     if (!sm_bConsole)
-    { return FALSE; } // There aint no console to set up, Duh
+    {
+        return FALSE;    // There aint no console to set up, Duh
+    }
 
     lStdHandle = (long)GetStdHandle(STD_OUTPUT_HANDLE);
     // set the screen buffer to be big enough to let us scroll text

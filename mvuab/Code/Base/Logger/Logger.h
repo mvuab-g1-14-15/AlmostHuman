@@ -62,6 +62,7 @@ class CLogger: public CSingleton<CLogger>
         std::vector<SLog> m_vLogs;
         ELogLevel m_eLogLevel;
         std::string     m_sPathFile;
+        bool            mEnabledConsole;
 
 };
 

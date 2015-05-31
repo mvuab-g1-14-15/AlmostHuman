@@ -13,12 +13,14 @@
 #include "ScriptManager.h"
 
 #include <iostream>
+#include "Utils/StringUtils.h"
 
 CEngine::CEngine()
     : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
     , m_pProcess( 0 )
     , m_pTimer( new CTimer( 30 ) )
     , m_Play( false )
+    , mConsoleEnabled( false )
 {
 }
 
@@ -65,6 +67,7 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
 
     if ( aEngineConfig )
     {
+        mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;
         // Init the managers of the engine
         m_pEngineManagers->Init();
 
@@ -75,10 +78,19 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
 
 void CEngine::Trace( const std::string& TraceStr )
 {
-    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-    SetConsoleTextAttribute( hConsole,
-                             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-    std::cout << TraceStr << std::endl << std::endl;
+    if( mConsoleEnabled )
+    {
+        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+        std::cout << TraceStr << std::endl << std::endl;
+    }
+    else
+    {
+        std::stringstream lMsg;
+        lMsg << "[APPLICATION]" << TraceStr << std::endl;
+        OutputDebugString(lMsg.str().c_str());
+    }
+
 }
 
 void CEngine::QuitGame()
