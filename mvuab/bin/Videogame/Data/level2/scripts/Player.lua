@@ -1,6 +1,7 @@
 dofile("./data/level2/scripts/PlayerController.lua")
 dofile("./data/level2/scripts/Blaster.lua")
 dofile("./data/level2/scripts/Grenade.lua")
+dofile("./data/level2/scripts/StealthAttack.lua")
 
 class "CPlayer"
 
@@ -12,6 +13,7 @@ function CPlayer:__init()
 	self.GrenadeQueue[#self.GrenadeQueue + 1] = CGrenade()
 	
 	self.Blaster = CBlaster()
+	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
@@ -53,6 +55,7 @@ function CPlayer:Update()
 	end
 	
 	self.Blaster:Update()
+	self.StealthAttack:Update()
 	if self.Life <= 0 then
 		self.PlayerController:SetPosition(Respawn())
 		self.Life= 100.0

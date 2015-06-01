@@ -130,6 +130,10 @@
  	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
   </action>
   
+  <action name="StealthAttack">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+  
   <action name="ShootUp">
  	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP"  Code="MOUSE_BUTTON_LEFT"/>
   </action>

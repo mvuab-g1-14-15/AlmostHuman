@@ -42,6 +42,23 @@ function PlayerDistance(enemy)
 	return l_DistanceVector:Length()
 end
 
+function GetAngleEnemyPlayer(enemy)
+	local l_PlayerPos = GetPlayerPosition()
+	local l_EnemyPos = enemy:GetPosition()
+	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
+	
+	local l_DistanceVector = l_PlayerPos - l_EnemyPos
+	l_DistanceVector:Normalize()
+	
+	local l_EnemyDir = enemy:GetDirection()
+	l_EnemyDir:Normalize()
+	
+	local angle = (l_EnemyDir.x*l_DistanceVector.x + l_EnemyDir.y*l_DistanceVector.y + l_EnemyDir.z*l_DistanceVector.z)
+	angle = math.acos(angle)
+	
+	return angle
+end
+
 function GetPlayerPosition()
 	local l_Player = physic_manager:GetController("Player")
 	local l_Position =  l_Player:GetPosition()
