@@ -1,16 +1,7 @@
 --includes
 fileIn "XMLStruct.ms"
 
-/*
-	Export all the lights of the scenary into the format of the UABEngine
-	Notes:
-	The allowed types of lights in the exportation are only:
-	- Omni
-	- Target Spot
-	- Target Direct
-	The other, including the target objects must not be exported.
-*/
-fn ExportLights filenameXML =
+fn ExportLights filenameXML aLights =
 (
 	clearListener()
 	
@@ -33,8 +24,8 @@ fn ExportLights filenameXML =
 		lAmbientLightNode.AddAttributeRGBNormalized "color" lAmbientColor
 		
 		-- iterate for all the lights and exported the allowed types into the xml file
-		local l_LightsCount = 1;
-		for iLight in selection do
+		local l_LightsCount = 0;
+		for iLight in aLights do
 		(
 			try
 			(
@@ -45,10 +36,29 @@ fn ExportLights filenameXML =
 				(
 					local l_LightName = iLight.name
 					--create the light node
-					local l_NewLightNode = xDoc.getNewNode "light"
-			
+					
+					local l_NewLightNode;
+					
+					--add the specific data for each light
+					if classof iLight == TargetDirectionallight then
+					(
+						l_NewLightNode = xDoc.getNewNode "directional_light"
+						--format "direct\n"
+					)
+					else if classof iLight == targetSpot then
+					(
+						l_NewLightNode = xDoc.getNewNode "spot_light"
+						--format "spot\n"
+					)
+					else
+					(
+						l_NewLightNode = xDoc.getNewNode "omni_light"
+						--format "omni\n"
+					)
+					
 					-- append the new node light to the root node lights
 					l_RootNode.AppendNode l_NewLightNode
+					
 					/*
 					<light name="mylight2" type="spot" pos="169 18 14" dir="0.39344111 0.0096235331 0.91929936" color="1.0 1.0 1.0" att_start_range="20" att_end_range="40" generate_shadow_map="true" 
 					shadow_map_format_type="R32F" shadow_map_width="256" shadow_map_height="256" generate_static_shadow_map="true" static_shadow_map_format_type="R32F" static_shadow_map_width="256"
@@ -57,14 +67,15 @@ fn ExportLights filenameXML =
 							<dynamic renderable_objects_manager="solid"/>
 					</light>
 					*/
+					
 					--add the common attributes of the light
 					local l_LightTypeStr = iLight.type as string
-					l_NewLightNode.AddAttributeAsString "type" l_LightTypeStr
 					l_NewLightNode.AddAttributeAsString "name" l_LightName
 					l_NewLightNode.AddAttributeCoordinate "pos" iLight.pos
 					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
 					l_NewLightNode.AddAttributeFloat "att_start_range" iLight.farAttenStart
 					l_NewLightNode.AddAttributeFloat "att_end_range" iLight.farAttenEnd
+					
 					/*
 					l_NewLightNode.AddAttributeFloat "generate_shadow_map" "true"
 					l_NewLightNode.AddAttributeFloat "shadow_map_format_type" "R32F"
@@ -76,7 +87,7 @@ fn ExportLights filenameXML =
 					l_NewLightNode.AddAttributeFloat "static_shadow_map_height" iLight.shadowgenerator.mapsize
 					l_NewLightNode.AddAttributeFloat "shadow_texture_mask" iLight.shadowProjectorMap.filename
 					*/
-							
+					
 					--add the specific data for each light
 					if classof iLight == TargetDirectionallight then
 					(
@@ -93,6 +104,9 @@ fn ExportLights filenameXML =
 						l_NewLightNode.AddAttributeFloat "fall_off" iLight.Falloff
 						l_NewLightNode.AddAttributeBool "render_shadows" false
 					)
+					
+					--<shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024"/>
+					
 					l_LightsCount = l_LightsCount + 1
 				)
 			)
@@ -103,7 +117,7 @@ fn ExportLights filenameXML =
 			)
 		)
 		
-		format "Exported in file: '%'\n - Ambient Color '%' and '%' Lights." filenameXML lAmbientColor l_LightsCount
+		format "Exported in file: '%'\n - Ambient Color '%' and '%' Lights.\n" filenameXML lAmbientColor l_LightsCount
 		return xDoc.PrettySaveXML()
 	)
 	catch

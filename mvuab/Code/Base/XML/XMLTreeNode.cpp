@@ -169,7 +169,7 @@ CXMLTreeNode CXMLTreeNode::operator()( int _iIndex ) const
 
         while ( pChildren != NULL )
         {
-            if ( pChildren->type != XML_TEXT_NODE )
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
             {
                 if ( _iIndex == iCount )
                 {
@@ -200,7 +200,7 @@ CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 
         while ( pChildren != NULL )
         {
-            if ( pChildren->type != XML_TEXT_NODE )
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
             {
                 if ( _iIndex == iCount )
                 {
@@ -222,7 +222,7 @@ CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 //----------------------------------------------------------------------------
 // Returns the number of children a tree has
 //----------------------------------------------------------------------------
-int CXMLTreeNode::GetNumChildren()  const
+int CXMLTreeNode::GetNumChildren() const
 {
     assert( m_pNode );
     int iCount = 0;
@@ -233,7 +233,7 @@ int CXMLTreeNode::GetNumChildren()  const
 
         while ( pChildren != NULL )
         {
-            if ( pChildren->type != XML_TEXT_NODE )
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
             {
                 ++iCount;
             }

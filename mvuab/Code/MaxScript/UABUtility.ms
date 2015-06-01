@@ -49,12 +49,14 @@ utility UABUtility "UAB Utility" width:163 height:500
 		if data_path!=undefined then
 			PathLabel.text=data_path
 	)
+	
 	on LightsButton pressed do
 	(
 		--export lights
 		local LightDir = PathLabel.text + "\\lights.xml"
 		ExportLights LightDir
 	)
+	
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
