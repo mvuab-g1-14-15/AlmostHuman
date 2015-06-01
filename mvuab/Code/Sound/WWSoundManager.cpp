@@ -18,6 +18,7 @@
 
 #include <Windows.h>
 #include <string>
+#include <math.h>
 #include "XML\XMLTreeNode.h"
 #include "Utils/Defines.h"
 #include "EngineConfig.h"
@@ -344,21 +345,24 @@ AKRESULT CWWSoundManager::SetListenerPosition( Math::Vect3f _ListenerPosition, M
   return AK::SoundEngine::SetListenerPosition( l_ListenerPosition );
 }
 
-AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition,
-    Math::Vect3f _GameObjectOrientation )
+AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation )
 {
+  bool l_OK = true;
   AkSoundPosition l_AKGameObjectPosition;
+
+  _GameObjectOrientation = _GameObjectOrientation.Normalize();
+  if(_isnan(_GameObjectOrientation.x) || _isnan(_GameObjectOrientation.y) || _isnan(_GameObjectOrientation.z))
+  {
+      l_OK = false;
+  }
 
   l_AKGameObjectPosition.Position.X = _GameObjectPosition.x;
   l_AKGameObjectPosition.Position.Y = _GameObjectPosition.y;
   l_AKGameObjectPosition.Position.Z = _GameObjectPosition.z;
 
-  Math::Vect3f l_GameObjectPositionNorm = _GameObjectPosition.GetNormalized();
-
-  l_AKGameObjectPosition.Orientation.X = l_GameObjectPositionNorm.x;
-  l_AKGameObjectPosition.Orientation.Y = l_GameObjectPositionNorm.y;
-  l_AKGameObjectPosition.Orientation.Z = l_GameObjectPositionNorm.z;
-
+  l_AKGameObjectPosition.Orientation.X = (!l_OK) ? 1.0f : _GameObjectOrientation.x;
+  l_AKGameObjectPosition.Orientation.Y = (!l_OK) ? 0.0f : _GameObjectOrientation.y;
+  l_AKGameObjectPosition.Orientation.Z = (!l_OK) ? 0.0f : _GameObjectOrientation.z;
 
   return AK::SoundEngine::SetPosition( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPosition );
 }
