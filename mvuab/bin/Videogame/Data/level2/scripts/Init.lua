@@ -39,7 +39,6 @@ function update_gameplay()
 	g_HUD:Update()
 	--g_Enemy:Update()
 	
-	CheckLevel()
 	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	if not g_ConsoleActivate then
 		if action_manager:DoAction("ChangeRoom") then

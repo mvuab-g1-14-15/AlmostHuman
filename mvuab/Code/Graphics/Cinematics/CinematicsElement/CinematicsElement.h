@@ -12,15 +12,15 @@ class CGraphicsManager;
 
 class CCinematicsElement: public CVisible, public CName
 {
-    public:
-        CCinematicsElement(CXMLTreeNode &atts);
-        virtual ~CCinematicsElement();
+public:
+  CCinematicsElement( CXMLTreeNode& atts );
+  virtual ~CCinematicsElement();
 
-        virtual void Execute(CGraphicsManager &GM) = 0;
-		virtual void Render(CGraphicsManager &GM) = 0;
-		virtual void Render2D(CGraphicsManager &GM) = 0;
+  virtual void Execute( CGraphicsManager& GM ) = 0;
+  virtual void Render( CGraphicsManager& GM ) = 0;
+  virtual void Render2D( CGraphicsManager& GM ) = 0;
 private:
-	bool mIsBlocker;
-	float32 mTime;
+  bool mIsBlocker;
+  float32 mTime;
 };
 #endif //CINEMATICS_ELEMENT_

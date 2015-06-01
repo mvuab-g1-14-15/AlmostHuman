@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "ActionManager.h"
 #include "Utils\Manager.h"
+#include "luabind_macros.h"
 
 extern "C"
 {
@@ -35,37 +36,33 @@ public:
 
 void registerInputs( lua_State* m_LS )
 {
-  module( m_LS )
-  [
-    class_<CInputManager, CManager>( "CInputManager" )
-    .def( constructor<>() )
+  //INPUT MANAGER
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_DERIVED_CLASS( CInputManager, CManager )
+  LUA_DECLARE_METHOD( CInputManager, IsDown )
+  LUA_DECLARE_METHOD( CInputManager, IsDownUp )
+  LUA_DECLARE_METHOD( CInputManager, IsUpDown )
+  LUA_END_DECLARATION
 
-    .def( "IsDown", &CInputManager::IsDown )
-    .def( "IsDownUp", &CInputManager::IsDownUp )
-    .def( "IsUpDown", &CInputManager::IsUpDown )
-  ];
+  //ACTION MANAGER
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_CLASS( CActionManager )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD( CActionManager, LoadXML )
+  LUA_DECLARE_METHOD( CActionManager, SaveXML )
+  LUA_DECLARE_METHOD_PROTO( CActionManager, DoAction, bool( CActionManager::* )( const std::string& ) )
+  //luabind::pure_out_value(_3) -> Cuenta como primer parámetro el this de la clase, el segundo parámetro es el tercero realmente
+  //http://stackoverflow.com/questions/14804154/luabind-pure-out-value-refuses-to-compile
+  //.def("DoAction",(bool(CActionManager::*)(const std::string &, float32 &)) &CActionManager::DoAction, luabind::pure_out_value(_3))
+  LUA_DECLARE_METHOD( CActionManager, SetAction )
+  LUA_DECLARE_METHOD( CActionManager, Update )
+  LUA_END_DECLARATION
 
-  module( m_LS )
-  [
-    class_<CActionManager>( "CActionManager" )
-    .def( constructor<>() )
-
-
-    .def( "LoadXML", &CActionManager::LoadXML )
-    .def( "SaveXML", &CActionManager::SaveXML )
-    .def( "DoAction", ( bool( CActionManager::* )( const std::string& ) ) &CActionManager::DoAction )
-    //luabind::pure_out_value(_3) -> Cuenta como primer parámetro el this de la clase, el segundo parámetro es el tercero realmente
-    //http://stackoverflow.com/questions/14804154/luabind-pure-out-value-refuses-to-compile
-    //.def("DoAction",(bool(CActionManager::*)(const std::string &, float32 &)) &CActionManager::DoAction, luabind::pure_out_value(_3))
-    .def( "SetAction", &CActionManager::SetAction )
-    .def( "Update", &CActionManager::Update )
-  ];
-
-  module( m_LS )
-  [
-    class_<CActionManagerLuaWrapper>( "CActionManagerLuaWrapper" )
-    .def( constructor<>() )
-    .def_readwrite( "amount", &CActionManagerLuaWrapper::m_Value )
-    .def( "DoAction", &CActionManagerLuaWrapper::DoAction )
-  ];
+  //ACTION MANAGER WRAPPER
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_CLASS( CActionManagerLuaWrapper )
+  LUA_DECLARE_DEFAULT_CTOR
+  .def_readwrite( "amount", &CActionManagerLuaWrapper::m_Value )
+  LUA_DECLARE_METHOD( CActionManagerLuaWrapper, DoAction )
+  LUA_END_DECLARATION
 }
