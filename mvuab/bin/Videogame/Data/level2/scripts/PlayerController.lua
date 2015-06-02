@@ -295,13 +295,16 @@ function CPlayerController:UpdateInput()
 			self.Run = false
 		end
 		if action_manager:DoAction("Crouch") then
+			local l_Can = false
 			if self.Crouch then
-				self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+				l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
 			else
-				self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+				l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
 			end
-			self.Crouch = not self.Crouch
-			self.ActualTimeCrouch = 0.0
+			if l_Can then
+				self.Crouch = not self.Crouch
+				self.ActualTimeCrouch = 0.0
+			end
 		end
 		
 		if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
