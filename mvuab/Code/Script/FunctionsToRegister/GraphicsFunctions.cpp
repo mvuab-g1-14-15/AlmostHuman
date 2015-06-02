@@ -16,6 +16,7 @@
 #include "Cameras/Camera.h"
 #include "Cameras/CameraInfo.h"
 
+#include "Cinematics/CinematicManager.h"
 #include "Cinematics/Cinematic.h"
 #include "Cinematics/CinematicPlayer.h"
 #include "Cinematics/CinematicObjectKeyFrame.h"
@@ -97,6 +98,14 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CCamera, SetEnable )
   LUA_DECLARE_METHOD( CCamera, AddYaw )
   LUA_DECLARE_METHOD( CCamera, AddPitch )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // CINEMATIC MANAGER
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS( CCinematicManager, CManager )
+  LUA_DECLARE_METHOD( CCinematicManager, Execute )
   LUA_END_DECLARATION
 }
 

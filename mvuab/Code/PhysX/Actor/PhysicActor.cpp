@@ -26,9 +26,9 @@ CPhysicActor::CPhysicActor( CPhysicUserData* _pUserData )
 {
   assert( m_pUserData );
   _pUserData->SetActor( this );
-  m_uCollisionGroups = _pUserData->GetGroup();
-  m_pPhXActorDesc = new NxActorDesc();
-  m_pPhXBodyDesc  = new NxBodyDesc();
+  m_uCollisionGroups  = _pUserData->GetGroup();
+  m_pPhXActorDesc     = new NxActorDesc();
+  m_pPhXBodyDesc      = new NxBodyDesc();
 }
 
 CPhysicActor::~CPhysicActor( void )
@@ -46,8 +46,8 @@ void CPhysicActor::Destroy( void )
 
   if ( m_vBoxDesc.size() > 0 )
   {
-    std::vector<NxBoxShapeDesc*>::iterator it( m_vBoxDesc.begin() );
-    std::vector<NxBoxShapeDesc*>::iterator itEnd( m_vBoxDesc.end() );
+    std::vector<NxBoxShapeDesc*>::iterator  it( m_vBoxDesc.begin() ),
+                                            itEnd( m_vBoxDesc.end() );
 
     while ( it != itEnd )
     {
@@ -61,8 +61,8 @@ void CPhysicActor::Destroy( void )
 
   if ( m_vMeshDesc.size() > 0 )
   {
-    std::vector<NxTriangleMeshShapeDesc*>::iterator it( m_vMeshDesc.begin() );
-    std::vector<NxTriangleMeshShapeDesc*>::iterator itEnd( m_vMeshDesc.end() );
+    std::vector<NxTriangleMeshShapeDesc*>::iterator it( m_vMeshDesc.begin() ),
+                                                    itEnd( m_vMeshDesc.end() );
 
     while ( it != itEnd )
     {
@@ -76,8 +76,8 @@ void CPhysicActor::Destroy( void )
 
   if ( m_vCapsuleDesc.size() > 0 )
   {
-    std::vector<NxCapsuleShapeDesc*>::iterator it( m_vCapsuleDesc.begin() );
-    std::vector<NxCapsuleShapeDesc*>::iterator itEnd( m_vCapsuleDesc.end() );
+    std::vector<NxCapsuleShapeDesc*>::iterator  it( m_vCapsuleDesc.begin() ),
+                                                itEnd( m_vCapsuleDesc.end() );
 
     while ( it != itEnd )
     {
@@ -91,8 +91,8 @@ void CPhysicActor::Destroy( void )
 
   if ( m_vSphereDesc.size() > 0 )
   {
-    std::vector<NxSphereShapeDesc*>::iterator it( m_vSphereDesc.begin() );
-    std::vector<NxSphereShapeDesc*>::iterator itEnd( m_vSphereDesc.end() );
+    std::vector<NxSphereShapeDesc*>::iterator it( m_vSphereDesc.begin() ),
+                                              itEnd( m_vSphereDesc.end() );
 
     while ( it != itEnd )
     {
@@ -106,8 +106,8 @@ void CPhysicActor::Destroy( void )
 
   if ( m_vPlaneDesc.size() > 0 )
   {
-    std::vector<NxPlaneShapeDesc*>::iterator it( m_vPlaneDesc.begin() );
-    std::vector<NxPlaneShapeDesc*>::iterator itEnd( m_vPlaneDesc.end() );
+    std::vector<NxPlaneShapeDesc*>::iterator  it( m_vPlaneDesc.begin() ),
+                                              itEnd( m_vPlaneDesc.end() );
 
     while ( it != itEnd )
     {
@@ -137,7 +137,7 @@ void CPhysicActor::CreateBoxTrigger( const Math::Vect3f& _vGlobalPos, const Math
   assert( m_pPhXActorDesc );
   NxBoxShapeDesc* boxDesc = new NxBoxShapeDesc();
   assert( boxDesc );
-  boxDesc->group = _uiGroup;
+  boxDesc->group      = _uiGroup;
   m_vBoxDesc.push_back( boxDesc );
   boxDesc->dimensions = NxVec3( _vSize.x, _vSize.y, _vSize.z );
   boxDesc->shapeFlags |= NX_TRIGGER_ENABLE;
@@ -151,10 +151,10 @@ void CPhysicActor::CreateSphereTrigger( const Math::Vect3f& _vGlobalPos, const f
   assert( m_pPhXActorDesc );
   NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
   assert( sphereDesc );
-  sphereDesc->group = _uiGroup;
+  sphereDesc->group  = _uiGroup;
   m_vSphereDesc.push_back( sphereDesc );
   sphereDesc->radius = _fRadius;
-  sphereDesc->shapeFlags |= NX_TRIGGER_ENABLE;
+  sphereDesc->shapeFlags       |= NX_TRIGGER_ENABLE;
   m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
   m_pPhXActorDesc->shapes.pushBack( sphereDesc );
 }
@@ -183,11 +183,11 @@ void CPhysicActor::AddSphereShape( float radius, const Math::Vect3f& _vGlobalPos
   // Add a sphere shape to the actor descriptor
   NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
   assert( sphereDesc );
-  sphereDesc->group = _uiGroup;
-  sphereDesc->materialIndex = m_MaterialIndex;
+  sphereDesc->group             = _uiGroup;
+  sphereDesc->materialIndex     = m_MaterialIndex;
   m_vSphereDesc.push_back( sphereDesc );
-  sphereDesc->radius = radius;
-  sphereDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
+  sphereDesc->radius            = radius;
+  sphereDesc->localPose.t       = NxVec3( localPos.x, localPos.y, localPos.z );
   m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
 
   if ( skeleton != NULL )
@@ -206,22 +206,22 @@ void CPhysicActor::AddBoxShape( const Math::Vect3f& _vSize, const Math::Vect3f& 
   assert( m_pPhXActorDesc );
   NxBoxShapeDesc* l_BoxDesc = new NxBoxShapeDesc();
   assert( l_BoxDesc );
-  l_BoxDesc->group = _uiGroup;
-  l_BoxDesc->materialIndex = m_MaterialIndex;
+  l_BoxDesc->group          = _uiGroup;
+  l_BoxDesc->materialIndex  = m_MaterialIndex;
   m_vBoxDesc.push_back( l_BoxDesc );
   // Add a box shape to the actor descriptor
-  l_BoxDesc->dimensions = NxVec3( _vSize.x, _vSize.y, _vSize.z );
+  l_BoxDesc->dimensions     = NxVec3( _vSize.x, _vSize.y, _vSize.z );
   //l_BoxDesc->localPose.M.rotX(NxReal(rotation.x));
   //l_BoxDesc->localPose.M.rotY(NxReal(rotation.y));
   //l_BoxDesc->localPose.M.rotZ(NxReal(rotation.z));
-  l_BoxDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
-  NxMat33 rotX = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotY = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotZ = m_pPhXActorDesc->globalPose.M;
+  l_BoxDesc->localPose.t    = NxVec3( localPos.x, localPos.y, localPos.z );
+  NxMat33 rotX              = m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotY              = m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotZ              = m_pPhXActorDesc->globalPose.M;
   rotX.rotX( NxReal( rotation.x ) );
   rotY.rotY( NxReal( rotation.y ) );
   rotZ.rotZ( NxReal( rotation.z ) );
-  NxMat33 rotAll = rotY;
+  NxMat33 rotAll            = rotY;
   rotAll.multiply( rotY, rotX );
   rotAll.multiply( rotAll, rotZ );
   m_pPhXActorDesc->globalPose.M = rotAll;
@@ -240,26 +240,26 @@ void CPhysicActor::AddBoxShapeHardcoded( const Math::Vect3f& _vSize,
     const Math::Vect3f& _vGlobalPos, const Math::Vect3f& localPos, const Math::Vect3f& rotation )
 {
   assert( m_pPhXActorDesc );
-  NxCCDSkeleton* skeleton = 0;
-  uint32 _uiGroup = 0;
+  NxCCDSkeleton* skeleton   = 0;
+  uint32 _uiGroup           = 0;
   NxBoxShapeDesc* l_BoxDesc = new NxBoxShapeDesc();
   assert( l_BoxDesc );
-  l_BoxDesc->group = _uiGroup;
-  l_BoxDesc->materialIndex = m_MaterialIndex;
+  l_BoxDesc->group          = _uiGroup;
+  l_BoxDesc->materialIndex  = m_MaterialIndex;
   m_vBoxDesc.push_back( l_BoxDesc );
   // Add a box shape to the actor descriptor
-  l_BoxDesc->dimensions = NxVec3( _vSize.x, _vSize.y, _vSize.z );
+  l_BoxDesc->dimensions     = NxVec3( _vSize.x, _vSize.y, _vSize.z );
   //l_BoxDesc->localPose.M.rotX(NxReal(rotation.x));
   //l_BoxDesc->localPose.M.rotY(NxReal(rotation.y));
   //l_BoxDesc->localPose.M.rotZ(NxReal(rotation.z));
-  l_BoxDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
-  NxMat33 rotX = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotY = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotZ = m_pPhXActorDesc->globalPose.M;
+  l_BoxDesc->localPose.t    = NxVec3( localPos.x, localPos.y, localPos.z );
+  NxMat33 rotX              = m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotY              = m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotZ              = m_pPhXActorDesc->globalPose.M;
   rotX.rotX( NxReal( rotation.x ) );
   rotY.rotY( NxReal( rotation.y ) );
   rotZ.rotZ( NxReal( rotation.z ) );
-  NxMat33 rotAll = rotY;
+  NxMat33 rotAll            = rotY;
   rotAll.multiply( rotY, rotX );
   rotAll.multiply( rotAll, rotZ );
   m_pPhXActorDesc->globalPose.M = rotAll;
@@ -281,13 +281,13 @@ void CPhysicActor::AddCapsuleShape( float radius, float height, const Math::Vect
   // Add a capsule shape to the actor descriptor
   NxCapsuleShapeDesc* capsuleDesc = new NxCapsuleShapeDesc();
   assert( capsuleDesc );
-  capsuleDesc->group = _uiGroup;
-  capsuleDesc->materialIndex = m_MaterialIndex;
+  capsuleDesc->group              = _uiGroup;
+  capsuleDesc->materialIndex      = m_MaterialIndex;
   m_vCapsuleDesc.push_back( capsuleDesc );
-  capsuleDesc->height = height;
-  capsuleDesc->radius = radius;
-  capsuleDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
-  m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
+  capsuleDesc->height             = height;
+  capsuleDesc->radius             = radius;
+  capsuleDesc->localPose.t        = NxVec3( localPos.x, localPos.y, localPos.z );
+  m_pPhXActorDesc->globalPose.t   = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
 
   if ( skeleton != NULL )
   {
@@ -306,18 +306,17 @@ void CPhysicActor::AddMeshShape( NxTriangleMesh* mesh, const Math::Vect3f& _vGlo
   // Add a mesh shape to the actor descriptor
   NxTriangleMeshShapeDesc* triangleMeshDesc = new NxTriangleMeshShapeDesc();
   assert( triangleMeshDesc );
-  triangleMeshDesc->group = _uiGroup;
-  triangleMeshDesc->materialIndex = m_MaterialIndex;
+  triangleMeshDesc->group                   = _uiGroup;
+  triangleMeshDesc->materialIndex           = m_MaterialIndex;
   m_vMeshDesc.push_back( triangleMeshDesc );
   // The actor has mesh shape
-  triangleMeshDesc->meshData = mesh;
-  m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
+  triangleMeshDesc->meshData                = mesh;
+  m_pPhXActorDesc->globalPose.t             = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
 
   if ( skeleton != NULL )
   {
     triangleMeshDesc->ccdSkeleton = skeleton;
-    triangleMeshDesc->shapeFlags |=
-      NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
+    triangleMeshDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
     triangleMeshDesc->shapeFlags |= NX_MESH_SMOOTH_SPHERE_COLLISIONS;
   }
 
@@ -331,10 +330,10 @@ void CPhysicActor::AddPlaneShape( const Math::Vect3f& _vNormal, float distance, 
   NxPlaneShapeDesc* planeDesc = new NxPlaneShapeDesc();
   assert( planeDesc );
   planeDesc->group  = _uiGroup;
-  planeDesc->materialIndex = m_MaterialIndex;
+  planeDesc->materialIndex    = m_MaterialIndex;
   m_vPlaneDesc.push_back( planeDesc );
-  planeDesc->normal = NxVec3( _vNormal.x, _vNormal.y, _vNormal.z );
-  planeDesc->d    = distance;
+  planeDesc->normal           = NxVec3( _vNormal.x, _vNormal.y, _vNormal.z );
+  planeDesc->d                = distance;
   m_pPhXActorDesc->shapes.pushBack( planeDesc );
 }
 
@@ -401,9 +400,9 @@ void CPhysicActor::CreateBody( float density, float angularDamping, float linear
     assert( m_pPhXBodyDesc );
     // Create body
     m_pPhXBodyDesc->angularDamping  = angularDamping;
-    m_pPhXBodyDesc->linearDamping = linearDamping;
-    m_pPhXActorDesc->body     = m_pPhXBodyDesc;
-    m_pPhXActorDesc->density = density;
+    m_pPhXBodyDesc->linearDamping   = linearDamping;
+    m_pPhXActorDesc->body           = m_pPhXBodyDesc;
+    m_pPhXActorDesc->density        = density;
   }
 }
 
@@ -629,15 +628,19 @@ void CPhysicActor::SetRotation( const Math::Vect3f& _vRot )
 
   Mat44f l_mat44;
   GetMat44( l_mat44 );
+
   Mat44f l_rot44;
   l_rot44.SetIdentity();
   l_rot44.RotByAnglesYXZ( l_vRot.y, l_vRot.x, l_vRot.z );
+
   Math::Vect3f l_rotScaleX( l_rot44.m00, l_rot44.m10, l_rot44.m20 );
   Math::Vect3f l_rotScaleY( l_rot44.m01, l_rot44.m11, l_rot44.m21 );
   Math::Vect3f l_rotScaleZ( l_rot44.m02, l_rot44.m12, l_rot44.m22 );
+
   assert( l_rotScaleX * l_rotScaleX < 1.01f && l_rotScaleX * l_rotScaleX > 0.99f );
   assert( l_rotScaleY * l_rotScaleY < 1.01f && l_rotScaleY * l_rotScaleY > 0.99f );
   assert( l_rotScaleZ * l_rotScaleZ < 1.01f && l_rotScaleZ * l_rotScaleZ > 0.99f );
+
   l_rot44.Translate( l_mat44.GetPos() );
   SetMat44( l_rot44 );
 }
@@ -679,7 +682,7 @@ Math::Vect3f CPhysicActor::GetRotation( void )
 void CPhysicActor::SetCollisionGroup( uint32 _uiGroup ) //NxCollisionGroup group
 {
   NxShape* const* shapes = m_pPhXActor->getShapes();
-  NxU32 nShapes = m_pPhXActor->getNbShapes();
+  NxU32 nShapes          = m_pPhXActor->getNbShapes();
 
   while ( nShapes-- )
     shapes[nShapes]->setGroup( _uiGroup );
@@ -689,16 +692,16 @@ void CPhysicActor::AddSphereShapeHardcoded( float radius, const Math::Vect3f& _v
                                    const Math::Vect3f& localPos )
 {
   NxCCDSkeleton* skeleton = 0;
-  uint32 _uiGroup = 0;
+  uint32 _uiGroup         = 0;
   assert( m_pPhXActorDesc );
   // Add a sphere shape to the actor descriptor
   NxSphereShapeDesc* sphereDesc = new NxSphereShapeDesc();
   assert( sphereDesc );
-  sphereDesc->group = _uiGroup;
-  sphereDesc->materialIndex = m_MaterialIndex;
+  sphereDesc->group             = _uiGroup;
+  sphereDesc->materialIndex     = m_MaterialIndex;
   m_vSphereDesc.push_back( sphereDesc );
-  sphereDesc->radius = radius;
-  sphereDesc->localPose.t = NxVec3( localPos.x, localPos.y, localPos.z );
+  sphereDesc->radius            = radius;
+  sphereDesc->localPose.t       = NxVec3( localPos.x, localPos.y, localPos.z );
   m_pPhXActorDesc->globalPose.t = NxVec3( _vGlobalPos.x, _vGlobalPos.y, _vGlobalPos.z );
 
   if ( skeleton != NULL )

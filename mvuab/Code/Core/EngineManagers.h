@@ -36,6 +36,7 @@ class CWWSoundManager;
 class CGUIManager;
 class CBillboardManager;
 class CCountDownTimerManager;
+class CCinematicManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -71,8 +72,9 @@ public:
   CTextureManager*                  GetTextureManager() const;
   CWWSoundManager*                  GetSoundManager() const;
   CGUIManager*                      GetGUIManager() const;
-  CBillboardManager*        GetBillboardManager() const;
-  CCountDownTimerManager* GetCountDownTimerManager() const;
+  CBillboardManager*                GetBillboardManager() const;
+  CCountDownTimerManager*           GetCountDownTimerManager() const;
+  CCinematicManager*                GetCinematicManager() const;
 
   GET_SET_REF(std::string, ManagersPath);
 
@@ -99,9 +101,10 @@ private:
   CTextureManager*                       m_pTextureManager;
   CWWSoundManager*                       m_pSoundManager;
   CGUIManager*                           m_pGUIManager;
-  CBillboardManager*             m_BillboardManager;
-  CCountDownTimerManager*  m_pCountDownTimerManager;
-  std::string                           m_ManagersPath;
+  CBillboardManager*                     m_BillboardManager;
+  CCountDownTimerManager*                m_pCountDownTimerManager;
+  CCinematicManager*                     m_pCinematicManager;
+  std::string                            m_ManagersPath;
 };
 
 #endif // ENGINE_MANAGER_H
