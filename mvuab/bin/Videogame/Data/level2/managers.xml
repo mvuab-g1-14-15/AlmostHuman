@@ -24,4 +24,5 @@
 	<particle_manager file_config="Data/particles.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<gui_manager file_config="Data/gui.xml"/>
+	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 </managers>

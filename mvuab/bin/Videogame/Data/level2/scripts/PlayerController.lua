@@ -46,7 +46,7 @@ function CPlayerController:__init()
 	self.ShakeVerticalAmplitude = 0.01
 	self.ShakeHorizontalAmplitude = 0.01
 	
-	physic_manager:AddController("Player", self.Radius, self.Height/2.0, g_HalfPi/2.0, 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
+	physic_manager:AddController("Player", self.Radius, self.Height/2.0, math.cos(g_HalfPi/2.0), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
 	engine:Trace("Player Controller initialized")
 end
@@ -101,6 +101,10 @@ function CPlayerController:Update()
 	
 	local l_Velocity = self.Direction * l_Speed
 	
+	if self.Jump then
+		self.CharacterController:Jump(200)
+		self.Jump = false
+	end
 	self.CharacterController:Move(l_Velocity, dt)
 	self.Position = self.CharacterController:GetPosition()
 	
@@ -291,13 +295,16 @@ function CPlayerController:UpdateInput()
 			self.Run = false
 		end
 		if action_manager:DoAction("Crouch") then
+			local l_Can = false
 			if self.Crouch then
-				self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+				l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
 			else
-				self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+				l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
 			end
-			self.Crouch = not self.Crouch
-			self.ActualTimeCrouch = 0.0
+			if l_Can then
+				self.Crouch = not self.Crouch
+				self.ActualTimeCrouch = 0.0
+			end
 		end
 		
 		if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
@@ -319,6 +326,9 @@ function CPlayerController:UpdateInput()
 			self.PrevLeanOut = self.LeanOut
 			self.LeanOut = 0
 			self.ActualTimeLeanOut = 0.0
+		end
+		if action_manager:DoAction("Jump") then
+			self.Jump = true
 		end
 	end
 end

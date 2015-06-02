@@ -17,7 +17,11 @@ public:
     void    AddPitch( float32 radians );
     void    AddHeight( float32 amount );
     
-    Math::Vect3f GetDirection( void ) const { return GetLookAt() - m_Position;}
+    Math::Vect3f GetDirection( void ) const
+    {
+      return GetLookAt() - m_Position;
+    }
+
     Math::Vect3f GetLookAt( void ) const;
     Math::Vect3f GetVecUp( void ) const;
 

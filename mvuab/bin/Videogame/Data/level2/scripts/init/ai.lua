@@ -23,19 +23,19 @@ function check_next_state()
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end
-	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" then
+	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" then
 		if l_DistanceToPlayer <= 8 and l_PlayerInSight then
 			l_NextState = "perseguir"
 		end
 	end
-	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
+	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 		if l_DistanceToPlayer < 4 and l_PlayerInSight then
 			l_NextState = "atacar"
 		end
 	end
-	if l_DistanceToPlayer > 5 or not l_PlayerInSight then
-		l_NextState = "andando"
-	end
+	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
+	--	l_NextState = "andando"
+	--end
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -87,6 +87,8 @@ function esperar()
 		countdowntimer_manager:SetActive(timerName, true)
 	end
 	
+	engine:Trace("Tiempo esperando: " .. countdowntimer_manager:GetElpasedTime(timerName))
+	
 	if countdowntimer_manager:isTimerFinish(timerName) then
 		enemy:ChangeState("andando")
 		countdowntimer_manager:Reset(timerName, false)
@@ -94,10 +96,16 @@ function esperar()
 end
 
 function atacar()
-	enemy = enemy_manager:GetActualEnemy()
-	if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
-		g_Player:AddDamage(5)
-		enemy:SetTimeToShoot(0.0)
+	local l_PlayerInSight = PlayerVisibility(enemy)
+	
+	if l_PlayerInSight then
+		enemy = enemy_manager:GetActualEnemy()
+		if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
+			g_Player:AddDamage(5)
+			enemy:SetTimeToShoot(0.0)
+		end
+	else
+		enemy:ChangeState("andando")
 	end
 end
 

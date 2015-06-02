@@ -17,14 +17,20 @@ public:
 
   void Init();
   void ReLoad();
-  bool Execute();
+  void Execute(const std::string& NameCinematic);
   void Update() {}
   void Render() {}
 
 
 private:
-  CTemplatedVectorMapManager<CCinematicsElement> m_CinematicsElement;
-
+  class CCinematicsItems
+  {
+  public:
+    std::vector<CCinematicsElement*> m_CinematicsItems;
+    CCinematicsItems( const std::string&  Node );
+    void Execute();
+  };
+  CTemplatedVectorMapManager<CCinematicsItems>  m_vCinematicsElement;
   void CleanUp();
   std::string GetNextName();
 };

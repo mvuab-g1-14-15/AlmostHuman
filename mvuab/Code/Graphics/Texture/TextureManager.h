@@ -17,11 +17,13 @@ public:
   CTextureManager();
   CTextureManager( CXMLTreeNode& atts );
   ~CTextureManager();
-  void Init() {}
+  void Init();
   void Update() {}
   void Render() {}
   void Reload();
   CTexture* GetTexture( const std::string& fileName );
+private:
+	CTexture *m_DummyTexture;
 };
 
 #endif //INC_TEXTURE_MANAGER_H

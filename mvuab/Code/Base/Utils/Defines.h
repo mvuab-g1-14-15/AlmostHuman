@@ -87,7 +87,7 @@
 #define GUIInstance             CEngineManagers::GetSingletonPtr()->GetGUIManager()
 #define BillboardMan            CEngineManagers::GetSingletonPtr()->GetBillboardManager()
 #define TimerInstance           CEngine::GetSingletonPtr()->GetTimer()
-#define CountDownTimerInstance            CEngineManagers::GetSingletonPtr()->GetCountDownTimerManager();
+#define CountDownTimerInstance  CEngineManagers::GetSingletonPtr()->GetCountDownTimerManager();
 
 #ifdef _DEBUG
 

@@ -410,8 +410,8 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     if ( !physicUserData->GetPaint() || physicUserData->GetName() == "CharacterController" )
         return;
 
-    NxShape* const* shapes = _pActor->getShapes();
-    NxU32 nShapes = _pActor->getNbShapes();
+    NxShape* const* shapes  = _pActor->getShapes();
+    NxU32 nShapes           = _pActor->getNbShapes();
     Mat44f m;
     Math::CColor color = physicUserData->GetColor();
 
@@ -421,8 +421,8 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
         {
         case NX_SHAPE_PLANE:
         {
-            float distance = shapes[nShapes]->isPlane()->getPlane().d;
-            NxVec3 normal =  shapes[nShapes]->isPlane()->getPlane().normal;
+            float distance  = shapes[nShapes]->isPlane()->getPlane().d;
+            NxVec3 normal   = shapes[nShapes]->isPlane()->getPlane().normal;
             Math::Vect3f n( normal.x, normal.y, normal.z );
             _RM->DrawPlane( 100.f, n, distance, color, 40, 40 );
         }
@@ -433,10 +433,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
             NxVec3 pos = shapes[nShapes]->getGlobalPosition();
             NxF32 m_aux[16];
             shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                        m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                        m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                        m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+            m = ConvertNxF32ToMat44( m_aux );
             NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
             _RM->DrawBox( m, boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
         }
@@ -446,10 +443,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
         {
             NxF32 m_aux[16];
             shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                        m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                        m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                        m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+            m = ConvertNxF32ToMat44( m_aux );
             NxReal radius = shapes[nShapes]->isSphere()->getRadius();
             Math::CColor color = physicUserData->GetColor();
             _RM->DrawSphere( m, radius, color, MAX_ARISTAS );
@@ -460,10 +454,7 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
         {
             NxF32 m_aux[16];
             shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                        m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                        m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                        m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+            m = ConvertNxF32ToMat44( m_aux );
             _RM->SetTransform( m );
             const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
             const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
@@ -498,17 +489,14 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
                 NxU32 p1;
                 NxU32 p2;
             } Triangle;
-            NxU32 nbVerts = meshDesc.numVertices;
-            NxU32 nbTriangles = meshDesc.numTriangles;
-            Point* points = ( Point* )meshDesc.points;
+            NxU32 nbVerts       = meshDesc.numVertices;
+            NxU32 nbTriangles   = meshDesc.numTriangles;
+            Point* points       = ( Point* )meshDesc.points;
             Triangle* triangles = ( Triangle* )meshDesc.triangles;
-            Math::CColor color = physicUserData->GetColor();
+            Math::CColor color  = physicUserData->GetColor();
             NxF32 m_aux[16];
             mesh->getGlobalPose().getColumnMajor44( m_aux );
-            m = Mat44f( m_aux[0], m_aux[4], m_aux[8], m_aux[12],
-                        m_aux[1], m_aux[5], m_aux[9], m_aux[13],
-                        m_aux[2], m_aux[6], m_aux[10], m_aux[14],
-                        m_aux[3], m_aux[7], m_aux[11], m_aux[15] );
+            m = ConvertNxF32ToMat44( m_aux );
             _RM->SetTransform( m );
             Math::Vect3f a, b, c;
 
@@ -541,6 +529,15 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
 
     Math::Mat44f identity = Math::m44fIDENTITY;
     _RM->SetTransform( identity );
+}
+
+//Convierte una un vector de 16 NxF32 a matriz de 4x4
+Math::Mat44f CPhysicsManager::ConvertNxF32ToMat44( NxF32 m[16] )
+{
+  return Math::Mat44f( m[0], m[4], m[8], m[12],
+                       m[1], m[5], m[9], m[13],
+                       m[2], m[6], m[10], m[14],
+                       m[3], m[7], m[11], m[15] );
 }
 
 //----------------------------------------------------------------------------
@@ -597,10 +594,10 @@ bool CPhysicsManager::ReleasePhysicActor( CPhysicActor* _pActor )
 
         m_pScene->releaseActor( *nxActor );
         nxActor = 0;
+        isOk = true;
     }
 
-    //TODO!!!!
-    return true;
+    return isOk;
 }
 
 //----------------------------------------------------------------------------
@@ -611,8 +608,8 @@ bool CPhysicsManager::ReleaseAllActors( void )  //EUserDataFlag _eFlags )
     assert( m_pScene != NULL );
     assert( m_pPhysicsSDK != NULL );
     bool isOk = true;
-    NxActor** l_ppActorList = m_pScene->getActors();
-    NxU32 l_TotalActors   = m_pScene->getNbActors();
+    NxActor** l_ppActorList   = m_pScene->getActors();
+    NxU32     l_TotalActors   = m_pScene->getNbActors();
 
     while ( l_TotalActors -- )
     {
@@ -827,13 +824,13 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton( float size )
     points[6].set( -size,  size, -size );
     points[7].set( -size,  size,  size );
     NxSimpleTriangleMesh stm;
-    stm.numVertices = 8;
-    stm.numTriangles = 6 * 2;
-    stm.pointStrideBytes = sizeof( NxVec3 );
+    stm.numVertices   = 8;
+    stm.numTriangles  = 6 * 2;
+    stm.pointStrideBytes    = sizeof( NxVec3 );
     stm.triangleStrideBytes = sizeof( NxU32 ) * 3;
-    stm.points = points;
+    stm.points    = points;
     stm.triangles = triangles;
-    stm.flags |= NX_MF_FLIPNORMALS;
+    stm.flags     |= NX_MF_FLIPNORMALS;
     return m_pPhysicsSDK->createCCDSkeleton( stm );
 }
 
@@ -875,10 +872,10 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
     //NxUserRaycastReport::ALL_SHAPES
     assert( m_pScene != NULL );
     NxRay ray;
-    ray.dir =  NxVec3( _vDirRay.x, _vDirRay.y, _vDirRay.z );
-    ray.orig = NxVec3( _vPosRay.x, _vPosRay.y, _vPosRay.z );
-    NxRaycastHit hit;
-    NxShape* closestShape = NULL;
+    ray.dir   = NxVec3( _vDirRay.x, _vDirRay.y, _vDirRay.z );
+    ray.orig  = NxVec3( _vPosRay.x, _vPosRay.y, _vPosRay.z );
+    NxRaycastHit  hit;
+    NxShape*      closestShape = NULL;
     //closestShape = m_pScene->raycastClosestShape ( ray, NX_ALL_SHAPES, hit, _uiImpactMask,  NX_MAX_F32, _uiImpactMask );
     //closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, 0xffffffff, NX_MAX_F32, 0xffffffff, NULL, NULL );
     NxReal l_Distance = ( NxReal ) _uiMaxDistance;
@@ -892,12 +889,12 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
         return NULL;
     }
 
-    NxActor* actor = &closestShape->getActor();
-    CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+    NxActor*          actor         = &closestShape->getActor();
+    CPhysicUserData*  impactObject  = ( CPhysicUserData* )actor->userData;
     //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
     assert( impactObject );
-    _Info.m_fDistance   = hit.distance;
-    _Info.m_Normal      = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
+    _Info.m_fDistance       = hit.distance;
+    _Info.m_Normal          = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
     _Info.m_CollisionPoint  = Math::Vect3f( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
     return impactObject;
 }
@@ -908,10 +905,10 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
     //NxUserRaycastReport::ALL_SHAPES
     assert( m_pScene != NULL );
     NxRay ray;
-    ray.dir =  NxVec3( _vDirRay.x, _vDirRay.y, _vDirRay.z );
+    ray.dir  = NxVec3( _vDirRay.x, _vDirRay.y, _vDirRay.z );
     ray.orig = NxVec3( _vPosRay.x, _vPosRay.y, _vPosRay.z );
-    NxRaycastHit hit;
-    NxShape* closestShape = NULL;
+    NxRaycastHit  hit;
+    NxShape*      closestShape = NULL;
     closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, _uiImpactMask );
 
     if ( !closestShape )
@@ -920,12 +917,12 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
         return NULL;
     }
 
-    NxActor* actor = &closestShape->getActor();
-    CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+    NxActor*          actor         = &closestShape->getActor();
+    CPhysicUserData*  impactObject  = ( CPhysicUserData* )actor->userData;
     //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
     assert( impactObject );
-    _Info.m_fDistance   = hit.distance;
-    _Info.m_Normal      = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
+    _Info.m_fDistance       = hit.distance;
+    _Info.m_Normal          = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
     _Info.m_CollisionPoint  = Math::Vect3f( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
     Math::Vect3f l_vDirection( _vDirRay.x - _vPosRay.x, _vDirRay.y - _vPosRay.y,
                                _vDirRay.z - _vPosRay.z );
@@ -955,8 +952,8 @@ std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay,
         return std::string( "" );
     }
 
-    NxActor* actor = &closestShape->getActor();
-    CPhysicUserData* impactObject = ( CPhysicUserData* )actor->userData;
+    NxActor*          actor         = &closestShape->getActor();
+    CPhysicUserData*  impactObject  = ( CPhysicUserData* )actor->userData;
 
     ASSERT( impactObject, "NO IMPACTOBJECT" );
     return impactObject->GetName();
@@ -1013,13 +1010,12 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     {
         if ( shapes[i] != NULL )
         {
-            NxActor* l_pActor = &shapes[i]->getActor();
-            CPhysicUserData* l_pPhysicObject = ( CPhysicUserData* ) l_pActor->userData;
+            NxActor*          l_pActor        = &shapes[i]->getActor();
+            CPhysicUserData*  l_pPhysicObject = ( CPhysicUserData* ) l_pActor->userData;
             //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle ID
             assert( l_pPhysicObject );
             //Antes de meterlo comprobamos que no exista ya (un objeto fisico puede estar compuesto por varias shapes)
-            std::vector<CPhysicUserData*>::iterator it( _ImpactObjects.begin() );
-            std::vector<CPhysicUserData*>::iterator itEnd( _ImpactObjects.end() );
+            std::vector<CPhysicUserData*>::iterator it( _ImpactObjects.begin() ), itEnd( _ImpactObjects.end() );
             bool find = false;
 
             while ( it != itEnd )
@@ -1046,7 +1042,9 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereController( float _f
     std::vector<CPhysicUserData*> l_Result;
     std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor( _fRadiusSphere, _vPosSphere, _uiImpactMask );
 
-    for(std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin() ; it != l_OverlapSphere.end(); ++it)
+    std::vector<CPhysicUserData*>::iterator it      = l_OverlapSphere.begin(),
+                                            it_end  = l_OverlapSphere.end(); 
+    for( ; it != it_end; ++it)
     {
         CPhysicUserData* l_UserData = *it;
         CPhysicController* l_Controller = l_UserData->GetController();
@@ -1066,14 +1064,14 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
 
     float lenSq2 = _Direction.x * _Direction.x + _Direction.y * _Direction.y + _Direction.z * _Direction.z;
 
-    std::vector<CPhysicUserData*>::iterator it = l_OverlapSphere.begin(),
-                                            it_end = l_OverlapSphere.end();
+    std::vector<CPhysicUserData*>::iterator it      = l_OverlapSphere.begin(),
+                                            it_end  = l_OverlapSphere.end();
 
     for ( ; it != it_end; ++it )
     {
-        CPhysicUserData* l_UserData = *it;
-        CPhysicController* l_Controller = l_UserData->GetController();
-        CPhysicActor* l_Actor = l_UserData->GetActor();
+        CPhysicUserData*    l_UserData    = *it;
+        CPhysicController*  l_Controller  = l_UserData->GetController();
+        CPhysicActor*       l_Actor       = l_UserData->GetActor();
 
         Math::Vect3f l_ActorPos;
 
@@ -1087,10 +1085,9 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
         Math::Vect3f l_VectToActor = l_ActorPos - _Position;
         l_VectToActor.Normalize();
 
-        float dot = l_VectToActor.DotProduct( _Direction );
-        float lenSq1 = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z *
-                       l_VectToActor.z;
-		float angle = Math::Utils::Rad2Deg(acos( dot / sqrt( lenSq1 * lenSq2 ) ));
+        float dot     = l_VectToActor.DotProduct( _Direction );
+        float lenSq1  = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z * l_VectToActor.z;
+		    float angle   = Math::Utils::Rad2Deg(acos( dot / sqrt( lenSq1 * lenSq2 ) ));
 
         if ( angle < _Angle )
             l_Result.push_back( l_UserData );
@@ -1102,9 +1099,9 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
 void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower )
 {
     assert( m_pScene );
-    NxSphere worldSphere( NxVec3( posSphere.x, posSphere.y, posSphere.z ), radiusSphere );
-    NxU32 nbShapes = m_pScene->getNbDynamicShapes();
-    NxShape** shapes = new NxShape* [nbShapes];
+    NxSphere  worldSphere( NxVec3( posSphere.x, posSphere.y, posSphere.z ), radiusSphere );
+    NxU32     nbShapes  = m_pScene->getNbDynamicShapes();
+    NxShape** shapes    = new NxShape* [nbShapes];
 
     for ( NxU32 i = 0; i < nbShapes; i++ )
         shapes[i] = NULL;
@@ -1116,13 +1113,13 @@ void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math:
     {
         if ( shapes[i] != NULL )
         {
-            NxActor* actor = &shapes[i]->getActor();
-            CPhysicUserData* physicObject = ( CPhysicUserData* )actor->userData;
+            NxActor*          actor         = &shapes[i]->getActor();
+            CPhysicUserData*  physicObject  = ( CPhysicUserData* )actor->userData;
             //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle ID
             assert( physicObject );
             //Antes de meterlo comprobamos que no exista ya (un objeto fisico puede estar compuesto por varias shapes)
-            std::vector<CPhysicUserData*>::iterator it( impactObjects.begin() );
-            std::vector<CPhysicUserData*>::iterator itEnd( impactObjects.end() );
+            std::vector<CPhysicUserData*>::iterator it( impactObjects.begin() ),
+                                                    itEnd( impactObjects.end() );
             bool find = false;
 
             while ( it != itEnd )
@@ -1153,53 +1150,18 @@ void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math:
         }*/
 }
 
-////void CPhysicsManager::RegisterFunctions (CScriptManager* scriptManager)
-////{
-////  //lua_State* l_pLUAState = scriptManager->GetLuaState();
-////
-////  //using namespace luabind;
-////  //
-////  //// ahora registramos lo que querramos
-////  // module(l_pLUAState)
-////  //   [
-////  //     // registramos la clase CPhysicsManager
-////  //    class_<CPhysicsManager>(CScriptRegister::SetClassName("CPhysicsManager"))
-////
-////
-////  //     // registramos su constructor
-////  //     .def(constructor<>())
-////
-////  //     // registramos sus funciones publicas
-////  //    .def( CScriptRegister::PushFunctionName(AUTO_COMPLETE), &CScriptRegister::AutoComplete)
-////
-////  //    .def( CScriptRegister::PushFunctionName(HELP,"void","void",
-////  //          "Muestra todas las funciones de esta clase"),
-////  //          &CScriptRegister::Help)
-////
-////  //     .def(  CScriptRegister::PushFunctionName("setDebugRender", "void", "bool flag",
-////  //          "Setea a true/false la visibilidad de todos los objetos físicos de la escena"),
-////  //          &CPhysicsManager::SetDebugRenderMode)
-////
-////  //    .def( CScriptRegister::PushFunctionName("getDebugRender", "bool", "void",
-////  //          "Obtiene si se visualiza o no los objetos físicos de la escena"),
-////  //          &CPhysicsManager::GetDebugRenderMode)
-////  //   ];
-////}
-
 void CPhysicsManager::ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPosSphere,
                                       float _fEffectRadius, float _fPower )
 {
-    Math::Vect3f l_vVelocityDirection;
-    Math::Vect3f l_vActorPosition;
-    float l_fDistance;
-    float l_fTotalPower;
-    NxVec3 l_vPos = _pActor->getGlobalPosition();
-    l_vActorPosition = Math::Vect3f( l_vPos.x, l_vPos.y, l_vPos.z );
-    l_vVelocityDirection = l_vActorPosition - _vPosSphere;
+    NxVec3 l_vPos                       = _pActor->getGlobalPosition();
+    Math::Vect3f l_vActorPosition       = Math::Vect3f( l_vPos.x, l_vPos.y, l_vPos.z );
+    Math::Vect3f l_vVelocityDirection   = l_vActorPosition - _vPosSphere;
     l_vVelocityDirection.Normalize();
-    l_fDistance = _vPosSphere.Distance( l_vActorPosition );
-    l_fTotalPower = _fPower * ( ( _fEffectRadius - l_fDistance ) / _fEffectRadius );
-    NxF32 coeff = _pActor->getMass() * l_fTotalPower;
+    
+    float l_fDistance   = _vPosSphere.Distance( l_vActorPosition );
+    float l_fTotalPower = _fPower * ( ( _fEffectRadius - l_fDistance ) / _fEffectRadius );
+
+    NxF32 coeff         = _pActor->getMass() * l_fTotalPower;
     NxVec3 l_vDirection( l_vVelocityDirection.x, l_vVelocityDirection.y, l_vVelocityDirection.z );
     _pActor->addForceAtLocalPos( l_vDirection * coeff, NxVec3( 0, 0, 0 ), NX_IMPULSE, true );
 }
@@ -1232,14 +1194,14 @@ CPhysicActor* CPhysicsManager::GetActor( std::string _ActorName )
     //NxActor** l_ppActorList = m_pScene->getActors();
     //NxU32 l_TotalActors   = m_pScene->getNbActors();
     //
-    CPhysicActor* l_pActor = NULL;
-    int nbActors = m_pScene->getNbActors();
-    NxActor** l_pActors = m_pScene->getActors();
+    CPhysicActor* l_pActor  = NULL;
+    int           nbActors  = m_pScene->getNbActors();
+    NxActor**     l_pActors = m_pScene->getActors();
 
     while ( nbActors-- )
     {
-        NxActor* l_pPhysicActor = *l_pActors++;
-        CPhysicUserData* l_pPhysicUserData = NULL;
+        NxActor*          l_pPhysicActor    = *l_pActors++;
+        CPhysicUserData*  l_pPhysicUserData = NULL;
         l_pPhysicUserData = ( CPhysicUserData* ) l_pPhysicActor->userData;
         //Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
         assert( l_pPhysicUserData );
@@ -1362,9 +1324,9 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
 
     if ( m.Exists() )
     {
-        std::string folder =  m( 0 ).GetPszProperty( "folder" );
-        std::string path = "./assets/PhX/" + folder + "/";
-        unsigned int count = ( unsigned int )m.GetNumChildren();
+        std::string folder  =  m( 0 ).GetPszProperty( "folder" );
+        std::string path    = "./assets/PhX/" + folder + "/";
+        unsigned int count  = ( unsigned int )m.GetNumChildren();
 
         for ( size_t i = 1; i < count; ++i )
         {
@@ -1396,10 +1358,10 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
 int CPhysicsManager::AddMaterial( float restitution, float staticFriction, float dynamicFriction )
 {
     NxMaterialDesc l_MatDesc;
-    l_MatDesc.restitution = restitution;
-    l_MatDesc.staticFriction = staticFriction;
-    l_MatDesc.dynamicFriction = dynamicFriction;
-    l_MatDesc.restitutionCombineMode = NxCombineMode( 0 );
+    l_MatDesc.restitution             = restitution;
+    l_MatDesc.staticFriction          = staticFriction;
+    l_MatDesc.dynamicFriction         = dynamicFriction;
+    l_MatDesc.restitutionCombineMode  = NxCombineMode( 0 );
     return m_pScene->createMaterial( l_MatDesc )->getMaterialIndex();
 }
 
@@ -1417,8 +1379,8 @@ CPhysicUserData* CPhysicsManager::GetUserData( const std::string& name )
 std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radiusSphere,
         const Math::Vect3f& posSphere )
 {
-    EShapesType shapeType = ALL_SHAPES;
-    uint32 impactMask = 1 << ECG_ESCENE;
+    EShapesType shapeType   = ALL_SHAPES;
+    uint32      impactMask  = 1 << ECG_ESCENE;
     // Check the scene
     assert( m_pScene );
     std::set<CPhysicUserData*> l_ImpactObjects;
@@ -1450,10 +1412,10 @@ bool CPhysicsManager::AddActor( const std::string& Name, const std::string& Type
                                 bool Paint, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vLocalPos, const Math::Vect3f& rotation,
                                 NxCCDSkeleton* _pSkeleton, uint32 _uiGroup )
 {
-    CPhysicUserData* l_UserData = new CPhysicUserData( Name );
+    CPhysicUserData*  l_UserData = new CPhysicUserData( Name );
     l_UserData->SetColor( Color );
     l_UserData->SetPaint( Paint );
-    CPhysicActor* l_Actor = new CPhysicActor( l_UserData );
+    CPhysicActor*     l_Actor    = new CPhysicActor( l_UserData );
 
     if ( Type == "Box" )
         l_Actor->AddBoxShape( _vDimension, _vGlobalPos, _vLocalPos, rotation, _pSkeleton, _uiGroup );
@@ -1487,10 +1449,9 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
                                      Math::Vect3f pos,
                                      ECollisionGroup ColliusionGroup, float gravity )
 {
-    CPhysicUserData* l_UserData = new CPhysicUserData( Name );
-    CPhysicController* l_Controller = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
-            l_UserData, pos,
-            gravity );
+    CPhysicUserData*    l_UserData    = new CPhysicUserData( Name );
+    CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
+            l_UserData, pos, gravity );
 
     if ( !CMapManager<CPhysicController>::GetResource( Name ) )
     {
@@ -1516,8 +1477,8 @@ bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name 
         CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
         l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
 
-        CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-        VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
+        CPhysicActor* l_AseMeshActor  = new CPhysicActor( l_pPhysicUserDataASEMesh );
+        VecMeshes     l_CookMeshes    = m_pCookingMesh->GetMeshes();
 
         for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
             l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
