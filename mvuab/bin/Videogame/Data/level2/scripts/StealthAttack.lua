@@ -28,7 +28,10 @@ function CStealthAttack:Update()
 			
 			local angle = GetAngleEnemyPlayer(enemy)
 			
-			engine:Trace("Angle: " .. angle)
+			--if angle < minAngle then
+			engine:Trace("Enemy life before: " .. enemy:GetLife())
+			enemy:AddDamage(enemy:GetLife())
+			engine:Trace("Enemy life after: " .. enemy:GetLife())
 		end
 	end
 	

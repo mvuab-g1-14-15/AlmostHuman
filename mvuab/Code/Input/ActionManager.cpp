@@ -406,6 +406,10 @@ unsigned int CActionManager::strKeyToCode(const std::string &strKey)
     else if("KEY_PAUSE" == strKey) { return(KEY_PAUSE); }
     else if("KEY_SCROLL" == strKey) { return(KEY_SCROLL); }
 
+	else if("MOUSE_BUTTON_LEFT" == strKey) { return(MOUSE_BUTTON_LEFT); }
+    else if("MOUSE_BUTTON_RIGHT" == strKey) { return(MOUSE_BUTTON_RIGHT); }
+    else if("MOUSE_BUTTON_MIDDLE" == strKey) { return(MOUSE_BUTTON_MIDDLE); }
+
     return(0);
 }
 
