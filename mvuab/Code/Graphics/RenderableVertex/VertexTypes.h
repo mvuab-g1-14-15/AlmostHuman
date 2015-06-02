@@ -87,7 +87,7 @@ struct TGEOMETRY
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tanx, tany, tanz, tanw;
   float bx, by, bz, bw;
   unsigned long color;
@@ -116,7 +116,7 @@ struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tanx, tany, tanz, tanw;
   float bx, by, bz, bw;
   unsigned long color;
@@ -144,7 +144,7 @@ struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
 struct TNORMAL_TAN_BI_DIFF_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tanx, tany, tanz, tanw;
   float bx, by, bz, bw;
   unsigned long color;
@@ -253,7 +253,7 @@ struct TNORMAL_T2_DIFF_VERTEX
 struct TNORMAL_T1_DIFF_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   unsigned long color;
   float tu, tv;
 
@@ -278,7 +278,7 @@ struct TNORMAL_T1_DIFF_VERTEX
 struct TNORMAL_DIFF_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   unsigned int color;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
@@ -328,7 +328,7 @@ struct TNORMAL_T2_VERTEX
 struct TNORMAL_T1_REFLECTION_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tu, tv;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
@@ -352,7 +352,7 @@ struct TNORMAL_T1_REFLECTION_VERTEX
 struct TNORMAL_T1_VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
+  float nx, ny, nz, nw;
   float tu, tv;
 
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;

@@ -1,8 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="Plane001" filename="\meshes\Plane001.mesh" />
-  <static_mesh name="Pyramid001" filename="\meshes\Pyramid001.mesh" />
-  <static_mesh name="Teapot001" filename="\meshes\Teapot001.mesh" />
-  <static_mesh name="Tube001" filename="\meshes\Tube001.mesh" />
-  <static_mesh name="Box005" filename="\meshes\Box005.mesh" />
+  <static_mesh name="Parets_terra" filename="\meshes\Parets_terra.mesh" />
 </static_meshes>
