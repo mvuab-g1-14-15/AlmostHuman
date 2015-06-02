@@ -43,6 +43,7 @@ public:
   //---- Main Functions ------------------------------------------------
   void            Move( const Math::Vect3f& _vDirection, float _fElapsedTime );
   void Jump( float _fAmmount, float height );
+  void Jump( float );
   void            CreateController( NxController* _pController, NxScene* _PScene );
 
   //---- Functions -----------------------------------------------------
@@ -128,6 +129,8 @@ private:
   float             m_fStepOffsetControler;
 
   float				m_fVelocity;
+
+  bool				m_bJumping;
 
   Math::Vect3f              m_vExtensio;
 
