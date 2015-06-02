@@ -253,7 +253,7 @@ end
 function CPlayerController:PlayFootstep()
 	if countdowntimer_manager:isTimerFinish("Footstep") then
 		sound_manager:PlayEvent( "Logan_Footstep_Walk", "TestGameObject2d" )
-		countdowntimer_manager:Reset("Footstep")
+		countdowntimer_manager:Reset("Footstep", true)
 	end
 end
 

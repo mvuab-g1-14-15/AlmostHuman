@@ -1,6 +1,6 @@
 tiempoDeEspera = 0
 
-function set_initial_waypoint()
+function init_enemy()
 	enemy = enemy_manager:GetActualEnemy()
 	enemy:SetCurrentPoint(0)
 end
@@ -63,6 +63,7 @@ function andar()
 		else
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
+		enemy:ChangeState("esperar")
 	end
 	
 	if CheckVector(l_DistanceVector) then
@@ -78,12 +79,17 @@ end
 
 function esperar()
 	enemy = enemy_manager:GetActualEnemy()
-	local timer = engine:GetTimer()
-	tiempoDeEspera = tiempoDeEspera + timer:GetElapsedTime()
-	if tiempoDeEspera > 2 then
-		enemy:SetOnExit(true)
-		tiempoDeEspera = 0
-		enemy:SetCurrentPoint(0)
+	local timerName = "Espera" .. enemy:GetName()
+
+	if not countdowntimer_manager:ExistTimer(timerName) then
+		countdowntimer_manager:AddTimer(timerName, 2.0, false)
+	else
+		countdowntimer_manager:SetActive(timerName, true)
+	end
+	
+	if countdowntimer_manager:isTimerFinish(timerName) then
+		enemy:ChangeState("andando")
+		countdowntimer_manager:Reset(timerName, false)
 	end
 end
 

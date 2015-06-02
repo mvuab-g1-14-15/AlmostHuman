@@ -34,7 +34,10 @@ public:
     float32 GetLeftoverTime( std::string _KeyName );
     float32 GetElpasedTime( std::string _KeyName );
 
-    void Reset( std::string _KeyName );
+    void Reset( std::string _KeyName, bool active = true );
+    bool ExistTimer( std::string _KeyName );
+    bool IsActive( std::string _KeyName );
+    void SetActive( std::string _KeyName, bool active );
 };
 
 #endif // __COUNT_DOWN_TIMER_MANAGER_H_
