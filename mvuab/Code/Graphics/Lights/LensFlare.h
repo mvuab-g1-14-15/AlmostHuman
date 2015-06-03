@@ -6,15 +6,31 @@
 
 class CTexture;
 
+class CFlare
+{
+public:
+	CFlare();
+	~CFlare();
+
+	bool Init(const CXMLTreeNode& node);
+
+private:
+
+	Math::Vect3f mColor;
+	CTexture*	  mTexture;
+	float		  mPos;
+};
+
 class CLensFlare
 {
     public:
-        CLensFlare( const CXMLTreeNode& node );
+        CLensFlare();
         ~CLensFlare();
 
+		bool Init(const CXMLTreeNode& node );
+
     protected:
-        std::vector< CTexture*> mTextures;
-        Math::CColor            mColor;
+        std::vector<CFlare*> mFlares;
 };
 
 #endif // LENS_FLARE_H
