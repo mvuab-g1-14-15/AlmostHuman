@@ -1,7 +1,8 @@
 <cinematic>
 	<set_transform object="Bombona" pos="85.0 2.5 16.0" yaw="0.0" pitch="0.0" roll="0.0" size="1.0 1.0 1.0" />
-	<set_camera pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<wait time="3.0" />
+	<!--<play_animation object="" animation="bla" resource_id_file="cinematics_mod.xml" />-->
+	<set_camera pos="82.13 2.47 13.88" yaw="6.9923" pitch="-0.1382" roll="0.0"/>
 	<show_dialog text="C4 colocada" />
+	<wait name="time1" time="3.0" />
 	<hide type="show_dialog" />
 </cinematic>

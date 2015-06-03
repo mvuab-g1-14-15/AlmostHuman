@@ -8,14 +8,16 @@ class CGraphicsManager;
 
 class CSetCameraElement : public CCinematicsElement
 {
-    private:
-		std::string			m_sCamera;
-		Math::Vect3f		m_Position;
     public:
-        CSetCameraElement(CXMLTreeNode& atts);
-        virtual void Execute(CGraphicsManager& GM);
-		virtual void Render(CGraphicsManager &GM);
-		virtual void Render2D(CGraphicsManager &GM);
+      CSetCameraElement(CXMLTreeNode& atts);
+      virtual void Execute(CGraphicsManager& GM);
+		  virtual void Render(CGraphicsManager &GM);
+		  virtual void Render2D(CGraphicsManager &GM);
+    private:
+		  Math::Vect3f		m_Position;
+      float           m_Yaw;
+      float           m_Pitch;
+      float           m_Roll;
 };
 
 #endif //_SET_CAMERA_ELEMENT_

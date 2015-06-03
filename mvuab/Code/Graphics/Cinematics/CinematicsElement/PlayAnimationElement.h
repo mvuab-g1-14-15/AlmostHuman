@@ -11,11 +11,12 @@ class CPlayAnimationElement : public CCinematicsElement
 {
     public:
         CPlayAnimationElement(CXMLTreeNode& atts);
+        void         Update();
         virtual void Execute(CGraphicsManager& GM);
-		virtual void Render(CGraphicsManager &GM);
-		virtual void Render2D(CGraphicsManager &GM);
+		    virtual void Render(CGraphicsManager &GM);
+		    virtual void Render2D(CGraphicsManager &GM);
 	private:
-		CCinematic m_Cinematic;
+		    CCinematic m_Cinematic;
 };
 
 #endif //_PLAY_ANIMATION_ELEMENT_

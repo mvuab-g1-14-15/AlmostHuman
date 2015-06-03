@@ -7,14 +7,14 @@
 class CGraphicsManager;
 
 class CShowDialogElement : public CCinematicsElement
-{
-    private:
-		std::string		m_Text;
+{   
     public:
-        CShowDialogElement(CXMLTreeNode& atts);
-        virtual void Execute(CGraphicsManager& GM);
-		virtual void Render(CGraphicsManager &GM);
-		virtual void Render2D(CGraphicsManager &GM);
+      CShowDialogElement(CXMLTreeNode& atts);
+      virtual void Execute(CGraphicsManager& GM);
+		  virtual void Render(CGraphicsManager &GM);
+		  virtual void Render2D(CGraphicsManager &GM);
+    private:
+		  std::string		m_Text;
 };
 
 #endif //_SHOW_DIALOG_ELEMENT_

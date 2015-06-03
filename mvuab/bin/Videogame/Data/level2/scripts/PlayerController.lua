@@ -64,6 +64,7 @@ function CPlayerController:Update()
 	self.Yaw = l_CameraYaw
 	local l_Yaw = self.CharacterController:GetYaw()
 	
+	
 	if l_CameraYaw == l_Yaw then
 		self.YawMoved = false
 	end

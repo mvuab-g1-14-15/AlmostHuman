@@ -8,6 +8,8 @@
 #include <string>
 #include "Utils/Manager.h"
 
+class CPlayAnimationElement;
+
 class CCinematicManager : public CManager
 {
 public:
@@ -18,20 +20,24 @@ public:
   void Init();
   void ReLoad();
   void Execute(const std::string& NameCinematic);
-  void Update() {}
-  void Render() {}
-
+  void Update();
+  void Render();
+   
 
 private:
   class CCinematicsItems
   {
   public:
-    std::vector<CCinematicsElement*> m_CinematicsItems;
+    CTemplatedVectorMapManager<CCinematicsElement> m_CinematicsItems;
     CCinematicsItems( const std::string&  Node );
     void Execute();
+    std::string GetNextName();
   };
-  CTemplatedVectorMapManager<CCinematicsItems>  m_vCinematicsElement;
+  CTemplatedVectorMapManager<CCinematicsItems>    m_vCinematicsElement;
+  CCinematicsItems*                               m_CurrentCinematicsElement;
+  CPlayAnimationElement*                          m_CurrentCinematic;
+  float                                           m_CurrentTime;
   void CleanUp();
-  std::string GetNextName();
+  std::string GetNextName(); 
 };
 #endif //CINEMATIC_MANAGER_
