@@ -9,6 +9,7 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "EngineManagers.h"
 
+#include "Utils\Defines.h"
 
 CCharacter::CCharacter( const std::string& Name )
     : CName( Name ), CObject3D()
@@ -78,7 +79,16 @@ ECollisionGroup CCharacter::GetCollisionGroup()
 
 void CCharacter::Move(Math::Vect3f direction, float dt)
 {
-    m_Controller->Move(direction, dt);
+	float l_DirYaw = Math::Utils::ATan2( direction.x, direction.z );
+	float l_Yaw = GetYaw();
+
+	float l_YawDif = l_DirYaw - l_Yaw;
+
+	if (Math::Utils::Abs(l_YawDif) < 0.1f )
+		m_Controller->Move(direction, dt);
+	else
+		l_Yaw += (l_YawDif > 0 ? 1 : -1) * 0.1f * deltaTimeMacro;
+
 	m_Controller->SetYaw( Math::Utils::ATan2( direction.x, direction.z ) );
 }
 

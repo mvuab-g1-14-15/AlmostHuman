@@ -133,6 +133,8 @@ bool CStaticMesh::Load( const std::string& FileName )
             CTexture* t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
             if (t) { l_Texture.push_back(t); }
 
+			ASSERT(t, "Unable to find texture: %s in for static mesht %s ", textureName, FileName.c_str() );
+
             free( textureName );
         }
 
@@ -146,7 +148,7 @@ bool CStaticMesh::Load( const std::string& FileName )
 
         // Strider of the vertices
         unsigned char *l_AuxVtxAddress = (unsigned char *) l_VtxsAddress;
-        for (int i = 0; i < l_VrtexCount; i++)
+        for (int j = 0; j < l_VrtexCount; ++j)
         {
             m_VB.push_back(*((Math::Vect3f *) l_AuxVtxAddress));
             l_AuxVtxAddress += l_TypeSize;
@@ -160,15 +162,15 @@ bool CStaticMesh::Load( const std::string& FileName )
         std::fread( l_IdxAddress, sizeof( unsigned short int ) * l_IdxCount, 1, l_pFile );
 
         uint16 *l_Indexs = (uint16 *) l_IdxAddress;
-        for ( int i = 0; i < l_IdxCount; i++ ) //Vector para physx
+        for ( int j = 0; j < l_IdxCount; ++j ) //Vector para physx
         {
-            uint32 l_Idx = l_Indexs[i] + l_MaxIndex;
+            uint32 l_Idx = l_Indexs[j] + l_MaxIndex;
             m_IB.push_back(l_Idx);
         }
 
-        for(unsigned int i = 0; i < m_IB.size(); i++)
+        for( uint32 j = 0; j < m_IB.size(); ++j )
         {
-            l_MaxIndex = (l_MaxIndex <= (int) m_IB[i]) ? m_IB[i] + 1 : l_MaxIndex;
+            l_MaxIndex = (l_MaxIndex <= (int) m_IB[j]) ? m_IB[j] + 1 : l_MaxIndex;
         }
 
         // Now create the renderable vertex

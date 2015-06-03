@@ -597,6 +597,6 @@ fn IsSubmeshComplete subMesh =
 	local nVertex = subMesh.m_VB.m_VertexList.count
 	local nIndex = subMesh.m_IB.m_IndexList.count
 	
-	format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
+	--format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
 	return nVertex != 0 and nIndex != 0
 )
