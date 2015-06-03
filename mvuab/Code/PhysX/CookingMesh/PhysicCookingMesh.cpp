@@ -130,21 +130,27 @@ bool CPhysicCookingMesh::CreatePhysicMesh( const std::string& _Bin_Filename, con
 
  NxTriangleMesh *CPhysicCookingMesh::CreatePhysicMesh(std::vector<Math::Vect3f> &l_VB, std::vector<uint32> &l_IB)
  {
-     NxTriangleMeshDesc l_TriangleMeshDesc;
+	 ASSERT( !l_VB.empty() && !l_IB.empty(), "Null VB or IB" );
+	 if(!l_VB.empty() && !l_IB.empty())
+	 {
+		NxTriangleMeshDesc l_TriangleMeshDesc;
      
-     l_TriangleMeshDesc.numVertices      = ( NxU32 ) l_VB.size();
-     l_TriangleMeshDesc.numTriangles     = ( NxU32 ) l_IB.size() / 3;
+		l_TriangleMeshDesc.numVertices      = ( NxU32 ) l_VB.size();
+		l_TriangleMeshDesc.numTriangles     = ( NxU32 ) l_IB.size() / 3;
 
-    l_TriangleMeshDesc.pointStrideBytes     = sizeof( Math::Vect3f );
-    l_TriangleMeshDesc.triangleStrideBytes  = 3 * sizeof( uint32 );
+	    l_TriangleMeshDesc.pointStrideBytes     = sizeof( Math::Vect3f );
+		l_TriangleMeshDesc.triangleStrideBytes  = 3 * sizeof( uint32 );
 
-    l_TriangleMeshDesc.points         = &l_VB[0].x;
-    l_TriangleMeshDesc.triangles      = &l_IB[0];
-    l_TriangleMeshDesc.flags          = 0;
+		l_TriangleMeshDesc.points         = &l_VB[0].x;
+		l_TriangleMeshDesc.triangles      = &l_IB[0];
+		l_TriangleMeshDesc.flags          = 0;
 
-    CPhysicMemoryWriteBuffer buf;
-    if(!m_pCooking->NxCookTriangleMesh(l_TriangleMeshDesc, buf)) return 0;
-    return m_pPhysicSDK->createTriangleMesh(CPhysicMemoryReadBuffer(buf.data));
+	    CPhysicMemoryWriteBuffer buf;
+	    if(!m_pCooking->NxCookTriangleMesh(l_TriangleMeshDesc, buf)) return 0;
+	    return m_pPhysicSDK->createTriangleMesh(CPhysicMemoryReadBuffer(buf.data));
+	 }
+
+	 return 0;
 }
 
 
