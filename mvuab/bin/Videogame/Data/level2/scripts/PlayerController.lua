@@ -9,6 +9,7 @@ function CPlayerController:__init()
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
 	self.Speed = 4.0
+	self.JumpForce = 180.0
 	
 	self.Forward = Vect3f(0.0)
 	self.Side = Vect3f(0.0)
@@ -103,7 +104,7 @@ function CPlayerController:Update()
 	local l_Velocity = self.Direction * l_Speed
 	
 	if self.Jump then
-		self.CharacterController:Jump(200)
+		self.CharacterController:Jump(self.JumpForce)
 		self.Jump = false
 	end
 	self.CharacterController:Move(l_Velocity, dt)
