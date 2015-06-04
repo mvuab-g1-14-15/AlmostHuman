@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <layer name="solid" />
-  <layer name="characters" /> 
-  <AnimatedInstance name="paladin001" core="paladin" pos="-15.0 0.0 5.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
-  <AnimatedInstance name="enemy001" core="enemy1" pos="-15.0 0.0 5.0" yaw="0.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
+  <layer name="characters" />
   <MeshInstance name="Parets_terra" core="Parets_terra" pos="64.4831 -18.5616 -59.9514" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier" core="barrier" pos="69.1883 -18.4869 -32.6105" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier001" core="barrier001" pos="64.0829 -18.4869 -32.6583" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier002" core="barrier002" pos="59.6234 -18.4869 -32.6395" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Viga" core="Viga" pos="65.8083 -7.77684 -28.9643" yaw="0.0" pitch="0.0" roll="0.00596164" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Viga" core="Viga" pos="65.8083 -7.77684 -28.9643" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Line001" core="Line001" pos="62.1054 -19.1879 -49.7188" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Line002" core="Line002" pos="64.6272 -19.1879 -51.1262" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Llum_passadis_01" core="Llum_passadis_01" pos="79.4282 -8.55895 -33.6349" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -18,12 +16,6 @@
   <MeshInstance name="Llum_passadis_005" core="Llum_passadis_005" pos="77.4891 -8.55895 -77.4669" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Llum_passadis_006" core="Llum_passadis_006" pos="77.0043 -8.55895 -88.4249" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_011" core="Lampara_011" pos="58.5324 -10.4757 -85.5011" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_007" core="Llum_passadis_007" pos="77.0043 -16.0834 -88.4249" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_008" core="Llum_passadis_008" pos="77.4891 -16.0834 -77.4669" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_009" core="Llum_passadis_009" pos="77.886 -16.0834 -68.4967" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_010" core="Llum_passadis_010" pos="78.417 -16.0834 -56.4918" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_011" core="Llum_passadis_011" pos="78.9434 -16.0834 -44.5929" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Llum_passadis_012" core="Llum_passadis_012" pos="79.4282 -16.0834 -33.6349" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_013" core="Lampara_013" pos="66.8099 -10.4757 -85.8673" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_014" core="Lampara_014" pos="67.2272 -10.4757 -76.4347" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_015" core="Lampara_015" pos="58.9497 -10.4757 -76.0685" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -31,93 +23,93 @@
   <MeshInstance name="Lampara_017" core="Lampara_017" pos="67.7108 -10.4757 -65.5039" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_018" core="Lampara_018" pos="60.0602 -10.4757 -50.9665" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_019" core="Lampara_019" pos="68.3377 -10.4757 -51.3327" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Lampara_021" core="Lampara_027" pos="68.9866 -10.4757 -36.6649" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Lampara_021" core="Lampara_021" pos="68.9866 -10.4757 -36.6649" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_022" core="Lampara_022" pos="50.8486 -10.4757 -50.559" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier003" core="barrier003" pos="52.2099 -18.4869 -32.3115" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_023" core="Lampara_023" pos="49.3208 -10.4757 -85.0936" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_024" core="Lampara_024" pos="50.2217 -10.4757 -64.7302" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_025" core="Lampara_025" pos="49.7381 -10.4757 -75.661" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Armari_2" core="Armari_2" pos="87.8607 0.578038 8.02651" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Tauleta_2" core="Tauleta_2" pos="79.3005 0.767794 5.45021" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="base_carga" core="base_carga" pos="83.0633 0.568054 3.57098" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Armari_2" core="Armari_2" pos="87.8607 0.578038 8.02651" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Tauleta_2" core="Tauleta_2" pos="79.3005 0.767794 5.45021" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="base_carga" core="base_carga" pos="83.0633 0.568054 3.57098" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box017" core="Box017" pos="78.1525 -0.972116 1.77238" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Aixeta" core="Aixeta" pos="72.5183 3.08042 17.297" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Focus_1" core="Focus_1" pos="78.7929 4.92231 12.1856" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="alcohol" core="alcohol" pos="70.5192 1.58071 13.164" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Alcohol_2" core="Alcohol_2" pos="74.6382 1.74354 18.7751" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="caixa_1" core="caixa_1" pos="70.9372 1.57986 14.7682" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="caixa_2" core="caixa_2" pos="71.2392 1.58577 15.2642" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="ampolla_1" core="ampolla_1" pos="72.9095 0.485971 7.70805" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Focus_002" core="Focus_002" pos="80.5215 4.94043 10.1746" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Tube001" core="Tube001" pos="83.599 0.752172 11.138" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="ampolla_002" core="ampolla_002" pos="71.0215 1.58822 13.9815" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="ampolla_003" core="ampolla_003" pos="75.6427 1.68892 19.3753" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Cylinder001" core="Cylinder001" pos="87.3837 0.623779 15.0486" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Armari_004" core="Armari_004" pos="77.8439 0.45925 15.4384" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Box019" core="Box019" pos="86.3362 0.554406 16.9246" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Tauleta001" core="Tauleta001" pos="73.5051 1.4018 5.808" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Tuberia" core="Tuberia" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Shape002" core="Shape002" pos="79.2115 1.02776 10.9084" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia" core="subjecte_tuberia" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia002" core="subjecte_tuberia002" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia004" core="subjecte_tuberia004" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia006" core="subjecte_tuberia006" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia007" core="subjecte_tuberia007" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia008" core="subjecte_tuberia008" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia009" core="subjecte_tuberia009" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia010" core="subjecte_tuberia010" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia011" core="subjecte_tuberia011" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia012" core="subjecte_tuberia012" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia016" core="subjecte_tuberia016" pos="79.121 3.75666 10.8462" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia019" core="subjecte_tuberia019" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia020" core="subjecte_tuberia020" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="subjecte_tuberia024" core="subjecte_tuberia024" pos="79.121 3.75666 10.8462" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Sostre001" core="Sostre001" pos="96.0393 4.86138 -1.55898" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret" core="Simbol_paret" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret001" core="Simbol_paret001" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret002" core="Simbol_paret002" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret003" core="Simbol_paret003" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret004" core="Simbol_paret004" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret005" core="Simbol_paret005" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret006" core="Simbol_paret006" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret007" core="Simbol_paret007" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret008" core="Simbol_paret008" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret009" core="Simbol_paret009" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret010" core="Simbol_paret010" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret011" core="Simbol_paret011" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret012" core="Simbol_paret012" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret013" core="Simbol_paret013" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret014" core="Simbol_paret014" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret015" core="Simbol_paret015" pos="79.218 2.27024 10.8724" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret016" core="Simbol_paret016" pos="79.218 2.27024 10.8724" yaw="0.00156896" pitch="-5.43968e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Simbol_paret017" core="Simbol_paret017" pos="79.218 2.27024 10.8724" yaw="0.00156896" pitch="-5.43968e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="robot_3" core="robot_3" pos="80.9875 2.60256 10.7345" yaw="0.00156813" pitch="-5.43681e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="robot_2" core="robot_2" pos="78.9189 2.57507 12.5287" yaw="0.00156869" pitch="-5.43037e-005" roll="-0.0346798" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="robot_1" core="robot_1" pos="77.5444 2.55326 10.6685" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="robot_004" core="robot_004" pos="79.652 2.57456 9.14547" yaw="0.0015687" pitch="-5.44786e-005" roll="-0.0346798" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="taula_operacions" core="taula_operacions" pos="79.2742 0.687768 10.4982" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa3" core="Reixa3" pos="73.54 4.47694 15.5636" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa4" core="Reixa4" pos="69.9906 4.41645 12.5121" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="REixa2" core="REixa2" pos="77.0864 4.53739 18.6125" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa1" core="Reixa1" pos="80.6123 4.59748 21.6439" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa005" core="Reixa005" pos="73.097 4.44902 8.89818" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa006" core="Reixa006" pos="76.6464 4.50952 11.9497" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="REixa003" core="REixa003" pos="80.1928 4.56996 14.9986" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa007" core="Reixa007" pos="83.7187 4.63005 18.03" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa008" core="Reixa008" pos="76.1709 4.48126 5.32213" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa009" core="Reixa009" pos="79.7202 4.54175 8.37362" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="REixa004" core="REixa004" pos="83.2667 4.60219 11.4226" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa010" core="Reixa010" pos="86.7926 4.66229 14.4539" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa011" core="Reixa011" pos="79.2867 4.51393 1.69729" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa012" core="Reixa012" pos="82.8361 4.57443 4.74878" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="REixa005" core="REixa005" pos="86.3825 4.63487 7.79774" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Reixa013" core="Reixa013" pos="89.9084 4.69496 10.8291" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Cylinder004" core="Cylinder004" pos="81.2928 2.38575 6.61361" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Bombona" core="Bombona" pos="80.2091 0.740832 12.7215" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Pot_vidre" core="Pot_vidre" pos="70.9026 1.12587 12.5842" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Pot_vidre001" core="Pot_vidre001" pos="71.1957 1.13189 13.1535" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Pot_vidre002" core="Pot_vidre002" pos="71.1887 1.6207 13.1519" yaw="0.00156878" pitch="-5.43907e-005" roll="-0.0346799" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="manec1" core="manec1" pos="79.2591 2.78551 10.8996" yaw="0.0" pitch="0.0" roll="-0.045345" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Aixeta" core="Aixeta" pos="72.5183 3.08042 17.297" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Focus_1" core="Focus_1" pos="78.7929 4.92231 12.1856" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="alcohol" core="alcohol" pos="70.5192 1.58071 13.164" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Alcohol_2" core="Alcohol_2" pos="74.6382 1.74354 18.7751" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="caixa_1" core="caixa_1" pos="70.9372 1.57986 14.7682" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="caixa_2" core="caixa_2" pos="71.2392 1.58577 15.2642" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="ampolla_1" core="ampolla_1" pos="72.9095 0.485971 7.70805" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Focus_002" core="Focus_002" pos="80.5215 4.94043 10.1746" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Tube001" core="Tube001" pos="83.599 0.752172 11.138" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="ampolla_002" core="ampolla_002" pos="71.0215 1.58822 13.9815" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="ampolla_003" core="ampolla_003" pos="75.6427 1.68892 19.3753" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Cylinder001" core="Cylinder001" pos="87.3837 0.623779 15.0486" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Armari_004" core="Armari_004" pos="77.8439 0.45925 15.4384" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Box019" core="Box019" pos="86.3362 0.554406 16.9246" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Tauleta001" core="Tauleta001" pos="73.5051 1.4018 5.808" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Tuberia" core="Tuberia" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Shape002" core="Shape002" pos="79.2115 1.02776 10.9084" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia" core="subjecte_tuberia" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia002" core="subjecte_tuberia002" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia004" core="subjecte_tuberia004" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia006" core="subjecte_tuberia006" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia007" core="subjecte_tuberia007" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia008" core="subjecte_tuberia008" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia009" core="subjecte_tuberia009" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia010" core="subjecte_tuberia010" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia011" core="subjecte_tuberia011" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia012" core="subjecte_tuberia012" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia016" core="subjecte_tuberia016" pos="79.121 3.75666 10.8462" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia019" core="subjecte_tuberia019" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia020" core="subjecte_tuberia020" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="subjecte_tuberia024" core="subjecte_tuberia024" pos="79.121 3.75666 10.8462" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Sostre001" core="Sostre001" pos="96.0393 4.86138 -1.55898" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret" core="Simbol_paret" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret001" core="Simbol_paret001" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret002" core="Simbol_paret002" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret003" core="Simbol_paret003" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret004" core="Simbol_paret004" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret005" core="Simbol_paret005" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret006" core="Simbol_paret006" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret007" core="Simbol_paret007" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret008" core="Simbol_paret008" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret009" core="Simbol_paret009" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret010" core="Simbol_paret010" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret011" core="Simbol_paret011" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret012" core="Simbol_paret012" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret013" core="Simbol_paret013" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret014" core="Simbol_paret014" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret015" core="Simbol_paret015" pos="79.218 2.27024 10.8724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret016" core="Simbol_paret016" pos="79.218 2.27024 10.8724" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Simbol_paret017" core="Simbol_paret017" pos="79.218 2.27024 10.8724" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="robot_3" core="robot_3" pos="80.9875 2.60256 10.7345" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="robot_2" core="robot_2" pos="78.9189 2.57507 12.5287" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="robot_1" core="robot_1" pos="77.5444 2.55326 10.6685" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="robot_004" core="robot_004" pos="79.652 2.57456 9.14547" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="taula_operacions" core="taula_operacions" pos="79.2742 0.687768 10.4982" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa3" core="Reixa3" pos="73.54 4.47694 15.5636" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa4" core="Reixa4" pos="69.9906 4.41645 12.5121" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="REixa2" core="REixa2" pos="77.0864 4.53739 18.6125" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa1" core="Reixa1" pos="80.6123 4.59748 21.6439" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa005" core="Reixa005" pos="73.097 4.44902 8.89818" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa006" core="Reixa006" pos="76.6464 4.50952 11.9497" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="REixa003" core="REixa003" pos="80.1928 4.56996 14.9986" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa007" core="Reixa007" pos="83.7187 4.63005 18.03" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa008" core="Reixa008" pos="76.1709 4.48126 5.32213" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa009" core="Reixa009" pos="79.7202 4.54175 8.37362" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="REixa004" core="REixa004" pos="83.2667 4.60219 11.4226" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa010" core="Reixa010" pos="86.7926 4.66229 14.4539" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa011" core="Reixa011" pos="79.2867 4.51393 1.69729" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa012" core="Reixa012" pos="82.8361 4.57443 4.74878" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="REixa005" core="REixa005" pos="86.3825 4.63487 7.79774" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Reixa013" core="Reixa013" pos="89.9084 4.69496 10.8291" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Cylinder004" core="Cylinder004" pos="81.2928 2.38575 6.61361" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Bombona" core="Bombona" pos="80.2091 0.740832 12.7215" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Pot_vidre" core="Pot_vidre" pos="70.9026 1.12587 12.5842" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Pot_vidre001" core="Pot_vidre001" pos="71.1957 1.13189 13.1535" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Pot_vidre002" core="Pot_vidre002" pos="71.1887 1.6207 13.1519" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="manec1" core="manec1" pos="79.2591 2.78551 10.8996" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Estanteria_TipusA_01" core="Estanteria_TipusA_01" pos="71.2646 -17.1881 -57.4796" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Estanteria_TipusA_003" core="Estanteria_TipusA_003" pos="72.0147 -17.1706 -49.2487" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Estanteria_TipusA_004" core="Estanteria_TipusA_004" pos="56.8326 -17.1881 -56.8412" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -397,7 +389,7 @@
   <MeshInstance name="Box053" core="Box053" pos="92.2916 37.4239 78.3531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box054" core="Box054" pos="75.1913 37.4239 78.9226" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box055" core="Box055" pos="203.563 24.9834 85.4159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Box056" core="Box056" pos="208.706 -3.92362 239.794" yaw="0.0" pitch="0.0" roll="0.0" scale="0.56064 0.56064 0.56064" layer="solid" />
+  <MeshInstance name="Box056" core="Box056" pos="208.706 -3.92362 239.794" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="enemy_low" core="enemy_low" pos="147.707 -12.2677 277.642" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="enemy_low001" core="enemy_low001" pos="150.259 -12.2677 354.259" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="enemy_low002" core="enemy_low002" pos="152.754 -12.2677 429.189" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -409,6 +401,8 @@
   <MeshInstance name="StraightStair007" core="StraightStair007" pos="82.8685 -10.9213 329.823" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="StraightStair008" core="StraightStair008" pos="105.163 -10.9213 428.745" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Plane012" core="Plane012" pos="211.605 6.06884 507.028" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Lampara_026" core="Lampara_027" pos="60.8474 -10.4757 -36.3622" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Lampara_026" core="Lampara_026" pos="60.8474 -10.4757 -36.3622" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Lampara_027" core="Lampara_027" pos="51.5351 -10.4757 -35.9233" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="barrierCIL_046" core="barrierCIL_046" pos="57.7617 -16.7752 -72.4236" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="plastic_barrel312" core="plastic_barrel312" pos="73.5271 -17.3392 -27.2613" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
 </RenderableObjects>
