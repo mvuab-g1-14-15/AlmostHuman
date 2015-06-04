@@ -8,10 +8,12 @@
 #include "Utils\Manager.h"
 
 class CGraphicsManager;
+class CPhysicUserData;
 
 class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRenderableObjectsManager>, public CManager
 {
     private:
+      std::vector<CPhysicUserData *> m_PhyscsUserData;
       CRenderableObjectsManager* m_DefaultRenderableObjectManager;
       CRenderableObjectsManager* GetRenderableObjectManager( CXMLTreeNode& Node );
 

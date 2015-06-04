@@ -18,19 +18,21 @@
 #include "Math\AABB.h"
 
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
-    : m_DefaultRenderableObjectManager( 0 ), CManager()
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager() : m_DefaultRenderableObjectManager(0), CManager()
 {
 }
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager( CXMLTreeNode& atts )
-    : m_DefaultRenderableObjectManager( 0 ), CManager( atts )
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(CXMLTreeNode& atts) : m_DefaultRenderableObjectManager(0), CManager(atts)
 {
 }
 
 CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 {
     Destroy();
+    for(unsigned int i = 0; i < m_PhyscsUserData.size(); i++)
+    {
+        CHECKED_DELETE(m_PhyscsUserData.at(i));
+    }
 }
 void CRenderableObjectsLayersManager::Destroy()
 {
@@ -189,17 +191,19 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
     }
 
     bool oK = false;
-    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0)
-        if(PhysXMInstance->AddPhysicActor(l_MeshActor))
-            if(PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
-                oK = true;
+    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
+    {
+        oK = true;
+        m_PhyscsUserData.push_back(l_pPhysicUserDataMesh);
+    }
 
     if(!oK)
     {
         PhysXMInstance->ReleasePhysicActor( l_MeshActor );
 
-        CHECKED_DELETE( l_MeshActor );
-        CHECKED_DELETE( l_pPhysicUserDataMesh );
+        CHECKED_DELETE(l_MeshActor);
+        CHECKED_DELETE(l_pPhysicUserDataMesh);
+        CHECKED_DELETE(l_pPhysicUserDataMesh);
     }
     else if ( l_InstanceMesh->GetType() == "dynamic" )
     {
