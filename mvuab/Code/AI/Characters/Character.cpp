@@ -80,16 +80,19 @@ ECollisionGroup CCharacter::GetCollisionGroup()
 void CCharacter::Move(Math::Vect3f direction, float dt)
 {
 	float l_DirYaw = Math::Utils::ATan2( direction.x, direction.z );
-	float l_Yaw = GetYaw();
+	float l_Yaw = m_Controller->GetYaw();
 
 	float l_YawDif = l_DirYaw - l_Yaw;
 
-	if (Math::Utils::Abs(l_YawDif) < 0.1f )
+	if (Math::Utils::Abs(l_YawDif) < 0.5f )
 		m_Controller->Move(direction, dt);
 	else
-		l_Yaw += (l_YawDif > 0 ? 1 : -1) * 0.1f * deltaTimeMacro;
+	{
+		m_Controller->Move(Math::Vect3f(0.0f), dt);
+		l_Yaw += (l_YawDif > 0 ? 1 : -1) * 1.0f * deltaTimeMacro;
+	}
 
-	m_Controller->SetYaw( Math::Utils::ATan2( direction.x, direction.z ) );
+	m_Controller->SetYaw( l_Yaw );
 }
 
 float CCharacter::GetHeight()
