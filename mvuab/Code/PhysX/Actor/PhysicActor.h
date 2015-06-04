@@ -88,52 +88,52 @@ public:
   void        AddPlaneShape( const Math::Vect3f& _vNormal, float _Distance, uint32 _uiGroup = 0 );
 
   //AddShape Functions hardcoded
-  void AddBoxShapeHardcoded( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO,
+  void        AddBoxShapeHardcoded( const Math::Vect3f& _vSize, const Math::Vect3f& _vGlobalPos = v3fZERO,
                              const Math::Vect3f& localPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO );
-  void AddSphereShapeHardcoded( float radius, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO );
+  void        AddSphereShapeHardcoded( float radius, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO );
   //---Activate---
   void        Activate( bool _bActivate );
   void        SetKinematic( bool _bValue );
 
   //---- Properties ( get & Set )---------------------------------------
-  CPhysicUserData*  GetUserData()
+  CPhysicUserData*    GetUserData()
   {
     return m_pUserData;
   }
 
-  void        SetLinearVelocity( const Math::Vect3f& _vVelocity );
+  void                SetLinearVelocity( const Math::Vect3f& _vVelocity );
   Math::Vect3f        GetLinearVelocity();
 
   Math::Vect3f        GetPosition();
   Math::Vect3f        GetRotation();
-  void        SetRotation( const Math::Vect3f& _vRot );
-  void        SetRotation( const Mat33f& _mRot );
+  void                SetRotation( const Math::Vect3f& _vRot );
+  void                SetRotation( const Mat33f& _mRot );
 
-  void        SetAngularVelocity( const Math::Vect3f  _vVelocity );
+  void                SetAngularVelocity( const Math::Vect3f  _vVelocity );
   Math::Vect3f        GetAngularVelocity();
 
-  void        SetGlobalPosition( const Math::Vect3f& _vPos = Math::Vect3f( 0.f, 0.f, 0.f ) );
-  void        MoveGlobalPosition( const Math::Vect3f& _vPos );
+  void                SetGlobalPosition( const Math::Vect3f& _vPos = Math::Vect3f( 0.f, 0.f, 0.f ) );
+  void                MoveGlobalPosition( const Math::Vect3f& _vPos );
 
   Math::Vect3f        GetAngularMomentum();
 
-  Mat33f        GetInertiaTensor();
+  Mat33f              GetInertiaTensor();
 
-  void        SetCollisionGroup( uint32 _uiGroup );
-  uint32        GetColisionGroup( void ) const
+  void                SetCollisionGroup( uint32 _uiGroup );
+  uint32              GetColisionGroup( void ) const
   {
     return m_uCollisionGroups;
   }
-  ECollisionGroup   GetPhXColisionGroup( void ) const
+  ECollisionGroup     GetPhXColisionGroup( void ) const
   {
     return m_uCollisionGroups;
   }
 
-  void        SetTriggerGroup( ECollisionGroup _uiGroup )
+  void                SetTriggerGroup( ECollisionGroup _uiGroup )
   {
     m_TriggerGroup = _uiGroup;
   }
-  ECollisionGroup   GetTriggerGroup( void ) const
+  ECollisionGroup     GetTriggerGroup( void ) const
   {
     return m_TriggerGroup;
   }
@@ -146,7 +146,7 @@ public:
   void        MoveGlobalPoseMat44( const Mat44f& _mMatrix );
 
   //---Get PhsX Info---
-  NxActor*      GetPhXActor()
+  NxActor*        GetPhXActor()
   {
     return m_pPhXActor;
   }
@@ -169,16 +169,16 @@ private:
   //---- Members ---------------------------------------
 private:
 
-  CPhysicUserData*              m_pUserData;
-  NxActor*                  m_pPhXActor;
+  CPhysicUserData*            m_pUserData;
+  NxActor*                    m_pPhXActor;
   NxActorDesc*                m_pPhXActorDesc;
   NxBodyDesc*                 m_pPhXBodyDesc;
 
-  std::vector<NxBoxShapeDesc*>        m_vBoxDesc;
+  std::vector<NxBoxShapeDesc*>            m_vBoxDesc;
   std::vector<NxTriangleMeshShapeDesc*>   m_vMeshDesc;
-  std::vector<NxCapsuleShapeDesc*>      m_vCapsuleDesc;
-  std::vector<NxSphereShapeDesc*>       m_vSphereDesc;
-  std::vector<NxPlaneShapeDesc*>        m_vPlaneDesc;
+  std::vector<NxCapsuleShapeDesc*>        m_vCapsuleDesc;
+  std::vector<NxSphereShapeDesc*>         m_vSphereDesc;
+  std::vector<NxPlaneShapeDesc*>          m_vPlaneDesc;
 
   ECollisionGroup               m_uCollisionGroups;
   ECollisionGroup               m_myCollisionGroups;

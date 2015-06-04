@@ -65,11 +65,11 @@ struct SMaterial
 				local l_Texture1FileName = mat.diffuseMap.filename
 				m_Texture1.FromMaxTexture l_Texture1FileName
 				
-				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
+				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == Normal_Bump then
 				(
 					m_Type = (bit.or m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) )
 					-- Load the texture of bump mapping
-					local l_TextureBumpMappingFileName = mat.bumpMap.filename
+					local l_TextureBumpMappingFileName = mat.bumpMap.normal_map.bitmap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
 				)
 				
@@ -597,6 +597,6 @@ fn IsSubmeshComplete subMesh =
 	local nVertex = subMesh.m_VB.m_VertexList.count
 	local nIndex = subMesh.m_IB.m_IndexList.count
 	
-	format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
+	--format "\tnVertex: %\n\tnIndex: %\n\tresult: %\n" nVertex nIndex (nVertex != 0 and nIndex != 0)
 	return nVertex != 0 and nIndex != 0
 )

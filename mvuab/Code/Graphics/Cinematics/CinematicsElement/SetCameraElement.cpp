@@ -4,15 +4,20 @@
 #include "Cameras\CameraManager.h"
 
 CSetCameraElement::CSetCameraElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-	, m_sCamera( atts.GetPszProperty( "name", "Test_Process" ) )
 	, m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f(0,0,0) ) )
+  , m_Yaw( atts.GetFloatProperty( "yaw", 0.0 ) )
+  , m_Pitch( atts.GetFloatProperty( "pitch", 0.0 ) )
+  , m_Roll( atts.GetFloatProperty( "roll", 0.0 ) )
 {
 }
 
 void CSetCameraElement::Execute( CGraphicsManager& GM )
 {
-	CameraMInstance->SetCurrentCamera(m_sCamera);
-	CameraMInstance->GetCamera(m_sCamera)->SetPosition(m_Position);
+  CCamera* lCamera = CameraMInstance->GetCurrentCamera();
+  lCamera->SetPosition(m_Position);
+  lCamera->SetYaw(m_Yaw);
+  lCamera->SetPitch(m_Pitch);
+  lCamera->SetRoll(m_Roll);
 }
 
 void CSetCameraElement::Render(CGraphicsManager &GM)

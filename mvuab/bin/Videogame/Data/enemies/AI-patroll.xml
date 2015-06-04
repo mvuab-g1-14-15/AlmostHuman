@@ -1,7 +1,7 @@
 <state_machine name="patroll">
 	<state name="inicial">
 		<on_enter>      
-			<action function="set_initial_waypoint"/>
+			<action function="init_enemy"/>
 		</on_enter>
 		<on_exit>
 		</on_exit>
@@ -19,7 +19,7 @@
 			<action function="check_next_state"/>
 		</update>
 	</state>
-	<state name="parado">
+	<state name="esperar">
 		<on_enter>
 		</on_enter>
 		<on_exit>

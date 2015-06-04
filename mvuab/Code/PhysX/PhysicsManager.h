@@ -13,6 +13,7 @@
 #include "PhysicsDefs.h"
 #include "Utils\Manager.h"
 #include "Utils\MapManager.h"
+#include "NxSimpleTypes.h"
 
 class NxPhysicsSDK;
 class NxScene;
@@ -106,12 +107,12 @@ public:
   bool CPhysicsManager::AddController( const std::string& Name, float radius = 0.2f, float height = 1, float slope = 0.2f, float skin_width = 0.01f,
                                        float step = 0.5f, Math::Vect3f pos = Math::Vect3f( 0, 4.0, 0 ), ECollisionGroup ColliusionGroup = ECG_PLAYER, float gravity = -10 );
   ////--- Add/Release Joints
-  bool          AddPhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
-  bool          ReleasePhysicSphericalJoint( CPhysicSphericalJoint* _pJoint );
-  bool          AddPhysicRevoluteJoint( CPhysicRevoluteJoint* _pJoint );
-  bool          ReleasePhysicRevoluteJoint( CPhysicRevoluteJoint* _pJoint );
-  bool          AddPhysicFixedJoint( CPhysicFixedJoint* _pJoint );
-  bool          ReleasePhysicFixedJoint( CPhysicFixedJoint* _pJoint );
+  bool          AddPhysicSphericalJoint		( CPhysicSphericalJoint* _pJoint );
+  bool          ReleasePhysicSphericalJoint	( CPhysicSphericalJoint* _pJoint );
+  bool          AddPhysicRevoluteJoint		( CPhysicRevoluteJoint* _pJoint );
+  bool          ReleasePhysicRevoluteJoint	( CPhysicRevoluteJoint* _pJoint );
+  bool          AddPhysicFixedJoint			( CPhysicFixedJoint* _pJoint );
+  bool          ReleasePhysicFixedJoint		( CPhysicFixedJoint* _pJoint );
 
   //Materials
 
@@ -247,6 +248,7 @@ public:
   CPhysicUserData*    GetUserData( const std::string& name );
   void                    ReleaseElement( const std::string& _ase );
 
+  Math::Mat44f ConvertNxF32ToMat44( NxF32 m[16] );
 private:
   bool          LoadXML();
   void          Release();
@@ -254,16 +256,16 @@ private:
   void          ReleaseToReload();
 
 private:
-  bool          m_bIsOk;
-  bool          m_bDebugRenderMode;
+  bool              m_bIsOk;
+  bool              m_bDebugRenderMode;
   std::string       m_szConfigFileName;
   std::string       m_FileName;
 
   std::map<int, int>    m_CollisionMasks;
 
   //---PhysX------------------------------
-  NxPhysicsSDK*     m_pPhysicsSDK;
-  NxScene*        m_pScene;
+  NxPhysicsSDK*         m_pPhysicsSDK;
+  NxScene*              m_pScene;
   NxControllerManager*  mControllerManager;
   CPhysicUserAllocator* m_pMyAllocator;
   CPhysicCookingMesh*   m_pCookingMesh;
@@ -275,14 +277,13 @@ private:
   bool        m_bNames;         // dice si dibuja los Nombres de los caracteres
   bool        m_bRays;          // dice si dibuja los Rayos de los caracteres
   bool        m_bRenderDebugPositions;  // dice si dibuja las posiciones de caracteres activos
-  bool
-  m_bDistancesSheres;     // dice si dibuja las esferas de las distancias de detección, etc
+  bool        m_bDistancesSheres;     // dice si dibuja las esferas de las distancias de detección, etc
 
   // Físicas escenario
   std::vector<CPhysicUserData*>          m_vUsersData;  // para guardar los UsersData del CreateMeshFromXML
   std::vector<CPhysicActor*>             m_vActors;     // para guardar los Actors del CreateMeshFromXML
   std::map<std::string, unsigned int>    m_vIds;    // para guardar los id's del vector de actors
-  std::vector<CPhysicUserData*> m_vUD;
+  std::vector<CPhysicUserData*>          m_vUD;
 };
 
 #endif //__PHYSX_MANAGER_CLASS_H__

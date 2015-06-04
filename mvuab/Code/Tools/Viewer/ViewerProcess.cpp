@@ -299,9 +299,11 @@ void CViewerProcess::Update()
 
 void CViewerProcess::Render()
 {
+	/*
     uint32 lBaseGridSize = 500;
     GraphicsInstance->DrawGrid( float32( lBaseGridSize ), CColor( 0.5f, 0.5f, 0.5f, 1.0f ), uint32( lBaseGridSize / 3 ),
                                 uint32( lBaseGridSize / 3 ) );
+								*/
 }
 
 void CViewerProcess::RenderScene2D( CGraphicsManager* GM, CFontManager* FM, float ElapsedTime, float FPS )
@@ -370,8 +372,8 @@ void CViewerProcess::CreateViewerCameras()
     (
         CCamera::Free,
         "ViewerFreeCamera",
-        Vect3f( 20.0f, 20.0f, 20.0f ),
-        Vect3f( 0.0f, 0.0f, 0.0f )
+        Vect3f( 62.0f, -14.0f, -56.0f ),
+        Vect3f( 62.0f, -15.0f, -39.0f )
     );
 
     lCM->SetCurrentCamera( "ViewerFreeCamera" );

@@ -39,13 +39,18 @@ void CCountDownTimerManager::Update()
                            it_end = m_Resources.end();
 
     for ( ; it != it_end; ++it )
-        it->second->Update( deltaTimeMacro );
+    {
+        CCountDownTimer* l_Timer = it->second;
+
+        if ( l_Timer->isActive() )
+            l_Timer->Update( deltaTimeMacro );
+    }
 }
 
 bool CCountDownTimerManager::isTimerFinish( std::string _KeyName )
 {
     CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
-    return l_Timer->Finished();
+    return l_Timer ? l_Timer->Finished() : false;
 }
 
 void CCountDownTimerManager::SetTime( std::string _KeyName , float32 _Time, bool _AutomaticReset )
@@ -78,14 +83,32 @@ float32 CCountDownTimerManager::GetElapsedTimeInPercent( std::string _KeyName )
     return l_Timer->GetElapsedTimeInPercent();
 }
 
-void CCountDownTimerManager::Reset( std::string _KeyName )
+void CCountDownTimerManager::Reset( std::string _KeyName, bool active )
 {
     CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
-    l_Timer->Reset();
+    l_Timer->Reset( active );
 }
 
 void CCountDownTimerManager::ChangeTotalTime( std::string _KeyName , float32 _Time )
 {
     CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
     l_Timer->ChangeTotalTime( _Time );
+}
+
+bool CCountDownTimerManager::ExistTimer( std::string _KeyName )
+{
+    CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
+    return l_Timer ? true : false;
+}
+
+bool CCountDownTimerManager::IsActive( std::string _KeyName )
+{
+    CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
+    return l_Timer ? l_Timer->isActive() : false;
+}
+
+void CCountDownTimerManager::SetActive( std::string _KeyName, bool active )
+{
+    CCountDownTimer* l_Timer = ( CCountDownTimer* )GetResource( _KeyName );
+    l_Timer->SetActive( active );
 }

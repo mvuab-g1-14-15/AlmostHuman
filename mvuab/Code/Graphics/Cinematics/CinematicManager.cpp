@@ -7,7 +7,7 @@
 #include "Cinematics\CinematicsElement\WaitTimeElement.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
-
+#include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 
@@ -15,6 +15,7 @@
 #include <sstream>
 #include "Utils\ObjectFactory.h"
 
+ObjectFactory1<CCinematicsElement, CXMLTreeNode, std::string > CommandFactory;
 
 CCinematicManager::CCinematicManager()
   : CManager()
@@ -23,6 +24,8 @@ CCinematicManager::CCinematicManager()
 
 CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
   : CManager( atts )
+  , m_CurrentCinematicsElement( 0 )
+  , m_CurrentTime( 0 )
 {
   /*  TODO RAUL
       LEER XML
@@ -31,31 +34,31 @@ CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
 
 CCinematicManager::~CCinematicManager()
 {
-  m_CinematicsElement.Destroy();
+  m_vCinematicsElement.Destroy();
 }
 
 void CCinematicManager::CleanUp()
 {
-  m_CinematicsElement.Destroy();
+  m_vCinematicsElement.Destroy();
 }
 std::string CCinematicManager::GetNextName()
 {
   std::stringstream l_Str;
   l_Str << "default_cinematics_element_";
-  l_Str << m_CinematicsElement.GetResourcesVector().size();
+  l_Str << m_vCinematicsElement.GetResourcesVector().size();
   return l_Str.str();
 }
 
 void CCinematicManager::Init()
 {
-  ObjectFactory1<CCinematicsElement, CXMLTreeNode, std::string > CommandFactory;
-  // Register all the elements with the object factory class
   CommandFactory.Register( "set_transform", Type2Type<CSetTransformElement>( ) );
   CommandFactory.Register( "play_animation", Type2Type<CPlayAnimationElement>( ) );
   CommandFactory.Register( "set_camera", Type2Type<CSetCameraElement>( ) );
   CommandFactory.Register( "wait_time", Type2Type<CWaitTimeElement>( ) );
   CommandFactory.Register( "show_dialog", Type2Type<CShowDialogElement>( ) );
   CommandFactory.Register( "hide", Type2Type<CHideElement>( ) );
+
+  // Register all the elements with the object factory class
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( mConfigPath.c_str() ) )
@@ -68,48 +71,101 @@ void CCinematicManager::Init()
 
   if ( TreeNode.Exists() )
   {
-    int count = TreeNode.GetNumChildren();
-
-    for ( int i = 0; i < count; ++i )
+    for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
     {
-      const std::string& TagName = TreeNode( i ).GetName();
+      CXMLTreeNode  SubTreeNode = TreeNode( i );
+      const std::string& TagName = SubTreeNode.GetName();
 
-      if ( TagName == "comment" )
-        continue;
+      std::string ResourceFileName = SubTreeNode.GetPszProperty( "resource_id_file", GetNextName().c_str());
 
-	  CCinematicsElement* CinematicsElement = 0;
+	    CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
 
-      CinematicsElement = CommandFactory.Create( TagName.c_str(), TreeNode( i ) );
 
-      if ( !CinematicsElement )
-        LOG_ERROR_APPLICATION( "Comand %s not found in the factory of commands!", TagName.c_str() );
+      if ( !CinematicsItems )
+        LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
       else
       {
-        if ( !m_CinematicsElement.AddResource( TreeNode( i ).GetPszProperty( "name",
-             GetNextName().c_str() ), CinematicsElement ) )
-          CHECKED_DELETE( CinematicsElement );
+        if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetPszProperty( "name",
+             GetNextName().c_str() ), CinematicsItems ) )
+          CHECKED_DELETE( CinematicsItems );
       }
     }
   }
-
-  //  return true;
 }
 
-bool CCinematicManager::Execute()
+void CCinematicManager::Execute(const std::string& NameCinematic)
 {
-  CGraphicsManager* gm = GraphicsInstance;
-  std::vector<CCinematicsElement*>::iterator it =
-    m_CinematicsElement.GetResourcesVector().begin(),
-    it_end = m_CinematicsElement.GetResourcesVector().end();
-
-  for ( ; it != it_end; ++it )
-    ( *it )->Execute( *gm );
-
-  return true;
+  m_CurrentCinematicsElement = m_vCinematicsElement.GetResource(NameCinematic);
 }
 
 void CCinematicManager::ReLoad()
 {
   CleanUp();
   Init();
+}
+
+CCinematicManager::CCinematicsItems::CCinematicsItems( const std::string& Node )
+{
+  CXMLTreeNode lFile;
+
+  if ( !lFile.LoadFile( Node.c_str() ) )
+  {
+    FATAL_ERROR( "Error loading the file %s", Node.c_str() );
+  }
+
+  if ( lFile.Exists() )
+  {
+    for ( int i = 0, count = lFile.GetNumChildren(); i < count; ++i )
+    {
+      const CXMLTreeNode& TreeNode = lFile( i );
+      const std::string& TagName = TreeNode.GetName();
+
+	    CCinematicsElement* CinematicsElement = 0;
+
+      CinematicsElement = CommandFactory.Create( TagName.c_str(), TreeNode );
+
+      if ( !CinematicsElement )
+        LOG_ERROR_APPLICATION( "CinematicElement %s not found in the factory of CinematicsElement!", TagName.c_str() );
+      else
+        if ( !m_CinematicsItems.AddResource( TreeNode.GetPszProperty( "name",
+             GetNextName().c_str() ), CinematicsElement ) )
+          CHECKED_DELETE( CinematicsElement );
+    }
+  }
+}
+
+void CCinematicManager::CCinematicsItems::Execute()
+{
+  CGraphicsManager* gm = GraphicsInstance;
+  std::vector<CCinematicsElement*>::iterator it = m_CinematicsItems.GetResourcesVector().begin(),
+                                             it_end = m_CinematicsItems.GetResourcesVector().end();
+  for ( ; it != it_end; ++it )
+    ( *it )->Execute( *gm );
+}
+
+
+std::string CCinematicManager::CCinematicsItems::GetNextName()
+{
+  std::stringstream l_Str;
+  l_Str << "default_cinematics_item_";
+  l_Str << m_CinematicsItems.GetResourcesVector().size();
+  return l_Str.str();
+}
+
+
+void CCinematicManager::Update() 
+{
+  if(m_CurrentCinematicsElement != 0)
+  {
+    m_CurrentCinematic->Update();
+    m_CurrentTime+=deltaTimeMacro;
+  }
+}
+
+void CCinematicManager::Render() 
+{
+  if(m_CurrentCinematicsElement != 0)
+  {
+    m_CurrentCinematic->Render(*GraphicsInstance);
+  }
 }

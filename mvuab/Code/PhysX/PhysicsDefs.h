@@ -36,7 +36,7 @@ struct SCollisionInfo
     , m_Normal( Math::Vect3f( 0, 0, 0 ) )
     , m_CollisionPoint( Math::Vect3f( 0, 0, 0 ) )
   {}
-  float   m_fDistance;
+  float           m_fDistance;
   Math::Vect3f    m_Normal;
   Math::Vect3f    m_CollisionPoint;
 };

@@ -1,8 +1,0 @@
-<set_transform object="" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" size="0.0 0.0 0.0" />
-<play_animation object="" animation="DestroyWallv1.max" resource_id_file="data/cinematic_mod.xml" />
-<set_camera name="" pos="0.0 0.0 0.0" />
-<wait time="3.0" />
-<show_dialog text="blabla" />
-<hide type="show_dialog" />
-<wait time="2"/>
-<show_dialog text="bla"/>

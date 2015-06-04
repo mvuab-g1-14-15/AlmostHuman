@@ -13,7 +13,7 @@
 class CCountDownTimer
 {
 public:
-    CCountDownTimer( float32 TotalTime, bool automaticReset = false ): m_fTotalTime( TotalTime ), m_fElapsedTime( 0.f ), m_bAutomaticReset( automaticReset ) {}
+    CCountDownTimer( float32 TotalTime, bool automaticReset = false, bool active = true ): m_fTotalTime( TotalTime ), m_fElapsedTime( 0.f ), m_bAutomaticReset( automaticReset ), m_bActive( active ) {}
     CCountDownTimer():                                m_fTotalTime( 0.f ), m_fElapsedTime( 0.f ), m_bAutomaticReset( false ) {}
     virtual ~CCountDownTimer()
     {
@@ -21,9 +21,10 @@ public:
     }
 
     void    SetTime( float32 TotalTime, bool automaticReset = false );
-    void    Reset()
+    void    Reset( bool active = true )
     {
         m_fElapsedTime    = 0.f;
+        m_bActive = active;
     }
     bool    Update( float32 deltaTime );
     bool    Finished();
@@ -49,11 +50,21 @@ public:
     {
         m_fTotalTime = time;
     }
+    bool isActive()
+    {
+        return m_bActive;
+    }
+    void SetActive( bool active )
+    {
+        m_bActive = active;
+    }
+
 
 private:
     float32    m_fTotalTime;
     float32    m_fElapsedTime;
     bool    m_bAutomaticReset;
+    bool    m_bActive;
 };
 
 #endif //__COUNT_DOWN_TIMER_H__

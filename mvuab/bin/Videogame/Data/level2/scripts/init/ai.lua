@@ -1,6 +1,6 @@
 tiempoDeEspera = 0
 
-function set_initial_waypoint()
+function init_enemy()
 	enemy = enemy_manager:GetActualEnemy()
 	enemy:SetCurrentPoint(0)
 end
@@ -23,19 +23,19 @@ function check_next_state()
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end
-	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" then
+	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" then
 		if l_DistanceToPlayer <= 8 and l_PlayerInSight then
 			l_NextState = "perseguir"
 		end
 	end
-	if l_CurrentState == "inicial" or l_CurrentState == "parado" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
+	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 		if l_DistanceToPlayer < 4 and l_PlayerInSight then
 			l_NextState = "atacar"
 		end
 	end
-	if l_DistanceToPlayer > 5 or not l_PlayerInSight then
-		l_NextState = "andando"
-	end
+	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
+	--	l_NextState = "andando"
+	--end
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -63,6 +63,7 @@ function andar()
 		else
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
+		enemy:ChangeState("esperar")
 	end
 	
 	if CheckVector(l_DistanceVector) then
@@ -78,20 +79,33 @@ end
 
 function esperar()
 	enemy = enemy_manager:GetActualEnemy()
-	local timer = engine:GetTimer()
-	tiempoDeEspera = tiempoDeEspera + timer:GetElapsedTime()
-	if tiempoDeEspera > 2 then
-		enemy:SetOnExit(true)
-		tiempoDeEspera = 0
-		enemy:SetCurrentPoint(0)
+	local timerName = "Espera" .. enemy:GetName()
+
+	if not countdowntimer_manager:ExistTimer(timerName) then
+		countdowntimer_manager:AddTimer(timerName, 2.0, false)
+	else
+		countdowntimer_manager:SetActive(timerName, true)
+	end
+	
+	engine:Trace("Tiempo esperando: " .. countdowntimer_manager:GetElpasedTime(timerName))
+	
+	if countdowntimer_manager:isTimerFinish(timerName) then
+		enemy:ChangeState("andando")
+		countdowntimer_manager:Reset(timerName, false)
 	end
 end
 
 function atacar()
-	enemy = enemy_manager:GetActualEnemy()
-	if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
-		g_Player:AddDamage(5)
-		enemy:SetTimeToShoot(0.0)
+	local l_PlayerInSight = PlayerVisibility(enemy)
+	
+	if l_PlayerInSight then
+		enemy = enemy_manager:GetActualEnemy()
+		if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
+			g_Player:AddDamage(5)
+			enemy:SetTimeToShoot(0.0)
+		end
+	else
+		enemy:ChangeState("andando")
 	end
 end
 

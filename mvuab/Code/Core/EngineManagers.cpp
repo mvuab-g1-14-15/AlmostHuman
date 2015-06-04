@@ -28,6 +28,7 @@
 #include "Console/Console.h"
 #include "WWSoundManager.h"
 #include "Timer/CounTDownTimerManager.h"
+#include "Cinematics/CinematicManager.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
   : m_ManagersPath( aPath )
@@ -54,6 +55,7 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
   , m_pGUIManager( 0 )
   , m_pSoundManager( 0 )
   , m_pCountDownTimerManager( 0 )
+  , m_pCinematicManager( 0 )
 {
 }
 
@@ -118,6 +120,8 @@ void CEngineManagers::Init()
                            Type2Type<CBillboardManager>( ) );
   ManagerFactory.Register( "countdowntimer_manager",
                            Type2Type<CCountDownTimerManager>( ) );
+  ManagerFactory.Register( "cinematic_manager",
+                           Type2Type<CCinematicManager>( ) );
 
   CXMLTreeNode l_File;
 
@@ -179,6 +183,7 @@ void CEngineManagers::Init()
   m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
   m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
   m_pCountDownTimerManager  = dynamic_cast<CCountDownTimerManager*>( GetResource( "countdowntimer_manager" ) );
+  m_pCinematicManager = dynamic_cast<CCinematicManager*>( GetResource( "cinematic_manager" ) );
 
   //
   // Init managers
@@ -315,19 +320,19 @@ CLightManager* CEngineManagers::GetLightManager() const
 
 CPhysicsManager* CEngineManagers::GetPhysicsManager() const
 {
-  //ASSERT( m_pPhysicsManager, "Null physics manager" );
+  ASSERT( m_pPhysicsManager, "Null physics manager" );
   return m_pPhysicsManager;
 }
 
 CEnemyManager* CEngineManagers::GetEnemyManager() const
 {
-  //ASSERT( m_pEnemyManager, "Null enemy manager" );
+  ASSERT( m_pEnemyManager, "Null enemy manager" );
   return m_pEnemyManager;
 }
 
 CTriggerManager* CEngineManagers::GetTriggerManager() const
 {
-  //ASSERT( m_pTriggerManager, "Null trigger manager" );
+  ASSERT( m_pTriggerManager, "Null trigger manager" );
   return m_pTriggerManager;
 }
 
@@ -339,7 +344,7 @@ CParticleManager* CEngineManagers::GetParticleManager() const
 
 CGizmosManager* CEngineManagers::GetGizmosManager() const
 {
-  //ASSERT( m_pGizmosManager, "Null gizmo manager" );
+  ASSERT( m_pGizmosManager, "Null gizmo manager" );
   return m_pGizmosManager;
 }
 
@@ -359,4 +364,10 @@ CCountDownTimerManager* CEngineManagers::GetCountDownTimerManager() const
 {
   ASSERT( m_pCountDownTimerManager, "Null CountdownTimer manager" );
   return m_pCountDownTimerManager;
+}
+
+CCinematicManager* CEngineManagers::GetCinematicManager() const
+{
+  ASSERT( m_pCinematicManager, "Null Cinematic manager" );
+  return m_pCinematicManager;
 }

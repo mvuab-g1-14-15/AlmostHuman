@@ -9,9 +9,21 @@ CTextureManager::CTextureManager( CXMLTreeNode& atts )
     : CManager( atts )
 {
 }
+
 CTextureManager::~CTextureManager()
 {
     Destroy();
+}
+
+void CTextureManager::Init()
+{
+	m_DummyTexture = new CTexture();
+	if ( !m_DummyTexture->Load("Data/textures/Dummy.png") )
+    {
+		CHECKED_DELETE( m_DummyTexture );
+		LOG_ERROR_APPLICATION( "The Dummy texture could not be loaded" );
+		m_DummyTexture = 0;
+	}
 }
 
 void CTextureManager::Reload()
@@ -28,7 +40,7 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
     if( fileName == "" )
     {
-        return 0;
+        return m_DummyTexture;
     }
     else if ( m_Resources.find( fileName ) == m_Resources.end() )
     {
@@ -51,7 +63,7 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
         {
             CHECKED_DELETE( t );
             LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-            return 0;
+            return m_DummyTexture;
         }
 
         m_Resources[fileName] = t;

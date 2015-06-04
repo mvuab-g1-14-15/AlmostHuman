@@ -33,7 +33,6 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
     , m_Type( ::CAPSULE )
     , m_bRotado( false )
     , m_fVelocity( 0.0f )
-
 {
     assert( _pUserData );
     m_pUserData->SetController( this );
@@ -185,7 +184,16 @@ Math::Vect3f CPhysicController::GetPosition()
 
 void CPhysicController::Jump( float _fAmmount, float height )
 {
-    m_Jump.StartJump( _fAmmount, height );
+    //m_Jump.StartJump( _fAmmount, height );
+}
+
+void CPhysicController::Jump( float force )
+{
+	if (!m_bJumping)
+	{
+		m_fVelocity = force;
+		m_bJumping = true;
+	}
 }
 
 void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTime )
@@ -207,6 +215,7 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
     NxF32 sharpness = 1.0f;
     NxU32 collisionFlags = 0;
     NxU32 collisionFlagsPre = 0;
+
     //NxU32 Collision = 0;
 
     /*
@@ -227,21 +236,16 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
     mask |= 1 << ECG_ENEMY;
     mask |= 1 << ECG_LIMITS;
 
-    m_pPhXController->move( NxVec3(0.0f, -0.01f, 0.0f) , mask, 0.000001f, collisionFlagsPre, sharpness );
-    if( collisionFlagsPre & NXCC_COLLISION_DOWN)
-    { m_pPhXController->move( l_Direction, mask, 0.000001f, collisionFlags, sharpness ); }
-    else
-    {
-        l_Direction.x = 0.0f;
-        l_Direction.z = 0.0f;
-        m_pPhXController->move( l_Direction, mask, 0.000001f, collisionFlags, sharpness );
-    }
+    m_pPhXController->move( l_Direction, mask, 0.000001f, collisionFlags, sharpness );
 
     //if ( ( collisionFlags & NXCC_COLLISION_DOWN && heightDelta <= 0 ) || ( collisionFlags & NXCC_COLLISION_UP ) )
     //  m_Jump.StopJump();
 
-    if( collisionFlags & NXCC_COLLISION_DOWN)
-    { m_fVelocity = 0.0f; }
+    if( (collisionFlags & NXCC_COLLISION_DOWN) && m_fVelocity < 0.0f )
+    {
+		m_fVelocity = 0.0f;
+		m_bJumping = false;
+	}
 
     NxExtendedVec3 tmp;
     tmp = m_pPhXController->getDebugPosition();

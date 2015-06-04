@@ -1,3 +1,4 @@
 <cinematics>
-	<cinematic name="cinematica_1" resource_id_file="data/cinematic.xml"/>
+	<cinematic name="cinematica_1" resource_id_file="Data/cinematic/cinematic.xml"/>
+	<cinematic name="cinematica_2" resource_id_file="Data/cinematic/cinematic2.xml"/>
 </cinematics>
