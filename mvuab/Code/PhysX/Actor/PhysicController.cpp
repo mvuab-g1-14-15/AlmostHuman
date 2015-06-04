@@ -189,7 +189,7 @@ void CPhysicController::Jump( float _fAmmount, float height )
 
 void CPhysicController::Jump( float force )
 {
-	if (!m_bJumping)
+	if (!m_bJumping && m_fVelocity == 0.0f)
 	{
 		m_fVelocity = force;
 		m_bJumping = true;
@@ -245,6 +245,10 @@ void CPhysicController::Move( const Math::Vect3f& _vDirection, float _ElapsedTim
     {
 		m_fVelocity = 0.0f;
 		m_bJumping = false;
+	}
+	if( (collisionFlags & NXCC_COLLISION_UP) && m_fVelocity > 0.0f )
+    {
+		m_fVelocity = 0.0f;
 	}
 
     NxExtendedVec3 tmp;
