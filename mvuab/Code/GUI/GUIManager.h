@@ -73,8 +73,8 @@ public:
   void SetMessageBox( const std::string& text );
   bool IsVisibleMessage() const
   {
-    assert( m_TextBox );
-    return m_TextBox->IsVisible();
+    assert( m_pTextBox );
+    return m_pTextBox->IsVisible();
   }
   void ActiveWindows( const std::string& inNameWindow );
   void PushWindows( const std::string& inNameWindow );
@@ -123,6 +123,7 @@ public:
   void ShowImage( bool bShow );
   GET_SET_PTR( CConsoleGUI, Console )
   GET_SET_PTR( CImage, PressButton )
+  GET_SET_PTR( CTextBox, TextBox )
   //-----------------------------------------------------------------------------------------------------------//
 
 private:
@@ -145,7 +146,7 @@ private:
   bool  m_RenderPointer;
   bool  m_bLoadedGuiFiles;
   CPointerMouse*  m_PointerMouse;
-  CTextBox* m_TextBox;
+  CTextBox* m_pTextBox;
   CConsoleGUI*  m_pConsole;
   TransitionEffect m_sTransitionEffect;
   CImage* m_pPressButton;

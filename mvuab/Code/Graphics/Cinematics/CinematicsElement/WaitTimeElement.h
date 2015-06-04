@@ -10,11 +10,11 @@ class CWaitTimeElement : public CCinematicsElement
 {
     public:
       CWaitTimeElement(CXMLTreeNode& atts);
+      virtual void Update();
       virtual void Execute(CGraphicsManager& GM);
-		  virtual void Render(CGraphicsManager &GM);
-		  virtual void Render2D(CGraphicsManager &GM);
-    private:
-      float		m_Time;
+		  virtual void Render();
+		  virtual void Render2D(CGraphicsManager &GM);     
+
 };
 
 #endif //_WAIT_TIME_ELEMENT_

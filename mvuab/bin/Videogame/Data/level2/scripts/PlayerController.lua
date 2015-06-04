@@ -224,7 +224,7 @@ end
 
 function CPlayerController:UpdateCamera(camera, dt)
 	local delta = 0.1
-	if not g_ConsoleActivate then
+	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
 			camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
 			if not self.YawMoved and math.abs(action_manager_lua_wrapper.amount) < 2 then

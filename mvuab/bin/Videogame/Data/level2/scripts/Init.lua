@@ -4,6 +4,7 @@ dofile("./data/level2/scripts/PatrolEnemy.lua")
 g_Player = nil
 g_HUD = nil
 g_ConsoleActivate = false
+g_CinematicActive = false
 local initialized = false
 
 
@@ -30,17 +31,23 @@ function update_gameplay()
 		load_gameplay()
 	end
 	
-	if( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
+	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
+	g_CinematicActive = cinematic_manager:GetCinematicActive()
+	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
-		g_Player:Update()
+		if not g_CinematicActive then
+			g_Player:Update()
+			g_HUD:Update()
+		end
+		
 	end
 	
-	g_HUD:Update()
+	
 	--g_Enemy:Update()
 	
-	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
-	if not g_ConsoleActivate then
+	engine:Trace("\ng_ConsoleActivate: " .. tostring(g_ConsoleActivate) .. "\ng_CinematicActive: " .. tostring(g_CinematicActive) .. "\nBool result: " .. tostring((not (g_ConsoleActivate or g_CinematicActive))))
+	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then
 			g_Player:SetPosition(ChangeRoom())
 		end
@@ -51,23 +58,25 @@ function update_gameplay()
 		end
 	end
 	
-	if action_manager:DoAction("ChangeCamera" ) then
-		if "FreeCam" == camera_manager:GetCurrentCameraName() then
-			g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
-			l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
-			l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
-			camera_manager:SetCurrentCamera( "TestProcessCam" )
-			camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
-			camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
-		else
-			l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
-			l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
-			camera_manager:SetCurrentCamera( "FreeCam" )
-			camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
-			camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
-			l_Pos = g_Player:GetPosition()
-			l_Pos.y = l_Pos.y + g_Player:GetHeight()
-			camera_manager:GetCurrentCamera():SetPosition(g_Player:GetPosition())
+	if not (g_ConsoleActivate or g_CinematicActive) then
+		if action_manager:DoAction("ChangeCamera" ) then
+			if "FreeCam" == camera_manager:GetCurrentCameraName() then
+				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
+				l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
+				l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
+				camera_manager:SetCurrentCamera( "TestProcessCam" )
+				camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
+				camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
+			else
+				l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
+				l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
+				camera_manager:SetCurrentCamera( "FreeCam" )
+				camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
+				camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
+				l_Pos = g_Player:GetPosition()
+				l_Pos.y = l_Pos.y + g_Player:GetHeight()
+				camera_manager:GetCurrentCamera():SetPosition(g_Player:GetPosition())
+			end
 		end
 	end
 end

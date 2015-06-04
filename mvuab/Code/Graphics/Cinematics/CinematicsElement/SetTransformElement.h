@@ -11,8 +11,9 @@ class CSetTransformElement: public CCinematicsElement
 {
     public:
       CSetTransformElement(CXMLTreeNode& atts);
+      virtual void Update();
       virtual void Execute(CGraphicsManager& GM);
-		  virtual void Render(CGraphicsManager &GM);
+		  virtual void Render();
 		  virtual void Render2D(CGraphicsManager &GM);
     
   private:

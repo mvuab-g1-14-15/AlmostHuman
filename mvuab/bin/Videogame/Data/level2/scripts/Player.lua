@@ -42,7 +42,7 @@ function CPlayer:Update()
 
 	self.RenderableObject:MakeTransform();
 	
-	if not g_ConsoleActivate then
+	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then
 		   self.Grenade = table.remove(self.GrenadeQueue, 1)
 		   self.Grenade:Throw()

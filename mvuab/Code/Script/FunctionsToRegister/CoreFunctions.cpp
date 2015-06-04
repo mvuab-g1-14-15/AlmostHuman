@@ -29,6 +29,7 @@
 #include "WWSoundManager.h"
 #include "GUIManager.h"
 #include "Timer/CountDownTimerManager.h"
+#include "Cinematics\CinematicManager.h"
 
 #include "luabind_macros.h"
 
@@ -92,6 +93,11 @@ CCountDownTimerManager* GetCountDownTimerManager()
 CScriptManager* GetScriptManager()
 {
   return ScriptMInstance;
+}
+
+CCinematicManager* GetCinematicManager()
+{
+  return CinematicMInstance;
 }
 
 void registerProcess( lua_State* aLuaState )
@@ -178,6 +184,10 @@ void registerManagers( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScriptManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCinematicManager )
   LUA_END_DECLARATION
 }
 

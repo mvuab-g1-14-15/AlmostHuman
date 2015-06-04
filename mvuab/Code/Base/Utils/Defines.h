@@ -88,6 +88,7 @@
 #define BillboardMan            CEngineManagers::GetSingletonPtr()->GetBillboardManager()
 #define TimerInstance           CEngine::GetSingletonPtr()->GetTimer()
 #define CountDownTimerInstance  CEngineManagers::GetSingletonPtr()->GetCountDownTimerManager();
+#define CinematicMInstance      CEngineManagers::GetSingletonPtr()->GetCinematicManager()
 
 #ifdef _DEBUG
 

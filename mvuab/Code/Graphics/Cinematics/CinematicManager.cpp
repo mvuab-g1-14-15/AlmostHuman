@@ -10,6 +10,7 @@
 #include "Timer\Timer.h"
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
+#include "Utils\TemplatedVectorMapManager.h"
 
 #include <Windows.h>
 #include <sstream>
@@ -25,11 +26,13 @@ CCinematicManager::CCinematicManager()
 CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
   : CManager( atts )
   , m_CurrentCinematicsElement( 0 )
-  , m_CurrentTime( 0 )
+  , m_CurrentElement( 0 )
+  , m_CurrentElementId( 0 )
+  , m_CheckBlock( true )
+  , m_CinematicActive( false )
+  , m_FirstFrame( true )
 {
-  /*  TODO RAUL
-      LEER XML
-  */
+
 }
 
 CCinematicManager::~CCinematicManager()
@@ -54,7 +57,7 @@ void CCinematicManager::Init()
   CommandFactory.Register( "set_transform", Type2Type<CSetTransformElement>( ) );
   CommandFactory.Register( "play_animation", Type2Type<CPlayAnimationElement>( ) );
   CommandFactory.Register( "set_camera", Type2Type<CSetCameraElement>( ) );
-  CommandFactory.Register( "wait_time", Type2Type<CWaitTimeElement>( ) );
+  CommandFactory.Register( "wait", Type2Type<CWaitTimeElement>( ) );
   CommandFactory.Register( "show_dialog", Type2Type<CShowDialogElement>( ) );
   CommandFactory.Register( "hide", Type2Type<CHideElement>( ) );
 
@@ -96,6 +99,7 @@ void CCinematicManager::Init()
 void CCinematicManager::Execute(const std::string& NameCinematic)
 {
   m_CurrentCinematicsElement = m_vCinematicsElement.GetResource(NameCinematic);
+  m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById(m_CurrentElementId);
 }
 
 void CCinematicManager::ReLoad()
@@ -155,17 +159,39 @@ std::string CCinematicManager::CCinematicsItems::GetNextName()
 
 void CCinematicManager::Update() 
 {
-  if(m_CurrentCinematicsElement != 0)
+  if(m_CurrentElement != 0)
   {
-    m_CurrentCinematic->Update();
-    m_CurrentTime+=deltaTimeMacro;
+    //Compruebo si este elemento es bloqueante y no está bloqueado por otro
+    if( m_CheckBlock && !m_CinematicActive)
+        m_CinematicActive = m_CurrentElement->GetIsBlocker();
+    
+    m_CheckBlock = false;
+
+    //Compruebo si ha transcurrido el tiempo para esta acción para cambiar al siguiente elemento
+    if(m_CurrentElement->GetTime() < m_CurrentElement->GetCurrentTime() )
+    {
+      m_CurrentElement->SetCurrentTime(0);
+      m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById(++m_CurrentElementId);
+      m_CheckBlock = true;
+      m_FirstFrame = true;
+      if( m_CurrentElement == 0 )
+      {
+        m_CurrentElementId = 0;
+        m_CinematicActive = false;
+        return;
+      }
+    }
+    if(!m_FirstFrame)
+      m_CurrentElement->Update();
+
+    m_FirstFrame = false;
   }
 }
 
 void CCinematicManager::Render() 
 {
-  if(m_CurrentCinematicsElement != 0)
+  if(m_CurrentElement != 0)
   {
-    m_CurrentCinematic->Render(*GraphicsInstance);
+   m_CurrentElement->Render();
   }
 }

@@ -1,16 +1,31 @@
 #include "Cinematics\CinematicsElement\HideElement.h"
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
+#include "GUIManager.h"
+#include "Widgets\TextBox.h"
+#include "Cinematics\CinematicManager.h"
+#include "Timer\Timer.h"
 
 CHideElement::CHideElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
+  , m_Type( atts.GetPszProperty( "type",  "no_type" ) )
 {
+}
+
+void CHideElement::Update()
+{
+  if( m_Type == "show_dialog" )
+  {
+  //  GUIInstance->GetTextBox()->SetVisible(false);
+  //  GUIInstance->GetTextBox()->SetActive(false);
+  }
+  m_CurrentTime += deltaTimeMacro;
 }
 
 void CHideElement::Execute( CGraphicsManager& GM )
 {
 }
 
-void CHideElement::Render(CGraphicsManager &GM)
+void CHideElement::Render()
 {
 }
 

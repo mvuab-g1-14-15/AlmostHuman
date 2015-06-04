@@ -15,6 +15,7 @@ gui_manager = GetGUIManager()
 id_manager = CIdManager()
 countdowntimer_manager = GetCountDownTimerManager()
 script_manager = GetScriptManager()
+cinematic_manager = GetCinematicManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0
