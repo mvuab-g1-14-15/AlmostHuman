@@ -127,86 +127,74 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 
 void CEffectManager::Init()
 {
-    //mEffectPool = new CEffectPool();
-    //bool lOk = mEffectPool->Init();
-
-    // Check if the file exist
-    CXMLTreeNode newFile;
-
-    if ( !newFile.LoadFile( mConfigPath.c_str() ) )
-    {
-        LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",  mConfigPath.c_str() );
-        return;
-    }
-
     // Parse the file and search for the key's
-    CXMLTreeNode l_Node = newFile["effects"];
+    Load(mConfigPath);
+}
 
-    if ( !l_Node.Exists() )
+void CEffectManager::Load( const std::string& lFile )
+{
+  CXMLTreeNode l_Node, lEffectsXml;
+  if ( !lEffectsXml.LoadAndFindNode(lFile.c_str(), "effects", l_Node ) )
+    return;
+
+  for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
+  {
+    CXMLTreeNode& l_CurrentNode = l_Node( i );
+    const std::string& l_TagName = l_CurrentNode.GetName();
+
+    if ( l_TagName == "technique" )
     {
-        LOG_ERROR_APPLICATION( "CEffectManager::Load Tag \"%s\" no existe","effects" );
-        return;
-    }
+      const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );
+      int l_VertexType = l_CurrentNode.GetIntProperty( "vertex_type" );
+      std::string l_EffectName;
+      CXMLTreeNode l_HandlesNode;
 
-    for ( int i = 0; i < l_Node.GetNumChildren(); i++ )
+      for ( int j = 0; j < l_CurrentNode.GetNumChildren(); j++ )
+      {
+        CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
+        const std::string& l_TagName = l_CurrentSubNode.GetName();
+
+        if ( l_TagName == "effect" )
+        {
+          l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
+          CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
+          l_pEffect = new CEffect( l_EffectName );
+
+          if ( !l_pEffect->Load( l_CurrentSubNode ) )
+          {
+            std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
+            LOG_ERROR_APPLICATION( msg_error.c_str() );
+            CHECKED_DELETE( l_pEffect );
+          }
+          else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
+          {
+            CHECKED_DELETE( l_pEffect );
+          }
+        }
+        else if ( l_TagName == "handles" )
+        {
+          l_HandlesNode = l_CurrentSubNode;
+        }
+      }
+
+      CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
+
+      if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
+      {
+        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
+        CHECKED_DELETE( l_NewTechnique );
+      }
+
+      if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
+      {
+        m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
+      }
+    }
+    else if ( l_TagName == "effect" )
     {
-        CXMLTreeNode& l_CurrentNode = l_Node( i );
-        const std::string& l_TagName = l_CurrentNode.GetName();
-
-        if ( l_TagName == "comment" )
-        {
-            continue;
-        }
-
-        if ( l_TagName == "technique" )
-        {
-            const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );
-            int l_VertexType = l_CurrentNode.GetIntProperty( "vertex_type" );
-            std::string l_EffectName;
-            CXMLTreeNode l_HandlesNode;
-
-            for ( int j = 0; j < l_CurrentNode.GetNumChildren(); j++ )
-            {
-                CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-                const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-                if ( l_TagName == "effect" )
-                {
-                    l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
-                    CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
-                    l_pEffect = new CEffect( l_EffectName );
-
-                    if ( !l_pEffect->Load( l_CurrentSubNode ) )
-                    {
-                        std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-                        LOG_ERROR_APPLICATION( msg_error.c_str() );
-                        CHECKED_DELETE( l_pEffect );
-                    }
-                    else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
-                    {
-                        CHECKED_DELETE( l_pEffect );
-                    }
-                }
-                else if ( l_TagName == "handles" )
-                {
-                    l_HandlesNode = l_CurrentSubNode;
-                }
-            }
-
-            CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
-
-            if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
-            {
-                LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
-                CHECKED_DELETE( l_NewTechnique );
-            }
-
-            if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
-            {
-                m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
-            }
-        }
+      Load(l_CurrentNode.GetPszProperty("file"));
     }
+  }
 }
 
 void CEffectManager::ReloadEffects()
@@ -230,3 +218,5 @@ CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName 
 
     return lTech;
 }
+
+

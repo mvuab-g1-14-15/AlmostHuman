@@ -40,6 +40,28 @@ void CXMLTreeNode::Release()
     xmlCleanupParser();
 }
 
+bool CXMLTreeNode::LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode )
+{
+  ASSERT(aFilename && aNodeTag, "Invalid filename or node tag");
+  CXMLTreeNode newFile;
+
+  if ( !LoadFile( aFilename ) )
+  {
+    LOG_ERROR_APPLICATION( "Unable to open %s",  aFilename );
+    return false;
+  }
+
+  // Parse the file and search for the key's
+  aNode = GetNode(aNodeTag);
+
+  if ( !aNode.Exists() )
+  {
+    LOG_ERROR_APPLICATION( "Unable to find %s",  aNodeTag );
+    return false;
+  }
+  return true;
+}
+
 //----------------------------------------------------------------------------
 // Load File
 //----------------------------------------------------------------------------

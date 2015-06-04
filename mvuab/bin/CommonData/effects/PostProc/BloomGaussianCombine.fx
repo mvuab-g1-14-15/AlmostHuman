@@ -1,8 +1,8 @@
 // http://gamedevelopment.tutsplus.com/tutorials/make-a-neon-vector-shooter-in-xna-bloom-and-black-holes--gamedev-9877
 // http://xbox.create.msdn.com/en-US/education/catalog/sample/bloom
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 // Shader parameters
 float Threshold = 0.5;				// Get the threshold of what brightness level we want to glow

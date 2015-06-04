@@ -1,8 +1,8 @@
 // http://www.iquilezles.org/www/articles/fog/fog.htm
 // http://www.terathon.com/lengyel/Lengyel-UnifiedFog.pdf
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 float4 FogPS(in float2 UV : TEXCOORD0) : COLOR
 {

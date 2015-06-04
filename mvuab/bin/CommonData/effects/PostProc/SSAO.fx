@@ -1,8 +1,8 @@
 //http://theorangeduck.com/page/pure-depth-ssao
 
-#include "vertex_types.fxh"
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../vertex_types.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 /*
 float3 normal_from_depth(float depth, float2 texcoords) {

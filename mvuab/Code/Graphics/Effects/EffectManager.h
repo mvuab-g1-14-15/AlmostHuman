@@ -40,6 +40,7 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         void SetCameraEye( const Math::Vect3f& CameraEye );
 
         void Init();
+        void Load( const std::string& lFile );
         void ReloadEffects();
 
         void Update() {};

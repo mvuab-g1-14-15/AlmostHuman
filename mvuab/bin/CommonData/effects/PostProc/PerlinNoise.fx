@@ -3,8 +3,8 @@
 // http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 // http://alaingalvan.tumblr.com/post/92065579169/github-project-3d-perlin-noise-dependancy
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 float3 mod289(float3 x)
 {

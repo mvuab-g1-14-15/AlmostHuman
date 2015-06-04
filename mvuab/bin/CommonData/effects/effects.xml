@@ -13,62 +13,7 @@
 		<effect name="InitRenderDeferredEffect" file="../CommonData/effects/InitRenderDeferred.fx"/>
 		<handles/>
 	</technique>
-	
-	<technique name="VignettingTechnique" vertex_type="1104">
-		<effect name="VignettingEffect" file="../CommonData/effects/Vignetting.fx"/>
-		<handles/>
-	</technique>
-	
-	<technique name="BlurTechnique" vertex_type="1104">
-		<effect name="BlurEffect" file="../CommonData/effects/Blur.fx"/>
-		<handles/>
-	</technique>
-	
-	<technique name="SobelTechnique" vertex_type="1104">
-		<effect name="SobelEffect" file="../CommonData/effects/Sobel.fx"/>
-		<handles/>
-	</technique>
-    
-    <technique name="PerlinNoiseTechnique" vertex_type="1104">
-		<effect name="PerlinNoiseEffect" file="../CommonData/effects/PerlinNoise.fx"/>
-		<handles use_time="true" use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
-	</technique>
-    
-    <technique name="ScatteredLightTechnique" vertex_type="1104">
-		<effect name="ScatteredLightEffect" file="../CommonData/effects/ScatteredLight.fx"/>
-		<handles use_world_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
-	</technique>
-
-	<technique name="FogTechnique" vertex_type="1104">
-		<effect name="FogEffect" file="../CommonData/effects/Fog.fx"/>
-		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
-	</technique>
-	
-	<technique name="SSAOTechnique" vertex_type="1104">
-		<effect name="SSAOEffect" file="../CommonData/effects/SSAO.fx"/>
-		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
-	</technique>
-	
-	<technique name="LensFlareTechnique" vertex_type="1104">
-		<effect name="LensFlareEffect" file="../CommonData/effects/LensFlare.fx"/>
-		<handles/>
-	</technique>
-	
-	<technique name="BloomFilter" vertex_type="1104">
-		<effect name="BloomEffectFilter" file="../CommonData/effects/BloomGaussianCombine.fx"/>
-		<handles/>
-	</technique>
-	
-	<technique name="CombineBloomTechnique" vertex_type="1104">
-		<effect name="BloomEffectGaussianCombine" file="../CommonData/effects/BloomGaussianCombine.fx"/>
-		<handles/>
-	</technique>
-	
-	<technique name="GaussianBlur" vertex_type="1104">
-		<effect name="GaussianBlurEffect" file="../CommonData/effects/GaussianBlur.fx"/>
-		<handles/>
-	</technique>
-	
+		
 	<!-- Effects of Billboards -->
 	<technique name="BillboardAlignedToCameraTechnique">
 		<effect name="BillboardEffectAlignedToCamera" file="../CommonData/effects/BillboardEffect.fx">
@@ -169,5 +114,7 @@
 		</effect>
 		<handles use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
+	
+	<effect file="../CommonData/effects/PostProc/effects_postproc.xml"/>
 	
 </effects>

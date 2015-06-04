@@ -2,8 +2,8 @@
 // http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling/
 // http://dev.theomader.com/gaussian-kernel-calculator/
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
 {

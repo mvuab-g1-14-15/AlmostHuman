@@ -1,6 +1,6 @@
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {

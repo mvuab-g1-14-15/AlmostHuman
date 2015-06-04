@@ -226,7 +226,7 @@ bool CEffect::LoadEffect()
         CHECKED_RELEASE( l_ErrorBuffer );
     }
 
-    ASSERT( l_HR == S_OK, "%s", lErrorMsg.c_str() );
+    ASSERT( l_HR == S_OK, "%s %s", m_FileName.c_str(), lErrorMsg.c_str() );
 
     if( !lOk )
     {

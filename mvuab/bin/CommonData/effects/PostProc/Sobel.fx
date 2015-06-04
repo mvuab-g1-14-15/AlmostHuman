@@ -1,7 +1,7 @@
 // http://es.wikipedia.org/wiki/Operador_Sobel
 
-#include "globals.fxh"
-#include "samplers.fxh"
+#include "../globals.fxh"
+#include "../samplers.fxh"
 
 float3x3 g_SobelX = float3x3
 (

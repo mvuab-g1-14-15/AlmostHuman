@@ -40,6 +40,7 @@ class CXMLTreeNode
         // Read functions
         // -----------------------
         bool                                LoadFile( const char* _pszFileName );
+        bool                        LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
 
         bool                                Exists()
         {

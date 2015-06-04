@@ -17,6 +17,7 @@ public:
   virtual ~CRenderableObjectTechniqueManager();
   void Destroy();
   void Init();
+  void Load(const std::string& aFile);
   void Update(){}
   void Render(){}
   void ReLoad();

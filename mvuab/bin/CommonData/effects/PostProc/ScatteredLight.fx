@@ -1,8 +1,8 @@
 // http://fabiensanglard.net/lightScattering/
 // https://medium.com/community-play-3d/god-rays-whats-that-5a67f26aeac2
 
-#include "samplers.fxh"
-#include "globals.fxh"
+#include "../samplers.fxh"
+#include "../globals.fxh"
 
 #define NUM_SAMPLES 100
 
