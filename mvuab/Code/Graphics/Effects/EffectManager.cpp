@@ -127,17 +127,15 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 
 void CEffectManager::Init()
 {
-    mEffectPool = new CEffectPool();
-
-    bool lOk = mEffectPool->Init();
+    //mEffectPool = new CEffectPool();
+    //bool lOk = mEffectPool->Init();
 
     // Check if the file exist
     CXMLTreeNode newFile;
 
     if ( !newFile.LoadFile( mConfigPath.c_str() ) )
     {
-        LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",
-                               mConfigPath.c_str() );
+        LOG_ERROR_APPLICATION( "CEffectManager::Load No se puede abrir \"%s\"!",  mConfigPath.c_str() );
         return;
     }
 
@@ -146,8 +144,7 @@ void CEffectManager::Init()
 
     if ( !l_Node.Exists() )
     {
-        LOG_ERROR_APPLICATION( "CEffectManager::Load Tag \"%s\" no existe",
-                               "effects" );
+        LOG_ERROR_APPLICATION( "CEffectManager::Load Tag \"%s\" no existe","effects" );
         return;
     }
 
@@ -200,8 +197,7 @@ void CEffectManager::Init()
 
             if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
             {
-                LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!",
-                                       l_TechniquetName.c_str(), l_EffectName.c_str() );
+                LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
                 CHECKED_DELETE( l_NewTechnique );
             }
 
