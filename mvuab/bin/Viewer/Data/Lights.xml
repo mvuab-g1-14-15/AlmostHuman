@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-</lens_flares>
-	<lens_flare name ="flare001" technique="">
-			<flare texture ="" color="1.0 1.0 1.0" position="0.0"/>
-			<flare texture ="" color="1.0 1.0 1.0" position="0.5"/>
-	</lens_flare>
-</lens_flares>
 <lights>
+  <!--<lens_flare name ="flare001" technique="">
+		<flare texture ="" color="1.0 1.0 1.0" position="0.0" size="2 2"/>
+		<flare texture ="" color="1.0 1.0 1.0" position="0.5"/>
+  </lens_flare>-->
   <ambient_light color="0.5 0.5 0.5" />
   <omni_light name="Omni001" pos="18.9709 6.58154 -30.5952" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" />
   <spot_light name="Spot001" pos="-23.4606 9.74805 30.3489" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-16.2957 0.0 34.3381" angle="43.0" fall_off="45.0" intensity="0.5" enabled="true" >

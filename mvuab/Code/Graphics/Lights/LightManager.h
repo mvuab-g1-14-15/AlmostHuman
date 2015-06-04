@@ -3,11 +3,13 @@
 
 #include "Utils/TemplatedVectorMapManager.h"
 #include "Utils/Manager.h"
+#include "LensFlare.h"
 #include "Light.h"
 
 #include <string>
 
 class CGraphicsManager;
+
 
 class CLightManager : public CTemplatedVectorMapManager<CLight>, public CManager
 {
@@ -26,6 +28,7 @@ public:
   const Math::Vect3f& GetAmbientLight() const;
 private:
 	Math::Vect3f mAmbientLightColor;
+	CTemplatedVectorMapManager<CLensFlare> mLensFlares;
 };
 
 //-----------------------------------------------------------------------------

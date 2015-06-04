@@ -6,6 +6,8 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "EngineConfig.h"
+#include "LensFlare.h"
+
 CLightManager::CLightManager()
     : CManager()
 {
@@ -29,56 +31,67 @@ void CLightManager::Init()
 }
 bool CLightManager::Load( const std::string& FileName )
 {
+	mConfigPath = FileName;
+
     CXMLTreeNode newFile;
 
-    if ( !newFile.LoadFile( FileName.c_str() ) )
+	bool lOk = false;
+
+    if ( newFile.LoadFile( FileName.c_str() ) )
     {
-        LOG_ERROR_APPLICATION( "CLightManager::Load --> Error loading XML %s.",
-                               FileName.c_str() );
-        return false;
-    }
+        CXMLTreeNode m = newFile["lights"];
 
-    mConfigPath = FileName;
-    CXMLTreeNode m;
-    m = newFile["lights"];
+		if ( m.Exists() )
+		{
+			for ( uint32 i = 0, lCount = m.GetNumChildren() ; i < lCount; ++i )
+			{
+				const CXMLTreeNode& lCurrentNode = m(i);
+				const std::string & lCurrentNodeName = lCurrentNode.GetName();
 
-    if ( !m.Exists() )
-    {
-        LOG_ERROR_APPLICATION( "Error reading %s, lights no existeix.", FileName.c_str() );
-        return false;
-    }
+				CLight* lNewLight = 0;
 
-    for ( uint32 i = 0, lCount = m.GetNumChildren() ; i < lCount; ++i )
-    {
-        const CXMLTreeNode& lCurrentNode = m(i);
-        const std::string & lCurrentNodeName = lCurrentNode.GetName();
+				if ( lCurrentNodeName == "omni_light" )
+				{
+					lNewLight = new COmniLight(lCurrentNode);
+				}
+				else if ( lCurrentNodeName == "directional_light" )
+				{
+					lNewLight = new CDirectionalLight(lCurrentNode);
+				}
+				else if ( lCurrentNodeName == "spot_light" )
+				{
+					lNewLight = new CSpotLight(lCurrentNode);
+				}
+				else if( lCurrentNodeName == "ambient_light" )
+				{
+					mAmbientLightColor = lCurrentNode.GetVect3fProperty( "color", Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
+				}
+				else if( lCurrentNodeName == "lens_flare" )
+				{
+					CLensFlare* lLensFlare = new CLensFlare();
+					if( lLensFlare->Init( lCurrentNode ) )
+					{
+						mLensFlares.AddResource( lLensFlare->GetName(), lLensFlare );
+					}
+					else
+					{
+						CHECKED_DELETE(lLensFlare);
+						LOG_ERROR_APPLICATION( "Error creating lens flare %s", lLensFlare->GetName().c_str() );
+					}
+				}
 
-        CLight* lNewLight = 0;
+				if ( lNewLight && !AddResource( lNewLight->GetName(), lNewLight ) )
+				{
+					CHECKED_DELETE( lNewLight );
+				}
+			}
+		}
+	}
 
-        if ( lCurrentNodeName == "omni_light" )
-        {
-            lNewLight = new COmniLight(lCurrentNode);
-        }
-        else if ( lCurrentNodeName == "directional_light" )
-        {
-            lNewLight = new CDirectionalLight(lCurrentNode);
-        }
-        else if ( lCurrentNodeName == "spot_light" )
-        {
-            lNewLight = new CSpotLight(lCurrentNode);
-        }
-        else if( lCurrentNodeName == "ambient_light" )
-        {
-            mAmbientLightColor = lCurrentNode.GetVect3fProperty( "color", Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
-        }
+	if( !lOk )
+		LOG_ERROR_APPLICATION( "Error loading Lights %s.", FileName.c_str() );
 
-        if ( lNewLight && !AddResource( lNewLight->GetName(), lNewLight ) )
-        {
-            CHECKED_DELETE( lNewLight );
-        }
-    }
-
-    return true;
+    return lOk;;
 }
 
 void CLightManager::Render()

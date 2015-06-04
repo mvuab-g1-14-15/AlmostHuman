@@ -329,41 +329,33 @@ bool CEffect::SetLights( size_t NumOfLights )
 bool CEffect::SetLight( size_t i_light )
 {
     ResetLightsHandle();
-    CLight* l_pCurrentLight = LightMInstance->GetLight( i_light );
+    CLight* lLight = LightMInstance->GetLight( i_light );
 
-    if ( !l_pCurrentLight )
-    {
-        LOG_ERROR_APPLICATION(
-            "CEffect::SetLight->The light % d was not found in the light manager\n", ( int )i_light );
-        return false;
-    }
+    if ( lLight )
+	{
+		m_LightsEnabled[0] = ( BOOL )lLight == NULL ? 0 : 1;
+		m_LightsType[0] = static_cast<int>( lLight->GetType() );
+		m_LightsStartRangeAttenuation[0] = lLight->GetStartRangeAttenuation();
+		m_LightsEndRangeAttenuation[0] = lLight->GetEndRangeAttenuation();
+		m_LightsPosition[0] = lLight->GetPosition();
+		Math::CColor l_Color = lLight->GetColor();
+		m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(), l_Color.GetGreen(), l_Color.GetBlue() );
+		CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( lLight );
+		if ( l_pDirectionalLight )
+		{
+			m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
 
-    m_LightsEnabled[0] = ( BOOL )l_pCurrentLight == NULL ? 0 : 1;
-    CLight::ELightType l_LightType = l_pCurrentLight->GetType();
-    m_LightsType[0] = static_cast<int>( l_LightType );
-    m_LightsStartRangeAttenuation[0] = l_pCurrentLight->GetStartRangeAttenuation();
-    m_LightsEndRangeAttenuation[0] = l_pCurrentLight->GetEndRangeAttenuation();
-    m_LightsPosition[0] = l_pCurrentLight->GetPosition();
-    Math::CColor l_Color = l_pCurrentLight->GetColor();
-    m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(),
-                                     l_Color.GetGreen(), l_Color.GetBlue() );
-    CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( l_pCurrentLight );
+			CSpotLight* lSpotLight = dynamic_cast<CSpotLight*>( lLight );
+			if ( lSpotLight )
+			{
+				m_LightsAngle[0] = lSpotLight->GetAngle();
+				m_LightsFallOff[0] = lSpotLight->GetFallOff();
+			}
+		}
 
-    if ( l_pDirectionalLight )
-    {
-        m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
-    }
-
-    CSpotLight* l_SpotLight = dynamic_cast<CSpotLight*>( l_pCurrentLight );
-
-    if ( l_SpotLight )
-    {
-        m_LightsAngle[0] = l_SpotLight->GetAngle();
-        m_LightsFallOff[0] = l_SpotLight->GetFallOff();
-    }
-
-    //Begin the render of the shadow
-    l_pCurrentLight->BeginRenderEffectManagerShadowMap( this );
+		//Begin the render of the shadow
+		lLight->BeginRenderEffectManagerShadowMap( this );
+	}
     return true;
 }
 
