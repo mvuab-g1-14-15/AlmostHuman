@@ -257,4 +257,15 @@ void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, fl
 	OutTangent = normalize(OutTangent);
 }
 
+// http://stackoverflow.com/questions/5149544/can-i-generate-a-random-number-inside-a-pixel-shader
+
+float random( float2 p ) // Version 2
+{
+   // e^pi (Gelfond's constant)
+   // 2^sqrt(2) (Gelfond–Schneider constant)
+   float2 r = float2( 23.14069263277926, 2.665144142690225 );
+ //return frac( cos( mod( 12345678., 256. * dot(p,r) ) ) ); // ver1
+   return frac(cos(dot(p,r)) * 123456.); // ver2
+}
+
 #endif // !defined( GLOBALS_FXH )

@@ -69,4 +69,8 @@
 		<default_technique vertex_type="1104" technique="CombineBloomTechnique"/>
 	</pool_renderable_object_technique>
 	
+	<pool_renderable_object_technique name="SSAO_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="SSAOTechnique"/>
+	</pool_renderable_object_technique>
+	
 </renderable_object_techniques>

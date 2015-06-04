@@ -44,6 +44,11 @@
 		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
 	</technique>
 	
+	<technique name="SSAOTechnique" vertex_type="1104">
+		<effect name="SSAOEffect" file="../CommonData/effects/SSAO.fx"/>
+		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
+	</technique>
+	
 	<technique name="LensFlareTechnique" vertex_type="1104">
 		<effect name="LensFlareEffect" file="../CommonData/effects/LensFlare.fx"/>
 		<handles/>
