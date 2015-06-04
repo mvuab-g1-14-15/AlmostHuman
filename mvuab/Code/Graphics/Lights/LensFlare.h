@@ -2,9 +2,11 @@
 #define LENS_FLARE_H
 
 #include "XML/XMLTreeNode.h"
+#include "Utils\Name.h"
 #include <vector>
 
 class CTexture;
+class CEffectTechnique;
 
 class CFlare
 {
@@ -15,13 +17,12 @@ public:
 	bool Init(const CXMLTreeNode& node);
 
 private:
-
 	Math::Vect3f mColor;
 	CTexture*	  mTexture;
 	float		  mPos;
 };
 
-class CLensFlare
+class CLensFlare : public CName
 {
     public:
         CLensFlare();
@@ -31,6 +32,7 @@ class CLensFlare
 
     protected:
         std::vector<CFlare*> mFlares;
+		CEffectTechnique*    mTechnique;
 };
 
 #endif // LENS_FLARE_H
