@@ -1,5 +1,6 @@
 --includes
 fileIn "XMLStruct.ms"
+filein "Utils.ms"
 
 fn ExportLights filenameXML aLights =
 (
@@ -29,10 +30,11 @@ fn ExportLights filenameXML aLights =
 		(
 			try
 			(
-			
+				l_IsLightExportable = IsLightExportable iLight
+			 format "Light name % and IsExportable: % \n " iLight.name l_IsLightExportable
 			if superclassof iLight == light then
 			(	
-				if classof iLight != Targetobject and classof iLight != freeDirect and classof iLight != freeSpot  then
+				if classof iLight != Targetobject and classof iLight != freeDirect and classof iLight != freeSpot AND l_IsLightExportable == true then
 				(
 					local l_LightName = iLight.name
 					--create the light node

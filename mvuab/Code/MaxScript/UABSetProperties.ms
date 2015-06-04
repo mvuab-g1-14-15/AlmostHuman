@@ -1,67 +1,84 @@
-rollout UABSetProperties "UABSetProperties" width:511 height:607
+rollout UABSetProperties "UABSetProperties" width:600 height:670
 (
-	GroupBox RenderGroup "Render" pos:[16,16] width:226 height:280
-	checkbox ExportCheckRender "Export" pos:[21,37] width:61 height:17
-	dropdownList ExportListRender "" pos:[112,35] width:120 height:21 enabled:false items:#("instance_mesh", "animated_mesh")
-	checkbox VisibleCheckRender "Visible" pos:[21,63] width:51 height:17
-	checkbox LayerCheckRender "Layer" pos:[21,86] width:51 height:17
-	dropdownList LayerListRender "" pos:[112,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
-	label AnimModelRender "Anim. model" pos:[21,120] width:64 height:18
-	edittext AnimModelEditText "" pos:[112,120] width:120 height:19
+	GroupBox RenderGroup "Render" pos:[45,16] width:226 height:280
+	checkbox ExportCheckRender "Export" pos:[50,37] width:61 height:17
+	dropdownList ExportListRender "" pos:[141,35] width:120 height:21 enabled:false items:#("instance_mesh", "animated_mesh")
+	checkbox VisibleCheckRender "Visible" pos:[50,63] width:51 height:17
+	checkbox LayerCheckRender "Layer" pos:[50,86] width:51 height:17
+	dropdownList LayerListRender "" pos:[141,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
+	label AnimModelRender "Anim. model" pos:[50,118] width:64 height:18
+	edittext AnimModelEditText "" pos:[141,120] width:120 height:19
 	
-	GroupBox PhysicsGroup "Physics" pos:[258,91] width:226 height:72
-	checkbox GenerateCheckPhysics "Generate" pos:[262,110] width:66 height:13
-	checkbox LayerCheckPhysics "Layer" pos:[262,138] width:62 height:13
-	dropdownList GenerateListPhysics "" pos:[347,106] width:123 height:21 enabled:false items:#("triangle_mesh", "convex_shape", "box_shape", "sphere_shape", "plane_shape", "capsule_shape")
-	dropdownList LayerListPhysics "" pos:[347,138] width:123 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
+	GroupBox PhysicsGroup "Physics" pos:[340,90] width:226 height:72
+	checkbox GenerateCheckPhysics "Generate" pos:[344,109] width:66 height:13
+	checkbox LayerCheckPhysics "Layer" pos:[344,137] width:62 height:13
+	dropdownList GenerateListPhysics "" pos:[429,105] width:123 height:21 enabled:false items:#("triangle_mesh", "convex_shape", "box_shape", "sphere_shape", "plane_shape", "capsule_shape")
+	dropdownList LayerListPhysics "" pos:[429,137] width:123 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
 	
-	GroupBox LogicGroup "Logic" pos:[258,17] width:223 height:69
-	checkbox GenerateCheckLogic "Generate" pos:[261,35] width:66 height:13
-	dropdownList GenerateListLogic "" pos:[347,31] width:123 height:21 enabled:false items:#("", "event_box", "event_sphere", "stairs", "grippable_edges", "edges_where_to_be_dropped")
+	GroupBox LogicGroup "Logic" pos:[340,16] width:223 height:69
+	checkbox GenerateCheckLogic "Generate" pos:[343,34] width:66 height:13
+	dropdownList GenerateListLogic "" pos:[429,30] width:123 height:21 enabled:false items:#("", "event_box", "event_sphere", "stairs", "grippable_edges", "edges_where_to_be_dropped")
 	
-	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[21,216] width:217 height:17
-	checkbox WorldTransformCheckBox "Don't export world transform" pos:[21,240] width:217 height:17
-	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[21,184] width:91 height:17
-	edittext LinkedToBoneEditText "" pos:[112,184] width:120 height:19
-	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[21,268] width:217 height:17
-	label lbl7 "Technique" pos:[21,152] width:64 height:18
-	edittext LineEditTechnique "" pos:[112,152] width:120 height:19
-	checkbox ShowNormalCheck "Show Normal" pos:[261,57] width:139 height:13
-	GroupBox grp15 "Events" pos:[258,168] width:226 height:40
-	checkbox GenerateEventsCheckBox "Generate" pos:[263,187] width:66 height:13
-	dropdownList GenerateEventsComboBox "" pos:[347,183] width:123 height:21 enabled:false items:#("", "event_1", "event_2", "event_3", "event_4", "event_5")
+	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[50,216] width:217 height:17
+	checkbox WorldTransformCheckBox "Don't export world transform" pos:[50,240] width:217 height:17
+	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[50,184] width:91 height:17
+	edittext LinkedToBoneEditText "" pos:[141,184] width:120 height:19
+	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[50,268] width:217 height:17
+	label lbl7 "Technique" pos:[50,152] width:64 height:18
+	edittext LineEditTechnique "" pos:[141,152] width:120 height:19
+	checkbox ShowNormalCheck "Show Normal" pos:[343,56] width:139 height:13
+	GroupBox grp15 "Events" pos:[340,167] width:226 height:40
+	checkbox GenerateEventsCheckBox "Generate" pos:[345,186] width:66 height:13
+	dropdownList GenerateEventsComboBox "" pos:[429,182] width:123 height:21 enabled:false items:#("", "event_1", "event_2", "event_3", "event_4", "event_5")
 	
-	GroupBox GBTracks "Traks" pos:[257,211] width:226 height:40
-	checkbox GenerateTracksCheckBox "Generate" pos:[264,228] width:66 height:13
-	GroupBox GBCameras "Cameras" pos:[257,256] width:226 height:40
-	checkbox CycleCameraCheckBox "Cycle" pos:[265,274] width:66 height:13
-	checkbox ReverseCameraCheckBox "Reverse" pos:[350,270] width:123 height:21
+	GroupBox GBTracks "Traks" pos:[339,210] width:226 height:40
+	checkbox GenerateTracksCheckBox "Generate" pos:[346,227] width:66 height:13
+	GroupBox GBCameras "Cameras" pos:[339,255] width:226 height:40
+	checkbox CycleCameraCheckBox "Cycle" pos:[347,273] width:66 height:13
+	checkbox ReverseCameraCheckBox "Reverse" pos:[432,269] width:123 height:21
 	
 	--  LIGHTS	
-	GroupBox GBLights "Lights" pos:[256,303] width:226 height:279
+	GroupBox GBLights "Lights" pos:[43,307] width:244 height:282
 	
 		--Shadow Map
-		label lbl8 "ShadowMapFormatType" pos:[261,326] width:120 height:18
-		edittext ShadowMapFormatType "" pos:[383,326] width:90 height:19
-		label lbl9 "ShadowMapHeight" pos:[261,346] width:120 height:18
-		edittext ShadowMapHeight "" pos:[383,346] width:90 height:19
-		label lbl10 "ShadowMapWidth" pos:[261,366] width:120 height:18
-		edittext ShadowMapWidth "" pos:[383,366] width:90 height:19
-		checkbox ExportGenerateShadowMap "Generate Shadow Map" pos:[300,401] width:150 height:13
+	label lbl8 "ShadowMapFormatType" pos:[49,341] width:120 height:18
+	edittext ShadowMapFormatType "" pos:[171,341] width:90 height:19
+	label lbl9 "ShadowMapHeight" pos:[48,367] width:120 height:18
+	edittext ShadowMapHeight "" pos:[170,367] width:90 height:19
+	label lbl10 "ShadowMapWidth" pos:[48,394] width:120 height:18
+	edittext ShadowMapWidth "" pos:[170,394] width:90 height:19
+	checkbox ExportGenerateShadowMap "Generate Shadow Map" pos:[89,420] width:150 height:13
 
 		--Static Shadow Map
-		label lbl11 "ShadowMapWidth" pos:[261,426] width:120 height:18
-		edittext StaticShadowMapFormatType "" pos:[383,426] width:90 height:19
-		label lbl12 "StaticShadowMapHeight" pos:[261,446] width:120 height:18
-		edittext StaticShadowMapHeight "" pos:[383,446] width:90 height:19
-		label lbl13 "StaticShadowMapWidth" pos:[261,466] width:120 height:18
-		edittext StaticShadowMapWidth "" pos:[383,466] width:90 height:19
-		checkbox ExportGenerateStaticShadowMap "Generate Static Shadow Map" pos:[301,506] width:150 height:13
+	label lbl11 "ShadowMapWidth" pos:[48,447] width:120 height:18
+	edittext StaticShadowMapFormatType "" pos:[170,447] width:90 height:19
+	label lbl12 "StaticShadowMapHeight" pos:[48,473] width:120 height:18
+	edittext StaticShadowMapHeight "" pos:[170,473] width:90 height:19
+	label lbl13 "StaticShadowMapWidth" pos:[47,496] width:120 height:18
+	edittext StaticShadowMapWidth "" pos:[169,496] width:90 height:19
+	checkbox ExportGenerateStaticShadowMap "Generate Static Shadow Map" pos:[88,527] width:150 height:13
 		
-		checkbox ExportLightsCheckBox "Export Light" pos:[270,552] width:66 height:13
+	checkbox ExportLightsCheckBox "no_export_lights" pos:[50,561] width:118 height:18
 	
-	button GetButton "Get" pos:[16,311] width:112 height:29
-	button SetButton "Set" pos:[134,311] width:108 height:29
+	--  TRIGGERS	
+	GroupBox grp8 "Trigger" pos:[338,305] width:226 height:40
+	edittext TriggerName "" pos:[431,320] width:120 height:19
+	label lblTriggerName "Trigger_Name" pos:[349,323] width:68 height:18
+	
+	-- COVERS
+	GroupBox grp10 "Covers" pos:[338,355] width:226 height:40
+	edittext CoverName "" pos:[430,371] width:120 height:19
+	label lblCoverName "Cover_Name" pos:[348,373] width:64 height:18
+	
+	-- PATHS
+	GroupBox grp11 "AI Paths" pos:[337,408] width:226 height:69
+	edittext PathsName "" pos:[425,427] width:120 height:19
+	label lblPathsName "Path_Name" pos:[347,426] width:64 height:18
+	edittext PathsNumNode "" pos:[484,452] width:60 height:19
+	label lbl28 "Node_Num (index of node)" pos:[347,453] width:129 height:18
+	
+	button GetButton "Load" pos:[335,486] width:112 height:29
+	button SetButton "Save" pos:[453,486] width:108 height:29
 	
 	--ENABLE OR DISABLE DROPLISTDOWN
 	
@@ -117,6 +134,7 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 	
 	fn GetPropertyEditText aProperty EditText=
 	(
+		--format "AProperty: % \n" aProperty 
 		if aProperty!="" then
 		(
 			if aProperty!=undefined then
@@ -131,6 +149,7 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 	)
 	fn GetPropertyList aProperty List=
 	(
+
 		if aProperty!="" then
 		(
 			if aProperty!=undefined then
@@ -181,6 +200,9 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 	
 	fn SetPropertyEditText Obj Type EditText=
 	(
+		
+		--format "Objeto % Type % EditText % \n" Obj Type EditText.text
+		
 		if EditText.text !="" then
 		(
 			setUserProp Obj Type EditText.text
@@ -195,7 +217,7 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 	(
 		setUserProp Obj Type List.items[List.selection]
 	)
-	fn SetProperties Obj=
+	fn SetEachProperties Obj=
 	(
 		if ((classof  Obj)==ObjectSet)==false then
 		(
@@ -268,7 +290,12 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 				SetPropertyCheck Obj "export_static_shadow_map" ExportGenerateStaticShadowMap
 				
 				--ADD/UPDATE PROPERTY EXPORT LIGHTS
-				SetPropertyCheck Obj "export_lights" ExportLightsCheckBox
+				SetPropertyCheck Obj "no_export_lights" ExportLightsCheckBox
+				
+			SetPropertyEditText Obj "Trigger_Name" TriggerName
+			SetPropertyEditText Obj "Cover_Name" CoverName
+			SetPropertyEditText Obj "Path_Name" PathsName
+			SetPropertyEditText Obj "Path_Num_Node" PathsNumNode
 				
 			ObjAnterior=Obj
 		)
@@ -344,7 +371,13 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 					SetPropertyCheck Obj[i] "export_static_shadow_map" ExportGenerateStaticShadowMap
 				
 				--ADD/UPDATE PROPERTY EXPORT LIGHTS
-				SetPropertyCheck Obj[i] "export_lights" ExportLightsCheckBox
+				SetPropertyCheck Obj[i] "no_export_lights" ExportLightsCheckBox
+			
+				SetPropertyEditText Obj[i] "Trigger_Name" TriggerName
+				SetPropertyEditText Obj[i] "Cover_Name" CoverName
+				SetPropertyEditText Obj[i] "Path_Name" PathsName
+				SetPropertyEditText Obj[i] "Path_Num_Node" PathsNumNode
+				
 				ObjAnterior=Obj[i]
 			)
 		)
@@ -356,6 +389,7 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 	
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
+	
 	
 	on ExportCheckRender changed theState do
 	(
@@ -520,16 +554,26 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 			--Static Shadow Map GET 
 			Property=getUserProp $ "Static_Shadow_Map_Format_Type" 
 			GetPropertyEditText Property StaticShadowMapFormatType
-			Property=getUserProp as String $ "Static_Shadow_Map_Height" 
+			Property=getUserProp $ "Static_Shadow_Map_Height" 
 			GetPropertyEditText Property StaticShadowMapHeight
-			Property=getUserProp as String $ "Static_Shadow_Map_Width" 
+			Property=getUserProp $ "Static_Shadow_Map_Width" 
 			GetPropertyEditText Property StaticShadowMapWidth
 			Property=getUserProp $ "export_static_shadow_map"
 			GetPropertyCheckBox Property ExportGenerateStaticShadowMap
-		
-			--OBTAIN EXPORT LIGHTS
-			Property=getUserProp $ "export_lights"
+			
+			--OBTAIN COVER NAME
+			Property=getUserProp $ "no_export_lights"
 			GetPropertyCheckBox Property ExportLightsCheckBox
+						
+			Property=getUserProp $ "Trigger_Name" 
+			GetPropertyEditText Property TriggerName
+			Property=getUserProp $ "Cover_Name" 
+			GetPropertyEditText Property CoverName
+			Property=getUserProp $ "Path_Name" 
+			GetPropertyEditText Property PathsName
+			Property=getUserProp $ "Path_Num_Node" 
+			GetPropertyEditText Property PathsNumNode
+				
 			ObjAnterior=$
 		)
 		else
@@ -545,17 +589,17 @@ rollout UABSetProperties "UABSetProperties" width:511 height:607
 			(
 				if (queryBox "Are the properties are of another object, you are sure assign it to another?")==true then
 				(
-					SetProperties $
+					SetEachProperties $
 				)
 			)
 			else
 			(
-				SetProperties $
+				SetEachProperties $
 			)
 		)
 		else
 		(
-			SetProperties $
+			SetEachProperties $
 		)
 		
 	)

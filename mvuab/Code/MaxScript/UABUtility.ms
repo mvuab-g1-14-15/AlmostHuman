@@ -3,39 +3,48 @@ fileIn "XMLExporter.ms"
 fileIn "Cinematics.ms"
 filein "RNMUtils.ms"
 filein "ExportGraph.ms"
+filein "Utils.ms"
+filein "Triggers.ms"
+filein "Paths.ms"
+filein "Covers.ms"
 		
-utility UABUtility "UAB Utility" width:163 height:500
+utility UABUtility "UAB Utility" width:170 height:761
 (
 	button SetPathButton "Select Path" pos:[13,9] width:127 height:30
 	label PathLabel "" pos:[15,44] width:132 height:29
 	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,84] width:79 height:25
 	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,110] width:94 height:25
 	dropdownList LevelList "" pos:[13,135] width:135 height:21
-	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:127
+	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:171
 	button LightsButton "Lights" pos:[21,171] width:57 height:17
 	button MeshButton "Mesh" pos:[85,171] width:57 height:17
-	button CinematicsButton "Cinematics" pos:[83,193] width:57 height:17
+	button CinematicsButton "Cinematics" pos:[85,193] width:57 height:17
 	button CameraButon "Camera" pos:[21,192] width:57 height:17
 	button GraphButton "Graph" pos:[21,213] width:57 height:17
 	button RouteButton "Route" pos:[85,213] width:57 height:17
-	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,234] width:124 height:17
-	button SceneButton "Scene" pos:[18,257] width:124 height:17
+	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,281] width:124 height:17
+	button SceneButton "Scene" pos:[18,304] width:124 height:17
 	
-	GroupBox grp9 "Generate RNM" pos:[10,286] width:141 height:112
-	button Xbtn "Generate X" pos:[15,310] width:124 height:17
-	button Ybtn "Generate Y" pos:[15,340] width:124 height:17
-	button Zbtn "Generate Z" pos:[15,370] width:124 height:17
+	GroupBox grp9 "Generate RNM" pos:[12,379] width:141 height:112
+	button Xbtn "Generate X" pos:[17,403] width:124 height:17
+	button Ybtn "Generate Y" pos:[17,433] width:124 height:17
+	button Zbtn "Generate Z" pos:[17,463] width:124 height:17
 	
-	GroupBox SetRNM "Set RNM Texture" pos:[10,410] width:141 height:75
-	button LightmapXBtn "X" pos:[20,434] width:34 height:17
-	label LightmapXLabel "" pos:[46,433] width:94 height:20
-	button LightmapYBtn "Y" pos:[65,434] width:34 height:17
-	label LightmapYLabel "" pos:[46,465] width:94 height:20
-	button LightmapZBtn "Z" pos:[105,434] width:34 height:17
-	label LightmapZLabel "" pos:[46,491] width:94 height:20
-	button ApplyBtn "Apply" pos:[20,460] width:120 height:17
+	GroupBox SetRNM "Set RNM Texture" pos:[12,503] width:141 height:76
+	button LightmapXBtn "X" pos:[22,527] width:34 height:17
+	label LightmapXLabel "" pos:[48,526] width:94 height:20
+	button LightmapYBtn "Y" pos:[67,527] width:34 height:17
+	label LightmapYLabel "" pos:[48,558] width:94 height:20
+	button LightmapZBtn "Z" pos:[107,527] width:34 height:17
+	label LightmapZLabel "" pos:[48,584] width:94 height:20
+	button ApplyBtn "Apply" pos:[22,553] width:120 height:17
 	
-	button SetProperties "Set Properties" pos:[10,500] width:141 height:17
+	button SetProperties "Set Properties" pos:[13,342] width:141 height:17
+	
+	button TriggerButton "Triggers" pos:[20,237] width:57 height:17
+	button CoverButton "Covers" pos:[84,237] width:57 height:17
+	button PathButton "Paths" pos:[20,260] width:57 height:17
+	
 	
 	on UABUtility open do
 	(
@@ -49,14 +58,12 @@ utility UABUtility "UAB Utility" width:163 height:500
 		if data_path!=undefined then
 			PathLabel.text=data_path
 	)
-	
 	on LightsButton pressed do
 	(
 		--export lights
 		local LightDir = PathLabel.text + "\\lights.xml"
-		ExportLights LightDir
+		ExportLights LightDir selection
 	)
-	
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
@@ -64,7 +71,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		--export Mesh
 		local MeshDir = PathLabel.text + "\\meshes"
 		local TexturesDir = PathLabel.text + "\\textures"		
-
+	
 		DoesFolderExist MeshDir
 		
 		local UniqueInstanceArray = GetUniqueInstances()
@@ -129,6 +136,33 @@ utility UABUtility "UAB Utility" width:163 height:500
 		graphExporter.Calculate()
 		graphExporter.ExportRouteXML RouteDir
 	)
+	on TriggerButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		TriggerDir = PathLabel.text + "\\triggers.xml"
+		
+		ExportTriggers TriggerDir		
+	)
+	on PathButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		PathDir = PathLabel.text + "\\paths.xml"
+		
+		ExportPaths PathDir		
+	)
+	on CoverButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		PathDir = PathLabel.text + "\\covers.xml"
+		
+		ExportCovers PathDir		
+	)
 	on StaticMeshManagerButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
@@ -142,6 +176,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
 		local MeshDir = PathLabel.text + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
+		local l_ExportableObjects = GetAllExportableObjects()
 		
 		select $*
 	
@@ -155,7 +190,7 @@ utility UABUtility "UAB Utility" width:163 height:500
 		if CopyTexturesCheckBox.checked then
 		(
 			DoesFolderExist TexturesDir
-			ExportTextureFile geometry TexturesDir
+			ExportTextureFile l_ExportableObjects TexturesDir
 		)
 	
 		--selec all objects
@@ -181,8 +216,10 @@ utility UABUtility "UAB Utility" width:163 height:500
 		local MeshDir = PathLabel.text + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		
+		local l_ExportableObjects = GetAllExportableObjects()
+	
 		select $*
-
+	
 		if fileSrcMeshXML != undefined then
 		(
 			DoesFolderExist MeshDir
@@ -192,14 +229,14 @@ utility UABUtility "UAB Utility" width:163 height:500
 		
 		if fileSrcRenderableXML != undefined then
 		(
-			ExportRenderableObjectXMLFile geometry fileSrcRenderableXML
+			ExportRenderableObjectXMLFile l_ExportableObjects fileSrcRenderableXML
 			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
 		)
 		
 		if CopyTexturesCheckBox.checked then
 		(
 			DoesFolderExist TexturesDir
-			ExportTextureFile geometry TexturesDir
+			ExportTextureFile l_ExportableObjects TexturesDir
 		)
 		
 		if ExportMeshCheckBox.checked then
@@ -210,10 +247,6 @@ utility UABUtility "UAB Utility" width:163 height:500
 			GenerateMeshes UniqueInstanceArray MeshDir
 		)
 		
-	)
-	on SetProperties pressed do
-	(
-		filein "UABSetProperties.ms"
 	)
 	on Xbtn pressed do
 	(
@@ -242,5 +275,9 @@ utility UABUtility "UAB Utility" width:163 height:500
 	on ApplyBtn pressed do
 	(
 		ApplyRNMToObj $
+	)
+	on SetProperties pressed do
+	(
+		filein "UABSetProperties.ms"
 	)
 )

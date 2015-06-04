@@ -31,7 +31,7 @@ fn DoesFolderExist f create:true =
 fn GetAllInstances = 
 (
 	allInsts = #()
-	for obj in geometry do
+	for obj in geometry where IsObjExportable obj == true do
 	(
 		format " Objeto geometrico %" obj
 		if (InstanceMgr.GetInstances obj &instances) > 1 do
@@ -101,7 +101,7 @@ fn GetUniqueInstances =
 fn GetUniqueInstancesScene = 
 (
 	local uniqueInstanceScene = #()
-	for obj in geometry do
+	for obj in geometry where IsObjExportable obj == true do
 	(
 		if (InstanceMgr.GetInstances obj &instances) > 1 then
 		(
@@ -141,4 +141,119 @@ fn IsEmptyLevelList LevelListText =
 		format "Empty level. Please select level to export data \n"
 		return -1
 	)
+)
+
+fn IsObjExportable Obj =
+(
+	if (getUserProp Obj "Trigger_Name" != undefined AND  getUserProp Obj "Cover_Name" != undefined AND getUserProp Obj "Path_Name" != undefined AND getUserProp Obj "no_export_lights" != undefined) OR (getUserProp Obj "Trigger_Name" == "" AND  getUserProp Obj "Cover_Name" == "" AND getUserProp Obj "Path_Name" == "" AND getUserProp Obj "no_export_lights" == true) then
+	(	
+		return false
+	)
+	else
+	(
+		return true
+	)
+)
+
+fn IsLightExportable Obj =
+(
+	l_Property = getUserProp Obj "no_export_lights"
+	
+	format "Light name % and IsExportable %" Obj l_Property
+	
+	if l_Property == true then
+	(	
+		return false
+	)
+	else
+	(
+		return true
+	)
+)
+
+fn GetAllExportableObjects =
+(
+	l_ExportableObjects = #()
+
+	for Obj in Geometry do 
+	(
+		if IsObjExportable Obj then
+		(
+			append l_ExportableObjects Obj
+		)
+	)
+	return l_ExportableObjects
+)
+
+
+fn GetNoExportableObjects =
+(
+	l_NoExportableObjects = #()
+
+	for Obj in Geometry do 
+	(
+		if IsObjExportable Obj == false then
+		(
+			append l_NoExportableObjects Obj
+		)
+	)
+	return l_NoExportableObjects
+)
+
+fn GetTriggers =
+(
+	l_Triggers = #()
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Trigger_Name" != "" do
+	(
+		append l_Triggers Obj
+	)
+	
+	return l_Triggers
+)
+
+fn GetPaths =
+(
+	l_Paths = #()
+		
+	l_IndexPaths=dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
+	
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Path_Name"	 != "" do
+	(
+		l_PathName = getUserProp Obj "Path_Name"
+		l_Index = 0
+		if l_IndexPaths.ContainsKey l_PathName == false then
+		(
+			l_Index = l_IndexPaths.count + 1
+			l_IndexPaths.Add l_PathName l_Index
+			append l_Paths #()
+		)
+		else
+			l_Index = l_IndexPaths.Item[l_PathName]
+		
+		l_IndexNode = getUserProp Obj "Path_Num_Node"
+		
+		--format "Material ID: %\n" material_id
+		while l_IndexNode >  l_Paths[l_Index].count do
+		(
+			append  l_Paths[l_Index] 0
+		)
+		
+		l_Paths[l_Index][l_IndexNode] = Obj
+	)
+	
+	return l_Paths
+)
+
+fn GetCovers =
+(
+	
+	l_CoverName = #()
+	
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Cover_Name" != "" do
+	(
+		append l_CoverName Obj
+	)
+	
+	return l_CoverName
+	
 )
