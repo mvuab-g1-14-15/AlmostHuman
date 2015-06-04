@@ -39,10 +39,10 @@ CLight::CLight( const CXMLTreeNode& node )
         {
 			/*
             ASSERT(!mLensFlare, "The light %s only could have one lens flare", GetName().c_str());
-            mLensFlare = new CLensFlare();
+			mLensFlare = 
 			if( !mLensFlare->Init( lNode ) )
 				CHECKED_DELETE( mLensFlare );
-				*/
+			*/
         }
         else if( TagName == "shadow_map" )
         {

@@ -53,3 +53,28 @@ bool CFlare::Init( const CXMLTreeNode& node )
 {
 	return false;
 }
+
+CLensFlareManager::CLensFlareManager(const CXMLTreeNode &atts)
+	: CManager( atts )
+{
+}
+
+CLensFlareManager::~CLensFlareManager()
+{
+
+}
+        
+void CLensFlareManager::Init()
+{
+
+}
+
+void CLensFlareManager::Update()
+{
+
+}
+
+void CLensFlareManager::Render()
+{
+
+}
