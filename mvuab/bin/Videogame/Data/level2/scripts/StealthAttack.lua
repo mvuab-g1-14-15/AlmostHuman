@@ -39,8 +39,10 @@ function CStealthAttack:Update()
 end
 
 function CStealthAttack:UpdateInput()
-	if action_manager:DoAction("StealthAttack") then
-		self.Doing = true
-		engine:Trace("Stealth attack press")
+	if not g_ConsoleActivate and not g_CinematicActive then
+		if action_manager:DoAction("StealthAttack") then
+			self.Doing = true
+			engine:Trace("Stealth attack press")
+		end
 	end
 end

@@ -10,8 +10,9 @@ class CShowDialogElement : public CCinematicsElement
 {   
     public:
       CShowDialogElement(CXMLTreeNode& atts);
+      virtual void Update();
       virtual void Execute(CGraphicsManager& GM);
-		  virtual void Render(CGraphicsManager &GM);
+		  virtual void Render();
 		  virtual void Render2D(CGraphicsManager &GM);
     private:
 		  std::string		m_Text;

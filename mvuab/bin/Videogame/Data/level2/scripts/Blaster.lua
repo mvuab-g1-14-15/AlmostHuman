@@ -69,7 +69,7 @@ function CBlaster:CreateParticles(position, direction)
 end
 
 function CBlaster:Update()
-	if not g_ConsoleActivate then
+	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("Shoot") then
 			if self.TimePressed < self.MaxTimePressed then
 				--Implementar soot acumulado

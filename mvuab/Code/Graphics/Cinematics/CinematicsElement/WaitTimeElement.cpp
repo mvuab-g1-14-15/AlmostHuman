@@ -4,20 +4,24 @@
 #include "Timer\Timer.h"
 
 CWaitTimeElement::CWaitTimeElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-	, m_Time( atts.GetFloatProperty( "time", 0.0 ) )
 {
+}
+
+void CWaitTimeElement::Update()
+{
+  m_CurrentTime += deltaTimeMacro;
+  if( m_CurrentTime >= m_Time )
+  {
+    m_IsBlocker = false;
+  }
 }
 
 void CWaitTimeElement::Execute( CGraphicsManager& GM )
 {
-  float lCurrentTime = 0;
-  while( m_Time>lCurrentTime )
-  {
-    lCurrentTime += deltaTimeMacro;
-  }
+  
 }
 
-void CWaitTimeElement::Render(CGraphicsManager &GM)
+void CWaitTimeElement::Render()
 {
 }
 

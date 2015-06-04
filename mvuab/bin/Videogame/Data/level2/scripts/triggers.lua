@@ -33,11 +33,12 @@ function OnStay(other_shape)
 end
 
 function ShowImage(other_shape)
-	gui_manager:ShowImage(true)
+	cinematic_manager:Execute("cinematica_1")
+	--gui_manager:ShowImage(true)
 end
 
 function HideImage(other_shape)
-	gui_manager:ShowImage(false)
+	--gui_manager:ShowImage(false)
 end
 
 function ChargeEnergy()

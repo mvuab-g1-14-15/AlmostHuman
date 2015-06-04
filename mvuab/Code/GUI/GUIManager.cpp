@@ -36,7 +36,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
   :
   CManager()
   , m_sCurrentWindows( "Main.xml" )
-  , m_TextBox( NULL )
+  , m_pTextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
   , m_bUpdateError( false )
@@ -55,7 +55,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
   :
   CManager( atts )
   , m_sCurrentWindows( "Main.xml" )
-  , m_TextBox( NULL )
+  , m_pTextBox( NULL )
   , m_PointerMouse( NULL )
   , m_bRenderError( false )
   , m_bUpdateError( false )
@@ -90,10 +90,10 @@ void CGUIManager::Release()
 {
   LOG_INFO_APPLICATION( "GUIManager:: shutting down GUI" );
 
-  std::map<std::string, CWindows*>::iterator it;
-  std::map<std::string, CWindows*>::iterator itEnd( m_WindowsMap.end() );
+  std::map<std::string, CWindows*>::iterator it    = m_WindowsMap.begin(),
+                                             itEnd = m_WindowsMap.end();
 
-  for ( it = m_WindowsMap.begin(); it != itEnd; ++it )
+  for ( ; it != itEnd; ++it )
   {
     CWindows* windows = it->second;
     CHECKED_DELETE( windows );
@@ -101,7 +101,7 @@ void CGUIManager::Release()
 
   m_WindowsMap.clear();
 
-  CHECKED_DELETE( m_TextBox );
+  CHECKED_DELETE( m_pTextBox );
   CHECKED_DELETE( m_PointerMouse );
   CHECKED_DELETE( m_pConsole );
 
@@ -155,53 +155,41 @@ void CGUIManager::Init()
 
       if ( m.Exists() )
       {
-        float posx = m.GetFloatProperty( "posx",
-                                         30.f );
-        float posy = m.GetFloatProperty( "posy",
-                                         30.f );
-        float w = m.GetFloatProperty( "width",
-                                      35.f );
-        float h = m.GetFloatProperty( "height",
-                                      35.f );
+        float posx      = m.GetFloatProperty( "posx", 30.f );
+        float posy      = m.GetFloatProperty( "posy", 30.f );
+        float w         = m.GetFloatProperty( "width", 35.f );
+        float h         = m.GetFloatProperty( "height", 35.f );
         float button_w  = m.GetFloatProperty( "button_width", 5.f );
         float button_h  = m.GetFloatProperty( "button_height", 5.f );
-        std::string buttonClose_normal  = m.GetPszProperty( "buttonClose_normal",
-                                          "/Data/textures/GUI/Textures_Test/CloseDialegBox.jpg" );
-        std::string buttonClose_over = m.GetPszProperty( "buttonClose_over",
-                                       "/Data/textures/GUI/Textures_Test/CloseDialegBoxO.jpg" );
-        std::string buttonClose_clicked = m.GetPszProperty( "buttonClose_clicked",
-                                          "/Data/textures/GUI/Textures_Test/CloseDialegBoxC.jpg" );
-        std::string buttonClose_deactivated = m.GetPszProperty( "buttonClose_deactivated",
-                                              "/Data/textures/GUI/Textures_Test/CloseDialegBoxC.jpg" );
-        std::string buttonMove_normal  = m.GetPszProperty( "buttonMove_normal",
-                                         "/Data/textures/GUI/Textures_Test/ButtonDialegBoxN.jpg" );
-        std::string buttonMove_over  = m.GetPszProperty( "buttonMove_over",
-                                       "/Data/textures/GUI/Textures_Test/ButtonDialegBoxO.jpg" );
-        std::string buttonMove_clicked  = m.GetPszProperty( "buttonMove_clicked",
-                                          "/Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg" );
-        std::string buttonMove_deactivated = m.GetPszProperty( "buttonMove_deactivated",
-                                             "/Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg" );
-        std::string quad = m.GetPszProperty( "quad",
-                                             "/Data/textures/GUI/Textures_Test/BaseDialegBox.jpg" );
 
-        CTexture* Close_normal  = textureM->GetTexture( buttonClose_normal );
-        CTexture* Close_over = textureM->GetTexture( buttonClose_over );
-        CTexture* Close_clicked = textureM->GetTexture( buttonClose_clicked );
+        std::string buttonClose_normal      = m.GetPszProperty( "buttonClose_normal", "no_buttonClose_normal" );
+        std::string buttonClose_over        = m.GetPszProperty( "buttonClose_over", "no_buttonClose_over" );
+        std::string buttonClose_clicked     = m.GetPszProperty( "buttonClose_clicked", "no_buttonClose_clicked" );
+        std::string buttonClose_deactivated = m.GetPszProperty( "buttonClose_deactivated", "no_buttonClose_deactivated" );
+        std::string buttonMove_normal       = m.GetPszProperty( "buttonMove_normal", "no_buttonMove_normal" );
+        std::string buttonMove_over         = m.GetPszProperty( "buttonMove_over", "no_buttonMove_over" );
+        std::string buttonMove_clicked      = m.GetPszProperty( "buttonMove_clicked", "no_buttonMove_clicked" );
+        std::string buttonMove_deactivated  = m.GetPszProperty( "buttonMove_deactivated", "no_buttonMove_deactivated" );
+        std::string quad                    = m.GetPszProperty( "quad", "no_quad" );
+
+        CTexture* Close_normal      = textureM->GetTexture( buttonClose_normal );
+        CTexture* Close_over        = textureM->GetTexture( buttonClose_over );
+        CTexture* Close_clicked     = textureM->GetTexture( buttonClose_clicked );
         CTexture* Close_deactivated = textureM->GetTexture( buttonClose_deactivated );
-        CTexture* Move_normal  = textureM->GetTexture( buttonMove_normal );
-        CTexture* Move_over  = textureM->GetTexture( buttonMove_over );
-        CTexture* Move_clicked  = textureM->GetTexture( buttonMove_clicked );
-        CTexture* Move_deactivated = textureM->GetTexture( buttonMove_deactivated );
-        CTexture* back = textureM->GetTexture( quad );
+        CTexture* Move_normal       = textureM->GetTexture( buttonMove_normal );
+        CTexture* Move_over         = textureM->GetTexture( buttonMove_over );
+        CTexture* Move_clicked      = textureM->GetTexture( buttonMove_clicked );
+        CTexture* Move_deactivated  = textureM->GetTexture( buttonMove_deactivated );
+        CTexture* back              = textureM->GetTexture( quad );
 
-        m_TextBox = new CTextBox( m_ScreenResolution.x, m_ScreenResolution.y, h, w, Math::Vect2f( posx, posy ), button_w,
+        m_pTextBox = new CTextBox( m_ScreenResolution.x, m_ScreenResolution.y, h, w, Math::Vect2f( posx, posy ), button_w,
                                   button_h );
-        assert( m_TextBox );
-        m_TextBox->SetName( "TextBox" );
-        m_TextBox->SetCloseButtonTextures( Close_normal, Close_over, Close_clicked, Close_deactivated );
-        m_TextBox->SetMoveButtonTextures( Move_normal, Move_over, Move_clicked, Move_deactivated );
-        m_TextBox->SetDialogTexture( back );
-        m_TextBox->SetVisible( false );
+        assert( m_pTextBox );
+        m_pTextBox->SetName( "TextBox" );
+        m_pTextBox->SetCloseButtonTextures( Close_normal, Close_over, Close_clicked, Close_deactivated );
+        m_pTextBox->SetMoveButtonTextures( Move_normal, Move_over, Move_clicked, Move_deactivated );
+        m_pTextBox->SetDialogTexture( back );
+        m_pTextBox->SetVisible( false );
       }
       else
       {
@@ -214,23 +202,27 @@ void CGUIManager::Init()
 
       if ( m.Exists() )
       {
-        float posx  = m.GetFloatProperty( "posx", 0.f );
-        float posy  = m.GetFloatProperty( "posy", 0.f );
-        float w  = m.GetFloatProperty( "width", 50.f );
-        float h  = m.GetFloatProperty( "height", 50.f );
-        bool visible = m.GetBoolProperty( "visible", false );
-        bool activated = m.GetBoolProperty( "active", false );
-        const std::string& name  = m.GetPszProperty( "name", "defaultGuiElement" );
-        const std::string& default_image = m.GetPszProperty( "default", "" );
-        const std::string& OnSaveValue  = m.GetPszProperty( "OnSaveValue", "" );
-        const std::string& OnLoadValue  = m.GetPszProperty( "OnLoadValue", "" );
-        const std::string& flip = m.GetPszProperty( "flip", "" );
-        bool backGround  = m.GetBoolProperty( "backGround", false );
-        const std::string& l_literal  = m.GetPszProperty( "Literal", "" );
-        float widthOffsetPercent = m.GetFloatProperty( "widthOffset", 0.f );
+        float posx      = m.GetFloatProperty( "posx", 0.f );
+        float posy      = m.GetFloatProperty( "posy", 0.f );
+        float w         = m.GetFloatProperty( "width", 50.f );
+        float h         = m.GetFloatProperty( "height", 50.f );
+
+        bool visible    = m.GetBoolProperty( "visible", false );
+        bool activated  = m.GetBoolProperty( "active", false );
+        bool backGround = m.GetBoolProperty( "backGround", false );
+
+        const std::string& name           = m.GetPszProperty( "name", "defaultGuiElement" );
+        const std::string& default_image  = m.GetPszProperty( "default", "" );
+        const std::string& OnSaveValue    = m.GetPszProperty( "OnSaveValue", "" );
+        const std::string& OnLoadValue    = m.GetPszProperty( "OnLoadValue", "" );
+        const std::string& flip           = m.GetPszProperty( "flip", "" );
+        const std::string& l_literal      = m.GetPszProperty( "Literal", "" );
+
+        
+        float widthOffsetPercent  = m.GetFloatProperty( "widthOffset", 0.f );
         float heightOffsetPercent = m.GetFloatProperty( "heightOffset", 0.f );
 
-        uint32 widthOffset = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
+        uint32 widthOffset  = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
         uint32 heightOffset = ( uint32 )( m_ScreenResolution.y * 0.01f * heightOffsetPercent );
 
         m_pPressButton = new CImage( m_ScreenResolution.y, m_ScreenResolution.x, h, w, Math::Vect2f( posx, posy ),
@@ -256,9 +248,9 @@ void CGUIManager::Init()
 
           if ( tagName.compare( "texture" ) == 0 )
           {
-            const std::string& name  = m( j ).GetPszProperty( "name" );
-            const std::string& texture = m( j ).GetPszProperty( "name_texture" );
-            CTexture* texture_image  = TextureMInstance->GetTexture( texture );
+            const std::string& name     = pTexture.GetPszProperty( "name" );
+            const std::string& texture  = pTexture.GetPszProperty( "name_texture" );
+            CTexture* texture_image     = TextureMInstance->GetTexture( texture );
             m_pPressButton->SetTexture( texture_image, name );
           }
         }
@@ -268,13 +260,12 @@ void CGUIManager::Init()
 
       if ( m.Exists() )
       {
-        float posx = m.GetFloatProperty( "posx", 5.f );
-        float posy = m.GetFloatProperty( "posy", 5.f );
-        float w = m.GetFloatProperty( "width",  5.f );
-        float h = m.GetFloatProperty( "height", 5.f );
-        std::string texture = m.GetPszProperty( "texture",
-                                                "/Data/textures/GUI/Textures_Test/gui_pointer_mouse.tga" );
-        bool isQuadrant = m.GetBoolProperty( "isQuadrant",  true );
+        float posx          = m.GetFloatProperty( "posx", 5.f );
+        float posy          = m.GetFloatProperty( "posy", 5.f );
+        float w             = m.GetFloatProperty( "width",  5.f );
+        float h             = m.GetFloatProperty( "height", 5.f );
+        std::string texture = m.GetPszProperty( "texture", "no_pointer_texture" );
+        bool isQuadrant     = m.GetBoolProperty( "isQuadrant",  true );
 
         CTexture* texture_pointer = textureM->GetTexture( texture );
 
@@ -291,7 +282,7 @@ void CGUIManager::Init()
         LOG_WARNING_APPLICATION( msg_error.c_str() );
       }
 
-      m_bIsOk = m_TextBox && m_PointerMouse;
+      m_bIsOk = m_pTextBox && m_PointerMouse;
 
     }//END if (m_bIsOk)
 
@@ -300,13 +291,8 @@ void CGUIManager::Init()
 
   //CONSOLA GUI LUA
   m_pConsole = new CConsoleGUI( m_ScreenResolution.y, m_ScreenResolution.x, 8, 40, Math::Vect2f( 0, 80 ), Math::colBLACK,
-                                0U, "", 2U, 2U, false,
-                                true );
+                                0U, "", 2U, 2U, false, true );
 
-  //m_Map = new CMap( m_ScreenResolution.y, m_ScreenResolution.x, 30, 30, Math::Vect2f( 68, 65 ) );
-
-  /*  m_Map->SetTexture(TextureMInstance->GetTexture("Data/textures/metal_plain.jpg"), "mapa");
-      m_Map->SetActiveTexture("mapa");*/
   if ( !m_bIsOk )
     Release();
   else
@@ -325,10 +311,10 @@ void CGUIManager::Render()
   {
     if ( m_bLoadedGuiFiles )
     {
-      std::map<std::string, CWindows*>::iterator it;
-      it = m_WindowsMap.find( m_sCurrentWindows );
+      std::map<std::string, CWindows*>::iterator it     = m_WindowsMap.find( m_sCurrentWindows ),
+                                                 it_end = m_WindowsMap.end();
 
-      if ( it != m_WindowsMap.end() )
+      if ( it != it_end )
       {
         CWindows* currentWindows = it->second;
         currentWindows->Render();
@@ -346,8 +332,8 @@ void CGUIManager::Render()
     }//END if (m_bLoadedGuiFiles)
 
     //Siempre los últimos en pintarse
-    assert( m_TextBox );
-    m_TextBox->Render();
+    assert( m_pTextBox );
+    m_pTextBox->Render();
     assert( m_pConsole );
     m_pConsole->Render();
     assert( m_pPressButton );
@@ -376,16 +362,16 @@ void CGUIManager::Update()
 {
   if ( m_bIsOk )
   {
-    assert( m_TextBox );
+    assert( m_pTextBox );
     assert( m_PointerMouse );
 
     //Si es la primera vez que actualizamos la GUI debemos hacer un load de la main.xml:
     if ( m_bFirstUpdate )
     {
-      std::map<std::string, CWindows*>::iterator itCurrentWindows;
-      itCurrentWindows = m_WindowsMap.find( m_sCurrentWindows );
+      std::map<std::string, CWindows*>::iterator itCurrentWindows = m_WindowsMap.find( m_sCurrentWindows ),
+                                                 it_end           = m_WindowsMap.end();
 
-      if ( itCurrentWindows != m_WindowsMap.end() )
+      if ( itCurrentWindows != it_end )
       {
         CWindows* currentWindow = itCurrentWindows->second;
         currentWindow->LoadWindows();
@@ -396,18 +382,18 @@ void CGUIManager::Update()
 
     m_PointerMouse->Update();
 
-    m_TextBox->Update();
+    m_pTextBox->Update();
 
     m_pConsole->Update();
 
     //m_Map->Update();
 
-    if ( !m_TextBox->IsVisible() && m_bLoadedGuiFiles )
+    if ( !m_pTextBox->IsVisible() && m_bLoadedGuiFiles )
     {
-      std::map<std::string, CWindows*>::iterator it;
-      it = m_WindowsMap.find( m_sCurrentWindows );
+      std::map<std::string, CWindows*>::iterator it     = m_WindowsMap.find( m_sCurrentWindows ),
+                                                 it_end = m_WindowsMap.end();
 
-      if ( it != m_WindowsMap.end() )
+      if ( it != it_end )
       {
         CWindows* currentWindow = it->second;
 
@@ -425,7 +411,7 @@ void CGUIManager::Update()
           m_bUpdateError = true;
         }
       }
-    }//END if( !m_TextBox.IsVisible() )
+    }//END if( !m_pTextBox.IsVisible() )
 
 
   }
@@ -678,14 +664,14 @@ void CGUIManager::SetMessageBox( const std::string& text )
 {
   if ( m_bIsOk )
   {
-    assert( m_TextBox );
+    assert( m_pTextBox );
 
-    if ( !m_TextBox->IsVisible() )
+    if ( !m_pTextBox->IsVisible() )
     {
-      m_TextBox->SetMessage( text );
-      m_TextBox->SetVisible( true );
-      m_TextBox->SetActive( true );
-      m_TextBox->SetPosition( Math::Vect2i( 30, 30 ) );
+      m_pTextBox->SetMessage( text );
+      m_pTextBox->SetVisible( true );
+      m_pTextBox->SetActive( true );
+      m_pTextBox->SetPosition( Math::Vect2i( 30, 30 ) );
     }
   }
 }

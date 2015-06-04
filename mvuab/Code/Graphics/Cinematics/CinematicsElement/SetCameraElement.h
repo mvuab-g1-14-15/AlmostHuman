@@ -10,8 +10,9 @@ class CSetCameraElement : public CCinematicsElement
 {
     public:
       CSetCameraElement(CXMLTreeNode& atts);
+      virtual void Update();
       virtual void Execute(CGraphicsManager& GM);
-		  virtual void Render(CGraphicsManager &GM);
+		  virtual void Render();
 		  virtual void Render2D(CGraphicsManager &GM);
     private:
 		  Math::Vect3f		m_Position;

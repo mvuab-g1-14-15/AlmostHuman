@@ -2,6 +2,7 @@
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "Timer\Timer.h"
 
 CSetTransformElement::CSetTransformElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
 	, m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f(0,0,0) ) )
@@ -13,7 +14,7 @@ CSetTransformElement::CSetTransformElement( CXMLTreeNode& atts ) : CCinematicsEl
 {
 }
 
-void CSetTransformElement::Execute( CGraphicsManager& GM )
+void CSetTransformElement::Update()
 {
   m_pObject->SetPosition(m_Position);
   m_pObject->SetScale(m_Size);
@@ -21,9 +22,13 @@ void CSetTransformElement::Execute( CGraphicsManager& GM )
   m_pObject->SetPitch(m_Pitch);
   m_pObject->SetRoll(m_Roll);
   m_pObject->MakeTransform();
+  m_CurrentTime+= deltaTimeMacro;
+}
+void CSetTransformElement::Execute( CGraphicsManager& GM )
+{
 }
 
-void CSetTransformElement::Render(CGraphicsManager &GM)
+void CSetTransformElement::Render()
 {
 }
 

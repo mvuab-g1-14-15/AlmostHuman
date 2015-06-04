@@ -22,7 +22,8 @@ public:
   void Execute(const std::string& NameCinematic);
   void Update();
   void Render();
-   
+  
+  GET_SET(bool, CinematicActive);
 
 private:
   class CCinematicsItems
@@ -35,8 +36,11 @@ private:
   };
   CTemplatedVectorMapManager<CCinematicsItems>    m_vCinematicsElement;
   CCinematicsItems*                               m_CurrentCinematicsElement;
-  CPlayAnimationElement*                          m_CurrentCinematic;
-  float                                           m_CurrentTime;
+  CCinematicsElement*                             m_CurrentElement;
+  bool                                            m_CinematicActive;
+  bool                                            m_CheckBlock;
+  size_t                                          m_CurrentElementId;
+  bool                                            m_FirstFrame;
   void CleanUp();
   std::string GetNextName(); 
 };
