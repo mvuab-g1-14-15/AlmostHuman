@@ -37,6 +37,7 @@ class CGUIManager;
 class CBillboardManager;
 class CCountDownTimerManager;
 class CCinematicManager;
+class CConsole;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -76,7 +77,7 @@ public:
   CCountDownTimerManager*           GetCountDownTimerManager() const;
   CCinematicManager*                GetCinematicManager() const;
 
-  GET_SET_REF(std::string, ManagersPath);
+  GET_SET_REF( std::string, ManagersPath );
 
 private:
   CGraphicsManager*                      m_pGraphicsManager;
@@ -104,6 +105,7 @@ private:
   CBillboardManager*                     m_BillboardManager;
   CCountDownTimerManager*                m_pCountDownTimerManager;
   CCinematicManager*                     m_pCinematicManager;
+  CConsole*                              m_pConsole;
   std::string                            m_ManagersPath;
 };
 

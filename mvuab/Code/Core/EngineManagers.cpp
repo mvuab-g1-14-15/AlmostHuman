@@ -156,6 +156,7 @@ void CEngineManagers::Init()
     }
   }
 
+  m_pConsole          = dynamic_cast<CConsole*>( GetResource( "console" ) );
   m_pScriptManager    = dynamic_cast<CScriptManager*>( GetResource( "script_manager" ) );
   m_pGraphicsManager  = dynamic_cast<CGraphicsManager*>( GetResource( "graphics_manager" ) );
   m_pInputManager     = dynamic_cast<CInputManager*>( GetResource( "input_manager" ) );
@@ -188,8 +189,20 @@ void CEngineManagers::Init()
   //
   // Init managers
   //
+  uint32 lSizeElement = GetResourcesCount();
+  uint32 lPosition = 0;
+  uint32 result;
+
   for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
+  {
     ( *lItb )->Init();
+    m_pConsole->Clear();
+    result = ++lPosition * 100 / lSizeElement;
+    std::stringstream ss;
+    ss  << "Porcertanje completado " << result << "%";
+    const std::string& lProgress = ss.str();
+    EngineInstance->Trace( lProgress );
+  }
 }
 
 void CEngineManagers::Update()
