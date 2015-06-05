@@ -199,7 +199,7 @@ void CEngineManagers::Init()
     m_pConsole->Clear();
     result = ++lPosition * 100 / lSizeElement;
     std::stringstream ss;
-    ss  << "Porcertanje completado " << result << "%";
+    ss  << "Porcentaje completado " << result << "%";
     const std::string& lProgress = ss.str();
     EngineInstance->Trace( lProgress );
   }
