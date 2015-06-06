@@ -31,7 +31,7 @@ inline void  Trace( const char* format, ... )
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
   OutputDebugStringA( buffer );
-  delete buffer;
+  free(buffer);
   va_end(args);
 }
 

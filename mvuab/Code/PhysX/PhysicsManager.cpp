@@ -1450,8 +1450,7 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
                                      ECollisionGroup ColliusionGroup, float gravity )
 {
     CPhysicUserData*    l_UserData    = new CPhysicUserData( Name );
-    CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
-            l_UserData, pos, gravity );
+    CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup, l_UserData, pos, gravity );
 
     if ( !CMapManager<CPhysicController>::GetResource( Name ) )
     {
@@ -1466,6 +1465,11 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
             CHECKED_DELETE( l_UserData );
             CHECKED_DELETE( l_Controller );
         }
+    }
+    else
+    {
+        CHECKED_DELETE( l_UserData );
+        CHECKED_DELETE( l_Controller );
     }
 
     return false;

@@ -30,6 +30,8 @@ void CMessageHandler::Assert( const char* file, long line, const char* aAssertMs
                 }
         }
     }
+
+    free(buffer);
 }
 
 void CMessageHandler::FatalError( const char* file, long line, const char* aAssertMsg, ... )
@@ -57,4 +59,6 @@ void CMessageHandler::FatalError( const char* file, long line, const char* aAsse
                 }
         }
     }
+
+    free(buffer);
 }

@@ -22,7 +22,7 @@ inline void Format( std::string& output, const char* format, ... )
   buffer = ( char* )malloc( len * sizeof( char ) );
   vsprintf_s( buffer, len, format, args );
   output = buffer;
-  delete buffer;
+  free(buffer);
   va_end(args);
 }
 
