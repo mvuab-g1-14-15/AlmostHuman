@@ -104,6 +104,7 @@ void CGUIManager::Release()
   CHECKED_DELETE( m_pTextBox );
   CHECKED_DELETE( m_PointerMouse );
   CHECKED_DELETE( m_pConsole );
+  CHECKED_DELETE( m_pPressButton );
 
   LOG_INFO_APPLICATION( "GUIManager:: offline (ok)" );
 }
