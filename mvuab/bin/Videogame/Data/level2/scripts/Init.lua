@@ -46,7 +46,7 @@ function update_gameplay()
 	
 	--g_Enemy:Update()
 	
-	engine:Trace("\ng_ConsoleActivate: " .. tostring(g_ConsoleActivate) .. "\ng_CinematicActive: " .. tostring(g_CinematicActive) .. "\nBool result: " .. tostring((not (g_ConsoleActivate or g_CinematicActive))))
+	--engine:Trace("\ng_ConsoleActivate: " .. tostring(g_ConsoleActivate) .. "\ng_CinematicActive: " .. tostring(g_CinematicActive) .. "\nBool result: " .. tostring((not (g_ConsoleActivate or g_CinematicActive))))
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then
 			g_Player:SetPosition(ChangeRoom())
