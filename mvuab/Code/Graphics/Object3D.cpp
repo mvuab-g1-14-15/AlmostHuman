@@ -12,8 +12,13 @@ CObject3D::CObject3D( const CXMLTreeNode& atts )
 }
 
 CObject3D::CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll, Math::Vect3f scale )
-
 {
+	m_Position  = pos;
+    m_fYaw      = yaw;
+    m_fPitch    = pitch;
+    m_fRoll     = roll;
+    m_Scale     = scale;
+
     MakeTransform();
 }
 

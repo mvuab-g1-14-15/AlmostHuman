@@ -90,6 +90,16 @@ class CObject3D
         {
             m_Scale = scale;
         }
+		void SetTransform( const Math::Mat44f& transform )
+		{
+			m_Position = transform.GetPos();
+			m_fYaw = transform.GetYaw();
+			m_fPitch = transform.GetPitch();
+			m_fRoll = transform.GetRoll();
+			m_Scale = transform.GetScale();
+
+			m_Transform = transform;
+		}
 
         void MakeTransform();
 };
