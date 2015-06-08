@@ -89,6 +89,7 @@ public:
 private:
   CTexture*  m_Marco;
   CTexture*  m_Mapa; // Textura del mapa/radar del escenario
+  CTexture*  m_Cone;
   CPlayer* m_Player; // Textura del player en el mapa
   CTexture*  m_Camara; // Textura del player en el mapa
   Math::Vect2f m_posNPlayer; // Posición del Player en el mapa/radar

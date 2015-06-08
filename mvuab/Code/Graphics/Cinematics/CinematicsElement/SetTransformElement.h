@@ -5,7 +5,8 @@
 #include "XML\XMLTreeNode.h"
 
 class CGraphicsManager;
-class CRenderableObject;
+class CInstanceMesh;
+class CPhysicActor;
 
 class CSetTransformElement: public CCinematicsElement
 {
@@ -17,9 +18,10 @@ class CSetTransformElement: public CCinematicsElement
 		  virtual void Render2D(CGraphicsManager &GM);
     
   private:
-      CRenderableObject*  m_pObject;
-  		Math::Vect3f        m_Position;
-  		Math::Vect3f        m_Size;
+      CInstanceMesh*	  m_pObject;
+	  CPhysicActor*	  m_pActorObject;
+  	  Math::Vect3f        m_Position;
+  	  Math::Vect3f        m_Size;
       float               m_Yaw;
       float               m_Pitch;
       float               m_Roll;

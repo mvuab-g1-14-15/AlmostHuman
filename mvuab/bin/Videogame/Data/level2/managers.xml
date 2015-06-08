@@ -18,11 +18,12 @@
 	<countdowntimer_manager file_config="no_name"/>
 	<script_manager file_config="Data/level2/scripts/"/>
 	<light_manager file_config="Data/lights.xml"/>
-	<enemy_manager file_config="Data/enemies/enemies.xml"/>
+	<enemy_manager file_config="Data/enemies/enemies.xml"/>	
+	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config="Data/billboards.xml"/>
 	<particle_manager file_config="Data/particles.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-	<gui_manager file_config="Data/gui.xml"/>
+	
 	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 </managers>

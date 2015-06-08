@@ -30,6 +30,7 @@ public:
 
     void Render();
     void SetActor( CPhysicActor* lPhysicActor );
+	CPhysicActor* GetActor();
 
     const std::vector<Math::Vect3f>& GetVertexBuffer();
     const std::vector<uint32>& GetIndexBuffer();

@@ -28,6 +28,8 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
   m_Marco = TextureMInstance->GetTexture( Marco );
   m_MinMaxMap[0] = pos_0_0;
   m_MinMaxMap[1] = pos_1_1;
+  const std::string& bla( "Data/textures/GUI/Textures_Test/conotrans.png" );
+  m_Cone = TextureMInstance->GetTexture( bla );
 }
 
 CMap::~CMap()
@@ -118,6 +120,9 @@ void CMap::Render()
                                    ( uint32 )( ( m_vEnemy[i]->m_PosInMap.y - l_PosY0 ) / m_Height_Map * m_uHeight ) );
           GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER,
                                         m_vEnemy[i]->m_Texture );
+		  Math::Vect2f up(cos(m_vEnemy[i]->m_Yaw), sin(m_vEnemy[i]->m_Yaw));
+          Math::Vect2i int_UP = Math::Vect2i((int)(up.x*-17),(int)(up.y*-17));
+		  GraphicsInstance->DrawQuad2D(l_drawPos+int_UP, 40,40, m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER, m_Cone);
         }
       }
     }
