@@ -24,33 +24,38 @@
 #include "EngineConfig.h"
 //#include "AK/SoundEngine/Common/AkTypes.h"
 
-namespace AK {
+namespace AK
+{
 #ifdef WIN32
-  void *AllocHook( size_t in_size ) {
-    return malloc( in_size );
-  }
-  void FreeHook( void *in_ptr ) {
-    free( in_ptr );
-  }
-  // Note: VirtualAllocHook() may be used by I/O pools of the default implementation
-  // of the Stream Manager, to allow "true" unbuffered I/O (using FILE_FLAG_NO_BUFFERING
-  // - refer to the Windows SDK documentation for more details). This is NOT mandatory;
-  // you may implement it with a simple malloc().
-  void *VirtualAllocHook(
-    void *in_pMemAddress,
-    size_t in_size,
-    DWORD in_dwAllocationType,
-    DWORD in_dwProtect
-    ) {
-      return VirtualAlloc( in_pMemAddress, in_size, in_dwAllocationType, in_dwProtect );
-  }
-  void VirtualFreeHook(
-    void *in_pMemAddress,
-    size_t in_size,
-    DWORD in_dwFreeType
-    ) {
-      VirtualFree( in_pMemAddress, in_size, in_dwFreeType );
-  }
+void* AllocHook( size_t in_size )
+{
+  return malloc( in_size );
+}
+void FreeHook( void* in_ptr )
+{
+  free( in_ptr );
+}
+// Note: VirtualAllocHook() may be used by I/O pools of the default implementation
+// of the Stream Manager, to allow "true" unbuffered I/O (using FILE_FLAG_NO_BUFFERING
+// - refer to the Windows SDK documentation for more details). This is NOT mandatory;
+// you may implement it with a simple malloc().
+void* VirtualAllocHook(
+  void* in_pMemAddress,
+  size_t in_size,
+  DWORD in_dwAllocationType,
+  DWORD in_dwProtect
+)
+{
+  return VirtualAlloc( in_pMemAddress, in_size, in_dwAllocationType, in_dwProtect );
+}
+void VirtualFreeHook(
+  void* in_pMemAddress,
+  size_t in_size,
+  DWORD in_dwFreeType
+)
+{
+  VirtualFree( in_pMemAddress, in_size, in_dwFreeType );
+}
 #endif
 }
 
@@ -76,7 +81,7 @@ void CWWSoundManager::Done()
 
   m_lowLevelIO->Term();
   //delete m_lowLevelIO;
-  CHECKED_DELETE(m_lowLevelIO);
+  CHECKED_DELETE( m_lowLevelIO );
 
   if ( AK::IAkStreamMgr::Get() )
     AK::IAkStreamMgr::Get()->Destroy();
@@ -100,9 +105,8 @@ void CWWSoundManager::Init()
   AkMemSettings memSettings;
   memSettings.uMaxNumPools = 50;
 
-  if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success ) {
+  if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success )
     assert( ! "Could not create the memory manager." );
-  }
 
   //
   // Create and initialize an instance of the default streaming manager. Note
@@ -115,9 +119,8 @@ void CWWSoundManager::Init()
 
   // Customize the Stream Manager settings here.
 
-  if ( !AK::StreamMgr::Create( stmSettings ) ) {
+  if ( !AK::StreamMgr::Create( stmSettings ) )
     assert( ! "Could not create the Streaming Manager" );
-  }
 
   //
   // Create a streaming device with blocking low-level I/O handshaking.
@@ -129,20 +132,19 @@ void CWWSoundManager::Init()
 
   // Customize the streaming device settings here.
   m_lowLevelIO = new CAkDefaultIOHookBlocking();
+
   // CAkFilePackageLowLevelIOBlocking::Init() creates a streaming device
   // in the Stream Manager, and registers itself as the File Location Resolver.
-  if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success ) {
+  if ( m_lowLevelIO->Init( deviceSettings ) != AK_Success )
     assert( ! "Could not create the streaming device and Low-Level I/O system" );
-  }
 
   AkInitSettings initSettings;
   AkPlatformInitSettings platformInitSettings;
   AK::SoundEngine::GetDefaultInitSettings( initSettings );
   AK::SoundEngine::GetDefaultPlatformInitSettings( platformInitSettings );
 
-  if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success ) {
+  if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success )
     assert( ! "Could not initialize the Sound Engine." );
-  }
 
   //
   // Initialize the music engine
@@ -152,9 +154,8 @@ void CWWSoundManager::Init()
   AkMusicSettings musicInit;
   AK::MusicEngine::GetDefaultInitSettings( musicInit );
 
-  if ( AK::MusicEngine::Init( &musicInit ) != AK_Success ) {
+  if ( AK::MusicEngine::Init( &musicInit ) != AK_Success )
     assert( ! "Could not initialize the Music Engine." );
-  }
 
   AK::SoundEngine::RegisterAllPlugins();
 
@@ -166,16 +167,19 @@ void CWWSoundManager::Init()
   //
   AkCommSettings commSettings;
   AK::Comm::GetDefaultInitSettings( commSettings );
-  if ( AK::Comm::Init( commSettings ) != AK_Success ) {
+
+  if ( AK::Comm::Init( commSettings ) != AK_Success )
+  {
     assert( ! "Could not initialize communication." );
     //return false;
   }
+
 #endif // AK_OPTIMIZED
 #endif
 
 
-  
- Load( mConfigPath );
+
+  Load( mConfigPath );
 }
 
 void CWWSoundManager::Update()
@@ -347,24 +351,24 @@ AKRESULT CWWSoundManager::SetListenerPosition( Math::Vect3f _ListenerPosition, M
   return AK::SoundEngine::SetListenerPosition( l_ListenerPosition );
 }
 
-AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation )
+AKRESULT CWWSoundManager::SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition,
+    Math::Vect3f _GameObjectOrientation )
 {
   bool l_OK = true;
   AkSoundPosition l_AKGameObjectPosition;
 
   _GameObjectOrientation = _GameObjectOrientation.Normalize();
-  if(_isnan(_GameObjectOrientation.x) || _isnan(_GameObjectOrientation.y) || _isnan(_GameObjectOrientation.z))
-  {
-      l_OK = false;
-  }
+
+  if ( _isnan( _GameObjectOrientation.x ) || _isnan( _GameObjectOrientation.y ) || _isnan( _GameObjectOrientation.z ) )
+    l_OK = false;
 
   l_AKGameObjectPosition.Position.X = _GameObjectPosition.x;
   l_AKGameObjectPosition.Position.Y = _GameObjectPosition.y;
   l_AKGameObjectPosition.Position.Z = _GameObjectPosition.z;
 
-  l_AKGameObjectPosition.Orientation.X = (!l_OK) ? 1.0f : _GameObjectOrientation.x;
-  l_AKGameObjectPosition.Orientation.Y = (!l_OK) ? 0.0f : _GameObjectOrientation.y;
-  l_AKGameObjectPosition.Orientation.Z = (!l_OK) ? 0.0f : _GameObjectOrientation.z;
+  l_AKGameObjectPosition.Orientation.X = ( !l_OK ) ? 1.0f : _GameObjectOrientation.x;
+  l_AKGameObjectPosition.Orientation.Y = ( !l_OK ) ? 0.0f : _GameObjectOrientation.y;
+  l_AKGameObjectPosition.Orientation.Z = ( !l_OK ) ? 0.0f : _GameObjectOrientation.z;
 
   return AK::SoundEngine::SetPosition( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPosition );
 }
@@ -398,8 +402,10 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
   else
     l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
 
-  return AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions,
-         l_NumPositions, l_eMultiPositionType );
+  AKRESULT result = AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions,
+                    l_NumPositions, l_eMultiPositionType );
+  CHECKED_DELETE( l_AKGameObjectPositions );
+  return result;
 }
 
 AKRESULT CWWSoundManager::SetState( std::string _Group, std::string _State )
