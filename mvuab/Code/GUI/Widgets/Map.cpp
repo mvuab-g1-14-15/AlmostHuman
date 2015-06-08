@@ -32,6 +32,17 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
 
 CMap::~CMap()
 {
+	CHECKED_DELETE( m_Player);
+
+	std::vector<CItemMap*>::iterator it = m_vItems.begin(),
+									 it_end = m_vItems.end();
+	for( ; it!=it_end ; ++it)
+		CHECKED_DELETE(*it);
+
+	std::vector<CEnemyMap*>::iterator it2 = m_vEnemy.begin(),
+									  it_end2 = m_vEnemy.end();
+	for( ; it2!=it_end2 ; ++it2)
+		CHECKED_DELETE(*it2);
 }
 //---------------CGuiElement Interface----------------------
 void CMap::Render()
