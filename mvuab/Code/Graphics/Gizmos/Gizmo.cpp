@@ -12,7 +12,6 @@ CGizmo::CGizmo( std::string name, Math::Vect3f position, float yaw, float pitch 
     : CObject3D( position, yaw, pitch )
     , CName( name )
 {
-
 }
 
 CGizmo::~CGizmo()
@@ -28,7 +27,6 @@ CGizmo::~CGizmo()
 
 void CGizmo::Init()
 {
-
 }
 
 void CGizmo::Update()
