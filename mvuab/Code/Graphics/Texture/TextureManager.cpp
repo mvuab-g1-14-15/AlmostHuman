@@ -13,6 +13,7 @@ CTextureManager::CTextureManager( CXMLTreeNode& atts )
 CTextureManager::~CTextureManager()
 {
     Destroy();
+	CHECKED_DELETE( m_DummyTexture );
 }
 
 void CTextureManager::Init()
