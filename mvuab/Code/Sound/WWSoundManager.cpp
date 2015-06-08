@@ -75,7 +75,8 @@ void CWWSoundManager::Done()
   AK::SoundEngine::Term();
 
   m_lowLevelIO->Term();
-  delete m_lowLevelIO;
+  //delete m_lowLevelIO;
+  CHECKED_DELETE(m_lowLevelIO);
 
   if ( AK::IAkStreamMgr::Get() )
     AK::IAkStreamMgr::Get()->Destroy();
@@ -83,6 +84,7 @@ void CWWSoundManager::Done()
   AK::MemoryMgr::Term();
 
   m_GameObjectMap.clear();
+
 }
 
 
@@ -374,6 +376,7 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
   int l_NumPositions = _GameObjectPosition.size();
 
   AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiSources;
+  //TODO JAUME, LA VARIABLE l_AKGameObjectPositions TIENE MEMORY LEAK, no se donde debe borrarse cuando se destruye
   AkSoundPosition* l_AKGameObjectPositions = ( AkSoundPosition* ) malloc( sizeof( AkSoundPosition ) * l_NumPositions );
   ZeroMemory( l_AKGameObjectPositions, sizeof( AkSoundPosition ) * l_NumPositions );
 
