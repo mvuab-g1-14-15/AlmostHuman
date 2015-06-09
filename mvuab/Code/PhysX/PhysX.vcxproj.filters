@@ -107,6 +107,7 @@
     <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp">
       <Filter>CookingMesh</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -192,5 +193,7 @@
     <ClInclude Include="CookingMesh\PhysicCookingMesh.h">
       <Filter>CookingMesh</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicUtils.h" />
+    <ClInclude Include="Physics.h" />
   </ItemGroup>
 </Project>

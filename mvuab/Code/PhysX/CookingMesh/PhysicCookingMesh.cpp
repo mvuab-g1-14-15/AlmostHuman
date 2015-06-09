@@ -128,7 +128,7 @@ bool CPhysicCookingMesh::CreatePhysicMesh( const std::string& _Bin_Filename, con
   return isOk;
 }
 
- NxTriangleMesh *CPhysicCookingMesh::CreatePhysicMesh(std::vector<Math::Vect3f> &l_VB, std::vector<uint32> &l_IB)
+ NxTriangleMesh *CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Vect3f> &l_VB, const std::vector<uint32> &l_IB)
  {
 	 ASSERT( !l_VB.empty() && !l_IB.empty(), "Null VB or IB" );
 	 if(!l_VB.empty() && !l_IB.empty())

@@ -85,6 +85,7 @@ public:
                                NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
   void        AddMeshShape( NxTriangleMesh* mesh, const Math::Vect3f& _vGlobalPos = v3fZERO,
                             const Math::Vect3f& _vLocalPos = v3fZERO, NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+  void        AddMeshShape( NxTriangleMesh* mesh, const Math::Mat44f& aTransform , NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
   void        AddPlaneShape( const Math::Vect3f& _vNormal, float _Distance, uint32 _uiGroup = 0 );
 
   //AddShape Functions hardcoded
