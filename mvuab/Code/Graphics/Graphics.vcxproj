@@ -63,6 +63,7 @@
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\BillboardRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\BloomSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ClearSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DeferredShadingSceneRendererCommand.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableZTestSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DisableZWriteSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\DrawQuadRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\EnableAlphaTestSceneRendererCommand.cpp" />
@@ -164,6 +166,7 @@
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
     <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\BillboardRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\BloomSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\CaptureFrameBufferSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ClearSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DeferredShadingSceneRendererCommand.h" />
@@ -172,6 +175,7 @@
     <ClInclude Include="SceneRenderComands\DisableAlphaTestSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableZTestSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DisableZWriteSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\DrawQuadRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\EnableAlphaBlendSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\EnableAlphaTestSceneRendererCommand.h" />

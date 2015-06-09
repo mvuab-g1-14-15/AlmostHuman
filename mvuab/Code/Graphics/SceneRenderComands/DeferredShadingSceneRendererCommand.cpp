@@ -9,14 +9,7 @@
 #include "EngineManagers.h"
 
 #include <string>
-/*
-    <set_render_target name="deferred_multiple_render_target">
-    <dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    <dynamic_texture stage_id="1" name="LightMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    <dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-    <dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F"/>
-    </set_render_target>
-*/
+
 
 CDeferredShadingSceneRendererCommand::CDeferredShadingSceneRendererCommand(
     CXMLTreeNode& atts )
@@ -37,12 +30,6 @@ CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
 void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
     ActivateTextures();
-    #ifdef _DEBUG
-
-    if ( false ) // DEBUG
-    { DebugTextures(); }
-
-    #endif
     SetLightsData( GM );
 }
 

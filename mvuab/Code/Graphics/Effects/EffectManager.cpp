@@ -142,6 +142,7 @@ void CEffectManager::Load( const std::string& lFile )
     CXMLTreeNode& l_CurrentNode = l_Node( i );
     const std::string& l_TagName = l_CurrentNode.GetName();
 
+  
     if ( l_TagName == "technique" )
     {
       const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );

@@ -285,6 +285,12 @@
     <ClCompile Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.cpp">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\BloomSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.cpp">
+      <Filter>SceneRenderComands\DebugCmd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -578,6 +584,12 @@
       <Filter>SceneRenderComands\EffectsCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderableObjectTechniquesSceneRendererCommand.h">
+      <Filter>SceneRenderComands\DebugCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\BloomSceneRendererCommand.h">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.h">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClInclude>
   </ItemGroup>
