@@ -90,6 +90,7 @@ class CObject3D
         {
             m_Scale = scale;
         }
+		void SetDirection( const Math::Vect3f& );
 		void SetTransform( const Math::Mat44f& transform )
 		{
 			m_Position = transform.GetPos();

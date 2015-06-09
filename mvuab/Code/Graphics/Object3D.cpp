@@ -70,3 +70,10 @@ const Math::Vect3f CObject3D::GetDirection() const
 
     return l_Direction;
 }
+
+void CObject3D::SetDirection( const Math::Vect3f& aDirection )
+{
+	SetYaw(Math::Utils::ATan2( aDirection.z, aDirection.x ) );
+	SetPitch(Math::Utils::ATan2( aDirection.y, Math::Utils::Sqrt( aDirection.z * aDirection.z + aDirection.x * aDirection.x ) ));
+	MakeTransform();
+}
