@@ -64,6 +64,7 @@ function andar()
 			enemy:SetCurrentPoint(currentPoint+1)
 		end
 		enemy:ChangeState("esperar")
+		enemy:GetAnimationModel():ChangeAnimation("esperar", 0.2, 1.0)
 	end
 	
 	if CheckVector(l_DistanceVector) then
@@ -91,6 +92,7 @@ function esperar()
 	
 	if countdowntimer_manager:isTimerFinish(timerName) then
 		enemy:ChangeState("andando")
+		enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		countdowntimer_manager:Reset(timerName, false)
 	end
 end
@@ -106,6 +108,7 @@ function atacar()
 		end
 	else
 		enemy:ChangeState("andando")
+		enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 	end
 end
 

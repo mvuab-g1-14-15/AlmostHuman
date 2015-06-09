@@ -46,10 +46,14 @@ void CGizmosManager::Render()
 
 CGizmoElement* CGizmosManager::CreateGizmoElement( CGizmoElement::EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color)
 {
-  return new CGizmoElement( type, size, position, yaw, pitch, color );
+	CGizmoElement* l_GizmoElement = new CGizmoElement( type, size, position, yaw, pitch, color );
+	l_GizmoElement->Init();
+	return l_GizmoElement;
 }
 
 CGizmo* CGizmosManager::CreateGizmo( std::string name, Math::Vect3f position, float yaw, float pitch )
 {
-  return new CGizmo( name, position, yaw, pitch );
+	CGizmo* l_Gizmo = new CGizmo( name, position, yaw, pitch );
+	l_Gizmo->Init();
+	return l_Gizmo;
 }

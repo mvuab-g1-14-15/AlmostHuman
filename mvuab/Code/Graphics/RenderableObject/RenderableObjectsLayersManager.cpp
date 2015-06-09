@@ -61,9 +61,6 @@ void CRenderableObjectsLayersManager::Init()
         const std::string& lTagName = TreeNode( i ).GetName();
         const std::string& lName = TreeNode( i ).GetPszProperty( "name", "" );
 
-        if ( lTagName == "comment" )
-            continue;
-
         if ( lTagName == "layer" )
         {
             if ( TreeNode( i ).GetBoolProperty( "default", false ) )
@@ -156,18 +153,7 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
     l_InstanceMesh->SetType( atts.GetPszProperty( "type", "static" ) );
 
     bool lOk = false;
-    string l_Name = l_InstanceMesh->GetName();
-
-    const std::vector<Math::Vect3f>& l_VertexBuffer = l_InstanceMesh->GetVertexBuffer();
-    const std::vector<uint32>& l_IndexBuffer = l_InstanceMesh->GetIndexBuffer();
-
-    int l_VecElements = l_VertexBuffer.size();
-    std::vector<Math::Vect3f> l_AuxVertexBuffer;
-    l_AuxVertexBuffer.resize( l_VertexBuffer.size() );
-
-    #pragma omp parallel for
-    for(int i = 0; i < l_VecElements; ++i)
-        l_AuxVertexBuffer[i] = l_InstanceMesh->GetTransform() * l_VertexBuffer[i];
+    const string& l_Name = l_InstanceMesh->GetName();
 
     CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( l_Name );
 
@@ -175,9 +161,9 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
         l_pPhysicUserDataMesh->SetGroup( ECG_DYNAMIC_OBJECTS );
 
     CPhysicActor* l_MeshActor = new CPhysicActor( l_pPhysicUserDataMesh );
-
-    NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_AuxVertexBuffer, std::vector<uint32>( l_IndexBuffer ) );
-    l_MeshActor->AddMeshShape(l_TriangleMesh, Math::Vect3f( 0.0f, 0.0f, 0.0f));
+    
+	NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+    l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
 
     if(l_InstanceMesh->GetType() == "dynamic")
     {
@@ -190,14 +176,13 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
         l_MeshActor->CreateBody(1.0f);
     }
 
-    bool oK = false;
     if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
     {
-        oK = true;
+        lOk = true;
         m_PhyscsUserData.push_back(l_pPhysicUserDataMesh);
     }
 
-    if(!oK)
+    if(!lOk)
     {
         PhysXMInstance->ReleasePhysicActor( l_MeshActor );
 

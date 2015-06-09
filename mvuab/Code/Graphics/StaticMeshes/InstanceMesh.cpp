@@ -65,6 +65,11 @@ void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )
     mPhysicActor = lPhysicActor;
 }
 
+CPhysicActor* CInstanceMesh::GetActor()
+{
+    return mPhysicActor;
+}
+
 
 CStaticMesh* CInstanceMesh::GetStaticMesh()
 {

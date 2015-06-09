@@ -4,6 +4,9 @@
 #include "Object3D.h"
 #include "Math\Color.h"
 
+class CShape;
+class CEffectTechnique;
+
 class CGizmoElement : public CObject3D
 {
 public:
@@ -21,6 +24,9 @@ private:
 
   float m_Size;
   Math::CColor m_Color;
+
+  CShape*       mShape;
+  CEffectTechnique* mTechnique;
 };
 
 #endif // GIZMO_ELEMENT_H

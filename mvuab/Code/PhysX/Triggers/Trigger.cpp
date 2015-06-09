@@ -160,6 +160,7 @@ void CTrigger::Destroy()
   // l_PM->ReleasePhysicActor( m_PhysicUserData->GetActor() );
   CHECKED_DELETE( m_PhysicActor );
   CHECKED_DELETE( m_PhysicUserData );
+  CHECKED_DELETE( mShape);
 }
 
 std::string CTrigger::GetLUAByName( unsigned int Type )
