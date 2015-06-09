@@ -162,9 +162,6 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
 
     CPhysicActor* l_MeshActor = new CPhysicActor( l_pPhysicUserDataMesh );
     
-	NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-    l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
-
     if(l_InstanceMesh->GetType() == "dynamic")
     {
         CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
@@ -175,6 +172,11 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
         l_MeshActor->AddBoxShape(Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f), l_Pos);
         l_MeshActor->CreateBody(1.0f);
     }
+	else
+	{
+		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+		l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
+	}
 
     if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
     {
