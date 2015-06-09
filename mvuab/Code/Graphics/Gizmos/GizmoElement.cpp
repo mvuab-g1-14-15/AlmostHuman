@@ -14,7 +14,7 @@
 
 CGizmoElement::CGizmoElement( EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch,
                               Math::CColor color )
-    : CObject3D( position, yaw, pitch )
+	: CObject3D( position, yaw, pitch, 0.0f, Math::Vect3f(size) )
     , m_Type( type )
     , m_Size( size )
     , m_Color( color )
@@ -29,6 +29,8 @@ CGizmoElement::CGizmoElement( EGizmoElementType type, float size, Math::Vect3f p
 		//ASSERT( false, "Sphere shape not implemented, using box shape" );
 		mShape = new CBoxShape();
 	}
+
+	mShape->SetColor(color);
 }
 
 CGizmoElement::~CGizmoElement()
