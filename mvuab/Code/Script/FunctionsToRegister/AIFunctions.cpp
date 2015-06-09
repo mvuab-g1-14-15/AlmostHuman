@@ -10,6 +10,7 @@
 #include "Characters\Enemies\BossEnemy.h"
 #include "Characters\Enemies\EasyEnemy.h"
 #include "Characters\Enemies\EnemyManager.h"
+#include "Characters\Enemies\Shoot.h"
 #include "StateMachine\StateMachine.h"
 #include "StateMachine\State.h"
 #include "Utils\MapManager.h"
@@ -136,6 +137,16 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
     LUA_DECLARE_METHOD( CEnemyManager, GetResource )
     LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
+    LUA_END_DECLARATION
+
+	LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CShoot, CObject3D )
+	LUA_DECLARE_DEFAULT_CTOR
+	LUA_DECLARE_CTOR_3( float, Math::Vect3f, float )
+    LUA_DECLARE_METHOD( CShoot, Init )
+    LUA_DECLARE_METHOD( CShoot, Update )
+    LUA_DECLARE_METHOD( CShoot, Render )
+	LUA_DECLARE_METHOD( CShoot, Impacted )
     LUA_END_DECLARATION
 }
 void registerAI( lua_State* aLuaState )

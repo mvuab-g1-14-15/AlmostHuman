@@ -13,6 +13,8 @@ function CBlaster:__init()
 	self.Energy = 100.0
 	self.Multiplicador = 2
 	
+	self.Shoots = {}
+	
     engine:Trace("Blaster initialized")
 end
 
@@ -26,6 +28,11 @@ function CBlaster:CalculateDamage()
 end
 
 function CBlaster:Shoot()
+	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
+	local lShoot = CShoot(1.0, lDirection, self:CalculateDamage())
+	table.insert(self.Shoots, lShoot)
+
+--[[ Old code
 	local lEnemy = self:GetEnemyFromRay()
     
 	if lEnemy ~= nil then
@@ -33,6 +40,7 @@ function CBlaster:Shoot()
 		lEnemy:AddDamage( damage )
 		engine:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
+	]]
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -101,6 +109,14 @@ function CBlaster:Update()
 			end
 			self.TimePressed = 0.0
 			self.IsAcumulatorSound = false
+		end
+
+		for i = #self.Shoots,1,-1 do
+			local lShoot = self.Shoots[i]
+			lShoot:Update()
+			if lShoot:Impacted() then
+				table.remove(self.Shoots, i)
+			end
 		end
 	end
 end
