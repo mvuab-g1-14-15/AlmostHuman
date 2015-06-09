@@ -31,41 +31,7 @@ CBloomSceneRendererCommand::CBloomSceneRendererCommand( CXMLTreeNode& atts )
   // Get the technique and obtain the effect, then link the semantics
   ASSERT( m_Technique, "Null technique for bloom command" );
   m_Effect = m_Technique->GetEffect()->GetEffect();
-
   LinkBloomParameters();
-
-  if ( !ParseXML( atts ) )
-  {
-    const std::string& lMsgError = "Error reading the bloom scenre renderer file";
-    FATAL_ERROR( lMsgError.c_str() );
-  }
-
-  // Parsear el node atts y buscar
-  // texture
-  // si texture_in la pido al texman
-  // si texture_out la creo con los parametros
-  // añadir a mTextures
-  // Assert de las dos texturas son validas
-}
-
-bool CBloomSceneRendererCommand::ParseXML( CXMLTreeNode& att )
-{
-
-  for ( int i = 0, lCount = att.GetNumChildren(); i < lCount ; ++i )
-  {
-    CXMLTreeNode& l_CurrentNode = att( i );
-    const std::string& l_TagName = l_CurrentNode.GetName();
-
-    if ( l_TagName == "texture_in" )
-    {
-    }
-    else if ( l_TagName == "texture_out" )
-    {
-    }
-  }
-
-  return true;
-
 }
 
 void CBloomSceneRendererCommand::LinkBloomParameters()
@@ -116,13 +82,6 @@ void CBloomSceneRendererCommand::Execute( CGraphicsManager& GM )
     if ( m_StageTextures[i].mIsDynamic )
       m_StageTextures[i].m_Texture->UnsetAsRenderTarget();
   }
-}
-
-void CBloomSceneRendererCommand::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
-{
-  a_Handle = m_Effect->GetParameterBySemantic( 0, SemanticName.c_str() );
-  //ASSERT( a_Handle, "Parameter by semantic '%s' wasn't found on effect '%s'", SemanticName.c_str(),
-  // );
 }
 
 void CBloomSceneRendererCommand::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle )

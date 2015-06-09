@@ -155,6 +155,7 @@ void CSceneRendererCommandManager::Init()
                            Type2Type<CProcessRenderRendererCommand>( ) );
   m_CommandFactory.Register( "render_triggers",
                            Type2Type<CTriggerRenderCommand>( ) );
+  m_CommandFactory.Register( "bloom", Type2Type<CBloomSceneRendererCommand>( ) );
   Load(mConfigPath);
 
 }

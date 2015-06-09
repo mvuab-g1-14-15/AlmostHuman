@@ -33,10 +33,7 @@ private:
   DECLARE_EFFECT_PARAMETER(BloomSaturation);
   DECLARE_EFFECT_PARAMETER(BloomOriginalSaturation);
   
-
   void LinkBloomParameters();
   void GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle );
-  void GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle );
-  bool ParseXML(CXMLTreeNode& att);
 };
 #endif

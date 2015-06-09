@@ -219,20 +219,18 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
 
 bool CTexture::Save( const std::string& FileName )
 {
-    // Usage:
-    // CTexture t;
-    // t.Create( "Static", 800, 600, 1, CTexture::RENDERTARGET, CTexture::DEFAULT, CTexture::A8R8G8B8 );
-    // t.SetAsRenderTarget();
-    // Render something here
-    // t.UnsetAsRenderTarget();
-    // t.Save("t");
-    assert( m_Texture != NULL );
-    /*  HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".tga" ).c_str(),
-                                        D3DXIFF_TGA,
-                                        m_Texture, 0 );*/
-    HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(),
-                                        D3DXIFF_PNG,
-                                        m_Texture, 0 );
-    assert( hr == D3D_OK );
-    return hr == D3D_OK;
+	bool lOk = true;
+	ASSERT( m_Texture, "Null d3dx texture to save" );
+    if( m_Texture )
+	{
+		HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture, 0 );
+
+		if( hr != D3D_OK )
+		{
+			lOk = false;
+			LOG_ERROR_APPLICATION("Error while saving the texture");
+		}
+	}
+    
+	return lOk;
 }
