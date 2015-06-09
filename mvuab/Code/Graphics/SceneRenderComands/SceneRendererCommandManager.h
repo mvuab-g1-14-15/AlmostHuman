@@ -8,6 +8,7 @@
 #include "SceneRendererCommand.h"
 #include <string>
 #include "Utils/Manager.h"
+#include "Utils\ObjectFactory.h"
 
 class CSceneRendererCommandManager : public CManager
 {
@@ -18,6 +19,7 @@ public:
   CRenderGUISceneRendererCommand* GetCommandGUI( );
 
   void Init();
+  bool Load(const std::string& lFile);
   void ReLoad();
   bool Execute();
   void Update() {}
@@ -29,5 +31,7 @@ private:
 
   void CleanUp();
   std::string GetNextName();
+
+  ObjectFactory1< CSceneRendererCommand, CXMLTreeNode, std::string > m_CommandFactory;
 };
 #endif

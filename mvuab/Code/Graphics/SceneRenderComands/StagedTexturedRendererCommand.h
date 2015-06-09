@@ -20,10 +20,12 @@ protected:
   public:
     int     m_StageId;
     CTexture*  m_Texture;
-    CKGStageTexture( int StageId, CTexture* Texture )
+    bool mIsDynamic;
+    CKGStageTexture( int StageId, CTexture* Texture, bool aIsDynamic )
     {
       m_StageId = StageId;
       m_Texture = Texture;
+      mIsDynamic = aIsDynamic;
     }
     void Activate();
   };
@@ -36,7 +38,7 @@ public:
   CStagedTexturedRendererCommand( CXMLTreeNode& atts );
   virtual ~CStagedTexturedRendererCommand();
   void ActivateTextures();
-  void AddStageTexture( int StageId, CTexture* Texture );
+  void AddStageTexture( int StageId, CTexture* Texture, bool aIsDynamic );
 
   virtual void Execute( CGraphicsManager& GM ) = 0;
 };

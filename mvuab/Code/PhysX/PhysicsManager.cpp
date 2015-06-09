@@ -5,15 +5,7 @@
 #include "Utils\Defines.h"
 ////#include "Utils\Base.h"
 
-////----PhysX Includes-------------
-#undef min
-#undef max
-#include "NxPhysics.h"
-#include "NxControllerManager.h"
-#include "NxCapsuleController.h"
-#include "NxUserRaycastReport.h"
-#include "NxMaterial.h"
-#include "NxMaterialDesc.h"
+#include "Physics.h"
 
 #include "Actor\PhysicActor.h"
 #include "Reports\PhysicCollisionReport.h"

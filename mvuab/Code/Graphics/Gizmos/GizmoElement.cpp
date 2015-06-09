@@ -35,6 +35,7 @@ CGizmoElement::CGizmoElement( EGizmoElementType type, float size, Math::Vect3f p
 
 CGizmoElement::~CGizmoElement()
 {
+    CHECKED_DELETE(mShape);
 }
 
 void CGizmoElement::Init()

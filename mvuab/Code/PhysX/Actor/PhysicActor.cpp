@@ -3,6 +3,7 @@
 #include "PhysicsManager.h"
 #include "Utils\PhysicUserData.h"
 #include "Math\Matrix44.h"
+#include "PhysicUtils.h"
 
 //----PhysX Includes-------------
 #undef min
@@ -252,14 +253,14 @@ void CPhysicActor::AddBoxShapeHardcoded( const Math::Vect3f& _vSize,
   //l_BoxDesc->localPose.M.rotX(NxReal(rotation.x));
   //l_BoxDesc->localPose.M.rotY(NxReal(rotation.y));
   //l_BoxDesc->localPose.M.rotZ(NxReal(rotation.z));
-  l_BoxDesc->localPose.t    = NxVec3( localPos.x, localPos.y, localPos.z );
-  NxMat33 rotX              = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotY              = m_pPhXActorDesc->globalPose.M;
-  NxMat33 rotZ              = m_pPhXActorDesc->globalPose.M;
+  l_BoxDesc->localPose.t		= NxVec3( localPos.x, localPos.y, localPos.z );
+  NxMat33 rotX					= m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotY					= m_pPhXActorDesc->globalPose.M;
+  NxMat33 rotZ					= m_pPhXActorDesc->globalPose.M;
   rotX.rotX( NxReal( rotation.x ) );
   rotY.rotY( NxReal( rotation.y ) );
   rotZ.rotZ( NxReal( rotation.z ) );
-  NxMat33 rotAll            = rotY;
+  NxMat33 rotAll				= rotY;
   rotAll.multiply( rotY, rotX );
   rotAll.multiply( rotAll, rotZ );
   m_pPhXActorDesc->globalPose.M = rotAll;
@@ -298,6 +299,30 @@ void CPhysicActor::AddCapsuleShape( float radius, float height, const Math::Vect
   m_pPhXActorDesc->shapes.pushBack( capsuleDesc );
 }
 
+void CPhysicActor::AddMeshShape( NxTriangleMesh* mesh, const Math::Mat44f& aTransform , NxCCDSkeleton* _pSkeleton , uint32 _uiGroup )
+{
+	ASSERT(m_pPhXActorDesc, "Null actor descriptor");
+	ASSERT( mesh, "Null mesh" );
+
+	// Add a mesh shape to the actor descriptor
+	  NxTriangleMeshShapeDesc* triangleMeshDesc = new NxTriangleMeshShapeDesc();
+	  triangleMeshDesc->group                   = _uiGroup;
+	  triangleMeshDesc->materialIndex           = m_MaterialIndex;
+	  m_vMeshDesc.push_back( triangleMeshDesc );
+	  // The actor has mesh shape
+	  triangleMeshDesc->meshData                = mesh;
+	  PhysicUtils::Convert<Math::Mat44f, NxMat34>(aTransform, m_pPhXActorDesc->globalPose );
+
+	  if ( _pSkeleton )
+	  {
+		triangleMeshDesc->ccdSkeleton = _pSkeleton;
+		triangleMeshDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
+		triangleMeshDesc->shapeFlags |= NX_MESH_SMOOTH_SPHERE_COLLISIONS;
+	  }
+
+	  m_pPhXActorDesc->shapes.pushBack( triangleMeshDesc );
+}
+
 void CPhysicActor::AddMeshShape( NxTriangleMesh* mesh, const Math::Vect3f& _vGlobalPos,
                                  const Math::Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 _uiGroup )
 {
@@ -305,7 +330,6 @@ void CPhysicActor::AddMeshShape( NxTriangleMesh* mesh, const Math::Vect3f& _vGlo
   assert( mesh );
   // Add a mesh shape to the actor descriptor
   NxTriangleMeshShapeDesc* triangleMeshDesc = new NxTriangleMeshShapeDesc();
-  assert( triangleMeshDesc );
   triangleMeshDesc->group                   = _uiGroup;
   triangleMeshDesc->materialIndex           = m_MaterialIndex;
   m_vMeshDesc.push_back( triangleMeshDesc );
@@ -329,7 +353,7 @@ void CPhysicActor::AddPlaneShape( const Math::Vect3f& _vNormal, float distance, 
   // Add a plane shape to the actor descriptor
   NxPlaneShapeDesc* planeDesc = new NxPlaneShapeDesc();
   assert( planeDesc );
-  planeDesc->group  = _uiGroup;
+  planeDesc->group			  = _uiGroup;
   planeDesc->materialIndex    = m_MaterialIndex;
   m_vPlaneDesc.push_back( planeDesc );
   planeDesc->normal           = NxVec3( _vNormal.x, _vNormal.y, _vNormal.z );

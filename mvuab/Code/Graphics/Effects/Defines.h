@@ -2,12 +2,15 @@
 #ifndef EFFECTS_DEFINES_H
 #define EFFECTS_DEFINES_H
 
+#include <d3dx9.h>
+
 #define DECLARE_EFFECT_PARAMETER( semantic ) D3DXHANDLE m_##semantic;
 #define CTOR_EFFECT_PARAMETER( semantic ) m_##semantic( 0 )
 #define RESET_EFFECT_PARAMETER( semantic ) m_##semantic = 0;
 #define LINK_EFFECT_PARAMETER( parameter ) GetParameterBySemantic( #parameter, m_##parameter );
 
-#define SET_FLOAT_PARAMETER( parameter, value ) m_Effect->SetFloat( m_##parameter, value );
+#define SET_FLOAT_PARAMETER( parameter, value ) m_Effect->SetFloat( m_##parameter, value )
+#define SET_INT_PARAMETER( parameter, value ) m_Effect->SetInt( m_##parameter, value )
 #define SET_MATRIX_PARAMETER( parameter, value ) m_Effect->SetMatrix( m_##parameter, &Matrix.GetD3DXMatrix() );
 
 //-----------------------------------------------------------------------
