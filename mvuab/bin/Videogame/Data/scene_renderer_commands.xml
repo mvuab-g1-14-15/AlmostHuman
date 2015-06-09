@@ -30,7 +30,6 @@
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
 	<render_debug render_lights="false" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/>
-	<render_gizmos render="true"/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
 	
 	<render_gui render="true"/>
@@ -63,6 +62,7 @@
 	<render_billboards/>
 	<render_particules/>
 	<render_triggers/>
+	<render_gizmos render="true"/>
 	<render_process/>
 	
 	<disable_z_test/>

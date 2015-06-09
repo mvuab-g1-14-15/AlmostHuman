@@ -64,6 +64,9 @@
     <ClCompile Include="MessagePassing\Subscriber.cpp">
       <Filter>MessagePassing</Filter>
     </ClCompile>
+    <ClCompile Include="Characters\Enemies\Shoot.cpp">
+      <Filter>Characters\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine\Action.h">
@@ -107,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="MessagePassing\Subscriber.h">
       <Filter>MessagePassing</Filter>
+    </ClInclude>
+    <ClInclude Include="Characters\Enemies\Shoot.h">
+      <Filter>Characters\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #ifndef EFFECT_H
 #define EFFECT_H
 
-#include <d3dx9.h>
+#include "Defines.h"
 #include <string>
 #include <vector>
 #include "Math\Matrix44.h"
