@@ -14,7 +14,7 @@ TGEOMETRY_PS mainVS(TGEOMETRY IN)
 
 float4 mainPS(TGEOMETRY_PS IN) : COLOR
 {
-	return float4(0.0, 0, 0.5, 0.5);
+	return g_DebugColor;
 }
 
 technique TECHNIQUE_NAME

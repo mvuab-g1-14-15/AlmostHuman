@@ -81,6 +81,9 @@ void CEnemy::Update()
     SetYaw( m_Controller->GetYaw() );
     SetPitch( m_Controller->GetPitch() );
     SetRoll( m_Controller->GetRoll() );
+	
+	MakeTransform();
+
     m_pRenderableObject->SetPosition( m_Position );
     m_pRenderableObject->SetYaw( m_fYaw );
     m_pRenderableObject->SetPitch( m_fPitch );
@@ -102,12 +105,12 @@ void CEnemy::Update()
     if ( l_Gizmo )
     {
         l_Gizmo->SetPosition( l_Pos );
-        l_Gizmo->SetYaw( - m_fYaw - Math::pi32 * 0.5f );
+        l_Gizmo->SetYaw( m_fYaw );
         l_Gizmo->SetPitch( m_fPitch );
     }
     else
     {
-        l_Gizmo = l_GizmosManager->CreateGizmo( l_GizmoName, l_Pos, - m_fYaw - Math::pi32 * 0.5f, m_fPitch );
+        l_Gizmo = l_GizmosManager->CreateGizmo( l_GizmoName, l_Pos, m_fYaw, m_fPitch );
         l_GizmosManager->AddResource( l_GizmoName, l_Gizmo );
 
         CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.4f, 0.0f, 0.0f ), 0.0f, 0.0f, Math::colRED );
