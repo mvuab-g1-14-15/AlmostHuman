@@ -3,6 +3,8 @@
 
 #include "Object3D.h"
 
+class CBillboard;
+
 class CShoot : public CObject3D
 {
 public:
@@ -10,7 +12,7 @@ public:
 	CShoot( float, Math::Vect3f, Math::Vect3f, float);
     virtual ~CShoot();
 
-    virtual void Init();
+    virtual bool Init();
     virtual void Update();
     virtual void Render();
 
@@ -21,6 +23,8 @@ private:
 	float mDamage;
 	bool mImpacted;
 	Math::Vect3f mDirection;
+
+	CBillboard* mBillboard;
 };
 
 #endif

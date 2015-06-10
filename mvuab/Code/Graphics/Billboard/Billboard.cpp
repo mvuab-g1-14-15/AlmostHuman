@@ -71,8 +71,8 @@ bool CBillboard::Init
     bool lOk( true );
 
     SetName( aName );
-
     m_Position = aPosition;
+	MakeTransform();
     mSize      = aSize;
     mAlpha     = aAlpha;
     mAngle     = aAngle;

@@ -37,6 +37,8 @@ class CBillboard : public CName, public CObject3D
         void Render();
         void Update();
 
+		void SetActive( bool aActive );
+
     private:
         CTexture*           m_Texture;
         CEffectTechnique*   mTechnique;
@@ -47,5 +49,11 @@ class CBillboard : public CName, public CObject3D
 
 		static CRenderableVertexs* sRV;
 };
+
+//--------------------------------------------------------------------------------------------------------------
+inline void CBillboard::SetActive( bool aActive )
+{
+	m_Active = aActive;
+}
 
 #endif //_BILLBOARD_H

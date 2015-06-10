@@ -1,7 +1,7 @@
 <billboards>
-    <!--
+    
 	<billboard name="billboard001" pos="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" size="2 2" enabled="true" texture="Data/textures/pearlring.png" technique="BillboardAlignedToCameraTechnique" />
 	<billboard name="billboard002" pos="0.0 2.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" size="2 2" enabled="true" texture="Data/textures/pearlring.png" technique="BillboardAlignedToWorldUpAxisTechnique" />
 	<billboard name="billboard003" pos="2.0 2.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" size="2 2" enabled="true" texture="Data/textures/pearlring.png" technique="BillboardNotAlignedTechnique" />
-	-->
+	
 </billboards>
