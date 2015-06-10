@@ -730,6 +730,11 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
     //Por defecto ya est alienado de esta manera :)
   }
   break;
+  case UPPER_LEFT_MIDDLE:
+  {
+    finalPos.x -= ( uint32 ) (w * 0.5f);
+  }
+  break;
 
   case UPPER_RIGHT:
   {
@@ -1368,15 +1373,18 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, 
 
 void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, float yaw, ETypeAlignment alignment, CTexture* Texture )
 {
+  Math::Vect2i finalPos = pos;
+  CalculateAlignment( w, h, alignment, finalPos );
   // Vectores Dirección
   Math::Vect2f right( cos( -yaw ), sin( -yaw ) );
   Math::Vect2f up( cos( -yaw - D3DX_PI / 2 ), sin( -yaw - D3DX_PI / 2 ) );
   // Vértices
-  Math::Vect2f vertex3( pos.x - ( up.x * w / 2 ) + ( right.x * h / 2 ), pos.y - ( up.y * w / 2 ) + ( right.y * h / 2 ) );
-  Math::Vect2f vertex1( pos.x - ( up.x * w / 2 ) - ( right.x * h / 2 ), pos.y - ( up.y * w / 2 ) - ( right.y * h / 2 ) );
-  Math::Vect2f vertex2( pos.x + ( up.x * w / 2 ) + ( right.x * h / 2 ), pos.y + ( up.y * w / 2 ) + ( right.y * h / 2 ) );
-  Math::Vect2f vertex0( pos.x + ( up.x * w / 2 ) - ( right.x * h / 2 ), pos.y + ( up.y * w / 2 ) - ( right.y * h / 2 ) );
+  Math::Vect2f vertex3( finalPos.x - ( up.x * w / 2 ) + ( right.x * h / 2 ), finalPos.y - ( up.y * w / 2 ) + ( right.y * h / 2 ) );
+  Math::Vect2f vertex1( finalPos.x - ( up.x * w / 2 ) - ( right.x * h / 2 ), finalPos.y - ( up.y * w / 2 ) - ( right.y * h / 2 ) );
+  Math::Vect2f vertex2( finalPos.x + ( up.x * w / 2 ) + ( right.x * h / 2 ), finalPos.y + ( up.y * w / 2 ) + ( right.y * h / 2 ) );
+  Math::Vect2f vertex0( finalPos.x + ( up.x * w / 2 ) - ( right.x * h / 2 ), finalPos.y + ( up.y * w / 2 ) - ( right.y * h / 2 ) );
 
+  
 
   // finalPos = [0]
   //

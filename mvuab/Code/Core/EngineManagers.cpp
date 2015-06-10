@@ -135,16 +135,16 @@ void CEngineManagers::Init()
 
   if ( TreeNode.Exists() )
   {
-    int count = TreeNode.GetNumChildren();
+    
 
-    for ( int i = 0; i < count; ++i )
+    for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
     {
-      const std::string& TagName = TreeNode( i ).GetName();
 
-      if ( TagName == "comment" )
-        continue;
+      CXMLTreeNode  Node = TreeNode( i );
+      
+      const std::string& TagName = Node.GetName();
 
-      CManager* Manager = ManagerFactory.Create( TagName.c_str(), TreeNode( i ) );
+      CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
 
       if ( !Manager )
         LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );

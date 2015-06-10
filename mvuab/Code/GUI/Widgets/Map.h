@@ -79,6 +79,7 @@ public:
   void AddItem( const std::string& Name, const std::string& Texture, Math::Vect3f PosInMap3D, uint32 Width,
                 uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
   void AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string OrientationScript );
+  void AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript );
   void AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw, std::string PositionScript, std::string  OrientationScript );
 
   void SetPositionPlayer( Math::Vect3f position );

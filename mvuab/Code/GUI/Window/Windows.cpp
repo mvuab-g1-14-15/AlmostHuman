@@ -812,38 +812,45 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
   //width_map="0.02" height_map="0.02" pos_0_0_3d_map="350.0 550.0" pos_1_1_3d_map="-50.0 -80.0" visible="true" active="true">
   //mark name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 
-  const std::string& name  = pNewNode.GetPszProperty( "name", "Radar" );
-  const std::string& texture_marco = pNewNode.GetPszProperty( "texture_marco",
-                                     "Data/textures/GUI/Textures_Test/marco2.png" );
-  const std::string& texture_map  = pNewNode.GetPszProperty( "texture_map", "Data/textures/GUI/Textures_Test/mapa.png" );
-  Math::Vect2f pos_in_screen = pNewNode.GetVect2fProperty( "pos_in_screen", Math::Vect2f( 0.f, 0.f ) );
-  Math::Vect2f pos_0_0_3d_map  = pNewNode.GetVect2fProperty( "pos_0_0_3d_map", Math::Vect2f( 0.f, 0.f ) );
-  Math::Vect2f pos_1_1_3d_map  = pNewNode.GetVect2fProperty( "pos_1_1_3d_map", Math::Vect2f( 0.f, 0.f ) );
-  float w = pNewNode.GetFloatProperty( "width", 8.f );
-  float h = pNewNode.GetFloatProperty( "height", 40.f );
-  float w_map   = pNewNode.GetFloatProperty( "width_map", 0.02f );
-  float h_map   = pNewNode.GetFloatProperty( "height_map", 0.02f );
-  bool visible  = pNewNode.GetBoolProperty( "visible", true );
-  bool activated = pNewNode.GetBoolProperty( "active", true );
-
+  const std::string& name                     = pNewNode.GetPszProperty( "name", "Radar" );
+  const std::string& texture_marco            = pNewNode.GetPszProperty( "texture_marco",
+                                               "Data/textures/GUI/Textures_Test/marco2.png" );
+  const std::string& texture_map              = pNewNode.GetPszProperty( "texture_map", "Data/textures/GUI/Textures_Test/mapa.png" );
+  const std::string& position_script_enemy    = pNewNode.GetPszProperty( "get_position_script", "no_script" );
+  const std::string& orientation_script_enemy = pNewNode.GetPszProperty( "orientation", "no_script" );
+  const std::string& texture_enemy			  = pNewNode.GetPszProperty( "texture_enemy", "" );
+  Math::Vect2f pos_in_screen                  = pNewNode.GetVect2fProperty( "pos_in_screen", Math::Vect2f( 0.f, 0.f ) );
+  Math::Vect2f pos_0_0_3d_map                 = pNewNode.GetVect2fProperty( "pos_0_0_3d_map", Math::Vect2f( 0.f, 0.f ) );
+  Math::Vect2f pos_1_1_3d_map                 = pNewNode.GetVect2fProperty( "pos_1_1_3d_map", Math::Vect2f( 0.f, 0.f ) );
+  float w                                     = pNewNode.GetFloatProperty( "width", 8.f );
+  float h                                     = pNewNode.GetFloatProperty( "height", 40.f );
+  float w_map                                 = pNewNode.GetFloatProperty( "width_map", 0.02f );
+  float h_map                                 = pNewNode.GetFloatProperty( "height_map", 0.02f );
+  bool visible                                = pNewNode.GetBoolProperty( "visible", true );
+  bool activated                              = pNewNode.GetBoolProperty( "active", true );
+  uint32 WidthEnemy                           = pNewNode.GetIntProperty( "width_enemy", 50 );
+  uint32 HeightEnemy                          = pNewNode.GetIntProperty( "height_enemy", 50 );
 
 
   CMap* l_Map = new CMap( screenResolution.y, screenResolution.x, h, w, pos_in_screen, texture_marco, texture_map,
                           pos_0_0_3d_map, pos_1_1_3d_map,
                           h_map, w_map, visible, activated );
   l_Map->SetName( name );
+  
+  l_Map->AddEnemys( texture_enemy, WidthEnemy, HeightEnemy, position_script_enemy, orientation_script_enemy );
+
   int count = pNewNode.GetNumChildren();
 
   for ( int i = 0; i < count; ++i )
   {
-    CXMLTreeNode pSubNewNode = pNewNode( i );
-    const std::string& NameItem  = pSubNewNode.GetPszProperty( "name", "defaultItemElement" );
-    const std::string& TextureItem = pSubNewNode.GetPszProperty( "texture", "no_texture" );
-    const std::string& position_script = pSubNewNode.GetPszProperty( "get_position_script", "no_script" );
+    CXMLTreeNode pSubNewNode              = pNewNode( i );
+    const std::string& NameItem           = pSubNewNode.GetPszProperty( "name", "defaultItemElement" );
+    const std::string& TextureItem        = pSubNewNode.GetPszProperty( "texture", "no_texture" );
+    const std::string& position_script    = pSubNewNode.GetPszProperty( "get_position_script", "no_script" );
     const std::string& orientation_script = pSubNewNode.GetPszProperty( "orientation", "no_script" );
-    uint32 WidthItem = pSubNewNode.GetIntProperty( "width", 50 );
-    uint32 HeightItem  = pSubNewNode.GetIntProperty( "height", 50 );
-    float Yaw = pSubNewNode.GetFloatProperty( "yaw", 0.f );
+    uint32 WidthItem                      = pSubNewNode.GetIntProperty( "width", 50 );
+    uint32 HeightItem                     = pSubNewNode.GetIntProperty( "height", 50 );
+    float Yaw                             = pSubNewNode.GetFloatProperty( "yaw", 0.f );
 
     std::string tagName = pSubNewNode.GetName();
 
@@ -858,9 +865,6 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
       Math::Vect3f pos = pSubNewNode.GetVect3fProperty( "pos_in_map", Math::Vect3f( 0.f, 0.0f, 0.f ) );
       l_Map->AddPlayer( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
     }
-
-    if ( tagName.compare( "enemy" ) == 0 )
-      l_Map->AddEnemy( NameItem, TextureItem, WidthItem, HeightItem, Yaw, position_script, orientation_script );
 
   }
 
