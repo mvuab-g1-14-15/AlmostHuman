@@ -7,6 +7,7 @@
 #include "Actor\PhysicActor.h"
 #include "Characters\Enemies\EnemyManager.h"
 #include "Characters\Enemies\Enemy.h"
+#include "Timer\Timer.h"
 
 CShoot::CShoot()
 	: CObject3D()
@@ -17,8 +18,8 @@ CShoot::CShoot()
 {
 }
 
-CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, float aDamage )
-	: CObject3D()
+CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, float aDamage )
+	: CObject3D( aPosition, 0.0f, 0.0f )
 	, mSpeed( aSpeed )
 	, mDamage( aDamage )
 	, mDirection( aDirection )
@@ -42,26 +43,35 @@ void CShoot::Update()
 		const Math::Vect3f& lDirection = GetDirection();
 		const Math::Vect3f& lPosition = GetPosition();
 
-		const Math::Vect3f& lVelocity = lDirection * mSpeed;
+		const Math::Vect3f lVelocity( lDirection * mSpeed * deltaTimeMacro );
 
-		const float& lLength = lVelocity.Length();
+		const float lLength( lVelocity.Length() );
 
-		const Math::Vect3f& lNewPosition = lPosition + lVelocity;
+		const Math::Vect3f lNewPosition = lPosition + lVelocity;
 
 		SCollisionInfo hit_info;
-		CPhysicUserData* lPUD = PhysXMInstance->RaycastClosestActor(lPosition, lDirection, 0xffffff, hit_info, lLength);
+		CPhysicUserData* lPUD = PhysXMInstance->RaycastClosestActor(lPosition, lDirection, 0xffffff, hit_info);
 
 		if (lPUD)
 		{
-			const std::string lName = lPUD->GetName();
-			CEnemy* lEnemy = EnemyMInstance->GetResource(lName);
+			const Math::Vect3f lCollisionPoint( hit_info.m_CollisionPoint );
+			const float lDistance( lCollisionPoint.Distance( lNewPosition ) );
+			if ( lDistance < lLength )
+			{
+				const std::string lName = lPUD->GetName();
+				CEnemy* lEnemy = EnemyMInstance->GetResource(lName);
 
-			if (lEnemy)
-				lEnemy->AddDamage( mDamage );
+				if (lEnemy)
+					lEnemy->AddDamage( mDamage );
 
-			mImpacted = true;
+				mImpacted = true;
 
-			SetPosition( hit_info.m_CollisionPoint );
+				SetPosition( hit_info.m_CollisionPoint );
+			}
+			else
+			{
+				SetPosition( lNewPosition );
+			}
 		}
 		else
 		{

@@ -1,4 +1,5 @@
 <animated_model name="enemy1">
+	<texture file=""/>
 	<skeleton file="androide.csf"/>
 	<mesh file="androide.cmf"/>
 	<!--animation name="idle" file="idle.caf"/-->

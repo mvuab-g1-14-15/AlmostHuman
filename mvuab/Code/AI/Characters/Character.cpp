@@ -60,7 +60,7 @@ void CCharacter::Init( CXMLTreeNode& Node )
     m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
     CPhysicsManager* l_PM = PhysXMInstance;
     l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.4f ),
-                         Node.GetFloatProperty( "height", 2.0f )/2.0f,
+                         Node.GetFloatProperty( "height", 2.0f ),
                          Node.GetFloatProperty( "slope", 0.2f ),
                          Node.GetFloatProperty( "skin_width", 0.01f ),
                          Node.GetFloatProperty( "step", 0.5f ),

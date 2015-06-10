@@ -142,7 +142,7 @@ void registerEnemies( lua_State* aLuaState )
 	LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CShoot, CObject3D )
 	LUA_DECLARE_DEFAULT_CTOR
-	LUA_DECLARE_CTOR_3( float, Math::Vect3f, float )
+	LUA_DECLARE_CTOR_4( float, Math::Vect3f, Math::Vect3f, float )
     LUA_DECLARE_METHOD( CShoot, Init )
     LUA_DECLARE_METHOD( CShoot, Update )
     LUA_DECLARE_METHOD( CShoot, Render )

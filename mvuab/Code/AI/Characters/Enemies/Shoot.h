@@ -7,7 +7,7 @@ class CShoot : public CObject3D
 {
 public:
     CShoot();
-	CShoot( float, Math::Vect3f, float);
+	CShoot( float, Math::Vect3f, Math::Vect3f, float);
     virtual ~CShoot();
 
     virtual void Init();
