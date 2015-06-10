@@ -55,6 +55,7 @@ void CCharacter::Init()
     SetTargetPosition( m_Controller->GetPosition() );
     SetTargetPositionOriginal( m_Controller->GetPosition() );
 }
+
 void CCharacter::Init( CXMLTreeNode& Node )
 {
     m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );

@@ -30,7 +30,8 @@ end
 function CBlaster:Shoot()
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
 	local lPosition = camera_manager:GetCurrentCamera():GetPosition() + lDirection * 0.5
-	local lShoot = CShoot(1000.0, lDirection, lPosition, self:CalculateDamage())
+	local lShoot = CShoot(20.0, lDirection, lPosition, self:CalculateDamage())
+	lShoot:Init()
 	table.insert(self.Shoots, lShoot)
 
 --[[ Old code

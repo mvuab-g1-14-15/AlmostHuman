@@ -8,6 +8,8 @@
 #include "Characters\Enemies\EnemyManager.h"
 #include "Characters\Enemies\Enemy.h"
 #include "Timer\Timer.h"
+#include "Billboard\Billboard.h"
+#include "Billboard\BillboardManager.h"
 
 CShoot::CShoot()
 	: CObject3D()
@@ -15,6 +17,7 @@ CShoot::CShoot()
 	, mDamage( 0.0f )
 	, mDirection( Math::Vect3f( 1.0f ) )
 	, mImpacted( false )
+	, mBillboard( new CBillboard() )
 {
 }
 
@@ -24,16 +27,27 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 	, mDamage( aDamage )
 	, mDirection( aDirection )
 	, mImpacted( false )
+	, mBillboard( 0 )
 {
 	SetDirection( mDirection );
+	mBillboard = BillboardMan->GetResource( "ShootBillBoard");
+	if( !mBillboard )
+	{
+		mBillboard = new CBillboard();		
+		BillboardMan->AddResource( "ShootBillBoard", mBillboard );
+	}
 }
 
 CShoot::~CShoot()
 {
 }
 
-void CShoot::Init()
+bool CShoot::Init()
 {
+	bool lOk( true );
+	lOk = lOk && mBillboard->Init( "ShootBillBoard", GetPosition(), 1.0f, 0.0f, 1.0f, "Data/textures/particles/fire3.png", "SmokeTechnique" );
+	ASSERT(lOk, "Error initing the shoot");
+	return lOk;
 }
 
 void CShoot::Update()
@@ -67,6 +81,8 @@ void CShoot::Update()
 				mImpacted = true;
 
 				SetPosition( hit_info.m_CollisionPoint );
+
+				mBillboard->SetActive( false );
 			}
 			else
 			{
@@ -78,12 +94,16 @@ void CShoot::Update()
 			SetPosition( lNewPosition );
 		}
 
+		mBillboard->SetPosition(GetPosition());
+		mBillboard->MakeTransform();
+
 		MakeTransform();
 	}
 }
 
 void CShoot::Render()
 {
+
 }
 
 bool CShoot::Impacted()
