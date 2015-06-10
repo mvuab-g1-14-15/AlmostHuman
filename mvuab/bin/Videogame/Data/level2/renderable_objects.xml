@@ -354,7 +354,7 @@
   <MeshInstance name="barrierCIL_044" core="barrierCIL_044" pos="70.1986 -15.3752 -41.4458" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrierCIL_045" core="barrierCIL_045" pos="70.1726 -15.3752 -42.0326" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="metal_barrel084" core="metal_barrel084" pos="58.5584 -18.2657 -55.7802" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="metal_barrel085" core="metal_barrel085" pos="59.4942 -18.2436 -55.8061" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="metal_barrel085" core="metal_barrel085" pos="59.4942 -18.2436 -55.8061" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" type="dynamic"/>
   <MeshInstance name="Estanteria_tipusB_007" core="Estanteria_tipusB_007" pos="72.9238 -16.9793 -29.4239" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box023" core="Box023" pos="52.1917 -13.4993 -19.3305" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box024" core="Box024" pos="139.591 30.4451 6.46172" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
