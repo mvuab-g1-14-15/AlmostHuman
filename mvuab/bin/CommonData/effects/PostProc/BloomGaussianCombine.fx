@@ -10,6 +10,7 @@
 //-----------------------------------------------------------------------------
 float4 FilterBloomPS(float2 Tex : TEXCOORD0) : COLOR
 {
+	return float4(1,0,0,0);
 	float4 Color = tex2D(S0LinearClampSampler, Tex);
     return saturate((Color - g_BloomThreshold) / (1 - g_BloomThreshold));
 }

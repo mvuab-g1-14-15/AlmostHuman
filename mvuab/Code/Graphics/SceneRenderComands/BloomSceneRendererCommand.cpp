@@ -37,7 +37,6 @@ CBloomSceneRendererCommand::CBloomSceneRendererCommand( CXMLTreeNode& atts )
 void CBloomSceneRendererCommand::LinkBloomParameters()
 {
   LINK_EFFECT_PARAMETER( BloomThreshold );
-  LINK_EFFECT_PARAMETER( BloomThreshold );
   LINK_EFFECT_PARAMETER( BloomIntensity );
   LINK_EFFECT_PARAMETER( BloomOriginalIntensity );
   LINK_EFFECT_PARAMETER( BloomSaturation );
@@ -60,6 +59,18 @@ void CBloomSceneRendererCommand::Execute( CGraphicsManager& GM )
 
   if ( SET_FLOAT_PARAMETER( BloomThreshold, mBloomThreshold ) != S_OK )
     LOG_ERROR_APPLICATION( "Could not set the bloom thresehold in the effect" );
+  
+  if ( SET_FLOAT_PARAMETER( BloomIntensity, mBloomIntensity ) != S_OK )
+    LOG_ERROR_APPLICATION( "Could not set the bloom intensity in the effect" );
+
+  if ( SET_FLOAT_PARAMETER( BloomOriginalIntensity, mBloomOriginalIntensity ) != S_OK )
+    LOG_ERROR_APPLICATION( "Could not set the bloom original intensity in the effect" );
+
+  if ( SET_FLOAT_PARAMETER( BloomSaturation, mBloomSaturation ) != S_OK )
+    LOG_ERROR_APPLICATION( "Could not set the bloom saturation in the effect" );
+
+  if ( SET_FLOAT_PARAMETER( BloomOriginalSaturation, mBloomOriginalSaturation ) != S_OK )
+    LOG_ERROR_APPLICATION( "Could not set the bloom original saturation in the effect" );
 
   uint32 width, height;
   GM.GetWidthAndHeight( width, height );
@@ -82,6 +93,8 @@ void CBloomSceneRendererCommand::Execute( CGraphicsManager& GM )
     if ( m_StageTextures[i].mIsDynamic )
       m_StageTextures[i].m_Texture->UnsetAsRenderTarget();
   }
+
+  DebugTextures();
 }
 
 void CBloomSceneRendererCommand::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle )

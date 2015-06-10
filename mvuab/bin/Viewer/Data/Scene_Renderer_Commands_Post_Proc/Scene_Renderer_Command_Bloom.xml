@@ -11,7 +11,7 @@
 	
 	<!--END FILTER BLOOM-->
 		
-	<!-- Gaussian -->	
+	<!-- Gaussian 	
 	<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768" scale_factor="2">
 		<texture stage_id="0" name="BloomFilterBuffer"/>
 	</gaussian>
