@@ -16,7 +16,10 @@
 *.sdf
 *.suo
 *.exp
-*3rdParty/
-*bin/lib/
-*bin/*.dll
+*.opensdf
+mvuab/3rdParty/
+mvuab/bin/lib/*.*
+mvuab/bin/lib/*.*
+mvuab/bin/Viewer/*.dll
+mvuab/bin/Videogame/*.dll
 WwiseProject
