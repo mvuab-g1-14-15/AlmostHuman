@@ -53,29 +53,17 @@ void CInstanceMesh::Render()
   if ( mType == "dynamic" && mPhysicActor != 0 )
   {
     mPhysicActor->GetMat44( lTransform );
+
+	float lMaxDistance = (laabb.GetMax().y - laabb.GetCenter().y);
+	Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
+	Math::Vect3f lCenter = laabb.GetCenter();
+	Math::Mat44f lCenterTransform;
+	lCenterTransform.SetIdentity();
 	
-	Math::Vect3f lHeight = laabb.GetMax() - laabb.GetCenter();
-	Math::Vect3f lUp( 0.0f, 1.0f, 0.0f );
-	Math::Mat44f lVecUpMat;
-	lVecUpMat.Translate(lUp - lHeight);
-	lTransform = lTransform * lVecUpMat;
-	/*Math::Vect3f l_VecUp(-Math::Utils::Cos( lTransform.GetAngleX() ) * Math::Utils::Sin( lTransform.GetAngleY() ),
-                              Math::Utils::Cos( lTransform.GetAngleY() ),
-                              -Math::Utils::Sin( lTransform.GetAngleX() ) * Math::Utils::Sin( lTransform.GetAngleY() ) );
-    Math::Vect3f l_Direction( Math::Utils::Cos( lTransform.GetAngleX() ) * Math::Utils::Cos( lTransform.GetAngleY() ),
-                              Math::Utils::Sin( lTransform.GetAngleY() ),
-                              Math::Utils::Sin( lTransform.GetAngleX() ) * Math::Utils::Cos( lTransform.GetAngleY() ) );
-    Math::Vect3f lPos = lTransform.GetPos();
+	lCenterTransform.Translate( lUp );
 
-    if ( l_Direction.y == 1.0f && l_Direction.x < 0.0f && l_Direction.z < 0.0f )
-      lPos.y = lPos.y - laabb.GetWidth() * 0.5f;
-
-    if ( l_Direction.x >= 0.9f )
-      lPos.y = lPos.y - laabb.GetHeight() * 0.5f;
-
-    lTransform.SetPos( lPos );*/
-
-
+	lTransform = lTransform * lCenterTransform;
+	
   }
 
   GraphicsInstance->SetTransform( lTransform );
