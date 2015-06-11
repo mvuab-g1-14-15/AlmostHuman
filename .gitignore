@@ -18,4 +18,5 @@
 *.exp
 *3rdParty/
 *bin/lib/
+*bin/*.dll
 WwiseProject
