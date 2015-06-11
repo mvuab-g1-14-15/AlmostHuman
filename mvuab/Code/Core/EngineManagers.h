@@ -38,6 +38,7 @@ class CBillboardManager;
 class CCountDownTimerManager;
 class CCinematicManager;
 class CConsole;
+class CLensFlareManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -76,6 +77,7 @@ public:
   CBillboardManager*                GetBillboardManager() const;
   CCountDownTimerManager*           GetCountDownTimerManager() const;
   CCinematicManager*                GetCinematicManager() const;
+  CLensFlareManager*			    GetLensFlareManager() const;
 
   GET_SET_REF( std::string, ManagersPath );
 
@@ -105,6 +107,7 @@ private:
   CBillboardManager*                     m_BillboardManager;
   CCountDownTimerManager*                m_pCountDownTimerManager;
   CCinematicManager*                     m_pCinematicManager;
+  CLensFlareManager*					 m_pLensFlareManager;
   CConsole*                              m_pConsole;
   std::string                            m_ManagersPath;
 };

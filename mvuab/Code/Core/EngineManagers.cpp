@@ -29,6 +29,7 @@
 #include "WWSoundManager.h"
 #include "Timer/CounTDownTimerManager.h"
 #include "Cinematics/CinematicManager.h"
+#include "Lights\LensFlare.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
   : m_ManagersPath( aPath )
@@ -120,8 +121,7 @@ void CEngineManagers::Init()
                            Type2Type<CBillboardManager>( ) );
   ManagerFactory.Register( "countdowntimer_manager",
                            Type2Type<CCountDownTimerManager>( ) );
-  ManagerFactory.Register( "cinematic_manager",
-                           Type2Type<CCinematicManager>( ) );
+  ManagerFactory.Register( "flare_manager", Type2Type<CLensFlareManager>( ) );
 
   CXMLTreeNode l_File;
 
@@ -185,6 +185,7 @@ void CEngineManagers::Init()
   m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
   m_pCountDownTimerManager  = dynamic_cast<CCountDownTimerManager*>( GetResource( "countdowntimer_manager" ) );
   m_pCinematicManager = dynamic_cast<CCinematicManager*>( GetResource( "cinematic_manager" ) );
+  m_pLensFlareManager = dynamic_cast<CLensFlareManager*>( GetResource( "flare_manager" ) );
 
   //
   // Init managers
@@ -233,6 +234,12 @@ void CEngineManagers::Reload()
 {
   Release();
   Init();
+}
+
+CLensFlareManager* CEngineManagers::GetLensFlareManager() const
+{
+	ASSERT( m_pLensFlareManager, "Null lens flare manager" );
+	return m_pLensFlareManager;
 }
 
 CWWSoundManager* CEngineManagers::GetSoundManager() const
