@@ -15,6 +15,7 @@
 	<scene_render_command_manager file_config="Data/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
 	<script_manager file_config="Data/scripts/"/>
+	<flare_manager file_config="Data/flares.xml"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<enemy_manager file_config="Data/enemies/enemies.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
