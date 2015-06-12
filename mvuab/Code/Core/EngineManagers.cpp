@@ -121,6 +121,7 @@ void CEngineManagers::Init()
                            Type2Type<CBillboardManager>( ) );
   ManagerFactory.Register( "countdowntimer_manager",
                            Type2Type<CCountDownTimerManager>( ) );
+  ManagerFactory.Register( "cinematic_manager", Type2Type<CCinematicManager>( ) );
   ManagerFactory.Register( "flare_manager", Type2Type<CLensFlareManager>( ) );
 
   CXMLTreeNode l_File;
