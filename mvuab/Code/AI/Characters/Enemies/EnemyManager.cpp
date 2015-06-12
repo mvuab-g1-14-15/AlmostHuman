@@ -180,6 +180,8 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 
     CPatrolEnemy* lPatrolEnemy = dynamic_cast<CPatrolEnemy*>( lEnemy );
 
+	lPatrolEnemy->SetMaxTimeToShoot(m_CoreEnemies.GetResource(lType)->m_TimeToShoot);
+
     if ( lPatrolEnemy )
     { lPatrolEnemy->SetWaypoints( m_Routes[lPatrolEnemy->GetRouteId()] ); }
 

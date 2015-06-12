@@ -99,14 +99,17 @@ end
 
 function atacar()
 	local l_PlayerInSight = PlayerVisibility(enemy)
-	
+	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then
 		enemy = enemy_manager:GetActualEnemy()
+		enemy:SetTimeToShoot(enemy:GetTimeToShoot() + timer:GetElapsedTime())
+		engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 		if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
 			g_Player:AddDamage(5)
 			enemy:SetTimeToShoot(0.0)
 		end
 	else
+		enemy:SetTimeToShoot(0.0)
 		enemy:ChangeState("andando")
 		enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 	end
