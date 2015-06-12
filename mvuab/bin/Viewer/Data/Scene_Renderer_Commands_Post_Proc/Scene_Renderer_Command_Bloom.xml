@@ -15,15 +15,20 @@
 	
 	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
 	
+	<!--
 	<render_draw_quad name="Show_Bloom_Step01" active="true">
 		<texture stage_id="0" name="FilterBrightTexture"/>
 	</render_draw_quad>
 	
-	<!--
-	<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
-		<texture stage_id="0" name="GenerateBrightPassRenderTarget"/>
-		<dynamic_texture stage_id="1" name="GaussianBloomFilterBuffer"/>
+	
+	<gaussian name="Bloom_Gaussian" iterations="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="512" height="512">
+		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer"/>
+		<texture stage_id="0" name="FilterBrightTexture"/>
 	</gaussian>
+	
+	<render_draw_quad name="Show_Bloom_Step01" active="true">
+		<texture stage_id="0" name="GaussianBloomFilterBuffer"/>
+	</render_draw_quad>
 
 	<set_pool_renderable_objects_technique name="Bloom_step3_pool_renderable_object_technique"/>
 	
@@ -32,5 +37,5 @@
 		<texture stage_id="1" name="GaussianBloomFilterBuffer"/>
 	</render_draw_quad>-->
 	
-	<!-- End Bloom Combine -->
+	End Bloom Combine -->
 </scene_renderer_commands>

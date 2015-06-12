@@ -27,12 +27,6 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
     ActivateTextures();
 
-    #ifdef _DEBUG
-
-    DebugTextures();
-
-    #endif
-
     CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
 
     const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(

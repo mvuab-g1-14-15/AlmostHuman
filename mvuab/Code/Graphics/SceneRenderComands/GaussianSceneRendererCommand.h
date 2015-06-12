@@ -14,10 +14,7 @@ class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
     private:
         CTexture *m_pAuxTexture[2];
         CEffectTechnique *m_Technique;
-
-        std::string m_NameTechnique;
-        unsigned int m_nIteration;
-        
+        unsigned int mIterations;
         unsigned int m_Width;
         unsigned int m_Height;
 

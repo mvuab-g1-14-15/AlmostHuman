@@ -20,6 +20,12 @@ float OriginalSaturation = 1.0;		// Saturation amount on original texture
 //-----------------------------------------------------------------------------
 float4 BloomFilterPS(float2 UV : TEXCOORD0) : COLOR
 {
+	//float4 l_SourceColor=tex2D(S0LinearClampSampler, UV);
+	//return l_SourceColor;
+	//float3 l_OutputColor=(l_SourceColor.xyz-float3(g_BloomThreshold,g_BloomThreshold,g_BloomThreshold))/float3(1.0-g_BloomThreshold, 1.0-g_BloomThreshold, 1.0-g_BloomThreshold);
+	//return float4(l_OutputColor, l_SourceColor.a);
+
+	//return tex2D(S0LinearClampSampler, UV);
 	return saturate((tex2D(S0LinearClampSampler, UV) - g_BloomThreshold) / (1 - g_BloomThreshold)); // +tex2D(S1Sampler, Textura glow); //Parte GLOW
 }
 
