@@ -54,9 +54,8 @@ void CInstanceMesh::Render()
   {
     mPhysicActor->GetMat44( lTransform );
 
-	float lMaxDistance = (laabb.GetMax().y - laabb.GetCenter().y);
 	Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
-	Math::Vect3f lCenter = laabb.GetCenter();
+	
 	Math::Mat44f lCenterTransform;
 	lCenterTransform.SetIdentity();
 	
