@@ -112,6 +112,7 @@ public:
   float  GetStateSlider( const std::string& inSliderName );
 
   void SetLiteralInStaticText( const std::string& inStaticText, const std::string& lit );
+  void ShowStaticText( const std::string& inStaticText );
 
   void SetEditableTextBox( const std::string& inEditableTextName, const std::string& text );
   std::string GetEditableTextBox( const std::string& inEditableTextName );

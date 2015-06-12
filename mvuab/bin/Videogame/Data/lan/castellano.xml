@@ -7,5 +7,7 @@
 	<literal id="textoItem"		font="Annabel"  color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
 	<literal id="textoPuerta"   font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
 	<literal id="textoCinematic"	font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
-	<literal id="FPS"	font="Annabel"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
+	<literal id="FPS"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
+	<literal id="ButtonEnergy"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press R to charge energy"/>
+	<literal id="StealthAttack"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press right button to stealth attack"/>
 </Language>

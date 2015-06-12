@@ -352,8 +352,8 @@ void CGUIManager::Render()
         m_pTextBox->Render();
         assert( m_pConsole );
         m_pConsole->Render();
-        assert( m_pPressButton );
-        m_pPressButton->Render();
+        /*assert( m_pPressButton );
+        m_pPressButton->Render();*/
 
         if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
         {
@@ -1028,6 +1028,31 @@ void CGUIManager::SetLiteralInStaticText( const std::string& inStaticText, const
     }
 }
 
+void CGUIManager::ShowStaticText( const std::string& inStaticText )
+{
+    std::map<std::string, CGuiElement*>::iterator it;
+    it = m_ElementsMap.find( inStaticText );
+
+    if ( it != m_ElementsMap.end() )
+    {
+        CStaticText* st = ( CStaticText* )( it->second );
+		if (st->GetVisible())
+		{
+			st->SetVisible(false);
+			st->SetActive(false);
+		}
+		else
+		{
+			st->SetVisible(true);
+			st->SetActive(true);
+		}
+    }
+    else
+    {
+        LOG_ERROR_APPLICATION( "CGUIManager:: No se ha encontrado el guiElement %s",
+                               inStaticText.c_str() );
+    }
+}
 
 bool CGUIManager::NextBlockInRadioBox( const std::string& inNameRadioBox )
 {

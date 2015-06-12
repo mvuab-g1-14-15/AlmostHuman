@@ -18,4 +18,7 @@
 		<enemy name="Enemy1" texture="Data/textures/GUI/Textures_Test/enemy.png" width="20" height="20" get_position_script="get_enemy_position('Enemy1')" orientation="get_enemy_orientation('Enemy1')"/>
 		<item name="door1" texture="Data/textures/GUI/Textures_Test/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 	</Map>
+	
+	<StaticText name="ButtonEnergy" posx="30" posy="80" height="30" width="12" visible="false" active="false" literal="ButtonEnergy" />
+	<StaticText name="StealthAttack" posx="30" posy="80" height="30" width="12" visible="false" active="false" literal="StealthAttack" />
 </Windows>
