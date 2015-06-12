@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<flares>
+  <lens_flare name="flare001" technique="">
+		<flare texture ="" color="1.0 1.0 1.0" position="0.0" size="2 2"/>
+		<flare texture ="" color="1.0 1.0 1.0" position="0.5" size="2 2"/>
+  </lens_flare>
+</flares>

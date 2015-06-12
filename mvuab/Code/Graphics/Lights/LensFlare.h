@@ -19,9 +19,10 @@ public:
 	bool Init(const CXMLTreeNode& node);
 
 private:
-	Math::Vect3f mColor;
+	Math::Vect3f  mColor;
 	CTexture*	  mTexture;
 	float		  mPos;
+	Math::Vect2f  mSize;
 };
 
 class CLensFlare : public CName

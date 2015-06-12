@@ -25,7 +25,7 @@ class CBoxShape;
 class CGraphicsManager : public CManager
 {
 public:
-  typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT, UPPER_LEFT_MIDDLE } ETypeAlignment;
+  typedef enum { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT, UPPER_MIDDLE, LOWER_MIDDLE } ETypeAlignment;
   typedef enum { NONE_FLIP, FLIP_X, FLIP_Y} ETypeFlip;
   CGraphicsManager( const CXMLTreeNode& atts );
   ~CGraphicsManager();
