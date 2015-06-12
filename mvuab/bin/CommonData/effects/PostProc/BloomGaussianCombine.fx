@@ -5,14 +5,25 @@
 #include "../globals.fxh"
 #include "bloom.fxh"
 
+// Shader parameters
+float Threshold = 0.25;				// Get the threshold of what brightness level we want to glow
+
+float BloomIntensity = 0.8;			// Controls the Intensity of the bloom texture
+float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
+
+float BloomSaturation = 1.5	;		// Saturation amount on bloom
+float OriginalSaturation = 1.0;		// Saturation amount on original texture
+
 //-----------------------------------------------------------------------------
 // 								FilterBloom
 //-----------------------------------------------------------------------------
 float4 FilterBloomPS(float2 Tex : TEXCOORD0) : COLOR
 {
-	return float4(1,0,0,0);
+	
 	float4 Color = tex2D(S0LinearClampSampler, Tex);
-    return saturate((Color - g_BloomThreshold) / (1 - g_BloomThreshold));
+    //return float4(1,0,0,1); 
+	return saturate((Color - Threshold) / (1 - Threshold));
+	
 }
 
 //-----------------------------------------------------------------------------
@@ -29,8 +40,8 @@ float4 FinalBloomPS(float2 texCoord : TEXCOORD0) : COLOR0
     float4 bloomColor = tex2D(S0LinearClampSampler, texCoord);
     float4 originalColor = tex2D(S1LinearClampSampler, texCoord);
 
-    bloomColor = AdjustSaturation(bloomColor, g_BloomSaturation) * g_BloomIntensity;
-    originalColor = AdjustSaturation(originalColor, g_BloomOriginalSaturation) * g_BloomOriginalIntensity;
+    bloomColor = AdjustSaturation(bloomColor, BloomSaturation) * BloomIntensity;
+    originalColor = AdjustSaturation(originalColor, OriginalSaturation) * OriginalIntensity;
 
     originalColor *= (1 - saturate(bloomColor));
     return originalColor + bloomColor;

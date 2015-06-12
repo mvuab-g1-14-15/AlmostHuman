@@ -1,35 +1,32 @@
-<scene_renderer_commands>
-	<!-- FILTER BLOOM -->
+﻿<scene_renderer_commands>
+	<!-- FILTER BLOOM  -->
 	<capture_frame_buffer>
 		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
+
+	<set_render_target name="GenerateBrightPassRenderTarget">
+		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+    </set_render_target>
 	
-	<bloom active="true" technique="BloomFilter" BloomThreshold="0.5">
+	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
+	
+	<render_draw_quad active="true">
 		<texture stage_id="0" name="ActualFrameBuffer"/>
-		<dynamic_texture stage_id="1" name="BloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="true"/>
-	</bloom>
+	</render_draw_quad>
 	
-	<!--END FILTER BLOOM-->
-		
-	<!-- Gaussian 	
-	<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768" scale_factor="2">
-		<texture stage_id="0" name="BloomFilterBuffer"/>
+	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
+	
+	<!--<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
+		<texture stage_id="0" name="GenerateBrightPassRenderTarget"/>
+		<dynamic_texture stage_id="1" name="GaussianBloomFilterBuffer"/>
 	</gaussian>
 
-	<render_draw_quad active="true" technique="DrawQuadSampler0Technique">
-		<texture stage_id="0" name="BloomFilterBuffer"/>
-	</render_draw_quad>
-
-	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-	<!-- END Gaussian -->
+	<set_pool_renderable_objects_technique name="Bloom_step3_pool_renderable_object_technique"/>
 	
-	<!-- Bloom Combine -->
-	<bloom active="true" technique="CombineBloomTechnique" BloomIntensity="0.8" BloomOriginalIntensity="1.0" BloomSaturation="1.5" BloomOriginalSaturation="1.0">
+	<render_draw_quad active="true">
 		<texture stage_id="0" name="ActualFrameBuffer"/>
 		<texture stage_id="1" name="GaussianBloomFilterBuffer"/>
-		<dynamic_texture stage_id="2" name="CombineFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="true"/>
-	</bloom>
+	</render_draw_quad>-->
+	
 	<!-- End Bloom Combine -->
 </scene_renderer_commands>

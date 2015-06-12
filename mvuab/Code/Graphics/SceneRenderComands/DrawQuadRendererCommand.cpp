@@ -29,8 +29,7 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 
     #ifdef _DEBUG
 
-    if ( false ) // DEBUG
-    { DebugTextures(); }
+    DebugTextures();
 
     #endif
 
