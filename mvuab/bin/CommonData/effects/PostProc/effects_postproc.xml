@@ -40,12 +40,18 @@
 	</technique>
 	
 	<technique name="BloomFilter" vertex_type="1104">
-		<effect name="BloomEffectFilter" file="../CommonData/effects/PostProc/BloomGaussianCombine.fx"/>
+		<effect name="BloomEffectFilter" file="../CommonData/effects/PostProc/BloomGaussianCombine.fx">
+			<define name="TECHNIQUE_NAME" description="BloomFilter"/>
+			<define name="PS_NAME" description="BloomFilterPS"/>
+		</effect>	
 		<handles/>
 	</technique>
 	
 	<technique name="CombineBloomTechnique" vertex_type="1104">
-		<effect name="BloomEffectGaussianCombine" file="../CommonData/effects/PostProc/BloomGaussianCombine.fx"/>
+		<effect name="BloomEffectGaussianCombine" file="../CommonData/effects/PostProc/BloomGaussianCombine.fx">
+			<define name="TECHNIQUE_NAME" description="CombineBloomTechnique"/>
+			<define name="PS_NAME" description="BloomEffectGaussianCombinePS"/>
+		</effect>
 		<handles/>
 	</technique>
 	

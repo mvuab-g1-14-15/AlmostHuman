@@ -1,7 +1,7 @@
 ﻿<scene_renderer_commands>
 	<!-- FILTER BLOOM  -->
-	<capture_frame_buffer>
-		<dynamic_texture stage_id="0" name="ActualFrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	<capture_frame_buffer name="Bloom_Step01_Capture_FB">
+		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
 
 	<set_render_target name="GenerateBrightPassRenderTarget">
@@ -9,14 +9,18 @@
     </set_render_target>
 	
 	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
-	
-	<render_draw_quad active="true">
-		<texture stage_id="0" name="ActualFrameBuffer"/>
+	<render_draw_quad name="Bloom_Step01_Render_FB" active="true">
+		<texture stage_id="0" name="FBCapture"/>
 	</render_draw_quad>
 	
 	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
 	
-	<!--<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
+	<render_draw_quad name="Show_Bloom_Step01" active="true">
+		<texture stage_id="0" name="FilterBrightTexture"/>
+	</render_draw_quad>
+	
+	<!--
+	<gaussian nIteration="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="1366" height="768">
 		<texture stage_id="0" name="GenerateBrightPassRenderTarget"/>
 		<dynamic_texture stage_id="1" name="GaussianBloomFilterBuffer"/>
 	</gaussian>

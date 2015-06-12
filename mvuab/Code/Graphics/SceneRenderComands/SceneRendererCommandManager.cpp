@@ -171,44 +171,50 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
     return false;
   }
 
+  bool lOk = true;
+
   for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
   {
     CXMLTreeNode& l_CurrentNode = l_Node( i );
     const std::string& l_TagName = l_CurrentNode.GetName();
 
-      CSceneRendererCommand* Command = 0;
-
-      if ( l_TagName == "unset_render_target" )
-      {
-        CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
-          dynamic_cast<CSetRenderTargetSceneRendererCommand*>( m_SceneRendererCommands.GetResource( l_CurrentNode.GetPszProperty( "render_target", "" ) ) );
-        Command = new CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, l_CurrentNode );
-      }
-      else if ( l_TagName == "postproc" )
-      {
-        if ( Load( l_CurrentNode.GetPszProperty( "filename", "" ) ) )
-        {
-          LOG_ERROR_APPLICATION( "Load->Error al intentar cargar el command: %s", l_TagName.c_str() );
-          return false;
-        }
-      }
-  
-      else
-        Command = m_CommandFactory.Create( l_TagName.c_str(), l_CurrentNode );
-
-      if ( !Command )
-      {
-        LOG_ERROR_APPLICATION( "Command %s not found in the factory of commands!", l_TagName.c_str() );
-         return false;
-      }
-      else
-      {
-        if ( !m_SceneRendererCommands.AddResource( l_CurrentNode.GetPszProperty( "name",
-          GetNextName().c_str() ), Command ) )
-          CHECKED_DELETE( Command );
-      }
+	if ( l_TagName == "postproc" )
+    {
+		if ( !Load( l_CurrentNode.GetPszProperty( "filename", "" ) ) )
+		{
+			LOG_ERROR_APPLICATION( "Load->Error al intentar cargar el command: %s", l_TagName.c_str() );
+			lOk = false;
+		}
     }
-  return true;
+	else
+	{
+		CSceneRendererCommand* Command = 0;
+		if ( l_TagName == "unset_render_target" )
+		{
+			CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
+				dynamic_cast<CSetRenderTargetSceneRendererCommand*>( m_SceneRendererCommands.GetResource( l_CurrentNode.GetPszProperty( "render_target", "" ) ) );
+			Command = new CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, l_CurrentNode );
+		}
+		else
+		{
+	        Command = m_CommandFactory.Create( l_TagName.c_str(), l_CurrentNode );
+			LOG_INFO_APPLICATION("Command added %s",  l_TagName.c_str() );
+		}
+
+		if ( !Command )
+		{
+			LOG_ERROR_APPLICATION( "Command %s not found in the factory of commands!", l_TagName.c_str() );
+			lOk = false;
+		}
+		else
+		{
+			if ( !m_SceneRendererCommands.AddResource( l_CurrentNode.GetPszProperty( "name", GetNextName().c_str() ), Command ) )
+				CHECKED_DELETE( Command );
+		}
+    }
+  }
+
+  return lOk;
 }
 
 bool CSceneRendererCommandManager::Execute()

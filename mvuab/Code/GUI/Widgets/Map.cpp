@@ -81,10 +81,6 @@ void CMap::Render()
     GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Marco, 0, 0, 1,
                                   1 );
 
-
-
-
-
     //RENDER ITEM
     for ( size_t i = 0 ; i < m_vItems.size() ; ++i )
     {
@@ -120,7 +116,7 @@ void CMap::Render()
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vEnemy[i]->m_PosInMap.x - l_PosX0 ) / m_Width_Map * m_uWidth ),
                                    ( uint32 )( ( m_vEnemy[i]->m_PosInMap.y - l_PosY0 ) / m_Height_Map * m_uHeight ) );
 		  l_drawPos.x = l_drawPos.x + m_vEnemy[i]->m_Width/2;
-		  GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, -m_vEnemy[i]->m_Yaw, CGraphicsManager::UPPER_LEFT_MIDDLE,
+		  GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, -m_vEnemy[i]->m_Yaw, CGraphicsManager::UPPER_MIDDLE,
                                         m_vEnemy[i]->m_Texture );
 		  /*Math::Vect2f up(cos(m_vEnemy[i]->m_Yaw), sin(m_vEnemy[i]->m_Yaw));
           Math::Vect2i int_UP = Math::Vect2i((int)(up.x*-17),(int)(up.y*-17));
@@ -128,8 +124,6 @@ void CMap::Render()
         }
       }
     }
-
-
   }
 }
 

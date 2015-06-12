@@ -1,5 +1,6 @@
 // http://gamedevelopment.tutsplus.com/tutorials/make-a-neon-vector-shooter-in-xna-bloom-and-black-holes--gamedev-9877
 // http://xbox.create.msdn.com/en-US/education/catalog/sample/bloom
+// https://digitalerr0r.wordpress.com/2009/10/04/xna-shader-programming-tutorial-24-bloom/
 
 #include "../samplers.fxh"
 #include "../globals.fxh"
@@ -11,19 +12,15 @@ float Threshold = 0.25;				// Get the threshold of what brightness level we want
 float BloomIntensity = 0.8;			// Controls the Intensity of the bloom texture
 float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
 
-float BloomSaturation = 1.5	;		// Saturation amount on bloom
+float BloomSaturation = 1.5;		// Saturation amount on bloom
 float OriginalSaturation = 1.0;		// Saturation amount on original texture
 
 //-----------------------------------------------------------------------------
 // 								FilterBloom
 //-----------------------------------------------------------------------------
-float4 FilterBloomPS(float2 Tex : TEXCOORD0) : COLOR
+float4 BloomFilterPS(float2 UV : TEXCOORD0) : COLOR
 {
-	
-	float4 Color = tex2D(S0LinearClampSampler, Tex);
-    //return float4(1,0,0,1); 
-	return saturate((Color - Threshold) / (1 - Threshold));
-	
+	return saturate((tex2D(S0LinearClampSampler, UV) - g_BloomThreshold) / (1 - g_BloomThreshold)); // +tex2D(S1Sampler, Textura glow); //Parte GLOW
 }
 
 //-----------------------------------------------------------------------------
@@ -35,7 +32,7 @@ float4 AdjustSaturation(float4 Color, float Saturation)
     return lerp(l_Grey, Color, Saturation);
 }
 
-float4 FinalBloomPS(float2 texCoord : TEXCOORD0) : COLOR0
+float4 BloomEffectGaussianCombinePS(float2 texCoord : TEXCOORD0) : COLOR0
 {
     float4 bloomColor = tex2D(S0LinearClampSampler, texCoord);
     float4 originalColor = tex2D(S1LinearClampSampler, texCoord);
@@ -47,18 +44,10 @@ float4 FinalBloomPS(float2 texCoord : TEXCOORD0) : COLOR0
     return originalColor + bloomColor;
 }
 
-technique BloomFilter
+technique TECHNIQUE_NAME
 {
     pass p0
     {
-        PixelShader = compile ps_3_0 FilterBloomPS();
+        PixelShader = compile ps_3_0 PS_NAME();
     }
-}
-
-technique CombineBloomTechnique
-{
-	pass p0
-	{
-		PixelShader = compile ps_3_0 FinalBloomPS();
-	}
 }
