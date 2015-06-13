@@ -22,7 +22,7 @@ CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts 
     ASSERT( m_StageTextures.size() == 2 && m_StageTextures[0].m_Texture &&
             m_StageTextures[1].m_Texture, "The number of textures for the Gaussian" );
     ASSERT( !m_StageTextures[0].mIsDynamic, "The first texture of the command must be a static texture" );
-    ASSERT(mIterations % 2 != 0, "The number of iterations must be even" );
+    ASSERT(mIterations % 2 != 0 || mIterations == 0, "The number of iterations must be even" );
 
     // Obtain the height of the output texture
     m_Width  = m_StageTextures[1].m_Texture->GetWidth();

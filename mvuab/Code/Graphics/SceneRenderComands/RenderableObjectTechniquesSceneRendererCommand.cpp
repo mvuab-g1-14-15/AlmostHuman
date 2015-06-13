@@ -11,6 +11,7 @@ CRenderableObjectTechniquesSceneRendererCommand::CRenderableObjectTechniquesScen
         ROTMInstance;
     m_PoolRenderableObjectTechnique = l_ROTManager->GetPoolRenderableObjectTechniques().GetResource(
                                           atts.GetPszProperty( "pool", "" ) );
+    ASSERT(m_PoolRenderableObjectTechnique, "Invalid Pool %s",  atts.GetPszProperty( "pool", "" ) );
 }
 
 CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSceneRendererCommand()

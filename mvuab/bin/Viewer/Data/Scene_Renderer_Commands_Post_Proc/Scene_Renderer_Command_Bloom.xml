@@ -22,22 +22,22 @@
 	DEBUG -->
 	
 	<set_pool_renderable_objects_technique pool="Bloom_step2_pool_renderable_object_technique"/>
-	<gaussian name="Bloom_Gaussian" iterations="1" >
+	<gaussian name="Bloom_Gaussian" iterations="0" >
 		<texture stage_id="0" name="FilterBrightTexture"/>
 		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" width="512" height="512" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
 	</gaussian>
 	
+	<!-- DEBUG 
 	<set_pool_renderable_objects_technique name="debug_output_bloom_step02" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
 	<render_draw_quad name="Show_Bloom_Step02" active="true">
 		<texture stage_id="0" name="GaussianBloomFilterBuffer"/>
 	</render_draw_quad>
+	DEBUG -->
 
-	<!--
-	<set_pool_renderable_objects_technique name="Bloom_step3_pool_renderable_object_technique"/>
-	
+	<set_pool_renderable_objects_technique pool="Bloom_step3_pool_renderable_object_technique"/>	
 	<render_draw_quad active="true">
 		<texture stage_id="0" name="ActualFrameBuffer"/>
 		<texture stage_id="1" name="GaussianBloomFilterBuffer"/>
-	</render_draw_quad>-->
+	</render_draw_quad>
 	
 </scene_renderer_commands>

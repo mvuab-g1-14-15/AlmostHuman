@@ -6,32 +6,11 @@
 #include "../globals.fxh"
 #include "bloom.fxh"
 
-// Shader parameters
-float Threshold = 0.25;				// Get the threshold of what brightness level we want to glow
-
-float BloomIntensity = 0.8;			// Controls the Intensity of the bloom texture
-float OriginalIntensity = 1.0;		// Controls the Intensity of the original scene texture
-
-float BloomSaturation = 1.5;		// Saturation amount on bloom
-float OriginalSaturation = 1.0;		// Saturation amount on original texture
-
-//-----------------------------------------------------------------------------
-// 								FilterBloom
-//-----------------------------------------------------------------------------
 float4 BloomFilterPS(float2 UV : TEXCOORD0) : COLOR
 {
-	//float4 l_SourceColor=tex2D(S0LinearClampSampler, UV);
-	//return l_SourceColor;
-	//float3 l_OutputColor=(l_SourceColor.xyz-float3(g_BloomThreshold,g_BloomThreshold,g_BloomThreshold))/float3(1.0-g_BloomThreshold, 1.0-g_BloomThreshold, 1.0-g_BloomThreshold);
-	//return float4(l_OutputColor, l_SourceColor.a);
-
-	//return tex2D(S0LinearClampSampler, UV);
 	return saturate((tex2D(S0LinearClampSampler, UV) - g_BloomThreshold) / (1 - g_BloomThreshold)); // +tex2D(S1Sampler, Textura glow); //Parte GLOW
 }
 
-//-----------------------------------------------------------------------------
-// 								CombineBloom
-//-----------------------------------------------------------------------------
 float4 AdjustSaturation(float4 Color, float Saturation)
 {
     float l_Grey = dot(Color, float3(0.3, 0.59, 0.11));
@@ -43,8 +22,8 @@ float4 BloomEffectGaussianCombinePS(float2 texCoord : TEXCOORD0) : COLOR0
     float4 bloomColor = tex2D(S0LinearClampSampler, texCoord);
     float4 originalColor = tex2D(S1LinearClampSampler, texCoord);
 
-    bloomColor = AdjustSaturation(bloomColor, BloomSaturation) * BloomIntensity;
-    originalColor = AdjustSaturation(originalColor, OriginalSaturation) * OriginalIntensity;
+    bloomColor = AdjustSaturation(bloomColor, g_BloomSaturation) * g_BloomIntensity;
+    originalColor = AdjustSaturation(originalColor, g_BloomOriginalSaturation) * g_BloomOriginalIntensity;
 
     originalColor *= (1 - saturate(bloomColor));
     return originalColor + bloomColor;
