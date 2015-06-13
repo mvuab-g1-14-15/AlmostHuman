@@ -1,13 +1,11 @@
 @echo off
 
 echo Copying dlls
-if "%1"=="" goto INVALID_EXE_DIRECTORY
+if !%1!==!""! goto INVALID_EXE_DIRECTORY
 if NOT EXIST %1 goto DIR_NOT_EXIST
 
+SET bat_dir="%~dp0"
 SET exe_directory=%1
-
-SET bat_dir=%~dp0
-
 SET XCOPY_BIN=%SystemRoot%\system32\xcopy.exe
 
 %XCOPY_BIN% %bat_dir%\\dlls\\*.* %exe_directory%  /F /R /Y
