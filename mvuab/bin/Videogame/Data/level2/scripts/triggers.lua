@@ -1,4 +1,4 @@
-
+g_bChargeEnergy = false
 engine = CEngine.GetSingletonPtr()
 function OnEnter()
 	process = engine:GetProcess()
@@ -34,6 +34,11 @@ end
 
 function ShowImage(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
+	if g_bChargeEnergy then
+		g_bChargeEnergy = false
+	else
+		g_bChargeEnergy = true
+	end
 	gui_manager:ShowStaticText("ButtonEnergy")
 end
 

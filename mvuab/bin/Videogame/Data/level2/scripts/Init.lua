@@ -52,7 +52,7 @@ function update_gameplay()
 			g_Player:SetPosition(ChangeRoom())
 		end
 		if action_manager:DoAction("PressR") then
-			if gui_manager:GetPressButton():GetVisible() then
+			if g_bChargeEnergy then
 				ChargeEnergy()
 			end
 		end
