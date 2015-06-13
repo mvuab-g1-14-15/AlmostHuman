@@ -41,9 +41,13 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
     std::string lName( ss.str() );
 
     SetName( lName );
-
     mBillboard = new CBillboard();
-    BillboardMan->AddResource( lName, mBillboard );
+
+    if(!BillboardMan->AddResource(lName, mBillboard))
+    {
+        CHECKED_DELETE(mBillboard);
+        mBillboard = BillboardMan->GetConstResource(lName);
+    }
 }
 
 CShoot::~CShoot()
