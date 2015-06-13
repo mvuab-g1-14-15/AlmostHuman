@@ -1,11 +1,10 @@
 ﻿<scene_renderer_commands>
-	<!-- FILTER BLOOM  -->
 	<capture_frame_buffer name="Bloom_Step01_Capture_FB">
 		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
 
 	<set_render_target name="GenerateBrightPassRenderTarget">
-		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+		<dynamic_texture stage_id="0" name="FilterBrightTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
     </set_render_target>
 	
 	<set_pool_renderable_objects_technique pool="Bloom_step1_pool_renderable_object_technique"/>
@@ -15,21 +14,25 @@
 	
 	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
 	
-	<!--
+	<!-- DEBUG 
+	<set_pool_renderable_objects_technique name="debug_output_bloom_step01" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
 	<render_draw_quad name="Show_Bloom_Step01" active="true">
 		<texture stage_id="0" name="FilterBrightTexture"/>
 	</render_draw_quad>
+	DEBUG -->
 	
-	
-	<gaussian name="Bloom_Gaussian" iterations="2" technique="GaussianBlur" texture_width_as_frame_buffer="false" width="512" height="512">
-		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer"/>
+	<set_pool_renderable_objects_technique pool="Bloom_step2_pool_renderable_object_technique"/>
+	<gaussian name="Bloom_Gaussian" iterations="1" >
 		<texture stage_id="0" name="FilterBrightTexture"/>
+		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" width="512" height="512" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
 	</gaussian>
 	
-	<render_draw_quad name="Show_Bloom_Step01" active="true">
+	<set_pool_renderable_objects_technique name="debug_output_bloom_step02" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
+	<render_draw_quad name="Show_Bloom_Step02" active="true">
 		<texture stage_id="0" name="GaussianBloomFilterBuffer"/>
 	</render_draw_quad>
 
+	<!--
 	<set_pool_renderable_objects_technique name="Bloom_step3_pool_renderable_object_technique"/>
 	
 	<render_draw_quad active="true">
@@ -37,5 +40,4 @@
 		<texture stage_id="1" name="GaussianBloomFilterBuffer"/>
 	</render_draw_quad>-->
 	
-	End Bloom Combine -->
 </scene_renderer_commands>

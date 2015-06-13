@@ -79,8 +79,9 @@
 	-->
 	
 
-	<!-- BLOOM -->
+	<!-- BLOOM 	-->
 	<postproc filename="Data/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Bloom.xml"/>
+
 	
     <end_scene/>
 	

@@ -13,43 +13,58 @@
 #include "EngineManagers.h"
 
 CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts )
-	: CStagedTexturedRendererCommand( atts )
-    , m_Width( atts.GetIntProperty("width", 0) )
-    , m_Height( atts.GetIntProperty("height", 0) )
+    : CStagedTexturedRendererCommand( atts )
+    , m_Width( 0 )
+    , m_Height( 0 )
     , mIterations( atts.GetIntProperty("iterations", 0) )
-	, m_Technique( EffectManagerInstance->GetResource(atts.GetPszProperty("technique", "no_tech")) )
 {
-    if(atts.GetBoolProperty("texture_width_as_frame_buffer", true))
-        GraphicsInstance->GetWidthAndHeight(m_Width, m_Height);
+    // Check the correct status of the command
+    ASSERT( m_StageTextures.size() == 2 && m_StageTextures[0].m_Texture &&
+            m_StageTextures[1].m_Texture, "The number of textures for the Gaussian" );
+    ASSERT( !m_StageTextures[0].mIsDynamic, "The first texture of the command must be a static texture" );
+    ASSERT(mIterations % 2 != 0, "The number of iterations must be even" );
 
-    m_Technique->SetTextureSize(m_Width, m_Height);
-    m_Technique->SetUseTextureSize(true);
-
-	ASSERT( m_StageTextures.size() == 2, "The number of textures for the gaussian" );
-    
-	m_pAuxTexture[0] = m_StageTextures[0].m_Texture;
-    m_pAuxTexture[1] = m_StageTextures[1].m_Texture;
-
-	ASSERT( m_StageTextures[0].mIsDynamic && !m_StageTextures[1].mIsDynamic, "The first texture must be dynamic and the second static" );
+    // Obtain the height of the output texture
+    m_Width  = m_StageTextures[1].m_Texture->GetWidth();
+    m_Height = m_StageTextures[1].m_Texture->GetHeight();
 }
 
 CGaussianSceneRendererCommand::~CGaussianSceneRendererCommand()
 {
 }
 
-void CGaussianSceneRendererCommand::Execute( CGraphicsManager& GM )
+void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
-	ASSERT( m_Technique && m_pAuxTexture[0] && m_pAuxTexture[1], "Null data to execute the gaussian cmd" );
+    CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
 
-	RECT l_Rect = { 0, 0, m_Width, m_Height };
-	m_Technique->SetTextureSize(m_Width, m_Height);
-	m_Technique->SetUseTextureSize(true);
+    const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(
+            SCREEN_COLOR_VERTEX::GetVertexType() );
 
-	for(uint32 i = 0; i < mIterations; ++i)
-	{
-		m_pAuxTexture[0]->SetAsRenderTarget(0);
-		GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(m_Technique, l_Rect, Math::CColor::CColor(), m_pAuxTexture[1], 0.0f, 0.0f, 1.0f, 1.0f );
-		m_pAuxTexture[0]->UnsetAsRenderTarget(0);
-		std::swap( m_pAuxTexture[0], m_pAuxTexture[1] );
-	}
+    CRenderableObjectTechnique* l_ROT = lROTM->GetResource( l_EffectTechName );
+
+    CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
+
+    RECT l_Rect = { 0, 0, ( long )m_Width - 1, ( long )m_Height - 1 };
+
+    // Update the texture size of the technique each render, because we do not know if somebody has used the technique
+    l_EffectTech->SetTextureSize(m_Width, m_Height);
+    l_EffectTech->SetUseTextureSize(true);
+
+    m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),
+            m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+    m_StageTextures[1].m_Texture->UnsetAsRenderTarget(0);
+
+    if( mIterations > 1 )
+    {
+        std::swap( m_StageTextures[0], m_StageTextures[1] );
+        for(uint32 i = 1; i < mIterations; ++i)
+        {
+            m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
+            GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),
+                    m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+            m_StageTextures[1].m_Texture->UnsetAsRenderTarget(0);
+            std::swap( m_StageTextures[0], m_StageTextures[1] );
+        }
+    }
 }

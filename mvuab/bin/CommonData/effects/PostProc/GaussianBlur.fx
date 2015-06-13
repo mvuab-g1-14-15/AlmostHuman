@@ -5,9 +5,9 @@
 #include "../samplers.fxh"
 #include "../globals.fxh"
 
-float4 PS_GaussianBlur(float2 texCoord : TEXCOORD) : COLOR0
+float4 PS_GaussianBlur(float2 UV : TEXCOORD) : COLOR0
 {
-    return GaussianBlur(S0LinearClampSampler, texCoord, 3);
+    return GaussianBlur(S0LinearSampler, UV, 3);
 }
 
 //-----------------------------------------------------------------------------

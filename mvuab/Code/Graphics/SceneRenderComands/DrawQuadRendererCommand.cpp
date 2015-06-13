@@ -10,10 +10,6 @@
 
 #include "EngineManagers.h"
 
-#ifdef _DEBUG
-    #include <sstream>
-#endif
-
 CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts ):
     CStagedTexturedRendererCommand( atts )
 {
@@ -32,8 +28,7 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
     const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(
             SCREEN_COLOR_VERTEX::GetVertexType() );
 
-    CRenderableObjectTechnique* l_ROT =
-        lROTM->GetResource( l_EffectTechName );
+    CRenderableObjectTechnique* l_ROT = lROTM->GetResource( l_EffectTechName );
 
     CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
     uint32 width, height;

@@ -3,6 +3,11 @@
 		<effect name="DrawQuad" file="../CommonData/effects/DrawQuad.fx"/>
 		<handles/>
 	</technique>
+	
+	<technique name="DrawTextureInScreenTechnique" vertex_type="1104">
+		<effect name="DrawTextureInScreenEffect" file="../CommonData/effects/DrawTextureInScreenEffect.fx"/>
+		<handles/>
+	</technique>
 
 	<technique name="RenderDeferredTechnique" vertex_type="1104">
 		<effect name="RenderDeferredEffect" file="../CommonData/effects/RenderDeferred.fx"/>

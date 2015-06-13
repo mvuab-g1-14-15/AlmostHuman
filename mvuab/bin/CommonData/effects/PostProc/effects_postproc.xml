@@ -13,6 +13,11 @@
 		<effect name="SobelEffect" file="../CommonData/effects/PostProc/Sobel.fx"/>
 		<handles/>
 	</technique>
+	
+	<technique name="GaussianBlurTechnique" vertex_type="1104">
+		<effect name="GaussianBlurEffect" file="../CommonData/effects/PostProc/GaussianBlur.fx"/>
+		<handles/>
+	</technique>
     
     <technique name="PerlinNoiseTechnique" vertex_type="1104">
 		<effect name="PerlinNoiseEffect" file="../CommonData/effects/PostProc/PerlinNoise.fx"/>
@@ -52,11 +57,6 @@
 			<define name="TECHNIQUE_NAME" description="CombineBloomTechnique"/>
 			<define name="PS_NAME" description="BloomEffectGaussianCombinePS"/>
 		</effect>
-		<handles/>
-	</technique>
-	
-	<technique name="GaussianBlur" vertex_type="1104">
-		<effect name="GaussianBlurEffect" file="../CommonData/effects/PostProc/GaussianBlur.fx"/>
 		<handles/>
 	</technique>
 		

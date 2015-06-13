@@ -12,7 +12,7 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node )
     , mTexture( new CTexture() )
     , mGenerate( node.GetBoolProperty("generate", false))
     , mLayer( node.GetPszProperty("layer", "static") )
-    , mFormatType( CTexture::R32F )
+    , mFormatType( CTexture::eR32F )
     , mSize( node.GetVect2iProperty("size", Math::Vect2i(0, 0) ) )
     , mStage( node.GetIntProperty("stage", 5 ) )
 {
@@ -20,8 +20,8 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node )
 
     if( mGenerate )
     {
-        mTexture->Create( std::string("Light_ShadowMap_") + mLayer, mSize.x, mSize.y, 1, CTexture::RENDERTARGET,
-                          CTexture::DEFAULT, mFormatType );
+        mTexture->Create( std::string("Light_ShadowMap_") + mLayer, mSize.x, mSize.y, 1, CTexture::eUsageRenderTarget,
+                          CTexture::eDefaultPool, mFormatType );
     }
 
     CRenderableObjectsManager* lROM = ROLMInstance->GetResource( node.GetPszProperty( "renderable_objects_manager", "" ) );

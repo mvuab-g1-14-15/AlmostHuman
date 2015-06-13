@@ -11,19 +11,15 @@ class CEffectTechnique;
 
 class CGaussianSceneRendererCommand : public CStagedTexturedRendererCommand
 {
-    private:
-        CTexture *m_pAuxTexture[2];
-        CEffectTechnique *m_Technique;
-        unsigned int mIterations;
-        unsigned int m_Width;
-        unsigned int m_Height;
-
-        
-
     public:
         CGaussianSceneRendererCommand( CXMLTreeNode& atts );
         ~ CGaussianSceneRendererCommand();
-        
+
         void Execute( CGraphicsManager& GM );
+    private:
+        uint32 mIterations;
+        uint32 m_Width;
+        uint32 m_Height;
+
 };
 #endif
