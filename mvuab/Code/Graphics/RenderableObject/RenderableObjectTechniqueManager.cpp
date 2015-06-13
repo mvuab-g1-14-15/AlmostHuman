@@ -47,13 +47,18 @@ void CRenderableObjectTechniqueManager::Load(const std::string& aFile)
     if (TagName == "pool_renderable_object_technique")
     {
       CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_PoolNode);
+      if(!m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(), PoolRenderableObjectTechnique))
+      {
+          CHECKED_DELETE(PoolRenderableObjectTechnique);
+          continue;
+      }
+
       for (int j = 0; j < l_PoolNode.GetNumChildren(); ++j )
       {
         const std::string& SubTagName = l_PoolNode(j).GetName();
         if (SubTagName == "default_technique")
         {
-          const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(
-            j).GetIntProperty("vertex_type", 0));
+          const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(j).GetIntProperty("vertex_type", 0));
           const std::string& l_TechniqueName = l_PoolNode(j).GetPszProperty("technique", "");
 
           InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
@@ -61,7 +66,7 @@ void CRenderableObjectTechniqueManager::Load(const std::string& aFile)
         }
       }
 
-      m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(), PoolRenderableObjectTechnique);
+      
     }
     else if( TagName == "pool")
     {
