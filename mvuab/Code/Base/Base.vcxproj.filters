@@ -198,6 +198,9 @@
     <ClInclude Include="Timer\CounTDownTimerManager.h">
       <Filter>Timer</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\IdManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

@@ -58,6 +58,7 @@
     <ClInclude Include="Utils\BaseUtils.h" />
     <ClInclude Include="Utils\Defines.h" />
     <ClInclude Include="Utils\GPUStatics.h" />
+    <ClInclude Include="Utils\IdManager.h" />
     <ClInclude Include="Utils\MacroRepeat.h" />
     <ClInclude Include="Utils\Manager.h" />
     <ClInclude Include="Utils\MapManager.h" />

@@ -89,7 +89,8 @@
 #define TimerInstance           CEngine::GetSingletonPtr()->GetTimer()
 #define CountDownTimerInstance  CEngineManagers::GetSingletonPtr()->GetCountDownTimerManager();
 #define CinematicMInstance      CEngineManagers::GetSingletonPtr()->GetCinematicManager()
-#define FlareMan			    CEngineManagers::GetSingletonPtr()->GetLensFlareManager()
+#define FlareMan                CEngineManagers::GetSingletonPtr()->GetLensFlareManager()
+#define IdManager               CEngineManagers::GetSingletonPtr()->GetIdManager()
 
 #ifdef _DEBUG
 
