@@ -67,6 +67,16 @@ function GetPlayerPosition()
 	return l_Position
 end
 
+function GetPlayerDirection(pos)
+	local l_Player = physic_manager:GetController("Player")
+	local l_Position =  l_Player:GetPosition()
+	
+	local lDir = l_Position - pos;
+	lDir:Normalize()
+	
+	return l_Dir
+end
+
 function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition()
 	local l_EnemyDir = enemy:GetDirection()

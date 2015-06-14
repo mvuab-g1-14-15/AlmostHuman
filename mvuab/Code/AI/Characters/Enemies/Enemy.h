@@ -14,12 +14,13 @@ class CStateMachine;
 class CRenderableObject;
 class CAnimatedInstanceModel;
 class CTrigger;
+class CShoot;
 
 class CEnemy : public CCharacter
 {
 public:
     typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
-    CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
+    CEnemy( CXMLTreeNode& Node, CStateMachine *aStateMachine );
 
     virtual ~CEnemy();
     virtual void Init();
@@ -35,7 +36,9 @@ public:
 
     void AddMesh( std::string );
     void ChangeState( std::string NewState );
-    CAnimatedInstanceModel* GetAnimationModel();
+    CAnimatedInstanceModel *GetAnimationModel();
+
+    void MakeShoot( Math::Vect3f aDirection );
 
 protected:
     EEnemyType m_Type;
@@ -43,12 +46,14 @@ protected:
     bool m_OnExit;
 
     // State Machine instance
-    CStateMachine* m_pStateMachine;
+    CStateMachine *m_pStateMachine;
     std::string m_CurrentState;
     std::string m_NextState;
 
     std::vector<std::string> m_NameStates;
-    CRenderableObject* m_pRenderableObject;
+    CRenderableObject *m_pRenderableObject;
+
+    std::vector<CShoot *> mShoots;
 };
 
 #endif

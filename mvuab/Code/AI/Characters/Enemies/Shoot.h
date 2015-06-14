@@ -10,7 +10,7 @@ class CShoot : public CObject3D, public CName
 {
 public:
     CShoot();
-    CShoot( float, Math::Vect3f, Math::Vect3f, float );
+    CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, float aDamage );
     virtual ~CShoot();
 
     virtual bool Init();
@@ -25,7 +25,7 @@ private:
     bool mImpacted;
     Math::Vect3f mDirection;
 
-    CBillboard* mBillboard;
+    CBillboard *mBillboard;
 };
 
 #endif
