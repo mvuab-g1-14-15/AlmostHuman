@@ -13,6 +13,7 @@
 #include "Billboard\Billboard.h"
 #include "Billboard\BillboardManager.h"
 #include "Utils\IdManager.h"
+#include "ScriptManager.h"
 
 CShoot::CShoot()
     : CObject3D()
@@ -88,10 +89,18 @@ void CShoot::Update()
             if ( lDistance < lLength )
             {
                 const std::string lName = lPUD->GetName();
-                CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
 
-                if ( lEnemy )
-                    lEnemy->AddDamage( mDamage );
+				if (lName == "Player")
+				{
+					ScriptMInstance->RunCode("g_Player:AddDamage(5.0)");
+				}
+				else
+				{
+					CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
+
+					if ( lEnemy )
+						lEnemy->AddDamage( mDamage );
+				}
 
                 mImpacted = true;
 

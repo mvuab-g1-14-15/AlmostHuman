@@ -100,16 +100,17 @@ function esperar()
 end
 
 function atacar()
+	enemy = enemy_manager:GetActualEnemy()
+	--engine:Trace("Ejecutando atacar")
 	local l_PlayerInSight = PlayerVisibility(enemy)
-	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
+	engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then
-		enemy = enemy_manager:GetActualEnemy()
 		enemy:SetTimeToShoot(enemy:GetTimeToShoot() + timer:GetElapsedTime())
-		--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
+		engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 		if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
 			engine:Trace("Enemy shooting")
 			local lDir = GetPlayerDirection(enemy:GetPosition())
-			--enemy:MakeShoot(lDir)
+			enemy:MakeShoot(lDir)
 			enemy:SetTimeToShoot(0.0)
 		end
 	else
