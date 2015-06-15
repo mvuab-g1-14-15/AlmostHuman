@@ -95,19 +95,27 @@ void CEnemy::Update()
     Math::Vect3f l_Pos = m_Position;
     l_Pos.y += m_Controller->GetHeight();
 
-    std::vector<CShoot *>::iterator it_shoot = mShoots.begin(),
-                                    it_end_shoot = mShoots.end();
+	std::vector<CShoot *>::iterator it_shoot = mShoots.begin();
+	while( it_shoot != mShoots.end() )
+	{
+		CShoot *lShoot = *it_shoot;
 
+    	if ( lShoot->Impacted() )
+		{
+			it_shoot = mShoots.erase( it_shoot );
+		}
+		else
+		{
+			++it_shoot;
+		}
+	}
+
+	it_shoot = mShoots.begin();
+	std::vector<CShoot *>::iterator it_end_shoot = mShoots.end();
     for ( ; it_shoot != it_end_shoot; ++it_shoot )
     {
         CShoot *lShoot = *it_shoot;
         lShoot->Update();
-
-        if ( lShoot->Impacted() )
-        {
-            mShoots.erase( it_shoot );
-            --it_shoot;
-        }
     }
 
     std::ostringstream ss;
