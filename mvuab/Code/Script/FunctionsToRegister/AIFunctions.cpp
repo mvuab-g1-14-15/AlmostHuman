@@ -143,9 +143,6 @@ void registerEnemies( lua_State *aLuaState )
 
 void registerAI( lua_State *aLuaState )
 {
-    registerCharacters( aLuaState );
-    registerEnemies( aLuaState );
-
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CShoot, CObject3D )
     LUA_DECLARE_DEFAULT_CTOR
@@ -155,6 +152,9 @@ void registerAI( lua_State *aLuaState )
     LUA_DECLARE_METHOD( CShoot, Render )
     LUA_DECLARE_METHOD( CShoot, Impacted )
     LUA_END_DECLARATION
+
+    registerCharacters( aLuaState );
+    registerEnemies( aLuaState );
 
     module( aLuaState )
     [
