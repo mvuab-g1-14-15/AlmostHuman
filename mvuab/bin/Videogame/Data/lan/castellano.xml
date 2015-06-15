@@ -10,4 +10,6 @@
 	<literal id="FPS"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
 	<literal id="ButtonEnergy"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press R to charge energy"/>
 	<literal id="StealthAttack"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press right button to stealth attack"/>
+	<literal id="OpenDoor"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press X to open door"/>
+	<literal id="Block"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Block"/>
 </Language>

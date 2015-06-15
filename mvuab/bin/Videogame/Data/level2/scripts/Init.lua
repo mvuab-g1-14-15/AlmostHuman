@@ -56,6 +56,12 @@ function update_gameplay()
 				ChargeEnergy()
 			end
 		end
+		if action_manager:DoAction("PressX") then
+			if g_bPressX then
+				gui_manager:ShowStaticText("Block")
+				g_bPressedX = true
+			end
+		end
 	end
 	
 	if not (g_ConsoleActivate or g_CinematicActive) then

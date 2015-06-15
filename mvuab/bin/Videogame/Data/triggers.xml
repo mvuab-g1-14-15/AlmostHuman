@@ -2,6 +2,8 @@
 <triggers>
 	<trigger name="PuntoEnergia" position="86.9 2.5 14.5" shape="box" size="1 2 1" enter_event="true" stay_event="false" leave_event="true"  enter_script="ShowImage()"
 			 stay_script="ShowImage()" leave_script="ShowImage()"	group="0" paint="true" color="1.0 0.0 0.0 0.5" technique="RenderForwardDebugShapeTechnique"/>		 
+	<trigger name="Door" position="85 2.5 16" shape="box" size="1 2 1" enter_event="true" stay_event="true" leave_event="true"  enter_script="ShowText('OpenDoor')"
+			 stay_script="StayText()" leave_script="ShowText('OpenDoor')"	group="0" paint="true" color="1.0 0.0 0.0 0.5" technique="RenderForwardDebugShapeTechnique"/>		 
 	<!--<trigger name="Puerta_Entrar_Bruja" position="18.9117 10.545 -30.2472" shape="box" size="9.716 9.2 8.749" enter_event="true" stay_event="true" leave_event="false"  enter_script="./assets/scripts/textoPuerta.lua"
 			 stay_script="./assets/scripts/textoPuerta.lua" leave_script="./assets/scripts/textoPuerta.lua"	group="1" paint="true" color="0.0 0.0 1.0" />
 	<trigger name="Puerta_Entrar_Bruja" position="18.9117 10.545 -30.2472" shape="box" size="9.716 9.2 8.749" enter_event="true" stay_event="true" leave_event="false"  enter_script="./assets/scripts/textoPuerta.lua"

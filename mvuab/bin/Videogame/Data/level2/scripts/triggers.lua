@@ -1,4 +1,7 @@
 g_bChargeEnergy = false
+g_bPressX = false
+g_bPressedX = false
+CuentaAtras = 3
 engine = CEngine.GetSingletonPtr()
 function OnEnter()
 	process = engine:GetProcess()
@@ -40,6 +43,26 @@ function ShowImage(other_shape)
 		g_bChargeEnergy = true
 	end
 	gui_manager:ShowStaticText("ButtonEnergy")
+end
+
+function ShowText(text, other_shape)
+	if g_bPressX then
+		g_bPressX = false
+	else
+		g_bPressX = true
+	end
+	gui_manager:ShowStaticText(text)
+end
+
+function StayText(other_shape)
+	if g_bPressedX then
+		CuentaAtras = CuentaAtras - timer:GetElapsedTime()
+		if CuentaAtras <= 0 then
+			gui_manager:ShowStaticText("Block")
+			CuentaAtras = 3
+			g_bPressedX = false
+		end
+	end
 end
 
 function HideImage(other_shape)
