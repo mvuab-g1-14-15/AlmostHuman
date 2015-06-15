@@ -5,7 +5,7 @@
 	</technique>
 	
 	<technique name="BlurTechnique" vertex_type="1104">
-		<effect name="BlurEffect" file="../CommonData/effects/PostProc/Blur.fx"/>
+		<effect name="BlurEffect" file="../CommonData/effects/PostProc/BlurV2.fx"/>
 		<handles/>
 	</technique>
 	
@@ -56,6 +56,7 @@
 		<effect name="BloomEffectGaussianCombine" file="../CommonData/effects/PostProc/BloomGaussianCombine.fx">
 			<define name="TECHNIQUE_NAME" description="CombineBloomTechnique"/>
 			<define name="PS_NAME" description="BloomEffectGaussianCombinePS"/>
+			<define name="STAGE_COMBINE" description=""/>
 		</effect>
 		<handles/>
 	</technique>
