@@ -5,7 +5,7 @@ function CStealthAttack:__init()
 	self.Doing = false
 	
 	self.MaxDistance = 3.0
-	self.MaxAngle = 1.0
+	self.MaxAngle = 0.707
 	self.Show = 0
     engine:Trace("StealthAttack initialized")
 end
