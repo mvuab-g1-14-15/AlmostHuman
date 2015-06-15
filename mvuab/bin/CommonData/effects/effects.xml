@@ -4,10 +4,10 @@
 		<handles/>
 	</technique>
 	
-	<!--<technique name="DrawTextureInScreenTechnique" vertex_type="1104">
+	<technique name="DrawTextureInScreenTechnique" vertex_type="1104">
 		<effect name="DrawTextureInScreenEffect" file="../CommonData/effects/DrawTextureInScreenEffect.fx"/>
 		<handles/>
-	</technique>-->
+	</technique>
 	
 	<technique name="RenderDeferredTechnique" vertex_type="1104">
 		<effect name="RenderDeferredEffect" file="../CommonData/effects/RenderDeferred.fx"/>
