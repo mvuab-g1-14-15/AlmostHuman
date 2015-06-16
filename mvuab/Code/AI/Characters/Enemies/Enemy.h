@@ -41,6 +41,8 @@ public:
     void MakeShoot( Math::Vect3f aDirection );
     void MoveAStar( Math::Vect3f aTargetPos );
 
+	Math::Vect3f GetDirectionEnemy();
+
 protected:
     EEnemyType m_Type;
     bool m_OnEnter;
