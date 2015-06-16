@@ -20,28 +20,24 @@ typedef enum EMenuOption
 
 class CProcess
 {
-    protected:
-        CCamera*     m_pCamera;
-        uint8        m_LastLineInDebug;
-        CAStar*      m_AStar;
-    public:
-        CProcess();
-        CProcess( CCamera* ap_Camera );
-        virtual ~CProcess() {}
+protected:
+    CCamera     *m_pCamera;
+    uint8        m_LastLineInDebug;
 
-        virtual void Init() = 0;
-		void ProcessReloads();
-        virtual void Update() = 0;
-        virtual void Render() = 0;
-        virtual void RenderDebugInfo();
+public:
+    CProcess();
+    CProcess( CCamera *ap_Camera );
+    virtual ~CProcess() {}
 
-        GET_SET_PTR( CCamera, Camera );
-        CAStar* GetAStar() const
-        {
-            return m_AStar;
-        }
+    virtual void Init() = 0;
+    void ProcessReloads();
+    virtual void Update() = 0;
+    virtual void Render() = 0;
+    virtual void RenderDebugInfo();
 
-		void OnClickedMenuOption( EMenuOption aMenuOption );
+    GET_SET_PTR( CCamera, Camera );
+
+    void OnClickedMenuOption( EMenuOption aMenuOption );
 };
 
 #endif // PROCESS_H

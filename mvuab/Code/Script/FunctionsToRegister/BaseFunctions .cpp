@@ -27,7 +27,7 @@
 
 using namespace luabind;
 
-void registerXML( lua_State* aLuaState )
+void registerXML( lua_State *aLuaState )
 {
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CXMLTreeNode )
@@ -51,12 +51,12 @@ void registerXML( lua_State* aLuaState )
     LUA_END_DECLARATION
 }
 
-void DA_Normalize( Math::Vect3f* vector3 )
+void DA_Normalize( Math::Vect3f *vector3 )
 {
     vector3->Normalize( Math::One<float32>() );
 }
 
-Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f* mat, const Math::Vect3f& vec )
+Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f *mat, const Math::Vect3f& vec )
 {
     return ( *mat ) * vec;
 }
@@ -75,7 +75,7 @@ int BitOr( int a, int b )
     return a | b;
 }
 
-void registerBase( lua_State* m_LS )
+void registerBase( lua_State *m_LS )
 {
     module( m_LS )
     [
@@ -111,8 +111,10 @@ void registerBase( lua_State* m_LS )
         .def( "CrossProduct", &Math::Vect3f::CrossProduct )
         .def( "Normalize", &DA_Normalize )
         .def( "Length", &Math::Vect3f::Length )
-		.def( "DotProduct", &Math::Vect3f::DotProduct )
+        .def( "DotProduct", &Math::Vect3f::DotProduct )
         .def( "ToString", &Vect3f2String )
+
+        .def( "RotateY", &Math::Vect3f::RotateY )
     ];
     module( m_LS )
     [

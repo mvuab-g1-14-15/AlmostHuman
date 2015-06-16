@@ -9,7 +9,7 @@ function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	local l_CurrentState = enemy:GetCurrentState()
 	local l_NextState = l_CurrentState
-	--engine:Trace("Current state: " .. l_CurrentState)
+	engine:Trace("Current state: " .. l_CurrentState)
 	
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -141,5 +141,7 @@ function perseguir()
 	enemy:SetYaw(l_Yaw)
 	
 	l_DistanceVector = l_DistanceVector
-	enemy:Move(l_DistanceVector, dt)
+	--enemy:Move(l_DistanceVector, dt)
+	
+	enemy:MoveAStar(l_TargetPos)
 end

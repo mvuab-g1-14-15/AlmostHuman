@@ -39,6 +39,7 @@ public:
     CAnimatedInstanceModel *GetAnimationModel();
 
     void MakeShoot( Math::Vect3f aDirection );
+    void MoveAStar( Math::Vect3f aTargetPos );
 
 protected:
     EEnemyType m_Type;

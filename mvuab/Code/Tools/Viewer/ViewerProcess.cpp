@@ -61,7 +61,6 @@ using namespace Math;
 CViewerProcess::CViewerProcess( void ) :
     CProcess()
 {
-    m_AStar = 0;
 }
 
 CViewerProcess::~CViewerProcess( void )
@@ -91,17 +90,11 @@ std::string CViewerProcess::OpenPicker( std::string Extension = "" )
     ofn.nMaxFile = sizeof( szFile );
 
     if ( Extension == "mesh" )
-    {
         ofn.lpstrFilter = "mesh\0*.MESH\0";
-    }
     else if ( Extension == "xml" )
-    {
         ofn.lpstrFilter = "xml\0*.XML\0";
-    }
     else
-    {
         ofn.lpstrFilter = "*\0*.ALL\0";
-    }
 
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
@@ -111,40 +104,36 @@ std::string CViewerProcess::OpenPicker( std::string Extension = "" )
     int test = GetOpenFileName( &ofn );
 
     if ( test )
-    {
         return ofn.lpstrFile;
-    }
 
     return "";
 }
 INT CALLBACK BrowseCallbackProc( HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData )
 {
     TCHAR szDir[MAX_PATH];
-    char* Data = "\\Data";
+    char *Data = "\\Data";
     int sze = sizeof( szDir ) / sizeof( TCHAR );
 
     switch ( uMsg )
     {
-        case BFFM_INITIALIZED:
-            if ( GetCurrentDirectory( sizeof( szDir ) / sizeof( TCHAR ), szDir ) )
-            {
-                int sze = strlen( szDir );
-                memcpy( szDir + sze, Data, strlen( Data ) + 1 );
-                szDir;
-                SendMessage( hwnd, BFFM_SETSELECTION, TRUE, ( LPARAM )szDir );
-            }
+    case BFFM_INITIALIZED:
+        if ( GetCurrentDirectory( sizeof( szDir ) / sizeof( TCHAR ), szDir ) )
+        {
+            int sze = strlen( szDir );
+            memcpy( szDir + sze, Data, strlen( Data ) + 1 );
+            szDir;
+            SendMessage( hwnd, BFFM_SETSELECTION, TRUE, ( LPARAM )szDir );
+        }
 
-            break;
+        break;
 
-        case BFFM_SELCHANGED:
+    case BFFM_SELCHANGED:
 
-            // Set the status window to the currently selected path.
-            if ( SHGetPathFromIDList( ( LPITEMIDLIST )lp, szDir ) )
-            {
-                SendMessage( hwnd, BFFM_SETSTATUSTEXT, 0, ( LPARAM )szDir );
-            }
+        // Set the status window to the currently selected path.
+        if ( SHGetPathFromIDList( ( LPITEMIDLIST )lp, szDir ) )
+            SendMessage( hwnd, BFFM_SETSTATUSTEXT, 0, ( LPARAM )szDir );
 
-            break;
+        break;
     }
 
     return 0;
@@ -299,14 +288,14 @@ void CViewerProcess::Update()
 
 void CViewerProcess::Render()
 {
-	/*
+    /*
     uint32 lBaseGridSize = 500;
     GraphicsInstance->DrawGrid( float32( lBaseGridSize ), CColor( 0.5f, 0.5f, 0.5f, 1.0f ), uint32( lBaseGridSize / 3 ),
                                 uint32( lBaseGridSize / 3 ) );
-								*/
+                                */
 }
 
-void CViewerProcess::RenderScene2D( CGraphicsManager* GM, CFontManager* FM, float ElapsedTime, float FPS )
+void CViewerProcess::RenderScene2D( CGraphicsManager *GM, CFontManager *FM, float ElapsedTime, float FPS )
 {
     /*  CColor quad2dColor( 0.f, 0.f, 0.5f, 0.7f );
         Vect3f pos = m_Object->GetPosition();
@@ -344,7 +333,7 @@ void CViewerProcess::Clear()
 
 }
 
-uint32 CViewerProcess::RenderDebugInfo( CGraphicsManager* GM, CFontManager* FM, float l_Fps )
+uint32 CViewerProcess::RenderDebugInfo( CGraphicsManager *GM, CFontManager *FM, float l_Fps )
 {
     //CProcess::RenderDebugInfo(GM, FM, l_Fps);
     return 0;
@@ -352,7 +341,7 @@ uint32 CViewerProcess::RenderDebugInfo( CGraphicsManager* GM, CFontManager* FM, 
 
 void CViewerProcess::CreateLight( Math::Vect3f Position )
 {
-    COmniLight* l_newLight = new COmniLight();
+    COmniLight *l_newLight = new COmniLight();
     l_newLight->SetPosition( Position );
     LightMInstance->AddResource( "newLight", l_newLight );
 }
@@ -360,14 +349,14 @@ void CViewerProcess::CreateLight( Math::Vect3f Position )
 
 void CViewerProcess::CreateCamera( Math::Vect3f Position , std::string CameraName )
 {
-    CCamera* l_newCamera = new CCamera();
+    CCamera *l_newCamera = new CCamera();
     l_newCamera->SetPosition( Position );
     CameraMInstance->AddResource( CameraName, l_newCamera );
 }
 
 void CViewerProcess::CreateViewerCameras()
 {
-    CCameraManager* lCM = CameraMInstance;
+    CCameraManager *lCM = CameraMInstance;
     lCM->NewCamera
     (
         CCamera::Free,

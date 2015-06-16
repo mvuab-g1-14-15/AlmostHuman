@@ -21,6 +21,10 @@
 
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "Shoot.h"
+#include "Pathfinding\AStar.h"
+
+#include "Characters/Enemies/EnemyManager.h"
+#include "Timer/Timer.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine *aStateMachine )
     : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
@@ -95,23 +99,21 @@ void CEnemy::Update()
     Math::Vect3f l_Pos = m_Position;
     l_Pos.y += m_Controller->GetHeight();
 
-	std::vector<CShoot *>::iterator it_shoot = mShoots.begin();
-	while( it_shoot != mShoots.end() )
-	{
-		CShoot *lShoot = *it_shoot;
+    std::vector<CShoot *>::iterator it_shoot = mShoots.begin();
 
-    	if ( lShoot->Impacted() )
-		{
-			it_shoot = mShoots.erase( it_shoot );
-		}
-		else
-		{
-			++it_shoot;
-		}
-	}
+    while ( it_shoot != mShoots.end() )
+    {
+        CShoot *lShoot = *it_shoot;
 
-	it_shoot = mShoots.begin();
-	std::vector<CShoot *>::iterator it_end_shoot = mShoots.end();
+        if ( lShoot->Impacted() )
+            it_shoot = mShoots.erase( it_shoot );
+        else
+            ++it_shoot;
+    }
+
+    it_shoot = mShoots.begin();
+    std::vector<CShoot *>::iterator it_end_shoot = mShoots.end();
+
     for ( ; it_shoot != it_end_shoot; ++it_shoot )
     {
         CShoot *lShoot = *it_shoot;
@@ -147,6 +149,26 @@ void CEnemy::Update()
 
         l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eSphere, 0.2f, Math::Vect3f( 0.0f ), 0.0f, 0.0f );
         l_Gizmo->AddElement( l_Element );
+    }
+
+    {
+        std::ostringstream ss;
+        ss << GetName() << "TargetPosGizmo";
+        std::string l_GizmoName( ss.str() );
+
+        CGizmosManager *l_GizmosManager = GizmosMInstance;
+        CGizmo *l_Gizmo = l_GizmosManager->GetResource( l_GizmoName );
+
+        if ( l_Gizmo )
+            l_Gizmo->SetPosition( GetTargetPosition() );
+        else
+        {
+            l_Gizmo = l_GizmosManager->CreateGizmo( l_GizmoName, GetTargetPosition(), 0.0f, 0.0f );
+            l_GizmosManager->AddResource( l_GizmoName, l_Gizmo );
+
+            CGizmoElement *l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.4f, Math::Vect3f( 0.0f ), 0.0f, 0.0f, Math::colRED );
+            l_Gizmo->AddElement( l_Element );
+        }
     }
 }
 
@@ -188,10 +210,40 @@ CAnimatedInstanceModel *CEnemy::GetAnimationModel()
 
 void CEnemy::MakeShoot( Math::Vect3f aDirection )
 {
-    Math::Vect3f lPosition = GetPosition();
+    Math::Vect3f lPosition = GetPosition() + aDirection * 0.4f;
+    lPosition.y += GetHeight() / 2.0f;
 
     CShoot *lShoot = new CShoot( 5.0f, aDirection, lPosition, 5.0f );
     lShoot->Init();
 
     mShoots.push_back( lShoot );
+}
+
+void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
+{
+    CAStar *lAStar = EnemyMInstance->GetAStar();
+
+    std::vector<Math::Vect3f> lPath = lAStar->GetPath( GetPosition(), aTargetPos );
+    std::vector<Math::Vect3f>::iterator it = lPath.begin(),
+                                        it_end = lPath.end();
+
+    for ( ; it != it_end; ++it )
+        it->y = 0.0f;
+
+    Math::Vect3f lTargetPos;
+
+    float lDist = lPath[0].Distance( lPath[1] );
+
+    if ( lDist < 0.5f )
+        lTargetPos = lPath[2];
+    else
+        lTargetPos = lPath[1];
+
+    lTargetPos.y = GetPosition().y;
+
+    Math::Vect3f lDir = GetTargetPosition() - GetPosition();
+    lDir.y = 0.0f;
+    lDir.Normalize();
+
+    Move( lDir, deltaTimeMacro );
 }
