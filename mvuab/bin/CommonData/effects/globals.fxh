@@ -182,31 +182,6 @@ float3 CalcNewNormal(float3 Tn, float3 Bn, float4 Color, float3 Normal)
     l_NewNormal = Normal + l_Bump.x * Tn + l_Bump.y * Bn;
     return normalize(l_NewNormal);
 }
-
-float GaussianValue(float2 UV, float sigma)
-{
-    return (1.0 / (2 * PI * sigma * sigma)) * exp(-((UV.x * UV.x + UV.y * UV.y) / (2 * sigma * sigma)));
-}
-
-float GaussianValue2(float x, float sigma)
-{
-    return (1.0 / sqrt(2 * PI * sigma * sigma)) * exp(-((x * x) / (2 * sigma * sigma)));
-}
-
-float4 GaussianBlur(sampler2D tex, float2 texCoord, int sz)
-{
-    float2 l_OffsetTexture = float2(1.0 / g_TextureWidth, 1.0 / g_TextureHeight);
-    float3 l_Color = tex2D(tex, texCoord).xyz * 0.50261952;
-    
-    for(int i = 1; i < sz; i++)
-    {
-        l_Color += tex2D(tex, texCoord + i * l_OffsetTexture).xyz * GaussianValue2(i, sz);
-        l_Color += tex2D(tex, texCoord - i * l_OffsetTexture).xyz * GaussianValue2(i, sz);
-    }
-    
-    return float4(l_Color, 1.0);
-}
-
 float3 CalcAnimtedPos(float4 Position, float4 Indices, float4 Weight)
 {
 	float3 l_Position = 0;
