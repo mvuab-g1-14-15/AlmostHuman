@@ -55,6 +55,9 @@ protected:
     CRenderableObject *m_pRenderableObject;
 
     std::vector<CShoot *> mShoots;
+
+	std::vector<Math::Vect3f> mPath;
+	bool mPathCalculated;
 };
 
 #endif

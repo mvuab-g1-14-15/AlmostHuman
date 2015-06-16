@@ -34,6 +34,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine *aStateMachine )
     , m_OnExit( false )
     , m_pStateMachine( aStateMachine )
     , m_pRenderableObject( NULL )
+	, mPathCalculated( false )
 {
     CCharacter::Init( Node );
 }
@@ -225,21 +226,28 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
 
     CAStar *lAStar = EnemyMInstance->GetAStar();
 
-    std::vector<Math::Vect3f> lPath = lAStar->GetPath( lPos, aTargetPos );
-    std::vector<Math::Vect3f>::iterator it = lPath.begin(),
-                                        it_end = lPath.end();
+	if (!mPathCalculated)
+    {
+		mPath = lAStar->GetPath( lPos, aTargetPos );
+		mPathCalculated = true;
+	}
+    std::vector<Math::Vect3f>::iterator it = mPath.begin(),
+                                        it_end = mPath.end();
 
     for ( ; it != it_end; ++it )
         it->y = 0.0f;
 
-    Math::Vect3f lTargetPos;
+    Math::Vect3f lTargetPos = lPos;
+	Math::Vect3f lPosAux = lPos;
+	lPosAux.y = 0.0f;
+    float lDist = lPosAux.Distance( mPath[1] );
 
-    float lDist = lPath[0].Distance( lPath[1] );
-
-    //if ( lDist < 0.6f )
-        lTargetPos = lPath[2];
-    //else
-    //    lTargetPos = lPath[1];
+	if (mPath.size() > 2)
+	{
+		if ( lDist < 0.6f )
+			mPath.erase(mPath.begin()+1);
+		lTargetPos = mPath[1];
+	}
 	lTargetPos.y = lPos.y;
 	SetTargetPosition(lTargetPos);
 
@@ -248,4 +256,8 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
     lDir.Normalize();
 
     Move( lDir, deltaTimeMacro );
+
+	aTargetPos.y = 0.0;
+	if (mPath[mPath.size()-1].Distance(aTargetPos) > 5.0f)
+		mPathCalculated = false;
 }

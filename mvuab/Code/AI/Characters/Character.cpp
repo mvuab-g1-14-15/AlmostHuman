@@ -86,7 +86,7 @@ void CCharacter::Move(Math::Vect3f direction, float dt)
 
 	float l_PrevYaw = l_Yaw;
 	if (Math::Utils::Abs(l_YawDif) < 0.1f )
-		m_Controller->Move(direction, dt);
+		m_Controller->Move(direction * 2.0f, dt);
 	else
 	{
 		m_Controller->Move(Math::Vect3f(0.0f), dt);

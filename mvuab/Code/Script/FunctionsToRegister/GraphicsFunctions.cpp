@@ -53,6 +53,11 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
   return new CInstanceMesh( Name, CoreName );
 }
 
+CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
+{
+  return new CAnimatedInstanceModel( Name, CoreName );
+}
+
 /*
 CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color)
 {
@@ -215,6 +220,10 @@ void registerStaticMesh( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+	LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateAnimatedInstanceModel )
   LUA_END_DECLARATION
 }
 
