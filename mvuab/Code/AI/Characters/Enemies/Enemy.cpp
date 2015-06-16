@@ -83,7 +83,7 @@ void CEnemy::Update()
 
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
-    SetYaw( m_Controller->GetYaw() );
+	SetYaw( m_Controller->GetYaw() );
     SetPitch( m_Controller->GetPitch() );
     SetRoll( m_Controller->GetRoll() );
 
@@ -246,4 +246,10 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
     lDir.Normalize();
 
     Move( lDir, deltaTimeMacro );
+}
+
+Math::Vect3f CEnemy::GetDirectionEnemy()
+{
+	float lYawRotate = m_fYaw + Math::half_pi32;
+	return Math::Vect3f( Math::Utils::Cos( lYawRotate ) * Math::Utils::Cos( m_fPitch ), Math::Utils::Sin( lYawRotate ), Math::Utils::Sin( lYawRotate ) * Math::Utils::Cos( m_fPitch ) );
 }

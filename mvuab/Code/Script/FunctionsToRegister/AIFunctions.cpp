@@ -105,6 +105,7 @@ void registerEnemies( lua_State *aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
     LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
     LUA_DECLARE_METHOD( CEnemy, MakeShoot )
+	LUA_DECLARE_METHOD( CEnemy, GetDirectionEnemy )
     LUA_DECLARE_METHOD( CEnemy, MoveAStar )
     LUA_END_DECLARATION
 
