@@ -111,7 +111,7 @@ void registerBase( lua_State* m_LS )
         .def( "CrossProduct", &Math::Vect3f::CrossProduct )
         .def( "Normalize", &DA_Normalize )
         .def( "Length", &Math::Vect3f::Length )
-
+		.def( "DotProduct", &Math::Vect3f::DotProduct )
         .def( "ToString", &Vect3f2String )
     ];
     module( m_LS )

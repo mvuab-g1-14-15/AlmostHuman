@@ -26,7 +26,6 @@ void CCharacter::ExecuteAI()
 
 void CCharacter::Update()
 {
-	m_TimeToShoot += deltaTimeMacro;
 }
 
 void CCharacter::Render()
@@ -85,7 +84,7 @@ void CCharacter::Move(Math::Vect3f direction, float dt)
 
 	float l_YawDif = l_DirYaw - l_Yaw;
 
-	if (Math::Utils::Abs(l_YawDif) < 0.5f )
+	if (Math::Utils::Abs(l_YawDif) < 0.1f )
 		m_Controller->Move(direction, dt);
 	else
 	{
