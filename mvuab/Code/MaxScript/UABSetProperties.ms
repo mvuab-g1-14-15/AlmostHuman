@@ -19,7 +19,6 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	checkbox GenerateCheckLogic "Generate" pos:[343,34] width:66 height:13
 	dropdownList GenerateListLogic "" pos:[429,30] width:123 height:21 enabled:false items:#("", "event_box", "event_sphere", "stairs", "grippable_edges", "edges_where_to_be_dropped")
 	
-	--checkbox GlowTextureCheckBox "Export as Glow Texture" pos:[51,214] width:217 height:17
 	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[51,232] width:217 height:17
 	checkbox WorldTransformCheckBox "Don't export world transform" pos:[51,250] width:217 height:17
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[50,184] width:91 height:17
@@ -189,6 +188,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	
 	fn SetPropertyCheck Obj Type Check=
 	(
+		format "I'm obj: % type: % and check: % " Obj.name Type Check
 		if Check.checked==true then
 		(
 			setUserProp Obj Type true
@@ -241,8 +241,6 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 			SetPropertyCheck Obj "linked_to_bone_check" LinkedToBoneCheckBox
 			--ADD/UPDATE LINKED
 			SetPropertyEditText Obj "linked_to_bone" LinkedToBoneEditText
-			--ADD/UPDATE PROPERTY GLOW TEXTURE
-			SetPropertyCheck Obj "export_glow_texture" GlowTextureCheckBox
 			--ADD/UPDATE PROPERTY CAMERA VISIBILITY
 			SetPropertyCheck Obj "camera_visibility" CameraVisibilityCheckBox
 			--ADD/UPDATE PROPERTY WORLD TRANSFORM
@@ -325,8 +323,6 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 				SetPropertyCheck Obj[i] "linked_to_bone_check" LinkedToBoneCheckBox
 				--ADD/UPDATE LINKED
 				SetPropertyEditText Obj[i] "linked_to_bone" LinkedToBoneEditText
-				--ADD/UPDATE PROPERTY CAMERA VISIBILITY
-				SetPropertyCheck Obj[i] "export_glow_texture" GlowTextureCheckBox
 				--ADD/UPDATE PROPERTY CAMERA VISIBILITY
 				SetPropertyCheck Obj[i] "camera_visibility" CameraVisibilityCheckBox
 				--ADD/UPDATE PROPERTY WORLD TRANSFORM
