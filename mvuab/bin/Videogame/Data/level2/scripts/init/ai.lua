@@ -9,7 +9,7 @@ function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	local l_CurrentState = enemy:GetCurrentState()
 	local l_NextState = l_CurrentState
-	engine:Trace("Current state: " .. l_CurrentState)
+	--engine:Trace("Current state: " .. l_CurrentState)
 	
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -36,6 +36,7 @@ function check_next_state()
 	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
 	--	l_NextState = "andando"
 	--end
+	l_NextState = "perseguir"
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)

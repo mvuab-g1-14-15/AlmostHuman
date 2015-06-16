@@ -84,12 +84,15 @@ void CCharacter::Move(Math::Vect3f direction, float dt)
 
 	float l_YawDif = l_DirYaw - l_Yaw;
 
+	float l_PrevYaw = l_Yaw;
 	if (Math::Utils::Abs(l_YawDif) < 0.1f )
 		m_Controller->Move(direction, dt);
 	else
 	{
 		m_Controller->Move(Math::Vect3f(0.0f), dt);
 		l_Yaw += (l_YawDif > 0 ? 1 : -1) * 1.0f * deltaTimeMacro;
+		if ( (l_Yaw < 0.0f && l_PrevYaw > 0.0f) || (l_Yaw > 0.0f && l_PrevYaw < 0.0f) )
+			l_Yaw = l_DirYaw;
 	}
 
 	m_Controller->SetYaw( l_Yaw );

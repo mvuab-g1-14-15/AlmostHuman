@@ -221,9 +221,11 @@ void CEnemy::MakeShoot( Math::Vect3f aDirection )
 
 void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
 {
+	Math::Vect3f lPos = GetPosition();
+
     CAStar *lAStar = EnemyMInstance->GetAStar();
 
-    std::vector<Math::Vect3f> lPath = lAStar->GetPath( GetPosition(), aTargetPos );
+    std::vector<Math::Vect3f> lPath = lAStar->GetPath( lPos, aTargetPos );
     std::vector<Math::Vect3f>::iterator it = lPath.begin(),
                                         it_end = lPath.end();
 
@@ -234,15 +236,15 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
 
     float lDist = lPath[0].Distance( lPath[1] );
 
-    if ( lDist < 0.5f )
+    //if ( lDist < 0.6f )
         lTargetPos = lPath[2];
-    else
-        lTargetPos = lPath[1];
+    //else
+    //    lTargetPos = lPath[1];
+	lTargetPos.y = lPos.y;
+	SetTargetPosition(lTargetPos);
 
-    lTargetPos.y = GetPosition().y;
-
-    Math::Vect3f lDir = GetTargetPosition() - GetPosition();
-    lDir.y = 0.0f;
+    Math::Vect3f lDir = lTargetPos - lPos;
+	lDir.y = 0.0;
     lDir.Normalize();
 
     Move( lDir, deltaTimeMacro );
