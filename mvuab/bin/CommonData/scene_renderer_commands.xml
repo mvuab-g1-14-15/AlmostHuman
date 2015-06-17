@@ -89,7 +89,7 @@
 	-->
 	
     <render_weapon_target size="20">
- 		<texture stage_id="0" name="Data/textures/mirilla.png"/>
+ 		<texture stage_id="0" name="./Videogame/Data/textures/mirilla.png"/>
  	</render_weapon_target>
 	
 	<render_gui render="true"/>
