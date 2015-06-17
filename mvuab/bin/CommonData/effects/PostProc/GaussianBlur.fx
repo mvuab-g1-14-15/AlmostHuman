@@ -83,7 +83,7 @@ float4 PS_GaussianBlur(float2 UV : TEXCOORD) : COLOR0
 	}
 */
 	
-	return GaussianBlur(S0LinearClampSampler, UV, pixels);
+	return GaussianBlur(S0LinearClampSampler, UV, 10);
 }
 
 //-----------------------------------------------------------------------------
