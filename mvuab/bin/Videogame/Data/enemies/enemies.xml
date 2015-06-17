@@ -30,8 +30,8 @@
 	<core_enemy type="patroll" life="100" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy1" type="patroll" route="0" pos="50.9834 -14.2753 -68.638" yaw="0.0" mesh="enemy1"/>
 	<!--
+	<enemy name="Enemy1" type="patroll" route="0" pos="50.9834 -14.2753 -68.638" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy2" type="patroll" route="1" pos="48.59 -14.2753 -55.0" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy3" type="patroll" route="2" pos="71.46 -14.2753 -78.7" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy4" type="patroll" route="3" pos="71.2 -14.2753 -31.0" yaw="0.0" mesh="enemy1"/>

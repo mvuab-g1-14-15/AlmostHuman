@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="Sala_2" filename="\meshes\Sala_2.mesh" />
   <static_mesh name="Box055" filename="\meshes\Box055.mesh" />
   <static_mesh name="Object001" filename="\meshes\Object001.mesh" />
   <static_mesh name="Box057" filename="\meshes\Box057.mesh" />
@@ -265,7 +266,6 @@
   <static_mesh name="barrier002" filename="\meshes\barrier002.mesh" />
   <static_mesh name="barrier001" filename="\meshes\barrier001.mesh" />
   <static_mesh name="Focus_005" filename="\meshes\Focus_005.mesh" />
-  <static_mesh name="Line002" filename="\meshes\Line002.mesh" />
   <static_mesh name="Focus_006" filename="\meshes\Focus_006.mesh" />
   <static_mesh name="Llum_passadis_005" filename="\meshes\Llum_passadis_005.mesh" />
   <static_mesh name="Reixa_003" filename="\meshes\Reixa_003.mesh" />
@@ -506,269 +506,31 @@
   <static_mesh name="Boto018" filename="\meshes\Boto018.mesh" />
   <static_mesh name="Line001" filename="\meshes\Line001.mesh" />
   <static_mesh name="Line002" filename="\meshes\Line002.mesh" />
-  <static_mesh name="Aixeta_01" filename="\meshes\Aixeta_01.mesh" />
-  <static_mesh name="Aixeta_02" filename="\meshes\Aixeta_02.mesh" />
   <static_mesh name="Cylinder006" filename="\meshes\Cylinder006.mesh" />
   <static_mesh name="Cylinder007" filename="\meshes\Cylinder007.mesh" />
   <static_mesh name="Capsule002" filename="\meshes\Capsule002.mesh" />
-  <static_mesh name="Boto019" filename="\meshes\Boto019.mesh" />
+  <static_mesh name="Line004" filename="\meshes\Line004.mesh" />
   <static_mesh name="Line005" filename="\meshes\Line005.mesh" />
   <static_mesh name="Cylinder009" filename="\meshes\Cylinder009.mesh" />
   <static_mesh name="Cylinder023" filename="\meshes\Cylinder023.mesh" />
-  <static_mesh name="Reixa_01" filename="\meshes\Reixa_01.mesh" />
-  <static_mesh name="Reixa_002" filename="\meshes\Reixa_002.mesh" />
-  <static_mesh name="Reixa_003" filename="\meshes\Reixa_003.mesh" />
-  <static_mesh name="Reixa_004" filename="\meshes\Reixa_004.mesh" />
-  <static_mesh name="Reixa_005" filename="\meshes\Reixa_005.mesh" />
-  <static_mesh name="Reixa_006" filename="\meshes\Reixa_006.mesh" />
-  <static_mesh name="Reixa_007" filename="\meshes\Reixa_007.mesh" />
-  <static_mesh name="Reixa_008" filename="\meshes\Reixa_008.mesh" />
-  <static_mesh name="Reixa_009" filename="\meshes\Reixa_009.mesh" />
-  <static_mesh name="Reixa_010" filename="\meshes\Reixa_010.mesh" />
-  <static_mesh name="Reixa_011" filename="\meshes\Reixa_011.mesh" />
-  <static_mesh name="Reixa_012" filename="\meshes\Reixa_012.mesh" />
-  <static_mesh name="Reixa_013" filename="\meshes\Reixa_013.mesh" />
-  <static_mesh name="Reixa_014" filename="\meshes\Reixa_014.mesh" />
-  <static_mesh name="Reixa_015" filename="\meshes\Reixa_015.mesh" />
-  <static_mesh name="Reixa_016" filename="\meshes\Reixa_016.mesh" />
-  <static_mesh name="Reixa_017" filename="\meshes\Reixa_017.mesh" />
-  <static_mesh name="Reixa_018" filename="\meshes\Reixa_018.mesh" />
-  <static_mesh name="Reixa_019" filename="\meshes\Reixa_019.mesh" />
-  <static_mesh name="Reixa_020" filename="\meshes\Reixa_020.mesh" />
-  <static_mesh name="Reixa_021" filename="\meshes\Reixa_021.mesh" />
-  <static_mesh name="Reixa_022" filename="\meshes\Reixa_022.mesh" />
-  <static_mesh name="Reixa_023" filename="\meshes\Reixa_023.mesh" />
-  <static_mesh name="Reixa_024" filename="\meshes\Reixa_024.mesh" />
-  <static_mesh name="Reixa_025" filename="\meshes\Reixa_025.mesh" />
-  <static_mesh name="Reixa_026" filename="\meshes\Reixa_026.mesh" />
-  <static_mesh name="Reixa_027" filename="\meshes\Reixa_027.mesh" />
-  <static_mesh name="Reixa_028" filename="\meshes\Reixa_028.mesh" />
-  <static_mesh name="Reixa_029" filename="\meshes\Reixa_029.mesh" />
-  <static_mesh name="Reixa_030" filename="\meshes\Reixa_030.mesh" />
-  <static_mesh name="Reixa_031" filename="\meshes\Reixa_031.mesh" />
-  <static_mesh name="Reixa_032" filename="\meshes\Reixa_032.mesh" />
-  <static_mesh name="Reixa_033" filename="\meshes\Reixa_033.mesh" />
-  <static_mesh name="Reixa_034" filename="\meshes\Reixa_034.mesh" />
-  <static_mesh name="Reixa_035" filename="\meshes\Reixa_035.mesh" />
-  <static_mesh name="Reixa_036" filename="\meshes\Reixa_036.mesh" />
-  <static_mesh name="Reixa_037" filename="\meshes\Reixa_037.mesh" />
-  <static_mesh name="Reixa_038" filename="\meshes\Reixa_038.mesh" />
-  <static_mesh name="Reixa_039" filename="\meshes\Reixa_039.mesh" />
-  <static_mesh name="Reixa_040" filename="\meshes\Reixa_040.mesh" />
-  <static_mesh name="Reixa_041" filename="\meshes\Reixa_041.mesh" />
-  <static_mesh name="Reixa_042" filename="\meshes\Reixa_042.mesh" />
-  <static_mesh name="Reixa_043" filename="\meshes\Reixa_043.mesh" />
-  <static_mesh name="Reixa_044" filename="\meshes\Reixa_044.mesh" />
-  <static_mesh name="Reixa_045" filename="\meshes\Reixa_045.mesh" />
-  <static_mesh name="Reixa_046" filename="\meshes\Reixa_046.mesh" />
-  <static_mesh name="Reixa_047" filename="\meshes\Reixa_047.mesh" />
-  <static_mesh name="Reixa_048" filename="\meshes\Reixa_048.mesh" />
-  <static_mesh name="Reixa_049" filename="\meshes\Reixa_049.mesh" />
-  <static_mesh name="Reixa_050" filename="\meshes\Reixa_050.mesh" />
-  <static_mesh name="Reixa_051" filename="\meshes\Reixa_051.mesh" />
-  <static_mesh name="Reixa_052" filename="\meshes\Reixa_052.mesh" />
-  <static_mesh name="Reixa_053" filename="\meshes\Reixa_053.mesh" />
-  <static_mesh name="Reixa_054" filename="\meshes\Reixa_054.mesh" />
-  <static_mesh name="Reixa_055" filename="\meshes\Reixa_055.mesh" />
-  <static_mesh name="Reixa_056" filename="\meshes\Reixa_056.mesh" />
-  <static_mesh name="Reixa_057" filename="\meshes\Reixa_057.mesh" />
-  <static_mesh name="Reixa_058" filename="\meshes\Reixa_058.mesh" />
-  <static_mesh name="Reixa_059" filename="\meshes\Reixa_059.mesh" />
-  <static_mesh name="Reixa_060" filename="\meshes\Reixa_060.mesh" />
-  <static_mesh name="Reixa_061" filename="\meshes\Reixa_061.mesh" />
-  <static_mesh name="Reixa_062" filename="\meshes\Reixa_062.mesh" />
-  <static_mesh name="Reixa_063" filename="\meshes\Reixa_063.mesh" />
-  <static_mesh name="Reixa_064" filename="\meshes\Reixa_064.mesh" />
-  <static_mesh name="Reixa_065" filename="\meshes\Reixa_065.mesh" />
-  <static_mesh name="Reixa_066" filename="\meshes\Reixa_066.mesh" />
-  <static_mesh name="Reixa_067" filename="\meshes\Reixa_067.mesh" />
-  <static_mesh name="Reixa_068" filename="\meshes\Reixa_068.mesh" />
-  <static_mesh name="Reixa_069" filename="\meshes\Reixa_069.mesh" />
-  <static_mesh name="Reixa_070" filename="\meshes\Reixa_070.mesh" />
-  <static_mesh name="Reixa_071" filename="\meshes\Reixa_071.mesh" />
-  <static_mesh name="Reixa_072" filename="\meshes\Reixa_072.mesh" />
-  <static_mesh name="Reixa_073" filename="\meshes\Reixa_073.mesh" />
-  <static_mesh name="Reixa_074" filename="\meshes\Reixa_074.mesh" />
-  <static_mesh name="Reixa_075" filename="\meshes\Reixa_075.mesh" />
-  <static_mesh name="Reixa_076" filename="\meshes\Reixa_076.mesh" />
-  <static_mesh name="Reixa_077" filename="\meshes\Reixa_077.mesh" />
-  <static_mesh name="Reixa_078" filename="\meshes\Reixa_078.mesh" />
-  <static_mesh name="Reixa_079" filename="\meshes\Reixa_079.mesh" />
-  <static_mesh name="Reixa_080" filename="\meshes\Reixa_080.mesh" />
-  <static_mesh name="Reixa_081" filename="\meshes\Reixa_081.mesh" />
-  <static_mesh name="Reixa_082" filename="\meshes\Reixa_082.mesh" />
-  <static_mesh name="Reixa_083" filename="\meshes\Reixa_083.mesh" />
-  <static_mesh name="Reixa_084" filename="\meshes\Reixa_084.mesh" />
-  <static_mesh name="Reixa_085" filename="\meshes\Reixa_085.mesh" />
-  <static_mesh name="Reixa_086" filename="\meshes\Reixa_086.mesh" />
-  <static_mesh name="Reixa_087" filename="\meshes\Reixa_087.mesh" />
-  <static_mesh name="Reixa_088" filename="\meshes\Reixa_088.mesh" />
-  <static_mesh name="Reixa_089" filename="\meshes\Reixa_089.mesh" />
-  <static_mesh name="Reixa_090" filename="\meshes\Reixa_090.mesh" />
-  <static_mesh name="Reixa_091" filename="\meshes\Reixa_091.mesh" />
-  <static_mesh name="Reixa_092" filename="\meshes\Reixa_092.mesh" />
-  <static_mesh name="Reixa_093" filename="\meshes\Reixa_093.mesh" />
-  <static_mesh name="Reixa_094" filename="\meshes\Reixa_094.mesh" />
-  <static_mesh name="Reixa_095" filename="\meshes\Reixa_095.mesh" />
-  <static_mesh name="Reixa_096" filename="\meshes\Reixa_096.mesh" />
-  <static_mesh name="Reixa_097" filename="\meshes\Reixa_097.mesh" />
-  <static_mesh name="Reixa_098" filename="\meshes\Reixa_098.mesh" />
-  <static_mesh name="Reixa_099" filename="\meshes\Reixa_099.mesh" />
-  <static_mesh name="Reixa_100" filename="\meshes\Reixa_100.mesh" />
-  <static_mesh name="Reixa_101" filename="\meshes\Reixa_101.mesh" />
-  <static_mesh name="Reixa_102" filename="\meshes\Reixa_102.mesh" />
-  <static_mesh name="Reixa_103" filename="\meshes\Reixa_103.mesh" />
-  <static_mesh name="Reixa_104" filename="\meshes\Reixa_104.mesh" />
-  <static_mesh name="Reixa_105" filename="\meshes\Reixa_105.mesh" />
-  <static_mesh name="Reixa_106" filename="\meshes\Reixa_106.mesh" />
-  <static_mesh name="Reixa_107" filename="\meshes\Reixa_107.mesh" />
-  <static_mesh name="Reixa_108" filename="\meshes\Reixa_108.mesh" />
-  <static_mesh name="Reixa_109" filename="\meshes\Reixa_109.mesh" />
-  <static_mesh name="Reixa_110" filename="\meshes\Reixa_110.mesh" />
-  <static_mesh name="Reixa_111" filename="\meshes\Reixa_111.mesh" />
-  <static_mesh name="Reixa_112" filename="\meshes\Reixa_112.mesh" />
-  <static_mesh name="Reixa_113" filename="\meshes\Reixa_113.mesh" />
-  <static_mesh name="Reixa_114" filename="\meshes\Reixa_114.mesh" />
-  <static_mesh name="Reixa_115" filename="\meshes\Reixa_115.mesh" />
-  <static_mesh name="Reixa_116" filename="\meshes\Reixa_116.mesh" />
-  <static_mesh name="Reixa_117" filename="\meshes\Reixa_117.mesh" />
-  <static_mesh name="Reixa_118" filename="\meshes\Reixa_118.mesh" />
-  <static_mesh name="Reixa_119" filename="\meshes\Reixa_119.mesh" />
-  <static_mesh name="Reixa_120" filename="\meshes\Reixa_120.mesh" />
-  <static_mesh name="Reixa_121" filename="\meshes\Reixa_121.mesh" />
-  <static_mesh name="Reixa_128" filename="\meshes\Reixa_128.mesh" />
-  <static_mesh name="Reixa_129" filename="\meshes\Reixa_129.mesh" />
-  <static_mesh name="Reixa_130" filename="\meshes\Reixa_130.mesh" />
-  <static_mesh name="Reixa_131" filename="\meshes\Reixa_131.mesh" />
-  <static_mesh name="Reixa_132" filename="\meshes\Reixa_132.mesh" />
-  <static_mesh name="Reixa_133" filename="\meshes\Reixa_133.mesh" />
-  <static_mesh name="Reixa_134" filename="\meshes\Reixa_134.mesh" />
-  <static_mesh name="Reixa_135" filename="\meshes\Reixa_135.mesh" />
-  <static_mesh name="Reixa_136" filename="\meshes\Reixa_136.mesh" />
-  <static_mesh name="Reixa_137" filename="\meshes\Reixa_137.mesh" />
-  <static_mesh name="Reixa_138" filename="\meshes\Reixa_138.mesh" />
-  <static_mesh name="Reixa_139" filename="\meshes\Reixa_139.mesh" />
-  <static_mesh name="Reixa_140" filename="\meshes\Reixa_140.mesh" />
-  <static_mesh name="Reixa_141" filename="\meshes\Reixa_141.mesh" />
-  <static_mesh name="Reixa_142" filename="\meshes\Reixa_142.mesh" />
-  <static_mesh name="Reixa_143" filename="\meshes\Reixa_143.mesh" />
-  <static_mesh name="Reixa_144" filename="\meshes\Reixa_144.mesh" />
-  <static_mesh name="Reixa_145" filename="\meshes\Reixa_145.mesh" />
-  <static_mesh name="Reixa_146" filename="\meshes\Reixa_146.mesh" />
-  <static_mesh name="Reixa_147" filename="\meshes\Reixa_147.mesh" />
-  <static_mesh name="Reixa_148" filename="\meshes\Reixa_148.mesh" />
-  <static_mesh name="Reixa_149" filename="\meshes\Reixa_149.mesh" />
-  <static_mesh name="Reixa_150" filename="\meshes\Reixa_150.mesh" />
-  <static_mesh name="Reixa_151" filename="\meshes\Reixa_151.mesh" />
-  <static_mesh name="Reixa_152" filename="\meshes\Reixa_152.mesh" />
-  <static_mesh name="Reixa_153" filename="\meshes\Reixa_153.mesh" />
-  <static_mesh name="Reixa_154" filename="\meshes\Reixa_154.mesh" />
-  <static_mesh name="Reixa_155" filename="\meshes\Reixa_155.mesh" />
-  <static_mesh name="Reixa_156" filename="\meshes\Reixa_156.mesh" />
-  <static_mesh name="Reixa_157" filename="\meshes\Reixa_157.mesh" />
-  <static_mesh name="Reixa_158" filename="\meshes\Reixa_158.mesh" />
-  <static_mesh name="Reixa_159" filename="\meshes\Reixa_159.mesh" />
-  <static_mesh name="Reixa_160" filename="\meshes\Reixa_160.mesh" />
-  <static_mesh name="Reixa_161" filename="\meshes\Reixa_161.mesh" />
-  <static_mesh name="Reixa_162" filename="\meshes\Reixa_162.mesh" />
-  <static_mesh name="Reixa_163" filename="\meshes\Reixa_163.mesh" />
-  <static_mesh name="Reixa_164" filename="\meshes\Reixa_164.mesh" />
-  <static_mesh name="Reixa_165" filename="\meshes\Reixa_165.mesh" />
-  <static_mesh name="Reixa_166" filename="\meshes\Reixa_166.mesh" />
-  <static_mesh name="Reixa_167" filename="\meshes\Reixa_167.mesh" />
-  <static_mesh name="Reixa_168" filename="\meshes\Reixa_168.mesh" />
-  <static_mesh name="Reixa_169" filename="\meshes\Reixa_169.mesh" />
-  <static_mesh name="Reixa_170" filename="\meshes\Reixa_170.mesh" />
-  <static_mesh name="Reixa_171" filename="\meshes\Reixa_171.mesh" />
-  <static_mesh name="Reixa_172" filename="\meshes\Reixa_172.mesh" />
-  <static_mesh name="Reixa_173" filename="\meshes\Reixa_173.mesh" />
-  <static_mesh name="Reixa_174" filename="\meshes\Reixa_174.mesh" />
-  <static_mesh name="Reixa_175" filename="\meshes\Reixa_175.mesh" />
-  <static_mesh name="Reixa_176" filename="\meshes\Reixa_176.mesh" />
-  <static_mesh name="Reixa_177" filename="\meshes\Reixa_177.mesh" />
-  <static_mesh name="Reixa_178" filename="\meshes\Reixa_178.mesh" />
-  <static_mesh name="Reixa_179" filename="\meshes\Reixa_179.mesh" />
-  <static_mesh name="Reixa_180" filename="\meshes\Reixa_180.mesh" />
-  <static_mesh name="Reixa_181" filename="\meshes\Reixa_181.mesh" />
-  <static_mesh name="Reixa_182" filename="\meshes\Reixa_182.mesh" />
-  <static_mesh name="Reixa_183" filename="\meshes\Reixa_183.mesh" />
-  <static_mesh name="Reixa_184" filename="\meshes\Reixa_184.mesh" />
-  <static_mesh name="Reixa_185" filename="\meshes\Reixa_185.mesh" />
-  <static_mesh name="Reixa_186" filename="\meshes\Reixa_186.mesh" />
-  <static_mesh name="Reixa_187" filename="\meshes\Reixa_187.mesh" />
-  <static_mesh name="Reixa_188" filename="\meshes\Reixa_188.mesh" />
-  <static_mesh name="Reixa_189" filename="\meshes\Reixa_189.mesh" />
-  <static_mesh name="Reixa_190" filename="\meshes\Reixa_190.mesh" />
-  <static_mesh name="Reixa_191" filename="\meshes\Reixa_191.mesh" />
-  <static_mesh name="Reixa_192" filename="\meshes\Reixa_192.mesh" />
-  <static_mesh name="Reixa_193" filename="\meshes\Reixa_193.mesh" />
-  <static_mesh name="Reixa_194" filename="\meshes\Reixa_194.mesh" />
-  <static_mesh name="Reixa_195" filename="\meshes\Reixa_195.mesh" />
-  <static_mesh name="Reixa_196" filename="\meshes\Reixa_196.mesh" />
-  <static_mesh name="Reixa_197" filename="\meshes\Reixa_197.mesh" />
-  <static_mesh name="Reixa_198" filename="\meshes\Reixa_198.mesh" />
-  <static_mesh name="Reixa_199" filename="\meshes\Reixa_199.mesh" />
-  <static_mesh name="Reixa_200" filename="\meshes\Reixa_200.mesh" />
-  <static_mesh name="Reixa_201" filename="\meshes\Reixa_201.mesh" />
-  <static_mesh name="Reixa_202" filename="\meshes\Reixa_202.mesh" />
-  <static_mesh name="Reixa_203" filename="\meshes\Reixa_203.mesh" />
-  <static_mesh name="Reixa_204" filename="\meshes\Reixa_204.mesh" />
-  <static_mesh name="Reixa_205" filename="\meshes\Reixa_205.mesh" />
-  <static_mesh name="Reixa_206" filename="\meshes\Reixa_206.mesh" />
-  <static_mesh name="Reixa_207" filename="\meshes\Reixa_207.mesh" />
-  <static_mesh name="Reixa_208" filename="\meshes\Reixa_208.mesh" />
-  <static_mesh name="Reixa_209" filename="\meshes\Reixa_209.mesh" />
-  <static_mesh name="Reixa_210" filename="\meshes\Reixa_210.mesh" />
-  <static_mesh name="Reixa_211" filename="\meshes\Reixa_211.mesh" />
-  <static_mesh name="Reixa_212" filename="\meshes\Reixa_212.mesh" />
-  <static_mesh name="Reixa_213" filename="\meshes\Reixa_213.mesh" />
-  <static_mesh name="Reixa_214" filename="\meshes\Reixa_214.mesh" />
-  <static_mesh name="Reixa_215" filename="\meshes\Reixa_215.mesh" />
-  <static_mesh name="Reixa_216" filename="\meshes\Reixa_216.mesh" />
-  <static_mesh name="Reixa_217" filename="\meshes\Reixa_217.mesh" />
-  <static_mesh name="Reixa_218" filename="\meshes\Reixa_218.mesh" />
-  <static_mesh name="Reixa_219" filename="\meshes\Reixa_219.mesh" />
-  <static_mesh name="Reixa_220" filename="\meshes\Reixa_220.mesh" />
-  <static_mesh name="Reixa_221" filename="\meshes\Reixa_221.mesh" />
-  <static_mesh name="Reixa_222" filename="\meshes\Reixa_222.mesh" />
-  <static_mesh name="Reixa_223" filename="\meshes\Reixa_223.mesh" />
-  <static_mesh name="Reixa_224" filename="\meshes\Reixa_224.mesh" />
-  <static_mesh name="Reixa_225" filename="\meshes\Reixa_225.mesh" />
-  <static_mesh name="Reixa_226" filename="\meshes\Reixa_226.mesh" />
-  <static_mesh name="Reixa_227" filename="\meshes\Reixa_227.mesh" />
-  <static_mesh name="Reixa_228" filename="\meshes\Reixa_228.mesh" />
-  <static_mesh name="Reixa_229" filename="\meshes\Reixa_229.mesh" />
-  <static_mesh name="Reixa_230" filename="\meshes\Reixa_230.mesh" />
-  <static_mesh name="Reixa_231" filename="\meshes\Reixa_231.mesh" />
-  <static_mesh name="Reixa_232" filename="\meshes\Reixa_232.mesh" />
-  <static_mesh name="Reixa_233" filename="\meshes\Reixa_233.mesh" />
-  <static_mesh name="Reixa_234" filename="\meshes\Reixa_234.mesh" />
-  <static_mesh name="Reixa_235" filename="\meshes\Reixa_235.mesh" />
-  <static_mesh name="Reixa_236" filename="\meshes\Reixa_236.mesh" />
   <static_mesh name="taula_operacions" filename="\meshes\taula_operacions.mesh" />
   <static_mesh name="robot_3" filename="\meshes\robot_3.mesh" />
   <static_mesh name="robot_2" filename="\meshes\robot_2.mesh" />
   <static_mesh name="robot_1" filename="\meshes\robot_1.mesh" />
   <static_mesh name="Taula" filename="\meshes\Taula.mesh" />
+  <static_mesh name="Line013" filename="\meshes\Line013.mesh" />
   <static_mesh name="Moble" filename="\meshes\Moble.mesh" />
   <static_mesh name="Moble001" filename="\meshes\Moble001.mesh" />
   <static_mesh name="Boto020" filename="\meshes\Boto020.mesh" />
-  <static_mesh name="Boto021" filename="\meshes\Boto021.mesh" />
   <static_mesh name="Plataforma" filename="\meshes\Plataforma.mesh" />
-  <!--static_mesh name="Marc_mirall" filename="\meshes\Marc_mirall.mesh" /-->
+  <static_mesh name="Marc_mirall" filename="\meshes\Marc_mirall.mesh" />
   <static_mesh name="Sala_1_estructura" filename="\meshes\Sala_1_estructura.mesh" />
-  <!--static_mesh name="Vidre001" filename="\meshes\Vidre001.mesh" />
-  <static_mesh name="Vidre002" filename="\meshes\Vidre002.mesh" /-->
-  <!--static_mesh name="Marc_mirall001" filename="\meshes\Marc_mirall001.mesh" /-->
-  <static_mesh name="Fluorescent008" filename="\meshes\Fluorescent008.mesh" />
-  <static_mesh name="suport_fluorescent003" filename="\meshes\suport_fluorescent003.mesh" />
+  <static_mesh name="Vidre001" filename="\meshes\Vidre001.mesh" />
   <static_mesh name="Fluorescent012" filename="\meshes\Fluorescent012.mesh" />
   <static_mesh name="suport_fluorescent004" filename="\meshes\suport_fluorescent004.mesh" />
   <static_mesh name="robot_004" filename="\meshes\robot_004.mesh" />
   <static_mesh name="Cylinder024" filename="\meshes\Cylinder024.mesh" />
   <static_mesh name="Cylinder025" filename="\meshes\Cylinder025.mesh" />
-  <static_mesh name="Fluorescent016" filename="\meshes\Fluorescent016.mesh" />
-  <static_mesh name="suport_fluorescent005" filename="\meshes\suport_fluorescent005.mesh" />
   <static_mesh name="Modular_selector" filename="\meshes\Modular_selector.mesh" />
   <static_mesh name="consola_1" filename="\meshes\consola_1.mesh" />
   <static_mesh name="servidor" filename="\meshes\servidor.mesh" />
@@ -778,4 +540,8 @@
   <static_mesh name="Bombona" filename="\meshes\Bombona.mesh" />
   <static_mesh name="Pot_vidre" filename="\meshes\Pot_vidre.mesh" />
   <static_mesh name="Osciloscopi" filename="\meshes\Osciloscopi.mesh" />
+  <static_mesh name="suport_fluorescent003" filename="\meshes\suport_fluorescent003.mesh" />
+  <static_mesh name="Fluorescent008" filename="\meshes\Fluorescent008.mesh" />
+  <static_mesh name="servidor001" filename="\meshes\servidor001.mesh" />
+  <static_mesh name="Marc_mirall001" filename="\meshes\Marc_mirall001.mesh" />
 </static_meshes>

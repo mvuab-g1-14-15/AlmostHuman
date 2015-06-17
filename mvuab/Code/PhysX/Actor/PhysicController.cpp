@@ -47,7 +47,7 @@ CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSl
     m_pPhXCapsuleControllerDesc->height       = m_fHeightControler;
     m_pUserData->SetRadius( m_fRadiusControler );
     // La pendiente máxima que puede subir. 0 lo desactiva. En función del coseno ángulo. Por defecto 0707
-    m_pPhXCapsuleControllerDesc->slopeLimit     = cosf( NxMath::degToRad( m_fSlopeLimitControler ) );
+    m_pPhXCapsuleControllerDesc->slopeLimit     = cosf( /*NxMath::degToRad(*/ m_fSlopeLimitControler /*)*/ );
     m_pPhXCapsuleControllerDesc->skinWidth      =
         m_fSkinWidthControler;  // La anchura de la piel. Permite dar un marche para evitar cálculos excesivos. Defecto: 0.1
     m_pPhXCapsuleControllerDesc->stepOffset     =
