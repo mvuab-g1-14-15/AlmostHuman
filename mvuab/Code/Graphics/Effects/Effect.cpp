@@ -302,8 +302,8 @@ bool CEffect::SetLights( size_t NumOfLights )
             m_LightsPosition[i] = l_pCurrentLight->GetPosition();
             Math::CColor l_Color = l_pCurrentLight->GetColor();
             m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() ,
-                                             l_Color.GetGreen() ,
-                                             l_Color.GetBlue() );
+                                                l_Color.GetGreen() ,
+                                                l_Color.GetBlue() );
 
             if ( l_LightType == CLight::DIRECTIONAL )
             {

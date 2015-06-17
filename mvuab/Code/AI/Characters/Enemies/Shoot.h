@@ -5,6 +5,7 @@
 #include "Utils/Name.h"
 
 class CBillboard;
+class CLight;
 
 class CShoot : public CObject3D, public CName
 {
@@ -26,6 +27,7 @@ private:
     Math::Vect3f mDirection;
 
     CBillboard *mBillboard;
+    CLight *mLight;
 };
 
 #endif
