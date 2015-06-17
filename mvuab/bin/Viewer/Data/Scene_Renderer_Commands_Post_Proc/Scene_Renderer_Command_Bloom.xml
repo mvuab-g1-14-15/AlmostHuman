@@ -24,7 +24,7 @@
 	<gaussian name="Bloom_Gaussian" iterations="1" >
 		<texture stage_id="0" name="GlowTexture"/>
 		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" width="512" height="512" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
-		<!--texture stage_id="1" name="DepthMapTexture"/-->
+		<texture stage_id="1" name="DepthMapTexture"/>
 	</gaussian>
 	
 	<!-- DEBUG 
