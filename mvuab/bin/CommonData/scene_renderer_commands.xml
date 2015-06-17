@@ -69,6 +69,8 @@
 	
 	<render_billboards/>
 	<render_particules/>
+	<render_triggers/>
+	<render_gizmos render="true"/>
 	<render_process/>
 	
 	<disable_z_test/>
