@@ -55,7 +55,8 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
     mLight = new COmniLight();
     mLight->SetName(lName);
     mLight->SetIntensity( 0.65f );
-    mLight->SetEndRangeAttenuation( 1.0f );
+    mLight->SetEndRangeAttenuation( 2.0f );
+    mLight->SetColor( Math::colRED );
     mLight->SetPosition( aPosition );
     mLight->SetRenderShadows( false );
 
