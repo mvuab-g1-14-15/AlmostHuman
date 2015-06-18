@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="Sala_2" filename="\meshes\Sala_2.mesh" />
   <static_mesh name="Box055" filename="\meshes\Box055.mesh" />
   <static_mesh name="Object001" filename="\meshes\Object001.mesh" />
   <static_mesh name="Box057" filename="\meshes\Box057.mesh" />
@@ -266,6 +265,7 @@
   <static_mesh name="barrier002" filename="\meshes\barrier002.mesh" />
   <static_mesh name="barrier001" filename="\meshes\barrier001.mesh" />
   <static_mesh name="Focus_005" filename="\meshes\Focus_005.mesh" />
+  <static_mesh name="Sala_2" filename="\meshes\Sala_2.mesh" />
   <static_mesh name="Focus_006" filename="\meshes\Focus_006.mesh" />
   <static_mesh name="Llum_passadis_005" filename="\meshes\Llum_passadis_005.mesh" />
   <static_mesh name="Reixa_003" filename="\meshes\Reixa_003.mesh" />
@@ -544,4 +544,5 @@
   <static_mesh name="Fluorescent008" filename="\meshes\Fluorescent008.mesh" />
   <static_mesh name="servidor001" filename="\meshes\servidor001.mesh" />
   <static_mesh name="Marc_mirall001" filename="\meshes\Marc_mirall001.mesh" />
+  <static_mesh name="barrierCIL_046" filename="\meshes\barrierCIL_046.mesh" />
 </static_meshes>

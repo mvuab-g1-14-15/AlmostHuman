@@ -2,7 +2,6 @@
 <RenderableObjects>
   <layer name="solid" />
   <layer name="characters" />
-  <MeshInstance name="Sala_2" core="Sala_2" pos="67.983 -10.722 -60.9569" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box055" core="Box055" pos="199.862 24.9834 89.6218" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Object001" core="Object001" pos="78.6413 -8.55895 -33.1392" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Box057" core="Box057" pos="85.635 -8.12036 -33.6167" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -267,7 +266,8 @@
   <MeshInstance name="Viga" core="Viga" pos="63.893 -7.77684 -28.9233" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier002" core="barrier002" pos="58.8143 -18.4869 -34.3569" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="barrier001" core="barrier001" pos="63.272 -18.4869 -32.6725" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Focus_005" core="Focus_005" pos="53.406 -18.3805 -72.7593" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />  
+  <MeshInstance name="Focus_005" core="Focus_005" pos="53.406 -18.3805 -72.7593" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="Sala_2" core="Sala_2" pos="67.983 -10.722 -60.9569" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Focus_006" core="Focus_006" pos="51.6673 -18.3805 -81.0257" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Llum_passadis_005" core="Llum_passadis_005" pos="78.1581 -8.55895 -77.0114" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
   <MeshInstance name="Reixa_003" core="Reixa_003" pos="102.405 -7.19804 -48.1536" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
@@ -547,5 +547,6 @@
   <MeshInstance name="suport_fluorescent004" core="suport_fluorescent004" pos="105.749 -5.20468 -26.2999" yaw="0.0" pitch="0.0" roll="-1.5708" scale="0.447611 0.165446 0.165446" layer="solid" />
   <MeshInstance name="Fluorescent012" core="Fluorescent012" pos="105.749 -5.20468 -26.2999" yaw="0.0" pitch="0.0" roll="-1.5708" scale="0.447611 0.165446 0.165446" layer="solid" />
   <MeshInstance name="servidor001" core="servidor001" pos="95.3322 -6.52753 -40.1821" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-  <MeshInstance name="Marc_mirall001" core="Marc_mirall001" pos="108.69 -5.86402 -26.2434" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" /> 
+  <MeshInstance name="Marc_mirall001" core="Marc_mirall001" pos="108.69 -5.86402 -26.2434" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
+  <MeshInstance name="barrierCIL_046" core="barrierCIL_046" pos="62.3252 -16.3896 -72.0242" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
 </RenderableObjects>
