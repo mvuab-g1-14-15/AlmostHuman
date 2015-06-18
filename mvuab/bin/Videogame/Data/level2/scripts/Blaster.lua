@@ -107,7 +107,7 @@ function CBlaster:Update()
 				engine:Trace("Energia Total: ".. tostring(self.Energy))
 				self:Shoot()
 			else
-				--Sonido de no munición
+				--Sonido de no municiÃ³n
 			end
 			self.TimePressed = 0.0
 			self.IsAcumulatorSound = false
@@ -118,6 +118,8 @@ function CBlaster:Update()
 			lShoot:Update()
 			if lShoot:Impacted() then
 				table.remove(self.Shoots, i)
+				-- Run the garbage collector for remove the shoot in cpp
+				-- collectgarbage()
 			end
 		end
 	end
