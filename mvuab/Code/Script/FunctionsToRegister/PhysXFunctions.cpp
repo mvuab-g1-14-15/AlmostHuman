@@ -109,7 +109,8 @@ bool PlayerInSight( CPhysicsManager *PhysicManager, float _Distance, float _Angl
         CPhysicController *l_Controller = l_UserData->GetController();
         std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
 
-        if ( name == "Player" ) return true;
+        if ( name == "Player" )
+            return true;
     }
 
     return false;
