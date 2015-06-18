@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Gui_config>
-  <GuiFiles path="Data/textures/GUI/XML_Laberynth" windows_default="HUD.xml"/>
+  <GuiFiles path="Data/textures/GUI/XML_Laberynth" windows_default="Main.xml"/>
   <TextBox  posx="30" posy="30" width="35" height="35" button_width="5" button_height="5"
             buttonClose_normal=     "Data/textures/GUI/Textures_Test/CloseDialegBox.jpg"
             buttonClose_over=       "Data/textures/GUI/Textures_Test/CloseDialegBoxO.jpg"
