@@ -18,15 +18,11 @@
 
 typedef CEnemy *( *CreateEnemyFn )( CXMLTreeNode& );
 
-CEnemyManager::CEnemyManager()
-    : CManager()
-    , mAStar( new CAStar() )
+CEnemyManager::CEnemyManager() : CManager(), mAStar(new CAStar())
 {
 }
 
-CEnemyManager::CEnemyManager( CXMLTreeNode& atts )
-    : CManager( atts )
-    , mAStar( new CAStar() )
+CEnemyManager::CEnemyManager( CXMLTreeNode& atts ) : CManager(atts), mAStar(new CAStar())
 {
     /*  TODO RAUL
         PONER LECTURA XML
@@ -40,8 +36,10 @@ CEnemyManager::~CEnemyManager()
 
 void CEnemyManager::Destroy()
 {
-    m_CoreEnemies.Destroy();
     CMapManager::Destroy();
+    CHECKED_DELETE(mAStar);
+
+    m_CoreEnemies.Destroy();
     m_StateMachines.Destroy();
 }
 
@@ -133,9 +131,7 @@ void CEnemyManager::AddNewStateMachine( const std::string& Name, const std::stri
 {
     CStateMachine *lStateMachine = new CStateMachine( Name );
 
-    if ( lStateMachine->Load( SMFileName ) )
-        m_StateMachines.AddResource( Name,  lStateMachine );
-    else
+    if(!lStateMachine->Load(SMFileName) || !m_StateMachines.AddResource(Name, lStateMachine))
     {
         CHECKED_DELETE( lStateMachine );
         LOG_ERROR_APPLICATION( "Adding a new state machine" );
@@ -148,12 +144,9 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
     // Read the type
     const std::string lType = Node.GetPszProperty( "type", "no_type" );
 
-    if ( lType == "easy" )
-        lCoreEnemy->m_EnemyType = CEnemy::eEasy;
-    else if ( lType == "patroll" )
-        lCoreEnemy->m_EnemyType = CEnemy::ePatroll;
-    else if ( lType == "boss" )
-        lCoreEnemy->m_EnemyType = CEnemy::eBoss;
+    if ( lType == "easy" ) lCoreEnemy->m_EnemyType = CEnemy::eEasy;
+    else if ( lType == "boss" ) lCoreEnemy->m_EnemyType = CEnemy::eBoss;
+    else if ( lType == "patroll" ) lCoreEnemy->m_EnemyType = CEnemy::ePatroll;
 
     lCoreEnemy->m_Life = Node.GetFloatProperty( "life", 0.0f );
     lCoreEnemy->m_RespawnTime = Node.GetFloatProperty( "time_to_respawn", 0.0f );
@@ -161,9 +154,10 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
     lCoreEnemy->m_ShootAccuracy = Node.GetFloatProperty( "shoot_accuracy", 0.0f );
     lCoreEnemy->m_StateMachineName = Node.GetPszProperty( "state_machine_name", "no_name" );
     lCoreEnemy->m_StateMachineFileName = Node.GetPszProperty( "state_machine_file", "no_name" );
+
     // Now add the new state machine
     AddNewStateMachine( lCoreEnemy->m_StateMachineName, lCoreEnemy->m_StateMachineFileName );
-    m_CoreEnemies.AddResource( lType, lCoreEnemy );
+    if(!m_CoreEnemies.AddResource(lType, lCoreEnemy)) CHECKED_DELETE(lCoreEnemy);
 }
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
