@@ -11,7 +11,7 @@
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
 	
-	<Map name="Radar" pos_in_screen="79 59" width="20" height="36" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/GUI/Textures_Test/mapa.jpg"
+	<Map name="Radar" pos_in_screen="0 59" width="20" height="36" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/GUI/Textures_Test/mapa.jpg"
 	 width_map="0.08" height_map="0.045" pos_0_0_3d_map="-2.956 533.182" pos_1_1_3d_map="359.366 -111.979" visible="true" active="true" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width_enemy="25" height_enemy="25" texture_enemy="Data/textures/GUI/Textures_Test/conotrans3.png">
 		<mark_player name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
