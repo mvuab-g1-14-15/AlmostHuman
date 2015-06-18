@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <triggers>
-	<trigger name="PuntoEnergia" position="50.06 -16.51.5 -26.52" shape="box" size="4 8 4" enter_event="true" stay_event="false" leave_event="true"  enter_script="ShowImage()"
+	<trigger name="PuntoEnergia" position="50.06 -16.515 -26.52" shape="box" size="4 8 4" enter_event="true" stay_event="false" leave_event="true"  enter_script="ShowImage()"
 			 stay_script="ShowImage()" leave_script="ShowImage()"	group="0" paint="true" color="1.0 0.0 0.0 0.5" technique="RenderForwardDebugShapeTechnique"/>
 	<trigger name="Cambiar Sala" position="96.53 -5.81 -41.0" shape="box" size="1 2 1" enter_event="true" stay_event="false" leave_event="true"  enter_script="ShowImageRoom()"
 			 stay_script="ShowImageRoom()" leave_script="ShowImageRoom()"	group="0" paint="true" color="1.0 0.0 0.0 0.5" technique="RenderForwardDebugShapeTechnique"/>
