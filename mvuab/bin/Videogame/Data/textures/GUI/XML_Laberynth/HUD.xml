@@ -23,5 +23,6 @@
 	<StaticText name="StealthAttack" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="StealthAttack" />
 	<StaticText name="OpenDoor" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="OpenDoor" />
 	<StaticText name="Block" posx="50" posy="60" height="30" width="12" visible="false" active="false" literal="Block" />
+	<StaticText name="CambiarSala" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="CambiarSala" />
 	
 </Windows>

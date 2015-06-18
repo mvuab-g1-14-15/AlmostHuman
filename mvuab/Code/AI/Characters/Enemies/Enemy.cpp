@@ -53,35 +53,6 @@ CEnemy::~CEnemy()
 
 void CEnemy::Update()
 {
-    CScriptManager *l_SM = ScriptMInstance;
-
-    if ( m_CurrentState != m_NextState )
-        m_OnExit = true;
-
-    CState *l_State = m_pStateMachine->GetResource( m_CurrentState );
-    std::vector<CAction *> l_Actions;
-
-    if ( m_OnEnter )
-    {
-        l_Actions = l_State->GetOnEnterActions();
-        m_OnEnter = false;
-    }
-    else if ( m_OnExit )
-    {
-        l_Actions = l_State->GetOnExitActions();
-        m_OnEnter = true;
-        m_OnExit = false;
-        m_CurrentState = m_NextState;
-    }
-    else
-        l_Actions = l_State->GetUpdateActions();
-
-    std::vector<CAction *>::iterator it = l_Actions.begin(),
-                                     it_end = l_Actions.end();
-
-    for ( ; it != it_end; ++it )
-        l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
-
     m_Position = m_Controller->GetPosition();
     m_Position.y -=  m_Controller->GetHeight() / 2.0f;
 	SetYaw( m_Controller->GetYaw() );
@@ -171,6 +142,35 @@ void CEnemy::Update()
             l_Gizmo->AddElement( l_Element );
         }
     }
+
+    CScriptManager *l_SM = ScriptMInstance;
+
+    if ( m_CurrentState != m_NextState )
+        m_OnExit = true;
+
+    CState *l_State = m_pStateMachine->GetResource( m_CurrentState );
+    std::vector<CAction *> l_Actions;
+
+    if ( m_OnEnter )
+    {
+        l_Actions = l_State->GetOnEnterActions();
+        m_OnEnter = false;
+    }
+    else if ( m_OnExit )
+    {
+        l_Actions = l_State->GetOnExitActions();
+        m_OnEnter = true;
+        m_OnExit = false;
+        m_CurrentState = m_NextState;
+    }
+    else
+        l_Actions = l_State->GetUpdateActions();
+
+    std::vector<CAction *>::iterator it = l_Actions.begin(),
+        it_end = l_Actions.end();
+
+    for ( ; it != it_end; ++it )
+        l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
 }
 
 void CEnemy::ChangeState( std::string NewState )

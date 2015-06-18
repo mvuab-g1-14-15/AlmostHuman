@@ -27,7 +27,7 @@
 	
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="true" render_triggers="false"/>
+	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="true" render_triggers="true"/>
 	<!--render_scene layer="glow" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/-->

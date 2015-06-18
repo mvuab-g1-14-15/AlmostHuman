@@ -98,3 +98,7 @@ function CPlayer:AddEnergy(amount)
 	end
 	self.Blaster:SetEnergy(TotalEnergy)
 end
+
+function CPlayer:SetEnergy(amount)
+	self.Blaster:SetEnergy(amount)
+end

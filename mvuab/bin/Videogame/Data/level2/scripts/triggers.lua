@@ -1,4 +1,5 @@
 g_bChargeEnergy = false
+g_bChangeRoom = false
 g_bPressX = false
 g_bPressedX = false
 CuentaAtras = 3
@@ -43,6 +44,16 @@ function ShowImage(other_shape)
 		g_bChargeEnergy = true
 	end
 	gui_manager:ShowStaticText("ButtonEnergy")
+end
+
+function ShowImageRoom(other_shape)
+	--cinematic_manager:Execute("cinematica_1")
+	if g_bChangeRoom then
+		g_bChangeRoom = false
+	else
+		g_bChangeRoom = true
+	end
+	gui_manager:ShowStaticText("CambiarSala")
 end
 
 function ShowText(text, other_shape)

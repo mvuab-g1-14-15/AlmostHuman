@@ -14,6 +14,7 @@ end
 
 function load_gameplay()
     g_Player = CPlayer()
+	g_Player:SetEnergy(0.0)
 	g_HUD = CHUD()
 	
 	--local pos = Vect3f( 0.0, 0.0, 0.0 )
@@ -54,6 +55,9 @@ function update_gameplay()
 		if action_manager:DoAction("PressR") then
 			if g_bChargeEnergy then
 				ChargeEnergy()
+			end
+			if g_bChangeRoom then
+				g_Player:SetPosition(ChangeRoom())
 			end
 		end
 		if action_manager:DoAction("PressX") then
