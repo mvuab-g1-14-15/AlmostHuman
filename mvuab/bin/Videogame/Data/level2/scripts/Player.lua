@@ -30,6 +30,8 @@ function CPlayer:__init()
 	self.RenderableObject:MakeTransform();
 	
 	self.Life = 100.0
+	
+	self.CurrentState = "idle"
 end
 
 function CPlayer:Update()
@@ -97,6 +99,18 @@ function CPlayer:AddEnergy(amount)
 		TotalEnergy = 100.0
 	end
 	self.Blaster:SetEnergy(TotalEnergy)
+end
+
+function CPlayer:GetRenderableObject()
+	return self.RenderableObject;
+end
+
+function CPlayer:GetCurrentState()
+	return self.CurrentState
+end
+
+function CPlayer:SetCurrentState(state)
+	self.CurrentState = state
 end
 
 function CPlayer:SetEnergy(amount)
