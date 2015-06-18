@@ -168,33 +168,33 @@ void registerGizmos( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
-void registerRenderableObject( lua_State * aLuaState )
+void registerRenderableObject( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register RenderableObjects" );
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // RENDERABLE OBJECT
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
+  LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
   LUA_END_DECLARATION
-  
+
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // RENDERABLE OBJECTS MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject> )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CRenderableObjectsManager, GetResource )
-    LUA_DECLARE_METHOD( CRenderableObjectsManager, AddResource )
+  LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsManager, CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD( CRenderableObjectsManager, GetResource )
+  LUA_DECLARE_METHOD( CRenderableObjectsManager, AddResource )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObjectsManager> )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObjectsManager> )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,8 +202,8 @@ void registerRenderableObject( lua_State * aLuaState )
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager> )
-    LUA_DECLARE_METHOD( CRenderableObjectsLayersManager, GetResource )
+  LUA_DECLARE_DERIVED_CLASS( CRenderableObjectsLayersManager, CTemplatedVectorMapManager<CRenderableObjectsManager> )
+  LUA_DECLARE_METHOD( CRenderableObjectsLayersManager, GetResource )
   LUA_END_DECLARATION
 }
 
@@ -215,15 +215,15 @@ void registerStaticMesh( lua_State* aLuaState )
   // INSTANCE MESH
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CInstanceMesh, CRenderableObject )
+  LUA_DECLARE_DERIVED_CLASS( CInstanceMesh, CRenderableObject )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-	LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateAnimatedInstanceModel )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateAnimatedInstanceModel )
   LUA_END_DECLARATION
 }
 
@@ -235,52 +235,53 @@ void registerAnimatedModels( lua_State* aLuaState )
   // INSTANCE MESH
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CAnimatedInstanceModel, CRenderableObject )
-	LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimation )
+  LUA_DECLARE_DERIVED_CLASS( CAnimatedInstanceModel, CRenderableObject )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimation )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimationAction )
   LUA_END_DECLARATION
 }
 
 void registerCinematics( lua_State* aLuaState )
 {
-	LUA_BEGIN_DECLARATION( aLuaState )
-		LUA_DECLARE_CLASS( CCinematicPlayer )
-		LUA_DECLARE_METHOD( CCinematicPlayer, Init )
-		LUA_DECLARE_METHOD( CCinematicPlayer, Update )
-		LUA_DECLARE_METHOD( CCinematicPlayer, Stop )
-		LUA_DECLARE_METHOD( CCinematicPlayer, Play )
-		LUA_DECLARE_METHOD( CCinematicPlayer, Pause )
-		LUA_DECLARE_METHOD( CCinematicPlayer, IsFinished )
-		LUA_DECLARE_METHOD( CCinematicPlayer, GetDuration )
-		LUA_DECLARE_METHOD( CCinematicPlayer, GetTimeCurrent )
-		LUA_DECLARE_METHOD( CCinematicPlayer, OnRestartCycle )
-	LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CCinematicPlayer )
+  LUA_DECLARE_METHOD( CCinematicPlayer, Init )
+  LUA_DECLARE_METHOD( CCinematicPlayer, Update )
+  LUA_DECLARE_METHOD( CCinematicPlayer, Stop )
+  LUA_DECLARE_METHOD( CCinematicPlayer, Play )
+  LUA_DECLARE_METHOD( CCinematicPlayer, Pause )
+  LUA_DECLARE_METHOD( CCinematicPlayer, IsFinished )
+  LUA_DECLARE_METHOD( CCinematicPlayer, GetDuration )
+  LUA_DECLARE_METHOD( CCinematicPlayer, GetTimeCurrent )
+  LUA_DECLARE_METHOD( CCinematicPlayer, OnRestartCycle )
+  LUA_END_DECLARATION
 
-	LUA_BEGIN_DECLARATION( aLuaState )
-		LUA_DECLARE_CLASS( CCinematicObject )
-		LUA_DECLARE_METHOD( CCinematicObject, IsOk )
-		LUA_DECLARE_METHOD( CCinematicObject, AddCinematicObjectKeyFrame )
-		LUA_DECLARE_METHOD( CCinematicObject, Update )
-		LUA_DECLARE_METHOD( CCinematicObject, Stop )
-		LUA_DECLARE_METHOD( CCinematicObject, OnRestartCycle )
-		LUA_DECLARE_METHOD( CCinematicObject, Render )
-	LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CCinematicObject )
+  LUA_DECLARE_METHOD( CCinematicObject, IsOk )
+  LUA_DECLARE_METHOD( CCinematicObject, AddCinematicObjectKeyFrame )
+  LUA_DECLARE_METHOD( CCinematicObject, Update )
+  LUA_DECLARE_METHOD( CCinematicObject, Stop )
+  LUA_DECLARE_METHOD( CCinematicObject, OnRestartCycle )
+  LUA_DECLARE_METHOD( CCinematicObject, Render )
+  LUA_END_DECLARATION
 
-	LUA_BEGIN_DECLARATION( aLuaState )
-		LUA_DECLARE_CLASS( CCinematicObjectKeyFrame )
-		LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, GetKeyFrameTime )
-		LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, SetKeyFrameTime )
-	LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CCinematicObjectKeyFrame )
+  LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, GetKeyFrameTime )
+  LUA_DECLARE_METHOD( CCinematicObjectKeyFrame, SetKeyFrameTime )
+  LUA_END_DECLARATION
 
-	LUA_BEGIN_DECLARATION( aLuaState )
-		LUA_DECLARE_CLASS( CCinematic )
-		LUA_DECLARE_METHOD( CCinematic, Stop )
-		LUA_DECLARE_METHOD( CCinematic, Play )
-		LUA_DECLARE_METHOD( CCinematic, Pause )
-		LUA_DECLARE_METHOD( CCinematic, LoadXML )
-		LUA_DECLARE_METHOD( CCinematic, AddCinematicObject )
-		LUA_DECLARE_METHOD( CCinematic, Update )
-		LUA_DECLARE_METHOD( CCinematic, Render )
-	LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CCinematic )
+  LUA_DECLARE_METHOD( CCinematic, Stop )
+  LUA_DECLARE_METHOD( CCinematic, Play )
+  LUA_DECLARE_METHOD( CCinematic, Pause )
+  LUA_DECLARE_METHOD( CCinematic, LoadXML )
+  LUA_DECLARE_METHOD( CCinematic, AddCinematicObject )
+  LUA_DECLARE_METHOD( CCinematic, Update )
+  LUA_DECLARE_METHOD( CCinematic, Render )
+  LUA_END_DECLARATION
 }
 
 void registerGraphics( lua_State* aLuaState )

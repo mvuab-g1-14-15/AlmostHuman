@@ -80,16 +80,33 @@ end
 
 function CBlaster:Update()
 	if not g_ConsoleActivate and not g_CinematicActive then
+		local CurrentState = g_Player:GetCurrentState()
 		if action_manager:DoAction("Shoot") then
+			if self.TimePressed == 0 then
+				if CurrentState ~= "idle_to_charge" then
+					engine:Trace("Estado actual idle_to_charge")
+					g_Player:GetRenderableObject():ChangeAnimation("idle_to_charge", 0.2, 0.5)
+					g_Player:SetCurrentState("idle_to_charge")
+				end
+			end
 			if self.TimePressed < self.MaxTimePressed then
 				--Implementar soot acumulado
 				self.TimePressed = self.TimePressed + timer:GetElapsedTime()
 			else
+				if CurrentState ~= "shoot_cargado" then
+					engine:Trace("Estado actual shoot_cargado")
+					g_Player:GetRenderableObject():ChangeAnimation("shoot_cargado", 0.5, 0)
+					g_Player:SetCurrentState("shoot_cargado")
+				end
 				self.TimePressed = self.MaxTimePressed
 			end
 			if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 				sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
-				
+				if CurrentState ~= "charge_loop" then
+					engine:Trace("Estado actual charge_loop")
+					g_Player:GetRenderableObject():ChangeAnimation("charge_loop", 0.5, 0)
+					g_Player:SetCurrentState("charge_loop")
+				end
 
 				self.IsAcumulatorSound = true
 			end
@@ -106,6 +123,11 @@ function CBlaster:Update()
 				end
 				engine:Trace("Energia Total: ".. tostring(self.Energy))
 				self:Shoot()
+				if CurrentState ~= "shoot_ok" then
+					engine:Trace("Estado actual shoot_ok")
+					g_Player:GetRenderableObject():ChangeAnimation("shoot_ok", 1, 1)
+					g_Player:SetCurrentState("shoot_ok")
+				end
 			else
 				--Sonido de no munición
 			end
