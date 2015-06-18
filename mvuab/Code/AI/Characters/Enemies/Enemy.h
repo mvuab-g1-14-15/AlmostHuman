@@ -15,6 +15,7 @@ class CRenderableObject;
 class CAnimatedInstanceModel;
 class CTrigger;
 class CShoot;
+class CCamera;
 
 class CEnemy : public CCharacter
 {
@@ -60,6 +61,8 @@ protected:
 
 	std::vector<Math::Vect3f> mPath;
 	bool mPathCalculated;
+
+    CCamera* mCamera;
 };
 
 #endif

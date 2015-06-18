@@ -15,11 +15,11 @@ function check_next_state()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
 	--engine:Trace("Distance to player: " .. l_DistanceToPlayer)
-	if l_PlayerInSight then
+	--[[if l_PlayerInSight then
 		engine:Trace("check_next_state: Is viewing player: true")
 	else
 		engine:Trace("check_next_state: Is viewing player: false")
-	end
+	end]]
 	if l_CurrentState == "inicial" then
 		l_NextState = "andando"
 	end
@@ -104,11 +104,11 @@ function atacar()
 	--engine:Trace("Ejecutando atacar")
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
-	if l_PlayerInSight then
+	--[[if l_PlayerInSight then
 		engine:Trace("atacar: Is viewing player: true")
 	else
 		engine:Trace("atacar: Is viewing player: false")
-	end
+	end]]
 	
 	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then

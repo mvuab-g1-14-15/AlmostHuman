@@ -125,3 +125,16 @@ function PlayerVisibility(enemy)
 	end
 ]]
 end
+
+function ChangeCameraCloseEnemy()
+	local lEnemyName = enemy_manager:GetCloseEnemy(GetPlayerPosition()):GetName()
+	local lActualCameraName = camera_manager:GetCurrentCameraName()
+	
+	if lActualCameraName == lEnemyName then
+		engine:Trace("Changing camera to Player")
+		camera_manager:SetCurrentCamera("TestProcessCam")
+	else
+		engine:Trace("Changing camera to close Enemy")
+		camera_manager:SetCurrentCamera(lEnemyName)
+	end
+end

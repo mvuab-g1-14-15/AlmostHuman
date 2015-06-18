@@ -38,7 +38,7 @@ private:
     CMapManager<CCoreEnemy>      m_CoreEnemies;
     std::map<unsigned int, std::vector<Math::Vect3f>> m_Routes;
 
-    CEnemy                  *m_ActualEnemy;
+    CEnemy*                  m_ActualEnemy;
 
     void Destroy();
     void AddNewStateMachine( const std::string& Name, const std::string& SMFileName );
@@ -46,10 +46,10 @@ private:
     void AddNewEnemy( CXMLTreeNode& Node );
     void AddNewRoute( CXMLTreeNode& Node );
 
-    ObjectFactory2<CEnemy, CXMLTreeNode, CStateMachine *, std::string > EnemyFactory;
+    ObjectFactory2<CEnemy, CXMLTreeNode, CStateMachine*, std::string > EnemyFactory;
     void RegisterEnemies();
 
-    CAStar *mAStar;
+    CAStar* mAStar;
 
 public:
     CEnemyManager();
@@ -61,10 +61,12 @@ public:
     void Init();
     void Reload();
     template<class T>
-    static CEnemy *CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode );
-    CEnemy *GetActualEnemy();
+    static CEnemy* CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode );
+    CEnemy* GetActualEnemy();
 
-    CAStar *GetAStar()
+    CEnemy* GetCloseEnemy( Math::Vect3f aPos );
+
+    CAStar* GetAStar()
     {
         return mAStar;
     }

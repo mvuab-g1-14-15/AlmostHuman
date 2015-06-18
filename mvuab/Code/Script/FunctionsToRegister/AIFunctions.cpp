@@ -48,7 +48,7 @@ T vector_get( std::vector<T>& vec, size_t i )
 }
 
 
-void registerCharacters( lua_State *aLuaState )
+void registerCharacters( lua_State* aLuaState )
 {
     ASSERT( aLuaState, "LuaState error in Register Characters" );
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -75,7 +75,7 @@ void registerCharacters( lua_State *aLuaState )
 
 struct CEnemy_wrapper : CEnemy, luabind::wrap_base
 {
-    CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine *aStateMachine )
+    CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine* aStateMachine )
         : CEnemy( Node, aStateMachine )
     {}
 
@@ -84,13 +84,13 @@ struct CEnemy_wrapper : CEnemy, luabind::wrap_base
         call<void>( "Update" );
     }
 
-    static void default_Update( CEnemy *ptr )
+    static void default_Update( CEnemy* ptr )
     {
         return ptr->CEnemy::Update();
     }
 };
 
-void registerEnemies( lua_State *aLuaState )
+void registerEnemies( lua_State* aLuaState )
 {
     ASSERT( aLuaState, "LuaState error in Register Enemies" );
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -105,7 +105,7 @@ void registerEnemies( lua_State *aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
     LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
     LUA_DECLARE_METHOD( CEnemy, MakeShoot )
-	LUA_DECLARE_METHOD( CEnemy, GetDirectionEnemy )
+    LUA_DECLARE_METHOD( CEnemy, GetDirectionEnemy )
     LUA_DECLARE_METHOD( CEnemy, MoveAStar )
     LUA_END_DECLARATION
 
@@ -140,10 +140,11 @@ void registerEnemies( lua_State *aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
     LUA_DECLARE_METHOD( CEnemyManager, GetResource )
     LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
+    LUA_DECLARE_METHOD( CEnemyManager, GetCloseEnemy )
     LUA_END_DECLARATION
 }
 
-void registerAI( lua_State *aLuaState )
+void registerAI( lua_State* aLuaState )
 {
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CShoot, CObject3D )

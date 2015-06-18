@@ -16,13 +16,13 @@
 #include "AnimatedModels\AnimatedInstanceModel.h"
 #include "Pathfinding\AStar.h"
 
-typedef CEnemy *( *CreateEnemyFn )( CXMLTreeNode& );
+typedef CEnemy* ( *CreateEnemyFn )( CXMLTreeNode& );
 
-CEnemyManager::CEnemyManager() : CManager(), mAStar(new CAStar())
+CEnemyManager::CEnemyManager() : CManager(), mAStar( new CAStar() )
 {
 }
 
-CEnemyManager::CEnemyManager( CXMLTreeNode& atts ) : CManager(atts), mAStar(new CAStar())
+CEnemyManager::CEnemyManager( CXMLTreeNode& atts ) : CManager( atts ), mAStar( new CAStar() )
 {
     /*  TODO RAUL
         PONER LECTURA XML
@@ -37,7 +37,7 @@ CEnemyManager::~CEnemyManager()
 void CEnemyManager::Destroy()
 {
     CMapManager::Destroy();
-    CHECKED_DELETE(mAStar);
+    CHECKED_DELETE( mAStar );
 
     m_CoreEnemies.Destroy();
     m_StateMachines.Destroy();
@@ -58,7 +58,7 @@ void CEnemyManager::Update()
         }
         else
         {
-            CAnimatedInstanceModel *l_AnimatedModel = m_ActualEnemy->GetAnimationModel();
+            CAnimatedInstanceModel* l_AnimatedModel = m_ActualEnemy->GetAnimationModel();
             l_AnimatedModel->ChangeAnimationAction( "morir", 0.2f, 0.2f );
 
             if ( l_AnimatedModel->IsActionAnimationActive( "morir" ) )
@@ -122,16 +122,16 @@ void CEnemyManager::Reload()
 }
 
 template<class T>
-CEnemy *CEnemyManager::CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode )
+CEnemy* CEnemyManager::CreateTemplatedEnemy( CXMLTreeNode& XMLTreeNode )
 {
     return new T( XMLTreeNode );
 }
 
 void CEnemyManager::AddNewStateMachine( const std::string& Name, const std::string& SMFileName )
 {
-    CStateMachine *lStateMachine = new CStateMachine( Name );
+    CStateMachine* lStateMachine = new CStateMachine( Name );
 
-    if(!lStateMachine->Load(SMFileName) || !m_StateMachines.AddResource(Name, lStateMachine))
+    if ( !lStateMachine->Load( SMFileName ) || !m_StateMachines.AddResource( Name, lStateMachine ) )
     {
         CHECKED_DELETE( lStateMachine );
         LOG_ERROR_APPLICATION( "Adding a new state machine" );
@@ -140,7 +140,7 @@ void CEnemyManager::AddNewStateMachine( const std::string& Name, const std::stri
 
 void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 {
-    CCoreEnemy *lCoreEnemy = new CCoreEnemy();
+    CCoreEnemy* lCoreEnemy = new CCoreEnemy();
     // Read the type
     const std::string lType = Node.GetPszProperty( "type", "no_type" );
 
@@ -157,28 +157,29 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 
     // Now add the new state machine
     AddNewStateMachine( lCoreEnemy->m_StateMachineName, lCoreEnemy->m_StateMachineFileName );
-    if(!m_CoreEnemies.AddResource(lType, lCoreEnemy)) CHECKED_DELETE(lCoreEnemy);
+
+    if ( !m_CoreEnemies.AddResource( lType, lCoreEnemy ) ) CHECKED_DELETE( lCoreEnemy );
 }
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 {
     const std::string& lType = Node.GetPszProperty( "type" );
-    CCoreEnemy *lCoreEnemy = m_CoreEnemies.GetResource( lType );
+    CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
     if ( !lCoreEnemy )
         LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
 
-    CStateMachine *lStateMachine = m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName );
+    CStateMachine* lStateMachine = m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName );
 
     if ( !lStateMachine )
         LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) );
 
-    CEnemy *lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
+    CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
 
     lEnemy->AddMesh( Node.GetPszProperty( "mesh", "default_mesh" ) );
     lEnemy->SetLife( m_CoreEnemies.GetResource( lType )->m_Life );
 
-    CPatrolEnemy *lPatrolEnemy = dynamic_cast<CPatrolEnemy *>( lEnemy );
+    CPatrolEnemy* lPatrolEnemy = dynamic_cast<CPatrolEnemy*>( lEnemy );
 
     lPatrolEnemy->SetMaxTimeToShoot( m_CoreEnemies.GetResource( lType )->m_TimeToShoot );
 
@@ -220,7 +221,30 @@ void CEnemyManager::RegisterEnemies()
     EnemyFactory.Register( "boss", Type2Type<CBossEnemy>( ) );
 }
 
-CEnemy *CEnemyManager::GetActualEnemy()
+CEnemy* CEnemyManager::GetActualEnemy()
 {
     return m_ActualEnemy;
+}
+
+CEnemy* CEnemyManager::GetCloseEnemy( Math::Vect3f aPos )
+{
+    float lDist = 999999.99f;
+    float lActualDist = 0.0f;
+    CEnemy* lEnemy = 0, *lActualEnemy = 0;
+
+    TMapResource::iterator it = m_Resources.begin();
+
+    for ( ; it != m_Resources.end(); ++it )
+    {
+        lActualEnemy = it->second;
+        lActualDist = lActualEnemy->GetPosition().Distance( aPos );
+
+        if ( lActualDist < lDist )
+        {
+            lDist = lActualDist;
+            lEnemy = lActualEnemy;
+        }
+    }
+
+    return lEnemy;
 }

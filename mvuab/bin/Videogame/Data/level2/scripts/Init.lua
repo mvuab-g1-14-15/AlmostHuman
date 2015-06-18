@@ -88,5 +88,9 @@ function update_gameplay()
 				camera_manager:GetCurrentCamera():SetPosition(g_Player:GetPosition())
 			end
 		end
+		
+		if action_manager:DoAction("ChangeCameraEnemy") then
+			ChangeCameraCloseEnemy()
+		end
 	end
 end
