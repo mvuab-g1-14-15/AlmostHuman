@@ -219,6 +219,8 @@ fn GetPaths =
 	
 	for Obj in GetNoExportableObjects() where getUserProp Obj "Path_Name"	 != "" do
 	(
+		format "Object path: %\n" Obj.name
+		
 		l_PathName = getUserProp Obj "Path_Name"
 		l_Index = 0
 		if l_IndexPaths.ContainsKey l_PathName == false then

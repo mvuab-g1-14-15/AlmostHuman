@@ -119,7 +119,7 @@ function CBlaster:Update()
 			if lShoot:Impacted() then
 				table.remove(self.Shoots, i)
 				-- Run the garbage collector for remove the shoot in cpp
-				-- collectgarbage()
+				collectgarbage()
 			end
 		end
 	end
