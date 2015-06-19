@@ -291,6 +291,10 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
 
 Math::Vect3f CEnemy::GetDirectionEnemy()
 {
-    float lYawRotate = m_fYaw + Math::half_pi32;
-    return Math::Vect3f( Math::Utils::Cos( lYawRotate ) * Math::Utils::Cos( m_fPitch ), Math::Utils::Sin( lYawRotate ), Math::Utils::Sin( lYawRotate ) * Math::Utils::Cos( m_fPitch ) );
+    Math::Vect3f lDirection( GetDirection() );
+
+    lDirection.y = 0.0f;
+    lDirection.Normalize();
+
+    return lDirection;
 }

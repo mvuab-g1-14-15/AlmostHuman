@@ -15,8 +15,8 @@ CCharacter::CCharacter( const std::string& Name )
     : CName( Name ), CObject3D()
     , m_Speed( 0.06f )
     , m_Life( 20.0f )
-	, m_TimeToShoot( 0.0f )
-	, m_MaxTimeToShoot( 2.0f )
+    , m_TimeToShoot( 0.0f )
+    , m_MaxTimeToShoot( 2.0f )
 {
 }
 
@@ -47,7 +47,7 @@ void CCharacter::Init()
     m_Height = 2.0f;
     m_Radius = 0.2f;
     CPhysicsManager* l_PM = PhysXMInstance;
-    l_PM->AddController( m_Name, m_Radius, m_Height/2.0f, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(),
+    l_PM->AddController( m_Name, m_Radius, m_Height / 2.0f, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(),
                          -10.0 );
     m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
     SetPosition( m_Controller->GetPosition() );
@@ -77,25 +77,28 @@ ECollisionGroup CCharacter::GetCollisionGroup()
     return ECG_ENEMY;
 }
 
-void CCharacter::Move(Math::Vect3f direction, float dt)
+void CCharacter::Move( Math::Vect3f direction, float dt )
 {
-	float l_DirYaw = Math::Utils::ATan2( direction.x, direction.z );
-	float l_Yaw = m_Controller->GetYaw();
+    float l_DirYaw = Math::Utils::ATan2( direction.z, direction.x );
+    float l_Yaw = m_Controller->GetYaw();
 
-	float l_YawDif = l_DirYaw - l_Yaw;
+    float l_YawDif = l_DirYaw - l_Yaw;
 
-	float l_PrevYaw = l_Yaw;
-	if (Math::Utils::Abs(l_YawDif) < 0.1f )
-		m_Controller->Move(direction * 2.0f, dt);
-	else
-	{
-		m_Controller->Move(Math::Vect3f(0.0f), dt);
-		l_Yaw += (l_YawDif > 0 ? 1 : -1) * 1.0f * deltaTimeMacro;
-		if ( (l_Yaw < 0.0f && l_PrevYaw > 0.0f) || (l_Yaw > 0.0f && l_PrevYaw < 0.0f) )
-			l_Yaw = l_DirYaw;
-	}
+    float l_PrevYaw = l_Yaw;
 
-	m_Controller->SetYaw( l_Yaw );
+    if ( Math::Utils::Abs( l_YawDif ) < 0.1f )
+        m_Controller->Move( direction * 2.0f, dt );
+    else
+    {
+        m_Controller->Move( Math::Vect3f( 0.0f ), dt );
+        l_Yaw += ( l_YawDif > 0 ? 1 : -1 ) * 1.0f * deltaTimeMacro;
+
+        if ( ( l_Yaw < 0.0f && l_PrevYaw > 0.0f ) || ( l_Yaw > 0.0f && l_PrevYaw < 0.0f ) )
+            l_Yaw = l_DirYaw;
+    }
+
+    m_Controller->SetYaw( l_Yaw );
+    SetYaw( l_Yaw );
 }
 
 float CCharacter::GetHeight()
