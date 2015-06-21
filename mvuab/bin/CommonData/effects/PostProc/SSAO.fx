@@ -8,7 +8,7 @@
 float4 ps_ssao(in float2 UV : TEXCOORD0) : COLOR
 {
     const int   g_samples = 16;
-    const float g_distanceThreshold = 0.01;
+    const float g_distanceThreshold = 1.0;
     const float2 g_filterRadius = float2(1.0/(float)1920, 1.0/ (float)1080);
     
 	float2 sample_sphere[g_samples] = 
@@ -48,6 +48,7 @@ float4 ps_ssao(in float2 UV : TEXCOORD0) : COLOR
 	}
     
     occlusion = occlusion / g_samples;
+	//occlusion = 1 - occlusion;
     //return float4(0,0,0,1);
 	return float4(occlusion, occlusion, occlusion, 1.0);
 }
