@@ -42,24 +42,24 @@ void CXMLTreeNode::Release()
 
 bool CXMLTreeNode::LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode )
 {
-  ASSERT(aFilename && aNodeTag, "Invalid filename or node tag");
-  CXMLTreeNode newFile;
+    ASSERT(aFilename && aNodeTag, "Invalid filename or node tag");
+    CXMLTreeNode newFile;
 
-  if ( !LoadFile( aFilename ) )
-  {
-    LOG_ERROR_APPLICATION( "Unable to open %s",  aFilename );
-    return false;
-  }
+    if ( !LoadFile( aFilename ) )
+    {
+        LOG_ERROR_APPLICATION( "Unable to open %s",  aFilename );
+        return false;
+    }
 
-  // Parse the file and search for the key's
-  aNode = GetNode(aNodeTag);
+    // Parse the file and search for the key's
+    aNode = GetNode(aNodeTag);
 
-  if ( !aNode.Exists() )
-  {
-    LOG_ERROR_APPLICATION( "Unable to find %s",  aNodeTag );
-    return false;
-  }
-  return true;
+    if ( !aNode.Exists() )
+    {
+        LOG_ERROR_APPLICATION( "Unable to find %s",  aNodeTag );
+        return false;
+    }
+    return true;
 }
 
 //----------------------------------------------------------------------------
@@ -305,9 +305,126 @@ int CXMLTreeNode::GetIntProperty( const char* _pszKey, int _iDefault, bool warni
     return iRet;
 }
 
-//----------------------------------------------------------------------------
-// Returns a float32 param if found. Else a default value
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const uint32 CXMLTreeNode::GetAttribute<uint32>( const char* aAttName, const uint32& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    uint32 lRtn( aDefaultAttValue );
+
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%u", &lRtn );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const float32 CXMLTreeNode::GetAttribute<float32>( const char* aAttName,
+        const float32& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    float32 lRtn( aDefaultAttValue );
+
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f", &lRtn );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const std::string CXMLTreeNode::GetAttribute<std::string>( const char* aAttName,
+        const std::string& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    std::string lRtn( aDefaultAttValue );
+
+    if ( value )
+    {
+        lRtn = ( const char* )value;
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::CColor CXMLTreeNode::GetAttribute<Math::CColor>( const char* aAttName,
+        const Math::CColor& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::CColor lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f %f", &lRtn.r, &lRtn.g, &lRtn.b, &lRtn.a );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::Vect2f CXMLTreeNode::GetAttribute<Math::Vect2f>( const char* aAttName,
+        const Math::Vect2f& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::Vect2f lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f", &lRtn.x, &lRtn.y );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::Vect4f CXMLTreeNode::GetAttribute<Math::Vect4f>( const char* aAttName,
+        const Math::Vect4f& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::Vect4f lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f %f", &lRtn.x, &lRtn.y, &lRtn.z, &lRtn.w );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::Vect3f CXMLTreeNode::GetAttribute<Math::Vect3f>( const char* aAttName,
+        const Math::Vect3f& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::Vect3f lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f", &lRtn.x, &lRtn.y, &lRtn.z );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
 float32 CXMLTreeNode::GetFloatProperty( const char* _pszKey, float32 _fDefault,
                                         bool warningDefault ) const
 {

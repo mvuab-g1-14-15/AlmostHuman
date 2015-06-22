@@ -30,17 +30,16 @@ class CXMLTreeNode
             Done();
         }
 
-        void                                Done();
-        bool                                IsOk() const
+        void Done();
+        bool IsOk() const
         {
             return m_bIsOk;
         }
 
-        // -----------------------
-        // Read functions
-        // -----------------------
-        bool                                LoadFile( const char* _pszFileName );
-        bool                        LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
+        bool LoadFile( const char* _pszFileName );
+        bool LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
+
+        template<typename T> const T GetAttribute( const char* aAttName, const T& aDefaultAttValue ) const;
 
         bool                                Exists()
         {
