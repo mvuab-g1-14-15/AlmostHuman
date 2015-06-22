@@ -1,3 +1,4 @@
 <animated_models>
 	<animated_model name="enemy1" path="Data/animated_models/androide/"/>
+	<animated_model name="Player" path="Data/animated_models/logan/"/>
 </animated_models>

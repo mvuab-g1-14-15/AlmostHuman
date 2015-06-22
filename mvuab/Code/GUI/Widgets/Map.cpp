@@ -35,17 +35,19 @@ CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, flo
 
 CMap::~CMap()
 {
-	CHECKED_DELETE( m_Player);
+  CHECKED_DELETE( m_Player );
 
-	std::vector<CItemMap*>::iterator it = m_vItems.begin(),
-									 it_end = m_vItems.end();
-	for( ; it!=it_end ; ++it)
-		CHECKED_DELETE(*it);
+  std::vector<CItemMap*>::iterator it = m_vItems.begin(),
+                                   it_end = m_vItems.end();
 
-	std::vector<CEnemyMap*>::iterator it2 = m_vEnemy.begin(),
-									  it_end2 = m_vEnemy.end();
-	for( ; it2!=it_end2 ; ++it2)
-		CHECKED_DELETE(*it2);
+  for ( ; it != it_end ; ++it )
+    CHECKED_DELETE( *it );
+
+  std::vector<CEnemyMap*>::iterator it2 = m_vEnemy.begin(),
+                                    it_end2 = m_vEnemy.end();
+
+  for ( ; it2 != it_end2 ; ++it2 )
+    CHECKED_DELETE( *it2 );
 }
 //---------------CGuiElement Interface----------------------
 void CMap::Render()
@@ -115,12 +117,12 @@ void CMap::Render()
         {
           Math::Vect2i l_drawPos = m_Position + Math::Vect2i( ( uint32 )( ( m_vEnemy[i]->m_PosInMap.x - l_PosX0 ) / m_Width_Map * m_uWidth ),
                                    ( uint32 )( ( m_vEnemy[i]->m_PosInMap.y - l_PosY0 ) / m_Height_Map * m_uHeight ) );
-		  l_drawPos.x = l_drawPos.x + m_vEnemy[i]->m_Width/2;
-		  GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, -m_vEnemy[i]->m_Yaw, CGraphicsManager::UPPER_MIDDLE,
+          //l_drawPos.x = l_drawPos.x + m_vEnemy[i]->m_Width/2;
+          GraphicsInstance->DrawQuad2D( l_drawPos, m_vEnemy[i]->m_Width, m_vEnemy[i]->m_Height, -m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER,
                                         m_vEnemy[i]->m_Texture );
-		  /*Math::Vect2f up(cos(m_vEnemy[i]->m_Yaw), sin(m_vEnemy[i]->m_Yaw));
-          Math::Vect2i int_UP = Math::Vect2i((int)(up.x*-17),(int)(up.y*-17));
-		  GraphicsInstance->DrawQuad2D(l_drawPos+int_UP, 40,40, m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER, m_Cone);*/
+          /*Math::Vect2f up(cos(m_vEnemy[i]->m_Yaw), sin(m_vEnemy[i]->m_Yaw));
+              Math::Vect2i int_UP = Math::Vect2i((int)(up.x*-17),(int)(up.y*-17));
+          GraphicsInstance->DrawQuad2D(l_drawPos+int_UP, 40,40, m_vEnemy[i]->m_Yaw, CGraphicsManager::CENTER, m_Cone);*/
         }
       }
     }
@@ -181,7 +183,7 @@ void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::V
 {
   Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3D.x, PosInMap3D.z );
   CItemMap* l_ItemMap     = new CItemMap( Name, TextureMInstance->GetTexture( Texture ), l_posInMap, Width, Height, Yaw, PositionScript,
-                                      OrientationScript );
+                                          OrientationScript );
   m_vItems.push_back( l_ItemMap );
 }
 
@@ -197,7 +199,7 @@ void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32
       Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
       Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
       CEnemyMap* l_EnemyMap   = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
-                                             Height, Yaw, PositionScript, OrientationScript );
+          Height, Yaw, PositionScript, OrientationScript );
       m_vEnemy.push_back( l_EnemyMap );
     }
   }
@@ -211,11 +213,12 @@ void CMap::AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, s
 
     std::map<std::string, CEnemy*>::iterator  it      = l_MapEnemy.begin(),
                                               it_end  = l_MapEnemy.end();
-    for( ; it != it_end ; ++it)
+
+    for ( ; it != it_end ; ++it )
     {
       Math::Vect3f PosInMap3d = it->second->GetPosition();
       Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-      float        lYaw       = it->second->GetYaw(); 
+      float        lYaw       = it->second->GetYaw();
       std::stringstream PositionScriptComplete;
       std::stringstream OrientationScriptComplete;
       PositionScriptComplete    << PositionScript     << "('" << it->first << "')";

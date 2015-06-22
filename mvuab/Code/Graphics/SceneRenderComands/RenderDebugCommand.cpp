@@ -10,13 +10,15 @@
 
 #include "Triggers/TriggerManager.h"
 
+#include "Characters/Enemies/EnemyManager.h"
+
 CRenderDebugCommand::CRenderDebugCommand( CXMLTreeNode& atts )
-  : CSceneRendererCommand( atts )
-  , m_RenderCameras( atts.GetBoolProperty( "render_cameras", false ) )
-  , m_RenderLights( atts.GetBoolProperty( "render_lights", false ) )
-  , m_RenderPhysics( atts.GetBoolProperty( "render_physics", false ) )
-  , m_RenderGraph( atts.GetBoolProperty( "render_graph", false ) )
-  , m_RenderTriggers( atts.GetBoolProperty( "render_triggers", false ) )
+    : CSceneRendererCommand( atts )
+    , m_RenderCameras( atts.GetBoolProperty( "render_cameras", false ) )
+    , m_RenderLights( atts.GetBoolProperty( "render_lights", false ) )
+    , m_RenderPhysics( atts.GetBoolProperty( "render_physics", false ) )
+    , m_RenderGraph( atts.GetBoolProperty( "render_graph", false ) )
+    , m_RenderTriggers( atts.GetBoolProperty( "render_triggers", false ) )
 {
 }
 
@@ -26,23 +28,23 @@ CRenderDebugCommand::~CRenderDebugCommand()
 
 void CRenderDebugCommand::Execute( CGraphicsManager& GM )
 {
-  if ( m_RenderCameras )
-    CameraMInstance->Render();
+    if ( m_RenderCameras )
+        CameraMInstance->Render();
 
-  if ( m_RenderLights )
-    LightMInstance->Render();
+    if ( m_RenderLights )
+        LightMInstance->Render();
 
-  if ( m_RenderGraph )
-  {
-    CAStar* lAStar = CEngine::GetSingletonPtr()->GetProcess()->GetAStar();
+    if ( m_RenderGraph )
+    {
+        CAStar *lAStar = EnemyMInstance->GetAStar();
 
-    if ( lAStar )
-      lAStar->Render();
-  }
+        if ( lAStar )
+            lAStar->Render();
+    }
 
-  if ( m_RenderPhysics )
-    PhysXMInstance->Render();
+    if ( m_RenderPhysics )
+        PhysXMInstance->Render();
 
-  if ( m_RenderTriggers )
-	  TriggersMInstance->Render();
+    if ( m_RenderTriggers )
+        TriggersMInstance->Render();
 }

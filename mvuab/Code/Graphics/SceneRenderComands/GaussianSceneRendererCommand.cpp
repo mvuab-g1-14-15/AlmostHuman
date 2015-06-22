@@ -19,8 +19,6 @@ CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts 
     , mIterations( atts.GetIntProperty("iterations", 0) )
 {
     // Check the correct status of the command
-    ASSERT( m_StageTextures.size() == 2 && m_StageTextures[0].m_Texture &&
-            m_StageTextures[1].m_Texture, "The number of textures for the Gaussian" );
     ASSERT( !m_StageTextures[0].mIsDynamic, "The first texture of the command must be a static texture" );
     ASSERT(mIterations % 2 != 0 || mIterations == 0, "The number of iterations must be even" );
 
@@ -49,6 +47,9 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
     // Update the texture size of the technique each render, because we do not know if somebody has used the technique
     l_EffectTech->SetTextureSize(m_Width, m_Height);
     l_EffectTech->SetUseTextureSize(true);
+
+	// Set the depht texture
+	m_StageTextures[1].m_Texture->Activate( m_StageTextures[1].m_StageId );
 
     m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),

@@ -63,7 +63,7 @@ void registerCharacters( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CCharacter, SetTargetPosition )
     LUA_DECLARE_METHOD( CCharacter, SetTargetPositionOriginal )
     LUA_DECLARE_METHOD( CCharacter, AddDamage )
-	LUA_DECLARE_METHOD( CCharacter, GetLife )
+    LUA_DECLARE_METHOD( CCharacter, GetLife )
     LUA_DECLARE_METHOD( CCharacter, Move )
     LUA_DECLARE_METHOD( CCharacter, GetPosition )
     LUA_DECLARE_METHOD( CCharacter, GetDirection )
@@ -76,15 +76,15 @@ void registerCharacters( lua_State* aLuaState )
 struct CEnemy_wrapper : CEnemy, luabind::wrap_base
 {
     CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine* aStateMachine )
-        : CEnemy(Node, aStateMachine)
+        : CEnemy( Node, aStateMachine )
     {}
 
     virtual void Update()
     {
-        call<void>("Update");
+        call<void>( "Update" );
     }
 
-    static void default_Update(CEnemy* ptr)
+    static void default_Update( CEnemy* ptr )
     {
         return ptr->CEnemy::Update();
     }
@@ -104,16 +104,19 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CEnemy, GetLife )
     LUA_DECLARE_METHOD( CEnemy, GetRenderableObject )
     LUA_DECLARE_METHOD( CEnemy, GetAnimationModel )
+    LUA_DECLARE_METHOD( CEnemy, MakeShoot )
+    LUA_DECLARE_METHOD( CEnemy, GetDirectionEnemy )
+    LUA_DECLARE_METHOD( CEnemy, MoveAStar )
     LUA_END_DECLARATION
 
-	/*
-	module(aLuaState)
-	[
-		class_<CEnemy, CEnemy_wrapper>("CEnemy")
-			.def(constructor<CXMLTreeNode&, CStateMachine*>())
-			.def("Update", &CEnemy::Update, &CEnemy_wrapper::default_Update)
-	];
-	*/
+    /*
+    module(aLuaState)
+    [
+        class_<CEnemy, CEnemy_wrapper>("CEnemy")
+            .def(constructor<CXMLTreeNode&, CStateMachine*>())
+            .def("Update", &CEnemy::Update, &CEnemy_wrapper::default_Update)
+    ];
+    */
 
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CMapManager<CEnemy> )
@@ -137,28 +140,30 @@ void registerEnemies( lua_State* aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
     LUA_DECLARE_METHOD( CEnemyManager, GetResource )
     LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
+    LUA_DECLARE_METHOD( CEnemyManager, GetCloseEnemy )
     LUA_END_DECLARATION
+}
 
-	LUA_BEGIN_DECLARATION( aLuaState )
+void registerAI( lua_State* aLuaState )
+{
+    LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CShoot, CObject3D )
-	LUA_DECLARE_DEFAULT_CTOR
-	LUA_DECLARE_CTOR_4( float, Math::Vect3f, Math::Vect3f, float )
+    LUA_DECLARE_DEFAULT_CTOR
+    LUA_DECLARE_CTOR_4( float, Math::Vect3f, Math::Vect3f, float )
     LUA_DECLARE_METHOD( CShoot, Init )
     LUA_DECLARE_METHOD( CShoot, Update )
     LUA_DECLARE_METHOD( CShoot, Render )
-	LUA_DECLARE_METHOD( CShoot, Impacted )
+    LUA_DECLARE_METHOD( CShoot, Impacted )
     LUA_END_DECLARATION
-}
-void registerAI( lua_State* aLuaState )
-{
+
     registerCharacters( aLuaState );
     registerEnemies( aLuaState );
 
     module( aLuaState )
     [
-        class_<std::vector<Vect3f>>( "VectorWaypoints" )
-        .def( constructor<std::vector<Vect3f>>() )
-        .def( "GetResource", &vector_get<Vect3f> )
+        class_<std::vector<Math::Vect3f>>( "VectorWaypoints" )
+        .def( constructor<std::vector<Math::Vect3f>>() )
+        .def( "GetResource", &vector_get<Math::Vect3f> )
     ];
 
 }

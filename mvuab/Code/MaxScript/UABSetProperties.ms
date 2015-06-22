@@ -1,11 +1,11 @@
 rollout UABSetProperties "UABSetProperties" width:600 height:670
 (
-	GroupBox RenderGroup "Render" pos:[45,16] width:226 height:280
+	GroupBox RenderGroup "Render" pos:[47,16] width:226 height:280
 	checkbox ExportCheckRender "Export" pos:[50,37] width:61 height:17
 	dropdownList ExportListRender "" pos:[141,35] width:120 height:21 enabled:false items:#("instance_mesh", "animated_mesh")
 	checkbox VisibleCheckRender "Visible" pos:[50,63] width:51 height:17
 	checkbox LayerCheckRender "Layer" pos:[50,86] width:51 height:17
-	dropdownList LayerListRender "" pos:[141,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles")
+	dropdownList LayerListRender "" pos:[141,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles","glow")
 	label AnimModelRender "Anim. model" pos:[50,118] width:64 height:18
 	edittext AnimModelEditText "" pos:[141,120] width:120 height:19
 	
@@ -19,11 +19,11 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	checkbox GenerateCheckLogic "Generate" pos:[343,34] width:66 height:13
 	dropdownList GenerateListLogic "" pos:[429,30] width:123 height:21 enabled:false items:#("", "event_box", "event_sphere", "stairs", "grippable_edges", "edges_where_to_be_dropped")
 	
-	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[50,216] width:217 height:17
-	checkbox WorldTransformCheckBox "Don't export world transform" pos:[50,240] width:217 height:17
+	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[51,232] width:217 height:17
+	checkbox WorldTransformCheckBox "Don't export world transform" pos:[51,250] width:217 height:17
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[50,184] width:91 height:17
 	edittext LinkedToBoneEditText "" pos:[141,184] width:120 height:19
-	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[50,268] width:217 height:17
+	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[51,268] width:217 height:17
 	label lbl7 "Technique" pos:[50,152] width:64 height:18
 	edittext LineEditTechnique "" pos:[141,152] width:120 height:19
 	checkbox ShowNormalCheck "Show Normal" pos:[343,56] width:139 height:13
@@ -188,6 +188,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	
 	fn SetPropertyCheck Obj Type Check=
 	(
+		format "I'm obj: % type: % and check: % " Obj.name Type Check
 		if Check.checked==true then
 		(
 			setUserProp Obj Type true
@@ -389,6 +390,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
+	
 	
 	
 	on ExportCheckRender changed theState do

@@ -68,11 +68,13 @@ bool CXMLTreeNode::LoadAndFindNode( const char* aFilename, const char* aNodeTag,
 bool CXMLTreeNode::LoadFile( const char* _pszFileName )
 {
     m_bIsOk = false;
-    assert( _pszFileName );
-
+    ASSERT( _pszFileName, "Null filename" );
     if ( _pszFileName )
     {
         m_pDoc = xmlParseFile( _pszFileName );
+		
+		xmlErrorPtr lError = xmlGetLastError();
+		ASSERT( !lError, "%s", ( const char* ) lError->message );
 
         if ( m_pDoc )
         {

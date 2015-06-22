@@ -13,6 +13,9 @@
 #include "Billboard\Billboard.h"
 #include "Billboard\BillboardManager.h"
 #include "Utils\IdManager.h"
+#include "ScriptManager.h"
+#include "Lights\OmniLight.h"
+#include "Lights\LightManager.h"
 
 CShoot::CShoot()
     : CObject3D()
@@ -34,7 +37,7 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 {
     SetDirection( mDirection );
 
-    const std::string lType( "ShootBillboard" );
+    const std::string lType( "Shoot" );
 
     std::ostringstream ss;
     ss << lType << IdManager->GetId( lType );
@@ -43,10 +46,24 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
     SetName( lName );
     mBillboard = new CBillboard();
 
-    if(!BillboardMan->AddResource(lName, mBillboard))
+    if ( !BillboardMan->AddResource( lName, mBillboard ) )
     {
-        CHECKED_DELETE(mBillboard);
-        mBillboard = BillboardMan->GetConstResource(lName);
+        CHECKED_DELETE( mBillboard );
+        mBillboard = BillboardMan->GetConstResource( lName );
+    }
+
+    mLight = new COmniLight();
+    mLight->SetName(lName);
+    mLight->SetIntensity( 0.65f );
+    mLight->SetEndRangeAttenuation( 2.0f );
+    mLight->SetColor( Math::colRED );
+    mLight->SetPosition( aPosition );
+    mLight->SetRenderShadows( false );
+
+    if ( !LightMInstance->AddResource( lName, mLight ) )
+    {
+        CHECKED_DELETE( mLight );
+        //mLight = LightMInstance->GetConstResource( lName );
     }
 }
 
@@ -54,6 +71,7 @@ CShoot::~CShoot()
 {
     // TODO: Remove the billboard in the manager
     mBillboard->SetActive( false );
+    LightMInstance->RemoveResource( GetName() );
 }
 
 bool CShoot::Init()
@@ -78,7 +96,7 @@ void CShoot::Update()
         const Math::Vect3f lNewPosition = lPosition + lVelocity;
 
         SCollisionInfo hit_info;
-        CPhysicUserData* lPUD = PhysXMInstance->RaycastClosestActor( lPosition, lDirection, 0xffffff, hit_info );
+        CPhysicUserData *lPUD = PhysXMInstance->RaycastClosestActor( lPosition, lDirection, 0xffffff, hit_info );
 
         if ( lPUD )
         {
@@ -88,10 +106,16 @@ void CShoot::Update()
             if ( lDistance < lLength )
             {
                 const std::string lName = lPUD->GetName();
-                CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
 
-                if ( lEnemy )
-                    lEnemy->AddDamage( mDamage );
+                if ( lName == "Player" )
+                    ScriptMInstance->RunCode( "g_Player:AddDamage(5.0)" );
+                else
+                {
+                    CEnemy *lEnemy = EnemyMInstance->GetResource( lName );
+
+                    if ( lEnemy )
+                        lEnemy->AddDamage( mDamage );
+                }
 
                 mImpacted = true;
 
@@ -107,6 +131,9 @@ void CShoot::Update()
 
         mBillboard->SetPosition( GetPosition() );
         mBillboard->MakeTransform();
+
+        mLight->SetPosition( GetPosition() );
+        mLight->MakeTransform();
 
         MakeTransform();
     }

@@ -46,18 +46,27 @@ end
 function GetAngleEnemyPlayer(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()
+	
 	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
+	l_DistanceVector.y = 0.0
 	l_DistanceVector:Normalize()
 	
-	local l_EnemyDir = enemy:GetDirection()
+	local l_EnemyDir = enemy:GetDirectionEnemy()
+	l_EnemyDir.y = 0.0
 	l_EnemyDir:Normalize()
 	
-	local angle = (l_EnemyDir.x*l_DistanceVector.x + l_EnemyDir.y*l_DistanceVector.y + l_EnemyDir.z*l_DistanceVector.z)
-	angle = math.acos(angle)
+	--local angle = (l_EnemyDir.x*l_DistanceVector.x + l_EnemyDir.y*l_DistanceVector.y + l_EnemyDir.z*l_DistanceVector.z)
 	
-	return angle
+	local lDot = l_DistanceVector:DotProduct(l_EnemyDir)
+	
+	engine:Trace("Dot product: " .. lDot)
+	
+	--engine:Trace(tostring(angle))
+	--angle = math.acos(angle)
+	--engine:Trace(tostring(angle))
+	return lDot
 end
 
 function GetPlayerPosition()
@@ -67,9 +76,26 @@ function GetPlayerPosition()
 	return l_Position
 end
 
+function GetPlayerDirection(pos)
+	local l_Player = physic_manager:GetController("Player")
+	local l_Position =  l_Player:GetPosition()
+	
+	engine:Trace(pos:ToString())
+	engine:Trace(l_Position:ToString())
+	
+	local lDir = l_Position - pos;
+	lDir:Normalize()
+	
+	engine:Trace(lDir:ToString())
+	
+	return lDir
+end
+
 function PlayerVisibility(enemy)
 	local l_EnemyPos = enemy:GetPosition()
-	local l_EnemyDir = enemy:GetDirection()
+	local l_EnemyDir = enemy:GetDirectionEnemy()
+	
+	--l_EnemyDir:RotateY(g_HalfPi)
 	
 	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
 	
@@ -98,4 +124,17 @@ function PlayerVisibility(enemy)
 		return false
 	end
 ]]
+end
+
+function ChangeCameraCloseEnemy()
+	local lEnemyName = enemy_manager:GetCloseEnemy(GetPlayerPosition()):GetName()
+	local lActualCameraName = camera_manager:GetCurrentCameraName()
+	
+	if lActualCameraName == lEnemyName then
+		engine:Trace("Changing camera to Player")
+		camera_manager:SetCurrentCamera("TestProcessCam")
+	else
+		engine:Trace("Changing camera to close Enemy")
+		camera_manager:SetCurrentCamera(lEnemyName)
+	end
 end

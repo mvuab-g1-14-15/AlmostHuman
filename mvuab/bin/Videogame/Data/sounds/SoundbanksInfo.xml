@@ -3,7 +3,7 @@
 	<RootPaths>
 		<ProjectRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\</ProjectRoot>
 		<SourceFilesRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Public\Documents\Dev\GameEngineUAB\mvuab\bin\Videogame\Data\sounds\</SoundBanksRoot>
+		<SoundBanksRoot>C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\sounds\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
 		<ExternalSourcesOutputRoot>C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
@@ -120,6 +120,7 @@
 				<Event Id="1292086503" Name="Play_Back"/>
 				<Event Id="3552663155" Name="Play_Cash"/>
 				<Event Id="3174629258" Name="Play_GameOver"/>
+				<Event Id="785979864" Name="Play_Gui_Over"/>
 				<Event Id="2454594115" Name="Play_Help"/>
 				<Event Id="426840996" Name="Play_Init"/>
 				<Event Id="2513968146" Name="Play_LoopGen"/>

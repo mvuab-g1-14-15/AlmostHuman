@@ -25,55 +25,60 @@ class CShadowMap;
 
 class CLight : public CObject3D, public CName
 {
-    public:
-        enum ELightType { OMNI = 0, DIRECTIONAL, SPOT };
-    public:
-        CLight() {};
-        CLight( const CXMLTreeNode& node );
-        virtual ~CLight();
-        void                SetIntensity( const float intensity );
-        float               GetIntensity() const;
-        void                SetColor( const Math::CColor& Color );
-        const Math::CColor& GetColor() const;
-        void                SetStartRangeAttenuation( const float StartRangeAttenuation );
-        float               GetStartRangeAttenuation() const;
-        void                SetEndRangeAttenuation( const float EndRangeAttenuation );
-        float               GetEndRangeAttenuation() const;
-        bool                RenderShadows() const;
-        void                SetType( const ELightType Type );
-        ELightType          GetType() const;
-        virtual void        Render() = 0;
-        virtual void        SetShadowMap( CGraphicsManager* GM ) = 0;
-        void                SetMustUpdateStaticShadowMap( bool MustUpdateStaticShadowMap );
-        bool                GetMustUpdateStaticShadowMap() const;
-        void                GenerateShadowMap( CGraphicsManager* GM );
-        CShadowMap*         GetStaticShadowMap() const;
-        CShadowMap*         GetDynamicShadowMap() const;
-        CTexture*           GetShadowMaskTexture() const;
-        const Mat44f&       GetViewShadowMap() const;
-        const Mat44f&       GetProjectionShadowMap() const;
-        void                BeginRenderEffectManagerShadowMap( CEffect* Effect );
+public:
+    enum ELightType { OMNI = 0, DIRECTIONAL, SPOT };
+public:
+    CLight();
+    CLight( const CXMLTreeNode& node );
+    virtual ~CLight();
+    void                SetIntensity( const float intensity );
+    float               GetIntensity() const;
+    void                SetColor( const Math::CColor& Color );
+    const Math::CColor& GetColor() const;
+    void                SetStartRangeAttenuation( const float StartRangeAttenuation );
+    float               GetStartRangeAttenuation() const;
+    void                SetEndRangeAttenuation( const float EndRangeAttenuation );
+    float               GetEndRangeAttenuation() const;
+    bool                RenderShadows() const;
+    void                SetType( const ELightType Type );
+    ELightType          GetType() const;
+    virtual void        Render() = 0;
+    virtual void        SetShadowMap( CGraphicsManager *GM ) = 0;
+    void                SetMustUpdateStaticShadowMap( bool MustUpdateStaticShadowMap );
+    bool                GetMustUpdateStaticShadowMap() const;
+    void                GenerateShadowMap( CGraphicsManager *GM );
+    CShadowMap         *GetStaticShadowMap() const;
+    CShadowMap         *GetDynamicShadowMap() const;
+    CTexture           *GetShadowMaskTexture() const;
+    const Mat44f&       GetViewShadowMap() const;
+    const Mat44f&       GetProjectionShadowMap() const;
+    void                BeginRenderEffectManagerShadowMap( CEffect *Effect );
 
-    protected:
-        CLensFlare* mLensFlare;
-        Math::CColor m_Color;
-        ELightType m_Type;
+    void SetRenderShadows( bool aBool )
+    {
+        m_RenderShadows = aBool;
+    }
 
-        float m_Intensity;
-        float m_StartRangeAttenuation;
-        float m_EndRangeAttenuation;
+protected:
+    CLensFlare *mLensFlare;
+    Math::CColor m_Color;
+    ELightType m_Type;
 
-        // Shadow map data
-        bool m_RenderShadows;
-        bool m_MustUpdateStaticShadowMap;
+    float m_Intensity;
+    float m_StartRangeAttenuation;
+    float m_EndRangeAttenuation;
 
-        CTexture* m_ShadowMaskTexture;
+    // Shadow map data
+    bool m_RenderShadows;
+    bool m_MustUpdateStaticShadowMap;
 
-        Mat44f m_ViewShadowMap;
-        Mat44f m_ProjectionShadowMap;
+    CTexture *m_ShadowMaskTexture;
 
-        CShadowMap* mStaticShadowMap;
-        CShadowMap* mDynamicShadowMap;
+    Mat44f m_ViewShadowMap;
+    Mat44f m_ProjectionShadowMap;
+
+    CShadowMap *mStaticShadowMap;
+    CShadowMap *mDynamicShadowMap;
 };
 
 #endif // LIGHT_H

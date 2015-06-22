@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="Parets_terra" filename="\meshes\Parets_terra.mesh" />
+  <static_mesh name="GlowBox" filename="\meshes\GlowBox.mesh" />
 </static_meshes>

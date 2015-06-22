@@ -543,6 +543,8 @@ struct SMesh
 			throw "SplineShape =>" Obj.name
 		)
 		
+		format "Object name: %\n" Obj.name
+		
 		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 		actualObj = newObj[1]
 		convertToMesh actualObj

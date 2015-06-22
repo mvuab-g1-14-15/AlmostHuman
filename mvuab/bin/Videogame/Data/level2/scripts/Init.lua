@@ -14,6 +14,7 @@ end
 
 function load_gameplay()
     g_Player = CPlayer()
+	g_Player:SetEnergy(0.0)
 	g_HUD = CHUD()
 	
 	--local pos = Vect3f( 0.0, 0.0, 0.0 )
@@ -55,6 +56,15 @@ function update_gameplay()
 			if g_bChargeEnergy then
 				ChargeEnergy()
 			end
+			if g_bChangeRoom then
+				g_Player:SetPosition(ChangeRoom())
+			end
+		end
+		if action_manager:DoAction("PressX") then
+			if g_bPressX then
+				gui_manager:ShowStaticText("Block")
+				g_bPressedX = true
+			end
 		end
 	end
 	
@@ -77,6 +87,10 @@ function update_gameplay()
 				l_Pos.y = l_Pos.y + g_Player:GetHeight()
 				camera_manager:GetCurrentCamera():SetPosition(g_Player:GetPosition())
 			end
+		end
+		
+		if action_manager:DoAction("ChangeCameraEnemy") then
+			ChangeCameraCloseEnemy()
 		end
 	end
 end

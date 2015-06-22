@@ -108,10 +108,10 @@
 
 #else
 
-#define ASSERT(expr, msg, ... ) do{ } while(0); // The compiler will delete this line in release
-#define LOG_ERROR_APPLICATION( x, ... ) do{ } while(0); // The compiler will delete this line in release
-#define LOG_WARNING_APPLICATION( x, ...  ) do{ } while(0); // The compiler will delete this line in release
-#define LOG_INFO_APPLICATION( x, ...  ) do{ } while(0); // The compiler will delete this line in release
+#define ASSERT(expr, msg, ... ) do{ } while(0) // The compiler will delete this line in release
+#define LOG_ERROR_APPLICATION( x, ... ) do{ } while(0) // The compiler will delete this line in release
+#define LOG_WARNING_APPLICATION( x, ...  ) do{ } while(0) // The compiler will delete this line in release
+#define LOG_INFO_APPLICATION( x, ...  ) do{ } while(0) // The compiler will delete this line in release
 
 #endif
 

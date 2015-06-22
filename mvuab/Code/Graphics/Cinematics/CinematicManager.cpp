@@ -79,9 +79,9 @@ void CCinematicManager::Init()
       CXMLTreeNode  SubTreeNode = TreeNode( i );
       const std::string& TagName = SubTreeNode.GetName();
 
-      std::string ResourceFileName = SubTreeNode.GetPszProperty( "resource_id_file", GetNextName().c_str());
+      std::string ResourceFileName = SubTreeNode.GetPszProperty( "resource_id_file", GetNextName().c_str() );
 
-	    CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
+      CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
 
 
       if ( !CinematicsItems )
@@ -89,17 +89,17 @@ void CCinematicManager::Init()
       else
       {
         if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetPszProperty( "name",
-             GetNextName().c_str() ), CinematicsItems ) )
+                                                GetNextName().c_str() ), CinematicsItems ) )
           CHECKED_DELETE( CinematicsItems );
       }
     }
   }
 }
 
-void CCinematicManager::Execute(const std::string& NameCinematic)
+void CCinematicManager::Execute( const std::string& NameCinematic )
 {
-  m_CurrentCinematicsElement = m_vCinematicsElement.GetResource(NameCinematic);
-  m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById(m_CurrentElementId);
+  m_CurrentCinematicsElement = m_vCinematicsElement.GetResource( NameCinematic );
+  m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById( m_CurrentElementId );
 }
 
 void CCinematicManager::ReLoad()
@@ -113,9 +113,7 @@ CCinematicManager::CCinematicsItems::CCinematicsItems( const std::string& Node )
   CXMLTreeNode lFile;
 
   if ( !lFile.LoadFile( Node.c_str() ) )
-  {
     FATAL_ERROR( "Error loading the file %s", Node.c_str() );
-  }
 
   if ( lFile.Exists() )
   {
@@ -124,16 +122,15 @@ CCinematicManager::CCinematicsItems::CCinematicsItems( const std::string& Node )
       const CXMLTreeNode& TreeNode = lFile( i );
       const std::string& TagName = TreeNode.GetName();
 
-	    CCinematicsElement* CinematicsElement = 0;
+      CCinematicsElement* CinematicsElement = 0;
 
       CinematicsElement = CommandFactory.Create( TagName.c_str(), TreeNode );
 
       if ( !CinematicsElement )
         LOG_ERROR_APPLICATION( "CinematicElement %s not found in the factory of CinematicsElement!", TagName.c_str() );
-      else
-        if ( !m_CinematicsItems.AddResource( TreeNode.GetPszProperty( "name",
-             GetNextName().c_str() ), CinematicsElement ) )
-          CHECKED_DELETE( CinematicsElement );
+      else if ( !m_CinematicsItems.AddResource( TreeNode.GetPszProperty( "name",
+                GetNextName().c_str() ), CinematicsElement ) )
+        CHECKED_DELETE( CinematicsElement );
     }
   }
 }
@@ -143,6 +140,7 @@ void CCinematicManager::CCinematicsItems::Execute()
   CGraphicsManager* gm = GraphicsInstance;
   std::vector<CCinematicsElement*>::iterator it = m_CinematicsItems.GetResourcesVector().begin(),
                                              it_end = m_CinematicsItems.GetResourcesVector().end();
+
   for ( ; it != it_end; ++it )
     ( *it )->Execute( *gm );
 }
@@ -157,41 +155,41 @@ std::string CCinematicManager::CCinematicsItems::GetNextName()
 }
 
 
-void CCinematicManager::Update() 
+void CCinematicManager::Update()
 {
-  if(m_CurrentElement != 0)
+  if ( m_CurrentElement != 0 )
   {
     //Compruebo si este elemento es bloqueante y no está bloqueado por otro
-    if( m_CheckBlock && !m_CinematicActive)
-        m_CinematicActive = m_CurrentElement->GetIsBlocker();
-    
+    if ( m_CheckBlock && !m_CinematicActive )
+      m_CinematicActive = m_CurrentElement->GetIsBlocker();
+
     m_CheckBlock = false;
 
     //Compruebo si ha transcurrido el tiempo para esta acción para cambiar al siguiente elemento
-    if(m_CurrentElement->GetTime() < m_CurrentElement->GetCurrentTime() )
+    if ( m_CurrentElement->GetTime() < m_CurrentElement->GetCurrentTime() )
     {
-      m_CurrentElement->SetCurrentTime(0);
-      m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById(++m_CurrentElementId);
+      m_CurrentElement->SetCurrentTime( 0 );
+      m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById( ++m_CurrentElementId );
       m_CheckBlock = true;
       m_FirstFrame = true;
-      if( m_CurrentElement == 0 )
+
+      if ( m_CurrentElement == 0 )
       {
         m_CurrentElementId = 0;
         m_CinematicActive = false;
         return;
       }
     }
-    if(!m_FirstFrame)
+
+    if ( !m_FirstFrame )
       m_CurrentElement->Update();
 
     m_FirstFrame = false;
   }
 }
 
-void CCinematicManager::Render() 
+void CCinematicManager::Render()
 {
-  if(m_CurrentElement != 0)
-  {
-   m_CurrentElement->Render();
-  }
+  if ( m_CurrentElement != 0 )
+    m_CurrentElement->Render();
 }

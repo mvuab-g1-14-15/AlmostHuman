@@ -18,7 +18,7 @@ function CPlayer:__init()
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
-		self.RenderableObject = CreateInstanceMesh("Player", "Player")
+		self.RenderableObject = CreateAnimatedInstanceModel("Player", "Player")
 		renderable_objects_manager_characters:AddResource("Player", self.RenderableObject)
 	end
 
@@ -30,6 +30,8 @@ function CPlayer:__init()
 	self.RenderableObject:MakeTransform();
 	
 	self.Life = 100.0
+	
+	self.CurrentState = "idle"
 end
 
 function CPlayer:Update()
@@ -97,4 +99,20 @@ function CPlayer:AddEnergy(amount)
 		TotalEnergy = 100.0
 	end
 	self.Blaster:SetEnergy(TotalEnergy)
+end
+
+function CPlayer:GetRenderableObject()
+	return self.RenderableObject;
+end
+
+function CPlayer:GetCurrentState()
+	return self.CurrentState
+end
+
+function CPlayer:SetCurrentState(state)
+	self.CurrentState = state
+end
+
+function CPlayer:SetEnergy(amount)
+	self.Blaster:SetEnergy(amount)
 end

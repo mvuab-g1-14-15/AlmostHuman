@@ -14,17 +14,17 @@
 	
 	<unset_render_target render_target="GenerateBrightPassRenderTarget"/>
 	
-	<!-- DEBUG 
+	<!-- DEBUG
 	<set_pool_renderable_objects_technique name="debug_output_bloom_step01" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
 	<render_draw_quad name="Show_Bloom_Step01" active="true">
-		<texture stage_id="0" name="FilterBrightTexture"/>
-	</render_draw_quad>
-	DEBUG -->
+		<texture stage_id="0" name="GlowTexture"/>
+	</render_draw_quad-->
 	
 	<set_pool_renderable_objects_technique pool="Bloom_step2_pool_renderable_object_technique"/>
-	<gaussian name="Bloom_Gaussian" iterations="0" >
-		<texture stage_id="0" name="FilterBrightTexture"/>
+	<gaussian name="Bloom_Gaussian" iterations="1" >
+		<texture stage_id="0" name="GlowTexture"/>
 		<dynamic_texture stage_id="0" name="GaussianBloomFilterBuffer" texture_width_as_frame_buffer="true" width="512" height="512" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+		<texture stage_id="1" name="DepthMapTexture"/>
 	</gaussian>
 	
 	<!-- DEBUG 

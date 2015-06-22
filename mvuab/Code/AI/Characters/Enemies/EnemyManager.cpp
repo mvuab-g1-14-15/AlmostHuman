@@ -14,16 +14,15 @@
 #include "EngineConfig.h"
 
 #include "AnimatedModels\AnimatedInstanceModel.h"
+#include "Pathfinding\AStar.h"
 
 typedef CEnemy* ( *CreateEnemyFn )( CXMLTreeNode& );
 
-CEnemyManager::CEnemyManager()
-    : CManager()
+CEnemyManager::CEnemyManager() : CManager(), mAStar( new CAStar() )
 {
 }
 
-CEnemyManager::CEnemyManager(CXMLTreeNode& atts)
-    : CManager(atts)
+CEnemyManager::CEnemyManager( CXMLTreeNode& atts ) : CManager( atts ), mAStar( new CAStar() )
 {
     /*  TODO RAUL
         PONER LECTURA XML
@@ -37,8 +36,10 @@ CEnemyManager::~CEnemyManager()
 
 void CEnemyManager::Destroy()
 {
-    m_CoreEnemies.Destroy();
     CMapManager::Destroy();
+    CHECKED_DELETE( mAStar );
+
+    m_CoreEnemies.Destroy();
     m_StateMachines.Destroy();
 }
 
@@ -49,24 +50,25 @@ void CEnemyManager::Update()
     while ( itr != m_Resources.end() )
     {
         m_ActualEnemy = itr->second;
-		
-		if ( m_ActualEnemy->GetLife() > 0 )
-		{
-			m_ActualEnemy->Update();
-			++itr;
-		}
-		else
-		{
-			CAnimatedInstanceModel* l_AnimatedModel = m_ActualEnemy->GetAnimationModel();
-			l_AnimatedModel->ChangeAnimationAction("morir", 0.2f, 0.2f);
-			if ( l_AnimatedModel->IsActionAnimationActive("morir") )
-			{
-				CHECKED_DELETE( m_ActualEnemy );
-			    m_Resources.erase( itr++ );
-			}
-			else
-				++itr;
-		}
+
+        if ( m_ActualEnemy->GetLife() > 0 )
+        {
+            m_ActualEnemy->Update();
+            ++itr;
+        }
+        else
+        {
+            CAnimatedInstanceModel* l_AnimatedModel = m_ActualEnemy->GetAnimationModel();
+            l_AnimatedModel->ChangeAnimationAction( "morir", 0.2f, 0.2f );
+
+            if ( l_AnimatedModel->IsActionAnimationActive( "morir" ) )
+            {
+                CHECKED_DELETE( m_ActualEnemy );
+                m_Resources.erase( itr++ );
+            }
+            else
+                ++itr;
+        }
     }
 }
 
@@ -75,7 +77,7 @@ void CEnemyManager::Render()
     TMapResource::iterator it = m_Resources.begin();
 
     for ( ; it != m_Resources.end(); ++it )
-    { it->second->Render(); }
+        it->second->Render();
 }
 
 void CEnemyManager::Init()
@@ -85,7 +87,7 @@ void CEnemyManager::Init()
     CXMLTreeNode l_File;
 
     if ( !l_File.LoadFile( mConfigPath.c_str() ) )
-    { printf( "File '%s' not correctly loaded", mConfigPath.c_str() ); }
+        printf( "File '%s' not correctly loaded", mConfigPath.c_str() );
 
     CXMLTreeNode  m = l_File["enemies"];
 
@@ -98,17 +100,19 @@ void CEnemyManager::Init()
             const std::string& l_TagName = m( i ).GetName();
 
             if ( l_TagName == "enemy" )
-            { AddNewEnemy( m( i ) ); }
+                AddNewEnemy( m( i ) );
             else if ( l_TagName == "core_enemy" )
             {
                 AddNewCoreEnemy( m( i ) );
                 //<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine="AI.xml"/>
             }
             else if ( l_TagName == "route" )
-            { AddNewRoute( m( i ) ); }
+                AddNewRoute( m( i ) );
 
         }
     }
+
+    mAStar->Init();
 }
 
 void CEnemyManager::Reload()
@@ -127,9 +131,7 @@ void CEnemyManager::AddNewStateMachine( const std::string& Name, const std::stri
 {
     CStateMachine* lStateMachine = new CStateMachine( Name );
 
-    if ( lStateMachine->Load( SMFileName ) )
-    { m_StateMachines.AddResource( Name,  lStateMachine ); }
-    else
+    if ( !lStateMachine->Load( SMFileName ) || !m_StateMachines.AddResource( Name, lStateMachine ) )
     {
         CHECKED_DELETE( lStateMachine );
         LOG_ERROR_APPLICATION( "Adding a new state machine" );
@@ -142,12 +144,9 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
     // Read the type
     const std::string lType = Node.GetPszProperty( "type", "no_type" );
 
-    if ( lType == "easy" )
-    { lCoreEnemy->m_EnemyType = CEnemy::eEasy; }
-    else if ( lType == "patroll" )
-    { lCoreEnemy->m_EnemyType = CEnemy::ePatroll; }
-    else if ( lType == "boss" )
-    { lCoreEnemy->m_EnemyType = CEnemy::eBoss; }
+    if ( lType == "easy" ) lCoreEnemy->m_EnemyType = CEnemy::eEasy;
+    else if ( lType == "boss" ) lCoreEnemy->m_EnemyType = CEnemy::eBoss;
+    else if ( lType == "patroll" ) lCoreEnemy->m_EnemyType = CEnemy::ePatroll;
 
     lCoreEnemy->m_Life = Node.GetFloatProperty( "life", 0.0f );
     lCoreEnemy->m_RespawnTime = Node.GetFloatProperty( "time_to_respawn", 0.0f );
@@ -155,9 +154,11 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
     lCoreEnemy->m_ShootAccuracy = Node.GetFloatProperty( "shoot_accuracy", 0.0f );
     lCoreEnemy->m_StateMachineName = Node.GetPszProperty( "state_machine_name", "no_name" );
     lCoreEnemy->m_StateMachineFileName = Node.GetPszProperty( "state_machine_file", "no_name" );
+
     // Now add the new state machine
     AddNewStateMachine( lCoreEnemy->m_StateMachineName, lCoreEnemy->m_StateMachineFileName );
-    m_CoreEnemies.AddResource( lType, lCoreEnemy );
+
+    if ( !m_CoreEnemies.AddResource( lType, lCoreEnemy ) ) CHECKED_DELETE( lCoreEnemy );
 }
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
@@ -166,12 +167,12 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
     CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
     if ( !lCoreEnemy )
-    { LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) ); }
+        LOG_ERROR_APPLICATION( ( "Core '%s' not found", lType.c_str() ) );
 
     CStateMachine* lStateMachine = m_StateMachines.GetResource( m_CoreEnemies.GetResource( lType )->m_StateMachineName );
 
     if ( !lStateMachine )
-    { LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) ); }
+        LOG_ERROR_APPLICATION( ( "State machine for '%s' not found", lType.c_str() ) );
 
     CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
 
@@ -180,18 +181,18 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 
     CPatrolEnemy* lPatrolEnemy = dynamic_cast<CPatrolEnemy*>( lEnemy );
 
-	lPatrolEnemy->SetMaxTimeToShoot(m_CoreEnemies.GetResource(lType)->m_TimeToShoot);
+    lPatrolEnemy->SetMaxTimeToShoot( m_CoreEnemies.GetResource( lType )->m_TimeToShoot );
 
     if ( lPatrolEnemy )
-    { lPatrolEnemy->SetWaypoints( m_Routes[lPatrolEnemy->GetRouteId()] ); }
+        lPatrolEnemy->SetWaypoints( m_Routes[lPatrolEnemy->GetRouteId()] );
 
     if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
     {
         LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
         CHECKED_DELETE( lEnemy );
     }
-	else
-		lEnemy->Init();
+    else
+        lEnemy->Init();
 }
 
 void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
@@ -205,9 +206,9 @@ void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
         const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty( "value", Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) );
 
         if ( l_Point != Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) )
-        { l_Route.push_back( l_Point ); }
+            l_Route.push_back( l_Point );
         else
-        { LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id ); }
+            LOG_ERROR_APPLICATION( "Point in the route '%d' not correctly loaded.", l_Id );
     }
 
     m_Routes[l_Id] = l_Route;
@@ -223,4 +224,27 @@ void CEnemyManager::RegisterEnemies()
 CEnemy* CEnemyManager::GetActualEnemy()
 {
     return m_ActualEnemy;
+}
+
+CEnemy* CEnemyManager::GetCloseEnemy( Math::Vect3f aPos )
+{
+    float lDist = 999999.99f;
+    float lActualDist = 0.0f;
+    CEnemy* lEnemy = 0, *lActualEnemy = 0;
+
+    TMapResource::iterator it = m_Resources.begin();
+
+    for ( ; it != m_Resources.end(); ++it )
+    {
+        lActualEnemy = it->second;
+        lActualDist = lActualEnemy->GetPosition().Distance( aPos );
+
+        if ( lActualDist < lDist )
+        {
+            lDist = lActualDist;
+            lEnemy = lActualEnemy;
+        }
+    }
+
+    return lEnemy;
 }

@@ -21,7 +21,7 @@ public:
     {
         if ( mIds.find( type ) != mIds.end() )
         {
-            unsigned int lId = mIds[type]++;
+            unsigned int lId = ++mIds[type];
 
             if ( lId == UINT_MAX )
                 mIds[type] = 0;

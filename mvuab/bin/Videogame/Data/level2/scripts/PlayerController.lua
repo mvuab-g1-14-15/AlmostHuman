@@ -3,7 +3,7 @@ dofile("./data/level2/scripts/Include.lua")
 class "CPlayerController"
 
 function CPlayerController:__init()
-	self.Position = Vect3f(72, 1, 11)
+	self.Position = Vect3f(112, -6.16, -34.28)
 	self.Height = 1.8
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
@@ -87,7 +87,7 @@ function CPlayerController:Update()
 
 	--Set Listenr Postion 
 	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
-	
+	local CurrentState = g_Player:GetCurrentState()
 	local l_Speed = self.Speed
 	if self.Crouch then
 		l_Speed = l_Speed / 3.0
@@ -96,9 +96,19 @@ function CPlayerController:Update()
 	if self.Run then
 		l_Speed = l_Speed * 2.0
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
+		if CurrentState ~= "run" then
+			engine:Trace("Estado actual run")
+			g_Player:GetRenderableObject():ChangeAnimation("run", 0.2, 0)
+			g_Player:SetCurrentState("run")
+		end
 	end
 	if not self.Crouch and not self.Run then
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep)
+		if CurrentState ~= "idle" and CurrentState ~= "charge_loop" and CurrentState ~= "idle_to_charge" and CurrentState ~= "shoot_cargado" then
+			engine:Trace("Estado actual idle")
+			g_Player:GetRenderableObject():ChangeAnimation("idle", 0.2, 0)
+			g_Player:SetCurrentState("idle")
+		end
 	end
 	
 	local l_Velocity = self.Direction * l_Speed
@@ -145,36 +155,39 @@ function CPlayerController:Update()
 		self.ActualTimeLeanOut = self.TimeLeanOut
 	end
 	
-	local l_Up = l_PlayerCamera:GetVecUp()
-	
-	local l_ShakeVerticalSpeed = self.ShakeHorizontalSpeed
-	local l_ShakeHorizontalSpeed = self.ShakeHorizontalSpeed
-	local l_ShakeVerticalAmplitude = self.ShakeVerticalAmplitude
-	local l_ShakeHorizontalAmplitude = self.ShakeHorizontalAmplitude	
-	if CheckVector(self.Direction) then
-		l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 5.0
-		l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 3.0
-		if self.Crouch then
-			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
-			l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
-			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 2.0
-			l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 2.0
+	if not self.CharacterController:IsJumping() then
+		local l_Up = l_PlayerCamera:GetVecUp()
+		
+		local l_ShakeVerticalSpeed = self.ShakeHorizontalSpeed
+		local l_ShakeHorizontalSpeed = self.ShakeHorizontalSpeed
+		local l_ShakeVerticalAmplitude = self.ShakeVerticalAmplitude
+		local l_ShakeHorizontalAmplitude = self.ShakeHorizontalAmplitude	
+		if CheckVector(self.Direction) then
+			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 5.0
+			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 3.0
+			if self.Crouch then
+				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
+				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
+				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 2.0
+				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 2.0
+			end
+			if self.Run then
+				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 2.0
+				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 2.0
+				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
+				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
+			end
 		end
-		if self.Run then
-			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 2.0
-			l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 2.0
-			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
-			l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
-		end
+		
+		self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
+		self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
+		l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * l_Up * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * self.Side * math.cos(self.ShakeValueHorizontal)
 	end
-	
-	self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
-	self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
-	l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * l_Up * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * self.Side * math.cos(self.ShakeValueHorizontal)
 	
 	--Move the camera outside de capsule of the controller
 	l_CameraPosition = l_CameraPosition + self.Forward * self.Radius
 	
+	--l_CameraPosition = l_CameraPosition - self.Forward
 	l_PlayerCamera:SetPosition(l_CameraPosition)
 	
 	self:MakeGizmo()
@@ -257,7 +270,7 @@ function CPlayerController:CalculateDirectionVectors(l_PlayerCamera)
 end
 
 function CPlayerController:PlayFootstep()
-	if countdowntimer_manager:isTimerFinish("Footstep") then
+	if countdowntimer_manager:isTimerFinish("Footstep") and not self.CharacterController:IsJumping() then
 		sound_manager:PlayEvent( "Logan_Footstep_Walk", "TestGameObject2d" )
 		countdowntimer_manager:Reset("Footstep", true)
 	end
@@ -268,19 +281,19 @@ function CPlayerController:UpdateInput()
 	if not g_ConsoleActivate then
 		if action_manager:DoAction("MoveForward") then
 			self.Direction = self.Direction + self.Forward
-			self.PlayFootstep()
+			self:PlayFootstep()
 		end
 		if action_manager:DoAction("MoveBackward") then
 			self.Direction = self.Direction - self.Forward
-			self.PlayFootstep()
+			self:PlayFootstep()
 		end
 		if action_manager:DoAction("MoveLeft") then
 			self.Direction = self.Direction + self.Side
-			self.PlayFootstep()
+			self:PlayFootstep()
 		end
 		if action_manager:DoAction("MoveRight") then
 			self.Direction = self.Direction - self.Side
-			self.PlayFootstep()
+			self:PlayFootstep()
 		end
 		if CheckVector(self.Direction) then
 			self.Direction:Normalize()
@@ -291,24 +304,28 @@ function CPlayerController:UpdateInput()
 		if action_manager:DoAction("ShootUp") then
 			self.Shooting = false
 		end
-		if action_manager:DoAction("Run") then
-			self.Run = true
-		else
-			self.Run = false
-		end
-		if action_manager:DoAction("Crouch") then
-			local l_Can = false
-			if self.Crouch then
-				l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+		if not self.CharacterController:IsJumping() then
+			if action_manager:DoAction("Run") then
+				self.Run = true
 			else
-				l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+				self.Run = false
 			end
-			if l_Can then
-				self.Crouch = not self.Crouch
-				self.ActualTimeCrouch = 0.0
+			if action_manager:DoAction("Crouch") then
+				local l_Can = false
+				if self.Crouch then
+					l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+				else
+					l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+				end
+				if l_Can then
+					self.Crouch = not self.Crouch
+					self.ActualTimeCrouch = 0.0
+				end
+			end
+			if action_manager:DoAction("Jump") then
+				self.Jump = true
 			end
 		end
-		
 		if self.LeanOut == 0 and self.ActualTimeLeanOut == self.TimeLeanOut then
 			if action_manager:DoAction("LeanOutLeft") then
 				self.LeanOut = 1
@@ -328,9 +345,6 @@ function CPlayerController:UpdateInput()
 			self.PrevLeanOut = self.LeanOut
 			self.LeanOut = 0
 			self.ActualTimeLeanOut = 0.0
-		end
-		if action_manager:DoAction("Jump") then
-			self.Jump = true
 		end
 	end
 end

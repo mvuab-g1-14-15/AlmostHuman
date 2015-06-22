@@ -1,0 +1,113 @@
+<scene_renderer_commands>
+    <!--pre_render-->	
+	<!--generate the shadow maps-->
+	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
+	<generate_shadow_maps/>
+	
+	<begin_scene/>
+	
+	<!--generate the deferred textures-->
+	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
+    <set_render_target name="deferred_multiple_render_target">
+        <dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="true"/>
+        <dynamic_texture stage_id="1" name="LightMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+        <dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+        <dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F" create_depth_stencil_buffer="false"/>
+    </set_render_target>
+	
+	<clear_scene color="true" depth="true" stencil="false"/>
+	
+	<enable_z_test/>
+	<enable_z_write/>
+	<disable_alpha_test/>
+	<disable_alpha_blend/>
+	
+    <set_matrices/>
+	
+	
+    <render_scene layer="solid" active="true"/>
+	<render_scene layer="characters" active="true"/>
+	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="true" render_triggers="true"/>
+	<!--render_scene layer="glow" active="true"/>
+	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
+	<render_gizmos render="true"/-->
+    <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
+	
+	
+	
+	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Glow.xml"/-->
+	
+	<!-- end pre_render-->
+
+	<disable_z_write/>
+    <disable_z_test/>
+	<set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="0" name="LightMapTexture"/>
+    </render_draw_quad>
+	
+	<enable_alpha_blend/>
+	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
+	
+	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
+    <render_deferred_shading>
+        <texture stage_id="0" name="DiffuseMapTexture"/>
+        <texture stage_id="1" name="LightMapTexture"/>
+        <texture stage_id="2" name="NormalMapTexture"/>
+        <texture stage_id="3" name="DepthMapTexture"/>
+    </render_deferred_shading>
+	
+	<!--
+	<clear_scene color="true" depth="true" stencil="true"/>
+	-->
+	
+	<enable_z_test/>
+	
+	<render_billboards/>
+	<render_particules/>
+	<!--<render_triggers/>-->
+	<render_gizmos render="true"/>
+	<render_process/>
+	
+	<disable_z_test/>
+
+	
+	<capture_frame_buffer name="Glow_Step01_Capture_FB">
+		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+	
+	<!-- BLOOM -->
+	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Bloom.xml"/>	-->
+	
+	<!-- DEBUG 
+	<set_pool_renderable_objects_technique name="debug_output_glow" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
+	<render_draw_quad name="show_glow_render" active="true">
+		<texture stage_id="0" name="GlowTexture"/>
+	</render_draw_quad>
+	
+	-->
+	
+	
+	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+    <render_weapon_target size="20">
+ 		<texture stage_id="0" name="Data/textures/mirilla.png"/>
+ 	</render_weapon_target>
+	
+	<render_gui render="true"/>
+	
+	<render_developer_info/>
+	
+	<disable_alpha_test/>
+	<disable_alpha_blend/>
+	
+    <end_scene/>
+	
+	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="0" name="DepthMapTexture"/>
+		<texture stage_id="1" name="NormalMapTexture"/>
+		<texture stage_id="2" name="Data/textures/Random.png"/>
+    </render_draw_quad>
+	
+    <present/>
+</scene_renderer_commands>

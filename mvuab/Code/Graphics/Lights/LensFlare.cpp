@@ -15,6 +15,8 @@ CLensFlare::CLensFlare()
 //---------------------------------------------------------------------------------
 CLensFlare::~CLensFlare()
 {
+    for(size_t i = 0; i < mFlares.size(); ++i) CHECKED_DELETE(mFlares.at(i));
+    mFlares.clear();
 }
 
 //---------------------------------------------------------------------------------
@@ -83,7 +85,8 @@ void CLensFlareManager::Init()
 				CLensFlare* lFlare = new CLensFlare();
 				if( lFlare->Init( lNode ) )
 				{
-					AddResource( lFlare->GetName(), lFlare );
+					if(!AddResource( lFlare->GetName(), lFlare ))
+                        CHECKED_DELETE( lFlare );
 				}
 				else
 				{

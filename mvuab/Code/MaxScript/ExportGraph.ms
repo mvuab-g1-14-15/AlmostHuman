@@ -106,13 +106,15 @@ struct RouteAndGraph
 				l_RootNode.AppendNode l_NewArcGraphNode
 				l_NewArcGraphNode.AddAttributeFloat "src" i	
 				l_NewArcGraphNode.AddAttributeFloat "dst" l_arc
-				l_NewArcGraphNode.AddAttributeFloat "value" 1
+				local l_Pos2 = point3 m_Nodes[l_arc].x m_Nodes[l_arc].y m_Nodes[l_arc].z
+				local lDist = distance l_Pos l_Pos2
+				l_NewArcGraphNode.AddAttributeFloat "value" lDist
 				
 			)
 		)
 		return xDoc.PrettySaveXML()
 	),
-		
+	
 	fn ExportRouteXML fileNameXML =
 	(
 		local xDoc = XMLDocument filenameXML
