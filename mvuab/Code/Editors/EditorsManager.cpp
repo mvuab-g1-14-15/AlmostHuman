@@ -22,8 +22,6 @@ CEditorsManager::~CEditorsManager()
 
 void CEditorsManager::Update()
 {
-    //std::cout << numSec << std::endl << std::endl;
-    std::cout << LightMInstance->GetAmbientLight().x << std::endl << std::endl;
 }
 
 void CEditorsManager::Render()
