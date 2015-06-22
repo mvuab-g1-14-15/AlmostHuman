@@ -65,6 +65,7 @@
 	
 	<render_billboards/>
 	<render_particules/>
+	<render_editors/>
 	<!--<render_triggers/>-->
 	<render_gizmos render="true"/>
 	<render_process/>
@@ -95,7 +96,7 @@
 	
 	<render_gui render="true"/>
 	
-	<render_developer_info/>
+	<!--<render_developer_info/>-->
 	
 	<disable_alpha_test/>
 	<disable_alpha_blend/>

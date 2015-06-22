@@ -37,6 +37,7 @@
 #include "SceneRenderComands\ProcessRenderRendererCommand.h"
 #include "SceneRenderComands\BloomSceneRendererCommand.h"
 #include "SceneRenderComands\TriggerRendererCommand.h"
+#include "SceneRenderComands\EditorsRendererCmd.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -136,10 +137,8 @@ void CSceneRendererCommandManager::Init()
                                Type2Type<CDisableAlphaTestSceneRendererCommand>( ) );
     m_CommandFactory.Register( "render_scene",
                                Type2Type<CRenderSceneSceneRendererCommand>( ) );
-    #ifdef _DEBUG
     m_CommandFactory.Register( "render_developer_info",
                                Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
-    #endif
     m_CommandFactory.Register( "render_particules",
                                Type2Type<CParticleRenderCommand>( ) );
     m_CommandFactory.Register( "render_weapon_target",
@@ -157,6 +156,7 @@ void CSceneRendererCommandManager::Init()
     m_CommandFactory.Register( "render_triggers",
                                Type2Type<CTriggerRenderCommand>( ) );
     m_CommandFactory.Register( "bloom", Type2Type<CBloomSceneRendererCommand>( ) );
+    m_CommandFactory.Register( "render_editors", Type2Type<CEditorsRenderCmd>( ) );
     Load(mConfigPath);
 
 }

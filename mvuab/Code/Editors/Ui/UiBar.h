@@ -1,0 +1,26 @@
+#ifndef UI_BAR_H
+#define UI_BAR_H
+#pragma once
+
+#include "Utils\Defines.h"
+#include "Utils\Name.h"
+#include "XML/XMLTreeNode.h"
+#include <AntTweakBar.h>
+
+class CUiBar : public CName
+{
+    public:
+        CUiBar( const std::string& aName );
+        ~CUiBar();
+
+        template<typename T> bool AddProperty( const char* aLabel, T& aPropery, const T& aMinValue, const T& aMaxValue,
+                                               const T& aStep );
+
+        virtual bool Create() = 0;
+    protected:
+
+    private: // Members
+        TwBar* mBar;
+};
+
+#endif // UI_BAR_H

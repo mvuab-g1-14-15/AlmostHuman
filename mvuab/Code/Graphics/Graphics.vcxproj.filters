@@ -291,6 +291,9 @@
     <ClCompile Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.cpp">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\EditorsRendererCmd.cpp">
+      <Filter>SceneRenderComands\Editors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -592,6 +595,9 @@
     <ClInclude Include="SceneRenderComands\DrawQuadByTechniqueRendererCommand.h">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClInclude>
+    <ClInclude Include="SceneRenderComands\EditorsRendererCmd.h">
+      <Filter>SceneRenderComands\Editors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -653,6 +659,9 @@
     </Filter>
     <Filter Include="SceneRenderComands\EffectsCmd">
       <UniqueIdentifier>{b40002c5-8ae9-4015-aa51-4e09ba0c6010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneRenderComands\Editors">
+      <UniqueIdentifier>{0f70fc96-40e7-4b8a-897c-35972cd387b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

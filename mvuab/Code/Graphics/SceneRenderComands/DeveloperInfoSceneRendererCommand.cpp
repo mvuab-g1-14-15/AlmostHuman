@@ -31,5 +31,6 @@ void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
                    "Stats: FPS <%5.2f> Cam<%5.2f %5.2f %5.2f> Look<%5.2f %5.2f %5.2f> Objs<%d> Vtxs<%d> Tri<%d> Faces<%d>",
                    FPS, lPosition.x, lPosition.y, lPosition.z, lTarget.x, lTarget.y, lTarget.z, GPU->GetDrawCount(),
                    GPU->GetVertexCount(), uint32( GPU->GetVertexCount() / 3 ), GPU->GetFacesCount() );
+
     GPU->SetToZero();
 }

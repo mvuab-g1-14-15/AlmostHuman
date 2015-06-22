@@ -29,6 +29,7 @@
 #include "WWSoundManager.h"
 #include "Timer/CounTDownTimerManager.h"
 #include "Cinematics/CinematicManager.h"
+#include "EditorsManager.h"
 #include "Lights\LensFlare.h"
 #include "Utils\IdManager.h"
 
@@ -59,6 +60,7 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
     , m_pCountDownTimerManager( 0 )
     , m_pCinematicManager( 0 )
     , m_pIdManager( 0 )
+    , m_pEditorsManager(0)
 {
 }
 
@@ -124,8 +126,9 @@ void CEngineManagers::Init()
     ManagerFactory.Register( "countdowntimer_manager",
                              Type2Type<CCountDownTimerManager>( ) );
     ManagerFactory.Register( "cinematic_manager", Type2Type<CCinematicManager>( ) );
-    ManagerFactory.Register( "flare_manager", Type2Type<CLensFlareManager>( ) );
-    ManagerFactory.Register( "id_manager", Type2Type<CIdManager>( ) );
+    ManagerFactory.Register( "flare_manager", Type2Type<CLensFlareManager>() );
+    ManagerFactory.Register( "id_manager", Type2Type<CIdManager>() );
+    ManagerFactory.Register( "editors_manager", Type2Type<CEditorsManager>() );
 
     CXMLTreeNode l_File;
 
@@ -140,7 +143,6 @@ void CEngineManagers::Init()
     if ( TreeNode.Exists() )
     {
 
-
         for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
         {
 
@@ -151,11 +153,15 @@ void CEngineManagers::Init()
             CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
 
             if ( !Manager )
+            {
                 LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
+            }
             else
             {
                 if ( !AddResource( TagName.c_str() , Manager ) )
+                {
                     CHECKED_DELETE( Manager );
+                }
             }
         }
     }
@@ -186,11 +192,12 @@ void CEngineManagers::Init()
     m_pGizmosManager    = dynamic_cast<CGizmosManager*>( GetResource( "gizmos_manager" ) );
     m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );
     m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
-    m_BillboardManager  = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
+    m_BillboardManager        = dynamic_cast<CBillboardManager*>( GetResource( "billboard_manager" ) );
     m_pCountDownTimerManager  = dynamic_cast<CCountDownTimerManager*>( GetResource( "countdowntimer_manager" ) );
     m_pCinematicManager = dynamic_cast<CCinematicManager*>( GetResource( "cinematic_manager" ) );
     m_pLensFlareManager = dynamic_cast<CLensFlareManager*>( GetResource( "flare_manager" ) );
     m_pIdManager = dynamic_cast<CIdManager*>( GetResource( "id_manager" ) );
+    m_pEditorsManager = dynamic_cast<CEditorsManager*>( GetResource( "editors_manager" ) );
 
     //
     // Init managers
@@ -199,7 +206,8 @@ void CEngineManagers::Init()
     uint32 lPosition = 0;
     uint32 result;
 
-    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
+    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
+            ++lItb )
     {
         ( *lItb )->Init();
         m_pConsole->Clear();
@@ -213,14 +221,20 @@ void CEngineManagers::Init()
 
 void CEngineManagers::Update()
 {
-    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
+    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
+            ++lItb )
+    {
         ( *lItb )->Update();
+    }
 }
 
 void CEngineManagers::Render()
 {
-    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte; ++lItb )
+    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
+            ++lItb )
+    {
         ( *lItb )->Render();
+    }
 }
 
 void CEngineManagers::Release()
@@ -251,6 +265,12 @@ CWWSoundManager* CEngineManagers::GetSoundManager() const
 {
     ASSERT( m_pSoundManager, "Null sound manager" );
     return m_pSoundManager;
+}
+
+CEditorsManager* CEngineManagers::GetEditorsManager() const
+{
+    ASSERT( m_pEditorsManager, "Null editors manager" );
+    return m_pEditorsManager;
 }
 
 CBillboardManager* CEngineManagers::GetBillboardManager() const
