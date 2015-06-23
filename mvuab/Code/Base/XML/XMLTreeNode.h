@@ -23,12 +23,8 @@ class CXMLTreeNode
 {
     public:
         // Init and End protocols
-        CXMLTreeNode() : m_bIsOk( false ), m_pDoc( NULL ), m_pNode( NULL ), m_pWriter( NULL ),
-            m_pszFileName( NULL ) {}
-        virtual ~CXMLTreeNode()
-        {
-            Done();
-        }
+        CXMLTreeNode();
+        virtual ~CXMLTreeNode();
 
         void Done();
         bool IsOk() const
@@ -41,18 +37,13 @@ class CXMLTreeNode
 
         template<typename T> const T GetAttribute( const char* aAttName, const T& aDefaultAttValue ) const;
 
-        bool                                Exists()
+        bool Exists()
         {
             return m_pNode != NULL;
         }
-        bool                                ExistsKey( const char* _pszKey );
-        const char*                    GetName() const;
+        bool ExistsKey( const char* _pszKey );
+        const char* GetName() const;
 
-        // To get properties from xml file
-        int                               GetIntProperty( const char* _pszKey, int _iDefault = 0,
-                bool warningDefault = false ) const;
-        float32                           GetFloatProperty( const char* _pszKey, float32 _fDefault = 0.0,
-                bool warningDefault = false ) const;
         bool                              GetBoolProperty( const char* _pszKey, bool _bDefault = false,
                 bool warningDefault = false ) const;
         const char*                       GetPszProperty( const char* _pszKey,

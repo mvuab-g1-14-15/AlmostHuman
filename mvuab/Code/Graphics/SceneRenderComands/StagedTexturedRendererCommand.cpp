@@ -26,15 +26,15 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
             if ( TagName == "dynamic_texture" )
             {
                 std::string l_Name = atts( i ).GetPszProperty( "name", "" );
-                int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
+                int l_StageId = atts( i ).GetAttribute<int32>( "stage_id", -1 );
                 bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
                 bool l_CreateDepthStencilBuffer = atts( i ).GetBoolProperty( "create_depth_stencil_buffer", true );
                 uint32 l_Width, l_Height;
 
                 if ( !l_WidthAsFB )
                 {
-                    l_Width = atts( i ).GetIntProperty( "width", 0 );
-                    l_Height = atts( i ).GetIntProperty( "height", 0 );
+                    l_Width = atts( i ).GetAttribute<int32>( "width", 0 );
+                    l_Height = atts( i ).GetAttribute<int32>( "height", 0 );
                 }
                 else
                 {
@@ -62,7 +62,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
             if ( TagName == "texture" )
             {
                 const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
-                int l_StageId = atts( i ).GetIntProperty( "stage_id", -1 );
+                int l_StageId = atts( i ).GetAttribute<int32>( "stage_id", -1 );
                 CTexture* l_Texture = TextureMInstance->GetTexture( l_Name );
 
                 if ( !l_Texture )

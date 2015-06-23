@@ -2,6 +2,8 @@
 #include "Utils\Defines.h"
 #include "Process.h"
 
+#include "ActionManager.h"
+
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
 #include "Timer\Timer.h"
@@ -53,7 +55,7 @@ void CEngine::Render()
 
 void CEngine::ProcessInputs()
 {
-  // TODO: Decirle al action manager que procese los inputs
+  ActionManagerInstance->ProcessInputs();
 }
 
 void CEngine::SetRunnigProcess( CProcess* aProcess )

@@ -3,9 +3,9 @@
 
 CObject3D::CObject3D( const CXMLTreeNode& atts )
     : m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) ) )
-    , m_fYaw( atts.GetFloatProperty( "yaw", 0.0f ) )
-    , m_fPitch( atts.GetFloatProperty( "pitch", 0.0f ) )
-    , m_fRoll( atts.GetFloatProperty( "roll", 0.0f ) )
+    , m_fYaw( atts.GetAttribute<float>( "yaw", 0.0f ) )
+    , m_fPitch( atts.GetAttribute<float>( "pitch", 0.0f ) )
+    , m_fRoll( atts.GetAttribute<float>( "roll", 0.0f ) )
     , m_Scale( atts.GetVect3fProperty( "scale", Math::Vect3f( 1.0f, 1.0f, 1.0f ) ) )
 {
     MakeTransform();
@@ -13,7 +13,7 @@ CObject3D::CObject3D( const CXMLTreeNode& atts )
 
 CObject3D::CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll, Math::Vect3f scale )
 {
-	m_Position  = pos;
+    m_Position  = pos;
     m_fYaw      = yaw;
     m_fPitch    = pitch;
     m_fRoll     = roll;
@@ -34,9 +34,9 @@ CObject3D::CObject3D()
 bool CObject3D::Init( const CXMLTreeNode& atts )
 {
     m_Position  = atts.GetVect3fProperty  ( "pos",    Math::Vect3f( 0, 0, 0 ) );
-    m_fYaw      = atts.GetFloatProperty   ( "yaw",    0.0f );
-    m_fPitch    = atts.GetFloatProperty   ( "pitch",  0.0f );
-    m_fRoll     = atts.GetFloatProperty   ( "roll",   0.0f );
+    m_fYaw      = atts.GetAttribute<float>   ( "yaw",    0.0f );
+    m_fPitch    = atts.GetAttribute<float>   ( "pitch",  0.0f );
+    m_fRoll     = atts.GetAttribute<float>   ( "roll",   0.0f );
     m_Scale     = atts.GetVect3fProperty  ( "scale",  Math::Vect3f( 1.0f, 1.0f, 1.0f ) );
     MakeTransform();
 
@@ -73,8 +73,9 @@ const Math::Vect3f CObject3D::GetDirection() const
 
 void CObject3D::SetDirection( const Math::Vect3f& aDirection )
 {
-	SetYaw(Math::Utils::ATan2( aDirection.z, aDirection.x ) );
-	SetPitch(Math::Utils::ATan2( aDirection.y, Math::Utils::Sqrt( aDirection.z * aDirection.z + aDirection.x * aDirection.x ) ));
+    SetYaw(Math::Utils::ATan2( aDirection.z, aDirection.x ) );
+    SetPitch(Math::Utils::ATan2( aDirection.y,
+                                 Math::Utils::Sqrt( aDirection.z * aDirection.z + aDirection.x * aDirection.x ) ));
     SetRoll( 0.0f );
-	MakeTransform();
+    MakeTransform();
 }

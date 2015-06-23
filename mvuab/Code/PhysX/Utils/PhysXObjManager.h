@@ -9,18 +9,18 @@
 #include "Utils\MapManager.h"
 #include "PhysXObjDefs.h"
 
-class CPhysXObjManager : public CMapManager<TPhysXObj>
+class CPhysXObjManager : public CMapManager<CPhysXObj>
 {
-private:
-	std::string		m_Filename;
+    private:
+        std::string     m_Filename;
 
-public:
-	CPhysXObjManager();
-	virtual ~CPhysXObjManager();
-	
-	bool			Load					(const std::string& filename);
-	bool			Reload					();
-	void			CleanUp					();
+    public:
+        CPhysXObjManager();
+        virtual ~CPhysXObjManager();
+
+        bool            Load                    (const std::string& filename);
+        bool            Reload                  ();
+        void            CleanUp                 ();
 };
 
 #endif

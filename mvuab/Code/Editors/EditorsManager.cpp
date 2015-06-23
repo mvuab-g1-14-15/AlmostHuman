@@ -32,6 +32,7 @@ void CEditorsManager::Render()
 
 void CEditorsManager::Init()
 {
+  return;
   TwInit( TW_DIRECT3D9, GraphicsInstance->GetDevice() );
 
   Math::Vect2i lScreenSize = CEngineConfig::GetSingleton().GetScreenSize();

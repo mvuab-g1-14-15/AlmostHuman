@@ -52,89 +52,61 @@ bool CPhysXObjManager::Load( const std::string& filename )
 
 bool CPhysXObjManager::Reload()
 {
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_Filename.c_str()))
-    {
-        std::string &msg_error = "CPhysXObjManager::Load->Error al intentar leer el archivo xml: " + m_Filename;
-        LOG_ERROR_APPLICATION(msg_error.c_str());
-        return false;
-    }
+    // @TODO@ Ruly Revisar que este reload funcione
+    bool lOk = true;
+    CXMLTreeNode newFile, l_xml;
 
-    CXMLTreeNode l_xml = newFile["physx_objs"];
-    if( l_xml.Exists() )
+    if( newFile.LoadAndFindNode(m_Filename.c_str(), "physx_objs", l_xml ))
     {
-        uint16 l_Count = l_xml.GetNumChildren();
-
-        for(uint16 i = 0; i < l_Count; ++i)
+        for(uint32 i = 0, lCount = l_xml.GetNumChildren(); i < lCount; ++i)
         {
-            std::string l_Type = l_xml(i).GetName();
-
-            if( l_Type == "physx_obj" )
+            const CXMLTreeNode& lCurrentNode = l_xml(i);
+            if( std::string( lCurrentNode.GetName() ) == "physx_obj" )
             {
-                std::string name = l_xml(i).GetPszProperty("name", "", true);
-                int type = l_xml(i).GetIntProperty("type", 0, true);
-                Math::Vect3f pos = l_xml(i).GetVect3fProperty("pos", Math::Vect3f(0, 0, 0), true);
-                float yaw = l_xml(i).GetFloatProperty("yaw", 0.0f, true);
-                float pitch = l_xml(i).GetFloatProperty("pitch", 0.0f, true);
-                float roll = l_xml(i).GetFloatProperty("roll", 0.0f, true);
-                std::string groupName = l_xml(i).GetPszProperty("group", "ECG_ESCENE", true);
-                bool activeStart = l_xml(i).GetBoolProperty("active_startup", false, true);
+                int32 type = lCurrentNode.GetAttribute<int32>("type", 0);
 
-                TPhysXObj* pxObj = NULL;
+                ASSERT( type == PHYSX_OBJ_BOX, "Invalid type for phx object" );
 
-                if(type == PHYSX_OBJ_BOX)
+                CPhysXObj *lpxObj = new CPhysXObj( lCurrentNode );
+
+                if( AddResource(lpxObj->GetName(), lpxObj) )
                 {
-                    TPhysXObjBox* pxBox = new TPhysXObjBox();
+                    if(lCurrentNode.GetAttribute<bool>("active_startup", false ) )
+                    {
+                        CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( lpxObj->GetName()  );
+                        l_pPhysicUserDataMesh->SetGroup(static_cast<ECollisionGroup>(lpxObj->GetGroup()));
 
-                    pxBox->m_Dimensions = l_xml(i).GetVect3fProperty("dimension", Math::Vect3f(0, 0, 0), true);
+                        // @TODO@ Ruly Esto no tengo muy claro que funcione bien, porque las rotaciones de 3dObject ya estan en radianes, asi que puede las rotaciones del xml no esten muy bien.
+                        Math::Vect3f rotationVect
+                        (
+                            Math::Utils::Deg2Rad(lpxObj->GetPitch()),
+                            Math::Utils::Deg2Rad(lpxObj->GetYaw()),
+                            Math::Utils::Deg2Rad(lpxObj->GetRoll())
+                        );
 
-                    pxObj = pxBox;
-                }
+                        CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
+                        l_pPhysicUserDataMesh->SetPaint (true);
 
-                assert(pxObj);
+                        l_MeshActor->AddBoxShape
+                        (
+                            lpxObj->GetDimensions() / 2.0f,
+                            lpxObj->GetPosition(),
+                            Math::Vect3f(0, 0, 0),
+                            rotationVect,
+                            NULL,
+                            (uint32)lpxObj->GetGroup()
+                        );
 
-                pxObj->m_Type = type;
-                pxObj->m_Group = PhysXMInstance->GetCollisionGroup(groupName);
-                pxObj->SetName(name);
-                pxObj->SetPosition(pos);
-                pxObj->SetYaw(yaw);
-                pxObj->SetPitch(pitch);
-                pxObj->SetRoll(roll);
-
-                /*bool isOk = */this->AddResource(name, pxObj);
-                //assert(isOk);
-
-                if(activeStart)
-                {
-                    CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( pxObj->GetName()  );
-
-                    l_pPhysicUserDataMesh->SetGroup(static_cast<ECollisionGroup>(pxObj->m_Group));
-
-                    Math::Vect3f rotationVect = v3fZERO;
-
-                    rotationVect.x = Math::Utils::Deg2Rad(pxObj->GetPitch());
-                    rotationVect.y = Math::Utils::Deg2Rad(pxObj->GetYaw());
-                    rotationVect.z = Math::Utils::Deg2Rad(pxObj->GetRoll());
-
-                    TPhysXObjBox* pxBox = static_cast<TPhysXObjBox*>(pxObj);
-
-                    Math::Vect3f size = pxBox->m_Dimensions;
-                    size /= 2;
-
-                    CPhysicActor* l_MeshActor = new CPhysicActor(l_pPhysicUserDataMesh);
-                    l_pPhysicUserDataMesh->SetPaint (true);
-
-                    l_MeshActor->AddBoxShape(size, pxBox->GetPosition(), Math::Vect3f(0, 0, 0), rotationVect, NULL, (uint32)pxObj->m_Group);
-
-                    PhysXMInstance->AddPhysicActor(l_MeshActor);
+                        PhysXMInstance->AddPhysicActor(l_MeshActor);
+                    }
                 }
             }
         }
     }
     else
     {
-        return false;
+        lOk = false;
     }
 
-    return true;
+    return lOk;
 }

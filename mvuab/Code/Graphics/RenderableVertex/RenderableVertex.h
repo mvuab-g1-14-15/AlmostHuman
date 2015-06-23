@@ -15,16 +15,16 @@ class CRenderableVertexs
         LPDIRECT3DINDEXBUFFER9 m_IB;
 
         size_t m_IndexCount;
-		size_t m_VertexCount;
+        size_t m_VertexCount;
 
     public:
         CRenderableVertexs()
         {
-			m_IndexCount = 0;
-			m_VertexCount = 0;
+            m_IndexCount = 0;
+            m_VertexCount = 0;
         }
 
-        virtual ~CRenderableVertexs() 
+        virtual ~CRenderableVertexs()
         {
             CHECKED_RELEASE(m_IB);
             CHECKED_RELEASE(m_VB);
@@ -42,7 +42,8 @@ class CRenderableVertexs
 
         virtual inline unsigned short GetVertexType() const = 0;
 
-        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount) = 0; 
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount,
+                            int minVertexIndex, int verticesCount, int startIndex, int facesCount) = 0;
         virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique) = 0;
         virtual bool Render(CGraphicsManager *GM) = 0;
 

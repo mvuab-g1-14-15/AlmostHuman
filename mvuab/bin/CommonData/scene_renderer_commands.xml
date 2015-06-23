@@ -27,7 +27,7 @@
 	
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="true" render_triggers="true"/>
+	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/>
 	<!--render_scene layer="glow" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/-->
@@ -65,8 +65,8 @@
 	
 	<render_billboards/>
 	<render_particules/>
-	<render_editors/>
-	<!--<render_triggers/>-->
+	<!--<render_editors/>
+	<render_triggers/>-->
 	<render_gizmos render="true"/>
 	<render_process/>
 	
@@ -99,7 +99,7 @@
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
 	
-	<render_gui render="true"/>
+	<render_gui render="false"/>
 	
 	<render_developer_info/>
 	

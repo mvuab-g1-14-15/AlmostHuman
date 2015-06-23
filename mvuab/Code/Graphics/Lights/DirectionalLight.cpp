@@ -25,8 +25,8 @@ CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
 {
     const Math::Vect3f& lLookAt = node.GetVect3fProperty( "look_at", Math::Vect3f( 0, 0, 0 ) );
     m_Direction = (lLookAt - m_Position).GetNormalized();
-    m_OrthoShadowMapSize.x = node.GetFloatProperty( "shadow_map_width", 0 );
-    m_OrthoShadowMapSize.y = node.GetFloatProperty( "shadow_map_height", 0 );
+    m_OrthoShadowMapSize.x = node.GetAttribute<float>( "shadow_map_width", 0 );
+    m_OrthoShadowMapSize.y = node.GetAttribute<float>( "shadow_map_height", 0 );
     SetType( CLight::DIRECTIONAL );
 }
 

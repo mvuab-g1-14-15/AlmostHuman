@@ -46,7 +46,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mIsLoop             = atts.GetBoolProperty("loop", false );
     mIsInmortal         = !mIsLoop;
     mIsActive           = atts.GetBoolProperty("active", false );
-    mMaxParticles       = atts.GetIntProperty("max_particles", 0);
+    mMaxParticles       = atts.GetAttribute<int32>("max_particles", 0);
     mTimeToEmit         = atts.GetVect2fProperty("time_to_emit", Math::Vect2f(1.0f, 1.0f));
     mTimeToLive         = atts.GetVect2fProperty("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize               = atts.GetVect2fProperty("particle_size_range", 0.0f );

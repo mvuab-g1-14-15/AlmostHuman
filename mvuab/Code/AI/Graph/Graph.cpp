@@ -66,7 +66,7 @@ bool CGraph::Parse(const std::string &file)
 
         if( l_TagName == "node" )
         {
-            int l_Id = l_TreeNode(i).GetIntProperty("id", -1);
+            int l_Id = l_TreeNode(i).GetAttribute<int32>("id", -1);
             Math::Vect3f l_Vect3f = l_TreeNode(i).GetVect3fProperty("pos", Math::Vect3f());
 
             m_NodeInfo.push_back(l_Vect3f);
@@ -74,9 +74,9 @@ bool CGraph::Parse(const std::string &file)
 
         if( l_TagName == "weight" )
         {
-            int l_Src = l_TreeNode(i).GetIntProperty("src"  , 0);
-            int l_Dst = l_TreeNode(i).GetIntProperty("dst"  , 0);
-            int l_Val = l_TreeNode(i).GetIntProperty("value", 0);
+            int l_Src = l_TreeNode(i).GetAttribute<int32>("src"  , 0);
+            int l_Dst = l_TreeNode(i).GetAttribute<int32>("dst"  , 0);
+            int l_Val = l_TreeNode(i).GetAttribute<int32>("value", 0);
 
             m_GraphGrid[l_Src][l_Dst] = l_Val;
         }

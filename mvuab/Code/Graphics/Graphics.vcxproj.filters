@@ -598,6 +598,9 @@
     <ClInclude Include="SceneRenderComands\EditorsRendererCmd.h">
       <Filter>SceneRenderComands\Editors</Filter>
     </ClInclude>
+    <ClInclude Include="RenderableVertex\InstancingVertexs.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">

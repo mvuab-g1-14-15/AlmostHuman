@@ -32,10 +32,10 @@ CLight::CLight()
 
 CLight::CLight( const CXMLTreeNode& node )
     : CObject3D( node ), CName( node.GetPszProperty( "name", "" ) )
-    , m_StartRangeAttenuation( node.GetFloatProperty( "att_start_range", 0 ) )
-    , m_EndRangeAttenuation( node.GetFloatProperty( "att_end_range", 0 ) )
+    , m_StartRangeAttenuation( node.GetAttribute<float>( "att_start_range", 0 ) )
+    , m_EndRangeAttenuation( node.GetAttribute<float>( "att_end_range", 0 ) )
     , m_Color( node.GetVect3fProperty( "color", Math::Vect3f( 1, 1, 1 ) ) )
-    , m_Intensity( node.GetFloatProperty( "intensity", 0 ) )
+    , m_Intensity( node.GetAttribute<float>( "intensity", 0 ) )
     , m_RenderShadows( node.GetBoolProperty( "render_shadows", false ) )
     , m_ViewShadowMap( Math::m44fIDENTITY )
     , m_ProjectionShadowMap( Math:: m44fIDENTITY )
@@ -64,7 +64,9 @@ CLight::CLight( const CXMLTreeNode& node )
             const std::string& l_ShadowMaskTextureFile = node.GetPszProperty( "shadow_texture_mask", "" );
 
             if ( l_ShadowMaskTextureFile != "" )
+            {
                 m_ShadowMaskTexture = TextureMInstance->GetTexture( l_ShadowMaskTextureFile );
+            }
 
             for ( uint32 iShadows = 0, lShadowsCount = lNode.GetNumChildren(); iShadows < lShadowsCount; ++iShadows )
             {
@@ -216,10 +218,14 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect *Effect )
         }
 
         if ( mStaticShadowMap )
+        {
             lUseStaticShadowMap = mStaticShadowMap->Activate();
+        }
 
         if ( mDynamicShadowMap )
+        {
             lUseDynamicShadowMap = mDynamicShadowMap->Activate();
+        }
 
         Effect->SetShadowMapParameters( lUseMaskShadowMap, lUseStaticShadowMap, lUseDynamicShadowMap );
     }

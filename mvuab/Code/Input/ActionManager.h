@@ -10,59 +10,65 @@
 #include "InputManager.h"
 #include "Utils\SingletonPattern.h"
 
-typedef struct S_INPUT_ACTION
+struct SInputActions
 {
-    S_INPUT_ACTION::S_INPUT_ACTION(): m_DeviceType(IDV_NOTHING), m_EventType(EVENT_NOTHING),
-                            m_AxisType(AXIS_NOTHING), m_Code(MOUSE_BUTTON_NOTHING), m_fDelta(1.f),
-                            m_sDeviceType(""), m_sEventType(""), m_sAxisType(""), m_sCode("") {}
+    EInputDeviceType        m_DeviceType;
+    EInputEventType         m_EventType;
+    EInputAxisType          m_AxisType;
 
-    INPUT_DEVICE_TYPE       m_DeviceType;
-    INPUT_EVENT_TYPE        m_EventType;
-    INPUT_AXIS_TYPE         m_AxisType;
-
-    unsigned int            m_Code;
-    float                   m_fDelta;
+    uint32                  m_Code;
+    float32                 m_fDelta;
 
     std::string             m_sDeviceType;
     std::string             m_sAxisType;
     std::string             m_sEventType;
     std::string             m_sCode;
 
-} S_INPUT_ACTION;
+};
 
-typedef std::vector<S_INPUT_ACTION> VecInputs;
+struct SActionDone
+{
+    bool mIsActionDone;
+    float32 mActionAmount;
+};
+
+typedef std::vector<SInputActions> TInputsVector;
 
 class CActionManager : public CManager
 {
-public:
-    CActionManager  ();
-	CActionManager  ( CXMLTreeNode& atts );
-    ~CActionManager ();
+    public:
+        CActionManager  ();
+        CActionManager  ( CXMLTreeNode& atts );
+        ~CActionManager ();
 
-    void Init       ( );
- 
-    bool Reload     ();
-    bool LoadXML    ();
-    bool SaveXML    (const std::string &xmlFile);
+        void Init         ();
+        void ProcessInputs();
 
-    bool DoAction   (const std::string &action);
-    bool DoAction   (const std::string &action, float32 &amount);
+        bool Reload       ();
+        bool LoadXML      ();
+        bool SaveXML      (const std::string &xmlFile);
 
-    void SetAction  (const std::string &action, VecInputs &a_vInputs);
+        bool DoAction     (const std::string &action);
+        bool DoAction     (const std::string &action, float32 &amount);
 
-    void Update     ();
-	void Render		(){};
-    void Destroy    ();
-private:
-    typedef std::map<std::string, std::vector<S_INPUT_ACTION>> MapActions;
-    MapActions m_mActions;
-    CInputManager *m_pInputManager;
-    std::string  m_ActionsPath;
+        void SetAction    (const std::string &action, TInputsVector &a_vInputs);
 
-    INPUT_DEVICE_TYPE    strDeviceToCode    (const std::string &strAction);
-    INPUT_AXIS_TYPE        strAxisToCode    (const std::string &strAxis);
-    INPUT_EVENT_TYPE    strEventToCode    (const std::string &strEvent);
-    unsigned int        strKeyToCode    (const std::string &strKey);
+        void Update       ();
+        void Render       () {};
+        void Destroy      ();
+    private:
+
+        typedef std::map<std::string, std::vector<SInputActions>> MapActions;
+        typedef std::map< std::string, SActionDone > MapActionsDone;
+
+        MapActionsDone      mDoActions;
+        MapActions          mActions;
+        CInputManager*      mInputManager;
+
+        EInputDeviceType   strDeviceToCode    (const std::string &strAction);
+        EInputAxisType     strAxisToCode      (const std::string &strAxis);
+        EInputEventType    strEventToCode     (const std::string &strEvent);
+        unsigned int        strKeyToCode       (const std::string &strKey);
 
 };
 

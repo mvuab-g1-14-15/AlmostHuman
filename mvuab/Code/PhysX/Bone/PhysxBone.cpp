@@ -97,7 +97,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     float l_fDensity;
 
     l_szName                  = _XMLObjects.GetPszISOProperty("name" , "");
-    l_fDensity            = _XMLObjects.GetFloatProperty("density");
+    l_fDensity            = _XMLObjects.GetAttribute<float>("density");
     l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point", Math::Vect3f(0.0f), false);
     l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size", Math::Vect3f(0.0f), false);
 
@@ -135,7 +135,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     float l_fDensity;
 
     l_szName                  = _XMLObjects.GetPszISOProperty("name" , "");
-    l_fDensity            = _XMLObjects.GetFloatProperty("density");
+    l_fDensity            = _XMLObjects.GetAttribute<float>("density");
     l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point", Math::Vect3f(0.0f), false);
     l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size", Math::Vect3f(0.0f), false);
 

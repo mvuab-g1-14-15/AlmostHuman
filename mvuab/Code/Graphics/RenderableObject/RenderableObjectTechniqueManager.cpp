@@ -30,49 +30,53 @@ void CRenderableObjectTechniqueManager::Destroy()
 
 void CRenderableObjectTechniqueManager::Init()
 {
-  Load( mConfigPath.c_str() );
+    Load( mConfigPath.c_str() );
 }
 
 void CRenderableObjectTechniqueManager::Load(const std::string& aFile)
 {
-  CXMLTreeNode TreeNode, lPoolXml;
-  if ( !lPoolXml.LoadAndFindNode(aFile.c_str(), "renderable_object_techniques", TreeNode ) )
-    return;
-
-  for (int i = 0; i < TreeNode.GetNumChildren(); ++i)
-  {
-    CXMLTreeNode& l_PoolNode = TreeNode(i);
-    const std::string& TagName = l_PoolNode.GetName();
-
-    if (TagName == "pool_renderable_object_technique")
+    CXMLTreeNode TreeNode, lPoolXml;
+    if ( !lPoolXml.LoadAndFindNode(aFile.c_str(), "renderable_object_techniques", TreeNode ) )
     {
-      CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_PoolNode);
-      if(!m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(), PoolRenderableObjectTechnique))
-      {
-          CHECKED_DELETE(PoolRenderableObjectTechnique);
-          continue;
-      }
+        return;
+    }
 
-      for (int j = 0; j < l_PoolNode.GetNumChildren(); ++j )
-      {
-        const std::string& SubTagName = l_PoolNode(j).GetName();
-        if (SubTagName == "default_technique")
+    for (int i = 0; i < TreeNode.GetNumChildren(); ++i)
+    {
+        CXMLTreeNode& l_PoolNode = TreeNode(i);
+        const std::string& TagName = l_PoolNode.GetName();
+
+        if (TagName == "pool_renderable_object_technique")
         {
-          const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(j).GetIntProperty("vertex_type", 0));
-          const std::string& l_TechniqueName = l_PoolNode(j).GetPszProperty("technique", "");
+            CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_PoolNode);
+            if(!m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(),
+                    PoolRenderableObjectTechnique))
+            {
+                CHECKED_DELETE(PoolRenderableObjectTechnique);
+                continue;
+            }
 
-          InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
-          PoolRenderableObjectTechnique->AddElement(l_VertexTypeStr, l_TechniqueName, GetResource(l_VertexTypeStr));
+            for (int j = 0; j < l_PoolNode.GetNumChildren(); ++j )
+            {
+                const std::string& SubTagName = l_PoolNode(j).GetName();
+                if (SubTagName == "default_technique")
+                {
+                    const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(
+                            j).GetAttribute<int32>("vertex_type", 0));
+                    const std::string& l_TechniqueName = l_PoolNode(j).GetPszProperty("technique", "");
+
+                    InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
+                    PoolRenderableObjectTechnique->AddElement(l_VertexTypeStr, l_TechniqueName, GetResource(l_VertexTypeStr));
+                }
+            }
+
+
         }
-      }
-
-      
+        else if( TagName == "pool")
+        {
+            Load(l_PoolNode.GetPszProperty("file"));
+        }
     }
-    else if( TagName == "pool")
-    {
-      Load(l_PoolNode.GetPszProperty("file"));
-    }
-  }
 }
 
 std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameByVertexType(uint32 VertexType )

@@ -14,7 +14,7 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node )
     , mLayer( node.GetPszProperty("layer", "static") )
     , mFormatType( CTexture::eR32F )
     , mSize( node.GetVect2iProperty("size", Math::Vect2i(0, 0) ) )
-    , mStage( node.GetIntProperty("stage", 5 ) )
+    , mStage( node.GetAttribute<int32>("stage", 5 ) )
 {
     mFormatType = mTexture->GetFormatTypeFromString( node.GetPszProperty( "format_type", "" ) );
 
