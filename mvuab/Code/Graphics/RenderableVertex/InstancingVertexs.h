@@ -35,31 +35,36 @@ class CInstancingVertexs : public CRenderableVertex
             m_InstanceB->Unlock();
         }
 
-        void SetInstanceNumber(int instanceNumber)
+        CInstancingVertexs
+        (
+            CGraphicsManager *GM,
+            void *VertexAddress,
+            void *IndexAddres,
+            size_t VertexCount,
+            size_t IndexCount,
+            size_t InstanceNumber
+        )
         {
-            m_InstancesNumber = instanceNumber;
-        }
+            if ( IndexCount != 0 || VertexCount != 0 )
+            {
+                void* l_memSrcV = 0;
+                void* l_memSrcI = 0;
+                m_IndexCount = IndexCount;
+                m_VertexCount = VertexCount;
+                m_InstancesNumber = InstanceNumber;
+                GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_IB, 0 );
+                GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
 
-        void CreateInstanceBuffer(CGraphicsManager *RM)
-        {
-            RM->GetDevice()->CreateVertexBuffer(GetInstanceSize() * m_InstancesNumber, 0, 0, D3DPOOL_MANAGED, &m_InstanceB, 0);
-        }
+                m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
+                memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
+                m_VB->Unlock();
 
-        CInstancingVertexs(CGraphicsManager *RM, void *VertexAddress, void *IndexAddres, size_t VertexCount, size_t IndexCount)
-        {
-            m_InstanceB = 0;
-            RM->GetDevice()->CreateVertexBuffer(GetVertexSize() * VertexCount, 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0);
-            RM->GetDevice()->CreateIndexBuffer(GetIndexSize() * IndexCount, 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_IB, 0);
-            m_IndexCount = IndexCount;
-            m_VertexCount = VertexCount;
-            void *vb_data;
-            void *ib_data;
-            m_VB->Lock(0, GetVertexSize()* VertexCount, &vb_data, 0);
-            memcpy(vb_data, VertexAddress, GetVertexSize() * VertexCount);
-            m_VB->Unlock();
-            m_IB->Lock(0, GetIndexSize() * IndexCount, &ib_data, 0);
-            memcpy(ib_data, IndexAddres, GetIndexSize() * IndexCount);
-            m_IB->Unlock();
+                m_IB->Lock( 0, IndexCount * GetIndexSize(), &l_memSrcI, 0 );
+                memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
+                m_IB->Unlock();
+
+                GM->GetDevice()->CreateVertexBuffer(GetInstanceSize() * InstanceNumber, 0, 0, D3DPOOL_MANAGED, &m_InstanceB, 0);
+            }
         }
         ~CInstancingVertexs()
         {
@@ -67,11 +72,11 @@ class CInstancingVertexs : public CRenderableVertex
         }
         bool Render(CGraphicsManager *RM)
         {
-            HRESULT m_ok = RM->GetDevice()->SetStreamSource(0, m_VB, 0, GetVertexSize());
-            m_ok = RM->GetDevice()->SetIndices(m_IB);
-            m_ok = RM->GetDevice()->SetFVF(T::GetFVF());
-            m_ok = RM->GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3);
-            return m_ok == S_OK;
+            HRESULT lOk = GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
+            lOk = GM->GetDevice()->SetIndices( m_IB );
+            lOk = GM->GetDevice()->SetFVF( T::GetFVF() );
+            lOk = GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 );
+            return lOk == S_OK;
         }
         bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique, int baseVertex = 0, int MinVertex = 0,
                     int NumVertex = -1, int StartIndex = 0, int IndexCount = -1) const
@@ -85,21 +90,24 @@ class CInstancingVertexs : public CRenderableVertex
             {
                 l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
                 // Setting the first stream source and frequency
-                l_Device->SetStreamSource(0, m_VB, 0, sizeof(T));
+                l_Device->SetStreamSource(0, m_VB, 0, GetVertexSize());
                 l_Device->SetStreamSourceFreq(0, D3DSTREAMSOURCE_INDEXEDDATA | m_InstancesNumber);
                 // Setting the second stream source and frequency
-                l_Device->SetStreamSource(1, m_InstanceB, 0, sizeof(TPARTICLE_VERTEX_INSTANCE));
+                l_Device->SetStreamSource(1, m_InstanceB, 0, GetInstanceSize());
                 l_Device->SetStreamSourceFreq(1, D3DSTREAMSOURCE_INSTANCEDATA | 1ul);
                 l_Device->SetIndices(m_IB);
                 for (UINT b = 0; b < l_NumPasses; ++b)
                 {
                     l_Effect->BeginPass(b);
-                    l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST,
-                                                    baseVertex,
-                                                    MinVertex,
-                                                    NumVertex == -1 ? (UINT)m_VertexCount : (UINT)NumVertex,
-                                                    StartIndex,
-                                                    IndexCount == -1 ? (UINT) m_IndexCount / 3 : (UINT)IndexCount / 3);
+                    l_Device->DrawIndexedPrimitive
+                    (
+                        D3DPT_TRIANGLELIST,
+                        baseVertex,
+                        MinVertex,
+                        NumVertex == -1 ? (UINT)m_VertexCount : (UINT)NumVertex,
+                        StartIndex,
+                        IndexCount == -1 ? (UINT) m_IndexCount / 3 : (UINT)IndexCount / 3
+                    );
                     l_Effect->EndPass();
                 }
                 l_Effect->End();

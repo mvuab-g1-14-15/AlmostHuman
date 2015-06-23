@@ -50,36 +50,16 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
 
         virtual bool Render( CGraphicsManager* GM )
         {
-            LARGE_INTEGER l_timeFreq, l_lastTime, l_actualTime;
-            QueryPerformanceCounter(&l_lastTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-
-            CGPUStatics::GetSingletonPtr()->AddVertexCount( m_VertexCount );
-            CGPUStatics::GetSingletonPtr()->AddFacesCount( m_IndexCount / 3 );
-            CGPUStatics::GetSingletonPtr()->AddDrawCount( 1 );
-
-            GM->GetDevice()->SetIndices( m_IB );
-            GM->GetDevice()->SetFVF( T::GetFVF() );
-            GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
-
-            GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 );
-
-            QueryPerformanceCounter(&l_actualTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-            double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
-            CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-
-            return ( true );
+            HRESULT lOk = GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
+            lOk = GM->GetDevice()->SetIndices( m_IB );
+            lOk = GM->GetDevice()->SetFVF( T::GetFVF() );
+            lOk = GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 );
+            return lOk == S_OK;
         }
 
         virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount,
                              int minVertexIndex, int verticesCount, int startIndex, int facesCount )
         {
-
-            LARGE_INTEGER l_timeFreq, l_lastTime, l_actualTime;
-            QueryPerformanceCounter(&l_lastTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
@@ -87,17 +67,8 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
             if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
             {
-                QueryPerformanceCounter(&l_actualTime);
-                QueryPerformanceFrequency(&l_timeFreq);
-                double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
-                CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-
                 return false;
             }
-
-            CGPUStatics::GetSingletonPtr()->AddVertexCount( verticesCount );
-            CGPUStatics::GetSingletonPtr()->AddFacesCount( facesCount );
-            CGPUStatics::GetSingletonPtr()->AddDrawCount( l_NumPasses );
 
             l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
             l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
@@ -112,21 +83,11 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             }
 
             l_Effect->End();
-
-            QueryPerformanceCounter(&l_actualTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-            double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
-            CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-
             return ( true );
         }
 
         bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique )
         {
-            LARGE_INTEGER l_timeFreq, l_lastTime, l_actualTime;
-            QueryPerformanceCounter(&l_lastTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-
             EffectTechnique->BeginRender();
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
@@ -135,17 +96,8 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             l_Effect->SetTechnique( EffectTechnique->GetD3DTechnique() );
             if ( FAILED( l_Effect->Begin( &l_NumPasses, 0 ) ) )
             {
-                QueryPerformanceCounter(&l_actualTime);
-                QueryPerformanceFrequency(&l_timeFreq);
-                double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
-                CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
-
                 return false;
             }
-
-            CGPUStatics::GetSingletonPtr()->AddVertexCount( m_VertexCount );
-            CGPUStatics::GetSingletonPtr()->AddFacesCount( m_IndexCount / 3 );
-            CGPUStatics::GetSingletonPtr()->AddDrawCount( l_NumPasses );
 
             l_Device->SetVertexDeclaration( T::GetVertexDeclaration() );
             l_Device->SetStreamSource( 0, m_VB, 0, sizeof( T ) );
@@ -159,11 +111,6 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             }
 
             l_Effect->End();
-
-            QueryPerformanceCounter(&l_actualTime);
-            QueryPerformanceFrequency(&l_timeFreq);
-            double t = (double) (l_actualTime.QuadPart - l_lastTime.QuadPart) / (double) l_timeFreq.QuadPart;
-            CGPUStatics::GetSingletonPtr()->AddTime((float) t * 1000.0f);
 
             return true;
         }
