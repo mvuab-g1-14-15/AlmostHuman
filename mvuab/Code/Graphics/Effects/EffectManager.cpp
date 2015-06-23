@@ -133,69 +133,72 @@ void CEffectManager::Init()
 
 void CEffectManager::Load( const std::string& lFile )
 {
-  CXMLTreeNode l_Node, lEffectsXml;
-  if ( !lEffectsXml.LoadAndFindNode(lFile.c_str(), "effects", l_Node ) )
-    return;
-
-  for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
-  {
-    CXMLTreeNode& l_CurrentNode = l_Node( i );
-    const std::string& l_TagName = l_CurrentNode.GetName();
-
-  
-    if ( l_TagName == "technique" )
+    CXMLTreeNode l_Node, lEffectsXml;
+    if ( !lEffectsXml.LoadAndFindNode(lFile.c_str(), "effects", l_Node ) )
     {
-      const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );
-      int l_VertexType = l_CurrentNode.GetIntProperty( "vertex_type" );
-      std::string l_EffectName;
-      CXMLTreeNode l_HandlesNode;
-
-      for ( int j = 0; j < l_CurrentNode.GetNumChildren(); j++ )
-      {
-        CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-        const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-        if ( l_TagName == "effect" )
-        {
-          l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
-          CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
-          l_pEffect = new CEffect( l_EffectName );
-
-          if ( !l_pEffect->Load( l_CurrentSubNode ) )
-          {
-            std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-            LOG_ERROR_APPLICATION( msg_error.c_str() );
-            CHECKED_DELETE( l_pEffect );
-          }
-          else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
-          {
-            CHECKED_DELETE( l_pEffect );
-          }
-        }
-        else if ( l_TagName == "handles" )
-        {
-          l_HandlesNode = l_CurrentSubNode;
-        }
-      }
-
-      CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
-
-      if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
-      {
-        LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!", l_TechniquetName.c_str(), l_EffectName.c_str() );
-        CHECKED_DELETE( l_NewTechnique );
-      }
-
-      if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
-      {
-        m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
-      }
+        return;
     }
-    else if ( l_TagName == "effect" )
+
+    for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
     {
-      Load(l_CurrentNode.GetPszProperty("file"));
+        CXMLTreeNode& l_CurrentNode = l_Node( i );
+        const std::string& l_TagName = l_CurrentNode.GetName();
+
+
+        if ( l_TagName == "technique" )
+        {
+            const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );
+            int l_VertexType = l_CurrentNode.GetAttribute<int32>( "vertex_type", 0 );
+            std::string l_EffectName;
+            CXMLTreeNode l_HandlesNode;
+
+            for ( int j = 0; j < l_CurrentNode.GetNumChildren(); j++ )
+            {
+                CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
+                const std::string& l_TagName = l_CurrentSubNode.GetName();
+
+                if ( l_TagName == "effect" )
+                {
+                    l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
+                    CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
+                    l_pEffect = new CEffect( l_EffectName );
+
+                    if ( !l_pEffect->Load( l_CurrentSubNode ) )
+                    {
+                        std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
+                        LOG_ERROR_APPLICATION( msg_error.c_str() );
+                        CHECKED_DELETE( l_pEffect );
+                    }
+                    else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
+                    {
+                        CHECKED_DELETE( l_pEffect );
+                    }
+                }
+                else if ( l_TagName == "handles" )
+                {
+                    l_HandlesNode = l_CurrentSubNode;
+                }
+            }
+
+            CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
+
+            if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
+            {
+                LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!",
+                                       l_TechniquetName.c_str(), l_EffectName.c_str() );
+                CHECKED_DELETE( l_NewTechnique );
+            }
+
+            if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
+            {
+                m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
+            }
+        }
+        else if ( l_TagName == "effect" )
+        {
+            Load(l_CurrentNode.GetPszProperty("file"));
+        }
     }
-  }
 }
 
 void CEffectManager::ReloadEffects()

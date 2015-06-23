@@ -6,7 +6,7 @@
 
 CPatrolEnemy::CPatrolEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
     : CEnemy( Node, aStateMachine ), m_CurrentPoint( 0 )
-    , m_RouteId(Node.GetIntProperty("route", -1))
+    , m_RouteId(Node.GetAttribute<int32>("route", -1))
 {
 }
 
@@ -18,7 +18,7 @@ CPatrolEnemy::~CPatrolEnemy( void )
 
 void CPatrolEnemy::Init()
 {
-	CEnemy::Init();
+    CEnemy::Init();
 }
 
 void CPatrolEnemy::Update( )

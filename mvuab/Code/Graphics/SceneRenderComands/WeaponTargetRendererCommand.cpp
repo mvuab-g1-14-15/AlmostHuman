@@ -15,7 +15,7 @@
 
 CWeaponTargetRendererCommand::CWeaponTargetRendererCommand( CXMLTreeNode& atts )
     : CDrawQuadRendererCommand( atts )
-    , mGizmoSize(atts.GetIntProperty("size", 20 ))
+    , mGizmoSize(atts.GetAttribute<int32>("size", 20 ))
 {
     CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
     std::string l_TechniqueName = lROTM->GetRenderableObjectTechniqueNameByVertexType(

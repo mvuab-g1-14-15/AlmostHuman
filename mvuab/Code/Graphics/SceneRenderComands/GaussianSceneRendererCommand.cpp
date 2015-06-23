@@ -16,7 +16,7 @@ CGaussianSceneRendererCommand::CGaussianSceneRendererCommand(CXMLTreeNode& atts 
     : CStagedTexturedRendererCommand( atts )
     , m_Width( 0 )
     , m_Height( 0 )
-    , mIterations( atts.GetIntProperty("iterations", 0) )
+    , mIterations( atts.GetAttribute<int32>("iterations", 0) )
 {
     // Check the correct status of the command
     ASSERT( !m_StageTextures[0].mIsDynamic, "The first texture of the command must be a static texture" );
@@ -48,8 +48,8 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_EffectTech->SetTextureSize(m_Width, m_Height);
     l_EffectTech->SetUseTextureSize(true);
 
-	// Set the depht texture
-	m_StageTextures[1].m_Texture->Activate( m_StageTextures[1].m_StageId );
+    // Set the depht texture
+    m_StageTextures[1].m_Texture->Activate( m_StageTextures[1].m_StageId );
 
     m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),

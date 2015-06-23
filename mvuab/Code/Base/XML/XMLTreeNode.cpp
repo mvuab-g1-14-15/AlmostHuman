@@ -6,6 +6,21 @@
 // Defines
 #define MY_ENCODING "ISO-8859-1"
 
+//-----------------------------------------------------------------------------------------------------------------------------------------
+CXMLTreeNode::CXMLTreeNode()
+    : m_bIsOk( false )
+    , m_pDoc( NULL )
+    , m_pNode( NULL )
+    , m_pWriter( NULL )
+    , m_pszFileName( NULL )
+{}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+CXMLTreeNode::~CXMLTreeNode()
+{
+    Done();
+}
+
 //----------------------------------------------------------------------------
 // Finalize data
 //----------------------------------------------------------------------------
@@ -72,9 +87,9 @@ bool CXMLTreeNode::LoadFile( const char* _pszFileName )
     if ( _pszFileName )
     {
         m_pDoc = xmlParseFile( _pszFileName );
-		
-		xmlErrorPtr lError = xmlGetLastError();
-		ASSERT( !lError, "%s", ( const char* ) lError->message );
+
+        xmlErrorPtr lError = xmlGetLastError();
+        ASSERT( !lError, "%s", ( const char* ) lError->message );
 
         if ( m_pDoc )
         {
@@ -285,26 +300,41 @@ xmlChar* CXMLTreeNode::GetProperty( const char* _pszKey ) const
     return value;
 }
 
-
-//----------------------------------------------------------------------------
-// Returns an integer param if found. Else a default value
-//----------------------------------------------------------------------------
-int CXMLTreeNode::GetIntProperty( const char* _pszKey, int _iDefault, bool warningDefault ) const
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const bool CXMLTreeNode::GetAttribute<bool>( const char* aAttName, const bool& aDefaultAttValue ) const
 {
-    int iRet = _iDefault;
-    xmlChar* value = GetProperty( _pszKey );
+    xmlChar* value = GetProperty( aAttName );
+
+    bool lRtn( aDefaultAttValue );
 
     if ( value )
     {
-        iRet = atoi( ( const char* )value );
+        const char* pszValue = ( const char* )value;
+
+        lRtn = ( strcmp( "TRUE", pszValue ) == 0 ||
+                 strcmp( "true", pszValue ) == 0 ||
+                 strcmp( "True", pszValue ) == 0 );
     }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION( "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>",
-                                 _iDefault,
-                                 _pszKey );
 
     xmlFree( value );
-    return iRet;
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const int32 CXMLTreeNode::GetAttribute<int32>( const char* aAttName, const int32& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    int32 lRtn( aDefaultAttValue );
+
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%d", &lRtn );
+    }
+
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------

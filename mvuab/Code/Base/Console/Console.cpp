@@ -52,9 +52,9 @@ void CConsole::Init()
         ASSERT(false, "Error creating the console");
     }
 
-    SetMaxLinesInWindow( mConsoleNode.GetIntProperty("max_lines_in_window", 10 ) );
-    SetNumberOfLines(mConsoleNode.GetIntProperty("lines", 10 ) );
-    SetNumberOfColumns(mConsoleNode.GetIntProperty("columns", 10 ) );
+    SetMaxLinesInWindow( mConsoleNode.GetAttribute<int32>("max_lines_in_window", 10 ) );
+    SetNumberOfLines(mConsoleNode.GetAttribute<int32>("lines", 10 ) );
+    SetNumberOfColumns(mConsoleNode.GetAttribute<int32>("columns", 10 ) );
 
     // Redirect all to the console
     RedirectToConsole( 0 );

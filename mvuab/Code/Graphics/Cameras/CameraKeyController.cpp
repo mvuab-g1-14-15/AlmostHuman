@@ -64,8 +64,8 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
     }
 
     SetName( l_Node.GetPszProperty("name", "no_name") );
-    m_Cycle = (l_Node.GetIntProperty("cycle", 0) != 0);
-    m_Reverse = (l_Node.GetIntProperty("reverse", 0) != 0);
+    m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
+    m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
     m_TotalTime = l_Node.GetFloatProperty("total_time", 0.0f);
 
     for(int i = 0; i < l_Node.GetNumChildren(); i++)
@@ -82,7 +82,9 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
 
     //Check that there are more than one key, in order to set the next key to 0
     if(m_Keys.size() == 1 )
-    { m_NextKey = 0; }
+    {
+        m_NextKey = 0;
+    }
 
     return true;
 }
@@ -132,7 +134,9 @@ void CCameraKeyController::Update()
 {
     // Check if the animation of the camera has finished
     if( m_Finish )
-    { return; }
+    {
+        return;
+    }
 
     if( m_PlayingBackward )
     {

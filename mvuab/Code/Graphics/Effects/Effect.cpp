@@ -55,9 +55,9 @@ CEffect::CEffect( const std::string& EffectName )
     , CTOR_EFFECT_PARAMETER( Alpha )
     , CTOR_EFFECT_PARAMETER( Color )
     , CTOR_EFFECT_PARAMETER( AmbientLightColor )
-	, CTOR_EFFECT_PARAMETER( WorldMatrix )
-	, CTOR_EFFECT_PARAMETER( ViewMatrix )
-	, CTOR_EFFECT_PARAMETER( ProjectionMatrix )
+    , CTOR_EFFECT_PARAMETER( WorldMatrix )
+    , CTOR_EFFECT_PARAMETER( ViewMatrix )
+    , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
 {
     ResetLightsHandle();
 }
@@ -120,13 +120,13 @@ void CEffect::SetNullParameters()
 
     RESET_EFFECT_PARAMETER( AmbientLightColor )
 
-	RESET_EFFECT_PARAMETER( WorldMatrix );
-	RESET_EFFECT_PARAMETER( ViewMatrix );
-	RESET_EFFECT_PARAMETER( ProjectionMatrix );
+    RESET_EFFECT_PARAMETER( WorldMatrix );
+    RESET_EFFECT_PARAMETER( ViewMatrix );
+    RESET_EFFECT_PARAMETER( ProjectionMatrix );
 
-	RESET_EFFECT_PARAMETER( InverseWorldMatrix );
-	RESET_EFFECT_PARAMETER( InverseViewMatrix );
-	RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
+    RESET_EFFECT_PARAMETER( InverseWorldMatrix );
+    RESET_EFFECT_PARAMETER( InverseViewMatrix );
+    RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
 
     ResetLightsHandle();
 }
@@ -135,8 +135,8 @@ void CEffect::LinkSemantics()
 {
     // Get the references to the handlers inside the effect
     LINK_EFFECT_PARAMETER( WorldMatrix );
-	LINK_EFFECT_PARAMETER( ViewMatrix );
-	LINK_EFFECT_PARAMETER( ProjectionMatrix );
+    LINK_EFFECT_PARAMETER( ViewMatrix );
+    LINK_EFFECT_PARAMETER( ProjectionMatrix );
     LINK_EFFECT_PARAMETER( Size  );
     LINK_EFFECT_PARAMETER( Angle );
     LINK_EFFECT_PARAMETER( Alpha );
@@ -302,8 +302,8 @@ bool CEffect::SetLights( size_t NumOfLights )
             m_LightsPosition[i] = l_pCurrentLight->GetPosition();
             Math::CColor l_Color = l_pCurrentLight->GetColor();
             m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() ,
-                                                l_Color.GetGreen() ,
-                                                l_Color.GetBlue() );
+                                             l_Color.GetGreen() ,
+                                             l_Color.GetBlue() );
 
             if ( l_LightType == CLight::DIRECTIONAL )
             {
@@ -332,30 +332,30 @@ bool CEffect::SetLight( size_t i_light )
     CLight* lLight = LightMInstance->GetLight( i_light );
 
     if ( lLight )
-	{
-		m_LightsEnabled[0] = ( BOOL )lLight == NULL ? 0 : 1;
-		m_LightsType[0] = static_cast<int>( lLight->GetType() );
-		m_LightsStartRangeAttenuation[0] = lLight->GetStartRangeAttenuation();
-		m_LightsEndRangeAttenuation[0] = lLight->GetEndRangeAttenuation();
-		m_LightsPosition[0] = lLight->GetPosition();
-		Math::CColor l_Color = lLight->GetColor();
-		m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(), l_Color.GetGreen(), l_Color.GetBlue() );
-		CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( lLight );
-		if ( l_pDirectionalLight )
-		{
-			m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
+    {
+        m_LightsEnabled[0] = ( BOOL )lLight == NULL ? 0 : 1;
+        m_LightsType[0] = static_cast<int>( lLight->GetType() );
+        m_LightsStartRangeAttenuation[0] = lLight->GetStartRangeAttenuation();
+        m_LightsEndRangeAttenuation[0] = lLight->GetEndRangeAttenuation();
+        m_LightsPosition[0] = lLight->GetPosition();
+        Math::CColor l_Color = lLight->GetColor();
+        m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(), l_Color.GetGreen(), l_Color.GetBlue() );
+        CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( lLight );
+        if ( l_pDirectionalLight )
+        {
+            m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
 
-			CSpotLight* lSpotLight = dynamic_cast<CSpotLight*>( lLight );
-			if ( lSpotLight )
-			{
-				m_LightsAngle[0] = lSpotLight->GetAngle();
-				m_LightsFallOff[0] = lSpotLight->GetFallOff();
-			}
-		}
+            CSpotLight* lSpotLight = dynamic_cast<CSpotLight*>( lLight );
+            if ( lSpotLight )
+            {
+                m_LightsAngle[0] = lSpotLight->GetAngle();
+                m_LightsFallOff[0] = lSpotLight->GetFallOff();
+            }
+        }
 
-		//Begin the render of the shadow
-		lLight->BeginRenderEffectManagerShadowMap( this );
-	}
+        //Begin the render of the shadow
+        lLight->BeginRenderEffectManagerShadowMap( this );
+    }
     return true;
 }
 
@@ -374,11 +374,11 @@ bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
 }
 bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
 {
-	return S_OK == SET_MATRIX_PARAMETER( ViewMatrix, Matrix );
+    return S_OK == SET_MATRIX_PARAMETER( ViewMatrix, Matrix );
 }
 bool CEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
 {
-	return S_OK == SET_MATRIX_PARAMETER( ProjectionMatrix, Matrix );
+    return S_OK == SET_MATRIX_PARAMETER( ProjectionMatrix, Matrix );
 }
 bool CEffect::SetInverseWorldMatrix( const Math::Mat44f& Matrix )
 {
