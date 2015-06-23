@@ -47,7 +47,8 @@ void CCharacter::Init()
     m_Height = 2.0f;
     m_Radius = 0.2f;
     CPhysicsManager* l_PM = PhysXMInstance;
-    l_PM->AddController( m_Name, m_Radius, m_Height / 2.0f, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ), GetCollisionGroup(),
+    l_PM->AddController( m_Name, m_Radius, m_Height / 2.0f, 2.0f, 2.0f, 2.0f, Math::Vect3f( -10, 0.0, 10 ),
+                         GetCollisionGroup(),
                          -10.0 );
     m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
     SetPosition( m_Controller->GetPosition() );
@@ -59,13 +60,13 @@ void CCharacter::Init( CXMLTreeNode& Node )
 {
     m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
     CPhysicsManager* l_PM = PhysXMInstance;
-    l_PM->AddController( m_Name, Node.GetFloatProperty( "radius", 0.4f ),
-                         Node.GetFloatProperty( "height", 2.0f ),
-                         Node.GetFloatProperty( "slope", 0.2f ),
-                         Node.GetFloatProperty( "skin_width", 0.01f ),
-                         Node.GetFloatProperty( "step", 0.5f ),
+    l_PM->AddController( m_Name, Node.GetAttribute<float>( "radius", 0.4f ),
+                         Node.GetAttribute<float>( "height", 2.0f ),
+                         Node.GetAttribute<float>( "slope", 0.2f ),
+                         Node.GetAttribute<float>( "skin_width", 0.01f ),
+                         Node.GetAttribute<float>( "step", 0.5f ),
                          Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
-                         GetCollisionGroup(), Node.GetFloatProperty( "gravity", -10.0f ) );
+                         GetCollisionGroup(), Node.GetAttribute<float>( "gravity", -10.0f ) );
     m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
     SetPosition( m_Controller->GetPosition() );
     SetTargetPosition( m_Controller->GetPosition() );
@@ -87,14 +88,18 @@ void CCharacter::Move( Math::Vect3f direction, float dt )
     float l_PrevYaw = l_Yaw;
 
     if ( Math::Utils::Abs( l_YawDif ) < 0.1f )
+    {
         m_Controller->Move( direction * 2.0f, dt );
+    }
     else
     {
         m_Controller->Move( Math::Vect3f( 0.0f ), dt );
         l_Yaw += ( l_YawDif > 0 ? 1 : -1 ) * 1.0f * deltaTimeMacro;
 
         if ( ( l_Yaw < 0.0f && l_PrevYaw > 0.0f ) || ( l_Yaw > 0.0f && l_PrevYaw < 0.0f ) )
+        {
             l_Yaw = l_DirYaw;
+        }
     }
 
     m_Controller->SetYaw( l_Yaw );

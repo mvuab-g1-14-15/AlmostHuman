@@ -457,23 +457,6 @@ template<> const Math::Vect3f CXMLTreeNode::GetAttribute<Math::Vect3f>( const ch
     return lRtn;
 }
 
-float32 CXMLTreeNode::GetFloatProperty( const char* _pszKey, float32 _fDefault,
-                                        bool warningDefault ) const
-{
-    float32 fRet = _fDefault;
-    xmlChar* value = GetProperty( _pszKey );
-
-    if ( value )
-    {
-        fRet = static_cast<float32>( atof( ( const char* )value ) );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::Getfloat32Property se ha utilizado el valor por defecto:%f para el tag <%s>",
-                                _fDefault, _pszKey );
-
-    xmlFree( value );
-    return fRet;
-}
 //----------------------------------------------------------------------------
 // Returns a boolean param if found. Else a default value
 //----------------------------------------------------------------------------

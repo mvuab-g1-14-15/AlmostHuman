@@ -102,7 +102,7 @@ HRESULT CInputDevice::CrankUp(REFGUID rguid, LPCDIDATAFORMAT pdf, bool exclusive
          void*       - stores the data
          DWORD*      - stores a counter (mouse only)
 */
-HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData, DWORD *pdwNum)
+HRESULT CInputDevice::GetData(EInputDeviceType Type, void *pData, DWORD *pdwNum)
 {
     HRESULT hr = S_FALSE;
     size_t size = 0;
@@ -116,8 +116,14 @@ HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData, DWORD *pdwNum
     }
     else
     {
-        if (Type == IDV_KEYBOARD) { size = sizeof(char) * 256; }
-        else { size = sizeof(DIJOYSTATE); }
+        if (Type == IDV_KEYBOARD)
+        {
+            size = sizeof(char) * 256;
+        }
+        else
+        {
+            size = sizeof(DIJOYSTATE);
+        }
 
         hr = m_pDevice->GetDeviceState((DWORD)size, pData);
     }
@@ -130,11 +136,16 @@ HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData, DWORD *pdwNum
         {
             hr = m_pDevice->Acquire();
             while (hr == DIERR_INPUTLOST)
-            { hr = m_pDevice->Acquire(); }
+            {
+                hr = m_pDevice->Acquire();
+            }
 
             // if another application is using this input device
             // we have to give up and try next frame
-            if (hr == DIERR_OTHERAPPHASPRIO) { return S_OK; }
+            if (hr == DIERR_OTHERAPPHASPRIO)
+            {
+                return S_OK;
+            }
 
             // if we got back device then try again to read data
             if (SUCCEEDED(hr))
@@ -143,11 +154,19 @@ HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData, DWORD *pdwNum
                     hr = m_pDevice->GetDeviceData((DWORD)size, (DIDEVICEOBJECTDATA*)
                                                   pData, pdwNum, 0);
                 else
-                { hr = m_pDevice->GetDeviceState((DWORD)size, pData); }
+                {
+                    hr = m_pDevice->GetDeviceState((DWORD)size, pData);
+                }
             }
-            if (FAILED(hr)) { return S_FALSE; }
+            if (FAILED(hr))
+            {
+                return S_FALSE;
+            }
         }
-        else { return S_FALSE; }
+        else
+        {
+            return S_FALSE;
+        }
     }
     return S_OK;
 } // GetData

@@ -43,9 +43,9 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
 
       // Fog
       m_UseFog( HandlesNode.GetBoolProperty( "use_fog", false ) ),
-      m_FogStart( HandlesNode.GetFloatProperty( "fog_start", 0 ) ),
-      m_FogEnd( HandlesNode.GetFloatProperty( "fog_end", 0 ) ),
-      m_FogExp( HandlesNode.GetFloatProperty( "fog_exp", 0 ) ),
+      m_FogStart( HandlesNode.GetAttribute<float>( "fog_start", 0 ) ),
+      m_FogEnd( HandlesNode.GetAttribute<float>( "fog_end", 0 ) ),
+      m_FogExp( HandlesNode.GetAttribute<float>( "fog_exp", 0 ) ),
       m_FogFun( ( EFogFunction )HandlesNode.GetAttribute<int32>( "fog_fun", 1 ) ),
 
       // Texture

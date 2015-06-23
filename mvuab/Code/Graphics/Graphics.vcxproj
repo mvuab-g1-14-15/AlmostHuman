@@ -163,6 +163,7 @@
     <ClInclude Include="RenderableObject\RenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
+    <ClInclude Include="RenderableVertex\InstancingVertexs.h" />
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
     <ClInclude Include="SceneRenderComands\BeginRenderSceneRendererCommand.h" />

@@ -21,7 +21,7 @@ CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCi
         return;
     }
     m_Name = cinematic.GetPszProperty("name", "");
-    m_Duration = cinematic.GetFloatProperty("duration", 0.0f);
+    m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
     CCinematicObject* l_CinematicObject;
     for(int i = 0; i < cinematic.GetNumChildren(); ++i)
@@ -59,7 +59,7 @@ void CCinematic::LoadXML(const std::string &FileName)
         return;
     }
     m_Name = cinematic.GetPszProperty("name", "");
-    m_Duration = cinematic.GetFloatProperty("duration", 0.0f);
+    m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
     for(int i = 0; i < cinematic.GetNumChildren(); ++i)
     {
@@ -78,7 +78,9 @@ void CCinematic::Update()
 {
     std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(), it_end = m_CinematicObjects.end();
     for(; it != it_end; ++it)
-    { (*it)->Update(); }
+    {
+        (*it)->Update();
+    }
 }
 
 void CCinematic::Stop()

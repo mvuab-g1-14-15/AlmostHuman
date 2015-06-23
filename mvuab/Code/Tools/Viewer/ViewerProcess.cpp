@@ -90,11 +90,17 @@ std::string CViewerProcess::OpenPicker( std::string Extension = "" )
     ofn.nMaxFile = sizeof( szFile );
 
     if ( Extension == "mesh" )
+    {
         ofn.lpstrFilter = "mesh\0*.MESH\0";
+    }
     else if ( Extension == "xml" )
+    {
         ofn.lpstrFilter = "xml\0*.XML\0";
+    }
     else
+    {
         ofn.lpstrFilter = "*\0*.ALL\0";
+    }
 
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
@@ -104,7 +110,9 @@ std::string CViewerProcess::OpenPicker( std::string Extension = "" )
     int test = GetOpenFileName( &ofn );
 
     if ( test )
+    {
         return ofn.lpstrFile;
+    }
 
     return "";
 }
@@ -116,24 +124,26 @@ INT CALLBACK BrowseCallbackProc( HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData )
 
     switch ( uMsg )
     {
-    case BFFM_INITIALIZED:
-        if ( GetCurrentDirectory( sizeof( szDir ) / sizeof( TCHAR ), szDir ) )
-        {
-            int sze = strlen( szDir );
-            memcpy( szDir + sze, Data, strlen( Data ) + 1 );
-            szDir;
-            SendMessage( hwnd, BFFM_SETSELECTION, TRUE, ( LPARAM )szDir );
-        }
+        case BFFM_INITIALIZED:
+            if ( GetCurrentDirectory( sizeof( szDir ) / sizeof( TCHAR ), szDir ) )
+            {
+                int sze = strlen( szDir );
+                memcpy( szDir + sze, Data, strlen( Data ) + 1 );
+                szDir;
+                SendMessage( hwnd, BFFM_SETSELECTION, TRUE, ( LPARAM )szDir );
+            }
 
-        break;
+            break;
 
-    case BFFM_SELCHANGED:
+        case BFFM_SELCHANGED:
 
-        // Set the status window to the currently selected path.
-        if ( SHGetPathFromIDList( ( LPITEMIDLIST )lp, szDir ) )
-            SendMessage( hwnd, BFFM_SETSTATUSTEXT, 0, ( LPARAM )szDir );
+            // Set the status window to the currently selected path.
+            if ( SHGetPathFromIDList( ( LPITEMIDLIST )lp, szDir ) )
+            {
+                SendMessage( hwnd, BFFM_SETSTATUSTEXT, 0, ( LPARAM )szDir );
+            }
 
-        break;
+            break;
     }
 
     return 0;
@@ -289,10 +299,10 @@ void CViewerProcess::Update()
 void CViewerProcess::Render()
 {
     /*
-    uint32 lBaseGridSize = 500;
-    GraphicsInstance->DrawGrid( float32( lBaseGridSize ), CColor( 0.5f, 0.5f, 0.5f, 1.0f ), uint32( lBaseGridSize / 3 ),
+        uint32 lBaseGridSize = 500;
+        GraphicsInstance->DrawGrid( float32( lBaseGridSize ), CColor( 0.5f, 0.5f, 0.5f, 1.0f ), uint32( lBaseGridSize / 3 ),
                                 uint32( lBaseGridSize / 3 ) );
-                                */
+    */
 }
 
 void CViewerProcess::RenderScene2D( CGraphicsManager *GM, CFontManager *FM, float ElapsedTime, float FPS )

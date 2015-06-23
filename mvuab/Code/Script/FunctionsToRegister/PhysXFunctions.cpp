@@ -48,28 +48,38 @@ void Move_PhysicController( CPhysicController *PhysicController, const Math::Vec
     PhysicController->Move( DirectionConst, Dt );
 }
 
-float RaycastDistance( CPhysicsManager *PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask, float maxDist )
+float RaycastDistance( CPhysicsManager *PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask,
+                       float maxDist )
 {
     SCollisionInfo hit_info;
 
     if ( !PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist ) )
+    {
         return 0.0f;
+    }
 
     return hit_info.m_fDistance;
 }
 
-ECollisionGroup RaycastType( CPhysicsManager *PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask )
+ECollisionGroup RaycastType( CPhysicsManager *PhysicManager, Math::Vect3f position, Math::Vect3f direction,
+                             uint32 impactMask )
 {
     SCollisionInfo hit_info;
     CPhysicUserData *l_PUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info );
 
     if ( l_PUD )
         if ( l_PUD->GetController() )
+        {
             return l_PUD->GetController()->GetColisionGroup();
+        }
         else
+        {
             return l_PUD->GetMyCollisionGroup();
+        }
     else
+    {
         return ( ECollisionGroup ) - 1;
+    }
 }
 
 template<class T> size_t set_getIdByResource( std::set<T>& vec, T val )
@@ -79,7 +89,10 @@ template<class T> size_t set_getIdByResource( std::set<T>& vec, T val )
 
     for ( ; it != it_end ; ++it )
     {
-        if ( *it == val ) return i;
+        if ( *it == val )
+        {
+            return i;
+        }
 
         ++i;
     }
@@ -97,9 +110,11 @@ template<class T> T vector_get( std::vector<T>& vec, size_t i )
     return vec[i];
 }
 
-bool PlayerInSight( CPhysicsManager *PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction )
+bool PlayerInSight( CPhysicsManager *PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position,
+                    const Math::Vect3f& _Direction )
 {
-    const std::vector<CPhysicUserData *>& l_UserDatas = PhysicManager->OverlapConeActor( _Distance, _Angle, _Position, _Direction, 0xffffffff );
+    const std::vector<CPhysicUserData *>& l_UserDatas = PhysicManager->OverlapConeActor( _Distance, _Angle, _Position,
+            _Direction, 0xffffffff );
     std::vector<CPhysicUserData *>::const_iterator it = l_UserDatas.begin(),
                                                    it_end = l_UserDatas.end();
 
@@ -110,7 +125,9 @@ bool PlayerInSight( CPhysicsManager *PhysicManager, float _Distance, float _Angl
         std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
 
         if ( name == "Player" )
+        {
             return true;
+        }
     }
 
     return false;
@@ -120,7 +137,8 @@ CEnemy *GetClosestEnemy( CPhysicsManager *PhysicManager )
 {
     CPhysicController *l_PlayerController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
     Math::Vect3f l_PlayerPos = l_PlayerController->GetPosition();
-    const std::vector<CPhysicUserData *>& l_UserDatas = PhysicManager->OverlapSphereController( 10, l_PlayerPos, 0xffffffff );
+    const std::vector<CPhysicUserData *>& l_UserDatas = PhysicManager->OverlapSphereController( 10, l_PlayerPos,
+            0xffffffff );
     std::vector<CPhysicUserData *>::const_iterator it = l_UserDatas.begin(),
                                                    it_end = l_UserDatas.end();
 
@@ -131,6 +149,7 @@ CEnemy *GetClosestEnemy( CPhysicsManager *PhysicManager )
     {
         CPhysicUserData *l_UserData = *it;
 
+        // @TODO@ Ruly, estas iterando sobre todo el escenario, no habria una forma de hacer que solo iterase sobre la capa de enmigos??
         if ( l_UserData->GetName() != "Player" )
         {
             CPhysicController *l_Controller = l_UserData->GetController();
@@ -144,15 +163,16 @@ CEnemy *GetClosestEnemy( CPhysicsManager *PhysicManager )
         }
     }
 
-    CEnemy *l_Enemy = EnemyMInstance->GetResource( l_EnemyName );
-
-    if ( l_Enemy )
-        return l_Enemy;
-    else
-        return 0;
+    CEnemy *l_Enemy = 0;
+    if( l_EnemyName != "no_enemy")
+    {
+        l_Enemy = EnemyMInstance->GetResource( l_EnemyName );
+    }
+    return l_Enemy;
 }
 
-bool AddGrenade( CPhysicsManager *PhysicManager, const std::string& name, const std::string& group, const Math::Vect3f& dimensions,
+bool AddGrenade( CPhysicsManager *PhysicManager, const std::string& name, const std::string& group,
+                 const Math::Vect3f& dimensions,
                  const Math::Vect3f& position, unsigned int mask )
 {
     return PhysicManager->AddActor
@@ -172,7 +192,8 @@ void registerPhysX( lua_State *m_LS )
     LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_DERIVED_CLASS( CPhysicUserData, CName )
     LUA_DECLARE_CTOR_1( const std::string& )
-    LUA_DECLARE_METHOD_PROTO( CPhysicUserData, SetColor, void ( CPhysicUserData::* )( const float, const float, const float, const float ) )
+    LUA_DECLARE_METHOD_PROTO( CPhysicUserData, SetColor, void ( CPhysicUserData::* )( const float, const float, const float,
+                              const float ) )
     LUA_DECLARE_METHOD( CPhysicUserData, SetPaint )
     LUA_DECLARE_METHOD( CPhysicUserData, GetName )
     LUA_DECLARE_METHOD( CPhysicUserData, GetController )
@@ -215,9 +236,9 @@ void registerPhysX( lua_State *m_LS )
     LUA_END_DECLARATION
 
     REGISTER_LUA_FUNCTION( m_LS, AddGrenade );
-    /*LUA_BEGIN_DECLARATION( aLuaState )
-      LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
-    LUA_END_DECLARATION*/
+    /*  LUA_BEGIN_DECLARATION( aLuaState )
+        LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+        LUA_END_DECLARATION*/
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // PHYSICCONTROLLER
@@ -250,57 +271,57 @@ void registerPhysX( lua_State *m_LS )
     ];
 
     /*
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // PARTICLE MANAGER
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_CLASS( CParticleManager )
-      LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
-      LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
-      LUA_DECLARE_METHOD( CParticleManager, CreateSphereEmitter )
-    LUA_END_DECLARATION
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // PARTICLE MANAGER
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        LUA_BEGIN_DECLARATION( m_LS )
+        LUA_DECLARE_CLASS( CParticleManager )
+        LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
+        LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
+        LUA_DECLARE_METHOD( CParticleManager, CreateSphereEmitter )
+        LUA_END_DECLARATION
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // PARTICLE EMITTER
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_CLASS( CParticleEmitter )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetActive )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetAcceleration )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetDirection )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetPosition )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
-    LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
-    LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
-      LUA_DECLARE_METHOD( CParticleEmitter, Generate )
-       LUA_DECLARE_METHOD( CParticleEmitter, SetOrientate )
-    LUA_END_DECLARATION
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // PARTICLE EMITTER
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        LUA_BEGIN_DECLARATION( m_LS )
+        LUA_DECLARE_CLASS( CParticleEmitter )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetActive )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetAcceleration )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetDirection )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetPosition )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
+        LUA_DECLARE_METHOD( CParticleEmitter, Generate )
+        LUA_DECLARE_METHOD( CParticleEmitter, SetOrientate )
+        LUA_END_DECLARATION
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // CUBE EMITTER
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_DERIVED_CLASS( CCubeEmitter, CParticleEmitter )
-      LUA_DECLARE_DEFAULT_CTOR
-      LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
-    LUA_END_DECLARATION
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // CUBE EMITTER
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        LUA_BEGIN_DECLARATION( m_LS )
+        LUA_DECLARE_DERIVED_CLASS( CCubeEmitter, CParticleEmitter )
+        LUA_DECLARE_DEFAULT_CTOR
+        LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
+        LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
+        LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
+        LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
+        LUA_END_DECLARATION
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // SPHERE EMITTER
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_DERIVED_CLASS( CSphereEmitter, CParticleEmitter )
-      LUA_DECLARE_DEFAULT_CTOR
-      LUA_DECLARE_METHOD( CSphereEmitter, SetRandom )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetRadius )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetPitch )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetYaw )
-    LUA_END_DECLARATION
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // SPHERE EMITTER
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        LUA_BEGIN_DECLARATION( m_LS )
+        LUA_DECLARE_DERIVED_CLASS( CSphereEmitter, CParticleEmitter )
+        LUA_DECLARE_DEFAULT_CTOR
+        LUA_DECLARE_METHOD( CSphereEmitter, SetRandom )
+        LUA_DECLARE_METHOD( CSphereEmitter, SetRadius )
+        LUA_DECLARE_METHOD( CSphereEmitter, SetPitch )
+        LUA_DECLARE_METHOD( CSphereEmitter, SetYaw )
+        LUA_END_DECLARATION
     */
 }

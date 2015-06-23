@@ -12,7 +12,7 @@
 #include "Math\MathTypes.h"
 #include <map>
 
-typedef enum INPUT_DEVICE_TYPE 
+typedef enum EInputDeviceType
 {
     IDV_KEYBOARD,
     IDV_GAMEPAD1,
@@ -23,7 +23,7 @@ typedef enum INPUT_DEVICE_TYPE
     IDV_NOTHING
 };
 
-typedef enum INPUT_AXIS_TYPE
+typedef enum EInputAxisType
 {
     AXIS_MOUSE_X,
     AXIS_MOUSE_Y,
@@ -37,7 +37,7 @@ typedef enum INPUT_AXIS_TYPE
     AXIS_NOTHING
 };
 
-typedef enum INPUT_EVENT_TYPE
+typedef enum EInputEventType
 {
     EVENT_DOWN,
     EVENT_UP_DOWN,
@@ -45,7 +45,7 @@ typedef enum INPUT_EVENT_TYPE
     EVENT_NOTHING
 };
 
-typedef enum MOUSE_BUTTON 
+typedef enum MOUSE_BUTTON
 {
     MOUSE_BUTTON_LEFT,
     MOUSE_BUTTON_RIGHT,
@@ -58,9 +58,9 @@ struct SInputInfo
     std::string            keyName;
     float32                delta;
     uint32                key;
-    INPUT_DEVICE_TYPE    deviceType;
-    INPUT_EVENT_TYPE    eventType;
-    INPUT_AXIS_TYPE        axisType;
+    EInputDeviceType    deviceType;
+    EInputEventType    eventType;
+    EInputAxisType        axisType;
 };
 
 //------------------------------------------

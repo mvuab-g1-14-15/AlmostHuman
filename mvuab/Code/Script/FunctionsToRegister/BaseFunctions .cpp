@@ -40,7 +40,7 @@ void registerXML( lua_State *aLuaState )
     LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
 
     LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<int32> )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
+    LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<float> )
     LUA_DECLARE_METHOD( CXMLTreeNode, GetBoolProperty )
     LUA_DECLARE_METHOD( CXMLTreeNode, GetPszProperty )
     LUA_DECLARE_METHOD( CXMLTreeNode, GetVect3fProperty )

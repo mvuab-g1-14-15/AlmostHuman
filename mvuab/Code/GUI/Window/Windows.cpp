@@ -266,10 +266,10 @@ bool CWindows::LoadXML( const std::string& xmlGuiFile, const Math::Vect2i& scree
 
                 //Para cada guielement leemos su informacion comun-->
                 std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-                float posx = pNewNode.GetFloatProperty( "posx", 0.f );
-                float posy = pNewNode.GetFloatProperty( "posy", 0.f );
-                float w  = pNewNode.GetFloatProperty( "width", 50.f );
-                float h  = pNewNode.GetFloatProperty( "height", 50.f );
+                float posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+                float posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+                float w  = pNewNode.GetAttribute<float>( "width", 50.f );
+                float h  = pNewNode.GetAttribute<float>( "height", 50.f );
                 bool visible = pNewNode.GetBoolProperty( "visible", true );
                 bool activated  = pNewNode.GetBoolProperty( "active", true );
 
@@ -383,10 +383,10 @@ CButton* CWindows::LoadButton( CXMLTreeNode& pNewNode, const Math::Vect2i& scree
     // OnClickedAction="blabla" OnOverAction="blabla" Literal="blabla" widthOffset="" heightOffset=""/>
 
     std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     std::string texture_normal = pNewNode.GetPszProperty( "texture_normal", "" );
@@ -396,8 +396,8 @@ CButton* CWindows::LoadButton( CXMLTreeNode& pNewNode, const Math::Vect2i& scree
     std::string OnClickedAction = pNewNode.GetPszProperty( "OnClickedAction", "" );
     std::string OnOverAction = pNewNode.GetPszProperty( "OnOverAction", "" );
     std::string l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     CTexture* normal = tm->GetTexture( texture_normal );
     CTexture* over = tm->GetTexture( texture_over );
@@ -426,10 +426,10 @@ CCheckButton* CWindows::LoadCheckButton( CXMLTreeNode& pNewNode, const Math::Vec
     // OnSaveValue="blabl" OnLoadValue="" Literal="blabla" widthOffset="" heightOffset=""/>
 
     std::string name  = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx  = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy  = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w  = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h  = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx  = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy  = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w  = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h  = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible  = pNewNode.GetBoolProperty( "visible", true );
     bool activated = pNewNode.GetBoolProperty( "active", true );
     bool isOn  = pNewNode.GetBoolProperty( "isOn", "" );
@@ -442,8 +442,8 @@ CCheckButton* CWindows::LoadCheckButton( CXMLTreeNode& pNewNode, const Math::Vec
     std::string OnSaveValue  = pNewNode.GetPszProperty( "OnSaveValue", "" );
     std::string OnLoadValue  = pNewNode.GetPszProperty( "OnLoadValue", "" );
     std::string l_literal = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent  = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent  = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent  = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent  = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
 
     CTexture* on  = tm->GetTexture( texture_on );
@@ -473,15 +473,15 @@ CSlider* CWindows::LoadSlider( CXMLTreeNode& pNewNode, const Math::Vect2i& scree
     // OnOverAction="" OnClickedAction="" OnChangeValue="" OnSaveValue="blabl" OnLoadValue="" Literal="blabla" widthOffset="" heightOffset=""/>
 
     std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     float  value  = pNewNode.GetBoolProperty( "value", 0.f );
-    float  buttonH = pNewNode.GetFloatProperty( "buttonH", 10.f );
-    float  buttonW = pNewNode.GetFloatProperty( "buttonW", 10.f );
+    float  buttonH = pNewNode.GetAttribute<float>( "buttonH", 10.f );
+    float  buttonW = pNewNode.GetAttribute<float>( "buttonW", 10.f );
     std::string button_normal  = pNewNode.GetPszProperty( "button_normal", "" );
     std::string button_over = pNewNode.GetPszProperty( "button_over", "" );
     std::string button_clicked = pNewNode.GetPszProperty( "button_clicked", "" );
@@ -493,8 +493,8 @@ CSlider* CWindows::LoadSlider( CXMLTreeNode& pNewNode, const Math::Vect2i& scree
     std::string OnSaveValue = pNewNode.GetPszProperty( "OnSaveValue", "" );
     std::string OnLoadValue = pNewNode.GetPszProperty( "OnLoadValue", "" );
     std::string l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     CTexture* normal = tm->GetTexture( button_normal ); //GetTexture(button_normal);
     CTexture* over  = tm->GetTexture( button_over );
@@ -526,14 +526,14 @@ CDialogBox* CWindows::LoadDialogBox( CXMLTreeNode& pNewNode, const Math::Vect2i&
     // buttonMove_clicked"bla" buttonMove_deactivated"bla" quad="bla" Literal="blabla" widthOffset="" heightOffset=""/>
 
     const std::string& name  = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float posx  = pNewNode.GetFloatProperty( "posx", 0.f );
-    float posy  = pNewNode.GetFloatProperty( "posy", 0.f );
-    float w  = pNewNode.GetFloatProperty( "width", 50.f );
-    float h  = pNewNode.GetFloatProperty( "height", 50.f );
+    float posx  = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float posy  = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float w  = pNewNode.GetAttribute<float>( "width", 50.f );
+    float h  = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated = pNewNode.GetBoolProperty( "active", true );
-    float buttonH  = pNewNode.GetFloatProperty( "buttonH", 10.f );
-    float buttonW  = pNewNode.GetFloatProperty( "buttonW", 10.f );
+    float buttonH  = pNewNode.GetAttribute<float>( "buttonH", 10.f );
+    float buttonW  = pNewNode.GetAttribute<float>( "buttonW", 10.f );
     const std::string& buttonClose_normal = pNewNode.GetPszProperty( "buttonClose_normal", "" );
     const std::string& buttonClose_over = pNewNode.GetPszProperty( "buttonClose_over", "" );
     const std::string& buttonClose_clicked = pNewNode.GetPszProperty( "buttonClose_clicked", "" );
@@ -544,8 +544,8 @@ CDialogBox* CWindows::LoadDialogBox( CXMLTreeNode& pNewNode, const Math::Vect2i&
     const std::string& buttonMove_deactivated = pNewNode.GetPszProperty( "buttonMove_deactivated", "" );
     const std::string& quad = pNewNode.GetPszProperty( "quad" );
     const std::string& l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     CTexture* Close_normal = tm->GetTexture( buttonClose_normal ); //GetTexture(buttonClose_normal);
     CTexture* Close_over = tm->GetTexture( buttonClose_over );
@@ -580,23 +580,23 @@ CEditableTextBox* CWindows::LoadEditableTextBox( CXMLTreeNode& pNewNode, const M
     // Literal="blabla" widthOffset="" heightOffset=""/>
 
     std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     std::string quad = pNewNode.GetPszProperty( "texture_quad", "" );
     std::string OnSaveValue = pNewNode.GetPszProperty( "OnSaveValue", "" );
     std::string OnLoadValue = pNewNode.GetPszProperty( "OnLoadValue", "" );
     uint32 idFont  = pNewNode.GetAttribute<int32>( "id_font", 0 );
-    float  color_font_r = pNewNode.GetFloatProperty( "color_font_r", 0.f );
-    float  color_font_g = pNewNode.GetFloatProperty( "color_font_g", 0.f );
-    float  color_font_b = pNewNode.GetFloatProperty( "color_font_b", 0.f );
+    float  color_font_r = pNewNode.GetAttribute<float>( "color_font_r", 0.f );
+    float  color_font_g = pNewNode.GetAttribute<float>( "color_font_g", 0.f );
+    float  color_font_b = pNewNode.GetAttribute<float>( "color_font_b", 0.f );
     std::string buffer  = pNewNode.GetPszProperty( "buffer", "" );
     std::string l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     uint32 widthOffset = ( uint32 )( screenResolution.x * 0.01f * widthOffsetPercent );
     uint32 heightOffset = ( uint32 )( screenResolution.y * 0.01f * heightOffsetPercent );
@@ -629,10 +629,10 @@ CRadioBox* CWindows::LoadRadioBox( CXMLTreeNode& pNewNode, const Math::Vect2i& s
 
 
     std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     std::string default_checkButton = pNewNode.GetPszProperty( "default_checkButton", "" );
@@ -645,8 +645,8 @@ CRadioBox* CWindows::LoadRadioBox( CXMLTreeNode& pNewNode, const Math::Vect2i& s
     std::string OnSaveValue = pNewNode.GetPszProperty( "OnSaveValue", "" );
     std::string OnLoadValue = pNewNode.GetPszProperty( "OnLoadValue", "" );
     std::string l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     uint32 widthOffset = ( uint32 )( screenResolution.x * 0.01f * widthOffsetPercent );
     uint32 heightOffset = ( uint32 )( screenResolution.y * 0.01f * heightOffsetPercent );
@@ -698,10 +698,10 @@ CImage* CWindows::_LoadImage( CXMLTreeNode& pNewNode, const Math::Vect2i& screen
     // <texture name="q3dm2" texture="gui_q3dm2_off.jpg"/>
     // ...
     //</Image>
-    float posx  = pNewNode.GetFloatProperty( "posx", 0.f );
-    float posy  = pNewNode.GetFloatProperty( "posy", 0.f );
-    float w  = pNewNode.GetFloatProperty( "width", 50.f );
-    float h  = pNewNode.GetFloatProperty( "height", 50.f );
+    float posx  = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float posy  = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float w  = pNewNode.GetAttribute<float>( "width", 50.f );
+    float h  = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated = pNewNode.GetBoolProperty( "active", true );
     const std::string& name  = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
@@ -711,8 +711,8 @@ CImage* CWindows::_LoadImage( CXMLTreeNode& pNewNode, const Math::Vect2i& screen
     const std::string& flip = pNewNode.GetPszProperty( "flip", "" );
     bool backGround  = pNewNode.GetBoolProperty( "backGround", false );
     const std::string& l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     uint32 widthOffset = ( uint32 )( screenResolution.x * 0.01f * widthOffsetPercent );
     uint32 heightOffset = ( uint32 )( screenResolution.y * 0.01f * heightOffsetPercent );
@@ -766,22 +766,22 @@ CProgressBar* CWindows::LoadProgressBar( CXMLTreeNode& pNewNode, const Math::Vec
     // Literal="blabla" widthOffset="" heightOffset="" OnComplete="blabla"/>
 
     std::string name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float  posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float  posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float  w = pNewNode.GetFloatProperty( "width", 50.f );
-    float  h = pNewNode.GetFloatProperty( "height", 50.f );
+    float  posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float  posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float  w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float  h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     std::string texture_bar = pNewNode.GetPszProperty( "texture_bar", "" );
     std::string texture_back = pNewNode.GetPszProperty( "texture_back", "" );
     std::string OnComplete  = pNewNode.GetPszProperty( "OnComplete", "" );
     uint32 idFont  = pNewNode.GetAttribute<int32>( "id_font", 0 );
-    float  color_font_r = pNewNode.GetFloatProperty( "color_font_r", 0.f );
-    float  color_font_g = pNewNode.GetFloatProperty( "color_font_g", 0.f );
-    float  color_font_b = pNewNode.GetFloatProperty( "color_font_b", 0.f );
+    float  color_font_r = pNewNode.GetAttribute<float>( "color_font_r", 0.f );
+    float  color_font_g = pNewNode.GetAttribute<float>( "color_font_g", 0.f );
+    float  color_font_b = pNewNode.GetAttribute<float>( "color_font_b", 0.f );
     std::string l_literal  = pNewNode.GetPszProperty( "Literal", "" );
-    float  widthOffsetPercent = pNewNode.GetFloatProperty( "widthOffset", 0.f );
-    float  heightOffsetPercent = pNewNode.GetFloatProperty( "heightOffset", 0.f );
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
 
     CTexture* bar = TM->GetTexture( texture_bar );
     CTexture* back = TM->GetTexture( texture_back );
@@ -804,10 +804,10 @@ CStaticText* CWindows::LoadStaticText( CXMLTreeNode& pNewNode, const Math::Vect2
     //<StaticText name="pepito" posx="0" posy="2" literal="blabla" visible="true" active="true"/>
 
     const std::string& name = pNewNode.GetPszProperty( "name", "defaultGuiElement" );
-    float posx = pNewNode.GetFloatProperty( "posx", 0.f );
-    float posy = pNewNode.GetFloatProperty( "posy", 0.f );
-    float w = pNewNode.GetFloatProperty( "width", 50.f );
-    float h = pNewNode.GetFloatProperty( "height", 50.f );
+    float posx = pNewNode.GetAttribute<float>( "posx", 0.f );
+    float posy = pNewNode.GetAttribute<float>( "posy", 0.f );
+    float w = pNewNode.GetAttribute<float>( "width", 50.f );
+    float h = pNewNode.GetAttribute<float>( "height", 50.f );
     bool visible  = pNewNode.GetBoolProperty( "visible", true );
     bool activated  = pNewNode.GetBoolProperty( "active", true );
     const std::string& l_literal = pNewNode.GetPszProperty( "literal", "" );
@@ -835,10 +835,10 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
     Math::Vect2f pos_in_screen                  = pNewNode.GetVect2fProperty( "pos_in_screen", Math::Vect2f( 0.f, 0.f ) );
     Math::Vect2f pos_0_0_3d_map                 = pNewNode.GetVect2fProperty( "pos_0_0_3d_map", Math::Vect2f( 0.f, 0.f ) );
     Math::Vect2f pos_1_1_3d_map                 = pNewNode.GetVect2fProperty( "pos_1_1_3d_map", Math::Vect2f( 0.f, 0.f ) );
-    float w                                     = pNewNode.GetFloatProperty( "width", 8.f );
-    float h                                     = pNewNode.GetFloatProperty( "height", 40.f );
-    float w_map                                 = pNewNode.GetFloatProperty( "width_map", 0.02f );
-    float h_map                                 = pNewNode.GetFloatProperty( "height_map", 0.02f );
+    float w                                     = pNewNode.GetAttribute<float>( "width", 8.f );
+    float h                                     = pNewNode.GetAttribute<float>( "height", 40.f );
+    float w_map                                 = pNewNode.GetAttribute<float>( "width_map", 0.02f );
+    float h_map                                 = pNewNode.GetAttribute<float>( "height_map", 0.02f );
     bool visible                                = pNewNode.GetBoolProperty( "visible", true );
     bool activated                              = pNewNode.GetBoolProperty( "active", true );
     uint32 WidthEnemy                           = pNewNode.GetAttribute<int32>( "width_enemy", 50 );
@@ -863,7 +863,7 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
         const std::string& orientation_script = pSubNewNode.GetPszProperty( "orientation", "no_script" );
         uint32 WidthItem                      = pSubNewNode.GetAttribute<int32>( "width", 50 );
         uint32 HeightItem                     = pSubNewNode.GetAttribute<int32>( "height", 50 );
-        float Yaw                             = pSubNewNode.GetFloatProperty( "yaw", 0.f );
+        float Yaw                             = pSubNewNode.GetAttribute<float>( "yaw", 0.f );
 
         std::string tagName = pSubNewNode.GetName();
 

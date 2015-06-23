@@ -161,12 +161,12 @@ void CGUIManager::Init()
 
             if ( m.Exists() )
             {
-                float posx      = m.GetFloatProperty( "posx", 30.f );
-                float posy      = m.GetFloatProperty( "posy", 30.f );
-                float w         = m.GetFloatProperty( "width", 35.f );
-                float h         = m.GetFloatProperty( "height", 35.f );
-                float button_w  = m.GetFloatProperty( "button_width", 5.f );
-                float button_h  = m.GetFloatProperty( "button_height", 5.f );
+                float posx      = m.GetAttribute<float>( "posx", 30.f );
+                float posy      = m.GetAttribute<float>( "posy", 30.f );
+                float w         = m.GetAttribute<float>( "width", 35.f );
+                float h         = m.GetAttribute<float>( "height", 35.f );
+                float button_w  = m.GetAttribute<float>( "button_width", 5.f );
+                float button_h  = m.GetAttribute<float>( "button_height", 5.f );
 
                 std::string buttonClose_normal      = m.GetPszProperty( "buttonClose_normal", "no_buttonClose_normal" );
                 std::string buttonClose_over        = m.GetPszProperty( "buttonClose_over", "no_buttonClose_over" );
@@ -208,10 +208,10 @@ void CGUIManager::Init()
 
             if ( m.Exists() )
             {
-                float posx      = m.GetFloatProperty( "posx", 0.f );
-                float posy      = m.GetFloatProperty( "posy", 0.f );
-                float w         = m.GetFloatProperty( "width", 50.f );
-                float h         = m.GetFloatProperty( "height", 50.f );
+                float posx      = m.GetAttribute<float>( "posx", 0.f );
+                float posy      = m.GetAttribute<float>( "posy", 0.f );
+                float w         = m.GetAttribute<float>( "width", 50.f );
+                float h         = m.GetAttribute<float>( "height", 50.f );
 
                 bool visible    = m.GetBoolProperty( "visible", false );
                 bool activated  = m.GetBoolProperty( "active", false );
@@ -225,8 +225,8 @@ void CGUIManager::Init()
                 const std::string& l_literal      = m.GetPszProperty( "Literal", "" );
 
 
-                float widthOffsetPercent  = m.GetFloatProperty( "widthOffset", 0.f );
-                float heightOffsetPercent = m.GetFloatProperty( "heightOffset", 0.f );
+                float widthOffsetPercent  = m.GetAttribute<float>( "widthOffset", 0.f );
+                float heightOffsetPercent = m.GetAttribute<float>( "heightOffset", 0.f );
 
                 uint32 widthOffset  = ( uint32 )( m_ScreenResolution.x * 0.01f * widthOffsetPercent );
                 uint32 heightOffset = ( uint32 )( m_ScreenResolution.y * 0.01f * heightOffsetPercent );
@@ -272,10 +272,10 @@ void CGUIManager::Init()
 
             if ( m.Exists() )
             {
-                float posx          = m.GetFloatProperty( "posx", 5.f );
-                float posy          = m.GetFloatProperty( "posy", 5.f );
-                float w             = m.GetFloatProperty( "width",  5.f );
-                float h             = m.GetFloatProperty( "height", 5.f );
+                float posx          = m.GetAttribute<float>( "posx", 5.f );
+                float posy          = m.GetAttribute<float>( "posy", 5.f );
+                float w             = m.GetAttribute<float>( "width",  5.f );
+                float h             = m.GetAttribute<float>( "height", 5.f );
                 std::string texture = m.GetPszProperty( "texture", "no_pointer_texture" );
                 bool isQuadrant     = m.GetBoolProperty( "isQuadrant",  true );
 
@@ -352,8 +352,8 @@ void CGUIManager::Render()
         m_pTextBox->Render();
         assert( m_pConsole );
         m_pConsole->Render();
-        /*assert( m_pPressButton );
-        m_pPressButton->Render();*/
+        /*  assert( m_pPressButton );
+            m_pPressButton->Render();*/
 
         if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
         {
@@ -1036,16 +1036,16 @@ void CGUIManager::ShowStaticText( const std::string& inStaticText )
     if ( it != m_ElementsMap.end() )
     {
         CStaticText* st = ( CStaticText* )( it->second );
-		if (st->GetVisible())
-		{
-			st->SetVisible(false);
-			st->SetActive(false);
-		}
-		else
-		{
-			st->SetVisible(true);
-			st->SetActive(true);
-		}
+        if (st->GetVisible())
+        {
+            st->SetVisible(false);
+            st->SetActive(false);
+        }
+        else
+        {
+            st->SetVisible(true);
+            st->SetActive(true);
+        }
     }
     else
     {

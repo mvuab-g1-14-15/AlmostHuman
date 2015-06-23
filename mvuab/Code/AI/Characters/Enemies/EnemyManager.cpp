@@ -167,10 +167,10 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
         lCoreEnemy->m_EnemyType = CEnemy::ePatroll;
     }
 
-    lCoreEnemy->m_Life = Node.GetFloatProperty( "life", 0.0f );
-    lCoreEnemy->m_RespawnTime = Node.GetFloatProperty( "time_to_respawn", 0.0f );
-    lCoreEnemy->m_TimeToShoot = Node.GetFloatProperty( "time_to_shoot", 0.0f );
-    lCoreEnemy->m_ShootAccuracy = Node.GetFloatProperty( "shoot_accuracy", 0.0f );
+    lCoreEnemy->m_Life = Node.GetAttribute<float>( "life", 0.0f );
+    lCoreEnemy->m_RespawnTime = Node.GetAttribute<float>( "time_to_respawn", 0.0f );
+    lCoreEnemy->m_TimeToShoot = Node.GetAttribute<float>( "time_to_shoot", 0.0f );
+    lCoreEnemy->m_ShootAccuracy = Node.GetAttribute<float>( "shoot_accuracy", 0.0f );
     lCoreEnemy->m_StateMachineName = Node.GetPszProperty( "state_machine_name", "no_name" );
     lCoreEnemy->m_StateMachineFileName = Node.GetPszProperty( "state_machine_file", "no_name" );
 

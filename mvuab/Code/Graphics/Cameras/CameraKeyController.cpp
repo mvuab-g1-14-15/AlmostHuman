@@ -66,7 +66,7 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
     SetName( l_Node.GetPszProperty("name", "no_name") );
     m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
     m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
-    m_TotalTime = l_Node.GetFloatProperty("total_time", 0.0f);
+    m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
 
     for(int i = 0; i < l_Node.GetNumChildren(); i++)
     {
@@ -75,7 +75,7 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
 
         if( l_TagName == "key" )
         {
-            float32 l_Time = l_CurrentNode.GetFloatProperty("time", 0.0f);
+            float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
             m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
         }
     }

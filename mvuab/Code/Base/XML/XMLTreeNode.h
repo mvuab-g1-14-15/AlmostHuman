@@ -44,8 +44,6 @@ class CXMLTreeNode
         bool ExistsKey( const char* _pszKey );
         const char* GetName() const;
 
-        float32                           GetFloatProperty( const char* _pszKey, float32 _fDefault = 0.0,
-                bool warningDefault = false ) const;
         bool                              GetBoolProperty( const char* _pszKey, bool _bDefault = false,
                 bool warningDefault = false ) const;
         const char*                       GetPszProperty( const char* _pszKey,
