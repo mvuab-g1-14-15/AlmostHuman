@@ -20,38 +20,59 @@
 class CMouse : public CInputDevice
 {
 public:
-    // Init and End protocols
-    CMouse() {}
-    virtual ~CMouse() { Done(); } 
+  // Init and End protocols
+  CMouse() {}
+  virtual ~CMouse()
+  {
+    Done();
+  }
 
-    bool                Init            (LPDIRECTINPUT8, HWND, const Math::Vect2i& screenRes, bool exclusiveMode);
-    void                Done            ();
+  bool                Init( LPDIRECTINPUT8, HWND, const Math::Vect2i& screenRes, bool exclusiveMode );
+  void                Done();
 
-    //----CInputDevice Interface----
-    virtual HRESULT        Update            ();
+  //----CInputDevice Interface----
+  virtual HRESULT        Update();
 
 
-    //----CMouse Interface----------
-    const Math::Vect3i&       GetMouseDelta            ()        const        { return m_Delta; }
+  //----CMouse Interface----------
+  const Math::Vect3i&       GetMouseDelta()        const
+  {
+    return m_Delta;
+  }
 
-    bool                IsDown                    (uint32 nBtn)        const         { if (nBtn<3) return m_bIsDown[nBtn]; return false; }
-    bool                IsUpDown                (uint32 nBtn)        const        { if (nBtn<3) return m_bIsUpDown[nBtn]; return false; }
-    bool                IsDownUp                (uint32 nBtn)        const        { if (nBtn<3) return m_bIsDownUp[nBtn]; return false; }
+  bool                IsDown( uint32 nBtn )        const
+  {
+    if ( nBtn < 3 ) return m_bIsDown[nBtn];
+
+    return false;
+  }
+  bool                IsUpDown( uint32 nBtn )        const
+  {
+    if ( nBtn < 3 ) return m_bIsUpDown[nBtn];
+
+    return false;
+  }
+  bool                IsDownUp( uint32 nBtn )        const
+  {
+    if ( nBtn < 3 ) return m_bIsDownUp[nBtn];
+
+    return false;
+  }
+  void                SetExclusiveMode( bool exclusiveMode );
+private:
+  void                Release();
 
 private:
-    void                Release           ();
+  //-- Tipos---
+  typedef CInputDevice Inherited;
+  //------------
 
-private:
-    //-- Tipos---
-    typedef CInputDevice Inherited;
-    //------------
-
-    HANDLE                m_hEvent;
-    bool                m_bIsDown[3];
-    bool                m_bIsUpDown[3];
-    bool                m_bIsDownUp[3];
-    Math::Vect3i                m_Delta;
-    Math::Vect2i                m_ScreenResolution;
+  HANDLE                m_hEvent;
+  bool                m_bIsDown[3];
+  bool                m_bIsUpDown[3];
+  bool                m_bIsDownUp[3];
+  Math::Vect3i                m_Delta;
+  Math::Vect2i                m_ScreenResolution;
 };
 
 

@@ -10,14 +10,14 @@
 #include <iostream>
 
 CEditorsManager::CEditorsManager( const CXMLTreeNode& atts )
-    : CManager( atts )
+  : CManager( atts )
 {
 
 }
 
 CEditorsManager::~CEditorsManager()
 {
-    TwTerminate();
+  TwTerminate();
 }
 
 void CEditorsManager::Update()
@@ -26,23 +26,24 @@ void CEditorsManager::Update()
 
 void CEditorsManager::Render()
 {
-    // Draw tweak bars
-    TwDraw();
+  // Draw tweak bars
+  TwDraw();
 }
 
 void CEditorsManager::Init()
 {
-    return;
-    TwInit(TW_DIRECT3D9, GraphicsInstance->GetDevice() );
+  return;
+  TwInit( TW_DIRECT3D9, GraphicsInstance->GetDevice() );
 
-    Math::Vect2i lScreenSize = CEngineConfig::GetSingleton().GetScreenSize();
-    TwWindowSize(lScreenSize.x, lScreenSize.y );
+  Math::Vect2i lScreenSize = CEngineConfig::GetSingleton().GetScreenSize();
+  TwWindowSize( lScreenSize.x, lScreenSize.y );
 
-    CUiLightsBar* lLightBar = new CUiLightsBar();
+  CUiLightsBar* lLightBar = new CUiLightsBar();
 
-    bool lOk = lLightBar->Create();
+  bool lOk = lLightBar->Create();
 
-    ASSERT(lOk, "Error creating light bar");
+  ASSERT( lOk, "Error creating light bar" );
 
-    //TwDefine(" TweakBar color='255 255 255' text=dark "); // Change TweakBar color and use dark text
+  CHECKED_DELETE( lLightBar );
+  //TwDefine(" TweakBar color='255 255 255' text=dark "); // Change TweakBar color and use dark text
 }

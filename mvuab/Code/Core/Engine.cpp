@@ -18,84 +18,85 @@
 #include "Utils/StringUtils.h"
 
 CEngine::CEngine()
-    : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
-    , m_pProcess( 0 )
-    , m_pTimer( new CTimer( 30 ) )
-    , m_Play( false )
-    , mConsoleEnabled( false )
+  : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
+  , m_pProcess( 0 )
+  , m_pTimer( new CTimer( 30 ) )
+  , m_Play( false )
+  , mConsoleEnabled( false )
 {
 }
 
 CEngine::~CEngine()
 {
-    CHECKED_DELETE( m_pEngineManagers );
-    CHECKED_DELETE( m_pProcess );
-    CHECKED_DELETE( m_pTimer );
+  CHECKED_DELETE( m_pEngineManagers );
+  CHECKED_DELETE( m_pProcess );
+  CHECKED_DELETE( m_pTimer );
 }
 
 void CEngine::Update()
 {
-    m_pEngineManagers->Update();
-    m_pProcess->ProcessReloads();
-    m_pProcess->Update();
-    m_pTimer->Update();
+  m_pEngineManagers->Update();
+  m_pProcess->ProcessReloads();
+  m_pProcess->ProcessKey();
+  m_pProcess->Update();
+  m_pTimer->Update();
 }
 
 void CEngine::Render()
 {
-    //if ( m_Play )
-    SRCMInstance->Execute();
-    /*  else
-        {
-        CRenderGUISceneRendererCommand* l_GUICommand = SRCMInstance->GetCommandGUI();
-        l_GUICommand->Execute( *GraphicsInstance );
-        }*/
+  //if ( m_Play )
+  SRCMInstance->Execute();
+  /*  else
+      {
+      CRenderGUISceneRendererCommand* l_GUICommand = SRCMInstance->GetCommandGUI();
+      l_GUICommand->Execute( *GraphicsInstance );
+      }*/
 }
 
 void CEngine::ProcessInputs()
 {
-    ActionManagerInstance->ProcessInputs();
+  ActionManagerInstance->ProcessInputs();
 }
 
 void CEngine::SetRunnigProcess( CProcess* aProcess )
 {
-    m_pProcess = aProcess;
+  m_pProcess = aProcess;
 }
 
 
 void CEngine::Init( CEngineConfig* aEngineConfig )
 {
-    m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
+  m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
 
-    if ( aEngineConfig )
-    {
-        mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;
-        // Init the managers of the engine
-        m_pEngineManagers->Init();
+  if ( aEngineConfig )
+  {
+    mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;
+    // Init the managers of the engine
+    m_pEngineManagers->Init();
 
-        // Init the videogame
-        m_pProcess->Init();
-    }
+    // Init the videogame
+    m_pProcess->Init();
+  }
 }
 
 void CEngine::Trace( const std::string& TraceStr )
 {
-    if( mConsoleEnabled )
-    {
-        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-        std::cout << TraceStr << std::endl << std::endl;
-    }
-    else
-    {
-        std::stringstream lMsg;
-        lMsg << "[APPLICATION]" << TraceStr << std::endl;
-        OutputDebugString(lMsg.str().c_str());
-    }
+  if ( mConsoleEnabled )
+  {
+    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+    std::cout << TraceStr << std::endl << std::endl;
+  }
+  else
+  {
+    std::stringstream lMsg;
+    lMsg << "[APPLICATION]" << TraceStr << std::endl;
+    OutputDebugString( lMsg.str().c_str() );
+  }
 
 }
 
 void CEngine::QuitGame()
 {
-    PostQuitMessage( 0 );
+  PostQuitMessage( 0 );
 }

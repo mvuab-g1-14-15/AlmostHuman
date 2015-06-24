@@ -9,35 +9,36 @@ class CAStar;
 
 typedef enum EMenuOption
 {
-    eOptionScene = 1,
-    eOptionMesh,
-    eOptionParticles,
-    eOptionLights,
-    eOptionEffect,
-    eOptionAnimatedModels,
-    eOptionExit
+  eOptionScene = 1,
+  eOptionMesh,
+  eOptionParticles,
+  eOptionLights,
+  eOptionEffect,
+  eOptionAnimatedModels,
+  eOptionExit
 };
 
 class CProcess
 {
 protected:
-    CCamera     *m_pCamera;
-    uint8        m_LastLineInDebug;
+  CCamera*     m_pCamera;
+  uint8        m_LastLineInDebug;
 
 public:
-    CProcess();
-    CProcess( CCamera *ap_Camera );
-    virtual ~CProcess() {}
+  CProcess();
+  CProcess( CCamera* ap_Camera );
+  virtual ~CProcess() {}
 
-    virtual void Init() = 0;
-    void ProcessReloads();
-    virtual void Update() = 0;
-    virtual void Render() = 0;
-    virtual void RenderDebugInfo();
+  virtual void Init() = 0;
+  void ProcessReloads();
+  void ProcessKey();
+  virtual void Update() = 0;
+  virtual void Render() = 0;
+  virtual void RenderDebugInfo();
 
-    GET_SET_PTR( CCamera, Camera );
+  GET_SET_PTR( CCamera, Camera );
 
-    void OnClickedMenuOption( EMenuOption aMenuOption );
+  void OnClickedMenuOption( EMenuOption aMenuOption );
 };
 
 #endif // PROCESS_H
