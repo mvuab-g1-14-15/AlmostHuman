@@ -36,6 +36,7 @@ class CXMLTreeNode
         bool LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
 
         template<typename T> const T GetAttribute( const char* aAttName, const T& aDefaultAttValue ) const;
+        template<typename T> T* GetAttribute( const char* aAttName ) const;
 
         bool Exists()
         {

@@ -1,4 +1,4 @@
-#include "RenderableVertex\VertexTypes.h"
+#include "RenderableVertex\InstancedVertexTypes.h"
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 

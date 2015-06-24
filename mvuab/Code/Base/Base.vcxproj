@@ -51,7 +51,6 @@
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Memory\MemLeaks.h" />
     <ClInclude Include="MessageHandler\MessageHandler.h" />
-    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Timer\CounTDownTimerManager.h" />
     <ClInclude Include="Timer\CountDownTimer.h" />
     <ClInclude Include="Timer\Timer.h" />

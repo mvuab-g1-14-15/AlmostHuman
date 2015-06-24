@@ -294,6 +294,12 @@
     <ClCompile Include="SceneRenderComands\EditorsRendererCmd.cpp">
       <Filter>SceneRenderComands\Editors</Filter>
     </ClCompile>
+    <ClCompile Include="RenderableVertex\InstancedVertexTypes.cpp">
+      <Filter>RenderableVertex</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsXMLTreeNode.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -601,6 +607,9 @@
     <ClInclude Include="RenderableVertex\InstancingVertexs.h">
       <Filter>RenderableVertex</Filter>
     </ClInclude>
+    <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
+      <Filter>RenderableVertex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -665,6 +674,9 @@
     </Filter>
     <Filter Include="SceneRenderComands\Editors">
       <UniqueIdentifier>{0f70fc96-40e7-4b8a-897c-35972cd387b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{abed453d-257e-4443-bc9a-5fdc2a75916f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

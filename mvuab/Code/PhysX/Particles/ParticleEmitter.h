@@ -3,12 +3,14 @@
 
 #include "Particle.h"
 #include "Math\Vector3.h"
+#include "Math\Color.h"
 #include "Math\Matrix44.h"
 #include "Utils\Defines.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Utils\Name.h"
 
 class CParticle;
+class CTexture;
 
 class CParticleEmitter :  public CName
 {
@@ -28,14 +30,25 @@ class CParticleEmitter :  public CName
         CParticle* GetParticle( const uint32 aIdx);
 
     protected:
-        typedef std::vector<CParticle*> TParticleContainer;
+        typedef std::vector<CParticle*>   TParticleContainer;
+        typedef std::vector < CTexture*>  TTextureContainer;
         bool                        mIsLoop;
-        bool                        mIsInmortal;
+        bool                        mIsImmortal;
         bool                        mIsActive;
-        uint32                      mMaxParticles;
-        uint32                      mAliveParticles;
+        uint32                      mAliveParticlesCount;
         float32                     mActualTime;
-        Math::Vect2f                mTimeToEmit;
+        float32                     mGravity;
+        Math::Vect3f                mInitialDirectionMin;
+        Math::Vect3f                mInitialDirectionMax;
+        Math::CColor                mColorMin;
+        Math::CColor                mColorMax;
+        Math::Vect2f                mSpeed;
+        Math::Vect2f                mRadialSpeed;
+        Math::Vect2f                mOndSpeed;
+        Math::Vect3f                mOndSpeedDirectionMin;
+        Math::Vect3f                mOndSpeedDirectionMax;
+        Math::Vect2u                mAliveParticles;
+        Math::Vect2f                mEmissionTime;
         Math::Vect2f                mAcceleration;
         Math::Vect2f                mVelocity;
         Math::Vect2f                mSize;
@@ -44,7 +57,7 @@ class CParticleEmitter :  public CName
         Math::Vect3f                mDirection;
         Math::Vect3f                mPosition;
         std::string                 mTechniqueName;
-        std::vector<std::string>    mTextures;
+        TTextureContainer           mTextures;
         TParticleContainer          mParticles;
         TParticleContainer          mDeadParticles;
 

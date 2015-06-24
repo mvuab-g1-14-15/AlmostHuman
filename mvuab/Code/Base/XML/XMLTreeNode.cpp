@@ -89,7 +89,7 @@ bool CXMLTreeNode::LoadFile( const char* _pszFileName )
         m_pDoc = xmlParseFile( _pszFileName );
 
         xmlErrorPtr lError = xmlGetLastError();
-        ASSERT( !lError, "%s", ( const char* ) lError->message );
+        ASSERT( !lError, "%s in file %s", ( const char* ) lError->message, _pszFileName );
 
         if ( m_pDoc )
         {
@@ -417,6 +417,40 @@ template<> const Math::Vect2f CXMLTreeNode::GetAttribute<Math::Vect2f>( const ch
     {
         const char* c_strValue = ( const char* )value;
         sscanf_s( c_strValue, "%f %f", &lRtn.x, &lRtn.y );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::Vect2i CXMLTreeNode::GetAttribute<Math::Vect2i>( const char* aAttName,
+        const Math::Vect2i& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::Vect2i lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%d %d", &lRtn.x, &lRtn.y );
+    }
+
+    xmlFree( value );
+    return lRtn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+template<> const Math::Vect2u CXMLTreeNode::GetAttribute<Math::Vect2u>( const char* aAttName,
+        const Math::Vect2u& aDefaultAttValue ) const
+{
+    xmlChar* value = GetProperty( aAttName );
+
+    Math::Vect2u lRtn( aDefaultAttValue );
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%u %u", &lRtn.x, &lRtn.y );
     }
 
     xmlFree( value );

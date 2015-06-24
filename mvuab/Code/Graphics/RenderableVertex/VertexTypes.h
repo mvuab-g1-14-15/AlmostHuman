@@ -1,24 +1,24 @@
 /*
-G  - geometry
-N  - normal
-T  - tangent
-d  - diffiuse
-B  - binormal
-T1 - texture1
-T2 - texture2
+    G  - geometry
+    N  - normal
+    T  - tangent
+    d  - diffiuse
+    B  - binormal
+    T1 - texture1
+    T2 - texture2
 
-G T1
-G N T1
-G D T1
-G N D T1
-G T1 T2
-G N T1 T
-G D T1 T2
+    G T1
+    G N T1
+    G D T1
+    G N D T1
+    G T1 T2
+    G N T1 T
+    G D T1 T2
 
-G N T B T1
-G N T B T1 T2
-G N T B D T1
-G N T B D T1 T2
+    G N T B T1
+    G N T B T1 T2
+    G N T B D T1
+    G N T B D T1 T2
 */
 #pragma once
 
@@ -39,581 +39,582 @@ G N T B D T1 T2
 #define VERTEX_TYPE_SCREEN              1 << 11 // 2048
 #define VERTEX_TYPE_SKYBOX              1 << 12 // 4096
 #define VERTEX_TYPE_RNM                 1 << 13 // 8192
+#define VERTEX_TYPE_PARTICLE            1 << 14
 
 struct T_SKYBOX_VERTEX
 {
-  float x, y, z;
+    float x, y, z;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_SKYBOX;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_SKYBOX;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TGEOMETRY
 {
-  float x, y, z;
+    float x, y, z;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_TAN_BI_T2_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tanx, tany, tanz, tanw;
-  float bx, by, bz, bw;
-  unsigned long color;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tanx, tany, tanz, tanw;
+    float bx, by, bz, bw;
+    unsigned long color;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
-           VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
+               VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_TAN_BI_T1_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tanx, tany, tanz, tanw;
-  float bx, by, bz, bw;
-  unsigned long color;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tanx, tany, tanz, tanw;
+    float bx, by, bz, bw;
+    unsigned long color;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
-           VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
+               VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_TAN_BI_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tanx, tany, tanz, tanw;
-  float bx, by, bz, bw;
-  unsigned long color;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tanx, tany, tanz, tanw;
+    float bx, by, bz, bw;
+    unsigned long color;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
-           VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
+               VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_TAN_BI_T2_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tanx, tany, tanz, tanw;
-  float bx, by, bz, bw;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tanx, tany, tanz, tanw;
+    float bx, by, bz, bw;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
-           VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
+               VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_TAN_BI_T1_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tanx, tany, tanz, tanw;
-  float bx, by, bz, bw;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tanx, tany, tanz, tanw;
+    float bx, by, bz, bw;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
-           VERTEX_TYPE_TEXTURE1;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL |
+               VERTEX_TYPE_TEXTURE1;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 };
 
 struct TNORMAL_T2_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz;
-  unsigned long color;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float nx, ny, nz;
+    unsigned long color;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 |
-           VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 |
+               VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_TEX2 | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_TEX2 | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TNORMAL_T1_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  unsigned long color;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    unsigned long color;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TNORMAL_DIFF_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  unsigned int color;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    unsigned int color;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
 
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0; //D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0; //D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TNORMAL_T2_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_TEX2;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_TEX2;
+    }
 };
 
 struct TNORMAL_T1_REFLECTION_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_REFLECTION;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_REFLECTION;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+    }
 };
 
 struct TNORMAL_T1_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+    }
 };
 
 struct TT2_DIFF_VERTEX
 {
-  float x, y, z;
-  unsigned long color;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    unsigned long color;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEX2 | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEX2 | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TT1_DIFF_VERTEX
 {
-  float x, y, z;
-  unsigned long color;
-  float tu, tv;
+    float x, y, z;
+    unsigned long color;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TDIFF_VERTEX
 {
-  float x, y, z;
-  unsigned long color;
+    float x, y, z;
+    unsigned long color;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_DIFFUSE;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_DIFFUSE;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_DIFFUSE;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_DIFFUSE;
+    }
 };
 
 struct TT2_VERTEX
 {
-  float x, y, z;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float tu, tv;
+    float tu2, tv2;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEX2;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEX2;
+    }
 };
 
 struct TT1_VERTEX
 {
-  float x, y, z;
-  float tu, tv;
+    float x, y, z;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_TEX1;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_TEX1;
+    }
 };
 
 struct TT1_N_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tu, tv;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tu, tv;
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_NORMAL;
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_NORMAL;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_NORMAL;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_NORMAL;
+    }
 };
 
 struct CAL3D_HW_VERTEX
 {
-  float x, y, z;
-  float weights[4];
-  float indices[4];
+    float x, y, z;
+    float weights[4];
+    float indices[4];
 
-  float nx, ny, nz, nw;
-  float tangentx, tangenty, tangentz, tangentw;
-  float binormalx, binormaly, binormalz, binormalw;
+    float nx, ny, nz, nw;
+    float tangentx, tangenty, tangentz, tangentw;
+    float binormalx, binormaly, binormalz, binormalw;
 
-  float tu, tv;
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
-           VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
-  }
+    float tu, tv;
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_INDICES | VERTEX_TYPE_WEIGHT | VERTEX_TYPE_NORMAL |
+               VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
+    }
 
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
 
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
 
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 };
 
 struct SCREEN_COLOR_VERTEX
 {
-  float x, y, z, w;
-  DWORD color;
-  float u, v;
+    float x, y, z, w;
+    DWORD color;
+    float u, v;
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
-  }
-  static unsigned int GetFVF()
-  {
-    return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
-  }
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_DIFFUSE | VERTEX_TYPE_TEXTURE1;
+    }
+    static unsigned int GetFVF()
+    {
+        return ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 );
+    }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 };
 
 struct SCREEN_TEXTURE_VERTEX
 {
-  float x, y, z, w;
-  float u, v;
+    float x, y, z, w;
+    float u, v;
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_TEXTURE1;
-  }
-  static unsigned int GetFVF()
-  {
-    return ( D3DFVF_XYZRHW | D3DFVF_TEX1 );
-  }
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_SCREEN_GEOMETRY | VERTEX_TYPE_TEXTURE1;
+    }
+    static unsigned int GetFVF()
+    {
+        return ( D3DFVF_XYZRHW | D3DFVF_TEX1 );
+    }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 };
 
 struct TRNM_VERTEX
 {
-  float x, y, z;
-  float nx, ny, nz, nw;
-  float tnx, tny, tnz, tnw;
-  float bnx, bny, bnz, bnw;
-  float tu, tv;
-  float tu2, tv2;
+    float x, y, z;
+    float nx, ny, nz, nw;
+    float tnx, tny, tnz, tnw;
+    float bnx, bny, bnz, bnw;
+    float tu, tv;
+    float tu2, tv2;
 
-  static inline unsigned short GetVertexType()
-  {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_NORMAL |
-           VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_RNM;
-  }
-  static inline unsigned int GetFVF()
-  {
-    return 0;
-  }
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-  static void ReleaseVertexDeclaration()
-  {
-    CHECKED_RELEASE( s_VertexDeclaration );
-  }
+    static inline unsigned short GetVertexType()
+    {
+        return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_TEXTURE2 | VERTEX_TYPE_NORMAL |
+               VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_RNM;
+    }
+    static inline unsigned int GetFVF()
+    {
+        return 0;
+    }
+    static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+    static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+    static void ReleaseVertexDeclaration()
+    {
+        CHECKED_RELEASE( s_VertexDeclaration );
+    }
 };
 
 void CalcTangentsAndBinormals( void* VtxsData, unsigned short* IdxsData, size_t VtxCount,

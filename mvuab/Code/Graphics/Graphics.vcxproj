@@ -37,6 +37,7 @@
     <ClCompile Include="Cinematics\CinematicsElement\SetTransformElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp" />
+    <ClCompile Include="GraphicsXMLTreeNode.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectManager.cpp" />
     <ClCompile Include="Effects\EffectPool.cpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
+    <ClCompile Include="RenderableVertex\InstancedVertexTypes.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\BillboardRendererCommand.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="RenderableObject\RenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
+    <ClInclude Include="RenderableVertex\InstancedVertexTypes.h" />
     <ClInclude Include="RenderableVertex\InstancingVertexs.h" />
     <ClInclude Include="RenderableVertex\RenderableVertex.h" />
     <ClInclude Include="RenderableVertex\VertexTypes.h" />
