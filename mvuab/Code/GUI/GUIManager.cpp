@@ -136,8 +136,8 @@ void CGUIManager::Init()
 
         if ( m.Exists() )
         {
-            std::string path = m.GetPszProperty( "path", "" );
-            m_sCurrentWindows =  m.GetPszProperty( "windows_default", "Main.xml" );
+            std::string path = m.GetAttribute<std::string>( "path", "" );
+            m_sCurrentWindows =  m.GetAttribute<std::string>( "windows_default", "Main.xml" );
 
             if ( path.compare( "" ) != 0 )
             {
@@ -168,15 +168,17 @@ void CGUIManager::Init()
                 float button_w  = m.GetAttribute<float>( "button_width", 5.f );
                 float button_h  = m.GetAttribute<float>( "button_height", 5.f );
 
-                std::string buttonClose_normal      = m.GetPszProperty( "buttonClose_normal", "no_buttonClose_normal" );
-                std::string buttonClose_over        = m.GetPszProperty( "buttonClose_over", "no_buttonClose_over" );
-                std::string buttonClose_clicked     = m.GetPszProperty( "buttonClose_clicked", "no_buttonClose_clicked" );
-                std::string buttonClose_deactivated = m.GetPszProperty( "buttonClose_deactivated", "no_buttonClose_deactivated" );
-                std::string buttonMove_normal       = m.GetPszProperty( "buttonMove_normal", "no_buttonMove_normal" );
-                std::string buttonMove_over         = m.GetPszProperty( "buttonMove_over", "no_buttonMove_over" );
-                std::string buttonMove_clicked      = m.GetPszProperty( "buttonMove_clicked", "no_buttonMove_clicked" );
-                std::string buttonMove_deactivated  = m.GetPszProperty( "buttonMove_deactivated", "no_buttonMove_deactivated" );
-                std::string quad                    = m.GetPszProperty( "quad", "no_quad" );
+                std::string buttonClose_normal      = m.GetAttribute<std::string>( "buttonClose_normal", "no_buttonClose_normal" );
+                std::string buttonClose_over        = m.GetAttribute<std::string>( "buttonClose_over", "no_buttonClose_over" );
+                std::string buttonClose_clicked     = m.GetAttribute<std::string>( "buttonClose_clicked", "no_buttonClose_clicked" );
+                std::string buttonClose_deactivated = m.GetAttribute<std::string>( "buttonClose_deactivated",
+                                                      "no_buttonClose_deactivated" );
+                std::string buttonMove_normal       = m.GetAttribute<std::string>( "buttonMove_normal", "no_buttonMove_normal" );
+                std::string buttonMove_over         = m.GetAttribute<std::string>( "buttonMove_over", "no_buttonMove_over" );
+                std::string buttonMove_clicked      = m.GetAttribute<std::string>( "buttonMove_clicked", "no_buttonMove_clicked" );
+                std::string buttonMove_deactivated  = m.GetAttribute<std::string>( "buttonMove_deactivated",
+                                                      "no_buttonMove_deactivated" );
+                std::string quad                    = m.GetAttribute<std::string>( "quad", "no_quad" );
 
                 CTexture* Close_normal      = textureM->GetTexture( buttonClose_normal );
                 CTexture* Close_over        = textureM->GetTexture( buttonClose_over );
@@ -213,16 +215,16 @@ void CGUIManager::Init()
                 float w         = m.GetAttribute<float>( "width", 50.f );
                 float h         = m.GetAttribute<float>( "height", 50.f );
 
-                bool visible    = m.GetBoolProperty( "visible", false );
-                bool activated  = m.GetBoolProperty( "active", false );
-                bool backGround = m.GetBoolProperty( "backGround", false );
+                bool visible    = m.GetAttribute<bool>( "visible", false );
+                bool activated  = m.GetAttribute<bool>( "active", false );
+                bool backGround = m.GetAttribute<bool>( "backGround", false );
 
-                const std::string& name           = m.GetPszProperty( "name", "defaultGuiElement" );
-                const std::string& default_image  = m.GetPszProperty( "default", "" );
-                const std::string& OnSaveValue    = m.GetPszProperty( "OnSaveValue", "" );
-                const std::string& OnLoadValue    = m.GetPszProperty( "OnLoadValue", "" );
-                const std::string& flip           = m.GetPszProperty( "flip", "" );
-                const std::string& l_literal      = m.GetPszProperty( "Literal", "" );
+                const std::string& name           = m.GetAttribute<std::string>( "name", "defaultGuiElement" );
+                const std::string& default_image  = m.GetAttribute<std::string>( "default", "" );
+                const std::string& OnSaveValue    = m.GetAttribute<std::string>( "OnSaveValue", "" );
+                const std::string& OnLoadValue    = m.GetAttribute<std::string>( "OnLoadValue", "" );
+                const std::string& flip           = m.GetAttribute<std::string>( "flip", "" );
+                const std::string& l_literal      = m.GetAttribute<std::string>( "Literal", "" );
 
 
                 float widthOffsetPercent  = m.GetAttribute<float>( "widthOffset", 0.f );
@@ -260,8 +262,8 @@ void CGUIManager::Init()
 
                     if ( tagName.compare( "texture" ) == 0 )
                     {
-                        const std::string& name     = pTexture.GetPszProperty( "name" );
-                        const std::string& texture  = pTexture.GetPszProperty( "name_texture" );
+                        const std::string& name     = pTexture.GetAttribute<std::string>( "name", "" );
+                        const std::string& texture  = pTexture.GetAttribute<std::string>( "name_texture", "" );
                         CTexture* texture_image     = TextureMInstance->GetTexture( texture );
                         m_pPressButton->SetTexture( texture_image, name );
                     }
@@ -276,8 +278,8 @@ void CGUIManager::Init()
                 float posy          = m.GetAttribute<float>( "posy", 5.f );
                 float w             = m.GetAttribute<float>( "width",  5.f );
                 float h             = m.GetAttribute<float>( "height", 5.f );
-                std::string texture = m.GetPszProperty( "texture", "no_pointer_texture" );
-                bool isQuadrant     = m.GetBoolProperty( "isQuadrant",  true );
+                std::string texture = m.GetAttribute<std::string>( "texture", "no_pointer_texture" );
+                bool isQuadrant     = m.GetAttribute<bool>( "isQuadrant",  true );
 
                 CTexture* texture_pointer = textureM->GetTexture( texture );
 

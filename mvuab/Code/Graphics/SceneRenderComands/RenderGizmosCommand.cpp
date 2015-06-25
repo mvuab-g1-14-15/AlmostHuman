@@ -6,7 +6,7 @@
 
 CRenderGizmosCommand::CRenderGizmosCommand( CXMLTreeNode& atts )
     : CSceneRendererCommand( atts )
-    , m_RenderGizmos( atts.GetBoolProperty( "render", false ) )
+    , m_RenderGizmos( atts.GetAttribute<bool>( "render", false ) )
 {
 }
 

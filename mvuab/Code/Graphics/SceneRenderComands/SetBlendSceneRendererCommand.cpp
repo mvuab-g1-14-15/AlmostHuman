@@ -2,13 +2,13 @@
 #include "GraphicsManager.h"
 
 CSetBlendSceneRendererCommand::CSetBlendSceneRendererCommand(
-  CXMLTreeNode& atts ): CSceneRendererCommand( atts )
+    CXMLTreeNode& atts ): CSceneRendererCommand( atts )
 {
-  if ( atts.Exists() )
-  {
-    m_SrcBlend =  atts.GetPszProperty( "srcblend", "" );
-    m_DstBlend =  atts.GetPszProperty( "dstblend", "" );
-  }
+    if ( atts.Exists() )
+    {
+        m_SrcBlend =  atts.GetAttribute<std::string>( "srcblend", "" );
+        m_DstBlend =  atts.GetAttribute<std::string>( "dstblend", "" );
+    }
 }
 
 CSetBlendSceneRendererCommand::~CSetBlendSceneRendererCommand()
@@ -17,6 +17,6 @@ CSetBlendSceneRendererCommand::~CSetBlendSceneRendererCommand()
 
 void  CSetBlendSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-  GM.SetSrcBlend( m_SrcBlend );
-  GM.SetDstBlend( m_DstBlend );
+    GM.SetSrcBlend( m_SrcBlend );
+    GM.SetDstBlend( m_DstBlend );
 }

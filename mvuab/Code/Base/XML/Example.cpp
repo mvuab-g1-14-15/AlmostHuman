@@ -41,10 +41,10 @@ if (NewXML.StartNewFile("test.xml"))
         int count = m.GetNumChildren();
         for (int i = 0; i < count; ++i)
         {
-            const char* name = m(i).GetPszProperty("name");
+            const char* name = m(i).GetAttribute<std::string>("name");
             int iAge = m(i).GetAttribute<int32>("age");
             float32 fSalary = m(i).Getfloat32Property("salary");
-            bool bDead = m(i).GetBoolProperty("dead");
+            bool bDead = m(i).GetAttribute<bool>("dead");
 
             printf("Name: %s, Age: %d, Salary: %f, Dead: %d\n", name, iAge, fSalary, bDead);
         }

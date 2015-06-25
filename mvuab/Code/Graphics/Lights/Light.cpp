@@ -31,12 +31,12 @@ CLight::CLight()
 }
 
 CLight::CLight( const CXMLTreeNode& node )
-    : CObject3D( node ), CName( node.GetPszProperty( "name", "" ) )
+    : CObject3D( node ), CName( node.GetAttribute<std::string>( "name", "" ) )
     , m_StartRangeAttenuation( node.GetAttribute<float>( "att_start_range", 0 ) )
     , m_EndRangeAttenuation( node.GetAttribute<float>( "att_end_range", 0 ) )
-    , m_Color( node.GetVect3fProperty( "color", Math::Vect3f( 1, 1, 1 ) ) )
+    , m_Color( node.GetAttribute<Math::Vect3f>( "color", Math::Vect3f( 1, 1, 1 ) ) )
     , m_Intensity( node.GetAttribute<float>( "intensity", 0 ) )
-    , m_RenderShadows( node.GetBoolProperty( "render_shadows", false ) )
+    , m_RenderShadows( node.GetAttribute<bool>( "render_shadows", false ) )
     , m_ViewShadowMap( Math::m44fIDENTITY )
     , m_ProjectionShadowMap( Math:: m44fIDENTITY )
     , m_ShadowMaskTexture( 0 )
@@ -55,13 +55,13 @@ CLight::CLight( const CXMLTreeNode& node )
         if ( TagName == "lens_flare" )
         {
             ASSERT( !mLensFlare, "The light %s only could have one lens flare", GetName().c_str() );
-            mLensFlare = FlareMan->GetResource( lNode.GetPszProperty( "name" ) );
+            mLensFlare = FlareMan->GetResource( lNode.GetAttribute<std::string>( "name", "null_flare" ) );
         }
         else if ( TagName == "shadow_map" )
         {
-            m_RenderShadows = lNode.GetBoolProperty( "render_shadows", false );
+            m_RenderShadows = lNode.GetAttribute<bool>( "render_shadows", false );
 
-            const std::string& l_ShadowMaskTextureFile = node.GetPszProperty( "shadow_texture_mask", "" );
+            const std::string& l_ShadowMaskTextureFile = node.GetAttribute<std::string>( "shadow_texture_mask", "" );
 
             if ( l_ShadowMaskTextureFile != "" )
             {

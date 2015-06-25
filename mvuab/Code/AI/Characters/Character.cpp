@@ -58,14 +58,14 @@ void CCharacter::Init()
 
 void CCharacter::Init( CXMLTreeNode& Node )
 {
-    m_AIPath = Node.GetPszProperty( "lua_path", "no_path" );
+    m_AIPath = Node.GetAttribute<std::string>( "lua_path", "no_path" );
     CPhysicsManager* l_PM = PhysXMInstance;
     l_PM->AddController( m_Name, Node.GetAttribute<float>( "radius", 0.4f ),
                          Node.GetAttribute<float>( "height", 2.0f ),
                          Node.GetAttribute<float>( "slope", 0.2f ),
                          Node.GetAttribute<float>( "skin_width", 0.01f ),
                          Node.GetAttribute<float>( "step", 0.5f ),
-                         Node.GetVect3fProperty( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
+                         Node.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f( 0, 4.0, 0 ) ),
                          GetCollisionGroup(), Node.GetAttribute<float>( "gravity", -10.0f ) );
     m_Controller = l_PM->CMapManager<CPhysicController>::GetResource( m_Name );
     SetPosition( m_Controller->GetPosition() );

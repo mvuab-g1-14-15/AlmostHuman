@@ -6,7 +6,9 @@ CRenderableObject::CRenderableObject() : CObject3D(), CName()
 {
 }
 
-CRenderableObject::CRenderableObject(CXMLTreeNode &atts) : CObject3D(atts), CName(atts.GetPszProperty("name", ""))
+CRenderableObject::CRenderableObject(const CXMLTreeNode &atts)
+    : CObject3D(atts)
+    , CName(atts.GetAttribute<std::string>("name", ""))
 {
 }
 

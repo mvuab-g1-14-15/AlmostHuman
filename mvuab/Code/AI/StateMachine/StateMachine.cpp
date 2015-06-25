@@ -37,7 +37,7 @@ bool CStateMachine::Load( const std::string& FileName )
 
             if ( TagName == "state" )
             {
-                const std::string& l_Name = l_CurrentNode.GetPszProperty( "name", "no_name" );
+                const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_name" );
                 CState* l_State = new CState( l_Name );
 
                 if ( !l_State->Load( l_CurrentNode ) )

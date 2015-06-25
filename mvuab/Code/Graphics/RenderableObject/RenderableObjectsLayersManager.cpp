@@ -18,11 +18,15 @@
 #include "Math\AABB.h"
 
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager() : m_DefaultRenderableObjectManager(0), CManager()
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
+    : m_DefaultRenderableObjectManager(0)
+    , CManager()
 {
 }
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(CXMLTreeNode& atts) : m_DefaultRenderableObjectManager(0), CManager(atts)
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager( const CXMLTreeNode& atts)
+    : m_DefaultRenderableObjectManager(0)
+    , CManager(atts)
 {
 }
 
@@ -41,74 +45,61 @@ void CRenderableObjectsLayersManager::Destroy()
 
 void CRenderableObjectsLayersManager::Init()
 {
-    CXMLTreeNode l_File;
+    CXMLTreeNode l_File, TreeNode;
 
-    if ( !l_File.LoadFile( mConfigPath.c_str() ) )
+    if ( !l_File.LoadAndFindNode( mConfigPath.c_str(), "RenderableObjects", TreeNode ) )
     {
-        std::string err = "ERROR reading the file " + mConfigPath;
-
-        MessageBox( NULL, err.c_str() , "Error", MB_ICONEXCLAMATION | MB_OK );
-        exit( EXIT_FAILURE );
+        FATAL_ERROR("Error loading renderable objects layer manager, with the config file %s", mConfigPath.c_str() );
     }
-
-    CXMLTreeNode  TreeNode = l_File["RenderableObjects"];
-
-    if ( !TreeNode.Exists() )
-        return;
-
-    for ( int i = 0; i < TreeNode.GetNumChildren(); ++i )
+    else
     {
-        const std::string& lTagName = TreeNode( i ).GetName();
-        const std::string& lName = TreeNode( i ).GetPszProperty( "name", "" );
-
-        if ( lTagName == "layer" )
+        for ( uint32 i = 0, lCount = TreeNode.GetNumChildren(); i < lCount ; ++i )
         {
-            if ( TreeNode( i ).GetBoolProperty( "default", false ) )
-            {
-                m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+            const CXMLTreeNode& lNode = TreeNode(i);
+            const std::string& lTagName = lNode.GetName();
+            const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
 
-                if ( !AddResource( lName, m_DefaultRenderableObjectManager ) )
+            if ( lTagName == "layer" )
+            {
+                if ( lNode.GetAttribute<bool>( "default", false ) )
                 {
-                    LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                    CHECKED_DELETE( m_DefaultRenderableObjectManager );
+                    m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+
+                    if ( !AddResource( lName, m_DefaultRenderableObjectManager ) )
+                    {
+                        LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
+                        CHECKED_DELETE( m_DefaultRenderableObjectManager );
+                    }
+                }
+                else
+                {
+                    CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+
+                    if ( !AddResource( lName, RenderableObjectManager ) )
+                    {
+                        LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
+                        CHECKED_DELETE( RenderableObjectManager );
+                    }
                 }
             }
             else
             {
-                CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+                CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( lNode );
+                ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
 
-                if ( !AddResource( lName, RenderableObjectManager ) )
+                if ( lTagName == "MeshInstance" )
                 {
-                    LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                    CHECKED_DELETE( RenderableObjectManager );
+                    AddNewInstaceMesh( lNode );
                 }
-            }
-        }
-        else
-        {
-            CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( TreeNode( i ) );
-            ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
-
-            if ( lTagName == "MeshInstance" )
-            {
-                /*CInstanceMesh* l_InstanceMesh = new CInstanceMesh(TreeNode(i));
-
-                if (!lRenderableObjectManager->AddResource(lName, l_InstanceMesh))
+                else if ( lTagName == "AnimatedInstance" )
                 {
-                    LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
-                    CHECKED_DELETE(l_InstanceMesh);
-                }*/
+                    CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
 
-                AddNewInstaceMesh( TreeNode( i ) );
-            }
-            else if ( lTagName == "AnimatedInstance" )
-            {
-                CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( TreeNode( i ) );
-
-                if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
-                {
-                    LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
-                    CHECKED_DELETE( l_AnimatedInstance );
+                    if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
+                    {
+                        LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
+                        CHECKED_DELETE( l_AnimatedInstance );
+                    }
                 }
             }
         }
@@ -124,14 +115,18 @@ void CRenderableObjectsLayersManager::Update()
     std::vector<CRenderableObjectsManager*>::iterator itb = GetResourcesVector().begin(), ite = GetResourcesVector().end();
 
     for ( ; itb != ite; ++itb )
+    {
         ( *itb )->Update();
+    }
 }
 void CRenderableObjectsLayersManager::Render()
 {
     std::vector<CRenderableObjectsManager*>::iterator itb = GetResourcesVector().begin(), ite = GetResourcesVector().end();
 
     for ( ; itb != ite; ++itb )
+    {
         ( *itb )->Render();
+    }
 }
 void CRenderableObjectsLayersManager::Render( const std::string& LayerName )
 {
@@ -139,18 +134,20 @@ void CRenderableObjectsLayersManager::Render( const std::string& LayerName )
     TMapResources::iterator itb = l_ResourcesMap.find( LayerName );
 
     if ( itb != l_ResourcesMap.end() )
+    {
         ( *itb ).second.m_Value->Render();
+    }
 }
-CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectManager( CXMLTreeNode& Node )
+CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectManager( const CXMLTreeNode& Node )
 {
-    const std::string& l_Layer = Node.GetPszProperty( "layer", "" );
+    const std::string& l_Layer = Node.GetAttribute<std::string>( "layer", "" );
     return ( l_Layer == "" ) ? m_DefaultRenderableObjectManager : GetResource( l_Layer.c_str() );
 }
 
-void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
+void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts )
 {
     CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-    l_InstanceMesh->SetType( atts.GetPszProperty( "type", "static" ) );
+    l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
 
     bool lOk = false;
     const string& l_Name = l_InstanceMesh->GetName();
@@ -158,10 +155,12 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
     CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( l_Name );
 
     if(l_InstanceMesh->GetType() == "dynamic")
+    {
         l_pPhysicUserDataMesh->SetGroup( ECG_DYNAMIC_OBJECTS );
+    }
 
     CPhysicActor* l_MeshActor = new CPhysicActor( l_pPhysicUserDataMesh );
-    
+
     if(l_InstanceMesh->GetType() == "dynamic")
     {
         CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
@@ -172,13 +171,15 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( CXMLTreeNode& atts )
         l_MeshActor->AddBoxShape(Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f), l_Pos);
         l_MeshActor->CreateBody(1.0f);
     }
-	else
-	{
-		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-		l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
-	}
+    else
+    {
+        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(),
+                                         l_InstanceMesh->GetIndexBuffer() );
+        l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
+    }
 
-    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name,l_MeshActor))
+    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) &&
+            PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name, l_MeshActor))
     {
         lOk = true;
         m_PhyscsUserData.push_back(l_pPhysicUserDataMesh);

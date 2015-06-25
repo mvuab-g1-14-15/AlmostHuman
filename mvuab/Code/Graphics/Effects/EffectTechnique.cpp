@@ -13,43 +13,43 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
                                     CXMLTreeNode& HandlesNode )
     : m_TechniqueName( TechniqueName ),
       m_EffectName( EffectName ),
-      m_UseCameraPosition( HandlesNode.GetBoolProperty( "use_camera_position", false ) ),
-      m_UseInverseProjMatrix( HandlesNode.GetBoolProperty( "use_inverse_projection_matrix", false ) ),
-      m_UseInverseViewMatrix( HandlesNode.GetBoolProperty( "use_inverse_view_matrix", false ) ),
-      m_UseInverseWorldMatrix( HandlesNode.GetBoolProperty( "use_inverse_world_matrix", false ) ),
+      m_UseCameraPosition( HandlesNode.GetAttribute<bool>( "use_camera_position", false ) ),
+      m_UseInverseProjMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_projection_matrix", false ) ),
+      m_UseInverseViewMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_view_matrix", false ) ),
+      m_UseInverseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_world_matrix", false ) ),
 
-      m_UseProjMatrix( HandlesNode.GetBoolProperty( "use_projection_matrix", false ) ),
-      m_UseViewMatrix( HandlesNode.GetBoolProperty( "use_view_matrix", false ) ),
-      m_UseWorldMatrix( HandlesNode.GetBoolProperty( "use_world_matrix", false ) ),
-      m_UseWorldViewMatrix( HandlesNode.GetBoolProperty( "use_world_view_matrix", false ) ),
-      m_UseWorldViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_world_view_projection_matrix",
+      m_UseProjMatrix( HandlesNode.GetAttribute<bool>( "use_projection_matrix", false ) ),
+      m_UseViewMatrix( HandlesNode.GetAttribute<bool>( "use_view_matrix", false ) ),
+      m_UseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_world_matrix", false ) ),
+      m_UseWorldViewMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_matrix", false ) ),
+      m_UseWorldViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_projection_matrix",
                                       false ) ),
-      m_UseViewProjectionMatrix( HandlesNode.GetBoolProperty( "use_view_projection_matrix", false ) ),
+      m_UseViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_view_projection_matrix", false ) ),
       m_UseViewToLightProjectionMatrix(
-          HandlesNode.GetBoolProperty( "use_view_to_light_projection_matrix", false ) ),
+          HandlesNode.GetAttribute<bool>( "use_view_to_light_projection_matrix", false ) ),
 
       // Lights
       m_NumOfLights( HandlesNode.GetAttribute<int32>( "num_of_lights", 0 ) ),
-      m_UseLights( HandlesNode.GetBoolProperty( "use_lights", false ) ),
-      m_UseLightAmbientColor( HandlesNode.GetBoolProperty( "use_light_ambient_color", false ) ),
+      m_UseLights( HandlesNode.GetAttribute<bool>( "use_lights", false ) ),
+      m_UseLightAmbientColor( HandlesNode.GetAttribute<bool>( "use_light_ambient_color", false ) ),
 
       // Debug
-      m_UseDebugColor( HandlesNode.GetBoolProperty( "use_debug_color", false ) ),
+      m_UseDebugColor( HandlesNode.GetAttribute<bool>( "use_debug_color", false ) ),
       m_DebugColor( Math::colWHITE ),
 
       // Timers
-      m_UseTime( HandlesNode.GetBoolProperty( "use_time", false ) ),
-      m_UseDeltaTime( HandlesNode.GetBoolProperty( "use_delta_time", false ) ),
+      m_UseTime( HandlesNode.GetAttribute<bool>( "use_time", false ) ),
+      m_UseDeltaTime( HandlesNode.GetAttribute<bool>( "use_delta_time", false ) ),
 
       // Fog
-      m_UseFog( HandlesNode.GetBoolProperty( "use_fog", false ) ),
+      m_UseFog( HandlesNode.GetAttribute<bool>( "use_fog", false ) ),
       m_FogStart( HandlesNode.GetAttribute<float>( "fog_start", 0 ) ),
       m_FogEnd( HandlesNode.GetAttribute<float>( "fog_end", 0 ) ),
       m_FogExp( HandlesNode.GetAttribute<float>( "fog_exp", 0 ) ),
       m_FogFun( ( EFogFunction )HandlesNode.GetAttribute<int32>( "fog_fun", 1 ) ),
 
       // Texture
-      m_UseTextureSizes( HandlesNode.GetBoolProperty( "use_texture_size", false ) ),
+      m_UseTextureSizes( HandlesNode.GetAttribute<bool>( "use_texture_size", false ) ),
       m_TextureHeight( HandlesNode.GetAttribute<int32>( "texture_height", 0 ) ),
       m_TextureWidth( HandlesNode.GetAttribute<int32>( "texture_width", 0 ) )
 {

@@ -18,10 +18,10 @@
 #endif
 
 CDrawQuadByTechniqueRendererCommand::CDrawQuadByTechniqueRendererCommand( CXMLTreeNode& atts )
-  :   CStagedTexturedRendererCommand( atts )
-  ,   m_Technique (EffectManagerInstance->GetEffectTechnique(atts.GetPszProperty("technique")))
+    :   CStagedTexturedRendererCommand( atts )
+    ,   m_Technique (EffectManagerInstance->GetEffectTechnique(atts.GetAttribute<std::string>("technique", "null_tech")))
 {
-  ASSERT(m_Technique, "DrawQuadByTechniqueRendererCommand empty technique");
+    ASSERT(m_Technique, "DrawQuadByTechniqueRendererCommand empty technique");
 }
 
 CDrawQuadByTechniqueRendererCommand::~CDrawQuadByTechniqueRendererCommand()
@@ -35,7 +35,9 @@ void CDrawQuadByTechniqueRendererCommand::Execute( CGraphicsManager& GM )
     #ifdef _DEBUG
 
     if ( false ) // DEBUG
-    { DebugTextures(); }
+    {
+        DebugTextures();
+    }
 
     #endif
 

@@ -85,80 +85,66 @@ void CPhysxSkeleton::Release()
 
 bool CPhysxSkeleton::Load(const std::string& _szFileName)
 {
+    bool lOk = true;
     CXMLTreeNode l_XML;
     CXMLTreeNode l_XMLObjects;
-    if(!l_XML.LoadFile(_szFileName.c_str()))
+    if(!l_XML.LoadAndFindNode(_szFileName.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
-        return false;
+        LOG_WARNING_APPLICATION "Could not open file %s", _szFileName.c_str());
+        lOk = false;
     }
-
-    l_XMLObjects = l_XML(0);
-    int l_iNumObjects = l_XMLObjects.GetNumChildren();
-
-    for(int i = 0; i < l_iNumObjects; i++)
+    else
     {
-        CXMLTreeNode l_XMLObject = l_XMLObjects(i);
-        string l_szType, l_szName;
-
-        if(l_XMLObject.IsComment())
+        for(uint32 i = 0, l_iNumObjects = l_XMLObjects.GetNumChildren(); i < l_iNumObjects; ++i)
         {
-            continue;
+            const CXMLTreeNode& l_XMLObject = l_XMLObjects(i);
+            const std::string& l_szName = l_XMLObject.GetAttribute<std::string>("name" , "");
+
+            CPhysxBone* l_pBone = GetPhysxBoneByName(l_szName);
+
+            if (l_pBone )
+            {
+                const std::string& l_szType = l_XMLObject.GetAttribute<std::string>("type" , "");
+                if (l_szType == "box")
+                {
+                    l_pBone->AddBoxActor(l_XMLObject, m_pEntity);
+                }
+                else if (l_szType == "sphere")
+                {
+                    l_pBone->AddSphereActor(l_XMLObject, m_pEntity);
+                }
+                else if (l_szType == "capsule")
+                {
+                    l_pBone->AddCapsuleActor(l_XMLObject, m_pEntity);
+                }
+            }
         }
 
-        l_szName = l_XMLObject.GetPszISOProperty("name" , "");
-        l_szType = l_XMLObject.GetPszISOProperty("type" , "");
-
-        CPhysxBone* l_pBone = GetPhysxBoneByName(l_szName);
-
-        if (l_pBone != 0)
+        if (!m_bRagdollActive)
         {
-            if (l_szType == "box")
-            {
-                l_pBone->AddBoxActor(l_XMLObject, m_pEntity);
-            }
-
-            if (l_szType == "sphere")
-            {
-                l_pBone->AddSphereActor(l_XMLObject, m_pEntity);
-            }
-
-            if (l_szType == "capsule")
-            {
-                l_pBone->AddCapsuleActor(l_XMLObject, m_pEntity);
-            }
+            SleepPhysxBones();
         }
     }
 
-
-
-    if (!m_bRagdollActive)
-    {
-        SleepPhysxBones();
-    }
-
-    return true;
+    return lOk;
 }
 
 
 CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(const std::string& _szName)
 {
-
     CPhysxBone* l_pBone = 0;
 
-    for(size_t i = 0; i < m_vBones.size(); ++i)
+    for( size_t i = 0; i < m_vBones.size() && !l_pBone; ++i )
     {
-        string l_szName;
-        l_szName = m_vBones[i]->GetName();
+        const std::string& l_szName = m_vBones[i]->GetName();
         if (l_szName == _szName)
         {
             l_pBone = m_vBones[i];
-            return l_pBone;
         }
 
     }
 
-    return 0;
+    return l_pBone;
 }
 
 
@@ -188,7 +174,7 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
             continue;
         }
 
-        l_szType = l_XMLObject.GetPszISOProperty("type" , "");
+        l_szType = l_XMLObject.GetAttribute<std::string>("type" , "");
 
         if (l_szType == "spherical")
         {
@@ -215,9 +201,9 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 {
     string l_szActor1, l_szActor2, l_szDirection;
 
-    l_szActor1        = _XMLObjects.GetPszISOProperty("Actor1" , "");
-    l_szActor2        = _XMLObjects.GetPszISOProperty("Actor2" , "");
-    l_szDirection = _XMLObjects.GetPszISOProperty("Direction" , "");
+    l_szActor1        = _XMLObjects.GetAttribute<std::string>("Actor1" , "");
+    l_szActor2        = _XMLObjects.GetAttribute<std::string>("Actor2" , "");
+    l_szDirection = _XMLObjects.GetAttribute<std::string>("Direction" , "");
 
     SSphericalLimitInfo l_pJointInfo = GetJointParameterInfo(_XMLObjects);
 
@@ -309,9 +295,9 @@ bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
 {
     string l_szActor1, l_szActor2, l_szDirection;
 
-    l_szActor1        = _XMLObjects.GetPszISOProperty("Actor1" , "");
-    l_szActor2        = _XMLObjects.GetPszISOProperty("Actor2" , "");
-    l_szDirection = _XMLObjects.GetPszISOProperty("Direction" , "");
+    l_szActor1        = _XMLObjects.GetAttribute<std::string>("Actor1" , "");
+    l_szActor2        = _XMLObjects.GetAttribute<std::string>("Actor2" , "");
+    l_szDirection = _XMLObjects.GetAttribute<std::string>("Direction" , "");
 
     CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
     CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
@@ -358,28 +344,28 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
 
     if (l_sInfo.JointSpring)
     {
-        Vect2f l_vJointSpring = _XMLObjects.GetVect2fProperty("JointSpring", v2fZERO, false);
+        Vect2f l_vJointSpring = _XMLObjects.GetAttribute<Math::Vect2f>("JointSpring", v2fZERO, false);
         l_sInfo.JointSpringValue = l_vJointSpring.x;
         l_sInfo.JointSpringDamper = l_vJointSpring.y;
     }
 
     if (l_sInfo.TwistSpring)
     {
-        Vect2f l_vTwistSpring = _XMLObjects.GetVect2fProperty("TwistSpring", v2fZERO, false);
+        Vect2f l_vTwistSpring = _XMLObjects.GetAttribute<Math::Vect2f>("TwistSpring", v2fZERO, false);
         l_sInfo.TwistSpringValue = l_vTwistSpring.x;
         l_sInfo.TwistSpringDamper = l_vTwistSpring.y;
     }
 
     if (l_sInfo.SwingSpring)
     {
-        Vect2f l_vSwingSpring = _XMLObjects.GetVect2fProperty("SwingSpring", v2fZERO, false);
+        Vect2f l_vSwingSpring = _XMLObjects.GetAttribute<Math::Vect2f>("SwingSpring", v2fZERO, false);
         l_sInfo.SwingSpringValue = l_vSwingSpring.x;
         l_sInfo.SwingSpringDamper = l_vSwingSpring.y;
     }
 
     if (l_sInfo.SwingLimit)
     {
-        Vect2f l_vSwingLimit = _XMLObjects.GetVect2fProperty("SwingLimit", v2fZERO, false);
+        Vect2f l_vSwingLimit = _XMLObjects.GetAttribute<Math::Vect2f>("SwingLimit", v2fZERO, false);
         l_sInfo.SwingValue = l_vSwingLimit.x;
         l_sInfo.SwingRestitution = l_vSwingLimit.y;
     }
@@ -387,8 +373,8 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
     if (l_bTwistLimitLow && l_bTwistLimitHigh)
     {
         l_sInfo.TwistLimit = true;
-        Vect2f l_vTwistLimitLow = _XMLObjects.GetVect2fProperty("TwistLimitLow", v2fZERO, false);
-        Vect2f l_vTwistLimitHigh = _XMLObjects.GetVect2fProperty("TwistLimitHigh", v2fZERO, false);
+        Vect2f l_vTwistLimitLow = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitLow", v2fZERO, false);
+        Vect2f l_vTwistLimitHigh = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitHigh", v2fZERO, false);
 
         l_sInfo.TwistLowValue = l_vTwistLimitLow.x;
         l_sInfo.TwistLowRestitution = l_vTwistLimitLow.y;

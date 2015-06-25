@@ -14,12 +14,14 @@
 
 CCinematicObject::CCinematicObject(CXMLTreeNode &atts)
 {
-    std::string resource = atts.GetPszProperty("resource", "");
+    std::string resource = atts.GetAttribute<std::string>("resource", "");
 
     m_RenderableObject = ROLMInstance->GetResource("solid")->GetResource(resource);
 
-    for(int i = 0; i < atts.GetNumChildren(); ++i)
-    { m_CinematicObjectKeyFrames.push_back(new CCinematicObjectKeyFrame(atts(i))); }
+    for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i)
+    {
+        m_CinematicObjectKeyFrames.push_back(new CCinematicObjectKeyFrame(atts(i)));
+    }
 }
 
 CCinematicObject::~CCinematicObject()

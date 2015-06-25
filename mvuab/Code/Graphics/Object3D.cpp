@@ -2,11 +2,11 @@
 #include "XML\XMLTreeNode.h"
 
 CObject3D::CObject3D( const CXMLTreeNode& atts )
-    : m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f( 0, 0, 0 ) ) )
+    : m_Position( atts.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f( 0, 0, 0 ) ) )
     , m_fYaw( atts.GetAttribute<float>( "yaw", 0.0f ) )
     , m_fPitch( atts.GetAttribute<float>( "pitch", 0.0f ) )
     , m_fRoll( atts.GetAttribute<float>( "roll", 0.0f ) )
-    , m_Scale( atts.GetVect3fProperty( "scale", Math::Vect3f( 1.0f, 1.0f, 1.0f ) ) )
+    , m_Scale( atts.GetAttribute<Math::Vect3f>( "scale", Math::Vect3f( 1.0f, 1.0f, 1.0f ) ) )
 {
     MakeTransform();
 }
@@ -33,11 +33,11 @@ CObject3D::CObject3D()
 
 bool CObject3D::Init( const CXMLTreeNode& atts )
 {
-    m_Position  = atts.GetVect3fProperty  ( "pos",    Math::Vect3f( 0, 0, 0 ) );
+    m_Position  = atts.GetAttribute<Math::Vect3f>  ( "pos",    Math::Vect3f( 0, 0, 0 ) );
     m_fYaw      = atts.GetAttribute<float>   ( "yaw",    0.0f );
     m_fPitch    = atts.GetAttribute<float>   ( "pitch",  0.0f );
     m_fRoll     = atts.GetAttribute<float>   ( "roll",   0.0f );
-    m_Scale     = atts.GetVect3fProperty  ( "scale",  Math::Vect3f( 1.0f, 1.0f, 1.0f ) );
+    m_Scale     = atts.GetAttribute<Math::Vect3f>  ( "scale",  Math::Vect3f( 1.0f, 1.0f, 1.0f ) );
     MakeTransform();
 
     return true;

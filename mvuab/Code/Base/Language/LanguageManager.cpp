@@ -30,13 +30,13 @@ void CLanguageManager::Init()
 
             if ( TagName == "language" )
             {
-                m_vXML_Files.push_back( std::string( TreeNode( lans ).GetPszProperty( "path", "" ) ) );
+                m_vXML_Files.push_back( std::string( TreeNode( lans ).GetAttribute<std::string>( "path", "" ) ) );
             }
         }
     }
 
     LoadXMLs();
-    SetCurrentLanguage( l_File.GetPszProperty( "current_language", "" ) );
+    SetCurrentLanguage( l_File.GetAttribute<std::string>( "current_language", "" ) );
 }
 void CLanguageManager::LoadXMLs()
 {

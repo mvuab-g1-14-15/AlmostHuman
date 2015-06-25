@@ -26,8 +26,8 @@ CLensFlare::~CLensFlare()
 bool CLensFlare::Init( const CXMLTreeNode& node )
 {
     bool lOk = true;
-    SetName( node.GetPszProperty("name") );
-    mTechnique = EffectManagerInstance->GetEffectTechnique(node.GetPszProperty("technique"));
+    SetName( node.GetAttribute<std::string>("name", "no_name") );
+    mTechnique = node.GetAttribute<CEffectTechnique>("technique");
 
     ASSERT(mTechnique, "Null technique to render the flares");
     for( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount; ++i )
@@ -60,10 +60,10 @@ CFlare::~CFlare()
 
 bool CFlare::Init( const CXMLTreeNode& node )
 {
-    mColor   = node.GetVect3fProperty("color", Math::Vect3f());
-    mSize    = node.GetVect2fProperty("size", Math::Vect2f() );
-    mPos     = node.GetAttribute<float>("position", 0.0f);
-    mTexture = TextureMInstance->GetTexture( node.GetPszProperty("texture") );
+    mColor   = node.GetAttribute<Math::Vect3f>("color", Math::Vect3f());
+    mSize    = node.GetAttribute<Math::Vect2f>("size", Math::Vect2f() );
+    mPos     = node.GetAttribute<float32>("position", 0.0f);
+    mTexture = node.GetAttribute<CTexture>("texture");
     return true;;
 }
 

@@ -7,18 +7,18 @@
 #include "Timer\Timer.h"
 
 CHideElement::CHideElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-  , m_Type( atts.GetPszProperty( "type",  "no_type" ) )
+    , m_Type( atts.GetAttribute<std::string>( "type",  "no_type" ) )
 {
 }
 
 void CHideElement::Update()
 {
-  if( m_Type == "show_dialog" )
-  {
-  //  GUIInstance->GetTextBox()->SetVisible(false);
-  //  GUIInstance->GetTextBox()->SetActive(false);
-  }
-  m_CurrentTime += deltaTimeMacro;
+    if( m_Type == "show_dialog" )
+    {
+        //  GUIInstance->GetTextBox()->SetVisible(false);
+        //  GUIInstance->GetTextBox()->SetActive(false);
+    }
+    m_CurrentTime += deltaTimeMacro;
 }
 
 void CHideElement::Execute( CGraphicsManager& GM )

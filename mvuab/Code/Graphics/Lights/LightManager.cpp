@@ -60,7 +60,7 @@ bool CLightManager::Load( const std::string& FileName )
         }
         else if ( lCurrentNodeName == "ambient_light" )
         {
-            mAmbientLightColor = lCurrentNode.GetVect3fProperty( "color", Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
+            mAmbientLightColor = lCurrentNode.GetAttribute<Math::Vect3f>( "color", Math::Vect3f( 0.0f, 0.0f, 0.0f ) );
         }
         else if ( lCurrentNodeName == "lens_flare" )
         {

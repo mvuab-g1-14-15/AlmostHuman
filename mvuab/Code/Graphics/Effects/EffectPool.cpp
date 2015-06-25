@@ -17,9 +17,9 @@ namespace
 
             if ( l_TagName == "define" )
             {
-                char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "name", "no_name" ) );
+                char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "name", "no_name" ) );
                 aNames.push_back( cstr_name );
-                char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "description",
+                char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "description",
                                   "no_description" ) );
                 aDescriptions.push_back( cstr_desc );
                 D3DXMACRO macro = { cstr_name, cstr_desc };
@@ -74,7 +74,7 @@ CEffect* CEffectPool::CreateEffect( const CXMLTreeNode& aEffectNode )
 {
     //ASSERT( aEffectNode.IsOk(), "The node to extract the effect data is invalid");
 
-    const std::string lEffectName = aEffectNode.GetPszProperty( "name", "invalid_name" );
+    const std::string lEffectName = aEffectNode.GetAttribute<std::string>( "name", "invalid_name" );
 
     ASSERT( lEffectName != "invalid_name", "The effect has no name");
 

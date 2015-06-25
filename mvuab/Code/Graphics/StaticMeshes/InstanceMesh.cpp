@@ -12,19 +12,22 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ),
+    mPhysicActor( 0 )
 {
-  SetName( aName );
+    SetName( aName );
 }
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
-  CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName,
+                              const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
+    CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
-  SetName( aName );
+    SetName( aName );
 }
 
-CInstanceMesh::CInstanceMesh( CXMLTreeNode& atts ) : CRenderableObject( atts ), mStaticMesh( SMeshMInstance->GetResource( atts.GetPszProperty( "core",
-      "no_staticMesh" ) ) ), mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
+    mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core",
+                 "no_staticMesh" ) ) ), mType( "static" ), mPhysicActor( 0 )
 {
 }
 
@@ -34,58 +37,63 @@ CInstanceMesh::~CInstanceMesh()
 
 const std::vector<Math::Vect3f>& CInstanceMesh::GetVertexBuffer()
 {
-  return mStaticMesh->GetVertexBuffer();
+    return mStaticMesh->GetVertexBuffer();
 }
 
 const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 {
-  return mStaticMesh->GetIndexBuffer();
+    return mStaticMesh->GetIndexBuffer();
 }
 
 void CInstanceMesh::Render()
 {
-  if ( !mStaticMesh )
-    return;
+    if ( !mStaticMesh )
+    {
+        return;
+    }
 
-  Math::Mat44f lTransform = GetTransform();
-  Math::AABB3f laabb = mStaticMesh->GetAABB();
+    Math::Mat44f lTransform = GetTransform();
+    Math::AABB3f laabb = mStaticMesh->GetAABB();
 
-  if ( mType == "dynamic" && mPhysicActor != 0 )
-  {
-    mPhysicActor->GetMat44( lTransform );
+    if ( mType == "dynamic" && mPhysicActor != 0 )
+    {
+        mPhysicActor->GetMat44( lTransform );
 
-	Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
-	
-	Math::Mat44f lCenterTransform;
-	lCenterTransform.SetIdentity();
-	
-	lCenterTransform.Translate( lUp );
+        Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
 
-	lTransform = lTransform * lCenterTransform;
-	
-  }
+        Math::Mat44f lCenterTransform;
+        lCenterTransform.SetIdentity();
 
-  GraphicsInstance->SetTransform( lTransform );
+        lCenterTransform.Translate( lUp );
 
-  CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
-  Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+        lTransform = lTransform * lCenterTransform;
 
-  if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z ), laabb.GetRadius() ) )
-    mStaticMesh->Render( GraphicsInstance );
+    }
+
+    GraphicsInstance->SetTransform( lTransform );
+
+    CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+
+    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y,
+                                       lPositionTransformed.z ), laabb.GetRadius() ) )
+    {
+        mStaticMesh->Render( GraphicsInstance );
+    }
 }
 
 void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )
 {
-  mPhysicActor = lPhysicActor;
+    mPhysicActor = lPhysicActor;
 }
 
 CPhysicActor* CInstanceMesh::GetActor()
 {
-  return mPhysicActor;
+    return mPhysicActor;
 }
 
 
 CStaticMesh* CInstanceMesh::GetStaticMesh()
 {
-  return mStaticMesh;
+    return mStaticMesh;
 }

@@ -8,73 +8,61 @@ CState::CState( const std::string& Name ) : CName( Name )
 
 CState::~CState()
 {
-  for ( size_t i = 0; i < m_OnEnterActions.size(); ++i )
-    CHECKED_DELETE( m_OnEnterActions[i] );
+    for ( size_t i = 0; i < m_OnEnterActions.size(); ++i )
+    {
+        CHECKED_DELETE( m_OnEnterActions[i] );
+    }
 
-  m_OnEnterActions.clear();
+    m_OnEnterActions.clear();
 
-  for ( size_t i = 0; i < m_OnExitActions.size(); ++i )
-    CHECKED_DELETE( m_OnExitActions[i] );
+    for ( size_t i = 0; i < m_OnExitActions.size(); ++i )
+    {
+        CHECKED_DELETE( m_OnExitActions[i] );
+    }
 
-  m_OnExitActions.clear();
+    m_OnExitActions.clear();
 
-  for ( size_t i = 0; i < m_UpdateActions.size(); ++i )
-    CHECKED_DELETE( m_UpdateActions[i] );
+    for ( size_t i = 0; i < m_UpdateActions.size(); ++i )
+    {
+        CHECKED_DELETE( m_UpdateActions[i] );
+    }
 
-  m_UpdateActions.clear();
+    m_UpdateActions.clear();
+}
+
+void ReadTriggerAction(const CXMLTreeNode& aNode,  std::vector<CAction*>& aActions )
+{
+    for ( uint32 j = 0, lCount = aNode.GetNumChildren() ; j < lCount ; ++j )
+    {
+        CXMLTreeNode& l_CurrentSubNode = aNode( j );
+        const std::string& ActualTagName = l_CurrentSubNode.GetName();
+
+        if ( ActualTagName == "action" )
+        {
+            CAction* l_Action = new CAction(l_CurrentSubNode);
+            aActions.push_back(l_Action);
+        }
+    }
 }
 
 bool CState::Load( CXMLTreeNode& Node)
 {
-  int count = Node.GetNumChildren();
-
-  for ( int i = 0; i < count; ++i )
-  {
-    CXMLTreeNode& l_CurrentNode = Node( i );
-    const std::string& TagName = l_CurrentNode.GetName();
-    
-    if ( TagName == "on_enter" )
+    for ( uint32 i = 0, lCount = Node.GetNumChildren(); i < lCount; ++i )
     {
-      for ( int j = 0; j < l_CurrentNode.GetNumChildren(); ++j )
-			{
-        CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-		    const std::string& ActualTagName = l_CurrentSubNode.GetName();
-        
-        if ( ActualTagName == "action" )
+        const CXMLTreeNode& l_CurrentNode = Node( i );
+        const std::string& TagName = l_CurrentNode.GetName();
+        if ( TagName == "on_enter" )
         {
-		      CAction* l_Action = new CAction(l_CurrentSubNode);
-		      m_OnEnterActions.push_back(l_Action);
+            ReadTriggerAction( l_CurrentNode, m_OnEnterActions );
         }
-      }
-    }
-	  if ( TagName == "on_exit" )
-    {
-      for ( int j = 0; j < l_CurrentNode.GetNumChildren(); ++j )
-			{
-        CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-		    const std::string& ActualTagName = l_CurrentSubNode.GetName();
-
-        if ( ActualTagName == "action" )
+        else if ( TagName == "on_exit" )
         {
-		      CAction* l_Action = new CAction(l_CurrentSubNode);
-		      m_OnExitActions.push_back(l_Action);
+            ReadTriggerAction( l_CurrentNode, m_OnExitActions );
         }
-      }
-    }
-	  if ( TagName == "update" )
-    {
-		  for ( int j = 0; j < l_CurrentNode.GetNumChildren(); ++j )
-      {
-        CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-		    const std::string& ActualTagName = l_CurrentSubNode.GetName();
-
-        if ( ActualTagName == "action" )
+        else if ( TagName == "update" )
         {
-		      CAction* l_Action = new CAction(l_CurrentSubNode);
-		      m_UpdateActions.push_back(l_Action);
+            ReadTriggerAction( l_CurrentNode, m_UpdateActions );
         }
-      }
     }
-  }
-	return true;
+    return true;
 }

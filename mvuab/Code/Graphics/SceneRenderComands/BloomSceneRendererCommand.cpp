@@ -15,7 +15,7 @@
 
 CBloomSceneRendererCommand::CBloomSceneRendererCommand( CXMLTreeNode& atts )
     : CStagedTexturedRendererCommand( atts )
-    , m_Technique( EffectManagerInstance->GetEffectTechnique( atts.GetPszProperty( "technique", "no_tech" ) ) )
+    , m_Technique( atts.GetAttribute<CEffectTechnique>( "technique" ) )
     , mBloomThreshold( atts.GetAttribute<float>( "BloomThreshold", 0.5f ) )
     , mBlurAmount( atts.GetAttribute<float>( "BlurAmount", 4.0f ) )
     , mBloomIntensity( atts.GetAttribute<float>( "BloomIntensity", 0.8f ) )

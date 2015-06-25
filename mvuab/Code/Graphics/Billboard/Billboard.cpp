@@ -9,9 +9,10 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableVertex\RenderableVertex.h"
 #include "RenderableVertex\IndexedVertexs.h"
-#include "Effects\EffectManager.h"
+#include "Effects/EffectManager.h"
 #include "EngineManagers.h"
 #include "EngineConfig.h"
+#include <string>
 
 
 CRenderableVertexs* CBillboard::sRV = 0;
@@ -36,22 +37,22 @@ bool CBillboard::Init( const CXMLTreeNode& atts )
 {
     bool lOk( true );
 
-    SetName( atts.GetPszProperty( "name", "unknown" ) );
+    SetName( atts.GetAttribute<std::string>( "name", "unknown" ) );
 
     lOk = lOk && CObject3D::Init( atts );
 
     mSize = atts.GetAttribute<float>( "size", 1.0f );
-    m_Active = atts.GetBoolProperty( "enabled", false );
+    m_Active = atts.GetAttribute<bool>( "enabled", false );
 
     // Get the texture of the billboard
-    m_Texture = TextureMInstance->GetTexture( atts.GetPszProperty( "texture" ) );
+    m_Texture = atts.GetAttribute<CTexture>( "texture" );
     lOk = lOk && ( m_Texture != 0 );
 
     // Get the technique of the billboard
-    mTechnique = EffectManagerInstance->GetEffectTechnique( atts.GetPszProperty( "technique" ) );
+    mTechnique = atts.GetAttribute<CEffectTechnique>("technique");
     lOk = lOk && ( mTechnique != 0 );
 
-    ASSERT( mTechnique, "Null technique %s to render the billboard!", atts.GetPszProperty( "technique" ) );
+    //ASSERT( mTechnique, "Null technique %s to render the billboard!", atts.GetAttribute<std::string>( "technique" ) );
 
     return lOk;
 }

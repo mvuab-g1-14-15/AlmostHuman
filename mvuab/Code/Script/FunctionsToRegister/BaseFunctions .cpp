@@ -42,12 +42,12 @@ void registerXML( lua_State *aLuaState )
     /*
         LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
         LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
-    */
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetBoolProperty )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetPszProperty )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetVect3fProperty )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
 
+        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<bool> )
+        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<std::string> )
+        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<Math::Vect3f> )
+        LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
+    */
     LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
     LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
     LUA_END_DECLARATION

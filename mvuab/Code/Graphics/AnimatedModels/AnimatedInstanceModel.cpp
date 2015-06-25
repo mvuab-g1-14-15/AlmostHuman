@@ -43,10 +43,10 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
     m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
     Initialize();
 }
-CAnimatedInstanceModel::CAnimatedInstanceModel( CXMLTreeNode& atts )
+CAnimatedInstanceModel::CAnimatedInstanceModel( const CXMLTreeNode& atts )
     : CRenderableObject( atts  )
     , m_CalModel( 0 )
-    , m_AnimatedCoreModel( AnimatedMInstance->GetCore( atts.GetPszProperty("core", "" ) ) )
+    , m_AnimatedCoreModel( AnimatedMInstance->GetCore( atts.GetAttribute<std::string>("core", "" ) ) )
     , m_BlendTime( 0.3f )
     , m_LodLevel( 1.0f )
     , m_CurrentAnimationId( 1 )

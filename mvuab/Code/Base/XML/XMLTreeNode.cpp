@@ -261,7 +261,7 @@ CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 //----------------------------------------------------------------------------
 // Returns the number of children a tree has
 //----------------------------------------------------------------------------
-int CXMLTreeNode::GetNumChildren() const
+uint32 CXMLTreeNode::GetNumChildren() const
 {
     assert( m_pNode );
     int iCount = 0;
@@ -492,217 +492,6 @@ template<> const Math::Vect3f CXMLTreeNode::GetAttribute<Math::Vect3f>( const ch
 }
 
 //----------------------------------------------------------------------------
-// Returns a boolean param if found. Else a default value
-//----------------------------------------------------------------------------
-
-bool CXMLTreeNode::GetBoolProperty( const char* _pszKey, bool _bDefault, bool warningDefault ) const
-{
-    bool bRet = _bDefault;
-    xmlChar* value = GetProperty( _pszKey );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-
-        if ( strcmp( "TRUE", pszValue ) == 0 || strcmp( "true", pszValue ) == 0 ||
-                strcmp( "True", pszValue ) == 0 )
-        {
-            bRet = true;
-        }
-        else
-        {
-            bRet = false;
-        }
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>",
-                                _bDefault,
-                                _pszKey );
-
-    xmlFree( value );
-    return bRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns an string param if found. Else a default value
-//----------------------------------------------------------------------------
-const char* CXMLTreeNode::GetPszProperty( const char* _pszKey, const char* _pszDefault,
-        bool warningDefault ) const
-{
-    const char* pszRet = _pszDefault;
-    xmlChar* value = GetProperty( _pszKey );
-
-    if ( value )
-    {
-        pszRet = ( const char* )value;
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
-                                _pszDefault, _pszKey );
-
-    return pszRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns an string param if found. Else a default value
-//----------------------------------------------------------------------------
-std::string CXMLTreeNode::GetPszISOProperty( const char* _pszKey, const char* _pszDefault,
-        bool warningDefault ) const
-{
-    std::string szRet = ( char* )_pszDefault;
-    xmlChar* value = GetProperty( _pszKey );
-
-    if ( value )
-    {
-        unsigned char* in = ( unsigned char* )value;
-        int inlen = ( int )strlen( ( const char* )in );
-        int outlen = inlen * 4;
-        unsigned char* out = ( unsigned char* )calloc( 1, outlen );
-        UTF8Toisolat1( out, &outlen, in, &inlen );
-        szRet = ( char* )out;
-        free( out );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",
-                                _pszDefault, _pszKey );
-
-    return szRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect2f param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect2f CXMLTreeNode::GetVect2fProperty( const char* _pszKey, const Math::Vect2f& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect2f l_V2f( 0.0f, 0.0f );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%f %f", &l_V2f.x, &l_V2f.y );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",
-                                _Default.x, _Default.y, _pszKey );
-
-    xmlFree( value );
-    return l_V2f;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect3f param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect3f CXMLTreeNode::GetVect3fProperty( const char* _pszKey, const Math::Vect3f& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect3f l_V3f( 0.0f, 0.0f, 0.0f );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%f %f %f", &l_V3f.x, &l_V3f.y, &l_V3f.z );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",
-                                _Default.x, _Default.y, _Default.z, _pszKey );
-
-    xmlFree( value );
-    return l_V3f;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect4f param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect4f CXMLTreeNode::GetVect4fProperty( const char* _pszKey, const Math::Vect4f& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect4f l_V4f( 0.0f, 0.0f, 0.0f, 0.0f );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%f %f %f %f", &l_V4f.x, &l_V4f.y, &l_V4f.z, &l_V4f.w );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",
-                                _Default.x, _Default.y, _Default.z, _Default.w, _pszKey );
-
-    xmlFree( value );
-    return l_V4f;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect2i param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect2i CXMLTreeNode::GetVect2iProperty( const char* _pszKey, const Math::Vect2i& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect2i l_V2i( 0, 0 );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%d %d", &l_V2i.x, &l_V2i.y );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>",
-                                _Default.x, _Default.y, _pszKey );
-
-    xmlFree( value );
-    return l_V2i;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect3i param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect3i CXMLTreeNode::GetVect3iProperty( const char* _pszKey, const Math::Vect3i& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect3i l_V3i( 0, 0, 0 );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%d %d %d", &l_V3i.x, &l_V3i.y, &l_V3i.z );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",
-                                _Default.x, _Default.y, _Default.z, _pszKey );
-
-    xmlFree( value );
-    return l_V3i;
-}
-
-//----------------------------------------------------------------------------
-// Returns an Math::Vect4i param if found. Else a default value
-//----------------------------------------------------------------------------
-Math::Vect4i CXMLTreeNode::GetVect4iProperty( const char* _pszKey, const Math::Vect4i& _Default,
-        bool warningDefault ) const
-{
-    xmlChar* value = GetProperty( _pszKey );
-    Math::Vect4i l_V4i( 0, 0, 0, 0 );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-        sscanf_s( pszValue, "%d %d %d %d", &l_V4i.x, &l_V4i.y, &l_V4i.z, &l_V4i.w );
-    }
-    else if ( warningDefault )
-        LOG_WARNING_APPLICATION("CXMLTreeNode::GetMath::Vect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>",
-                                _Default.x, _Default.y, _Default.z, _Default.w, _pszKey );
-
-    xmlFree( value );
-    return l_V4i;
-}
-
-
-//----------------------------------------------------------------------------
 // Returns an keyword from the tree from a given key
 //----------------------------------------------------------------------------
 xmlChar* CXMLTreeNode::GetKeyword( const char* _pszKey ) const
@@ -723,84 +512,7 @@ xmlChar* CXMLTreeNode::GetKeyword( const char* _pszKey ) const
     return value;
 }
 
-//----------------------------------------------------------------------------
-// Returns an integer keyword if found. Else a default value
-//----------------------------------------------------------------------------
-int CXMLTreeNode::GetIntKeyword( const char* _pszKey, int _iDefault/*=0*/ ) const
-{
-    int iRet = _iDefault;
-    xmlChar* value = GetKeyword( _pszKey );
-
-    if ( value )
-    {
-        iRet = atoi( ( const char* )value );
-    }
-
-    return iRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns a float32 keyword if found. Else a default value
-//----------------------------------------------------------------------------
-float32 CXMLTreeNode::GetFloatKeyword( const char* _pszKey, float32 _fDefault/*=0.0*/ ) const
-{
-    float32 fRet = _fDefault;
-    xmlChar* value = GetKeyword( _pszKey );
-
-    if ( value )
-    {
-        fRet = static_cast<float32>( atof( ( const char* )value ) );
-    }
-
-    return fRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns a boolean keyword if found. Else a default value
-//----------------------------------------------------------------------------
-bool CXMLTreeNode::GetBoolKeyword( const char* _pszKey, bool _bDefault/*=false*/ ) const
-{
-    bool bRet = _bDefault;
-    xmlChar* value = GetKeyword( _pszKey );
-
-    if ( value )
-    {
-        const char* pszValue = ( const char* )value;
-
-        if ( strcmp( "TRUE", pszValue ) == 0 || strcmp( "true", pszValue ) == 0 ||
-                strcmp( "True", pszValue ) == 0 )
-        {
-            bRet = true;
-        }
-        else
-        {
-            bRet = false;
-        }
-    }
-
-    return bRet;
-}
-
-//----------------------------------------------------------------------------
-// Returns a string keyword if found. Else a default value
-//----------------------------------------------------------------------------
-const char* CXMLTreeNode::GetPszKeyword( const char* _pszKey,
-        const char* _pszDefault/*=NULL*/ ) const
-{
-    const char* pszRet = _pszDefault;
-    xmlChar* value = GetKeyword( _pszKey );
-
-    if ( value )
-    {
-        pszRet = ( const char* )value;
-    }
-
-    return pszRet;
-}
-
-//----------------------------------------------------------------------------
-// Checks if a key is on the tree
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------
 bool CXMLTreeNode::ExistsKey( const char* _pszKey )
 {
     assert( _pszKey );
@@ -808,8 +520,6 @@ bool CXMLTreeNode::ExistsKey( const char* _pszKey )
     return TreeFound.Exists();
 }
 
-//----------------------------------------------------------------------------
-// Starts a new file and prepares it to be written
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::StartNewFile( const char* _pszFileName )
 {
@@ -819,6 +529,7 @@ bool CXMLTreeNode::StartNewFile( const char* _pszFileName )
     if ( _pszFileName )
     {
         m_pszFileName = _pszFileName;
+
         // Create a new XmlWriter for DOM, with no compression.
         m_pWriter = xmlNewTextWriterDoc( &m_pDoc, 0 );
         assert( m_pWriter );
@@ -1241,23 +952,4 @@ bool CXMLTreeNode::WriteVect4iProperty( const char* _pszKey, const Math::Vect4i&
     }
 
     return false;
-}
-
-//----------------------------------------------------------------------------
-// Return true if node is a comment
-//----------------------------------------------------------------------------
-bool CXMLTreeNode::IsComment() const
-{
-    if ( m_pNode )
-    {
-        return ( m_pNode->type == XML_COMMENT_NODE );
-    }
-
-    return false;
-}
-
-Math::CColor CXMLTreeNode::GetCColorProperty( const char* _pszKey, const Math::CColor& _Default,
-        bool warningDefault ) const
-{
-    return Math::CColor( GetVect4fProperty( _pszKey, Math::Vect4f( 0, 0, 0, 0 ), warningDefault ) );
 }

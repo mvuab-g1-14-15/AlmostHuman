@@ -15,7 +15,7 @@ class CAnimatedInstanceModel : public CRenderableObject
 {
     public:
         CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName );
-        CAnimatedInstanceModel( CXMLTreeNode& atts );
+        CAnimatedInstanceModel( const CXMLTreeNode& atts );
         ~CAnimatedInstanceModel();
 
         void Initialize();

@@ -5,7 +5,7 @@
 #include "Timer\Timer.h"
 
 CSetCameraElement::CSetCameraElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-    , m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f(0, 0, 0) ) )
+    , m_Position( atts.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f(0, 0, 0) ) )
     , m_Yaw( atts.GetAttribute<float>( "yaw", 0.0 ) )
     , m_Pitch( atts.GetAttribute<float>( "pitch", 0.0 ) )
     , m_Roll( atts.GetAttribute<float>( "roll", 0.0 ) )

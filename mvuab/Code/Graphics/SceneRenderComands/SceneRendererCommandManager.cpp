@@ -180,7 +180,7 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
 
         if ( l_TagName == "postproc" )
         {
-            if ( !Load( l_CurrentNode.GetPszProperty( "filename", "" ) ) )
+            if ( !Load( l_CurrentNode.GetAttribute<std::string>( "filename", "" ) ) )
             {
                 LOG_ERROR_APPLICATION( "Load->Error al intentar cargar el command: %s", l_TagName.c_str() );
                 lOk = false;
@@ -193,7 +193,7 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
             {
                 CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
                     dynamic_cast<CSetRenderTargetSceneRendererCommand*>( m_SceneRendererCommands.GetResource(
-                                l_CurrentNode.GetPszProperty( "render_target", "" ) ) );
+                                l_CurrentNode.GetAttribute<std::string>( "render_target", "" ) ) );
                 Command = new CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, l_CurrentNode );
                 LOG_INFO_APPLICATION("Command added %s",  l_TagName.c_str() );
             }
@@ -210,7 +210,8 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
             }
             else
             {
-                if ( !m_SceneRendererCommands.AddResource( l_CurrentNode.GetPszProperty( "name", GetNextName().c_str() ), Command ) )
+                if ( !m_SceneRendererCommands.AddResource( l_CurrentNode.GetAttribute<std::string>( "name", GetNextName().c_str() ),
+                        Command ) )
                 {
                     CHECKED_DELETE( Command );
                 }

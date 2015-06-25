@@ -30,7 +30,7 @@
 #include "Cameras/CameraManager.h"
 
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
-    : CCharacter( Node.GetPszProperty( "name", "no_name" ) )
+    : CCharacter( Node.GetAttribute<std::string>( "name", "no_name" ) )
     , m_CurrentState( "inicial" )
     , m_NextState( "inicial" )
     , m_OnEnter( true )
@@ -101,9 +101,13 @@ void CEnemy::Update()
         CShoot* lShoot = *it_shoot;
 
         if ( lShoot->Impacted() )
+        {
             it_shoot = mShoots.erase( it_shoot );
+        }
         else
+        {
             ++it_shoot;
+        }
     }
 
     it_shoot = mShoots.begin();
@@ -133,13 +137,16 @@ void CEnemy::Update()
         l_Gizmo = l_GizmosManager->CreateGizmo( l_GizmoName, l_Pos, m_fYaw, m_fPitch );
         l_GizmosManager->AddResource( l_GizmoName, l_Gizmo );
 
-        CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.4f, 0.0f, 0.0f ), 0.0f, 0.0f, Math::colRED );
+        CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.4f, 0.0f,
+                                   0.0f ), 0.0f, 0.0f, Math::colRED );
         l_Gizmo->AddElement( l_Element );
 
-        l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.0f, 0.4f, 0.0f ), 0.0f, 0.0f, Math::colGREEN );
+        l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.0f, 0.4f, 0.0f ), 0.0f,
+                    0.0f, Math::colGREEN );
         l_Gizmo->AddElement( l_Element );
 
-        l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.0f, 0.0f, 0.4f ), 0.0f, 0.0f, Math::colBLUE );
+        l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.2f, Math::Vect3f( 0.0f, 0.0f, 0.4f ), 0.0f,
+                    0.0f, Math::colBLUE );
         l_Gizmo->AddElement( l_Element );
 
         l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eSphere, 0.2f, Math::Vect3f( 0.0f ), 0.0f, 0.0f );
@@ -155,13 +162,16 @@ void CEnemy::Update()
         CGizmo* l_Gizmo = l_GizmosManager->GetResource( l_GizmoName );
 
         if ( l_Gizmo )
+        {
             l_Gizmo->SetPosition( GetTargetPosition() );
+        }
         else
         {
             l_Gizmo = l_GizmosManager->CreateGizmo( l_GizmoName, GetTargetPosition(), 0.0f, 0.0f );
             l_GizmosManager->AddResource( l_GizmoName, l_Gizmo );
 
-            CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.4f, Math::Vect3f( 0.0f ), 0.0f, 0.0f, Math::colRED );
+            CGizmoElement* l_Element = l_GizmosManager->CreateGizmoElement( CGizmoElement::eCube, 0.4f, Math::Vect3f( 0.0f ), 0.0f,
+                                       0.0f, Math::colRED );
             l_Gizmo->AddElement( l_Element );
         }
     }
@@ -169,7 +179,9 @@ void CEnemy::Update()
     CScriptManager* l_SM = ScriptMInstance;
 
     if ( m_CurrentState != m_NextState )
+    {
         m_OnExit = true;
+    }
 
     CState* l_State = m_pStateMachine->GetResource( m_CurrentState );
     std::vector<CAction*> l_Actions;
@@ -187,13 +199,17 @@ void CEnemy::Update()
         m_CurrentState = m_NextState;
     }
     else
+    {
         l_Actions = l_State->GetUpdateActions();
+    }
 
     std::vector<CAction*>::iterator it = l_Actions.begin(),
                                     it_end = l_Actions.end();
 
     for ( ; it != it_end; ++it )
+    {
         l_SM->RunCode( ( *it )->GetLuaFunction() + "()" );
+    }
 }
 
 void CEnemy::ChangeState( std::string NewState )
@@ -259,7 +275,9 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
                                         it_end = mPath.end();
 
     for ( ; it != it_end; ++it )
+    {
         it->y = 0.0f;
+    }
 
     Math::Vect3f lTargetPos = lPos;
     Math::Vect3f lPosAux = lPos;
@@ -269,7 +287,9 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
     if ( mPath.size() > 2 )
     {
         if ( lDist < 0.6f )
+        {
             mPath.erase( mPath.begin() + 1 );
+        }
 
         lTargetPos = mPath[1];
     }
@@ -286,7 +306,9 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
     aTargetPos.y = 0.0;
 
     if ( mPath[mPath.size() - 1].Distance( aTargetPos ) > 5.0f )
+    {
         mPathCalculated = false;
+    }
 }
 
 Math::Vect3f CEnemy::GetDirectionEnemy()

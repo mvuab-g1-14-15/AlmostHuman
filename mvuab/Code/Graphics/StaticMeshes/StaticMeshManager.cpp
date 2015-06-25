@@ -35,8 +35,8 @@ void CStaticMeshManager::Init()
 
     for( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
-        const std::string &lName = node(i).GetPszProperty("name", "no_name");
-        const std::string &file = "Data" + std::string( node(i).GetPszProperty("filename", "no_file") );
+        const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
+        const std::string &file = "Data" + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
 
         CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
@@ -45,7 +45,9 @@ void CStaticMeshManager::Init()
 
         // Default TODO Delete
         if( !AddResource( lName, l_StaticMesh ) )
+        {
             CHECKED_DELETE(l_StaticMesh);
+        }
     }
 }
 

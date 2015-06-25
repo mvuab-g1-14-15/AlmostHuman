@@ -30,7 +30,7 @@
 #include "EngineManagers.h"
 
 #if defined(_DEBUG)
-#include "Memory\MemLeaks.h"
+    #include "Memory\MemLeaks.h"
 #endif
 
 
@@ -146,7 +146,9 @@ void CPhysicsManager::Init()
                     m_bIsOk = m_pCookingMesh->Init( m_pPhysicsSDK, m_pMyAllocator );
 
                     if ( m_bIsOk )
+                    {
                         LOG_INFO_APPLICATION( "PhysicsManager::Init-> Creado el CookingMesh" );
+                    }
                 }// isOk mControllerManager?
             }//isOk m_pScene?
         }//isOk m_pPhysicsSDK ?
@@ -160,12 +162,12 @@ void CPhysicsManager::Init()
     }
 
     /*Precompilation Directives*/
-#if defined( _DEBUG )
+    #if defined( _DEBUG )
     //#define USE_DEBUGGER
     //#ifdef USE_DEBUGGER
     m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect( "127.0.0.1" );
     //#endif
-#endif
+    #endif
     //return m_bIsOk;
 }
 
@@ -219,17 +221,23 @@ void CPhysicsManager::ReleaseVectors()
 {
     // UsersData & Actors del CreateMeshFromXML
     for ( size_t i = 0; i < m_vUsersData.size(); ++i )
+    {
         CHECKED_DELETE( m_vUsersData[i] );
+    }
 
     m_vUsersData.clear();
 
     for ( size_t i = 0; i < m_vActors.size(); ++i )
+    {
         CHECKED_DELETE( m_vActors[i] );
+    }
 
     m_vActors.clear();
 
     for ( size_t i = 0; i < m_vUD.size(); ++i )
+    {
         CHECKED_DELETE( m_vUD[i] );
+    }
 
     m_vUD.clear();
 }
@@ -239,7 +247,9 @@ void CPhysicsManager::ReleaseToReload()
     GetCookingMesh()->Release();
 
     for ( size_t i = 0; i < m_vActors.size(); ++i )
+    {
         ReleasePhysicActor( m_vActors[i] );
+    }
 }
 
 void CPhysicsManager::ReleaseElement( const std::string& _ase )
@@ -248,7 +258,9 @@ void CPhysicsManager::ReleaseElement( const std::string& _ase )
     std::map<std::string, unsigned int>::iterator it = m_vIds.find( _ase );
 
     if ( it != m_vIds.end() )
+    {
         l_id = it->second;
+    }
 
     GetCookingMesh()->ReleasePhysicMesh( _ase );
     ReleasePhysicActor( m_vActors[l_id] );
@@ -310,7 +322,7 @@ bool CPhysicsManager::LoadXML( void )
           std::string l_Type = l_Scripts(i).GetName();
           if ( l_Type == "script" )
           {
-            std::string l_FileName = l_Scripts(i).GetPszProperty ( "filename" );    // Obtenemos la ruta del fichero lua
+            std::string l_FileName = l_Scripts(i).GetAttribute<std::string> ( "filename" );    // Obtenemos la ruta del fichero lua
             RunFile ( l_FileName );                           // Ejecutamos el fichero lua
           }
           else
@@ -363,7 +375,9 @@ void CPhysicsManager::WaitForSimulation( void )
     m_pScene->getTiming( l_MaxTimestep, l_MaxIter, l_Method, &l_NumSubSteps );
 
     if ( l_NumSubSteps )
+    {
         mControllerManager->updateControllers();
+    }
 }
 
 void CPhysicsManager::AddGravity( Math::Vect3f g )
@@ -381,7 +395,9 @@ void CPhysicsManager::Render()
     assert( m_pScene != NULL );
 
     if ( !m_bDebugRenderMode )
+    {
         return;
+    }
 
     // Render all actors in the scene
     int nbActors = m_pScene->getNbActors();
@@ -400,7 +416,9 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     ASSERT( physicUserData, "Registering a phyxs object without user data" );
 
     if ( !physicUserData->GetPaint() || physicUserData->GetName() == "CharacterController" )
+    {
         return;
+    }
 
     NxShape* const* shapes  = _pActor->getShapes();
     NxU32 nShapes           = _pActor->getNbShapes();
@@ -411,111 +429,111 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
     {
         switch ( shapes[nShapes]->getType() )
         {
-        case NX_SHAPE_PLANE:
-        {
-            float distance  = shapes[nShapes]->isPlane()->getPlane().d;
-            NxVec3 normal   = shapes[nShapes]->isPlane()->getPlane().normal;
-            Math::Vect3f n( normal.x, normal.y, normal.z );
-            _RM->DrawPlane( 100.f, n, distance, color, 40, 40 );
-        }
-        break;
+            case NX_SHAPE_PLANE:
+                {
+                    float distance  = shapes[nShapes]->isPlane()->getPlane().d;
+                    NxVec3 normal   = shapes[nShapes]->isPlane()->getPlane().normal;
+                    Math::Vect3f n( normal.x, normal.y, normal.z );
+                    _RM->DrawPlane( 100.f, n, distance, color, 40, 40 );
+                }
+                break;
 
-        case NX_SHAPE_BOX:
-        {
-            NxVec3 pos = shapes[nShapes]->getGlobalPosition();
-            NxF32 m_aux[16];
-            shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = ConvertNxF32ToMat44( m_aux );
-            NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
-            _RM->DrawBox( m, boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
-        }
-        break;
+            case NX_SHAPE_BOX:
+                {
+                    NxVec3 pos = shapes[nShapes]->getGlobalPosition();
+                    NxF32 m_aux[16];
+                    shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
+                    m = ConvertNxF32ToMat44( m_aux );
+                    NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
+                    _RM->DrawBox( m, boxDim.x * 2, boxDim.y * 2, boxDim.z * 2, color );
+                }
+                break;
 
-        case NX_SHAPE_SPHERE:
-        {
-            NxF32 m_aux[16];
-            shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = ConvertNxF32ToMat44( m_aux );
-            NxReal radius = shapes[nShapes]->isSphere()->getRadius();
-            Math::CColor color = physicUserData->GetColor();
-            _RM->DrawSphere( m, radius, color, MAX_ARISTAS );
-        }
-        break;
+            case NX_SHAPE_SPHERE:
+                {
+                    NxF32 m_aux[16];
+                    shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
+                    m = ConvertNxF32ToMat44( m_aux );
+                    NxReal radius = shapes[nShapes]->isSphere()->getRadius();
+                    Math::CColor color = physicUserData->GetColor();
+                    _RM->DrawSphere( m, radius, color, MAX_ARISTAS );
+                }
+                break;
 
-        case NX_SHAPE_CAPSULE:
-        {
-            NxF32 m_aux[16];
-            shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
-            m = ConvertNxF32ToMat44( m_aux );
-            _RM->SetTransform( m );
-            const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
-            const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
-            Math::CColor color = physicUserData->GetColor();
-            Mat44f t;
-            t.RotByAngleX( 3.1415f / 2 );
-            _RM->DrawCylinder( m * t, radius, radius, height, MAX_ARISTAS, color, false );
-            t.SetIdentity();
-            t.Translate( Math::Vect3f( 0, height * 0.5f, 0 ) );
-            _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
-            t.SetIdentity();
-            t.Translate( Math::Vect3f( 0, -height * 0.5f, 0 ) );
-            _RM->SetTransform( m * t );
-            _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
-            t.SetIdentity();
-            _RM->SetTransform( m * t );
-        }
-        break;
+            case NX_SHAPE_CAPSULE:
+                {
+                    NxF32 m_aux[16];
+                    shapes[nShapes]->getGlobalPose().getColumnMajor44( m_aux );
+                    m = ConvertNxF32ToMat44( m_aux );
+                    _RM->SetTransform( m );
+                    const NxReal& radius = shapes[nShapes]->isCapsule()->getRadius();
+                    const NxReal& height = shapes[nShapes]->isCapsule()->getHeight();
+                    Math::CColor color = physicUserData->GetColor();
+                    Mat44f t;
+                    t.RotByAngleX( 3.1415f / 2 );
+                    _RM->DrawCylinder( m * t, radius, radius, height, MAX_ARISTAS, color, false );
+                    t.SetIdentity();
+                    t.Translate( Math::Vect3f( 0, height * 0.5f, 0 ) );
+                    _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
+                    t.SetIdentity();
+                    t.Translate( Math::Vect3f( 0, -height * 0.5f, 0 ) );
+                    _RM->SetTransform( m * t );
+                    _RM->DrawSphere( m * t, radius, color, MAX_ARISTAS );
+                    t.SetIdentity();
+                    _RM->SetTransform( m * t );
+                }
+                break;
 
-        case NX_SHAPE_CONVEX:
-            break;
+            case NX_SHAPE_CONVEX:
+                break;
 
-        case NX_SHAPE_MESH:
-        {
-            NxShape* mesh = shapes[nShapes];
-            NxTriangleMeshDesc meshDesc;
-            mesh->isTriangleMesh()->getTriangleMesh().saveToDesc( meshDesc );
-            typedef NxVec3 Point;
-            typedef struct _Triangle
-            {
-                NxU32 p0;
-                NxU32 p1;
-                NxU32 p2;
-            } Triangle;
-            NxU32 nbVerts       = meshDesc.numVertices;
-            NxU32 nbTriangles   = meshDesc.numTriangles;
-            Point* points       = ( Point* )meshDesc.points;
-            Triangle* triangles = ( Triangle* )meshDesc.triangles;
-            Math::CColor color  = physicUserData->GetColor();
-            NxF32 m_aux[16];
-            mesh->getGlobalPose().getColumnMajor44( m_aux );
-            m = ConvertNxF32ToMat44( m_aux );
-            _RM->SetTransform( m );
-            Math::Vect3f a, b, c;
+            case NX_SHAPE_MESH:
+                {
+                    NxShape* mesh = shapes[nShapes];
+                    NxTriangleMeshDesc meshDesc;
+                    mesh->isTriangleMesh()->getTriangleMesh().saveToDesc( meshDesc );
+                    typedef NxVec3 Point;
+                    typedef struct _Triangle
+                    {
+                        NxU32 p0;
+                        NxU32 p1;
+                        NxU32 p2;
+                    } Triangle;
+                    NxU32 nbVerts       = meshDesc.numVertices;
+                    NxU32 nbTriangles   = meshDesc.numTriangles;
+                    Point* points       = ( Point* )meshDesc.points;
+                    Triangle* triangles = ( Triangle* )meshDesc.triangles;
+                    Math::CColor color  = physicUserData->GetColor();
+                    NxF32 m_aux[16];
+                    mesh->getGlobalPose().getColumnMajor44( m_aux );
+                    m = ConvertNxF32ToMat44( m_aux );
+                    _RM->SetTransform( m );
+                    Math::Vect3f a, b, c;
 
-            while ( nbTriangles-- )
-            {
-                a = Math::Vect3f( points[triangles->p0].x, points[triangles->p0].y, points[triangles->p0].z );
-                b = Math::Vect3f( points[triangles->p1].x, points[triangles->p1].y, points[triangles->p1].z );
-                c = Math::Vect3f( points[triangles->p2].x, points[triangles->p2].y, points[triangles->p2].z );
-                _RM->DrawLine( a, b, color );
-                _RM->DrawLine( b, c, color );
-                _RM->DrawLine( c, a, color );
-                triangles++;
-            }
-        }
-        break;
+                    while ( nbTriangles-- )
+                    {
+                        a = Math::Vect3f( points[triangles->p0].x, points[triangles->p0].y, points[triangles->p0].z );
+                        b = Math::Vect3f( points[triangles->p1].x, points[triangles->p1].y, points[triangles->p1].z );
+                        c = Math::Vect3f( points[triangles->p2].x, points[triangles->p2].y, points[triangles->p2].z );
+                        _RM->DrawLine( a, b, color );
+                        _RM->DrawLine( b, c, color );
+                        _RM->DrawLine( c, a, color );
+                        triangles++;
+                    }
+                }
+                break;
 
-        case NX_SHAPE_WHEEL:
-        {
-            //TODO...
-        }
-        break;
+            case NX_SHAPE_WHEEL:
+                {
+                    //TODO...
+                }
+                break;
 
-        default:
-        {
-            //TODO...
-        }
-        break;
+            default:
+                {
+                    //TODO...
+                }
+                break;
         }
     }
 
@@ -526,10 +544,10 @@ void CPhysicsManager::DrawActor( NxActor* _pActor, CGraphicsManager* _RM )
 //Convierte una un vector de 16 NxF32 a matriz de 4x4
 Math::Mat44f CPhysicsManager::ConvertNxF32ToMat44( NxF32 m[16] )
 {
-  return Math::Mat44f( m[0], m[4], m[8], m[12],
-                       m[1], m[5], m[9], m[13],
-                       m[2], m[6], m[10], m[14],
-                       m[3], m[7], m[11], m[15] );
+    return Math::Mat44f( m[0], m[4], m[8], m[12],
+                         m[1], m[5], m[9], m[13],
+                         m[2], m[6], m[10], m[14],
+                         m[3], m[7], m[11], m[15] );
 }
 
 //----------------------------------------------------------------------------
@@ -553,7 +571,9 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
     }
 
     if ( l_bIsOK )
+    {
         _pActor->SetCollisionGroup( _pActor->GetColisionGroup() );
+    }
 
     return l_bIsOK;
 }
@@ -578,11 +598,15 @@ bool CPhysicsManager::ReleasePhysicActor( CPhysicActor* _pActor )
             NxShape* shape = nxActor->getShapes()[i];
 
             if ( shape->getCCDSkeleton() != NULL )
+            {
                 skeletons.pushBack( shape->getCCDSkeleton() );
+            }
         }
 
         for ( NxU32 i = 0; i < skeletons.size(); i++ )
+        {
             m_pPhysicsSDK->releaseCCDSkeleton( *skeletons[i] );
+        }
 
         m_pScene->releaseActor( *nxActor );
         nxActor = 0;
@@ -616,11 +640,15 @@ bool CPhysicsManager::ReleaseAllActors( void )  //EUserDataFlag _eFlags )
                 NxShape* shape = nxActor->getShapes()[i];
 
                 if ( shape->getCCDSkeleton() != NULL )
+                {
                     skeletons.pushBack( shape->getCCDSkeleton() );
+                }
             }
 
             for ( NxU32 i = 0; i < skeletons.size(); i++ )
+            {
                 m_pPhysicsSDK->releaseCCDSkeleton( *skeletons[i] );
+            }
 
             m_pScene->releaseActor( *nxActor );
             nxActor = 0;
@@ -747,23 +775,23 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
 
     switch ( _pController->GetType() )
     {
-    case BOX:
-    {
-        NxControllerDesc* l_NxControllerDesc = NULL;
-        l_NxControllerDesc = _pController->GetPhXControllerDesc();
-        assert( l_NxControllerDesc != NULL );
-        l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
-        break;
-    }
+        case BOX:
+            {
+                NxControllerDesc* l_NxControllerDesc = NULL;
+                l_NxControllerDesc = _pController->GetPhXControllerDesc();
+                assert( l_NxControllerDesc != NULL );
+                l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
+                break;
+            }
 
-    case CAPSULE:
-    {
-        NxControllerDesc* l_NxControllerDesc = NULL;
-        l_NxControllerDesc = _pController->GetPhXControllerDesc();
-        assert( l_NxControllerDesc != NULL );
-        l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
-        break;
-    }
+        case CAPSULE:
+            {
+                NxControllerDesc* l_NxControllerDesc = NULL;
+                l_NxControllerDesc = _pController->GetPhXControllerDesc();
+                assert( l_NxControllerDesc != NULL );
+                l_NxController = mControllerManager->createController( m_pScene, *l_NxControllerDesc );
+                break;
+            }
     }
 
     if ( mControllerManager != NULL )
@@ -777,7 +805,9 @@ bool CPhysicsManager::AddPhysicController( CPhysicController* _pController, ECon
     }
 
     if ( l_bIsOK )
+    {
         _pController->SetGroup( _pController->GetColisionGroup() );
+    }
 
     return l_bIsOK;
 }
@@ -982,7 +1012,8 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphere( float radiusSphere, c
 }
 
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere,
+        const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
 {
     assert( m_pScene );
     NxSphere l_WorldSphere( NxVec3( _vPosSphere.x, _vPosSphere.y, _vPosSphere.z ), _fRadiusSphere );
@@ -992,9 +1023,12 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     NxShape** shapes = new NxShape* [nbShapes];
 
     for ( NxU32 i = 0; i < nbShapes; i++ )
+    {
         shapes[i] = NULL;
+    }
 
-    NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_WorldSphere, NX_ALL_SHAPES, nbShapes, shapes, NULL, _uiImpactMask, NULL, true );
+    NxU32 l_NumShapesCollision = m_pScene->overlapSphereShapes( l_WorldSphere, NX_ALL_SHAPES, nbShapes, shapes, NULL,
+                                 _uiImpactMask, NULL, true );
     std::vector<CPhysicUserData*> _ImpactObjects;
 
     for ( NxU32 i = 0; i < nbShapes; ++i )
@@ -1014,13 +1048,17 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
                 CPhysicUserData* id = *it;
 
                 if ( id == l_pPhysicObject )
+                {
                     find = true;
+                }
 
                 ++it;
             }
 
             if ( !find )
+            {
                 _ImpactObjects.push_back( l_pPhysicObject );
+            }
         }
     }
 
@@ -1028,27 +1066,31 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiu
     return _ImpactObjects;
 }
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereController( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereController( float _fRadiusSphere,
+        const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask )
 {
     std::vector<CPhysicUserData*> l_Result;
     std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor( _fRadiusSphere, _vPosSphere, _uiImpactMask );
 
     std::vector<CPhysicUserData*>::iterator it      = l_OverlapSphere.begin(),
-                                            it_end  = l_OverlapSphere.end(); 
+                                            it_end  = l_OverlapSphere.end();
     for( ; it != it_end; ++it)
     {
         CPhysicUserData* l_UserData = *it;
         CPhysicController* l_Controller = l_UserData->GetController();
 
         if(l_Controller)
+        {
             l_Result.push_back(l_UserData);
+        }
 
     }
 
     return l_Result;
 }
 
-std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle, const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
+std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance, float _Angle,
+        const Math::Vect3f& _Position, const Math::Vect3f& _Direction, uint32 _uiImpactMask )
 {
     std::vector<CPhysicUserData*> l_Result;
     std::vector<CPhysicUserData*> l_OverlapSphere = OverlapSphereActor( _Distance, _Position, _uiImpactMask );
@@ -1067,27 +1109,37 @@ std::vector<CPhysicUserData*> CPhysicsManager::OverlapConeActor( float _Distance
         Math::Vect3f l_ActorPos;
 
         if ( l_Controller )
+        {
             l_ActorPos = l_Controller->GetPosition();
+        }
         else if ( l_Actor )
+        {
             l_ActorPos = l_Actor->GetPosition();
+        }
         else
+        {
             continue;
+        }
 
         Math::Vect3f l_VectToActor = l_ActorPos - _Position;
         l_VectToActor.Normalize();
 
         float dot     = l_VectToActor.DotProduct( _Direction );
-        float lenSq1  = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z * l_VectToActor.z;
-		    float angle   = Math::Utils::Rad2Deg(acos( dot / sqrt( lenSq1 * lenSq2 ) ));
+        float lenSq1  = l_VectToActor.x * l_VectToActor.x + l_VectToActor.y * l_VectToActor.y + l_VectToActor.z *
+                        l_VectToActor.z;
+        float angle   = Math::Utils::Rad2Deg(acos( dot / sqrt( lenSq1 * lenSq2 ) ));
 
         if ( angle < _Angle )
+        {
             l_Result.push_back( l_UserData );
+        }
     }
 
     return l_Result;
 }
 
-void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower )
+void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math::Vect3f& posSphere,
+        std::vector<CPhysicUserData*> impactObjects, float _fPower )
 {
     assert( m_pScene );
     NxSphere  worldSphere( NxVec3( posSphere.x, posSphere.y, posSphere.z ), radiusSphere );
@@ -1095,7 +1147,9 @@ void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math:
     NxShape** shapes    = new NxShape* [nbShapes];
 
     for ( NxU32 i = 0; i < nbShapes; i++ )
+    {
         shapes[i] = NULL;
+    }
 
     //NX_DYNAMIC_SHAPES
     m_pScene->overlapSphereShapes( worldSphere, NX_DYNAMIC_SHAPES, nbShapes, shapes, NULL );
@@ -1110,7 +1164,7 @@ void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math:
             assert( physicObject );
             //Antes de meterlo comprobamos que no exista ya (un objeto fisico puede estar compuesto por varias shapes)
             std::vector<CPhysicUserData*>::iterator it( impactObjects.begin() ),
-                                                    itEnd( impactObjects.end() );
+                itEnd( impactObjects.end() );
             bool find = false;
 
             while ( it != itEnd )
@@ -1118,7 +1172,9 @@ void CPhysicsManager::OverlapSphereActorGrenade( float radiusSphere, const Math:
                 CPhysicUserData* id = *it;
 
                 if ( id == physicObject )
+                {
                     find = true;
+                }
 
                 ++it;
             }
@@ -1148,7 +1204,7 @@ void CPhysicsManager::ApplyExplosion( NxActor* _pActor, const Math::Vect3f& _vPo
     Math::Vect3f l_vActorPosition       = Math::Vect3f( l_vPos.x, l_vPos.y, l_vPos.z );
     Math::Vect3f l_vVelocityDirection   = l_vActorPosition - _vPosSphere;
     l_vVelocityDirection.Normalize();
-    
+
     float l_fDistance   = _vPosSphere.Distance( l_vActorPosition );
     float l_fTotalPower = _fPower * ( ( _fEffectRadius - l_fDistance ) / _fEffectRadius );
 
@@ -1211,91 +1267,169 @@ CPhysicActor* CPhysicsManager::GetActor( std::string _ActorName )
 int CPhysicsManager::GetCollisionGroup( const std::string& _szGroup )
 {
     if ( _szGroup.compare( "ECG_ESCENE" ) == 0 )
+    {
         return ECG_ESCENE;
+    }
     else if ( _szGroup.compare( "ECG_PLAYER" ) == 0 )
+    {
         return ECG_PLAYER;
+    }
     else if ( _szGroup.compare( "ECG_ENEMY" ) == 0 )
+    {
         return ECG_ENEMY;
+    }
     else if ( _szGroup.compare( "ECG_TRIGGERS" ) == 0 )
+    {
         return ECG_TRIGGERS;
+    }
     else if ( _szGroup.compare( "ECG_MALGLOBAL" ) == 0 )
+    {
         return ECG_MALGLOBAL;
+    }
     else if ( _szGroup.compare( "ECG_COBERTURES" ) == 0 )
+    {
         return ECG_COBERTURES;
+    }
     else if ( _szGroup.compare( "ECG_DYNAMIC_OBJECTS" ) == 0 )
+    {
         return ECG_DYNAMIC_OBJECTS;
+    }
     else if ( _szGroup.compare( "ECG_EXPLOSIONS" ) == 0 )
+    {
         return ECG_EXPLOSIONS;
+    }
     else if ( _szGroup.compare( "ECG_RAY_SHOOT" ) == 0 )
+    {
         return ECG_RAY_SHOOT;
+    }
     else if ( _szGroup.compare( "ECG_RAY_SHOOT_PLAYER" ) == 0 )
+    {
         return ECG_RAY_SHOOT_PLAYER;
+    }
     else if ( _szGroup.compare( "ECG_FORCE" ) == 0 )
+    {
         return ECG_FORCE;
+    }
     else if ( _szGroup.compare( "ECG_CAMERA" ) == 0 )
+    {
         return ECG_CAMERA;
+    }
     else if ( _szGroup.compare( "ECG_RAGDOLL" ) == 0 )
+    {
         return ECG_RAGDOLL;
+    }
     else if ( _szGroup.compare( "ECG_RAGDOLL_PLAYER" ) == 0 )
+    {
         return ECG_RAGDOLL_PLAYER;
+    }
     else if ( _szGroup.compare( "ECG_RAY_IA_GRAPH" ) == 0 )
+    {
         return ECG_RAY_IA_GRAPH;
+    }
     else if ( _szGroup.compare( "ECG_VIGIA" ) == 0 )
+    {
         return ECG_VIGIA;
+    }
     else if ( _szGroup.compare( "ECG_LIMITS" ) == 0 )
+    {
         return ECG_LIMITS;
+    }
     else if ( _szGroup.compare( "ECG_STATIC_OBJECTS" ) == 0 )
+    {
         return ECG_STATIC_OBJECTS;
+    }
     else
+    {
         return 0;
+    }
 }
 
 ECollisionGroup CPhysicsManager::GetCollisionGroup( const int _szGroup )
 {
     if ( _szGroup == 0 )
+    {
         return ECG_ESCENE;
+    }
     else if ( _szGroup == 1 )
+    {
         return ECG_PLAYER;
+    }
     else if ( _szGroup == 2 )
+    {
         return ECG_ENEMY;
+    }
     else if ( _szGroup == 3 )
+    {
         return ECG_TRIGGERS;
+    }
     else if ( _szGroup == 4 )
+    {
         return ECG_MALGLOBAL;
+    }
     else if ( _szGroup == 5 )
+    {
         return ECG_COBERTURES;
+    }
     else if ( _szGroup == 6 )
+    {
         return ECG_DYNAMIC_OBJECTS;
+    }
     else if ( _szGroup == 7 )
+    {
         return ECG_EXPLOSIONS;
+    }
     else if ( _szGroup == 8 )
+    {
         return ECG_RAY_SHOOT;
+    }
     else if ( _szGroup == 9 )
+    {
         return ECG_RAY_SHOOT_PLAYER;
+    }
     else if ( _szGroup == 10 )
+    {
         return ECG_FORCE;
+    }
     else if ( _szGroup == 11 )
+    {
         return ECG_CAMERA;
+    }
     else if ( _szGroup == 12 )
+    {
         return ECG_RAGDOLL;
+    }
     else if ( _szGroup == 13 )
+    {
         return ECG_RAGDOLL_PLAYER;
+    }
     else if ( _szGroup == 14 )
+    {
         return ECG_RAY_IA_GRAPH;
+    }
     else if ( _szGroup == 15 )
+    {
         return ECG_VIGIA;
+    }
     else if ( _szGroup == 16 )
+    {
         return ECG_LIMITS;
+    }
     else if ( _szGroup == 17 )
+    {
         return ECG_STATIC_OBJECTS;
+    }
     else
+    {
         return ECG_ESCENE;
+    }
 }
 
 bool CPhysicsManager::CompareUserDatas( CPhysicUserData* _pUserData1, CPhysicUserData* _pUserData2 )
 {
     if ( _pUserData1 == _pUserData2 )
+    {
         return true;
+    }
 
     return false;
 }
@@ -1315,7 +1449,7 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
 
     if ( m.Exists() )
     {
-        std::string folder  =  m( 0 ).GetPszProperty( "folder" );
+        std::string folder  =  m( 0 ).GetAttribute<std::string>( "folder" , "");
         std::string path    = "./assets/PhX/" + folder + "/";
         unsigned int count  = ( unsigned int )m.GetNumChildren();
 
@@ -1324,7 +1458,7 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
             //path viejo - "./assets/data/ases/barrioRico/"
             //path nuevo - "./assets/PhX/Fisicas_arturo/"
             //std::string path = "./assets/PhX/Fisicas_arturo/";
-            std::string name = m( i ).GetPszProperty( "name" );
+            std::string name = m( i ).GetAttribute<std::string>( "name", "" );
             std::string file = path + name + ".ASE";
             // Guardar id elemento
             m_vIds.insert( std::pair<std::string, unsigned int>( name, i - 1 ) );
@@ -1362,7 +1496,9 @@ CPhysicUserData* CPhysicsManager::GetUserData( const std::string& name )
 
     for ( ; it != m_vUD.end(); ++it )
         if ( ( *it )->GetName() == name )
+        {
             return *it;
+        }
 
     return 0;
 }
@@ -1399,7 +1535,8 @@ std::set<CPhysicUserData*> CPhysicsManager::OverlapSphereHardcoded( float radius
     return l_ImpactObjects;
 }
 
-bool CPhysicsManager::AddActor( const std::string& Name, const std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color,
+bool CPhysicsManager::AddActor( const std::string& Name, const std::string& Type, const Math::Vect3f& _vDimension,
+                                const Math::CColor& Color,
                                 bool Paint, const Math::Vect3f& _vGlobalPos, const Math::Vect3f& _vLocalPos, const Math::Vect3f& rotation,
                                 NxCCDSkeleton* _pSkeleton, uint32 _uiGroup )
 {
@@ -1409,13 +1546,21 @@ bool CPhysicsManager::AddActor( const std::string& Name, const std::string& Type
     CPhysicActor*     l_Actor    = new CPhysicActor( l_UserData );
 
     if ( Type == "Box" )
+    {
         l_Actor->AddBoxShape( _vDimension, _vGlobalPos, _vLocalPos, rotation, _pSkeleton, _uiGroup );
+    }
     else if ( Type == "Sphere" )
+    {
         l_Actor->AddSphereShape( _vDimension.x, _vGlobalPos, _vLocalPos, _pSkeleton, _uiGroup );
+    }
     else if ( Type == "Capsule" )
+    {
         l_Actor->AddCapsuleShape( _vDimension.x, _vDimension.y, _vGlobalPos, _vLocalPos, _pSkeleton, _uiGroup );
+    }
     else if ( Type == "Plane" )
+    {
         l_Actor->AddPlaneShape( _vGlobalPos, _vDimension.x, _uiGroup );
+    }
 
     if ( !CMapManager<CPhysicActor>::GetResource( Name ) )
     {
@@ -1441,7 +1586,8 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
                                      ECollisionGroup ColliusionGroup, float gravity )
 {
     CPhysicUserData*    l_UserData    = new CPhysicUserData( Name );
-    CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup, l_UserData, pos, gravity );
+    CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
+            l_UserData, pos, gravity );
 
     if ( !CMapManager<CPhysicController>::GetResource( Name ) )
     {
@@ -1476,7 +1622,9 @@ bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name 
         VecMeshes     l_CookMeshes    = m_pCookingMesh->GetMeshes();
 
         for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+        {
             l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+        }
 
         if ( !CMapManager<CPhysicActor>::GetResource( Name ) )
         {

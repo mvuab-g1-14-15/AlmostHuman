@@ -67,7 +67,7 @@ bool CGraph::Parse(const std::string &file)
         if( l_TagName == "node" )
         {
             int l_Id = l_TreeNode(i).GetAttribute<int32>("id", -1);
-            Math::Vect3f l_Vect3f = l_TreeNode(i).GetVect3fProperty("pos", Math::Vect3f());
+            Math::Vect3f l_Vect3f = l_TreeNode(i).GetAttribute<Math::Vect3f>("pos", Math::Vect3f());
 
             m_NodeInfo.push_back(l_Vect3f);
         }

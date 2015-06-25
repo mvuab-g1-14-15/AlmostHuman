@@ -96,10 +96,10 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     Math::Vect3f l_vSize, l_fMiddlePoint;
     float l_fDensity;
 
-    l_szName                  = _XMLObjects.GetPszISOProperty("name" , "");
+    l_szName                  = _XMLObjects.GetAttribute<std::string>("name" , "");
     l_fDensity            = _XMLObjects.GetAttribute<float>("density");
-    l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point", Math::Vect3f(0.0f), false);
-    l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size", Math::Vect3f(0.0f), false);
+    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f), false);
+    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f), false);
 
     CPhysicsManager* l_pPM = PhysXMInstance;
     Mat44f l_vMatActor;
@@ -134,10 +134,10 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     Math::Vect3f l_vSize, l_fMiddlePoint;
     float l_fDensity;
 
-    l_szName                  = _XMLObjects.GetPszISOProperty("name" , "");
+    l_szName                  = _XMLObjects.GetAttribute<std::string>("name" , "");
     l_fDensity            = _XMLObjects.GetAttribute<float>("density");
-    l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point", Math::Vect3f(0.0f), false);
-    l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size", Math::Vect3f(0.0f), false);
+    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f), false);
+    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f), false);
 
     CPhysicsManager* l_pPM = PhysXMInstance;
     Mat44f l_vMatActor;

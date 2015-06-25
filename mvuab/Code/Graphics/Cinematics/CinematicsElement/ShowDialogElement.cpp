@@ -5,18 +5,18 @@
 #include "Timer\Timer.h"
 
 CShowDialogElement::CShowDialogElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-	, m_Text( atts.GetPszProperty( "text", "" ) ) 
+    , m_Text( atts.GetAttribute<std::string>( "text", "" ) )
 {
 }
 
 void CShowDialogElement::Update()
 {
-  GUIInstance->SetMessageBox(m_Text);
-  m_CurrentTime += deltaTimeMacro;
+    GUIInstance->SetMessageBox(m_Text);
+    m_CurrentTime += deltaTimeMacro;
 }
 void CShowDialogElement::Execute( CGraphicsManager& GM )
 {
-	
+
 }
 
 void CShowDialogElement::Render()

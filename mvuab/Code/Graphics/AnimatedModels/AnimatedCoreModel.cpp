@@ -15,7 +15,7 @@
 #define MAXBONES 29
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name)
-	: CName( Name )
+    : CName( Name )
     , m_Path("")
     , m_FileName("")
     , m_CalHardwareModel(0)
@@ -59,9 +59,9 @@ bool CAnimatedCoreModel::LoadAnimation(const std::string &aName, const std::stri
     ASSERT(m_CalCoreModel, "Cal Core Model not found");
 
     bool lLoadedOk( true );
-    
+
     int lId = m_CalCoreModel->loadCoreAnimation(m_Path + aFilename, aName);
-    
+
     lLoadedOk = lLoadedOk && bool( lId != -1 );
 
     if( lLoadedOk )
@@ -119,18 +119,18 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 
     //En caso de utilizar NormalMap
     CalcTangentsAndBinormals
-        (
-            l_Vtxs, 
-            (unsigned short *) l_Idxs, 
-            m_NumVtxs, 
-            m_NumFaces * 3, 
-            sizeof(CAL3D_HW_VERTEX), 
-            0, 
-            44,
-            60, 
-            76, 
-            92
-        );
+    (
+        l_Vtxs,
+        (unsigned short *) l_Idxs,
+        m_NumVtxs,
+        m_NumFaces * 3,
+        sizeof(CAL3D_HW_VERTEX),
+        0,
+        44,
+        60,
+        76,
+        92
+    );
 
     CHECKED_DELETE(m_RenderableVertexs);
     m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
@@ -145,7 +145,9 @@ bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
     // Get the texture from the texture manager
     CTexture *t = TextureMInstance->GetTexture( m_Path + Filename);
     if(t)
-    { m_TextureVector.push_back(t); }
+    {
+        m_TextureVector.push_back(t);
+    }
     return (t != 0);
 }
 
@@ -183,13 +185,14 @@ bool CAnimatedCoreModel::Load()
     }
 
     // Parse the animation stuff
-    for(int i = 0; i < node.GetNumChildren(); ++i)
+    for(uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i)
     {
-        const std::string &TagName = node(i).GetName();
+        const CXMLTreeNode& lCurrentNode = node(i);
+        const std::string &TagName = lCurrentNode.GetName();
 
         if( TagName == "texture" )
         {
-            const std::string &textureFilename = node(i).GetPszProperty("file", "no_file");
+            const std::string &textureFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
             if(!LoadTexture(textureFilename))
             {
                 LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadTexture No se puede abrir %s!", m_FileName.c_str());
@@ -197,7 +200,7 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "skeleton" )
         {
-            const std::string &skeletonFilename = node(i).GetPszProperty("file", "no_file");
+            const std::string &skeletonFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
             if(!LoadSkeleton(skeletonFilename))
             {
                 LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadSkeleton No se puede abrir %s!", m_FileName.c_str());
@@ -205,7 +208,7 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "mesh" )
         {
-            const std::string &meshFilename = node(i).GetPszProperty("file", "no_file");
+            const std::string &meshFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
             if(!LoadMesh(meshFilename))
             {
                 LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadMesh No se puede abrir %s!", m_FileName.c_str());
@@ -213,8 +216,8 @@ bool CAnimatedCoreModel::Load()
         }
         else if( TagName == "animation" )
         {
-            const std::string &animationFilename = node(i).GetPszProperty("file", "no_file");
-            const std::string &name = node(i).GetPszProperty("name", "no_name");
+            const std::string &animationFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
+            const std::string &name = lCurrentNode.GetAttribute<std::string>("name", "no_name");
             if(!LoadAnimation(name, animationFilename))
             {
                 LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadAnimation No se puede abrir %s!", m_FileName.c_str());

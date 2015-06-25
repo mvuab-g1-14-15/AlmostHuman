@@ -60,13 +60,13 @@ void CConsole::Init()
     RedirectToConsole( 0 );
 
     // Set the user properties to the console
-    if( mConsoleNode.GetBoolProperty("full_size", false ) )
+    if( mConsoleNode.GetAttribute<bool>("full_size", false ) )
     {
         SetFullSize();
     }
     else
     {
-        const Math::Vect2i& lSize = mConsoleNode.GetVect2iProperty("size", Math::Vect2i(0, 0));
+        const Math::Vect2i& lSize = mConsoleNode.GetAttribute<Math::Vect2i>("size", Math::Vect2i(0, 0));
         ASSERT(lSize.x != 0, "The console width is 0" );
         ASSERT(lSize.y != 0, "The console height is 0" );
         SetSize( lSize.x, lSize.y );

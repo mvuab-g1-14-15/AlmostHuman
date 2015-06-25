@@ -13,24 +13,24 @@ class CPhysicUserData;
 class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRenderableObjectsManager>, public CManager
 {
     private:
-      std::vector<CPhysicUserData *> m_PhyscsUserData;
-      CRenderableObjectsManager* m_DefaultRenderableObjectManager;
-      CRenderableObjectsManager* GetRenderableObjectManager( CXMLTreeNode& Node );
+        std::vector<CPhysicUserData *> m_PhyscsUserData;
+        CRenderableObjectsManager* m_DefaultRenderableObjectManager;
+        CRenderableObjectsManager* GetRenderableObjectManager( const CXMLTreeNode& Node );
 
-      void AddNewInstaceMesh(CXMLTreeNode& atts);
+        void AddNewInstaceMesh(const CXMLTreeNode& atts);
 
     public:
-      CRenderableObjectsLayersManager();
-      CRenderableObjectsLayersManager( CXMLTreeNode& atts);
-      ~CRenderableObjectsLayersManager();
+        CRenderableObjectsLayersManager();
+        CRenderableObjectsLayersManager(const  CXMLTreeNode& atts);
+        ~CRenderableObjectsLayersManager();
 
-      void Destroy();
-      void Init();
+        void Destroy();
+        void Init();
 
-      void Reload();
-      void Update();
+        void Reload();
+        void Update();
 
-      void Render();
-      void Render( const std::string& LayerName );
+        void Render();
+        void Render( const std::string& LayerName );
 };
 #endif

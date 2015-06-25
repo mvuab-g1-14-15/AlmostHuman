@@ -11,9 +11,9 @@ class CRenderableObject : public CObject3D, public CName
 {
     public:
         CRenderableObject();
-        CRenderableObject(CXMLTreeNode &atts);
+        CRenderableObject( const CXMLTreeNode &atts);
         virtual ~CRenderableObject();
-        
+
         virtual void Update() {}
         virtual void Render() = 0;
 };

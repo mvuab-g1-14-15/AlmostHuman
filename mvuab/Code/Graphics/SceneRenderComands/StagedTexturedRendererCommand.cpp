@@ -25,10 +25,10 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
 
             if ( TagName == "dynamic_texture" )
             {
-                std::string l_Name = atts( i ).GetPszProperty( "name", "" );
+                std::string l_Name = atts( i ).GetAttribute<std::string>( "name", "" );
                 int l_StageId = atts( i ).GetAttribute<int32>( "stage_id", -1 );
-                bool l_WidthAsFB = atts( i ).GetBoolProperty( "texture_width_as_frame_buffer", false );
-                bool l_CreateDepthStencilBuffer = atts( i ).GetBoolProperty( "create_depth_stencil_buffer", true );
+                bool l_WidthAsFB = atts( i ).GetAttribute<bool>( "texture_width_as_frame_buffer", false );
+                bool l_CreateDepthStencilBuffer = atts( i ).GetAttribute<bool>( "create_depth_stencil_buffer", true );
                 uint32 l_Width, l_Height;
 
                 if ( !l_WidthAsFB )
@@ -41,7 +41,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
                     gm->GetWidthAndHeight( l_Width, l_Height );
                 }
 
-                std::string l_FormatType = atts( i ).GetPszProperty( "format_type", "" );
+                std::string l_FormatType = atts( i ).GetAttribute<std::string>( "format_type", "" );
                 CTexture::TFormatType l_iFormatType = ( l_FormatType == "R32F" ) ? ( CTexture::TFormatType )3 :
                                                       ( CTexture::TFormatType )0;
                 CTexture* l_Texture = new CTexture();
@@ -61,7 +61,7 @@ CStagedTexturedRendererCommand::CStagedTexturedRendererCommand( CXMLTreeNode& at
 
             if ( TagName == "texture" )
             {
-                const std::string& l_Name = atts( i ).GetPszProperty( "name", "" );
+                const std::string& l_Name = atts( i ).GetAttribute<std::string>( "name", "" );
                 int l_StageId = atts( i ).GetAttribute<int32>( "stage_id", -1 );
                 CTexture* l_Texture = TextureMInstance->GetTexture( l_Name );
 

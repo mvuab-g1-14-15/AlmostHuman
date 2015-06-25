@@ -139,27 +139,26 @@ void CEffectManager::Load( const std::string& lFile )
         return;
     }
 
-    for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
+    for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
     {
         CXMLTreeNode& l_CurrentNode = l_Node( i );
         const std::string& l_TagName = l_CurrentNode.GetName();
 
-
         if ( l_TagName == "technique" )
         {
-            const std::string& l_TechniquetName = l_CurrentNode.GetPszProperty( "name" );
+            const std::string& l_TechniquetName = l_CurrentNode.GetAttribute<std::string>( "name", "null_tech" );
             int l_VertexType = l_CurrentNode.GetAttribute<int32>( "vertex_type", 0 );
             std::string l_EffectName;
             CXMLTreeNode l_HandlesNode;
 
-            for ( int j = 0; j < l_CurrentNode.GetNumChildren(); j++ )
+            for ( uint32 j = 0, lCurrentNodeCount = l_CurrentNode.GetNumChildren(); j < lCurrentNodeCount; j++ )
             {
                 CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
                 const std::string& l_TagName = l_CurrentSubNode.GetName();
 
                 if ( l_TagName == "effect" )
                 {
-                    l_EffectName = l_CurrentSubNode.GetPszProperty( "name" );
+                    l_EffectName = l_CurrentSubNode.GetAttribute<std::string>( "name", "no_effect" );
                     CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
                     l_pEffect = new CEffect( l_EffectName );
 
@@ -196,7 +195,7 @@ void CEffectManager::Load( const std::string& lFile )
         }
         else if ( l_TagName == "effect" )
         {
-            Load(l_CurrentNode.GetPszProperty("file"));
+            Load(l_CurrentNode.GetAttribute<std::string>("file", "no_file"));
         }
     }
 }

@@ -35,33 +35,31 @@ void CParticleManager::Init()
         return;
     }
 
-    for(int i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i)
+    for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i)
     {
-        if(!l_Node.IsComment())
+        const std::string& lEmitterType = l_Node( i ).GetAttribute<std::string>( "type", "cube" );
+
+        ASSERT( lEmitterType != "", "Null emitter type");
+
+        CParticleEmitter *lEmitter = 0;
+
+        if( lEmitterType == "sphere")
         {
-            const std::string& lEmitterType = l_Node( i ).GetPszProperty( "type", "cube" );
-
-            ASSERT( lEmitterType != "", "Null emitter type");
-
-            CParticleEmitter *lEmitter = 0;
-
-            if( lEmitterType == "sphere")
-            {
-                lEmitter =  new CSphereEmitter();
-            }
-            else if(lEmitterType == "cube")
-            {
-                lEmitter =  new CCubeEmitter();
-            }
-
-            ASSERT(lEmitter, "Null Emitter");
-
-            if( !lEmitter->Init( l_Node( i ) ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
-            {
-                LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
-                CHECKED_DELETE( lEmitter );
-            }
+            lEmitter =  new CSphereEmitter();
         }
+        else if(lEmitterType == "cube")
+        {
+            lEmitter =  new CCubeEmitter();
+        }
+
+        ASSERT(lEmitter, "Null Emitter");
+
+        if( !lEmitter->Init( l_Node( i ) ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+        {
+            LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
+            CHECKED_DELETE( lEmitter );
+        }
+
     }
 }
 

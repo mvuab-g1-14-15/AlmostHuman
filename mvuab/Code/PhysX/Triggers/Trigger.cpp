@@ -14,39 +14,39 @@
 #include "Shapes/Shapes.h"
 
 CTrigger::CTrigger( const CXMLTreeNode& Node )
-    : CName( Node.GetPszProperty( "name", "unknown" ) )
-    , m_Position( Node.GetVect3fProperty( "position", Math::Vect3f( 0, 0, 0 ) ) )
-    , m_Size( Node.GetVect3fProperty( "size", Math::Vect3f( 0, 0, 0 ) ) )
-    , m_Color( Node.GetCColorProperty( "color", Math::CColor( 0, 0, 0, 1 ) ) )
+    : CName( Node.GetAttribute<std::string>( "name", "unknown" ) )
+    , m_Position( Node.GetAttribute<Math::Vect3f>( "position", Math::Vect3f( 0, 0, 0 ) ) )
+    , m_Size( Node.GetAttribute<Math::Vect3f>( "size", Math::Vect3f( 0, 0, 0 ) ) )
+    , m_Color( Node.GetAttribute<Math::CColor>( "color", Math::CColor( 0, 0, 0, 1 ) ) )
     , m_Group( Node.GetAttribute<int32>( "group", 0 ) )
-    , m_Paint( Node.GetBoolProperty( "paint", false ) )
-    , m_PhysicUserData( new CPhysicUserData( Node.GetPszProperty( "name", "unknown" ) ) )
-    , mTechnique( EffectManagerInstance->GetEffectTechnique( Node.GetPszProperty( "technique", "" ) ) )
+    , m_Paint( Node.GetAttribute<bool>( "paint", false ) )
+    , m_PhysicUserData( new CPhysicUserData( Node.GetAttribute<std::string>( "name", "unknown" ) ) )
+    , mTechnique( Node.GetAttribute<CEffectTechnique>("technique") )
     , mShape( 0 )
 {
-    m_bEnter = Node.GetBoolProperty( "enter_event", false );
+    m_bEnter = Node.GetAttribute<bool>( "enter_event", false );
 
     if ( m_bEnter )
-        m_Enter = ( std::make_pair( ENTER, Node.GetPszProperty( "enter_script",
+        m_Enter = ( std::make_pair( ENTER, Node.GetAttribute<std::string>( "enter_script",
                                     "unknown" ) ) );
 
-    m_bLeave = Node.GetBoolProperty( "leave_event", false );
+    m_bLeave = Node.GetAttribute<bool>( "leave_event", false );
 
     if ( m_bLeave )
-        m_Leave = ( std::make_pair( LEAVE, Node.GetPszProperty( "leave_script",
+        m_Leave = ( std::make_pair( LEAVE, Node.GetAttribute<std::string>( "leave_script",
                                     "unknown" ) ) );
 
-    m_bStay = Node.GetBoolProperty( "stay_event", false );
+    m_bStay = Node.GetAttribute<bool>( "stay_event", false );
 
     if ( m_bStay )
-        m_Stay = ( std::make_pair( STAY, Node.GetPszProperty( "stay_script",
+        m_Stay = ( std::make_pair( STAY, Node.GetAttribute<std::string>( "stay_script",
                                    "unknown" ) ) );
 
     m_PhysicUserData->SetPaint( m_Paint );
     m_PhysicUserData->SetColor( m_Color );
     m_PhysicUserData->SetGroup( ECG_TRIGGERS );
     m_PhysicActor = new CPhysicActor( m_PhysicUserData );
-    const std::string& l_sType = Node.GetPszProperty( "shape", "" );
+    const std::string& l_sType = Node.GetAttribute<std::string>( "shape", "" );
 
     if ( l_sType == "box" )
     {

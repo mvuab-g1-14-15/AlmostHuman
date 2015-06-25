@@ -152,7 +152,7 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 {
     CCoreEnemy* lCoreEnemy = new CCoreEnemy();
     // Read the type
-    const std::string lType = Node.GetPszProperty( "type", "no_type" );
+    const std::string lType = Node.GetAttribute<std::string>( "type", "no_type" );
 
     if ( lType == "easy" )
     {
@@ -171,8 +171,8 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
     lCoreEnemy->m_RespawnTime = Node.GetAttribute<float>( "time_to_respawn", 0.0f );
     lCoreEnemy->m_TimeToShoot = Node.GetAttribute<float>( "time_to_shoot", 0.0f );
     lCoreEnemy->m_ShootAccuracy = Node.GetAttribute<float>( "shoot_accuracy", 0.0f );
-    lCoreEnemy->m_StateMachineName = Node.GetPszProperty( "state_machine_name", "no_name" );
-    lCoreEnemy->m_StateMachineFileName = Node.GetPszProperty( "state_machine_file", "no_name" );
+    lCoreEnemy->m_StateMachineName = Node.GetAttribute<std::string>( "state_machine_name", "no_name" );
+    lCoreEnemy->m_StateMachineFileName = Node.GetAttribute<std::string>( "state_machine_file", "no_name" );
 
     // Now add the new state machine
     AddNewStateMachine( lCoreEnemy->m_StateMachineName, lCoreEnemy->m_StateMachineFileName );
@@ -185,7 +185,7 @@ void CEnemyManager::AddNewCoreEnemy( CXMLTreeNode& Node )
 
 void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 {
-    const std::string& lType = Node.GetPszProperty( "type" );
+    const std::string& lType = Node.GetAttribute<std::string>( "type", "no_type" );
     CCoreEnemy* lCoreEnemy = m_CoreEnemies.GetResource( lType );
 
     if ( !lCoreEnemy )
@@ -202,7 +202,7 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
 
     CEnemy* lEnemy = EnemyFactory.Create( lType.c_str(), Node, lStateMachine );
 
-    lEnemy->AddMesh( Node.GetPszProperty( "mesh", "default_mesh" ) );
+    lEnemy->AddMesh( Node.GetAttribute<std::string>( "mesh", "default_mesh" ) );
     lEnemy->SetLife( m_CoreEnemies.GetResource( lType )->m_Life );
 
     CPatrolEnemy* lPatrolEnemy = dynamic_cast<CPatrolEnemy*>( lEnemy );
@@ -214,9 +214,9 @@ void CEnemyManager::AddNewEnemy( CXMLTreeNode& Node )
         lPatrolEnemy->SetWaypoints( m_Routes[lPatrolEnemy->GetRouteId()] );
     }
 
-    if ( !AddResource( Node.GetPszProperty( "name", "no_name" ), lEnemy ) )
+    if ( !AddResource( Node.GetAttribute<std::string>( "name", "no_name" ), lEnemy ) )
     {
-        LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetPszProperty( "name", "no_name" ) ) );
+        LOG_ERROR_APPLICATION( ( "Error adding '%s' not found", Node.GetAttribute<std::string>( "name", "no_name" ).c_str() ) );
         CHECKED_DELETE( lEnemy );
     }
     else
@@ -233,7 +233,7 @@ void CEnemyManager::AddNewRoute( CXMLTreeNode& Node )
 
     for ( int i = 0; i < count; ++i )
     {
-        const Math::Vect3f& l_Point = Node( i ).GetVect3fProperty( "value", Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) );
+        const Math::Vect3f& l_Point = Node( i ).GetAttribute<Math::Vect3f>( "value", Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) );
 
         if ( l_Point != Math::Vect3f( 0.0f, -99999999.0f, 0.0f ) )
         {

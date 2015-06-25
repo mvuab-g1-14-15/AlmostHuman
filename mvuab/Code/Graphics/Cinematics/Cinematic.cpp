@@ -20,11 +20,11 @@ CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCi
         LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error reading %s, cinematic no existeix.", FileName.c_str());
         return;
     }
-    m_Name = cinematic.GetPszProperty("name", "");
+    m_Name = cinematic.GetAttribute<std::string>("name", "");
     m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
     CCinematicObject* l_CinematicObject;
-    for(int i = 0; i < cinematic.GetNumChildren(); ++i)
+    for( uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount ; ++i)
     {
         l_CinematicObject = new CCinematicObject(cinematic(i));
         l_CinematicObject->Init(m_Duration);
@@ -58,12 +58,12 @@ void CCinematic::LoadXML(const std::string &FileName)
         LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error reading %s, cinematic no existeix.", FileName.c_str());
         return;
     }
-    m_Name = cinematic.GetPszProperty("name", "");
+    m_Name = cinematic.GetAttribute<std::string>("name", "");
     m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
-    for(int i = 0; i < cinematic.GetNumChildren(); ++i)
+    for(uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount; ++i)
     {
-        std::string resource = cinematic(i).GetPszProperty("resource", "");
+        std::string resource = cinematic(i).GetAttribute<std::string>("resource", "");
 
         m_CinematicObjects.push_back(new CCinematicObject(cinematic(i)));
     }

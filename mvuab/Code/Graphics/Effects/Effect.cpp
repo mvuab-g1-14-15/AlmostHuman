@@ -254,18 +254,18 @@ void CEffect::Unload()
 
 bool CEffect::Load( CXMLTreeNode& EffectNode )
 {
-    m_FileName = EffectNode.GetPszProperty( "file", "no_file" );
+    m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
 
-    for ( int j = 0; j < EffectNode.GetNumChildren(); j++ )
+    for ( uint32 j = 0, lCount = EffectNode.GetNumChildren(); j < lCount; ++j )
     {
-        CXMLTreeNode& l_CurrentSubNode = EffectNode( j );
+        const CXMLTreeNode& l_CurrentSubNode = EffectNode( j );
         const std::string& l_TagName = l_CurrentSubNode.GetName();
 
         if ( l_TagName == "define" )
         {
-            char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "name", "no_name" ) );
+            char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "name", "no_name" ) );
             m_NamesMacrosChar.push_back( cstr_name );
-            char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetPszProperty( "description",
+            char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "description",
                               "no_description" ) );
             m_DescriptionsMacrosChar.push_back( cstr_desc );
             D3DXMACRO macro = { cstr_name, cstr_desc };

@@ -19,7 +19,7 @@ bool CCubeEmitter::Init( const CXMLTreeNode& atts )
 
     if( lOk )
     {
-        Math::Vect3f lSize = atts.GetVect3fProperty("cubic_size", Math::Vect3f());
+        Math::Vect3f lSize = atts.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f());
         mMinPnt = mPosition - lSize;
         mMaxPnt = mPosition + lSize;
     }

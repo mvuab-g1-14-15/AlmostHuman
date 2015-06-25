@@ -1,11 +1,3 @@
-//----------------------------------------------------------------------------------
-// CXMLTreeNode class
-// Author: Gabriel Cirera
-//
-// Description:
-// This class manages xml files both for read and write.
-// It internally uses the libxml tool.
-//----------------------------------------------------------------------------------
 #pragma once
 
 #ifndef _XML_TREE_NODE_H_
@@ -22,7 +14,6 @@
 class CXMLTreeNode
 {
     public:
-        // Init and End protocols
         CXMLTreeNode();
         virtual ~CXMLTreeNode();
 
@@ -32,56 +23,31 @@ class CXMLTreeNode
             return m_bIsOk;
         }
 
-        bool LoadFile( const char* _pszFileName );
-        bool LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
+        // reading methods
+        bool                          LoadFile( const char* _pszFileName );
+        bool                          LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode );
+        const char*                   GetName() const;
+        template<typename T> const T  GetAttribute( const char* aAttName, const T& aDefaultAttValue ) const;
+        template<typename T> T*       GetAttribute( const char* aAttName ) const;
 
-        template<typename T> const T GetAttribute( const char* aAttName, const T& aDefaultAttValue ) const;
-        template<typename T> T* GetAttribute( const char* aAttName ) const;
+        // writing methods
+        template<typename T> bool     AddAttribute( const char* aAttName, const T& aValue );
 
         bool Exists()
         {
             return m_pNode != NULL;
         }
+
         bool ExistsKey( const char* _pszKey );
-        const char* GetName() const;
 
-        bool                              GetBoolProperty( const char* _pszKey, bool _bDefault = false,
-                bool warningDefault = false ) const;
-        const char*                       GetPszProperty( const char* _pszKey,
-                const char* _pszDefault = NULL, bool warningDefault = false ) const;
-        std::string                       GetPszISOProperty( const char* _pszKey,
-                const char* _pszDefault = NULL,    bool warningDefault = false ) const;
-        Math::Vect2f                      GetVect2fProperty( const char* _pszKey,
-                const Math::Vect2f& _Default, bool warningDefault = false ) const;
-        Math::Vect3f                      GetVect3fProperty( const char* _pszKey,
-                const Math::Vect3f& _Default, bool warningDefault = false ) const;
-        Math::Vect4f                      GetVect4fProperty( const char* _pszKey,
-                const Math::Vect4f& _Default, bool warningDefault = false ) const;
-        Math::Vect2i                      GetVect2iProperty( const char* _pszKey,
-                const Math::Vect2i& _Default, bool warningDefault = false ) const;
-        Math::Vect3i                      GetVect3iProperty( const char* _pszKey,
-                const Math::Vect3i& _Default, bool warningDefault = false ) const;
-        Math::Vect4i                      GetVect4iProperty( const char* _pszKey,
-                const Math::Vect4i& _Default, bool warningDefault = false ) const;
-        Math::CColor                      GetCColorProperty( const char* _pszKey,
-                const Math::CColor& _Default, bool warningDefault = false ) const;
 
-        // To get keywords from xml file
-        int GetIntKeyword( const char* _pszKey, int _iDefault = 0 ) const;
-        float32 GetFloatKeyword( const char* _pszKey, float32 _fDefault = 0.0 ) const;
-        bool                                GetBoolKeyword( const char* _pszKey,
-                bool _bDefault = false ) const;
-        const char*                         GetPszKeyword( const char* _pszKey,
-                const char* _pszDefault = NULL ) const;
-        int GetNumChildren() const;
+        uint32 GetNumChildren() const;
 
-        CXMLTreeNode                 operator[]( const char* _pszKey ) const;
-        CXMLTreeNode                 operator()( int _iIndex ) const;
+        CXMLTreeNode operator[]( const char* _pszKey ) const;
+        CXMLTreeNode operator()( int _iIndex ) const;
 
-        CXMLTreeNode                 GetChildren( int _iIndex ) const;
-        CXMLTreeNode                 GetNode( const char* _pszKey ) const;
-
-        bool                                IsComment() const;
+        CXMLTreeNode GetChildren( int _iIndex ) const;
+        CXMLTreeNode GetNode( const char* _pszKey ) const;
 
         // -----------------------
         // Write functions
@@ -113,13 +79,12 @@ class CXMLTreeNode
     private:
         void                        Release();
         CXMLTreeNode                GetSubTree( const char* _pszKey ) const;
-        bool                                _FindSubTree( xmlNodePtr _pNode, const char* _pszKey,
-                CXMLTreeNode& _TreeFound ) const;
+        bool                        _FindSubTree( xmlNodePtr _pNode, const char* _pszKey, CXMLTreeNode& _TreeFound ) const;
 
-        xmlChar*                        GetProperty( const char* _pszKey ) const;
-        xmlChar*                        GetKeyword( const char* _pszKey ) const;
+        xmlChar*                    GetProperty( const char* _pszKey ) const;
+        xmlChar*                    GetKeyword( const char* _pszKey ) const;
 
-        xmlChar*                        ConvertInput( const char* _pszIn, const char* _pszEncoding );
+        xmlChar*                    ConvertInput( const char* _pszIn, const char* _pszEncoding );
 
         // member variables
         bool                m_bIsOk;          // Initialization boolean control

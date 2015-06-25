@@ -7,10 +7,10 @@
 #include "Actor\PhysicActor.h"
 
 CSetTransformElement::CSetTransformElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-    , m_Position( atts.GetVect3fProperty( "pos", Math::Vect3f(0, 0, 0) ) )
+    , m_Position( atts.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f(0, 0, 0) ) )
     , m_pObject( dynamic_cast<CInstanceMesh * >(ROLMInstance->GetResource("solid")->GetResource(
-                     atts.GetPszProperty("object", "no_object") ) ) )
-    , m_Size( atts.GetVect3fProperty( "size", Math::Vect3f(0, 0, 0) ) )
+                     atts.GetAttribute<std::string>("object", "no_object") ) ) )
+    , m_Size( atts.GetAttribute<Math::Vect3f>( "size", Math::Vect3f(0, 0, 0) ) )
     , m_Yaw( atts.GetAttribute<float>( "yaw", 0.0 ) )
     , m_Pitch( atts.GetAttribute<float>( "pitch", 0.0 ) )
     , m_Roll( atts.GetAttribute<float>( "roll", 0.0 ) )

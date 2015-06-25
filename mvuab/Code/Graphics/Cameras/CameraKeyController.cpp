@@ -63,14 +63,14 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
         return false;
     }
 
-    SetName( l_Node.GetPszProperty("name", "no_name") );
+    SetName( l_Node.GetAttribute<std::string>("name", "no_name") );
     m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
     m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
     m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
 
-    for(int i = 0; i < l_Node.GetNumChildren(); i++)
+    for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; i++)
     {
-        CXMLTreeNode &l_CurrentNode = l_Node(i);
+        const CXMLTreeNode &l_CurrentNode = l_Node(i);
         const std::string &l_TagName = l_CurrentNode.GetName();
 
         if( l_TagName == "key" )
