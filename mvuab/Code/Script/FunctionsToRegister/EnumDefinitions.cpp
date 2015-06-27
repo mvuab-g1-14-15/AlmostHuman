@@ -36,4 +36,8 @@ void registerEnum( lua_State* m_LS )
                    "ECG_VIGIA", ECG_VIGIA,
                    "ECG_LIMITS", ECG_LIMITS,
                    "ECG_LAST_GROUP", ECG_LAST_GROUP, 0 );
+  add_enum_to_lua( m_LS, "EControleType",
+                   "BOX", BOX,
+                   "CAPSULE", CAPSULE, 0 );
+
 }
