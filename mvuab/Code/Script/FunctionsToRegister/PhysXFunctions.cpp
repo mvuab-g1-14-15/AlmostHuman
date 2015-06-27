@@ -123,24 +123,19 @@ bool PlayerInSight( CPhysicsManager* PhysicManager, float _Distance, float _Angl
 
 CEnemy* GetClosestEnemy( CPhysicsManager* PhysicManager )
 {
-  CPhysicController* l_PlayerController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
+  CPhysicController* l_PlayerController = PhysicManager->CMapManager<CPhysicController>::GetResource( "Player" );
   Math::Vect3f l_PlayerPos = l_PlayerController->GetPosition();
-  const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapSphereController( 10, l_PlayerPos,
-      ECG_ENEMY );
   std::map<std::string, CEnemy*>::const_iterator it = EnemyMInstance->GetResourcesMap().begin(),
                                                  it_end = EnemyMInstance->GetResourcesMap().end();
-  /*std::vector<CPhysicUserData*>::const_iterator it = l_UserDatas.begin(),
-                                                it_end = l_UserDatas.end();*/
 
   float l_ActualDistance = 10.0f;
-  std::string l_EnemyName( "no_enemy" );
   CEnemy* l_Enemy = 0;
 
   for ( ; it != it_end; ++it )
   {
-    CPhysicController* l_UserData = PhysXMInstance->CMapManager<CPhysicController>::GetResource( it->first );
+    CPhysicController* l_EnemyController = PhysicManager->CMapManager<CPhysicController>::GetResource( it->first );
 
-    float l_Dist = ( l_PlayerPos - l_UserData->GetPosition() ).Length();
+    float l_Dist = ( l_PlayerPos - l_EnemyController->GetPosition() ).Length();
 
     if ( l_ActualDistance > l_Dist )
     {
