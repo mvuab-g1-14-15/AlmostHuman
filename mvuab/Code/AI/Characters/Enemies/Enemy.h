@@ -21,7 +21,7 @@ class CEnemy : public CCharacter
 {
 public:
     typedef enum { eEasy = 0, ePatroll, eBoss } EEnemyType;
-    CEnemy( CXMLTreeNode& Node, CStateMachine *aStateMachine );
+    CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine );
 
     virtual ~CEnemy();
     virtual void Init();
@@ -37,12 +37,17 @@ public:
 
     void AddMesh( std::string );
     void ChangeState( std::string NewState );
-    CAnimatedInstanceModel *GetAnimationModel();
+    CAnimatedInstanceModel* GetAnimationModel();
 
     void MakeShoot( Math::Vect3f aDirection );
     void MoveAStar( Math::Vect3f aTargetPos );
 
-	Math::Vect3f GetDirectionEnemy();
+    Math::Vect3f GetDirectionEnemy();
+
+    CCamera* GetCamera()
+    {
+        return mCamera;
+    }
 
 protected:
     EEnemyType m_Type;
@@ -50,17 +55,17 @@ protected:
     bool m_OnExit;
 
     // State Machine instance
-    CStateMachine *m_pStateMachine;
+    CStateMachine* m_pStateMachine;
     std::string m_CurrentState;
     std::string m_NextState;
 
     std::vector<std::string> m_NameStates;
-    CRenderableObject *m_pRenderableObject;
+    CRenderableObject* m_pRenderableObject;
 
-    std::vector<CShoot *> mShoots;
+    std::vector<CShoot*> mShoots;
 
-	std::vector<Math::Vect3f> mPath;
-	bool mPathCalculated;
+    std::vector<Math::Vect3f> mPath;
+    bool mPathCalculated;
 
     CCamera* mCamera;
 };

@@ -92,14 +92,15 @@ function GetPlayerDirection(pos)
 end
 
 function PlayerVisibility(enemy)
-	local l_EnemyPos = enemy:GetPosition()
-	local l_EnemyDir = enemy:GetDirectionEnemy()
+	--local l_EnemyPos = enemy:GetPosition()
+	--local l_EnemyDir = enemy:GetDirectionEnemy()
 	
 	--l_EnemyDir:RotateY(g_HalfPi)
 	
 	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
 	
-	l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
+	--l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
+	l_ViewingPlayer = PlayerInSight(enemy)
 
 	return l_ViewingPlayer
 --[[

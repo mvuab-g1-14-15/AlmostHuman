@@ -22,7 +22,14 @@
 #include "RenderableObject\RenderableObject.h"
 #include "AnimatedModels\AnimatedInstanceModel.h"
 
+#include "Cameras/Camera.h"
+
+#include "EngineManagers.h"
+#include "PhysicsManager.h"
+
 #include "luabind_macros.h"
+#include "Actor/PhysicController.h"
+#include "Utils/Defines.h"
 
 using namespace luabind;
 using namespace Math;
@@ -47,6 +54,18 @@ T vector_get( std::vector<T>& vec, size_t i )
     return vec[i];
 }
 
+bool PlayerInSight( CEnemy* aEnemy )
+{
+    CCamera* lCamera = aEnemy->GetCamera();
+
+    CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
+    Math::Vect3f lPosition( lController->GetPosition() );
+
+    if ( lCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
+        return true;
+
+    return false;
+}
 
 void registerCharacters( lua_State* aLuaState )
 {
@@ -154,6 +173,10 @@ void registerAI( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CShoot, Update )
     LUA_DECLARE_METHOD( CShoot, Render )
     LUA_DECLARE_METHOD( CShoot, Impacted )
+    LUA_END_DECLARATION
+
+    LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( PlayerInSight )
     LUA_END_DECLARATION
 
     registerCharacters( aLuaState );
