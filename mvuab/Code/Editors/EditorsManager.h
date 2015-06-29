@@ -19,7 +19,7 @@ class CEditorsManager : public CManager
         void Render();
 
     private: // Members
-        CUiBar* mBar;
+        std::vector<CUiBar*> mBars;
 };
 
 #endif // EDITORS_MANAGER_H
