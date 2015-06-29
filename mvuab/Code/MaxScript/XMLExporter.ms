@@ -42,18 +42,27 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 )
 
 --export de la class
-fn ExportRenderableObjectXMLFile AllObj filenameXML =
+fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers =
 (
-	try
-	(
+	--try
+	--(
+			
 		local unique_instances = GetUniqueInstancesScene()
+		local m_LayersIndex = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
 		
-		-- create the document and set the filename
-		xDoc = XMLDocument filenameXML
+		local l_counter = 1
 		
-		--create the base node and append the node to the document
-		local l_RootNode = xDoc.getNewNode "RenderableObjects"
-		xDoc.AppendNode l_RootNode
+		for layer in l_Layers do
+		(
+			m_LayersIndex.Add layer l_counter
+			l_counter = l_counter + 1
+		)
+		
+		local m_LayersVector = #()
+		while m_LayersIndex.count > m_LayersVector.count do
+		(
+			append m_LayersVector #()
+		)
 		
 		if AllObj.count == 0 then 
 		(
@@ -61,82 +70,65 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML =
 			return -1
 		)
 
-		local layers=#()
-
 		for Obj in AllObj do
 		(
-			if layers.count != 0 then
-			(
-				local Exists = false
-				for i=1 to layers.count do
-				(
-					if layers[i] == (getUserProp Obj "layer_render") then
-					(
-						Exists = true	
-					)
-				)
-				if Exists == false then
-				(
-					if (getUserProp Obj "layer_render") != undefined then
-					(
-						layers[(layers.count+1)] = getUserProp Obj "layer_render"
-						local l_NewLayerNode = xDoc.getNewNode "layer"
-						l_RootNode.AppendNode l_NewLayerNode
-						l_NewLayerNode.AddAttributeAsString "name" layers[layers.count-1]
-					)
-				)
-			)
-			else
-			(
-				if (getUserProp Obj "layer_render") == undefined then
-				(
-					layers[1] = "solid"
-				)
-				else
-				(
-					layers[1] = getUserProp Obj "layer_render"
-				)
-				local l_NewLayerNode = xDoc.getNewNode "layer"
-				l_RootNode.AppendNode l_NewLayerNode
-				l_NewLayerNode.AddAttributeAsString "name" layers[1]
-			)
 			
-			local l_CoreName = GetObjectCore Obj unique_instances
-			local lRotation = Obj.rotation 
-			local l_Yaw = GetYaw lRotation as string
-			local l_Pitch = GetPitch lRotation as string
-			local l_Roll = GetRoll lRotation as string
+			local l_Layer = (getUserProp Obj "layer_render")
+			
+			if l_Layer == undefined then
+			(
+				l_Layer = "solid"
+				setUserProp Obj "layer_render" "solid"
+			)
 
-			local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
-			-- append the new node MeshInstance to the root node RenderableObjects
-			l_RootNode.AppendNode l_NewMeshInstanceNode 
-
-			l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
-			l_NewMeshInstanceNode.AddAttributeAsString "core" l_CoreName
-			l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
-			
-			l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
-			l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
-			l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
-		
-			l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
-			
-			if (getUserProp Obj "layer_render") == undefined then
-			(
-				l_NewMeshInstanceNode.AddAttributeAsString "layer" "solid"
-			)
-			else
-			(
-				l_NewMeshInstanceNode.AddAttributeAsString "layer" (getUserProp Obj "layer_render")
-			)
+			local l_index = m_LayersIndex.Item[l_Layer]
+						
+			append m_LayersVector[l_index] Obj
 		)	
 		
-	)
-	catch
-	(
-		format "Error generating renderable object\n"
-	)
-	return xDoc.PrettySaveXML()
+		for LayerItem in m_LayersVector do
+		(
+			local l_LayerFilename = (getUserProp LayerItem[1] "layer_render") 
+			local l_XmlFilename = (filenameXML +"\\"+ l_LayerFilename + "_layer" + ".xml") as String						
+
+			-- create the document and set the filename
+			xDoc = XMLDocument l_XmlFilename
+			
+			--create the base node and append the node to the document
+			local l_RootNode = xDoc.getNewNode "RenderableObjects"
+			xDoc.AppendNode l_RootNode
+				
+			for Obj in LayerItem do
+			(	
+				local l_CoreName = GetObjectCore Obj unique_instances
+				local lRotation = Obj.rotation 
+				local l_Yaw = GetYaw lRotation as string
+				local l_Pitch = GetPitch lRotation as string
+				local l_Roll = GetRoll lRotation as string
+
+				local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
+				-- append the new node MeshInstance to the root node RenderableObjects
+				l_RootNode.AppendNode l_NewMeshInstanceNode 
+
+				l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
+				l_NewMeshInstanceNode.AddAttributeAsString "core" l_CoreName
+				l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+				
+				l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
+				l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
+				l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
+			
+				l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
+
+			)
+			xDoc.PrettySaveXML()
+		)	
+		
+	--)
+	--catch
+	--(
+	--	format "Error generating renderable object\n"
+	--)
 )
 
 fn ExportTextureFile AllObj DestPath = 
@@ -303,4 +295,78 @@ function GenerateMeshes aObjects MeshDir =
 	)
 	
 	format "Meshes copied on: % \n" MeshDir	
+)
+
+function ExportLayerFile AllObj aDirToXML aRoom =
+(
+	try
+	(
+		local unique_instances = GetUniqueInstancesScene()
+		local l_OutXmlFilename = aRoom + ".xml"
+
+		-- create the document and set the filename
+		xDoc = XMLDocument (aDirToXML +"\\"+ l_OutXmlFilename)
+		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "room"
+		l_RootNode.AddAttributeAsString "path" aDirToXML
+		xDoc.AppendNode l_RootNode
+		
+		if AllObj.count == 0 then 
+		(
+			format "Empty selection. Select any object \n"
+			return -1
+		)
+		
+		local layers=#()
+		
+		for Obj in AllObj do
+			(
+				if layers.count != 0 then
+				(
+					local Exists = false
+					for i=1 to layers.count do
+					(
+						if layers[i] == (getUserProp Obj "layer_render") then
+						(
+							Exists = true	
+						)
+					)
+					if Exists == false then
+					(
+						if (getUserProp Obj "layer_render") != undefined then
+						(
+							layers[(layers.count+1)] = getUserProp Obj "layer_render"
+							local l_LayerName =  layers[layers.count-1]
+							
+							local l_NewLayerNode = xDoc.getNewNode "layer"
+							l_RootNode.AppendNode l_NewLayerNode
+							l_NewLayerNode.AddAttributeAsString "name" l_LayerName
+							l_NewLayerNode.AddAttributeAsString "file" (l_LayerName + "_layer.xml")
+						)
+					)
+				)
+				else
+				(
+					if (getUserProp Obj "layer_render") == undefined then
+					(
+						layers[1] = "solid"
+					)
+					else
+					(
+						layers[1] = getUserProp Obj "layer_render"
+					)
+					local l_NewLayerNode = xDoc.getNewNode "layer"
+					l_RootNode.AppendNode l_NewLayerNode
+					l_NewLayerNode.AddAttributeAsString "name" layers[1]
+					l_NewLayerNode.AddAttributeAsString "file" layers[1] + "_layer.xml"
+				)
+		)
+		return layers
+	)
+	catch
+	(
+		format "Error generating renderable object\n"
+	)
+	return xDoc.PrettySaveXML()
 )
