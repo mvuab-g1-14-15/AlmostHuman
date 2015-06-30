@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <renderable_object_techniques>
+
+	<pool_renderable_object_technique name="generate_ssaa_normal_pool_renderable_object_technique">
+		<default_technique vertex_type="19"		technique="GenerateNormalTextureSSAOTechnique"/>
+		<default_technique vertex_type="31"		technique="GenerateNormalTextureSSAONormalTechnique"/>
+		<default_technique vertex_type="51"		technique="GenerateNormalTextureSSAOSelfIllumTechnique"/>
+		<default_technique vertex_type="63"		technique="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="67"		technique="GenerateNormalTextureSSAODiffuseTechnique"/>
+		<default_technique vertex_type="415" 	technique="GenerateNormalTextureSSAOCal3DTechnique"/>
+	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="lens_flare_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="LensFlareTechnique"/>
