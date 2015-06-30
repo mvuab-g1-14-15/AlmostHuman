@@ -17,7 +17,7 @@ namespace Math
                 r( vect.x ), g( vect.y), b( vect.z ), a( vect.w ) {}
             explicit Math::CColor( float32 red, float32 green, float32 blue,
                                    float32 alpha = 1.0f )
-                : r( r ), g(green), b(blue), a( alpha ) {}
+                : r( red ), g(green), b(blue), a( alpha ) {}
 
             // Getters and setters
             inline void Set( float32 red, float32 green, float32 blue, float32 alpha = 1.0f )

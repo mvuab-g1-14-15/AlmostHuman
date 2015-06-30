@@ -5,7 +5,7 @@
 	<!-- available modes for logger console, output_window -->
 	<logger mode="output_window"/>
 	<trace mode="console"/>
-	<mouse exclusive_mode_in_mouse="false"  draw_pointer_mouse="false" />
+	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="false" />
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
 	<managers path="../CommonData/managers.xml"/>
 	<sound init_sound_path="./Data/sounds.xml"/>
