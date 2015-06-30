@@ -99,7 +99,7 @@ void CCharacter::Move( Math::Vect3f direction, float dt )
   }
 
   m_Controller->SetYaw( l_Yaw );
-  SetYaw( l_Yaw );
+  SetYaw( -l_Yaw + Math::half_pi32 );
 }
 
 float CCharacter::GetHeight()
