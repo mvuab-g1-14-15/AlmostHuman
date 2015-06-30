@@ -30,7 +30,7 @@ class CParticleEmitter :  public CName
         CParticle* GetParticle( const uint32 aIdx);
 
     protected:
-        typedef std::vector<CParticle*>   TParticleContainer;
+        typedef CParticle*                TParticleContainer;
         typedef std::vector < CTexture*>  TTextureContainer;
         bool                        mIsLoop;
         bool                        mIsImmortal;
@@ -49,12 +49,9 @@ class CParticleEmitter :  public CName
         Math::Vect3f                mOndSpeedDirectionMax;
         Math::Vect2u                mAliveParticles;
         Math::Vect2f                mEmissionTime;
-        Math::Vect2f                mAcceleration;
-        Math::Vect2f                mVelocity;
         Math::Vect2f                mSize;
         Math::Vect2f                mTimeToLive;
         Math::Vect2f                mParticlesXEmission;
-        Math::Vect3f                mDirection;
         Math::Vect3f                mPosition;
         std::string                 mTechniqueName;
         TTextureContainer           mTextures;
@@ -75,19 +72,19 @@ inline bool CParticleEmitter::IsActive()
 //-----------------------------------------------------------------------------------------
 inline const uint32 CParticleEmitter::GetParticleCount() const
 {
-    return mParticles.size();
+    return 0;//return mParticles.size();
 }
 
 //-----------------------------------------------------------------------------------------
 inline const CParticle* CParticleEmitter::GetParticle( const uint32 aIdx) const
 {
-    return mParticles[ aIdx ];
+    return 0;
 }
 
 //-----------------------------------------------------------------------------------------
 inline CParticle* CParticleEmitter::GetParticle( const uint32 aIdx)
 {
-    return mParticles[ aIdx ];
+    return 0;
 }
 
 

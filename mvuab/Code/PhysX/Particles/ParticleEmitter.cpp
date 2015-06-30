@@ -5,6 +5,8 @@
 #include "EngineManagers.h"
 #include "Effects/EffectManager.h"
 
+using namespace baseUtils;
+
 CParticleEmitter::CParticleEmitter()
     : CName()
     , mIsLoop( false )
@@ -16,14 +18,12 @@ CParticleEmitter::CParticleEmitter()
     , mActualTime(0.0f)
     , mSize(Math::Vect2f(1.0f, 1.0f))
     , mSpeed(Math::Vect2f(1.0f, 1.0f))
-    , mAcceleration(Math::Vect2f(1.0f, 1.0f))
-    , mDirection(Math::Vect3f(0.0f, 0.0f, 0.0f))
     , mPosition(Math::Vect3f(0.0f, 0.0f, 0.0f))
-    , mVelocity(Math::Vect2f(1.0f, 1.0f))
     , mTechniqueName( "" )
     , mIsImmortal( 0 )
     , mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
     , mGravity(0.f)
+    , mParticles( 0 )
 {
 }
 
@@ -38,14 +38,11 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mIsImmortal           = atts.GetAttribute<bool>("immortal", false );
     mIsActive             = atts.GetAttribute<bool>("active", false );
     mAliveParticles       = atts.GetAttribute<Math::Vect2u>("alive_particles", 0);
-    mAliveParticles       = atts.GetAttribute<Math::Vect2u>("speed", 0);
+    mSpeed                = atts.GetAttribute<Math::Vect2f>("speed", 0);
     mEmissionTime         = atts.GetAttribute<Math::Vect2f>("emission_time", Math::Vect2f(1.0f, 1.0f));
     mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
-    mAcceleration         = atts.GetAttribute<Math::Vect2f>("acceleration", Math::Vect2f(1.0f, 1.0f));
-    mDirection            = atts.GetAttribute<Math::Vect3f>("direction", Math::Vect3f());
     mPosition             = atts.GetAttribute<Math::Vect3f>("position", Math::Vect3f());
-    mVelocity             = atts.GetAttribute<Math::Vect2f>("velocity", Math::Vect2f(1.0f, 1.0f));
     mTechniqueName        = atts.GetAttribute<std::string>("technique", "none");
     mParticlesXEmission   = atts.GetAttribute<Math::Vect2f>("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
     mColorMin             = atts.GetAttribute<Math::CColor>("min_color", Math::colWHITE );
@@ -54,7 +51,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mInitialDirectionMax  = atts.GetAttribute<Math::Vect3f>("max_initial_direction", mInitialDirectionMin );
     mGravity              = atts.GetAttribute<float32>("gravity", 1.0f );
     mRadialSpeed          = atts.GetAttribute<Math::Vect2f>("radial_speed", 1.0f );
-    mOndSpeed             = atts.GetAttribute<Math::Vect2f>("ondulative_speed", 1.0f );
+    mOndSpeed             = atts.GetAttribute<Math::Vect2f>("ondulative_speed", Math::Vect2f(1.0f, 1.0f) );
     mOndSpeedDirectionMin = atts.GetAttribute<Math::Vect3f>("min_ondulative_direction", Math::Vect3f());
     mOndSpeedDirectionMax = atts.GetAttribute<Math::Vect3f>("max_ondulative_direction", mOndSpeedDirectionMin );
 
@@ -74,15 +71,10 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     }
 
     // Reserve the memory for the particles
-    mParticles.reserve( mAliveParticles.y );
-    mDeadParticles.reserve( mAliveParticles.y );
+    mParticles = new CParticle[mAliveParticles.y];
+    ZeroMemory(mParticles, mAliveParticles.y * sizeof(CParticle) );
 
-    // Allocate all the particles
-    for( uint32 i = 0; i < mAliveParticles.y; ++i )
-    {
-        mDeadParticles.push_back( new CParticle() );
-    }
-
+    CParticle* lPar = new CParticle();
     return true;
 }
 
@@ -90,74 +82,60 @@ void CParticleEmitter::Update( float dt )
 {
     KillParticles();
     EmitParticles();
-    for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
-    {
+    /*
+        for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
+        {
         CParticle* lParticle = GetParticle( i );
         lParticle->Update( 1 / 30.0f );
-    }
+        }
+    */
 }
 
 void CParticleEmitter::Render()
 {
-    for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
-    {
-        CParticle* lParticle = GetParticle( i );
-        lParticle->Render();
-    }
+    /*
+        for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
+        {
+          CParticle* lParticle = GetParticle( i );
+          lParticle->Render();
+        }
+    */
 }
 
 void CParticleEmitter::EmitParticles()
 {
-    /*
-        const uint32 lParticlesToEmit = (uint32)baseUtils::RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
-        for( uint32 i = 0; i < lParticlesToEmit && (GetParticleCount() < mAliveParticles.y); ++i )
+    const uint32 lParticlesToEmit = (uint32)RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
+    for( uint32 i = 0; i < lParticlesToEmit && mAliveParticlesCount < mAliveParticles.y; ++i )
+    {
+        CParticle& lParticle = mParticles[i];
+
+        if( !lParticle.IsAlive() )
         {
-          CParticle* lNewParticle = mDeadParticles.back();
-          mDeadParticles.pop_back();
-          /*
-              bool lOk = lNewParticle->Init(
-                         baseUtils::RandRange( mTimeToLive.x, mTimeToLive.y),
-                         baseUtils::RandRange( Math::Vect3f(0.0f, 0.0f, 0.0f) , Math::Vect3f(1.0f, 1.0f, 1.0f) ),
-                         GetSpawnPosition(),
-                         baseUtils::RandRange( mVelocity.x, mVelocity.y ),
-                         baseUtils::RandRange( mAcceleration.x, mAcceleration.x ),
-                         mDirection,
-                         baseUtils::RandRange( mSize.x, mSize.y ),
-                         1.0f,
-                         3.14f,
-                         mTextures[ baseUtils::RandRange( (unsigned int)(0), (unsigned int)(mTextures.size() - 1) ) ],
-                         mTechniqueName
-                     );
-
-
-          ASSERT( lOk, "Error initing the particle" );
-
-          if( lOk )
-          {
-              mParticles.push_back( lNewParticle );
-              ++mAliveParticlesCount;
-          }
-        }*/
+            lParticle.SetIsAlive(true);
+            lParticle.SetGravity( mGravity );
+            lParticle.SetSpeed(RandRange(mSpeed.x, mSpeed.y));
+            lParticle.SetDirection(RandRange(mInitialDirectionMin, mInitialDirectionMax).Normalize());
+            lParticle.SetSize(RandRange(mSize.x, mSize.y));
+            lParticle.SetTimeToLive(RandRange(mTimeToLive.x, mTimeToLive.y));
+            lParticle.SetPosition(GetSpawnPosition());
+            lParticle.SetOndSpeed(RandRange(mOndSpeed.x, mOndSpeed.y));
+            lParticle.SetOndSpeedDirection(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax).Normalize());
+            lParticle.SetRadialSpeed(RandRange(mRadialSpeed.x, mRadialSpeed.y));
+            lParticle.SetColor(RandRange(mColorMin, mColorMax));
+            ++mAliveParticlesCount;
+        }
+    }
 }
 
 void CParticleEmitter::KillParticles()
 {
-    for( uint32 i = 0, lParticlesCount = GetParticleCount(); i < lParticlesCount; )
+    for( uint32 i = 0; i < mAliveParticles.y && mAliveParticlesCount > 0; ++i )
     {
-        CParticle* lParticle = GetParticle( i );
-        if( !lParticle->IsAlive() )
+        CParticle& lParticle = mParticles[i];
+        if( lParticle.IsAlive() && lParticle.GetActualTime() > lParticle.GetTimeToLive() )
         {
-            std::swap( mParticles[i], mParticles[mAliveParticlesCount - 1] );
-            mDeadParticles.push_back( mParticles.back() ) ;
-            mParticles.pop_back();
-
+            lParticle.SetIsAlive(false);
             --mAliveParticlesCount;
-            lParticlesCount = GetParticleCount();
-        }
-        else
-        {
-            // Is ok, then next iteration
-            ++i;
         }
     }
 }
