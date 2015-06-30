@@ -304,7 +304,7 @@ void CMap::SetYawEnemy( const std::string& Name, float Yaw )
   {
     if ( m_vEnemy[i]->m_Name == Name )
     {
-      m_vEnemy[i]->m_Yaw = Yaw;
+      m_vEnemy[i]->m_Yaw = -Yaw + Math::half_pi32;
       return;
     }
   }
