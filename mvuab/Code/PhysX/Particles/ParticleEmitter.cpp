@@ -29,6 +29,11 @@ CParticleEmitter::CParticleEmitter()
 
 CParticleEmitter::~CParticleEmitter()
 {
+    if(mParticles)
+    {
+        delete[] mParticles;
+        mParticles = 0;
+    }
 }
 
 bool CParticleEmitter::Init( const CXMLTreeNode& atts )
@@ -74,7 +79,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mParticles = new CParticle[mAliveParticles.y];
     ZeroMemory(mParticles, mAliveParticles.y * sizeof(CParticle) );
 
-    CParticle* lPar = new CParticle();
+    //CParticle* lPar = new CParticle();
     return true;
 }
 

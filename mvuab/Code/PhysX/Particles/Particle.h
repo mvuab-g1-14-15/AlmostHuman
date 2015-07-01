@@ -10,7 +10,7 @@ class CParticle
 {
     public:
         CParticle();
-        virtual ~CParticle();
+        ~CParticle();
 
         void Update( float dt );
         void Render();
