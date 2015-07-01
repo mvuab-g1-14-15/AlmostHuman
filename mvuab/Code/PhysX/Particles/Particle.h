@@ -111,6 +111,30 @@ class CParticle
         {
             mOndSpeed = val;
         }
+        float32 GetOndulationVel() const
+        {
+            return mOndulationVel;
+        }
+        void SetOndulationVel(float32 val)
+        {
+            mOndulationVel = val;
+        }
+        float32 GetInitalOndulation() const
+        {
+            return mInitalOndulation;
+        }
+        void SetInitalOndulation(float32 val)
+        {
+            mInitalOndulation = val;
+        }
+        float32 GetAngle() const
+        {
+            return mAngle;
+        }
+        void SetAngle(float32 val)
+        {
+            mAngle = val;
+        }
     private:
         CBillboard *mBillboard;
         bool                        mIsAlive;
@@ -121,6 +145,9 @@ class CParticle
         float32                     mSpeed;
         float32                     mRadialSpeed;
         float32                     mTimeToLive;
+        float32                     mInitalOndulation;
+        float32                     mOndulationVel;
+        float32                     mAngle;
         Math::Vect3f                mDirection;
         Math::Vect3f                mOndSpeedDirection;
         Math::CColor                mColor;

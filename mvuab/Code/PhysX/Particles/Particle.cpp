@@ -6,6 +6,7 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 #include "Texture/TextureManager.h"
+#include "Math/MathUtils.h"
 
 CParticle::CParticle()
 {
@@ -19,6 +20,13 @@ CParticle::~CParticle()
 
 void CParticle::Update( float dt )
 {
+    mDirection = (mDirection * mSpeed + Math::Vect3f( 0, -1, 0) * mGravity * dt);
+    mDirection.Normalize();
+    mPosition += mDirection * mSpeed * dt + mOndSpeedDirection * Math::Utils::Sin( dt * mOndulationVel +
+                 mInitalOndulation );
+    mAngle += dt;
+    mActualTime += dt;
+
     /*
         ASSERT( mBillboard, "Null billboard for particle" );
 
