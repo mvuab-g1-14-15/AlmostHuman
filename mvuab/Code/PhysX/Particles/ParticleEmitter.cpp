@@ -4,8 +4,24 @@
 #include "XML/XMLTreeNode.h"
 #include "EngineManagers.h"
 #include "Effects/EffectManager.h"
+#include "Billboard/Billboard.h"
+#include "RenderableVertex/InstancedVertexTypes.h"
+#include "RenderableVertex/InstancingVertexs.h"
 
 using namespace baseUtils;
+
+const uint32 lIdxCount = 6;
+const uint32 lVtxCount = 4;
+
+TT1_VERTEX lVtx[lVtxCount] =
+{
+    {  -0.5f, 0.0f, -0.5f, 0, 0 },    // vertex 0
+    {  -0.5f, 0.0f,  0.5f, 0, 1 },    // vertex 1
+    {   0.5f, 0.0f,  0.5f, 1, 1 },    // vertex 2
+    {   0.5f, 0.0f, -0.5f, 1, 0 }     // vertex 3
+};
+
+unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
 CParticleEmitter::CParticleEmitter()
     : CName()
@@ -57,8 +73,8 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mGravity              = atts.GetAttribute<float32>("gravity", 1.0f );
     mRadialSpeed          = atts.GetAttribute<Math::Vect2f>("radial_speed", 1.0f );
     mOndSpeed             = atts.GetAttribute<Math::Vect2f>("ondulative_speed", Math::Vect2f(1.0f, 1.0f) );
-    mOndSpeedDirectionMin = atts.GetAttribute<Math::Vect3f>("min_ondulative_direction", Math::Vect3f());
-    mOndSpeedDirectionMax = atts.GetAttribute<Math::Vect3f>("max_ondulative_direction", mOndSpeedDirectionMin );
+    mOndSpeedDirectionMin = atts.GetAttribute<float32>("min_ondulative_direction", 0.0);
+    mOndSpeedDirectionMax = atts.GetAttribute<float32>("max_ondulative_direction", mOndSpeedDirectionMin );
 
     // Get textures
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
@@ -79,6 +95,13 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mParticles = new CParticle[mAliveParticles.y];
     ZeroMemory(mParticles, mAliveParticles.y * sizeof(CParticle) );
 
+    mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mAliveParticles.y];
+    ZeroMemory(mParticles, mAliveParticles.y * sizeof(TPARTICLE_VERTEX_INSTANCE) );
+
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount,
+            lIdxCount,
+            mAliveParticles.y );
+
     //CParticle* lPar = new CParticle();
     return true;
 }
@@ -87,13 +110,24 @@ void CParticleEmitter::Update( float dt )
 {
     KillParticles();
     EmitParticles();
-    /*
-        for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
+    for( uint32 i = 0, lParticles = mAliveParticles.y; i < lParticles; ++i)
+    {
+        if(mParticles[i].IsAlive())
         {
-        CParticle* lParticle = GetParticle( i );
-        lParticle->Update( 1 / 30.0f );
+            CParticle& lParticle = mParticles[i];
+
+            lParticle.Update(dt);
+            mParticlesStream[i].alive = 1.0;
+            mParticlesStream[i].size = lParticle.GetSize();
+            mParticlesStream[i].x = lParticle.GetPosition().x;
+            mParticlesStream[i].y = lParticle.GetPosition().y;
+            mParticlesStream[i].z = lParticle.GetPosition().z;
         }
-    */
+        else
+        {
+            mParticlesStream[i].alive = 0.0;
+        }
+    }
 }
 
 void CParticleEmitter::Render()
@@ -110,7 +144,8 @@ void CParticleEmitter::Render()
 void CParticleEmitter::EmitParticles()
 {
     const uint32 lParticlesToEmit = (uint32)RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
-    for( uint32 i = 0; i < lParticlesToEmit && mAliveParticlesCount < mAliveParticles.y; ++i )
+    for( uint32 i = 0, lEmittedParticles = 0; i < mAliveParticles.y &&
+            mAliveParticlesCount < mAliveParticles.y && lEmittedParticles < lParticlesToEmit ; ++i )
     {
         CParticle& lParticle = mParticles[i];
 
@@ -124,10 +159,13 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetTimeToLive(RandRange(mTimeToLive.x, mTimeToLive.y));
             lParticle.SetPosition(GetSpawnPosition());
             lParticle.SetOndSpeed(RandRange(mOndSpeed.x, mOndSpeed.y));
-            lParticle.SetOndSpeedDirection(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax).Normalize());
+            lParticle.SetOndSpeedDirection(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
             lParticle.SetRadialSpeed(RandRange(mRadialSpeed.x, mRadialSpeed.y));
             lParticle.SetColor(RandRange(mColorMin, mColorMax));
+            lParticle.SetInitalOndulation(RandRange(0.0f, 360.0f));
+            lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
             ++mAliveParticlesCount;
+            ++lEmittedParticles;
         }
     }
 }
@@ -140,6 +178,7 @@ void CParticleEmitter::KillParticles()
         if( lParticle.IsAlive() && lParticle.GetActualTime() > lParticle.GetTimeToLive() )
         {
             lParticle.SetIsAlive(false);
+            lParticle.SetActualTime(0.0f);
             --mAliveParticlesCount;
         }
     }

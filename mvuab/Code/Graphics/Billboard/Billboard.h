@@ -18,26 +18,26 @@ class CBillboard : public CName, public CObject3D
         CBillboard();
         virtual ~CBillboard();
 
-		static void CreateBillBoardGeometry();
-		static void DestroyBillBoardGeometry();
+        static void CreateBillBoardGeometry();
+        static void DestroyBillBoardGeometry();
 
         bool Init(const CXMLTreeNode& atts);
         bool Init
         (
             const std::string&  aName,
-			const Math::Vect3f& aPosition,
-			float				aSize,
-			float				aAngle,
-			float				aAlpha,
-			const std::string & aTextureName,
-			const std::string & aTechniqueName,
-			bool                aActive = true
+            const Math::Vect3f& aPosition,
+            float               aSize,
+            float               aAngle,
+            float               aAlpha,
+            const std::string & aTextureName,
+            const std::string & aTechniqueName,
+            bool                aActive = true
         );
 
         void Render();
         void Update();
 
-		void SetActive( bool aActive );
+        void SetActive( bool aActive );
 
     private:
         CTexture*           m_Texture;
@@ -47,13 +47,13 @@ class CBillboard : public CName, public CObject3D
         float               mAlpha;
         bool                m_Active;
 
-		static CRenderableVertexs* sRV;
+        static CRenderableVertexs* sRV;
 };
 
 //--------------------------------------------------------------------------------------------------------------
 inline void CBillboard::SetActive( bool aActive )
 {
-	m_Active = aActive;
+    m_Active = aActive;
 }
 
 #endif //_BILLBOARD_H

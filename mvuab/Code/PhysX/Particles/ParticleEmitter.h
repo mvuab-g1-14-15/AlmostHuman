@@ -8,9 +8,11 @@
 #include "Utils\Defines.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Utils\Name.h"
+#include "RenderableVertex\InstancedVertexTypes.h"
 
 class CParticle;
 class CTexture;
+class CRenderableVertexs;
 
 class CParticleEmitter :  public CName
 {
@@ -38,6 +40,8 @@ class CParticleEmitter :  public CName
         uint32                      mAliveParticlesCount;
         float32                     mActualTime;
         float32                     mGravity;
+        float32                     mOndSpeedDirectionMin;
+        float32                     mOndSpeedDirectionMax;
         Math::Vect3f                mInitialDirectionMin;
         Math::Vect3f                mInitialDirectionMax;
         Math::CColor                mColorMin;
@@ -45,8 +49,6 @@ class CParticleEmitter :  public CName
         Math::Vect2f                mSpeed;
         Math::Vect2f                mRadialSpeed;
         Math::Vect2f                mOndSpeed;
-        Math::Vect3f                mOndSpeedDirectionMin;
-        Math::Vect3f                mOndSpeedDirectionMax;
         Math::Vect2u                mAliveParticles;
         Math::Vect2f                mEmissionTime;
         Math::Vect2f                mSize;
@@ -57,6 +59,9 @@ class CParticleEmitter :  public CName
         TTextureContainer           mTextures;
         TParticleContainer          mParticles;
         TParticleContainer          mDeadParticles;
+
+        CRenderableVertexs          *mRV;
+        TPARTICLE_VERTEX_INSTANCE   *mParticlesStream;
 
     private:
         void EmitParticles();

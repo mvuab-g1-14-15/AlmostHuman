@@ -20,46 +20,32 @@ CParticleManager::~CParticleManager()
 
 void CParticleManager::Init()
 {
-    CXMLTreeNode l_XML;
-    if ( !l_XML.LoadFile( mConfigPath.c_str() ) )
+    CXMLTreeNode l_XML, l_Node;
+    if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "emitters", l_Node ) )
     {
-        LOG_ERROR_APPLICATION( "CParticleManager::Init Can't load XML file" );
-        return;
-    }
-
-    CXMLTreeNode l_Node = l_XML["emitters"];
-
-    if ( !l_Node.Exists() )
-    {
-        LOG_ERROR_APPLICATION( "CParticleManager::Init Can't find node \"emitters\"" );
-        return;
-    }
-
-    for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i)
-    {
-        const std::string& lEmitterType = l_Node( i ).GetAttribute<std::string>( "type", "cube" );
-
-        ASSERT( lEmitterType != "", "Null emitter type");
-
-        CParticleEmitter *lEmitter = 0;
-
-        if( lEmitterType == "sphere")
+        for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i)
         {
-            lEmitter =  new CSphereEmitter();
-        }
-        else if(lEmitterType == "cube")
-        {
-            lEmitter =  new CCubeEmitter();
-        }
+            const CXMLTreeNode& lCurrentEmitter = l_Node(i);
+            const std::string& lEmitterType = lCurrentEmitter.GetName();
 
-        ASSERT(lEmitter, "Null Emitter");
+            CParticleEmitter *lEmitter = 0;
+            if( lEmitterType == "cube_emitter" )
+            {
+                lEmitter =  new CCubeEmitter();
+            }
+            else if( lEmitterType == "sphere_emitter" )
+            {
+                lEmitter =  new CSphereEmitter();
+            }
 
-        if( !lEmitter->Init( l_Node( i ) ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
-        {
-            LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
-            CHECKED_DELETE( lEmitter );
+            ASSERT(lEmitter, "Null Emitter");
+
+            if( !lEmitter->Init(lCurrentEmitter) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+            {
+                LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
+                CHECKED_DELETE( lEmitter );
+            }
         }
-
     }
 }
 
