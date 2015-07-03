@@ -9,7 +9,7 @@ CParticleManager::CParticleManager() : CManager()
 {
 }
 
-CParticleManager::CParticleManager(CXMLTreeNode& atts) : CManager(atts)
+CParticleManager::CParticleManager( CXMLTreeNode& atts ) : CManager( atts )
 {
 }
 
@@ -20,70 +20,52 @@ CParticleManager::~CParticleManager()
 
 void CParticleManager::Init()
 {
-    CXMLTreeNode l_XML;
-    if ( !l_XML.LoadFile( mConfigPath.c_str() ) )
+    CXMLTreeNode l_XML, l_Node;
+
+    if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "emitters", l_Node ) )
     {
-        LOG_ERROR_APPLICATION( "CParticleManager::Init Can't load XML file" );
-        return;
-    }
-
-    CXMLTreeNode l_Node = l_XML["emitters"];
-
-    if ( !l_Node.Exists() )
-    {
-        LOG_ERROR_APPLICATION( "CParticleManager::Init Can't find node \"emitters\"" );
-        return;
-    }
-
-    for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i)
-    {
-        const std::string& lEmitterType = l_Node( i ).GetAttribute<std::string>( "type", "cube" );
-
-        ASSERT( lEmitterType != "", "Null emitter type");
-
-        CParticleEmitter *lEmitter = 0;
-
-        if( lEmitterType == "sphere")
+        for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
         {
-            lEmitter =  new CSphereEmitter();
-        }
-        else if(lEmitterType == "cube")
-        {
-            lEmitter =  new CCubeEmitter();
-        }
+            const CXMLTreeNode& lCurrentEmitter = l_Node( i );
+            const std::string& lEmitterType = lCurrentEmitter.GetAttribute<std::string>( "type", "cube" );
 
-        ASSERT(lEmitter, "Null Emitter");
+            CParticleEmitter* lEmitter = 0;
 
-        if( !lEmitter->Init( l_Node( i ) ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
-        {
-            LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
-            CHECKED_DELETE( lEmitter );
+            if ( lEmitterType == "cube" )
+                lEmitter =  new CCubeEmitter();
+            else if ( lEmitterType == "sphere" )
+                lEmitter =  new CSphereEmitter();
+
+            ASSERT( lEmitter, "Null Emitter" );
+
+            if ( !lEmitter->Init( lCurrentEmitter ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+            {
+                LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
+                CHECKED_DELETE( lEmitter );
+            }
         }
-
     }
 }
 
 void CParticleManager::Update()
 {
-    for( uint32 i = 0, lEmitters = GetResourcesCount(); i < lEmitters; ++i)
+    for ( uint32 i = 0, lEmitters = GetResourcesCount(); i < lEmitters; ++i )
     {
         CParticleEmitter* lEmitter = GetResourceById( i );
-        if(lEmitter->IsActive())
-        {
+
+        if ( lEmitter->IsActive() )
             lEmitter->Update( deltaTimeMacro );
-        }
     }
 }
 
 void CParticleManager::Render()
 {
-    for( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i)
+    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
     {
         CParticleEmitter* lEmitter = GetResourceById( i );
-        if(lEmitter->IsActive())
-        {
+
+        if ( lEmitter->IsActive() )
             lEmitter->Render();
-        }
     }
 }
 

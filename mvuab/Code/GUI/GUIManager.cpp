@@ -1,5 +1,3 @@
-
-
 #include "Utils\Defines.h"
 #include "GUIManager.h"
 #include "EngineManagers.h"
@@ -140,13 +138,9 @@ void CGUIManager::Init()
             m_sCurrentWindows =  m.GetAttribute<std::string>( "windows_default", "Main.xml" );
 
             if ( path.compare( "" ) != 0 )
-            {
                 m_bIsOk = LoadGuiFiles( path );
-            }
             else
-            {
                 m_bIsOk = true;
-            }
         }
         else
         {
@@ -243,17 +237,11 @@ void CGUIManager::Init()
                 m_pPressButton->SetBackGround( backGround );
 
                 if ( flip.compare( "FLIP_X" ) == 0 )
-                {
                     m_pPressButton->SetFlip( CGraphicsManager::FLIP_X );
-                }
                 else if ( flip.compare( "FLIP_Y" ) == 0 )
-                {
                     m_pPressButton->SetFlip( CGraphicsManager::FLIP_Y );
-                }
                 else
-                {
                     m_pPressButton->SetFlip( CGraphicsManager::NONE_FLIP );
-                }
 
                 for ( int j = 0, count = m.GetNumChildren(); j < count; ++j )
                 {
@@ -308,13 +296,9 @@ void CGUIManager::Init()
                                   0U, "", 2U, 2U, false, true );
 
     if ( !m_bIsOk )
-    {
         Release();
-    }
     else
-    {
         LOG_INFO_APPLICATION( "CSoundManager:: online (ok)" );
-    }
 
     //return m_bIsOk;
 
@@ -358,14 +342,10 @@ void CGUIManager::Render()
             m_pPressButton->Render();*/
 
         if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
-        {
             m_RenderPointer = true;
-        }
 
         if ( m_RenderPointer )
-        {
             RenderPointerMouse();
-        }
 
     }//END if (m_bIsOk)
 }
@@ -374,9 +354,7 @@ void CGUIManager::Render()
 void  CGUIManager::RenderPointerMouse()
 {
     if ( m_bVisiblePointerMouse )
-    {
         m_PointerMouse->Render();
-    }
 }
 //----------------------------------------------------------------------------
 // Update
@@ -422,9 +400,7 @@ void CGUIManager::Update()
                 CWindows* currentWindow = it->second;
 
                 if ( !UpdateTransitionEffect() )
-                {
                     currentWindow->Update();
-                }
 
                 m_bUpdateError = false;
             }
@@ -449,36 +425,36 @@ void CGUIManager::RenderTransitionEffect()
     {
         switch ( m_sTransitionEffect.m_eType )
         {
-            case TE_SHADOW:
-                {
-                    //Dibujamos un quad2d en toda la pantalla:
-                    // - Durante la primera mitad de tiempo irá de totalmente transparente a totalmente opaco negro
-                    // - Durante la segunda mitad de tiempo irá de totalmente opaco negro a totalmente transparente
-                    Math::CColor color = Math::colBLACK;
-                    float alpha;
+        case TE_SHADOW:
+        {
+            //Dibujamos un quad2d en toda la pantalla:
+            // - Durante la primera mitad de tiempo irá de totalmente transparente a totalmente opaco negro
+            // - Durante la segunda mitad de tiempo irá de totalmente opaco negro a totalmente transparente
+            Math::CColor color = Math::colBLACK;
+            float alpha;
 
-                    if ( m_sTransitionEffect.m_fTimeCounter < m_sTransitionEffect.m_fTransitionTime * 0.5f )
-                    {
-                        //Durante la primera mitad del tiempo: alpha de 0.f -> 1.f
-                        alpha = m_sTransitionEffect.m_fTimeCounter / m_sTransitionEffect.m_fTransitionTime * 0.5f;
-                        color.SetAlpha( alpha );
-                    }
-                    else
-                    {
-                        //Durante la segunda mitad del tiempo: alpha de 1.f -> 0.f
-                        alpha = m_sTransitionEffect.m_fTimeCounter / m_sTransitionEffect.m_fTransitionTime * 0.5f; //esto va de 1->2
-                        color.SetAlpha( abs( alpha - 2 ) );
-                    }
+            if ( m_sTransitionEffect.m_fTimeCounter < m_sTransitionEffect.m_fTransitionTime * 0.5f )
+            {
+                //Durante la primera mitad del tiempo: alpha de 0.f -> 1.f
+                alpha = m_sTransitionEffect.m_fTimeCounter / m_sTransitionEffect.m_fTransitionTime * 0.5f;
+                color.SetAlpha( alpha );
+            }
+            else
+            {
+                //Durante la segunda mitad del tiempo: alpha de 1.f -> 0.f
+                alpha = m_sTransitionEffect.m_fTimeCounter / m_sTransitionEffect.m_fTransitionTime * 0.5f; //esto va de 1->2
+                color.SetAlpha( abs( alpha - 2 ) );
+            }
 
-                    GraphicsInstance->DrawQuad2D( Math::Vect2i( 0, 0 ), m_ScreenResolution.x, m_ScreenResolution.y,
-                                                  CGraphicsManager::UPPER_LEFT, color );
-                }
-                break;
+            GraphicsInstance->DrawQuad2D( Math::Vect2i( 0, 0 ), m_ScreenResolution.x, m_ScreenResolution.y,
+                                          CGraphicsManager::UPPER_LEFT, color );
+        }
+        break;
 
-            default:
-                {
-                    LOG_ERROR_APPLICATION( "CGUIManager::RenderTransitionEffect-> No se reconoce el efecto a realizar!" );
-                }
+        default:
+        {
+            LOG_ERROR_APPLICATION( "CGUIManager::RenderTransitionEffect-> No se reconoce el efecto a realizar!" );
+        }
         }
     }
 }
@@ -576,9 +552,7 @@ void CGUIManager::PushWindows( const std::string& inNameWindow )
 void CGUIManager::PopWindows()
 {
     if ( m_PrevWindows.size() == 0 )
-    {
         LOG_ERROR_APPLICATION( "CGUIManager::PopWindows -> El vector de PrevWindows esta vacío!" );
-    }
     else
     {
         std::string popWindows = m_PrevWindows[m_PrevWindows.size() - 1];
@@ -644,9 +618,7 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
         isOk = windows->LoadXML( pathFile, m_ScreenResolution );
 
         if ( !isOk )
-        {
             return false;
-        }
 
         windows->RegisterElements( m_ElementsMap );
         windows->SetName( FileName );
@@ -661,9 +633,7 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
             isOk = windows->LoadXML( pathFile, m_ScreenResolution );
 
             if ( !isOk )
-            {
                 return false;
-            }
 
             windows->RegisterElements( m_ElementsMap );
             windows->SetName( FileName );
@@ -687,9 +657,7 @@ bool CGUIManager::ReloadGuiFiles()
     it = m_WindowsMap.find( windows );
 
     if ( it != m_WindowsMap.end() )
-    {
         m_sCurrentWindows = windows;
-    }
 
     return isOk;
 }
@@ -726,9 +694,7 @@ CWindows*  CGUIManager::GetWindow( const std::string& NameWindow )
     it = m_WindowsMap.find( NameWindow );
 
     if ( it != m_WindowsMap.end() )
-    {
         return it->second;
-    }
 
     return 0;
 }
@@ -744,9 +710,7 @@ void CGUIManager::SetActiveGuiElement( const std::string& inNameGuiElement, bool
     it = m_ElementsMap.find( inNameGuiElement );
 
     if ( it != m_ElementsMap.end() )
-    {
         it->second->SetActive( flag );
-    }
     else
     {
         LOG_ERROR_APPLICATION( "CGUIManager:: No se ha encontrado el guiElement %s al ejecutar la funcion SetActiveGuiElement",
@@ -760,9 +724,7 @@ void CGUIManager::SetVisibleGuiElement( const std::string& inNameGuiElement, boo
     it = m_ElementsMap.find( inNameGuiElement );
 
     if ( it != m_ElementsMap.end() )
-    {
         it->second->SetVisible( flag );
-    }
     else
     {
         LOG_ERROR_APPLICATION( "CGUIManager:: No se ha encontrado el guiElement %s al ejecutar la funcion SetVisibleGuiElement",
@@ -1038,15 +1000,16 @@ void CGUIManager::ShowStaticText( const std::string& inStaticText )
     if ( it != m_ElementsMap.end() )
     {
         CStaticText* st = ( CStaticText* )( it->second );
-        if (st->GetVisible())
+
+        if ( st->GetVisible() )
         {
-            st->SetVisible(false);
-            st->SetActive(false);
+            st->SetVisible( false );
+            st->SetActive( false );
         }
         else
         {
-            st->SetVisible(true);
-            st->SetActive(true);
+            st->SetVisible( true );
+            st->SetActive( true );
         }
     }
     else

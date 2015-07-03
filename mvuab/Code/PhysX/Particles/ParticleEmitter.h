@@ -8,9 +8,11 @@
 #include "Utils\Defines.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Utils\Name.h"
+#include "RenderableVertex\InstancedVertexTypes.h"
 
 class CParticle;
 class CTexture;
+class CRenderableVertexs;
 
 class CParticleEmitter :  public CName
 {
@@ -30,7 +32,7 @@ class CParticleEmitter :  public CName
         CParticle* GetParticle( const uint32 aIdx);
 
     protected:
-        typedef std::vector<CParticle*>   TParticleContainer;
+        typedef CParticle*                TParticleContainer;
         typedef std::vector < CTexture*>  TTextureContainer;
         bool                        mIsLoop;
         bool                        mIsImmortal;
@@ -38,6 +40,8 @@ class CParticleEmitter :  public CName
         uint32                      mAliveParticlesCount;
         float32                     mActualTime;
         float32                     mGravity;
+        float32                     mOndSpeedDirectionMin;
+        float32                     mOndSpeedDirectionMax;
         Math::Vect3f                mInitialDirectionMin;
         Math::Vect3f                mInitialDirectionMax;
         Math::CColor                mColorMin;
@@ -45,21 +49,19 @@ class CParticleEmitter :  public CName
         Math::Vect2f                mSpeed;
         Math::Vect2f                mRadialSpeed;
         Math::Vect2f                mOndSpeed;
-        Math::Vect3f                mOndSpeedDirectionMin;
-        Math::Vect3f                mOndSpeedDirectionMax;
         Math::Vect2u                mAliveParticles;
         Math::Vect2f                mEmissionTime;
-        Math::Vect2f                mAcceleration;
-        Math::Vect2f                mVelocity;
         Math::Vect2f                mSize;
         Math::Vect2f                mTimeToLive;
         Math::Vect2f                mParticlesXEmission;
-        Math::Vect3f                mDirection;
         Math::Vect3f                mPosition;
         std::string                 mTechniqueName;
         TTextureContainer           mTextures;
         TParticleContainer          mParticles;
         TParticleContainer          mDeadParticles;
+
+        CRenderableVertexs          *mRV;
+        TPARTICLE_VERTEX_INSTANCE   *mParticlesStream;
 
     private:
         void EmitParticles();
@@ -75,19 +77,19 @@ inline bool CParticleEmitter::IsActive()
 //-----------------------------------------------------------------------------------------
 inline const uint32 CParticleEmitter::GetParticleCount() const
 {
-    return mParticles.size();
+    return 0;//return mParticles.size();
 }
 
 //-----------------------------------------------------------------------------------------
 inline const CParticle* CParticleEmitter::GetParticle( const uint32 aIdx) const
 {
-    return mParticles[ aIdx ];
+    return 0;
 }
 
 //-----------------------------------------------------------------------------------------
 inline CParticle* CParticleEmitter::GetParticle( const uint32 aIdx)
 {
-    return mParticles[ aIdx ];
+    return 0;
 }
 
 

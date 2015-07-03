@@ -52,56 +52,7 @@
 	</technique>
 	
 	<!-- Effects of GenerateGBuffer -->
-	<technique name="GenerateGBufferTechnique" vertex_type="19">
-		<effect name="GenerateGBuffer" file="../CommonData/effects/GenerateGBuffer.fx"/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
-	</technique>
-	
-	<technique name="GenerateGBufferDebugTechnique" vertex_type="19">
-		<effect name="GenerateGBufferDebug" file="../CommonData/effects/GenerateGBuffer.fx"/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" use_light_ambient_color="true"/>
-	</technique>
-	
-	<technique name="GenerateGBufferNormalTechnique" vertex_type="31">
-		<effect name="GenerateGBufferNormal" file="../CommonData/effects/GenerateGBuffer.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
-			<define name="USE_NORMAL" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
-	</technique>
-	
-	<technique name="GenerateGBufferSelfIllumTechnique" vertex_type="51">
-		<effect name="GenerateGBufferSelfIllum" file="../CommonData/effects/GenerateGBuffer.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
-			<define name="USE_SELF_ILUM" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
-	</technique>
-	
-	<technique name="GenerateGBufferSelfIllumNormalTechnique" vertex_type="63">
-		<effect name="GenerateGBufferSelfIllumNormal" file="../CommonData/effects/GenerateGBuffer.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateGBufferSelfIllumNormalTechnique"/>
-			<define name="USE_SELF_ILUM" description=""/>
-			<define name="USE_NORMAL" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
-	</technique>
-	
-	<technique name="GenerateGBufferDiffuseTechnique" vertex_type="67">
-		<effect name="GenerateGBufferDiffuse" file="../CommonData/effects/GenerateGBuffer.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateGBufferDiffuseTechnique"/>
-			<define name="USE_DIFFUSE_COLOR" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
-	</technique>
-	
-	<technique name="GenerateGBufferCal3DTechnique" vertex_type="415">
-		<effect name="GenerateGBufferCal3D" file="../CommonData/effects/GenerateGBuffer.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateGBufferCal3DTechnique"/>
-			<define name="USE_CAL3D_HW" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
-	</technique>
+	<effect file="../CommonData/effects/gbuffer_effects.xml"/>
 	
 	<technique name="ShadowMapTechnique" vertex_type="19">
 		<effect name="ShadowMapEffect" file="../CommonData/effects/ShadowMap.fx"/>

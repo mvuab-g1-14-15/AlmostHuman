@@ -99,7 +99,7 @@
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
 	
-	<render_gui render="false"/>
+	<render_gui render="true"/>
 	
 	<render_developer_info/>
 	

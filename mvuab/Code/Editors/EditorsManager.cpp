@@ -12,12 +12,15 @@
 CEditorsManager::CEditorsManager( const CXMLTreeNode& atts )
   : CManager( atts )
 {
-
 }
 
 CEditorsManager::~CEditorsManager()
 {
   TwTerminate();
+  for( uint32 i = 0, lCount = mBars.size(); i < lCount; ++i )
+  {
+	  CHECKED_DELETE( mBars[i] );
+  }
 }
 
 void CEditorsManager::Update()
@@ -32,7 +35,6 @@ void CEditorsManager::Render()
 
 void CEditorsManager::Init()
 {
-  return;
   TwInit( TW_DIRECT3D9, GraphicsInstance->GetDevice() );
 
   Math::Vect2i lScreenSize = CEngineConfig::GetSingleton().GetScreenSize();
@@ -41,9 +43,10 @@ void CEditorsManager::Init()
   CUiLightsBar* lLightBar = new CUiLightsBar();
 
   bool lOk = lLightBar->Create();
-
-  ASSERT( lOk, "Error creating light bar" );
-
-  CHECKED_DELETE( lLightBar );
+  if( lOk )
+  {
+	  mBars.push_back( lLightBar );
+  }
+  //lOlk = new enemybar;
   //TwDefine(" TweakBar color='255 255 255' text=dark "); // Change TweakBar color and use dark text
 }

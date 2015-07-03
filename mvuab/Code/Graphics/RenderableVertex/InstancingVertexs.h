@@ -8,7 +8,7 @@
 #include "Effects/EffectTechnique.h"
 
 template<class T, class U>
-class CInstancingVertexs : public CRenderableVertex
+class CInstancingVertexs : public CRenderableVertexs
 {
     private:
         LPDIRECT3DVERTEXBUFFER9 m_InstanceB;
@@ -70,7 +70,7 @@ class CInstancingVertexs : public CRenderableVertex
         {
             CHECKED_RELEASE(m_InstanceB);
         }
-        bool Render(CGraphicsManager *RM)
+        bool Render(CGraphicsManager *GM)
         {
             HRESULT lOk = GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
             lOk = GM->GetDevice()->SetIndices( m_IB );
@@ -78,6 +78,18 @@ class CInstancingVertexs : public CRenderableVertex
             lOk = GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 );
             return lOk == S_OK;
         }
+
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique)
+        {
+            return true;
+        }
+
+        virtual bool Render(CGraphicsManager *GM, CEffectTechnique *effectTechnique, int baseVertexIndexCount,
+                            int minVertexIndex, int verticesCount, int startIndex, int facesCount)
+        {
+            return true;
+        }
+
         bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique, int baseVertex = 0, int MinVertex = 0,
                     int NumVertex = -1, int StartIndex = 0, int IndexCount = -1) const
         {

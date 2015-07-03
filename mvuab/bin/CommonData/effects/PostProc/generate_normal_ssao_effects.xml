@@ -1,0 +1,51 @@
+<effects>	
+	<technique name="GenerateNormalTextureSSAOTechnique" vertex_type="19">
+		<effect name="GenerateNormalTextureSSAO" file="../CommonData/effects/GenerateNormalTextureSSAO.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAODebugTechnique" vertex_type="19">
+		<effect name="GenerateNormalTextureSSAODebug" file="../CommonData/effects/GenerateNormalTextureSSAO.fx"/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAONormalTechnique" vertex_type="31">
+		<effect name="GenerateNormalTextureSSAONormal" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>
+			<define name="USE_NORMAL" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAOSelfIllumTechnique" vertex_type="51">
+		<effect name="GenerateNormalTextureSSAOSelfIllum" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>
+			<define name="USE_SELF_ILUM" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAOSelfIllumNormalTechnique" vertex_type="63">
+		<effect name="GenerateNormalTextureSSAOSelfIllumNormal" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>
+			<define name="USE_SELF_ILUM" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAODiffuseTechnique" vertex_type="67">
+		<effect name="GenerateNormalTextureSSAODiffuse" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAODiffuseTechnique"/>
+			<define name="USE_DIFFUSE_COLOR" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="GenerateNormalTextureSSAOCal3DTechnique" vertex_type="415">
+		<effect name="GenerateNormalTextureSSAOCal3D" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOCal3DTechnique"/>
+			<define name="USE_CAL3D_HW" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+</effects>
