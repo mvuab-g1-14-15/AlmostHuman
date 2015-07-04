@@ -157,15 +157,16 @@ void CSceneRendererCommandManager::Init()
                                Type2Type<CTriggerRenderCommand>( ) );
     m_CommandFactory.Register( "bloom", Type2Type<CBloomSceneRendererCommand>( ) );
     m_CommandFactory.Register( "render_editors", Type2Type<CEditorsRenderCmd>( ) );
-    Load(mConfigPath);
+    Load( mConfigPath );
 
 }
 
-bool CSceneRendererCommandManager::Load(const std::string& lFile )
+bool CSceneRendererCommandManager::Load( const std::string& lFile )
 {
 
     CXMLTreeNode l_Node, SceneRendererXml;
-    if ( !SceneRendererXml.LoadAndFindNode(lFile.c_str(), "scene_renderer_commands", l_Node ) )
+
+    if ( !SceneRendererXml.LoadAndFindNode( lFile.c_str(), "scene_renderer_commands", l_Node ) )
     {
         FATAL_ERROR( "Error reading the file %s", lFile.c_str() );
         return false;
@@ -178,6 +179,8 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
         CXMLTreeNode& l_CurrentNode = l_Node( i );
         const std::string& l_TagName = l_CurrentNode.GetName();
 
+        std::string lName = l_CurrentNode.GetAttribute<std::string>( "name", GetNextName().c_str() );
+
         if ( l_TagName == "postproc" )
         {
             if ( !Load( l_CurrentNode.GetAttribute<std::string>( "filename", "" ) ) )
@@ -189,18 +192,19 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
         else
         {
             CSceneRendererCommand* Command = 0;
+
             if ( l_TagName == "unset_render_target" )
             {
                 CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
                     dynamic_cast<CSetRenderTargetSceneRendererCommand*>( m_SceneRendererCommands.GetResource(
                                 l_CurrentNode.GetAttribute<std::string>( "render_target", "" ) ) );
                 Command = new CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, l_CurrentNode );
-                LOG_INFO_APPLICATION("Command added %s",  l_TagName.c_str() );
+                LOG_INFO_APPLICATION( "Command added %s",  l_TagName.c_str() );
             }
             else
             {
                 Command = m_CommandFactory.Create( l_TagName.c_str(), l_CurrentNode );
-                LOG_INFO_APPLICATION("Command added %s",  l_TagName.c_str() );
+                LOG_INFO_APPLICATION( "Command added %s",  l_TagName.c_str() );
             }
 
             if ( !Command )
@@ -210,11 +214,8 @@ bool CSceneRendererCommandManager::Load(const std::string& lFile )
             }
             else
             {
-                if ( !m_SceneRendererCommands.AddResource( l_CurrentNode.GetAttribute<std::string>( "name", GetNextName().c_str() ),
-                        Command ) )
-                {
+                if ( !m_SceneRendererCommands.AddResource( lName , Command ) )
                     CHECKED_DELETE( Command );
-                }
             }
         }
     }
@@ -231,7 +232,10 @@ bool CSceneRendererCommandManager::Execute()
 
     for ( ; it != it_end; ++it )
     {
-        ( *it )->Execute( *gm );
+        CSceneRendererCommand* lCommand = *it;
+
+        if ( lCommand->GetVisible() )
+            lCommand->Execute( *gm );
     }
 
     return true;
@@ -246,4 +250,22 @@ void CSceneRendererCommandManager::ReLoad()
 CRenderGUISceneRendererCommand* CSceneRendererCommandManager::GetCommandGUI( )
 {
     return dynamic_cast<CRenderGUISceneRendererCommand*>( m_SceneRendererCommands.GetResource( "render_gui" ) );
+}
+
+bool CSceneRendererCommandManager::GetVisibleCommand( std::string aName )
+{
+    CSceneRendererCommand* lCommand = m_SceneRendererCommands.GetResource( aName );
+
+    if ( lCommand )
+        return lCommand->GetVisible();
+
+    return false;
+}
+
+void CSceneRendererCommandManager::SetVisibleCommand( std::string aName, bool aVisible )
+{
+    CSceneRendererCommand* lCommand = m_SceneRendererCommands.GetResource( aName );
+
+    if ( lCommand )
+        return lCommand->SetVisible( aVisible );
 }

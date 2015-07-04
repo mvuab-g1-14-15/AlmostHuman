@@ -311,16 +311,7 @@ function CPlayerController:UpdateInput()
 				self.Run = false
 			end
 			if action_manager:DoAction("Crouch") then
-				local l_Can = false
-				if self.Crouch then
-					l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
-				else
-					l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
-				end
-				if l_Can then
-					self.Crouch = not self.Crouch
-					self.ActualTimeCrouch = 0.0
-				end
+				self:MakeCrouch()
 			end
 			if action_manager:DoAction("Jump") then
 				self.Jump = true
@@ -347,4 +338,19 @@ function CPlayerController:UpdateInput()
 			self.ActualTimeLeanOut = 0.0
 		end
 	end
+end
+
+function CPlayerController:MakeCrouch()
+	local l_Can = false
+	if self.Crouch then
+		l_Can = self.CharacterController:UpdateCharacterExtents(true, self.Height / 2.0)
+	else
+		l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
+	end
+	if l_Can then
+		self.Crouch = not self.Crouch
+		self.ActualTimeCrouch = 0.0
+	end
+	
+	return l_Can
 end

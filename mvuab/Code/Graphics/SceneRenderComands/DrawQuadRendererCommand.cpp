@@ -25,7 +25,7 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 
     CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
 
-    const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(
+    const std::string& l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(
             SCREEN_COLOR_VERTEX::GetVertexType() );
 
     CRenderableObjectTechnique* l_ROT = lROTM->GetResource( l_EffectTechName );

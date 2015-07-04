@@ -95,6 +95,11 @@
     </render_draw_quad>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
+    <render_draw_quad active="false" name="InsideBarrel">
+ 		<texture stage_id="0" name="Data/textures/InsideBarrel.png"/>
+ 	</render_draw_quad>
+	
+	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_weapon_target size="20">
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
@@ -107,8 +112,6 @@
 	<disable_alpha_blend/>
 	
     <end_scene/>
-	
-	
-	
+
     <present/>
 </scene_renderer_commands>
