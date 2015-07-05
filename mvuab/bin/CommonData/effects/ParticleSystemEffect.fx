@@ -52,6 +52,7 @@ struct PSVertex
 {
     float4 HPosition : POSITION;
     float3 params    : TEXCOORD0;
+	float3 color        : COLOR0;
 };
 
 struct PARTICLEIN
@@ -60,6 +61,7 @@ struct PARTICLEIN
 	float2 uv           : TEXCOORD0;
 	float3 worldPos : TEXCOORD1;
 	float3 params    : TEXCOORD2;
+	float3 color    : COLOR0;
 };
 
 PSVertex VS(PARTICLEIN IN)
@@ -82,6 +84,7 @@ PSVertex VS(PARTICLEIN IN)
 
 		OUT.HPosition=mul(float4(lPosition, 1.0), g_WorldViewProj);
 		OUT.params = float3( IN.uv.x, IN.uv.y, IN.params.z);
+		OUT.color = IN.color;
 	}
 	
     return OUT;
@@ -90,7 +93,7 @@ PSVertex VS(PARTICLEIN IN)
 float4 PS(PSVertex IN) : COLOR
 {
 	float4 color = tex2D(S0PointClampSampler, float2( IN.params.x, IN.params.y) ); 
-	return float4( color.rgb, color.a * IN.params.z);
+	return float4( color.rgb * IN.color, color.a * IN.params.z);
 }
 
 

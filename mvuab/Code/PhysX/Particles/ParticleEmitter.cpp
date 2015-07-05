@@ -139,7 +139,7 @@ void CParticleEmitter::Update( float dt )
 
 void CParticleEmitter::Render()
 {
-    mShape->Render( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") );
+    //mShape->Render( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") );
     CGraphicsManager* lGM = GraphicsInstance;
 
     ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->AddInstancinguffer(lGM, mParticlesStream);
