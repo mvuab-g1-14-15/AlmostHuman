@@ -14,8 +14,8 @@
         <dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
         <dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F" create_depth_stencil_buffer="false"/>
     </set_render_target>
-	
-	<clear_scene color="true" depth="true" stencil="false"/>
+    
+    <clear_scene color="true" depth="true" stencil="false"/>
 	
 	<enable_z_test/>
 	<enable_z_write/>
@@ -28,19 +28,33 @@
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
 	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/>
+    <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
+   
 	<!--render_scene layer="glow" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/-->
-    <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
 	
 	
 	
 	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Glow.xml"/-->
 	
 	<!-- end pre_render-->
-
-	<disable_z_write/>
+	
+    <!--
+    START NORMALES PARA EL SSAO
+    <set_pool_renderable_objects_technique pool="generate_ssaa_normal_pool_renderable_object_technique"/>
+    <set_render_target name="deferred_geometry_render_target">
+        <dynamic_texture stage_id="0" name="GeometryNormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="true"/>
+    </set_render_target>
+    
+    <clear_scene color="true" depth="true" stencil="false"/>
+    <render_scene layer="solid" active="true"/>
+    <unset_render_target render_target="deferred_geometry_render_target" use_depth_stencil_buffer="0"/>
+    END NORMALES PARA EL SSAO
+    -->
+    <disable_z_write/>
     <disable_z_test/>
+    
 	<set_pool_renderable_objects_technique pool="init_deferred_technique_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="LightMapTexture"/>
@@ -90,7 +104,7 @@
 	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="DepthMapTexture"/>
-		<texture stage_id="1" name="NormalMapTexture"/>
+		<texture stage_id="1" name="GeometryNormalMapTexture"/>
 		<texture stage_id="2" name="Data/textures/Random.png"/>
     </render_draw_quad>
 	
