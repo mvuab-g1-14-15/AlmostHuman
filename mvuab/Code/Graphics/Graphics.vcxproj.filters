@@ -300,6 +300,12 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
+    <ClCompile Include="RenderableObject\Scene.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\Room.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -609,6 +615,12 @@
     </ClInclude>
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
       <Filter>RenderableVertex</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\Scene.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\Room.h">
+      <Filter>RenderableObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
