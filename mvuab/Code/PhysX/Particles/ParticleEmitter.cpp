@@ -118,13 +118,17 @@ void CParticleEmitter::Update( float dt )
         if(mParticles[i].IsAlive())
         {
             CParticle& lParticle = mParticles[i];
-
             lParticle.Update(dt);
-            mParticlesStream[i].alive = 1.0;
-            mParticlesStream[i].size = lParticle.GetSize();
+            mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle());
+            const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
+            mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
+            mParticlesStream[i].alpha = 1.0f - lPercentage;
             mParticlesStream[i].x = lParticle.GetPosition().x;
             mParticlesStream[i].y = lParticle.GetPosition().y;
             mParticlesStream[i].z = lParticle.GetPosition().z;
+            mParticlesStream[i].r = lParticle.GetColor().r;
+            mParticlesStream[i].g = lParticle.GetColor().g;
+            mParticlesStream[i].b = lParticle.GetColor().b;
         }
         else
         {
@@ -137,15 +141,11 @@ void CParticleEmitter::Render()
 {
     mShape->Render( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") );
     CGraphicsManager* lGM = GraphicsInstance;
-    //Math::Mat44f translation;
-    //translation.Translate(mPosition);
-    //7lGM->SetTransform(translation);
+
     ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->AddInstancinguffer(lGM, mParticlesStream);
     ActivateTextures();
 
     ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->Render(lGM, mTechnique);
-
-    lGM->SetTransform(Math::Mat44f());
 }
 
 void CParticleEmitter::EmitParticles()
@@ -171,6 +171,7 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetColor(RandRange(mColorMin, mColorMax));
             lParticle.SetInitalOndulation(RandRange(0.0f, 360.0f));
             lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
+            lParticle.SetAngle(RandRange(0.0f, 360.0f));
             ++mAliveParticlesCount;
             ++lEmittedParticles;
         }

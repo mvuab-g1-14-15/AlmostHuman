@@ -9,8 +9,22 @@
 #include "Math/MathUtils.h"
 
 CParticle::CParticle()
+    : mIsAlive( false )
+    , mActualTime(0.0f)
+    , mGravity(1.0f)
+    , mSize( 1.0f )
+    , mOndSpeed( 1.0f)
+    , mSpeed(1.0f )
+    , mRadialSpeed( 1.0f)
+    , mTimeToLive( 0.0f )
+    , mInitalOndulation( 1.0f )
+    , mOndulationVel( 1.0f )
+    , mAngle( 0.0f )
+    , mDirection( Math::Vect3f() )
+    , mOndSpeedDirection( Math::Vect3f() )
+    , mColor( Math::CColor() )
+    , mPosition( Math::Vect3f() )
 {
-    ZeroMemory(this, sizeof(CParticle));
 }
 
 CParticle::~CParticle()
@@ -22,18 +36,7 @@ void CParticle::Update( float dt )
 {
     mDirection = (mDirection * mSpeed + Math::Vect3f( 0, -1, 0) * mGravity * dt);
     mDirection.Normalize();
-    mPosition += mDirection * mSpeed * dt + mOndSpeedDirection * Math::Utils::Sin( dt * mOndulationVel +
-                 mInitalOndulation );
-    mAngle += dt;
+    mPosition += mDirection * mSpeed * dt;
+    mAngle += dt * mRadialSpeed;
     mActualTime += dt;
-}
-
-void CParticle::Render()
-{
-    /*
-        if ( mIsAlive )
-        {
-          mBillboard->Render();
-        }
-    */
 }

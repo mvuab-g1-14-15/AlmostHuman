@@ -4,7 +4,7 @@
 	<window_properties resolution="1280 720" position="0 0" mode="fit_desktop" size="1280 720"/>
 	<!-- available modes for logger console, output_window -->
 	<logger mode="output_window"/>
-	<trace mode="console"/>
+	<trace mode="output_window"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="false" />
 	<GUI init_gui_path="./Data/GUI/initGui_laberynth.xml"/>
 	<managers path="../CommonData/managers.xml"/>

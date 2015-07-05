@@ -27,5 +27,7 @@ struct TPARTICLE_VERTEX_INSTANCE
 {
     float x, y, z;
     float size;
-    float alive;
+    float alive; // Stores the size
+    float alpha;
+    float r, g, b;
 };
