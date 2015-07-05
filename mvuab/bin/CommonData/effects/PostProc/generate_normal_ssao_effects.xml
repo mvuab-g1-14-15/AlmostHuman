@@ -1,6 +1,8 @@
 <effects>	
 	<technique name="GenerateNormalTextureSSAOTechnique" vertex_type="19">
-		<effect name="GenerateNormalTextureSSAO" file="../CommonData/effects/GenerateNormalTextureSSAO.fx"/>
+		<effect name="GenerateNormalTextureSSAO" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
+            <define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOTechnique"/>
+        </effect>
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
 	</technique>
 	
