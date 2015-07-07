@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <emitters>
-	<emitter 
-		type="cube" 
+	<cube_emitter 
+	    name="smoke"
 		loop="false" 
+		immortal="true" 
 		active="true" 
-		max_particles="15" 
-		time_to_emit="10.0" 
-		time_to_live="15.0 30.0" 
-		particle_size_range="2 5" 
-		particles_per_emission="2 4" 
-		position="64 -15.5 -38" 
-		direction="0.0 1.0 0.5" 
-		velocity="0.0 0.01" 
-		acceleration="0.0 0.01" 
-		cubic_size="2.0 2.0 2.0" 
+		alive_particles="0 500" 
+		speed="1.5 2.0" 
+		emission_time="10.0" 
+		time_to_live="4.0 6.0" 
+		particle_size_range="1 4" 
+		particles_per_emission="1 1" 
+		position="64 -16.5 -60" 
+		min_color="0.5 0.0 0.0" 
+		max_color="1.0 1.0 1.0" 
+		min_initial_direction="0.0 1.0 0.0" 
+		max_initial_direction="0.0 1.0 0.0" 
+		gravity="1.0" 
+		radial_speed="0.0 30.0" 
+		ondulative_speed="0.0 0.0" 
+		min_ondulative_direction="0.0" 
+		max_ondulative_direction="0.0" 
+		cubic_size="0.0 0.0 0.0"
 		technique="SmokeTechnique">
-		<texture name="Data/textures/particles/toon_smoke.png"/>
-	</emitter> 
+		<texture name="Data/textures/particles/smoke_2.png"/>
+	</cube_emitter> 
 </emitters>
