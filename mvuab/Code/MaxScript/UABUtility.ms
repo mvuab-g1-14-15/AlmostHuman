@@ -212,7 +212,6 @@ utility UABUtility "UAB Utility" width:170 height:761
 		
 		DoesFolderExist l_DirToXML
 		
-		local fileSrcRenderableXML = l_DirToXML + "\\renderable_objects.xml"
 		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
 		local MeshDir = l_DirToXML + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
@@ -221,19 +220,16 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 		select $*
 	
-		if fileSrcMeshXML != undefined then
-		(
+		--Export Static Meshes
 			DoesFolderExist MeshDir
 			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
-		)
+		-- End Export Static Meshes
 		
-		if fileSrcRenderableXML != undefined then
-		(
+		--Export Renderable Objects
 			local l_Layers = ExportLayerFile l_ExportableObjects l_DirToXML LevelList.selected
 			ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers
-			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
-		)
+		-- End Export Renderable Objects
 		
 		if CopyTexturesCheckBox.checked then
 		(

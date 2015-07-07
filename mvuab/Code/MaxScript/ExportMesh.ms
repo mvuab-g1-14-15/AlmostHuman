@@ -534,29 +534,26 @@ struct SMesh
 	
 	fn InitFromMaxObject Obj =
 	(
-		--format "Mesh: % \n" Obj.name
-		/*actualObj = copy Obj
-		convertToMesh actualObj */
-		
-		if  classof Obj == SplineShape then
-		(
-			throw "SplineShape =>" Obj.name
-		)
-		
-		format "Object name: %\n" Obj.name
-		
-		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-		actualObj = newObj[1]
-		convertToMesh actualObj
+			if  classof Obj == SplineShape then
+			(
+				throw "SplineShape =>" Obj.name
+			)
+			
+			format "Object name: %\n" Obj.name
+			
+			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+			actualObj = newObj[1]
+			convertToMesh actualObj
 
-		CreateSubMeshes actualObj
-		CreateBuffers actualObj
-		m_AABB.CalculateFromObject actualObj
-		
-		if delete actualObj != 1 then
-		(
-			format "% not deleted, please delete the object manually\n" actualObj
-		)
+			CreateSubMeshes actualObj
+			CreateBuffers actualObj
+			m_AABB.CalculateFromObject actualObj
+			
+			if delete actualObj != 1 then
+			(
+				format "% not deleted, please delete the object manually\n" actualObj
+			)
+
 	),
 	
 

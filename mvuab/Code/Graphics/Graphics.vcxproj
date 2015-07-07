@@ -61,6 +61,8 @@
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
+    <ClCompile Include="RenderableObject\Room.cpp" />
+    <ClCompile Include="RenderableObject\Scene.cpp" />
     <ClCompile Include="RenderableVertex\InstancedVertexTypes.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
@@ -164,6 +166,8 @@
     <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h" />
+    <ClInclude Include="RenderableObject\Room.h" />
+    <ClInclude Include="RenderableObject\Scene.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h" />
     <ClInclude Include="RenderableVertex\InstancingVertexs.h" />

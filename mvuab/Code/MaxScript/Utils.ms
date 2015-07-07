@@ -145,14 +145,26 @@ fn IsEmptyLevelList LevelListText =
 
 fn IsObjExportable Obj =
 (
-	if (getUserProp Obj "Trigger_Name" != undefined AND  getUserProp Obj "Cover_Name" != undefined AND getUserProp Obj "Path_Name" != undefined AND getUserProp Obj "no_export_lights" != undefined) OR (getUserProp Obj "Trigger_Name" == "" AND  getUserProp Obj "Cover_Name" == "" AND getUserProp Obj "Path_Name" == "" AND getUserProp Obj "no_export_lights" == true) then
-	(	
-		return false
+	local isExportable = false
+	
+	if (getUserProp Obj "Trigger_Name" != undefined AND getUserProp Obj "Trigger_Name" != "") then
+	(
+		isExportable = false
+	)
+	else if (getUserProp Obj "Cover_Name" != undefined AND getUserProp Obj "Cover_Name" != "") then
+	(
+		isExportable = false
+	)
+	else if (getUserProp Obj "Path_Name" != undefined AND getUserProp Obj "Path_Name" != "") then
+	(
+		isExportable = false
 	)
 	else
 	(
-		return true
+		isExportable = true
 	)
+
+	return isExportable
 )
 
 fn IsLightExportable Obj =

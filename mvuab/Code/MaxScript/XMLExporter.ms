@@ -44,8 +44,8 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 --export de la class
 fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers =
 (
-	--try
-	--(
+	try
+	(
 			
 		local unique_instances = GetUniqueInstancesScene()
 		local m_LayersIndex = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
@@ -124,11 +124,11 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers =
 			xDoc.PrettySaveXML()
 		)	
 		
-	--)
-	--catch
-	--(
-	--	format "Error generating renderable object\n"
-	--)
+	)
+	catch
+	(
+		format "Error generating renderable object\n"
+	)
 )
 
 fn ExportTextureFile AllObj DestPath = 
@@ -271,30 +271,37 @@ fn ExportTextureFile AllObj DestPath =
 
 function GenerateMeshes aObjects MeshDir =
 (
-	local ObjectsProcessed = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
-	for Obj in aObjects do
-	(
-		local ObjName = Obj.name
-		if (ObjectsProcessed.ContainsKey (ObjName)) == true then
+
+		local ObjectsProcessed = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
+		for Obj in aObjects do
 		(
-			local index = ObjectsProcessed.Item[ObjName] + 1
-			ObjectsProcessed.Remove ObjName
-			ObjectsProcessed.Add ObjName index
-			ObjName = ObjName + "_" + (index as string)
+			try
+			(
+				local ObjName = Obj.name
+				if (ObjectsProcessed.ContainsKey (ObjName)) == true then
+				(
+					local index = ObjectsProcessed.Item[ObjName] + 1
+					ObjectsProcessed.Remove ObjName
+					ObjectsProcessed.Add ObjName index
+					ObjName = ObjName + "_" + (index as string)
+				)
+				else
+				(
+					ObjectsProcessed.Add ObjName 0
+				)
+				filename = MeshDir +"\\"+ ObjName + ".mesh"--poner parametrico
+				local file = fopen filename "wb"
+				local l_ObjectMesh = SMesh()
+				l_ObjectMesh.InitFromMaxObject Obj
+				l_ObjectMesh.WriteToFile file
+				fclose file
+			)
+			catch
+			(
+				format "Something was wrong with object: % \n" Obj
+			)
 		)
-		else
-		(
-			ObjectsProcessed.Add ObjName 0
-		)
-		filename = MeshDir +"\\"+ ObjName + ".mesh"--poner parametrico
-		local file = fopen filename "wb"
-		local l_ObjectMesh = SMesh()
-		l_ObjectMesh.InitFromMaxObject Obj
-		l_ObjectMesh.WriteToFile file
-		fclose file
-	)
-	
-	format "Meshes copied on: % \n" MeshDir	
+		format "Meshes copied on: % \n" MeshDir	
 )
 
 function ExportLayerFile AllObj aDirToXML aRoom =
@@ -302,10 +309,10 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 	try
 	(
 		local unique_instances = GetUniqueInstancesScene()
-		local l_OutXmlFilename = aRoom + ".xml"
+		local l_OutXmlFilename = (aDirToXML +"\\"+ aRoom + ".xml")
 
 		-- create the document and set the filename
-		xDoc = XMLDocument (aDirToXML +"\\"+ l_OutXmlFilename)
+		xDoc = XMLDocument l_OutXmlFilename
 		
 		--create the base node and append the node to the document
 		local l_RootNode = xDoc.getNewNode "room"
@@ -321,7 +328,8 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 		local layers=#()
 		
 		for Obj in AllObj do
-			(
+		(
+				
 				if layers.count != 0 then
 				(
 					local Exists = false
@@ -332,17 +340,21 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 							Exists = true	
 						)
 					)
+					
 					if Exists == false then
 					(
+					
 						if (getUserProp Obj "layer_render") != undefined then
 						(
-							layers[(layers.count+1)] = getUserProp Obj "layer_render"
-							local l_LayerName =  layers[layers.count-1]
+							append layers (getUserProp Obj "layer_render")
+							
+							local l_LayerName =  layers[layers.count]
 							
 							local l_NewLayerNode = xDoc.getNewNode "layer"
 							l_RootNode.AppendNode l_NewLayerNode
 							l_NewLayerNode.AddAttributeAsString "name" l_LayerName
 							l_NewLayerNode.AddAttributeAsString "file" (l_LayerName + "_layer.xml")
+							format "LayerXML created on: % \n" (aDirToXML + "\\" + l_LayerName + "_layer.xml")
 						)
 					)
 				)
@@ -356,17 +368,21 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 					(
 						layers[1] = getUserProp Obj "layer_render"
 					)
+					
 					local l_NewLayerNode = xDoc.getNewNode "layer"
 					l_RootNode.AppendNode l_NewLayerNode
 					l_NewLayerNode.AddAttributeAsString "name" layers[1]
-					l_NewLayerNode.AddAttributeAsString "file" layers[1] + "_layer.xml"
+					l_NewLayerNode.AddAttributeAsString "file" (layers[1] + "_layer.xml")
+					format "LayerXML created on: % \n"  (aDirToXML + "\\" + layers[1] + "_layer.xml")
 				)
 		)
+		
+		xDoc.PrettySaveXML()
+		
 		return layers
 	)
 	catch
 	(
 		format "Error generating renderable object\n"
 	)
-	return xDoc.PrettySaveXML()
 )
