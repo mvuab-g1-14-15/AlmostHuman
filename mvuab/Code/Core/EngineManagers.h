@@ -21,7 +21,7 @@ class CFontManager;
 class CRenderableObjectTechniqueManager;
 class CStaticMeshManager;
 class CAnimatedModelsManager;
-class CRenderableObjectsLayersManager;
+class CScene;
 class CSceneRendererCommandManager;
 class CCameraManager;
 class CScriptManager;
@@ -60,7 +60,7 @@ class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CS
         CActionManager*                   GetActionManager() const;
         CLanguageManager*                 GetLanguageManager() const;
         CFontManager*                     GetFontManager() const;
-        CRenderableObjectsLayersManager*  GetROLManager() const;
+        CScene*							  GetSceneManager() const;
         CStaticMeshManager*               GetStaticMeshManager() const;
         CRenderableObjectTechniqueManager* GetROTManager() const;
         CAnimatedModelsManager*           GetAnimatedModelsManager() const;
@@ -96,7 +96,7 @@ class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CS
         CRenderableObjectTechniqueManager*     m_pRenderableObjectTechniqueManager;
         CStaticMeshManager*                    m_pStaticMeshManager;
         CAnimatedModelsManager*                m_pAnimatedModelsManager;
-        CRenderableObjectsLayersManager*       m_pRenderableObjectsLayersManager;
+        CScene*								   m_pScene;
         CSceneRendererCommandManager*          m_pSceneRendererCommandManager;
         CCameraManager*                        m_pCameraManager;
         CScriptManager*                        m_pScriptManager;

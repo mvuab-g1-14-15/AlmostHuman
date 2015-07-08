@@ -20,13 +20,11 @@
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
     : m_DefaultRenderableObjectManager(0)
-    , CManager()
 {
 }
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager( const CXMLTreeNode& atts)
     : m_DefaultRenderableObjectManager(0)
-    , CManager(atts)
 {
 }
 
@@ -43,73 +41,70 @@ void CRenderableObjectsLayersManager::Destroy()
     CTemplatedVectorMapManager::Destroy();
 }
 
-void CRenderableObjectsLayersManager::Init()
+bool CRenderableObjectsLayersManager::LoadLayers(const std::string &l_LayerName,const std::string &l_FilePath)
 {
-    CXMLTreeNode l_File, TreeNode;
+    CXMLTreeNode l_Node, l_Root;
 
-    if ( !l_File.LoadAndFindNode( mConfigPath.c_str(), "RenderableObjects", TreeNode ) )
+    if(!l_Root.LoadAndFindNode(l_FilePath.c_str(), "room", l_Node))
     {
-        FATAL_ERROR("Error loading renderable objects layer manager, with the config file %s", mConfigPath.c_str() );
+        return false;
     }
-    else
+
+    const std::string &l_Path = l_Root.GetAttribute<std::string>("path", "no_path");
+
+    for (int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i)
     {
-        for ( uint32 i = 0, lCount = TreeNode.GetNumChildren(); i < lCount ; ++i )
-        {
-            const CXMLTreeNode& lNode = TreeNode(i);
-            const std::string& lTagName = lNode.GetName();
-            const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
+      CXMLTreeNode& l_CurrentNode = l_Node(i);
 
-            if ( lTagName == "layer" )
-            {
-                if ( lNode.GetAttribute<bool>( "default", false ) )
-                {
-                    m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+      const std::string &l_Name = l_CurrentNode.GetAttribute<std::string>("name", "no_path");
+      const std::string &l_File = l_CurrentNode.GetAttribute<std::string>("file", "no_file");
+      
 
-                    if ( !AddResource( lName, m_DefaultRenderableObjectManager ) )
-                    {
-                        LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                        CHECKED_DELETE( m_DefaultRenderableObjectManager );
-                    }
-                }
-                else
-                {
-                    CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
-
-                    if ( !AddResource( lName, RenderableObjectManager ) )
-                    {
-                        LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                        CHECKED_DELETE( RenderableObjectManager );
-                    }
-                }
-            }
-            else
-            {
-                CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( lNode );
-                ASSERT( lRenderableObjectManager, "Check the layer of the objects" );
-
-                if ( lTagName == "MeshInstance" )
-                {
-                    AddNewInstaceMesh( lNode );
-                }
-                else if ( lTagName == "AnimatedInstance" )
-                {
-                    CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
-
-                    if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
-                    {
-                        LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
-                        CHECKED_DELETE( l_AnimatedInstance );
-                    }
-                }
-            }
-        }
+      CRenderableObjectsManager* l_ROM  = LoadRenderableObject(l_Path + "/" + l_File);
+      
+	  if(!AddResource(l_LayerName, l_ROM))
+		  CHECKED_DELETE(l_ROM);     
     }
+
+    return true;
 }
-void CRenderableObjectsLayersManager::Reload()
+
+CRenderableObjectsManager* CRenderableObjectsLayersManager::LoadRenderableObject(const std::string &l_FilePath)
 {
-    Destroy();
-    Init();
+
+	CXMLTreeNode l_Node, l_Root;
+	CRenderableObjectsManager* lRenderableObjectManager;
+
+    if(!l_Root.LoadAndFindNode(l_FilePath.c_str(), "RenderableObjects", l_Node))
+    {
+        return 0;
+    }
+
+    for (int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i)
+    {
+		const CXMLTreeNode& lNode = l_Node(i);
+        const std::string& lTagName = lNode.GetName();
+        const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
+
+		if ( lTagName == "MeshInstance" )
+		{
+			AddNewInstaceMesh( lNode );
+		}
+		else if ( lTagName == "AnimatedInstance" )
+		{
+			CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
+
+			if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
+			{
+				LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
+				CHECKED_DELETE( l_AnimatedInstance );
+			}
+		}
+	}
+
+	return lRenderableObjectManager;
 }
+
 void CRenderableObjectsLayersManager::Update()
 {
     std::vector<CRenderableObjectsManager*>::iterator itb = GetResourcesVector().begin(), ite = GetResourcesVector().end();

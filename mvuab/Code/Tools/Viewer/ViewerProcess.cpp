@@ -333,14 +333,12 @@ void CViewerProcess::RenderScene2D( CGraphicsManager *GM, CFontManager *FM, floa
 
 void CViewerProcess::Clear()
 {
-
     HMENU l_MenuSuperior = GetMenu( EngineConfigInstance->GetWindowId() );
     DeleteMenu( l_MenuSuperior, 3, MF_BYPOSITION );
     DeleteMenu( l_MenuSuperior, 2, MF_BYPOSITION );
     SMeshMInstance->Destroy();
     //AnimatedMInstance->Destroy();
-    ROLMInstance->Destroy();
-
+    SceneInstance->Destroy();
 }
 
 uint32 CViewerProcess::RenderDebugInfo( CGraphicsManager *GM, CFontManager *FM, float l_Fps )

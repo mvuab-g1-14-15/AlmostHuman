@@ -12,7 +12,7 @@
 	<renderable_technique_manager file_config="../CommonData/effects/effects_pools.xml"/>
 	<static_mesh_manager file_config="Data/level2/static_meshes.xml"/>
 	<animated_manager file_config="Data/animated_models.xml"/>
-	<renderable_manager_layer file_config="Data/level2/renderable_objects.xml"/>
+	<scene file_config="Data/scene.xml"/>
 	<scene_render_command_manager file_config="../CommonData/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
 	<countdowntimer_manager file_config="no_name"/>

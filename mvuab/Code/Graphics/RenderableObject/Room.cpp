@@ -20,7 +20,7 @@ bool CRoom::Load(const std::string &l_FilePath, const std::string &l_RoomName)
     CXMLTreeNode l_Node, l_Root;
     SetName(l_RoomName);
 
-    if(!l_Root.LoadAndFindNode(l_FilePath.c_str(), "layer", l_Node))
+    if(!l_Root.LoadAndFindNode(l_FilePath.c_str(), "room", l_Node))
     {
         return false;
     }
