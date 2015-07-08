@@ -9,7 +9,6 @@
 *.res
 *.lastbuildstate
 *.log
-*.rc
 *.cache
 *.ipch
 *.db
