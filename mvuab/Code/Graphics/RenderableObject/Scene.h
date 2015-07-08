@@ -8,11 +8,11 @@
 
 class CRoom;
 
-class CSene : public CMapManager<CRoom>, public CSingleton<CSene>
+class CScene : public CMapManager<CRoom>, public CSingleton<CScene>
 {
     public:
-        CSene   ();
-        ~CSene  ();
+        CScene   ();
+        ~CScene  ();
 
         bool Load(const std::string &l_FilePath);
 };

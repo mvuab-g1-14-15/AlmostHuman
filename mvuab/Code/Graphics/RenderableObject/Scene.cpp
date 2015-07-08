@@ -5,17 +5,17 @@
 #include "Logger\Logger.h"
 #include "XML\XMLTreeNode.h"
 
-CSene::CSene()
+CScene::CScene()
 {
 
 }
 
-CSene::~CSene()
+CScene::~CScene()
 {
     CMapManager::Destroy();
 }
 
-bool CSene::Load(const std::string &l_FilePath)
+bool CScene::Load(const std::string &l_FilePath)
 {
     CXMLTreeNode l_Root, l_Node;
     if(!l_Root.LoadAndFindNode(l_FilePath.c_str(), "room", l_Node))

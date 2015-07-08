@@ -3,9 +3,12 @@
 #define ROOM_H
 
 #include "Utils/Name.h"
+#include "Utils\MapManager.h"
 #include <string>
 
-class CRoom : public CName
+class CLayer;
+
+class CRoom : public CName, public CMapManager<CLayer>
 {
     public:
         CRoom   ();

@@ -55,6 +55,7 @@
     <ClCompile Include="Lights\ShadowMap.cpp" />
     <ClCompile Include="Lights\SpotLight.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObject\Layer.cpp" />
     <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObject.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsLayersManager.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Lights\ShadowMap.h" />
     <ClInclude Include="Lights\SpotLight.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="RenderableObject\Layer.h" />
     <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsLayersManager.h" />
