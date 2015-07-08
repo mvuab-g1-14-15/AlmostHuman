@@ -145,7 +145,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             NULL
         };
 
-        wc.hIcon = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_ICON2));
+        wc.hIcon = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_ICON1));
         RegisterClassEx( &wc );
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
