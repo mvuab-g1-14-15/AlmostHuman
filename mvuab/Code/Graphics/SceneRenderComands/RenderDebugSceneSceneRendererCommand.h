@@ -5,6 +5,7 @@
 
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
+#include <vector>
 
 class CGraphicsManager;
 class CRenderableObjectsManager;
@@ -12,7 +13,7 @@ class CRenderableObjectsManager;
 class CRenderDebugSceneSceneRendererCommand : public CSceneRendererCommand
 {
 	private:
-		CRenderableObjectsManager	*m_Layer;
+		std::vector<CRenderableObjectsManager*> m_Layers;
     public:
         CRenderDebugSceneSceneRendererCommand(CXMLTreeNode &atts);
         ~ CRenderDebugSceneSceneRendererCommand();

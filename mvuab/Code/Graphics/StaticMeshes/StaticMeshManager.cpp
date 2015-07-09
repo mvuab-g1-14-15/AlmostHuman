@@ -19,10 +19,14 @@ CStaticMeshManager::~CStaticMeshManager()
 
 void CStaticMeshManager::Init()
 {
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(mConfigPath.c_str()))
+}
+
+void CStaticMeshManager::Load( std::string aFilePath )
+{
+	CXMLTreeNode newFile;
+    if (!newFile.LoadFile(aFilePath.c_str()))
     {
-        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", aFilePath.c_str());
         return;
     }
 
@@ -49,10 +53,4 @@ void CStaticMeshManager::Init()
             CHECKED_DELETE(l_StaticMesh);
         }
     }
-}
-
-void CStaticMeshManager::Reload()
-{
-    Destroy();
-    Init();
 }

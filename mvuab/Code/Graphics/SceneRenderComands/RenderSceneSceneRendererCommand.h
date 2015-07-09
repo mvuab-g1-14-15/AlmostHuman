@@ -2,9 +2,9 @@
 #define RENDER_SCENE_SCENE_RENDERER_COMMAND_
 #pragma once
 
-
 #include "SceneRenderComands\SceneRendererCommand.h"
 #include "XML\XMLTreeNode.h"
+#include <vector>
 
 class CGraphicsManager;
 class CRenderableObjectsManager;
@@ -12,7 +12,8 @@ class CRenderableObjectsManager;
 class CRenderSceneSceneRendererCommand : public CSceneRendererCommand
 {
 	private:
-		CRenderableObjectsManager	*m_Layer;
+	 std::vector<CRenderableObjectsManager*> m_Layers;
+
     public:
         CRenderSceneSceneRendererCommand(CXMLTreeNode &atts);
         ~ CRenderSceneSceneRendererCommand();

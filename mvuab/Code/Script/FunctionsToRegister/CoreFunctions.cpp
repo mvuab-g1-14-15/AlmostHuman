@@ -60,11 +60,6 @@ CEnemyManager* GetEnemyManager()
   return EnemyMInstance;
 }
 
-CRenderableObjectsLayersManager* GetRenderableObjectsLayersManager()
-{
-  return ROLMInstance;
-}
-
 CGizmosManager* GetGizmosManager()
 {
   return GizmosMInstance;

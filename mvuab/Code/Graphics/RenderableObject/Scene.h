@@ -8,8 +8,9 @@
 #include "Utils\SingletonPattern.h"
 
 class CRenderableObjectsLayersManager;
+class CRoom;
 
-class CScene : public CMapManager<CRenderableObjectsLayersManager>, public CManager
+class CScene : public CMapManager<CRoom>, public CManager
 {
     public:
 		CScene   () : CManager() {};
@@ -24,6 +25,12 @@ class CScene : public CMapManager<CRenderableObjectsLayersManager>, public CMana
         void Render();
 
 		void Destroy();
+
+		void LoadRoom( std::string aRoomName );
+		void ActivateRoom( std::string aRoomName );
+
+		void UnloadRoom( std::string aRoomName );
+		void DesactivateRoom( std::string aRoomName );
 };
 
 #endif

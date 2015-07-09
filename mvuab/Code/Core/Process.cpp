@@ -3,7 +3,6 @@
 #include "Utils\Defines.h"
 #include "Effects\EffectManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
-#include "RenderableObject\RenderableObjectsLayerManager.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 #include "Lights\LightManager.h"
 #include "StaticMeshes\StaticMeshManager.h"

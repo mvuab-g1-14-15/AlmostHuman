@@ -19,6 +19,7 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 		void Init();
 		void Update(){}
 		void Render(){}
-        void Reload();
+
+		void Load( std::string aFilePath );
 };
 #endif
