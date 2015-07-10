@@ -42,7 +42,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 )
 
 --export de la class
-fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers =
+fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 (
 	try
 	(
@@ -105,13 +105,16 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers =
 				local l_Yaw = GetYaw lRotation as string
 				local l_Pitch = GetPitch lRotation as string
 				local l_Roll = GetRoll lRotation as string
+				
+				local l_Name = (Obj.name + "_" + l_Room) as String
+				local l_Core = (l_CoreName + "_" + l_Room) as String
 
 				local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
 				-- append the new node MeshInstance to the root node RenderableObjects
 				l_RootNode.AppendNode l_NewMeshInstanceNode 
 
-				l_NewMeshInstanceNode.AddAttributeAsString "name" Obj.name	
-				l_NewMeshInstanceNode.AddAttributeAsString "core" l_CoreName
+				l_NewMeshInstanceNode.AddAttributeAsString "name" l_Name	
+				l_NewMeshInstanceNode.AddAttributeAsString "core" l_Core
 				l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
 				
 				l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw

@@ -228,7 +228,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		
 		--Export Renderable Objects
 			local l_Layers = ExportLayerFile l_ExportableObjects l_DirToXML LevelList.selected
-			ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers
+			ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers LevelList.selected
 		-- End Export Renderable Objects
 		
 		if CopyTexturesCheckBox.checked then
