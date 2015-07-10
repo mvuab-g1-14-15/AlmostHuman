@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-class CParticleSystemManager: public CManager, CTemplatedVectorMapManager<CParticleSystemCore>
+class CParticleSystemManager: public CManager, public CTemplatedVectorMapManager<CParticleSystemCore>
 {
 public:
   CParticleSystemManager();

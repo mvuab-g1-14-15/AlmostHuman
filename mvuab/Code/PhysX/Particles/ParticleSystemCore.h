@@ -16,13 +16,13 @@ class CParticleSystemCore: public CTemplatedVectorMapManager<CParticleEmitter>
 {
 public:
   CParticleSystemCore();
-  CParticleSystemCore( CXMLTreeNode& atts );
+  CParticleSystemCore( const CXMLTreeNode& atts );
   ~CParticleSystemCore();
 
-  void Init();
   void Update();
   void Render();
   void Refresh();
+
 };
 
 #endif //_PARTICLE_SYSTEM_CORE_H
