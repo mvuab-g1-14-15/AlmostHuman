@@ -15,10 +15,10 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
     private:
         std::vector<CPhysicUserData *> m_PhyscsUserData;
         CRenderableObjectsManager* m_DefaultRenderableObjectManager;
-        CRenderableObjectsManager* GetRenderableObjectManager( const CXMLTreeNode& Node );
-		CRenderableObjectsManager* LoadRenderableObject(const std::string &l_FilePath);
+        CRenderableObjectsManager* GetRenderableObjectManager( const std::string &l_Name );
+		void LoadRenderableObject(const std::string &l_FilePath, const std::string& l_Name);
 		
-        void AddNewInstaceMesh(const CXMLTreeNode& atts);
+        void AddNewInstaceMesh(const CXMLTreeNode& atts, const std::string &l_Layer);
 
     public:
         CRenderableObjectsLayersManager();

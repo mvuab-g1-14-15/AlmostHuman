@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <MeshInstance name="sala_2_room2" core="sala_2_room2" pos="63.893 -7.77684 -28.9233" yaw="-0.0331987" pitch="-0.000197881" roll="0.00595836" scale="1.12722 1.12722 1.12722" />
+  <MeshInstance name="Viga_room2" core="Viga_room2" pos="63.893 -7.77684 -28.9233" yaw="-0.0331987" pitch="-0.000197881" roll="0.00595836" scale="1.12722 1.12722 1.12722" />
   <MeshInstance name="Estanteria_TipusA_01_room2" core="Estanteria_TipusA_01_room2" pos="70.4766 -17.1881 -59.3457" yaw="-0.0331985" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Estanteria_TipusA_005_room2" core="Estanteria_TipusA_005_room2" pos="53.414 -17.1881 -69.892" yaw="-0.0331985" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Estanteria_TipusA_006_room2" core="Estanteria_TipusA_006_room2" pos="70.2292 -17.1881 -69.8638" yaw="-0.0331985" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -119,13 +119,14 @@
   <MeshInstance name="Ammo_box437_room2" core="Ammo_box437_room2" pos="53.3704 -15.6457 -68.4711" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Ammo_box438_room2" core="Ammo_box438_room2" pos="53.3296 -16.1971 -71.1448" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Ammo_box439_room2" core="Ammo_box439_room2" pos="53.3225 -16.1971 -71.789" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="plastic_barrel296_room2" core="plastic_barrel296_room2" pos="53.2041 -16.2342 -61.51" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel297_room2" core="plastic_barrel297_room2" pos="54.5373 -16.2346 -57.25" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel298_room2" core="plastic_barrel298_room2" pos="53.2844 -16.2346 -57.3081" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel299_room2" core="plastic_barrel299_room2" pos="53.2748 -16.2346 -58.1787" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel300_room2" core="plastic_barrel300_room2" pos="54.4105 -16.2346 -58.2298" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="plastic_barrel301_room2" core="plastic_barrel301_room2" pos="53.1734 -16.2342 -59.5737" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="plastic_barrel301_room2" core="plastic_barrel301_room2" pos="53.1734 -16.2342 -59.185" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel302_room2" core="plastic_barrel302_room2" pos="54.6024 -16.2346 -59.064" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="plastic_barrel303_room2" core="plastic_barrel303_room2" pos="53.2946 -16.2342 -60.9529" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="plastic_barrel303_room2" core="plastic_barrel303_room2" pos="53.2946 -16.2342 -60.2488" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel304_room2" core="plastic_barrel304_room2" pos="54.3909 -16.2342 -60.0078" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="plastic_barrel305_room2" core="plastic_barrel305_room2" pos="54.4036 -16.2342 -60.8549" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="barrierCIL_031_room2" core="barrierCIL_031_room2" pos="56.3923 -15.196 -80.0637" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -157,10 +158,6 @@
   <MeshInstance name="Godlight007_room2" core="Godlight007_room2" pos="66.5013 -20.1583 -69.8046" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Godlight008_room2" core="Godlight008_room2" pos="67.0612 -20.1583 -77.1661" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Godlight009_room2" core="Godlight009_room2" pos="58.1669 -20.1583 -77.1996" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="porta_room2" core="porta_room2" pos="52.9089 -18.6175 -24.0051" yaw="1.50996e-007" pitch="0.0" roll="3.14159" scale="-0.710016 -0.696682 -0.432929" />
   <MeshInstance name="lampara_porta_room2" core="lampara_porta_room2" pos="63.8224 -5.28916 -28.9233" yaw="-0.0331987" pitch="-0.000197874" roll="0.00595813" scale="1.12722 1.12722 1.12722" />
-  <MeshInstance name="feix_llum_room2" core="feix_llum_room2" pos="63.893 -7.77684 -28.9233" yaw="-0.0331987" pitch="-0.000197874" roll="0.00595813" scale="1.12722 1.12722 1.12722" />
-  <MeshInstance name="grup_objectes_room2" core="grup_objectes_room2" pos="63.893 -7.77684 -28.9233" yaw="-0.0331987" pitch="-0.000197874" roll="0.00595813" scale="1.12722 1.12722 1.12722" />
-  <MeshInstance name="Focus_007_room2" core="Focus_007_room2" pos="51.6673 -18.3805 -70.0533" yaw="0.0" pitch="0.0" roll="-0.610865" scale="0.569914 0.569914 0.569914" />
-  <MeshInstance name="Focus_008_room2" core="Focus_008_room2" pos="51.6673 -18.3805 -70.0533" yaw="0.0" pitch="0.0" roll="-0.610865" scale="0.569914 0.569914 0.569914" />
-  <MeshInstance name="Focus_009_room2" core="Focus_009_room2" pos="51.6673 -18.3805 -70.0533" yaw="0.0" pitch="0.0" roll="-0.610865" scale="0.569914 0.569914 0.569914" />
 </RenderableObjects>
