@@ -58,5 +58,4 @@ void CParticleSystemCore::Render()
 void CParticleSystemCore::Refresh()
 {
   Destroy();
-  Init();
 }
