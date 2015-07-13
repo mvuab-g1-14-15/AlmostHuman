@@ -40,7 +40,7 @@ void CRenderableObjectsLayersManager::Destroy()
     CTemplatedVectorMapManager::Destroy();
 }
 
-bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_LayerName, const std::string& l_FilePath )
+bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath )
 {
     CXMLTreeNode l_Node, l_Root;
 
@@ -59,7 +59,7 @@ bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_LayerName
 
         CRenderableObjectsManager* l_ROM  = LoadRenderableObject( l_Path + "/" + l_File );
 
-        if ( !AddResource( l_LayerName, l_ROM ) )
+        if ( !AddResource( l_Name, l_ROM ) )
             CHECKED_DELETE( l_ROM );
     }
 

@@ -24,14 +24,10 @@ CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode 
 		if (lRoom->GetActive())
 		{
 			CRenderableObjectsManager* lROM = lRoom->GetLayers()->GetResource(l_LayerName);
-			if (lROM )
+			if (lROM)
 				m_Layers.push_back(lROM);
 		}
-		
-	
 	}
-
-	ASSERT(m_Layers.size()!=0, "Invalid layer %s", l_LayerName.c_str() );
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()

@@ -11,6 +11,8 @@
 #include "Room.h"
 #include "EngineManagers.h"
 
+#include <string>
+
 
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
@@ -67,10 +69,13 @@ bool CScene::Load( const std::string& l_FilePath )
         lRoom->SetName( l_Level );
         lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
         lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
+		lRoom->SetBasePath( l_Path + "/" );
 
         if ( !AddResource( l_Level, lRoom ) )
             CHECKED_DELETE( lRoom );
     }
+
+	LoadRoom("core");
 
     return true;
 }
@@ -89,8 +94,14 @@ void CScene::LoadRoom( std::string aRoomName )
 
     if ( lRoom )
     {
-        SMeshMInstance->Load( lRoom->GetStaticMeshesPath() );
-        lROLM->LoadLayers( lRoom->GetName(), lRoom->GetRenderableObjectsPath() );
+		std::string lSMPath = lRoom->GetStaticMeshesPath();
+		std::string lROPath = lRoom->GetRenderableObjectsPath();
+		std::string lBasePath = lRoom->GetBasePath();
+
+		if (lSMPath.find(".xml") != std::string::npos)
+			SMeshMInstance->Load( lSMPath, lBasePath );
+		if (lROPath.find(".xml") != std::string::npos)
+			lROLM->LoadLayers( lROPath );
         lRoom->SetLayers( lROLM );
     }
 }

@@ -24,7 +24,9 @@
 	<billboard_manager file_config="Data/billboards.xml"/>
 	<particle_manager file_config="Data/particles.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
+	<!--
+		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
+	-->
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
 </managers>

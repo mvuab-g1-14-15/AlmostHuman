@@ -13,6 +13,7 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
+#include "RenderableObject\Scene.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "ScriptManager.h"
 #include "Cameras\CameraManager.h"
@@ -93,6 +94,11 @@ CScriptManager* GetScriptManager()
 CCinematicManager* GetCinematicManager()
 {
     return CinematicMInstance;
+}
+
+CScene* GetScene()
+{
+	return SceneInstance;
 }
 
 void registerProcess( lua_State* aLuaState )
@@ -179,6 +185,10 @@ void registerManagers( lua_State* aLuaState )
 
     LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCinematicManager )
+    LUA_END_DECLARATION
+
+	LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScene )
     LUA_END_DECLARATION
 }
 

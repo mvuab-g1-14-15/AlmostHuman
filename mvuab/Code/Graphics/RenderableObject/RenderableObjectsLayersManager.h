@@ -27,7 +27,7 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
 
         void Destroy();
         
-		bool LoadLayers(const std::string &l_LayerName,const std::string &l_FilePath);
+		bool LoadLayers(const std::string &l_FilePath);
         void Update();
 
         void Render();
