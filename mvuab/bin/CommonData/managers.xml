@@ -20,7 +20,8 @@
 	<enemy_manager file_config="Data/enemies/enemies.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config="Data/billboards.xml"/>
-	<particle_manager file_config="Data/particles.xml"/>
+	<particle_system_manager file_config="Data/Particle/particle_system.xml"/>
+	<particle_manager file_config="Data/Particle/particles.xml"/>
 	<gizmos_manager file_config="no_name"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<gui_manager file_config="Data/gui.xml"/>

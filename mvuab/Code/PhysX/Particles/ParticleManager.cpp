@@ -22,7 +22,7 @@ void CParticleManager::Init()
 {
   CXMLTreeNode l_XML, l_Node;
 
-  if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "emitters", l_Node ) )
+  if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_instances", l_Node ) )
   {
     for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
     {

@@ -199,3 +199,9 @@ void CParticleEmitter::ActivateTextures()
         mTextures[i]->Activate(i);
     }
 }
+//TODO ALEXITO EL NIÑO MÁS BONITO
+void CParticleEmitter::SetPosition(Math::Vect3f& lPosition)
+{
+	mPosition = lPosition;
+	SetPositionParticle(mPosition);
+}

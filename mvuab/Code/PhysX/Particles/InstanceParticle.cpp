@@ -9,10 +9,9 @@ CInstanceParticle::CInstanceParticle()
 }
 
 CInstanceParticle::CInstanceParticle( const CXMLTreeNode& atts ) :
-  m_ParticleSystem( ParticleSystemInstance->GetResource( atts.GetAttribute<std::string>( "name", "" ) ) ),
+  m_ParticleSystem( ParticleSystemInstance->GetResource( atts.GetAttribute<std::string>( "core", "" ) ) ),
   m_Position( atts.GetAttribute<Math::Vect3f>( "position", Math::Vect3f( 0, 0, 0 ) ) )
-{
-
+{	
 }
 
 CInstanceParticle::~CInstanceParticle()
@@ -22,7 +21,7 @@ CInstanceParticle::~CInstanceParticle()
 
 void CInstanceParticle::Update()
 {
-  m_ParticleSystem->Update();
+  m_ParticleSystem->Update(m_Position);
 }
 
 void CInstanceParticle::Render()

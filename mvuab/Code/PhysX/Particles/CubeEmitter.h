@@ -9,6 +9,7 @@ class CCubeEmitter : public CParticleEmitter
     private:
         Math::Vect3f mMinPnt;
         Math::Vect3f mMaxPnt;
+		Math::Vect3f mSize;
     public:
         CCubeEmitter            ();
         virtual ~CCubeEmitter   ();
@@ -17,6 +18,7 @@ class CCubeEmitter : public CParticleEmitter
         void Update             (float dt);
         void Render             ();
         virtual Math::Vect3f GetSpawnPosition();
+		virtual void SetPositionParticle(Math::Vect3f& lPosition);
 };
 
 #endif

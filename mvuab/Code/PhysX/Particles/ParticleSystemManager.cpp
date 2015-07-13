@@ -19,7 +19,7 @@ void CParticleSystemManager::Init()
 {
   CXMLTreeNode l_XML, l_Node;
 
-  if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particle_systems", l_Node ) )
+  if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_systems", l_Node ) )
   {
     for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
     {

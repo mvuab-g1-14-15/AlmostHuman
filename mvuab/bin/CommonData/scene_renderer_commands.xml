@@ -78,7 +78,6 @@
 	<enable_z_test/>
 	
 	<render_billboards/>
-	<render_particules/>
 	<!--<render_editors/>
 	<render_triggers/>-->
 	<render_gizmos render="true"/>
@@ -117,6 +116,11 @@
     <render_weapon_target size="20">
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
+	
+	<enable_z_test/>
+	<render_particules/>
+	
+	<disable_z_test/>
 	
 	<render_gui render="true"/>
 	

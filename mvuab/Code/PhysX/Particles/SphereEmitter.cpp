@@ -23,6 +23,10 @@ bool CSphereEmitter::Init( const CXMLTreeNode& atts )
     return CParticleEmitter::Init( atts );
 }
 
+void CSphereEmitter::SetPositionParticle(Math::Vect3f& lPosition)
+{
+
+}
 /*
     void CSphereEmitter::NewParticle(CParticle*)
     {

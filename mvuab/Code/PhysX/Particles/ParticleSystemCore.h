@@ -19,7 +19,7 @@ public:
   CParticleSystemCore( const CXMLTreeNode& atts );
   ~CParticleSystemCore();
 
-  void Update();
+  void Update(Math::Vect3f& lPosition);
   void Render();
   void Refresh();
 
