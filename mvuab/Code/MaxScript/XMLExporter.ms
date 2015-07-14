@@ -23,7 +23,7 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 		
 		for Obj in UniqueInstanceArray do
 		(
-				filename = "\\meshes\\" + Obj.name +".mesh"
+				filename = "meshes\\" + Obj.name +".mesh"
 				
 				local l_NewStaticMeshNode = xDoc.getNewNode "static_mesh"			
 				-- append the new node static_mesh to the root node static_meshs
@@ -312,14 +312,15 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 	try
 	(
 		local unique_instances = GetUniqueInstancesScene()
-		local l_OutXmlFilename = (aDirToXML +"\\"+ aRoom + ".xml")
+		local l_OutXmlFilenameToWrite = (aDirToXML +"\\"+ aRoom + ".xml")
+		local l_OutXmlFilenameToXML = ("Data\\"+ aRoom)
 
 		-- create the document and set the filename
-		xDoc = XMLDocument l_OutXmlFilename
+		xDoc = XMLDocument l_OutXmlFilenameToWrite
 		
 		--create the base node and append the node to the document
 		local l_RootNode = xDoc.getNewNode "room"
-		l_RootNode.AddAttributeAsString "path" aDirToXML
+		l_RootNode.AddAttributeAsString "path" l_OutXmlFilenameToXML
 		xDoc.AppendNode l_RootNode
 		
 		if AllObj.count == 0 then 
@@ -386,6 +387,6 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 	)
 	catch
 	(
-		format "Error generating renderable object\n"
+		format "Error generating layer XML file\n"
 	)
 )
