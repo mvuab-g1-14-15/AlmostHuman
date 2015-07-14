@@ -184,7 +184,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		if fileSrcMeshXML != undefined then
 		(
 			DoesFolderExist MeshDir
-			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir LevelList.selected
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
 	
@@ -222,7 +222,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 		--Export Static Meshes
 			DoesFolderExist MeshDir
-			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir LevelList.selected
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		-- End Export Static Meshes
 		

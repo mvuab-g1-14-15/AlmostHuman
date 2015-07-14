@@ -2,7 +2,7 @@ fileIn "Utils.ms"
 fileIn "XMLStruct.ms"
 
 --export de la class
-fn ExportStaticMeshXMLFile filenameXML MeshDir =
+fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 (	
 	try
 	(
@@ -29,7 +29,9 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir =
 				-- append the new node static_mesh to the root node static_meshs
 				l_RootNode.AppendNode l_NewStaticMeshNode 
 
-				l_NewStaticMeshNode.AddAttributeAsString "name" Obj.name	
+				local l_Name = (Obj.name + "_" + aRoom) as String
+			
+				l_NewStaticMeshNode.AddAttributeAsString "name" l_Name
 				l_NewStaticMeshNode.AddAttributeAsString "filename" filename
 
 		)
