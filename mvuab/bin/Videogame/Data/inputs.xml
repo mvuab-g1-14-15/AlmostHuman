@@ -209,6 +209,10 @@
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_C"/>
     </action>
 	
+	<action name="Hide">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_V"/>
+    </action>
+	
 	<action name="LyingDown">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_X"/>
     </action>

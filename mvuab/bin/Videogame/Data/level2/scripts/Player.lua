@@ -16,6 +16,8 @@ function CPlayer:__init()
 	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	
+	self.Hiden = false
+	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel("Player", "Player")
@@ -53,6 +55,10 @@ function CPlayer:Update()
 		if action_manager:DoAction("ExplodeGrenade") and self.Grenade ~= nil then
 			self.Grenade:Explode()
 			self.Grenade = nil
+		end
+		
+		if action_manager:DoAction("LyingDown") then
+			self:HideInBarrel()
 		end
 	end
 	
@@ -115,4 +121,30 @@ end
 
 function CPlayer:SetEnergy(amount)
 	self.Blaster:SetEnergy(amount)
+end
+
+function CPlayer:HideInBarrel()
+	if not self.Hiden then
+		local l_Can = true
+		if not self.PlayerController.Crouch then
+			l_Can = self.PlayerController:MakeCrouch()
+		end
+		
+		if l_Can then
+			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", true)
+		end
+		
+		self.Hiden = true
+	else
+		local l_Can = true
+		if self.PlayerController.Crouch then
+			l_Can = self.PlayerController:MakeCrouch()
+		end
+		
+		if l_Can then
+			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", false)
+		end
+		
+		self.Hiden = false
+	end
 end

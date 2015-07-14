@@ -2,11 +2,13 @@
 #include "Utils/BaseUtils.h"
 #include "Utils/Defines.h"
 #include "XML/XMLTreeNode.h"
+#include "Texture/Texture.h"
 #include "EngineManagers.h"
 #include "Effects/EffectManager.h"
 #include "Billboard/Billboard.h"
 #include "RenderableVertex/InstancedVertexTypes.h"
 #include "RenderableVertex/InstancingVertexs.h"
+#include "Shapes/Shapes.h"
 
 using namespace baseUtils;
 
@@ -35,7 +37,7 @@ CParticleEmitter::CParticleEmitter()
     , mSize(Math::Vect2f(1.0f, 1.0f))
     , mSpeed(Math::Vect2f(1.0f, 1.0f))
     , mPosition(Math::Vect3f(0.0f, 0.0f, 0.0f))
-    , mTechniqueName( "" )
+    , mTechnique( 0 )
     , mIsImmortal( 0 )
     , mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
     , mGravity(0.f)
@@ -62,7 +64,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
     mPosition             = atts.GetAttribute<Math::Vect3f>("position", Math::Vect3f());
-    mTechniqueName        = atts.GetAttribute<std::string>("technique", "none");
+    mTechnique            = atts.GetAttribute<CEffectTechnique>("technique");
     mParticlesXEmission   = atts.GetAttribute<Math::Vect2f>("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
     mColorMin             = atts.GetAttribute<Math::CColor>("min_color", Math::colWHITE );
     mColorMax             = atts.GetAttribute<Math::CColor>("max_color", mColorMin );
@@ -96,7 +98,12 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mAliveParticles.y];
     ZeroMemory(mParticles, mAliveParticles.y * sizeof(TPARTICLE_VERTEX_INSTANCE) );
 
-    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mAliveParticles.y );
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount,
+            lIdxCount, mAliveParticles.y );
+
+    mShape = new CBoxShape();
+    mShape->SetPosition( mPosition );
+    mShape->MakeTransform();
 
     //CParticle* lPar = new CParticle();
     return true;
@@ -111,13 +118,17 @@ void CParticleEmitter::Update( float dt )
         if(mParticles[i].IsAlive())
         {
             CParticle& lParticle = mParticles[i];
-
             lParticle.Update(dt);
-            mParticlesStream[i].alive = 1.0;
-            mParticlesStream[i].size = lParticle.GetSize();
+            mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle());
+            const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
+            mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
+            mParticlesStream[i].alpha = 1.0f - lPercentage;
             mParticlesStream[i].x = lParticle.GetPosition().x;
             mParticlesStream[i].y = lParticle.GetPosition().y;
             mParticlesStream[i].z = lParticle.GetPosition().z;
+            mParticlesStream[i].r = lParticle.GetColor().r;
+            mParticlesStream[i].g = lParticle.GetColor().g;
+            mParticlesStream[i].b = lParticle.GetColor().b;
         }
         else
         {
@@ -128,13 +139,13 @@ void CParticleEmitter::Update( float dt )
 
 void CParticleEmitter::Render()
 {
-    /*
-        for( uint32 i = 0, lParticles = GetParticleCount(); i < lParticles; ++i)
-        {
-          CParticle* lParticle = GetParticle( i );
-          lParticle->Render();
-        }
-    */
+    //mShape->Render( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") );
+    CGraphicsManager* lGM = GraphicsInstance;
+
+    ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->AddInstancinguffer(lGM, mParticlesStream);
+    ActivateTextures();
+
+    ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->Render(lGM, mTechnique);
 }
 
 void CParticleEmitter::EmitParticles()
@@ -160,6 +171,7 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetColor(RandRange(mColorMin, mColorMax));
             lParticle.SetInitalOndulation(RandRange(0.0f, 360.0f));
             lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
+            lParticle.SetAngle(RandRange(0.0f, 360.0f));
             ++mAliveParticlesCount;
             ++lEmittedParticles;
         }
@@ -177,5 +189,13 @@ void CParticleEmitter::KillParticles()
             lParticle.SetActualTime(0.0f);
             --mAliveParticlesCount;
         }
+    }
+}
+
+void CParticleEmitter::ActivateTextures()
+{
+    for( uint32 i = 0, lCount = mTextures.size(); i < lCount; ++i )
+    {
+        mTextures[i]->Activate(i);
     }
 }

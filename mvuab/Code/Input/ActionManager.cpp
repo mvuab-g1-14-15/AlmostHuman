@@ -346,7 +346,7 @@ bool CActionManager::SaveXML( const std::string& xmlFile )
     for ( ; it != itEnd; ++it )
     {
       NewXML.StartElement( "action" );
-      NewXML.WritePszProperty( "name", it->first.c_str() );
+      NewXML.AddAttribute<std::string>( "name", it->first );
       TInputsVector vInputs = it->second;
       TInputsVector::const_iterator aux_it = vInputs.begin();
       TInputsVector::const_iterator aux_itEnd = vInputs.end();
@@ -356,19 +356,19 @@ bool CActionManager::SaveXML( const std::string& xmlFile )
         //<input deviceType="IDV_KEYBOARD"      EventType="EVENT_DOWN_UP"               Code="KEY_F4"/>
         //<input deviceType="IDV_MOUSE"                 AxisType="AXIS_MOUSE_X"                 Delta="1.f"/>
         NewXML.StartElement( "input" );
-        NewXML.WritePszProperty( "deviceType", aux_it->m_sDeviceType.c_str() );
+        NewXML.AddAttribute<std::string>( "deviceType", aux_it->m_sDeviceType );
 
         if ( aux_it->m_sEventType != "EVENT_NOTHING" )
-          NewXML.WritePszProperty( "EventType", aux_it->m_sEventType.c_str() );
+          NewXML.AddAttribute<std::string>( "EventType", aux_it->m_sEventType );
 
         if ( aux_it->m_sAxisType != "AXIS_NOTHING" )
         {
-          NewXML.WritePszProperty( "AxisType", aux_it->m_sAxisType.c_str() );
-          NewXML.WriteFloatProperty( "Delta", aux_it->m_fDelta );
+          NewXML.AddAttribute<std::string>( "AxisType", aux_it->m_sAxisType );
+          NewXML.AddAttribute<float>( "Delta", aux_it->m_fDelta );
         }
 
         if ( aux_it->m_sCode != "MOUSE_BUTTON_NOTHING" )
-          NewXML.WritePszProperty( "Code", aux_it->m_sCode.c_str() );
+          NewXML.AddAttribute<std::string>( "Code", aux_it->m_sCode );
 
         NewXML.EndElement(); //("input")
       }

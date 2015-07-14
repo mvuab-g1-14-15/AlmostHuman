@@ -19,6 +19,8 @@
 #include <ctime>
 #include <AntTweakBar.h>
 
+#include "resource.h"
+
 #if _DEBUG
     #include "Memory\MemLeaks.h"
 #endif
@@ -142,6 +144,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             APPLICATION_NAME,
             NULL
         };
+
+        wc.hIcon = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_ICON1));
         RegisterClassEx( &wc );
         // For random number generation
         srand( ( unsigned int )time( 0 ) );

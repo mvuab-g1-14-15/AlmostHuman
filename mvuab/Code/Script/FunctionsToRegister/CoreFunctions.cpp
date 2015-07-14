@@ -13,7 +13,6 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Texture\TextureManager.h"
 #include "RenderableObject\RenderableObjectsManager.h"
-#include "RenderableObject\Scene.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "ScriptManager.h"
 #include "Cameras\CameraManager.h"
@@ -31,6 +30,7 @@
 #include "GUIManager.h"
 #include "Timer/CountDownTimerManager.h"
 #include "Cinematics\CinematicManager.h"
+#include "SceneRenderComands\SceneRendererCommandManager.h"
 
 #include "luabind_macros.h"
 
@@ -59,6 +59,11 @@ CPhysicsManager* GetPhysicsManager()
 CEnemyManager* GetEnemyManager()
 {
     return EnemyMInstance;
+}
+
+CRenderableObjectsLayersManager* GetRenderableObjectsLayersManager()
+{
+    return ROLMInstance;
 }
 
 CGizmosManager* GetGizmosManager()
@@ -96,9 +101,9 @@ CCinematicManager* GetCinematicManager()
     return CinematicMInstance;
 }
 
-CScene* GetScene()
+CSceneRendererCommandManager* GetSceneRendererCommandsManager()
 {
-	return SceneInstance;
+    return SRCMInstance;
 }
 
 void registerProcess( lua_State* aLuaState )
@@ -160,6 +165,10 @@ void registerManagers( lua_State* aLuaState )
     LUA_END_DECLARATION
 
     LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetRenderableObjectsLayersManager )
+    LUA_END_DECLARATION
+
+    LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager )
     LUA_END_DECLARATION
 
@@ -187,8 +196,8 @@ void registerManagers( lua_State* aLuaState )
     LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCinematicManager )
     LUA_END_DECLARATION
 
-	LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScene )
+    LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSceneRendererCommandsManager )
     LUA_END_DECLARATION
 }
 

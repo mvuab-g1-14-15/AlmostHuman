@@ -13,6 +13,8 @@
 class CParticle;
 class CTexture;
 class CRenderableVertexs;
+class CEffectTechnique;
+class CShape;
 
 class CParticleEmitter :  public CName
 {
@@ -55,10 +57,11 @@ class CParticleEmitter :  public CName
         Math::Vect2f                mTimeToLive;
         Math::Vect2f                mParticlesXEmission;
         Math::Vect3f                mPosition;
-        std::string                 mTechniqueName;
+        CEffectTechnique*           mTechnique;
         TTextureContainer           mTextures;
         TParticleContainer          mParticles;
         TParticleContainer          mDeadParticles;
+        CShape*                     mShape;
 
         CRenderableVertexs          *mRV;
         TPARTICLE_VERTEX_INSTANCE   *mParticlesStream;
@@ -66,6 +69,7 @@ class CParticleEmitter :  public CName
     private:
         void EmitParticles();
         void KillParticles();
+        void ActivateTextures();
 };
 
 //-----------------------------------------------------------------------------------------

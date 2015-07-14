@@ -81,6 +81,39 @@ class CInstancingVertexs : public CRenderableVertexs
 
         virtual bool Render(CGraphicsManager *GM, CEffectTechnique *EffectTechnique)
         {
+            LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
+            UINT l_NumPasses;
+            LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
+            l_Effect->SetTechnique(EffectTechnique->GetD3DTechnique());
+            EffectTechnique->BeginRender();
+            if (SUCCEEDED(l_Effect->Begin(&l_NumPasses, 0)))
+            {
+                l_Device->SetVertexDeclaration(T::GetVertexDeclaration());
+                // Setting the first stream source and frequency
+                l_Device->SetStreamSource(0, m_VB, 0, GetVertexSize());
+                l_Device->SetStreamSourceFreq(0, D3DSTREAMSOURCE_INDEXEDDATA | m_InstancesNumber);
+                // Setting the second stream source and frequency
+                l_Device->SetStreamSource(1, m_InstanceB, 0, GetInstanceSize());
+                l_Device->SetStreamSourceFreq(1, D3DSTREAMSOURCE_INSTANCEDATA | 1ul);
+                l_Device->SetIndices(m_IB);
+                for (UINT b = 0; b < l_NumPasses; ++b)
+                {
+                    l_Effect->BeginPass(b);
+                    l_Device->DrawIndexedPrimitive
+                    (
+                        D3DPT_TRIANGLELIST,
+                        0,
+                        0,
+                        (UINT)m_VertexCount,
+                        0,
+                        (UINT) m_IndexCount / 3
+                    );
+                    l_Effect->EndPass();
+                }
+                l_Effect->End();
+            }
+            l_Device->SetStreamSourceFreq(0, 1);
+            l_Device->SetStreamSourceFreq(1, 1);
             return true;
         }
 

@@ -82,6 +82,11 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
                 l_Effect->EndPass();
             }
 
+			CGPUStatics* GPU = CGPUStatics::GetSingletonPtr();
+			GPU->AddVertexCount(verticesCount);
+			GPU->AddFacesCount(facesCount);
+			GPU->AddDrawCount(1);
+
             l_Effect->End();
             return ( true );
         }

@@ -108,6 +108,12 @@
       <Filter>CookingMesh</Filter>
     </ClCompile>
     <ClCompile Include="PhysicUtils.cpp" />
+    <ClCompile Include="Particles\ParticleSystemCore.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles\ParticleSystemManager.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -195,5 +201,11 @@
     </ClInclude>
     <ClInclude Include="PhysicUtils.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Particles\ParticleSystemCore.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\ParticleSystemManager.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

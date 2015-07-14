@@ -13,7 +13,6 @@ class CParticle
         ~CParticle();
 
         void Update( float dt );
-        void Render();
 
         bool IsAlive() const
         {
@@ -136,7 +135,6 @@ class CParticle
             mAngle = val;
         }
     private:
-        CBillboard *mBillboard;
         bool                        mIsAlive;
         float32                     mActualTime;
         float32                     mGravity;

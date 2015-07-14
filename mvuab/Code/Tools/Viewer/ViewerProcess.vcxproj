@@ -15,7 +15,15 @@
     <ClCompile Include="ViewerProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ViewerProcess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Viewer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\bin\Viewer\Data\textures\gear.ico" />
+    <None Include="icon1.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7911C49A-7E8C-4280-8D70-EA7A76E63328}</ProjectGuid>
