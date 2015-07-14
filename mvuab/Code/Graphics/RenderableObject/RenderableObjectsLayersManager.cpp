@@ -55,25 +55,26 @@ bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath 
 
         const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_path" );
         const std::string& l_File = l_CurrentNode.GetAttribute<std::string>( "file", "no_file" );
-
-
-        CRenderableObjectsManager* l_ROM  = LoadRenderableObject( l_Path + "/" + l_File );
-
-        if ( !AddResource( l_Name, l_ROM ) )
-            CHECKED_DELETE( l_ROM );
+		
+		LoadRenderableObject( l_Path + "/" + l_File, l_Name );
     }
 
     return true;
 }
 
-CRenderableObjectsManager* CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath )
+void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name )
 {
-
     CXMLTreeNode l_Node, l_Root;
     CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
 
+	if ( !AddResource( l_Name, lRenderableObjectManager ) )
+	{
+		CHECKED_DELETE( lRenderableObjectManager );
+		return;
+	}
+
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
-        return 0;
+        return;
 
     for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
     {
@@ -82,7 +83,7 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::LoadRenderableObject
         const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
 
         if ( lTagName == "MeshInstance" )
-            AddNewInstaceMesh( lNode );
+            AddNewInstaceMesh( lNode, l_Name );
         else if ( lTagName == "AnimatedInstance" )
         {
             CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
@@ -94,8 +95,6 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::LoadRenderableObject
             }
         }
     }
-
-    return lRenderableObjectManager;
 }
 
 void CRenderableObjectsLayersManager::Update()
@@ -120,13 +119,12 @@ void CRenderableObjectsLayersManager::Render( const std::string& LayerName )
     if ( itb != l_ResourcesMap.end() )
         ( *itb ).second.m_Value->Render();
 }
-CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectManager( const CXMLTreeNode& Node )
+CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectManager( const std::string &l_Name )
 {
-    const std::string& l_Layer = Node.GetAttribute<std::string>( "layer", "" );
-    return ( l_Layer == "" ) ? m_DefaultRenderableObjectManager : GetResource( l_Layer.c_str() );
+    return ( l_Name == "" ) ? m_DefaultRenderableObjectManager : GetResource( l_Name.c_str() );
 }
 
-void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts )
+void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts, const std::string &l_Layer )
 {
     CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
     l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
@@ -181,7 +179,7 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     else
         l_InstanceMesh->SetActor( l_MeshActor );
 
-    CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( atts );
+    CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
 
     if ( !lRenderableObjectManager->AddResource( l_Name, l_InstanceMesh ) )
     {
