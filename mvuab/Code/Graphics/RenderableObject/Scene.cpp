@@ -69,13 +69,13 @@ bool CScene::Load( const std::string& l_FilePath )
         lRoom->SetName( l_Level );
         lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
         lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
-		lRoom->SetBasePath( l_Path + "/" );
+        lRoom->SetBasePath( l_Path + "/" );
 
         if ( !AddResource( l_Level, lRoom ) )
             CHECKED_DELETE( lRoom );
     }
 
-	LoadRoom("core");
+    ActivateRoom( "core" );
 
     return true;
 }
@@ -94,14 +94,16 @@ void CScene::LoadRoom( std::string aRoomName )
 
     if ( lRoom )
     {
-		std::string lSMPath = lRoom->GetStaticMeshesPath();
-		std::string lROPath = lRoom->GetRenderableObjectsPath();
-		std::string lBasePath = lRoom->GetBasePath();
+        std::string lSMPath = lRoom->GetStaticMeshesPath();
+        std::string lROPath = lRoom->GetRenderableObjectsPath();
+        std::string lBasePath = lRoom->GetBasePath();
 
-		if (lSMPath.find(".xml") != std::string::npos)
-			SMeshMInstance->Load( lSMPath, lBasePath );
-		if (lROPath.find(".xml") != std::string::npos)
-			lROLM->LoadLayers( lROPath );
+        if ( lSMPath.find( ".xml" ) != std::string::npos )
+            SMeshMInstance->Load( lSMPath, lBasePath );
+
+        if ( lROPath.find( ".xml" ) != std::string::npos )
+            lROLM->LoadLayers( lROPath );
+
         lRoom->SetLayers( lROLM );
     }
 }
