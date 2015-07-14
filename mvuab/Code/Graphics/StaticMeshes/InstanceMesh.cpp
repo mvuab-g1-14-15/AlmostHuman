@@ -54,29 +54,27 @@ void CInstanceMesh::Render()
 
     Math::Mat44f lTransform = GetTransform();
     Math::AABB3f laabb = mStaticMesh->GetAABB();
+    const Math::Vect3f laabbCenter = laabb.GetCenter();
 
     if ( mType == "dynamic" && mPhysicActor != 0 )
     {
         mPhysicActor->GetMat44( lTransform );
 
-        Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
+        Math::Vect3f lUp( 0.0f, -laabbCenter.y, 0.0f );
 
         Math::Mat44f lCenterTransform;
         lCenterTransform.SetIdentity();
 
         lCenterTransform.Translate( lUp );
-
         lTransform = lTransform * lCenterTransform;
-
     }
 
     GraphicsInstance->SetTransform( lTransform );
 
     CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
-    Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
+    Math::Vect3f lPositionTransformed = lTransform * laabbCenter;
 
-    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y,
-                                       lPositionTransformed.z ), laabb.GetRadius() ) )
+    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z ), laabb.GetRadius() ) )
     {
         mStaticMesh->Render( GraphicsInstance );
     }
