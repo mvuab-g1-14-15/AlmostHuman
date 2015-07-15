@@ -17,6 +17,9 @@
 #include "Utils\PhysicUserData.h"
 #include "Math\AABB.h"
 
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+#include "SceneRenderComands\RenderSceneSceneRendererCommand.h"
+
 
 CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
     : m_DefaultRenderableObjectManager( 0 )
@@ -72,6 +75,10 @@ void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
 		CHECKED_DELETE( lRenderableObjectManager );
 		return;
 	}
+
+	CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>( SRCMInstance->GetCommand( "render_" + l_Name ) );
+	if (lRSSRC)
+		lRSSRC->AddLayer( lRenderableObjectManager );
 
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
         return;

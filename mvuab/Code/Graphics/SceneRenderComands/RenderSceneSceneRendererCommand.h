@@ -19,5 +19,7 @@ class CRenderSceneSceneRendererCommand : public CSceneRendererCommand
         ~ CRenderSceneSceneRendererCommand();
 
         void Execute(CGraphicsManager &GM);
+
+		void AddLayer( CRenderableObjectsManager* aROM );
 };
 #endif

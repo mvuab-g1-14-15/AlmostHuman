@@ -25,9 +25,14 @@ CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode 
 		{
 			CRenderableObjectsManager* lROM = lRoom->GetLayers()->GetResource(l_LayerName);
 			if (lROM)
-				m_Layers.push_back(lROM);
+				AddLayer(lROM);
 		}
 	}
+}
+
+void CRenderSceneSceneRendererCommand::AddLayer( CRenderableObjectsManager* aROM )
+{
+	m_Layers.push_back(aROM);
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
