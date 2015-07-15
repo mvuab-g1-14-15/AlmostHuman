@@ -12,7 +12,7 @@ function CStateMachineLUA:Load( FileName )
 	engine:Trace("Init the loading of the state machine " .. FileName)
 
 	File = CXMLTreeNode()
-	if not File:LoadFile( FileName ) then
+	if not File:LoadAndFindNode( FileName ) then
 		--TODO: LOG ERROR
 		engine:Trace("Error loading XML in CStateMachineLUA")
 	end
@@ -29,7 +29,7 @@ function CStateMachineLUA:Load( FileName )
 			TagName = CurrentNode:GetName()
 			
 			if TagName == "state" then
-				Name = CurrentNode:GetPszProperty("name", "no_name", false)
+				Name = CurrentNode:GetAttributeString("name", "no_name")
 				State = CStateLUA(Name)
 				
 				if not State:Load(CurrentNode) then

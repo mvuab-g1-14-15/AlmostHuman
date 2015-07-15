@@ -25,211 +25,281 @@
 
 #include <sstream>
 
+#define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
+
+bool GetAttributeBool( CXMLTreeNode& Node, const char* aAttName, const bool& aDefaultAttValue )
+{
+  return Node.GetAttribute<bool>( aAttName, aDefaultAttValue );
+}
+
+int32 GetAttributeInt( CXMLTreeNode& Node, const char* aAttName, const int32& aDefaultAttValue )
+{
+  return Node.GetAttribute<int32>( aAttName, aDefaultAttValue );
+}
+
+uint32 GetAttributeUint( CXMLTreeNode& Node, const char* aAttName, const uint32& aDefaultAttValue )
+{
+  return Node.GetAttribute<uint32>( aAttName, aDefaultAttValue );
+}
+
+float32 GetAttributeFloat( CXMLTreeNode& Node, const char* aAttName, const float32& aDefaultAttValue )
+{
+  return Node.GetAttribute<float32>( aAttName, aDefaultAttValue );
+}
+
+std::string GetAttributeString( CXMLTreeNode& Node, const char* aAttName, const std::string& aDefaultAttValue )
+{
+  return Node.GetAttribute<std::string>( aAttName, aDefaultAttValue );
+}
+
+Math::CColor GetAttributeColor( CXMLTreeNode& Node, const char* aAttName, const Math::CColor& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::CColor>( aAttName, aDefaultAttValue );
+}
+
+Math::Vect2f GetAttributeVect2f( CXMLTreeNode& Node, const char* aAttName, const Math::Vect2f& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::Vect2f>( aAttName, aDefaultAttValue );
+}
+
+Math::Vect2i GetAttributeVect2i( CXMLTreeNode& Node, const char* aAttName, const Math::Vect2i& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::Vect2i>( aAttName, aDefaultAttValue );
+}
+
+Math::Vect2u GetAttributeVect2u( CXMLTreeNode& Node, const char* aAttName, const Math::Vect2u& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::Vect2u>( aAttName, aDefaultAttValue );
+}
+
+Math::Vect4f GetAttributeVect4f( CXMLTreeNode& Node, const char* aAttName, const Math::Vect4f& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::Vect4f>( aAttName, aDefaultAttValue );
+}
+
+Math::Vect3f GetAttributeVect3f( CXMLTreeNode& Node, const char* aAttName, const Math::Vect3f& aDefaultAttValue )
+{
+  return Node.GetAttribute<Math::Vect3f>( aAttName, aDefaultAttValue );
+}
+
 using namespace luabind;
 
-void registerXML( lua_State *aLuaState )
+void registerXML( lua_State* aLuaState )
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CXMLTreeNode )
-    LUA_DECLARE_DEFAULT_CTOR
-    LUA_DECLARE_METHOD( CXMLTreeNode, Done )
-    LUA_DECLARE_METHOD( CXMLTreeNode, IsOk )
-    LUA_DECLARE_METHOD( CXMLTreeNode, LoadFile )
-    LUA_DECLARE_METHOD( CXMLTreeNode, Exists )
-    LUA_DECLARE_METHOD( CXMLTreeNode, ExistsKey )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CXMLTreeNode )
+  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_METHOD( CXMLTreeNode, Done )
+  LUA_DECLARE_METHOD( CXMLTreeNode, IsOk )
+  LUA_DECLARE_METHOD( CXMLTreeNode, LoadFile )
+  LUA_DECLARE_METHOD( CXMLTreeNode, Exists )
+  LUA_DECLARE_METHOD( CXMLTreeNode, ExistsKey )
+  LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
+  /*
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
 
-    /*
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<bool> )
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<std::string> )
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<Math::Vect3f> )
+      LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
+  */
+  LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
+  LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
+  LUA_END_DECLARATION
 
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<bool> )
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<std::string> )
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<Math::Vect3f> )
-        LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
-    */
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
-    LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
-    LUA_END_DECLARATION
+
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeBool )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeInt )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeUint )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeFloat )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeString )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeColor )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2f )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2i )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2u )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect4f )
+  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect3f )
+
 }
 
-void DA_Normalize( Math::Vect3f *vector3 )
+void DA_Normalize( Math::Vect3f* vector3 )
 {
-    vector3->Normalize( Math::One<float32>() );
+  vector3->Normalize( Math::One<float32>() );
 }
 
-Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f *mat, const Math::Vect3f& vec )
+Math::Vect3f DA_MulMat44fVect3f( Math::Mat44f* mat, const Math::Vect3f& vec )
 {
-    return ( *mat ) * vec;
+  return ( *mat ) * vec;
 }
 
 std::string Vect3f2String( Math::Vect3f vector3 )
 {
-    std::ostringstream ss;
-    ss << "(" << vector3.x << ", " << vector3.y << ", " << vector3.z << ")";
-    std::string s( ss.str() );
+  std::ostringstream ss;
+  ss << "(" << vector3.x << ", " << vector3.y << ", " << vector3.z << ")";
+  std::string s( ss.str() );
 
-    return s;
+  return s;
 }
 
 int BitOr( int a, int b )
 {
-    return a | b;
+  return a | b;
 }
 
-void registerBase( lua_State *m_LS )
+void registerBase( lua_State* m_LS )
 {
-    module( m_LS )
-    [
-        def( "BitOr", &BitOr )
-    ];
-    module( m_LS )
-    [
-        class_<Math::Vect3f>( "Vect3f" )
-        .def( constructor<float, float, float>() )
-        .def( constructor<const Math::Vect3f&>() )
-        .def( constructor<float>() )
-        .def( constructor<>() )
+  module( m_LS )
+  [
+    def( "BitOr", &BitOr )
+  ];
+  module( m_LS )
+  [
+    class_<Math::Vect3f>( "Vect3f" )
+    .def( constructor<float, float, float>() )
+    .def( constructor<const Math::Vect3f&>() )
+    .def( constructor<float>() )
+    .def( constructor<>() )
 
-        .def( const_self + const_self )
-        .def( const_self - const_self )
-        .def( const_self * const_self )
-        .def( const_self ^ const_self )
-        .def( const_self == const_self )
-        .def( const_self * float() )
-        .def( const_self / float() )
-        .def( float() * const_self )
-        .def( float() / const_self )
-        .def( const_self + float() )
-        .def( const_self - float() )
-        .def( float() + const_self )
-        .def( float() - const_self )
-        .def( - const_self )
+    .def( const_self + const_self )
+    .def( const_self - const_self )
+    .def( const_self * const_self )
+    .def( const_self ^ const_self )
+    .def( const_self == const_self )
+    .def( const_self * float() )
+    .def( const_self / float() )
+    .def( float() * const_self )
+    .def( float() / const_self )
+    .def( const_self + float() )
+    .def( const_self - float() )
+    .def( float() + const_self )
+    .def( float() - const_self )
+    .def( - const_self )
 
-        .def_readwrite( "x", &Math::Vect3f::x )
-        .def_readwrite( "y", &Math::Vect3f::y )
-        .def_readwrite( "z", &Math::Vect3f::z )
+    .def_readwrite( "x", &Math::Vect3f::x )
+    .def_readwrite( "y", &Math::Vect3f::y )
+    .def_readwrite( "z", &Math::Vect3f::z )
 
-        .def( "CrossProduct", &Math::Vect3f::CrossProduct )
-        .def( "Normalize", &DA_Normalize )
-        .def( "Length", &Math::Vect3f::Length )
-        .def( "DotProduct", &Math::Vect3f::DotProduct )
-        .def( "ToString", &Vect3f2String )
+    .def( "CrossProduct", &Math::Vect3f::CrossProduct )
+    .def( "Normalize", &DA_Normalize )
+    .def( "Length", &Math::Vect3f::Length )
+    .def( "DotProduct", &Math::Vect3f::DotProduct )
+    .def( "ToString", &Vect3f2String )
 
-        .def( "RotateY", &Math::Vect3f::RotateY )
-    ];
-    module( m_LS )
-    [
-        class_<Math::Vect4f>( "Vect4f" )
-        .def( constructor<float, float, float, float>() )
-        .def( constructor<const Math::Vect4f&>() )
-        .def( constructor<float>() )
-        .def( constructor<>() )
+    .def( "RotateY", &Math::Vect3f::RotateY )
+  ];
+  module( m_LS )
+  [
+    class_<Math::Vect4f>( "Vect4f" )
+    .def( constructor<float, float, float, float>() )
+    .def( constructor<const Math::Vect4f&>() )
+    .def( constructor<float>() )
+    .def( constructor<>() )
 
-        .def_readwrite( "x", &Math::Vect4f::x )
-        .def_readwrite( "y", &Math::Vect4f::y )
-        .def_readwrite( "z", &Math::Vect4f::z )
-        .def_readwrite( "w", &Math::Vect4f::w )
-    ];
-    module( m_LS )
-    [
-        class_<Math::Mat44f>( "Mat44f" )
-        .def( constructor<>() )
-        .def( "Mul", DA_MulMat44fVect3f )
+    .def_readwrite( "x", &Math::Vect4f::x )
+    .def_readwrite( "y", &Math::Vect4f::y )
+    .def_readwrite( "z", &Math::Vect4f::z )
+    .def_readwrite( "w", &Math::Vect4f::w )
+  ];
+  module( m_LS )
+  [
+    class_<Math::Mat44f>( "Mat44f" )
+    .def( constructor<>() )
+    .def( "Mul", DA_MulMat44fVect3f )
 
-        .def( "SetRotByAngleX", &Math::Mat44f::SetRotByAngleX )
-        .def( "SetRotByAngleY", &Math::Mat44f::SetRotByAngleY )
-        .def( "SetRotByAngleZ", &Math::Mat44f::SetRotByAngleZ )
-        //.def("SetScale", &Math::Mat44f::SetScale) //TODO to ask
-        .def( "SetIdentity", &Math::Mat44f::SetIdentity )
-        .def( "SetPos", ( Math::Mat44f & ( Math::Mat44f::* )( const Math::Vect3f& ) ) &Math::Mat44f::SetPos )
-        .def( "GetPos", &Math::Mat44f::GetPos )
-        .def( "GetScaleX", &Math::Mat44f::GetScaleX )
-        .def( "GetScaleY", &Math::Mat44f::GetScaleY )
-        .def( "GetScaleZ", &Math::Mat44f::GetScaleZ )
-        .def( "GetAngleX", &Math::Mat44f::GetAngleX )
-        .def( "GetAngleY", &Math::Mat44f::GetAngleY )
-        .def( "GetAngleZ", &Math::Mat44f::GetAngleZ )
-        .def( "GetRoll", &Math::Mat44f::GetRoll )
-        .def( "GetPitch", &Math::Mat44f::GetPitch )
-        .def( "GetYaw", &Math::Mat44f::GetYaw )
-        .def( "GetPitchRollYaw", &Math::Mat44f::GetPitchRollYaw )
-        .def( "GetRotedByAngleX", &Math::Mat44f::GetRotedByAngleX )
-        .def( "GetRotedByAngleY", &Math::Mat44f::GetRotedByAngleY )
-        .def( "GetRotedByAngleZ", &Math::Mat44f::GetRotedByAngleZ )
-        .def( "GetRotedByAnglesXZ", &Math::Mat44f::GetRotedByAnglesXZ )
-        .def( "GetRotedByAnglesYXZ", &Math::Mat44f::GetRotedByAnglesYXZ )
-        .def( "GetTranslated", &Math::Mat44f::GetTranslated )
-        .def( "GetScaled", &Math::Mat44f::GetScaled )
-        .def( "RotByAngleX", &Math::Mat44f::RotByAngleX )
-        .def( "RotByAngleY", &Math::Mat44f::RotByAngleY )
-        .def( "RotByAngleZ", &Math::Mat44f::RotByAngleZ )
-        .def( "RotByAnglesXZ", &Math::Mat44f::RotByAnglesXZ )
-        .def( "RotByAnglesYXZ", &Math::Mat44f::RotByAnglesYXZ )
-        .def( "GetScale", &Math::Mat44f::GetScale )
-        .def( "GetScaleX", &Math::Mat44f::GetScaleX )
-        .def( "GetScaleY", &Math::Mat44f::GetScaleY )
-        .def( "GetScaleZ", &Math::Mat44f::GetScaleZ )
-        .def( "Translate", &Math::Mat44f::Translate )
-        .def( "Transpose", &Math::Mat44f::Transpose )
-        .def( "RotByAngleX", &Math::Mat44f::RotByAngleX )
-        .def( "RotByAngleY", &Math::Mat44f::RotByAngleY )
-        .def( "RotByAngleZ", &Math::Mat44f::RotByAngleZ )
-        .def( "RotByAnglesXZ", &Math::Mat44f::RotByAnglesXZ )
-        .def( "RotByAnglesYXZ", &Math::Mat44f::RotByAnglesYXZ )
-        .def( "GetAnglesYXZ", &Math::Mat44f::GetAnglesYXZ )
-        .def( "GetAngleX", &Math::Mat44f::GetAngleX )
-        .def( "GetAngleY", &Math::Mat44f::GetAngleY )
-        .def( "GetAngleZ", &Math::Mat44f::GetAngleZ )
-    ];
-    module( m_LS )
-    [
-        class_<CName>( "CName" )
-        .def( constructor<>() )
-        .def( "SetName", &CName::SetName )
-        .def( "GetName", &CName::GetName )
-    ];
-    module( m_LS )
-    [
-        class_<CVisible>( "CVisible" )
-        .def( constructor<>() )
-        .def( "SetVisible", &CVisible::SetVisible )
-        .def( "GetVisible", &CVisible::GetVisible )
-    ];
-    module( m_LS )
-    [
-        class_<CCountDownTimerManager>( "CCountDownTimerManager" )
-        .def( constructor<>() )
-        .def( "AddTimer", &CCountDownTimerManager::AddTimer )
-        .def( "isTimerFinish", &CCountDownTimerManager::isTimerFinish )
-        .def( "SetTime", &CCountDownTimerManager::SetTime )
-        .def( "GetTime", &CCountDownTimerManager::GetTime )
-        .def( "GetElapsedTimeInPercent", &CCountDownTimerManager::GetElapsedTimeInPercent )
-        .def( "GetLeftoverTime", &CCountDownTimerManager::GetLeftoverTime )
-        .def( "GetElpasedTime", &CCountDownTimerManager::GetElpasedTime )
-        .def( "ChangeTotalTime", &CCountDownTimerManager::ChangeTotalTime )
-        .def( "Reset", &CCountDownTimerManager::Reset )
-        .def( "ExistTimer", &CCountDownTimerManager::ExistTimer )
-        .def( "IsActive", &CCountDownTimerManager::IsActive )
-        .def( "SetActive", &CCountDownTimerManager::SetActive )
-    ];
-    module( m_LS )
-    [
-        class_<CTimer>( "CTimer" )
-        .def( "GetElapsedTime", &CTimer::GetElapsedTime )
-    ];
-    module( m_LS )
-    [
-        class_<Math::CColor>( "CColor" )
-        .def( constructor<float, float, float, float>() )
-        .def( constructor<>() )
-        .def( constructor<const Math::Vect4f&>() )
-    ];
+    .def( "SetRotByAngleX", &Math::Mat44f::SetRotByAngleX )
+    .def( "SetRotByAngleY", &Math::Mat44f::SetRotByAngleY )
+    .def( "SetRotByAngleZ", &Math::Mat44f::SetRotByAngleZ )
+    //.def("SetScale", &Math::Mat44f::SetScale) //TODO to ask
+    .def( "SetIdentity", &Math::Mat44f::SetIdentity )
+    .def( "SetPos", ( Math::Mat44f & ( Math::Mat44f::* )( const Math::Vect3f& ) ) &Math::Mat44f::SetPos )
+    .def( "GetPos", &Math::Mat44f::GetPos )
+    .def( "GetScaleX", &Math::Mat44f::GetScaleX )
+    .def( "GetScaleY", &Math::Mat44f::GetScaleY )
+    .def( "GetScaleZ", &Math::Mat44f::GetScaleZ )
+    .def( "GetAngleX", &Math::Mat44f::GetAngleX )
+    .def( "GetAngleY", &Math::Mat44f::GetAngleY )
+    .def( "GetAngleZ", &Math::Mat44f::GetAngleZ )
+    .def( "GetRoll", &Math::Mat44f::GetRoll )
+    .def( "GetPitch", &Math::Mat44f::GetPitch )
+    .def( "GetYaw", &Math::Mat44f::GetYaw )
+    .def( "GetPitchRollYaw", &Math::Mat44f::GetPitchRollYaw )
+    .def( "GetRotedByAngleX", &Math::Mat44f::GetRotedByAngleX )
+    .def( "GetRotedByAngleY", &Math::Mat44f::GetRotedByAngleY )
+    .def( "GetRotedByAngleZ", &Math::Mat44f::GetRotedByAngleZ )
+    .def( "GetRotedByAnglesXZ", &Math::Mat44f::GetRotedByAnglesXZ )
+    .def( "GetRotedByAnglesYXZ", &Math::Mat44f::GetRotedByAnglesYXZ )
+    .def( "GetTranslated", &Math::Mat44f::GetTranslated )
+    .def( "GetScaled", &Math::Mat44f::GetScaled )
+    .def( "RotByAngleX", &Math::Mat44f::RotByAngleX )
+    .def( "RotByAngleY", &Math::Mat44f::RotByAngleY )
+    .def( "RotByAngleZ", &Math::Mat44f::RotByAngleZ )
+    .def( "RotByAnglesXZ", &Math::Mat44f::RotByAnglesXZ )
+    .def( "RotByAnglesYXZ", &Math::Mat44f::RotByAnglesYXZ )
+    .def( "GetScale", &Math::Mat44f::GetScale )
+    .def( "GetScaleX", &Math::Mat44f::GetScaleX )
+    .def( "GetScaleY", &Math::Mat44f::GetScaleY )
+    .def( "GetScaleZ", &Math::Mat44f::GetScaleZ )
+    .def( "Translate", &Math::Mat44f::Translate )
+    .def( "Transpose", &Math::Mat44f::Transpose )
+    .def( "RotByAngleX", &Math::Mat44f::RotByAngleX )
+    .def( "RotByAngleY", &Math::Mat44f::RotByAngleY )
+    .def( "RotByAngleZ", &Math::Mat44f::RotByAngleZ )
+    .def( "RotByAnglesXZ", &Math::Mat44f::RotByAnglesXZ )
+    .def( "RotByAnglesYXZ", &Math::Mat44f::RotByAnglesYXZ )
+    .def( "GetAnglesYXZ", &Math::Mat44f::GetAnglesYXZ )
+    .def( "GetAngleX", &Math::Mat44f::GetAngleX )
+    .def( "GetAngleY", &Math::Mat44f::GetAngleY )
+    .def( "GetAngleZ", &Math::Mat44f::GetAngleZ )
+  ];
+  module( m_LS )
+  [
+    class_<CName>( "CName" )
+    .def( constructor<>() )
+    .def( "SetName", &CName::SetName )
+    .def( "GetName", &CName::GetName )
+  ];
+  module( m_LS )
+  [
+    class_<CVisible>( "CVisible" )
+    .def( constructor<>() )
+    .def( "SetVisible", &CVisible::SetVisible )
+    .def( "GetVisible", &CVisible::GetVisible )
+  ];
+  module( m_LS )
+  [
+    class_<CCountDownTimerManager>( "CCountDownTimerManager" )
+    .def( constructor<>() )
+    .def( "AddTimer", &CCountDownTimerManager::AddTimer )
+    .def( "isTimerFinish", &CCountDownTimerManager::isTimerFinish )
+    .def( "SetTime", &CCountDownTimerManager::SetTime )
+    .def( "GetTime", &CCountDownTimerManager::GetTime )
+    .def( "GetElapsedTimeInPercent", &CCountDownTimerManager::GetElapsedTimeInPercent )
+    .def( "GetLeftoverTime", &CCountDownTimerManager::GetLeftoverTime )
+    .def( "GetElpasedTime", &CCountDownTimerManager::GetElpasedTime )
+    .def( "ChangeTotalTime", &CCountDownTimerManager::ChangeTotalTime )
+    .def( "Reset", &CCountDownTimerManager::Reset )
+    .def( "ExistTimer", &CCountDownTimerManager::ExistTimer )
+    .def( "IsActive", &CCountDownTimerManager::IsActive )
+    .def( "SetActive", &CCountDownTimerManager::SetActive )
+  ];
+  module( m_LS )
+  [
+    class_<CTimer>( "CTimer" )
+    .def( "GetElapsedTime", &CTimer::GetElapsedTime )
+  ];
+  module( m_LS )
+  [
+    class_<Math::CColor>( "CColor" )
+    .def( constructor<float, float, float, float>() )
+    .def( constructor<>() )
+    .def( constructor<const Math::Vect4f&>() )
+  ];
 
-    module( m_LS )
-    [
-        class_<CManager>( "CManager" )
-    ];
+  module( m_LS )
+  [
+    class_<CManager>( "CManager" )
+  ];
 
-    registerXML( m_LS );
+  registerXML( m_LS );
 }
