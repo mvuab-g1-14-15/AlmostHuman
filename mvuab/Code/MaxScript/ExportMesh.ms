@@ -320,7 +320,13 @@ struct SMesh
 	m_SubMeshes = #(),
 	m_AABB = SAABB(),
 	m_BS = SBndSphere(),
+	m_ObjName = "",
     m_MaterialsHashTable = dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.String]",
+	
+	fn SetObjName Obj =
+	(
+		m_ObjName = Obj.name
+	),
 	
 	fn CreateSubMeshes Obj =
 	(
@@ -544,7 +550,8 @@ struct SMesh
 			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 			actualObj = newObj[1]
 			convertToMesh actualObj
-
+			
+			SetObjName Obj
 			CreateSubMeshes actualObj
 			CreateBuffers actualObj
 			m_AABB.CalculateFromObject actualObj
@@ -574,6 +581,12 @@ struct SMesh
 		WriteShort file counter #unsigned--Write number of materials
 		format "Submeshes: %\n" counter
 		
+		if m_SubMeshes == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 submeshes.")
+			exit
+		)
+			
 		for iSubMesh in m_SubMeshes do
 		(
 			--format "Current Submesh%\n" iSubMesh
@@ -581,6 +594,11 @@ struct SMesh
 			(
 				--format "--------------m_Material: %\n" iSubMesh.m_Material
 				iSubMesh.WriteToFile file
+			)
+			else
+			(
+				messageBox ("The object " + m_ObjName + " has 0 vertex and index.")
+				exit
 			)
 		)
 		
