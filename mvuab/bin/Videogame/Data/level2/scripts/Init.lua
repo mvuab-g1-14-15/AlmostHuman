@@ -9,6 +9,7 @@ local initialized = false
 
 function load_basics()
 	-- basic loads
+	scene:ActivateRoom("room1")
 	scene:ActivateRoom("room2")
 end
 

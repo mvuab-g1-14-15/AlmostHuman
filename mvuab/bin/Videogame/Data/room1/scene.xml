@@ -1,6 +1,0 @@
-<scene>
-	<room level="room1" path="Data/room1" file="room1.xml"/>
-	<room level="room2" path="Data/room2" file="room2.xml"/>
-	<room level="room3" path="Data/room3" file="room3.xml"/>
-	<room level="room4" path="Data/room4" file="room4.xml"/>
-</scene>
