@@ -2,8 +2,8 @@ dofile("./data/level2/scripts/Enemy.lua")
 
 class 'CPatrolEnemyLUA' (CEnemyLUA)
 
-function CPatrolEnemyLUA:__init(waypoints)
-	CEnemyLUA.__init(self, waypoints[1])
+function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
+	CEnemyLUA.__init(Node, state_machine, core_enemy)
 	
 	self.Waypoints = waypoints
 	self.ActualWaypoint = 1
@@ -12,6 +12,7 @@ function CPatrolEnemyLUA:__init(waypoints)
 	
 	engine:Trace("CPatrolEnemyLUA: " .. self.Name .. " initialized")
 end
+
 
 function CPatrolEnemyLUA:Update()
 	CEnemyLUA.Update(self)

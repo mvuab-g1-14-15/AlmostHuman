@@ -95,6 +95,7 @@ void registerXML( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CXMLTreeNode, Exists )
   LUA_DECLARE_METHOD( CXMLTreeNode, ExistsKey )
   LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
+  LUA_DECLARE_METHOD( CXMLTreeNode, LoadAndFindNode )
   /*
       LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
       LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )

@@ -12,12 +12,11 @@ function CStateMachineLUA:Load( FileName )
 	engine:Trace("Init the loading of the state machine " .. FileName)
 
 	File = CXMLTreeNode()
-	if not File:LoadAndFindNode( FileName ) then
+	TreeNode = CXMLTreeNode()
+	if not File:LoadAndFindNode( FileName, "state_machine", TreeNode) then
 		--TODO: LOG ERROR
 		engine:Trace("Error loading XML in CStateMachineLUA")
 	end
-	
-	TreeNode = File:GetNode("state_machine")
 	
 	if TreeNode:Exists() then
 		count = TreeNode:GetNumChildren()
