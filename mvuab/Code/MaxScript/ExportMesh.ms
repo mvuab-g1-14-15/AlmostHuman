@@ -578,15 +578,22 @@ struct SMesh
 				counter = counter + 1
 			)
 		)
-		WriteShort file counter #unsigned--Write number of materials
-		format "Submeshes: %\n" counter
 		
 		if m_SubMeshes == 0 then
 		(
 			messageBox ("The object " + m_ObjName + " has 0 submeshes.")
 			exit
 		)
-			
+		
+		if counter == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 vertex and index.")
+			exit
+		)
+		
+		WriteShort file counter #unsigned--Write number of materials
+		format "Submeshes: %\n" counter
+		
 		for iSubMesh in m_SubMeshes do
 		(
 			--format "Current Submesh%\n" iSubMesh
@@ -594,11 +601,6 @@ struct SMesh
 			(
 				--format "--------------m_Material: %\n" iSubMesh.m_Material
 				iSubMesh.WriteToFile file
-			)
-			else
-			(
-				messageBox ("The object " + m_ObjName + " has 0 vertex and index.")
-				exit
 			)
 		)
 		
