@@ -82,6 +82,15 @@ Math::Vect3f GetAttributeVect3f( CXMLTreeNode& Node, const char* aAttName, const
   return Node.GetAttribute<Math::Vect3f>( aAttName, aDefaultAttValue );
 }
 
+float aTan2( float x, float y )
+{
+  return Math::Utils::ATan2( x, y );
+}
+
+float Abs( float x )
+{
+  return Math::Utils::Abs( x );
+}
 using namespace luabind;
 
 void registerXML( lua_State* aLuaState )
@@ -95,7 +104,19 @@ void registerXML( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CXMLTreeNode, Exists )
   LUA_DECLARE_METHOD( CXMLTreeNode, ExistsKey )
   LUA_DECLARE_METHOD( CXMLTreeNode, GetName )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeBool )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeInt )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeUint )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeFloat )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeString )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeColor )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect2f )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect2i )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect2u )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect4f )
+  .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect3f )
   LUA_DECLARE_METHOD( CXMLTreeNode, LoadAndFindNode )
+  LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
   /*
       LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
       LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
@@ -103,7 +124,6 @@ void registerXML( lua_State* aLuaState )
       LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<bool> )
       LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<std::string> )
       LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<Math::Vect3f> )
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
   */
   LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
   LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
@@ -150,6 +170,8 @@ int BitOr( int a, int b )
 
 void registerBase( lua_State* m_LS )
 {
+  REGISTER_LUA_FUNCTION( m_LS, aTan2 )
+  REGISTER_LUA_FUNCTION( m_LS, Abs )
   module( m_LS )
   [
     def( "BitOr", &BitOr )

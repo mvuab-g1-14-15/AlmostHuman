@@ -13,12 +13,12 @@ end
 function CStateLUA:Load( Node )
 	local count = Node:GetNumChildren()
 	
-	for i = 0, count do
+	for i = 0, count-1 do
 		CurrentNode = Node:GetChildren(i)
 		TagName = CurrentNode:GetName()
 		
 		if TagName == "on_enter" then
-			for j = 0, CurrentNode:GetNumChildren() do
+			for j = 0, CurrentNode:GetNumChildren()-1 do
 				CurrentSubNode = CurrentNode:GetChildren(j)
 				ActualTagName = CurrentSubNode:GetName()
         
@@ -28,7 +28,7 @@ function CStateLUA:Load( Node )
 				end
 			end
 		elseif TagName == "on_exit" then
-			for j = 0, CurrentNode:GetNumChildren() do
+			for j = 0, CurrentNode:GetNumChildren()-1 do
 				CurrentSubNode = CurrentNode:GetChildren(j)
 				ActualTagName = CurrentSubNode:GetName()
         
@@ -38,7 +38,7 @@ function CStateLUA:Load( Node )
 				end
 			end
 		elseif TagName == "update" then
-			for j = 0, CurrentNode:GetNumChildren() do
+			for j = 0, CurrentNode:GetNumChildren()-1 do
 				CurrentSubNode = CurrentNode:GetChildren(j)
 				ActualTagName = CurrentSubNode:GetName()
         
@@ -70,7 +70,7 @@ function CStateLUA:SetOnExitActions( Actions )
 end
 
 function CStateLUA:GetUpdateActions()
-	return self.OnEnterActions
+	return self.UpdateActions
 end
 
 function CStateLUA:SetUpdateActions( Actions )

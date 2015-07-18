@@ -1,6 +1,6 @@
 class 'CCoreEnemyLUA'
 
-function CCoreEnemyLUA:__Init()
+function CCoreEnemyLUA:__init()
 	self.EnemyType = "no_type"
 	self.Life = 0.0
     self.RespawnTime = 0.0

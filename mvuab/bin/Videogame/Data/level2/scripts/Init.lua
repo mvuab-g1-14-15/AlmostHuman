@@ -1,8 +1,9 @@
 dofile("./data/level2/scripts/Player.lua")
-dofile("./data/level2/scripts/PatrolEnemy.lua")
+dofile("./data/level2/scripts/EnemyManager.lua")
 
 g_Player = nil
 g_HUD = nil
+g_EnemyManager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
 local initialized = false
@@ -16,7 +17,7 @@ function load_gameplay()
     g_Player = CPlayer()
 	g_Player:SetEnergy(0.0)
 	g_HUD = CHUD()
-	
+	g_EnemyManager = CEnemyManagerLUA()
 	--local pos = Vect3f( 0.0, 0.0, 0.0 )
 	local waypoints = {Vect3f(-2.12, 0.4, 5.19), Vect3f(3.30, 0.4, 2.94)}
 	--g_Enemy = CPatrolEnemyLUA(waypoints)
@@ -31,6 +32,8 @@ function update_gameplay()
 	if not initialized then
 		load_gameplay()
 	end
+	
+	g_EnemyManager:Update()
 	
 	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()

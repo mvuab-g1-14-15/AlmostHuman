@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <enemies>
-	<route id="0">
+	<route id="1">
 		<point value="73.7825 -18.4127 -43.6002"/>
 		<point value="70.6929 -18.4127 -43.8464"/>
 		<point value="66.8798 -18.4127 -45.1014"/>
@@ -12,14 +12,14 @@
 		<point value="76.9249 -18.4127 -52.2043"/>
 		<point value="76.5528 -18.4127 -45.8193"/>
 	</route>
-	<route id="1">
+	<route id="2">
 		<point value="57.7057 -18.4127 -44.8169"/>
 		<point value="57.7057 -18.4127 -53.3287"/>
 		<point value="50.0715 -18.4127 -53.3287"/>
 		<point value="50.0715 -18.4127 -64.045"/>
 		<point value="57.582 -18.4127 -64.045"/>
 	</route>
-	<route id="2">
+	<route id="3">
 		<point value="71.263 -18.4127 -75.3886"/>
 		<point value="57.4167 -18.4127 -74.6642"/>
 		<point value="50.6465 -18.4127 -75.0935"/>
@@ -32,7 +32,7 @@
 	<core_enemy type="patroll" life="100" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Enemy1" type="patroll" route="0" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="enemy1"/>
-	<enemy name="Enemy2" type="patroll" route="1" pos="57.7057 -16.4127 -44.8169" yaw="0.0" mesh="enemy1"/>
-	<enemy name="Enemy3" type="patroll" route="2" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1"/>
+	<enemy name="Enemy1" type="patroll" route="1" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="enemy1"/>
+	<enemy name="Enemy2" type="patroll" route="2" pos="57.7057 -16.4127 -44.8169" yaw="0.0" mesh="enemy1"/>
+	<enemy name="Enemy3" type="patroll" route="3" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1"/>
 </enemies>

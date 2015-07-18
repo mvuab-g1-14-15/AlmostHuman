@@ -1,18 +1,25 @@
+dofile("./data/level2/scripts/StateMachine.lua")
+dofile("./data/level2/scripts/CoreEnemy.lua")
+
 class 'CEnemyManagerLUA'
 
-function CEnemyManagerLUA:__Init(name)
+function CEnemyManagerLUA:__init()
+	--Mapas
 	self.StatesMachine = {}
 	self.CoreEnemy = {}
 	self.Enemy = {}
 	self.Routes = {}
-	self:Load(name)
+	self.ActualEnemy = nil
+	self.AStar = CAStar()
+	self:Load("Data/enemies/enemies.xml")
+	
 end
 
 function CEnemyManagerLUA:Load(filename)
 	
 	l_File = CXMLTreeNode()
 	Node = CXMLTreeNode()
-    if not l_File:LoadFile( filename.c_str(), "enemies", Node ) then
+    if not l_File:LoadAndFindNode( filename, "enemies", Node ) then
         engine:Trace( "File '"..filename.."' not correctly loaded" )
     end
 
@@ -21,27 +28,32 @@ function CEnemyManagerLUA:Load(filename)
 
         for i = 0, count do
 			CurrentNode = Node:GetChildren(i)
-            l_TagName = CurrentNode.GetName();
+            l_TagName = CurrentNode:GetName()
 
             if ( l_TagName == "enemy" ) then
                 self:AddNewEnemy( CurrentNode )
-            end
-			if ( l_TagName == "core_enemy" ) then           
+            elseif ( l_TagName == "core_enemy" ) then           
                 self:AddNewCoreEnemy( CurrentNode )                          
-            end
-			if ( l_TagName == "route" ) then           
+            elseif( l_TagName == "route" ) then           
                 self:AddNewRoute( CurrentNode )
             end
 
         end
     end
+	
+	self.AStar:Init()
 end
 
 function CEnemyManagerLUA:Update()
-
+	for i in pairs (self.Enemy) do
+		self.ActualEnemy = self.Enemy[i]
+		self.ActualEnemy:Update()
+	end
+	
 end
 
 function CEnemyManagerLUA:AddNewCoreEnemy( Node )
+	
 	
 	CoreEnemy = CCoreEnemyLUA()
     
@@ -65,21 +77,20 @@ end
 
 function CEnemyManagerLUA:AddNewRoute( Node )
 	l_Id = Node:GetAttributeInt( "id", -1 )
-    count = Node:GetNumChildren();
-    l_Route = {};
-
-    for i = 0, count do
+    count = Node:GetNumChildren()
+    l_Route = {}
+    for i = 0, count-1 do
 		CurrentNode = Node:GetChildren(i)
-        l_Point = CurrentNode.GetAttributeVect3f( "value", Vect3f( 0.0, -99999999.0, 0.0 ) )
-
+        l_Point = Vect3f(CurrentNode:GetAttributeVect3f( "value", Vect3f( 0.0, -99999999.0, 0.0 ) ))
+		engine:Trace("Nodo ".. i)
         if ( l_Point == Vect3f( 0.0, -99999999.0, 0.0 ) ) then        
             engine:Trace( "Point in the route '".. l_Id .."' not correctly loaded.")        
-        else        
+        else     
             table.insert(l_Route, l_Point)
         end
     end
 
-    self.Routes[l_Id] = l_Route;
+    self.Routes[l_Id] = l_Route
 end
 
 function CEnemyManagerLUA:AddNewEnemy( Node )
@@ -98,9 +109,24 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 	
 	lEnemy = nil
 	
-    if lType == "patrol" then
+    if lType == "patroll" then
+		engine:Trace("He entrado en el tipo: "..lType)
 		lEnemy = CPatrolEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)
 	end
-	
-	self.Enemy[Node:GetAttributeString("name", "no_name")] = lEnemy
+	name = Node:GetAttributeString("name", "no_name")
+	engine:Trace("Enemigo: "..name)
+	self.Enemy[name] = lEnemy
+	self.ActualEnemy = lEnemy
+end
+
+function CEnemyManagerLUA:GetActualEnemy()
+	return self.ActualEnemy
+end
+
+function CEnemyManagerLUA:GetAStar()
+	return self.AStar
+end
+
+function CEnemyManagerLUA:GetResource(name)
+	return self.Enemy[name]
 end

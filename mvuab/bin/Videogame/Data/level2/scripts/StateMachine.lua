@@ -1,9 +1,9 @@
 class 'CStateMachineLUA'
 
 function CStateMachineLUA:__init( Name )
+	self.States = {}
 	self:Load( Name )
 	
-	self.States = {}
 end
 
 function CStateMachineLUA:Load( FileName )
@@ -23,7 +23,7 @@ function CStateMachineLUA:Load( FileName )
 		
 		engine:Trace("State machine number of states is " .. count)
 		
-		for i = 0, count do
+		for i = 0, count-1 do
 			CurrentNode = TreeNode:GetChildren(i)
 			TagName = CurrentNode:GetName()
 			
@@ -51,4 +51,8 @@ function CStateMachineLUA:CleanUp()
 	for k in pairs (self.States) do
 		self.States[k] = nil
 	end
+end
+
+function CStateMachineLUA:GetState(State)
+	return self.States[State]
 end
