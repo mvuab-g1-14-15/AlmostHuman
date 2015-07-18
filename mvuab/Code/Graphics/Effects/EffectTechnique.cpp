@@ -1,6 +1,7 @@
 #include "EffectTechnique.h"
 #include "EffectManager.h"
 #include "Effect.h"
+#include "EffectFlags.h"
 #include "Lights\LightManager.h"
 #include "Cameras\CameraManager.h"
 
@@ -13,6 +14,7 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
                                     CXMLTreeNode& HandlesNode )
     : m_TechniqueName( TechniqueName ),
       m_EffectName( EffectName ),
+      mFlags( new CEffectFlags( HandlesNode ) ),
       m_UseCameraPosition( HandlesNode.GetAttribute<bool>( "use_camera_position", false ) ),
       m_UseInverseProjMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_projection_matrix", false ) ),
       m_UseInverseViewMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_view_matrix", false ) ),

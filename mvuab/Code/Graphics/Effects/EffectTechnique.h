@@ -2,15 +2,16 @@
 #ifndef EFFECT_TECHNIQUE_H
 #define EFFECT_TECHNIQUE_H
 
-#include "d3dx9.h"
 #include "XML\XMLTreeNode.h"
 #include "Math/Color.h"
 #include <string>
 #include "Utils\Defines.h"
 #include "Utils\Types.h"
 #include "Effects\Defines.h"
+#include "dx9.h"
 
 class CEffect;
+class CEffectFlags;
 
 class CEffectTechnique
 {
@@ -75,6 +76,7 @@ private: // Members
   EFogFunction                m_FogFun;
 
   CEffect*                    m_Effect;
+  CEffectFlags*               mFlags;
   D3DXHANDLE                  m_D3DTechnique;
   std::string                 m_TechniqueName;
   std::string                 m_EffectName;

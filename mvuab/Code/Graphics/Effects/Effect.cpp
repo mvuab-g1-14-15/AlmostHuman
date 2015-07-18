@@ -1,6 +1,7 @@
 #include "Effect.h"
 
 #include "EffectManager.h"
+#include "EffectPool.h"
 #include "EffectTechnique.h"
 #include "GraphicsManager.h"
 #include "Lights/DirectionalLight.h"
@@ -64,6 +65,7 @@ CEffect::CEffect( const std::string& EffectName )
 
 CEffect::~CEffect()
 {
+   m_Effect->End();
     CHECKED_RELEASE( m_Effect );
 
     for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )
@@ -197,7 +199,7 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
             m_FileName.c_str() );
 }
 
-bool CEffect::LoadEffect()
+bool CEffect::LoadEffect( CEffectPool* aEffectPool )
 {
     bool lOk(true);
     // Obtain the device from the graphics manager and load the effect
@@ -211,7 +213,7 @@ bool CEffect::LoadEffect()
                        &m_Defines[0],
                        0, // LPD3DXINCLUDE pInclude,
                        dwShaderFlags,
-                       0, // LPD3DXEFFECTPOOL pPool,
+                       (aEffectPool) ? aEffectPool->GetD3DEffectPool() : 0,
                        &m_Effect,
                        &l_ErrorBuffer );
 
@@ -240,10 +242,10 @@ bool CEffect::LoadEffect()
     return lOk;
 }
 
-bool CEffect::Reload()
+bool CEffect::Reload(CEffectPool* aEffectPool)
 {
     Unload();
-    return LoadEffect();
+    return LoadEffect(aEffectPool);
 }
 
 void CEffect::Unload()
@@ -252,7 +254,7 @@ void CEffect::Unload()
     CHECKED_RELEASE( m_Effect );
 }
 
-bool CEffect::Load( CXMLTreeNode& EffectNode )
+bool CEffect::Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool )
 {
     m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
 
@@ -275,7 +277,7 @@ bool CEffect::Load( CXMLTreeNode& EffectNode )
 
     D3DXMACRO null = { NULL, NULL };
     m_Defines.push_back( null );
-    return LoadEffect();
+    return LoadEffect(aEffectPool);
 }
 
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )

@@ -14,17 +14,18 @@
 #define Deg2Rad(x)  (x * PI / 180.0)
 
 //
-// Matrices
+// Shared Parameters 
 //
-float4x4 g_WorldViewProj                                            : WorldViewProjection;
-float4x4 g_ViewMatrix                                               : ViewMatrix;
-float4x4 g_ViewInverseMatrix                                        : ViewInverse;
-float4x4 g_ProjectionInverseMatrix                                  : ProjectionInverse;
-float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
-float4x4 g_WorldMatrix                                              : WorldMatrix;
-float4x4 g_WorldInverseMatrix                                       : WorldInverse;
-float4x4 g_WorldViewMatrix                                          : WorldView;
-float4x4 g_ViewProjMatrix                                           : ViewProjection;
+shared float4x4 g_WorldViewProj                                            : WorldViewProjection;
+shared float4x4 g_ViewMatrix                                               : ViewMatrix;
+shared float4x4 g_ViewInverseMatrix                                        : ViewInverse;
+shared float4x4 g_ProjectionInverseMatrix                                  : ProjectionInverse;
+shared float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
+shared float4x4 g_WorldMatrix                                              : WorldMatrix;
+shared float4x4 g_WorldInverseMatrix                                       : WorldInverse;
+shared float4x4 g_WorldViewMatrix                                          : WorldView;
+shared float4x4 g_ViewProjMatrix                                           : ViewProjection;
+shared float3   g_CameraPosition                                           : CameraPosition;
 
 //
 // Debug semantics
@@ -42,11 +43,6 @@ bool 		g_UseShadowMaskTexture 								    : UseShadowMaskTexture;
 bool 		g_UseShadowMapStatic 									: UseStaticShadowMap;
 bool 		g_UseShadowMapDynamic 									: UseDynamicShadowMap;
 int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
-
-//
-// Camera data
-//
-float3      g_CameraPosition                                        : CameraPosition;
 
 float	    g_Size													: Size;
 int	        g_Angle													: Angle;

@@ -300,6 +300,12 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
+    <ClCompile Include="Effects\EffectFlags.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects\SharedEffect.cpp">
+      <Filter>Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -610,6 +616,13 @@
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
       <Filter>RenderableVertex</Filter>
     </ClInclude>
+    <ClInclude Include="Effects\EffectFlags.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects\SharedEffect.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="dx9.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">

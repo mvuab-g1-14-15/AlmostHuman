@@ -12,6 +12,7 @@
 #include "XML\XMLTreeNode.h"
 
 class CLight;
+class CEffectPool;
 
 class CEffect: public CName
 {
@@ -34,8 +35,8 @@ class CEffect: public CName
         bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
         bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-        bool Load( CXMLTreeNode& EffectNode );
-        bool Reload();
+        bool Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool );
+        bool Reload(CEffectPool* aEffectPool);
 
         //DirectX Methods Interface
         D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
@@ -131,9 +132,11 @@ class CEffect: public CName
         void SetAngle( float aAngle );
         void SetAmbientLightColor( const Math::Vect3f& aAmbienLightColor );
 
+   protected:
+      LPD3DXEFFECT m_Effect;
+
     private: // Members
         std::string m_FileName;
-        LPD3DXEFFECT m_Effect;
         BOOL m_LightsEnabled[MAX_LIGHTS_BY_SHADER];
         int32 m_LightsType[MAX_LIGHTS_BY_SHADER];
         float32 m_LightsAngle[MAX_LIGHTS_BY_SHADER];
@@ -229,7 +232,7 @@ class CEffect: public CName
         void GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle );
         void GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle );
 
-        bool LoadEffect();
+        bool LoadEffect( CEffectPool* aEffectPool );
         void Unload();
         void ResetLightsHandle();
 };
