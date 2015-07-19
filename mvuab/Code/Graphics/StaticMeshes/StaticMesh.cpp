@@ -19,7 +19,7 @@
 
 #include <cstdio>
 
-CStaticMesh::CStaticMesh() : m_FileName( "" ), m_RenderableObjectTechniqueName( "" )
+CStaticMesh::CStaticMesh() : m_FileName( "" ), m_RenderableObjectTechniqueName( "" ), m_IsTransformed(false)
 {
 }
 
