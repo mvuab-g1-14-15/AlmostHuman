@@ -1196,7 +1196,7 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   mDirectXDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
   mDirectXDevice->GetViewport( &pViewport );
   D3DXVECTOR3 l_OutPosition;
-  D3DXVECTOR3 modPos( Point.x, Point.y, Point.z );
+  D3DXVECTOR3 modPos( Point.u );
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
                    &worldMatrix );
   // To Debug uncomment this line

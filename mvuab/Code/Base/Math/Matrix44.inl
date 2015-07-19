@@ -246,9 +246,17 @@ void Matrix44<T>::TransformArrayPoints (int iElements, Vector3<T>* pVecOUT, Vect
 template<typename T>
 inline Vector3<T> Matrix44<T>::operator * (const Vector3<T>& vector) const
 {
-  return Vector3<T>(vector.x * m00 + vector.y * m01 + vector.z * m02 + m03,
+  /*return Vector3<T>(vector.x * m00 + vector.y * m01 + vector.z * m02 + m03,
                     vector.x * m10 + vector.y * m11 + vector.z * m12 + m13,
-                    vector.x * m20 + vector.y * m21 + vector.z * m22 + m23);
+                    vector.x * m20 + vector.y * m21 + vector.z * m22 + m23);*/
+
+    Vector3<T> l_Result;
+    
+    l_Result.u[0] = m_pMatrix4[ 0] * vector.u[0] + m_pMatrix4[ 4] * vector.u[1] + m_pMatrix4[ 8] * vector.u[2] + m_pMatrix4[12];
+    l_Result.u[1] = m_pMatrix4[ 1] * vector.u[0] + m_pMatrix4[ 5] * vector.u[1] + m_pMatrix4[ 9] * vector.u[2] + m_pMatrix4[13];
+    l_Result.u[2] = m_pMatrix4[ 2] * vector.u[0] + m_pMatrix4[ 6] * vector.u[1] + m_pMatrix4[10] * vector.u[2] + m_pMatrix4[14];
+   
+    return l_Result;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1560,7 +1568,7 @@ Matrix44<T> Matrix44<T>::operator - (const Matrix44<T> &otra) const
 template<typename T>
 Matrix44<T> Matrix44<T>::operator * (const Matrix44<T>& otra) const
 {
-  return (Matrix44<T>(m00 * otra.m00 + m01 * otra.m10 + m02 * otra.m20 + m03 * otra.m30,
+  /*return (Matrix44<T>(m00 * otra.m00 + m01 * otra.m10 + m02 * otra.m20 + m03 * otra.m30,
                       m00 * otra.m01 + m01 * otra.m11 + m02 * otra.m21 + m03 * otra.m31,
                       m00 * otra.m02 + m01 * otra.m12 + m02 * otra.m22 + m03 * otra.m32,
                       m00 * otra.m03 + m01 * otra.m13 + m02 * otra.m23 + m03 * otra.m33,
@@ -1578,7 +1586,31 @@ Matrix44<T> Matrix44<T>::operator * (const Matrix44<T>& otra) const
                       m30 * otra.m00 + m31 * otra.m10 + m32 * otra.m20 + m33 * otra.m30,
                       m30 * otra.m01 + m31 * otra.m11 + m32 * otra.m21 + m33 * otra.m31,          
                       m30 * otra.m02 + m31 * otra.m12 + m32 * otra.m22 + m33 * otra.m32, 
-                      m30 * otra.m03 + m31 * otra.m13 + m32 * otra.m23 + m33 * otra.m33));
+                      m30 * otra.m03 + m31 * otra.m13 + m32 * otra.m23 + m33 * otra.m33));*/
+
+    Matrix44<T> newMatrix;
+
+    newMatrix.m_pMatrix4[ 0] = m_pMatrix4[ 0] * otra.m_pMatrix4[ 0] + m_pMatrix4[ 4] * otra.m_pMatrix4[ 1] + m_pMatrix4[ 8] * otra.m_pMatrix4[ 2] + m_pMatrix4[12] * otra.m_pMatrix4[ 3];
+    newMatrix.m_pMatrix4[ 1] = m_pMatrix4[ 1] * otra.m_pMatrix4[ 0] + m_pMatrix4[ 5] * otra.m_pMatrix4[ 1] + m_pMatrix4[ 9] * otra.m_pMatrix4[ 2] + m_pMatrix4[13] * otra.m_pMatrix4[ 3];
+    newMatrix.m_pMatrix4[ 2] = m_pMatrix4[ 2] * otra.m_pMatrix4[ 0] + m_pMatrix4[ 6] * otra.m_pMatrix4[ 1] + m_pMatrix4[10] * otra.m_pMatrix4[ 2] + m_pMatrix4[14] * otra.m_pMatrix4[ 3];
+    newMatrix.m_pMatrix4[ 3] = m_pMatrix4[ 3] * otra.m_pMatrix4[ 0] + m_pMatrix4[ 7] * otra.m_pMatrix4[ 1] + m_pMatrix4[11] * otra.m_pMatrix4[ 2] + m_pMatrix4[15] * otra.m_pMatrix4[ 3];
+
+    newMatrix.m_pMatrix4[ 4] = m_pMatrix4[ 0] * otra.m_pMatrix4[ 4] + m_pMatrix4[ 4] * otra.m_pMatrix4[ 5] + m_pMatrix4[ 8] * otra.m_pMatrix4[ 6] + m_pMatrix4[12] * otra.m_pMatrix4[ 7];
+    newMatrix.m_pMatrix4[ 5] = m_pMatrix4[ 1] * otra.m_pMatrix4[ 4] + m_pMatrix4[ 5] * otra.m_pMatrix4[ 5] + m_pMatrix4[ 9] * otra.m_pMatrix4[ 6] + m_pMatrix4[13] * otra.m_pMatrix4[ 7];
+    newMatrix.m_pMatrix4[ 6] = m_pMatrix4[ 2] * otra.m_pMatrix4[ 4] + m_pMatrix4[ 6] * otra.m_pMatrix4[ 5] + m_pMatrix4[10] * otra.m_pMatrix4[ 6] + m_pMatrix4[14] * otra.m_pMatrix4[ 7];
+    newMatrix.m_pMatrix4[ 7] = m_pMatrix4[ 3] * otra.m_pMatrix4[ 4] + m_pMatrix4[ 7] * otra.m_pMatrix4[ 5] + m_pMatrix4[11] * otra.m_pMatrix4[ 6] + m_pMatrix4[15] * otra.m_pMatrix4[ 7];
+
+    newMatrix.m_pMatrix4[ 8] = m_pMatrix4[ 0] * otra.m_pMatrix4[ 8] + m_pMatrix4[ 4] * otra.m_pMatrix4[ 9] + m_pMatrix4[ 8] * otra.m_pMatrix4[10] + m_pMatrix4[12] * otra.m_pMatrix4[11];
+    newMatrix.m_pMatrix4[ 9] = m_pMatrix4[ 1] * otra.m_pMatrix4[ 8] + m_pMatrix4[ 5] * otra.m_pMatrix4[ 9] + m_pMatrix4[ 9] * otra.m_pMatrix4[10] + m_pMatrix4[13] * otra.m_pMatrix4[11];
+    newMatrix.m_pMatrix4[10] = m_pMatrix4[ 2] * otra.m_pMatrix4[ 8] + m_pMatrix4[ 6] * otra.m_pMatrix4[ 9] + m_pMatrix4[10] * otra.m_pMatrix4[10] + m_pMatrix4[14] * otra.m_pMatrix4[11];
+    newMatrix.m_pMatrix4[11] = m_pMatrix4[ 3] * otra.m_pMatrix4[ 8] + m_pMatrix4[ 7] * otra.m_pMatrix4[ 9] + m_pMatrix4[11] * otra.m_pMatrix4[10] + m_pMatrix4[15] * otra.m_pMatrix4[11];
+
+    newMatrix.m_pMatrix4[12] = m_pMatrix4[ 0] * otra.m_pMatrix4[12] + m_pMatrix4[ 4] * otra.m_pMatrix4[13] + m_pMatrix4[ 8] * otra.m_pMatrix4[14] + m_pMatrix4[12] * otra.m_pMatrix4[15];
+    newMatrix.m_pMatrix4[13] = m_pMatrix4[ 1] * otra.m_pMatrix4[12] + m_pMatrix4[ 5] * otra.m_pMatrix4[13] + m_pMatrix4[ 9] * otra.m_pMatrix4[14] + m_pMatrix4[13] * otra.m_pMatrix4[15];
+    newMatrix.m_pMatrix4[14] = m_pMatrix4[ 2] * otra.m_pMatrix4[12] + m_pMatrix4[ 6] * otra.m_pMatrix4[13] + m_pMatrix4[10] * otra.m_pMatrix4[14] + m_pMatrix4[14] * otra.m_pMatrix4[15];
+    newMatrix.m_pMatrix4[15] = m_pMatrix4[ 3] * otra.m_pMatrix4[12] + m_pMatrix4[ 7] * otra.m_pMatrix4[13] + m_pMatrix4[11] * otra.m_pMatrix4[14] + m_pMatrix4[15] * otra.m_pMatrix4[15];
+
+    return(newMatrix);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2424,8 +2456,10 @@ inline Matrix44<T>::Matrix44(const D3DXMATRIX &otra)
 template<typename T>
 D3DXMATRIX Matrix44<T>::GetD3DXMatrix() const
 {
-  return D3DXMATRIX(    m00, m10, m20, m30
+  /*return D3DXMATRIX(    m00, m10, m20, m30
                                 , m01, m11, m21, m31
                                 , m02, m12, m22, m32
-                                , m03, m13, m23, m33);
+                                , m03, m13, m23, m33);*/
+
+    return D3DXMATRIX(m_pMatrix4);
 }

@@ -65,7 +65,7 @@ CEffect::CEffect( const std::string& EffectName )
 
 CEffect::~CEffect()
 {
-   m_Effect->End();
+    m_Effect->End();
     CHECKED_RELEASE( m_Effect );
 
     for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )

@@ -92,9 +92,17 @@ inline Vector3<T> Vector3<T>::operator - ( const Vector3<T>& otro ) const
 template<typename T>
 inline Vector3<T> Vector3<T>::operator * ( const T escalar ) const
 {
-    return ( Vector3<T>( x * escalar,
+    /*return ( Vector3<T>( x * escalar,
                          y * escalar,
-                         z * escalar ) );
+                         z * escalar ) );*/
+
+    Vector3<T> r;
+
+    r.u[0] = u[0] * escalar;
+    r.u[1] = u[1] * escalar;
+    r.u[2] = u[2] * escalar;
+
+    return r;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,9 +111,17 @@ inline Vector3<T> Vector3<T>::operator * ( const T escalar ) const
 template<typename T>
 inline Vector3<T> operator * ( const T escalar, const Vector3<T>& otro )
 {
-    return ( Vector3<T>( otro.x * escalar,
+    /*return ( Vector3<T>( otro.x * escalar,
                          otro.y * escalar,
-                         otro.z * escalar ) );
+                         otro.z * escalar ) );*/
+    Vector3<T> r;
+
+    r.u[0] = otro.u[0] * escalar;
+    r.u[1] = otro.u[1] * escalar;
+    r.u[2] = otro.u[2] * escalar;
+
+    return r;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,9 +342,9 @@ inline Vector3<T>& Vector3<T>::operator -= ( const Vector3<T>& otro )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator *= ( const T escalar )
 {
-    x *= escalar;
-    y *= escalar;
-    z *= escalar;
+    u[0] *= escalar;
+    u[1] *= escalar;
+    u[2] *= escalar;
 
     return ( *this );
 }
@@ -357,9 +373,9 @@ inline Vector3<T>& Vector3<T>::operator /= ( const T escalar )
     //------------------------------------------<<<
     // Sin chequeo
     T inv_escalar = One<T>() / escalar;
-    x *= inv_escalar;
-    y *= inv_escalar;
-    z *= inv_escalar;
+    u[0] *= inv_escalar;
+    u[1] *= inv_escalar;
+    u[2] *= inv_escalar;
     //------------------------------------------>>>
 #endif
 
@@ -372,9 +388,9 @@ inline Vector3<T>& Vector3<T>::operator /= ( const T escalar )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator += ( const T escalar )
 {
-    x += escalar;
-    y += escalar;
-    z += escalar;
+    u[0] += escalar;
+    u[1] += escalar;
+    u[2] += escalar;
 
     return ( *this );
 }
@@ -385,9 +401,9 @@ inline Vector3<T>& Vector3<T>::operator += ( const T escalar )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator -= ( const T escalar )
 {
-    x -= escalar;
-    y -= escalar;
-    z -= escalar;
+    u[0] -= escalar;
+    u[1] -= escalar;
+    u[2] -= escalar;
 
     return ( *this );
 }
@@ -698,11 +714,14 @@ inline Vector3<T>& Vector3<T>::Normalize( const T tk )
 #else
     //------------------------------------------<<<
     // Sin chequeo
-    T length = Length();
+    T length = u[0] * u[0] + u[1] * u[1] + u[2] * u[2];
+    if(1.0f == length || 0.0f == length) return *this;
+
     //ASSERT( length != Zero<T>(), "División por cero en normalización de vector" );
     //TODO EL ASSERT NO FUNCIONA NI METIENDO EL INCLUDE
 
-    T aux = tk / length;
+    T aux = T(1.0) / sqrt(length);
+
     u[0] *= aux;
     u[1] *= aux;
     u[2] *= aux;

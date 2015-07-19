@@ -69,13 +69,12 @@ void CInstanceMesh::Render()
         lTransform = lTransform * lCenterTransform;
     }
 
-    GraphicsInstance->SetTransform( lTransform );
-
     CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f lPositionTransformed = lTransform * laabbCenter;
 
-    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y, lPositionTransformed.z ), laabb.GetRadius() ) )
+    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.u ), laabb.GetRadius() ) )
     {
+        GraphicsInstance->SetTransform( lTransform );
         mStaticMesh->Render( GraphicsInstance );
     }
 }
