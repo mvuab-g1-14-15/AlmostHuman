@@ -15,6 +15,8 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	physic_manager:AddController(self.Name, self.Radius, self.Height, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
 	self.CharacterController = physic_manager:GetController(self.Name)
 	
+	self.CharacterController:SetYaw(Node:GetAttributeFloat("yaw", 0.0))
+	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
 		engine:Trace("Añadiendo "..self.Name)
@@ -64,7 +66,7 @@ function CEnemyLUA:GetYaw()
 end
 
 function CEnemyLUA:SetPitch(pitch)
-	self.RenderableObject:SetYaw(pitch)
+	self.RenderableObject:SetPitch(pitch)
 end
 
 function CEnemyLUA:GetPitch()

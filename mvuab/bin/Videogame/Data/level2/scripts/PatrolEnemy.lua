@@ -3,23 +3,25 @@ dofile("./data/level2/scripts/Enemy.lua")
 class 'CPatrolEnemyLUA' (CEnemyLUA)
 
 function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
-	self.Enemy = CEnemyLUA(Node, state_machine, core_enemy)
+	CEnemyLUA.__init(self, Node, state_machine, core_enemy)
+	--self = CEnemyLUA(Node, state_machine, core_enemy)
 	self.Waypoints = waypoints
 	self.ActualWaypoint = 1
 	
-	self.Delta = 0.05
+	self.Delta = 0.2
 	self.PathCalculated = false
 	self.Path = vecVect3f()
-	engine:Trace("CPatrolEnemyLUA: " .. self.Enemy:GetName() .. " initialized")
+	engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
 
 function CPatrolEnemyLUA:Update()
-	self.Enemy:Update()
+	CEnemyLUA.Update(self)
+	--self:Update()
 end
 
 function CPatrolEnemyLUA:GetPosition()
-	return self.Enemy:GetCharacterController():GetPosition()
+	return self:GetCharacterController():GetPosition()
 end
 
 function CPatrolEnemyLUA:NextWaypoint()
@@ -31,57 +33,48 @@ end
 
 function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 	local dt = timer:GetElapsedTime()
-	CharacterController = self.Enemy:GetCharacterController()
+	CharacterController = CEnemyLUA.GetCharacterController(self)
 	local ActualPos = Vect3f(CharacterController:GetPosition())
 	local FinalPos = Vect3f()
-	engine:Trace("traza 1")
 	if PositionPlayer == Vect3f(0.0) then
-		engine:Trace("traza 2")	
-		FinalPos = self.Waypoints[self.ActualWaypoint]
+		FinalPos = Vect3f(self.Waypoints[self.ActualWaypoint])
 	else
-		engine:Trace("traza 3")
 		FinalPos = PositionPlayer
 	end
-	
-	engine:Trace("traza 4")
+	FinalPos.y = 0
+	ActualPos.y = 0
 	local Dir = FinalPos - ActualPos	
-	engine:Trace("traza 5")
 	Dir.y = 0.0
-	engine:Trace("traza 5")
-	Dir:Normalize()
-	engine:Trace("traza 5")
-	DirYaw = aTan2( Dir.z, Dir.x )
+	if CheckVector(Dir) then
+		Dir:Normalize()
+	end
+	DirYaw = math.atan2( Dir.z, Dir.x )
 	Yaw = CharacterController:GetYaw()
 	YawDif = DirYaw - Yaw
     PrevYaw = Yaw
 	
-	engine:Trace("traza 6")
-    if ( Abs( YawDif ) < 0.1 ) then
-		engine:Trace("traza 7")
-        CharacterController:Move( Dir * 2.0, dt )
+    if ( math.abs( YawDif ) < 0.1 ) then
+		CharacterController:Move( Dir * 2.0, dt )
     else
-		engine:Trace("traza 8")
         CharacterController:Move( Vect3f( 0.0 ), dt )
 		if YawDif > 0 then
 			YawDif = 1
 		else
 			YawDif = -1
 		end
-        Yaw = Yaw + (YawDif * 1.0 * dt)
+        Yaw = Yaw + (YawDif * 0.60 * dt)
 
         if ( ( Yaw < 0.0 and PrevYaw > 0.0 ) or ( Yaw > 0.0 and PrevYaw < 0.0 ) ) then
             Yaw = DirYaw
 		end
     end
-	engine:Trace("traza 9")
-    CharacterController:SetYaw( Yaw )
-    self:SetYaw( Yaw )
 	
-	--engine:Trace("Actual position " .. self.CharacterController:GetPosition():ToString())
+    CharacterController:SetYaw( Yaw )
+    CEnemyLUA.SetYaw( self, Yaw )
 end
 
 function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
-	CharacterController = self.Enemy:GetCharacterController()	
+	CharacterController = CEnemyLUA.GetCharacterController(self)	
 	lPos = CharacterController:GetPosition()
 
     lAStar = g_EnemyManager:GetAStar()
@@ -111,7 +104,7 @@ function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
 
     lTargetPos.y = lPos.y
     
-	self:MoveToWaypoint(lTargetPos)
+	CEnemyLUA.MoveToWaypoint(self, lTargetPos)
     
     PositionPlayer.y = 0.0
 
@@ -121,72 +114,13 @@ function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
 end
 
 function CPatrolEnemyLUA:IsInWaypoint()
-	CharacterController = self.Enemy:GetCharacterController()
+	CharacterController = CEnemyLUA.GetCharacterController(self)
 	local ActualPos = CharacterController:GetPosition()
 	local FinalPos = self.Waypoints[self.ActualWaypoint]
-	
+	FinalPos.y = 0.0
+	ActualPos.y = 0.0
 	local DistVector = FinalPos - ActualPos
 	local Distance = DistVector:Length()
-	
 	return Distance < self.Delta
 end
 
-function CPatrolEnemyLUA:AddLife(Amount)
-	self.Enemy:AddLife(Amount)
-end
-
-function CPatrolEnemyLUA:SetYaw(Yaw)
-	self.Enemy:SetYaw(Yaw)
-end
-
-function CPatrolEnemyLUA:GetYaw()
-	return self.Enemy:GetYaw()
-end
-
-function CPatrolEnemyLUA:SetPitch(Pitch)
-	self.Enemy:SetPitch(Pitch)
-end
-
-function CPatrolEnemyLUA:GetPitch()
-	return self.Enemy:GetPitch()
-end
-
-function CPatrolEnemyLUA:GetActualState()
-	return self.Enemy:GetActualState()
-end
-
-function CPatrolEnemyLUA:ChangeState(NewState)
-	self.Enemy:ChangeState(NewState)
-end
-
-function CPatrolEnemyLUA:GetAnimationModel()
-	return self.Enemy:GetAnimationModel()
-end
-
-function CPatrolEnemyLUA:GetName()
-	return self.Enemy:GetName()
-end
-
-function CPatrolEnemyLUA:SetTimeToShoot(aTimeToShoot)
-	self.Enemy:SetTimeToShoot(aTimeToShoot)
-end
-
-function CPatrolEnemyLUA:GetTimeToShoot()
-	return self.Enemy:GetTimeToShoot()
-end
-
-function CPatrolEnemyLUA:GetCountTimeShoot()
-	return self.Enemy:GetCountTimeShoot()
-end
-
-function CPatrolEnemyLUA:SetCountTimeShoot(CountTimeShoot)
-	self.Enemy:SetCountTimeShoot(CountTimeShoot)
-end
-
-function CPatrolEnemyLUA:GetHeight()
-	return self.Enemy:GetHeight()
-end
-
-function CPatrolEnemyLUA:GetDirection()
-	return self.Enemy:GetDirection()
-end

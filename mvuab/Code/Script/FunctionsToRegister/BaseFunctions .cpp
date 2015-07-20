@@ -117,30 +117,10 @@ void registerXML( lua_State* aLuaState )
   .LUA_DECLARE_METHOD_WITHOUT_CLASS( GetAttributeVect3f )
   LUA_DECLARE_METHOD( CXMLTreeNode, LoadAndFindNode )
   LUA_DECLARE_METHOD( CXMLTreeNode, GetNumChildren )
-  /*
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetIntProperty )
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetFloatProperty )
 
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<bool> )
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<std::string> )
-      LUA_DECLARE_METHOD( CXMLTreeNode, GetAttribute<Math::Vect3f> )
-  */
   LUA_DECLARE_METHOD( CXMLTreeNode, GetChildren )
   LUA_DECLARE_METHOD( CXMLTreeNode, GetNode )
   LUA_END_DECLARATION
-
-
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeBool )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeInt )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeUint )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeFloat )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeString )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeColor )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2f )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2i )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect2u )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect4f )
-  REGISTER_LUA_FUNCTION( aLuaState, GetAttributeVect3f )
 
 }
 

@@ -7,7 +7,6 @@ function CActionLUA:__init( Node )
 end
 
 function CActionLUA:Execute()
-	engine:Trace("Estoy ejecutando la función ".. self.Function)
 	script_manager:RunCode(self.Function)
 end
 

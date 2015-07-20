@@ -46,18 +46,18 @@ function andar()
 	enemy = g_EnemyManager:GetActualEnemy()
 	
 	if enemy:IsInWaypoint() then
-		engine:Trace("Estoy en el punto")
 		enemy:NextWaypoint()
 		if (enemy:GetActualState() == "andando" ) then
 			enemy:ChangeState("esperar")
-			enemy:GetAnimationModel():ChangeAnimation("esperar", 0.2, 1.0)
+			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		end
+	else
+		enemy:MoveToWaypoint(Vect3f(0.0))
 	end
-	enemy:MoveToWaypoint(Vect3f(0.0))
 end
 
 function esperar()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	local timerName = "Espera" .. enemy:GetName()
 
 	if not countdowntimer_manager:ExistTimer(timerName) then
