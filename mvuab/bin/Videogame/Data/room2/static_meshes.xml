@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="Viga_room2" filename="meshes\Viga.mesh" />
+  <static_mesh name="sala_2_room2" filename="meshes\sala_2.mesh" />
   <static_mesh name="Estanteria_TipusA_01_room2" filename="meshes\Estanteria_TipusA_01.mesh" />
   <static_mesh name="Estanteria_TipusA_005_room2" filename="meshes\Estanteria_TipusA_005.mesh" />
   <static_mesh name="Estanteria_TipusA_006_room2" filename="meshes\Estanteria_TipusA_006.mesh" />
@@ -52,7 +52,7 @@
   <static_mesh name="metal_barrel023_room2" filename="meshes\metal_barrel023.mesh" />
   <static_mesh name="metal_barrel022_room2" filename="meshes\metal_barrel022.mesh" />
   <static_mesh name="metal_barrel019_room2" filename="meshes\metal_barrel019.mesh" />
-  <static_mesh name="metal_barrel018_room2" filename="meshes\metal_barrel018.mesh" />
+  <static_mesh name="barril_sigil_room2" filename="meshes\barril_sigil.mesh" />
   <static_mesh name="metal_barrel017_room2" filename="meshes\metal_barrel017.mesh" />
   <static_mesh name="metal_barrel016_room2" filename="meshes\metal_barrel016.mesh" />
   <static_mesh name="metal_barrel014_room2" filename="meshes\metal_barrel014.mesh" />
@@ -119,14 +119,12 @@
   <static_mesh name="Ammo_box437_room2" filename="meshes\Ammo_box437.mesh" />
   <static_mesh name="Ammo_box438_room2" filename="meshes\Ammo_box438.mesh" />
   <static_mesh name="Ammo_box439_room2" filename="meshes\Ammo_box439.mesh" />
-  <static_mesh name="plastic_barrel296_room2" filename="meshes\plastic_barrel296.mesh" />
   <static_mesh name="plastic_barrel297_room2" filename="meshes\plastic_barrel297.mesh" />
   <static_mesh name="plastic_barrel298_room2" filename="meshes\plastic_barrel298.mesh" />
   <static_mesh name="plastic_barrel299_room2" filename="meshes\plastic_barrel299.mesh" />
   <static_mesh name="plastic_barrel300_room2" filename="meshes\plastic_barrel300.mesh" />
   <static_mesh name="plastic_barrel301_room2" filename="meshes\plastic_barrel301.mesh" />
   <static_mesh name="plastic_barrel302_room2" filename="meshes\plastic_barrel302.mesh" />
-  <static_mesh name="plastic_barrel303_room2" filename="meshes\plastic_barrel303.mesh" />
   <static_mesh name="plastic_barrel304_room2" filename="meshes\plastic_barrel304.mesh" />
   <static_mesh name="plastic_barrel305_room2" filename="meshes\plastic_barrel305.mesh" />
   <static_mesh name="barrierCIL_031_room2" filename="meshes\barrierCIL_031.mesh" />
@@ -147,17 +145,19 @@
   <static_mesh name="metal_barrel081_room2" filename="meshes\metal_barrel081.mesh" />
   <static_mesh name="metal_barrel082_room2" filename="meshes\metal_barrel082.mesh" />
   <static_mesh name="metal_barrel083_room2" filename="meshes\metal_barrel083.mesh" />
-  <static_mesh name="Focus_01_room2" filename="meshes\Focus_01.mesh" />
-  <static_mesh name="Focus_002_room2" filename="meshes\Focus_002.mesh" />
-  <static_mesh name="Focus_005_room2" filename="meshes\Focus_005.mesh" />
-  <static_mesh name="Focus_006_room2" filename="meshes\Focus_006.mesh" />
   <static_mesh name="Object004_room2" filename="meshes\Object004.mesh" />
   <static_mesh name="Object005_room2" filename="meshes\Object005.mesh" />
   <static_mesh name="Object006_room2" filename="meshes\Object006.mesh" />
-  <static_mesh name="Godlight006_room2" filename="meshes\Godlight006.mesh" />
-  <static_mesh name="Godlight007_room2" filename="meshes\Godlight007.mesh" />
-  <static_mesh name="Godlight008_room2" filename="meshes\Godlight008.mesh" />
-  <static_mesh name="Godlight009_room2" filename="meshes\Godlight009.mesh" />
-  <static_mesh name="porta_room2" filename="meshes\porta.mesh" />
-  <static_mesh name="lampara_porta_room2" filename="meshes\lampara_porta.mesh" />
+  <static_mesh name="barricada_room2" filename="meshes\barricada.mesh" />
+  <static_mesh name="Object007_room2" filename="meshes\Object007.mesh" />
+  <static_mesh name="lampara_porta001_room2" filename="meshes\lampara_porta001.mesh" />
+  <static_mesh name="focus_01_room2" filename="meshes\focus_01.mesh" />
+  <static_mesh name="focus_002_room2" filename="meshes\focus_002.mesh" />
+  <static_mesh name="focus_003_room2" filename="meshes\focus_003.mesh" />
+  <static_mesh name="focus_004_room2" filename="meshes\focus_004.mesh" />
+  <static_mesh name="focus_005_room2" filename="meshes\focus_005.mesh" />
+  <static_mesh name="focus_006_room2" filename="meshes\focus_006.mesh" />
+  <static_mesh name="estanteria_01_room2" filename="meshes\estanteria_01.mesh" />
+  <static_mesh name="estanteria_02_room2" filename="meshes\estanteria_02.mesh" />
+  <static_mesh name="oxid_barrel_01_room2" filename="meshes\oxid_barrel_01.mesh" />
 </static_meshes>
