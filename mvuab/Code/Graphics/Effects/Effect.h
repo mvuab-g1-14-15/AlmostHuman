@@ -23,31 +23,21 @@ class CEffect: public CName
         void LinkSemantics();
         bool SetLights( size_t NumOfLights );
         bool SetLight( size_t i_light );
-        bool SetCameraPosition( const Math::Vect3f &CameraPosition );
-        bool SetWorldMatrix( const Math::Mat44f& Matrix );
-        bool SetViewMatrix( const Math::Mat44f& Matrix );
-        bool SetProjectionMatrix( const Math::Mat44f& Matrix );
-        bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
-        bool SetInverseViewMatrix( const Math::Mat44f& Matrix );
-        bool SetInverseProjectionMatrix( const Math::Mat44f& Matrix );
-        bool SetWorldViewMatrix( const Math::Mat44f& Matrix );
-        bool SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix );
-        bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
+
         bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
         bool Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool );
         bool Reload(CEffectPool* aEffectPool);
 
+        bool SetWorldMatrix( const Math::Mat44f& Matrix );
+        bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
+        bool SetWorldViewMatrix( const Math::Mat44f& Matrix );
+        bool SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix );
+
         //DirectX Methods Interface
         D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
 
-        GET_SET( D3DXHANDLE, WorldViewMatrixParameter );
-        GET_SET( D3DXHANDLE, ViewProjectionMatrixParameter );
-        GET_SET( D3DXHANDLE, WorldViewProjectionMatrixParameter );
         GET_SET( D3DXHANDLE, ViewToLightProjectionMatrixParameter );
-        GET_SET( D3DXHANDLE, InverseProjectionMatrixParameter );
-        GET_SET( D3DXHANDLE, InverseViewMatrixParameter );
-        GET_SET( D3DXHANDLE, InverseWorldMatrixParameter );
 
         GET_SET( D3DXHANDLE, LightEnabledParameter );
         GET_SET( D3DXHANDLE, LightsTypeParameter );
@@ -59,7 +49,6 @@ class CEffect: public CName
         GET_SET( D3DXHANDLE, LightsStartRangeAttenuationParameter );
         GET_SET( D3DXHANDLE, LightsEndRangeAttenuationParameter );
 
-        GET_SET( D3DXHANDLE, CameraPositionParameter );
         GET_SET( D3DXHANDLE, BonesParameter );
 
         GET_SET( D3DXHANDLE, DebugColor );
@@ -130,10 +119,12 @@ class CEffect: public CName
         void SetSize( float aSize );
         void SetAlpha( float aAlpha );
         void SetAngle( float aAngle );
-        void SetAmbientLightColor( const Math::Vect3f& aAmbienLightColor );
 
-   protected:
-      LPD3DXEFFECT m_Effect;
+    protected:
+        LPD3DXEFFECT m_Effect;
+        virtual void  SetNullParameters();
+        void GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle );
+        void GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle );
 
     private: // Members
         std::string m_FileName;
@@ -151,20 +142,11 @@ class CEffect: public CName
         DECLARE_EFFECT_PARAMETER( Angle );
         DECLARE_EFFECT_PARAMETER( Alpha );
         DECLARE_EFFECT_PARAMETER( Color );
-        DECLARE_EFFECT_PARAMETER( AmbientLightColor );
 
+        DECLARE_EFFECT_PARAMETER( InverseWorldMatrix );
         DECLARE_EFFECT_PARAMETER( WorldMatrix );
-		DECLARE_EFFECT_PARAMETER( ViewMatrix );
-		DECLARE_EFFECT_PARAMETER( ProjectionMatrix );
-		DECLARE_EFFECT_PARAMETER( InverseWorldMatrix );
-		DECLARE_EFFECT_PARAMETER( InverseViewMatrix );
-		DECLARE_EFFECT_PARAMETER( InverseProjectionMatrix );
-
-        D3DXHANDLE m_InverseProjectionMatrixParameter,
-                   m_InverseViewMatrixParameter, m_InverseWorldMatrixParameter;
-
-        D3DXHANDLE m_WorldViewMatrixParameter, m_ViewProjectionMatrixParameter,
-                   m_WorldViewProjectionMatrixParameter;
+        DECLARE_EFFECT_PARAMETER( WVMatrix );
+        DECLARE_EFFECT_PARAMETER( WVPMatrix );
 
         D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
 
@@ -175,7 +157,6 @@ class CEffect: public CName
         D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter,
                    m_LightsEndRangeAttenuationParameter;
 
-        D3DXHANDLE m_CameraPositionParameter;
         D3DXHANDLE m_BonesParameter;
 
         D3DXHANDLE m_DebugColor;
@@ -228,9 +209,6 @@ class CEffect: public CName
         std::vector<D3DXMACRO> m_Defines;
 
     private: // Methods
-        void  SetNullParameters();
-        void GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Handle );
-        void GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle );
 
         bool LoadEffect( CEffectPool* aEffectPool );
         void Unload();

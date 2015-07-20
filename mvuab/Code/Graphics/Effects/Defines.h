@@ -4,29 +4,29 @@
 
 enum EMatrixFlags
 {
-   eProjectionMatrix            = 1 << 0,
-   eViewMatrix                  = 1 << 1,
-   eWorldMatrix                 = 1 << 2,
-   eWVMatrix                    = 1 << 3,
-   eWVPMatrix                   = 1 << 4,
-   eVPMatrix                    = 1 << 5,
-   eInverseProjection           = 1 << 6,
-   eInverseView                 = 1 << 7,
-   eInverseWorld                = 1 << 8,
-   eCameraPosition              = 1 << 9
+    eProjectionMatrix            = 1 << 0,
+    eViewMatrix                  = 1 << 1,
+    eWorldMatrix                 = 1 << 2,
+    eWVMatrix                    = 1 << 3,
+    eWVPMatrix                   = 1 << 4,
+    eVPMatrix                    = 1 << 5,
+    eInverseProjection           = 1 << 6,
+    eInverseView                 = 1 << 7,
+    eInverseWorld                = 1 << 8,
+    eCameraPosition              = 1 << 9
 };
 
 enum ELightsFlags
 {
-   eUseLights                   = 1 << 0,
-   eUseAmbientLight             = 1 << 1,
-   eViewToLightProjectionMatrix = 1 << 2,
+    eUseLights                   = 1 << 0,
+    eUseAmbientLight             = 1 << 1,
+    eViewToLightProjectionMatrix = 1 << 2,
 };
 
 enum ETimeFlags
 {
-   eUseTime            = 1 << 0,
-   eUseDeltaTime       = 1 << 1
+    eUseTime            = 1 << 0,
+    eUseDeltaTime       = 1 << 1
 };
 
 #define DECLARE_EFFECT_PARAMETER( semantic ) D3DXHANDLE m_##semantic;
@@ -92,10 +92,10 @@ const char FogFunStr[]      = "FogFun";
 // Fog enum
 enum EFogFunction
 {
-  eFogExponentianl = 0,
-  eFogLineal,
-  eFogGround,
-  eFogFunctionCount
+    eFogExponentianl = 0,
+    eFogLineal,
+    eFogGround,
+    eFogFunctionCount
 };
 
 //-Size handles ----------------------------------------------------------

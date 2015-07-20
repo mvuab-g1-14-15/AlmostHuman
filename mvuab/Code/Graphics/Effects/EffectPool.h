@@ -6,6 +6,7 @@
 #include "dx9.h"
 
 class CEffect;
+class CSharedEffect;
 
 class CEffectPool
 {
@@ -14,8 +15,11 @@ class CEffectPool
         virtual ~CEffectPool(void);
         bool Init();
         LPD3DXEFFECTPOOL GetD3DEffectPool();
+        CSharedEffect*   GetSharedEffect();
+        void Bind();
     private:
         LPD3DXEFFECTPOOL mD3DXEffectPool;
+        CSharedEffect*   mSharedEffect;
 };
 
 #endif // EFFECT_POOL_H
