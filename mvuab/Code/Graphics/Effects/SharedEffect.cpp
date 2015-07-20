@@ -4,6 +4,8 @@
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
 #include "Lights\LightManager.h"
+#include "Timer\Timer.h"
+#include "GraphicsManager.h"
 
 namespace {
 bool BindMatrices( CSharedEffect* aSharedEffect, CEffectManager* aEffectManager )
@@ -34,6 +36,9 @@ CSharedEffect::CSharedEffect( )
     , CTOR_EFFECT_PARAMETER( InverseProjectionMatrix )
     , CTOR_EFFECT_PARAMETER( CameraPosition )
     , CTOR_EFFECT_PARAMETER( AmbientLight )
+    , CTOR_EFFECT_PARAMETER( FBWidth )
+    , CTOR_EFFECT_PARAMETER( FBHeight )
+    , CTOR_EFFECT_PARAMETER( DeltaTime )
 {
 }
 
@@ -57,6 +62,18 @@ void CSharedEffect::Bind()
     {
         LOG_ERROR_APPLICATION( "Error binding the ambient light to the shared effect!!" );
     }
+
+    if( !SetDeltaTime( deltaTimeMacro ) )
+    {
+        LOG_ERROR_APPLICATION( "Error binding the delta time to the shared effect!!" );
+    }
+
+    Math::Vect2u lFBSize;
+    GraphicsInstance->GetWidthAndHeight(lFBSize.x, lFBSize.y);
+    if( !SetFBSize( lFBSize ) )
+    {
+        LOG_ERROR_APPLICATION( "Error binding the fb size to the shared effect!!" );
+    }
 }
 
 void CSharedEffect::SetNullParameters()
@@ -71,6 +88,10 @@ void CSharedEffect::SetNullParameters()
 
     RESET_EFFECT_PARAMETER( CameraPosition );
     RESET_EFFECT_PARAMETER( AmbientLight );
+
+    RESET_EFFECT_PARAMETER( FBWidth );
+    RESET_EFFECT_PARAMETER( FBHeight );
+    RESET_EFFECT_PARAMETER( DeltaTime );
 }
 
 void CSharedEffect::LinkSemantics()
@@ -85,6 +106,10 @@ void CSharedEffect::LinkSemantics()
 
     LINK_EFFECT_PARAMETER( CameraPosition );
     LINK_EFFECT_PARAMETER( AmbientLight );
+
+    LINK_EFFECT_PARAMETER( FBWidth );
+    LINK_EFFECT_PARAMETER( FBHeight );
+    LINK_EFFECT_PARAMETER( DeltaTime );
 }
 
 bool CSharedEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
@@ -108,12 +133,12 @@ bool CSharedEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
 
 bool CSharedEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
 {
-    return S_OK == SET_MATRIX_PARAMETER( InverseViewMatrix, (Matrix.GetInverted()) );
+    return ( m_Effect->SetMatrix( m_InverseViewMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
 
 bool CSharedEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
 {
-    return S_OK == SET_MATRIX_PARAMETER( InverseProjectionMatrix, (Matrix.GetInverted()) );
+    return ( m_Effect->SetMatrix( m_InverseProjectionMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
 
 bool CSharedEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )
@@ -129,4 +154,14 @@ bool CSharedEffect::SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor 
     ASSERT( lRes == S_OK, "Error setting ambient color");
 
     return lRes == S_OK;
+}
+
+bool CSharedEffect::SetFBSize( const Math::Vect2u aSize )
+{
+    return ( S_OK == SET_INT_PARAMETER( FBWidth, aSize.x ) ) && ( S_OK == SET_INT_PARAMETER( FBHeight, aSize.y ) );
+}
+
+bool CSharedEffect::SetDeltaTime( const float dt )
+{
+    return S_OK == SET_FLOAT_PARAMETER( DeltaTime, dt );
 }

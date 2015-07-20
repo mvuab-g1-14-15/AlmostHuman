@@ -28,6 +28,10 @@ shared float4x4 g_WorldViewMatrix                                          : WVM
 shared float4x4 g_ViewProjMatrix                                           : VPMatrix;
 shared float3   g_CameraPosition                                           : CameraPosition;
 shared float3   g_AmbientLight 											   : AmbientLight;
+shared float    g_DeltaTime 											   : DeltaTime;
+shared int      g_FBWidth    											   : FBWidth;
+shared int      g_FBHeight       										   : FBHeight;
+
 
 //
 // Debug semantics
@@ -72,12 +76,6 @@ float       g_SpecularFactor 	= 20.0f;
 // Cal3D parameters
 //
 float3x4    g_Bones[MAXBONES]                                       : Bones;
-
-//
-// Time data
-//
-float       g_DeltaTime                                             : DeltaTime;
-float       g_Time                                                  : Time;
 
 float       g_Bump = 24.0;
 

@@ -33,10 +33,6 @@ CEffect::CEffect( const std::string& EffectName )
       m_UseDebugColor( 0 ),
       m_DebugColor( 0 ),
 
-      // Timers
-      m_TimeParameter( 0 ),
-      m_DeltaTimeParameter( 0 ),
-
       // Fog
       m_FogStart( 0 ),
       m_FogEnd( 0 ),
@@ -100,9 +96,7 @@ void CEffect::SetNullParameters()
     m_LightsEndRangeAttenuationParameter = 0;
 
     m_BonesParameter = 0;
-    // Timers
-    m_TimeParameter = 0;
-    m_DeltaTimeParameter = 0;
+
     // Fog
     m_FogStart = 0;
     m_FogEnd = 0;
@@ -149,7 +143,6 @@ void CEffect::LinkSemantics()
                             m_LightsEndRangeAttenuationParameter );
 
     GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
-    GetParameterBySemantic( TimeParameterStr, m_TimeParameter );
 
     GetParameterBySemantic( DebugColorStr, m_DebugColor );
     GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );
@@ -438,7 +431,7 @@ bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
 
 bool CEffect::SetInverseWorldMatrix( const Math::Mat44f& Matrix )
 {
-    return S_OK == SET_MATRIX_PARAMETER( InverseWorldMatrix, (Matrix.GetInverted()) );
+    return ( m_Effect->SetMatrix( m_InverseWorldMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
 }
 
 bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )

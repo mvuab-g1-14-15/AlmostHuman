@@ -15,33 +15,21 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
     : m_TechniqueName( TechniqueName ),
       m_EffectName( EffectName ),
       mFlags( new CEffectFlags( HandlesNode ) ),
-      m_UseCameraPosition( HandlesNode.GetAttribute<bool>( "use_camera_position", false ) ),
-      m_UseInverseProjMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_projection_matrix", false ) ),
-      m_UseInverseViewMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_view_matrix", false ) ),
       m_UseInverseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_world_matrix", false ) ),
-
-      m_UseProjMatrix( HandlesNode.GetAttribute<bool>( "use_projection_matrix", false ) ),
-      m_UseViewMatrix( HandlesNode.GetAttribute<bool>( "use_view_matrix", false ) ),
       m_UseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_world_matrix", false ) ),
       m_UseWorldViewMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_matrix", false ) ),
       m_UseWorldViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_projection_matrix",
                                       false ) ),
-      m_UseViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_view_projection_matrix", false ) ),
       m_UseViewToLightProjectionMatrix(
           HandlesNode.GetAttribute<bool>( "use_view_to_light_projection_matrix", false ) ),
 
       // Lights
       m_NumOfLights( HandlesNode.GetAttribute<int32>( "num_of_lights", 0 ) ),
       m_UseLights( HandlesNode.GetAttribute<bool>( "use_lights", false ) ),
-      m_UseLightAmbientColor( HandlesNode.GetAttribute<bool>( "use_light_ambient_color", false ) ),
 
       // Debug
       m_UseDebugColor( HandlesNode.GetAttribute<bool>( "use_debug_color", false ) ),
       m_DebugColor( Math::colWHITE ),
-
-      // Timers
-      m_UseTime( HandlesNode.GetAttribute<bool>( "use_time", false ) ),
-      m_UseDeltaTime( HandlesNode.GetAttribute<bool>( "use_delta_time", false ) ),
 
       // Fog
       m_UseFog( HandlesNode.GetAttribute<bool>( "use_fog", false ) ),
@@ -79,7 +67,6 @@ bool CEffectTechnique::BeginRender()
 {
     if ( m_Effect )
     {
-
         // Obtain the direct x effect
         LPD3DXEFFECT l_Effect = m_Effect->GetEffect();
         D3DXHANDLE l_Handle = NULL;
@@ -99,19 +86,6 @@ bool CEffectTechnique::BeginRender()
             l_Effect->SetInt( l_Handle, m_TextureHeight );
             l_Handle = m_Effect->GetWidthTexture();
             l_Effect->SetInt( l_Handle, m_TextureWidth );
-        }
-
-        // TODO Check the time
-        if ( m_UseTime )
-        {
-            l_Handle = m_Effect->GetTimeParameter();
-            l_Effect->SetFloat( l_Handle, deltaTimeMacro );
-        }
-
-        if ( m_UseDeltaTime )
-        {
-            l_Handle = m_Effect->GetDeltaTimeParameter();
-            l_Effect->SetFloat( l_Handle, deltaTimeMacro );
         }
 
         SetupMatrices();

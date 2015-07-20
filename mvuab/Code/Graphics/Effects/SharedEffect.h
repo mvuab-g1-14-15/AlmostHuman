@@ -23,6 +23,8 @@ class CSharedEffect: public CEffect
         bool SetInverseProjectionMatrix( const Math::Mat44f& Matrix );
         bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
         bool SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor );
+        bool SetFBSize( const Math::Vect2u aSize );
+        bool SetDeltaTime( const float dt );
 
     private:
         DECLARE_EFFECT_PARAMETER( ViewMatrix );
@@ -32,6 +34,9 @@ class CSharedEffect: public CEffect
         DECLARE_EFFECT_PARAMETER( VPMatrix );
         DECLARE_EFFECT_PARAMETER( CameraPosition );
         DECLARE_EFFECT_PARAMETER( AmbientLight );
+        DECLARE_EFFECT_PARAMETER( FBWidth );
+        DECLARE_EFFECT_PARAMETER( FBHeight );
+        DECLARE_EFFECT_PARAMETER( DeltaTime );
 };
 
 #endif // SHARED_EFFECT_H

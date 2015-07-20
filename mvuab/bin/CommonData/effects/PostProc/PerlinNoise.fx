@@ -126,7 +126,7 @@ float turb(float3 P, float3 rep, float lacunarity, float gain)
 
 float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 {
-    float t = turb(float3(UV.x, UV.y, g_Time * 0.09), float3(1.3, 1.2, 2.0), 3, 0.6);
+    float t = turb(float3(UV.x, UV.y, g_DeltaTime * 0.09), float3(1.3, 1.2, 2.0), 3, 0.6);
     return tex2D(S0LinearSampler, UV) * float4(t, t, t, t);
 }
 

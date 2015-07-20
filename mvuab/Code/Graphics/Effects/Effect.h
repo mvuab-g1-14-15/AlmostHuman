@@ -54,21 +54,6 @@ class CEffect: public CName
         GET_SET( D3DXHANDLE, DebugColor );
         GET_SET( D3DXHANDLE, UseDebugColor );
 
-        GET_SET( D3DXHANDLE, SceneTextureParameter );
-        GET_SET( D3DXHANDLE, BloomThresholdParameter );
-        GET_SET( D3DXHANDLE, SampleOffsetsParameter );
-        GET_SET( D3DXHANDLE, SampleWeightsParameter );
-        GET_SET( D3DXHANDLE, GaussianBlurTextureParameter );
-        GET_SET( D3DXHANDLE, BloomIntensityParameter );
-        GET_SET( D3DXHANDLE, BaseIntensityParameter );
-        GET_SET( D3DXHANDLE, BloomSaturationParameter );
-        GET_SET( D3DXHANDLE, BaseSaturationParameter );
-        GET_SET( D3DXHANDLE, PostBloomTextureParameter );
-
-        // Timers
-        GET_SET( D3DXHANDLE, TimeParameter );
-        GET_SET( D3DXHANDLE, DeltaTimeParameter );
-
         // Texture
         GET_SET( D3DXHANDLE, HeightTexture );
         GET_SET( D3DXHANDLE, WidthTexture );
@@ -180,10 +165,6 @@ class CEffect: public CName
         D3DXHANDLE m_BloomSaturationParameter;
         D3DXHANDLE m_BaseSaturationParameter;
         D3DXHANDLE m_PostBloomTextureParameter;
-
-        // Timers
-        D3DXHANDLE m_TimeParameter;
-        D3DXHANDLE m_DeltaTimeParameter;
 
         // Fog information
         D3DXHANDLE m_UseFog;
