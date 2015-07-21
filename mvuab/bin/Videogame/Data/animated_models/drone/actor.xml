@@ -1,0 +1,9 @@
+<animated_model name="drone">
+	<skeleton file="drone.csf"/>
+	<mesh file="drone.cmf"/>
+	<animation name="idle_drone" file="idle.caf"/>
+	<animation name="shoot_drone" file="shoot.caf"/>
+	<animation name="pose_atac_drone" file="pose_atac.caf"/>
+	<animation name="death_drone" file="death.caf"/>
+	<animation name="hurt_drone" file="hurt.caf"/>
+</animated_model>

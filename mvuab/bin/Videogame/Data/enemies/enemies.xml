@@ -28,6 +28,11 @@
 		<point value="53.4073 -18.4127 -75.8385"/>
 	</route>
   
+	<route id="3">
+		<point value="73.403 -9.4127 -33.3886"/>
+		<point value="52.416 -9.4127 -33.3886"/>
+	</route>
+  
 	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
 	<core_enemy type="patroll" life="100" time_to_respawn="1.0" time_to_shoot="4.2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="boss" life="250" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
@@ -35,4 +40,8 @@
 	<enemy name="Enemy1" type="patroll" route="0" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy2" type="patroll" route="1" pos="57.7057 -16.4127 -44.8169" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy3" type="patroll" route="2" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1"/>
+	
+	<enemy name="Drone1" type="patroll" route="3" pos="73.403 -9.4127 -33.3886" yaw="0.0" mesh="drone"/>
+	<!--enemy name="Drone2" type="drone" route="4" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="drone"/-->
+	
 </enemies>
