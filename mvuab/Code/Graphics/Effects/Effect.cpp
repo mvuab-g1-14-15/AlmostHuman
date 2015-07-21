@@ -1,6 +1,7 @@
 #include "Effect.h"
 
 #include "EffectManager.h"
+#include "EffectPool.h"
 #include "EffectTechnique.h"
 #include "GraphicsManager.h"
 #include "Lights/DirectionalLight.h"
@@ -16,9 +17,6 @@ CEffect::CEffect( const std::string& EffectName )
     : CName( EffectName ),
       m_FileName( "" ),
       m_Effect( 0 ),
-      m_WorldViewMatrixParameter( 0 ),
-      m_ViewProjectionMatrixParameter( 0 ),
-      m_WorldViewProjectionMatrixParameter( 0 ),
       m_ViewToLightProjectionMatrixParameter( 0 ),
       m_LightEnabledParameter( 0 ),
       m_LightsTypeParameter( 0 ),
@@ -29,16 +27,11 @@ CEffect::CEffect( const std::string& EffectName )
       m_LightsFallOffParameter( 0 ),
       m_LightsStartRangeAttenuationParameter( 0 ),
       m_LightsEndRangeAttenuationParameter( 0 ),
-      m_CameraPositionParameter( 0 ),
       m_BonesParameter( 0 ),
 
       // Debug data
       m_UseDebugColor( 0 ),
       m_DebugColor( 0 ),
-
-      // Timers
-      m_TimeParameter( 0 ),
-      m_DeltaTimeParameter( 0 ),
 
       // Fog
       m_FogStart( 0 ),
@@ -54,16 +47,17 @@ CEffect::CEffect( const std::string& EffectName )
     , CTOR_EFFECT_PARAMETER( Angle )
     , CTOR_EFFECT_PARAMETER( Alpha )
     , CTOR_EFFECT_PARAMETER( Color )
-    , CTOR_EFFECT_PARAMETER( AmbientLightColor )
+    , CTOR_EFFECT_PARAMETER( InverseWorldMatrix )
     , CTOR_EFFECT_PARAMETER( WorldMatrix )
-    , CTOR_EFFECT_PARAMETER( ViewMatrix )
-    , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
+    , CTOR_EFFECT_PARAMETER( WVMatrix )
+    , CTOR_EFFECT_PARAMETER( WVPMatrix )
 {
     ResetLightsHandle();
 }
 
 CEffect::~CEffect()
 {
+    m_Effect->End();
     CHECKED_RELEASE( m_Effect );
 
     for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )
@@ -85,9 +79,11 @@ CEffect::~CEffect()
 void CEffect::SetNullParameters()
 {
     // Reset the parameters
-    m_WorldViewMatrixParameter = 0;
-    m_ViewProjectionMatrixParameter = 0;
-    m_WorldViewProjectionMatrixParameter = 0;
+    RESET_EFFECT_PARAMETER( InverseWorldMatrix );
+    RESET_EFFECT_PARAMETER( WorldMatrix );
+    RESET_EFFECT_PARAMETER( WVMatrix );
+    RESET_EFFECT_PARAMETER( WVPMatrix );
+
     m_ViewToLightProjectionMatrixParameter = 0;
     m_LightEnabledParameter = 0;
     m_LightsTypeParameter = 0;
@@ -98,11 +94,9 @@ void CEffect::SetNullParameters()
     m_LightsFallOffParameter = 0;
     m_LightsStartRangeAttenuationParameter = 0;
     m_LightsEndRangeAttenuationParameter = 0;
-    m_CameraPositionParameter = 0;
+
     m_BonesParameter = 0;
-    // Timers
-    m_TimeParameter = 0;
-    m_DeltaTimeParameter = 0;
+
     // Fog
     m_FogStart = 0;
     m_FogEnd = 0;
@@ -118,38 +112,22 @@ void CEffect::SetNullParameters()
     RESET_EFFECT_PARAMETER( Alpha )
     RESET_EFFECT_PARAMETER( Color )
 
-    RESET_EFFECT_PARAMETER( AmbientLightColor )
-
-    RESET_EFFECT_PARAMETER( WorldMatrix );
-    RESET_EFFECT_PARAMETER( ViewMatrix );
-    RESET_EFFECT_PARAMETER( ProjectionMatrix );
-
-    RESET_EFFECT_PARAMETER( InverseWorldMatrix );
-    RESET_EFFECT_PARAMETER( InverseViewMatrix );
-    RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
-
     ResetLightsHandle();
 }
 
 void CEffect::LinkSemantics()
 {
     // Get the references to the handlers inside the effect
-    LINK_EFFECT_PARAMETER( WorldMatrix );
-    LINK_EFFECT_PARAMETER( ViewMatrix );
-    LINK_EFFECT_PARAMETER( ProjectionMatrix );
     LINK_EFFECT_PARAMETER( Size  );
     LINK_EFFECT_PARAMETER( Angle );
     LINK_EFFECT_PARAMETER( Alpha );
     LINK_EFFECT_PARAMETER( Color );
-    LINK_EFFECT_PARAMETER( AmbientLightColor );
 
-    GetParameterBySemantic( InverseWorldMatrixParameterStr, m_InverseWorldMatrixParameter );
-    GetParameterBySemantic( InverseViewMatrixParameterStr, m_InverseViewMatrixParameter );
-    GetParameterBySemantic( InverseProjectionMatrixParameterStr, m_InverseProjectionMatrixParameter );
-    GetParameterBySemantic( WorldViewMatrixParameterStr, m_WorldViewMatrixParameter );
-    GetParameterBySemantic( ViewProjectionMatrixParameterStr, m_ViewProjectionMatrixParameter );
-    GetParameterBySemantic( WorldViewProjectionMatrixParameterStr,
-                            m_WorldViewProjectionMatrixParameter );
+    LINK_EFFECT_PARAMETER( InverseWorldMatrix );
+    LINK_EFFECT_PARAMETER( WorldMatrix );
+    LINK_EFFECT_PARAMETER( WVMatrix );
+    LINK_EFFECT_PARAMETER( WVPMatrix );
+
     GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
                             m_ViewToLightProjectionMatrixParameter );
     GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -163,19 +141,23 @@ void CEffect::LinkSemantics()
                             m_LightsStartRangeAttenuationParameter );
     GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,
                             m_LightsEndRangeAttenuationParameter );
-    GetParameterBySemantic( CameraPositionParameterStr, m_CameraPositionParameter );
+
     GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
-    GetParameterBySemantic( TimeParameterStr, m_TimeParameter );
+
     GetParameterBySemantic( DebugColorStr, m_DebugColor );
     GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );
+
     GetParameterBySemantic( FogStartStr, m_FogStart );
     GetParameterBySemantic( FogEndStr, m_FogEnd );
     GetParameterBySemantic( FogExpStr, m_FogExp );
     GetParameterBySemantic( FogFunStr, m_FogFun );
+
     GetParameterBySemantic( TextureHeightStr, m_HeightTexture );
     GetParameterBySemantic( TextureWidthStr, m_WidthTexture );
+
     GetParameterBySemantic( WindowHeightStr, m_HeightWindow );
     GetParameterBySemantic( WindowWidthStr, m_WidthWindow );
+
     GetParameterBySemantic( ShadowMapTextureSizeStr, m_ShadowMapTextureSizeParameter );
     GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
     GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
@@ -197,7 +179,7 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
             m_FileName.c_str() );
 }
 
-bool CEffect::LoadEffect()
+bool CEffect::LoadEffect( CEffectPool* aEffectPool )
 {
     bool lOk(true);
     // Obtain the device from the graphics manager and load the effect
@@ -211,7 +193,7 @@ bool CEffect::LoadEffect()
                        &m_Defines[0],
                        0, // LPD3DXINCLUDE pInclude,
                        dwShaderFlags,
-                       0, // LPD3DXEFFECTPOOL pPool,
+                       (aEffectPool) ? aEffectPool->GetD3DEffectPool() : 0,
                        &m_Effect,
                        &l_ErrorBuffer );
 
@@ -240,10 +222,10 @@ bool CEffect::LoadEffect()
     return lOk;
 }
 
-bool CEffect::Reload()
+bool CEffect::Reload(CEffectPool* aEffectPool)
 {
     Unload();
-    return LoadEffect();
+    return LoadEffect(aEffectPool);
 }
 
 void CEffect::Unload()
@@ -252,7 +234,7 @@ void CEffect::Unload()
     CHECKED_RELEASE( m_Effect );
 }
 
-bool CEffect::Load( CXMLTreeNode& EffectNode )
+bool CEffect::Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool )
 {
     m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
 
@@ -275,7 +257,7 @@ bool CEffect::Load( CXMLTreeNode& EffectNode )
 
     D3DXMACRO null = { NULL, NULL };
     m_Defines.push_back( null );
-    return LoadEffect();
+    return LoadEffect(aEffectPool);
 }
 
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
@@ -359,57 +341,6 @@ bool CEffect::SetLight( size_t i_light )
     return true;
 }
 
-bool CEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
-{
-    float32 l_Camera[3];
-    l_Camera[0] = CameraPosition.x;
-    l_Camera[1] = CameraPosition.y;
-    l_Camera[2] = CameraPosition.z;
-    return ( m_Effect->SetFloatArray( m_CameraPositionParameter, l_Camera,
-                                      3 ) == S_OK );
-}
-bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
-{
-    return S_OK == SET_MATRIX_PARAMETER( WorldMatrix, Matrix );
-}
-bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
-{
-    return S_OK == SET_MATRIX_PARAMETER( ViewMatrix, Matrix );
-}
-bool CEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
-{
-    return S_OK == SET_MATRIX_PARAMETER( ProjectionMatrix, Matrix );
-}
-bool CEffect::SetInverseWorldMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_InverseWorldMatrixParameter,
-                                  &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
-}
-bool CEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_InverseViewMatrixParameter,
-                                  &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
-}
-bool CEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_InverseProjectionMatrixParameter,
-                                  &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
-}
-bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_WorldViewMatrixParameter,
-                                  &Matrix.GetD3DXMatrix() ) == S_OK );
-}
-bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_WorldViewProjectionMatrixParameter,
-                                  &Matrix.GetD3DXMatrix() ) == S_OK );
-}
-bool CEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )
-{
-    return ( m_Effect->SetMatrix( m_ViewProjectionMatrixParameter,
-                                  &Matrix.GetD3DXMatrix() ) == S_OK );
-}
 bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
 {
     return ( m_Effect->SetMatrix( m_ViewToLightProjectionMatrixParameter,
@@ -493,9 +424,22 @@ void CEffect::SetAngle( float aAngle )
     ASSERT( lRes == S_OK, "Error setting size");
 }
 
-void CEffect::SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor )
+bool CEffect::SetWorldMatrix( const Math::Mat44f& Matrix )
 {
-    float lAmbientColor[3] = {aAmbienLightColor.x, aAmbienLightColor.y, aAmbienLightColor.z};
-    HRESULT lRes = m_Effect->SetFloatArray( m_AmbientLightColor, lAmbientColor, 3 );
-    ASSERT( lRes == S_OK, "Error setting ambient color");
+    return S_OK == SET_MATRIX_PARAMETER( WorldMatrix, Matrix );
+}
+
+bool CEffect::SetInverseWorldMatrix( const Math::Mat44f& Matrix )
+{
+    return ( m_Effect->SetMatrix( m_InverseWorldMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+}
+
+bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( WVMatrix, Matrix );
+}
+
+bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( WVPMatrix, Matrix );
 }

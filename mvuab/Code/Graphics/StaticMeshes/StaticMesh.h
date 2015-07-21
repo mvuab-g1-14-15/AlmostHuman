@@ -31,6 +31,9 @@ class CStaticMesh
         
         Math::AABB3f m_AABB;
 
+        Math::Vect3f m_AABBCenter;
+        bool m_IsTransformed;
+
     public:
         CStaticMesh();
         ~CStaticMesh();
@@ -47,7 +50,13 @@ class CStaticMesh
         void Destroy();
         
         Math::AABB3f GetAABB() { return m_AABB; }
+        void SetAABB(const Math::Vect3f &AABBCenter){ m_AABBCenter = AABBCenter; }
+        Math::Vect3f GetAABBCenter(){ return m_AABBCenter; }
+
         bool GetRenderableObjectTechnique();
+
+        bool IsTransformed() { return m_IsTransformed; }
+        void setIsTransformed(bool isTransfomed){ m_IsTransformed = isTransfomed; }
 };
 
 #endif //INC_STATIC_MESH_H_

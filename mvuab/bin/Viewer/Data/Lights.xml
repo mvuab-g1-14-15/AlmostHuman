@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="0.5 0.5 0.5" />
+  <ambient_light color="1 0 0" />
   <!--<lens_flare name ="flare001" technique="">
 		<flare texture ="" color="1.0 1.0 1.0" position="0.0" size="2 2"/>
 		<flare texture ="" color="1.0 1.0 1.0" position="0.5"/>

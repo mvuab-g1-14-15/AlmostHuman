@@ -21,6 +21,8 @@
 
 #include "Shapes/Shapes.h"
 
+#include "Effects\SharedEffect.h"
+
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
 {
@@ -113,6 +115,7 @@ void CGraphicsManager::BeginScene()
   else
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
 
+  EffectManagerInstance->BeginRender();
 }
 
 void CGraphicsManager::BeginRender()
@@ -132,6 +135,8 @@ void CGraphicsManager::BeginRender()
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID );
   else
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
+
+
 }
 
 void CGraphicsManager::Clear()
@@ -1196,7 +1201,7 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   mDirectXDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
   mDirectXDevice->GetViewport( &pViewport );
   D3DXVECTOR3 l_OutPosition;
-  D3DXVECTOR3 modPos( Point.x, Point.y, Point.z );
+  D3DXVECTOR3 modPos( Point.u );
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
                    &worldMatrix );
   // To Debug uncomment this line

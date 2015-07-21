@@ -1,7 +1,9 @@
 <effects>	
 	<technique name="DrawQuadSampler0Technique" vertex_type="1104">
 		<effect name="DrawQuad" file="../CommonData/effects/DrawQuad.fx"/>
-		<handles/>
+		<handles>
+			<matrices use_view_matrix="true"/>
+		</handles>
 	</technique>
 	
 	<technique name="DrawTextureInScreenTechnique" vertex_type="1104">
@@ -11,7 +13,10 @@
 	
 	<technique name="RenderDeferredTechnique" vertex_type="1104">
 		<effect name="RenderDeferredEffect" file="../CommonData/effects/RenderDeferred.fx"/>
-		<handles use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_matrix="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1"/>
+		<handles use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_matrix="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1">
+			<matrices use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_matrix="true" use_view_to_light_projection_matrix="true" />
+			<lights use_lights="true" num_of_lights="1"/>
+		</handles>
 	</technique>
 	
 	<technique name="InitRenderDeferredTechnique" vertex_type="1104">
@@ -24,7 +29,9 @@
 		<effect name="BillboardEffectAlignedToCamera" file="../CommonData/effects/BillboardEffect.fx">
 			<define name="TECHNIQUE_NAME" description="BillboardAlignedToCameraTechnique"/>
 		</effect>
-		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true">
+			<matrices use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true" />
+		</handles>
 	</technique>
 	
 	<technique name="BillboardAlignedToWorldUpAxisTechnique">

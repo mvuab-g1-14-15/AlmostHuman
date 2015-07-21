@@ -58,12 +58,12 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
 {
     D3DXMATRIX l_View;
     D3DXMATRIX l_Ortho;
-    D3DXVECTOR3 l_Eye( m_Position.x, m_Position.y, m_Position.z );
+    D3DXVECTOR3 l_Eye( m_Position.u );
 
     m_Direction.Normalize();
     Vect3f l_LookAtV3f = m_Position + m_Direction;
 
-    D3DXVECTOR3 l_LookAt( l_LookAtV3f.x, l_LookAtV3f.y, l_LookAtV3f.z );
+    D3DXVECTOR3 l_LookAt( l_LookAtV3f.u );
     D3DXVECTOR3 l_VUP;
 
     float l_Value = v3fY * l_LookAtV3f;
@@ -72,13 +72,13 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
     {
         Vect3f l_Cross = v3fX ^ m_Direction;
         Vect3f l_VUpV3f = m_Direction ^ l_Cross;
-        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+        l_VUP = D3DXVECTOR3( l_VUpV3f.u );
     }
     else
     {
         Vect3f l_Cross = v3fY ^ m_Direction;
         Vect3f l_VUpV3f = m_Direction ^ l_Cross;
-        l_VUP = D3DXVECTOR3( l_VUpV3f.x, l_VUpV3f.y, l_VUpV3f.z );
+        l_VUP = D3DXVECTOR3( l_VUpV3f.u );
     }
 
 

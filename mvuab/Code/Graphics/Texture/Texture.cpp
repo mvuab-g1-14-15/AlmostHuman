@@ -9,6 +9,8 @@ static const D3DPOOL    sTexturePools[CTexture::eTexturePoolCount]    = { D3DPOO
 static const DWORD      sTextureUsage[CTexture::eTextureUsageCount]   = { D3DUSAGE_DYNAMIC, D3DUSAGE_RENDERTARGET  };
 static const D3DFORMAT  sTextureFormat[CTexture::eTextureFormatCount] = { D3DFMT_A8R8G8B8, D3DFMT_R8G8B8, D3DFMT_X8R8G8B8, D3DFMT_R32F };
 
+#define D3D_TEXTURE_ERROR_CASE( param ) case param: LOG_ERROR_APPLICATION( "%s creating the texture %s", ""#param"", m_FileName.c_str() ); break;
+
 CTexture::CTexture()
     : m_Texture( 0 )
     , m_FileName( "" )
@@ -33,11 +35,37 @@ CTexture::~CTexture()
 
 bool CTexture::LoadFile()
 {
-    HRESULT l_Res = D3DXCreateTextureFromFile(
-                        GraphicsInstance->GetDevice(),
-                        m_FileName.c_str(), &m_Texture );
+   bool lOk = true;
+   HRESULT lHR = D3DXCreateTextureFromFile( GraphicsInstance->GetDevice(), m_FileName.c_str(), &m_Texture );
 
-    return ( l_Res == S_OK );
+   if( lHR != S_OK )
+   {
+      lOk = false;
+      switch ( lHR )
+      {
+         D3D_TEXTURE_ERROR_CASE( D3DERR_NOTAVAILABLE )
+         D3D_TEXTURE_ERROR_CASE( D3DERR_INVALIDCALL )
+         D3D_TEXTURE_ERROR_CASE( D3DERR_NOTFOUND )
+         D3D_TEXTURE_ERROR_CASE( D3DERR_DRIVERINVALIDCALL )
+         D3D_TEXTURE_ERROR_CASE( E_OUTOFMEMORY )
+         D3D_TEXTURE_ERROR_CASE( D3DERR_OUTOFVIDEOMEMORY )
+         default: LOG_ERROR_APPLICATION("The file %s does not exist", m_FileName.c_str());
+      }
+   }
+
+   if( lOk )
+   {
+      D3DXIMAGE_INFO lTextureInfo;
+      HRESULT lTextureInfoHR= D3DXGetImageInfoFromFile(m_FileName.c_str(),&lTextureInfo);
+
+      if( lTextureInfoHR == S_OK )
+      {
+         m_Width = lTextureInfo.Width;
+         m_Height = lTextureInfo.Height;
+      }
+   }
+
+    return lOk;
 }
 
 void CTexture::Unload()

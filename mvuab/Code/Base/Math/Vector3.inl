@@ -54,9 +54,17 @@ inline Vector3<T>::Vector3( const T escalar )
 template<typename T>
 inline Vector3<T> Vector3<T>::operator + ( const Vector3<T>& otro ) const
 {
-    return ( Vector3<T>( x + otro.x,
+    Vector3<T> r;
+
+    r.u[0] = u[0] + otro.u[0];
+    r.u[1] = u[1] + otro.u[1];
+    r.u[2] = u[2] + otro.u[2];
+
+    return r;
+
+    /*return ( Vector3<T>( x + otro.x,
                          y + otro.y,
-                         z + otro.z ) );
+                         z + otro.z ) );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,9 +73,17 @@ inline Vector3<T> Vector3<T>::operator + ( const Vector3<T>& otro ) const
 template<typename T>
 inline Vector3<T> Vector3<T>::operator - ( const Vector3<T>& otro ) const
 {
-    return ( Vector3<T>( x - otro.x,
+    Vector3<T> r;
+
+    r.u[0] = u[0] - otro.u[0];
+    r.u[1] = u[1] - otro.u[1];
+    r.u[2] = u[2] - otro.u[2];
+
+    return r;
+
+    /*return ( Vector3<T>( x - otro.x,
                          y - otro.y,
-                         z - otro.z ) );
+                         z - otro.z ) );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,9 +92,17 @@ inline Vector3<T> Vector3<T>::operator - ( const Vector3<T>& otro ) const
 template<typename T>
 inline Vector3<T> Vector3<T>::operator * ( const T escalar ) const
 {
-    return ( Vector3<T>( x * escalar,
+    /*return ( Vector3<T>( x * escalar,
                          y * escalar,
-                         z * escalar ) );
+                         z * escalar ) );*/
+
+    Vector3<T> r;
+
+    r.u[0] = u[0] * escalar;
+    r.u[1] = u[1] * escalar;
+    r.u[2] = u[2] * escalar;
+
+    return r;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,9 +111,17 @@ inline Vector3<T> Vector3<T>::operator * ( const T escalar ) const
 template<typename T>
 inline Vector3<T> operator * ( const T escalar, const Vector3<T>& otro )
 {
-    return ( Vector3<T>( otro.x * escalar,
+    /*return ( Vector3<T>( otro.x * escalar,
                          otro.y * escalar,
-                         otro.z * escalar ) );
+                         otro.z * escalar ) );*/
+    Vector3<T> r;
+
+    r.u[0] = otro.u[0] * escalar;
+    r.u[1] = otro.u[1] * escalar;
+    r.u[2] = otro.u[2] * escalar;
+
+    return r;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,9 +202,18 @@ inline Vector3<T> operator / ( const T escalar, const Vector3<T>& otro )
 template<typename T>
 inline Vector3<T> Vector3<T>::operator + ( const T escalar ) const
 {
-    return Vector3<T>( x + escalar,
+
+    Vector3<T> r;
+
+    r.u[0] = u[0] + escalar;
+    r.u[1] = u[1] + escalar;
+    r.u[2] = u[2] + escalar;
+
+    return r;
+
+    /*return Vector3<T>( x + escalar,
                        y + escalar,
-                       z + escalar );
+                       z + escalar );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,9 +223,17 @@ inline Vector3<T> Vector3<T>::operator + ( const T escalar ) const
 template<typename T>
 inline Vector3<T> operator + ( const T escalar, const Vector3<T>& vector )
 {
-    return Vector3<T>( vector.x + escalar,
+    Vector3<T> r;
+
+    r.u[0] = vector.u[0] + escalar;
+    r.u[1] = vector.u[1] + escalar;
+    r.u[2] = vector.u[2] + escalar;
+
+    return r;
+
+    /*return Vector3<T>( vector.x + escalar,
                        vector.y + escalar,
-                       vector.z + escalar );
+                       vector.z + escalar );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,9 +242,17 @@ inline Vector3<T> operator + ( const T escalar, const Vector3<T>& vector )
 template<typename T>
 inline Vector3<T> Vector3<T>::operator - ( const T escalar ) const
 {
-    return Vector3<T>( x - escalar,
+    Vector3<T> r;
+
+    r.u[0] = u[0] - escalar;
+    r.u[1] = u[1] - escalar;
+    r.u[2] = u[2] - escalar;
+
+    return r;
+
+    /*return Vector3<T>( x - escalar,
                        y - escalar,
-                       z - escalar );
+                       z - escalar );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,9 +262,17 @@ inline Vector3<T> Vector3<T>::operator - ( const T escalar ) const
 template<typename T>
 inline Vector3<T> operator - ( const T escalar, const Vector3<T>& vector )
 {
-    return Vector3<T>( escalar - vector.x,
+    Vector3<T> r;
+
+    r.u[0] = escalar - vector.u[0];
+    r.u[1] = escalar - vector.u[1];
+    r.u[2] = escalar - vector.u[2];
+
+    return r;
+
+    /*return Vector3<T>( escalar - vector.x,
                        escalar - vector.y,
-                       escalar - vector.z );
+                       escalar - vector.z );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,9 +308,13 @@ inline const Vector3<T>& Vector3<T>::operator + () const
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator += ( const Vector3<T>& otro )
 {
-    x += otro.x;
+    /*x += otro.x;
     y += otro.y;
-    z += otro.z;
+    z += otro.z;*/
+
+    u[0] += otro.u[0];
+    u[1] += otro.u[1];
+    u[2] += otro.u[2];
 
     return ( *this );
 }
@@ -256,9 +325,13 @@ inline Vector3<T>& Vector3<T>::operator += ( const Vector3<T>& otro )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator -= ( const Vector3<T>& otro )
 {
-    x -= otro.x;
+    /*x -= otro.x;
     y -= otro.y;
-    z -= otro.z;
+    z -= otro.z;*/
+
+    u[0] -= otro.u[0];
+    u[1] -= otro.u[1];
+    u[2] -= otro.u[2];
 
     return ( *this );
 }
@@ -269,9 +342,9 @@ inline Vector3<T>& Vector3<T>::operator -= ( const Vector3<T>& otro )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator *= ( const T escalar )
 {
-    x *= escalar;
-    y *= escalar;
-    z *= escalar;
+    u[0] *= escalar;
+    u[1] *= escalar;
+    u[2] *= escalar;
 
     return ( *this );
 }
@@ -300,9 +373,9 @@ inline Vector3<T>& Vector3<T>::operator /= ( const T escalar )
     //------------------------------------------<<<
     // Sin chequeo
     T inv_escalar = One<T>() / escalar;
-    x *= inv_escalar;
-    y *= inv_escalar;
-    z *= inv_escalar;
+    u[0] *= inv_escalar;
+    u[1] *= inv_escalar;
+    u[2] *= inv_escalar;
     //------------------------------------------>>>
 #endif
 
@@ -315,9 +388,9 @@ inline Vector3<T>& Vector3<T>::operator /= ( const T escalar )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator += ( const T escalar )
 {
-    x += escalar;
-    y += escalar;
-    z += escalar;
+    u[0] += escalar;
+    u[1] += escalar;
+    u[2] += escalar;
 
     return ( *this );
 }
@@ -328,9 +401,9 @@ inline Vector3<T>& Vector3<T>::operator += ( const T escalar )
 template<typename T>
 inline Vector3<T>& Vector3<T>::operator -= ( const T escalar )
 {
-    x -= escalar;
-    y -= escalar;
-    z -= escalar;
+    u[0] -= escalar;
+    u[1] -= escalar;
+    u[2] -= escalar;
 
     return ( *this );
 }
@@ -404,7 +477,8 @@ void Vector3<T>::GetPolar( T& longitude, T& latitude, T& length ) const
 template<typename T>
 inline T Vector3<T>::operator * ( const Vector3<T>& otro ) const
 {
-    return ( x * otro.x + y * otro.y + z * otro.z );
+    return (u[0] * otro.u[0] + u[1] * otro.u[1] + u[2] * otro.u[2]);
+    //return ( x * otro.x + y * otro.y + z * otro.z );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,9 +487,17 @@ inline T Vector3<T>::operator * ( const Vector3<T>& otro ) const
 template<typename T>
 inline Vector3<T> Vector3<T>::operator ^ ( const Vector3<T>& otro ) const
 {
-    return Vector3<T>( ( y * otro.z ) - ( z * otro.y ),
+    Vector3<T> r;
+
+    r.u[0] = u[1] * otro.u[2] - u[2] * otro.u[1];
+    r.u[1] = u[2] * otro.u[0] - u[0] * otro.u[2];
+    r.u[2] = u[0] * otro.u[1] - u[1] * otro.u[0];
+
+    return r;
+
+    /*return Vector3<T>( ( y * otro.z ) - ( z * otro.y ),
                        ( z * otro.x ) - ( x * otro.z ),
-                       ( x * otro.y ) - ( y * otro.x ) );
+                       ( x * otro.y ) - ( y * otro.x ) );*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -575,7 +657,7 @@ inline Vector2<T> Vector3<T>::GetProjZX() const
 template<typename T>
 inline T Vector3<T>::Length() const
 {
-    return ( ( T )sqrt( x * x + y * y + z * z ) );
+    return ( ( T )sqrt( u[0] * u[0] + u[1] * u[1] + u[2] * u[2] ) );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -623,23 +705,26 @@ inline Vector3<T>& Vector3<T>::Normalize( const T tk )
     if ( length != Zero<T>() )
     {
         T aux = tk / length;
-        x *= aux;
-        y *= aux;
-        z *= aux;
+        u[0] *= aux;
+        u[1] *= aux;
+        u[2] *= aux;
     }
 
     //------------------------------------------>>>
 #else
     //------------------------------------------<<<
     // Sin chequeo
-    T length = Length();
+    T length = u[0] * u[0] + u[1] * u[1] + u[2] * u[2];
+    if(1.0f == length || 0.0f == length) return *this;
+
     //ASSERT( length != Zero<T>(), "División por cero en normalización de vector" );
     //TODO EL ASSERT NO FUNCIONA NI METIENDO EL INCLUDE
 
-    T aux = tk / Length();
-    x *= aux;
-    y *= aux;
-    z *= aux;
+    T aux = T(1.0) / sqrt(length);
+
+    u[0] *= aux;
+    u[1] *= aux;
+    u[2] *= aux;
     //------------------------------------------>>>
 #endif
 

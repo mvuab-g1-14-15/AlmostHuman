@@ -300,14 +300,11 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
-    <ClCompile Include="RenderableObject\Scene.cpp">
-      <Filter>RenderableObject</Filter>
+    <ClCompile Include="Effects\EffectFlags.cpp">
+      <Filter>Effects</Filter>
     </ClCompile>
-    <ClCompile Include="RenderableObject\Room.cpp">
-      <Filter>RenderableObject</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject\Layer.cpp">
-      <Filter>RenderableObject</Filter>
+    <ClCompile Include="Effects\SharedEffect.cpp">
+      <Filter>Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -619,15 +616,13 @@
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
       <Filter>RenderableVertex</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableObject\Scene.h">
-      <Filter>RenderableObject</Filter>
+    <ClInclude Include="Effects\EffectFlags.h">
+      <Filter>Effects</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableObject\Room.h">
-      <Filter>RenderableObject</Filter>
+    <ClInclude Include="Effects\SharedEffect.h">
+      <Filter>Effects</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableObject\Layer.h">
-      <Filter>RenderableObject</Filter>
-    </ClInclude>
+    <ClInclude Include="dx9.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">

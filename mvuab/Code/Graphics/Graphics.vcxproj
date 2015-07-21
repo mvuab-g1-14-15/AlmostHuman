@@ -37,6 +37,8 @@
     <ClCompile Include="Cinematics\CinematicsElement\SetTransformElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp" />
+    <ClCompile Include="Effects\EffectFlags.cpp" />
+    <ClCompile Include="Effects\SharedEffect.cpp" />
     <ClCompile Include="GraphicsXMLTreeNode.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectManager.cpp" />
@@ -143,11 +145,14 @@
     <ClInclude Include="Cinematics\CinematicsElement\SetTransformElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\ShowDialogElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\WaitTimeElement.h" />
+    <ClInclude Include="dx9.h" />
     <ClInclude Include="Effects\Effect.h" />
+    <ClInclude Include="Effects\EffectFlags.h" />
     <ClInclude Include="Effects\EffectManager.h" />
     <ClInclude Include="Effects\Defines.h" />
     <ClInclude Include="Effects\EffectPool.h" />
     <ClInclude Include="Effects\EffectTechnique.h" />
+    <ClInclude Include="Effects\SharedEffect.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="Gizmos\Gizmo.h" />
     <ClInclude Include="Gizmos\GizmoElement.h" />

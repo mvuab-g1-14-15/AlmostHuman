@@ -61,7 +61,7 @@ bool PlayerInSight( CEnemy* aEnemy )
     CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
     Math::Vect3f lPosition( lController->GetPosition() );
 
-    if ( lCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
+    if ( lCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.u ), lController->GetHeight() * 0.5f ) )
         return true;
 
     return false;

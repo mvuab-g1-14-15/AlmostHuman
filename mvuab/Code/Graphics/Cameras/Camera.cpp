@@ -45,9 +45,9 @@ D3DXMATRIX CCamera::GetMatrixView( void )
 {
     Math::Vect3f& l_LookAt = GetLookAt();
     Math::Vect3f& l_UpVec = GetVecUp();
-    D3DXVECTOR3 d3dxPos( m_Position.x, m_Position.y, m_Position.z );
-    D3DXVECTOR3 d3dxTarget( l_LookAt.x, l_LookAt.y, l_LookAt.z );
-    D3DXVECTOR3 d3dxUp( l_UpVec.x, l_UpVec.y, l_UpVec.z );
+    D3DXVECTOR3 d3dxPos( m_Position.u);
+    D3DXVECTOR3 d3dxTarget( l_LookAt.u );
+    D3DXVECTOR3 d3dxUp( l_UpVec.u );
     D3DXMatrixLookAtLH( &m_view, &d3dxPos, &d3dxTarget, &d3dxUp );
     return m_view;
 }
