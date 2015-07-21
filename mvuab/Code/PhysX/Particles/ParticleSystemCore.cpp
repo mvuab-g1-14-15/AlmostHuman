@@ -38,19 +38,11 @@ CParticleSystemCore::~CParticleSystemCore()
   Destroy();
 }
 
-void CParticleSystemCore::Update(Math::Vect3f& lPosition)
+void CParticleSystemCore::Update()
 {
-  //LO ACTUALIZA EL INSTANCE? TODO ALEX
-  for ( uint32 i = 0, lEmitters = GetResourcesCount(); i < lEmitters; ++i )
+  for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
   {
-    CParticleEmitter* lEmitter = GetResourceById( i );
-
-    if ( lEmitter->IsActive() )
-	{
-		//TODO ALEXITO EL NIÑO MÁS BONITO
-		lEmitter->SetPosition(lPosition);
-		lEmitter->Update( deltaTimeMacro );
-	}
+	GetResourceById( i )->Update(deltaTimeMacro);
   }
 }
 
@@ -58,9 +50,7 @@ void CParticleSystemCore::Render()
 {
   for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
   {
-	  CParticleEmitter* lParticleInstance = GetResourceById( i );
-
-    lParticleInstance->Render();
+	GetResourceById( i )->Render();
   }
 }
 

@@ -38,3 +38,13 @@ void CParticleSystemManager::Init()
     }
   }
 }
+
+void CParticleSystemManager::Update()
+{
+	for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); 
+		lItb != lIte; ++lItb )
+	{
+		(*lItb)->Update();
+	}
+}
+

@@ -2,22 +2,19 @@
 #define _INSTANCE_PARTICLE_H
 
 #include "XML\XMLTreeNode.h"
-#include "ParticleSystemCore.h"
+#include "Object3D.h"
 
-#include <string>
-#include <vector>
+class CParticleSystemCore;
 
-class CInstanceParticle
+class CInstanceParticle : public CObject3D
 {
 private:
-  CParticleSystemCore*  m_ParticleSystem;
-  Math::Vect3f          m_Position;
+	CParticleSystemCore* mCore;
 public:
-  CInstanceParticle();
   CInstanceParticle( const CXMLTreeNode& atts );
   ~CInstanceParticle();
 
-  void Update();
+  void Update(){};
   void Render();
 };
 

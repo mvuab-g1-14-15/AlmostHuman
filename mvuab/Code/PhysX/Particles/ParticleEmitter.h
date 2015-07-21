@@ -32,7 +32,6 @@ class CParticleEmitter :  public CName
         const uint32 GetParticleCount() const;
         const CParticle* GetParticle( const uint32 aIdx) const;
         CParticle* GetParticle( const uint32 aIdx);
-		void SetPosition(Math::Vect3f& lPosition);
     protected:
         typedef CParticle*                TParticleContainer;
         typedef std::vector < CTexture*>  TTextureContainer;
@@ -56,7 +55,6 @@ class CParticleEmitter :  public CName
         Math::Vect2f                mSize;
         Math::Vect2f                mTimeToLive;
         Math::Vect2f                mParticlesXEmission;
-        Math::Vect3f                mPosition;
         CEffectTechnique*           mTechnique;
         TTextureContainer           mTextures;
         TParticleContainer          mParticles;

@@ -47,39 +47,38 @@ const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 
 void CInstanceMesh::Render()
 {
-    if ( !mStaticMesh )
+    if ( mStaticMesh )
     {
-        return;
-    }
+		Math::Mat44f lTransform = GetTransform();
+		Math::AABB3f laabb = mStaticMesh->GetAABB();
 
-    Math::Mat44f lTransform = GetTransform();
-    Math::AABB3f laabb = mStaticMesh->GetAABB();
+		if ( mType == "dynamic" && mPhysicActor != 0 )
+		{
+			mPhysicActor->GetMat44( lTransform );
 
-    if ( mType == "dynamic" && mPhysicActor != 0 )
-    {
-        mPhysicActor->GetMat44( lTransform );
+			Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
 
-        Math::Vect3f lUp( 0.0f, - laabb.GetCenter().y, 0.0f );
+			Math::Mat44f lCenterTransform;
+			lCenterTransform.SetIdentity();
 
-        Math::Mat44f lCenterTransform;
-        lCenterTransform.SetIdentity();
+			lCenterTransform.Translate( lUp );
 
-        lCenterTransform.Translate( lUp );
+			lTransform = lTransform * lCenterTransform;
+		}
 
-        lTransform = lTransform * lCenterTransform;
+		GraphicsInstance->SetTransform( lTransform );
 
-    }
+		CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+		Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
 
-    GraphicsInstance->SetTransform( lTransform );
+		if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y,
+										   lPositionTransformed.z ), laabb.GetRadius() ) )
+		{
+			mStaticMesh->Render( GraphicsInstance );
+		}
 
-    CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
-    Math::Vect3f lPositionTransformed = lTransform * laabb.GetCenter();
-
-    if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( lPositionTransformed.x, lPositionTransformed.y,
-                                       lPositionTransformed.z ), laabb.GetRadius() ) )
-    {
-        mStaticMesh->Render( GraphicsInstance );
-    }
+		GraphicsInstance->SetTransform( Math::Mat44f() );
+	}
 }
 
 void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )

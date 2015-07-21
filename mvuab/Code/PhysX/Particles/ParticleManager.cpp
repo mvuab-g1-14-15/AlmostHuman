@@ -42,23 +42,11 @@ void CParticleManager::Init()
   }
 }
 
-void CParticleManager::Update()
-{
-  for ( uint32 i = 0, lEmitters = GetResourcesCount(); i < lEmitters; ++i )
-  {
-    CInstanceParticle* lParticleInstance = GetResourceById( i );
-
-    lParticleInstance->Update();
-  }
-}
-
 void CParticleManager::Render()
 {
   for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
   {
-    CInstanceParticle* lParticleInstance = GetResourceById( i );
-
-    lParticleInstance->Render();
+    GetResourceById( i )->Render();
   }
 }
 

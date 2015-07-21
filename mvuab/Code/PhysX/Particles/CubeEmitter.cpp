@@ -20,8 +20,8 @@ bool CCubeEmitter::Init( const CXMLTreeNode& atts )
     if( lOk )
     {
         mSize = atts.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f());
-        mMinPnt = mPosition - mSize;
-        mMaxPnt = mPosition + mSize;
+        mMinPnt = -mSize;
+        mMaxPnt =  mSize;
     }
 
     return lOk;
@@ -75,6 +75,6 @@ Math::Vect3f CCubeEmitter::GetSpawnPosition()
 //TODO ALEXITO EL NIÑO MÁS BONITO
 void CCubeEmitter::SetPositionParticle(Math::Vect3f& lPosition)
 {
-	mMinPnt = mPosition - mSize;
-    mMaxPnt = mPosition + mSize;
+	mMinPnt = -mSize;
+    mMaxPnt = mSize;
 }

@@ -21,7 +21,7 @@ public:
   ~CParticleManager();
 
   void Init();
-  void Update();
+  void Update(){};
   void Render();
   void Refresh();
 };
