@@ -19,6 +19,8 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         CEffectManager( CXMLTreeNode &atts);
         ~CEffectManager();
 
+        void BeginRender();
+
         const Math::Mat44f& GetWorldMatrix() const;
         const Math::Mat44f& GetProjectionMatrix() const;
         const Math::Mat44f& GetViewMatrix() const;

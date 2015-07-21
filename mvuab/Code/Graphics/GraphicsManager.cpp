@@ -21,6 +21,8 @@
 
 #include "Shapes/Shapes.h"
 
+#include "Effects\SharedEffect.h"
+
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
 {
@@ -113,6 +115,7 @@ void CGraphicsManager::BeginScene()
   else
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
 
+  EffectManagerInstance->BeginRender();
 }
 
 void CGraphicsManager::BeginRender()
@@ -132,6 +135,8 @@ void CGraphicsManager::BeginRender()
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID );
   else
     mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
+
+
 }
 
 void CGraphicsManager::Clear()

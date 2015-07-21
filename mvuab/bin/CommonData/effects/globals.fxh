@@ -16,16 +16,22 @@
 //
 // Shared Parameters 
 //
-shared float4x4 g_WorldViewProj                                            : WorldViewProjection;
+
+shared float4x4 g_WorldViewProj                                            : WVPMatrix;
 shared float4x4 g_ViewMatrix                                               : ViewMatrix;
-shared float4x4 g_ViewInverseMatrix                                        : ViewInverse;
-shared float4x4 g_ProjectionInverseMatrix                                  : ProjectionInverse;
+shared float4x4 g_ViewInverseMatrix                                        : InverseViewMatrix;
+shared float4x4 g_ProjectionInverseMatrix                                  : InverseProjectionMatrix;
 shared float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
 shared float4x4 g_WorldMatrix                                              : WorldMatrix;
-shared float4x4 g_WorldInverseMatrix                                       : WorldInverse;
-shared float4x4 g_WorldViewMatrix                                          : WorldView;
-shared float4x4 g_ViewProjMatrix                                           : ViewProjection;
+shared float4x4 g_WorldInverseMatrix                                       : InverseWorldMatrix;
+shared float4x4 g_WorldViewMatrix                                          : WVMatrix;
+shared float4x4 g_ViewProjMatrix                                           : VPMatrix;
 shared float3   g_CameraPosition                                           : CameraPosition;
+shared float3   g_AmbientLight 											   : AmbientLight;
+shared float    g_DeltaTime 											   : DeltaTime;
+shared int      g_FBWidth    											   : FBWidth;
+shared int      g_FBHeight       										   : FBHeight;
+
 
 //
 // Debug semantics
@@ -65,18 +71,11 @@ float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDire
 float       g_SpecularExponent 	= 20.0f;
 float       g_SpecularFactor 	= 20.0f;
 //float4    g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
-float3      g_AmbientLight 											: AmbientLightColor;
 
 //
 // Cal3D parameters
 //
 float3x4    g_Bones[MAXBONES]                                       : Bones;
-
-//
-// Time data
-//
-float       g_DeltaTime                                             : DeltaTime;
-float       g_Time                                                  : Time;
 
 float       g_Bump = 24.0;
 

@@ -4,6 +4,9 @@
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
 #include "EngineConfig.h"
+#include "SharedEffect.h"
+
+static bool sSharedEffectInited = false;
 
 CEffectManager::CEffectManager()
     : CManager()
@@ -174,6 +177,17 @@ void CEffectManager::Load( const std::string& lFile )
                     {
                         CHECKED_DELETE( l_pEffect );
                     }
+
+                    if( l_pEffect && !sSharedEffectInited )
+                    {
+                       CSharedEffect* lSharedEffect = mEffectPool->GetSharedEffect();
+                       ASSERT( lSharedEffect, "Null shared effect" );
+
+                       lSharedEffect->SetEffect( l_pEffect->GetEffect() );
+                       lSharedEffect->LinkSemantics();
+
+                       sSharedEffectInited = true;
+                    }
                 }
                 else if ( l_TagName == "handles" )
                 {
@@ -224,4 +238,9 @@ CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName 
     return lTech;
 }
 
+
+void CEffectManager::BeginRender()
+{
+   mEffectPool->Bind();
+}
 
