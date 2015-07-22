@@ -6,24 +6,26 @@
 #include "GraphicsManager.h"
 
 CInstanceParticle::CInstanceParticle( const CXMLTreeNode& atts )
-	: CObject3D( atts )
-	, mCore( ParticleSystemInstance->GetResource( atts.GetAttribute<std::string>( "core", "" ) ) )
+  : CObject3D( atts )
+  , mCore( ParticleSystemInstance->GetResource( atts.GetAttribute<std::string>( "core", "" ) ) )
 {
-	ASSERT( mCore, "Null core" );
+  ASSERT( mCore, "Null core" );
 }
 
 CInstanceParticle::~CInstanceParticle()
 {
-	
+
 }
 
 void CInstanceParticle::Render()
 {
-	CGraphicsManager *lGM = GraphicsInstance;
-	lGM->SetTransform( GetTransform() );
-	lGM->EnableAlphaBlend();
-	lGM->EnableZTest();
-	lGM->EnableZWrite();
-	mCore->Render();
-	lGM->SetTransform( Math::Mat44f() );
+  CGraphicsManager* lGM = GraphicsInstance;
+  lGM->SetTransform( GetTransform() );
+  //lGM->EnableAlphaBlend();
+  //lGM->EnableZTest();
+  lGM->SetSrcBlend( "One" );
+  lGM->SetDstBlend( "One" );
+  lGM->SetBlendOP( "Add" );
+  mCore->Render();
+  lGM->SetTransform( Math::Mat44f() );
 }

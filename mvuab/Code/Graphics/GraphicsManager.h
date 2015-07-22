@@ -56,7 +56,8 @@ public:
   void Present();
   void EnableAlphaTest();
   void DisableAlphaTest();
-  void SetBlendOP();
+  void SetBlendOP( const std::string& BlendOPState );
+  void SetBlendOP( );
   void SetSrcBlend( const std::string& BlendState );
   void SetDstBlend( const std::string& BlendState );
   Math::Vect2f ToScreenCoordinates( Math::Vect3f Point );
@@ -135,6 +136,7 @@ private: // Members
 private: // Methods
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i& finalPos );
   D3DBLEND ToD3DBlendEnum( const std::string& BlendState );
+  D3DBLENDOP ToD3DBlendOPEnum( const std::string& BlendOPState );
   void InitShapes();
   void DestroyShapes();
 
