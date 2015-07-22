@@ -101,12 +101,14 @@
 	</render_draw_quad>
 	
 	-->
+	<!--
 	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="DepthMapTexture"/>
 		<texture stage_id="1" name="GeometryNormalMapTexture"/>
 		<texture stage_id="2" name="Data/textures/Random.png"/>
     </render_draw_quad>
+	-->
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
