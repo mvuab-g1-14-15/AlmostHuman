@@ -50,10 +50,10 @@ technique SSAOTechnique
 {
 	pass p0
 	{
-		AlphaBlendEnable = true;
-        BlendOp = RevSubtract;
-        DestBlend = one;
-		SrcBlend = one;
+		//AlphaBlendEnable = true;
+        //BlendOp = RevSubtract;
+        //DestBlend = one;
+		//SrcBlend = one;
 		
 		PixelShader = compile ps_3_0 ps_ssao();
 	}

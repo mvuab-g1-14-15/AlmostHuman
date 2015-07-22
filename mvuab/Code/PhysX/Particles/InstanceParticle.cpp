@@ -22,10 +22,10 @@ void CInstanceParticle::Render()
   CGraphicsManager* lGM = GraphicsInstance;
   lGM->SetTransform( GetTransform() );
   //lGM->EnableAlphaBlend();
-  //lGM->EnableZTest();
+  /*lGM->EnableZTest();
   lGM->SetSrcBlend( "One" );
   lGM->SetDstBlend( "One" );
-  lGM->SetBlendOP( "Add" );
+  lGM->SetBlendOP( "Add" );*/
   mCore->Render();
   lGM->SetTransform( Math::Mat44f() );
 }

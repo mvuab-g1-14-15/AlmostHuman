@@ -774,9 +774,6 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
 void CGraphicsManager::EnableAlphaBlend()
 {
   mDirectXDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
-  // render el quad de difuminacion....
-  //m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  //m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
   //// render el quad de difuminacion....
   mDirectXDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
   mDirectXDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );

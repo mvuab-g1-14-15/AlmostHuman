@@ -61,7 +61,7 @@
     </render_draw_quad>
 	
 	<enable_alpha_blend/>
-	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha"/>
+	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	
 	<set_pool_renderable_objects_technique pool="render_deferred_technique_pool_renderable_object_technique"/>
     <render_deferred_shading>
@@ -76,20 +76,24 @@
 	-->
 	
 	<enable_z_test/>
-	
+	<enable_alpha_blend/>
+	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<render_billboards/>
 	<!--<render_editors/>
 	<render_triggers/>-->
 	<render_gizmos render="true"/>
 	<render_process/>
 	
+	<disable_alpha_blend/>
 	<disable_z_test/>
 
-	
+	<enable_alpha_blend/>
+	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<capture_frame_buffer name="Glow_Step01_Capture_FB">
 		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
 	
+	<disable_alpha_blend/>
 	<!-- BLOOM -->
 	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Bloom.xml"/>	-->
 	
@@ -100,12 +104,16 @@
 	</render_draw_quad>
 	
 	-->
+	<!--<enable_alpha_blend/>
+	<set_blend srcblend="One" dstblend="One" blendop="RevSubtract"/>
 	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
     <render_draw_quad active="true">
         <texture stage_id="0" name="DepthMapTexture"/>
 		<texture stage_id="1" name="GeometryNormalMapTexture"/>
 		<texture stage_id="2" name="Data/textures/Random.png"/>
     </render_draw_quad>
+	
+	<disable_alpha_blend/>-->
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
@@ -117,13 +125,17 @@
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
 	
+	
 	<enable_z_test/>
+	<enable_alpha_blend/>
+	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_particules/>
+	
 	
 	<disable_z_test/>
 	
 	<render_gui render="true"/>
-	
+	<disable_alpha_blend/>
 	<render_developer_info/>
 	
 	<disable_alpha_test/>

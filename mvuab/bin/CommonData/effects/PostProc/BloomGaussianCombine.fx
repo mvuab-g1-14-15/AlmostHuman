@@ -34,10 +34,10 @@ technique TECHNIQUE_NAME
     pass p0
     {
 	#if defined( STAGE_COMBINE )
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
+		//AlphaBlendEnable = true;
+		//BlendOp=Add;
+		//SrcBlend = one;
+		//DestBlend = one;
 	#endif
         PixelShader = compile ps_3_0 PS_NAME();
     }
