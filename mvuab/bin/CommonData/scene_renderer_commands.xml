@@ -34,8 +34,6 @@
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/-->
 	
-	
-	
 	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Glow.xml"/-->
 	
 	<!-- end pre_render-->
@@ -86,7 +84,6 @@
 	
 	<disable_z_test/>
 
-	
 	<capture_frame_buffer name="Glow_Step01_Capture_FB">
 		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
@@ -101,12 +98,6 @@
 	</render_draw_quad>
 	
 	-->
-	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="DepthMapTexture"/>
-		<texture stage_id="1" name="GeometryNormalMapTexture"/>
-		<texture stage_id="2" name="Data/textures/Random.png"/>
-    </render_draw_quad>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
