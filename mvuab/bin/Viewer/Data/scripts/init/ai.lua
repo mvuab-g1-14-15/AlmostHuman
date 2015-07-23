@@ -65,7 +65,7 @@ function andar()
 		end
 		if (enemy:GetCurrentState() == "andando" ) then
 			enemy:ChangeState("esperar")
-			enemy:GetAnimationModel():ChangeAnimation("esperar", 0.2, 1.0)
+			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		end
 	end
 	

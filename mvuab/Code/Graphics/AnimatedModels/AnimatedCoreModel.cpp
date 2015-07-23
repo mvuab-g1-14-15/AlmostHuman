@@ -239,7 +239,8 @@ int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
     }
     else
     {
-        lAnimationId = lItFind->second;
+      lAnimationId = lItFind->second;
+      LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
     }
 
     return lAnimationId;
