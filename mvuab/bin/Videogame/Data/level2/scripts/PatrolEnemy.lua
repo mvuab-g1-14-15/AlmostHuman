@@ -8,6 +8,7 @@ function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	self.Waypoints = waypoints
 	self.ActualWaypoint = 1
 	
+	self.TurnSpeed = 0.6
 	self.Delta = 0.2
 	self.PathCalculated = false
 	self.Path = vecVect3f()
@@ -38,7 +39,7 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 	local FinalPos = Vect3f()
 	if PositionPlayer == Vect3f(0.0) then
 		FinalPos = Vect3f(self.Waypoints[self.ActualWaypoint])
-	else
+	else		
 		FinalPos = PositionPlayer
 	end
 	FinalPos.y = 0
@@ -50,11 +51,25 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 	end
 	DirYaw = math.atan2( Dir.z, Dir.x )
 	Yaw = CharacterController:GetYaw()
+	engine:Trace("Yaw: "..Yaw)
+	engine:Trace("DirYaw: "..DirYaw)
 	YawDif = DirYaw - Yaw
     PrevYaw = Yaw
+	engine:Trace("YawDif "..YawDif)
 	
+	local YawDifCom = DirYaw - 2*g_Pi -Yaw
+	if math.abs( YawDifCom ) < math.abs( YawDif ) then
+		YawDif = YawDifCom
+	else
+		local YawDifCom = DirYaw + 2*g_Pi -Yaw
+		if math.abs( YawDifCom ) < math.abs( YawDif ) then
+			YawDif = YawDifCom
+		end
+	end
+		
     if ( math.abs( YawDif ) < 0.1 ) then
-		CharacterController:Move( Dir * 2.0, dt )
+		CharacterController:Move( Dir * 5.0, dt )
+		Yaw = DirYaw;
     else
         CharacterController:Move( Vect3f( 0.0 ), dt )
 		if YawDif > 0 then
@@ -62,9 +77,9 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 		else
 			YawDif = -1
 		end
-        Yaw = Yaw + (YawDif * 0.60 * dt)
+        Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
 
-        if ( ( Yaw < 0.0 and PrevYaw > 0.0 ) or ( Yaw > 0.0 and PrevYaw < 0.0 ) ) then
+        if ( ( Yaw < DirYaw and PrevYaw > DirYaw ) or ( Yaw > DirYaw and PrevYaw < DirYaw ) ) then
             Yaw = DirYaw
 		end
     end
@@ -74,41 +89,41 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 end
 
 function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
+	
 	CharacterController = CEnemyLUA.GetCharacterController(self)	
 	lPos = CharacterController:GetPosition()
-
     lAStar = g_EnemyManager:GetAStar()
 
-    if ( not self.PathCalculated ) then    
-        self.Path = vecVect3f(lAStar:GetPath( lPos, PositionPlayer ))
+    if ( not self.PathCalculated ) then   
+        self.Path = lAStar:GetPath( lPos, PositionPlayer )
         self.PathCalculated = true
     end
-	
 	count = self.Path:size()
 	
     for i = 0, count-1 do
-        self.Path[i].y = 0.0
+        self.Path:GetResource(i).y = 0.0
 	end
 	
     lTargetPos = lPos
     lPosAux = lPos
     lPosAux.y = 0.0
-    lDist = lPosAux.Distance( self.Path[1] )
-
+	lWaypointPos = self.Path:GetResource(1)
+	lWaypointPos.y = 0.0
+    lDist = lPosAux:Distance( lWaypointPos )
+	engine:Trace("Size "..self.Path:size())
+			engine:Trace("Distancia "..lDist)
     if ( self.Path:size() > 2 ) then
         if ( lDist < 0.6 ) then
             self.Path:erase( self.Path:begin() + 1 )
 		end
-        lTargetPos = self.Path[1]
+        lTargetPos = self.Path:GetResource(1)
     end
-
     lTargetPos.y = lPos.y
     
-	CEnemyLUA.MoveToWaypoint(self, lTargetPos)
+	self:MoveToWaypoint(lTargetPos)
     
     PositionPlayer.y = 0.0
-
-    if ( self.Path[self.Path:size() - 1].Distance( PositionPlayer ) > 5.0 ) then
+    if ( self.Path:GetResource(self.Path:size() - 1):Distance( PositionPlayer ) > 5.0 ) then
         self.PathCalculated = false
 	end
 end

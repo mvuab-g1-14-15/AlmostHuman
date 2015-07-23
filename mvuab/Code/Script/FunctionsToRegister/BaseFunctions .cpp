@@ -188,7 +188,7 @@ void registerBase( lua_State* m_LS )
     .def( "Length", &Math::Vect3f::Length )
     .def( "DotProduct", &Math::Vect3f::DotProduct )
     .def( "ToString", &Vect3f2String )
-
+	.def( "Distance", &Math::Vect3f::Distance )
     .def( "RotateY", &Math::Vect3f::RotateY )
   ];
   module( m_LS )

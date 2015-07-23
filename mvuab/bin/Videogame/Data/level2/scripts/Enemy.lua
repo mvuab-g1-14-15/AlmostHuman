@@ -34,6 +34,15 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	self.Brain = CBrain("inicial", state_machine)
 	
+	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
+	self.Camera = camera_manager:GetCamera(self.Name)
+	lPosition = self.CharacterController:GetPosition()
+	lPosition.y = lPosition.y + self:GetHeight()
+	lPosition = lPosition + self:GetDirection()
+	self.Camera:SetPosition(lPosition)
+	self.Camera:SetDirection(self:GetDirection())
+	self.Camera:MakeTransform()
+
 	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
@@ -112,10 +121,14 @@ end
 function CEnemyLUA:GetDirection()
 	local Yaw = self:GetYaw()
 	local Pitch = self:GetPitch()
-	local Direction = Vect3f( cos( Yaw ) * cos( Pitch ), sin( Pitch ), sin( Yaw ) * cos( Pitch ) )
+	local Direction = Vect3f( math.cos( Yaw ) * math.cos( Pitch ), math.sin( Pitch ), math.sin( Yaw ) * math.cos( Pitch ) )
 	return Direction
 end
 
 function CEnemyLUA:GetCharacterController()
 	return self.CharacterController
+end
+
+function CEnemyLUA:GetCamera()
+	return self.Camera
 end

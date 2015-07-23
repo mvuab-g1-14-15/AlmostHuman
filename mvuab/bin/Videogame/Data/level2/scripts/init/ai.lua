@@ -29,12 +29,13 @@ function check_next_state()
 	end
 	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 		if l_DistanceToPlayer < 4 and l_PlayerInSight then
-			l_NextState = "atacar"
+			l_NextState = "perseguir"
 		end
 	end
 	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
 	--	l_NextState = "andando"
 	--end
+	l_NextState = "perseguir"
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -109,7 +110,7 @@ function perseguir()
 	enemy = g_EnemyManager:GetActualEnemy()
 	
 	local l_TargetPos = GetPlayerPosition()
-	l_TargetPos.y = 0.0
+	
 	
 	enemy:MoveToPlayer(l_TargetPos)
 end

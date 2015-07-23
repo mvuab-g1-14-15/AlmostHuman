@@ -66,14 +66,26 @@ T vector_get( std::vector<T>& vec, size_t i )
   return vec[i];
 }
 
-bool PlayerInSight( CEnemy* aEnemy )
+//bool PlayerInSight( CEnemy* aEnemy )
+//{
+//  CCamera* lCamera = aEnemy->GetCamera();
+//
+//  CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
+//  Math::Vect3f lPosition( lController->GetPosition() );
+//
+//  if ( lCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
+//    return true;
+//
+//  return false;
+//}
+
+bool PlayerInSight( CCamera &aCamera )
 {
-  CCamera* lCamera = aEnemy->GetCamera();
 
   CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
   Math::Vect3f lPosition( lController->GetPosition() );
 
-  if ( lCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
+  if ( aCamera.GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
     return true;
 
   return false;
@@ -210,9 +222,10 @@ void registerAI( lua_State* aLuaState )
   [
     class_<std::vector<Math::Vect3f>>( "vecVect3f" )
     .def( constructor<>() )
+	.def( constructor<std::vector<Math::Vect3f>>() )
     .def( "GetResource", &vector_get<Math::Vect3f> )
     .def( "size", &std::vector<Math::Vect3f>::size )
-    .def( "erase", &vector_begin<Math::Vect3f> )
+    .def( "erase", &vector_erase<Math::Vect3f> )
     .def( "begin", &vector_begin<Math::Vect3f> )
   ];
 

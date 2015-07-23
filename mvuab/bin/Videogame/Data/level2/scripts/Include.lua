@@ -101,9 +101,9 @@ function PlayerVisibility(enemy)
 	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
 	
 	--l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
-	--l_ViewingPlayer = PlayerInSight(enemy)
+	l_ViewingPlayer = PlayerInSight(enemy:GetCamera())
 
-	return false --l_ViewingPlayer
+	return l_ViewingPlayer
 --[[
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()

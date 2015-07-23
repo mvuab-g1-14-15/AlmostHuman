@@ -139,6 +139,7 @@ void registerObject3D( lua_State* aLuaState )
     LUA_DECLARE_METHOD( CObject3D, SetScale )
     LUA_DECLARE_METHOD( CObject3D, GetScale )
     LUA_DECLARE_METHOD( CObject3D, GetDirection )
+    LUA_DECLARE_METHOD( CObject3D, SetDirection )
     LUA_END_DECLARATION
 }
 
