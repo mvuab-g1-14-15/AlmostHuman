@@ -18,7 +18,7 @@
 *.opensdf
 mvuab/3rdParty/
 mvuab/bin/lib/*.*
-mvuab/bin/lib/*.*
+mvuab/bin/Intermediate/*.*
 mvuab/bin/Viewer/*.dll
 mvuab/bin/Videogame/*.dll
 WwiseProject
