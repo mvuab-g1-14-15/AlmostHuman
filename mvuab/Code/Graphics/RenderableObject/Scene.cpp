@@ -11,6 +11,8 @@
 #include "Room.h"
 #include "EngineManagers.h"
 
+#include "Lights/LightManager.h"
+
 #include <string>
 
 
@@ -103,6 +105,8 @@ void CScene::LoadRoom( std::string aRoomName )
 
         if ( lROPath.find( ".xml" ) != std::string::npos )
             lROLM->LoadLayers( lROPath );
+
+       LightMInstance->Load(lRoom->GetBasePath() + "lights.xml");
 
         lRoom->SetLayers( lROLM );
     }

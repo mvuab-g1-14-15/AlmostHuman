@@ -61,14 +61,14 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on LightsButton pressed do
 	(
 		--export lights
-		local LightDir = PathLabel.text + "\\lights.xml"
+		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\lights.xml"
 		ExportLights LightDir selection
 	)
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
 
-		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		local l_DirToXML = PathLabel.text + "\\" +LevelList.selected
 		--export Mesh
 		local MeshDir = l_DirToXML + "\\meshes"
 		local TexturesDir = PathLabel.text + "\\textures"		

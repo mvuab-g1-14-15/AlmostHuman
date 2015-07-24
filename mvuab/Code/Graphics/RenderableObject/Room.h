@@ -7,6 +7,7 @@
 #include <string>
 
 class CRenderableObjectsLayersManager;
+class CLightManager;
 
 class CRoom
 {
@@ -29,6 +30,16 @@ public:
 	{
 		m_pLayers = aLayers;
 	}
+
+  CLightManager* GetLights()
+  {
+    return m_pLights;
+  }
+
+  void SetLights( CLightManager* aLights)
+  {
+    m_pLights = aLights;
+  }
 	
 private:
 	std::string m_Name;
@@ -36,17 +47,8 @@ private:
 	std::string m_StaticMeshesPath;
 	std::string m_BasePath;
 	CRenderableObjectsLayersManager* m_pLayers;
+  CLightManager* m_pLights;
 	bool m_Active;
 };
 
-/*
-class CRoom : public CName, public CMapManager<CLayer>
-{
-    public:
-        CRoom   ();
-        ~CRoom  ();
-
-        bool Load(const std::string &l_FilePath, const std::string &l_RoomName);
-};
-*/
 #endif
