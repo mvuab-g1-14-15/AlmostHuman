@@ -2,14 +2,12 @@
 #include "Gizmos/Gizmo.h"
 #include "Gizmos/GizmoElement.h"
 
-CGizmosManager::CGizmosManager()
-  :CManager()
+CGizmosManager::CGizmosManager() :CManager()
 {
 
 }
 
-CGizmosManager::CGizmosManager(CXMLTreeNode& atts)
-  :CManager(atts)
+CGizmosManager::CGizmosManager(CXMLTreeNode& atts) :CManager(atts)
 {
 	/*TODO RAUL
 	PONER LECTURA XML
@@ -28,20 +26,15 @@ void CGizmosManager::Init()
 
 void CGizmosManager::Update()
 {
-  std::vector<CGizmo*>::iterator it = m_ResourcesVector.begin(),
-    it_end = m_ResourcesVector.end();
-
-  for ( ; it != it_end; ++it )
-    ( *it )->Update();
+  std::vector<CGizmo*>::iterator it = m_ResourcesVector.begin(), it_end = m_ResourcesVector.end();
+  for ( ; it != it_end; ++it )( *it )->Update();
 }
 
 void CGizmosManager::Render()
 {
-  std::vector<CGizmo*>::iterator it = m_ResourcesVector.begin(),
-                                 it_end = m_ResourcesVector.end();
+  std::vector<CGizmo*>::iterator it = m_ResourcesVector.begin(), it_end = m_ResourcesVector.end();
 
-  for ( ; it != it_end; ++it )
-    ( *it )->Render();
+  for ( ; it != it_end; ++it ) ( *it )->Render();
 }
 
 CGizmoElement* CGizmosManager::CreateGizmoElement( CGizmoElement::EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color)

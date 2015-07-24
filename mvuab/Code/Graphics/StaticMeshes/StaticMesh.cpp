@@ -17,6 +17,10 @@
 #include "EngineManagers.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 #include <cstdio>
 
 CStaticMesh::CStaticMesh() : m_FileName( "" ), m_RenderableObjectTechniqueName( "" ), m_IsTransformed(false)
@@ -34,7 +38,13 @@ void CStaticMesh::Destroy()
     m_Textures.clear();
     m_VertexTypes.clear();
 
-    for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it) { CHECKED_DELETE( *it ); }
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it)
+    {
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete(*it);
+        (*it) = 0;
+    }
+
     m_RenderableObjectTechniques.clear();
     m_RVs.clear();
 }
@@ -177,47 +187,92 @@ bool CStaticMesh::Load( const std::string& FileName )
         CRenderableVertexs *l_RV = NULL;
 
         if (l_VertexType == TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_T2_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_T2_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_T2_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_T2_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_T1_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_T1_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_T1_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_T1_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TT2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TT2_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TT2_DIFF_VERTEX>), __alignof(CIndexedVertexs<TT2_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TT2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TT1_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TT1_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TT1_DIFF_VERTEX>), __alignof(CIndexedVertexs<TT1_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TT1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TDIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TDIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TDIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TDIFF_VERTEX>), __alignof(CIndexedVertexs<TDIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TDIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TT2_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TT2_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TT2_VERTEX>), __alignof(CIndexedVertexs<TT2_VERTEX>));
+            new (l_RV) CIndexedVertexs<TT2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TT1_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TT1_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TT1_VERTEX>), __alignof(CIndexedVertexs<TT1_VERTEX>));
+            new (l_RV) CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        {
+            l_RV = (CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>), __alignof(CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>));
+            new (l_RV) CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+        }
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TRNM_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = (CIndexedVertexs<TRNM_VERTEX> *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<TRNM_VERTEX>), __alignof(CIndexedVertexs<TRNM_VERTEX>));
+            new (l_RV) CIndexedVertexs<TRNM_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
 
         // Check the renderable object

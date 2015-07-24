@@ -41,6 +41,7 @@ class CConsole;
 class CLensFlareManager;
 class CIdManager;
 class CEditorsManager;
+class CAllocatorManager;
 
 class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CSingleton< CEngineManagers >
 {
@@ -82,11 +83,12 @@ class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CS
         CLensFlareManager*                GetLensFlareManager() const;
         CIdManager*                       GetIdManager() const;
         CEditorsManager*                  GetEditorsManager() const;
+        CAllocatorManager*                GetAllocatorManager() const;
 
         GET_SET_REF( std::string, ManagersPath );
 
     private:
-        CEditorsManager*                         m_pEditorsManager;
+        CEditorsManager*                       m_pEditorsManager;
         CGraphicsManager*                      m_pGraphicsManager;
         CEffectManager*                        m_pEffectManager;
         CInputManager*                         m_pInputManager;
@@ -116,6 +118,7 @@ class CEngineManagers : public CTemplatedVectorMapManager< CManager >, public CS
         CIdManager*                            m_pIdManager;
         CConsole*                              m_pConsole;
         std::string                            m_ManagersPath;
+        CAllocatorManager*                     m_pAllocatorManager;
 };
 
 #endif // ENGINE_MANAGER_H

@@ -29,6 +29,13 @@
 #include "Cameras/Camera.h"
 #include "Cameras/CameraManager.h"
 
+#include "EngineManagers.h"
+#include "Enemy.h"
+
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetAttribute<std::string>( "name", "no_name" ) )
   , m_CurrentState( "inicial" )
@@ -219,7 +226,11 @@ void CEnemy::AddMesh( std::string MeshName )
   CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
 
   //m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
-  m_pRenderableObject = new CAnimatedInstanceModel( m_Name, MeshName );
+  //m_pRenderableObject = new CAnimatedInstanceModel( m_Name, MeshName );
+
+  m_pRenderableObject = (CAnimatedInstanceModel *) CEngineManagers::GetSingletonPtr()->GetAllocatorManager()->m_pFreeListAllocator->Allocate(sizeof(CAnimatedInstanceModel), __alignof(CAnimatedInstanceModel));
+  new (m_pRenderableObject) CAnimatedInstanceModel(m_Name, MeshName);
+
   l_ROM->AddResource( m_Name, m_pRenderableObject );
   m_Position = m_Controller->GetPosition();
   m_Position.y -=  m_Controller->GetHeight() / 2.0f;

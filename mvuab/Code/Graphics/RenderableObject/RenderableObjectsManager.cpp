@@ -7,6 +7,13 @@
 #include "Math\MathTypes.h"
 #include "Cinematics\Cinematic.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+#include "EngineConfig.h"
+#include "EngineManagers.h"
+
 CRenderableObjectsManager::CRenderableObjectsManager()
 {
 }
@@ -18,7 +25,7 @@ CRenderableObjectsManager::~CRenderableObjectsManager()
 
 bool CRenderableObjectsManager::Load( const std::string& FileName )
 {
-    CXMLTreeNode newFile;
+    /*CXMLTreeNode newFile;
     CXMLTreeNode m;
 
     if ( !newFile.LoadFile( FileName.c_str() ) )
@@ -62,13 +69,20 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 
     //CCinematic* l_CinematicInstance = new CCinematic("Data/cinematic.xml");
     //l_CinematicInstance->Play(true);
-    //AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);
+    //AddResource(l_CinematicInstance->GetName(), l_CinematicInstance);*/
     return true;
 }
 
 void CRenderableObjectsManager::CleanUp()
 {
-    Destroy();
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    for(unsigned int i =  0; i < m_ResourcesVector.size(); ++i)
+    {
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
+    }
+
+    m_ResourcesMap.clear();
+    m_ResourcesVector.clear();
 }
 
 void CRenderableObjectsManager::Render()
@@ -102,7 +116,37 @@ void CRenderableObjectsManager::Update()
 
 CCinematic* CRenderableObjectsManager::CreateCinematic( const std::string& FileName )
 {
-    CCinematic* l_Cinematic = new CCinematic( FileName );
-    AddResource( l_Cinematic->GetName(), l_Cinematic );
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CCinematic *l_Cinematic = (CCinematic *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CCinematic), __alignof(CCinematic));
+    new (l_Cinematic) CCinematic(FileName);
+
+    if(!AddResource(l_Cinematic->GetName(), l_Cinematic))
+    {
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(l_Cinematic);
+        l_Cinematic = 0;
+    }
+
     return l_Cinematic;
+}
+
+void CRenderableObjectsManager::RemoveResource(const std::string &l_Name)
+{
+    TMapResources::iterator it = m_ResourcesMap.find(l_Name);
+    if ( it == m_ResourcesMap.end() ) return;
+
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    l_AllocatorManager->m_pFreeListAllocator->MakeDelete(it->second.m_Value);
+    unsigned int l_ID = it->second.m_Id;
+
+    m_ResourcesMap.erase(it);
+    m_ResourcesVector.erase(m_ResourcesVector.begin() + l_ID);
+
+    for (size_t i =  l_ID; i < m_ResourcesVector.size();  ++i)
+    {
+        TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
+
+        while (l_ItMap->second.m_Value != m_ResourcesVector[i]) ++l_ItMap;
+        l_ItMap->second.m_Id = i;
+    }
 }

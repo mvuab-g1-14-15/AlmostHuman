@@ -54,10 +54,10 @@ void *CFreeListAllocator::Allocate(unsigned int l_Size, unsigned int l_Alignment
     unsigned int l_NewMemAddress = (unsigned int) l_FreeBlock + l_Offset;
     struct AllocHeader *l_AllocHeader = (struct AllocHeader *) (l_NewMemAddress - sizeof(struct AllocHeader));
 
-    l_AllocHeader->m_Size = l_Size + l_Offset;
+    l_AllocHeader->m_Size = l_TotalSize;
     l_AllocHeader->m_Alignment = l_Offset;
 
-    m_UsedMemory += l_Size + l_Offset;
+    m_UsedMemory += l_TotalSize;
     m_NumAllocations++;
 
     return (void *) (l_NewMemAddress);
@@ -68,8 +68,12 @@ void CFreeListAllocator::Deallocate(void *l_MemAddress)
     if(l_MemAddress == 0) return;
 
     struct AllocHeader *l_AllocHeader = (struct AllocHeader *) ((unsigned int) l_MemAddress - sizeof(struct AllocHeader));
-    unsigned int l_BlockStart = (unsigned int) l_MemAddress - l_AllocHeader->m_Alignment;
-    unsigned int l_BlockEnd = l_BlockStart + l_AllocHeader->m_Size;
+
+    unsigned int l_BlockSize = l_AllocHeader->m_Size;
+    unsigned int l_BlockAlignment = l_AllocHeader->m_Alignment;
+
+    unsigned int l_BlockStart = (unsigned int) l_MemAddress - l_BlockAlignment;
+    unsigned int l_BlockEnd = l_BlockStart + l_BlockSize;
 
     struct FreeBlock *l_PrevBlock = 0;
     struct FreeBlock *l_FreeBlock = m_FreeBlocks;
@@ -80,25 +84,25 @@ void CFreeListAllocator::Deallocate(void *l_MemAddress)
         l_FreeBlock = l_FreeBlock->m_Next;
     }
 
-    if(l_PrevBlock == nullptr)
+    if(l_PrevBlock == 0)
     {
         l_PrevBlock = (FreeBlock*) l_BlockStart;
-        l_PrevBlock->m_Size = l_AllocHeader->m_Size;
+        l_PrevBlock->m_Size = l_BlockSize;
         l_PrevBlock->m_Next = m_FreeBlocks;
 
         m_FreeBlocks = l_PrevBlock;
     }
     else if((unsigned int) l_PrevBlock + l_PrevBlock->m_Size == l_BlockStart)
     {
-        l_PrevBlock->m_Size += l_AllocHeader->m_Size;
+        l_PrevBlock->m_Size += l_BlockSize;
     }
     else
     {
         FreeBlock* temp = (FreeBlock*) l_BlockStart;
-        temp->m_Size = l_AllocHeader->m_Size;
         temp->m_Next = l_PrevBlock->m_Next;
-        l_PrevBlock->m_Next = temp;
+        temp->m_Size = l_BlockSize;
 
+        l_PrevBlock->m_Next = temp;
         l_PrevBlock = temp;
     }
 
@@ -108,6 +112,6 @@ void CFreeListAllocator::Deallocate(void *l_MemAddress)
         l_PrevBlock->m_Next = l_FreeBlock->m_Next;
     }
 
-    m_UsedMemory -= l_AllocHeader->m_Size;
+    m_UsedMemory -= l_BlockSize;
     m_NumAllocations--;
 }

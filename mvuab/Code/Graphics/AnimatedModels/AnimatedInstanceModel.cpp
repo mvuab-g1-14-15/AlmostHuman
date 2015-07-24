@@ -38,8 +38,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
 {
     SetName( Name );
     CRenderableObjectTechniqueManager* lROT = ROTMInstance;
-    const std::string & l_TechniqueName =
-        lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
+    const std::string & l_TechniqueName = lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
     m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
     Initialize();
 }
@@ -57,8 +56,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const CXMLTreeNode& atts )
     , m_ChangeAnimation(  )
 {
     CRenderableObjectTechniqueManager* lROT = ROTMInstance;
-    const std::string & l_TechniqueName = lROT->GetRenderableObjectTechniqueNameByVertexType(
-            CAL3D_HW_VERTEX::GetVertexType() );
+    const std::string & l_TechniqueName = lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
     m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
     Initialize();
 }

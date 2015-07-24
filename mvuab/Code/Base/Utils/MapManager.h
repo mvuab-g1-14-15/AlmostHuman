@@ -60,11 +60,8 @@ template<class T> class CMapManager
         void Destroy()
         {
             TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
-            for (; itb != ite; ++itb)
-            {
-                CHECKED_DELETE(itb->second);
-            }
-
+            for (; itb != ite; ++itb) CHECKED_DELETE(itb->second);
+           
             m_Resources.clear();
         }
 

@@ -17,30 +17,48 @@
 #include "Utils\PhysicUserData.h"
 #include "Math\AABB.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager()
-    : m_DefaultRenderableObjectManager(0)
-    , CManager()
+#include "EngineConfig.h"
+#include "EngineManagers.h"
+
+
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager(): m_DefaultRenderableObjectManager(0), CManager()
 {
 }
 
-CRenderableObjectsLayersManager::CRenderableObjectsLayersManager( const CXMLTreeNode& atts)
-    : m_DefaultRenderableObjectManager(0)
-    , CManager(atts)
+CRenderableObjectsLayersManager::CRenderableObjectsLayersManager( const CXMLTreeNode& atts): m_DefaultRenderableObjectManager(0), CManager(atts)
 {
 }
 
 CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 {
-    Destroy();
     for(unsigned int i = 0; i < m_PhyscsUserData.size(); i++)
     {
         CHECKED_DELETE(m_PhyscsUserData.at(i));
     }
+
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+    {
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
+    }
 }
+
 void CRenderableObjectsLayersManager::Destroy()
 {
-    CTemplatedVectorMapManager::Destroy();
+    for(unsigned int i = 0; i < m_PhyscsUserData.size(); i++)
+    {
+        CHECKED_DELETE(m_PhyscsUserData.at(i));
+    }
+
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
+    {
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
+    }
 }
 
 void CRenderableObjectsLayersManager::Init()
@@ -53,6 +71,8 @@ void CRenderableObjectsLayersManager::Init()
     }
     else
     {
+        CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
         for ( uint32 i = 0, lCount = TreeNode.GetNumChildren(); i < lCount ; ++i )
         {
             const CXMLTreeNode& lNode = TreeNode(i);
@@ -63,22 +83,24 @@ void CRenderableObjectsLayersManager::Init()
             {
                 if ( lNode.GetAttribute<bool>( "default", false ) )
                 {
-                    m_DefaultRenderableObjectManager = new CRenderableObjectsManager();
+                    m_DefaultRenderableObjectManager = (CRenderableObjectsManager *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CRenderableObjectsManager), __alignof(CRenderableObjectsManager));
+                    new (m_DefaultRenderableObjectManager) CRenderableObjectsManager();
 
                     if ( !AddResource( lName, m_DefaultRenderableObjectManager ) )
                     {
                         LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                        CHECKED_DELETE( m_DefaultRenderableObjectManager );
+                        l_AllocatorManager->m_pFreeListAllocator->MakeDelete( m_DefaultRenderableObjectManager );
                     }
                 }
                 else
                 {
-                    CRenderableObjectsManager* RenderableObjectManager = new CRenderableObjectsManager();
+                    CRenderableObjectsManager* RenderableObjectManager = (CRenderableObjectsManager *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CRenderableObjectsManager), __alignof(CRenderableObjectsManager));
+                    new (RenderableObjectManager) CRenderableObjectsManager();
 
                     if ( !AddResource( lName, RenderableObjectManager ) )
                     {
                         LOG_ERROR_APPLICATION( "Error adding layer %s!", lName.c_str() );
-                        CHECKED_DELETE( RenderableObjectManager );
+                        l_AllocatorManager->m_pFreeListAllocator->MakeDelete( RenderableObjectManager );
                     }
                 }
             }
@@ -93,12 +115,13 @@ void CRenderableObjectsLayersManager::Init()
                 }
                 else if ( lTagName == "AnimatedInstance" )
                 {
-                    CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
+                    CAnimatedInstanceModel *l_AnimatedInstance = (CAnimatedInstanceModel *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CAnimatedInstanceModel), __alignof(CAnimatedInstanceModel));
+                    new (l_AnimatedInstance) CAnimatedInstanceModel(TreeNode(i));
 
-                    if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
+                    if (!lRenderableObjectManager->AddResource(lName, l_AnimatedInstance))
                     {
-                        LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
-                        CHECKED_DELETE( l_AnimatedInstance );
+                        LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
+                        l_AllocatorManager->m_pFreeListAllocator->Deallocate(l_AnimatedInstance);
                     }
                 }
             }
@@ -146,7 +169,11 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
 
 void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts )
 {
-    CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CInstanceMesh *l_InstanceMesh = (CInstanceMesh *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CInstanceMesh), __alignof(CInstanceMesh));
+    new (l_InstanceMesh) CInstanceMesh(atts);
+
     l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
 
     bool lOk = false;
@@ -173,13 +200,11 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     }
     else
     {
-        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(),
-                                         l_InstanceMesh->GetIndexBuffer() );
+        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
         l_MeshActor->AddMeshShape(l_TriangleMesh, l_InstanceMesh->GetTransform() );
     }
 
-    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) &&
-            PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name, l_MeshActor))
+    if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(l_Name) == 0 && PhysXMInstance->AddPhysicActor(l_MeshActor) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource(l_Name, l_MeshActor))
     {
         lOk = true;
         m_PhyscsUserData.push_back(l_pPhysicUserDataMesh);
@@ -208,6 +233,6 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     if ( !lRenderableObjectManager->AddResource( l_Name, l_InstanceMesh ) )
     {
         LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", l_Name.c_str() );
-        CHECKED_DELETE( l_InstanceMesh );
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(l_InstanceMesh);
     }
 }

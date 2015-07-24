@@ -32,6 +32,7 @@
 #include "EditorsManager.h"
 #include "Lights\LensFlare.h"
 #include "Utils\IdManager.h"
+#include "Memory\AllocatorManager.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
     : m_ManagersPath( aPath )
@@ -61,12 +62,14 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
     , m_pCinematicManager( 0 )
     , m_pIdManager( 0 )
     , m_pEditorsManager(0)
+    , m_pAllocatorManager( 0 )
 {
 }
 
 CEngineManagers::~CEngineManagers()
 {
     Release();
+    CHECKED_DELETE(m_pAllocatorManager);
 }
 
 void CEngineManagers::Init()
@@ -198,7 +201,7 @@ void CEngineManagers::Init()
     m_pLensFlareManager = dynamic_cast<CLensFlareManager*>( GetResource( "flare_manager" ) );
     m_pIdManager = dynamic_cast<CIdManager*>( GetResource( "id_manager" ) );
     m_pEditorsManager = dynamic_cast<CEditorsManager*>( GetResource( "editors_manager" ) );
-
+    m_pAllocatorManager = new CAllocatorManager();
     //
     // Init managers
     //
@@ -421,4 +424,10 @@ CIdManager* CEngineManagers::GetIdManager() const
 {
     ASSERT( m_pIdManager, "Null id manager" );
     return m_pIdManager;
+}
+
+CAllocatorManager* CEngineManagers::GetAllocatorManager() const
+{
+    ASSERT( m_pAllocatorManager, "Null allocator manager" );
+    return m_pAllocatorManager;
 }

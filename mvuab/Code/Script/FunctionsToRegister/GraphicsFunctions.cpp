@@ -47,16 +47,35 @@ extern "C"
 #include "Gizmos/GizmosManager.h"
 #include "SceneRenderComands/SceneRendererCommandManager.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+#include "EngineConfig.h"
+#include "EngineManagers.h"
+
 using namespace luabind;
 
 CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
 {
-    return new CInstanceMesh( Name, CoreName );
+    //return new CInstanceMesh( Name, CoreName );
+     CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+     CInstanceMesh *l_InstanceMehs = (CInstanceMesh *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CInstanceMesh), __alignof(CInstanceMesh));
+     new (l_InstanceMehs) CInstanceMesh(Name, CoreName);
+
+     return l_InstanceMehs;
 }
 
 CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
 {
-    return new CAnimatedInstanceModel( Name, CoreName );
+    //return new CAnimatedInstanceModel( Name, CoreName );
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CAnimatedInstanceModel *l_AnimatorInstanceModel = (CAnimatedInstanceModel *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CAnimatedInstanceModel), __alignof(CAnimatedInstanceModel));
+    new (l_AnimatorInstanceModel) CAnimatedInstanceModel(Name, CoreName);
+
+    return l_AnimatorInstanceModel;
 }
 
 /*
