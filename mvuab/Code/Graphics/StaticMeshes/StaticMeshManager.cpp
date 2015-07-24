@@ -57,7 +57,7 @@ void CStaticMeshManager::Init()
         // Default TODO Delete
         if( !AddResource( lName, l_StaticMesh ) )
         {
-            l_AllocatorManger->m_pFreeListAllocator->Deallocate(l_StaticMesh);
+            l_AllocatorManger->m_pFreeListAllocator->MakeDelete(l_StaticMesh);
         }
     }
 }

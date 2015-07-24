@@ -32,8 +32,8 @@ void CRenderableObjectTechniqueManager::Destroy()
     std::map<std::string, CPoolRenderableObjectTechnique *>::iterator itb1 = l_Resources.begin(), ite1 = l_Resources.end();
     TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
 
-    for (; itb1 != ite1; ++itb1) l_AllocatorManger->m_pFreeListAllocator->Deallocate(itb1->second);
-    for (; itb != ite; ++itb) l_AllocatorManger->m_pFreeListAllocator->Deallocate(itb->second);
+    for (; itb1 != ite1; ++itb1) l_AllocatorManger->m_pFreeListAllocator->MakeDelete(itb1->second);
+    for (; itb != ite; ++itb) l_AllocatorManger->m_pFreeListAllocator->MakeDelete(itb->second);
 
     m_Resources.clear();
     l_Resources.clear();

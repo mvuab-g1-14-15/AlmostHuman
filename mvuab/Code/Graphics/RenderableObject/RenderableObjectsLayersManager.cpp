@@ -40,11 +40,15 @@ CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
         CHECKED_DELETE(m_PhyscsUserData.at(i));
     }
 
+    m_PhyscsUserData.clear();
+
     CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
     {
         l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
     }
+
+    m_ResourcesVector.clear();
 }
 
 void CRenderableObjectsLayersManager::Destroy()
@@ -54,11 +58,15 @@ void CRenderableObjectsLayersManager::Destroy()
         CHECKED_DELETE(m_PhyscsUserData.at(i));
     }
 
+    m_PhyscsUserData.clear();
+
     CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     for(unsigned int i = 0; i < m_ResourcesVector.size(); ++i)
     {
         l_AllocatorManager->m_pFreeListAllocator->MakeDelete(m_ResourcesVector[i]);
     }
+
+    m_ResourcesVector.clear();
 }
 
 void CRenderableObjectsLayersManager::Init()
@@ -121,7 +129,7 @@ void CRenderableObjectsLayersManager::Init()
                     if (!lRenderableObjectManager->AddResource(lName, l_AnimatedInstance))
                     {
                         LOG_ERROR_APPLICATION("Error adding instance mesh %s!", lName.c_str());
-                        l_AllocatorManager->m_pFreeListAllocator->Deallocate(l_AnimatedInstance);
+                        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(l_AnimatedInstance);
                     }
                 }
             }
