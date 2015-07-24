@@ -4,6 +4,13 @@
 #include "Logger\Logger.h"
 #include "CinematicObject.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+#include "EngineConfig.h"
+#include "EngineManagers.h"
+
 CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCinematicPlayer()
 {
     CXMLTreeNode newFile;
@@ -20,13 +27,18 @@ CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCi
         LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error reading %s, cinematic no existeix.", FileName.c_str());
         return;
     }
+
     m_Name = cinematic.GetAttribute<std::string>("name", "");
     m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
-    CCinematicObject* l_CinematicObject;
+    CCinematicObject* l_CinematicObject = 0;
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
     for( uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount ; ++i)
     {
-        l_CinematicObject = new CCinematicObject(cinematic(i));
+        l_CinematicObject = (CCinematicObject *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CCinematicObject), __alignof(CCinematicObject));
+        new (l_CinematicObject) CCinematicObject(cinematic(i));
+
         l_CinematicObject->Init(m_Duration);
         m_CinematicObjects.push_back(l_CinematicObject);
     }
@@ -34,9 +46,11 @@ CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCi
 
 CCinematic::~CCinematic()
 {
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
     for(std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(); it != m_CinematicObjects.end(); ++it)
     {
-        CHECKED_DELETE((*it));
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete(*it);
     }
 
     m_CinematicObjects.clear();
@@ -58,14 +72,19 @@ void CCinematic::LoadXML(const std::string &FileName)
         LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error reading %s, cinematic no existeix.", FileName.c_str());
         return;
     }
+
     m_Name = cinematic.GetAttribute<std::string>("name", "");
     m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     for(uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount; ++i)
     {
         std::string resource = cinematic(i).GetAttribute<std::string>("resource", "");
 
-        m_CinematicObjects.push_back(new CCinematicObject(cinematic(i)));
+        CCinematicObject *l_CinematicObject = (CCinematicObject *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CCinematicObject), __alignof(CCinematicObject));
+        new (l_CinematicObject) CCinematicObject(cinematic(i));
+
+        m_CinematicObjects.push_back(l_CinematicObject);
     }
 }
 

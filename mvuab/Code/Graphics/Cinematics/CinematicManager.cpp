@@ -38,6 +38,21 @@ CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
 CCinematicManager::~CCinematicManager()
 {
     m_vCinematicsElement.Destroy();
+
+    /*
+    std::vector<CCinematicsItems *> l_Items = m_vCinematicsElement.GetResourcesVector();
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    for(unsigned int i = 0; i < l_Items.size(); i++)
+    {
+    std::vector<CCinematicsElement *> l_Elements = l_Items[i]->m_CinematicsItems.GetResourcesVector();
+    for(unsigned int j = 0; j < l_Elements.size(); j++) l_AllocatorManger->m_pFreeListAllocator->MakeDelete(l_Elements[j]);
+
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(l_Items[i]);
+    }
+
+    l_Items.clear();
+    */
 }
 
 void CCinematicManager::CleanUp()
