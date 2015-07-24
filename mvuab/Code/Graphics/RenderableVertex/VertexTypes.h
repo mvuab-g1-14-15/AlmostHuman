@@ -22,9 +22,9 @@
 */
 #pragma once
 
-#include <d3dx9.h>
 #include "Utils\Defines.h"
 
+#include "dx9.h"
 #define VERTEX_TYPE_GEOMETRY            1 << 0 // 1
 #define VERTEX_TYPE_NORMAL              1 << 1 // 2
 #define VERTEX_TYPE_TANGENT             1 << 2 // 4

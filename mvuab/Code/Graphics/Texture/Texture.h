@@ -2,7 +2,7 @@
 #ifndef INC_TEXTURE_H_
 #define INC_TEXTURE_H_
 
-#include <d3dx9.h>
+#include "dx9.h"
 #include <string>
 #include "Utils\Name.h"
 

@@ -6,8 +6,6 @@
 #include "GraphicsManager.h"
 #include "Effects\EffectTechnique.h"
 
-#include <d3dx9.h>
-
 class CRenderableVertexs
 {
     protected:
