@@ -81,11 +81,26 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
     return DefWindowProc( hWnd, msg, wParam, lParam );
 }
 
+bool IsProcessRunning( DWORD ProcessId )
+{
+    HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, ProcessId);
+    DWORD RetCode = 0;
+
+    if (hProc != NULL)
+    {
+        GetExitCodeProcess(hProc, &RetCode);
+        CloseHandle( hProc );
+
+        if(RetCode == STILL_ACTIVE) return true;
+    }
+
+    return false;
+} 
+
 //-----------------------------------------------------------------------
 // WinMain
 //-----------------------------------------------------------------------
-int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
-                      LPSTR _lpCmdLine, int _nCmdShow )
+int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow )
 {
     try
     {

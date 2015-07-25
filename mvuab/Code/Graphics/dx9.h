@@ -59,7 +59,7 @@
 #endif
 #else
 #ifndef HR
-#define HR(x) HRESULT lHR = x; lHR
+#define HR(x) {HRESULT lHR = x; lHR;}
 #endif
 #endif
 

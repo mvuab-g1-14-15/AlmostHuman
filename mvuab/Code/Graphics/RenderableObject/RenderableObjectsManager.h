@@ -23,7 +23,7 @@ class CRenderableObjectsManager : public CTemplatedVectorMapManager<CRenderableO
         
          void CleanUp();
          bool Load( const std::string& FileName );
-         void CRenderableObjectsManager::RemoveResource(const std::string &l_Name);
+         void RemoveResource(const std::string &l_Name);
 
         CCinematic* CreateCinematic(const std::string& FileName);
         CRenderableObject* GetInstance(const std::string& Name) const;

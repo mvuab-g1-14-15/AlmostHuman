@@ -32,7 +32,7 @@ template <class T> class CTemplatedVectorMapManager
         CTemplatedVectorMapManager() { }
         virtual ~CTemplatedVectorMapManager() { Destroy(); }
         
-        void RemoveResource( const std::string& Name )
+        virtual void RemoveResource( const std::string& Name )
         {
             TMapResources::iterator it = m_ResourcesMap.find(Name);
             if ( it == m_ResourcesMap.end() ) return;
