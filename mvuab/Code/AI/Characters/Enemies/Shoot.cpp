@@ -18,125 +18,125 @@
 #include "Lights\LightManager.h"
 
 CShoot::CShoot()
-    : CObject3D()
-    , mSpeed( 0.0f )
-    , mDamage( 0.0f )
-    , mDirection( Math::Vect3f( 1.0f ) )
-    , mImpacted( false )
-    , mBillboard( new CBillboard() )
+  : CObject3D()
+  , mSpeed( 0.0f )
+  , mDamage( 0.0f )
+  , mDirection( Math::Vect3f( 1.0f ) )
+  , mImpacted( false )
+  , mBillboard( new CBillboard() )
 {
 }
 
 CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, float aDamage )
-    : CObject3D( aPosition, 0.0f, 0.0f )
-    , mSpeed( aSpeed )
-    , mDamage( aDamage )
-    , mDirection( aDirection )
-    , mImpacted( false )
-    , mBillboard( 0 )
+  : CObject3D( aPosition, 0.0f, 0.0f )
+  , mSpeed( aSpeed )
+  , mDamage( aDamage )
+  , mDirection( aDirection )
+  , mImpacted( false )
+  , mBillboard( 0 )
 {
-    SetDirection( mDirection );
+  SetDirection( mDirection );
 
-    const std::string lType( "Shoot" );
+  const std::string lType( "Shoot" );
 
-    std::ostringstream ss;
-    ss << lType << IdManager->GetId( lType );
-    std::string lName( ss.str() );
+  std::ostringstream ss;
+  ss << lType << IdManager->GetId( lType );
+  std::string lName( ss.str() );
 
-    SetName( lName );
-    mBillboard = new CBillboard();
+  SetName( lName );
+  mBillboard = new CBillboard();
 
-    if ( !BillboardMan->AddResource( lName, mBillboard ) )
-    {
-        CHECKED_DELETE( mBillboard );
-        mBillboard = BillboardMan->GetConstResource( lName );
-    }
+  if ( !BillboardMan->AddResource( lName, mBillboard ) )
+  {
+    CHECKED_DELETE( mBillboard );
+    mBillboard = BillboardMan->GetConstResource( lName );
+  }
 
-    mLight = new COmniLight();
-    mLight->SetName(lName);
-    mLight->SetIntensity( 0.65f );
-    mLight->SetEndRangeAttenuation( 2.0f );
-    mLight->SetColor( Math::colRED );
-    mLight->SetPosition( aPosition );
-    mLight->SetRenderShadows( false );
+  mLight = new COmniLight();
+  mLight->SetName( lName );
+  mLight->SetIntensity( 0.65f );
+  mLight->SetEndRangeAttenuation( 2.0f );
+  mLight->SetColor( Math::colRED );
+  mLight->SetPosition( aPosition );
+  mLight->SetRenderShadows( false );
 
-    if ( !LightMInstance->AddResource( lName, mLight ) )
-    {
-        CHECKED_DELETE( mLight );
-        //mLight = LightMInstance->GetConstResource( lName );
-    }
+  if ( !LightMInstance->AddResource( lName, mLight ) )
+  {
+    CHECKED_DELETE( mLight );
+    //mLight = LightMInstance->GetConstResource( lName );
+  }
 }
 
 CShoot::~CShoot()
 {
-    // TODO: Remove the billboard in the manager
-    mBillboard->SetActive( false );
-    LightMInstance->RemoveResource( GetName() );
+  // TODO: Remove the billboard in the manager
+  mBillboard->SetActive( false );
+  LightMInstance->RemoveResource( GetName() );
 }
 
 bool CShoot::Init()
 {
-    bool lOk( true );
-    lOk = lOk && mBillboard->Init( "ShootBillBoard", GetPosition(), 1.0f, 0.0f, 1.0f, "Data/textures/particles/fire3.png", "SmokeTechnique" );
-    ASSERT( lOk, "Error initing the shoot" );
-    return lOk;
+  bool lOk( true );
+  lOk = lOk && mBillboard->Init( "ShootBillBoard", GetPosition(), 1.0f, 0.0f, 1.0f, "Data/textures/particles/fire3.png", "SmokeTechnique" );
+  ASSERT( lOk, "Error initing the shoot" );
+  return lOk;
 }
 
 void CShoot::Update()
 {
-    if ( !mImpacted )
+  if ( !mImpacted )
+  {
+    const Math::Vect3f& lDirection = GetDirection();
+    const Math::Vect3f& lPosition = GetPosition();
+
+    const Math::Vect3f lVelocity( lDirection * mSpeed * deltaTimeMacro );
+
+    const float lLength( lVelocity.Length() );
+
+    const Math::Vect3f lNewPosition = lPosition + lVelocity;
+
+    SCollisionInfo hit_info;
+    CPhysicUserData* lPUD = PhysXMInstance->RaycastClosestActor( lPosition, lDirection, 0xffffff, hit_info );
+
+    if ( lPUD )
     {
-        const Math::Vect3f& lDirection = GetDirection();
-        const Math::Vect3f& lPosition = GetPosition();
+      const Math::Vect3f lCollisionPoint( hit_info.m_CollisionPoint );
+      const float lDistance( lCollisionPoint.Distance( lNewPosition ) );
 
-        const Math::Vect3f lVelocity( lDirection * mSpeed * deltaTimeMacro );
+      if ( lDistance < lLength )
+      {
+        const std::string lName = lPUD->GetName();
 
-        const float lLength( lVelocity.Length() );
-
-        const Math::Vect3f lNewPosition = lPosition + lVelocity;
-
-        SCollisionInfo hit_info;
-        CPhysicUserData *lPUD = PhysXMInstance->RaycastClosestActor( lPosition, lDirection, 0xffffff, hit_info );
-
-        if ( lPUD )
-        {
-            const Math::Vect3f lCollisionPoint( hit_info.m_CollisionPoint );
-            const float lDistance( lCollisionPoint.Distance( lNewPosition ) );
-
-            if ( lDistance < lLength )
-            {
-                const std::string lName = lPUD->GetName();
-
-                if ( lName == "Player" )
-                    ScriptMInstance->RunCode( "g_Player:AddDamage(5.0)" );
-                else
-                {
-                    CEnemy *lEnemy = EnemyMInstance->GetResource( lName );
-
-                    if ( lEnemy )
-                        lEnemy->AddDamage( mDamage );
-                }
-
-                mImpacted = true;
-
-                SetPosition( hit_info.m_CollisionPoint );
-
-                mBillboard->SetActive( false );
-            }
-            else
-                SetPosition( lNewPosition );
-        }
+        if ( lName == "Player" )
+          ScriptMInstance->RunCode( "g_Player:AddDamage(5.0)" );
         else
-            SetPosition( lNewPosition );
+        {
+          CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
 
-        mBillboard->SetPosition( GetPosition() );
-        mBillboard->MakeTransform();
+          if ( lEnemy )
+            lEnemy->AddDamage( mDamage );
+        }
 
-        mLight->SetPosition( GetPosition() );
-        mLight->MakeTransform();
+        mImpacted = true;
 
-        MakeTransform();
+        SetPosition( hit_info.m_CollisionPoint );
+
+        mBillboard->SetActive( false );
+      }
+      else
+        SetPosition( lNewPosition );
     }
+    else
+      SetPosition( lNewPosition );
+
+    mBillboard->SetPosition( GetPosition() );
+    mBillboard->MakeTransform();
+
+    mLight->SetPosition( GetPosition() );
+    mLight->MakeTransform();
+
+    MakeTransform();
+  }
 }
 
 void CShoot::Render()
@@ -146,5 +146,5 @@ void CShoot::Render()
 
 bool CShoot::Impacted()
 {
-    return mImpacted;
+  return mImpacted;
 }

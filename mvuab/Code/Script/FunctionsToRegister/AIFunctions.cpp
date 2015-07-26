@@ -79,7 +79,7 @@ T vector_get( std::vector<T>& vec, size_t i )
 //  return false;
 //}
 
-bool PlayerInSight( CCamera &aCamera )
+bool PlayerInSight( CCamera& aCamera )
 {
 
   CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
@@ -222,7 +222,7 @@ void registerAI( lua_State* aLuaState )
   [
     class_<std::vector<Math::Vect3f>>( "vecVect3f" )
     .def( constructor<>() )
-	.def( constructor<std::vector<Math::Vect3f>>() )
+    .def( constructor<std::vector<Math::Vect3f>>() )
     .def( "GetResource", &vector_get<Math::Vect3f> )
     .def( "size", &std::vector<Math::Vect3f>::size )
     .def( "erase", &vector_erase<Math::Vect3f> )

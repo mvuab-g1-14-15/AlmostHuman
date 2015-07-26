@@ -1,3 +1,4 @@
+dofile("./data/level2/scripts/shoot.lua")
 class "CEnemyLUA"
 
 function CEnemyLUA:__init(Node, state_machine, core_enemy)
@@ -19,7 +20,6 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
-		engine:Trace("Añadiendo "..self.Name)
 		self.RenderableObject = CreateAnimatedInstanceModel(self.Name, Node:GetAttributeString("mesh", "default_mesh"))
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
@@ -43,6 +43,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Camera:SetDirection(self:GetDirection())
 	self.Camera:MakeTransform()
 
+	self.Shoots = {}
 	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
@@ -50,6 +51,18 @@ end
 function CEnemyLUA:Update()
 	self:SetMeshTransform()
 	self.Brain:Update()
+	
+	for k in pairs (self.Shoots) do
+		if self.Shoots[k]:GetImpacted() then
+			self.Shoots[k]:Destroy()
+			table.remove(self.Shoots, k)
+			collectgarbage()
+		end
+	end
+	
+	for k in pairs (self.Shoots) do
+		self.Shoots[k]:Update()
+	end
 end
 
 function CEnemyLUA:SetMeshTransform()
@@ -131,4 +144,12 @@ end
 
 function CEnemyLUA:GetCamera()
 	return self.Camera
+end
+
+function CEnemyLUA:MakeShoot(aDirection)
+	
+	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
+	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
+	lShoot = CShoot( 5.0, aDirection, lPosition, 5.0 )	
+	table.insert( self.Shoots, lShoot)
 end

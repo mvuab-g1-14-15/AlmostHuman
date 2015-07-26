@@ -17,6 +17,8 @@ countdowntimer_manager = GetCountDownTimerManager()
 script_manager = GetScriptManager()
 cinematic_manager = GetCinematicManager()
 scene_renderer_commands_manager = GetSceneRendererCommandsManager()
+billboard_manager = GetBillboardManager()
+light_manager = GetLightManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0
@@ -81,51 +83,14 @@ function GetPlayerDirection(pos)
 	local l_Player = physic_manager:GetController("Player")
 	local l_Position =  l_Player:GetPosition()
 	
-	engine:Trace(pos:ToString())
-	engine:Trace(l_Position:ToString())
-	
-	local lDir = l_Position - pos;
+	local lDir = l_Position - pos
 	lDir:Normalize()
-	
-	engine:Trace(lDir:ToString())
 	
 	return lDir
 end
 
 function PlayerVisibility(enemy)
-	--local l_EnemyPos = enemy:GetPosition()
-	--local l_EnemyDir = enemy:GetDirectionEnemy()
-	
-	--l_EnemyDir:RotateY(g_HalfPi)
-	
-	--engine:Trace("Enemy dir: " .. l_EnemyDir:Vect3f2String())
-	
-	--l_ViewingPlayer = physic_manager:PlayerInSight(8, 45, l_EnemyPos, l_EnemyDir)
-	l_ViewingPlayer = PlayerInSight(enemy:GetCamera())
-
-	return l_ViewingPlayer
---[[
-	local l_PlayerPos = GetPlayerPosition()
-	local l_EnemyPos = enemy:GetPosition()
-	
-	local l_Direction = l_PlayerPos - l_EnemyPos
-	if CheckVector(l_Direction) then
-		l_Direction:Normalize()
-	end
-	
-	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_PLAYER.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
-	
-	-- The impact mask is not used
-	local l_CollisionGroup = physic_manager:RaycastType(l_EnemyPos + l_Direction * enemy:GetRadius(), l_Direction, l_ImpactMask)
-	
-	--engine:Trace("Group: " .. l_CollisionGroup)
-	
-	if l_CollisionGroup == CollisionGroup.ECG_PLAYER.value then
-		return true
-	else
-		return false
-	end
-]]
+	return PlayerInSight(enemy:GetCamera())
 end
 
 function ChangeCameraCloseEnemy()

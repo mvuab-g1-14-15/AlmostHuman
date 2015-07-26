@@ -34,7 +34,7 @@ function CStateLUA:Load( Node )
         
 				if ActualTagName == "action" then
 					Action = CActionLUA(CurrentSubNode)
-					table.insert(self.OnExitActions, Action)
+					table.insert(self.OnExitActions, Action)					
 				end
 			end
 		elseif TagName == "update" then

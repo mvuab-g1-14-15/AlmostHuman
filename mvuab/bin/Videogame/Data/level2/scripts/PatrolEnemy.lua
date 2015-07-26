@@ -4,10 +4,9 @@ class 'CPatrolEnemyLUA' (CEnemyLUA)
 
 function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	CEnemyLUA.__init(self, Node, state_machine, core_enemy)
-	--self = CEnemyLUA(Node, state_machine, core_enemy)
 	self.Waypoints = waypoints
 	self.ActualWaypoint = 1
-	
+	self.ActualPathPoint = 1
 	self.TurnSpeed = 0.6
 	self.Delta = 0.2
 	self.PathCalculated = false
@@ -18,7 +17,6 @@ end
 
 function CPatrolEnemyLUA:Update()
 	CEnemyLUA.Update(self)
-	--self:Update()
 end
 
 function CPatrolEnemyLUA:GetPosition()
@@ -51,12 +49,9 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 	end
 	DirYaw = math.atan2( Dir.z, Dir.x )
 	Yaw = CharacterController:GetYaw()
-	engine:Trace("Yaw: "..Yaw)
-	engine:Trace("DirYaw: "..DirYaw)
 	YawDif = DirYaw - Yaw
     PrevYaw = Yaw
-	engine:Trace("YawDif "..YawDif)
-	
+		
 	local YawDifCom = DirYaw - 2*g_Pi -Yaw
 	if math.abs( YawDifCom ) < math.abs( YawDif ) then
 		YawDif = YawDifCom
@@ -98,33 +93,29 @@ function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
         self.Path = lAStar:GetPath( lPos, PositionPlayer )
         self.PathCalculated = true
     end
-	count = self.Path:size()
-	
-    for i = 0, count-1 do
-        self.Path:GetResource(i).y = 0.0
-	end
 	
     lTargetPos = lPos
-    lPosAux = lPos
-    lPosAux.y = 0.0
-	lWaypointPos = self.Path:GetResource(1)
+    lTargetPos.y = 0
+	lWaypointPos = self.Path:GetResource(self.ActualPathPoint)
 	lWaypointPos.y = 0.0
-    lDist = lPosAux:Distance( lWaypointPos )
-	engine:Trace("Size "..self.Path:size())
-			engine:Trace("Distancia "..lDist)
-    if ( self.Path:size() > 2 ) then
+    lDist = lTargetPos:Distance( lWaypointPos )
+	
+	count = self.Path:size()
+	
+    if ( (count - self.ActualPathPoint) > 2 ) then
         if ( lDist < 0.6 ) then
-            self.Path:erase( self.Path:begin() + 1 )
+            self.ActualPathPoint = self.ActualPathPoint + 1
 		end
-        lTargetPos = self.Path:GetResource(1)
+        lTargetPos = self.Path:GetResource(self.ActualPathPoint)
     end
-    lTargetPos.y = lPos.y
-    
+    lTargetPos.y = 0
+	
 	self:MoveToWaypoint(lTargetPos)
     
-    PositionPlayer.y = 0.0
-    if ( self.Path:GetResource(self.Path:size() - 1):Distance( PositionPlayer ) > 5.0 ) then
+    
+    if ( self.Path:GetResource(count - 1):Distance( PositionPlayer ) > 5.0 ) then
         self.PathCalculated = false
+		self.ActualPathPoint = 1
 	end
 end
 

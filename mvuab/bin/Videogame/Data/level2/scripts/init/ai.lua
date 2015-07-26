@@ -28,14 +28,14 @@ function check_next_state()
 		end
 	end
 	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
-		if l_DistanceToPlayer < 4 and l_PlayerInSight then
-			l_NextState = "perseguir"
+		if l_DistanceToPlayer < 8 and l_PlayerInSight then
+			l_NextState = "atacar"
 		end
 	end
 	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
 	--	l_NextState = "andando"
 	--end
-	l_NextState = "perseguir"
+	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -77,7 +77,7 @@ function esperar()
 end
 
 function atacar()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	--engine:Trace("Ejecutando atacar")
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
@@ -90,9 +90,9 @@ function atacar()
 	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then
 		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())
-		engine:Trace("Tiempo disparando" .. enemy:GetCountTimeShoot() )
+		--engine:Trace("Tiempo disparando" .. enemy:GetCountTimeShoot() )
 		if enemy:GetCountTimeShoot() >= enemy:GetTimeToShoot() then
-			engine:Trace("Enemy shooting")
+			--engine:Trace("Enemy shooting")
 			local lDir = GetPlayerDirection(enemy:GetPosition())
 			enemy:MakeShoot(lDir)
 			enemy:SetCountTimeShoot(0.0)
