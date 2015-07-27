@@ -2,7 +2,6 @@
 #ifndef INSTANCING_VERTEX_H
 #define INSTANCING_VERTEX_H
 
-#include <d3d9.h>
 #include "RenderableVertex.h"
 #include "Effects/Effect.h"
 #include "Effects/EffectTechnique.h"

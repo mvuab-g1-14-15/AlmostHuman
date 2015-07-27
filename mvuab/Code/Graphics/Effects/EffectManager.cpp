@@ -10,7 +10,7 @@ static bool sSharedEffectInited = false;
 
 CEffectManager::CEffectManager()
     : CManager()
-    
+
     , m_WorldMatrix( Math::m44fIDENTITY )
     , m_ProjectionMatrix( Math::m44fIDENTITY )
     , m_ViewMatrix( Math::m44fIDENTITY )
@@ -28,9 +28,9 @@ CEffectManager::CEffectManager( CXMLTreeNode &atts)
 }
 CEffectManager::~CEffectManager()
 {
-   CHECKED_DELETE( mEffectPool );
     CleanUp();
     Destroy();
+    CHECKED_DELETE( mEffectPool );
 }
 
 const Math::Mat44f& CEffectManager::GetWorldMatrix() const
@@ -132,8 +132,8 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 
 void CEffectManager::Init()
 {
-   if( mEffectPool->Init() )
-      Load(mConfigPath);
+    if( mEffectPool->Init() )
+        Load(mConfigPath);
 }
 
 void CEffectManager::Load( const std::string& lFile )
@@ -180,13 +180,13 @@ void CEffectManager::Load( const std::string& lFile )
 
                     if( l_pEffect && !sSharedEffectInited )
                     {
-                       CSharedEffect* lSharedEffect = mEffectPool->GetSharedEffect();
-                       ASSERT( lSharedEffect, "Null shared effect" );
+                        CSharedEffect* lSharedEffect = mEffectPool->GetSharedEffect();
+                        ASSERT( lSharedEffect, "Null shared effect" );
 
-                       lSharedEffect->SetEffect( l_pEffect->GetEffect() );
-                       lSharedEffect->LinkSemantics();
+                        lSharedEffect->SetEffect( l_pEffect->GetEffect() );
+                        lSharedEffect->LinkSemantics();
 
-                       sSharedEffectInited = true;
+                        sSharedEffectInited = true;
                     }
                 }
                 else if ( l_TagName == "handles" )
@@ -222,7 +222,7 @@ void CEffectManager::ReloadEffects()
     std::map<std::string, CEffect*>::iterator lItb = lEffectsVector.begin(), lIte = lEffectsVector.end();
     for( ; lItb != lIte; ++lItb )
     {
-       lItb->second->Reload(mEffectPool);
+        lItb->second->Reload(mEffectPool);
     }
 }
 
@@ -241,6 +241,6 @@ CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName 
 
 void CEffectManager::BeginRender()
 {
-   mEffectPool->Bind();
+    mEffectPool->Bind();
 }
 

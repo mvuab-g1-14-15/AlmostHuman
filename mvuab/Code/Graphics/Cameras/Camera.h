@@ -8,59 +8,57 @@
 #include "Utils\Name.h"
 #include "Object3D.h"
 
-#include <d3dx9.h>
-
 class CCamera : public CName, public CObject3D
 {
-public:
+    public:
 
-    enum Type{ Free = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
-    
-    CCamera();
-    virtual ~CCamera();
+        enum Type { Free = 0, ThirdPerson, FirstPerson, Spherical, Cinematical };
 
-    void            RenderCamera( LPDIRECT3DDEVICE9 device);
-    virtual void    Update( );
-    virtual Math::Vect3f GetDirection( void ) const;
-    virtual Math::Vect3f GetLookAt( void ) const;
-    virtual Math::Vect3f GetVecUp( void ) const;
+        CCamera();
+        virtual ~CCamera();
 
-    D3DXMATRIX GetMatrixView( void );
-    D3DXMATRIX  GetMatrixProj( void );
+        void            RenderCamera( LPDIRECT3DDEVICE9 device);
+        virtual void    Update( );
+        virtual Math::Vect3f GetDirection( void ) const;
+        virtual Math::Vect3f GetLookAt( void ) const;
+        virtual Math::Vect3f GetVecUp( void ) const;
 
-    GET_SET( Type, CameraType )
-    GET_SET( float32, ZNear )
-    GET_SET( float32, ZFar )
-    GET_SET( float32, AspectRatio )
-    GET_SET( bool, Enable )
-    
-    //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
-    void    AddYaw( float32 aRadian );
-    void    AddPitch( float32 aRadian );
-    void    AddZf( float32 aAmount );
-    void    AddFov( float32 aAmont );
-    void    AddViewD( float32 aAmount );
+        D3DXMATRIX GetMatrixView( void );
+        D3DXMATRIX  GetMatrixProj( void );
 
-    // Frustum methods
-    GET_SET( CFrustum, Frustum );
-    void UpdateFrustum(D3DXMATRIX ViewProjectionMatrix);
+        GET_SET( Type, CameraType )
+        GET_SET( float32, ZNear )
+        GET_SET( float32, ZFar )
+        GET_SET( float32, AspectRatio )
+        GET_SET( bool, Enable )
 
-protected:
+        //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
+        void    AddYaw( float32 aRadian );
+        void    AddPitch( float32 aRadian );
+        void    AddZf( float32 aAmount );
+        void    AddFov( float32 aAmont );
+        void    AddViewD( float32 aAmount );
 
-    float32            m_view_d;
-    float32            m_FovInRadians;
-    float32            m_AspectRatio;
-    float32            m_ZNear;
-    float32            m_ZFar;
+        // Frustum methods
+        GET_SET( CFrustum, Frustum );
+        void UpdateFrustum(D3DXMATRIX ViewProjectionMatrix);
 
-    Type               m_CameraType;
+    protected:
 
-    bool               m_Enable;
+        float32            m_view_d;
+        float32            m_FovInRadians;
+        float32            m_AspectRatio;
+        float32            m_ZNear;
+        float32            m_ZFar;
 
-    CFrustum           m_Frustum;
+        Type               m_CameraType;
 
-    D3DXMATRIXA16      m_view;
-    D3DXMATRIXA16      m_proj;
+        bool               m_Enable;
+
+        CFrustum           m_Frustum;
+
+        D3DXMATRIXA16      m_view;
+        D3DXMATRIXA16      m_proj;
 };
 
 #endif // INC_CAMERA_H_

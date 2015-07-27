@@ -36,8 +36,6 @@
 #include "Actor\PhysicActor.h"
 #include "Utils/PhysicUserData.h"
 
-#include <d3dx9.h>
-
 #include "Items\Grenade.h"
 
 
@@ -73,19 +71,29 @@ void CPhysicMaterial::Update()
     CActionManager* pActionManager = ActionManagerInstance;
 
     if ( pActionManager->DoAction( "ReloadStaticMesh" ) )
-    { SMeshMInstance->Reload(); }
+    {
+        SMeshMInstance->Reload();
+    }
 
     if ( pActionManager->DoAction( "ReloadLUA" ) )
-    { ScriptMInstance->Reload(); }
+    {
+        ScriptMInstance->Reload();
+    }
 
     if ( pActionManager->DoAction( "ReloadShaders" ) )
-    { EffectManagerInstance->Reload(); }
+    {
+        EffectManagerInstance->Reload();
+    }
 
     if ( pActionManager->DoAction( "ReloadActionToInput" ) )
-    { ActionManagerInstance->Reload(); }
+    {
+        ActionManagerInstance->Reload();
+    }
 
     if ( pActionManager->DoAction( "SaveActionToInput" ) )
-    { ActionManagerInstance->SaveXML( "Data/Prueba.xml" ); }
+    {
+        ActionManagerInstance->SaveXML( "Data/Prueba.xml" );
+    }
 
     if ( pActionManager->DoAction( "SetActionToInput" ) )
     {
@@ -138,9 +146,13 @@ void CPhysicMaterial::Update()
                                      l_SCollisionInfo, 40.0f );
 
             if ( l_PUD )
-            { std::string l_Object = l_PUD->GetName(); }
+            {
+                std::string l_Object = l_PUD->GetName();
+            }
             else
-            { std::string l_Object = ""; }
+            {
+                std::string l_Object = "";
+            }
         }
 
     }
@@ -154,9 +166,13 @@ void CPhysicMaterial::Update()
         if ( l_CurrentCamera )
         {
             if ( l_CurrentCamera->GetEnable() )
-            { l_CurrentCamera->SetEnable( false ); }
+            {
+                l_CurrentCamera->SetEnable( false );
+            }
             else
-            { l_CurrentCamera->SetEnable( true ); }
+            {
+                l_CurrentCamera->SetEnable( true );
+            }
         }
     }
 
@@ -179,7 +195,9 @@ void CPhysicMaterial::Update()
 
         //CPhysicUserData* l_PUD = l_PM->RaycastClosestActor(l_Pos, l_Dir.GetNormalized(), mask, l_SCollisionInfo);
         if ( l_PUD )
-        { l_PUD->SetColor( colRED ); }
+        {
+            l_PUD->SetColor( colRED );
+        }
     }
 
     ScriptMInstance->RunCode( "update()" );
