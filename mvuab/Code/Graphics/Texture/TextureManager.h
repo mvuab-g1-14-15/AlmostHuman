@@ -23,6 +23,7 @@ class CTextureManager : public CMapManager<CTexture>, public CManager
         CTexture* GetTexture( const std::string& fileName );
     private:
         CTexture *m_DummyTexture;
+        CTexture* AddTexture( const std::string& fileName );
 };
 
 #endif //INC_TEXTURE_MANAGER_H

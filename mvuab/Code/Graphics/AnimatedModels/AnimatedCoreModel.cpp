@@ -193,9 +193,9 @@ bool CAnimatedCoreModel::Load()
         if( TagName == "texture" )
         {
             const std::string &textureFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
-            if(!LoadTexture(textureFilename))
+            if(  !LoadTexture(textureFilename))
             {
-                LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadTexture No se puede abrir %s!", m_FileName.c_str());
+                LOG_ERROR_APPLICATION( "%s could not be loaded!", m_FileName.c_str());
             }
         }
         else if( TagName == "skeleton" )
@@ -239,8 +239,8 @@ int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
     }
     else
     {
-      lAnimationId = lItFind->second;
-      LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
+        lAnimationId = lItFind->second;
+        LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
     }
 
     return lAnimationId;

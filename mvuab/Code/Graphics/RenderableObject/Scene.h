@@ -13,24 +13,24 @@ class CRoom;
 class CScene : public CMapManager<CRoom>, public CManager
 {
     public:
-		CScene   () : CManager() {};
-		CScene(const CXMLTreeNode& atts);
+        CScene   () : CManager() {};
+        CScene(const CXMLTreeNode& atts);
         ~CScene  ();
 
         bool Load( const std::string &l_FilePath );
-		bool Reload();
+        bool Reload();
 
-		void Init();
+        void Init();
         void Update();
         void Render();
 
-		void Destroy();
+        void Destroy();
 
-		void LoadRoom( std::string aRoomName );
-		void ActivateRoom( std::string aRoomName );
+        void LoadRoom( std::string aRoomName );
+        void ActivateRoom( std::string aRoomName );
 
-		void UnloadRoom( std::string aRoomName );
-		void DesactivateRoom( std::string aRoomName );
+        void UnloadRoom( std::string aRoomName );
+        void DesactivateRoom( std::string aRoomName );
 };
 
 #endif

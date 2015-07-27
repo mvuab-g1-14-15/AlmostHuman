@@ -11,44 +11,44 @@ class CLightManager;
 
 class CRoom
 {
-public:
-	CRoom();
-	~CRoom();
+    public:
+        CRoom();
+        ~CRoom();
 
-	GET_SET(std::string, Name);
-	GET_SET(std::string, RenderableObjectsPath);
-	GET_SET(std::string, StaticMeshesPath);
-	GET_SET(std::string, BasePath);
-	GET_SET(bool, Active);
+        GET_SET(std::string, Name);
+        GET_SET(std::string, RenderableObjectsPath);
+        GET_SET(std::string, StaticMeshesPath);
+        GET_SET(std::string, BasePath);
+        GET_SET(bool, Active);
 
-	CRenderableObjectsLayersManager* GetLayers()
-	{
-		return m_pLayers;
-	}
+        CRenderableObjectsLayersManager* GetLayers()
+        {
+            return m_pLayers;
+        }
 
-	void SetLayers( CRenderableObjectsLayersManager* aLayers )
-	{
-		m_pLayers = aLayers;
-	}
+        void SetLayers( CRenderableObjectsLayersManager* aLayers )
+        {
+            m_pLayers = aLayers;
+        }
 
-  CLightManager* GetLights()
-  {
-    return m_pLights;
-  }
+        CLightManager* GetLights()
+        {
+            return m_pLights;
+        }
 
-  void SetLights( CLightManager* aLights)
-  {
-    m_pLights = aLights;
-  }
-	
-private:
-	std::string m_Name;
-	std::string m_RenderableObjectsPath;
-	std::string m_StaticMeshesPath;
-	std::string m_BasePath;
-	CRenderableObjectsLayersManager* m_pLayers;
-  CLightManager* m_pLights;
-	bool m_Active;
+        void SetLights( CLightManager* aLights)
+        {
+            m_pLights = aLights;
+        }
+
+    private:
+        std::string m_Name;
+        std::string m_RenderableObjectsPath;
+        std::string m_StaticMeshesPath;
+        std::string m_BasePath;
+        CRenderableObjectsLayersManager* m_pLayers;
+        CLightManager* m_pLights;
+        bool m_Active;
 };
 
 #endif
