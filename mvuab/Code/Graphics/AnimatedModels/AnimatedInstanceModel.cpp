@@ -15,6 +15,10 @@
 #include "Timer\Timer.h"
 #include "EngineManagers.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 #include "ActionManager.h"
 #include "Utils\Defines.h"
 
@@ -22,8 +26,7 @@
 
 #define MAXBONES 29
 
-CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
-        const std::string& CoreName ) :
+CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,const std::string& CoreName ) :
     m_CalModel( 0 ),
     m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) ),
     m_BlendTime( 0.3f ),
@@ -227,8 +230,11 @@ void CAnimatedInstanceModel::Initialize()
     ASSERT( m_AnimatedCoreModel, "Invalid CalCoreModel" );
 
     // Create the calcoremodel
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     CalCoreModel* l_CalCoreModel = m_AnimatedCoreModel->GetCoreModel();
-    m_CalModel = new CalModel( l_CalCoreModel );
+
+    m_CalModel = (CalModel *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CalModel), __alignof(CalModel));
+    new (m_CalModel) CalModel(l_CalCoreModel);
 
     // attach all meshes to the model
     uint16 l_CoreMeshCount = l_CalCoreModel->getCoreMeshCount();
@@ -287,7 +293,9 @@ void CAnimatedInstanceModel::Initialize()
 
 void CAnimatedInstanceModel::Destroy()
 {
-    CHECKED_DELETE( m_CalModel );
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete( m_CalModel );
+
     CHECKED_RELEASE( m_pVB );
     CHECKED_RELEASE( m_pIB );
 }

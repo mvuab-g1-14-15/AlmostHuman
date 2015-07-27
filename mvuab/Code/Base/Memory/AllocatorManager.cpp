@@ -17,6 +17,9 @@ CAllocatorManager::CAllocatorManager()
     m_pLinearAllocatorMem = (void *) malloc ((unsigned int) LINEAR_SIZE);
     m_pFreeListAllocatorMem = (void *) malloc ((unsigned int) FREE_LIST_SIZE);
 
+    //memset(m_pLinearAllocatorMem, 0, (unsigned int) LINEAR_SIZE);
+    //memset(m_pFreeListAllocatorMem, 0, (unsigned int) FREE_LIST_SIZE);
+
     m_pLinearAllocator = new CLinearAllocator((unsigned int) LINEAR_SIZE, m_pLinearAllocatorMem);
     m_pFreeListAllocator = new CFreeListAllocator((unsigned int) FREE_LIST_SIZE, m_pLinearAllocatorMem);
 }

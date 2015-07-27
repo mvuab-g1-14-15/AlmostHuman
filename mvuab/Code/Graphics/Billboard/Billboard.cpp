@@ -14,6 +14,10 @@
 #include "EngineConfig.h"
 #include <string>
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 
 CRenderableVertexs* CBillboard::sRV = 0;
 
@@ -137,12 +141,16 @@ void CBillboard::CreateBillBoardGeometry()
     };
 
     unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
-    sRV = new CIndexedVertexs<TT1_VERTEX>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
+    sRV = ( CIndexedVertexs<TT1_VERTEX> *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof( CIndexedVertexs<TT1_VERTEX>), __alignof( CIndexedVertexs<TT1_VERTEX>));
+    new (sRV)  CIndexedVertexs<TT1_VERTEX>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
 }
 
 void CBillboard::DestroyBillBoardGeometry()
 {
     ASSERT( sRV != 0, "The billboard geometry is already destroyed" );
-    CHECKED_DELETE( sRV );
+
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(sRV);
 }

@@ -3,23 +3,35 @@
 #include "AnimatedInstanceModel.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
+
+#include "EngineManagers.h"
 #include "EngineConfig.h"
 
-CAnimatedModelsManager::CAnimatedModelsManager()
-    : CManager()
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
+CAnimatedModelsManager::CAnimatedModelsManager(): CManager()
 {
     CalLoader::setLoadingMode( LOADER_ROTATE_X_AXIS );
 }
 
-CAnimatedModelsManager::CAnimatedModelsManager( CXMLTreeNode& atts )
-    : CManager( atts )
+CAnimatedModelsManager::CAnimatedModelsManager( CXMLTreeNode& atts ) : CManager( atts )
 {
     CalLoader::setLoadingMode( LOADER_ROTATE_X_AXIS );
 }
 
 CAnimatedModelsManager::~CAnimatedModelsManager()
 {
-    Destroy();
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    for(TMapResource::iterator it = m_Resources.begin(); it != m_Resources.end(); it++)
+    {
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete(it->second);
+        it->second = 0;
+    }
+
+    m_Resources.clear();
 }
 
 CAnimatedCoreModel* CAnimatedModelsManager::GetCore( const std::string& Name, const std::string& Path )
@@ -80,11 +92,15 @@ void CAnimatedModelsManager::Init()
 
 CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string& Name, const std::string& Path )
 {
-    CAnimatedCoreModel* l_pAnimatedCoreModel = new CAnimatedCoreModel( Name );
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    CAnimatedCoreModel* l_pAnimatedCoreModel = (CAnimatedCoreModel *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CAnimatedCoreModel), __alignof(CAnimatedCoreModel));
+    new (l_pAnimatedCoreModel) CAnimatedCoreModel(Name);
 
     if ( !l_pAnimatedCoreModel->Load( Path ) )
     {
-        CHECKED_DELETE( l_pAnimatedCoreModel );
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete( l_pAnimatedCoreModel );
+        l_pAnimatedCoreModel = 0;
     }
     else
     {

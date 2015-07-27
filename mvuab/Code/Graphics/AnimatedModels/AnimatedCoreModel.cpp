@@ -12,6 +12,10 @@
 #include "RenderableVertex\IndexedVertexs.h"
 #include "EngineManagers.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 #define MAXBONES 29
 
 CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name)
@@ -20,10 +24,15 @@ CAnimatedCoreModel::CAnimatedCoreModel(const std::string &Name)
     , m_FileName("")
     , m_CalHardwareModel(0)
     , m_RenderableVertexs(0)
-    , m_CalCoreModel(new CalCoreModel(Name))
     , m_NumFaces(0)
     , m_NumVtxs(0)
 {
+    //m_CalCoreModel(new CalCoreModel(Name))
+
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    m_CalCoreModel = (CalCoreModel *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CalCoreModel), __alignof(CalCoreModel));
+    new (m_CalCoreModel) CalCoreModel(Name); 
 }
 
 CAnimatedCoreModel::~CAnimatedCoreModel()
@@ -35,10 +44,12 @@ void CAnimatedCoreModel::Destroy()
 {
     m_TextureVector.clear();
     m_AnimationsMap.clear();
+    
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
-    CHECKED_DELETE(m_CalCoreModel);
-    CHECKED_DELETE(m_CalHardwareModel);
-    CHECKED_DELETE(m_RenderableVertexs);
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_CalCoreModel);
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_CalHardwareModel);
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_RenderableVertexs);
 }
 
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)
@@ -97,8 +108,15 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
         }
     }
 
-    CHECKED_DELETE(m_CalHardwareModel);
-    m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
+    CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_CalHardwareModel);
+
+    m_CalHardwareModel = (CalHardwareModel *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CalHardwareModel), __alignof(CalHardwareModel));
+    new (m_CalHardwareModel) CalHardwareModel(m_CalCoreModel);
+        
+    //unsigned short *l_Idxs = (unsigned short *) l_AllocatorManger->m_pLinearAllocator->Allocate(sizeof(unsigned short) * m_NumFaces * 3, __alignof(unsigned short));
+    //CAL3D_HW_VERTEX *l_Vtxs = (CAL3D_HW_VERTEX *) l_AllocatorManger->m_pLinearAllocator->Allocate(sizeof(CAL3D_HW_VERTEX) * m_NumFaces * 3, __alignof(CAL3D_HW_VERTEX));
+
     unsigned short *l_Idxs = new unsigned short[m_NumFaces * 3];
     CAL3D_HW_VERTEX *l_Vtxs = new CAL3D_HW_VERTEX[m_NumFaces * 3];
 
@@ -132,10 +150,14 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
         92
     );
 
-    CHECKED_DELETE(m_RenderableVertexs);
-    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
-    delete []l_Vtxs;
-    delete []l_Idxs;
+    l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_RenderableVertexs);
+
+    m_RenderableVertexs = (CIndexedVertexs<CAL3D_HW_VERTEX> *) l_AllocatorManger->m_pFreeListAllocator->Allocate(sizeof(CIndexedVertexs<CAL3D_HW_VERTEX>), __alignof(CIndexedVertexs<CAL3D_HW_VERTEX>));
+    new (m_RenderableVertexs)  CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
+
+    //l_AllocatorManger->m_pLinearAllocator->Reset();
+    delete(l_Idxs);
+    delete(l_Vtxs);
 
     return true;
 }
@@ -144,10 +166,8 @@ bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
     CTexture *t = TextureMInstance->GetTexture( m_Path + Filename);
-    if(t)
-    {
-        m_TextureVector.push_back(t);
-    }
+    if(t) m_TextureVector.push_back(t);
+    
     return (t != 0);
 }
 
