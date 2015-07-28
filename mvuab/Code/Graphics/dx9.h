@@ -7,7 +7,9 @@
 #include <d3dx9effect.h>
 #include <d3dx9math.h>
 
-#if defined(DEBUG) | defined(_DEBUG)
+#define ENABLE_HR_INST 0
+
+#if ENABLE_HR_INST == 1
 
 #ifndef D3D_DEBUG_INFO
 #define D3D_DEBUG_INFO
@@ -59,7 +61,7 @@
 #endif
 #else
 #ifndef HR
-#define HR(x) HRESULT lHR = x; lHR
+#define HR(x) x
 #endif
 #endif
 

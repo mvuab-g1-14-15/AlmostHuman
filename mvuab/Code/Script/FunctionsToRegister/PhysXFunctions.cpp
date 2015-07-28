@@ -115,7 +115,21 @@ bool PlayerInSight( CPhysicsManager* PhysicManager, float _Distance, float _Angl
         std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
 
         if ( name == "Player" )
-            return true;
+        {
+          SCollisionInfo hit;
+          CPhysicUserData* lRayCollision = PhysicManager->RaycastClosestActor(_Position, _Direction, 0xffffff, hit, _Distance);
+          CPhysicController* lRayController = lRayCollision->GetController();
+          if (lRayController)
+          {
+            std::string lName( lRayController->GetUserData()->GetName());
+            if ( name == "Player" )
+              return true;
+            else
+              return false;
+          }
+          else
+            return false;
+        }
     }
 
     return false;

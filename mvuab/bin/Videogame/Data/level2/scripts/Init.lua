@@ -7,9 +7,10 @@ g_ConsoleActivate = false
 g_CinematicActive = false
 local initialized = false
 
-
 function load_basics()
 	-- basic loads
+	scene:ActivateRoom("room1")
+	scene:ActivateRoom("room2")
 end
 
 function load_gameplay()
@@ -24,16 +25,17 @@ function load_gameplay()
 	--g_stateMachine = CStateMachineLUA("Data/enemies/AI-patroll.xml")
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-	initialized = true
 end
 
 function update_gameplay()
 	if not initialized then
+		load_basics()
 		load_gameplay()
+		initialized = true
 	end
 	
 	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
-	g_CinematicActive = cinematic_manager:GetCinematicActive()
+	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else

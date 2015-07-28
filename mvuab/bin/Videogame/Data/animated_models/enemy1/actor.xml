@@ -1,5 +1,0 @@
-<animated_model name="enemy1">
-	<skeleton file="enemy1_skeleton.csf"/>
-	<mesh file="enemy1_mesh.cmf"/>
-	<animation name="enemy1_arm_up" file="enemy1_arm_up.caf"/>
-</animated_model>

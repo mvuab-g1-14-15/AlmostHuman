@@ -19,10 +19,14 @@ CStaticMeshManager::~CStaticMeshManager()
 
 void CStaticMeshManager::Init()
 {
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(mConfigPath.c_str()))
+}
+
+void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
+{
+	CXMLTreeNode newFile;
+    if (!newFile.LoadFile(aFilePath.c_str()))
     {
-        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str());
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", aFilePath.c_str());
         return;
     }
 
@@ -36,7 +40,7 @@ void CStaticMeshManager::Init()
     for( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
-        const std::string &file = "Data" + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
+        const std::string &file = aBasePath + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
 
         CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
@@ -49,10 +53,4 @@ void CStaticMeshManager::Init()
             CHECKED_DELETE(l_StaticMesh);
         }
     }
-}
-
-void CStaticMeshManager::Reload()
-{
-    Destroy();
-    Init();
 }

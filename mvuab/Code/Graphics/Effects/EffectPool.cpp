@@ -16,12 +16,13 @@ CEffectPool::CEffectPool(void)
 //-----------------------------------------------------------------------------------------------------------------------------------------
 CEffectPool::~CEffectPool(void)
 {
-   CHECKED_RELEASE( mD3DXEffectPool );
+    mD3DXEffectPool = 0;
+    //CHECKED_RELEASE( mD3DXEffectPool );
 }
 
 void CEffectPool::Bind()
 {
-   mSharedEffect->Bind();
+    mSharedEffect->Bind();
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -33,13 +34,14 @@ bool CEffectPool::Init()
 
     if( lHR != S_OK )
     {
-       lOk = false;
-       switch(lHR)
-       {
-          D3D_EFFECT_POOL_ERROR_CASE(D3DERR_INVALIDCALL)
-          D3D_EFFECT_POOL_ERROR_CASE(E_FAIL)
-          default: LOG_ERROR_APPLICATION( "Unknown error creating the effect pool");
-       }
+        lOk = false;
+        switch(lHR)
+        {
+            D3D_EFFECT_POOL_ERROR_CASE(D3DERR_INVALIDCALL)
+            D3D_EFFECT_POOL_ERROR_CASE(E_FAIL)
+        default:
+            LOG_ERROR_APPLICATION( "Unknown error creating the effect pool");
+        }
     }
 
     return lOk;
@@ -47,10 +49,10 @@ bool CEffectPool::Init()
 
 LPD3DXEFFECTPOOL CEffectPool::GetD3DEffectPool()
 {
-   return mD3DXEffectPool;
+    return mD3DXEffectPool;
 }
 
 CSharedEffect* CEffectPool::GetSharedEffect()
 {
-   return mSharedEffect;
+    return mSharedEffect;
 }

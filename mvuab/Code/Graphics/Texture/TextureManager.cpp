@@ -13,18 +13,18 @@ CTextureManager::CTextureManager( CXMLTreeNode& atts )
 CTextureManager::~CTextureManager()
 {
     Destroy();
-	CHECKED_DELETE( m_DummyTexture );
+    CHECKED_DELETE( m_DummyTexture );
 }
 
 void CTextureManager::Init()
 {
-	m_DummyTexture = new CTexture();
-	if ( !m_DummyTexture->Load("Data/textures/Dummy.png") )
+    m_DummyTexture = new CTexture();
+    if ( !m_DummyTexture->Load("Data/textures/Dummy.png") )
     {
-		CHECKED_DELETE( m_DummyTexture );
-		LOG_ERROR_APPLICATION( "The Dummy texture could not be loaded" );
-		m_DummyTexture = 0;
-	}
+        CHECKED_DELETE( m_DummyTexture );
+        LOG_ERROR_APPLICATION( "The Dummy texture could not be loaded" );
+        m_DummyTexture = 0;
+    }
 }
 
 void CTextureManager::Reload()
@@ -39,39 +39,38 @@ void CTextureManager::Reload()
 
 CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
-    if( fileName == "" )
+    if( fileName == ""  )
     {
+        ASSERT( false, "Null texture name" );
         return m_DummyTexture;
     }
-    else if ( m_Resources.find( fileName ) == m_Resources.end() )
+
+    return ( m_Resources.find( fileName ) == m_Resources.end() ) ? AddTexture( fileName ) : m_Resources[fileName];
+}
+
+CTexture* CTextureManager::AddTexture( const std::string& fileName )
+{
+    CTexture* t;
+
+    if ( fileName.find( "Cube" ) != std::string::npos )
     {
-        CTexture* t;
-
-        if ( fileName.find( "Cube" ) != std::string::npos )
-        {
-            t = new CCubedTexture();
-        }
-        else if ( fileName.find( "GUI" ) != std::string::npos )
-        {
-            t = new CGUITexture();
-        }
-        else
-        {
-            t = new CTexture();
-        }
-
-        if ( !t->Load( fileName ) )
-        {
-            CHECKED_DELETE( t );
-            LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-            return m_DummyTexture;
-        }
-
-        m_Resources[fileName] = t;
-        return t;
+        t = new CCubedTexture();
+    }
+    else if ( fileName.find( "GUI" ) != std::string::npos )
+    {
+        t = new CGUITexture();
     }
     else
     {
-        return m_Resources[fileName];
+        t = new CTexture();
     }
+
+    if ( !t->Load( fileName ) || !AddResource( fileName, t) )
+    {
+        CHECKED_DELETE( t );
+        LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
+        return m_DummyTexture;
+    }
+
+    return t;
 }

@@ -29,8 +29,8 @@
 	</route>
   
 	<route id="3">
-		<point value="73.403 -9.4127 -33.3886"/>
-		<point value="52.416 -9.4127 -33.3886"/>
+		<point value="72.403 -9.4127 -36.3886"/>
+		<point value="52.416 -9.4127 -36.3886"/>
 	</route>
   
 	<core_enemy type="easy" life="50" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
@@ -41,7 +41,7 @@
 	<enemy name="Enemy2" type="patroll" route="1" pos="57.7057 -16.4127 -44.8169" yaw="0.0" mesh="enemy1"/>
 	<enemy name="Enemy3" type="patroll" route="2" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1"/>
 	
-	<enemy name="Drone1" type="patroll" route="3" pos="73.403 -9.4127 -33.3886" yaw="0.0" mesh="drone"/>
+	<enemy name="Drone1" type="patroll" route="3" pos="72.403 -9.4127 -36.3886" yaw="0.0" mesh="drone"/>
 	<!--enemy name="Drone2" type="drone" route="4" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="drone"/-->
 	
 </enemies>

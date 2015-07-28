@@ -3,7 +3,7 @@
 #include "AnimatedInstanceModel.h"
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
-#include "EngineConfig.h"
+#include "EngineManagers.h"
 
 CAnimatedModelsManager::CAnimatedModelsManager()
     : CManager()
@@ -22,21 +22,6 @@ CAnimatedModelsManager::~CAnimatedModelsManager()
     Destroy();
 }
 
-CAnimatedCoreModel* CAnimatedModelsManager::GetCore( const std::string& Name, const std::string& Path )
-{
-    CAnimatedCoreModel* l_pAnimatedCoreModel = GetResource( Name );
-
-    // Check if the core model is already in memory
-    if ( !l_pAnimatedCoreModel )
-    {
-        l_pAnimatedCoreModel = AddNewCore( Name, Path );
-    }
-
-    assert( l_pAnimatedCoreModel );
-
-    return l_pAnimatedCoreModel;
-}
-
 CAnimatedCoreModel* CAnimatedModelsManager::GetCore( const std::string& Name )
 {
     CAnimatedCoreModel* l_pAnimatedCoreModel = GetResource( Name );
@@ -53,45 +38,29 @@ CAnimatedInstanceModel* CAnimatedModelsManager::GetInstance( const std::string& 
 
 void CAnimatedModelsManager::Init()
 {
-    CXMLTreeNode newFile;
+    CXMLTreeNode lFile, lNode;
 
-    if ( !newFile.LoadFile( mConfigPath.c_str() ) )
+    if( lFile.LoadAndFindNode( mConfigPath.c_str(),"animated_models", lNode ) )
     {
-        LOG_ERROR_APPLICATION( "CAnimatedModelManager::Load No se puede abrir \"%s\"!", mConfigPath.c_str() );
-        return;
+        for ( uint32 i = 0, lCount = lNode.GetNumChildren(); i < lCount; ++i )
+        {
+            const CXMLTreeNode& lCurrentNode = lNode(i);
+            const std::string& name = lCurrentNode.GetAttribute<std::string>( "name", "no_name" );
+            const std::string& path = lCurrentNode.GetAttribute<std::string>( "path", "no_file" );
+
+            CAnimatedCoreModel* lAnimatedCoreModel = new CAnimatedCoreModel( name );
+
+            if( lAnimatedCoreModel->Load( path ) && AddResource( name, lAnimatedCoreModel ) )
+            {
+                lAnimatedCoreModel->LoadVertexBuffer( GraphicsInstance );
+            }
+            else
+            {
+                LOG_ERROR_APPLICATION( "The animated core model %s could not be loaded", name.c_str() );
+                CHECKED_DELETE( lAnimatedCoreModel );
+            }
+        }
     }
-
-    CXMLTreeNode node = newFile["animated_models"];
-
-    if ( !node.Exists() )
-    {
-        LOG_ERROR_APPLICATION( "CAnimatedModelManager::Load Tag \"%s\" no existe",  "animated_models" );
-        return;
-    }
-
-    for ( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount; ++i )
-    {
-        const CXMLTreeNode& lCurrentNode = node(i);
-        const std::string& name = lCurrentNode.GetAttribute<std::string>( "name", "no_name" );
-        const std::string& path = lCurrentNode.GetAttribute<std::string>( "path", "no_file" );
-        AddNewCore( name, path );
-    }
-}
-
-CAnimatedCoreModel* CAnimatedModelsManager::AddNewCore( const std::string& Name, const std::string& Path )
-{
-    CAnimatedCoreModel* l_pAnimatedCoreModel = new CAnimatedCoreModel( Name );
-
-    if ( !l_pAnimatedCoreModel->Load( Path ) )
-    {
-        CHECKED_DELETE( l_pAnimatedCoreModel );
-    }
-    else
-    {
-        AddResource( Name, l_pAnimatedCoreModel );
-    }
-
-    return l_pAnimatedCoreModel;
 }
 
 void CAnimatedModelsManager::Reload()

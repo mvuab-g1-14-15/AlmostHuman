@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="tuberia_1_room1" filename="meshes\tuberia_1.mesh" />
+  <static_mesh name="Reixa_01_room1" filename="meshes\Reixa_01.mesh" />
+  <static_mesh name="taula_operacions_room1" filename="meshes\taula_operacions.mesh" />
+  <static_mesh name="robot_3_room1" filename="meshes\robot_3.mesh" />
+  <static_mesh name="robot_2_room1" filename="meshes\robot_2.mesh" />
+  <static_mesh name="robot_1_room1" filename="meshes\robot_1.mesh" />
+  <static_mesh name="Taula_room1" filename="meshes\Taula.mesh" />
+  <static_mesh name="Moble_room1" filename="meshes\Moble.mesh" />
+  <static_mesh name="Plataforma_room1" filename="meshes\Plataforma.mesh" />
+  <static_mesh name="Sphere001_room1" filename="meshes\Sphere001.mesh" />
+  <static_mesh name="Tornillos_room1" filename="meshes\Tornillos.mesh" />
+  <static_mesh name="Tornillos001_room1" filename="meshes\Tornillos001.mesh" />
+  <static_mesh name="Tornillos002_room1" filename="meshes\Tornillos002.mesh" />
+  <static_mesh name="Tornillos003_room1" filename="meshes\Tornillos003.mesh" />
+  <static_mesh name="Tornillos004_room1" filename="meshes\Tornillos004.mesh" />
+  <static_mesh name="Tornillos005_room1" filename="meshes\Tornillos005.mesh" />
+  <static_mesh name="Tornillos006_room1" filename="meshes\Tornillos006.mesh" />
+  <static_mesh name="Tornillos007_room1" filename="meshes\Tornillos007.mesh" />
+  <static_mesh name="Tornillos008_room1" filename="meshes\Tornillos008.mesh" />
+  <static_mesh name="Tornillos009_room1" filename="meshes\Tornillos009.mesh" />
+  <static_mesh name="Tornillos010_room1" filename="meshes\Tornillos010.mesh" />
+  <static_mesh name="Tornillos011_room1" filename="meshes\Tornillos011.mesh" />
+  <static_mesh name="Tornillos012_room1" filename="meshes\Tornillos012.mesh" />
+  <static_mesh name="Tornillos013_room1" filename="meshes\Tornillos013.mesh" />
+  <static_mesh name="Tornillos014_room1" filename="meshes\Tornillos014.mesh" />
+  <static_mesh name="Tornillos015_room1" filename="meshes\Tornillos015.mesh" />
+  <static_mesh name="Tornillos016_room1" filename="meshes\Tornillos016.mesh" />
+  <static_mesh name="robot_004_room1" filename="meshes\robot_004.mesh" />
+  <static_mesh name="servidor_room1" filename="meshes\servidor.mesh" />
+  <static_mesh name="Base_carga_room1" filename="meshes\Base_carga.mesh" />
+  <static_mesh name="Layer_dia-_room1" filename="meshes\Layer_dia-.mesh" />
+  <static_mesh name="Bombona_room1" filename="meshes\Bombona.mesh" />
+  <static_mesh name="Pot_vidre_room1" filename="meshes\Pot_vidre.mesh" />
+  <static_mesh name="Osciloscopi_room1" filename="meshes\Osciloscopi.mesh" />
+  <static_mesh name="tuberia_2_room1" filename="meshes\tuberia_2.mesh" />
+  <static_mesh name="Sala_room1" filename="meshes\Sala.mesh" />
+</static_meshes>
