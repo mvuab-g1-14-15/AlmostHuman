@@ -48,8 +48,13 @@ void CAnimatedCoreModel::Destroy()
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
     l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_CalCoreModel);
+    m_CalCoreModel = 0;
+
     l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_CalHardwareModel);
+    m_CalHardwareModel = 0;
+
     l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_RenderableVertexs);
+    m_RenderableVertexs = 0;
 }
 
 bool CAnimatedCoreModel::LoadMesh(const std::string &Filename)

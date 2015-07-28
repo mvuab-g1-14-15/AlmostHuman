@@ -93,7 +93,6 @@ CPhysicActor* CInstanceMesh::GetActor()
     return mPhysicActor;
 }
 
-
 CStaticMesh* CInstanceMesh::GetStaticMesh()
 {
     return mStaticMesh;

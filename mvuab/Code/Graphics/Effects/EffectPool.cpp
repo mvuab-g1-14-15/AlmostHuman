@@ -17,6 +17,7 @@ CEffectPool::CEffectPool(void)
 CEffectPool::~CEffectPool(void)
 {
    CHECKED_RELEASE( mD3DXEffectPool );
+   CHECKED_DELETE(mSharedEffect)
 }
 
 void CEffectPool::Bind()

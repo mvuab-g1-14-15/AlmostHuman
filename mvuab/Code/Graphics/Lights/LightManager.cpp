@@ -28,7 +28,10 @@ CLightManager::~CLightManager()
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
     for(std::vector<CLight *>::iterator it = m_ResourcesVector.begin(); it != m_ResourcesVector.end(); it++)
+    {
         l_AllocatorManger->m_pFreeListAllocator->MakeDelete(*it);
+        *it = 0;
+    }
 
     m_ResourcesMap.clear();
     m_ResourcesVector.clear();
@@ -108,12 +111,12 @@ Math::Vect3f& CLightManager::GetAmbientLight()
 void CLightManager::Render()
 {
 #ifdef _DEBUG
-    TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
+    /*TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
 
     for(; itb != ite; ++itb)
     {
         (*itb)->Render();
-    }
+    }*/
 
 #endif
 }

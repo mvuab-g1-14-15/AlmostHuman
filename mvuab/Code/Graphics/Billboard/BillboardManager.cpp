@@ -22,6 +22,7 @@ CBillboardManager::~CBillboardManager()
     for ( TMapResource::iterator lItb = m_Resources.begin(), lIte = m_Resources.end(); lItb != lIte; ++lItb )
     {
         l_AllocatorManger->m_pFreeListAllocator->MakeDelete(lItb->second);
+        lItb->second = 0;
     }
     
     m_Resources.clear();

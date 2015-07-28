@@ -12,7 +12,7 @@
 #include "EngineManagers.h"
 #include <sstream>
 
-CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode& TreeNode) : CName( TreeNode.GetAttribute<std::string>("name", ""))
+CPoolRenderableObjectTechnique::CPoolRenderableObjectTechnique(CXMLTreeNode& TreeNode) : CName(TreeNode.GetAttribute<std::string>("name", ""))
 {
 }
 
@@ -25,11 +25,11 @@ void CPoolRenderableObjectTechnique::Destroy()
 {
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
-    for (size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
+    for(size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i)
     {
-         l_AllocatorManger->m_pFreeListAllocator->MakeDelete( m_RenderableObjectTechniqueElements[i] );
+        l_AllocatorManger->m_pFreeListAllocator->MakeDelete(m_RenderableObjectTechniqueElements[i]);
     }
-    
+
     m_RenderableObjectTechniqueElements.clear();
 }
 
@@ -38,20 +38,20 @@ void CPoolRenderableObjectTechnique::AddElement(const std::string& Name, const s
     CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
     CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement = (CPoolRenderableObjectTechniqueElement *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CPoolRenderableObjectTechniqueElement), __alignof(CPoolRenderableObjectTechniqueElement));
-    new (PoolRenderableObjectTechniqueElement) CPoolRenderableObjectTechniqueElement(Name, EffectManagerInstance->GetResource(TechniqueName), ROTOnRenderableObjectTechniqueManager);
+    new(PoolRenderableObjectTechniqueElement) CPoolRenderableObjectTechniqueElement(Name, EffectManagerInstance->GetResource(TechniqueName), ROTOnRenderableObjectTechniqueManager);
 
-    m_RenderableObjectTechniqueElements.push_back( PoolRenderableObjectTechniqueElement );
+    m_RenderableObjectTechniqueElements.push_back(PoolRenderableObjectTechniqueElement);
 }
 
 void CPoolRenderableObjectTechnique::Apply()
 {
     CRenderableObjectTechniqueManager* l_ROTM = ROTMInstance;
 
-    for ( size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i )
+    for(size_t i = 0; i < m_RenderableObjectTechniqueElements.size(); ++i)
     {
         CPoolRenderableObjectTechniqueElement* l_CurrentElement = m_RenderableObjectTechniqueElements[i];
         CRenderableObjectTechnique* l_ROT = l_CurrentElement->m_OnRenderableObjectTechniqueManager;
-        l_ROT->SetEffectTechnique( l_CurrentElement->m_RenderableObjectTechnique.GetEffectTechnique() );
+        l_ROT->SetEffectTechnique(l_CurrentElement->m_RenderableObjectTechnique.GetEffectTechnique());
     }
 }
 

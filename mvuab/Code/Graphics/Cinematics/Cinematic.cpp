@@ -51,6 +51,7 @@ CCinematic::~CCinematic()
     for(std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(); it != m_CinematicObjects.end(); ++it)
     {
         l_AllocatorManger->m_pFreeListAllocator->MakeDelete(*it);
+        *it = 0;
     }
 
     m_CinematicObjects.clear();
@@ -95,7 +96,9 @@ void CCinematic::AddCinematicObject(CCinematicObject *CinematicObject)
 
 void CCinematic::Update()
 {
-    std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin(), it_end = m_CinematicObjects.end();
+    std::vector<CCinematicObject *>::iterator it = m_CinematicObjects.begin();
+    std::vector<CCinematicObject *>::iterator it_end = m_CinematicObjects.end();
+
     for(; it != it_end; ++it)
     {
         (*it)->Update();

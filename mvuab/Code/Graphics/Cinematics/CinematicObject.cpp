@@ -12,24 +12,34 @@
 #include "Utils\BaseUtils.h"
 #include "EngineManagers.h"
 
+#include "Memory\FreeListAllocator.h"
+#include "Memory\AllocatorManager.h"
+#include "Memory\LinearAllocator.h"
+
 CCinematicObject::CCinematicObject(CXMLTreeNode &atts)
 {
     std::string resource = atts.GetAttribute<std::string>("resource", "");
 
     m_RenderableObject = ROLMInstance->GetResource("solid")->GetResource(resource);
+    CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
 
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i)
     {
-        m_CinematicObjectKeyFrames.push_back(new CCinematicObjectKeyFrame(atts(i)));
+        CCinematicObjectKeyFrame *l_ObjectFrame = (CCinematicObjectKeyFrame *) l_AllocatorManager->m_pFreeListAllocator->Allocate(sizeof(CCinematicObjectKeyFrame), __alignof(CCinematicObjectKeyFrame));
+        new (l_ObjectFrame) CCinematicObjectKeyFrame(atts(i));
+
+        m_CinematicObjectKeyFrames.push_back(l_ObjectFrame);
     }
 }
 
 CCinematicObject::~CCinematicObject()
 {
-    for(std::vector<CCinematicObjectKeyFrame *>::iterator it = m_CinematicObjectKeyFrames.begin();
-            it != m_CinematicObjectKeyFrames.end(); ++it)
+     CAllocatorManager *l_AllocatorManager = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
+
+    for(std::vector<CCinematicObjectKeyFrame *>::iterator it = m_CinematicObjectKeyFrames.begin(); it != m_CinematicObjectKeyFrames.end(); ++it)
     {
-        CHECKED_DELETE((*it));
+        l_AllocatorManager->m_pFreeListAllocator->MakeDelete(*it);
+        *it = 0;
     }
 
     m_CinematicObjectKeyFrames.clear();

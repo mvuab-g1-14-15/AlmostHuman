@@ -35,6 +35,7 @@ CBillboard::CBillboard()
 
 CBillboard::~CBillboard()
 {
+
 }
 
 bool CBillboard::Init( const CXMLTreeNode& atts )
@@ -153,4 +154,5 @@ void CBillboard::DestroyBillBoardGeometry()
 
     CAllocatorManager *l_AllocatorManger = CEngineManagers::GetSingletonPtr()->GetAllocatorManager();
     l_AllocatorManger->m_pFreeListAllocator->MakeDelete(sRV);
+    sRV = 0;
 }

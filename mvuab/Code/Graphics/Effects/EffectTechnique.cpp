@@ -10,18 +10,15 @@
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 
-CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
-                                    CXMLTreeNode& HandlesNode )
+CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,CXMLTreeNode& HandlesNode )
     : m_TechniqueName( TechniqueName ),
       m_EffectName( EffectName ),
       mFlags( new CEffectFlags( HandlesNode ) ),
       m_UseInverseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_inverse_world_matrix", false ) ),
       m_UseWorldMatrix( HandlesNode.GetAttribute<bool>( "use_world_matrix", false ) ),
       m_UseWorldViewMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_matrix", false ) ),
-      m_UseWorldViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_projection_matrix",
-                                      false ) ),
-      m_UseViewToLightProjectionMatrix(
-          HandlesNode.GetAttribute<bool>( "use_view_to_light_projection_matrix", false ) ),
+      m_UseWorldViewProjectionMatrix( HandlesNode.GetAttribute<bool>( "use_world_view_projection_matrix", false ) ),
+      m_UseViewToLightProjectionMatrix(HandlesNode.GetAttribute<bool>( "use_view_to_light_projection_matrix", false ) ),
 
       // Lights
       m_NumOfLights( HandlesNode.GetAttribute<int32>( "num_of_lights", 0 ) ),
@@ -49,6 +46,7 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
 
 CEffectTechnique::~CEffectTechnique()
 {
+    CHECKED_DELETE(mFlags);
     m_Effect = 0;
 }
 

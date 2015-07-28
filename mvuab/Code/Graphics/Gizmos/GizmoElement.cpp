@@ -12,8 +12,7 @@
 #include "Effects\EffectTechnique.h"
 #include "Effects\EffectManager.h"
 
-CGizmoElement::CGizmoElement( EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch,
-                              Math::CColor color )
+CGizmoElement::CGizmoElement( EGizmoElementType type, float size, Math::Vect3f position, float yaw, float pitch, Math::CColor color )
 	: CObject3D( position, yaw, pitch, 0.0f, Math::Vect3f(size) )
     , m_Type( type )
     , m_Size( size )
