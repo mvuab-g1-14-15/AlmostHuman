@@ -7,6 +7,10 @@
 #include "PhysicsDefs.h"
 #include "Utils\Defines.h"
 
+#include "Engine.h"
+
+#include <sstream>
+
 #include "Particles\ParticleManager.h"
 #include "Particles\ParticleEmitter.h"
 #include "Particles\SphereEmitter.h"
@@ -67,9 +71,22 @@ SCollisionInfo RaycastCollisionGroup( CPhysicsManager* PhysicManager, Math::Vect
 
   if ( !lPUD || lPUD->GetName() != "Player" )
   {
-    hit_info = SCollisionInfo();
+    if (lPUD)
+	{
+		std::stringstream ss;
+		ss << "Collision name: " << lPUD->GetName();
+		std::string lName = ss.str();
+		EngineInstance->Trace( lName );
+	}
+
+	hit_info = SCollisionInfo();
     return hit_info;
   }
+
+	std::stringstream ss;
+	ss << "Collision name: " << lPUD->GetName();
+	std::string lName = ss.str();
+	EngineInstance->Trace( lName );
 
   return hit_info;
 }

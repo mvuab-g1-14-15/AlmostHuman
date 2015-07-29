@@ -37,7 +37,7 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 {
   SetDirection( mDirection );
 
-  const std::string lType( "Shoot" );
+  const std::string lType( "ShootPlayer" );
 
   std::ostringstream ss;
   ss << lType << IdManager->GetId( lType );

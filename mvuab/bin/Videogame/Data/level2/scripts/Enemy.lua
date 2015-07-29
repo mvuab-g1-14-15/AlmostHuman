@@ -1,4 +1,3 @@
-dofile("./data/level2/scripts/shoot.lua")
 class "CEnemyLUA"
 
 function CEnemyLUA:__init(Node, state_machine, core_enemy)
@@ -32,18 +31,18 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RenderableObject:SetRoll(self.CharacterController:GetRoll())
 	self.RenderableObject:MakeTransform()
 	
+	
+	
 	self.Brain = CBrain("inicial", state_machine)
+	
+	--self:ChangeState("perseguir")
+	--self:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
-	lPosition = self.CharacterController:GetPosition()
-	lPosition.y = lPosition.y + self:GetHeight()
-	lPosition = lPosition + self:GetDirection()
-	self.Camera:SetPosition(lPosition)
-	self.Camera:SetDirection(self:GetDirection())
-	self.Camera:MakeTransform()
+	self:UpdateCamera()
 
-	self.Shoots = {}
+	
 	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
@@ -56,20 +55,17 @@ end
 function CEnemyLUA:Update()
 	self:SetMeshTransform()
 	self.Brain:Update()
-	
-	for k in pairs (self.Shoots) do
-		if self.Shoots[k]:GetImpacted() then
-			self.Shoots[k]:Destroy()
-			table.remove(self.Shoots, k)
-			collectgarbage()
-		end
-	end
-	
-	for k in pairs (self.Shoots) do
-		self.Shoots[k]:Update()
-	end
+	self:UpdateCamera()
 end
 
+function CEnemyLUA:UpdateCamera()
+	lPosition = self.CharacterController:GetPosition()
+	lPosition.y = lPosition.y + self:GetHeight()
+	lPosition = lPosition + self:GetDirection()
+	self.Camera:SetPosition(lPosition)
+	self.Camera:SetDirection(self:GetDirectionEnemy())
+	self.Camera:MakeTransform()
+end
 function CEnemyLUA:SetMeshTransform()
 	local l_MeshPosition = self.CharacterController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.Height/2
@@ -148,6 +144,13 @@ function CEnemyLUA:GetDirection()
 	return Direction
 end
 
+function CEnemyLUA:GetDirectionEnemy()
+	local Yaw = self.CharacterController:GetYaw()
+	local Pitch = self.CharacterController:GetPitch()
+	local Direction = Vect3f( math.cos( Yaw ) * math.cos( Pitch ), math.sin( Pitch ), math.sin( Yaw ) * math.cos( Pitch ) )
+	return Direction
+end
+
 function CEnemyLUA:GetCharacterController()
 	return self.CharacterController
 end
@@ -157,11 +160,10 @@ function CEnemyLUA:GetCamera()
 end
 
 function CEnemyLUA:MakeShoot(aDirection)
-	
 	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
 	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
 	lShoot = CShootLUA( 5.0, aDirection, lPosition, 5.0 )	
-	table.insert( self.Shoots, lShoot)
+	g_EnemyManager:AddShoot(lShoot)
 end
 
 function CEnemyLUA:GetLife()

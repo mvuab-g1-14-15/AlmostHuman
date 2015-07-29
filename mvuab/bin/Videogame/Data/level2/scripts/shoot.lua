@@ -4,7 +4,7 @@ function CShootLUA:__init(speed, direction, position, damage)
 	self.Speed = speed
     self.Damage = damage
     self.Impacted = false
-	--direction.y = direction.y - 0.1
+	--direction.y = direction.y - 0.001
     self.Direction = direction
 	self.Position = position
 	self.Yaw = 0.0

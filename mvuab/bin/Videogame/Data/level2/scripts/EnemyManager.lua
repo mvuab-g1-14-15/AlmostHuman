@@ -1,5 +1,6 @@
 dofile("./data/level2/scripts/StateMachine.lua")
 dofile("./data/level2/scripts/CoreEnemy.lua")
+dofile("./data/level2/scripts/shoot.lua")
 
 class 'CEnemyManagerLUA'
 
@@ -11,6 +12,7 @@ function CEnemyManagerLUA:__init()
 	self.Routes = {}
 	self.ActualEnemy = nil
 	self.AStar = CAStar()
+	self.Shoots = {}
 	self:Load("Data/enemies/enemies.xml")
 	
 end
@@ -55,10 +57,22 @@ function CEnemyManagerLUA:Update()
 			if AnimatedModel:IsActionAnimationActive( "morir" ) then
 				self.ActualEnemy:Destroy()
 				table.remove(self.Enemy, i)
+				collectgarbage()
 			end
 		end
 	end
 	
+	for k in pairs (self.Shoots) do
+		if self.Shoots[k]:GetImpacted() then
+			self.Shoots[k]:Destroy()
+			table.remove(self.Shoots, k)
+			collectgarbage()
+		end
+	end
+	
+	for k in pairs (self.Shoots) do
+		self.Shoots[k]:Update()
+	end
 end
 
 function CEnemyManagerLUA:AddNewCoreEnemy( Node )
@@ -162,4 +176,8 @@ function CEnemyManagerLUA:GetCloseEnemy(aPos)
 	end
 
 	return lEnemy
+end
+
+function CEnemyManagerLUA:AddShoot(aShoot)
+	table.insert(self.Shoots, aShoot)
 end

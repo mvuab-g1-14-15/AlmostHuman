@@ -82,7 +82,7 @@ end
 function GetPlayerDirection(pos)
 	local l_Player = physic_manager:GetController("Player")
 	local l_Position =  l_Player:GetPosition()
-	
+	l_Position.y = l_Position.y - (l_Player:GetHeight()/2.0)
 	local lDir = l_Position - pos
 	lDir:Normalize()
 	
@@ -101,7 +101,7 @@ function ChangeCameraCloseEnemy()
 		engine:Trace("Changing camera to Player")
 		camera_manager:SetCurrentCamera("TestProcessCam")
 	else
-		engine:Trace("Changing camera to close Enemy")
+		engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end

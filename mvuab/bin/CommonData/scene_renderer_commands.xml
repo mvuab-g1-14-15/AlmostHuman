@@ -136,7 +136,7 @@
 	
 	<render_gui render="true"/>
 	<disable_alpha_blend/>
-	<render_developer_info/>
+	<!--<render_developer_info/>-->
 	
 	<disable_alpha_test/>
 	<disable_alpha_blend/>

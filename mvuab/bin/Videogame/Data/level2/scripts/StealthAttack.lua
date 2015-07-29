@@ -5,14 +5,14 @@ function CStealthAttack:__init()
 	self.Doing = false
 	
 	self.MaxDistance = 3.0
-	self.MaxAngle = 0.507
+	self.MaxAngle = -0.507
 	self.Show = 0
     engine:Trace("StealthAttack initialized")
 end
 
 function CStealthAttack:Update()
 	self:UpdateInput()
-	local enemy = physic_manager:GetClosestEnemy()
+	local enemy = g_EnemyManager:GetCloseEnemy(GetPlayerPosition())
 	if enemy == nil then
 		self.Doing = false
 		return
@@ -28,7 +28,7 @@ function CStealthAttack:Update()
 		if self.Doing then	
 			local angle = GetAngleEnemyPlayer(enemy)
 			engine:Trace("Angulo".. angle)
-			if angle > self.MaxAngle then
+			if angle < self.MaxAngle then
 				engine:Trace("Enemy life before: " .. enemy:GetLife())
 				enemy:AddDamage(enemy:GetLife())
 				engine:Trace("Enemy life after: " .. enemy:GetLife())
