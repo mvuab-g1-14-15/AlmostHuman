@@ -111,10 +111,13 @@ void CShoot::Update()
           ScriptMInstance->RunCode( "g_Player:AddDamage(5.0)" );
         else
         {
-          CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
 
-          if ( lEnemy )
-            lEnemy->AddDamage( mDamage );
+          //CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
+
+          if ( lPUD->GetController() )
+            ScriptMInstance->RunCode( "g_EnemyManager:AddDamage('" + lName + "')" );
+
+          //lEnemy->AddDamage( mDamage );
         }
 
         mImpacted = true;

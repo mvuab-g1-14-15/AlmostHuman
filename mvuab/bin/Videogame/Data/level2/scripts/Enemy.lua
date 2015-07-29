@@ -8,7 +8,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
     self.TimeToShoot = core_enemy:GetTimeToShoot()
     self.ShootAccuracy = core_enemy:GetShootAccuracy()
 	self.CountTimeShoot = 0.0
-	self.Name = "Enemy" .. id_manager:GetId()
+	self.Name = Node:GetAttributeString("name", "no_name")
 	
 	self.Radius = 0.4
 	self.Height = 2.0
@@ -47,6 +47,11 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
+function CEnemyLUA:Destroy()
+	physic_manager:ReleasePhysicController(self.CharacterController)
+	renderable_objects_manager_characters:RemoveResource(self.Name)
+	engine:Trace("He muerto Vida actual: "..self.Life)
+end
 
 function CEnemyLUA:Update()
 	self:SetMeshTransform()
@@ -77,6 +82,11 @@ end
 
 function CEnemyLUA:AddLife(amount)
 	self.Life = self.Life + amount
+end
+
+function CEnemyLUA:AddDamage(amount)
+	self.Life = self.Life - amount
+	engine:Trace("Vida actual: "..self.Life)
 end
 
 function CEnemyLUA:SetYaw(yaw)
@@ -150,6 +160,10 @@ function CEnemyLUA:MakeShoot(aDirection)
 	
 	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
 	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
-	lShoot = CShoot( 5.0, aDirection, lPosition, 5.0 )	
+	lShoot = CShootLUA( 5.0, aDirection, lPosition, 5.0 )	
 	table.insert( self.Shoots, lShoot)
+end
+
+function CEnemyLUA:GetLife()
+	return self.Life
 end

@@ -14,6 +14,9 @@ function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
+function CPatrolEnemyLUA:Destroy()
+	CEnemyLUA.Destroy(self)
+end
 
 function CPatrolEnemyLUA:Update()
 	CEnemyLUA.Update(self)

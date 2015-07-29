@@ -1,6 +1,6 @@
-class 'CShoot'
+class 'CShootLUA'
 
-function CShoot:__init(speed, direction, position, damage)
+function CShootLUA:__init(speed, direction, position, damage)
 	self.Speed = speed
     self.Damage = damage
     self.Impacted = false
@@ -27,7 +27,7 @@ function CShoot:__init(speed, direction, position, damage)
 	light_manager:AddResource(self.Name, self.Light)
 end
 
-function CShoot:Update()
+function CShootLUA:Update()
 	if not self.Impacted then
 		dt = timer:GetElapsedTime()
 		lVelocity 		= self.Direction * self.Speed * dt
@@ -62,11 +62,11 @@ function CShoot:Update()
 	end
 end
 
-function CShoot:GetImpacted()
+function CShootLUA:GetImpacted()
 	return self.Impacted
 end
 
-function CShoot:Destroy()
+function CShootLUA:Destroy()
 	self.Billboard:SetActive( false )
 	light_manager:RemoveResource( self.Name )
 end

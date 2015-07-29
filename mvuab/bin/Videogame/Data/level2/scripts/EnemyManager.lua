@@ -47,7 +47,16 @@ end
 function CEnemyManagerLUA:Update()
 	for i in pairs (self.Enemy) do
 		self.ActualEnemy = self.Enemy[i]
-		self.ActualEnemy:Update()
+		if self.ActualEnemy:GetLife() > 0 then
+			self.ActualEnemy:Update()
+		else
+			AnimatedModel = self.ActualEnemy:GetAnimationModel()
+			AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
+			if AnimatedModel:IsActionAnimationActive( "morir" ) then
+				self.ActualEnemy:Destroy()
+				table.remove(self.Enemy, i)
+			end
+		end
 	end
 	
 end
@@ -114,7 +123,7 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 		lEnemy = CPatrolEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)
 	end
 	name = Node:GetAttributeString("name", "no_name")
-	engine:Trace("Enemigo: "..name)
+	engine:Trace("Enemy: "..name)
 	self.Enemy[name] = lEnemy
 	self.ActualEnemy = lEnemy
 end
@@ -129,4 +138,28 @@ end
 
 function CEnemyManagerLUA:GetResource(name)
 	return self.Enemy[name]
+end
+
+function CEnemyManagerLUA:AddDamage(name)
+	lEnemy = self.Enemy[name]
+	lEnemy:AddDamage(25.0)
+end
+
+function CEnemyManagerLUA:GetCloseEnemy(aPos)
+	lDist = 999999.99
+	lActualDist = 0.0
+	lEnemy = 0
+	lActualEnemy = 0
+
+	for i in pairs (self.Enemy) do
+		lActualEnemy = self.Enemy[i]
+		lActualDist = lActualEnemy:GetPosition():Distance( aPos )
+
+		if ( lActualDist < lDist ) then
+		  lDist = lActualDist
+		  lEnemy = lActualEnemy
+		end
+	end
+
+	return lEnemy
 end

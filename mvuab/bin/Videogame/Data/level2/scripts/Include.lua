@@ -6,7 +6,7 @@ action_manager_lua_wrapper = CActionManagerLuaWrapper()
 camera_manager = GetCameraManager()
 timer = engine:GetTimer()
 physic_manager = GetPhysicsManager()
-enemy_manager = GetEnemyManager()
+--enemy_manager = GetEnemyManager()
 gizmos_manager = GetGizmosManager()
 renderable_objects_layer_manager = GetRenderableObjectsLayersManager()
 renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
@@ -94,7 +94,7 @@ function PlayerVisibility(enemy)
 end
 
 function ChangeCameraCloseEnemy()
-	local lEnemyName = enemy_manager:GetCloseEnemy(GetPlayerPosition()):GetName()
+	local lEnemyName = g_EnemyManager:GetCloseEnemy(GetPlayerPosition()):GetName()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
 	
 	if lActualCameraName == lEnemyName then
