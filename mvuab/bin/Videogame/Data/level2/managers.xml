@@ -27,6 +27,7 @@
 	<!--
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 	-->
+	<cinematic_manager file_config=""/>
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
 </managers>

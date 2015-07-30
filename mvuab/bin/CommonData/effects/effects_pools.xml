@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <renderable_object_techniques>
-
-	<pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
-		<default_technique vertex_type="19"		technique="GenerateGBufferTechnique"/>
-		<default_technique vertex_type="31"		technique="GenerateGBufferNormalTechnique"/>
-		<default_technique vertex_type="51"		technique="GenerateGBufferSelfIllumTechnique"/>
-		<default_technique vertex_type="63"		technique="GenerateGBufferSelfIllumNormalTechnique"/>
-		<default_technique vertex_type="67"		technique="GenerateGBufferDiffuseTechnique"/>
-		<default_technique vertex_type="415" 	technique="GenerateGBufferCal3DTechnique"/>
-	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="shadow_map_pool_renderable_object_technique">
 		<default_technique vertex_type="19"	technique="ShadowMapTechnique"/>
@@ -32,15 +23,15 @@
 	<pool_renderable_object_technique name="render_deferred_technique_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="RenderDeferredTechnique"/>
 	</pool_renderable_object_technique>
-	
-	<pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
-		<default_technique vertex_type="19"		technique="GenerateGBufferTechnique"/>
-		<default_technique vertex_type="31"		technique="GenerateGBufferNormalTechnique"/>
-		<default_technique vertex_type="51"		technique="GenerateGBufferSelfIllumTechnique"/>
-		<default_technique vertex_type="63"		technique="GenerateGBufferSelfIllumNormalTechnique"/>
-		<default_technique vertex_type="67"		technique="GenerateGBufferDiffuseTechnique"/>
-		<default_technique vertex_type="415" 	technique="GenerateGBufferCal3DTechnique"/>
-	</pool_renderable_object_technique>
+
+  <pool_renderable_object_technique name="generate_deferred_shading_pool_renderable_object_technique">
+    <default_technique vertex_type="19"		technique="GenerateGBufferTechnique"/>
+    <default_technique vertex_type="31"		technique="GenerateGBufferNormalTechnique"/>
+    <default_technique vertex_type="51"		technique="GenerateGBufferSelfIllumTechnique"/>
+    <default_technique vertex_type="63"		technique="GenerateGBufferSelfIllumNormalTechnique"/>
+    <default_technique vertex_type="67"		technique="GenerateGBufferDiffuseTechnique"/>
+    <default_technique vertex_type="415" 	technique="GenerateGBufferCal3DTechnique"/>
+  </pool_renderable_object_technique>
 	
 	<pool file="../CommonData/effects/PostProc/effects_pools_postproc.xml"/>
 	
