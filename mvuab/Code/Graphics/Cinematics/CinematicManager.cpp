@@ -62,27 +62,17 @@ void CCinematicManager::Init()
     CommandFactory.Register( "hide", Type2Type<CHideElement>( ) );
 
     // Register all the elements with the object factory class
-    CXMLTreeNode l_File;
+    CXMLTreeNode l_File, TreeNode;
 
-    if ( !l_File.LoadFile( mConfigPath.c_str() ) )
-    {
-        const std::string& lMsgError = "Error reading the file " + mConfigPath;
-        FATAL_ERROR( lMsgError.c_str() );
-    }
-
-    CXMLTreeNode  TreeNode = l_File["cinematics"];
-
-    if ( TreeNode.Exists() )
+    if ( l_File.LoadAndFindNode( mConfigPath.c_str(), "cinematics", TreeNode ) )
     {
         for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
         {
             CXMLTreeNode  SubTreeNode = TreeNode( i );
             const std::string& TagName = SubTreeNode.GetName();
-
-            std::string ResourceFileName = SubTreeNode.GetAttribute<std::string>( "resource_id_file", GetNextName().c_str() );
+            const std::string& ResourceFileName = SubTreeNode.GetAttribute<std::string>( "resource_id_file", GetNextName().c_str() );
 
             CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
-
 
             if ( !CinematicsItems )
             {
