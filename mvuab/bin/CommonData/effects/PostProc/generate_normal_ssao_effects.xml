@@ -11,14 +11,6 @@
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_debug_color="true" use_light_ambient_color="true"/>
 	</technique>
 	
-	<technique name="GenerateNormalTextureSSAONormalTechnique" vertex_type="31">
-		<effect name="GenerateNormalTextureSSAONormal" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
-			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>
-			<define name="USE_NORMAL" description=""/>
-		</effect>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
-	</technique>
-	
 	<technique name="GenerateNormalTextureSSAOSelfIllumTechnique" vertex_type="51">
 		<effect name="GenerateNormalTextureSSAOSelfIllum" file="../CommonData/effects/GenerateNormalTextureSSAO.fx">
 			<define name="TECHNIQUE_NAME" description="GenerateNormalTextureSSAOSelfIllumNormalTechnique"/>

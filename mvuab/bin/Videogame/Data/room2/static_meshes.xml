@@ -160,4 +160,6 @@
   <static_mesh name="estanteria_01_room2" filename="meshes\estanteria_01.mesh" />
   <static_mesh name="estanteria_02_room2" filename="meshes\estanteria_02.mesh" />
   <static_mesh name="oxid_barrel_01_room2" filename="meshes\oxid_barrel_01.mesh" />
+  <static_mesh name="Porta_room2" filename="meshes\Porta.mesh" />
+  <static_mesh name="Lampares_room2" filename="meshes\Lampares.mesh" />
 </static_meshes>
