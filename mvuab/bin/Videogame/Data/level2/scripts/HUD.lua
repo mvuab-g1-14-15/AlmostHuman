@@ -36,7 +36,7 @@ end
 
 function CHUD:UpdateYawEnemy(name)
 	enemy = g_EnemyManager:GetResource(name)
-	self.Map:SetYawEnemy(name, enemy:GetYaw())
+	self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
 end
 
 
@@ -85,4 +85,13 @@ function GetMapItemPosition()
 	--Vect3f 
 	return l_MapPosition+Vect3f(l_Offset.x*l_MapSize.x, l_Offset.y*l_MapSize.y, 0)]]
 	return GetMapPosition(l_ItemPosition, l_MapPosition, l_MapSize, l_UVMapSize, l_MapPosition00, l_MapPosition11)
+end
+
+function CHUD:AddEnemy( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
+	engine:Trace("He llegado antes de petar")
+	self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
+end
+
+function CHUD:NormalizePlayerPos(x, z)
+	return self.Map:NormalizePlayerPos(x, z)
 end

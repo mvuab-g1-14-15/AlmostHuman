@@ -116,22 +116,22 @@ void registerCharacters( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
-struct CEnemy_wrapper : CEnemy, luabind::wrap_base
-{
-  CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine* aStateMachine )
-    : CEnemy( Node, aStateMachine )
-  {}
-
-  virtual void Update()
-  {
-    call<void>( "Update" );
-  }
-
-  static void default_Update( CEnemy* ptr )
-  {
-    return ptr->CEnemy::Update();
-  }
-};
+//struct CEnemy_wrapper : CEnemy, luabind::wrap_base
+//{
+//  CEnemy_wrapper( CXMLTreeNode& Node, CStateMachine* aStateMachine )
+//    : CEnemy( Node, aStateMachine )
+//  {}
+//
+//  virtual void Update()
+//  {
+//    call<void>( "Update" );
+//  }
+//
+//  static void default_Update( CEnemy* ptr )
+//  {
+//    return ptr->CEnemy::Update();
+//  }
+//};
 
 void registerEnemies( lua_State* aLuaState )
 {
@@ -139,7 +139,7 @@ void registerEnemies( lua_State* aLuaState )
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // ENEMY
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
+  /*LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CEnemy, CCharacter )
   LUA_DECLARE_METHOD( CEnemy, ChangeState )
   LUA_DECLARE_METHOD( CEnemy, SetOnExit )
@@ -150,7 +150,7 @@ void registerEnemies( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CEnemy, MakeShoot )
   LUA_DECLARE_METHOD( CEnemy, GetDirectionEnemy )
   LUA_DECLARE_METHOD( CEnemy, MoveAStar )
-  LUA_END_DECLARATION
+  LUA_END_DECLARATION*/
 
   /*
   module(aLuaState)
@@ -161,30 +161,30 @@ void registerEnemies( lua_State* aLuaState )
   ];
   */
 
-  LUA_BEGIN_DECLARATION( aLuaState )
+  /*LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CMapManager<CEnemy> )
-  LUA_END_DECLARATION
+  LUA_END_DECLARATION*/
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // PATROL ENEMY
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
+  /*LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CPatrolEnemy, CEnemy )
   LUA_DECLARE_METHOD( CPatrolEnemy, GetWaypoints )
   LUA_DECLARE_METHOD( CPatrolEnemy, GetCurrentPoint )
   LUA_DECLARE_METHOD( CPatrolEnemy, SetCurrentPoint )
   LUA_DECLARE_METHOD( CPatrolEnemy, GetCount )
-  LUA_END_DECLARATION
+  LUA_END_DECLARATION*/
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // ENEMY MANAGER
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
-  LUA_DECLARE_METHOD( CEnemyManager, GetResource )
-  LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
-  LUA_DECLARE_METHOD( CEnemyManager, GetCloseEnemy )
-  LUA_END_DECLARATION
+  /* LUA_BEGIN_DECLARATION( aLuaState )
+   LUA_DECLARE_DERIVED_CLASS( CEnemyManager, CMapManager<CEnemy> )
+   LUA_DECLARE_METHOD( CEnemyManager, GetResource )
+   LUA_DECLARE_METHOD( CEnemyManager, GetActualEnemy )
+   LUA_DECLARE_METHOD( CEnemyManager, GetCloseEnemy )
+   LUA_END_DECLARATION*/
 }
 
 void registerStar( lua_State* aLuaState )
@@ -215,7 +215,7 @@ void registerAI( lua_State* aLuaState )
   LUA_END_DECLARATION
 
   registerCharacters( aLuaState );
-  registerEnemies( aLuaState );
+  //registerEnemies( aLuaState );
   registerStar( aLuaState );
 
   module( aLuaState )

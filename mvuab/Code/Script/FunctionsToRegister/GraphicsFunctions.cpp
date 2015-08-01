@@ -378,6 +378,18 @@ void registerCinematics( lua_State* aLuaState )
   LUA_END_DECLARATION
 }
 
+void registerTextureManager( lua_State* aLuaState )
+{
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CTexture )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CTextureManager )
+  LUA_DECLARE_METHOD( CTextureManager, GetTexture )
+  LUA_END_DECLARATION
+}
+
 void registerSceneRendererCommand( lua_State* aLuaState )
 {
   LUA_BEGIN_DECLARATION( aLuaState )
@@ -399,4 +411,5 @@ void registerGraphics( lua_State* aLuaState )
   registerSceneRendererCommand( aLuaState );
   registerBillboards( aLuaState );
   registerLights( aLuaState );
+  registerTextureManager( aLuaState );
 }

@@ -16,8 +16,12 @@ end
 function load_gameplay()
     g_Player = CPlayer()
 	g_Player:SetEnergy(0.0)
-	g_HUD = CHUD()
-	g_EnemyManager = CEnemyManagerLUA()
+	if g_HUD == nil then
+		g_HUD = CHUD()
+	end
+	if g_EnemyManager == nil then
+		g_EnemyManager = CEnemyManagerLUA()	
+	end
 	--local pos = Vect3f( 0.0, 0.0, 0.0 )
 	local waypoints = {Vect3f(-2.12, 0.4, 5.19), Vect3f(3.30, 0.4, 2.94)}
 	--g_Enemy = CPatrolEnemyLUA(waypoints)

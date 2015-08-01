@@ -57,10 +57,15 @@ CPhysicsManager* GetPhysicsManager()
   return PhysXMInstance;
 }
 
-CEnemyManager* GetEnemyManager()
+CTextureManager* GetTextureManager()
 {
-  return EnemyMInstance;
+  return TextureMInstance;
 }
+
+//CEnemyManager* GetEnemyManager()
+//{
+//  return EnemyMInstance;
+//}
 
 CRenderableObjectsLayersManager* GetRenderableObjectsLayersManager()
 {
@@ -171,8 +176,12 @@ void registerManagers( lua_State* aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager )
   LUA_END_DECLARATION
 
-  LUA_BEGIN_DECLARATION( aLuaState )
+  /*LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetEnemyManager )
+  LUA_END_DECLARATION*/
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetTextureManager )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

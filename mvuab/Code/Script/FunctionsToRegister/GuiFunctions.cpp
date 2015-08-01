@@ -57,6 +57,8 @@ void registerGUI( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CMap, SetYawPlayer )
   LUA_DECLARE_METHOD( CMap, SetPositionEnemy )
   LUA_DECLARE_METHOD( CMap, SetYawEnemy )
+  LUA_DECLARE_METHOD( CMap, NormalizePlayerPos )
+  LUA_DECLARE_METHOD( CMap, AddEnemyLUA )
   LUA_END_DECLARATION
 
   //CEditableTextBox

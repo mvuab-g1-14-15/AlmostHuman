@@ -181,3 +181,7 @@ end
 function CEnemyManagerLUA:AddShoot(aShoot)
 	table.insert(self.Shoots, aShoot)
 end
+
+function CEnemyManagerLUA:GetEnemys()
+	return self.Enemy
+end

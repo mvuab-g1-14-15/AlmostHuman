@@ -78,7 +78,7 @@
 #define ScriptMInstance         CEngineManagers::GetSingletonPtr()->GetScriptManager()
 #define LightMInstance          CEngineManagers::GetSingletonPtr()->GetLightManager()
 #define PhysXMInstance          CEngineManagers::GetSingletonPtr()->GetPhysicsManager()
-#define EnemyMInstance          CEngineManagers::GetSingletonPtr()->GetEnemyManager()
+//#define EnemyMInstance          CEngineManagers::GetSingletonPtr()->GetEnemyManager()
 #define TriggersMInstance       CEngineManagers::GetSingletonPtr()->GetTriggerManager()
 #define PSMan                   CEngineManagers::GetSingletonPtr()->GetParticleManager()
 #define GizmosMInstance         CEngineManagers::GetSingletonPtr()->GetGizmosManager()

@@ -156,6 +156,32 @@ void registerBase( lua_State* m_LS )
   [
     def( "BitOr", &BitOr )
   ];
+
+  module( m_LS )
+  [
+    class_<Math::Vect2f>( "Vect2f" )
+    .def( constructor<float, float>() )
+    .def( constructor<const Math::Vect2f&>() )
+    .def( constructor<float>() )
+    .def( constructor<>() )
+
+    .def( const_self + const_self )
+    .def( const_self - const_self )
+    .def( const_self * const_self )
+    .def( const_self == const_self )
+    .def( const_self * float() )
+    .def( const_self / float() )
+    .def( float() * const_self )
+    .def( float() / const_self )
+    .def( const_self + float() )
+    .def( const_self - float() )
+    .def( - const_self )
+
+    .def_readwrite( "x", &Math::Vect2f::x )
+    .def_readwrite( "y", &Math::Vect2f::y )
+
+  ];
+
   module( m_LS )
   [
     class_<Math::Vect3f>( "Vect3f" )
@@ -188,7 +214,7 @@ void registerBase( lua_State* m_LS )
     .def( "Length", &Math::Vect3f::Length )
     .def( "DotProduct", &Math::Vect3f::DotProduct )
     .def( "ToString", &Vect3f2String )
-	.def( "Distance", &Math::Vect3f::Distance )
+    .def( "Distance", &Math::Vect3f::Distance )
     .def( "RotateY", &Math::Vect3f::RotateY )
   ];
   module( m_LS )

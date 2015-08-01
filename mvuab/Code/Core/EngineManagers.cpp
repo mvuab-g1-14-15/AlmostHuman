@@ -106,8 +106,8 @@ void CEngineManagers::Init()
                            Type2Type<CSceneRendererCommandManager>( ) );
   ManagerFactory.Register( "physics_manager",
                            Type2Type<CPhysicsManager>( ) );
-  ManagerFactory.Register( "enemy_manager",
-                           Type2Type<CEnemyManager>( ) );
+  //ManagerFactory.Register( "enemy_manager",
+  //                       Type2Type<CEnemyManager>( ) );
   ManagerFactory.Register( "trigger_manager",
                            Type2Type<CTriggerManager>( ) );
   ManagerFactory.Register( "particle_manager",
@@ -171,7 +171,7 @@ void CEngineManagers::Init()
   m_pActionManager    = dynamic_cast<CActionManager*>( GetResource( "action_manager" ) );
   m_pFontManager      = dynamic_cast<CFontManager*>( GetResource( "font_manager" ) );
   m_pLanguageManager  = dynamic_cast<CLanguageManager*>( GetResource( "language_manager" ) );
-  m_pEnemyManager     = dynamic_cast<CEnemyManager*>( GetResource( "enemy_manager" ) );
+  //m_pEnemyManager     = dynamic_cast<CEnemyManager*>( GetResource( "enemy_manager" ) );
   m_pStaticMeshManager = dynamic_cast<CStaticMeshManager*>( GetResource( "static_mesh_manager" ) );
   m_pRenderableObjectsLayersManager = dynamic_cast<CRenderableObjectsLayersManager*>
                                       ( GetResource( "renderable_manager_layer" ) );

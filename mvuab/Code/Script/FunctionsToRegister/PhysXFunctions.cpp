@@ -71,22 +71,22 @@ SCollisionInfo RaycastCollisionGroup( CPhysicsManager* PhysicManager, Math::Vect
 
   if ( !lPUD || lPUD->GetName() != "Player" )
   {
-    if (lPUD)
-	{
-		std::stringstream ss;
-		ss << "Collision name: " << lPUD->GetName();
-		std::string lName = ss.str();
-		EngineInstance->Trace( lName );
-	}
+    if ( lPUD )
+    {
+      std::stringstream ss;
+      ss << "Collision name: " << lPUD->GetName();
+      std::string lName = ss.str();
+      EngineInstance->Trace( lName );
+    }
 
-	hit_info = SCollisionInfo();
+    hit_info = SCollisionInfo();
     return hit_info;
   }
 
-	std::stringstream ss;
-	ss << "Collision name: " << lPUD->GetName();
-	std::string lName = ss.str();
-	EngineInstance->Trace( lName );
+  std::stringstream ss;
+  ss << "Collision name: " << lPUD->GetName();
+  std::string lName = ss.str();
+  EngineInstance->Trace( lName );
 
   return hit_info;
 }
@@ -153,32 +153,32 @@ bool PlayerInSight( CPhysicsManager* PhysicManager, float _Distance, float _Angl
   return false;
 }
 
-CEnemy* GetClosestEnemy( CPhysicsManager* PhysicManager )
-{
-  CPhysicController* l_PlayerController = PhysicManager->CMapManager<CPhysicController>::GetResource( "Player" );
-  Math::Vect3f l_PlayerPos = l_PlayerController->GetPosition();
-  std::map<std::string, CEnemy*>::const_iterator it = EnemyMInstance->GetResourcesMap().begin(),
-                                                 it_end = EnemyMInstance->GetResourcesMap().end();
-
-  float l_ActualDistance = 999999.99f;
-  CEnemy* l_Enemy = 0;
-
-  for ( ; it != it_end; ++it )
-  {
-    CPhysicController* l_EnemyController = PhysicManager->CMapManager<CPhysicController>::GetResource( it->first );
-
-    float l_Dist = ( l_PlayerPos - l_EnemyController->GetPosition() ).Length();
-
-    if ( l_ActualDistance > l_Dist )
-    {
-      l_ActualDistance = l_Dist;
-      l_Enemy = it->second;
-
-    }
-  }
-
-  return l_Enemy;
-}
+//CEnemy* GetClosestEnemy( CPhysicsManager* PhysicManager )
+//{
+//  CPhysicController* l_PlayerController = PhysicManager->CMapManager<CPhysicController>::GetResource( "Player" );
+//  Math::Vect3f l_PlayerPos = l_PlayerController->GetPosition();
+//  std::map<std::string, CEnemy*>::const_iterator it = EnemyMInstance->GetResourcesMap().begin(),
+//                                                 it_end = EnemyMInstance->GetResourcesMap().end();
+//
+//  float l_ActualDistance = 999999.99f;
+//  CEnemy* l_Enemy = 0;
+//
+//  for ( ; it != it_end; ++it )
+//  {
+//    CPhysicController* l_EnemyController = PhysicManager->CMapManager<CPhysicController>::GetResource( it->first );
+//
+//    float l_Dist = ( l_PlayerPos - l_EnemyController->GetPosition() ).Length();
+//
+//    if ( l_ActualDistance > l_Dist )
+//    {
+//      l_ActualDistance = l_Dist;
+//      l_Enemy = it->second;
+//
+//    }
+//  }
+//
+//  return l_Enemy;
+//}
 
 bool AddGrenade( CPhysicsManager* PhysicManager, const std::string& name, const std::string& group,
                  const Math::Vect3f& dimensions,
@@ -241,7 +241,7 @@ void registerPhysX( lua_State* m_LS )
   .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
   .def( "RaycastType", &RaycastType )
   .def( "PlayerInSight", &PlayerInSight )
-  .def( "GetClosestEnemy", &GetClosestEnemy )
+  //  .def( "GetClosestEnemy", &GetClosestEnemy )
   .def( "RaycastCollisionGroup", &RaycastCollisionGroup )
   LUA_END_DECLARATION
 

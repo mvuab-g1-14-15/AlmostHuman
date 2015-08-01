@@ -12,11 +12,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Characters\Character.cpp" />
-    <ClCompile Include="Characters\Enemies\BossEnemy.cpp" />
-    <ClCompile Include="Characters\Enemies\EasyEnemy.cpp" />
-    <ClCompile Include="Characters\Enemies\Enemy.cpp" />
-    <ClCompile Include="Characters\Enemies\EnemyManager.cpp" />
-    <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp" />
+    <ClCompile Include="Characters\Enemies\BossEnemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Characters\Enemies\EasyEnemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Characters\Enemies\Enemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Characters\Enemies\EnemyManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Characters\Enemies\PatrolEnemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Characters\Enemies\Shoot.cpp" />
     <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="MessagePassing\Blackboard.cpp" />
@@ -28,11 +38,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Characters\Character.h" />
-    <ClInclude Include="Characters\Enemies\BossEnemy.h" />
-    <ClInclude Include="Characters\Enemies\EasyEnemy.h" />
-    <ClInclude Include="Characters\Enemies\Enemy.h" />
-    <ClInclude Include="Characters\Enemies\EnemyManager.h" />
-    <ClInclude Include="Characters\Enemies\PatrolEnemy.h" />
+    <ClInclude Include="Characters\Enemies\BossEnemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Characters\Enemies\EasyEnemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Characters\Enemies\Enemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Characters\Enemies\EnemyManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Characters\Enemies\PatrolEnemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Characters\Enemies\Shoot.h" />
     <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="MessagePassing\Blackboard.h" />
