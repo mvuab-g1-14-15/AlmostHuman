@@ -18,6 +18,7 @@
 
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
+    , mCurrentRoom(0)
 {
 
 }
@@ -34,7 +35,12 @@ void CScene::Render()
 
 void CScene::Update()
 {
+    // Update the core room, in order to update all the characters
+    GetResource("core")->GetLayers()->GetResource("characters")->Update();
 
+    // Update the current room
+    if(mCurrentRoom)
+        mCurrentRoom->GetLayers()->Update();
 }
 
 void CScene::Destroy()
@@ -49,37 +55,41 @@ void CScene::Init()
 
 bool CScene::Load( const std::string& l_FilePath )
 {
-    if ( l_FilePath == "" )
-        return false;
-
-    CXMLTreeNode l_Root, l_Node;
-
-    if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "scene", l_Node ) )
-        return false;
-
-    for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+    bool lOk = false;
+    if ( l_FilePath != "" )
     {
-        CXMLTreeNode& l_CurrentNode = l_Node( i );
+        CXMLTreeNode l_Root, l_Node;
 
-        const std::string& l_Path = l_CurrentNode.GetAttribute<std::string>( "path", "no_path" );
-        const std::string& l_ROFile = l_CurrentNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" );
-        const std::string& l_SMFile = l_CurrentNode.GetAttribute<std::string>( "static_meshes_file", "no_file" );
-        const std::string& l_Level = l_CurrentNode.GetAttribute<std::string>( "level", "no_level" );
+        if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "scene", l_Node ) )
+        {
+            for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+            {
+                CXMLTreeNode& l_CurrentNode = l_Node( i );
 
-        CRoom* lRoom = new CRoom();
+                const std::string& l_Path = l_CurrentNode.GetAttribute<std::string>( "path", "no_path" );
+                const std::string& l_ROFile = l_CurrentNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" );
+                const std::string& l_SMFile = l_CurrentNode.GetAttribute<std::string>( "static_meshes_file", "no_file" );
+                const std::string& l_Level = l_CurrentNode.GetAttribute<std::string>( "level", "no_level" );
 
-        lRoom->SetName( l_Level );
-        lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
-        lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
-        lRoom->SetBasePath( l_Path + "/" );
+                CRoom* lRoom = new CRoom();
 
-        if ( !AddResource( l_Level, lRoom ) )
-            CHECKED_DELETE( lRoom );
+                lRoom->SetName( l_Level );
+                lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
+                lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
+                lRoom->SetBasePath( l_Path + "/" );
+
+                if ( !AddResource( l_Level, lRoom ) )
+                    CHECKED_DELETE( lRoom );
+            }
+
+            // This will read the characters, all the characters are inside the core room, it is mandatory
+            ActivateRoom( "core" );
+
+            lOk = true;
+        }
     }
 
-    ActivateRoom( "core" );
-
-    return true;
+    return lOk;
 }
 
 bool CScene::Reload()
@@ -106,7 +116,7 @@ void CScene::LoadRoom( std::string aRoomName )
         if ( lROPath.find( ".xml" ) != std::string::npos )
             lROLM->LoadLayers( lROPath );
 
-       LightMInstance->Load(lRoom->GetBasePath() + "lights.xml");
+        LightMInstance->Load(lRoom->GetBasePath() + "lights.xml");
 
         lRoom->SetLayers( lROLM );
     }
@@ -120,6 +130,7 @@ void CScene::ActivateRoom( std::string aRoomName )
         LoadRoom( aRoomName );
 
     lRoom->SetActive( true );
+    mCurrentRoom = lRoom;
 }
 
 void CScene::UnloadRoom( std::string aRoomName )

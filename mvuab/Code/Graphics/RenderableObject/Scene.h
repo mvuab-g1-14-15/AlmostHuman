@@ -13,6 +13,7 @@ class CRoom;
 class CScene : public CMapManager<CRoom>, public CManager
 {
     public:
+
         CScene   () : CManager() {};
         CScene(const CXMLTreeNode& atts);
         ~CScene  ();
@@ -31,6 +32,12 @@ class CScene : public CMapManager<CRoom>, public CManager
 
         void UnloadRoom( std::string aRoomName );
         void DesactivateRoom( std::string aRoomName );
+
+
+        CRoom* GetCurrentRoom();
+
+    private:
+        CRoom* mCurrentRoom;
 };
 
 #endif
