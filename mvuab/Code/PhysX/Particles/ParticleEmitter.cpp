@@ -48,6 +48,8 @@ CParticleEmitter::~CParticleEmitter()
 {
     CHECKED_DELETE_ARRAY(mParticlesStream);
     CHECKED_DELETE_ARRAY(mParticles);
+
+    CHECKED_DELETE(mShape);
     CHECKED_DELETE(mRV);
 }
 
@@ -96,9 +98,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mAliveParticles.y];
     ZeroMemory(mParticles, mAliveParticles.y * sizeof(TPARTICLE_VERTEX_INSTANCE) );
 
-    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount,
-            lIdxCount, mAliveParticles.y );
-
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mAliveParticles.y );
     mShape = new CBoxShape();
 
     //CParticle* lPar = new CParticle();

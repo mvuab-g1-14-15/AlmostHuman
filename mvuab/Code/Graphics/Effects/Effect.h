@@ -18,7 +18,7 @@ class CEffect: public CName
 {
     public:
         CEffect( const std::string& EffectName );
-        ~CEffect();
+        virtual ~CEffect();
 
         void LinkSemantics();
         bool SetLights( size_t NumOfLights );

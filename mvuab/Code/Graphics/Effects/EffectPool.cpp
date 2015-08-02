@@ -18,6 +18,9 @@ CEffectPool::~CEffectPool(void)
 {
     mD3DXEffectPool = 0;
     //CHECKED_RELEASE( mD3DXEffectPool );
+
+    //TODO (scalar deleting destructor crash)
+    //CHECKED_DELETE(mSharedEffect);
 }
 
 void CEffectPool::Bind()

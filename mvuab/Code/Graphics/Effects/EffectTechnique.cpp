@@ -50,6 +50,7 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
 CEffectTechnique::~CEffectTechnique()
 {
     m_Effect = 0;
+    CHECKED_DELETE(mFlags);
 }
 
 void CEffectTechnique::SetUseTextureSize( bool active )
