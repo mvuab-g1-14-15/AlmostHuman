@@ -2,7 +2,7 @@
 fileIn "XMLStruct.ms"
 filein "Utils.ms"
 
-fn ExportLights filenameXML aLights =
+fn ExportLights filenameXML aLights  =
 (
 	clearListener()
 	

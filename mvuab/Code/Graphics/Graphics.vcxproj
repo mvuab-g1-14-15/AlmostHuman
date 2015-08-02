@@ -37,6 +37,8 @@
     <ClCompile Include="Cinematics\CinematicsElement\SetTransformElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp" />
+    <ClCompile Include="Effects\EffectFlags.cpp" />
+    <ClCompile Include="Effects\SharedEffect.cpp" />
     <ClCompile Include="GraphicsXMLTreeNode.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectManager.cpp" />
@@ -55,12 +57,15 @@
     <ClCompile Include="Lights\ShadowMap.cpp" />
     <ClCompile Include="Lights\SpotLight.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObject\Layer.cpp" />
     <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObject.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsLayersManager.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechnique.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectTechniqueManager.cpp" />
+    <ClCompile Include="RenderableObject\Room.cpp" />
+    <ClCompile Include="RenderableObject\Scene.cpp" />
     <ClCompile Include="RenderableVertex\InstancedVertexTypes.cpp" />
     <ClCompile Include="RenderableVertex\VertexTypes.cpp" />
     <ClCompile Include="SceneRenderComands\BeginRenderSceneRendererCommand.cpp" />
@@ -140,11 +145,14 @@
     <ClInclude Include="Cinematics\CinematicsElement\SetTransformElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\ShowDialogElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\WaitTimeElement.h" />
+    <ClInclude Include="dx9.h" />
     <ClInclude Include="Effects\Effect.h" />
+    <ClInclude Include="Effects\EffectFlags.h" />
     <ClInclude Include="Effects\EffectManager.h" />
     <ClInclude Include="Effects\Defines.h" />
     <ClInclude Include="Effects\EffectPool.h" />
     <ClInclude Include="Effects\EffectTechnique.h" />
+    <ClInclude Include="Effects\SharedEffect.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="Gizmos\Gizmo.h" />
     <ClInclude Include="Gizmos\GizmoElement.h" />
@@ -158,12 +166,15 @@
     <ClInclude Include="Lights\ShadowMap.h" />
     <ClInclude Include="Lights\SpotLight.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="RenderableObject\Layer.h" />
     <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsLayersManager.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechnique.h" />
     <ClInclude Include="RenderableObject\RenderableObjectTechniqueManager.h" />
+    <ClInclude Include="RenderableObject\Room.h" />
+    <ClInclude Include="RenderableObject\Scene.h" />
     <ClInclude Include="RenderableVertex\IndexedVertexs.h" />
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h" />
     <ClInclude Include="RenderableVertex\InstancingVertexs.h" />
@@ -263,8 +274,10 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Editors;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Editors;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;$(SolutionDir)\3rdParty\Lua\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -284,7 +297,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;AK_OPTIMIZED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Code\Script;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Editors;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\Code\Editors;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\Sound;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

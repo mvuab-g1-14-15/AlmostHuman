@@ -21,7 +21,7 @@ class CFontManager;
 class CRenderableObjectTechniqueManager;
 class CStaticMeshManager;
 class CAnimatedModelsManager;
-class CRenderableObjectsLayersManager;
+class CScene;
 class CSceneRendererCommandManager;
 class CCameraManager;
 class CScriptManager;
@@ -55,13 +55,14 @@ public:
   void Reload();
   void Release();
 
+
   CGraphicsManager*                 GetGraphicsManager()      const;
   CEffectManager*                   GetEffectsManager()       const;
   CInputManager*                    GetInputManager() const;
   CActionManager*                   GetActionManager() const;
   CLanguageManager*                 GetLanguageManager() const;
   CFontManager*                     GetFontManager() const;
-  CRenderableObjectsLayersManager*  GetROLManager() const;
+  CScene*               GetSceneManager() const;
   CStaticMeshManager*               GetStaticMeshManager() const;
   CRenderableObjectTechniqueManager* GetROTManager() const;
   CAnimatedModelsManager*           GetAnimatedModelsManager() const;
@@ -87,6 +88,7 @@ public:
 
   GET_SET_REF( std::string, ManagersPath );
 
+
 private:
   CEditorsManager*                         m_pEditorsManager;
   CGraphicsManager*                      m_pGraphicsManager;
@@ -98,7 +100,7 @@ private:
   CRenderableObjectTechniqueManager*     m_pRenderableObjectTechniqueManager;
   CStaticMeshManager*                    m_pStaticMeshManager;
   CAnimatedModelsManager*                m_pAnimatedModelsManager;
-  CRenderableObjectsLayersManager*       m_pRenderableObjectsLayersManager;
+  CScene*                  m_pScene;
   CSceneRendererCommandManager*          m_pSceneRendererCommandManager;
   CCameraManager*                        m_pCameraManager;
   CScriptManager*                        m_pScriptManager;

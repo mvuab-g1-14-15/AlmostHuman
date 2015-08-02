@@ -7,6 +7,8 @@
 #include "RenderableObject\RenderableObject.h"
 #include "RenderableObject\RenderableObjectsManager.h"
 #include "RenderableObject/RenderableObjectsLayersManager.h"
+#include "RenderableObject/Room.h"
+#include "RenderableObject/Scene.h"
 #include "Utils\Name.h"
 #include "Math\Color.h"
 
@@ -50,6 +52,8 @@ extern "C"
 #include "Gizmos/Gizmo.h"
 #include "Gizmos/GizmosManager.h"
 #include "SceneRenderComands/SceneRendererCommandManager.h"
+
+
 
 using namespace luabind;
 
@@ -409,7 +413,28 @@ void registerGraphics( lua_State* aLuaState )
   registerAnimatedModels( aLuaState );
   registerCinematics( aLuaState );
   registerSceneRendererCommand( aLuaState );
+
   registerBillboards( aLuaState );
   registerLights( aLuaState );
   registerTextureManager( aLuaState );
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CRoom )
+  LUA_DECLARE_METHOD( CRoom, GetLayers )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CMapManager<CRoom> )
+  LUA_DECLARE_METHOD( CMapManager<CRoom>, GetResource )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS( CScene, CMapManager<CRoom> )
+  LUA_DECLARE_METHOD( CScene, Load )
+  LUA_DECLARE_METHOD( CScene, Reload )
+  LUA_DECLARE_METHOD( CScene, LoadRoom )
+  LUA_DECLARE_METHOD( CScene, ActivateRoom )
+  LUA_DECLARE_METHOD( CScene, UnloadRoom )
+  LUA_DECLARE_METHOD( CScene, DesactivateRoom )
+  LUA_END_DECLARATION
 }

@@ -1,84 +1,86 @@
 // Disable warning for loss of data
-#pragma warning( disable : 4244 )  
+#pragma warning( disable : 4244 )
 
 //main include files
 #include "Frustum.h"
 
+#include "dx9.h"
 
-void CFrustum::Update(const D3DXMATRIX &clip) 
+
+void CFrustum::Update(const D3DXMATRIX &clip)
 {
-     // Extract the numbers for the RIGHT plane 
+    // Extract the numbers for the RIGHT plane
     m_frustum[0][0] = clip._14 - clip._11;
     m_frustum[0][1] = clip._24 - clip._21;
     m_frustum[0][2] = clip._34 - clip._31;
     m_frustum[0][3] = clip._44 - clip._41;
 
-    // Normalize the result 
+    // Normalize the result
     float32 t = 1.0f / sqrtf( (m_frustum[0][0] * m_frustum[0][0]) + (m_frustum[0][1] * m_frustum[0][1]) + (m_frustum[0][2] * m_frustum[0][2]) );
     m_frustum[0][0] *= t;
     m_frustum[0][1] *= t;
     m_frustum[0][2] *= t;
     m_frustum[0][3] *= t;
 
-    // Extract the numbers for the LEFT plane 
+    // Extract the numbers for the LEFT plane
     m_frustum[1][0] = clip._14 + clip._11;
     m_frustum[1][1] = clip._24 + clip._21;
     m_frustum[1][2] = clip._34 + clip._31;
     m_frustum[1][3] = clip._44 + clip._41;
 
-    // Normalize the result 
+    // Normalize the result
     t = 1.0f / sqrtf( (m_frustum[1][0] * m_frustum[1][0]) + (m_frustum[1][1] * m_frustum[1][1]) + (m_frustum[1][2] * m_frustum[1][2]) );
     m_frustum[1][0] *= t;
     m_frustum[1][1] *= t;
     m_frustum[1][2] *= t;
     m_frustum[1][3] *= t;
 
-    // Extract the BOTTOM plane 
+    // Extract the BOTTOM plane
     m_frustum[2][0] = clip._14 + clip._12;
     m_frustum[2][1] = clip._24 + clip._22;
     m_frustum[2][2] = clip._34 + clip._32;
     m_frustum[2][3] = clip._44 + clip._42;
 
-    // Normalize the result 
+    // Normalize the result
     t = 1.0f / sqrtf( (m_frustum[2][0] * m_frustum[2][0]) + (m_frustum[2][1] * m_frustum[2][1]) + (m_frustum[2][2] * m_frustum[2][2]) );
     m_frustum[2][0] *= t;
     m_frustum[2][1] *= t;
     m_frustum[2][2] *= t;
     m_frustum[2][3] *= t;
 
-    // Extract the TOP plane 
+    // Extract the TOP plane
     m_frustum[3][0] = clip._14 - clip._12;
     m_frustum[3][1] = clip._24 - clip._22;
     m_frustum[3][2] = clip._34 - clip._32;
     m_frustum[3][3] = clip._44 - clip._42;
 
-    // Normalize the result 
+    // Normalize the result
     t = 1.0f / sqrtf( (m_frustum[3][0] * m_frustum[3][0]) + (m_frustum[3][1] * m_frustum[3][1]) + (m_frustum[3][2] * m_frustum[3][2]) );
     m_frustum[3][0] *= t;
     m_frustum[3][1] *= t;
     m_frustum[3][2] *= t;
     m_frustum[3][3] *= t;
 
-    // Extract the FAR plane 
+    // Extract the FAR plane
     m_frustum[4][0] = clip._14 - clip._13;
     m_frustum[4][1] = clip._24 - clip._23;
     m_frustum[4][2] = clip._34 - clip._33;
     m_frustum[4][3] = clip._44 - clip._43;
 
-    // Normalize the result 
+    // Normalize the result
     t = 1.0f / sqrtf( (m_frustum[4][0] * m_frustum[4][0]) + (m_frustum[4][1] * m_frustum[4][1]) + (m_frustum[4][2] * m_frustum[4][2]) );
     m_frustum[4][0] *= t;
     m_frustum[4][1] *= t;
     m_frustum[4][2] *= t;
     m_frustum[4][3] *= t;
 
-    // Extract the NEAR plane 
+    // Extract the NEAR plane
     m_frustum[5][0] = clip._14 + clip._13;
     m_frustum[5][1] = clip._24 + clip._23;
     m_frustum[5][2] = clip._34 + clip._33;
     m_frustum[5][3] = clip._44 + clip._43;
 
-    // Normalize the result 
+    // Normalize the result
     t = 1.0f / sqrtf( (m_frustum[5][0] * m_frustum[5][0]) + (m_frustum[5][1] * m_frustum[5][1]) + (m_frustum[5][2] * m_frustum[5][2]) );
     m_frustum[5][0] *= t;
     m_frustum[5][1] *= t;
@@ -86,23 +88,23 @@ void CFrustum::Update(const D3DXMATRIX &clip)
     m_frustum[5][3] *= t;
 }
 
-bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const 
+bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const
 {
-    for (int i=0; i < 6; ++i)    
+    for (int i=0; i < 6; ++i)
     {
-        if (( (m_frustum[i][0]*center.x) + (m_frustum[i][1]*center.y) + 
-             (m_frustum[i][2]*center.z) + (m_frustum[i][3] )) <= -radius )
+        if (( (m_frustum[i][0]*center.x) + (m_frustum[i][1]*center.y) +
+                (m_frustum[i][2]*center.z) + (m_frustum[i][3] )) <= -radius )
         {
-                return false;
+            return false;
         }
     }
 
     return true;
 }
 
-bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const 
-{  
-  int iInCount;
+bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const
+{
+    int iInCount;
     for(int p=0; p<6; p++)
     {
         iInCount = 8;
@@ -116,13 +118,13 @@ bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const
         if (iInCount == 0)
             return false;
     }
-    
+
     // Si todos los puntos están dentro, entonces la caja
     // está dentro del frustum o parcialmente
     return true;
 }
 
-bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const 
+bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const
 {
     float32 points[24];
 
@@ -175,7 +177,7 @@ bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const
         if (iInCount == 0)
             return false;
     }
-    
+
     // Si todos los puntos están dentro, entonces la caja
     // está dentro del frustum o parcialmente
     return true;

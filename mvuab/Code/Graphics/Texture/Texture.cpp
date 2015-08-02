@@ -33,11 +33,12 @@ CTexture::~CTexture()
 
 bool CTexture::LoadFile()
 {
-    HRESULT l_Res = D3DXCreateTextureFromFile(
-                        GraphicsInstance->GetDevice(),
-                        m_FileName.c_str(), &m_Texture );
-
-    return ( l_Res == S_OK );
+    HR(D3DXCreateTextureFromFile( GraphicsInstance->GetDevice(), m_FileName.c_str(), &m_Texture ));
+    D3DXIMAGE_INFO lTextureInfo;
+    HR( D3DXGetImageInfoFromFile(m_FileName.c_str(),&lTextureInfo) );
+    m_Width = lTextureInfo.Width;
+    m_Height = lTextureInfo.Height;
+    return true;
 }
 
 void CTexture::Unload()

@@ -4,10 +4,13 @@
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
 #include "EngineConfig.h"
+#include "SharedEffect.h"
+
+static bool sSharedEffectInited = false;
 
 CEffectManager::CEffectManager()
     : CManager()
-    , mEffectPool(0)
+
     , m_WorldMatrix( Math::m44fIDENTITY )
     , m_ProjectionMatrix( Math::m44fIDENTITY )
     , m_ViewMatrix( Math::m44fIDENTITY )
@@ -20,12 +23,14 @@ CEffectManager::CEffectManager()
 
 CEffectManager::CEffectManager( CXMLTreeNode &atts)
     : CManager(atts)
+    , mEffectPool( new CEffectPool() )
 {
 }
 CEffectManager::~CEffectManager()
 {
     CleanUp();
     Destroy();
+    CHECKED_DELETE( mEffectPool );
 }
 
 const Math::Mat44f& CEffectManager::GetWorldMatrix() const
@@ -127,8 +132,8 @@ void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
 
 void CEffectManager::Init()
 {
-    // Parse the file and search for the key's
-    Load(mConfigPath);
+    if( mEffectPool->Init() )
+        Load(mConfigPath);
 }
 
 void CEffectManager::Load( const std::string& lFile )
@@ -162,7 +167,7 @@ void CEffectManager::Load( const std::string& lFile )
                     CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
                     l_pEffect = new CEffect( l_EffectName );
 
-                    if ( !l_pEffect->Load( l_CurrentSubNode ) )
+                    if ( !l_pEffect->Load( l_CurrentSubNode, mEffectPool ) )
                     {
                         std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
                         LOG_ERROR_APPLICATION( msg_error.c_str() );
@@ -171,6 +176,17 @@ void CEffectManager::Load( const std::string& lFile )
                     else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
                     {
                         CHECKED_DELETE( l_pEffect );
+                    }
+
+                    if( l_pEffect && !sSharedEffectInited )
+                    {
+                        CSharedEffect* lSharedEffect = mEffectPool->GetSharedEffect();
+                        ASSERT( lSharedEffect, "Null shared effect" );
+
+                        lSharedEffect->SetEffect( l_pEffect->GetEffect() );
+                        lSharedEffect->LinkSemantics();
+
+                        sSharedEffectInited = true;
                     }
                 }
                 else if ( l_TagName == "handles" )
@@ -206,7 +222,7 @@ void CEffectManager::ReloadEffects()
     std::map<std::string, CEffect*>::iterator lItb = lEffectsVector.begin(), lIte = lEffectsVector.end();
     for( ; lItb != lIte; ++lItb )
     {
-        lItb->second->Reload();
+        lItb->second->Reload(mEffectPool);
     }
 }
 
@@ -222,4 +238,9 @@ CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName 
     return lTech;
 }
 
+
+void CEffectManager::BeginRender()
+{
+    mEffectPool->Bind();
+}
 

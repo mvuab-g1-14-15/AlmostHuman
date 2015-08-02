@@ -6,6 +6,9 @@
 #include "EngineManagers.h"
 #include "Utils/Defines.h"
 
+#include "RenderableObject\Scene.h"
+#include "RenderableObject\Room.h"
+
 //<shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024"/>
 CShadowMap::CShadowMap( const CXMLTreeNode& node )
     : mColor( Math::CColor(1.0f, 1.0f, 1.0f, 1.0f ) )
@@ -24,13 +27,26 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node )
                           CTexture::eDefaultPool, mFormatType );
     }
 
-    CRenderableObjectsManager* lROM = ROLMInstance->GetResource(
-                                          node.GetAttribute<std::string>( "renderable_objects_manager", "" ) );
+	const std::string &l_LayerName = node.GetAttribute<std::string>("renderable_objects_manager", "");
+    
+	CScene* l_Scene = SceneInstance;
 
-    if ( lROM )
-    {
-        mROMs.push_back(lROM);
-    }
+	std::map<std::string, CRoom*> l_SceneMap = l_Scene->GetResourcesMap();
+	std::map<std::string, CRoom*>::iterator it = l_SceneMap.begin(), it_end = l_SceneMap.end();
+
+	for (;it!=it_end; ++it)
+	{
+		CRoom* lRoom = it->second;
+		
+		if (lRoom->GetActive())
+		{
+			CRenderableObjectsManager* lROM = lRoom->GetLayers()->GetResource(l_LayerName);
+			if (lROM )
+				mROMs.push_back(lROM);
+		}
+		
+	
+	}
 
     mClearMask = ( mLayer == "static" ) ? 0x000000ff : 0xffffffff;
 }

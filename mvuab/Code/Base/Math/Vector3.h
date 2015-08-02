@@ -38,7 +38,16 @@ public:
   //-----------------
   // DATOS PUBLICOS
   //-----------------
-  T x, y, z;
+
+    union
+    {
+        struct
+        {
+            T x, y, z;
+        };
+
+        T u[3];
+    };
 
 public:
   //-------------------

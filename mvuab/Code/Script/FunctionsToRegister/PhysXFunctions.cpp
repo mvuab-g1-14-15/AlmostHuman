@@ -135,22 +135,36 @@ template<class T> T vector_get( std::vector<T>& vec, size_t i )
 bool PlayerInSight( CPhysicsManager* PhysicManager, float _Distance, float _Angle, const Math::Vect3f& _Position,
                     const Math::Vect3f& _Direction )
 {
-  const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapConeActor( _Distance, _Angle, _Position,
-      _Direction, 0xffffffff );
-  std::vector<CPhysicUserData*>::const_iterator it = l_UserDatas.begin(),
-                                                it_end = l_UserDatas.end();
+    const std::vector<CPhysicUserData*>& l_UserDatas = PhysicManager->OverlapConeActor( _Distance, _Angle, _Position,
+            _Direction, 0xffffffff );
+    std::vector<CPhysicUserData*>::const_iterator it = l_UserDatas.begin(),
+                                                  it_end = l_UserDatas.end();
 
-  for ( ; it != it_end; ++it )
-  {
-    CPhysicUserData* l_UserData = *it;
-    CPhysicController* l_Controller = l_UserData->GetController();
-    std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
+    for ( ; it != it_end; ++it )
+    {
+        CPhysicUserData* l_UserData = *it;
+        CPhysicController* l_Controller = l_UserData->GetController();
+        std::string name = l_Controller ? l_Controller->GetUserData()->GetName() : l_UserData->GetName();
 
-    if ( name == "Player" )
-      return true;
-  }
+        if ( name == "Player" )
+        {
+          SCollisionInfo hit;
+          CPhysicUserData* lRayCollision = PhysicManager->RaycastClosestActor(_Position, _Direction, 0xffffff, hit, _Distance);
+          CPhysicController* lRayController = lRayCollision->GetController();
+          if (lRayController)
+          {
+            std::string lName( lRayController->GetUserData()->GetName());
+            if ( name == "Player" )
+              return true;
+            else
+              return false;
+          }
+          else
+            return false;
+        }
+    }
 
-  return false;
+    return false;
 }
 
 //CEnemy* GetClosestEnemy( CPhysicsManager* PhysicManager )

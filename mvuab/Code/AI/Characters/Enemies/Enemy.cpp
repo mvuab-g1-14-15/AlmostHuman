@@ -29,6 +29,9 @@
 #include "Cameras/Camera.h"
 #include "Cameras/CameraManager.h"
 
+#include "RenderableObject\Scene.h"
+#include "RenderableObject\Room.h"
+
 CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   : CCharacter( Node.GetAttribute<std::string>( "name", "no_name" ) )
   , m_CurrentState( "inicial" )
@@ -56,7 +59,7 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
 
 CEnemy::~CEnemy()
 {
-  CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
+	CRenderableObjectsManager* l_ROM = SceneInstance->GetResource("core")->GetLayers()->GetResource( "characters" );
   PhysXMInstance->ReleasePhysicController( m_Controller );
   l_ROM->RemoveResource( m_Name );
 
@@ -70,7 +73,8 @@ void CEnemy::Update()
 {
   m_Position = m_Controller->GetPosition();
   m_Position.y -=  m_Controller->GetHeight() / 2.0f;
-  //SetYaw( m_Controller->GetYaw() );
+
+  SetYaw( m_Controller->GetYaw() );
   SetPitch( m_Controller->GetPitch() );
   SetRoll( m_Controller->GetRoll() );
 
@@ -216,7 +220,8 @@ void CEnemy::Render()
 
 void CEnemy::AddMesh( std::string MeshName )
 {
-  CRenderableObjectsManager* l_ROM = ROLMInstance->GetResource( "characters" );
+
+    CRenderableObjectsManager* l_ROM = SceneInstance->GetResource("core")->GetLayers()->GetResource( "characters" );
 
   //m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );
   m_pRenderableObject = new CAnimatedInstanceModel( m_Name, MeshName );

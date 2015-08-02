@@ -6,8 +6,6 @@
 	
 	<begin_scene/>
 	
-	
-
 	<!--generate the deferred textures-->
 	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
     <set_render_target name="deferred_multiple_render_target">
@@ -26,12 +24,10 @@
 	
     <set_matrices/>
 	
-	
     <render_scene layer="solid" active="true"/>
 	<render_scene layer="characters" active="true"/>
-	<render_debug render_lights="false" render_physics="false" render_cameras="false" render_graph="true" render_triggers="false"/>
+	<render_debug render_lights="false" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
-
 
 	<!--end pre_render-->
 
@@ -66,10 +62,13 @@
 	
 	<disable_z_test/>
 	
+	<!--
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
  	<render_weapon_target size="20">
  		<texture stage_id="0" name="./Data/textures/mirilla.png"/>
  	</render_weapon_target>
+	
+	-->
 	
 	<render_gui render="true"/>
 	

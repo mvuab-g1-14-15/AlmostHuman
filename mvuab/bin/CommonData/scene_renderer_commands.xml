@@ -25,16 +25,14 @@
     <set_matrices/>
 	
 	
-    <render_scene layer="solid" active="true"/>
-	<render_scene layer="characters" active="true"/>
+    <render_scene name="render_solid" layer="solid" active="true"/>
+	<render_scene name="render_characters" layer="characters" active="true"/>
 	<render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/>
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
    
 	<!--render_scene layer="glow" active="true"/>
 	<render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
 	<render_gizmos render="true"/-->
-	
-	
 	
 	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Glow.xml"/-->
 	
@@ -104,6 +102,7 @@
 	</render_draw_quad>
 	
 	-->
+
 	<!--<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="RevSubtract"/>
 	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
@@ -136,7 +135,7 @@
 	
 	<render_gui render="true"/>
 	<disable_alpha_blend/>
-	<!--<render_developer_info/>-->
+	<render_developer_info/>
 	
 	<disable_alpha_test/>
 	<disable_alpha_blend/>

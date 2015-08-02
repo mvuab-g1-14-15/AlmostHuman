@@ -1,3 +1,5 @@
+dofile("./data/scripts/IdManager.lua")
+
 engine = CEngine.GetSingletonPtr()
 action_manager = GetActionManager()
 action_manager_lua_wrapper = CActionManagerLuaWrapper()
@@ -6,11 +8,15 @@ timer = engine:GetTimer()
 physic_manager = GetPhysicsManager()
 enemy_manager = GetEnemyManager()
 gizmos_manager = GetGizmosManager()
-renderable_objects_layer_manager = GetRenderableObjectsLayersManager()
-renderable_objects_manager_characters = renderable_objects_layer_manager:GetResource("characters")
+scene = GetScene()
+renderable_objects_manager_characters = scene:GetResource("core"):GetLayers():GetResource("characters")
 sound_manager = GetSoundManager()
-process = CEngine.GetSingletonPtr():GetProcess()
 gui_manager = GetGUIManager()
+id_manager = CIdManager()
+countdowntimer_manager = GetCountDownTimerManager()
+script_manager = GetScriptManager()
+cinematic_manager = GetCinematicManager()
+scene_renderer_commands_manager = GetSceneRendererCommandsManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0

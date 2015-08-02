@@ -868,6 +868,7 @@ CMap* CWindows::LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResol
     {
       Math::Vect3f pos = pSubNewNode.GetAttribute<Math::Vect3f>( "pos_in_map", Math::Vect3f( 0.f, 0.0f, 0.f ) );
       l_Map->AddPlayer( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
+
     }
 
   }

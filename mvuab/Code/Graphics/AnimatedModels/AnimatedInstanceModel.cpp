@@ -253,6 +253,7 @@ void CAnimatedInstanceModel::Initialize()
     BlendCycle( 0, 1.0f, 0.0f );
     m_CalModel->update( 0.0f );
 
+    /*
     // Load Vertex and Index buffers
     CGraphicsManager* GM = GraphicsInstance;
     LPDIRECT3DDEVICE9 l_pD3DDevice = GM->GetDevice();
@@ -282,9 +283,7 @@ void CAnimatedInstanceModel::Initialize()
             return;
         }
     }
-
-    LoadTextures();
-    m_AnimatedCoreModel->LoadVertexBuffer( GM );
+    */
 }
 
 void CAnimatedInstanceModel::Destroy()
@@ -314,7 +313,7 @@ void CAnimatedInstanceModel::ChangeAnimation(const std::string &AnimationName, f
 void CAnimatedInstanceModel::ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut)
 {
     uint32 l_Id = m_AnimatedCoreModel->GetAnimationId(AnimationName);
-    if (l_Id != m_CurrentAnimationId)
+    if (l_Id != m_CurrentAnimationId && l_Id != INT_MAX)
     {
         ClearCycle(m_CurrentAnimationId, DelayOut);
         ExecuteAction(l_Id, 1.0f, DelayIn);

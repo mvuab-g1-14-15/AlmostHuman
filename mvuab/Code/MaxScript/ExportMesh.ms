@@ -320,7 +320,13 @@ struct SMesh
 	m_SubMeshes = #(),
 	m_AABB = SAABB(),
 	m_BS = SBndSphere(),
+	m_ObjName = "",
     m_MaterialsHashTable = dotnetobject "System.Collections.Generic.Dictionary`2[System.Int16,System.String]",
+	
+	fn SetObjName Obj =
+	(
+		m_ObjName = Obj.name
+	),
 	
 	fn CreateSubMeshes Obj =
 	(
@@ -534,29 +540,27 @@ struct SMesh
 	
 	fn InitFromMaxObject Obj =
 	(
-		--format "Mesh: % \n" Obj.name
-		/*actualObj = copy Obj
-		convertToMesh actualObj */
-		
-		if  classof Obj == SplineShape then
-		(
-			throw "SplineShape =>" Obj.name
-		)
-		
-		format "Object name: %\n" Obj.name
-		
-		maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
-		actualObj = newObj[1]
-		convertToMesh actualObj
+			if  classof Obj == SplineShape then
+			(
+				throw "SplineShape =>" Obj.name
+			)
+			
+			format "Object name: %\n" Obj.name
+			
+			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
+			actualObj = newObj[1]
+			convertToMesh actualObj
+			
+			SetObjName Obj
+			CreateSubMeshes actualObj
+			CreateBuffers actualObj
+			m_AABB.CalculateFromObject actualObj
+			
+			if delete actualObj != 1 then
+			(
+				format "% not deleted, please delete the object manually\n" actualObj
+			)
 
-		CreateSubMeshes actualObj
-		CreateBuffers actualObj
-		m_AABB.CalculateFromObject actualObj
-		
-		if delete actualObj != 1 then
-		(
-			format "% not deleted, please delete the object manually\n" actualObj
-		)
 	),
 	
 
@@ -574,6 +578,19 @@ struct SMesh
 				counter = counter + 1
 			)
 		)
+		
+		if m_SubMeshes == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 submeshes.")
+			exit
+		)
+		
+		if counter == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 vertex and index.")
+			exit
+		)
+		
 		WriteShort file counter #unsigned--Write number of materials
 		format "Submeshes: %\n" counter
 		

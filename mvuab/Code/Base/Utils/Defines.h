@@ -72,7 +72,7 @@
 #define ROTMInstance            CEngineManagers::GetSingletonPtr()->GetROTManager()
 #define SMeshMInstance          CEngineManagers::GetSingletonPtr()->GetStaticMeshManager()
 #define AnimatedMInstance       CEngineManagers::GetSingletonPtr()->GetAnimatedModelsManager()
-#define ROLMInstance            CEngineManagers::GetSingletonPtr()->GetROLManager()
+#define SceneInstance           CEngineManagers::GetSingletonPtr()->GetSceneManager()
 #define SRCMInstance            CEngineManagers::GetSingletonPtr()->GetSceneRendererCmdManager()
 #define CameraMInstance         CEngineManagers::GetSingletonPtr()->GetCameraManager()
 #define ScriptMInstance         CEngineManagers::GetSingletonPtr()->GetScriptManager()

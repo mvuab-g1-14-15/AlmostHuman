@@ -48,9 +48,9 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 	on UABUtility open do
 	(
-		local levels=#("level2","level1","")
+		local levels=#("level2","room1","room2","room3","room4")
 		LevelList.items=levels
-		PathLabel.text = "E:\Master"
+		PathLabel.text = "C:\Users\Galix\Desktop"
 	)
 	on SetPathButton pressed do
 	(
@@ -61,15 +61,16 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on LightsButton pressed do
 	(
 		--export lights
-		local LightDir = PathLabel.text + "\\lights.xml"
+		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\lights.xml"
 		ExportLights LightDir selection
 	)
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
-		
+
+		local l_DirToXML = PathLabel.text + "\\" +LevelList.selected
 		--export Mesh
-		local MeshDir = PathLabel.text + "\\meshes"
+		local MeshDir = l_DirToXML + "\\meshes"
 		local TexturesDir = PathLabel.text + "\\textures"		
 	
 		DoesFolderExist MeshDir
@@ -174,7 +175,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		DoesFolderExist l_DirToXML
 		
 		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
-		local MeshDir = PathLabel.text + "\\meshes\\"
+		local MeshDir = l_DirToXML + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		local l_ExportableObjects = GetAllExportableObjects()
 		
@@ -183,7 +184,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		if fileSrcMeshXML != undefined then
 		(
 			DoesFolderExist MeshDir
-			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir LevelList.selected
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
 		)
 	
@@ -211,27 +212,24 @@ utility UABUtility "UAB Utility" width:170 height:761
 		
 		DoesFolderExist l_DirToXML
 		
-		local fileSrcRenderableXML = l_DirToXML + "\\renderable_objects.xml"
 		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
-		local MeshDir = PathLabel.text + "\\meshes\\"
+		local MeshDir = l_DirToXML + "\\meshes\\"
 		local TexturesDir = PathLabel.text + "\\textures\\"
 		
 		local l_ExportableObjects = GetAllExportableObjects()
 	
 		select $*
 	
-		if fileSrcMeshXML != undefined then
-		(
+		--Export Static Meshes
 			DoesFolderExist MeshDir
-			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir
+			ExportStaticMeshXMLFile fileSrcMeshXML MeshDir LevelList.selected
 			format "StaticMeshXML created on: % \n" fileSrcMeshXML
-		)
+		-- End Export Static Meshes
 		
-		if fileSrcRenderableXML != undefined then
-		(
-			ExportRenderableObjectXMLFile l_ExportableObjects fileSrcRenderableXML
-			format "RenderableObjectXML created on: % \n" fileSrcRenderableXML
-		)
+		--Export Renderable Objects
+			local l_Layers = ExportLayerFile l_ExportableObjects l_DirToXML LevelList.selected
+			ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers LevelList.selected
+		-- End Export Renderable Objects
 		
 		if CopyTexturesCheckBox.checked then
 		(

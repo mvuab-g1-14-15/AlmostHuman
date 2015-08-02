@@ -26,14 +26,14 @@ CLightManager::~CLightManager()
 
 void CLightManager::Init()
 {
-    Load( mConfigPath );
+    //Load( mConfigPath );
 }
 
 bool CLightManager::Load( const std::string& FileName )
 {
     CXMLTreeNode lXmlFile, lLightsNode;
 
-    if ( !lXmlFile.LoadAndFindNode( mConfigPath.c_str(), "lights", lLightsNode ) )
+    if ( !lXmlFile.LoadAndFindNode( FileName.c_str(), "lights", lLightsNode ) )
     {
         LOG_ERROR_APPLICATION( "Error loading Lights %s.", FileName.c_str() );
         return false;

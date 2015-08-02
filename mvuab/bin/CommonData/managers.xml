@@ -26,4 +26,5 @@
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<gui_manager file_config="Data/gui.xml"/>
 	<editors_manager file_config=""/>
+	<cinematic_manager file_config=""/>
 </managers>

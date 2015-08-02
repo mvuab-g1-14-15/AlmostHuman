@@ -1,0 +1,28 @@
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+	<ProgressBar name="Life" posx="2" posy="5" height="4" width="30" visible="true" active="true"
+	texture_back="Data/textures/GUI/Textures_Test/marco2.png" texture_bar="Data/textures/barLife.png"  id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	<ProgressBar name="Energy" posx="2" posy="10" height="4" width="30" visible="true" active="true"
+	texture_back="Data/textures/GUI/Textures_Test/marco2.png" texture_bar="Data/textures/barEnergy.png"  id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	
+	<Map name="Radar" pos_in_screen="0 59" width="20" height="36" texture_marco="Data/textures/GUI/Textures_Test/marco2.png" texture_map="Data/textures/GUI/Textures_Test/mapa.jpg"
+	 width_map="0.08" height_map="0.045" pos_0_0_3d_map="-2.956 533.182" pos_1_1_3d_map="359.366 -111.979" visible="true" active="true" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width_enemy="25" height_enemy="25" texture_enemy="Data/textures/GUI/Textures_Test/conotrans3.png">
+		<mark_player name="player" texture="Data/textures/GUI/Textures_Test/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+		<enemy name="Enemy1" texture="Data/textures/GUI/Textures_Test/enemy.png" width="20" height="20" get_position_script="get_enemy_position('Enemy1')" orientation="get_enemy_orientation('Enemy1')"/>
+		<item name="door1" texture="Data/textures/GUI/Textures_Test/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+	</Map>
+	
+	<StaticText name="ButtonEnergy" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="ButtonEnergy" />
+	<StaticText name="StealthAttack" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="StealthAttack" />
+	<StaticText name="OpenDoor" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="OpenDoor" />
+	<StaticText name="Block" posx="50" posy="60" height="30" width="12" visible="false" active="false" literal="Block" />
+	<StaticText name="CambiarSala" posx="40" posy="80" height="30" width="12" visible="false" active="false" literal="CambiarSala" />
+	
+</Windows>

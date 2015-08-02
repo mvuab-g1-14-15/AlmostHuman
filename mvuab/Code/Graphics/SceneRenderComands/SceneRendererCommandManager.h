@@ -28,6 +28,11 @@ public:
     bool GetVisibleCommand( std::string );
     void SetVisibleCommand( std::string, bool );
 
+	CSceneRendererCommand* GetCommand( std::string aName )
+	{
+		return m_SceneRendererCommands.GetResource( aName );
+	}
+
 private:
     CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
 

@@ -8,17 +8,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 CXMLTreeNode::CXMLTreeNode()
-  : m_bIsOk( false )
-  , m_pDoc( NULL )
-  , m_pNode( NULL )
-  , m_pWriter( NULL )
-  , m_pszFileName( NULL )
+    : m_bIsOk( false )
+    , m_pDoc( NULL )
+    , m_pNode( NULL )
+    , m_pWriter( NULL )
+    , m_pszFileName( NULL )
 {}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 CXMLTreeNode::~CXMLTreeNode()
 {
-  Done();
+    Done();
 }
 
 //----------------------------------------------------------------------------
@@ -26,11 +26,11 @@ CXMLTreeNode::~CXMLTreeNode()
 //----------------------------------------------------------------------------
 void CXMLTreeNode::Done()
 {
-  if ( IsOk() )
-  {
-    Release();
-    m_bIsOk = false;
-  }
+    if ( IsOk() )
+    {
+        Release();
+        m_bIsOk = false;
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -38,44 +38,44 @@ void CXMLTreeNode::Done()
 //----------------------------------------------------------------------------
 void CXMLTreeNode::Release()
 {
-  if ( m_pDoc )
-  {
-    xmlFreeDoc( m_pDoc );
-    m_pDoc = NULL;
-  }
+    if ( m_pDoc )
+    {
+        xmlFreeDoc( m_pDoc );
+        m_pDoc = NULL;
+    }
 
-  m_pNode = NULL;
+    m_pNode = NULL;
 
-  if ( m_pWriter )
-  {
-    xmlFreeTextWriter( m_pWriter );
-    m_pWriter = NULL;
-  }
+    if ( m_pWriter )
+    {
+        xmlFreeTextWriter( m_pWriter );
+        m_pWriter = NULL;
+    }
 
-  xmlCleanupParser();
+    xmlCleanupParser();
 }
 
 bool CXMLTreeNode::LoadAndFindNode( const char* aFilename, const char* aNodeTag, CXMLTreeNode& aNode )
 {
-  ASSERT( aFilename && aNodeTag, "Invalid filename or node tag" );
-  CXMLTreeNode newFile;
+    ASSERT( aFilename && aNodeTag, "Invalid filename or node tag" );
+    CXMLTreeNode newFile;
 
-  if ( !LoadFile( aFilename ) )
-  {
-    LOG_ERROR_APPLICATION( "Unable to open %s",  aFilename );
-    return false;
-  }
+    if ( !LoadFile( aFilename ) )
+    {
+        LOG_ERROR_APPLICATION( "Unable to open %s",  aFilename );
+        return false;
+    }
 
-  // Parse the file and search for the key's
-  aNode = GetNode( aNodeTag );
+    // Parse the file and search for the key's
+    aNode = GetNode( aNodeTag );
 
-  if ( !aNode.Exists() )
-  {
-    LOG_ERROR_APPLICATION( "Unable to find %s",  aNodeTag );
-    return false;
-  }
+    if ( !aNode.Exists() )
+    {
+        LOG_ERROR_APPLICATION( "Unable to find %s",  aNodeTag );
+        return false;
+    }
 
-  return true;
+    return true;
 }
 
 //----------------------------------------------------------------------------
@@ -83,30 +83,30 @@ bool CXMLTreeNode::LoadAndFindNode( const char* aFilename, const char* aNodeTag,
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::LoadFile( const char* _pszFileName )
 {
-  m_bIsOk = false;
-  ASSERT( _pszFileName, "Null filename" );
+    m_bIsOk = false;
+    ASSERT( _pszFileName, "Null filename" );
 
-  if ( _pszFileName )
-  {
-    m_pDoc = xmlParseFile( _pszFileName );
-
-    xmlErrorPtr lError = xmlGetLastError();
-    ASSERT( !lError, "%s in file %s", ( const char* ) lError->message, _pszFileName );
-
-    if ( m_pDoc )
+    if ( _pszFileName && (_pszFileName[0] != '\0'))
     {
-      m_pNode = xmlDocGetRootElement( m_pDoc );
+        m_pDoc = xmlParseFile( _pszFileName );
 
-      if ( m_pNode )
-      {
-        m_bIsOk = true;
-        return true;
-      }
+        xmlErrorPtr lError = xmlGetLastError();
+        ASSERT( !lError, "%s in file %s", ( const char* ) lError->message, _pszFileName );
+
+        if ( m_pDoc )
+        {
+            m_pNode = xmlDocGetRootElement( m_pDoc );
+
+            if ( m_pNode )
+            {
+                m_bIsOk = true;
+                return true;
+            }
+        }
     }
-  }
 
-  Release();
-  return false;
+    Release();
+    return false;
 }
 
 //----------------------------------------------------------------------------
@@ -114,13 +114,13 @@ bool CXMLTreeNode::LoadFile( const char* _pszFileName )
 //----------------------------------------------------------------------------
 CXMLTreeNode CXMLTreeNode::GetSubTree( const char* _pszKey ) const
 {
-  assert( m_pNode && _pszKey );
-  CXMLTreeNode NewTree;
+    assert( m_pNode && _pszKey );
+    CXMLTreeNode NewTree;
 
-  if ( _pszKey && m_pNode )
-    _FindSubTree( m_pNode, _pszKey, NewTree );
+    if ( _pszKey && m_pNode )
+        _FindSubTree( m_pNode, _pszKey, NewTree );
 
-  return NewTree;
+    return NewTree;
 }
 
 //----------------------------------------------------------------------------
@@ -129,24 +129,24 @@ CXMLTreeNode CXMLTreeNode::GetSubTree( const char* _pszKey ) const
 bool CXMLTreeNode::_FindSubTree( xmlNodePtr _pNode, const char* _pszKey,
                                  CXMLTreeNode& _TreeFound ) const
 {
-  while ( _pNode != NULL )
-  {
-    if ( xmlStrcmp( _pNode->name, ( const xmlChar* )_pszKey ) )
+    while ( _pNode != NULL )
     {
-      if ( _FindSubTree( _pNode->xmlChildrenNode, _pszKey, _TreeFound ) )
-        return true;
-    }
-    else
-    {
-      _TreeFound.m_pNode = _pNode;
-      _TreeFound.m_pDoc = m_pDoc;
-      return true;
+        if ( xmlStrcmp( _pNode->name, ( const xmlChar* )_pszKey ) )
+        {
+            if ( _FindSubTree( _pNode->xmlChildrenNode, _pszKey, _TreeFound ) )
+                return true;
+        }
+        else
+        {
+            _TreeFound.m_pNode = _pNode;
+            _TreeFound.m_pDoc = m_pDoc;
+            return true;
+        }
+
+        _pNode = _pNode->next;
     }
 
-    _pNode = _pNode->next;
-  }
-
-  return false;
+    return false;
 }
 
 //----------------------------------------------------------------------------
@@ -154,10 +154,10 @@ bool CXMLTreeNode::_FindSubTree( xmlNodePtr _pNode, const char* _pszKey,
 //----------------------------------------------------------------------------
 const char* CXMLTreeNode::GetName() const
 {
-  if ( m_pNode )
-    return ( char* )m_pNode->name;
+    if ( m_pNode )
+        return ( char* )m_pNode->name;
 
-  return NULL;
+    return NULL;
 }
 
 //----------------------------------------------------------------------------
@@ -165,24 +165,24 @@ const char* CXMLTreeNode::GetName() const
 //----------------------------------------------------------------------------
 CXMLTreeNode CXMLTreeNode::operator[]( const char* _pszKey ) const
 {
-  assert( _pszKey && m_pNode );
-  CXMLTreeNode TreeFound;
+    assert( _pszKey && m_pNode );
+    CXMLTreeNode TreeFound;
 
-  if ( _pszKey && m_pNode )
-    TreeFound = GetSubTree( _pszKey );
+    if ( _pszKey && m_pNode )
+        TreeFound = GetSubTree( _pszKey );
 
-  return TreeFound;
+    return TreeFound;
 }
 
 CXMLTreeNode CXMLTreeNode::GetNode( const char* _pszKey ) const
 {
-  assert( _pszKey && m_pNode );
-  CXMLTreeNode TreeFound;
+    assert( _pszKey && m_pNode );
+    CXMLTreeNode TreeFound;
 
-  if ( _pszKey && m_pNode )
-    TreeFound = GetSubTree( _pszKey );
+    if ( _pszKey && m_pNode )
+        TreeFound = GetSubTree( _pszKey );
 
-  return TreeFound;
+    return TreeFound;
 }
 
 //----------------------------------------------------------------------------
@@ -190,64 +190,64 @@ CXMLTreeNode CXMLTreeNode::GetNode( const char* _pszKey ) const
 //----------------------------------------------------------------------------
 CXMLTreeNode CXMLTreeNode::operator()( int _iIndex ) const
 {
-  assert( _iIndex >= 0 && m_pNode );
-  CXMLTreeNode TreeFound;
+    assert( _iIndex >= 0 && m_pNode );
+    CXMLTreeNode TreeFound;
 
-  if ( _iIndex >= 0 && m_pNode )
-  {
-    int iCount = 0;
-    xmlNodePtr pChildren = m_pNode->children;
-
-    while ( pChildren != NULL )
+    if ( _iIndex >= 0 && m_pNode )
     {
-      if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
-      {
-        if ( _iIndex == iCount )
+        int iCount = 0;
+        xmlNodePtr pChildren = m_pNode->children;
+
+        while ( pChildren != NULL )
         {
-          TreeFound.m_pNode = pChildren;
-          TreeFound.m_pDoc = m_pDoc;
-          break;
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
+            {
+                if ( _iIndex == iCount )
+                {
+                    TreeFound.m_pNode = pChildren;
+                    TreeFound.m_pDoc = m_pDoc;
+                    break;
+                }
+
+                ++iCount;
+            }
+
+            pChildren = pChildren->next;
         }
-
-        ++iCount;
-      }
-
-      pChildren = pChildren->next;
     }
-  }
 
-  return TreeFound;
+    return TreeFound;
 }
 
 CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 {
-  assert( _iIndex >= 0 && m_pNode );
-  CXMLTreeNode TreeFound;
+    assert( _iIndex >= 0 && m_pNode );
+    CXMLTreeNode TreeFound;
 
-  if ( _iIndex >= 0 && m_pNode )
-  {
-    int iCount = 0;
-    xmlNodePtr pChildren = m_pNode->children;
-
-    while ( pChildren != NULL )
+    if ( _iIndex >= 0 && m_pNode )
     {
-      if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
-      {
-        if ( _iIndex == iCount )
+        int iCount = 0;
+        xmlNodePtr pChildren = m_pNode->children;
+
+        while ( pChildren != NULL )
         {
-          TreeFound.m_pNode = pChildren;
-          TreeFound.m_pDoc = m_pDoc;
-          break;
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
+            {
+                if ( _iIndex == iCount )
+                {
+                    TreeFound.m_pNode = pChildren;
+                    TreeFound.m_pDoc = m_pDoc;
+                    break;
+                }
+
+                ++iCount;
+            }
+
+            pChildren = pChildren->next;
         }
-
-        ++iCount;
-      }
-
-      pChildren = pChildren->next;
     }
-  }
 
-  return TreeFound;
+    return TreeFound;
 }
 
 //----------------------------------------------------------------------------
@@ -255,23 +255,23 @@ CXMLTreeNode CXMLTreeNode::GetChildren( int _iIndex ) const
 //----------------------------------------------------------------------------
 uint32 CXMLTreeNode::GetNumChildren() const
 {
-  assert( m_pNode );
-  int iCount = 0;
+    assert( m_pNode );
+    int iCount = 0;
 
-  if ( m_pNode )
-  {
-    xmlNodePtr pChildren = m_pNode->children;
-
-    while ( pChildren != NULL )
+    if ( m_pNode )
     {
-      if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
-        ++iCount;
+        xmlNodePtr pChildren = m_pNode->children;
 
-      pChildren = pChildren->next;
+        while ( pChildren != NULL )
+        {
+            if ( pChildren->type != XML_TEXT_NODE && pChildren->type != XML_COMMENT_NODE )
+                ++iCount;
+
+            pChildren = pChildren->next;
+        }
     }
-  }
 
-  return iCount;
+    return iCount;
 }
 
 //----------------------------------------------------------------------------
@@ -279,208 +279,208 @@ uint32 CXMLTreeNode::GetNumChildren() const
 //----------------------------------------------------------------------------
 xmlChar* CXMLTreeNode::GetProperty( const char* _pszKey ) const
 {
-  assert( _pszKey && m_pNode );
-  xmlChar* value = NULL;
+    assert( _pszKey && m_pNode );
+    xmlChar* value = NULL;
 
-  if ( _pszKey && m_pNode )
-    value = xmlGetProp( m_pNode, ( const xmlChar* )_pszKey );
+    if ( _pszKey && m_pNode )
+        value = xmlGetProp( m_pNode, ( const xmlChar* )_pszKey );
 
-  return value;
+    return value;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::GetAttribute<bool>( const char* aAttName, const bool& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  bool lRtn( aDefaultAttValue );
+    bool lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* pszValue = ( const char* )value;
+    if ( value )
+    {
+        const char* pszValue = ( const char* )value;
 
-    lRtn = ( strcmp( "TRUE", pszValue ) == 0 ||
-             strcmp( "true", pszValue ) == 0 ||
-             strcmp( "True", pszValue ) == 0 );
-  }
+        lRtn = ( strcmp( "TRUE", pszValue ) == 0 ||
+                 strcmp( "true", pszValue ) == 0 ||
+                 strcmp( "True", pszValue ) == 0 );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const int32 CXMLTreeNode::GetAttribute<int32>( const char* aAttName, const int32& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  int32 lRtn( aDefaultAttValue );
+    int32 lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%d", &lRtn );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%d", &lRtn );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const uint32 CXMLTreeNode::GetAttribute<uint32>( const char* aAttName, const uint32& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  uint32 lRtn( aDefaultAttValue );
+    uint32 lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%u", &lRtn );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%u", &lRtn );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const float32 CXMLTreeNode::GetAttribute<float32>( const char* aAttName,
-    const float32& aDefaultAttValue ) const
+        const float32& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  float32 lRtn( aDefaultAttValue );
+    float32 lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%f", &lRtn );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f", &lRtn );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const std::string CXMLTreeNode::GetAttribute<std::string>( const char* aAttName,
-    const std::string& aDefaultAttValue ) const
+        const std::string& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  std::string lRtn( aDefaultAttValue );
+    std::string lRtn( aDefaultAttValue );
 
-  if ( value )
-    lRtn = ( const char* )value;
+    if ( value )
+        lRtn = ( const char* )value;
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::CColor CXMLTreeNode::GetAttribute<Math::CColor>( const char* aAttName,
-    const Math::CColor& aDefaultAttValue ) const
+        const Math::CColor& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::CColor lRtn( aDefaultAttValue );
+    Math::CColor lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%f %f %f %f", &lRtn.r, &lRtn.g, &lRtn.b, &lRtn.a );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f %f", &lRtn.r, &lRtn.g, &lRtn.b, &lRtn.a );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::Vect2f CXMLTreeNode::GetAttribute<Math::Vect2f>( const char* aAttName,
-    const Math::Vect2f& aDefaultAttValue ) const
+        const Math::Vect2f& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::Vect2f lRtn( aDefaultAttValue );
+    Math::Vect2f lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%f %f", &lRtn.x, &lRtn.y );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f", &lRtn.x, &lRtn.y );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::Vect2i CXMLTreeNode::GetAttribute<Math::Vect2i>( const char* aAttName,
-    const Math::Vect2i& aDefaultAttValue ) const
+        const Math::Vect2i& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::Vect2i lRtn( aDefaultAttValue );
+    Math::Vect2i lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%d %d", &lRtn.x, &lRtn.y );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%d %d", &lRtn.x, &lRtn.y );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::Vect2u CXMLTreeNode::GetAttribute<Math::Vect2u>( const char* aAttName,
-    const Math::Vect2u& aDefaultAttValue ) const
+        const Math::Vect2u& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::Vect2u lRtn( aDefaultAttValue );
+    Math::Vect2u lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%u %u", &lRtn.x, &lRtn.y );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%u %u", &lRtn.x, &lRtn.y );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::Vect4f CXMLTreeNode::GetAttribute<Math::Vect4f>( const char* aAttName,
-    const Math::Vect4f& aDefaultAttValue ) const
+        const Math::Vect4f& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::Vect4f lRtn( aDefaultAttValue );
+    Math::Vect4f lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%f %f %f %f", &lRtn.x, &lRtn.y, &lRtn.z, &lRtn.w );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f %f", &lRtn.x, &lRtn.y, &lRtn.z, &lRtn.w );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const Math::Vect3f CXMLTreeNode::GetAttribute<Math::Vect3f>( const char* aAttName,
-    const Math::Vect3f& aDefaultAttValue ) const
+        const Math::Vect3f& aDefaultAttValue ) const
 {
-  xmlChar* value = GetProperty( aAttName );
+    xmlChar* value = GetProperty( aAttName );
 
-  Math::Vect3f lRtn( aDefaultAttValue );
+    Math::Vect3f lRtn( aDefaultAttValue );
 
-  if ( value )
-  {
-    const char* c_strValue = ( const char* )value;
-    sscanf_s( c_strValue, "%f %f %f", &lRtn.x, &lRtn.y, &lRtn.z );
-  }
+    if ( value )
+    {
+        const char* c_strValue = ( const char* )value;
+        sscanf_s( c_strValue, "%f %f %f", &lRtn.x, &lRtn.y, &lRtn.z );
+    }
 
-  xmlFree( value );
-  return lRtn;
+    xmlFree( value );
+    return lRtn;
 }
 
 //----------------------------------------------------------------------------
@@ -488,58 +488,58 @@ template<> const Math::Vect3f CXMLTreeNode::GetAttribute<Math::Vect3f>( const ch
 //----------------------------------------------------------------------------
 xmlChar* CXMLTreeNode::GetKeyword( const char* _pszKey ) const
 {
-  assert( _pszKey && m_pNode && m_pDoc );
-  xmlChar* value = NULL;
+    assert( _pszKey && m_pNode && m_pDoc );
+    xmlChar* value = NULL;
 
-  if ( _pszKey && m_pNode && m_pDoc )
-  {
-    CXMLTreeNode FoundTree;
+    if ( _pszKey && m_pNode && m_pDoc )
+    {
+        CXMLTreeNode FoundTree;
 
-    if ( _FindSubTree( m_pNode, _pszKey, FoundTree ) )
-      value = xmlNodeListGetString( FoundTree.m_pDoc, FoundTree.m_pNode->xmlChildrenNode, 1 );
-  }
+        if ( _FindSubTree( m_pNode, _pszKey, FoundTree ) )
+            value = xmlNodeListGetString( FoundTree.m_pDoc, FoundTree.m_pNode->xmlChildrenNode, 1 );
+    }
 
-  return value;
+    return value;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 bool CXMLTreeNode::ExistsKey( const char* _pszKey )
 {
-  assert( _pszKey );
-  CXMLTreeNode TreeFound = GetSubTree( _pszKey );
-  return TreeFound.Exists();
+    assert( _pszKey );
+    CXMLTreeNode TreeFound = GetSubTree( _pszKey );
+    return TreeFound.Exists();
 }
 
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::StartNewFile( const char* _pszFileName )
 {
-  assert( _pszFileName );
-  m_bIsOk = false;
+    assert( _pszFileName );
+    m_bIsOk = false;
 
-  if ( _pszFileName )
-  {
-    m_pszFileName = _pszFileName;
-
-    // Create a new XmlWriter for DOM, with no compression.
-    m_pWriter = xmlNewTextWriterDoc( &m_pDoc, 0 );
-    assert( m_pWriter );
-
-    if ( m_pWriter )
+    if ( _pszFileName )
     {
-      // Start the document with the xml default for the version, encoding ISO 8858-1 and the default for the standalone declaration.
-      int rc = xmlTextWriterStartDocument( m_pWriter, NULL, MY_ENCODING, NULL );
-      assert( rc >= 0 );
+        m_pszFileName = _pszFileName;
 
-      if ( rc >= 0 )
-      {
-        m_bIsOk = true;
-        return true;
-      }
+        // Create a new XmlWriter for DOM, with no compression.
+        m_pWriter = xmlNewTextWriterDoc( &m_pDoc, 0 );
+        assert( m_pWriter );
+
+        if ( m_pWriter )
+        {
+            // Start the document with the xml default for the version, encoding ISO 8858-1 and the default for the standalone declaration.
+            int rc = xmlTextWriterStartDocument( m_pWriter, NULL, MY_ENCODING, NULL );
+            assert( rc >= 0 );
+
+            if ( rc >= 0 )
+            {
+                m_bIsOk = true;
+                return true;
+            }
+        }
     }
-  }
 
-  Release();
-  return false;
+    Release();
+    return false;
 }
 
 
@@ -548,14 +548,14 @@ bool CXMLTreeNode::StartNewFile( const char* _pszFileName )
 //----------------------------------------------------------------------------
 void CXMLTreeNode::EndNewFile()
 {
-  assert( m_pWriter && m_pDoc && m_pszFileName );
+    assert( m_pWriter && m_pDoc && m_pszFileName );
 
-  if ( m_pWriter && m_pDoc && m_pszFileName )
-  {
-    xmlFreeTextWriter( m_pWriter );
-    m_pWriter = NULL;
-    xmlSaveFileEnc( m_pszFileName, m_pDoc, MY_ENCODING );
-  }
+    if ( m_pWriter && m_pDoc && m_pszFileName )
+    {
+        xmlFreeTextWriter( m_pWriter );
+        m_pWriter = NULL;
+        xmlSaveFileEnc( m_pszFileName, m_pDoc, MY_ENCODING );
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -563,20 +563,20 @@ void CXMLTreeNode::EndNewFile()
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::WriteComment( const char* _pszComment )
 {
-  assert( _pszComment && m_pWriter );
+    assert( _pszComment && m_pWriter );
 
-  if ( _pszComment && m_pWriter )
-  {
-    int rc = xmlTextWriterWriteComment( m_pWriter, BAD_CAST _pszComment );
-    assert( rc >= 0 );
+    if ( _pszComment && m_pWriter )
+    {
+        int rc = xmlTextWriterWriteComment( m_pWriter, BAD_CAST _pszComment );
+        assert( rc >= 0 );
 
-    if ( rc < 0 )
-      return false;
-  }
-  else
-    return false;
+        if ( rc < 0 )
+            return false;
+    }
+    else
+        return false;
 
-  return true;
+    return true;
 }
 
 //----------------------------------------------------------------------------
@@ -584,21 +584,21 @@ bool CXMLTreeNode::WriteComment( const char* _pszComment )
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::StartElement( const char* _pszKey )
 {
-  assert( _pszKey && m_pWriter );
+    assert( _pszKey && m_pWriter );
 
-  if ( _pszKey && m_pWriter )
-  {
-    // Start an element named "EXAMPLE". Since thist is the first element, this will be the root element of the document.
-    int rc = xmlTextWriterStartElement( m_pWriter, BAD_CAST _pszKey );
-    assert( rc >= 0 );
+    if ( _pszKey && m_pWriter )
+    {
+        // Start an element named "EXAMPLE". Since thist is the first element, this will be the root element of the document.
+        int rc = xmlTextWriterStartElement( m_pWriter, BAD_CAST _pszKey );
+        assert( rc >= 0 );
 
-    if ( rc < 0 )
-      return false;
-  }
-  else
-    return false;
+        if ( rc < 0 )
+            return false;
+    }
+    else
+        return false;
 
-  return true;
+    return true;
 }
 
 //----------------------------------------------------------------------------
@@ -606,116 +606,116 @@ bool CXMLTreeNode::StartElement( const char* _pszKey )
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::EndElement()
 {
-  assert( m_pWriter );
+    assert( m_pWriter );
 
-  if ( m_pWriter )
-  {
-    /* Close the element named HEADER. */
-    int rc = xmlTextWriterEndElement( m_pWriter );
-    assert( rc >= 0 );
+    if ( m_pWriter )
+    {
+        /* Close the element named HEADER. */
+        int rc = xmlTextWriterEndElement( m_pWriter );
+        assert( rc >= 0 );
 
-    if ( rc < 0 )
-      return false;
-  }
-  else
-    return false;
+        if ( rc < 0 )
+            return false;
+    }
+    else
+        return false;
 
-  return true;
+    return true;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 bool  CXMLTreeNode::AddProperty( const char* _pszKey, const char* _Value ) const
 {
-  assert( _pszKey && _Value && m_pWriter );
+    assert( _pszKey && _Value && m_pWriter );
 
-  if ( _pszKey && _Value && m_pWriter )
-  {
-    // Write an element
-    int rc = xmlTextWriterWriteAttribute( m_pWriter, BAD_CAST _pszKey, BAD_CAST _Value );
+    if ( _pszKey && _Value && m_pWriter )
+    {
+        // Write an element
+        int rc = xmlTextWriterWriteAttribute( m_pWriter, BAD_CAST _pszKey, BAD_CAST _Value );
 
-    if ( rc >= 0 )
-      return true;
-  }
+        if ( rc >= 0 )
+            return true;
+    }
 
-  return false;
+    return false;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<std::string>( const char* _pszKey, const std::string& _Value ) const
 {
-  return AddProperty( _pszKey, _Value.c_str() );
+    return AddProperty( _pszKey, _Value.c_str() );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<int>( const char* _pszKey, const int& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%d", _Value );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%d", _Value );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<float>( const char* _pszKey, const float& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%f", _Value );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%f", _Value );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<bool>( const char* _pszKey, const bool& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, _Value ? "true" : "false" );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, _Value ? "true" : "false" );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect2f>( const char* _pszKey, const Math::Vect2f& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%f %f", _Value.x, _Value.y );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%f %f", _Value.x, _Value.y );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect3f>( const char* _pszKey, const Math::Vect3f& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%f %f %f", _Value.x, _Value.y, _Value.z );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%f %f %f", _Value.x, _Value.y, _Value.z );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect4f>( const char* _pszKey, const Math::Vect4f& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%f %f %f %f", _Value.x, _Value.y, _Value.z, _Value.w );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%f %f %f %f", _Value.x, _Value.y, _Value.z, _Value.w );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect2i>( const char* _pszKey, const Math::Vect2i& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%i %i", _Value.x, _Value.y );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%i %i", _Value.x, _Value.y );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect3i>( const char* _pszKey, const Math::Vect3i& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%i %i %i", _Value.x, _Value.y, _Value.z );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%i %i %i", _Value.x, _Value.y, _Value.z );
+    return AddProperty( _pszKey, Value );
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 template<> const bool CXMLTreeNode::AddAttribute<Math::Vect4i>( const char* _pszKey, const Math::Vect4i& _Value ) const
 {
-  char Value[32];
-  sprintf_s( Value, "%i %i %i %i", _Value.x, _Value.y, _Value.z, _Value.w );
-  return AddProperty( _pszKey, Value );
+    char Value[32];
+    sprintf_s( Value, "%i %i %i %i", _Value.x, _Value.y, _Value.z, _Value.w );
+    return AddProperty( _pszKey, Value );
 }
 
 //----------------------------------------------------------------------------
@@ -723,18 +723,18 @@ template<> const bool CXMLTreeNode::AddAttribute<Math::Vect4i>( const char* _psz
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::WritePszKeyword( const char* _pszKey, const char* _pszValue )
 {
-  assert( _pszKey && _pszValue && m_pWriter );
+    assert( _pszKey && _pszValue && m_pWriter );
 
-  if ( _pszKey && _pszValue && m_pWriter )
-  {
-    // Write an element
-    int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST _pszValue );
+    if ( _pszKey && _pszValue && m_pWriter )
+    {
+        // Write an element
+        int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST _pszValue );
 
-    if ( rc >= 0 )
-      return true;
-  }
+        if ( rc >= 0 )
+            return true;
+    }
 
-  return false;
+    return false;
 }
 
 //----------------------------------------------------------------------------
@@ -742,20 +742,20 @@ bool CXMLTreeNode::WritePszKeyword( const char* _pszKey, const char* _pszValue )
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::WriteIntKeyword( const char* _pszKey, int _iValue )
 {
-  assert( _pszKey && m_pWriter );
+    assert( _pszKey && m_pWriter );
 
-  if ( _pszKey && m_pWriter )
-  {
-    char pszValue[32];
-    sprintf_s( pszValue, "%d", _iValue );
-    // Write an element
-    int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
+    if ( _pszKey && m_pWriter )
+    {
+        char pszValue[32];
+        sprintf_s( pszValue, "%d", _iValue );
+        // Write an element
+        int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
 
-    if ( rc >= 0 )
-      return true;
-  }
+        if ( rc >= 0 )
+            return true;
+    }
 
-  return false;
+    return false;
 }
 
 //----------------------------------------------------------------------------
@@ -763,20 +763,20 @@ bool CXMLTreeNode::WriteIntKeyword( const char* _pszKey, int _iValue )
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::WriteFloatKeyword( const char* _pszKey, float32 _fValue )
 {
-  assert( _pszKey && m_pWriter );
+    assert( _pszKey && m_pWriter );
 
-  if ( _pszKey && m_pWriter )
-  {
-    char pszValue[32];
-    sprintf_s( pszValue, "%d", _fValue );
-    // Write an element
-    int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
+    if ( _pszKey && m_pWriter )
+    {
+        char pszValue[32];
+        sprintf_s( pszValue, "%d", _fValue );
+        // Write an element
+        int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
 
-    if ( rc >= 0 )
-      return true;
-  }
+        if ( rc >= 0 )
+            return true;
+    }
 
-  return false;
+    return false;
 }
 
 //----------------------------------------------------------------------------
@@ -784,18 +784,18 @@ bool CXMLTreeNode::WriteFloatKeyword( const char* _pszKey, float32 _fValue )
 //----------------------------------------------------------------------------
 bool CXMLTreeNode::WriteBoolKeyword( const char* _pszKey, bool _bValue )
 {
-  assert( _pszKey && m_pWriter );
+    assert( _pszKey && m_pWriter );
 
-  if ( _pszKey && m_pWriter )
-  {
-    char pszValue[32];
-    sprintf_s( pszValue, "%d", _bValue ? "true" : "false" );
-    // Write an element
-    int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
+    if ( _pszKey && m_pWriter )
+    {
+        char pszValue[32];
+        sprintf_s( pszValue, "%d", _bValue ? "true" : "false" );
+        // Write an element
+        int rc = xmlTextWriterWriteElement( m_pWriter, BAD_CAST _pszKey, BAD_CAST pszValue );
 
-    if ( rc >= 0 )
-      return true;
-  }
+        if ( rc >= 0 )
+            return true;
+    }
 
-  return false;
+    return false;
 }
