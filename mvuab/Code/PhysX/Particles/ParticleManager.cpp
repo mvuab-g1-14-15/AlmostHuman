@@ -15,62 +15,43 @@ CParticleManager::CParticleManager( CXMLTreeNode& atts ) : CManager( atts )
 
 CParticleManager::~CParticleManager()
 {
-    Destroy();
+  Destroy();
 }
 
 void CParticleManager::Init()
 {
-    CXMLTreeNode l_XML, l_Node;
+  CXMLTreeNode l_XML, l_Node;
 
-    if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "emitters", l_Node ) )
+  if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_instances", l_Node ) )
+  {
+    for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
     {
-        for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
-        {
-            const CXMLTreeNode& lCurrentEmitter = l_Node( i );
-            const std::string& lEmitterType = lCurrentEmitter.GetAttribute<std::string>( "type", "cube" );
+      const CXMLTreeNode& lCurrentParticle = l_Node( i );
+      const std::string& lNameParticle = lCurrentParticle.GetAttribute<std::string>( "name", "" );
 
-            CParticleEmitter* lEmitter = 0;
+      CInstanceParticle* lInstanceParticle = new CInstanceParticle( lCurrentParticle );
 
-            if ( lEmitterType == "cube" )
-                lEmitter =  new CCubeEmitter();
-            else if ( lEmitterType == "sphere" )
-                lEmitter =  new CSphereEmitter();
+      ASSERT( lInstanceParticle, "Null Instance Particle" );
 
-            ASSERT( lEmitter, "Null Emitter" );
-
-            if ( !lEmitter->Init( lCurrentEmitter ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
-            {
-                LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
-                CHECKED_DELETE( lEmitter );
-            }
-        }
+      if ( lNameParticle == "" || ( !AddResource( lNameParticle, lInstanceParticle ) ) )
+      {
+        LOG_ERROR_APPLICATION( "Error initing emitter %s", lNameParticle );
+        CHECKED_DELETE( lInstanceParticle );
+      }
     }
-}
-
-void CParticleManager::Update()
-{
-    for ( uint32 i = 0, lEmitters = GetResourcesCount(); i < lEmitters; ++i )
-    {
-        CParticleEmitter* lEmitter = GetResourceById( i );
-
-        if ( lEmitter->IsActive() )
-            lEmitter->Update( deltaTimeMacro );
-    }
+  }
 }
 
 void CParticleManager::Render()
 {
-    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
-    {
-        CParticleEmitter* lEmitter = GetResourceById( i );
-
-        if ( lEmitter->IsActive() )
-            lEmitter->Render();
-    }
+  for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
+  {
+    GetResourceById( i )->Render();
+  }
 }
 
 void CParticleManager::Refresh()
 {
-    Destroy();
-    Init();
+  Destroy();
+  Init();
 }

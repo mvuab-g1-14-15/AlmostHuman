@@ -14,6 +14,7 @@ class CSphereEmitter : public CParticleEmitter
         void Update             (float dt);
         void Render             ();
         virtual Math::Vect3f GetSpawnPosition();
+		virtual void SetPositionParticle(Math::Vect3f& lPosition);
 };
 
 #endif

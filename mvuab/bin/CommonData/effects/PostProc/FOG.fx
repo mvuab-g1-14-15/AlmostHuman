@@ -22,10 +22,10 @@ technique FogTechnique
 {
 	pass p0
 	{
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend=SrcAlpha;
-		DestBlend=InvSrcAlpha;
+		//AlphaBlendEnable = true;
+		//BlendOp=Add;
+		//SrcBlend=SrcAlpha;
+		//DestBlend=InvSrcAlpha;
 		
         VertexShader = null;
 		PixelShader = compile ps_3_0 FogPS();

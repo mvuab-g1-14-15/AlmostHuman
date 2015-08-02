@@ -114,6 +114,9 @@
     <ClCompile Include="Particles\ParticleSystemManager.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Particles\InstanceParticle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -205,6 +208,9 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Particles\ParticleSystemManager.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\InstanceParticle.h">
       <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>

@@ -77,6 +77,7 @@ end
 
 function CPlayer:AddDamage(amount)
 	self.Life = self.Life - amount
+	engine:Trace("Life: ".. self.Life)
 end
 
 function CPlayer:GetLife()

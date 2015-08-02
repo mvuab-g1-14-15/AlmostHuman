@@ -190,24 +190,24 @@ void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::V
 void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width,
                      uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
 {
-  if ( EnemyMInstance != NULL )
-  {
-    CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
+  //if ( EnemyMInstance != NULL )
+  //{
+  //  CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
 
-    if ( l_Enemy )
-    {
-      Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
-      Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-      CEnemyMap* l_EnemyMap   = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
-          Height, Yaw, PositionScript, OrientationScript );
-      m_vEnemy.push_back( l_EnemyMap );
-    }
-  }
+  //  if ( l_Enemy )
+  //  {
+  //    Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
+  //    Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
+  //    CEnemyMap* l_EnemyMap   = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
+  //        Height, Yaw, PositionScript, OrientationScript );
+  //    m_vEnemy.push_back( l_EnemyMap );
+  //  }
+  //}
 }
 
 void CMap::AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript )
 {
-  if ( EnemyMInstance != NULL )
+  /*if ( EnemyMInstance != NULL )
   {
     std::map<std::string, CEnemy*> l_MapEnemy         = EnemyMInstance->GetResourcesMap();
 
@@ -227,7 +227,17 @@ void CMap::AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, s
                                              Height, lYaw, PositionScriptComplete.str(), OrientationScriptComplete.str() );
       m_vEnemy.push_back( l_EnemyMap );
     }
-  }
+  }*/
+  std::stringstream parametros;
+  parametros << Texture << "', '" << Width << "', '" << Height << "', '" << PositionScript << "', '" << OrientationScript << "')";
+  ScriptMInstance->RunCode( "AddEnemys('" + parametros.str() );
+}
+
+void CMap::AddEnemyLUA( const std::string& aName, CTexture* aTexture, Math::Vect3f aPosInMap3d, Math::Vect2f aPosInMap, uint32 aWidth,
+                        uint32 aHeight, float aYaw, std::string  aPositionScript, std::string  aOrientationScript )
+{
+  CEnemyMap* l_EnemyMap = new CEnemyMap( aName, aTexture, aPosInMap3d, aPosInMap, aWidth, aHeight, aYaw, aPositionScript, aOrientationScript );
+  m_vEnemy.push_back( l_EnemyMap );
 }
 
 void CMap::AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw,

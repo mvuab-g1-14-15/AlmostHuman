@@ -735,15 +735,16 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
     //Por defecto ya est alienado de esta manera :)
   }
   break;
+
   case UPPER_MIDDLE:
   {
-    finalPos.x -= ( uint32 ) (w * 0.5f);
+    finalPos.x -= ( uint32 )( w * 0.5f );
   }
   break;
 
   case LOWER_MIDDLE:
   {
-    finalPos.x -= ( uint32 ) (w * 0.5f);
+    finalPos.x -= ( uint32 )( w * 0.5f );
     finalPos.y -= h;
   }
   break;
@@ -778,9 +779,6 @@ void CGraphicsManager::CalculateAlignment( uint32 w, uint32 h, ETypeAlignment al
 void CGraphicsManager::EnableAlphaBlend()
 {
   mDirectXDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
-  // render el quad de difuminacion....
-  //m_pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  //m_pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
   //// render el quad de difuminacion....
   mDirectXDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
   mDirectXDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
@@ -995,9 +993,9 @@ void CGraphicsManager::DisableAlphaTest()
 {
   mDirectXDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
 }
-void CGraphicsManager::SetBlendOP()
+void CGraphicsManager::SetBlendOP( const std::string& BlendOPState )
 {
-  mDirectXDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
+  mDirectXDevice->SetRenderState( D3DRS_BLENDOP, ToD3DBlendOPEnum( BlendOPState ) );
 }
 void CGraphicsManager::EnableZTest()
 {
@@ -1093,6 +1091,7 @@ void CGraphicsManager::SetDstBlend( const std::string& BlendState )
 {
   mDirectXDevice->SetRenderState( D3DRS_DESTBLEND, ToD3DBlendEnum( BlendState ) );
 }
+
 D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
 {
   if ( BlendState == "One" )
@@ -1132,6 +1131,23 @@ D3DBLEND CGraphicsManager::ToD3DBlendEnum( const std::string& BlendState )
 
   return D3DBLEND_ZERO;
 }
+
+D3DBLENDOP CGraphicsManager::ToD3DBlendOPEnum( const std::string& BlendOPState )
+{
+  if ( BlendOPState == "Add" )
+    return D3DBLENDOP_ADD;
+  else if ( BlendOPState == "Subtract" )
+    return D3DBLENDOP_SUBTRACT;
+  else if ( BlendOPState == "RevSubtract" )
+    return D3DBLENDOP_REVSUBTRACT;
+  else if ( BlendOPState == "Min" )
+    return D3DBLENDOP_MIN;
+  else if ( BlendOPState == "Max" )
+    return D3DBLENDOP_MAX;
+
+  return D3DBLENDOP_FORCE_DWORD;
+}
+
 void CGraphicsManager::CreateQuadBuffers()
 {
   Math::CColor color = Math::colBLACK;
@@ -1229,9 +1245,9 @@ void CGraphicsManager::RenderMesh( const Math::Mat44f aTransform, LPD3DXMESH aMe
 {
   SetTransform( aTransform );
 
-  CEffectTechnique* EffectTechnique =  ( aColor.GetAlpha() < 1.0f ) ? 
-	  EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" ) :
-	  EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
+  CEffectTechnique* EffectTechnique = ( aColor.GetAlpha() < 1.0f ) ?
+                                      EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" ) :
+                                      EffectManagerInstance->GetResource( "GenerateGBufferDebugTechnique" );
 
   // Set the debug color
   EffectTechnique->SetDebugColor( aColor );
@@ -1463,11 +1479,11 @@ void CGraphicsManager::DrawQuad2D( const Math::Vect2i& pos, uint32 w, uint32 h, 
 
 void CGraphicsManager::InitShapes()
 {
-	// Create the box shape
-	CBoxShape::CreateGeometry();
+  // Create the box shape
+  CBoxShape::CreateGeometry();
 }
 
 void CGraphicsManager::DestroyShapes()
 {
-    CBoxShape::DestroyGeometry();
+  CBoxShape::DestroyGeometry();
 }

@@ -1,13 +1,12 @@
 tiempoDeEspera = 0
 
 function init_enemy()
-	enemy = enemy_manager:GetActualEnemy()
-	enemy:SetCurrentPoint(0)
+	enemy = g_EnemyManager:GetActualEnemy()
 end
 
 function check_next_state()
-	enemy = enemy_manager:GetActualEnemy()
-	local l_CurrentState = enemy:GetCurrentState()
+	enemy = g_EnemyManager:GetActualEnemy()
+	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState
 	--engine:Trace("Current state: " .. l_CurrentState)
 	
@@ -29,13 +28,14 @@ function check_next_state()
 		end
 	end
 	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
-		if l_DistanceToPlayer < 4 and l_PlayerInSight then
+		if l_DistanceToPlayer < 8 and l_PlayerInSight then
 			l_NextState = "atacar"
 		end
 	end
 	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
 	--	l_NextState = "andando"
 	--end
+	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -44,44 +44,21 @@ end
 
 function andar()
 	local dt = timer:GetElapsedTime()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	
-	local l_TargetPos = enemy:GetTargetPosition()
-	l_TargetPos.y = 0.0
-	local l_EnemyPos = enemy:GetPosition()
-	l_EnemyPos.y = 0.0
-	
-	local l_DistanceVector = l_TargetPos - l_EnemyPos
-	
-	if l_DistanceVector:Length() < 0.1  then
-		local currentPoint = enemy:GetCurrentPoint()
-		local lTargetPosition = VectorWaypoints(enemy:GetWaypoints()):GetResource(currentPoint)
-		enemy:SetTargetPosition(lTargetPosition)
-		enemy:SetTargetPositionOriginal(lTargetPosition)
-		if currentPoint+1 == (enemy:GetCount()) then
-			enemy:SetCurrentPoint(0)
-		else
-			enemy:SetCurrentPoint(currentPoint+1)
-		end
-		if (enemy:GetCurrentState() == "andando" ) then
+	if enemy:IsInWaypoint() then
+		enemy:NextWaypoint()
+		if (enemy:GetActualState() == "andando" ) then
 			enemy:ChangeState("esperar")
-			enemy:GetAnimationModel():ChangeAnimation("esperar", 0.2, 1.0)
+			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		end
+	else
+		enemy:MoveToWaypoint(Vect3f(0.0))
 	end
-	
-	if CheckVector(l_DistanceVector) then
-		l_DistanceVector:Normalize()
-	end
-	
-	local l_Yaw = math.atan2( l_DistanceVector.z, l_DistanceVector.x)
-	enemy:SetYaw(l_Yaw)
-	
-	l_DistanceVector = l_DistanceVector
-	enemy:Move(l_DistanceVector, dt)
 end
 
 function esperar()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	local timerName = "Espera" .. enemy:GetName()
 
 	if not countdowntimer_manager:ExistTimer(timerName) then
@@ -92,7 +69,7 @@ function esperar()
 	
 	--engine:Trace("Tiempo esperando: " .. countdowntimer_manager:GetElpasedTime(timerName))
 	
-	if countdowntimer_manager:isTimerFinish(timerName) and enemy:GetCurrentState() == "esperar" then
+	if countdowntimer_manager:isTimerFinish(timerName) and enemy:GetActualState() == "esperar" then
 		enemy:ChangeState("andando")
 		enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		countdowntimer_manager:Reset(timerName, false)
@@ -100,7 +77,7 @@ function esperar()
 end
 
 function atacar()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	--engine:Trace("Ejecutando atacar")
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
@@ -112,17 +89,17 @@ function atacar()
 	
 	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then
-		enemy:SetTimeToShoot(enemy:GetTimeToShoot() + timer:GetElapsedTime())
-		engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
-		if enemy:GetTimeToShoot() >= enemy:GetMaxTimeToShoot() then
-			engine:Trace("Enemy shooting")
+		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())
+		--engine:Trace("Tiempo disparando" .. enemy:GetCountTimeShoot() )
+		if enemy:GetCountTimeShoot() >= enemy:GetTimeToShoot() then
+			--engine:Trace("Enemy shooting")
 			local lDir = GetPlayerDirection(enemy:GetPosition())
 			enemy:MakeShoot(lDir)
-			enemy:SetTimeToShoot(0.0)
+			enemy:SetCountTimeShoot(0.0)
 		end
 	else
-		enemy:SetTimeToShoot(0.0)
-		if enemy:GetCurrentState() == "atacar" then
+		enemy:SetCountTimeShoot(0.0)
+		if enemy:GetActualState() == "atacar" then
 			enemy:ChangeState("andando")
 			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
 		end
@@ -130,25 +107,10 @@ function atacar()
 end
 
 function perseguir()
-	local dt = timer:GetElapsedTime()
-	enemy = enemy_manager:GetActualEnemy()
+	enemy = g_EnemyManager:GetActualEnemy()
 	
 	local l_TargetPos = GetPlayerPosition()
-	l_TargetPos.y = 0.0
-	local l_EnemyPos = enemy:GetPosition()
-	l_EnemyPos.y = 0.0
 	
-	local l_DistanceVector = l_TargetPos - l_EnemyPos
 	
-	if CheckVector(l_DistanceVector) then
-		l_DistanceVector:Normalize()
-	end
-	
-	local l_Yaw = math.atan2( l_DistanceVector.z, l_DistanceVector.x)
-	enemy:SetYaw(l_Yaw)
-	
-	l_DistanceVector = l_DistanceVector
-	--enemy:Move(l_DistanceVector, dt)
-	
-	enemy:MoveAStar(l_TargetPos)
+	enemy:MoveToPlayer(l_TargetPos)
 end

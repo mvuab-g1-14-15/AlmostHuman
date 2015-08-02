@@ -8,6 +8,7 @@ CSetBlendSceneRendererCommand::CSetBlendSceneRendererCommand(
     {
         m_SrcBlend =  atts.GetAttribute<std::string>( "srcblend", "" );
         m_DstBlend =  atts.GetAttribute<std::string>( "dstblend", "" );
+		m_BlendOP = atts.GetAttribute<std::string>( "blendop", "" );
     }
 }
 

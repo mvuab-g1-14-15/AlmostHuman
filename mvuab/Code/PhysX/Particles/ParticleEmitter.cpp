@@ -36,7 +36,6 @@ CParticleEmitter::CParticleEmitter()
     , mActualTime(0.0f)
     , mSize(Math::Vect2f(1.0f, 1.0f))
     , mSpeed(Math::Vect2f(1.0f, 1.0f))
-    , mPosition(Math::Vect3f(0.0f, 0.0f, 0.0f))
     , mTechnique( 0 )
     , mIsImmortal( 0 )
     , mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
@@ -63,7 +62,6 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mEmissionTime         = atts.GetAttribute<Math::Vect2f>("emission_time", Math::Vect2f(1.0f, 1.0f));
     mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
-    mPosition             = atts.GetAttribute<Math::Vect3f>("position", Math::Vect3f());
     mTechnique            = atts.GetAttribute<CEffectTechnique>("technique");
     mParticlesXEmission   = atts.GetAttribute<Math::Vect2f>("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
     mColorMin             = atts.GetAttribute<Math::CColor>("min_color", Math::colWHITE );
@@ -102,8 +100,6 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
             lIdxCount, mAliveParticles.y );
 
     mShape = new CBoxShape();
-    mShape->SetPosition( mPosition );
-    mShape->MakeTransform();
 
     //CParticle* lPar = new CParticle();
     return true;

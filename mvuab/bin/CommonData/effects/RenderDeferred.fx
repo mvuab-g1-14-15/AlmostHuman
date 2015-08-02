@@ -78,10 +78,10 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 technique RenderDeferredTechnique {
 	pass p0 {
 
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
+		//AlphaBlendEnable = true;
+		//BlendOp=Add;
+		//SrcBlend = one;
+		//DestBlend = one;
 		VertexShader = null;
 		PixelShader = compile ps_3_0 mainPS();
 	}

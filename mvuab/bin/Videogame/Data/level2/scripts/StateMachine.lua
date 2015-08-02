@@ -1,9 +1,9 @@
 class 'CStateMachineLUA'
 
 function CStateMachineLUA:__init( Name )
+	self.States = {}
 	self:Load( Name )
 	
-	self.States = {}
 end
 
 function CStateMachineLUA:Load( FileName )
@@ -12,24 +12,23 @@ function CStateMachineLUA:Load( FileName )
 	engine:Trace("Init the loading of the state machine " .. FileName)
 
 	File = CXMLTreeNode()
-	if not File:LoadFile( FileName ) then
+	TreeNode = CXMLTreeNode()
+	if not File:LoadAndFindNode( FileName, "state_machine", TreeNode) then
 		--TODO: LOG ERROR
 		engine:Trace("Error loading XML in CStateMachineLUA")
 	end
-	
-	TreeNode = File:GetNode("state_machine")
 	
 	if TreeNode:Exists() then
 		count = TreeNode:GetNumChildren()
 		
 		engine:Trace("State machine number of states is " .. count)
 		
-		for i = 0, count do
+		for i = 0, count-1 do
 			CurrentNode = TreeNode:GetChildren(i)
 			TagName = CurrentNode:GetName()
 			
 			if TagName == "state" then
-				Name = CurrentNode:GetPszProperty("name", "no_name", false)
+				Name = CurrentNode:GetAttributeString("name", "no_name")
 				State = CStateLUA(Name)
 				
 				if not State:Load(CurrentNode) then
@@ -52,4 +51,8 @@ function CStateMachineLUA:CleanUp()
 	for k in pairs (self.States) do
 		self.States[k] = nil
 	end
+end
+
+function CStateMachineLUA:GetState(State)
+	return self.States[State]
 end

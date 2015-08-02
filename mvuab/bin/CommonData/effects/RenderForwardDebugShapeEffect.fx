@@ -21,10 +21,10 @@ technique TECHNIQUE_NAME
 {
 	pass p0
 	{
-		AlphaBlendEnable = true;
-		BlendOp=Add;
-		SrcBlend = one;
-		DestBlend = one;
+		//AlphaBlendEnable = true;
+		//BlendOp=Add;
+		//SrcBlend = one;
+		//DestBlend = one;
 		VertexShader = compile vs_3_0 mainVS();
 		PixelShader = compile ps_3_0 mainPS();
 	}

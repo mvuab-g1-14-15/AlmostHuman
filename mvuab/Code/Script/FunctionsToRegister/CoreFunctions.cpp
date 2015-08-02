@@ -31,6 +31,7 @@
 #include "Timer/CountDownTimerManager.h"
 #include "Cinematics\CinematicManager.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
+#include "Billboard\BillboardManager.h"
 
 #include "luabind_macros.h"
 
@@ -43,17 +44,17 @@ using namespace luabind;
 
 CActionManager* GetActionManager()
 {
-    return ActionManagerInstance;
+  return ActionManagerInstance;
 }
 
 CCameraManager* GetCameraManager()
 {
-    return CameraMInstance;
+  return CameraMInstance;
 }
 
 CPhysicsManager* GetPhysicsManager()
 {
-    return PhysXMInstance;
+  return PhysXMInstance;
 }
 
 CScene* GetScene()
@@ -61,149 +62,183 @@ CScene* GetScene()
   return SceneInstance;
 }
 
-CEnemyManager* GetEnemyManager()
+
+CTextureManager* GetTextureManager()
 {
-    return EnemyMInstance;
+  return TextureMInstance;
 }
+
+//CEnemyManager* GetEnemyManager()
+//{
+//  return EnemyMInstance;
+//}
+
 
 CGizmosManager* GetGizmosManager()
 {
-    return GizmosMInstance;
+  return GizmosMInstance;
 }
 
 CParticleManager* GetParticleManager()
 {
-    return PSMan;
+  return PSMan;
 }
 
 CWWSoundManager* GetSoundManager()
 {
-    return SoundMan;
+  return SoundMan;
 }
 
 CGUIManager* GetGUIManager()
 {
-    return GUIInstance;
+  return GUIInstance;
 }
 
 CCountDownTimerManager* GetCountDownTimerManager()
 {
-    return CountDownTimerInstance;
+  return CountDownTimerInstance;
 }
 
 CScriptManager* GetScriptManager()
 {
-    return ScriptMInstance;
+  return ScriptMInstance;
 }
 
 CCinematicManager* GetCinematicManager()
 {
-    return CinematicMInstance;
+  return CinematicMInstance;
 }
 
 CSceneRendererCommandManager* GetSceneRendererCommandsManager()
 {
-    return SRCMInstance;
+  return SRCMInstance;
+}
+
+CBillboardManager* GetBillboardManager()
+{
+  return BillboardMan;
+}
+
+CLightManager* GetLightManager()
+{
+  return LightMInstance;
 }
 
 void registerProcess( lua_State* aLuaState )
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CProcess )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CProcess )
+  LUA_END_DECLARATION
 }
 
 void registerEngine( lua_State* aLuaState )
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CSingleton<CEngine> )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CSingleton<CEngine> )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
-    LUA_DECLARE_METHOD( CEngine, GetProcess )
-    LUA_DECLARE_METHOD( CEngine, GetTimer )
-    LUA_DECLARE_METHOD( CEngine, GetPlay )
-    LUA_DECLARE_METHOD( CEngine, SetPlay )
-    LUA_DECLARE_METHOD( CEngine, QuitGame )
-    LUA_DECLARE_METHOD( CEngine, Trace )
-    LUA_BEGIN_SCOPE
-    LUA_DECLARE_METHOD_SCOPE( CEngine, GetSingletonPtr )
-    LUA_END_SCOPE
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS( CEngine, CSingleton<CEngine> )
+  LUA_DECLARE_METHOD( CEngine, GetProcess )
+  LUA_DECLARE_METHOD( CEngine, GetTimer )
+  LUA_DECLARE_METHOD( CEngine, GetPlay )
+  LUA_DECLARE_METHOD( CEngine, SetPlay )
+  LUA_DECLARE_METHOD( CEngine, QuitGame )
+  LUA_DECLARE_METHOD( CEngine, Trace )
+  LUA_BEGIN_SCOPE
+  LUA_DECLARE_METHOD_SCOPE( CEngine, GetSingletonPtr )
+  LUA_END_SCOPE
+  LUA_END_DECLARATION
 }
 
 void registerManagers( lua_State* aLuaState )
 {
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CSingleton<CEngineManagers> )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CSingleton<CEngineManagers> )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CEngineManagers )
-    LUA_DECLARE_METHOD( CEngineManagers, GetManagersPath )
-    LUA_DECLARE_METHOD( CEngineManagers, SetManagersPath )
-    LUA_BEGIN_SCOPE
-    LUA_DECLARE_METHOD_SCOPE( CEngineManagers, GetSingletonPtr )
-    LUA_END_SCOPE
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CEngineManagers )
+  LUA_DECLARE_METHOD( CEngineManagers, GetManagersPath )
+  LUA_DECLARE_METHOD( CEngineManagers, SetManagersPath )
+  LUA_BEGIN_SCOPE
+  LUA_DECLARE_METHOD_SCOPE( CEngineManagers, GetSingletonPtr )
+  LUA_END_SCOPE
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetActionManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetActionManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCameraManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCameraManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetEnemyManager )
-    LUA_END_DECLARATION
+  /*LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetEnemyManager )
+  LUA_END_DECLARATION*/
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetTextureManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager )
-    LUA_END_DECLARATION
+  /*LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetRenderableObjectsLayersManager )
+  LUA_END_DECLARATION*/
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSoundManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGUIManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCountDownTimerManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSoundManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScriptManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGUIManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCinematicManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCountDownTimerManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScene )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScriptManager )
+  LUA_END_DECLARATION
 
-    LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSceneRendererCommandsManager )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetCinematicManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetBillboardManager )
+  LUA_END_DECLARATION
+
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetLightManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetScene )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetSceneRendererCommandsManager )
+  LUA_END_DECLARATION
 }
 
 void registerCore( lua_State* aLuaState )
 {
-    registerProcess( aLuaState );
-    registerEngine( aLuaState );
-    registerManagers( aLuaState );
+  registerProcess( aLuaState );
+  registerEngine( aLuaState );
+  registerManagers( aLuaState );
 }

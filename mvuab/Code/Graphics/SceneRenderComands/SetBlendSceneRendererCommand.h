@@ -13,6 +13,8 @@ class CSetBlendSceneRendererCommand : public CSceneRendererCommand
 private:
   std::string m_SrcBlend;
   std::string m_DstBlend;
+  std::string m_BlendOP;
+
 public:
   CSetBlendSceneRendererCommand( CXMLTreeNode& atts );
   ~ CSetBlendSceneRendererCommand();

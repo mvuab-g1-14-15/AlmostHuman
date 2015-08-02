@@ -1,7 +1,7 @@
 class 'CActionLUA'
 
 function CActionLUA:__init( Node )
-	self.Function = Node:GetPszProperty( "function", "no_function", false )
+	self.Function = Node:GetAttributeString( "function", "no_function" ).."()"
 	
 	engine:Trace("Loaded the action " .. self.Function)
 end
