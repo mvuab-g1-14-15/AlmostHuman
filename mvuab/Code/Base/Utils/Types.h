@@ -15,4 +15,14 @@ typedef unsigned int        uint32; // integer positivo de 32 bits
 typedef float               float32;    // float32 de 32 bits
 typedef double              float64;    // float32 de 64 bits
 
+
+// use for functions, global at the context of the file
+#define internal static
+
+// normal static variable
+#define local_persist static
+
+// use for global vars, global at the context of the file, also sets the var to zero
+#define global_variable static
+
 #endif
