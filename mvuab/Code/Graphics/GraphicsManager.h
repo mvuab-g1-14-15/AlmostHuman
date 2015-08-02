@@ -58,6 +58,10 @@ public:
   Math::Vect2f ToScreenCoordinates( Math::Vect3f Point );
   Math::Vect3f ToWorldCoordinates( Math::Vect2f Point );
 
+  bool isDeviceLost();
+  bool canDeviceBeReseted();
+
+
   // Getters and setters
   const LPDIRECT3DDEVICE9 GetDevice() const
   {

@@ -87,6 +87,54 @@ void CGraphicsManager::Render()
 {
 }
 
+bool CGraphicsManager::isDeviceLost()
+{
+    HRESULT l_Result = mDirectXDevice->TestCooperativeLevel();
+
+    /************************************************************************/
+    /* Device lost and can't be reseted yet                                 */
+    /************************************************************************/
+    if(l_Result == D3DERR_DEVICELOST)
+    {
+        Sleep(20);
+        return true;
+    }
+
+    /************************************************************************/
+    /* Device lost and can be reseted                                       */
+    /************************************************************************/
+    if(l_Result == D3DERR_DEVICENOTRESET)
+    {
+        return true;
+    }
+
+    /************************************************************************/
+    /* Device is OK                                                         */
+    /************************************************************************/
+    if(l_Result == D3D_OK)
+    {
+        return false;
+    }
+
+    /************************************************************************/
+    /* Fatal error, internal driver error, exit the game                    */
+    /************************************************************************/
+    if(l_Result == D3DERR_DRIVERINTERNALERROR)
+    {
+        PostQuitMessage(1);
+    }
+
+    return false;
+}
+
+bool CGraphicsManager::canDeviceBeReseted()
+{
+    /************************************************************************/
+    /* Device lost and can be reseted                                       */
+    /************************************************************************/
+    return mDirectXDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET;
+}
+
 void CGraphicsManager::Release()
 {
   CHECKED_RELEASE( m_SphereMesh );

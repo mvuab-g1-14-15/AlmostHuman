@@ -19,6 +19,9 @@
 #include "TestProcess\AStarProcess.h"
 #include "TestProcess\PreProcess.h"
 
+#include "EngineManagers.h"
+#include "GraphicsManager.h"
+
 #include <iostream>
 #include <ctime>
 
@@ -183,7 +186,9 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             {
                 pEngine->ProcessInputs();
                 pEngine->Update();
-                pEngine->Render();
+
+                if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
+                    pEngine->Render();
             }
         }
 
