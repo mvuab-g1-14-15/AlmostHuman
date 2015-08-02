@@ -26,6 +26,7 @@
 
 #include "EngineManagers.h"
 #include "PhysicsManager.h"
+#include "Utils\PhysicUserData.h"
 
 #include "luabind_macros.h"
 #include "Actor/PhysicController.h"
@@ -86,7 +87,28 @@ bool PlayerInSight( CCamera& aCamera )
   Math::Vect3f lPosition( lController->GetPosition() );
 
   if ( aCamera.GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
-    return true;
+  {
+    SCollisionInfo hit;
+    Math::Vect3f lDirection = aCamera.GetDirection();
+    //lDirection.y = lDirection.y - ( lController->GetHeight() / 2.0f );
+    CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
+                                     aCamera.GetZFar() );
+    CPhysicController* lRayController = 0;
+
+    if ( lRayCollision )
+      lRayController = lRayCollision->GetController();
+
+    if ( lRayController )
+    {
+      std::string lName( lRayController->GetUserData()->GetName() );
+
+      if ( lName == "Player" )
+        return true;
+      else
+        return false;
+    }
+  }
+
 
   return false;
 }

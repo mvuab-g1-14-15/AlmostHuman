@@ -40,6 +40,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
+	self.Camera:SetZFar(20.0)
 	self:UpdateCamera()
 	
 	AddEnemy(Node:GetAttributeString("texture_enemy", ""), Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), Node:GetAttributeInt("width", 50.0), Node:GetAttributeInt("height", 50.0), self.CharacterController:GetYaw(), Node:GetAttributeString("get_position_script", "no_script"), Node:GetAttributeString("orientation", "no_script"), self.Name)
@@ -66,6 +67,7 @@ function CEnemyLUA:UpdateCamera()
 	self.Camera:SetPosition(lPosition)
 	self.Camera:SetDirection(self:GetDirectionEnemy())
 	self.Camera:MakeTransform()
+	self.Camera:UpdateFrustum()
 end
 function CEnemyLUA:SetMeshTransform()
 	local l_MeshPosition = self.CharacterController:GetPosition()
