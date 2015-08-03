@@ -10,7 +10,7 @@ CCamera::CCamera()
   , m_view_d( 2.0f )
   , m_FovInRadians( Math::Utils::Deg2Rad( 60.0f ) )
   , m_ZNear( 0.1f )
-  , m_ZFar( 100.0f )
+  , m_ZFar( 65.0f )
   , m_Enable( true )
 {
   uint32 w, h;
@@ -28,7 +28,7 @@ void CCamera::Update( )
 
 Math::Vect3f CCamera::GetDirection( void ) const
 {
-  return Math::Vect3f();
+  return CObject3D::GetDirection();
 }
 
 Math::Vect3f CCamera::GetLookAt( void ) const
