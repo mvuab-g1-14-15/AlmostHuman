@@ -91,6 +91,9 @@ function GetPlayerDirection(pos)
 end
 
 function PlayerVisibility(enemy)
+	--lDirection = enemy:GetDirectionEnemy()
+	--lDirection.y = lDirection.y - enemy:GetHeight()/2.0
+	--return physic_manager:PlayerInSight(20, 0.7853, enemy:GetPosition(), lDirection)
 	return PlayerInSight(enemy:GetCamera())
 end
 
