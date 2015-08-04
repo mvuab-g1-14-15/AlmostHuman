@@ -17,7 +17,16 @@ function CStealthAttack:Update()
 		self.Doing = false
 		return
 	end
-			
+
+    if enemy:GetLife() <= 0 then
+        if self.Show > 0 then
+            self.Show = 0
+            gui_manager:ShowStaticText("StealthAttack")
+        end
+        
+        return
+    end
+	
 	local dist = PlayerDistance(enemy)
 	if dist < self.MaxDistance then
 		local vPlayerEnemy = enemy:GetPosition() - GetPlayerPosition()
