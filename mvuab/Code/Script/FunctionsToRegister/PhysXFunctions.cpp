@@ -279,6 +279,7 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD( CPhysicController, SetHeight )
   LUA_DECLARE_METHOD( CPhysicController, GetHeight )
   LUA_DECLARE_METHOD( CPhysicController, UpdateCharacterExtents )
+  LUA_DECLARE_METHOD( CPhysicController, SetbCrouch )
   LUA_DECLARE_METHOD( CPhysicController, IsJumping )
   LUA_END_DECLARATION
 

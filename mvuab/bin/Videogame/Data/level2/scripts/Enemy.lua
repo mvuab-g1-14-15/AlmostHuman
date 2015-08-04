@@ -11,7 +11,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	self.Radius = 0.4
 	self.Height = 2.0
-	
+	self.PitchCameraMove = 0.0
 	physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
 	self.CharacterController = physic_manager:GetController(self.Name)
 	
@@ -65,7 +65,15 @@ function CEnemyLUA:UpdateCamera()
 	lPosition.y = lPosition.y + self:GetHeight()
 	lPosition = lPosition + self:GetDirection()
 	self.Camera:SetPosition(lPosition)
-	self.Camera:SetDirection(self:GetDirectionEnemy())
+	self.Camera:SetYaw(self.CharacterController:GetYaw())
+	if not (self:GetActualState() == "atacar") then
+		if self.PitchCameraMove >= 360.0 then
+			self.PitchCameraMove = 0
+		end
+		self.PitchCameraMove = self.PitchCameraMove + timer:GetElapsedTime()
+	end
+	self.Camera:SetPitch(self.CharacterController:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
+	--self.Camera:SetDirection(self:GetDirectionEnemy())
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
 end
