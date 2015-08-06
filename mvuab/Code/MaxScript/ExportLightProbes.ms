@@ -1,13 +1,52 @@
+struct LightProbeRoom
+(
+	mLightProbe = #(),
+	
+	fn Calculate Obj =
+	(
+		mLightProbe = ExportLightProbes Obj
+	)
+	
+	fn WriteToFile file =
+	(
+		for i = 1 to mLightProbe.count do
+		(
+			local lLightProbe = mLightProbe[i]
+			lLightProbe.WriteToFile file
+		)
+	)
+)
+
 struct LightProbe
 (
 	mPos = point3 0 0 0,
-	mVertex = #()
+	mVertex = #(),
+	
+	fn WriteToFile file =
+	(
+		--<light_probe>
+		--	<center pos=0.0 0.0 0.0/>
+		--	<vertexs>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+		--	</vertexs>
+		--</light_probe>
+	)
 )
 
 struct LPVertex
 (
 	mPos = point3 0 0 0,
-	mUV = point2 0 0
+	mUV = point2 0 0,
+	
+	fn WriteToFile file =
+	(
+		--<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
+	)
 )
 
 fn GetUV Obj i =
@@ -65,7 +104,5 @@ fn ExportLightProbes Obj =
 		lCenterVert = lCenterVert + lVert / 6.0
 		lCounter = lCounter + 1
 	)
-	format "%" lLightProbes
+	return lLightProbes
 )
-
-ExportLightProbes $
