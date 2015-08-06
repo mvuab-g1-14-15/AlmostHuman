@@ -18,9 +18,9 @@ function CStealthAttack:Update()
 		return
 	end
 
-    if enemy:GetLife() <= 0 then
-        if self.Show > 0 then
-            self.Show = 0
+    if enemy:GetLife() <= 0.0 then
+        if self.Show > 0.0 then
+            self.Show = 0.0
             gui_manager:ShowStaticText("StealthAttack")
         end
         
@@ -38,9 +38,7 @@ function CStealthAttack:Update()
 			local angle = GetAngleEnemyPlayer(enemy)
 			engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
-				engine:Trace("Enemy life before: " .. enemy:GetLife())
-				enemy:AddDamage(enemy:GetLife())
-				engine:Trace("Enemy life after: " .. enemy:GetLife())
+				enemy:AddDamage(enemy:GetLife())				
 			end
 		end
 	else
