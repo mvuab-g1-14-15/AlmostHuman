@@ -2,44 +2,50 @@ tiempoDeEspera = 0
 
 function init_enemy()
 	enemy = g_EnemyManager:GetActualEnemy()
+	timerPerseguir = "Perseguir Player"
 end
 
 function check_next_state()
+	
 	enemy = g_EnemyManager:GetActualEnemy()
 	local l_CurrentState = enemy:GetActualState()
-	local l_NextState = l_CurrentState
-	--engine:Trace("Current state: " .. l_CurrentState)
-	
-	local l_DistanceToPlayer = PlayerDistance(enemy)
+	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
-	
-	--engine:Trace("Distance to player: " .. l_DistanceToPlayer)
-	--[[if l_PlayerInSight then
-		engine:Trace("check_next_state: Is viewing player: true")
-	else
-		engine:Trace("check_next_state: Is viewing player: false")
-	end]]
-	if l_CurrentState == "inicial" then
-		l_NextState = "andando"
-	end
-	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" then
-		if l_DistanceToPlayer <= 8 and l_PlayerInSight then
-			l_NextState = "perseguir"
+	local l_DistanceToPlayer = PlayerDistance(enemy)
+	if l_CurrentState ~= "perseguir" then	
+		if l_CurrentState == "inicial" then
+			l_NextState = "andando"
 		end
-	end
-	if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
-		if l_DistanceToPlayer < 8 and l_PlayerInSight then
+		--if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" then
+		--	if l_DistanceToPlayer <= 8 and l_PlayerInSight then
+		--		l_NextState = "perseguir"
+		--	end
+		--end
+		if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
+			if l_DistanceToPlayer < 8 and l_PlayerInSight then
+				l_NextState = "atacar"
+				if countdowntimer_manager:IsActive(timerPerseguir) then
+					countdowntimer_manager:Reset(timerPerseguir, false)
+				end
+			end
+		end	
+	elseif countdowntimer_manager:ExistTimer(timerPerseguir) and countdowntimer_manager:IsActive(timerPerseguir) then
+			if countdowntimer_manager:isTimerFinish(timerPerseguir) then
+				l_NextState = "andando"
+				countdowntimer_manager:Reset(timerPerseguir, false)
+			end
+	elseif l_DistanceToPlayer < 8 and l_PlayerInSight then
 			l_NextState = "atacar"
-		end
+			if countdowntimer_manager:IsActive(timerPerseguir) then
+				countdowntimer_manager:Reset(timerPerseguir, false)
+			end
 	end
-	--if l_DistanceToPlayer > 5 or not l_PlayerInSight then
-	--	l_NextState = "andando"
-	--end
 	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
-	end
+	end	
+	
 end
 
 function andar()
@@ -48,10 +54,10 @@ function andar()
 	
 	if enemy:IsInWaypoint() then
 		enemy:NextWaypoint()
-		if (enemy:GetActualState() == "andando" ) then
-			enemy:ChangeState("esperar")
-			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
-		end
+		--if (enemy:GetActualState() == "andando" ) then
+		--	enemy:ChangeState("esperar")
+		--	enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
+		--end
 	else
 		enemy:MoveToWaypoint(Vect3f(0.0))
 	end
@@ -78,19 +84,10 @@ end
 
 function atacar()
 	enemy = g_EnemyManager:GetActualEnemy()
-	--engine:Trace("Ejecutando atacar")
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
-	--[[if l_PlayerInSight then
-		engine:Trace("atacar: Is viewing player: true")
-	else
-		engine:Trace("atacar: Is viewing player: false")
-	end]]
-	
-	--engine:Trace("Tiempo disparando" .. enemy:GetTimeToShoot() )
 	if l_PlayerInSight then
-		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())
-		--engine:Trace("Tiempo disparando" .. enemy:GetCountTimeShoot() )
+		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())		
 		if enemy:GetCountTimeShoot() >= enemy:GetTimeToShoot() then
 			--engine:Trace("Enemy shooting")
 			local lDir = GetPlayerDirection(enemy:GetPosition())
@@ -100,17 +97,19 @@ function atacar()
 	else
 		enemy:SetCountTimeShoot(0.0)
 		if enemy:GetActualState() == "atacar" then
-			enemy:ChangeState("andando")
-			enemy:GetAnimationModel():ChangeAnimation("andando", 0.2, 1.0)
+			enemy:ChangeState("perseguir")
+			enemy:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
+			if not countdowntimer_manager:ExistTimer(timerPerseguir) then
+				countdowntimer_manager:AddTimer(timerPerseguir, 10.0, false)
+			else
+				countdowntimer_manager:SetActive(timerPerseguir, true)
+			end
 		end
 	end
 end
 
 function perseguir()
 	enemy = g_EnemyManager:GetActualEnemy()
-	
 	local l_TargetPos = GetPlayerPosition()
-	
-	
-	enemy:MoveToPlayer(l_TargetPos)
+	enemy:MoveToPlayer(l_TargetPos)	
 end

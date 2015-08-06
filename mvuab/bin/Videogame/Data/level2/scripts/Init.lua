@@ -54,9 +54,6 @@ function update_gameplay()
 		
 	end
 	
-	
-	--g_Enemy:Update()
-	
 
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then

@@ -162,7 +162,7 @@ end
 function CEnemyManagerLUA:GetCloseEnemy(aPos)
 	lDist = 999999.99
 	lActualDist = 0.0
-	lEnemy = 0
+	lEnemy = nil
 	lActualEnemy = 0
 
 	for i in pairs (self.Enemy) do

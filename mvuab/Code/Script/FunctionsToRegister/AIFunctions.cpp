@@ -89,8 +89,19 @@ bool PlayerInSight( CCamera& aCamera )
   if ( aCamera.GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
   {
     SCollisionInfo hit;
-    Math::Vect3f lDirection = aCamera.GetDirection();
-    //lDirection.y = lDirection.y - ( lController->GetHeight() / 2.0f );
+
+    float lHeight;
+
+    if ( lController->GetbCrouch() )
+      lHeight = lController->GetHeight() * 5;
+    else
+      lHeight = lController->GetHeight();
+
+    Math::Vect3f lDirection = lPosition - aCamera.GetPosition();
+    lDirection.y = 0;
+    lDirection.y = lDirection.y - lHeight;
+    lDirection.Normalize();
+
     CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
                                      aCamera.GetZFar() );
     CPhysicController* lRayController = 0;

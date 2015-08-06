@@ -349,6 +349,7 @@ function CPlayerController:MakeCrouch()
 	end
 	if l_Can then
 		self.Crouch = not self.Crouch
+		self.CharacterController:SetbCrouch(self.Crouch)
 		self.ActualTimeCrouch = 0.0
 	end
 	

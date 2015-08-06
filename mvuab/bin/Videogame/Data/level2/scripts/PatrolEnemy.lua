@@ -7,7 +7,7 @@ function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	self.Waypoints = waypoints
 	self.ActualWaypoint = 1
 	self.ActualPathPoint = 1
-	self.TurnSpeed = 0.6
+	self.TurnSpeed = 1
 	self.Delta = 0.2
 	self.PathCalculated = false
 	self.Path = vecVect3f()
@@ -55,11 +55,11 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
 	YawDif = DirYaw - Yaw
     PrevYaw = Yaw
 		
-	local YawDifCom = DirYaw - 2*g_Pi -Yaw
+	local YawDifCom = DirYaw - 2*g_Pi - Yaw
 	if math.abs( YawDifCom ) < math.abs( YawDif ) then
 		YawDif = YawDifCom
 	else
-		local YawDifCom = DirYaw + 2*g_Pi -Yaw
+		local YawDifCom = DirYaw + 2*g_Pi - Yaw
 		if math.abs( YawDifCom ) < math.abs( YawDif ) then
 			YawDif = YawDifCom
 		end
