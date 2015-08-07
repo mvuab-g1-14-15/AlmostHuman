@@ -31,6 +31,12 @@ struct XMLNode(
 		format "% % %" CoordAtt.x CoordAtt.z CoordAtt.y to:pos
 		DotNetNode.SetAttribute attribute pos as string
 	),
+	fn AddAttribute2DCoordinate attribute CoordAtt = 
+	(
+		pos = stringStream ""
+		format "% %" CoordAtt.x CoordAtt.y to:pos
+		DotNetNode.SetAttribute attribute pos as string
+	),
 	fn AddAttributeRGB attribute RGBAtt = 
 	(
 		Colors = stringStream ""

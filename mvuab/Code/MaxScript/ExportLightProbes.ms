@@ -1,3 +1,5 @@
+fileIn "XMLStruct.ms"
+
 struct LightProbeRoom
 (
 	mLightProbe = #(),
@@ -5,24 +7,9 @@ struct LightProbeRoom
 	fn Calculate Obj =
 	(
 		mLightProbe = ExportLightProbes Obj
-	)
+	),
 	
-	fn WriteToFile file =
-	(
-		for i = 1 to mLightProbe.count do
-		(
-			local lLightProbe = mLightProbe[i]
-			lLightProbe.WriteToFile file
-		)
-	)
-)
-
-struct LightProbe
-(
-	mPos = point3 0 0 0,
-	mVertex = #(),
-	
-	fn WriteToFile file =
+	fn WriteToFile filenameXML =
 	(
 		--<light_probe>
 		--	<center pos=0.0 0.0 0.0/>
@@ -35,18 +22,49 @@ struct LightProbe
 		--		<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
 		--	</vertexs>
 		--</light_probe>
+		
+		xDoc = XMLDocument filenameXML
+		
+		local lRootNode = xDoc.getNewNode "light_probe_room"
+		xDoc.AppendNode lRootNode
+		
+		for i = 1 to mLightProbe.count do
+		(
+			local lLightProbe = mLightProbe[i]
+			
+			local lNewLightProbeNode = xDoc.getNewNode "light_probe"	
+			lRootNode.AppendNode lNewLightProbeNode
+			
+			local lCenterNode = xDoc.getNewNode "center"
+			lCenterNode.AddAttributeCoordinate "pos" lLightProbe.mPos
+			lNewLightProbeNode.AppendNode lCenterNode
+			
+			local lVertexsNode = xDoc.getNewNode "vertexs"
+			lNewLightProbeNode.AppendNode lVertexsNode
+
+			for j = 1 to lLightProbe.mVertex.count do
+			(
+				local lNewVertexNode = xDoc.getNewNode "vertex"
+				lNewVertexNode.AddAttributeCoordinate "pos" lLightProbe.mVertex[j].mPos
+				lNewVertexNode.AddAttribute2DCoordinate "uv" lLightProbe.mVertex[j].mUV
+				lVertexsNode.AppendNode lNewVertexNode
+			)
+		)
+		
+		xDoc.PrettySaveXML()
 	)
+)
+
+struct LightProbe
+(
+	mPos = point3 0 0 0,
+	mVertex = #()
 )
 
 struct LPVertex
 (
 	mPos = point3 0 0 0,
-	mUV = point2 0 0,
-	
-	fn WriteToFile file =
-	(
-		--<vertex pos=0.0 0.0 0.0 uv=0.0 0.0/>
-	)
+	mUV = point2 0 0
 )
 
 fn GetUV Obj i =
@@ -104,5 +122,11 @@ fn ExportLightProbes Obj =
 		lCenterVert = lCenterVert + lVert / 6.0
 		lCounter = lCounter + 1
 	)
-	return lLightProbes
+	
+	local lLightProbeRoom = LightProbeRoom()
+	lLightProbeRoom.mLightProbe = lLightProbes
+	return lLightProbeRoom
 )
+
+lTest = ExportLightProbes $
+lTest.WriteToFile "E:/Master/GameEngineUAB/mvuab/test.xml"
