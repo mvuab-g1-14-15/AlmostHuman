@@ -3,6 +3,8 @@
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "Lights\LightProbe.h"
 
+#include <algorithm>
+
 CRoom::CRoom()
 	: m_Name( "" )
 	, m_BasePath( "" )
@@ -31,7 +33,40 @@ void CRoom::LoadLightProbe()
                 CXMLTreeNode& l_CurrentNode = l_Node( i );
 
 				CLightProbe* lLightProbe = new CLightProbe( l_CurrentNode );
+				if (lLightProbe)
+					mLightProbes.push_back( lLightProbe );
             }
 		}
 	}
+}
+
+struct SPointDist
+{
+	CLightProbe* lightprobe;
+	float distance;
+};
+
+bool SPointDistComparison( SPointDist a, SPointDist b)
+{
+	return a.distance < b.distance;
+};
+
+std::vector<CLightProbe*> CRoom::GetClosedLightProbes( Math::Vect3f aPos )
+{
+	std::vector<CLightProbe*> lLightProbes;
+	std::vector<SPointDist> lDistances;
+	for( unsigned int i = 0; i < mLightProbes.size(); ++i)
+	{
+		Math::Vect3f lPos = mLightProbes[i]->GetPosition();
+		float lDist = lPos.SqDistance( aPos );
+		SPointDist s = { mLightProbes[i], lDist };
+		lDistances.push_back( s );
+	}
+
+	std::sort( lDistances.begin(), lDistances.end(), SPointDistComparison);
+
+	for (int i = 0; i < 4; ++i)
+		lLightProbes.push_back(lDistances[i].lightprobe);
+
+	return lLightProbes;
 }

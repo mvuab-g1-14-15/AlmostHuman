@@ -4,6 +4,9 @@
 
 #include "Utils/Name.h"
 #include "Utils\MapManager.h"
+
+#include "Math/Vector3.h"
+
 #include <string>
 
 class CRenderableObjectsLayersManager;
@@ -23,6 +26,7 @@ class CRoom
         GET_SET(bool, Active);
 
 		void LoadLightProbe();
+		std::vector<CLightProbe*> GetClosedLightProbes(Math::Vect3f);
 
         CRenderableObjectsLayersManager* GetLayers()
         {

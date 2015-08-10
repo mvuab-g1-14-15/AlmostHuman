@@ -14,7 +14,7 @@ CLightProbe::CLightProbe( const CXMLTreeNode& aXMLNode )
 		{
 			for ( int j = 0, l_NumVertexs = l_CurrentNode.GetNumChildren(); j < l_NumVertexs; ++j )
 			{
-				CXMLTreeNode l_VertexNode = l_CurrentNode( i );
+				CXMLTreeNode l_VertexNode = l_CurrentNode( j );
 				std::string lVertexTag( l_VertexNode.GetName() );
 
 				if (lVertexTag == "vertex")
@@ -25,9 +25,7 @@ CLightProbe::CLightProbe( const CXMLTreeNode& aXMLNode )
 					Math::Vect3f lDir( lPos - mPosition );
 					lDir.Normalize();
 
-					SLightProbeVertex v;
-					v.position = lPos;
-					v.uv = lUV;
+					CLightProbeVertex* v = new CLightProbeVertex(lPos, lUV);
 
 					std::string lKey( "" );
 					if (lDir.x == 1.0f)

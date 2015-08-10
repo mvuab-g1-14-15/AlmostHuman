@@ -8,10 +8,23 @@
 
 class CXMLTreeNode;
 
-struct SLightProbeVertex
+class CLightProbeVertex
 {
-	Math::Vect3f position;
-	Math::Vect2f uv;
+public:
+	CLightProbeVertex( Math::Vect3f a_position, Math::Vect2f a_uv)
+		: mPosition( a_position )
+		, mUV( a_uv )
+	{
+	}
+	~CLightProbeVertex()
+	{}
+
+	Math::Vect3f GetPosition() { return mPosition; }
+	Math::Vect2f GetUV() { return mUV; }
+
+private:
+	Math::Vect3f mPosition;
+	Math::Vect2f mUV;
 };
 
 class CLightProbe
@@ -20,9 +33,12 @@ public:
 	CLightProbe( const CXMLTreeNode& );
 	~CLightProbe();
 
+	Math::Vect3f GetPosition() { return mPosition; }
+
+private:
 	Math::Vect3f mPosition;
 
-	std::map<std::string, SLightProbeVertex> mVertexs;
+	std::map<std::string, CLightProbeVertex*> mVertexs;
 };
 
 #endif // LIGHT_PROBE_H
