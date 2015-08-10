@@ -8,6 +8,7 @@
 
 class CRenderableObjectsLayersManager;
 class CLightManager;
+class CLightProbe;
 
 class CRoom
 {
@@ -20,6 +21,8 @@ class CRoom
         GET_SET(std::string, StaticMeshesPath);
         GET_SET(std::string, BasePath);
         GET_SET(bool, Active);
+
+		void LoadLightProbe();
 
         CRenderableObjectsLayersManager* GetLayers()
         {
@@ -49,6 +52,8 @@ class CRoom
         CRenderableObjectsLayersManager* m_pLayers;
         CLightManager* m_pLights;
         bool m_Active;
+
+		std::vector<CLightProbe*> mLightProbes;
 };
 
 #endif

@@ -78,6 +78,8 @@ bool CScene::Load( const std::string& l_FilePath )
                 lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
                 lRoom->SetBasePath( l_Path + "/" );
 
+				lRoom->LoadLightProbe();
+
                 if ( !AddResource( l_Level, lRoom ) )
                     CHECKED_DELETE( lRoom );
             }
