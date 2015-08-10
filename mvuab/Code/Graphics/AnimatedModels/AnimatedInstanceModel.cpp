@@ -129,10 +129,57 @@ void CAnimatedInstanceModel::RenderModelByHardware()
                               l_pCalHardwareModel->getBoneCount() * 3 * 4 );
 
 	// Calculate the ambient light with the light probe
-	// std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
+	std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
+	
+	float l_LPMatrix[4 * 6 * (3 + 2) + 4]; // 4 light probes * 6 directions * 6 ( 3 components in color + 2 in uv) + 4 factors
+
+	unsigned int lCounter = 0;
+	CLightProbeVertex *lVect;
+	for (unsigned int i = 0; i < lLightProbes.size(); ++i)
+	{
+		l_LPMatrix[lCounter++] = 0.25f; //factor. tiene que ser dependiente de la distancia por ahora se reparte a todos iguales
+		lVect = lLightProbes[i]->GetVertex("x");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		lVect = lLightProbes[i]->GetVertex("y");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		lVect = lLightProbes[i]->GetVertex("z");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		lVect = lLightProbes[i]->GetVertex("-x");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		lVect = lLightProbes[i]->GetVertex("-y");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		lVect = lLightProbes[i]->GetVertex("-z");
+		l_LPMatrix[lCounter++] = lVect->GetPosition().x;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().y;
+		l_LPMatrix[lCounter++] = lVect->GetPosition().z;
+		l_LPMatrix[lCounter++] = lVect->GetUV().x;
+		l_LPMatrix[lCounter++] = lVect->GetUV().y;
+	}
 
     if ( !m_Textures.empty() )
       m_Textures[0]->Activate( 0 );
+
+	// Activate light probe texture
 
     //m_NormalTextureList[0]->Activate(1);
     m_AnimatedCoreModel->GetRenderableVertexs()->Render

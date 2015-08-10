@@ -34,6 +34,7 @@ public:
 	~CLightProbe();
 
 	Math::Vect3f GetPosition() { return mPosition; }
+	CLightProbeVertex* GetVertex( std::string aKey ) { return mVertexs[aKey]; }
 
 private:
 	Math::Vect3f mPosition;
