@@ -6,38 +6,149 @@ uniform int DELTA_FRAME_TIME;
 uniform sampler2D TextureUnit0;
 uniform sampler2D TextureUnit1;
 
-float rand2(vec2 co)
+vec4 mod289(vec4 x)
 {
-    return fract(sin(dot(co.xy ,vec2(12.9898, 78.233))) * 43758.5453);
+    return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
-
-float rand3(vec3 co)
+ 
+vec4 permute(vec4 x)
 {
-  	return fract(sin(dot(co ,vec3(12.9898, 78.233, 37.241))) * 43758.5453);
+    return mod289(((x*34.0)+1.0)*x);
 }
-
-float hash(float n)
+ 
+vec4 taylorInvSqrt(vec4 r)
 {
-	return fract(sin(n) * 1e4);
+    return 1.79284291400159 - 0.85373472095314 * r;
 }
-
-float hash(vec2 p)
-{
-	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+ 
+vec2 fade(vec2 t) {
+    return t*t*t*(t*(t*6.0-15.0)+10.0);
 }
-
-float noise(vec2 x) 
+ 
+// Classic Perlin noise
+float cnoise(vec2 P)
 {
-    vec2 i = floor(x);
-    vec2 f = fract(x);
-
-	float a = hash(i);
-    float b = hash(i + vec2(1.0, 0.0));
-    float c = hash(i + vec2(0.0, 1.0));
-    float d = hash(i + vec2(1.0, 1.0));
-
-    vec2 u = f * f * (3.0 - 2.0 * f);
-	return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+    vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+    Pi = mod289(Pi); // To avoid truncation effects in permutation
+    vec4 ix = Pi.xzxz;
+    vec4 iy = Pi.yyww;
+    vec4 fx = Pf.xzxz;
+    vec4 fy = Pf.yyww;
+     
+    vec4 i = permute(permute(ix) + iy);
+     
+    vec4 gx = fract(i * (1.0 / 41.0)) * 2.0 - 1.0 ;
+    vec4 gy = abs(gx) - 0.5 ;
+    vec4 tx = floor(gx + 0.5);
+    gx = gx - tx;
+     
+    vec2 g00 = vec2(gx.x,gy.x);
+    vec2 g10 = vec2(gx.y,gy.y);
+    vec2 g01 = vec2(gx.z,gy.z);
+    vec2 g11 = vec2(gx.w,gy.w);
+     
+    vec4 norm = taylorInvSqrt(vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
+    g00 *= norm.x;  
+    g01 *= norm.y;  
+    g10 *= norm.z;  
+    g11 *= norm.w;  
+     
+    float n00 = dot(g00, vec2(fx.x, fy.x));
+    float n10 = dot(g10, vec2(fx.y, fy.y));
+    float n01 = dot(g01, vec2(fx.z, fy.z));
+    float n11 = dot(g11, vec2(fx.w, fy.w));
+     
+    vec2 fade_xy = fade(Pf.xy);
+    vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+    float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+    return 2.3 * n_xy;
+}
+ 
+// Classic Perlin noise, periodic variant
+float pnoise(vec2 P, vec2 rep)
+{
+    vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+    vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+    Pi = mod(Pi, rep.xyxy); // To create noise with explicit period
+    Pi = mod289(Pi);        // To avoid truncation effects in permutation
+    vec4 ix = Pi.xzxz;
+    vec4 iy = Pi.yyww;
+    vec4 fx = Pf.xzxz;
+    vec4 fy = Pf.yyww;
+     
+    vec4 i = permute(permute(ix) + iy);
+     
+    vec4 gx = fract(i * (1.0 / 41.0)) * 2.0 - 1.0 ;
+    vec4 gy = abs(gx) - 0.5 ;
+    vec4 tx = floor(gx + 0.5);
+    gx = gx - tx;
+     
+    vec2 g00 = vec2(gx.x,gy.x);
+    vec2 g10 = vec2(gx.y,gy.y);
+    vec2 g01 = vec2(gx.z,gy.z);
+    vec2 g11 = vec2(gx.w,gy.w);
+     
+    vec4 norm = taylorInvSqrt(vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
+    g00 *= norm.x;  
+    g01 *= norm.y;  
+    g10 *= norm.z;  
+    g11 *= norm.w;  
+     
+    float n00 = dot(g00, vec2(fx.x, fy.x));
+    float n10 = dot(g10, vec2(fx.y, fy.y));
+    float n01 = dot(g01, vec2(fx.z, fy.z));
+    float n11 = dot(g11, vec2(fx.w, fy.w));
+     
+    vec2 fade_xy = fade(Pf.xy);
+    vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+    float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+    return 2.3 * n_xy;
+}
+ 
+float fbm(vec2 P, int octaves, float lacunarity, float gain)
+{
+    float sum = 0.0;
+    float amp = 1.0;
+    vec2 pp = P;
+     
+    int i;
+     
+    for(i = 0; i < octaves; i+=1)
+    {
+        amp *= gain; 
+        sum += amp * cnoise(pp);
+        pp *= lacunarity;
+    }
+    return sum;
+ 
+}
+ 
+ 
+float pattern(in vec2 p)
+{
+    float l = 2.5;
+    float g = 0.4;
+    int oc = 10;
+     
+    vec2 q = vec2( fbm( p + vec2(0.0,0.0),oc,l,g),fbm( p + vec2(5.2,1.3),oc,l,g));
+    vec2 r = vec2( fbm( p + 4.0*q + vec2(1.7,9.2),oc,l,g ), fbm( p + 4.0*q + vec2(8.3,2.8) ,oc,l,g));
+    return fbm( p + 4.0*r ,oc,l,g);    
+}
+ 
+float pattern2( in vec2 p, out vec2 q, out vec2 r , in float time)
+{
+    float l = 2.8;
+    float g = 0.2;
+    int oc = 20; 
+     
+    q.x = fbm(p + vec2(time, time), oc, l, g);
+    q.y = fbm(p + vec2(5.2 * time, 1.3 * time), oc, l, g);
+     
+    r.x = fbm(p + 4.0 * q + vec2(1.7, 9.2), oc, l, g);
+    r.y = fbm(p + 4.0 * q + vec2(8.3, 2.8), oc, l, g);
+     
+    return fbm(p + 4.0 * r, oc, l, g);
 }
 
 bool isEdge(sampler2D l_Texture, vec2 l_TexCoord)
@@ -55,15 +166,18 @@ bool isEdge(sampler2D l_Texture, vec2 l_TexCoord)
 
 void main(void)
 {
-	vec2 l_Movement = vec2(3 + TIME_FROM_INIT * 0.001, 2 + TIME_FROM_INIT * 0.001);
-	float l_RandColor = noise(gl_FragCoord.xy + l_Movement * DELTA_FRAME_TIME * 0.001);
+	vec2 q = gl_FragCoord.xy / vec2(1920.0,1080.0);
+    vec2 p = -1.0 + 2.0 * q, qq = vec2(0.0), r = vec2(0.0);
+    float l_RandColor = pattern2(p, qq, r, TIME_FROM_INIT * 0.00001);
+    
 	
-	vec4 l_Color = vec4(l_RandColor);
+	vec4 l_Color = vec4(l_RandColor) * 8.5;
 	vec4 l_Cone = texture2D(TextureUnit1, gl_TexCoord[1].xy);
 	vec4 l_Texture = texture2D(TextureUnit0, gl_TexCoord[0].xy);
 	
 	if(l_Cone.a > 0.5)
 	{
+		l_Texture.a = 1.0; l_Color.a = 1.0;
 		l_Texture =  mix(l_Texture, l_Color * 2 * ( gl_TexCoord[1].y + 0.2), 0.5);
 		if(isEdge(TextureUnit1,  gl_TexCoord[1].xy)) l_Texture = vec4(1.0, 1.0, 1.0, 1.0);
 	}
