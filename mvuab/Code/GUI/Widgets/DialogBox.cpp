@@ -6,27 +6,37 @@
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 
-//---Constructor
-CDialogBox::CDialogBox(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                           const Math::Vect2f position_percent, float buttonWidthPercent, float buttonHeightPercent,
-                           std::string lit, uint32 textHeightOffset, uint32 textWidthOffset, bool isVisible, bool isActive)
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, DIALOG_BOX, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
-
+CDialogBox::CDialogBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
     , m_bDialogClicked(false)
-    , m_ButtonClose(windowsHeight, windowsWidth, buttonHeightPercent, buttonWidthPercent,
-                    position_percent + Math::Vect2f(witdh_percent - buttonWidthPercent, 0.f), "", 0, 0, isVisible, isActive )
-    , m_ButtonMove(windowsHeight, windowsWidth, buttonHeightPercent, witdh_percent - buttonWidthPercent, position_percent,
-                   "", 0, 0, isVisible, isActive )
-    , m_pBackGroundTexture(NULL)
+    , m_ButtonClose( aNode, screenResolution )
+    , m_ButtonMove( aNode, screenResolution )
+    , m_pBackGroundTexture(aNode.GetAttribute<CTexture>( "quad" ))
     , m_BackGroundColor(Math::colWHITE)
     , m_bStart_to_Move(false)
     , m_PreviousPosMouse(Math::v2iZERO)
-    , m_fButtonHeight( buttonHeightPercent )
-    , m_fButtonWidth( buttonWidthPercent )
+    , m_fButtonHeight( 0.0f )
+    , m_fButtonWidth( 0.0f )
 {
     m_ButtonClose.SetParent(this);
     m_ButtonClose.SetName("buttonClose");
+    m_ButtonClose.SetTextures
+    (
+        aNode.GetAttribute<CTexture>( "buttonClose_normal" ),
+        aNode.GetAttribute<CTexture>( "buttonClose_over" ),
+        aNode.GetAttribute<CTexture>( "buttonClose_clicked" ),
+        aNode.GetAttribute<CTexture>( "buttonClose_deactivated" )
+    );
+
+    m_ButtonMove.SetParent(this);
+    m_ButtonMove.SetName("buttonClose");
+    m_ButtonMove.SetTextures
+    (
+        aNode.GetAttribute<CTexture>( "buttonMove_normal" ),
+        aNode.GetAttribute<CTexture>( "buttonMove_over" ),
+        aNode.GetAttribute<CTexture>( "buttonMove_clicked" ),
+        aNode.GetAttribute<CTexture>( "buttonMove_deactivated" )
+    );
 }
 
 //---------------Interfaz de GuiElement----------------------

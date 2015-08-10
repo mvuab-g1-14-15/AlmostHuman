@@ -26,9 +26,7 @@ class CCheckButton: public CGuiElement
         typedef enum ECheckButtonState { CBS_ON, CBS_OFF };
 
     public:
-        CCheckButton(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                         const Math::Vect2f position_percent, bool isOn = true, std::string lit = "", uint32 textHeightOffset = 0,
-                         uint32 textWidthOffset = 0, bool isVisible = true, bool isActive = true);
+        CCheckButton( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CCheckButton()
         {

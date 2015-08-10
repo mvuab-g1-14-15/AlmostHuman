@@ -20,11 +20,8 @@ class CTexture;
 
 class CProgressBar: public CGuiElement
 {
-
     public:
-        CProgressBar(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                         const Math::Vect2f position_percent, std::string lit = "", uint32 textHeightOffset = 0, uint32 textWidthOffset = 0,
-                         bool isVisible = true, bool isActive = true);
+        CProgressBar( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CProgressBar()
         {

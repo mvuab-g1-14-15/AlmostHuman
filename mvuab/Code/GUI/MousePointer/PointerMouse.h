@@ -25,8 +25,7 @@ class CPointerMouse: public CGuiElement
         typedef std::map<std::string, CTexture*>    tTexturesMap;
 
     public:
-        CPointerMouse(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                          const Math::Vect2f position_percent, bool isVisible = true, bool isActive = true);
+        CPointerMouse( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CPointerMouse()
         {

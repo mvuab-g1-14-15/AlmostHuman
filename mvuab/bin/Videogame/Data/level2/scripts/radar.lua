@@ -21,9 +21,6 @@ function AddEnemy(aTexture, aPosInMap3d, aWidth, aHeight, aYaw, aPositionScript,
 	  end
       lposInMap = g_HUD:NormalizePlayerPos( aPosInMap3d.x, aPosInMap3d.z )
       PositionScriptComplete 	= ""..aPositionScript.."('"..aName.."')"
-	  engine:Trace("El script es: "..PositionScriptComplete)	
       OrientationScriptComplete = ""..aOrientationScript  .."('" .. aName.."')"
-      engine:Trace("El script es: "..OrientationScriptComplete)
 	  g_HUD:AddEnemy( aName, texture_manager:GetTexture( aTexture ), aPosInMap3d, lposInMap, aWidth, aHeight, aYaw, PositionScriptComplete, OrientationScriptComplete )
-	  engine:Trace("He llegado despues de petar")      
 end

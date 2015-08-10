@@ -12,15 +12,8 @@
 #include "Timer\Timer.h"
 
 //---Constructor
-CConsoleGUI::CConsoleGUI( uint32 windowsHeight, uint32 windowsWidth, float height_precent,
-                          float witdh_percent,
-                          const Math::Vect2f position_percent, Math::CColor textColor, uint32 fontID,
-                          std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
-                          bool isVisible, bool isActive )
-    : CEditableTextBox( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, textColor, fontID,
-                        lit,
-                        textHeightOffset, textWidthOffset, isVisible, isActive )
-
+CConsoleGUI::CConsoleGUI( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CEditableTextBox( aNode, screenResolution )
 {
 }
 
@@ -42,12 +35,12 @@ void CConsoleGUI::Update()
         if ( GetVisible() )
         {
             SetVisible( false );
-			GUIInstance->SetRenderPointer(false);
+            GUIInstance->SetRenderPointer(false);
         }
         else
         {
             SetVisible( true );
-			GUIInstance->SetRenderPointer(true);
+            GUIInstance->SetRenderPointer(true);
         }
     }
 

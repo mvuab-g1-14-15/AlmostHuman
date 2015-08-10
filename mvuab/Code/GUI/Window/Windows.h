@@ -40,7 +40,6 @@ class CMap;
 
 class CWindows
 {
-
     public:
         CWindows(): m_sLuaCode_OnKeyDown( "" ), m_uInputKeyDown( 0 ), m_sLuaCode_OnUpdateWindows( "" ), m_sWindowsName( "" ),
             m_sLuaCode_OnLoadWindows( "" ), m_sLuaCode_OnSaveWindows( "" ) {}
@@ -64,18 +63,6 @@ class CWindows
 
     private:
         void IsKeyDown();
-
-        CButton*  LoadButton( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CCheckButton* LoadCheckButton( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CSlider*  LoadSlider( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CDialogBox*  LoadDialogBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CEditableTextBox* LoadEditableTextBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution,
-                                               CTextureManager* tm );
-        CRadioBox* LoadRadioBox( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CImage*  _LoadImage( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CProgressBar* LoadProgressBar( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CStaticText* LoadStaticText( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution, CTextureManager* tm );
-        CMap* LoadMap( CXMLTreeNode& pNewNode, const Math::Vect2i& screenResolution );
 
     private:
         std::vector<CGuiElement*>  m_GuiElementsVector;

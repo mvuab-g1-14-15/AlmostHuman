@@ -65,11 +65,7 @@ private:
   };
 
 public:
-  CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-        const Math::Vect2f position_percent,
-        const std::string& Marco, const std::string& Map, const Math::Vect2f pos_0_0, const Math::Vect2f pos_1_1, float h_map,
-        float w_map,
-        bool isVisible = true, bool isActive = true );
+  CMap( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
   virtual ~CMap();
 
@@ -81,13 +77,14 @@ public:
 
   void AddItem( const std::string& Name, const std::string& Texture, Math::Vect3f PosInMap3D, uint32 Width,
                 uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript );
-  void AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width, uint32 Height, float Yaw, std::string PositionScript,
+  void AddEnemy( CTexture* aTexture, const std::string& Texture, uint32 Width, uint32 Height, float Yaw, std::string PositionScript,
                  std::string OrientationScript );
-  void AddEnemyLUA( const std::string& aName, CTexture* aTexture, Math::Vect3f aPosInMap3d, Math::Vect2f aPosInMap, uint32 aWidth, uint32 aHeight,
-                    float aYaw, std::string  aPositionScript, std::string  aOrientationScript );
-  void AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript );
+  void AddEnemys( const std::string& aTexture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript );
+  void AddEnemyLUA( const std::string& aName, CTexture* aTexture, Math::Vect3f aPosInMap3d, Math::Vect2f aPosInMap, uint32 aWidth,
+                    uint32 aHeight, float aYaw, std::string  aPositionScript, std::string  aOrientationScript );
   void AddPlayer( const std::string& Name, const std::string& Texture, Math::Vect3f PosPlayer, uint32 Width, uint32 Height, float Yaw,
-                  std::string PositionScript, std::string  OrientationScript );
+                  std::string PositionScript,
+                  std::string  OrientationScript );
 
   void SetPositionPlayer( Math::Vect3f position );
   void SetYawPlayer( float yaw );

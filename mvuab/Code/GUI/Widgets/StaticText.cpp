@@ -5,13 +5,11 @@
 #include "Logger/Logger.h"
 #include "EngineManagers.h"
 
-//---Constructor
-CStaticText::CStaticText( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                          const Math::Vect2f position_percent, std::string lit, bool isVisible, bool isActive)
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, STATIC_TEXT, lit, 0, 0,
-                   isVisible, isActive)
-{}
+CStaticText::CStaticText( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
+{
 
+}
 
 //---------------Interfaz de GuiElement----------------------
 void    CStaticText::Render ()

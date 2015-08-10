@@ -7,23 +7,42 @@
 #include "EngineManagers.h"
 
 //---Constructor
-CRadioBox::CRadioBox(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                         const Math::Vect2f position_percent, uint32 columns, uint32 rows, const std::string& defaultButtonCheck,
-                         std::string lit, uint32 textHeightOffset, uint32 textWidthOffset, bool isVisible, bool isActive)
 
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, RADIO_BOX, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
-    , m_pBackGroundTexture(NULL)
-    , m_sDefaultButtonCheck(defaultButtonCheck)
-    , m_uColumns(columns)
-    , m_uRows(rows)
+CRadioBox::CRadioBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
+    , m_pBackGroundTexture(aNode.GetAttribute<CTexture>( "texture_back"))
+    , m_sDefaultButtonCheck(aNode.GetAttribute<std::string>( "default_checkButton", "" ))
+    , m_uColumns( aNode.GetAttribute<int32>( "columns", 0 ) )
+    , m_uRows( aNode.GetAttribute<int32>( "rows", 0 ) )
     , m_uLastButtonColumn(0)
     , m_uLastButtonRow(0)
     , m_uBlockCheckButton(0)
 {
-    m_CheckButtons.reserve(columns * rows);
-}
+    m_CheckButtons.reserve(m_uColumns * m_uRows);
+    SetCheckButtonActions
+    (
+        aNode.GetAttribute<std::string>( "OnCheckOn", "" ),
+        aNode.GetAttribute<std::string>( "OnCheckOff", "" ),
+        aNode.GetAttribute<std::string>( "OnOverButton", "" )
+    );
 
+    for ( uint32 j = 0, lCount = aNode.GetNumChildren(); j < lCount; ++j )
+    {
+        const CXMLTreeNode& pTexture = aNode( j );
+        const std::string& tagName = pTexture.GetName();
+
+        if( tagName == "texture" )
+        {
+            SetCheckButton
+            (
+                pTexture.GetAttribute<std::string>( "name" , ""),
+                pTexture.GetAttribute<CTexture>("on"),
+                pTexture.GetAttribute<CTexture>("off"),
+                pTexture.GetAttribute<CTexture>("deactivated")
+            );
+        }
+    }
+}
 
 //---------------CGuiElement Interface----------------------
 void CRadioBox::Render ()
@@ -88,44 +107,46 @@ void CRadioBox::OnClickedChild( const std::string& inName )
 //---------------CCheckButton Interface----------------------
 void CRadioBox::SetCheckButton (const std::string& name, CTexture* on, CTexture* off, CTexture* deactivated )
 {
-    float heightButton    = m_fHeightPercent / m_uRows;
-    float widthButton        = m_fWidthPercent / m_uColumns;
+    /*
+     float heightButton    = m_fHeightPercent / m_uRows;
+     float widthButton        = m_fWidthPercent / m_uColumns;
 
-    Math::Vect2f pos;
-    pos.y = m_PositionPercent.y + m_uLastButtonRow * heightButton;
-    pos.x = m_PositionPercent.x + m_uLastButtonColumn * widthButton;
+     Math::Vect2f pos;
+     pos.y = m_PositionPercent.y + m_uLastButtonRow * heightButton;
+     pos.x = m_PositionPercent.x + m_uLastButtonColumn * widthButton;
 
-    CCheckButton newCheckButton = CCheckButton(
-                                      CGuiElement::m_uWindowsHeight,
-                                      CGuiElement::m_uWindowsWidth,
-                                      heightButton,
-                                      widthButton,
-                                      pos,
-                                      false,
-                                      "",
-                                      0,
-                                      0,
-                                      false,
-                                      true);
-    if( name.compare(m_sDefaultButtonCheck) == 0)
-    {
-        newCheckButton.SetOn(true);
-    }
-    newCheckButton.SetTextures(on, off, deactivated);
-    newCheckButton.SetParent(this);
-    newCheckButton.SetName(name);
-    m_CheckButtons.push_back(newCheckButton);
+     CCheckButton newCheckButton = CCheckButton(
+                                       CGuiElement::m_uWindowsHeight,
+                                       CGuiElement::m_uWindowsWidth,
+                                       heightButton,
+                                       widthButton,
+                                       pos,
+                                       false,
+                                       "",
+                                       0,
+                                       0,
+                                       false,
+                                       true);
+     if( name.compare(m_sDefaultButtonCheck) == 0)
+     {
+         newCheckButton.SetOn(true);
+     }
+     newCheckButton.SetTextures(on, off, deactivated);
+     newCheckButton.SetParent(this);
+     newCheckButton.SetName(name);
+     m_CheckButtons.push_back(newCheckButton);
 
-    m_uLastButtonColumn++;
-    if( m_uLastButtonColumn == m_uColumns )
-    {
-        m_uLastButtonColumn = 0;
-        m_uLastButtonRow++;
-        if( m_uLastButtonRow == m_uRows )
-        {
-            m_uLastButtonRow = 0;
-        }
-    }
+     m_uLastButtonColumn++;
+     if( m_uLastButtonColumn == m_uColumns )
+     {
+         m_uLastButtonColumn = 0;
+         m_uLastButtonRow++;
+         if( m_uLastButtonRow == m_uRows )
+         {
+             m_uLastButtonRow = 0;
+         }
+     }
+     */
 }
 
 void CRadioBox::NextBlock ()

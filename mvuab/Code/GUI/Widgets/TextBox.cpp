@@ -4,19 +4,13 @@
 #include "Fonts\FontManager.h"
 #include "EngineManagers.h"
 
-
-//---Constructor
-CTextBox::CTextBox( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float width_percent,
-                    const Math::Vect2f position_percent, float buttonWidthPercent, float buttonHeightPercent,
-                    std::string lit, uint32 textHeightOffset, uint32 textWidthOffset, bool isVisible, bool isActive)
-    : CDialogBox(  windowsHeight, windowsWidth, height_precent, width_percent, position_percent, buttonWidthPercent,
-                   buttonHeightPercent, lit, textHeightOffset, textWidthOffset, isVisible, isActive)
-    , m_sMessage("Default_TextBox")
+CTextBox::CTextBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CDialogBox( aNode, screenResolution )
+    , m_sMessage("")
     , m_uFontID(0)
     , m_TextColor(Math::colBLACK)
-
-{}
-
+{
+}
 
 void CTextBox::Render ()
 {

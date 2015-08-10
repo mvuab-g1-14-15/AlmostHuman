@@ -15,21 +15,29 @@
 #include "Utils/Types.h"
 #include "Math\Vector2.h"
 #include "Utils/Defines.h"
-
+#include "XML\XMLTreeNode.h"
 
 class CGuiElement
 {
     public:
-        typedef enum {    BUTTON = 0, CHECKBUTTON, STATIC_TEXT, SLIDER, IMAGE, EDITABLE_TEXT_BOX,
-                          PROGRESS_BAR, DIALOG_BOX, RADIO_BOX
-                     } TypeGuiElement;
+        typedef enum
+        {
+            GUI = 0,
+            BUTTON = 1,
+            CHECKBUTTON,
+            STATIC_TEXT,
+            SLIDER,
+            IMAGE,
+            EDITABLE_TEXT_BOX,
+            PROGRESS_BAR,
+            DIALOG_BOX,
+            RADIO_BOX
+        } TypeGuiElement;
 
         typedef enum { EDITPOS, EDITSIZE, DISABLE } TypeEditMode;
 
     public:
-        CGuiElement(    uint32 windowsHeight, uint32 windowsWidth, float height_percent, float width_percent,
-                        Math::Vect2f position_percent, TypeGuiElement type, std::string lit = "", uint32 textHeightOffset = 0,
-                        uint32 textWidthOffset = 0, bool isVisible = true, bool isActive = true );
+        CGuiElement( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CGuiElement()
         {
@@ -194,6 +202,7 @@ class CGuiElement
             return m_eType;
         }
 
+        GET_SET(TypeGuiElement, eType)
         GET_SET(uint32, uWindowsWidth)
         GET_SET(uint32, uWindowsHeight)
     protected:

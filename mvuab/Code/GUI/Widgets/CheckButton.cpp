@@ -1,5 +1,3 @@
-
-
 #include "Widgets\CheckButton.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
@@ -8,31 +6,20 @@
 #include "ScriptManager.h"
 #include "EngineManagers.h"
 
-
-//---Constructor
-CCheckButton::CCheckButton(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                               const Math::Vect2f position_percent, bool isOn, std::string lit, uint32 textHeightOffset,
-                               uint32 textWidthOffset, bool isVisible, bool isActive)
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, CHECKBUTTON, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
-    , m_pOnTexture(NULL)
-    , m_pOffTexture(NULL)
-    , m_pDeactivatedTexture(NULL)
-    , m_sLuaCode_OnCheckOn("")
-    , m_sLuaCode_OnCheckOff("")
-    , m_sLuaCode_OnOver("")
+CCheckButton::CCheckButton( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
+    , m_pOnTexture(aNode.GetAttribute<CTexture>( "texture_on" ))
+    , m_pOffTexture(aNode.GetAttribute<CTexture>( "texture_off" ))
+    , m_pDeactivatedTexture(aNode.GetAttribute<CTexture>( "texture_deactivated" ))
+    , m_sLuaCode_OnCheckOn(aNode.GetAttribute<std::string>( "OnCheckOn", "" ))
+    , m_sLuaCode_OnCheckOff(aNode.GetAttribute<std::string>( "OnCheckOff", "" ))
+    , m_sLuaCode_OnOver(aNode.GetAttribute<std::string>( "OnOverButton", "" ))
     , m_OnColor(Math::colGREEN)
     , m_OffColor(Math::colRED)
     , m_DeactivatedColor(Math::colYELLOW)
+    , m_eState( aNode.GetAttribute<bool>( "isOn", "" ) ? CBS_ON : CBS_OFF )
 {
-    if (isOn)
-    {
-        m_eState = CBS_ON;
-    }
-    else
-    {
-        m_eState = CBS_OFF;
-    }
+    m_eType = CHECKBUTTON;
 }
 
 //---------------Interfaz de CGuiElement----------------------

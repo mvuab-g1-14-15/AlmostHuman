@@ -42,7 +42,7 @@ function update_gameplay()
 	
 	g_EnemyManager:Update()
 	
-	g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
+	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()

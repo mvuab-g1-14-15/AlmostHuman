@@ -10,18 +10,12 @@
 
 #include "Timer\Timer.h"
 
-//---Constructor
-CEditableTextBox::CEditableTextBox( uint32 windowsHeight, uint32 windowsWidth, float height_precent,
-                                    float witdh_percent,
-                                    const Math::Vect2f position_percent, Math::CColor textColor, uint32 fontID,
-                                    std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
-                                    bool isVisible, bool isActive )
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, EDITABLE_TEXT_BOX, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive )
-    , m_uFontID( 0 )
-    , m_TextColor( Math::colBLACK )
-    , m_pBackGroundTexture( NULL )
-    , m_sBuffer( "" )
+CEditableTextBox::CEditableTextBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
+    , m_uFontID( aNode.GetAttribute<int32>( "id_font", 0 ) )
+    , m_TextColor( aNode.GetAttribute<Math::Vect3f>( "font_color", Math::Vect3f()) )
+    , m_pBackGroundTexture( aNode.GetAttribute<CTexture>( "texture_quad" ) )
+    , m_sBuffer( aNode.GetAttribute<std::string>( "buffer", "" ) )
     , m_sFocusObject( " " )
     , m_bShift( false )
     , m_fTime( 0.5f )
@@ -31,12 +25,16 @@ CEditableTextBox::CEditableTextBox( uint32 windowsHeight, uint32 windowsWidth, f
     , m_bReturnPress( false )
     , m_fSpeed( 0.05f )
     , m_fSpeedCount( 0.f )
-    , m_fWidthMargin( 0.05f * witdh_percent * windowsWidth * 0.01f )
+    , m_fWidthMargin( /* 0.05f * witdh_percent * windowsWidth * 0.01f */)
     , m_fHeightMargin( 0.2f )
     , m_BackTime1( 0.f )
     , m_BackTime2( 0.f )
     , m_uCursorPos( 0 )
 {
+    /*
+     std::string OnSaveValue = pNewNode.GetAttribute<std::string>( "OnSaveValue", "" );
+     std::string OnLoadValue = pNewNode.GetAttribute<std::string>( "OnLoadValue", "" );
+     */
     for ( int cont = 0; cont < 256; cont++ )
     {
         m_bFlagDiks[cont] = false;

@@ -9,25 +9,29 @@
 #include "ScriptManager.h"
 
 
-CSlider::CSlider(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                     const Math::Vect2f position_percent, float buttonWidthPercent, float buttonHeightPercent,
-                     float value, std::string lit, uint32 textHeightOffset, uint32 textWidthOffset, bool isVisible, bool isActive)
-
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, SLIDER, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
-    , m_Button(    windowsHeight, windowsWidth, buttonHeightPercent, buttonWidthPercent, position_percent, "", 0, 0,
-                   isVisible, isActive )
-    , m_fValue( value )
+CSlider::CSlider( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
+    , m_Button( aNode, screenResolution )
+    , m_fValue( aNode.GetAttribute<bool>( "value", 0.f ) )
     , m_bStart_to_Move( false )
-    , m_pBackGroundTexture(NULL)
+    , m_pBackGroundTexture(aNode.GetAttribute<CTexture>( "texture_on" ))
 {
+    m_Button.SetWindowsHeight( aNode.GetAttribute<uint32>( "buttonH", 10 ) );
+    m_Button.SetWindowsWidth( aNode.GetAttribute<uint32>( "buttonW", 10 ) );
+
+    /* TODO Ruly Setear la posicion del boton dentro del slider
+    float  widthOffsetPercent = pNewNode.GetAttribute<float>( "widthOffset", 0.f );
+    float  heightOffsetPercent = pNewNode.GetAttribute<float>( "heightOffset", 0.f );
+
+    uint32 widthOffset = ( uint32 )( screenResolution.x * 0.01f * widthOffsetPercent );
+    uint32 heightOffset = ( uint32 )( screenResolution.y * 0.01f * heightOffsetPercent );
+
     Math::Vect2f position;
     position.x = position_percent.x + witdh_percent * value - buttonWidthPercent * 0.5f;
     position.y = position_percent.y + height_precent * 0.5f - buttonHeightPercent * 0.5f;
     m_Button.SetPositionPercent(position);
+    */
 }
-
-
 
 //---------------Interfaz de GuiElement----------------------
 void CSlider::Render    ()

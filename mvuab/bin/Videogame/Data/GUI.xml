@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Gui_config>
-  <GuiFiles path="Data/textures/GUI/XML_Laberynth" windows_default="Main.xml"/>
+  <GuiFiles path="Data/GUI" windows_default="Main.xml"/>
   <TextBox  posx="30" posy="30" width="35" height="35" button_width="5" button_height="5"
-            buttonClose_normal=     "Data/textures/GUI/Textures_Test/CloseDialegBox.jpg"
-            buttonClose_over=       "Data/textures/GUI/Textures_Test/CloseDialegBoxO.jpg"
-            buttonClose_clicked=    "Data/textures/GUI/Textures_Test/CloseDialegBoxC.jpg"
-            buttonClose_deactivated="Data/textures/GUI/Textures_Test/CloseDialegBoxC.jpg" 
-            buttonMove_normal=      "Data/textures/GUI/Textures_Test/ButtonDialegBoxN.jpg"
-            buttonMove_over=        "Data/textures/GUI/Textures_Test/ButtonDialegBoxO.jpg"
-            buttonMove_clicked=     "Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg"
-            buttonMove_deactivated= "Data/textures/GUI/Textures_Test/ButtonDialegBoxC.jpg"
-            quad=                   "Data/textures/GUI/Textures_Test/BaseDialegBox.jpg"/>
+            buttonClose_normal=     "Data/textures/GUI/CloseDialegBox.jpg"
+            buttonClose_over=       "Data/textures/GUI/CloseDialegBoxO.jpg"
+            buttonClose_clicked=    "Data/textures/GUI/CloseDialegBoxC.jpg"
+            buttonClose_deactivated="Data/textures/GUI/CloseDialegBoxC.jpg" 
+            buttonMove_normal=      "Data/textures/GUI/ButtonDialegBoxN.jpg"
+            buttonMove_over=        "Data/textures/GUI/ButtonDialegBoxO.jpg"
+            buttonMove_clicked=     "Data/textures/GUI/ButtonDialegBoxC.jpg"
+            buttonMove_deactivated= "Data/textures/GUI/ButtonDialegBoxC.jpg"
+            quad=                   "Data/textures/GUI/BaseDialegBox.jpg"/>
   <PointerMouse posx="5" posy="5" width="5" height="5" 
-                texture="Data/textures/GUI/Textures_LaberynthGame/cursor.png" isQuadrant="true"/>
+                texture="Data/textures/GUI/cursor.png" isQuadrant="true"/>
 </Gui_config>

@@ -27,10 +27,7 @@ class CDialogBox: public CGuiElement
 {
 
     public:
-        CDialogBox(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                       const Math::Vect2f position_percent, float buttonWidthPercent, float buttonHeightPercent,
-                       std::string lit = "", uint32 textHeightOffset = 0, uint32 textWidthOffset = 0,
-                       bool isVisible = true, bool isActive = true);
+        CDialogBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CDialogBox()
         {

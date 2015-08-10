@@ -1,0 +1,26 @@
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+	<ProgressBar name="Life" pos="2 5" height="4" width="30" visible="true" active="true"
+	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	<ProgressBar name="Energy" pos="2 10" height="4" width="30" visible="true" active="true"
+	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	
+	
+	<Map name="Radar" pos="0 59" width="20" height="36" texture_marco="Data/textures/GUI/marco2.png" texture_map="Data/textures/GUI/mapa.jpg"
+	 width_map="0.08" height_map="0.045" pos_0_0_3d_map="-2.956 533.182" pos_1_1_3d_map="359.366 -111.979" visible="true" active="true" >
+		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+		<item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
+	</Map>
+	
+	<StaticText name="ButtonEnergy" pos="40 80" height="30" width="12" visible="false" active="false" Literal="ButtonEnergy" />
+	<StaticText name="StealthAttack" pos="40 80" height="30" width="12" visible="false" active="false" Literal="StealthAttack" />
+	<StaticText name="OpenDoor" pos="40 80" height="30" width="12" visible="false" active="false" Literal="OpenDoor" />
+	<StaticText name="Block" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Block" />
+	<StaticText name="CambiarSala" pos="40 80" height="30" width="12" visible="false" active="false" Literal="CambiarSala" />
+	
+</Windows>

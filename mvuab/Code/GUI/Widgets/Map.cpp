@@ -2,7 +2,6 @@
 #include "EngineManagers.h"
 #include "Texture\TextureManager.h"
 #include "Texture\Texture.h"
-#include "Texture\GUITexture.h"
 #include "GraphicsManager.h"
 #include "Cameras\CameraManager.h"
 #include "Object3D.h"
@@ -11,26 +10,49 @@
 #include <vector>
 #include <sstream>
 
-
 //---Constructor
-CMap::CMap( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-            const Math::Vect2f position_percent,
-            const std::string& Marco, const std::string& Map, const Math::Vect2f pos_0_0, const Math::Vect2f pos_1_1, float h_map,
-            float w_map, bool isVisible,
-            bool isActive )
-  : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, IMAGE, "", 2U, 2U,
-                 isVisible,
-                 isActive )
-  , m_Width_Map( w_map )
-  , m_Height_Map( h_map )
+CMap::CMap( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+  : CGuiElement( aNode, screenResolution )
+  , m_Width_Map( aNode.GetAttribute<float>( "width_map", 0.02f ) )
+  , m_Height_Map( aNode.GetAttribute<float>( "height_map", 0.02f ) )
+  , m_Mapa( aNode.GetAttribute<CTexture>( "texture_map" ) )
+  , m_Marco( aNode.GetAttribute<CTexture>( "texture_marco" ) )
+  , m_Cone( aNode.GetAttribute<CTexture>( "Data/textures/GUI/Textures_Test/conotrans.png" ) ) // TODO Ruly, poner esto en el xml tambien
+  , m_Player( 0 )
 {
-  m_Mapa = TextureMInstance->GetTexture( Map );
-  m_Player = 0;
-  m_Marco = TextureMInstance->GetTexture( Marco );
-  m_MinMaxMap[0] = pos_0_0;
-  m_MinMaxMap[1] = pos_1_1;
-  const std::string& bla( "Data/textures/GUI/Textures_Test/conotrans.png" );
-  m_Cone = TextureMInstance->GetTexture( bla );
+  /*AddEnemys
+  (
+    aNode.GetAttribute<std::string>( "texture_enemy", "" ),
+    aNode.GetAttribute<int32>( "width_enemy", 50 ),
+    aNode.GetAttribute<int32>( "height_enemy", 50 ),
+    aNode.GetAttribute<std::string>( "get_position_script", "" ),
+    aNode.GetAttribute<std::string>( "orientation", "" )
+  );*/
+
+  m_MinMaxMap[0] = aNode.GetAttribute<Math::Vect2f>( "pos_0_0_3d_map", Math::Vect2f( 0.f,
+                   0.f ) );
+  m_MinMaxMap[1] = aNode.GetAttribute<Math::Vect2f>( "pos_1_1_3d_map", Math::Vect2f( 0.f,
+                   0.f ) );
+
+  for ( int i = 0, count = aNode.GetNumChildren(); i < count; ++i )
+  {
+    const CXMLTreeNode& pSubNewNode       = aNode( i );
+    const std::string& NameItem           = pSubNewNode.GetAttribute<std::string>( "name", "defaultItemElement" );
+    const std::string& TextureItem        = pSubNewNode.GetAttribute<std::string>( "texture", "no_texture" );
+    const std::string& position_script    = pSubNewNode.GetAttribute<std::string>( "get_position_script", "no_script" );
+    const std::string& orientation_script = pSubNewNode.GetAttribute<std::string>( "orientation", "no_script" );
+    uint32 WidthItem                      = pSubNewNode.GetAttribute<uint32>( "width", 50 );
+    uint32 HeightItem                     = pSubNewNode.GetAttribute<uint32>( "height", 50 );
+    float Yaw                             = pSubNewNode.GetAttribute<float>( "yaw", 0.f );
+
+    const std::string& tagName = pSubNewNode.GetName();
+    const Math::Vect3f& pos = pSubNewNode.GetAttribute<Math::Vect3f>( "pos_in_map", Math::Vect3f() );
+
+    if ( tagName == "item" )
+      AddItem( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
+    else if ( tagName == "mark_player" )
+      AddPlayer( NameItem, TextureItem, pos, WidthItem, HeightItem, Yaw, position_script, orientation_script );
+  }
 }
 
 CMap::~CMap()
@@ -187,49 +209,49 @@ void CMap::AddItem( const std::string& Name, const std::string& Texture, Math::V
   m_vItems.push_back( l_ItemMap );
 }
 
-void CMap::AddEnemy( const std::string& Name, const std::string& Texture, uint32 Width,
+void CMap::AddEnemy( CTexture* aTexture, const std::string& Name, uint32 Width,
                      uint32 Height, float Yaw, std::string  PositionScript, std::string  OrientationScript )
-{
-  //if ( EnemyMInstance != NULL )
-  //{
-  //  CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
-
-  //  if ( l_Enemy )
-  //  {
-  //    Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
-  //    Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-  //    CEnemyMap* l_EnemyMap   = new CEnemyMap( Name, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
-  //        Height, Yaw, PositionScript, OrientationScript );
-  //    m_vEnemy.push_back( l_EnemyMap );
-  //  }
-  //}
-}
-
-void CMap::AddEnemys( const std::string& Texture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript )
 {
   /*if ( EnemyMInstance != NULL )
   {
-    std::map<std::string, CEnemy*> l_MapEnemy         = EnemyMInstance->GetResourcesMap();
+      CEnemy* l_Enemy = EnemyMInstance->GetResource( Name );
 
-    std::map<std::string, CEnemy*>::iterator  it      = l_MapEnemy.begin(),
-                                              it_end  = l_MapEnemy.end();
+      if ( l_Enemy )
+      {
+          Math::Vect3f PosInMap3d = l_Enemy->GetPosition();
+          Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
+          CEnemyMap* l_EnemyMap   = new CEnemyMap( Name, aTexture, PosInMap3d, l_posInMap, Width,
+                  Height, Yaw, PositionScript, OrientationScript );
+          m_vEnemy.push_back( l_EnemyMap );
+      }
+  }*/
+}
 
-    for ( ; it != it_end ; ++it )
-    {
-      Math::Vect3f PosInMap3d = it->second->GetPosition();
-      Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
-      float        lYaw       = it->second->GetYaw();
-      std::stringstream PositionScriptComplete;
-      std::stringstream OrientationScriptComplete;
-      PositionScriptComplete    << PositionScript     << "('" << it->first << "')";
-      OrientationScriptComplete << OrientationScript  << "('" << it->first << "')";
-      CEnemyMap* l_EnemyMap = new CEnemyMap( it->first, TextureMInstance->GetTexture( Texture ), PosInMap3d, l_posInMap, Width,
-                                             Height, lYaw, PositionScriptComplete.str(), OrientationScriptComplete.str() );
-      m_vEnemy.push_back( l_EnemyMap );
-    }
+void CMap::AddEnemys( const std::string& aTexture, uint32 Width, uint32 Height, std::string  PositionScript, std::string  OrientationScript )
+{
+  /*if ( EnemyMInstance != NULL )
+  {
+      std::map<std::string, CEnemy*> l_MapEnemy         = EnemyMInstance->GetResourcesMap();
+
+      std::map<std::string, CEnemy*>::iterator  it      = l_MapEnemy.begin(),
+                                                it_end  = l_MapEnemy.end();
+
+      for ( ; it != it_end ; ++it )
+      {
+          Math::Vect3f PosInMap3d = it->second->GetPosition();
+          Math::Vect2f l_posInMap = NormalizePlayerPos( PosInMap3d.x, PosInMap3d.z );
+          float        lYaw       = it->second->GetYaw();
+          std::stringstream PositionScriptComplete;
+          std::stringstream OrientationScriptComplete;
+          PositionScriptComplete    << PositionScript     << "('" << it->first << "')";
+          OrientationScriptComplete << OrientationScript  << "('" << it->first << "')";
+          CEnemyMap* l_EnemyMap = new CEnemyMap( it->first, aTexture, PosInMap3d, l_posInMap, Width,
+                                                 Height, lYaw, PositionScriptComplete.str(), OrientationScriptComplete.str() );
+          m_vEnemy.push_back( l_EnemyMap );
+      }
   }*/
   std::stringstream parametros;
-  parametros << Texture << "', '" << Width << "', '" << Height << "', '" << PositionScript << "', '" << OrientationScript << "')";
+  parametros << aTexture << "', '" << Width << "', '" << Height << "', '" << PositionScript << "', '" << OrientationScript << "')";
   ScriptMInstance->RunCode( "AddEnemys('" + parametros.str() );
 }
 
@@ -285,6 +307,7 @@ CMap::CEnemyMap::CEnemyMap( std::string Name, CTexture* Texture, Math::Vect3f Po
   m_PositionScript = PositionScript;
   m_OrientationScript = OrientationScript;
 }
+
 
 void CMap::SetPositionPlayer( Math::Vect3f position )
 {

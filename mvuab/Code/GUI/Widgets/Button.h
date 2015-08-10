@@ -27,9 +27,7 @@ class CButton: public CGuiElement
 
     public:
 
-        CButton(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                    const Math::Vect2f position_percent, std::string lit = "", uint32 textHeightOffset = 0,
-                    uint32 textWidthOffsetbool = 0, bool isVisible = true, bool isActive = true);
+        CButton( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CButton()
         {
@@ -63,17 +61,17 @@ class CButton: public CGuiElement
         void                    SetOnOverAction            (std::string & inAction );
 
     private:
-        EButtonState    m_eState;
-        std::string        m_sLuaCode_OnClicked;
-        std::string        m_sLuaCode_OnOver;
-        CTexture*            m_pNormalTexture;
-        CTexture*            m_pOverTexture;
-        CTexture*            m_pClickedTexture;
-        CTexture*            m_pDeactivatedTexture;
-        Math::CColor                m_NormalColor;
-        Math::CColor                m_OverColor;
-        Math::CColor                m_ClickedColor;
-        Math::CColor                m_DeactivatedColor;
+        EButtonState             m_eState;
+        std::string              m_sLuaCode_OnClicked;
+        std::string              m_sLuaCode_OnOver;
+        CTexture*                m_pNormalTexture;
+        CTexture*                m_pOverTexture;
+        CTexture*                m_pClickedTexture;
+        CTexture*                m_pDeactivatedTexture;
+        Math::CColor             m_NormalColor;
+        Math::CColor             m_OverColor;
+        Math::CColor             m_ClickedColor;
+        Math::CColor             m_DeactivatedColor;
 };
 
 #endif //INC_BUTTON_H

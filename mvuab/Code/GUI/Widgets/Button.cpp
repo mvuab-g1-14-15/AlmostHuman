@@ -1,6 +1,4 @@
-
-
-#include "Widgets\Button.h"
+#include "Widgets/Button.h"
 #include "InputManager.h"
 #include "Texture/Texture.h"
 #include "GraphicsManager.h"
@@ -8,26 +6,22 @@
 #include "EngineManagers.h"
 #include "ScriptManager.h"
 
-
-//---Constructor
-CButton::CButton (    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                      const Math::Vect2f position_percent, std::string lit, uint32 textHeightOffset,
-                      uint32 textWidthOffset, bool isVisible, bool isActive)
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, BUTTON, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
+CButton::CButton( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
     , m_eState(BS_NORMAL)
-    , m_sLuaCode_OnClicked("")
-    , m_sLuaCode_OnOver("")
-    , m_pNormalTexture(NULL)
-    , m_pOverTexture(NULL)
-    , m_pClickedTexture(NULL)
-    , m_pDeactivatedTexture(NULL)
+    , m_sLuaCode_OnClicked(aNode.GetAttribute<std::string>( "OnClickedAction", "" ))
+    , m_sLuaCode_OnOver(aNode.GetAttribute<std::string>( "OnOverAction", "" ))
+    , m_pNormalTexture(aNode.GetAttribute<CTexture>( "texture_normal" ))
+    , m_pOverTexture(aNode.GetAttribute<CTexture>( "texture_over" ))
+    , m_pClickedTexture(aNode.GetAttribute<CTexture>( "texture_clicked" ))
+    , m_pDeactivatedTexture(aNode.GetAttribute<CTexture>( "texture_deactivated" ))
     , m_NormalColor(Math::colBLUE)
     , m_OverColor(Math::colGREEN)
     , m_ClickedColor(Math::colRED)
     , m_DeactivatedColor(Math::colYELLOW)
-{}
-
+{
+    m_eType = BUTTON;
+}
 
 //---------------Interfaz de GuiElement----------------------
 void CButton::Render    ()
@@ -39,47 +33,47 @@ void CButton::Render    ()
 
         switch(m_eState)
         {
-            case BS_NORMAL:
-                if (m_pNormalTexture)
-                {
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_pNormalTexture);
-                }
-                else
-                {
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_NormalColor);
-                }
-                break;
-            case BS_OVER:
-                if (m_pOverTexture)
-                {
-                    //TODO RAUL
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_pOverTexture);
-                }
-                else
-                {
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_OverColor);
-                }
-                break;
-            case BS_CLICKED:
-                if (m_pClickedTexture)
-                {
-                    //TODO RAUL
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_pClickedTexture);
-                }
-                else
-                {
-                    GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                                 CGraphicsManager::UPPER_LEFT, m_ClickedColor);
-                }
-                break;
-            default:
-                LOG_ERROR_APPLICATION("CButton::Render Tipo de estado desconocido en el boton %s", CGuiElement::m_sName.c_str());
-                break;
+        case BS_NORMAL:
+            if (m_pNormalTexture)
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_pNormalTexture);
+            }
+            else
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_NormalColor);
+            }
+            break;
+        case BS_OVER:
+            if (m_pOverTexture)
+            {
+                //TODO RAUL
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_pOverTexture);
+            }
+            else
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_OverColor);
+            }
+            break;
+        case BS_CLICKED:
+            if (m_pClickedTexture)
+            {
+                //TODO RAUL
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_pClickedTexture);
+            }
+            else
+            {
+                GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                             CGraphicsManager::UPPER_LEFT, m_ClickedColor);
+            }
+            break;
+        default:
+            LOG_ERROR_APPLICATION("CButton::Render Tipo de estado desconocido en el boton %s", CGuiElement::m_sName.c_str());
+            break;
         }
 
         if( !CGuiElement::m_bIsActive )

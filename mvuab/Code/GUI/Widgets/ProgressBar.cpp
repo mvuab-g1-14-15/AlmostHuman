@@ -9,24 +9,21 @@
 
 #include "Timer\Timer.h"
 
-
-CProgressBar::CProgressBar( uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                            const Math::Vect2f position_percent, std::string lit, uint32 textHeightOffset, uint32 textWidthOffset,
-                            bool isVisible, bool isActive)
-    : CGuiElement( windowsHeight, windowsWidth, height_precent, witdh_percent, position_percent, PROGRESS_BAR, lit,
-                   textHeightOffset, textWidthOffset, isVisible, isActive)
+CProgressBar::CProgressBar( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
+    : CGuiElement( aNode, screenResolution )
     , m_fProgress( 0.f )
     , m_sText(std::to_string((long double)m_fProgress))
     , m_fCountTime( 0.f )
     , m_fTimeToUpdate( 0.5f )
     , m_sLuaCode_OnComplete("")
-    , m_pBackgroundTexture(NULL)
-    , m_pProgressTexture(NULL)
-    , m_BackGroundColor(Math::colBLACK)
-    , m_ProgressColor(Math::colRED)
-    , m_uFontID(0)
-    , m_TextColor(Math::colBLACK)
-{}
+    , m_pBackgroundTexture(aNode.GetAttribute<CTexture>( "background_texture"))
+    , m_pProgressTexture(aNode.GetAttribute<CTexture>( "progress_texture"))
+    , m_BackGroundColor(aNode.GetAttribute<Math::CColor>( "background_color", Math::CColor()))
+    , m_ProgressColor(aNode.GetAttribute<Math::CColor>( "progress_color", Math::CColor()))
+    , m_uFontID(aNode.GetAttribute<int32>( "id_font", 0 ))
+    , m_TextColor(aNode.GetAttribute<Math::CColor>( "font_color", Math::CColor()))
+{
+}
 
 //---------------Interfaz de CGuiElement----------------------
 void CProgressBar::Render  ()

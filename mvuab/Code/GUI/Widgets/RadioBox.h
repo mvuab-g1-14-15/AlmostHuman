@@ -24,10 +24,7 @@ class CRadioBox: public CGuiElement
 {
 
     public:
-        CRadioBox(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                      const Math::Vect2f position_percent, uint32 columns, uint32 rows, const std::string& defaultButtonCheck,
-                      std::string lit = "", uint32 textHeightOffset = 0, uint32 textWidthOffset = 0,
-                      bool isVisible = true, bool isActive = true);
+        CRadioBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CRadioBox()
         {
@@ -61,11 +58,10 @@ class CRadioBox: public CGuiElement
             m_sDefaultButtonCheck = checkB;
         }
 
-
     private:
         CTexture*                                    m_pBackGroundTexture;
         std::vector<CCheckButton> m_CheckButtons;
-        std::string                                m_sDefaultButtonCheck;
+        std::string                                   m_sDefaultButtonCheck;
         uint32                                        m_uColumns;
         uint32                                        m_uRows;
         uint32                                        m_uLastButtonColumn;

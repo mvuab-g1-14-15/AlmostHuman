@@ -22,8 +22,7 @@ class CStaticText: public CGuiElement
 {
 
     public:
-        CStaticText(    uint32 windowsHeight, uint32 windowsWidth, float height_precent, float witdh_percent,
-                        const Math::Vect2f position_percent, std::string lit = "", bool isVisible = true, bool isActive = true);
+        CStaticText( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution );
 
         virtual ~CStaticText()
         {
