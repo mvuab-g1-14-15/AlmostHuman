@@ -13,40 +13,40 @@ class CEffectTechnique;
 class CFlare
 {
 public:
-	CFlare();
-	~CFlare();
+  CFlare();
+  ~CFlare();
 
-	bool Init(const CXMLTreeNode& node);
+  bool Init( const CXMLTreeNode& node );
 
 private:
-	Math::Vect3f  mColor;
-	CTexture*	  mTexture;
-	float		  mPos;
-	Math::Vect2f  mSize;
+  Math::Vect3f  mColor;
+  CTexture*   mTexture;
+  float     mPos;
+  Math::Vect2f  mSize;
 };
 
 class CLensFlare : public CName
 {
-    public:
-        CLensFlare();
-        ~CLensFlare();
-		bool Init(const CXMLTreeNode& node );
+public:
+  CLensFlare();
+  ~CLensFlare();
+  bool Init( const CXMLTreeNode& node );
 
-    protected:
-        std::vector<CFlare*> mFlares;
-		CEffectTechnique*    mTechnique;
+protected:
+  std::vector<CFlare*> mFlares;
+  CEffectTechnique*    mTechnique;
 };
 
 class CLensFlareManager: public CTemplatedVectorMapManager<CLensFlare>, public CManager
 {
 public:
-	    CLensFlareManager(){}
-        CLensFlareManager(const CXMLTreeNode &atts);
-        virtual ~CLensFlareManager();
-        
-        virtual void Init();
-        virtual void Update();
-        virtual void Render();
+  CLensFlareManager() {}
+  CLensFlareManager( const CXMLTreeNode& atts );
+  virtual ~CLensFlareManager();
+
+  virtual void Init();
+  virtual void Update();
+  virtual void Render();
 };
 
 #endif // LENS_FLARE_H

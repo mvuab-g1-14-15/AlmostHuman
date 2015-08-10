@@ -128,11 +128,10 @@ void CEngineManagers::Init()
   ManagerFactory.Register( "countdowntimer_manager",
                            Type2Type<CCountDownTimerManager>( ) );
   ManagerFactory.Register( "cinematic_manager", Type2Type<CCinematicManager>( ) );
-  ManagerFactory.Register( "flare_manager", Type2Type<CLensFlareManager>() );
+  ManagerFactory.Register( "lens_flares_manager", Type2Type<CLensFlareManager>() );
   ManagerFactory.Register( "id_manager", Type2Type<CIdManager>() );
   ManagerFactory.Register( "editors_manager", Type2Type<CEditorsManager>() );
   ManagerFactory.Register( "particle_system_manager", Type2Type<CParticleSystemManager>() );
-
   CXMLTreeNode l_File;
 
   if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
@@ -145,16 +144,11 @@ void CEngineManagers::Init()
 
   if ( TreeNode.Exists() )
   {
-
     for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
     {
-
       CXMLTreeNode  Node = TreeNode( i );
-
       const std::string& TagName = Node.GetName();
-
       CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
-
 
       if ( !Manager )
         LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
@@ -198,7 +192,6 @@ void CEngineManagers::Init()
   m_pIdManager = dynamic_cast<CIdManager*>( GetResource( "id_manager" ) );
   m_pEditorsManager = dynamic_cast<CEditorsManager*>( GetResource( "editors_manager" ) );
   m_pParticleSystemManager = dynamic_cast<CParticleSystemManager*>( GetResource( "particle_system_manager" ) );
-
   //
   // Init managers
   //

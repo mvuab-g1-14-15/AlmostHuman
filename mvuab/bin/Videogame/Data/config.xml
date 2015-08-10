@@ -6,7 +6,7 @@
 	<logger mode="output_window"/>
 	<trace mode="output_window"/>
 	<mouse exclusive_mode_in_mouse="true"  draw_pointer_mouse="true" />
-	<managers path="Data/level2/managers.xml"/>
+	<managers path="Data/core/managers.xml"/>
 	<sound init_sound_path="./Data/sounds.xml"/>
 	<animation animated_model="./Data/animated_model.xml" animated_model_path="./Data/animated_models/"/>
 	<data path="./Data/"/>

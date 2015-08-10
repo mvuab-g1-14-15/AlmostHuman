@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lens_flares>
+	<lens_flare name ="flare001" technique="DrawTextureInScreenTechnique">
+		<flare texture ="Data\textures\lens_flare_files\lens_flare_atlas.jpg" color="1.0 1.0 1.0" position="0.0" size="2 2"/>
+		<flare texture ="Data\textures\lens_flare_files\lens_flare_atlas.jpg" color="1.0 1.0 1.0" position="0.5" size="2 2"/>
+	</lens_flare>
+</lens_flares>
