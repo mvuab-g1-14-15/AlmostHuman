@@ -9,6 +9,7 @@
 
 class CRenderableObjectsLayersManager;
 class CRoom;
+class CLightProbe;
 
 class CScene : public CMapManager<CRoom>, public CManager
 {
@@ -32,6 +33,8 @@ class CScene : public CMapManager<CRoom>, public CManager
 
         void UnloadRoom( std::string aRoomName );
         void DesactivateRoom( std::string aRoomName );
+
+		std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f);
 
 
         CRoom* GetCurrentRoom();

@@ -306,11 +306,17 @@
     <ClCompile Include="Effects\SharedEffect.cpp">
       <Filter>Effects</Filter>
     </ClCompile>
-    <ClCompile Include="RenderableObject\Layer.cpp" />
-    <ClCompile Include="RenderableObject\Room.cpp" />
-    <ClCompile Include="RenderableObject\Scene.cpp" />
     <ClCompile Include="Lights\LightProbe.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\Layer.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\Room.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\Scene.cpp">
+      <Filter>RenderableObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -629,11 +635,17 @@
       <Filter>Effects</Filter>
     </ClInclude>
     <ClInclude Include="dx9.h" />
-    <ClInclude Include="RenderableObject\Layer.h" />
-    <ClInclude Include="RenderableObject\Room.h" />
-    <ClInclude Include="RenderableObject\Scene.h" />
     <ClInclude Include="Lights\LightProbe.h">
       <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\Layer.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\Room.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\Scene.h">
+      <Filter>RenderableObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

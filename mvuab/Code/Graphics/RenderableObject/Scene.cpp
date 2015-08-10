@@ -152,3 +152,14 @@ void CScene::DesactivateRoom( std::string aRoomName )
     CRoom* lRoom = GetResource( aRoomName );
     lRoom->SetActive( false );
 }
+
+std::vector<CLightProbe*> CScene::GetClosedLightProbes( std::string aRoomName, Math::Vect3f aPos )
+{
+	//CRoom* lRoom = GetResource( aRoomName );
+	CRoom* lRoom = GetResource( "room2" ); // Hardcoded for test
+    if ( lRoom )
+    {
+		return lRoom->GetClosedLightProbes( aPos );
+	}
+	return std::vector<CLightProbe*>();
+}

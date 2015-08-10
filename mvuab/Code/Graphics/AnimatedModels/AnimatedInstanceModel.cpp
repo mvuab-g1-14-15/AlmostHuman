@@ -20,6 +20,9 @@
 
 #include "XML\XMLTreeNode.h"
 
+#include "Lights\LightProbe.h"
+#include "RenderableObject\Scene.h"
+
 #define MAXBONES 29
 
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
@@ -124,6 +127,9 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 
     lDXEffect->SetFloatArray( lEffect->GetBonesParameter(), ( float* ) l_Matrix,
                               l_pCalHardwareModel->getBoneCount() * 3 * 4 );
+
+	// Calculate the ambient light with the light probe
+	// std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
 
     if ( !m_Textures.empty() )
       m_Textures[0]->Activate( 0 );
