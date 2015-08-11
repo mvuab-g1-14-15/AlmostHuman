@@ -72,6 +72,8 @@ float       g_SpecularExponent 	= 20.0f;
 float       g_SpecularFactor 	= 20.0f;
 //float4    g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
 
+float		g_LightProbes[52]										: LightProbes;
+
 //
 // Cal3D parameters
 //

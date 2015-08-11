@@ -90,7 +90,7 @@ fn GetUV Obj i =
 	local VertUVW = meshop.getMapVert Obj 1 TexVert
 	--format "VertUVW: %\n" VertUVW
 	-- Finally return out the UV for this vertex
-	return point2 VertUVW.x VertUVW.y
+	return point2 VertUVW.x ( 1.0 - VertUVW.y)
 )
 
 fn ExportLightProbes Obj =

@@ -44,6 +44,7 @@ const char LightsIntensityParameterStr[]              = "LightsIntensity";
 const char LightsStartRangeAttenuationParameterStr[]  = "LightsStartAngle";
 const char LightsEndRangeAttenuationParameterStr[]    = "LightsEndAngle";
 const char BonesParameterStr[] = "Bones";
+const char LightProbesParameterStr[] = "LightProbes";
 
 //-Debug Handles----------------------------------------------------------
 const char DebugColorStr[]      = "DebugColor";

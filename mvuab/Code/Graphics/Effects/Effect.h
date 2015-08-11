@@ -51,6 +51,8 @@ class CEffect: public CName
 
         GET_SET( D3DXHANDLE, BonesParameter );
 
+		GET_SET( D3DXHANDLE, LightProbesParameter );
+
         GET_SET( D3DXHANDLE, DebugColor );
         GET_SET( D3DXHANDLE, UseDebugColor );
 
@@ -143,6 +145,8 @@ class CEffect: public CName
                    m_LightsEndRangeAttenuationParameter;
 
         D3DXHANDLE m_BonesParameter;
+
+		D3DXHANDLE m_LightProbesParameter;
 
         D3DXHANDLE m_DebugColor;
         D3DXHANDLE m_UseDebugColor;

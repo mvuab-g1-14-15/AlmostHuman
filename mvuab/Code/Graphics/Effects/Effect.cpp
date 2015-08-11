@@ -28,6 +28,7 @@ CEffect::CEffect( const std::string& EffectName )
       m_LightsStartRangeAttenuationParameter( 0 ),
       m_LightsEndRangeAttenuationParameter( 0 ),
       m_BonesParameter( 0 ),
+	  m_LightProbesParameter( 0 ),
 
       // Debug data
       m_UseDebugColor( 0 ),
@@ -97,6 +98,8 @@ void CEffect::SetNullParameters()
 
     m_BonesParameter = 0;
 
+	m_LightProbesParameter = 0;
+
     // Fog
     m_FogStart = 0;
     m_FogEnd = 0;
@@ -143,6 +146,8 @@ void CEffect::LinkSemantics()
                             m_LightsEndRangeAttenuationParameter );
 
     GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
+
+	GetParameterBySemantic( LightProbesParameterStr, m_LightProbesParameter );
 
     GetParameterBySemantic( DebugColorStr, m_DebugColor );
     GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );

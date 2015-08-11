@@ -82,8 +82,6 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #else
 	l_AmbientColor = l_DiffuseColor.xyz * g_AmbientLight;
 #endif
-	
-	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 
 #if defined( USE_NORMAL )
 	#if defined( USE_SELF_ILUM )
@@ -98,7 +96,30 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #else
 	float3 l_Normal = normalize(IN.Normal);
 #endif
+
+#if defined( USE_CAL3D_HW )
+	// Light probes
+	float3 l_LightProbeColor = float3(0.0, 0.0, 0.0);
+	float lFactor;
+	float3 lFixedNormal = l_Normal* -1;
+	for ( int i = 0; i<52; i+=13)
+	{
+		float3 l_LightProbeX = (lFixedNormal.x > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[1+i], g_LightProbes[2+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[7+i], g_LightProbes[8+i]));
+		l_LightProbeX *= lFixedNormal.x;
+		
+		float3 l_LightProbeY = (lFixedNormal.y > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[3+i], g_LightProbes[4+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[9+i], g_LightProbes[10+i]));
+		l_LightProbeY *= lFixedNormal.y;
+		
+		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
+		l_LightProbeZ *= lFixedNormal.z;
+		
+		l_LightProbeColor += g_LightProbes[0+i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
+		
+		//l_AmbientColor = l_LightProbeColor; 
+	}
+#endif
 	
+	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 	OUT.Normal=float4(Normal2Texture(l_Normal), 1);
 	OUT.Depth=IN.WorldPosition.z/IN.WorldPosition.w;
 	
