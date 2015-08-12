@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="0.2 0.2 0.2" />
+  <ambient_light color="1 1 1" />
+  <!--
   <omni_light name="Omni001" pos="78.21 -8.68069 -33.0581" color="0.847059 0.0 0.0" att_start_range="3.94359" att_end_range="4.9106" />
   <omni_light name="Omni002" pos="78.1943 -8.55895 -43.8044" color="0.847059 0.0 0.0" att_start_range="3.94359" att_end_range="4.9106" />
   <omni_light name="Omni003" pos="78.1188 -8.55895 -55.8824" color="0.847059 0.0 0.0" att_start_range="3.94359" att_end_range="4.9106" />
@@ -24,4 +25,5 @@
   <spot_light name="Spot017" pos="58.1602 -12.2629 -77.2959" color="1.0 1.0 1.0" att_start_range="17.195" att_end_range="31.16" look_at="57.9082 -20.6807 -77.2959" angle="24.5" fall_off="73.7" render_shadows="false" />
   <spot_light name="Spot018" pos="70.9305 -18.2485 -29.5086" color="0.662745 0.866667 0.85098" att_start_range="0.0" att_end_range="66.0" look_at="47.063 -9.51272 -17.6258" angle="22.6" fall_off="66.4" render_shadows="false" />
   <spot_light name="Spot019" pos="51.5982 -17.9758 -81.0916" color="0.662745 0.866667 0.85098" att_start_range="0.0" att_end_range="66.0" look_at="45.7512 -11.9618 -80.8076" angle="22.6" fall_off="66.4" render_shadows="false" />
+  -->
 </lights>

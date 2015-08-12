@@ -143,7 +143,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
-    CTexture *t = TextureMInstance->GetTexture( m_Path + Filename);
+	CTexture *t = ( Filename.empty() ) ? TextureMInstance->GetTexture("") : TextureMInstance->GetTexture( m_Path + Filename);
     if(t)
     {
         m_TextureVector.push_back(t);

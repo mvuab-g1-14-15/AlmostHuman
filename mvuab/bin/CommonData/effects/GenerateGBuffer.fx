@@ -73,7 +73,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #if defined( USE_SELF_ILUM )
 	l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2)*2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
 	
-	l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
+	//l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
 	//OUT.Albedo.xyz=float3(0,0,0);
 	
 #elif defined( USE_RNM )
@@ -100,26 +100,30 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #if defined( USE_CAL3D_HW )
 	// Light probes
 	float3 l_LightProbeColor = float3(0.0, 0.0, 0.0);
-	float lFactor;
-	float3 lFixedNormal = l_Normal* -1;
+	float3 lFixedNormal = l_Normal;
 	for ( int i = 0; i<52; i+=13)
 	{
-		float3 l_LightProbeX = (lFixedNormal.x > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[1+i], g_LightProbes[2+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[7+i], g_LightProbes[8+i]));
+		float3 l_LightProbeX = (lFixedNormal.x > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[1+i], g_LightProbes[2+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[7+i], g_LightProbes[8+i]));
 		l_LightProbeX *= lFixedNormal.x;
 		
-		float3 l_LightProbeY = (lFixedNormal.y > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[3+i], g_LightProbes[4+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[9+i], g_LightProbes[10+i]));
+		float3 l_LightProbeY = (lFixedNormal.y > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[3+i], g_LightProbes[4+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[9+i], g_LightProbes[10+i]));
 		l_LightProbeY *= lFixedNormal.y;
 		
-		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(S6LinearSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(S6LinearSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
+		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
 		l_LightProbeZ *= lFixedNormal.z;
 		
-		l_LightProbeColor += g_LightProbes[0+i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
+		l_LightProbeColor += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ ) * 2;
 		
-		//l_AmbientColor = l_LightProbeColor; 
+		l_AmbientColor = l_LightProbeColor; 
 	}
+	
+	l_AmbientColor *= l_DiffuseColor*2;
+	
+	OUT.Ambient=float4( l_AmbientColor, 0 );
+#else
+	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 #endif
 	
-	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 	OUT.Normal=float4(Normal2Texture(l_Normal), 1);
 	OUT.Depth=IN.WorldPosition.z/IN.WorldPosition.w;
 	
@@ -131,7 +135,7 @@ technique TECHNIQUE_NAME
 	pass p0
 	{
 #if defined( USE_CAL3D_HW )
-		CullMode = NONE;
+		CullMode = None;
 #endif
 	
 		VertexShader = compile vs_3_0 mainVS();

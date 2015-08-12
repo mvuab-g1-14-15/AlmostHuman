@@ -337,4 +337,13 @@ sampler ShadowMapTextureDynamicSampler : register( s6 ) = sampler_state
     AddressU = Clamp;
     AddressV = Clamp;
 };
+
+sampler LightProbeSampler : register( s6 ) = sampler_state
+{
+	MinFilter = Point;
+    MagFilter = Point;
+    MipFilter = Point;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
 #endif // !defined( SAMPLERS_FXH )

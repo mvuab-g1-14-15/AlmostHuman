@@ -161,11 +161,13 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 
 	lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, lLightProbeSize );
 
-    if ( !m_Textures.empty() )
-      m_Textures[0]->Activate( 0 );
+    m_Textures[0]->Activate( 0 );
 
 	// Activate light probe texture
+	//TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Save("lightprobe");
 	TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Activate(6); //Hardcoded to test
+
+	
 
     //m_NormalTextureList[0]->Activate(1);
     m_AnimatedCoreModel->GetRenderableVertexs()->Render
@@ -283,37 +285,7 @@ void CAnimatedInstanceModel::Initialize()
   BlendCycle( 0, 1.0f, 0.0f );
   m_CalModel->update( 0.0f );
 
-  /*
-  // Load Vertex and Index buffers
-  CGraphicsManager* GM = GraphicsInstance;
-  LPDIRECT3DDEVICE9 l_pD3DDevice = GM->GetDevice();
-
-  // Create vertex buffer
-  if ( FAILED( l_pD3DDevice->CreateVertexBuffer( 30000 * sizeof( TNORMAL_T1_VERTEX ),
-               D3DUSAGE_WRITEONLY | D3DUSAGE_DYNAMIC, TNORMAL_T1_VERTEX::GetFVF(), D3DPOOL_DEFAULT , &m_pVB,
-               NULL ) ) )
-  {
-      return;
-  }
-
-  // Create index buffer
-  if ( sizeof( CalIndex ) == 2 )
-  {
-      if ( FAILED( l_pD3DDevice->CreateIndexBuffer( 50000 * 3 * sizeof( CalIndex ),
-                   D3DUSAGE_WRITEONLY | D3DUSAGE_DYNAMIC, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &m_pIB, NULL ) ) )
-      {
-          return;
-      }
-  }
-  else
-  {
-      if ( FAILED( l_pD3DDevice->CreateIndexBuffer( 50000 * 3 * sizeof( CalIndex ),
-                   D3DUSAGE_WRITEONLY | D3DUSAGE_DYNAMIC, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_pIB, NULL ) ) )
-      {
-          return;
-      }
-  }
-  */
+  LoadTextures();
 }
 
 void CAnimatedInstanceModel::Destroy()
@@ -402,6 +374,11 @@ void CAnimatedInstanceModel::LoadTextures()
   {
     CTexture* l_Texture = TextureMInstance->GetTexture( m_AnimatedCoreModel->GetTextureName( i ) );
     m_Textures.push_back( l_Texture );
+  }
+
+  if( m_Textures.empty() )
+  {
+	  m_Textures.push_back( TextureMInstance->GetTexture("Data/textures/Dummy.png") );
   }
 }
 
