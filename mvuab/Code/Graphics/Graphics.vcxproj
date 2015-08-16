@@ -49,8 +49,9 @@
     <ClCompile Include="Gizmos\GizmoElement.cpp" />
     <ClCompile Include="Gizmos\GizmosManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="LensFlare\LensFlare.cpp" />
+    <ClCompile Include="LensFlare\LensFlareManager.cpp" />
     <ClCompile Include="Lights\DirectionalLight.cpp" />
-    <ClCompile Include="Lights\LensFlare.cpp" />
     <ClCompile Include="Lights\Light.cpp" />
     <ClCompile Include="Lights\LightManager.cpp" />
     <ClCompile Include="Lights\LightProbe.cpp" />
@@ -159,8 +160,9 @@
     <ClInclude Include="Gizmos\GizmoElement.h" />
     <ClInclude Include="Gizmos\GizmosManager.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="LensFlare\LensFlare.h" />
+    <ClInclude Include="LensFlare\LensFlareManager.h" />
     <ClInclude Include="Lights\DirectionalLight.h" />
-    <ClInclude Include="Lights\LensFlare.h" />
     <ClInclude Include="Lights\Light.h" />
     <ClInclude Include="Lights\LightManager.h" />
     <ClInclude Include="Lights\LightProbe.h" />

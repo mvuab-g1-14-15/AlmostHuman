@@ -528,7 +528,7 @@ inline Vector2<T> Vector2<T>::GetNormalized () const
 template<typename T>
 inline T Vector2<T>::Length () const
 {
-    return ((T)sqrt(x * x + y * y));
+    return ((T)sqrt( double( x * x + y * y )));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

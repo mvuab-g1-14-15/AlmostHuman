@@ -3,13 +3,12 @@
 
 #include "Utils/TemplatedVectorMapManager.h"
 #include "Utils/Manager.h"
-#include "LensFlare.h"
+#include "LensFlare/LensFlare.h"
 #include "Light.h"
 
 #include <string>
 
 class CGraphicsManager;
-
 
 class CLightManager : public CTemplatedVectorMapManager<CLight>, public CManager
 {

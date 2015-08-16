@@ -15,7 +15,6 @@ typedef unsigned int        uint32; // integer positivo de 32 bits
 typedef float               float32;    // float32 de 32 bits
 typedef double              float64;    // float32 de 64 bits
 
-
 // use for functions, global at the context of the file
 //#define internal static
 //
@@ -24,5 +23,17 @@ typedef double              float64;    // float32 de 64 bits
 //
 //// use for global vars, global at the context of the file, also sets the var to zero
 //#define global_variable static
+
+#ifndef float4
+#define float4             Math::Vect4f;
+#endif
+
+#ifndef float3
+#define float3             Math::Vect3f;
+#endif
+
+#ifndef float2
+#define float2             Math::Vect2f;
+#endif
 
 #endif

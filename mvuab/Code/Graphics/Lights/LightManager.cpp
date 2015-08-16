@@ -6,7 +6,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "EngineConfig.h"
-#include "LensFlare.h"
+#include "LensFlare/LensFlare.h"
 
 CLightManager::CLightManager()
     : CManager()
@@ -93,7 +93,7 @@ Math::Vect3f& CLightManager::GetAmbientLight()
 
 void CLightManager::Render()
 {
-    #ifdef _DEBUG
+#ifdef _DEBUG
     TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
 
     for ( ; itb != ite; ++itb )
@@ -101,7 +101,7 @@ void CLightManager::Render()
         ( *itb )->Render();
     }
 
-    #endif
+#endif
 }
 
 CLight *CLightManager::GetLight( size_t at )

@@ -171,9 +171,6 @@
     <ClCompile Include="Cinematics\CinematicManager.cpp">
       <Filter>Cinematics</Filter>
     </ClCompile>
-    <ClCompile Include="Lights\LensFlare.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
     <ClCompile Include="Lights\ShadowMap.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -317,6 +314,12 @@
     </ClCompile>
     <ClCompile Include="RenderableObject\Scene.cpp">
       <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="LensFlare\LensFlare.cpp">
+      <Filter>LensFlare</Filter>
+    </ClCompile>
+    <ClCompile Include="LensFlare\LensFlareManager.cpp">
+      <Filter>LensFlare</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,9 +502,6 @@
     <ClInclude Include="Cinematics\CinematicManager.h">
       <Filter>Cinematics</Filter>
     </ClInclude>
-    <ClInclude Include="Lights\LensFlare.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
     <ClInclude Include="Lights\ShadowMap.h">
       <Filter>Lights</Filter>
     </ClInclude>
@@ -647,6 +647,12 @@
     <ClInclude Include="RenderableObject\Scene.h">
       <Filter>RenderableObject</Filter>
     </ClInclude>
+    <ClInclude Include="LensFlare\LensFlare.h">
+      <Filter>LensFlare</Filter>
+    </ClInclude>
+    <ClInclude Include="LensFlare\LensFlareManager.h">
+      <Filter>LensFlare</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -714,6 +720,9 @@
     </Filter>
     <Filter Include="XML">
       <UniqueIdentifier>{abed453d-257e-4443-bc9a-5fdc2a75916f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LensFlare">
+      <UniqueIdentifier>{174f1671-ece3-41fc-bad9-50c47a45eead}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

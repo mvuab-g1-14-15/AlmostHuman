@@ -30,7 +30,7 @@
 #include "Timer/CounTDownTimerManager.h"
 #include "Cinematics/CinematicManager.h"
 #include "EditorsManager.h"
-#include "Lights\LensFlare.h"
+#include "LensFlare\LensFlareManager.h"
 #include "Utils\IdManager.h"
 #include "Particles\ParticleSystemManager.h"
 

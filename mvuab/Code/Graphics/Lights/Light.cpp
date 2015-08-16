@@ -1,5 +1,6 @@
 #include "Light.h"
-#include "LensFlare.h"
+#include "LensFlare/LensFlareManager.h"
+#include "LensFlare/LensFlare.h"
 #include "ShadowMap.h"
 
 #include "Effects\Effect.h"
