@@ -4,8 +4,7 @@
 
 #include "Utils/TemplatedVectorMapManager.h"
 #include "Utils/Manager.h"
-
-class CLensFlare;
+#include "LensFlare.h"
 
 class CLensFlareManager: public CTemplatedVectorMapManager<CLensFlare>, public CManager
 {

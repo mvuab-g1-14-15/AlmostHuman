@@ -11,10 +11,8 @@ class CLight;
 
 class CLensOfFlareRendererCommand :  public CDrawQuadRendererCommand
 {
-public:
-  CLensOfFlareRendererCommand( CXMLTreeNode& atts );
-  void Execute( CGraphicsManager& GM );
-private:
-  CLight* GetSun();
+    public:
+        CLensOfFlareRendererCommand( CXMLTreeNode& atts );
+        void Execute( CGraphicsManager& GM );
 };
 #endif

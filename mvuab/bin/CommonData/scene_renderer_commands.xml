@@ -131,16 +131,20 @@
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_particules/>
 	
+	<!-- Rendering Lens Flares -->
+	<enable_alpha_blend/>
+	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
+	<lens_of_flare/>
+	<disable_alpha_blend/>
 	
 	<disable_z_test/>
 	
+	<enable_alpha_blend/>
+	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_gui render="true"/>
 	<disable_alpha_blend/>
+	
 	<render_developer_info/>
-	
-	<disable_alpha_test/>
-	<disable_alpha_blend/>
-	
     <end_scene/>
 
     <present/>
