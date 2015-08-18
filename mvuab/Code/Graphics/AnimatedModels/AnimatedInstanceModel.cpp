@@ -138,7 +138,8 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 	CLightProbeVertex *lVect;
 	for (unsigned int i = 0; i < lLightProbes.size(); ++i)
 	{
-		l_LPMatrix[lCounter++] = 0.25f; //factor. tiene que ser dependiente de la distancia por ahora se reparte a todos iguales
+		Math::Vect3f lPos( lLightProbes[i]->GetPosition() );
+		l_LPMatrix[lCounter++] = lPos.Distance( m_Position ); //factor. tiene que ser dependiente de la distancia por ahora se reparte a todos iguales
 		lVect = lLightProbes[i]->GetVertex("x");
 		l_LPMatrix[lCounter++] = lVect->GetUV().x;
 		l_LPMatrix[lCounter++] = lVect->GetUV().y;
@@ -158,6 +159,12 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 		l_LPMatrix[lCounter++] = lVect->GetUV().x;
 		l_LPMatrix[lCounter++] = lVect->GetUV().y;
 	}
+
+	float lTotal( l_LPMatrix[0] + l_LPMatrix[13] + l_LPMatrix[26] + l_LPMatrix[39] );
+	l_LPMatrix[0] /= lTotal;
+	l_LPMatrix[13] /= lTotal;
+	l_LPMatrix[26] /= lTotal;
+	l_LPMatrix[39] /= lTotal;
 
 	lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, lLightProbeSize );
 
