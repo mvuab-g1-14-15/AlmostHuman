@@ -159,6 +159,10 @@ fn IsObjExportable Obj =
 	(
 		isExportable = false
 	)
+	else if(classof Obj == CATParent OR classof Obj == HubObject OR classof Obj == CATBone) then
+	(
+		isExportable = false
+	)
 	else
 	(
 		isExportable = true

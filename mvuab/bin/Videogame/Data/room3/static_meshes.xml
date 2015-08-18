@@ -6,7 +6,7 @@
   <static_mesh name="escala002_room3" filename="meshes\escala002.mesh" />
   <static_mesh name="escala003_room3" filename="meshes\escala003.mesh" />
   <static_mesh name="escala004_room3" filename="meshes\escala004.mesh" />
-  <static_mesh name="andride003_room3" filename="meshes\andride003.mesh" />
+  <static_mesh name="andride084_room3" filename="meshes\andride084.mesh" />
   <static_mesh name="cinta_010_room3" filename="meshes\cinta_010.mesh" />
   <static_mesh name="cinta_011_room3" filename="meshes\cinta_011.mesh" />
   <static_mesh name="cinta_012_room3" filename="meshes\cinta_012.mesh" />
@@ -229,4 +229,28 @@
   <static_mesh name="container008_room3" filename="meshes\container008.mesh" />
   <static_mesh name="Llum_018_room3" filename="meshes\Llum_018.mesh" />
   <static_mesh name="Object012_room3" filename="meshes\Object012.mesh" />
+  <static_mesh name="container009_room3" filename="meshes\container009.mesh" />
+  <static_mesh name="container010_room3" filename="meshes\container010.mesh" />
+  <static_mesh name="container011_room3" filename="meshes\container011.mesh" />
+  <static_mesh name="container012_room3" filename="meshes\container012.mesh" />
+  <static_mesh name="container013_room3" filename="meshes\container013.mesh" />
+  <static_mesh name="container014_room3" filename="meshes\container014.mesh" />
+  <static_mesh name="container015_room3" filename="meshes\container015.mesh" />
+  <static_mesh name="container016_room3" filename="meshes\container016.mesh" />
+  <static_mesh name="container017_room3" filename="meshes\container017.mesh" />
+  <static_mesh name="container018_room3" filename="meshes\container018.mesh" />
+  <static_mesh name="container019_room3" filename="meshes\container019.mesh" />
+  <static_mesh name="container020_room3" filename="meshes\container020.mesh" />
+  <static_mesh name="container021_room3" filename="meshes\container021.mesh" />
+  <static_mesh name="container022_room3" filename="meshes\container022.mesh" />
+  <static_mesh name="container023_room3" filename="meshes\container023.mesh" />
+  <static_mesh name="container024_room3" filename="meshes\container024.mesh" />
+  <static_mesh name="container025_room3" filename="meshes\container025.mesh" />
+  <static_mesh name="container026_room3" filename="meshes\container026.mesh" />
+  <static_mesh name="container027_room3" filename="meshes\container027.mesh" />
+  <static_mesh name="container028_room3" filename="meshes\container028.mesh" />
+  <static_mesh name="container029_room3" filename="meshes\container029.mesh" />
+  <static_mesh name="container030_room3" filename="meshes\container030.mesh" />
+  <static_mesh name="container031_room3" filename="meshes\container031.mesh" />
+  <static_mesh name="container032_room3" filename="meshes\container032.mesh" />
 </static_meshes>
