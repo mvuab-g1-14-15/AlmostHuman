@@ -60,5 +60,10 @@
 		</effect>
 		<handles/>
 	</technique>
+    
+    <technique name="ColorGradingTechnique" vertex_type="1104">
+		<effect name="ColorGradinEffect" file="../CommonData/effects/PostProc/ColorGrading.fx"/>
+		<handles/>
+	</technique>
 		
 </effects>

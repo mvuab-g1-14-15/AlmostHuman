@@ -124,6 +124,16 @@
     <render_weapon_target size="20">
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
+    
+    <capture_frame_buffer name="ColorGradient_Capture_FB">
+		<dynamic_texture stage_id="0" name="ColorGradient" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+    
+    <set_pool_renderable_objects_technique pool="ColorGrading_pool_renderable_object_technique"/>
+    <render_draw_quad active="true">
+        <texture stage_id="1" name="ColorGradient"/>
+		<texture stage_id="0" name="Data/textures/RGBTable16x1.png"/>
+    </render_draw_quad>
 	
 	
 	<enable_z_test/>

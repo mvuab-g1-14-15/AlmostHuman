@@ -112,12 +112,12 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
 		l_LightProbeZ *= lFixedNormal.z;
 		
-		l_LightProbeColor += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ ) * 2;
-		
-		l_AmbientColor = l_LightProbeColor; 
+		l_LightProbeColor += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
 	}
 	
-	l_AmbientColor *= l_DiffuseColor*2;
+	l_AmbientColor = saturate(l_LightProbeColor + g_AmbientLight);
+	
+	l_AmbientColor *= l_DiffuseColor;
 	
 	OUT.Ambient=float4( l_AmbientColor, 0 );
 #else
