@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lens_flares>
+	<lens_flare name ="flare001" technique="DrawTextureInScreenTechnique">
+		<flare texture ="Data\textures\lens_flare_files\corona.png" color="1.0 0.0 1.0" distance="0.0" size="10" max_size="20" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\wavering.png" color="1.0 1.0 0.0" distance="0.1" size="20" max_size="25" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\starring.png" color="1.0 0.0 1.0" distance="0.2" size="30" max_size="40" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\x5.png" color="0.0 1.0 1.0" distance="0.3" size="40" max_size="50" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\hexagon.png" color="0.0 1.0 0.0" distance="0.4" size="50" max_size="60" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\extend.png" color="0.25 1.0 0.25" distance="0.5" size="60" max_size="65" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\iris.png" color="1.0 1.0 1.0" distance="0.6" size="20" max_size="25" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\pearlring.png" color="0.5 1.0 1.0" distance="0.7" size="20" max_size="30" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\star.png" color="1.0 1.0 0.25" distance="0.8" size="30" max_size="40" alpha="0.5"/>
+		<flare texture ="Data\textures\lens_flare_files\hexangle.png" color="1.0 0.6 1.0" distance="1.0" size="40" max_size="45" alpha="0.5"/>
+	</lens_flare>
+</lens_flares>
