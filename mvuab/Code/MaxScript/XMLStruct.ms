@@ -43,6 +43,12 @@ struct XMLNode(
 		format "% % %" ( RGBAtt.r / 255 ) ( RGBAtt.g / 255 ) ( RGBAtt.b / 255 ) to:Colors
 		DotNetNode.SetAttribute attribute Colors as string
 	),
+	fn AddAttributeRGBa attribute RGBAtt = 
+	(
+		Colors = stringStream ""
+		format "% % % %" ( RGBAtt.r / 255 ) ( RGBAtt.g / 255 ) ( RGBAtt.b / 255 ) ( RGBAtt.a / 255 )  to:Colors
+		DotNetNode.SetAttribute attribute Colors as string
+	),
 	fn AddAttributeRGBNormalized attribute RGBAtt = 
 	(
 		Colors = stringStream ""

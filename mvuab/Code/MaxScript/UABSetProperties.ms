@@ -5,7 +5,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	dropdownList ExportListRender "" pos:[141,35] width:120 height:21 enabled:false items:#("instance_mesh", "animated_mesh")
 	checkbox VisibleCheckRender "Visible" pos:[50,63] width:51 height:17
 	checkbox LayerCheckRender "Layer" pos:[50,86] width:51 height:17
-	dropdownList LayerListRender "" pos:[141,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles","glow")
+	dropdownList LayerListRender "" pos:[141,84] width:120 height:21 enabled:false items:#("solid", "alpha_objects", "alpha_blend_objects", "particles", "glow")
 	label AnimModelRender "Anim. model" pos:[50,118] width:64 height:18
 	edittext AnimModelEditText "" pos:[141,120] width:120 height:19
 	
@@ -61,24 +61,30 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	checkbox ExportLightsCheckBox "no_export_lights" pos:[50,561] width:118 height:18
 	
 	--  TRIGGERS	
-	GroupBox grp8 "Trigger" pos:[338,305] width:226 height:40
-	edittext TriggerName "" pos:[431,320] width:120 height:19
-	label lblTriggerName "Trigger_Name" pos:[349,323] width:68 height:18
+	GroupBox grp8 "Trigger" pos:[329,442] width:256 height:124
+	edittext TriggerName "" pos:[423,459] width:120 height:19
+	label lblTriggerName "Trigger_Name" pos:[351,462] width:68 height:18
+	checkbox enter_event_chk "Enter Event" pos:[334,486] width:78 height:17
+	edittext enter_event_func "" pos:[423,484] width:148 height:19
+	checkbox stay_event_chk "Stay Event" pos:[334,511] width:91 height:17
+	edittext stay_event_func "" pos:[424,511] width:145 height:19
+	checkbox leave_event_chk "Leave Event" pos:[334,539] width:91 height:17
+	edittext leave_event_func "" pos:[424,536] width:145 height:19
 	
 	-- COVERS
-	GroupBox grp10 "Covers" pos:[338,355] width:226 height:40
-	edittext CoverName "" pos:[430,371] width:120 height:19
-	label lblCoverName "Cover_Name" pos:[348,373] width:64 height:18
+	GroupBox grp10 "Covers" pos:[337,306] width:226 height:40
+	edittext CoverName "" pos:[429,322] width:120 height:19
+	label lblCoverName "Cover_Name" pos:[347,324] width:64 height:18
 	
 	-- PATHS
-	GroupBox grp11 "AI Paths" pos:[337,408] width:226 height:69
-	edittext PathsName "" pos:[425,427] width:120 height:19
-	label lblPathsName "Path_Name" pos:[347,426] width:64 height:18
-	edittext PathsNumNode "" pos:[484,452] width:60 height:19
-	label lbl28 "Node_Num (index of node)" pos:[347,453] width:129 height:18
+	GroupBox grp11 "AI Paths" pos:[336,359] width:226 height:69
+	edittext PathsName "" pos:[424,378] width:120 height:19
+	label lblPathsName "Path_Name" pos:[346,377] width:64 height:18
+	edittext PathsNumNode "" pos:[483,403] width:60 height:19
+	label lbl28 "Node_Num (index of node)" pos:[346,404] width:129 height:18
 	
-	button GetButton "Load" pos:[335,486] width:112 height:29
-	button SetButton "Save" pos:[453,486] width:108 height:29
+	button GetButton "Load" pos:[50,614] width:112 height:29
+	button SetButton "Save" pos:[168,614] width:108 height:29
 	
 	--ENABLE OR DISABLE DROPLISTDOWN
 	
@@ -294,6 +300,13 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 				SetPropertyCheck Obj "no_export_lights" ExportLightsCheckBox
 				
 			SetPropertyEditText Obj "Trigger_Name" TriggerName
+			SetPropertyCheck Obj "Enter_Event" enter_event_chk
+			SetPropertyCheck Obj "Stay_Event" stay_event_chk
+			SetPropertyCheck Obj "Leave_Event" leave_event_chk
+			SetPropertyEditText Obj "Enter_Event_Function" enter_event_func
+			SetPropertyEditText Obj "Stay_Event_Function" stay_event_func
+			SetPropertyEditText Obj "Leave_Event_Function" leave_event_func
+
 			SetPropertyEditText Obj "Cover_Name" CoverName
 			SetPropertyEditText Obj "Path_Name" PathsName
 			SetPropertyEditText Obj "Path_Num_Node" PathsNumNode
@@ -375,6 +388,13 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 				SetPropertyCheck Obj[i] "no_export_lights" ExportLightsCheckBox
 			
 				SetPropertyEditText Obj[i] "Trigger_Name" TriggerName
+				SetPropertyCheck Obj[i] "Enter_Event" enter_event_chk
+				SetPropertyCheck Obj[i] "Stay_Event" stay_event_chk
+				SetPropertyCheck Obj[i] "Leave_Event" leave_event_chk
+				SetPropertyEditText Obj[i] "Enter_Event_Function" enter_event_func
+				SetPropertyEditText Obj[i] "Stay_Event_Function" stay_event_func
+				SetPropertyEditText Obj[i] "Leave_Event_Function" leave_event_func
+
 				SetPropertyEditText Obj[i] "Cover_Name" CoverName
 				SetPropertyEditText Obj[i] "Path_Name" PathsName
 				SetPropertyEditText Obj[i] "Path_Num_Node" PathsNumNode
@@ -390,8 +410,6 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 	
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
-	
-	
 	
 	on ExportCheckRender changed theState do
 	(
@@ -569,6 +587,19 @@ rollout UABSetProperties "UABSetProperties" width:600 height:670
 						
 			Property=getUserProp $ "Trigger_Name" 
 			GetPropertyEditText Property TriggerName
+			Property=getUserProp $ "Enter_Event"
+			GetPropertyCheckBox Property enter_event_chk
+			Property=getUserProp $ "Stay_Event"
+			GetPropertyCheckBox Property stay_event_chk
+			Property=getUserProp $ "Leave_Event"
+			GetPropertyCheckBox Property leave_event_chk
+			Property=getUserProp $ "Enter_Event_Function"
+			GetPropertyEditText Property enter_event_func
+			Property=getUserProp $ "Stay_Event_Function"
+			GetPropertyEditText Property stay_event_func
+			Property=getUserProp $ "Leave_Event_Function"
+			GetPropertyEditText Property leave_event_func
+
 			Property=getUserProp $ "Cover_Name" 
 			GetPropertyEditText Property CoverName
 			Property=getUserProp $ "Path_Name" 

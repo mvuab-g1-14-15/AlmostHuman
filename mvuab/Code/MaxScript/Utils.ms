@@ -219,7 +219,7 @@ fn GetNoExportableObjects =
 fn GetTriggers =
 (
 	l_Triggers = #()
-	for Obj in GetNoExportableObjects() where getUserProp Obj "Trigger_Name" != "" do
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Trigger_Name" != "" AND getUserProp Obj "Trigger_Name" != undefined do
 	(
 		append l_Triggers Obj
 	)
@@ -233,7 +233,7 @@ fn GetPaths =
 		
 	l_IndexPaths=dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
 	
-	for Obj in GetNoExportableObjects() where getUserProp Obj "Path_Name"	 != "" do
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Path_Name"	 != "" AND getUserProp Obj "Path_Name" != undefined do
 	(
 		format "Object path: %\n" Obj.name
 		
@@ -267,7 +267,7 @@ fn GetCovers =
 	
 	l_CoverName = #()
 	
-	for Obj in GetNoExportableObjects() where getUserProp Obj "Cover_Name" != "" do
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Cover_Name" != "" AND getUserProp Obj "Cover_Name" != undefined do
 	(
 		append l_CoverName Obj
 	)

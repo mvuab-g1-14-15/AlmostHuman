@@ -48,7 +48,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     m_PhysicActor = new CPhysicActor( m_PhysicUserData );
     const std::string& l_sType = Node.GetAttribute<std::string>( "shape", "" );
 
-    if ( l_sType == "box" )
+    if ( l_sType == "Box" )
     {
         m_PhysicActor->CreateBoxTrigger( m_Position, m_Size, m_Group );
         m_PhysicActor->ActivateAllTriggers();
@@ -56,7 +56,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
         l_PM->AddPhysicActor( m_PhysicActor );
         mShape = new CBoxShape();
     }
-    else if ( l_sType == "sphere" )
+    else if ( l_sType == "Sphere" )
     {
         m_PhysicActor->CreateSphereTrigger( m_Position, m_Radius, m_Group );
         m_PhysicActor->ActivateAllTriggers();
