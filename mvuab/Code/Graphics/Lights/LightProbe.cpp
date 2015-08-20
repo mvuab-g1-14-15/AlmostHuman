@@ -1,4 +1,5 @@
 #include "LightProbe.h"
+#include "Utils\Defines.h"
 #include "XML\XMLTreeNode.h"
 
 CLightProbe::CLightProbe( const CXMLTreeNode& aXMLNode )
@@ -50,4 +51,10 @@ CLightProbe::CLightProbe( const CXMLTreeNode& aXMLNode )
 
 CLightProbe::~CLightProbe()
 {
+    for(std::map<std::string, CLightProbeVertex*>::iterator it = mVertexs.begin(); it != mVertexs.end(); it++)
+    {
+        CHECKED_DELETE(it->second);
+    }
+
+    mVertexs.clear();
 }

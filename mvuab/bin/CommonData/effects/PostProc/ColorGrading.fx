@@ -1,3 +1,4 @@
+// https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/ColorGrading/index.html
 // http://gamedev.stackexchange.com/questions/61738/color-grading-shaders-and-3d-texture
 // http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter24.html
 // http://kpulv.com/359/Dev_Log__Color_Grading_Shader/
@@ -35,13 +36,13 @@ float4 sampleAs3DTexture(sampler2D tex, float3 uv, float width)
 
 float4 ColorGrading(in float2 UV : TEXCOORD0) : COLOR
 {
-    UV.xy = (UV.xy * 15.0f/16.0f) + (0.5f/16.0f);
+    //UV.xy = (UV.xy * 15.0f/16.0f) + (0.5f/16.0f);
     
-    float4 l_Color = tex2D(S1LinearSampler, UV);
-    float4 l_GradeColor = sampleAs3DTexture(S0LinearSampler, l_Color.rgb, 16);
+    float4 l_Color = tex2D(S0PointSampler, UV);
+    float4 l_GradeColor = sampleAs3DTexture(S1PointSampler, l_Color.rgb, 16);
     
     l_GradeColor.a = l_Color.a;
-    return l_Color;
+    return l_GradeColor;
 }
 
 technique ColorGradingTechnique

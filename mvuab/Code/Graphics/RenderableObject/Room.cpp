@@ -15,8 +15,14 @@ CRoom::CRoom()
 {
 }
 
-CRoom::~CRoom() { 
+CRoom::~CRoom() 
+{ 
 	CHECKED_DELETE(m_pLayers);
+
+    for(unsigned int i = 0; i < mLightProbes.size(); i++)
+    {
+        CHECKED_DELETE(mLightProbes[i]);
+    }
 }
 
 void CRoom::LoadLightProbe()
