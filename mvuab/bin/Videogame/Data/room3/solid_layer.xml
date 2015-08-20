@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <MeshInstance name="sala_3_room3" core="sala_3_room3" pos="83.6209 19.6399 -15.0698" yaw="0.0" pitch="0.0" roll="0.0" scale="2.62757 2.62757 2.62757" />
+  <MeshInstance name="sala_3_room3" core="sala_3_room3" pos="83.6209 19.6399 -15.0698" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="escala_room3" core="escala_room3" pos="82.1222 20.2245 -20.0811" yaw="0.0" pitch="0.0" roll="0.0" scale="2.39664 2.39664 2.39664" />
   <MeshInstance name="escala001_room3" core="escala001_room3" pos="82.1222 20.1097 -19.7005" yaw="0.0" pitch="0.0" roll="0.0" scale="2.39664 2.39664 2.39664" />
   <MeshInstance name="escala002_room3" core="escala002_room3" pos="82.1222 19.9636 -19.3495" yaw="0.0" pitch="0.0" roll="0.0" scale="2.39664 2.39664 2.39664" />
