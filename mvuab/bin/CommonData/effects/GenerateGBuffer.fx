@@ -99,7 +99,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 
 #if defined( USE_CAL3D_HW )
 	// Light probes
-	float3 l_LightProbeColor = float3(0.0, 0.0, 0.0);
+	float3 l_LightProbeColorInit = float3(0.0, 0.0, 0.0);
 	float3 lFixedNormal = l_Normal;
 	for ( int i = 0; i<52; i+=13)
 	{
@@ -112,9 +112,24 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
 		l_LightProbeZ *= lFixedNormal.z;
 		
-		l_LightProbeColor += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
+		l_LightProbeColorInit += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
 	}
-	
+	float3 l_LightProbeColorFinal = float3(0.0, 0.0, 0.0);
+	for ( int i = 52; i<104; i+=13)
+	{
+		float3 l_LightProbeX = (lFixedNormal.x > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[1+i], g_LightProbes[2+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[7+i], g_LightProbes[8+i]));
+		l_LightProbeX *= lFixedNormal.x;
+		
+		float3 l_LightProbeY = (lFixedNormal.y > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[3+i], g_LightProbes[4+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[9+i], g_LightProbes[10+i]));
+		l_LightProbeY *= lFixedNormal.y;
+		
+		float3 l_LightProbeZ = (lFixedNormal.z > 0) ? tex2D(LightProbeSampler, float2(g_LightProbes[5+i], g_LightProbes[6+i])) : tex2D(LightProbeSampler, float2(g_LightProbes[11+i], g_LightProbes[12+i]));
+		l_LightProbeZ *= lFixedNormal.z;
+		
+		l_LightProbeColorFinal += g_LightProbes[i] * ( l_LightProbeX + l_LightProbeY + l_LightProbeZ );
+	}
+	float lPercentage = g_LightProbes[104];
+	float3 l_LightProbeColor = l_LightProbeColorInit * (1 - lPercentage) + l_LightProbeColorFinal * lPercentage;
 	l_AmbientColor = saturate(l_LightProbeColor + g_AmbientLight);
 	
 	l_AmbientColor *= l_DiffuseColor;

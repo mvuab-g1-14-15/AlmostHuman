@@ -11,6 +11,8 @@ class CTexture;
 class CXMLTreeNode;
 class CRenderableObjectTechnique;
 
+static const unsigned int gLightProbeSize = 4 * 6 * 2 + 4; // 4 light probes * 6 directions * 2 components in uv + 4 factors
+
 class CAnimatedInstanceModel : public CRenderableObject
 {
     public:
@@ -67,6 +69,13 @@ class CAnimatedInstanceModel : public CRenderableObject
         float32 m_BlendTime;
         float32 m_ChangeAnimation;
         CRenderableObjectTechnique*  m_RenderableObjectTechnique;
+
+		void CalculateNewLightProbeMatrix();
+
+		float m_LPMatrixInitial[gLightProbeSize];
+		float m_LPMatrixTarget[gLightProbeSize];
+
+		Math::Vect3f m_PreviousPosition;
 
         void LoadTextures();
 };
