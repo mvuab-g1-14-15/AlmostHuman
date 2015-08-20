@@ -43,7 +43,7 @@ public:
     }
     float32 GetElapsedTimeInPercent() const
     {
-        return ( m_fElapsedTime / m_fTotalTime ) * 100.f;
+        return ( m_fElapsedTime / m_fTotalTime );
     }
 
     void ChangeTotalTime( float time )

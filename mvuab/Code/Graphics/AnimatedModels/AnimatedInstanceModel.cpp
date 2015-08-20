@@ -23,6 +23,8 @@
 #include "Lights\LightProbe.h"
 #include "RenderableObject\Scene.h"
 
+#include "Timer\CountDownTimerManager.h"
+
 #define MAXBONES 29
 
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
@@ -128,45 +130,16 @@ void CAnimatedInstanceModel::RenderModelByHardware()
     lDXEffect->SetFloatArray( lEffect->GetBonesParameter(), ( float* ) l_Matrix,
                               l_pCalHardwareModel->getBoneCount() * 3 * 4 );
 
-	// Calculate the ambient light with the light probe
-	std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
-	
-	const int lLightProbeSize = 4 * 6 * 2 + 4; // 4 light probes * 6 directions * 2 components in uv + 4 factors
-	float l_LPMatrix[lLightProbeSize];
+	CalculateNewLightProbeMatrix();
+	float l_LPMatrix[gLightProbeSize*2 +1];
 
-	unsigned int lCounter = 0;
-	CLightProbeVertex *lVect;
-	for (unsigned int i = 0; i < lLightProbes.size(); ++i)
-	{
-		Math::Vect3f lPos( lLightProbes[i]->GetPosition() );
-		l_LPMatrix[lCounter++] = lPos.Distance( m_Position ); //factor. tiene que ser dependiente de la distancia por ahora se reparte a todos iguales
-		lVect = lLightProbes[i]->GetVertex("x");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-		lVect = lLightProbes[i]->GetVertex("y");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-		lVect = lLightProbes[i]->GetVertex("z");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-		lVect = lLightProbes[i]->GetVertex("-x");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-		lVect = lLightProbes[i]->GetVertex("-y");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-		lVect = lLightProbes[i]->GetVertex("-z");
-		l_LPMatrix[lCounter++] = lVect->GetUV().x;
-		l_LPMatrix[lCounter++] = lVect->GetUV().y;
-	}
+	for (unsigned int i=0; i<gLightProbeSize; ++i)
+		l_LPMatrix[i] = m_LPMatrixInitial[i];
+	for (unsigned int i=0; i<gLightProbeSize; ++i)
+		l_LPMatrix[i+gLightProbeSize] = m_LPMatrixTarget[i];
+	l_LPMatrix[gLightProbeSize*2] = CountDownTimerInstance->GetElapsedTimeInPercent( GetName() + "LightProbeTimer" );
 
-	float lTotal( l_LPMatrix[0] + l_LPMatrix[13] + l_LPMatrix[26] + l_LPMatrix[39] );
-	l_LPMatrix[0] /= lTotal;
-	l_LPMatrix[13] /= lTotal;
-	l_LPMatrix[26] /= lTotal;
-	l_LPMatrix[39] /= lTotal;
-
-	lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, lLightProbeSize );
+	lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, gLightProbeSize*2 + 1 );
 
     m_Textures[0]->Activate( 0 );
 
@@ -293,6 +266,16 @@ void CAnimatedInstanceModel::Initialize()
   m_CalModel->update( 0.0f );
 
   LoadTextures();
+
+  m_PreviousPosition = GetPosition();
+
+  for (unsigned int i = 0; i < gLightProbeSize; ++i)
+  {
+	  m_LPMatrixInitial[i] = 0.0f;
+	  m_LPMatrixTarget[i] = 0.0f;
+  }
+
+  CountDownTimerInstance->AddTimer( GetName() + "LightProbeTimer", 1.0f);
 }
 
 void CAnimatedInstanceModel::Destroy()
@@ -424,4 +407,60 @@ bool CAnimatedInstanceModel::IsActionAnimationActive( const std::string& Animati
 {
   uint32 l_Id = m_AnimatedCoreModel->GetAnimationId( AnimationName );
   return IsActionAnimationActive( l_Id );
+}
+
+void CAnimatedInstanceModel::CalculateNewLightProbeMatrix()
+{
+	if ( m_PreviousPosition != GetPosition() )
+	{
+		// Calculate the ambient light with the light probe
+		std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
+	
+		float l_LPMatrix[gLightProbeSize];
+
+		unsigned int lCounter = 0;
+		CLightProbeVertex *lVect;
+		for (unsigned int i = 0; i < lLightProbes.size(); ++i)
+		{
+			Math::Vect3f lPos( lLightProbes[i]->GetPosition() );
+			l_LPMatrix[lCounter++] = lPos.Distance( m_Position ); //factor. tiene que ser dependiente de la distancia por ahora se reparte a todos iguales
+			lVect = lLightProbes[i]->GetVertex("x");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+			lVect = lLightProbes[i]->GetVertex("y");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+			lVect = lLightProbes[i]->GetVertex("z");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+			lVect = lLightProbes[i]->GetVertex("-x");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+			lVect = lLightProbes[i]->GetVertex("-y");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+			lVect = lLightProbes[i]->GetVertex("-z");
+			l_LPMatrix[lCounter++] = lVect->GetUV().x;
+			l_LPMatrix[lCounter++] = lVect->GetUV().y;
+		}
+
+		float lTotal( l_LPMatrix[0] + l_LPMatrix[13] + l_LPMatrix[26] + l_LPMatrix[39] );
+		l_LPMatrix[0] /= lTotal;
+		l_LPMatrix[13] /= lTotal;
+		l_LPMatrix[26] /= lTotal;
+		l_LPMatrix[39] /= lTotal;
+
+		for (unsigned int i = 0; i < gLightProbeSize; ++i)
+			m_LPMatrixTarget[i] = l_LPMatrix[i];
+	}
+	
+	float lPercentage = CountDownTimerInstance->GetElapsedTimeInPercent( GetName() + "LightProbeTimer" );
+	if (lPercentage >= 1.0f)
+	{
+		CountDownTimerInstance->Reset( GetName() + "LightProbeTimer" );
+		for (unsigned int i = 0; i < gLightProbeSize; ++i)
+			m_LPMatrixInitial[i] = m_LPMatrixTarget[i];
+	}
+
+	m_PreviousPosition = GetPosition();
 }
