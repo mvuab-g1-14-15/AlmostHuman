@@ -21,4 +21,5 @@ mvuab/bin/lib/*.*
 mvuab/bin/lib/*.*
 mvuab/bin/Viewer/*.dll
 mvuab/bin/Videogame/*.dll
+mvuab/bin/Intermediate/*.*
 WwiseProject
