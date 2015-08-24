@@ -3,6 +3,7 @@ class 'CCoreEnemyLUA'
 function CCoreEnemyLUA:__init()
 	self.EnemyType = "no_type"
 	self.Life = 0.0
+	self.Damage = 0.0
     self.RespawnTime = 0.0
     self.TimeToShoot = 0.0
     self.ShootAccuracy = 0.0
@@ -24,6 +25,14 @@ end
 
 function CCoreEnemyLUA:GetLife()
 	return self.Life
+end
+
+function CCoreEnemyLUA:SetDamage(aDamage)
+	self.Damage = aDamage
+end
+
+function CCoreEnemyLUA:GetDamage()
+	return self.Damage
 end
 
 function CCoreEnemyLUA:SetRespawnTime(aRespawnTime)

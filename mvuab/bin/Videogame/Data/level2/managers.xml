@@ -29,6 +29,7 @@
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 	-->
 	<cinematic_manager file_config=""/>
+	<lens_flares_manager file_config="Data/core/lens_flare.xml"/>
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
 </managers>

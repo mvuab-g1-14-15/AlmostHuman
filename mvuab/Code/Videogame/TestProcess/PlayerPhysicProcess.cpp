@@ -134,7 +134,7 @@ void CPlayerPhysicProcess::InitSceneCharacterController()
 void CPlayerPhysicProcess::Init()
 {
   //ScriptMInstance->RunCode( "init()" );
-  ScriptMInstance->RunCode( "load_gameplay()" );
+  //ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
   l_PM->SetTriggerReport( this );
 

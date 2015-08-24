@@ -94,6 +94,9 @@ function PlayerVisibility(enemy)
 	--lDirection = enemy:GetDirectionEnemy()
 	--lDirection.y = lDirection.y - enemy:GetHeight()/2.0
 	--return physic_manager:PlayerInSight(20, 0.7853, enemy:GetPosition(), lDirection)
+	if enemy:GetType() == "drone" then
+		return PlayerInSightDrone(enemy:GetCamera())
+	end
 	return PlayerInSight(enemy:GetCamera())
 end
 

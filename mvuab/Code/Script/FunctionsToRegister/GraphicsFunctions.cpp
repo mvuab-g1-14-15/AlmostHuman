@@ -278,6 +278,7 @@ void registerRenderableObject( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRenderableObject> )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CRenderableObject>, RemoveResource )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -436,5 +437,6 @@ void registerGraphics( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CScene, ActivateRoom )
   LUA_DECLARE_METHOD( CScene, UnloadRoom )
   LUA_DECLARE_METHOD( CScene, DesactivateRoom )
+  LUA_DECLARE_METHOD( CScene, GetActivateRoom )
   LUA_END_DECLARATION
 }

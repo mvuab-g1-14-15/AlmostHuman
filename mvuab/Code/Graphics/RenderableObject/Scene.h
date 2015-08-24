@@ -13,34 +13,36 @@ class CLightProbe;
 
 class CScene : public CMapManager<CRoom>, public CManager
 {
-    public:
+public:
 
-        CScene   () : CManager() {};
-        CScene(const CXMLTreeNode& atts);
-        ~CScene  ();
+  CScene() : CManager() {};
+  CScene( const CXMLTreeNode& atts );
+  ~CScene();
 
-        bool Load( const std::string &l_FilePath );
-        bool Reload();
+  bool Load( const std::string& l_FilePath );
+  bool Reload();
 
-        void Init();
-        void Update();
-        void Render();
+  void Init();
+  void Update();
+  void Render();
 
-        void Destroy();
+  void Destroy();
 
-        void LoadRoom( std::string aRoomName );
-        void ActivateRoom( std::string aRoomName );
+  void LoadRoom( std::string aRoomName );
+  void ActivateRoom( std::string aRoomName );
 
-        void UnloadRoom( std::string aRoomName );
-        void DesactivateRoom( std::string aRoomName );
+  void UnloadRoom( std::string aRoomName );
+  void DesactivateRoom( std::string aRoomName );
 
-		std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f);
+  const std::string& GetActivateRoom();
+
+  std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f );
 
 
-        CRoom* GetCurrentRoom();
+  CRoom* GetCurrentRoom();
 
-    private:
-        CRoom* mCurrentRoom;
+private:
+  CRoom* mCurrentRoom;
 };
 
 #endif

@@ -9,11 +9,17 @@ function CEnemyManagerLUA:__init()
 	self.StatesMachine = {}
 	self.CoreEnemy = {}
 	self.Enemy = {}
+	self.ExtraEnemy = {}
 	self.Routes = {}
 	self.ActualEnemy = nil
 	self.AStar = CAStar()
 	self.Shoots = {}
+	self.Alarm = false
+	self.ExtraEnemyCount = 0
+	self.ExtraEnemyCountMax = 3
+	self.timerExtraEnemy = "Add Extra Enemy"
 	self:Load("Data/enemies/enemies.xml")
+	
 	
 end
 
@@ -38,6 +44,8 @@ function CEnemyManagerLUA:Load(filename)
                 self:AddNewCoreEnemy( CurrentNode )                          
             elseif( l_TagName == "route" ) then           
                 self:AddNewRoute( CurrentNode )
+			elseif ( l_TagName == "extra_enemy" ) then
+				self:AddExtraEnemy( CurrentNode )
             end
 
         end
@@ -47,6 +55,15 @@ function CEnemyManagerLUA:Load(filename)
 end
 
 function CEnemyManagerLUA:Update()
+	if self.Alarm then
+		if ( self.ExtraEnemyCount < self.ExtraEnemyCountMax and ( not countdowntimer_manager:ExistTimer(self.timerExtraEnemy) or countdowntimer_manager:isTimerFinish(self.timerExtraEnemy) ) ) then			
+			self:GenerateEnemy()
+			countdowntimer_manager:AddTimer(self.timerExtraEnemy, 10.0, false)
+			
+		elseif countdowntimer_manager:isTimerFinish(self.timerExtraEnemy) then
+			countdowntimer_manager:Reset(self.timerExtraEnemy, false)
+		end
+	end
 	for i in pairs (self.Enemy) do
 		self.ActualEnemy = self.Enemy[i]
 		if self.ActualEnemy:GetLife() > 0 then
@@ -82,6 +99,7 @@ function CEnemyManagerLUA:AddNewCoreEnemy( Node )
     
     CoreEnemy:SetEnemyType(Node:GetAttributeString( "type", "no_type" ))
 	CoreEnemy:SetLife(Node:GetAttributeFloat( "life", 0.0 ))
+	CoreEnemy:SetDamage(Node:GetAttributeFloat( "damage", 1.0 ))
 	CoreEnemy:SetRespawnTime(Node:GetAttributeFloat( "time_to_respawn", 0.0 ))
 	CoreEnemy:SetTimeToShoot(Node:GetAttributeFloat( "time_to_shoot", 0.0 ))
 	CoreEnemy:SetShootAccuracy(Node:GetAttributeFloat( "shoot_accuracy", 0.0 ))
@@ -133,13 +151,21 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 	lEnemy = nil
 	
     if lType == "patroll" then
-		engine:Trace("He entrado en el tipo: "..lType)
 		lEnemy = CPatrolEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)
+	elseif lType == "drone" then		
+		lEnemy = CDroneEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
+	elseif lType == "easy" then
+		lEnemy = CEasyEnemyLUA(Node, lStateMachine, lCoreEnemy)	
 	end
 	name = Node:GetAttributeString("name", "no_name")
 	engine:Trace("Enemy: "..name)
 	self.Enemy[name] = lEnemy
 	self.ActualEnemy = lEnemy
+end
+
+function CEnemyManagerLUA:AddExtraEnemy( Node )
+	local lRoomName = Node:GetAttributeString("name", "no_name")
+	self.ExtraEnemy[lRoomName] = Node
 end
 
 function CEnemyManagerLUA:GetActualEnemy()
@@ -184,4 +210,16 @@ end
 
 function CEnemyManagerLUA:GetEnemys()
 	return self.Enemy
+end
+
+function CEnemyManagerLUA:SetAlarm(aAlarm)
+	self.Alarm = aAlarm
+end
+
+function CEnemyManagerLUA:GenerateEnemy()
+	local lRoom = scene:GetActivateRoom()
+	engine:Trace("Name room:"..lRoom)
+	local Node = self.ExtraEnemy[lRoom]
+	self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )
+	self.ExtraEnemyCount = self.ExtraEnemyCount + 1
 end

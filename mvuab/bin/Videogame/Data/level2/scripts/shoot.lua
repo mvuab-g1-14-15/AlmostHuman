@@ -4,7 +4,6 @@ function CShootLUA:__init(speed, direction, position, damage)
 	self.Speed = speed
     self.Damage = damage
     self.Impacted = false
-	--direction.y = direction.y - 0.001
     self.Direction = direction
 	self.Position = position
 	self.Yaw = 0.0
@@ -41,7 +40,7 @@ function CShootLUA:Update()
 			lDistance = lCollisionPoint:Distance( lNewPosition )
 
 			if ( lDistance < lLength ) then
-				g_Player:AddDamage(5.0)
+				g_Player:AddDamage(self.Damage)
 				
 				self.Impacted = true
 
@@ -58,7 +57,6 @@ function CShootLUA:Update()
 		self.Billboard:MakeTransform()
 		self.Light:SetPosition( self.Position )
 		self.Light:MakeTransform()
-		--MakeTransform();
 	end
 end
 

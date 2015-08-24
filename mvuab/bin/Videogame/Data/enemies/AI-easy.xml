@@ -1,12 +1,12 @@
 <state_machine name="easy">
-	<state name="inicial">
+		<state name="inicial">
 		<on_enter>      
-			<action function="set_initial_waypoint"/>
+			<action function="init_enemy"/>
 		</on_enter>
 		<on_exit>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			<action function="check_next_state"/>
 		</update>
 	</state>
 	<state name="andando">
@@ -15,16 +15,28 @@
 		<on_exit>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			<action function="stay"/>
+			<action function="check_next_state"/>
 		</update>
 	</state>
-	<state name="parado">
+	<state name="atacar">
 		<on_enter>
 		</on_enter>
 		<on_exit>
 		</on_exit>
 		<update>
-			<action function="change_state"/>
+			<action function="atacar"/>
+			<action function="check_next_state"/>
+		</update>
+	</state>
+	<state name="perseguir">
+		<on_enter>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="perseguir"/>
+			<action function="check_next_state"/>
 		</update>
 	</state>
 </state_machine>

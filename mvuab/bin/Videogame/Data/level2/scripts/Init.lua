@@ -6,13 +6,13 @@ g_HUD = nil
 g_EnemyManager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
-local initialized = false
+initialized1 = false
 
 function load_basics()
 	-- basic loads
 	--scene:ActivateRoom("room1")
 	scene:ActivateRoom("room2")
-	scene:ActivateRoom("room3")
+	--scene:ActivateRoom("room3")
 end
 
 function load_gameplay()
@@ -24,20 +24,16 @@ function load_gameplay()
 	if g_EnemyManager == nil then
 		g_EnemyManager = CEnemyManagerLUA()	
 	end
-	--local pos = Vect3f( 0.0, 0.0, 0.0 )
-	local waypoints = {Vect3f(-2.12, 0.4, 5.19), Vect3f(3.30, 0.4, 2.94)}
-	--g_Enemy = CPatrolEnemyLUA(waypoints)
-	
-	--g_stateMachine = CStateMachineLUA("Data/enemies/AI-patroll.xml")
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 end
 
 function update_gameplay()
-	if not initialized then
+	if not initialized1 then
+		engine:Trace("Creando todo ")
 		load_basics()
 		load_gameplay()
-		initialized = true
+		initialized1 = true
 	end
 	
 	g_EnemyManager:Update()

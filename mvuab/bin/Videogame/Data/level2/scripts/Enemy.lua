@@ -6,9 +6,10 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RespawnTime = core_enemy:GetRespawnTime()
     self.TimeToShoot = core_enemy:GetTimeToShoot()
     self.ShootAccuracy = core_enemy:GetShootAccuracy()
+	self.Damage = core_enemy:GetDamage()
 	self.CountTimeShoot = 0.0
 	self.Name = Node:GetAttributeString("name", "no_name")
-	
+	self.Type = Node:GetAttributeString("type", "no_enemy")
 	self.Radius = 0.4
 	self.Height = 2.0
 	self.PitchCameraMove = 0.0
@@ -173,10 +174,26 @@ end
 function CEnemyLUA:MakeShoot(aDirection)
 	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
 	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
-	lShoot = CShootLUA( 5.0, aDirection, lPosition, 5.0 )	
+	lShoot = CShootLUA( 5.0, aDirection, lPosition, self.Damage )	
 	g_EnemyManager:AddShoot(lShoot)
 end
 
 function CEnemyLUA:GetLife()
 	return self.Life
+end
+
+function CEnemyLUA:GetBrain()
+	return self.Brain
+end
+
+function CEnemyLUA:GetPitchCameraMove()
+	return self.PitchCameraMove
+end
+
+function CEnemyLUA:SetPitchCameraMove(aPitchCameraMove)
+	self.PitchCameraMove = aPitchCameraMove
+end
+
+function CEnemyLUA:GetType()
+	return self.Type
 end

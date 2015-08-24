@@ -1,4 +1,4 @@
-<state_machine name="patroll">
+<state_machine name="drone">
 	<state name="inicial">
 		<on_enter>      
 			<action function="init_enemy"/>

@@ -82,13 +82,12 @@ T vector_get( std::vector<T>& vec, size_t i )
 
 bool PlayerInSight( CCamera& aCamera )
 {
-
   CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
   Math::Vect3f lPosition( lController->GetPosition() );
 
   if ( aCamera.GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
   {
-    SCollisionInfo hit;
+    /*SCollisionInfo hit;
 
     float lHeight;
 
@@ -118,8 +117,61 @@ bool PlayerInSight( CCamera& aCamera )
       else
         return false;
     }
+    }
+
+    return false;*/
+    SCollisionInfo hit;
+
+    // float lHeight;
+
+    Math::Vect3f lDirection = lPosition - aCamera.GetPosition();
+
+    lDirection.Normalize();
+
+    float lDistance = lPosition.Distance( aCamera.GetPosition() );
+
+    lDistance++;
+
+    CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
+                                     lDistance );
+    CPhysicController* lRayController = 0;
+
+    if ( lPosition.Distance( hit.m_CollisionPoint ) < 10.0f )
+      return true;
+
   }
 
+  return false;
+}
+
+bool PlayerInSightDrone( CCamera& aCamera )
+{
+  CPhysicController* lController = PhysXMInstance->CMapManager<CPhysicController>::GetResource( "Player" );
+  Math::Vect3f lPosition( lController->GetPosition() );
+
+  if ( aCamera.GetFrustum().SphereVisible( D3DXVECTOR3( lPosition.x, lPosition.y, lPosition.z ), lController->GetHeight() / 2.0f ) )
+  {
+    SCollisionInfo hit;
+
+    float lHeight;
+
+    if ( lController->GetbCrouch() )
+      lHeight = lController->GetHeight() * 5;
+    else
+      lHeight = lController->GetHeight();
+
+    Math::Vect3f lDirection = lPosition - aCamera.GetPosition();
+
+    lDirection.Normalize();
+
+    float lDistance = lPosition.Distance( aCamera.GetPosition() );
+    CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
+                                     lDistance );
+    CPhysicController* lRayController = 0;
+
+    if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
+      return true;
+  }
 
   return false;
 }
@@ -245,6 +297,10 @@ void registerAI( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( PlayerInSight )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( PlayerInSightDrone )
   LUA_END_DECLARATION
 
   registerCharacters( aLuaState );
