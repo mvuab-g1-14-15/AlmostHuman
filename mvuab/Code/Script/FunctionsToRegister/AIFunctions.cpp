@@ -136,7 +136,7 @@ bool PlayerInSight( CCamera& aCamera )
                                      lDistance );
     CPhysicController* lRayController = 0;
 
-    if ( lPosition.Distance( hit.m_CollisionPoint ) < 10.0f )
+    if ( hit.m_CollisionPoint == 0 || lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
       return true;
 
   }
@@ -169,7 +169,7 @@ bool PlayerInSightDrone( CCamera& aCamera )
                                      lDistance );
     CPhysicController* lRayController = 0;
 
-    if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
+    if ( hit.m_CollisionPoint == 0 || lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
       return true;
   }
 

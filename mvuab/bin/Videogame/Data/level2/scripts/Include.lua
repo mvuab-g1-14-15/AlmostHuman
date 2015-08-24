@@ -25,6 +25,7 @@ texture_manager = GetTextureManager()
 g_CameraSensibility = 30.0
 g_HalfPi = 1.57079632679
 g_Pi = 3.141592
+g_DoublePi = 2*g_Pi
 
 -- Global Functions
 function OverlapSphere(radius, position)
@@ -109,6 +110,7 @@ function ChangeCameraCloseEnemy()
 		camera_manager:SetCurrentCamera("TestProcessCam")
 	else
 		engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
+		engine:Trace("Cantidad de enemigos: "..g_EnemyManager:GetNumEnemys())
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end

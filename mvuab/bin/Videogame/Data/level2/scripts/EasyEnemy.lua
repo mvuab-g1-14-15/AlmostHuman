@@ -11,6 +11,9 @@ function CEasyEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.PathCalculated = false
 	self.Path = vecVect3f()
 	self.YawPlayerMove = 0
+	self.YawInitial = 0
+	self.YawDirection = 1
+	self.MidRangeDegree = 45
 	engine:Trace("CEasyEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
@@ -40,8 +43,12 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 	CharacterController = CEnemyLUA.GetCharacterController(self)
 	local ActualPos = Vect3f(CharacterController:GetPosition())
 	local FinalPos = Vect3f()
-	local Dir = Vect3f(0.0)
+	local Dir = Vect3f(0.0)	
+	local Yaw = CharacterController:GetYaw()
 	if PositionPlayer ~= Vect3f(0.0) then
+		if self.YawPlayerMove >= 0 then
+			self.YawPlayerMove = -1
+		end
 		FinalPos = PositionPlayer
 		FinalPos.y = 0
 		ActualPos.y = 0
@@ -50,47 +57,50 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 		if CheckVector(Dir) then
 			Dir:Normalize()
 		end
-	end
-
-	DirYaw = math.atan2( Dir.z, Dir.x )
-	Yaw = CharacterController:GetYaw()
-	YawDif = DirYaw - Yaw
-	PrevYaw = Yaw
-		
-	local YawDifCom = DirYaw - 2*g_Pi - Yaw
-	if math.abs( YawDifCom ) < math.abs( YawDif ) then
-		YawDif = YawDifCom
-	else
-		local YawDifCom = DirYaw + 2*g_Pi - Yaw
+		DirYaw = math.atan2( Dir.z, Dir.x )
+		YawDif = DirYaw - Yaw
+		PrevYaw = Yaw
+			
+		local YawDifCom = DirYaw - 2*g_Pi - Yaw
 		if math.abs( YawDifCom ) < math.abs( YawDif ) then
 			YawDif = YawDifCom
-		end
-	end
-		
-    if ( math.abs( YawDif ) < 0.1 ) then
-		CharacterController:Move( Dir * self.Speed, dt )
-		Yaw = DirYaw;
-    else
-        CharacterController:Move( Vect3f( 0.0 ), dt )
-		if YawDif > 0 then
-			YawDif = 1
 		else
-			YawDif = -1
+			local YawDifCom = DirYaw + 2*g_Pi - Yaw
+			if math.abs( YawDifCom ) < math.abs( YawDif ) then
+				YawDif = YawDifCom
+			end
 		end
-        Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
+			
+		if ( math.abs( YawDif ) < 0.1 ) then
+			CharacterController:Move( Dir * self.Speed, dt )
+			Yaw = DirYaw;
+		else
+			CharacterController:Move( Vect3f( 0.0 ), dt )
+			if YawDif > 0 then
+				YawDif = 1
+			else
+				YawDif = -1
+			end
+			Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
 
-        if ( ( Yaw < DirYaw and PrevYaw > DirYaw ) or ( Yaw > DirYaw and PrevYaw < DirYaw ) ) then
-            Yaw = DirYaw
+			if ( ( Yaw < DirYaw and PrevYaw > DirYaw ) or ( Yaw > DirYaw and PrevYaw < DirYaw ) ) then
+				Yaw = DirYaw
+			end
 		end
-    end
-	
-	if PositionPlayer == Vect3f(0.0) then
-		if self.YawPlayerMove >= 360.0 then
+	else
+		CharacterController:Move( Vect3f( 0.0 ), dt )
+		if self.YawPlayerMove == -1 then
+			self.YawInitial = Yaw
 			self.YawPlayerMove = 0
 		end
-		self.YawPlayerMove = self.YawPlayerMove + timer:GetElapsedTime()
-		Yaw = Yaw + 22.5*math.sin(g_Pi*self.YawPlayerMove/18.0)
+		if self.YawPlayerMove >= g_DoublePi then
+			self.YawPlayerMove = 0
+		end
+		self.YawPlayerMove = self.YawPlayerMove + dt
+
+		Yaw = self.YawInitial + g_Pi*self.MidRangeDegree*math.sin(self.YawPlayerMove)/180.0
 	end
+	
     CharacterController:SetYaw( Yaw )
     CEnemyLUA.SetYaw( self, Yaw )
 end
