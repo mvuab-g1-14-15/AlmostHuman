@@ -37,6 +37,8 @@ extern "C"
 #include "Characters/Enemies/Enemy.h"
 #include "Characters/Enemies/EnemyManager.h"
 
+#include "Triggers/Trigger.h"
+
 #define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
 
 using namespace luabind;
@@ -305,6 +307,10 @@ void registerPhysX( lua_State* m_LS )
     .def( "GetResource", &vector_get<CPhysicUserData*> )
   ];
 
+  LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_DERIVED_CLASS(CTrigger, CObject3D)
+    LUA_END_DECLARATION
+  
 
   /*
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
