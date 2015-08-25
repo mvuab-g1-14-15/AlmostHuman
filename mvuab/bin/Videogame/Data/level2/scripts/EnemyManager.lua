@@ -69,9 +69,14 @@ function CEnemyManagerLUA:Update()
 		if self.ActualEnemy:GetLife() > 0 then
 			self.ActualEnemy:Update()
 		else
-			AnimatedModel = self.ActualEnemy:GetAnimationModel()
-			AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
-			if AnimatedModel:IsActionAnimationActive( "morir" ) then
+			if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
+				AnimatedModel = self.ActualEnemy:GetAnimationModel()
+				AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
+				countdowntimer_manager:AddTimer(self.ActualEnemy:GetName().."DeadTimer", 2.0, false)
+			end
+		
+			if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then
+				countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
 				self.ActualEnemy:Destroy()
 				table.remove(self.Enemy, i)
 				collectgarbage()
@@ -210,6 +215,14 @@ end
 
 function CEnemyManagerLUA:GetEnemys()
 	return self.Enemy
+end
+
+function CEnemyManagerLUA:GetNumEnemys()
+	local count = 0
+	for i in pairs (self.Enemy) do
+		count = count + 1
+	end
+	return count
 end
 
 function CEnemyManagerLUA:SetAlarm(aAlarm)

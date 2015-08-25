@@ -30,7 +30,6 @@ end
 
 function update_gameplay()
 	if not initialized1 then
-		engine:Trace("Creando todo ")
 		load_basics()
 		load_gameplay()
 		initialized1 = true

@@ -50,7 +50,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 end
 
 function CEnemyLUA:Destroy()
-	physic_manager:ReleasePhysicController(self.CharacterController)
+	physic_manager:ReleasePhysicController(self.Name)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
 	engine:Trace("He muerto Vida actual: "..self.Life)
 end
@@ -196,4 +196,8 @@ end
 
 function CEnemyLUA:GetType()
 	return self.Type
+end
+
+function CEnemyLUA:GetDead()
+	return self.Life <= 0
 end
