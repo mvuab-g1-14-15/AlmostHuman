@@ -274,6 +274,8 @@ void registerRenderableObject( lua_State* aLuaState )
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS2( CRenderableObject, CObject3D, CName )
+  LUA_DECLARE_METHOD( CRenderableObject, GetActive )
+  LUA_DECLARE_METHOD( CRenderableObject, SetActive )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

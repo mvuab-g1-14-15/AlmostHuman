@@ -5,7 +5,7 @@ dofile("./data/level2/scripts/StealthAttack.lua")
 
 class "CPlayer"
 
-function CPlayer:__init() 
+function CPlayer:__init()
 	self.PlayerController = CPlayerController()
 	
 	self.GrenadeQueue = {}
@@ -16,7 +16,9 @@ function CPlayer:__init()
 	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	
-	self.Hiden = false
+	self.Hidden = false
+	self.InsideBarrel = false
+	self.BarrelName = ""
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
@@ -125,7 +127,7 @@ function CPlayer:SetEnergy(amount)
 end
 
 function CPlayer:HideInBarrel()
-	if not self.Hiden then
+	if not self.Hidden then
 		local l_Can = true
 		if not self.PlayerController.Crouch then
 			l_Can = self.PlayerController:MakeCrouch()
@@ -135,7 +137,7 @@ function CPlayer:HideInBarrel()
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", true)
 		end
 		
-		self.Hiden = true
+		self.Hidden = true
 	else
 		local l_Can = true
 		if self.PlayerController.Crouch then
@@ -146,6 +148,11 @@ function CPlayer:HideInBarrel()
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", false)
 		end
 		
-		self.Hiden = false
+		self.Hidden = false
 	end
+end
+
+function CPlayer:ExitBarrel()
+	local lBarrel = g_Barrels[self.BarrelName]
+	lBarrel:ExitBarrel(self:GetPosition())
 end

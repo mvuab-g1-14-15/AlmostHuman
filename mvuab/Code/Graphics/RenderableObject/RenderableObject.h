@@ -14,8 +14,13 @@ class CRenderableObject : public CObject3D, public CName
         CRenderableObject( const CXMLTreeNode &atts);
         virtual ~CRenderableObject();
 
+        GET_SET(bool, Active);
+
         virtual void Update() {}
         virtual void Render() = 0;
+
+    private:
+        bool m_Active;
 };
 
 #endif

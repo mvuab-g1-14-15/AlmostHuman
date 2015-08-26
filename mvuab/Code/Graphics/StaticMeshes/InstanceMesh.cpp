@@ -49,6 +49,9 @@ void CInstanceMesh::Render()
   if ( !mStaticMesh )
     return;
 
+  if ( !GetActive() )
+    return;
+
   bool l_Transfomed = mStaticMesh->IsTransformed();
   bool l_ObjDynamic = mType.compare( "dynamic" ) == 0;
 

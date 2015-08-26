@@ -43,6 +43,11 @@ extern "C"
 
 using namespace luabind;
 
+CTrigger* CreateTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, bool aEnter, bool aStay, bool aLeave, std::string aEnterEvent ,std::string aStayEvent, std::string aLeaveEvent) 
+{
+  return new CTrigger( name, position, size, Math::colBLUE, 0, false, aEnter, aStay, aLeave, aEnterEvent, aStayEvent, aLeaveEvent);
+}
+
 bool Add_PhysicController( CPhysicsManager* PhysicManager, CPhysicController* PhysicController )
 {
   return PhysicManager->AddPhysicController( PhysicController );
@@ -308,11 +313,15 @@ void registerPhysX( lua_State* m_LS )
     .def( "size", &std::vector<CPhysicUserData*>::size )
     .def( "GetResource", &vector_get<CPhysicUserData*> )
   ];
-
+  
+  /* TRIGGER */
   LUA_BEGIN_DECLARATION( m_LS )
     LUA_DECLARE_DERIVED_CLASS(CTrigger, CObject3D)
     LUA_END_DECLARATION
   
+    LUA_BEGIN_DECLARATION( m_LS )
+    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateTrigger )
+    LUA_END_DECLARATION
 
   /*
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

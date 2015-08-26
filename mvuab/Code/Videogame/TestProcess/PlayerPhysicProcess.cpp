@@ -320,6 +320,9 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
 
+  if (!l_Trigger)
+    return;
+
   if ( l_Trigger->GetbEnter() && _Other_Shape->GetName() == "Player" )
   {
     //Get method name
@@ -337,6 +340,9 @@ void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
 
+  if (!l_Trigger)
+    return;
+
   //Get method name
   if ( l_Trigger->GetbLeave() )
   {
@@ -353,8 +359,11 @@ void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
   std::string l_Msg = "On Stay de " + _Other_Shape->GetName() + " a " +
                       _Entity_Trigger1->GetName();
   CTrigger* l_Trigger = TriggersMInstance->GetTriggerByName( _Entity_Trigger1->GetName() );
-  //Get method name
+  
+  if (!l_Trigger)
+    return;
 
+  //Get method name
   if ( l_Trigger->GetbStay() )
   {
     std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );

@@ -1,11 +1,14 @@
 dofile("./data/level2/scripts/Player.lua")
 dofile("./data/level2/scripts/EnemyManager.lua")
+dofile("./data/level2/scripts/Barrel.lua")
 
 g_Player = nil
 g_HUD = nil
 g_EnemyManager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
+g_Barrels = {}
+
 initialized1 = false
 
 function load_basics()
@@ -24,6 +27,8 @@ function load_gameplay()
 	if g_EnemyManager == nil then
 		g_EnemyManager = CEnemyManagerLUA()	
 	end
+	
+	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 end

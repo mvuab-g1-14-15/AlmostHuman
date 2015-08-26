@@ -76,6 +76,19 @@ function StayText(other_shape)
 	end
 end
 
+function HiddenBarrel(aName)
+	gui_manager:ShowStaticText("Entrar Barril")
+	if action_manager:DoAction("EnterBarrel") then
+		local lBarrel = g_Barrels[aName]
+		lBarrel:SetStateInside()
+	end
+end
+
+function HiddenBarrelExit(aName)
+	local lBarrel = g_Barrels[aName]
+	lBarrel:RestoreBarrel()
+end
+
 function HideImage(other_shape)
 	gui_manager:ShowImage(false)
 end
