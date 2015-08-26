@@ -11,13 +11,13 @@ function check_next_state()
 	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
-	local l_DistanceToPlayer = PlayerDistance(enemy)
+	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	if l_CurrentState ~= "perseguir" then	
 		if l_CurrentState == "inicial" then
 			l_NextState = "andando"
 		end
 		if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
-			if l_DistanceToPlayer < 8 and l_PlayerInSight then
+			if l_PlayerInSight then
 				l_NextState = "atacar"
 				if countdowntimer_manager:IsActive(timerPerseguir) then
 					countdowntimer_manager:Reset(timerPerseguir, false)
@@ -31,7 +31,7 @@ function check_next_state()
 				l_NextState = "andando"
 				countdowntimer_manager:Reset(timerPerseguir, false)
 			end
-	elseif l_DistanceToPlayer < 8 and l_PlayerInSight then
+	elseif l_PlayerInSight then
 			l_NextState = "atacar"
 			if countdowntimer_manager:IsActive(timerPerseguir) then
 				countdowntimer_manager:Reset(timerPerseguir, false)

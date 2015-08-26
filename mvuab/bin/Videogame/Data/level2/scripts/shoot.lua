@@ -6,6 +6,7 @@ function CShootLUA:__init(speed, direction, position, damage)
     self.Impacted = false
     self.Direction = direction
 	self.Position = position
+	self.InitialPosition = position
 	self.Yaw = 0.0
 	self.Pitch = 0.0
 	self.Name = "Shoot" .. id_manager:GetId("Shoot")
@@ -35,6 +36,8 @@ function CShootLUA:Update()
 		
 		hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 )
 		
+		local lDistanceInitial = self.InitialPosition:Distance(lNewPosition)
+		engine:Trace("Distancia que ha recorrido: "..lDistanceInitial)
 		if not (hit_info.Distance == 0.0) then
 			lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 			lDistance = lCollisionPoint:Distance( lNewPosition )
@@ -52,6 +55,10 @@ function CShootLUA:Update()
 			end
 		else
 			self.Position = lNewPosition
+		end
+		if lDistanceInitial > 100.0 then
+				self.Impacted = true
+				self.Billboard:SetActive( false )
 		end
 		self.Billboard:SetPosition( self.Position )
 		self.Billboard:MakeTransform()

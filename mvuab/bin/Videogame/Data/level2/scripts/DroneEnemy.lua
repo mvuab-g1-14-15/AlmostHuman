@@ -23,8 +23,8 @@ function CDroneEnemyLUA:Update()
 	--UPDATE MESH
 	local lCharacterController = CEnemyLUA.GetCharacterController(self)
 	local lMeshPosition = lCharacterController:GetPosition()
-	lCharacterController:SetPosition(lMeshPosition)
 	lMeshPosition.y = self.HeightFly - CEnemyLUA.GetHeight(self)/2
+	lCharacterController:SetPosition(lMeshPosition)
 	lRenderableObject = CEnemyLUA.GetAnimationModel(self)
 	lRenderableObject:SetPosition(lMeshPosition)
 	lRenderableObject:SetYaw(-lCharacterController:GetYaw() + g_HalfPi)

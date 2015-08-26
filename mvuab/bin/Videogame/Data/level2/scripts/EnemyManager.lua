@@ -65,21 +65,24 @@ function CEnemyManagerLUA:Update()
 		end
 	end
 	for i in pairs (self.Enemy) do
-		self.ActualEnemy = self.Enemy[i]
-		if self.ActualEnemy:GetLife() > 0 then
-			self.ActualEnemy:Update()
-		else
-			if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
-				AnimatedModel = self.ActualEnemy:GetAnimationModel()
-				AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
-				countdowntimer_manager:AddTimer(self.ActualEnemy:GetName().."DeadTimer", 2.0, false)
-			end
-		
-			if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then
-				countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
-				self.ActualEnemy:Destroy()
-				table.remove(self.Enemy, i)
-				collectgarbage()
+		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
+			self.ActualEnemy = self.Enemy[i]
+			if self.ActualEnemy:GetLife() > 0 then
+				self.ActualEnemy:Update()
+			else
+				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
+					AnimatedModel = self.ActualEnemy:GetAnimationModel()
+					AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
+					countdowntimer_manager:AddTimer(self.ActualEnemy:GetName().."DeadTimer", 10.0, false)
+				end
+			
+				if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then				
+					countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
+					self.ActualEnemy:Destroy()
+					self.Enemy[i] = nil
+					--table.remove(self.Enemy, i)
+					collectgarbage()
+				end
 			end
 		end
 	end
