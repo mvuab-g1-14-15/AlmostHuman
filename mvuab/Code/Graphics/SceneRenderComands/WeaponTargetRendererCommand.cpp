@@ -25,7 +25,6 @@ CWeaponTargetRendererCommand::CWeaponTargetRendererCommand( CXMLTreeNode& atts )
 
 void CWeaponTargetRendererCommand::Execute( CGraphicsManager& GM )
 {
-    return;
     // Activate the textures
     ActivateTextures();
 
