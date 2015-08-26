@@ -238,6 +238,7 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD( CPhysicActor, AddImpulseAtPos )
   //LUA_DECLARE_METHOD( CPhysicActor, AddForceAtPos )
   LUA_DECLARE_METHOD( CPhysicActor, GetPosition )
+  LUA_DECLARE_METHOD( CPhysicActor, MoveGlobalPosition)
   LUA_END_DECLARATION
 
 
@@ -249,6 +250,7 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD( CPhysicsManager, RaycastClosestActor )
   LUA_DECLARE_METHOD( CPhysicsManager, RaycastClosestActorName )
   LUA_DECLARE_METHOD( CPhysicsManager, AddPhysicActor )
+  LUA_DECLARE_METHOD( CPhysicsManager, AddActorCapsule )
   LUA_DECLARE_METHOD( CPhysicsManager, AddController )
   LUA_DECLARE_METHOD( CPhysicsManager, ReleasePhysicActor )
   LUA_DECLARE_METHOD_PROTO( CPhysicsManager, GetUserData, CPhysicUserData * ( CPhysicsManager::* )( const std::string& ) )

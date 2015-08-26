@@ -98,6 +98,8 @@ public:
   bool          AddActor( const std::string& Name, const std::string& Type, const Math::Vect3f& _vDimension, const Math::CColor& Color = Math::colBLACK,
                           bool Paint = true, const Math::Vect3f& _vGlobalPos = v3fZERO, const Math::Vect3f& _vLocalPos = v3fZERO, const Math::Vect3f& rotation = v3fZERO,
                           NxCCDSkeleton* _pSkeleton = 0, uint32 _uiGroup = 0 );
+  bool			AddActorCapsule( const std::string& aName, float aRadius, float aHeight );
+
   bool          AddMesh( const std::string& Path, const std::string& Name);
   //--- Add/Release CharacterControllers
   bool          AddPhysicController( CPhysicController* _pController,

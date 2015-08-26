@@ -1443,6 +1443,11 @@ bool CPhysicsManager::AddActor( const std::string& Name, const std::string& Type
     return false;
 }
 
+bool CPhysicsManager::AddActorCapsule( const std::string& aName, float aRadius, float aHeight )
+{
+	return AddActor( aName, "Capsule", Vect3f(aRadius, aHeight, 0.0f));
+}
+
 bool CPhysicsManager::AddController( const std::string& Name, float radius, float height, float slope, float skin_width,
                                      float step,
                                      Math::Vect3f pos,
