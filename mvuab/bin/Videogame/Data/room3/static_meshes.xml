@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="sala_3_room3" filename="meshes\sala_3.mesh" />
-  <static_mesh name="escala_room3" filename="meshes\escala.mesh" />
-  <static_mesh name="escala001_room3" filename="meshes\escala001.mesh" />
-  <static_mesh name="escala002_room3" filename="meshes\escala002.mesh" />
-  <static_mesh name="escala003_room3" filename="meshes\escala003.mesh" />
-  <static_mesh name="escala004_room3" filename="meshes\escala004.mesh" />
   <static_mesh name="andride084_room3" filename="meshes\andride084.mesh" />
   <static_mesh name="cinta_010_room3" filename="meshes\cinta_010.mesh" />
   <static_mesh name="cinta_011_room3" filename="meshes\cinta_011.mesh" />
@@ -13,12 +8,9 @@
   <static_mesh name="cinta_013_room3" filename="meshes\cinta_013.mesh" />
   <static_mesh name="cinta_014_room3" filename="meshes\cinta_014.mesh" />
   <static_mesh name="cinta_015_room3" filename="meshes\cinta_015.mesh" />
-  <static_mesh name="Object002_room3" filename="meshes\Object002.mesh" />
   <static_mesh name="Box021_room3" filename="meshes\Box021.mesh" />
   <static_mesh name="Box022_room3" filename="meshes\Box022.mesh" />
   <static_mesh name="trasto_004_room3" filename="meshes\trasto_004.mesh" />
-  <static_mesh name="COMPONENT0_Mesh_007_room3" filename="meshes\COMPONENT0_Mesh_007.mesh" />
-  <static_mesh name="COMPONENT0_Mesh_008_room3" filename="meshes\COMPONENT0_Mesh_008.mesh" />
   <static_mesh name="Reixa_014_room3" filename="meshes\Reixa_014.mesh" />
   <static_mesh name="Reixa_015_room3" filename="meshes\Reixa_015.mesh" />
   <static_mesh name="Reixa_016_room3" filename="meshes\Reixa_016.mesh" />
@@ -70,7 +62,6 @@
   <static_mesh name="Reixa_032_room3" filename="meshes\Reixa_032.mesh" />
   <static_mesh name="Reixa_033_room3" filename="meshes\Reixa_033.mesh" />
   <static_mesh name="Reixa_034_room3" filename="meshes\Reixa_034.mesh" />
-  <static_mesh name="Maquina_ensambladora_room3" filename="meshes\Maquina_ensambladora.mesh" />
   <static_mesh name="cinta_7_room3" filename="meshes\cinta_7.mesh" />
   <static_mesh name="robot_assembly002_room3" filename="meshes\robot_assembly002.mesh" />
   <static_mesh name="Reixa_009_room3" filename="meshes\Reixa_009.mesh" />
@@ -84,7 +75,6 @@
   <static_mesh name="Reixa_007_room3" filename="meshes\Reixa_007.mesh" />
   <static_mesh name="Reixa_003_room3" filename="meshes\Reixa_003.mesh" />
   <static_mesh name="robot_assembly_room3" filename="meshes\robot_assembly.mesh" />
-  <static_mesh name="COMPONENT0_Mesh_005_room3" filename="meshes\COMPONENT0_Mesh_005.mesh" />
   <static_mesh name="Box020_room3" filename="meshes\Box020.mesh" />
   <static_mesh name="Reixa_002_room3" filename="meshes\Reixa_002.mesh" />
   <static_mesh name="Reixa_004_room3" filename="meshes\Reixa_004.mesh" />
@@ -92,7 +82,6 @@
   <static_mesh name="Reixa_005_room3" filename="meshes\Reixa_005.mesh" />
   <static_mesh name="porta_sala3_room3" filename="meshes\porta_sala3.mesh" />
   <static_mesh name="cinta_4_room3" filename="meshes\cinta_4.mesh" />
-  <static_mesh name="COMPONENT0_Mesh_006_room3" filename="meshes\COMPONENT0_Mesh_006.mesh" />
   <static_mesh name="trasto_3_room3" filename="meshes\trasto_3.mesh" />
   <static_mesh name="cinta_8_room3" filename="meshes\cinta_8.mesh" />
   <static_mesh name="cinta_5_room3" filename="meshes\cinta_5.mesh" />
@@ -175,7 +164,6 @@
   <static_mesh name="Reixa_082_room3" filename="meshes\Reixa_082.mesh" />
   <static_mesh name="Reixa_083_room3" filename="meshes\Reixa_083.mesh" />
   <static_mesh name="Reixa_084_room3" filename="meshes\Reixa_084.mesh" />
-  <static_mesh name="porta_sala004_room3" filename="meshes\porta_sala004.mesh" />
   <static_mesh name="Reixa_085_room3" filename="meshes\Reixa_085.mesh" />
   <static_mesh name="Reixa_086_room3" filename="meshes\Reixa_086.mesh" />
   <static_mesh name="Reixa_087_room3" filename="meshes\Reixa_087.mesh" />
@@ -192,21 +180,6 @@
   <static_mesh name="Reixa_098_room3" filename="meshes\Reixa_098.mesh" />
   <static_mesh name="Reixa_099_room3" filename="meshes\Reixa_099.mesh" />
   <static_mesh name="Reixa_100_room3" filename="meshes\Reixa_100.mesh" />
-  <static_mesh name="Llum_001_room3" filename="meshes\Llum_001.mesh" />
-  <static_mesh name="Llum_002_room3" filename="meshes\Llum_002.mesh" />
-  <static_mesh name="Llum_003_room3" filename="meshes\Llum_003.mesh" />
-  <static_mesh name="Llum_004_room3" filename="meshes\Llum_004.mesh" />
-  <static_mesh name="Llum_005_room3" filename="meshes\Llum_005.mesh" />
-  <static_mesh name="Llum_006_room3" filename="meshes\Llum_006.mesh" />
-  <static_mesh name="Llum_007_room3" filename="meshes\Llum_007.mesh" />
-  <static_mesh name="Llum_008_room3" filename="meshes\Llum_008.mesh" />
-  <static_mesh name="Llum_009_room3" filename="meshes\Llum_009.mesh" />
-  <static_mesh name="Llum_010_room3" filename="meshes\Llum_010.mesh" />
-  <static_mesh name="Llum_011_room3" filename="meshes\Llum_011.mesh" />
-  <static_mesh name="Llum_012_room3" filename="meshes\Llum_012.mesh" />
-  <static_mesh name="Llum_013_room3" filename="meshes\Llum_013.mesh" />
-  <static_mesh name="Llum_020_room3" filename="meshes\Llum_020.mesh" />
-  <static_mesh name="Llum_015_room3" filename="meshes\Llum_015.mesh" />
   <static_mesh name="ventilador_01_room3" filename="meshes\ventilador_01.mesh" />
   <static_mesh name="enganche_017_room3" filename="meshes\enganche_017.mesh" />
   <static_mesh name="enganche_018_room3" filename="meshes\enganche_018.mesh" />
@@ -218,7 +191,6 @@
   <static_mesh name="Object009_room3" filename="meshes\Object009.mesh" />
   <static_mesh name="Object010_room3" filename="meshes\Object010.mesh" />
   <static_mesh name="Object011_room3" filename="meshes\Object011.mesh" />
-  <static_mesh name="Escales_room3" filename="meshes\Escales.mesh" />
   <static_mesh name="container_room3" filename="meshes\container.mesh" />
   <static_mesh name="container001_room3" filename="meshes\container001.mesh" />
   <static_mesh name="container002_room3" filename="meshes\container002.mesh" />
@@ -227,8 +199,6 @@
   <static_mesh name="container006_room3" filename="meshes\container006.mesh" />
   <static_mesh name="container007_room3" filename="meshes\container007.mesh" />
   <static_mesh name="container008_room3" filename="meshes\container008.mesh" />
-  <static_mesh name="Llum_018_room3" filename="meshes\Llum_018.mesh" />
-  <static_mesh name="Object012_room3" filename="meshes\Object012.mesh" />
   <static_mesh name="container009_room3" filename="meshes\container009.mesh" />
   <static_mesh name="container010_room3" filename="meshes\container010.mesh" />
   <static_mesh name="container011_room3" filename="meshes\container011.mesh" />
@@ -253,4 +223,43 @@
   <static_mesh name="container030_room3" filename="meshes\container030.mesh" />
   <static_mesh name="container031_room3" filename="meshes\container031.mesh" />
   <static_mesh name="container032_room3" filename="meshes\container032.mesh" />
+  <static_mesh name="msf_Ceiling04_room3" filename="meshes\msf_Ceiling04.mesh" />
+  <static_mesh name="msf_Ceiling005_room3" filename="meshes\msf_Ceiling005.mesh" />
+  <static_mesh name="msf_Steps2_room3" filename="meshes\msf_Steps2.mesh" />
+  <static_mesh name="msf_WallCapping01_room3" filename="meshes\msf_WallCapping01.mesh" />
+  <static_mesh name="msf_WallCapping002_room3" filename="meshes\msf_WallCapping002.mesh" />
+  <static_mesh name="msf_WallCapping003_room3" filename="meshes\msf_WallCapping003.mesh" />
+  <static_mesh name="mfs_Ceiling004_room3" filename="meshes\mfs_Ceiling004.mesh" />
+  <static_mesh name="mfs_Ceiling005_room3" filename="meshes\mfs_Ceiling005.mesh" />
+  <static_mesh name="msf2_Lamp02_room3" filename="meshes\msf2_Lamp02.mesh" />
+  <static_mesh name="msf2_Lamp003_room3" filename="meshes\msf2_Lamp003.mesh" />
+  <static_mesh name="msf2_Lamp004_room3" filename="meshes\msf2_Lamp004.mesh" />
+  <static_mesh name="msf2_Lamp005_room3" filename="meshes\msf2_Lamp005.mesh" />
+  <static_mesh name="msf2_Lamp006_room3" filename="meshes\msf2_Lamp006.mesh" />
+  <static_mesh name="msf2_Lamp007_room3" filename="meshes\msf2_Lamp007.mesh" />
+  <static_mesh name="msf2_Lamp008_room3" filename="meshes\msf2_Lamp008.mesh" />
+  <static_mesh name="msf2_Lamp009_room3" filename="meshes\msf2_Lamp009.mesh" />
+  <static_mesh name="msf2_Lamp010_room3" filename="meshes\msf2_Lamp010.mesh" />
+  <static_mesh name="msf2_Lamp011_room3" filename="meshes\msf2_Lamp011.mesh" />
+  <static_mesh name="msf2_Lamp012_room3" filename="meshes\msf2_Lamp012.mesh" />
+  <static_mesh name="msf2_Lamp013_room3" filename="meshes\msf2_Lamp013.mesh" />
+  <static_mesh name="msf2_Lamp014_room3" filename="meshes\msf2_Lamp014.mesh" />
+  <static_mesh name="msf2_Lamp015_room3" filename="meshes\msf2_Lamp015.mesh" />
+  <static_mesh name="msf2_Lamp016_room3" filename="meshes\msf2_Lamp016.mesh" />
+  <static_mesh name="msf2_Lamp017_room3" filename="meshes\msf2_Lamp017.mesh" />
+  <static_mesh name="msf2_Lamp018_room3" filename="meshes\msf2_Lamp018.mesh" />
+  <static_mesh name="msf2_Lamp019_room3" filename="meshes\msf2_Lamp019.mesh" />
+  <static_mesh name="msf2_Lamp020_room3" filename="meshes\msf2_Lamp020.mesh" />
+  <static_mesh name="msf2_Lamp021_room3" filename="meshes\msf2_Lamp021.mesh" />
+  <static_mesh name="msf2_Lamp022_room3" filename="meshes\msf2_Lamp022.mesh" />
+  <static_mesh name="msf2_Lamp023_room3" filename="meshes\msf2_Lamp023.mesh" />
+  <static_mesh name="msf2_Lamp024_room3" filename="meshes\msf2_Lamp024.mesh" />
+  <static_mesh name="msf2_Lamp025_room3" filename="meshes\msf2_Lamp025.mesh" />
+  <static_mesh name="msf2_Lamp026_room3" filename="meshes\msf2_Lamp026.mesh" />
+  <static_mesh name="msf2_Lamp027_room3" filename="meshes\msf2_Lamp027.mesh" />
+  <static_mesh name="msf2_Lamp028_room3" filename="meshes\msf2_Lamp028.mesh" />
+  <static_mesh name="Reixa_101_room3" filename="meshes\Reixa_101.mesh" />
+  <static_mesh name="Reixa_102_room3" filename="meshes\Reixa_102.mesh" />
+  <static_mesh name="Reixa_103_room3" filename="meshes\Reixa_103.mesh" />
+  <static_mesh name="Reixa_104_room3" filename="meshes\Reixa_104.mesh" />
 </static_meshes>
