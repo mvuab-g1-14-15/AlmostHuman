@@ -38,6 +38,7 @@ extern "C"
 #include "Characters/Enemies/EnemyManager.h"
 
 #include "Triggers/Trigger.h"
+#include "Triggers/TriggerManager.h"
 
 #define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
 
@@ -317,12 +318,18 @@ void registerPhysX( lua_State* m_LS )
   
   /* TRIGGER */
   LUA_BEGIN_DECLARATION( m_LS )
-    LUA_DECLARE_DERIVED_CLASS(CTrigger, CObject3D)
-    LUA_END_DECLARATION
+  LUA_DECLARE_CLASS(CTriggerManager)
+  LUA_DECLARE_METHOD( CTriggerManager, ReleaseTrigger )
+  LUA_DECLARE_METHOD( CTriggerManager, AddTrigger )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_DERIVED_CLASS(CTrigger, CObject3D)
+  LUA_END_DECLARATION
   
-    LUA_BEGIN_DECLARATION( m_LS )
-    LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateTrigger )
-    LUA_END_DECLARATION
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateTrigger )
+  LUA_END_DECLARATION
 
   /*
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

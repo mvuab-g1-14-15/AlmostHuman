@@ -90,6 +90,16 @@ void CTriggerManager::Release()
     { ( *itb )->Release(); }
 }
 
+void CTriggerManager::ReleaseTrigger(const std::string& _trigger)
+{
+  RemoveResource( _trigger );
+}
+
+void CTriggerManager::AddTrigger(CTrigger* lTrigger)
+{
+  AddResource(lTrigger->GetName(), lTrigger);
+}
+
 std::vector<CTrigger*> CTriggerManager::GetTriggersVector()
 {
     return m_ResourcesVector;

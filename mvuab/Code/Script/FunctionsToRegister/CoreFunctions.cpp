@@ -32,6 +32,7 @@
 #include "Cinematics\CinematicManager.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "Billboard\BillboardManager.h"
+#include "Triggers\TriggerManager.h"
 
 #include "luabind_macros.h"
 
@@ -66,6 +67,11 @@ CScene* GetScene()
 CTextureManager* GetTextureManager()
 {
   return TextureMInstance;
+}
+
+CTriggerManager* GetTriggerManager()
+{
+  return TriggersMInstance;
 }
 
 //CEnemyManager* GetEnemyManager()
@@ -176,6 +182,10 @@ void registerManagers( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetPhysicsManager )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetTriggerManager )
   LUA_END_DECLARATION
 
   /*LUA_BEGIN_DECLARATION( aLuaState )
