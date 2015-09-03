@@ -233,7 +233,7 @@ function CEnemyManagerLUA:SetAlarm(aAlarm)
 end
 
 function CEnemyManagerLUA:GenerateEnemy()
-	local lRoom = scene:GetActivateRoom()
+	local lRoom = "room2"--scene:GetActivateRoom()
 	engine:Trace("Name room:"..lRoom)
 	local Node = self.ExtraEnemy[lRoom]
 	self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )

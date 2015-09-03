@@ -15,7 +15,7 @@ function load_basics()
 	-- basic loads
 	--scene:ActivateRoom("room1")
 	scene:ActivateRoom("room2")
-	scene:ActivateRoom("room3")
+	--scene:ActivateRoom("room3")
 end
 
 function load_gameplay()
@@ -73,15 +73,16 @@ function update_gameplay()
 				g_bPressedX = true
 			end
 		end
+		
+	end
+	if g_bInBarrel then
 		if action_manager:DoAction("EnterBarrel") then
-			if g_bInBarrel then
-				engine:Trace("Entered in barrel!!!!!")
-				local lBarrel = g_Barrels[g_BarrelName]
-				lBarrel:SetStateInside()
-			end
+			engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
+			lBarrel = g_Barrels[g_BarrelName]
+			lBarrel:SetStateInside()
+			g_bInBarrel = false
 		end
 	end
-	
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeCamera" ) then
 			if "FreeCam" == camera_manager:GetCurrentCameraName() then

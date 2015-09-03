@@ -82,7 +82,6 @@ function HiddenBarrel(aName, other_shape)
 	gui_manager:ShowStaticText("HideInBarrel")
 	if g_bInBarrel then
 		g_bInBarrel = false
-		g_BarrelName = ""
 	else
 		g_bInBarrel = true
 		g_BarrelName = aName
