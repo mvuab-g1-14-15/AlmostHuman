@@ -313,6 +313,7 @@ std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
 
   return codeCat.str();
 }
+
 void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
                                     CPhysicUserData* _Other_Shape )
 {
@@ -331,8 +332,8 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
-
 }
+
 void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
                                     CPhysicUserData* _Other_Shape )
 {
@@ -351,8 +352,8 @@ void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
-
 }
+
 void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
                                    CPhysicUserData* _Other_Shape )
 {
@@ -371,5 +372,4 @@ void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
     LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
-
 }
