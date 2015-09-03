@@ -414,7 +414,7 @@ void CAnimatedInstanceModel::CalculateNewLightProbeMatrix()
 	if ( m_PreviousPosition != GetPosition() )
 	{
 		// Calculate the ambient light with the light probe
-		std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes("room2", GetPosition());
+		std::vector<CLightProbe*> lLightProbes = SceneInstance->GetClosedLightProbes(GetRoomName(), GetPosition());
 	
 		float l_LPMatrix[gLightProbeSize];
 

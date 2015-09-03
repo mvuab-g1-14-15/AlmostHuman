@@ -117,7 +117,7 @@ void CScene::LoadRoom( std::string aRoomName )
       SMeshMInstance->Load( lSMPath, lBasePath );
 
     if ( lROPath.find( ".xml" ) != std::string::npos )
-      lROLM->LoadLayers( lROPath );
+      lROLM->LoadLayers( lROPath, aRoomName );
 
     LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
 
@@ -156,8 +156,8 @@ void CScene::DesactivateRoom( std::string aRoomName )
 
 std::vector<CLightProbe*> CScene::GetClosedLightProbes( std::string aRoomName, Math::Vect3f aPos )
 {
-  //CRoom* lRoom = GetResource( aRoomName );
-  CRoom* lRoom = GetResource( "room2" ); // Hardcoded for test
+  CRoom* lRoom = GetResource( aRoomName );
+  //CRoom* lRoom = GetResource( "room2" ); // Hardcoded for test
 
   if ( lRoom )
     return lRoom->GetClosedLightProbes( aPos );

@@ -60,19 +60,23 @@ bool SPointDistComparison( SPointDist a, SPointDist b)
 std::vector<CLightProbe*> CRoom::GetClosedLightProbes( Math::Vect3f aPos )
 {
 	std::vector<CLightProbe*> lLightProbes;
-	std::vector<SPointDist> lDistances;
-	for( unsigned int i = 0; i < mLightProbes.size(); ++i)
-	{
-		Math::Vect3f lPos = mLightProbes[i]->GetPosition();
-		float lDist = lPos.SqDistance( aPos );
-		SPointDist s = { mLightProbes[i], lDist };
-		lDistances.push_back( s );
-	}
 
-	std::sort( lDistances.begin(), lDistances.end(), SPointDistComparison);
+  if (!mLightProbes.empty())
+  {
+	  std::vector<SPointDist> lDistances;
+	  for( unsigned int i = 0; i < mLightProbes.size(); ++i)
+	  {
+		  Math::Vect3f lPos = mLightProbes[i]->GetPosition();
+		  float lDist = lPos.SqDistance( aPos );
+		  SPointDist s = { mLightProbes[i], lDist };
+		  lDistances.push_back( s );
+	  }
 
-	for (int i = 0; i < 4; ++i)
-		lLightProbes.push_back(lDistances[i].lightprobe);
+	  std::sort( lDistances.begin(), lDistances.end(), SPointDistComparison);
+
+	  for (int i = 0; i < 4; ++i)
+		  lLightProbes.push_back(lDistances[i].lightprobe);
+  }
 
 	return lLightProbes;
 }

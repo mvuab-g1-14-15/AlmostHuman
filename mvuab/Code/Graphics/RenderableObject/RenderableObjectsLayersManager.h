@@ -16,9 +16,9 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
         std::vector<CPhysicUserData *> m_PhyscsUserData;
         CRenderableObjectsManager* m_DefaultRenderableObjectManager;
         CRenderableObjectsManager* GetRenderableObjectManager( const std::string &l_Name );
-		void LoadRenderableObject(const std::string &l_FilePath, const std::string& l_Name);
+		void LoadRenderableObject(const std::string &l_FilePath, const std::string& l_Name, const std::string& l_RoomName);
 		
-        void AddNewInstaceMesh(const CXMLTreeNode& atts, const std::string &l_Layer);
+        void AddNewInstaceMesh(const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName);
 
     public:
         CRenderableObjectsLayersManager();
@@ -27,7 +27,7 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
 
         void Destroy();
         
-		bool LoadLayers(const std::string &l_FilePath);
+		bool LoadLayers(const std::string &l_FilePath, const std::string &l_RoomName);
         void Update();
 
         void Render();
