@@ -20,7 +20,7 @@ scene_renderer_commands_manager = GetSceneRendererCommandsManager()
 billboard_manager = GetBillboardManager()
 light_manager = GetLightManager()
 texture_manager = GetTextureManager()
-triiger_manager = GetTriggerManager()
+trigger_manager = GetTriggerManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0

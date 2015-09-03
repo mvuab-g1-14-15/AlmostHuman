@@ -309,7 +309,7 @@ std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
        1 ) //Si es 1 es que no tiene parametro por defecto, por ejemplo  funcion() y pasaría a function(other_shape)
     codeCat << l_LuaCode2 << "'" << Other_Shape.c_str() << "'" << ")";
   else //en este caso podría ser algo así --> funcion(parametro1, parametro2) y añadir el othershape como tercer parametro
-    codeCat << l_LuaCode2 << "," << "'" << Other_Shape.c_str() << "')";
+    codeCat << l_LuaCode2 << "' ," << "'" << Other_Shape.c_str() << "')";
 
   return codeCat.str();
 }

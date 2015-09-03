@@ -76,15 +76,16 @@ function StayText(other_shape)
 	end
 end
 
-function HiddenBarrel(aName)
-	gui_manager:ShowStaticText("Entrar Barril")
+function HiddenBarrel(aName, other_shape)
+	gui_manager:ShowStaticText("HideInBarrel")
 	if action_manager:DoAction("EnterBarrel") then
 		local lBarrel = g_Barrels[aName]
+		engine:Trace("-----> Barrel Name: "..aName)
 		lBarrel:SetStateInside()
 	end
 end
 
-function HiddenBarrelExit(aName)
+function HiddenBarrelExit(aName, other_shape)
 	local lBarrel = g_Barrels[aName]
 	lBarrel:RestoreBarrel()
 end

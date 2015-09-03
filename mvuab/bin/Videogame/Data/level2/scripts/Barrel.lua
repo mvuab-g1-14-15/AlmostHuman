@@ -7,6 +7,7 @@ function CBarrel:__init(aName, aPosition)
 	self.Height = 0.8
 	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
+	trigger_manager:AddTrigger( self.Trigger )
 
 	--physic_manager:AddActorCapsule(self.Name, self.Radius, self.Height)
 	--self.Actor = physic_manager:GetActor(self.Name)
@@ -35,10 +36,10 @@ function CBarrel:RestoreBarrel()
 	--self.Actor:SetActive( true )
 	self.RenderableObject:SetActive( true )
 	
-	-- Sacar del trigger manager el trigger anterior
+	trigger_manager:ReleaseTrigger(self.Name)
 	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
-	-- Poner trigger en el trigger manager
+	trigger_manager:AddTrigger( self.Trigger )
 end
 
 function CBarrel:ExitBarrel( aPos )
@@ -50,7 +51,7 @@ function CBarrel:ExitBarrel( aPos )
 	self.RenderableObject:MakeTransform()
 	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius, self.Height, self.Radius), false, false, true, "", "", "HiddenBarrelExit('"..self.Name..")")
-	-- Poner trigger en el trigger manager
+	trigger_manager:AddTrigger( self.Trigger )
 end
 
 function CBarrel:SetStateInside()
@@ -60,5 +61,5 @@ function CBarrel:SetStateInside()
 	-- Setear al player dentro del barril
 	g_Player:HideInBarrel()
 	
-	-- Quitar el trigger del trigger manager
+	trigger_manager:ReleaseTrigger(self.Name)
 end
