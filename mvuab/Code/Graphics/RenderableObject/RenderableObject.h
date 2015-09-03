@@ -19,8 +19,13 @@ class CRenderableObject : public CObject3D, public CName
         virtual void Update() {}
         virtual void Render() = 0;
 
+        std::string GetRoomName();
+        void SetRoomName( std::string );
+
     private:
         bool m_Active;
+
+        std::string m_RoomName;
 };
 
 #endif

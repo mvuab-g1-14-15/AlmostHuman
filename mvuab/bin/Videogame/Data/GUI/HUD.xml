@@ -22,5 +22,6 @@
 	<StaticText name="OpenDoor" pos="40 80" height="30" width="12" visible="false" active="false" Literal="OpenDoor" />
 	<StaticText name="Block" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Block" />
 	<StaticText name="CambiarSala" pos="40 80" height="30" width="12" visible="false" active="false" Literal="CambiarSala" />
+	<StaticText name="HideInBarrel" pos="40 80" height="30" width="12" visible="false" active="false" Literal="HideInBarrel" />
 	
 </Windows>

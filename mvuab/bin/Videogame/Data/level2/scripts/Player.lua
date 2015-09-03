@@ -23,6 +23,7 @@ function CPlayer:__init()
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel("Player", "Player")
+		self.RenderableObject:SetRoomName( "room1" )
 		renderable_objects_manager_characters:AddResource("Player", self.RenderableObject)
 	end
 
@@ -62,6 +63,12 @@ function CPlayer:Update()
 		if action_manager:DoAction("LyingDown") then
 			self:HideInBarrel()
 		end
+		
+		if self.InsideBarrel then
+			if action_manager:DoAction("EnterBarrel") then
+				self:ExitBarrel()
+			end
+		end
 	end
 	
 	self.Blaster:Update()
@@ -70,6 +77,8 @@ function CPlayer:Update()
 		self.PlayerController:SetPosition(Respawn())
 		self.Life= 100.0
 	end
+	
+	
 	--engine:Trace( "Player life: " .. self.Life )
 end
 
@@ -126,15 +135,20 @@ function CPlayer:SetEnergy(amount)
 	self.Blaster:SetEnergy(amount)
 end
 
-function CPlayer:HideInBarrel()
+function CPlayer:HideInBarrel( aName )
 	if not self.Hidden then
+		engine:Trace("No estoy oculto")
 		local l_Can = true
 		if not self.PlayerController.Crouch then
+			engine:Trace("No estoy agachado")
 			l_Can = self.PlayerController:MakeCrouch()
 		end
 		
 		if l_Can then
+			engine:Trace("Puedo entrar en el barril")
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", true)
+			self.InsideBarrel = true
+			self.BarrelName = aName
 		end
 		
 		self.Hidden = true
@@ -146,6 +160,8 @@ function CPlayer:HideInBarrel()
 		
 		if l_Can then
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", false)
+			self.InsideBarrel = false
+			self.BarrelName = aName
 		end
 		
 		self.Hidden = false
@@ -153,6 +169,7 @@ function CPlayer:HideInBarrel()
 end
 
 function CPlayer:ExitBarrel()
-	local lBarrel = g_Barrels[self.BarrelName]
+	engine:Trace("BarrelName = "..self.BarrelName)
+	lBarrel = g_Barrels[self.BarrelName]
 	lBarrel:ExitBarrel(self:GetPosition())
 end

@@ -46,14 +46,9 @@ public:
       u_int Type );
   void                                Clear();
   void                                Release();
-  void                                ReleaseTrigger( const std::string&
-      _trigger );
+  void                                ReleaseTrigger( const std::string& _trigger );
 
-  //void                                AddTrigger                  (CXMLTreeNode XMLData, ItemCore *Core, Vect3f Pos,sTrigger TriggerLua);
-  //void                                AddTriggerWithoutXML        (std::string Name, ItemCore *Core, Vect3f Pos);
-
-  //void                                AddTrigger                  (CXMLTreeNode XMLData,Vect3f Size, Vect3f Pos, int Group,sTrigger TriggerLua);
-  //void                                AddTriggerWithoutXML        (std::string Name, Vect3f Size, Vect3f Pos, int Group, sTrigger TriggerLua);
+  void                                AddTrigger                  (CTrigger* lTrigger );
 
   // Métodos para Luabind
   int                                 GetValue() const;

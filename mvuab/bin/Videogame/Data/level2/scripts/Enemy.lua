@@ -21,6 +21,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel(self.Name, Node:GetAttributeString("mesh", "default_mesh"))
+		self.RenderableObject:SetRoomName( Node:GetAttributeString("room", "") )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
 	

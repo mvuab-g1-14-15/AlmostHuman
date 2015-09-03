@@ -42,21 +42,6 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
   , m_pRenderableObject( NULL )
   , mPathCalculated( false )
 {
-<<<<<<< HEAD
-  CCharacter::Init( Node );
-
-  CCameraManager* lCM = CameraMInstance;
-  lCM->NewCamera( CCamera::Free, GetName(), Math::Vect3f( 0.0f, 1.0f, 0.0f ), Math::Vect3f( 0.0f ) );
-
-  mCamera = lCM->GetResource( GetName() );
-  Math::Vect3f lPosition = m_Position;
-  lPosition.y += GetHeight();
-  lPosition += GetDirectionEnemy() * 0.4f;
-  mCamera->SetPosition( lPosition );
-  mCamera->SetDirection( GetDirectionEnemy() );
-
-  mCamera->MakeTransform();
-=======
   /* CCharacter::Init( Node );
 
    CCameraManager* lCM = CameraMInstance;
@@ -70,7 +55,6 @@ CEnemy::CEnemy( CXMLTreeNode& Node, CStateMachine* aStateMachine )
    mCamera->SetDirection( GetDirectionEnemy() );
 
    mCamera->MakeTransform();*/
->>>>>>> origin/Ruly
 }
 
 CEnemy::~CEnemy()
@@ -89,29 +73,6 @@ void CEnemy::Update()
 {
   m_Position = m_Controller->GetPosition();
   m_Position.y -=  m_Controller->GetHeight() / 2.0f;
-<<<<<<< HEAD
-  SetYaw( m_Controller->GetYaw() );
-  SetPitch( m_Controller->GetPitch() );
-  SetRoll( m_Controller->GetRoll() );
-
-  MakeTransform();
-
-  m_pRenderableObject->SetPosition( m_Position );
-  m_pRenderableObject->SetYaw( -m_fYaw + Math::half_pi32 );
-  m_pRenderableObject->SetPitch( m_fPitch );
-  m_pRenderableObject->SetRoll( m_fRoll );
-
-  m_pRenderableObject->MakeTransform();
-
-  Math::Vect3f lPosition = m_Position;
-  lPosition.y += GetHeight();
-  lPosition += GetDirectionEnemy() * 0.4f;
-  mCamera->SetPosition( lPosition );
-  mCamera->SetDirection( GetDirectionEnemy() );
-
-  mCamera->MakeTransform();
-
-=======
 
   SetYaw( m_Controller->GetYaw() );
   SetPitch( m_Controller->GetPitch() );
@@ -134,7 +95,6 @@ void CEnemy::Update()
 
   mCamera->MakeTransform();
 
->>>>>>> origin/Ruly
   Math::Vect3f l_Pos = m_Position;
   l_Pos.y += m_Controller->GetHeight();
 
@@ -260,10 +220,6 @@ void CEnemy::Render()
 
 void CEnemy::AddMesh( std::string MeshName )
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Ruly
     CRenderableObjectsManager* l_ROM = SceneInstance->GetResource("core")->GetLayers()->GetResource( "characters" );
 
   //m_pRenderableObject = new CInstanceMesh( m_Name, MeshName );

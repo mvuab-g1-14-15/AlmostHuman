@@ -2,8 +2,10 @@ g_bChargeEnergy = false
 g_bChangeRoom = false
 g_bPressX = false
 g_bPressedX = false
+g_bInBarrel = false
 CuentaAtras = 3
 engine = CEngine.GetSingletonPtr()
+
 function OnEnter()
 	process = engine:GetProcess()
 	physicUserData = process:GetNewPUD("Box6")
@@ -76,15 +78,17 @@ function StayText(other_shape)
 	end
 end
 
-function HiddenBarrel(aName)
-	gui_manager:ShowStaticText("Entrar Barril")
-	if action_manager:DoAction("EnterBarrel") then
-		local lBarrel = g_Barrels[aName]
-		lBarrel:SetStateInside()
+function HiddenBarrel(aName, other_shape)
+	gui_manager:ShowStaticText("HideInBarrel")
+	if g_bInBarrel then
+		g_bInBarrel = false
+	else
+		g_bInBarrel = true
+		g_BarrelName = aName
 	end
 end
 
-function HiddenBarrelExit(aName)
+function HiddenBarrelExit(aName, other_shape)
 	local lBarrel = g_Barrels[aName]
 	lBarrel:RestoreBarrel()
 end
