@@ -15,7 +15,7 @@ function load_basics()
 	-- basic loads
 	--scene:ActivateRoom("room1")
 	scene:ActivateRoom("room2")
-	--scene:ActivateRoom("room3")
+	scene:ActivateRoom("room3")
 end
 
 function load_gameplay()
@@ -71,6 +71,13 @@ function update_gameplay()
 			if g_bPressX then
 				gui_manager:ShowStaticText("Block")
 				g_bPressedX = true
+			end
+		end
+		if action_manager:DoAction("EnterBarrel") then
+			if g_bInBarrel then
+				engine:Trace("Entered in barrel!!!!!")
+				local lBarrel = g_Barrels[g_BarrelName]
+				lBarrel:SetStateInside()
 			end
 		end
 	end

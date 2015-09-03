@@ -6,7 +6,7 @@ function CBarrel:__init(aName, aPosition)
 	self.Radius = 0.2
 	self.Height = 0.8
 	
-	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
+	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, false, true, "HiddenBarrel('"..self.Name..")", "", "HiddenBarrel('"..self.Name..")")
 	trigger_manager:AddTrigger( self.Trigger )
 
 	--physic_manager:AddActorCapsule(self.Name, self.Radius, self.Height)
