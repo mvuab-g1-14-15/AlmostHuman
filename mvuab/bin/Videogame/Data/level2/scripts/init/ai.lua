@@ -2,12 +2,13 @@ tiempoDeEspera = 0
 
 function init_enemy()
 	enemy = g_EnemyManager:GetActualEnemy()
-	timerPerseguir = "Perseguir Player"
+	timerPerseguir = "Perseguir Player"..enemy:GetName()
 end
 
 function check_next_state()
 	
 	enemy = g_EnemyManager:GetActualEnemy()
+	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -19,7 +20,7 @@ function check_next_state()
 		if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 			if l_PlayerInSight then
 				l_NextState = "atacar"
-				if countdowntimer_manager:IsActive(timerPerseguir) then
+				if countdowntimer_manager:ExistTimer(timerPerseguir) then
 					countdowntimer_manager:Reset(timerPerseguir, false)
 				end
 				
@@ -66,6 +67,7 @@ end
 
 function atacar()
 	enemy = g_EnemyManager:GetActualEnemy()
+	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
 	if l_PlayerInSight then
