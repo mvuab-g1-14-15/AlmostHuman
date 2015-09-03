@@ -73,6 +73,13 @@ function update_gameplay()
 				g_bPressedX = true
 			end
 		end
+		if action_manager:DoAction("EnterBarrel") then
+			if g_bInBarrel then
+				engine:Trace("Entered in barrel!!!!!")
+				local lBarrel = g_Barrels[g_BarrelName]
+				lBarrel:SetStateInside()
+			end
+		end
 	end
 	
 	if not (g_ConsoleActivate or g_CinematicActive) then
