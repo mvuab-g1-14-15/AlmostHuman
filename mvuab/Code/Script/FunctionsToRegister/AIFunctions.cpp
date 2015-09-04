@@ -129,17 +129,22 @@ bool PlayerInSight( CCamera& aCamera )
     lDirection.Normalize();
 
     float lDistance = lPosition.Distance( aCamera.GetPosition() );
-	if (lDistance > aCamera.GetZFar())
-		lDistance = aCamera.GetZFar();
+
+    if ( lDistance > aCamera.GetZFar() )
+      lDistance = aCamera.GetZFar();
+
     lDistance++;
 
     CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
                                      lDistance );
-    CPhysicController* lRayController = 0;
 
-    if ( hit.m_CollisionPoint == 0 || lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
+    if ( lRayCollision )
+    {
+      if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f || lRayCollision->GetName() == "Player" )
+        return true;
+    }
+    else if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
       return true;
-
   }
 
   return false;
@@ -166,8 +171,10 @@ bool PlayerInSightDrone( CCamera& aCamera )
     lDirection.Normalize();
 
     float lDistance = lPosition.Distance( aCamera.GetPosition() );
-	if (lDistance > aCamera.GetZFar())
-		lDistance = aCamera.GetZFar();
+
+    if ( lDistance > aCamera.GetZFar() )
+      lDistance = aCamera.GetZFar();
+
     CPhysicUserData* lRayCollision = PhysXMInstance->RaycastClosestActor( aCamera.GetPosition(), lDirection, 0xffffff, hit,
                                      lDistance );
     CPhysicController* lRayController = 0;

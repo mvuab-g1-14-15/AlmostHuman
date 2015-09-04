@@ -6,7 +6,7 @@ function CBarrel:__init(aName, aPosition)
 	self.Radius = 0.2
 	self.Height = 0.8
 	
-	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
+	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, false, true, "HiddenBarrel('"..self.Name..")", "", "HiddenBarrel('"..self.Name..")")
 	trigger_manager:AddTrigger( self.Trigger )
 
 	--physic_manager:AddActorCapsule(self.Name, self.Radius, self.Height)
@@ -36,13 +36,14 @@ function CBarrel:RestoreBarrel()
 	--self.Actor:SetActive( true )
 	self.RenderableObject:SetActive( true )
 	
-	trigger_manager:ReleaseTrigger(self.Name)
+	--trigger_manager:ReleaseTrigger(self.Name)
 	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
 	trigger_manager:AddTrigger( self.Trigger )
 end
 
 function CBarrel:ExitBarrel( aPos )
+	engine:Trace("He pasado por aqui: "..aPos:ToString())
 	self.Pos = aPos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )
@@ -57,9 +58,9 @@ end
 function CBarrel:SetStateInside()
 	--self.Actor:SetActive( false )
 	self.RenderableObject:SetActive( false )
-	
+	--trigger_manager:ReleaseTrigger(self.Name)
 	-- Setear al player dentro del barril
-	g_Player:HideInBarrel()
+	g_Player:HideInBarrel(self.Name)
 	
-	trigger_manager:ReleaseTrigger(self.Name)
+	
 end

@@ -281,6 +281,13 @@ bool CPhysicController::UpdateCharacterExtents( bool bent, float ammount )
     //Agacharse
     height -= ammount;
     pos.y -= ammount * 0.5f;
+	NxExtendedVec3 position( pos.x, pos.y, pos.z );
+	m_pPhXController->setPosition( position );
+	SetPosition( Math::Vect3f( ( float )pos.x, ( float )pos.y, ( float )pos.z ) );
+	NxCapsuleController* c = static_cast<NxCapsuleController*>( m_pPhXController );
+	c->setHeight( height );
+	m_fHeightControler = height;
+	return true;
   }
 
   NxCapsule worldCapsule;
@@ -291,7 +298,7 @@ bool CPhysicController::UpdateCharacterExtents( bool bent, float ammount )
   worldCapsule.p1.y += height * 0.5f;
   worldCapsule.radius = radius;
   m_pPhXController->setCollision( false ); // Avoid checking overlap with ourself
-  bool Status = m_pPhXScene->checkOverlapCapsule( worldCapsule );
+  bool Status = m_pPhXScene->checkOverlapCapsule( worldCapsule);
   m_pPhXController->setCollision( true );
 
   if ( Status )
