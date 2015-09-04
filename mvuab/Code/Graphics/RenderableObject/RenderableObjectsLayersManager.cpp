@@ -161,13 +161,19 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     }
     else
     {
-        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(),
-                                         l_InstanceMesh->GetIndexBuffer() );
-        l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+       if(l_InstanceMesh->GetVertexBuffer().size() * l_InstanceMesh->GetIndexBuffer().size() == 0)
+       {
+            lOk = false;
+       }
+       else
+       {
+            lOk = true;
+           NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+           l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+       }
     }
 
-    if ( PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) &&
-            PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
+    if (lOk && PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
     {
         lOk = true;
         m_PhyscsUserData.push_back( l_pPhysicUserDataMesh );
