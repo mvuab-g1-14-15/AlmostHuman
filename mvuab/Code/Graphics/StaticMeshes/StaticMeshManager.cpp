@@ -48,7 +48,7 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
 
         // Default TODO Delete
-        if( !AddResource( lName, l_StaticMesh ) )
+        if(!lLoadOk || !AddResource( lName, l_StaticMesh ) )
         {
             CHECKED_DELETE(l_StaticMesh);
         }
