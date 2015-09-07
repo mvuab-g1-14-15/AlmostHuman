@@ -25,8 +25,10 @@ TT1_VERTEX lVtx[lVtxCount] =
 
 unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
-CParticleEmitter::CParticleEmitter()
+CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction aFunction )
     : CName()
+    , mType(aType)
+    , mSpawnFn(aFunction)
     , mIsLoop( false )
     , mIsActive( false )
     , mAliveParticlesCount(0)
@@ -41,6 +43,8 @@ CParticleEmitter::CParticleEmitter()
     , mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
     , mGravity(0.f)
     , mParticles( 0 )
+    , mMinPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
+    , mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
 {
 }
 
@@ -75,6 +79,11 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mOndSpeed             = atts.GetAttribute<Math::Vect2f>("ondulative_speed", Math::Vect2f(1.0f, 1.0f) );
     mOndSpeedDirectionMin = atts.GetAttribute<float32>("min_ondulative_direction", 0.0);
     mOndSpeedDirectionMax = atts.GetAttribute<float32>("max_ondulative_direction", mOndSpeedDirectionMin );
+
+    // Box Emitter
+    Math::Vect3f lSize = atts.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f());
+    mMinPnt = -lSize;
+    mMaxPnt =  lSize;
 
     // Get textures
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
@@ -160,7 +169,7 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetDirection(RandRange(mInitialDirectionMin, mInitialDirectionMax).Normalize());
             lParticle.SetSize(RandRange(mSize.x, mSize.y));
             lParticle.SetTimeToLive(RandRange(mTimeToLive.x, mTimeToLive.y));
-            lParticle.SetPosition(GetSpawnPosition());
+            lParticle.SetPosition(mSpawnFn(this));
             lParticle.SetOndSpeed(RandRange(mOndSpeed.x, mOndSpeed.y));
             lParticle.SetOndSpeedDirection(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
             lParticle.SetRadialSpeed(RandRange(mRadialSpeed.x, mRadialSpeed.y));
