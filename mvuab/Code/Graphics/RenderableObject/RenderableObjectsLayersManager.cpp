@@ -170,7 +170,6 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
         l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
     }
    
-
     if (PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
     {
         lOk = true;

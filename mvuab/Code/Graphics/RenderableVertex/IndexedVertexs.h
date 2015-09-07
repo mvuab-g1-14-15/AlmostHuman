@@ -19,7 +19,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
         }
         inline size_t GetIndexSize()
         {
-            return sizeof( unsigned short );
+            return sizeof( unsigned int );
         }
 
     public:
@@ -29,8 +29,10 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             {
                 void* l_memSrcV = 0;
                 void* l_memSrcI = 0;
+
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
+
                 GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_IB, 0 );
                 GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
 
@@ -57,8 +59,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             return lOk == S_OK;
         }
 
-        virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount,
-                             int minVertexIndex, int verticesCount, int startIndex, int facesCount )
+        virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount )
         {
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
@@ -77,8 +78,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             for ( UINT b = 0; b < l_NumPasses; ++b )
             {
                 l_Effect->BeginPass( b );
-                l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, baseVertexIndexCount, minVertexIndex, verticesCount, startIndex,
-                                                facesCount );
+                l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, baseVertexIndexCount, minVertexIndex, verticesCount, startIndex, facesCount );
                 l_Effect->EndPass();
             }
 
@@ -111,7 +111,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
             for ( UINT b = 0; b < l_NumPasses; ++b )
             {
                 l_Effect->BeginPass( b );
-                l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, ( UINT )m_VertexCount, 0, ( UINT ) m_IndexCount / 3 );
+                l_Device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, ( UINT ) m_VertexCount, 0, ( UINT ) m_IndexCount / 3 );
                 l_Effect->EndPass();
             }
 
