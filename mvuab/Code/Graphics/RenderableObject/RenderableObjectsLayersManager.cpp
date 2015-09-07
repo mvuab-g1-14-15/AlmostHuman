@@ -135,8 +135,13 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
 void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName )
 {
     CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-    l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
+    if(l_InstanceMesh->GetVertexBuffer().size() * l_InstanceMesh->GetIndexBuffer().size() == 0)
+    {
+        CHECKED_DELETE( l_InstanceMesh );
+        return;
+    }
 
+    l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
     l_InstanceMesh->SetRoomName( l_RoomName );
 
     bool lOk = false;
@@ -161,19 +166,12 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     }
     else
     {
-       if(l_InstanceMesh->GetVertexBuffer().size() * l_InstanceMesh->GetIndexBuffer().size() == 0)
-       {
-            lOk = false;
-       }
-       else
-       {
-            lOk = true;
-           NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-           l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
-       }
+        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+        l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
     }
+   
 
-    if (lOk && PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
+    if (PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
     {
         lOk = true;
         m_PhyscsUserData.push_back( l_pPhysicUserDataMesh );
@@ -182,10 +180,12 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
     if ( !lOk )
     {
         PhysXMInstance->ReleasePhysicActor( l_MeshActor );
-
         CHECKED_DELETE( l_MeshActor );
+
         CHECKED_DELETE( l_pPhysicUserDataMesh );
-        CHECKED_DELETE( l_pPhysicUserDataMesh );
+        CHECKED_DELETE( l_InstanceMesh );
+
+        return;
     }
     else if ( l_InstanceMesh->GetType() == "dynamic" )
     {
@@ -193,13 +193,20 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
         l_InstanceMesh->SetActor( l_MeshActor );
     }
     else
+    {
         l_InstanceMesh->SetActor( l_MeshActor );
+    }
 
     CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
 
     if ( !lRenderableObjectManager->AddResource( l_Name, l_InstanceMesh ) )
     {
         LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", l_Name.c_str() );
+        
+        PhysXMInstance->ReleasePhysicActor( l_MeshActor );
+        CHECKED_DELETE( l_MeshActor );
+
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
         CHECKED_DELETE( l_InstanceMesh );
     }
 }

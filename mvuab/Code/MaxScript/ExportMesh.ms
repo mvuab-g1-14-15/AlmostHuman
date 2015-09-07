@@ -212,7 +212,7 @@ struct SMaterial
 struct SVertexBuffer
 (
 	m_VertexList = #(),
-	m_VertexIdMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]",
+	m_VertexIdMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]",
 	
 	fn AddVertex vertex =
 	(
@@ -237,7 +237,7 @@ struct SVertexBuffer
 	(
 		--format "Writing BV\n"
 		local l_NumVertex = m_VertexList.count 
-		WriteShort file l_NumVertex #unsigned
+		WriteLong file l_NumVertex #unsigned
 		format "Vtx count: %\n" l_NumVertex
 		for iVertex in m_VertexList do
 		(
@@ -260,11 +260,11 @@ struct SIndexBuffer
 	(
 		--format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
-		WriteShort file l_NumIds #unsigned
+		WriteLong file l_NumIds #unsigned
 		format "Idx count: %\n" l_NumIds
 		for iIndex in m_IndexList do
 		(
-			WriteShort file iIndex #unsigned
+			WriteLong file iIndex #unsigned
 			--format "Idx actual id: %\n" iIndex
 		)
 		

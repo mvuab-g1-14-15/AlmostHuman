@@ -140,29 +140,29 @@ bool CStaticMesh::Load( const std::string& FileName )
 
         m_Textures.push_back(l_Texture);
 
-        unsigned short l_VrtexCount = 0;
-        std::fread( &l_VrtexCount, sizeof( unsigned short int ), 1, l_pFile );
+        unsigned int l_VrtexCount = 0;
+        std::fread( &l_VrtexCount, sizeof( unsigned int ), 1, l_pFile );
 
         void *l_VtxsAddress = (void *) malloc (l_TypeSize * l_VrtexCount);
         std::fread(l_VtxsAddress, l_TypeSize * l_VrtexCount, 1, l_pFile);
 
         // Strider of the vertices
         unsigned char *l_AuxVtxAddress = (unsigned char *) l_VtxsAddress;
-        for (int j = 0; j < l_VrtexCount; ++j)
+        for (unsigned int j = 0; j < l_VrtexCount; ++j)
         {
             m_VB.push_back(*((Math::Vect3f *) l_AuxVtxAddress));
             l_AuxVtxAddress += l_TypeSize;
         }
 
         // Reading index buffer
-        unsigned short l_IdxCount = 0;
-        std::fread( &l_IdxCount, sizeof( unsigned short ), 1, l_pFile );
+        unsigned int l_IdxCount = 0;
+        std::fread( &l_IdxCount, sizeof( unsigned int ), 1, l_pFile );
 
-        void* l_IdxAddress = malloc( sizeof( unsigned short int ) * l_IdxCount );
-        std::fread( l_IdxAddress, sizeof( unsigned short int ) * l_IdxCount, 1, l_pFile );
+        void* l_IdxAddress = malloc( sizeof( unsigned int ) * l_IdxCount );
+        std::fread( l_IdxAddress, sizeof( unsigned int ) * l_IdxCount, 1, l_pFile );
 
-        uint16 *l_Indexs = (uint16 *) l_IdxAddress;
-        for ( int j = 0; j < l_IdxCount; ++j ) //Vector para physx
+        uint32 *l_Indexs = (uint32 *) l_IdxAddress;
+        for (unsigned int j = 0; j < l_IdxCount; ++j ) //Vector para physx
         {
             uint32 l_Idx = l_Indexs[j] + l_MaxIndex;
             m_IB.push_back(l_Idx);
@@ -244,8 +244,6 @@ bool CStaticMesh::Load( const std::string& FileName )
     }
     
     std::fclose( l_pFile );
-    
-    if(m_VB.size() % 3 != 0 || m_VB.size() == 0 || m_IB.size() == 0) return false;
     return (GetRenderableObjectTechnique());
 }
 

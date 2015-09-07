@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="sic_Wall1_level2" filename="meshes\sic_Wall1.mesh" />
+</static_meshes>
