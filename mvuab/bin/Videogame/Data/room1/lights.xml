@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<lights>
-  <ambient_light color="0.2 0.2 0.2" />
-  <omni_light name="Omni001" pos="104.85 -3.84284 -38.8029" color="1.0 1.0 1.0" att_start_range="4.52738" att_end_range="6.74815" />
-  <spot_light name="Spot008" pos="109.539 -4.87701 -48.373" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" look_at="109.538 -7.16718 -47.9622" angle="43.0" fall_off="86.4" render_shadows="false" />
- </lights>
