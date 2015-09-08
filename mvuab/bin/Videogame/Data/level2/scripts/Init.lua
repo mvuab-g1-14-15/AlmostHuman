@@ -81,6 +81,7 @@ function update_gameplay()
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false
+			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
 	if not (g_ConsoleActivate or g_CinematicActive) then

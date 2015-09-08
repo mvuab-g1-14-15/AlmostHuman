@@ -60,5 +60,7 @@ function CBarrel:SetStateInside()
 	-- Setear al player dentro del barril
 	g_Player:HideInBarrel(self.Name)
 	
+	g_bInBarrel = false
+	
 	self.Trigger:SetActive(false)
 end
