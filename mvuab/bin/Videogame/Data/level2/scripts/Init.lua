@@ -20,7 +20,7 @@ end
 
 function load_gameplay()
     g_Player = CPlayer()
-	g_Player:SetEnergy(0.0)
+	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end

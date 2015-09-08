@@ -26,6 +26,7 @@ CBillboard::CBillboard()
     , m_Active( true )
     , m_Texture( 0 )
     , mTechnique( 0 )
+	, m_Direction( Math::Vect3f(0.0f, 0.0f, 0.0f) )
 {
 }
 
@@ -115,6 +116,7 @@ void CBillboard::Render()
         lEffect->SetSize( mSize );
         lEffect->SetAlpha( mAlpha );
         lEffect->SetAngle( mAngle );
+		lEffect->SetDirection( m_Direction );
 
         sRV->Render( lGM, mTechnique );
         lGM->SetTransform( Math::Mat44f() );
@@ -145,4 +147,9 @@ void CBillboard::DestroyBillBoardGeometry()
 {
     ASSERT( sRV != 0, "The billboard geometry is already destroyed" );
     CHECKED_DELETE( sRV );
+}
+
+void CBillboard::SetDirection( const Math::Vect3f& aDirection )
+{
+	m_Direction = aDirection;
 }
