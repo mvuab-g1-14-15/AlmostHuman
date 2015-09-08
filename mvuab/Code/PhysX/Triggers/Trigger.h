@@ -40,7 +40,10 @@ public:
   GET_SET(Math::Vect3f, Position);
   GET_SET(Math::Vect3f, Size);
 
-  void SetActive( bool aActive ) { mActive = aActive; };
+  void SetActive( bool aActive )
+  {
+	  mActive = aActive;
+  };
   bool GetActive() { return mActive; };
 
 private: // Members

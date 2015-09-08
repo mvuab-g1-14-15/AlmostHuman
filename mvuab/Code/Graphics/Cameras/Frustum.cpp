@@ -90,6 +90,9 @@ void CFrustum::Update(const D3DXMATRIX &clip)
 
 bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const
 {
+	// RETURN TRUE FOR DEBUG!
+	return true;
+
     for (int i=0; i < 6; ++i)
     {
         if (( (m_frustum[i][0]*center.x) + (m_frustum[i][1]*center.y) +
@@ -104,6 +107,9 @@ bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const
 
 bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const
 {
+	// RETURN TRUE FOR DEBUG!
+	return true;
+
     int iInCount;
     for(int p=0; p<6; p++)
     {
@@ -126,6 +132,9 @@ bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const
 
 bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const
 {
+	// RETURN TRUE FOR DEBUG!
+	return true;
+
     float32 points[24];
 
     // calculamos los 8 puntos de la bounding box
