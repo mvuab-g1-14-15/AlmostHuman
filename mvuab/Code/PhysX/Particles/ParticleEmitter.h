@@ -9,6 +9,7 @@
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Utils\Name.h"
 #include "RenderableVertex\InstancedVertexTypes.h"
+#include "ps.h"
 
 class CParticle;
 class CTexture;
@@ -19,7 +20,7 @@ class CShape;
 class CParticleEmitter :  public CName
 {
     public:
-        CParticleEmitter();
+        CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction aFunction );
         virtual ~CParticleEmitter();
 
         virtual bool Init( const CXMLTreeNode& atts );
@@ -27,11 +28,19 @@ class CParticleEmitter :  public CName
         void         Render();
         bool IsActive();
 
-        virtual Math::Vect3f GetSpawnPosition() = 0;
-		virtual void SetPositionParticle(Math::Vect3f& lPosition) = 0;
         const uint32 GetParticleCount() const;
         const CParticle* GetParticle( const uint32 aIdx) const;
         CParticle* GetParticle( const uint32 aIdx);
+
+        const Math::Vect3f& GetMinPoint()
+        {
+            return mMinPnt;
+        }
+
+        const Math::Vect3f& GetMaxPoint()
+        {
+            return mMaxPnt;
+        }
     protected:
         typedef CParticle*                TParticleContainer;
         typedef std::vector < CTexture*>  TTextureContainer;
@@ -59,6 +68,13 @@ class CParticleEmitter :  public CName
         TTextureContainer           mTextures;
         TParticleContainer          mParticles;
         TParticleContainer          mDeadParticles;
+        Math::Vect3f                mMinPnt;
+        Math::Vect3f                mMaxPnt;
+
+        ps::TSpawnFunction          mSpawnFn;
+
+        ps::TEmitterType            mType;
+
         CShape*                     mShape;
 
         CRenderableVertexs          *mRV;

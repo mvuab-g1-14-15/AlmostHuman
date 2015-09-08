@@ -36,12 +36,12 @@ CInstanceMesh::~CInstanceMesh()
 
 const std::vector<Math::Vect3f>& CInstanceMesh::GetVertexBuffer()
 {
-  return mStaticMesh->GetVertexBuffer();
+  return mStaticMesh == 0 ? Dummy01 : mStaticMesh->GetVertexBuffer();
 }
 
 const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 {
-  return mStaticMesh->GetIndexBuffer();
+  return  mStaticMesh == 0 ? Dummy02 :  mStaticMesh->GetIndexBuffer();
 }
 
 void CInstanceMesh::Render()

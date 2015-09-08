@@ -6,17 +6,18 @@
 #include "Utils\TemplatedVectorMapManager.h"
 
 class CParticleEmitter;
+class CEmitterFactory;
 
 class CParticleSystemCore: public CTemplatedVectorMapManager<CParticleEmitter>
 {
-public:
-  CParticleSystemCore();
-  CParticleSystemCore( const CXMLTreeNode& atts );
-  ~CParticleSystemCore();
+    public:
+        CParticleSystemCore();
+        CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFactory* aEmitterFactory );
+        ~CParticleSystemCore();
 
-  void Update();
-  void Render();
-  void Refresh();
+        void Update();
+        void Render();
+        void Refresh();
 };
 
 #endif //_PARTICLE_SYSTEM_CORE_H

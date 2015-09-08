@@ -23,8 +23,8 @@
 	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config="Data/billboards.xml"/>
-	<particle_system_manager file_config="Data/Particle/particle_system.xml"/>
-	<particle_manager file_config="Data/Particle/particles.xml"/>
+	<particle_manager file_config=""/>
+	<particle_system_manager file_config="Data/core/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<!--
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>

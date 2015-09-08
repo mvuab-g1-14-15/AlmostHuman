@@ -18,8 +18,8 @@ class CInstanceMesh : public CRenderableObject
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
 
-        std::vector<Math::Vect3f> m_VB;
-        std::vector<uint32> m_IB;
+        std::vector<Math::Vect3f> Dummy01;
+        std::vector<uint32> Dummy02;
 
     public:
         CInstanceMesh( const std::string& aName, const std::string& CoreName );
