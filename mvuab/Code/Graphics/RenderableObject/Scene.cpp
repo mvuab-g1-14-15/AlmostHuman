@@ -13,6 +13,7 @@
 
 #include "Lights/LightManager.h"
 #include "Particles/ParticleManager.h"
+#include "Billboard\BillboardManager.h"
 
 #include <string>
 
@@ -124,6 +125,9 @@ void CScene::LoadRoom( std::string aRoomName )
 
         PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
         PSMan->Init();
+
+		BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
+        BillboardMan->Init();
 
         lRoom->SetLayers( lROLM );
     }
