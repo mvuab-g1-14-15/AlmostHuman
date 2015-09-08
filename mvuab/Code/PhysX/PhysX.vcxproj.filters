@@ -98,12 +98,6 @@
     <ClCompile Include="Particles\ParticleManager.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Particles\SphereEmitter.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Particles\CubeEmitter.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp">
       <Filter>CookingMesh</Filter>
     </ClCompile>
@@ -115,6 +109,9 @@
       <Filter>Particles</Filter>
     </ClCompile>
     <ClCompile Include="Particles\InstanceParticle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles\Emitters\EmitterFactory.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
   </ItemGroup>
@@ -193,12 +190,6 @@
     <ClInclude Include="Particles\ParticleManager.h">
       <Filter>Particles</Filter>
     </ClInclude>
-    <ClInclude Include="Particles\SphereEmitter.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Particles\CubeEmitter.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
     <ClInclude Include="CookingMesh\PhysicCookingMesh.h">
       <Filter>CookingMesh</Filter>
     </ClInclude>
@@ -211,6 +202,9 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Particles\InstanceParticle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\Emitters\EmitterFactory.h">
       <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>
