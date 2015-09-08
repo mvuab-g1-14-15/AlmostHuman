@@ -1,5 +1,5 @@
 <managers>
-	<console lines="800" columns="130" max_lines_in_window="25" foreground_color="black" full_size="true" size="1000 800"/>
+	<!--<console lines="800" columns="130" max_lines_in_window="25" foreground_color="black" full_size="true" size="1000 800"/>-->
 	<physics_manager file_config="no_name"/>
     <gizmos_manager file_config="no_name"/>
 	<graphics_manager file_config=""/>
@@ -10,26 +10,18 @@
 	<language_manager file_config="Data/language.xml"/>
 	<font_manager file_config="Data/fonts/fonts.xml"/>
 	<renderable_technique_manager file_config="../CommonData/effects/effects_pools.xml"/>
-	<static_mesh_manager file_config=""/>
+	<static_mesh_manager file_config="Data/level1/static_meshes.xml"/>
 	<animated_manager file_config="Data/animated_models.xml"/>
-	<scene file_config="Data/scene.xml"/>
-	<scene_render_command_manager file_config="../CommonData/scene_renderer_commands.xml"/>
+	<renderable_manager_layer file_config="Data/level1/renderable_objects.xml"/>
+	<scene_render_command_manager file_config="Data/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
 	<countdowntimer_manager file_config="no_name"/>
-	<script_manager file_config="Data/level2/scripts/"/>
-	<lens_flares_manager file_config="Data/core/lens_flare.xml"/>
+	<script_manager file_config="Data/level1/scripts/"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
-	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
-	<billboard_manager file_config=""/>
-	<particle_manager file_config=""/>
-	<particle_system_manager file_config="Data/core/particle_system.xml"/>
+	<billboard_manager file_config="Data/billboards.xml"/>
+	<particle_manager file_config="Data/particles.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-	<!--
-		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
-	-->
-	<cinematic_manager file_config=""/>
-	<id_manager file_config="no_name"/>
-	<editors_manager file_config=""/>
+	<gui_manager file_config="Data/gui.xml"/>
 </managers>

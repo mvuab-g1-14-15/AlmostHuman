@@ -140,6 +140,7 @@
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_particules/>
+	<render_billboards/>
 	
 	<!-- Rendering Lens Flares -->
 	<!--enable_alpha_blend/>
