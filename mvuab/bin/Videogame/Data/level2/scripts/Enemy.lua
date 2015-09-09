@@ -13,9 +13,12 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Radius = 0.4
 	self.Height = 2.0
 	self.PitchCameraMove = 0.0
-	physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
-	self.CharacterController = physic_manager:GetController(self.Name)
 	
+	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
+	end
+	self.CharacterController = physic_manager:GetController(self.Name)
 	self.CharacterController:SetYaw(Node:GetAttributeFloat("yaw", 0.0))
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
