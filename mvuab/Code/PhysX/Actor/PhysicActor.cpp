@@ -693,6 +693,12 @@ Math::Vect3f CPhysicActor::GetPosition( void )
   return Math::Vect3f( pos.x, pos.y, pos.z );
 }
 
+void CPhysicActor::SetPosition( Math::Vect3f aPos )
+{
+  assert( m_pPhXActor );
+  m_pPhXActor->setGlobalPosition( NxVec3(aPos.x, aPos.y, aPos.z) );
+}
+
 Math::Vect3f CPhysicActor::GetRotation( void )
 {
   assert( m_pPhXActor );

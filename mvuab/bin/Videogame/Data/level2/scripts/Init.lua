@@ -28,7 +28,7 @@ function load_gameplay()
 		g_EnemyManager = CEnemyManagerLUA()	
 	end
 	
-	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(107.45, -6.95, -42.54))--Vect3f(76.50, -12.30, -42.30))
+	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 end
@@ -76,6 +76,7 @@ function update_gameplay()
 		
 	end
 	if g_bInBarrel then
+		engine:Trace("Next to barrel "..g_BarrelName)
 		if action_manager:DoAction("EnterBarrel") then
 			engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
 			lBarrel = g_Barrels[g_BarrelName]

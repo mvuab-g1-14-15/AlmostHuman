@@ -233,3 +233,25 @@ void CTrigger::Render()
         mShape->Render( mTechnique );
     }
 }
+
+void CTrigger::SetPaint( bool aPaint )
+{
+	m_PhysicUserData->SetPaint(aPaint);
+	m_Paint = aPaint;
+}
+
+bool CTrigger::GetPaint()
+{
+	return m_Paint;
+}
+
+void CTrigger::SetPosition( Math::Vect3f aPos )
+{
+	m_Position = aPos;
+	m_PhysicActor->SetPosition( aPos );
+}
+
+Math::Vect3f CTrigger::GetPosition()
+{
+	return m_Position;
+}
