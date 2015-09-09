@@ -17,7 +17,6 @@ function OnEnter()
 	physicActor:CreateBody(1, 0.5, 0.5)
 	process:AddPhysicActorVector(physicActor)
 	physic_manager:AddPhysicActor(physicActor)
-
 end
 
 function OnLeave(other_shape)

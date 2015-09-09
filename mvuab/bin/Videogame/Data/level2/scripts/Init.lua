@@ -20,7 +20,7 @@ end
 
 function load_gameplay()
     g_Player = CPlayer()
-	g_Player:SetEnergy(0.0)
+	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
@@ -28,7 +28,7 @@ function load_gameplay()
 		g_EnemyManager = CEnemyManagerLUA()	
 	end
 	
-	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
+	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(107.45, -6.95, -42.54))--Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 end
@@ -81,6 +81,7 @@ function update_gameplay()
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false
+			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
 	if not (g_ConsoleActivate or g_CinematicActive) then

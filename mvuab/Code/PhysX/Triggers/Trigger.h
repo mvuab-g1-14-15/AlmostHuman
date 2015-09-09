@@ -31,15 +31,24 @@ public:
   void Render();
 
   std::string GetLUAByName( unsigned int Type );
+  void SetLUAByName( unsigned int Type, std::string aScript );
 
   GET_SET( bool, bEnter );
   GET_SET( bool, bStay );
   GET_SET( bool, bLeave );
 
   GET_SET(Math::Vect3f, Position);
+  GET_SET(Math::Vect3f, Size);
+
+  void SetActive( bool aActive )
+  {
+	  mActive = aActive;
+  };
+  bool GetActive() { return mActive; };
 
 private: // Members
 
+	bool mActive;
 
   Math::Vect3f m_Position;
   Math::Vect3f m_Size;

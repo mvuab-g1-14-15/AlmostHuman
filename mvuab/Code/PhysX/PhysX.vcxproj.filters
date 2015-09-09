@@ -35,6 +35,9 @@
     <Filter Include="CookingMesh">
       <UniqueIdentifier>{5af4e941-472e-4019-84aa-1f043f776773}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles\Emitters">
+      <UniqueIdentifier>{c6b74b5c-0b15-46cf-a19b-c6a1c8914b7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Triggers\Trigger.cpp">
@@ -98,12 +101,6 @@
     <ClCompile Include="Particles\ParticleManager.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Particles\SphereEmitter.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Particles\CubeEmitter.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp">
       <Filter>CookingMesh</Filter>
     </ClCompile>
@@ -117,6 +114,10 @@
     <ClCompile Include="Particles\InstanceParticle.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Particles\Emitters\EmitterFactory.cpp">
+      <Filter>Particles\Emitters</Filter>
+    </ClCompile>
+    <ClCompile Include="CProyectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -193,12 +194,6 @@
     <ClInclude Include="Particles\ParticleManager.h">
       <Filter>Particles</Filter>
     </ClInclude>
-    <ClInclude Include="Particles\SphereEmitter.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Particles\CubeEmitter.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
     <ClInclude Include="CookingMesh\PhysicCookingMesh.h">
       <Filter>CookingMesh</Filter>
     </ClInclude>
@@ -213,5 +208,12 @@
     <ClInclude Include="Particles\InstanceParticle.h">
       <Filter>Particles</Filter>
     </ClInclude>
+    <ClInclude Include="Particles\Emitters\EmitterFactory.h">
+      <Filter>Particles\Emitters</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\ps.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="CProyectile.h" />
   </ItemGroup>
 </Project>

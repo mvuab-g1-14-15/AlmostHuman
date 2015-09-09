@@ -109,6 +109,23 @@ CTrigger* CTriggerManager::GetTriggerByName( std::string Name )
     return GetResource( Name );
 }
 
+void
+CTriggerManager::ModifyTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, bool aEnter, bool aStay, bool aLeave, std::string aEnterEvent ,std::string aStayEvent, std::string aLeaveEvent)
+{
+	CTrigger* l_Trigger = GetResource( name );
+	if (l_Trigger)
+	{
+		l_Trigger->SetPosition( position );
+		l_Trigger->SetSize( size );
+		l_Trigger->SetbEnter( aEnter );
+		l_Trigger->SetbStay( aStay );
+		l_Trigger->SetbLeave( aLeave );
+		l_Trigger->SetLUAByName( 0, aEnterEvent );
+		l_Trigger->SetLUAByName( 2, aStayEvent );
+		l_Trigger->SetLUAByName( 1, aLeaveEvent );
+	}
+}
+
 void CTriggerManager::Render()
 {
 	std::vector<CTrigger*> v_triggers = GetTriggersVector();

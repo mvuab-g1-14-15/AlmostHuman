@@ -23,6 +23,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     , m_PhysicUserData( new CPhysicUserData( Node.GetAttribute<std::string>( "name", "unknown" ) ) )
     , mTechnique( Node.GetAttribute<CEffectTechnique>("technique") )
     , mShape( 0 )
+	, mActive( true )
 {
     m_bEnter = Node.GetAttribute<bool>( "enter_event", false );
 
@@ -98,6 +99,7 @@ CTrigger::CTrigger
     , m_PhysicUserData( new CPhysicUserData( name ) )
     , mTechnique( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") )
     , mShape( 0 )
+	, mActive( true )
 {
     m_bEnter = bEnter;
 
@@ -197,6 +199,27 @@ std::string CTrigger::GetLUAByName( unsigned int Type )
     }
 
     return l_Return;
+}
+
+void CTrigger::SetLUAByName( unsigned int Type, std::string aScript )
+{
+    switch ( Type )
+    {
+        case ENTER:
+            m_Enter.second = aScript;
+            break;
+
+        case LEAVE:
+            m_Leave.second = aScript;
+            break;
+
+        case STAY:
+            m_Stay.second = aScript;
+            break;
+
+        default:
+            LOG_ERROR_APPLICATION( "SetLUABYName (Trigger) Type error" );
+    }
 }
 
 void CTrigger::Render()

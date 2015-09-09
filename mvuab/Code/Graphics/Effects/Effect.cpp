@@ -52,6 +52,7 @@ CEffect::CEffect( const std::string& EffectName )
     , CTOR_EFFECT_PARAMETER( WorldMatrix )
     , CTOR_EFFECT_PARAMETER( WVMatrix )
     , CTOR_EFFECT_PARAMETER( WVPMatrix )
+	, CTOR_EFFECT_PARAMETER( Direction )
 {
     ResetLightsHandle();
 }
@@ -84,6 +85,7 @@ void CEffect::SetNullParameters()
     RESET_EFFECT_PARAMETER( WorldMatrix );
     RESET_EFFECT_PARAMETER( WVMatrix );
     RESET_EFFECT_PARAMETER( WVPMatrix );
+	RESET_EFFECT_PARAMETER( Direction );
 
     m_ViewToLightProjectionMatrixParameter = 0;
     m_LightEnabledParameter = 0;
@@ -125,6 +127,7 @@ void CEffect::LinkSemantics()
     LINK_EFFECT_PARAMETER( Angle );
     LINK_EFFECT_PARAMETER( Alpha );
     LINK_EFFECT_PARAMETER( Color );
+	LINK_EFFECT_PARAMETER( Direction );
 
     LINK_EFFECT_PARAMETER( InverseWorldMatrix );
     LINK_EFFECT_PARAMETER( WorldMatrix );
@@ -421,6 +424,16 @@ void CEffect::SetAlpha( float aAlpha )
 {
     HRESULT lRes = SET_FLOAT_PARAMETER( Alpha, aAlpha );
     ASSERT( lRes == S_OK, "Error setting alpha");
+}
+
+void CEffect::SetDirection( const Math::Vect3f& aDirection )
+{
+	float32 l_Direction[3];
+    l_Direction[0] = aDirection.x;
+    l_Direction[1] = aDirection.y;
+    l_Direction[2] = aDirection.z;
+	HRESULT lRes = m_Effect->SetFloatArray( m_Direction, l_Direction, sizeof( float ) * 3 );
+    ASSERT( lRes == S_OK, "Error setting direction");
 }
 
 void CEffect::SetAngle( float aAngle )

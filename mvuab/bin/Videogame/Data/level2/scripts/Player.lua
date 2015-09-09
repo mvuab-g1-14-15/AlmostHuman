@@ -136,7 +136,7 @@ function CPlayer:SetEnergy(amount)
 end
 
 function CPlayer:HideInBarrel( aName )
-	if not self.Hidden then
+	if not self.InsideBarrel then
 		engine:Trace("No estoy oculto")
 		local l_Can = true
 		if not self.PlayerController.Crouch then
@@ -150,8 +150,7 @@ function CPlayer:HideInBarrel( aName )
 			self.InsideBarrel = true
 			self.BarrelName = aName
 		end
-		
-		self.Hidden = true
+		return l_Can
 	else
 		local l_Can = true
 		if self.PlayerController.Crouch then
@@ -161,15 +160,16 @@ function CPlayer:HideInBarrel( aName )
 		if l_Can then
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", false)
 			self.InsideBarrel = false
-			self.BarrelName = aName
 		end
-		
-		self.Hidden = false
+		return l_Can
 	end
 end
 
 function CPlayer:ExitBarrel()
 	engine:Trace("BarrelName = "..self.BarrelName)
-	lBarrel = g_Barrels[self.BarrelName]
-	lBarrel:ExitBarrel(self:GetPosition())
+	if self:HideInBarrel( self.BarrelName ) then
+		lBarrel = g_Barrels[self.BarrelName]
+		lBarrel:ExitBarrel(self:GetPosition())
+		self.BarrelName = ""
+	end
 end

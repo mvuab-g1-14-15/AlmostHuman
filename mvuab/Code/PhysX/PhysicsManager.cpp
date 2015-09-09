@@ -540,7 +540,7 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
     assert( _pActor != NULL );
     assert( m_pScene != NULL );
     bool l_bIsOK = false;
-    NxActor* nxActor;
+    NxActor* nxActor = NULL;
     NxActorDesc* l_pActorDesc = _pActor->GetActorDesc();
     assert( l_pActorDesc != NULL );
     nxActor = m_pScene->createActor( *l_pActorDesc );

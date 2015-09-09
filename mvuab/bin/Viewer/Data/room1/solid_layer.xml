@@ -2,14 +2,14 @@
 <RenderableObjects>
   <MeshInstance name="tuberia_1_room1" core="tuberia_1_room1" pos="111.103 -7.22766 -42.1181" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_01_room1" core="Reixa_01_room1" pos="102.934 -6.77654 -48.4697" yaw="0.0" pitch="1.5708" roll="0.0" scale="0.0544173 0.0566317 0.0462288" />
-  <MeshInstance name="taula_operacions_room1" core="taula_operacions_room1" pos="104.762 -7.34909 -38.5224" yaw="0.0" pitch="0.0" roll="0.0" scale="0.67213 0.67213 0.67213" />
-  <MeshInstance name="robot_3_room1" core="robot_3_room1" pos="103.628 -5.06452 -39.9566" yaw="-2.44346" pitch="0.0" roll="0.0" scale="0.0170626 0.0170626 0.0170626" />
-  <MeshInstance name="robot_2_room1" core="robot_2_room1" pos="106.803 -5.06929 -39.434" yaw="1.5708" pitch="-1.5708" roll="0.610865" scale="0.00998065 0.00469633 0.00469634" />
-  <MeshInstance name="robot_1_room1" core="robot_1_room1" pos="106.201 -5.06452 -36.8411" yaw="1.0472" pitch="0.0" roll="0.0" scale="0.0170626 0.0170626 0.0170626" />
-  <MeshInstance name="Taula_room1" core="Taula_room1" pos="95.3608 -6.70288 -39.455" yaw="0.0" pitch="0.0" roll="0.0" scale="0.600726 0.600726 0.600726" />
+  <MeshInstance name="taula_operacions_room1" core="taula_operacions_room1" pos="104.762 -7.34909 -38.5224" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="robot_3_room1" core="robot_3_room1" pos="103.628 -5.06452 -39.9566" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="robot_2_room1" core="robot_2_room1" pos="106.803 -5.06929 -39.434" yaw="0.0" pitch="1.74846e-007" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="robot_1_room1" core="robot_1_room1" pos="106.201 -5.06452 -36.8411" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Taula_room1" core="Taula_room1" pos="95.3608 -6.70288 -39.455" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Moble_room1" core="Moble_room1" pos="104.762 -7.70947 -38.5224" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Plataforma_room1" core="Plataforma_room1" pos="104.762 -8.29028 -38.5224" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Sphere001_room1" core="Sphere001_room1" pos="104.762 -8.29028 -38.5224" yaw="-3.01345" pitch="1.18785" roll="-0.325586" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sphere001_room1" core="Sphere001_room1" pos="104.762 -8.29028 -38.5224" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tornillos_room1" core="Tornillos_room1" pos="106.612 -7.55643 -35.3214" yaw="-2.85284" pitch="1.11184" roll="-0.644944" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tornillos001_room1" core="Tornillos001_room1" pos="104.762 -8.29028 -38.5224" yaw="-2.59154" pitch="0.922784" roll="-0.944042" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tornillos002_room1" core="Tornillos002_room1" pos="104.762 -8.29028 -38.5224" yaw="-2.03291" pitch="0.430104" roll="-1.17071" scale="1.0 1.0 1.0" />
@@ -27,13 +27,13 @@
   <MeshInstance name="Tornillos014_room1" core="Tornillos014_room1" pos="104.762 -8.29028 -38.5224" yaw="2.85283" pitch="1.11184" roll="0.644956" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tornillos015_room1" core="Tornillos015_room1" pos="104.762 -8.29028 -38.5224" yaw="3.01344" pitch="1.18785" roll="0.325598" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tornillos016_room1" core="Tornillos016_room1" pos="104.762 -8.29028 -38.5224" yaw="3.14159" pitch="1.20893" roll="6.38459e-006" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_004_room1" core="robot_004_room1" pos="103.272 -5.06928 -36.9614" yaw="-1.5708" pitch="1.5708" roll="-0.610865" scale="0.00998065 0.00469634 0.00469634" />
-  <MeshInstance name="servidor_room1" core="servidor_room1" pos="95.3746 -6.52771 -40.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="0.01073 0.01073 0.01073" />
-  <MeshInstance name="Base_carga_room1" core="Base_carga_room1" pos="102.088 -6.26391 -47.9028" yaw="0.0" pitch="0.610865" roll="0.0" scale="0.237764 0.237764 0.237764" />
-  <MeshInstance name="Layer_dia-_room1" core="Layer_dia-_room1" pos="95.5036 -6.51957 -37.8919" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="0.0638759 0.0638759 0.0638759" />
+  <MeshInstance name="robot_004_room1" core="robot_004_room1" pos="103.272 -5.06928 -36.9614" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="servidor_room1" core="servidor_room1" pos="95.3746 -6.52771 -40.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Base_carga_room1" core="Base_carga_room1" pos="102.088 -6.26391 -47.9028" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Layer_dia-_room1" core="Layer_dia-_room1" pos="95.5036 -6.51957 -37.8919" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Bombona_room1" core="Bombona_room1" pos="106.752 -7.65546 -33.1512" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pot_vidre_room1" core="Pot_vidre_room1" pos="95.3608 -6.53416 -38.8957" yaw="0.0" pitch="0.0" roll="0.0" scale="0.722816 0.593772 0.595805" />
-  <MeshInstance name="Osciloscopi_room1" core="Osciloscopi_room1" pos="100.388 -5.78156 -40.0562" yaw="-0.349066" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Pot_vidre_room1" core="Pot_vidre_room1" pos="95.3608 -6.53416 -38.8957" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Osciloscopi_room1" core="Osciloscopi_room1" pos="100.388 -5.78156 -40.0562" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="tuberia_2_room1" core="tuberia_2_room1" pos="111.103 -7.52926 -42.1181" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_room1" core="Sala_room1" pos="101.654 -5.86623 -29.9667" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>
