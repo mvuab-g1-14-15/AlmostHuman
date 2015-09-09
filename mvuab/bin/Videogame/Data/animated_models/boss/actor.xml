@@ -1,0 +1,8 @@
+<animated_model name="boss">
+	<texture file=""/>
+	<skeleton file="boss.csf"/>
+	<mesh file="boss.cmf"/>
+	<animation name="hurt" file="hurt.caf"/>
+	<animation name="atacar" file="shoot.caf"/>
+	<animation name="andando" file="walk.caf"/>
+</animated_model>

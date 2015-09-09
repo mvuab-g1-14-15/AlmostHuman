@@ -115,10 +115,12 @@
 	
 	<disable_alpha_blend/>-->
 	
+	<enable_alpha_test/>
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
  		<texture stage_id="0" name="Data/textures/InsideBarrel.png"/>
  	</render_draw_quad>
+	<disable_alpha_test/>
 	
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_weapon_target size="20">
@@ -134,7 +136,6 @@
         <texture stage_id="0" name="ColorGradient"/>
 		<texture stage_id="1" name="Data/textures/LUT_Greenish.png"/>
     </render_draw_quad>
-	
 	
 	<enable_z_test/>
 	<enable_alpha_blend/>

@@ -20,6 +20,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
 	self.CharacterController:SetYaw(Node:GetAttributeFloat("yaw", 0.0))
+	self.CharacterController:SetScale(Node:GetAttributeVect3f("scale", Vect3f( 1.0, 1.0, 1.0)))
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
@@ -34,6 +35,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi)
 	self.RenderableObject:SetPitch(self.CharacterController:GetPitch())
 	self.RenderableObject:SetRoll(self.CharacterController:GetRoll())
+	self.RenderableObject:SetScale(self.CharacterController:GetScale())
 	self.RenderableObject:MakeTransform()
 	
 	
