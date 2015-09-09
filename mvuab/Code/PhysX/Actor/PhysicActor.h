@@ -106,6 +106,7 @@ public:
   Math::Vect3f        GetLinearVelocity();
 
   Math::Vect3f        GetPosition();
+  void				  SetPosition( Math::Vect3f aPos );
   Math::Vect3f        GetRotation();
   void                SetRotation( const Math::Vect3f& _vRot );
   void                SetRotation( const Mat33f& _mRot );

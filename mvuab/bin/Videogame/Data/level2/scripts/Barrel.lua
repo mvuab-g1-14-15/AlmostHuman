@@ -6,9 +6,9 @@ function CBarrel:__init(aName, aPosition)
 	self.Radius = 0.2
 	self.Height = 0.8
 	
-	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, false, true, "HiddenBarrel('"..self.Name..")", "", "HiddenBarrel('"..self.Name..")")
+	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, true, "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnLeave('"..self.Name.."')")
 	trigger_manager:AddTrigger( self.Trigger )
-
+	
 	--physic_manager:AddActorCapsule(self.Name, self.Radius, self.Height)
 	--self.Actor = physic_manager:GetActor(self.Name)
 	--self.Actor:MoveGlobalPosition( self.Pos )
@@ -36,7 +36,7 @@ function CBarrel:RestoreBarrel()
 	--self.Actor:SetActive( true )
 	self.RenderableObject:SetActive( true )
 	
-	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, false, "HiddenBarrel('"..self.Name..")", "HiddenBarrel('"..self.Name..")", "")
+	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, true, "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnLeave('"..self.Name.."')")
 	self.Trigger:SetActive(true)
 end
 
@@ -49,7 +49,7 @@ function CBarrel:ExitBarrel( aPos )
 	self.RenderableObject:SetPosition(self.Pos)
 	self.RenderableObject:MakeTransform()
 	
-	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius, self.Height, self.Radius), false, false, true, "", "", "HiddenBarrelExit('"..self.Name..")")
+	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius, self.Height, self.Radius), false, false, true, "", "", "HiddenBarrelExit('"..self.Name.."')")
 	self.Trigger:SetActive(true)
 end
 

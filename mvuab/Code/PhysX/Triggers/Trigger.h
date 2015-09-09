@@ -37,8 +37,13 @@ public:
   GET_SET( bool, bStay );
   GET_SET( bool, bLeave );
 
-  GET_SET(Math::Vect3f, Position);
   GET_SET(Math::Vect3f, Size);
+
+  void SetPaint( bool aPaint );
+  bool GetPaint();
+
+  void SetPosition( Math::Vect3f aPos );
+  Math::Vect3f GetPosition();
 
   void SetActive( bool aActive )
   {
