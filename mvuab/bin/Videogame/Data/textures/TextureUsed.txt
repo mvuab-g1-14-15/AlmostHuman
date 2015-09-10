@@ -1,0 +1,136 @@
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #2756 , texture Material #1955 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\metall_pulit.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner01.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #2756 , texture Material #1955 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\metall_pulit.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #4482 , texture Material #1955 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\metall_pulit.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #4482 , texture Material #1955 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #4482 , texture Material #1955 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\metall_pulit.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Cable_braç_robot.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Braç_robot(groc).tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Aluminium-surface830.jpg 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia_1.tga 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\Peu_cilindre_robot_cirugia.tga 
+MaterialMaterial #4482 , texture Material #1955 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel05.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel05.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_Panel03.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_Panel03.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel07.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor03.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel07.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+MaterialMaterial #4992 , texture black matt 
+MaterialMaterial #4992 , texture Global 
+MaterialMaterial #4992 , texture WHITEPORCELAIN 
+C:\Users\Public\Documents\Dev\AlmostHuman\mvuab\bin\Videogame\Data\textures\metall_pulit.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfPanel05.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButress06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfWallCap01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap04.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfWallCap01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfWallCap01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfWallCap01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap04.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msf_WallCap04.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfWallCap01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfButressCap1.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor06.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfFloor02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCeiling01.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCeiling01S.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCeiling01B.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\sffDoorWay.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 
+F:\Items\SCI FI Kit\Modular Sci-Fi Kit 02\IM00019214-02_ModularSciFiKit02Ps\Content\Runtime\Textures\Stonemason\msf2\msfCorner02.jpg 

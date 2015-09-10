@@ -162,4 +162,5 @@
   <MeshInstance name="oxid_barrel_01_room2" core="oxid_barrel_01_room2" pos="61.1966 -15.0891 -56.4359" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Porta_room2" core="Porta_room2" pos="63.893 -7.77684 -28.9233" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lampares_room2" core="Lampares_room2" pos="63.893 -7.77684 -28.9233" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="viga_room2" core="viga_room2" pos="63.893 -7.77684 -28.9233" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

@@ -294,7 +294,7 @@
   <MeshInstance name="container032_room3" core="container032_room3" pos="97.1492 19.5991 35.0279" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf_Ceiling04_room3" core="msf_Ceiling04_room3" pos="63.7952 21.5016 -21.7199" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf_Ceiling005_room3" core="msf_Ceiling005_room3" pos="69.2819 21.5016 -21.7199" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="msf_Steps2_room3" core="msf_Steps2_room3" pos="72.6255 20.6378 -21.6833" yaw="-1.5708" pitch="0.0" roll="0.0" scale="-3.96615 -3.96615 -3.96615" />
+  <MeshInstance name="msf_Steps2_room3" core="msf_Steps2_room3" pos="72.6255 20.6378 -21.6833" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf_WallCapping01_room3" core="msf_WallCapping01_room3" pos="62.9308 19.6354 -21.1937" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf_WallCapping002_room3" core="msf_WallCapping002_room3" pos="66.1724 19.6354 -21.1937" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf_WallCapping003_room3" core="msf_WallCapping003_room3" pos="69.4139 19.6354 -21.1937" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -303,18 +303,18 @@
   <MeshInstance name="msf2_Lamp02_room3" core="msf2_Lamp02_room3" pos="67.9566 26.3062 -19.555" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp003_room3" core="msf2_Lamp003_room3" pos="82.539 26.3062 -19.555" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp004_room3" core="msf2_Lamp004_room3" pos="97.1214 26.3062 -19.555" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="msf2_Lamp005_room3" core="msf2_Lamp005_room3" pos="97.1214 26.3062 -9.53703" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp006_room3" core="msf2_Lamp006_room3" pos="82.539 26.3062 -9.53703" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp007_room3" core="msf2_Lamp007_room3" pos="67.9566 26.3062 -9.53703" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp008_room3" core="msf2_Lamp008_room3" pos="97.1214 26.3062 0.480961" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp009_room3" core="msf2_Lamp009_room3" pos="82.539 26.3062 0.480961" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp010_room3" core="msf2_Lamp010_room3" pos="67.9566 26.3062 0.480961" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
+  <MeshInstance name="msf2_Lamp005_room3" core="msf2_Lamp005_room3" pos="97.1214 26.3062 -9.53703" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp006_room3" core="msf2_Lamp006_room3" pos="82.539 26.3062 -9.53703" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp007_room3" core="msf2_Lamp007_room3" pos="67.9566 26.3062 -9.53703" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp008_room3" core="msf2_Lamp008_room3" pos="97.1214 26.3062 0.480961" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp009_room3" core="msf2_Lamp009_room3" pos="82.539 26.3062 0.480961" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp010_room3" core="msf2_Lamp010_room3" pos="67.9566 26.3062 0.480961" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp011_room3" core="msf2_Lamp011_room3" pos="97.1214 26.3062 10.499" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp012_room3" core="msf2_Lamp012_room3" pos="82.539 26.3062 10.499" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp013_room3" core="msf2_Lamp013_room3" pos="67.9566 26.3062 10.499" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="msf2_Lamp014_room3" core="msf2_Lamp014_room3" pos="97.1214 26.3062 20.5169" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp015_room3" core="msf2_Lamp015_room3" pos="82.539 26.3062 20.5169" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp016_room3" core="msf2_Lamp016_room3" pos="67.9566 26.3062 20.5169" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
+  <MeshInstance name="msf2_Lamp014_room3" core="msf2_Lamp014_room3" pos="97.1214 26.3062 20.5169" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp015_room3" core="msf2_Lamp015_room3" pos="82.539 26.3062 20.5169" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp016_room3" core="msf2_Lamp016_room3" pos="67.9566 26.3062 20.5169" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="msf2_Lamp017_room3" core="msf2_Lamp017_room3" pos="97.1214 26.3062 30.5349" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
   <MeshInstance name="msf2_Lamp018_room3" core="msf2_Lamp018_room3" pos="82.539 26.3062 30.5349" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
   <MeshInstance name="msf2_Lamp019_room3" core="msf2_Lamp019_room3" pos="67.9566 26.3062 30.5349" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
@@ -324,9 +324,9 @@
   <MeshInstance name="msf2_Lamp023_room3" core="msf2_Lamp023_room3" pos="97.1214 26.3062 50.5709" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
   <MeshInstance name="msf2_Lamp024_room3" core="msf2_Lamp024_room3" pos="82.539 26.3062 50.5709" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
   <MeshInstance name="msf2_Lamp025_room3" core="msf2_Lamp025_room3" pos="67.9566 26.3062 50.5709" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp026_room3" core="msf2_Lamp026_room3" pos="97.1214 26.3062 60.5889" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp027_room3" core="msf2_Lamp027_room3" pos="82.539 26.3062 60.5889" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
-  <MeshInstance name="msf2_Lamp028_room3" core="msf2_Lamp028_room3" pos="67.9566 26.3062 60.5889" yaw="0.0" pitch="-3.14159" roll="0.0" scale="7.97568 7.97568 7.97568" />
+  <MeshInstance name="msf2_Lamp026_room3" core="msf2_Lamp026_room3" pos="97.1214 26.3062 60.5889" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp027_room3" core="msf2_Lamp027_room3" pos="82.539 26.3062 60.5889" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="msf2_Lamp028_room3" core="msf2_Lamp028_room3" pos="67.9566 26.3062 60.5889" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_101_room3" core="Reixa_101_room3" pos="64.8859 21.3216 22.1624" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_102_room3" core="Reixa_102_room3" pos="62.8187 21.3216 22.2598" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_103_room3" core="Reixa_103_room3" pos="100.777 21.3216 22.3238" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
