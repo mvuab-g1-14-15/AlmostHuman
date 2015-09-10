@@ -14,7 +14,7 @@ function CEasyEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.YawInitial = 0
 	self.YawDirection = 1
 	self.MidRangeDegree = 45
-	engine:Trace("CEasyEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
+	--engine:Trace("CEasyEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
 function CEasyEnemyLUA:Destroy()
