@@ -15,7 +15,6 @@
 CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
 {
   SetName( aName );
-  MakeTransform();
 }
 
 
@@ -23,14 +22,12 @@ CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreN
   CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
   SetName( aName );
-  MakeTransform();
 }
 
 
 CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
   mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) ), mType( "static" ), mPhysicActor( 0 )
 {
-    MakeTransform();
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -62,7 +59,6 @@ void CInstanceMesh::Render()
   Math::AABB3f laabb = mStaticMesh->GetAABB();
 
   Math::Vect3f laabbCenter =  mStaticMesh->GetAABBCenter();
-
   if ( !l_Transfomed ) laabbCenter = laabb.GetCenter();
 
   if ( l_ObjDynamic && ( mPhysicActor != 0 ) )

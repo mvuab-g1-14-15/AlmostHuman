@@ -106,7 +106,7 @@ public:
                                      EControleType _Tipus = ::CAPSULE, ECollisionGroup _Group = ::ECG_ENEMY );
   bool          ReleasePhysicController( CPhysicController* _pController );
 
-  bool CPhysicsManager::AddController( const std::string& Name, float radius = 0.2f, float height = 1, float slope = 0.2f, float skin_width = 0.01f,
+  bool AddController( const std::string& Name, float radius = 0.2f, float height = 1, float slope = 0.2f, float skin_width = 0.01f,
                                        float step = 0.5f, Math::Vect3f pos = Math::Vect3f( 0, 4.0, 0 ), ECollisionGroup ColliusionGroup = ECG_PLAYER, float gravity = -10 );
   ////--- Add/Release Joints
   bool          AddPhysicSphericalJoint		( CPhysicSphericalJoint* _pJoint );

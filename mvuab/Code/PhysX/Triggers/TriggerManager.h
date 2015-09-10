@@ -53,6 +53,8 @@ public:
   // Métodos para Luabind
   int                                 GetValue() const;
   void                                SetValue( const unsigned int& v );
+
+  void ModifyTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, bool aEnter, bool aStay, bool aLeave, std::string aEnterEvent ,std::string aStayEvent, std::string aLeaveEvent);
 };
 
 #endif __TRIGGER_MANAGER_H__

@@ -20,7 +20,7 @@ template<class T> class CMapManager
 
             if (it == m_Resources.end())
             {
-                LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
+                //LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
                 return 0;
             }
 
@@ -33,7 +33,7 @@ template<class T> class CMapManager
 
             if( it == m_Resources.end())
             {
-                LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
+                //LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
                 return 0;
             }
 
@@ -71,6 +71,14 @@ template<class T> class CMapManager
         virtual TMapResource& GetResourcesMap()
         {
             return m_Resources;
+        }
+		void RemoveResource( const std::string& Name )
+        {
+            TMapResource::iterator it = m_Resources.find(Name);
+            if ( it == m_Resources.end() ) return;
+
+            CHECKED_DELETE(it->second);
+			m_Resources.erase(it);     
         }
 };
 

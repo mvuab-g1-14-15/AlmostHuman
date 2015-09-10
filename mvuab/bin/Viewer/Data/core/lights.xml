@@ -1,21 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="1 0 0" />
-  <!--<lens_flare name ="flare001" technique="">
-		<flare texture ="" color="1.0 1.0 1.0" position="0.0" size="2 2"/>
-		<flare texture ="" color="1.0 1.0 1.0" position="0.5"/>
-  </lens_flare>
-  <ambient_light color="0.5 0.5 0.5" />
-  <omni_light name="Omni001" pos="18.9709 6.58154 -30.5952" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" />
-  <spot_light name="Spot001" pos="-23.4606 9.74805 30.3489" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-16.2957 0.0 34.3381" angle="43.0" fall_off="45.0" intensity="0.5" enabled="true" >
-		<lens_flare name="flare001"/>
-		<shadow_map render_shadows="true" shadow_texture_mask="">
-			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
-			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
-		</shadow_map>
-  </spot_light>
-  <directional_light name="Direct001" pos="29.9612 8.3009 10.6313" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="54.647 0.0 46.4583" />
-  <spot_light name="Spot002" pos="-1.44849 13.1467 0.170654" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="0.0 0.0 0.0" angle="43.0" fall_off="45.0" render_shadows="false" />
-  <spot_light name="Spot003" pos="-20.0 10 0 -20.0" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-25.0 0.0 -25.0" angle="43.0" fall_off="45.0" render_shadows="false" />
-  -->
 </lights>

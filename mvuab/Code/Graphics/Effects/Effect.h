@@ -106,6 +106,7 @@ class CEffect: public CName
         void SetSize( float aSize );
         void SetAlpha( float aAlpha );
         void SetAngle( float aAngle );
+		void SetDirection( const Math::Vect3f& aDirection );
 
     protected:
         LPD3DXEFFECT m_Effect;
@@ -125,6 +126,7 @@ class CEffect: public CName
         Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
         Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
 
+		DECLARE_EFFECT_PARAMETER( Direction  );
         DECLARE_EFFECT_PARAMETER( Size  );
         DECLARE_EFFECT_PARAMETER( Angle );
         DECLARE_EFFECT_PARAMETER( Alpha );

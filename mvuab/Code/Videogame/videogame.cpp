@@ -63,7 +63,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
         case WM_DESTROY:
             {
                 PostQuitMessage( 0 );
-                return 0;
+                exit(1);
             }
             break;
 
@@ -193,6 +193,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         }
 
         UnregisterClass( APPLICATION_NAME, wc.hInstance );
+        
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
         CHECKED_DELETE( pLogger );
