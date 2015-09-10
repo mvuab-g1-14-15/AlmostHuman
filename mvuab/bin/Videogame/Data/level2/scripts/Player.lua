@@ -16,7 +16,6 @@ function CPlayer:__init()
 	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	
-	self.Hidden = false
 	self.InsideBarrel = false
 	self.BarrelName = ""
 	
@@ -171,5 +170,13 @@ function CPlayer:ExitBarrel()
 		lBarrel = g_Barrels[self.BarrelName]
 		lBarrel:ExitBarrel(self:GetPosition())
 		self.BarrelName = ""
+	end
+end
+
+function CPlayer:GetIsHidden()
+	if self.InsideBarrel then
+		return self.PlayerController:GetIsMoving()
+	else
+		return false
 	end
 end
