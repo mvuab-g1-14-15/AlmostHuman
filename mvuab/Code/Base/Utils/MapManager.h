@@ -20,7 +20,7 @@ template<class T> class CMapManager
 
             if (it == m_Resources.end())
             {
-                LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
+                //LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
                 return 0;
             }
 
@@ -33,7 +33,7 @@ template<class T> class CMapManager
 
             if( it == m_Resources.end())
             {
-                LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
+                //LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
                 return 0;
             }
 
