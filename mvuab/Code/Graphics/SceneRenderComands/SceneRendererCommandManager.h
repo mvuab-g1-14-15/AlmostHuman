@@ -10,35 +10,33 @@
 #include "Utils/Manager.h"
 #include "Utils\ObjectFactory.h"
 
-class CSceneRendererCommandManager : public CManager
+class CSceneRendererCommandManager : public CManager, public CTemplatedVectorMapManager<CSceneRendererCommand>
 {
 public:
-    CSceneRendererCommandManager();
-    CSceneRendererCommandManager( CXMLTreeNode& atts );
-    ~ CSceneRendererCommandManager();
-    CRenderGUISceneRendererCommand* GetCommandGUI( );
+  CSceneRendererCommandManager();
+  CSceneRendererCommandManager( CXMLTreeNode& atts );
+  ~ CSceneRendererCommandManager();
+  CRenderGUISceneRendererCommand* GetCommandGUI( );
 
-    void Init();
-    bool Load( const std::string& lFile );
-    void ReLoad();
-    bool Execute();
-    void Update() {}
-    void Render() {}
+  void Init();
+  bool Load( const std::string& lFile );
+  void ReLoad();
+  bool Execute();
+  void Update() {}
+  void Render() {}
 
-    bool GetVisibleCommand( std::string );
-    void SetVisibleCommand( std::string, bool );
+  bool GetVisibleCommand( std::string );
+  void SetVisibleCommand( std::string, bool );
 
-	CSceneRendererCommand* GetCommand( std::string aName )
-	{
-		return m_SceneRendererCommands.GetResource( aName );
-	}
+  CSceneRendererCommand* GetCommand( const std::string& aName )
+  {
+    return GetResource( aName );
+  }
 
 private:
-    CTemplatedVectorMapManager<CSceneRendererCommand> m_SceneRendererCommands;
+  void CleanUp();
+  std::string GetNextName();
 
-    void CleanUp();
-    std::string GetNextName();
-
-    ObjectFactory1< CSceneRendererCommand, CXMLTreeNode, std::string > m_CommandFactory;
+  ObjectFactory1< CSceneRendererCommand, CXMLTreeNode, std::string > m_CommandFactory;
 };
 #endif
