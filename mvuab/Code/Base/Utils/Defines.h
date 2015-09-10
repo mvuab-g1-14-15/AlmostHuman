@@ -55,9 +55,9 @@
     }
 #define DIRECTINPUT_VERSION     0x0800
 
-#define CHECKED_DELETE(x)       if(x != NULL){ delete x; x = NULL; }
-#define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
-#define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
+#define CHECKED_DELETE(x)       { if(x != NULL){ delete x; x = NULL; } }
+#define CHECKED_RELEASE(x)      { if(x != NULL){ x->Release(); x = NULL; } }
+#define CHECKED_DELETE_ARRAY(x) { if(x != NULL){ delete [] x; x = NULL; } }
 
 #define EngineInstance          CEngine::GetSingletonPtr()
 #define EngineManagerInstance   CEngineManagers::GetSingletonPtr()

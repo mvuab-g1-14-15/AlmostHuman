@@ -1,0 +1,11 @@
+﻿<scene_renderer_commands>
+	<capture_frame_buffer name="ColorGradient_Capture_FB">
+		<dynamic_texture stage_id="0" name="ColorGradient" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+
+	<set_pool_renderable_objects_technique pool="ColorGrading_pool_renderable_object_technique"/>
+	<render_draw_quad active="false" name="ColorGradient_DrawQuad">
+		<texture stage_id="0" name="ColorGradient"/>
+		<texture stage_id="1" name="Data/textures/LUT_Greenish.png"/>
+	</render_draw_quad>
+</scene_renderer_commands>
