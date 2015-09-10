@@ -1,60 +1,52 @@
 #include "Particles\ParticleSystemCore.h"
 #include "EngineConfig.h"
-#include "SphereEmitter.h"
-#include "CubeEmitter.h"
 #include "Timer\Timer.h"
-
+#include "Emitters\EmitterFactory.h"
 
 CParticleSystemCore::CParticleSystemCore()
 {
 }
 
-CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts )
+CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFactory* aEmitterFactory )
 {
-  for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
-  {
-    const CXMLTreeNode& lCurrentEmitter = atts( i );
-    const std::string& lNameParticle  = lCurrentEmitter.GetAttribute<std::string>( "name", "" );
-    const std::string& lEmitterType   = lCurrentEmitter.GetName();
-    CParticleEmitter* lEmitter = 0;
-
-    if ( lEmitterType == "cube_emitter" )
-      lEmitter =  new CCubeEmitter();
-    else if ( lEmitterType == "sphere_emitter" )
-      lEmitter =  new CSphereEmitter();
-
-    ASSERT( lEmitter, "Null Emitter" );
-
-    if ( !lEmitter->Init( lCurrentEmitter ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+    for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
     {
-      LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
-      CHECKED_DELETE( lEmitter );
+        const CXMLTreeNode& lCurrentEmitter = atts( i );
+        const std::string& lNameParticle  = lCurrentEmitter.GetAttribute<std::string>( "name", "" );
+
+        CParticleEmitter* lEmitter = aEmitterFactory->CreateEmitter( lCurrentEmitter.GetName() );
+        ASSERT( lEmitter, "Null Emitter" );
+
+        if ( !lEmitter->Init( lCurrentEmitter ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+        {
+            LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
+            CHECKED_DELETE( lEmitter );
+        }
     }
-  }
 }
 
 CParticleSystemCore::~CParticleSystemCore()
 {
-  Destroy();
+    Destroy();
 }
 
 void CParticleSystemCore::Update()
 {
-  for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
-  {
-	GetResourceById( i )->Update(deltaTimeMacro);
-  }
+    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
+    {
+        GetResourceById( i )->Update(deltaTimeMacro);
+    }
 }
 
 void CParticleSystemCore::Render()
 {
-  for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
-  {
-	GetResourceById( i )->Render();
-  }
+    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
+    {
+        GetResourceById( i )->Render();
+    }
 }
 
 void CParticleSystemCore::Refresh()
 {
-  Destroy();
+    Destroy();
 }

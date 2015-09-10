@@ -22,18 +22,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CookingMesh\PhysicCookingMesh.cpp" />
+    <ClCompile Include="CProyectile.cpp" />
     <ClCompile Include="Joints\PhysicFixedJoint.cpp" />
     <ClCompile Include="Joints\PhysicRevoluteJoint.cpp" />
     <ClCompile Include="Joints\PhysicSphericalJoint.cpp" />
     <ClCompile Include="Jump\Jump.cpp" />
-    <ClCompile Include="Particles\CubeEmitter.cpp" />
+    <ClCompile Include="Particles\Emitters\EmitterFactory.cpp" />
     <ClCompile Include="Particles\InstanceParticle.cpp" />
     <ClCompile Include="Particles\Particle.cpp" />
     <ClCompile Include="Particles\ParticleEmitter.cpp" />
     <ClCompile Include="Particles\ParticleManager.cpp" />
     <ClCompile Include="Particles\ParticleSystemCore.cpp" />
     <ClCompile Include="Particles\ParticleSystemManager.cpp" />
-    <ClCompile Include="Particles\SphereEmitter.cpp" />
     <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicUtils.cpp" />
@@ -58,19 +58,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CookingMesh\PhysicCookingMesh.h" />
+    <ClInclude Include="CProyectile.h" />
     <ClInclude Include="Joints\JointsDefs.h" />
     <ClInclude Include="Joints\PhysicFixedJoint.h" />
     <ClInclude Include="Joints\PhysicRevoluteJoint.h" />
     <ClInclude Include="Joints\PhysicSphericalJoint.h" />
     <ClInclude Include="Jump\Jump.h" />
-    <ClInclude Include="Particles\CubeEmitter.h" />
+    <ClInclude Include="Particles\Emitters\EmitterFactory.h" />
     <ClInclude Include="Particles\InstanceParticle.h" />
     <ClInclude Include="Particles\Particle.h" />
     <ClInclude Include="Particles\ParticleEmitter.h" />
     <ClInclude Include="Particles\ParticleManager.h" />
     <ClInclude Include="Particles\ParticleSystemCore.h" />
     <ClInclude Include="Particles\ParticleSystemManager.h" />
-    <ClInclude Include="Particles\SphereEmitter.h" />
+    <ClInclude Include="Particles\ps.h" />
     <ClInclude Include="PhysicMaterial\PhysicMaterial.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicsDefs.h" />

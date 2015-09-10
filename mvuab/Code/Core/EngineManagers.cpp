@@ -132,31 +132,26 @@ void CEngineManagers::Init()
     ManagerFactory.Register( "id_manager", Type2Type<CIdManager>() );
     ManagerFactory.Register( "editors_manager", Type2Type<CEditorsManager>() );
     ManagerFactory.Register( "particle_system_manager", Type2Type<CParticleSystemManager>() );
-    CXMLTreeNode l_File;
 
-    if ( !l_File.LoadFile( m_ManagersPath.c_str() ) )
+    CXMLTreeNode l_File, TreeNode;
+
+    if ( !l_File.LoadAndFindNode( m_ManagersPath.c_str(), "managers", TreeNode ) )
     {
         const std::string& lMsgError = "Error reading the file " + m_ManagersPath;
         FATAL_ERROR( lMsgError.c_str() );
     }
-
-    CXMLTreeNode  TreeNode = l_File["managers"];
-
-    if ( TreeNode.Exists() )
+    for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
     {
-        for ( int i = 0, count = TreeNode.GetNumChildren(); i < count; ++i )
-        {
-            CXMLTreeNode  Node = TreeNode( i );
-            const std::string& TagName = Node.GetName();
-            CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
+        const CXMLTreeNode& Node = TreeNode( i );
+        const std::string& TagName = Node.GetName();
+        CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
 
-            if ( !Manager )
-                LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
-            else
-            {
-                if ( !AddResource( TagName.c_str() , Manager ) )
-                    CHECKED_DELETE( Manager );
-            }
+        if ( !Manager )
+            LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
+        else
+        {
+            if ( !AddResource( TagName.c_str() , Manager ) )
+                CHECKED_DELETE( Manager );
         }
     }
 
@@ -167,7 +162,7 @@ void CEngineManagers::Init()
     m_pActionManager    = dynamic_cast<CActionManager*>( GetResource( "action_manager" ) );
     m_pFontManager      = dynamic_cast<CFontManager*>( GetResource( "font_manager" ) );
     m_pLanguageManager  = dynamic_cast<CLanguageManager*>( GetResource( "language_manager" ) );
-    //m_pEnemyManager     = dynamic_cast<CEnemyManager*>( GetResource( "enemy_manager" ) );
+//m_pEnemyManager     = dynamic_cast<CEnemyManager*>( GetResource( "enemy_manager" ) );
     m_pStaticMeshManager = dynamic_cast<CStaticMeshManager*>( GetResource( "static_mesh_manager" ) );
     m_pScene = dynamic_cast<CScene*>( GetResource( "scene" ) );
     m_pRenderableObjectTechniqueManager = dynamic_cast<CRenderableObjectTechniqueManager*>
@@ -192,9 +187,9 @@ void CEngineManagers::Init()
     m_pIdManager = dynamic_cast<CIdManager*>( GetResource( "id_manager" ) );
     m_pEditorsManager = dynamic_cast<CEditorsManager*>( GetResource( "editors_manager" ) );
     m_pParticleSystemManager = dynamic_cast<CParticleSystemManager*>( GetResource( "particle_system_manager" ) );
-    //
-    // Init managers
-    //
+//
+// Init managers
+//
     uint32 lSizeElement = GetResourcesCount();
     uint32 lPosition = 0;
     uint32 result;

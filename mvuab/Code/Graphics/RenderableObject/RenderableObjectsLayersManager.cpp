@@ -135,6 +135,7 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
 void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName )
 {
     CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+
     if(l_InstanceMesh->GetVertexBuffer().size() * l_InstanceMesh->GetIndexBuffer().size() == 0)
     {
         CHECKED_DELETE( l_InstanceMesh );
@@ -169,7 +170,7 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
         NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
         l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
     }
-   
+
     if (PhysXMInstance->CMapManager<CPhysicActor>::GetResource( l_Name ) == 0 && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
     {
         lOk = true;
@@ -207,5 +208,9 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
 
         CHECKED_DELETE( l_pPhysicUserDataMesh );
         CHECKED_DELETE( l_InstanceMesh );
+
+        CHECKED_DELETE( l_MeshActor );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
     }
 }

@@ -77,8 +77,12 @@ CShoot::~CShoot()
 bool CShoot::Init()
 {
   bool lOk( true );
-  lOk = lOk && mBillboard->Init( "ShootBillBoard", GetPosition(), 1.0f, 0.0f, 1.0f, "Data/textures/particles/fire3.png", "SmokeTechnique" );
+  lOk = lOk && mBillboard->Init( "ShootBillBoard", GetPosition(), 1.0f, 0.0f, 1.0f, "Data/textures/particles/fire3.png", "BillboardAlignedToCameraTechnique" );
   ASSERT( lOk, "Error initing the shoot" );
+
+  if( !BillboardMan->Exist( GetName() ) )
+	BillboardMan->AddResource( GetName(), mBillboard );
+
   return lOk;
 }
 

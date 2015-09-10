@@ -82,7 +82,8 @@ float32 CCountDownTimerManager::GetElapsedTimeInPercent(std::string _KeyName)
 void CCountDownTimerManager::Reset(std::string _KeyName, bool active)
 {
     CCountDownTimer* l_Timer = (CCountDownTimer *) GetResource(_KeyName);
-    l_Timer->Reset(active);
+    if (l_Timer)
+      l_Timer->Reset(active);
 }
 
 void CCountDownTimerManager::ChangeTotalTime(std::string _KeyName , float32 _Time)

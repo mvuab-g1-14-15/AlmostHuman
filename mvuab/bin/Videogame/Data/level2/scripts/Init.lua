@@ -14,14 +14,13 @@ initialized1 = false
 function load_basics()
 	-- basic loads
 	scene:ActivateRoom("room1")
-	--scene:ActivateRoom("room2")
-	--scene:ActivateRoom("room3")
-    --scene:ActivateRoom("room4")
+	scene:ActivateRoom("room2")
+	scene:ActivateRoom("room3")
 end
 
 function load_gameplay()
     g_Player = CPlayer()
-	g_Player:SetEnergy(0.0)
+	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
@@ -77,11 +76,13 @@ function update_gameplay()
 		
 	end
 	if g_bInBarrel then
+		engine:Trace("Next to barrel "..g_BarrelName)
 		if action_manager:DoAction("EnterBarrel") then
 			engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false
+			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
 	if not (g_ConsoleActivate or g_CinematicActive) then

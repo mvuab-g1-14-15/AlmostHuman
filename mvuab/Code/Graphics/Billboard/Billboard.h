@@ -38,7 +38,7 @@ class CBillboard : public CName, public CObject3D
         void Update();
 
         void SetActive( bool aActive );
-
+		void SetDirection( const Math::Vect3f& aDirection );
     private:
         CTexture*           m_Texture;
         CEffectTechnique*   mTechnique;
@@ -46,6 +46,7 @@ class CBillboard : public CName, public CObject3D
         float               mAngle;
         float               mAlpha;
         bool                m_Active;
+		Math::Vect3f		m_Direction;
 
         static CRenderableVertexs* sRV;
 };

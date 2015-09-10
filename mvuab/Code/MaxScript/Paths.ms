@@ -27,15 +27,15 @@ fn ExportPaths filenameXML =
 			
 			format "Obj: % & l_Name: %\n" Obj l_Name
 			
-			local l_NewPath = xDoc.getNewNode "path"	
+			local l_NewPath = xDoc.getNewNode "route"	
 			l_RootNode.AppendNode l_NewPath 
-			l_NewPath.AddAttributeAsString "name" (l_Name as String)
+			l_NewPath.AddAttributeAsString "id" (l_Name as String)
 
 			for EachNode in Obj do
 			(
-				local l_NewPathNode = xDoc.getNewNode "node"	
+				local l_NewPathNode = xDoc.getNewNode "point"	
 				l_NewPath.AppendNode l_NewPathNode 
-				l_NewPathNode.AddAttributeCoordinate "pos" EachNode.Pos
+				l_NewPathNode.AddAttributeCoordinate "value" EachNode.Pos
 			)
 		)
 	)

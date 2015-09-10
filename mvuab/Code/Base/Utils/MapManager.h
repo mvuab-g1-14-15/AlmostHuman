@@ -72,6 +72,14 @@ template<class T> class CMapManager
         {
             return m_Resources;
         }
+		void RemoveResource( const std::string& Name )
+        {
+            TMapResource::iterator it = m_Resources.find(Name);
+            if ( it == m_Resources.end() ) return;
+
+            CHECKED_DELETE(it->second);
+			m_Resources.erase(it);     
+        }
 };
 
 #endif //INC_MAP_MANAGER_H_

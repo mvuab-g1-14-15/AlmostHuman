@@ -792,6 +792,7 @@ bool CPhysicsManager::ReleasePhysicController( CPhysicController* _pController )
 
     if ( l_NxController != NULL )
     {
+		CMapManager<CPhysicController>::RemoveResource( _pController->GetUserData()->GetName() );
         mControllerManager->releaseController( *l_NxController );
         l_bIsOk = true;
     }

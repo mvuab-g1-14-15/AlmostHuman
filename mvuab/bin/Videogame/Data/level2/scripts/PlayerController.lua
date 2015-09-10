@@ -25,6 +25,8 @@ function CPlayerController:__init()
 	self.PrevLeanOut = 0
 	self.YawMoved = false
 	
+	self.IsMoving = false
+	
 	--Timers
 	self.TimeCrouch = 0.2
 	self.ActualTimeCrouch = 0.2
@@ -37,6 +39,8 @@ function CPlayerController:__init()
 	
 	self.TimeFootstep = 0.5
 	countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep, false)
+	
+	self.TimeDetectionMoving = 1.0
 	
 	--Counters
 	self.ShakeValueVertical = 0.0
@@ -84,6 +88,21 @@ function CPlayerController:Update()
 	self:UpdateInput()
 	
 	self:UpdateTimers(dt)
+	
+	--Is Player moving?
+	if not self.Direction == Vect3f(0.0) then
+		if not countdowntimer_manager:ExistTimer("PlayerMoving") then
+			countdowntimer_manager:AddTimer("PlayerMoving", self.TimeDetectionMoving, false)
+		else
+			countdowntimer_manager:SetActive("PlayerMoving", true)
+		end
+		if countdowntimer_manager:isTimerFinish("PlayerMoving") then
+			self.IsMoving = true
+		end
+	else
+		countdowntimer_manager:Reset("PlayerMoving", false)
+		self.IsMoving = false
+	end
 
 	--Set Listenr Postion 
 	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
@@ -354,4 +373,8 @@ function CPlayerController:MakeCrouch()
 	end
 	
 	return l_Can
+end
+
+function CPlayerController:GetIsMoving()
+	return self.IsMoving
 end

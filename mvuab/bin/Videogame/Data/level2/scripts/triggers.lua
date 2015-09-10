@@ -17,7 +17,6 @@ function OnEnter()
 	physicActor:CreateBody(1, 0.5, 0.5)
 	process:AddPhysicActorVector(physicActor)
 	physic_manager:AddPhysicActor(physicActor)
-
 end
 
 function OnLeave(other_shape)
@@ -78,13 +77,18 @@ function StayText(other_shape)
 	end
 end
 
-function HiddenBarrel(aName, other_shape)
-	gui_manager:ShowStaticText("HideInBarrel")
-	if g_bInBarrel then
-		g_bInBarrel = false
-	else
+function HiddenBarrelOnEnter(aName, other_shape)
+	if not g_bInBarrel then
+		gui_manager:ShowStaticText("HideInBarrel")
 		g_bInBarrel = true
 		g_BarrelName = aName
+	end
+end
+
+function HiddenBarrelOnLeave(aName, other_shape)
+	if g_bInBarrel then
+		gui_manager:ShowStaticText("HideInBarrel")
+		g_bInBarrel = false
 	end
 end
 

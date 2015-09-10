@@ -244,6 +244,10 @@ bool CStaticMesh::Load( const std::string& FileName )
     }
     
     std::fclose( l_pFile );
+
+    // Do we need to check that everything is triangle mesh?
+    //if(m_VB.size() % 3 != 0 || m_VB.size() == 0 || m_IB.size() == 0) return false;
+
     return (GetRenderableObjectTechnique());
 }
 
