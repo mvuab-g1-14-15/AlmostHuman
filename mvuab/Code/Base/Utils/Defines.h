@@ -97,9 +97,10 @@
 
 #define ASSERT(expr, msg, ... ) \
     {\
-        if ( !( expr ) ) \
+        static bool sIgnoreAssert = false; \
+        if ( !sIgnoreAssert && !( (expr) ) ) \
         {\
-            CMessageHandler::Assert( __FILE__, __LINE__, msg, __VA_ARGS__ );\
+            CMessageHandler::Assert( sIgnoreAssert, __FILE__, __LINE__, msg, __VA_ARGS__ );\
         } \
     }\
 
