@@ -22,14 +22,14 @@ function CBarrel:__init(aName, aPosition)
 	self.RenderableObject:SetPosition(self.Pos)
 	self.RenderableObject:MakeTransform()
 	
-	engine:Trace("CBarrel: " .. self.Name .. " initialized")
-	engine:Trace("CBarrel Pos: " .. self.Pos:ToString())
+	--engine:Trace("CBarrel: " .. self.Name .. " initialized")
+	--engine:Trace("CBarrel Pos: " .. self.Pos:ToString())
 end
 
 function CBarrel:Destroy()
 	physic_manager:ReleasePhysicActor(self.Actor)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
-	engine:Trace("CBarrel: " .. self.Name .. " destroyed")
+	--engine:Trace("CBarrel: " .. self.Name .. " destroyed")
 end
 
 function CBarrel:RestoreBarrel()
@@ -41,7 +41,7 @@ function CBarrel:RestoreBarrel()
 end
 
 function CBarrel:ExitBarrel( aPos )
-	engine:Trace("He pasado por aqui: "..aPos:ToString())
+	--engine:Trace("He pasado por aqui: "..aPos:ToString())
 	self.Pos = aPos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )

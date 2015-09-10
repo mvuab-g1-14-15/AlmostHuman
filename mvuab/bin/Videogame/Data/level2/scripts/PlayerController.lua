@@ -53,7 +53,7 @@ function CPlayerController:__init()
 	
 	physic_manager:AddController("Player", self.Radius, self.Height/2.0, math.cos(g_HalfPi/2.0), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
-	engine:Trace("Player Controller initialized")
+	--engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()
@@ -90,7 +90,7 @@ function CPlayerController:Update()
 	self:UpdateTimers(dt)
 	
 	--Is Player moving?
-	if not self.Direction == Vect3f(0.0) then
+	if CheckVector(self.Direction) then
 		if not countdowntimer_manager:ExistTimer("PlayerMoving") then
 			countdowntimer_manager:AddTimer("PlayerMoving", self.TimeDetectionMoving, false)
 		else
@@ -102,6 +102,12 @@ function CPlayerController:Update()
 	else
 		countdowntimer_manager:Reset("PlayerMoving", false)
 		self.IsMoving = false
+	end
+	
+	if self.IsMoving then
+		engine:Trace("Player is moving: true")
+	else
+		engine:Trace("Player is moving: false")
 	end
 
 	--Set Listenr Postion 
@@ -116,7 +122,7 @@ function CPlayerController:Update()
 		l_Speed = l_Speed * 2.0
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
 		if CurrentState ~= "run" then
-			engine:Trace("Estado actual run")
+			--engine:Trace("Estado actual run")
 			g_Player:GetRenderableObject():ChangeAnimation("run", 0.2, 0)
 			g_Player:SetCurrentState("run")
 		end
@@ -124,7 +130,7 @@ function CPlayerController:Update()
 	if not self.Crouch and not self.Run then
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep)
 		if CurrentState ~= "idle" and CurrentState ~= "charge_loop" and CurrentState ~= "idle_to_charge" and CurrentState ~= "shoot_cargado" then
-			engine:Trace("Estado actual idle")
+			--engine:Trace("Estado actual idle")
 			g_Player:GetRenderableObject():ChangeAnimation("idle", 0.2, 0)
 			g_Player:SetCurrentState("idle")
 		end

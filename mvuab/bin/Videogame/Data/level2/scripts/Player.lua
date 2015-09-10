@@ -78,7 +78,7 @@ function CPlayer:Update()
 	end
 	
 	
-	--engine:Trace( "Player life: " .. self.Life )
+	----engine:Trace( "Player life: " .. self.Life )
 end
 
 function CPlayer:SetPosition(position)
@@ -87,7 +87,7 @@ end
 
 function CPlayer:AddDamage(amount)
 	self.Life = self.Life - amount
-	engine:Trace("Life: ".. self.Life)
+	--engine:Trace("Life: ".. self.Life)
 end
 
 function CPlayer:GetLife()
@@ -136,15 +136,15 @@ end
 
 function CPlayer:HideInBarrel( aName )
 	if not self.InsideBarrel then
-		engine:Trace("No estoy oculto")
+		--engine:Trace("No estoy oculto")
 		local l_Can = true
 		if not self.PlayerController.Crouch then
-			engine:Trace("No estoy agachado")
+			--engine:Trace("No estoy agachado")
 			l_Can = self.PlayerController:MakeCrouch()
 		end
 		
 		if l_Can then
-			engine:Trace("Puedo entrar en el barril")
+			--engine:Trace("Puedo entrar en el barril")
 			scene_renderer_commands_manager:SetVisibleCommand("InsideBarrel", true)
 			self.InsideBarrel = true
 			self.BarrelName = aName
@@ -165,7 +165,7 @@ function CPlayer:HideInBarrel( aName )
 end
 
 function CPlayer:ExitBarrel()
-	engine:Trace("BarrelName = "..self.BarrelName)
+	--engine:Trace("BarrelName = "..self.BarrelName)
 	if self:HideInBarrel( self.BarrelName ) then
 		lBarrel = g_Barrels[self.BarrelName]
 		lBarrel:ExitBarrel(self:GetPosition())
@@ -175,7 +175,7 @@ end
 
 function CPlayer:GetIsHidden()
 	if self.InsideBarrel then
-		return self.PlayerController:GetIsMoving()
+		return not self.PlayerController:GetIsMoving()
 	else
 		return false
 	end

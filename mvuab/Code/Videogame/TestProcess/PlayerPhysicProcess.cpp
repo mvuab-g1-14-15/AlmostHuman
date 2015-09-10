@@ -300,6 +300,9 @@ void CPlayerPhysicProcess::DeleteController( CPhysicUserData* PUD )
 //////////////////////////////////////////////////////////////////////////////////////
 std::string GetLuaCodeComplete( std::string LuaCode, std::string Other_Shape )
 {
+	if (LuaCode == "")
+		return "";
+
   std::ostringstream codeCat;
   size_t count = LuaCode.find( ")" );
   size_t count2 = LuaCode.find( "(" );

@@ -3,7 +3,7 @@ class 'CActionLUA'
 function CActionLUA:__init( Node )
 	self.Function = Node:GetAttributeString( "function", "no_function" ).."()"
 	
-	engine:Trace("Loaded the action " .. self.Function)
+	--engine:Trace("Loaded the action " .. self.Function)
 end
 
 function CActionLUA:Execute()

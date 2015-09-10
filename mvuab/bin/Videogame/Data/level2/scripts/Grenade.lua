@@ -34,6 +34,6 @@ function CGrenade:Explode()
 		l_Enemy = enemy_manager:GetResource(l_PhysXActors:GetResource(i - 1):GetName())
 		l_Enemy:AddDamage(self:CalculateDamage((self.Actor:GetPosition() - l_Enemy:GetPosition()):Length()))
 	end
-	engine:Trace( "BOOOM " )
+	--engine:Trace( "BOOOM " )
 	--action_manager:ReleasePhysicActor(self.Actor)	
 end

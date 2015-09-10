@@ -23,11 +23,11 @@ function UpdateFree()
 		end
 		
 		if action_manager:DoAction("MoveUp") then
-			engine:Trace("MoveUp")
+			--engine:Trace("MoveUp")
 			vertical = vertical + 1
 		elseif action_manager:DoAction("MoveDown") then
 			vertical =  vertical - 1
-			engine:Trace("MoveDown")
+			--engine:Trace("MoveDown")
 		end
 	end
 	
