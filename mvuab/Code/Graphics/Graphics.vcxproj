@@ -37,6 +37,7 @@
     <ClCompile Include="Cinematics\CinematicsElement\SetTransformElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp" />
+    <ClCompile Include="DronBarrier\DronBarrier.cpp" />
     <ClCompile Include="Effects\EffectFlags.cpp" />
     <ClCompile Include="Effects\SharedEffect.cpp" />
     <ClCompile Include="GraphicsXMLTreeNode.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Cinematics\CinematicsElement\SetTransformElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\ShowDialogElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\WaitTimeElement.h" />
+    <ClInclude Include="DronBarrier\DronBarrier.h" />
     <ClInclude Include="dx9.h" />
     <ClInclude Include="Effects\Effect.h" />
     <ClInclude Include="Effects\EffectFlags.h" />

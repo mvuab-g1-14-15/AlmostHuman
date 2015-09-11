@@ -28,7 +28,7 @@ function CEnemyManagerLUA:Load(filename)
 	l_File = CXMLTreeNode()
 	Node = CXMLTreeNode()
     if not l_File:LoadAndFindNode( filename, "enemies", Node ) then
-        engine:Trace( "File '"..filename.."' not correctly loaded" )
+        --engine:Trace( "File '"..filename.."' not correctly loaded" )
     end
 
     if Node:Exists() then
@@ -131,9 +131,9 @@ function CEnemyManagerLUA:AddNewRoute( Node )
     for i = 0, count-1 do
 		CurrentNode = Node:GetChildren(i)
         l_Point = Vect3f(CurrentNode:GetAttributeVect3f( "value", Vect3f( 0.0, -99999999.0, 0.0 ) ))
-		engine:Trace("Nodo ".. i)
+		--engine:Trace("Nodo ".. i)
         if ( l_Point == Vect3f( 0.0, -99999999.0, 0.0 ) ) then        
-            engine:Trace( "Point in the route '".. l_Id .."' not correctly loaded.")        
+            --engine:Trace( "Point in the route '".. l_Id .."' not correctly loaded.")        
         else     
             table.insert(l_Route, l_Point)
         end
@@ -147,13 +147,13 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
     lCoreEnemy = self.CoreEnemy[lType]
 
     if ( lCoreEnemy == nil) then
-        engine:Trace("Core '".. lType .."' not found")
+        --engine:Trace("Core '".. lType .."' not found")
     end
 
     lStateMachine = self.StatesMachine[self.CoreEnemy[lType]:GetStateMachineName()]
 
     if ( lStateMachine == nil) then
-        engine:Trace("State machine for '".. lType .."' not found")
+        --engine:Trace("State machine for '".. lType .."' not found")
     end
 	
 	lEnemy = nil
@@ -166,7 +166,7 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 		lEnemy = CEasyEnemyLUA(Node, lStateMachine, lCoreEnemy)	
 	end
 	name = Node:GetAttributeString("name", "no_name")
-	engine:Trace("Enemy: "..name)
+	--engine:Trace("Enemy: "..name)
 	self.Enemy[name] = lEnemy
 	self.ActualEnemy = lEnemy
 end
@@ -234,7 +234,7 @@ end
 
 function CEnemyManagerLUA:GenerateEnemy()
 	local lRoom = "room2"--scene:GetActivateRoom()
-	engine:Trace("Name room:"..lRoom)
+	--engine:Trace("Name room:"..lRoom)
 	local Node = self.ExtraEnemy[lRoom]
 	self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )
 	self.ExtraEnemyCount = self.ExtraEnemyCount + 1

@@ -76,9 +76,9 @@ function update_gameplay()
 		
 	end
 	if g_bInBarrel then
-		engine:Trace("Next to barrel "..g_BarrelName)
+		--engine:Trace("Next to barrel "..g_BarrelName)
 		if action_manager:DoAction("EnterBarrel") then
-			engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
+			--engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false

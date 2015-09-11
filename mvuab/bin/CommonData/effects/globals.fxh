@@ -107,6 +107,9 @@ int         g_WindowWidth                                      		: WindowWidth;
 int         g_WindowHeight                                     		: WindowHeight;
 
 
+float       g_Time													: Time;
+
+
 //
 // Functions
 //

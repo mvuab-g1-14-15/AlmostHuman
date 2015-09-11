@@ -52,13 +52,13 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	AddEnemy(Node:GetAttributeString("texture_enemy", ""), Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), Node:GetAttributeInt("width", 50.0), Node:GetAttributeInt("height", 50.0), self.CharacterController:GetYaw(), Node:GetAttributeString("get_position_script", "no_script"), Node:GetAttributeString("orientation", "no_script"), self.Name)
 	
-	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
+	--engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
 function CEnemyLUA:Destroy()
 	physic_manager:ReleasePhysicController(self.CharacterController)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
-	engine:Trace("He muerto Vida actual: "..self.Life)
+	--engine:Trace("He muerto Vida actual: "..self.Life)
 end
 
 function CEnemyLUA:Update()
@@ -100,7 +100,7 @@ end
 
 function CEnemyLUA:AddDamage(amount)
 	self.Life = self.Life - amount
-	engine:Trace("Vida actual: "..self.Life)
+	--engine:Trace("Vida actual: "..self.Life)
 end
 
 function CEnemyLUA:SetYaw(yaw)

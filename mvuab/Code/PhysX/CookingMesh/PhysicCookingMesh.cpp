@@ -35,7 +35,6 @@ CPhysicCookingMesh::CPhysicCookingMesh( void )
 
 bool CPhysicCookingMesh::Init( NxPhysicsSDK* _pPhysicSDK, CPhysicUserAllocator* _pMyAllocator )
 {
-
   m_pPhysicSDK  = _pPhysicSDK;
   m_pMyAllocator  = new CPhysicUserAllocator();
   assert( m_pPhysicSDK && m_pMyAllocator );
@@ -128,71 +127,78 @@ bool CPhysicCookingMesh::CreatePhysicMesh( const std::string& _Bin_Filename, con
   return isOk;
 }
 
- NxTriangleMesh *CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Vect3f> &l_VB, const std::vector<uint32> &l_IB)
- {
-	 ASSERT( !l_VB.empty() && !l_IB.empty(), "Null VB or IB" );
-	 if(!l_VB.empty() && !l_IB.empty())
-	 {
-		NxTriangleMeshDesc l_TriangleMeshDesc;
-     
-		l_TriangleMeshDesc.numVertices      = ( NxU32 ) l_VB.size();
-		l_TriangleMeshDesc.numTriangles     = ( NxU32 ) l_IB.size() / 3;
+NxTriangleMesh* CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Vect3f>& l_VB,
+    const std::vector<uint32>& l_IB )
+{
+  ASSERT( !l_VB.empty() && !l_IB.empty(), "Null VB or IB" );
 
-	    l_TriangleMeshDesc.pointStrideBytes     = sizeof( Math::Vect3f );
-		l_TriangleMeshDesc.triangleStrideBytes  = 3 * sizeof( uint32 );
+  if ( !l_VB.empty() && !l_IB.empty() )
+  {
+    NxTriangleMeshDesc l_TriangleMeshDesc;
+    l_TriangleMeshDesc.numVertices      = ( NxU32 ) l_VB.size();
+    l_TriangleMeshDesc.numTriangles     = ( NxU32 ) l_IB.size() / 3;
+    l_TriangleMeshDesc.pointStrideBytes     = sizeof( Math::Vect3f );
+    l_TriangleMeshDesc.triangleStrideBytes  = 3 * sizeof( uint32 );
+    l_TriangleMeshDesc.points         = &l_VB[0].x;
+    l_TriangleMeshDesc.triangles      = &l_IB[0];
+    l_TriangleMeshDesc.flags          = 0;
+    CPhysicMemoryWriteBuffer buf;
 
-		l_TriangleMeshDesc.points         = &l_VB[0].x;
-		l_TriangleMeshDesc.triangles      = &l_IB[0];
-		l_TriangleMeshDesc.flags          = 0;
+    if ( !m_pCooking->NxCookTriangleMesh( l_TriangleMeshDesc, buf ) ) return 0;
 
-	    CPhysicMemoryWriteBuffer buf;
-	    if(!m_pCooking->NxCookTriangleMesh(l_TriangleMeshDesc, buf)) return 0;
-	    return m_pPhysicSDK->createTriangleMesh(CPhysicMemoryReadBuffer(buf.data));
-	 }
+    return m_pPhysicSDK->createTriangleMesh( CPhysicMemoryReadBuffer( buf.data ) );
+  }
 
-	 return 0;
+  return 0;
 }
 
 
 //----------------------------------------------------------------------------
 // Creating a PhysicMesh from a buffer
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::CreatePhysicMesh(std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces )
+bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>>& _Vertices,
+    std::vector<std::vector<unsigned int>>& _Faces )
 {
-	bool isOk = false;
+  bool isOk = false;
 
-	for(unsigned int i = 0; i < _Vertices.size(); i++)
-	{
-		std::ostringstream s; s << _NameMesh << i;
-		std::string l_Name(s.str());
+  for ( unsigned int i = 0; i < _Vertices.size(); i++ )
+  {
+    std::ostringstream s;
+    s << _NameMesh << i;
+    std::string l_Name( s.str() );
+    std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( l_Name );
 
-		std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( l_Name );
-		if ( it != m_TriangleMeshes.end() ) continue;
+    if ( it != m_TriangleMeshes.end() ) continue;
 
-        NxTriangleMesh *l_TriangleMesh = CreatePhysicMesh(_Vertices[i], _Faces[i]);
-        if(l_TriangleMesh != 0) m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
-	}
-	
-	return isOk;
+    NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices[i], _Faces[i] );
+
+    if ( l_TriangleMesh != 0 ) m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
+  }
+
+  return isOk;
 }
 
-bool CPhysicCookingMesh::CreatePhysicMesh(std::string _NameMesh, std::vector<Math::Vect3f> &_Vertices, std::vector<unsigned int> &_Faces )
+bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f>& _Vertices,
+    std::vector<unsigned int>& _Faces )
 {
-    std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( _NameMesh );
-    if ( it != m_TriangleMeshes.end() ) return false;
+  std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( _NameMesh );
 
-    NxTriangleMesh *l_TriangleMesh = CreatePhysicMesh(_Vertices, _Faces);
-    if(l_TriangleMesh != 0) return false;
-    
-    m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( _NameMesh, l_TriangleMesh ) );
-	return true;
+  if ( it != m_TriangleMeshes.end() ) return false;
+
+  NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices, _Faces );
+
+  if ( l_TriangleMesh != 0 ) return false;
+
+  m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( _NameMesh, l_TriangleMesh ) );
+  return true;
 }
 
 
 //----------------------------------------------------------------------------
 // Save a PhysicMesh in a bin file
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::SavePhysicMesh( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string& _BinFilename )
+bool CPhysicCookingMesh::SavePhysicMesh( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces,
+    const std::string& _BinFilename )
 {
   // Build physical model
   NxTriangleMeshDesc triangleMeshDesc;
@@ -203,12 +209,9 @@ bool CPhysicCookingMesh::SavePhysicMesh( const std::vector<Math::Vect3f>& _Verti
   triangleMeshDesc.points         = &_Vertices[0].x;
   triangleMeshDesc.triangles        = &_Faces[0];
   triangleMeshDesc.flags          = 0;
-
   assert( m_pCooking );
   bool isOk = false;
-
   isOk = m_pCooking->NxCookTriangleMesh( triangleMeshDesc, CPhysicUserStream( _BinFilename.c_str(), false ) );
-
   return isOk;
 }
 
@@ -227,7 +230,8 @@ bool CPhysicCookingMesh::CookClothMesh( const NxClothMeshDesc& desc, NxStream& s
 //----------------------------------------------------------------------------
 // Load the ASE File thought ASE Loader
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::ReadMeshFromASE( std::string _FileName, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces )
+bool CPhysicCookingMesh::ReadMeshFromASE( std::string _FileName, std::vector<std::vector<Math::Vect3f>>& _Vertices,
+    std::vector<std::vector<unsigned int>>& _Faces )
 {
   bool l_bOK = CPhysicASELoader::ReadMeshFromASE( _FileName, _Vertices, _Faces );
   return l_bOK;
@@ -244,13 +248,13 @@ bool CPhysicCookingMesh::CreateMeshFromASE( std::string _FileName, std::string _
     else
     {
       LOG_ERROR_APPLICATION( "Error al leer la mesh del fichero ASE: %s",
-                                             _FileName );
+                             _FileName );
       return false;
     }
   else
   {
     LOG_ERROR_APPLICATION( "Error al leer la mesh del fichero ASE: %s",
-                                           _FileName );
+                           _FileName );
     return false;
   }
 }

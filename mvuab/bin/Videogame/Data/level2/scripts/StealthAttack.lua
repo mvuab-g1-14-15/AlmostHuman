@@ -7,7 +7,7 @@ function CStealthAttack:__init()
 	self.MaxDistance = 3.0
 	self.MaxAngle = -0.507
 	self.Show = 0
-    engine:Trace("StealthAttack initialized")
+    --engine:Trace("StealthAttack initialized")
 end
 
 function CStealthAttack:Update()
@@ -36,7 +36,7 @@ function CStealthAttack:Update()
 		self.Show = self.Show + 1
 		if self.Doing then	
 			local angle = GetAngleEnemyPlayer(enemy)
-			engine:Trace("Angulo".. angle)
+			--engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
 				enemy:AddDamage(enemy:GetLife())				
 			end
@@ -58,7 +58,7 @@ function CStealthAttack:UpdateInput()
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("StealthAttack") then
 			self.Doing = true
-			engine:Trace("Stealth attack press")
+			--engine:Trace("Stealth attack press")
 		end
 	end
 end

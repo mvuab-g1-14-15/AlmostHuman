@@ -106,5 +106,5 @@ function ChargeEnergy()
 end
 
 function TracePhysX(message, other_shape)
-	engine:Trace(message)
+	--engine:Trace(message)
 end
