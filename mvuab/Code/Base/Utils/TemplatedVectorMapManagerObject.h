@@ -1,27 +1,27 @@
 #pragma once
 
-#ifndef _TEMPLATED_VECTOR_MAP_MANAGER_H
-#define _TEMPLATED_VECTOR_MAP_MANAGER_H
+#ifndef _TEMPLATED_VECTOR_MAP_MANAGER_OBJ_H
+#define _TEMPLATED_VECTOR_MAP_MANAGER_OBJ_H
 
 #include <string>
 #include <vector>
 #include <map>
 #include "Utils\Defines.h"
 
-template <class T> class CTemplatedVectorMapManager
+template <class T> class CTemplatedVectorMapManagerObject
 {
     public:
         class CMapResourceValue
         {
             public:
-                T*     m_Value;
+                T      m_Value;
                 size_t m_Id;
 
-                CMapResourceValue(T* value, size_t id) : m_Value(value), m_Id(id) { }
+                CMapResourceValue(T value, size_t id) : m_Value(value), m_Id(id) { }
                 CMapResourceValue() : m_Value(0), m_Id(0) { }
         };
 
-        typedef std::vector<T*>                          TVectorResources;
+        typedef std::vector<T>                          TVectorResources;
         typedef std::map<std::string, CMapResourceValue> TMapResources;
 
     protected:
@@ -29,8 +29,8 @@ template <class T> class CTemplatedVectorMapManager
         TMapResources       m_ResourcesMap;
 
     public:
-        CTemplatedVectorMapManager() { }
-        virtual ~CTemplatedVectorMapManager()
+        CTemplatedVectorMapManagerObject() { }
+        virtual ~CTemplatedVectorMapManagerObject()
         {
             Destroy();
         }
@@ -61,18 +61,18 @@ template <class T> class CTemplatedVectorMapManager
             }
         }
 
-        virtual T* GetResourceById(size_t Id)
+        virtual T GetResourceById(size_t Id)
         {
             return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
         }
 
-        virtual T* GetResource(const std::string& Name)
+        virtual T GetResource(const std::string& Name)
         {
             TMapResources::iterator it = m_ResourcesMap.find(Name );
             return (it != m_ResourcesMap.end()) ? it->second.m_Value : 0;
         }
 
-        virtual bool AddResource( const std::string& Name, T* Resource )
+        virtual bool AddResource( const std::string& Name, T Resource )
         {
             if (m_ResourcesMap.find(Name) != m_ResourcesMap.end()) return false;
 
@@ -85,7 +85,7 @@ template <class T> class CTemplatedVectorMapManager
 
         virtual void Destroy()
         {
-            for ( size_t i = 0; i < m_ResourcesVector.size() ; ++i ) CHECKED_DELETE( m_ResourcesVector[i] );
+            for ( size_t i = 0; i < m_ResourcesVector.size() ; ++i ) CHECKED_RELEASE( m_ResourcesVector[i] );
 
             m_ResourcesMap.clear();
             m_ResourcesVector.clear();

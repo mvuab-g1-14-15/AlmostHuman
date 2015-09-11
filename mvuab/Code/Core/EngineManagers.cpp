@@ -33,6 +33,8 @@
 #include "LensFlare\LensFlareManager.h"
 #include "Utils\IdManager.h"
 #include "Particles\ParticleSystemManager.h"
+#include "Utils\BaseUtils.h"
+#include "Utils\StringUtils.h"
 
 CEngineManagers::CEngineManagers( const std::string& aPath )
 
@@ -193,17 +195,20 @@ void CEngineManagers::Init()
     uint32 lSizeElement = GetResourcesCount();
     uint32 lPosition = 0;
     uint32 result;
+    std::string lMsg;
 
     for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
             ++lItb )
     {
+#ifdef _DEBUG
+        TIMER_START();
         ( *lItb )->Init();
-        m_pConsole->Clear();
         result = ++lPosition * 100 / lSizeElement;
-        std::stringstream ss;
-        ss  << "Porcentaje completado " << result << "%";
-        const std::string& lProgress = ss.str();
-        EngineInstance->Trace( lProgress );
+        StringUtils::Format( lMsg, "[%u Percentage Completed] Manager %s", result, (*lItb)->GetName().c_str() );
+        TIMER_STOP( lMsg.c_str() );
+#else
+      ( *lItb )->Init();
+#endif
     }
 }
 

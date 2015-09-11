@@ -6,126 +6,60 @@
 #include "EngineConfig.h"
 
 #include "EngineManagers.h"
+#include "Utils/StringUtils.h"
 
 CFontManager::CFontManager( CXMLTreeNode& atts )
     : CManager( atts )
 {
 }
 
-void CFontManager::Done()
-{
-    if ( IsOk() )
-    {
-        Release();
-        m_bIsOk = false;
-    }
-}
-
 void CFontManager::Init()
 {
-    //LOG_INFO_APPLICATION( "Inicializando FontManager" );
-    m_pD3DDevice = GraphicsInstance->GetDevice();
-    m_bIsOk = ( m_pD3DDevice != NULL );
-
-    if ( m_bIsOk )
-    {
-        //Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
-        CreateFont( 17, true, false, "Times New Roman" );
-    }
-
-    LoadTTFs( mConfigPath );
-    //return m_bIsOk;
+  m_pD3DDevice = GraphicsInstance->GetDevice();
+  LoadTTFs( mConfigPath );
 }
 void CFontManager::Release()
 {
-    std::vector<LPD3DXFONT>::iterator it = m_Fonts.begin();
-    std::vector<LPD3DXFONT>::iterator itEnd = m_Fonts.end();
-
-    while ( it != itEnd )
-    {
-        LPD3DXFONT font = *it;
-        CHECKED_RELEASE( font );
-        ++it;
-    }
-
-    m_Fonts.clear();
-    std::vector<std::string>::iterator itTTF = m_vTTFsFiles.begin();
-    std::vector<std::string>::iterator itTTFEnd = m_vTTFsFiles.end();
-
-    for ( ; itTTF != itTTFEnd; ++itTTF )
-    {
-        RemoveFontResource( itTTF->c_str() );
-    }
-
-    m_vTTFsFiles.clear();
+  m_Fonts.Destroy();
+  mTTFs.clear();
 }
 
 bool CFontManager::ReloadTTFs()
 {
-    if ( mConfigPath != "" )
-    {
-        return LoadTTFs( mConfigPath );
-    }
-
-    return false;
+  return LoadTTFs( mConfigPath );
 }
 
 bool CFontManager::LoadTTFs( const std::string& pathFile )
 {
-    CXMLTreeNode parser;
+  bool lLoadedOk = false;
+  if( pathFile != "" )
+  {
+    //first of all we release the fonts
+    Release();
 
-    if ( !parser.LoadFile( pathFile.c_str() ) )
+    // Create a default font
+    mTTFs["TimesNewRoman"] = AddFont( 17, true, false, "Times New Roman", "timesnewroman.ttf", true );
+
+    CXMLTreeNode parser, m;
+    if ( parser.LoadAndFindNode( pathFile.c_str(), "Fonts", m ) )
     {
-        LOG_ERROR_APPLICATION( "Error Loading fonts configuration file %s", pathFile.c_str() );
-        return false;
-    }
-
-    m_sPathFile = pathFile;
-    CXMLTreeNode  m = parser["Fonts"];
-
-    if ( m.Exists() )
-    {
-        //first of all we release the fonts
-        Release();
-        //Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
-        CreateFont( 17, true, false, "Times New Roman" );
-        int count = m.GetNumChildren();
-
-        for ( int i = 0; i < count; ++i )
+        for ( uint32 i = 0, lCount = m.GetNumChildren(); i < lCount; ++i )
         {
-            std::string fontId = m( i ).GetAttribute<std::string>( "id" , "no_id" );
-            std::string name = m( i ).GetAttribute<std::string>( "name" , "no_name");
-            std::string file = m( i ).GetAttribute<std::string>( "file" , "no_file");
-            uint8 size = m( i ).GetAttribute<int32>( "size", 10 );
-            bool bold = m( i ).GetAttribute<bool>( "bold", false );
-            bool italica = m( i ).GetAttribute<bool>( "italica", false );
-            bool _default = m( i ).GetAttribute<bool>( "default", false );
-            std::vector<std::string>::iterator it = m_vTTFsFiles.begin();
-            std::vector<std::string>::iterator itEnd    = m_vTTFsFiles.end();
-            bool exist = false;
-
-            while ( it != itEnd )
+            const CXMLTreeNode& lCurrentNode = m(i);
+            const std::string& file = lCurrentNode.GetAttribute<std::string>( "file" , "no_file");
+            if ( !m_Fonts.Exist( file ) )
             {
-                std::string ttfFile = *it;
-
-                if ( ttfFile == file )
+                if ( AddFontResource( file.c_str() ) == 1 )
                 {
-                    exist = true;
-                }
-
-                ++it;
-            }
-
-            if ( !exist )
-            {
-                int id = AddFontResource( file.c_str() );
-
-                if ( id == 1 )
-                {
-                    m_vTTFsFiles.push_back( file );
-                    m_TTFs[fontId] = CreateFont( size, bold, italica, name, _default );
-                    //LOG_INFO_APPLICATION( "LoadFonts:: Add font %s (file:%s,size:%d,bold:%d,italica:%d,default:%d),",
-                    //   fontId.c_str(), file.c_str(), size, bold, italica, _default );
+                    mTTFs[lCurrentNode.GetAttribute<std::string>( "id" , "no_id" )] = 
+                      AddFont( 
+                        lCurrentNode.GetAttribute<int32>( "size", 10 ),
+                        lCurrentNode.GetAttribute<bool>( "bold", false ),
+                        lCurrentNode.GetAttribute<bool>( "italica", false ),
+                        lCurrentNode.GetAttribute<std::string>( "name" , "no_name"),
+                        file,
+                        lCurrentNode.GetAttribute<bool>( "default", false )
+                      );
                 }
                 else
                 {
@@ -134,16 +68,18 @@ bool CFontManager::LoadTTFs( const std::string& pathFile )
             }
         }
     }
+    lLoadedOk = true;
+  }
 
-    return true;
+  return lLoadedOk;
 }
 
 int32 CFontManager::GetTTF_Id( const std::string& name )
 {
     std::map<std::string, uint32>::iterator it;
-    it = m_TTFs.find( name );
+    it = mTTFs.find( name );
 
-    if ( it != m_TTFs.end() )
+    if ( it != mTTFs.end() )
     {
         return it->second;
     }
@@ -151,44 +87,32 @@ int32 CFontManager::GetTTF_Id( const std::string& name )
     return -1;
 }
 
-uint32 CFontManager::CreateFont( uint32 size, bool bold, bool italica,
-                                 const std::string& fontName, bool replaceDefault )
+uint32 CFontManager::AddFont( uint32 size, bool bold, bool italica, const std::string& fontName, const std::string& fontFile, bool replaceDefault )
 {
-    LPD3DXFONT font;
-    uint32 weight;
+    LPD3DXFONT font = 0;
+    D3DXCreateFont
+      (
+        m_pD3DDevice,
+        size,
+        0,
+        (bold) ? FW_BOLD : FW_NORMAL,
+        1,
+        italica,
+        DEFAULT_CHARSET,
+        OUT_DEFAULT_PRECIS,
+        DEFAULT_QUALITY,
+        DEFAULT_PITCH | FF_DONTCARE,
+        fontName.c_str(),
+        &font
+      );
 
-    if ( bold )
-    {
-        weight = FW_BOLD;
-    }
-    else
-    {
-        weight = FW_NORMAL;
-    }
+    uint32 id = m_Fonts.GetResourcesCount();
 
-    D3DXCreateFont( m_pD3DDevice, size, 0, weight, 1, italica, DEFAULT_CHARSET,
-                    OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-                    fontName.c_str(),    &font );
-    uint32 id = 0;
+    m_Fonts.AddResource( fontFile, font );
 
     if ( replaceDefault )
     {
-        if ( m_Fonts.size() > 0 )
-        {
-            CHECKED_RELEASE( m_Fonts[0] );
-            m_Fonts[0] = font;
-        }
-        else
-        {
-            m_Fonts.push_back( font );
-        }
-
-        id = 0;
-    }
-    else
-    {
-        m_Fonts.push_back( font );
-        id = ( uint32 )m_Fonts.size() - 1;
+      mDefaultFont = font;
     }
 
     return id;
@@ -197,23 +121,22 @@ uint32 CFontManager::CreateFont( uint32 size, bool bold, bool italica,
 uint32 CFontManager::DrawDefaultText( uint32 x, uint32 y, Math::CColor color,
                                       const char* format, ... )
 {
+    std::string lMsg;
     va_list args;
-    char* buffer;
-    va_start( args, format );
-    int len = _vscprintf( format, args ) + 1;
-    buffer = ( char* )malloc( len * sizeof( char ) );
-    vsprintf_s( buffer, len, format, args );
+    va_start(args,format);
+    StringUtils::Format( lMsg, format, args); 
     va_end(args);
+    
     RECT rect;
     rect.left = x;
     rect.top = y;
     DWORD color_aux = color.GetUint32Argb();
+
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
-    assert( m_Fonts.size() > 0 );
-    m_Fonts[0]->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, color_aux );
+    mDefaultFont->DrawText( NULL, lMsg.c_str(), -1, &rect, DT_CALCRECT, color_aux );
     // pintarlo
-    m_Fonts[0]->DrawText( NULL, buffer, -1, &rect, DT_LEFT, color_aux );
-    free( buffer );
+    mDefaultFont->DrawText( NULL, lMsg.c_str(), -1, &rect, DT_LEFT, color_aux );
+
     return ( rect.bottom  - rect.top );
 }
 
@@ -232,10 +155,9 @@ uint32 CFontManager::DrawText( uint32 x, uint32 y, Math::CColor color,
     rect.top = y;
     DWORD color_aux = color.GetUint32Argb();
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
-    assert( m_Fonts.size() > idFont );
-    m_Fonts[idFont]->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, color_aux );
+    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, color_aux );
     // pintarlo
-    m_Fonts[idFont]->DrawText( NULL, buffer, -1, &rect, DT_LEFT, color_aux );
+    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_LEFT, color_aux );
     free( buffer );
     return ( rect.bottom  - rect.top );
 }
@@ -274,8 +196,7 @@ uint32 CFontManager::SizeX( const char* format, uint32 idFont )
     va_end(args);
     RECT rect;
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
-    assert( m_Fonts.size() > idFont );
-    m_Fonts[idFont]->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, 0xff000000 );
+    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, 0xff000000 );
     free( buffer );
     return ( rect.right  - rect.left );
 }
@@ -291,8 +212,7 @@ uint32 CFontManager::SizeY( const char* format, uint32 idFont )
     va_end(args);
     RECT rect;
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
-    assert( m_Fonts.size() > idFont );
-    m_Fonts[idFont]->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, 0xff000000 );
+    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, 0xff000000 );
     free( buffer );
     return ( rect.bottom  - rect.top );
 }
