@@ -14,6 +14,7 @@ function CEasyEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.YawInitial = 0
 	self.YawDirection = 1
 	self.MidRangeDegree = 45
+	self.PositionStay = Node:GetAttributeVect3f("pos", Vect3f(0,0,0))
 	--engine:Trace("CEasyEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
@@ -45,7 +46,18 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 	local FinalPos = Vect3f()
 	local Dir = Vect3f(0.0)	
 	local Yaw = CharacterController:GetYaw()
-	if PositionPlayer ~= Vect3f(0.0) then
+	PositionPlayer.y = 0
+	if CheckVector(PositionPlayer) == false then
+		PositionPlayer.x = self.PositionStay.x
+		PositionPlayer.y = 0
+		PositionPlayer.z = self.PositionStay.z
+	end
+	local ActualPosAux = ActualPos
+	ActualPosAux.y = 0
+	engine:Trace("Move Player to position"..PositionPlayer:ToString())
+	engine:Trace("Posición actual "..ActualPos:ToString())
+	engine:Trace("Distancia entre la posicion y el destino"..PositionPlayer:Distance(ActualPos))
+	if PositionPlayer:Distance(ActualPosAux) > 0.5 then
 		if self.YawPlayerMove >= 0 then
 			self.YawPlayerMove = -1
 		end
@@ -87,6 +99,7 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 				Yaw = DirYaw
 			end
 		end
+		CharacterController:SetYaw( Yaw )
 	else
 		CharacterController:Move( Vect3f( 0.0 ), dt )
 		if self.YawPlayerMove == -1 then
@@ -101,8 +114,9 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 		Yaw = self.YawInitial + g_Pi*self.MidRangeDegree*math.sin(self.YawPlayerMove)/180.0
 	end
 	
-    CharacterController:SetYaw( Yaw )
-    CEnemyLUA.SetYaw( self, Yaw )
+	CEnemyLUA.SetYaw( self, Yaw )
+    
+    
 end
 
 function CEasyEnemyLUA:MoveToPlayer(PositionPlayer)

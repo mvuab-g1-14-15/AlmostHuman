@@ -72,14 +72,14 @@ function CEnemyLUA:UpdateCamera()
 	lPosition.y = lPosition.y + self:GetHeight()
 	lPosition = lPosition + self:GetDirection()
 	self.Camera:SetPosition(lPosition)
-	self.Camera:SetYaw(self.CharacterController:GetYaw())
+	self.Camera:SetYaw(-self.RenderableObject:GetYaw() + g_HalfPi)
 	if not (self:GetActualState() == "atacar") then
 		if self.PitchCameraMove >= 360.0 then
 			self.PitchCameraMove = 0
 		end
 		self.PitchCameraMove = self.PitchCameraMove + timer:GetElapsedTime()
 	end
-	self.Camera:SetPitch(self.CharacterController:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
+	self.Camera:SetPitch(self.RenderableObject:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
 	--self.Camera:SetDirection(self:GetDirectionEnemy())
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
