@@ -10,6 +10,8 @@
 #include "CubedTexture.h"
 #include "GUITexture.h"
 
+static const char* sDummyTextureName = "Data/textures/Dummy.png";
+
 class CTextureManager : public CMapManager<CTexture>, public CManager
 {
     public:

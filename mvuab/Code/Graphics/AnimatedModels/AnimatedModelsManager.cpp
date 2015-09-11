@@ -4,6 +4,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
+#include "Utils\BaseUtils.h"
 
 CAnimatedModelsManager::CAnimatedModelsManager()
     : CManager()
@@ -50,6 +51,7 @@ void CAnimatedModelsManager::Init()
 
             CAnimatedCoreModel* lAnimatedCoreModel = new CAnimatedCoreModel( name );
 
+            TIMER_START();
             if( lAnimatedCoreModel->Load( path ) && AddResource( name, lAnimatedCoreModel ) )
             {
                 lAnimatedCoreModel->LoadVertexBuffer( GraphicsInstance );
@@ -59,6 +61,7 @@ void CAnimatedModelsManager::Init()
                 LOG_ERROR_APPLICATION( "The animated core model %s could not be loaded", name.c_str() );
                 CHECKED_DELETE( lAnimatedCoreModel );
             }
+            TIMER_STOP(name.c_str());
         }
     }
 }

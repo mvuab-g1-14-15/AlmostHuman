@@ -11,6 +11,7 @@
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableVertex\IndexedVertexs.h"
 #include "EngineManagers.h"
+#include "Utils\BaseUtils.h"
 
 #define MAXBONES 29
 
@@ -97,6 +98,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
         }
     }
 
+    
     CHECKED_DELETE(m_CalHardwareModel);
     m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
     unsigned short *l_Idxs = new unsigned short[m_NumFaces * 3];
@@ -114,11 +116,11 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     m_CalHardwareModel->setIndexBuffer(l_Idxs);
     m_CalHardwareModel->load( 0, 0, MAXBONES);
 
-    m_NumVtxs = m_CalHardwareModel->getTotalVertexCount();
-    m_NumFaces = m_CalHardwareModel->getTotalFaceCount();
+    ASSERT( m_NumVtxs == m_CalHardwareModel->getTotalVertexCount() ,"Different vtx count" );
+    ASSERT( m_NumFaces == m_CalHardwareModel->getTotalFaceCount(), "Different faces count" );
 
     //En caso de utilizar NormalMap
-    CalcTangentsAndBinormals
+    CalcTangentsAndBinormals 
     (
         l_Vtxs,
         (unsigned short *) l_Idxs,
@@ -134,8 +136,8 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 
     CHECKED_DELETE(m_RenderableVertexs);
     m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
-    delete []l_Vtxs;
-    delete []l_Idxs;
+    CHECKED_DELETE_ARRAY( l_Vtxs );
+    CHECKED_DELETE_ARRAY( l_Idxs );
 
     return true;
 }
@@ -143,7 +145,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
 {
     // Get the texture from the texture manager
-	CTexture *t = ( Filename.empty() ) ? TextureMInstance->GetTexture("") : TextureMInstance->GetTexture( m_Path + Filename);
+    CTexture *t = ( Filename.empty() ) ? TextureMInstance->GetTexture(sDummyTextureName) : TextureMInstance->GetTexture( m_Path + Filename);
     if(t)
     {
         m_TextureVector.push_back(t);
