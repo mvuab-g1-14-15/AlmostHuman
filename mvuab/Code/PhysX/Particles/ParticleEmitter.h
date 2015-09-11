@@ -47,8 +47,10 @@ class CParticleEmitter :  public CName
         bool                        mIsLoop;
         bool                        mIsImmortal;
         bool                        mIsActive;
+        float32                     mMaxLife;
         uint32                      mAliveParticlesCount;
         float32                     mActualTime;
+        float32                     mAlpha;
         float32                     mGravity;
         float32                     mOndSpeedDirectionMin;
         float32                     mOndSpeedDirectionMax;
@@ -80,6 +82,7 @@ class CParticleEmitter :  public CName
         CRenderableVertexs          *mRV;
         TPARTICLE_VERTEX_INSTANCE   *mParticlesStream;
 
+        void LoadFromNode( const CXMLTreeNode& atts );
     private:
         void EmitParticles();
         void KillParticles();

@@ -9,6 +9,7 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "Particles\ParticleManager.h"
+#include "Particles\ParticleSystemManager.h"
 #include "Billboard\BillboardManager.h"
 #include "ActionManager.h"
 #include "ScriptManager.h"
@@ -55,6 +56,7 @@ void OnOptionAnimatedModelsClicked()
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionParticlesClicked()
 {
+  ParticleSystemInstance->Refresh();
   PSMan->Refresh();
 }
 

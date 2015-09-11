@@ -17,7 +17,7 @@
 #include <string>
 #include "Defines.h"
 
-#ifdef _DEBUG
+#ifndef _DEBUG
     #define TIMER_START() \
         LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 }; \
         QueryPerformanceCounter(&g_lastTime); \
@@ -125,13 +125,11 @@ namespace baseUtils
     inline Math::CColor RandRange( Math::CColor aMin, Math::CColor aMax )
     {
         float r = RandRange( aMin.r, aMax.r );
-        /*
-            float y = RandRange( aMin.y, aMax.y );
-            float z = RandRange( aMin.z, aMax.z );
-            float a = RandRange( aMin.z, aMax.z );
-        */
+        float g = RandRange( aMin.g, aMax.g );
+        float b = RandRange( aMin.b, aMax.b );
+        float a = RandRange( aMin.a, aMax.a );
 
-        return Math::CColor( r, r, r, 1.0 );
+        return Math::CColor( r, g, b, 1.0f);
     }
 
     inline Math::Vect2f RandRange( Math::Vect2f aMin, Math::Vect2f aMax )

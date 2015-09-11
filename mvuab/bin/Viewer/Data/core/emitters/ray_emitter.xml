@@ -1,0 +1,25 @@
+<emitter 
+	name="ray"
+	loop="false" 
+	immortal="true" 
+	active="true" 
+	alive_particles="0 2" 
+	speed="0.0 0" 
+	emission_time="1.0" 
+	time_to_live="0 0.2" 
+	particle_size_range="0 2" 
+	particles_per_emission="1 3"
+	min_color="0.0 0.0 0.0" 
+	max_color="1.0 1.0 1.0" 
+	min_initial_direction="0.0 0.0 0.0" 
+	max_initial_direction="0.0 0.0 0.0" 
+	gravity="0.0" 
+	radial_speed="0 0.0" 
+	ondulative_speed="0.0 0.0" 
+	min_ondulative_direction="0.1" 
+	max_ondulative_direction="0.1" 
+	cubic_size="0.1 0.1 0.1"
+	technique="RayTechnique"
+	alpha="1.0">
+	<texture name="Data/textures/particles/rays/pump_lightning_01.png"/>
+</emitter>

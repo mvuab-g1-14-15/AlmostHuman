@@ -52,8 +52,24 @@
 	
 	<!-- Particle Effects -->
 	<technique name="SmokeTechnique">
-		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+		<effect name="SmokeParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
 			<define name="TECHNIQUE_NAME" description="SmokeTechnique"/>
+			<define name="BLACK_AND_WHITE" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
+	<technique name="RayTechnique">
+		<effect name="RayParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="RayTechnique"/>
+			<define name="RAY" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
+	<technique name="ParticleTechnique">
+		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="ParticleTechnique"/>
 		</effect>
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>

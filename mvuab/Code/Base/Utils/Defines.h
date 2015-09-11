@@ -113,13 +113,13 @@
 
 #else
 
-#define ASSERT(expr, msg, ... )
-#define LOG_ERROR_APPLICATION( x, ... )
-#define LOG_WARNING_APPLICATION( x, ...  )
-#define LOG_INFO_APPLICATION( x, ...  )
-#define STATIC_LOG_INFO_APPLICATION( x, ...  )
-#define STATIC_LOG_ERROR_APPLICATION( x, ...  )
-#define STATIC_LOG_WARNING_APPLICATION( x, ...  )
+#define ASSERT(expr, msg, ... ){}
+#define LOG_ERROR_APPLICATION( x, ... ){}
+#define LOG_WARNING_APPLICATION( x, ...  ){}
+#define LOG_INFO_APPLICATION( x, ...  ){}
+#define STATIC_LOG_INFO_APPLICATION( x, ...  ){}
+#define STATIC_LOG_ERROR_APPLICATION( x, ...  ){}
+#define STATIC_LOG_WARNING_APPLICATION( x, ...  ){}
 
 #endif
 

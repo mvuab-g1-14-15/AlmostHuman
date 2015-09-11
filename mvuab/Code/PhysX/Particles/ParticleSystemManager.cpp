@@ -21,12 +21,15 @@ CParticleSystemManager::~CParticleSystemManager()
     CHECKED_DELETE( mEmitterFactory );
 }
 
-void CParticleSystemManager::Init()
+void CParticleSystemManager::Refresh()
 {
-    // Init the factory
-    mEmitterFactory->InitFactory();
+  Destroy();
+  LoadXML();
+}
 
-    // Parse all the particle systems
+void CParticleSystemManager::LoadXML()
+{
+  // Parse all the particle systems
     CXMLTreeNode l_XML, l_Node;
 
     if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_systems", l_Node ) )
@@ -47,6 +50,13 @@ void CParticleSystemManager::Init()
             }
         }
     }
+}
+
+void CParticleSystemManager::Init()
+{
+    // Init the factory
+    mEmitterFactory->InitFactory();
+    LoadXML();
 }
 
 void CParticleSystemManager::Update()

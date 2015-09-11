@@ -149,7 +149,9 @@ void CEngineManagers::Init()
         CManager* Manager = ManagerFactory.Create( TagName.c_str(), Node );
 
         if ( !Manager )
+        {
             LOG_ERROR_APPLICATION( "Manager %s not found in the factory of managers!", TagName.c_str() );
+        }
         else
         {
             if ( !AddResource( TagName.c_str() , Manager ) )

@@ -72,7 +72,7 @@ CViewerProcess::~CViewerProcess( void )
 void CViewerProcess::Init()
 {
     CreateViewerCameras();
-    SceneInstance->ActivateRoom("room1");
+    SceneInstance->ActivateRoom("room2");
 }
 
 std::string CViewerProcess::OpenPicker( std::string Extension = "" )

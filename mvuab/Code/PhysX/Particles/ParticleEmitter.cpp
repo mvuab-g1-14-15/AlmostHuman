@@ -27,6 +27,7 @@ unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
 CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction aFunction )
     : CName()
+    , mRV(0)
     , mType(aType)
     , mSpawnFn(aFunction)
     , mIsLoop( false )
@@ -45,6 +46,7 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
     , mParticles( 0 )
     , mMinPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
     , mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
+    , mAlpha( 0.0f )
 {
 }
 
@@ -57,9 +59,9 @@ CParticleEmitter::~CParticleEmitter()
     CHECKED_DELETE(mRV);
 }
 
-bool CParticleEmitter::Init( const CXMLTreeNode& atts )
+void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
 {
-    SetName(atts.GetAttribute<std::string>("name", "no_name"));
+  SetName(atts.GetAttribute<std::string>("name", "no_name"));
     mIsLoop               = atts.GetAttribute<bool>("loop", false );
     mIsImmortal           = atts.GetAttribute<bool>("immortal", false );
     mIsActive             = atts.GetAttribute<bool>("active", false );
@@ -69,6 +71,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
     mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
     mTechnique            = atts.GetAttribute<CEffectTechnique>("technique");
+    mAlpha                = atts.GetAttribute<float32>("alpha", 1.0f);
     mParticlesXEmission   = atts.GetAttribute<Math::Vect2f>("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
     mColorMin             = atts.GetAttribute<Math::CColor>("min_color", Math::colWHITE );
     mColorMax             = atts.GetAttribute<Math::CColor>("max_color", mColorMin );
@@ -109,9 +112,23 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 
     mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mAliveParticles.y );
     mShape = new CBoxShape();
+}
 
-    //CParticle* lPar = new CParticle();
-    return true;
+bool CParticleEmitter::Init( const CXMLTreeNode& atts )
+{
+  const std::string& lFile = atts.GetAttribute<std::string>("file", "" );
+  if( lFile != "" )
+  {
+    CXMLTreeNode lFileNode, lEmitterNode;
+    if( lFileNode.LoadAndFindNode( lFile.c_str(), "emitter", lEmitterNode ) )
+      LoadFromNode( lEmitterNode );
+  }
+  else
+  {
+    LoadFromNode( atts );
+  }
+
+  return true;
 }
 
 void CParticleEmitter::Update( float dt )
@@ -127,7 +144,13 @@ void CParticleEmitter::Update( float dt )
             mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle());
             const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
             mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
-            mParticlesStream[i].alpha = 1.0f - lPercentage;
+            
+            mParticlesStream[i].alpha= lParticle.GetAlpha();
+            if( lPercentage > 0.90f )
+              mParticlesStream[i].alpha = 1.0f - lPercentage;
+            else if( lPercentage < 0.10f )
+              mParticlesStream[i].alpha = lPercentage;
+            
             mParticlesStream[i].x = lParticle.GetPosition().x;
             mParticlesStream[i].y = lParticle.GetPosition().y;
             mParticlesStream[i].z = lParticle.GetPosition().z;
@@ -155,6 +178,8 @@ void CParticleEmitter::Render()
 
 void CParticleEmitter::EmitParticles()
 {
+  if( IsActive() )
+  {
     const uint32 lParticlesToEmit = (uint32)RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
     for( uint32 i = 0, lEmittedParticles = 0; i < mAliveParticles.y &&
             mAliveParticlesCount < mAliveParticles.y && lEmittedParticles < lParticlesToEmit ; ++i )
@@ -177,10 +202,12 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetInitalOndulation(RandRange(0.0f, 360.0f));
             lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
             lParticle.SetAngle(RandRange(0.0f, 360.0f));
+            lParticle.SetAlpha( RandRange(0.0f, mAlpha) );
             ++mAliveParticlesCount;
             ++lEmittedParticles;
         }
     }
+  }
 }
 
 void CParticleEmitter::KillParticles()
