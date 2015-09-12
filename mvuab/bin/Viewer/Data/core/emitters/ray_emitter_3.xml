@@ -1,13 +1,13 @@
 <emitter 
-	name="ray2"
+	name="ray3"
 	loop="false" 
 	immortal="true" 
 	active="true" 
-	alive_particles="1 1" 
-	speed="0.3 0.5" 
+	alive_particles="2 2" 
+	speed="0.0 0" 
 	emission_time="1.0" 
-	time_to_live="0 0.5" 
-	particle_size_range="1 1"
+	time_to_live="0 0.2" 
+	particle_size_range="2 2"
 	keep_size="true"
 	particles_per_emission="1 3"
 	min_color="0.0 0.0 0.0" 
@@ -22,5 +22,5 @@
 	cubic_size="0.0 0.0 0.0"
 	technique="RayTechnique"
 	alpha="1.0">
-	<texture name="Data/textures/particles/rays/pump_lightning_03.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+	<texture name="Data/textures/particles/rays/pump_spark_01.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 </emitter>

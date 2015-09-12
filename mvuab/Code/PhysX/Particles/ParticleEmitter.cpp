@@ -47,6 +47,7 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
     , mMinPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
     , mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
     , mAlpha( 0.0f )
+    , mKeepSize( false )
 {
 }
 
@@ -65,6 +66,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
     mIsLoop               = atts.GetAttribute<bool>("loop", false );
     mIsImmortal           = atts.GetAttribute<bool>("immortal", false );
     mIsActive             = atts.GetAttribute<bool>("active", false );
+    mKeepSize             = atts.GetAttribute<bool>("keep_size", false );
     mAliveParticles       = atts.GetAttribute<Math::Vect2u>("alive_particles", 0);
     mSpeed                = atts.GetAttribute<Math::Vect2f>("speed", 0);
     mEmissionTime         = atts.GetAttribute<Math::Vect2f>("emission_time", Math::Vect2f(1.0f, 1.0f));
@@ -96,6 +98,8 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
         if( lTagName == "texture" )
         {
             CTexture* lTexture = lSubNode.GetAttribute<CTexture>("name");
+            mFlipUVHorizontal  = lSubNode.GetAttribute<bool>("flip_uv_horizontal", false );
+            mFlipUVVertical    = lSubNode.GetAttribute<bool>("flip_uv_vertical", false );
             if( lTexture )
             {
                 mTextures.push_back(lTexture);
@@ -143,7 +147,11 @@ void CParticleEmitter::Update( float dt )
             lParticle.Update(dt);
             mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle());
             const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
-            mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
+
+            if( mKeepSize )
+              mParticlesStream[i].size = lParticle.GetSize();
+            else
+              mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
             
             mParticlesStream[i].alpha= lParticle.GetAlpha();
             if( lPercentage > 0.90f )
@@ -154,9 +162,12 @@ void CParticleEmitter::Update( float dt )
             mParticlesStream[i].x = lParticle.GetPosition().x;
             mParticlesStream[i].y = lParticle.GetPosition().y;
             mParticlesStream[i].z = lParticle.GetPosition().z;
+            
             mParticlesStream[i].r = lParticle.GetColor().r;
             mParticlesStream[i].g = lParticle.GetColor().g;
             mParticlesStream[i].b = lParticle.GetColor().b;
+            mParticlesStream[i].fliph = static_cast<float>( lParticle.GetFLipUVHorizontal () ); 
+            mParticlesStream[i].flipv = static_cast<float>( lParticle.GetFlipUVVertical () ); 
         }
         else
         {
@@ -203,7 +214,12 @@ void CParticleEmitter::EmitParticles()
             lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
             lParticle.SetAngle(RandRange(0.0f, 360.0f));
             lParticle.SetAlpha( RandRange(0.0f, mAlpha) );
-            ++mAliveParticlesCount;
+            lParticle.SetFlipUV
+              (
+                (mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
+                (mFlipUVVertical)   ? baseUtils::RandomBool() : false
+              );
+                ++mAliveParticlesCount;
             ++lEmittedParticles;
         }
     }

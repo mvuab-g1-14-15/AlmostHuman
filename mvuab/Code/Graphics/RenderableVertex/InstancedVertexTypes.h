@@ -30,4 +30,5 @@ struct TPARTICLE_VERTEX_INSTANCE
     float alive; // Stores the size
     float alpha;
     float r, g, b;
+    float flipv, fliph;
 };

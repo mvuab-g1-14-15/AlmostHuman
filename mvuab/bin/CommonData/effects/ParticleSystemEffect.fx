@@ -11,11 +11,12 @@ struct PSVertex
 
 struct PARTICLEIN
 {
-	float3 Position  : POSITION;
-	float2 uv           : TEXCOORD0;
+	float3 Position : POSITION;
+	float2 uv       : TEXCOORD0;
 	float3 worldPos : TEXCOORD1;
-	float3 params    : TEXCOORD2;
+	float3 params   : TEXCOORD2;
 	float3 color    : COLOR0;
+	float2 flipUV	: TEXCOORD3;
 };
 
 PSVertex VS(PARTICLEIN IN)
@@ -38,10 +39,16 @@ PSVertex VS(PARTICLEIN IN)
 		float3 vRightNew = sn * rightVector + cs * upVector;
 		float3 lPosition = IN.worldPos + ( ( IN.Position.x * vRightNew  )+ (IN.Position.z*vUpNew)) * IN.params.x;
 #endif
-		
 
 		OUT.HPosition=mul(float4(lPosition, 1.0), g_WorldViewProj);
-		OUT.params = float3( IN.uv.x, IN.uv.y, IN.params.z);
+		
+		float u = IN.uv.x;
+		if( IN.flipUV.x > 0.99 ) u = 1.0 - u;
+		
+		float v = IN.uv.y;
+		if( IN.flipUV.y > 0.99 ) v = 1.0 - v;
+		
+		OUT.params = float3( u, v, IN.params.z);
 		OUT.color = IN.color;
 	}
 	

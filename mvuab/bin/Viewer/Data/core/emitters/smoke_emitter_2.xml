@@ -18,8 +18,8 @@
 	ondulative_speed="0.0 2.0" 
 	min_ondulative_direction="0.2" 
 	max_ondulative_direction="0.2" 
-	cubic_size="0.2 0.2 0.2"
+	cubic_size="0.5 0.5 0.5"
 	technique="SmokeTechnique"
 	alpha="0.23">
-	<texture name="Data/textures/particles/smoke/pump_smoke_01.png"/>
+	<texture name="Data/textures/particles/smoke/pump_smoke_01.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 </emitter>

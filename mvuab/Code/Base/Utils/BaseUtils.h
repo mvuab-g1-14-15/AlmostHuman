@@ -113,6 +113,11 @@ namespace baseUtils
         return ( Random() * ( fMax - fMin ) ) + fMin;
     }
 
+    inline bool RandomBool()
+    {
+      return ( ( rand() % 2 ) == 1 );
+    }
+
     inline Math::Vect3f RandRange( Math::Vect3f aMin, Math::Vect3f aMax )
     {
         float x = RandRange( aMin.x, aMax.x );

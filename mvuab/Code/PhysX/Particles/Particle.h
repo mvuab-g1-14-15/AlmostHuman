@@ -143,6 +143,22 @@ class CParticle
         {
             mAlpha = val;
         }
+        void SetFlipUV( bool aHorizontal, bool aVertical )
+        {
+          mFlipUVHorizontal = aHorizontal;
+          mFlipUVVertical = aVertical;
+        }
+        
+        bool GetFLipUVHorizontal()
+        {
+          return mFlipUVHorizontal;
+        }
+
+        bool GetFlipUVVertical()
+        { 
+          return mFlipUVVertical;
+        }
+
     private:
         bool                        mIsAlive;
         float32                     mActualTime;
@@ -160,6 +176,7 @@ class CParticle
         Math::Vect3f                mOndSpeedDirection;
         Math::CColor                mColor;
         Math::Vect3f                mPosition;
+        bool                        mFlipUVVertical, mFlipUVHorizontal;
 };
 
 #endif

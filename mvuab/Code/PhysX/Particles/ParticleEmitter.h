@@ -47,6 +47,7 @@ class CParticleEmitter :  public CName
         bool                        mIsLoop;
         bool                        mIsImmortal;
         bool                        mIsActive;
+        bool                        mKeepSize;
         float32                     mMaxLife;
         uint32                      mAliveParticlesCount;
         float32                     mActualTime;
@@ -72,6 +73,8 @@ class CParticleEmitter :  public CName
         TParticleContainer          mDeadParticles;
         Math::Vect3f                mMinPnt;
         Math::Vect3f                mMaxPnt;
+        bool                        mFlipUVHorizontal;
+        bool                        mFlipUVVertical;
 
         ps::TSpawnFunction          mSpawnFn;
 
