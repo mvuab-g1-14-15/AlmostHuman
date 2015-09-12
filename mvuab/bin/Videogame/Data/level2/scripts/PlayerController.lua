@@ -103,12 +103,6 @@ function CPlayerController:Update()
 		countdowntimer_manager:Reset("PlayerMoving", false)
 		self.IsMoving = false
 	end
-	
-	if self.IsMoving then
-		engine:Trace("Player is moving: true")
-	else
-		engine:Trace("Player is moving: false")
-	end
 
 	--Set Listenr Postion 
 	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
