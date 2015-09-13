@@ -101,6 +101,11 @@ function PlayerVisibility(enemy)
 	--end
 	if g_Player:GetIsHidden() then
 		return false
+	else
+		if g_Player:GetIsInBarrel() then
+			lBarrel = g_Player:GetActualBarrel()
+			lBarrel:SetIsSafe(false)
+		end
 	end
 	return PlayerInSight(enemy:GetCamera())
 end

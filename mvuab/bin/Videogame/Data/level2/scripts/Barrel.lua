@@ -6,6 +6,8 @@ function CBarrel:__init(aName, aPosition)
 	self.Radius = 0.2
 	self.Height = 0.8
 	
+	self.IsSafe = true
+	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, true, "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnLeave('"..self.Name.."')")
 	trigger_manager:AddTrigger( self.Trigger )
 	
@@ -42,7 +44,9 @@ end
 
 function CBarrel:ExitBarrel( aPos )
 	--engine:Trace("He pasado por aqui: "..aPos:ToString())
-	self.Pos = aPos
+	final_pos = aPos;
+	final_pos.y = final_pos.y - self.Height * 0.5
+	self.Pos = final_pos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )
 	
@@ -63,4 +67,12 @@ function CBarrel:SetStateInside()
 	g_bInBarrel = false
 	
 	self.Trigger:SetActive(false)
+end
+
+function CBarrel:SetIsSafe( aSafe )
+	self.IsSafe = aSafe
+end
+
+function CBarrel:GetIsSafe()
+	return self.IsSafe
 end

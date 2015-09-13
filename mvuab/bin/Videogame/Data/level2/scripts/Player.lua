@@ -86,7 +86,13 @@ function CPlayer:SetPosition(position)
 end
 
 function CPlayer:AddDamage(amount)
-	self.Life = self.Life - amount
+	if self.InsideBarrel then
+		lBarrel = g_Barrels[self.BarrelName]
+		lBarrel:SetIsSafe(false)
+		self:ExitBarrel()
+	else
+		self.Life = self.Life - amount
+	end
 	--engine:Trace("Life: ".. self.Life)
 end
 
@@ -175,8 +181,21 @@ end
 
 function CPlayer:GetIsHidden()
 	if self.InsideBarrel then
-		return not self.PlayerController:GetIsMoving()
+		lBarrel = g_Barrels[self.BarrelName]
+		if lBarrel:GetIsSafe() then
+			return not self.PlayerController:GetIsMoving()
+		else
+			return false
+		end
 	else
 		return false
 	end
+end
+
+function CPlayer:GetIsInBarrel()
+	return self.InsideBarrel
+end
+
+function CPlayer:GetActualBarrel()
+	return g_Barrels[self.BarrelName];
 end
