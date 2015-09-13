@@ -1,6 +1,7 @@
 // https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/ColorGrading/index.html
 // http://gamedev.stackexchange.com/questions/61738/color-grading-shaders-and-3d-texture
 // http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter24.html
+// https://www.youtube.com/watch?v=rfQ8rKGTVlg#t=26m00s
 // http://kpulv.com/359/Dev_Log__Color_Grading_Shader/
 // https://udn.epicgames.com/Three/ColorGrading.html
 
@@ -35,17 +36,17 @@ float4 sampleAs3DTexture(sampler2D tex, float3 uv, float width)
 } 
 
 float4 ColorGrading(in float2 UV : TEXCOORD0) : COLOR
-{
-	//return float4(1.0, 0.0, 0.0, 1.0);
-	
-	return tex2D(S1PointSampler, UV);
-	
-    //UV.xy = (UV.xy * 15.0f/16.0f) + (0.5f/16.0f);
-    
+{	
+    UV.xy = (UV.xy * 15.0f/16.0f) + (0.5f/16.0f);
     float4 l_Color = tex2D(S0PointSampler, UV);
-    float4 l_GradeColor = sampleAs3DTexture(S1PointSampler, l_Color.rgb, 16);
     
+    float lutSize = 16.0;
+    float scale = (lutSize - 1.0) / lutSize;
+    float offset = 1.0 / (2.0 * lutSize);
+    
+    float4 l_GradeColor = sampleAs3DTexture(S1PointSampler, l_Color.rgb * scale + offset, 16);
     l_GradeColor.a = l_Color.a;
+    
     return l_GradeColor;
 }
 
