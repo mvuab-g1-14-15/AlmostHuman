@@ -11,7 +11,7 @@ function CPatrolEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	self.Delta = 0.2
 	self.PathCalculated = false
 	self.Path = vecVect3f()
-	engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
+	--engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
 function CPatrolEnemyLUA:Destroy()

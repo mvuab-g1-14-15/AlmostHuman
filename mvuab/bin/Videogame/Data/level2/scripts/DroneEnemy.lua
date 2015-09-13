@@ -12,7 +12,7 @@ function CDroneEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	self.PathCalculated = false
 	self.Path = vecVect3f()
 	self.HeightFly = Node:GetAttributeVect3f("pos", Vect3f(0,0,0)).y
-	engine:Trace("CDroneEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
+	--engine:Trace("CDroneEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 end
 
 function CDroneEnemyLUA:Destroy()

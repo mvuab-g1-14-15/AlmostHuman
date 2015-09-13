@@ -24,6 +24,7 @@ CParticle::CParticle()
     , mOndSpeedDirection( Math::Vect3f() )
     , mColor( Math::CColor() )
     , mPosition( Math::Vect3f() )
+    , mAlpha( 0.0f )
 {
 }
 

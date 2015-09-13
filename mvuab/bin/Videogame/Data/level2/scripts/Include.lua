@@ -45,7 +45,7 @@ function PlayerDistance(enemy)
 	
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
-	--engine:Trace("Player distance: " .. l_DistanceVector:Length())
+	----engine:Trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -67,11 +67,11 @@ function GetAngleEnemyPlayer(enemy)
 	
 	local lDot = l_DistanceVector:DotProduct(l_EnemyDir)
 	
-	engine:Trace("Dot product: " .. lDot)
+	--engine:Trace("Dot product: " .. lDot)
 	
-	--engine:Trace(tostring(angle))
+	----engine:Trace(tostring(angle))
 	--angle = math.acos(angle)
-	--engine:Trace(tostring(angle))
+	----engine:Trace(tostring(angle))
 	return lDot
 end
 
@@ -99,6 +99,14 @@ function PlayerVisibility(enemy)
 	--if enemy:GetType() == "drone" then
 	--	return PlayerInSightDrone(enemy:GetCamera())
 	--end
+	if g_Player:GetIsHidden() then
+		return false
+	else
+		if g_Player:GetIsInBarrel() then
+			lBarrel = g_Player:GetActualBarrel()
+			lBarrel:SetIsSafe(false)
+		end
+	end
 	return PlayerInSight(enemy:GetCamera())
 end
 
@@ -107,11 +115,11 @@ function ChangeCameraCloseEnemy()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
 	
 	if lActualCameraName == lEnemyName then
-		engine:Trace("Changing camera to Player")
+		--engine:Trace("Changing camera to Player")
 		camera_manager:SetCurrentCamera("TestProcessCam")
 	else
-		engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
-		engine:Trace("Cantidad de enemigos: "..g_EnemyManager:GetNumEnemys())
+		--engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
+		--engine:Trace("Cantidad de enemigos: "..g_EnemyManager:GetNumEnemys())
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end

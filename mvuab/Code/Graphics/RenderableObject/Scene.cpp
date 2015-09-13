@@ -125,8 +125,8 @@ void CScene::LoadRoom( std::string aRoomName )
 
         PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
         PSMan->Init();
-
-		BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
+        
+        BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
         BillboardMan->Init();
 
         lRoom->SetLayers( lROLM );

@@ -198,6 +198,9 @@
     <ClInclude Include="Utils\IdManager.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\TemplatedVectorMapManagerObject.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

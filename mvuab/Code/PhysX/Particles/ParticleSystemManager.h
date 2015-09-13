@@ -24,6 +24,8 @@ class CParticleSystemManager: public CManager, public CTemplatedVectorMapManager
         void Refresh();
     private:
         CEmitterFactory* mEmitterFactory;
+
+        void LoadXML();
 };
 
 #endif //_PARTICLE_SYSTEM_MANAGER_H

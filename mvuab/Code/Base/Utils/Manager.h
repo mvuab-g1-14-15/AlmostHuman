@@ -4,15 +4,18 @@
 
 #include <string>
 #include "XML/XMLTreeNode.h"
+#include "Name.h"
 
-class CManager
+class CManager : public CName
 {
     protected:
         std::string mConfigPath;
 
     public:
-        CManager() {}
-        CManager(const CXMLTreeNode &atts) : mConfigPath(atts.GetAttribute<std::string>("file_config", "")) {}
+        CManager() : CName(){}
+        CManager(const CXMLTreeNode &atts)
+          : CName( atts.GetName() )
+          , mConfigPath(atts.GetAttribute<std::string>("file_config", "")) {}
         virtual ~CManager() {}
 
         void SetConfigPath( const std::string& aNewPath )

@@ -15,7 +15,22 @@
 #include "Math\Color.h"
 #include <sstream>
 #include <string>
+#include "Defines.h"
 
+#ifndef _DEBUG
+    #define TIMER_START() \
+        LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 }; \
+        QueryPerformanceCounter(&g_lastTime); \
+        QueryPerformanceFrequency(&g_timeFreq);
+
+    #define TIMER_STOP( msg ) \
+        QueryPerformanceCounter(&g_actualTime); \
+        double t = (double) (g_actualTime.QuadPart - g_lastTime.QuadPart) / g_timeFreq.QuadPart;\
+        STATIC_LOG_INFO_APPLICATION("%s %f milliseconds\n", msg, (float) t * 1000.0f);
+#else
+# define TIMER_START()
+# define TIMER_STOP(msg)
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// namespace baseUtils
@@ -74,27 +89,6 @@ namespace baseUtils
         }
     }
 
-    namespace TIMER_VAR
-    {
-        static LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 };
-    }
-
-    inline void TIMER_START()
-    {
-        QueryPerformanceCounter(&TIMER_VAR::g_lastTime);
-        QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
-    }
-
-    inline void TIMER_STOP()
-    {
-        QueryPerformanceCounter(&TIMER_VAR::g_actualTime);
-        QueryPerformanceFrequency(&TIMER_VAR::g_timeFreq);
-        double t = (double) (TIMER_VAR::g_actualTime.QuadPart - TIMER_VAR::g_lastTime.QuadPart) /
-                   (double) TIMER_VAR::g_timeFreq.QuadPart;
-
-        printf("%time: %f\n", (float) t * 1000.0f);
-    }
-
     inline float Random()
     {
         return rand() / (float)RAND_MAX;
@@ -119,6 +113,11 @@ namespace baseUtils
         return ( Random() * ( fMax - fMin ) ) + fMin;
     }
 
+    inline bool RandomBool()
+    {
+      return ( ( rand() % 2 ) == 1 );
+    }
+
     inline Math::Vect3f RandRange( Math::Vect3f aMin, Math::Vect3f aMax )
     {
         float x = RandRange( aMin.x, aMax.x );
@@ -131,13 +130,11 @@ namespace baseUtils
     inline Math::CColor RandRange( Math::CColor aMin, Math::CColor aMax )
     {
         float r = RandRange( aMin.r, aMax.r );
-        /*
-            float y = RandRange( aMin.y, aMax.y );
-            float z = RandRange( aMin.z, aMax.z );
-            float a = RandRange( aMin.z, aMax.z );
-        */
+        float g = RandRange( aMin.g, aMax.g );
+        float b = RandRange( aMin.b, aMax.b );
+        float a = RandRange( aMin.a, aMax.a );
 
-        return Math::CColor( r, r, r, 1.0 );
+        return Math::CColor( r, g, b, 1.0f);
     }
 
     inline Math::Vect2f RandRange( Math::Vect2f aMin, Math::Vect2f aMax )

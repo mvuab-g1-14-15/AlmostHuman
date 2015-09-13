@@ -15,7 +15,7 @@ function CBlaster:__init()
 	
 	self.Shoots = {}
 	
-    engine:Trace("Blaster initialized")
+    --engine:Trace("Blaster initialized")
 end
 
 function CBlaster:CalculateDamage()
@@ -40,7 +40,7 @@ function CBlaster:Shoot()
 	if lEnemy ~= nil then
 		local damage = self:CalculateDamage()
 		lEnemy:AddDamage( damage )
-		engine:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
+		--engine:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
 	end
 	]]
 end
@@ -85,7 +85,7 @@ function CBlaster:Update()
 			if self.Energy > 1 then
 				if self.TimePressed == 0 then
 					if CurrentState ~= "idle_to_charge" then
-						engine:Trace("Estado actual idle_to_charge")
+						--engine:Trace("Estado actual idle_to_charge")
 						g_Player:GetRenderableObject():ChangeAnimation("idle_to_charge", 0.2, 0.5)
 						g_Player:SetCurrentState("idle_to_charge")
 					end
@@ -95,7 +95,7 @@ function CBlaster:Update()
 					self.TimePressed = self.TimePressed + timer:GetElapsedTime()
 				else
 					if CurrentState ~= "shoot_cargado" then
-						engine:Trace("Estado actual shoot_cargado")
+						--engine:Trace("Estado actual shoot_cargado")
 						g_Player:GetRenderableObject():ChangeAnimation("shoot_cargado", 0.5, 0)
 						g_Player:SetCurrentState("shoot_cargado")
 					end
@@ -104,7 +104,7 @@ function CBlaster:Update()
 				if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 					sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
 					if CurrentState ~= "charge_loop" then
-						engine:Trace("Estado actual charge_loop")
+						--engine:Trace("Estado actual charge_loop")
 						g_Player:GetRenderableObject():ChangeAnimation("charge_loop", 0.5, 0)
 						g_Player:SetCurrentState("charge_loop")
 					end
@@ -121,12 +121,12 @@ function CBlaster:Update()
 				else
 					sound_manager:PlayEvent( "Shoot_Long_Shoot_Event", "TestGameObject2d" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
-					engine:Trace("Tiempo pulsado: ".. tostring(self.TimePressed).." Energia consumida: "..tostring(self.TimePressed*self.Multiplicador))
+					--engine:Trace("Tiempo pulsado: ".. tostring(self.TimePressed).." Energia consumida: "..tostring(self.TimePressed*self.Multiplicador))
 				end
-				engine:Trace("Energia Total: ".. tostring(self.Energy))
+				--engine:Trace("Energia Total: ".. tostring(self.Energy))
 				self:Shoot()
 				if CurrentState ~= "shoot_ok" then
-					engine:Trace("Estado actual shoot_ok")
+					--engine:Trace("Estado actual shoot_ok")
 					g_Player:GetRenderableObject():ChangeAnimation("shoot_ok", 1, 1)
 					g_Player:SetCurrentState("shoot_ok")
 				end

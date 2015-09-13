@@ -6,6 +6,8 @@ function CBarrel:__init(aName, aPosition)
 	self.Radius = 0.2
 	self.Height = 0.8
 	
+	self.IsSafe = true
+	
 	self.Trigger = CreateTrigger( self.Name, self.Pos, Vect3f(self.Radius*2.0, self.Height, self.Radius*2.0), true, true, true, "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnEnter('"..self.Name.."')", "HiddenBarrelOnLeave('"..self.Name.."')")
 	trigger_manager:AddTrigger( self.Trigger )
 	
@@ -22,14 +24,14 @@ function CBarrel:__init(aName, aPosition)
 	self.RenderableObject:SetPosition(self.Pos)
 	self.RenderableObject:MakeTransform()
 	
-	engine:Trace("CBarrel: " .. self.Name .. " initialized")
-	engine:Trace("CBarrel Pos: " .. self.Pos:ToString())
+	--engine:Trace("CBarrel: " .. self.Name .. " initialized")
+	--engine:Trace("CBarrel Pos: " .. self.Pos:ToString())
 end
 
 function CBarrel:Destroy()
 	physic_manager:ReleasePhysicActor(self.Actor)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
-	engine:Trace("CBarrel: " .. self.Name .. " destroyed")
+	--engine:Trace("CBarrel: " .. self.Name .. " destroyed")
 end
 
 function CBarrel:RestoreBarrel()
@@ -41,8 +43,10 @@ function CBarrel:RestoreBarrel()
 end
 
 function CBarrel:ExitBarrel( aPos )
-	engine:Trace("He pasado por aqui: "..aPos:ToString())
-	self.Pos = aPos
+	--engine:Trace("He pasado por aqui: "..aPos:ToString())
+	final_pos = aPos;
+	final_pos.y = final_pos.y - self.Height * 0.5
+	self.Pos = final_pos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )
 	
@@ -63,4 +67,12 @@ function CBarrel:SetStateInside()
 	g_bInBarrel = false
 	
 	self.Trigger:SetActive(false)
+end
+
+function CBarrel:SetIsSafe( aSafe )
+	self.IsSafe = aSafe
+end
+
+function CBarrel:GetIsSafe()
+	return self.IsSafe
 end

@@ -410,7 +410,9 @@ void CGUIManager::PushWindows( const std::string& inNameWindow )
 void CGUIManager::PopWindows()
 {
   if ( m_PrevWindows.size() == 0 )
+  {
     LOG_ERROR_APPLICATION( "CGUIManager::PopWindows -> El vector de PrevWindows esta vacío!" );
+  }
   else
   {
     std::string popWindows = m_PrevWindows[m_PrevWindows.size() - 1];
@@ -463,7 +465,9 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
 
     // we check the existence of the XmlGui directory
     if ( hFind == INVALID_HANDLE_VALUE )
+    {
       LOG_ERROR_APPLICATION( "CGUIManager:: Error al intentar leer los .xml del directorio %s", pathGUI_XML.c_str() );
+    }
     else
     {
       CWindows* windows = new CWindows();

@@ -134,6 +134,31 @@ class CParticle
         {
             mAngle = val;
         }
+        
+        float32 GetAlpha() const
+        {
+            return mAlpha;
+        }
+        void SetAlpha(float32 val)
+        {
+            mAlpha = val;
+        }
+        void SetFlipUV( bool aHorizontal, bool aVertical )
+        {
+          mFlipUVHorizontal = aHorizontal;
+          mFlipUVVertical = aVertical;
+        }
+        
+        bool GetFLipUVHorizontal()
+        {
+          return mFlipUVHorizontal;
+        }
+
+        bool GetFlipUVVertical()
+        { 
+          return mFlipUVVertical;
+        }
+
     private:
         bool                        mIsAlive;
         float32                     mActualTime;
@@ -146,10 +171,12 @@ class CParticle
         float32                     mInitalOndulation;
         float32                     mOndulationVel;
         float32                     mAngle;
+        float32                     mAlpha;
         Math::Vect3f                mDirection;
         Math::Vect3f                mOndSpeedDirection;
         Math::CColor                mColor;
         Math::Vect3f                mPosition;
+        bool                        mFlipUVVertical, mFlipUVHorizontal;
 };
 
 #endif

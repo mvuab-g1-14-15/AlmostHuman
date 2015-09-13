@@ -52,8 +52,24 @@
 	
 	<!-- Particle Effects -->
 	<technique name="SmokeTechnique">
-		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+		<effect name="SmokeParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
 			<define name="TECHNIQUE_NAME" description="SmokeTechnique"/>
+			<define name="BLACK_AND_WHITE" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
+	<technique name="RayTechnique">
+		<effect name="RayParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="RayTechnique"/>
+			<define name="RAY" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
+	<technique name="ParticleTechnique">
+		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="ParticleTechnique"/>
 		</effect>
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
@@ -71,11 +87,18 @@
 		<handles use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	</technique>
 	
-	<technique name="RenderForwardDebugShapeTechnique">
+	<technique name="RenderForwardDebugShapeTechnique" vertex_type="">
 		<effect name="RenderForwardDebugShapeEffect" file="../CommonData/effects/RenderForwardDebugShapeEffect.fx">
 			<define name="TECHNIQUE_NAME" description="RenderForwardDebugShapeTechnique"/>
 		</effect>
 		<handles use_world_view_projection_matrix="true" use_debug_color="true" />
+	</technique>
+	
+	<technique name="DronBarrierTechnique" vertex_type="">
+		<effect name="DronBarrierEffect" file="../CommonData/effects/DronBarrier.fx">
+			<define name="TECHNIQUE_NAME" description="DronBarrierTechnique"/>
+		</effect>
+		<handles use_world_view_projection_matrix="true" use_texture_size="true"/>
 	</technique>
 	
 	<effect file="../CommonData/effects/PostProc/effects_postproc.xml"/>

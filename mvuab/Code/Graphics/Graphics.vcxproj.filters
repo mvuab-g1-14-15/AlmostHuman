@@ -321,6 +321,9 @@
     <ClCompile Include="LensFlare\LensFlareManager.cpp">
       <Filter>LensFlare</Filter>
     </ClCompile>
+    <ClCompile Include="DronBarrier\DronBarrier.cpp">
+      <Filter>DronBarrier</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -653,6 +656,9 @@
     <ClInclude Include="LensFlare\LensFlareManager.h">
       <Filter>LensFlare</Filter>
     </ClInclude>
+    <ClInclude Include="DronBarrier\DronBarrier.h">
+      <Filter>DronBarrier</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -723,6 +729,9 @@
     </Filter>
     <Filter Include="LensFlare">
       <UniqueIdentifier>{174f1671-ece3-41fc-bad9-50c47a45eead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DronBarrier">
+      <UniqueIdentifier>{3dac9d0b-bfaf-4010-a512-9e54ea45ada0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

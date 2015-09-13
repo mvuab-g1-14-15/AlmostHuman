@@ -52,13 +52,13 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	AddEnemy(Node:GetAttributeString("texture_enemy", ""), Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), Node:GetAttributeInt("width", 50.0), Node:GetAttributeInt("height", 50.0), self.CharacterController:GetYaw(), Node:GetAttributeString("get_position_script", "no_script"), Node:GetAttributeString("orientation", "no_script"), self.Name)
 	
-	engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
+	--engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
 function CEnemyLUA:Destroy()
 	physic_manager:ReleasePhysicController(self.CharacterController)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
-	engine:Trace("He muerto Vida actual: "..self.Life)
+	--engine:Trace("He muerto Vida actual: "..self.Life)
 end
 
 function CEnemyLUA:Update()
@@ -72,14 +72,14 @@ function CEnemyLUA:UpdateCamera()
 	lPosition.y = lPosition.y + self:GetHeight()
 	lPosition = lPosition + self:GetDirection()
 	self.Camera:SetPosition(lPosition)
-	self.Camera:SetYaw(self.CharacterController:GetYaw())
+	self.Camera:SetYaw(-self.RenderableObject:GetYaw() + g_HalfPi)
 	if not (self:GetActualState() == "atacar") then
 		if self.PitchCameraMove >= 360.0 then
 			self.PitchCameraMove = 0
 		end
 		self.PitchCameraMove = self.PitchCameraMove + timer:GetElapsedTime()
 	end
-	self.Camera:SetPitch(self.CharacterController:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
+	self.Camera:SetPitch(self.RenderableObject:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
 	--self.Camera:SetDirection(self:GetDirectionEnemy())
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
@@ -100,7 +100,7 @@ end
 
 function CEnemyLUA:AddDamage(amount)
 	self.Life = self.Life - amount
-	engine:Trace("Vida actual: "..self.Life)
+	--engine:Trace("Vida actual: "..self.Life)
 end
 
 function CEnemyLUA:SetYaw(yaw)

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lights>
+  <ambient_light color="0.2 0.2 0.2" />
+  <spot_light name="Spot001" pos="78.21 -8.68069 -33.0581" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-16.2957 0.0 34.3381" angle="43.0" fall_off="45.0" intensity="0.5" enabled="true" >
+		<lens_flare name="flare001"/>
+		<!--<shadow_map render_shadows="true" shadow_texture_mask="">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
+		</shadow_map>-->
+  </spot_light>
+  <omni_light name="Spot001" pos="67.1752 -12.2629 -33.5086" color="1.0 1.0 1.0" att_start_range="17.195" att_end_range="31.16" look_at="66.9232 -20.6807 -33.5086" angle="24.5" fall_off="73.7" render_shadows="false" />
+  <omni_light name="Spot002" pos="58.1602 -12.2629 -33.5086" color="1.0 1.0 1.0" att_start_range="17.195" att_end_range="31.16" look_at="57.9082 -20.6807 -33.5086" angle="24.5" fall_off="73.7" render_shadows="false" />
+</lights>

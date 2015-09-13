@@ -19,7 +19,7 @@ CTextureManager::~CTextureManager()
 void CTextureManager::Init()
 {
     m_DummyTexture = new CTexture();
-    if ( !m_DummyTexture->Load("Data/textures/Dummy.png") )
+    if ( !m_DummyTexture->Load(sDummyTextureName) )
     {
         CHECKED_DELETE( m_DummyTexture );
         LOG_ERROR_APPLICATION( "The Dummy texture could not be loaded" );

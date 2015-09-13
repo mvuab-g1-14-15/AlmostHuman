@@ -35,6 +35,11 @@ template <class T> class CTemplatedVectorMapManager
             Destroy();
         }
 
+        bool Exist( const std::string & Name )
+        {
+            return m_ResourcesMap.find( Name ) != m_ResourcesMap.end();
+        }
+
         void RemoveResource( const std::string& Name )
         {
             TMapResources::iterator it = m_ResourcesMap.find(Name);
@@ -101,7 +106,6 @@ template <class T> class CTemplatedVectorMapManager
             m_ResourcesVector.clear();
             m_ResourcesMap.clear();
         }
-
 
         const uint32 GetResourcesCount()
         {

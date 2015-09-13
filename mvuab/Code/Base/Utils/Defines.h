@@ -55,9 +55,9 @@
     }
 #define DIRECTINPUT_VERSION     0x0800
 
-#define CHECKED_DELETE(x)       if(x != NULL){ delete x; x = NULL; }
-#define CHECKED_RELEASE(x)      if(x != NULL){ x->Release(); x = NULL; }
-#define CHECKED_DELETE_ARRAY(x) if(x != NULL){ delete [] x; x = NULL; }
+#define CHECKED_DELETE(x)       { if(x != NULL){ delete x; x = NULL; } }
+#define CHECKED_RELEASE(x)      { if(x != NULL){ x->Release(); x = NULL; } }
+#define CHECKED_DELETE_ARRAY(x) { if(x != NULL){ delete [] x; x = NULL; } }
 
 #define EngineInstance          CEngine::GetSingletonPtr()
 #define EngineManagerInstance   CEngineManagers::GetSingletonPtr()
@@ -97,22 +97,29 @@
 
 #define ASSERT(expr, msg, ... ) \
     {\
-        if ( !( expr ) ) \
+        static bool sIgnoreAssert = false; \
+        if ( !sIgnoreAssert && !( (expr) ) ) \
         {\
-            CMessageHandler::Assert( __FILE__, __LINE__, msg, __VA_ARGS__ );\
+            CMessageHandler::Assert( sIgnoreAssert, __FILE__, __LINE__, msg, __VA_ARGS__ );\
         } \
     }\
 
 #define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
 #define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
 #define LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_ERROR_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_WARNING_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
 
 #else
 
-#define ASSERT(expr, msg, ... ) do{ } while(0) // The compiler will delete this line in release
-#define LOG_ERROR_APPLICATION( x, ... ) do{ } while(0) // The compiler will delete this line in release
-#define LOG_WARNING_APPLICATION( x, ...  ) do{ } while(0) // The compiler will delete this line in release
-#define LOG_INFO_APPLICATION( x, ...  ) do{ } while(0) // The compiler will delete this line in release
+#define ASSERT(expr, msg, ... ){}
+#define LOG_ERROR_APPLICATION( x, ... ){}
+#define LOG_WARNING_APPLICATION( x, ...  ){}
+#define LOG_INFO_APPLICATION( x, ...  ){}
+#define STATIC_LOG_INFO_APPLICATION( x, ...  ){}
+#define STATIC_LOG_ERROR_APPLICATION( x, ...  ){}
+#define STATIC_LOG_WARNING_APPLICATION( x, ...  ){}
 
 #endif
 
