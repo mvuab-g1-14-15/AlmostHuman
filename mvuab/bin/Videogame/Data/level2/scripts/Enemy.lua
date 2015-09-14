@@ -37,9 +37,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RenderableObject:SetRoll(self.CharacterController:GetRoll())
 	self.RenderableObject:SetScale(self.CharacterController:GetScale())
 	self.RenderableObject:MakeTransform()
-	
-	
-	
+
 	self.Brain = CBrain("inicial", state_machine)
 	
 	--self:ChangeState("perseguir")

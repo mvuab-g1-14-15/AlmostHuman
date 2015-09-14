@@ -115,7 +115,6 @@ function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
 	
 	self:MoveToWaypoint(lTargetPos)
     
-    
     if ( self.Path:GetResource(count - 1):Distance( PositionPlayer ) > 5.0 ) then
         self.PathCalculated = false
 		self.ActualPathPoint = 1
