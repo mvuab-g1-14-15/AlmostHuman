@@ -378,3 +378,11 @@ end
 function CPlayerController:GetIsMoving()
 	return self.IsMoving
 end
+
+function CPlayerController:GetIsRunning()
+	return self.Run
+end
+
+function CPlayerController:GetIsCrouch()
+	return self.Crouch
+end

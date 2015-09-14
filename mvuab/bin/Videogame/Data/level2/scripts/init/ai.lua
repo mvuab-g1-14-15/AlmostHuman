@@ -6,12 +6,17 @@ function init_enemy()
 end
 
 function check_next_state()
-	
 	enemy = g_EnemyManager:GetActualEnemy()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
+	local l_HearSomething = HearPlayer(enemy)
+	
+	if l_HearSomething then
+		engine:Trace("He escuchado algo: "..enemy:GetName())
+	end
+	
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	if l_CurrentState ~= "perseguir" then	
 		if l_CurrentState == "inicial" then
@@ -24,9 +29,9 @@ function check_next_state()
 					countdowntimer_manager:Reset(timerPerseguir, false)
 				end
 				
-				g_EnemyManager:SetAlarm(true)				
+				g_EnemyManager:SetAlarm(true)
 			end
-		end	
+		end
 	elseif countdowntimer_manager:ExistTimer(timerPerseguir) and countdowntimer_manager:IsActive(timerPerseguir) then
 			if countdowntimer_manager:isTimerFinish(timerPerseguir) then
 				l_NextState = "andando"
@@ -37,14 +42,14 @@ function check_next_state()
 			if countdowntimer_manager:IsActive(timerPerseguir) then
 				countdowntimer_manager:Reset(timerPerseguir, false)
 			end
+	elseif l_HearSomething then
+		l_NextState = "perseguir"
 	end
-	
 	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
-	end	
-	
+	end
 end
 
 function andar()

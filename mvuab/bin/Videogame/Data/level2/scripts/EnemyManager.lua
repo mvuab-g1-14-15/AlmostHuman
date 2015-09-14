@@ -236,6 +236,8 @@ function CEnemyManagerLUA:GenerateEnemy()
 	local lRoom = "room2"--scene:GetActivateRoom()
 	--engine:Trace("Name room:"..lRoom)
 	local Node = self.ExtraEnemy[lRoom]
-	self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )
-	self.ExtraEnemyCount = self.ExtraEnemyCount + 1
+	if not Node == nil then
+		self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )
+		self.ExtraEnemyCount = self.ExtraEnemyCount + 1
+	end
 end

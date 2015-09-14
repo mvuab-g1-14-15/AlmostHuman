@@ -110,6 +110,40 @@ function PlayerVisibility(enemy)
 	return PlayerInSight(enemy:GetCamera())
 end
 
+function HearPlayer(enemy)
+	local isRunning = g_Player:GetIsRunning()
+	local isCrouch = g_Player:GetIsCrouch()
+	local playerDistance = PlayerDistance(enemy)
+	
+	--[[
+	local message_str = "Player is "
+	if isRunning and isCrouch then
+		message_str = message_str.."running and crouching."
+	else
+		if isRunning then
+			message_str = message_str.."running."
+		end
+		if isCrouch then
+			message_str = message_str.."crouching."
+		end
+	end
+	message_str = message_str.." At distance "..playerDistance
+	engine:Trace(message_str)
+	]]
+	
+	
+	if isRunning and isCrouch then
+		return playerDistance < 2.0
+	end
+	if isRunning then
+		return playerDistance < 10.0
+	end
+	if isCrouch then
+		return playerDistance < 0.5
+	end
+	return playerDistance < 6.0
+end	
+
 function ChangeCameraCloseEnemy()
 	local lEnemyName = g_EnemyManager:GetCloseEnemy(GetPlayerPosition()):GetName()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
