@@ -13,7 +13,7 @@ initialized1 = false
 
 function load_basics()
 	-- basic loads
-	--scene:ActivateRoom("sala1")
+	scene:ActivateRoom("sala1")
 	scene:ActivateRoom("room2")
 	scene:ActivateRoom("room3")
     scene:ActivateRoom("room4")
