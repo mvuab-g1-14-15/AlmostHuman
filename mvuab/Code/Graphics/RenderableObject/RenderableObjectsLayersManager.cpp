@@ -37,6 +37,7 @@ CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 
     for ( unsigned int i = 0; i < m_PhyscsUserData.size(); i++ )
         CHECKED_DELETE( m_PhyscsUserData.at( i ) );
+    m_PhyscsUserData.clear();
 }
 void CRenderableObjectsLayersManager::Destroy()
 {

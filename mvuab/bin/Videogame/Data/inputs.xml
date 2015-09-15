@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
+
+	<action name="LoadSala1">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_U"/>
+    </action>
+	<action name="LoadSala2">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_I"/>
+    </action>
+	<action name="LoadSala3">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_O"/>
+    </action>
+	<action name="LoadSala4">
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_P"/>
+    </action>
+
     <action name="LeanOutLeft">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>

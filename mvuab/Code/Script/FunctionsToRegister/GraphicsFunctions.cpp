@@ -426,11 +426,13 @@ void registerGraphics( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CRoom )
   LUA_DECLARE_METHOD( CRoom, GetLayers )
+  LUA_DECLARE_METHOD( CRoom, GetActive )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CMapManager<CRoom> )
   LUA_DECLARE_METHOD( CMapManager<CRoom>, GetResource )
+  LUA_DECLARE_METHOD( CMapManager<CRoom>, Exist )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
@@ -443,4 +445,5 @@ void registerGraphics( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CScene, DesactivateRoom )
   LUA_DECLARE_METHOD( CScene, GetActivateRoom )
   LUA_END_DECLARATION
+
 }

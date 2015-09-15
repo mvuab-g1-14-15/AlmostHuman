@@ -14,9 +14,6 @@ initialized1 = false
 function load_basics()
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	scene:ActivateRoom("room2")
-	scene:ActivateRoom("room3")
-    scene:ActivateRoom("room4")
 end
 
 function load_gameplay()
@@ -109,5 +106,70 @@ function update_gameplay()
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
 		end
+		
+		if action_manager:DoAction("LoadSala1") then
+			local lRoom
+			if scene:Exist("sala1") then
+				engine:Trace("lRoom 1 exist")
+				lRoom = scene:GetResource("sala1")
+				if lRoom:GetActive() then
+					engine:Trace("lRoom 1 active")
+					scene:UnloadRoom("sala1")
+				else
+					engine:Trace("lRoom 1 non active")
+					scene:ActivateRoom("sala1")
+				end
+			else
+				engine:Trace("lRoom 1 not exist")
+				scene:ActivateRoom("sala1")
+			end
+		end
+		
+		if action_manager:DoAction("LoadSala2") then
+			local lRoom
+			if scene:Exist("room2") then
+				lRoom = scene:			GetResource("room2")
+				if lRoom:GetActive() then
+					scene:UnloadRoom("room2")
+				else
+					scene:ActivateRoom("room2")
+				end
+			else
+				scene:ActivateRoom("room2")
+			end
+		end
+		
+		if action_manager:DoAction("LoadSala3") then
+			local lRoom
+			if scene:Exist("room3") then
+				lRoom = scene:GetResource("room3")
+				if lRoom:GetActive() then
+					scene:UnloadRoom("room3")
+				else
+					scene:ActivateRoom("room3")
+				end
+			else
+				scene:ActivateRoom("room3")
+			end
+		end
+		
+		if action_manager:DoAction("LoadSala4") then
+			local lRoom
+			if scene:Exist("room4") then
+				lRoom = scene:GetResource("room4")
+				if lRoom:GetActive() then
+					scene:UnloadRoom("room4")
+				else
+					scene:ActivateRoom("room4")
+				end
+			else
+				scene:ActivateRoom("room4")
+			end
+		end
+		
+		
+		
+		
+		
 	end
 end

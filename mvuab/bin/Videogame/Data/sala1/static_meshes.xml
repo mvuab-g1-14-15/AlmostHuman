@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="robot_009_sala1" filename="meshes\robot_009.mesh" />
   <static_mesh name="Base_carga001_sala1" filename="meshes\Base_carga001.mesh" />
-  <static_mesh name="robot_010_sala1" filename="meshes\robot_010.mesh" />
-  <static_mesh name="robot_011_sala1" filename="meshes\robot_011.mesh" />
-  <static_mesh name="robot_012_sala1" filename="meshes\robot_012.mesh" />
   <static_mesh name="LW_Pipes001_sala1" filename="meshes\LW_Pipes001.mesh" />
   <static_mesh name="Taula002_sala1" filename="meshes\Taula002.mesh" />
   <static_mesh name="Torus088_sala1" filename="meshes\Torus088.mesh" />
@@ -89,7 +85,6 @@
   <static_mesh name="msf_Floor167_sala1" filename="meshes\msf_Floor167.mesh" />
   <static_mesh name="SF_Console004_Object010_sala1" filename="meshes\SF_Console004_Object010.mesh" />
   <static_mesh name="Box025_sala1" filename="meshes\Box025.mesh" />
-  <static_mesh name="Porta002_sala1" filename="meshes\Porta002.mesh" />
   <static_mesh name="msf2_Lamp031_sala1" filename="meshes\msf2_Lamp031.mesh" />
   <static_mesh name="Box026_sala1" filename="meshes\Box026.mesh" />
   <static_mesh name="tube018_sala1" filename="meshes\tube018.mesh" />
@@ -190,4 +185,27 @@
   <static_mesh name="mfs_Ceiling007_sala1" filename="meshes\mfs_Ceiling007.mesh" />
   <static_mesh name="Line001_sala1" filename="meshes\Line001.mesh" />
   <static_mesh name="Line002_sala1" filename="meshes\Line002.mesh" />
+  <static_mesh name="Porta_sala1" filename="meshes\Porta.mesh" />
+  <static_mesh name="Cylinder029_sala1" filename="meshes\Cylinder029.mesh" />
+  <static_mesh name="Box033_sala1" filename="meshes\Box033.mesh" />
+  <static_mesh name="Cylinder028_sala1" filename="meshes\Cylinder028.mesh" />
+  <static_mesh name="Cylinder021_sala1" filename="meshes\Cylinder021.mesh" />
+  <static_mesh name="Cylinder022_sala1" filename="meshes\Cylinder022.mesh" />
+  <static_mesh name="Cylinder023_sala1" filename="meshes\Cylinder023.mesh" />
+  <static_mesh name="Cylinder024_sala1" filename="meshes\Cylinder024.mesh" />
+  <static_mesh name="Cylinder025_sala1" filename="meshes\Cylinder025.mesh" />
+  <static_mesh name="Cylinder030_sala1" filename="meshes\Cylinder030.mesh" />
+  <static_mesh name="Cylinder019_sala1" filename="meshes\Cylinder019.mesh" />
+  <static_mesh name="Box030_sala1" filename="meshes\Box030.mesh" />
+  <static_mesh name="Cylinder018_sala1" filename="meshes\Cylinder018.mesh" />
+  <static_mesh name="Cylinder017_sala1" filename="meshes\Cylinder017.mesh" />
+  <static_mesh name="Cylinder016_sala1" filename="meshes\Cylinder016.mesh" />
+  <static_mesh name="Cylinder015_sala1" filename="meshes\Cylinder015.mesh" />
+  <static_mesh name="Cylinder014_sala1" filename="meshes\Cylinder014.mesh" />
+  <static_mesh name="Cylinder013_sala1" filename="meshes\Cylinder013.mesh" />
+  <static_mesh name="Cylinder012_sala1" filename="meshes\Cylinder012.mesh" />
+  <static_mesh name="Cylinder011_sala1" filename="meshes\Cylinder011.mesh" />
+  <static_mesh name="Box028_sala1" filename="meshes\Box028.mesh" />
+  <static_mesh name="Box029_sala1" filename="meshes\Box029.mesh" />
+  <static_mesh name="Cylinder020_sala1" filename="meshes\Cylinder020.mesh" />
 </static_meshes>
