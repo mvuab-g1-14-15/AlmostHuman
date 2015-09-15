@@ -1,4 +1,4 @@
-g_Rooms = {Vect3f( 112, -6.16, -34.28 ), Vect3f( 76.30, -9.66, -34.77 ), Vect3f( 84, 31.5, 43.7 ), Vect3f( 104, 20.5, 198 )}g_ActualRoom = 1
+g_Rooms = {Vect3f( 141.48, 6.75, -63.59 ), Vect3f( 76.30, -9.66, -34.77 ), Vect3f( 40.07, -17.19, 52.25 ), Vect3f( -51.74, 62.45, 70.35 )}g_ActualRoom = 1
 
 function ChangeRoom()
     g_ActualRoom = g_ActualRoom + 1

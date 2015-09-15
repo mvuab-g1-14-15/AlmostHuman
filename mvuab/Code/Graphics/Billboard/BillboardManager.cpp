@@ -25,6 +25,19 @@ void CBillboardManager::Update()
 
 void CBillboardManager::Init()
 {
+  // Create the shared geometry
+  CBillboard::CreateBillBoardGeometry();
+  LoadFromXML();
+}
+
+void CBillboardManager::Reload()
+{
+  Destroy();
+  LoadFromXML();
+}
+
+void CBillboardManager::LoadFromXML()
+{
   CXMLTreeNode newFile;
 
   if ( !newFile.LoadFile( mConfigPath.c_str() ) )
@@ -40,9 +53,6 @@ void CBillboardManager::Init()
     LOG_ERROR_APPLICATION( "Tag %s not found",  "billboards" );
     return;
   }
-
-  // Create the shared geometry
-  CBillboard::CreateBillBoardGeometry();
 
   for ( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
   {

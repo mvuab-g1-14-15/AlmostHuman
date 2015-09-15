@@ -16,6 +16,8 @@ public:
   virtual ~CBillboardManager();
 
   void Init();
+  void Reload();
+  void LoadFromXML();
   void Render();
   void Update();
 
