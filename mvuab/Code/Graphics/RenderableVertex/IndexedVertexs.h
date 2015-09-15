@@ -10,7 +10,7 @@
 #include "Effects\Effect.h"
 #include "Effects\EffectTechnique.h"
 
-template<class T> class CIndexedVertexs : public CRenderableVertexs
+template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 {
     protected:
         inline size_t GetVertexSize()
@@ -19,8 +19,12 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
         }
         inline size_t GetIndexSize()
         {
-            return sizeof( unsigned int );
+            return sizeof( S );
         }
+
+        template<class I> D3DFORMAT GetIndexFormat()        { return D3DFMT_INDEX32; }
+        template<>        D3DFORMAT GetIndexFormat<int>()   { return D3DFMT_INDEX32; }
+        template<>        D3DFORMAT GetIndexFormat<short>() { return D3DFMT_INDEX16; }
 
     public:
         CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount )
@@ -33,7 +37,7 @@ template<class T> class CIndexedVertexs : public CRenderableVertexs
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
 
-                GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_IB, 0 );
+                GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 );
                 GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
 
                 m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );

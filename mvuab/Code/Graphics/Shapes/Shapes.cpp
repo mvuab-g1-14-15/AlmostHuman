@@ -89,7 +89,7 @@ void CBoxShape::CreateGeometry()
         2, 7, 6,
     };
 
-    sRV = new CIndexedVertexs<TGEOMETRY>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
+    sRV = new CIndexedVertexs<TGEOMETRY, short>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount);
 }
 //------------------------------------------------------------------------------------------------
 void CBoxShape::DestroyGeometry()

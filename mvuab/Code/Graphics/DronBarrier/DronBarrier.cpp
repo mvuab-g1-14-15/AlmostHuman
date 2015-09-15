@@ -50,17 +50,20 @@ void CDronBarrier::CreateGeometry()
   ASSERT( sRV == 0, "Initing twice the geometry of the dron barrier" );
   const uint32 lIdxCount = 3;
   const uint32 lVtxCount = 3;
+
   TT1_VERTEX lVtx[lVtxCount] =
   {
     {  0.0f, 0.8f, 0.0f,  0.5f, 1.0f},
     { -0.8f, -0.8f, 0.0f, 0.0f, 0.0f},
     {  0.8f, -0.8f, 0.0f, 1.0f, 0.0f}
   };
+
   unsigned short int lIdx[lIdxCount] =
   {
     0, 1, 2    // side 1
   };
-  sRV = new CIndexedVertexs<TT1_VERTEX>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
+
+  sRV = new CIndexedVertexs<TT1_VERTEX, short>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
 }
 //------------------------------------------------------------------------------------------------
 void CDronBarrier::DestroyGeometry()

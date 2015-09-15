@@ -140,7 +140,7 @@ void CBillboard::CreateBillBoardGeometry()
 
     unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
-    sRV = new CIndexedVertexs<TT1_VERTEX>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
+    sRV = new CIndexedVertexs<TT1_VERTEX, short>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount );
 }
 
 void CBillboard::DestroyBillBoardGeometry()

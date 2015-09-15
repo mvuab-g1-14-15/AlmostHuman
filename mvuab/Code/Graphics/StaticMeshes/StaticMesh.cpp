@@ -177,47 +177,47 @@ bool CStaticMesh::Load( const std::string& FileName )
         CRenderableVertexs *l_RV = NULL;
 
         if (l_VertexType == TNORMAL_TAN_BI_T2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_TAN_BI_T1_DIFF_VERTEX::GetVertexType() )
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_TAN_BI_T2_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T2_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_TAN_BI_T1_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_T1_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
         else if (l_VertexType == TNORMAL_T2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_T2_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_T1_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_T1_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_T2_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_T2_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_T1_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_T1_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_T1_REFLECTION_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_T1_REFLECTION_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TT2_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT2_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TT2_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TT1_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT1_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TT1_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TDIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TDIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TDIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TT2_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT2_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TT2_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TT1_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TT1_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TNORMAL_TAN_BI_DIFF_VERTEX::GetVertexType())
-        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
+        { l_RV = new CIndexedVertexs<TNORMAL_TAN_BI_DIFF_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount); }
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         {
             CalcTangentsAndBinormals(l_VtxsAddress, (unsigned short *)l_IdxAddress, l_VrtexCount, l_IdxCount, l_TypeSize, 0, 12, 28, 44, 60);
-            l_RV = new CIndexedVertexs<TRNM_VERTEX>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
+            l_RV = new CIndexedVertexs<TRNM_VERTEX, int>(GraphicsInstance, l_VtxsAddress, l_IdxAddress, l_VrtexCount, l_IdxCount);
         }
 
         // Check the renderable object
