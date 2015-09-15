@@ -11,6 +11,11 @@
 		<cube_emitter file="Data/core/emitters/ray_emitter_3.xml"/>
 	</particle_system_core>
 	
+	<particle_system_core name="charge">
+		<radial_emitter file="Data/core/emitters/spiral_emitter.xml"/>
+		<radial_emitter file="Data/core/emitters/spiral_emitter2.xml"/>
+	</particle_system_core>
+	
 	<particle_system_core name="smoke2">
 	<cube_emitter 
 	    name="fire3"

@@ -41,6 +41,15 @@ class CParticleEmitter :  public CName
         {
             return mMaxPnt;
         }
+
+		float GetRadialAngle() const { return mRadialAngle; }
+		void  SetRadialAngle( float aRadialAngle ) { mRadialAngle = aRadialAngle; }
+
+		float GetRadius() const { return mRadius; }
+		void  SetRadius( float aRadius ) { mRadius = aRadius; }
+
+		float GetRadiusSpace() const { return mRadiusSpace; }
+
     protected:
         typedef CParticle*                TParticleContainer;
         typedef std::vector < CTexture*>  TTextureContainer;
@@ -48,11 +57,15 @@ class CParticleEmitter :  public CName
         bool                        mIsImmortal;
         bool                        mIsActive;
         bool                        mKeepSize;
+		uint32                      mAliveParticlesCount;
+		float32						mTimeSinceLastEmission;
+		float32                     mTotalTime;
         float32                     mMaxLife;
-        uint32                      mAliveParticlesCount;
         float32                     mActualTime;
+		float32                     mEmissionTime;
         float32                     mAlpha;
         float32                     mGravity;
+		float32                     mRadiusSpace;
         float32                     mOndSpeedDirectionMin;
         float32                     mOndSpeedDirectionMax;
         Math::Vect3f                mInitialDirectionMin;
@@ -63,7 +76,6 @@ class CParticleEmitter :  public CName
         Math::Vect2f                mRadialSpeed;
         Math::Vect2f                mOndSpeed;
         Math::Vect2u                mAliveParticles;
-        Math::Vect2f                mEmissionTime;
         Math::Vect2f                mSize;
         Math::Vect2f                mTimeToLive;
         Math::Vect2f                mParticlesXEmission;
@@ -75,6 +87,9 @@ class CParticleEmitter :  public CName
         Math::Vect3f                mMaxPnt;
         bool                        mFlipUVHorizontal;
         bool                        mFlipUVVertical;
+
+		float						mRadialAngle;
+		float						mRadius;
 
         ps::TSpawnFunction          mSpawnFn;
 

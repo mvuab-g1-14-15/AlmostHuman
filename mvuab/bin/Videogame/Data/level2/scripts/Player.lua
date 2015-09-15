@@ -199,3 +199,11 @@ end
 function CPlayer:GetActualBarrel()
 	return g_Barrels[self.BarrelName];
 end
+
+function CPlayer:GetIsRunning()
+	return self.PlayerController:GetIsRunning()
+end
+
+function CPlayer:GetIsCrouch()
+	return self.PlayerController:GetIsCrouch()
+end

@@ -33,7 +33,7 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
     , mIsLoop( false )
     , mIsActive( false )
     , mAliveParticlesCount(0)
-    , mEmissionTime(Math::Vect2f(1.0f, 1.0f))
+    , mEmissionTime( 1.0f )
     , mAliveParticles( Math::Vect2u( 0, 0 ) )
     , mTimeToLive(Math::Vect2f(1.0f, 1.0f))
     , mActualTime(0.0f)
@@ -48,6 +48,11 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
     , mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
     , mAlpha( 0.0f )
     , mKeepSize( false )
+	, mRadialAngle( 0.0f )
+	, mRadius( 0.0f )
+	, mTimeSinceLastEmission(0.0f)
+	, mTotalTime(0.0f)
+	, mRadiusSpace( 0.0f )
 {
 }
 
@@ -69,7 +74,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
     mKeepSize             = atts.GetAttribute<bool>("keep_size", false );
     mAliveParticles       = atts.GetAttribute<Math::Vect2u>("alive_particles", 0);
     mSpeed                = atts.GetAttribute<Math::Vect2f>("speed", 0);
-    mEmissionTime         = atts.GetAttribute<Math::Vect2f>("emission_time", Math::Vect2f(1.0f, 1.0f));
+    mEmissionTime         = atts.GetAttribute<float32>("emission_time", 0.0f );
     mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
     mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
     mTechnique            = atts.GetAttribute<CEffectTechnique>("technique");
@@ -89,6 +94,10 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
     Math::Vect3f lSize = atts.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f());
     mMinPnt = -lSize;
     mMaxPnt =  lSize;
+
+	// Radial Emitter
+	mRadius				  = atts.GetAttribute<float32>("radius", 0.0f );
+    mRadiusSpace		  = atts.GetAttribute<float32>("radius_space", 0.0f );
 
     // Get textures
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
@@ -137,6 +146,9 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 
 void CParticleEmitter::Update( float dt )
 {
+	mTimeSinceLastEmission += dt;
+	mTotalTime += dt;
+
     KillParticles();
     EmitParticles();
     for( uint32 i = 0, lParticles = mAliveParticles.y; i < lParticles; ++i)
@@ -189,7 +201,7 @@ void CParticleEmitter::Render()
 
 void CParticleEmitter::EmitParticles()
 {
-  if( IsActive() )
+  if( ( mEmissionTime < mTimeSinceLastEmission ) && IsActive() )
   {
     const uint32 lParticlesToEmit = (uint32)RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
     for( uint32 i = 0, lEmittedParticles = 0; i < mAliveParticles.y &&
@@ -223,6 +235,8 @@ void CParticleEmitter::EmitParticles()
             ++lEmittedParticles;
         }
     }
+
+	mTimeSinceLastEmission = 0.0f;
   }
 }
 
