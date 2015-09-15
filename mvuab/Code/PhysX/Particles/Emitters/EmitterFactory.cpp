@@ -34,12 +34,24 @@ Vect3f GetPointSpawnPosition( CParticleEmitter* aEmitter )
     return Vect3f( 0.0f, 0.0f, 0.0f );
 }
 
+Vect3f GetRadialSpawnPosition( CParticleEmitter* aEmitter )
+{
+	float lAngle = aEmitter->GetRadialAngle();
+
+	Vect3f lVector( Math::Utils::Cos( lAngle ), 0.0f, Math::Utils::Sin( lAngle ) );
+
+	aEmitter->SetRadialAngle( lAngle + aEmitter->GetRadiusSpace() );
+
+	return lVector * aEmitter->GetRadius();
+}
+
 ps::TEmitterType StrToEmitterType( const std::string & aEmitterStr )
 {
-    if( aEmitterStr == "sphere") return ps::eET_Sphere;
-    if( aEmitterStr == "line"  ) return ps::eET_Line;
-    if( aEmitterStr == "point" ) return ps::eET_Point;
-    if( aEmitterStr == "circle") return ps::eET_Circle;
+    if( aEmitterStr == "sphere_emitter") return ps::eET_Sphere;
+    if( aEmitterStr == "line_emitter"  ) return ps::eET_Line;
+    if( aEmitterStr == "point_emitter" ) return ps::eET_Point;
+    if( aEmitterStr == "circle_emitter") return ps::eET_Circle;
+	if( aEmitterStr == "radial_emitter") return ps::eET_Radial;
 
     return ps::eET_Box;
 }
@@ -48,11 +60,12 @@ void CEmitterFactory::InitFactory()
 {
     LOG_INFO_APPLICATION("Initializing emitter factory");
 
-    mMap[ps::eET_Box   ] = GetBoxSpawnPosition;
-    mMap[ps::eET_Sphere] = GetSphereSpawnPosition;
-    mMap[ps::eET_Circle] = GetCircleSpawnPosition;
-    mMap[ps::eET_Line  ] = GetLineSpawnPosition;
-    mMap[ps::eET_Point ] = GetPointSpawnPosition;
+    mMap[ps::eET_Box    ] = GetBoxSpawnPosition;
+    mMap[ps::eET_Sphere ] = GetSphereSpawnPosition;
+    mMap[ps::eET_Circle ] = GetCircleSpawnPosition;
+    mMap[ps::eET_Line   ] = GetLineSpawnPosition;
+    mMap[ps::eET_Point  ] = GetPointSpawnPosition;
+	mMap[ps::eET_Radial ] = GetRadialSpawnPosition;
 }
 
 CParticleEmitter* CEmitterFactory::CreateEmitter( const std::string& aEmitterType )

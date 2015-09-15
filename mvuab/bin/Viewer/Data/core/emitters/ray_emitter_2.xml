@@ -5,7 +5,7 @@
 	active="true" 
 	alive_particles="1 1" 
 	speed="0.3 0.5" 
-	emission_time="1.0" 
+	emission_time="0.3" 
 	time_to_live="0 0.5" 
 	particle_size_range="1 1"
 	keep_size="true"

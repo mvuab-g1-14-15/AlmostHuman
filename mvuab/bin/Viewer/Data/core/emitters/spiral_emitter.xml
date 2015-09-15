@@ -1,0 +1,26 @@
+<emitter 
+	name="smoke"
+	loop="false" 
+	immortal="true" 
+	active="true" 
+	alive_particles="0 400" 
+	speed="0.4 0.4" 
+	emission_time="0.01" 
+	time_to_live="5 5" 
+	particle_size_range="0.1 0.1" 
+	particles_per_emission="1 1" 
+	min_color="0.2 0.2 0.4" 
+	max_color="0.2 0.2 0.8" 
+	min_initial_direction="0.0 0.0 0.0" 
+	max_initial_direction="0.0 0.0 0.0" 
+	gravity="-1" 
+	radial_speed="40 60" 
+	ondulative_speed="0.0 0.0" 
+	min_ondulative_direction="0.0" 
+	max_ondulative_direction="0.0" 
+	technique="ParticleTechnique"
+	alpha="0.7"
+	radius="0.4"
+	radius_space="0.3">
+	<texture name="Data/textures/particles/spiral/hexagon.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+</emitter>

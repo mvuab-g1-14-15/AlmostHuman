@@ -13,7 +13,8 @@ enum TEmitterType
     eET_Sphere,
     eET_Line,
     eET_Point,
-    eET_Box
+    eET_Box,
+	eET_Radial
 };
 
 typedef Math::Vect3f(*TSpawnFunction)(CParticleEmitter*);

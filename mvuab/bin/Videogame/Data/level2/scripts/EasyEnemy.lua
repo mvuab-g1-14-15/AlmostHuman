@@ -54,9 +54,9 @@ function CEasyEnemyLUA:MoveToWaypoint(PositionPlayer)
 	end
 	local ActualPosAux = ActualPos
 	ActualPosAux.y = 0
-	engine:Trace("Move Player to position"..PositionPlayer:ToString())
-	engine:Trace("Posición actual "..ActualPos:ToString())
-	engine:Trace("Distancia entre la posicion y el destino"..PositionPlayer:Distance(ActualPos))
+	--engine:Trace("Move Player to position"..PositionPlayer:ToString())
+	--engine:Trace("Posición actual "..ActualPos:ToString())
+	--engine:Trace("Distancia entre la posicion y el destino"..PositionPlayer:Distance(ActualPos))
 	if PositionPlayer:Distance(ActualPosAux) > 0.5 then
 		if self.YawPlayerMove >= 0 then
 			self.YawPlayerMove = -1
