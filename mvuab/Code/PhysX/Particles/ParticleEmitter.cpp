@@ -97,6 +97,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
 
 	// Radial Emitter
 	mRadius				  = atts.GetAttribute<float32>("radius", 0.0f );
+	mMinRadius		      = atts.GetAttribute<float32>("min_radius", 0.0f );
     mRadiusSpace		  = atts.GetAttribute<float32>("radius_space", 0.0f );
 
     // Get textures

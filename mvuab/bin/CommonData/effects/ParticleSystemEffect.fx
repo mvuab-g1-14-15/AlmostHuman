@@ -32,13 +32,9 @@ PSVertex VS(PARTICLEIN IN)
 		float sn = sin( IN.params.y);
 		float cs = cos( IN.params.y);
 		
-#if defined( RAY )
-		float3 lPosition = IN.worldPos + ( ( IN.Position.x * rightVector  )+ (IN.Position.z*upVector)) * IN.params.x;
-#else
 		float3 vUpNew    = cs * rightVector - sn * upVector;
 		float3 vRightNew = sn * rightVector + cs * upVector;
 		float3 lPosition = IN.worldPos + ( ( IN.Position.x * vRightNew  )+ (IN.Position.z*vUpNew)) * IN.params.x;
-#endif
 
 		OUT.HPosition=mul(float4(lPosition, 1.0), g_WorldViewProj);
 		
@@ -61,14 +57,17 @@ float4 PS(PSVertex IN) : COLOR
 #if defined( BLACK_AND_WHITE )
 	float lAverage = (( IN.color.x + IN.color.y + IN.color.z) / 3 );
 	float3 lColor =  float3( lAverage, lAverage, lAverage );
+	return float4( lSamplerColor.rgb * lColor.rgb , lSamplerColor.a * IN.params.z);
 #elif defined ( RAY )
 	float lAverage = (( IN.color.x + IN.color.y + IN.color.z) / 3 );
 	float3 lColor =  float3( lAverage, lAverage, 1.0 );
 	return float4( lSamplerColor.rgb * lColor.rgb , lSamplerColor.a);
+//#elif defined( BLEND_ADD )
+	//return float4( lSamplerColor.rgb * lColor.rgb , lSamplerColor.a);
 #else
 	float3 lColor = IN.color;
-#endif 
 	return float4( lSamplerColor.rgb * lColor.rgb , lSamplerColor.a * IN.params.z);
+#endif 
 }
 
 
@@ -78,7 +77,14 @@ technique TECHNIQUE_NAME
 	{
 		//AlphaBlendEnable = false;
 		//CullMode = NONE; // NONE - CW
-		CullMode = NONE;
+
+#if defined( BLEND_ADD )
+		AlphaBlendEnable = true;
+		BlendOp=Add;
+		SrcBlend = one;
+		DestBlend = one;
+#endif
+		CullMode = CW;
 		VertexShader = compile vs_3_0 VS();
 		PixelShader = compile ps_3_0 PS();
 	}

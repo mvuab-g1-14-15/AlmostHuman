@@ -67,6 +67,14 @@
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
+	<technique name="ParticleTechniqueV2">
+		<effect name="ParticleSystemEffectV2" file="../CommonData/effects/ParticleSystemEffect.fx">
+			<define name="TECHNIQUE_NAME" description="ParticleTechniqueV2"/>
+			<define name="BLEND_ADD" description=""/>
+		</effect>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+	</technique>
+	
 	<technique name="ParticleTechnique">
 		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
 			<define name="TECHNIQUE_NAME" description="ParticleTechnique"/>
