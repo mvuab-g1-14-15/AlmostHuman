@@ -22,7 +22,7 @@ function CPlayer:__init()
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel("Player", "Player")
-		self.RenderableObject:SetRoomName( "room2" )
+		self.RenderableObject:SetRoomName( "sala1" )
 		renderable_objects_manager_characters:AddResource("Player", self.RenderableObject)
 	end
 
