@@ -86,7 +86,7 @@ function CPatrolEnemyLUA:MoveToWaypoint(PositionPlayer)
     CEnemyLUA.SetYaw( self, Yaw )
 end
 
-function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer)
+function CPatrolEnemyLUA:MoveToPlayer(PositionPlayer) --this better in the CEnemy base class
 	
 	CharacterController = CEnemyLUA.GetCharacterController(self)	
 	lPos = CharacterController:GetPosition()

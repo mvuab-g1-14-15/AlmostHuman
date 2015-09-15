@@ -5,6 +5,9 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Life = core_enemy:GetLife()
 	self.RespawnTime = core_enemy:GetRespawnTime()
     self.TimeToShoot = core_enemy:GetTimeToShoot()
+	self.TimeBurst = 0.3
+	self.NumShootBurst = 3
+	self.ActualShootBurst = 0
     self.ShootAccuracy = core_enemy:GetShootAccuracy()
 	self.Damage = core_enemy:GetDamage()
 	self.CountTimeShoot = 0.0
@@ -13,6 +16,13 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Radius = 0.4
 	self.Height = 2.0
 	self.PitchCameraMove = 0.0
+	
+	self.Suspected = false
+	self.SuspectedPosition = Vect3f(0.0)
+	
+	self.ShootSpeed = 50.0
+	
+	self.Delta = 0.2
 	
 	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
@@ -178,8 +188,9 @@ end
 function CEnemyLUA:MakeShoot(aDirection)
 	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
 	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
-	lShoot = CShootLUA( 5.0, aDirection, lPosition, self.Damage )	
+	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
 	g_EnemyManager:AddShoot(lShoot)
+	--Play shoot enemy sound
 end
 
 function CEnemyLUA:GetLife()
@@ -204,4 +215,55 @@ end
 
 function CEnemyLUA:GetDead()
 	return self.Life <= 0
+end
+
+function CEnemyLUA:MoveToPos( aPos )
+	if self:IsInPos( aPos ) then
+		return true
+	end
+	
+	local CharacterController = self:GetCharacterController()
+	lPos = CharacterController:GetPosition()
+    lAStar = g_EnemyManager:GetAStar()
+
+    if ( not self.PathCalculated ) then   
+        self.Path = lAStar:GetPath( lPos, aPos )
+        self.PathCalculated = true
+    end
+	
+    lTargetPos = lPos
+    lTargetPos.y = 0
+	lWaypointPos = self.Path:GetResource(self.ActualPathPoint)
+	lWaypointPos.y = 0.0
+    lDist = lTargetPos:Distance( lWaypointPos )
+	
+	count = self.Path:size()
+	
+    if ( (count - self.ActualPathPoint) > 2 ) then
+        if ( lDist < 0.6 ) then
+            self.ActualPathPoint = self.ActualPathPoint + 1
+		end
+        lTargetPos = self.Path:GetResource(self.ActualPathPoint)
+    end
+    lTargetPos.y = 0
+	
+	self:MoveToWaypoint(lTargetPos)
+    
+    if ( self.Path:GetResource(count - 1):Distance( aPos ) > 5.0 ) then
+        self.PathCalculated = false
+		self.ActualPathPoint = 1
+	end
+	
+	return false
+end
+
+function CEnemyLUA:IsInPos( aPos )
+	local CharacterController = self:GetCharacterController()
+	local ActualPos = CharacterController:GetPosition()
+	local FinalPos = aPos
+	FinalPos.y = 0.0
+	ActualPos.y = 0.0
+	local DistVector = FinalPos - ActualPos
+	local Distance = DistVector:Length()
+	return Distance < self.Delta
 end

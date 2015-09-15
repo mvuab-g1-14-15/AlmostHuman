@@ -19,8 +19,6 @@ function CEnemyManagerLUA:__init()
 	self.ExtraEnemyCountMax = 3
 	self.timerExtraEnemy = "Add Extra Enemy"
 	self:Load("Data/enemies/enemies.xml")
-	
-	
 end
 
 function CEnemyManagerLUA:Load(filename)
