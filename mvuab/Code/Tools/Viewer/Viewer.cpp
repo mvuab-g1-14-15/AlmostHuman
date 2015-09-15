@@ -22,7 +22,7 @@
 #include "resource.h"
 
 #if _DEBUG
-    #include "Memory\MemLeaks.h"
+#include "Memory\MemLeaks.h"
 #endif
 
 
@@ -63,54 +63,55 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 
     switch ( msg )
     {
-        case WM_CREATE:
-            {
-                HMENU l_TopMenu, l_MenuLoad, l_MainMenu;
-                l_TopMenu  = CreateMenu();
-                l_MenuLoad = CreateMenu();
-                l_MainMenu = CreateMenu();
-                AppendMenu( l_MenuLoad, MF_STRING, eOptionScene, TEXT( "Scene" ) );
-                AppendMenu( l_MenuLoad, MF_STRING, eOptionAnimatedModels, TEXT( "Animated models" ) );
-                AppendMenu( l_MenuLoad, MF_STRING, eOptionParticles, TEXT( "Particles" ) );
-                AppendMenu( l_MenuLoad, MF_STRING, eOptionLights, TEXT( "Lights" ) );
-                AppendMenu( l_MainMenu, MF_STRING, eOptionExit, TEXT( "&Exit" ) );
+    case WM_CREATE:
+    {
+        HMENU l_TopMenu, l_MenuLoad, l_MainMenu;
+        l_TopMenu  = CreateMenu();
+        l_MenuLoad = CreateMenu();
+        l_MainMenu = CreateMenu();
+        AppendMenu( l_MenuLoad, MF_STRING, eOptionScene, TEXT( "Scene" ) );
+        AppendMenu( l_MenuLoad, MF_STRING, eOptionAnimatedModels, TEXT( "Animated models" ) );
+        AppendMenu( l_MenuLoad, MF_STRING, eOptionParticles, TEXT( "Particles" ) );
+        AppendMenu( l_MenuLoad, MF_STRING, eOptionLights, TEXT( "Lights" ) );
+        AppendMenu( l_MainMenu, MF_STRING, eOptionExit, TEXT( "&Exit" ) );
 
-                AppendMenu( l_TopMenu, MF_STRING, eOptionLights, TEXT( "Reload Lights" ) );
-                AppendMenu( l_TopMenu, MF_STRING, eOptionParticles, TEXT( "Reload Particles" ) );
-                AppendMenu( l_TopMenu, MF_STRING, eOptionEffect, TEXT( "Reload Effects" ) );
+        AppendMenu( l_TopMenu, MF_STRING, eOptionLights, TEXT( "Reload Lights" ) );
+        AppendMenu( l_TopMenu, MF_STRING, eOptionParticles, TEXT( "Reload Particles" ) );
+        AppendMenu( l_TopMenu, MF_STRING, eOptionGUI, TEXT( "Reload GUI" ) );
+        AppendMenu( l_TopMenu, MF_STRING, eOptionEffect, TEXT( "Reload Effects" ) );
 
-                AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MainMenu, TEXT( "&Principal" ) );
-                AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MenuLoad, TEXT( "Reload" ) );
-                SetMenu( hWnd, l_TopMenu );
-            }
-            break;
+        AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MainMenu, TEXT( "&Principal" ) );
+        AppendMenu( l_TopMenu, MF_STRING | MF_POPUP, ( UINT )l_MenuLoad, TEXT( "Reload" ) );
+        SetMenu( hWnd, l_TopMenu );
+    }
+    break;
 
-        case WM_COMMAND:
-            switch ( LOWORD( wParam ) )
-            {
-                case eOptionExit:
-                    return OnExit(hWnd);
-                default:
-                    m_ViewerProcess->OnClickedMenuOption( EMenuOption(wParam) );
-            }
+    case WM_COMMAND:
+        switch ( LOWORD( wParam ) )
+        {
+        case eOptionExit:
+            return OnExit(hWnd);
+        default:
+            m_ViewerProcess->OnClickedMenuOption( EMenuOption(wParam) );
+        }
 
-            break;
+        break;
 
-        case WM_DESTROY:
-            {
-                return OnExit(hWnd);
-            }
-            break;
+    case WM_DESTROY:
+    {
+        return OnExit(hWnd);
+    }
+    break;
 
-        case WM_KEYDOWN:
-            {
-                switch ( wParam )
-                {
-                    case VK_ESCAPE:
-                        PostQuitMessage(EXIT_SUCCESS);
-                }
-            }
-            break;
+    case WM_KEYDOWN:
+    {
+        switch ( wParam )
+        {
+        case VK_ESCAPE:
+            PostQuitMessage(EXIT_SUCCESS);
+        }
+    }
+    break;
     }//end switch( msg )
 
     return DefWindowProc( hWnd, msg, wParam, lParam );
@@ -126,9 +127,9 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 {
     try
     {
-        #if _DEBUG
+#if _DEBUG
         MemLeaks::MemoryBegin();
-        #endif
+#endif
         // Register the window class
         WNDCLASSEX wc =
         {
@@ -235,9 +236,9 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         CHECKED_DELETE( pLogger );
         CHECKED_DELETE( gpu );
         CHECKED_DELETE( lEngineConfig );
-        #if _DEBUG
+#if _DEBUG
         MemLeaks::MemoryEnd();
-        #endif
+#endif
     }
     catch ( CException& e )
     {

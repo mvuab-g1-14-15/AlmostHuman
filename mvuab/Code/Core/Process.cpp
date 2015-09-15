@@ -11,6 +11,7 @@
 #include "Particles\ParticleManager.h"
 #include "Particles\ParticleSystemManager.h"
 #include "Billboard\BillboardManager.h"
+#include "GUIManager.h"
 #include "ActionManager.h"
 #include "ScriptManager.h"
 #include "GUIManager.h"
@@ -18,19 +19,18 @@
 #include "Periphericals\Mouse.h"
 #include "EngineConfig.h"
 
-namespace
-{
+namespace {
 void OnOptionSceneClicked()
 {
-  /*
-      EffectManagerInstance->ReloadEffects();
-      LightMInstance->ReLoad();
-      ROTMInstance->ReLoad();
-      SMeshMInstance->Reload();
-      ROLMInstance->Reload();
-      LightMInstance->ReLoad();
-      SRCMInstance->ReLoad();
-  */
+    /*
+        EffectManagerInstance->ReloadEffects();
+        LightMInstance->ReLoad();
+        ROTMInstance->ReLoad();
+        SMeshMInstance->Reload();
+        ROLMInstance->Reload();
+        LightMInstance->ReLoad();
+        SRCMInstance->ReLoad();
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------
@@ -41,69 +41,75 @@ void OnOptionMeshClicked()
 
 void OnOptionAnimatedModelsClicked()
 {
-  /*
-      EffectManagerInstance->Reload();
-      LightMInstance->ReLoad();
-      ROTMInstance->ReLoad();
-      SMeshMInstance->Destroy();
-      ROLMInstance->Reload();
-      AnimatedMInstance->Reload();
-      LightMInstance->ReLoad();
-      SRCMInstance->ReLoad();
-  */
+    /*
+        EffectManagerInstance->Reload();
+        LightMInstance->ReLoad();
+        ROTMInstance->ReLoad();
+        SMeshMInstance->Destroy();
+        ROLMInstance->Reload();
+        AnimatedMInstance->Reload();
+        LightMInstance->ReLoad();
+        SRCMInstance->ReLoad();
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionParticlesClicked()
 {
-  ParticleSystemInstance->Refresh();
-  PSMan->Refresh();
+    ParticleSystemInstance->Refresh();
+    PSMan->Refresh();
 }
 
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionLigthsClicked()
 {
-  LightMInstance->ReLoad();
+    LightMInstance->ReLoad();
+}
+
+//---------------------------------------------------------------------------------------------------------------
+void OnOptionGuiClicked()
+{
+    GUIInstance->Reload();
 }
 
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionEffectsClicked()
 {
-  EffectManagerInstance->ReloadEffects();
+    EffectManagerInstance->ReloadEffects();
 }
 
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionReloadLua()
 {
-  ScriptMInstance->Reload();
+    ScriptMInstance->Reload();
 }
 
 void OnOptionReloadGui()
 {
-  GUIInstance->Reload();
-  ScriptMInstance->RunCode( "ReloadGUI()" );
+    GUIInstance->Reload();
+    ScriptMInstance->RunCode( "ReloadGUI()" );
 }
 
 void OnOptionReloadInputs()
 {
-  ActionManagerInstance->Reload();
+    ActionManagerInstance->Reload();
 }
 
 void OnChangeCamera()
 {
-  CCameraManager* lCM = CameraMInstance;
+    CCameraManager* lCM = CameraMInstance;
 
-  if ( "FreeCam" == lCM->GetCurrentCameraName() )
-    lCM->SetCurrentCamera( "TestProcessCam" );
-  else
-    lCM->SetCurrentCamera( "FreeCam" );
+    if ( "FreeCam" == lCM->GetCurrentCameraName() )
+        lCM->SetCurrentCamera( "TestProcessCam" );
+    else
+        lCM->SetCurrentCamera( "FreeCam" );
 }
 
 void OnChangeMousse()
 {
-  CInputManager* l_IM = InputManagerInstance;
-  EngineConfigInstance->SetExclusiveModeInMouse( EngineConfigInstance->GetExclusiveModeInMouse() == true ? false : true );
-  l_IM->GetMouse()->SetExclusiveMode( EngineConfigInstance->GetExclusiveModeInMouse() );
+    CInputManager* l_IM = InputManagerInstance;
+    EngineConfigInstance->SetExclusiveModeInMouse( EngineConfigInstance->GetExclusiveModeInMouse() == true ? false : true );
+    l_IM->GetMouse()->SetExclusiveMode( EngineConfigInstance->GetExclusiveModeInMouse() );
 }
 }
 
@@ -125,55 +131,55 @@ void CProcess::RenderDebugInfo()
 //---------------------------------------------------------------------------------------------------------------
 void CProcess::OnClickedMenuOption( EMenuOption aMenuOption )
 {
-  switch ( aMenuOption )
-  {
-  case eOptionScene:
-    OnOptionSceneClicked();
-    break;
+    switch ( aMenuOption )
+    {
+    case eOptionScene:
+        OnOptionSceneClicked();
+        break;
 
-  case eOptionMesh:
-    OnOptionMeshClicked();
-    break;
+    case eOptionMesh:
+        OnOptionMeshClicked();
+        break;
 
-  case eOptionAnimatedModels:
-    OnOptionAnimatedModelsClicked();
-    break;
+    case eOptionAnimatedModels:
+        OnOptionAnimatedModelsClicked();
+        break;
 
-  case eOptionParticles:
-    OnOptionParticlesClicked();
-    break;
+    case eOptionParticles:
+        OnOptionParticlesClicked();
+        break;
 
-  case eOptionLights:
-    OnOptionLigthsClicked();
-    break;
+    case eOptionLights:
+        OnOptionLigthsClicked();
+        break;
 
-  case eOptionEffect:
-    OnOptionEffectsClicked();
-    break;
+    case eOptionEffect:
+        OnOptionEffectsClicked();
+        break;
 
-  default:
-    LOG_ERROR_APPLICATION( "Invalid option for menu" );
-  }
+    default:
+        LOG_ERROR_APPLICATION( "Invalid option for menu" );
+    }
 }
 
 void CProcess::ProcessReloads()
 {
-  CActionManager* lAM = ActionManagerInstance;
+    CActionManager* lAM = ActionManagerInstance;
 
-  if ( lAM->DoAction( "ReloadStaticMesh" ) )
-    OnOptionMeshClicked();
-  else if ( lAM->DoAction( "ReloadLUA" ) )
-    OnOptionReloadLua();
-  else if ( lAM->DoAction( "ReloadGUI" ) )
-    OnOptionReloadGui();
-  else if ( lAM->DoAction( "ReloadShaders" ) )
-    OnOptionEffectsClicked();
+    if ( lAM->DoAction( "ReloadStaticMesh" ) )
+        OnOptionMeshClicked();
+    else if ( lAM->DoAction( "ReloadLUA" ) )
+        OnOptionReloadLua();
+    else if ( lAM->DoAction( "ReloadGUI" ) )
+        OnOptionReloadGui();
+    else if ( lAM->DoAction( "ReloadShaders" ) )
+        OnOptionEffectsClicked();
 }
 
 void CProcess::ProcessKey()
 {
-  CActionManager* lAM = ActionManagerInstance;
+    CActionManager* lAM = ActionManagerInstance;
 
-  if ( lAM->DoAction( "MousePointer" ) )
-    OnChangeMousse();
+    if ( lAM->DoAction( "MousePointer" ) )
+        OnChangeMousse();
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Gui_config>
+  <GuiFiles path="../CommonData/Gui" windows_default="Main.xml"/>
+  <TextBox  posx="30" posy="30" width="35" height="35" button_width="5" button_height="5"
+            buttonClose_normal=     "../CommonData/Gui/GUI/CloseDialegBox.jpg"
+            buttonClose_over=       "../CommonData/Gui/GUI/CloseDialegBoxO.jpg"
+            buttonClose_clicked=    "../CommonData/Gui/GUI/CloseDialegBoxC.jpg"
+            buttonClose_deactivated="../CommonData/Gui/GUI/CloseDialegBoxC.jpg" 
+            buttonMove_normal=      "../CommonData/Gui/GUI/ButtonDialegBoxN.jpg"
+            buttonMove_over=        "../CommonData/Gui/GUI/ButtonDialegBoxO.jpg"
+            buttonMove_clicked=     "../CommonData/Gui/GUI/ButtonDialegBoxC.jpg"
+            buttonMove_deactivated= "../CommonData/Gui/GUI/ButtonDialegBoxC.jpg"
+            quad=                   "../CommonData/Gui/GUI/BaseDialegBox.jpg"/>
+  <PointerMouse posx="5" posy="5" width="5" height="5" 
+                texture="../CommonData/Gui/GUI/cursor.png" isQuadrant="true"/>
+</Gui_config>

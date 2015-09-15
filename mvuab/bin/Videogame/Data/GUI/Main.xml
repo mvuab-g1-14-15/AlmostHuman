@@ -8,7 +8,7 @@
     <texture name="img1" name_texture="Data/textures/GUI/Almost_human.jpg"/>
   </Image>
 
-  <Image name="main_logoalmostHuman" pos="30.00 12.00" height="30.00" width="40.00" visible="true" active="true"
+  <Image name="almost_human" pos="10.00 10.00" height="100.00" width="100.00" visible="true" active="true"
       default="0" 
       OnLoadValue=""
       OnSaveValue=""
