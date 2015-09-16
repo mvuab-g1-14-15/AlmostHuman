@@ -4,7 +4,7 @@
 	</capture_frame_buffer>
 
 	<set_pool_renderable_objects_technique pool="ColorGrading_pool_renderable_object_technique"/>
-	<render_draw_quad active="false" name="ColorGradient_DrawQuad">
+	<render_draw_quad active="true" name="ColorGradient_DrawQuad">
 		<texture stage_id="0" name="ColorGradient"/>
 		<texture stage_id="1" name="Data/textures/LUT_Greenish.png"/>
 	</render_draw_quad>

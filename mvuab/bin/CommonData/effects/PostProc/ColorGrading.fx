@@ -37,14 +37,13 @@ float4 sampleAs3DTexture(sampler2D tex, float3 uv, float width)
 
 float4 ColorGrading(in float2 UV : TEXCOORD0) : COLOR
 {	
-    UV.xy = (UV.xy * 15.0f/16.0f) + (0.5f/16.0f);
     float4 l_Color = tex2D(S0PointSampler, UV);
     
     float lutSize = 16.0;
     float scale = (lutSize - 1.0) / lutSize;
     float offset = 1.0 / (2.0 * lutSize);
     
-    float4 l_GradeColor = sampleAs3DTexture(S1PointSampler, l_Color.rgb * scale + offset, 16);
+    float4 l_GradeColor = sampleAs3DTexture(LUTTexture, l_Color.rgb * scale + offset, 16);
     l_GradeColor.a = l_Color.a;
     
     return l_GradeColor;
