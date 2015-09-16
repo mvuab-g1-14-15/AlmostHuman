@@ -35,6 +35,14 @@ function CBlaster:Shoot()
 	local lShoot = CShoot(self.ShootSpeed, lDirection, lPosition, self:CalculateDamage())
 	lShoot:Init()
 	table.insert(self.Shoots, lShoot)
+	
+	local lEnemies = g_EnemyManager:GetEnemiesAtDistance( 5.0 )
+	for i = 1, #lEnemies do
+		lEnemy = lEnemies[i]
+		lEnemy.Suspected = true
+		lEnemy.SuspectedPosition = g_Player:GetPosition()
+		lEnemy:ChangeState("perseguir")
+	end
 
 --[[ Old code
 	local lEnemy = self:GetEnemyFromRay()
