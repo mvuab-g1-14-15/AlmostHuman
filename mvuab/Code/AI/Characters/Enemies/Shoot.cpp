@@ -119,7 +119,10 @@ void CShoot::Update()
           //CEnemy* lEnemy = EnemyMInstance->GetResource( lName );
 
           if ( lPUD->GetController() )
+		  {
             ScriptMInstance->RunCode( "g_EnemyManager:AddDamage('" + lName + "')" );
+			ScriptMInstance->RunCode( "local enemy = g_EnemyManager:GetResource('" + lName + "');enemy.Suspected = true; enemy.SuspectedPosition = g_Player:GetPosition();" );
+		  }
 
           //lEnemy->AddDamage( mDamage );
         }

@@ -18,6 +18,15 @@ sampler S0PointClampSampler : register (s0)=sampler_state
 	AddressV = Clamp;
 };
 
+sampler LUTTexture : register (s1)=sampler_state
+{ 
+	MinFilter = POINT;
+	MagFilter = POINT;
+	
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
 sampler S0LinearClampSampler : register (s0)=sampler_state
 { 
 	MipFilter = LINEAR; 

@@ -20,7 +20,9 @@ Vect3f GetBoxSpawnPosition( CParticleEmitter* aEmitter )
 Vect3f GetCircleSpawnPosition( CParticleEmitter* aEmitter )
 {
     ASSERT(aEmitter, "Null Emitter");
-    return Vect3f( 0.0f, 0.0f, 0.0f );
+	float lAngle = baseUtils::RandRange(0.0f, 360.0f);
+	Vect3f lVector( Math::Utils::Cos( lAngle ), 0.0f, Math::Utils::Sin( lAngle ) );
+    return lVector * baseUtils::RandRange(aEmitter->GetMinRadius(), aEmitter->GetRadius() );
 }
 
 Vect3f GetLineSpawnPosition( CParticleEmitter* aEmitter )

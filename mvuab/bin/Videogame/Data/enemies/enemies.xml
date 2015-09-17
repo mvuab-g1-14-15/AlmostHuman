@@ -22,9 +22,9 @@
     <point value="63.044 -17.5027 -86.1066" />
   </route>
   
-	<core_enemy type="easy" life="50" damage="1.0" time_to_respawn="2.0" time_to_shoot="5.0" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
-	<core_enemy type="patroll" life="100" damage="5.0" time_to_respawn="1.0" time_to_shoot="2" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
-	<core_enemy type="drone" life="40" damage="0.5" time_to_respawn="1.0" time_to_shoot="0.75" shoot_accuracy="0.35" state_machine_name="droneMachine" state_machine_file="Data/enemies/AI-drone.xml"/>
+	<core_enemy type="easy" life="50" damage="1.0" time_to_respawn="2.0" time_to_shoot="2" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
+	<core_enemy type="patroll" life="100" damage="1.0" time_to_respawn="1.0" time_to_shoot="1" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
+	<core_enemy type="drone" life="40" damage="0.5" time_to_respawn="1.0" time_to_shoot="0.5" shoot_accuracy="0.35" state_machine_name="droneMachine" state_machine_file="Data/enemies/AI-drone.xml"/>
 	<core_enemy type="boss" life="250" damage="10" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
 	<enemy name="Boss" room="room2" type="patroll" route="1" pos="83.37 21.40 21.61" yaw="0.0" scale="0.2 0.2 0.2" mesh="boss" get_position_script="get_enemy_position" 

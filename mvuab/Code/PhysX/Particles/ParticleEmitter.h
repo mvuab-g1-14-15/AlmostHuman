@@ -45,6 +45,9 @@ class CParticleEmitter :  public CName
 		float GetRadialAngle() const { return mRadialAngle; }
 		void  SetRadialAngle( float aRadialAngle ) { mRadialAngle = aRadialAngle; }
 
+		float GetMinRadius() const { return mMinRadius; }
+		void  SetMinRadius( float aRadius ) { mMinRadius = aRadius; }
+
 		float GetRadius() const { return mRadius; }
 		void  SetRadius( float aRadius ) { mRadius = aRadius; }
 
@@ -89,6 +92,7 @@ class CParticleEmitter :  public CName
         bool                        mFlipUVVertical;
 
 		float						mRadialAngle;
+		float						mMinRadius;
 		float						mRadius;
 
         ps::TSpawnFunction          mSpawnFn;

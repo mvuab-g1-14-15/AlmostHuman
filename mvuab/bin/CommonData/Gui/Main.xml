@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+  <Image name="main_fondo" pos="0.00 0.00" height="10.00" width="10.00" visible="true" active="true"
+         default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
+    <texture name="img1" name_texture="../CommonData/textures/GUI/Almost_human.jpg"/>
+  </Image>
+
+  <Image name="almost_human" pos="10.00 10.00" height="100.00" width="100.00" visible="true" active="true"
+      default="0" 
+      OnLoadValue=""
+      OnSaveValue=""
+      flip="" is_background="false">
+    <texture name="0" name_texture="../CommonData/textures/GUI/AlmostHumanLogo.png"/>
+    
+  </Image>
+
+  
+  <Button name="Play" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
+          active="true" texture_normal="../CommonData/textures/GUI/Play.png"
+          texture_over="../CommonData/textures/GUI/play-over.png"
+          texture_clicked="../CommonData/textures/GUI/play-click.png"
+          texture_deactivated="../CommonData/textures/GUI/play_press.png"
+          OnClickedAction="CargarJuego()"
+          OnOverAction="SoundGUI()"/>
+  
+ <!-- <Button name="Setup" pos="38.00 60.00" height="10.00" width="25.00" visible="true" active="true" 
+          texture_normal="../CommonData/textures/GUI/setup.png"
+          texture_over="../CommonData/textures/GUI/setup-over.png" 
+          texture_clicked="../CommonData/textures/GUI/setup-click.png"
+          texture_deactivated= "../CommonData/textures/GUI/setup_normal.png"
+          OnClickedAction="IrASetup()"
+          OnOverAction="SoundGUI()"/>-->
+
+  
+  <Button name="Exit" pos="38.00 75.00" height="10.00" width="25.00" visible="true" active="true" 
+          texture_normal="../CommonData/textures/GUI/exit.png"
+          texture_over="../CommonData/textures/GUI/exit-over.png"
+          texture_clicked="../CommonData/textures/GUI/exit-click.png"
+          texture_deactivated="../CommonData/textures/GUI/exit_normal.png"
+          OnClickedAction="SalirJuego()"
+          OnOverAction="SoundGUI()"/>
+</Windows>

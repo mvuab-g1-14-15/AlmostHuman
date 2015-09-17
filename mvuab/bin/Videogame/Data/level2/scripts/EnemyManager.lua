@@ -19,8 +19,6 @@ function CEnemyManagerLUA:__init()
 	self.ExtraEnemyCountMax = 3
 	self.timerExtraEnemy = "Add Extra Enemy"
 	self:Load("Data/enemies/enemies.xml")
-	
-	
 end
 
 function CEnemyManagerLUA:Load(filename)
@@ -240,4 +238,19 @@ function CEnemyManagerLUA:GenerateEnemy()
 		self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )
 		self.ExtraEnemyCount = self.ExtraEnemyCount + 1
 	end
+end
+
+function CEnemyManagerLUA:GetEnemiesAtDistance( aDist )
+	lEnemyList = {}
+	local PlayerPos = g_Player:GetPosition()
+	for i in pairs (self.Enemy) do
+		if self.Enemy[i] ~= nil then
+			local EnemyPos = self.Enemy[i]:GetPosition()
+			local Dist = PlayerPos:Distance(EnemyPos)
+			if Dist <= aDist then
+				table.insert(lEnemyList, self.Enemy[i])
+			end
+		end
+	end
+	return lEnemyList
 end

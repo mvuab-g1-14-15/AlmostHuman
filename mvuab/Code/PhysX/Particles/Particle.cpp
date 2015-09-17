@@ -39,7 +39,8 @@ void CParticle::Update( float dt )
     mDirection.y += -mGravity * dt;
     mDirection.Normalize();
 
-    mPosition += mDirection * (mSpeed * dt);
+	mPosition += mDirection * (mSpeed * dt);
+
     mAngle += dt * mRadialSpeed;
 
     mActualTime += dt;

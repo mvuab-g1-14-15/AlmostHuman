@@ -59,10 +59,6 @@ function CPlayer:Update()
 			self.Grenade = nil
 		end
 		
-		if action_manager:DoAction("LyingDown") then
-			self:HideInBarrel()
-		end
-		
 		if self.InsideBarrel then
 			if action_manager:DoAction("EnterBarrel") then
 				self:ExitBarrel()

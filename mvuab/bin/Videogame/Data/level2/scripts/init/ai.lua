@@ -42,8 +42,17 @@ function check_next_state()
 			if countdowntimer_manager:IsActive(timerPerseguir) then
 				countdowntimer_manager:Reset(timerPerseguir, false)
 			end
+			enemy.Suspected = false
 	elseif l_HearSomething then
 		l_NextState = "perseguir"
+		enemy.Suspected = true
+		enemy.SuspectedPosition = g_Player:GetPosition()
+	end
+	
+	if enemy.Suspected then
+		if enemy:MoveToPos(enemy.SuspectedPosition) then
+			enemy.Suspected = false
+		end
 	end
 	
 	if l_NextState ~= l_CurrentState then
@@ -73,14 +82,32 @@ end
 function atacar()
 	enemy = g_EnemyManager:GetActualEnemy()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
+	timerBurst = "Burst"..enemy:GetName()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
 	if l_PlayerInSight then
 		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())		
 		if enemy:GetCountTimeShoot() >= enemy:GetTimeToShoot() then
-			local lDir = GetPlayerDirection(enemy:GetPosition())
-			enemy:MakeShoot(lDir)
-			enemy:SetCountTimeShoot(0.0)
+			if not countdowntimer_manager:ExistTimer(timerBurst) then
+				countdowntimer_manager:AddTimer(timerBurst, enemy.TimeBurst, false)
+			else
+				countdowntimer_manager:SetActive(timerBurst, true)
+			end
+			if countdowntimer_manager:isTimerFinish(timerBurst) then
+				local lDir = GetPlayerDirection(enemy:GetPosition())
+				enemy:MakeShoot(lDir)
+				enemy.ActualShootBurst = enemy.ActualShootBurst + 1
+				countdowntimer_manager:Reset(timerBurst, false)
+			end
+			if enemy.ActualShootBurst == 0 then
+				local lDir = GetPlayerDirection(enemy:GetPosition())
+				enemy:MakeShoot(lDir)
+				enemy.ActualShootBurst = enemy.ActualShootBurst + 1
+			end
+			if enemy.ActualShootBurst == enemy.NumShootBurst then
+				enemy:SetCountTimeShoot(0.0)
+				enemy.ActualShootBurst = 0
+			end
 		end
 	else
 		enemy:SetCountTimeShoot(0.0)

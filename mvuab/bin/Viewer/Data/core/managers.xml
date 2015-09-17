@@ -20,7 +20,7 @@
 	<lens_flares_manager file_config="Data/core/lens_flare.xml"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
-	<gui_manager file_config="Data/gui.xml"/>
+	<gui_manager file_config="../CommonData/Gui/GUI.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config=""/>
 	<particle_manager file_config=""/>
