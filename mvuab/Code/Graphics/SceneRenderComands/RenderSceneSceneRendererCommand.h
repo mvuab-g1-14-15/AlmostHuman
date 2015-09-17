@@ -20,6 +20,6 @@ class CRenderSceneSceneRendererCommand : public CSceneRendererCommand
 
         void Execute(CGraphicsManager &GM);
 		void AddLayer( CRenderableObjectsManager* aROM );
-        void RemoveLayer( CRenderableObjectsManager* aROM );
+        bool RemoveLayer( CRenderableObjectsManager* aROM );
 };
 #endif

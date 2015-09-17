@@ -37,10 +37,12 @@ void CRenderSceneSceneRendererCommand::AddLayer( CRenderableObjectsManager* aROM
 	m_Layers.push_back(aROM);
 }
 
-void CRenderSceneSceneRendererCommand::RemoveLayer( CRenderableObjectsManager* aROM )
+bool CRenderSceneSceneRendererCommand::RemoveLayer( CRenderableObjectsManager* aROM )
 {
     std::vector<CRenderableObjectsManager*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), aROM);
-    if(it != m_Layers.end()) m_Layers.erase(it);
+    if(it != m_Layers.end()){ m_Layers.erase(it); return true; }
+
+    return false;
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
