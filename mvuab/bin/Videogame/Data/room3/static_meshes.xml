@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="sala_3_room3" filename="meshes\sala_3.mesh" />
-  <static_mesh name="andride084_room3" filename="meshes\andride084.mesh" />
+  <static_mesh name="andride003_room3" filename="meshes\andride003.mesh" />
   <static_mesh name="cinta_010_room3" filename="meshes\cinta_010.mesh" />
   <static_mesh name="cinta_011_room3" filename="meshes\cinta_011.mesh" />
   <static_mesh name="cinta_012_room3" filename="meshes\cinta_012.mesh" />
@@ -191,6 +191,75 @@
   <static_mesh name="Object009_room3" filename="meshes\Object009.mesh" />
   <static_mesh name="Object010_room3" filename="meshes\Object010.mesh" />
   <static_mesh name="Object011_room3" filename="meshes\Object011.mesh" />
+  <static_mesh name="andride015_room3" filename="meshes\andride015.mesh" />
+  <static_mesh name="andride016_room3" filename="meshes\andride016.mesh" />
+  <static_mesh name="andride017_room3" filename="meshes\andride017.mesh" />
+  <static_mesh name="andride018_room3" filename="meshes\andride018.mesh" />
+  <static_mesh name="andride019_room3" filename="meshes\andride019.mesh" />
+  <static_mesh name="andride020_room3" filename="meshes\andride020.mesh" />
+  <static_mesh name="andride021_room3" filename="meshes\andride021.mesh" />
+  <static_mesh name="andride022_room3" filename="meshes\andride022.mesh" />
+  <static_mesh name="andride023_room3" filename="meshes\andride023.mesh" />
+  <static_mesh name="andride024_room3" filename="meshes\andride024.mesh" />
+  <static_mesh name="andride025_room3" filename="meshes\andride025.mesh" />
+  <static_mesh name="andride026_room3" filename="meshes\andride026.mesh" />
+  <static_mesh name="andride027_room3" filename="meshes\andride027.mesh" />
+  <static_mesh name="andride028_room3" filename="meshes\andride028.mesh" />
+  <static_mesh name="andride029_room3" filename="meshes\andride029.mesh" />
+  <static_mesh name="andride030_room3" filename="meshes\andride030.mesh" />
+  <static_mesh name="andride031_room3" filename="meshes\andride031.mesh" />
+  <static_mesh name="andride032_room3" filename="meshes\andride032.mesh" />
+  <static_mesh name="andride033_room3" filename="meshes\andride033.mesh" />
+  <static_mesh name="andride034_room3" filename="meshes\andride034.mesh" />
+  <static_mesh name="andride035_room3" filename="meshes\andride035.mesh" />
+  <static_mesh name="andride036_room3" filename="meshes\andride036.mesh" />
+  <static_mesh name="andride037_room3" filename="meshes\andride037.mesh" />
+  <static_mesh name="andride038_room3" filename="meshes\andride038.mesh" />
+  <static_mesh name="andride039_room3" filename="meshes\andride039.mesh" />
+  <static_mesh name="andride040_room3" filename="meshes\andride040.mesh" />
+  <static_mesh name="andride041_room3" filename="meshes\andride041.mesh" />
+  <static_mesh name="andride042_room3" filename="meshes\andride042.mesh" />
+  <static_mesh name="andride043_room3" filename="meshes\andride043.mesh" />
+  <static_mesh name="andride044_room3" filename="meshes\andride044.mesh" />
+  <static_mesh name="andride045_room3" filename="meshes\andride045.mesh" />
+  <static_mesh name="andride046_room3" filename="meshes\andride046.mesh" />
+  <static_mesh name="andride047_room3" filename="meshes\andride047.mesh" />
+  <static_mesh name="andride048_room3" filename="meshes\andride048.mesh" />
+  <static_mesh name="andride049_room3" filename="meshes\andride049.mesh" />
+  <static_mesh name="andride051_room3" filename="meshes\andride051.mesh" />
+  <static_mesh name="andride052_room3" filename="meshes\andride052.mesh" />
+  <static_mesh name="andride053_room3" filename="meshes\andride053.mesh" />
+  <static_mesh name="andride054_room3" filename="meshes\andride054.mesh" />
+  <static_mesh name="andride055_room3" filename="meshes\andride055.mesh" />
+  <static_mesh name="andride056_room3" filename="meshes\andride056.mesh" />
+  <static_mesh name="andride057_room3" filename="meshes\andride057.mesh" />
+  <static_mesh name="andride058_room3" filename="meshes\andride058.mesh" />
+  <static_mesh name="andride059_room3" filename="meshes\andride059.mesh" />
+  <static_mesh name="andride060_room3" filename="meshes\andride060.mesh" />
+  <static_mesh name="andride061_room3" filename="meshes\andride061.mesh" />
+  <static_mesh name="andride062_room3" filename="meshes\andride062.mesh" />
+  <static_mesh name="andride063_room3" filename="meshes\andride063.mesh" />
+  <static_mesh name="andride064_room3" filename="meshes\andride064.mesh" />
+  <static_mesh name="andride065_room3" filename="meshes\andride065.mesh" />
+  <static_mesh name="andride066_room3" filename="meshes\andride066.mesh" />
+  <static_mesh name="andride067_room3" filename="meshes\andride067.mesh" />
+  <static_mesh name="andride068_room3" filename="meshes\andride068.mesh" />
+  <static_mesh name="andride069_room3" filename="meshes\andride069.mesh" />
+  <static_mesh name="andride070_room3" filename="meshes\andride070.mesh" />
+  <static_mesh name="andride071_room3" filename="meshes\andride071.mesh" />
+  <static_mesh name="andride072_room3" filename="meshes\andride072.mesh" />
+  <static_mesh name="andride073_room3" filename="meshes\andride073.mesh" />
+  <static_mesh name="andride074_room3" filename="meshes\andride074.mesh" />
+  <static_mesh name="andride075_room3" filename="meshes\andride075.mesh" />
+  <static_mesh name="andride076_room3" filename="meshes\andride076.mesh" />
+  <static_mesh name="andride077_room3" filename="meshes\andride077.mesh" />
+  <static_mesh name="andride078_room3" filename="meshes\andride078.mesh" />
+  <static_mesh name="andride079_room3" filename="meshes\andride079.mesh" />
+  <static_mesh name="andride080_room3" filename="meshes\andride080.mesh" />
+  <static_mesh name="andride081_room3" filename="meshes\andride081.mesh" />
+  <static_mesh name="andride082_room3" filename="meshes\andride082.mesh" />
+  <static_mesh name="andride083_room3" filename="meshes\andride083.mesh" />
+  <static_mesh name="andride084_room3" filename="meshes\andride084.mesh" />
   <static_mesh name="container_room3" filename="meshes\container.mesh" />
   <static_mesh name="container001_room3" filename="meshes\container001.mesh" />
   <static_mesh name="container002_room3" filename="meshes\container002.mesh" />

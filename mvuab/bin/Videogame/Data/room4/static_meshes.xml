@@ -16,10 +16,10 @@
   <static_mesh name="Box61_room4" filename="meshes\Box61.mesh" />
   <static_mesh name="Box62_room4" filename="meshes\Box62.mesh" />
   <static_mesh name="Box63_room4" filename="meshes\Box63.mesh" />
-  <static_mesh name="Box151_room4" filename="meshes\Box151.mesh" />
+  <static_mesh name="Box64_room4" filename="meshes\Box64.mesh" />
   <static_mesh name="Box65_room4" filename="meshes\Box65.mesh" />
   <static_mesh name="Box66_room4" filename="meshes\Box66.mesh" />
-  <static_mesh name="Box150_room4" filename="meshes\Box150.mesh" />
+  <static_mesh name="Box67_room4" filename="meshes\Box67.mesh" />
   <static_mesh name="Box68_room4" filename="meshes\Box68.mesh" />
   <static_mesh name="Box69_room4" filename="meshes\Box69.mesh" />
   <static_mesh name="Box70_room4" filename="meshes\Box70.mesh" />
@@ -169,6 +169,8 @@
   <static_mesh name="Box147_room4" filename="meshes\Box147.mesh" />
   <static_mesh name="Box148_room4" filename="meshes\Box148.mesh" />
   <static_mesh name="Line10_room4" filename="meshes\Line10.mesh" />
+  <static_mesh name="Box150_room4" filename="meshes\Box150.mesh" />
+  <static_mesh name="Box151_room4" filename="meshes\Box151.mesh" />
   <static_mesh name="Box152_room4" filename="meshes\Box152.mesh" />
   <static_mesh name="Box153_room4" filename="meshes\Box153.mesh" />
   <static_mesh name="Box155_room4" filename="meshes\Box155.mesh" />
@@ -350,8 +352,11 @@
   <static_mesh name="Lums_pista040_room4" filename="meshes\Lums_pista040.mesh" />
   <static_mesh name="Lums_pista041_room4" filename="meshes\Lums_pista041.mesh" />
   <static_mesh name="Lums_pista042_room4" filename="meshes\Lums_pista042.mesh" />
-  <static_mesh name="sic_Wall009_room4" filename="meshes\sic_Wall009.mesh" />
-  <static_mesh name="sic_Wall010_room4" filename="meshes\sic_Wall010.mesh" />
   <static_mesh name="sic_Ceiling003_room4" filename="meshes\sic_Ceiling003.mesh" />
   <static_mesh name="sic_Ceiling004_room4" filename="meshes\sic_Ceiling004.mesh" />
+  <static_mesh name="Pared_fons001_room4" filename="meshes\Pared_fons001.mesh" />
+  <static_mesh name="columnes_room4" filename="meshes\columnes.mesh" />
+  <static_mesh name="columnes001_room4" filename="meshes\columnes001.mesh" />
+  <static_mesh name="sic_Wall011_room4" filename="meshes\sic_Wall011.mesh" />
+  <static_mesh name="sic_Wall012_room4" filename="meshes\sic_Wall012.mesh" />
 </static_meshes>

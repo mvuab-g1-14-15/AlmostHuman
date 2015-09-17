@@ -6,7 +6,7 @@ filein "ExportGraph.ms"
 filein "Utils.ms"
 filein "Triggers.ms"
 filein "Paths.ms"
-filein "Covers.ms"
+filein "Particles.ms"
 		
 utility UABUtility "UAB Utility" width:170 height:761
 (
@@ -42,8 +42,9 @@ utility UABUtility "UAB Utility" width:170 height:761
 	button SetProperties "Set Properties" pos:[13,342] width:141 height:17
 	
 	button TriggerButton "Triggers" pos:[20,237] width:57 height:17
-	button CoverButton "Covers" pos:[84,237] width:57 height:17
+	button ParticlesButton "Particles" pos:[84,237] width:57 height:17
 	button PathButton "Paths" pos:[20,260] width:57 height:17
+	button BillboardButton "Billboards" pos:[84,260] width:57 height:17
 	
 	
 	on UABUtility open do
@@ -67,7 +68,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
-
+	
 		local l_DirToXML = PathLabel.text + "\\" +LevelList.selected
 		--export Mesh
 		local MeshDir = l_DirToXML + "\\meshes"
@@ -136,33 +137,6 @@ utility UABUtility "UAB Utility" width:170 height:761
 		local graphExporter = RouteAndGraph()
 		graphExporter.Calculate()
 		graphExporter.ExportRouteXML RouteDir
-	)
-	on TriggerButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		TriggerDir = PathLabel.text + "\\triggers.xml"
-		
-		ExportTriggers TriggerDir		
-	)
-	on PathButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		PathDir = PathLabel.text + "\\paths.xml"
-		
-		ExportPaths PathDir		
-	)
-	on CoverButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		PathDir = PathLabel.text + "\\covers.xml"
-		
-		ExportCovers PathDir		
 	)
 	on StaticMeshManagerButton pressed do
 	(		
@@ -277,5 +251,48 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on SetProperties pressed do
 	(
 		filein "UABSetProperties.ms"
+	)
+	on TriggerButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		TriggerDir = PathLabel.text + "\\triggers.xml"
+		
+		ExportTriggers TriggerDir		
+	)
+	on ParticlesButton pressed do
+	(
+		IsEmptyDestPath PathLabel.text
+		PathDir = PathLabel.text + "\\particules.xml"
+		
+		ExportParticles PathDir		
+	)
+	
+	on BillboardButton pressed do
+	(
+		IsEmptyDestPath PathLabel.text
+		PathDir = PathLabel.text + "\\billboards.xml"
+		
+		--ExportCovers PathDir		
+	)
+	
+	on PathButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		PathDir = PathLabel.text + "\\paths.xml"
+		
+		ExportPaths PathDir		
+	)
+	on BillboardButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		PathDir = PathLabel.text + "\\covers.xml"
+		
+		ExportCovers PathDir		
 	)
 )
