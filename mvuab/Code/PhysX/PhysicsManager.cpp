@@ -167,6 +167,10 @@ void CPhysicsManager::Init()
     //#endif
 #endif
     //return m_bIsOk;
+
+#ifndef _USING_MESH_FOR_PHYSX
+	m_pCookingMesh->CreateMeshFromASE("Data/PhysXMeshes.ase", "PhysXMeshes");
+#endif
 }
 
 //----------------------------------------------------------------------------
