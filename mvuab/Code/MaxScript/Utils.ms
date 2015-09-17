@@ -262,16 +262,31 @@ fn GetPaths =
 	return l_Paths
 )
 
-fn GetCovers =
+fn GetBillboards =
 (
 	
-	l_CoverName = #()
+	l_BillboardName = #()
 	
-	for Obj in GetNoExportableObjects() where getUserProp Obj "Cover_Name" != "" AND getUserProp Obj "Cover_Name" != undefined do
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Billboard_Core" != "" AND getUserProp Obj "Billboard_Core" != undefined do
 	(
-		append l_CoverName Obj
+		append l_BillboardName Obj
 	)
 	
-	return l_CoverName
+	return l_BillboardName
 	
 )
+
+fn GetParticles =
+(
+	
+	l_ParticleName = #()
+	
+	for Obj in GetNoExportableObjects() where getUserProp Obj "Particle_Core" != "" AND getUserProp Obj "Particle_Core" != undefined do
+	(
+		append l_ParticleName Obj
+	)
+	
+	return l_ParticleName
+	
+)
+
