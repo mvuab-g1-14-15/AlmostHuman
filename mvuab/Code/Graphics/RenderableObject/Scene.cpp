@@ -41,7 +41,7 @@ void CScene::Update()
     GetResource( "core" )->GetLayers()->GetResource( "characters" )->Update();
 
     // Update the current room
-    if ( mCurrentRoom )
+    if ( mCurrentRoom != NULL && mCurrentRoom->GetLayers() != NULL )
         mCurrentRoom->GetLayers()->Update();
 }
 
@@ -152,6 +152,8 @@ void CScene::UnloadRoom( std::string aRoomName )
     {
         CRenderableObjectsLayersManager* lROLM = lRoom->GetLayers();
         CHECKED_DELETE( lROLM );
+
+        lRoom->SetLayers(NULL);
         lRoom->SetActive( false );
     }
 }

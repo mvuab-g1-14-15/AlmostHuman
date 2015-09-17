@@ -209,9 +209,5 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
 
         CHECKED_DELETE( l_pPhysicUserDataMesh );
         CHECKED_DELETE( l_InstanceMesh );
-
-        CHECKED_DELETE( l_MeshActor );
-        CHECKED_DELETE( l_pPhysicUserDataMesh );
-        CHECKED_DELETE( l_pPhysicUserDataMesh );
     }
 }

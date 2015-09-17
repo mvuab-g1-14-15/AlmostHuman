@@ -7,6 +7,8 @@
 #include "RenderableObject\Room.h"
 #include "EngineManagers.h"
 
+#include <algorithm>
+
 
 CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode &atts): CSceneRendererCommand(atts)
 {
@@ -33,6 +35,12 @@ CRenderSceneSceneRendererCommand::CRenderSceneSceneRendererCommand(CXMLTreeNode 
 void CRenderSceneSceneRendererCommand::AddLayer( CRenderableObjectsManager* aROM )
 {
 	m_Layers.push_back(aROM);
+}
+
+void CRenderSceneSceneRendererCommand::RemoveLayer( CRenderableObjectsManager* aROM )
+{
+    std::vector<CRenderableObjectsManager*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), aROM);
+    if(it != m_Layers.end()) m_Layers.erase(it);
 }
 
 CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
