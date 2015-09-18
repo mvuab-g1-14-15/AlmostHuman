@@ -166,13 +166,14 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
         l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
         l_MeshActor->CreateBody( 1.0f );
     }
-#ifdef _USING_MESH_FOR_PHYSX
     else
     {
-        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-        l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+		if (!PhysXMInstance->GetLoadASE())
+        {
+			NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+			l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+		}
     }
-#endif
 
     if (!PhysXMInstance->CMapManager<CPhysicActor>::Exist( l_Name ) && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
     {
@@ -195,12 +196,11 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
         l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
         l_InstanceMesh->SetActor( l_MeshActor );
     }
-#ifdef _USING_MESH_FOR_PHYSX
     else
     {
-        l_InstanceMesh->SetActor( l_MeshActor );
+		if (!PhysXMInstance->GetLoadASE())
+			l_InstanceMesh->SetActor( l_MeshActor );
     }
-#endif
 
     CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
 

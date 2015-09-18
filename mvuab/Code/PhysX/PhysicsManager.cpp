@@ -50,6 +50,7 @@ CPhysicsManager::CPhysicsManager( void )
     , m_pMyAllocator( NULL )
     , m_pCookingMesh( NULL )
     , m_InitParams( )
+	, m_LoadASE( false )
     , CManager()
 {
 }
@@ -64,6 +65,7 @@ CPhysicsManager::CPhysicsManager( CXMLTreeNode& atts )
     , m_pMyAllocator( NULL )
     , m_pCookingMesh( NULL )
     , m_InitParams( )
+	, m_LoadASE( false )
     , CManager( atts )
 {
 }
@@ -79,6 +81,8 @@ void CPhysicsManager::Init()
     m_pMyAllocator = new CPhysicUserAllocator;
     LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
     m_bIsOk = ( m_pMyAllocator != NULL );
+
+	m_LoadASE = false;
 
     if ( m_bIsOk )
     {
@@ -168,9 +172,8 @@ void CPhysicsManager::Init()
 #endif
     //return m_bIsOk;
 
-#ifndef _USING_MESH_FOR_PHYSX
-	m_pCookingMesh->CreateMeshFromASE("Data/sala1/sala1.ase", "Sala1");
-#endif
+	if (m_LoadASE)
+		m_pCookingMesh->CreateMeshFromASE("Data/sala1/sala1.ase", "Sala1");
 }
 
 //----------------------------------------------------------------------------

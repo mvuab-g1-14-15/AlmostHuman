@@ -251,6 +251,9 @@ public:
   void                    ReleaseElement( const std::string& _ase );
 
   Math::Mat44f ConvertNxF32ToMat44( NxF32 m[16] );
+
+  GET_SET(bool, LoadASE);
+
 private:
   bool          LoadXML();
   void          Release();
@@ -262,6 +265,8 @@ private:
   bool              m_bDebugRenderMode;
   std::string       m_szConfigFileName;
   std::string       m_FileName;
+
+  bool				m_LoadASE;
 
   std::map<int, int>    m_CollisionMasks;
 
