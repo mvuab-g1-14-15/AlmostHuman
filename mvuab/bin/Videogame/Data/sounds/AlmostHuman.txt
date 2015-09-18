@@ -2,24 +2,36 @@ Event	ID	Name			Wwise Object Path	Notes
 	186343927	Play_Youwin			\GUI\Play_Youwin	
 	426840996	Play_Init			\GUI\Play_Init	
 	474386569	Play_Next			\GUI\Play_Next	
+	603937113	Play_Alarm			\Gameplay\Play_Alarm	
 	785979864	Play_Gui_Over			\Default Work Unit\Play_Gui_Over	
 	847470298	Open_Close_Door_Event			\Default Work Unit\Open_Close_Door_Event	
+	1062476537	Play_Spark			\Various\Play_Spark	
 	1292086503	Play_Back			\GUI\Play_Back	
+	1355231703	Play_LightHumming			\Various\Play_LightHumming	
 	2348692292	Play_Over			\GUI\Play_Over	
 	2454594115	Play_Help			\GUI\Play_Help	
+	2456271929	Play_In_Out_Barrel			\Gameplay\Play_In_Out_Barrel	
 	2513968146	Play_LoopGen			\GUI\Play_LoopGen	
+	2757069037	Play_Fan			\Various\Play_Fan	
+	2885688842	Play_Steam			\Various\Play_Steam	
 	3174629258	Play_GameOver			\GUI\Play_GameOver	
 	3552663155	Play_Cash			\GUI\Play_Cash	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	45634969	gui_back	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_back_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_back		4730
-	193371772	gui_next	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_next_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_next		4986
-	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Open_Close_Door		323156
-	444784154	gameOver	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gameOver_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gameOver		80356
-	482623365	loop-gen	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		2822464
-	507701302	gui_over	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		4986
-	869195930	youwin	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		50676
-	937521952	Init	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		136104
-	1048744211	help	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		2945704
+	10864768	Steam	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\steam(vapor)_short_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Steam		25859
+	45634969	gui_back	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_back_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_back		1415
+	193371772	gui_next	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_next_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_next		1065
+	294083481	LightHumming	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Light Humming_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\LightHumming		22420
+	328627046	enter_leave_barrel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\enter_leave_barrel_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\enter_leave_barrel		9667
+	418116809	Fan	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Fan_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Fan		29812
+	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Open_Close_Door		31048
+	444784154	gameOver	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gameOver_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gameOver		19305
+	482623365	loop-gen	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		339473
+	507701302	gui_over	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		1237
+	707043063	Spark	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Spark		170387
+	709423413	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\alarm2_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		61832
+	869195930	youwin	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		11008
+	937521952	Init	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		29300
+	1048744211	help	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		403359
 	1049674178	cash	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\cash_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\cash		15078
 

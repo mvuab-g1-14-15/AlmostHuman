@@ -13,7 +13,8 @@ initialized1 = false
 
 function load_basics()
 	-- basic loads
-	scene:ActivateRoom("sala1")
+	--scene:ActivateRoom("sala1")
+	scene:ActivateRoom("sala4")
 	--scene:ActivateRoom("room2")
 	--scene:ActivateRoom("room3")
 	--scene:ActivateRoom("room4")
@@ -158,15 +159,15 @@ function update_gameplay()
 		
 		if action_manager:DoAction("LoadSala4") then
 			local lRoom
-			if scene:Exist("room4") then
-				lRoom = scene:GetResource("room4")
+			if scene:Exist("sala4") then
+				lRoom = scene:GetResource("sala4")
 				if lRoom:GetActive() then
-					scene:UnloadRoom("room4")
+					scene:UnloadRoom("sala4")
 				else
-					scene:ActivateRoom("room4")
+					scene:ActivateRoom("sala4")
 				end
 			else
-				scene:ActivateRoom("room4")
+				scene:ActivateRoom("sala4")
 			end
 		end
 		

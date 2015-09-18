@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<room path="Data\sala4">
+  <layer name="solid" file="solid_layer.xml" />
+</room>
