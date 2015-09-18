@@ -17,6 +17,7 @@
 //--------------------------
 
 #include "Utils/Defines.h"
+#include "Utils\BaseUtils.h"
 
 #if defined( _DEBUG )
 #include "Memory\MemLeaks.h"
@@ -161,20 +162,32 @@ bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<st
 {
   bool isOk = false;
 
-  // PARALELIZAR ESTE BUCLE!
-  for ( unsigned int i = 0; i < _Vertices.size(); i++ )
+  int lSize = _Vertices.size();
+
+  //TIMER_START();
+  //#pragma omp parallel for
+  for ( int i = 0; i < lSize; ++i )
   {
     std::ostringstream s;
     s << _NameMesh << i;
     std::string l_Name( s.str() );
-    std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( l_Name );
+
+    std::map<std::string, NxTriangleMesh*>::iterator it;
+	//#pragma omp atomic
+	it = m_TriangleMeshes.find( l_Name );
 
     if ( it != m_TriangleMeshes.end() ) continue;
 
     NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices[i], _Faces[i] );
 
-    if ( l_TriangleMesh != 0 ) m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
+    if ( l_TriangleMesh != 0 ) 
+	{
+		//#pragma omp atomic
+		m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
+	}
   }
+
+  //TIMER_STOP( "Generating the physx mesh with the ase." );
 
   return isOk;
 }

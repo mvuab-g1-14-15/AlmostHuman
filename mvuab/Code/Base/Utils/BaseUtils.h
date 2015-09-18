@@ -17,7 +17,7 @@
 #include <string>
 #include "Defines.h"
 
-#ifndef _DEBUG
+#ifdef _DEBUG
     #define TIMER_START() \
         LARGE_INTEGER g_timeFreq = { 0 }, g_lastTime = { 0 }, g_actualTime = { 0 }; \
         QueryPerformanceCounter(&g_lastTime); \

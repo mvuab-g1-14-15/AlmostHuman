@@ -43,6 +43,8 @@ void CAnimatedModelsManager::Init()
 
     if( lFile.LoadAndFindNode( mConfigPath.c_str(),"animated_models", lNode ) )
     {
+		std::vector<CAnimatedCoreModel*> lACM;
+		//TIMER_START();
         for ( uint32 i = 0, lCount = lNode.GetNumChildren(); i < lCount; ++i )
         {
             const CXMLTreeNode& lCurrentNode = lNode(i);
@@ -51,18 +53,24 @@ void CAnimatedModelsManager::Init()
 
             CAnimatedCoreModel* lAnimatedCoreModel = new CAnimatedCoreModel( name );
 
-            TIMER_START();
             if( lAnimatedCoreModel->Load( path ) && AddResource( name, lAnimatedCoreModel ) )
             {
-                lAnimatedCoreModel->LoadVertexBuffer( GraphicsInstance );
+				lACM.push_back(lAnimatedCoreModel);
             }
             else
             {
                 LOG_ERROR_APPLICATION( "The animated core model %s could not be loaded", name.c_str() );
                 CHECKED_DELETE( lAnimatedCoreModel );
             }
-            TIMER_STOP(name.c_str());
         }
+		//TIMER_STOP( "Animated models." );
+
+		int lSize( lACM.size() );
+		TIMER_START();
+		#pragma omp parallel for shared(lSize)
+		for(int i = 0; i < lSize; ++i)
+			lACM[i]->LoadVertexBuffer( GraphicsInstance );
+		TIMER_STOP( "Animated models. LoadVertexBuffer." );
     }
 }
 
