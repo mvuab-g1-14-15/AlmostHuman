@@ -32,13 +32,25 @@ bool CPhysicASELoader::ReadMeshFromASE(	std::string fileName, std::vector<std::v
 
 	char line[512];
 	int linenbr = 0;
+	
+	std::string lName;
 	while (!feof(f))
 	{
 		fgets(line, 512, f);
 		char* l = TrimFront(line);
+
+		if (!strncmp(l, "*NODE_NAME ", 11))
+		{
+			std::string lLine( l );
+			lName = lLine.substr(12);
+		}
+
 		if (!strncmp(l, "*MESH {", 7)) 
 		{
 			ReadMeshFromASE_aux(f, vertices, faces);
+
+			const std::string& msg( "Vertices ans faces are 0 in mesh " + lName );
+			ASSERT( !vertices.empty() && !faces.empty(), msg.c_str());
 
 			_Vertices.push_back(vertices);
 			_Faces.push_back(faces);

@@ -161,6 +161,7 @@ bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<st
 {
   bool isOk = false;
 
+  // PARALELIZAR ESTE BUCLE!
   for ( unsigned int i = 0; i < _Vertices.size(); i++ )
   {
     std::ostringstream s;
