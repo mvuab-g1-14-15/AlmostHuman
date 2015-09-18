@@ -84,7 +84,8 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 {
     m_NumVtxs = 0;
     m_NumFaces = 0;
-    for(int i = 0; i < m_CalCoreModel->getCoreMeshCount(); ++i)
+	int lCoreMeshCount( m_CalCoreModel->getCoreMeshCount() );
+    for(int i = 0; i < lCoreMeshCount; ++i)
     {
         CalCoreMesh *l_CalCoreMesh = m_CalCoreModel->getCoreMesh(i);
         for(int j = 0; j < l_CalCoreMesh->getCoreSubmeshCount(); ++j)
@@ -98,7 +99,6 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
         }
     }
 
-    
     CHECKED_DELETE(m_CalHardwareModel);
     m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
     unsigned short *l_Idxs = new unsigned short[m_NumFaces * 3];

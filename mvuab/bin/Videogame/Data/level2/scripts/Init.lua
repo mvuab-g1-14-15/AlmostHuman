@@ -12,15 +12,18 @@ g_Barrels = {}
 initialized1 = false
 
 function load_basics()
+	engine:Trace("Init the load_basics()")
 	-- basic loads
 	--scene:ActivateRoom("sala1")
 	scene:ActivateRoom("sala4")
 	--scene:ActivateRoom("room2")
 	--scene:ActivateRoom("room3")
 	--scene:ActivateRoom("room4")
+	engine:Trace("Finish the load_basics()")
 end
 
 function load_gameplay()
+	engine:Trace("Init the load_gameplay()")
     g_Player = CPlayer()
 	g_Player:SetEnergy(0.0)
 	if g_HUD == nil then
@@ -33,6 +36,7 @@ function load_gameplay()
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+	engine:Trace("Finish the load_gameplay()")
 end
 
 function update_gameplay()
