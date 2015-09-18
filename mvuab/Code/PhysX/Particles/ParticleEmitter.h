@@ -32,83 +32,40 @@ class CParticleEmitter :  public CName
         const CParticle* GetParticle( const uint32 aIdx) const;
         CParticle* GetParticle( const uint32 aIdx);
 
-        const Math::Vect3f& GetMinPoint()
-        {
-            return mMinPnt;
-        }
+		ps::Emissions GetEmissions() const { return mEmissions;}
 
-        const Math::Vect3f& GetMaxPoint()
-        {
-            return mMaxPnt;
-        }
+    private:
+		ps::TEmitterType            mType;
 
-		float GetRadialAngle() const { return mRadialAngle; }
-		void  SetRadialAngle( float aRadialAngle ) { mRadialAngle = aRadialAngle; }
-
-		float GetMinRadius() const { return mMinRadius; }
-		void  SetMinRadius( float aRadius ) { mMinRadius = aRadius; }
-
-		float GetRadius() const { return mRadius; }
-		void  SetRadius( float aRadius ) { mRadius = aRadius; }
-
-		float GetRadiusSpace() const { return mRadiusSpace; }
-
-    protected:
         typedef CParticle*                TParticleContainer;
-        typedef std::vector < CTexture*>  TTextureContainer;
-        bool                        mIsLoop;
-        bool                        mIsImmortal;
-        bool                        mIsActive;
-        bool                        mKeepSize;
-		uint32                      mAliveParticlesCount;
-		float32						mTimeSinceLastEmission;
-		float32                     mTotalTime;
-        float32                     mMaxLife;
-        float32                     mActualTime;
-		float32                     mEmissionTime;
-        float32                     mAlpha;
-        float32                     mGravity;
-		float32                     mRadiusSpace;
-        float32                     mOndSpeedDirectionMin;
-        float32                     mOndSpeedDirectionMax;
-        Math::Vect3f                mInitialDirectionMin;
-        Math::Vect3f                mInitialDirectionMax;
-        Math::CColor                mColorMin;
-        Math::CColor                mColorMax;
-        Math::Vect2f                mSpeed;
-        Math::Vect2f                mRadialSpeed;
-        Math::Vect2f                mOndSpeed;
-        Math::Vect2u                mAliveParticles;
-        Math::Vect2f                mSize;
-        Math::Vect2f                mTimeToLive;
-        Math::Vect2f                mParticlesXEmission;
-        CEffectTechnique*           mTechnique;
-        TTextureContainer           mTextures;
-        TParticleContainer          mParticles;
-        TParticleContainer          mDeadParticles;
-        Math::Vect3f                mMinPnt;
-        Math::Vect3f                mMaxPnt;
-        bool                        mFlipUVHorizontal;
-        bool                        mFlipUVVertical;
+		TParticleContainer				  mParticles;
+        TParticleContainer                mDeadParticles;
 
-		float						mRadialAngle;
-		float						mMinRadius;
-		float						mRadius;
+		ps::EmitterSpeedPropery		      mLinearSpeed;
+		ps::EmitterSpeedPropery			  mRadialSpeed;
+		ps::EmitterSpeedPropery			  mOndulativeSpeed;
 
-        ps::TSpawnFunction          mSpawnFn;
+		uint32							  mAliveParticlesCount;		// The number of alive particles
+		ps::ParticlesProperties           mParticleProperies;
+		ps::Emissions					  mEmissions;
+		ps::TSpawnFunction                mSpawnFn;
 
-        ps::TEmitterType            mType;
+        bool							  mIsLoop;					// If the emitter after his dead has to born again, as the Phoenix ;D
+        bool							  mIsActive;				// If the emitter is active
 
-        CShape*                     mShape;
+		float32						      mTimeSinceLastEmission;   // The time since the emitter has emitted some particles
+        float32                           mMaxLife;					// The maxium life of the emitter
+        float32                           mActualTime;			    // The current time of the emitter
+        float32                           mGravity;
+        
+        CRenderableVertexs                *mRV;
+        TPARTICLE_VERTEX_INSTANCE         *mParticlesStream;
 
-        CRenderableVertexs          *mRV;
-        TPARTICLE_VERTEX_INSTANCE   *mParticlesStream;
-
-        void LoadFromNode( const CXMLTreeNode& atts );
     private:
         void EmitParticles();
         void KillParticles();
         void ActivateTextures();
+		void LoadFromNode( const CXMLTreeNode& atts );
 };
 
 //-----------------------------------------------------------------------------------------

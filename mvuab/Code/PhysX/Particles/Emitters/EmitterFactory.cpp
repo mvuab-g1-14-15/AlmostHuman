@@ -14,15 +14,20 @@ Vect3f GetSphereSpawnPosition( CParticleEmitter* aEmitter )
 Vect3f GetBoxSpawnPosition( CParticleEmitter* aEmitter )
 {
     ASSERT(aEmitter, "Null Emitter");
-    return baseUtils::RandRange( aEmitter->GetMinPoint(), aEmitter->GetMaxPoint() );
+	ps::Emissions lEmissions = aEmitter->GetEmissions();
+	return baseUtils::RandRange( -lEmissions.mCubicSize, lEmissions.mCubicSize );
 }
 
 Vect3f GetCircleSpawnPosition( CParticleEmitter* aEmitter )
 {
     ASSERT(aEmitter, "Null Emitter");
+	
+	ps::Emissions lEmissions = aEmitter->GetEmissions();
+	
 	float lAngle = baseUtils::RandRange(0.0f, 360.0f);
 	Vect3f lVector( Math::Utils::Cos( lAngle ), 0.0f, Math::Utils::Sin( lAngle ) );
-    return lVector * baseUtils::RandRange(aEmitter->GetMinRadius(), aEmitter->GetRadius() );
+
+	return lVector * baseUtils::RandRange(lEmissions.mMinRadius, lEmissions.mMaxRadius );
 }
 
 Vect3f GetLineSpawnPosition( CParticleEmitter* aEmitter )
@@ -38,6 +43,16 @@ Vect3f GetPointSpawnPosition( CParticleEmitter* aEmitter )
 
 Vect3f GetRadialSpawnPosition( CParticleEmitter* aEmitter )
 {
+	ASSERT(aEmitter, "Null Emitter");
+	
+	ps::Emissions lEmissions = aEmitter->GetEmissions();
+	
+	float lAngle = baseUtils::RandRange(0.0f, 360.0f);
+	Vect3f lVector( Math::Utils::Cos( lAngle ), 0.0f, Math::Utils::Sin( lAngle ) );
+
+	return lVector * baseUtils::RandRange(lEmissions.mMinRadius, lEmissions.mMaxRadius );
+
+	/*
 	float lAngle = aEmitter->GetRadialAngle();
 
 	Vect3f lVector( Math::Utils::Cos( lAngle ), 0.0f, Math::Utils::Sin( lAngle ) );
@@ -45,6 +60,7 @@ Vect3f GetRadialSpawnPosition( CParticleEmitter* aEmitter )
 	aEmitter->SetRadialAngle( lAngle + aEmitter->GetRadiusSpace() );
 
 	return lVector * aEmitter->GetRadius();
+	*/
 }
 
 ps::TEmitterType StrToEmitterType( const std::string & aEmitterStr )

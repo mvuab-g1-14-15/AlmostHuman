@@ -1,149 +1,19 @@
 <particles_systems>
-	
-	<particle_system_core name="smoke">
+	<particle_system_core name="smoke" sound="">
 		<cube_emitter file="Data/core/emitters/smoke_emitter.xml"/>
-		<cube_emitter file="Data/core/emitters/smoke_emitter_2.xml"/>
+		<!--<cube_emitter file="Data/core/emitters/smoke_emitter_2.xml"/>-->
 	</particle_system_core>
 	
 	<particle_system_core name="rays">
-		<cube_emitter file="Data/core/emitters/ray_emitter.xml"/>
-		<cube_emitter file="Data/core/emitters/ray_emitter_2.xml"/>
-		<cube_emitter file="Data/core/emitters/ray_emitter_3.xml"/>
+		<!--<cube_emitter file="Data/core/emitters/ray_emitter.xml"/>-->
+		<!--<cube_emitter file="Data/core/emitters/ray_emitter_2.xml"/>-->
+		<!--<cube_emitter file="Data/core/emitters/ray_emitter_3.xml"/>-->
 	</particle_system_core>
 	
 	<particle_system_core name="charge">
-		<radial_emitter file="Data/core/emitters/spiral_emitter.xml"/>
-		<circle_emitter file="Data/core/emitters/spiral_emitter2.xml"/>
-		<circle_emitter file="Data/core/emitters/spiral_emitter3.xml"/>
-		<cube_emitter file="Data/core/emitters/spiral_emitter4.xml"/>
+		<!--<radial_emitter file="Data/core/emitters/spiral_emitter.xml"/>-->
+		<!--<circle_emitter file="Data/core/emitters/spiral_emitter2.xml"/>-->
+		<!--<circle_emitter file="Data/core/emitters/spiral_emitter3.xml"/>-->
+		<!--<cube_emitter file="Data/core/emitters/spiral_emitter4.xml"/>-->
 	</particle_system_core>
-	
-	<particle_system_core name="smoke2">
-	<cube_emitter 
-	    name="fire3"
-		loop="false" 
-		immortal="true" 
-		active="true" 
-		alive_particles="0 1000" 
-		speed="1.8 2" 
-		emission_time="10.0" 
-		time_to_live="10 10" 
-		particle_size_range="0 4" 
-		particles_per_emission="1 3" 
-		min_color="0.8 0.0 0.0" 
-		max_color="1 0.0 0.0" 
-		min_initial_direction="0.5 0.1 0.0" 
-		max_initial_direction="0.5 0.1 0.0" 
-		gravity="-1.5" 
-		radial_speed="1 50.0" 
-		ondulative_speed="0.0 0.0" 
-		min_ondulative_direction="0.0" 
-		max_ondulative_direction="0.0" 
-		cubic_size="0.5 0.5 0.5"
-		technique="SmokeTechnique"
-		alpha="0.5">
-		<texture name="Data/textures/particles/smoke_1.png"/>
-	</cube_emitter>
-		<cube_emitter 
-	    name="fire"
-		loop="false" 
-		immortal="true" 
-		active="true" 
-		alive_particles="0 10" 
-		speed="0.3 0.4" 
-		emission_time="10.0" 
-		time_to_live="0.5 4" 
-		particle_size_range="0 2" 
-		particles_per_emission="1 1" 
-		min_color="0.8 0.0 0.0" 
-		max_color="1 0.0 0.0" 
-		min_initial_direction="0.0 0.0 0.0" 
-		max_initial_direction="1.0 1.0 1.0" 
-		gravity="1.0" 
-		radial_speed="0.0 100.0" 
-		ondulative_speed="0.0 0.0" 
-		min_ondulative_direction="0.0" 
-		max_ondulative_direction="0.0" 
-		cubic_size="0.0 0.0 0.0"
-		technique="SmokeTechnique"
-		alpha="0.5">
-		<texture name="Data/textures/particles/fire_1.png"/>
-	</cube_emitter>
-	<cube_emitter 
-	    name="fire2"
-		loop="false" 
-		immortal="true" 
-		active="true" 
-		alive_particles="0 20" 
-		speed="0.2 0.3" 
-		emission_time="10.0" 
-		time_to_live="0.5 4" 
-		particle_size_range="0 3" 
-		particles_per_emission="1 2" 
-		min_color="1.0 0.0 0.0" 
-		max_color="1 0.0 0.0" 
-		min_initial_direction="1.0 0.0 1.0" 
-		max_initial_direction="1.0 1.0 1.0" 
-		gravity="1.0" 
-		radial_speed="0.0 5.0" 
-		ondulative_speed="0.0 0.0" 
-		min_ondulative_direction="0.0" 
-		max_ondulative_direction="0.0" 
-		cubic_size="0.0 0.0 0.0"
-		technique="SmokeTechnique"
-		alpha="0.5">
-		<texture name="Data/textures/particles/fire_1.png"/>
-	</cube_emitter>
-	<cube_emitter 
-	    name="spark"
-		loop="false" 
-		immortal="true" 
-		active="true" 
-		alive_particles="0 20" 
-		speed="5 10" 
-		emission_time="10.0" 
-		time_to_live="0.5 1" 
-		particle_size_range="0 2" 
-		particles_per_emission="1 5" 
-		min_color="1.0 0.0 0.0" 
-		max_color="1 0.0 0.0" 
-		min_initial_direction="0.0 0.0 0.0" 
-		max_initial_direction="1.0 1.0 1.0" 
-		gravity="1.0" 
-		radial_speed="0.0 0.0" 
-		ondulative_speed="0.0 2.0" 
-		min_ondulative_direction="0.0" 
-		max_ondulative_direction="0.0" 
-		cubic_size="0.0 0.0 0.0"
-		technique="SmokeTechnique"
-		alpha="0.5">
-		<texture name="Data/textures/particles/spark6.png"/>
-	</cube_emitter>
-	<cube_emitter 
-	    name="sparks2"
-		loop="false" 
-		immortal="true" 
-		active="true" 
-		alive_particles="0 20" 
-		speed="1.5 6.0" 
-		emission_time="10.0" 
-		time_to_live="4.0 6.0" 
-		particle_size_range="1 4" 
-		particles_per_emission="1 1" 
-		min_color="0.5 0.0 0.0" 
-		max_color="1.0 1.0 1.0" 
-		min_initial_direction="0.0 1.0 0.0" 
-		max_initial_direction="1.0 1.0 1.0" 
-		gravity="1.0" 
-		radial_speed="0.0 30.0" 
-		ondulative_speed="0.0 0.0" 
-		min_ondulative_direction="0.0" 
-		max_ondulative_direction="0.0" 
-		cubic_size="0.0 0.0 0.0"
-		technique="SmokeTechnique"
-		alpha="0.5">
-		<texture name="Data/textures/particles/spark6.png"/>
-	</cube_emitter> 
-	</particle_system_core>
-	
 </particles_systems>

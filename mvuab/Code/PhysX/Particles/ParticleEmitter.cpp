@@ -25,6 +25,71 @@ TT1_VERTEX lVtx[lVtxCount] =
 
 unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
+namespace
+{
+	ps::EmitterSpeedPropery GetSpeedFromNode( const CXMLTreeNode& aNode )
+	{
+		ps::EmitterSpeedPropery lSpeed = 
+		{
+			aNode.GetAttribute<Math::Vect2f>("value", Math::Vect2f(0.0f, 0.0f) ),
+			aNode.GetAttribute<Math::Vect3f>("min_dir", Math::Vect3f(0.0f, 0.0f, 0.0f ) ),
+			aNode.GetAttribute<Math::Vect3f>("max_dir", Math::Vect3f(0.0f, 0.0f, 0.0f ) ),
+		};
+
+		return lSpeed;
+	}
+
+	ps::ParticleVisualProperty GetVisualProperyFromNode( const CXMLTreeNode& aNode )
+	{
+		ps::ParticleVisualProperty lVisualProperty;
+
+		// Fill the other data
+		lVisualProperty.mAlpha		= aNode.GetAttribute<float>("alpha", 0.0f);
+		lVisualProperty.mMinColor   = aNode.GetAttribute<Math::CColor>("min_color", Math::CColor(0.0f, 0.0f, 0.0f, 0.0f ) );
+		lVisualProperty.mMaxColor   = aNode.GetAttribute<Math::CColor>("max_color", Math::CColor(0.0f, 0.0f, 0.0f, 0.0f ) );
+		lVisualProperty.mKeepSize   = aNode.GetAttribute<bool>("keep_size", false);
+		lVisualProperty.mSizeRange  = aNode.GetAttribute<Math::Vect2f>("size_range", Math::Vect2f(0.0f, 0.0f) );
+		lVisualProperty.mTechnique  = aNode.GetAttribute<CEffectTechnique>("technique");
+
+		return lVisualProperty;
+	}
+
+	ps::Emissions GetEmissionsFromNode( const CXMLTreeNode& aNode )
+	{
+		ps::Emissions lEmissions = 
+		{
+			aNode.GetAttribute<float>("emission_time", 0.0f),
+			aNode.GetAttribute<bool>("modify_initial_angle", false),
+			aNode.GetAttribute<Math::Vect2u>("particles_per_emission", Math::Vect2u(0, 0) ),
+			aNode.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f(0.0f, 0.0f, 0.0f ) ),
+			aNode.GetAttribute<float>("min_radius", 0.0f),
+			aNode.GetAttribute<float>("max_radius", 0.0f),
+			aNode.GetAttribute<float>("angle_step", 0.0f),
+		};
+
+		return lEmissions;
+	}
+
+	ps::ParticlesProperties GetParticlePropertiesFromNode( const CXMLTreeNode& aNode )
+	{
+		ps::ParticlesProperties lParticleProps;
+
+		for( uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount; ++i )
+		{
+			const CXMLTreeNode& lNode = aNode(i);
+			if( lNode.GetName() == "texture" )
+			{
+				lParticleProps.mTexture						= ps::ParticleTexture();
+				lParticleProps.mTexture.mValue				= lNode.GetAttribute<CTexture>("name");
+				lParticleProps.mTexture.mFlipUVHorizontal  = lNode.GetAttribute<bool>("flip_uv_horizontal", false);
+				lParticleProps.mTexture.mFlipUVVertical    = lNode.GetAttribute<bool>("flip_uv_vertical"  , false);
+			}
+		}
+
+		return lParticleProps;
+	}
+}
+
 CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction aFunction )
     : CName()
     , mRV(0)
@@ -33,26 +98,11 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
     , mIsLoop( false )
     , mIsActive( false )
     , mAliveParticlesCount(0)
-    , mEmissionTime( 1.0f )
-    , mAliveParticles( Math::Vect2u( 0, 0 ) )
-    , mTimeToLive(Math::Vect2f(1.0f, 1.0f))
     , mActualTime(0.0f)
-    , mSize(Math::Vect2f(1.0f, 1.0f))
-    , mSpeed(Math::Vect2f(1.0f, 1.0f))
-    , mTechnique( 0 )
-    , mIsImmortal( 0 )
-    , mParticlesXEmission(Math::Vect2f(1.0f, 1.0f))
     , mGravity(0.f)
     , mParticles( 0 )
-    , mMinPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
-    , mMaxPnt( Math::Vect3f(1.0f, 1.0f, 1.0f) )
-    , mAlpha( 0.0f )
-    , mKeepSize( false )
-	, mRadialAngle( 0.0f )
-	, mRadius( 0.0f )
 	, mTimeSinceLastEmission(0.0f)
-	, mTotalTime(0.0f)
-	, mRadiusSpace( 0.0f )
+	, mMaxLife(0.0f)
 {
 }
 
@@ -60,72 +110,57 @@ CParticleEmitter::~CParticleEmitter()
 {
     CHECKED_DELETE_ARRAY(mParticlesStream);
     CHECKED_DELETE_ARRAY(mParticles);
-
-    CHECKED_DELETE(mShape);
     CHECKED_DELETE(mRV);
 }
 
 void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
 {
-  SetName(atts.GetAttribute<std::string>("name", "no_name"));
+    SetName(atts.GetAttribute<std::string>("name", "no_name"));
     mIsLoop               = atts.GetAttribute<bool>("loop", false );
-    mIsImmortal           = atts.GetAttribute<bool>("immortal", false );
     mIsActive             = atts.GetAttribute<bool>("active", false );
-    mKeepSize             = atts.GetAttribute<bool>("keep_size", false );
-    mAliveParticles       = atts.GetAttribute<Math::Vect2u>("alive_particles", 0);
-    mSpeed                = atts.GetAttribute<Math::Vect2f>("speed", 0);
-    mEmissionTime         = atts.GetAttribute<float32>("emission_time", 0.0f );
-    mTimeToLive           = atts.GetAttribute<Math::Vect2f>("time_to_live", Math::Vect2f(1.0f, 1.0f));
-    mSize                 = atts.GetAttribute<Math::Vect2f>("particle_size_range", 0.0f );
-    mTechnique            = atts.GetAttribute<CEffectTechnique>("technique");
-    mAlpha                = atts.GetAttribute<float32>("alpha", 1.0f);
-    mParticlesXEmission   = atts.GetAttribute<Math::Vect2f>("particles_per_emission", Math::Vect2f(1.0f, 1.0f) );
-    mColorMin             = atts.GetAttribute<Math::CColor>("min_color", Math::colWHITE );
-    mColorMax             = atts.GetAttribute<Math::CColor>("max_color", mColorMin );
-    mInitialDirectionMin  = atts.GetAttribute<Math::Vect3f>("min_initial_direction", Math::Vect3f());
-    mInitialDirectionMax  = atts.GetAttribute<Math::Vect3f>("max_initial_direction", mInitialDirectionMin );
-    mGravity              = atts.GetAttribute<float32>("gravity", 1.0f );
-    mRadialSpeed          = atts.GetAttribute<Math::Vect2f>("radial_speed", 1.0f );
-    mOndSpeed             = atts.GetAttribute<Math::Vect2f>("ondulative_speed", Math::Vect2f(1.0f, 1.0f) );
-    mOndSpeedDirectionMin = atts.GetAttribute<float32>("min_ondulative_direction", 0.0);
-    mOndSpeedDirectionMax = atts.GetAttribute<float32>("max_ondulative_direction", mOndSpeedDirectionMin );
 
-    // Box Emitter
-    Math::Vect3f lSize = atts.GetAttribute<Math::Vect3f>("cubic_size", Math::Vect3f());
-    mMinPnt = -lSize;
-    mMaxPnt =  lSize;
-
-	// Radial Emitter
-	mRadius				  = atts.GetAttribute<float32>("radius", 0.0f );
-	mMinRadius		      = atts.GetAttribute<float32>("min_radius", 0.0f );
-    mRadiusSpace		  = atts.GetAttribute<float32>("radius_space", 0.0f );
-
-    // Get textures
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
     {
         const CXMLTreeNode& lSubNode = atts(i);
         const std::string& lTagName = lSubNode.GetName();
-        if( lTagName == "texture" )
-        {
-            CTexture* lTexture = lSubNode.GetAttribute<CTexture>("name");
-            mFlipUVHorizontal  = lSubNode.GetAttribute<bool>("flip_uv_horizontal", false );
-            mFlipUVVertical    = lSubNode.GetAttribute<bool>("flip_uv_vertical", false );
-            if( lTexture )
-            {
-                mTextures.push_back(lTexture);
-            }
-        }
+        if( lTagName == "speeds" )
+		{
+			for( uint32 iSpeed = 0, lSpeedCount = lSubNode.GetNumChildren() ; iSpeed < lSpeedCount; ++iSpeed )
+			{
+				const CXMLTreeNode& lSpeedNode = lSubNode(iSpeed);
+				const std::string& lSpeedTag = lSubNode.GetName();
+				if( lSpeedTag == "linear" )
+				{
+					mLinearSpeed = GetSpeedFromNode( lSpeedNode );
+				}
+				else if ( lSpeedTag == "radial" )
+				{
+					mRadialSpeed = GetSpeedFromNode( lSpeedNode );
+				}
+				else if ( lSpeedTag == "ondulative" )
+				{
+					mOndulativeSpeed = GetSpeedFromNode( lSpeedNode );
+				}
+				else if ( lSpeedTag == "gravity" )
+				{
+					mGravity = lSpeedNode.GetAttribute<float>("value", 1.0f);
+				}
+			}
+		}
+		else if( lTagName == "particles" )
+		{
+			mParticleProperies = GetParticlePropertiesFromNode( lSubNode );
+		}
     }
 
     // Reserve the memory for the particles
-    mParticles = new CParticle[mAliveParticles.y];
-    ZeroMemory(mParticles, mAliveParticles.y * sizeof(CParticle) );
+	mParticles = new CParticle[mParticleProperies.mMaxAliveParticles];
+    ZeroMemory(mParticles, mParticleProperies.mMaxAliveParticles * sizeof(CParticle) );
 
-    mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mAliveParticles.y];
-    ZeroMemory(mParticles, mAliveParticles.y * sizeof(TPARTICLE_VERTEX_INSTANCE) );
+    mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mParticleProperies.mMaxAliveParticles];
+    ZeroMemory(mParticles, mParticleProperies.mMaxAliveParticles * sizeof(TPARTICLE_VERTEX_INSTANCE) );
 
-    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mAliveParticles.y );
-    mShape = new CBoxShape();
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>(GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mParticleProperies.mMaxAliveParticles );
 }
 
 bool CParticleEmitter::Init( const CXMLTreeNode& atts )
@@ -148,11 +183,11 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 void CParticleEmitter::Update( float dt )
 {
 	mTimeSinceLastEmission += dt;
-	mTotalTime += dt;
+	mActualTime += dt;
 
     KillParticles();
     EmitParticles();
-    for( uint32 i = 0, lParticles = mAliveParticles.y; i < lParticles; ++i)
+	for( uint32 i = 0, lParticles = mParticleProperies.mMaxAliveParticles; i < lParticles; ++i)
     {
         if(mParticles[i].IsAlive())
         {
@@ -161,10 +196,7 @@ void CParticleEmitter::Update( float dt )
             mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle());
             const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
 
-            if( mKeepSize )
-              mParticlesStream[i].size = lParticle.GetSize();
-            else
-              mParticlesStream[i].size = Math::Utils::Lerp<float32>(mSize.x, mSize.y, lPercentage);//lParticle.GetSize();
+			mParticlesStream[i].size = ( mParticleProperies.KeepSize() ) ? lParticle.GetSize() : mParticleProperies.Size(lPercentage);
             
             mParticlesStream[i].alpha= lParticle.GetAlpha();
             if( lPercentage > 0.90f )
@@ -191,47 +223,37 @@ void CParticleEmitter::Update( float dt )
 
 void CParticleEmitter::Render()
 {
-    //mShape->Render( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") );
     CGraphicsManager* lGM = GraphicsInstance;
-
     ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->AddInstancinguffer(lGM, mParticlesStream);
     ActivateTextures();
-
-    ((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->Render(lGM, mTechnique);
+	((CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE> *)mRV)->Render(lGM, mParticleProperies.mVisualProperty.mTechnique );
 }
 
 void CParticleEmitter::EmitParticles()
 {
-  if( ( mEmissionTime < mTimeSinceLastEmission ) && IsActive() )
+  if( ( mActualTime < mTimeSinceLastEmission ) && IsActive() )
   {
-    const uint32 lParticlesToEmit = (uint32)RandRange( mParticlesXEmission.x, mParticlesXEmission.y );
-    for( uint32 i = 0, lEmittedParticles = 0; i < mAliveParticles.y &&
-            mAliveParticlesCount < mAliveParticles.y && lEmittedParticles < lParticlesToEmit ; ++i )
-    {
+	  const uint32 lParticlesToEmit = mEmissions.GetParticlesToEmit();
+	  for( uint32 i = 0, lEmittedParticles = 0; i < mParticleProperies.mMaxAliveParticles && mAliveParticlesCount < mParticleProperies.mMaxAliveParticles && lEmittedParticles < lParticlesToEmit ; ++i )
+	  {
         CParticle& lParticle = mParticles[i];
 
         if( !lParticle.IsAlive() )
         {
             lParticle.SetIsAlive(true);
             lParticle.SetGravity( mGravity );
-            lParticle.SetSpeed(RandRange(mSpeed.x, mSpeed.y));
-            lParticle.SetDirection(RandRange(mInitialDirectionMin, mInitialDirectionMax).Normalize());
-            lParticle.SetSize(RandRange(mSize.x, mSize.y));
-            lParticle.SetTimeToLive(RandRange(mTimeToLive.x, mTimeToLive.y));
-            lParticle.SetPosition(mSpawnFn(this));
-            lParticle.SetOndSpeed(RandRange(mOndSpeed.x, mOndSpeed.y));
-            lParticle.SetOndSpeedDirection(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
-            lParticle.SetRadialSpeed(RandRange(mRadialSpeed.x, mRadialSpeed.y));
-            lParticle.SetColor(RandRange(mColorMin, mColorMax));
-            lParticle.SetInitalOndulation(RandRange(0.0f, 360.0f));
-            lParticle.SetOndulationVel(RandRange(mOndSpeedDirectionMin, mOndSpeedDirectionMax));
+			lParticle.SetSpeed( mLinearSpeed.GetRange() );
+			lParticle.SetDirection( mLinearSpeed.GetRandomDirection() );
+			lParticle.SetSize( mParticleProperies.Size() );
+			lParticle.SetTimeToLive( mParticleProperies.MaxLife() );
+			lParticle.SetPosition( mSpawnFn(this) );
+
+			lParticle.SetRadialSpeed( mRadialSpeed.GetRange() );
+			lParticle.SetColor(mParticleProperies.Color());
+            
             lParticle.SetAngle(RandRange(0.0f, 360.0f));
-            lParticle.SetAlpha( RandRange(0.0f, mAlpha) );
-            lParticle.SetFlipUV
-              (
-                (mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
-                (mFlipUVVertical)   ? baseUtils::RandomBool() : false
-              );
+			lParticle.SetAlpha( mParticleProperies.Alpha() );
+			lParticle.SetFlipUV( mParticleProperies.FlipUVHorizontal(), mParticleProperies.FlipUVVertical() );
                 ++mAliveParticlesCount;
             ++lEmittedParticles;
         }
@@ -243,7 +265,7 @@ void CParticleEmitter::EmitParticles()
 
 void CParticleEmitter::KillParticles()
 {
-    for( uint32 i = 0; i < mAliveParticles.y && mAliveParticlesCount > 0; ++i )
+	for( uint32 i = 0; i < mParticleProperies.mMaxAliveParticles && mAliveParticlesCount > 0; ++i )
     {
         CParticle& lParticle = mParticles[i];
         if( lParticle.IsAlive() && lParticle.GetActualTime() > lParticle.GetTimeToLive() )
@@ -257,8 +279,5 @@ void CParticleEmitter::KillParticles()
 
 void CParticleEmitter::ActivateTextures()
 {
-    for( uint32 i = 0, lCount = mTextures.size(); i < lCount; ++i )
-    {
-        mTextures[i]->Activate(i);
-    }
+	mParticleProperies.ActivateTexture();
 }
