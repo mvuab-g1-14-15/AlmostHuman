@@ -7,6 +7,7 @@ filein "Utils.ms"
 filein "Triggers.ms"
 filein "Paths.ms"
 filein "Particles.ms"
+filein "Billboards.ms"
 		
 utility UABUtility "UAB Utility" width:170 height:761
 (
@@ -49,7 +50,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 	on UABUtility open do
 	(
-		local levels=#("","sala1","room2","room3","room4")
+		local levels=#("","sala1","sala2","sala3","sala4")
 		LevelList.items=levels
 		PathLabel.text = "C:\Users\Galix\Desktop"
 	)
@@ -266,7 +267,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		IsEmptyDestPath PathLabel.text
 		PathDir = PathLabel.text + "\\particules.xml"
 		
-		ExportParticles PathDir		
+		ExportParticles PathDir
 	)
 	
 	on BillboardButton pressed do
@@ -274,7 +275,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		IsEmptyDestPath PathLabel.text
 		PathDir = PathLabel.text + "\\billboards.xml"
 		
-		--ExportCovers PathDir		
+		ExportBillboards PathDir		
 	)
 	
 	on PathButton pressed do
@@ -286,13 +287,5 @@ utility UABUtility "UAB Utility" width:170 height:761
 		
 		ExportPaths PathDir		
 	)
-	on BillboardButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		PathDir = PathLabel.text + "\\covers.xml"
-		
-		ExportCovers PathDir		
-	)
+
 )

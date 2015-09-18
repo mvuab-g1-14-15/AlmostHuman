@@ -159,6 +159,14 @@ fn IsObjExportable Obj =
 	(
 		isExportable = false
 	)
+	else if (getUserProp Obj "Particle_Core" != undefined AND getUserProp Obj "Particle_Core" != "") then
+	(
+		isExportable = false
+	)
+	else if (getUserProp Obj "Billboard_Core" != undefined AND getUserProp Obj "Billboard_Core" != "") then
+	(
+		isExportable = false
+	)
 	else if(classof Obj == CATParent OR classof Obj == HubObject OR classof Obj == CATBone) then
 	(
 		isExportable = false
@@ -280,7 +288,6 @@ fn GetParticles =
 (
 	
 	l_ParticleName = #()
-	
 	for Obj in GetNoExportableObjects() where getUserProp Obj "Particle_Core" != "" AND getUserProp Obj "Particle_Core" != undefined do
 	(
 		append l_ParticleName Obj
