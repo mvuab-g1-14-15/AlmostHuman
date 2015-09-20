@@ -135,7 +135,7 @@ void CParticleEmitter::Update( float dt )
   mActualTime += dt;
   mTimeSinceLastEmission += dt;
 
-  if ( mActualTime > mTTLEmitter )
+  if ( mTTLEmitter != 0 && mActualTime > mTTLEmitter )
   {
     mIsActive = false;
   }
