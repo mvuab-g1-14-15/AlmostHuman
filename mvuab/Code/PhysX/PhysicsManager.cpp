@@ -50,7 +50,7 @@ CPhysicsManager::CPhysicsManager( void )
     , m_pMyAllocator( NULL )
     , m_pCookingMesh( NULL )
     , m_InitParams( )
-	, m_LoadASE( false )
+	, m_LoadASE( true )
     , CManager()
 {
 }
