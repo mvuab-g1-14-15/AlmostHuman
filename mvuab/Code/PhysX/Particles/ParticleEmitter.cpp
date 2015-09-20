@@ -26,6 +26,9 @@ TT1_VERTEX lVtx[lVtxCount] =
 
 unsigned short int lIdx[lIdxCount] = { 0, 1, 2,  2, 3, 0 };
 
+#define ALLOC_PARTICLES_PROPERTY( particle_property, particle_property_type, size ) \
+      particle_property = new particle_property_type[size];\
+      ZeroMemory( particle_property, size * sizeof( particle_property_type ) );\
 
 CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction aFunction )
   : CName()
@@ -35,7 +38,6 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
   , mIsLoop( false )
   , mIsActive( false )
   , mAliveParticlesCount( 0 )
-  , mParticles( 0 )
   , mTTLEmitter( 0.0f )
   , mTechnique( NULL )
   , mRandomInitialAngle( false )
@@ -49,7 +51,16 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
 CParticleEmitter::~CParticleEmitter()
 {
   CHECKED_DELETE_ARRAY( mParticlesStream );
-  CHECKED_DELETE_ARRAY( mParticles );
+  CHECKED_DELETE_ARRAY( mParticlesTTL );
+  CHECKED_DELETE_ARRAY( mParticlesLifeTime );
+  CHECKED_DELETE_ARRAY( mParticlesAngles );
+  CHECKED_DELETE_ARRAY( mParticlesSpeed );
+  CHECKED_DELETE_ARRAY( mParticlesRadialSpeed );
+  CHECKED_DELETE_ARRAY( mParticlesIsAlive );
+  CHECKED_DELETE_ARRAY( mParticlesFlipUVHorizontal);
+  CHECKED_DELETE_ARRAY( mParticlesFlipUVVertical);
+  CHECKED_DELETE_ARRAY( mParticlesDirections );
+  CHECKED_DELETE_ARRAY( mParticlesPositions );
   CHECKED_DELETE( mRV );
 }
 
@@ -112,15 +123,20 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
   if ( mMaxAliveParticles )
   {
     // Reserve the memory for the particles
-    mParticles = new CParticle[mMaxAliveParticles];
+    ALLOC_PARTICLES_PROPERTY( mParticlesStream,     TPARTICLE_VERTEX_INSTANCE,  mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesTTL,        float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesLifeTime,   float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesAngles,     float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesSpeed,      float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesRadialSpeed,float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesIsAlive,    bool,                       mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVHorizontal,    bool,             mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVVertical,    bool,                mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesDirections, Math::Vect3f,               mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesPositions,  Math::Vect3f,               mMaxAliveParticles );
 
-    ZeroMemory( mParticles, mMaxAliveParticles * sizeof( CParticle ) );
-
-    mParticlesStream = new TPARTICLE_VERTEX_INSTANCE[mMaxAliveParticles];
-    ZeroMemory( mParticles, mMaxAliveParticles * sizeof( TPARTICLE_VERTEX_INSTANCE ) );
-
-    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount,
-        mMaxAliveParticles );
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>
+      ( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mMaxAliveParticles );
   }
 }
 
@@ -132,28 +148,29 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 
 void CParticleEmitter::Update( float dt )
 {
+  TIMER_START();
   mActualTime += dt;
   mTimeSinceLastEmission += dt;
-
-  if ( mTTLEmitter != 0 && mActualTime > mTTLEmitter )
-  {
-    mIsActive = false;
-  }
 
   KillParticles();
   EmitParticles();
 
   for ( uint32 i = 0, lParticles = mMaxAliveParticles; i < lParticles; ++i )
   {
-    if ( mParticles[i].IsAlive() )
+    if ( mParticlesIsAlive[i] )
     {
-      CParticle& lParticle = mParticles[i];
-      lParticle.Update( dt );
-      mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle() );
+      mParticlesLifeTime[i] += dt;
+      mParticlesDirections[i] *= mParticlesSpeed[i];
+      mParticlesDirections[i].y += -mMotion.mGravity * dt;
+      mParticlesPositions[i] += mParticlesDirections[i] * dt; 
+      mParticlesDirections[i].Normalize();
+      mParticlesAngles[i] += dt * mParticlesRadialSpeed[i];
+
+      mParticlesStream[i].alive = Math::Utils::Deg2Rad( mParticlesAngles[i] );
 
       mInterpolator.Interpolate
       (
-        ( lParticle.GetActualTime() / lParticle.GetTimeToLive() ),
+      ( mParticlesLifeTime[i] / mParticlesTTL[i] ),
         mParticlesStream[i].size,
         mParticlesStream[i].r,
         mParticlesStream[i].g,
@@ -161,18 +178,20 @@ void CParticleEmitter::Update( float dt )
         mParticlesStream[i].alpha
       );
 
-      mParticlesStream[i].x = lParticle.GetPosition().x;
-      mParticlesStream[i].y = lParticle.GetPosition().y;
-      mParticlesStream[i].z = lParticle.GetPosition().z;
+      mParticlesStream[i].x = mParticlesPositions[i].x;
+      mParticlesStream[i].y = mParticlesPositions[i].y;
+      mParticlesStream[i].z = mParticlesPositions[i].z;
 
-      mParticlesStream[i].fliph = static_cast<float>( lParticle.GetFLipUVHorizontal() );
-      mParticlesStream[i].flipv = static_cast<float>( lParticle.GetFlipUVVertical() );
+      mParticlesStream[i].fliph = static_cast<float>( mParticlesFlipUVHorizontal[i] );
+      mParticlesStream[i].flipv = static_cast<float>( mParticlesFlipUVVertical[i] );
     }
     else
     {
       mParticlesStream[i].alive = 0.0;
     }
   }
+
+  TIMER_STOP("Update Particles");
 }
 
 void CParticleEmitter::Render()
@@ -185,8 +204,6 @@ void CParticleEmitter::Render()
 
 void CParticleEmitter::EmitParticles( )
 {
-  if (mIsActive)
-  {
     if ( ( mTimeSinceLastEmission > mEmissionTime ) && IsActive() )
     {
       const uint32 lParticlesToEmit = baseUtils::RandRange( mParticlesPerEmission.x, mParticlesPerEmission.y );
@@ -194,30 +211,20 @@ void CParticleEmitter::EmitParticles( )
       for ( uint32 i = 0, lEmittedParticles = 0; i < mMaxAliveParticles &&
             mAliveParticlesCount < mMaxAliveParticles && lEmittedParticles < lParticlesToEmit ; ++i )
       {
-        CParticle& lParticle = mParticles[i];
-
-        if ( !lParticle.IsAlive() )
+        if ( !mParticlesIsAlive[i] )
         {
-          lParticle.SetIsAlive( true );
-          lParticle.SetGravity( mMotion.mGravity );
-          lParticle.SetSpeed( baseUtils::RandRange( mMotion.mLinearSpeed.x, mMotion.mLinearSpeed.y ) );
-          lParticle.SetDirection( baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax ) );
+          mParticlesIsAlive[i] =  true;
+          mParticlesSpeed[i] = baseUtils::RandRange( mMotion.mLinearSpeed.x, mMotion.mLinearSpeed.y );
+          mParticlesDirections[i]= baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax );
 
-          lParticle.SetTimeToLive( baseUtils::RandRange( mTTLParticles.x, mTTLParticles.y ) );
-          lParticle.SetPosition( mSpawnFn( this ) );
+          mParticlesTTL[i] = baseUtils::RandRange( mTTLParticles.x, mTTLParticles.y );
+          mParticlesPositions[i] = mSpawnFn( this );
 
-          lParticle.SetRadialSpeed( baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y ) );
+          mParticlesRadialSpeed[i] = baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y );
+          mParticlesAngles[i] = ( mRandomInitialAngle ) ? RandRange( 0.0f, 360.0f ) : 0.0f;
 
-          if( mRandomInitialAngle )
-            lParticle.SetAngle( RandRange( 0.0f, 360.0f ) );
-          else
-            lParticle.SetAngle( 0.0f );
-
-          lParticle.SetFlipUV
-                (
-                  (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
-                  (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false
-                );
+          mParticlesFlipUVHorizontal[i] = (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false;
+          mParticlesFlipUVVertical[i]  = (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false;
 
           ++mAliveParticlesCount;
           ++lEmittedParticles;
@@ -226,19 +233,16 @@ void CParticleEmitter::EmitParticles( )
 
       mTimeSinceLastEmission = 0.0f;
     }
-  }
 }
 
 void CParticleEmitter::KillParticles()
 {
   for ( uint32 i = 0; i < mMaxAliveParticles && mAliveParticlesCount > 0; ++i )
   {
-    CParticle& lParticle = mParticles[i];
-
-    if ( lParticle.IsAlive() && lParticle.GetActualTime() > lParticle.GetTimeToLive() )
+    if ( mParticlesIsAlive[i] && mParticlesLifeTime[i] > mParticlesTTL[i] )
     {
-      lParticle.SetIsAlive( false );
-      lParticle.SetActualTime( 0.0f );
+      mParticlesIsAlive[i] = false;
+      mParticlesLifeTime[i] = 0.0f;
       --mAliveParticlesCount;
     }
   }
@@ -247,4 +251,18 @@ void CParticleEmitter::KillParticles()
 void CParticleEmitter::ActivateTextures()
 {
   mTexture.mValue->Activate( 0 );
+}
+
+//-----------------------------------------------------------------------------------------
+bool CParticleEmitter::IsActive()
+{
+  if( mActualTime > mTTLEmitter )
+  {
+    if( mIsLoop )
+      mActualTime = 0.0f;
+    else
+      mIsActive = false;
+  }
+
+  return mIsActive;
 }

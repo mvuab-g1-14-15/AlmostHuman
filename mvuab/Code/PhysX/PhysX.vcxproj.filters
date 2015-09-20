@@ -95,9 +95,6 @@
     <ClCompile Include="PhysicMaterial\PhysicMaterial.cpp">
       <Filter>PhysicMaterial</Filter>
     </ClCompile>
-    <ClCompile Include="Particles\Particle.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="Particles\ParticleEmitter.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
@@ -190,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="PhysicMaterial\PhysicMaterial.h">
       <Filter>PhysicMaterial</Filter>
-    </ClInclude>
-    <ClInclude Include="Particles\Particle.h">
-      <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Particles\ParticleEmitter.h">
       <Filter>Particles</Filter>

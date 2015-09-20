@@ -4,6 +4,10 @@
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
+	<particle_system_core name="sparks">
+		<cube_emitter file="spark_emitter.xml"/>
+	</particle_system_core>
+	
 	<particle_system_core name="rays">
 		<!--<cube_emitter file="Data/core/emitters/ray_emitter.xml"/>-->
 		<!--<cube_emitter file="Data/core/emitters/ray_emitter_2.xml"/>-->

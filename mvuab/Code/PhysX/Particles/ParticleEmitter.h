@@ -1,7 +1,6 @@
 #ifndef _PARTICLE_EMITTER_H
 #define _PARTICLE_EMITTER_H
 
-#include "Particle.h"
 #include "Math\Vector3.h"
 #include "Math\Color.h"
 #include "Math\Matrix44.h"
@@ -41,8 +40,17 @@ public:
   uint32                      mRadiusMax;
 
 private:
+  float*                        mParticlesLifeTime;
+  float*                        mParticlesTTL;
+  float*                        mParticlesAngles;
+  float*                        mParticlesSpeed;
+  float*                        mParticlesRadialSpeed;
+  bool*                         mParticlesIsAlive;
+  bool*                         mParticlesFlipUVHorizontal;
+  bool*                         mParticlesFlipUVVertical;
+  Math::Vect3f*                 mParticlesPositions;
+  Math::Vect3f*                 mParticlesDirections;
 
-  typedef CParticle*                 TParticleContainer;
 
   struct Motion
   {
@@ -71,7 +79,6 @@ private:
   bool                        mRandomInitialAngle;
   Math::Vect2u                mParticlesPerEmission;
 
-  TParticleContainer          mParticles;
 
   uint32                            mAliveParticlesCount;   // The number of alive particles
   ps::TSpawnFunction                mSpawnFn;
@@ -93,12 +100,6 @@ private:
   void ActivateTextures();
   void LoadFromNode( const CXMLTreeNode& atts );
 };
-
-//-----------------------------------------------------------------------------------------
-inline bool CParticleEmitter::IsActive()
-{
-  return mIsActive;
-}
 
 //-----------------------------------------------------------------------------------------
 inline const uint32 CParticleEmitter::GetParticleCount() const

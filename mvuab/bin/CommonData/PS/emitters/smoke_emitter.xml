@@ -1,4 +1,4 @@
-<emitter active="true" name="smoke" loop="false" time_to_live="5.0">
+<emitter active="true" name="smoke" loop="true" time_to_live="20.0">
 	<particles max_alive_particles="70" time_to_live="5 7">
 		<technique name="SmokeTechnique" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/PS/smoke/smoke_2.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
