@@ -50,7 +50,7 @@ CPhysicsManager::CPhysicsManager( void )
     , m_pMyAllocator( NULL )
     , m_pCookingMesh( NULL )
     , m_InitParams( )
-	, m_LoadASE( true )
+    , m_LoadASE( true )
     , CManager()
 {
 }
@@ -65,7 +65,7 @@ CPhysicsManager::CPhysicsManager( CXMLTreeNode& atts )
     , m_pMyAllocator( NULL )
     , m_pCookingMesh( NULL )
     , m_InitParams( )
-	, m_LoadASE( false )
+    , m_LoadASE( true )
     , CManager( atts )
 {
 }
@@ -82,7 +82,7 @@ void CPhysicsManager::Init()
     LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
     m_bIsOk = ( m_pMyAllocator != NULL );
 
-	m_LoadASE = false;
+	m_LoadASE = true;
 
     if ( m_bIsOk )
     {
