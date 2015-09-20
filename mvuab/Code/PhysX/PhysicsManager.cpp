@@ -82,7 +82,7 @@ void CPhysicsManager::Init()
     LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
     m_bIsOk = ( m_pMyAllocator != NULL );
 
-	m_LoadASE = false;
+	m_LoadASE = true;
 
     if ( m_bIsOk )
     {
@@ -173,7 +173,22 @@ void CPhysicsManager::Init()
     //return m_bIsOk;
 
 	if (m_LoadASE)
-		m_pCookingMesh->CreateMeshFromASE("Data/sala1/sala1.ase", "Sala1");
+	{
+		if (m_pCookingMesh->CreateMeshFromASE("Data/sala1/sala1.ase", "Sala1"))
+		{
+			CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
+			l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+			CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+			VecMeshes l_CookMeshes = m_pCookingMesh->GetMeshes();
+
+			for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+			  l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+			//m_AseMeshActor->CreateBody ( 10.f );
+			PhysXMInstance->AddPhysicActor( l_AseMeshActor );
+		}
+	}
 }
 
 //----------------------------------------------------------------------------

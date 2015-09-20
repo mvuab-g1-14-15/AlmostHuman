@@ -160,7 +160,7 @@ NxTriangleMesh* CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Ve
 bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>>& _Vertices,
     std::vector<std::vector<unsigned int>>& _Faces )
 {
-  bool isOk = false;
+  bool isOk = true;
 
   int lSize = _Vertices.size();
 
@@ -185,6 +185,8 @@ bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<st
 		//#pragma omp atomic
 		m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
 	}
+	else
+		isOk = false;
   }
 
   //TIMER_STOP( "Generating the physx mesh with the ase." );
