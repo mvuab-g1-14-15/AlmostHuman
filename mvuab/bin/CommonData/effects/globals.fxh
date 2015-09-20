@@ -244,4 +244,27 @@ float random( float2 p ) // Version 2
    return frac(cos(dot(p,r)) * 123456.); // ver2
 }
 
+float3 GetRadiosityNormalMapBySamplers(float3 PixelNn, float3 FaceNormal, float3 FaceTangent, float3 FaceBinormal, float2 UV, sampler SamplerX, sampler SamplerY, sampler SamplerZ)
+{
+	float3x3 l_TangentSpaceMatrix;
+	l_TangentSpaceMatrix[0] = normalize(FaceTangent);
+	l_TangentSpaceMatrix[1] = normalize(FaceNormal);
+	l_TangentSpaceMatrix[2] = normalize(FaceBinormal);
+	float3 l_LightmapX=(tex2D(SamplerX, UV).xyz);
+	float3 l_LightmapY=(tex2D(SamplerY, UV).xyz);
+	float3 l_LightmapZ=(tex2D(SamplerZ, UV).xyz);
+	float3 l_BumpBasisX=normalize(mul(float3(0.816496580927726, 0.5773502691896258, 0),l_TangentSpaceMatrix));
+	float3 l_BumpBasisY=normalize(mul(float3(-0.408248290463863, 0.5773502691896258,0.7071067811865475 ),l_TangentSpaceMatrix));
+	float3 l_BumpBasisZ=normalize(mul(float3(-0.408248290463863, 0.5773502691896258, -0.7071067811865475),l_TangentSpaceMatrix));
+	float3 dp;
+	dp.x=saturate( dot( PixelNn, l_BumpBasisX ) );
+	dp.y=saturate( dot( PixelNn, l_BumpBasisY ) );
+	dp.z=saturate( dot( PixelNn, l_BumpBasisZ ) );
+	dp*=dp;
+	float sum=dot(dp, float3(1.0, 1.0, 1.0));
+	float3 l_DiffuseLight=dp.x*l_LightmapX+dp.y*l_LightmapY+dp.z*l_LightmapZ;
+	l_DiffuseLight/=sum;
+	return l_DiffuseLight*2;
+}
+
 #endif // !defined( GLOBALS_FXH )
