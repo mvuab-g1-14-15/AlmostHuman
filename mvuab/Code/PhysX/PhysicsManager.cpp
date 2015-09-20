@@ -82,7 +82,7 @@ void CPhysicsManager::Init()
     LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
     m_bIsOk = ( m_pMyAllocator != NULL );
 
-	m_LoadASE = true;
+	m_LoadASE = false;
 
     if ( m_bIsOk )
     {
@@ -559,25 +559,25 @@ Math::Mat44f CPhysicsManager::ConvertNxF32ToMat44( NxF32 m[16] )
 //----------------------------------------------------------------------------
 bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
 {
-    assert( _pActor != NULL );
-    assert( m_pScene != NULL );
-    bool l_bIsOK = false;
-    NxActor* nxActor = NULL;
-    NxActorDesc* l_pActorDesc = _pActor->GetActorDesc();
-    assert( l_pActorDesc != NULL );
-    nxActor = m_pScene->createActor( *l_pActorDesc );
+	bool lOk = false;
+	if(_pActor && m_pScene )
+	{
+		NxActorDesc* l_pActorDesc = _pActor->GetActorDesc();
+		ASSERT( l_pActorDesc, "Null actor descriptor" );
+		NxActor* nxActor = m_pScene->createActor( *l_pActorDesc );
 
-    if ( nxActor != NULL )
-    {
-        nxActor->userData = _pActor->GetUserData();
-        _pActor->CreateActor( nxActor );
-        l_bIsOK = true;
-    }
+		if(nxActor)
+		{
+			nxActor->userData = _pActor->GetUserData();
+			_pActor->CreateActor( nxActor );
+			_pActor->SetCollisionGroup( _pActor->GetColisionGroup() );
+			ASSERT( _pActor->GetUserData(), "Null actor user data" );
+			CMapManager<CPhysicActor>::AddResource( _pActor->GetUserData()->GetName(), _pActor );
+			lOk = true;
+		}
+	}
 
-    if ( l_bIsOK )
-        _pActor->SetCollisionGroup( _pActor->GetColisionGroup() );
-
-    return l_bIsOK;
+    return lOk;
 }
 
 //----------------------------------------------------------------------------

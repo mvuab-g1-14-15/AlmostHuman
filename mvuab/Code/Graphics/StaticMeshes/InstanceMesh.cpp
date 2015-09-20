@@ -6,6 +6,7 @@
 #include "Actor\PhysicActor.h"
 
 #include "EngineManagers.h"
+#include "PhysicsManager.h"
 #include "GraphicsManager.h"
 
 #include "Cameras/Camera.h"
@@ -32,6 +33,10 @@ CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( at
 
 CInstanceMesh::~CInstanceMesh()
 {
+	if( mType == "dynamic" )
+	{
+		PhysXMInstance->ReleasePhysicActor( mPhysicActor );
+	}
 }
 
 const std::vector<Math::Vect3f>& CInstanceMesh::GetVertexBuffer()
@@ -88,6 +93,7 @@ void CInstanceMesh::Render()
     mStaticMesh->Render( GraphicsInstance );
   }
 }
+
 void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )
 {
   mPhysicActor = lPhysicActor;

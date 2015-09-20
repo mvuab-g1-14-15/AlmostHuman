@@ -9,6 +9,7 @@
 
 class CGraphicsManager;
 class CPhysicUserData;
+class CInstanceMesh;
 
 class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRenderableObjectsManager>
 {
@@ -19,6 +20,8 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
 		void LoadRenderableObject(const std::string &l_FilePath, const std::string& l_Name, const std::string& l_RoomName);
 		
         void AddNewInstaceMesh(const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName);
+		CInstanceMesh* AddDynamic( const CXMLTreeNode& atts );
+		CInstanceMesh* AddStatic( const CXMLTreeNode& atts  );
 
     public:
         CRenderableObjectsLayersManager();
