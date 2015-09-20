@@ -31,9 +31,11 @@ CParticleSystemCore::~CParticleSystemCore()
 
 void CParticleSystemCore::Update()
 {
+    CParticleEmitter* lParticleEmitter;
     for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
     {
-        GetResourceById( i )->Update(deltaTimeMacro);
+        lParticleEmitter = GetResourceById( i );
+        lParticleEmitter->Update(deltaTimeMacro);
     }
 }
 

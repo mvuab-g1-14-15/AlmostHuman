@@ -11,9 +11,9 @@
 	</particle_system_core>
 	
 	<particle_system_core name="charge">
-		<!--<radial_emitter file="Data/core/emitters/spiral_emitter.xml"/>-->
-		<!--<circle_emitter file="Data/core/emitters/spiral_emitter2.xml"/>-->
-		<!--<circle_emitter file="Data/core/emitters/spiral_emitter3.xml"/>-->
-		<!--<cube_emitter file="Data/core/emitters/spiral_emitter4.xml"/>-->
+		<radial_emitter file="spiral_emitter.xml"/>
+		<circle_emitter file="spiral_emitter2.xml"/>
+		<circle_emitter file="spiral_emitter3.xml"/>
+		<cube_emitter file="spiral_emitter4.xml"/>
 	</particle_system_core>
 </particles_systems>

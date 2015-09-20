@@ -135,6 +135,11 @@ void CParticleEmitter::Update( float dt )
   mActualTime += dt;
   mTimeSinceLastEmission += dt;
 
+  if ( mActualTime > mTTLEmitter )
+  {
+    mIsActive = false;
+  }
+
   KillParticles();
   EmitParticles();
 
@@ -180,44 +185,47 @@ void CParticleEmitter::Render()
 
 void CParticleEmitter::EmitParticles( )
 {
-  if ( ( mTimeSinceLastEmission > mEmissionTime ) && IsActive() )
+  if (mIsActive)
   {
-    const uint32 lParticlesToEmit = baseUtils::RandRange( mParticlesPerEmission.x, mParticlesPerEmission.y );
-
-    for ( uint32 i = 0, lEmittedParticles = 0; i < mMaxAliveParticles &&
-          mAliveParticlesCount < mMaxAliveParticles && lEmittedParticles < lParticlesToEmit ; ++i )
+    if ( ( mTimeSinceLastEmission > mEmissionTime ) && IsActive() )
     {
-      CParticle& lParticle = mParticles[i];
+      const uint32 lParticlesToEmit = baseUtils::RandRange( mParticlesPerEmission.x, mParticlesPerEmission.y );
 
-      if ( !lParticle.IsAlive() )
+      for ( uint32 i = 0, lEmittedParticles = 0; i < mMaxAliveParticles &&
+            mAliveParticlesCount < mMaxAliveParticles && lEmittedParticles < lParticlesToEmit ; ++i )
       {
-        lParticle.SetIsAlive( true );
-        lParticle.SetGravity( mMotion.mGravity );
-        lParticle.SetSpeed( baseUtils::RandRange( mMotion.mLinearSpeed.x, mMotion.mLinearSpeed.y ) );
-        lParticle.SetDirection( baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax ) );
+        CParticle& lParticle = mParticles[i];
 
-        lParticle.SetTimeToLive( baseUtils::RandRange( mTTLParticles.x, mTTLParticles.y ) );
-        lParticle.SetPosition( mSpawnFn( this ) );
+        if ( !lParticle.IsAlive() )
+        {
+          lParticle.SetIsAlive( true );
+          lParticle.SetGravity( mMotion.mGravity );
+          lParticle.SetSpeed( baseUtils::RandRange( mMotion.mLinearSpeed.x, mMotion.mLinearSpeed.y ) );
+          lParticle.SetDirection( baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax ) );
 
-        lParticle.SetRadialSpeed( baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y ) );
+          lParticle.SetTimeToLive( baseUtils::RandRange( mTTLParticles.x, mTTLParticles.y ) );
+          lParticle.SetPosition( mSpawnFn( this ) );
 
-        if( mRandomInitialAngle )
-          lParticle.SetAngle( RandRange( 0.0f, 360.0f ) );
-        else
-          lParticle.SetAngle( 0.0f );
+          lParticle.SetRadialSpeed( baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y ) );
 
-        lParticle.SetFlipUV
-              (
-                (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
-                (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false
-              );
+          if( mRandomInitialAngle )
+            lParticle.SetAngle( RandRange( 0.0f, 360.0f ) );
+          else
+            lParticle.SetAngle( 0.0f );
 
-        ++mAliveParticlesCount;
-        ++lEmittedParticles;
+          lParticle.SetFlipUV
+                (
+                  (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
+                  (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false
+                );
+
+          ++mAliveParticlesCount;
+          ++lEmittedParticles;
+        }
       }
-    }
 
-    mTimeSinceLastEmission = 0.0f;
+      mTimeSinceLastEmission = 0.0f;
+    }
   }
 }
 
