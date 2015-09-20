@@ -38,6 +38,9 @@
     <Filter Include="Particles\Emitters">
       <UniqueIdentifier>{c6b74b5c-0b15-46cf-a19b-c6a1c8914b7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles\Interpolators">
+      <UniqueIdentifier>{85cd2592-0264-4349-935e-6d80506fdaf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Triggers\Trigger.cpp">
@@ -118,6 +121,9 @@
       <Filter>Particles\Emitters</Filter>
     </ClCompile>
     <ClCompile Include="CProyectile.cpp" />
+    <ClCompile Include="Particles\Interpolators\ParticleInterpolator.cpp">
+      <Filter>Particles\Interpolators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Triggers\Trigger.h">
@@ -215,5 +221,8 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="CProyectile.h" />
+    <ClInclude Include="Particles\Interpolators\ParticleInterpolator.h">
+      <Filter>Particles\Interpolators</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
