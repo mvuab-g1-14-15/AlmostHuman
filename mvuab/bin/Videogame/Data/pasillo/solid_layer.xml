@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <MeshInstance name="ceiling_pasillo" core="ceiling_pasillo" pos="53.4479 -18.5058 14.0062" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Figure_1_pasillo" core="Figure_1_pasillo" pos="53.9566 -18.5058 12.2778" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="leftWall_pasillo" core="leftWall_pasillo" pos="47.6864 -18.4335 -2.10603" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ceiling001_pasillo" core="ceiling001_pasillo" pos="53.4479 -18.5058 -2.9749" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="leftwall2_pasillo" core="leftwall2_pasillo" pos="47.6864 -18.4335 -2.01761" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorUpper_pasillo" core="doorUpper_pasillo" pos="53.4479 -18.5058 14.0062" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorLower_pasillo" core="doorLower_pasillo" pos="53.4479 -18.5058 14.0062" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="rightWall_pasillo" core="rightWall_pasillo" pos="57.7109 -18.0167 -2.10603" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="arch_pasillo" core="arch_pasillo" pos="53.4479 -18.5058 -2.26323" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="floor_pasillo" core="floor_pasillo" pos="53.4479 -18.5058 14.0062" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="floor001_pasillo" core="floor001_pasillo" pos="49.5259 -18.8574 -8.6732" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Figure_002_pasillo" core="Figure_002_pasillo" pos="53.9566 -18.5058 -6.37891" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="rightwall1_pasillo" core="rightwall1_pasillo" pos="57.7109 -18.0167 -2.10603" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorUpper001_pasillo" core="doorUpper001_pasillo" pos="53.4479 -18.5058 -19.6232" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorLower001_pasillo" core="doorLower001_pasillo" pos="53.4479 -18.5058 -19.6232" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="ceiling_pasillo" filename="meshes\ceiling.mesh" />
+  <static_mesh name="Figure_1_pasillo" filename="meshes\Figure_1.mesh" />
+  <static_mesh name="leftWall_pasillo" filename="meshes\leftWall.mesh" />
+  <static_mesh name="ceiling001_pasillo" filename="meshes\ceiling001.mesh" />
+  <static_mesh name="leftwall2_pasillo" filename="meshes\leftwall2.mesh" />
+  <static_mesh name="doorUpper_pasillo" filename="meshes\doorUpper.mesh" />
+  <static_mesh name="doorLower_pasillo" filename="meshes\doorLower.mesh" />
+  <static_mesh name="rightWall_pasillo" filename="meshes\rightWall.mesh" />
+  <static_mesh name="arch_pasillo" filename="meshes\arch.mesh" />
+  <static_mesh name="floor_pasillo" filename="meshes\floor.mesh" />
+  <static_mesh name="floor001_pasillo" filename="meshes\floor001.mesh" />
+  <static_mesh name="Figure_002_pasillo" filename="meshes\Figure_002.mesh" />
+  <static_mesh name="rightwall1_pasillo" filename="meshes\rightwall1.mesh" />
+  <static_mesh name="doorUpper001_pasillo" filename="meshes\doorUpper001.mesh" />
+  <static_mesh name="doorLower001_pasillo" filename="meshes\doorLower001.mesh" />
+</static_meshes>
