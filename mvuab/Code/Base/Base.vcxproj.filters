@@ -82,6 +82,12 @@
     <ClCompile Include="Timer\CountDownTimerManager.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Math\BandMatrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\SplineInterpolator.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -200,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="Utils\TemplatedVectorMapManagerObject.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\BandMatrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\SplineInterpolator.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

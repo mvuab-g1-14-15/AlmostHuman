@@ -1,7 +1,7 @@
 <particles_systems>
 	<particle_system_core name="smoke" sound="">
 		<cube_emitter file="Data/core/emitters/smoke_emitter.xml"/>
-		<!--<cube_emitter file="Data/core/emitters/smoke_emitter_2.xml"/>-->
+		<cube_emitter file="Data/core/emitters/smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="rays">

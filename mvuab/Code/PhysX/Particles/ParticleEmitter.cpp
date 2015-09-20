@@ -160,11 +160,10 @@ void CParticleEmitter::Update( float dt )
       CParticle& lParticle = mParticles[i];
       lParticle.Update( dt );
       mParticlesStream[i].alive = Math::Utils::Deg2Rad( lParticle.GetAngle() );
-      const float32 lPercentage = lParticle.GetActualTime() / lParticle.GetTimeToLive();
 
       mInterpolator.Interpolate
       (
-        lPercentage,
+        ( lParticle.GetActualTime() / lParticle.GetTimeToLive() ),
         mParticlesStream[i].size,
         mParticlesStream[i].r,
         mParticlesStream[i].g,
@@ -217,8 +216,17 @@ void CParticleEmitter::EmitParticles( )
 
         lParticle.SetRadialSpeed( baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y ) );
 
-        lParticle.SetAngle( RandRange( 0.0f, 360.0f ) );
-        lParticle.SetFlipUV( mTexture.mFlipUVHorizontal, mTexture.mFlipUVVertical );
+        if( mRandomInitialAngle )
+          lParticle.SetAngle( RandRange( 0.0f, 360.0f ) );
+        else
+          lParticle.SetAngle( 0.0f );
+
+        lParticle.SetFlipUV
+              (
+                (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false,
+                (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false
+              );
+
         ++mAliveParticlesCount;
         ++lEmittedParticles;
       }

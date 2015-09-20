@@ -1,25 +1,13 @@
-<emitter 
-	name="smoke_2"
-	loop="false" 
-	immortal="true" 
-	active="true" 
-	alive_particles="0 50" 
-	speed="0.4 1" 
-	emission_time="0.5" 
-	time_to_live="8 10" 
-	particle_size_range="0 10" 
-	particles_per_emission="1 3" 
-	min_color="0.1 0.5 0.5" 
-	max_color="0.5 0.5 0.5"
-	min_initial_direction="0.0 0.2 0.0" 
-	max_initial_direction="0.0 0.1 0.0" 
-	gravity="-0.2" 
-	radial_speed="10 15.0" 
-	ondulative_speed="0.0 2.0" 
-	min_ondulative_direction="0.2" 
-	max_ondulative_direction="0.2" 
-	cubic_size="0.5 0.5 0.5"
-	technique="SmokeTechnique"
-	alpha="0.23">
-	<texture name="Data/textures/particles/smoke/pump_smoke_01.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+<emitter active="true" name="smoke2" loop="false" time_to_live="5.0">
+	<particles max_alive_particles="20" time_to_live="5 9">
+		<technique name="SmokeTechnique" render_group="alpha_blend"/>
+		<texture name="Data/textures/particles/smoke_2.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0" color="0.3 0.3 0.3" size="0.5"/>
+			<interpolator alpha="0.23" color="0.5 0.5 0.5" size="2"/>
+			<interpolator alpha="0" color="0.6 0.6 0.6" size="1"/>
+		</interpolators>
+		<motion linear_speed="0.4 1" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="10 15" gravity="-0.2"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0.3" particles_per_emission="1 2" cubic_size="0.5 0.5 0.5"/>
 </emitter>
