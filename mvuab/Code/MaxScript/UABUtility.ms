@@ -50,7 +50,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 	on UABUtility open do
 	(
-		local levels=#("","sala1","sala2","sala3","sala4")
+		local levels=#("","sala1","sala2","pasillo","sala3","sala4")
 		LevelList.items=levels
 		PathLabel.text = "C:\Users\Galix\Desktop"
 	)
