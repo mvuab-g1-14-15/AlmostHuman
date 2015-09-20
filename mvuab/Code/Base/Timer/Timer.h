@@ -14,6 +14,8 @@
 #include "Utils\Types.h"
 #include "Engine.h"
 
+static const float s30FPS = 1.0f / 30.0f ;
+
 class CTimer
 {
 

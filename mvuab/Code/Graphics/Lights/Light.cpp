@@ -44,6 +44,7 @@ CLight::CLight( const CXMLTreeNode& node )
     , mLensFlare( 0 )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
+    , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
 {
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
             m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
@@ -77,13 +78,13 @@ CLight::CLight( const CXMLTreeNode& node )
                 if ( ShadowType == "static_shadow_map" )
                 {
                     ASSERT( !mStaticShadowMap, "The light %s only could have one static shadow map", GetName().c_str() );
-                    mStaticShadowMap = new CShadowMap( lShadowNode );
+                    mStaticShadowMap = new CShadowMap( lShadowNode, m_RoomName );
                     m_MustUpdateStaticShadowMap = true;
                 }
                 else if ( ShadowType == "dynamic_shadow_map" )
                 {
                     ASSERT( !mDynamicShadowMap, "The light %s only could have one dynamic shadow map", GetName().c_str() );
-                    mDynamicShadowMap = new CShadowMap( lShadowNode );
+                    mDynamicShadowMap = new CShadowMap( lShadowNode, m_RoomName );
                 }
             }
         }

@@ -121,8 +121,6 @@ void CScene::LoadRoom( std::string aRoomName )
         if ( lROPath.find( ".xml" ) != std::string::npos )
             lROLM->LoadLayers( lROPath, aRoomName );
 
-        LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
-
         PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
         PSMan->Init();
         
@@ -130,6 +128,8 @@ void CScene::LoadRoom( std::string aRoomName )
         BillboardMan->Reload();
 
         lRoom->SetLayers( lROLM );
+
+        LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
     }
 }
 
@@ -137,11 +137,11 @@ void CScene::ActivateRoom( std::string aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
 
-    if ( !lRoom->GetLayers() )
-        LoadRoom( aRoomName );
-
     lRoom->SetActive( true );
     mCurrentRoom = lRoom;
+
+    if ( !lRoom->GetLayers() )
+        LoadRoom( aRoomName );
 }
 
 void CScene::UnloadRoom( std::string aRoomName )

@@ -12,16 +12,12 @@ bool BindMatrices( CSharedEffect* aSharedEffect, CEffectManager* aEffectManager 
 {
     bool lOk = true;
 
-    // Obtain the matrices only once then multiply or invert depending on the case
-    const Math::Mat44f lProjectionMtx = aEffectManager->GetProjectionMatrix();
-    const Math::Mat44f lViewMtx = aEffectManager->GetViewMatrix();
-
     // Then set the parameters
-    lOk = lOk && aSharedEffect->SetProjectionMatrix( lProjectionMtx );
-    lOk = lOk && aSharedEffect->SetViewMatrix( lViewMtx );
-    lOk = lOk && aSharedEffect->SetViewProjectionMatrix( lProjectionMtx * lViewMtx);
-    lOk = lOk && aSharedEffect->SetInverseProjectionMatrix( lProjectionMtx );
-    lOk = lOk && aSharedEffect->SetInverseViewMatrix( lViewMtx );
+    lOk = lOk && aSharedEffect->SetProjectionMatrix( aEffectManager->GetProjectionMatrix() );
+    lOk = lOk && aSharedEffect->SetViewMatrix( aEffectManager->GetViewMatrix() );
+    lOk = lOk && aSharedEffect->SetViewProjectionMatrix( aEffectManager->GetViewProjectionMatrix() );
+    lOk = lOk && aSharedEffect->SetInverseProjectionMatrix( aEffectManager->GetProjectionMatrix().GetInverted() );
+    lOk = lOk && aSharedEffect->SetInverseViewMatrix( aEffectManager->GetViewMatrix().GetInverted() );
 
     return lOk;
 }
@@ -133,12 +129,12 @@ bool CSharedEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
 
 bool CSharedEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
 {
-    return ( m_Effect->SetMatrix( m_InverseViewMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+    return ( m_Effect->SetMatrix( m_InverseViewMatrix, &Matrix.GetD3DXMatrix() ) == S_OK );
 }
 
 bool CSharedEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
 {
-    return ( m_Effect->SetMatrix( m_InverseProjectionMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+    return ( m_Effect->SetMatrix( m_InverseProjectionMatrix, &Matrix.GetD3DXMatrix() ) == S_OK );
 }
 
 bool CSharedEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )

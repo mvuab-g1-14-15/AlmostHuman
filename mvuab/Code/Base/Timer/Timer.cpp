@@ -74,4 +74,7 @@ void CTimer::Update( void )
             }
     }
     //---------------------------------------------//
+
+    if( m_DeltaTime > s30FPS )
+        m_DeltaTime = s30FPS;
 }
