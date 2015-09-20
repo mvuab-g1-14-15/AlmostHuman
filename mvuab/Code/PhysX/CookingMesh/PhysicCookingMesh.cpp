@@ -157,56 +157,41 @@ NxTriangleMesh* CPhysicCookingMesh::CreatePhysicMesh( const std::vector<Math::Ve
 //----------------------------------------------------------------------------
 // Creating a PhysicMesh from a buffer
 //----------------------------------------------------------------------------
-bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>>& _Vertices,
-    std::vector<std::vector<unsigned int>>& _Faces )
+bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>>& _Vertices, std::vector<std::vector<unsigned int>>& _Faces )
 {
-  bool isOk = true;
+    bool isOk = true;
+    int lSize = _Vertices.size();
 
-  int lSize = _Vertices.size();
+    //TIMER_START();
+    #pragma omp parallel for
+    for (int i = 0; i < lSize; ++i)
+    {
+        std::ostringstream s;
+        s << _NameMesh << i;
 
-  //TIMER_START();
-  //#pragma omp parallel for
-  for ( int i = 0; i < lSize; ++i )
-  {
-    std::ostringstream s;
-    s << _NameMesh << i;
-    std::string l_Name( s.str() );
+        std::string l_Name( s.str() );
+        bool loop_ok = CreatePhysicMesh(l_Name,  _Vertices[i], _Faces[i]);
 
-    std::map<std::string, NxTriangleMesh*>::iterator it;
-	//#pragma omp atomic
-	it = m_TriangleMeshes.find( l_Name );
-
-    if ( it != m_TriangleMeshes.end() ) continue;
-
-    NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices[i], _Faces[i] );
-
-    if ( l_TriangleMesh != 0 ) 
-	{
-		//#pragma omp atomic
-		m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( l_Name, l_TriangleMesh ) );
-	}
-	else
-		isOk = false;
-  }
-
-  //TIMER_STOP( "Generating the physx mesh with the ase." );
-
-  return isOk;
+        #pragma omp critical
+        isOk = loop_ok;
+    }
+    
+    //TIMER_STOP( "Generating the physx mesh with the ase." );
+    return isOk;
 }
 
-bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f>& _Vertices,
-    std::vector<unsigned int>& _Faces )
+bool CPhysicCookingMesh::CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces )
 {
-  std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( _NameMesh );
+    std::map<std::string, NxTriangleMesh*>::iterator it = m_TriangleMeshes.find( _NameMesh );
+    if ( it != m_TriangleMeshes.end() ) return false;
 
-  if ( it != m_TriangleMeshes.end() ) return false;
+    NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices, _Faces );
+    if ( l_TriangleMesh == 0 ) return false;
 
-  NxTriangleMesh* l_TriangleMesh = CreatePhysicMesh( _Vertices, _Faces );
+    #pragma omp critical
+    m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( _NameMesh, l_TriangleMesh ) );
 
-  if ( l_TriangleMesh != 0 ) return false;
-
-  m_TriangleMeshes.insert( std::pair<std::string, NxTriangleMesh*>( _NameMesh, l_TriangleMesh ) );
-  return true;
+    return true;
 }
 
 
