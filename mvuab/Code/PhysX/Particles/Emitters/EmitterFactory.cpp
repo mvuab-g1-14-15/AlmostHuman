@@ -91,8 +91,27 @@ void CEmitterFactory::InitFactory()
   mMap[ps::eET_Radial ] = GetRadialSpawnPosition;
 }
 
-CParticleEmitter* CEmitterFactory::CreateEmitter( const std::string& aEmitterType )
+CParticleEmitter* CEmitterFactory::CreateEmitter( const std::string& aEmitterType, const CXMLTreeNode& aNode )
 {
   ps::TEmitterType lType = StrToEmitterType( aEmitterType );
-  return ( new CParticleEmitter( lType, mMap[lType] ) );
+  CParticleEmitter * lEmitter = new CParticleEmitter( lType, mMap[lType] );
+
+  const std::string& lFile = aNode.GetAttribute<std::string>( "file", "" );
+
+  CXMLTreeNode lFileNode, lEmitterNode;
+
+  if( lFile != "" )
+  {
+	  const std::string& lEmitterFile = mEmittersPath + lFile;
+    if ( lFileNode.LoadAndFindNode( lEmitterFile.c_str(), "emitter", lEmitterNode ) )
+    {
+		  if( !lEmitter->Init( lEmitterNode ) )
+		  {
+			  LOG_ERROR_APPLICATION("Could not create emitter %s", aEmitterType );
+			  CHECKED_DELETE( lEmitter );
+		  }
+    }
+  }
+
+  return lEmitter;
 }

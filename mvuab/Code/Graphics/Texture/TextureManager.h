@@ -10,7 +10,7 @@
 #include "CubedTexture.h"
 #include "GUITexture.h"
 
-static const char* sDummyTextureName = "Data/textures/Dummy.png";
+static const char* sDummyTextureName = "../CommonData/textures/UV_alignment_pattern.jpg";
 
 class CTextureManager : public CMapManager<CTexture>, public CManager
 {

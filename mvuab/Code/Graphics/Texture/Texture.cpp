@@ -42,6 +42,9 @@ bool CTexture::LoadFile()
     m_Width = lTextureInfo.Width;
     m_Height = lTextureInfo.Height;
 
+    if( m_Width > 4096 || m_Height > 4096 )
+      return false;
+
     return true;
 }
 

@@ -108,7 +108,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
     }
   }
 
-  ASSERT( mMaxAliveParticles < MAX_PARTICLES, "The maxiumum number of particles is %u it could not be %u", mMaxAliveParticles, MAX_PARTICLES );
+  ASSERT( mMaxAliveParticles <= MAX_PARTICLES, "The maxiumum number of particles is %u it could not be %u", mMaxAliveParticles, MAX_PARTICLES );
   if ( mMaxAliveParticles )
   {
     // Reserve the memory for the particles
@@ -126,22 +126,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
 
 bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 {
-  const std::string& lFile = atts.GetAttribute<std::string>( "file", "" );
-
-  if ( lFile != "" )
-  {
-    CXMLTreeNode lFileNode, lEmitterNode;
-
-    if ( lFileNode.LoadAndFindNode( lFile.c_str(), "emitter", lEmitterNode ) )
-    {
-      LoadFromNode( lEmitterNode );
-    }
-  }
-  else
-  {
-    LoadFromNode( atts );
-  }
-
+  LoadFromNode( atts );
   return true;
 }
 
