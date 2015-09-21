@@ -15,6 +15,11 @@
 #include "Particles/ParticleManager.h"
 #include "Billboard\BillboardManager.h"
 
+#include "PhysicsManager.h"
+#include "Actor\PhysicActor.h"
+#include "Utils\PhysicUserData.h"
+#include "CookingMesh\PhysicCookingMesh.h"
+
 #include <string>
 
 
@@ -130,6 +135,24 @@ void CScene::LoadRoom( std::string aRoomName )
         lRoom->SetLayers( lROLM );
 
         LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
+
+        if (PhysXMInstance->GetLoadASE())
+	    {
+            if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lBasePath+""+aRoomName+".ase", aRoomName))
+		    {
+			    CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( aRoomName + "Escenario" );
+			    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+			    CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+			    VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+
+			    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+			      l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+			    //m_AseMeshActor->CreateBody ( 10.f );
+			    PhysXMInstance->AddPhysicActor( l_AseMeshActor );
+		    }
+	    }
     }
 }
 
