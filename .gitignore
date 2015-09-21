@@ -23,3 +23,5 @@ mvuab/bin/Viewer/*.dll
 mvuab/bin/Videogame/*.dll
 mvuab/bin/Intermediate/
 WwiseProject
+ase
+*.ASE
