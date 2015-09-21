@@ -17,7 +17,7 @@
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\PhysicUserAllocator.h"
 #include "Utils\PhysicUserData.h"
-#include "Particles\SphereEmitter.h"
+//#include "Particles\SphereEmitter.h"
 #include "Particles\ParticleManager.h"
 ////--------------------------------
 

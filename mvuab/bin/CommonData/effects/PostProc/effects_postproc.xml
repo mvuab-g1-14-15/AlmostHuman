@@ -26,7 +26,7 @@
     
     <technique name="ScatteredLightTechnique" vertex_type="1104">
 		<effect name="ScatteredLightEffect" file="../CommonData/effects/PostProc/ScatteredLight.fx"/>
-		<handles use_world_view_projection_matrix="true" use_lights="true" num_of_lights="1"/>
+		<handles use_view_matrix="true" use_lights="true" num_of_lights="1"/>
 	</technique>
 
 	<technique name="FogTechnique" vertex_type="1104">
