@@ -18,7 +18,7 @@ function load_basics()
 	scene:ActivateRoom("pasillo")
 	scene:ActivateRoom("sala4")
 	scene:ActivateRoom("sala2")
-	scene:ActivateRoom("sala3")
+	--scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -133,31 +133,50 @@ function update_gameplay()
 			end
 		end
 		
-		if action_manager:DoAction("LoadSala2") then
+		
+		if action_manager:DoAction("LoadPasillo") then
 			local lRoom
-			if scene:Exist("room2") then
-				lRoom = scene:			GetResource("room2")
+			if scene:Exist("pasillo") then
+				engine:Trace("lRoom 1 exist")
+				lRoom = scene:GetResource("pasillo")
 				if lRoom:GetActive() then
-					scene:UnloadRoom("room2")
+					engine:Trace("lRoom 1 active")
+					scene:UnloadRoom("pasillo")
 				else
-					scene:ActivateRoom("room2")
+					engine:Trace("lRoom 1 non active")
+					scene:ActivateRoom("pasillo")
 				end
 			else
-				scene:ActivateRoom("room2")
+				engine:Trace("lRoom 1 not exist")
+				scene:ActivateRoom("pasillo")
+			end
+		end
+		
+		if action_manager:DoAction("LoadSala2") then
+			local lRoom
+			if scene:Exist("sala2") then
+				lRoom = scene:			GetResource("sala2")
+				if lRoom:GetActive() then
+					scene:UnloadRoom("sala2")
+				else
+					scene:ActivateRoom("sala2")
+				end
+			else
+				scene:ActivateRoom("sala2")
 			end
 		end
 		
 		if action_manager:DoAction("LoadSala3") then
 			local lRoom
-			if scene:Exist("room3") then
-				lRoom = scene:GetResource("room3")
+			if scene:Exist("sala3") then
+				lRoom = scene:GetResource("sala3")
 				if lRoom:GetActive() then
-					scene:UnloadRoom("room3")
+					scene:UnloadRoom("sala3")
 				else
-					scene:ActivateRoom("room3")
+					scene:ActivateRoom("sala3")
 				end
 			else
-				scene:ActivateRoom("room3")
+				scene:ActivateRoom("sala3")
 			end
 		end
 		
