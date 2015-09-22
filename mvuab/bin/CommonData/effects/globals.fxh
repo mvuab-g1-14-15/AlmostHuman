@@ -17,20 +17,20 @@
 // Shared Parameters 
 //
 
-shared float4x4 g_WorldViewProj                                            : WVPMatrix;
-shared float4x4 g_ViewMatrix                                               : ViewMatrix;
-shared float4x4 g_ViewInverseMatrix                                        : InverseViewMatrix;
-shared float4x4 g_ProjectionInverseMatrix                                  : InverseProjectionMatrix;
-shared float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
-shared float4x4 g_WorldMatrix                                              : WorldMatrix;
-shared float4x4 g_WorldInverseMatrix                                       : InverseWorldMatrix;
-shared float4x4 g_WorldViewMatrix                                          : WVMatrix;
-shared float4x4 g_ViewProjMatrix                                           : VPMatrix;
-shared float3   g_CameraPosition                                           : CameraPosition;
-shared float3   g_AmbientLight 											   : AmbientLight;
-shared float    g_DeltaTime 											   : DeltaTime;
-shared int      g_FBWidth    											   : FBWidth;
-shared int      g_FBHeight       										   : FBHeight;
+float4x4 g_WorldViewProj                                            : WVPMatrix;
+float4x4 g_ViewMatrix                                               : ViewMatrix;
+float4x4 g_ViewInverseMatrix                                        : InverseViewMatrix;
+float4x4 g_ProjectionInverseMatrix                                  : InverseProjectionMatrix;
+float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
+float4x4 g_WorldMatrix                                              : WorldMatrix;
+float4x4 g_WorldInverseMatrix                                       : InverseWorldMatrix;
+float4x4 g_WorldViewMatrix                                          : WVMatrix;
+float4x4 g_ViewProjMatrix                                           : VPMatrix;
+float3   g_CameraPosition                                           : CameraPosition;
+float3   g_AmbientLight 											: AmbientLight;
+float    g_DeltaTime 											    : DeltaTime;
+int      g_FBWidth    											    : FBWidth;
+int      g_FBHeight       										    : FBHeight;
 
 
 //

@@ -137,12 +137,12 @@
 	<render_billboards/>
 	
 	<!-- Rendering Lens Flares -->
-	<!--enable_alpha_blend/>
+	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<lens_of_flare/>
 	<disable_alpha_blend/>
 	
-	<disable_z_test/-->
+	<disable_z_test/>
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

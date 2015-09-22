@@ -64,6 +64,8 @@ class CLight : public CObject3D, public CName
             return mLensFlare;
         }
 
+        GET_SET(std::string, RoomName);
+
     protected:
         CLensFlare *mLensFlare;
         Math::CColor m_Color;
@@ -84,6 +86,8 @@ class CLight : public CObject3D, public CName
 
         CShadowMap *mStaticShadowMap;
         CShadowMap *mDynamicShadowMap;
+
+        std::string m_RoomName;
 };
 
 #endif // LIGHT_H

@@ -54,6 +54,16 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( WVPMatrix )
   , CTOR_EFFECT_PARAMETER( Direction )
   , CTOR_EFFECT_PARAMETER( Time )
+      , CTOR_EFFECT_PARAMETER( ViewMatrix )
+    , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
+    , CTOR_EFFECT_PARAMETER( VPMatrix )
+    , CTOR_EFFECT_PARAMETER( InverseViewMatrix )
+    , CTOR_EFFECT_PARAMETER( InverseProjectionMatrix )
+    , CTOR_EFFECT_PARAMETER( CameraPosition )
+    , CTOR_EFFECT_PARAMETER( AmbientLight )
+    , CTOR_EFFECT_PARAMETER( FBWidth )
+    , CTOR_EFFECT_PARAMETER( FBHeight )
+    , CTOR_EFFECT_PARAMETER( DeltaTime )
 {
   ResetLightsHandle();
 }
@@ -84,6 +94,20 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( WVMatrix );
   RESET_EFFECT_PARAMETER( WVPMatrix );
   RESET_EFFECT_PARAMETER( Direction );
+  RESET_EFFECT_PARAMETER( VPMatrix );
+
+    RESET_EFFECT_PARAMETER( ViewMatrix );
+    RESET_EFFECT_PARAMETER( ProjectionMatrix );
+
+    RESET_EFFECT_PARAMETER( InverseViewMatrix );
+    RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
+
+    RESET_EFFECT_PARAMETER( CameraPosition );
+    RESET_EFFECT_PARAMETER( AmbientLight );
+
+    RESET_EFFECT_PARAMETER( FBWidth );
+    RESET_EFFECT_PARAMETER( FBHeight );
+    RESET_EFFECT_PARAMETER( DeltaTime );
   m_ViewToLightProjectionMatrixParameter = 0;
   m_LightEnabledParameter = 0;
   m_LightsTypeParameter = 0;
@@ -124,6 +148,20 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( WorldMatrix );
   LINK_EFFECT_PARAMETER( WVMatrix );
   LINK_EFFECT_PARAMETER( WVPMatrix );
+      LINK_EFFECT_PARAMETER( VPMatrix );
+
+    LINK_EFFECT_PARAMETER( ViewMatrix );
+    LINK_EFFECT_PARAMETER( ProjectionMatrix );
+
+    LINK_EFFECT_PARAMETER( InverseViewMatrix );
+    LINK_EFFECT_PARAMETER( InverseProjectionMatrix );
+
+    LINK_EFFECT_PARAMETER( CameraPosition );
+    LINK_EFFECT_PARAMETER( AmbientLight );
+
+    LINK_EFFECT_PARAMETER( FBWidth );
+    LINK_EFFECT_PARAMETER( FBHeight );
+    LINK_EFFECT_PARAMETER( DeltaTime );
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
                           m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -184,7 +222,7 @@ bool CEffect::LoadEffect( CEffectPool* aEffectPool )
                    &m_Defines[0],
                    0, // LPD3DXINCLUDE pInclude,
                    dwShaderFlags,
-                   ( aEffectPool ) ? aEffectPool->GetD3DEffectPool() : 0,
+                   0,
                    &m_Effect,
                    &l_ErrorBuffer );
   std::string lErrorMsg;
@@ -444,4 +482,58 @@ bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )
 bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return S_OK == SET_MATRIX_PARAMETER( WVPMatrix, Matrix );
+}
+
+bool CEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
+{
+    float32 l_Camera[3];
+    l_Camera[0] = CameraPosition.x;
+    l_Camera[1] = CameraPosition.y;
+    l_Camera[2] = CameraPosition.z;
+    return ( m_Effect->SetFloatArray( m_CameraPosition, l_Camera, 3 ) == S_OK );
+}
+
+bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( ViewMatrix, Matrix );
+}
+
+bool CEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( ProjectionMatrix, Matrix );
+}
+
+bool CEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
+{
+    return ( m_Effect->SetMatrix( m_InverseViewMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+}
+
+bool CEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return ( m_Effect->SetMatrix( m_InverseProjectionMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+}
+
+bool CEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( VPMatrix, Matrix );
+}
+
+bool CEffect::SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor )
+{
+    float lAmbientColor[3] = {aAmbienLightColor.x, aAmbienLightColor.y, aAmbienLightColor.z};
+
+    HRESULT lRes = m_Effect->SetFloatArray( m_AmbientLight, lAmbientColor, 3 );
+    ASSERT( lRes == S_OK, "Error setting ambient color");
+
+    return lRes == S_OK;
+}
+
+bool CEffect::SetFBSize( const Math::Vect2u aSize )
+{
+    return ( S_OK == SET_INT_PARAMETER( FBWidth, aSize.x ) ) && ( S_OK == SET_INT_PARAMETER( FBHeight, aSize.y ) );
+}
+
+bool CEffect::SetDeltaTime( const float dt )
+{
+    return S_OK == SET_FLOAT_PARAMETER( DeltaTime, dt );
 }

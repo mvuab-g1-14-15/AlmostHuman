@@ -11,7 +11,7 @@ class CRenderableObjectsManager;
 class CShadowMap
 {
     public:
-        CShadowMap( const CXMLTreeNode& node );
+        CShadowMap( const CXMLTreeNode& node, const std::string& );
         ~CShadowMap();
 
         bool Generate();

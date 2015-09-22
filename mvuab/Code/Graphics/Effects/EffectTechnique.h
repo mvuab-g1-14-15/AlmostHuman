@@ -11,7 +11,6 @@
 #include "dx9.h"
 
 class CEffect;
-class CEffectFlags;
 
 class CEffectTechnique
 {
@@ -37,40 +36,49 @@ public:
   void SetTextureSize( unsigned int width, unsigned int height );
 
 private: // Members
-  bool m_UseInverseWorldMatrix;
-  bool m_UseWorldMatrix;
-  bool m_UseWorldViewMatrix;
-  bool m_UseWorldViewProjectionMatrix;
-  bool m_UseViewToLightProjectionMatrix;
 
   // Debug
-  bool                        m_UseDebugColor;
   Math::CColor                m_DebugColor;
 
   // Lights
   int32                       m_NumOfLights;
-  bool                        m_UseLights;
 
   // Textures
-  bool                        m_UseTextureSizes;
   uint32                      m_TextureHeight;
   uint32                      m_TextureWidth;
 
   // Fog
-  bool                        m_UseFog;
   float                       m_FogStart;
   float                       m_FogEnd;
   float                       m_FogExp;
   EFogFunction                m_FogFun;
 
   CEffect*                    m_Effect;
-  CEffectFlags*               mFlags;
   D3DXHANDLE                  m_D3DTechnique;
   std::string                 m_TechniqueName;
   std::string                 m_EffectName;
 
+  bool mUseWorld;
+  bool mUseInverseWorld;
+  bool mUseView;
+  bool mUseInverseView;
+  bool mUseProjection;
+  bool mUseInverseProjection;
+  bool mUseWorldView;
+  bool mUseViewProjection;
+  bool mUseWorldViewProjection;
+  bool mUseViewToLightProjection;
+  bool mUseFog;
+  bool mUseLights;
+  bool mUseDebugColor;
+  bool mUseFBSize;
+  bool mUseAmbientLight;
+  bool mUseCamera;
+  bool mUseTime;
+
 private: // Methods
   void SetupMatrices();
   bool SetupLights();
+  void ReadFlags( const CXMLTreeNode& aFlagsNode );
 };
 #endif // EFFECT_TECHNIQUE_H

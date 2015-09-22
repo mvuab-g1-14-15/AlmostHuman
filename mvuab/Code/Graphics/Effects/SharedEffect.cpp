@@ -48,6 +48,7 @@ CSharedEffect::~CSharedEffect()
 
 void CSharedEffect::Bind()
 {
+  return;
     if( !BindMatrices( this, EffectManagerInstance ) )
     {
         LOG_ERROR_APPLICATION( "Error binding the matrices to the shared effect!!" );
