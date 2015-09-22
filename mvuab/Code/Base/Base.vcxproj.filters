@@ -82,6 +82,15 @@
     <ClCompile Include="Timer\CountDownTimerManager.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Mutex.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\ConditionVarible.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\RWLock.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -199,6 +208,15 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utils\TemplatedVectorMapManagerObject.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Mutex.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ConditionVarible.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\RWLock.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

@@ -24,6 +24,9 @@
     <ClCompile Include="Timer\CountDownTimerManager.cpp" />
     <ClCompile Include="Timer\CountDownTimer.cpp" />
     <ClCompile Include="Timer\Timer.cpp" />
+    <ClCompile Include="Utils\ConditionVarible.cpp" />
+    <ClCompile Include="Utils\Mutex.cpp" />
+    <ClCompile Include="Utils\RWLock.cpp" />
     <ClCompile Include="XML\Example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -55,14 +58,17 @@
     <ClInclude Include="Timer\CountDownTimer.h" />
     <ClInclude Include="Timer\Timer.h" />
     <ClInclude Include="Utils\BaseUtils.h" />
+    <ClInclude Include="Utils\ConditionVarible.h" />
     <ClInclude Include="Utils\Defines.h" />
     <ClInclude Include="Utils\GPUStatics.h" />
     <ClInclude Include="Utils\IdManager.h" />
     <ClInclude Include="Utils\MacroRepeat.h" />
     <ClInclude Include="Utils\Manager.h" />
     <ClInclude Include="Utils\MapManager.h" />
+    <ClInclude Include="Utils\Mutex.h" />
     <ClInclude Include="Utils\Name.h" />
     <ClInclude Include="Utils\ObjectFactory.h" />
+    <ClInclude Include="Utils\RWLock.h" />
     <ClInclude Include="Utils\SingletonPattern.h" />
     <ClInclude Include="Utils\StringUtils.h" />
     <ClInclude Include="Utils\TemplatedVectorMapManager.h" />
