@@ -3,6 +3,8 @@
 #pragma once
 
 #include <Windows.h>
+#include <DxErr.h>
+#pragma comment(lib, "dxerr.lib")
 
 #include "Utils\GPUStatics.h"
 #include "RenderableVertex.h"
@@ -12,6 +14,9 @@
 
 template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 {
+    private:
+        bool m_RenderOK;
+
     protected:
         inline size_t GetVertexSize()
         {
@@ -27,7 +32,7 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
         template<>        D3DFORMAT GetIndexFormat<short>() { return D3DFMT_INDEX16; }
 
     public:
-        CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount )
+        CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount ) : m_RenderOK(false)
         {
             if ( IndexCount != 0 || VertexCount != 0 )
             {
@@ -37,16 +42,32 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
 
-                GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 );
-                GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
+                HRESULT HR1 = GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 );
+                if(HR1 != D3D_OK)
+                {
+                    char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Index Buffer: %s\n", DXGetErrorString(HR1));
+                    OutputDebugStringA(s);
+                }
 
-                m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
-                memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
-                m_VB->Unlock();
+                HRESULT HR2 = GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
+                if(HR2 != D3D_OK)
+                {
+                    char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Vertex Buffer: %s\n", DXGetErrorString(HR2));
+                    OutputDebugStringA(s);
+                }
+                
+                if(m_VB != NULL && m_IB != NULL)
+                {
+                    m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
+                    memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
+                    m_VB->Unlock();
 
-                m_IB->Lock( 0, IndexCount * GetIndexSize(), &l_memSrcI, 0 );
-                memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
-                m_IB->Unlock();
+                    m_IB->Lock( 0, IndexCount * GetIndexSize(), &l_memSrcI, 0 );
+                    memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
+                    m_IB->Unlock();
+
+                    m_RenderOK = true;
+                }
             }
         }
 
@@ -54,8 +75,15 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
         {
         }
 
+        virtual bool isRenderOK()
+        {
+            return m_RenderOK;
+        }
+
         virtual bool Render( CGraphicsManager* GM )
         {
+            if(!m_RenderOK) return false;
+
             HRESULT lOk = GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
             lOk = GM->GetDevice()->SetIndices( m_IB );
             lOk = GM->GetDevice()->SetFVF( T::GetFVF() );
@@ -65,6 +93,8 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 
         virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount )
         {
+            if(!m_RenderOK) return false;
+
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
@@ -97,6 +127,8 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 
         bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique )
         {
+            if(!m_RenderOK) return false;
+
             EffectTechnique->BeginRender();
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
