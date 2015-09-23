@@ -28,6 +28,8 @@ public:
 
   void Destroy();
 
+  void ThreadLoadRoom();
+
   void LoadRoom( std::string aRoomName );
   void ActivateRoom( std::string aRoomName );
 
@@ -43,6 +45,9 @@ public:
 
 private:
   CRoom* mCurrentRoom;
+  std::string mRoom2Load;
 };
+
+void WindowsThreadFunction(CScene* theThread);
 
 #endif

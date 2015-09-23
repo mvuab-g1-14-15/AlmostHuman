@@ -111,8 +111,13 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             NULL
         };
         RegisterClassEx( &wc );
+
+        // http://xmlsoft.org/threads.html
+        xmlInitParser();
+
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
+
         // Read the configuration of the engine
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "./Data/config.xml" );

@@ -25,6 +25,7 @@
 
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
+    , mRoom2Load( "" )
     , mCurrentRoom( 0 )
 {
 
@@ -102,6 +103,39 @@ bool CScene::Load( const std::string& l_FilePath )
     return lOk;
 }
 
+void CScene::ThreadLoadRoom()
+{
+    if(mRoom2Load.length() == 0) return;
+    
+    CXMLTreeNode l_Root, l_Node;
+    if(!l_Root.LoadAndFindNode( mRoom2Load.c_str(), "scene", l_Node)) return;
+    
+    for(int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+    {
+        CXMLTreeNode& l_CurrentNode = l_Node( i );
+        
+        const std::string& l_Path = l_CurrentNode.GetAttribute<std::string>( "path", "no_path" );
+        const std::string& l_ROFile = l_CurrentNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" );
+        const std::string& l_SMFile = l_CurrentNode.GetAttribute<std::string>( "static_meshes_file", "no_file" );
+        const std::string& l_Level = l_CurrentNode.GetAttribute<std::string>( "level", "no_level" );
+
+        CRoom* lRoom = new CRoom();
+
+        lRoom->SetName( l_Level );
+        lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
+        lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
+        lRoom->SetBasePath( l_Path + "/" );
+
+        lRoom->LoadLightProbe();
+
+        if ( !AddResource( l_Level, lRoom ) )
+            CHECKED_DELETE( lRoom );
+    }
+
+    // This will read the characters, all the characters are inside the core room, it is mandatory
+    ActivateRoom( "core" );
+}
+
 bool CScene::Reload()
 {
     CMapManager::Destroy();
@@ -161,11 +195,13 @@ void CScene::LoadRoom( std::string aRoomName )
 void CScene::ActivateRoom( std::string aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
+    mRoom2Load = aRoomName;
 
     lRoom->SetActive( true );
     mCurrentRoom = lRoom;
 
     if ( !lRoom->GetLayers() )
+        //CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) WindowsThreadFunction, this, NULL, NULL);
         LoadRoom( aRoomName );
 }
 
@@ -215,4 +251,9 @@ const std::string& CScene::GetActivateRoom()
 
     const std::string& lDontExist( "" );
     return lDontExist;
+}
+
+void WindowsThreadFunction(CScene* theThread)
+{
+    theThread->ThreadLoadRoom();
 }
