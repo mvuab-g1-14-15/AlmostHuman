@@ -136,7 +136,7 @@ void CScene::LoadRoom( std::string aRoomName )
 
         LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
 
-        if (aRoomName != "core"){
+        /*if (aRoomName != "core"){
           if (PhysXMInstance->GetLoadASE())
 	        {
                 if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lAsePath+""+aRoomName+".ase", aRoomName))
@@ -154,7 +154,7 @@ void CScene::LoadRoom( std::string aRoomName )
 			        PhysXMInstance->AddPhysicActor( l_AseMeshActor );
 		        }
 	        }
-        }
+        }*/
     }
 }
 

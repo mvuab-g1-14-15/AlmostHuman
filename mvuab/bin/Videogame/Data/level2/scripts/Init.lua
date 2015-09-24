@@ -13,12 +13,14 @@ initialized1 = false
 
 function load_basics()
 	engine:Trace("Init the load_basics()")
+	
 	-- basic loads
 	scene:ActivateRoom("sala1")
 	scene:ActivateRoom("pasillo")
 	scene:ActivateRoom("sala4")
 	scene:ActivateRoom("sala2")
 	--scene:ActivateRoom("sala3")
+	camera_manager:SetCurrentCamera( "FreeCam" )
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -194,7 +196,9 @@ function update_gameplay()
 			end
 		end
 		
-		
+		if action_manager:DoAction("FullEnergy") then
+			g_Player:SetEnergy(100.0)
+		end
 		
 		
 		
