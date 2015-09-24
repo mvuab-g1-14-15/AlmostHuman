@@ -12,6 +12,7 @@
 #include <string>
 #include "Exceptions\Exception.h"
 
+#include "ScriptManager.h"
 #include "Utils\GPUStatics.h"
 #include "Console\Console.h"
 #include "TestProcess\PhysicProcess.h"
@@ -19,6 +20,7 @@
 #include "TestProcess\AStarProcess.h"
 #include "TestProcess\PreProcess.h"
 
+#include "EngineConfig.h"
 #include "EngineManagers.h"
 #include "GraphicsManager.h"
 
@@ -31,6 +33,15 @@
 
 
 #define APPLICATION_NAME    "ALMOST HUMAN"
+
+void EngineUpdateRender(CEngine* pEngine)
+{
+    pEngine->ProcessInputs();
+    pEngine->Update();
+
+    if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
+        pEngine->Render();
+}
 
 void ShowErrorMessage( const std::string& message )
 {
@@ -113,7 +124,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         RegisterClassEx( &wc );
 
         // http://xmlsoft.org/threads.html
-        xmlInitParser();
+        //xmlInitParser();
 
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
@@ -121,11 +132,10 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         // Read the configuration of the engine
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "./Data/config.xml" );
-
+        CEngine* pEngine = new CEngine();
         CGPUStatics* gpu = new CGPUStatics();
         CLogger* pLogger = new CLogger();
 
-        CEngine* pEngine = new CEngine();
         DWORD style;
 
         if ( lEngineConfig->GetFullScreenMode() || lEngineConfig->GetFitDesktop() )
@@ -180,6 +190,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
 
+        //CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) EngineUpdateRender, pEngine, NULL, NULL);
+
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -191,6 +203,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             {
                 pEngine->ProcessInputs();
                 pEngine->Update();
+
+                ScriptMInstance->RunCode( "update_gameplay()" );
 
                 if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
                     pEngine->Render();

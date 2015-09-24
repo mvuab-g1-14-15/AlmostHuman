@@ -2,10 +2,10 @@
 #ifndef D3DX9_H
 #define D3DX9_H
 
-#include <d3dx9.h>
-#include <d3dx9shape.h>
 #include <d3dx9effect.h>
+#include <d3dx9shape.h>
 #include <d3dx9math.h>
+#include <d3dx9.h>
 
 #define ENABLE_HR_INST 0
 
