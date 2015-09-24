@@ -18,17 +18,23 @@ function check_next_state()
 	end
 	
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
-	if l_CurrentState ~= "perseguir" then	
+	if l_CurrentState ~= "perseguir" then
+		if l_HearSomething and l_PlayerInSight ~= true then
+			l_NextState = "perseguir"
+			enemy.Suspected = true
+			enemy.SuspectedPosition = g_Player:GetPosition()
+		end
 		if l_CurrentState == "inicial" then
 			l_NextState = "andando"
 		end
 		if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 			if l_PlayerInSight then
 				l_NextState = "atacar"
+				engine:Trace("He entrado en atacar "..enemy:GetName())
 				if countdowntimer_manager:ExistTimer(timerPerseguir) then
 					countdowntimer_manager:Reset(timerPerseguir, false)
 				end
-				
+				enemy.Suspected = false
 				g_EnemyManager:SetAlarm(true)
 			end
 		end
@@ -43,16 +49,6 @@ function check_next_state()
 				countdowntimer_manager:Reset(timerPerseguir, false)
 			end
 			enemy.Suspected = false
-	elseif l_HearSomething then
-		l_NextState = "perseguir"
-		enemy.Suspected = true
-		enemy.SuspectedPosition = g_Player:GetPosition()
-	end
-	
-	if enemy.Suspected then
-		if enemy:MoveToPos(enemy.SuspectedPosition) then
-			enemy.Suspected = false
-		end
 	end
 	
 	if l_NextState ~= l_CurrentState then
@@ -75,8 +71,13 @@ end
 function stay()
 	local dt = timer:GetElapsedTime()
 	enemy = g_EnemyManager:GetActualEnemy()
-	
-	enemy:MoveToWaypoint(Vect3f(0.0))
+	if enemy.Suspected then
+		if enemy:MoveToPos(enemy.SuspectedPosition) then
+			enemy.Suspected = false
+		end
+	else
+		enemy:MoveToWaypoint(Vect3f(0.0))
+	end
 end
 
 function atacar()
@@ -86,6 +87,9 @@ function atacar()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	
 	if l_PlayerInSight then
+		if enemy.Suspected then
+			enemy.Suspected = false
+		end
 		enemy:SetCountTimeShoot(enemy:GetCountTimeShoot() + timer:GetElapsedTime())		
 		if enemy:GetCountTimeShoot() >= enemy:GetTimeToShoot() then
 			if not countdowntimer_manager:ExistTimer(timerBurst) then
@@ -126,5 +130,11 @@ end
 function perseguir()
 	enemy = g_EnemyManager:GetActualEnemy()
 	local l_TargetPos = GetPlayerPosition()
-	enemy:MoveToPlayer(l_TargetPos)	
+	if enemy.Suspected then
+		if enemy:MoveToPos(enemy.SuspectedPosition) then
+			enemy.Suspected = false
+		end
+	else
+		enemy:MoveToPlayer(l_TargetPos)
+    end		
 end
