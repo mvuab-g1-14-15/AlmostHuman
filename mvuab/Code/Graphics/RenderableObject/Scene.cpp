@@ -106,34 +106,54 @@ bool CScene::Load( const std::string& l_FilePath )
 void CScene::ThreadLoadRoom()
 {
     if(mRoom2Load.length() == 0) return;
-    
-    CXMLTreeNode l_Root, l_Node;
-    if(!l_Root.LoadAndFindNode( mRoom2Load.c_str(), "scene", l_Node)) return;
-    
-    for(int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+    std::string l_Room2Load(mRoom2Load);
+
+    CRenderableObjectsLayersManager* lROLM = new CRenderableObjectsLayersManager();
+    std::string lAsePath = "Data/ase/";
+    CRoom* lRoom = GetResource( l_Room2Load );
+
+    if ( lRoom )
     {
-        CXMLTreeNode& l_CurrentNode = l_Node( i );
-        
-        const std::string& l_Path = l_CurrentNode.GetAttribute<std::string>( "path", "no_path" );
-        const std::string& l_ROFile = l_CurrentNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" );
-        const std::string& l_SMFile = l_CurrentNode.GetAttribute<std::string>( "static_meshes_file", "no_file" );
-        const std::string& l_Level = l_CurrentNode.GetAttribute<std::string>( "level", "no_level" );
+        std::string lSMPath = lRoom->GetStaticMeshesPath();
+        std::string lROPath = lRoom->GetRenderableObjectsPath();
+        std::string lBasePath = lRoom->GetBasePath();
 
-        CRoom* lRoom = new CRoom();
+        if ( lSMPath.find( ".xml" ) != std::string::npos )
+            SMeshMInstance->Load( lSMPath, lBasePath );
 
-        lRoom->SetName( l_Level );
-        lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
-        lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
-        lRoom->SetBasePath( l_Path + "/" );
+        if ( lROPath.find( ".xml" ) != std::string::npos )
+            lROLM->LoadLayers( lROPath, l_Room2Load );
 
-        lRoom->LoadLightProbe();
+        PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
+        PSMan->Init();
 
-        if ( !AddResource( l_Level, lRoom ) )
-            CHECKED_DELETE( lRoom );
+        BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
+        BillboardMan->Reload();
+
+        lRoom->SetLayers( lROLM );
+
+        LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
+
+        if (l_Room2Load != "core"){
+            if (PhysXMInstance->GetLoadASE())
+            {
+                if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lAsePath+""+l_Room2Load+".ase", l_Room2Load))
+                {
+                    CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( l_Room2Load + "Escenario" );
+                    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+                    CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+                    VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+
+                    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+                        l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+                    //m_AseMeshActor->CreateBody ( 10.f );
+                    PhysXMInstance->AddPhysicActor( l_AseMeshActor );
+                }
+            }
+        }
     }
-
-    // This will read the characters, all the characters are inside the core room, it is mandatory
-    ActivateRoom( "core" );
 }
 
 bool CScene::Reload()
@@ -201,8 +221,10 @@ void CScene::ActivateRoom( std::string aRoomName )
     mCurrentRoom = lRoom;
 
     if ( !lRoom->GetLayers() )
+    {
         //CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) WindowsThreadFunction, this, NULL, NULL);
         LoadRoom( aRoomName );
+    }
 }
 
 void CScene::UnloadRoom( std::string aRoomName )

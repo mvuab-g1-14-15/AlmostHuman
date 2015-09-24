@@ -4,11 +4,16 @@
 #define _XML_TREE_NODE_H_
 
 // Includes
-#include "libxml/parser.h"
 #include "libxml/xmlwriter.h"
-#include <string>
+#include "libxml/globals.h"
+#include "libxml/threads.h"
+#include "libxml/parser.h"
+#include "libxml/tree.h"
+
 #include "Math/Vector4.h"
 #include "Math/Color.h"
+
+#include <string>
 
 //Class
 class CXMLTreeNode

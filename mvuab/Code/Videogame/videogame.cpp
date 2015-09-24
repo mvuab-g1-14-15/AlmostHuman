@@ -34,13 +34,18 @@
 
 #define APPLICATION_NAME    "ALMOST HUMAN"
 
+bool g_Exit = false;
+
 void EngineUpdateRender(CEngine* pEngine)
 {
-    pEngine->ProcessInputs();
-    pEngine->Update();
+    while(!g_Exit)
+    {
+        pEngine->ProcessInputs();
+        pEngine->Update();
 
-    if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-        pEngine->Render();
+        if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
+            pEngine->Render();
+    }
 }
 
 void ShowErrorMessage( const std::string& message )
@@ -124,7 +129,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         RegisterClassEx( &wc );
 
         // http://xmlsoft.org/threads.html
-        //xmlInitParser();
+        xmlInitParser();
 
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
@@ -201,16 +206,16 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
             else
             {
+                //ScriptMInstance->RunCode( "update_gameplay()" );
                 pEngine->ProcessInputs();
                 pEngine->Update();
-
-                ScriptMInstance->RunCode( "update_gameplay()" );
 
                 if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
                     pEngine->Render();
             }
         }
 
+        g_Exit = true;
         UnregisterClass( APPLICATION_NAME, wc.hInstance );
         
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos

@@ -96,7 +96,7 @@ void CPlayerPhysicProcess::Update()
   // m_ConsoleActivate = GUIInstance->GetConsole()->GetVisible();
 
   //ScriptMInstance->RunCode( "update()" );
-  //ScriptMInstance->RunCode( "update_gameplay()" );
+  ScriptMInstance->RunCode( "update_gameplay()" );
 }
 
 
