@@ -46,7 +46,10 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
     }
 
     TMapResource::iterator l_It = m_Resources.find(fileName);
-    return ( l_It == m_Resources.end() ) ? AddTexture( fileName ) : l_It->second;
+    return (l_It == m_Resources.end()) ? AddTexture( fileName ) : l_It->second;
+
+    //CTexture *t = GetResource(fileName);
+    //return (t == NULL) ? AddTexture(fileName) : t;
 }
 
 CTexture* CTextureManager::AddTexture( const std::string& fileName )
@@ -65,7 +68,7 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
     {
         t = new CTexture();
     }
-
+    
     if ( !t->Load( fileName ) || !AddResource( fileName, t) )
     {
         CHECKED_DELETE( t );

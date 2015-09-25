@@ -20,6 +20,17 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 		void Update(){}
 		void Render(){}
 
+        bool threadMeshLoad(std::string &l_File, std::string &l_Name);
 		void Load( std::string aFilePath, std::string aBasePath );
 };
+
+typedef struct 
+{
+    std::string FileName;
+    std::string ResourceName;
+
+    CStaticMeshManager *MeshManager;
+} MESH_THREAD_INFO;
+
+void runMeshLoad(MESH_THREAD_INFO *l_ThreadInfo);
 #endif

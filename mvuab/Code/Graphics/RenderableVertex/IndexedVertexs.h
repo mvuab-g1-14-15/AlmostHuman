@@ -42,14 +42,14 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
 
-                HRESULT HR1 = GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 );
+                HRESULT HR1 = GM->GetDevice()->CreateIndexBuffer(IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0);
                 if(HR1 != D3D_OK)
                 {
                     char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Index Buffer: %s\n", DXGetErrorString(HR1));
                     OutputDebugStringA(s);
                 }
 
-                HRESULT HR2 = GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
+                HRESULT HR2 = GM->GetDevice()->CreateVertexBuffer(VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0);
                 if(HR2 != D3D_OK)
                 {
                     char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Vertex Buffer: %s\n", DXGetErrorString(HR2));
@@ -58,15 +58,35 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 
                 if(m_VB != NULL && m_IB != NULL)
                 {
-                    m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
+                    bool l_OkVB = false;
+                    bool l_OkIB = false;
+
+                    /*if(m_VB->Lock(0, VertexCount * GetVertexSize(), &l_memSrcV, 0) ==  D3D_OK)
+                    {
+                        memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
+                        m_VB->Unlock(); l_OkVB = true;
+                    }
+
+                    if(m_IB->Lock(0, IndexCount * GetIndexSize(), &l_memSrcI, 0) == D3D_OK)
+                    {
+                        memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
+                        m_IB->Unlock(); l_OkIB = true;
+                    }*/
+
+                    m_VB->Lock(0, VertexCount * GetVertexSize(), &l_memSrcV, 0);
                     memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
-                    m_VB->Unlock();
+                    m_VB->Unlock(); l_OkVB = true;
+                    
 
-                    m_IB->Lock( 0, IndexCount * GetIndexSize(), &l_memSrcI, 0 );
+                    m_IB->Lock(0, IndexCount * GetIndexSize(), &l_memSrcI, 0);
                     memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
-                    m_IB->Unlock();
+                    m_IB->Unlock(); l_OkIB = true;
 
-                    m_RenderOK = true;
+                    if(!(m_RenderOK = l_OkIB & l_OkVB))
+                    {
+                        CHECKED_RELEASE(m_IB);
+                        CHECKED_RELEASE(m_VB);
+                    }
                 }
             }
         }

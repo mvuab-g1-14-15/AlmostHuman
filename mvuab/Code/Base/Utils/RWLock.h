@@ -14,6 +14,7 @@ class CRWLock
 
         int m_ActiveReaders;
         int m_ActiveWriters;
+        int m_WritersWaiting;
 
     public:
         CRWLock  (void);

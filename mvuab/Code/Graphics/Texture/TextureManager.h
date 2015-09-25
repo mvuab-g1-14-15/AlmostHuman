@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "CubedTexture.h"
 #include "GUITexture.h"
+#include "Utils\Mutex.h"
 
 static const char* sDummyTextureName = "Data/textures/Dummy.png";
 
@@ -24,6 +25,7 @@ class CTextureManager : public CMapManager<CTexture>, public CManager
         void Reload();
         CTexture* GetTexture( const std::string& fileName );
     private:
+        CMutex m_Mutex;
         CTexture *m_DummyTexture;
         CTexture* AddTexture( const std::string& fileName );
 };

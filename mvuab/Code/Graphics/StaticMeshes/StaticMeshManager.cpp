@@ -47,7 +47,16 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
         const std::string &file = aBasePath + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
 
-        CStaticMesh *l_StaticMesh = new CStaticMesh();
+        MESH_THREAD_INFO *l_ThreadInfo = (MESH_THREAD_INFO *) malloc (sizeof(MESH_THREAD_INFO));
+        new (l_ThreadInfo) MESH_THREAD_INFO;
+
+        l_ThreadInfo->MeshManager = this;
+        l_ThreadInfo->FileName.assign(file);
+        l_ThreadInfo->ResourceName.assign(lName);
+
+        CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
+
+        /*CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
 
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
@@ -59,7 +68,35 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         if(!lLoadOk || !lState )
         {
             CHECKED_DELETE(l_StaticMesh);
-        }
+        }*/
     }
     TIMER_STOP( "CStaticMeshManager::Load." );
+}
+
+bool CStaticMeshManager::threadMeshLoad(std::string &l_File, std::string &l_Name)
+{
+    CStaticMesh *l_StaticMesh = new CStaticMesh();
+
+    if(!l_StaticMesh->Load(l_File))
+    {
+        CHECKED_DELETE(l_StaticMesh);
+        return false;
+    }
+
+    if(!AddResource(l_Name, l_StaticMesh))
+    {
+        CHECKED_DELETE(l_StaticMesh);
+        return false;
+    }
+
+    return true;
+}
+
+void runMeshLoad(MESH_THREAD_INFO *l_ThreadInfo)
+{
+    bool lLoadOk = l_ThreadInfo->MeshManager->threadMeshLoad(l_ThreadInfo->FileName, l_ThreadInfo->ResourceName);
+    ASSERT( lLoadOk, "Could not load static mesh %s", l_ThreadInfo->FileName.c_str() );
+    
+    free(l_ThreadInfo);
+    l_ThreadInfo = NULL;
 }

@@ -19,6 +19,7 @@ CLogger::CLogger()
 
 void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, long line, const char* format, ... )
 {
+    return;
     if ( ll >= m_eLogLevel )
     {
         va_list args;

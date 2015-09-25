@@ -333,30 +333,29 @@ void CGraphicsManager::Init()
 
 DWORD CGraphicsManager::GetBehaviorFlags()
 {
-  DWORD dwBehaviorFlags = 0;
-  //
-  // Do we support hardware vertex processing? if so, use it.
-  // If not, downgrade to software.
-  //
-  D3DCAPS9 d3dCaps;
+    DWORD dwBehaviorFlags = D3DCREATE_MULTITHREADED;
+    //
+    // Do we support hardware vertex processing? if so, use it.
+    // If not, downgrade to software.
+    //
+    D3DCAPS9 d3dCaps;
 
-  if ( FAILED( mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT,
-               D3DDEVTYPE_HAL, &d3dCaps ) ) )
-  {
-    LOG_ERROR_APPLICATION( "GraphicsManager::Error getting the device caps" );
-    return dwBehaviorFlags;
-  }
+    if(FAILED(mDirectXObject->GetDeviceCaps( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &d3dCaps)))
+    {
+        LOG_ERROR_APPLICATION( "GraphicsManager::Error getting the device caps" );
+        return dwBehaviorFlags;
+    }
 
-  if ( d3dCaps.VertexProcessingCaps != 0 )
-  {
-    dwBehaviorFlags |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
-    LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_HARDWARE_VERTEXPROCESSING" );
-  }
-  else
-  {
-    dwBehaviorFlags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-    LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_SOFTWARE_VERTEXPROCESSING" );
-  }
+    if(d3dCaps.VertexProcessingCaps != 0)
+    {
+        dwBehaviorFlags |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
+        LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_HARDWARE_VERTEXPROCESSING" );
+    }
+    else
+    {
+        dwBehaviorFlags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+        LOG_INFO_APPLICATION( "GraphicsManager::D3DCREATE_SOFTWARE_VERTEXPROCESSING" );
+    }
 
   return dwBehaviorFlags;
 }
@@ -454,8 +453,7 @@ bool CGraphicsManager::CreateFullScreenMode( CEngineConfig* aEngineConfig )
   d3dpp.MultiSampleType             = D3DMULTISAMPLE_NONE;
   d3dpp.MultiSampleQuality          = 0;
 
-  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp,
-               &mDirectXDevice );
+  HRESULT hr = mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp, &mDirectXDevice );
 
   if ( FAILED( hr ) )
   {
@@ -501,8 +499,7 @@ bool CGraphicsManager::CreateWindowedMode( CEngineConfig* aEngineConfig )
   d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
   d3dpp.PresentationInterval   = D3DPRESENT_INTERVAL_IMMEDIATE;
 
-  if ( FAILED( mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId,
-               dwBehaviorFlags, &d3dpp, &mDirectXDevice ) ) )
+  if ( FAILED( mDirectXObject->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_WindowId, dwBehaviorFlags, &d3dpp, &mDirectXDevice ) ) )
   {
     LOG_ERROR_APPLICATION( "Error creating the device" );
     return false;
