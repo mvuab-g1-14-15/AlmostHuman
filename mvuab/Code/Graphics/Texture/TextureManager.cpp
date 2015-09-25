@@ -45,11 +45,11 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
         return m_DummyTexture;
     }
 
-    TMapResource::iterator l_It = m_Resources.find(fileName);
-    return (l_It == m_Resources.end()) ? AddTexture( fileName ) : l_It->second;
+    //TMapResource::iterator l_It = m_Resources.find(fileName);
+    //return (l_It == m_Resources.end()) ? AddTexture( fileName ) : l_It->second;
 
-    //CTexture *t = GetResource(fileName);
-    //return (t == NULL) ? AddTexture(fileName) : t;
+    CTexture *t = GetResource(fileName);
+    return (t == NULL) ? AddTexture(fileName) : t;
 }
 
 CTexture* CTextureManager::AddTexture( const std::string& fileName )

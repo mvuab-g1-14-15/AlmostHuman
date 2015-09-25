@@ -41,6 +41,9 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
 
     TIMER_START();
     int lCount( node.GetNumChildren() );
+    std::vector<HANDLE> l_ThreadHandler;
+    l_ThreadHandler.reserve(lCount);
+
     //#pragma omp parallel for shared(lCount)
     for( int i = 0; i < lCount ; ++i )
     {
@@ -50,11 +53,21 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         MESH_THREAD_INFO *l_ThreadInfo = (MESH_THREAD_INFO *) malloc (sizeof(MESH_THREAD_INFO));
         new (l_ThreadInfo) MESH_THREAD_INFO;
 
+        l_ThreadInfo->iD = i;
         l_ThreadInfo->MeshManager = this;
+
         l_ThreadInfo->FileName.assign(file);
         l_ThreadInfo->ResourceName.assign(lName);
 
-        CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
+        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
+        if(h == NULL)
+        {
+            char s[256] = { 0 }; sprintf_s(s, 256, "CreateThread ERROR: %d\n", GetLastError());
+            OutputDebugStringA(s); continue;
+        }
+
+        l_ThreadHandler.push_back(h);
+        if(i % 4 == 0) Sleep(200);
 
         /*CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
@@ -70,21 +83,34 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
             CHECKED_DELETE(l_StaticMesh);
         }*/
     }
+
+    WaitForMultipleObjects(l_ThreadHandler.size(), &l_ThreadHandler[0], true, INFINITE);
+    for(unsigned int i = 0; i < l_ThreadHandler.size(); i++)
+    {
+        CloseHandle(l_ThreadHandler[i]);
+    }
+
     TIMER_STOP( "CStaticMeshManager::Load." );
 }
 
-bool CStaticMeshManager::threadMeshLoad(std::string &l_File, std::string &l_Name)
+bool CStaticMeshManager::threadMeshLoad(std::string &l_File, std::string &l_Name, unsigned int iD)
 {
     CStaticMesh *l_StaticMesh = new CStaticMesh();
 
     if(!l_StaticMesh->Load(l_File))
     {
+        char s[256] = { 0 }; sprintf_s(s, 256, "CreateThread l_StaticMesh->Load() ERROR\n");
+        OutputDebugStringA(s);
+
         CHECKED_DELETE(l_StaticMesh);
         return false;
     }
 
     if(!AddResource(l_Name, l_StaticMesh))
     {
+        char s[256] = { 0 }; sprintf_s(s, 256, "CreateThread AddResource ERROR\n");
+        OutputDebugStringA(s);
+
         CHECKED_DELETE(l_StaticMesh);
         return false;
     }
@@ -94,9 +120,11 @@ bool CStaticMeshManager::threadMeshLoad(std::string &l_File, std::string &l_Name
 
 void runMeshLoad(MESH_THREAD_INFO *l_ThreadInfo)
 {
-    bool lLoadOk = l_ThreadInfo->MeshManager->threadMeshLoad(l_ThreadInfo->FileName, l_ThreadInfo->ResourceName);
+    bool lLoadOk = l_ThreadInfo->MeshManager->threadMeshLoad(l_ThreadInfo->FileName, l_ThreadInfo->ResourceName, l_ThreadInfo->iD);
     ASSERT( lLoadOk, "Could not load static mesh %s", l_ThreadInfo->FileName.c_str() );
     
     free(l_ThreadInfo);
     l_ThreadInfo = NULL;
+
+    ExitThread(0);
 }
