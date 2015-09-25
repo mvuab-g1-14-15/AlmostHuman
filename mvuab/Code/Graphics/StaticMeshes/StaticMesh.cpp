@@ -17,6 +17,8 @@
 #include "EngineManagers.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
 
+uint32 CStaticMesh::mAllVtxCount = 0;
+
 #include <cstdio>
 
 CStaticMesh::CStaticMesh() : m_FileName( "" ), m_RenderableObjectTechniqueName( "" ), m_IsTransformed(false)
@@ -229,6 +231,10 @@ bool CStaticMesh::Load( const std::string& FileName )
 
         // Check the renderable object
         if (l_RV) { m_RVs.push_back(l_RV); }
+
+        mAllVtxCount += l_VrtexCount;
+
+        LOG_INFO_APPLICATION( "Total vertices loaded %u", mAllVtxCount );
 
         free(l_VtxsAddress);
         free(l_IdxAddress);

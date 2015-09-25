@@ -7,7 +7,7 @@
 #include <d3dx9effect.h>
 #include <d3dx9math.h>
 
-#define ENABLE_HR_INST 0
+#define ENABLE_HR_INST 1
 
 #if ENABLE_HR_INST == 1
 

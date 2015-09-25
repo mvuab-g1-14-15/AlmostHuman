@@ -34,6 +34,8 @@ class CStaticMesh
         Math::Vect3f m_AABBCenter;
         bool m_IsTransformed;
 
+        static uint32 mAllVtxCount;
+
     public:
         CStaticMesh();
         ~CStaticMesh();

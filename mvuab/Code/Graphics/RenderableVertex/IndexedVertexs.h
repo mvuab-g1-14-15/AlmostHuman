@@ -37,8 +37,8 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
 
-                GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 );
-                GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 );
+                HR( GM->GetDevice()->CreateIndexBuffer( IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0 ));
+                HR( GM->GetDevice()->CreateVertexBuffer( VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0 ) );
 
                 m_VB->Lock( 0, VertexCount * GetVertexSize(), &l_memSrcV, 0 );
                 memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
