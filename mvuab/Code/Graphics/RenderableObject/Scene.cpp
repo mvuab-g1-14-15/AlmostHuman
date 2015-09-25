@@ -25,7 +25,6 @@
 
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
-    , mRoom2Load( "" )
     , mCurrentRoom( 0 )
 {
 
@@ -103,59 +102,6 @@ bool CScene::Load( const std::string& l_FilePath )
     return lOk;
 }
 
-void CScene::ThreadLoadRoom()
-{
-    if(mRoom2Load.length() == 0) return;
-    std::string l_Room2Load(mRoom2Load);
-
-    CRenderableObjectsLayersManager* lROLM = new CRenderableObjectsLayersManager();
-    std::string lAsePath = "Data/ase/";
-    CRoom* lRoom = GetResource( l_Room2Load );
-
-    if ( lRoom )
-    {
-        std::string lSMPath = lRoom->GetStaticMeshesPath();
-        std::string lROPath = lRoom->GetRenderableObjectsPath();
-        std::string lBasePath = lRoom->GetBasePath();
-
-        if ( lSMPath.find( ".xml" ) != std::string::npos )
-            SMeshMInstance->Load( lSMPath, lBasePath );
-
-        if ( lROPath.find( ".xml" ) != std::string::npos )
-            lROLM->LoadLayers( lROPath, l_Room2Load );
-
-        PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
-        PSMan->Init();
-
-        BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
-        BillboardMan->Reload();
-
-        lRoom->SetLayers( lROLM );
-
-        LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
-
-        if (l_Room2Load != "core"){
-            if (PhysXMInstance->GetLoadASE())
-            {
-                if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lAsePath+""+l_Room2Load+".ase", l_Room2Load))
-                {
-                    CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( l_Room2Load + "Escenario" );
-                    l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-                    CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-
-                    VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
-
-                    for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-                        l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-                    //m_AseMeshActor->CreateBody ( 10.f );
-                    PhysXMInstance->AddPhysicActor( l_AseMeshActor );
-                }
-            }
-        }
-    }
-}
-
 bool CScene::Reload()
 {
     CMapManager::Destroy();
@@ -215,14 +161,12 @@ void CScene::LoadRoom( std::string aRoomName )
 void CScene::ActivateRoom( std::string aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
-    mRoom2Load = aRoomName;
 
     lRoom->SetActive( true );
     mCurrentRoom = lRoom;
 
     if ( !lRoom->GetLayers() )
     {
-        //CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) WindowsThreadFunction, this, NULL, NULL);
         LoadRoom( aRoomName );
     }
 }
@@ -273,9 +217,4 @@ const std::string& CScene::GetActivateRoom()
 
     const std::string& lDontExist( "" );
     return lDontExist;
-}
-
-void WindowsThreadFunction(CScene* theThread)
-{
-    theThread->ThreadLoadRoom();
 }

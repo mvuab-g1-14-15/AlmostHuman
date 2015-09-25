@@ -25,7 +25,7 @@ void CStaticMeshManager::Init()
 
 void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
 {
-	CXMLTreeNode newFile;
+    CXMLTreeNode newFile;
     if (!newFile.LoadFile(aFilePath.c_str()))
     {
         LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", aFilePath.c_str());
@@ -39,9 +39,9 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         return;
     }
 
-	TIMER_START();
-	int lCount( node.GetNumChildren() );
-	//#pragma omp parallel for shared(lCount)
+    TIMER_START();
+    int lCount( node.GetNumChildren() );
+    //#pragma omp parallel for shared(lCount)
     for( int i = 0; i < lCount ; ++i )
     {
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
@@ -53,13 +53,13 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
 
         // Default TODO Delete
-		int lState = 0;
-		//#pragma omp atomic
-		lState += AddResource( lName, l_StaticMesh );
+        int lState = 0;
+        //#pragma omp atomic
+        lState += AddResource( lName, l_StaticMesh );
         if(!lLoadOk || !lState )
         {
             CHECKED_DELETE(l_StaticMesh);
         }
     }
-	TIMER_STOP( "CStaticMeshManager::Load." );
+    TIMER_STOP( "CStaticMeshManager::Load." );
 }

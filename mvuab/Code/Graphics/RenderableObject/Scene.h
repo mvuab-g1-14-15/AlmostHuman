@@ -45,9 +45,6 @@ public:
 
 private:
   CRoom* mCurrentRoom;
-  std::string mRoom2Load;
 };
-
-void WindowsThreadFunction(CScene* theThread);
 
 #endif

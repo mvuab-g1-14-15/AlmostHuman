@@ -34,20 +34,6 @@
 
 #define APPLICATION_NAME    "ALMOST HUMAN"
 
-bool g_Exit = false;
-
-void EngineUpdateRender(CEngine* pEngine)
-{
-    while(!g_Exit)
-    {
-        pEngine->ProcessInputs();
-        pEngine->Update();
-
-        if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-            pEngine->Render();
-    }
-}
-
 void ShowErrorMessage( const std::string& message )
 {
     bool logSaved = CLogger::GetSingletonPtr()->SaveLogsInFile();
@@ -195,8 +181,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
 
-        //CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) EngineUpdateRender, pEngine, NULL, NULL);
-
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -206,7 +190,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
             else
             {
-                //ScriptMInstance->RunCode( "update_gameplay()" );
                 pEngine->ProcessInputs();
                 pEngine->Update();
 
@@ -215,7 +198,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
         }
 
-        g_Exit = true;
         UnregisterClass( APPLICATION_NAME, wc.hInstance );
         
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
