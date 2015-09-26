@@ -22,7 +22,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	self.ShootSpeed = 50.0
 	
-	self.Delta = 0.2
+	self.Delta = 0.5
 	
 	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
