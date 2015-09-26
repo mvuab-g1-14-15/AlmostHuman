@@ -1273,7 +1273,7 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
   pViewport.Width=mWidth;
   pViewport.Height=mHeight;
 
-  D3DXVECTOR3 l_OutPosition;
+  D3DXVECTOR3 l_OutPosition; 
   D3DXVECTOR3 modPos( Point.u );
   D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &(mProjection.GetD3DXMatrix()), &(mView.GetD3DXMatrix() ), &(mWorld.GetD3DXMatrix()) );
   // To Debug uncomment this line
