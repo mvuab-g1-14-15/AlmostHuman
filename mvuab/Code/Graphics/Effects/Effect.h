@@ -2,9 +2,7 @@
 #ifndef EFFECT_H
 #define EFFECT_H
 
-#include "Defines.h"
-#include <string>
-#include <vector>
+#include "Effects\Defines.h"
 #include "Math\Matrix44.h"
 #include "Effects\Defines.h"
 #include "Utils\Name.h"
@@ -25,8 +23,8 @@ public:
 
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-  bool Load( const CXMLTreeNode& EffectNode);
-  bool Reload();
+  bool Load  ( const std::string& aFileName, const std::vector<SDefines>& aDefines );
+  void Unload();
 
   bool SetWorldMatrix               ( const Math::Mat44f& Matrix );
   bool SetInverseWorldMatrix        ( const Math::Mat44f& Matrix );
@@ -60,8 +58,6 @@ public:
   GET_SET( D3DXHANDLE, LightProbesParameter );
   GET_SET( D3DXHANDLE, DebugColor );
   GET_SET( D3DXHANDLE, UseDebugColor );
-
-  GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
 
   const BOOL* GetLightsEnabled()
@@ -175,17 +171,7 @@ private: // Members
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
 
-  // To avoid memory leaks
-  std::vector<char*> m_NamesMacrosChar;
-  std::vector<char*> m_DescriptionsMacrosChar;
-
-  // The macros to compile the effect
-  std::vector<D3DXMACRO> m_Defines;
-
 private: // Methods
-
-  bool LoadEffect();
-  void Unload();
   void ResetLightsHandle();
 };
 #endif // EFFECT_H

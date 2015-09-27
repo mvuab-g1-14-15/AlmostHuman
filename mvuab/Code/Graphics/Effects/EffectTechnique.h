@@ -18,17 +18,10 @@ public:
   CEffectTechnique( const CXMLTreeNode& aTechniqueNode);
   virtual ~CEffectTechnique();
 
-  inline CEffect* GetEffect() const
-  {
-    return m_Effect;
-  }
+  inline CEffect* GetEffect() const { return m_Effect; }
+  D3DXHANDLE GetD3DTechnique() { return m_D3DTechnique; }
   bool BeginRender();
   bool Refresh();
-  //DirectX Methods Interface
-  D3DXHANDLE GetD3DTechnique()
-  {
-    return m_D3DTechnique;
-  }
 
   void SetDebugColor( Math::CColor color = Math::colWHITE );
 
@@ -43,7 +36,8 @@ private: // Members
 
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;
-  std::string                 m_EffectName;
+  std::string                 m_Filename;
+  std::vector<SDefines>       m_Defines;
 
   bool mUseWorld;
   bool mUseInverseWorld;

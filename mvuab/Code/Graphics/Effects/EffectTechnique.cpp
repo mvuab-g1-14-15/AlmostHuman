@@ -1,7 +1,6 @@
 #include "EffectTechnique.h"
 #include "EffectManager.h"
 #include "Effect.h"
-#include "EffectFlags.h"
 #include "Lights\LightManager.h"
 #include "Cameras\CameraManager.h"
 
@@ -17,30 +16,41 @@ CEffectTechnique::CEffectTechnique( const CXMLTreeNode& aTechniqueNode )
     : CName( aTechniqueNode.GetAttribute<std::string>("name", "null") )
     , m_DebugColor( Math::colWHITE )
     , m_VertexType( aTechniqueNode.GetAttribute<uint32>("vertex_type", 0 ) )
+    , m_Filename( aTechniqueNode.GetAttribute<std::string>("file", "null_file") )
 {
+  ASSERT( m_Filename != "null_file", "Check the file of the technique %s", GetName().c_str() );
+
   for ( uint32 j = 0, lCount = aTechniqueNode.GetNumChildren(); j < lCount; ++j )
   {
     const CXMLTreeNode& lCurrentNode = aTechniqueNode( j );
     const std::string& l_TagName = lCurrentNode.GetName();
-    if ( l_TagName == "effect" )
+    
+    if( l_TagName == "define" )
     {
-      m_Effect = new CEffect(lCurrentNode.GetAttribute<std::string>( "name", "null" ) );
-      bool lLoaded = m_Effect->Load( lCurrentNode);
-      ASSERT(lLoaded, "The effect %s could not be loaded" );
-
-      if( lLoaded )
-      {
-        m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( GetName() ) : 0;
-      }
-      else
-      {
-        CHECKED_DELETE( m_Effect );
-      }
+      SDefines lDefine = { lCurrentNode.GetAttribute<std::string>("name", "null_name"), lCurrentNode.GetAttribute<std::string>("description", "") };
+      m_Defines.push_back(lDefine);
     }
     else if ( l_TagName == "handles" )
     {
       ReadFlags( lCurrentNode );
     }
+  }
+
+  // By default insert the definition of the techinque name
+  SDefines lDefine = { "TECHNIQUE_NAME", GetName() };
+  m_Defines.push_back(lDefine);
+
+  m_Effect = new CEffect(GetName() + "_Effect" );
+  bool lLoaded = m_Effect->Load( m_Filename, m_Defines );
+  ASSERT(lLoaded, "The effect %s could not be loaded" );
+
+  if( lLoaded )
+  {
+    m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( GetName() ) : 0;
+  }
+  else
+  {
+    CHECKED_DELETE( m_Effect );
   }
 }
 
@@ -78,7 +88,8 @@ bool CEffectTechnique::BeginRender()
 
 bool CEffectTechnique::Refresh()
 {
-    return false;
+  m_Effect->Unload();
+  return m_Effect->Load( GetName() + "_Effect", m_Defines );
 }
 
 void CEffectTechnique::SetupMatrices()
