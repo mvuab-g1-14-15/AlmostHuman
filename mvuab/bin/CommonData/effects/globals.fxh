@@ -50,6 +50,10 @@ bool 		g_UseShadowMapStatic 									: UseStaticShadowMap;
 bool 		g_UseShadowMapDynamic 									: UseDynamicShadowMap;
 int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
 
+// Flip uv's
+bool		g_FlipUVHorizontal										: FlipUVHorizontal;
+bool		g_FlipUVVertical										: FlipUVVertical;
+
 float	    g_Size													: Size;
 int	        g_Angle													: Angle;
 float	    g_Alpha													: Alpha;
