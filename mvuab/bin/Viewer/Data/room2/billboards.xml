@@ -1,0 +1,4 @@
+<billboards_instances>
+	<billboard_instance name="target001" core="target" pos="66 -16.5 -44" active="true" />
+	<billboard_instance name="energy001" core="energy" pos="69 -16.5 -44" active="true" />
+</billboards_instances>
