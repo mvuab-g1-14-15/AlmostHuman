@@ -5,7 +5,6 @@
 #include "Texture/Texture.h"
 #include "EngineManagers.h"
 #include "Effects/EffectManager.h"
-#include "Billboard/Billboard.h"
 #include "RenderableVertex/InstancedVertexTypes.h"
 #include "RenderableVertex/InstancingVertexs.h"
 #include "Shapes/Shapes.h"

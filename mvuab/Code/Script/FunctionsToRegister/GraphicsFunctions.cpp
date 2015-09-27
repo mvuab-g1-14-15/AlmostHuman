@@ -14,7 +14,7 @@
 
 #include "Object3D.h"
 
-#include "Billboard\Billboard.h"
+#include "Billboard\BillboardInstance.h"
 #include "Billboard\BillboardManager.h"
 
 #include "Cameras/CameraManager.h"
@@ -67,11 +67,6 @@ CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, co
   return new CAnimatedInstanceModel( Name, CoreName );
 }
 
-CBillboard* CreateBillBoard()
-{
-  return new CBillboard();
-}
-
 COmniLight* CreateOmniLight()
 {
   return new COmniLight();
@@ -85,37 +80,18 @@ CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, 
 void registerBillboards( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Billboard" );
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // BILLBOARD
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS2( CBillboard, CName, CObject3D )
-  LUA_DECLARE_DEFAULT_CTOR
-  LUA_DECLARE_METHOD( CBillboard, Update )
-  LUA_DECLARE_METHOD( CBillboard, Render )
-  LUA_DECLARE_METHOD( CBillboard, SetActive )
-  LUA_DECLARE_METHOD_PROTO( CBillboard, Init, bool( CBillboard::* )( const std::string&, const Math::Vect3f&, float, float, float, const std::string&,
-                            const std::string&, bool ) )
-  LUA_DECLARE_METHOD( CBillboard, CreateBillBoardGeometry )
-  LUA_DECLARE_METHOD( CBillboard, DestroyBillBoardGeometry )
-  LUA_END_DECLARATION
-
-
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CMapManager<CBillboard> )
-  LUA_DECLARE_METHOD( CMapManager<CBillboard>, AddResource )
-  LUA_DECLARE_METHOD( CMapManager<CBillboard>, GetResource )
-  LUA_END_DECLARATION
-
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // BILLBOARD MANAGER
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS2( CBillboardManager, CMapManager<CBillboard>, CManager )
+  LUA_DECLARE_DERIVED_CLASS2( CBillboardInstance, CName, CObject3D )
+  LUA_DECLARE_METHOD( CBillboardInstance, SetActive )
+  LUA_DECLARE_METHOD( CBillboardInstance, ChangePosition )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateBillBoard )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CBillboardCore> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS2( CBillboardManager, CManager, CTemplatedVectorMapManager<CBillboardCore> )
   LUA_END_DECLARATION
 }
 

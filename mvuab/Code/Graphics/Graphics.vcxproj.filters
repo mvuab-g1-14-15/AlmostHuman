@@ -126,9 +126,6 @@
     <ClCompile Include="Cameras\CameraFree.cpp">
       <Filter>Cameras</Filter>
     </ClCompile>
-    <ClCompile Include="Billboard\Billboard.cpp">
-      <Filter>Billboard</Filter>
-    </ClCompile>
     <ClCompile Include="Gizmos\GizmosManager.cpp">
       <Filter>Gizmos</Filter>
     </ClCompile>
@@ -324,6 +321,12 @@
     <ClCompile Include="DronBarrier\DronBarrier.cpp">
       <Filter>DronBarrier</Filter>
     </ClCompile>
+    <ClCompile Include="Billboard\BillboardCore.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard\BillboardInstance.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -459,9 +462,6 @@
     </ClInclude>
     <ClInclude Include="Cameras\CameraFree.h">
       <Filter>Cameras</Filter>
-    </ClInclude>
-    <ClInclude Include="Billboard\Billboard.h">
-      <Filter>Billboard</Filter>
     </ClInclude>
     <ClInclude Include="Gizmos\GizmosManager.h">
       <Filter>Gizmos</Filter>
@@ -658,6 +658,12 @@
     </ClInclude>
     <ClInclude Include="DronBarrier\DronBarrier.h">
       <Filter>DronBarrier</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\BillboardCore.h">
+      <Filter>Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\BillboardInstance.h">
+      <Filter>Billboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

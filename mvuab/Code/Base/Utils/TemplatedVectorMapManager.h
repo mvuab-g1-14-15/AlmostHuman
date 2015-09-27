@@ -74,13 +74,20 @@ template <class T> class CTemplatedVectorMapManager
 
         virtual bool AddResource( const std::string& Name, T* Resource )
         {
-            if (m_ResourcesMap.find(Name) != m_ResourcesMap.end()) return false;
+            bool lOk = false;
+            if (m_ResourcesMap.find(Name) == m_ResourcesMap.end() )
+            {
+              CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
+              m_ResourcesVector.push_back(Resource);
+              m_ResourcesMap[Name] = l_Resource;
+              lOk = true;
+            }
+            else
+            {
+              LOG_WARNING_APPLICATION("Trying to add twice %s", Name.c_str() );
+            }
 
-            CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
-            m_ResourcesVector.push_back(Resource);
-            m_ResourcesMap[Name] = l_Resource;
-
-            return true;
+            return lOk;
         }
 
         virtual void Destroy()
