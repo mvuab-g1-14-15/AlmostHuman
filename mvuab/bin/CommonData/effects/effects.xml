@@ -1,102 +1,66 @@
 <effects>	
-	<technique name="DrawQuadSampler0Technique" vertex_type="1104">
-		<effect name="DrawQuad" file="../CommonData/effects/DrawQuad.fx"/>
+	<technique name="DrawQuadSampler0Technique" vertex_type="1104" file="../CommonData/effects/DrawQuad.fx">
 		<handles use_view_matrix="true"/>
 	</technique>
 	
-	<technique name="DrawTextureInScreenTechnique" vertex_type="1104">
-		<effect name="DrawTextureInScreenEffect" file="../CommonData/effects/DrawTextureInScreenEffect.fx"/>
-	</technique>
+	<technique name="DrawTextureInScreenTechnique" vertex_type="1104" file="../CommonData/effects/DrawTextureInScreenEffect.fx"/>
 	
-	<technique name="RenderDeferredTechnique" vertex_type="1104">
-		<effect name="RenderDeferredEffect" file="../CommonData/effects/RenderDeferred.fx"/>
+	<technique name="InitRenderDeferredTechnique" vertex_type="1104" file="../CommonData/effects/InitRenderDeferred.fx"/>
+	<technique name="RenderDeferredTechnique" vertex_type="1104" file="../CommonData/effects/RenderDeferred.fx">
 		<handles use_inverse_projection_matrix="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" use_view_matrix="true" use_view_to_light_projection_matrix="true" use_lights="true" num_of_lights="1"/>
-	</technique>
-	
-	<technique name="InitRenderDeferredTechnique" vertex_type="1104">
-		<effect name="InitRenderDeferredEffect" file="../CommonData/effects/InitRenderDeferred.fx"/>
 	</technique>
 		
 	<!-- Effects of Billboards -->
-	<technique name="BillboardAlignedToCameraTechnique">
-		<effect name="BillboardEffectAlignedToCamera" file="../CommonData/effects/BillboardEffect.fx">
-			<define name="TECHNIQUE_NAME" description="BillboardAlignedToCameraTechnique"/>
-		</effect>
+	<technique name="BillboardAlignedToCameraTechnique" file="../CommonData/effects/BillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
-	<technique name="BillboardAlignedToWorldUpAxisTechnique">
-		<effect name="BillboardEffectAlignedUpAxis" file="../CommonData/effects/BillboardEffect.fx">
-			<define name="TECHNIQUE_NAME" description="BillboardAlignedToWorldUpAxisTechnique"/>
-			<define name="ALIGNED_TO_UP_AXIS" description=""/>
-		</effect>
+	<technique name="BillboardAlignedToWorldUpAxisTechnique" file="../CommonData/effects/BillboardEffect.fx">
+		<define name="ALIGNED_TO_UP_AXIS" description=""/>
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
-	<technique name="BillboardNotAlignedTechnique">
-		<effect name="BillboardEffectNotAligned" file="../CommonData/effects/BillboardEffect.fx">
-			<define name="TECHNIQUE_NAME" description="BillboardNotAlignedTechnique"/>
-			<define name="NOT_ALIGNED" description=""/>
-		</effect>
+	<technique name="BillboardNotAlignedTechnique" file="../CommonData/effects/BillboardEffect.fx">
+		<define name="NOT_ALIGNED" description=""/>
 		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
 	<!-- Particle Effects -->
-	<technique name="SmokeTechnique">
-		<effect name="SmokeParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
-			<define name="TECHNIQUE_NAME" description="SmokeTechnique"/>
-			<define name="BLACK_AND_WHITE" description=""/>
-		</effect>
+	<technique name="SmokeTechnique" file="../CommonData/effects/ParticleSystemEffect.fx">
+		<define name="BLACK_AND_WHITE" description=""/>
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
-	<technique name="RayTechnique">
-		<effect name="RayParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
-			<define name="TECHNIQUE_NAME" description="RayTechnique"/>
-			<define name="RAY" description=""/>
-		</effect>
+	<technique name="RayTechnique" file="../CommonData/effects/ParticleSystemEffect.fx">
+		<define name="RAY" description=""/>
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
-	<technique name="ParticleTechniqueV2">
-		<effect name="ParticleSystemEffectV2" file="../CommonData/effects/ParticleSystemEffect.fx">
-			<define name="TECHNIQUE_NAME" description="ParticleTechniqueV2"/>
-			<define name="BLEND_ADD" description=""/>
-		</effect>
+	<technique name="ParticleTechniqueV2" file="../CommonData/effects/ParticleSystemEffect.fx">
+		<define name="BLEND_ADD" description=""/>
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
-	<technique name="ParticleTechnique">
-		<effect name="ParticleSystemEffect" file="../CommonData/effects/ParticleSystemEffect.fx">
-			<define name="TECHNIQUE_NAME" description="ParticleTechnique"/>
-		</effect>
+	<technique name="ParticleTechnique" file="../CommonData/effects/ParticleSystemEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
 	<!-- Effects of GenerateGBuffer -->
 	<effect file="../CommonData/effects/gbuffer_effects.xml"/>
 	
-	<technique name="ShadowMapTechnique" vertex_type="19">
-		<effect name="ShadowMapEffect" file="../CommonData/effects/ShadowMap.fx"/>
+	<technique name="ShadowMapTechnique" vertex_type="19" file="../CommonData/effects/ShadowMap.fx">
 		<handles use_world_view_projection_matrix="true" />
 	</technique>
 	
-	<technique name="DefaultTechnique" vertex_type="233">
-		<effect name="DefaultEffect" file="../CommonData/effects/DefaultEffect.fx"/>
+	<technique name="DefaultTechnique" vertex_type="233" file="../CommonData/effects/DefaultEffect.fx">
 		<handles use_debug_color="true" use_world_matrix="true" use_world_view_projection_matrix="true" use_inverse_view_matrix="true" use_lights="true" num_of_lights="4" use_camera_position="true"/>
 	</technique>
 	
-	<technique name="RenderForwardDebugShapeTechnique" vertex_type="">
-		<effect name="RenderForwardDebugShapeEffect" file="../CommonData/effects/RenderForwardDebugShapeEffect.fx">
-			<define name="TECHNIQUE_NAME" description="RenderForwardDebugShapeTechnique"/>
-		</effect>
+	<technique name="RenderForwardDebugShapeTechnique" vertex_type="" file="../CommonData/effects/RenderForwardDebugShapeEffect.fx">
 		<handles use_world_view_projection_matrix="true" use_debug_color="true" />
 	</technique>
 	
-	<technique name="DronBarrierTechnique" vertex_type="">
-		<effect name="DronBarrierEffect" file="../CommonData/effects/DronBarrier.fx">
-			<define name="TECHNIQUE_NAME" description="DronBarrierTechnique"/>
-		</effect>
+	<technique name="DronBarrierTechnique" vertex_type="" file="../CommonData/effects/DronBarrier.fx">
 		<handles use_world_view_projection_matrix="true" use_texture_size="true"/>
 	</technique>
 	

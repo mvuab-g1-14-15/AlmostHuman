@@ -291,9 +291,6 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
-    <ClCompile Include="Effects\EffectFlags.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Lights\LightProbe.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -621,9 +618,6 @@
     </ClInclude>
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
       <Filter>RenderableVertex</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\EffectFlags.h">
-      <Filter>Effects</Filter>
     </ClInclude>
     <ClInclude Include="dx9.h" />
     <ClInclude Include="Lights\LightProbe.h">

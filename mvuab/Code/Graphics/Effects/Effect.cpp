@@ -58,19 +58,7 @@ CEffect::CEffect( const std::string& EffectName )
 
 CEffect::~CEffect()
 {
-  m_Effect->End();
   CHECKED_RELEASE( m_Effect );
-
-  for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )
-    delete m_NamesMacrosChar[i];
-
-  m_NamesMacrosChar.clear();
-
-  for ( size_t i = 0; i < m_DescriptionsMacrosChar.size(); ++i )
-    delete m_DescriptionsMacrosChar[i];
-
-  m_DescriptionsMacrosChar.clear();
-  m_Defines.clear();
 }
 
 void CEffect::SetNullParameters()
@@ -175,84 +163,54 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
           m_FileName.c_str() );
 }
 
-bool CEffect::LoadEffect()
-{
-  bool lOk( true );
-  // Obtain the device from the graphics manager and load the effect
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  DWORD dwShaderFlags = 0;
-  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
-  LPD3DXBUFFER l_ErrorBuffer = 0;
-  HRESULT l_HR = D3DXCreateEffectFromFile(
-                   l_Device,
-                   m_FileName.c_str(),
-                   &m_Defines[0],
-                   0, // LPD3DXINCLUDE pInclude,
-                   dwShaderFlags,
-                   0,
-                   &m_Effect,
-                   &l_ErrorBuffer );
-  std::string lErrorMsg;
-
-  if ( l_ErrorBuffer )
-  {
-    lOk = false;
-    StringUtils::Format( lErrorMsg, "Error creating effect '%s': \n\n %s \n", m_FileName.c_str(),
-                         l_ErrorBuffer->GetBufferPointer() );
-    ASSERT( l_HR == S_OK, "Error creating effect '%s': \n % s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
-    CHECKED_RELEASE( l_ErrorBuffer );
-  }
-
-  ASSERT( l_HR == S_OK, "%s %s", m_FileName.c_str(), lErrorMsg.c_str() );
-
-  if ( !lOk )
-  {
-    CHECKED_RELEASE( m_Effect );
-  }
-  else
-  {
-    LinkSemantics();
-  }
-
-  return lOk;
-}
-
-bool CEffect::Reload()
-{
-  Unload();
-  return LoadEffect();
-}
-
 void CEffect::Unload()
 {
   SetNullParameters();
   CHECKED_RELEASE( m_Effect );
 }
 
-bool CEffect::Load( const CXMLTreeNode& EffectNode )
+bool CEffect::Load( const std::string& aFileName, const std::vector<SDefines>& aDefines )
 {
-  m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
+  bool lOk( true );
 
-  for ( uint32 j = 0, lCount = EffectNode.GetNumChildren(); j < lCount; ++j )
+  // Store the filename 
+  m_FileName = aFileName;
+
+  // Transform the defines struct to dx9 struct
+  std::vector<D3DXMACRO> lDefines;
+  for ( uint32 j = 0, lCount = aDefines.size(); j < lCount; ++j )
   {
-    const CXMLTreeNode& l_CurrentSubNode = EffectNode( j );
-    const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-    if ( l_TagName == "define" )
-    {
-      char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "name", "no_name" ) );
-      m_NamesMacrosChar.push_back( cstr_name );
-      char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "description",
-                        "no_description" ) );
-      m_DescriptionsMacrosChar.push_back( cstr_desc );
-      D3DXMACRO macro = { cstr_name, cstr_desc };
-      m_Defines.push_back( macro );
-    }
+      D3DXMACRO macro = { aDefines[j].name.c_str(), aDefines[j].description.c_str() };
+      lDefines.push_back( macro );
   }
 
+  // Set the end of the vector
   D3DXMACRO null = { NULL, NULL };
-  m_Defines.push_back( null );
-  return LoadEffect();
+  lDefines.push_back( null );
+
+  // Obtain the device from the graphics manager and load the effect
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+  DWORD dwShaderFlags = 0;
+  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
+  LPD3DXBUFFER l_ErrorBuffer = 0;
+  lOk = D3DXCreateEffectFromFile( l_Device, m_FileName.c_str(), &lDefines[0], 0, dwShaderFlags, 0, &m_Effect, &l_ErrorBuffer ) == S_OK;
+  
+  if ( l_ErrorBuffer )
+  {
+    lOk = false;
+    ASSERT( lOk, "Error creating effect '%s': \n % s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+    CHECKED_RELEASE( l_ErrorBuffer );
+    CHECKED_RELEASE( m_Effect );
+  }
+
+  ASSERT( lOk, "%s %s", m_FileName.c_str() );
+
+  if ( lOk )
+  {
+    LinkSemantics();
+  }
+
+  return lOk;
 }
 
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )

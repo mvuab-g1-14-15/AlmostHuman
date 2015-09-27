@@ -134,6 +134,10 @@ void CEffectManager::Load( const std::string& lFile )
 
 void CEffectManager::ReloadEffects()
 {
+  for( TMapResource::iterator lItb = m_Resources.begin(), lIte = m_Resources.end(); lItb != lIte; ++lItb)
+  {
+    (lItb)->second->Refresh();
+  }
 }
 
 CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName ) const
