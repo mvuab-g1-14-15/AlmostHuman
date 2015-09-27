@@ -19,7 +19,7 @@ TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 		upVector 			= float3(0,1,0);
 	#endif
 
-	position 			= IN.Position.x*rightVector+IN.Position.z*upVector;
+	position 			= (IN.Position.x*rightVector+IN.Position.z*upVector) * g_Size;
 	OUT.Normal			= float4( viewVector.xyz, 1);;
 	OUT.WorldTangent	= float4( rightVector.xyz, 1);
 	OUT.WorldBinormal	= float4( upVector.xyz, 1);
