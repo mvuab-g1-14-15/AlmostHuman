@@ -103,7 +103,6 @@ public:
 
   void SetFlipUVs( bool Horizontal, bool aVertical );
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
-  void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
   void SetDebugColor( bool aUse, const Math::CColor aColor );
   void SetSize( float aSize );
   void SetAlpha( float aAlpha );
@@ -175,33 +174,6 @@ private: // Members
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
-
-  D3DXHANDLE m_SceneTextureParameter;
-  D3DXHANDLE m_BloomThresholdParameter;
-  D3DXHANDLE m_SampleOffsetsParameter;
-  D3DXHANDLE m_SampleWeightsParameter;
-  D3DXHANDLE m_GaussianBlurTextureParameter;
-  D3DXHANDLE m_BloomIntensityParameter;
-  D3DXHANDLE m_BaseIntensityParameter;
-  D3DXHANDLE m_BloomSaturationParameter;
-  D3DXHANDLE m_BaseSaturationParameter;
-  D3DXHANDLE m_PostBloomTextureParameter;
-
-  // Fog information
-  D3DXHANDLE m_UseFog;
-  D3DXHANDLE m_FogStart;
-  D3DXHANDLE m_FogEnd;
-  D3DXHANDLE m_FogExp;
-  D3DXHANDLE m_FogFun;
-
-  //Width & Height Textures
-  D3DXHANDLE m_HeightTexture;
-  D3DXHANDLE m_WidthTexture;
-
-  //Width & Height window
-  D3DXHANDLE m_HeightWindow;
-  //D3DXHANDLE m_WidthWindow;
-  DECLARE_EFFECT_PARAMETER( WidthWindow )
 
   // To avoid memory leaks
   std::vector<char*> m_NamesMacrosChar;

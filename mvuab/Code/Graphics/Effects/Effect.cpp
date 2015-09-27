@@ -98,35 +98,24 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( Angle )
   RESET_EFFECT_PARAMETER( Alpha )
   RESET_EFFECT_PARAMETER( Color )
-
-  m_ViewToLightProjectionMatrixParameter = 0;
-  m_LightEnabledParameter = 0;
-  m_LightsTypeParameter = 0;
-  m_LightsPositionParameter = 0;
-  m_LightsDirectionParameter = 0;
-  m_LightsAngleParameter = 0;
-  m_LightsColorParameter = 0;
-  m_LightsFallOffParameter = 0;
-  m_LightsStartRangeAttenuationParameter = 0;
-  m_LightsEndRangeAttenuationParameter = 0;
-  m_BonesParameter = 0;
-  m_LightProbesParameter = 0;
+  RESET_EFFECT_PARAMETER( ViewToLightProjectionMatrixParameter)
+  RESET_EFFECT_PARAMETER( LightEnabledParameter)
+  RESET_EFFECT_PARAMETER( LightsTypeParameter)
+  RESET_EFFECT_PARAMETER( LightsPositionParameter)
+  RESET_EFFECT_PARAMETER( LightsDirectionParameter)
+  RESET_EFFECT_PARAMETER( LightsAngleParameter)
+  RESET_EFFECT_PARAMETER( LightsColorParameter )
+  RESET_EFFECT_PARAMETER( LightsFallOffParameter )
+  RESET_EFFECT_PARAMETER( LightsStartRangeAttenuationParameter)
+  RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
+  RESET_EFFECT_PARAMETER( BonesParameter )
+  RESET_EFFECT_PARAMETER( LightProbesParameter )
   
-  // Fog
-  m_FogStart = 0;
-  m_FogEnd = 0;
-  m_FogExp = 0;
-  m_FogFun = 0;
-
-  // Texture
-  m_HeightTexture = 0;
-  m_WidthTexture = 0;
   ResetLightsHandle();
 }
 
 void CEffect::LinkSemantics()
 {
-  // Get the references to the handlers inside the effect
   LINK_EFFECT_PARAMETER( Time );
   LINK_EFFECT_PARAMETER( Size );
   LINK_EFFECT_PARAMETER( Angle );
@@ -166,19 +155,10 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( LightProbesParameterStr, m_LightProbesParameter );
   GetParameterBySemantic( DebugColorStr, m_DebugColor );
   GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );
-  GetParameterBySemantic( FogStartStr, m_FogStart );
-  GetParameterBySemantic( FogEndStr, m_FogEnd );
-  GetParameterBySemantic( FogExpStr, m_FogExp );
-  GetParameterBySemantic( FogFunStr, m_FogFun );
-  GetParameterBySemantic( TextureHeightStr, m_HeightTexture );
-  GetParameterBySemantic( TextureWidthStr, m_WidthTexture );
-  GetParameterBySemantic( WindowHeightStr, m_HeightWindow );
-  GetParameterBySemantic( WindowWidthStr, m_WidthWindow );
   GetParameterBySemantic( ShadowMapTextureSizeStr, m_ShadowMapTextureSizeParameter );
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
-  GetParameterBySemantic( UseFogStr, m_UseFog );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -390,22 +370,6 @@ void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
     l_DebugColor[3] = aColor.GetAlpha();
     m_Effect->SetFloatArray( m_DebugColor, l_DebugColor, sizeof( float ) * 4 );
   }
-}
-
-void CEffect::SetFog
-(
-  bool aUseFog,
-  float32 aFogStart,
-  float32 aFogEnd,
-  float32 aFogExponent,
-  EFogFunction aFogFun
-)
-{
-  m_Effect->SetBool( m_UseFog,     aUseFog ? TRUE : FALSE );
-  m_Effect->SetInt( m_FogFun, ( int ) aFogFun );
-  m_Effect->SetFloat( m_FogStart,   aFogStart );
-  m_Effect->SetFloat( m_FogEnd,     aFogEnd );
-  m_Effect->SetFloat( m_FogExp,     aFogExponent );
 }
 
 void CEffect::ResetLightsHandle()
