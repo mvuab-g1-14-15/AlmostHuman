@@ -22,13 +22,7 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
       m_NumOfLights( HandlesNode.GetAttribute<int32>( "num_of_lights", 0 ) ),
 
       // Debug
-      m_DebugColor( Math::colWHITE ),
-
-      // Fog
-      m_FogStart( HandlesNode.GetAttribute<float>( "fog_start", 0 ) ),
-      m_FogEnd( HandlesNode.GetAttribute<float>( "fog_end", 0 ) ),
-      m_FogExp( HandlesNode.GetAttribute<float>( "fog_exp", 0 ) ),
-      m_FogFun( ( EFogFunction )HandlesNode.GetAttribute<int32>( "fog_fun", 1 ) )
+      m_DebugColor( Math::colWHITE )
 {
     m_Effect = EffectManagerInstance->GetEffect( m_EffectName );
     m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( m_TechniqueName ) : 0;
@@ -38,17 +32,6 @@ CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std:
 CEffectTechnique::~CEffectTechnique()
 {
     m_Effect = 0;
-}
-
-void CEffectTechnique::SetUseTextureSize( bool active )
-{
-  mUseFBSize = active;
-}
-
-void CEffectTechnique::SetTextureSize( unsigned int width, unsigned int height )
-{
-    m_TextureHeight = height;
-    m_TextureWidth = width;
 }
 
 bool CEffectTechnique::BeginRender()
@@ -63,17 +46,12 @@ bool CEffectTechnique::BeginRender()
         // Debug color, only for debug primitives
         //
         m_Effect->SetDebugColor( mUseDebugColor, m_DebugColor );
-        //
-        // Fog value
-        //
-        m_Effect->SetFog( mUseFog, m_FogStart, m_FogEnd, m_FogExp, m_FogFun );
 
         if ( mUseFBSize )
         {
-            l_Handle = m_Effect->GetHeightTexture();
-            l_Effect->SetInt( l_Handle, m_TextureHeight );
-            l_Handle = m_Effect->GetWidthTexture();
-            l_Effect->SetInt( l_Handle, m_TextureWidth );
+          uint32 lWidth, lHeight;
+          GraphicsInstance->GetWidthAndHeight( lWidth, lHeight );
+          m_Effect->SetFBSize( Math::Vect2u(lWidth, lHeight ) );
         }
 
         SetupMatrices();
@@ -306,12 +284,6 @@ void CEffectTechnique::SetDebugColor( Math::CColor color )
 void CEffectTechnique::ReadFlags( const CXMLTreeNode& aFlagsNode )
 {
     m_NumOfLights   = aFlagsNode.GetAttribute<int32>( "num_of_lights", 0 );
-    m_FogStart      = aFlagsNode.GetAttribute<float>( "fog_start", 0 );
-    m_FogEnd        = aFlagsNode.GetAttribute<float>( "fog_end", 0 );
-    m_FogExp        = aFlagsNode.GetAttribute<float>( "fog_exp", 0 );
-    m_FogFun        = ( EFogFunction )aFlagsNode.GetAttribute<int32>( "fog_fun", 1 );
-    m_TextureHeight = aFlagsNode.GetAttribute<int32>( "texture_height", 0 );
-    m_TextureWidth  = aFlagsNode.GetAttribute<int32>( "texture_width", 0 );
 
     // Read the flags of the technique from the handles node
     READ_TECHNIQUE_FLAG( aFlagsNode, "use_world_matrix", mUseWorld );

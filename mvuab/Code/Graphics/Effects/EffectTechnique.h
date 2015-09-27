@@ -32,9 +32,6 @@ public:
 
   void SetDebugColor( Math::CColor color = Math::colWHITE );
 
-  void SetUseTextureSize( bool active = false );
-  void SetTextureSize( unsigned int width, unsigned int height );
-
 private: // Members
 
   // Debug
@@ -42,16 +39,6 @@ private: // Members
 
   // Lights
   int32                       m_NumOfLights;
-
-  // Textures
-  uint32                      m_TextureHeight;
-  uint32                      m_TextureWidth;
-
-  // Fog
-  float                       m_FogStart;
-  float                       m_FogEnd;
-  float                       m_FogExp;
-  EFogFunction                m_FogFun;
 
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;

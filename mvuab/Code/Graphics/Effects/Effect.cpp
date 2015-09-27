@@ -13,35 +13,23 @@
 #include "Effects\Defines.h"
 
 CEffect::CEffect( const std::string& EffectName )
-  : CName( EffectName ),
-    m_FileName( "" ),
-    m_Effect( 0 ),
-    m_ViewToLightProjectionMatrixParameter( 0 ),
-    m_LightEnabledParameter( 0 ),
-    m_LightsTypeParameter( 0 ),
-    m_LightsPositionParameter( 0 ),
-    m_LightsDirectionParameter( 0 ),
-    m_LightsAngleParameter( 0 ),
-    m_LightsColorParameter( 0 ),
-    m_LightsFallOffParameter( 0 ),
-    m_LightsStartRangeAttenuationParameter( 0 ),
-    m_LightsEndRangeAttenuationParameter( 0 ),
-    m_BonesParameter( 0 ),
-    m_LightProbesParameter( 0 ),
-
-    // Debug data
-    m_UseDebugColor( 0 ),
-    m_DebugColor( 0 ),
-
-    // Fog
-    m_FogStart( 0 ),
-    m_FogEnd( 0 ),
-    m_FogExp( 0 ),
-    m_FogFun( 0 ),
-
-    // Texture
-    m_HeightTexture( 0 ),
-    m_WidthTexture( 0 )
+  : CName( EffectName )
+  , m_FileName( "" )
+  , m_Effect( 0 )
+  , CTOR_EFFECT_PARAMETER(ViewToLightProjectionMatrixParameter)
+  , CTOR_EFFECT_PARAMETER(LightEnabledParameter)
+  , CTOR_EFFECT_PARAMETER(LightsTypeParameter)
+  , CTOR_EFFECT_PARAMETER(LightsPositionParameter)
+  , CTOR_EFFECT_PARAMETER(LightsDirectionParameter)
+  , CTOR_EFFECT_PARAMETER(LightsAngleParameter)
+  , CTOR_EFFECT_PARAMETER(LightsColorParameter)
+  , CTOR_EFFECT_PARAMETER(LightsFallOffParameter)
+  , CTOR_EFFECT_PARAMETER(LightsStartRangeAttenuationParameter)
+  , CTOR_EFFECT_PARAMETER(LightsEndRangeAttenuationParameter)
+  , CTOR_EFFECT_PARAMETER(BonesParameter)
+  , CTOR_EFFECT_PARAMETER(LightProbesParameter)
+  , CTOR_EFFECT_PARAMETER( DebugColor )
+  , CTOR_EFFECT_PARAMETER( UseDebugColor )
   , CTOR_EFFECT_PARAMETER( Size )
   , CTOR_EFFECT_PARAMETER( Angle )
   , CTOR_EFFECT_PARAMETER( Alpha )
@@ -382,24 +370,16 @@ void CEffect::SetFlipUVs( bool aHorizontal, bool aVertical )
   SET_BOOL_PARAMETER( FlipUVVertical  , aVertical   );
 }
 
-void CEffect::SetShadowMapParameters
-(
-  bool UseShadowMaskTexture,
-  bool UseStaticShadowmap,
-  bool UseDynamicShadowmap
-)
+void CEffect::SetShadowMapParameters ( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap )
 {
-  m_Effect->SetBool( m_UseShadowMaskTextureParameter, UseShadowMaskTexture ?
-                     TRUE : FALSE );
-  m_Effect->SetBool( m_UseStaticShadowmapParameter, UseStaticShadowmap ? TRUE :
-                     FALSE );
-  m_Effect->SetBool( m_UseDynamicShadowmapParameter, UseDynamicShadowmap ? TRUE
-                     : FALSE );
+  SET_BOOL_PARAMETER( UseShadowMaskTextureParameter, UseShadowMaskTexture );
+  SET_BOOL_PARAMETER( UseStaticShadowmapParameter  , UseStaticShadowmap   );
+  SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
 {
-  m_Effect->SetBool( m_UseDebugColor, aUse ? TRUE : FALSE );
+  SET_BOOL_PARAMETER( UseDebugColor , aUse );
 
   if ( aUse )
   {

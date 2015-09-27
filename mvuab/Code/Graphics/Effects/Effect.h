@@ -28,19 +28,19 @@ public:
   bool Load( CXMLTreeNode& EffectNode);
   bool Reload();
 
-  bool SetWorldMatrix( const Math::Mat44f& Matrix );
-  bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
-  bool SetWorldViewMatrix( const Math::Mat44f& Matrix );
-  bool SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix );
-  bool SetCameraPosition( const Math::Vect3f &CameraPosition );
-  bool SetViewMatrix( const Math::Mat44f& Matrix );
-  bool SetProjectionMatrix( const Math::Mat44f& Matrix );
-  bool SetInverseViewMatrix( const Math::Mat44f& Matrix );
-  bool SetInverseProjectionMatrix( const Math::Mat44f& Matrix );
-  bool SetViewProjectionMatrix( const Math::Mat44f& Matrix );
-  bool SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor );
-  bool SetFBSize( const Math::Vect2u aSize );
-  bool SetDeltaTime( const float dt );
+  bool SetWorldMatrix               ( const Math::Mat44f& Matrix );
+  bool SetInverseWorldMatrix        ( const Math::Mat44f& Matrix );
+  bool SetWorldViewMatrix           ( const Math::Mat44f& Matrix );
+  bool SetWorldViewProjectionMatrix ( const Math::Mat44f& Matrix );
+  bool SetCameraPosition            ( const Math::Vect3f &CameraPosition );
+  bool SetViewMatrix                ( const Math::Mat44f& Matrix );
+  bool SetProjectionMatrix          ( const Math::Mat44f& Matrix );
+  bool SetInverseViewMatrix         ( const Math::Mat44f& Matrix );
+  bool SetInverseProjectionMatrix   ( const Math::Mat44f& Matrix );
+  bool SetViewProjectionMatrix      ( const Math::Mat44f& Matrix );
+  bool SetAmbientLightColor         ( const Math::Vect3f &aAmbienLightColor );
+  bool SetFBSize                    ( const Math::Vect2u aSize );
+  bool SetDeltaTime                 ( const float dt );
 
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
@@ -56,17 +56,10 @@ public:
   GET_SET( D3DXHANDLE, LightsFallOffParameter );
   GET_SET( D3DXHANDLE, LightsStartRangeAttenuationParameter );
   GET_SET( D3DXHANDLE, LightsEndRangeAttenuationParameter );
-
   GET_SET( D3DXHANDLE, BonesParameter );
-
   GET_SET( D3DXHANDLE, LightProbesParameter );
-
   GET_SET( D3DXHANDLE, DebugColor );
   GET_SET( D3DXHANDLE, UseDebugColor );
-
-  // Texture
-  GET_SET( D3DXHANDLE, HeightTexture );
-  GET_SET( D3DXHANDLE, WidthTexture );
 
   GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );

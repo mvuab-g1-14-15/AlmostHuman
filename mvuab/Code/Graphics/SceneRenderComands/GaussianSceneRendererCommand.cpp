@@ -44,10 +44,6 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     RECT l_Rect = { 0, 0, ( long )m_Width - 1, ( long )m_Height - 1 };
 
-    // Update the texture size of the technique each render, because we do not know if somebody has used the technique
-    l_EffectTech->SetTextureSize(m_Width, m_Height);
-    l_EffectTech->SetUseTextureSize(true);
-
     // Set the depht texture
     m_StageTextures[1].m_Texture->Activate( m_StageTextures[1].m_StageId );
 
