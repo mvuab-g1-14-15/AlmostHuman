@@ -138,9 +138,6 @@
     <ClCompile Include="Billboard\BillboardManager.cpp">
       <Filter>Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="Effects\EffectPool.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Shapes\Shapes.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
@@ -474,9 +471,6 @@
     </ClInclude>
     <ClInclude Include="Billboard\BillboardManager.h">
       <Filter>Billboard</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\EffectPool.h">
-      <Filter>Effects</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\Shapes.h">
       <Filter>Shapes</Filter>

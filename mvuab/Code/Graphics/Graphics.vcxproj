@@ -44,7 +44,6 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectManager.cpp" />
-    <ClCompile Include="Effects\EffectPool.cpp" />
     <ClCompile Include="Effects\EffectTechnique.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Gizmos\Gizmo.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="Effects\EffectFlags.h" />
     <ClInclude Include="Effects\EffectManager.h" />
     <ClInclude Include="Effects\Defines.h" />
-    <ClInclude Include="Effects\EffectPool.h" />
     <ClInclude Include="Effects\EffectTechnique.h" />
     <ClInclude Include="Effects\SharedEffect.h" />
     <ClInclude Include="Fonts\FontManager.h" />

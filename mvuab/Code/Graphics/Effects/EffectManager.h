@@ -57,7 +57,6 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         CEffectTechnique* GetEffectTechnique( const std::string & aName ) const;
 
     private: // Members
-        CEffectPool* mEffectPool;
         typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
         TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
 

@@ -12,7 +12,6 @@
 #include "XML\XMLTreeNode.h"
 
 class CLight;
-class CEffectPool;
 
 class CEffect: public CName
 {
@@ -26,8 +25,8 @@ public:
 
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-  bool Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool );
-  bool Reload( CEffectPool* aEffectPool );
+  bool Load( CXMLTreeNode& EffectNode);
+  bool Reload();
 
   bool SetWorldMatrix( const Math::Mat44f& Matrix );
   bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
@@ -217,7 +216,7 @@ private: // Members
 
 private: // Methods
 
-  bool LoadEffect( CEffectPool* aEffectPool );
+  bool LoadEffect();
   void Unload();
   void ResetLightsHandle();
 };
