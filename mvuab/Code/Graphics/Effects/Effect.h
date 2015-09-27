@@ -25,7 +25,7 @@ public:
 
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-  bool Load( CXMLTreeNode& EffectNode);
+  bool Load( const CXMLTreeNode& EffectNode);
   bool Reload();
 
   bool SetWorldMatrix               ( const Math::Mat44f& Matrix );

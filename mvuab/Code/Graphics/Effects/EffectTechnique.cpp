@@ -13,25 +13,40 @@
 #define READ_TECHNIQUE_FLAG( node, attribute, flag ) flag = node.GetAttribute<bool>( attribute, false );
 #define CHECK_FLAG( flag ) ( flag )
 
-CEffectTechnique::CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName,
-                                    CXMLTreeNode& HandlesNode )
-    : m_TechniqueName( TechniqueName ),
-      m_EffectName( EffectName ),
-
-      // Lights
-      m_NumOfLights( HandlesNode.GetAttribute<int32>( "num_of_lights", 0 ) ),
-
-      // Debug
-      m_DebugColor( Math::colWHITE )
+CEffectTechnique::CEffectTechnique( const CXMLTreeNode& aTechniqueNode )
+    : CName( aTechniqueNode.GetAttribute<std::string>("name", "null") )
+    , m_DebugColor( Math::colWHITE )
+    , m_VertexType( aTechniqueNode.GetAttribute<uint32>("vertex_type", 0 ) )
 {
-    m_Effect = EffectManagerInstance->GetEffect( m_EffectName );
-    m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( m_TechniqueName ) : 0;
-    ReadFlags(HandlesNode);
+  for ( uint32 j = 0, lCount = aTechniqueNode.GetNumChildren(); j < lCount; ++j )
+  {
+    const CXMLTreeNode& lCurrentNode = aTechniqueNode( j );
+    const std::string& l_TagName = lCurrentNode.GetName();
+    if ( l_TagName == "effect" )
+    {
+      m_Effect = new CEffect(lCurrentNode.GetAttribute<std::string>( "name", "null" ) );
+      bool lLoaded = m_Effect->Load( lCurrentNode);
+      ASSERT(lLoaded, "The effect %s could not be loaded" );
+
+      if( lLoaded )
+      {
+        m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( GetName() ) : 0;
+      }
+      else
+      {
+        CHECKED_DELETE( m_Effect );
+      }
+    }
+    else if ( l_TagName == "handles" )
+    {
+      ReadFlags( lCurrentNode );
+    }
+  }
 }
 
 CEffectTechnique::~CEffectTechnique()
 {
-    m_Effect = 0;
+  CHECKED_DELETE( m_Effect );
 }
 
 bool CEffectTechnique::BeginRender()
@@ -63,9 +78,7 @@ bool CEffectTechnique::BeginRender()
 
 bool CEffectTechnique::Refresh()
 {
-    m_Effect = EffectManagerInstance->GetEffect( m_EffectName );
-    m_D3DTechnique = m_Effect->GetTechniqueByName( m_TechniqueName );
-    return ( m_Effect != 0 && m_D3DTechnique != 0 );
+    return false;
 }
 
 void CEffectTechnique::SetupMatrices()

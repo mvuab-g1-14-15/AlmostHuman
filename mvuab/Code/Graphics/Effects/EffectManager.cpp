@@ -22,7 +22,6 @@ CEffectManager::CEffectManager( CXMLTreeNode &atts)
 }
 CEffectManager::~CEffectManager()
 {
-    CleanUp();
     Destroy();
 }
 
@@ -94,27 +93,6 @@ void CEffectManager::SetCameraEye( const Math::Vect3f& CameraEye )
     m_CameraEye = CameraEye;
 }
 
-std::string CEffectManager::GetTechniqueEffectNameByVertexDefault( unsigned short VertexType )
-{
-    return m_DefaultTechniqueEffectMap[VertexType];
-}
-
-size_t CEffectManager::GetMaxLights() const
-{
-    return MAX_LIGHTS_BY_SHADER;
-}
-
-CEffect* CEffectManager::GetEffect( const std::string& Name )
-{
-    return m_Effects.GetResource( Name );
-}
-
-void CEffectManager::CleanUp()
-{
-    m_DefaultTechniqueEffectMap.clear();
-    m_Effects.Destroy();
-}
-
 void CEffectManager::ActivateCamera( const Math::Mat44f& ViewMatrix,
                                      const Math::Mat44f& ProjectionMatrix, const Math::Vect3f& CameraEye )
 {
@@ -131,80 +109,31 @@ void CEffectManager::Init()
 void CEffectManager::Load( const std::string& lFile )
 {
     CXMLTreeNode l_Node, lEffectsXml;
-    if ( !lEffectsXml.LoadAndFindNode(lFile.c_str(), "effects", l_Node ) )
+    if ( lEffectsXml.LoadAndFindNode(lFile.c_str(), "effects", l_Node ) )
     {
-        return;
-    }
-
-    for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
-    {
-        CXMLTreeNode& l_CurrentNode = l_Node( i );
+      for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
+      {
+        const CXMLTreeNode& l_CurrentNode = l_Node( i );
         const std::string& l_TagName = l_CurrentNode.GetName();
-
         if ( l_TagName == "technique" )
         {
-            const std::string& l_TechniquetName = l_CurrentNode.GetAttribute<std::string>( "name", "null_tech" );
-            int l_VertexType = l_CurrentNode.GetAttribute<int32>( "vertex_type", 0 );
-            std::string l_EffectName;
-            CXMLTreeNode l_HandlesNode;
-
-            for ( uint32 j = 0, lCurrentNodeCount = l_CurrentNode.GetNumChildren(); j < lCurrentNodeCount; j++ )
+            CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_CurrentNode  );
+            if ( !AddResource( l_NewTechnique->GetName(), l_NewTechnique ) )
             {
-                CXMLTreeNode& l_CurrentSubNode = l_CurrentNode( j );
-                const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-                if ( l_TagName == "effect" )
-                {
-                    l_EffectName = l_CurrentSubNode.GetAttribute<std::string>( "name", "no_effect" );
-                    CEffect* l_pEffect = 0;//mEffectPool->CreateEffect(l_CurrentNode);
-                    l_pEffect = new CEffect( l_EffectName );
-
-                    if ( !l_pEffect->Load( l_CurrentSubNode ) )
-                    {
-                        std::string msg_error = "EffectManager::Load->Error al intentar cargar el efecto: " + l_EffectName;
-                        LOG_ERROR_APPLICATION( msg_error.c_str() );
-                        CHECKED_DELETE( l_pEffect );
-                    }
-                    else if(!m_Effects.AddResource(l_EffectName, l_pEffect))
-                    {
-                        CHECKED_DELETE( l_pEffect );
-                    }
-                }
-                else if ( l_TagName == "handles" )
-                {
-                    l_HandlesNode = l_CurrentSubNode;
-                }
-            }
-
-            CEffectTechnique* l_NewTechnique = new CEffectTechnique( l_TechniquetName, l_EffectName, l_HandlesNode );
-
-            if ( !AddResource( l_TechniquetName, l_NewTechnique ) )
-            {
-                LOG_ERROR_APPLICATION( "CEffectManager::Error adding the new effect technique %s with effect %s!",
-                                       l_TechniquetName.c_str(), l_EffectName.c_str() );
-                CHECKED_DELETE( l_NewTechnique );
-            }
-
-            if ( m_DefaultTechniqueEffectMap.find( l_VertexType ) == m_DefaultTechniqueEffectMap.end() )
-            {
-                m_DefaultTechniqueEffectMap[l_VertexType] = l_TechniquetName;
+              LOG_ERROR_APPLICATION( "Effect technique %s is duplicated", l_NewTechnique->GetName() );
+              CHECKED_DELETE( l_NewTechnique );
             }
         }
         else if ( l_TagName == "effect" )
         {
             Load(l_CurrentNode.GetAttribute<std::string>("file", "no_file"));
         }
+      }
     }
 }
 
 void CEffectManager::ReloadEffects()
 {
-    std::map<std::string, CEffect*>& lEffectsVector = m_Effects.GetResourcesMap();
-    std::map<std::string, CEffect*>::iterator lItb = lEffectsVector.begin(), lIte = lEffectsVector.end();
-    for( ; lItb != lIte; ++lItb )
-    {
-        lItb->second->Reload();
-    }
 }
 
 CEffectTechnique* CEffectManager::GetEffectTechnique( const std::string & aName ) const

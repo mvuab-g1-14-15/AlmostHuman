@@ -249,7 +249,7 @@ void CEffect::Unload()
   CHECKED_RELEASE( m_Effect );
 }
 
-bool CEffect::Load( CXMLTreeNode& EffectNode )
+bool CEffect::Load( const CXMLTreeNode& EffectNode )
 {
   m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
 

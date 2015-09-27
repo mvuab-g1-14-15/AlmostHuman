@@ -4,18 +4,18 @@
 
 #include "XML\XMLTreeNode.h"
 #include "Math/Color.h"
-#include <string>
 #include "Utils\Defines.h"
-#include "Utils\Types.h"
 #include "Effects\Defines.h"
+#include "Utils\Types.h"
+#include "Utils\Name.h"
 #include "dx9.h"
 
 class CEffect;
 
-class CEffectTechnique
+class CEffectTechnique : public CName
 {
 public:
-  CEffectTechnique( const std::string& TechniqueName, const std::string& EffectName, CXMLTreeNode& HandlesNode );
+  CEffectTechnique( const CXMLTreeNode& aTechniqueNode);
   virtual ~CEffectTechnique();
 
   inline CEffect* GetEffect() const
@@ -39,10 +39,10 @@ private: // Members
 
   // Lights
   int32                       m_NumOfLights;
+  uint32                      m_VertexType;
 
   CEffect*                    m_Effect;
   D3DXHANDLE                  m_D3DTechnique;
-  std::string                 m_TechniqueName;
   std::string                 m_EffectName;
 
   bool mUseWorld;
