@@ -3,7 +3,6 @@
 #include "EffectTechnique.h"
 #include "Utils\Defines.h"
 #include "EngineConfig.h"
-#include "SharedEffect.h"
 
 CEffectManager::CEffectManager()
     : CManager()

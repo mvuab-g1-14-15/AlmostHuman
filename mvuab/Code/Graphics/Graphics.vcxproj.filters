@@ -294,9 +294,6 @@
     <ClCompile Include="Effects\EffectFlags.cpp">
       <Filter>Effects</Filter>
     </ClCompile>
-    <ClCompile Include="Effects\SharedEffect.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Lights\LightProbe.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -626,9 +623,6 @@
       <Filter>RenderableVertex</Filter>
     </ClInclude>
     <ClInclude Include="Effects\EffectFlags.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\SharedEffect.h">
       <Filter>Effects</Filter>
     </ClInclude>
     <ClInclude Include="dx9.h" />
