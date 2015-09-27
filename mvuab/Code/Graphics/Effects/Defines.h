@@ -23,6 +23,7 @@ enum ELightsFlags
 
 #define SET_FLOAT_PARAMETER( parameter, value ) m_Effect->SetFloat( m_##parameter, value )
 #define SET_INT_PARAMETER( parameter, value ) m_Effect->SetInt( m_##parameter, value )
+#define SET_BOOL_PARAMETER( parameter, value ) m_Effect->SetBool( m_##parameter, value ? TRUE : FALSE )
 #define SET_MATRIX_PARAMETER( parameter, value ) m_Effect->SetMatrix( m_##parameter, &((Matrix).GetD3DXMatrix()) );
 
 //-----------------------------------------------------------------------

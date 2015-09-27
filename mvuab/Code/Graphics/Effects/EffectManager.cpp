@@ -6,7 +6,6 @@
 
 CEffectManager::CEffectManager()
     : CManager()
-
     , m_WorldMatrix( Math::m44fIDENTITY )
     , m_ProjectionMatrix( Math::m44fIDENTITY )
     , m_ViewMatrix( Math::m44fIDENTITY )

@@ -59,6 +59,7 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
 
       lEffect->SetSize( mSize );
       lEffect->SetAlpha( mAlpha );
+      lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
       mInstances[i]->Render(aRV, aGM, mTechnique );
     }
   }

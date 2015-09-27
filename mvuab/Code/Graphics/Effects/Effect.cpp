@@ -42,7 +42,6 @@ CEffect::CEffect( const std::string& EffectName )
     // Texture
     m_HeightTexture( 0 ),
     m_WidthTexture( 0 )
-
   , CTOR_EFFECT_PARAMETER( Size )
   , CTOR_EFFECT_PARAMETER( Angle )
   , CTOR_EFFECT_PARAMETER( Alpha )
@@ -53,16 +52,18 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( WVPMatrix )
   , CTOR_EFFECT_PARAMETER( Direction )
   , CTOR_EFFECT_PARAMETER( Time )
-      , CTOR_EFFECT_PARAMETER( ViewMatrix )
-    , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
-    , CTOR_EFFECT_PARAMETER( VPMatrix )
-    , CTOR_EFFECT_PARAMETER( InverseViewMatrix )
-    , CTOR_EFFECT_PARAMETER( InverseProjectionMatrix )
-    , CTOR_EFFECT_PARAMETER( CameraPosition )
-    , CTOR_EFFECT_PARAMETER( AmbientLight )
-    , CTOR_EFFECT_PARAMETER( FBWidth )
-    , CTOR_EFFECT_PARAMETER( FBHeight )
-    , CTOR_EFFECT_PARAMETER( DeltaTime )
+  , CTOR_EFFECT_PARAMETER( ViewMatrix )
+  , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
+  , CTOR_EFFECT_PARAMETER( VPMatrix )
+  , CTOR_EFFECT_PARAMETER( InverseViewMatrix )
+  , CTOR_EFFECT_PARAMETER( InverseProjectionMatrix )
+  , CTOR_EFFECT_PARAMETER( CameraPosition )
+  , CTOR_EFFECT_PARAMETER( AmbientLight )
+  , CTOR_EFFECT_PARAMETER( FBWidth )
+  , CTOR_EFFECT_PARAMETER( FBHeight )
+  , CTOR_EFFECT_PARAMETER( DeltaTime )
+  , CTOR_EFFECT_PARAMETER( FlipUVVertical   )
+  , CTOR_EFFECT_PARAMETER( FlipUVHorizontal )
 {
   ResetLightsHandle();
 }
@@ -94,19 +95,22 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( WVPMatrix );
   RESET_EFFECT_PARAMETER( Direction );
   RESET_EFFECT_PARAMETER( VPMatrix );
+  RESET_EFFECT_PARAMETER( FlipUVVertical   );
+  RESET_EFFECT_PARAMETER( FlipUVHorizontal );
+  RESET_EFFECT_PARAMETER( ViewMatrix );
+  RESET_EFFECT_PARAMETER( ProjectionMatrix );
+  RESET_EFFECT_PARAMETER( InverseViewMatrix );
+  RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
+  RESET_EFFECT_PARAMETER( CameraPosition );
+  RESET_EFFECT_PARAMETER( AmbientLight );
+  RESET_EFFECT_PARAMETER( FBWidth );
+  RESET_EFFECT_PARAMETER( FBHeight );
+  RESET_EFFECT_PARAMETER( DeltaTime );
+  RESET_EFFECT_PARAMETER( Size )
+  RESET_EFFECT_PARAMETER( Angle )
+  RESET_EFFECT_PARAMETER( Alpha )
+  RESET_EFFECT_PARAMETER( Color )
 
-    RESET_EFFECT_PARAMETER( ViewMatrix );
-    RESET_EFFECT_PARAMETER( ProjectionMatrix );
-
-    RESET_EFFECT_PARAMETER( InverseViewMatrix );
-    RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
-
-    RESET_EFFECT_PARAMETER( CameraPosition );
-    RESET_EFFECT_PARAMETER( AmbientLight );
-
-    RESET_EFFECT_PARAMETER( FBWidth );
-    RESET_EFFECT_PARAMETER( FBHeight );
-    RESET_EFFECT_PARAMETER( DeltaTime );
   m_ViewToLightProjectionMatrixParameter = 0;
   m_LightEnabledParameter = 0;
   m_LightsTypeParameter = 0;
@@ -119,18 +123,16 @@ void CEffect::SetNullParameters()
   m_LightsEndRangeAttenuationParameter = 0;
   m_BonesParameter = 0;
   m_LightProbesParameter = 0;
+  
   // Fog
   m_FogStart = 0;
   m_FogEnd = 0;
   m_FogExp = 0;
   m_FogFun = 0;
+
   // Texture
   m_HeightTexture = 0;
   m_WidthTexture = 0;
-  RESET_EFFECT_PARAMETER( Size )
-  RESET_EFFECT_PARAMETER( Angle )
-  RESET_EFFECT_PARAMETER( Alpha )
-  RESET_EFFECT_PARAMETER( Color )
   ResetLightsHandle();
 }
 
@@ -147,20 +149,18 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( WorldMatrix );
   LINK_EFFECT_PARAMETER( WVMatrix );
   LINK_EFFECT_PARAMETER( WVPMatrix );
-      LINK_EFFECT_PARAMETER( VPMatrix );
-
-    LINK_EFFECT_PARAMETER( ViewMatrix );
-    LINK_EFFECT_PARAMETER( ProjectionMatrix );
-
-    LINK_EFFECT_PARAMETER( InverseViewMatrix );
-    LINK_EFFECT_PARAMETER( InverseProjectionMatrix );
-
-    LINK_EFFECT_PARAMETER( CameraPosition );
-    LINK_EFFECT_PARAMETER( AmbientLight );
-
-    LINK_EFFECT_PARAMETER( FBWidth );
-    LINK_EFFECT_PARAMETER( FBHeight );
-    LINK_EFFECT_PARAMETER( DeltaTime );
+  LINK_EFFECT_PARAMETER( VPMatrix );
+  LINK_EFFECT_PARAMETER( ViewMatrix );
+  LINK_EFFECT_PARAMETER( ProjectionMatrix );
+  LINK_EFFECT_PARAMETER( InverseViewMatrix );
+  LINK_EFFECT_PARAMETER( InverseProjectionMatrix );
+  LINK_EFFECT_PARAMETER( CameraPosition );
+  LINK_EFFECT_PARAMETER( AmbientLight );
+  LINK_EFFECT_PARAMETER( FBWidth );
+  LINK_EFFECT_PARAMETER( FBHeight );
+  LINK_EFFECT_PARAMETER( DeltaTime );
+  LINK_EFFECT_PARAMETER( FlipUVVertical   );
+  LINK_EFFECT_PARAMETER( FlipUVHorizontal );
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
                           m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -375,6 +375,13 @@ bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
   return ( m_Effect->SetMatrix( m_ViewToLightProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
+
+void CEffect::SetFlipUVs( bool aHorizontal, bool aVertical )
+{
+  SET_BOOL_PARAMETER( FlipUVHorizontal, aHorizontal );
+  SET_BOOL_PARAMETER( FlipUVVertical  , aVertical   );
+}
+
 void CEffect::SetShadowMapParameters
 (
   bool UseShadowMaskTexture,
