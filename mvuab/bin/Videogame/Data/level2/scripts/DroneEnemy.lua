@@ -5,6 +5,7 @@ class 'CDroneEnemyLUA' (CEnemyLUA)
 function CDroneEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	CEnemyLUA.__init(self, Node, state_machine, core_enemy)
 	self.Waypoints = waypoints
+	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	self.ActualWaypoint = 1
 	self.ActualPathPoint = 1
 	self.TurnSpeed = 1
@@ -165,3 +166,9 @@ function CDroneEnemyLUA:IsInWaypoint()
 	return Distance < self.Delta
 end
 
+-- function CDroneEnemyLUA:ChangeRoute(waypoints)
+	-- self.Waypoints = waypoints
+	-- self.ActualWaypoint = 1
+	-- self.ActualPathPoint = 1
+	-- self.PathCalculated = false
+-- end

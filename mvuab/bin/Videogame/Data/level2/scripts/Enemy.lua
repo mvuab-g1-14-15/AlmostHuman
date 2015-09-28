@@ -16,13 +16,17 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Radius = 0.4
 	self.Height = 2.0
 	self.PitchCameraMove = 0.0
-	
+	self.Room = Node:GetAttributeString("room", "no_name")
 	self.Suspected = false
 	self.SuspectedPosition = Vect3f(0.0)
 	
 	self.ShootSpeed = 50.0
 	self.Velocity = 1.0
 	self.Delta = 0.5
+	
+	self.AlarmadoInRoom2 = false
+	self.PositionAlarm = Vect3f(0,0,0)
+	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	
 	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
@@ -389,4 +393,15 @@ end
 function CEnemyLUA:SetVelocity(velocity)
 	self.Velocity = velocity
 	self.RenderableObject:SetVelocity(self.Velocity)
+end
+
+function CEnemyLUA:GetRoom()
+	return self.Room
+end
+
+function CEnemyLUA:ChangeRoute(position)
+	self.AlarmadoInRoom2 = true
+	self.ActualPathPoint = 1
+	self.PathCalculated = false
+	self.PositionAlarm = position[1]
 end
