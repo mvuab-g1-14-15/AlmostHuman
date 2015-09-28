@@ -33,6 +33,7 @@
 
 
 #define APPLICATION_NAME    "ALMOST HUMAN"
+static bool g_Exit = false;
 
 void ShowErrorMessage( const std::string& message )
 {
@@ -49,8 +50,18 @@ void ShowErrorMessage( const std::string& message )
     }
 
     end_message += message;
-    MessageBox( 0, end_message.c_str(), "FlostiProject Report",
-                MB_OK | MB_ICONERROR );
+    MessageBox( 0, end_message.c_str(), "FlostiProject Report", MB_OK | MB_ICONERROR );
+}
+
+void updateThread(CEngine* pEngine)
+{
+    while(!g_Exit)
+    {
+        //pEngine->ProcessInputs();
+
+        if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
+            pEngine->Render();
+    }
 }
 
 
@@ -181,6 +192,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
 
+
+        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) updateThread, pEngine, NULL, NULL);
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -193,13 +206,18 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
                 pEngine->ProcessInputs();
                 pEngine->Update();
 
-                if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-                    pEngine->Render();
+                //if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
+                //    pEngine->Render();
             }
         }
 
-        UnregisterClass( APPLICATION_NAME, wc.hInstance );
+        g_Exit = true;
+
+        WaitForSingleObject(h, INFINITE);
+        CloseHandle(h);
         
+        UnregisterClass( APPLICATION_NAME, wc.hInstance );
+
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
         CHECKED_DELETE( pLogger );

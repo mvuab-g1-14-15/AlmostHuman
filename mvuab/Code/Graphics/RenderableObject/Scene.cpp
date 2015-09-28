@@ -1,15 +1,17 @@
 #include "Scene.h"
+#include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "SceneRenderComands\RenderSceneSceneRendererCommand.h"
 
 #include "Utils\Defines.h"
 #include "Logger\Logger.h"
 #include "XML\XMLTreeNode.h"
 
 #include "Utils\Defines.h"
+#include "EngineManagers.h"
 
 #include "StaticMeshes\StaticMeshManager.h"
 #include "Room.h"
-#include "EngineManagers.h"
 
 #include "Lights/LightManager.h"
 #include "Particles/ParticleManager.h"
@@ -26,6 +28,7 @@
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
     , mCurrentRoom( 0 )
+    , mToDelete( 0 )
 {
 
 }
@@ -124,7 +127,8 @@ void CScene::LoadRoom( std::string aRoomName )
             SMeshMInstance->Load( lSMPath, lBasePath );
 
         if ( lROPath.find( ".xml" ) != std::string::npos )
-            lROLM->LoadLayers( lROPath, aRoomName );
+            mToDelete = ( CRenderableObjectsManager *) lROLM->LoadLayers( lROPath, aRoomName );
+        
 
         PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
         PSMan->Init();
@@ -177,6 +181,13 @@ void CScene::UnloadRoom( std::string aRoomName )
 
     if ( lRoom )
     {
+
+        if(mToDelete)
+        {
+            CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>(SRCMInstance->GetCommand("render_solid"));
+            //lRSSRC->RemoveLayer(mToDelete);
+        }
+
         CRenderableObjectsLayersManager* lROLM = lRoom->GetLayers();
         CHECKED_DELETE( lROLM );
 

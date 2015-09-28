@@ -38,6 +38,7 @@ bool CActionManager::DoAction( const std::string& action )
 
 void CActionManager::ProcessInputs()
 {
+  mMutex.Lock();
   mDoActions.clear();
 
   MapActions::const_iterator lItb = mActions.begin(), lIte = mActions.end();
@@ -149,18 +150,23 @@ void CActionManager::ProcessInputs()
     SActionDone lAction = { doIt, amount };
     mDoActions[lItb->first] = lAction;
   }
+
+  mMutex.UnLock();
 }
 
 bool CActionManager::DoAction( const std::string& action, float32& amount )
 {
+  mMutex.Lock();
   MapActionsDone::iterator lItfind = mDoActions.find( action );
 
   if ( lItfind != mDoActions.end() )
   {
     amount = lItfind->second.mActionAmount;
+    mMutex.UnLock();
     return lItfind->second.mIsActionDone;
   }
 
+  mMutex.UnLock();
   return false;
   /*
       if(it1 == mActions.end())

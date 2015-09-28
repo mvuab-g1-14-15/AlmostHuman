@@ -73,7 +73,9 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
     {
         CHECKED_DELETE( t );
         LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-        return m_DummyTexture;
+
+        t = GetResource(fileName);
+        return t == NULL ? m_DummyTexture : t;
     }
 
     return t;
