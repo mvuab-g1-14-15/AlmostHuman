@@ -88,15 +88,24 @@
 				<Event Id="23506888" Name="Play_Long_Shoot"/>
 				<Event Id="3038207054" Name="Shoot"/>
 				<Event Id="401192514" Name="Shoot_Long_Shoot_Event"/>
+				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="28984091" Language="SFX">
 					<ShortName>RS2_FAST_IMPACT_WEAPONRY_013_B.wav</ShortName>
-					<Path>SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_DDC98EF4.wem</Path>
+					<Path>SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_76A5D070.wem</Path>
 				</File>
 				<File Id="165869216" Language="SFX">
 					<ShortName>RS2_MACHINE_MOVE_LONG_022_Bb_v(short).wav</ShortName>
-					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_DDC98EF4.wem</Path>
+					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_76A5D070.wem</Path>
+				</File>
+				<File Id="267394215" Language="SFX">
+					<ShortName>Paso suelo1.wav</ShortName>
+					<Path>SFX\Paso suelo1_76A5D070.wem</Path>
+				</File>
+				<File Id="787840959" Language="SFX">
+					<ShortName>Paso suelo2.wav</ShortName>
+					<Path>SFX\Paso suelo2_76A5D070.wem</Path>
 				</File>
 				<File Id="834326531" Language="SFX">
 					<ShortName>ACUMULATOR_Db.wav</ShortName>
@@ -106,10 +115,6 @@
 					<ShortName>ACUMULATOR_loop_Db.wav</ShortName>
 					<Path>SFX\ACUMULATOR_loop_Db_8BD76F1E.wem</Path>
 				</File>
-				<File Id="1041278161" Language="SFX">
-					<ShortName>hard_sole_shoes_single_footstep_on_rough_ground.wav</ShortName>
-					<Path>SFX\hard_sole_shoes_single_footstep_on_rough_ground_DDC98EF4.wem</Path>
-				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1275829538" Language="SFX">
@@ -117,53 +122,83 @@
 			<Path>AlmostHuman.bnk</Path>
 			<IncludedEvents>
 				<Event Id="847470298" Name="Open_Close_Door_Event"/>
+				<Event Id="603937113" Name="Play_Alarm"/>
 				<Event Id="1292086503" Name="Play_Back"/>
 				<Event Id="3552663155" Name="Play_Cash"/>
+				<Event Id="2757069037" Name="Play_Fan"/>
 				<Event Id="3174629258" Name="Play_GameOver"/>
 				<Event Id="785979864" Name="Play_Gui_Over"/>
 				<Event Id="2454594115" Name="Play_Help"/>
+				<Event Id="2456271929" Name="Play_In_Out_Barrel"/>
 				<Event Id="426840996" Name="Play_Init"/>
+				<Event Id="1355231703" Name="Play_LightHumming"/>
 				<Event Id="2513968146" Name="Play_LoopGen"/>
 				<Event Id="474386569" Name="Play_Next"/>
 				<Event Id="2348692292" Name="Play_Over"/>
+				<Event Id="1062476537" Name="Play_Spark"/>
+				<Event Id="2885688842" Name="Play_Steam"/>
 				<Event Id="186343927" Name="Play_Youwin"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="10864768" Language="SFX">
+					<ShortName>steam(vapor)_short.wav</ShortName>
+					<Path>SFX\steam(vapor)_short_76A5D070.wem</Path>
+				</File>
 				<File Id="45634969" Language="SFX">
 					<ShortName>gui_back.wav</ShortName>
-					<Path>SFX\gui_back_DDC98EF4.wem</Path>
+					<Path>SFX\gui_back_76A5D070.wem</Path>
 				</File>
 				<File Id="193371772" Language="SFX">
 					<ShortName>gui_next.wav</ShortName>
-					<Path>SFX\gui_next_DDC98EF4.wem</Path>
+					<Path>SFX\gui_next_76A5D070.wem</Path>
+				</File>
+				<File Id="294083481" Language="SFX">
+					<ShortName>Light Humming.wav</ShortName>
+					<Path>SFX\Light Humming_BADC626A.wem</Path>
+				</File>
+				<File Id="328627046" Language="SFX">
+					<ShortName>enter_leave_barrel.wav</ShortName>
+					<Path>SFX\enter_leave_barrel_76A5D070.wem</Path>
+				</File>
+				<File Id="418116809" Language="SFX">
+					<ShortName>Fan.wav</ShortName>
+					<Path>SFX\Fan_76A5D070.wem</Path>
 				</File>
 				<File Id="427511858" Language="SFX">
 					<ShortName>open_close_door.wav</ShortName>
-					<Path>SFX\open_close_door_DDC98EF4.wem</Path>
+					<Path>SFX\open_close_door_76A5D070.wem</Path>
 				</File>
 				<File Id="444784154" Language="SFX">
 					<ShortName>gameOver.wav</ShortName>
-					<Path>SFX\gameOver_DDC98EF4.wem</Path>
+					<Path>SFX\gameOver_76A5D070.wem</Path>
 				</File>
 				<File Id="482623365" Language="SFX">
 					<ShortName>loop-gen.wav</ShortName>
-					<Path>SFX\loop-gen_DDC98EF4.wem</Path>
+					<Path>SFX\loop-gen_76A5D070.wem</Path>
 				</File>
 				<File Id="507701302" Language="SFX">
 					<ShortName>gui_over.wav</ShortName>
-					<Path>SFX\gui_over_DDC98EF4.wem</Path>
+					<Path>SFX\gui_over_76A5D070.wem</Path>
+				</File>
+				<File Id="707043063" Language="SFX">
+					<ShortName>sparks(chispas).wav</ShortName>
+					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
+				</File>
+				<File Id="709423413" Language="SFX">
+					<ShortName>alarm2.wav</ShortName>
+					<Path>SFX\alarm2_BADC626A.wem</Path>
 				</File>
 				<File Id="869195930" Language="SFX">
 					<ShortName>youwin.wav</ShortName>
-					<Path>SFX\youwin_DDC98EF4.wem</Path>
+					<Path>SFX\youwin_76A5D070.wem</Path>
 				</File>
 				<File Id="937521952" Language="SFX">
 					<ShortName>Init.wav</ShortName>
-					<Path>SFX\Init_DDC98EF4.wem</Path>
+					<Path>SFX\Init_76A5D070.wem</Path>
 				</File>
 				<File Id="1048744211" Language="SFX">
 					<ShortName>help.wav</ShortName>
-					<Path>SFX\help_DDC98EF4.wem</Path>
+					<Path>SFX\help_76A5D070.wem</Path>
 				</File>
 				<File Id="1049674178" Language="SFX">
 					<ShortName>cash.wav</ShortName>
