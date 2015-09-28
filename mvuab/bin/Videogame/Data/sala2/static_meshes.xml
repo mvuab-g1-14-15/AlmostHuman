@@ -52,7 +52,6 @@
   <static_mesh name="metal_barrel023_sala2" filename="meshes\metal_barrel023.mesh" />
   <static_mesh name="metal_barrel022_sala2" filename="meshes\metal_barrel022.mesh" />
   <static_mesh name="metal_barrel019_sala2" filename="meshes\metal_barrel019.mesh" />
-  <static_mesh name="barril_sigil_sala2" filename="meshes\barril_sigil.mesh" />
   <static_mesh name="metal_barrel017_sala2" filename="meshes\metal_barrel017.mesh" />
   <static_mesh name="metal_barrel016_sala2" filename="meshes\metal_barrel016.mesh" />
   <static_mesh name="metal_barrel014_sala2" filename="meshes\metal_barrel014.mesh" />
@@ -119,14 +118,6 @@
   <static_mesh name="Ammo_box437_sala2" filename="meshes\Ammo_box437.mesh" />
   <static_mesh name="Ammo_box438_sala2" filename="meshes\Ammo_box438.mesh" />
   <static_mesh name="Ammo_box439_sala2" filename="meshes\Ammo_box439.mesh" />
-  <static_mesh name="plastic_barrel297_sala2" filename="meshes\plastic_barrel297.mesh" />
-  <static_mesh name="plastic_barrel298_sala2" filename="meshes\plastic_barrel298.mesh" />
-  <static_mesh name="plastic_barrel299_sala2" filename="meshes\plastic_barrel299.mesh" />
-  <static_mesh name="plastic_barrel300_sala2" filename="meshes\plastic_barrel300.mesh" />
-  <static_mesh name="plastic_barrel301_sala2" filename="meshes\plastic_barrel301.mesh" />
-  <static_mesh name="plastic_barrel302_sala2" filename="meshes\plastic_barrel302.mesh" />
-  <static_mesh name="plastic_barrel304_sala2" filename="meshes\plastic_barrel304.mesh" />
-  <static_mesh name="plastic_barrel305_sala2" filename="meshes\plastic_barrel305.mesh" />
   <static_mesh name="barrierCIL_031_sala2" filename="meshes\barrierCIL_031.mesh" />
   <static_mesh name="barrierCIL_032_sala2" filename="meshes\barrierCIL_032.mesh" />
   <static_mesh name="barrierCIL_033_sala2" filename="meshes\barrierCIL_033.mesh" />
@@ -145,25 +136,45 @@
   <static_mesh name="metal_barrel081_sala2" filename="meshes\metal_barrel081.mesh" />
   <static_mesh name="metal_barrel082_sala2" filename="meshes\metal_barrel082.mesh" />
   <static_mesh name="metal_barrel083_sala2" filename="meshes\metal_barrel083.mesh" />
-  <static_mesh name="Object004_sala2" filename="meshes\Object004.mesh" />
-  <static_mesh name="Object005_sala2" filename="meshes\Object005.mesh" />
-  <static_mesh name="Object006_sala2" filename="meshes\Object006.mesh" />
   <static_mesh name="barricada_sala2" filename="meshes\barricada.mesh" />
   <static_mesh name="Object007_sala2" filename="meshes\Object007.mesh" />
-  <static_mesh name="lampara_porta001_sala2" filename="meshes\lampara_porta001.mesh" />
-  <static_mesh name="focus_01_sala2" filename="meshes\focus_01.mesh" />
-  <static_mesh name="focus_002_sala2" filename="meshes\focus_002.mesh" />
-  <static_mesh name="focus_003_sala2" filename="meshes\focus_003.mesh" />
-  <static_mesh name="focus_004_sala2" filename="meshes\focus_004.mesh" />
-  <static_mesh name="focus_005_sala2" filename="meshes\focus_005.mesh" />
   <static_mesh name="focus_006_sala2" filename="meshes\focus_006.mesh" />
   <static_mesh name="estanteria_01_sala2" filename="meshes\estanteria_01.mesh" />
   <static_mesh name="estanteria_02_sala2" filename="meshes\estanteria_02.mesh" />
   <static_mesh name="oxid_barrel_01_sala2" filename="meshes\oxid_barrel_01.mesh" />
-  <static_mesh name="Porta_sala2" filename="meshes\Porta.mesh" />
-  <static_mesh name="Lampares_sala2" filename="meshes\Lampares.mesh" />
-  <static_mesh name="viga_sala2" filename="meshes\viga.mesh" />
   <static_mesh name="reixa_sala_2_sala2" filename="meshes\reixa_sala_2.mesh" />
   <static_mesh name="Base_carga_sala2" filename="meshes\Base_carga.mesh" />
   <static_mesh name="tapa_sala2" filename="meshes\tapa.mesh" />
+  <static_mesh name="sffWalls8_sala2" filename="meshes\sffWalls8.mesh" />
+  <static_mesh name="subterra_sala2" filename="meshes\subterra.mesh" />
+  <static_mesh name="sffWalls009_sala2" filename="meshes\sffWalls009.mesh" />
+  <static_mesh name="sffCeiling002_sala2" filename="meshes\sffCeiling002.mesh" />
+  <static_mesh name="sffCeiling1Glass001_sala2" filename="meshes\sffCeiling1Glass001.mesh" />
+  <static_mesh name="sffWalls011_sala2" filename="meshes\sffWalls011.mesh" />
+  <static_mesh name="sffWalls012_sala2" filename="meshes\sffWalls012.mesh" />
+  <static_mesh name="sffWalls013_sala2" filename="meshes\sffWalls013.mesh" />
+  <static_mesh name="sffWalls014_sala2" filename="meshes\sffWalls014.mesh" />
+  <static_mesh name="sffWalls015_sala2" filename="meshes\sffWalls015.mesh" />
+  <static_mesh name="sffWalls018_sala2" filename="meshes\sffWalls018.mesh" />
+  <static_mesh name="sffWalls019_sala2" filename="meshes\sffWalls019.mesh" />
+  <static_mesh name="sffWalls021_sala2" filename="meshes\sffWalls021.mesh" />
+  <static_mesh name="sffWalls022_sala2" filename="meshes\sffWalls022.mesh" />
+  <static_mesh name="sffWalls023_sala2" filename="meshes\sffWalls023.mesh" />
+  <static_mesh name="sffWalls024_sala2" filename="meshes\sffWalls024.mesh" />
+  <static_mesh name="sffWalls025_sala2" filename="meshes\sffWalls025.mesh" />
+  <static_mesh name="sffWalls026_sala2" filename="meshes\sffWalls026.mesh" />
+  <static_mesh name="sffWalls027_sala2" filename="meshes\sffWalls027.mesh" />
+  <static_mesh name="Object008_sala2" filename="meshes\Object008.mesh" />
+  <static_mesh name="lamp_04_sala2" filename="meshes\lamp_04.mesh" />
+  <static_mesh name="lamp_03_sala2" filename="meshes\lamp_03.mesh" />
+  <static_mesh name="lamp_02_sala2" filename="meshes\lamp_02.mesh" />
+  <static_mesh name="lamp_01_sala2" filename="meshes\lamp_01.mesh" />
+  <static_mesh name="Handrail_sala2" filename="meshes\Handrail.mesh" />
+  <static_mesh name="lamp_05_sala2" filename="meshes\lamp_05.mesh" />
+  <static_mesh name="Box001_sala2" filename="meshes\Box001.mesh" />
+  <static_mesh name="Estanteria_001_sala2" filename="meshes\Estanteria_001.mesh" />
+  <static_mesh name="E·stanteria_2_sala2" filename="meshes\E·stanteria_2.mesh" />
+  <static_mesh name="Door_sala2" filename="meshes\Door.mesh" />
+  <static_mesh name="doorUpper_sala2" filename="meshes\doorUpper.mesh" />
+  <static_mesh name="doorLower_sala2" filename="meshes\doorLower.mesh" />
 </static_meshes>
