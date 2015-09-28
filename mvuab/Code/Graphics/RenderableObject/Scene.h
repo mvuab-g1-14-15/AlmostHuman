@@ -3,13 +3,14 @@
 #define SCENE_H
 
 #include <string>
-#include "Utils\MapManager.h"
 #include "Utils\Manager.h"
+#include "Utils\MapManager.h"
 #include "Utils\SingletonPattern.h"
 
 class CRenderableObjectsLayersManager;
-class CRoom;
+class CRenderableObjectsManager;
 class CLightProbe;
+class CRoom;
 
 class CScene : public CMapManager<CRoom>, public CManager
 {
@@ -45,6 +46,7 @@ public:
 
 private:
   CRoom* mCurrentRoom;
+  CRenderableObjectsManager *mToDelete;
 };
 
 #endif

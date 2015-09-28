@@ -44,12 +44,13 @@ void CRenderableObjectsLayersManager::Destroy()
     CTemplatedVectorMapManager::Destroy();
 }
 
-bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath, const std::string& l_RoomName )
+void *CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath, const std::string& l_RoomName )
 {
     CXMLTreeNode l_Node, l_Root;
+    void *p = NULL;
 
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "room", l_Node ) )
-        return false;
+        return p;
 
     const std::string& l_Path = l_Root.GetAttribute<std::string>( "path", "no_path" );
 
@@ -60,13 +61,13 @@ bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath,
         const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_path" );
         const std::string& l_File = l_CurrentNode.GetAttribute<std::string>( "file", "no_file" );
 		
-		LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
+		p = LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
     }
 
-    return true;
+    return p;
 }
 
-void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
+void *CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
 {
     CXMLTreeNode l_Node, l_Root;
     CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
@@ -74,7 +75,7 @@ void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
 	if ( !AddResource( l_Name, lRenderableObjectManager ) )
 	{
 		CHECKED_DELETE( lRenderableObjectManager );
-		return;
+		return NULL;
 	}
 
 	CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>( SRCMInstance->GetCommand( "render_" + l_Name ) );
@@ -82,7 +83,7 @@ void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
 		lRSSRC->AddLayer( lRenderableObjectManager );
 
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
-        return;
+        return NULL;
 
     for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
     {
@@ -104,6 +105,8 @@ void CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
             }
         }
     }
+
+    return lRenderableObjectManager;
 }
 
 void CRenderableObjectsLayersManager::Update()
