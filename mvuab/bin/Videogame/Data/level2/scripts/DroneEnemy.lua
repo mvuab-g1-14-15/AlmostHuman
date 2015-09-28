@@ -27,9 +27,11 @@ function CDroneEnemyLUA:Update()
 	lCharacterController:SetPosition(lMeshPosition)
 	lRenderableObject = CEnemyLUA.GetAnimationModel(self)
 	lRenderableObject:SetPosition(lMeshPosition)
-	lRenderableObject:SetYaw(-lCharacterController:GetYaw() + g_HalfPi)
-	lRenderableObject:SetPitch(lCharacterController:GetPitch())
-	lRenderableObject:SetRoll(lCharacterController:GetRoll())
+	if CEnemyLUA.GetActualState(self) ~= "atacar" then
+		lRenderableObject:SetYaw(-lCharacterController:GetYaw() + g_HalfPi)
+		lRenderableObject:SetPitch(lCharacterController:GetPitch())
+		lRenderableObject:SetRoll(lCharacterController:GetRoll())
+	end
 	lRenderableObject:MakeTransform()
 	--UPDATE BRAIN
 	CEnemyLUA.GetBrain(self):Update()

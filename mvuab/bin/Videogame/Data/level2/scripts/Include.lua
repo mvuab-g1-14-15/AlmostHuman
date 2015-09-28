@@ -42,7 +42,11 @@ function PlayerDistance(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()
 	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
-	
+	local DifHeight = l_EnemyPos.y - l_PlayerPos.y
+	if DifHeight < -2 then
+		engine:Trace("El player está más alto")
+		return 9999
+	end
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
 	----engine:Trace("Player distance: " .. l_DistanceVector:Length())
