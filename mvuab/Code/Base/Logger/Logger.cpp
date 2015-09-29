@@ -19,7 +19,7 @@ CLogger::CLogger()
 
 void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, long line, const char* format, ... )
 {
-    return;
+    m_Mutex.Lock();
     if ( ll >= m_eLogLevel )
     {
         va_list args;
@@ -46,6 +46,7 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
                     {
                         m_vLogs.push_back( newLog );
                         free(buffer);
+                        m_Mutex.UnLock();
                         return;
                         SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
                     }
@@ -105,6 +106,8 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
         m_vLogs.push_back( newLog );
         free(buffer);
     }
+
+    m_Mutex.UnLock();
 }
 
 bool CLogger::SaveLogsInFile()

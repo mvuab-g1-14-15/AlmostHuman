@@ -42,7 +42,13 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
     TIMER_START();
     int lCount( node.GetNumChildren() );
     std::vector<HANDLE> l_ThreadHandler;
+
     l_ThreadHandler.reserve(lCount);
+    SYSTEM_INFO sysinfo;
+    int lIntents = 0;
+
+    GetSystemInfo( &sysinfo );
+    int numCPU = sysinfo.dwNumberOfProcessors;
 
     //#pragma omp parallel for shared(lCount)
     for( int i = 0; i < lCount ; ++i )
@@ -50,8 +56,9 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
         const std::string &file = aBasePath + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
 
-        MESH_THREAD_INFO *l_ThreadInfo = (MESH_THREAD_INFO *) malloc (sizeof(MESH_THREAD_INFO));
+        /*MESH_THREAD_INFO *l_ThreadInfo = (MESH_THREAD_INFO *) malloc (sizeof(MESH_THREAD_INFO));
         new (l_ThreadInfo) MESH_THREAD_INFO;
+        int lSleep = 200;
 
         l_ThreadInfo->iD = i;
         l_ThreadInfo->MeshManager = this;
@@ -60,16 +67,20 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         l_ThreadInfo->ResourceName.assign(lName);
 
         HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
-        if(h == NULL)
+        while(h == NULL)
         {
-            char s[256] = { 0 }; sprintf_s(s, 256, "CreateThread ERROR: %d\n", GetLastError());
-            OutputDebugStringA(s); continue;
+            char s[256] = { 0 }; 
+            
+            sprintf_s(s, 256, "CreateThread -> Intent: %d -> Error: %d\n", ++lIntents, GetLastError());
+            OutputDebugStringA(s);
+
+            Sleep(lIntents * lSleep);
+            h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
         }
 
-        l_ThreadHandler.push_back(h);
-        if(i % 4 == 0) Sleep(200);
+        l_ThreadHandler.push_back(h);*/
 
-        /*CStaticMesh *l_StaticMesh = new CStaticMesh();
+        CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
 
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
@@ -81,14 +92,14 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         if(!lLoadOk || !lState )
         {
             CHECKED_DELETE(l_StaticMesh);
-        }*/
+        }
     }
 
-    WaitForMultipleObjects(l_ThreadHandler.size(), &l_ThreadHandler[0], true, INFINITE);
+    /*WaitForMultipleObjects(l_ThreadHandler.size(), &l_ThreadHandler[0], true, INFINITE);
     for(unsigned int i = 0; i < l_ThreadHandler.size(); i++)
     {
         CloseHandle(l_ThreadHandler[i]);
-    }
+    }*/
 
     TIMER_STOP( "CStaticMeshManager::Load." );
 }
