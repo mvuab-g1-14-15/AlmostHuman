@@ -75,8 +75,10 @@ function update_gameplay()
 			if g_bPressX then
 				gui_manager:ShowStaticText("Block")
 				g_bPressedX = true
+			elseif g_bOpenDoor2 then
+				--Code para abrir puerta
 			end
-		end
+		end	
 		
 	end
 	if g_bInBarrel then

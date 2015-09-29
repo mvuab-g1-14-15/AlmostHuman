@@ -2,6 +2,7 @@ g_bChargeEnergy = false
 g_bChangeRoom = false
 g_bPressX = false
 g_bPressedX = false
+g_bOpenDoor2 = false
 g_bInBarrel = false
 CuentaAtras = 3
 engine = CEngine.GetSingletonPtr()
@@ -50,7 +51,7 @@ end
 function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
-		engine:Trace("He salido del punto de carga")
+		g_Player:SetWeak(false)
 		g_EnemyManager:AlarmRoom("room2")
 		g_bChargeEnergy = false
 	else
@@ -78,15 +79,36 @@ function ShowText(text, other_shape)
 	gui_manager:ShowStaticText(text)
 end
 
-function StayText(other_shape)
-	if g_bPressedX then
+function StayText(room, other_shape)
+	local enemigosVivos = GetEnemyLive(room)
+	if g_bPressedX and enemigosVivos then
 		CuentaAtras = CuentaAtras - timer:GetElapsedTime()
 		if CuentaAtras <= 0 then
 			gui_manager:ShowStaticText("Block")
 			CuentaAtras = 3
 			g_bPressedX = false
 		end
+	elseif g_bPressedX then
+		
+		gui_manager:ShowStaticText("Block")
+		CuentaAtras = 3
+		g_bPressedX = false
+		g_bPressX = false
+		g_bOpenDoor2 = true
+		--Codigo para cambiar de sala o abrir la puerta
 	end
+end
+
+function GetEnemyLive(room)
+	lEnemy = g_EnemyManager:GetEnemys()
+	engine:Trace("La room es "..room)
+	for i in pairs (lEnemy) do
+		lActualEnemy = lEnemy[i]
+		if lEnemy[i] ~= nil and lActualEnemy:GetRoom() == room then
+			return true
+		end
+	end
+	return false	
 end
 
 function HiddenBarrelOnEnter(aName, other_shape)
