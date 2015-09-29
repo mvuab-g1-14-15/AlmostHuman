@@ -7,6 +7,7 @@
 #define LUA_DECLARE_CLASS( CL )                       luabind::class_< CL >( #CL )
 #define LUA_DECLARE_DERIVED_CLASS( CL, BASE )         luabind::class_< CL, BASE >( #CL )
 #define LUA_DECLARE_DERIVED_CLASS2( CL, BASE, BASE1 ) luabind::class_< CL, bases< BASE, BASE1 > >( #CL )
+#define LUA_DECLARE_DERIVED_CLASS3( CL, BASE, BASE1, BAS2 ) luabind::class_< CL, bases< BASE, BASE1, BASE2 > >( #CL )
 
 #define LUA_DECLARE_DEFAULT_CTOR                       .def(luabind::constructor<>())
 #define LUA_DECLARE_CTOR_1( P1 )                       .def(luabind::constructor<P1>())

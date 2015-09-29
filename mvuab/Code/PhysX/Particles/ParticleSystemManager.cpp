@@ -34,6 +34,7 @@ void CParticleSystemManager::LoadXML()
 
     if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_systems", l_Node ) )
     {
+		    mEmitterFactory->SetEmittersPath( l_Node.GetAttribute<std::string>( "emitters_path", "" ) );
         for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
         {
             const CXMLTreeNode& lCurrentSystem = l_Node( i );
@@ -41,7 +42,7 @@ void CParticleSystemManager::LoadXML()
 
             CParticleSystemCore* lSystemCore = new CParticleSystemCore( lCurrentSystem, mEmitterFactory );
 
-            ASSERT( lSystemCore, "Null SystemCore" );
+            ASSERT( lSystemCore, "Null PSystemCore" );
 
             if ( lSystemCoreName == "" || !AddResource( lSystemCoreName, lSystemCore ) )
             {

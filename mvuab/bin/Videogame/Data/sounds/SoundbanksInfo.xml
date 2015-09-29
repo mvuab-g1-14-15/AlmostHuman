@@ -99,6 +99,14 @@
 					<ShortName>RS2_MACHINE_MOVE_LONG_022_Bb_v(short).wav</ShortName>
 					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_76A5D070.wem</Path>
 				</File>
+				<File Id="267394215" Language="SFX">
+					<ShortName>Paso suelo1.wav</ShortName>
+					<Path>SFX\Paso suelo1_76A5D070.wem</Path>
+				</File>
+				<File Id="787840959" Language="SFX">
+					<ShortName>Paso suelo2.wav</ShortName>
+					<Path>SFX\Paso suelo2_76A5D070.wem</Path>
+				</File>
 				<File Id="834326531" Language="SFX">
 					<ShortName>ACUMULATOR_Db.wav</ShortName>
 					<Path>SFX\ACUMULATOR_Db_DDC98EF4.wem</Path>
@@ -106,10 +114,6 @@
 				<File Id="917228779" Language="SFX">
 					<ShortName>ACUMULATOR_loop_Db.wav</ShortName>
 					<Path>SFX\ACUMULATOR_loop_Db_8BD76F1E.wem</Path>
-				</File>
-				<File Id="1041278161" Language="SFX">
-					<ShortName>hard_sole_shoes_single_footstep_on_rough_ground.wav</ShortName>
-					<Path>SFX\hard_sole_shoes_single_footstep_on_rough_ground_76A5D070.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

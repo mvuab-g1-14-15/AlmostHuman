@@ -128,37 +128,14 @@ void CScene::LoadRoom( std::string aRoomName )
 
         if ( lROPath.find( ".xml" ) != std::string::npos )
             mToDelete = ( CRenderableObjectsManager *) lROLM->LoadLayers( lROPath, aRoomName );
-        
 
         PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
         PSMan->Init();
         
-        BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
-        BillboardMan->Reload();
-
+        BillboardMan->LoadInstances( lRoom->GetBasePath() + "billboards.xml" );
         lRoom->SetLayers( lROLM );
 
         LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
-
-        if (aRoomName != "core"){
-          if (PhysXMInstance->GetLoadASE())
-	        {
-                if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lAsePath+""+aRoomName+".ase", aRoomName))
-		        {
-			        CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( aRoomName + "Escenario" );
-			        l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-			        CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-
-			        VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
-
-			        for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-			          l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-			        //m_AseMeshActor->CreateBody ( 10.f );
-			        PhysXMInstance->AddPhysicActor( l_AseMeshActor );
-		        }
-	        }
-        }
     }
 }
 
@@ -181,7 +158,6 @@ void CScene::UnloadRoom( std::string aRoomName )
 
     if ( lRoom )
     {
-
         if(mToDelete)
         {
             CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>(SRCMInstance->GetCommand("render_solid"));

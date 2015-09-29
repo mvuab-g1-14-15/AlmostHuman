@@ -48,18 +48,9 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         void Update() {};
         void Render() {};
 
-        std::string GetTechniqueEffectNameByVertexDefault( unsigned short VertexType );
-        size_t GetMaxLights() const;
-        CEffect* GetEffect( const std::string& Name );
-
-        void CleanUp();
-
         CEffectTechnique* GetEffectTechnique( const std::string & aName ) const;
 
     private: // Members
-        CEffectPool* mEffectPool;
-        typedef std::map<int, std::string> TDefaultTechniqueEffectMap;
-        TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
 
         Math::Mat44f m_WorldMatrix;
         Math::Mat44f m_ProjectionMatrix;
@@ -70,8 +61,6 @@ class CEffectManager : public CMapManager<CEffectTechnique>, public CManager
         Math::Mat44f m_ShadowProjectionMatrix;
 
         Math::Vect3f m_CameraEye;
-
-        CMapManager<CEffect> m_Effects;
 
     private: // Methods
 };

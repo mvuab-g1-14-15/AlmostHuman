@@ -10,6 +10,8 @@ class CInstanceParticle : public CObject3D
 {
 private:
 	CParticleSystemCore* mCore;
+	bool mActive;
+
 public:
   CInstanceParticle( const CXMLTreeNode& atts );
   ~CInstanceParticle();

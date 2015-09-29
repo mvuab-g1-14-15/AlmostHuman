@@ -30,9 +30,9 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node, const std::string& aRoomName )
 	const std::string &l_LayerName = node.GetAttribute<std::string>("renderable_objects_manager", "");
     
 	CScene* l_Scene = SceneInstance;
-
     CRoom* lRoom = l_Scene->GetResource( aRoomName );
-	if (lRoom->GetActive())
+    
+	if (lRoom )
 	{
 		CRenderableObjectsManager* lROM = lRoom->GetLayers()->GetResource(l_LayerName);
 		if (lROM )

@@ -12,31 +12,31 @@
 
 class CSceneRendererCommandManager : public CManager, public CTemplatedVectorMapManager<CSceneRendererCommand>
 {
-public:
-  CSceneRendererCommandManager();
-  CSceneRendererCommandManager( CXMLTreeNode& atts );
-  ~ CSceneRendererCommandManager();
-  CRenderGUISceneRendererCommand* GetCommandGUI( );
+    public:
+        CSceneRendererCommandManager();
+        CSceneRendererCommandManager(CXMLTreeNode& atts);
+        ~ CSceneRendererCommandManager();
+        CRenderGUISceneRendererCommand* GetCommandGUI();
 
-  void Init();
-  bool Load( const std::string& lFile );
-  void ReLoad();
-  bool Execute();
-  void Update() {}
-  void Render() {}
+        void Init();
+        bool Load(const std::string& lFile);
+        void ReLoad();
+        bool Execute();
+        void Update() {}
+        void Render() {}
 
-  bool GetVisibleCommand( std::string );
-  void SetVisibleCommand( std::string, bool );
+        bool GetVisibleCommand(std::string);
+        void SetVisibleCommand(std::string, bool);
 
-  CSceneRendererCommand* GetCommand( const std::string& aName )
-  {
-    return GetResource( aName );
-  }
+        CSceneRendererCommand* GetCommand(const std::string& aName)
+        {
+            return GetResource(aName);
+        }
 
-private:
-  void CleanUp();
-  std::string GetNextName();
+    private:
+        void CleanUp();
+        std::string GetNextName();
 
-  ObjectFactory1< CSceneRendererCommand, CXMLTreeNode, std::string > m_CommandFactory;
+        ObjectFactory1< CSceneRendererCommand, CXMLTreeNode, std::string > m_CommandFactory;
 };
 #endif

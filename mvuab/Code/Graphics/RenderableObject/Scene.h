@@ -42,7 +42,7 @@ public:
   std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f );
 
 
-  CRoom* GetCurrentRoom();
+  CRoom* GetCurrentRoom(){return mCurrentRoom;}
 
 private:
   CRoom* mCurrentRoom;

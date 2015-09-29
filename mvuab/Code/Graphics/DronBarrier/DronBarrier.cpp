@@ -40,7 +40,6 @@ void CDronBarrier::Render( )
   lGM->GetWidthAndHeight( lWidth, lHeight );
   lGM->SetTransform( GetTransform() );
   mTechnique->SetDebugColor( mColor );
-  mTechnique->SetTextureSize( lWidth, lHeight );
   sRV->Render( lGM, mTechnique );
   lGM->SetTransform( Math::Mat44f() );
 }

@@ -10,7 +10,7 @@ function CShootLUA:__init(speed, direction, position, damage)
 	self.Yaw = 0.0
 	self.Pitch = 0.0
 	self.Name = "Shoot" .. id_manager:GetId("Shoot")
-	
+	--TODO ALEX
     self.Billboard = CreateBillBoard()
 	if not billboard_manager:AddResource(self.Name, self.Billboard) then
 		self.Billboard = billboard_manager:GetResource(self.Name)

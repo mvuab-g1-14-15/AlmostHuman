@@ -126,9 +126,6 @@
     <ClCompile Include="Cameras\CameraFree.cpp">
       <Filter>Cameras</Filter>
     </ClCompile>
-    <ClCompile Include="Billboard\Billboard.cpp">
-      <Filter>Billboard</Filter>
-    </ClCompile>
     <ClCompile Include="Gizmos\GizmosManager.cpp">
       <Filter>Gizmos</Filter>
     </ClCompile>
@@ -140,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="Billboard\BillboardManager.cpp">
       <Filter>Billboard</Filter>
-    </ClCompile>
-    <ClCompile Include="Effects\EffectPool.cpp">
-      <Filter>Effects</Filter>
     </ClCompile>
     <ClCompile Include="Shapes\Shapes.cpp">
       <Filter>Shapes</Filter>
@@ -297,12 +291,6 @@
     <ClCompile Include="GraphicsXMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
-    <ClCompile Include="Effects\EffectFlags.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Effects\SharedEffect.cpp">
-      <Filter>Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Lights\LightProbe.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -323,6 +311,12 @@
     </ClCompile>
     <ClCompile Include="DronBarrier\DronBarrier.cpp">
       <Filter>DronBarrier</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard\BillboardCore.cpp">
+      <Filter>Billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard\BillboardInstance.cpp">
+      <Filter>Billboard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -460,9 +454,6 @@
     <ClInclude Include="Cameras\CameraFree.h">
       <Filter>Cameras</Filter>
     </ClInclude>
-    <ClInclude Include="Billboard\Billboard.h">
-      <Filter>Billboard</Filter>
-    </ClInclude>
     <ClInclude Include="Gizmos\GizmosManager.h">
       <Filter>Gizmos</Filter>
     </ClInclude>
@@ -474,9 +465,6 @@
     </ClInclude>
     <ClInclude Include="Billboard\BillboardManager.h">
       <Filter>Billboard</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\EffectPool.h">
-      <Filter>Effects</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\Shapes.h">
       <Filter>Shapes</Filter>
@@ -631,12 +619,6 @@
     <ClInclude Include="RenderableVertex\InstancedVertexTypes.h">
       <Filter>RenderableVertex</Filter>
     </ClInclude>
-    <ClInclude Include="Effects\EffectFlags.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects\SharedEffect.h">
-      <Filter>Effects</Filter>
-    </ClInclude>
     <ClInclude Include="dx9.h" />
     <ClInclude Include="Lights\LightProbe.h">
       <Filter>Lights</Filter>
@@ -658,6 +640,12 @@
     </ClInclude>
     <ClInclude Include="DronBarrier\DronBarrier.h">
       <Filter>DronBarrier</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\BillboardCore.h">
+      <Filter>Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard\BillboardInstance.h">
+      <Filter>Billboard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

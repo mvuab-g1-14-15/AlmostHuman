@@ -16,13 +16,17 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Radius = 0.4
 	self.Height = 2.0
 	self.PitchCameraMove = 0.0
-	
+	self.Room = Node:GetAttributeString("room", "no_name")
 	self.Suspected = false
 	self.SuspectedPosition = Vect3f(0.0)
 	
 	self.ShootSpeed = 50.0
+	self.Velocity = 1.0
+	self.Delta = 0.5
 	
-	self.Delta = 0.2
+	self.AlarmadoInRoom2 = false
+	self.PositionAlarm = Vect3f(0,0,0)
+	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	
 	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
@@ -41,6 +45,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	
 	local l_MeshPosition = self.CharacterController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.Height/2
+	self.RenderableObject:SetVelocity(self.Velocity)
 	self.RenderableObject:SetPosition(l_MeshPosition)
 	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi)
 	self.RenderableObject:SetPitch(self.CharacterController:GetPitch())
@@ -78,7 +83,8 @@ end
 function CEnemyLUA:UpdateCamera()
 	lPosition = self.CharacterController:GetPosition()
 	lPosition.y = lPosition.y + self:GetHeight()
-	lPosition = lPosition + self:GetDirection()
+	lPosition.x = lPosition.x + self:GetDirection().x
+	lPosition.z = lPosition.z + self:GetDirection().z
 	self.Camera:SetPosition(lPosition)
 	self.Camera:SetYaw(-self.RenderableObject:GetYaw() + g_HalfPi)
 	if not (self:GetActualState() == "atacar") then
@@ -87,7 +93,8 @@ function CEnemyLUA:UpdateCamera()
 		end
 		self.PitchCameraMove = self.PitchCameraMove + timer:GetElapsedTime()
 	end
-	self.Camera:SetPitch(self.RenderableObject:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
+	--self.Camera:SetPitch(self.RenderableObject:GetPitch() - (g_Pi/18)- (g_Pi*2*math.sin(self.PitchCameraMove)/18.0))
+	self.Camera:SetPitch(self.RenderableObject:GetPitch())
 	--self.Camera:SetDirection(self:GetDirectionEnemy())
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
@@ -96,9 +103,11 @@ function CEnemyLUA:SetMeshTransform()
 	local l_MeshPosition = self.CharacterController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.Height/2
 	self.RenderableObject:SetPosition(l_MeshPosition)
-	self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi)
-	self.RenderableObject:SetPitch(self.CharacterController:GetPitch())
-	self.RenderableObject:SetRoll(self.CharacterController:GetRoll())
+	if self:GetActualState() ~= "atacar" then
+		self.RenderableObject:SetYaw(-self.CharacterController:GetYaw() + g_HalfPi)
+		self.RenderableObject:SetPitch(self.CharacterController:GetPitch())
+		self.RenderableObject:SetRoll(self.CharacterController:GetRoll())
+	end
 	self.RenderableObject:MakeTransform()
 end
 
@@ -186,10 +195,20 @@ function CEnemyLUA:GetCamera()
 end
 
 function CEnemyLUA:MakeShoot(aDirection)
-	lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
-	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
+	 lPosition = self.CharacterController:GetPosition() + aDirection * 0.4
+	 lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
+	--lPosition = self.Camera:GetPosition()
 	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
 	g_EnemyManager:AddShoot(lShoot)
+	if self.Type == "drone" then
+		engine:Trace("He entrado en el disparo del drone")
+		local YawTmp = math.atan2(aDirection.z, aDirection.x)
+		local PitchTmp = math.atan2(aDirection.y, math.sqrt( (aDirection.z * aDirection.z) + (aDirection.x * aDirection.x) ) )
+		self.RenderableObject:SetYaw(YawTmp + g_HalfPi)
+		self.RenderableObject:SetPitch(PitchTmp - (g_Pi/18))
+		
+		self.RenderableObject:MakeTransform()
+	end
 	--Play shoot enemy sound
 end
 
@@ -336,7 +355,7 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
 	end
 		
     if ( math.abs( YawDif ) < 0.1 ) then
-		CharacterController:Move( Dir * 5.0, dt )
+		CharacterController:Move( Dir * self.Velocity, dt )
 		Yaw = DirYaw;
     else
         CharacterController:Move( Vect3f( 0.0 ), dt )
@@ -365,4 +384,24 @@ function CEnemyLUA:IsInWaypoint()
 	local DistVector = FinalPos - ActualPos
 	local Distance = DistVector:Length()
 	return Distance < self.Delta
+end
+
+function CEnemyLUA:GetVelocity()
+	return self.Velocity
+end
+
+function CEnemyLUA:SetVelocity(velocity)
+	self.Velocity = velocity
+	self.RenderableObject:SetVelocity(self.Velocity)
+end
+
+function CEnemyLUA:GetRoom()
+	return self.Room
+end
+
+function CEnemyLUA:ChangeRoute(position)
+	self.AlarmadoInRoom2 = true
+	self.ActualPathPoint = 1
+	self.PathCalculated = false
+	self.PositionAlarm = position[1]
 end

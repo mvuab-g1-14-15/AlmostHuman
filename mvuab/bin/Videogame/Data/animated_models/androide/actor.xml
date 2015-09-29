@@ -10,4 +10,6 @@
 	<animation name="activacion" file="activacion.caf"/>
 	<animation name="hurt" file="hurt.caf"/>
 	<animation name="idle_to_atac" file="idle_to_atac.caf"/>
+	<animation name="turn_left" file="turn_left.caf"/>
+	<animation name="turn_right" file="turn_right.caf"/>
 </animated_model>

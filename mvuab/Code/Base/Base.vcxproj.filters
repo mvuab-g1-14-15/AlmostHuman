@@ -82,6 +82,7 @@
     <ClCompile Include="Timer\CountDownTimerManager.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Utils\Mutex.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -90,6 +91,13 @@
     </ClCompile>
     <ClCompile Include="Utils\RWLock.cpp">
       <Filter>Utils</Filter>
+=======
+    <ClCompile Include="Math\BandMatrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\SplineInterpolator.cpp">
+      <Filter>Math</Filter>
+>>>>>>> master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +218,7 @@
     <ClInclude Include="Utils\TemplatedVectorMapManagerObject.h">
       <Filter>Utils</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Utils\Mutex.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -218,6 +227,13 @@
     </ClInclude>
     <ClInclude Include="Utils\RWLock.h">
       <Filter>Utils</Filter>
+=======
+    <ClInclude Include="Math\BandMatrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\SplineInterpolator.h">
+      <Filter>Math</Filter>
+>>>>>>> master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

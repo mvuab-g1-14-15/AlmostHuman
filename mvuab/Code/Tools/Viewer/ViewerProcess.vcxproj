@@ -22,7 +22,6 @@
     <ResourceCompile Include="Viewer.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\bin\Viewer\Data\textures\gear.ico" />
     <None Include="icon1.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

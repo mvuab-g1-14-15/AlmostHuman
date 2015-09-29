@@ -13,8 +13,6 @@
 
 #include "Particles\ParticleManager.h"
 #include "Particles\ParticleEmitter.h"
-#include "Particles\SphereEmitter.h"
-#include "Particles\CubeEmitter.h"
 
 #include "EngineManagers.h"
 

@@ -37,7 +37,6 @@ CRenderableObjectsLayersManager::~CRenderableObjectsLayersManager()
 
     for ( unsigned int i = 0; i < m_PhyscsUserData.size(); i++ )
         CHECKED_DELETE( m_PhyscsUserData.at( i ) );
-    m_PhyscsUserData.clear();
 }
 void CRenderableObjectsLayersManager::Destroy()
 {
@@ -47,10 +46,9 @@ void CRenderableObjectsLayersManager::Destroy()
 void *CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath, const std::string& l_RoomName )
 {
     CXMLTreeNode l_Node, l_Root;
-    void *p = NULL;
 
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "room", l_Node ) )
-        return p;
+        return NULL;
 
     const std::string& l_Path = l_Root.GetAttribute<std::string>( "path", "no_path" );
 
@@ -61,14 +59,15 @@ void *CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath
         const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_path" );
         const std::string& l_File = l_CurrentNode.GetAttribute<std::string>( "file", "no_file" );
 		
-		p = LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
+		LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
     }
 
-    return p;
+    return NULL;
 }
 
 void *CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
 {
+    void *p = NULL;
     CXMLTreeNode l_Node, l_Root;
     CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
 
@@ -80,10 +79,13 @@ void *CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& 
 
 	CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>( SRCMInstance->GetCommand( "render_" + l_Name ) );
 	if (lRSSRC)
+    {
 		lRSSRC->AddLayer( lRenderableObjectManager );
+        p = lRenderableObjectManager;
+    }
 
     if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
-        return NULL;
+        return p;
 
     for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
     {
@@ -105,8 +107,8 @@ void *CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& 
             }
         }
     }
-
-    return lRenderableObjectManager;
+    
+    return p;
 }
 
 void CRenderableObjectsLayersManager::Update()
@@ -136,78 +138,80 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
     return ( l_Name == "" ) ? m_DefaultRenderableObjectManager : GetResource( l_Name.c_str() );
 }
 
-CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& atts )
-{
-	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-	
-	l_InstanceMesh->SetType("dynamic");
-
-	// User data
-	CPhysicUserData * lData = new CPhysicUserData( l_InstanceMesh->GetName() );
-	lData->SetGroup( ECG_DYNAMIC_OBJECTS );
-	
-	// Phyx actor
-	CPhysicActor* l_MeshActor = new CPhysicActor(lData);
-	l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
-
-	// Obtain a box from the static mesh aabb
-	CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
-
-    Math::AABB3f l_AABB = l_StaticMesh->GetAABB();
-    Math::Vect3f l_Pos = l_InstanceMesh->GetTransform() * l_AABB.GetCenter();
-
-    l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
-    l_MeshActor->CreateBody( 1.0f );
-
-	l_InstanceMesh->SetActor( l_MeshActor );
-	PhysXMInstance->AddPhysicActor( l_MeshActor );
-
-	return l_InstanceMesh;
-}
-
-CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
-{
-	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-
-	l_InstanceMesh->SetType("static");
-
-	// If there is no ase loaded and we want phyx
-	if (!PhysXMInstance->GetLoadASE())
-    {
-		CPhysicActor* l_MeshActor = new CPhysicActor( new CPhysicUserData( l_InstanceMesh->GetName() ) );
-		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-		l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
-		l_InstanceMesh->SetActor( l_MeshActor );
-		PhysXMInstance->AddPhysicActor( l_MeshActor );
-	}
-
-	return l_InstanceMesh;
-}
-
 void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName )
 {
-	if( SMeshMInstance->Exist( atts.GetAttribute<std::string>( "core", "no_static_mesh " ) ) )
-	{
-		const std::string& lType = atts.GetAttribute<std::string>( "type", "static" );
-		CInstanceMesh* l_InstanceMesh = ( lType == "static" ) ? AddStatic( atts ) : AddDynamic( atts );
+    CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
 
-		if( l_InstanceMesh )
-		{
-			l_InstanceMesh->SetRoomName( l_RoomName );
+    if(l_InstanceMesh->GetVertexBuffer().size() * l_InstanceMesh->GetIndexBuffer().size() == 0)
+    {
+        CHECKED_DELETE(l_InstanceMesh);
+        return;
+    }
 
-			CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
+    l_InstanceMesh->SetType( atts.GetAttribute<std::string>( "type", "static" ) );
+    l_InstanceMesh->SetRoomName( l_RoomName );
 
-			if ( !lRenderableObjectManager->AddResource( l_InstanceMesh->GetName(), l_InstanceMesh ) )
-			{
-				LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", l_InstanceMesh->GetName().c_str() );
-				CPhysicUserData * lData = l_InstanceMesh->GetActor()->GetUserData();
-				CHECKED_DELETE( lData );
-				CHECKED_DELETE( l_InstanceMesh );
-			}
-		} 
-	}
-	else
-	{
-		LOG_ERROR_APPLICATION("Loading a instance mesh with out static mesh");
-	}
+    bool lOk = false;
+    const string& l_Name = l_InstanceMesh->GetName();
+
+    CPhysicUserData* l_pPhysicUserDataMesh = new CPhysicUserData( l_Name );
+
+    if ( l_InstanceMesh->GetType() == "dynamic" )
+        l_pPhysicUserDataMesh->SetGroup( ECG_DYNAMIC_OBJECTS );
+
+    CPhysicActor* l_MeshActor = new CPhysicActor( l_pPhysicUserDataMesh );
+
+    if ( l_InstanceMesh->GetType() == "dynamic" )
+    {
+        CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
+
+        Math::AABB3f l_AABB = l_StaticMesh->GetAABB();
+        Math::Vect3f l_Pos = l_InstanceMesh->GetTransform() * l_AABB.GetCenter();
+
+        l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
+        l_MeshActor->CreateBody( 1.0f );
+    }
+#ifdef _USING_MESH_FOR_PHYSX
+    else
+    {
+        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+        l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+    }
+#endif
+
+    if (!PhysXMInstance->CMapManager<CPhysicActor>::Exist( l_Name ) && PhysXMInstance->AddPhysicActor( l_MeshActor ) && PhysXMInstance->CMapManager<CPhysicActor>::AddResource( l_Name, l_MeshActor ) )
+    {
+        lOk = true;
+        m_PhyscsUserData.push_back( l_pPhysicUserDataMesh );
+    }
+
+    if ( !lOk )
+    {
+        PhysXMInstance->ReleasePhysicActor( l_MeshActor );
+
+        CHECKED_DELETE( l_MeshActor );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
+    }
+    else if ( l_InstanceMesh->GetType() == "dynamic" )
+    {
+        l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
+        l_InstanceMesh->SetActor( l_MeshActor );
+    }
+#ifdef _USING_MESH_FOR_PHYSX
+    else
+        l_InstanceMesh->SetActor( l_MeshActor );
+#endif
+
+    CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
+
+    if ( !lRenderableObjectManager->AddResource( l_Name, l_InstanceMesh ) )
+    {
+        LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", l_Name.c_str() );
+        CHECKED_DELETE( l_InstanceMesh );
+
+        CHECKED_DELETE( l_MeshActor );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
+        CHECKED_DELETE( l_pPhysicUserDataMesh );
+    }
 }
