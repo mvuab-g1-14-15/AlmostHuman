@@ -15,6 +15,7 @@ function CEnemyManagerLUA:__init()
 	self.AStar = CAStar()
 	self.Shoots = {}
 	self.Alarm = false
+	self.RoomAlarm = false
 	self.ExtraEnemyCount = 0
 	self.ExtraEnemyCountMax = 3
 	self.timerExtraEnemy = "Add Extra Enemy"
@@ -65,9 +66,16 @@ function CEnemyManagerLUA:Update()
 	for i in pairs (self.Enemy) do
 		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
 			self.ActualEnemy = self.Enemy[i]
+			if self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+			end
 			if self.ActualEnemy:GetLife() > 0 then
 				self.ActualEnemy:Update()
+				
 			else
+				if self.ActualEnemy:GetVelocity() == 5.0 then
+					self.ActualEnemy:SetVelocity(1.0)
+				end
 				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
 					AnimatedModel = self.ActualEnemy:GetAnimationModel()
 					AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
@@ -76,6 +84,7 @@ function CEnemyManagerLUA:Update()
 			
 				if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then				
 					countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
+					
 					self.ActualEnemy:Destroy()
 					self.Enemy[i] = nil
 					--table.remove(self.Enemy, i)
@@ -85,6 +94,7 @@ function CEnemyManagerLUA:Update()
 		end
 	end
 	
+	self.RoomAlarm = false
 	for k in pairs (self.Shoots) do
 		if self.Shoots[k]:GetImpacted() then
 			self.Shoots[k]:Destroy()
@@ -161,7 +171,7 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 	elseif lType == "drone" then		
 		lEnemy = CDroneEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
 	elseif lType == "easy" then
-		lEnemy = CEasyEnemyLUA(Node, lStateMachine, lCoreEnemy)	
+		lEnemy = CEasyEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
 	end
 	name = Node:GetAttributeString("name", "no_name")
 	--engine:Trace("Enemy: "..name)
@@ -253,4 +263,9 @@ function CEnemyManagerLUA:GetEnemiesAtDistance( aDist )
 		end
 	end
 	return lEnemyList
+end
+
+function CEnemyManagerLUA:AlarmRoom(room)	
+	self.Room = room
+	self.RoomAlarm = true
 end

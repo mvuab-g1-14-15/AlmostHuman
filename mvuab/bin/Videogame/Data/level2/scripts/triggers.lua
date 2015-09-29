@@ -47,6 +47,18 @@ function ShowImage(other_shape)
 	gui_manager:ShowStaticText("ButtonEnergy")
 end
 
+function ShowImage1(other_shape)
+	--cinematic_manager:Execute("cinematica_1")
+	if g_bChargeEnergy then
+		engine:Trace("He salido del punto de carga")
+		g_EnemyManager:AlarmRoom("room2")
+		g_bChargeEnergy = false
+	else
+		g_bChargeEnergy = true
+	end
+	gui_manager:ShowStaticText("ButtonEnergy")
+end
+
 function ShowImageRoom(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChangeRoom then

@@ -57,6 +57,10 @@ extern "C"
 
 using namespace luabind;
 
+CBillboardInstance* CreateBillBoard()
+{
+	return new CBillboardInstance();
+}
 CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
 {
   return new CInstanceMesh( Name, CoreName );
@@ -80,6 +84,10 @@ CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, 
 void registerBillboards( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Billboard" );
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS(CreateBillBoard)
+  LUA_END_DECLARATION
+  
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS2( CBillboardInstance, CName, CObject3D )
   LUA_DECLARE_METHOD( CBillboardInstance, SetActive )
