@@ -1,5 +1,5 @@
 <animated_model name="Player">
-	<texture file="Compo_logan.tga"/>
+	<texture file="Compo_loogan.tga"/>
 	<skeleton file="logan.csf"/>
 	<mesh file="logan.cmf"/>
 	<animation name="idle" file="idle.caf"/>

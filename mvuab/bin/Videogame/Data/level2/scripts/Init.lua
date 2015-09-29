@@ -31,6 +31,7 @@ function load_gameplay()
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+	
 end
 
 function update_gameplay()
@@ -54,6 +55,9 @@ function update_gameplay()
 		
 	end
 	
+	if action_manager:DoAction("Alarm") then
+			sound_manager:PlayEvent("Play_Alarm", "Alarma_Sala2" )	
+	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then

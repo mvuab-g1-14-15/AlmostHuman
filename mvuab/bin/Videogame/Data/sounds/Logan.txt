@@ -9,8 +9,8 @@ Event	ID	Name			Wwise Object Path	Notes
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Short Shoot\RS2_FAST_IMPACT_WEAPONRY_013_B		28613
 	165869216	LongShoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\LongShoot		38244
-	267394215	Paso suelo1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo1		18008
-	787840959	Paso suelo2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo2		12257
+	267394215	Paso suelo1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo1		4362
+	787840959	Paso suelo2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo2		3963
 	834326531	Acumlator Long Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_Db_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\Acumlator Long Shoot		806016
 	917228779	ACUMULATOR_loop_Db	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_loop_Db_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\ACUMULATOR_loop_Db		66504
 
