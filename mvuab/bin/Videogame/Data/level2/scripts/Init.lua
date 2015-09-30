@@ -36,7 +36,6 @@ function load_gameplay()
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-	engine:Trace("Finish the load_gameplay()")
 end
 
 function update_gameplay()
@@ -60,6 +59,9 @@ function update_gameplay()
 		
 	end
 	
+	if action_manager:DoAction("Alarm") then
+			sound_manager:PlayEvent("Play_Alarm", "Alarma_Sala2" )	
+	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then
@@ -77,8 +79,10 @@ function update_gameplay()
 			if g_bPressX then
 				gui_manager:ShowStaticText("Block")
 				g_bPressedX = true
+			elseif g_bOpenDoor2 then
+				--Code para abrir puerta
 			end
-		end
+		end	
 		
 	end
 	if g_bInBarrel then
@@ -193,10 +197,5 @@ function update_gameplay()
 				scene:ActivateRoom("sala4")
 			end
 		end
-		
-		
-		
-		
-		
 	end
 end
