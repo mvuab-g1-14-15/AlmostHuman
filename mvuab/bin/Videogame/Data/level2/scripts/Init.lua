@@ -73,10 +73,31 @@ function update_gameplay()
 		end
 		if action_manager:DoAction("PressX") then
 			if g_bPressX then
-				gui_manager:ShowStaticText("Block")
+				if CuentaAtras == 3 then
+					gui_manager:ShowStaticText("Block")
+				end
 				g_bPressedX = true
 			elseif g_bOpenDoor2 then
 				--Code para abrir puerta
+			end
+		end	
+		
+		if action_manager:DoAction("PressR") then
+			if g_bPressE then
+				g_bPressedE = true
+				if g_fC4Colocada == "1" then
+					g_bC41 = true
+				elseif g_fC4Colocada == "2" then
+					g_bC42 = true
+				end
+			end
+		end	
+		if action_manager:DoAction("DetonarC4") then
+			if g_bDistanceC4 and g_bC41 and g_bC42 then
+				g_bC41 = false
+				g_bC42 = false
+				gui_manager:ShowStaticText(g_sTextC4Press)
+				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
 		

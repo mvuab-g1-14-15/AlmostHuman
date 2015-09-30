@@ -6,7 +6,13 @@ g_bOpenDoor2 = false
 g_bInBarrel = false
 CuentaAtras = 3
 engine = CEngine.GetSingletonPtr()
-
+g_fC4Colocada = 0
+g_bPressE = false
+g_bPressedE = false
+g_bC41 = false
+g_bC42 = false
+g_bDistanceC4 = false
+g_sTextC4Press = ""
 function OnEnter()
 	process = engine:GetProcess()
 	physicUserData = process:GetNewPUD("Box6")
@@ -73,10 +79,58 @@ end
 function ShowText(text, other_shape)
 	if g_bPressX then
 		g_bPressX = false
+		if CuentaAtras ~= 3 then
+			CuentaAtras = 0
+			gui_manager:ShowStaticText("Block")
+		end
 	else
 		g_bPressX = true
 	end
 	gui_manager:ShowStaticText(text)
+end
+
+function ShowText(text, num, textC4Colocada, text2, other_shape)	
+	if g_bPressedE == false and g_bC41 then
+		g_bPressE = false
+		g_bPressedE = true
+		gui_manager:ShowStaticText(textC4Colocada)
+	elseif g_bPressedE == false and g_bC42 then
+		g_bPressE = false	
+		g_bPressedE = true
+		gui_manager:ShowStaticText(textC4Colocada)
+	elseif g_bPressE then
+		g_bPressE = false
+		gui_manager:ShowStaticText(text)
+	else
+		g_bPressE = true
+		g_bPressedE = false
+		g_fC4Colocada = num
+		gui_manager:ShowStaticText(text)
+	end
+	
+end
+
+function CheckC4(num, textC4Colocada, text2, other_shape)
+	
+	if g_bPressedE then
+		gui_manager:ShowStaticText(num)
+		gui_manager:ShowStaticText(textC4Colocada)
+		g_bPressedE = false
+		gui_manager:ShowStaticText(text2, true)
+	end
+		
+end
+
+function ShowDetonar(text, text2, other_shape)
+	if g_bC41 and g_bC42 then
+		g_bDistanceC4 = true
+		g_sTextC4Press = text
+		gui_manager:ShowStaticText(text)
+	else
+		g_bDistanceC4 = false
+		g_sTextC4Press = text2
+		gui_manager:ShowStaticText(text2)
+	end
 end
 
 function StayText(room, other_shape)

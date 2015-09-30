@@ -32,8 +32,7 @@ function check_next_state()
 		end
 		if l_CurrentState == "inicial" or l_CurrentState == "esperar" or l_CurrentState == "andando" or l_CurrentState == "perseguir" then
 			if (l_PlayerInSight and l_DistanceToPlayer < 20) or (0 < angle and l_DistanceToPlayer < 4) then
-				l_NextState = "atacar"
-				engine:Trace("He entrado en atacar "..enemy:GetName())
+				l_NextState = "atacar"		
 				if countdowntimer_manager:ExistTimer(timerPerseguir) then
 					countdowntimer_manager:Reset(timerPerseguir, false)
 				end
