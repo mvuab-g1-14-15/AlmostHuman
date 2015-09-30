@@ -173,7 +173,7 @@
   <static_mesh name="lamp_05_sala2" filename="meshes\lamp_05.mesh" />
   <static_mesh name="Box001_sala2" filename="meshes\Box001.mesh" />
   <static_mesh name="Estanteria_001_sala2" filename="meshes\Estanteria_001.mesh" />
-  <static_mesh name="E·stanteria_2_sala2" filename="meshes\E·stanteria_2.mesh" />
+  <static_mesh name="Estanteria_2_sala2" filename="meshes\Estanteria_2.mesh" />
   <static_mesh name="Door_sala2" filename="meshes\Door.mesh" />
   <static_mesh name="doorUpper_sala2" filename="meshes\doorUpper.mesh" />
   <static_mesh name="doorLower_sala2" filename="meshes\doorLower.mesh" />
