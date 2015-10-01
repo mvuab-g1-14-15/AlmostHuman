@@ -115,6 +115,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         { l_TypeSize = sizeof(TRNM_VERTEX); }
 
+        /*
         // Obtain all the textures if any
         unsigned short l_numTexturas = 0;
         std::fread( &l_numTexturas, sizeof( unsigned short int ), 1, l_pFile );
@@ -139,6 +140,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         }
 
         m_Textures.push_back(l_Texture);
+        */
 
         unsigned int l_VrtexCount = 0;
         std::fread( &l_VrtexCount, sizeof( unsigned int ), 1, l_pFile );
@@ -258,21 +260,12 @@ bool CStaticMesh::ReLoad()
     return Load( m_FileName );
 }
 
-void CStaticMesh::Render( CGraphicsManager* GM )
+void CStaticMesh::Render( CGraphicsManager* GM, uint32 aIdx )
 {
-    for(unsigned int i = 0; i < m_RVs.size(); ++i)
-    {
-        for(unsigned int j = 0; j < m_Textures[i].size(); ++j) { m_Textures[i][j]->Activate(j); }
+  //ASSERT(aIdx < m_RVs.size(), "Invalid index");
+  //ASSERT(aIdx < m_RenderableObjectTechniques.size(), "Invalid index");
 
-        if (i < m_RenderableObjectTechniques.size() && m_RenderableObjectTechniques[i] != NULL)
-		{
-			m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
-		}
-        else
-		{
-			LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
-		}
-    }
+  m_RVs[aIdx]->Render( GM, m_RenderableObjectTechniques[aIdx]->GetEffectTechnique() );
 }
 
 bool CStaticMesh::GetRenderableObjectTechnique()

@@ -3,6 +3,7 @@
 #include "Logger\Logger.h"
 #include "ActionManager.h"
 #include "EngineConfig.h"
+#include "Material.h"
 
 #include "Utils\BaseUtils.h"
 
@@ -23,6 +24,34 @@ void CStaticMeshManager::Init()
 {
 }
 
+void CStaticMeshManager::LoadMaterials(const std::string& aMaterialsPath )
+{
+  TIMER_START();
+
+  CXMLTreeNode lFile, lMaterials;
+  if( lFile.LoadAndFindNode( aMaterialsPath.c_str(), "materials", lMaterials ) )
+  {
+    int32 lCount = lMaterials.GetNumChildren();
+    //#pragma omp parallel for
+    for( int32 i = 0; i < lCount; ++i )
+    {
+      const CXMLTreeNode& lNode = lMaterials(i);
+      const std::string& lName = lNode.GetName();
+      if( lName == "object_material" )
+      {
+        CMaterial* lNewMaterial = new CMaterial( lNode );
+        if( !mMaterials.AddResource(lNewMaterial->GetName(), lNewMaterial ) )
+        {
+          LOG_ERROR_APPLICATION("Could not add %s material", lNewMaterial->GetName() );
+          CHECKED_DELETE( lNewMaterial );
+        }
+      }
+    }
+  }
+
+  TIMER_STOP("Load materials.");
+}
+
 void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
 {
     CXMLTreeNode newFile;
@@ -38,6 +67,8 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
         return;
     }
+
+    LoadMaterials( aBasePath + "meshes/materials.xml" );
 
     TIMER_START();
     int lCount( node.GetNumChildren() );

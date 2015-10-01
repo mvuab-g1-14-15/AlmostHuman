@@ -324,6 +324,9 @@
     <ClCompile Include="DronBarrier\DronBarrier.cpp">
       <Filter>DronBarrier</Filter>
     </ClCompile>
+    <ClCompile Include="StaticMeshes\Material.cpp">
+      <Filter>StaticMeshes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -658,6 +661,9 @@
     </ClInclude>
     <ClInclude Include="DronBarrier\DronBarrier.h">
       <Filter>DronBarrier</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\Material.h">
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

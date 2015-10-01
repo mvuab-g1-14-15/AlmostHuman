@@ -46,7 +46,7 @@ class CStaticMesh
         bool Load( const std::string& FileName );
         bool ReLoad();
         
-        void Render( CGraphicsManager* GM );
+        void Render( CGraphicsManager* GM, uint32 aIdx );
         void Destroy();
         
         Math::AABB3f GetAABB() { return m_AABB; }

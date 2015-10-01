@@ -8,6 +8,7 @@ struct STexture
 (
 	m_Name = "",
 	m_Path = "",
+	m_ID ="",
 	
 	fn FromMaxTexture textureFileName =
 	(
@@ -21,20 +22,12 @@ struct STexture
 		return m_Name.count > 0
 	),
 	
-	fn WriteToFile file = 
+	fn WriteToXML xmlNode = 
 	(
 		if IsNotNull() then
 		(
 			format "Texture name: %\n" m_Name
-			--format "Texture length: %\n" m_Name.count
-			WriteShort file m_Name.count #unsigned--Write Lenght Name
-			WriteString file m_Name --Write Name
-		)
-		else
-		(
-			l_Name = "test.png"
-			WriteShort file l_Name.count #unsigned--Write Lenght Name
-			WriteString file l_Name --Write Name
+			xmlNode.AddAttributeAsString m_ID m_Name
 		)
 	)
 )
@@ -64,6 +57,7 @@ struct SMaterial
 				-- Load the texture 1
 				local l_Texture1FileName = mat.diffuseMap.filename
 				m_Texture1.FromMaxTexture l_Texture1FileName
+				m_Texture1.m_ID ="diffuse"
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == Normal_Bump then
 				(
@@ -71,6 +65,7 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureBumpMappingFileName = mat.bumpMap.normal_map.bitmap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+					m_TextureBump.m_ID ="normal"
 				)
 				
 				if mat.selfIllumMapEnable == true AND classOf(mat.selfIllumMap) == BitmapTexture then
@@ -94,6 +89,7 @@ struct SMaterial
 					(
 						local l_Texture2FileName = lSelfIlumMaterial.filename
 						m_Texture2.FromMaxTexture l_Texture2FileName
+						m_Texture2.m_ID ="light_map"
 					)
 					
 				)
@@ -104,6 +100,7 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureReflectionFileName = mat.reflectionMap.filename
 					m_TextureReflection.FromMaxTexture l_TextureReflectionFileName
+					m_TextureReflection.m_ID ="reflection"
 				)
 				
 				if mat.refractionMapEnable == true AND classOf(mat.refractionMap) == BitmapTexture then
@@ -112,6 +109,7 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureSkyBoxFileName = mat.refractionMap.filename
 					m_TextureSkyBox.FromMaxTexture l_TextureSkyBoxFileName
+					m_TextureSkyBox.m_ID ="sky_box"
 				)
 			)
 			else
@@ -123,9 +121,7 @@ struct SMaterial
 				m_ColorGreen = bit.and mat.diffuse.g 0xFF
 				m_ColorBlue = bit.and mat.diffuse.b 0xFF
 				
-				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
-				
-				
+				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue	
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -133,6 +129,7 @@ struct SMaterial
 					-- Load the texture of bump mapping
 					local l_TextureBumpMappingFileName = mat.bumpMap.filename
 					m_TextureBump.FromMaxTexture l_TextureBumpMappingFileName
+					m_TextureBump.m_ID ="bump"
 				)
 			)
 		)
@@ -154,58 +151,33 @@ struct SMaterial
 		m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
 	),
 	
-	fn WriteToFile file =
+	fn WriteToXML xmlDoc xmlNode =
 	(
+		local lMaterialNode= xmlDoc.getNewNode "material"
 		--format "Writing Material\n"
 		
-		WriteShort file m_Type #unsigned
-		--format "Type: %\n" m_Type
-		
-		local l_nTextures = 0
 		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 		(
-			l_nTextures = l_nTextures + 1
+			m_Texture1.WriteToXML lMaterialNode
 		)
 		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
 		(
-			l_nTextures = l_nTextures + 1
+			m_Texture2.WriteToXML lMaterialNode
 		)
 		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
 		(
-			l_nTextures = l_nTextures + 1
+			m_TextureBump.WriteToXML lMaterialNode
 		)
 		if ((bit.and m_Type VERTEX_TYPE_REFLECTION) == VERTEX_TYPE_REFLECTION ) then 
 		(
-			l_nTextures = l_nTextures + 1
+			m_TextureReflection.WriteToXML lMaterialNode
 		)
 		if ((bit.and m_Type VERTEX_TYPE_SKYBOX) == VERTEX_TYPE_SKYBOX ) then 
 		(
-			l_nTextures = l_nTextures + 1
-		)
-		
-		WriteShort file l_nTextures #unsigned
-		
-		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
-		(
-			m_Texture1.WriteToFile file
-		)
-		if ((bit.and m_Type VERTEX_TYPE_TEXTURE2) == VERTEX_TYPE_TEXTURE2 ) then 
-		(
-			m_Texture2.WriteToFile file
-		)
-		if (bit.and m_Type (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) ) == (bit.or VERTEX_TYPE_BINORMAL VERTEX_TYPE_TANGENT) then
-		(
-			m_TextureBump.WriteToFile file
-		)
-		if ((bit.and m_Type VERTEX_TYPE_REFLECTION) == VERTEX_TYPE_REFLECTION ) then 
-		(
-			m_TextureReflection.WriteToFile file
-		)
-		if ((bit.and m_Type VERTEX_TYPE_SKYBOX) == VERTEX_TYPE_SKYBOX ) then 
-		(
-			m_TextureSkyBox.WriteToFile file
+			m_TextureSkyBox.WriteToXML lMaterialNode
 		)
 		--format "Writing Material End\n"
+		xmlNode.AppendNode lMaterialNode
 	)
 )
 
@@ -307,11 +279,17 @@ struct SSubMesh
 	m_IB = SIndexBuffer(),
 	m_VB = SVertexBuffer(),
 	
-	fn WriteToFile file =
+	fn WriteToFile file xmlDoc xmlNode =
 	(
-		m_Material.WriteToFile file
+		m_Material.WriteToXML xmlDoc xmlNode
+		WriteShort file m_Material.m_Type #unsigned
 		m_VB.WriteToFile file
 		m_IB.WriteToFile file
+	),
+	
+	fn WriteToXML xmlDoc xmlNode =
+	(
+		m_Material.WriteToXML xmlDoc xmlNode
 	)
 )
 
@@ -563,8 +541,7 @@ struct SMesh
 
 	),
 	
-
-	fn WriteToFile file =
+	fn WriteToFile file xmlDoc xmlNode =
 	(
 		--format "Write to file\n"
 		WriteShort file 0x55ff #unsigned
@@ -600,7 +577,7 @@ struct SMesh
 			if IsSubmeshComplete iSubMesh then
 			(
 				--format "--------------m_Material: %\n" iSubMesh.m_Material
-				iSubMesh.WriteToFile file
+				iSubMesh.WriteToFile file xmlDoc xmlNode
 			)
 		)
 		
@@ -608,6 +585,42 @@ struct SMesh
 	
 		WriteShort file 0xff55 #unsigned
 		format "Footer writed!\n"
+	),
+	
+	fn WriteToXML xmlDoc xmlNode =
+	(	
+		local counter = 0
+		for iSubMesh in m_SubMeshes do
+		(
+			if IsSubmeshComplete iSubMesh then
+			(
+				counter = counter + 1
+			)
+		)
+		
+		if m_SubMeshes == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 submeshes.")
+			exit
+		)
+		
+		if counter == 0 then
+		(
+			messageBox ("The object " + m_ObjName + " has 0 vertex and index.")
+			exit
+		)
+		
+		format "Submeshes: %\n" counter
+		
+		for iSubMesh in m_SubMeshes do
+		(
+			--format "Current Submesh%\n" iSubMesh
+			if IsSubmeshComplete iSubMesh then
+			(
+				--format "--------------m_Material: %\n" iSubMesh.m_Material
+				iSubMesh.WriteToXML xmlDoc xmlNode
+			)
+		)
 	)
 )
 

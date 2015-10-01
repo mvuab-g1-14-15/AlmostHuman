@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materials>
+  <object_material name="base_carga001">
+    <material diffuse="sml9Tile03Dark.jpg" />
+    <material diffuse="USFb_ConcreteA.jpg" />
+  </object_material>
+  <object_material name="lw_pipes001">
+    <material />
+  </object_material>
+  <object_material name="msf_floor129">
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="wall_1">
+    <material diffuse="msfPanel05.jpg" />
+    <material diffuse="msfFloor01.jpg" />
+    <material diffuse="msfButress06.jpg" />
+    <material diffuse="msfPanel01.jpg" />
+    <material diffuse="msf_WallCap04.jpg" />
+    <material diffuse="msfCorner02.jpg" />
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="wall_2">
+    <material diffuse="msf_Panel03.jpg" />
+    <material diffuse="msfWallCap01.jpg" />
+    <material diffuse="msfButress06.jpg" />
+    <material diffuse="msfFloor06.jpg" />
+    <material diffuse="msf_WallCap02.jpg" />
+    <material diffuse="msfButressCap1.jpg" />
+    <material diffuse="msf_WallCap04.jpg" />
+    <material diffuse="msfCorner02.jpg" />
+    <material diffuse="msfCorner01.jpg" />
+  </object_material>
+  <object_material name="tuberia">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="wall_3">
+    <material diffuse="msfFloor06.jpg" />
+    <material diffuse="msfFloor01.jpg" />
+    <material diffuse="msfButress06.jpg" />
+    <material diffuse="msfPanel07.jpg" />
+    <material diffuse="msfWallCap01.jpg" />
+  </object_material>
+  <object_material name="floor136">
+    <material diffuse="msfFloor06.jpg" />
+    <material diffuse="msfButressCap1.jpg" />
+    <material diffuse="msf_WallCap04.jpg" />
+    <material diffuse="msfButress06.jpg" />
+    <material diffuse="msfFloor01.jpg" />
+    <material diffuse="msfWallCap01.jpg" />
+    <material diffuse="msfPanel01.jpg" />
+    <material diffuse="msfPanel05.jpg" />
+    <material diffuse="msf_WallCap02.jpg" />
+  </object_material>
+  <object_material name="msf_floor149">
+    <material diffuse="msfCorner02.jpg" />
+  </object_material>
+  <object_material name="msf_floor153">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="msf_butresscap013">
+    <material diffuse="msfButressCap1.jpg" />
+  </object_material>
+  <object_material name="msf_butresscap014">
+    <material diffuse="msfButressCap1.jpg" />
+  </object_material>
+  <object_material name="msf_floor159">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="door">
+    <material diffuse="sffDoorWay.jpg" />
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="msf_floor162">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="msf_floor163">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="msf_floor164">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="msf_floor165">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="msf_floor166">
+    <material diffuse="msfFloor01.jpg" />
+  </object_material>
+  <object_material name="box025">
+    <material />
+  </object_material>
+  <object_material name="tube024">
+    <material diffuse="Metal_base.tga" />
+    <material diffuse="Metal_base_black.jpg" />
+    <material diffuse="metal_grating.tga" />
+    <material diffuse="Cooper_text.tga" />
+    <material diffuse="Metal_base.tga" />
+    <material diffuse="Metal_base_black.jpg" />
+    <material diffuse="Cooper_text.tga" />
+    <material diffuse="SFC16_ButressLeft.jpg" />
+    <material diffuse="metal_grating.tga" />
+    <material />
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="SFC16_Metal01.jpg" />
+    <material diffuse="SF16_Details001.jpg" />
+  </object_material>
+  <object_material name="msf_floor084">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor094">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor093">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor082">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor092">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor120">
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="msf_floor04">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor096">
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="msf_floor091">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor083">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor090">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor118">
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="msf_floor089">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor117">
+    <material diffuse="msfFloor06.jpg" />
+  </object_material>
+  <object_material name="msf_floor086">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="msf_floor119">
+    <material diffuse="msfFloor03.jpg" />
+    <material diffuse="msfFloor03B.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling01">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor125">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling011">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling012">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling009">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling010">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor100">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor102">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor121">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor123">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor122">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor099">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor127">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor128">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor111">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor110">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor115">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling002">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling008">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor124">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling004">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor114">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling003">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor101">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling006">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor107">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling005">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="msf_floor126">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor108">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="msf_floor109">
+    <material diffuse="msfFloor02.jpg" />
+    <material diffuse="msfCeiling01.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling007">
+    <material diffuse="msfCeiling01.jpg" />
+    <material diffuse="msfCeiling01B.jpg" />
+    <material diffuse="msfCeiling01S.jpg" />
+  </object_material>
+  <object_material name="line001">
+    <material diffuse="Surgery_light_texture.tga" />
+    <material diffuse="Surgery_light_texture2.tga" />
+    <material />
+  </object_material>
+  <object_material name="line002">
+    <material diffuse="Surgery_light_texture.tga" />
+    <material diffuse="Surgery_light_texture2.tga" />
+    <material />
+  </object_material>
+  <object_material name="taula003">
+    <material diffuse="Text_taula.tga" />
+  </object_material>
+  <object_material name="hip">
+    <material diffuse="PtSbx_Hull6_W.jpg" />
+    <material diffuse="PtSbx_Rubber.jpg" />
+    <material diffuse="PtSbx_Light.jpg" />
+  </object_material>
+  <object_material name="hip001">
+    <material diffuse="PtSbx_Hull6_W.jpg" />
+    <material />
+  </object_material>
+  <object_material name="radioctive_box">
+    <material diffuse="PtSbx_Hull1_W.jpg" />
+    <material diffuse="PtSbx_Hull2_W.jpg" />
+    <material diffuse="PtSbx_Hull2_W.jpg" />
+    <material diffuse="PtSbx_Metal1.jpg" />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="container1">
+    <material diffuse="PtSbx_Hull2_G.jpg" />
+  </object_material>
+  <object_material name="container002">
+    <material diffuse="PtSbx_Hull2_G.jpg" />
+  </object_material>
+  <object_material name="box005">
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="figure_1">
+    <material />
+    <material />
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="figure_002">
+    <material />
+    <material />
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="figure_003">
+    <material />
+    <material />
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="figure_004">
+    <material />
+    <material />
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="cylinder02">
+    <material />
+  </object_material>
+  <object_material name="box194">
+    <material />
+  </object_material>
+  <object_material name="cylinder041">
+    <material />
+  </object_material>
+  <object_material name="cylinder042">
+    <material />
+  </object_material>
+  <object_material name="cylinder043">
+    <material />
+  </object_material>
+  <object_material name="cylinder044">
+    <material />
+  </object_material>
+  <object_material name="cylinder045">
+    <material />
+  </object_material>
+  <object_material name="cylinder046">
+    <material />
+  </object_material>
+  <object_material name="cylinder047">
+    <material />
+  </object_material>
+  <object_material name="cylinder048">
+    <material />
+  </object_material>
+  <object_material name="box02">
+    <material />
+  </object_material>
+  <object_material name="box195">
+    <material />
+  </object_material>
+  <object_material name="cylinder050">
+    <material />
+  </object_material>
+  <object_material name="box196">
+    <material />
+  </object_material>
+  <object_material name="cylinder051">
+    <material />
+  </object_material>
+  <object_material name="cylinder052">
+    <material />
+  </object_material>
+  <object_material name="cylinder053">
+    <material />
+  </object_material>
+  <object_material name="cylinder054">
+    <material />
+  </object_material>
+  <object_material name="cylinder055">
+    <material />
+  </object_material>
+  <object_material name="cylinder056">
+    <material />
+    <material />
+  </object_material>
+  <object_material name="mb_slabrotate001">
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay_Column.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay02.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay02.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay02.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="displayscreens04.jpg" />
+    <material diffuse="displayscreens05.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="displayscreens06.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MedBay_Column.jpg" />
+    <material diffuse="MedBay_Column.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay_Column.jpg" />
+    <material diffuse="MedBay02.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+  </object_material>
+  <object_material name="mb_slab001">
+    <material diffuse="MedBay04.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="Display09.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+  </object_material>
+  <object_material name="mb_slab_arm001">
+    <material diffuse="MedBay04.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+  </object_material>
+  <object_material name="mb_slab_drum001">
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+  </object_material>
+  <object_material name="mb_overhead001">
+    <material diffuse="MedBay01.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="Display08.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material />
+    <material diffuse="MedBay02.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+  </object_material>
+  <object_material name="mb_ringrail001">
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="displayscreens04.jpg" />
+    <material diffuse="displayscreens08.jpg" />
+  </object_material>
+  <object_material name="object__0">
+    <material diffuse="MB-Console.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MEDBAY-TILE.jpg" />
+    <material />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="MedBay03.jpg" />
+    <material diffuse="displayscreens05.jpg" />
+    <material diffuse="displayscreens01.jpg" />
+    <material diffuse="displayscreens02.jpg" />
+  </object_material>
+  <object_material name="lamp">
+    <material />
+    <material />
+  </object_material>
+  <object_material name="lamp001">
+    <material />
+    <material />
+  </object_material>
+  <object_material name="lamp002">
+    <material />
+    <material />
+  </object_material>
+  <object_material name="lamp003">
+    <material />
+    <material />
+  </object_material>
+  <object_material name="figure_005">
+    <material />
+    <material />
+    <material />
+    <material />
+    <material />
+  </object_material>
+  <object_material name="tuberia001">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+</materials>

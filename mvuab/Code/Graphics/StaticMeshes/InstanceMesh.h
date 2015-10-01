@@ -10,6 +10,7 @@ class CGraphicsManager;
 
 class CXMLTreeNode;
 class CPhysicActor;
+class CMaterial;
 
 class CInstanceMesh : public CRenderableObject
 {
@@ -17,6 +18,7 @@ class CInstanceMesh : public CRenderableObject
         std::string   mType;
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
+        CMaterial*    mMaterial;
 
         std::vector<Math::Vect3f> Dummy01;
         std::vector<uint32> Dummy02;
@@ -44,5 +46,7 @@ class CInstanceMesh : public CRenderableObject
             mType = lType;
         }
         CStaticMesh* GetStaticMesh();
+
+        void GetMaterial();
 };
 #endif //INC_INSTANCE_MESH_H_

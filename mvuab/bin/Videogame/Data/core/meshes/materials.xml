@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materials>
+  <object_material name="barrel001">
+    <material diffuse="sml9Tile03Dark.jpg" />
+    <material diffuse="USFb_ConcreteA.jpg" />
+  </object_material>
+</materials>

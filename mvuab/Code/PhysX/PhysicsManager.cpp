@@ -82,7 +82,7 @@ void CPhysicsManager::Init()
     LOG_INFO_APPLICATION( "PhysicsManager:: Inicializando la libreria PhysX" );
     m_bIsOk = ( m_pMyAllocator != NULL );
 
-	m_LoadASE = true;
+	m_LoadASE = false;
 
     if ( m_bIsOk )
     {

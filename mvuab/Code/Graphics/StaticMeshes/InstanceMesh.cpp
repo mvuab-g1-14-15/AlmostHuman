@@ -13,22 +13,33 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 
+#include "Material.h"
+
+#include <algorithm>
+#include <string> 
+
 CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
 {
   SetName( aName );
+  GetMaterial();
 }
 
 
 CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
   CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
-  SetName( aName );
+  SetName(aName);
+  GetMaterial();
 }
 
 
-CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
-  mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) ), mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
+  : CRenderableObject( atts )
+  , mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
+  , mType( "static" )
+  , mPhysicActor( 0 )
 {
+ GetMaterial();
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -61,11 +72,8 @@ void CInstanceMesh::Render()
   bool l_ObjDynamic = mType.compare( "dynamic" ) == 0;
 
   Math::Mat44f lTransform = GetTransform();
-  Math::AABB3f laabb = mStaticMesh->GetAABB();
-
-  Math::Vect3f laabbCenter =  mStaticMesh->GetAABBCenter();
-  if ( !l_Transfomed ) laabbCenter = laabb.GetCenter();
-
+  
+  Math::Vect3f& laabbCenter = ( !l_Transfomed) ? mStaticMesh->GetAABBCenter() : GetTransform() * mStaticMesh->GetAABBCenter();
   if ( l_ObjDynamic && ( mPhysicActor != 0 ) )
   {
     mPhysicActor->GetMat44( lTransform );
@@ -78,19 +86,21 @@ void CInstanceMesh::Render()
     lTransform = lTransform * lCenterTransform;
   }
 
-  if ( !l_Transfomed || l_ObjDynamic )
-  {
-    laabbCenter = lTransform * laabbCenter;
-    mStaticMesh->setIsTransformed( true );
-    mStaticMesh->SetAABB( laabbCenter );
-  }
+  laabbCenter = lTransform * laabbCenter;
 
+  CGraphicsManager* lGM = GraphicsInstance;
   CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
 
-  if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( laabbCenter.u ), laabb.GetRadius() ) )
+  const float lAABBRadius( mStaticMesh->GetAABB().GetRadius() );
+  if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( laabbCenter.u ), lAABBRadius ) )
   {
-    GraphicsInstance->SetTransform( lTransform );
-    mStaticMesh->Render( GraphicsInstance );
+    lGM->SetTransform( lTransform );
+    for( uint32 i = 0, lCount = mMaterial->GetCount(); i < lCount; ++i )
+    {
+      mMaterial->ApplyMaterial(i);
+      mStaticMesh->Render( lGM, i );
+    }
+    lGM->SetTransform(Math::Mat44f());
   }
 }
 
@@ -108,4 +118,18 @@ CPhysicActor* CInstanceMesh::GetActor()
 CStaticMesh* CInstanceMesh::GetStaticMesh()
 {
   return mStaticMesh;
+}
+
+void CInstanceMesh::GetMaterial()
+{
+  std::string& lMaterialName = GetName();
+  std::string::size_type i = lMaterialName.find_last_of("_");
+  if (i != std::string::npos)
+    lMaterialName.erase(i, lMaterialName.size() - i);
+
+  std::transform(lMaterialName.begin(), lMaterialName.end(), lMaterialName.begin(), ::tolower);
+
+  mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
+
+  ASSERT(mMaterial, "Null material");
 }
