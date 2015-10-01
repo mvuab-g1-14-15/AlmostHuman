@@ -83,27 +83,29 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
     D3DPOOL l_Pool = sTexturePools[ PoolType ];
     DWORD l_UsageType = sTextureUsage[UsageType];
     D3DFORMAT l_Format = sTextureFormat[FormatType];
+
     m_CreateDepthStencilSurface = (UsageType == eUsageRenderTarget) ? CreateDepthStencilBuffer : false;
 
     // Obtain the device from the graphics manager
     const LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-    HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool,
-                                          &m_Texture, NULL );
+    HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool, &m_Texture, NULL );
     ASSERT( hr == D3D_OK && m_Texture, "Error creating the texture  %s", Name.c_str() );
 
     if ( m_CreateDepthStencilSurface )
     {
-        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE,
-                                             &m_DepthStencilRenderTargetTexture, NULL );
+        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_DepthStencilRenderTargetTexture, NULL );
         ASSERT( m_DepthStencilRenderTargetTexture, "Error creating the depth stencil surface" );
     }
 
     m_Width  = Width;
     m_Height = Height;
+
     mMips    = MipMaps;
     mUsage   = UsageType;
+
     mPoolType = PoolType;
     mFormat = FormatType;
+
     return ( hr == D3D_OK );
 }
 

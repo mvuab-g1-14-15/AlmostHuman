@@ -231,6 +231,7 @@
     <ClInclude Include="Texture\GUITexture.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="Texture\TextureManager.h" />
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{399F3B78-06DC-41CE-A9C6-612A5AAC1C97}</ProjectGuid>

@@ -647,6 +647,7 @@
     <ClInclude Include="Billboard\BillboardInstance.h">
       <Filter>Billboard</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
