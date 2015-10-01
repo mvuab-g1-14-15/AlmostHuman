@@ -4,7 +4,10 @@
 
 #include <Windows.h>
 #include "Utils/AVIReader.h"
+#include "EngineManagers.h"
+
 #include "Texture/Texture.h"
+#include "GraphicsManager.h"
 #pragma comment (lib, "Winmm.lib")
 
 class CVideoPlayer
@@ -12,30 +15,69 @@ class CVideoPlayer
     private:
         CAVIReader *m_pAviReader;
         CTexture m_Texture;
-        float m_FrameTime;
 
+        float m_FrameTime;
         HANDLE m_pThreadHandle;
 
-    public:
-        CVideoPlayer(unsigned int l_FPS, char *l_File) : m_pThreadHandle(0), m_pAviReader(0)
+        bool m_StopPlay;
+        bool m_PausePlay;
+
+        void BeginThread(void)
         {
-            m_FrameTime = (float) 1.0f / l_FPS;
-            m_pAviReader = new CAVIReader();
+            this->m_pThreadHandle = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) WindowsThreadFunction, this, NULL, NULL);
+        }
 
-            if(m_pAviReader->OpenFile(l_File))
+        void EndThread(void)
+        {
+            TerminateThread(m_pThreadHandle, 0);
+            CloseHandle(m_pThreadHandle);
+        }
+
+        void threadProc()
+        {
+            if(m_pAviReader == NULL)
+            { EndThread(); return; }
+
+            int l_StartFrame = m_pAviReader->GetFirstFrame();
+            int l_NumFrames = m_pAviReader->GetNumFrames();
+
+            int l_FrameIndex = l_StartFrame;
+            unsigned int l_LastTime = timeGetTime();
+            AVIFILEINFO l_VideoInfo = m_pAviReader->GetFileInfo();
+
+            while(l_FrameIndex < l_NumFrames && !m_StopPlay)
             {
-                AVIFILEINFO l_VideoInfo = m_pAviReader->GetFileInfo();
-                CTexture::TFormatType l_TexFormat = CTexture::TFormatType::eRGB8;
+                while(m_PausePlay && !m_StopPlay);
 
-                CTexture::TUsageType l_TexUsage = CTexture::TUsageType::eUsageDynamic;
-                CTexture::TPoolType l_TexPool = CTexture::TPoolType::eDefaultPool;
+                unsigned int l_ActialTime = timeGetTime();
+                float l_LoopTime = (l_ActialTime - l_LastTime) * 1000.0f;
 
-                if(!m_Texture.Create("VideoPlayer", l_VideoInfo.dwWidth, l_VideoInfo.dwHeight, 1, l_TexUsage, l_TexPool, l_TexFormat, false))
+                if(l_LastTime > m_FrameTime)
                 {
-                    delete m_pAviReader;
-                    m_pAviReader = NULL;
+                    char *f = m_pAviReader->GetBitmap(l_FrameIndex, l_StartFrame);
+                    if(m_Texture.SetBitmap(f, l_VideoInfo.dwWidth, l_VideoInfo.dwHeight, 3))
+                    {
+                        uint32 width, height;
+                        CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->GetWidthAndHeight( width, height );
+
+                        RECT l_Rect = { 0, 0, width, height };
+                        Math::CColor l_Color = Math::colBLACK;
+                        CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->DrawColoredQuad2DTexturedInPixels(l_Rect, l_Color, &m_Texture, 0.0f, 0.0f, 1.0f, 1.0f);
+                    }
+
+                    free(f);
+                    l_FrameIndex++;
+                    l_LastTime = l_ActialTime;
                 }
             }
+
+            EndThread();
+        }
+
+    public:
+        CVideoPlayer() : m_pThreadHandle(0), m_pAviReader(0), m_FrameTime(0), m_StopPlay(false), m_PausePlay(false)
+        {
+            m_pAviReader = new CAVIReader();
         }
 
         ~CVideoPlayer() 
@@ -47,50 +89,30 @@ class CVideoPlayer
             }
         };
 
-        void Begin(void)
+        void Stop()
         {
-            this->m_pThreadHandle = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) WindowsThreadFunction, this, NULL, NULL);
+            m_StopPlay = true;
         }
 
-        void End(void)
+        void Pause(bool l_Play)
         {
-            TerminateThread(m_pThreadHandle, 0);
-            CloseHandle(m_pThreadHandle);
+            m_PausePlay = l_Play;
         }
 
-        void threadProc()
+        bool Play(char *l_File)
         {
-            if(m_pAviReader == NULL)
-            { End(); return; }
+            if(!m_pAviReader->OpenFile(l_File)) return false;
+            m_FrameTime = 24.0f / 1.0f;
+            m_StopPlay = false;
 
-            int l_StartFrame = m_pAviReader->GetFirstFrame();
-            int l_NumFrames = m_pAviReader->GetNumFrames();
-
-            int l_FrameIndex = l_StartFrame;
-            unsigned int l_LastTime = timeGetTime();
             AVIFILEINFO l_VideoInfo = m_pAviReader->GetFileInfo();
+            CTexture::TFormatType l_TexFormat = CTexture::TFormatType::eRGB8;
             
-            while(l_FrameIndex < l_NumFrames)
-            {
-                unsigned int l_ActialTime = timeGetTime();
-                float l_LoopTime = (l_ActialTime - l_LastTime) * 1000.0f;
-
-                if(l_LastTime > m_FrameTime)
-                {
-                    char *f = m_pAviReader->GetBitmap(l_FrameIndex, l_StartFrame);
-                    if(m_Texture.SetBitmap(f, l_VideoInfo.dwWidth, l_VideoInfo.dwHeight, 3))
-                    {
-                        //render
-                    }
-
-                    free(f);
-
-                    l_FrameIndex++;
-                    l_LastTime = l_ActialTime;
-                }
-            }
-
-            End();
+            CTexture::TUsageType l_TexUsage = CTexture::TUsageType::eUsageDynamic;
+            CTexture::TPoolType l_TexPool = CTexture::TPoolType::eDefaultPool;
+            
+            if(!m_Texture.Create("VideoPlayer", l_VideoInfo.dwWidth, l_VideoInfo.dwHeight, 1, l_TexUsage, l_TexPool, l_TexFormat, false)) return false;
+            BeginThread(); return true;
         }
 };
 
