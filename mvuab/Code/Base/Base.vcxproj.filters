@@ -213,6 +213,9 @@
     <ClInclude Include="Math\SplineInterpolator.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\AVIReader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

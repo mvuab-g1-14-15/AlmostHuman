@@ -58,6 +58,7 @@
     <ClInclude Include="Timer\CounTDownTimerManager.h" />
     <ClInclude Include="Timer\CountDownTimer.h" />
     <ClInclude Include="Timer\Timer.h" />
+    <ClInclude Include="Utils\AVIReader.h" />
     <ClInclude Include="Utils\BaseUtils.h" />
     <ClInclude Include="Utils\Defines.h" />
     <ClInclude Include="Utils\GPUStatics.h" />
