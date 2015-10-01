@@ -92,6 +92,9 @@ class CTexture: public CName
                      TFormatType FormatType, bool CreateDepthStencilBuffer = true);
         bool Clone( CTexture** aTexture );
 
+        bool SetBitmap(char *l_Bitmap, int l_Width, int l_Height, int l_NumBytes);
+        unsigned int GetColorSize();
+
         void Deactivate( size_t Stage );
         bool SetAsRenderTarget( size_t IdStage = 0 );
         void UnsetAsRenderTarget( size_t IdStage = 0, bool UnsetDepthStencilBuffer = true );

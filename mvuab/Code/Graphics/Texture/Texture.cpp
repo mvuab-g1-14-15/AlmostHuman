@@ -173,8 +173,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
     }
     else
     {
-        LOG_ERROR_APPLICATION(
-            "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
+        LOG_ERROR_APPLICATION("Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
     }
 }
 
@@ -197,29 +196,27 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
         return eRGBX8;
     }
     else
-        LOG_ERROR_APPLICATION( "Format Type '%s' not recognized",
-                               FormatType.c_str() );
+    {
+        LOG_ERROR_APPLICATION( "Format Type '%s' not recognized", FormatType.c_str() );
+    }
 
     return eRGBA8;
 }
 
 bool CTexture::Save( const std::string& FileName )
 {
-    bool lOk = true;
     ASSERT( m_Texture, "Null d3dx texture to save" );
-    if( m_Texture )
-    {
-        HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture,
-                                            0 );
 
-        if( hr != D3D_OK )
-        {
-            lOk = false;
-            LOG_ERROR_APPLICATION("Error while saving the texture");
-        }
+    if( m_Texture ) return false;
+    HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture, 0 );
+    
+    if( hr != D3D_OK )
+    {
+        LOG_ERROR_APPLICATION("Error while saving the texture");
+        return false;
     }
 
-    return lOk;
+    return true;
 }
 
 bool CTexture::Clone( CTexture** aTexture )
@@ -229,6 +226,37 @@ bool CTexture::Clone( CTexture** aTexture )
         *aTexture = new CTexture();
     }
 
-    return (*aTexture)->Create( GetName(), m_Width, m_Height, mMips, mUsage, mPoolType, mFormat,
-                                m_CreateDepthStencilSurface );
+    return (*aTexture)->Create( GetName(), m_Width, m_Height, mMips, mUsage, mPoolType, mFormat, m_CreateDepthStencilSurface );
+}
+
+unsigned int CTexture::GetColorSize()
+{
+    if(mFormat == eRGB8) return 3;
+    else if(mFormat == eRGBA8) return 4;
+    else if(mFormat == eRGBX8) return 4;
+
+    return 0; // no color format
+}
+
+bool CTexture::SetBitmap(char *l_Bitmap, int l_Width, int l_Height, int l_NumBytes)
+{
+    D3DLOCKED_RECT l_LockRect = { 0 };
+    unsigned int m_TextureColorSize = GetColorSize();
+
+    if(m_Texture == NULL || m_TextureColorSize == 0) return false;
+    if(FAILED(m_Texture->LockRect(0, &l_LockRect, NULL, 0))) return false;
+
+    char *l_Color = (char *) l_LockRect.pBits;
+    for(int i = 0; i < l_Width * l_Height; i += l_NumBytes)
+    {
+        l_Color[i + 0] = l_Bitmap[i + 0];
+        l_Color[i + 1] = l_Bitmap[i + 1];
+        l_Color[i + 2] = l_Bitmap[i + 2];
+        
+        if(l_NumBytes == 4 && m_TextureColorSize == 4) l_Color[i + 3] = l_Bitmap[i + 3];
+        else if(m_TextureColorSize == 4) l_Color[i + 3] = (char) 256;
+    }
+
+    m_Texture->UnlockRect(0); // check for fail?
+    return true;
 }
