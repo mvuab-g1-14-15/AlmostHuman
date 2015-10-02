@@ -318,6 +318,7 @@
     <ClCompile Include="Billboard\BillboardInstance.cpp">
       <Filter>Billboard</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />

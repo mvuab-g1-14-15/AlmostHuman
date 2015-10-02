@@ -5,6 +5,9 @@
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
 
+#include <DxErr.h>
+#pragma comment(lib, "DxErr.lib")
+
 static const D3DPOOL    sTexturePools[CTexture::eTexturePoolCount]    = { D3DPOOL_DEFAULT, D3DPOOL_SYSTEMMEM };
 static const DWORD      sTextureUsage[CTexture::eTextureUsageCount]   = { D3DUSAGE_DYNAMIC, D3DUSAGE_RENDERTARGET  };
 static const D3DFORMAT  sTextureFormat[CTexture::eTextureFormatCount] = { D3DFMT_A8R8G8B8, D3DFMT_R8G8B8, D3DFMT_X8R8G8B8, D3DFMT_R32F };
@@ -89,7 +92,7 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
     // Obtain the device from the graphics manager
     const LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
     HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool, &m_Texture, NULL );
-    ASSERT( hr == D3D_OK && m_Texture, "Error creating the texture  %s", Name.c_str() );
+    ASSERT( hr == D3D_OK && m_Texture, "Error creating the texture  %s\n%s: %s", Name.c_str(), DXGetErrorString(hr), DXGetErrorDescription(hr) );
 
     if ( m_CreateDepthStencilSurface )
     {
@@ -245,18 +248,26 @@ bool CTexture::SetBitmap(char *l_Bitmap, int l_Width, int l_Height, int l_NumByt
     D3DLOCKED_RECT l_LockRect = { 0 };
     unsigned int m_TextureColorSize = GetColorSize();
 
-    if(m_Texture == NULL || m_TextureColorSize == 0) return false;
+    if(l_Bitmap == NULL || m_Texture == NULL || m_TextureColorSize == 0) return false;
     if(FAILED(m_Texture->LockRect(0, &l_LockRect, NULL, 0))) return false;
 
-    char *l_Color = (char *) l_LockRect.pBits;
-    for(int i = 0; i < l_Width * l_Height; i += l_NumBytes)
+    unsigned char *l_Color = (unsigned char *) l_LockRect.pBits;
+
+    for(int y = 0; y < l_Height; y++)
     {
-        l_Color[i + 0] = l_Bitmap[i + 0];
-        l_Color[i + 1] = l_Bitmap[i + 1];
-        l_Color[i + 2] = l_Bitmap[i + 2];
-        
-        if(l_NumBytes == 4 && m_TextureColorSize == 4) l_Color[i + 3] = l_Bitmap[i + 3];
-        else if(m_TextureColorSize == 4) l_Color[i + 3] = (char) 256;
+        for(int x = 0; x < l_Width; x++)
+        {
+            int l_TexPos = l_LockRect.Pitch * y + m_TextureColorSize * x;
+            l_Color[l_TexPos + 0] = (unsigned char) 255;
+            l_Color[l_TexPos + 1] = l_Bitmap[y * l_Width + l_NumBytes * 0];
+            l_Color[l_TexPos + 2] = l_Bitmap[y * l_Width + l_NumBytes * 1];
+            l_Color[l_TexPos + 3] = l_Bitmap[y * l_Width + l_NumBytes * 2];
+
+            /*if(l_NumBytes == 4 && m_TextureColorSize == 4) 
+                l_Color[l_TexPos + 3] = l_Bitmap[y * l_Width + l_NumBytes * 3];
+            else if(m_TextureColorSize == 4) 
+                l_Color[l_TexPos + 3] = (unsigned char) 255;*/
+        }
     }
 
     m_Texture->UnlockRect(0); // check for fail?
