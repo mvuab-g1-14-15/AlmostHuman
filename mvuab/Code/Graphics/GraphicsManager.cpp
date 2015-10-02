@@ -21,6 +21,9 @@
 
 #include "Shapes/Shapes.h"
 
+#include <DxErr.h>
+#pragma comment(lib, "DxErr.lib")
+
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
 {
