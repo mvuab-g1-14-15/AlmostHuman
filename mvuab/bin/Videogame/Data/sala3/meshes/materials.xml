@@ -1,0 +1,1251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materials>
+  <object_material name="sala_3">
+    <material diffuse="Terra_Sala_3_dif.tga" normal="Terra_Sala_3_norm.tga" />
+    <material diffuse="metal12.jpg" />
+  </object_material>
+  <object_material name="cinta_010">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_011">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_012">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_013">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_014">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_015">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="box021">
+    <material diffuse="Consola_diffuse.tga" />
+  </object_material>
+  <object_material name="box022">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+  </object_material>
+  <object_material name="reixa_014">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_015">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_016">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_017">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_018">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_019">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_020">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_021">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_022">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_023">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_024">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_025">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_026">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_027">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_028">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_029">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="robot_assembly007">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+    <material diffuse="robot_assembly_metal.tga" />
+  </object_material>
+  <object_material name="robot_assembly009">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+    <material diffuse="robot_assembly_metal.tga" />
+  </object_material>
+  <object_material name="cinta_016">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="enganche_005">
+    <material diffuse="Vermell_valvula.tga" />
+    <material diffuse="Consola_diffuse.tga" />
+  </object_material>
+  <object_material name="escala005">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala006">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala007">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala008">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala009">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala010">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala011">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala012">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala013">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala014">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala015">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala016">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala017">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala018">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala019">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala020">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala021">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala022">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala023">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala024">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala025">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala026">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala027">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala028">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="escala029">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="reixa_030">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_031">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_032">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_033">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_034">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="cinta_7">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="reixa_009">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_010">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_011">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="cinta_6">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="reixa_008">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_1">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_007">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_003">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="robot_assembly">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+    <material diffuse="robot_assembly_metal.tga" />
+  </object_material>
+  <object_material name="reixa_002">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_004">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_006">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_005">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="cinta_4">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_5">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="robot_assembly004">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+    <material diffuse="robot_assembly_metal.tga" />
+  </object_material>
+  <object_material name="robot_assembly001">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+    <material diffuse="robot_assembly_metal.tga" />
+  </object_material>
+  <object_material name="cinta_3">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="reixa_035">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_036">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_037">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_038">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_039">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_040">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_041">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_042">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_043">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="escala040">
+    <material diffuse="Pasarela_bora.tga" light_map="Sala2_LM+AO_02.tga" />
+    <material diffuse="metal12.jpg" light_map="Sala2_LM+AO_02.tga" normal="metal12_NRM.tga" />
+  </object_material>
+  <object_material name="cinta_017">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_018">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="cinta_019">
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="VS_Metal01.jpg" />
+    <material diffuse="cinta_base.tga" />
+  </object_material>
+  <object_material name="reixa_046">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_048">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_050">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_051">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_052">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_053">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_055">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_057">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_058">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_059">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_060">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_061">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_062">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_063">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_064">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_065">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_066">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="trasto_005">
+    <material diffuse="sci_fi_house_hi_res_by_roomper-d393tdk.jpg" />
+  </object_material>
+  <object_material name="reixa_068">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_069">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_070">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_071">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_072">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_073">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_075">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_077">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_078">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_079">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_080">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_081">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_082">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_083">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_084">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_085">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_086">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_087">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_088">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_089">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="object005">
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="object006">
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="object007">
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_090">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_091">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_094">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_095">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_097">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="enganche_017">
+    <material diffuse="Vermell_valvula.tga" />
+    <material diffuse="Consola_diffuse.tga" />
+  </object_material>
+  <object_material name="enganche_022">
+    <material diffuse="Vermell_valvula.tga" />
+    <material diffuse="Consola_diffuse.tga" />
+  </object_material>
+  <object_material name="andride084">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="container001">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container002">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container003">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container004">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container006">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container007">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container008">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container009">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container010">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container011">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container012">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container013">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container014">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container015">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container016">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container017">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container018">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container019">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container020">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container021">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container022">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container023">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container024">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container025">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container026">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container027">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container028">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container029">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container030">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container031">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container032">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="msf_steps2">
+    <material diffuse="msfStepsWall.jpg" />
+    <material diffuse="msfSteps.jpg" />
+    <material diffuse="msfStepsB.jpg" />
+    <material diffuse="msfStepsWall.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling004">
+    <material diffuse="msfCeiling02.jpg" />
+    <material diffuse="msfPanel07.jpg" />
+    <material diffuse="sci_fi_house_hi_res_by_roomper-d393tdk.jpg" />
+    <material diffuse="msfButress02.jpg" />
+  </object_material>
+  <object_material name="mfs_ceiling005">
+    <material diffuse="msfCeiling02.jpg" />
+    <material diffuse="msfPanel07.jpg" />
+    <material diffuse="sci_fi_house_hi_res_by_roomper-d393tdk.jpg" />
+    <material diffuse="msfButress02.jpg" />
+  </object_material>
+  <object_material name="walls009">
+    <material diffuse="sffWalls3.jpg" />
+    <material diffuse="sffWalls1.jpg" />
+    <material />
+  </object_material>
+  <object_material name="sfffloor1">
+    <material diffuse="sffFloorTrim.jpg" />
+    <material diffuse="sffFloor1.jpg" />
+    <material diffuse="sffWalls1.jpg" />
+    <material diffuse="sffCabinets2.jpg" />
+    <material diffuse="sffFloor3.jpg" />
+    <material />
+    <material diffuse="sfStairs.jpg" />
+  </object_material>
+  <object_material name="sffwalls5">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls006">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls007">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls008">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls009">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls010">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls011">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls012">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls015">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="sffwalls016">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="object012">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="sffwalls018">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="object013">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="box023">
+    <material diffuse="Consola_diffuse.tga" />
+  </object_material>
+  <object_material name="box024">
+    <material diffuse="robot_assembly.tga" normal="robot_assembly_NRM.tga" />
+  </object_material>
+  <object_material name="reixa_105">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_106">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="sffwalls019">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="sffwalls020">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="box91">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box89">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="line03">
+    <material />
+  </object_material>
+  <object_material name="box54">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box73">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box72">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box71">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box66">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box65">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box62">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box122">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="box10">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box144">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="line65">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box48">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box61">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box63">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box64">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box67">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box70">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box74">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box75">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box77">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box84">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder241">
+    <material />
+  </object_material>
+  <object_material name="box98">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box99">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box100">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box101">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder23">
+    <material />
+  </object_material>
+  <object_material name="box03">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder237">
+    <material />
+  </object_material>
+  <object_material name="box02">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box106">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box102">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box09">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box53">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder24">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box49">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box90">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box87">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box80">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box60">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box47">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box153">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box76">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box78">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder238">
+    <material />
+  </object_material>
+  <object_material name="box96">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box79">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box81">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box85">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box103">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box104">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box105">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box86">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box151">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box152">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder03">
+    <material />
+  </object_material>
+  <object_material name="155x158">
+    <material />
+  </object_material>
+  <object_material name="155x159">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cabin">
+    <material diffuse="L18_Concrete01.jpg" />
+  </object_material>
+  <object_material name="line04">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder242">
+    <material />
+  </object_material>
+  <object_material name="line25">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box08">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder01">
+    <material />
+  </object_material>
+  <object_material name="box07">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="line05">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="text01">
+    <material />
+  </object_material>
+  <object_material name="cylinder02">
+    <material />
+  </object_material>
+  <object_material name="line07">
+    <material diffuse="zeltaya_poloska.JPG" />
+  </object_material>
+  <object_material name="box107">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box108">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="line01">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="line02">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder243">
+    <material />
+  </object_material>
+  <object_material name="cylinder240">
+    <material />
+  </object_material>
+  <object_material name="box82">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box68">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box69">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box83">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box88">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="box150">
+    <material diffuse="Steelplt.jpg" />
+  </object_material>
+  <object_material name="cylinder233">
+    <material />
+  </object_material>
+  <object_material name="msf2_lamp001">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp002">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp003">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp020">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp021">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp019">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp007">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp008">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp009">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp018">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp016">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="msf2_lamp017">
+    <material diffuse="msf_Lamps.jpg" />
+    <material diffuse="msf_Lamps.jpg" />
+  </object_material>
+  <object_material name="reixa_111">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_112">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_113">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_114">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_115">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="reixa_116">
+    <material diffuse="reixa_1.tga" />
+    <material diffuse="Vermell_valvula.tga" />
+  </object_material>
+  <object_material name="lamp_01">
+    <material diffuse="Lampara.tga" />
+  </object_material>
+  <object_material name="lamp_002">
+    <material diffuse="Lampara.tga" />
+  </object_material>
+  <object_material name="sffwalls021">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="sffwalls022">
+    <material diffuse="sffButress.jpg" />
+    <material diffuse="sffGlass.jpg" />
+    <material diffuse="sffWindowFrames.jpg" />
+    <material diffuse="sffCylinders.jpg" />
+    <material diffuse="sffTile.jpg" />
+    <material diffuse="sffGlass.jpg" />
+  </object_material>
+  <object_material name="object026">
+    <material diffuse="sffWalls3.jpg" />
+    <material diffuse="sffWalls1.jpg" />
+    <material />
+  </object_material>
+  <object_material name="object027">
+    <material diffuse="sffWalls3.jpg" />
+    <material diffuse="sffWalls1.jpg" />
+    <material />
+  </object_material>
+  <object_material name="object028">
+    <material diffuse="sffTrim.jpg" />
+    <material diffuse="sffTrim.jpg" />
+  </object_material>
+  <object_material name="container033">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container034">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container035">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container036">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container037">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container038">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container039">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="object029">
+    <material diffuse="sffWalls3.jpg" />
+    <material diffuse="sffWalls1.jpg" />
+    <material />
+  </object_material>
+  <object_material name="container048">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="container049">
+    <material diffuse="Cargo01_D.tga" />
+  </object_material>
+  <object_material name="lamp_008">
+    <material diffuse="Lampara.tga" />
+  </object_material>
+  <object_material name="box154">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="box155">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="box156">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="box157">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="box158">
+    <material diffuse="L18_Metal01.jpg" />
+  </object_material>
+  <object_material name="object030">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="arm">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="foot">
+    <material />
+  </object_material>
+  <object_material name="body">
+    <material />
+  </object_material>
+  <object_material name="leg">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="arm001">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="foot001">
+    <material />
+  </object_material>
+  <object_material name="object031">
+    <material diffuse="compo_android.tga" />
+    <material />
+  </object_material>
+  <object_material name="body001">
+    <material />
+  </object_material>
+  <object_material name="cylinder244">
+    <material />
+  </object_material>
+</materials>
