@@ -62,7 +62,7 @@ class CProgressBar: public CGuiElement
         float                    m_fProgress;
         uint32                m_uFontID;
         Math::CColor                m_TextColor;
-        std::string        m_sText;
+        std::string              m_sText;
         float                    m_fCountTime;
         float                    m_fTimeToUpdate;
         std::string        m_sLuaCode_OnComplete;

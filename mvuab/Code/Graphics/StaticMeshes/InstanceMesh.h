@@ -21,6 +21,9 @@ class CInstanceMesh : public CRenderableObject
 
         std::string   mMaterialName;
         CMaterial*    mMaterial;
+        float         mAABBRadius;
+        Math::Vect3f  mAABBCenter;
+        bool          mIsDynamicMesh;
 
         std::vector<Math::Vect3f> Dummy01;
         std::vector<uint32> Dummy02;
@@ -50,5 +53,6 @@ class CInstanceMesh : public CRenderableObject
         CStaticMesh* GetStaticMesh();
 
         void GetMaterial();
+        void GetCenterAndRadiusFromAABB();
 };
 #endif //INC_INSTANCE_MESH_H_
