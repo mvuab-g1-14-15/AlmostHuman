@@ -25,6 +25,8 @@
 #include <iostream>
 #include <ctime>
 
+#include "VideoPlayer.h"
+
 #if _DEBUG
     #include "Memory\MemLeaks.h"
 #endif
@@ -87,8 +89,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 // WinMain
 //-----------------------------------------------------------------------
-int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
-                      LPSTR _lpCmdLine, int _nCmdShow )
+int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow )
 {
     try
     {
@@ -139,10 +140,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
 
             lEngineConfig->SetScreenPosition( Math::Vect2i( 0, 0 ) );
-            lEngineConfig->SetScreenSize( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
-                                          GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
-            lEngineConfig->SetScreenResolution( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
-                                                GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
+            lEngineConfig->SetScreenSize( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),  GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
+            lEngineConfig->SetScreenResolution( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),  GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
             style = WS_POPUP | WS_VISIBLE;
         }
         else
@@ -174,6 +173,13 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         UpdateWindow( hWnd );
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
+
+        /*CVideoPlayer l_VideoPlayer;
+        if(!l_VideoPlayer.Play("test.avi"))
+        {
+            char s[] = "Error playing video\n";
+            OutputDebugStringA(s);
+        }*/
 
         while ( msg.message != WM_QUIT )
         {

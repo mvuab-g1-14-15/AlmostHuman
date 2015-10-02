@@ -64,9 +64,9 @@ class CAVIReader
             return AVIStreamStart(m_pStream);
         }
 
-        char *GetBitmap(int l_NumFrame, int l_FirstFrame)
+        void *GetBitmap(int l_NumFrame, int l_FirstFrame)
         {
-            return (char *) AVIStreamGetFrame(m_pFrame, l_NumFrame - l_FirstFrame);
+            return (void *) AVIStreamGetFrame(m_pFrame, l_NumFrame - l_FirstFrame);
         }
 };
 
