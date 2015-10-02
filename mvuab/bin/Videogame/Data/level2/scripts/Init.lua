@@ -82,6 +82,16 @@ function update_gameplay()
 			end
 		end	
 		
+		if action_manager:DoAction("OpenDoorRoom3") then
+			if g_bPressX then
+				--gui_manager:ShowStaticText("Alarm")
+				g_EnemyManager:AlarmRoom("room3")				
+				g_bPressedX = true
+			elseif g_bOpenDoor3 then
+				--Code para abrir puerta
+			end
+		end	
+		
 		if action_manager:DoAction("PressR") then
 			if g_bPressE then
 				g_bPressedE = true
@@ -96,6 +106,7 @@ function update_gameplay()
 			if g_bDistanceC4 and g_bC41 and g_bC42 then
 				g_bC41 = false
 				g_bC42 = false
+				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
 				--Code para montar las cinematicas y matar a los drones
 			end

@@ -24,7 +24,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Velocity = 1.0
 	self.Delta = 0.5
 	
-	self.AlarmadoInRoom2 = false
+	self.Alarmado = false
 	self.PositionAlarm = Vect3f(0,0,0)
 	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	
@@ -53,7 +53,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.RenderableObject:SetScale(self.CharacterController:GetScale())
 	self.RenderableObject:MakeTransform()
 
-	self.Brain = CBrain("inicial", state_machine)
+	self.Brain = CBrain(Node:GetAttributeString("state", "inicial"), state_machine)
 	
 	--self:ChangeState("perseguir")
 	--self:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
@@ -400,7 +400,7 @@ function CEnemyLUA:GetRoom()
 end
 
 function CEnemyLUA:ChangeRoute(position)
-	self.AlarmadoInRoom2 = true
+	self.Alarmado = true
 	self.ActualPathPoint = 1
 	self.PathCalculated = false
 	self.PositionAlarm = position[1]

@@ -3,6 +3,7 @@ g_bChangeRoom = false
 g_bPressX = false
 g_bPressedX = false
 g_bOpenDoor2 = false
+g_bOpenDoor3 = false
 g_bInBarrel = false
 CuentaAtras = 3
 engine = CEngine.GetSingletonPtr()
@@ -13,6 +14,7 @@ g_bC41 = false
 g_bC42 = false
 g_bDistanceC4 = false
 g_sTextC4Press = ""
+g_bBombaActivada = false
 function OnEnter()
 	process = engine:GetProcess()
 	physicUserData = process:GetNewPUD("Box6")
@@ -89,6 +91,14 @@ function ShowText(text, other_shape)
 	gui_manager:ShowStaticText(text)
 end
 
+function OpenDoor(text, other_shape)
+	if g_bPressX then
+		g_bPressX = false	
+	else
+		g_bPressX = true
+	end
+	gui_manager:ShowStaticText(text)
+end
 function ShowText(text, num, textC4Colocada, text2, other_shape)	
 	if g_bPressedE == false and g_bC41 then
 		g_bPressE = false
@@ -133,29 +143,36 @@ function ShowDetonar(text, text2, other_shape)
 	end
 end
 
-function StayText(room, other_shape)
+function StayText(room, message, other_shape)
 	local enemigosVivos = GetEnemyLive(room)
 	if g_bPressedX and enemigosVivos then
 		CuentaAtras = CuentaAtras - timer:GetElapsedTime()
 		if CuentaAtras <= 0 then
-			gui_manager:ShowStaticText("Block")
+			gui_manager:ShowStaticText(message)
 			CuentaAtras = 3
 			g_bPressedX = false
 		end
+		
 	elseif g_bPressedX then
 		
-		gui_manager:ShowStaticText("Block")
+		gui_manager:ShowStaticText(message)
 		CuentaAtras = 3
 		g_bPressedX = false
 		g_bPressX = false
-		g_bOpenDoor2 = true
-		--Codigo para cambiar de sala o abrir la puerta
+		if room == "room2" then
+			g_bOpenDoor2 = true
+			--Codigo para cambiar de sala o abrir la puerta
+		elseif room == "room3" then
+			g_bOpenDoor3 = true
+			--Codigo para cambiar de sala o abrir la puerta
+		end
+		
 	end
 end
 
 function GetEnemyLive(room)
 	lEnemy = g_EnemyManager:GetEnemys()
-	engine:Trace("La room es "..room)
+	--engine:Trace("La room es "..room)
 	for i in pairs (lEnemy) do
 		lActualEnemy = lEnemy[i]
 		if lEnemy[i] ~= nil and lActualEnemy:GetRoom() == room then

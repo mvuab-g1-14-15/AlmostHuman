@@ -66,7 +66,10 @@ function CEnemyManagerLUA:Update()
 	for i in pairs (self.Enemy) do
 		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
 			self.ActualEnemy = self.Enemy[i]
-			if self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
+			if self.ActualEnemy:GetActualState() == "idle" and self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+				self.ActualEnemy:ChangeState("activation")
+			elseif self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
 				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
 			end
 			if self.ActualEnemy:GetLife() > 0 then

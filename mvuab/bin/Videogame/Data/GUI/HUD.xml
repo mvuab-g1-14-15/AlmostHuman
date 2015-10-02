@@ -27,4 +27,5 @@
 	<StaticText name="DetonarC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="DetonarC4" />
 	<StaticText name="FaltanC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="FaltanC4" />
 	<StaticText name="C4Colocada" pos="50 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
+	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
 </Windows>

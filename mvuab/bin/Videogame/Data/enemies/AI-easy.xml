@@ -1,5 +1,24 @@
 <state_machine name="easy">
-		<state name="inicial">
+	<state name="idle">
+		<on_enter>    
+			<action function="init_enemy"/>		
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+		</update>
+	</state>
+	<state name="activation">
+		<on_enter> 
+			<action function="activation"/>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="check_next_state"/>
+		</update>
+	</state>
+	<state name="inicial">
 		<on_enter>      
 			<action function="init_enemy"/>
 		</on_enter>

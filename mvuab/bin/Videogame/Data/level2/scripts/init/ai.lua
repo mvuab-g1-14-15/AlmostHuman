@@ -2,12 +2,24 @@ tiempoDeEspera = 0
 
 function init_enemy()
 	enemy = g_EnemyManager:GetActualEnemy()
+	enemy:GetAnimationModel():ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 end
 
+function activation()
+	enemy = g_EnemyManager:GetActualEnemy()
+	enemy:GetAnimationModel():ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
+	timerActivation = "Activation"..enemy:GetName()
+	if not countdowntimer_manager:ExistTimer(timerActivation) then
+		countdowntimer_manager:AddTimer(timerActivation, 3.0, false)
+	else
+		countdowntimer_manager:SetActive(timerActivation, true)
+	end
+end
 function check_next_state()
 	enemy = g_EnemyManager:GetActualEnemy()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
+	timerActivation = "Activation"..enemy:GetName()
 	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -18,7 +30,7 @@ function check_next_state()
 	--engine:Trace("Estado actual "..l_CurrentState)
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	
-	if l_CurrentState ~= "perseguir" then
+	if l_CurrentState ~= "perseguir" and l_CurrentState ~= "activation" then
 		if l_HearSomething and l_PlayerInSight ~= true then
 			l_NextState = "perseguir"
 			enemy.Suspected = true
@@ -50,6 +62,7 @@ function check_next_state()
 			if countdowntimer_manager:isTimerFinish(timerPerseguir) then
 				l_NextState = "andando"
 				countdowntimer_manager:Reset(timerPerseguir, false)
+				
 			end
 	end
 	
@@ -58,6 +71,16 @@ function check_next_state()
 			enemy:SetVelocity(1.0)
 		end
 	end
+	
+	if l_CurrentState == "activation" then
+		if countdowntimer_manager:ExistTimer(timerActivation) and countdowntimer_manager:IsActive(timerActivation) then
+			if countdowntimer_manager:isTimerFinish(timerActivation) then
+				l_NextState = "perseguir"
+				countdowntimer_manager:Reset(timerActivation, false)
+			end
+		end
+	end
+	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
@@ -150,7 +173,7 @@ function perseguir()
 	if enemy:GetVelocity() == 1.0 then
 		enemy:SetVelocity(5.0)
 	end
-	if enemy.AlarmadoInRoom2 then
+	if enemy.Alarmado then
 		enemy:MoveToPlayer(enemy.PositionAlarm)
 	elseif enemy.Suspected then
 		if enemy:MoveToPos(enemy.SuspectedPosition) then
