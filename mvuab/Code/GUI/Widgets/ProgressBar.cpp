@@ -12,7 +12,7 @@
 CProgressBar::CProgressBar( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
     : CGuiElement( aNode, screenResolution )
     , m_fProgress( 0.f )
-    , m_sText(std::to_string((long double)m_fProgress))
+    , m_sText("%f")
     , m_fCountTime( 0.f )
     , m_fTimeToUpdate( 0.5f )
     , m_sLuaCode_OnComplete("")
@@ -60,9 +60,7 @@ void CProgressBar::Render  ()
         Math::Vect2i pos;
         pos.x = (uint32)(CGuiElement::m_Position.x + 0.4f * m_uWidth);
         pos.y = (uint32)(CGuiElement::m_Position.y + 0.2f * m_uHeight);
-        FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sText.c_str());
-
-        //Finalmente renderizamos el texto:
+        FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sText.c_str(), m_fProgress );
         CGuiElement::RenderText();
     }
 }
@@ -71,21 +69,6 @@ void CProgressBar::Update()
 {
     if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
     {
-        m_sText = std::to_string((long double)((int)m_fProgress));
-        /*  m_fCountTime += deltaTime;
-            if( m_fCountTime > m_fTimeToUpdate )
-            {
-            m_fCountTime = 0.f;
-
-            if( m_sText.compare("Loading") == 0 )
-            { m_sText = "Loading."; }
-            else if( m_sText.compare("Loading.") == 0 )
-            { m_sText = "Loading.."; }
-            else if( m_sText.compare("Loading..") == 0 )
-            { m_sText = "Loading..."; }
-            else if( m_sText.compare("Loading...") == 0 )
-            { m_sText = "Loading"; }
-            }*/
     }
 }
 
