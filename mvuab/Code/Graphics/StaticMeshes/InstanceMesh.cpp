@@ -23,6 +23,7 @@ CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), 
   SetName( aName );
   mMaterialName = aName;
   GetMaterial();
+  GetCenterAndRadiusFromAABB();
 }
 
 
@@ -35,6 +36,7 @@ CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreN
   else
     mMaterialName = MaterialName;
   GetMaterial();
+  GetCenterAndRadiusFromAABB();
 }
 
 
@@ -46,6 +48,7 @@ CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
 {
   mMaterialName = GetName();
   GetMaterial();
+  GetCenterAndRadiusFromAABB();
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -68,45 +71,36 @@ const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 
 void CInstanceMesh::Render()
 {
-  if ( !mStaticMesh )
-    return;
-
-  if ( !GetActive() )
-    return;
-
-  bool l_Transfomed = mStaticMesh->IsTransformed();
-  bool l_ObjDynamic = mType.compare( "dynamic" ) == 0;
-
-  Math::Mat44f lTransform = GetTransform();
-  
-  Math::Vect3f& laabbCenter = ( !l_Transfomed) ? mStaticMesh->GetAABBCenter() : GetTransform() * mStaticMesh->GetAABBCenter();
-  if ( l_ObjDynamic && ( mPhysicActor != 0 ) )
+  if ( mStaticMesh && GetActive() )
   {
-    mPhysicActor->GetMat44( lTransform );
-    Math::Vect3f lUp( 0.0f, -laabbCenter.y, 0.0f );
-
-    Math::Mat44f lCenterTransform;
-    lCenterTransform.SetIdentity();
-
-    lCenterTransform.Translate( lUp );
-    lTransform = lTransform * lCenterTransform;
-  }
-
-  laabbCenter = lTransform * laabbCenter;
-
-  CGraphicsManager* lGM = GraphicsInstance;
-  CFrustum lCameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
-
-  const float lAABBRadius( mStaticMesh->GetAABB().GetRadius() );
-  if ( lCameraFrustum.SphereVisible( D3DXVECTOR3( laabbCenter.u ), lAABBRadius ) )
-  {
-    lGM->SetTransform( lTransform );
-    for( uint32 i = 0, lCount = mMaterial->GetCount(); i < lCount; ++i )
+    Math::Mat44f lTransform = GetTransform();
+    if( mIsDynamicMesh && mPhysicActor )
     {
-      mMaterial->ApplyMaterial(i);
-      mStaticMesh->Render( lGM, i );
+      mPhysicActor->GetMat44( lTransform );
+      Math::Vect3f lUp( 0.0f, -mStaticMesh->GetAABBCenter().y, 0.0f );
+
+      Math::Mat44f lCenterTransform;
+      lCenterTransform.SetIdentity();
+
+      lCenterTransform.Translate( lUp );
+      lTransform = lTransform * lCenterTransform;
+
+      mAABBCenter = lTransform * mAABBCenter;
     }
-    lGM->SetTransform(Math::Mat44f());
+
+    // Check the visibility with the frustum
+    if ( CameraMInstance->GetCurrentCamera()->GetFrustum().SphereVisible( D3DXVECTOR3( mAABBCenter.u ), mAABBRadius ) )
+    {
+      CGraphicsManager* lGM = GraphicsInstance;
+      lGM->SetTransform( lTransform );
+      for( uint32 i = 0, lCount = mMaterial->GetCount(); i < lCount; ++i )
+      {
+        mMaterial->ApplyMaterial(i);
+        mStaticMesh->Render( lGM, i );
+      }
+      lGM->SetTransform(Math::Mat44f());
+    }
+
   }
 }
 
@@ -138,4 +132,15 @@ void CInstanceMesh::GetMaterial()
   mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
 
   ASSERT(mMaterial, "Null material");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CInstanceMesh::GetCenterAndRadiusFromAABB()
+{
+  if( mStaticMesh )
+  {
+    mIsDynamicMesh = ( mType == "dynamic");
+    mAABBCenter = GetTransform() * mStaticMesh->GetAABBCenter();
+    mAABBRadius = mStaticMesh->GetAABB().GetRadius() * 2.0f;
+  }
 }

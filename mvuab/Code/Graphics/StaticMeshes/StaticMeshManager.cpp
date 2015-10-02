@@ -54,84 +54,25 @@ void CStaticMeshManager::LoadMaterials(const std::string& aMaterialsPath )
 
 void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
 {
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(aFilePath.c_str()))
-    {
-        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", aFilePath.c_str());
-        return;
-    }
-
-    CXMLTreeNode node = newFile["static_meshes"];
-    if(!node.Exists())
-    {
-        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
-        return;
-    }
-
-    LoadMaterials( aBasePath + "meshes/materials.xml" );
-
     TIMER_START();
-    int lCount( node.GetNumChildren() );
-    std::vector<HANDLE> l_ThreadHandler;
-
-    l_ThreadHandler.reserve(lCount);
-    SYSTEM_INFO sysinfo;
-    int lIntents = 0;
-
-    GetSystemInfo( &sysinfo );
-    int numCPU = sysinfo.dwNumberOfProcessors;
-
-    //#pragma omp parallel for shared(lCount)
-    for( int i = 0; i < lCount ; ++i )
+    CXMLTreeNode newFile, node;
+    if (newFile.LoadAndFindNode(aFilePath.c_str(), "static_meshes", node ))
     {
+      LoadMaterials( aBasePath + "meshes/materials.xml" );
+      for( int i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
+      {
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
         const std::string &file = aBasePath + std::string( node(i).GetAttribute<std::string>("filename", "no_file") );
 
-        /*MESH_THREAD_INFO *l_ThreadInfo = (MESH_THREAD_INFO *) malloc (sizeof(MESH_THREAD_INFO));
-        new (l_ThreadInfo) MESH_THREAD_INFO;
-        int lSleep = 200;
-
-        l_ThreadInfo->iD = i;
-        l_ThreadInfo->MeshManager = this;
-
-        l_ThreadInfo->FileName.assign(file);
-        l_ThreadInfo->ResourceName.assign(lName);
-
-        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
-        while(h == NULL)
-        {
-            char s[256] = { 0 }; 
-            
-            sprintf_s(s, 256, "CreateThread -> Intent: %d -> Error: %d\n", ++lIntents, GetLastError());
-            OutputDebugStringA(s);
-
-            Sleep(lIntents * lSleep);
-            h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) runMeshLoad, l_ThreadInfo, NULL, NULL);
-        }
-
-        l_ThreadHandler.push_back(h);*/
-
         CStaticMesh *l_StaticMesh = new CStaticMesh();
         bool lLoadOk = l_StaticMesh->Load(file);
-
         ASSERT( lLoadOk, "Could not load static mesh %s", lName.c_str() );
-
-        // Default TODO Delete
-        int lState = 0;
-        //#pragma omp atomic
-        lState += AddResource( lName, l_StaticMesh );
-        if(!lLoadOk || !lState )
+        if(!lLoadOk || !AddResource( lName, l_StaticMesh ) )
         {
-            CHECKED_DELETE(l_StaticMesh);
+          CHECKED_DELETE(l_StaticMesh);
         }
+      }
     }
-
-    /*WaitForMultipleObjects(l_ThreadHandler.size(), &l_ThreadHandler[0], true, INFINITE);
-    for(unsigned int i = 0; i < l_ThreadHandler.size(); i++)
-    {
-        CloseHandle(l_ThreadHandler[i]);
-    }*/
-
     TIMER_STOP( "CStaticMeshManager::Load." );
 }
 
