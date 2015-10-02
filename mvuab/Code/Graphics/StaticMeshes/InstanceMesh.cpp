@@ -21,14 +21,19 @@
 CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
 {
   SetName( aName );
+  mMaterialName = aName;
   GetMaterial();
 }
 
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
+CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
   CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
   SetName(aName);
+  if (mMaterialName == "")
+    mMaterialName = aName;
+  else
+    mMaterialName = MaterialName;
   GetMaterial();
 }
 
@@ -39,7 +44,8 @@ CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
   , mType( "static" )
   , mPhysicActor( 0 )
 {
- GetMaterial();
+  mMaterialName = GetName();
+  GetMaterial();
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -122,7 +128,7 @@ CStaticMesh* CInstanceMesh::GetStaticMesh()
 
 void CInstanceMesh::GetMaterial()
 {
-  std::string& lMaterialName = GetName();
+  std::string& lMaterialName = mMaterialName;
   std::string::size_type i = lMaterialName.find_last_of("_");
   if (i != std::string::npos)
     lMaterialName.erase(i, lMaterialName.size() - i);

@@ -18,13 +18,15 @@ class CInstanceMesh : public CRenderableObject
         std::string   mType;
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
+
+        std::string   mMaterialName;
         CMaterial*    mMaterial;
 
         std::vector<Math::Vect3f> Dummy01;
         std::vector<uint32> Dummy02;
 
     public:
-        CInstanceMesh( const std::string& aName, const std::string& CoreName );
+        CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName = "" );
         CInstanceMesh( const std::string& aName );
 
         CInstanceMesh( const CXMLTreeNode& atts );

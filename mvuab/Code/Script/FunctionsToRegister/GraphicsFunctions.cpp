@@ -62,6 +62,11 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
   return new CInstanceMesh( Name, CoreName );
 }
 
+CInstanceMesh* CreateInstanceMeshWithMaterial( const std::string& Name, const std::string& CoreName, const std::string MaterialName )
+{
+  return new CInstanceMesh( Name, CoreName, MaterialName );
+}
+
 CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
 {
   return new CAnimatedInstanceModel( Name, CoreName );
@@ -323,6 +328,10 @@ void registerStaticMesh( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMesh )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateInstanceMeshWithMaterial )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
