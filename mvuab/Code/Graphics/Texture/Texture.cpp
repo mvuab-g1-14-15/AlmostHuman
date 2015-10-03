@@ -212,7 +212,7 @@ bool CTexture::Save( const std::string& FileName )
 {
     ASSERT( m_Texture, "Null d3dx texture to save" );
 
-    if( m_Texture ) return false;
+    //if( m_Texture ) return false;
     HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture, 0 );
     
     if( hr != D3D_OK )
@@ -246,30 +246,27 @@ unsigned int CTexture::GetColorSize()
 bool CTexture::SetBitmap(char *l_Bitmap, int l_Width, int l_Height, int l_NumBytes)
 {
     D3DLOCKED_RECT l_LockRect = { 0 };
-    unsigned int m_TextureColorSize = GetColorSize();
+    if(l_Bitmap == NULL || m_Texture == NULL || GetColorSize() == 0) return false;
 
-    if(l_Bitmap == NULL || m_Texture == NULL || m_TextureColorSize == 0) return false;
-    if(FAILED(m_Texture->LockRect(0, &l_LockRect, NULL, 0))) return false;
-
-    unsigned char *l_Color = (unsigned char *) l_LockRect.pBits;
-
-    for(int y = 0; y < l_Height; y++)
+    if(FAILED(m_Texture->LockRect(0, &l_LockRect, NULL, 0)))
     {
-        for(int x = 0; x < l_Width; x++)
-        {
-            int l_TexPos = l_LockRect.Pitch * y + m_TextureColorSize * x;
-            l_Color[l_TexPos + 0] = (unsigned char) 255;
-            l_Color[l_TexPos + 1] = l_Bitmap[y * l_Width + l_NumBytes * 0];
-            l_Color[l_TexPos + 2] = l_Bitmap[y * l_Width + l_NumBytes * 1];
-            l_Color[l_TexPos + 3] = l_Bitmap[y * l_Width + l_NumBytes * 2];
-
-            /*if(l_NumBytes == 4 && m_TextureColorSize == 4) 
-                l_Color[l_TexPos + 3] = l_Bitmap[y * l_Width + l_NumBytes * 3];
-            else if(m_TextureColorSize == 4) 
-                l_Color[l_TexPos + 3] = (unsigned char) 255;*/
-        }
+        m_Texture->UnlockRect(0);
+        return false;
     }
 
-    m_Texture->UnlockRect(0); // check for fail?
+    int l_RowWidthDst = l_LockRect.Pitch;
+    int l_RowWidthSrc = l_Width * l_NumBytes;
+
+    unsigned char *l_pDst = (unsigned char *) l_LockRect.pBits;
+    int l_Bits2Cpy = (l_RowWidthSrc < l_RowWidthDst) ? l_RowWidthSrc : l_RowWidthDst;
+
+    for(int i = 0; i < l_Height; i++)
+    {
+        memcpy(l_pDst, l_Bitmap, l_Bits2Cpy);
+        l_Bitmap += l_RowWidthSrc;
+        l_pDst += l_RowWidthDst;
+    }
+
+    m_Texture->UnlockRect(0);
     return true;
 }
