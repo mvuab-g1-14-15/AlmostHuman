@@ -21,7 +21,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.SuspectedPosition = Vect3f(0.0)
 	
 	self.ShootSpeed = 50.0
-	self.Velocity = 1.0
+	self.Velocity = 2.0
 	self.Delta = 0.5
 	
 	self.Alarmado = false
@@ -55,12 +55,17 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 
 	self.Brain = CBrain(Node:GetAttributeString("state", "inicial"), state_machine)
 	
+	self.CurrentAnimation = Node:GetAttributeString("state", "inicial")
 	--self:ChangeState("perseguir")
 	--self:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
 	self.Camera:SetZFar(20.0)
+	if self.Type == "drone" then
+		self.Camera:SetFovInRadians(20.0)
+	end
+	
 	self:UpdateCamera()
 	
 	AddEnemy(Node:GetAttributeString("texture_enemy", ""), Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), Node:GetAttributeInt("width", 50.0), Node:GetAttributeInt("height", 50.0), self.CharacterController:GetYaw(), Node:GetAttributeString("get_position_script", "no_script"), Node:GetAttributeString("orientation", "no_script"), self.Name)
@@ -356,13 +361,16 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
 		
     if ( math.abs( YawDif ) < 0.1 ) then
 		CharacterController:Move( Dir * self.Velocity, dt )
+		self.RenderableObject:ChangeAnimation(self.CurrentAnimation, 0.2, 1)
 		Yaw = DirYaw;
     else
         CharacterController:Move( Vect3f( 0.0 ), dt )
 		if YawDif > 0 then
 			YawDif = 1
+			self.RenderableObject:ChangeAnimation("turn_left", 0.5, 0.5)
 		else
 			YawDif = -1
+			self.RenderableObject:ChangeAnimation("turn_right", 0.5, 0.5)
 		end
         Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
 
@@ -404,4 +412,9 @@ function CEnemyLUA:ChangeRoute(position)
 	self.ActualPathPoint = 1
 	self.PathCalculated = false
 	self.PositionAlarm = position[1]
+end
+
+function CEnemyLUA:ChangeAnimation(animation, delayin, delayout)
+	self.CurrentAnimation = animation
+	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
 end

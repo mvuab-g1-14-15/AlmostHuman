@@ -72,21 +72,23 @@ function update_gameplay()
 			end
 		end
 		if action_manager:DoAction("PressX") then
-			if g_bPressX then
+			engine:Trace("He entrado en PressX")
+			if g_bPressRoom2X then
+				engine:Trace("He entrado en PressRoom2X")
 				if CuentaAtras == 3 then
 					gui_manager:ShowStaticText("Block")
 				end
-				g_bPressedX = true
+				g_bPressedRoom2X = true
 			elseif g_bOpenDoor2 then
 				--Code para abrir puerta
 			end
 		end	
 		
 		if action_manager:DoAction("OpenDoorRoom3") then
-			if g_bPressX then
+			if g_bPressRoom3X then
 				--gui_manager:ShowStaticText("Alarm")
 				g_EnemyManager:AlarmRoom("room3")				
-				g_bPressedX = true
+				g_bPressedRoom3X = true
 			elseif g_bOpenDoor3 then
 				--Code para abrir puerta
 			end

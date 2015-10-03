@@ -2,13 +2,13 @@ tiempoDeEspera = 0
 
 function init_enemy()
 	enemy = g_EnemyManager:GetActualEnemy()
-	enemy:GetAnimationModel():ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
+	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 end
 
 function activation()
 	enemy = g_EnemyManager:GetActualEnemy()
-	enemy:GetAnimationModel():ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
+	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
 	timerActivation = "Activation"..enemy:GetName()
 	if not countdowntimer_manager:ExistTimer(timerActivation) then
 		countdowntimer_manager:AddTimer(timerActivation, 3.0, false)
@@ -27,7 +27,7 @@ function check_next_state()
 	local l_HearSomething = HearPlayer(enemy)
 	local angle = GetAngleEnemyPlayer(enemy)
 	--engine:Trace("Veo al player "..tostring(l_PlayerInSight))
-	--engine:Trace("Estado actual "..l_CurrentState)
+	engine:Trace("Estado actual "..l_CurrentState)
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	
 	if l_CurrentState ~= "perseguir" and l_CurrentState ~= "activation" then
@@ -68,7 +68,7 @@ function check_next_state()
 	
 	if l_NextState ~= "perseguir" then
 		if enemy:GetVelocity() == 5.0 then
-			enemy:SetVelocity(1.0)
+			enemy:SetVelocity(2.0)
 		end
 	end
 	
@@ -83,7 +83,7 @@ function check_next_state()
 	
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
-		enemy:GetAnimationModel():ChangeAnimation(l_NextState, 0.2, 1.0)
+		enemy:ChangeAnimation(l_NextState, 0.2, 1.0)
 	end
 end
 
@@ -108,7 +108,7 @@ function stay()
 			enemy.Suspected = false
 		end
 		if enemy:GetVelocity() == 5.0 then
-			enemy:SetVelocity(1.0)
+			enemy:SetVelocity(2.0)
 		end
 	else
 		enemy:MoveToWaypoint(Vect3f(0.0))
@@ -125,7 +125,7 @@ function atacar()
 	
 	if l_PlayerInSight or (0 < angle and l_DistanceToPlayer < 4) then
 		if enemy:GetVelocity() == 5.0 then
-			enemy:SetVelocity(1.0)
+			enemy:SetVelocity(2.0)
 		end
 		if enemy.Suspected then
 			enemy.Suspected = false
@@ -157,7 +157,7 @@ function atacar()
 		enemy:SetCountTimeShoot(0.0)
 		if enemy:GetActualState() == "atacar" then
 			enemy:ChangeState("perseguir")
-			enemy:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
+			enemy:ChangeAnimation("perseguir", 0.2, 1.0)
 			if not countdowntimer_manager:ExistTimer(timerPerseguir) then
 				countdowntimer_manager:AddTimer(timerPerseguir, 10.0, false)
 			else
@@ -170,7 +170,7 @@ end
 function perseguir()
 	enemy = g_EnemyManager:GetActualEnemy()
 	local l_TargetPos = GetPlayerPosition()
-	if enemy:GetVelocity() == 1.0 then
+	if enemy:GetVelocity() == 2.0 then
 		enemy:SetVelocity(5.0)
 	end
 	if enemy.Alarmado then
