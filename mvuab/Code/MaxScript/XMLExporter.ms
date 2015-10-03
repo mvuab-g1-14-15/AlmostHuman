@@ -143,7 +143,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 				local lNumMaterials = GetMaterialCount Obj
 				local ObjNameCore = ObjNameCoreAux + "v" + lNumVertices + "m" + lNumMaterials
 				
-				local l_Name = (Obj.name + "_" + l_Room) as String
+				local l_Name = (ObjName + "_" + l_Room) as String
 				local l_Core = (ObjNameCore + "_" + l_Room) as String
 				
 				l_Name = toLower l_Name
@@ -311,20 +311,12 @@ fn ExportTextureFile AllObj DestPath =
 
 function GenerateMeshes aObjects MeshDir =
 (
-		-- create the document and set the filename
-		local    filenameXML = MeshDir +"\\materials.xml"
-		xDoc = XMLDocument filenameXML
-		
-		--create the base node and append the node to the document
-		local l_RootNode = xDoc.getNewNode "materials"
-		xDoc.AppendNode l_RootNode
-	
 		local NameVertexsMap       = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]"
 		local ObjectsProcessed     = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
 		for Obj in aObjects do
 		(
-			--try
-			--(
+			try
+			(
 				local ObjName = toLower Obj.name
 				local ObjNameCoreAux = trimright ObjName "0123456789"
 				
@@ -334,8 +326,9 @@ function GenerateMeshes aObjects MeshDir =
 				
 				format "ObjectName % CoreName %\n" ObjName ObjNameCore
 				
-				local l_ObjectMaterialNode = xDoc.getNewNode "object_material"
-				l_ObjectMaterialNode.AddAttributeAsString "name" ObjName
+				--Create a material for this object
+				local lMaterialFilename = MeshDir +"\\"+ ObjName + ".mat"--poner parametrico
+				local lMaterialFile = fopen lMaterialFilename "wb"
 				
 				--------------------------------------------------------------------------------
 				if (NameVertexsMap.ContainsKey (ObjNameCore)) == true then
@@ -345,11 +338,10 @@ function GenerateMeshes aObjects MeshDir =
 					NameVertexsMap.Remove ObjNameCore
 					NameVertexsMap.Add ObjNameCore index
 					
-					-- Export materials
+					-- Export materials only
 					local l_ObjectMesh = SMesh()
 					l_ObjectMesh.InitFromMaxObject Obj
-					l_ObjectMesh.WriteToXML xDoc l_ObjectMaterialNode
-					fclose file
+					l_ObjectMesh.WriteToXML lMaterialFile
 				)
 				else
 				(
@@ -362,18 +354,16 @@ function GenerateMeshes aObjects MeshDir =
 					local file = fopen filename "wb"
 					local l_ObjectMesh = SMesh()
 					l_ObjectMesh.InitFromMaxObject Obj
-					l_ObjectMesh.WriteToFile file xDoc l_ObjectMaterialNode
+					l_ObjectMesh.WriteToFile file lMaterialFile
 					fclose file
 				)
-				l_RootNode.AppendNode l_ObjectMaterialNode
-				--------------------------------------------------------------------------------
-			--)
-			--catch
-			--(
-				--format "Something was wrong with object: % \n" Obj
-			--)
+				fclose lMaterialFile
+			)
+			catch
+			(
+				format "Something was wrong with object: % \n" Obj
+			)
 		)
-		xDoc.PrettySaveXML()
 		format "Meshes copied on: % \n" MeshDir	
 )
 

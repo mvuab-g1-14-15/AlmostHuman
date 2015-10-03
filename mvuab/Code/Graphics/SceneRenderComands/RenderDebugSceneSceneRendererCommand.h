@@ -3,17 +3,11 @@
 #pragma once
 
 
-#include "SceneRenderComands\SceneRendererCommand.h"
-#include "XML\XMLTreeNode.h"
-#include <vector>
-
+#include "SceneRenderComands\RenderSceneSceneRendererCommand.h"
 class CGraphicsManager;
-class CRenderableObjectsManager;
 
-class CRenderDebugSceneSceneRendererCommand : public CSceneRendererCommand
+class CRenderDebugSceneSceneRendererCommand : public CRenderSceneSceneRendererCommand
 {
-	private:
-		std::vector<CRenderableObjectsManager*> m_Layers;
     public:
         CRenderDebugSceneSceneRendererCommand(CXMLTreeNode &atts);
         ~ CRenderDebugSceneSceneRendererCommand();

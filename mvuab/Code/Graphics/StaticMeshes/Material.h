@@ -3,36 +3,25 @@
 #define _MATERIAL_H
 
 #include "Utils/Defines.h"
-#include "XML/XMLTreeNode.h"
 #include "Utils/Name.h"
 
 class CTexture;
 
+typedef std::vector<CTexture*> TTextureVector;
 class CMaterial : public CName
 {
 public:
-   CMaterial( const CXMLTreeNode& aNode );
+   CMaterial( const std::string& FileName );
    uint32 GetCount();
    void ApplyMaterial( uint32 aIdx );
    virtual ~CMaterial();
 private:
-  enum ETextureType
-  {
-    eColor = 0,
-    eDiffuse,
-    eNormal,
-  };
   struct SSubMaterial
   {
-    ETextureType mType;
-    std::string  mTextureName;
-    CTexture*    mTexture;
-    Math::CColor mColor;
+    TTextureVector m_Textures;
   };
 
   std::vector< SSubMaterial > mSubMaterials;
-
-
 };
 
 #endif //INC_STATIC_MESH_H_

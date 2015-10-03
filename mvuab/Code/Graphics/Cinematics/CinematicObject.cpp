@@ -19,7 +19,7 @@ CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
 {
   std::string resource = atts.GetAttribute<std::string>( "resource", "" );
 
-  m_RenderableObject = SceneInstance->GetResource( "core" )->GetLayers()->GetResource( "solid" )->GetResource( resource );
+  m_RenderableObject = SceneInstance->GetResource( "core" )->GetLayer( "solid" )->GetResource( resource );
 
   for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
     m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );

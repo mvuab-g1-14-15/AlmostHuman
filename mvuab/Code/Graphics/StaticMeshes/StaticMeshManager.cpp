@@ -24,41 +24,13 @@ void CStaticMeshManager::Init()
 {
 }
 
-void CStaticMeshManager::LoadMaterials(const std::string& aMaterialsPath )
-{
-  TIMER_START();
-
-  CXMLTreeNode lFile, lMaterials;
-  if( lFile.LoadAndFindNode( aMaterialsPath.c_str(), "materials", lMaterials ) )
-  {
-    int32 lCount = lMaterials.GetNumChildren();
-    //#pragma omp parallel for
-    for( int32 i = 0; i < lCount; ++i )
-    {
-      const CXMLTreeNode& lNode = lMaterials(i);
-      const std::string& lName = lNode.GetName();
-      if( lName == "object_material" )
-      {
-        CMaterial* lNewMaterial = new CMaterial( lNode );
-        if( !mMaterials.AddResource(lNewMaterial->GetName(), lNewMaterial ) )
-        {
-          LOG_ERROR_APPLICATION("Could not add %s material", lNewMaterial->GetName() );
-          CHECKED_DELETE( lNewMaterial );
-        }
-      }
-    }
-  }
-
-  TIMER_STOP("Load materials.");
-}
-
-void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
+void CStaticMeshManager::Load( const std::string& aFilePath, const std::string& aBasePath )
 {
     TIMER_START();
+	mMeshesPath = aBasePath + "meshes/";
     CXMLTreeNode newFile, node;
     if (newFile.LoadAndFindNode(aFilePath.c_str(), "static_meshes", node ))
     {
-      LoadMaterials( aBasePath + "meshes/materials.xml" );
       for( int i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
       {
         const std::string &lName = node(i).GetAttribute<std::string>("name", "no_name");
@@ -110,4 +82,15 @@ void runMeshLoad(MESH_THREAD_INFO *l_ThreadInfo)
     l_ThreadInfo = NULL;
 
     ExitThread(0);
+}
+
+CMaterial* CStaticMeshManager::GetMaterial( const std::string& aMaterialName )
+{
+	CMaterial* lMaterial = mMaterials.GetResource( aMaterialName );
+	if( !lMaterial )
+	{
+		lMaterial = new CMaterial( mMeshesPath + aMaterialName + ".mat" );
+		mMaterials.AddResource(aMaterialName, lMaterial);
+	}
+	return mMaterials.GetResource( aMaterialName );
 }

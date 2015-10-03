@@ -3,59 +3,44 @@
 #define ROOM_H
 
 #include "Utils/Name.h"
-#include "Utils\MapManager.h"
-
+#include "XML/XMLTreeNode.h"
 #include "Math/Vector3.h"
-
 #include <string>
 
 class CRenderableObjectsLayersManager;
+class CRenderableObjectsManager;
 class CLightManager;
 class CLightProbe;
 
-class CRoom
+class CRoom : public CName
 {
     public:
-        CRoom();
+        CRoom( const CXMLTreeNode& aNode );
         ~CRoom();
 
-        GET_SET(std::string, Name);
-        GET_SET(std::string, RenderableObjectsPath);
-        GET_SET(std::string, StaticMeshesPath);
-        GET_SET(std::string, BasePath);
-        GET_SET(bool, Active);
-
+		void Update();
 		void LoadLightProbe();
 		std::vector<CLightProbe*> GetClosedLightProbes(Math::Vect3f);
-
-        CRenderableObjectsLayersManager* GetLayers()
-        {
-            return m_pLayers;
-        }
-
-        void SetLayers( CRenderableObjectsLayersManager* aLayers )
-        {
-            m_pLayers = aLayers;
-        }
-
-        CLightManager* GetLights()
-        {
-            return m_pLights;
-        }
-
-        void SetLights( CLightManager* aLights)
-        {
-            m_pLights = aLights;
-        }
+		void Load();
+		void Unload();
+		void LoadMeshes();
+		void LoadInstances();
+		void LoadLights();
+		void RenderLayer( const std::string& aLayerName );
+		bool IsActive() const { return m_Active; }
+		void Activate() { m_Active = true; }
+		void Deactivate() { m_Active = false; }
+		bool IsLoaded() const { return mIsLoaded; }
+		CRenderableObjectsManager* GetLayer( const std::string& aLayer ) const;
 
     private:
-        std::string m_Name;
         std::string m_RenderableObjectsPath;
         std::string m_StaticMeshesPath;
         std::string m_BasePath;
         CRenderableObjectsLayersManager* m_pLayers;
         CLightManager* m_pLights;
         bool m_Active;
+		bool mIsLoaded;
 
 		std::vector<CLightProbe*> mLightProbes;
 };

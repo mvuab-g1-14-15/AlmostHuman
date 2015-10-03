@@ -148,6 +148,25 @@ int BitOr( int a, int b )
   return a | b;
 }
 
+void registerTemplatedVectorMapManager( /*lua_State* aState*/ )
+{
+	/*
+	LUA_BEGIN_DECLARATION( aState )
+		LUA_DECLARE_CLASS( CTemplatedVectorMapManager )
+		LUA_DECLARE_DEFAULT_CTOR
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, GetResource )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, Exist )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, RemoveResource )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, GetResourceById )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, AddResource )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, Destroy )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, GetResourcesMap )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, Clear )
+		LUA_DECLARE_METHOD( CTemplatedVectorMapManager, GetResourcesCount )
+		LUA_END_DECLARATION
+		*/
+}
+
 void registerBase( lua_State* m_LS )
 {
   REGISTER_LUA_FUNCTION( m_LS, aTan2 )
@@ -331,4 +350,5 @@ void registerBase( lua_State* m_LS )
   ];
 
   registerXML( m_LS );
+/*  registerTemplatedVectorMapManager( m_LS );*/
 }

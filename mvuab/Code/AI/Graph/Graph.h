@@ -29,7 +29,7 @@ public:
 
   unsigned int GetSize()
   {
-    return m_NodeInfo.size();
+    return ( unsigned int) m_NodeInfo.size();
   };
 
   std::map<unsigned int, unsigned int> GetArcs( unsigned int node )

@@ -16,6 +16,7 @@ class CStaticMeshManager : public CMapManager<CStaticMesh>, public CManager
 private:
   CMapManager< CMaterial > mMaterials;
   void LoadMaterials(const std::string& aMaterialsPath );
+  std::string mMeshesPath;
     public:
         CStaticMeshManager();
 		CStaticMeshManager( CXMLTreeNode& atts);
@@ -25,10 +26,10 @@ private:
 		void Update(){}
 		void Render(){}
 
-    CMaterial* GetMaterial( const std::string& aMaterialName ) { return mMaterials.GetResource( aMaterialName ); }
+    CMaterial* GetMaterial( const std::string& aMaterialName );
 
         bool threadMeshLoad(std::string &l_File, std::string &l_Name, unsigned int iD);
-		void Load( std::string aFilePath, std::string aBasePath );
+		void Load( const std::string& aFilePath, const std::string& aBasePath );
 };
 
 typedef struct 

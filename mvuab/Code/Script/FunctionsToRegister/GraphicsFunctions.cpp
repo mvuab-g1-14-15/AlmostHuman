@@ -434,18 +434,18 @@ void registerGraphics( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CRoom )
-  LUA_DECLARE_METHOD( CRoom, GetLayers )
-  LUA_DECLARE_METHOD( CRoom, GetActive )
+  LUA_DECLARE_METHOD( CRoom, GetLayer )
+  LUA_DECLARE_METHOD( CRoom, IsActive )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CMapManager<CRoom> )
-  LUA_DECLARE_METHOD( CMapManager<CRoom>, GetResource )
-  LUA_DECLARE_METHOD( CMapManager<CRoom>, Exist )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CRoom> )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CRoom>, GetResource )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CRoom>, Exist )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS( CScene, CMapManager<CRoom> )
+  LUA_DECLARE_DERIVED_CLASS( CScene, CTemplatedVectorMapManager<CRoom> )
   LUA_DECLARE_METHOD( CScene, Load )
   LUA_DECLARE_METHOD( CScene, Reload )
   LUA_DECLARE_METHOD( CScene, LoadRoom )

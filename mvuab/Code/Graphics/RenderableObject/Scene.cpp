@@ -46,16 +46,18 @@ void CScene::Render()
 void CScene::Update()
 {
     // Update the core room, in order to update all the characters
-    GetResource( "core" )->GetLayers()->GetResource( "characters" )->Update();
+    GetResource( "core" )->Update();
 
-    // Update the current room
-    if ( mCurrentRoom != NULL && mCurrentRoom->GetLayers() != NULL )
-        mCurrentRoom->GetLayers()->Update();
+	for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
+	{
+		if( (*lItb)->IsActive() )
+			(*lItb)->Update();
+	}
 }
 
 void CScene::Destroy()
 {
-    CMapManager::Destroy();
+    CTemplatedVectorMapManager::Destroy();
 }
 
 void CScene::Init()
@@ -75,23 +77,8 @@ bool CScene::Load( const std::string& l_FilePath )
         {
             for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
             {
-                CXMLTreeNode& l_CurrentNode = l_Node( i );
-
-                const std::string& l_Path = l_CurrentNode.GetAttribute<std::string>( "path", "no_path" );
-                const std::string& l_ROFile = l_CurrentNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" );
-                const std::string& l_SMFile = l_CurrentNode.GetAttribute<std::string>( "static_meshes_file", "no_file" );
-                const std::string& l_Level = l_CurrentNode.GetAttribute<std::string>( "level", "no_level" );
-
-                CRoom* lRoom = new CRoom();
-
-                lRoom->SetName( l_Level );
-                lRoom->SetRenderableObjectsPath( l_Path + "/" + l_ROFile );
-                lRoom->SetStaticMeshesPath( l_Path + "/" + l_SMFile );
-                lRoom->SetBasePath( l_Path + "/" );
-
-                lRoom->LoadLightProbe();
-
-                if ( !AddResource( l_Level, lRoom ) )
+                CRoom *lRoom = new CRoom( l_Node( i ) );
+                if ( !AddResource( lRoom->GetName(), lRoom ) )
                     CHECKED_DELETE( lRoom );
             }
 
@@ -107,99 +94,35 @@ bool CScene::Load( const std::string& l_FilePath )
 
 bool CScene::Reload()
 {
-    CMapManager::Destroy();
+    CTemplatedVectorMapManager::Destroy();
     return Load( mConfigPath );
 }
 
-void CScene::LoadRoom( std::string aRoomName )
-{
-    CRenderableObjectsLayersManager* lROLM = new CRenderableObjectsLayersManager();
-    std::string lAsePath = "Data/ase/";
-    CRoom* lRoom = GetResource( aRoomName );
-
-    if ( lRoom )
-    {
-        std::string lSMPath = lRoom->GetStaticMeshesPath();
-        std::string lROPath = lRoom->GetRenderableObjectsPath();
-        std::string lBasePath = lRoom->GetBasePath();
-
-        if ( lSMPath.find( ".xml" ) != std::string::npos )
-            SMeshMInstance->Load( lSMPath, lBasePath );
-
-        if ( lROPath.find( ".xml" ) != std::string::npos )
-            mToDelete = ( CRenderableObjectsManager *) lROLM->LoadLayers( lROPath, aRoomName );
-        
-
-        PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
-        PSMan->Init();
-        
-        BillboardMan->SetConfigPath( lRoom->GetBasePath() + "billboards.xml");
-        BillboardMan->Reload();
-
-        lRoom->SetLayers( lROLM );
-
-        LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
-
-        if (aRoomName != "core"){
-          if (PhysXMInstance->GetLoadASE())
-	        {
-                if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(lAsePath+""+aRoomName+".ase", aRoomName))
-		        {
-			        CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( aRoomName + "Escenario" );
-			        l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-			        CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-
-			        VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
-
-			        for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-			          l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-			        //m_AseMeshActor->CreateBody ( 10.f );
-			        PhysXMInstance->AddPhysicActor( l_AseMeshActor );
-		        }
-	        }
-        }
-    }
-}
-
-void CScene::ActivateRoom( std::string aRoomName )
+void CScene::ActivateRoom( const std::string& aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
+	if( lRoom )
+	{
+		if( !lRoom->IsLoaded() )
+			lRoom->Load();
 
-    lRoom->SetActive( true );
-    mCurrentRoom = lRoom;
-
-    if ( !lRoom->GetLayers() )
-    {
-        LoadRoom( aRoomName );
-    }
+		lRoom->Activate();
+		mCurrentRoom = lRoom;
+	}
 }
 
 void CScene::UnloadRoom( std::string aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
-
     if ( lRoom )
     {
-
-        if(mToDelete)
-        {
-            CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>(SRCMInstance->GetCommand("render_solid"));
-            //lRSSRC->RemoveLayer(mToDelete);
-        }
-
-        CRenderableObjectsLayersManager* lROLM = lRoom->GetLayers();
-        CHECKED_DELETE( lROLM );
-
-        lRoom->SetLayers(NULL);
-        lRoom->SetActive( false );
     }
 }
 
 void CScene::DesactivateRoom( std::string aRoomName )
 {
     CRoom* lRoom = GetResource( aRoomName );
-    lRoom->SetActive( false );
+    lRoom->Deactivate();
 }
 
 std::vector<CLightProbe*> CScene::GetClosedLightProbes( std::string aRoomName, Math::Vect3f aPos )
@@ -213,19 +136,32 @@ std::vector<CLightProbe*> CScene::GetClosedLightProbes( std::string aRoomName, M
     return std::vector<CLightProbe*>();
 }
 
-const std::string& CScene::GetActivateRoom()
+void CScene::RenderLayer( const std::string& aLayerName )
 {
-    TMapResource::iterator it = GetResourcesMap().begin(),
-                           it_end = GetResourcesMap().end();
+	for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
+	{
+		if( (*lItb)->IsActive() )
+			(*lItb)->RenderLayer( aLayerName );
+	}
+}
 
-    while ( it != it_end )
-    {
-        if ( it->second == mCurrentRoom )
-            return it->first;
+void CScene::LoadRoom( const std::string& aRoomName )
+{
+	ActivateRoom( aRoomName );
+}
 
-        ++it;
-    }
+const std::string CScene::GetActivateRoom()
+{
+	TVectorResources::iterator it = m_ResourcesVector.begin(), it_end = m_ResourcesVector.end();
 
-    const std::string& lDontExist( "" );
-    return lDontExist;
+	while ( it != it_end )
+	{
+		if ( *it == mCurrentRoom )
+			return (*it)->GetName();
+
+		++it;
+	}
+
+	const std::string& lDontExist( "" );
+	return lDontExist;
 }

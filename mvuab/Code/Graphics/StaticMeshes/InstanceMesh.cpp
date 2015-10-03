@@ -17,6 +17,7 @@
 
 #include <algorithm>
 #include <string> 
+#include "Utils/PhysicUserData.h"
 
 CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
 {
@@ -53,9 +54,12 @@ CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
 
 CInstanceMesh::~CInstanceMesh()
 {
-	if( mType == "dynamic" )
+	if( mType == "dynamic" && mPhysicActor)
 	{
+		CPhysicUserData * lData = mPhysicActor->GetUserData();
+		CHECKED_DELETE( lData );
 		PhysXMInstance->ReleasePhysicActor( mPhysicActor );
+		mPhysicActor = NULL;
 	}
 }
 
@@ -130,8 +134,8 @@ void CInstanceMesh::GetMaterial()
   std::transform(lMaterialName.begin(), lMaterialName.end(), lMaterialName.begin(), ::tolower);
 
   mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
-
-  ASSERT(mMaterial, "Null material");
+  ASSERT( mMaterial, "Null material" );
+  ASSERT( mStaticMesh->GetRVs().size() == mMaterial->GetCount(), "materials != submeshes-> Static Mesh %s -Instance Mesh: %s", lMaterialName.c_str(), lMaterialName.c_str() );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

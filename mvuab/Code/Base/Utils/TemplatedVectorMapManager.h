@@ -105,19 +105,19 @@ template <class T> class CTemplatedVectorMapManager
 
         virtual bool AddResource( const std::string& Name, T* Resource )
         {
-            m_Lock.ReadLock();
+            //m_Lock.ReadLock();
                 if( m_ResourcesMap.end() !=  m_ResourcesMap.find(Name))
                 {
-                    m_Lock.ReadUnLock();
+              //      m_Lock.ReadUnLock();
                     return false;
                 }
-            m_Lock.ReadUnLock();
+            //m_Lock.ReadUnLock();
 
-            m_Lock.WriteLock();
+            //m_Lock.WriteLock();
                 CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
                 m_ResourcesVector.push_back(Resource);
                 m_ResourcesMap[Name] = l_Resource;
-            m_Lock.WriteUnLock();
+            //m_Lock.WriteUnLock();
 
             return true;
         }

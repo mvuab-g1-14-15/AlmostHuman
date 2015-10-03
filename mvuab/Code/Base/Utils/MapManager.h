@@ -21,15 +21,15 @@ template<class T> class CMapManager
         {
             TMapResource::iterator it;
 
-            m_Lock.ReadLock();
+            //m_Lock.ReadLock();
                 it = m_Resources.find(Name);
                 if (it == m_Resources.end())
                 {
-                    m_Lock.ReadUnLock();
+                    //m_Lock.ReadUnLock();
                     //LOG_WARNING_APPLICATION("CMapManager::GetResource->(%s)", Name.c_str());
                     return 0;
                 }
-            m_Lock.ReadUnLock();
+            //m_Lock.ReadUnLock();
 
             return it->second;
         }

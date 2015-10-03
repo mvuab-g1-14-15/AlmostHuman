@@ -14,7 +14,7 @@
   <static_mesh name="doorv2253m2_sala1" filename="meshes\doorv2253m2.mesh" />
   <static_mesh name="msf_floorv692m1_sala1" filename="meshes\msf_floorv692m1.mesh" />
   <static_mesh name="boxv536m1_sala1" filename="meshes\boxv536m1.mesh" />
-  <static_mesh name="tubev59089m14_sala1" filename="meshes\tubev59089m14.mesh" />
+  <static_mesh name="tubev57056m14_sala1" filename="meshes\tubev57056m14.mesh" />
   <static_mesh name="msf_floorv3864m2_sala1" filename="meshes\msf_floorv3864m2.mesh" />
   <static_mesh name="msf_floorv3656m2_sala1" filename="meshes\msf_floorv3656m2.mesh" />
   <static_mesh name="msf_floorv1075m1_sala1" filename="meshes\msf_floorv1075m1.mesh" />
@@ -46,6 +46,8 @@
   <static_mesh name="mb_slab_drumv2600m10_sala1" filename="meshes\mb_slab_drumv2600m10.mesh" />
   <static_mesh name="mb_overheadv16665m19_sala1" filename="meshes\mb_overheadv16665m19.mesh" />
   <static_mesh name="mb_ringrailv8742m17_sala1" filename="meshes\mb_ringrailv8742m17.mesh" />
-  <static_mesh name="object__v15016m16_sala1" filename="meshes\object__v15016m16.mesh" />
+  <static_mesh name="object__v15016m17_sala1" filename="meshes\object__v15016m17.mesh" />
   <static_mesh name="lampv158m2_sala1" filename="meshes\lampv158m2.mesh" />
+  <static_mesh name="fanleftv690m1_sala1" filename="meshes\fanleftv690m1.mesh" />
+  <static_mesh name="ventv1377m15_sala1" filename="meshes\ventv1377m15.mesh" />
 </static_meshes>

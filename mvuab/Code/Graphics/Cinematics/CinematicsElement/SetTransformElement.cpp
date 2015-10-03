@@ -11,8 +11,7 @@
 
 CSetTransformElement::CSetTransformElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
     , m_Position( atts.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f( 0, 0, 0 ) ) )
-    , m_pObject( dynamic_cast<CInstanceMesh * >( SceneInstance->GetResource( "core" )->GetLayers()->GetResource( "solid" )->GetResource(
-                     atts.GetAttribute<std::string>( "object", "no_object" ) ) ) )
+    , m_pObject( dynamic_cast<CInstanceMesh * >( SceneInstance->GetResource( "core" )->GetLayer("solid" )->GetResource( atts.GetAttribute<std::string>( "object", "no_object" ) ) ) )
     , m_Size( atts.GetAttribute<Math::Vect3f>( "size", Math::Vect3f( 0, 0, 0 ) ) )
     , m_Yaw( atts.GetAttribute<float>( "yaw", 0.0 ) )
     , m_Pitch( atts.GetAttribute<float>( "pitch", 0.0 ) )

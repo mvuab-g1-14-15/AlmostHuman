@@ -17,38 +17,47 @@
 
 #include <cstdio>
 
-CMaterial::CMaterial( const CXMLTreeNode& aNode )
-  : CName( aNode.GetAttribute<std::string>("name", "no_name" ) )
+CMaterial::CMaterial( const std::string& FileName )
+  : CName( FileName )
 {
-  for( uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount; ++i )
-  {
-    const CXMLTreeNode& lNode = aNode(i);
-    const std::string& lName = lNode.GetName();
-    if( lName == "material")
-    {
-      const std::string& lDiffusse = lNode.GetAttribute<std::string>("diffuse", "" );
-      if( lDiffusse != "")
-      {
-        SSubMaterial lSubMaterial;
-        lSubMaterial.mType = eDiffuse;
-        lSubMaterial.mTextureName = lDiffusse;
-        lSubMaterial.mTexture = TextureMInstance->GetTexture( "Data/textures/" + lDiffusse );
-        lSubMaterial.mColor   = lNode.GetAttribute<Math::CColor>("color", Math::colWHITE );
-        mSubMaterials.push_back(lSubMaterial);
-      }
+	std::FILE* l_pFile = 0;
+	fopen_s(&l_pFile, FileName.c_str(), "rb");
 
-      const std::string& lNormal = lNode.GetAttribute<std::string>("normal", "" );
-      if( lNormal != "")
-      {
-        SSubMaterial lSubMaterial;
-        lSubMaterial.mType = eNormal;
-        lSubMaterial.mTextureName = lNormal;
-        lSubMaterial.mTexture = TextureMInstance->GetTexture( "Data/textures/" + lNormal );
-        lSubMaterial.mColor   = lNode.GetAttribute<Math::CColor>("color", Math::colWHITE );
-        mSubMaterials.push_back(lSubMaterial);
-      }
-    }
-  }
+	if (l_pFile)
+	{
+		unsigned short int l_header = 0;
+		std::fread(&l_header, sizeof( unsigned short int ), 1, l_pFile);
+
+		if (l_header == 0x55ff)
+		{
+			unsigned short int l_SubMeshes = 0;
+			std::fread(&l_SubMeshes, sizeof(unsigned short int), 1, l_pFile);
+
+			for (unsigned int i = 0; i < l_SubMeshes; ++i)
+			{
+				// Obtain all the textures if any
+				unsigned short l_numTexturas = 0;
+				std::fread( &l_numTexturas, sizeof( unsigned short int ), 1, l_pFile );
+				SSubMaterial lSubMaterial;
+				for (unsigned int j = 0; j < l_numTexturas; ++j)
+				{
+					unsigned short l_TextureLength = 0;
+					std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
+
+					++l_TextureLength;
+					char* textureName = (char *) malloc(sizeof(char) * (l_TextureLength));
+					ZeroMemory(textureName, sizeof(char) * l_TextureLength);
+
+					std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
+					CTexture* t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
+					if (t) { lSubMaterial.m_Textures.push_back(t); }
+					free( textureName );
+				}
+				mSubMaterials.push_back(lSubMaterial);
+			}
+		}
+		std::fclose(l_pFile);
+	}
 }
 CMaterial::~CMaterial()
 {
@@ -61,17 +70,8 @@ uint32 CMaterial::GetCount()
 
 void CMaterial::ApplyMaterial( uint32 aIdx )
 {
-  SSubMaterial lSubMaterial = mSubMaterials[aIdx];
-
-  if( lSubMaterial.mTexture )
-  {
-    uint32 lSamplerStage = 0;
-    switch( lSubMaterial.mType )
-    {
-      case eDiffuse: lSamplerStage = 0; break;
-      case eNormal: lSamplerStage  = 1; break; // Todo check this when it has self ilum
-    }
-    
-    lSubMaterial.mTexture->Activate(lSamplerStage);
-  }
+	for( uint32 i = 0, lCount = mSubMaterials[aIdx].m_Textures.size(); i < lCount; ++i )
+	{
+		mSubMaterials[aIdx].m_Textures[i]->Activate(i);
+	}
 }

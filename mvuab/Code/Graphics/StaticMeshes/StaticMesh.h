@@ -16,10 +16,7 @@ class CRenderableObjectTechnique;
 class CStaticMesh
 {
     protected:
-        typedef std::vector<CTexture*> TTextureVector;
-        std::vector<TTextureVector> m_Textures;
-        
-        std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
+		std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
         std::vector<CRenderableVertexs*> m_RVs;
 
         std::vector<size_t> m_VertexTypes;

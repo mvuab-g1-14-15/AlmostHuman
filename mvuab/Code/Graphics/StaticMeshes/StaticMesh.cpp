@@ -30,8 +30,7 @@ CStaticMesh::~CStaticMesh()
 
 void CStaticMesh::Destroy()
 {
-    // Clear the references to the vector of textures
-    m_Textures.clear();
+    // Clear the references to the vector of textures;
     m_VertexTypes.clear();
 
     for (std::vector<CRenderableVertexs*>::iterator it = m_RVs.begin(); it != m_RVs.end(); ++it) { CHECKED_DELETE( *it ); }
@@ -115,32 +114,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         { l_TypeSize = sizeof(TRNM_VERTEX); }
 
-        /*
-        // Obtain all the textures if any
-        unsigned short l_numTexturas = 0;
-        std::fread( &l_numTexturas, sizeof( unsigned short int ), 1, l_pFile );
-        std::vector<CTexture *> l_Texture;
-
-        for (unsigned int j = 0; j < l_numTexturas; ++j)
-        {
-            unsigned short l_TextureLength = 0;
-            std::fread(&l_TextureLength, sizeof(unsigned short int), 1, l_pFile);
-
-            ++l_TextureLength;
-            char* textureName = (char *) malloc(sizeof(char) * (l_TextureLength));
-            ZeroMemory(textureName, sizeof(char) * l_TextureLength);
-
-            std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
-            CTexture* t = TextureMInstance->GetTexture( "Data/textures/" + std::string( textureName ) );
-            if (t) { l_Texture.push_back(t); }
-
-			ASSERT(t, "Unable to find texture: %s in for static mesht %s ", textureName, FileName.c_str() );
-
-            free( textureName );
-        }
-
-        m_Textures.push_back(l_Texture);
-        */
+        
 
         unsigned int l_VrtexCount = 0;
         std::fread( &l_VrtexCount, sizeof( unsigned int ), 1, l_pFile );
@@ -262,8 +236,8 @@ bool CStaticMesh::ReLoad()
 
 void CStaticMesh::Render( CGraphicsManager* GM, uint32 aIdx )
 {
-  //ASSERT(aIdx < m_RVs.size(), "Invalid index");
-  //ASSERT(aIdx < m_RenderableObjectTechniques.size(), "Invalid index");
+  ASSERT(aIdx < m_RVs.size(), "Invalid index");
+  ASSERT(aIdx < m_RenderableObjectTechniques.size(), "Invalid index");
 
   m_RVs[aIdx]->Render( GM, m_RenderableObjectTechniques[aIdx]->GetEffectTechnique() );
 }

@@ -2,17 +2,29 @@
 #include "Utils\Defines.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "Lights\LightProbe.h"
-
+#include "EngineManagers.h"
+#include "Lights/LightManager.h"
+#include "StaticMeshes/StaticMeshManager.h"
+#include "PhysicsManager.h"
+#include "Utils/Defines.h"
 #include <algorithm>
+#include "CookingMesh/PhysicCookingMesh.h"
+#include "Utils/PhysicUserData.h"
+#include "Actor/PhysicActor.h"
 
-CRoom::CRoom()
-	: m_Name( "" )
-	, m_BasePath( "" )
-	, m_RenderableObjectsPath( "" )
-	, m_StaticMeshesPath( "" )
+CRoom::CRoom( const CXMLTreeNode& aNode )
+	: CName( aNode.GetAttribute<std::string>("level", "no_level") )
+	, m_BasePath( aNode.GetAttribute<std::string>( "path", "no_path" ) )
+	, m_RenderableObjectsPath( aNode.GetAttribute<std::string>( "renderable_objects_file", "no_file" ) )
+	, m_StaticMeshesPath( aNode.GetAttribute<std::string>( "static_meshes_file", "no_file" ) )
 	, m_pLayers( 0 )
 	, m_Active( false )
+	, mIsLoaded( false )
 {
+	m_BasePath				+= "/";
+	m_RenderableObjectsPath = m_BasePath + m_RenderableObjectsPath;
+	m_StaticMeshesPath      = m_BasePath + m_StaticMeshesPath;
+	LoadLightProbe();
 }
 
 CRoom::~CRoom() 
@@ -59,7 +71,7 @@ bool SPointDistComparison( SPointDist a, SPointDist b)
 
 std::vector<CLightProbe*> CRoom::GetClosedLightProbes( Math::Vect3f aPos )
 {
-	std::vector<CLightProbe*> lLightProbes;
+  std::vector<CLightProbe*> lLightProbes;
 
   if (!mLightProbes.empty())
   {
@@ -79,4 +91,75 @@ std::vector<CLightProbe*> CRoom::GetClosedLightProbes( Math::Vect3f aPos )
   }
 
 	return lLightProbes;
+}
+
+void CRoom::RenderLayer( const std::string& aLayerName )
+{
+	if( m_pLayers ) m_pLayers->Render(aLayerName);
+}
+
+
+static const std::string sAsePath = "Data/ase/";
+void CRoom::Load()
+{
+	LoadMeshes();
+	LoadInstances();
+	// The core room must not load some elements
+	if( GetName() != "core" )
+	{
+		if (PhysXMInstance->GetLoadASE())
+		{
+			if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(sAsePath + "" + GetName() + ".ase", GetName()))
+			{
+				CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( GetName() + "Escenario" );
+				l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+				CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+				VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+
+				for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+					l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+				//m_AseMeshActor->CreateBody ( 10.f );
+				PhysXMInstance->AddPhysicActor( l_AseMeshActor );
+			}
+		}
+
+		// TODO: Load Billboards
+		// TODO: Load PS
+		LoadLights();
+	}
+
+	mIsLoaded = true;
+}
+
+void CRoom::Unload()
+{
+
+}
+
+void CRoom::LoadMeshes()
+{
+	SMeshMInstance->Load( m_StaticMeshesPath, m_BasePath );
+}
+
+void CRoom::LoadInstances()
+{
+	m_pLayers = new CRenderableObjectsLayersManager();
+	m_pLayers->LoadLayers( m_RenderableObjectsPath, GetName() );
+}
+
+void CRoom::LoadLights()
+{
+	LightMInstance->Load( m_BasePath + "lights.xml" );
+}
+
+CRenderableObjectsManager* CRoom::GetLayer( const std::string& aLayer ) const 
+{
+	return m_pLayers->GetResource(aLayer);
+}
+
+void CRoom::Update()
+{
+	m_pLayers->Update();
 }

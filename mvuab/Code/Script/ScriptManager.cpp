@@ -102,10 +102,10 @@ void CScriptManager::RunFile( const std::string& FileName )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
         ASSERT( false, "Error running lua file: %s\n %s", FileName.c_str(), l_Str );
-
-#ifdef _DEBUG
-		Reload();
-#endif
+// 
+// #ifdef _DEBUG
+// 		Reload();
+// #endif
     }
 }
 
