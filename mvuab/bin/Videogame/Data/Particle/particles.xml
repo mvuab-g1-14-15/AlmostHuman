@@ -1,4 +1,0 @@
-<particles_instances>
-	<particle_instance name="smoke01" core="smoke" position="64 -16.5 -60"/> 
-	<particle_instance name="smoke02" core="smoke" position="66 -16.5 -44"/>
-</particles_instances>
