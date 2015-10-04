@@ -31,6 +31,10 @@ public:
   GET_SET( float32, ZFar )
   GET_SET( float32, AspectRatio )
   GET_SET( bool, Enable )
+  void SetFovInRadians(float32 _aFovInDeg)
+  {
+	  m_FovInRadians = Math::Utils::Deg2Rad(_aFovInDeg);
+  }
 
   //void    AddPos( const D3DXVECTOR3 &position ) { m_Pos += position; }
   void    AddYaw( float32 aRadian );

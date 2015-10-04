@@ -135,7 +135,7 @@ uint32 CFontManager::DrawDefaultText( uint32 x, uint32 y, Math::CColor color,
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
     mDefaultFont->DrawText( NULL, lMsg.c_str(), -1, &rect, DT_CALCRECT, color_aux );
     // pintarlo
-    mDefaultFont->DrawText( NULL, lMsg.c_str(), -1, &rect, DT_LEFT, color_aux );
+    mDefaultFont->DrawText( NULL, lMsg.c_str(), -1, &rect, DT_CENTER, color_aux );
 
     return ( rect.bottom  - rect.top );
 }

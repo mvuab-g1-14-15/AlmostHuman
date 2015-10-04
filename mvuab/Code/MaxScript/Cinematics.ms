@@ -4,8 +4,8 @@ fileIn "Utils.ms"
 
 fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
-	try 
-	(
+	--try 
+	--(
 		if cameras.count == 0 then
 		(
 			format "No cameras in the scene \n"
@@ -21,7 +21,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				
 		for EachCamera in cameras do
 		(
-			if(classof EachCamera == targetcamera) then 
+			if(classof EachCamera == targetcamera or classof EachCamera == freecamera) then 
 			(
 				
 				fov = EachCamera.Fov as string
@@ -82,7 +82,14 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 
 									l_NewCameraKeyTagNode.AddAttributeAsString "time" strTime
 									l_NewCameraKeyTagNode.AddAttributeCoordinate "pos" EachCamera.Pos
-									l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
+									
+									if (classof EachCamera == targetcamera) then
+										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
+									
+									if (classof EachCamera == freecamera) then
+										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" EachCamera.transform[4]
+									
+								
 									l_NewCameraKeyTagNode.AddAttributeAsString "fov" fov
 									l_NewCameraKeyTagNode.AddAttributeAsString "near_plane" nearclip
 									l_NewCameraKeyTagNode.AddAttributeAsString "far_plane" farclip
@@ -107,11 +114,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				)			
 			)
 		)
-	)
-	catch
-	(
-		format "Error generating camera XML \n"
-	)
+	--)
+	--catch
+	--(
+	--	format "Error generating camera XML \n"
+	--)
 	
 	format "Camera XML created successfully: % \n" filenameXML
 	return xDoc.PrettySaveXML()

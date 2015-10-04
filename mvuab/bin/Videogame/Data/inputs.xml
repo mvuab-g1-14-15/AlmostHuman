@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
-
 	<action name="LoadSala1">
 	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
    	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_1"/>
@@ -21,8 +20,28 @@
 	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
    	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_5"/>
     </action>
+    <action name="PlayVideo">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_P"/>
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+    </action>
 
-    <action name="LeanOutLeft">
+    <action name="Alarm">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_Y"/>
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+    </action>
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_3"/>
+    </action>
+	<action name="LoadSala3">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_4"/>
+    </action>
+	<action name="LoadSala4">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_5"/>
+    </action>
+
+	<action name="LeanOutLeft">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
 	
@@ -43,9 +62,20 @@
     </action>
 	
 	<action name="PressX">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_Y"/>
+    </action>
+	
+	<action name="OpenDoorRoom3">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_X"/>
     </action>
 	
+	<action name="PressE">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_R"/>
+    </action>
+	
+	<action name="DetonarC4">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_R"/>
+    </action>
 	<action name="LeanOutLeftUp">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_Q"/>
     </action>

@@ -106,6 +106,8 @@ void CScene::ActivateRoom( const std::string& aRoomName )
 		if( !lRoom->IsLoaded() )
 			lRoom->Load();
 
+         LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
+
 		lRoom->Activate();
 		mCurrentRoom = lRoom;
 	}

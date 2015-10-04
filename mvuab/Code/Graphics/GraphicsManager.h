@@ -119,7 +119,10 @@ private: // Members
   LPDIRECT3D9             mDirectXObject;                  // direct3d interface
   LPDIRECT3DDEVICE9       mDirectXDevice;                  // direct3d device
   uint32                  mWidth;                          // width of the client windows
-  uint32                  mHeight;                         // height of the client windows
+  uint32                  mHeight;                         // height of the client windowsç
+  Math::Mat44f            mView;                           // View matrix
+  Math::Mat44f            mProjection;                     // Projection matrix
+  Math::Mat44f            mWorld;                          // World matrix
   Math::CColor            m_BackbufferColor_debug;         // Clear the backbuffer with this color in debug mode
   Math::CColor            m_BackbufferColor_release;       // Clear the backbuffer with this color in release mode
   LPDIRECT3DSURFACE9      m_pBackBuffer;

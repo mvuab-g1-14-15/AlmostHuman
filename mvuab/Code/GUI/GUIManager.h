@@ -113,6 +113,7 @@ public:
 
   void SetLiteralInStaticText( const std::string& inStaticText, const std::string& lit );
   void ShowStaticText( const std::string& inStaticText );
+  void ShowStaticText( const std::string& inStaticText, bool inActive);
 
   void SetEditableTextBox( const std::string& inEditableTextName, const std::string& text );
   std::string GetEditableTextBox( const std::string& inEditableTextName );

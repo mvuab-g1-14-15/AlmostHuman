@@ -1,0 +1,13 @@
+<emitter active="true" name="spark" loop="true" time_to_live="50">
+	<particles max_alive_particles="350" time_to_live="20 30">
+		<technique name="RayTechnique" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/spark_.png" flip_uv_horizontal="false" flip_uv_vertical="false"/>
+		<interpolators>
+			<interpolator alpha="1.0" color="1 1 1" size="20"/>
+			<interpolator alpha="1.0" color="1 1 1" size="20"/>
+			<interpolator alpha="1.0" color="1 1 1" size="10"/>
+		</interpolators>
+		<motion linear_speed="0.4 1" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="0 0" gravity="-1"/>
+	</particles>
+	<emissions random_initial_angle="false" emission_time="0.1" particles_per_emission="1 5" cubic_size="0 0 0"/>
+</emitter>

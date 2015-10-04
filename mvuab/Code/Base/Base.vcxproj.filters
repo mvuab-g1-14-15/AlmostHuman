@@ -91,6 +91,16 @@
     <ClCompile Include="Utils\RWLock.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Math\BandMatrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\SplineInterpolator.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    </ClCompile>
+    <ClCompile Include="Utils\RWLock.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -217,6 +227,18 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utils\RWLock.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\BandMatrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\SplineInterpolator.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\AVIReader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    </ClInclude>
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

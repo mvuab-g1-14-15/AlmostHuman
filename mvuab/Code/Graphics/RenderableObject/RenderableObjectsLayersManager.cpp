@@ -185,6 +185,7 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& a
 		l_InstanceMesh->SetActor( l_MeshActor );
 		PhysXMInstance->AddPhysicActor( l_MeshActor );
 	}
+#endif
 
 	return l_InstanceMesh;
 }
@@ -199,6 +200,8 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
 		if( l_InstanceMesh )
 		{
 			l_InstanceMesh->SetRoomName( l_RoomName );
+#ifdef _USING_MESH_FOR_PHYSX
+#endif
 
 			CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
 

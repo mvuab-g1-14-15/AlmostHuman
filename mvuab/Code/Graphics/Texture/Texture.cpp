@@ -5,6 +5,9 @@
 #include "Logger\Logger.h"
 #include "EngineManagers.h"
 
+#include <DxErr.h>
+#pragma comment(lib, "DxErr.lib")
+
 static const D3DPOOL    sTexturePools[CTexture::eTexturePoolCount]    = { D3DPOOL_DEFAULT, D3DPOOL_SYSTEMMEM };
 static const DWORD      sTextureUsage[CTexture::eTextureUsageCount]   = { D3DUSAGE_DYNAMIC, D3DUSAGE_RENDERTARGET  };
 static const D3DFORMAT  sTextureFormat[CTexture::eTextureFormatCount] = { D3DFMT_A8R8G8B8, D3DFMT_R8G8B8, D3DFMT_X8R8G8B8, D3DFMT_R32F };
@@ -41,6 +44,9 @@ bool CTexture::LoadFile()
 
     m_Width = lTextureInfo.Width;
     m_Height = lTextureInfo.Height;
+
+    if( m_Width > 4096 || m_Height > 4096 )
+      return false;
 
     return true;
 }
@@ -80,27 +86,29 @@ bool CTexture::Create( const std::string& Name, size_t Width, size_t Height,
     D3DPOOL l_Pool = sTexturePools[ PoolType ];
     DWORD l_UsageType = sTextureUsage[UsageType];
     D3DFORMAT l_Format = sTextureFormat[FormatType];
+
     m_CreateDepthStencilSurface = (UsageType == eUsageRenderTarget) ? CreateDepthStencilBuffer : false;
 
     // Obtain the device from the graphics manager
     const LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-    HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool,
-                                          &m_Texture, NULL );
-    ASSERT( hr == D3D_OK && m_Texture, "Error creating the texture  %s", Name.c_str() );
+    HRESULT hr = l_Device->CreateTexture( Width, Height, MipMaps, l_UsageType, l_Format, l_Pool, &m_Texture, NULL );
+    ASSERT( hr == D3D_OK && m_Texture, "Error creating the texture  %s\n%s: %s", Name.c_str(), DXGetErrorString(hr), DXGetErrorDescription(hr) );
 
     if ( m_CreateDepthStencilSurface )
     {
-        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE,
-                                             &m_DepthStencilRenderTargetTexture, NULL );
+        l_Device->CreateDepthStencilSurface( Width, Height, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0, TRUE, &m_DepthStencilRenderTargetTexture, NULL );
         ASSERT( m_DepthStencilRenderTargetTexture, "Error creating the depth stencil surface" );
     }
 
     m_Width  = Width;
     m_Height = Height;
+
     mMips    = MipMaps;
     mUsage   = UsageType;
+
     mPoolType = PoolType;
     mFormat = FormatType;
+
     return ( hr == D3D_OK );
 }
 
@@ -170,8 +178,7 @@ void CTexture::CaptureFrameBuffer( size_t IdStage )
     }
     else
     {
-        LOG_ERROR_APPLICATION(
-            "Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
+        LOG_ERROR_APPLICATION("Texture::CaptureFrameBuffer: Error capturing the frame buffer" );
     }
 }
 
@@ -194,29 +201,27 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString( const std::string& Form
         return eRGBX8;
     }
     else
-        LOG_ERROR_APPLICATION( "Format Type '%s' not recognized",
-                               FormatType.c_str() );
+    {
+        LOG_ERROR_APPLICATION( "Format Type '%s' not recognized", FormatType.c_str() );
+    }
 
     return eRGBA8;
 }
 
 bool CTexture::Save( const std::string& FileName )
 {
-    bool lOk = true;
     ASSERT( m_Texture, "Null d3dx texture to save" );
-    if( m_Texture )
-    {
-        HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture,
-                                            0 );
 
-        if( hr != D3D_OK )
-        {
-            lOk = false;
-            LOG_ERROR_APPLICATION("Error while saving the texture");
-        }
+    //if( m_Texture ) return false;
+    HRESULT hr = D3DXSaveTextureToFile( ( "./Data/textures/debug/" + FileName + ".png" ).c_str(), D3DXIFF_PNG, m_Texture, 0 );
+    
+    if( hr != D3D_OK )
+    {
+        LOG_ERROR_APPLICATION("Error while saving the texture");
+        return false;
     }
 
-    return lOk;
+    return true;
 }
 
 bool CTexture::Clone( CTexture** aTexture )
@@ -226,6 +231,42 @@ bool CTexture::Clone( CTexture** aTexture )
         *aTexture = new CTexture();
     }
 
-    return (*aTexture)->Create( GetName(), m_Width, m_Height, mMips, mUsage, mPoolType, mFormat,
-                                m_CreateDepthStencilSurface );
+    return (*aTexture)->Create( GetName(), m_Width, m_Height, mMips, mUsage, mPoolType, mFormat, m_CreateDepthStencilSurface );
+}
+
+unsigned int CTexture::GetColorSize()
+{
+    if(mFormat == eRGB8) return 3;
+    else if(mFormat == eRGBA8) return 4;
+    else if(mFormat == eRGBX8) return 4;
+
+    return 0; // no color format
+}
+
+bool CTexture::SetBitmap(char *l_Bitmap, int l_Width, int l_Height, int l_NumBytes)
+{
+    D3DLOCKED_RECT l_LockRect = { 0 };
+    if(l_Bitmap == NULL || m_Texture == NULL || GetColorSize() == 0) return false;
+
+    if(FAILED(m_Texture->LockRect(0, &l_LockRect, NULL, 0)))
+    {
+        m_Texture->UnlockRect(0);
+        return false;
+    }
+
+    int l_RowWidthDst = l_LockRect.Pitch;
+    int l_RowWidthSrc = l_Width * l_NumBytes;
+
+    unsigned char *l_pDst = (unsigned char *) l_LockRect.pBits;
+    int l_Bits2Cpy = (l_RowWidthSrc < l_RowWidthDst) ? l_RowWidthSrc : l_RowWidthDst;
+
+    for(int i = 0; i < l_Height; i++)
+    {
+        memcpy(l_pDst, l_Bitmap, l_Bits2Cpy);
+        l_Bitmap += l_RowWidthSrc;
+        l_pDst += l_RowWidthDst;
+    }
+
+    m_Texture->UnlockRect(0);
+    return true;
 }

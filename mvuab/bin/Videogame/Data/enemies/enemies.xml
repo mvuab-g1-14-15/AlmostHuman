@@ -21,27 +21,69 @@
   <route id="4">
     <point value="63.044 -17.5027 -86.1066" />
   </route>
+   <route id="5">
+    <point value="53.8107 -18.2971 -30.6728 " />
+  </route>
+   <route id="6">
+    <point value="62.2851 -18.2971 -36.8825" />
+  </route>
+   <route id="7">
+    <point value="71.2594 -18.2971 -39.8732" />
+  </route>
+   <route id="8">
+    <point value="81.2594 21.2971 60.8732" />
+  </route>
+  <route id="drone_path1">
+    <point value="45.0822 -11.4762 57.0066" />
+    <point value="37.1764 -11.4762 51.5591" />
+    <point value="44.9289 -11.4762 46.6786" />
+    <point value="36.8802 -11.4762 40.9817" />
+    <point value="44.9466 -10.1012 37.1238" />
+    <point value="43.3187 -10.1637 31.5817" />
+    <point value="43.3187 -10.1637 27.0644" />
+    <point value="43.3187 -10.1637 20.2843" />
+    <point value="35.1726 -10.1637 20.2843" />
+    <point value="38.722 -10.1637 28.6949" />
+  </route>
+  <route id="drone_path2">
+    <point value="22.2774 -11.4762 16.8658" />
+    <point value="30.2481 -11.4762 20.6169" />
+    <point value="22.4739 -10.1637 23.511" />
+    <point value="30.3398 -11.4762 29.683" />
+    <point value="25.6397 -11.4762 32.1519" />
+    <point value="21.8303 -10.1012 36.168" />
+    <point value="19.8143 -10.1637 43.648" />
+    <point value="22.488 -10.1637 54.9455" />
+    <point value="28.4797 -10.1637 54.9455" />
+    <point value="28.3052 -10.1637 46.5348" />
+    <point value="29.2105 -10.1637 40.3186" />
+  </route>
   
 	<core_enemy type="easy" life="50" damage="1.0" time_to_respawn="2.0" time_to_shoot="2" shoot_accuracy="0.35" state_machine_name="easyMachine" state_machine_file="Data/enemies/AI-easy.xml"/>
 	<core_enemy type="patroll" life="100" damage="1.0" time_to_respawn="1.0" time_to_shoot="1" shoot_accuracy="0.35" state_machine_name="patrolMachine" state_machine_file="Data/enemies/AI-patroll.xml"/>
 	<core_enemy type="drone" life="40" damage="0.5" time_to_respawn="1.0" time_to_shoot="0.5" shoot_accuracy="0.35" state_machine_name="droneMachine" state_machine_file="Data/enemies/AI-drone.xml"/>
 	<core_enemy type="boss" life="250" damage="10" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<enemy name="Boss" room="room2" type="patroll" route="1" pos="83.37 21.40 21.61" yaw="0.0" scale="0.2 0.2 0.2" mesh="boss" get_position_script="get_enemy_position" 
-	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
+	<!--<enemy name="Boss" room="room3" type="patroll" route="1" pos="83.37 21.40 21.61" yaw="0.0" scale="0.2 0.2 0.2" mesh="boss" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
 	
 	
-	<enemy name="Enemy1" room="room2" type="patroll" route="1" pos="70.7825 -16.4127 -44.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy1" room="room2" type="patroll" route="1" route_alarm="5" state="inicial" pos="70.7825 -16.4127 -44.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy2" room="room2" type="patroll" route="2" pos="53.7057 -16.4127 -41.8169" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<!--<enemy name="Enemy2" room="room2" type="patroll" route="2" route_alarm="5" state="inicial" pos="53.7057 -16.4127 -41.8169" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy3" room="room2" type="patroll" route="3" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy3" room="room2" type="patroll" route="3" route_alarm="5" state="inicial" pos="71.263 -16.4127 -75.3886" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	 <enemy name="Enemy4" room="room2" type="easy" route="4" pos="63.044 -16.5334 -86.1066" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	 <enemy name="Enemy4" room="room2" type="easy" route="4" route_alarm="5" state="inicial" pos="63.044 -16.5334 -86.1066" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	
-	<!--enemy name="Drone1" room="room2" type="drone" route="4" pos="72.403 -9.4127 -36.3886" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
-	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/-->
+	<enemy name="Enemy5" room="room3" type="easy" route="1" route_alarm="8" state="idle" pos="80.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
+	<enemy name="Enemy6" room="room3" type="easy" route="2" route_alarm="8" state="idle" pos="86.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
+	<enemy name="Enemy7" room="room3" type="easy" route="3" route_alarm="8" state="idle" pos="86.7825 21.4127 41.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
+	<!--<enemy name="Drone1" room="room2" type="drone" route="4" route_alarm="1" pos="72.403 -9.4127 -36.3886" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
 	<!--<enemy name="Drone2" type="drone" route="4" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="drone"/>-->
 	
 	<extra_enemy name="room2">

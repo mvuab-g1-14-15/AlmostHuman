@@ -93,6 +93,8 @@
 #define IdManager               CEngineManagers::GetSingletonPtr()->GetIdManager()
 #define ParticleSystemInstance  CEngineManagers::GetSingletonPtr()->GetParticleSystemManager()
 
+#define _USING_MESH_FOR_PHYSX
+
 #ifdef _DEBUG
 
 #define ASSERT(expr, msg, ... ) \

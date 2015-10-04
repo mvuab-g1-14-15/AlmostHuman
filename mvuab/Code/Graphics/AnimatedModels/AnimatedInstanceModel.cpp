@@ -39,6 +39,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
   m_pIB( 0 ),
   m_pVB( 0 ),
   m_ChangeAnimation( 0 ),
+  m_Velocity( 1.0 ),
   CRenderableObject()
 {
   SetName( Name );
@@ -59,6 +60,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const CXMLTreeNode& atts )
   , m_NumFaces( 0 )
   , m_pIB( 0 )
   , m_pVB( 0 )
+  , m_Velocity( 1.0 )
   , m_ChangeAnimation( )
 {
   CRenderableObjectTechniqueManager* lROT = ROTMInstance;
@@ -287,7 +289,7 @@ void CAnimatedInstanceModel::Destroy()
 
 void CAnimatedInstanceModel::Update()
 {
-  m_CalModel->update( deltaTimeMacro );
+  m_CalModel->update( deltaTimeMacro * m_Velocity);
 }
 
 void CAnimatedInstanceModel::ChangeAnimation( const std::string& AnimationName, float32 DelayIn, float32 DelayOut )

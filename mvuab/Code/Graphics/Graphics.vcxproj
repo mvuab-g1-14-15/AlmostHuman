@@ -22,7 +22,8 @@
     <ClCompile Include="AnimatedModels\AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModels\AnimatedModelsManager.cpp" />
-    <ClCompile Include="Billboard\Billboard.cpp" />
+    <ClCompile Include="Billboard\BillboardCore.cpp" />
+    <ClCompile Include="Billboard\BillboardInstance.cpp" />
     <ClCompile Include="Billboard\BillboardManager.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Cameras\CameraCinematical.cpp" />
@@ -46,12 +47,9 @@
     <ClCompile Include="Cinematics\CinematicsElement\ShowDialogElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\WaitTimeElement.cpp" />
     <ClCompile Include="DronBarrier\DronBarrier.cpp" />
-    <ClCompile Include="Effects\EffectFlags.cpp" />
-    <ClCompile Include="Effects\SharedEffect.cpp" />
     <ClCompile Include="GraphicsXMLTreeNode.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectManager.cpp" />
-    <ClCompile Include="Effects\EffectPool.cpp" />
     <ClCompile Include="Effects\EffectTechnique.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Gizmos\Gizmo.cpp" />
@@ -129,12 +127,14 @@
     <ClCompile Include="Texture\GUITexture.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="Texture\TextureManager.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedModels\AnimatedCoreModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedInstanceModel.h" />
     <ClInclude Include="AnimatedModels\AnimatedModelsManager.h" />
-    <ClInclude Include="Billboard\Billboard.h" />
+    <ClInclude Include="Billboard\BillboardCore.h" />
+    <ClInclude Include="Billboard\BillboardInstance.h" />
     <ClInclude Include="Billboard\BillboardManager.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Cameras\CameraCinematical.h" />
@@ -160,12 +160,9 @@
     <ClInclude Include="DronBarrier\DronBarrier.h" />
     <ClInclude Include="dx9.h" />
     <ClInclude Include="Effects\Effect.h" />
-    <ClInclude Include="Effects\EffectFlags.h" />
     <ClInclude Include="Effects\EffectManager.h" />
     <ClInclude Include="Effects\Defines.h" />
-    <ClInclude Include="Effects\EffectPool.h" />
     <ClInclude Include="Effects\EffectTechnique.h" />
-    <ClInclude Include="Effects\SharedEffect.h" />
     <ClInclude Include="Fonts\FontManager.h" />
     <ClInclude Include="Gizmos\Gizmo.h" />
     <ClInclude Include="Gizmos\GizmoElement.h" />
@@ -245,6 +242,7 @@
     <ClInclude Include="Texture\GUITexture.h" />
     <ClInclude Include="Texture\Texture.h" />
     <ClInclude Include="Texture\TextureManager.h" />
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{399F3B78-06DC-41CE-A9C6-612A5AAC1C97}</ProjectGuid>

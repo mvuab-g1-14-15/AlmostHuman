@@ -11,20 +11,20 @@
 	<font_manager file_config="Data/fonts/fonts.xml"/>
 	<renderable_technique_manager file_config="../CommonData/effects/effects_pools.xml"/>
 	<static_mesh_manager file_config=""/>
-	<animated_manager file_config="Data/animated_models.xml"/>
+	<animated_manager file_config="Data/core/animated_models.xml"/>
 	<scene file_config="Data/scene.xml"/>
 	<scene_render_command_manager file_config="../CommonData/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
 	<countdowntimer_manager file_config="no_name"/>
 	<script_manager file_config="Data/scripts/"/>
-	<lens_flares_manager file_config="Data/core/lens_flare.xml"/>
+	<lens_flares_manager file_config="../CommonData/LF/lens_flare.xml"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
 	<gui_manager file_config="../CommonData/Gui/GUI.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
-	<billboard_manager file_config=""/>
+	<billboard_manager file_config="../CommonData/Billboards/billboards.xml"/>
 	<particle_manager file_config=""/>
-	<particle_system_manager file_config="Data/core/particle_system.xml"/>
+	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<!--
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>

@@ -24,7 +24,7 @@
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<billboard_manager file_config=""/>
 	<particle_manager file_config=""/>
-	<particle_system_manager file_config="Data/core/particle_system.xml"/>
+	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
 	<!--
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>

@@ -1,0 +1,43 @@
+<!--
+<emitter 
+	name="spiral2"
+	loop="false" 
+	immortal="true" 
+	active="true" 
+	alive_particles="0 40" 
+	speed="0 0" 
+	emission_time="0" 
+	time_to_live="20 20" 
+	particle_size_range="0.5 0.5" 
+	keep_size="true"
+	particles_per_emission="1 1" 
+    min_color="0.0 0.0.0 0.0" 
+	max_color="1.0 1.5 0" 
+	min_initial_direction="0.0 0.0 0.0" 
+	max_initial_direction="0.0 0.0 0.0" 
+	gravity="-0" 
+	radial_speed="0 5" 
+	ondulative_speed="0.0 1.0" 
+	min_ondulative_direction="0.2" 
+	max_ondulative_direction="0.4" 
+	technique="ParticleTechniqueV2"
+	alpha="0.3"
+	radius="0.4"
+	min_radius="0.3">
+	<texture name="Data/textures/particles/negras/raro2.png" flip_uv_horizontal="true" flip_uv_vertical="false"/>
+</emitter>
+-->
+
+<emitter active="true" name="spiral2" loop="false" time_to_live="5.0">
+	<particles max_alive_particles="300" time_to_live="20 20">
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/negras/raro2.png" flip_uv_horizontal="true" flip_uv_vertical="false"/>
+		<interpolators>
+			<interpolator alpha="0.3" color="0.3 0.3 0.3" size="0.5"/>
+			<interpolator alpha="0.3" color="0.5 0.5 0.5" size="0.5"/>
+			<interpolator alpha="0.3" color="0.6 0.6 0.6" size="0.5"/>
+		</interpolators>
+		<motion linear_speed="0 0" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="0 5" gravity="-0"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0" particles_per_emission="1 1" cubic_size="0.1 0.0 0.1"/>
+</emitter>

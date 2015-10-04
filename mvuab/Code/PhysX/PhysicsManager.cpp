@@ -17,7 +17,7 @@
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\PhysicUserAllocator.h"
 #include "Utils\PhysicUserData.h"
-#include "Particles\SphereEmitter.h"
+//#include "Particles\SphereEmitter.h"
 #include "Particles\ParticleManager.h"
 ////--------------------------------
 
@@ -171,6 +171,10 @@ void CPhysicsManager::Init()
     //#endif
 #endif
     //return m_bIsOk;
+
+#ifndef _USING_MESH_FOR_PHYSX
+	m_pCookingMesh->CreateMeshFromASE("Data/PhysXMeshes.ase", "PhysXMeshes");
+#endif
 }
 
 //----------------------------------------------------------------------------

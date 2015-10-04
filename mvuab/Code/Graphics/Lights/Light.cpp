@@ -63,7 +63,9 @@ CLight::CLight( const CXMLTreeNode& node )
         {
             m_RenderShadows = lNode.GetAttribute<bool>( "render_shadows", false );
 
-            const std::string& l_ShadowMaskTextureFile = node.GetAttribute<std::string>( "shadow_texture_mask", "" );
+            const std::string& l_ShadowMaskTextureFile = lNode.GetAttribute<std::string>( "shadow_texture_mask", "" );
+
+            m_RoomName = lNode.GetAttribute<std::string>( "room", "" );
 
             if ( l_ShadowMaskTextureFile != "" )
             {

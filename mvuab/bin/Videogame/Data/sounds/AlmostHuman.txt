@@ -29,7 +29,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	482623365	loop-gen	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		339473
 	507701302	gui_over	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		1237
 	707043063	Spark	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Spark		170387
-	709423413	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\alarm2_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		61832
+	709423413	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\alarm2_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		20042
 	869195930	youwin	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		11008
 	937521952	Init	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		29300
 	1048744211	help	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		403359
