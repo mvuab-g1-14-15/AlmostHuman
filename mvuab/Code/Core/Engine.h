@@ -22,6 +22,8 @@ class CEngine: public CSingleton<CEngine>
         void Init( CEngineConfig* aEngineConfig );
         void SetRunnigProcess( CProcess* aProcess );
 
+        void Execute();
+
         void ProcessInputs();
         void Update();
         void Render();

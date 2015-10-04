@@ -33,19 +33,27 @@ CEngine::~CEngine()
   CHECKED_DELETE( m_pTimer );
 }
 
+void CEngine::Execute()
+{
+    ProcessInputs();
+    Update();
+    Render();
+}
+
 void CEngine::Update()
 {
+  m_pTimer->Update();
   m_pEngineManagers->Update();
   m_pProcess->ProcessReloads();
   m_pProcess->ProcessKey();
   m_pProcess->Update();
-  m_pTimer->Update();
 }
 
 void CEngine::Render()
 {
   //if ( m_Play )
-  SRCMInstance->Execute();
+    if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost()) 
+        SRCMInstance->Execute();
   /*  else
       {
       CRenderGUISceneRendererCommand* l_GUICommand = SRCMInstance->GetCommandGUI();
