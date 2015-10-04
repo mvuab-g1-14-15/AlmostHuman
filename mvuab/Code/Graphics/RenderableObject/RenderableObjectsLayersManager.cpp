@@ -70,8 +70,10 @@ bool CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
     CXMLTreeNode l_Node, l_Root;
     if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
 	{
+		uint32 l_NumChilds = l_Node.GetNumChildren();
 		CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
-		for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+		m_ResourcesVector.reserve( l_NumChilds );
+		for ( uint32 i = 0; i < l_NumChilds; ++i )
 		{
 			const CXMLTreeNode& lNode = l_Node( i );
 			const std::string& lTagName = lNode.GetName();
