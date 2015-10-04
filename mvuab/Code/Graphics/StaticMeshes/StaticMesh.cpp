@@ -114,8 +114,6 @@ bool CStaticMesh::Load( const std::string& FileName )
         else if (l_VertexType == TRNM_VERTEX::GetVertexType())
         { l_TypeSize = sizeof(TRNM_VERTEX); }
 
-        
-
         unsigned int l_VrtexCount = 0;
         std::fread( &l_VrtexCount, sizeof( unsigned int ), 1, l_pFile );
 

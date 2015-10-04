@@ -98,7 +98,6 @@ void CRoom::RenderLayer( const std::string& aLayerName )
 	if( m_pLayers ) m_pLayers->Render(aLayerName);
 }
 
-
 static const std::string sAsePath = "Data/ase/";
 void CRoom::Load()
 {
