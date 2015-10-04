@@ -65,19 +65,13 @@ function CEnemyManagerLUA:Update()
 	end
 	for i in pairs (self.Enemy) do
 		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
-			self.ActualEnemy = self.Enemy[i]
-			if self.ActualEnemy:GetActualState() == "idle" and self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then
-				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
-				self.ActualEnemy:ChangeState("activation")
-			elseif self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
-				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
-			end
+			self.ActualEnemy = self.Enemy[i]			
 			if self.ActualEnemy:GetLife() > 0 then
 				self.ActualEnemy:Update()
 				
 			else
 				if self.ActualEnemy:GetVelocity() == 5.0 then
-					self.ActualEnemy:SetVelocity(1.0)
+					self.ActualEnemy:SetVelocity(2.0)
 				end
 				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
 					AnimatedModel = self.ActualEnemy:GetAnimationModel()
@@ -97,7 +91,20 @@ function CEnemyManagerLUA:Update()
 		end
 	end
 	
+	for i in pairs (self.Enemy) do
+		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
+			self.ActualEnemy = self.Enemy[i]
+			if self.ActualEnemy:GetActualState() == "idle" and self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+				self.ActualEnemy:ChangeState("activation")
+			elseif self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+			end	
+		end
+	end
+	
 	self.RoomAlarm = false
+	
 	for k in pairs (self.Shoots) do
 		if self.Shoots[k]:GetImpacted() then
 			self.Shoots[k]:Destroy()

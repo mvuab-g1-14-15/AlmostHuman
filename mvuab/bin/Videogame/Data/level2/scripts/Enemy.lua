@@ -250,7 +250,8 @@ function CEnemyLUA:MoveToPos( aPos )
 	lPos = CharacterController:GetPosition()
     lAStar = g_EnemyManager:GetAStar()
 
-    if ( not self.PathCalculated ) then   
+    if ( not self.PathCalculated ) then  
+		engine:Trace("He entrado a calcular la posicion")
         self.Path = lAStar:GetPath( lPos, aPos )
         self.PathCalculated = true
     end
@@ -262,15 +263,16 @@ function CEnemyLUA:MoveToPos( aPos )
     lDist = lTargetPos:Distance( lWaypointPos )
 	
 	count = self.Path:size()
-	
+	engine:Trace("El tamaño de la path es: "..lDist)
     if ( (count - self.ActualPathPoint) > 2 ) then
-        if ( lDist < 0.6 ) then
+        if ( lDist < 0.8 ) then
             self.ActualPathPoint = self.ActualPathPoint + 1
 		end
         lTargetPos = self.Path:GetResource(self.ActualPathPoint)
     end
     lTargetPos.y = 0
 	
+	engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
 	self:MoveToWaypoint(lTargetPos)
     
     if ( self.Path:GetResource(count - 1):Distance( aPos ) > 5.0 ) then
@@ -367,10 +369,10 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
         CharacterController:Move( Vect3f( 0.0 ), dt )
 		if YawDif > 0 then
 			YawDif = 1
-			self.RenderableObject:ChangeAnimation("turn_left", 0.5, 0.5)
+			self.RenderableObject:ChangeAnimation("turn_left", 0.2, 1)
 		else
 			YawDif = -1
-			self.RenderableObject:ChangeAnimation("turn_right", 0.5, 0.5)
+			self.RenderableObject:ChangeAnimation("turn_right", 0.2, 1)
 		end
         Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
 
