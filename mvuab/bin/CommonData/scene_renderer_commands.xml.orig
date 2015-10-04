@@ -128,7 +128,10 @@
  	</render_weapon_target>
     
     <!--<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_ColorGrading.xml"/>-->
+<<<<<<< HEAD
+=======
     <!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_LightScattering.xml"/-->
+>>>>>>> origin/master
 	
 	<enable_z_test/>
 	<enable_alpha_blend/>
@@ -146,7 +149,7 @@
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
-	<render_gui render="true"/>
+	<!--<render_gui render="true"/>-->
 	<disable_alpha_blend/>
 	
 	<render_developer_info/>

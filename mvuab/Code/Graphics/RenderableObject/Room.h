@@ -33,6 +33,8 @@ class CRoom : public CName
 		bool IsLoaded() const { return mIsLoaded; }
 		CRenderableObjectsManager* GetLayer( const std::string& aLayer ) const;
 
+        GET_SET(std::string, BasePath);
+
     private:
         std::string m_RenderableObjectsPath;
         std::string m_StaticMeshesPath;

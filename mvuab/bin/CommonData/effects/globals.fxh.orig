@@ -16,6 +16,18 @@
 //
 // Shared Parameters 
 //
+<<<<<<< HEAD
+shared float4x4 g_ViewMatrix                                               : ViewMatrix;
+shared float4x4 g_ViewInverseMatrix                                        : InverseViewMatrix;
+shared float4x4 g_ProjectionInverseMatrix                                  : InverseProjectionMatrix;
+shared float4x4 g_ProjectionMatrix                                         : ProjectionMatrix;
+shared float4x4 g_ViewProjMatrix                                           : VPMatrix;
+shared float3   g_CameraPosition                                           : CameraPosition;
+shared float3   g_AmbientLight 											   : AmbientLight;
+shared float    g_DeltaTime 											   : DeltaTime;
+shared int      g_FBWidth    											   : FBWidth;
+shared int      g_FBHeight       										   : FBHeight;
+=======
 
 float4x4 g_WorldViewProj                                            : WVPMatrix;
 float4x4 g_ViewMatrix                                               : ViewMatrix;
@@ -31,7 +43,16 @@ float3   g_AmbientLight 											: AmbientLight;
 float    g_DeltaTime 											    : DeltaTime;
 int      g_FBWidth    											    : FBWidth;
 int      g_FBHeight       										    : FBHeight;
+>>>>>>> origin/master
 
+
+// 
+// World dependant matrices
+//
+float4x4 g_WorldViewProj                                            : WVPMatrix;
+float4x4 g_WorldMatrix                                              : WorldMatrix;
+float4x4 g_WorldInverseMatrix                                       : InverseWorldMatrix;
+float4x4 g_WorldViewMatrix                                          : WVMatrix;
 
 //
 // Debug semantics
@@ -246,6 +267,29 @@ float random( float2 p ) // Version 2
    float2 r = float2( 23.14069263277926, 2.665144142690225 );
  //return frac( cos( mod( 12345678., 256. * dot(p,r) ) ) ); // ver1
    return frac(cos(dot(p,r)) * 123456.); // ver2
+}
+
+float3 GetRadiosityNormalMapBySamplers(float3 PixelNn, float3 FaceNormal, float3 FaceTangent, float3 FaceBinormal, float2 UV, sampler SamplerX, sampler SamplerY, sampler SamplerZ)
+{
+	float3x3 l_TangentSpaceMatrix;
+	l_TangentSpaceMatrix[0] = normalize(FaceTangent);
+	l_TangentSpaceMatrix[1] = normalize(FaceNormal);
+	l_TangentSpaceMatrix[2] = normalize(FaceBinormal);
+	float3 l_LightmapX=(tex2D(SamplerX, UV).xyz);
+	float3 l_LightmapY=(tex2D(SamplerY, UV).xyz);
+	float3 l_LightmapZ=(tex2D(SamplerZ, UV).xyz);
+	float3 l_BumpBasisX=normalize(mul(float3(0.816496580927726, 0.5773502691896258, 0),l_TangentSpaceMatrix));
+	float3 l_BumpBasisY=normalize(mul(float3(-0.408248290463863, 0.5773502691896258,0.7071067811865475 ),l_TangentSpaceMatrix));
+	float3 l_BumpBasisZ=normalize(mul(float3(-0.408248290463863, 0.5773502691896258, -0.7071067811865475),l_TangentSpaceMatrix));
+	float3 dp;
+	dp.x=saturate( dot( PixelNn, l_BumpBasisX ) );
+	dp.y=saturate( dot( PixelNn, l_BumpBasisY ) );
+	dp.z=saturate( dot( PixelNn, l_BumpBasisZ ) );
+	dp*=dp;
+	float sum=dot(dp, float3(1.0, 1.0, 1.0));
+	float3 l_DiffuseLight=dp.x*l_LightmapX+dp.y*l_LightmapY+dp.z*l_LightmapZ;
+	l_DiffuseLight/=sum;
+	return l_DiffuseLight*2;
 }
 
 #endif // !defined( GLOBALS_FXH )

@@ -40,6 +40,7 @@ void CBillboardInstanceManager::Init()
           CHECKED_DELETE( lBillBoard );
           LOG_ERROR_APPLICATION( "Error creating the billboard %s check the configuration file!", lBillboardName.c_str() );
         }
+      }
     }
   }
 }

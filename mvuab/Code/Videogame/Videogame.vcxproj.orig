@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{423B8457-AFD2-4D21-8A18-252CED05E294}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Videogame</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)bin\Intermediate\$(ProjectName)$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)bin\Intermediate\$(ProjectName)$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)\bin\Intermediate\$(ProjectName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)\bin\Intermediate\$(ProjectName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\OpenAL\include;$(SolutionDir)\3rdParty\WWise\Include;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Sound;$(SolutionDir)\3rdParty\PhysX\Cooking\include;$(SolutionDir)\3rdParty\PhysX\Foundation\include;$(SolutionDir)\3rdParty\PhysX\NxCharacter\include;$(SolutionDir)\3rdParty\PhysX\Physics\include;$(SolutionDir)\3rdParty\PhysX\PhysXLoader\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Cooking\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Foundation\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\NxCharacter\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Physics\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OpenMPSupport>true</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Script_d.lib;Editors_d.lib;Gui_d.lib;base_d.lib;ai_d.lib;core_d.lib;AntTweakBar.lib;sound_d.lib;libxml2.lib;graphics_d.lib;d3dxof.lib;cal3d_d.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;input_d.lib;Lua_d.lib;LuaBind_d.lib;PhysX_d.lib;NxCharacter.lib;NxCooking.lib;PhysXLoader.lib;OpenAL32.lib;alut.lib;AkConvolutionReverbFX.lib;AkFlangerFX.lib;AstoundsoundExpanderFX.lib;AkTremoloFX.lib;AkMemoryMgr.lib;AuroHeadphoneFX.lib;IOSONOProximityMixer.lib;AkMotionGenerator.lib;AkSineSource.lib;AkSoundSeedWind.lib;AkStereoDelayFX.lib;AkGuitarDistortionFX.lib;AkRumble.lib;AuroPannerMixer.lib;AkSoundEngine.lib;AkSilenceSource.lib;AkPeakLimiterFX.lib;McDSPLimiterFX.lib;iZTrashBoxModelerFX.lib;AkSoundSeedImpactFX.lib;AkRoomVerbFX.lib;iZTrashDelayFX.lib;McDSPFutzBoxFX.lib;AkParametricEQFX.lib;AstoundsoundFolddownFX.lib;AkToneSource.lib;AkMatrixReverbFX.lib;AkCompressorFX.lib;AkAudioInputSource.lib;AkMusicEngine.lib;AkSoundSeedWoosh.lib;CrankcaseAudioREVModelPlayerFX.lib;iZTrashMultibandDistortionFX.lib;iZHybridReverbFX.lib;AkPitchShifterFX.lib;iZTrashDynamicsFX.lib;iZTrashDistortionFX.lib;AstoundsoundRTIFX.lib;AkDelayFX.lib;AkGainFX.lib;AkVorbisDecoder.lib;AkMeterFX.lib;AstoundsoundShared.lib;iZTrashFiltersFX.lib;AkSynthOne.lib;AkMP3Source.lib;AkStreamMgr.lib;AkHarmonizerFX.lib;AkTimeStretchFX.lib;AkExpanderFX.lib;XInput.lib;msacm32.lib;CommunicationCentral.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\AntTweakBar\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Lib\x86;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\lib\Win32;$(SolutionDir)\3rdParty\OpenAL\lib;$(SolutionDir)\3rdParty\WWise\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>call "$(SolutionDir)bin\CopyDlls.bat" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\OpenAL\include;$(SolutionDir)\3rdParty\WWise\Include;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Graphics;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Sound;$(SolutionDir)\3rdParty\PhysX\Cooking\include;$(SolutionDir)\3rdParty\PhysX\Foundation\include;$(SolutionDir)\3rdParty\PhysX\NxCharacter\include;$(SolutionDir)\3rdParty\PhysX\Physics\include;$(SolutionDir)\3rdParty\PhysX\PhysXLoader\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Cooking\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Foundation\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\NxCharacter\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Physics\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OpenMPSupport>true</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Script_d.lib;Editors_d.lib;Gui_d.lib;base_d.lib;ai_d.lib;core_d.lib;AntTweakBar.lib;sound_d.lib;libxml2.lib;graphics_d.lib;d3dxof.lib;cal3d_d.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;input_d.lib;Lua_d.lib;LuaBind_d.lib;PhysX_d.lib;NxCharacter.lib;NxCooking.lib;PhysXLoader.lib;OpenAL32.lib;alut.lib;AkConvolutionReverbFX.lib;AkFlangerFX.lib;AstoundsoundExpanderFX.lib;AkTremoloFX.lib;AkMemoryMgr.lib;AuroHeadphoneFX.lib;IOSONOProximityMixer.lib;AkMotionGenerator.lib;AkSineSource.lib;AkSoundSeedWind.lib;AkStereoDelayFX.lib;AkGuitarDistortionFX.lib;AkRumble.lib;AuroPannerMixer.lib;AkSoundEngine.lib;AkSilenceSource.lib;AkPeakLimiterFX.lib;McDSPLimiterFX.lib;iZTrashBoxModelerFX.lib;AkSoundSeedImpactFX.lib;AkRoomVerbFX.lib;iZTrashDelayFX.lib;McDSPFutzBoxFX.lib;AkParametricEQFX.lib;AstoundsoundFolddownFX.lib;AkToneSource.lib;AkMatrixReverbFX.lib;AkCompressorFX.lib;AkAudioInputSource.lib;AkMusicEngine.lib;AkSoundSeedWoosh.lib;CrankcaseAudioREVModelPlayerFX.lib;iZTrashMultibandDistortionFX.lib;iZHybridReverbFX.lib;AkPitchShifterFX.lib;iZTrashDynamicsFX.lib;iZTrashDistortionFX.lib;AstoundsoundRTIFX.lib;AkDelayFX.lib;AkGainFX.lib;AkVorbisDecoder.lib;AkMeterFX.lib;AstoundsoundShared.lib;iZTrashFiltersFX.lib;AkSynthOne.lib;AkMP3Source.lib;AkStreamMgr.lib;AkHarmonizerFX.lib;AkTimeStretchFX.lib;AkExpanderFX.lib;XInput.lib;msacm32.lib;CommunicationCentral.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\AntTweakBar\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Lib\x86;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\lib\Win32;$(SolutionDir)\3rdParty\OpenAL\lib;$(SolutionDir)\3rdParty\WWise\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>call "$(SolutionDir)bin\CopyDlls.bat" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;AK_OPTIMIZED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\OpenAL\include;$(SolutionDir)\3rdParty\WWise\Include;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Sound;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Cooking\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Foundation\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\NxCharacter\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Physics\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<<<<<<< HEAD
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Lib\x86;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\lib\Win32;$(SolutionDir)\3rdParty\OpenAL\lib;$(SolutionDir)\3rdParty\WWise\Lib\Release;$(SolutionDir)\3rdParty\AntTweakBar\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Script.lib;Gui.lib;script.lib;ai.lib;base.lib;core.lib;graphics.lib;Editors.lib;AntTweakBar.lib;sound.lib;input.lib;libxml2.lib;cal3d.lib;d3dxof.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;Lua.lib;LuaBind.lib;PhysX.lib;NxCharacter.lib;NxCooking.lib;PhysXLoader.lib;OpenAL32.lib;alut.lib;AkConvolutionReverbFX.lib;AkFlangerFX.lib;AstoundsoundExpanderFX.lib;AkTremoloFX.lib;AkMemoryMgr.lib;AuroHeadphoneFX.lib;IOSONOProximityMixer.lib;AkMotionGenerator.lib;AkSineSource.lib;AkSoundSeedWind.lib;AkStereoDelayFX.lib;AkGuitarDistortionFX.lib;AkRumble.lib;AuroPannerMixer.lib;AkSoundEngine.lib;AkSilenceSource.lib;AkPeakLimiterFX.lib;McDSPLimiterFX.lib;iZTrashBoxModelerFX.lib;AkSoundSeedImpactFX.lib;AkRoomVerbFX.lib;iZTrashDelayFX.lib;McDSPFutzBoxFX.lib;AkParametricEQFX.lib;AstoundsoundFolddownFX.lib;AkToneSource.lib;AkMatrixReverbFX.lib;AkCompressorFX.lib;AkAudioInputSource.lib;AkMusicEngine.lib;AkSoundSeedWoosh.lib;CrankcaseAudioREVModelPlayerFX.lib;iZTrashMultibandDistortionFX.lib;iZHybridReverbFX.lib;AkPitchShifterFX.lib;iZTrashDynamicsFX.lib;iZTrashDistortionFX.lib;AstoundsoundRTIFX.lib;AkDelayFX.lib;AkGainFX.lib;AkVorbisDecoder.lib;AkMeterFX.lib;AstoundsoundShared.lib;iZTrashFiltersFX.lib;AkSynthOne.lib;AkMP3Source.lib;AkStreamMgr.lib;AkHarmonizerFX.lib;AkTimeStretchFX.lib;AkExpanderFX.lib;XInput.lib;msacm32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)bin/CopyDlls.bat $(OutDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;AK_OPTIMIZED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\Boost;$(SolutionDir)\3rdParty\Lua\src;$(SolutionDir)\3rdParty\LuaBind;$(SolutionDir)\3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)\3rdParty\OpenAL\include;$(SolutionDir)\3rdParty\WWise\Include;$(SolutionDir)\Code\Base;$(SolutionDir)\Code\Videogame;$(SolutionDir)\Code\Graphics;$(SolutionDir)\Code\PhysX;$(SolutionDir)\Code\Input;$(SolutionDir)\Code\AI;$(SolutionDir)\Code\Core;$(SolutionDir)\Code\Script;$(SolutionDir)\Code\Gui;$(SolutionDir)\Code\Sound;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Cooking\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Foundation\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\NxCharacter\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\Physics\include;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\PhysXLoader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+>>>>>>> origin/master
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\bin\lib;$(SolutionDir)\3rdParty\libxml2-2.7.2.win32\lib;$(SolutionDir)\3rdParty\Microsoft DirectX SDK (June 2010)\Lib\x86;$(SolutionDir)\3rdParty\NVIDIA PhysX SDK\lib\Win32;$(SolutionDir)\3rdParty\OpenAL\lib;$(SolutionDir)\3rdParty\WWise\Lib\Release;$(SolutionDir)\3rdParty\AntTweakBar\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Script.lib;Gui.lib;script.lib;ai.lib;base.lib;core.lib;graphics.lib;Editors.lib;AntTweakBar.lib;sound.lib;input.lib;libxml2.lib;cal3d.lib;d3dxof.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;dinput8.lib;xinput.lib;Lua.lib;LuaBind.lib;PhysX.lib;NxCharacter.lib;NxCooking.lib;PhysXLoader.lib;OpenAL32.lib;alut.lib;AkConvolutionReverbFX.lib;AkFlangerFX.lib;AstoundsoundExpanderFX.lib;AkTremoloFX.lib;AkMemoryMgr.lib;AuroHeadphoneFX.lib;IOSONOProximityMixer.lib;AkMotionGenerator.lib;AkSineSource.lib;AkSoundSeedWind.lib;AkStereoDelayFX.lib;AkGuitarDistortionFX.lib;AkRumble.lib;AuroPannerMixer.lib;AkSoundEngine.lib;AkSilenceSource.lib;AkPeakLimiterFX.lib;McDSPLimiterFX.lib;iZTrashBoxModelerFX.lib;AkSoundSeedImpactFX.lib;AkRoomVerbFX.lib;iZTrashDelayFX.lib;McDSPFutzBoxFX.lib;AkParametricEQFX.lib;AstoundsoundFolddownFX.lib;AkToneSource.lib;AkMatrixReverbFX.lib;AkCompressorFX.lib;AkAudioInputSource.lib;AkMusicEngine.lib;AkSoundSeedWoosh.lib;CrankcaseAudioREVModelPlayerFX.lib;iZTrashMultibandDistortionFX.lib;iZHybridReverbFX.lib;AkPitchShifterFX.lib;iZTrashDynamicsFX.lib;iZTrashDistortionFX.lib;AstoundsoundRTIFX.lib;AkDelayFX.lib;AkGainFX.lib;AkVorbisDecoder.lib;AkMeterFX.lib;AstoundsoundShared.lib;iZTrashFiltersFX.lib;AkSynthOne.lib;AkMP3Source.lib;AkStreamMgr.lib;AkHarmonizerFX.lib;AkTimeStretchFX.lib;AkExpanderFX.lib;XInput.lib;msacm32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>call $(SolutionDir)bin/CopyDlls.bat $(OutDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="TestProcess.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TestProcess\AStarProcess.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TestProcess\PhysicProcess.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TestProcess\PhysicMaterial.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TestProcess\PlayerPhysicProcess.cpp" />
+    <ClCompile Include="TestProcess\PreProcess.cpp" />
+    <ClCompile Include="videogame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestProcess.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="TestProcess\AStarProcess.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="TestProcess\PhysicProcess.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="TestProcess\PhysicMaterial.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="TestProcess\PlayerPhysicProcess.h" />
+    <ClInclude Include="TestProcess\PreProcess.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

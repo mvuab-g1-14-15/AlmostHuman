@@ -21,8 +21,6 @@ public:
   void DestroyBillBoardGeometry();
 
   void Init();
-  void Reload();
-  void LoadFromXML();
   void Render();
   void Update();
 

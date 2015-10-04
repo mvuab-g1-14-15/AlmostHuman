@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lights>
+  <ambient_light color="0.2 0.2 0.2" />
+  <spot_light name="Spot001" pos="57.77 -15.77 -29.40" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="52.85 -17.93 -34.31" angle="43.0" fall_off="45.0" intensity="0.5" enabled="true" >
+		<lens_flare name="flare001"/>
+<<<<<<< HEAD
+		<shadow_map render_shadows="true" shadow_texture_mask="">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
+=======
+		<shadow_map render_shadows="true" shadow_texture_mask="" room="room2">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="false" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
+>>>>>>> origin/master
+		</shadow_map>
+  </spot_light>
+</lights>

@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
+<<<<<<< HEAD
+
+	<action name="LoadSala1">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_1"/>
+    </action>
+	<action name="LoadSala2">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_2"/>
+    </action>
+	<action name="LoadPasillo">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_3"/>
+    </action>
+	<action name="LoadSala3">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_4"/>
+    </action>
+	<action name="LoadSala4">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+   	  <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_5"/>
+    </action>
+
+    <action name="LeanOutLeft">
+=======
     <action name="PlayVideo">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_P"/>
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
@@ -11,6 +36,7 @@
     </action>
 	
 	<action name="LeanOutLeft">
+>>>>>>> origin/master
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
 	

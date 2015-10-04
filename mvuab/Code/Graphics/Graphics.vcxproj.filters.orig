@@ -312,9 +312,11 @@
     <ClCompile Include="DronBarrier\DronBarrier.cpp">
       <Filter>DronBarrier</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="StaticMeshes\Material.cpp">
       <Filter>StaticMeshes</Filter>
     </ClCompile>
+=======
     <ClCompile Include="Billboard\BillboardCore.cpp">
       <Filter>Billboard</Filter>
     </ClCompile>
@@ -322,13 +324,7 @@
       <Filter>Billboard</Filter>
     </ClCompile>
     <ClCompile Include="VideoPlayer.cpp" />
-    <ClCompile Include="Billboard\BillboardInstance.cpp">
-      <Filter>Billboard</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoPlayer.cpp" />
-    <ClCompile Include="Billboard\BillboardInstanceManager.cpp">
-      <Filter>Billboard</Filter>
-    </ClCompile>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -652,9 +648,11 @@
     <ClInclude Include="DronBarrier\DronBarrier.h">
       <Filter>DronBarrier</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="StaticMeshes\Material.h">
       <Filter>StaticMeshes</Filter>
     </ClInclude>
+=======
     <ClInclude Include="Billboard\BillboardCore.h">
       <Filter>Billboard</Filter>
     </ClInclude>
@@ -662,9 +660,7 @@
       <Filter>Billboard</Filter>
     </ClInclude>
     <ClInclude Include="VideoPlayer.h" />
-    <ClInclude Include="Billboard\BillboardInstanceManager.h">
-      <Filter>Billboard</Filter>
-    </ClInclude>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">

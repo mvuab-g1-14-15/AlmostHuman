@@ -167,8 +167,24 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 	l_InstanceMesh->SetActor( l_MeshActor );
 	PhysXMInstance->AddPhysicActor( l_MeshActor );
 
+<<<<<<< HEAD
 	return l_InstanceMesh;
 }
+=======
+        Math::AABB3f l_AABB = l_StaticMesh->GetAABB();
+        Math::Vect3f l_Pos = l_InstanceMesh->GetTransform() * l_AABB.GetCenter();
+
+        l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
+        l_MeshActor->CreateBody( 1.0f );
+    }
+#ifdef _USING_MESH_FOR_PHYSX
+    else
+    {
+        NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+        l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+    }
+#endif
+>>>>>>> origin/master
 
 CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
 {
@@ -179,12 +195,25 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& a
 	// If there is no ase loaded and we want phyx
 	if (!PhysXMInstance->GetLoadASE())
     {
+<<<<<<< HEAD
 		CPhysicActor* l_MeshActor = new CPhysicActor( new CPhysicUserData( l_InstanceMesh->GetName() ) );
 		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
 		l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
 		l_InstanceMesh->SetActor( l_MeshActor );
 		PhysXMInstance->AddPhysicActor( l_MeshActor );
 	}
+=======
+        l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
+        l_InstanceMesh->SetActor( l_MeshActor );
+    }
+#ifdef _USING_MESH_FOR_PHYSX
+    else
+        l_InstanceMesh->SetActor( l_MeshActor );
+#endif
+
+    CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
+>>>>>>> origin/master
+
 	return l_InstanceMesh;
 }
 
@@ -198,8 +227,6 @@ void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& att
 		if( l_InstanceMesh )
 		{
 			l_InstanceMesh->SetRoomName( l_RoomName );
-#ifdef _USING_MESH_FOR_PHYSX
-#endif
 
 			CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
 

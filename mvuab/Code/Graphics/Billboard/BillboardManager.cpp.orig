@@ -49,7 +49,24 @@ void CBillboardManager::Update()
 
 void CBillboardManager::Init()
 {
+<<<<<<< HEAD
+  // Create the shared geometry
+  CBillboard::CreateBillBoardGeometry();
+  LoadFromXML();
+}
+
+void CBillboardManager::Reload()
+{
+  Destroy();
+  LoadFromXML();
+}
+
+void CBillboardManager::LoadFromXML()
+{
+  CXMLTreeNode newFile;
+=======
   CXMLTreeNode newFile, node;
+>>>>>>> origin/master
 
   if ( newFile.LoadAndFindNode( mConfigPath.c_str(), "billboards", node ) )
   {
@@ -77,11 +94,15 @@ void CBillboardManager::Init()
   }
 }
 
+<<<<<<< HEAD
+  for ( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
+=======
 void CBillboardManager::LoadInstances( const std::string& aFileName )
 {
   CXMLTreeNode newFile, node;
 
   if ( newFile.LoadAndFindNode( aFileName.c_str(), "billboards_instances", node ) )
+>>>>>>> origin/master
   {
     for ( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
@@ -118,7 +139,7 @@ void CBillboardManager::CreateBillBoardGeometry()
 {
   if( !sRV )
   {
-    sRV = new CIndexedVertexs<TT1_VERTEX, short>(GraphicsInstance, lVtx, lIdx, lVtxCount, lIdxCount);
+    sRV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, lVtx, lIdx, lVtxCount, lIdxCount);
   }
 }
 

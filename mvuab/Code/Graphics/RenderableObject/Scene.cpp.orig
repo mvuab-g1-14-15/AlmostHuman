@@ -1,0 +1,203 @@
+#include "Scene.h"
+#include "SceneRenderComands\SceneRendererCommandManager.h"
+#include "RenderableObject\RenderableObjectsLayersManager.h"
+#include "SceneRenderComands\RenderSceneSceneRendererCommand.h"
+
+#include "Utils\Defines.h"
+#include "Logger\Logger.h"
+#include "XML\XMLTreeNode.h"
+
+#include "Utils\Defines.h"
+#include "EngineManagers.h"
+
+#include "StaticMeshes\StaticMeshManager.h"
+#include "Room.h"
+
+#include "Lights/LightManager.h"
+#include "Particles/ParticleManager.h"
+#include "Billboard\BillboardManager.h"
+
+#include "PhysicsManager.h"
+#include "Actor\PhysicActor.h"
+#include "Utils\PhysicUserData.h"
+#include "CookingMesh\PhysicCookingMesh.h"
+
+#include <string>
+
+
+CScene::CScene( const CXMLTreeNode& atts )
+    : CManager( atts )
+    , mCurrentRoom( 0 )
+    , mToDelete( 0 )
+{
+
+}
+
+CScene::~CScene()
+{
+    Destroy();
+}
+
+void CScene::Render()
+{
+
+}
+
+void CScene::Update()
+{
+    // Update the core room, in order to update all the characters
+    GetResource( "core" )->Update();
+
+	for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
+	{
+		if( (*lItb)->IsActive() )
+			(*lItb)->Update();
+	}
+}
+
+void CScene::Destroy()
+{
+    CTemplatedVectorMapManager::Destroy();
+}
+
+void CScene::Init()
+{
+    Load( mConfigPath );
+}
+
+bool CScene::Load( const std::string& l_FilePath )
+{
+    bool lOk = false;
+
+    if ( l_FilePath != "" )
+    {
+        CXMLTreeNode l_Root, l_Node;
+
+        if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "scene", l_Node ) )
+        {
+            for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+            {
+                CRoom *lRoom = new CRoom( l_Node( i ) );
+                if ( !AddResource( lRoom->GetName(), lRoom ) )
+                    CHECKED_DELETE( lRoom );
+            }
+
+            // This will read the characters, all the characters are inside the core room, it is mandatory
+            ActivateRoom( "core" );
+
+            lOk = true;
+        }
+    }
+
+    return lOk;
+}
+
+bool CScene::Reload()
+{
+    CTemplatedVectorMapManager::Destroy();
+    return Load( mConfigPath );
+}
+
+void CScene::ActivateRoom( const std::string& aRoomName )
+{
+    CRoom* lRoom = GetResource( aRoomName );
+<<<<<<< HEAD
+	if( lRoom )
+	{
+		if( !lRoom->IsLoaded() )
+			lRoom->Load();
+
+		lRoom->Activate();
+		mCurrentRoom = lRoom;
+	}
+=======
+
+    if ( lRoom )
+    {
+        std::string lSMPath = lRoom->GetStaticMeshesPath();
+        std::string lROPath = lRoom->GetRenderableObjectsPath();
+        std::string lBasePath = lRoom->GetBasePath();
+
+        if ( lSMPath.find( ".xml" ) != std::string::npos )
+            SMeshMInstance->Load( lSMPath, lBasePath );
+
+        if ( lROPath.find( ".xml" ) != std::string::npos )
+            lROLM->LoadLayers( lROPath, aRoomName );
+
+        PSMan->SetConfigPath( lRoom->GetBasePath() + "particles.xml");
+        PSMan->Init();
+        
+        BillboardMan->LoadInstances( lRoom->GetBasePath() + "billboards.xml" );
+
+        lRoom->SetLayers( lROLM );
+
+         LightMInstance->Load( lRoom->GetBasePath() + "lights.xml" );
+    }
+}
+
+void CScene::ActivateRoom( std::string aRoomName )
+{
+    CRoom* lRoom = GetResource( aRoomName );
+
+    if ( !lRoom->GetLayers() )
+        LoadRoom( aRoomName );
+
+    lRoom->SetActive( true );
+    mCurrentRoom = lRoom;
+>>>>>>> origin/master
+}
+
+void CScene::UnloadRoom( std::string aRoomName )
+{
+    CRoom* lRoom = GetResource( aRoomName );
+    if ( lRoom )
+    {
+    }
+}
+
+void CScene::DesactivateRoom( std::string aRoomName )
+{
+    CRoom* lRoom = GetResource( aRoomName );
+    lRoom->Deactivate();
+}
+
+std::vector<CLightProbe*> CScene::GetClosedLightProbes( std::string aRoomName, Math::Vect3f aPos )
+{
+    CRoom* lRoom = GetResource( aRoomName );
+    //CRoom* lRoom = GetResource( "room2" ); // Hardcoded for test
+
+    if ( lRoom )
+        return lRoom->GetClosedLightProbes( aPos );
+
+    return std::vector<CLightProbe*>();
+}
+
+void CScene::RenderLayer( const std::string& aLayerName )
+{
+	for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
+	{
+		if( (*lItb)->IsActive() )
+			(*lItb)->RenderLayer( aLayerName );
+	}
+}
+
+void CScene::LoadRoom( const std::string& aRoomName )
+{
+	ActivateRoom( aRoomName );
+}
+
+const std::string CScene::GetActivateRoom()
+{
+	TVectorResources::iterator it = m_ResourcesVector.begin(), it_end = m_ResourcesVector.end();
+
+	while ( it != it_end )
+	{
+		if ( *it == mCurrentRoom )
+			return (*it)->GetName();
+
+		++it;
+	}
+
+	const std::string& lDontExist( "" );
+	return lDontExist;
+}
