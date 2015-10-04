@@ -123,6 +123,10 @@ function atacar()
 	local angle = GetAngleEnemyPlayer(enemy)
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	
+	if math.abs(angle) > 0.1 then
+		enemy:RotateToPlayer()
+	end
+	
 	if l_PlayerInSight or (0 < angle and l_DistanceToPlayer < 4) then
 		if enemy:GetVelocity() == 5.0 then
 			enemy:SetVelocity(2.0)
