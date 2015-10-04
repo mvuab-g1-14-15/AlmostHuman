@@ -147,7 +147,7 @@ bool CParticleEmitter::Init( const CXMLTreeNode& atts )
 
 void CParticleEmitter::Update( float dt )
 {
-  TIMER_START();
+  //TIMER_START();
   mActualTime += dt;
   mTimeSinceLastEmission += dt;
 
@@ -190,7 +190,7 @@ void CParticleEmitter::Update( float dt )
     }
   }
 
-  TIMER_STOP("Update Particles");
+  //TIMER_STOP("Update Particles");
 }
 
 void CParticleEmitter::Render()

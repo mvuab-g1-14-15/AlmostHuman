@@ -147,7 +147,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 
 	// Activate light probe texture
 	//TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Save("lightprobe");
-	TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Activate(6); //Hardcoded to test
+	//TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Activate(6); //Hardcoded to test
 
 	
 

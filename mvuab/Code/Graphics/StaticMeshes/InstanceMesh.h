@@ -53,6 +53,7 @@ class CInstanceMesh : public CRenderableObject
         CStaticMesh* GetStaticMesh();
 
         void GetMaterial();
+		void GetStaticMesh( const std::string& aCoreName );
         void GetCenterAndRadiusFromAABB();
 };
 #endif //INC_INSTANCE_MESH_H_

@@ -19,7 +19,11 @@
 #include <string> 
 #include "Utils/PhysicUserData.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName )
+	: CRenderableObject()
+	, mStaticMesh( 0 )
+	, mType( "static" )
+	, mPhysicActor( 0 )
 {
   SetName( aName );
   mMaterialName = aName;
@@ -28,14 +32,17 @@ CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), 
 }
 
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
-  CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName )
+	: CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
   SetName(aName);
+
   if (mMaterialName == "")
     mMaterialName = aName;
   else
     mMaterialName = MaterialName;
+  
+  GetStaticMesh(CoreName);
   GetMaterial();
   GetCenterAndRadiusFromAABB();
 }
@@ -43,11 +50,11 @@ CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreN
 
 CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
   : CRenderableObject( atts )
-  , mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
   , mType( "static" )
   , mPhysicActor( 0 )
 {
   mMaterialName = GetName();
+  GetStaticMesh( atts.GetAttribute<std::string>( "core", "no_staticMesh" ));
   GetMaterial();
   GetCenterAndRadiusFromAABB();
 }
@@ -135,7 +142,7 @@ void CInstanceMesh::GetMaterial()
 
   mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
   ASSERT( mMaterial, "Null material" );
-  ASSERT( mStaticMesh->GetRVs().size() == mMaterial->GetCount(), "materials != submeshes-> Static Mesh %s -Instance Mesh: %s", lMaterialName.c_str(), lMaterialName.c_str() );
+  ASSERT( mStaticMesh && mStaticMesh->GetRVs().size() == mMaterial->GetCount(), "materials != submeshes-> Static Mesh %s -Instance Mesh: %s", lMaterialName.c_str(), lMaterialName.c_str() );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,4 +154,15 @@ void CInstanceMesh::GetCenterAndRadiusFromAABB()
     mAABBCenter = GetTransform() * mStaticMesh->GetAABBCenter();
     mAABBRadius = mStaticMesh->GetAABB().GetRadius() * 2.0f;
   }
+}
+
+void CInstanceMesh::GetStaticMesh( const std::string& aCoreName )
+{
+	std::string lCoreName = aCoreName;
+	std::string::size_type i = lCoreName.find_last_of("_");
+	if (i != std::string::npos)
+		lCoreName.erase(i, lCoreName.size() - i);
+
+	mStaticMesh = SMeshMInstance->GetStaticMesh(lCoreName);
+	ASSERT( mStaticMesh, "Null static mesh %s for instance mesh %s", aCoreName.c_str(), GetName().c_str() );
 }

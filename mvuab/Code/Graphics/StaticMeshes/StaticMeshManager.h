@@ -27,6 +27,7 @@ private:
 		void Render(){}
 
     CMaterial* GetMaterial( const std::string& aMaterialName );
+	CStaticMesh* GetStaticMesh( const std::string& aStaticMesh );
 
         bool threadMeshLoad(std::string &l_File, std::string &l_Name, unsigned int iD);
 		void Load( const std::string& aFilePath, const std::string& aBasePath );

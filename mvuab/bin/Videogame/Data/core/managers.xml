@@ -17,7 +17,7 @@
 	<camera_manager file_config="no_name"/>
 	<countdowntimer_manager file_config="no_name"/>
 	<script_manager file_config="Data/level2/scripts/"/>
-	<lens_flares_manager file_config="Data/core/lens_flare.xml"/>
+	<lens_flares_manager file_config="../CommonData/LF/lens_flare.xml"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
 	<gui_manager file_config="Data/gui.xml"/>
