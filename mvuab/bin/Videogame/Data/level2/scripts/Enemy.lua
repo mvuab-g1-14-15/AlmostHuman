@@ -418,3 +418,50 @@ function CEnemyLUA:ChangeAnimation(animation, delayin, delayout)
 	self.CurrentAnimation = animation
 	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
 end
+
+function CEnemyLUA:RotateToPlayer()
+	local dt = timer:GetElapsedTime()
+	CharacterController = self:GetCharacterController()
+	local ActualPos = Vect3f(CharacterController:GetPosition())
+	local FinalPos = g_Player:GetPosition()
+	FinalPos.y = 0
+	ActualPos.y = 0
+	local Dir = FinalPos - ActualPos	
+	Dir.y = 0.0
+	if CheckVector(Dir) then
+		Dir:Normalize()
+	end
+	DirYaw = math.atan2( Dir.z, Dir.x )
+	Yaw = CharacterController:GetYaw()
+	YawDif = DirYaw - Yaw
+    PrevYaw = Yaw
+		
+	local YawDifCom = DirYaw - 2*g_Pi - Yaw
+	if math.abs( YawDifCom ) < math.abs( YawDif ) then
+		YawDif = YawDifCom
+	else
+		local YawDifCom = DirYaw + 2*g_Pi - Yaw
+		if math.abs( YawDifCom ) < math.abs( YawDif ) then
+			YawDif = YawDifCom
+		end
+	end
+		
+    if ( math.abs( YawDif ) < 0.1 ) then
+		Yaw = DirYaw;
+    else
+        CharacterController:Move( Vect3f( 0.0 ), dt )
+		if YawDif > 0 then
+			YawDif = 1
+		else
+			YawDif = -1
+		end
+        Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
+
+        if ( ( Yaw < DirYaw and PrevYaw > DirYaw ) or ( Yaw > DirYaw and PrevYaw < DirYaw ) ) then
+            Yaw = DirYaw
+		end
+    end
+	
+    CharacterController:SetYaw( Yaw )
+    self:SetYaw( Yaw )
+end
