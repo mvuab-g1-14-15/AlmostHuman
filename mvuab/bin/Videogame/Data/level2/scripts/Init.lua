@@ -61,7 +61,13 @@ function update_gameplay()
 
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then
-			g_Player:SetPosition(ChangeRoom())
+			if camera_manager:GetCurrentCamera():GetName() == "FreeCam" then
+				engine:Trace("He entrado")
+				camera_manager:GetCurrentCamera():SetPosition(ChangeRoom())
+			else
+				g_Player:SetPosition(ChangeRoom())
+			end
+			
 		end
 		if action_manager:DoAction("PressR") then
 			if g_bChargeEnergy then
