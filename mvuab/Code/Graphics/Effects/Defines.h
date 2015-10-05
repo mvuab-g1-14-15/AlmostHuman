@@ -84,10 +84,10 @@ const char ShadowMapTextureSizeStr[]    = "ShadowMapTextureSize";
 //-----------------------------------------------------------------------
 
 // ZBlur data -----------------------------------------------------------
-const char ZBlurFocalStart[] = "g_ZBlurFocalStart";
-const char ZBlurFocalEnd[] = "g_ZBlurFocalEnd";
-const char ZBlurConstant[] = "g_ConstantBlur";
-const char ZBlurEnd[] = "g_ZBlurEnd";
+const char ZBlurFocalStart[] = "ZBlurFocalStart";
+const char ZBlurFocalEnd[] = "ZBlurFocalEnd";
+const char ZBlurConstant[] = "ConstantBlur";
+const char ZBlurEnd[] = "ZBlurEnd";
 //-----------------------------------------------------------------------
 
 #endif //EFFECTS_DEFINES_H

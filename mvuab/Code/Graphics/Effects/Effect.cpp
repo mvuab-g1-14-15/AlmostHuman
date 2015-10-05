@@ -136,11 +136,6 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( FlipUVVertical   );
   LINK_EFFECT_PARAMETER( FlipUVHorizontal );
 
-  LINK_EFFECT_PARAMETER( ZBlurFocalStart );
-  LINK_EFFECT_PARAMETER( ZBlurFocalEnd );
-  LINK_EFFECT_PARAMETER( ZBlurConstant );
-  LINK_EFFECT_PARAMETER( ZBlurEnd );
-
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
