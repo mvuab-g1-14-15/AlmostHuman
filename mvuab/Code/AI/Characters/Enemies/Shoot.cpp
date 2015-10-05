@@ -102,7 +102,7 @@ void CShoot::Update()
           if ( lPUD->GetController() )
 		  {
             ScriptMInstance->RunCode( "g_EnemyManager:AddDamage('" + lName + "')" );
-			ScriptMInstance->RunCode( "local enemy = g_EnemyManager:GetResource('" + lName + "');enemy.Suspected = true; enemy.SuspectedPosition = g_Player:GetPosition();enemy.RenderableObject:ChangeAnimation(\"hurt\", 0.2, 1);" );
+			ScriptMInstance->RunCode( "local enemy = g_EnemyManager:GetResource('" + lName + "');enemy.Suspected = true; enemy.SuspectedPosition = g_Player:GetPosition();enemy:SetIsHurting();" );
 		  }
 
           //lEnemy->AddDamage( mDamage );

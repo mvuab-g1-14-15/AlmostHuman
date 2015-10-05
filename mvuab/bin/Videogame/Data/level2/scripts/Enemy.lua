@@ -24,6 +24,9 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Velocity = 2.0
 	self.Delta = 0.5
 	
+	self.IsHurting = false
+	countdowntimer_manager:AddTimer(self.Name.."HurtTime", 1.0, false)
+	
 	self.Alarmado = false
 	self.PositionAlarm = Vect3f(0,0,0)
 	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
@@ -83,6 +86,7 @@ function CEnemyLUA:Update()
 	self:SetMeshTransform()
 	self.Brain:Update()
 	self:UpdateCamera()
+	self:CheckHurting()
 end
 
 function CEnemyLUA:UpdateCamera()
@@ -417,8 +421,12 @@ function CEnemyLUA:ChangeRoute(position)
 end
 
 function CEnemyLUA:ChangeAnimation(animation, delayin, delayout)
-	self.CurrentAnimation = animation
-	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
+	engine:Trace("Next animation: "..animation)
+	if not self.IsHurting then
+		engine:Trace("Is not hurting.")
+		self.CurrentAnimation = animation
+		self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
+	end
 end
 
 function CEnemyLUA:RotateToPlayer()
@@ -466,4 +474,26 @@ function CEnemyLUA:RotateToPlayer()
 	
     CharacterController:SetYaw( Yaw )
     self:SetYaw( Yaw )
+end
+
+function CEnemyLUA:SetIsHurting()
+	if self.Life > 0 then
+		self.IsHurting = true
+		countdowntimer_manager:SetActive(self.Name.."HurtTime", true)
+	end
+end
+
+function CEnemyLUA:CheckHurting()
+	if self.Life > 0 then
+		if self.IsHurting then
+			if countdowntimer_manager:IsActive(self.Name.."HurtTime") then
+				if countdowntimer_manager:isTimerFinish(self.Name.."HurtTime") then
+					self.IsHurting = false
+					countdowntimer_manager:Reset(self.Name.."HurtTime", false)
+				end
+			end
+		end
+	else
+		self.IsHurting = false
+	end
 end
