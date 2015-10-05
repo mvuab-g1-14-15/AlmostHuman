@@ -8,12 +8,11 @@
   <static_mesh name="reixa_v80m5_sala3" filename="meshes\reixa_v80m5.mesh" />
   <static_mesh name="robot_assemblyv2417m2_sala3" filename="meshes\robot_assemblyv2417m2.mesh" />
   <static_mesh name="cinta_v664m5_sala3" filename="meshes\cinta_v664m5.mesh" />
-  <static_mesh name="enganche_v420m4_sala3" filename="meshes\enganche_v420m4.mesh" />
   <static_mesh name="escalav8m30_sala3" filename="meshes\escalav8m30.mesh" />
   <static_mesh name="cinta_v992m5_sala3" filename="meshes\cinta_v992m5.mesh" />
   <static_mesh name="escalav200m30_sala3" filename="meshes\escalav200m30.mesh" />
-  <static_mesh name="trasto_v192m1_sala3" filename="meshes\trasto_v192m1.mesh" />
   <static_mesh name="objectv24m5_sala3" filename="meshes\objectv24m5.mesh" />
+  <static_mesh name="enganche_v420m4_sala3" filename="meshes\enganche_v420m4.mesh" />
   <static_mesh name="andridev5371m2_sala3" filename="meshes\andridev5371m2.mesh" />
   <static_mesh name="containerv546m1_sala3" filename="meshes\containerv546m1.mesh" />
   <static_mesh name="msf_stepsv2000m4_sala3" filename="meshes\msf_stepsv2000m4.mesh" />

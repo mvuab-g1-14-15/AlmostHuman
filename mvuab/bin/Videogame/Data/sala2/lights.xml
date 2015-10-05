@@ -8,6 +8,8 @@
 			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
 		</shadow_map>-->
   </spot_light>
+  <spot_light name="Spot002" pos="0.0 0.0 0.0" color="1.0 1.0 1.0" att_start_range="10.0" att_end_range="50.0" look_at="-16.2957 0.0 34.3381" angle="43.0" fall_off="45.0" intensity="0.5" enabled="true" />
+  
   <!--
   <omni_light name="Omni001" pos="78.21 -8.68069 -33.0581" color="0.847059 0.0 0.0" att_start_range="3.94359" att_end_range="4.9106" />
   <omni_light name="Omni002" pos="78.1943 -8.55895 -43.8044" color="0.847059 0.0 0.0" att_start_range="3.94359" att_end_range="4.9106" />

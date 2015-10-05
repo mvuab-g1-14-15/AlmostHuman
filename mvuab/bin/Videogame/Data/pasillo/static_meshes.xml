@@ -1,18 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="ceiling_pasillo" filename="meshes\ceiling.mesh" />
-  <static_mesh name="Figure_1_pasillo" filename="meshes\Figure_1.mesh" />
-  <static_mesh name="leftWall_pasillo" filename="meshes\leftWall.mesh" />
-  <static_mesh name="ceiling001_pasillo" filename="meshes\ceiling001.mesh" />
-  <static_mesh name="leftwall2_pasillo" filename="meshes\leftwall2.mesh" />
-  <static_mesh name="doorUpper_pasillo" filename="meshes\doorUpper.mesh" />
-  <static_mesh name="doorLower_pasillo" filename="meshes\doorLower.mesh" />
-  <static_mesh name="rightWall_pasillo" filename="meshes\rightWall.mesh" />
-  <static_mesh name="arch_pasillo" filename="meshes\arch.mesh" />
-  <static_mesh name="floor_pasillo" filename="meshes\floor.mesh" />
-  <static_mesh name="floor001_pasillo" filename="meshes\floor001.mesh" />
-  <static_mesh name="Figure_002_pasillo" filename="meshes\Figure_002.mesh" />
-  <static_mesh name="rightwall1_pasillo" filename="meshes\rightwall1.mesh" />
-  <static_mesh name="doorUpper001_pasillo" filename="meshes\doorUpper001.mesh" />
-  <static_mesh name="doorLower001_pasillo" filename="meshes\doorLower001.mesh" />
+  <static_mesh name="doorupperv1213m1_pasillo" filename="meshes\doorupperv1213m1.mesh" />
+  <static_mesh name="doorlowerv820m1_pasillo" filename="meshes\doorlowerv820m1.mesh" />
+  <static_mesh name="ceilingv27490m12_pasillo" filename="meshes\ceilingv27490m12.mesh" />
+  <static_mesh name="figure_v34159m7_pasillo" filename="meshes\figure_v34159m7.mesh" />
+  <static_mesh name="leftwallv30568m15_pasillo" filename="meshes\leftwallv30568m15.mesh" />
+  <static_mesh name="ceilingv27486m12_pasillo" filename="meshes\ceilingv27486m12.mesh" />
+  <static_mesh name="leftwallv31617m15_pasillo" filename="meshes\leftwallv31617m15.mesh" />
+  <static_mesh name="rightwallv32367m15_pasillo" filename="meshes\rightwallv32367m15.mesh" />
+  <static_mesh name="archv12084m10_pasillo" filename="meshes\archv12084m10.mesh" />
+  <static_mesh name="floorv13308m10_pasillo" filename="meshes\floorv13308m10.mesh" />
+  <static_mesh name="floorv13271m10_pasillo" filename="meshes\floorv13271m10.mesh" />
+  <static_mesh name="figure_v27304m7_pasillo" filename="meshes\figure_v27304m7.mesh" />
+  <static_mesh name="rightwallv32377m15_pasillo" filename="meshes\rightwallv32377m15.mesh" />
+  <static_mesh name="fanleftv690m1_pasillo" filename="meshes\fanleftv690m1.mesh" />
+  <static_mesh name="doorv12084m10_pasillo" filename="meshes\doorv12084m10.mesh" />
+  <static_mesh name="leftwallv26471m15_pasillo" filename="meshes\leftwallv26471m15.mesh" />
+  <static_mesh name="rightwallv32545m15_pasillo" filename="meshes\rightwallv32545m15.mesh" />
+  <static_mesh name="floorv13284m10_pasillo" filename="meshes\floorv13284m10.mesh" />
+  <static_mesh name="floorv13287m10_pasillo" filename="meshes\floorv13287m10.mesh" />
+  <static_mesh name="figure_v24179m7_pasillo" filename="meshes\figure_v24179m7.mesh" />
+  <static_mesh name="metal_barrelv256m9_pasillo" filename="meshes\metal_barrelv256m9.mesh" />
+  <static_mesh name="ammo_boxv76m9_pasillo" filename="meshes\ammo_boxv76m9.mesh" />
+  <static_mesh name="bombv466m1_pasillo" filename="meshes\bombv466m1.mesh" />
 </static_meshes>
