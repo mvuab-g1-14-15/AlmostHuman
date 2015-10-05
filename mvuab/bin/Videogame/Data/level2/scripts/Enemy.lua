@@ -248,7 +248,7 @@ function CEnemyLUA:MoveToPos( aPos )
 	
 	local CharacterController = self:GetCharacterController()
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = g_EnemyManager:GetAStar( self.Room )
 
     if ( not self.PathCalculated ) then  
 		engine:Trace("He entrado a calcular la posicion")
@@ -297,7 +297,7 @@ end
 function CEnemyLUA:MoveToPlayer(PositionPlayer)
 	CharacterController = self:GetCharacterController()	
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = g_EnemyManager:GetAStar(self.Room)
 
     if ( not self.PathCalculated ) then   
         self.Path = lAStar:GetPath( lPos, PositionPlayer )

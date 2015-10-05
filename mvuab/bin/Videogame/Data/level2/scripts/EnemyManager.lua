@@ -12,7 +12,7 @@ function CEnemyManagerLUA:__init()
 	self.ExtraEnemy = {}
 	self.Routes = {}
 	self.ActualEnemy = nil
-	self.AStar = CAStar()
+	self.AStar = {}
 	self.Shoots = {}
 	self.Alarm = false
 	self.RoomAlarm = false
@@ -50,7 +50,8 @@ function CEnemyManagerLUA:Load(filename)
         end
     end
 	
-	self.AStar:Init()
+	self.AStar[ "room2" ] = CAStar( "room2" )
+	self.AStar[ "room3" ] = CAStar( "room3" )
 end
 
 function CEnemyManagerLUA:Update()
@@ -119,8 +120,6 @@ function CEnemyManagerLUA:Update()
 end
 
 function CEnemyManagerLUA:AddNewCoreEnemy( Node )
-	
-	
 	CoreEnemy = CCoreEnemyLUA()
     
     CoreEnemy:SetEnemyType(Node:GetAttributeString( "type", "no_type" ))
@@ -198,8 +197,8 @@ function CEnemyManagerLUA:GetActualEnemy()
 	return self.ActualEnemy
 end
 
-function CEnemyManagerLUA:GetAStar()
-	return self.AStar
+function CEnemyManagerLUA:GetAStar( aRoomName )
+	return self.AStar[ aRoomName ]
 end
 
 function CEnemyManagerLUA:GetResource(name)

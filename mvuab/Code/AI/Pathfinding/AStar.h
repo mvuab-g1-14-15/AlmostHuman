@@ -10,19 +10,19 @@ class CGraph;
 class CAStar
 {
 public:
-  //std::vector<Node*> nodos;
-  CGraph* m_Graph;
-
-  CGraph* GetGraph() const
-  {
-	  return m_Graph;
-  }
-
-  CAStar();
+  CAStar(std::string aRoomName);
   ~CAStar();
 
   void Init();
   void Render();
+
+  CGraph* m_Graph;
+  std::string mRoomName;
+
+  CGraph* GetGraph() const
+  {
+      return m_Graph;
+  }
 
   std::vector<Math::Vect3f> GetPath( Math::Vect3f posicion_inicial, Math::Vect3f posicion_final );
 };
