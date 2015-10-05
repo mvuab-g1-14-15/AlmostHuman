@@ -27,10 +27,10 @@ float4x4 g_WorldInverseMatrix                                       : InverseWor
 float4x4 g_WorldViewMatrix                                          : WVMatrix;
 float4x4 g_ViewProjMatrix                                           : VPMatrix;
 float3   g_CameraPosition                                           : CameraPosition;
-float3   g_AmbientLight 											: AmbientLight;
-float    g_DeltaTime 											    : DeltaTime;
-int      g_FBWidth    											    : FBWidth;
-int      g_FBHeight       										    : FBHeight;
+float3   g_AmbientLight                                             : AmbientLight;
+
+int      g_FBWidth                                                  : FBWidth;
+int      g_FBHeight                                                 : FBHeight;
 
 
 //
@@ -45,20 +45,20 @@ float4  g_DebugColor                                                : DebugColor
 float4x4    g_ShadowProjectionMatrix                                : ShadowProjection;
 float4x4    g_LightViewMatrix                                       : LightView;
 float4x4    g_ViewToLightProjMatrix                                 : ViewToLightProjection;
-bool 		g_UseShadowMaskTexture 								    : UseShadowMaskTexture;
-bool 		g_UseShadowMapStatic 									: UseStaticShadowMap;
-bool 		g_UseShadowMapDynamic 									: UseDynamicShadowMap;
-int  		g_ShadowMapTextureSize									: ShadowMapTextureSize;
+bool        g_UseShadowMaskTexture                                  : UseShadowMaskTexture;
+bool        g_UseShadowMapStatic                                    : UseStaticShadowMap;
+bool        g_UseShadowMapDynamic                                   : UseDynamicShadowMap;
+int         g_ShadowMapTextureSize                                  : ShadowMapTextureSize;
 
 // Flip uv's
-bool		g_FlipUVHorizontal										: FlipUVHorizontal;
-bool		g_FlipUVVertical										: FlipUVVertical;
+bool        g_FlipUVHorizontal                                      : FlipUVHorizontal;
+bool        g_FlipUVVertical                                        : FlipUVVertical;
 
-float	    g_Size													: Size;
-int	        g_Angle													: Angle;
-float	    g_Alpha													: Alpha;
-float3	    g_Color													: Color;
-float3	    g_Direction											    : Direction;
+float       g_Size                                                  : Size;
+int         g_Angle                                                 : Angle;
+float       g_Alpha                                                 : Alpha;
+float3      g_Color                                                 : Color;
+float3      g_Direction                                             : Direction;
 
 //
 // Lights data
@@ -73,11 +73,11 @@ float       g_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER]     : LightsStar
 float3      g_LightsColor[MAX_LIGHTS_BY_SHADER]                     : LightsColors;
 float3      g_LightsPosition[MAX_LIGHTS_BY_SHADER]                  : LightsPositions;
 float3      g_LightsDirection[MAX_LIGHTS_BY_SHADER]                 : LightsDirections;
-float       g_SpecularExponent 	= 20.0f;
-float       g_SpecularFactor 	= 20.0f;
-//float4    g_AmbientLight 		= float4(0.35, 0.35, 0.35, 1.0);
+float       g_SpecularExponent  = 20.0f;
+float       g_SpecularFactor    = 20.0f;
+//float4    g_AmbientLight      = float4(0.35, 0.35, 0.35, 1.0);
 
-float		g_LightProbes[105]										: LightProbes;
+float       g_LightProbes[105]                                      : LightProbes;
 
 //
 // Cal3D parameters
@@ -89,29 +89,41 @@ float       g_Bump = 24.0;
 //
 // Fog data
 //
-bool		g_UseFog												: UseFog;
-float       g_FogStar                                           	: FogStart;
-float       g_FogEnd                                            	: FogEnd;
-float       g_FodExp                                            	: FogExp;
-int         g_FogFun                                            	: FogFun;
+bool        g_UseFog                                                : UseFog;
+float       g_FogStar                                               : FogStart;
+float       g_FogEnd                                                : FogEnd;
+float       g_FodExp                                                : FogExp;
+int         g_FogFun                                                : FogFun;
 
-float       g_Weight[5]                                         	: Weight;
-float       g_Offset[5]                                         	: Offset;
+float       g_Weight[5]                                             : Weight;
+float       g_Offset[5]                                             : Offset;
 
 //
 // 2D texture parameters
 //
-int         g_TextureWidth                                      	: TextureWidth;
-int         g_TextureHeight                                     	: TextureHeight;
+int         g_TextureWidth                                          : TextureWidth;
+int         g_TextureHeight                                         : TextureHeight;
 
 //
 // Window size
 //
-int         g_WindowWidth                                      		: WindowWidth;
-int         g_WindowHeight                                     		: WindowHeight;
+int         g_WindowWidth                                           : WindowWidth;
+int         g_WindowHeight                                          : WindowHeight;
 
 
-float       g_Time													: Time;
+//
+// ZBlur data
+//
+float      g_ZBlurFocalStart                                        : ZBlurFocalStart = 50;
+float      g_ZBlurFocalEnd                                          : ZBlurFocalEnd = 65;
+float      g_ConstantBlur                                           : ConstantBlur = 0.4;
+float      g_ZBlurEnd                                               : ZBlurEnd = 300;
+
+//
+// Timers
+//
+float      g_Time                                                   : Time;
+float      g_DeltaTime                                              : DeltaTime;
 
 
 //
@@ -189,52 +201,52 @@ float3 CalcNewNormal(float3 Tn, float3 Bn, float4 Color, float3 Normal)
 }
 float3 CalcAnimtedPos(float4 Position, float4 Indices, float4 Weight)
 {
-	float3 l_Position = 0;
-	
-	l_Position  = mul(g_Bones[Indices.x], Position) * Weight.x;
-	l_Position += mul(g_Bones[Indices.y], Position) * Weight.y;
-	l_Position += mul(g_Bones[Indices.z], Position) * Weight.z;
-	l_Position += mul(g_Bones[Indices.w], Position) * Weight.w;
-	
-	return l_Position;
+    float3 l_Position = 0;
+    
+    l_Position  = mul(g_Bones[Indices.x], Position) * Weight.x;
+    l_Position += mul(g_Bones[Indices.y], Position) * Weight.y;
+    l_Position += mul(g_Bones[Indices.z], Position) * Weight.z;
+    l_Position += mul(g_Bones[Indices.w], Position) * Weight.w;
+    
+    return l_Position;
 }
 
 void CalcAnimatedNormalTangent(float3 Normal, float3 Tangent, float4 Indices, float4 Weight, out float3 OutNormal, out float3 OutTangent)
 {
-	OutNormal  = 0;
-	OutTangent = 0;
-	float3x3 m;
-	
-	m[0].xyz = g_Bones[Indices.x][0].xyz;
-	m[1].xyz = g_Bones[Indices.x][1].xyz;
-	m[2].xyz = g_Bones[Indices.x][2].xyz;
-	
-	OutNormal  += mul(m, Normal.xyz)* Weight.x;
-	OutTangent += mul(m, Tangent.xyz)* Weight.x;
-	
-	m[0].xyz = g_Bones[Indices.y][0].xyz;
-	m[1].xyz = g_Bones[Indices.y][1].xyz;
-	m[2].xyz = g_Bones[Indices.y][2].xyz;
-	
-	OutNormal  += mul(m, Normal.xyz)* Weight.y;
-	OutTangent += mul(m, Tangent.xyz)* Weight.y;
-	
-	m[0].xyz = g_Bones[Indices.z][0].xyz;
-	m[1].xyz = g_Bones[Indices.z][1].xyz;
-	m[2].xyz = g_Bones[Indices.z][2].xyz;
-	
-	OutNormal += mul(m, Normal.xyz)* Weight.z;
-	OutTangent += mul(m, Tangent.xyz)* Weight.z;
-	
-	m[0].xyz = g_Bones[Indices.w][0].xyz;
-	m[1].xyz = g_Bones[Indices.w][1].xyz;
-	m[2].xyz = g_Bones[Indices.w][2].xyz;
-	
-	OutNormal  += mul(m, Normal.xyz)* Weight.w;
-	OutTangent += mul(m, Tangent.xyz)* Weight.w;
-	
-	OutNormal  = normalize(OutNormal);
-	OutTangent = normalize(OutTangent);
+    OutNormal  = 0;
+    OutTangent = 0;
+    float3x3 m;
+    
+    m[0].xyz = g_Bones[Indices.x][0].xyz;
+    m[1].xyz = g_Bones[Indices.x][1].xyz;
+    m[2].xyz = g_Bones[Indices.x][2].xyz;
+    
+    OutNormal  += mul(m, Normal.xyz)* Weight.x;
+    OutTangent += mul(m, Tangent.xyz)* Weight.x;
+    
+    m[0].xyz = g_Bones[Indices.y][0].xyz;
+    m[1].xyz = g_Bones[Indices.y][1].xyz;
+    m[2].xyz = g_Bones[Indices.y][2].xyz;
+    
+    OutNormal  += mul(m, Normal.xyz)* Weight.y;
+    OutTangent += mul(m, Tangent.xyz)* Weight.y;
+    
+    m[0].xyz = g_Bones[Indices.z][0].xyz;
+    m[1].xyz = g_Bones[Indices.z][1].xyz;
+    m[2].xyz = g_Bones[Indices.z][2].xyz;
+    
+    OutNormal += mul(m, Normal.xyz)* Weight.z;
+    OutTangent += mul(m, Tangent.xyz)* Weight.z;
+    
+    m[0].xyz = g_Bones[Indices.w][0].xyz;
+    m[1].xyz = g_Bones[Indices.w][1].xyz;
+    m[2].xyz = g_Bones[Indices.w][2].xyz;
+    
+    OutNormal  += mul(m, Normal.xyz)* Weight.w;
+    OutTangent += mul(m, Tangent.xyz)* Weight.w;
+    
+    OutNormal  = normalize(OutNormal);
+    OutTangent = normalize(OutTangent);
 }
 
 // http://stackoverflow.com/questions/5149544/can-i-generate-a-random-number-inside-a-pixel-shader
