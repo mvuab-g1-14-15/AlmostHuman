@@ -191,10 +191,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
 
-<<<<<<< HEAD
-
-        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) updateThread, pEngine, NULL, NULL);
-=======
         /*CVideoPlayer l_VideoPlayer;
         if(!l_VideoPlayer.Play("test.avi"))
         {
@@ -202,7 +198,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
             OutputDebugStringA(s);
         }*/
 
->>>>>>> origin/master
+
+        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) updateThread, pEngine, NULL, NULL);
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -212,11 +209,15 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
             }
             else
             {
+<<<<<<< HEAD
                 pEngine->ProcessInputs();
                 pEngine->Update();
 
                 //if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
                 //    pEngine->Render();
+=======
+                pEngine->Execute();
+>>>>>>> origin/master
             }
         }
 
