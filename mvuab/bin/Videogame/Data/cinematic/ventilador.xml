@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cinematic name="ventilador.max" duration="5.0">
+  <cinematic_object resource="fanLeft001" renderable_objects_manager="fanLeft001">
+    <cinematic_object_key_frame time="0.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.166667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.333333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.5" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.666667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.833333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.16667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.33333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.5" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.66667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.83333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.16667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.33333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.5" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.66667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.83333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.16667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.33333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.5" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.66667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.83333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.16667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.33333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.5" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.66667" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.83333" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="5.0" pos="60.2161 -11.0441 -15.4333" yaw="-5.78355e-007" pitch="0.174533" roll="0.792469" scale="1.0 1.0 1.0" />
+  </cinematic_object>
+  <cinematic_object resource="vent" renderable_objects_manager="vent">
+    <cinematic_object_key_frame time="0.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.166667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.333333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.5" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.666667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="0.833333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.16667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.33333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.5" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.66667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="1.83333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.16667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.33333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.5" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.66667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="2.83333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.16667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.33333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.5" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.66667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="3.83333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.16667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.33333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.5" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.66667" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="4.83333" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+    <cinematic_object_key_frame time="5.0" pos="54.5596 -12.8609 -2.10603" yaw="0.0" pitch="0.0" roll="1.05427" scale="1.0 1.0 1.0" />
+  </cinematic_object>
+</cinematic>
