@@ -61,6 +61,7 @@ CBillboardInstance* CreateBillBoard()
 {
 	return new CBillboardInstance();
 }
+
 CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
 {
   return new CInstanceMesh( Name, CoreName );
