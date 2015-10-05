@@ -209,11 +209,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
             }
             else
             {
-                pEngine->ProcessInputs();
-                pEngine->Update();
-
-                //if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-                //    pEngine->Render();
+                pEngine->Execute();
             }
         }
 

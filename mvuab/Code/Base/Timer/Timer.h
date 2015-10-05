@@ -26,7 +26,10 @@ class CTimer
 
         void Update();
 
-        float32 GetElapsedTime() const { return m_DeltaTime; }
+        float32 GetElapsedTime() const
+        {
+            return m_DeltaTime;
+        }
         float32 GetTime() const { return m_fTime; }
 
         float32 GetFPS() const { return m_FPS; }

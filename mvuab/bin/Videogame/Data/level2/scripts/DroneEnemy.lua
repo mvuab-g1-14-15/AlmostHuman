@@ -123,7 +123,7 @@ function CDroneEnemyLUA:MoveToPlayer(PositionPlayer)
 	
 	CharacterController = CEnemyLUA.GetCharacterController(self)	
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = g_EnemyManager:GetAStar( self.Room )
 
     if ( not self.PathCalculated ) then   
         self.Path = lAStar:GetPath( lPos, PositionPlayer )

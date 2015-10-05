@@ -163,6 +163,11 @@ private: // Members
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
 
+  D3DXHANDLE m_ZBlurFocalStart;
+  D3DXHANDLE m_ZBlurFocalEnd;
+  D3DXHANDLE m_ZBlurConstant;
+  D3DXHANDLE m_ZBlurEnd;
+
   //
   // Shadow map handles
   //

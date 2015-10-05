@@ -235,6 +235,7 @@ int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
     TAnimationsIdMap::const_iterator lItFind = m_AnimationsMap.find( AnimationName );
 	ASSERT( lItFind != m_AnimationsMap.end(), "The animation %s does not exist", AnimationName.c_str() );
 	return (lItFind == m_AnimationsMap.end()) ? INT_MAX : lItFind->second;
+        //LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
 }
 
 int CAnimatedCoreModel::GetAnimationsCount()

@@ -24,6 +24,9 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Velocity = 2.0
 	self.Delta = 0.5
 	
+	self.IsHurting = false
+	countdowntimer_manager:AddTimer(self.Name.."HurtTime", 1.0, false)
+	
 	self.Alarmado = false
 	self.PositionAlarm = Vect3f(0,0,0)
 	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
@@ -83,6 +86,7 @@ function CEnemyLUA:Update()
 	self:SetMeshTransform()
 	self.Brain:Update()
 	self:UpdateCamera()
+	self:CheckHurting()
 end
 
 function CEnemyLUA:UpdateCamera()
@@ -248,9 +252,10 @@ function CEnemyLUA:MoveToPos( aPos )
 	
 	local CharacterController = self:GetCharacterController()
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = g_EnemyManager:GetAStar( self.Room )
 
-    if ( not self.PathCalculated ) then   
+    if ( not self.PathCalculated ) then  
+		engine:Trace("He entrado a calcular la posicion")
         self.Path = lAStar:GetPath( lPos, aPos )
         self.PathCalculated = true
     end
@@ -262,15 +267,16 @@ function CEnemyLUA:MoveToPos( aPos )
     lDist = lTargetPos:Distance( lWaypointPos )
 	
 	count = self.Path:size()
-	
+	engine:Trace("El tamaño de la path es: "..lDist)
     if ( (count - self.ActualPathPoint) > 2 ) then
-        if ( lDist < 0.6 ) then
+        if ( lDist < 0.8 ) then
             self.ActualPathPoint = self.ActualPathPoint + 1
 		end
         lTargetPos = self.Path:GetResource(self.ActualPathPoint)
     end
     lTargetPos.y = 0
 	
+	engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
 	self:MoveToWaypoint(lTargetPos)
     
     if ( self.Path:GetResource(count - 1):Distance( aPos ) > 5.0 ) then
@@ -295,7 +301,7 @@ end
 function CEnemyLUA:MoveToPlayer(PositionPlayer)
 	CharacterController = self:GetCharacterController()	
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = g_EnemyManager:GetAStar(self.Room)
 
     if ( not self.PathCalculated ) then   
         self.Path = lAStar:GetPath( lPos, PositionPlayer )
@@ -367,10 +373,10 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
         CharacterController:Move( Vect3f( 0.0 ), dt )
 		if YawDif > 0 then
 			YawDif = 1
-			self.RenderableObject:ChangeAnimation("turn_left", 0.5, 0.5)
+			self.RenderableObject:ChangeAnimation("turn_left", 0.2, 1)
 		else
 			YawDif = -1
-			self.RenderableObject:ChangeAnimation("turn_right", 0.5, 0.5)
+			self.RenderableObject:ChangeAnimation("turn_right", 0.2, 1)
 		end
         Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
 
@@ -415,6 +421,79 @@ function CEnemyLUA:ChangeRoute(position)
 end
 
 function CEnemyLUA:ChangeAnimation(animation, delayin, delayout)
-	self.CurrentAnimation = animation
-	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
+	engine:Trace("Next animation: "..animation)
+	if not self.IsHurting then
+		engine:Trace("Is not hurting.")
+		self.CurrentAnimation = animation
+		self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
+	end
+end
+
+function CEnemyLUA:RotateToPlayer()
+	local dt = timer:GetElapsedTime()
+	CharacterController = self:GetCharacterController()
+	local ActualPos = Vect3f(CharacterController:GetPosition())
+	local FinalPos = g_Player:GetPosition()
+	FinalPos.y = 0
+	ActualPos.y = 0
+	local Dir = FinalPos - ActualPos	
+	Dir.y = 0.0
+	if CheckVector(Dir) then
+		Dir:Normalize()
+	end
+	DirYaw = math.atan2( Dir.z, Dir.x )
+	Yaw = CharacterController:GetYaw()
+	YawDif = DirYaw - Yaw
+    PrevYaw = Yaw
+		
+	local YawDifCom = DirYaw - 2*g_Pi - Yaw
+	if math.abs( YawDifCom ) < math.abs( YawDif ) then
+		YawDif = YawDifCom
+	else
+		local YawDifCom = DirYaw + 2*g_Pi - Yaw
+		if math.abs( YawDifCom ) < math.abs( YawDif ) then
+			YawDif = YawDifCom
+		end
+	end
+		
+    if ( math.abs( YawDif ) < 0.1 ) then
+		Yaw = DirYaw;
+    else
+        CharacterController:Move( Vect3f( 0.0 ), dt )
+		if YawDif > 0 then
+			YawDif = 1
+		else
+			YawDif = -1
+		end
+        Yaw = Yaw + (YawDif * self.TurnSpeed * dt)
+
+        if ( ( Yaw < DirYaw and PrevYaw > DirYaw ) or ( Yaw > DirYaw and PrevYaw < DirYaw ) ) then
+            Yaw = DirYaw
+		end
+    end
+	
+    CharacterController:SetYaw( Yaw )
+    self:SetYaw( Yaw )
+end
+
+function CEnemyLUA:SetIsHurting()
+	if self.Life > 0 then
+		self.IsHurting = true
+		countdowntimer_manager:SetActive(self.Name.."HurtTime", true)
+	end
+end
+
+function CEnemyLUA:CheckHurting()
+	if self.Life > 0 then
+		if self.IsHurting then
+			if countdowntimer_manager:IsActive(self.Name.."HurtTime") then
+				if countdowntimer_manager:isTimerFinish(self.Name.."HurtTime") then
+					self.IsHurting = false
+					countdowntimer_manager:Reset(self.Name.."HurtTime", false)
+				end
+			end
+		end
+	else
+		self.IsHurting = false
+	end
 end

@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<graph>
+  <node id="1" pos="-43.1412 -16.7975 78.1289" />
+  <weight src="1" dst="4" value="4.45004" />
+  <weight src="1" dst="2" value="3.53358" />
+  <weight src="1" dst="5" value="4.82518" />
+  <node id="2" pos="-46.6747 -16.7975 78.1289" />
+  <weight src="2" dst="1" value="3.53358" />
+  <weight src="2" dst="3" value="4.45004" />
+  <node id="3" pos="-46.6747 -16.7975 73.6788" />
+  <weight src="3" dst="2" value="4.45004" />
+  <weight src="3" dst="8" value="4.45005" />
+  <weight src="3" dst="4" value="3.53358" />
+  <node id="4" pos="-43.1412 -16.7975 73.6788" />
+  <weight src="4" dst="1" value="4.45004" />
+  <weight src="4" dst="3" value="3.53358" />
+  <weight src="4" dst="6" value="4.82518" />
+  <weight src="4" dst="7" value="4.45005" />
+  <node id="5" pos="-38.316 -16.7975 78.1289" />
+  <weight src="5" dst="1" value="4.82518" />
+  <weight src="5" dst="13" value="4.17938" />
+  <weight src="5" dst="6" value="4.45004" />
+  <node id="6" pos="-38.316 -16.7975 73.6788" />
+  <weight src="6" dst="4" value="4.82518" />
+  <weight src="6" dst="5" value="4.45004" />
+  <weight src="6" dst="11" value="4.45005" />
+  <weight src="6" dst="12" value="4.17938" />
+  <node id="7" pos="-43.1412 -16.7975 69.2288" />
+  <weight src="7" dst="4" value="4.45005" />
+  <weight src="7" dst="10" value="4.45004" />
+  <weight src="7" dst="8" value="3.53358" />
+  <weight src="7" dst="11" value="4.82518" />
+  <node id="8" pos="-46.6747 -16.7975 69.2288" />
+  <weight src="8" dst="3" value="4.45005" />
+  <weight src="8" dst="7" value="3.53358" />
+  <weight src="8" dst="9" value="4.45004" />
+  <node id="9" pos="-46.6747 -16.7975 64.7787" />
+  <weight src="9" dst="8" value="4.45004" />
+  <weight src="9" dst="10" value="3.53358" />
+  <weight src="9" dst="14" value="4.45005" />
+  <node id="10" pos="-43.1412 -16.7975 64.7787" />
+  <weight src="10" dst="7" value="4.45004" />
+  <weight src="10" dst="9" value="3.53358" />
+  <weight src="10" dst="15" value="4.45005" />
+  <weight src="10" dst="16" value="4.82518" />
+  <node id="11" pos="-38.316 -16.7975 69.2288" />
+  <weight src="11" dst="6" value="4.45005" />
+  <weight src="11" dst="7" value="4.82518" />
+  <weight src="11" dst="16" value="4.45004" />
+  <weight src="11" dst="17" value="4.17938" />
+  <node id="12" pos="-34.1366 -16.7975 73.6788" />
+  <weight src="12" dst="6" value="4.17938" />
+  <weight src="12" dst="17" value="4.45005" />
+  <weight src="12" dst="13" value="4.45004" />
+  <weight src="12" dst="18" value="4.64132" />
+  <node id="13" pos="-34.1366 -16.7975 78.1289" />
+  <weight src="13" dst="5" value="4.17938" />
+  <weight src="13" dst="12" value="4.45004" />
+  <weight src="13" dst="19" value="4.64132" />
+  <node id="14" pos="-46.6747 -16.7975 60.3287" />
+  <weight src="14" dst="9" value="4.45005" />
+  <weight src="14" dst="15" value="3.53358" />
+  <weight src="14" dst="20" value="4.45005" />
+  <node id="15" pos="-43.1412 -16.7975 60.3287" />
+  <weight src="15" dst="10" value="4.45005" />
+  <weight src="15" dst="14" value="3.53358" />
+  <weight src="15" dst="21" value="4.45005" />
+  <weight src="15" dst="22" value="4.82518" />
+  <node id="16" pos="-38.316 -16.7975 64.7787" />
+  <weight src="16" dst="11" value="4.45004" />
+  <weight src="16" dst="10" value="4.82518" />
+  <weight src="16" dst="22" value="4.45005" />
+  <weight src="16" dst="23" value="4.17938" />
+  <node id="17" pos="-34.1366 -16.7975 69.2288" />
+  <weight src="17" dst="12" value="4.45005" />
+  <weight src="17" dst="11" value="4.17938" />
+  <weight src="17" dst="23" value="4.45005" />
+  <weight src="17" dst="24" value="4.64132" />
+  <node id="18" pos="-29.4953 -16.7975 73.6788" />
+  <weight src="18" dst="12" value="4.64132" />
+  <weight src="18" dst="24" value="4.45005" />
+  <weight src="18" dst="19" value="4.45004" />
+  <weight src="18" dst="25" value="4.58773" />
+  <node id="19" pos="-29.4953 -16.7975 78.1289" />
+  <weight src="19" dst="13" value="4.64132" />
+  <weight src="19" dst="18" value="4.45004" />
+  <weight src="19" dst="26" value="4.58773" />
+  <node id="20" pos="-46.6747 -16.7975 55.8786" />
+  <weight src="20" dst="14" value="4.45005" />
+  <weight src="20" dst="21" value="3.53358" />
+  <weight src="20" dst="27" value="4.45005" />
+  <node id="21" pos="-43.1412 -16.7975 55.8786" />
+  <weight src="21" dst="15" value="4.45005" />
+  <weight src="21" dst="20" value="3.53358" />
+  <weight src="21" dst="28" value="4.45005" />
+  <weight src="21" dst="29" value="4.82518" />
+  <node id="22" pos="-38.316 -16.7975 60.3287" />
+  <weight src="22" dst="16" value="4.45005" />
+  <weight src="22" dst="15" value="4.82518" />
+  <weight src="22" dst="29" value="4.45005" />
+  <weight src="22" dst="30" value="4.17938" />
+  <node id="23" pos="-34.1366 -16.7975 64.7787" />
+  <weight src="23" dst="17" value="4.45005" />
+  <weight src="23" dst="16" value="4.17938" />
+  <weight src="23" dst="30" value="4.45004" />
+  <weight src="23" dst="31" value="4.64132" />
+  <node id="24" pos="-29.4953 -16.7975 69.2288" />
+  <weight src="24" dst="18" value="4.45005" />
+  <weight src="24" dst="17" value="4.64132" />
+  <weight src="24" dst="31" value="4.45005" />
+  <weight src="24" dst="32" value="4.58773" />
+  <node id="25" pos="-24.9075 -16.7975 73.6788" />
+  <weight src="25" dst="18" value="4.58773" />
+  <weight src="25" dst="32" value="4.45004" />
+  <weight src="25" dst="26" value="4.45005" />
+  <weight src="25" dst="33" value="3.30908" />
+  <node id="26" pos="-24.9075 -16.7975 78.1289" />
+  <weight src="26" dst="19" value="4.58773" />
+  <weight src="26" dst="25" value="4.45005" />
+  <weight src="26" dst="34" value="3.30909" />
+  <node id="27" pos="-46.6747 -16.7975 51.4286" />
+  <weight src="27" dst="20" value="4.45005" />
+  <weight src="27" dst="28" value="3.53358" />
+  <weight src="27" dst="35" value="4.45005" />
+  <node id="28" pos="-43.1412 -16.7975 51.4286" />
+  <weight src="28" dst="21" value="4.45005" />
+  <weight src="28" dst="27" value="3.53358" />
+  <weight src="28" dst="36" value="4.45005" />
+  <weight src="28" dst="37" value="4.82518" />
+  <node id="29" pos="-38.316 -16.7975 55.8786" />
+  <weight src="29" dst="22" value="4.45005" />
+  <weight src="29" dst="21" value="4.82518" />
+  <weight src="29" dst="37" value="4.45005" />
+  <weight src="29" dst="38" value="4.17938" />
+  <node id="30" pos="-34.1366 -16.7975 60.3287" />
+  <weight src="30" dst="23" value="4.45004" />
+  <weight src="30" dst="22" value="4.17938" />
+  <weight src="30" dst="38" value="4.45005" />
+  <weight src="30" dst="39" value="4.64132" />
+  <node id="31" pos="-29.4953 -16.7975 64.7787" />
+  <weight src="31" dst="24" value="4.45005" />
+  <weight src="31" dst="23" value="4.64132" />
+  <weight src="31" dst="39" value="4.45004" />
+  <weight src="31" dst="40" value="4.58773" />
+  <node id="32" pos="-24.9075 -16.7975 69.2288" />
+  <weight src="32" dst="25" value="4.45004" />
+  <weight src="32" dst="24" value="4.58773" />
+  <weight src="32" dst="40" value="4.45005" />
+  <weight src="32" dst="41" value="3.30908" />
+  <node id="33" pos="-21.5985 -16.7975 73.6788" />
+  <weight src="33" dst="25" value="3.30908" />
+  <weight src="33" dst="41" value="4.45004" />
+  <weight src="33" dst="34" value="4.45005" />
+  <node id="34" pos="-21.5985 -16.7975 78.1289" />
+  <weight src="34" dst="26" value="3.30909" />
+  <weight src="34" dst="33" value="4.45005" />
+  <node id="35" pos="-46.6747 -16.7975 46.9785" />
+  <weight src="35" dst="27" value="4.45005" />
+  <weight src="35" dst="36" value="3.53358" />
+  <weight src="35" dst="42" value="4.45005" />
+  <node id="36" pos="-43.1412 -16.7975 46.9785" />
+  <weight src="36" dst="28" value="4.45005" />
+  <weight src="36" dst="35" value="3.53358" />
+  <weight src="36" dst="43" value="4.45005" />
+  <weight src="36" dst="44" value="4.82518" />
+  <node id="37" pos="-38.316 -16.7975 51.4286" />
+  <weight src="37" dst="29" value="4.45005" />
+  <weight src="37" dst="28" value="4.82518" />
+  <weight src="37" dst="44" value="4.45005" />
+  <weight src="37" dst="45" value="4.17938" />
+  <node id="38" pos="-34.1366 -16.7975 55.8786" />
+  <weight src="38" dst="30" value="4.45005" />
+  <weight src="38" dst="29" value="4.17938" />
+  <weight src="38" dst="45" value="4.45005" />
+  <weight src="38" dst="46" value="4.64132" />
+  <node id="39" pos="-29.4953 -16.7975 60.3287" />
+  <weight src="39" dst="31" value="4.45004" />
+  <weight src="39" dst="30" value="4.64132" />
+  <weight src="39" dst="46" value="4.45005" />
+  <weight src="39" dst="47" value="4.58773" />
+  <node id="40" pos="-24.9075 -16.7975 64.7787" />
+  <weight src="40" dst="32" value="4.45005" />
+  <weight src="40" dst="31" value="4.58773" />
+  <weight src="40" dst="47" value="4.45004" />
+  <weight src="40" dst="48" value="3.30908" />
+  <node id="41" pos="-21.5985 -16.7975 69.2288" />
+  <weight src="41" dst="33" value="4.45004" />
+  <weight src="41" dst="32" value="3.30908" />
+  <weight src="41" dst="48" value="4.45005" />
+  <node id="42" pos="-46.6747 -16.7975 42.5285" />
+  <weight src="42" dst="35" value="4.45005" />
+  <weight src="42" dst="43" value="3.53358" />
+  <node id="43" pos="-43.1412 -16.7975 42.5285" />
+  <weight src="43" dst="36" value="4.45005" />
+  <weight src="43" dst="42" value="3.53358" />
+  <weight src="43" dst="49" value="4.82518" />
+  <node id="44" pos="-38.316 -16.7975 46.9785" />
+  <weight src="44" dst="37" value="4.45005" />
+  <weight src="44" dst="36" value="4.82518" />
+  <weight src="44" dst="49" value="4.45005" />
+  <weight src="44" dst="50" value="4.17938" />
+  <node id="45" pos="-34.1366 -16.7975 51.4286" />
+  <weight src="45" dst="38" value="4.45005" />
+  <weight src="45" dst="37" value="4.17938" />
+  <weight src="45" dst="50" value="4.45005" />
+  <weight src="45" dst="51" value="4.64132" />
+  <node id="46" pos="-29.4953 -16.7975 55.8786" />
+  <weight src="46" dst="39" value="4.45005" />
+  <weight src="46" dst="38" value="4.64132" />
+  <weight src="46" dst="51" value="4.45005" />
+  <weight src="46" dst="52" value="4.58773" />
+  <node id="47" pos="-24.9075 -16.7975 60.3287" />
+  <weight src="47" dst="40" value="4.45004" />
+  <weight src="47" dst="39" value="4.58773" />
+  <weight src="47" dst="52" value="4.45005" />
+  <weight src="47" dst="53" value="3.30909" />
+  <node id="48" pos="-21.5985 -16.7975 64.7787" />
+  <weight src="48" dst="41" value="4.45005" />
+  <weight src="48" dst="40" value="3.30908" />
+  <weight src="48" dst="53" value="4.45005" />
+  <node id="49" pos="-38.316 -16.7975 42.5285" />
+  <weight src="49" dst="44" value="4.45005" />
+  <weight src="49" dst="43" value="4.82518" />
+  <weight src="49" dst="54" value="4.17938" />
+  <node id="50" pos="-34.1366 -16.7975 46.9785" />
+  <weight src="50" dst="45" value="4.45005" />
+  <weight src="50" dst="44" value="4.17938" />
+  <weight src="50" dst="54" value="4.45005" />
+  <weight src="50" dst="55" value="4.64132" />
+  <node id="51" pos="-29.4953 -16.7975 51.4286" />
+  <weight src="51" dst="46" value="4.45005" />
+  <weight src="51" dst="45" value="4.64132" />
+  <weight src="51" dst="55" value="4.45005" />
+  <weight src="51" dst="56" value="4.58773" />
+  <node id="52" pos="-24.9075 -16.7975 55.8786" />
+  <weight src="52" dst="47" value="4.45005" />
+  <weight src="52" dst="46" value="4.58773" />
+  <weight src="52" dst="56" value="4.45005" />
+  <weight src="52" dst="57" value="3.30909" />
+  <node id="53" pos="-21.5985 -16.7975 60.3287" />
+  <weight src="53" dst="48" value="4.45005" />
+  <weight src="53" dst="47" value="3.30909" />
+  <weight src="53" dst="57" value="4.45005" />
+  <node id="54" pos="-34.1366 -16.7975 42.5285" />
+  <weight src="54" dst="50" value="4.45005" />
+  <weight src="54" dst="49" value="4.17938" />
+  <weight src="54" dst="58" value="4.64132" />
+  <node id="55" pos="-29.4953 -16.7975 46.9785" />
+  <weight src="55" dst="51" value="4.45005" />
+  <weight src="55" dst="50" value="4.64132" />
+  <weight src="55" dst="58" value="4.45004" />
+  <weight src="55" dst="59" value="4.58773" />
+  <node id="56" pos="-24.9075 -16.7975 51.4286" />
+  <weight src="56" dst="52" value="4.45005" />
+  <weight src="56" dst="51" value="4.58773" />
+  <weight src="56" dst="59" value="4.45005" />
+  <weight src="56" dst="60" value="3.30908" />
+  <node id="57" pos="-21.5985 -16.7975 55.8786" />
+  <weight src="57" dst="53" value="4.45005" />
+  <weight src="57" dst="52" value="3.30909" />
+  <weight src="57" dst="60" value="4.45004" />
+  <node id="58" pos="-29.4953 -16.7975 42.5285" />
+  <weight src="58" dst="55" value="4.45004" />
+  <weight src="58" dst="54" value="4.64132" />
+  <weight src="58" dst="61" value="4.58773" />
+  <node id="59" pos="-24.9075 -16.7975 46.9785" />
+  <weight src="59" dst="56" value="4.45005" />
+  <weight src="59" dst="55" value="4.58773" />
+  <weight src="59" dst="61" value="4.45004" />
+  <weight src="59" dst="62" value="3.30908" />
+  <node id="60" pos="-21.5985 -16.7975 51.4286" />
+  <weight src="60" dst="57" value="4.45004" />
+  <weight src="60" dst="56" value="3.30908" />
+  <weight src="60" dst="62" value="4.45005" />
+  <node id="61" pos="-24.9075 -16.7975 42.5285" />
+  <weight src="61" dst="59" value="4.45004" />
+  <weight src="61" dst="58" value="4.58773" />
+  <weight src="61" dst="63" value="3.30908" />
+  <node id="62" pos="-21.5985 -16.7975 46.9785" />
+  <weight src="62" dst="60" value="4.45005" />
+  <weight src="62" dst="59" value="3.30908" />
+  <weight src="62" dst="63" value="4.45004" />
+  <node id="63" pos="-21.5985 -16.7975 42.5285" />
+  <weight src="63" dst="62" value="4.45004" />
+  <weight src="63" dst="61" value="3.30908" />
+</graph>

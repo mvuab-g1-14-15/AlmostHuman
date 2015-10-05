@@ -27,7 +27,7 @@ function check_next_state()
 	local l_HearSomething = HearPlayer(enemy)
 	local angle = GetAngleEnemyPlayer(enemy)
 	--engine:Trace("Veo al player "..tostring(l_PlayerInSight))
-	engine:Trace("Estado actual "..l_CurrentState)
+	--engine:Trace("Estado actual "..l_CurrentState)
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	
 	if l_CurrentState ~= "perseguir" and l_CurrentState ~= "activation" then
@@ -36,7 +36,7 @@ function check_next_state()
 			enemy.Suspected = true
 			enemy.SuspectedPosition = g_Player:GetPosition()
 		end
-		if enemy.AlarmadoInRoom2 and l_CurrentState ~= "atacar" then
+		if enemy.Alarmado and l_CurrentState ~= "atacar" then
 			l_NextState = "perseguir"
 		end
 		if l_CurrentState == "inicial" then
@@ -85,6 +85,10 @@ function check_next_state()
 		enemy:ChangeState(l_NextState)
 		enemy:ChangeAnimation(l_NextState, 0.2, 1.0)
 	end
+	
+	if enemy.IsHurting then
+		enemy:ChangeAnimation("hurt", 0.2, 1.0)
+	end
 end
 
 function andar()
@@ -122,6 +126,10 @@ function atacar()
 	local l_PlayerInSight = PlayerVisibility(enemy)
 	local angle = GetAngleEnemyPlayer(enemy)
 	local l_DistanceToPlayer = PlayerDistance(enemy)
+	
+	if math.abs(angle) > 0.1 then
+		enemy:RotateToPlayer()
+	end
 	
 	if l_PlayerInSight or (0 < angle and l_DistanceToPlayer < 4) then
 		if enemy:GetVelocity() == 5.0 then
@@ -174,7 +182,10 @@ function perseguir()
 		enemy:SetVelocity(5.0)
 	end
 	if enemy.Alarmado then
-		enemy:MoveToPlayer(enemy.PositionAlarm)
+		--engine:Trace("He entrado en Alarmado pos: "..enemy.PositionAlarm:ToString())
+		if enemy:MoveToPos(enemy.PositionAlarm) then
+			engine:Trace("Estoy en la posición")
+		end
 	elseif enemy.Suspected then
 		if enemy:MoveToPos(enemy.SuspectedPosition) then
 			enemy.Suspected = false

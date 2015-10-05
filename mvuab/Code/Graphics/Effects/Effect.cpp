@@ -52,6 +52,10 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( DeltaTime )
   , CTOR_EFFECT_PARAMETER( FlipUVVertical   )
   , CTOR_EFFECT_PARAMETER( FlipUVHorizontal )
+  , CTOR_EFFECT_PARAMETER( ZBlurFocalStart )
+  , CTOR_EFFECT_PARAMETER( ZBlurFocalEnd )
+  , CTOR_EFFECT_PARAMETER( ZBlurConstant )
+  , CTOR_EFFECT_PARAMETER( ZBlurEnd )
 {
   ResetLightsHandle();
 }
@@ -98,6 +102,11 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
   RESET_EFFECT_PARAMETER( BonesParameter )
   RESET_EFFECT_PARAMETER( LightProbesParameter )
+
+  RESET_EFFECT_PARAMETER( ZBlurFocalStart )
+  RESET_EFFECT_PARAMETER( ZBlurFocalEnd )
+  RESET_EFFECT_PARAMETER( ZBlurConstant )
+  RESET_EFFECT_PARAMETER( ZBlurEnd )
   
   ResetLightsHandle();
 }
@@ -126,8 +135,8 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( DeltaTime );
   LINK_EFFECT_PARAMETER( FlipUVVertical   );
   LINK_EFFECT_PARAMETER( FlipUVHorizontal );
-  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
-                          m_ViewToLightProjectionMatrixParameter );
+
+  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
@@ -135,10 +144,8 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( LightsAngleParameterStr, m_LightsAngleParameter );
   GetParameterBySemantic( LightsColorParameterStr, m_LightsColorParameter );
   GetParameterBySemantic( LightsFallOffParameterStr, m_LightsFallOffParameter );
-  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr,
-                          m_LightsStartRangeAttenuationParameter );
-  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,
-                          m_LightsEndRangeAttenuationParameter );
+  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr, m_LightsStartRangeAttenuationParameter );
+  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr, m_LightsEndRangeAttenuationParameter );
   GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
   GetParameterBySemantic( LightProbesParameterStr, m_LightProbesParameter );
   GetParameterBySemantic( DebugColorStr, m_DebugColor );
@@ -147,6 +154,11 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
+
+  GetParameterBySemantic( ZBlurFocalStart, m_ZBlurFocalStart );
+  GetParameterBySemantic( ZBlurFocalEnd, m_ZBlurFocalEnd );
+  GetParameterBySemantic( ZBlurConstant, m_ZBlurConstant );
+  GetParameterBySemantic( ZBlurEnd, m_ZBlurEnd );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
