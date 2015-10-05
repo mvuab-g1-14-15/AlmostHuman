@@ -16,7 +16,7 @@ function CShootLUA:__init(speed, direction, position, damage)
 	--	self.Billboard = billboard_manager:GetResource(self.Name)
 	--end
 	
-	self.Billboard:Init( "ShootBillBoard", self.Position, 1.0, 0.0, 1.0, "Data/textures/particles/fire3.png", "SmokeTechnique", true )
+	--self.Billboard:Init( "ShootBillBoard", self.Position, 1.0, 0.0, 1.0, "Data/textures/particles/fire3.png", "SmokeTechnique", true )
     self.Light = CreateOmniLight()
 	self.Light:SetName(self.Name)
     self.Light:SetIntensity( 0.65 )
