@@ -479,7 +479,6 @@ end
 
 function CEnemyLUA:SetIsHurting()
 	if self.Life > 0 then
-		enemy:ChangeAnimation("hurt", 0.2, 1.0)
 		self.IsHurting = true
 		countdowntimer_manager:SetActive(self.Name.."HurtTime", true)
 	end
@@ -491,8 +490,7 @@ function CEnemyLUA:CheckHurting()
 			if countdowntimer_manager:IsActive(self.Name.."HurtTime") then
 				if countdowntimer_manager:isTimerFinish(self.Name.."HurtTime") then
 					self.IsHurting = false
-					countdowntimer_manager:Reset(self.Name.."HurtTime", false)
-					enemy:ChangeAnimation("idle", 0.2, 1.0)
+					countdowntimer_manager:Reset(self.Name.."HurtTime", false)					
 				end
 			end
 		end
