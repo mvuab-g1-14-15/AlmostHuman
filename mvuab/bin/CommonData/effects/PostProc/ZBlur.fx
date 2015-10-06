@@ -6,8 +6,8 @@ float4 ZBlurPS(in float2 UV : TEXCOORD0) : COLOR
     float4 l_Color = float4(0.0, 0.0, 0.0, 0.0);
     float4 l_DepthMap = tex2D(S1LinearClampSampler, UV);
 
-    float3 l_CameraPosition = g_InverseViewMatrix[3].xyz;
-    float3 l_WorldPosition = GetPositionFromZDepthView(l_DepthMap, float2(0.0, 0.0), g_InverseViewMatrix, g_InverseProjectionMatrix);
+    float3 l_CameraPosition = g_ViewInverseMatrix[3].xyz;
+    float3 l_WorldPosition = GetPositionFromZDepthView(l_DepthMap, float2(0.0, 0.0), g_ViewInverseMatrix, g_ProjectionInverseMatrix);
 
     float l_Distance = length(l_WorldPosition - l_CameraPosition);
     float l_Blur = 1.0;
@@ -27,7 +27,7 @@ float4 ZBlurPS(in float2 UV : TEXCOORD0) : COLOR
         float2(-1, 0), float2(1,  0), float2(0, -1),float2(0, 1)
     };
 
-    float2 l_PixelInc = 4 * 1.0 / g_RenderTargetSize; //4 pixeles a la redonda
+    float2 l_PixelInc = 4 * 1.0 / 720; //4 pixeles a la redonda
     float4 l_AlbedoColor = tex2D(S0LinearClampSampler, UV);
 
     for(int i = 0; i < 8; i++)

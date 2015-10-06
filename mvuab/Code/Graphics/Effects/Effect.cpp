@@ -327,6 +327,15 @@ void CEffect::SetShadowMapParameters ( bool UseShadowMaskTexture, bool UseStatic
   SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
 }
 
+void CEffect::SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd)
+{
+    m_Effect->SetFloat(m_ZBlurFocalStart, FocalStart);
+    m_Effect->SetFloat(m_ZBlurFocalEnd, FocalEnd);
+
+    m_Effect->SetFloat(m_ZBlurConstant, Constant);
+    m_Effect->SetFloat(ZBlurEnd, BlurEnd);
+}
+
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
 {
   SET_BOOL_PARAMETER( UseDebugColor , aUse );

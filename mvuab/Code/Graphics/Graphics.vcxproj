@@ -110,6 +110,7 @@
     <ClCompile Include="SceneRenderComands\TriggerRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\ZBlurSceneRendererCommand.cpp" />
     <ClCompile Include="Shapes\Shapes.cpp" />
     <ClCompile Include="StaticMeshes\InstanceMesh.cpp" />
     <ClCompile Include="StaticMeshes\StaticMesh.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="SceneRenderComands\TriggerRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\UnsetRenderTargetSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\ZBlurSceneRendererCommand.h" />
     <ClInclude Include="Shapes\Shapes.h" />
     <ClInclude Include="StaticMeshes\InstanceMesh.h" />
     <ClInclude Include="StaticMeshes\StaticMesh.h" />

@@ -35,5 +35,9 @@
 	</technique>
     
     <technique name="ColorGradingTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ColorGrading.fx"/>
+    
+    <technique name="ZBlurTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ZBlur.fx">
+		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
+	</technique>
 		
 </effects>
