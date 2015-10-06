@@ -1,6 +1,7 @@
 <animated_model name="drone">
 	<skeleton file="drone.csf"/>
 	<mesh file="drone.cmf"/>
+	<!--texture file="drone_compo.dds"/-->
 	<animation name="idle" file="idle.caf"/>
 	<animation name="atacar" file="shoot.caf"/>
 	<animation name="pose_atac" file="pose_atac.caf"/>

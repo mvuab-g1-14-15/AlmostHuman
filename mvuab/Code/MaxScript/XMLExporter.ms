@@ -40,6 +40,13 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 		local NameVertexsMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]"
 		for Obj in UniqueInstanceArray do
 		(
+			
+				if (classof Obj != Editable_mesh OR classof Obj != Editable_poly) then
+				(
+					messageBox ("The object " + m_ObjName + " is not an Editable_mesh or Editable_poly")
+					exit
+				)
+				
 				local ObjName = toLower Obj.name
 				local ObjNameCoreAux = trimright ObjName "0123456789"
 				

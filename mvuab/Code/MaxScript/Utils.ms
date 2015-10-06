@@ -171,6 +171,10 @@ fn IsObjExportable Obj =
 	(
 		isExportable = false
 	)
+	else if(classof Obj == tube) then 
+	(
+		isExportable = false
+	)
 	else
 	(
 		isExportable = true
