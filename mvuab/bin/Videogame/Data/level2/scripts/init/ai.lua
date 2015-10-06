@@ -85,10 +85,6 @@ function check_next_state()
 		enemy:ChangeState(l_NextState)
 		enemy:ChangeAnimation(l_NextState, 0.2, 1.0)
 	end
-	
-	if enemy.IsHurting then
-		enemy:ChangeAnimation("hurt", 0.2, 1.0)
-	end
 end
 
 function andar()
