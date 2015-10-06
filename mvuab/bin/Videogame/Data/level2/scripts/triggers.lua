@@ -175,11 +175,11 @@ function StayText(room, message, other_shape)
 	elseif room == "room3" then
 		if g_bPressedRoom3X and enemigosVivos then
 				gui_manager:ShowStaticText(message)
-				CuentaAtras = 3
+				g_sMessageAlarm = message
 				g_bPressedRoom3X = false
 		elseif g_bPressedRoom3X then
 			
-			gui_manager:ShowStaticText(message)
+			--gui_manager:ShowStaticText(message)
 			g_bPressedRoom3X = false
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true

@@ -11,6 +11,10 @@ g_Barrels = {}
 
 initialized1 = false
 
+g_bAlarmRoom3 = false
+g_fOcultarMensaje = 5.0
+g_sMessageAlarm = ""
+
 function load_basics()
 	-- basic loads
 	scene:ActivateRoom("room1")
@@ -93,6 +97,7 @@ function update_gameplay()
 		if action_manager:DoAction("OpenDoorRoom3") then
 			if g_bPressRoom3X then
 				--gui_manager:ShowStaticText("Alarm")
+				g_bAlarmRoom3 = true
 				g_EnemyManager:AlarmRoom("room3")				
 				g_bPressedRoom3X = true
 			elseif g_bOpenDoor3 then
@@ -119,7 +124,8 @@ function update_gameplay()
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
-		
+		dt = timer:GetElapsedTime()
+		UpdateVariables(dt)
 	end
 	if g_bInBarrel then
 		--engine:Trace("Next to barrel "..g_BarrelName)
@@ -154,6 +160,17 @@ function update_gameplay()
 		
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
+		end
+	end
+end
+
+function UpdateVariables(dt)
+	if g_bAlarmRoom3 then
+		g_fOcultarMensaje = g_fOcultarMensaje - dt
+		if g_fOcultarMensaje <= 0 then
+			g_fOcultarMensaje = 5.0
+			g_bAlarmRoom3 = false
+			gui_manager:ShowStaticText(g_sMessageAlarm)
 		end
 	end
 end
