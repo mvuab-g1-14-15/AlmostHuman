@@ -59,6 +59,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Brain = CBrain(Node:GetAttributeString("state", "inicial"), state_machine)
 	
 	self.CurrentAnimation = Node:GetAttributeString("state", "inicial")
+	self.BackAnimation = self.CurrentAnimation
 	--self:ChangeState("perseguir")
 	--self:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
 	

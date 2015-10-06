@@ -2,13 +2,13 @@ tiempoDeEspera = 0
 
 function init_enemy()
 	enemy = g_EnemyManager:GetActualEnemy()
-	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
+	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 0.2)
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 end
 
 function activation()
 	enemy = g_EnemyManager:GetActualEnemy()
-	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 1.0)
+	enemy:ChangeAnimation(enemy:GetActualState(), 1, 0.2)
 	timerActivation = "Activation"..enemy:GetName()
 	if not countdowntimer_manager:ExistTimer(timerActivation) then
 		countdowntimer_manager:AddTimer(timerActivation, 3.0, false)
@@ -18,8 +18,10 @@ function activation()
 end
 function check_next_state()
 	enemy = g_EnemyManager:GetActualEnemy()
+	--timerHurt = "Recibo disparo "..enemy:GetName()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	timerActivation = "Activation"..enemy:GetName()
+
 	local l_CurrentState = enemy:GetActualState()
 	local l_NextState = l_CurrentState	
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -81,13 +83,11 @@ function check_next_state()
 		end
 	end
 	
+	
+		
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:ChangeAnimation(l_NextState, 0.2, 1.0)
-	end
-	
-	if enemy.IsHurting then
-		enemy:ChangeAnimation("hurt", 0.2, 1.0)
 	end
 end
 
