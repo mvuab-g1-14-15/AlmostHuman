@@ -235,10 +235,10 @@
       <Filter>SceneRenderComands\PostProcCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\BillboardRendererCommand.cpp">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderDebugSceneSceneRendererCommand.cpp">
       <Filter>SceneRenderComands\DebugCmd</Filter>
@@ -250,13 +250,13 @@
       <Filter>SceneRenderComands\DXCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\WeaponTargetRendererCommand.cpp">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\TriggerRendererCommand.cpp">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClCompile>
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp">
       <Filter>SceneRenderComands\DXCmd</Filter>
@@ -319,6 +319,9 @@
       <Filter>Billboard</Filter>
     </ClCompile>
     <ClCompile Include="VideoPlayer.cpp" />
+    <ClCompile Include="SceneRenderComands\ZBlurSceneRendererCommand.cpp">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -564,10 +567,10 @@
       <Filter>SceneRenderComands\PostProcCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\BillboardRendererCommand.h">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderDebugShadowMapsSceneRendererCommand.h">
       <Filter>SceneRenderComands\DebugCmd</Filter>
@@ -579,13 +582,13 @@
       <Filter>SceneRenderComands\DXCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\WeaponTargetRendererCommand.h">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\TriggerRendererCommand.h">
       <Filter>SceneRenderComands\DebugCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h">
-      <Filter>SceneRenderComands\VisualsCmd</Filter>
+      <Filter>SceneRenderComands\PostProcCmd\VisualsCmd</Filter>
     </ClInclude>
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h">
       <Filter>SceneRenderComands\DXCmd</Filter>
@@ -649,6 +652,9 @@
       <Filter>Billboard</Filter>
     </ClInclude>
     <ClInclude Include="VideoPlayer.h" />
+    <ClInclude Include="SceneRenderComands\ZBlurSceneRendererCommand.h">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -705,9 +711,6 @@
     <Filter Include="SceneRenderComands\DebugCmd">
       <UniqueIdentifier>{42b0243a-0b14-4669-837c-55497473958e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneRenderComands\VisualsCmd">
-      <UniqueIdentifier>{c61a49ff-1c74-489c-b963-41de6b334f58}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SceneRenderComands\EffectsCmd">
       <UniqueIdentifier>{b40002c5-8ae9-4015-aa51-4e09ba0c6010}</UniqueIdentifier>
     </Filter>
@@ -722,6 +725,9 @@
     </Filter>
     <Filter Include="DronBarrier">
       <UniqueIdentifier>{3dac9d0b-bfaf-4010-a512-9e54ea45ada0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneRenderComands\PostProcCmd\VisualsCmd">
+      <UniqueIdentifier>{c61a49ff-1c74-489c-b963-41de6b334f58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

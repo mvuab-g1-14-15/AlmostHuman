@@ -103,6 +103,7 @@ public:
   void SetSize( float aSize );
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
+  void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:

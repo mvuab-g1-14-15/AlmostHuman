@@ -114,10 +114,10 @@ int         g_WindowHeight                                          : WindowHeig
 //
 // ZBlur data
 //
-float      g_ZBlurFocalStart                                        : ZBlurFocalStart = 50;
-float      g_ZBlurFocalEnd                                          : ZBlurFocalEnd = 65;
-float      g_ConstantBlur                                           : ConstantBlur = 0.4;
-float      g_ZBlurEnd                                               : ZBlurEnd = 300;
+float      g_ZBlurFocalStart                                        : ZBlurFocalStart = 2;
+float      g_ZBlurFocalEnd                                          : ZBlurFocalEnd = 5;
+float      g_ConstantBlur                                           : ConstantBlur = 0.1;
+float      g_ZBlurEnd                                               : ZBlurEnd = 50;
 
 //
 // Timers
