@@ -55,8 +55,12 @@ function update_gameplay()
 		
 	end
 	
-	if action_manager:DoAction("Alarm") then
+	if action_manager:DoAction("Alarm") then	
 			sound_manager:PlayEvent("Play_Alarm", "Alarma_Sala2" )	
+	end
+	
+	if action_manager:DoAction("Ambient_salaX") then
+		sound_manager:PlayEvent("Play_Ambient_Sala3", "Ambient" )	
 	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then

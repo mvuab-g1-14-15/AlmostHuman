@@ -14,16 +14,25 @@
 			<ShortName>Ambient</ShortName>
 			<Path>Ambient.bnk</Path>
 			<IncludedEvents>
+				<Event Id="2902920709" Name="Play_Alerta"/>
+				<Event Id="1704638915" Name="Play_Ambient_Pasillo"/>
+				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
+				<Event Id="3568813383" Name="Play_Main_Theme"/>
+				<Event Id="339442378" Name="Play_Panico"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="267654150" Language="SFX">
+				<File Id="197167235" Language="SFX">
 					<ShortName>dark soundscapes 14.wav</ShortName>
-					<Path>SFX\dark soundscapes 14_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 14_E106FFBE.wem</Path>
+				</File>
+				<File Id="331274194" Language="SFX">
+					<ShortName>Main Theme.wav</ShortName>
+					<Path>SFX\Main Theme_E106FFBE.wem</Path>
 				</File>
 				<File Id="342893694" Language="SFX">
 					<ShortName>dark soundscapes 16.wav</ShortName>
-					<Path>SFX\dark soundscapes 16_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 16_E106FFBE.wem</Path>
 				</File>
 				<File Id="354184061" Language="SFX">
 					<ShortName>dark soundscapes 11.wav</ShortName>
@@ -73,47 +82,88 @@
 					<ShortName>dark soundscapes 02.wav</ShortName>
 					<Path>SFX\dark soundscapes 02_950FF8F3.wem</Path>
 				</File>
-				<File Id="1072309381" Language="SFX">
-					<ShortName>dark soundscapes 03.wav</ShortName>
-					<Path>SFX\dark soundscapes 03_950FF8F3.wem</Path>
+				<File Id="1057715424" Language="SFX">
+					<ShortName>Almost human Panico.wav</ShortName>
+					<Path>SFX\Almost human Panico_E106FFBE.wem</Path>
+				</File>
+				<File Id="1058189291" Language="SFX">
+					<ShortName>Almost human Alerta.wav</ShortName>
+					<Path>SFX\Almost human Alerta_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="89505537" Language="SFX">
+			<ShortName>Gameplay</ShortName>
+			<Path>Gameplay.bnk</Path>
+			<IncludedEvents>
+				<Event Id="847470298" Name="Open_Close_Door_Event"/>
+				<Event Id="603937113" Name="Play_Alarm"/>
+				<Event Id="2989601031" Name="Play_Crash_Metal_Grille"/>
+				<Event Id="2456271929" Name="Play_In_Out_Barrel"/>
+				<Event Id="377487063" Name="Stop_Alarm"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="207815857" Language="SFX">
+					<ShortName>crash_metal_grille_curt.wav</ShortName>
+					<Path>SFX\crash_metal_grille_curt_E106FFBE.wem</Path>
+				</File>
+				<File Id="328627046" Language="SFX">
+					<ShortName>enter_leave_barrel.wav</ShortName>
+					<Path>SFX\enter_leave_barrel_76A5D070.wem</Path>
+				</File>
+				<File Id="427511858" Language="SFX">
+					<ShortName>open_close_door.wav</ShortName>
+					<Path>SFX\open_close_door_76A5D070.wem</Path>
+				</File>
+				<File Id="709423413" Language="SFX">
+					<ShortName>alarm2.wav</ShortName>
+					<Path>SFX\alarm2_BADC626A.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="166012248" Language="SFX">
+			<ShortName>Irirs</ShortName>
+			<Path>Irirs.bnk</Path>
 		</SoundBank>
 		<SoundBank Id="207235876" Language="SFX">
 			<ShortName>Logan</ShortName>
 			<Path>Logan.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2054452452" Name="Acumulator_Long_Shoot_Event"/>
-				<Event Id="2839381747" Name="Logan_Footstep_Walk"/>
-				<Event Id="23506888" Name="Play_Long_Shoot"/>
-				<Event Id="3038207054" Name="Shoot"/>
-				<Event Id="401192514" Name="Shoot_Long_Shoot_Event"/>
+				<Event Id="3002718147" Name="Logan_Footstep_Walk_Metal"/>
+				<Event Id="2855377483" Name="Logan_Footstep_Walk_Pavimento"/>
+				<Event Id="3876631393" Name="Play_Acumulator_Long_Shoot_Event"/>
+				<Event Id="4202206853" Name="Play_Long_Shoot_Event"/>
+				<Event Id="3668163621" Name="Play_Short_Shoot_Event"/>
 				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="28984091" Language="SFX">
-					<ShortName>RS2_FAST_IMPACT_WEAPONRY_013_B.wav</ShortName>
-					<Path>SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_76A5D070.wem</Path>
+				<File Id="32348632" Language="SFX">
+					<ShortName>Paso metal der_amp.wav</ShortName>
+					<Path>SFX\Paso metal der_amp_76A5D070.wem</Path>
 				</File>
-				<File Id="165869216" Language="SFX">
-					<ShortName>RS2_MACHINE_MOVE_LONG_022_Bb_v(short).wav</ShortName>
-					<Path>SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_76A5D070.wem</Path>
+				<File Id="262355845" Language="SFX">
+					<ShortName>Paso metal izq_amp.wav</ShortName>
+					<Path>SFX\Paso metal izq_amp_76A5D070.wem</Path>
 				</File>
 				<File Id="267394215" Language="SFX">
 					<ShortName>Paso suelo1.wav</ShortName>
 					<Path>SFX\Paso suelo1_76A5D070.wem</Path>
 				</File>
+				<File Id="273085640" Language="SFX">
+					<ShortName>Logan Large Shoot.wav</ShortName>
+					<Path>SFX\Logan Large Shoot_76A5D070.wem</Path>
+				</File>
+				<File Id="535759751" Language="SFX">
+					<ShortName>Logan Short Shoot.wav</ShortName>
+					<Path>SFX\Logan Short Shoot_DDC98EF4.wem</Path>
+				</File>
 				<File Id="787840959" Language="SFX">
 					<ShortName>Paso suelo2.wav</ShortName>
 					<Path>SFX\Paso suelo2_76A5D070.wem</Path>
 				</File>
-				<File Id="834326531" Language="SFX">
-					<ShortName>ACUMULATOR_Db.wav</ShortName>
-					<Path>SFX\ACUMULATOR_Db_DDC98EF4.wem</Path>
-				</File>
-				<File Id="917228779" Language="SFX">
-					<ShortName>ACUMULATOR_loop_Db.wav</ShortName>
-					<Path>SFX\ACUMULATOR_loop_Db_8BD76F1E.wem</Path>
+				<File Id="864427922" Language="SFX">
+					<ShortName>Logan Carga.wav</ShortName>
+					<Path>SFX\Logan Carga_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -121,29 +171,18 @@
 			<ShortName>AlmostHuman</ShortName>
 			<Path>AlmostHuman.bnk</Path>
 			<IncludedEvents>
-				<Event Id="847470298" Name="Open_Close_Door_Event"/>
-				<Event Id="603937113" Name="Play_Alarm"/>
 				<Event Id="1292086503" Name="Play_Back"/>
 				<Event Id="3552663155" Name="Play_Cash"/>
-				<Event Id="2757069037" Name="Play_Fan"/>
 				<Event Id="3174629258" Name="Play_GameOver"/>
 				<Event Id="785979864" Name="Play_Gui_Over"/>
 				<Event Id="2454594115" Name="Play_Help"/>
-				<Event Id="2456271929" Name="Play_In_Out_Barrel"/>
 				<Event Id="426840996" Name="Play_Init"/>
-				<Event Id="1355231703" Name="Play_LightHumming"/>
 				<Event Id="2513968146" Name="Play_LoopGen"/>
 				<Event Id="474386569" Name="Play_Next"/>
 				<Event Id="2348692292" Name="Play_Over"/>
-				<Event Id="1062476537" Name="Play_Spark"/>
-				<Event Id="2885688842" Name="Play_Steam"/>
 				<Event Id="186343927" Name="Play_Youwin"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="10864768" Language="SFX">
-					<ShortName>steam(vapor)_short.wav</ShortName>
-					<Path>SFX\steam(vapor)_short_76A5D070.wem</Path>
-				</File>
 				<File Id="45634969" Language="SFX">
 					<ShortName>gui_back.wav</ShortName>
 					<Path>SFX\gui_back_76A5D070.wem</Path>
@@ -151,22 +190,6 @@
 				<File Id="193371772" Language="SFX">
 					<ShortName>gui_next.wav</ShortName>
 					<Path>SFX\gui_next_76A5D070.wem</Path>
-				</File>
-				<File Id="294083481" Language="SFX">
-					<ShortName>Light Humming.wav</ShortName>
-					<Path>SFX\Light Humming_BADC626A.wem</Path>
-				</File>
-				<File Id="328627046" Language="SFX">
-					<ShortName>enter_leave_barrel.wav</ShortName>
-					<Path>SFX\enter_leave_barrel_76A5D070.wem</Path>
-				</File>
-				<File Id="418116809" Language="SFX">
-					<ShortName>Fan.wav</ShortName>
-					<Path>SFX\Fan_76A5D070.wem</Path>
-				</File>
-				<File Id="427511858" Language="SFX">
-					<ShortName>open_close_door.wav</ShortName>
-					<Path>SFX\open_close_door_76A5D070.wem</Path>
 				</File>
 				<File Id="444784154" Language="SFX">
 					<ShortName>gameOver.wav</ShortName>
@@ -179,14 +202,6 @@
 				<File Id="507701302" Language="SFX">
 					<ShortName>gui_over.wav</ShortName>
 					<Path>SFX\gui_over_76A5D070.wem</Path>
-				</File>
-				<File Id="707043063" Language="SFX">
-					<ShortName>sparks(chispas).wav</ShortName>
-					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
-				</File>
-				<File Id="709423413" Language="SFX">
-					<ShortName>alarm2.wav</ShortName>
-					<Path>SFX\alarm2_BADC626A.wem</Path>
 				</File>
 				<File Id="869195930" Language="SFX">
 					<ShortName>youwin.wav</ShortName>
@@ -209,6 +224,86 @@
 		<SoundBank Id="1355168291" Language="SFX">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1904121556" Language="SFX">
+			<ShortName>Various</ShortName>
+			<Path>Various.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2757069037" Name="Play_Fan"/>
+				<Event Id="1355231703" Name="Play_LightHumming"/>
+				<Event Id="2995129850" Name="Play_Shoot_Nave"/>
+				<Event Id="1062476537" Name="Play_Spark"/>
+				<Event Id="2885688842" Name="Play_Steam"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="10864768" Language="SFX">
+					<ShortName>steam(vapor)_short.wav</ShortName>
+					<Path>SFX\steam(vapor)_short_BADC626A.wem</Path>
+				</File>
+				<File Id="294083481" Language="SFX">
+					<ShortName>Light Humming.wav</ShortName>
+					<Path>SFX\Light Humming_BADC626A.wem</Path>
+				</File>
+				<File Id="320027244" Language="SFX">
+					<ShortName>Shoot Nau_Impact_Lent_v2_vel085.wav</ShortName>
+					<Path>SFX\Shoot Nau_Impact_Lent_v2_vel085_E106FFBE.wem</Path>
+				</File>
+				<File Id="418116809" Language="SFX">
+					<ShortName>Fan.wav</ShortName>
+					<Path>SFX\Fan_76A5D070.wem</Path>
+				</File>
+				<File Id="707043063" Language="SFX">
+					<ShortName>sparks(chispas).wav</ShortName>
+					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="2242381963" Language="SFX">
+			<ShortName>Enemies</ShortName>
+			<Path>Enemies.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1837463184" Name="Play_Drone_Movement"/>
+				<Event Id="2035691397" Name="Play_Footstep_Androide"/>
+				<Event Id="1448726960" Name="Play_Footstep_boss"/>
+				<Event Id="3592177204" Name="Play_impact_to_boss"/>
+				<Event Id="1548910984" Name="Play_Shoot_Androide"/>
+				<Event Id="3330875125" Name="Play_Shoot_boss"/>
+				<Event Id="4046093832" Name="Play_Shoot_Drone"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="17079506" Language="SFX">
+					<ShortName>footstep_right.wav</ShortName>
+					<Path>SFX\footstep_right_E106FFBE.wem</Path>
+				</File>
+				<File Id="297188304" Language="SFX">
+					<ShortName>footstep_left.wav</ShortName>
+					<Path>SFX\footstep_left_E106FFBE.wem</Path>
+				</File>
+				<File Id="378953843" Language="SFX">
+					<ShortName>Drone Shoot.wav</ShortName>
+					<Path>SFX\Drone Shoot_E106FFBE.wem</Path>
+				</File>
+				<File Id="803787533" Language="SFX">
+					<ShortName>Footstep_androide.wav</ShortName>
+					<Path>SFX\Footstep_androide_E106FFBE.wem</Path>
+				</File>
+				<File Id="815910077" Language="SFX">
+					<ShortName>Drone Movement.wav</ShortName>
+					<Path>SFX\Drone Movement_76A5D070.wem</Path>
+				</File>
+				<File Id="826784510" Language="SFX">
+					<ShortName>Metralleta 1.wav</ShortName>
+					<Path>SFX\Metralleta 1_E106FFBE.wem</Path>
+				</File>
+				<File Id="848849463" Language="SFX">
+					<ShortName>Disparo Androide.wav</ShortName>
+					<Path>SFX\Disparo Androide_E106FFBE.wem</Path>
+				</File>
+				<File Id="940048716" Language="SFX">
+					<ShortName>Boss_Impact.wav</ShortName>
+					<Path>SFX\Boss_Impact_E106FFBE.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>

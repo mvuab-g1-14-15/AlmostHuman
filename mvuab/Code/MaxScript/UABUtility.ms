@@ -6,7 +6,8 @@ filein "ExportGraph.ms"
 filein "Utils.ms"
 filein "Triggers.ms"
 filein "Paths.ms"
-filein "Covers.ms"
+filein "Particles.ms"
+filein "Billboards.ms"
 		
 utility UABUtility "UAB Utility" width:170 height:761
 (
@@ -15,40 +16,54 @@ utility UABUtility "UAB Utility" width:170 height:761
 	checkbox ExportMeshCheckBox "Export Mesh" pos:[17,84] width:79 height:25
 	checkbox CopyTexturesCheckBox "Copy textures" pos:[17,110] width:94 height:25
 	dropdownList LevelList "" pos:[13,135] width:135 height:21
-	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:171
+	GroupBox ExportGroup "Export" pos:[11,156] width:141 height:221
 	button LightsButton "Lights" pos:[21,171] width:57 height:17
 	button MeshButton "Mesh" pos:[85,171] width:57 height:17
 	button CinematicsButton "Cinematics" pos:[85,193] width:57 height:17
 	button CameraButon "Camera" pos:[21,192] width:57 height:17
 	button GraphButton "Graph" pos:[21,213] width:57 height:17
-	button RouteButton "Route" pos:[85,213] width:57 height:17
-	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,281] width:124 height:17
-	button SceneButton "Scene" pos:[18,304] width:124 height:17
+	button ExportLayersButton "ExportLayers" pos:[85,213] width:57 height:17
+	button StaticMeshManagerButton "Static Mesh Manager" pos:[20,324] width:124 height:17
+	button SceneButton "Scene" pos:[19,347] width:124 height:17
 	
-	GroupBox grp9 "Generate RNM" pos:[12,379] width:141 height:112
-	button Xbtn "Generate X" pos:[17,403] width:124 height:17
-	button Ybtn "Generate Y" pos:[17,433] width:124 height:17
-	button Zbtn "Generate Z" pos:[17,463] width:124 height:17
+	GroupBox grp9 "Generate RNM" pos:[20,410] width:133 height:108
+	button Xbtn "Generate X" pos:[22,430] width:124 height:17
+	button Ybtn "Generate Y" pos:[23,460] width:124 height:17
+	button Zbtn "Generate Z" pos:[23,490] width:124 height:17
 	
-	GroupBox SetRNM "Set RNM Texture" pos:[12,503] width:141 height:76
-	button LightmapXBtn "X" pos:[22,527] width:34 height:17
-	label LightmapXLabel "" pos:[48,526] width:94 height:20
-	button LightmapYBtn "Y" pos:[67,527] width:34 height:17
-	label LightmapYLabel "" pos:[48,558] width:94 height:20
-	button LightmapZBtn "Z" pos:[107,527] width:34 height:17
-	label LightmapZLabel "" pos:[48,584] width:94 height:20
-	button ApplyBtn "Apply" pos:[22,553] width:120 height:17
+	GroupBox SetRNM "Set RNM Texture" pos:[12,530] width:141 height:76
+	button LightmapXBtn "X" pos:[22,554] width:34 height:17
+	label LightmapXLabel "" pos:[48,553] width:94 height:20
+	button LightmapYBtn "Y" pos:[67,554] width:34 height:17
+	label LightmapYLabel "" pos:[48,585] width:94 height:20
+	button LightmapZBtn "Z" pos:[107,554] width:34 height:17
+	label LightmapZLabel "" pos:[48,611] width:94 height:20
+	button ApplyBtn "Apply" pos:[22,580] width:120 height:17
 	
-	button SetProperties "Set Properties" pos:[13,342] width:141 height:17
+	button SetProperties "Set Properties" pos:[16,381] width:141 height:17
 	
 	button TriggerButton "Triggers" pos:[20,237] width:57 height:17
-	button CoverButton "Covers" pos:[84,237] width:57 height:17
+	button ParticlesButton "Particles" pos:[84,237] width:57 height:17
 	button PathButton "Paths" pos:[20,260] width:57 height:17
+	button BillboardButton "Billboards" pos:[84,260] width:57 height:17
+	button ExportEnemyPos "Enemies" pos:[24,283] width:57 height:17
 	
-	
+	/*on RouteButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		RouteDir = PathLabel.text + "\\route.xml"
+		
+		local graphExporter = RouteAndGraph()
+		graphExporter.Calculate()
+		graphExporter.ExportRouteXML RouteDir
+	)*/
+
+
 	on UABUtility open do
 	(
-		local levels=#("level2","room1","room2","room3","room4")
+		local levels=#("","sala1","sala2","pasillo","sala3","sala4")
 		LevelList.items=levels
 		PathLabel.text = "C:\Users\Galix\Desktop"
 	)
@@ -67,7 +82,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on MeshButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
-
+	
 		local l_DirToXML = PathLabel.text + "\\" +LevelList.selected
 		--export Mesh
 		local MeshDir = l_DirToXML + "\\meshes"
@@ -126,43 +141,27 @@ utility UABUtility "UAB Utility" width:170 height:761
 		graphExporter.Calculate()
 		graphExporter.ExportGraphXML GraphDir
 	)
-	on RouteButton pressed do
+	on ExportLayersButton pressed do
 	(
-		format " PathLabel % \n" PathLabel.text
+	
 		IsEmptyDestPath PathLabel.text
+		IsEmptyLevelList LevelList.selected
 		
-		RouteDir = PathLabel.text + "\\route.xml"
+		local rootDir = PathLabel.text
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
 		
-		local graphExporter = RouteAndGraph()
-		graphExporter.Calculate()
-		graphExporter.ExportRouteXML RouteDir
-	)
-	on TriggerButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
+		DoesFolderExist l_DirToXML
 		
-		TriggerDir = PathLabel.text + "\\triggers.xml"
 		
-		ExportTriggers TriggerDir		
-	)
-	on PathButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
+		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
+		local MeshDir = l_DirToXML + "\\meshes\\"
+		local TexturesDir = PathLabel.text + "\\textures\\"
 		
-		PathDir = PathLabel.text + "\\paths.xml"
-		
-		ExportPaths PathDir		
-	)
-	on CoverButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		PathDir = PathLabel.text + "\\covers.xml"
-		
-		ExportCovers PathDir		
+		local l_ExportableObjects = GetAllExportableObjects()
+		--Export Renderable Objects
+		local l_Layers = ExportLayerFile l_ExportableObjects l_DirToXML LevelList.selected
+		ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers LevelList.selected
+		-- End Export Renderable Objects
 	)
 	on StaticMeshManagerButton pressed do
 	(		
@@ -277,5 +276,44 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on SetProperties pressed do
 	(
 		filein "UABSetProperties.ms"
+	)
+	on TriggerButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		TriggerDir = PathLabel.text + "\\triggers.xml"
+		
+		ExportTriggers TriggerDir		
+	)
+	on ParticlesButton pressed do
+	(
+		IsEmptyDestPath PathLabel.text
+		PathDir = PathLabel.text + "\\particules.xml"
+		
+		ExportParticles PathDir
+	)
+	on PathButton pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+		
+		PathDir = PathLabel.text + "\\paths.xml"
+		
+		ExportPaths PathDir		
+	)
+	on BillboardButton pressed do
+	(
+		IsEmptyDestPath PathLabel.text
+		PathDir = PathLabel.text + "\\billboards.xml"
+		
+		ExportBillboards PathDir		
+	)
+	on ExportEnemyPos pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+			
+		ExportEnemyPositionToXML PathLabel.text		
 	)
 )
