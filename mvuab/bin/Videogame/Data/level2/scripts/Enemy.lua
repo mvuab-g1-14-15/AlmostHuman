@@ -86,7 +86,7 @@ end
 
 function CEnemyLUA:Destroy()
 	if self.OnDead then
-		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..self.OnDeadCode
+		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString().."; local selfName = '"..self:GetName().."'; "..self.OnDeadCode
 		script_manager:RunCode(codeToExecute)
 	end
 		
@@ -281,7 +281,7 @@ function CEnemyLUA:MoveToPos( aPos )
     lDist = lTargetPos:Distance( lWaypointPos )
 	
 	count = self.Path:size()
-	engine:Trace("El tamaño de la path es: "..lDist)
+	--engine:Trace("El tamaño de la path es: "..lDist)
     if ( (count - self.ActualPathPoint) > 2 ) then
         if ( lDist < 0.8 ) then
             self.ActualPathPoint = self.ActualPathPoint + 1
@@ -290,13 +290,15 @@ function CEnemyLUA:MoveToPos( aPos )
     end
     lTargetPos.y = 0
 	
-	engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
+	--engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
 	self:MoveToWaypoint(lTargetPos)
     
     if ( self.Path:GetResource(count - 1):Distance( aPos ) > 5.0 ) then
         self.PathCalculated = false
 		self.ActualPathPoint = 1
 	end
+	
+	engine:Trace("Estoy en "..lPos:ToString()..". Voy a "..self.Path:GetResource(count - 1):ToString()..".")
 	
 	return false
 end
@@ -510,4 +512,21 @@ function CEnemyLUA:CheckHurting()
 	else
 		self.IsHurting = false
 	end
+end
+
+function CEnemyLUA:SetSuspected( aBool )
+	engine:Trace("Setting suspected "..self:GetName())
+	self.Suspected = aBool
+end
+
+function CEnemyLUA:GetSuspected()
+	return self.Suspected
+end
+
+function CEnemyLUA:SetSuspectedPosition( aPos )
+	self.SuspectedPosition = aPos
+end
+
+function CEnemyLUA:GetSuspectedPosition()
+	return self.SuspectedPosition
 end
