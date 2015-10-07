@@ -22,7 +22,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	button CinematicsButton "Cinematics" pos:[85,193] width:57 height:17
 	button CameraButon "Camera" pos:[21,192] width:57 height:17
 	button GraphButton "Graph" pos:[21,213] width:57 height:17
-	button ExportLayersButton "ExportLayers" pos:[85,213] width:57 height:17
+	button RouteButton "Route" pos:[85,213] width:57 height:17
 	button StaticMeshManagerButton "Static Mesh Manager" pos:[19,281] width:124 height:17
 	button SceneButton "Scene" pos:[18,304] width:124 height:17
 	
@@ -128,7 +128,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		graphExporter.Calculate()
 		graphExporter.ExportGraphXML GraphDir
 	)
-	/*on RouteButton pressed do
+	on RouteButton pressed do
 	(
 		format " PathLabel % \n" PathLabel.text
 		IsEmptyDestPath PathLabel.text
@@ -138,7 +138,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		local graphExporter = RouteAndGraph()
 		graphExporter.Calculate()
 		graphExporter.ExportRouteXML RouteDir
-	)*/
+	)
 	on StaticMeshManagerButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
@@ -177,30 +177,6 @@ utility UABUtility "UAB Utility" width:170 height:761
 			GenerateMeshes UniqueInstanceArray MeshDir
 		)
 	)
-	
-	on ExportLayersButton pressed do
-	(
-	
-		IsEmptyDestPath PathLabel.text
-		IsEmptyLevelList LevelList.selected
-		
-		local rootDir = PathLabel.text
-		local l_DirToXML = rootDir + "\\" +LevelList.selected
-		
-		DoesFolderExist l_DirToXML
-		
-		
-		local fileSrcMeshXML = l_DirToXML + "\\static_meshes.xml"
-		local MeshDir = l_DirToXML + "\\meshes\\"
-		local TexturesDir = PathLabel.text + "\\textures\\"
-		
-		local l_ExportableObjects = GetAllExportableObjects()
-		--Export Renderable Objects
-		local l_Layers = ExportLayerFile l_ExportableObjects l_DirToXML LevelList.selected
-		ExportRenderableObjectXMLFile l_ExportableObjects l_DirToXML l_Layers LevelList.selected
-		-- End Export Renderable Objects
-	)
-		
 	on SceneButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text

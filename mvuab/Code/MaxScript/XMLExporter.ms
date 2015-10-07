@@ -1,27 +1,11 @@
 fileIn "Utils.ms"
 fileIn "XMLStruct.ms"
 
-function GetMaterialCount aObj =
-(
-	local lMaterialCount = 0
-	local lMaterial = aObj.material
-	if classof lMaterial == Multimaterial then
-	(
-		lMaterialCount = lMaterial.count
-	)
-	else
-	(
-		lMaterialCount = 1
-	)
-	
-	return lMaterialCount as string
-)
-	
 --export de la class
 fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 (	
-	--try
-	--(
+	try
+	(
 		-- create the document and set the filename
 		xDoc = XMLDocument filenameXML
 		
@@ -37,45 +21,25 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 			return -1
 		)
 		
-		local NameVertexsMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]"
 		for Obj in UniqueInstanceArray do
 		(
-				--format "Classof Obj: % \n" (classof Obj) as String
-			
-				/*if (classof Obj != Editable_Poly) then
-				(
-					messageBox ("The object " + Obj.Name as String + " is not an Editable_mesh or Editable_poly")
-					exit
-				)*/
+				filename = "meshes\\" + Obj.name +".mesh"
 				
-				local ObjName = toLower Obj.name
-				local ObjNameCoreAux = trimright ObjName "0123456789"
-				
-				local lNumVertices  = Obj.verts.count as string
-				local lNumMaterials = GetMaterialCount Obj
-				local ObjNameCore = ObjNameCoreAux + "v" + lNumVertices + "m" + lNumMaterials
-			
-			    if (NameVertexsMap.ContainsKey (ObjNameCore)) == false then
-				(
-					local l_NewStaticMeshNode = xDoc.getNewNode "static_mesh"
+				local l_NewStaticMeshNode = xDoc.getNewNode "static_mesh"			
+				-- append the new node static_mesh to the root node static_meshs
+				l_RootNode.AppendNode l_NewStaticMeshNode 
 
-				    format "COre name %\n" ObjNameCore			
-					-- append the new node static_mesh to the root node static_meshs
-					l_RootNode.AppendNode l_NewStaticMeshNode 
-
-					local l_Name = (ObjNameCore + "_" + aRoom) as String
-					filename = "meshes\\" + ObjNameCore +".mesh"
+				local l_Name = (Obj.name + "_" + aRoom) as String
 			
-					l_NewStaticMeshNode.AddAttributeAsString "name" l_Name
-					l_NewStaticMeshNode.AddAttributeAsString "filename" filename
-					NameVertexsMap.Add ObjNameCore 0
-				)
+				l_NewStaticMeshNode.AddAttributeAsString "name" l_Name
+				l_NewStaticMeshNode.AddAttributeAsString "filename" filename
+
 		)
-	--)
-	--catch
-	--(
-	--	format "Error generating mesh instance\n"
-	--)
+	)
+	catch
+	(
+		format "Error generating mesh instance\n"
+	)
 	return xDoc.PrettySaveXML()
 )
 
@@ -144,22 +108,13 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 				local l_Pitch = GetPitch lRotation as string
 				local l_Roll = GetRoll lRotation as string
 				
-				local ObjName = toLower Obj.name
-				local ObjNameCoreAux = trimright ObjName "0123456789"
-				
-				local lNumVertices = Obj.verts.count as string
-				local lNumMaterials = GetMaterialCount Obj
-				local ObjNameCore = ObjNameCoreAux + "v" + lNumVertices + "m" + lNumMaterials
-				
-				local l_Name = (ObjName + "_" + l_Room) as String
-				local l_Core = (ObjNameCore + "_" + l_Room) as String
-				
-				l_Name = toLower l_Name
-				
+				local l_Name = (Obj.name + "_" + l_Room) as String
+				local l_Core = (l_CoreName + "_" + l_Room) as String
+
 				local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
 				-- append the new node MeshInstance to the root node RenderableObjects
 				l_RootNode.AppendNode l_NewMeshInstanceNode 
-				
+
 				l_NewMeshInstanceNode.AddAttributeAsString "name" l_Name	
 				l_NewMeshInstanceNode.AddAttributeAsString "core" l_Core
 				l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
@@ -169,6 +124,7 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 				l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 			
 				l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
+
 			)
 			xDoc.PrettySaveXML()
 		)	
@@ -315,57 +271,35 @@ fn ExportTextureFile AllObj DestPath =
 			
 	)
 	close file
+
 )
 
 function GenerateMeshes aObjects MeshDir =
 (
-		local NameVertexsMap       = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]"
-		local ObjectsProcessed     = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
+
+		local ObjectsProcessed = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
 		for Obj in aObjects do
 		(
 			try
 			(
-				local ObjName = toLower Obj.name
-				local ObjNameCoreAux = trimright ObjName "0123456789"
-				
-				local lNumVertices  = Obj.verts.count as string
-				local lNumMaterials = GetMaterialCount Obj
-				local ObjNameCore = ObjNameCoreAux + "v" + lNumVertices + "m" + lNumMaterials
-				
-				format "ObjectName % CoreName %\n" ObjName ObjNameCore
-				
-				--Create a material for this object
-				local lMaterialFilename = MeshDir +"\\"+ ObjName + ".mat"--poner parametrico
-				local lMaterialFile = fopen lMaterialFilename "wb"
-				
-				--------------------------------------------------------------------------------
-				if (NameVertexsMap.ContainsKey (ObjNameCore)) == true then
+				local ObjName = Obj.name
+				if (ObjectsProcessed.ContainsKey (ObjName)) == true then
 				(
-					format "Core exist %\n" ObjNameCore
-					local index = NameVertexsMap.Item[ObjNameCore] + 1
-					NameVertexsMap.Remove ObjNameCore
-					NameVertexsMap.Add ObjNameCore index
-					
-					-- Export materials only
-					local l_ObjectMesh = SMesh()
-					l_ObjectMesh.InitFromMaxObject Obj
-					l_ObjectMesh.WriteToXML lMaterialFile
+					local index = ObjectsProcessed.Item[ObjName] + 1
+					ObjectsProcessed.Remove ObjName
+					ObjectsProcessed.Add ObjName index
+					ObjName = ObjName + "_" + (index as string)
 				)
 				else
 				(
-					format "Adding core %\n" ObjNameCore
-					
-					NameVertexsMap.Add ObjNameCore 0
-					
-					-- Export mesh and materials
-					filename = MeshDir +"\\"+ ObjNameCore + ".mesh"--poner parametrico
-					local file = fopen filename "wb"
-					local l_ObjectMesh = SMesh()
-					l_ObjectMesh.InitFromMaxObject Obj
-					l_ObjectMesh.WriteToFile file lMaterialFile
-					fclose file
+					ObjectsProcessed.Add ObjName 0
 				)
-				fclose lMaterialFile
+				filename = MeshDir +"\\"+ ObjName + ".mesh"--poner parametrico
+				local file = fopen filename "wb"
+				local l_ObjectMesh = SMesh()
+				l_ObjectMesh.InitFromMaxObject Obj
+				l_ObjectMesh.WriteToFile file
+				fclose file
 			)
 			catch
 			(

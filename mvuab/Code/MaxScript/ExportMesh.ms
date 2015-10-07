@@ -25,7 +25,7 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
-			--format "Texture name: %\n" m_Name
+			format "Texture name: %\n" m_Name
 			--format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
@@ -123,7 +123,9 @@ struct SMaterial
 				m_ColorGreen = bit.and mat.diffuse.g 0xFF
 				m_ColorBlue = bit.and mat.diffuse.b 0xFF
 				
-				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue	
+				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
+				
+				
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -156,7 +158,7 @@ struct SMaterial
 	(
 		--format "Writing Material\n"
 		
-		--WriteShort file m_Type #unsigned
+		WriteShort file m_Type #unsigned
 		--format "Type: %\n" m_Type
 		
 		local l_nTextures = 0
@@ -182,7 +184,6 @@ struct SMaterial
 		)
 		
 		WriteShort file l_nTextures #unsigned
-		--format "Textures Count: %\n" l_nTextures
 		
 		if ((bit.and m_Type VERTEX_TYPE_TEXTURE1) == VERTEX_TYPE_TEXTURE1 ) then 
 		(
@@ -237,7 +238,7 @@ struct SVertexBuffer
 		--format "Writing BV\n"
 		local l_NumVertex = m_VertexList.count 
 		WriteLong file l_NumVertex #unsigned
-		--format "Vtx count: %\n" l_NumVertex
+		format "Vtx count: %\n" l_NumVertex
 		for iVertex in m_VertexList do
 		(
 			iVertex.WriteToFile file
@@ -260,7 +261,7 @@ struct SIndexBuffer
 		--format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
 		WriteLong file l_NumIds #unsigned
-		--format "Idx count: %\n" l_NumIds
+		format "Idx count: %\n" l_NumIds
 		for iIndex in m_IndexList do
 		(
 			WriteLong file iIndex #unsigned
@@ -306,17 +307,11 @@ struct SSubMesh
 	m_IB = SIndexBuffer(),
 	m_VB = SVertexBuffer(),
 	
-	fn WriteToFile file materialFile =
+	fn WriteToFile file =
 	(
-		m_Material.WriteToFile materialFile
-		WriteShort file m_Material.m_Type #unsigned
+		m_Material.WriteToFile file
 		m_VB.WriteToFile file
 		m_IB.WriteToFile file
-	),
-	
-	fn WriteToXML materialFile =
-	(
-		m_Material.WriteToFile materialFile
 	)
 )
 
@@ -337,7 +332,7 @@ struct SMesh
 	(
 		--format "Creating submeshes\n"
     	local l_Material = Obj.material
-		--format "-->Material: %\n" l_Material
+		format "-->Material: %\n" l_Material
 		if classof l_Material == Multimaterial then
 		(
 			--format "Saving multimaterial object...\n"
@@ -377,7 +372,7 @@ struct SMesh
             	)
 				catch
 				(
-					format "ErrorInitFromMaxObject while exporting submaterial %.\n" l_MaterialId
+					--format "ErrorInitFromMaxObject while exporting submaterial %.\n" l_MaterialId
 				)
 			)
 		)
@@ -550,7 +545,7 @@ struct SMesh
 				throw "SplineShape =>" Obj.name
 			)
 			
-			--format "Object name: %\n" Obj.name
+			format "Object name: %\n" Obj.name
 			
 			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 			actualObj = newObj[1]
@@ -568,59 +563,14 @@ struct SMesh
 
 	),
 	
-	fn WriteToFile file materialFile =
+
+	fn WriteToFile file =
 	(
 		--format "Write to file\n"
 		WriteShort file 0x55ff #unsigned
-		WriteShort materialFile 0x55ff #unsigned
 		--WriteShort file m_SubMeshes.count #unsigned--Write number of materials
 	
 		local counter = 0
-		for iSubMesh in m_SubMeshes do
-		(
-			if IsSubmeshComplete iSubMesh then
-			(
-				counter = counter + 1
-			)
-		)
-		
-		if m_SubMeshes == 0 then
-		(
-			messageBox ("Error:The object " + m_ObjName + " has 0 submeshes.")
-			exit
-		)
-		
-		if counter == 0 then
-		(
-			messageBox ("Error:The object " + m_ObjName + " has 0 vertex and index.")
-			exit
-		)
-		
-		WriteShort file counter #unsigned--Write number of materials
-		WriteShort materialFile counter #unsigned--Write number of materials
-		format "Submeshes: %\n" counter
-		
-		for iSubMesh in m_SubMeshes do
-		(
-			format "Current Submesh%\n" iSubMesh
-			if IsSubmeshComplete iSubMesh then
-			(
-				format "--------------m_Material: %\n" iSubMesh.m_Material
-				iSubMesh.WriteToFile file materialFile
-			)
-		)
-		
-		m_AABB.WriteToFile file
-	
-		WriteShort file 0xff55 #unsigned
-		WriteShort materialfile 0xff55 #unsigned
-		format "Footer writed!\n"
-	),
-	
-	fn WriteToXML materialFile =
-	(	
-		local counter = 0
-		WriteShort materialFile 0x55ff #unsigned
 		for iSubMesh in m_SubMeshes do
 		(
 			if IsSubmeshComplete iSubMesh then
@@ -641,19 +591,23 @@ struct SMesh
 			exit
 		)
 		
+		WriteShort file counter #unsigned--Write number of materials
 		format "Submeshes: %\n" counter
-		WriteShort materialFile counter #unsigned--Write number of materials
+		
 		for iSubMesh in m_SubMeshes do
 		(
 			--format "Current Submesh%\n" iSubMesh
 			if IsSubmeshComplete iSubMesh then
 			(
 				--format "--------------m_Material: %\n" iSubMesh.m_Material
-				iSubMesh.WriteToXML materialFile
+				iSubMesh.WriteToFile file
 			)
 		)
 		
-		WriteShort materialFile 0xff55 #unsigned
+		m_AABB.WriteToFile file
+	
+		WriteShort file 0xff55 #unsigned
+		format "Footer writed!\n"
 	)
 )
 
