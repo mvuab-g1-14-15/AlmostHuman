@@ -62,7 +62,7 @@ function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
 		g_Player:SetWeak(false)
-		g_EnemyManager:AlarmRoom("room2")
+		enemy_manager:AlarmRoom("room2")
 		g_bChargeEnergy = false
 	else
 		g_bChargeEnergy = true
@@ -175,11 +175,11 @@ function StayText(room, message, other_shape)
 	elseif room == "room3" then
 		if g_bPressedRoom3X and enemigosVivos then
 				gui_manager:ShowStaticText(message)
-				CuentaAtras = 3
+				g_sMessageAlarm = message
 				g_bPressedRoom3X = false
 		elseif g_bPressedRoom3X then
 			
-			gui_manager:ShowStaticText(message)
+			--gui_manager:ShowStaticText(message)
 			g_bPressedRoom3X = false
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
@@ -190,7 +190,7 @@ function StayText(room, message, other_shape)
 end
 
 function GetEnemyLive(room)
-	lEnemy = g_EnemyManager:GetEnemys()
+	lEnemy = enemy_manager:GetEnemys()
 	--engine:Trace("La room es "..room)
 	for i in pairs (lEnemy) do
 		lActualEnemy = lEnemy[i]

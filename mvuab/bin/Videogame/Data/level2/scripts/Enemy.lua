@@ -27,12 +27,19 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.IsHurting = false
 	countdowntimer_manager:AddTimer(self.Name.."HurtTime", 1.0, false)
 	
+	self.OnDeadCode = Node:GetAttributeString("on_dead_code", "")
+	self.OnDead = true
+	if self.OnDeadCode == "" then
+		self.OnDead = false
+	end
+	
 	self.Alarmado = false
 	self.PositionAlarm = Vect3f(0,0,0)
 	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	
 	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
 		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
@@ -59,6 +66,7 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Brain = CBrain(Node:GetAttributeString("state", "inicial"), state_machine)
 	
 	self.CurrentAnimation = Node:GetAttributeString("state", "inicial")
+	self.BackAnimation = self.CurrentAnimation
 	--self:ChangeState("perseguir")
 	--self:GetAnimationModel():ChangeAnimation("perseguir", 0.2, 1.0)
 	
@@ -77,8 +85,14 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 end
 
 function CEnemyLUA:Destroy()
+	if self.OnDead then
+		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..self.OnDeadCode
+		script_manager:RunCode(codeToExecute)
+	end
+		
 	physic_manager:ReleasePhysicController(self.CharacterController)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
+	
 	--engine:Trace("He muerto Vida actual: "..self.Life)
 end
 
@@ -208,7 +222,7 @@ function CEnemyLUA:MakeShoot(aDirection)
 	 lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
 	--lPosition = self.Camera:GetPosition()
 	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
-	g_EnemyManager:AddShoot(lShoot)
+	enemy_manager:AddShoot(lShoot)
 	if self.Type == "drone" then
 		engine:Trace("He entrado en el disparo del drone")
 		local YawTmp = math.atan2(aDirection.z, aDirection.x)
@@ -252,7 +266,7 @@ function CEnemyLUA:MoveToPos( aPos )
 	
 	local CharacterController = self:GetCharacterController()
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar( self.Room )
+    lAStar = enemy_manager:GetAStar( self.Room )
 
     if ( not self.PathCalculated ) then  
 		engine:Trace("He entrado a calcular la posicion")
@@ -301,7 +315,7 @@ end
 function CEnemyLUA:MoveToPlayer(PositionPlayer)
 	CharacterController = self:GetCharacterController()	
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar(self.Room)
+    lAStar = enemy_manager:GetAStar(self.Room)
 
     if ( not self.PathCalculated ) then   
         self.Path = lAStar:GetPath( lPos, PositionPlayer )
@@ -489,7 +503,7 @@ function CEnemyLUA:CheckHurting()
 			if countdowntimer_manager:IsActive(self.Name.."HurtTime") then
 				if countdowntimer_manager:isTimerFinish(self.Name.."HurtTime") then
 					self.IsHurting = false
-					countdowntimer_manager:Reset(self.Name.."HurtTime", false)
+					countdowntimer_manager:Reset(self.Name.."HurtTime", false)					
 				end
 			end
 		end

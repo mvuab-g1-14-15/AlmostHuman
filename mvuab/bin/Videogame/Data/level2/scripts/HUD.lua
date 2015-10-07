@@ -30,14 +30,14 @@ function CHUD:UpdateYawPlayer()
 end
 
 function CHUD:UpdatePositionEnemy(name)
-	enemy = g_EnemyManager:GetResource(name)
+	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
 		self.Map:SetPositionEnemy(name, enemy:GetPosition())
 	end
 end
 
 function CHUD:UpdateYawEnemy(name)
-	enemy = g_EnemyManager:GetResource(name)
+	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
 		self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
 	end

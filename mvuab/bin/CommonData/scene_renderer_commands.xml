@@ -148,11 +148,13 @@
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
     
+	<!--
     <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
     <zblur FocalStart="2" FocalEnd="5" Constant="0.1" BlurEnd="50">
 		<texture stage_id="0" name="FB1"/>
         <texture stage_id="1" name="DepthMapTexture"/>
     </zblur>
+	-->
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

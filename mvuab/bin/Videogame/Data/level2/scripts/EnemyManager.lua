@@ -66,14 +66,32 @@ function CEnemyManagerLUA:Update()
 	end
 	for i in pairs (self.Enemy) do
 		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
-			self.ActualEnemy = self.Enemy[i]			
-			if self.ActualEnemy:GetLife() > 0 then
+			self.ActualEnemy = self.Enemy[i]
+			timerHurt = "Recibo disparo "..self.ActualEnemy:GetName()			
+			if self.ActualEnemy:GetLife() > 0 and not self.ActualEnemy.IsHurting and self.ActualEnemy.CurrentAnimation ~="hurt" then
 				self.ActualEnemy:Update()
 				
+			elseif self.ActualEnemy:GetLife() > 0 and self.ActualEnemy.IsHurting and self.ActualEnemy.CurrentAnimation ~= "hurt" then
+				self.ActualEnemy.IsHurting = false
+				self.ActualEnemy.BackAnimation = self.ActualEnemy.CurrentAnimation
+				self.ActualEnemy:ChangeAnimation("hurt", 0.2, 1.0)
+				if not countdowntimer_manager:ExistTimer(timerHurt) then
+					countdowntimer_manager:AddTimer(timerHurt, 1.0, false)
+				else
+					countdowntimer_manager:SetActive(timerHurt, true)
+				end
+			elseif self.ActualEnemy:GetLife() > 0 and countdowntimer_manager:ExistTimer(timerHurt) and countdowntimer_manager:IsActive(timerHurt) then
+				self.ActualEnemy.IsHurting = false
+				if countdowntimer_manager:isTimerFinish(timerHurt) then
+					self.ActualEnemy:ChangeAnimation(self.ActualEnemy.BackAnimation, 0.2, 1)
+					countdowntimer_manager:Reset(timerHurt, false)
+				end
 			else
 				if self.ActualEnemy:GetVelocity() == 5.0 then
 					self.ActualEnemy:SetVelocity(2.0)
 				end
+				self.ActualEnemy.IsHurting = false
+				
 				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
 					AnimatedModel = self.ActualEnemy:GetAnimationModel()
 					AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
@@ -203,6 +221,10 @@ end
 
 function CEnemyManagerLUA:GetResource(name)
 	return self.Enemy[name]
+end
+
+function CEnemyManagerLUA:GetEnemy( aName )
+	return self.Enemy[aName]
 end
 
 function CEnemyManagerLUA:AddDamage(name)

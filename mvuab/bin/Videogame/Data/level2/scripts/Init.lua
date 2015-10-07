@@ -4,12 +4,16 @@ dofile("./data/level2/scripts/Barrel.lua")
 
 g_Player = nil
 g_HUD = nil
-g_EnemyManager = nil
+enemy_manager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
 g_Barrels = {}
 
 initialized1 = false
+
+g_bAlarmRoom3 = false
+g_fOcultarMensaje = 5.0
+g_sMessageAlarm = ""
 
 function load_basics()
 	-- basic loads
@@ -24,8 +28,8 @@ function load_gameplay()
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
-	if g_EnemyManager == nil then
-		g_EnemyManager = CEnemyManagerLUA()	
+	if enemy_manager == nil then
+		enemy_manager = CEnemyManagerLUA()	
 	end
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
@@ -41,7 +45,7 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
-	g_EnemyManager:Update()
+	enemy_manager:Update()
 	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
@@ -97,7 +101,8 @@ function update_gameplay()
 		if action_manager:DoAction("OpenDoorRoom3") then
 			if g_bPressRoom3X then
 				--gui_manager:ShowStaticText("Alarm")
-				g_EnemyManager:AlarmRoom("room3")				
+				g_bAlarmRoom3 = true
+				enemy_manager:AlarmRoom("room3")				
 				g_bPressedRoom3X = true
 			elseif g_bOpenDoor3 then
 				--Code para abrir puerta
@@ -123,7 +128,8 @@ function update_gameplay()
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
-		
+		dt = timer:GetElapsedTime()
+		UpdateVariables(dt)
 	end
 	if g_bInBarrel then
 		--engine:Trace("Next to barrel "..g_BarrelName)
@@ -158,6 +164,17 @@ function update_gameplay()
 		
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
+		end
+	end
+end
+
+function UpdateVariables(dt)
+	if g_bAlarmRoom3 then
+		g_fOcultarMensaje = g_fOcultarMensaje - dt
+		if g_fOcultarMensaje <= 0 then
+			g_fOcultarMensaje = 5.0
+			g_bAlarmRoom3 = false
+			gui_manager:ShowStaticText(g_sMessageAlarm)
 		end
 	end
 end

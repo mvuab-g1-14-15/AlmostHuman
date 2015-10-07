@@ -149,7 +149,7 @@ function HearPlayer(enemy)
 end	
 
 function ChangeCameraCloseEnemy()
-	local lEnemyName = g_EnemyManager:GetCloseEnemy(GetPlayerPosition()):GetName()
+	local lEnemyName = enemy_manager:GetCloseEnemy(GetPlayerPosition()):GetName()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
 	
 	if lActualCameraName == lEnemyName then
@@ -157,7 +157,7 @@ function ChangeCameraCloseEnemy()
 		camera_manager:SetCurrentCamera("TestProcessCam")
 	else
 		--engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
-		--engine:Trace("Cantidad de enemigos: "..g_EnemyManager:GetNumEnemys())
+		--engine:Trace("Cantidad de enemigos: "..enemy_manager:GetNumEnemys())
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end
