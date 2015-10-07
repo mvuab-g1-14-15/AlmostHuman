@@ -3,16 +3,15 @@
 	<Bank name="Init.bnk"/>
 	<Bank name="AlmostHuman.bnk"/>
 	<Bank name="Ambient.bnk"/>
+	<Bank name="Enemies.bnk"/>
+	<Bank name="Gameplay.bnk"/>
+	<Bank name="Irirs.bnk"/>
 	<Bank name="Logan.bnk"/>
+	<Bank name="Various.bnk"/>
 	<GameObject2d name="GUI" register="true"/>
 	<GameObject2d name="Iris" register="true"/>
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
 	<GameObject3d name="TestGameObject3d" register="true" pos="0 0 0" dir="0 0 0"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
-	<!--GameObject3d name="Ambient" register="true" type="MultiSource">
-		<Source pos="-2.27 1.28 10.09" dir="-2.16 -1.31 -9.10"/> 
-		<Source pos="-0.61 -6.45 40.98" dir="0.07 -6.66 40.28"/> 
-		<Source pos="75.64 29.50 291.18" dir="76.64 29.44 291.15"/> 
-	</GameObject3d-->
  </sounds>

@@ -10,6 +10,16 @@
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
     </action>
 	
+	 <action name="Ambient_salaX">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_A"/>
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+    </action>
+	
+	 <action name="PlayAmbient">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_H"/>
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+    </action>
+	
 	<action name="LeanOutLeft">
         <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_Q"/>
     </action>
