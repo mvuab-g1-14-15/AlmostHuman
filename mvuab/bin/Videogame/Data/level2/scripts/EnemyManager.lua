@@ -251,6 +251,28 @@ function CEnemyManagerLUA:GetCloseEnemy(aPos)
 	return lEnemy
 end
 
+function CEnemyManagerLUA:GetCloseEnemyNotSelf(aPos, aName)
+	engine:Trace("Getting close enemy, not self")
+	lDist = 999999.99
+	lActualDist = 0.0
+	lEnemy = nil
+	lActualEnemy = 0
+
+	for i in pairs (self.Enemy) do
+		lActualEnemy = self.Enemy[i]
+		if lActualEnemy:GetName() ~= aName then
+			lActualDist = lActualEnemy:GetPosition():Distance( aPos )
+
+			if ( lActualDist < lDist ) then
+				lDist = lActualDist
+				lEnemy = lActualEnemy
+			end
+		end
+	end
+
+	return lEnemy
+end
+
 function CEnemyManagerLUA:AddShoot(aShoot)
 	table.insert(self.Shoots, aShoot)
 end

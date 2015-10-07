@@ -16,6 +16,7 @@ function activation()
 		countdowntimer_manager:SetActive(timerActivation, true)
 	end
 end
+
 function check_next_state()
 	enemy = enemy_manager:GetActualEnemy()
 	--timerHurt = "Recibo disparo "..enemy:GetName()
@@ -31,6 +32,14 @@ function check_next_state()
 	--engine:Trace("Veo al player "..tostring(l_PlayerInSight))
 	--engine:Trace("Estado actual "..l_CurrentState)
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
+	
+	if enemy:GetSuspected() then
+		--engine:Trace("Enemy suspected")
+		l_NextState = "investigate"
+	else
+		l_NextState = "andando"
+	end
+
 	
 	if l_CurrentState ~= "perseguir" and l_CurrentState ~= "activation" then
 		if l_HearSomething and l_PlayerInSight ~= true then
@@ -82,12 +91,20 @@ function check_next_state()
 			end
 		end
 	end
-	
-	
-		
+			
 	if l_NextState ~= l_CurrentState then
 		enemy:ChangeState(l_NextState)
 		enemy:ChangeAnimation(l_NextState, 0.2, 1.0)
+	end
+end
+
+function investigate()
+	enemy = enemy_manager:GetActualEnemy()
+	
+	--engine:Trace("Investigate")
+	
+	if enemy:MoveToPos(enemy:GetSuspectedPosition()) then
+		enemy:SetSuspected(false)
 	end
 end
 

@@ -58,4 +58,14 @@
 			<action function="check_next_state"/>
 		</update>
 	</state>
+	<state name="investigate">
+		<on_enter>
+		</on_enter>
+		<on_exit>
+		</on_exit>
+		<update>
+			<action function="investigate"/>
+			<action function="check_next_state"/>
+		</update>
+	</state>
 </state_machine>
