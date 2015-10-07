@@ -43,6 +43,7 @@ template  <typename T>          inline  T     Exp     (T _val)                  
 template  <typename T>          inline  void  Swap    (T& _a, T& _b)            { T t=_a;_a=_b;_b=t; }
 
 template  <typename T>          inline  T     Lerp    (const T& _a, const T& _b, const T& _lambda)  { return _a*((T)1-_lambda)+_b*_lambda; }
+template  <typename T>          inline  bool  IsPowerOf2(const T& x)  { return !(x == 0) && !(x & (x - 1)); }
 
 // Copiadas de cmath.h
 template <class T>              inline bool InRangeNonSorted_Open (T const& val, T const& ref0, T const& ref1)
