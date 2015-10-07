@@ -5,6 +5,8 @@
 #include "Cinematics\CinematicsElement\SetCameraElement.h"
 #include "Cinematics\CinematicsElement\SetTransformElement.h"
 #include "Cinematics\CinematicsElement\WaitTimeElement.h"
+#include "Cameras\CameraCinematical.h"
+#include "Cameras\CameraManager.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 #include "Timer\Timer.h"
@@ -32,7 +34,7 @@ CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
     , m_CinematicActive( false )
     , m_FirstFrame( true )
 {
-
+	m_CurrentCamera = "";
 }
 
 CCinematicManager::~CCinematicManager()
@@ -72,22 +74,65 @@ void CCinematicManager::Init()
             const std::string& TagName = SubTreeNode.GetName();
             const std::string& ResourceFileName = SubTreeNode.GetAttribute<std::string>( "resource_id_file", GetNextName().c_str() );
 
-            CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
+            if ( TagName == "cinematic" )
+			{
+				CCinematicsItems* CinematicsItems = new CCinematicsItems( ResourceFileName );
 
-            if ( !CinematicsItems )
-            {
-                LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
-            }
-            else
-            {
-                if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetAttribute<std::string>( "name",
-                                                        GetNextName().c_str() ), CinematicsItems ) )
-                {
-                    CHECKED_DELETE( CinematicsItems );
-                }
-            }
+				if ( !CinematicsItems )
+				{
+					LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
+				}
+				else
+				{
+					if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetAttribute<std::string>( "name",
+															GetNextName().c_str() ), CinematicsItems ) )
+					{
+						CHECKED_DELETE( CinematicsItems );
+					}
+				}
+			}
+			else if( TagName == "camera_cinematic" )
+			{
+				const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
+				CXMLTreeNode l_SubFile, SubTreeNode3;
+				if (l_SubFile.LoadAndFindNode( ResourceFileName.c_str(), "camera", SubTreeNode3 ) )
+				{
+					CCameraKeyController* CameraKeyController = new CCameraKeyController( SubTreeNode3(0) );
+					CCameraCinematical* lCameraCinematical = new CCameraCinematical( CameraKeyController );
+					if ( !CameraMInstance->AddResource( lName, lCameraCinematical ) )
+					{
+						LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
+						CHECKED_DELETE( lCameraCinematical );
+						CHECKED_DELETE( CameraKeyController );
+					}
+				}
+			}
         }
     }
+	/*CXMLTreeNode l_File2, TreeNode2;
+	 if ( l_File2.LoadAndFindNode( mConfigPath.c_str(), "cinematics_camera", TreeNode2 ) )
+    {
+        for ( int i = 0, count = TreeNode2.GetNumChildren(); i < count; ++i )
+        {
+            CXMLTreeNode  SubTreeNode2 = TreeNode2( i );
+            const std::string& TagName = SubTreeNode2.GetName();
+            const std::string& ResourceFileName = SubTreeNode2.GetAttribute<std::string>( "resource_id_file", GetNextName().c_str() );
+			
+			CXMLTreeNode l_SubFile, SubTreeNode3;
+			if (l_SubFile.LoadAndFindNode( ResourceFileName.c_str(), "camera", SubTreeNode3 ) )
+			{
+				CCameraKeyController* CameraKeyController = new CCameraKeyController( SubTreeNode3(0) );
+				CCameraCinematical* lCameraCinematical = new CCameraCinematical( CameraKeyController );
+				if ( !CameraMInstance->AddResource( TagName.c_str(), lCameraCinematical ) )
+				{
+					LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
+					CHECKED_DELETE( lCameraCinematical );
+					CHECKED_DELETE( CameraKeyController );
+				}
+			}
+            
+        }
+    }*/
 }
 
 void CCinematicManager::Execute( const std::string& NameCinematic )
@@ -159,6 +204,7 @@ std::string CCinematicManager::CCinematicsItems::GetNextName()
 
 void CCinematicManager::Update()
 {
+
     if ( m_CurrentElement != 0 )
     {
         //Compruebo si este elemento es bloqueante y no está bloqueado por otro
@@ -200,4 +246,19 @@ void CCinematicManager::Render()
     {
         m_CurrentElement->Render();
     }
+}
+
+void CCinematicManager::PlayCinematic( const std::string& aName )
+{
+	m_CurrentCamera = CameraMInstance->GetCurrentCameraName();
+	CameraMInstance->SetCurrentCamera( aName );
+	CameraMInstance->GetCurrentCamera()->SetEnable(true);
+	m_CinematicActive = true;
+}
+
+void CCinematicManager::StopCinematic( const std::string& aName )
+{
+	CameraMInstance->GetCurrentCamera()->SetEnable(false);
+	CameraMInstance->SetCurrentCamera( m_CurrentCamera );
+	m_CinematicActive = false;
 }

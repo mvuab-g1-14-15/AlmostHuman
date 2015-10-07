@@ -1,4 +1,8 @@
 <cinematics>
-	<cinematic name="cinematica_1" resource_id_file="Data/cinematic/cinematic.xml"/>
-	<cinematic name="cinematica_2" resource_id_file="Data/cinematic/cinematic2.xml"/>
+	<!--<cinematic name="cinematica_1" resource_id_file="Data/cinematic/cinematic.xml"/>
+	<cinematic name="cinematica_2" resource_id_file="Data/cinematic/cinematic2.xml"/>-->
+	<!--<cinematic name="ventilador" resource_id_file="Data/cinematic/ventilador.xml"/>
+	<cinematic name="opendoor" resource_id_file="Data/cinematic/opendoor.xml"/>-->
+	<camera_cinematic name="cinematica_inicial" resource_id_file="Data/cinematic/cinematica_inicial.xml"/>
+	<camera_cinematic name="cinematica_final" resource_id_file="Data/cinematic/cinematica_final.xml"/>
 </cinematics>

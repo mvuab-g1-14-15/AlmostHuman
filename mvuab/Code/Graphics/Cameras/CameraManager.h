@@ -38,6 +38,7 @@ public:
   void NewCamera( CCamera::Type id_cam, const std::string& name, const Math::Vect3f& Eye,
                   const Math::Vect3f& LookAt );
   void DeleteCamera( const std::string& name );
+  void AddCamera( const std::string& name, CCamera* aCamera );
   void Render();
 
 private:

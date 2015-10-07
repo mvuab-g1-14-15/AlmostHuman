@@ -35,7 +35,7 @@ function load_gameplay()
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-	
+	--cinematic_manager:PlayCinematic("cinematica_inicial")
 end
 
 function update_gameplay()

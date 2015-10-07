@@ -128,3 +128,8 @@ void CCameraManager::Update()
     for ( ; itb != ite; ++itb )
     { itb->second->Update(); }
 }
+
+void CCameraManager::AddCamera( const std::string& name, CCamera* aCamera )
+{
+	AddResource(name, aCamera);
+}
