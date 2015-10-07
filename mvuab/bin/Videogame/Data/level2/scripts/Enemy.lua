@@ -283,7 +283,7 @@ function CEnemyLUA:MoveToPos( aPos )
 	count = self.Path:size()
 	--engine:Trace("El tamaño de la path es: "..lDist)
     if ( (count - self.ActualPathPoint) > 2 ) then
-        if ( lDist < 0.8 ) then
+        if ( lDist < 1 ) then
             self.ActualPathPoint = self.ActualPathPoint + 1
 		end
         lTargetPos = self.Path:GetResource(self.ActualPathPoint)
