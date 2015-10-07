@@ -26,24 +26,15 @@ CInstanceMesh::CInstanceMesh( const std::string& aName )
 	, mPhysicActor( 0 )
 {
   SetName( aName );
-  mMaterialName = aName;
-  GetMaterial();
   GetCenterAndRadiusFromAABB();
 }
 
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName )
+CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName )
 	: CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
 {
   SetName(aName);
-
-  if (mMaterialName == "")
-    mMaterialName = aName;
-  else
-    mMaterialName = MaterialName;
-  
   GetStaticMesh(CoreName);
-  GetMaterial();
   GetCenterAndRadiusFromAABB();
 }
 
@@ -53,9 +44,7 @@ CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
   , mType( "static" )
   , mPhysicActor( 0 )
 {
-  mMaterialName = GetName();
   GetStaticMesh( atts.GetAttribute<std::string>( "core", "no_staticMesh" ));
-  GetMaterial();
   GetCenterAndRadiusFromAABB();
 }
 
@@ -100,15 +89,11 @@ void CInstanceMesh::Render()
     }
 
     // Check the visibility with the frustum
-    if ( CameraMInstance->GetCurrentCamera()->GetFrustum().SphereVisible( D3DXVECTOR3( mAABBCenter.u ), mAABBRadius ) )
+    //if ( CameraMInstance->GetCurrentCamera()->GetFrustum().SphereVisible( D3DXVECTOR3( mAABBCenter.u ), mAABBRadius ) )
     {
       CGraphicsManager* lGM = GraphicsInstance;
-      lGM->SetTransform( lTransform );
-      for( uint32 i = 0, lCount = mMaterial->GetCount(); i < lCount; ++i )
-      {
-        mMaterial->ApplyMaterial(i);
-        mStaticMesh->Render( lGM, i );
-      }
+      lGM->SetTransform( GetTransform() );
+      mStaticMesh->Render( lGM );
       lGM->SetTransform(Math::Mat44f());
     }
 
@@ -166,4 +151,5 @@ void CInstanceMesh::GetStaticMesh( const std::string& aCoreName )
 		lCoreName.erase(i, lCoreName.size() - i);
 
 	mStaticMesh = SMeshMInstance->GetStaticMesh(lCoreName);
+	ASSERT(mStaticMesh, "Null static mesh");
 }

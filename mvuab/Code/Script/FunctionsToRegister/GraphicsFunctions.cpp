@@ -67,9 +67,9 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
   return new CInstanceMesh( Name, CoreName );
 }
 
-CInstanceMesh* CreateInstanceMeshWithMaterial( const std::string& Name, const std::string& CoreName, const std::string MaterialName )
+CInstanceMesh* CreateInstanceMeshWithMaterial( const std::string& Name, const std::string& CoreName, const std::string /*MaterialName*/ )
 {
-  return new CInstanceMesh( Name, CoreName, MaterialName );
+  return new CInstanceMesh( Name, CoreName );
 }
 
 CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )

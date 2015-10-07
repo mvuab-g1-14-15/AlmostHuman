@@ -67,6 +67,7 @@ bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath,
 bool CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
 {
 	bool lOk = true;
+	mRoomName = l_RoomName;
     CXMLTreeNode l_Node, l_Root;
     if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
 	{
@@ -167,8 +168,12 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 
 CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
 {
-	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-
+	CInstanceMesh* l_InstanceMesh = new CInstanceMesh
+	( 
+			atts.GetAttribute<std::string>( "name", "no_name" ),
+			atts.GetAttribute<std::string>( "core", "no_staticMesh" ) + "+" + mRoomName
+	);
+	
 	l_InstanceMesh->SetType("static");
 
 	// If there is no ase loaded and we want phyx

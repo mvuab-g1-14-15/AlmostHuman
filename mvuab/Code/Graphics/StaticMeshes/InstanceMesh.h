@@ -29,7 +29,7 @@ class CInstanceMesh : public CRenderableObject
         std::vector<uint32> Dummy02;
 
     public:
-        CInstanceMesh( const std::string& aName, const std::string& CoreName, const std::string& MaterialName = "" );
+        CInstanceMesh( const std::string& aName, const std::string& CoreName );
         CInstanceMesh( const std::string& aName );
 
         CInstanceMesh( const CXMLTreeNode& atts );

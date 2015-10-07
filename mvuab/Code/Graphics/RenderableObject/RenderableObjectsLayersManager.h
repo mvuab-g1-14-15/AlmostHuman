@@ -15,6 +15,7 @@ class CRenderableObjectsLayersManager : public CTemplatedVectorMapManager<CRende
 {
     private:
         std::vector<CPhysicUserData *> m_PhyscsUserData;
+		std::string mRoomName;
         CRenderableObjectsManager* m_DefaultRenderableObjectManager;
         CRenderableObjectsManager* GetRenderableObjectManager( const std::string &l_Name );
 		bool					   LoadRenderableObject(const std::string &l_FilePath, const std::string& l_Name, const std::string& l_RoomName);

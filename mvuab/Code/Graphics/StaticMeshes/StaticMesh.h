@@ -16,7 +16,10 @@ class CRenderableObjectTechnique;
 class CStaticMesh
 {
     protected:
-		std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
+        typedef std::vector<CTexture*> TTextureVector;
+        std::vector<TTextureVector> m_Textures;
+        
+        std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
         std::vector<CRenderableVertexs*> m_RVs;
 
         std::vector<size_t> m_VertexTypes;
@@ -43,7 +46,7 @@ class CStaticMesh
         bool Load( const std::string& FileName );
         bool ReLoad();
         
-        void Render( CGraphicsManager* GM, uint32 aIdx );
+        void Render( CGraphicsManager* GM );
         void Destroy();
         
         Math::AABB3f GetAABB() { return m_AABB; }
