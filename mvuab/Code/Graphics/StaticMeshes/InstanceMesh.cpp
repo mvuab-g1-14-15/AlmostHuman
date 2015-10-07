@@ -133,16 +133,18 @@ CStaticMesh* CInstanceMesh::GetStaticMesh()
 
 void CInstanceMesh::GetMaterial()
 {
-  std::string& lMaterialName = mMaterialName;
-  std::string::size_type i = lMaterialName.find_last_of("_");
-  if (i != std::string::npos)
-    lMaterialName.erase(i, lMaterialName.size() - i);
+	if( mStaticMesh )
+	{
+	  std::string& lMaterialName = mMaterialName;
+	  std::string::size_type i = lMaterialName.find_last_of("_");
+	  if (i != std::string::npos)
+		lMaterialName.erase(i, lMaterialName.size() - i);
 
-  std::transform(lMaterialName.begin(), lMaterialName.end(), lMaterialName.begin(), ::tolower);
+	  std::transform(lMaterialName.begin(), lMaterialName.end(), lMaterialName.begin(), ::tolower);
 
-  mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
-  ASSERT( mMaterial, "Null material" );
-  ASSERT( mStaticMesh && mStaticMesh->GetRVs().size() == mMaterial->GetCount(), "materials != submeshes-> Static Mesh %s -Instance Mesh: %s", lMaterialName.c_str(), lMaterialName.c_str() );
+	  mMaterial = SMeshMInstance->GetMaterial( lMaterialName );
+	  ASSERT( mMaterial && mStaticMesh->GetRVs().size() == mMaterial->GetCount(), "materials != submeshes-> Static Mesh %s -Instance Mesh: %s", lMaterialName.c_str(), lMaterialName.c_str() );
+	}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -164,5 +166,4 @@ void CInstanceMesh::GetStaticMesh( const std::string& aCoreName )
 		lCoreName.erase(i, lCoreName.size() - i);
 
 	mStaticMesh = SMeshMInstance->GetStaticMesh(lCoreName);
-	ASSERT( mStaticMesh, "Null static mesh %s for instance mesh %s", aCoreName.c_str(), GetName().c_str() );
 }

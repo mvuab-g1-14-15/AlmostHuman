@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
+  <MeshInstance name="sffwalls011_sala2" core="sffwallsv11733m10_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls012_sala2" core="sffwallsv11733m10_sala2" pos="78.3625 -15.5219 -77.0613" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls013_sala2" core="sffwallsv8829m10_sala2" pos="78.3626 -15.5219 -30.9983" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls014_sala2" core="sffwallsv5833m10_sala2" pos="78.2659 -10.086 -66.9674" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls015_sala2" core="sffwallsv5659m10_sala2" pos="78.2654 -10.086 -37.5479" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls018_sala2" core="sffwallsv1750m10_sala2" pos="78.2659 -10.086 -86.2164" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls019_sala2" core="sffwallsv5833m10_sala2" pos="63.2718 -10.0391 -88.2355" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls021_sala2" core="sffwallsv1750m10_sala2" pos="48.9965 -9.91932 -85.2724" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls022_sala2" core="sffwallsv7326m10_sala2" pos="63.8264 -15.5096 -24.9366" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls023_sala2" core="sffwallsv11733m10_sala2" pos="48.8649 -15.5219 -37.4404" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls024_sala2" core="sffwallsv11733m10_sala2" pos="48.8647 -15.5219 -63.7795" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls025_sala2" core="sffwallsv8829m10_sala2" pos="48.8647 -15.5219 -83.5033" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls026_sala2" core="sffwallsv7542m10_sala2" pos="63.2041 -15.5096 -89.5093" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls027_sala2" core="sffwallsv5833m10_sala2" pos="63.4184 -10.0391 -24.2868" yaw="3.1415926536" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sala_2_sala2" core="sala_v817m30_sala2" pos="63.5475 -15.3988 -57.2775" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="estanteria_tipusa_01_sala2" core="estanteria_tipusa_v112m2_sala2" pos="70.4766 -16.9091 -59.3457" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="estanteria_tipusa_005_sala2" core="estanteria_tipusa_v112m2_sala2" pos="53.414 -17.1881 -69.892" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -139,20 +153,6 @@
   <MeshInstance name="sffwalls009_sala2" core="sffwallsv5659m10_sala2" pos="49.0812 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sffceiling002_sala2" core="sffceilingv38398m10_sala2" pos="63.4862 -5.20385 -57.6083" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sffceiling1glass001_sala2" core="sffceiling1glassv240m1_sala2" pos="63.5364 -4.90197 -58.057" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls011_sala2" core="sffwallsv11733m10_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls012_sala2" core="sffwallsv11733m10_sala2" pos="78.3625 -15.5219 -77.0613" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls013_sala2" core="sffwallsv8829m10_sala2" pos="78.3626 -15.5219 -30.9983" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls014_sala2" core="sffwallsv5833m10_sala2" pos="78.2659 -10.086 -66.9674" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls015_sala2" core="sffwallsv5659m10_sala2" pos="78.2654 -10.086 -37.5479" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls018_sala2" core="sffwallsv1750m10_sala2" pos="78.2659 -10.086 -86.2164" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls019_sala2" core="sffwallsv5833m10_sala2" pos="63.2718 -10.0391 -88.2355" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls021_sala2" core="sffwallsv1750m10_sala2" pos="48.9965 -9.91932 -85.2724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls022_sala2" core="sffwallsv7326m10_sala2" pos="63.8264 -15.5096 -24.9366" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls023_sala2" core="sffwallsv11733m10_sala2" pos="48.8649 -15.5219 -37.4404" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls024_sala2" core="sffwallsv11733m10_sala2" pos="48.8647 -15.5219 -63.7795" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls025_sala2" core="sffwallsv8829m10_sala2" pos="48.8647 -15.5219 -83.5033" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls026_sala2" core="sffwallsv7542m10_sala2" pos="63.2041 -15.5096 -89.5093" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls027_sala2" core="sffwallsv5833m10_sala2" pos="63.4184 -10.0391 -24.2868" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="object008_sala2" core="objectv40m1_sala2" pos="64.7415 -18.403 -55.6597" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamp_04_sala2" core="lamp_v1636m1_sala2" pos="62.4198 -7.15009 -48.2927" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamp_03_sala2" core="lamp_v1636m1_sala2" pos="62.4198 -7.15009 -58.8906" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
