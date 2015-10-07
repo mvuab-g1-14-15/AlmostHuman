@@ -62,7 +62,7 @@ function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
 		g_Player:SetWeak(false)
-		g_EnemyManager:AlarmRoom("room2")
+		enemy_manager:AlarmRoom("room2")
 		g_bChargeEnergy = false
 	else
 		g_bChargeEnergy = true
@@ -190,7 +190,7 @@ function StayText(room, message, other_shape)
 end
 
 function GetEnemyLive(room)
-	lEnemy = g_EnemyManager:GetEnemys()
+	lEnemy = enemy_manager:GetEnemys()
 	--engine:Trace("La room es "..room)
 	for i in pairs (lEnemy) do
 		lActualEnemy = lEnemy[i]

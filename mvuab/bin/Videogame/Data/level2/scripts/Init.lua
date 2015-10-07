@@ -4,7 +4,7 @@ dofile("./data/level2/scripts/Barrel.lua")
 
 g_Player = nil
 g_HUD = nil
-g_EnemyManager = nil
+enemy_manager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
 g_Barrels = {}
@@ -28,8 +28,8 @@ function load_gameplay()
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
-	if g_EnemyManager == nil then
-		g_EnemyManager = CEnemyManagerLUA()	
+	if enemy_manager == nil then
+		enemy_manager = CEnemyManagerLUA()	
 	end
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
@@ -45,7 +45,7 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
-	g_EnemyManager:Update()
+	enemy_manager:Update()
 	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
@@ -98,7 +98,7 @@ function update_gameplay()
 			if g_bPressRoom3X then
 				--gui_manager:ShowStaticText("Alarm")
 				g_bAlarmRoom3 = true
-				g_EnemyManager:AlarmRoom("room3")				
+				enemy_manager:AlarmRoom("room3")				
 				g_bPressedRoom3X = true
 			elseif g_bOpenDoor3 then
 				--Code para abrir puerta

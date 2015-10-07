@@ -1,13 +1,13 @@
 tiempoDeEspera = 0
 
 function init_enemy()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	enemy:ChangeAnimation(enemy:GetActualState(), 0.2, 0.2)
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 end
 
 function activation()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	enemy:ChangeAnimation(enemy:GetActualState(), 1, 0.2)
 	timerActivation = "Activation"..enemy:GetName()
 	if not countdowntimer_manager:ExistTimer(timerActivation) then
@@ -17,7 +17,7 @@ function activation()
 	end
 end
 function check_next_state()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	--timerHurt = "Recibo disparo "..enemy:GetName()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	timerActivation = "Activation"..enemy:GetName()
@@ -51,7 +51,7 @@ function check_next_state()
 					countdowntimer_manager:Reset(timerPerseguir, false)
 				end
 				enemy.Suspected = false
-				g_EnemyManager:SetAlarm(true)
+				enemy_manager:SetAlarm(true)
 			end
 		end
 	elseif l_PlayerInSight or (0 < angle and l_DistanceToPlayer < 4) then
@@ -93,7 +93,7 @@ end
 
 function andar()
 	local dt = timer:GetElapsedTime()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	if enemy:GetVelocity() == 5.0 then
 		enemy:SetVelocity(1.0)
 	end
@@ -106,7 +106,7 @@ end
 
 function stay()
 	local dt = timer:GetElapsedTime()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	if enemy.Suspected then
 		if enemy:MoveToPos(enemy.SuspectedPosition) then
 			enemy.Suspected = false
@@ -120,7 +120,7 @@ function stay()
 end
 
 function atacar()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	timerPerseguir = "Perseguir Player"..enemy:GetName()
 	timerBurst = "Burst"..enemy:GetName()
 	local l_PlayerInSight = PlayerVisibility(enemy)
@@ -176,7 +176,7 @@ function atacar()
 end
 
 function perseguir()
-	enemy = g_EnemyManager:GetActualEnemy()
+	enemy = enemy_manager:GetActualEnemy()
 	local l_TargetPos = GetPlayerPosition()
 	if enemy:GetVelocity() == 2.0 then
 		enemy:SetVelocity(5.0)
@@ -187,6 +187,7 @@ function perseguir()
 			engine:Trace("Estoy en la posición")
 		end
 	elseif enemy.Suspected then
+		engine:Trace("Moviendose a posicion sospechosa")
 		if enemy:MoveToPos(enemy.SuspectedPosition) then
 			enemy.Suspected = false
 		end

@@ -140,7 +140,7 @@ end
 	
 	-- CharacterController = CEnemyLUA.GetCharacterController(self)	
 	-- lPos = CharacterController:GetPosition()
-    -- lAStar = g_EnemyManager:GetAStar(self.Room)
+    -- lAStar = enemy_manager:GetAStar(self.Room)
 
     -- if ( not self.PathCalculated ) then   
         -- self.Path = lAStar:GetPath( lPos, PositionPlayer )

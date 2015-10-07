@@ -36,7 +36,7 @@ function CBlaster:Shoot()
 	lShoot:Init()
 	table.insert(self.Shoots, lShoot)
 	
-	local lEnemies = g_EnemyManager:GetEnemiesAtDistance( 5.0 )
+	local lEnemies = enemy_manager:GetEnemiesAtDistance( 5.0 )
 	for i = 1, #lEnemies do
 		lEnemy = lEnemies[i]
 		lEnemy.Suspected = true
@@ -62,7 +62,7 @@ function CBlaster:GetEnemyFromRay()
 	self:CreateParticles(l_OriRay, l_DirRay)
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_ENEMY.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	local l_EnemyName = physic_manager:RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
-    return g_EnemyManager:GetResource(l_EnemyName)
+    return enemy_manager:GetResource(l_EnemyName)
 end
 
 function CBlaster:CreateParticles(position, direction)

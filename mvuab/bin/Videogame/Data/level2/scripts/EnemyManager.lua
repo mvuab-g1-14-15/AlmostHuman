@@ -223,6 +223,10 @@ function CEnemyManagerLUA:GetResource(name)
 	return self.Enemy[name]
 end
 
+function CEnemyManagerLUA:GetEnemy( aName )
+	return self.Enemy[aName]
+end
+
 function CEnemyManagerLUA:AddDamage(name)
 	lEnemy = self.Enemy[name]
 	lEnemy:AddDamage(25.0)
