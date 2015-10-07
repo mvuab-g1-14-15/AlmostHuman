@@ -20,8 +20,8 @@ function GetMaterialCount aObj =
 --export de la class
 fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 (	
-	try
-	(
+	--try
+	--(
 		-- create the document and set the filename
 		xDoc = XMLDocument filenameXML
 		
@@ -40,12 +40,13 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 		local NameVertexsMap = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int32]"
 		for Obj in UniqueInstanceArray do
 		(
+				--format "Classof Obj: % \n" (classof Obj) as String
 			
-				if (classof Obj != Editable_mesh OR classof Obj != Editable_poly) then
+				/*if (classof Obj != Editable_Poly) then
 				(
-					messageBox ("The object " + m_ObjName + " is not an Editable_mesh or Editable_poly")
+					messageBox ("The object " + Obj.Name as String + " is not an Editable_mesh or Editable_poly")
 					exit
-				)
+				)*/
 				
 				local ObjName = toLower Obj.name
 				local ObjNameCoreAux = trimright ObjName "0123456789"
@@ -70,11 +71,11 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 					NameVertexsMap.Add ObjNameCore 0
 				)
 		)
-	)
-	catch
-	(
-		format "Error generating mesh instance\n"
-	)
+	--)
+	--catch
+	--(
+	--	format "Error generating mesh instance\n"
+	--)
 	return xDoc.PrettySaveXML()
 )
 

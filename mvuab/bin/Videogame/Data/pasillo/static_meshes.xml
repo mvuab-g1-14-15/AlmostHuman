@@ -23,4 +23,5 @@
   <static_mesh name="metal_barrelv256m9_pasillo" filename="meshes\metal_barrelv256m9.mesh" />
   <static_mesh name="ammo_boxv76m9_pasillo" filename="meshes\ammo_boxv76m9.mesh" />
   <static_mesh name="bombv466m1_pasillo" filename="meshes\bombv466m1.mesh" />
+  <static_mesh name="tubev216m1_pasillo" filename="meshes\tubev216m1.mesh" />
 </static_meshes>

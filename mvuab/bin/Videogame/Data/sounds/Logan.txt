@@ -1,16 +1,17 @@
 Event	ID	Name			Wwise Object Path	Notes
-	23506888	Play_Long_Shoot			\Default Work Unit\Play_Long_Shoot	
-	401192514	Shoot_Long_Shoot_Event			\Default Work Unit\Shoot_Long_Shoot_Event	
-	1082697451	Stop_Acumulator_Long_Shoot_Event			\Default Work Unit\Stop_Acumulator_Long_Shoot_Event	
-	2054452452	Acumulator_Long_Shoot_Event			\Default Work Unit\Acumulator_Long_Shoot_Event	
-	2839381747	Logan_Footstep_Walk			\Default Work Unit\Logan_Footstep_Walk	
-	3038207054	Shoot			\Default Work Unit\Shoot	
+	1082697451	Stop_Acumulator_Long_Shoot_Event			\Logan\Stop_Acumulator_Long_Shoot_Event	
+	2855377483	Logan_Footstep_Walk_Pavimento			\Logan\Logan_Footstep_Walk_Pavimento	
+	3002718147	Logan_Footstep_Walk_Metal			\Logan\Logan_Footstep_Walk_Metal	
+	3668163621	Play_Short_Shoot_Event			\Logan\Play_Short_Shoot_Event	
+	3876631393	Play_Acumulator_Long_Shoot_Event			\Logan\Play_Acumulator_Long_Shoot_Event	
+	4202206853	Play_Long_Shoot_Event			\Logan\Play_Long_Shoot_Event	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	28984091	RS2_FAST_IMPACT_WEAPONRY_013_B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_FAST_IMPACT_WEAPONRY_013_B_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Short Shoot\RS2_FAST_IMPACT_WEAPONRY_013_B		28613
-	165869216	LongShoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_MACHINE_MOVE_LONG_022_Bb_v(short)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\LongShoot		38244
-	267394215	Paso suelo1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo1		4362
-	787840959	Paso suelo2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan_Footstep\Paso suelo2		3963
-	834326531	Acumlator Long Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_Db_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\Acumlator Long Shoot		806016
-	917228779	ACUMULATOR_loop_Db	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ACUMULATOR_loop_Db_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\AcumLongShoot\ACUMULATOR_loop_Db		66504
+	32348632	Paso metal der_amp	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso metal der_amp_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\Paso metal der_amp		11193
+	262355845	Paso metal izq_amp	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso metal izq_amp_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\Paso metal izq_amp		9403
+	267394215	Paso suelo1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\Paso suelo1		4362
+	273085640	LongShoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Large Shoot_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Long Shoot\LongShoot		41279
+	535759751	Logan Short Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Short Shoot_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Short Shoot\Logan Short Shoot		56348
+	787840959	Paso suelo2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\Paso suelo2		3963
+	864427922	Logan Carga	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Carga_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Long Shoot\AcumLongShoot\Logan Carga		311024
 

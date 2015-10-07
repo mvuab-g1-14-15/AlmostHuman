@@ -1,20 +1,27 @@
 Event	ID	Name			Wwise Object Path	Notes
-	1203582209	Play_Long_Ambient			\Default Work Unit\Play_Long_Ambient	
+	339442378	Play_Panico			\Music & Ambients\Play_Panico	
+	1203582209	Play_Long_Ambient			\Music & Ambients\Play_Long_Ambient	
+	1704638915	Play_Ambient_Pasillo			\Music & Ambients\Play_Ambient_Pasillo	
+	1827037115	Play_Ambient_Sala3			\Music & Ambients\Play_Ambient_Sala3	
+	2902920709	Play_Alerta			\Music & Ambients\Play_Alerta	
+	3568813383	Play_Main_Theme			\Music & Ambients\Play_Main_Theme	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	267654150	dark soundscapes 14	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 14_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 14		3200051
-	342893694	dark soundscapes 16	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 16_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 16		3577465
-	354184061	dark soundscapes 11	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 11_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 11		2986058
-	362224286	dark soundscapes 01	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 01_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 01		2931198
-	438075751	dark soundscapes 12	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 12_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 12		4167818
-	466521606	dark soundscapes 13	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 13_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 13		3387777
-	497909137	dark soundscapes 10	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 10_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 10		3376583
-	615389019	dark soundscapes 08	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 08_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 08		3001469
-	677139355	dark soundscapes 06	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 06_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 06		2823479
-	773649004	dark soundscapes 19	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 19_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 19		3316252
-	808935493	dark soundscapes 09	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 09_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 09		3280985
-	900351120	dark soundscapes 15	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 15_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 15		3078138
-	918214348	dark soundscapes 07	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 07_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 07		2774497
-	1022880071	dark soundscapes 02	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 02_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 02		2700583
-	1072309381	dark soundscapes 03	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 03_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient(Long)\dark soundscapes 03		3939147
+	197167235	Ambient_Inici_Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 14_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient_Inici_Pasillo		844774
+	331274194	Main Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Main Theme_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Main Theme		1891237
+	342893694	Ambient_Inici_Sala3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 16_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient_Inici_Sala3		549387
+	354184061	dark soundscapes 11	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 11_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 11		2986058
+	362224286	dark soundscapes 01	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 01_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 01		2931198
+	438075751	dark soundscapes 12	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 12_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 12		4167818
+	466521606	dark soundscapes 13	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 13_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 13		3387777
+	497909137	dark soundscapes 10	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 10_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 10		3376583
+	615389019	dark soundscapes 08	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 08_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 08		3001469
+	677139355	dark soundscapes 06	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 06_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 06		2823479
+	773649004	dark soundscapes 19	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 19_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 19		3316252
+	808935493	dark soundscapes 09	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 09_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 09		3280985
+	900351120	dark soundscapes 15	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 15_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 15		3078138
+	918214348	dark soundscapes 07	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 07_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 07		2774497
+	1022880071	dark soundscapes 02	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 02_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 02		2700583
+	1057715424	Panico	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Almost human Panico_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Estados\Panico		968502
+	1058189291	Alerta	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Almost human Alerta_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Estados\Alerta		821397
 

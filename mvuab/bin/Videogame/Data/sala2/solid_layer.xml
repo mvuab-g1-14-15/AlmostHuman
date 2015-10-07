@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <MeshInstance name="sala_2_sala2" core="sala_v817m30_sala2" pos="63.5475 -15.3988 -57.2775" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="estanteria_tipusa_01_sala2" core="estanteria_tipusa_v112m2_sala2" pos="70.4766 -16.9091 -59.3457" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="estanteria_tipusa_005_sala2" core="estanteria_tipusa_v112m2_sala2" pos="53.414 -17.1881 -69.892" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="estanteria_tipusa_006_sala2" core="estanteria_tipusa_v112m2_sala2" pos="70.2292 -16.9292 -69.8638" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="estanteria_tipusb_003_sala2" core="estanteria_tipusb_v112m2_sala2" pos="61.9889 -16.8616 -69.6353" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="estanteria_tipusa_01_sala2" core="estanteria_tipusa_v112m2_sala2" pos="70.4766 -16.9091 -59.3457" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="estanteria_tipusa_005_sala2" core="estanteria_tipusa_v112m2_sala2" pos="53.414 -17.1881 -69.892" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="estanteria_tipusa_006_sala2" core="estanteria_tipusa_v112m2_sala2" pos="70.2292 -16.9292 -69.8638" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="estanteria_tipusb_003_sala2" core="estanteria_tipusb_v112m2_sala2" pos="61.9889 -16.8616 -69.6353" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="estanteria_tipusb_005_sala2" core="estanteria_tipusb_v112m2_sala2" pos="59.3435 -16.7873 -79.2825" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="estanteria_tipusb_006_sala2" core="estanteria_tipusb_v112m2_sala2" pos="67.9355 -16.7873 -79.3606" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="barriercil_01_sala2" core="barriercil_v24m1_sala2" pos="59.3291 -16.7752 -80.096" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -31,14 +31,14 @@
   <MeshInstance name="pallet_v004_sala2" core="pallet_vv360m1_sala2" pos="52.5194 -18.3595 -66.4147" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="pallet_v006_sala2" core="pallet_vv360m1_sala2" pos="73.4654 -18.4283 -73.9851" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="pallet_v009_sala2" core="pallet_vv360m1_sala2" pos="51.6678 -18.3595 -57.9159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel048_sala2" core="metal_barrelv256m9_sala2" pos="70.6546 -15.3503 -71.7676" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel047_sala2" core="metal_barrelv256m9_sala2" pos="70.5658 -15.3503 -67.7623" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel046_sala2" core="metal_barrelv256m9_sala2" pos="69.4682 -15.3443 -67.7881" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel044_sala2" core="metal_barrelv256m9_sala2" pos="69.5177 -15.3443 -71.0937" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel043_sala2" core="metal_barrelv256m9_sala2" pos="69.7328 -15.3443 -71.901" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel042_sala2" core="metal_barrelv256m9_sala2" pos="69.3925 -15.3342 -69.9418" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel041_sala2" core="metal_barrelv256m9_sala2" pos="70.5979 -15.3503 -68.8386" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="metal_barrel040_sala2" core="metal_barrelv256m9_sala2" pos="70.6499 -15.6134 -70.6701" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel048_sala2" core="metal_barrelv256m9_sala2" pos="70.6546 -15.3503 -71.7676" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel047_sala2" core="metal_barrelv256m9_sala2" pos="70.5658 -15.3503 -67.7623" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel046_sala2" core="metal_barrelv256m9_sala2" pos="69.4682 -15.3443 -67.7881" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel044_sala2" core="metal_barrelv256m9_sala2" pos="69.5177 -15.3443 -71.0937" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel043_sala2" core="metal_barrelv256m9_sala2" pos="69.7328 -15.3443 -71.901" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel042_sala2" core="metal_barrelv256m9_sala2" pos="69.3925 -15.3342 -69.9418" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel041_sala2" core="metal_barrelv256m9_sala2" pos="70.5979 -15.3503 -68.8386" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="metal_barrel040_sala2" core="metal_barrelv256m9_sala2" pos="70.6499 -15.6134 -70.6701" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="metal_barrel036_sala2" core="metal_barrelv256m9_sala2" pos="61.4149 -14.8244 -58.1225" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="metal_barrel035_sala2" core="metal_barrelv256m9_sala2" pos="70.5252 -15.3239 -69.7652" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="metal_barrel032_sala2" core="metal_barrelv256m9_sala2" pos="69.7802 -15.2884 -58.4119" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -82,7 +82,7 @@
   <MeshInstance name="ammo_box043_sala2" core="ammo_boxv76m9_sala2" pos="70.3475 -16.9733 -69.2692" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ammo_box044_sala2" core="ammo_boxv76m9_sala2" pos="69.9054 -16.4151 -70.5238" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ammo_box045_sala2" core="ammo_boxv76m9_sala2" pos="69.7473 -16.4151 -69.9277" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ammo_box046_sala2" core="ammo_boxv76m9_sala2" pos="69.9609 -16.4151 -68.5728" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ammo_box046_sala2" core="ammo_boxv76m9_sala2" pos="69.9609 -16.4151 -68.5728" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ammo_box047_sala2" core="ammo_boxv76m9_sala2" pos="69.8069 -16.4151 -67.8421" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ammo_box066_sala2" core="ammo_boxv76m9_sala2" pos="70.0513 -16.3312 -57.6011" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ammo_box067_sala2" core="ammo_boxv76m9_sala2" pos="70.2048 -16.3312 -58.3751" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -147,12 +147,12 @@
   <MeshInstance name="sffwalls018_sala2" core="sffwallsv1750m10_sala2" pos="78.2659 -10.086 -86.2164" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sffwalls019_sala2" core="sffwallsv5833m10_sala2" pos="63.2718 -10.0391 -88.2355" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sffwalls021_sala2" core="sffwallsv1750m10_sala2" pos="48.9965 -9.91932 -85.2724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls022_sala2" core="sffwallsv7326m10_sala2" pos="63.8264 -15.5096 -24.9366" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls023_sala2" core="sffwallsv11733m10_sala2" pos="48.8649 -15.5219 -37.4404" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls024_sala2" core="sffwallsv11733m10_sala2" pos="48.8647 -15.5219 -63.7795" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls025_sala2" core="sffwallsv8829m10_sala2" pos="48.8647 -15.5219 -83.5033" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls022_sala2" core="sffwallsv7326m10_sala2" pos="63.8264 -15.5096 -24.9366" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls023_sala2" core="sffwallsv11733m10_sala2" pos="48.8649 -15.5219 -37.4404" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls024_sala2" core="sffwallsv11733m10_sala2" pos="48.8647 -15.5219 -63.7795" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls025_sala2" core="sffwallsv8829m10_sala2" pos="48.8647 -15.5219 -83.5033" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sffwalls026_sala2" core="sffwallsv7542m10_sala2" pos="63.2041 -15.5096 -89.5093" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sffwalls027_sala2" core="sffwallsv5833m10_sala2" pos="63.4184 -10.0391 -24.2868" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sffwalls027_sala2" core="sffwallsv5833m10_sala2" pos="63.4184 -10.0391 -24.2868" yaw="-1.74846" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="object008_sala2" core="objectv40m1_sala2" pos="64.7415 -18.403 -55.6597" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamp_04_sala2" core="lamp_v1636m1_sala2" pos="62.4198 -7.15009 -48.2927" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamp_03_sala2" core="lamp_v1636m1_sala2" pos="62.4198 -7.15009 -58.8906" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
