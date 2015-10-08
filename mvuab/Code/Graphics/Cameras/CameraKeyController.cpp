@@ -89,6 +89,40 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
     return true;
 }
 
+bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)
+{
+    if(!aNode.Exists())
+    {
+        LOG_ERROR_APPLICATION( "CCameraKeyController::Load Tag \"%s\" no existe", "camera_key_controller");
+        return false;
+    }
+
+    SetName( aNode.GetAttribute<std::string>("name", "no_name") );
+    m_Cycle = (aNode.GetAttribute<int32>("cycle", 0) != 0);
+    m_Reverse = (aNode.GetAttribute<int32>("reverse", 0) != 0);
+    m_TotalTime = aNode.GetAttribute<float>("total_time", 0.0f);
+
+    for(uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount ; i++)
+    {
+        const CXMLTreeNode &l_CurrentNode = aNode(i);
+        const std::string &l_TagName = l_CurrentNode.GetName();
+
+        if( l_TagName == "key" )
+        {
+            float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
+            m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
+        }
+    }
+
+    //Check that there are more than one key, in order to set the next key to 0
+    if(m_Keys.size() == 1 )
+    {
+        m_NextKey = 0;
+    }
+
+    return true;
+}
+
 void CCameraKeyController::GetCurrentKeyForward()
 {
     for( uint32 i = m_CurrentKey; i < m_Keys.size(); ++i )

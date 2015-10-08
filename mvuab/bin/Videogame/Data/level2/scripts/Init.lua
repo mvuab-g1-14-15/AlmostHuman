@@ -35,7 +35,7 @@ function load_gameplay()
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-	--cinematic_manager:PlayCinematic("cinematica_inicial")
+	cinematic_manager:PlayCinematic("cinematica_inicial")
 end
 
 function update_gameplay()
@@ -48,7 +48,7 @@ function update_gameplay()
 	enemy_manager:Update()
 	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
-	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
+	g_CinematicActive = cinematic_manager:GetCinematicActive()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else

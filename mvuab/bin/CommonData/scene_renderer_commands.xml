@@ -162,7 +162,7 @@
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
-	<!--<render_gui render="true"/>-->
+	<render_gui render="true"/>
 	<disable_alpha_blend/>
 	
 	<render_developer_info/>
