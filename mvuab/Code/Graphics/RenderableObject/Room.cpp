@@ -11,6 +11,7 @@
 #include "CookingMesh/PhysicCookingMesh.h"
 #include "Utils/PhysicUserData.h"
 #include "Actor/PhysicActor.h"
+#include "Billboard/BillboardManager.h"
 
 CRoom::CRoom( const CXMLTreeNode& aNode )
 	: CName( aNode.GetAttribute<std::string>("level", "no_level") )
@@ -123,6 +124,8 @@ void CRoom::Load()
 				lPM->AddPhysicActor( l_AseMeshActor );
 			}
 		}
+
+		BillboardMan->LoadInstances( m_BasePath + "billboards.xml");
 
 		// TODO: Load Billboards
 		// TODO: Load PS

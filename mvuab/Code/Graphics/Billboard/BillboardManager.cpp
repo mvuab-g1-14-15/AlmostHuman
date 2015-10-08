@@ -59,7 +59,7 @@ void CBillboardManager::Init()
     for ( uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i )
     {
       const CXMLTreeNode& lCurrentNode = node( i );
-      const std::string& lCurrentNodeName = lCurrentNode.GetName();
+      const std::string&  lCurrentNodeName = lCurrentNode.GetName();
 
       if ( lCurrentNodeName == "billboard" )
       {

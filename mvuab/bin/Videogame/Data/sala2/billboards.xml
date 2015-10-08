@@ -1,3 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<billboards>
-</billboards>
+<billboards_instances>
+	<billboard_instance name="target001" core="target" pos="61 -15.23 -35.97" active="true" />
+	<billboard_instance name="energy001" core="energy" pos="61 -14.23 -35.97" active="true" />
+</billboards_instances>
