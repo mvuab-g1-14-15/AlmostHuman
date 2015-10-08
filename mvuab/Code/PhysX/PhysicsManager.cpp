@@ -70,12 +70,6 @@ CPhysicsManager::CPhysicsManager( CXMLTreeNode& atts )
 {
 }
 
-// -----------------------------------------
-//        Métodos principales
-// -----------------------------------------
-//----------------------------------------------------------------------------
-// Init data
-//----------------------------------------------------------------------------
 void CPhysicsManager::Init()
 {
     m_pMyAllocator = new CPhysicUserAllocator;
@@ -94,18 +88,15 @@ void CPhysicsManager::Init()
 
         if ( m_bIsOk )
         {
-            LOG_INFO_APPLICATION( "PhysicsManager:: Creado el PhysXSDK" );
-            LOG_INFO_APPLICATION( "PhysicsManager:: -------PhsX Settings---" );
-            LOG_INFO_APPLICATION( "PhysicsManager:: El valor del SkinWidth es: %f", m_InitParams.m_fSkinWidth );
             m_pPhysicsSDK->setParameter( NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth );
+
             //Código para pintar la información de los Joints
             m_pPhysicsSDK->setParameter( NX_VISUALIZE_ACTOR_AXES, 1 );
             m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_LIMITS, 1 );
             m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_LOCAL_AXES, 1 );
             m_pPhysicsSDK->setParameter( NX_VISUALIZE_JOINT_WORLD_AXES, 1 );
             m_pPhysicsSDK->setParameter( NX_CONTINUOUS_CD, 1 );
-            // Create a scene
-            LOG_INFO_APPLICATION( "PhysicsManager::Init-> El valor de la gravedad es: %f", m_InitParams.m_fGravity );
+
             NxSceneDesc sceneDesc;
             sceneDesc.gravity = NxVec3( 0.0f, m_InitParams.m_fGravity, 0.0f );
             sceneDesc.simType = NX_SIMULATION_HW;
@@ -122,13 +113,6 @@ void CPhysicsManager::Init()
 
             if ( m_bIsOk )
             {
-                LOG_INFO_APPLICATION( "PhysicsManager::Init-> Solo hay un material, con los siguientes params" );
-                LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->Restitution %f:", m_InitParams.m_Restitution_DefMat );
-                LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->StaticFriction %f:",
-                                      m_InitParams.m_StaticFriction_DefMat );
-                LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
-                                      m_InitParams.m_DynamicFriction_DefMat );
-                LOG_INFO_APPLICATION( "PhysicsManager::Init-> ----END PhsX Settings---" );
                 NxMaterial* defaultMaterial = m_pScene->getMaterialFromIndex( 0 );
                 defaultMaterial->setRestitution( m_InitParams.m_Restitution_DefMat );
                 defaultMaterial->setStaticFriction( m_InitParams.m_StaticFriction_DefMat );
@@ -139,13 +123,12 @@ void CPhysicsManager::Init()
 
                 if ( m_bIsOk )
                 {
-                    LOG_INFO_APPLICATION( "PhysicsManager::Init-> Creado el controlador de caracteres" );
                     m_pCookingMesh = new CPhysicCookingMesh();
                     assert( m_pCookingMesh );
                     m_bIsOk = m_pCookingMesh->Init( m_pPhysicsSDK, m_pMyAllocator );
 
                     if ( m_bIsOk )
-                        LOG_INFO_APPLICATION( "PhysicsManager::Init-> Creado el CookingMesh" );
+                        LOG_INFO_APPLICATION( "" );
                 }// isOk mControllerManager?
             }//isOk m_pScene?
         }//isOk m_pPhysicsSDK ?
@@ -535,10 +518,7 @@ Math::Mat44f CPhysicsManager::ConvertNxF32ToMat44( NxF32 m[16] )
                          m[3], m[7], m[11], m[15] );
 }
 
-//----------------------------------------------------------------------------
-// AddPhysicActor : Añade un actor en la escena de PhysX
-//----------------------------------------------------------------------------
-bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
+bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor, bool own /* = true */ )
 {
 	bool lOk = false;
 	if(_pActor && m_pScene )
@@ -553,7 +533,8 @@ bool CPhysicsManager::AddPhysicActor( CPhysicActor* _pActor )
 			_pActor->CreateActor( nxActor );
 			_pActor->SetCollisionGroup( _pActor->GetColisionGroup() );
 			ASSERT( _pActor->GetUserData(), "Null actor user data" );
-			CMapManager<CPhysicActor>::AddResource( _pActor->GetUserData()->GetName(), _pActor );
+			if( own )
+				CMapManager<CPhysicActor>::AddResource( _pActor->GetUserData()->GetName(), _pActor );
 			lOk = true;
 		}
 	}

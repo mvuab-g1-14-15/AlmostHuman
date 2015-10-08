@@ -45,11 +45,12 @@ bool CTexture::LoadFile()
     m_Width = lTextureInfo.Width;
     m_Height = lTextureInfo.Height;
 
-    if( m_Width > 2048 || m_Height > 2048 )
+#ifdef _DEBUG
+	if( m_Width > 2048 || m_Height > 2048 )
 	{
 		LOG_ERROR_APPLICATION( "The texture %s, is greater than 2048", m_FileName.c_str() );
 	}
-	
+
 	if( Math::Utils::IsPowerOf2( m_Width )|| Math::Utils::IsPowerOf2( m_Height ) )
 	{
 		LOG_ERROR_APPLICATION( "The texture %s, is greater than 2048", m_FileName.c_str() );
@@ -65,6 +66,7 @@ bool CTexture::LoadFile()
 	{
 		LOG_ERROR_APPLICATION( "The texture %s, is not compressed", m_FileName.c_str() );
 	}
+#endif // _DEBUG
 
     return true;
 }

@@ -90,7 +90,7 @@ public:
 
   //--- Add/Release Actors
   //CPhysicActor* RegisterPhysicActor( const std::string & aName, TActorInfo
-  bool          AddPhysicActor( CPhysicActor* _pActor );
+  bool          AddPhysicActor( CPhysicActor* _pActor, bool own = true );
   bool          ReleasePhysicActor( CPhysicActor* _pActor );
 
   bool          ReleaseAllActors();         //EUserDataFlag _eFlags );

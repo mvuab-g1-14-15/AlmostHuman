@@ -34,7 +34,9 @@ CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreN
 
 
 CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
-  mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) ), mType( "static" ), mPhysicActor( 0 )
+  mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
+  , mType( "static" )
+  , mPhysicActor( 0 )
 {
 }
 

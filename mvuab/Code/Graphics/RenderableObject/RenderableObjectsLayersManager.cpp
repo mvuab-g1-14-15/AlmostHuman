@@ -162,7 +162,7 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 #endif
 
 	l_InstanceMesh->SetActor( l_MeshActor );
-	PhysXMInstance->AddPhysicActor( l_MeshActor );
+	PhysXMInstance->AddPhysicActor( l_MeshActor, false );
 
 	return l_InstanceMesh;
 }
@@ -170,9 +170,6 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
 {
 	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-
-	l_InstanceMesh->SetType("static");
-
 	// If there is no ase loaded and we want phyx
 	if (!PhysXMInstance->GetLoadASE())
     {
@@ -180,7 +177,7 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& a
 		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
 		l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
 		l_InstanceMesh->SetActor( l_MeshActor );
-		PhysXMInstance->AddPhysicActor( l_MeshActor );
+		PhysXMInstance->AddPhysicActor( l_MeshActor, false );
 	}
 #ifdef _USING_MESH_FOR_PHYSX
 #endif
