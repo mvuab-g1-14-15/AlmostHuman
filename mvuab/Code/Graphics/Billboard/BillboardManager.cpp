@@ -118,7 +118,7 @@ void CBillboardManager::CreateBillBoardGeometry()
 {
   if( !sRV )
   {
-    sRV = new CIndexedVertexs<TT1_VERTEX>(GraphicsInstance, lVtx, lIdx, lVtxCount, lIdxCount);
+    sRV = new CIndexedVertexs<TT1_VERTEX, short>(GraphicsInstance, lVtx, lIdx, lVtxCount, lIdxCount);
   }
 }
 

@@ -135,7 +135,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     );
 
     CHECKED_DELETE(m_RenderableVertexs);
-    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
+    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX, short>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
     CHECKED_DELETE_ARRAY( l_Vtxs );
     CHECKED_DELETE_ARRAY( l_Idxs );
 
