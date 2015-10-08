@@ -22,7 +22,7 @@
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
 	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
-	<billboard_manager file_config=""/>
+	<billboard_manager file_config="../CommonData/Billboards/billboards.xml"/>
 	<particle_manager file_config=""/>
 	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
