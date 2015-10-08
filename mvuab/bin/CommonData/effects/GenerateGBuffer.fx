@@ -29,13 +29,23 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 	OUT.WorldBinormal = float4(mul(cross(l_Tangent,l_Normal), (float3x3)g_WorldMatrix), 0.0);
 	
 	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProj );
+	
+	float u = IN.UV.x;
+	//u = 1.0 - u;
+	
+	float v = IN.UV.y;
+	v = 1.0 - v;
+	
+	OUT.UV = float2( u, v);
+	
 #else
 	OUT.HPosition=mul(float4(IN.Position, 1.0), g_WorldViewProj);
     OUT.Normal=mul(IN.Normal, (float3x3)g_WorldMatrix);
     OUT.WorldPosition=OUT.HPosition;
+	OUT.UV=IN.UV;
 #endif
 
-	OUT.UV=IN.UV;
+
 
 #if defined( USE_NORMAL )
 	OUT.WorldTangent = float4( mul(IN.Tangent.xyz, (float3x3)g_WorldMatrix), 1.0);
