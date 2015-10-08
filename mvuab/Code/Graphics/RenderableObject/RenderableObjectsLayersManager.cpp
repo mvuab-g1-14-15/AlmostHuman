@@ -158,6 +158,8 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 
     l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
     l_MeshActor->CreateBody( 1.0f );
+#ifdef _USING_MESH_FOR_PHYSX
+#endif
 
 	l_InstanceMesh->SetActor( l_MeshActor );
 	PhysXMInstance->AddPhysicActor( l_MeshActor );
@@ -180,6 +182,8 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& a
 		l_InstanceMesh->SetActor( l_MeshActor );
 		PhysXMInstance->AddPhysicActor( l_MeshActor );
 	}
+#ifdef _USING_MESH_FOR_PHYSX
+#endif
 
 	return l_InstanceMesh;
 }

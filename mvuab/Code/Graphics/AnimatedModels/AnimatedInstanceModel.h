@@ -50,6 +50,8 @@ class CAnimatedInstanceModel : public CRenderableObject
         void ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
         void ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
 
+		GET_SET(float32, Velocity);
+
     private:
         CalModel*             m_CalModel;
         CAnimatedCoreModel*   m_AnimatedCoreModel;
@@ -68,6 +70,7 @@ class CAnimatedInstanceModel : public CRenderableObject
         float32 m_LodLevel;
         float32 m_BlendTime;
         float32 m_ChangeAnimation;
+		float32 m_Velocity;
         CRenderableObjectTechnique*  m_RenderableObjectTechnique;
 
 		void CalculateNewLightProbeMatrix();

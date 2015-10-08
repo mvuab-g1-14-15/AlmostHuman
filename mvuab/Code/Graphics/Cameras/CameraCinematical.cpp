@@ -19,15 +19,22 @@ CCameraCinematical::~CCameraCinematical()
 
 void CCameraCinematical::Update( )
 {
-    m_pKeyController->Update();
+	if( m_Enable )
+	{
+		m_pKeyController->Update();
 
-    CCameraInfo * l_pCameraInfo = m_pKeyController->GetCurrentInfo();
-    m_Position = l_pCameraInfo->GetEye();
-    m_LookAt = l_pCameraInfo->GetLookAt();
-    m_Up = l_pCameraInfo->GetUp();
-    m_ZFar = l_pCameraInfo->GetFarPlane();
-    m_ZNear = l_pCameraInfo->GetNearPlane();
-    m_FovInRadians = l_pCameraInfo->GetFOV();
+		CCameraInfo * l_pCameraInfo = m_pKeyController->GetCurrentInfo();
+		m_Position					= l_pCameraInfo->GetEye();
+		m_LookAt					= l_pCameraInfo->GetLookAt();
+		m_Up						= l_pCameraInfo->GetUp();
+		m_ZFar						= l_pCameraInfo->GetFarPlane();
+		m_ZNear						= l_pCameraInfo->GetNearPlane();
+		m_FovInRadians				= l_pCameraInfo->GetFOV();
+	}
+	else
+	{
+		m_pKeyController->SetCurrentTime(0);
+	}
 
 #ifdef _DEBUG
     // The yaw is only calculated to draw the cinematic cameras frustum

@@ -84,8 +84,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
 {
     m_NumVtxs = 0;
     m_NumFaces = 0;
-	int lCoreMeshCount( m_CalCoreModel->getCoreMeshCount() );
-    for(int i = 0; i < lCoreMeshCount; ++i)
+    for(int i = 0; i < m_CalCoreModel->getCoreMeshCount(); ++i)
     {
         CalCoreMesh *l_CalCoreMesh = m_CalCoreModel->getCoreMesh(i);
         for(int j = 0; j < l_CalCoreMesh->getCoreSubmeshCount(); ++j)
@@ -99,6 +98,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
         }
     }
 
+    
     CHECKED_DELETE(m_CalHardwareModel);
     m_CalHardwareModel = new CalHardwareModel(m_CalCoreModel);
     unsigned short *l_Idxs = new unsigned short[m_NumFaces * 3];
@@ -135,7 +135,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     );
 
     CHECKED_DELETE(m_RenderableVertexs);
-    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX, short>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
+    m_RenderableVertexs = new CIndexedVertexs<CAL3D_HW_VERTEX>(GM, l_Vtxs, l_Idxs, m_NumVtxs, m_NumFaces * 3);
     CHECKED_DELETE_ARRAY( l_Vtxs );
     CHECKED_DELETE_ARRAY( l_Idxs );
 
@@ -232,9 +232,20 @@ bool CAnimatedCoreModel::Load()
 
 int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
 {
+    int lAnimationId = INT_MAX;
+
     TAnimationsIdMap::const_iterator lItFind = m_AnimationsMap.find( AnimationName );
-	ASSERT( lItFind != m_AnimationsMap.end(), "The animation %s does not exist", AnimationName.c_str() );
-	return (lItFind == m_AnimationsMap.end()) ? INT_MAX : lItFind->second;
+    if( lItFind == m_AnimationsMap.end() )
+    {
+        LOG_ERROR_APPLICATION( "Unknown animation %s", AnimationName.c_str() );
+    }
+    else
+    {
+        lAnimationId = lItFind->second;
+        //LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
+    }
+
+    return lAnimationId;
 }
 
 int CAnimatedCoreModel::GetAnimationsCount()

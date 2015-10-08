@@ -14,12 +14,11 @@ CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFact
         const CXMLTreeNode& lCurrentEmitter = atts( i );
         const std::string& lNameParticle  = lCurrentEmitter.GetAttribute<std::string>( "name", "" );
 
-        CParticleEmitter* lEmitter = aEmitterFactory->CreateEmitter( lCurrentEmitter.GetName() );
+        CParticleEmitter* lEmitter = aEmitterFactory->CreateEmitter( lCurrentEmitter.GetName(), lCurrentEmitter );
         ASSERT( lEmitter, "Null Emitter" );
 
-        if ( !lEmitter->Init( lCurrentEmitter ) || ( !AddResource( lEmitter->GetName(), lEmitter ) ) )
+        if ( !lEmitter || !AddResource( lEmitter->GetName(), lEmitter ) )
         {
-            LOG_ERROR_APPLICATION( "Error initing emitter %s", lEmitter->GetName() );
             CHECKED_DELETE( lEmitter );
         }
     }
@@ -32,9 +31,11 @@ CParticleSystemCore::~CParticleSystemCore()
 
 void CParticleSystemCore::Update()
 {
+    CParticleEmitter* lParticleEmitter;
     for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
     {
-        GetResourceById( i )->Update(deltaTimeMacro);
+        lParticleEmitter = GetResourceById( i );
+        lParticleEmitter->Update(deltaTimeMacro);
     }
 }
 

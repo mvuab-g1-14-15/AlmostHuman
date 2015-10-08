@@ -1,14 +1,8 @@
 <animated_model name="Player">
-	<texture file=""/>
+	<texture file="Compo_loogan.tga"/>
 	<skeleton file="logan.csf"/>
 	<mesh file="logan.cmf"/>
 	<animation name="idle" file="idle.caf"/>
-	<animation name="idle_breaker" file="idle_breaker.caf"/>
-	<animation name="run" file="run.caf"/>
-	<animation name="charge_loop" file="charge_loop.caf"/>
-	<animation name="charge_to_idle" file="charge_to_idle.caf"/>
-	<animation name="idle_to_charge" file="idle_to_charge.caf"/>
-	<animation name="shoot_cargado" file="shoot_carga.caf"/>
-	<animation name="shoot_ok" file="shoot_ok.caf"/>
-	<animation name="atac_sigil" file="atac_sigil.caf"/>
+	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
+	<animation name="shoot" file="shoot.caf"/>
 </animated_model>

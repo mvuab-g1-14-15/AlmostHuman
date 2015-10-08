@@ -5,6 +5,7 @@
 
 #include "Utils\TemplatedVectorMapManager.h"
 #include "CinematicsElement\CinematicsElement.h"
+#include "Cameras\CameraKeyController.h"
 #include <string>
 #include "Utils/Manager.h"
 
@@ -22,7 +23,9 @@ public:
   void Execute(const std::string& NameCinematic);
   void Update();
   void Render();
-  
+  void PlayCinematic( const std::string& aName );
+  void StopCinematic( const std::string& aName );
+
   GET_SET(bool, CinematicActive);
 
 private:
@@ -34,13 +37,15 @@ private:
     void Execute();
     std::string GetNextName();
   };
-  CTemplatedVectorMapManager<CCinematicsItems>    m_vCinematicsElement;
-  CCinematicsItems*                               m_CurrentCinematicsElement;
-  CCinematicsElement*                             m_CurrentElement;
-  bool                                            m_CinematicActive;
-  bool                                            m_CheckBlock;
-  size_t                                          m_CurrentElementId;
-  bool                                            m_FirstFrame;
+  CTemplatedVectorMapManager<CCinematicsItems>     m_vCinematicsElement;
+  CCinematicsItems*								   m_CurrentCinematicsElement;
+  CCinematicsElement*							   m_CurrentElement;
+  //CCameraCinematical*							   m_CurrentCameraCinematical;
+  std::string							   m_CurrentCamera;
+  bool											   m_CinematicActive;
+  bool											   m_CheckBlock;
+  size_t										   m_CurrentElementId;
+  bool											   m_FirstFrame;
   void CleanUp();
   std::string GetNextName(); 
 };

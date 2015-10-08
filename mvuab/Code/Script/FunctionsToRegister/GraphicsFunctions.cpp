@@ -14,7 +14,7 @@
 
 #include "Object3D.h"
 
-#include "Billboard\Billboard.h"
+#include "Billboard\BillboardInstance.h"
 #include "Billboard\BillboardManager.h"
 
 #include "Cameras/CameraManager.h"
@@ -57,6 +57,11 @@ extern "C"
 
 using namespace luabind;
 
+CBillboardInstance* CreateBillBoard()
+{
+	return new CBillboardInstance();
+}
+
 CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
 {
   return new CInstanceMesh( Name, CoreName );
@@ -65,11 +70,6 @@ CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& C
 CAnimatedInstanceModel* CreateAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
 {
   return new CAnimatedInstanceModel( Name, CoreName );
-}
-
-CBillboard* CreateBillBoard()
-{
-  return new CBillboard();
 }
 
 COmniLight* CreateOmniLight()
@@ -85,37 +85,22 @@ CGizmoElement* CreateGizmoElement( int type, float size, Math::Vect3f position, 
 void registerBillboards( lua_State* aLuaState )
 {
   ASSERT( aLuaState, "LuaState error in Register Billboard" );
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // BILLBOARD
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS2( CBillboard, CName, CObject3D )
-  LUA_DECLARE_DEFAULT_CTOR
-  LUA_DECLARE_METHOD( CBillboard, Update )
-  LUA_DECLARE_METHOD( CBillboard, Render )
-  LUA_DECLARE_METHOD( CBillboard, SetActive )
-  LUA_DECLARE_METHOD_PROTO( CBillboard, Init, bool( CBillboard::* )( const std::string&, const Math::Vect3f&, float, float, float, const std::string&,
-                            const std::string&, bool ) )
-  LUA_DECLARE_METHOD( CBillboard, CreateBillBoardGeometry )
-  LUA_DECLARE_METHOD( CBillboard, DestroyBillBoardGeometry )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS(CreateBillBoard)
   LUA_END_DECLARATION
-
-
+  
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CMapManager<CBillboard> )
-  LUA_DECLARE_METHOD( CMapManager<CBillboard>, AddResource )
-  LUA_DECLARE_METHOD( CMapManager<CBillboard>, GetResource )
-  LUA_END_DECLARATION
-
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // BILLBOARD MANAGER
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS2( CBillboardManager, CMapManager<CBillboard>, CManager )
+  LUA_DECLARE_DERIVED_CLASS2( CBillboardInstance, CName, CObject3D )
+  LUA_DECLARE_METHOD( CBillboardInstance, SetActive )
+  LUA_DECLARE_METHOD( CBillboardInstance, ChangePosition )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateBillBoard )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CBillboardCore> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS2( CBillboardManager, CManager, CTemplatedVectorMapManager<CBillboardCore> )
   LUA_END_DECLARATION
 }
 
@@ -199,6 +184,7 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CCamera, SetEnable )
   LUA_DECLARE_METHOD( CCamera, AddYaw )
   LUA_DECLARE_METHOD( CCamera, AddPitch )
+  LUA_DECLARE_METHOD( CCamera, SetFovInRadians )
   LUA_DECLARE_METHOD_PROTO( CCamera, UpdateFrustum, void( CCamera::* )( void ) )
   LUA_END_DECLARATION
 
@@ -209,6 +195,8 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CCinematicManager, CManager )
   LUA_DECLARE_METHOD( CCinematicManager, Execute )
   LUA_DECLARE_METHOD( CCinematicManager, GetCinematicActive )
+  LUA_DECLARE_METHOD( CCinematicManager, PlayCinematic )
+  LUA_DECLARE_METHOD( CCinematicManager, StopCinematic )
   LUA_END_DECLARATION
 }
 
@@ -342,6 +330,7 @@ void registerAnimatedModels( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimation )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, ChangeAnimationAction )
   LUA_DECLARE_METHOD_PROTO( CAnimatedInstanceModel, IsActionAnimationActive, bool( CAnimatedInstanceModel::* )( const std::string& ) const )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, SetVelocity )
   LUA_END_DECLARATION
 }
 

@@ -39,17 +39,22 @@ void CTextureManager::Reload()
 
 CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
-    if( fileName == ""  )
-    {
-        ASSERT( false, "Null texture name" );
-        return m_DummyTexture;
-    }
+  CTexture* lTexture = NULL;
 
-    //TMapResource::iterator l_It = m_Resources.find(fileName);
-    //return (l_It == m_Resources.end()) ? AddTexture( fileName ) : l_It->second;
+  TMapResource::iterator l_It = m_Resources.find(fileName);
 
-    CTexture *t = GetResource(fileName);
-    return (t == NULL) ? AddTexture(fileName) : t;
+  if( !Exist( fileName ) )
+    lTexture = AddTexture( fileName );
+  else
+    lTexture = l_It->second;
+    
+  if( fileName == ""  )
+  {
+    ASSERT( false, "Null texture name" );
+    lTexture = m_DummyTexture;
+  }
+
+  return lTexture;
 }
 
 CTexture* CTextureManager::AddTexture( const std::string& fileName )
@@ -68,14 +73,12 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
     {
         t = new CTexture();
     }
-    
+
     if ( !t->Load( fileName ) || !AddResource( fileName, t) )
     {
         CHECKED_DELETE( t );
         LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-
-        t = GetResource(fileName);
-        return t == NULL ? m_DummyTexture : t;
+        return m_DummyTexture;
     }
 
     return t;

@@ -140,10 +140,10 @@ bool PlayerInSight( CCamera& aCamera )
 
     if ( lRayCollision )
     {
-      if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f || lRayCollision->GetName() == "Player" )
+      if ( lPosition.Distance( hit.m_CollisionPoint ) < 1.0f || lRayCollision->GetName() == "Player" )
         return true;
     }
-    else if ( lPosition.Distance( hit.m_CollisionPoint ) < 2.0f )
+    else if ( lPosition.Distance( hit.m_CollisionPoint ) < 1.0f )
       return true;
   }
 
@@ -286,7 +286,7 @@ void registerStar( lua_State* aLuaState )
 {
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CAStar )
-  LUA_DECLARE_DEFAULT_CTOR
+  LUA_DECLARE_CTOR_1( std::string )
   LUA_DECLARE_METHOD( CAStar, Init )
   LUA_DECLARE_METHOD( CAStar, Render )
   LUA_DECLARE_METHOD( CAStar, GetPath )

@@ -44,7 +44,7 @@ CLight::CLight( const CXMLTreeNode& node )
     , mLensFlare( 0 )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
-    , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
+    , m_RoomName(  )
 {
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
             m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
@@ -63,7 +63,9 @@ CLight::CLight( const CXMLTreeNode& node )
         {
             m_RenderShadows = lNode.GetAttribute<bool>( "render_shadows", false );
 
-            const std::string& l_ShadowMaskTextureFile = node.GetAttribute<std::string>( "shadow_texture_mask", "" );
+            const std::string& l_ShadowMaskTextureFile = lNode.GetAttribute<std::string>( "shadow_texture_mask", "" );
+
+            m_RoomName = lNode.GetAttribute<std::string>( "room", "" );
 
             if ( l_ShadowMaskTextureFile != "" )
             {

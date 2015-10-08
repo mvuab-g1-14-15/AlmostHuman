@@ -4,39 +4,38 @@ dofile("./data/level2/scripts/Barrel.lua")
 
 g_Player = nil
 g_HUD = nil
-g_EnemyManager = nil
+enemy_manager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
 g_Barrels = {}
 
 initialized1 = false
 
+g_bAlarmRoom3 = false
+g_fOcultarMensaje = 5.0
+g_sMessageAlarm = ""
+
 function load_basics()
-	engine:Trace("Init the load_basics()")
 	-- basic loads
-	--scene:ActivateRoom("sala1")
-	--scene:ActivateRoom("pasillo")
-	--scene:ActivateRoom("sala4")
-	scene:ActivateRoom("sala2")
-	scene:ActivateRoom("sala3")
-	engine:Trace("Finish the load_basics()")
+	scene:ActivateRoom("room1")
+	scene:ActivateRoom("room2")
+	scene:ActivateRoom("room3")
 end
 
 function load_gameplay()
-	engine:Trace("Init the load_gameplay()")
     g_Player = CPlayer()
-	g_Player:SetEnergy(0.0)
+	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
-	if g_EnemyManager == nil then
-		g_EnemyManager = CEnemyManagerLUA()	
+	if enemy_manager == nil then
+		enemy_manager = CEnemyManagerLUA()	
 	end
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-	engine:Trace("Finish the load_gameplay()")
+	--cinematic_manager:PlayCinematic("cinematica_inicial")
 end
 
 function update_gameplay()
@@ -46,7 +45,7 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
-	g_EnemyManager:Update()
+	enemy_manager:Update()
 	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = false--cinematic_manager:GetCinematicActive()
@@ -60,10 +59,27 @@ function update_gameplay()
 		
 	end
 	
+	
+	if action_manager:DoAction("PlayAmbient") then	
+		sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+	end
+	if action_manager:DoAction("Alarm") then	
+			sound_manager:PlayEvent("Play_Alarm", "Alarma_Sala2" )	
+	end
+	
+	if action_manager:DoAction("Ambient_salaX") then
+		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient" )	
+	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then
 		if action_manager:DoAction("ChangeRoom") then
-			g_Player:SetPosition(ChangeRoom())
+			if camera_manager:GetCurrentCamera():GetName() == "FreeCam" then
+				engine:Trace("He entrado")
+				camera_manager:GetCurrentCamera():SetPosition(ChangeRoom())
+			else
+				g_Player:SetPosition(ChangeRoom())
+			end
+			
 		end
 		if action_manager:DoAction("PressR") then
 			if g_bChargeEnergy then
@@ -74,12 +90,50 @@ function update_gameplay()
 			end
 		end
 		if action_manager:DoAction("PressX") then
-			if g_bPressX then
-				gui_manager:ShowStaticText("Block")
-				g_bPressedX = true
+			engine:Trace("He entrado en PressX")
+			if g_bPressRoom2X then
+				engine:Trace("He entrado en PressRoom2X")
+				if CuentaAtras == 3 then
+					gui_manager:ShowStaticText("Block")
+				end
+				g_bPressedRoom2X = true
+			elseif g_bOpenDoor2 then
+				--Code para abrir puerta
 			end
-		end
+		end	
 		
+		if action_manager:DoAction("OpenDoorRoom3") then
+			if g_bPressRoom3X then
+				--gui_manager:ShowStaticText("Alarm")
+				g_bAlarmRoom3 = true
+				enemy_manager:AlarmRoom("room3")				
+				g_bPressedRoom3X = true
+			elseif g_bOpenDoor3 then
+				--Code para abrir puerta
+			end
+		end	
+		
+		if action_manager:DoAction("PressR") then
+			if g_bPressE then
+				g_bPressedE = true
+				if g_fC4Colocada == "1" then
+					g_bC41 = true
+				elseif g_fC4Colocada == "2" then
+					g_bC42 = true
+				end
+			end
+		end	
+		if action_manager:DoAction("DetonarC4") then
+			if g_bDistanceC4 and g_bC41 and g_bC42 then
+				g_bC41 = false
+				g_bC42 = false
+				g_bBombaActivada = true
+				gui_manager:ShowStaticText(g_sTextC4Press)
+				--Code para montar las cinematicas y matar a los drones
+			end
+		end	
+		dt = timer:GetElapsedTime()
+		UpdateVariables(dt)
 	end
 	if g_bInBarrel then
 		--engine:Trace("Next to barrel "..g_BarrelName)
@@ -88,6 +142,7 @@ function update_gameplay()
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false
+			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
 	if not (g_ConsoleActivate or g_CinematicActive) then
@@ -114,89 +169,16 @@ function update_gameplay()
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
 		end
-		
-		if action_manager:DoAction("LoadSala1") then
-			local lRoom
-			if scene:Exist("sala1") then
-				engine:Trace("lRoom 1 exist")
-				lRoom = scene:GetResource("sala1")
-				if lRoom:GetActive() then
-					engine:Trace("lRoom 1 active")
-					scene:UnloadRoom("sala1")
-				else
-					engine:Trace("lRoom 1 non active")
-					scene:ActivateRoom("sala1")
-				end
-			else
-				engine:Trace("lRoom 1 not exist")
-				scene:ActivateRoom("sala1")
-			end
+	end
+end
+
+function UpdateVariables(dt)
+	if g_bAlarmRoom3 then
+		g_fOcultarMensaje = g_fOcultarMensaje - dt
+		if g_fOcultarMensaje <= 0 then
+			g_fOcultarMensaje = 5.0
+			g_bAlarmRoom3 = false
+			gui_manager:ShowStaticText(g_sMessageAlarm)
 		end
-		
-		
-		if action_manager:DoAction("LoadPasillo") then
-			local lRoom
-			if scene:Exist("pasillo") then
-				engine:Trace("lRoom 1 exist")
-				lRoom = scene:GetResource("pasillo")
-				if lRoom:GetActive() then
-					engine:Trace("lRoom 1 active")
-					scene:UnloadRoom("pasillo")
-				else
-					engine:Trace("lRoom 1 non active")
-					scene:ActivateRoom("pasillo")
-				end
-			else
-				engine:Trace("lRoom 1 not exist")
-				scene:ActivateRoom("pasillo")
-			end
-		end
-		
-		if action_manager:DoAction("LoadSala2") then
-			local lRoom
-			if scene:Exist("sala2") then
-				lRoom = scene:			GetResource("sala2")
-				if lRoom:GetActive() then
-					scene:UnloadRoom("sala2")
-				else
-					scene:ActivateRoom("sala2")
-				end
-			else
-				scene:ActivateRoom("sala2")
-			end
-		end
-		
-		if action_manager:DoAction("LoadSala3") then
-			local lRoom
-			if scene:Exist("sala3") then
-				lRoom = scene:GetResource("sala3")
-				if lRoom:GetActive() then
-					scene:UnloadRoom("sala3")
-				else
-					scene:ActivateRoom("sala3")
-				end
-			else
-				scene:ActivateRoom("sala3")
-			end
-		end
-		
-		if action_manager:DoAction("LoadSala4") then
-			local lRoom
-			if scene:Exist("sala4") then
-				lRoom = scene:GetResource("sala4")
-				if lRoom:GetActive() then
-					scene:UnloadRoom("sala4")
-				else
-					scene:ActivateRoom("sala4")
-				end
-			else
-				scene:ActivateRoom("sala4")
-			end
-		end
-		
-		
-		
-		
-		
 	end
 end

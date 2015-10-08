@@ -11,7 +11,7 @@ CCamera::CCamera()
   , m_FovInRadians( Math::Utils::Deg2Rad( 60.0f ) )
   , m_ZNear( 0.1f )
   , m_ZFar( 65.0f )
-  , m_Enable( true )
+  , m_Enable( false )
 {
   uint32 w, h;
   GraphicsInstance->GetWidthAndHeight( w, h );

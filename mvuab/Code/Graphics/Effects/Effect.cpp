@@ -1,7 +1,6 @@
 #include "Effect.h"
 
 #include "EffectManager.h"
-#include "EffectPool.h"
 #include "EffectTechnique.h"
 #include "GraphicsManager.h"
 #include "Lights/DirectionalLight.h"
@@ -14,36 +13,23 @@
 #include "Effects\Defines.h"
 
 CEffect::CEffect( const std::string& EffectName )
-  : CName( EffectName ),
-    m_FileName( "" ),
-    m_Effect( 0 ),
-    m_ViewToLightProjectionMatrixParameter( 0 ),
-    m_LightEnabledParameter( 0 ),
-    m_LightsTypeParameter( 0 ),
-    m_LightsPositionParameter( 0 ),
-    m_LightsDirectionParameter( 0 ),
-    m_LightsAngleParameter( 0 ),
-    m_LightsColorParameter( 0 ),
-    m_LightsFallOffParameter( 0 ),
-    m_LightsStartRangeAttenuationParameter( 0 ),
-    m_LightsEndRangeAttenuationParameter( 0 ),
-    m_BonesParameter( 0 ),
-    m_LightProbesParameter( 0 ),
-
-    // Debug data
-    m_UseDebugColor( 0 ),
-    m_DebugColor( 0 ),
-
-    // Fog
-    m_FogStart( 0 ),
-    m_FogEnd( 0 ),
-    m_FogExp( 0 ),
-    m_FogFun( 0 ),
-
-    // Texture
-    m_HeightTexture( 0 ),
-    m_WidthTexture( 0 )
-
+  : CName( EffectName )
+  , m_FileName( "" )
+  , m_Effect( 0 )
+  , CTOR_EFFECT_PARAMETER(ViewToLightProjectionMatrixParameter)
+  , CTOR_EFFECT_PARAMETER(LightEnabledParameter)
+  , CTOR_EFFECT_PARAMETER(LightsTypeParameter)
+  , CTOR_EFFECT_PARAMETER(LightsPositionParameter)
+  , CTOR_EFFECT_PARAMETER(LightsDirectionParameter)
+  , CTOR_EFFECT_PARAMETER(LightsAngleParameter)
+  , CTOR_EFFECT_PARAMETER(LightsColorParameter)
+  , CTOR_EFFECT_PARAMETER(LightsFallOffParameter)
+  , CTOR_EFFECT_PARAMETER(LightsStartRangeAttenuationParameter)
+  , CTOR_EFFECT_PARAMETER(LightsEndRangeAttenuationParameter)
+  , CTOR_EFFECT_PARAMETER(BonesParameter)
+  , CTOR_EFFECT_PARAMETER(LightProbesParameter)
+  , CTOR_EFFECT_PARAMETER( DebugColor )
+  , CTOR_EFFECT_PARAMETER( UseDebugColor )
   , CTOR_EFFECT_PARAMETER( Size )
   , CTOR_EFFECT_PARAMETER( Angle )
   , CTOR_EFFECT_PARAMETER( Alpha )
@@ -54,25 +40,37 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( WVPMatrix )
   , CTOR_EFFECT_PARAMETER( Direction )
   , CTOR_EFFECT_PARAMETER( Time )
+  , CTOR_EFFECT_PARAMETER( ViewMatrix )
+  , CTOR_EFFECT_PARAMETER( ProjectionMatrix )
+  , CTOR_EFFECT_PARAMETER( VPMatrix )
+  , CTOR_EFFECT_PARAMETER( InverseViewMatrix )
+  , CTOR_EFFECT_PARAMETER( InverseProjectionMatrix )
+  , CTOR_EFFECT_PARAMETER( CameraPosition )
+  , CTOR_EFFECT_PARAMETER( AmbientLight )
+  , CTOR_EFFECT_PARAMETER( FBWidth )
+  , CTOR_EFFECT_PARAMETER( FBHeight )
+  , CTOR_EFFECT_PARAMETER( DeltaTime )
+  , CTOR_EFFECT_PARAMETER( FlipUVVertical   )
+  , CTOR_EFFECT_PARAMETER( FlipUVHorizontal )
+  // ZBLUR
+  , CTOR_EFFECT_PARAMETER( ZBlurFocalStart )
+  , CTOR_EFFECT_PARAMETER( ZBlurFocalEnd )
+  , CTOR_EFFECT_PARAMETER( ZBlurConstant )
+  , CTOR_EFFECT_PARAMETER( ZBlurEnd )
+  // Scattered Light
+  , CTOR_EFFECT_PARAMETER( SLDecai )
+  , CTOR_EFFECT_PARAMETER( SLExposure )
+  , CTOR_EFFECT_PARAMETER( SLDensity )
+  , CTOR_EFFECT_PARAMETER( SLWeight )
+  , CTOR_EFFECT_PARAMETER( SLSamples )
+  , CTOR_EFFECT_PARAMETER( SLLightPos )
 {
   ResetLightsHandle();
 }
 
 CEffect::~CEffect()
 {
-  m_Effect->End();
   CHECKED_RELEASE( m_Effect );
-
-  for ( size_t i = 0; i < m_NamesMacrosChar.size(); ++i )
-    delete m_NamesMacrosChar[i];
-
-  m_NamesMacrosChar.clear();
-
-  for ( size_t i = 0; i < m_DescriptionsMacrosChar.size(); ++i )
-    delete m_DescriptionsMacrosChar[i];
-
-  m_DescriptionsMacrosChar.clear();
-  m_Defines.clear();
 }
 
 void CEffect::SetNullParameters()
@@ -84,36 +82,53 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( WVMatrix );
   RESET_EFFECT_PARAMETER( WVPMatrix );
   RESET_EFFECT_PARAMETER( Direction );
-  m_ViewToLightProjectionMatrixParameter = 0;
-  m_LightEnabledParameter = 0;
-  m_LightsTypeParameter = 0;
-  m_LightsPositionParameter = 0;
-  m_LightsDirectionParameter = 0;
-  m_LightsAngleParameter = 0;
-  m_LightsColorParameter = 0;
-  m_LightsFallOffParameter = 0;
-  m_LightsStartRangeAttenuationParameter = 0;
-  m_LightsEndRangeAttenuationParameter = 0;
-  m_BonesParameter = 0;
-  m_LightProbesParameter = 0;
-  // Fog
-  m_FogStart = 0;
-  m_FogEnd = 0;
-  m_FogExp = 0;
-  m_FogFun = 0;
-  // Texture
-  m_HeightTexture = 0;
-  m_WidthTexture = 0;
+  RESET_EFFECT_PARAMETER( VPMatrix );
+  RESET_EFFECT_PARAMETER( FlipUVVertical   );
+  RESET_EFFECT_PARAMETER( FlipUVHorizontal );
+  RESET_EFFECT_PARAMETER( ViewMatrix );
+  RESET_EFFECT_PARAMETER( ProjectionMatrix );
+  RESET_EFFECT_PARAMETER( InverseViewMatrix );
+  RESET_EFFECT_PARAMETER( InverseProjectionMatrix );
+  RESET_EFFECT_PARAMETER( CameraPosition );
+  RESET_EFFECT_PARAMETER( AmbientLight );
+  RESET_EFFECT_PARAMETER( FBWidth );
+  RESET_EFFECT_PARAMETER( FBHeight );
+  RESET_EFFECT_PARAMETER( DeltaTime );
   RESET_EFFECT_PARAMETER( Size )
   RESET_EFFECT_PARAMETER( Angle )
   RESET_EFFECT_PARAMETER( Alpha )
   RESET_EFFECT_PARAMETER( Color )
+  RESET_EFFECT_PARAMETER( ViewToLightProjectionMatrixParameter)
+  RESET_EFFECT_PARAMETER( LightEnabledParameter)
+  RESET_EFFECT_PARAMETER( LightsTypeParameter)
+  RESET_EFFECT_PARAMETER( LightsPositionParameter)
+  RESET_EFFECT_PARAMETER( LightsDirectionParameter)
+  RESET_EFFECT_PARAMETER( LightsAngleParameter)
+  RESET_EFFECT_PARAMETER( LightsColorParameter )
+  RESET_EFFECT_PARAMETER( LightsFallOffParameter )
+  RESET_EFFECT_PARAMETER( LightsStartRangeAttenuationParameter)
+  RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
+  RESET_EFFECT_PARAMETER( BonesParameter )
+  RESET_EFFECT_PARAMETER( LightProbesParameter )
+  // ZBlur
+  RESET_EFFECT_PARAMETER( ZBlurFocalStart )
+  RESET_EFFECT_PARAMETER( ZBlurFocalEnd )
+  RESET_EFFECT_PARAMETER( ZBlurConstant )
+  RESET_EFFECT_PARAMETER( ZBlurEnd )
+
+  // Scattered Light
+  RESET_EFFECT_PARAMETER( SLDecai )
+  RESET_EFFECT_PARAMETER( SLExposure )
+  RESET_EFFECT_PARAMETER( SLDensity )
+  RESET_EFFECT_PARAMETER( SLWeight )
+  RESET_EFFECT_PARAMETER( SLSamples )
+  RESET_EFFECT_PARAMETER( SLLightPos )
+  
   ResetLightsHandle();
 }
 
 void CEffect::LinkSemantics()
 {
-  // Get the references to the handlers inside the effect
   LINK_EFFECT_PARAMETER( Time );
   LINK_EFFECT_PARAMETER( Size );
   LINK_EFFECT_PARAMETER( Angle );
@@ -124,8 +139,20 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( WorldMatrix );
   LINK_EFFECT_PARAMETER( WVMatrix );
   LINK_EFFECT_PARAMETER( WVPMatrix );
-  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,
-                          m_ViewToLightProjectionMatrixParameter );
+  LINK_EFFECT_PARAMETER( VPMatrix );
+  LINK_EFFECT_PARAMETER( ViewMatrix );
+  LINK_EFFECT_PARAMETER( ProjectionMatrix );
+  LINK_EFFECT_PARAMETER( InverseViewMatrix );
+  LINK_EFFECT_PARAMETER( InverseProjectionMatrix );
+  LINK_EFFECT_PARAMETER( CameraPosition );
+  LINK_EFFECT_PARAMETER( AmbientLight );
+  LINK_EFFECT_PARAMETER( FBWidth );
+  LINK_EFFECT_PARAMETER( FBHeight );
+  LINK_EFFECT_PARAMETER( DeltaTime );
+  LINK_EFFECT_PARAMETER( FlipUVVertical   );
+  LINK_EFFECT_PARAMETER( FlipUVHorizontal );
+
+  GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
@@ -133,27 +160,28 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( LightsAngleParameterStr, m_LightsAngleParameter );
   GetParameterBySemantic( LightsColorParameterStr, m_LightsColorParameter );
   GetParameterBySemantic( LightsFallOffParameterStr, m_LightsFallOffParameter );
-  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr,
-                          m_LightsStartRangeAttenuationParameter );
-  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr,
-                          m_LightsEndRangeAttenuationParameter );
+  GetParameterBySemantic( LightsStartRangeAttenuationParameterStr, m_LightsStartRangeAttenuationParameter );
+  GetParameterBySemantic( LightsEndRangeAttenuationParameterStr, m_LightsEndRangeAttenuationParameter );
   GetParameterBySemantic( BonesParameterStr, m_BonesParameter );
   GetParameterBySemantic( LightProbesParameterStr, m_LightProbesParameter );
   GetParameterBySemantic( DebugColorStr, m_DebugColor );
   GetParameterBySemantic( UseDebugColorStr, m_UseDebugColor );
-  GetParameterBySemantic( FogStartStr, m_FogStart );
-  GetParameterBySemantic( FogEndStr, m_FogEnd );
-  GetParameterBySemantic( FogExpStr, m_FogExp );
-  GetParameterBySemantic( FogFunStr, m_FogFun );
-  GetParameterBySemantic( TextureHeightStr, m_HeightTexture );
-  GetParameterBySemantic( TextureWidthStr, m_WidthTexture );
-  GetParameterBySemantic( WindowHeightStr, m_HeightWindow );
-  GetParameterBySemantic( WindowWidthStr, m_WidthWindow );
   GetParameterBySemantic( ShadowMapTextureSizeStr, m_ShadowMapTextureSizeParameter );
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
-  GetParameterBySemantic( UseFogStr, m_UseFog );
+  //ZBlur
+  GetParameterBySemantic( ZBlurFocalStart, m_ZBlurFocalStart );
+  GetParameterBySemantic( ZBlurFocalEnd, m_ZBlurFocalEnd );
+  GetParameterBySemantic( ZBlurConstant, m_ZBlurConstant );
+  GetParameterBySemantic( ZBlurEnd, m_ZBlurEnd );
+  // Scattered Light
+  GetParameterBySemantic( SLDecai, m_SLDecai );
+  GetParameterBySemantic( SLExposure, m_SLExposure );
+  GetParameterBySemantic( SLDensity, m_SLDensity );
+  GetParameterBySemantic( SLWeight, m_SLWeight );
+  GetParameterBySemantic( SLSamples, m_SLSamples );
+  GetParameterBySemantic( SLLightSource, m_SLLightPos );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -170,84 +198,54 @@ void CEffect::GetParameterBySemantic( const char* SemanticName, D3DXHANDLE& a_Ha
           m_FileName.c_str() );
 }
 
-bool CEffect::LoadEffect( CEffectPool* aEffectPool )
-{
-  bool lOk( true );
-  // Obtain the device from the graphics manager and load the effect
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  DWORD dwShaderFlags = 0;
-  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
-  LPD3DXBUFFER l_ErrorBuffer = 0;
-  HRESULT l_HR = D3DXCreateEffectFromFile(
-                   l_Device,
-                   m_FileName.c_str(),
-                   &m_Defines[0],
-                   0, // LPD3DXINCLUDE pInclude,
-                   dwShaderFlags,
-                   ( aEffectPool ) ? aEffectPool->GetD3DEffectPool() : 0,
-                   &m_Effect,
-                   &l_ErrorBuffer );
-  std::string lErrorMsg;
-
-  if ( l_ErrorBuffer )
-  {
-    lOk = false;
-    StringUtils::Format( lErrorMsg, "Error creating effect '%s': \n\n %s \n", m_FileName.c_str(),
-                         l_ErrorBuffer->GetBufferPointer() );
-    ASSERT( l_HR == S_OK, "Error creating effect '%s': \n % s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
-    CHECKED_RELEASE( l_ErrorBuffer );
-  }
-
-  ASSERT( l_HR == S_OK, "%s %s", m_FileName.c_str(), lErrorMsg.c_str() );
-
-  if ( !lOk )
-  {
-    CHECKED_RELEASE( m_Effect );
-  }
-  else
-  {
-    LinkSemantics();
-  }
-
-  return lOk;
-}
-
-bool CEffect::Reload( CEffectPool* aEffectPool )
-{
-  Unload();
-  return LoadEffect( aEffectPool );
-}
-
 void CEffect::Unload()
 {
   SetNullParameters();
   CHECKED_RELEASE( m_Effect );
 }
 
-bool CEffect::Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool )
+bool CEffect::Load( const std::string& aFileName, const std::vector<SDefines>& aDefines )
 {
-  m_FileName = EffectNode.GetAttribute<std::string>( "file", "no_file" );
+  bool lOk( true );
 
-  for ( uint32 j = 0, lCount = EffectNode.GetNumChildren(); j < lCount; ++j )
+  // Store the filename 
+  m_FileName = aFileName;
+
+  // Transform the defines struct to dx9 struct
+  std::vector<D3DXMACRO> lDefines;
+  for ( uint32 j = 0, lCount = aDefines.size(); j < lCount; ++j )
   {
-    const CXMLTreeNode& l_CurrentSubNode = EffectNode( j );
-    const std::string& l_TagName = l_CurrentSubNode.GetName();
-
-    if ( l_TagName == "define" )
-    {
-      char* cstr_name = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "name", "no_name" ) );
-      m_NamesMacrosChar.push_back( cstr_name );
-      char* cstr_desc = StringUtils::ToCharPtr( l_CurrentSubNode.GetAttribute<std::string>( "description",
-                        "no_description" ) );
-      m_DescriptionsMacrosChar.push_back( cstr_desc );
-      D3DXMACRO macro = { cstr_name, cstr_desc };
-      m_Defines.push_back( macro );
-    }
+      D3DXMACRO macro = { aDefines[j].name.c_str(), aDefines[j].description.c_str() };
+      lDefines.push_back( macro );
   }
 
+  // Set the end of the vector
   D3DXMACRO null = { NULL, NULL };
-  m_Defines.push_back( null );
-  return LoadEffect( aEffectPool );
+  lDefines.push_back( null );
+
+  // Obtain the device from the graphics manager and load the effect
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+  DWORD dwShaderFlags = 0;
+  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
+  LPD3DXBUFFER l_ErrorBuffer = 0;
+  lOk = D3DXCreateEffectFromFile( l_Device, m_FileName.c_str(), &lDefines[0], 0, dwShaderFlags, 0, &m_Effect, &l_ErrorBuffer ) == S_OK;
+  
+  if ( l_ErrorBuffer )
+  {
+    lOk = false;
+    ASSERT( lOk, "Error creating effect '%s': \n % s", m_FileName.c_str(), l_ErrorBuffer->GetBufferPointer() );
+    CHECKED_RELEASE( l_ErrorBuffer );
+    CHECKED_RELEASE( m_Effect );
+  }
+
+  ASSERT( lOk, "%s %s", m_FileName.c_str() );
+
+  if ( lOk )
+  {
+    LinkSemantics();
+  }
+
+  return lOk;
 }
 
 D3DXHANDLE CEffect::GetTechniqueByName( const std::string& TechniqueName )
@@ -338,24 +336,44 @@ bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
   return ( m_Effect->SetMatrix( m_ViewToLightProjectionMatrixParameter,
                                 &Matrix.GetD3DXMatrix() ) == S_OK );
 }
-void CEffect::SetShadowMapParameters
-(
-  bool UseShadowMaskTexture,
-  bool UseStaticShadowmap,
-  bool UseDynamicShadowmap
-)
+
+void CEffect::SetFlipUVs( bool aHorizontal, bool aVertical )
 {
-  m_Effect->SetBool( m_UseShadowMaskTextureParameter, UseShadowMaskTexture ?
-                     TRUE : FALSE );
-  m_Effect->SetBool( m_UseStaticShadowmapParameter, UseStaticShadowmap ? TRUE :
-                     FALSE );
-  m_Effect->SetBool( m_UseDynamicShadowmapParameter, UseDynamicShadowmap ? TRUE
-                     : FALSE );
+  SET_BOOL_PARAMETER( FlipUVHorizontal, aHorizontal );
+  SET_BOOL_PARAMETER( FlipUVVertical  , aVertical   );
+}
+
+void CEffect::SetShadowMapParameters ( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap )
+{
+  SET_BOOL_PARAMETER( UseShadowMaskTextureParameter, UseShadowMaskTexture );
+  SET_BOOL_PARAMETER( UseStaticShadowmapParameter  , UseStaticShadowmap   );
+  SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
+}
+
+void CEffect::SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd)
+{
+    m_Effect->SetFloat(m_ZBlurFocalStart, FocalStart);
+    m_Effect->SetFloat(m_ZBlurFocalEnd, FocalEnd);
+
+    m_Effect->SetFloat(m_ZBlurConstant, Constant);
+    m_Effect->SetFloat(ZBlurEnd, BlurEnd);
+}
+
+void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos)
+{
+    m_Effect->SetFloat(m_SLDecai, l_Decay);
+    m_Effect->SetFloat(m_SLExposure, l_Esposure);
+
+    m_Effect->SetFloat(m_SLWeight, l_Weight);
+    m_Effect->SetFloat(m_SLDensity, l_Density);
+
+    m_Effect->SetInt(m_SLSamples, l_Samples);
+    m_Effect->SetFloatArray(m_SLLightPos, &l_Pos.x, 2);
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
 {
-  m_Effect->SetBool( m_UseDebugColor, aUse ? TRUE : FALSE );
+  SET_BOOL_PARAMETER( UseDebugColor , aUse );
 
   if ( aUse )
   {
@@ -366,22 +384,6 @@ void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
     l_DebugColor[3] = aColor.GetAlpha();
     m_Effect->SetFloatArray( m_DebugColor, l_DebugColor, sizeof( float ) * 4 );
   }
-}
-
-void CEffect::SetFog
-(
-  bool aUseFog,
-  float32 aFogStart,
-  float32 aFogEnd,
-  float32 aFogExponent,
-  EFogFunction aFogFun
-)
-{
-  m_Effect->SetBool( m_UseFog,     aUseFog ? TRUE : FALSE );
-  m_Effect->SetInt( m_FogFun, ( int ) aFogFun );
-  m_Effect->SetFloat( m_FogStart,   aFogStart );
-  m_Effect->SetFloat( m_FogEnd,     aFogEnd );
-  m_Effect->SetFloat( m_FogExp,     aFogExponent );
 }
 
 void CEffect::ResetLightsHandle()
@@ -444,4 +446,58 @@ bool CEffect::SetWorldViewMatrix( const Math::Mat44f& Matrix )
 bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
 {
   return S_OK == SET_MATRIX_PARAMETER( WVPMatrix, Matrix );
+}
+
+bool CEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
+{
+    float32 l_Camera[3];
+    l_Camera[0] = CameraPosition.x;
+    l_Camera[1] = CameraPosition.y;
+    l_Camera[2] = CameraPosition.z;
+    return ( m_Effect->SetFloatArray( m_CameraPosition, l_Camera, 3 ) == S_OK );
+}
+
+bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( ViewMatrix, Matrix );
+}
+
+bool CEffect::SetProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( ProjectionMatrix, Matrix );
+}
+
+bool CEffect::SetInverseViewMatrix( const Math::Mat44f& Matrix )
+{
+    return ( m_Effect->SetMatrix( m_InverseViewMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+}
+
+bool CEffect::SetInverseProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return ( m_Effect->SetMatrix( m_InverseProjectionMatrix, &Matrix.GetInverted().GetD3DXMatrix() ) == S_OK );
+}
+
+bool CEffect::SetViewProjectionMatrix( const Math::Mat44f& Matrix )
+{
+    return S_OK == SET_MATRIX_PARAMETER( VPMatrix, Matrix );
+}
+
+bool CEffect::SetAmbientLightColor( const Math::Vect3f &aAmbienLightColor )
+{
+    float lAmbientColor[3] = {aAmbienLightColor.x, aAmbienLightColor.y, aAmbienLightColor.z};
+
+    HRESULT lRes = m_Effect->SetFloatArray( m_AmbientLight, lAmbientColor, 3 );
+    ASSERT( lRes == S_OK, "Error setting ambient color");
+
+    return lRes == S_OK;
+}
+
+bool CEffect::SetFBSize( const Math::Vect2u aSize )
+{
+    return ( S_OK == SET_INT_PARAMETER( FBWidth, aSize.x ) ) && ( S_OK == SET_INT_PARAMETER( FBHeight, aSize.y ) );
+}
+
+bool CEffect::SetDeltaTime( const float dt )
+{
+    return S_OK == SET_FLOAT_PARAMETER( DeltaTime, dt );
 }

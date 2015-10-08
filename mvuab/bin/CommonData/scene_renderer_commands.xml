@@ -128,6 +128,7 @@
  	</render_weapon_target>
     
     <!--<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_ColorGrading.xml"/>-->
+    <!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_LightScattering.xml"/-->
 	
 	<enable_z_test/>
 	<enable_alpha_blend/>
@@ -136,16 +137,32 @@
 	<render_billboards/>
 	
 	<!-- Rendering Lens Flares -->
-	<!--enable_alpha_blend/>
+	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<lens_of_flare/>
 	<disable_alpha_blend/>
 	
-	<disable_z_test/-->
+	<disable_z_test/>
+    
+    <capture_frame_buffer name="FB1">
+		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+    
+	<!--
+    <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
+    <zblur FocalStart="2" FocalEnd="5" Constant="0.1" BlurEnd="50">
+		<texture stage_id="0" name="FB1"/>
+        <texture stage_id="1" name="DepthMapTexture"/>
+    </zblur>
+	-->
+    
+    <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
+    <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
+    </scattered_light>
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
-	<render_gui render="true"/>
+	<!--<render_gui render="true"/>-->
 	<disable_alpha_blend/>
 	
 	<render_developer_info/>

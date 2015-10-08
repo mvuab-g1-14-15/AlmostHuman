@@ -21,7 +21,8 @@
 
 #include "Shapes/Shapes.h"
 
-#include "Effects\SharedEffect.h"
+#include <DxErr.h>
+#pragma comment(lib, "DxErr.lib")
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 typedef struct CUSTOMVERTEX
@@ -147,8 +148,7 @@ void CGraphicsManager::Release()
 
 void CGraphicsManager::BeginScene()
 {
-  HRESULT hr = mDirectXDevice->BeginScene();
-  assert( SUCCEEDED( hr ) );
+  HR( mDirectXDevice->BeginScene() );
 
   mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
   mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
@@ -168,23 +168,19 @@ void CGraphicsManager::BeginScene()
 
 void CGraphicsManager::BeginRender()
 {
-  // Begin the scene
-  HRESULT hr = mDirectXDevice->BeginScene();
-  //assert( SUCCEEDED( hr ) );
-  mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
-  mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL );
-  mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
-  mDirectXDevice->SetRenderState( D3DRS_DITHERENABLE, TRUE );
-  mDirectXDevice->SetRenderState( D3DRS_SPECULARENABLE, FALSE );
+  HR( mDirectXDevice->BeginScene() );
+  HR( mDirectXDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE  ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE  ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_LIGHTING, FALSE ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_DITHERENABLE, TRUE ) );
+  HR( mDirectXDevice->SetRenderState( D3DRS_SPECULARENABLE, FALSE ) );
 
   if ( m_bPaintSolid )
-    mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID );
+     HR( mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID ) );
   else
-    mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
-
-
+     HR( mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME ) );
 }
 
 void CGraphicsManager::Clear()
@@ -215,19 +211,17 @@ void CGraphicsManager::Clear( bool target, bool zbuffer, bool stencil, u_int mas
   if ( stencil )
     l_Mask = l_Mask | D3DCLEAR_STENCIL;
 
-  mDirectXDevice->Clear( 0, NULL, l_Mask, mask, 1.0f, 0 );
+  HR( mDirectXDevice->Clear( 0, NULL, l_Mask, mask, 1.0f, 0 ) );
 }
 
 void CGraphicsManager::EndScene()
 {
-  mDirectXDevice->EndScene();
+  HR( mDirectXDevice->EndScene() );
 }
 
 void CGraphicsManager::EndRender()
 {
-  mDirectXDevice->EndScene();
-  // Present the backbuffer contents to the display
-  //mDirectXDevice->Present( NULL, NULL, NULL, NULL );
+  HR( mDirectXDevice->EndScene() );
 }
 
 void CGraphicsManager::SetupMatrices()
@@ -261,6 +255,10 @@ void CGraphicsManager::SetupMatrices()
 
   mDirectXDevice->SetTransform( D3DTS_VIEW, &l_matView );
   mDirectXDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
+
+  mView = l_matView;
+  mProjection = l_matProject;
+
   // Set the new parameters to the effect manager
   EffectManagerInstance->ActivateCamera( Math::Mat44f( l_matView ), Math::Mat44f( l_matProject ), l_CameraPosition );
 }
@@ -308,6 +306,15 @@ void CGraphicsManager::Init()
   Math::Vect2i lWindowPosition    = EngineConfigInstance->GetScreenPosition();
   Math::Vect2i lWindowSize        = EngineConfigInstance->GetScreenSize();
   Math::Vect2i lWindowResolution  = EngineConfigInstance->GetScreenResolution();
+
+  D3DVIEWPORT9 l_Viewport;
+  l_Viewport.MinZ=0.0f;
+  l_Viewport.MinZ=1.0f;
+  l_Viewport.X=0;
+  l_Viewport.Y=0;
+  l_Viewport.Width=mWidth;
+  l_Viewport.Height=mHeight;
+  mDirectXDevice->SetViewport(&l_Viewport);
   LOG_INFO_APPLICATION( "GraphicsManager::Window created in (%d,%d) with size (%d,%d) and resolution(%d,%d)",
                         lWindowPosition.x, lWindowPosition.y,
                         lWindowSize.x, lWindowSize.y,
@@ -721,6 +728,7 @@ void CGraphicsManager::DrawLine( const Math::Vect3f& PosA, const Math::Vect3f& P
 void CGraphicsManager::SetTransform( D3DXMATRIX& matrix )
 {
   mDirectXDevice->SetTransform( D3DTS_WORLD, &matrix );
+  mWorld = matrix;
   EffectManagerInstance->SetWorldMatrix( Math::Mat44f( matrix ) );
 }
 void CGraphicsManager::SetTransform( const Math::Mat44f& m )
@@ -733,6 +741,7 @@ void CGraphicsManager::SetTransform( const Math::Mat44f& m )
     m.m03, m.m13, m.m23, m.m33
   );
   mDirectXDevice->SetTransform( D3DTS_WORLD, &aux );
+  mWorld = m;
   EffectManagerInstance->SetWorldMatrix( m );
 }
 //La posicion y el (w,h) esta en pixeles
@@ -1257,14 +1266,14 @@ Math::Vect2f CGraphicsManager::ToScreenCoordinates( Math::Vect3f Point )
 {
   D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
   D3DVIEWPORT9 pViewport;
-  mDirectXDevice->GetTransform( D3DTS_PROJECTION, &projectionMatrix );
-  mDirectXDevice->GetTransform( D3DTS_VIEW, &viewMatrix );
-  mDirectXDevice->GetTransform( D3DTS_WORLD, &worldMatrix );
   mDirectXDevice->GetViewport( &pViewport );
-  D3DXVECTOR3 l_OutPosition;
+
+  pViewport.Width=mWidth;
+  pViewport.Height=mHeight;
+
+  D3DXVECTOR3 l_OutPosition; 
   D3DXVECTOR3 modPos( Point.u );
-  D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &projectionMatrix, &viewMatrix,
-                   &worldMatrix );
+  D3DXVec3Project( &l_OutPosition, &modPos, &pViewport, &(mProjection.GetD3DXMatrix()), &(mView.GetD3DXMatrix() ), &(mWorld.GetD3DXMatrix()) );
   // To Debug uncomment this line
   //CFontManager::GetSingletonPtr()->DrawDefaultText( l_OutPosition.x, l_OutPosition.y, Math::colWHITE,
   // "Light" );

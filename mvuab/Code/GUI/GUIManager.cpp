@@ -873,6 +873,28 @@ void CGUIManager::ShowStaticText( const std::string& inStaticText )
     }
 }
 
+void CGUIManager::ShowStaticText( const std::string& inStaticText, bool inActive)
+{
+	std::map<std::string, CGuiElement*>::iterator it;
+    it = m_ElementsMap.find( inStaticText );
+
+    if ( it != m_ElementsMap.end() )
+    {
+        CStaticText* st = ( CStaticText* )( it->second );
+
+        if ( st->GetVisible() == inActive )
+        {
+			st->SetVisible( !inActive );
+            st->SetActive( !inActive );
+        }       
+    }
+    else
+    {
+        LOG_ERROR_APPLICATION( "CGUIManager:: No se ha encontrado el guiElement %s",
+                               inStaticText.c_str() );
+    }
+}
+
 bool CGUIManager::NextBlockInRadioBox( const std::string& inNameRadioBox )
 {
     std::map<std::string, CGuiElement*>::iterator it;

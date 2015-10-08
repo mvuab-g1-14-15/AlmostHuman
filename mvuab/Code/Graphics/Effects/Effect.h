@@ -2,9 +2,7 @@
 #ifndef EFFECT_H
 #define EFFECT_H
 
-#include "Defines.h"
-#include <string>
-#include <vector>
+#include "Effects\Defines.h"
 #include "Math\Matrix44.h"
 #include "Effects\Defines.h"
 #include "Utils\Name.h"
@@ -12,7 +10,6 @@
 #include "XML\XMLTreeNode.h"
 
 class CLight;
-class CEffectPool;
 
 class CEffect: public CName
 {
@@ -26,13 +23,22 @@ public:
 
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 
-  bool Load( CXMLTreeNode& EffectNode, CEffectPool* aEffectPool );
-  bool Reload( CEffectPool* aEffectPool );
+  bool Load  ( const std::string& aFileName, const std::vector<SDefines>& aDefines );
+  void Unload();
 
-  bool SetWorldMatrix( const Math::Mat44f& Matrix );
-  bool SetInverseWorldMatrix( const Math::Mat44f& Matrix );
-  bool SetWorldViewMatrix( const Math::Mat44f& Matrix );
-  bool SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix );
+  bool SetWorldMatrix               ( const Math::Mat44f& Matrix );
+  bool SetInverseWorldMatrix        ( const Math::Mat44f& Matrix );
+  bool SetWorldViewMatrix           ( const Math::Mat44f& Matrix );
+  bool SetWorldViewProjectionMatrix ( const Math::Mat44f& Matrix );
+  bool SetCameraPosition            ( const Math::Vect3f &CameraPosition );
+  bool SetViewMatrix                ( const Math::Mat44f& Matrix );
+  bool SetProjectionMatrix          ( const Math::Mat44f& Matrix );
+  bool SetInverseViewMatrix         ( const Math::Mat44f& Matrix );
+  bool SetInverseProjectionMatrix   ( const Math::Mat44f& Matrix );
+  bool SetViewProjectionMatrix      ( const Math::Mat44f& Matrix );
+  bool SetAmbientLightColor         ( const Math::Vect3f &aAmbienLightColor );
+  bool SetFBSize                    ( const Math::Vect2u aSize );
+  bool SetDeltaTime                 ( const float dt );
 
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
@@ -48,19 +54,10 @@ public:
   GET_SET( D3DXHANDLE, LightsFallOffParameter );
   GET_SET( D3DXHANDLE, LightsStartRangeAttenuationParameter );
   GET_SET( D3DXHANDLE, LightsEndRangeAttenuationParameter );
-
   GET_SET( D3DXHANDLE, BonesParameter );
-
   GET_SET( D3DXHANDLE, LightProbesParameter );
-
   GET_SET( D3DXHANDLE, DebugColor );
   GET_SET( D3DXHANDLE, UseDebugColor );
-
-  // Texture
-  GET_SET( D3DXHANDLE, HeightTexture );
-  GET_SET( D3DXHANDLE, WidthTexture );
-
-  GET_SET_REF( std::string, FileName );
   GET_SET( LPD3DXEFFECT, Effect );
 
   const BOOL* GetLightsEnabled()
@@ -100,12 +97,14 @@ public:
     return m_LightsColor;
   }
 
+  void SetFlipUVs( bool Horizontal, bool aVertical );
   void SetShadowMapParameters( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap );
-  void SetFog( bool aUseFog, float32 aFogStart, float32 aFogEnd, float32 aFogExponent, EFogFunction aFogFun );
   void SetDebugColor( bool aUse, const Math::CColor aColor );
   void SetSize( float aSize );
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
+  void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
+  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:
@@ -137,6 +136,18 @@ private: // Members
   DECLARE_EFFECT_PARAMETER( WorldMatrix );
   DECLARE_EFFECT_PARAMETER( WVMatrix );
   DECLARE_EFFECT_PARAMETER( WVPMatrix );
+  DECLARE_EFFECT_PARAMETER( ViewMatrix );
+  DECLARE_EFFECT_PARAMETER( ProjectionMatrix );
+  DECLARE_EFFECT_PARAMETER( InverseViewMatrix );
+  DECLARE_EFFECT_PARAMETER( InverseProjectionMatrix );
+  DECLARE_EFFECT_PARAMETER( VPMatrix );
+  DECLARE_EFFECT_PARAMETER( CameraPosition );
+  DECLARE_EFFECT_PARAMETER( AmbientLight );
+  DECLARE_EFFECT_PARAMETER( FBWidth );
+  DECLARE_EFFECT_PARAMETER( FBHeight );
+  DECLARE_EFFECT_PARAMETER( DeltaTime );
+  DECLARE_EFFECT_PARAMETER( FlipUVHorizontal );
+  DECLARE_EFFECT_PARAMETER( FlipUVVertical   );
 
   D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
 
@@ -155,6 +166,24 @@ private: // Members
   D3DXHANDLE m_UseDebugColor;
 
   //
+  // ZBlur
+  //
+  D3DXHANDLE m_ZBlurFocalStart;
+  D3DXHANDLE m_ZBlurFocalEnd;
+  D3DXHANDLE m_ZBlurConstant;
+  D3DXHANDLE m_ZBlurEnd;
+
+  //
+  // Scattered Ligh
+  //
+  D3DXHANDLE m_SLDecai;
+  D3DXHANDLE m_SLExposure;
+  D3DXHANDLE m_SLDensity;
+  D3DXHANDLE m_SLWeight;
+  D3DXHANDLE m_SLSamples;
+  D3DXHANDLE m_SLLightPos;
+
+  //
   // Shadow map handles
   //
   D3DXHANDLE m_ShadowMapTextureSizeParameter;
@@ -162,44 +191,7 @@ private: // Members
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
 
-  D3DXHANDLE m_SceneTextureParameter;
-  D3DXHANDLE m_BloomThresholdParameter;
-  D3DXHANDLE m_SampleOffsetsParameter;
-  D3DXHANDLE m_SampleWeightsParameter;
-  D3DXHANDLE m_GaussianBlurTextureParameter;
-  D3DXHANDLE m_BloomIntensityParameter;
-  D3DXHANDLE m_BaseIntensityParameter;
-  D3DXHANDLE m_BloomSaturationParameter;
-  D3DXHANDLE m_BaseSaturationParameter;
-  D3DXHANDLE m_PostBloomTextureParameter;
-
-  // Fog information
-  D3DXHANDLE m_UseFog;
-  D3DXHANDLE m_FogStart;
-  D3DXHANDLE m_FogEnd;
-  D3DXHANDLE m_FogExp;
-  D3DXHANDLE m_FogFun;
-
-  //Width & Height Textures
-  D3DXHANDLE m_HeightTexture;
-  D3DXHANDLE m_WidthTexture;
-
-  //Width & Height window
-  D3DXHANDLE m_HeightWindow;
-  //D3DXHANDLE m_WidthWindow;
-  DECLARE_EFFECT_PARAMETER( WidthWindow )
-
-  // To avoid memory leaks
-  std::vector<char*> m_NamesMacrosChar;
-  std::vector<char*> m_DescriptionsMacrosChar;
-
-  // The macros to compile the effect
-  std::vector<D3DXMACRO> m_Defines;
-
 private: // Methods
-
-  bool LoadEffect( CEffectPool* aEffectPool );
-  void Unload();
   void ResetLightsHandle();
 };
 #endif // EFFECT_H

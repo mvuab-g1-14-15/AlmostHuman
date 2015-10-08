@@ -4,7 +4,6 @@
 #include "Object3D.h"
 #include "Utils/Name.h"
 
-class CBillboard;
 class CLight;
 
 class CShoot : public CObject3D, public CName
@@ -25,8 +24,6 @@ private:
     float mDamage;
     bool mImpacted;
     Math::Vect3f mDirection;
-
-    CBillboard *mBillboard;
     CLight *mLight;
 };
 

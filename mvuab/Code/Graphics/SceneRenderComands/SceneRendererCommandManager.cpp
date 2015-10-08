@@ -38,6 +38,8 @@
 #include "SceneRenderComands\BloomSceneRendererCommand.h"
 #include "SceneRenderComands\TriggerRendererCommand.h"
 #include "SceneRenderComands\EditorsRendererCmd.h"
+#include "SceneRenderComands\ZBlurSceneRendererCommand.h"
+#include "SceneRenderComands\ScatteredLightRendererCommand.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -155,6 +157,8 @@ void CSceneRendererCommandManager::Init()
                              Type2Type<CTriggerRenderCommand>( ) );
   m_CommandFactory.Register( "bloom", Type2Type<CBloomSceneRendererCommand>( ) );
   m_CommandFactory.Register( "render_editors", Type2Type<CEditorsRenderCmd>( ) );
+  m_CommandFactory.Register( "zblur", Type2Type<CZBlurSceneRendererCommand>( ) );
+  m_CommandFactory.Register( "scattered_light", Type2Type<CScatteredLightSceneRendererCommand>() );
   Load( mConfigPath );
 }
 

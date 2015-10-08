@@ -12,7 +12,6 @@
 #include <string>
 #include "Exceptions\Exception.h"
 
-#include "ScriptManager.h"
 #include "Utils\GPUStatics.h"
 #include "Console\Console.h"
 #include "TestProcess\PhysicProcess.h"
@@ -20,12 +19,13 @@
 #include "TestProcess\AStarProcess.h"
 #include "TestProcess\PreProcess.h"
 
-#include "EngineConfig.h"
 #include "EngineManagers.h"
 #include "GraphicsManager.h"
 
 #include <iostream>
 #include <ctime>
+
+#include "VideoPlayer.h"
 
 #if _DEBUG
     #include "Memory\MemLeaks.h"
@@ -33,7 +33,6 @@
 
 
 #define APPLICATION_NAME    "ALMOST HUMAN"
-static bool g_Exit = false;
 
 void ShowErrorMessage( const std::string& message )
 {
@@ -50,18 +49,8 @@ void ShowErrorMessage( const std::string& message )
     }
 
     end_message += message;
-    MessageBox( 0, end_message.c_str(), "FlostiProject Report", MB_OK | MB_ICONERROR );
-}
-
-void updateThread(CEngine* pEngine)
-{
-    while(!g_Exit)
-    {
-        //pEngine->ProcessInputs();
-
-        if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-            pEngine->Render();
-    }
+    MessageBox( 0, end_message.c_str(), "FlostiProject Report",
+                MB_OK | MB_ICONERROR );
 }
 
 
@@ -76,7 +65,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
         case WM_DESTROY:
             {
                 PostQuitMessage( 0 );
-                exit(1);
+                return 0;
             }
             break;
 
@@ -100,8 +89,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 // WinMain
 //-----------------------------------------------------------------------
-int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
-                      LPSTR _lpCmdLine, int _nCmdShow )
+int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow )
 {
     try
     {
@@ -124,20 +112,16 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             NULL
         };
         RegisterClassEx( &wc );
-
-        // http://xmlsoft.org/threads.html
-        xmlInitParser();
-
         // For random number generation
         srand( ( unsigned int )time( 0 ) );
-
         // Read the configuration of the engine
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "./Data/config.xml" );
-        CEngine* pEngine = new CEngine();
+
         CGPUStatics* gpu = new CGPUStatics();
         CLogger* pLogger = new CLogger();
 
+        CEngine* pEngine = new CEngine();
         DWORD style;
 
         if ( lEngineConfig->GetFullScreenMode() || lEngineConfig->GetFitDesktop() )
@@ -156,10 +140,8 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
 
             lEngineConfig->SetScreenPosition( Math::Vect2i( 0, 0 ) );
-            lEngineConfig->SetScreenSize( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
-                                          GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
-            lEngineConfig->SetScreenResolution( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),
-                                                GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
+            lEngineConfig->SetScreenSize( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),  GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
+            lEngineConfig->SetScreenResolution( Math::Vect2i( GetSystemMetrics( SM_CXSCREEN ),  GetSystemMetrics( SM_CYSCREEN ) - lTaskBarHeight ) );
             style = WS_POPUP | WS_VISIBLE;
         }
         else
@@ -192,8 +174,13 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
 
+        /*CVideoPlayer l_VideoPlayer;
+        if(!l_VideoPlayer.Play("test.avi"))
+        {
+            char s[] = "Error playing video\n";
+            OutputDebugStringA(s);
+        }*/
 
-        HANDLE h = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) updateThread, pEngine, NULL, NULL);
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -203,21 +190,11 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
             }
             else
             {
-                pEngine->ProcessInputs();
-                pEngine->Update();
-
-                //if(!CEngineManagers::GetSingletonPtr()->GetGraphicsManager()->isDeviceLost()) 
-                //    pEngine->Render();
+                pEngine->Execute();
             }
         }
 
-        g_Exit = true;
-
-        WaitForSingleObject(h, INFINITE);
-        CloseHandle(h);
-        
         UnregisterClass( APPLICATION_NAME, wc.hInstance );
-
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
         CHECKED_DELETE( pLogger );

@@ -42,7 +42,11 @@ function PlayerDistance(enemy)
 	local l_PlayerPos = GetPlayerPosition()
 	local l_EnemyPos = enemy:GetPosition()
 	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
-	
+	local DifHeight = l_EnemyPos.y - l_PlayerPos.y
+	if DifHeight < -2 then
+		--engine:Trace("El player está más alto")
+		return 9999
+	end
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
 	----engine:Trace("Player distance: " .. l_DistanceVector:Length())
@@ -145,7 +149,7 @@ function HearPlayer(enemy)
 end	
 
 function ChangeCameraCloseEnemy()
-	local lEnemyName = g_EnemyManager:GetCloseEnemy(GetPlayerPosition()):GetName()
+	local lEnemyName = enemy_manager:GetCloseEnemy(GetPlayerPosition()):GetName()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
 	
 	if lActualCameraName == lEnemyName then
@@ -153,7 +157,7 @@ function ChangeCameraCloseEnemy()
 		camera_manager:SetCurrentCamera("TestProcessCam")
 	else
 		--engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
-		--engine:Trace("Cantidad de enemigos: "..g_EnemyManager:GetNumEnemys())
+		--engine:Trace("Cantidad de enemigos: "..enemy_manager:GetNumEnemys())
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end

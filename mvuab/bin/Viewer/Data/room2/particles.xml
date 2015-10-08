@@ -1,7 +1,5 @@
 <particles_instances>
-	<particle_instance name="smoke01" core="smoke" pos="64 -16.5 -60"/> 
-	<particle_instance name="smoke021" core="smoke2" pos="64 -16.5 -70"/> 
-	<particle_instance name="smoke02" core="smoke" pos="66 -16.5 -44"/>
-	<particle_instance name="ray01" core="rays" pos="62 -17.5 -28"/>
-	<particle_instance name="charge01" core="charge" pos="54 -14 -30"/>
+	<particle_instance name="smoke02" core="smoke" pos="66 -16.5 -44" active="true"/>
+	<particle_instance name="spark01" core="sparks" pos="62 -17.5 -28" active="true"/>
+	<!--<particle_instance name="charge01" core="charge" pos="54 -14 -30" active="true"/>-->
 </particles_instances>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RenderableObjects>
-  <layer name="solid" />
-    <layer name="characters" />
-	<layer name="glow" />
-  <AnimatedInstance name="paladin001" core="paladin" pos="-25.0 0.0 -25.0" yaw="90.0"  pitch="0.0" roll="0.0" scale="0.1 0.1 0.1" layer="characters"/>
-  <MeshInstance name="GlowBox" core="GlowBox" pos="62 -14 -56" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="glow" />
-  <MeshInstance name="Parets_terra" core="Parets_terra" pos="64.5779 -18.5616 -59.9372" yaw="-0.0331981" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" layer="solid" />
-</RenderableObjects>

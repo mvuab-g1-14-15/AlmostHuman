@@ -10,13 +10,13 @@ function CShootLUA:__init(speed, direction, position, damage)
 	self.Yaw = 0.0
 	self.Pitch = 0.0
 	self.Name = "Shoot" .. id_manager:GetId("Shoot")
+	--TODO ALEX
+    --self.Billboard = CreateBillBoard()
+	--if not billboard_manager:AddResource(self.Name, self.Billboard) then
+	--	self.Billboard = billboard_manager:GetResource(self.Name)
+	--end
 	
-    self.Billboard = CreateBillBoard()
-	if not billboard_manager:AddResource(self.Name, self.Billboard) then
-		self.Billboard = billboard_manager:GetResource(self.Name)
-	end
-	
-	self.Billboard:Init( "ShootBillBoard", self.Position, 1.0, 0.0, 1.0, "Data/textures/particles/fire3.png", "SmokeTechnique", true )
+	--self.Billboard:Init( "ShootBillBoard", self.Position, 1.0, 0.0, 1.0, "Data/textures/particles/fire3.png", "SmokeTechnique", true )
     self.Light = CreateOmniLight()
 	self.Light:SetName(self.Name)
     self.Light:SetIntensity( 0.65 )
@@ -49,7 +49,7 @@ function CShootLUA:Update()
 
 				self.Position = lCollisionPoint
 
-				self.Billboard:SetActive( false )
+				--self.Billboard:SetActive( false )
 			else
 				self.Position = lNewPosition
 			end
@@ -58,10 +58,10 @@ function CShootLUA:Update()
 		end
 		if lDistanceInitial > 100.0 then
 				self.Impacted = true
-				self.Billboard:SetActive( false )
+				--self.Billboard:SetActive( false )
 		end
-		self.Billboard:SetPosition( self.Position )
-		self.Billboard:MakeTransform()
+		--self.Billboard:SetPosition( self.Position )
+		--self.Billboard:MakeTransform()
 		self.Light:SetPosition( self.Position )
 		self.Light:MakeTransform()
 	end
@@ -72,6 +72,6 @@ function CShootLUA:GetImpacted()
 end
 
 function CShootLUA:Destroy()
-	self.Billboard:SetActive( false )
+	--self.Billboard:SetActive( false )
 	light_manager:RemoveResource( self.Name )
 end

@@ -19,7 +19,6 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 	
 	OUT.WorldPosition = mul(l_WorldPosition, g_WorldMatrix);
 	
-	
 	OUT.Normal = normalize(mul(l_Normal, g_WorldMatrix));
 	OUT.WorldNormal = OUT.Normal;
 	
@@ -63,48 +62,51 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
     return OUT;
 }
 
-TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
+//--------------------------------------------------------------------------------
+float4 PackAlbedo( UBER_VERTEX_PS IN )
 {
-	TMultiRenderTargetPixel OUT=(TMultiRenderTargetPixel)0;
-	float4 l_DiffuseColor = tex2D(S0LinearSampler,IN.UV);
-	
-	if(g_UseDebugColor)
-		l_DiffuseColor = g_DebugColor;
-		
 #if defined( USE_DIFFUSE_COLOR )
-		l_DiffuseColor = IN.Color;
-#endif
-
-	if(l_DiffuseColor.a<0.5)
-		clip(-1);
-		
-	OUT.Albedo=float4(l_DiffuseColor.xyz, g_SpecularFactor);
-	float3 l_AmbientColor = float3(0,0,0);
-#if defined( USE_SELF_ILUM )
-	l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2)*2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
-	
-	//l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2);
-	//OUT.Albedo.xyz=float3(0,0,0);
-	
-#elif defined( USE_RNM )
-	float3 l_LightMap = GetRadiosityNormalMapBySamplers(FaceNn, FaceNormal, FaceTangent, FaceBinormal, IN.UV2, S2LinearSampler, S3LinearSampler, S4LinearSampler);
-	l_AmbientColor = l_DiffuseColor * l_LightMap * 2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
+	return IN.Color;
+#elif defined ( USE_DEBUG )
+	return g_DebugColor;
 #else
-	l_AmbientColor = l_DiffuseColor.xyz * g_AmbientLight;
+	return tex2D(S0LinearSampler,IN.UV);
 #endif
+}
 
+//--------------------------------------------------------------------------------
+float3 PackNormal( UBER_VERTEX_PS IN )
+{
 #if defined( USE_NORMAL )
 	#if defined( USE_SELF_ILUM )
 		float4 l_TexNormal = tex2D(S2LinearSampler,IN.UV);
 	#else
 		float4 l_TexNormal = tex2D(S1LinearSampler,IN.UV);
 	#endif
-	float3 l_Normal = CalcNewNormal( normalize(IN.WorldTangent), 
-									 normalize(IN.WorldBinormal),
-									 l_TexNormal,
-									 normalize(IN.Normal));
+	return CalcNewNormal( normalize(IN.WorldTangent), normalize(IN.WorldBinormal), l_TexNormal, normalize(IN.Normal));
 #else
-	float3 l_Normal = normalize(IN.Normal);
+	return normalize(IN.Normal);
+#endif
+}
+
+TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
+{
+	TMultiRenderTargetPixel OUT=(TMultiRenderTargetPixel)0;
+	
+	float4 l_DiffuseColor = PackAlbedo( IN );
+	if(l_DiffuseColor.a<0.5)
+		clip(-1);
+		
+	float3 l_Normal = PackNormal( IN );
+		
+	float3 l_AmbientColor = float3(0,0,0);
+#if defined( USE_SELF_ILUM )
+	l_AmbientColor = l_DiffuseColor*tex2D(S1LinearSampler, IN.UV2)*2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
+#elif defined( USE_RNM )
+	float3 l_LightMap = GetRadiosityNormalMapBySamplers(FaceNn, FaceNormal, FaceTangent, FaceBinormal, IN.UV2, S2LinearSampler, S3LinearSampler, S4LinearSampler);
+	l_AmbientColor = l_DiffuseColor * l_LightMap * 2; //Darle más potencia para que se acerque más a lo que se ve en el MAX
+#else
+	l_AmbientColor = l_DiffuseColor.xyz * g_AmbientLight;
 #endif
 
 #if defined( USE_CAL3D_HW )
@@ -149,8 +151,9 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 #endif
 	
-	OUT.Normal=float4(Normal2Texture(l_Normal), 1);
-	OUT.Depth=IN.WorldPosition.z/IN.WorldPosition.w;
+	OUT.Albedo = float4(l_DiffuseColor.xyz, g_SpecularFactor);
+	OUT.Normal = float4(Normal2Texture(l_Normal), 1);
+	OUT.Depth  = IN.WorldPosition.z/IN.WorldPosition.w;
 	
 	return OUT;
 }

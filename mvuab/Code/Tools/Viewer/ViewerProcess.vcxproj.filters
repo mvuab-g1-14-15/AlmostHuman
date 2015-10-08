@@ -23,8 +23,5 @@
     <None Include="icon1.ico">
       <Filter>Archivos de recursos</Filter>
     </None>
-    <None Include="..\..\..\bin\Viewer\Data\textures\gear.ico">
-      <Filter>Archivos de recursos</Filter>
-    </None>
   </ItemGroup>
 </Project>

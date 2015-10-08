@@ -5,6 +5,7 @@ class 'CDroneEnemyLUA' (CEnemyLUA)
 function CDroneEnemyLUA:__init(Node, waypoints, state_machine, core_enemy)
 	CEnemyLUA.__init(self, Node, state_machine, core_enemy)
 	self.Waypoints = waypoints
+	self.IdRouteAlarm = Node:GetAttributeInt("route_alarm", -1)
 	self.ActualWaypoint = 1
 	self.ActualPathPoint = 1
 	self.TurnSpeed = 1
@@ -27,9 +28,11 @@ function CDroneEnemyLUA:Update()
 	lCharacterController:SetPosition(lMeshPosition)
 	lRenderableObject = CEnemyLUA.GetAnimationModel(self)
 	lRenderableObject:SetPosition(lMeshPosition)
-	lRenderableObject:SetYaw(-lCharacterController:GetYaw() + g_HalfPi)
-	lRenderableObject:SetPitch(lCharacterController:GetPitch())
-	lRenderableObject:SetRoll(lCharacterController:GetRoll())
+	if CEnemyLUA.GetActualState(self) ~= "atacar" then
+		lRenderableObject:SetYaw(-lCharacterController:GetYaw() + g_HalfPi)
+		lRenderableObject:SetPitch(lCharacterController:GetPitch())
+		lRenderableObject:SetRoll(lCharacterController:GetRoll())
+	end
 	lRenderableObject:MakeTransform()
 	--UPDATE BRAIN
 	CEnemyLUA.GetBrain(self):Update()
@@ -120,7 +123,7 @@ function CDroneEnemyLUA:MoveToPlayer(PositionPlayer)
 	
 	CharacterController = CEnemyLUA.GetCharacterController(self)	
 	lPos = CharacterController:GetPosition()
-    lAStar = g_EnemyManager:GetAStar()
+    lAStar = enemy_manager:GetAStar( self.Room )
 
     if ( not self.PathCalculated ) then   
         self.Path = lAStar:GetPath( lPos, PositionPlayer )
@@ -163,3 +166,9 @@ function CDroneEnemyLUA:IsInWaypoint()
 	return Distance < self.Delta
 end
 
+-- function CDroneEnemyLUA:ChangeRoute(waypoints)
+	-- self.Waypoints = waypoints
+	-- self.ActualWaypoint = 1
+	-- self.ActualPathPoint = 1
+	-- self.PathCalculated = false
+-- end

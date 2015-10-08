@@ -2,16 +2,21 @@
 <Language id="castellano">
 	<literal id="HiWorld" 		font="xfiles"  color="0.5 0.1 0.1 1.0" value="Hola Mundo"/>
 	<literal id="Exit"     		font="xfiles"  color="0.1 0.1 0.1 1.0" value="Salir"/>
-	<literal id="PickUp"   		font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press E to grab the item"/>
-	<literal id="puertaBruja"   font="Annabel"  color="0.1 0.1 0.1 1.0" value="The door has opened, you can now advance to the next level"/>
-	<literal id="textoItem"		font="Annabel"  color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
-	<literal id="textoPuerta"   font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
-	<literal id="textoCinematic"	font="Annabel"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
-	<literal id="FPS"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
-	<literal id="ButtonEnergy"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press R to charge energy"/>
-	<literal id="HideInBarrel"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press V to hide in barrel"/>
-	<literal id="StealthAttack"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press right button to stealth attack"/>
-	<literal id="CambiarSala"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press R to change room"/>
-	<literal id="OpenDoor"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Press X to open door"/>
-	<literal id="Block"			font="Annabel"  color="0.9 0.1 0.1 1.0" value="Block"/>
+	<literal id="PickUp"   		font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press E to grab the item"/>
+	<literal id="puertaBruja"   font="xfiles"  color="0.1 0.1 0.1 1.0" value="The door has opened, you can now advance to the next level"/>
+	<literal id="textoItem"		font="xfiles"  color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
+	<literal id="textoPuerta"   font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
+	<literal id="textoCinematic"	font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
+	<literal id="FPS"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
+	<literal id="ButtonEnergy"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press R to charge energy"/>
+	<literal id="HideInBarrel"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press V to hide in barrel"/>
+	<literal id="StealthAttack"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press right button to stealth attack"/>
+	<literal id="CambiarSala"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press R to change room"/>
+	<literal id="OpenDoor"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press X to open door"/>
+	<literal id="Block"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Block"/>
+	<literal id="ColocarC4"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press R to put C4"/>
+	<literal id="DetonarC4"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Press R to detonate C4"/>
+	<literal id="FaltanC4"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="You must plant the explosives"/>
+	<literal id="C4Colocada"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="C4 planted"/>
+	<literal id="Alarm"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Alarm activate"/>
 </Language>

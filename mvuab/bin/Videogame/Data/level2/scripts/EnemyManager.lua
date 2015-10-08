@@ -12,9 +12,10 @@ function CEnemyManagerLUA:__init()
 	self.ExtraEnemy = {}
 	self.Routes = {}
 	self.ActualEnemy = nil
-	self.AStar = CAStar()
+	self.AStar = {}
 	self.Shoots = {}
 	self.Alarm = false
+	self.RoomAlarm = false
 	self.ExtraEnemyCount = 0
 	self.ExtraEnemyCountMax = 3
 	self.timerExtraEnemy = "Add Extra Enemy"
@@ -49,7 +50,8 @@ function CEnemyManagerLUA:Load(filename)
         end
     end
 	
-	self.AStar:Init()
+	self.AStar[ "room2" ] = CAStar( "room2" )
+	self.AStar[ "room3" ] = CAStar( "room3" )
 end
 
 function CEnemyManagerLUA:Update()
@@ -65,9 +67,31 @@ function CEnemyManagerLUA:Update()
 	for i in pairs (self.Enemy) do
 		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
 			self.ActualEnemy = self.Enemy[i]
-			if self.ActualEnemy:GetLife() > 0 then
+			timerHurt = "Recibo disparo "..self.ActualEnemy:GetName()			
+			if self.ActualEnemy:GetLife() > 0 and not self.ActualEnemy.IsHurting and self.ActualEnemy.CurrentAnimation ~="hurt" then
 				self.ActualEnemy:Update()
+				
+			elseif self.ActualEnemy:GetLife() > 0 and self.ActualEnemy.IsHurting and self.ActualEnemy.CurrentAnimation ~= "hurt" then
+				self.ActualEnemy.IsHurting = false
+				self.ActualEnemy.BackAnimation = self.ActualEnemy.CurrentAnimation
+				self.ActualEnemy:ChangeAnimation("hurt", 0.2, 1.0)
+				if not countdowntimer_manager:ExistTimer(timerHurt) then
+					countdowntimer_manager:AddTimer(timerHurt, 1.0, false)
+				else
+					countdowntimer_manager:SetActive(timerHurt, true)
+				end
+			elseif self.ActualEnemy:GetLife() > 0 and countdowntimer_manager:ExistTimer(timerHurt) and countdowntimer_manager:IsActive(timerHurt) then
+				self.ActualEnemy.IsHurting = false
+				if countdowntimer_manager:isTimerFinish(timerHurt) then
+					self.ActualEnemy:ChangeAnimation(self.ActualEnemy.BackAnimation, 0.2, 1)
+					countdowntimer_manager:Reset(timerHurt, false)
+				end
 			else
+				if self.ActualEnemy:GetVelocity() == 5.0 then
+					self.ActualEnemy:SetVelocity(2.0)
+				end
+				self.ActualEnemy.IsHurting = false
+				
 				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
 					AnimatedModel = self.ActualEnemy:GetAnimationModel()
 					AnimatedModel:ChangeAnimationAction( "morir", 0.2, 0.2 )
@@ -76,6 +100,7 @@ function CEnemyManagerLUA:Update()
 			
 				if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then				
 					countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
+					
 					self.ActualEnemy:Destroy()
 					self.Enemy[i] = nil
 					--table.remove(self.Enemy, i)
@@ -84,6 +109,20 @@ function CEnemyManagerLUA:Update()
 			end
 		end
 	end
+	
+	for i in pairs (self.Enemy) do
+		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
+			self.ActualEnemy = self.Enemy[i]
+			if self.ActualEnemy:GetActualState() == "idle" and self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+				self.ActualEnemy:ChangeState("activation")
+			elseif self.RoomAlarm == true and self.Room == self.ActualEnemy:GetRoom() then					
+				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
+			end	
+		end
+	end
+	
+	self.RoomAlarm = false
 	
 	for k in pairs (self.Shoots) do
 		if self.Shoots[k]:GetImpacted() then
@@ -99,8 +138,6 @@ function CEnemyManagerLUA:Update()
 end
 
 function CEnemyManagerLUA:AddNewCoreEnemy( Node )
-	
-	
 	CoreEnemy = CCoreEnemyLUA()
     
     CoreEnemy:SetEnemyType(Node:GetAttributeString( "type", "no_type" ))
@@ -161,7 +198,7 @@ function CEnemyManagerLUA:AddNewEnemy( Node )
 	elseif lType == "drone" then		
 		lEnemy = CDroneEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
 	elseif lType == "easy" then
-		lEnemy = CEasyEnemyLUA(Node, lStateMachine, lCoreEnemy)	
+		lEnemy = CEasyEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
 	end
 	name = Node:GetAttributeString("name", "no_name")
 	--engine:Trace("Enemy: "..name)
@@ -178,12 +215,16 @@ function CEnemyManagerLUA:GetActualEnemy()
 	return self.ActualEnemy
 end
 
-function CEnemyManagerLUA:GetAStar()
-	return self.AStar
+function CEnemyManagerLUA:GetAStar( aRoomName )
+	return self.AStar[ aRoomName ]
 end
 
 function CEnemyManagerLUA:GetResource(name)
 	return self.Enemy[name]
+end
+
+function CEnemyManagerLUA:GetEnemy( aName )
+	return self.Enemy[aName]
 end
 
 function CEnemyManagerLUA:AddDamage(name)
@@ -204,6 +245,28 @@ function CEnemyManagerLUA:GetCloseEnemy(aPos)
 		if ( lActualDist < lDist ) then
 		  lDist = lActualDist
 		  lEnemy = lActualEnemy
+		end
+	end
+
+	return lEnemy
+end
+
+function CEnemyManagerLUA:GetCloseEnemyNotSelf(aPos, aName)
+	engine:Trace("Getting close enemy, not self")
+	lDist = 999999.99
+	lActualDist = 0.0
+	lEnemy = nil
+	lActualEnemy = 0
+
+	for i in pairs (self.Enemy) do
+		lActualEnemy = self.Enemy[i]
+		if lActualEnemy:GetName() ~= aName then
+			lActualDist = lActualEnemy:GetPosition():Distance( aPos )
+
+			if ( lActualDist < lDist ) then
+				lDist = lActualDist
+				lEnemy = lActualEnemy
+			end
 		end
 	end
 
@@ -253,4 +316,9 @@ function CEnemyManagerLUA:GetEnemiesAtDistance( aDist )
 		end
 	end
 	return lEnemyList
+end
+
+function CEnemyManagerLUA:AlarmRoom(room)	
+	self.Room = room
+	self.RoomAlarm = true
 end

@@ -60,7 +60,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	{	
 		if(!(ShadowTexC.x<0.0 || ShadowTexC.x>1.0 || ShadowTexC.y<0.0 || ShadowTexC.y>1.0))
 		{
-			LightAmount = (tex2D( ShadowMapTextureSampler, ShadowTexC ) + SHADOW_EPSILON) < (PosLight.z / PosLight.w)? 0.2f: 1.0f;  
+			LightAmount = (tex2D( ShadowMapTextureSampler, ShadowTexC ) + SHADOW_EPSILON) < (PosLight.z / PosLight.w)? 0.0f: 1.0f;  
 		}
 	}
 	

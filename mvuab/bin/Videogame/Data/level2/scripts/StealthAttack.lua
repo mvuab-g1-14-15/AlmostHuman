@@ -12,7 +12,7 @@ end
 
 function CStealthAttack:Update()
 	self:UpdateInput()
-	local enemy = g_EnemyManager:GetCloseEnemy(GetPlayerPosition())
+	local enemy = enemy_manager:GetCloseEnemy(GetPlayerPosition())
 	if enemy == nil then
 		self.Doing = false
 		return

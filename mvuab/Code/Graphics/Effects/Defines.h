@@ -2,19 +2,8 @@
 #ifndef EFFECTS_DEFINES_H
 #define EFFECTS_DEFINES_H
 
-enum EMatrixFlags
-{
-    eWorldMatrix                 = 1 << 0,
-    eWVMatrix                    = 1 << 1,
-    eWVPMatrix                   = 1 << 2,
-    eInverseWorld                = 1 << 3,
-};
-
-enum ELightsFlags
-{
-    eUseLights                   = 1 << 0,
-    eViewToLightProjectionMatrix = 1 << 1
-};
+#include <string>
+#include <vector>
 
 #define DECLARE_EFFECT_PARAMETER( semantic ) D3DXHANDLE m_##semantic;
 #define CTOR_EFFECT_PARAMETER( semantic ) m_##semantic( 0 )
@@ -23,7 +12,14 @@ enum ELightsFlags
 
 #define SET_FLOAT_PARAMETER( parameter, value ) m_Effect->SetFloat( m_##parameter, value )
 #define SET_INT_PARAMETER( parameter, value ) m_Effect->SetInt( m_##parameter, value )
+#define SET_BOOL_PARAMETER( parameter, value ) m_Effect->SetBool( m_##parameter, value ? TRUE : FALSE )
 #define SET_MATRIX_PARAMETER( parameter, value ) m_Effect->SetMatrix( m_##parameter, &((Matrix).GetD3DXMatrix()) );
+
+struct SDefines
+{
+  std::string name;
+  std::string description;
+};
 
 //-----------------------------------------------------------------------
 #define MAX_LIGHTS_BY_SHADER 4
@@ -87,5 +83,20 @@ const char UseShadowDynamicStr[]        = "UseDynamicShadowMap";
 const char ShadowMapTextureSizeStr[]    = "ShadowMapTextureSize";
 //-----------------------------------------------------------------------
 
+// ZBlur data -----------------------------------------------------------
+const char ZBlurFocalStart[] = "ZBlurFocalStart";
+const char ZBlurFocalEnd[] = "ZBlurFocalEnd";
+const char ZBlurConstant[] = "ConstantBlur";
+const char ZBlurEnd[] = "ZBlurEnd";
+//-----------------------------------------------------------------------
+
+// Scattered Light data -------------------------------------------------
+const char SLDecai[] = "SLDecai";
+const char SLExposure[] = "SLExposure";
+const char SLDensity[] = "SLDensity";
+const char SLWeight[] = "SLWeight";
+const char SLSamples[] = "SLSamples";
+const char SLLightSource[] = "SLLightSource";
+//-----------------------------------------------------------------------
 
 #endif //EFFECTS_DEFINES_H

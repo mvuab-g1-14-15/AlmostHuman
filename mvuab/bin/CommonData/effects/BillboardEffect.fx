@@ -19,7 +19,7 @@ TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 		upVector 			= float3(0,1,0);
 	#endif
 
-	position 			= IN.Position.x*rightVector+IN.Position.z*upVector;
+	position 			= (IN.Position.x*rightVector+IN.Position.z*upVector) * g_Size;
 	OUT.Normal			= float4( viewVector.xyz, 1);;
 	OUT.WorldTangent	= float4( rightVector.xyz, 1);
 	OUT.WorldBinormal	= float4( upVector.xyz, 1);
@@ -27,7 +27,14 @@ TT1_VERTEX_PS mainVS(TT1_VERTEX_VS IN)
 	
 	OUT.Position		= mul( float4( position.xyz, 1), g_WorldViewProj);
 	OUT.WorldPosition	= OUT.Position;
-	OUT.UV				= IN.UV;
+	
+	// Get the correct UV's for the billboard
+	float u = IN.UV.x;
+	if( g_FlipUVHorizontal ) u = 1.0 - u;
+	float v = IN.UV.y;
+	if( g_FlipUVVertical ) v = 1.0 - v;
+	OUT.UV				= float2( u, v );
+	
     return OUT;
 }
 

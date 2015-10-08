@@ -10,6 +10,7 @@ class CCameraCinematical : public CCamera
 {
     public:
         CCameraCinematical(CCameraKeyController *KeyController);
+		CCameraCinematical(CXMLTreeNode& atts);
         ~CCameraCinematical();
         void    Update( );
 
@@ -29,6 +30,7 @@ class CCameraCinematical : public CCamera
             m_Up = Up;
         }
         Math::Vect3f GetVecUp( void ) const;
+
 
     private: // Members
         CCameraKeyController *m_pKeyController;
