@@ -98,8 +98,6 @@ void CRoom::RenderLayer( const std::string& aLayerName )
 	if( m_pLayers ) m_pLayers->Render(aLayerName);
 }
 
-
-static const std::string sAsePath = "Data/ase/";
 void CRoom::Load()
 {
 	LoadMeshes();
@@ -109,7 +107,7 @@ void CRoom::Load()
 	{
 		if (PhysXMInstance->GetLoadASE())
 		{
-			if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(sAsePath + "" + GetName() + ".ase", GetName()))
+            if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + ".ase", GetName()))
 			{
 				CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( GetName() + "Escenario" );
 				l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
