@@ -129,11 +129,6 @@ void CPhysicsManager::Init()
                 LOG_INFO_APPLICATION( "PhysicsManager::Init-> DefaultMaterial->DynamicFriction %f:",
                                       m_InitParams.m_DynamicFriction_DefMat );
                 LOG_INFO_APPLICATION( "PhysicsManager::Init-> ----END PhsX Settings---" );
-                // Set default material
-                //TODO: Borrar líneas
-                //m_InitParams.m_Restitution_DefMat = 0.5f;
-                //m_InitParams.m_StaticFriction_DefMat = 0.5f;
-                //m_InitParams.m_DynamicFriction_DefMat = 0.5f;
                 NxMaterial* defaultMaterial = m_pScene->getMaterialFromIndex( 0 );
                 defaultMaterial->setRestitution( m_InitParams.m_Restitution_DefMat );
                 defaultMaterial->setStaticFriction( m_InitParams.m_StaticFriction_DefMat );

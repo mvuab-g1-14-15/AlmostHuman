@@ -102,14 +102,16 @@ void CRoom::Load()
 {
 	LoadMeshes();
 	LoadInstances();
+	const std::string& lName = GetName();
 	// The core room must not load some elements
-	if( GetName() != "core" )
+	if( lName != "core" )
 	{
-		if (PhysXMInstance->GetLoadASE())
+		CPhysicsManager *lPM = PhysXMInstance;
+		if (lPM->GetLoadASE())
 		{
             if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + ".ase", GetName()))
 			{
-				CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( GetName() + "Escenario" );
+				CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( lName + "Escenario" );
 				l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
 				CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
@@ -118,8 +120,7 @@ void CRoom::Load()
 				for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
 					l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
-				//m_AseMeshActor->CreateBody ( 10.f );
-				PhysXMInstance->AddPhysicActor( l_AseMeshActor );
+				lPM->AddPhysicActor( l_AseMeshActor );
 			}
 		}
 
