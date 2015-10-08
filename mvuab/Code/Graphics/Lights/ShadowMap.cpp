@@ -32,9 +32,9 @@ CShadowMap::CShadowMap( const CXMLTreeNode& node, const std::string& aRoomName )
 	CScene* l_Scene = SceneInstance;
 
     CRoom* lRoom = l_Scene->GetResource( aRoomName );
-	if (lRoom->GetActive())
+	if (lRoom->IsActive())
 	{
-		CRenderableObjectsManager* lROM = lRoom->GetLayers()->GetResource(l_LayerName);
+		CRenderableObjectsManager* lROM = lRoom->GetLayer(l_LayerName);
 		if (lROM )
 			mROMs.push_back(lROM);
 	}

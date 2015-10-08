@@ -3,23 +3,20 @@
 #pragma once
 
 #include "SceneRenderComands\SceneRendererCommand.h"
-#include "XML\XMLTreeNode.h"
-#include <vector>
 
 class CGraphicsManager;
-class CRenderableObjectsManager;
+class CScene;
 
 class CRenderSceneSceneRendererCommand : public CSceneRendererCommand
 {
 	private:
-	 std::vector<CRenderableObjectsManager*> m_Layers;
+	 CScene* mScene;
+	 std::string mLayer;
 
     public:
         CRenderSceneSceneRendererCommand(CXMLTreeNode &atts);
         ~ CRenderSceneSceneRendererCommand();
 
         void Execute(CGraphicsManager &GM);
-		void AddLayer( CRenderableObjectsManager* aROM );
-        bool RemoveLayer( CRenderableObjectsManager* aROM );
 };
 #endif

@@ -44,69 +44,74 @@ void CRenderableObjectsLayersManager::Destroy()
     CTemplatedVectorMapManager::Destroy();
 }
 
-void *CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath, const std::string& l_RoomName )
+bool CRenderableObjectsLayersManager::LoadLayers( const std::string& l_FilePath, const std::string& l_RoomName )
 {
+	bool lOk = true;
+
     CXMLTreeNode l_Node, l_Root;
-    void *p = NULL;
-
-    if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "room", l_Node ) )
-        return p;
-
-    const std::string& l_Path = l_Root.GetAttribute<std::string>( "path", "no_path" );
-
-    for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
-    {
-        CXMLTreeNode& l_CurrentNode = l_Node( i );
-
-        const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_path" );
-        const std::string& l_File = l_CurrentNode.GetAttribute<std::string>( "file", "no_file" );
-		
-		p = LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
-    }
-
-    return p;
-}
-
-void *CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
-{
-    CXMLTreeNode l_Node, l_Root;
-    CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
-
-	if ( !AddResource( l_Name, lRenderableObjectManager ) )
+    if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "room", l_Node ) )
 	{
-		CHECKED_DELETE( lRenderableObjectManager );
-		return NULL;
+		const std::string& l_Path = l_Root.GetAttribute<std::string>( "path", "no_path" );
+		for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+		{
+			const CXMLTreeNode& l_CurrentNode = l_Node( i );
+			const std::string& l_Name = l_CurrentNode.GetAttribute<std::string>( "name", "no_path" );
+			const std::string& l_File = l_CurrentNode.GetAttribute<std::string>( "file", "no_file" );
+			lOk = lOk && LoadRenderableObject( l_Path + "/" + l_File, l_Name, l_RoomName );
+		}
 	}
 
-	CRenderSceneSceneRendererCommand* lRSSRC = dynamic_cast<CRenderSceneSceneRendererCommand*>( SRCMInstance->GetCommand( "render_" + l_Name ) );
-	if (lRSSRC)
-		lRSSRC->AddLayer( lRenderableObjectManager );
+    return lOk;
+}
 
-    if ( !l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
-        return NULL;
+bool CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l_FilePath, const std::string& l_Name, const std::string& l_RoomName )
+{
+	bool lOk = true;
+    CXMLTreeNode l_Node, l_Root;
+    if ( l_Root.LoadAndFindNode( l_FilePath.c_str(), "RenderableObjects", l_Node ) )
+	{
+		CRenderableObjectsManager* lRenderableObjectManager = new CRenderableObjectsManager();
+		for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
+		{
+			const CXMLTreeNode& lNode = l_Node( i );
+			const std::string& lTagName = lNode.GetName();
+			const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
 
-    for ( int i = 0, l_NumChilds = l_Node.GetNumChildren(); i < l_NumChilds; ++i )
-    {
-        const CXMLTreeNode& lNode = l_Node( i );
-        const std::string& lTagName = lNode.GetName();
-        const std::string& lName = lNode.GetAttribute<std::string>( "name", "" );
+			CRenderableObject* p_object = NULL;
+			if ( lTagName == "MeshInstance" )
+			{
+				if( SMeshMInstance->Exist( lNode.GetAttribute<std::string>( "core", "no_static_mesh " ) ) )
+				{
+					const std::string& lType = lNode.GetAttribute<std::string>( "type", "static" );
+					p_object = ( lType == "static" ) ? AddStatic( lNode ) : AddDynamic( lNode );
+				}
+				else
+				{
+					LOG_ERROR_APPLICATION("Loading a instance mesh with out static mesh");
+				}
+			}
+			else if ( lTagName == "AnimatedInstance" )
+			{
+				p_object = new CAnimatedInstanceModel( lNode );
+			}
 
-        if ( lTagName == "MeshInstance" )
-            AddNewInstaceMesh( lNode, l_Name, l_RoomName );
-        else if ( lTagName == "AnimatedInstance" )
-        {
-            CAnimatedInstanceModel* l_AnimatedInstance = new CAnimatedInstanceModel( lNode );
-            l_AnimatedInstance->SetRoomName( l_RoomName );
+			if( p_object )
+			{
+				p_object->SetRoomName( l_RoomName );
+				if ( !lRenderableObjectManager->AddResource( lName, p_object ) )
+				{
+					LOG_ERROR_APPLICATION( "Error adding renderable object %s!", lName.c_str() );
+					CHECKED_DELETE( p_object );
+				}
+			}
+		}
 
-            if ( !lRenderableObjectManager->AddResource( lName, l_AnimatedInstance ) )
-            {
-                LOG_ERROR_APPLICATION( "Error adding animated mesh %s!", lName.c_str() );
-                CHECKED_DELETE( l_AnimatedInstance );
-            }
-        }
-    }
+		lOk = AddResource(l_Name, lRenderableObjectManager );
+		ASSERT( lOk, "The layer %s could not be added", l_Name.c_str() );
+		if( !lOk ) CHECKED_DELETE( lRenderableObjectManager );
+	}
 
-    return lRenderableObjectManager;
+	return lOk;
 }
 
 void CRenderableObjectsLayersManager::Update()

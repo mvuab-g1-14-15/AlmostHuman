@@ -4,15 +4,15 @@
 
 #include <string>
 #include "Utils\Manager.h"
-#include "Utils\MapManager.h"
+#include "Utils/TemplatedVectorMapManager.h"
 #include "Utils\SingletonPattern.h"
+#include "Room.h"
 
 class CRenderableObjectsLayersManager;
 class CRenderableObjectsManager;
 class CLightProbe;
-class CRoom;
 
-class CScene : public CMapManager<CRoom>, public CManager
+class CScene : public CTemplatedVectorMapManager<CRoom>, public CManager
 {
 public:
 
@@ -22,6 +22,7 @@ public:
 
   bool Load( const std::string& l_FilePath );
   bool Reload();
+  void RenderLayer( const std::string& aLayerName );
 
   void Init();
   void Update();
@@ -30,17 +31,14 @@ public:
   void Destroy();
 
   void ThreadLoadRoom();
-
-  void LoadRoom( std::string aRoomName );
-  void ActivateRoom( std::string aRoomName );
+  void ActivateRoom(  const std::string& aRoomName );
+  void LoadRoom( const std::string& aRoomName );
 
   void UnloadRoom( std::string aRoomName );
   void DesactivateRoom( std::string aRoomName );
 
-  const std::string& GetActivateRoom();
-
   std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f );
-
+  const std::string GetActivateRoom();
 
   CRoom* GetCurrentRoom();
 
