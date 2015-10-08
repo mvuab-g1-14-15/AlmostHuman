@@ -52,6 +52,7 @@
   <static_mesh name="metal_barrel023_sala2" filename="meshes\metal_barrel023.mesh" />
   <static_mesh name="metal_barrel022_sala2" filename="meshes\metal_barrel022.mesh" />
   <static_mesh name="metal_barrel019_sala2" filename="meshes\metal_barrel019.mesh" />
+  <static_mesh name="barril_sigil_sala2" filename="meshes\barril_sigil.mesh" />
   <static_mesh name="metal_barrel017_sala2" filename="meshes\metal_barrel017.mesh" />
   <static_mesh name="metal_barrel016_sala2" filename="meshes\metal_barrel016.mesh" />
   <static_mesh name="metal_barrel014_sala2" filename="meshes\metal_barrel014.mesh" />
@@ -83,21 +84,10 @@
   <static_mesh name="Ammo_box045_sala2" filename="meshes\Ammo_box045.mesh" />
   <static_mesh name="Ammo_box046_sala2" filename="meshes\Ammo_box046.mesh" />
   <static_mesh name="Ammo_box047_sala2" filename="meshes\Ammo_box047.mesh" />
-  <static_mesh name="Ammo_box061_sala2" filename="meshes\Ammo_box061.mesh" />
-  <static_mesh name="Ammo_box062_sala2" filename="meshes\Ammo_box062.mesh" />
-  <static_mesh name="Ammo_box063_sala2" filename="meshes\Ammo_box063.mesh" />
-  <static_mesh name="Ammo_box064_sala2" filename="meshes\Ammo_box064.mesh" />
-  <static_mesh name="Ammo_box065_sala2" filename="meshes\Ammo_box065.mesh" />
   <static_mesh name="Ammo_box066_sala2" filename="meshes\Ammo_box066.mesh" />
   <static_mesh name="Ammo_box067_sala2" filename="meshes\Ammo_box067.mesh" />
   <static_mesh name="Ammo_box068_sala2" filename="meshes\Ammo_box068.mesh" />
   <static_mesh name="Ammo_box069_sala2" filename="meshes\Ammo_box069.mesh" />
-  <static_mesh name="Ammo_box070_sala2" filename="meshes\Ammo_box070.mesh" />
-  <static_mesh name="Ammo_box071_sala2" filename="meshes\Ammo_box071.mesh" />
-  <static_mesh name="Ammo_box072_sala2" filename="meshes\Ammo_box072.mesh" />
-  <static_mesh name="Ammo_box073_sala2" filename="meshes\Ammo_box073.mesh" />
-  <static_mesh name="Ammo_box074_sala2" filename="meshes\Ammo_box074.mesh" />
-  <static_mesh name="Ammo_box075_sala2" filename="meshes\Ammo_box075.mesh" />
   <static_mesh name="Ammo_box076_sala2" filename="meshes\Ammo_box076.mesh" />
   <static_mesh name="Ammo_box077_sala2" filename="meshes\Ammo_box077.mesh" />
   <static_mesh name="Ammo_box078_sala2" filename="meshes\Ammo_box078.mesh" />
@@ -143,7 +133,6 @@
   <static_mesh name="estanteria_02_sala2" filename="meshes\estanteria_02.mesh" />
   <static_mesh name="oxid_barrel_01_sala2" filename="meshes\oxid_barrel_01.mesh" />
   <static_mesh name="reixa_sala_2_sala2" filename="meshes\reixa_sala_2.mesh" />
-  <static_mesh name="Base_carga_sala2" filename="meshes\Base_carga.mesh" />
   <static_mesh name="tapa_sala2" filename="meshes\tapa.mesh" />
   <static_mesh name="sffWalls8_sala2" filename="meshes\sffWalls8.mesh" />
   <static_mesh name="subterra_sala2" filename="meshes\subterra.mesh" />
@@ -171,10 +160,11 @@
   <static_mesh name="lamp_01_sala2" filename="meshes\lamp_01.mesh" />
   <static_mesh name="Handrail_sala2" filename="meshes\Handrail.mesh" />
   <static_mesh name="lamp_05_sala2" filename="meshes\lamp_05.mesh" />
-  <static_mesh name="Box001_sala2" filename="meshes\Box001.mesh" />
   <static_mesh name="Estanteria_001_sala2" filename="meshes\Estanteria_001.mesh" />
   <static_mesh name="Estanteria_2_sala2" filename="meshes\Estanteria_2.mesh" />
   <static_mesh name="Door_sala2" filename="meshes\Door.mesh" />
   <static_mesh name="doorUpper_sala2" filename="meshes\doorUpper.mesh" />
   <static_mesh name="doorLower_sala2" filename="meshes\doorLower.mesh" />
+  <static_mesh name="Base_carga001_sala2" filename="meshes\Base_carga001.mesh" />
+  <static_mesh name="Lamp_sala2" filename="meshes\Lamp.mesh" />
 </static_meshes>

@@ -9,7 +9,6 @@
   <static_mesh name="cinta_015_sala3" filename="meshes\cinta_015.mesh" />
   <static_mesh name="Box021_sala3" filename="meshes\Box021.mesh" />
   <static_mesh name="Box022_sala3" filename="meshes\Box022.mesh" />
-  <static_mesh name="trasto_004_sala3" filename="meshes\trasto_004.mesh" />
   <static_mesh name="Reixa_014_sala3" filename="meshes\Reixa_014.mesh" />
   <static_mesh name="Reixa_015_sala3" filename="meshes\Reixa_015.mesh" />
   <static_mesh name="Reixa_016_sala3" filename="meshes\Reixa_016.mesh" />
@@ -26,11 +25,9 @@
   <static_mesh name="Reixa_027_sala3" filename="meshes\Reixa_027.mesh" />
   <static_mesh name="Reixa_028_sala3" filename="meshes\Reixa_028.mesh" />
   <static_mesh name="Reixa_029_sala3" filename="meshes\Reixa_029.mesh" />
-  <static_mesh name="robot_assembly006_sala3" filename="meshes\robot_assembly006.mesh" />
   <static_mesh name="robot_assembly007_sala3" filename="meshes\robot_assembly007.mesh" />
   <static_mesh name="robot_assembly009_sala3" filename="meshes\robot_assembly009.mesh" />
   <static_mesh name="cinta_016_sala3" filename="meshes\cinta_016.mesh" />
-  <static_mesh name="enganche_005_sala3" filename="meshes\enganche_005.mesh" />
   <static_mesh name="escala005_sala3" filename="meshes\escala005.mesh" />
   <static_mesh name="escala006_sala3" filename="meshes\escala006.mesh" />
   <static_mesh name="escala007_sala3" filename="meshes\escala007.mesh" />
@@ -62,27 +59,20 @@
   <static_mesh name="Reixa_033_sala3" filename="meshes\Reixa_033.mesh" />
   <static_mesh name="Reixa_034_sala3" filename="meshes\Reixa_034.mesh" />
   <static_mesh name="cinta_7_sala3" filename="meshes\cinta_7.mesh" />
-  <static_mesh name="robot_assembly002_sala3" filename="meshes\robot_assembly002.mesh" />
   <static_mesh name="Reixa_009_sala3" filename="meshes\Reixa_009.mesh" />
   <static_mesh name="Reixa_010_sala3" filename="meshes\Reixa_010.mesh" />
   <static_mesh name="Reixa_011_sala3" filename="meshes\Reixa_011.mesh" />
   <static_mesh name="cinta_6_sala3" filename="meshes\cinta_6.mesh" />
   <static_mesh name="Reixa_008_sala3" filename="meshes\Reixa_008.mesh" />
-  <static_mesh name="trasto_1_sala3" filename="meshes\trasto_1.mesh" />
-  <static_mesh name="trasto_2_sala3" filename="meshes\trasto_2.mesh" />
   <static_mesh name="Reixa_1_sala3" filename="meshes\Reixa_1.mesh" />
   <static_mesh name="Reixa_007_sala3" filename="meshes\Reixa_007.mesh" />
   <static_mesh name="Reixa_003_sala3" filename="meshes\Reixa_003.mesh" />
   <static_mesh name="robot_assembly_sala3" filename="meshes\robot_assembly.mesh" />
-  <static_mesh name="Box020_sala3" filename="meshes\Box020.mesh" />
   <static_mesh name="Reixa_002_sala3" filename="meshes\Reixa_002.mesh" />
   <static_mesh name="Reixa_004_sala3" filename="meshes\Reixa_004.mesh" />
   <static_mesh name="Reixa_006_sala3" filename="meshes\Reixa_006.mesh" />
   <static_mesh name="Reixa_005_sala3" filename="meshes\Reixa_005.mesh" />
-  <static_mesh name="porta_sala3_sala3" filename="meshes\porta_sala3.mesh" />
   <static_mesh name="cinta_4_sala3" filename="meshes\cinta_4.mesh" />
-  <static_mesh name="trasto_3_sala3" filename="meshes\trasto_3.mesh" />
-  <static_mesh name="cinta_8_sala3" filename="meshes\cinta_8.mesh" />
   <static_mesh name="cinta_5_sala3" filename="meshes\cinta_5.mesh" />
   <static_mesh name="robot_assembly004_sala3" filename="meshes\robot_assembly004.mesh" />
   <static_mesh name="robot_assembly001_sala3" filename="meshes\robot_assembly001.mesh" />
@@ -96,38 +86,11 @@
   <static_mesh name="Reixa_041_sala3" filename="meshes\Reixa_041.mesh" />
   <static_mesh name="Reixa_042_sala3" filename="meshes\Reixa_042.mesh" />
   <static_mesh name="Reixa_043_sala3" filename="meshes\Reixa_043.mesh" />
-  <static_mesh name="Reixa_045_sala3" filename="meshes\Reixa_045.mesh" />
-  <static_mesh name="escala030_sala3" filename="meshes\escala030.mesh" />
-  <static_mesh name="escala031_sala3" filename="meshes\escala031.mesh" />
-  <static_mesh name="escala032_sala3" filename="meshes\escala032.mesh" />
-  <static_mesh name="escala033_sala3" filename="meshes\escala033.mesh" />
-  <static_mesh name="escala034_sala3" filename="meshes\escala034.mesh" />
-  <static_mesh name="escala035_sala3" filename="meshes\escala035.mesh" />
-  <static_mesh name="escala036_sala3" filename="meshes\escala036.mesh" />
-  <static_mesh name="escala037_sala3" filename="meshes\escala037.mesh" />
-  <static_mesh name="escala038_sala3" filename="meshes\escala038.mesh" />
-  <static_mesh name="escala039_sala3" filename="meshes\escala039.mesh" />
   <static_mesh name="escala040_sala3" filename="meshes\escala040.mesh" />
-  <static_mesh name="escala041_sala3" filename="meshes\escala041.mesh" />
-  <static_mesh name="escala042_sala3" filename="meshes\escala042.mesh" />
-  <static_mesh name="escala043_sala3" filename="meshes\escala043.mesh" />
-  <static_mesh name="escala044_sala3" filename="meshes\escala044.mesh" />
-  <static_mesh name="escala045_sala3" filename="meshes\escala045.mesh" />
-  <static_mesh name="escala046_sala3" filename="meshes\escala046.mesh" />
-  <static_mesh name="escala047_sala3" filename="meshes\escala047.mesh" />
-  <static_mesh name="escala048_sala3" filename="meshes\escala048.mesh" />
-  <static_mesh name="escala049_sala3" filename="meshes\escala049.mesh" />
-  <static_mesh name="escala050_sala3" filename="meshes\escala050.mesh" />
-  <static_mesh name="escala051_sala3" filename="meshes\escala051.mesh" />
-  <static_mesh name="escala052_sala3" filename="meshes\escala052.mesh" />
-  <static_mesh name="escala053_sala3" filename="meshes\escala053.mesh" />
-  <static_mesh name="escala054_sala3" filename="meshes\escala054.mesh" />
   <static_mesh name="cinta_017_sala3" filename="meshes\cinta_017.mesh" />
   <static_mesh name="cinta_018_sala3" filename="meshes\cinta_018.mesh" />
   <static_mesh name="cinta_019_sala3" filename="meshes\cinta_019.mesh" />
   <static_mesh name="Reixa_046_sala3" filename="meshes\Reixa_046.mesh" />
-  <static_mesh name="Reixa_047_sala3" filename="meshes\Reixa_047.mesh" />
-  <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
   <static_mesh name="Reixa_048_sala3" filename="meshes\Reixa_048.mesh" />
   <static_mesh name="Reixa_050_sala3" filename="meshes\Reixa_050.mesh" />
   <static_mesh name="Reixa_051_sala3" filename="meshes\Reixa_051.mesh" />
@@ -144,15 +107,12 @@
   <static_mesh name="Reixa_064_sala3" filename="meshes\Reixa_064.mesh" />
   <static_mesh name="Reixa_065_sala3" filename="meshes\Reixa_065.mesh" />
   <static_mesh name="Reixa_066_sala3" filename="meshes\Reixa_066.mesh" />
-  <static_mesh name="Reixa_067_sala3" filename="meshes\Reixa_067.mesh" />
-  <static_mesh name="trasto_005_sala3" filename="meshes\trasto_005.mesh" />
   <static_mesh name="Reixa_068_sala3" filename="meshes\Reixa_068.mesh" />
   <static_mesh name="Reixa_069_sala3" filename="meshes\Reixa_069.mesh" />
   <static_mesh name="Reixa_070_sala3" filename="meshes\Reixa_070.mesh" />
   <static_mesh name="Reixa_071_sala3" filename="meshes\Reixa_071.mesh" />
   <static_mesh name="Reixa_072_sala3" filename="meshes\Reixa_072.mesh" />
   <static_mesh name="Reixa_073_sala3" filename="meshes\Reixa_073.mesh" />
-  <static_mesh name="Reixa_074_sala3" filename="meshes\Reixa_074.mesh" />
   <static_mesh name="Reixa_075_sala3" filename="meshes\Reixa_075.mesh" />
   <static_mesh name="Reixa_077_sala3" filename="meshes\Reixa_077.mesh" />
   <static_mesh name="Reixa_078_sala3" filename="meshes\Reixa_078.mesh" />
@@ -167,30 +127,17 @@
   <static_mesh name="Reixa_087_sala3" filename="meshes\Reixa_087.mesh" />
   <static_mesh name="Reixa_088_sala3" filename="meshes\Reixa_088.mesh" />
   <static_mesh name="Reixa_089_sala3" filename="meshes\Reixa_089.mesh" />
-  <static_mesh name="Object005_sala3" filename="meshes\Object005.mesh" />
-  <static_mesh name="Object006_sala3" filename="meshes\Object006.mesh" />
-  <static_mesh name="Object007_sala3" filename="meshes\Object007.mesh" />
+  <static_mesh name="Object036_sala3" filename="meshes\Object036.mesh" />
+  <static_mesh name="Object037_sala3" filename="meshes\Object037.mesh" />
+  <static_mesh name="Object038_sala3" filename="meshes\Object038.mesh" />
   <static_mesh name="Reixa_090_sala3" filename="meshes\Reixa_090.mesh" />
   <static_mesh name="Reixa_091_sala3" filename="meshes\Reixa_091.mesh" />
   <static_mesh name="Reixa_094_sala3" filename="meshes\Reixa_094.mesh" />
   <static_mesh name="Reixa_095_sala3" filename="meshes\Reixa_095.mesh" />
   <static_mesh name="Reixa_097_sala3" filename="meshes\Reixa_097.mesh" />
-  <static_mesh name="Reixa_098_sala3" filename="meshes\Reixa_098.mesh" />
-  <static_mesh name="Reixa_099_sala3" filename="meshes\Reixa_099.mesh" />
-  <static_mesh name="Reixa_100_sala3" filename="meshes\Reixa_100.mesh" />
-  <static_mesh name="ventilador_01_sala3" filename="meshes\ventilador_01.mesh" />
   <static_mesh name="enganche_017_sala3" filename="meshes\enganche_017.mesh" />
-  <static_mesh name="enganche_018_sala3" filename="meshes\enganche_018.mesh" />
-  <static_mesh name="enganche_019_sala3" filename="meshes\enganche_019.mesh" />
-  <static_mesh name="enganche_020_sala3" filename="meshes\enganche_020.mesh" />
-  <static_mesh name="enganche_021_sala3" filename="meshes\enganche_021.mesh" />
   <static_mesh name="enganche_022_sala3" filename="meshes\enganche_022.mesh" />
-  <static_mesh name="Object008_sala3" filename="meshes\Object008.mesh" />
-  <static_mesh name="Object009_sala3" filename="meshes\Object009.mesh" />
-  <static_mesh name="Object010_sala3" filename="meshes\Object010.mesh" />
-  <static_mesh name="Object011_sala3" filename="meshes\Object011.mesh" />
   <static_mesh name="andride084_sala3" filename="meshes\andride084.mesh" />
-  <static_mesh name="container_sala3" filename="meshes\container.mesh" />
   <static_mesh name="container001_sala3" filename="meshes\container001.mesh" />
   <static_mesh name="container002_sala3" filename="meshes\container002.mesh" />
   <static_mesh name="container003_sala3" filename="meshes\container003.mesh" />
@@ -222,44 +169,167 @@
   <static_mesh name="container030_sala3" filename="meshes\container030.mesh" />
   <static_mesh name="container031_sala3" filename="meshes\container031.mesh" />
   <static_mesh name="container032_sala3" filename="meshes\container032.mesh" />
-  <static_mesh name="msf_Ceiling04_sala3" filename="meshes\msf_Ceiling04.mesh" />
-  <static_mesh name="msf_Ceiling005_sala3" filename="meshes\msf_Ceiling005.mesh" />
   <static_mesh name="msf_Steps2_sala3" filename="meshes\msf_Steps2.mesh" />
-  <static_mesh name="msf_WallCapping01_sala3" filename="meshes\msf_WallCapping01.mesh" />
-  <static_mesh name="msf_WallCapping002_sala3" filename="meshes\msf_WallCapping002.mesh" />
-  <static_mesh name="msf_WallCapping003_sala3" filename="meshes\msf_WallCapping003.mesh" />
-  <static_mesh name="mfs_Ceiling004_sala3" filename="meshes\mfs_Ceiling004.mesh" />
-  <static_mesh name="mfs_Ceiling005_sala3" filename="meshes\mfs_Ceiling005.mesh" />
-  <static_mesh name="msf2_Lamp02_sala3" filename="meshes\msf2_Lamp02.mesh" />
+  <static_mesh name="mfs_Ceiling013_sala3" filename="meshes\mfs_Ceiling013.mesh" />
+  <static_mesh name="mfs_Ceiling014_sala3" filename="meshes\mfs_Ceiling014.mesh" />
+  <static_mesh name="Walls009_sala3" filename="meshes\Walls009.mesh" />
+  <static_mesh name="sffFloor1_sala3" filename="meshes\sffFloor1.mesh" />
+  <static_mesh name="sffWalls5_sala3" filename="meshes\sffWalls5.mesh" />
+  <static_mesh name="sffWalls006_sala3" filename="meshes\sffWalls006.mesh" />
+  <static_mesh name="sffWalls007_sala3" filename="meshes\sffWalls007.mesh" />
+  <static_mesh name="sffWalls008_sala3" filename="meshes\sffWalls008.mesh" />
+  <static_mesh name="sffWalls009_sala3" filename="meshes\sffWalls009.mesh" />
+  <static_mesh name="sffWalls010_sala3" filename="meshes\sffWalls010.mesh" />
+  <static_mesh name="sffWalls011_sala3" filename="meshes\sffWalls011.mesh" />
+  <static_mesh name="sffWalls012_sala3" filename="meshes\sffWalls012.mesh" />
+  <static_mesh name="sffWalls015_sala3" filename="meshes\sffWalls015.mesh" />
+  <static_mesh name="sffWalls016_sala3" filename="meshes\sffWalls016.mesh" />
+  <static_mesh name="Object012_sala3" filename="meshes\Object012.mesh" />
+  <static_mesh name="sffWalls018_sala3" filename="meshes\sffWalls018.mesh" />
+  <static_mesh name="Object013_sala3" filename="meshes\Object013.mesh" />
+  <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
+  <static_mesh name="Box024_sala3" filename="meshes\Box024.mesh" />
+  <static_mesh name="Reixa_105_sala3" filename="meshes\Reixa_105.mesh" />
+  <static_mesh name="Reixa_106_sala3" filename="meshes\Reixa_106.mesh" />
+  <static_mesh name="sffWalls019_sala3" filename="meshes\sffWalls019.mesh" />
+  <static_mesh name="sffWalls020_sala3" filename="meshes\sffWalls020.mesh" />
+  <static_mesh name="Box91_sala3" filename="meshes\Box91.mesh" />
+  <static_mesh name="Box89_sala3" filename="meshes\Box89.mesh" />
+  <static_mesh name="Line03_sala3" filename="meshes\Line03.mesh" />
+  <static_mesh name="Box54_sala3" filename="meshes\Box54.mesh" />
+  <static_mesh name="Box73_sala3" filename="meshes\Box73.mesh" />
+  <static_mesh name="Box72_sala3" filename="meshes\Box72.mesh" />
+  <static_mesh name="Box71_sala3" filename="meshes\Box71.mesh" />
+  <static_mesh name="Box66_sala3" filename="meshes\Box66.mesh" />
+  <static_mesh name="Box65_sala3" filename="meshes\Box65.mesh" />
+  <static_mesh name="Box62_sala3" filename="meshes\Box62.mesh" />
+  <static_mesh name="Box122_sala3" filename="meshes\Box122.mesh" />
+  <static_mesh name="Box10_sala3" filename="meshes\Box10.mesh" />
+  <static_mesh name="Box144_sala3" filename="meshes\Box144.mesh" />
+  <static_mesh name="Line65_sala3" filename="meshes\Line65.mesh" />
+  <static_mesh name="Box48_sala3" filename="meshes\Box48.mesh" />
+  <static_mesh name="Box61_sala3" filename="meshes\Box61.mesh" />
+  <static_mesh name="Box63_sala3" filename="meshes\Box63.mesh" />
+  <static_mesh name="Box64_sala3" filename="meshes\Box64.mesh" />
+  <static_mesh name="Box67_sala3" filename="meshes\Box67.mesh" />
+  <static_mesh name="Box70_sala3" filename="meshes\Box70.mesh" />
+  <static_mesh name="Box74_sala3" filename="meshes\Box74.mesh" />
+  <static_mesh name="Box75_sala3" filename="meshes\Box75.mesh" />
+  <static_mesh name="Box77_sala3" filename="meshes\Box77.mesh" />
+  <static_mesh name="Box84_sala3" filename="meshes\Box84.mesh" />
+  <static_mesh name="Cylinder3817_sala3" filename="meshes\Cylinder3817.mesh" />
+  <static_mesh name="Box98_sala3" filename="meshes\Box98.mesh" />
+  <static_mesh name="Box412_sala3" filename="meshes\Box412.mesh" />
+  <static_mesh name="Box100_sala3" filename="meshes\Box100.mesh" />
+  <static_mesh name="Box101_sala3" filename="meshes\Box101.mesh" />
+  <static_mesh name="Cylinder3818_sala3" filename="meshes\Cylinder3818.mesh" />
+  <static_mesh name="Box03_sala3" filename="meshes\Box03.mesh" />
+  <static_mesh name="Cylinder237_sala3" filename="meshes\Cylinder237.mesh" />
+  <static_mesh name="Box02_sala3" filename="meshes\Box02.mesh" />
+  <static_mesh name="Box106_sala3" filename="meshes\Box106.mesh" />
+  <static_mesh name="Box102_sala3" filename="meshes\Box102.mesh" />
+  <static_mesh name="Box09_sala3" filename="meshes\Box09.mesh" />
+  <static_mesh name="Box53_sala3" filename="meshes\Box53.mesh" />
+  <static_mesh name="Cylinder24_sala3" filename="meshes\Cylinder24.mesh" />
+  <static_mesh name="Box49_sala3" filename="meshes\Box49.mesh" />
+  <static_mesh name="Box90_sala3" filename="meshes\Box90.mesh" />
+  <static_mesh name="Box87_sala3" filename="meshes\Box87.mesh" />
+  <static_mesh name="Box80_sala3" filename="meshes\Box80.mesh" />
+  <static_mesh name="Box60_sala3" filename="meshes\Box60.mesh" />
+  <static_mesh name="Box47_sala3" filename="meshes\Box47.mesh" />
+  <static_mesh name="Box153_sala3" filename="meshes\Box153.mesh" />
+  <static_mesh name="Box76_sala3" filename="meshes\Box76.mesh" />
+  <static_mesh name="Box78_sala3" filename="meshes\Box78.mesh" />
+  <static_mesh name="Cylinder238_sala3" filename="meshes\Cylinder238.mesh" />
+  <static_mesh name="Box96_sala3" filename="meshes\Box96.mesh" />
+  <static_mesh name="Box79_sala3" filename="meshes\Box79.mesh" />
+  <static_mesh name="Box81_sala3" filename="meshes\Box81.mesh" />
+  <static_mesh name="Box85_sala3" filename="meshes\Box85.mesh" />
+  <static_mesh name="Box103_sala3" filename="meshes\Box103.mesh" />
+  <static_mesh name="Box413_sala3" filename="meshes\Box413.mesh" />
+  <static_mesh name="Box414_sala3" filename="meshes\Box414.mesh" />
+  <static_mesh name="Box86_sala3" filename="meshes\Box86.mesh" />
+  <static_mesh name="Box01_sala3" filename="meshes\Box01.mesh" />
+  <static_mesh name="Box151_sala3" filename="meshes\Box151.mesh" />
+  <static_mesh name="Box152_sala3" filename="meshes\Box152.mesh" />
+  <static_mesh name="Cylinder03_sala3" filename="meshes\Cylinder03.mesh" />
+  <static_mesh name="155x200_sala3" filename="meshes\155x200.mesh" />
+  <static_mesh name="155x159_sala3" filename="meshes\155x159.mesh" />
+  <static_mesh name="cabin_sala3" filename="meshes\cabin.mesh" />
+  <static_mesh name="Line04_sala3" filename="meshes\Line04.mesh" />
+  <static_mesh name="Cylinder242_sala3" filename="meshes\Cylinder242.mesh" />
+  <static_mesh name="Line25_sala3" filename="meshes\Line25.mesh" />
+  <static_mesh name="Box08_sala3" filename="meshes\Box08.mesh" />
+  <static_mesh name="Cylinder01_sala3" filename="meshes\Cylinder01.mesh" />
+  <static_mesh name="Box07_sala3" filename="meshes\Box07.mesh" />
+  <static_mesh name="Line05_sala3" filename="meshes\Line05.mesh" />
+  <static_mesh name="Text01_sala3" filename="meshes\Text01.mesh" />
+  <static_mesh name="Cylinder3819_sala3" filename="meshes\Cylinder3819.mesh" />
+  <static_mesh name="Line07_sala3" filename="meshes\Line07.mesh" />
+  <static_mesh name="Box107_sala3" filename="meshes\Box107.mesh" />
+  <static_mesh name="Box108_sala3" filename="meshes\Box108.mesh" />
+  <static_mesh name="Line01_sala3" filename="meshes\Line01.mesh" />
+  <static_mesh name="Line02_sala3" filename="meshes\Line02.mesh" />
+  <static_mesh name="Cylinder243_sala3" filename="meshes\Cylinder243.mesh" />
+  <static_mesh name="Cylinder3820_sala3" filename="meshes\Cylinder3820.mesh" />
+  <static_mesh name="Box82_sala3" filename="meshes\Box82.mesh" />
+  <static_mesh name="Box68_sala3" filename="meshes\Box68.mesh" />
+  <static_mesh name="Box69_sala3" filename="meshes\Box69.mesh" />
+  <static_mesh name="Box83_sala3" filename="meshes\Box83.mesh" />
+  <static_mesh name="Box88_sala3" filename="meshes\Box88.mesh" />
+  <static_mesh name="Box150_sala3" filename="meshes\Box150.mesh" />
+  <static_mesh name="Cylinder233_sala3" filename="meshes\Cylinder233.mesh" />
+  <static_mesh name="msf2_Lamp001_sala3" filename="meshes\msf2_Lamp001.mesh" />
+  <static_mesh name="msf2_Lamp002_sala3" filename="meshes\msf2_Lamp002.mesh" />
   <static_mesh name="msf2_Lamp003_sala3" filename="meshes\msf2_Lamp003.mesh" />
-  <static_mesh name="msf2_Lamp004_sala3" filename="meshes\msf2_Lamp004.mesh" />
-  <static_mesh name="msf2_Lamp005_sala3" filename="meshes\msf2_Lamp005.mesh" />
-  <static_mesh name="msf2_Lamp006_sala3" filename="meshes\msf2_Lamp006.mesh" />
+  <static_mesh name="msf2_Lamp020_sala3" filename="meshes\msf2_Lamp020.mesh" />
+  <static_mesh name="msf2_Lamp021_sala3" filename="meshes\msf2_Lamp021.mesh" />
+  <static_mesh name="msf2_Lamp019_sala3" filename="meshes\msf2_Lamp019.mesh" />
   <static_mesh name="msf2_Lamp007_sala3" filename="meshes\msf2_Lamp007.mesh" />
   <static_mesh name="msf2_Lamp008_sala3" filename="meshes\msf2_Lamp008.mesh" />
   <static_mesh name="msf2_Lamp009_sala3" filename="meshes\msf2_Lamp009.mesh" />
-  <static_mesh name="msf2_Lamp010_sala3" filename="meshes\msf2_Lamp010.mesh" />
-  <static_mesh name="msf2_Lamp011_sala3" filename="meshes\msf2_Lamp011.mesh" />
-  <static_mesh name="msf2_Lamp012_sala3" filename="meshes\msf2_Lamp012.mesh" />
-  <static_mesh name="msf2_Lamp013_sala3" filename="meshes\msf2_Lamp013.mesh" />
-  <static_mesh name="msf2_Lamp014_sala3" filename="meshes\msf2_Lamp014.mesh" />
-  <static_mesh name="msf2_Lamp015_sala3" filename="meshes\msf2_Lamp015.mesh" />
+  <static_mesh name="msf2_Lamp018_sala3" filename="meshes\msf2_Lamp018.mesh" />
   <static_mesh name="msf2_Lamp016_sala3" filename="meshes\msf2_Lamp016.mesh" />
   <static_mesh name="msf2_Lamp017_sala3" filename="meshes\msf2_Lamp017.mesh" />
-  <static_mesh name="msf2_Lamp018_sala3" filename="meshes\msf2_Lamp018.mesh" />
-  <static_mesh name="msf2_Lamp019_sala3" filename="meshes\msf2_Lamp019.mesh" />
-  <static_mesh name="msf2_Lamp020_sala3" filename="meshes\msf2_Lamp020.mesh" />
-  <static_mesh name="msf2_Lamp021_sala3" filename="meshes\msf2_Lamp021.mesh" />
-  <static_mesh name="msf2_Lamp022_sala3" filename="meshes\msf2_Lamp022.mesh" />
-  <static_mesh name="msf2_Lamp023_sala3" filename="meshes\msf2_Lamp023.mesh" />
-  <static_mesh name="msf2_Lamp024_sala3" filename="meshes\msf2_Lamp024.mesh" />
-  <static_mesh name="msf2_Lamp025_sala3" filename="meshes\msf2_Lamp025.mesh" />
-  <static_mesh name="msf2_Lamp026_sala3" filename="meshes\msf2_Lamp026.mesh" />
-  <static_mesh name="msf2_Lamp027_sala3" filename="meshes\msf2_Lamp027.mesh" />
-  <static_mesh name="msf2_Lamp028_sala3" filename="meshes\msf2_Lamp028.mesh" />
-  <static_mesh name="Reixa_101_sala3" filename="meshes\Reixa_101.mesh" />
-  <static_mesh name="Reixa_102_sala3" filename="meshes\Reixa_102.mesh" />
-  <static_mesh name="Reixa_103_sala3" filename="meshes\Reixa_103.mesh" />
-  <static_mesh name="Reixa_104_sala3" filename="meshes\Reixa_104.mesh" />
-  <static_mesh name="Walls009_sala3" filename="meshes\Walls009.mesh" />
+  <static_mesh name="Reixa_111_sala3" filename="meshes\Reixa_111.mesh" />
+  <static_mesh name="Reixa_112_sala3" filename="meshes\Reixa_112.mesh" />
+  <static_mesh name="Reixa_113_sala3" filename="meshes\Reixa_113.mesh" />
+  <static_mesh name="Reixa_114_sala3" filename="meshes\Reixa_114.mesh" />
+  <static_mesh name="Reixa_115_sala3" filename="meshes\Reixa_115.mesh" />
+  <static_mesh name="Reixa_116_sala3" filename="meshes\Reixa_116.mesh" />
+  <static_mesh name="lamp_01_sala3" filename="meshes\lamp_01.mesh" />
+  <static_mesh name="lamp_002_sala3" filename="meshes\lamp_002.mesh" />
+  <static_mesh name="sffWalls021_sala3" filename="meshes\sffWalls021.mesh" />
+  <static_mesh name="sffWalls022_sala3" filename="meshes\sffWalls022.mesh" />
+  <static_mesh name="Object026_sala3" filename="meshes\Object026.mesh" />
+  <static_mesh name="Object027_sala3" filename="meshes\Object027.mesh" />
+  <static_mesh name="Object028_sala3" filename="meshes\Object028.mesh" />
+  <static_mesh name="container033_sala3" filename="meshes\container033.mesh" />
+  <static_mesh name="container034_sala3" filename="meshes\container034.mesh" />
+  <static_mesh name="container035_sala3" filename="meshes\container035.mesh" />
+  <static_mesh name="container036_sala3" filename="meshes\container036.mesh" />
+  <static_mesh name="container037_sala3" filename="meshes\container037.mesh" />
+  <static_mesh name="container038_sala3" filename="meshes\container038.mesh" />
+  <static_mesh name="container039_sala3" filename="meshes\container039.mesh" />
+  <static_mesh name="Object029_sala3" filename="meshes\Object029.mesh" />
+  <static_mesh name="container048_sala3" filename="meshes\container048.mesh" />
+  <static_mesh name="container049_sala3" filename="meshes\container049.mesh" />
+  <static_mesh name="lamp_008_sala3" filename="meshes\lamp_008.mesh" />
+  <static_mesh name="Box154_sala3" filename="meshes\Box154.mesh" />
+  <static_mesh name="Box155_sala3" filename="meshes\Box155.mesh" />
+  <static_mesh name="Box156_sala3" filename="meshes\Box156.mesh" />
+  <static_mesh name="Box157_sala3" filename="meshes\Box157.mesh" />
+  <static_mesh name="Box158_sala3" filename="meshes\Box158.mesh" />
+  <static_mesh name="Box159_sala3" filename="meshes\Box159.mesh" />
+  <static_mesh name="Object030_sala3" filename="meshes\Object030.mesh" />
+  <static_mesh name="arm_sala3" filename="meshes\arm.mesh" />
+  <static_mesh name="foot_sala3" filename="meshes\foot.mesh" />
+  <static_mesh name="body_sala3" filename="meshes\body.mesh" />
+  <static_mesh name="leg_sala3" filename="meshes\leg.mesh" />
+  <static_mesh name="arm001_sala3" filename="meshes\arm001.mesh" />
+  <static_mesh name="foot001_sala3" filename="meshes\foot001.mesh" />
+  <static_mesh name="Object031_sala3" filename="meshes\Object031.mesh" />
+  <static_mesh name="body001_sala3" filename="meshes\body001.mesh" />
+  <static_mesh name="Cylinder244_sala3" filename="meshes\Cylinder244.mesh" />
+  <static_mesh name="Object039_sala3" filename="meshes\Object039.mesh" />
 </static_meshes>
