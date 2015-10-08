@@ -13,14 +13,21 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& aName ) : CRenderableObject(), mStaticMesh( 0 ) , mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName )
+	: CRenderableObject()
+	, mStaticMesh( 0 )
+	, mType( "static" )
+	, mPhysicActor( 0 )
 {
   SetName( aName );
 }
 
 
-CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName ) : mStaticMesh( SMeshMInstance->GetResource( CoreName ) ),
-  CRenderableObject(), mType( "static" ), mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName )
+	: CRenderableObject()
+    , mType( "static" )
+    , mPhysicActor( 0 )
+    , mStaticMesh( SMeshMInstance->GetResource( CoreName ) )
 {
   SetName( aName );
 }

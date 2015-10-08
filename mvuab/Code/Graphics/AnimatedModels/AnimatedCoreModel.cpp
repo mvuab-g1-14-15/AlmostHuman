@@ -232,20 +232,9 @@ bool CAnimatedCoreModel::Load()
 
 int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
 {
-    int lAnimationId = INT_MAX;
-
     TAnimationsIdMap::const_iterator lItFind = m_AnimationsMap.find( AnimationName );
-    if( lItFind == m_AnimationsMap.end() )
-    {
-        LOG_ERROR_APPLICATION( "Unknown animation %s", AnimationName.c_str() );
-    }
-    else
-    {
-        lAnimationId = lItFind->second;
-        LOG_INFO_APPLICATION( "Playing Animation %s", AnimationName.c_str() );
-    }
-
-    return lAnimationId;
+	ASSERT( lItFind != m_AnimationsMap.end(), "The animation %s does not exist", AnimationName.c_str() );
+	return (lItFind == m_AnimationsMap.end()) ? INT_MAX : lItFind->second;
 }
 
 int CAnimatedCoreModel::GetAnimationsCount()

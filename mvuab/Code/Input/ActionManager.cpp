@@ -143,12 +143,13 @@ void CActionManager::ProcessInputs()
         doIt = true;
       else
         doIt = false;
-
-
     }
 
-    SActionDone lAction = { doIt, amount };
-    mDoActions[lItb->first] = lAction;
+	if( doIt )
+	{
+		SActionDone lAction = { doIt, amount };
+		mDoActions[lItb->first] = lAction;
+	}
   }
 
   mMutex.UnLock();
@@ -168,115 +169,6 @@ bool CActionManager::DoAction( const std::string& action, float32& amount )
 
   mMutex.UnLock();
   return false;
-  /*
-      if(it1 == mActions.end())
-      {
-      return(false);
-      }
-
-      TInputsVector vector = it1->second;
-      TInputsVector::iterator itb = vector.begin(), ite = vector.end();
-
-      bool doIt = true;
-      for(; itb != ite; ++itb)
-      {
-      SInputActions current_action = *itb;
-      if ( current_action.m_AxisType != AXIS_NOTHING)
-      {
-          switch(current_action.m_AxisType)
-          {
-              case AXIS_MOUSE_X:
-                  {
-                      Math::Vect3i deltas = mInputManager->GetMouseDelta();
-                      amount = (float)deltas.x * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_MOUSE_Y:
-                  {
-                      Math::Vect3i deltas = mInputManager->GetMouseDelta();
-                      amount = (float)deltas.y * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_MOUSE_Z:
-                  {
-                      Math::Vect3i deltas = mInputManager->GetMouseDelta();
-                      amount = (float)deltas.z * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_LEFT_THUMB_X:
-                  {
-                      float x, y;
-                      mInputManager->GetGamePadLeftThumbDeflection(&x, &y, current_action.m_DeviceType);
-                      amount = x * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_LEFT_THUMB_Y:
-                  {
-                      float x, y;
-                      mInputManager->GetGamePadLeftThumbDeflection(&x, &y, current_action.m_DeviceType);
-                      amount = y * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_RIGHT_THUMB_X:
-                  {
-                      float x, y;
-                      mInputManager->GetGamePadRightThumbDeflection(&x, &y, current_action.m_DeviceType);
-                      amount = x * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_RIGHT_THUMB_Y:
-                  {
-                      float x, y;
-                      mInputManager->GetGamePadRightThumbDeflection(&x, &y, current_action.m_DeviceType);
-                      amount = y * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_DELTA_TRIGGER_RIGHT:
-                  {
-                      float right, left;
-                      mInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
-                      amount = right * current_action.m_fDelta;
-                  }
-                  break;
-              case AXIS_DELTA_TRIGGER_LEFT:
-                  {
-                      float right, left;
-                      mInputManager->GetGamePadDeltaTriggers(&left, &right, current_action.m_DeviceType );
-                      amount = left * current_action.m_fDelta;
-                  }
-                  break;
-          }//END switch(current_action.m_AxisType)
-          /*  if( amount == 0.f)
-              {
-              doIt = false;
-              }
-      }
-
-      if(current_action.m_EventType == EVENT_DOWN)
-      {
-          doIt = doIt && mInputManager->IsDown(current_action.m_DeviceType, current_action.m_Code);
-      }
-      else if(current_action.m_EventType == EVENT_DOWN_UP)
-      {
-          doIt = doIt && mInputManager->IsDownUp(current_action.m_DeviceType, current_action.m_Code);
-      }
-      else if(current_action.m_EventType == EVENT_UP_DOWN)
-      {
-          doIt = doIt && mInputManager->IsUpDown(current_action.m_DeviceType, current_action.m_Code);
-      }
-      else if(current_action.m_EventType == EVENT_NOTHING && current_action.m_AxisType != AXIS_NOTHING)
-      {
-          doIt = true;
-      }
-      else
-      {
-          doIt = false;
-      }
-
-      }
-
-      return(doIt);
-  */
 }
 
 bool CActionManager::LoadXML()

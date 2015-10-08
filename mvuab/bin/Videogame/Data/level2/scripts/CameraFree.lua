@@ -1,6 +1,7 @@
 function UpdateFree()
 	dt = timer:GetElapsedTime()
 	local current_camera = camera_manager:GetCurrentCamera()
+	
 	flag_speed = 0
     forward = 0
     strafe = 0
@@ -34,6 +35,11 @@ function UpdateFree()
 	moveFree( flag_speed, forward, strafe, vertical, dt )
 	
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
+	
+	if l_ActionManagerLuaWrapper:DoAction(action_manager, "ChangeRoom") then
+		current_camera:SetPosition(ChangeRoom())
+	end
+	
 	local value=""
 	local current_camera = camera_manager:GetCurrentCamera();
 	if not g_ConsoleActivate and not g_CinematicActive then

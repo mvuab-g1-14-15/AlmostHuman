@@ -82,15 +82,8 @@ bool CRenderableObjectsLayersManager::LoadRenderableObject( const std::string& l
 			CRenderableObject* p_object = NULL;
 			if ( lTagName == "MeshInstance" )
 			{
-				if( SMeshMInstance->Exist( lNode.GetAttribute<std::string>( "core", "no_static_mesh " ) ) )
-				{
-					const std::string& lType = lNode.GetAttribute<std::string>( "type", "static" );
-					p_object = ( lType == "static" ) ? AddStatic( lNode ) : AddDynamic( lNode );
-				}
-				else
-				{
-					LOG_ERROR_APPLICATION("Loading a instance mesh with out static mesh");
-				}
+				const std::string& lType = lNode.GetAttribute<std::string>( "type", "static" );
+				p_object = ( lType == "static" ) ? AddStatic( lNode ) : AddDynamic( lNode );
 			}
 			else if ( lTagName == "AnimatedInstance" )
 			{
@@ -189,32 +182,4 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& a
 	}
 
 	return l_InstanceMesh;
-}
-
-void CRenderableObjectsLayersManager::AddNewInstaceMesh( const CXMLTreeNode& atts, const std::string &l_Layer, const std::string &l_RoomName )
-{
-	if( SMeshMInstance->Exist( atts.GetAttribute<std::string>( "core", "no_static_mesh " ) ) )
-	{
-		const std::string& lType = atts.GetAttribute<std::string>( "type", "static" );
-		CInstanceMesh* l_InstanceMesh = ( lType == "static" ) ? AddStatic( atts ) : AddDynamic( atts );
-
-		if( l_InstanceMesh )
-		{
-			l_InstanceMesh->SetRoomName( l_RoomName );
-
-			CRenderableObjectsManager* lRenderableObjectManager = GetRenderableObjectManager( l_Layer );
-
-			if ( !lRenderableObjectManager->AddResource( l_InstanceMesh->GetName(), l_InstanceMesh ) )
-			{
-				LOG_ERROR_APPLICATION( "Error adding instance mesh %s!", l_InstanceMesh->GetName().c_str() );
-				CPhysicUserData * lData = l_InstanceMesh->GetActor()->GetUserData();
-				CHECKED_DELETE( lData );
-				CHECKED_DELETE( l_InstanceMesh );
-			}
-		} 
-	}
-	else
-	{
-		LOG_ERROR_APPLICATION("Loading a instance mesh with out static mesh");
-	}
 }
