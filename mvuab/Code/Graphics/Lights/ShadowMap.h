@@ -26,7 +26,6 @@ class CShadowMap
         CTexture::TFormatType                   mFormatType;
         u_int                                   mClearMask;
         u_int                                   mStage;
-        std::vector<CRenderableObjectsManager*> mROMs;
 };
 
 #endif // SHADOW_MAP_H
