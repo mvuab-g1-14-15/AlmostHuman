@@ -90,4 +90,13 @@ const char ZBlurConstant[] = "ConstantBlur";
 const char ZBlurEnd[] = "ZBlurEnd";
 //-----------------------------------------------------------------------
 
+// Scattered Light data -------------------------------------------------
+const char SLDecai[] = "SLDecai";
+const char SLExposure[] = "SLExposure";
+const char SLDensity[] = "SLDensity";
+const char SLWeight[] = "SLWeight";
+const char SLSamples[] = "SLSamples";
+const char SLLightSource[] = "SLLightSource";
+//-----------------------------------------------------------------------
+
 #endif //EFFECTS_DEFINES_H

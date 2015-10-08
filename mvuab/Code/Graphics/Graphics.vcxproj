@@ -101,6 +101,7 @@
     <ClCompile Include="SceneRenderComands\RenderGizmosCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderGUISceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\RenderSceneSceneRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\ScatteredLightRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\SceneRendererCommandManager.cpp" />
     <ClCompile Include="SceneRenderComands\SetBlendSceneRendererCommand.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="SceneRenderComands\RenderGizmosCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderGUISceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\RenderSceneSceneRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\ScatteredLightRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\SceneRendererCommandManager.h" />
     <ClInclude Include="SceneRenderComands\SetBlendSceneRendererCommand.h" />

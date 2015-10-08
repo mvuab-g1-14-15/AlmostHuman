@@ -155,6 +155,10 @@
         <texture stage_id="1" name="DepthMapTexture"/>
     </zblur>
 	-->
+    
+    <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
+    <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
+    </scattered_light>
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

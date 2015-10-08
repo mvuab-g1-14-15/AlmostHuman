@@ -322,6 +322,9 @@
     <ClCompile Include="SceneRenderComands\ZBlurSceneRendererCommand.cpp">
       <Filter>SceneRenderComands\PostProcCmd</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\ScatteredLightRendererCommand.cpp">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -653,6 +656,9 @@
     </ClInclude>
     <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="SceneRenderComands\ZBlurSceneRendererCommand.h">
+      <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\ScatteredLightRendererCommand.h">
       <Filter>SceneRenderComands\PostProcCmd</Filter>
     </ClInclude>
   </ItemGroup>

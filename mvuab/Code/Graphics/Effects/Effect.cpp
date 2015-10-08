@@ -52,10 +52,18 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( DeltaTime )
   , CTOR_EFFECT_PARAMETER( FlipUVVertical   )
   , CTOR_EFFECT_PARAMETER( FlipUVHorizontal )
+  // ZBLUR
   , CTOR_EFFECT_PARAMETER( ZBlurFocalStart )
   , CTOR_EFFECT_PARAMETER( ZBlurFocalEnd )
   , CTOR_EFFECT_PARAMETER( ZBlurConstant )
   , CTOR_EFFECT_PARAMETER( ZBlurEnd )
+  // Scattered Light
+  , CTOR_EFFECT_PARAMETER( SLDecai )
+  , CTOR_EFFECT_PARAMETER( SLExposure )
+  , CTOR_EFFECT_PARAMETER( SLDensity )
+  , CTOR_EFFECT_PARAMETER( SLWeight )
+  , CTOR_EFFECT_PARAMETER( SLSamples )
+  , CTOR_EFFECT_PARAMETER( SLLightPos )
 {
   ResetLightsHandle();
 }
@@ -102,11 +110,19 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
   RESET_EFFECT_PARAMETER( BonesParameter )
   RESET_EFFECT_PARAMETER( LightProbesParameter )
-
+  // ZBlur
   RESET_EFFECT_PARAMETER( ZBlurFocalStart )
   RESET_EFFECT_PARAMETER( ZBlurFocalEnd )
   RESET_EFFECT_PARAMETER( ZBlurConstant )
   RESET_EFFECT_PARAMETER( ZBlurEnd )
+
+  // Scattered Light
+  RESET_EFFECT_PARAMETER( SLDecai )
+  RESET_EFFECT_PARAMETER( SLExposure )
+  RESET_EFFECT_PARAMETER( SLDensity )
+  RESET_EFFECT_PARAMETER( SLWeight )
+  RESET_EFFECT_PARAMETER( SLSamples )
+  RESET_EFFECT_PARAMETER( SLLightPos )
   
   ResetLightsHandle();
 }
@@ -154,11 +170,18 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
-
+  //ZBlur
   GetParameterBySemantic( ZBlurFocalStart, m_ZBlurFocalStart );
   GetParameterBySemantic( ZBlurFocalEnd, m_ZBlurFocalEnd );
   GetParameterBySemantic( ZBlurConstant, m_ZBlurConstant );
   GetParameterBySemantic( ZBlurEnd, m_ZBlurEnd );
+  // Scattered Light
+  GetParameterBySemantic( SLDecai, m_SLDecai );
+  GetParameterBySemantic( SLExposure, m_SLExposure );
+  GetParameterBySemantic( SLDensity, m_SLDensity );
+  GetParameterBySemantic( SLWeight, m_SLWeight );
+  GetParameterBySemantic( SLSamples, m_SLSamples );
+  GetParameterBySemantic( SLLightSource, m_SLLightPos );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -334,6 +357,18 @@ void CEffect::SetZBlur(float FocalStart, float FocalEnd, float Constant, float B
 
     m_Effect->SetFloat(m_ZBlurConstant, Constant);
     m_Effect->SetFloat(ZBlurEnd, BlurEnd);
+}
+
+void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos)
+{
+    m_Effect->SetFloat(m_SLDecai, l_Decay);
+    m_Effect->SetFloat(m_SLExposure, l_Esposure);
+
+    m_Effect->SetFloat(m_SLWeight, l_Weight);
+    m_Effect->SetFloat(m_SLDensity, l_Density);
+
+    m_Effect->SetInt(m_SLSamples, l_Samples);
+    m_Effect->SetFloatArray(m_SLLightPos, &l_Pos.x, 2);
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
