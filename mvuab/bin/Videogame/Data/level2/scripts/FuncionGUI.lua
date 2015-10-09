@@ -6,7 +6,7 @@ function CargarJuego()
 engine:SetPlay(true)
 gui_manager:ActiveWindows("HUD.xml")
 gui_manager:SetRenderPointer(false)
---cinematic_manager:StopCinematic("cinematica_inicial")
+cinematic_manager:StopCinematic("cinematica_inicial")
 end
 
 function IrASetup()

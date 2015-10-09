@@ -26,9 +26,8 @@
 	<particle_manager file_config=""/>
 	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-	<!--
 		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
-	-->
+	
 	<cinematic_manager file_config=""/>
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
