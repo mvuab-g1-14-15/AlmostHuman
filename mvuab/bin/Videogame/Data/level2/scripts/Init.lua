@@ -41,6 +41,7 @@ function load_gameplay()
 	
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
+	cinematic_manager:PlayCinematic("cinematica_inicial")
 end
 
 function update_gameplay()
@@ -54,6 +55,7 @@ function update_gameplay()
 	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()
+	
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
