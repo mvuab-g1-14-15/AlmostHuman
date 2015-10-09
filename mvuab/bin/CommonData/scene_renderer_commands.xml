@@ -156,9 +156,13 @@
     </zblur>
 	-->
     
-    <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
-    <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
-    </scattered_light>
+    <!--set_pool_renderable_objects_technique pool="Scattered_Light_pool_renderable_object_technique"/>
+    <render_draw_quad active="true" name="Scattered_Light">
+ 		<texture stage_id="0" name="FB1"/>
+        <texture stage_id="1" name="DepthMapTexture"/>
+ 	</render_draw_quad-->
+    <!--scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
+    </scattered_light-->
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

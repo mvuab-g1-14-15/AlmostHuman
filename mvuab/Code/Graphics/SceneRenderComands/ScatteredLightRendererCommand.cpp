@@ -8,9 +8,12 @@
 #include "RenderableObject\RenderableObjectTechnique.h"
 #include "RenderableVertex\VertexTypes.h"
 
-#include "GraphicsManager.h"
+#include "Cameras/CameraManager.h"
+#include "Cameras/Camera.h"
 
+#include "GraphicsManager.h"
 #include "EngineManagers.h"
+#include "Utils/Defines.h"
 
 CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTreeNode& atts) : CStagedTexturedRendererCommand(atts)
 {
@@ -29,8 +32,19 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
-    Math::Vect2f l_ScrPos = GM.ToScreenCoordinates(Math::Vect3f(66.7f, -9.68f, -70.95f));
+    Math::Vect3f l_LightPos(66.7f, -9.68f, -70.95f);
+    Math::Vect2f l_ScrPos = GM.ToScreenCoordinates(l_LightPos);
     std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+
+    CCamera l_LastCamera;
+    CCamera *l_CurrentCamera = CameraMInstance->GetCurrentCamera();
+
+    memcpy(&l_LastCamera, l_CurrentCamera, sizeof(CCamera));
+
+    l_CurrentCamera->SetPosition(l_LightPos);
+    l_CurrentCamera->SetDirection(l_LastCamera.GetDirection());
+
+    GM.SetupMatrices();
 
     
 }
