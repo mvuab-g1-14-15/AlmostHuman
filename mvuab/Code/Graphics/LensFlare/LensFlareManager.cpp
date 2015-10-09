@@ -8,6 +8,7 @@
 #include "Cameras/CameraManager.h"
 #include "Cameras/Camera.h"
 #include "EngineManagers.h"
+#include "PhysicsManager.h"
 
 CLensFlareManager::CLensFlareManager(const CXMLTreeNode &atts)
     : CManager( atts )
@@ -73,13 +74,20 @@ void CLensFlareManager::Render()
 
         if( lLensFlare )
         {
-            Math::Vect3f lLightPosition = lCurrentLight->GetPosition();
+            const Math::Vect3f& lLightPosition = lCurrentLight->GetPosition();
+			const Math::Vect3f& lCameraPosition = lCurrentCamera->GetPosition();
 
-            if ( lCurrentCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lLightPosition.x, lLightPosition.y,
-                    lLightPosition.z ), lCurrentLight->GetStartRangeAttenuation() ) )
+			// Check with the frustum
+            if ( lCurrentCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lLightPosition.x, lLightPosition.y, lLightPosition.z ), lCurrentLight->GetStartRangeAttenuation() ) )
             {
-                Math::Vect2f lLightProj = lGM->ToScreenCoordinates(lCurrentLight->GetPosition());
-                lLensFlare->Render( Math::Vect2u( uint32(lLightProj.x), uint32(lLightProj.y )), Math::Vect2u( lWidth/2, lHeight/2 ), lAspectRatio );
+				if( lCurrentCamera->GetDirection().DotProduct( lLightPosition - lCameraPosition ) > 0 )
+				{
+					if( !PhysXMInstance->RayCastSceneObject( lCurrentCamera->GetPosition(), lLightPosition ) )
+					{
+						Math::Vect2f lLightProj = lGM->ToScreenCoordinates(lCurrentLight->GetPosition());
+						lLensFlare->Render( Math::Vect2u( uint32(lLightProj.x), uint32(lLightProj.y )), Math::Vect2u( lWidth/2, lHeight/2 ), lAspectRatio );
+					}
+				}
             }
         }
     }

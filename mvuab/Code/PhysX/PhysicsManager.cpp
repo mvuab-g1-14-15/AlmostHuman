@@ -32,6 +32,7 @@
 #if defined(_DEBUG)
 #include "Memory\MemLeaks.h"
 #endif
+#include "PhysicUtils.h"
 
 
 // -----------------------------------------
@@ -843,8 +844,7 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton( float size )
 //  return impactObject;
 //}
 
-CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosRay,
-        const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance )
+CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance )
 {
     //NxUserRaycastReport::ALL_SHAPES
     assert( m_pScene != NULL );
@@ -875,8 +875,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
     return impactObject;
 }
 
-CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _vPosRay,
-        const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _fPower )
+CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _fPower )
 {
     //NxUserRaycastReport::ALL_SHAPES
     assert( m_pScene != NULL );
@@ -909,6 +908,15 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
     return impactObject;
 }
 
+bool CPhysicsManager::RayCastSceneObject( const Math::Vect3f& aOrigin, const Math::Vect3f& aTarget )
+{
+	ASSERT( m_pScene != NULL , "NULL SCENE" );
+	NxRay ray;
+	PhysicUtils::Convert<Math::Vect3f, NxVec3>( aOrigin, ray.orig );
+	PhysicUtils::Convert<Math::Vect3f, NxVec3>( ( aTarget - aOrigin ), ray.dir );
+	NxRaycastHit hit;
+	return ( m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit ) != NULL );
+}
 
 std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
         uint32 impactMask )

@@ -126,6 +126,7 @@ public:
   CPhysicUserData*    RaycastClosestActor( const Math::Vect3f _vPosRay, const Math::Vect3f& _vDirRay, uint32 _uiImpactMask, SCollisionInfo& _Info, float _uiMaxDistance = FLT_MAX );
   CPhysicUserData*    RaycastClosestActorShoot( const Math::Vect3f posRay, const Math::Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower );
   std::string  RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay, uint32 impactMask);
+  bool			RayCastSceneObject( const Math::Vect3f& aOrigin, const Math::Vect3f& aTarget );
 
   std::set<CPhysicUserData*> OverlapSphere( float radiusSphere, const Math::Vect3f& posSphere, EShapesType shapeType = ALL_SHAPES , uint32 impactMask = 0xffffffff );
   std::vector<CPhysicUserData*> CPhysicsManager::OverlapSphereActor( float _fRadiusSphere, const Math::Vect3f& _vPosSphere, uint32 _uiImpactMask );
