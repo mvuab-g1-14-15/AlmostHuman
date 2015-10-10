@@ -20,7 +20,8 @@ class CParticleSystemManager: public CManager, public CTemplatedVectorMapManager
 
         void Init();
         void Update();
-        void Render() {};
+        void Render();
+        void LoadInstances( const std::string& aFileName );
         void Refresh();
     private:
         CEmitterFactory* mEmitterFactory;

@@ -1,7 +1,4 @@
 #include "Scene.h"
-#include "SceneRenderComands\SceneRendererCommandManager.h"
-#include "RenderableObject\RenderableObjectsLayersManager.h"
-#include "SceneRenderComands\RenderSceneSceneRendererCommand.h"
 
 #include "Utils\Defines.h"
 #include "Logger\Logger.h"
@@ -10,12 +7,7 @@
 #include "Utils\Defines.h"
 #include "EngineManagers.h"
 
-#include "StaticMeshes\StaticMeshManager.h"
 #include "Room.h"
-
-#include "Lights/LightManager.h"
-#include "Particles/ParticleManager.h"
-#include "Billboard\BillboardManager.h"
 
 #include "PhysicsManager.h"
 #include "Actor\PhysicActor.h"

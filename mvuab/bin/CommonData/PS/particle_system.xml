@@ -4,10 +4,6 @@
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="sparks">
-		<cube_emitter file="spark_emitter.xml"/>
-	</particle_system_core>
-	
 	<particle_system_core name="rays">
 		<!--<cube_emitter file="Data/core/emitters/ray_emitter.xml"/>-->
 		<!--<cube_emitter file="Data/core/emitters/ray_emitter_2.xml"/>-->
@@ -15,9 +11,6 @@
 	</particle_system_core>
 	
 	<particle_system_core name="charge">
-		<radial_emitter file="spiral_emitter.xml"/>
-		<circle_emitter file="spiral_emitter2.xml"/>
-		<circle_emitter file="spiral_emitter3.xml"/>
-		<cube_emitter file="spiral_emitter4.xml"/>
+		<cube_emitter file="charge_emitter_1.xml"/>
 	</particle_system_core>
 </particles_systems>

@@ -21,7 +21,7 @@ CTimer::CTimer (uint32 avgSamples)
     for(uint32 j=0;j<m_uSamples;j++)
     {
             m_Deltas[j] = 0;
-	}
+    }
 }
 
 CTimer::~CTimer( void )

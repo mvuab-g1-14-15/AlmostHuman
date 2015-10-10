@@ -1,6 +1,8 @@
 #include "ParticleSystemManager.h"
 #include "EngineConfig.h"
 #include "Emitters/EmitterFactory.h"
+#include <boost/foreach.hpp>
+#include "InstanceParticle.h"
 
 
 CParticleSystemManager::CParticleSystemManager()
@@ -25,6 +27,7 @@ void CParticleSystemManager::Refresh()
 {
   Destroy();
   LoadXML();
+  LoadInstances("Data/sala1/particles.xml"); // The refresh only is available in developer mode
 }
 
 void CParticleSystemManager::LoadXML()
@@ -34,7 +37,7 @@ void CParticleSystemManager::LoadXML()
 
     if ( l_XML.LoadAndFindNode( mConfigPath.c_str(), "particles_systems", l_Node ) )
     {
-		    mEmitterFactory->SetEmittersPath( l_Node.GetAttribute<std::string>( "emitters_path", "" ) );
+        mEmitterFactory->SetEmittersPath( l_Node.GetAttribute<std::string>( "emitters_path", "" ) );
         for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
         {
             const CXMLTreeNode& lCurrentSystem = l_Node( i );
@@ -62,10 +65,34 @@ void CParticleSystemManager::Init()
 
 void CParticleSystemManager::Update()
 {
-    for( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end();
-            lItb != lIte; ++lItb )
+    BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
     {
-        (*lItb)->Update();
+        lCore->Update();
     }
 }
 
+void CParticleSystemManager::Render()
+{
+    BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
+    {
+        lCore->Render();
+    }
+}
+
+void CParticleSystemManager::LoadInstances( const std::string& aFileName )
+{
+    CXMLTreeNode l_XML, l_Node;
+    if ( l_XML.LoadAndFindNode( aFileName.c_str(), "particles_instances", l_Node ) )
+    {
+        for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
+        {
+            const CXMLTreeNode& lCurrentParticle = l_Node( i );
+            const std::string& lNameParticle = lCurrentParticle.GetAttribute<std::string>( "name", "" );
+
+            CParticleSystemCore * lCore = GetResource(lCurrentParticle.GetAttribute<std::string>( "core", "" ));
+            ASSERT(lCore, "Triying to add a instance particle (%s) with out a core(%s)", lNameParticle.c_str(), lCurrentParticle.GetAttribute<std::string>( "core", "" ).c_str() );
+            if(lCore)
+                lCore->AddInstance( new CParticleInstance( lCurrentParticle ) );
+        }
+    }
+}

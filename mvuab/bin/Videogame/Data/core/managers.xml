@@ -9,6 +9,8 @@
 	<action_manager file_config="Data/inputs.xml"/>
 	<language_manager file_config="Data/language.xml"/>
 	<font_manager file_config="Data/fonts/fonts.xml"/>
+	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
+	<billboard_manager file_config="../CommonData/Billboards/billboards.xml"/>
 	<renderable_technique_manager file_config="../CommonData/effects/effects_pools.xml"/>
 	<static_mesh_manager file_config=""/>
 	<animated_manager file_config="Data/animated_models.xml"/>
@@ -22,13 +24,8 @@
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
 	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
-	<billboard_manager file_config="../CommonData/Billboards/billboards.xml"/>
-	<particle_manager file_config=""/>
-	<particle_system_manager file_config="../CommonData/PS/particle_system.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-		<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
-	
-	<cinematic_manager file_config=""/>
+	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
 </managers>

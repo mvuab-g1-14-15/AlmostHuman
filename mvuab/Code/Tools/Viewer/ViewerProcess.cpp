@@ -30,7 +30,6 @@
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 #include "RenderableObject\RenderableObjectTechniqueManager.h"
-#include "Particles\ParticleManager.h"
 #include "RenderableObject\Scene.h"
 
 //INPUTS

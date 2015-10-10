@@ -78,9 +78,7 @@
 #define ScriptMInstance         CEngineManagers::GetSingletonPtr()->GetScriptManager()
 #define LightMInstance          CEngineManagers::GetSingletonPtr()->GetLightManager()
 #define PhysXMInstance          CEngineManagers::GetSingletonPtr()->GetPhysicsManager()
-//#define EnemyMInstance          CEngineManagers::GetSingletonPtr()->GetEnemyManager()
 #define TriggersMInstance       CEngineManagers::GetSingletonPtr()->GetTriggerManager()
-#define PSMan                   CEngineManagers::GetSingletonPtr()->GetParticleManager()
 #define GizmosMInstance         CEngineManagers::GetSingletonPtr()->GetGizmosManager()
 #define TextureMInstance        CEngineManagers::GetSingletonPtr()->GetTextureManager()
 #define SoundMan                CEngineManagers::GetSingletonPtr()->GetSoundManager()
@@ -91,7 +89,7 @@
 #define CinematicMInstance      CEngineManagers::GetSingletonPtr()->GetCinematicManager()
 #define FlareMan                CEngineManagers::GetSingletonPtr()->GetLensFlareManager()
 #define IdManager               CEngineManagers::GetSingletonPtr()->GetIdManager()
-#define ParticleSystemInstance  CEngineManagers::GetSingletonPtr()->GetParticleSystemManager()
+#define PSManager               CEngineManagers::GetSingletonPtr()->GetParticleSystemManager()
 
 #define _USING_MESH_FOR_PHYSX
 
@@ -106,12 +104,12 @@
         } \
     }\
 
-#define LOG_ERROR_APPLICATION( x, ... )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-#define LOG_WARNING_APPLICATION( x, ...  ) CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-#define LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
-#define STATIC_LOG_INFO_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
-#define STATIC_LOG_ERROR_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
-#define STATIC_LOG_WARNING_APPLICATION( x, ...  )    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
+#define LOG_ERROR_APPLICATION( x, ... )                    CLogger::GetSingletonPtr()->AddNewLog( eLogError,   typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define LOG_WARNING_APPLICATION( x, ...  )                CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define LOG_INFO_APPLICATION( x, ...  )                    CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    typeid(this).name(), __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_INFO_APPLICATION( x, ...  )            CLogger::GetSingletonPtr()->AddNewLog( eLogInfo,    "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_ERROR_APPLICATION( x, ...  )         CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
+#define STATIC_LOG_WARNING_APPLICATION( x, ...  )       CLogger::GetSingletonPtr()->AddNewLog( eLogError,   "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
 
 #else
 
