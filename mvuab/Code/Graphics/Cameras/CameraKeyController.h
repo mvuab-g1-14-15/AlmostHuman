@@ -26,6 +26,7 @@ public:
     bool IsReverse() const;
     void SetReverse(bool Reverse);
     bool LoadXML(const std::string &FileName);
+	bool LoadXML(CXMLTreeNode &aNode);
     CCameraInfo* GetCurrentInfo(){return  m_pCameraInfo; }
 
 private: // Members

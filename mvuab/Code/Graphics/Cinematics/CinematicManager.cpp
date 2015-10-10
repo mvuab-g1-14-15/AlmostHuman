@@ -97,7 +97,8 @@ void CCinematicManager::Init()
 				CXMLTreeNode l_SubFile, SubTreeNode3;
 				if (l_SubFile.LoadAndFindNode( ResourceFileName.c_str(), "camera", SubTreeNode3 ) )
 				{
-					CCameraKeyController* CameraKeyController = new CCameraKeyController( SubTreeNode3(0) );
+					CCameraKeyController* CameraKeyController = new CCameraKeyController( );
+					CameraKeyController->LoadXML(SubTreeNode3(0));
 					CCameraCinematical* lCameraCinematical = new CCameraCinematical( CameraKeyController );
 					if ( !CameraMInstance->AddResource( lName, lCameraCinematical ) )
 					{
