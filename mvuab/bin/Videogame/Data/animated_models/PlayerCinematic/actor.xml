@@ -1,0 +1,6 @@
+<animated_model name="PlayerCinematic">
+	<texture file="Compo_loogan.dds"/>
+	<skeleton file="anim_cinem_inicial_sala1.csf"/>
+	<mesh file="anim_cinem_inicial_sala1.cmf"/>
+	<animation name="anim_cinem_inicial_sala1" file="anim_cinem_inicial_sala1.caf"/>
+</animated_model>

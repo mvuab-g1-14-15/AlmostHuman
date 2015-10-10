@@ -327,8 +327,8 @@ void CCameraKeyController::InterpolateKeys(float32 Percentage, CCameraInfo A, CC
     m_pCameraInfo->SetNearPlane(l_NearPlane);
 
     // Obtain the current camera FOV
-    l_Interpolator1D.SetValues(A.GetFOV(), B.GetFOV(), 1.0f, Math::FUNC_CONSTANT);
+    /*l_Interpolator1D.SetValues(A.GetFOV(), B.GetFOV(), 1.0f, Math::FUNC_CONSTANT);
     float32 l_FOV;
     l_Interpolator1D.Update(Percentage, l_FOV);
-    m_pCameraInfo->SetFOV(l_NearPlane);
+    m_pCameraInfo->SetFOV(l_FOV);*/
 }

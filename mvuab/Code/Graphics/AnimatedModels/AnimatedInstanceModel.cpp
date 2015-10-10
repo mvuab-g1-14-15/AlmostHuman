@@ -381,6 +381,11 @@ void CAnimatedInstanceModel::ExecuteAction( const std::string& AnimationName, fl
   ExecuteAction( l_Id, DelayIn, DelayOut, WeightTarget, AutoLock );
 }
 
+void CAnimatedInstanceModel::ExecuteActionLUA( const std::string& AnimationName, float32 DelayIn, float32 DelayOut )
+{
+  ExecuteAction(AnimationName, DelayIn, DelayOut);
+}
+
 void CAnimatedInstanceModel::RemoveAction( const std::string& AnimationName )
 {
   uint32 l_Id = m_AnimatedCoreModel->GetAnimationId( AnimationName );

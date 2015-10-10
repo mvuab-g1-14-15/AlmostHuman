@@ -13,7 +13,6 @@
 #include "InputManager.h"
 #include "ActionManager.h"
 #include "Effects\EffectManager.h"
-#include "Particles\ParticleManager.h"
 #include "Lights\LightManager.h"
 #include "Triggers\TriggerManager.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
@@ -57,7 +56,6 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
     , m_pPhysicsManager( 0 )
     , m_pEnemyManager( 0 )
     , m_pTriggerManager( 0 )
-    , m_pParticleManager( 0 )
     , m_pGizmosManager( 0 )
     , m_pGUIManager( 0 )
     , m_pSoundManager( 0 )
@@ -65,6 +63,7 @@ CEngineManagers::CEngineManagers( const std::string& aPath )
     , m_pCinematicManager( 0 )
     , m_pIdManager( 0 )
     , m_pEditorsManager( 0 )
+	, m_bGamePause( false )
 {
 }
 
@@ -109,12 +108,8 @@ void CEngineManagers::Init()
                              Type2Type<CSceneRendererCommandManager>( ) );
     ManagerFactory.Register( "physics_manager",
                              Type2Type<CPhysicsManager>( ) );
-    //ManagerFactory.Register( "enemy_manager",
-    //                         Type2Type<CEnemyManager>( ) );
     ManagerFactory.Register( "trigger_manager",
                              Type2Type<CTriggerManager>( ) );
-    ManagerFactory.Register( "particle_manager",
-                             Type2Type<CParticleManager>( ) );
     ManagerFactory.Register( "gizmos_manager",
                              Type2Type<CGizmosManager>( ) );
     ManagerFactory.Register( "language_manager",
@@ -180,7 +175,6 @@ void CEngineManagers::Init()
                                      ( GetResource( "scene_render_command_manager" ) );
     m_pPhysicsManager   = dynamic_cast<CPhysicsManager*>( GetResource( "physics_manager" ) );
     m_pTriggerManager   = dynamic_cast<CTriggerManager*>( GetResource( "trigger_manager" ) );
-    m_pParticleManager  = dynamic_cast<CParticleManager*>( GetResource( "particle_manager" ) );
     m_pGizmosManager    = dynamic_cast<CGizmosManager*>( GetResource( "gizmos_manager" ) );
     m_pSoundManager     = dynamic_cast<CWWSoundManager*>( GetResource( "sound_manager" ) );
     m_pGUIManager       = dynamic_cast<CGUIManager*>( GetResource( "gui_manager" ) );
@@ -191,34 +185,48 @@ void CEngineManagers::Init()
     m_pIdManager = dynamic_cast<CIdManager*>( GetResource( "id_manager" ) );
     m_pEditorsManager = dynamic_cast<CEditorsManager*>( GetResource( "editors_manager" ) );
     m_pParticleSystemManager = dynamic_cast<CParticleSystemManager*>( GetResource( "particle_system_manager" ) );
-//
-// Init managers
-//
+
+#ifdef _DEBUG
     uint32 lSizeElement = GetResourcesCount();
     uint32 lPosition = 0;
     uint32 result;
     std::string lMsg;
 
     for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
-            ++lItb )
+        ++lItb )
     {
-#ifdef _DEBUG
         TIMER_START();
         ( *lItb )->Init();
         result = ++lPosition * 100 / lSizeElement;
         StringUtils::Format( lMsg, "[%u Percentage Completed] Manager %s", result, (*lItb)->GetName().c_str() );
         TIMER_STOP( lMsg.c_str() );
-#else
-      ( *lItb )->Init();
-#endif
     }
+#else
+    for( uint32 i = 0, lCount = GetResourcesCount(); i < lCount; ++i )
+    {
+        m_ResourcesVector[i]->Init();
+    }
+#endif // _DEBUG
 }
 
 void CEngineManagers::Update()
 {
     for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end() ; lItb != lIte;
             ++lItb )
-        ( *lItb )->Update();
+	{
+        if( m_bGamePause )
+		{
+			if( m_pGUIManager == ( *lItb ) || m_pSoundManager == ( *lItb ) )
+			{
+				( *lItb )->Update();
+			}
+		}
+		else
+		{
+			( *lItb )->Update();
+		}
+				
+	}
 }
 
 void CEngineManagers::Render()
@@ -238,6 +246,7 @@ void CEngineManagers::Release()
     CHECKED_DELETE( m_ResourcesVector[0] )
     m_ResourcesVector.clear();
     m_ResourcesMap.clear();
+	m_bGamePause = false;
 }
 
 void CEngineManagers::Reload()
@@ -370,12 +379,6 @@ CTriggerManager* CEngineManagers::GetTriggerManager() const
 {
     ASSERT( m_pTriggerManager, "Null trigger manager" );
     return m_pTriggerManager;
-}
-
-CParticleManager* CEngineManagers::GetParticleManager() const
-{
-    ASSERT( m_pParticleManager, "Null particle manager manager" );
-    return m_pParticleManager;
 }
 
 CGizmosManager* CEngineManagers::GetGizmosManager() const

@@ -29,6 +29,7 @@ class CAnimatedInstanceModel : public CRenderableObject
 
         void Update();
         void ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f, bool AutoLock = true);
+		
         void RemoveAction(uint32 Id);
 
         void BlendCycle(uint32 Id, float32 Weight, float32 DelayIn);
@@ -39,6 +40,7 @@ class CAnimatedInstanceModel : public CRenderableObject
 
         void ExecuteAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f,
                            bool AutoLock = true);
+		void ExecuteActionLUA(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
         void RemoveAction(const std::string &AnimationName);
 
         void BlendCycle(const std::string &AnimationName, float32 Weight, float32 DelayIn);

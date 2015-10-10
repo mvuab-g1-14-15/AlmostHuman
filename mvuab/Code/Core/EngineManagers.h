@@ -29,7 +29,6 @@ class CLightManager;
 class CPhysicsManager;
 class CEnemyManager;
 class CTriggerManager;
-class CParticleManager;
 class CGizmosManager;
 class CTextureManager;
 class CWWSoundManager;
@@ -72,7 +71,6 @@ public:
   CPhysicsManager*                  GetPhysicsManager() const;
   CEnemyManager*                    GetEnemyManager() const;
   CTriggerManager*                  GetTriggerManager() const;
-  CParticleManager*                 GetParticleManager() const;
   CGizmosManager*                   GetGizmosManager() const;
   CTextureManager*                  GetTextureManager() const;
   CWWSoundManager*                  GetSoundManager() const;
@@ -86,7 +84,7 @@ public:
   CParticleSystemManager*           GetParticleSystemManager() const;
 
   GET_SET_REF( std::string, ManagersPath );
-
+  GET_SET( bool, bGamePause);
 
 private:
   CEditorsManager*                         m_pEditorsManager;
@@ -107,7 +105,6 @@ private:
   CPhysicsManager*                       m_pPhysicsManager;
   CEnemyManager*                         m_pEnemyManager;
   CTriggerManager*                       m_pTriggerManager;
-  CParticleManager*                      m_pParticleManager;
   CGizmosManager*                        m_pGizmosManager;
   CTextureManager*                       m_pTextureManager;
   CWWSoundManager*                       m_pSoundManager;
@@ -120,6 +117,7 @@ private:
   CConsole*                              m_pConsole;
   CParticleSystemManager*                m_pParticleSystemManager;
   std::string                            m_ManagersPath;
+  bool									 m_bGamePause;
 };
 
 #endif // ENGINE_MANAGER_H

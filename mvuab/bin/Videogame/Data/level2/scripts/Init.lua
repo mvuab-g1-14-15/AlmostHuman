@@ -14,15 +14,16 @@ initialized1 = false
 g_bAlarmRoom3 = false
 g_fOcultarMensaje = 5.0
 g_sMessageAlarm = ""
+g_PlayerCinematic = nil
 
 function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	--scene:ActivateRoom("pasillo")
-	--scene:ActivateRoom("sala4")
+	scene:ActivateRoom("pasillo")
+	scene:ActivateRoom("sala4")
 	scene:ActivateRoom("sala2")
-	--scene:ActivateRoom("sala3")
+	scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -38,10 +39,17 @@ function load_gameplay()
 	end
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
-	
-	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+
+	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
+
 	engine:Trace("Finish the load_gameplay()")
 	cinematic_manager:PlayCinematic("cinematica_inicial")
+	g_PlayerCinematic = CreateAnimatedInstanceModel("PlayerCinematic", "PlayerCinematic")
+	renderable_objects_manager_characters:AddResource("PlayerCinematic", g_PlayerCinematic)
+	g_PlayerCinematic:SetPosition(Vect3f(124.992, -8.283, -51.212))
+	g_PlayerCinematic:MakeTransform()
+	g_PlayerCinematic:SetRoomName( "sala1" )
+	g_PlayerCinematic:ExecuteActionLUA("anim_cinem_inicial_sala1", 0.2, 1)
 end
 
 function update_gameplay()
@@ -76,7 +84,7 @@ function update_gameplay()
 	end
 	
 	if action_manager:DoAction("Ambient_salaX") then
-		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient" )	
+		sound_manager:PlayEvent("Play_Ambient_Sala3", "Ambient" )	
 	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then

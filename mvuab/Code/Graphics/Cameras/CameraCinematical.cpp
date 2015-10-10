@@ -35,14 +35,15 @@ void CCameraCinematical::Update( )
 		m_ZFar						= l_pCameraInfo->GetFarPlane();
 		m_ZNear						= l_pCameraInfo->GetNearPlane();
 		m_FovInRadians				= l_pCameraInfo->GetFOV();
-		#ifdef _DEBUG
+		//#ifdef _DEBUG
 		// The yaw is only calculated to draw the cinematic cameras frustum
 		Math::Vect3f d = m_LookAt- m_Position;
 		m_fYaw = Math::Utils::ATan2(d.z, d.x);
 		m_fPitch = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
+		//m_fRoll = 
 		//baseUtils::TraceVect3f("CameraPosition",m_Pos);
 		// baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
-		#endif
+		//#endif
 	}
 	else
 	{
