@@ -50,6 +50,7 @@ function load_gameplay()
 	g_PlayerCinematic:MakeTransform()
 	g_PlayerCinematic:SetRoomName( "sala1" )
 	g_PlayerCinematic:ExecuteActionLUA("anim_cinem_inicial_sala1", 0.2, 1)
+
 end
 
 function update_gameplay()
