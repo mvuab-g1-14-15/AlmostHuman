@@ -4,7 +4,12 @@
 #include "CameraInfo.h"
 #include "CameraKeyController.h"
 #include "Utils/BaseUtils.h"
+#include "Timer/CounTDownTimerManager.h"
+#include "EngineManagers.h"
+#include "Utils\StringUtils.h"
+#include "Utils\Defines.h"
 
+bool timer = false;
 CCameraCinematical::CCameraCinematical( CCameraKeyController *KeyController)
     : CCamera()
     , m_pKeyController(KeyController)
@@ -30,20 +35,31 @@ void CCameraCinematical::Update( )
 		m_ZFar						= l_pCameraInfo->GetFarPlane();
 		m_ZNear						= l_pCameraInfo->GetNearPlane();
 		m_FovInRadians				= l_pCameraInfo->GetFOV();
+		#ifdef _DEBUG
+		// The yaw is only calculated to draw the cinematic cameras frustum
+		Math::Vect3f d = m_LookAt- m_Position;
+		m_fYaw = Math::Utils::ATan2(d.z, d.x);
+		m_fPitch = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
+		//baseUtils::TraceVect3f("CameraPosition",m_Pos);
+		// baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
+		#endif
 	}
 	else
 	{
+		/*if(!timer)
+		{
+			TIMER_START();
+			timer = true;
+		}
+		else
+		{     
+			TIMER_STOP( "Ha tardado en hacerlo" );
+			timer = false;
+		}*/
 		m_pKeyController->SetCurrentTime(0);
 	}
 
-#ifdef _DEBUG
-    // The yaw is only calculated to draw the cinematic cameras frustum
-    Math::Vect3f d = m_LookAt- m_Position;
-    m_fYaw = Math::Utils::ATan2(d.z, d.x);
-    m_fPitch = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
-    //baseUtils::TraceVect3f("CameraPosition",m_Pos);
-    // baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
-#endif
+
 }
 
 Math::Vect3f CCameraCinematical::GetLookAt(void) const

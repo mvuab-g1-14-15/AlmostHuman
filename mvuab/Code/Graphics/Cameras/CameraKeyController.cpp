@@ -3,12 +3,13 @@
 #include "Logger\Logger.h"
 #include "CameraKey.h"
 #include "CameraInfo.h"
-
 #include "Timer/Timer.h"
 #include "Utils/BaseUtils.h"
+#include "Utils\StringUtils.h"
 #include "Math\LerpAnimator3D.h"
 #include "Math\Vector3.h"
 #include "Math\LerpAnimator1D.h"
+#include <sstream>
 
 CCameraKeyController::CCameraKeyController()
     :
@@ -224,7 +225,7 @@ void CCameraKeyController::PlayBackward()
 
     // Obtain the current key
     GetCurrentKeyBackward();
-
+	
     // Obtain the current camera info and the next one
     CCameraInfo l_CurrentCameraInfo = m_Keys[m_CurrentKey]->GetCameraInfo();
     CCameraInfo l_NextCameraInfo = m_Keys[m_NextKey]->GetCameraInfo();
@@ -252,7 +253,9 @@ void CCameraKeyController::PlayFoward()
 
     // Obtain the current key
     GetCurrentKeyForward();
-
+	/*std::string lCurrentKey = "";
+	StringUtils::Format( lCurrentKey,"%u", m_CurrentKey);
+	LOG_INFO_APPLICATION( "La key actual es %s!", lCurrentKey.c_str() );*/
     // Obtain the current camera info and the next one
     CCameraInfo l_CurrentCameraInfo = m_Keys[m_CurrentKey]->GetCameraInfo();
     CCameraInfo l_NextCameraInfo = m_Keys[m_NextKey]->GetCameraInfo();
@@ -277,6 +280,7 @@ void CCameraKeyController::PlayFoward()
             }
             else
             {
+				m_CurrentKey = 0;
                 m_CurrentTime = 0.0f;
             }
         }
