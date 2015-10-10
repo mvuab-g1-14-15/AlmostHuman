@@ -98,8 +98,11 @@
 			<IncludedEvents>
 				<Event Id="847470298" Name="Open_Close_Door_Event"/>
 				<Event Id="603937113" Name="Play_Alarm"/>
+				<Event Id="1558590687" Name="Play_C4_Explosion"/>
+				<Event Id="736447403" Name="Play_Countdown_Explosion"/>
 				<Event Id="2989601031" Name="Play_Crash_Metal_Grille"/>
 				<Event Id="2456271929" Name="Play_In_Out_Barrel"/>
+				<Event Id="2558030041" Name="Play_Plant_C4"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -111,6 +114,10 @@
 					<ShortName>enter_leave_barrel.wav</ShortName>
 					<Path>SFX\enter_leave_barrel_76A5D070.wem</Path>
 				</File>
+				<File Id="341974608" Language="SFX">
+					<ShortName>C4 Explosion.wav</ShortName>
+					<Path>SFX\C4 Explosion_E106FFBE.wem</Path>
+				</File>
 				<File Id="427511858" Language="SFX">
 					<ShortName>open_close_door.wav</ShortName>
 					<Path>SFX\open_close_door_76A5D070.wem</Path>
@@ -118,6 +125,14 @@
 				<File Id="709423413" Language="SFX">
 					<ShortName>alarm2.wav</ShortName>
 					<Path>SFX\alarm2_BADC626A.wem</Path>
+				</File>
+				<File Id="752427372" Language="SFX">
+					<ShortName>Countdown_Explosion.wav</ShortName>
+					<Path>SFX\Countdown_Explosion_E106FFBE.wem</Path>
+				</File>
+				<File Id="1064441044" Language="SFX">
+					<ShortName>Plant C4.wav</ShortName>
+					<Path>SFX\Plant C4_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -133,6 +148,7 @@
 				<Event Id="2855377483" Name="Logan_Footstep_Walk_Pavimento"/>
 				<Event Id="3876631393" Name="Play_Acumulator_Long_Shoot_Event"/>
 				<Event Id="4202206853" Name="Play_Long_Shoot_Event"/>
+				<Event Id="1958143393" Name="Play_Panting_Logan"/>
 				<Event Id="3668163621" Name="Play_Short_Shoot_Event"/>
 				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
 			</IncludedEvents>
@@ -164,6 +180,10 @@
 				<File Id="864427922" Language="SFX">
 					<ShortName>Logan Carga.wav</ShortName>
 					<Path>SFX\Logan Carga_DDC98EF4.wem</Path>
+				</File>
+				<File Id="866851989" Language="SFX">
+					<ShortName>panting(jadeo).wav</ShortName>
+					<Path>SFX\panting(jadeo)_951343B8.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -283,13 +303,13 @@
 					<ShortName>Drone Shoot.wav</ShortName>
 					<Path>SFX\Drone Shoot_E106FFBE.wem</Path>
 				</File>
+				<File Id="499018898" Language="SFX">
+					<ShortName>Drone Movement_loop.wav</ShortName>
+					<Path>SFX\Drone Movement_loop_76A5D070.wem</Path>
+				</File>
 				<File Id="803787533" Language="SFX">
 					<ShortName>Footstep_androide.wav</ShortName>
 					<Path>SFX\Footstep_androide_E106FFBE.wem</Path>
-				</File>
-				<File Id="815910077" Language="SFX">
-					<ShortName>Drone Movement.wav</ShortName>
-					<Path>SFX\Drone Movement_76A5D070.wem</Path>
 				</File>
 				<File Id="826784510" Language="SFX">
 					<ShortName>Metralleta 1.wav</ShortName>

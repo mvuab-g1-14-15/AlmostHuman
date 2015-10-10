@@ -38,10 +38,11 @@ function load_gameplay()
 	end
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
-	
-	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+
+	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
+
 	engine:Trace("Finish the load_gameplay()")
-	cinematic_manager:PlayCinematic("cinematica_inicial")
+	--cinematic_manager:PlayCinematic("cinematica_inicial")
 end
 
 function update_gameplay()
@@ -76,7 +77,7 @@ function update_gameplay()
 	end
 	
 	if action_manager:DoAction("Ambient_salaX") then
-		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient" )	
+		sound_manager:PlayEvent("Play_Ambient_Sala3", "Ambient" )	
 	end
 
 	if not (g_ConsoleActivate or g_CinematicActive) then

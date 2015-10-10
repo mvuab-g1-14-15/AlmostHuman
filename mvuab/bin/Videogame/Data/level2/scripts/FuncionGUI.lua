@@ -1,9 +1,10 @@
 function shoot()
-	sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+	sound_manager:PlayEvent( "Shoot", "Logan" )
 end
 
 function CargarJuego()
 engine:SetPlay(true)
+sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 gui_manager:ActiveWindows("HUD.xml")
 gui_manager:SetRenderPointer(false)
 cinematic_manager:StopCinematic("cinematica_inicial")

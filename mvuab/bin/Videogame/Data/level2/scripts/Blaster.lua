@@ -112,7 +112,7 @@ function CBlaster:Update()
 					self.TimePressed = self.MaxTimePressed
 				end
 				if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
-					sound_manager:PlayEvent( "Acumulator_Long_Shoot_Event", "TestGameObject2d" )
+					sound_manager:PlayEvent( "Play_Acumulator_Long_Shoot_Event", "Logan" )
 					if CurrentState ~= "charge_loop" then
 						--engine:Trace("Estado actual charge_loop")
 						g_Player:GetRenderableObject():ChangeAnimation("charge_loop", 0.5, 0)
@@ -126,10 +126,10 @@ function CBlaster:Update()
 		if action_manager:DoAction("ShootUp") then
 			if self.Energy > 1 then
 				if self.TimePressed < (self.MaxTimePressed * 0.1) then
-					sound_manager:PlayEvent( "Shoot", "TestGameObject2d" )
+					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
 				else
-					sound_manager:PlayEvent( "Shoot_Long_Shoot_Event", "TestGameObject2d" )
+					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
 					--engine:Trace("Tiempo pulsado: ".. tostring(self.TimePressed).." Energia consumida: "..tostring(self.TimePressed*self.Multiplicador))
 				end
