@@ -8,7 +8,6 @@
 #include "StaticMeshes\StaticMeshManager.h"
 #include "SceneRenderComands\SceneRendererCommandManager.h"
 #include "AnimatedModels\AnimatedModelsManager.h"
-#include "Particles\ParticleManager.h"
 #include "Particles\ParticleSystemManager.h"
 #include "Billboard\BillboardManager.h"
 #include "GUIManager.h"
@@ -56,8 +55,7 @@ void OnOptionAnimatedModelsClicked()
 //---------------------------------------------------------------------------------------------------------------
 void OnOptionParticlesClicked()
 {
-    ParticleSystemInstance->Refresh();
-    PSMan->Refresh();
+    PSManager->Refresh();
 }
 
 //---------------------------------------------------------------------------------------------------------------
@@ -174,6 +172,8 @@ void CProcess::ProcessReloads()
         OnOptionReloadGui();
     else if ( lAM->DoAction( "ReloadShaders" ) )
         OnOptionEffectsClicked();
+    else if ( lAM->DoAction( "ReloadParticles" ) )
+        OnOptionParticlesClicked();
 }
 
 void CProcess::ProcessKey()

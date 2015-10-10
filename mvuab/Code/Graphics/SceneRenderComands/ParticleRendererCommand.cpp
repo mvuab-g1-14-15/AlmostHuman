@@ -1,5 +1,5 @@
 #include "SceneRenderComands\ParticleRendererCommand.h"
-#include "Particles\ParticleManager.h"
+#include "Particles\ParticleSystemManager.h"
 #include "GraphicsManager.h"
 
 #include "EngineManagers.h"
@@ -10,5 +10,5 @@ CParticleRenderCommand::CParticleRenderCommand( CXMLTreeNode& atts ) : CSceneRen
 
 void CParticleRenderCommand::Execute( CGraphicsManager& GM )
 {
-    PSMan->Render();
+    PSManager->Render();
 }

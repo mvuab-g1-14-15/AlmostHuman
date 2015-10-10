@@ -17,10 +17,10 @@ class CPhysicController;
 class CAStarProcess : public CProcess
 {
 private:
-  CAStar*						m_pAStarScene;
-  Math::Vect3f					m_PointInicial;
-  Math::Vect3f					m_PointFinal;
-  std::vector<Math::Vect3f>		m_Path;
+  CAStar*                        m_pAStarScene;
+  Math::Vect3f                    m_PointInicial;
+  Math::Vect3f                    m_PointFinal;
+  std::vector<Math::Vect3f>        m_Path;
   std::vector<CPhysicActor*>    m_vPA;
   std::vector<CPhysicUserData*> m_vPUD;
   CPhysicController*            m_PhysicController;

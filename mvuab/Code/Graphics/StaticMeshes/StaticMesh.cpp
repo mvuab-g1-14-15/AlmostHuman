@@ -266,12 +266,13 @@ void CStaticMesh::Render( CGraphicsManager* GM )
     {
         for(unsigned int j = 0; j < m_Textures[i].size(); ++j) { m_Textures[i][j]->Activate(j); }
 
-        if (i < m_RenderableObjectTechniques.size() && m_RenderableObjectTechniques[i] != NULL)
+        if (i < m_RenderableObjectTechniques.size() && m_RenderableObjectTechniques[i] != NULL && GM->GetUseTechniques())
 		{
 			m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
 		}
         else
 		{
+            m_RVs[i]->Render( GM );
 			LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
 		}
     }

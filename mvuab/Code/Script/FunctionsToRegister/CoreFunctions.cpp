@@ -25,7 +25,6 @@
 #include "Characters\Enemies\EnemyManager.h"
 #include "Gizmos\GizmosManager.h"
 #include "EngineManagers.h"
-#include "Particles\ParticleManager.h"
 #include "WWSoundManager.h"
 #include "GUIManager.h"
 #include "Timer/CountDownTimerManager.h"
@@ -83,11 +82,6 @@ CTriggerManager* GetTriggerManager()
 CGizmosManager* GetGizmosManager()
 {
   return GizmosMInstance;
-}
-
-CParticleManager* GetParticleManager()
-{
-  return PSMan;
 }
 
 CWWSoundManager* GetSoundManager()
@@ -167,6 +161,8 @@ void registerManagers( lua_State* aLuaState )
   LUA_DECLARE_CLASS( CEngineManagers )
   LUA_DECLARE_METHOD( CEngineManagers, GetManagersPath )
   LUA_DECLARE_METHOD( CEngineManagers, SetManagersPath )
+  LUA_DECLARE_METHOD( CEngineManagers, GetbGamePause )
+  LUA_DECLARE_METHOD( CEngineManagers, SetbGamePause )
   LUA_BEGIN_SCOPE
   LUA_DECLARE_METHOD_SCOPE( CEngineManagers, GetSingletonPtr )
   LUA_END_SCOPE
@@ -202,10 +198,6 @@ void registerManagers( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( GetGizmosManager )
-  LUA_END_DECLARATION
-
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleManager )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

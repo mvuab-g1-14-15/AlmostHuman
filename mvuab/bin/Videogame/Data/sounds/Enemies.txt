@@ -14,8 +14,8 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	17079506	footstep_boss_right	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_right_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_right		6902
 	297188304	footstep_boss_left	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_left_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_left		6700
 	378953843	Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Shoot_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Shoot		5197
+	499018898	Movimiento	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Movement_loop_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Movimiento		2437916
 	803787533	Footstep_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Footstep_androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Footstep_Androide		7568
-	815910077	Movimiento	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Movement_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Movimiento		873064
 	826784510	Shoot Boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Metralleta 1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss		31398
 	848849463	Shoot_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo Androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Shoot_Androide		4218
 	940048716	Boss Impact	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss_Impact_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Boss Impact		6587

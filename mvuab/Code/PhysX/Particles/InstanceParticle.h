@@ -4,20 +4,15 @@
 #include "XML\XMLTreeNode.h"
 #include "Object3D.h"
 
-class CParticleSystemCore;
-
-class CInstanceParticle : public CObject3D
+class CParticleInstance : public CObject3D
 {
 private:
-	CParticleSystemCore* mCore;
-	bool mActive;
+    bool mActive;
 
 public:
-  CInstanceParticle( const CXMLTreeNode& atts );
-  ~CInstanceParticle();
-
-  void Update(){};
-  void Render();
+  CParticleInstance( const CXMLTreeNode& atts );
+  ~CParticleInstance();
+  bool IsActive() const { return mActive; }
 };
 
 #endif //_INSTANCE_PARTICLE_H

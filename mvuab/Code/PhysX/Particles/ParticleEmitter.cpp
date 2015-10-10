@@ -115,6 +115,10 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
       mRandomInitialAngle = lSubNode.GetAttribute<bool>( "random_initial_angle"  , false );
       mEmissionTime       = lSubNode.GetAttribute<float32>( "emission_time"  , 0.0f );
       mCubicSize          = lSubNode.GetAttribute < Math::Vect3f > ( "cubic_size"  , Math::Vect3f() );
+      mAngleStep          = lSubNode.GetAttribute<float32>( "angle_step", 0 );
+      mCurrentAngle       = 0.0;
+      mRadiusMin          = lSubNode.GetAttribute<float32>( "radius_min", 0 );
+      mRadiusMax          = lSubNode.GetAttribute<float32>( "radius_max", 0 );
     }
   }
 
@@ -217,7 +221,7 @@ void CParticleEmitter::EmitParticles( )
           mParticlesPositions[i] = mSpawnFn( this );
 
           mParticlesRadialSpeed[i] = baseUtils::RandRange( mMotion.mRadialSpeed.x, mMotion.mRadialSpeed.y );
-          mParticlesAngles[i] = ( mRandomInitialAngle ) ? RandRange( 0.0f, 360.0f ) : 0.0f;
+          mParticlesAngles[i] = ( mRandomInitialAngle ) ? RandRange( 0.0f, 360.0f ) : 0.01f;
 
           mParticlesFlipUVHorizontal[i] = (mTexture.mFlipUVHorizontal) ? baseUtils::RandomBool() : false;
           mParticlesFlipUVVertical[i]  = (mTexture.mFlipUVVertical)   ? baseUtils::RandomBool() : false;

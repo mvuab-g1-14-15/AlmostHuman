@@ -17,16 +17,11 @@
 #include "Reports\PhysicTriggerReport.h"
 #include "Utils\PhysicUserAllocator.h"
 #include "Utils\PhysicUserData.h"
-//#include "Particles\SphereEmitter.h"
-#include "Particles\ParticleManager.h"
-////--------------------------------
 
 #include "Utils\Defines.h"
 #include "Timer\Timer.h"
 #include "GraphicsManager.h"
-//#include "Utils\Exception.h"
 #include "Logger\Logger.h"
-////#include "Utils\Base.h"
 #include "EngineManagers.h"
 
 #if defined(_DEBUG)
