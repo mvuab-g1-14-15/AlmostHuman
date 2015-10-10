@@ -50,8 +50,8 @@ function CEnemyManagerLUA:Load(filename)
         end
     end
 	
-	self.AStar[ "room2" ] = CAStar( "room2" )
-	self.AStar[ "room3" ] = CAStar( "room3" )
+	self.AStar[ "sala2" ] = CAStar( "sala2" )
+	self.AStar[ "sala3" ] = CAStar( "sala3" )
 end
 
 function CEnemyManagerLUA:Update()

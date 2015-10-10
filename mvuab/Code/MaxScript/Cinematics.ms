@@ -87,7 +87,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
 									
 									if (classof EachCamera == freecamera) then
-										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" (EachCamera.pos + EachCamera.dir)
+										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" (EachCamera.pos - EachCamera.dir)
 									
 								
 									l_NewCameraKeyTagNode.AddAttributeAsString "fov" fov
@@ -107,17 +107,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 
 					l_NewFixedCameraNode.AddAttributeAsString "name" EachCamera.name
 					l_NewFixedCameraNode.AddAttributeCoordinate "pos" EachCamera.Pos
-					
-					if (classof EachCamera == targetcamera) then
-						l_NewFixedCameraNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
-									
-					if (classof EachCamera == freecamera) then
-						l_NewFixedCameraNode.AddAttributeCoordinate "look_at" (EachCamera.pos + EachCamera.dir)
-					
+					l_NewFixedCameraNode.AddAttributeCoordinate "look_at" EachCamera.Target.Pos
 					l_NewFixedCameraNode.AddAttributeAsString "fov" fov
 					l_NewFixedCameraNode.AddAttributeAsString "near_plane" nearclip
 					l_NewFixedCameraNode.AddAttributeAsString "far_plane" farclip
-				)		
+				)			
 			)
 		)
 	--)

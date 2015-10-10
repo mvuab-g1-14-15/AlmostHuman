@@ -34,10 +34,10 @@ public:
 
 public:
   Math::Vect3f                mCubicSize;
-  uint32                      mAngleStep;
-  uint32                      mCurrentAngle;
-  uint32                      mRadiusMin;
-  uint32                      mRadiusMax;
+  float32                      mAngleStep;
+  float32                      mCurrentAngle;
+  float32                      mRadiusMin;
+  float32                      mRadiusMax;
 
 private:
   float*                        mParticlesLifeTime;
