@@ -11,7 +11,6 @@
 
 #include <sstream>
 
-#include "Particles\ParticleManager.h"
 #include "Particles\ParticleEmitter.h"
 
 #include "EngineManagers.h"

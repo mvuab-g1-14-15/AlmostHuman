@@ -2,6 +2,11 @@
 #include "EngineConfig.h"
 #include "Timer\Timer.h"
 #include "Emitters\EmitterFactory.h"
+#include "InstanceParticle.h"
+#include <boost\foreach.hpp>
+#include "Utils\Defines.h"
+#include "GraphicsManager.h"
+#include "EngineManagers.h"
 
 CParticleSystemCore::CParticleSystemCore()
 {
@@ -13,41 +18,68 @@ CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFact
     {
         const CXMLTreeNode& lCurrentEmitter = atts( i );
         const std::string& lNameParticle  = lCurrentEmitter.GetAttribute<std::string>( "name", "" );
-
-        CParticleEmitter* lEmitter = aEmitterFactory->CreateEmitter( lCurrentEmitter.GetName(), lCurrentEmitter );
-        ASSERT( lEmitter, "Null Emitter" );
-
-        if ( !lEmitter || !AddResource( lEmitter->GetName(), lEmitter ) )
-        {
-            CHECKED_DELETE( lEmitter );
-        }
+        AddEmitter( aEmitterFactory->CreateEmitter( lCurrentEmitter.GetName(), lCurrentEmitter ));
     }
 }
 
 CParticleSystemCore::~CParticleSystemCore()
 {
-    Destroy();
+    BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+    {
+        CHECKED_DELETE( lParticleEmitter );
+    }
+
+    BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
+    {
+        CHECKED_DELETE( lParticleInstance );
+    }
 }
 
 void CParticleSystemCore::Update()
 {
-    CParticleEmitter* lParticleEmitter;
-    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
+    float dt = deltaTimeMacro;
+    BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
     {
-        lParticleEmitter = GetResourceById( i );
-        lParticleEmitter->Update(deltaTimeMacro);
+        lParticleEmitter->Update(dt);
     }
 }
 
 void CParticleSystemCore::Render()
 {
-    for ( uint32 i = 0, lParticles = GetResourcesCount(); i < lParticles; ++i )
+    CGraphicsManager* lGM = GraphicsInstance;
+
+    BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
     {
-        GetResourceById( i )->Render();
+        if( lParticleInstance->IsActive() )
+        {
+            lGM->SetTransform( lParticleInstance->GetTransform() );
+            BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+            {
+                lParticleEmitter->Render();
+            }
+        }
     }
+
+    // Set the indentity
+    lGM->SetTransform( Math::Mat44f() );
 }
 
 void CParticleSystemCore::Refresh()
 {
-    Destroy();
+}
+
+void CParticleSystemCore::AddInstance( CParticleInstance* aInstance )
+{
+    if( aInstance )
+        mInstances.push_back(aInstance);
+    else
+        LOG_ERROR_APPLICATION("Adding a null instance to the core");
+}
+
+void CParticleSystemCore::AddEmitter( CParticleEmitter* aEmitter )
+{
+    if( aEmitter )
+        mEmitters.push_back( aEmitter );
+    else
+        LOG_ERROR_APPLICATION("Adding a null emitter to the core");
 }

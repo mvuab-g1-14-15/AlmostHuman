@@ -31,7 +31,7 @@ class CPlayerPhysicProcess : public CProcess, public CPhysicTriggerReport
         CPhysicController*            m_PhysicController;
         //CBillboard*                   m_Billboard;
         //CCharacter*               m_Character;
-		bool					m_ConsoleActivate;
+        bool                    m_ConsoleActivate;
     public:
         CPlayerPhysicProcess();
         virtual ~CPlayerPhysicProcess();
@@ -55,12 +55,12 @@ class CPlayerPhysicProcess : public CProcess, public CPhysicTriggerReport
 
         void InitSceneCharacterController();
 
-		void    OnEnter( CPhysicUserData* _Entity_Trigger1,
+        void    OnEnter( CPhysicUserData* _Entity_Trigger1,
                    CPhysicUserData* _Other_Shape );
-		void    OnLeave( CPhysicUserData* _Entity_Trigger1,
-						CPhysicUserData* _Other_Shape );
-		void    OnStay( CPhysicUserData* _Entity_Trigger1,
-						CPhysicUserData* _Other_Shape );
+        void    OnLeave( CPhysicUserData* _Entity_Trigger1,
+                        CPhysicUserData* _Other_Shape );
+        void    OnStay( CPhysicUserData* _Entity_Trigger1,
+                        CPhysicUserData* _Other_Shape );
 
 
 };
