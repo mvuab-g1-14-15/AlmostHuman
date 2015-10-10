@@ -64,37 +64,37 @@
 	<core_enemy type="drone" life="40" damage="0.5" time_to_respawn="1.0" time_to_shoot="0.5" shoot_accuracy="0.35" state_machine_name="droneMachine" state_machine_file="Data/enemies/AI-drone.xml"/>
 	<core_enemy type="boss" life="250" damage="10" time_to_respawn="0.0" time_to_shoot="3.0" shoot_accuracy="0.75" state_machine_name="bossMachine" state_machine_file="Data/enemies/AI-boss.xml"/>
 
-	<!--<enemy name="Boss" room="room3" type="patroll" route="1" pos="83.37 21.40 21.61" yaw="0.0" scale="0.2 0.2 0.2" mesh="boss" get_position_script="get_enemy_position" 
+	<!--<enemy name="Boss" room="sala3" type="patroll" route="1" pos="83.37 21.40 21.61" yaw="0.0" scale="0.2 0.2 0.2" mesh="boss" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
 	
 	
-	<!--<enemy name="Enemy1" room="room2" type="patroll" route="1" route_alarm="5" state="inicial" pos="75.4508 -16.5334 -76.6861" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<!--<enemy name="Enemy1" room="sala2" type="patroll" route="1" route_alarm="5" state="inicial" pos="75.4508 -16.5334 -76.6861" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy2" room="room2" type="patroll" route="2" route_alarm="5" state="inicial" pos="77.5906 -16.5334 -76.7094" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy2" room="sala2" type="patroll" route="2" route_alarm="5" state="inicial" pos="77.5906 -16.5334 -76.7094" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
-	<enemy name="Enemy3" room="room2" type="patroll" route="3" route_alarm="5" state="inicial" pos="56.1998 -16.5334 -52.8975" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy3" room="sala2" type="patroll" route="3" route_alarm="5" state="inicial" pos="56.1998 -16.5334 -52.8975" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy4" room="room2" type="easy" route="4" route_alarm="5" state="inicial" pos="63.044 -16.5334 -86.1066" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy4" room="sala2" type="easy" route="4" route_alarm="5" state="inicial" pos="63.044 -16.5334 -86.1066" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png" on_dead_code="local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName); closeEnemy:SetSuspected(true); closeEnemy:SetSuspectedPosition(lPos);engine:Trace('Executing enemy dead script');"/>
 	 <!--
-	<enemy name="Enemy5" room="room3" type="easy" route="1" route_alarm="8" state="idle" pos="80.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy5" room="sala3" type="easy" route="1" route_alarm="8" state="idle" pos="80.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy6" room="room3" type="easy" route="2" route_alarm="8" state="idle" pos="86.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy6" room="sala3" type="easy" route="2" route_alarm="8" state="idle" pos="86.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Enemy7" room="room3" type="easy" route="3" route_alarm="8" state="idle" pos="86.7825 21.4127 41.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<enemy name="Enemy7" room="sala3" type="easy" route="3" route_alarm="8" state="idle" pos="86.7825 21.4127 41.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
-	<!--<enemy name="Drone1" room="room3" type="drone" route="9" route_alarm="1" pos="45.0822 -11.4762 57.0066" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
+	<!--<enemy name="Drone1" room="sala3" type="drone" route="9" route_alarm="1" pos="45.0822 -11.4762 57.0066" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-	<enemy name="Drone2" room="room3" type="drone" route="10" route_alarm="1" pos="22.2774 -11.4762 16.8658" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
+	<enemy name="Drone2" room="sala3" type="drone" route="10" route_alarm="1" pos="22.2774 -11.4762 16.8658" yaw="0.0" mesh="drone" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>-->
 	<!--<enemy name="Drone2" type="drone" route="4" pos="73.7825 -16.4127 -43.6002" yaw="0.0" mesh="drone"/>-->
 	
-	<extra_enemy name="room2">
-		<enemy name="Room2Enemy1" room="room2" type="easy" pos="49.4086 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+	<extra_enemy name="sala2">
+		<enemy name="sala2Enemy1" room="sala2" type="easy" pos="49.4086 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 		 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-		<enemy name="Room2Enemy2" room="room2" type="easy" pos="52.9753 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+		<enemy name="sala2Enemy2" room="sala2" type="easy" pos="52.9753 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 		 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
-		<enemy name="Room2Enemy3" room="room2" type="easy" pos="56.4248 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
+		<enemy name="sala2Enemy3" room="sala2" type="easy" pos="56.4248 -16.5334 -25.4399" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 		 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
 	</extra_enemy>
 </enemies>
