@@ -237,16 +237,19 @@ void registerGizmos( lua_State* aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CGizmoElement, CObject3D )
   LUA_DECLARE_CTOR_5( CGizmoElement::EGizmoElementType, float, Math::Vect3f, float, float )
   LUA_END_DECLARATION
+
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS2( CGizmo, CObject3D, CName )
   LUA_DECLARE_CTOR_4( std::string, Math::Vect3f, float, float )
   LUA_DECLARE_METHOD( CGizmo, AddElement )
   LUA_END_DECLARATION
+
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CGizmo> )
   LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, GetResource )
   LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CGizmo>, AddResource )
   LUA_END_DECLARATION
+
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CGizmosManager, CTemplatedVectorMapManager<CGizmo> )
   LUA_DECLARE_METHOD( CGizmosManager, CreateGizmoElement )

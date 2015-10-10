@@ -20,6 +20,12 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	self.Suspected = false
 	self.SuspectedPosition = Vect3f(0.0)
 	
+	--self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", Vect3f(0.0), 0.0, 0.0)
+	--local lGizmoElement = gizmos_manager:CreateGizmoElement(1, 0.05, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
+	--self.Gizmo:AddElement( lGizmoElement )
+	--gizmos_manager:AddResource( self.Name.."TargetPos", self.Gizmo )
+	self.GizmoPosition = Vect3f(0.0)
+	
 	self.ShootSpeed = 50.0
 	self.Velocity = 2.0
 	self.Delta = 0.5
@@ -84,6 +90,20 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	--engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
+function CEnemyLUA:MakeGizmo()
+	local lGizmoName = self.Name.."TargetPos"
+	local Gizmo = gizmos_manager:GetResource(lGizmoName)
+	if Gizmo == nil then
+		Gizmo = gizmos_manager:CreateGizmo(lGizmoName, self.GizmoPosition, 0.0, 0.0)
+		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.05, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
+		Gizmo:AddElement(GizmoElement)
+		gizmos_manager:AddResource(lGizmoName, Gizmo)
+	else
+		Gizmo:SetPosition(self.GizmoPosition)
+	end
+	Gizmo:MakeTransform()
+end
+
 function CEnemyLUA:Destroy()
 	if self.OnDead then
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString().."; local selfName = '"..self:GetName().."'; "..self.OnDeadCode
@@ -101,6 +121,7 @@ function CEnemyLUA:Update()
 	self.Brain:Update()
 	self:UpdateCamera()
 	self:CheckHurting()
+	self:MakeGizmo()
 end
 
 function CEnemyLUA:UpdateCamera()
@@ -277,6 +298,9 @@ function CEnemyLUA:MoveToPos( aPos )
     lTargetPos = lPos
     lTargetPos.y = 0
 	lWaypointPos = self.Path:GetResource(self.ActualPathPoint)
+	--self.Gizmo:SetPosition( lWaypointPos )
+	--self.Gizmo:MakeTransform()
+	self.GizmoPosition = lWaypointPos
 	lWaypointPos.y = 0.0
     lDist = lTargetPos:Distance( lWaypointPos )
 	
@@ -327,6 +351,9 @@ function CEnemyLUA:MoveToPlayer(PositionPlayer)
     lTargetPos = lPos
     lTargetPos.y = 0
 	lWaypointPos = self.Path:GetResource(self.ActualPathPoint)
+	--self.Gizmo:SetPosition( lWaypointPos )
+	--self.Gizmo:MakeTransform()
+	self.GizmoPosition = lWaypointPos
 	lWaypointPos.y = 0.0
     lDist = lTargetPos:Distance( lWaypointPos )
 	
@@ -359,6 +386,9 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
 	else		
 		FinalPos = PositionPlayer
 	end
+	--self.Gizmo:SetPosition( FinalPos )
+	--self.Gizmo:MakeTransform()
+	self.GizmoPosition = FinalPos
 	FinalPos.y = 0
 	ActualPos.y = 0
 	local Dir = FinalPos - ActualPos	

@@ -4,6 +4,7 @@
 
 #include "Cameras\Camera.h"
 #include "PhysicsDefs.h"
+#include "Gizmos\GizmoElement.h"
 
 using namespace luabind;
 
@@ -39,5 +40,9 @@ void registerEnum( lua_State* m_LS )
   add_enum_to_lua( m_LS, "EControleType",
                    "BOX", BOX,
                    "CAPSULE", CAPSULE, 0 );
+
+  add_enum_to_lua( m_LS, "EGizmoElementType",
+                    "eCube", CGizmoElement::eCube,
+                    "eSphere", CGizmoElement::eSphere, 0 );
 
 }

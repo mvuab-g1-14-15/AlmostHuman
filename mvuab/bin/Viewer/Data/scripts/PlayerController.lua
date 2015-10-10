@@ -203,6 +203,7 @@ function CPlayerController:MakeGizmo()
 	else
 		Gizmo:SetPosition(self.Position)
 	end
+	Gizmo:MakeTransform()
 end
 
 function CPlayerController:SetPosition(position)
