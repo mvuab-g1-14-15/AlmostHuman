@@ -90,20 +90,6 @@ function CEnemyLUA:__init(Node, state_machine, core_enemy)
 	--engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 end
 
-function CEnemyLUA:MakeGizmo()
-	local lGizmoName = self.Name.."TargetPos"
-	local Gizmo = gizmos_manager:GetResource(lGizmoName)
-	if Gizmo == nil then
-		Gizmo = gizmos_manager:CreateGizmo(lGizmoName, self.GizmoPosition, 0.0, 0.0)
-		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.05, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
-		Gizmo:AddElement(GizmoElement)
-		gizmos_manager:AddResource(lGizmoName, Gizmo)
-	else
-		Gizmo:SetPosition(self.GizmoPosition)
-	end
-	Gizmo:MakeTransform()
-end
-
 function CEnemyLUA:Destroy()
 	if self.OnDead then
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString().."; local selfName = '"..self:GetName().."'; "..self.OnDeadCode
@@ -122,6 +108,21 @@ function CEnemyLUA:Update()
 	self:UpdateCamera()
 	self:CheckHurting()
 	self:MakeGizmo()
+end
+
+function CEnemyLUA:MakeGizmo()
+	local lGizmoName = self.Name.."TargetPos"
+	local Gizmo = gizmos_manager:GetResource(lGizmoName)
+	if Gizmo == nil then
+		Gizmo = gizmos_manager:CreateGizmo(lGizmoName, self.GizmoPosition, 0.0, 0.0)
+		local GizmoElement = gizmos_manager:CreateGizmoElement(1, 0.25, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
+		Gizmo:AddElement(GizmoElement)
+		gizmos_manager:AddResource(lGizmoName, Gizmo)
+	else
+		self.GizmoPosition.y = self.CharacterController:GetPosition().y - self.Height/2
+		Gizmo:SetPosition(self.GizmoPosition)
+	end
+	Gizmo:MakeTransform()
 end
 
 function CEnemyLUA:UpdateCamera()
@@ -389,6 +390,7 @@ function CEnemyLUA:MoveToWaypoint(PositionPlayer)
 	--self.Gizmo:SetPosition( FinalPos )
 	--self.Gizmo:MakeTransform()
 	self.GizmoPosition = FinalPos
+	local lPosGizmo = self.CharacterController:GetPosition()
 	FinalPos.y = 0
 	ActualPos.y = 0
 	local Dir = FinalPos - ActualPos	
