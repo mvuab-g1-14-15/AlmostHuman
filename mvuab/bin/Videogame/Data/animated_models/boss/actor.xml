@@ -1,8 +1,9 @@
 <animated_model name="boss">
-	<texture file="boss_compo.jpg"/>
-	<skeleton file="boss.csf"/>
-	<mesh file="boss.cmf"/>
+	<texture file="final_boss_compo.jpg"/>
+	<skeleton file="final_boss.csf"/>
+	<mesh file="final_boss.cmf"/>
 	<animation name="hurt" file="hurt.caf"/>
 	<animation name="atacar" file="shoot.caf"/>
 	<animation name="andando" file="walk.caf"/>
+	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>	
 </animated_model>

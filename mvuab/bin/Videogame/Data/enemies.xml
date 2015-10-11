@@ -12,5 +12,6 @@
 	<enemy name="Enemy6" type="patrol" pos="35.0 2.0 3.0" yaw="0.0"/>
 	<enemy name="Enemy7" type="patrol" pos="25.0 2.0 3.0" yaw="0.0"/>
 	<enemy name="Enemy8" type="patrol" pos="15.0 2.0 3.0" yaw="0.0"/>
-	<enemy name="Enemy9" type="boss" pos="50.0 12.0 -33.0" yaw="0.0"/>
+	<enemy name="Enemy9" type="boss" pos="-152.77 31.50 61.55" yaw="0.0"/>
+
 </enemies>
