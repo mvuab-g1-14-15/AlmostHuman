@@ -45,49 +45,41 @@ CCameraKeyController::CCameraKeyController(CXMLTreeNode &atts)
 
 bool CCameraKeyController::LoadXML(const std::string &FileName)
 {
+    bool lOk = false;
     // Obtain the filename
     m_FileName = FileName;
 
     // Check if the file exist
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_FileName.c_str()))
+    CXMLTreeNode newFile, l_Node;
+    if (!newFile.LoadAndFindNode(m_FileName.c_str(), "camera_key_controller", l_Node ))
     {
-        LOG_ERROR_APPLICATION("CCameraKeyController::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-        return false;
-    }
+        SetName( l_Node.GetAttribute<std::string>("name", "no_name") );
+        m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
+        m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
+        m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
 
-    // Parse the file and search for the key's
-    CXMLTreeNode l_Node = newFile["camera_key_controller"];
-    if(!l_Node.Exists())
-    {
-        LOG_ERROR_APPLICATION( "CCameraKeyController::Load Tag \"%s\" no existe", "camera_key_controller");
-        return false;
-    }
-
-    SetName( l_Node.GetAttribute<std::string>("name", "no_name") );
-    m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
-    m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
-    m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
-
-    for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; i++)
-    {
-        const CXMLTreeNode &l_CurrentNode = l_Node(i);
-        const std::string &l_TagName = l_CurrentNode.GetName();
-
-        if( l_TagName == "key" )
+        for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; i++)
         {
-            float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
-            m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
+            const CXMLTreeNode &l_CurrentNode = l_Node(i);
+            const std::string &l_TagName = l_CurrentNode.GetName();
+
+            if( l_TagName == "key" )
+            {
+                float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
+                m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
+            }
         }
+
+        //Check that there are more than one key, in order to set the next key to 0
+        if(m_Keys.size() == 1 )
+        {
+            m_NextKey = 0;
+        }
+        lOk = true;
     }
 
-    //Check that there are more than one key, in order to set the next key to 0
-    if(m_Keys.size() == 1 )
-    {
-        m_NextKey = 0;
-    }
 
-    return true;
+    return lOk;
 }
 
 bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)

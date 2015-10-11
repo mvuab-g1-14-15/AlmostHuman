@@ -89,6 +89,8 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 									if (classof EachCamera == freecamera) then
 										l_NewCameraKeyTagNode.AddAttributeCoordinate "look_at" (EachCamera.pos - EachCamera.dir)
 									
+									local lUpVector = EachCamera.transform[2]
+									l_NewCameraKeyTagNode.AddAttributeCoordinate "up_vector" (lUpVector)
 								
 									l_NewCameraKeyTagNode.AddAttributeAsString "fov" fov
 									l_NewCameraKeyTagNode.AddAttributeAsString "near_plane" nearclip

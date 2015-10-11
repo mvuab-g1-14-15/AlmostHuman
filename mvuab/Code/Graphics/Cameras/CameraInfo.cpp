@@ -20,7 +20,6 @@ CCameraInfo::CCameraInfo(const Math::Vect3f &Eye, const Math::Vect3f &LookAt, co
       m_LookAt(LookAt),
       m_Up(Up)
 {
-
 }
 
 CCameraInfo::CCameraInfo(const CXMLTreeNode &attribs)
@@ -29,6 +28,6 @@ CCameraInfo::CCameraInfo(const CXMLTreeNode &attribs)
       m_FOV(Math::Utils::Deg2Rad(attribs.GetAttribute<float>("fov", Math::half_pi32))),
       m_Eye(attribs.GetAttribute<Math::Vect3f>("pos", Math::Vect3f(1.0f, 0.0f, 0.0f))),
       m_LookAt(attribs.GetAttribute<Math::Vect3f>("look_at", Math::Vect3f(0.0f, 0.0f, 0.0f))),
-      m_Up(Math::Vect3f(0.0f, 1.0f, 0.0f))
+      m_Up(attribs.GetAttribute<Math::Vect3f>("up_vector", Math::Vect3f(0.0f, 0.0f, 0.0f)))
 {
 }

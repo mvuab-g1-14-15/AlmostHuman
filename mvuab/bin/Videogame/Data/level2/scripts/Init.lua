@@ -19,10 +19,10 @@ g_PlayerCinematic = nil
 function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
-	--scene:ActivateRoom("sala1")
+	scene:ActivateRoom("sala1")
 	--scene:ActivateRoom("pasillo")
-	scene:ActivateRoom("sala4")
-	scene:ActivateRoom("sala2")
+	--scene:ActivateRoom("sala4")
+	--scene:ActivateRoom("sala2")
 	--scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
