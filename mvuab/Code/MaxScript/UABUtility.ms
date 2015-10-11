@@ -115,7 +115,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		IsEmptyDestPath PathLabel.text
 		
 		CinematicsDir = PathLabel.text + "\\cinematics.xml"
-		nFrames = 5
+		nFrames = 1
 		
 		ExportCinematicObjects nFrames CinematicsDir
 	)
@@ -124,7 +124,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 		IsEmptyDestPath PathLabel.text
 		
 		cameraDir = PathLabel.text + "\\camera.xml"
-		nFrames = 5
+		nFrames = 1
 		isCycle = 1
 		isReverse = 0
 		
