@@ -50,7 +50,10 @@ bool CTriggerManager::LoadXML( const std::string& FileName )
             if ( l_TagName == "trigger" )
             {
                 CTrigger* l_Trigger = new CTrigger( m( i ) );
-                AddResource( l_Trigger->GetName(), l_Trigger );
+                if(!AddResource(l_Trigger->GetName(), l_Trigger))
+                {
+                    CHECKED_DELETE(l_Trigger);
+                }
             }
         }
     }
@@ -97,7 +100,10 @@ void CTriggerManager::ReleaseTrigger(const std::string& _trigger)
 
 void CTriggerManager::AddTrigger(CTrigger* lTrigger)
 {
-  AddResource(lTrigger->GetName(), lTrigger);
+  if(!AddResource(lTrigger->GetName(), lTrigger))
+  {
+      CHECKED_DELETE(lTrigger);
+  }
 }
 
 std::vector<CTrigger*> CTriggerManager::GetTriggersVector()
