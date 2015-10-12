@@ -27,6 +27,8 @@
 
 #include "VideoPlayer.h"
 
+#include "Brofiler.h"
+
 #if _DEBUG
     #include "Memory\MemLeaks.h"
 #endif
@@ -190,6 +192,7 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
             }
             else
             {
+                BROFILER_FRAME("Main")
                 pEngine->Execute();
             }
         }
