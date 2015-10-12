@@ -170,7 +170,7 @@ void CTrigger::Destroy()
 {
     // CPhysicsManager* l_PM = PhysXMInstance;
     // l_PM->ReleasePhysicActor( m_PhysicUserData->GetActor() );
-    CHECKED_DELETE( m_PhysicActor );
+    //CHECKED_DELETE( m_PhysicActor );
     CHECKED_DELETE( m_PhysicUserData );
     CHECKED_DELETE( mShape);
 }
