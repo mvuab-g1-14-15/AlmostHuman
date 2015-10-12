@@ -27,26 +27,6 @@ sampler LUTTexture : register (s1)=sampler_state
 	AddressV = Clamp;
 };
 
-sampler S0LinearClampSampler : register (s0)=sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	
-	AddressU = Clamp;
-	AddressV = Clamp;
-};
-
-sampler S1LinearClampSampler : register (s1)=sampler_state
-{ 
-	MipFilter = LINEAR; 
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	
-	AddressU = Clamp;
-	AddressV = Clamp;
-};
-
 sampler S1PointSampler : register (s1)=sampler_state
 { 
 	MipFilter = POINT; 
@@ -354,5 +334,133 @@ sampler LightProbeSampler : register( s6 ) = sampler_state
     MipFilter = Point;
     AddressU = Clamp;
     AddressV = Clamp;
+};
+
+sampler S0LinearWrapSampler:register(s0) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S1LinearWrapSampler:register(s1) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S2LinearWrapSampler:register(s2) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S3LinearWrapSampler:register(s3) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S4LinearWrapSampler:register(s4) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S5LinearWrapSampler:register(s5) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S6LinearWrapSampler:register(s6) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S7LinearWrapSampler:register(s7) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+sampler S0LinearClampSampler:register(s0) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S1LinearClampSampler:register(s1) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S2LinearClampSampler:register(s2) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S3LinearClampSampler:register(s3) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S4LinearClampSampler:register(s4) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S5LinearClampSampler:register(s5) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S6LinearClampSampler:register(s6) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+sampler S7LinearClampSampler:register(s7) = sampler_state {
+	MinFilter = Linear;
+	MagFilter = Linear;
+	MipFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
 };
 #endif // !defined( SAMPLERS_FXH )

@@ -38,7 +38,8 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mAlpha            = atts.GetAttribute<float>( "alpha"             , 1.0f  );
     mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal", false );
     mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"  , false );
-    mUseTick          = atts.GetAttribute<bool> ( "use_tick"  , false );
+    mUseTick          = atts.GetAttribute<bool> ( "use_tick"          , false );
+    mUseDeltaTime     = atts.GetAttribute<bool> ( "use_delta_time"    , false );
     mTick             = float( (rand() % 100 + 1) / 10);
 
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i<lCount; ++i)
@@ -71,7 +72,7 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
       lEffect->SetAlpha( mAlpha );
       lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
       
-      if( mUseTick )
+      if( mUseTick || mUseDeltaTime )
           lEffect->SetDeltaTime( mTick );
 
       mInstances[i]->Render(aRV, aGM, mTechnique );
@@ -98,7 +99,15 @@ void CBillboardCore::Flush()
 
 void CBillboardCore::Update()
 {
-    mTick += 0.05f * deltaTimeMacro;
-    if (mTick >= 1000.f)
-        mTick = 0.f;
+    if( mUseTick )
+    {
+        mTick += deltaTimeMacro;
+        if (mTick >= 100.f)
+            mTick = 0.f;
+    }
+    else
+    {
+        mTick = deltaTimeMacro;
+    }
+    
 }

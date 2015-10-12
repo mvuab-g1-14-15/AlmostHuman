@@ -27,6 +27,10 @@ TT1_VERTEX_BLASTER_PS mainBlasterVS(TT1_VERTEX_VS IN)
 	float3 upVector 	= normalize(float3(g_ViewMatrix[0][1], g_ViewMatrix[1][1], g_ViewMatrix[2][1] ));
 	float3 viewVector	= normalize(float3(g_ViewMatrix[0][2], g_ViewMatrix[1][2], g_ViewMatrix[2][2] ));
 	
+#if defined( ALIGNED_TO_UP_AXIS )
+	upVector 			= float3(0,1,0);
+#endif
+	
 	float3 position    	= (IN.Position.x*rightVector+IN.Position.z*upVector) * g_Size;
 	OUT.Position		= mul( float4( position.xyz, 1), g_WorldViewProj);
 
@@ -37,6 +41,7 @@ TT1_VERTEX_BLASTER_PS mainBlasterVS(TT1_VERTEX_VS IN)
 	if( g_FlipUVVertical ) v = 1.0 - v;
 	OUT.UV				= float2( u, v );
 	
+#if defined( FIRE )
 	// Other UV's
 	OUT.UV2 	= OUT.UV * scales.x;
 	OUT.UV2.y 	= OUT.UV2.y + (g_DeltaTime * scrollSpeeds.x);
@@ -44,6 +49,12 @@ TT1_VERTEX_BLASTER_PS mainBlasterVS(TT1_VERTEX_VS IN)
 	OUT.UV3.y 	= OUT.UV3.y + (g_DeltaTime * scrollSpeeds.y);
 	OUT.UV4 	= OUT.UV * scales.z;
 	OUT.UV4.y 	= OUT.UV4.y + (g_DeltaTime * scrollSpeeds.z);
+#endif
+
+#if defined( BLASTER )
+	// Other UV's
+	OUT.UV2 	= OUT.UV + g_DeltaTime;
+#endif
 	
     return OUT;
 }
@@ -52,12 +63,10 @@ TT1_VERTEX_BLASTER_PS mainBlasterVS(TT1_VERTEX_VS IN)
 
 float4 mainBlasterPS(TT1_VERTEX_BLASTER_PS IN) : COLOR
 {
-	return float4(1, 0, 1, 1);
-/*
-	float4 noise1 = tex2D(S1LinearWrapSampler, IN.uv2);
-	float4 noise2 = tex2D(S1LinearWrapSampler, IN.uv3);
-	float4 noise3 = tex2D(S1LinearWrapSampler, IN.uv4);
-
+	float4 noise1 = tex2D(S1LinearWrapSampler, IN.UV2);
+	float4 noise2 = tex2D(S1LinearWrapSampler, IN.UV3);
+	float4 noise3 = tex2D(S1LinearWrapSampler, IN.UV4);
+	
 	noise1 = (noise1 - 0.5f) * 2.f;
 	noise2 = (noise2 - 0.5f) * 2.f;
 	noise3 = (noise3 - 0.5f) * 2.f;
@@ -68,21 +77,29 @@ float4 mainBlasterPS(TT1_VERTEX_BLASTER_PS IN) : COLOR
 
 	float4 finalNoise = noise1 + noise2 + noise3;
 
-	float perturb = ((1.0f - IN.uv.y) * distortionScale) + distortionBias;
+	float perturb = ((1.0f - IN.UV.y) * distortionScale) + distortionBias;
 
-	float2 noiseCoords = (finalNoise.xy * perturb) + IN.uv.xy;
-
-	float4 fireColor = tex2D(S0LinearClampSampler, noiseCoords.xy);
-	float4 alphaColor = tex2D(S2LinearClampSampler, noiseCoords.xy);
-	fireColor.a = alphaColor;
-	return fireColor;
-	*/
+	float2 noiseCoords = (finalNoise.xy * perturb) + IN.UV.xy;
+	
+#if defined( BLASTER )
+	float4 fireColor   = tex2D(S0LinearClampSampler, IN.UV);
+	float4 alphaColor  = tex2D(S2LinearClampSampler, IN.UV);
+	return fireColor * alphaColor * noise1;
+#else
+	float4 fireColor   = tex2D(S0LinearClampSampler, noiseCoords.xy);
+	float4 alphaColor  = tex2D(S2LinearClampSampler, noiseCoords.xy);
+	return fireColor * alphaColor;
+#endif
 }
 
 technique TECHNIQUE_NAME
 {
 	pass p0
 	{
+		AlphaBlendEnable = true;
+		BlendOp=Add;
+		SrcBlend = one;
+		DestBlend = one;
 		VertexShader = compile vs_3_0 mainBlasterVS();
 		PixelShader = compile ps_3_0 mainBlasterPS();
 	}
