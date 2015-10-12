@@ -25,7 +25,15 @@ class CBillboardCore : public CName
         void Update();
         void Flush();
     private:
-        CTexture*           m_Texture;
+        struct STextureStage
+        {
+            uint32 mStage;
+            CTexture*           m_Texture;
+        };
+        
+        typedef std::vector<STextureStage> TTextureStagedVector;
+        TTextureStagedVector mTextures;
+
         CEffectTechnique*   mTechnique;
         float               mSize;
         float               mAlpha;

@@ -15,7 +15,6 @@
 
 CBillboardCore::CBillboardCore()
     : CName()
-    , m_Texture( 0 )
     , mTechnique( 0 )
     , mSize(1.0f)
     , mAlpha(1.0f)
@@ -32,7 +31,6 @@ CBillboardCore::~CBillboardCore()
 bool CBillboardCore::Init( const CXMLTreeNode& atts )
 {
     SetName( atts.GetAttribute<std::string>( "name", "unknown" ) );
-    m_Texture = atts.GetAttribute<CTexture>( "texture" );
 
     // Get the technique of the BillboardCore
     mTechnique        = atts.GetAttribute<CEffectTechnique>("technique");
@@ -43,6 +41,13 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mUseTick          = atts.GetAttribute<bool> ( "use_tick"  , false );
     mTick             = float( (rand() % 100 + 1) / 10);
 
+    for( uint32 i = 0, lCount = atts.GetNumChildren(); i<lCount; ++i)
+    {
+        const CXMLTreeNode& lNode = atts(i);
+        STextureStage lTexture = { lNode.GetAttribute<uint32>("stage_id", 0), lNode.GetAttribute<CTexture>("filename") };
+        mTextures.push_back(lTexture);
+    }
+
     ASSERT( mTechnique, "Null technique %s to render the BillboardCore %s!", atts.GetAttribute<std::string>( "technique", "null_technique" ), GetName().c_str() );
     return ( mTechnique != 0 );
 }
@@ -51,8 +56,10 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
 {
   if ( !mInstances.empty() )
   {
-    if ( m_Texture )
-      m_Texture->Activate( 0 );
+    for( uint32 i = 0, lCount = mTextures.size(); i<lCount; ++i)
+    {
+        mTextures[i].m_Texture->Activate(mTextures[i].mStage);
+    }
     
     CEffect* lEffect = mTechnique->GetEffect();
 
