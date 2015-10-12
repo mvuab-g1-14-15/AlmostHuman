@@ -82,7 +82,7 @@ float4 mainBlasterPS(TT1_VERTEX_BLASTER_PS IN) : COLOR
 	float2 noiseCoords = (finalNoise.xy * perturb) + IN.UV.xy;
 	
 #if defined( BLASTER )
-	float4 fireColor   = tex2D(S0LinearClampSampler, IN.UV);
+	float4 fireColor   = tex2D(S0LinearWrapSampler, IN.UV2);
 	float4 alphaColor  = tex2D(S2LinearClampSampler, IN.UV);
 	return fireColor * alphaColor * noise1;
 #else

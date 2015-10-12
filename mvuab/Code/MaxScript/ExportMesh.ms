@@ -125,7 +125,7 @@ struct SMaterial
 				
 				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
 				
-				
+				format "Diffuse Color: %\n" m_Color
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(

@@ -20,6 +20,5 @@ void CSetRenderTargetSceneRendererCommand::UnSetRenderTarget(int IdSetDepthStenc
 {
   for ( size_t i = 0; i < m_StageTextures.size()  ; ++i )
     m_StageTextures[i].m_Texture->UnsetAsRenderTarget( m_StageTextures[i].m_StageId, IdSetDepthStencilBuffer!=i);
-
-		DebugTextures();
+  DebugTextures();
 }

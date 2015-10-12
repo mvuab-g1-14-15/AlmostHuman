@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+	<MeshInstance name="blaster" core="Blaster" pos="134.38 -6 -58.50" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />	
+</RenderableObjects>

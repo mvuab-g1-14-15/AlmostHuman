@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="Barrel" filename="meshes\metal_barrel.mesh" />
+  <static_mesh name="Blaster" filename="meshes\Blaster.mesh" />
 </static_meshes>

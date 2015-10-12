@@ -170,6 +170,9 @@ CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& 
 CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
 {
 	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+
+    ASSERT(l_InstanceMesh->GetStaticMesh(), "Null static mesh for instance mesh %s", l_InstanceMesh->GetName().c_str() );
+
 	// If there is no ase loaded and we want phyx
 	if (!PhysXMInstance->GetLoadASE())
     {

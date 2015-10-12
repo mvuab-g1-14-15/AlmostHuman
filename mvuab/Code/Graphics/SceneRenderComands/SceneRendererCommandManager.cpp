@@ -180,7 +180,7 @@ bool CSceneRendererCommandManager::Load( const std::string& lFile )
     const std::string& l_TagName = l_CurrentNode.GetName();
     std::string lName = l_CurrentNode.GetAttribute<std::string>( "name", GetNextName().c_str() );
 
-    if ( l_TagName == "postproc" )
+    if ( l_TagName == "postproc" || l_TagName == "render_command" )
     {
       if ( !Load( l_CurrentNode.GetAttribute<std::string>( "filename", "" ) ) )
       {

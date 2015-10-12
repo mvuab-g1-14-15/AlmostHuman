@@ -1,0 +1,32 @@
+﻿<scene_renderer_commands>
+	<!--generate the shadow maps-->
+	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
+	<generate_shadow_maps/>
+	
+	<begin_scene/>
+	
+	<!--generate the deferred textures-->
+	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
+    <set_render_target name="deferred_multiple_render_target">
+        <dynamic_texture stage_id="0" name="DiffuseMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="true"/>
+        <dynamic_texture stage_id="1" name="LightMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+        <dynamic_texture stage_id="2" name="NormalMapTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+        <dynamic_texture stage_id="3" name="DepthMapTexture" texture_width_as_frame_buffer="true" format_type="R32F" create_depth_stencil_buffer="false"/>
+    </set_render_target>
+    <clear_scene color="true" depth="true" stencil="false"/>
+	<enable_z_test/>
+	<enable_z_write/>
+	<disable_alpha_test/>
+	<disable_alpha_blend/>
+    <set_matrices/>
+    <render_scene name="render_solid" layer="solid" active="true"/>
+	<render_scene name="render_characters" layer="characters" active="true"/>
+	
+	<!--render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/-->
+    <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
+	
+	<render_command filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Glow.xml"/>
+   
+	<!--render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
+	<render_gizmos render="true"/-->
+</scene_renderer_commands>

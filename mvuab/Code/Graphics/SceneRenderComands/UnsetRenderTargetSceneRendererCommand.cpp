@@ -5,7 +5,6 @@ CUnsetRenderTargetSceneRendererCommand::CUnsetRenderTargetSceneRendererCommand(C
         *SetRenderTargetRendererCommand, CXMLTreeNode &atts): CSceneRendererCommand(atts),
     m_SetRenderTargetRendererCommand(SetRenderTargetRendererCommand)
 {
-
     m_UseDepthStencilBuffer = atts.GetAttribute<int32>("use_depth_stencil_buffer", -1);
 }
 
