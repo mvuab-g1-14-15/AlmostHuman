@@ -8,6 +8,7 @@
 		<cube_emitter file="sparks_emitter_1.xml"/>
 		<cube_emitter file="sparks_emitter_2.xml"/>
 		<cube_emitter file="sparks_emitter_3.xml"/>
+		<cube_emitter file="ray_emitter_1.xml"/>
 		<cube_emitter file="sparks_emitter_4.xml"/>
 	</particle_system_core>
 	

@@ -1,0 +1,13 @@
+<emitter active="true" name="smoke" loop="true" time_to_live="20.0">
+	<particles max_alive_particles="20" time_to_live="0.01 0.2">
+		<technique name="RayTechnique" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/rays/pump_lightning_04.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.0" color="1.0 0.8.0 0.0" size="0.4"/>
+			<interpolator alpha="0.7" color="1.0 0.7 0.0" size="0.5"/>
+			<interpolator alpha="0.0" color="1.0 0.65 0.0" size="0.3"/>
+		</interpolators>
+		<motion linear_speed="0.01 0.01" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="0 0" gravity="0"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0.25" particles_per_emission="1 2" cubic_size="0.1 0 0.1"/>
+</emitter>
