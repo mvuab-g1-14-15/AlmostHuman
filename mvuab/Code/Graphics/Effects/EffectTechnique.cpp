@@ -88,8 +88,20 @@ bool CEffectTechnique::BeginRender()
 
 bool CEffectTechnique::Refresh()
 {
-  m_Effect->Unload();
-  return m_Effect->Load( GetName() + "_Effect", m_Defines );
+    m_Effect = new CEffect(GetName() + "_Effect" );
+    bool lLoaded = m_Effect->Load( m_Filename, m_Defines );
+    ASSERT(lLoaded, "The effect %s could not be loaded" );
+
+    if( lLoaded )
+    {
+        m_D3DTechnique = ( m_Effect ) ? m_Effect->GetTechniqueByName( GetName() ) : 0;
+    }
+    else
+    {
+        CHECKED_DELETE( m_Effect );
+    }
+
+    return lLoaded;
 }
 
 void CEffectTechnique::SetupMatrices()

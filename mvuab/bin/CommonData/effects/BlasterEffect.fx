@@ -52,7 +52,7 @@ TT1_VERTEX_BLASTER_PS mainBlasterVS(TT1_VERTEX_VS IN)
 
 float4 mainBlasterPS(TT1_VERTEX_BLASTER_PS IN) : COLOR
 {
-	return float4(1, 1, 1, 1);
+	return float4(1, 0, 1, 1);
 /*
 	float4 noise1 = tex2D(S1LinearWrapSampler, IN.uv2);
 	float4 noise2 = tex2D(S1LinearWrapSampler, IN.uv3);
