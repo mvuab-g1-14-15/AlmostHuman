@@ -19,9 +19,14 @@
 				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
 				<Event Id="3568813383" Name="Play_Main_Theme"/>
+				<Event Id="74299344" Name="Play_Musica_Boss"/>
 				<Event Id="339442378" Name="Play_Panico"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="84672891" Language="SFX">
+					<ShortName>Final boss Almost Human.wav</ShortName>
+					<Path>SFX\Final boss Almost Human_E106FFBE.wem</Path>
+				</File>
 				<File Id="197167235" Language="SFX">
 					<ShortName>dark soundscapes 14.wav</ShortName>
 					<Path>SFX\dark soundscapes 14_E106FFBE.wem</Path>
@@ -42,6 +47,10 @@
 					<ShortName>dark soundscapes 01.wav</ShortName>
 					<Path>SFX\dark soundscapes 01_950FF8F3.wem</Path>
 				</File>
+				<File Id="384441130" Language="SFX">
+					<ShortName>Almost Panico.wav</ShortName>
+					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
+				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
 					<Path>SFX\dark soundscapes 12_950FF8F3.wem</Path>
@@ -54,6 +63,10 @@
 					<ShortName>dark soundscapes 10.wav</ShortName>
 					<Path>SFX\dark soundscapes 10_950FF8F3.wem</Path>
 				</File>
+				<File Id="585946315" Language="SFX">
+					<ShortName>Almost alerta.wav</ShortName>
+					<Path>SFX\Almost alerta_E106FFBE.wem</Path>
+				</File>
 				<File Id="615389019" Language="SFX">
 					<ShortName>dark soundscapes 08.wav</ShortName>
 					<Path>SFX\dark soundscapes 08_950FF8F3.wem</Path>
@@ -61,6 +74,10 @@
 				<File Id="677139355" Language="SFX">
 					<ShortName>dark soundscapes 06.wav</ShortName>
 					<Path>SFX\dark soundscapes 06_950FF8F3.wem</Path>
+				</File>
+				<File Id="772078166" Language="SFX">
+					<ShortName>Almost ok.wav</ShortName>
+					<Path>SFX\Almost ok_950FF8F3.wem</Path>
 				</File>
 				<File Id="773649004" Language="SFX">
 					<ShortName>dark soundscapes 19.wav</ShortName>
@@ -81,14 +98,6 @@
 				<File Id="1022880071" Language="SFX">
 					<ShortName>dark soundscapes 02.wav</ShortName>
 					<Path>SFX\dark soundscapes 02_950FF8F3.wem</Path>
-				</File>
-				<File Id="1057715424" Language="SFX">
-					<ShortName>Almost human Panico.wav</ShortName>
-					<Path>SFX\Almost human Panico_E106FFBE.wem</Path>
-				</File>
-				<File Id="1058189291" Language="SFX">
-					<ShortName>Almost human Alerta.wav</ShortName>
-					<Path>SFX\Almost human Alerta_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -192,15 +201,11 @@
 			<Path>AlmostHuman.bnk</Path>
 			<IncludedEvents>
 				<Event Id="1292086503" Name="Play_Back"/>
-				<Event Id="3552663155" Name="Play_Cash"/>
 				<Event Id="3174629258" Name="Play_GameOver"/>
 				<Event Id="785979864" Name="Play_Gui_Over"/>
-				<Event Id="2454594115" Name="Play_Help"/>
-				<Event Id="426840996" Name="Play_Init"/>
 				<Event Id="2513968146" Name="Play_LoopGen"/>
 				<Event Id="474386569" Name="Play_Next"/>
 				<Event Id="2348692292" Name="Play_Over"/>
-				<Event Id="186343927" Name="Play_Youwin"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="45634969" Language="SFX">
@@ -222,22 +227,6 @@
 				<File Id="507701302" Language="SFX">
 					<ShortName>gui_over.wav</ShortName>
 					<Path>SFX\gui_over_76A5D070.wem</Path>
-				</File>
-				<File Id="869195930" Language="SFX">
-					<ShortName>youwin.wav</ShortName>
-					<Path>SFX\youwin_76A5D070.wem</Path>
-				</File>
-				<File Id="937521952" Language="SFX">
-					<ShortName>Init.wav</ShortName>
-					<Path>SFX\Init_76A5D070.wem</Path>
-				</File>
-				<File Id="1048744211" Language="SFX">
-					<ShortName>help.wav</ShortName>
-					<Path>SFX\help_76A5D070.wem</Path>
-				</File>
-				<File Id="1049674178" Language="SFX">
-					<ShortName>cash.wav</ShortName>
-					<Path>SFX\cash_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
