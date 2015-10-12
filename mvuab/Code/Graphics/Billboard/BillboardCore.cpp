@@ -11,6 +11,7 @@
 #include "Effects/EffectManager.h"
 #include "EngineManagers.h"
 #include "EngineConfig.h"
+#include "Timer/Timer.h"
 
 CBillboardCore::CBillboardCore()
     : CName()
@@ -39,6 +40,8 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mAlpha            = atts.GetAttribute<float>( "alpha"             , 1.0f  );
     mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal", false );
     mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"  , false );
+    mUseTick          = atts.GetAttribute<bool> ( "use_tick"  , false );
+    mTick             = float( (rand() % 100 + 1) / 10);
 
     ASSERT( mTechnique, "Null technique %s to render the BillboardCore %s!", atts.GetAttribute<std::string>( "technique", "null_technique" ), GetName().c_str() );
     return ( mTechnique != 0 );
@@ -60,6 +63,10 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
       lEffect->SetSize( mSize );
       lEffect->SetAlpha( mAlpha );
       lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
+      
+      if( mUseTick )
+          lEffect->SetDeltaTime( mTick );
+
       mInstances[i]->Render(aRV, aGM, mTechnique );
     }
   }
@@ -80,4 +87,11 @@ void CBillboardCore::Flush()
     CHECKED_DELETE( mInstances[i] );
   }
   mInstances.clear();
+}
+
+void CBillboardCore::Update()
+{
+    mTick += 0.05f * deltaTimeMacro;
+    if (mTick >= 1000.f)
+        mTick = 0.f;
 }

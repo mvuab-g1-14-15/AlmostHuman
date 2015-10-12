@@ -1,4 +1,5 @@
 <billboards>
 	<billboard name="target" texture="../CommonData/textures/Billboards/target.png" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 	<billboard name="energy" texture="../CommonData/textures/Billboards/refill.png" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true"/>
+	<billboard name="blaster" texture="../CommonData/textures/Billboards/refill.png" technique="BlasterTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true"/>
 </billboards>

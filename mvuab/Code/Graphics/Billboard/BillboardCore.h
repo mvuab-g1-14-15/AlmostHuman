@@ -22,13 +22,15 @@ class CBillboardCore : public CName
         void AddInstance( CBillboardInstance * aInstance );
 
         void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM );
-        void Update(){}
+        void Update();
         void Flush();
     private:
         CTexture*           m_Texture;
         CEffectTechnique*   mTechnique;
         float               mSize;
         float               mAlpha;
+        bool                mUseTick;
+        float               mTick;
         bool                mFlipUVHorizontal;
         bool                mFlipUVVertical;
         typedef std::vector< CBillboardInstance* > TBillboardInstancesContainer;
