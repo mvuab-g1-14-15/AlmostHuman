@@ -39,6 +39,7 @@ class CBillboardCore : public CName
         float               mAlpha;
         bool                mUseTick;
         float               mTick;
+        bool                mUseDeltaTime;
         bool                mFlipUVHorizontal;
         bool                mFlipUVVertical;
         typedef std::vector< CBillboardInstance* > TBillboardInstancesContainer;

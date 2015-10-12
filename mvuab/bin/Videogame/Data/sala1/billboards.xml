@@ -1,4 +1,5 @@
 ﻿<billboards_instances>
 	<billboard_instance name="blaster001" core="blaster" pos="134 -5 -58" active="true" />
 	<billboard_instance name="target001" core="target" pos="134 -6 -58" active="true" />
+	<billboard_instance name="fire001" core="fire" pos="134 -7 -58" active="true" />
 </billboards_instances>

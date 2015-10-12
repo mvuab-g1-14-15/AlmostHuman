@@ -11,8 +11,15 @@
 	</technique>
 		
 	<!-- Effects of Billboards -->
-	<technique name="BlasterTechnique" file="../CommonData/effects/BlasterEffect.fx">
+	<technique name="BlasterTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<define name="BLASTER" description=""/>
+	</technique>
+	
+	<technique name="FireTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<define name="FIRE" description=""/>
+		<define name="ALIGNED_TO_UP_AXIS" description=""/>
 	</technique>
 	
 	<technique name="BillboardAlignedToCameraTechnique" file="../CommonData/effects/BillboardEffect.fx">
