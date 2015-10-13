@@ -5,4 +5,6 @@
 	<animation name="idle" file="idle.caf"/>
 	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
 	<animation name="shoot" file="shoot.caf"/>
+	<animation name="cinematica_inicial_sala1" file="cinematica_inicial_sala1.caf"/>
+	<animation name="crash_rejilla" file="crash_rejilla.caf"/>	
 </animated_model>

@@ -8,6 +8,7 @@ sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 gui_manager:ActiveWindows("HUD.xml")
 gui_manager:SetRenderPointer(false)
 cinematic_manager:StopCinematic("cinematica_inicial")
+sound_manager:PlayParticlesSFX()
 end
 
 function IrASetup()
@@ -17,7 +18,6 @@ end
 function IrAMain()
 	gui_manager:ActiveWindows("Main.xml")
 	sound_manager:PlayEvent("Play_Back","GUI")
-	
 end
 
 function MostrarMensaje()

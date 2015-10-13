@@ -62,7 +62,7 @@
 #define EngineInstance          CEngine::GetSingletonPtr()
 #define EngineManagerInstance   CEngineManagers::GetSingletonPtr()
 #define GraphicsInstance        CEngineManagers::GetSingletonPtr()->GetGraphicsManager()
-#define SoundInstance           CSoundManager::GetSingletonPtr()
+#define SoundInstance           CEngineManagers::GetSingletonPtr()->GetSoundManager()
 #define EffectManagerInstance   CEngineManagers::GetSingletonPtr()->GetEffectsManager()
 #define InputManagerInstance    CEngineManagers::GetSingletonPtr()->GetInputManager()
 #define ActionManagerInstance   CEngineManagers::GetSingletonPtr()->GetActionManager()

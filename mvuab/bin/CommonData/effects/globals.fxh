@@ -10,9 +10,6 @@
 
 #define SHADOW_EPSILON 0.001f
 
-#define PI          3.14159265359
-#define Deg2Rad(x)  (x * PI / 180.0)
-
 //
 // Shared Parameters 
 //
@@ -31,7 +28,6 @@ float3   g_AmbientLight                                             : AmbientLig
 
 int      g_FBWidth                                                  : FBWidth;
 int      g_FBHeight                                                 : FBHeight;
-
 
 //
 // Debug semantics

@@ -92,7 +92,10 @@ template <class T> class CTemplatedVectorMapManager
 
         virtual void Destroy()
         {
-            for ( size_t i = 0; i < m_ResourcesVector.size() ; ++i ) CHECKED_DELETE( m_ResourcesVector[i] );
+            for ( size_t i = 0; i < m_ResourcesVector.size() ; ++i ) 
+            {
+                CHECKED_DELETE( m_ResourcesVector[i] );
+            }
 
             m_ResourcesMap.clear();
             m_ResourcesVector.clear();

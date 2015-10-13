@@ -45,6 +45,8 @@ void CBillboardManager::Render()
 
 void CBillboardManager::Update()
 {
+    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
+        (*lItb)->Update();
 }
 
 void CBillboardManager::Init()

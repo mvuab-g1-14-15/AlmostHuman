@@ -104,7 +104,7 @@ public:
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
   void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
-  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos);
+  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos, Math::Vect2i &l_TexSize);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:
@@ -190,6 +190,12 @@ private: // Members
   D3DXHANDLE m_UseShadowMaskTextureParameter;
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
+
+  //
+  // Texture Width and Height
+  //
+  D3DXHANDLE m_TextureWidth;
+  D3DXHANDLE m_TextureHeight;
 
 private: // Methods
   void ResetLightsHandle();

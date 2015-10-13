@@ -1,3 +1,4 @@
 <particles_instances>
 	<particle_instance name="charge01" core="charge" pos="135.25 -7.5 -39.60" active="true"/>
+	<particle_instance name="spark01" core="sparks" pos="129.45 -3.7 -46.82" active="true"/>
 </particles_instances>

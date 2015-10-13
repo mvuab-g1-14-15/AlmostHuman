@@ -11,20 +11,31 @@
 	</technique>
 		
 	<!-- Effects of Billboards -->
+	<technique name="BlasterTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<define name="BLASTER" description=""/>
+	</technique>
+	
+	<technique name="FireTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<define name="FIRE" description=""/>
+		<define name="ALIGNED_TO_UP_AXIS" description=""/>
+	</technique>
+	
 	<technique name="BillboardAlignedToCameraTechnique" file="../CommonData/effects/BillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
 	<technique name="BillboardAlignedToWorldUpAxisTechnique" file="../CommonData/effects/BillboardEffect.fx">
 		<define name="ALIGNED_TO_UP_AXIS" description=""/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
 	
 	<technique name="BillboardNotAlignedTechnique" file="../CommonData/effects/BillboardEffect.fx">
 		<define name="NOT_ALIGNED" description=""/>
-		<handles use_world_matrix="true" use_world_view_projection_matrix="true"/>
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>
-	
+		
 	<!-- Particle Effects -->
 	<technique name="SmokeTechnique" file="../CommonData/effects/ParticleSystemEffect.fx">
 		<define name="BLACK_AND_WHITE" description=""/>

@@ -22,13 +22,24 @@ class CBillboardCore : public CName
         void AddInstance( CBillboardInstance * aInstance );
 
         void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM );
-        void Update(){}
+        void Update();
         void Flush();
     private:
-        CTexture*           m_Texture;
+        struct STextureStage
+        {
+            uint32 mStage;
+            CTexture*           m_Texture;
+        };
+        
+        typedef std::vector<STextureStage> TTextureStagedVector;
+        TTextureStagedVector mTextures;
+
         CEffectTechnique*   mTechnique;
         float               mSize;
         float               mAlpha;
+        bool                mUseTick;
+        float               mTick;
+        bool                mUseDeltaTime;
         bool                mFlipUVHorizontal;
         bool                mFlipUVVertical;
         typedef std::vector< CBillboardInstance* > TBillboardInstancesContainer;

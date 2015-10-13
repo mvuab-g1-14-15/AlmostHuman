@@ -1,14 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
-	186343927	Play_Youwin			\GUI\Play_Youwin	
-	426840996	Play_Init			\GUI\Play_Init	
 	474386569	Play_Next			\GUI\Play_Next	
 	785979864	Play_Gui_Over			\GUI\Play_Gui_Over	
 	1292086503	Play_Back			\GUI\Play_Back	
 	2348692292	Play_Over			\GUI\Play_Over	
-	2454594115	Play_Help			\GUI\Play_Help	
 	2513968146	Play_LoopGen			\GUI\Play_LoopGen	
 	3174629258	Play_GameOver			\GUI\Play_GameOver	
-	3552663155	Play_Cash			\GUI\Play_Cash	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	45634969	gui_back	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_back_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_back		1415
@@ -16,8 +12,4 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	444784154	gameOver	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gameOver_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gameOver		19305
 	482623365	loop-gen	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\loop-gen_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\loop-gen		339473
 	507701302	gui_over	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gui_over_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\gui_over		1237
-	869195930	youwin	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\youwin_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\youwin		11008
-	937521952	Init	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Init_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\Init		29300
-	1048744211	help	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\help_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\help		403359
-	1049674178	cash	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\cash_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\GUI\cash		15078
 

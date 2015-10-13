@@ -17,6 +17,8 @@
 #include <iostream>
 #include "Utils/StringUtils.h"
 
+#include "Brofiler.h"
+
 CEngine::CEngine()
   : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
   , m_pProcess( 0 )
@@ -41,7 +43,7 @@ void CEngine::Execute()
 }
 
 void CEngine::Update()
-{
+{ BROFILER_CATEGORY("CEngine:Update", Profiler::Color::LightBlue)
   m_pTimer->Update();
   m_pEngineManagers->Update();
   m_pProcess->ProcessReloads();
@@ -50,7 +52,7 @@ void CEngine::Update()
 }
 
 void CEngine::Render()
-{
+{ BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
   //if ( m_Play )
     if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost()) 
         SRCMInstance->Execute();
@@ -62,7 +64,7 @@ void CEngine::Render()
 }
 
 void CEngine::ProcessInputs()
-{
+{ BROFILER_CATEGORY("CEngine:Update", Profiler::Color::Green)
   ActionManagerInstance->ProcessInputs();
 }
 

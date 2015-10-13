@@ -21,10 +21,10 @@ function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	--scene:ActivateRoom("pasillo")
-	--scene:ActivateRoom("sala4")
-	--scene:ActivateRoom("sala2")
-	--scene:ActivateRoom("sala3")
+	scene:ActivateRoom("pasillo")
+	scene:ActivateRoom("sala4")
+	scene:ActivateRoom("sala2")
+	scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -39,10 +39,11 @@ function load_gameplay()
 		enemy_manager = CEnemyManagerLUA()	
 	end
 	
+	enemy_manager:CreateBoss()
+	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 
-	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
-
+	--sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
 	g_Player:Update()
 	cinematic_manager:PlayCinematic("cinematica_inicial")

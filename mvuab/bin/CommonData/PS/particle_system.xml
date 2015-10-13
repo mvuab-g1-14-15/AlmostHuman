@@ -1,13 +1,19 @@
 <particles_systems emitters_path="../CommonData/PS/emitters/">
-	<particle_system_core name="smoke" sound="">
+	<particle_system_core name="smoke" sound="false">
 		<cube_emitter file="smoke_emitter.xml"/>
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="rays">
-		<!--<cube_emitter file="Data/core/emitters/ray_emitter.xml"/>-->
-		<!--<cube_emitter file="Data/core/emitters/ray_emitter_2.xml"/>-->
-		<!--<cube_emitter file="Data/core/emitters/ray_emitter_3.xml"/>-->
+	<particle_system_core name="steam" sound="false">
+		<cube_emitter file="steam_emitter.xml"/>
+	</particle_system_core>
+	
+	<particle_system_core name="sparks" sound="true">
+		<cube_emitter file="sparks_emitter_1.xml"/>
+		<cube_emitter file="sparks_emitter_2.xml"/>
+		<cube_emitter file="sparks_emitter_3.xml"/>
+		<cube_emitter file="ray_emitter_1.xml"/>
+		<cube_emitter file="sparks_emitter_4.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="charge">

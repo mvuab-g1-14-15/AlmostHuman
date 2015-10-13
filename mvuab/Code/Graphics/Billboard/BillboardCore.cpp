@@ -11,10 +11,10 @@
 #include "Effects/EffectManager.h"
 #include "EngineManagers.h"
 #include "EngineConfig.h"
+#include "Timer/Timer.h"
 
 CBillboardCore::CBillboardCore()
     : CName()
-    , m_Texture( 0 )
     , mTechnique( 0 )
     , mSize(1.0f)
     , mAlpha(1.0f)
@@ -31,7 +31,6 @@ CBillboardCore::~CBillboardCore()
 bool CBillboardCore::Init( const CXMLTreeNode& atts )
 {
     SetName( atts.GetAttribute<std::string>( "name", "unknown" ) );
-    m_Texture = atts.GetAttribute<CTexture>( "texture" );
 
     // Get the technique of the BillboardCore
     mTechnique        = atts.GetAttribute<CEffectTechnique>("technique");
@@ -39,6 +38,16 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mAlpha            = atts.GetAttribute<float>( "alpha"             , 1.0f  );
     mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal", false );
     mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"  , false );
+    mUseTick          = atts.GetAttribute<bool> ( "use_tick"          , false );
+    mUseDeltaTime     = atts.GetAttribute<bool> ( "use_delta_time"    , false );
+    mTick             = float( (rand() % 100 + 1) / 10);
+
+    for( uint32 i = 0, lCount = atts.GetNumChildren(); i<lCount; ++i)
+    {
+        const CXMLTreeNode& lNode = atts(i);
+        STextureStage lTexture = { lNode.GetAttribute<uint32>("stage_id", 0), lNode.GetAttribute<CTexture>("filename") };
+        mTextures.push_back(lTexture);
+    }
 
     ASSERT( mTechnique, "Null technique %s to render the BillboardCore %s!", atts.GetAttribute<std::string>( "technique", "null_technique" ), GetName().c_str() );
     return ( mTechnique != 0 );
@@ -48,8 +57,10 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
 {
   if ( !mInstances.empty() )
   {
-    if ( m_Texture )
-      m_Texture->Activate( 0 );
+    for( uint32 i = 0, lCount = mTextures.size(); i<lCount; ++i)
+    {
+        mTextures[i].m_Texture->Activate(mTextures[i].mStage);
+    }
     
     CEffect* lEffect = mTechnique->GetEffect();
 
@@ -60,6 +71,10 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
       lEffect->SetSize( mSize );
       lEffect->SetAlpha( mAlpha );
       lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
+      
+      if( mUseTick || mUseDeltaTime )
+          lEffect->SetDeltaTime( mTick );
+
       mInstances[i]->Render(aRV, aGM, mTechnique );
     }
   }
@@ -80,4 +95,19 @@ void CBillboardCore::Flush()
     CHECKED_DELETE( mInstances[i] );
   }
   mInstances.clear();
+}
+
+void CBillboardCore::Update()
+{
+    if( mUseTick )
+    {
+        mTick += deltaTimeMacro;
+        if (mTick >= 100.f)
+            mTick = 0.f;
+    }
+    else
+    {
+        mTick = deltaTimeMacro;
+    }
+    
 }

@@ -32,6 +32,7 @@ void registerSound( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CWWSoundManager, SetGameObjectPosition )
 
   LUA_DECLARE_METHOD( CWWSoundManager, PlayEvent )
+  LUA_DECLARE_METHOD( CWWSoundManager, PlayParticlesSFX )
   LUA_DECLARE_METHOD( CWWSoundManager, ResumeEvent )
   LUA_DECLARE_METHOD( CWWSoundManager, PauseEvent )
   LUA_DECLARE_METHOD( CWWSoundManager, ResumeAllFromGameObject )

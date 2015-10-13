@@ -37,6 +37,7 @@ fn ExportParticles filenameXML =
 			l_NewPath.AddAttributeAsString "core" (l_Core as String)
 			l_NewPath.AddAttributeCoordinate "pos" Obj.Pos
 			l_NewPath.AddAttributeAsString "active" "true"
+			l_NewPath.AddAttributeAsString "sound" "true"
 			
 			l_Count = l_Count + 1
 		)
