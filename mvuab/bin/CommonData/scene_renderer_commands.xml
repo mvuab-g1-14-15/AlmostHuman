@@ -21,10 +21,6 @@
         <texture stage_id="3" name="DepthMapTexture"/>
     </render_deferred_shading>
 	
-	<!--
-	<clear_scene color="true" depth="true" stencil="true"/>
-	-->
-	
 	<enable_z_test/>
 	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
@@ -37,35 +33,9 @@
 	<disable_alpha_blend/>
 	<disable_z_test/>
 
-	<enable_alpha_blend/>
-	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
-
-	<capture_frame_buffer name="Glow_Step01_Capture_FB">
-		<dynamic_texture stage_id="0" name="FBCapture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
+	<render_command filename="../CommonData/glow_cmd.xml"/>
 	
-	<disable_alpha_blend/>
-	<!-- BLOOM -->
-	<!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Bloom.xml"/>	-->
-	
-	<!-- DEBUG 
-	<set_pool_renderable_objects_technique name="debug_output_glow" pool="draw_texture_in_screen_pool_renderable_object_technique"/>
-	<render_draw_quad name="show_glow_render" active="true">
-		<texture stage_id="0" name="GlowTexture"/>
-	</render_draw_quad>
-	
-	-->
-
-	<!--<enable_alpha_blend/>
-	<set_blend srcblend="One" dstblend="One" blendop="RevSubtract"/>
-	<set_pool_renderable_objects_technique pool="SSAO_pool_renderable_object_technique"/>
-    <render_draw_quad active="true">
-        <texture stage_id="0" name="DepthMapTexture"/>
-		<texture stage_id="1" name="GeometryNormalMapTexture"/>
-		<texture stage_id="2" name="Data/textures/Random.png"/>
-    </render_draw_quad>
-	
-	<disable_alpha_blend/>-->
+	<disable_alpha_test/>
 	
 	<enable_alpha_test/>
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>

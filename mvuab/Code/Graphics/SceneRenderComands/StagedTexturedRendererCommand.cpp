@@ -94,17 +94,19 @@ void CStagedTexturedRendererCommand::AddStageTexture( int StageId, CTexture* Tex
 void CStagedTexturedRendererCommand::DebugTextures()
 {
 #ifdef _DEBUG
-
   if ( false )
   {
-    for ( size_t i = 0; i < m_StageTextures.size(); ++i )
+    for ( uint32 i = 0, lCount = m_StageTextures.size(); i < lCount; ++i )
     {
-      std::string l_TextureName = "CDrawQuadRendererCommand_" + GetName() + "_";
-      std::stringstream l_CompletedTextureName;
-      l_CompletedTextureName << l_TextureName << i;
-      m_StageTextures[i].m_Texture->Save( l_CompletedTextureName.str() );
+        CTexture* lTexture = m_StageTextures[i].m_Texture;
+        if( lTexture )
+        {
+            std::string l_TextureName = GetName() + "_" + lTexture->GetName();
+            std::stringstream l_CompletedTextureName;
+            l_CompletedTextureName << l_TextureName << i;
+            lTexture->Save( l_CompletedTextureName.str() );
+        }
     }
   }
-
 #endif
 }

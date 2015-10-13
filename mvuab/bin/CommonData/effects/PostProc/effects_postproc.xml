@@ -1,5 +1,6 @@
 <effects>	
 	<technique name="VignettingTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/Vignetting.fx" />	
+	<technique name="OptimizedGaussianTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/OptimizedGaussianBlur.fx"/>
 	<technique name="BlurTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/BlurV2.fx"/>
 	<technique name="SobelTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/Sobel.fx"/>
 	

@@ -48,8 +48,8 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
     m_StageTextures[1].m_Texture->Activate( m_StageTextures[1].m_StageId );
 
     m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),
-            m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+    l_EffectTech->GetEffect()->SetFBSize( Math::Vect2u(m_Width, m_Height) );
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
     m_StageTextures[1].m_Texture->UnsetAsRenderTarget(0);
 
     if( mIterations > 1 )
@@ -58,8 +58,7 @@ void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
         for(uint32 i = 1; i < mIterations; ++i)
         {
             m_StageTextures[1].m_Texture->SetAsRenderTarget(0);
-            GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(),
-                    m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
+            GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
             m_StageTextures[1].m_Texture->UnsetAsRenderTarget(0);
             std::swap( m_StageTextures[0], m_StageTextures[1] );
         }

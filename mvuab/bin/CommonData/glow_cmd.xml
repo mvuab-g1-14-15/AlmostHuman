@@ -1,0 +1,33 @@
+﻿<scene_renderer_commands>
+	<!--Render all the glow objects into a texture-->
+	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
+	<set_render_target name="GlowRenderTarget">
+        <dynamic_texture stage_id="0" name="GlowTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+	</set_render_target>
+		<clear_scene color="true" depth="false" stencil="false"/> 
+		<enable_z_test/>
+		<disable_z_write/>
+		<set_matrices/>
+		<render_scene layer="glow" active="true"/>
+	<unset_render_target render_target="GlowRenderTarget"/>
+	
+	<enable_alpha_blend/>
+	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
+	<!--Blur the glow texture using z blur-->
+	<set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
+	<set_render_target name="GlowRenderZBlur">
+        <dynamic_texture stage_id="0" name="GlowTextureZBlur" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
+	</set_render_target>
+		<render_draw_quad active="true" name="RenderGlowWithZBlur">
+ 		<texture stage_id="0" name="GlowTexture"/>
+ 	</render_draw_quad>
+	<unset_render_target render_target="GlowRenderZBlur"/>
+	
+	<!--Blur with the gaussian the z glow texture-->
+	<set_pool_renderable_objects_technique pool="optimized_gaussian_blur_pool"/>
+    <render_draw_quad active="true" name="RenderGaussianBlur">
+ 		<texture stage_id="0" name="GlowTextureZBlur"/>
+ 	</render_draw_quad>
+	<disable_alpha_blend/>
+   
+</scene_renderer_commands>

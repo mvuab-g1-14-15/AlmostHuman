@@ -2,4 +2,5 @@
 <static_meshes>
   <static_mesh name="Barrel" filename="meshes\metal_barrel.mesh" />
   <static_mesh name="Blaster" filename="meshes\Blaster.mesh" />
+  <static_mesh name="VLight" filename="meshes\Volumetric_light.mesh" />
 </static_meshes>

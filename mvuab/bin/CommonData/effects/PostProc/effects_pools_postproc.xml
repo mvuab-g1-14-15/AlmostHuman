@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <renderable_object_techniques>
+
+	<pool_renderable_object_technique name="optimized_gaussian_blur_pool">
+		<default_technique vertex_type="1104" technique="OptimizedGaussianTechnique"/>
+	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="lens_flare_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="LensFlareTechnique"/>

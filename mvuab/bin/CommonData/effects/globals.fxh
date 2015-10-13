@@ -26,8 +26,8 @@ float4x4 g_ViewProjMatrix                                           : VPMatrix;
 float3   g_CameraPosition                                           : CameraPosition;
 float3   g_AmbientLight                                             : AmbientLight;
 
-int      g_FBWidth                                                  : FBWidth;
-int      g_FBHeight                                                 : FBHeight;
+int      g_TextureWidth                                                  : FBWidth;
+int      g_TextureHeight                                                 : FBHeight;
 
 //
 // Debug semantics
@@ -93,12 +93,6 @@ int         g_FogFun                                                : FogFun;
 
 float       g_Weight[5]                                             : Weight;
 float       g_Offset[5]                                             : Offset;
-
-//
-// 2D texture parameters
-//
-int         g_TextureWidth                                          : TextureWidth;
-int         g_TextureHeight                                         : TextureHeight;
 
 //
 // Window size
