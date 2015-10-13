@@ -33,10 +33,42 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
     return float4(l_Color * g_SExposure, 1.0);*/
 }
 
+float4 DrawLight(in float2 UV : TEXCOORD0) : COLOR0
+{
+	float aspect = (float)g_TextureWidth / (float)g_TextureHeight;
+
+	float distanceX = abs(UV.x - g_LightPos.x) * aspect;
+	float distanceY = abs(UV.y - g_LightPos.y);
+
+	float distance = length(float2(distanceX,distanceY));
+	float4 Color = float4(0,0,0,0);
+	float SunRadius = 0.017f;
+
+	if((distance) <= SunRadius)
+	{
+		if(distance <= SunRadius * 0.8)
+		{
+			Color = float4(1, 1, 1, 1) * 0.68f;
+		}
+		else
+		{
+			float t = (SunRadius - distance) / (SunRadius * 0.2f);
+			Color = float4(1, 1, 1, 1) * t * 0.68f;
+		}
+	}
+	else
+	{
+		discard;
+	}
+
+	return Color;
+}
+
 technique ScatteredLightTechnique
 {
     pass p0
     {
-        PixelShader = compile ps_3_0 mainPS();
+        //PixelShader = compile ps_3_0 mainPS();
+        PixelShader = compile ps_3_0 DrawLight();
     }
 }

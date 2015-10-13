@@ -115,6 +115,9 @@ public:
   void ShowStaticText( const std::string& inStaticText );
   void ShowStaticText( const std::string& inStaticText, bool inActive);
 
+  void ShowDialogText( const std::string& inDialogText );
+  bool NextDialog();
+
   void SetEditableTextBox( const std::string& inEditableTextName, const std::string& text );
   std::string GetEditableTextBox( const std::string& inEditableTextName );
 
@@ -152,6 +155,7 @@ private:
   CConsoleGUI*  m_pConsole;
   TransitionEffect m_sTransitionEffect;
   CImage* m_pPressButton;
+  CDialogBox* m_CurrentDialogBox;
 };
 
 #endif //INC_GUI_MANAGER_H

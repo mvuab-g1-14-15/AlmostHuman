@@ -23,6 +23,7 @@ void CPlayAnimationElement::Update()
     if( m_CurrentTime >= m_Time )
     {
         m_IsBlocker = false;
+		m_Playing = false;
     }
 }
 

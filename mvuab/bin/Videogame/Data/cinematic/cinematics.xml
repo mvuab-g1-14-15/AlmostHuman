@@ -3,6 +3,9 @@
 	<cinematic name="cinematica_2" resource_id_file="Data/cinematic/cinematic2.xml"/>-->
 	<!--<cinematic name="ventilador" resource_id_file="Data/cinematic/ventilador.xml"/>
 	<cinematic name="opendoor" resource_id_file="Data/cinematic/opendoor.xml"/>-->
+	<cinematic name="opendoor2" resource_id_file="Data/cinematic/open_door.xml"/>
 	<camera_cinematic name="cinematica_inicial" resource_id_file="Data/cinematic/cinematica_inicial.xml"/>
 	<camera_cinematic name="cinematica_final" resource_id_file="Data/cinematic/cinematica_final.xml"/>
+	<object_cinematic name="ventilador01" resource_id_file="Data/cinematic/ventilador.xml"/>
+	<object_cinematic name="elevator" resource_id_file="Data/cinematic/elevator.xml"/>
 </cinematics>

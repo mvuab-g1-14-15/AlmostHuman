@@ -241,8 +241,8 @@
 				<Event Id="2757069037" Name="Play_Fan"/>
 				<Event Id="1355231703" Name="Play_LightHumming"/>
 				<Event Id="2995129850" Name="Play_Shoot_Nave"/>
-				<Event Id="1062476537" Name="Play_Spark"/>
-				<Event Id="2885688842" Name="Play_Steam"/>
+				<Event Id="2858841480" Name="Play_sparks"/>
+				<Event Id="3459205581" Name="Play_steams"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="10864768" Language="SFX">
@@ -263,7 +263,7 @@
 				</File>
 				<File Id="707043063" Language="SFX">
 					<ShortName>sparks(chispas).wav</ShortName>
-					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
+					<Path>SFX\sparks(chispas)_BADC626A.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

@@ -318,6 +318,7 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_CLASS(CTriggerManager)
   LUA_DECLARE_METHOD( CTriggerManager, ReleaseTrigger )
   LUA_DECLARE_METHOD( CTriggerManager, AddTrigger )
+  LUA_DECLARE_METHOD( CTriggerManager, GetTriggerByName )
   LUA_DECLARE_METHOD( CTriggerManager, ModifyTrigger )
   LUA_END_DECLARATION
 

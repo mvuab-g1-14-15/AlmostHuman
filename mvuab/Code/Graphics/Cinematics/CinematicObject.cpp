@@ -11,6 +11,7 @@
 #include "Math\Vector3.h"
 #include "Utils\BaseUtils.h"
 #include "EngineManagers.h"
+#include "StaticMeshes\InstanceMesh.h"
 
 #include "RenderableObject/Room.h"
 #include "RenderableObject/Scene.h"
@@ -18,8 +19,8 @@
 CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
 {
   std::string resource = atts.GetAttribute<std::string>( "resource", "" );
-
-  m_RenderableObject = SceneInstance->GetResource( "core" )->GetLayer( "solid" )->GetResource( resource );
+  std::string room = atts.GetAttribute<std::string>("room", "" );
+  m_RenderableObject = dynamic_cast<CInstanceMesh*>(SceneInstance->GetResource( room )->GetLayer( "solid" )->GetResource( resource ));
 
   for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
     m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
@@ -174,6 +175,7 @@ void CCinematicObject::Update()
   m_RenderableObject->SetPitch( pitch );
   m_RenderableObject->SetRoll( roll );
   m_RenderableObject->SetScale( scale );
+  m_RenderableObject->MakeTransform();
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
 

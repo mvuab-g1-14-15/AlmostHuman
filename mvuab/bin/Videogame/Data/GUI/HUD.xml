@@ -28,4 +28,25 @@
 	<StaticText name="FaltanC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="FaltanC4" />
 	<StaticText name="C4Colocada" pos="50 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
 	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
+	
+	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
+			quad="Data/textures/GUI/BaseDialegBox.jpg" pos_button="40.00 15.00" height_button="5.00" width_button="5.00"
+          buttonClose_normal="Data/textures/GUI/ButtonDialegBoxC.jpg"  buttonClose_over="Data/textures/GUI/ButtonDialegBoxN.jpg"
+          buttonClose_clicked="Data/textures/GUI/ButtonDialegBoxO.jpg" buttonClose_deactivated="Data/textures/GUI/exit_normal.png">
+		  <Dialog>
+			<StaticText name="Texto1" pos="5.0 5.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea01" />
+			<StaticText name="Texto2" pos="5.0 10.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea02" />
+			<StaticText name="Texto3" pos="5.0 15.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea03" />
+		  </Dialog>
+		  <Dialog>
+			<StaticText name="Texto1" pos="5.0 5.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea11" />
+			<StaticText name="Texto2" pos="5.0 10.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea12" />
+			<StaticText name="Texto3" pos="5.0 15.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea13" />
+		  </Dialog>
+		  <Dialog>
+			<StaticText name="Texto1" pos="5.0 5.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea21" />
+			<StaticText name="Texto2" pos="5.0 10.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea22" />
+			<StaticText name="Texto3" pos="5.0 15.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea23" />
+		  </Dialog>
+	</DialogBox>
 </Windows>

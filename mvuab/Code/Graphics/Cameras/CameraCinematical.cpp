@@ -40,6 +40,7 @@ void CCameraCinematical::Update( )
 		Math::Vect3f d = m_LookAt- m_Position;
 		m_fYaw = Math::Utils::ATan2(d.z, d.x);
 		m_fPitch = Math::Utils::ATan2(d.y,Math::Utils::Sqrt(d.z * d.z + d.x * d.x));
+		MakeTransform();
 		//m_fRoll = 
 		//baseUtils::TraceVect3f("CameraPosition",m_Pos);
 		// baseUtils::TraceVect3f("CameraLookAt",GetLookAt());
@@ -47,16 +48,6 @@ void CCameraCinematical::Update( )
 	}
 	else
 	{
-		/*if(!timer)
-		{
-			TIMER_START();
-			timer = true;
-		}
-		else
-		{     
-			TIMER_STOP( "Ha tardado en hacerlo" );
-			timer = false;
-		}*/
 		m_pKeyController->SetCurrentTime(0);
 	}
 
@@ -65,10 +56,19 @@ void CCameraCinematical::Update( )
 
 Math::Vect3f CCameraCinematical::GetLookAt(void) const
 {
-    return m_LookAt;
+    //return m_LookAt;
+	Math::Vect3f look( Math::Utils::Cos(m_fYaw) * Math::Utils::Cos(m_fPitch),
+                       Math::Utils::Sin(m_fPitch),
+                       Math::Utils::Sin(m_fYaw) * Math::Utils::Cos(m_fPitch) );
+
+    return m_Position + look;
 }
 
 Math::Vect3f CCameraCinematical::GetVecUp(void) const
 {
     return m_Up;
+	Math::Vect3f vUpVec( -Math::Utils::Cos(m_fYaw) * Math::Utils::Sin(m_fPitch),
+                         Math::Utils::Cos(m_fPitch),
+                         -Math::Utils::Sin(m_fYaw) * Math::Utils::Sin(m_fPitch) );
+	return vUpVec;
 }

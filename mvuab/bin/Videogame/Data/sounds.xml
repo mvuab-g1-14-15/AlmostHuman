@@ -12,6 +12,5 @@
 	<GameObject2d name="Iris" register="true"/>
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
-	<GameObject3d name="TestGameObject3d" register="true" pos="0 0 0" dir="0 0 0"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
  </sounds>

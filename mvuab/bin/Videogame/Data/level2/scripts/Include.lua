@@ -21,6 +21,7 @@ billboard_manager = GetBillboardManager()
 light_manager = GetLightManager()
 texture_manager = GetTextureManager()
 trigger_manager = GetTriggerManager()
+engine_manager = CEngineManagers.GetSingletonPtr()
 
 -- Global Variables
 g_CameraSensibility = 30.0

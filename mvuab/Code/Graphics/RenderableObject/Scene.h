@@ -33,6 +33,7 @@ public:
   void ThreadLoadRoom();
   void ActivateRoom(  const std::string& aRoomName );
   void LoadRoom( const std::string& aRoomName );
+  void LoadAllRoom();
 
   void UnloadRoom( std::string aRoomName );
   void DesactivateRoom( std::string aRoomName );

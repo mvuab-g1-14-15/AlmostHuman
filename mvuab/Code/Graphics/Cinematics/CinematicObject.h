@@ -6,7 +6,7 @@
 #include <vector>
 
 class CCinematicObjectKeyFrame;
-class CRenderableObject;
+class CInstanceMesh;
 class CXMLTreeNode;
 
 class CCinematicObject : public CCinematicPlayer
@@ -14,7 +14,7 @@ class CCinematicObject : public CCinematicPlayer
 private:
 	std::vector<CCinematicObjectKeyFrame *> m_CinematicObjectKeyFrames;
 	size_t m_CurrentKeyFrame;
-	CRenderableObject *m_RenderableObject;
+	CInstanceMesh *m_RenderableObject;
 public:
 	CCinematicObject(CXMLTreeNode &atts);
 	bool IsOk();

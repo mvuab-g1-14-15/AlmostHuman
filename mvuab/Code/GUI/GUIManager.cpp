@@ -895,6 +895,50 @@ void CGUIManager::ShowStaticText( const std::string& inStaticText, bool inActive
     }
 }
 
+void CGUIManager::ShowDialogText( const std::string& inDialogText )
+{
+	if( inDialogText == "current" )
+	{
+		if ( m_CurrentDialogBox->GetVisible() )
+		{
+			m_CurrentDialogBox->EndDialog(  );
+		}
+		else
+		{
+			m_CurrentDialogBox->StartDialog( );
+		}
+	}
+	else
+	{
+		std::map<std::string, CGuiElement*>::iterator it;
+		it = m_ElementsMap.find( inDialogText );
+
+		if ( it != m_ElementsMap.end() )
+		{
+			m_CurrentDialogBox = ( CDialogBox* )( it->second );
+
+			if ( m_CurrentDialogBox->GetVisible() )
+			{
+				m_CurrentDialogBox->EndDialog(  );
+			}
+			else
+			{
+				m_CurrentDialogBox->StartDialog( );
+			}
+		}
+		else
+		{
+			LOG_ERROR_APPLICATION( "CGUIManager:: No se ha encontrado el guiElement %s",
+								   inDialogText.c_str() );
+		}
+	}
+}
+
+bool CGUIManager::NextDialog()
+{
+	return m_CurrentDialogBox->NextDialog();
+}
+
 bool CGUIManager::NextBlockInRadioBox( const std::string& inNameRadioBox )
 {
     std::map<std::string, CGuiElement*>::iterator it;
