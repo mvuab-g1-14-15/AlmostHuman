@@ -13,6 +13,7 @@
 #include "Actor/PhysicActor.h"
 #include "Billboard/BillboardManager.h"
 #include "Particles/ParticleSystemManager.h"
+#include "WWSoundManager.h"
 
 CRoom::CRoom( const CXMLTreeNode& aNode )
     : CName( aNode.GetAttribute<std::string>("level", "no_level") )
@@ -128,6 +129,7 @@ void CRoom::Load()
 
         BillboardMan->LoadInstances( m_BasePath + "billboards.xml");
         PSManager->LoadInstances( m_BasePath + "particles.xml");
+        SoundInstance->LoadParticlePosSound(m_BasePath + "particles.xml");
         LoadLights();
     }
 

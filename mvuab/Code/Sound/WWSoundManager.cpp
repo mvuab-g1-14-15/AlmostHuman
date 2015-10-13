@@ -1,4 +1,5 @@
 #include "WWSoundManager.h"
+#include "EngineConfig.h"
 
 //WWise Includes
 #include <AK/SoundEngine/Common/AkMemoryMgr.h>                  // Memory Manager
@@ -328,6 +329,52 @@ bool CWWSoundManager::Load( const std::string& xmlFile )
     return true;
 }
 
+void CWWSoundManager::LoadParticlePosSound(const std::string& aFileName)
+{
+  //std::map<std::string,std::vector<Math::Vect3f>> lTempInstanceParticleMap;
+  CXMLTreeNode l_XML, l_Node;
+  if ( l_XML.LoadAndFindNode( aFileName.c_str(), "particles_instances", l_Node ) )
+  {
+    for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
+    {
+      
+      const CXMLTreeNode& lCurrentParticle = l_Node( i );
+      const std::string& lCoreSoundParticle = lCurrentParticle.GetAttribute<std::string>( "core", "" );
+      const std::string& lInstanceNameSoundParticle = lCurrentParticle.GetAttribute<std::string>( "name", "" );
+      const std::string& lHasSound = lCurrentParticle.GetAttribute<std::string>( "sound", "" );
+      const std::string& lIsActive = lCurrentParticle.GetAttribute<std::string>( "active", "" );
+      Math::Vect3f lParticleSoundPos = lCurrentParticle.GetAttribute<Math::Vect3f>( "pos", 0 );
+      
+
+      if (lHasSound != "true" || lIsActive != "true")
+        continue;
+    
+      m_ParticlesSoundMap[lInstanceNameSoundParticle] = lCoreSoundParticle;
+      
+      m_GameObjectMap[lInstanceNameSoundParticle.c_str()] =  ++m_ObjectId;
+
+      AKRESULT l_AkResult =  RegisterGameObject( lInstanceNameSoundParticle.c_str() );
+
+      if ( l_AkResult != AK_Success )
+      {
+        LOG_ERROR_APPLICATION( "CWWSoundManager::LoadCoreSoundParticles --> Error loading particle emitter %s.",
+          lCoreSoundParticle.c_str() );
+        return;
+      }else{
+        SetGameObjectPosition(lInstanceNameSoundParticle,lParticleSoundPos,lParticleSoundPos);
+      }
+    }
+
+    /*typedef std::map<std::string, std::vector<Math::Vect3f>>::iterator it_type;
+    for(it_type iterator = m_ParticlesSoundMap.begin(); iterator != m_ParticlesSoundMap.end(); iterator++) {
+      std::vector<Math::Vect3f> lVectorOrientation((iterator->second).size(), 0);
+      //SetGameObjectMultiplePositions( iterator->first, iterator->second, lVectorOrientation, "MultiSource" );
+      
+    }*/
+  }
+
+}
+
 AKRESULT CWWSoundManager::SetSwitch( std::string _Group, std::string _Gravel, std::string _KeyGameObjectMap )
 {
     return AK::SoundEngine::SetSwitch( _Group.c_str(), _Gravel.c_str(), m_GameObjectMap[_KeyGameObjectMap] );
@@ -398,7 +445,7 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
     int l_NumPositions = _GameObjectPosition.size();
 
     AK::SoundEngine::MultiPositionType l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiSources;
-    //TODO JAUME, LA VARIABLE l_AKGameObjectPositions TIENE MEMORY LEAK, no se donde debe borrarse cuando se destruye
+
     AkSoundPosition* l_AKGameObjectPositions = ( AkSoundPosition* ) malloc( sizeof( AkSoundPosition ) * l_NumPositions );
     ZeroMemory( l_AKGameObjectPositions, sizeof( AkSoundPosition ) * l_NumPositions );
 
@@ -408,11 +455,9 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
         l_AKGameObjectPositions[i].Position.Y = _GameObjectPosition[i].y;
         l_AKGameObjectPositions[i].Position.Z = _GameObjectPosition[i].z;
 
-        Math::Vect3f l_GameObjectPositionNorm = _GameObjectPosition[i].GetNormalized();
-
-        l_AKGameObjectPositions[i].Orientation.X = l_GameObjectPositionNorm.x;
-        l_AKGameObjectPositions[i].Orientation.Y = l_GameObjectPositionNorm.y;
-        l_AKGameObjectPositions[i].Orientation.Z = l_GameObjectPositionNorm.z;
+       /* l_AKGameObjectPositions[i].Orientation.X = _GameObjectOrientation[i].x;
+        l_AKGameObjectPositions[i].Orientation.Y = _GameObjectOrientation[i].y;
+        l_AKGameObjectPositions[i].Orientation.Z = _GameObjectOrientation[i].z;*/
     }
 
     if ( _TypePos == "MultiSource" )
@@ -424,10 +469,26 @@ AKRESULT CWWSoundManager::SetGameObjectMultiplePositions( std::string _KeyGameOb
         l_eMultiPositionType = AK::SoundEngine::MultiPositionType_MultiDirections;
     }
 
-    AKRESULT result = AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions,
-                      l_NumPositions, l_eMultiPositionType );
-    CHECKED_DELETE( l_AKGameObjectPositions );
+    AKRESULT result = AK::SoundEngine::SetMultiplePositions( m_GameObjectMap[_KeyGameObjectMap] , l_AKGameObjectPositions,l_NumPositions, l_eMultiPositionType );
+    
+    if ( result != AK_Success )
+    {
+      LOG_ERROR_APPLICATION( "CWWSoundManager::SetMultiplePositions --> Error loading multiple position");
+      CHECKED_DELETE( l_AKGameObjectPositions );
+      return result;
+    }
     return result;
+}
+
+void CWWSoundManager::PlayParticlesSFX()
+{
+  typedef std::map<std::string, std::string>::iterator it_type;
+  
+  for(it_type iterator = m_ParticlesSoundMap.begin(); iterator != m_ParticlesSoundMap.end(); iterator++) 
+  {
+    PlayEvent("Play_"+iterator->second,iterator->first);
+  }
+
 }
 
 AKRESULT CWWSoundManager::SetState( std::string _Group, std::string _State )

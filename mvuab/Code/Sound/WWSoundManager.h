@@ -20,7 +20,10 @@
 #include "Utils/Manager.h"
 #include "Utils/BaseUtils.h"
 #include <map>
+#include <vector>
 #include "Math/Vector3.h"
+#include "Math\MathUtils.h"
+#include "Utils\TemplatedVectorMapManager.h"
 
 class CWWSoundManager : public CManager
 {
@@ -54,7 +57,10 @@ public:
   AKRESULT SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation );
   AKRESULT SetGameObjectMultiplePositions( std::string _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
       std::vector<Math::Vect3f> _GameObjectOrientation, std::string _TypePos );
-  /***************************** BASIC OPS ***********************************************/
+  /******************************* Particles OP  ************/
+  void LoadParticlePosSound(const std::string& aFileName);
+  void PlayParticlesSFX();
+    /***************************** BASIC OPS ***********************************************/
   AkPlayingID PlayEvent( std::string _Event, std::string _GameObjectId );
   void ResumeEvent( std::string _Event, std::string _KeyGameObjectMap );
   void PauseEvent( std::string _Event, std::string _KeyGameObjectMap );
@@ -63,7 +69,6 @@ public:
 
   AkGameObjectID GetGameObjectMapById( std::string _KeyGameObjectMap );
   void SetGameObjectMapById( std::string _KeyGameObjectMap );
-
   //void PauseAllSounds();
   //void ResumeAllSounds();
 
@@ -71,7 +76,9 @@ private:
 
   CAkDefaultIOHookBlocking* m_lowLevelIO;
   std::map<std::string, AkGameObjectID> m_GameObjectMap;
+  std::map<std::string, std::string> m_ParticlesSoundMap;
   bool m_GamePaused;
   AkGameObjectID m_ObjectId;
+
 };
 #endif // INC_SOUND_MANAGER_H_

@@ -42,8 +42,7 @@ function load_gameplay()
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 
-	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
-
+	--sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
 	cinematic_manager:PlayCinematic("cinematica_inicial")
 	g_PlayerCinematic = CreateAnimatedInstanceModel("PlayerCinematic", "PlayerCinematic")
@@ -51,7 +50,7 @@ function load_gameplay()
 	g_PlayerCinematic:SetPosition(Vect3f(124.992, -8.283, -51.212))
 	g_PlayerCinematic:MakeTransform()
 	g_PlayerCinematic:SetRoomName( "sala1" )
-	g_PlayerCinematic:ExecuteActionLUA("anim_cinem_inicial_sala1", 0.2, 1)
+	--g_PlayerCinematic:ExecuteActionLUA("anim_cinem_inicial_sala1", 0.2, 1)
 
 end
 
