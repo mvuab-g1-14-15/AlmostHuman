@@ -19,6 +19,9 @@ function CEnemyManagerLUA:__init()
 	self.ExtraEnemyCount = 0
 	self.ExtraEnemyCountMax = 3
 	self.timerExtraEnemy = "Add Extra Enemy"
+	
+	self.Boss = nil
+	
 	self:Load("Data/enemies/enemies.xml")
 end
 
@@ -120,6 +123,10 @@ function CEnemyManagerLUA:Update()
 				self.ActualEnemy:ChangeRoute(self.Routes[self.ActualEnemy.IdRouteAlarm])
 			end	
 		end
+	end
+	
+	if self.Boss ~= nil then
+		self.Boss:Update()
 	end
 	
 	self.RoomAlarm = false
@@ -321,4 +328,8 @@ end
 function CEnemyManagerLUA:AlarmRoom(room)	
 	self.Room = room
 	self.RoomAlarm = true
+end
+
+function CEnemyManagerLUA:CreateBoss()
+	self.Boss = CBoss()
 end

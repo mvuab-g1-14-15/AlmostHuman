@@ -335,6 +335,7 @@ void registerAnimatedModels( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, ExecuteActionLUA )
   LUA_DECLARE_METHOD_PROTO( CAnimatedInstanceModel, IsActionAnimationActive, bool( CAnimatedInstanceModel::* )( const std::string& ) const )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, SetVelocity )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, GetVelocity )
   LUA_END_DECLARATION
 }
 

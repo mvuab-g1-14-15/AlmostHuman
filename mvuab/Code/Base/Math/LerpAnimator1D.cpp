@@ -14,6 +14,12 @@ void Math::CLerpAnimator1D::SetValues (float32 initValue, float32 endValue, floa
     m_eFunction = type;
 }
 
+float32 Math::CLerpAnimator1D::Value( float32 ElapsedTime )
+{
+    float32 lReturn;
+    Update(ElapsedTime, lReturn);
+    return lReturn;
+}
 
 bool Math::CLerpAnimator1D::Update (float32 ElapsedTime, float32 &value)
 {

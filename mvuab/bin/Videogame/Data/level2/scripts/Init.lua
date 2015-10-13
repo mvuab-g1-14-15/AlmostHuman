@@ -20,10 +20,10 @@ function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	--scene:ActivateRoom("pasillo")
-	--scene:ActivateRoom("sala4")
-	--scene:ActivateRoom("sala2")
-	--scene:ActivateRoom("sala3")
+	scene:ActivateRoom("pasillo")
+	scene:ActivateRoom("sala4")
+	scene:ActivateRoom("sala2")
+	scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -37,6 +37,8 @@ function load_gameplay()
 	if enemy_manager == nil then
 		enemy_manager = CEnemyManagerLUA()	
 	end
+	
+	enemy_manager:CreateBoss()
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
 
