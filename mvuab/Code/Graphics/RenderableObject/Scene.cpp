@@ -55,6 +55,7 @@ void CScene::Destroy()
 void CScene::Init()
 {
     Load( mConfigPath );
+	//LoadAllRoom();
 }
 
 bool CScene::Load( const std::string& l_FilePath )
@@ -156,4 +157,11 @@ const std::string CScene::GetActivateRoom()
 
     const std::string& lDontExist( "" );
     return lDontExist;
+}
+
+void CScene::LoadAllRoom()
+{
+	TMapResources::iterator it = m_ResourcesMap.begin(), it_end = m_ResourcesMap.end();
+	for(;it!=it_end;++it)
+		ActivateRoom(it->first);
 }
