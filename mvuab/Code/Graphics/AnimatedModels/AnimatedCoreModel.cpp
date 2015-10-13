@@ -237,7 +237,7 @@ int CAnimatedCoreModel::GetAnimationId(const std::string &AnimationName) const
     TAnimationsIdMap::const_iterator lItFind = m_AnimationsMap.find( AnimationName );
     if( lItFind == m_AnimationsMap.end() )
     {
-        LOG_ERROR_APPLICATION( "Unknown animation %s", AnimationName.c_str() );
+        //LOG_ERROR_APPLICATION( "Unknown animation %s", AnimationName.c_str() );
     }
     else
     {
