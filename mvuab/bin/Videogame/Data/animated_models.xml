@@ -3,5 +3,5 @@
 	<animated_model name="enemy1" path="Data/animated_models/androide/"/>
 	<animated_model name="Player" path="Data/animated_models/logan/"/>
 	<animated_model name="boss" path="Data/animated_models/boss/"/>
-	<animated_model name="PlayerCinematic" path="Data/animated_models/PlayerCinematic/"/>
+	<animated_model name="playercinematic1" path="Data/animated_models/PlayerCinematic/"/>
 </animated_models>

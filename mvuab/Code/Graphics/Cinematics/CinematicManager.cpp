@@ -7,6 +7,7 @@
 #include "Cinematics\CinematicsElement\WaitTimeElement.h"
 #include "Cameras\CameraCinematical.h"
 #include "Cameras\CameraManager.h"
+#include "Cinematics\Cinematic.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 #include "Timer\Timer.h"
@@ -108,6 +109,17 @@ void CCinematicManager::Init()
 					}
 				}
 			}
+			else if( TagName == "object_cinematic" )
+			{
+				const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
+				CCinematic* ObjectCinematic = new CCinematic(ResourceFileName);
+				ObjectCinematic->Play(true);
+				if ( !m_vCinematicLoop.AddResource( lName, ObjectCinematic ) )
+				{
+					LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
+					CHECKED_DELETE( ObjectCinematic );
+				}
+			}
         }
     }
 	/*CXMLTreeNode l_File2, TreeNode2;
@@ -205,6 +217,12 @@ std::string CCinematicManager::CCinematicsItems::GetNextName()
 
 void CCinematicManager::Update()
 {
+	std::vector<CCinematic*>::iterator it = m_vCinematicLoop.GetResourcesVector().begin(),
+                                               it_end = m_vCinematicLoop.GetResourcesVector().end();
+    for(; it != it_end; ++it)
+    {
+        (*it)->Update();
+    }
 
     if ( m_CurrentElement != 0 )
     {

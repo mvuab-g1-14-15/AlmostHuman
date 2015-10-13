@@ -6,6 +6,7 @@
 #include "Utils\TemplatedVectorMapManager.h"
 #include "CinematicsElement\CinematicsElement.h"
 #include "Cameras\CameraKeyController.h"
+#include "Cinematics\Cinematic.h"
 #include <string>
 #include "Utils/Manager.h"
 
@@ -38,6 +39,7 @@ private:
     std::string GetNextName();
   };
   CTemplatedVectorMapManager<CCinematicsItems>     m_vCinematicsElement;
+  CTemplatedVectorMapManager<CCinematic>		   m_vCinematicLoop;
   CCinematicsItems*								   m_CurrentCinematicsElement;
   CCinematicsElement*							   m_CurrentElement;
   //CCameraCinematical*							   m_CurrentCameraCinematical;
