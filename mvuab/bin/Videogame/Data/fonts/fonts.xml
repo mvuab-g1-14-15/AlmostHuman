@@ -2,7 +2,7 @@
 <Fonts>
 
   <font id="arial"    name="Arial"                        file="Data/fonts/arial.ttf"               size="16" bold="true"   italica="false" default="false" />
-  <font id="xfiles"   name="X-Files"                      file="Data/fonts/xfiles.ttf"              size="32" bold="false"  italica="false" default="false" />
+  <font id="xfiles"   name="X-Files"                      file="Data/fonts/xfiles.ttf"              size="16" bold="false"  italica="false" default="false" />
   <font id="futurama" name="Futurama Alien Alphabet One"  file="Data/fonts/fr-fal1-2.ttf"           			size="32" bold="false"  italica="false" default="false" />
   <font id="Annabel"  name="Annabel Script"               file="Data/fonts/AnnabelScript.ttf"       			size="32" bold="false"  italica="false" default="false" />
   <font id="Slap"     name="SF Slapstick Comic"           file="Data/fonts/SF Slapstick Comic.ttf"  size="32" bold="false"  italica="false" default="false" />

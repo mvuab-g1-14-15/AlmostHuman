@@ -19,4 +19,13 @@
 	<literal id="FaltanC4"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="You must plant the explosives"/>
 	<literal id="C4Colocada"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="C4 planted"/>
 	<literal id="Alarm"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Alarm activate"/>
+	<literal id="Documento1Linea01"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba1"/>
+	<literal id="Documento1Linea02"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba2"/>
+	<literal id="Documento1Linea03"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba3"/>
+	<literal id="Documento1Linea11"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba4"/>
+	<literal id="Documento1Linea12"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba5"/>
+	<literal id="Documento1Linea13"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba6"/>
+	<literal id="Documento1Linea21"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba7"/>
+	<literal id="Documento1Linea22"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba8"/>
+	<literal id="Documento1Linea23"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba9"/>
 </Language>

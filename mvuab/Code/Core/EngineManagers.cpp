@@ -216,7 +216,7 @@ void CEngineManagers::Update()
 	{
         if( m_bGamePause )
 		{
-			if( m_pGUIManager == ( *lItb ) || m_pSoundManager == ( *lItb ) )
+			if( m_pGUIManager == ( *lItb ) || m_pSoundManager == ( *lItb ) || m_pActionManager == (*lItb) || m_pInputManager == (*lItb) )
 			{
 				( *lItb )->Update();
 			}

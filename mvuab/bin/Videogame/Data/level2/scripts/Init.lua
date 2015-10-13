@@ -7,6 +7,7 @@ g_HUD = nil
 enemy_manager = nil
 g_ConsoleActivate = false
 g_CinematicActive = false
+g_PauseGame = false
 g_Barrels = {}
 
 initialized1 = false
@@ -43,13 +44,22 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 
 	engine:Trace("Finish the load_gameplay()")
+	g_Player:Update()
 	cinematic_manager:PlayCinematic("cinematica_inicial")
-	g_PlayerCinematic = CreateAnimatedInstanceModel("PlayerCinematic", "PlayerCinematic")
-	renderable_objects_manager_characters:AddResource("PlayerCinematic", g_PlayerCinematic)
-	g_PlayerCinematic:SetPosition(Vect3f(124.992, -8.283, -51.212))
-	g_PlayerCinematic:MakeTransform()
-	g_PlayerCinematic:SetRoomName( "sala1" )
-	g_PlayerCinematic:ExecuteActionLUA("anim_cinem_inicial_sala1", 0.2, 1)
+	--
+	-- if renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1")) == false  then
+		-- renderable_objects_manager_characters:RemoveResource("PlayerCinematic")
+		-- renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1"))
+	-- end
+	-- g_PlayerCinematic = renderable_objects_manager_characters:GetResource("PlayerCinematic")
+	-- g_PlayerCinematic:SetPosition(Vect3f(124.989,-8.31726,-51.9642))
+	-- g_PlayerCinematic:MakeTransform()
+	-- g_PlayerCinematic:SetRoomName( "sala1" )
+	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
+	 --g_Player:SetPosition(Vect3f(124.989,-8.31726,-51.9642))
+	 --g_Player:Update()
+	 --g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1", 0.2, 0)
+	 --g_Player:SetCurrentState("cinematica_inicial_sala1")
 
 end
 
@@ -61,21 +71,29 @@ function update_gameplay()
 	end
 	
 	enemy_manager:Update()
-	
+	engine:Trace("El estado actual del player es: "..g_Player:GetCurrentState())
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()
-	
+	g_PauseGame = engine_manager:GetbGamePause()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
-		if not g_CinematicActive then
+		if not (g_CinematicActive or g_PauseGame) then
 			g_Player:Update()
 			g_HUD:Update()
 		end
 		
 	end
 	
-
+	if g_PauseGame then
+		if action_manager:DoAction("RightClick") then
+			engine:Trace("He entrado a pulsar boton derecho")
+			local findialog = gui_manager:NextDialog()
+			if findialog then
+				gui_manager:ShowDialogText("current")
+			end
+		end
+	end
 	
 	if action_manager:DoAction("PlayAmbient") then	
 		sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
@@ -88,7 +106,7 @@ function update_gameplay()
 		sound_manager:PlayEvent("Play_Ambient_Sala3", "Ambient" )	
 	end
 
-	if not (g_ConsoleActivate or g_CinematicActive) then
+	if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
 		if action_manager:DoAction("ChangeRoom") then
 			if camera_manager:GetCurrentCamera():GetName() == "FreeCam" then
 				engine:Trace("He entrado")
@@ -115,6 +133,9 @@ function update_gameplay()
 				end
 				g_bPressedRoom2X = true
 			elseif g_bOpenDoor2 then
+				cinematic_manager:Execute("opendoor2")
+				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
+				gui_manager:ShowStaticText("OpenDoor")
 				--Code para abrir puerta
 			end
 		end	
@@ -162,7 +183,7 @@ function update_gameplay()
 			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
-	if not (g_ConsoleActivate or g_CinematicActive) then
+	if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
 		if action_manager:DoAction("ChangeCamera" ) then
 			if "FreeCam" == camera_manager:GetCurrentCameraName() then
 				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
