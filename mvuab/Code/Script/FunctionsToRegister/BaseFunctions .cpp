@@ -20,6 +20,7 @@
 #include "Math\Color.h"
 #include "Utils\TemplatedVectorMapManager.h"
 #include "Timer\CounTDownTimerManager.h"
+#include "Math/LerpAnimator1D.h"
 
 #include "XML\XMLTreeNode.h"
 
@@ -351,4 +352,12 @@ void registerBase( lua_State* m_LS )
 
   registerXML( m_LS );
 /*  registerTemplatedVectorMapManager( m_LS );*/
+
+  module( m_LS )
+  [
+      class_<Math::CLerpAnimator1D>("CLerpAnimator1D")
+      .def( constructor<>() )
+      .def( "SetValues", &Math::CLerpAnimator1D::SetValues )
+      .def( "Value", &Math::CLerpAnimator1D::Value )
+  ];
 }

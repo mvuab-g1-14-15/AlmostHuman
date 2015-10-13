@@ -332,5 +332,4 @@ end
 
 function CEnemyManagerLUA:CreateBoss()
 	self.Boss = CBoss()
-	self.Boss:SetPosition( Vect3f(-114.0, 31.0, 61.0) )
 end
