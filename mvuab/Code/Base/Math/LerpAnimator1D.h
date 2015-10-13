@@ -19,6 +19,7 @@ public:
     virtual ~CLerpAnimator1D () {/*NOTHING*/}
     
     void        SetValues            (float32 initValue, float32 endValue, float32 totalTime, ETypeFunction type); 
+    float32     Value               ( float32 ElapsedTime );
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
     bool        Update                (float32 ElapsedTime, float32 &value);
     void        Pause                    (bool flag) {m_bPause = flag;}

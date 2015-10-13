@@ -144,11 +144,11 @@
 	
 	<disable_z_test/>
     
-    <capture_frame_buffer name="FB1">
+	<!--
+     <capture_frame_buffer name="FB1">
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
     
-	<!--
     <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
     <zblur FocalStart="2" FocalEnd="5" Constant="0.1" BlurEnd="50">
 		<texture stage_id="0" name="FB1"/>
@@ -164,7 +164,7 @@
     <!--set_pool_renderable_objects_technique pool="Scattered_Light_pool_renderable_object_technique"/>
     <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
     </scattered_light-->
-	
+    
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_gui render="true"/>
