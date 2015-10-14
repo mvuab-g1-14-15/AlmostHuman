@@ -43,18 +43,15 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     CRenderableObjectTechnique* l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatteredLight(m_Decay, m_Exposure, m_Weight, m_Density, m_Samples, l_ScrPos, Math::Vect2i(512, 512));
+    l_EffectTech->GetEffect()->SetScatteredLight(m_Decay, m_Exposure, m_Weight, m_Density, m_Samples, l_LightPos, Math::Vect2i(512, 512));
 
     unsigned int l_Width = 0, l_Height = 0;
     GM.GetWidthAndHeight(l_Width, l_Height);
 
-    GM.Clear(true, true, true, 0);
-    RECT l_Rect = { 0, 0, l_Width - 1, l_Height - 1 };
-
     //m_RenderTexture->SetAsRenderTarget();
-      
+    CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
     //m_RenderTexture->UnsetAsRenderTarget(0);
     
-    //m_RenderTexture->Activate(0);
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), NULL, 0.0f, 0.0f, 1.0f, 1.0f );
+    RECT l_Rect = { 0, 0, l_Width - 1, l_Height - 1 };
+    //GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), NULL, 0.0f, 0.0f, 1.0f, 1.0f );
 }
