@@ -64,9 +64,6 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( SLWeight )
   , CTOR_EFFECT_PARAMETER( SLSamples )
   , CTOR_EFFECT_PARAMETER( SLLightPos )
-  // Texture Width/Height
-  , CTOR_EFFECT_PARAMETER( TextureWidth )
-  , CTOR_EFFECT_PARAMETER( TextureHeight )
 {
   ResetLightsHandle();
 }
@@ -127,10 +124,6 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( SLSamples )
   RESET_EFFECT_PARAMETER( SLLightPos )
 
-  // Texture Width/Height
-  RESET_EFFECT_PARAMETER( TextureWidth )
-  RESET_EFFECT_PARAMETER( TextureHeight )
-
   ResetLightsHandle();
 }
 
@@ -189,9 +182,6 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( SLWeight, m_SLWeight );
   GetParameterBySemantic( SLSamples, m_SLSamples );
   GetParameterBySemantic( SLLightSource, m_SLLightPos );
-  // Texture Width/Height
-  GetParameterBySemantic( TextureWidthStr, m_TextureWidth );
-  GetParameterBySemantic( TextureHeightStr, m_TextureHeight );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -380,8 +370,8 @@ void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight,
     m_Effect->SetInt(m_SLSamples, l_Samples);
     m_Effect->SetFloatArray(m_SLLightPos, &l_Pos.x, 2);
 
-    m_Effect->SetInt(m_TextureWidth, l_TexSize.x);
-    m_Effect->SetInt(m_TextureHeight, l_TexSize.y);
+    m_Effect->SetInt(m_FBWidth, l_TexSize.x);
+    m_Effect->SetInt(m_FBHeight, l_TexSize.y);
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )

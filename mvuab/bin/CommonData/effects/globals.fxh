@@ -26,8 +26,8 @@ float4x4 g_ViewProjMatrix                                           : VPMatrix;
 float3   g_CameraPosition                                           : CameraPosition;
 float3   g_AmbientLight                                             : AmbientLight;
 
-int      g_TextureWidth                                                  : FBWidth;
-int      g_TextureHeight                                                 : FBHeight;
+int      g_TextureWidth                                             : FBWidth;
+int      g_TextureHeight                                            : FBHeight;
 
 //
 // Debug semantics

@@ -191,12 +191,6 @@ private: // Members
   D3DXHANDLE m_UseStaticShadowmapParameter;
   D3DXHANDLE m_UseDynamicShadowmapParameter;
 
-  //
-  // Texture Width and Height
-  //
-  D3DXHANDLE m_TextureWidth;
-  D3DXHANDLE m_TextureHeight;
-
 private: // Methods
   void ResetLightsHandle();
 };

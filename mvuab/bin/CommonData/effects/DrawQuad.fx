@@ -10,7 +10,6 @@ float g_Saturation = 1.0;
 float g_Constrast = 1.0;
 float g_Brightness = 0.0;
 
-
 float Luminance(float3 l_Color)
 {
     return dot(l_Color, float3(0.2126, 0.7152, 0.0722));
