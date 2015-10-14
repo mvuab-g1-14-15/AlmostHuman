@@ -238,7 +238,7 @@ bool CEffect::Load( const std::string& aFileName, const std::vector<SDefines>& a
     CHECKED_RELEASE( m_Effect );
   }
 
-  ASSERT( lOk, "%s %s", m_FileName.c_str() );
+  ASSERT( lOk, "%s", m_FileName.c_str() );
 
   if ( lOk )
   {
@@ -359,7 +359,7 @@ void CEffect::SetZBlur(float FocalStart, float FocalEnd, float Constant, float B
     m_Effect->SetFloat(ZBlurEnd, BlurEnd);
 }
 
-void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos, Math::Vect2i &l_TexSize)
+void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect3f &l_Pos, Math::Vect2i &l_TexSize)
 {
     m_Effect->SetFloat(m_SLDecai, l_Decay);
     m_Effect->SetFloat(m_SLExposure, l_Esposure);
@@ -368,7 +368,7 @@ void CEffect::SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight,
     m_Effect->SetFloat(m_SLDensity, l_Density);
 
     m_Effect->SetInt(m_SLSamples, l_Samples);
-    m_Effect->SetFloatArray(m_SLLightPos, &l_Pos.x, 2);
+    m_Effect->SetFloatArray(m_SLLightPos, &l_Pos.x, 3);
 
     m_Effect->SetInt(m_FBWidth, l_TexSize.x);
     m_Effect->SetInt(m_FBHeight, l_TexSize.y);

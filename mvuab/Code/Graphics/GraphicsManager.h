@@ -113,9 +113,6 @@ public:
   void DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
   void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
 
-  bool GetUseTechniques() { return m_UseTechniques; }
-  void SetUseTechniques(bool l_Use) { m_UseTechniques = l_Use; } 
-
 private: // Members
   HWND                    m_WindowId;                      // 3D render window handle
   LPDIRECT3D9             mDirectXObject;                  // direct3d interface
@@ -136,8 +133,6 @@ private: // Members
   LPD3DXMESH              m_TeapotMesh;
   LPDIRECT3DVERTEXBUFFER9 m_VBQuad;
   LPDIRECT3DINDEXBUFFER9  m_IBQuad;
-
-  bool m_UseTechniques;
 
 private: // Methods
   void CalculateAlignment( uint32 w, uint32 h, ETypeAlignment alignment, Math::Vect2i& finalPos );

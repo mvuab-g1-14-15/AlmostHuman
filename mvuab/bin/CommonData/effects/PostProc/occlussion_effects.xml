@@ -1,0 +1,36 @@
+<effects>	
+	<technique name="OcclusionMapTechnique" vertex_type="19" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="OcclusionMapDebugTechnique" vertex_type="19" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_DEBUG" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="OcclusionMapNormalTechnique" vertex_type="31" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_NORMAL" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="OcclusionMapSelfIllumTechnique" vertex_type="51" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_SELF_ILUM" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="OcclusionMapSelfIllumNormalTechnique" vertex_type="63" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_SELF_ILUM" description=""/>
+		<define name="USE_NORMAL" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="OcclusionMapDiffuseTechnique" vertex_type="67" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_DIFFUSE_COLOR" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="OcclusionMapCal3DTechnique" vertex_type="415" file="../CommonData/effects/PostProc/OcclusionMap.fx">
+		<define name="USE_CAL3D_HW" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+</effects>

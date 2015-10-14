@@ -1,0 +1,36 @@
+<effects>	
+	<technique name="RenderGlowTechnique" vertex_type="19" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="RenderGlowDebugTechnique" vertex_type="19" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_DEBUG" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="RenderGlowNormalTechnique" vertex_type="31" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_NORMAL" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="RenderGlowSelfIllumTechnique" vertex_type="51" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_SELF_ILUM" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="RenderGlowSelfIllumNormalTechnique" vertex_type="63" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_SELF_ILUM" description=""/>
+		<define name="USE_NORMAL" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true"/>
+	</technique>
+	
+	<technique name="RenderGlowDiffuseTechnique" vertex_type="67" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_DIFFUSE_COLOR" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+	
+	<technique name="RenderGlowCal3DTechnique" vertex_type="415" file="../CommonData/effects/PostProc/RenderGlow.fx">
+		<define name="USE_CAL3D_HW" description=""/>
+		<handles use_world_matrix="true" use_world_view_projection_matrix="true" use_light_ambient_color="true" />
+	</technique>
+</effects>

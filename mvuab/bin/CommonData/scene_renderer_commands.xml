@@ -83,7 +83,11 @@
  		<texture stage_id="0" name="FB1"/>
         <texture stage_id="1" name="DepthMapTexture"/>
  	</render_draw_quad-->
-    <!--set_pool_renderable_objects_technique pool="Scattered_Light_pool_renderable_object_technique"/>
+    
+    <!--disable_z_test/>
+    <disable_z_write/>
+    <clear_scene color="true" depth="true" stencil="false" clearColor="50 50 50"/>
+    <set_pool_renderable_objects_technique pool="occlusion_map_pool_renderable_object_technique"/>
     <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
     </scattered_light-->
     

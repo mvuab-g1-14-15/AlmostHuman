@@ -27,11 +27,16 @@ void CPoolRenderableObjectTechnique::Destroy()
     }
 }
 
-void CPoolRenderableObjectTechnique::AddElement(const std::string& Name, const std::string& TechniqueName,
-        CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager)
+void CPoolRenderableObjectTechnique::AddElement
+(
+    const std::string& Name,
+    const std::string& TechniqueName,
+    CRenderableObjectTechnique* ROTOnRenderableObjectTechniqueManager
+)
 {
-    CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement =
-        new CPoolRenderableObjectTechniqueElement( Name,
+    CEffectTechnique* lEffectTechnique = EffectManagerInstance->GetResource( TechniqueName );
+    ASSERT(lEffectTechnique, "Null Effect technique for the pool");
+    CPoolRenderableObjectTechniqueElement* PoolRenderableObjectTechniqueElement = new CPoolRenderableObjectTechniqueElement( Name,
                 EffectManagerInstance->GetResource( TechniqueName ),
                 ROTOnRenderableObjectTechniqueManager );
     m_RenderableObjectTechniqueElements.push_back( PoolRenderableObjectTechniqueElement );
