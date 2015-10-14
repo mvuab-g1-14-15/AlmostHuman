@@ -9,6 +9,7 @@ gui_manager:ActiveWindows("HUD.xml")
 gui_manager:SetRenderPointer(false)
 cinematic_manager:StopCinematic("cinematica_inicial")
 sound_manager:PlayParticlesSFX()
+--gui_manager:ShowDialogTex("Test")
 end
 
 function IrASetup()

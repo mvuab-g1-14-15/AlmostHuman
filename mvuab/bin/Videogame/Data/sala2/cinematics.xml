@@ -1,2 +1,3 @@
 <cinematics>
+	<cinematic name="OpenDoor" resource_id_file="Data/sala2/cinematics/open_door.xml"/>
 </cinematics>

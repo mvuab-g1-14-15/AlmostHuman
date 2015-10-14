@@ -195,12 +195,15 @@ std::string CCinematicManager::CCinematicsItems::GetNextName()
 
 void CCinematicManager::Update()
 {
-    std::vector<CCinematic*>::iterator it = m_vCinematicLoop.GetResourcesVector().begin(),
-                                               it_end = m_vCinematicLoop.GetResourcesVector().end();
-    for(; it != it_end; ++it)
-    {
-        (*it)->Update();
-    }
+    if( m_vCinematicLoop.GetResourcesCount() != 0 )
+	{
+		std::vector<CCinematic*>::iterator it = m_vCinematicLoop.GetResourcesVector().begin(),
+												   it_end = m_vCinematicLoop.GetResourcesVector().end();
+		for(; it != it_end; ++it)
+		{
+			(*it)->Update();
+		}
+	}
 
     if ( m_CurrentElement != 0 )
     {

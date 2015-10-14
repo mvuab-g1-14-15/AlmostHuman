@@ -1,3 +1,4 @@
 <cinematics>
+	<camera_cinematic name="cinematica_inicial" resource_id_file="Data/sala1/cinematics/cinematica_inicial.xml"/>
 	<object_cinematic name="ventilador01" resource_id_file="Data/sala1/cinematics/ventilador.xml"/>
 </cinematics>

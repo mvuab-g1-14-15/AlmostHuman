@@ -88,7 +88,6 @@ function update_gameplay()
 	
 	if g_PauseGame then
 		if action_manager:DoAction("RightClick") then
-			engine:Trace("He entrado a pulsar boton derecho")
 			local findialog = gui_manager:NextDialog()
 			if findialog then
 				gui_manager:ShowDialogText("current")
@@ -109,8 +108,7 @@ function update_gameplay()
 
 	if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
 		if action_manager:DoAction("ChangeRoom") then
-			if camera_manager:GetCurrentCamera():GetName() == "FreeCam" then
-				engine:Trace("He entrado")
+			if camera_manager:GetCurrentCamera():GetName() == "FreeCam" then				
 				camera_manager:GetCurrentCamera():SetPosition(ChangeRoom())
 			else
 				g_Player:SetPosition(ChangeRoom())
@@ -134,7 +132,7 @@ function update_gameplay()
 				end
 				g_bPressedRoom2X = true
 			elseif g_bOpenDoor2 then
-				cinematic_manager:Execute("opendoor2")
+				cinematic_manager:Execute("OpenDoor")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				gui_manager:ShowStaticText("OpenDoor")
 				--Code para abrir puerta
