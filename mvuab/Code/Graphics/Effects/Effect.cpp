@@ -238,7 +238,7 @@ bool CEffect::Load( const std::string& aFileName, const std::vector<SDefines>& a
     CHECKED_RELEASE( m_Effect );
   }
 
-  ASSERT( lOk, "%s %s", m_FileName.c_str() );
+  ASSERT( lOk, "%s", m_FileName.c_str() );
 
   if ( lOk )
   {

@@ -1,6 +1,6 @@
 ﻿<scene_renderer_commands>
 	<!--Render all the glow objects into a texture-->
-	<set_pool_renderable_objects_technique pool="generate_deferred_shading_pool_renderable_object_technique"/>
+	<set_pool_renderable_objects_technique pool="render_glow_pool"/>
 	<set_render_target name="GlowRenderTarget">
         <dynamic_texture stage_id="0" name="GlowTexture" texture_width_as_frame_buffer="true" format_type="A8R8G8B8" create_depth_stencil_buffer="false"/>
 	</set_render_target>

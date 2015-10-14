@@ -65,4 +65,14 @@
 		<default_technique vertex_type="1104" technique="ZBlurTechnique"/>
 	</pool_renderable_object_technique>
 	
+	<!-- Render Glow -->
+	<pool_renderable_object_technique name="render_glow_pool">
+		<default_technique vertex_type="19"		technique="RenderGlowTechnique"/>
+		<default_technique vertex_type="31"		technique="RenderGlowNormalTechnique"/>
+		<default_technique vertex_type="51"		technique="RenderGlowSelfIllumTechnique"/>
+		<default_technique vertex_type="63"		technique="RenderGlowSelfIllumNormalTechnique"/>
+		<default_technique vertex_type="67"		technique="RenderGlowDiffuseTechnique"/>
+		<default_technique vertex_type="415" 	technique="RenderGlowCal3DTechnique"/>
+	</pool_renderable_object_technique>
+	
 </renderable_object_techniques>

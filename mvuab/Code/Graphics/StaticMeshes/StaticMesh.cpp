@@ -262,19 +262,17 @@ bool CStaticMesh::ReLoad()
 
 void CStaticMesh::Render( CGraphicsManager* GM )
 {
-    for(unsigned int i = 0; i < m_RVs.size(); ++i)
+    for(uint32 i = 0; i < m_RVs.size(); ++i)
     {
-        for(unsigned int j = 0; j < m_Textures[i].size(); ++j) { m_Textures[i][j]->Activate(j); }
+        for(uint32 j = 0; j < m_Textures[i].size(); ++j)
+        {
+            m_Textures[i][j]->Activate(j);
+        }
 
-        if (i < m_RenderableObjectTechniques.size() && m_RenderableObjectTechniques[i] != NULL && GM->GetUseTechniques())
-		{
-			m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
-		}
-        else
-		{
-            m_RVs[i]->Render( GM );
-			LOG_ERROR_APPLICATION( "No technique in file %s", m_FileName.c_str() );
-		}
+        if (i < m_RenderableObjectTechniques.size() && m_RenderableObjectTechniques[i] )
+        {
+            m_RVs[i]->Render( GM, m_RenderableObjectTechniques[i]->GetEffectTechnique() );
+        }
     }
 }
 

@@ -72,7 +72,6 @@ CGraphicsManager::CGraphicsManager( const CXMLTreeNode& atts )
   , m_VBQuad( 0 )
   , mDirectXDevice( 0 )
   , mDirectXObject( 0 )
-  , m_UseTechniques(true)
 {
 }
 

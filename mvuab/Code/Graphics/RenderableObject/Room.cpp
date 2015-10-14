@@ -130,8 +130,8 @@ void CRoom::Load()
 
         BillboardMan->LoadInstances         ( m_BasePath + "billboards.xml");
         PSManager->LoadInstances            ( m_BasePath + "particles.xml");
-        SoundInstance->LoadParticlePosSound (m_BasePath + "particles.xml");
-        CinematicMInstance->LoadCinematics  (m_BasePath + "cinematics.xml");
+        SoundInstance->LoadParticlePosSound ( m_BasePath + "particles.xml");
+        CinematicMInstance->LoadCinematics  ( m_BasePath + "cinematics.xml");
         LoadLights();
     }
 
