@@ -1,7 +1,7 @@
-<emitter active="true" name="smoke" loop="true" time_to_live="20.0">
+<emitter active="true" name="ray" loop="true" time_to_live="0.5">
 	<particles max_alive_particles="20" time_to_live="0.01 0.2">
-		<technique name="RayTechnique" render_group="alpha_blend"/>
-		<texture name="../CommonData/textures/PS/rays/pump_lightning_04.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/rays/Ray01.png" name2="../CommonData/textures/PS/rays/Ray02.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 		<interpolators>
 			<interpolator alpha="0.0" color="1.0 0.8.0 0.0" size="0.4"/>
 			<interpolator alpha="0.7" color="1.0 0.7 0.0" size="0.5"/>

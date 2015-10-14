@@ -53,7 +53,8 @@ PSVertex VS(PARTICLEIN IN)
 
 float4 PS(PSVertex IN) : COLOR
 {
-	float4 lSamplerColor = tex2D(S0PointClampSampler, float2( IN.params.x, IN.params.y) );
+	float4 lSamplerColor = tex2D(S0LinearClampSampler, float2( IN.params.x, IN.params.y) ) * g_PercentageTexture1;
+	lSamplerColor += tex2D(S1LinearClampSampler, float2( IN.params.x, IN.params.y) ) * g_PercentageTexture2;
 #if defined( BLACK_AND_WHITE )
 	float lAverage = (( IN.color.x + IN.color.y + IN.color.z) / 3 );
 	float3 lColor =  float3( lAverage, lAverage, lAverage );

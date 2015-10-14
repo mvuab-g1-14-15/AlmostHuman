@@ -39,6 +39,7 @@ public:
   bool SetAmbientLightColor         ( const Math::Vect3f &aAmbienLightColor );
   bool SetFBSize                    ( const Math::Vect2u aSize );
   bool SetDeltaTime                 ( const float dt );
+  bool SetPercentageTextures        ( float aPercentageTexture1, float aPercentageTexture2 );
 
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
@@ -124,6 +125,9 @@ private: // Members
   Math::Vect3f m_LightsPosition[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
   Math::Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
+
+  DECLARE_EFFECT_PARAMETER( PercentageTexture1 );
+  DECLARE_EFFECT_PARAMETER( PercentageTexture2 );
 
   DECLARE_EFFECT_PARAMETER( Direction );
   DECLARE_EFFECT_PARAMETER( Size );

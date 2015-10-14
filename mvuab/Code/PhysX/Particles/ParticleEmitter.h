@@ -63,7 +63,8 @@ private:
 
   struct ParticleTexture
   {
-    CTexture* mValue;          // Pointer to the texture object
+    CTexture* mValue;            // Pointer to the texture object
+    CTexture* mValue2;           // Pointer to the texture object
     bool   mFlipUVHorizontal;    // If the particle must randomize to flip horizontal
     bool   mFlipUVVertical;      // If the particle must randomize to flip vertical
   };

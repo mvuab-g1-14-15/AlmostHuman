@@ -88,6 +88,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
         if ( lTagParticleName == "texture" )
         {
           mTexture.mValue               = lParticleNode.GetAttribute<CTexture>( "name" );
+          mTexture.mValue2              = lParticleNode.GetAttribute<CTexture>( "name2" );
           mTexture.mFlipUVHorizontal    = lParticleNode.GetAttribute<bool>( "flip_uv_horizontal", false );
           mTexture.mFlipUVVertical      = lParticleNode.GetAttribute<bool>( "flip_uv_vertical"  , false );
         }
@@ -198,7 +199,22 @@ void CParticleEmitter::Render()
 {
   CGraphicsManager* lGM = GraphicsInstance;
   ( ( CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>* )mRV )->AddInstancinguffer( lGM, mParticlesStream );
+  
+  //Activates the textures
   ActivateTextures();
+
+  // Sets the textures for the animation
+  CEffect* lEffect = mTechnique->GetEffect();
+  if( mTexture.mValue2 )
+  {
+      float lPercentage = mActualTime / mTTLEmitter;
+      lEffect->SetPercentageTextures( 1.0f - lPercentage, lPercentage );
+  }
+  else
+  {
+      lEffect->SetPercentageTextures( 1.0f, 0.0f );
+  }
+
   ( ( CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>* )mRV )->Render( lGM, mTechnique );
 }
 
@@ -250,7 +266,10 @@ void CParticleEmitter::KillParticles()
 
 void CParticleEmitter::ActivateTextures()
 {
-  mTexture.mValue->Activate( 0 );
+    mTexture.mValue->Activate( 0 );
+
+    if( mTexture.mValue2 )
+        mTexture.mValue2->Activate( 1 );
 }
 
 //-----------------------------------------------------------------------------------------

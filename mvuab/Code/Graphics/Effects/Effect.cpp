@@ -64,6 +64,9 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( SLWeight )
   , CTOR_EFFECT_PARAMETER( SLSamples )
   , CTOR_EFFECT_PARAMETER( SLLightPos )
+  // Percentages of lights
+  , CTOR_EFFECT_PARAMETER( PercentageTexture1 )
+  , CTOR_EFFECT_PARAMETER( PercentageTexture2 )
 {
   ResetLightsHandle();
 }
@@ -124,6 +127,9 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( SLSamples )
   RESET_EFFECT_PARAMETER( SLLightPos )
 
+  RESET_EFFECT_PARAMETER( PercentageTexture1 );
+  RESET_EFFECT_PARAMETER( PercentageTexture2 );
+
   ResetLightsHandle();
 }
 
@@ -151,6 +157,8 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( DeltaTime );
   LINK_EFFECT_PARAMETER( FlipUVVertical   );
   LINK_EFFECT_PARAMETER( FlipUVHorizontal );
+  LINK_EFFECT_PARAMETER( PercentageTexture1 );
+  LINK_EFFECT_PARAMETER( PercentageTexture2 );
 
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -401,6 +409,15 @@ void CEffect::ResetLightsHandle()
   memset( m_LightsPosition,                 0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsDirection,                0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsColor,                    0, sizeof( Math::Vect3f ) * MAX_LIGHTS_BY_SHADER );
+}
+
+bool CEffect::SetPercentageTextures( float aPercentageTexture1, float aPercentageTexture2 )
+{
+    HRESULT lRes1 = SET_FLOAT_PARAMETER( PercentageTexture1, aPercentageTexture1 );
+    ASSERT( lRes1 == S_OK, "Error setting Percentage Texture 1" );
+    HRESULT lRes2 = SET_FLOAT_PARAMETER( PercentageTexture2, aPercentageTexture2 );
+    ASSERT( lRes2 == S_OK, "Error setting Percentage Texture 1" );
+    return lRes1 == S_OK && lRes2 == S_OK;
 }
 
 void CEffect::SetSize( float aSize )

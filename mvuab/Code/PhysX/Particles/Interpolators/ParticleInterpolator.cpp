@@ -1,5 +1,6 @@
 #include "ParticleInterpolator.h"
 #include "Utils/Defines.h"
+#include "Texture/Texture.h"
 
 #define NUM_INTERPOLATORS 4
 #define MAX_UPPER_LIMIT   3

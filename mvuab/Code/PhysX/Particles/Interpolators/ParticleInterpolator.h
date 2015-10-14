@@ -7,6 +7,8 @@
 
 #include "Math\SplineInterpolator.h"
 
+class CTexture;
+
 class CParticleInterpolator
 {
 public:
@@ -15,7 +17,6 @@ public:
   virtual ~CParticleInterpolator();
 
   void Interpolate( float aPercentageOfLive, float& aSize, float& aRed, float& aGreen, float& aBlue, float& aAlpha );
-
 private:
   Math::CSplineInterpolator mAlpha;
   Math::CSplineInterpolator mSize;
