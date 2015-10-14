@@ -14,6 +14,7 @@
 #include "Billboard/BillboardManager.h"
 #include "Particles/ParticleSystemManager.h"
 #include "WWSoundManager.h"
+#include "Cinematics/CinematicManager.h"
 
 CRoom::CRoom( const CXMLTreeNode& aNode )
     : CName( aNode.GetAttribute<std::string>("level", "no_level") )
@@ -127,9 +128,10 @@ void CRoom::Load()
             }
         }
 
-        BillboardMan->LoadInstances( m_BasePath + "billboards.xml");
-        PSManager->LoadInstances( m_BasePath + "particles.xml");
-        SoundInstance->LoadParticlePosSound(m_BasePath + "particles.xml");
+        BillboardMan->LoadInstances         ( m_BasePath + "billboards.xml");
+        PSManager->LoadInstances            ( m_BasePath + "particles.xml");
+        SoundInstance->LoadParticlePosSound (m_BasePath + "particles.xml");
+        CinematicMInstance->LoadCinematics  (m_BasePath + "cinematics.xml");
         LoadLights();
     }
 
@@ -159,6 +161,7 @@ void CRoom::LoadLights()
 
 CRenderableObjectsManager* CRoom::GetLayer( const std::string& aLayer ) const 
 {
+    ASSERT( m_pLayers, "Null Layers for room %s", GetName().c_str() );
     return m_pLayers->GetResource(aLayer);
 }
 

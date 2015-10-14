@@ -20,6 +20,7 @@ public:
   ~ CCinematicManager();
 
   void Init();
+  void LoadCinematics( const std::string& NameCinematic );
   void ReLoad();
   void Execute(const std::string& NameCinematic);
   void Update();

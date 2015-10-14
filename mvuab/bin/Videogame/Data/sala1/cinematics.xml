@@ -1,0 +1,3 @@
+<cinematics>
+	<object_cinematic name="ventilador01" resource_id_file="Data/sala1/cinematics/ventilador.xml"/>
+</cinematics>

@@ -18,12 +18,20 @@
 
 CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
 {
-  std::string resource = atts.GetAttribute<std::string>( "resource", "" );
-  std::string room = atts.GetAttribute<std::string>("room", "" );
-  m_RenderableObject = dynamic_cast<CInstanceMesh*>(SceneInstance->GetResource( room )->GetLayer( "solid" )->GetResource( resource ));
-
-  for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
-    m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
+  CRoom* lRoom = SceneInstance->GetResource( atts.GetAttribute<std::string>("room", "" ) );
+  ASSERT( lRoom, "The room %s doesn't exist", atts.GetAttribute<std::string>("room", "" ).c_str() );
+  if( lRoom )
+  {
+      CRenderableObjectsManager* lLayer = lRoom->GetLayer( "solid" );
+      ASSERT( lRoom, "The layer %s doesn't exist in the room %s", "solid", atts.GetAttribute<std::string>("room", "" ).c_str() );
+      if( lLayer )
+      {
+          const std::string& resource = atts.GetAttribute<std::string>( "resource", "" );
+          m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );
+          for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
+              m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
+      }
+  }
 }
 
 CCinematicObject::~CCinematicObject()

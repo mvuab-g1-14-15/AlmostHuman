@@ -6,29 +6,19 @@
 
 CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCinematicPlayer()
 {
-    CXMLTreeNode newFile;
-
-    if (!newFile.LoadFile(FileName.c_str()))
+    CXMLTreeNode newFile, cinematic;
+    if ( newFile.LoadAndFindNode( FileName.c_str(), "cinematic", cinematic ))
     {
-        LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error loading XML %s.", FileName.c_str());
-        return;
-    }
+        m_Name = cinematic.GetAttribute<std::string>("name", "");
+        m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
 
-    CXMLTreeNode cinematic = newFile["cinematic"];
-    if (!cinematic.Exists())
-    {
-        LOG_ERROR_APPLICATION("CCinematic::Constructor --> Error reading %s, cinematic no existeix.", FileName.c_str());
-        return;
-    }
-    m_Name = cinematic.GetAttribute<std::string>("name", "");
-    m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
-
-    CCinematicObject* l_CinematicObject;
-    for( uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount ; ++i)
-    {
-        l_CinematicObject = new CCinematicObject(cinematic(i));
-        l_CinematicObject->Init(m_Duration);
-        m_CinematicObjects.push_back(l_CinematicObject);
+        CCinematicObject* l_CinematicObject;
+        for( uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount ; ++i)
+        {
+            l_CinematicObject = new CCinematicObject(cinematic(i));
+            l_CinematicObject->Init(m_Duration);
+            m_CinematicObjects.push_back(l_CinematicObject);
+        }
     }
 }
 

@@ -15,7 +15,7 @@ class CName
     }
     virtual ~CName() {}
 
-    GET_SET(std::string,Name);
+    GET_SET_REF(std::string,Name);
 
   protected:
     std::string m_Name;
