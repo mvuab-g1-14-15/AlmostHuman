@@ -14,6 +14,8 @@ protected:
   bool  m_Color;
   bool  m_Depht;
   bool  m_Stencil;
+  Math::CColor m_ClearColor;
+
 public:
   CClearSceneRendererCommand( CXMLTreeNode& atts );
   virtual void Execute( CGraphicsManager& GM );

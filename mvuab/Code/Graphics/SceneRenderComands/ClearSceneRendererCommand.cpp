@@ -6,10 +6,11 @@ CClearSceneRendererCommand::CClearSceneRendererCommand( CXMLTreeNode& atts )
     , m_Color( atts.GetAttribute<bool>( "color", false ) )
     , m_Depht( atts.GetAttribute<bool>( "depth", false ) )
     , m_Stencil( atts.GetAttribute<bool>( "stencil", false ) )
+    , m_ClearColor( atts.GetAttribute<Math::CColor>("clearColor", Math::CColor(0, 0, 0)) )
 {
 }
 
 void CClearSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
-    GM.Clear( m_Color, m_Depht, m_Stencil, D3DCOLOR_XRGB( 0, 0, 0 ) );
+    GM.Clear( m_Color, m_Depht, m_Stencil, D3DCOLOR_XRGB((int)m_ClearColor.r, (int)m_ClearColor.g, (int)m_ClearColor.b) );
 }

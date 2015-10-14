@@ -12,10 +12,6 @@
 		<handles use_time="true" use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
 	</technique>
     
-    <technique name="ScatteredLightTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ScatteredLight.fx">
-		<handles use_world_view_projection_matrix="true" se_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_world_matrix="true" use_camera_position="true" use_lights="true" num_of_lights="1"/>
-	</technique>
-
 	<technique name="FogTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/Fog.fx">
 		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true" use_camera_position="true" fog_start="50.0" fog_end="150.0" fog_exp = "0.02" fog_fun="1"/>
 	</technique>
@@ -40,5 +36,6 @@
     <technique name="ZBlurTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ZBlur.fx">
 		<handles use_inverse_projection_matrix="true" use_inverse_view_matrix="true"/>
 	</technique>
-		
+    
+    <effect file="../CommonData/effects/PostProc/occlussion_effects.xml"/>
 </effects>

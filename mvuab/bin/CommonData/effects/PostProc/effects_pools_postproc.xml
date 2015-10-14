@@ -64,5 +64,14 @@
     <pool_renderable_object_technique name="ZBlur_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="ZBlurTechnique"/>
 	</pool_renderable_object_technique>
-	
+    
+    <!-- Occlusions for scattering light -->
+    <pool_renderable_object_technique name="occlusion_map_pool_renderable_object_technique">
+        <default_technique vertex_type="19"		technique="OcclusionMapTechnique"/>
+        <default_technique vertex_type="31"		technique="OcclusionMapNormalTechnique"/>
+        <default_technique vertex_type="51"		technique="OcclusionMapSelfIllumTechnique"/>
+        <default_technique vertex_type="63"		technique="OcclusionMapSelfIllumNormalTechnique"/>
+        <default_technique vertex_type="67"		technique="OcclusionMapDiffuseTechnique"/>
+        <default_technique vertex_type="415" 	technique="OcclusionMapCal3DTechnique"/>
+    </pool_renderable_object_technique>	
 </renderable_object_techniques>
