@@ -67,6 +67,7 @@ CEffect::CEffect( const std::string& EffectName )
   // Percentages of lights
   , CTOR_EFFECT_PARAMETER( PercentageTexture1 )
   , CTOR_EFFECT_PARAMETER( PercentageTexture2 )
+  , CTOR_EFFECT_PARAMETER( SelfIlumAmount )
 {
   ResetLightsHandle();
 }
@@ -79,6 +80,7 @@ CEffect::~CEffect()
 void CEffect::SetNullParameters()
 {
   // Reset the parameters
+  RESET_EFFECT_PARAMETER( SelfIlumAmount );
   RESET_EFFECT_PARAMETER( Time );
   RESET_EFFECT_PARAMETER( InverseWorldMatrix );
   RESET_EFFECT_PARAMETER( WorldMatrix );
@@ -159,6 +161,7 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( FlipUVHorizontal );
   LINK_EFFECT_PARAMETER( PercentageTexture1 );
   LINK_EFFECT_PARAMETER( PercentageTexture2 );
+  LINK_EFFECT_PARAMETER( SelfIlumAmount );
 
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -520,4 +523,11 @@ bool CEffect::SetFBSize( const Math::Vect2u aSize )
 bool CEffect::SetDeltaTime( const float dt )
 {
     return S_OK == SET_FLOAT_PARAMETER( DeltaTime, dt );
+}
+
+bool CEffect::SetSelfIlumAmount            ( float aSelfIlumAmount )
+{
+    HRESULT lRes = SET_FLOAT_PARAMETER( SelfIlumAmount, aSelfIlumAmount );
+    ASSERT( lRes == S_OK, "Error setting selfilumamount" );
+    return lRes == S_OK;
 }
