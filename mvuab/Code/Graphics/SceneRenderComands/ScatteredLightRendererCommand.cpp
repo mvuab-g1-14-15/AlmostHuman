@@ -18,13 +18,13 @@
 
 CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTreeNode& atts) : CStagedTexturedRendererCommand(atts)
 {
-    m_Decay = atts.GetAttribute<float>("Decay", 0.96815f);
-    m_Exposure = atts.GetAttribute<float>("Exposure", 0.2f);
+    m_Decay = atts.GetAttribute<float>("Decay", 1.0);
+    m_Exposure = atts.GetAttribute<float>("Exposure", 0.0034f);
 
-    m_Weight = atts.GetAttribute<float>("Weight", 0.98767f);
-    m_Density = atts.GetAttribute<float>("Density", 0.926f);
+    m_Weight = atts.GetAttribute<float>("Weight", 5.65f);
+    m_Density = atts.GetAttribute<float>("Density", 0.84f);
 
-    m_Samples = atts.GetAttribute<int>("Samples", 20);
+    m_Samples = atts.GetAttribute<int>("Samples", 100);
 }
 
 CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
