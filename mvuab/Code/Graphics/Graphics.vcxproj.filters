@@ -325,6 +325,9 @@
     <ClCompile Include="SceneRenderComands\ScatteredLightRendererCommand.cpp">
       <Filter>SceneRenderComands\PostProcCmd</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderComands\OcclusionMap.cpp">
+      <Filter>SceneRenderComands\EffectsCmd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -660,6 +663,9 @@
     </ClInclude>
     <ClInclude Include="SceneRenderComands\ScatteredLightRendererCommand.h">
       <Filter>SceneRenderComands\PostProcCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderComands\OcclusionMap.h">
+      <Filter>SceneRenderComands\EffectsCmd</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

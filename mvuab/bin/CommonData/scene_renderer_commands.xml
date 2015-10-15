@@ -66,11 +66,12 @@
 	
 	<disable_z_test/>
     
-	<!--
-     <capture_frame_buffer name="FB1">
+	
+    <capture_frame_buffer name="FB1">
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
     
+    <!--
     <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
     <zblur FocalStart="2" FocalEnd="5" Constant="0.1" BlurEnd="50">
 		<texture stage_id="0" name="FB1"/>
@@ -84,12 +85,31 @@
         <texture stage_id="1" name="DepthMapTexture"/>
  	</render_draw_quad-->
     
-    <!--disable_z_test/>
+    <!--
+    SCATTERED LIGHT
+    <disable_z_test/>
     <disable_z_write/>
     <clear_scene color="true" depth="true" stencil="false" clearColor="50 50 50"/>
-    <set_pool_renderable_objects_technique pool="occlusion_map_pool_renderable_object_technique"/>
-    <scattered_light Decay="0.1" Exposure="0.1" Weight="0.1" Density="0.1" Samples="1">
-    </scattered_light-->
+    <occlusion_map />
+    
+    <capture_frame_buffer name="FB2">
+		<dynamic_texture stage_id="0" name="FB2" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+    
+    <scattered_light Decay="0.2" Exposure="1.0" Weight="1.2" Density="0.6" Samples="100">
+        <texture stage_id="0" name="FB2"/>
+    </scattered_light>
+    
+    <capture_frame_buffer name="FB3">
+		<dynamic_texture stage_id="0" name="FB3" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+    
+    <set_pool_renderable_objects_technique pool="merge_pool_renderable_object_technique"/>
+    <render_draw_quad active="true" name="merge_light_scattered">
+ 		<texture stage_id="0" name="FB1"/>
+        <texture stage_id="1" name="FB3"/>
+ 	</render_draw_quad>
+    -->
     
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

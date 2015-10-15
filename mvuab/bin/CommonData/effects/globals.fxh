@@ -120,7 +120,7 @@ float      g_SDecay                                                 : SLDecai = 
 float      g_SExposure                                              : SLExposure = 0.2;
 float      g_SDensity                                               : SLDensity = 0.926;
 float      g_SWeight                                                : SLWeight = 0.98767;
-float3     g_LightPos                                               : SLLightSource = float3(0, 0, 0);
+float2     g_LightPos                                               : SLLightSource = float2(0, 0);
 
 //
 // Timers

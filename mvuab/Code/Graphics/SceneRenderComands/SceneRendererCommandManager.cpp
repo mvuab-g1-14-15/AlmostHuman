@@ -40,6 +40,7 @@
 #include "SceneRenderComands\EditorsRendererCmd.h"
 #include "SceneRenderComands\ZBlurSceneRendererCommand.h"
 #include "SceneRenderComands\ScatteredLightRendererCommand.h"
+#include "SceneRenderComands\OcclusionMap.h"
 #include "XML\XMLTreeNode.h"
 #include "EngineConfig.h"
 
@@ -159,6 +160,8 @@ void CSceneRendererCommandManager::Init()
   m_CommandFactory.Register( "render_editors", Type2Type<CEditorsRenderCmd>( ) );
   m_CommandFactory.Register( "zblur", Type2Type<CZBlurSceneRendererCommand>( ) );
   m_CommandFactory.Register( "scattered_light", Type2Type<CScatteredLightSceneRendererCommand>() );
+  m_CommandFactory.Register( "occlusion_map", Type2Type<COcclusionMapSceneRendererCommand>() );
+
   Load( mConfigPath );
 }
 

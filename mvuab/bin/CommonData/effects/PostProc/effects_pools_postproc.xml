@@ -61,6 +61,16 @@
 		<default_technique vertex_type="1104" technique="ZBlurTechnique"/>
 	</pool_renderable_object_technique>
     
+    <!-- Scattering Light -->
+    <pool_renderable_object_technique name="scattering_light_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="ScatteredLightTechnique"/>
+	</pool_renderable_object_technique>
+    
+    <!-- Merge 2 textures -->
+    <pool_renderable_object_technique name="merge_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="MergeTechnique"/>
+	</pool_renderable_object_technique>
+    
     <!-- Occlusions for scattering light -->
     <pool_renderable_object_technique name="occlusion_map_pool_renderable_object_technique">
         <default_technique vertex_type="19"		technique="OcclusionMapTechnique"/>

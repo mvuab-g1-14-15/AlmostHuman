@@ -105,7 +105,7 @@ public:
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
   void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
-  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect3f &l_Pos, Math::Vect2i &l_TexSize);
+  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos, Math::Vect2i &l_TexSize);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:

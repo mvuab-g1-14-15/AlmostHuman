@@ -25,9 +25,6 @@ CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTre
     m_Density = atts.GetAttribute<float>("Density", 0.926f);
 
     m_Samples = atts.GetAttribute<int>("Samples", 20);
-    m_RenderTexture = new CTexture();
-
-    m_RenderTexture->Create("SL_PASS01", 512, 512, 1, CTexture::eUsageDynamic, CTexture::eDefaultPool, CTexture::eRGBA8);
 }
 
 CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
@@ -36,22 +33,21 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
-    Math::Vect3f l_LightPos(117.6f, -6.0f, -40.5f);
+    //Math::Vect3f l_LightPos(93.8f, -8.7f, -24.5f);
+    Math::Vect3f l_LightPos(125.8f, 2.7f, -46.5f);
     Math::Vect2f l_ScrPos = GM.ToScreenCoordinates(l_LightPos);
+
+    unsigned int l_Width = 0, l_Height = 0;
+    GM.GetWidthAndHeight(l_Width, l_Height);
+
+    RECT l_Rect = { 0, 0, l_Width - 1, l_Height - 1 };
+    ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
     std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
     CRenderableObjectTechnique* l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatteredLight(m_Decay, m_Exposure, m_Weight, m_Density, m_Samples, l_LightPos, Math::Vect2i(512, 512));
+    l_EffectTech->GetEffect()->SetScatteredLight(m_Decay, m_Exposure, m_Weight, m_Density, m_Samples, Math::Vect2f(l_ScrPos.x, l_ScrPos.y), Math::Vect2i(l_Width, l_Height));
 
-    unsigned int l_Width = 0, l_Height = 0;
-    GM.GetWidthAndHeight(l_Width, l_Height);
-
-    //m_RenderTexture->SetAsRenderTarget();
-    CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
-    //m_RenderTexture->UnsetAsRenderTarget(0);
-    
-    RECT l_Rect = { 0, 0, l_Width - 1, l_Height - 1 };
-    //GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), NULL, 0.0f, 0.0f, 1.0f, 1.0f );
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect, Math::CColor::CColor(), m_StageTextures[0].m_Texture, 0.0f, 0.0f, 1.0f, 1.0f );
 }

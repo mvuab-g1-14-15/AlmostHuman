@@ -91,6 +91,7 @@
     <ClCompile Include="SceneRenderComands\GaussianSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\LensOfFlareRendererCommand.cpp" />
+    <ClCompile Include="SceneRenderComands\OcclusionMap.cpp" />
     <ClCompile Include="SceneRenderComands\ParticleRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\PresentSceneRendererCommand.cpp" />
     <ClCompile Include="SceneRenderComands\ProcessRenderRendererCommand.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="SceneRenderComands\GaussianSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\GenerateShadowMapsSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\LensOfFlareRendererCommand.h" />
+    <ClInclude Include="SceneRenderComands\OcclusionMap.h" />
     <ClInclude Include="SceneRenderComands\ParticleRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\PresentSceneRendererCommand.h" />
     <ClInclude Include="SceneRenderComands\ProcessRenderRendererCommand.h" />

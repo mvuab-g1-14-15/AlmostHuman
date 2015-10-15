@@ -23,7 +23,5 @@ class CScatteredLightSceneRendererCommand : public CStagedTexturedRendererComman
        float m_Density;
        float m_Weight;
        int   m_Samples;
-
-       CTexture *m_RenderTexture;
 };
 #endif
