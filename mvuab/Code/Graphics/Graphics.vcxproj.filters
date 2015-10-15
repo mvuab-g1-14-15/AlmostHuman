@@ -328,6 +328,9 @@
     <ClCompile Include="SceneRenderComands\OcclusionMap.cpp">
       <Filter>SceneRenderComands\EffectsCmd</Filter>
     </ClCompile>
+    <ClCompile Include="Materials\Material.cpp">
+      <Filter>Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -667,6 +670,9 @@
     <ClInclude Include="SceneRenderComands\OcclusionMap.h">
       <Filter>SceneRenderComands\EffectsCmd</Filter>
     </ClInclude>
+    <ClInclude Include="Materials\Material.h">
+      <Filter>Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AnimatedModels">
@@ -740,6 +746,9 @@
     </Filter>
     <Filter Include="SceneRenderComands\PostProcCmd\VisualsCmd">
       <UniqueIdentifier>{c61a49ff-1c74-489c-b963-41de6b334f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials">
+      <UniqueIdentifier>{4b9c0976-c97c-463e-aff0-d97b99dac161}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
