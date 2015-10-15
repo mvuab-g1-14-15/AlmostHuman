@@ -21,10 +21,21 @@ function CShootLUA:__init(speed, direction, position, damage)
 	self.Light:SetName(self.Name)
     self.Light:SetIntensity( 0.65 )
     self.Light:SetEndRangeAttenuation( 2.0 )
-    self.Light:SetColor( CColor(1.0, 0.0, 0.0, 1.0 ) )
+    self.Light:SetColor( CColor(0.0, 0.0, 1.0, 1.0 ) )
     self.Light:SetPosition( self.Position	)
     self.Light:SetRenderShadows( false )
 	light_manager:AddResource(self.Name, self.Light)
+	
+	self.mShoot = CreateInstanceMesh(self.Name, "Blaster");
+	scene:GetResource("core"):GetLayer("solid"):AddResource(self.Name, self.mShoot);
+	self.mShootGlow = CreateInstanceMesh(self.Name, "Blaster");
+	scene:GetResource("core"):GetLayer("glow"):AddResource(self.Name, self.mShootGlow);
+
+	self.mShoot:SetPosition(position);
+	self.mShootGlow:SetPosition(position);
+	
+	self.mShoot:MakeTransform();
+    self.mShootGlow:MakeTransform();
 end
 
 function CShootLUA:Update()
@@ -64,6 +75,12 @@ function CShootLUA:Update()
 		--self.Billboard:MakeTransform()
 		self.Light:SetPosition( self.Position )
 		self.Light:MakeTransform()
+		
+		self.mShoot:SetPosition(self.Position);
+		self.mShootGlow:SetPosition(self.Position);
+		
+		self.mShoot:MakeTransform();
+		self.mShootGlow:MakeTransform();
 	end
 end
 

@@ -5,6 +5,7 @@
 #include "Utils/Name.h"
 
 class CLight;
+class CInstanceMesh;
 
 class CShoot : public CObject3D, public CName
 {
@@ -25,6 +26,9 @@ private:
     bool mImpacted;
     Math::Vect3f mDirection;
     CLight *mLight;
+
+    CInstanceMesh* mShoot;
+    CInstanceMesh* mShootGlow;
 };
 
 #endif

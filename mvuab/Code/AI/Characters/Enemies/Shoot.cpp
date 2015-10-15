@@ -15,6 +15,14 @@
 #include "ScriptManager.h"
 #include "Lights\OmniLight.h"
 #include "Lights\LightManager.h"
+#include "StaticMeshes\InstanceMesh.h"
+
+#include "RenderableObject/Scene.h"
+#include "RenderableObject\Room.h"
+
+#include "RenderableObject/RenderableObjectsManager.h"
+#include "Cameras\Camera.h"
+#include "Cameras/CameraManager.h"
 
 CShoot::CShoot()
   : CObject3D()
@@ -22,6 +30,8 @@ CShoot::CShoot()
   , mDamage( 0.0f )
   , mDirection( Math::Vect3f( 1.0f ) )
   , mImpacted( false )
+  , mShoot( 0 )
+  , mShootGlow( 0 )
 {
 }
 
@@ -46,9 +56,42 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
   mLight->SetName( lName );
   mLight->SetIntensity( 0.65f );
   mLight->SetEndRangeAttenuation( 2.0f );
-  mLight->SetColor( Math::colRED );
+  mLight->SetColor( Math::colBLUE );
   mLight->SetPosition( aPosition );
   mLight->SetRenderShadows( false );
+
+  mShoot = new CInstanceMesh(lName, "Blaster");
+  SceneInstance->GetResource("core")->GetLayer("solid")->AddResource(lName, mShoot);
+  mShootGlow = new CInstanceMesh(lName, "Blaster");
+  SceneInstance->GetResource("core")->GetLayer("glow")->AddResource(lName, mShootGlow);
+
+  mShoot->SetPosition(aPosition);
+  mShootGlow->SetPosition(aPosition);
+
+  //mShoot->SetDirection( aDirection );
+  //mShootGlow->SetDirection( aDirection );
+
+  //mShoot->SetYaw( mShoot->GetYaw() - Math::half_pi32);
+  //mShootGlow->SetYaw( mShootGlow->GetYaw() - Math::half_pi32);
+  //mShoot->SetYaw( -Math::Utils::ATan2( aDirection.z, aDirection.x ) + Math::half_pi32 );
+  //mShootGlow->SetYaw( -Math::Utils::ATan2( aDirection.z, aDirection.x ) + Math::half_pi32 );
+  //float lPitch = Math::Utils::ATan2( aDirection.y,Math::Utils::Sqrt( aDirection.z * aDirection.z + aDirection.x * aDirection.x ) );
+  //if (aDirection.z > 0)
+  //    lPitch = -lPitch;
+  //mShoot->SetPitch( lPitch );
+  //mShootGlow->SetPitch( lPitch );
+
+  CCamera* p_cam = CameraMInstance->GetCurrentCamera();
+  float lYaw = p_cam->GetYaw();
+  float lPitch = p_cam->GetPitch();
+
+  mShoot->SetYaw( -lYaw );
+  mShoot->SetPitch(lPitch);
+  mShootGlow->SetYaw( -lYaw );
+  mShootGlow->SetPitch(lPitch);
+
+  mShoot->MakeTransform();
+  mShootGlow->MakeTransform();
 
   if ( !LightMInstance->AddResource( lName, mLight ) )
   {
@@ -60,6 +103,9 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 CShoot::~CShoot()
 {
   LightMInstance->RemoveResource( GetName() );
+
+  SceneInstance->GetResource("core")->GetLayer("solid")->RemoveResource(GetName());
+  SceneInstance->GetResource("core")->GetLayer("glow")->RemoveResource(GetName());
 }
 
 bool CShoot::Init()
@@ -122,6 +168,18 @@ void CShoot::Update()
     mLight->MakeTransform();
 
     MakeTransform();
+    
+    mShoot->SetPosition(GetPosition());
+    mShootGlow->SetPosition(GetPosition());
+
+    //mShoot->SetDirection( lDirection );
+    //mShootGlow->SetDirection( lDirection );
+
+    //mShoot->SetYaw( mShoot->GetYaw() - Math::half_pi32);
+    //mShootGlow->SetYaw( mShootGlow->GetYaw() - Math::half_pi32);
+
+    mShoot->MakeTransform();
+    mShootGlow->MakeTransform();
   }
 }
 
