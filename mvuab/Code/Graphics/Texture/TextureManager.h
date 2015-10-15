@@ -28,6 +28,7 @@ class CTextureManager : public CMapManager<CTexture>, public CManager
         CMutex m_Mutex;
         CTexture *m_DummyTexture;
         CTexture* AddTexture( const std::string& fileName );
+        bool TryToLoad(CTexture* aTexture, std::string aFileName);
 };
 
 #endif //INC_TEXTURE_MANAGER_H

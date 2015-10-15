@@ -130,9 +130,9 @@ bool CStaticMesh::Load( const std::string& FileName )
             ZeroMemory(textureName, sizeof(char) * l_TextureLength);
 
             std::fread( textureName, sizeof( char ) * l_TextureLength, 1, l_pFile );
-			std::string s = textureName;
-			s.erase(s.find_last_of("."), std::string::npos);
-            CTexture* t = TextureMInstance->GetTexture( "../CommonData/textures/" + s + ".dds" );
+			std::string lPathTextureName = textureName;
+            lPathTextureName = "Data/textures/" + lPathTextureName;
+            CTexture* t = TextureMInstance->GetTexture( lPathTextureName );
             if (t) { l_Texture.push_back(t); }
 
 			ASSERT(t, "Unable to find texture: %s in for static mesht %s ", textureName, FileName.c_str() );
