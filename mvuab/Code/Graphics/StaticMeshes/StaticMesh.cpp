@@ -90,7 +90,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         unsigned short int l_header = 0;
         std::fread(&l_header, sizeof( unsigned short int ), 1, l_pFile);
 
-        if (l_header == 0x55ff)
+        if (l_header == 0x55ff || l_header == 0x56ff)
         {
             unsigned short int l_SubMeshes = 0;
             std::fread(&l_SubMeshes, sizeof(unsigned short int), 1, l_pFile);
@@ -109,12 +109,18 @@ bool CStaticMesh::Load( const std::string& FileName )
                 // Obtain the size of the vertex
                 size_t l_TypeSize = GetVertexSize(lVertexType);
 
+                CMaterial* lMaterial = new CMaterial();
+
+                if( l_header == 0x56ff )
+                {
+                    float lSelfIlumAmount = 0;
+                    std::fread( &lSelfIlumAmount, sizeof( float ), 1, l_pFile );
+                    lMaterial->SetSelfIlumAmount(lSelfIlumAmount);
+                }
+
                 // Obtain all the textures if any
                 unsigned short l_numTexturas = 0;
                 std::fread( &l_numTexturas, sizeof( unsigned short int ), 1, l_pFile );
-        
-                CMaterial* lMaterial = new CMaterial();
-
                 for (unsigned int j = 0; j < l_numTexturas; ++j)
                 {
                     unsigned short l_TextureLength = 0;
@@ -224,7 +230,7 @@ bool CStaticMesh::Load( const std::string& FileName )
             unsigned short int l_footer = 0;
             std::fread( &l_footer, sizeof( unsigned short int ), 1, l_pFile );
 
-            lOk = (l_footer == 0xff55);
+            lOk = ( l_footer == 0xff55 || l_footer == 0xff56 );
         }
     
         std::fclose( l_pFile );
