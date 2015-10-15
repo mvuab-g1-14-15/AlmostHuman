@@ -75,7 +75,8 @@ void CRenderableObjectsManager::Render()
 {
     for ( unsigned int i = 0; i < m_ResourcesVector.size(); ++i )
     {
-        m_ResourcesVector[i]->Render();
+		if(m_ResourcesVector[i]->GetActive())
+			m_ResourcesVector[i]->Render();
     }
 }
 
