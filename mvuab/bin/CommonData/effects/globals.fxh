@@ -59,6 +59,8 @@ float       g_Alpha                                                 : Alpha;
 float3      g_Color                                                 : Color;
 float3      g_Direction                                             : Direction;
 
+float		g_SelfIlumAmount										: SelfIlumAmount;
+
 //
 // Lights data
 //

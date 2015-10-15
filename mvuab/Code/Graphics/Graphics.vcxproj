@@ -58,6 +58,7 @@
     <ClCompile Include="Lights\OmniLight.cpp" />
     <ClCompile Include="Lights\ShadowMap.cpp" />
     <ClCompile Include="Lights\SpotLight.cpp" />
+    <ClCompile Include="Materials\Material.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderableObject\Layer.cpp" />
     <ClCompile Include="RenderableObject\PoolRenderableObjectTechnique.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Lights\OmniLight.h" />
     <ClInclude Include="Lights\ShadowMap.h" />
     <ClInclude Include="Lights\SpotLight.h" />
+    <ClInclude Include="Materials\Material.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="RenderableObject\Layer.h" />
     <ClInclude Include="RenderableObject\PoolRenderableObjectTechnique.h" />

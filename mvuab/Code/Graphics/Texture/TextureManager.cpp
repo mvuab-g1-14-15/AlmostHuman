@@ -1,5 +1,7 @@
 #include "TextureManager.h"
 
+#include <sys\stat.h>
+
 CTextureManager::CTextureManager()
     : CManager()
 {
@@ -57,6 +59,24 @@ CTexture* CTextureManager::GetTexture( const std::string& fileName )
   return lTexture;
 }
 
+bool fileExists(const std::string& file)
+{
+    struct stat buf;
+    return (stat(file.c_str(), &buf) == 0);
+}
+
+bool CTextureManager::TryToLoad(CTexture* aTexture, std::string aFileName)
+{
+    if (fileExists(aFileName))
+    {
+        if( aTexture->Load( aFileName ) )
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 CTexture* CTextureManager::AddTexture( const std::string& fileName )
 {
     CTexture* t;
@@ -74,7 +94,19 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
         t = new CTexture();
     }
 
-    if ( !t->Load( fileName ) || !AddResource( fileName, t) )
+    std::string lFileName = fileName;
+    lFileName.erase(lFileName.find_last_of("."), std::string::npos);
+    if (!TryToLoad( t, lFileName + ".dds"))
+    {
+        if (!TryToLoad( t, fileName))
+        {
+            CHECKED_DELETE( t );
+            LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
+            return m_DummyTexture;
+        }
+    }
+
+    if ( !AddResource( fileName, t) )
     {
         CHECKED_DELETE( t );
         LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );

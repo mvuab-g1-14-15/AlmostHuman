@@ -330,6 +330,8 @@
     </ClCompile>
     <ClCompile Include="Cinematics\CinematicsElement\SetActiveElement.cpp">
       <Filter>Cinematics\CinematicsElement</Filter>
+    <ClCompile Include="Materials\Material.cpp">
+      <Filter>Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -672,6 +674,8 @@
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicsElement\SetActiveElement.h">
       <Filter>Cinematics\CinematicsElement</Filter>
+    <ClInclude Include="Materials\Material.h">
+      <Filter>Materials</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -746,6 +750,9 @@
     </Filter>
     <Filter Include="SceneRenderComands\PostProcCmd\VisualsCmd">
       <UniqueIdentifier>{c61a49ff-1c74-489c-b963-41de6b334f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials">
+      <UniqueIdentifier>{4b9c0976-c97c-463e-aff0-d97b99dac161}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

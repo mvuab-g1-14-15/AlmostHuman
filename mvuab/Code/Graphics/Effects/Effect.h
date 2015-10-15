@@ -40,6 +40,7 @@ public:
   bool SetFBSize                    ( const Math::Vect2u aSize );
   bool SetDeltaTime                 ( const float dt );
   bool SetPercentageTextures        ( float aPercentageTexture1, float aPercentageTexture2 );
+  bool SetSelfIlumAmount            ( float aSelfIlumAmount );
 
   //DirectX Methods Interface
   D3DXHANDLE GetTechniqueByName( const std::string& TechniqueName );
@@ -128,6 +129,8 @@ private: // Members
 
   DECLARE_EFFECT_PARAMETER( PercentageTexture1 );
   DECLARE_EFFECT_PARAMETER( PercentageTexture2 );
+
+  DECLARE_EFFECT_PARAMETER( SelfIlumAmount );
 
   DECLARE_EFFECT_PARAMETER( Direction );
   DECLARE_EFFECT_PARAMETER( Size );

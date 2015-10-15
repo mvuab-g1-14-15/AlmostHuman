@@ -51,11 +51,14 @@ struct SMaterial
 	m_TexturesRadiosityColor1 = STexture(),
 	m_TexturesRadiosityColor2 = STexture(),
 	m_Color = 0,
+	m_SelfIlumAmount = 0,
 	
 	fn FromMaxMaterial mat =
 	(
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
-
+		m_SelfIlumAmount = mat.selfIllumAmount
+		format "% self ilum amount\n" m_SelfIlumAmount
+		
 		if mat != undefined then
 		(
 			if mat.diffuseMapEnable == true AND classOf(mat.diffuseMap) == BitmapTexture then
@@ -157,8 +160,8 @@ struct SMaterial
 	fn WriteToFile file =
 	(
 		--format "Writing Material\n"
-		
-		WriteShort file m_Type #unsigned
+		WriteShort file  m_Type #unsigned
+		WriteFloat file   m_SelfIlumAmount
 		--format "Type: %\n" m_Type
 		
 		local l_nTextures = 0
@@ -567,7 +570,8 @@ struct SMesh
 	fn WriteToFile file =
 	(
 		--format "Write to file\n"
-		WriteShort file 0x55ff #unsigned
+		--WriteShort file 0x55ff #unsigned
+		WriteShort file 0x56ff #unsigned
 		--WriteShort file m_SubMeshes.count #unsigned--Write number of materials
 	
 		local counter = 0
@@ -606,7 +610,8 @@ struct SMesh
 		
 		m_AABB.WriteToFile file
 	
-		WriteShort file 0xff55 #unsigned
+		--WriteShort file 0xff55 #unsigned
+		WriteShort file 0xff56 #unsigned
 		format "Footer writed!\n"
 	)
 )
