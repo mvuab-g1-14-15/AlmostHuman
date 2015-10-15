@@ -152,7 +152,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #endif
 	
 	OUT.Albedo = float4(l_DiffuseColor.xyz, g_SpecularFactor);
-	OUT.Normal = float4(Normal2Texture(l_Normal), 1);
+	OUT.Normal = float4(Normal2Texture(l_Normal), g_SelfIlumAmount);
 	OUT.Depth  = IN.WorldPosition.z/IN.WorldPosition.w;
 	
 	return OUT;
