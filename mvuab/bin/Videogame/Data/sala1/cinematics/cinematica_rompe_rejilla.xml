@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cinematic name="Sala01_cinematica02_ok.max" duration="5.0">
-  <cinematic_object resource="Cylinder001" renderable_objects_manager="Cylinder001">
+  <!--<cinematic_object resource="Cylinder001_sala1" room="sala1" renderable_objects_manager="Cylinder001">
     <cinematic_object_key_frame time="0.0" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -32,8 +32,8 @@
     <cinematic_object_key_frame time="4.66667" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="4.83333" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="-16.7227 -1.2593 2.98179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_001" renderable_objects_manager="Rejilla_frag_001">
+  </cinematic_object>-->
+  <cinematic_object resource="Rejilla_frag_001_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_001">
     <cinematic_object_key_frame time="0.0" pos="113.118 -9.17377 -44.4424" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -9.17377 -44.4424" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -9.17377 -44.4424" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -66,7 +66,7 @@
     <cinematic_object_key_frame time="4.83333" pos="111.928 -20.2434 -44.5382" yaw="-0.449769" pitch="0.31953" roll="-3.03819" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="111.874 -22.4931 -44.5466" yaw="-0.442361" pitch="0.286886" roll="3.06686" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_002" renderable_objects_manager="Rejilla_frag_002">
+  <cinematic_object resource="Rejilla_frag_002_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_002">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -99,7 +99,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.932 -9.74849 -44.6037" yaw="0.095223" pitch="0.0208101" roll="-0.510556" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.932 -9.74849 -44.6037" yaw="0.095223" pitch="0.0208101" roll="-0.510556" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_003" renderable_objects_manager="Rejilla_frag_003">
+  <cinematic_object resource="Rejilla_frag_003_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_003">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.92063 -44.5965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.92063 -44.5965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.92063 -44.5965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -132,7 +132,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.494 -9.74129 -44.6127" yaw="0.471682" pitch="-0.0214497" roll="2.66536" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.494 -9.74129 -44.6127" yaw="0.471682" pitch="-0.0214497" roll="2.66536" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_004" renderable_objects_manager="Rejilla_frag_004">
+  <cinematic_object resource="Rejilla_frag_004_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_004">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.10801 -44.5962" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.10801 -44.5962" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.10801 -44.5962" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -165,7 +165,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.316 -9.76231 -44.4975" yaw="0.596496" pitch="-0.00785392" roll="-0.578724" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.316 -9.76231 -44.4975" yaw="0.596496" pitch="-0.00785392" roll="-0.578724" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_005" renderable_objects_manager="Rejilla_frag_005">
+  <cinematic_object resource="Rejilla_frag_005_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_005">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.29541 -43.9816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.29541 -43.9816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.29541 -43.9816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -198,7 +198,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.262 -9.67846 -43.5455" yaw="0.310107" pitch="0.159969" roll="0.999551" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.262 -9.67847 -43.5455" yaw="0.310324" pitch="0.160119" roll="1.00005" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_006" renderable_objects_manager="Rejilla_frag_006">
+  <cinematic_object resource="Rejilla_frag_006_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_006">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.3891 -44.6086" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.3891 -44.6086" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.3891 -44.6086" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -231,7 +231,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.03 -9.76422 -44.6456" yaw="0.610395" pitch="-0.00961226" roll="-0.543475" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.03 -9.76422 -44.6456" yaw="0.610395" pitch="-0.00961226" roll="-0.543475" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_007" renderable_objects_manager="Rejilla_frag_007">
+  <cinematic_object resource="Rejilla_frag_007_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_007">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.48279 -43.9942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.48279 -43.9942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.48279 -43.9942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -264,7 +264,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.189 -9.76442 -43.4916" yaw="1.49148" pitch="0.00496049" roll="-0.525622" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.189 -9.76442 -43.4916" yaw="1.49148" pitch="0.00496033" roll="-0.525621" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_008" renderable_objects_manager="Rejilla_frag_008">
+  <cinematic_object resource="Rejilla_frag_008_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_008">
     <cinematic_object_key_frame time="0.0" pos="113.118 -8.6349 -44.2926" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -8.6349 -44.2926" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -8.6349 -44.2926" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -297,7 +297,7 @@
     <cinematic_object_key_frame time="4.83333" pos="112.67 -17.325 -44.1866" yaw="-0.405937" pitch="3.02704" roll="0.010747" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="112.625 -19.2468 -44.1904" yaw="-0.60737" pitch="-2.59931" roll="-0.82083" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_009" renderable_objects_manager="Rejilla_frag_009">
+  <cinematic_object resource="Rejilla_frag_009_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_009">
     <cinematic_object_key_frame time="0.0" pos="113.118 -8.65585 -43.9253" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -8.65585 -43.9253" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -8.65585 -43.9253" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -330,7 +330,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.542 -9.69959 -43.4154" yaw="-0.370821" pitch="-0.0138236" roll="-3.13414" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.541 -9.6996 -43.4154" yaw="-0.370814" pitch="-0.014132" roll="-3.13465" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_010" renderable_objects_manager="Rejilla_frag_010">
+  <cinematic_object resource="Rejilla_frag_010_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_010">
     <cinematic_object_key_frame time="0.0" pos="113.118 -8.83568 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -8.83568 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -8.83568 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -363,7 +363,7 @@
     <cinematic_object_key_frame time="4.83333" pos="111.185 -29.3818 -43.4072" yaw="0.275904" pitch="-1.34279" roll="0.194628" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="111.047 -32.4298 -43.4015" yaw="0.6082" pitch="-1.85048" roll="-0.184969" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_011" renderable_objects_manager="Rejilla_frag_011">
+  <cinematic_object resource="Rejilla_frag_011_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_011">
     <cinematic_object_key_frame time="0.0" pos="113.118 -9.17193 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -9.17193 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -9.17193 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -396,7 +396,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.138 -9.74482 -43.2629" yaw="1.53145" pitch="-1.56927" roll="0.00934239" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.138 -9.74482 -43.2629" yaw="1.53144" pitch="-1.56929" roll="0.00939541" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_012" renderable_objects_manager="Rejilla_frag_012">
+  <cinematic_object resource="Rejilla_frag_012_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_012">
     <cinematic_object_key_frame time="0.0" pos="113.118 -9.34943 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -9.34943 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -9.34943 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -429,7 +429,7 @@
     <cinematic_object_key_frame time="4.83333" pos="112.663 -38.9038 -42.0182" yaw="-1.12053" pitch="1.3967" roll="-1.9815" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="112.647 -42.5953 -41.9494" yaw="0.749368" pitch="0.098311" roll="-2.34289" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_013" renderable_objects_manager="Rejilla_frag_013">
+  <cinematic_object resource="Rejilla_frag_013_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_013">
     <cinematic_object_key_frame time="0.0" pos="113.118 -9.57621 -43.8628" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.118 -9.57621 -43.8628" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.118 -9.57621 -43.8628" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -462,7 +462,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.111 -9.58475 -43.8401" yaw="0.0888775" pitch="0.00152932" roll="-0.133621" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.117 -9.58642 -43.8401" yaw="0.0885363" pitch="0.00460262" roll="-0.0992095" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_014" renderable_objects_manager="Rejilla_frag_014">
+  <cinematic_object resource="Rejilla_frag_014_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_014">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.57649 -44.7116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.57649 -44.7116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.57649 -44.7116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -495,7 +495,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.707 -9.76758 -44.7441" yaw="-0.135868" pitch="0.00959665" roll="2.58595" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.707 -9.76758 -44.7441" yaw="-0.135868" pitch="0.00959665" roll="2.58595" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_015" renderable_objects_manager="Rejilla_frag_015">
+  <cinematic_object resource="Rejilla_frag_015_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_015">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.57649 -44.4076" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.57649 -44.4076" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.57649 -44.4076" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -528,7 +528,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.782 -9.77476 -44.4977" yaw="0.601816" pitch="-0.0394934" roll="2.62569" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.782 -9.77476 -44.4977" yaw="0.601816" pitch="-0.0394934" roll="2.62569" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_016" renderable_objects_manager="Rejilla_frag_016">
+  <cinematic_object resource="Rejilla_frag_016_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_016">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.29541 -44.7159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.29541 -44.7159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.29541 -44.7159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -561,7 +561,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.809 -9.76486 -44.8202" yaw="-0.322597" pitch="0.0276949" roll="-0.620327" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.809 -9.76486 -44.8202" yaw="-0.322597" pitch="0.0276949" roll="-0.620327" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_017" renderable_objects_manager="Rejilla_frag_017">
+  <cinematic_object resource="Rejilla_frag_017_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_017">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.29541 -44.3985" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.29541 -44.3985" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.29541 -44.3985" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -594,7 +594,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.816 -9.75934 -44.5484" yaw="2.34136" pitch="0.0232368" roll="-0.581619" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.816 -9.75934 -44.5484" yaw="2.34136" pitch="0.0232368" roll="-0.581619" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_018" renderable_objects_manager="Rejilla_frag_018">
+  <cinematic_object resource="Rejilla_frag_018_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_018">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.57649 -43.8769" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.57649 -43.8769" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.57649 -43.8769" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -627,7 +627,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.83 -9.76649 -43.6873" yaw="0.401926" pitch="-0.00340474" roll="-0.546942" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.83 -9.7668 -43.6873" yaw="0.404398" pitch="-0.0080051" roll="-0.562359" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_019" renderable_objects_manager="Rejilla_frag_019">
+  <cinematic_object resource="Rejilla_frag_019_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_019">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.57649 -44.1909" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.57649 -44.1909" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.57649 -44.1909" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -660,7 +660,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.725 -9.76626 -44.0922" yaw="-1.35914" pitch="-5.60853e-005" roll="-0.535467" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.725 -9.76626 -44.0922" yaw="-1.35914" pitch="-5.59813e-005" roll="-0.535466" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_020" renderable_objects_manager="Rejilla_frag_020">
+  <cinematic_object resource="Rejilla_frag_020_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_020">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.82694 -43.8768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.82694 -43.8768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.82694 -43.8768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -693,7 +693,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.44 -9.77031 -44.0734" yaw="-0.311979" pitch="-1.16287e-005" roll="2.60073" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.44 -9.77031 -44.0734" yaw="-0.311978" pitch="-1.23848e-005" roll="2.60073" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_021" renderable_objects_manager="Rejilla_frag_021">
+  <cinematic_object resource="Rejilla_frag_021_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_021">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.82694 -44.1547" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.82694 -44.1547" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.82694 -44.1547" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -726,7 +726,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.22 -9.75955 -44.2306" yaw="-0.397984" pitch="-0.00968989" roll="-0.555957" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.22 -9.75834 -44.2301" yaw="-0.3852" pitch="-0.0333117" roll="-0.594407" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_022" renderable_objects_manager="Rejilla_frag_022">
+  <cinematic_object resource="Rejilla_frag_022_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_022">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.20171 -43.8762" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.20171 -43.8762" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.20171 -43.8762" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -759,7 +759,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.355 -9.63321 -43.4558" yaw="0.154255" pitch="0.498615" roll="-2.99131" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.355 -9.63327 -43.4558" yaw="0.153938" pitch="0.498359" roll="-2.99107" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_023" renderable_objects_manager="Rejilla_frag_023">
+  <cinematic_object resource="Rejilla_frag_023_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_023">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.20171 -44.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.20171 -44.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.20171 -44.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -792,7 +792,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.398 -9.74781 -43.8589" yaw="0.0666748" pitch="-0.0442989" roll="2.71855" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.397 -9.75116 -43.8585" yaw="0.0867214" pitch="-0.00040348" roll="2.65808" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_024" renderable_objects_manager="Rejilla_frag_024">
+  <cinematic_object resource="Rejilla_frag_024_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_024">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.3891 -43.8771" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.3891 -43.8771" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.3891 -43.8771" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -825,7 +825,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.645 -9.77031 -43.7159" yaw="0.791809" pitch="1.56796e-005" roll="2.60064" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.645 -9.77031 -43.7159" yaw="0.791849" pitch="2.87003e-005" roll="2.6006" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_025" renderable_objects_manager="Rejilla_frag_025">
+  <cinematic_object resource="Rejilla_frag_025_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_025">
     <cinematic_object_key_frame time="0.0" pos="113.125 -9.3891 -44.1365" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.125 -9.3891 -44.1365" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.125 -9.3891 -44.1365" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -858,7 +858,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.893 -9.7588 -43.8185" yaw="0.432324" pitch="0.0406102" roll="-0.559771" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.893 -9.75843 -43.8186" yaw="0.434135" pitch="0.0371488" roll="-0.574939" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_026" renderable_objects_manager="Rejilla_frag_026">
+  <cinematic_object resource="Rejilla_frag_026_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_026">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.01432 -43.8525" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.01432 -43.8525" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.01432 -43.8525" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -891,7 +891,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.214 -9.75283 -44.0958" yaw="-0.0568216" pitch="3.11245" roll="0.497232" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.214 -9.75645 -44.0953" yaw="-0.0688422" pitch="3.09058" roll="0.499636" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_027" renderable_objects_manager="Rejilla_frag_027">
+  <cinematic_object resource="Rejilla_frag_027_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_027">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.01432 -44.1482" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.01432 -44.1482" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.01432 -44.1482" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -924,7 +924,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.539 -9.76328 -44.2715" yaw="2.19966" pitch="-0.0311163" roll="-0.582961" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.539 -9.76328 -44.2715" yaw="2.19966" pitch="-0.0311163" roll="-0.582961" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_028" renderable_objects_manager="Rejilla_frag_028">
+  <cinematic_object resource="Rejilla_frag_028_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_028">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.73324 -43.8694" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.73324 -43.8694" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.73324 -43.8694" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -957,7 +957,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.328 -9.66102 -43.4057" yaw="0.285371" pitch="-0.39418" roll="0.216173" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.328 -9.66106 -43.4057" yaw="0.28526" pitch="-0.393923" roll="0.216449" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_029" renderable_objects_manager="Rejilla_frag_029">
+  <cinematic_object resource="Rejilla_frag_029_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_029">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.7336 -44.1494" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.7336 -44.1494" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.7336 -44.1494" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -990,7 +990,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.419 -9.76351 -43.2029" yaw="0.549128" pitch="0.0208902" roll="-0.527324" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.419 -9.76348 -43.2029" yaw="0.548623" pitch="0.0216524" roll="-0.528451" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_030" renderable_objects_manager="Rejilla_frag_030">
+  <cinematic_object resource="Rejilla_frag_030_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_030">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.10801 -43.8656" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.10801 -43.8656" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.10801 -43.8656" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1023,7 +1023,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.297 -9.70749 -43.4996" yaw="0.299379" pitch="0.0170596" roll="-2.28943" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.297 -9.70749 -43.4996" yaw="0.299394" pitch="0.0171188" roll="-2.28932" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_031" renderable_objects_manager="Rejilla_frag_031">
+  <cinematic_object resource="Rejilla_frag_031_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_031">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.10801 -44.1483" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.10801 -44.1483" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.10801 -44.1483" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1056,7 +1056,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.333 -9.76548 -43.7436" yaw="0.192228" pitch="3.61581e-005" roll="2.60059" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.333 -9.76547 -43.7436" yaw="0.192152" pitch="2.50043e-005" roll="2.60073" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_032" renderable_objects_manager="Rejilla_frag_032">
+  <cinematic_object resource="Rejilla_frag_032_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_032">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.48279 -44.7332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.48279 -44.7332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.48279 -44.7332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1089,7 +1089,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.898 -9.76529 -44.7721" yaw="0.908079" pitch="0.012459" roll="2.5921" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.898 -9.76529 -44.7721" yaw="0.90808" pitch="0.0124602" roll="2.5921" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_033" renderable_objects_manager="Rejilla_frag_033">
+  <cinematic_object resource="Rejilla_frag_033_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_033">
     <cinematic_object_key_frame time="0.0" pos="113.125 -9.48279 -44.4554" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.125 -9.48279 -44.4554" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.125 -9.48279 -44.4554" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1122,7 +1122,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.71 -9.76643 -44.5" yaw="-0.031434" pitch="0.0127426" roll="-0.578262" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.71 -9.76643 -44.5" yaw="-0.031434" pitch="0.0127426" roll="-0.578262" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_034" renderable_objects_manager="Rejilla_frag_034">
+  <cinematic_object resource="Rejilla_frag_034_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_034">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.20171 -44.7474" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.20171 -44.7474" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.20171 -44.7474" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1155,7 +1155,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.019 -9.75631 -44.7553" yaw="0.71822" pitch="0.0245832" roll="2.49539" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.019 -9.75631 -44.7553" yaw="0.71822" pitch="0.0245832" roll="2.49539" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_035" renderable_objects_manager="Rejilla_frag_035">
+  <cinematic_object resource="Rejilla_frag_035_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_035">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.20171 -44.4417" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.20171 -44.4417" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.20171 -44.4417" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1188,7 +1188,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.989 -9.75724 -44.4897" yaw="1.31237" pitch="0.0468216" roll="-0.530189" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.989 -9.75724 -44.4897" yaw="1.31237" pitch="0.0468216" roll="-0.530189" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_036" renderable_objects_manager="Rejilla_frag_036">
+  <cinematic_object resource="Rejilla_frag_036_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_036">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.73324 -44.727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.73324 -44.727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.73324 -44.727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1221,7 +1221,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.566 -9.76222 -44.8681" yaw="-1.42264" pitch="0.0252057" roll="-0.634792" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.566 -9.76222 -44.8681" yaw="-1.42264" pitch="0.0252057" roll="-0.634792" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_037" renderable_objects_manager="Rejilla_frag_037">
+  <cinematic_object resource="Rejilla_frag_037_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_037">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.73348 -44.4489" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.73348 -44.4489" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.73348 -44.4489" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1254,7 +1254,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.578 -9.76464 -43.6858" yaw="1.74734" pitch="-0.00429723" roll="-0.545673" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.578 -9.76497 -43.6858" yaw="1.74356" pitch="0.00358044" roll="-0.540833" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_038" renderable_objects_manager="Rejilla_frag_038">
+  <cinematic_object resource="Rejilla_frag_038_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_038">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.92063 -43.855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.92063 -43.855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.92063 -43.855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1287,7 +1287,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.389 -9.75657 -44.0109" yaw="-0.38453" pitch="0.0201525" roll="2.69296" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.389 -9.75521 -44.0107" yaw="-0.379133" pitch="0.0299046" roll="2.62126" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_039" renderable_objects_manager="Rejilla_frag_039">
+  <cinematic_object resource="Rejilla_frag_039_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_039">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.92063 -44.1531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.92063 -44.1531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.92063 -44.1531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1320,7 +1320,7 @@
     <cinematic_object_key_frame time="4.83333" pos="113.229 -9.76657 -44.173" yaw="-0.519012" pitch="-0.000607949" roll="-0.541117" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="113.229 -9.76662 -44.1728" yaw="-0.511094" pitch="-0.0156696" roll="-0.57033" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_040" renderable_objects_manager="Rejilla_frag_040">
+  <cinematic_object resource="Rejilla_frag_040_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_040">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.01432 -44.7292" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.01432 -44.7292" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.01432 -44.7292" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1353,7 +1353,7 @@
     <cinematic_object_key_frame time="4.83333" pos="114.338 -9.75383 -44.6638" yaw="-0.489532" pitch="0.0596141" roll="-0.564439" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="114.338 -9.75383 -44.6638" yaw="-0.489532" pitch="0.0596141" roll="-0.564439" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_041" renderable_objects_manager="Rejilla_frag_041">
+  <cinematic_object resource="Rejilla_frag_041_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_041">
     <cinematic_object_key_frame time="0.0" pos="113.124 -9.01432 -44.4524" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -9.01432 -44.4524" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -9.01432 -44.4524" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

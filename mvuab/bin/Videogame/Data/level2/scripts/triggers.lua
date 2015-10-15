@@ -1,5 +1,8 @@
 g_bChargeEnergy = false
 g_bChangeRoom = false
+g_bPressedRoom1Button = false
+g_bPressRoom1Button = false
+g_bRejillaBreak = false
 g_bPressRoom2X = false
 g_bPressRoom3X = false
 g_bPressedRoom2X = false
@@ -81,16 +84,13 @@ function ShowImageRoom(other_shape)
 end
 
 function ShowTextDoor2(text, other_shape)
-	engine:Trace("He entrado en ShowText")
 	if g_bPressRoom2X then
-		engine:Trace("He entrado en PressRoom2X = true")
 		g_bPressRoom2X = false
 		if CuentaAtras ~= 3 then
 			CuentaAtras = 0
 			gui_manager:ShowStaticText("Block")
 		end
 	else
-		engine:Trace("He entrado en PressRoom2X = false")
 		g_bPressRoom2X = true
 	end
 	gui_manager:ShowStaticText(text)
@@ -146,6 +146,23 @@ function ShowDetonar(text, text2, other_shape)
 		g_bDistanceC4 = false
 		g_sTextC4Press = text2
 		gui_manager:ShowStaticText(text2)
+	end
+end
+
+function OpenRejilla(text, other_shape)
+	if g_bPressRoom1Button and not g_bRejillaBreak then
+		g_bPressRoom1Button = false	
+		gui_manager:ShowStaticText(text)
+	elseif not g_bPressRoom1Button and not g_bRejillaBreak then
+		g_bPressRoom1Button = true
+		gui_manager:ShowStaticText(text)
+	end
+end
+
+function StayRejilla(text, other_shape)
+	if not g_bRejillaBreak and g_bPressedRoom1Button then
+		g_bRejillaBreak = true
+		gui_manager:ShowStaticText(text)		
 	end
 end
 

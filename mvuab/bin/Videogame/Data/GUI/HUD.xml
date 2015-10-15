@@ -28,6 +28,7 @@
 	<StaticText name="FaltanC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="FaltanC4" />
 	<StaticText name="C4Colocada" pos="50 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
 	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
+	<StaticText name="RomperRejilla" pos="50 60" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
 			quad="Data/textures/GUI/BaseDialegBox.jpg" pos_button="40.00 15.00" height_button="5.00" width_button="5.00"

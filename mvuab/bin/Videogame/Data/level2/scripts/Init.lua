@@ -123,10 +123,8 @@ function update_gameplay()
 				g_Player:SetPosition(ChangeRoom())
 			end
 		end
-		if action_manager:DoAction("PressX") then
-			engine:Trace("He entrado en PressX")
+		if action_manager:DoAction("PressX") then			
 			if g_bPressRoom2X then
-				engine:Trace("He entrado en PressRoom2X")
 				if CuentaAtras == 3 then
 					gui_manager:ShowStaticText("Block")
 				end
@@ -136,6 +134,13 @@ function update_gameplay()
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				gui_manager:ShowStaticText("OpenDoor")
 				--Code para abrir puerta
+			end
+		end	
+		
+		if action_manager:DoAction("RomperRejilla") then			
+			if g_bPressRoom1Button then				
+				g_bPressedRoom1Button = true
+				cinematic_manager:Execute("rejilla")
 			end
 		end	
 		

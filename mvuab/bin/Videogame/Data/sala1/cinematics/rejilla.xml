@@ -1,3 +1,4 @@
 <cinematic>
-	<play_animation name="Rejilla" resource_id_file="Data/sala1/cinematic/cinematica_rompe_rejilla.xml" time="4.0" />
+	<set_active name="rejilla_fragment" resource_id_file="Data/sala1/cinematics/elementos_rejilla.xml" active="true" time="0.1"/>
+	<play_animation name="Rejilla" room="sala1" resource_id_file="Data/sala1/cinematics/cinematica_rompe_rejilla.xml" time="5.0"/>
 </cinematic>
