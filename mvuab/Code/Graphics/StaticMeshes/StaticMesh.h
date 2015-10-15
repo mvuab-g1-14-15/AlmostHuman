@@ -12,12 +12,13 @@ class CRenderableVertexs;
 class CGraphicsManager;
 class CTexture;
 class CRenderableObjectTechnique;
+class CMaterial;
 
 class CStaticMesh
 {
     protected:
-        typedef std::vector<CTexture*> TTextureVector;
-        std::vector<TTextureVector> m_Textures;
+        typedef std::vector<CMaterial*> TMaterialsVector;
+        TMaterialsVector                mMaterials;
         
         std::vector<CRenderableObjectTechnique*> m_RenderableObjectTechniques;
         std::vector<CRenderableVertexs*> m_RVs;
