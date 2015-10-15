@@ -328,6 +328,9 @@
     <ClCompile Include="SceneRenderComands\OcclusionMap.cpp">
       <Filter>SceneRenderComands\EffectsCmd</Filter>
     </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\SetActiveElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -666,6 +669,9 @@
     </ClInclude>
     <ClInclude Include="SceneRenderComands\OcclusionMap.h">
       <Filter>SceneRenderComands\EffectsCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\SetActiveElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
