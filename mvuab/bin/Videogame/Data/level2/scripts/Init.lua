@@ -9,6 +9,7 @@ g_ConsoleActivate = false
 g_CinematicActive = false
 g_PauseGame = false
 g_Barrels = {}
+g_bCinematicLoopMain = false
 
 initialized1 = false
 
@@ -23,7 +24,7 @@ function load_basics()
 	scene:ActivateRoom("sala1")
 	--scene:ActivateRoom("pasillo")
 	--scene:ActivateRoom("sala4")
-	scene:ActivateRoom("sala2")
+	--scene:ActivateRoom("sala2")
 	--scene:ActivateRoom("sala3")
 	engine:Trace("Finish the load_basics()")
 end
@@ -57,10 +58,11 @@ function load_gameplay()
 	-- g_PlayerCinematic:MakeTransform()
 	-- g_PlayerCinematic:SetRoomName( "sala1" )
 	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
-	 --g_Player:SetPosition(Vect3f(124.989,-8.31726,-51.9642))
-	 --g_Player:Update()
-	 --g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1", 0.2, 0)
-	 --g_Player:SetCurrentState("cinematica_inicial_sala1")
+	g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
+	g_bCinematicLoopMain = true
+	g_Player:Update()
+	g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
+	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
 
 end
 
@@ -70,7 +72,7 @@ function update_gameplay()
 		load_gameplay()
 		initialized1 = true
 	end
-	
+
 	enemy_manager:Update()
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()
@@ -186,7 +188,7 @@ function update_gameplay()
 			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
-	if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
+	--if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
 		if action_manager:DoAction("ChangeCamera" ) then
 			if "FreeCam" == camera_manager:GetCurrentCameraName() then
 				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
@@ -210,7 +212,7 @@ function update_gameplay()
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
 		end
-	end
+	--end
 end
 
 function UpdateVariables(dt)
