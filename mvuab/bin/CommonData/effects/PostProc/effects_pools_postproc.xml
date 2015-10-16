@@ -71,6 +71,11 @@
 		<default_technique vertex_type="1104" technique="MergeTechnique"/>
 	</pool_renderable_object_technique>
     
+    <!-- Draw Quad (pixel pass throw) -->
+     <pool_renderable_object_technique name="draw_quad_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
+	</pool_renderable_object_technique>
+    
     <!-- Occlusions for scattering light -->
     <pool_renderable_object_technique name="occlusion_map_pool_renderable_object_technique">
         <default_technique vertex_type="19"		technique="OcclusionMapTechnique"/>

@@ -43,6 +43,9 @@
     
     <technique name="MergeTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ScatteredLight.fx">
 	</technique>
+    
+    <technique name="DrawQuadSampler0Technique" vertex_type="1104" file="../CommonData/effects/DrawQuad.fx">
+	</technique>
 
 	<effect file="../CommonData/effects/PostProc/glow_effects.xml"/>
     <effect file="../CommonData/effects/PostProc/occlussion_effects.xml"/></effects>

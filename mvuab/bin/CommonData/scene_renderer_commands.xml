@@ -66,6 +66,7 @@
 	
 	<disable_z_test/>
     
+    <!--
     ZBLUT_START
     <capture_frame_buffer name="Z_NO_BLUR">
 		<dynamic_texture stage_id="0" name="Z_NO_BLUR" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
@@ -76,37 +77,18 @@
         <texture stage_id="1" name="DepthMapTexture"/>
     </zblur>
     ZBLUR_END
- 
-    <!--
+    -->
+    
+    
     SCATTERED_LIGHT_START
     <capture_frame_buffer name="FB1">
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
-    
-    <disable_z_test/>
-    <disable_z_write/>
-    <clear_scene color="true" depth="true" stencil="false" clearColor="50 50 50"/>
-    <occlusion_map />
-    
-    <capture_frame_buffer name="FB2">
-		<dynamic_texture stage_id="0" name="FB2" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-    
+
     <scattered_light>
-        <texture stage_id="0" name="FB2"/>
+        <texture stage_id="0" name="FB1"/>
     </scattered_light>
-    
-    <capture_frame_buffer name="FB3">
-		<dynamic_texture stage_id="0" name="FB3" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-    
-    <set_pool_renderable_objects_technique pool="merge_pool_renderable_object_technique"/>
-    <render_draw_quad active="true" name="merge_light_scattered">
- 		<texture stage_id="0" name="FB1"/>
-        <texture stage_id="1" name="FB3"/>
- 	</render_draw_quad>
     SCATTERED_LIGHT_END
-    --> 
     
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

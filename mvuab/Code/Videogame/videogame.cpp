@@ -51,8 +51,7 @@ void ShowErrorMessage( const std::string& message )
     }
 
     end_message += message;
-    MessageBox( 0, end_message.c_str(), "FlostiProject Report",
-                MB_OK | MB_ICONERROR );
+    MessageBox( 0, end_message.c_str(), "Almost Human Report",  MB_OK | MB_ICONERROR );
 }
 
 

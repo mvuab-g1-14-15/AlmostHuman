@@ -11,6 +11,11 @@ class CTexture;
 
 class CScatteredLightSceneRendererCommand : public CStagedTexturedRendererCommand
 {
+    private:
+        CTexture m_RenderTarget1;
+        CTexture m_RenderTarget2;
+        CTexture m_RenderTarget3;
+
     public:
         CScatteredLightSceneRendererCommand( CXMLTreeNode& atts );
         ~ CScatteredLightSceneRendererCommand();
