@@ -31,6 +31,7 @@
     <ClCompile Include="Cinematics\CinematicObject.cpp" />
     <ClCompile Include="Cinematics\CinematicObjectKeyFrame.cpp" />
     <ClCompile Include="Cinematics\CinematicPlayer.cpp" />
+    <ClCompile Include="Cinematics\CinematicsElement\AddRenderablesElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\CinematicsElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\HideElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\PlayAnimationElement.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Cinematics\CinematicObject.h" />
     <ClInclude Include="Cinematics\CinematicObjectKeyFrame.h" />
     <ClInclude Include="Cinematics\CinematicPlayer.h" />
+    <ClInclude Include="Cinematics\CinematicsElement\AddRenderablesElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\CinematicsElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\HideElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\PlayAnimationElement.h" />

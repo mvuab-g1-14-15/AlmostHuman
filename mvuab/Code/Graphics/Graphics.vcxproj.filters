@@ -330,9 +330,12 @@
     </ClCompile>
     <ClCompile Include="Cinematics\CinematicsElement\SetActiveElement.cpp">
       <Filter>Cinematics\CinematicsElement</Filter>
-	  </ClCompile>
+    </ClCompile>
     <ClCompile Include="Materials\Material.cpp">
       <Filter>Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\AddRenderablesElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -675,9 +678,12 @@
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicsElement\SetActiveElement.h">
       <Filter>Cinematics\CinematicsElement</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Materials\Material.h">
       <Filter>Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\AddRenderablesElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

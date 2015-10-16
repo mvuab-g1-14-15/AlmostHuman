@@ -6,6 +6,7 @@
 #include "Cinematics\CinematicsElement\SetTransformElement.h"
 #include "Cinematics\CinematicsElement\WaitTimeElement.h"
 #include "Cinematics\CinematicsElement\SetActiveElement.h"
+#include "Cinematics\CinematicsElement\AddRenderablesElement.h"
 #include "Cameras\CameraCinematical.h"
 #include "Cameras\CameraManager.h"
 #include "Cinematics\Cinematic.h"
@@ -65,6 +66,7 @@ void CCinematicManager::Init()
     CommandFactory.Register( "show_dialog", Type2Type<CShowDialogElement>( ) );
     CommandFactory.Register( "hide", Type2Type<CHideElement>( ) );
 	CommandFactory.Register( "set_active", Type2Type<CSetActiveElement>( ) );
+	CommandFactory.Register( "add_renderable", Type2Type<CAddRenderablesElement>( ) );
 }
 
 void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )

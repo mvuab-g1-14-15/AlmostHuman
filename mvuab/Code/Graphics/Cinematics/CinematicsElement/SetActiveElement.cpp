@@ -4,6 +4,8 @@
 #include "Timer\Timer.h"
 #include "RenderableObject\Scene.h"
 #include "RenderableObject\Room.h"
+#include "StaticMeshes\StaticMesh.h"
+#include "StaticMeshes\StaticMeshManager.h"
 #include "RenderableObject\RenderableObjectsLayersManager.h"
 
 CSetActiveElement::CSetActiveElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
@@ -12,11 +14,13 @@ CSetActiveElement::CSetActiveElement( CXMLTreeNode& atts ) : CCinematicsElement(
 	CXMLTreeNode newFile, element;
 	if ( newFile.LoadAndFindNode( atts.GetAttribute<std::string>("resource_id_file", "").c_str(), "elements" , element ))
     {
-		CRenderableObject* l_RenderableObject;
+		CRenderableObject* lRenderableObject;
         for( uint32 i = 0, lCount = element.GetNumChildren(); i < lCount ; ++i)
         {
-			l_RenderableObject = SceneInstance->GetResource(element(i).GetAttribute<std::string>("room", ""))->GetLayer("solid")->GetResource(element(i).GetAttribute<std::string>("name", ""));            
-			m_vRenderableObject.push_back(l_RenderableObject);
+			CXMLTreeNode lSubElement = element(i);
+			const std::string& lName = lSubElement.GetAttribute<std::string>("name", "" );
+			lRenderableObject = SceneInstance->GetResource(lSubElement.GetAttribute<std::string>("room", ""))->GetLayer("solid")->GetResource(lName);            
+			m_vRenderableObject.push_back(lRenderableObject);
         }
     }
 }
