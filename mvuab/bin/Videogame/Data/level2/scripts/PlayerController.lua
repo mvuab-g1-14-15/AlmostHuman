@@ -107,7 +107,6 @@ function CPlayerController:Update()
 
 	--Set Listenr Postion 
 	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
-	local CurrentState = g_Player:GetCurrentState()
 	local l_Speed = self.Speed
 	if self.Crouch then
 		l_Speed = l_Speed / 3.0
@@ -116,19 +115,9 @@ function CPlayerController:Update()
 	if self.Run then
 		l_Speed = l_Speed * 2.0
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
-		if CurrentState ~= "run" then
-			--engine:Trace("Estado actual run")
-			g_Player:GetRenderableObject():ChangeAnimation("run", 0.2, 0)
-			g_Player:SetCurrentState("run")
-		end
 	end
 	if not self.Crouch and not self.Run then
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep)
-		if CurrentState ~= "idle" and CurrentState ~= "charge_loop" and CurrentState ~= "idle_to_charge" and CurrentState ~= "shoot_cargado" then
-			--engine:Trace("Estado actual idle")
-			g_Player:GetRenderableObject():ChangeAnimation("idle", 0.2, 0)
-			g_Player:SetCurrentState("idle")
-		end
 	end
 	
 	local l_Velocity = self.Direction * l_Speed
@@ -390,4 +379,10 @@ end
 
 function CPlayerController:GetIsCrouch()
 	return self.Crouch
+end
+
+function CPlayerController:GetMeshOffset( aOffset )
+	local lUp = self.Side ^ self.Forward
+	lUp:Normalize()
+	return self.Forward * aOffset.x + self.Side * aOffset.z + lUp * aOffset.y
 end

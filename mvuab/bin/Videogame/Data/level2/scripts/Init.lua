@@ -72,7 +72,6 @@ function update_gameplay()
 	end
 	
 	enemy_manager:Update()
-	engine:Trace("El estado actual del player es: "..g_Player:GetCurrentState())
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()
 	g_PauseGame = engine_manager:GetbGamePause()

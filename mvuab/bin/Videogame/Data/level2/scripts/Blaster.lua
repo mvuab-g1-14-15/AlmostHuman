@@ -17,6 +17,10 @@ function CBlaster:__init()
 	
 	self.Shoots = {}
 	
+	self.IsShooting = false
+	FinishShooting = false
+	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
+	
     --engine:Trace("Blaster initialized")
 end
 
@@ -90,35 +94,22 @@ end
 
 function CBlaster:Update()
 	if not g_ConsoleActivate and not g_CinematicActive then
-		local CurrentState = g_Player:GetCurrentState()
 		if action_manager:DoAction("Shoot") then
 			if self.Energy > 1 then
+				self.IsShooting = true
+				self.FinishShooting = false
 				if self.TimePressed == 0 then
-					if CurrentState ~= "idle_to_charge" then
-						--engine:Trace("Estado actual idle_to_charge")
-						g_Player:GetRenderableObject():ChangeAnimation("idle_to_charge", 0.2, 0.5)
-						g_Player:SetCurrentState("idle_to_charge")
-					end
+					g_Player:SetAnimation("idle_to_shoot")
 				end
 				if self.TimePressed < self.MaxTimePressed then
-					--Implementar soot acumulado
+					--Implementar shoot acumulado
 					self.TimePressed = self.TimePressed + timer:GetElapsedTime()
 				else
-					if CurrentState ~= "shoot_cargado" then
-						--engine:Trace("Estado actual shoot_cargado")
-						g_Player:GetRenderableObject():ChangeAnimation("shoot_cargado", 0.5, 0)
-						g_Player:SetCurrentState("shoot_cargado")
-					end
 					self.TimePressed = self.MaxTimePressed
 				end
 				if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 					sound_manager:PlayEvent( "Play_Acumulator_Long_Shoot_Event", "Logan" )
-					if CurrentState ~= "charge_loop" then
-						--engine:Trace("Estado actual charge_loop")
-						g_Player:GetRenderableObject():ChangeAnimation("charge_loop", 0.5, 0)
-						g_Player:SetCurrentState("charge_loop")
-					end
-
+					g_Player:SetAnimation("charge_loop")
 					self.IsAcumulatorSound = true
 				end
 			end
@@ -131,21 +122,26 @@ function CBlaster:Update()
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
-					--engine:Trace("Tiempo pulsado: ".. tostring(self.TimePressed).." Energia consumida: "..tostring(self.TimePressed*self.Multiplicador))
 				end
-				--engine:Trace("Energia Total: ".. tostring(self.Energy))
 				self:Shoot()
-				if CurrentState ~= "shoot_ok" then
-					--engine:Trace("Estado actual shoot_ok")
-					g_Player:GetRenderableObject():ChangeAnimation("shoot_ok", 1, 1)
-					g_Player:SetCurrentState("shoot_ok")
-				end
+				g_Player:SetAnimation("shoot")
 			else
 			--SONIDO DE PEDO AQUI
 			end
 			self.TimePressed = 0.0
 			self.IsAcumulatorSound = false
+			self.FinishShooting = true
+			countdowntimer_manager:SetActive("BlasterFinish", true)
 		end
+		
+		if self.FinishShooting then
+			if countdowntimer_manager:isTimerFinish("BlasterFinish") then
+				self.IsShooting = false
+				self.FinishShooting = false
+				countdowntimer_manager:Reset("BlasterFinish", false)
+			end
+		end
+			
 
 		for i = #self.Shoots,1,-1 do
 			local lShoot = self.Shoots[i]
@@ -157,6 +153,10 @@ function CBlaster:Update()
 			end
 		end
 	end
+end
+
+function CBlaster:GetIsShooting()
+	return self.IsShooting
 end
 
 function CBlaster:GetEnergy()

@@ -19,6 +19,8 @@ function CPlayer:__init()
 	self.InsideBarrel = false
 	self.BarrelName = ""
 	
+	self.MeshOffset = Vect3f(1.0, 0.0, 0.0)
+	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel("Player", "Player")
@@ -33,20 +35,35 @@ function CPlayer:__init()
 
 	self.RenderableObject:MakeTransform();
 	
-	self.Life = 100.0
+	self.Animation = "idle"
 	
-	self.CurrentState = "idle"
+	self.Life = 100.0
 end
 
 function CPlayer:Update()
 	self.PlayerController:Update()
 	
+	local l_MeshOffset = self:GetMeshOffset()
 	local l_MeshPosition = self.PlayerController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
-	self.RenderableObject:SetPosition(l_MeshPosition);
-	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi);
+	l_MeshPosition = l_MeshPosition + l_MeshOffset
+	self.RenderableObject:SetPosition(l_MeshPosition)
+	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
+	
+	if not self.Blaster:GetIsShooting() then
+		if self.PlayerController:GetIsMoving() then
+			if self.PlayerController:GetIsRunning() then
+				self:SetAnimation("run")
+			else
+				self:SetAnimation("walk")
+			end
+		else
+			self:SetAnimation("idle")
+		end
+	end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then
@@ -73,10 +90,16 @@ function CPlayer:Update()
 		self.Life= 100.0
 	end
 	
-	
-	----engine:Trace( "Player life: " .. self.Life )
+	self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
 end
 
+function CPlayer:SetAnimation( aName )
+	self.Animation = aName
+end
+
+function CPlayer:GetMeshOffset()
+	return self.PlayerController:GetMeshOffset( self.MeshOffset )
+end
 function CPlayer:SetPosition(position)
 	self.PlayerController:SetPosition(position)
 end
@@ -98,6 +121,7 @@ end
 function CPlayer:SetWeak(weak)
 	self.PlayerController.Weak = weak
 end
+
 function CPlayer:GetLife()
 	return self.Life
 end
@@ -128,14 +152,6 @@ end
 
 function CPlayer:GetRenderableObject()
 	return self.RenderableObject;
-end
-
-function CPlayer:GetCurrentState()
-	return self.CurrentState
-end
-
-function CPlayer:SetCurrentState(state)
-	self.CurrentState = state
 end
 
 function CPlayer:SetEnergy(amount)
