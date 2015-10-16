@@ -14,30 +14,31 @@
 #include "Cameras/CameraManager.h"
 
 CInstanceMesh::CInstanceMesh( const std::string& aName )
-	: CRenderableObject()
-	, mStaticMesh( 0 )
-	, mType( "static" )
-	, mPhysicActor( 0 )
+    : CRenderableObject( aName )
+    , mStaticMesh( 0 )
+    , mType( "static" )
+    , mPhysicActor( 0 )
 {
-  SetName( aName );
 }
 
 
 CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName )
-	: CRenderableObject()
+    : CRenderableObject( aName )
     , mType( "static" )
     , mPhysicActor( 0 )
     , mStaticMesh( SMeshMInstance->GetResource( CoreName ) )
 {
-  SetName( aName );
+    mIsOk = mStaticMesh != NULL;
 }
 
 
-CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
-  mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
-  , mType( "static" )
-  , mPhysicActor( 0 )
+CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) 
+    : CRenderableObject( atts )
+    , mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
+    , mType( atts.GetAttribute<std::string>( "type", "static" ) )
+    , mPhysicActor( 0 )
 {
+    mIsOk = mStaticMesh != NULL;
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -50,12 +51,14 @@ CInstanceMesh::~CInstanceMesh()
 
 const std::vector<Math::Vect3f>& CInstanceMesh::GetVertexBuffer()
 {
-  return mStaticMesh == 0 ? Dummy01 : mStaticMesh->GetVertexBuffer();
+    ASSERT(mStaticMesh, "Null Static Mesh for instance mesh %s", GetName().c_str() );
+    return mStaticMesh->GetVertexBuffer();
 }
 
 const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 {
-  return  mStaticMesh == 0 ? Dummy02 :  mStaticMesh->GetIndexBuffer();
+    ASSERT(mStaticMesh, "Null Static Mesh for instance mesh %s", GetName().c_str() );
+    return mStaticMesh->GetIndexBuffer();
 }
 
 void CInstanceMesh::Render()

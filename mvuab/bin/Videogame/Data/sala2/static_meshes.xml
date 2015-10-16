@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="barril_sigil006_sala2" filename="meshes\barril_sigil006.mesh" />
   <static_mesh name="sala_2_sala2" filename="meshes\sala_2.mesh" />
   <static_mesh name="Pack_obj_3_sala2" filename="meshes\Pack_obj_3.mesh" />
   <static_mesh name="Pack_obj_04_sala2" filename="meshes\Pack_obj_04.mesh" />
@@ -20,7 +21,6 @@
   <static_mesh name="Walls_upper_2_sala2" filename="meshes\Walls_upper_2.mesh" />
   <static_mesh name="Walls_upper_3_sala2" filename="meshes\Walls_upper_3.mesh" />
   <static_mesh name="Base_carga_sala2" filename="meshes\Base_carga.mesh" />
-  <static_mesh name="barril_sigil006_sala2" filename="meshes\barril_sigil006.mesh" />
   <static_mesh name="barril_sigil007_sala2" filename="meshes\barril_sigil007.mesh" />
   <static_mesh name="Pack_obj_006_sala2" filename="meshes\Pack_obj_006.mesh" />
   <static_mesh name="barril_sigil011_sala2" filename="meshes\barril_sigil011.mesh" />

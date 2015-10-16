@@ -17,9 +17,8 @@ class CInstanceMesh : public CRenderableObject
         std::string   mType;
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
-
-        std::vector<Math::Vect3f> Dummy01;
-        std::vector<uint32> Dummy02;
+        bool          mIsOk;
+        float         mRadius;
 
     public:
         CInstanceMesh( const std::string& aName, const std::string& CoreName );
@@ -29,6 +28,7 @@ class CInstanceMesh : public CRenderableObject
         ~CInstanceMesh();
 
         void Render();
+        bool IsOk() const { return mIsOk; }
         void SetActor( CPhysicActor* lPhysicActor );
         CPhysicActor* GetActor();
 
