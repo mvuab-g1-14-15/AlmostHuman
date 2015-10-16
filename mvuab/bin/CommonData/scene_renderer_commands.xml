@@ -95,7 +95,7 @@
 		<dynamic_texture stage_id="0" name="FB2" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
     
-    <scattered_light Decay="1.0" Exposure="0.0034" Weight="5.65" Density="0.84" Samples="100">
+    <scattered_light>
         <texture stage_id="0" name="FB2"/>
     </scattered_light>
     

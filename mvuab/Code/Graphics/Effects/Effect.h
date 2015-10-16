@@ -106,7 +106,6 @@ public:
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
   void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
-  void SetScatteredLight(float l_Decay, float l_Esposure, float l_Weight, float l_Density, int l_Samples, Math::Vect2f &l_Pos, Math::Vect2i &l_TexSize);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:
@@ -179,16 +178,6 @@ private: // Members
   D3DXHANDLE m_ZBlurFocalEnd;
   D3DXHANDLE m_ZBlurConstant;
   D3DXHANDLE m_ZBlurEnd;
-
-  //
-  // Scattered Ligh
-  //
-  D3DXHANDLE m_SLDecai;
-  D3DXHANDLE m_SLExposure;
-  D3DXHANDLE m_SLDensity;
-  D3DXHANDLE m_SLWeight;
-  D3DXHANDLE m_SLSamples;
-  D3DXHANDLE m_SLLightPos;
 
   //
   // Shadow map handles

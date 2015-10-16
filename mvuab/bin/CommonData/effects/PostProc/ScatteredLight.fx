@@ -5,6 +5,12 @@
 #include "../samplers.fxh"
 #include "../globals.fxh"
 
+int        g_Samples = 100;
+float      g_SDecay = 1.0;
+float      g_SExposure = 0.0034;
+float      g_SDensity  = 0.84;
+float      g_SWeight = 5.65;
+
 float4 Merge(in float2 UV : TEXCOORD0) : COLOR
 {
     float4 s1 = tex2D(S0LinearSampler, UV);

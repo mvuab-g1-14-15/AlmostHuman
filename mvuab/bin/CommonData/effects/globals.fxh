@@ -115,16 +115,6 @@ float      g_ConstantBlur                                           : ConstantBl
 float      g_ZBlurEnd                                               : ZBlurEnd = 50;
 
 //
-// Scattered Light
-//
-int        g_Samples                                                : SLSamples = 20;
-float      g_SDecay                                                 : SLDecai = 0.96815;
-float      g_SExposure                                              : SLExposure = 0.2;
-float      g_SDensity                                               : SLDensity = 0.926;
-float      g_SWeight                                                : SLWeight = 0.98767;
-float2     g_LightPos                                               : SLLightSource = float2(0, 0);
-
-//
 // Timers
 //
 float      g_Time                                                   : Time;

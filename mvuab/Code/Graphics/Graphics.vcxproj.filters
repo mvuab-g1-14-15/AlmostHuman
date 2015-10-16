@@ -330,6 +330,7 @@
     </ClCompile>
     <ClCompile Include="Cinematics\CinematicsElement\SetActiveElement.cpp">
       <Filter>Cinematics\CinematicsElement</Filter>
+	  </ClCompile>
     <ClCompile Include="Materials\Material.cpp">
       <Filter>Materials</Filter>
     </ClCompile>
@@ -674,6 +675,7 @@
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicsElement\SetActiveElement.h">
       <Filter>Cinematics\CinematicsElement</Filter>
+	</ClInclude>
     <ClInclude Include="Materials\Material.h">
       <Filter>Materials</Filter>
     </ClInclude>

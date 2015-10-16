@@ -16,12 +16,5 @@ class CScatteredLightSceneRendererCommand : public CStagedTexturedRendererComman
         ~ CScatteredLightSceneRendererCommand();
 
         void Execute( CGraphicsManager& GM );
-
-    private:
-       float m_Decay;
-       float m_Exposure;
-       float m_Density;
-       float m_Weight;
-       int   m_Samples;
 };
 #endif
