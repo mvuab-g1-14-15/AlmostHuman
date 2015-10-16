@@ -19,7 +19,7 @@ function CPlayer:__init()
 	self.InsideBarrel = false
 	self.BarrelName = ""
 	
-	self.MeshOffset = Vect3f(1.0, 0.0, 0.0)
+	self.MeshOffset = Vect3f(0.5, 0.0, 0.0)
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
