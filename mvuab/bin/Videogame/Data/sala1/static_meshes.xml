@@ -14,8 +14,6 @@
   <static_mesh name="Cylinder054_sala1" filename="meshes\Cylinder054.mesh" />
   <static_mesh name="Cylinder055_sala1" filename="meshes\Cylinder055.mesh" />
   <static_mesh name="Cylinder056_sala1" filename="meshes\Cylinder056.mesh" />
-  <static_mesh name="Lamp_sala1" filename="meshes\Lamp.mesh" />
-  <static_mesh name="Lamp001_sala1" filename="meshes\Lamp001.mesh" />
   <static_mesh name="Figure_005_sala1" filename="meshes\Figure_005.mesh" />
   <static_mesh name="tuberia001_sala1" filename="meshes\tuberia001.mesh" />
   <static_mesh name="Floor_sala1" filename="meshes\Floor.mesh" />
@@ -26,16 +24,22 @@
   <static_mesh name="wall_4_sala1" filename="meshes\wall_4.mesh" />
   <static_mesh name="Wall_2_sala1" filename="meshes\Wall_2.mesh" />
   <static_mesh name="Med_Bay_ centre_sala1" filename="meshes\Med_Bay_ centre.mesh" />
-  <static_mesh name="Med_bay_camilla_sala1" filename="meshes\Med_bay_camilla.mesh" />
-  <static_mesh name="MB_Slab_Arm001_sala1" filename="meshes\MB_Slab_Arm001.mesh" />
-  <static_mesh name="MB_Slab_Drum001_sala1" filename="meshes\MB_Slab_Drum001.mesh" />
+  <static_mesh name="Med_bay_camilla_up_sala1" filename="meshes\Med_bay_camilla_up.mesh" />
   <static_mesh name="Med_bay_consola_sala1" filename="meshes\Med_bay_consola.mesh" />
   <static_mesh name="Bombona_sala1" filename="meshes\Bombona.mesh" />
-  <static_mesh name="Lights_sala1" filename="meshes\Lights.mesh" />
   <static_mesh name="ventilador_aspas_sala1" filename="meshes\ventilador_aspas.mesh" />
   <static_mesh name="ventilador_aspas001_sala1" filename="meshes\ventilador_aspas001.mesh" />
   <static_mesh name="Tunnel_greebles_sala1" filename="meshes\Tunnel_greebles.mesh" />
-  <static_mesh name="Taula003_sala1" filename="meshes\Taula003.mesh" />
+  <static_mesh name="Taula_llums_sala1" filename="meshes\Taula_llums.mesh" />
   <static_mesh name="Box005_sala1" filename="meshes\Box005.mesh" />
   <static_mesh name="Tunnel_2_sala1" filename="meshes\Tunnel_2.mesh" />
+  <static_mesh name="Med_bay_camilla_down_sala1" filename="meshes\Med_bay_camilla_down.mesh" />
+  <static_mesh name="Med_bay_support_sala1" filename="meshes\Med_bay_support.mesh" />
+  <static_mesh name="screen_01_sala1" filename="meshes\screen_01.mesh" />
+  <static_mesh name="Screen_02_sala1" filename="meshes\Screen_02.mesh" />
+  <static_mesh name="Screen_003_sala1" filename="meshes\Screen_003.mesh" />
+  <static_mesh name="Screens_med_bay_sala1" filename="meshes\Screens_med_bay.mesh" />
+  <static_mesh name="Lights_Roof_Glow_sala1" filename="meshes\Lights_Roof_Glow.mesh" />
+  <static_mesh name="Lights_wall_glow_sala1" filename="meshes\Lights_wall_glow.mesh" />
+  <static_mesh name="Lights_tunnel_glow_sala1" filename="meshes\Lights_tunnel_glow.mesh" />
 </static_meshes>

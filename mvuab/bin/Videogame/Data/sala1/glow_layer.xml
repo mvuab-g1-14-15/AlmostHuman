@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <MeshInstance name="Lights_Roof_Glow_sala1" core="Lights_Roof_Glow_sala1" pos="115.732 5.13867 -60.5456" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Lights_wall_glow_sala1" core="Lights_wall_glow_sala1" pos="122.926 -9.81903 -53.1179" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Lights_tunnel_glow_sala1" core="Lights_tunnel_glow_sala1" pos="109.842 -9.74718 -44.9369" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>
