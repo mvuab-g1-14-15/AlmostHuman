@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="Rejilla_frag_001_sala1" filename="meshes\Rejilla_frag_001.mesh" />
+  <static_mesh name="Rejilla_frag_002_sala1" filename="meshes\Rejilla_frag_002.mesh" />
+  <static_mesh name="Rejilla_frag_003_sala1" filename="meshes\Rejilla_frag_003.mesh" />
+  <static_mesh name="Rejilla_frag_004_sala1" filename="meshes\Rejilla_frag_004.mesh" />
+  <static_mesh name="Rejilla_frag_005_sala1" filename="meshes\Rejilla_frag_005.mesh" />
+  <static_mesh name="Rejilla_frag_006_sala1" filename="meshes\Rejilla_frag_006.mesh" />
+  <static_mesh name="Rejilla_frag_007_sala1" filename="meshes\Rejilla_frag_007.mesh" />
+  <static_mesh name="Rejilla_frag_008_sala1" filename="meshes\Rejilla_frag_008.mesh" />
+  <static_mesh name="Rejilla_frag_009_sala1" filename="meshes\Rejilla_frag_009.mesh" />
+  <static_mesh name="Rejilla_frag_010_sala1" filename="meshes\Rejilla_frag_010.mesh" />
+  <static_mesh name="Rejilla_frag_011_sala1" filename="meshes\Rejilla_frag_011.mesh" />
+  <static_mesh name="Rejilla_frag_012_sala1" filename="meshes\Rejilla_frag_012.mesh" />
+  <static_mesh name="Rejilla_frag_013_sala1" filename="meshes\Rejilla_frag_013.mesh" />
+  <static_mesh name="Rejilla_frag_014_sala1" filename="meshes\Rejilla_frag_014.mesh" />
+  <static_mesh name="Rejilla_frag_015_sala1" filename="meshes\Rejilla_frag_015.mesh" />
+  <static_mesh name="Rejilla_frag_016_sala1" filename="meshes\Rejilla_frag_016.mesh" />
+  <static_mesh name="Rejilla_frag_017_sala1" filename="meshes\Rejilla_frag_017.mesh" />
+  <static_mesh name="Rejilla_frag_018_sala1" filename="meshes\Rejilla_frag_018.mesh" />
+  <static_mesh name="Rejilla_frag_019_sala1" filename="meshes\Rejilla_frag_019.mesh" />
+  <static_mesh name="Rejilla_frag_020_sala1" filename="meshes\Rejilla_frag_020.mesh" />
+  <static_mesh name="Rejilla_frag_021_sala1" filename="meshes\Rejilla_frag_021.mesh" />
+  <static_mesh name="Rejilla_frag_022_sala1" filename="meshes\Rejilla_frag_022.mesh" />
+  <static_mesh name="Rejilla_frag_023_sala1" filename="meshes\Rejilla_frag_023.mesh" />
+  <static_mesh name="Rejilla_frag_024_sala1" filename="meshes\Rejilla_frag_024.mesh" />
+  <static_mesh name="Rejilla_frag_025_sala1" filename="meshes\Rejilla_frag_025.mesh" />
+  <static_mesh name="Rejilla_frag_026_sala1" filename="meshes\Rejilla_frag_026.mesh" />
+  <static_mesh name="Rejilla_frag_027_sala1" filename="meshes\Rejilla_frag_027.mesh" />
+  <static_mesh name="Rejilla_frag_028_sala1" filename="meshes\Rejilla_frag_028.mesh" />
+  <static_mesh name="Rejilla_frag_029_sala1" filename="meshes\Rejilla_frag_029.mesh" />
+  <static_mesh name="Rejilla_frag_030_sala1" filename="meshes\Rejilla_frag_030.mesh" />
+  <static_mesh name="Rejilla_frag_031_sala1" filename="meshes\Rejilla_frag_031.mesh" />
+  <static_mesh name="Rejilla_frag_032_sala1" filename="meshes\Rejilla_frag_032.mesh" />
+  <static_mesh name="Rejilla_frag_033_sala1" filename="meshes\Rejilla_frag_033.mesh" />
+  <static_mesh name="Rejilla_frag_034_sala1" filename="meshes\Rejilla_frag_034.mesh" />
+  <static_mesh name="Rejilla_frag_035_sala1" filename="meshes\Rejilla_frag_035.mesh" />
+  <static_mesh name="Rejilla_frag_036_sala1" filename="meshes\Rejilla_frag_036.mesh" />
+  <static_mesh name="Rejilla_frag_037_sala1" filename="meshes\Rejilla_frag_037.mesh" />
+  <static_mesh name="Rejilla_frag_038_sala1" filename="meshes\Rejilla_frag_038.mesh" />
+  <static_mesh name="Rejilla_frag_039_sala1" filename="meshes\Rejilla_frag_039.mesh" />
+  <static_mesh name="Rejilla_frag_040_sala1" filename="meshes\Rejilla_frag_040.mesh" />
+  <static_mesh name="Rejilla_frag_041_sala1" filename="meshes\Rejilla_frag_041.mesh" />
+</static_meshes>

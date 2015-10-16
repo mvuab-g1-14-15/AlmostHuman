@@ -38,45 +38,5 @@
   <MeshInstance name="Taula003_sala1" core="Taula003_sala1" pos="112.818 -8.59541 -42.4039" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box005_sala1" core="Box005_sala1" pos="113.61 -8.25985 -43.6678" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Tunnel_2_sala1" core="Tunnel_2_sala1" pos="109.842 -9.74718 -44.9369" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_001_sala1" core="Rejilla_frag_001_sala1" active="false" pos="113.118 -9.17377 -44.4424" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_002_sala1" core="Rejilla_frag_002_sala1" active="false" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_003_sala1" core="Rejilla_frag_003_sala1" active="false" pos="113.124 -8.92063 -44.5965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_004_sala1" core="Rejilla_frag_004_sala1" active="false" pos="113.124 -9.10801 -44.5962" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_005_sala1" core="Rejilla_frag_005_sala1" active="false" pos="113.124 -9.29541 -43.9816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_006_sala1" core="Rejilla_frag_006_sala1" active="false" pos="113.124 -9.3891 -44.6086" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_007_sala1" core="Rejilla_frag_007_sala1" active="false" pos="113.124 -9.48279 -43.9942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_008_sala1" core="Rejilla_frag_008_sala1" active="false" pos="113.118 -8.6349 -44.2926" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_009_sala1" core="Rejilla_frag_009_sala1" active="false" pos="113.118 -8.65585 -43.9253" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_010_sala1" core="Rejilla_frag_010_sala1" active="false" pos="113.118 -8.83568 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_011_sala1" core="Rejilla_frag_011_sala1" active="false" pos="113.118 -9.17193 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_012_sala1" core="Rejilla_frag_012_sala1" active="false" pos="113.118 -9.34943 -43.6686" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_013_sala1" core="Rejilla_frag_013_sala1" active="false" pos="113.118 -9.57621 -43.8628" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_014_sala1" core="Rejilla_frag_014_sala1" active="false" pos="113.124 -9.57649 -44.7116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_015_sala1" core="Rejilla_frag_015_sala1" active="false" pos="113.124 -9.57649 -44.4076" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_016_sala1" core="Rejilla_frag_016_sala1" active="false" pos="113.124 -9.29541 -44.7159" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_017_sala1" core="Rejilla_frag_017_sala1" active="false" pos="113.124 -9.29541 -44.3985" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_018_sala1" core="Rejilla_frag_018_sala1" active="false" pos="113.124 -9.57649 -43.8769" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_019_sala1" core="Rejilla_frag_019_sala1" active="false" pos="113.124 -9.57649 -44.1909" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_020_sala1" core="Rejilla_frag_020_sala1" active="false" pos="113.124 -8.82694 -43.8768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_021_sala1" core="Rejilla_frag_021_sala1" active="false" pos="113.124 -8.82694 -44.1547" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_022_sala1" core="Rejilla_frag_022_sala1" active="false" pos="113.124 -9.20171 -43.8762" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_023_sala1" core="Rejilla_frag_023_sala1" active="false" pos="113.124 -9.20171 -44.1428" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_024_sala1" core="Rejilla_frag_024_sala1" active="false" pos="113.124 -9.3891 -43.8771" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_025_sala1" core="Rejilla_frag_025_sala1" active="false" pos="113.125 -9.3891 -44.1365" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_026_sala1" core="Rejilla_frag_026_sala1" active="false" pos="113.124 -9.01432 -43.8525" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_027_sala1" core="Rejilla_frag_027_sala1" active="false" pos="113.124 -9.01432 -44.1482" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_028_sala1" core="Rejilla_frag_028_sala1" active="false" pos="113.124 -8.73324 -43.8694" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_029_sala1" core="Rejilla_frag_029_sala1" active="false" pos="113.124 -8.7336 -44.1494" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_030_sala1" core="Rejilla_frag_030_sala1" active="false" pos="113.124 -9.10801 -43.8656" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_031_sala1" core="Rejilla_frag_031_sala1" active="false" pos="113.124 -9.10801 -44.1483" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_032_sala1" core="Rejilla_frag_032_sala1" active="false" pos="113.124 -9.48279 -44.7332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_033_sala1" core="Rejilla_frag_033_sala1" active="false" pos="113.125 -9.48279 -44.4554" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_034_sala1" core="Rejilla_frag_034_sala1" active="false" pos="113.124 -9.20171 -44.7474" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_035_sala1" core="Rejilla_frag_035_sala1" active="false" pos="113.124 -9.20171 -44.4417" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_036_sala1" core="Rejilla_frag_036_sala1" active="false" pos="113.124 -8.73324 -44.727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_037_sala1" core="Rejilla_frag_037_sala1" active="false" pos="113.124 -8.73348 -44.4489" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_038_sala1" core="Rejilla_frag_038_sala1" active="false" pos="113.124 -8.92063 -43.855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_039_sala1" core="Rejilla_frag_039_sala1" active="false" pos="113.124 -8.92063 -44.1531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_040_sala1" core="Rejilla_frag_040_sala1" active="false" pos="113.124 -9.01432 -44.7292" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Rejilla_frag_041_sala1" core="Rejilla_frag_041_sala1" active="false" pos="113.124 -9.01432 -44.4524" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+ 
 </RenderableObjects>

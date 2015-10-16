@@ -1,4 +1,5 @@
 <cinematic>
+	<add_renderable path="Data\sala1\cinematics/" room="sala1" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.1"/>
 	<set_active name="rejilla_fragment" resource_id_file="Data/sala1/cinematics/elementos_rejilla.xml" active="true" time="0.1"/>
 	<play_animation name="Rejilla" room="sala1" resource_id_file="Data/sala1/cinematics/cinematica_rompe_rejilla.xml" time="5.0"/>
 </cinematic>
