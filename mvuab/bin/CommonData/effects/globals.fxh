@@ -105,15 +105,6 @@ float       g_Offset[5]                                             : Offset;
 int         g_WindowWidth                                           : WindowWidth;
 int         g_WindowHeight                                          : WindowHeight;
 
-
-//
-// ZBlur data
-//
-float      g_ZBlurFocalStart                                        : ZBlurFocalStart = 2;
-float      g_ZBlurFocalEnd                                          : ZBlurFocalEnd = 5;
-float      g_ConstantBlur                                           : ConstantBlur = 0.1;
-float      g_ZBlurEnd                                               : ZBlurEnd = 50;
-
 //
 // Timers
 //

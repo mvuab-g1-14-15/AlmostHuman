@@ -66,21 +66,18 @@
 	
 	<disable_z_test/>
     
-    <!--
-    <set_pool_renderable_objects_technique pool="ZBlur_pool_renderable_object_technique"/>
-    <zblur FocalStart="2" FocalEnd="5" Constant="0.1" BlurEnd="50">
-		<texture stage_id="0" name="FB1"/>
+    ZBLUT_START
+    <capture_frame_buffer name="Z_NO_BLUR">
+		<dynamic_texture stage_id="0" name="Z_NO_BLUR" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+
+    <zblur>
+		<texture stage_id="0" name="Z_NO_BLUR"/>
         <texture stage_id="1" name="DepthMapTexture"/>
     </zblur>
-	-->
-    
-    
-    <!--render_draw_quad active="true" name="Scattered_Light">
- 		<texture stage_id="0" name="FB1"/>
-        <texture stage_id="1" name="DepthMapTexture"/>
- 	</render_draw_quad-->
-    
+    ZBLUR_END
  
+    <!--
     SCATTERED_LIGHT_START
     <capture_frame_buffer name="FB1">
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
@@ -109,6 +106,7 @@
         <texture stage_id="1" name="FB3"/>
  	</render_draw_quad>
     SCATTERED_LIGHT_END
+    --> 
     
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

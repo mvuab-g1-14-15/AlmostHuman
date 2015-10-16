@@ -83,11 +83,4 @@ const char UseShadowDynamicStr[]        = "UseDynamicShadowMap";
 const char ShadowMapTextureSizeStr[]    = "ShadowMapTextureSize";
 //-----------------------------------------------------------------------
 
-// ZBlur data -----------------------------------------------------------
-const char ZBlurFocalStart[] = "ZBlurFocalStart";
-const char ZBlurFocalEnd[] = "ZBlurFocalEnd";
-const char ZBlurConstant[] = "ConstantBlur";
-const char ZBlurEnd[] = "ZBlurEnd";
-//-----------------------------------------------------------------------
-
 #endif //EFFECTS_DEFINES_H

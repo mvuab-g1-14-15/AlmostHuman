@@ -16,12 +16,5 @@ class CZBlurSceneRendererCommand : public CStagedTexturedRendererCommand
 
         void Execute( CGraphicsManager& GM );
 
-    private:
-        float m_FocalStart;
-        float m_FocalEnd;
-
-        float m_BlurConstant;
-        float m_BlurEnd;
-
 };
 #endif

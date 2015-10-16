@@ -105,7 +105,6 @@ public:
   void SetSize( float aSize );
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
-  void SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd);
   void SetDirection( const Math::Vect3f& aDirection );
 
 protected:
@@ -170,14 +169,6 @@ private: // Members
 
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
-
-  //
-  // ZBlur
-  //
-  D3DXHANDLE m_ZBlurFocalStart;
-  D3DXHANDLE m_ZBlurFocalEnd;
-  D3DXHANDLE m_ZBlurConstant;
-  D3DXHANDLE m_ZBlurEnd;
 
   //
   // Shadow map handles

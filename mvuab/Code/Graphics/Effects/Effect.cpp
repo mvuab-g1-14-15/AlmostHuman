@@ -52,11 +52,6 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( DeltaTime )
   , CTOR_EFFECT_PARAMETER( FlipUVVertical   )
   , CTOR_EFFECT_PARAMETER( FlipUVHorizontal )
-  // ZBLUR
-  , CTOR_EFFECT_PARAMETER( ZBlurFocalStart )
-  , CTOR_EFFECT_PARAMETER( ZBlurFocalEnd )
-  , CTOR_EFFECT_PARAMETER( ZBlurConstant )
-  , CTOR_EFFECT_PARAMETER( ZBlurEnd )
   // Percentages of lights
   , CTOR_EFFECT_PARAMETER( PercentageTexture1 )
   , CTOR_EFFECT_PARAMETER( PercentageTexture2 )
@@ -108,11 +103,6 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
   RESET_EFFECT_PARAMETER( BonesParameter )
   RESET_EFFECT_PARAMETER( LightProbesParameter )
-  // ZBlur
-  RESET_EFFECT_PARAMETER( ZBlurFocalStart )
-  RESET_EFFECT_PARAMETER( ZBlurFocalEnd )
-  RESET_EFFECT_PARAMETER( ZBlurConstant )
-  RESET_EFFECT_PARAMETER( ZBlurEnd )
 
   RESET_EFFECT_PARAMETER( PercentageTexture1 );
   RESET_EFFECT_PARAMETER( PercentageTexture2 );
@@ -166,11 +156,6 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
-  //ZBlur
-  GetParameterBySemantic( ZBlurFocalStart, m_ZBlurFocalStart );
-  GetParameterBySemantic( ZBlurFocalEnd, m_ZBlurFocalEnd );
-  GetParameterBySemantic( ZBlurConstant, m_ZBlurConstant );
-  GetParameterBySemantic( ZBlurEnd, m_ZBlurEnd );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -337,15 +322,6 @@ void CEffect::SetShadowMapParameters ( bool UseShadowMaskTexture, bool UseStatic
   SET_BOOL_PARAMETER( UseShadowMaskTextureParameter, UseShadowMaskTexture );
   SET_BOOL_PARAMETER( UseStaticShadowmapParameter  , UseStaticShadowmap   );
   SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
-}
-
-void CEffect::SetZBlur(float FocalStart, float FocalEnd, float Constant, float BlurEnd)
-{
-    m_Effect->SetFloat(m_ZBlurFocalStart, FocalStart);
-    m_Effect->SetFloat(m_ZBlurFocalEnd, FocalEnd);
-
-    m_Effect->SetFloat(m_ZBlurConstant, Constant);
-    m_Effect->SetFloat(ZBlurEnd, BlurEnd);
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
