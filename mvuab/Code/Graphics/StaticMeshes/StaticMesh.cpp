@@ -20,6 +20,7 @@
 #include "Materials/Material.h"
 
 #include <cstdio>
+#include "Utils/BaseUtils.h"
 
 namespace
 {
@@ -84,6 +85,7 @@ bool CStaticMesh::Load( const std::string& FileName )
     fopen_s(&l_pFile, FileName.c_str(), "rb");
 
     ASSERT(l_pFile, "Null file %s", FileName.c_str() );
+    ASSERT( baseUtils::GetFileSize( FileName ) != 0 , "File %s is empty", FileName.c_str() );
 
     if (l_pFile)
     {
@@ -236,10 +238,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         std::fclose( l_pFile );
     }
 
-    lOk = lOk && GetRenderableObjectTechnique();
-    lOk = lOk && m_RVs.size() == m_RenderableObjectTechniques.size();
-    ASSERT( lOk, "Null EffectTechnique for the static mesh %s", m_FileName.c_str() );
-    return lOk;
+    return lOk && GetRenderableObjectTechnique() && m_RVs.size() == mMaterials.size();
 }
 
 bool CStaticMesh::ReLoad()

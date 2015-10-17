@@ -16,6 +16,7 @@
 #include <sstream>
 #include <string>
 #include "Defines.h"
+#include <sys\stat.h>
 
 #ifdef _DEBUG
     #define TIMER_START() \
@@ -37,6 +38,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace baseUtils
 {
+  inline long GetFileSize(std::string filename)
+  {
+    struct stat stat_buf;
+    int rc = stat(filename.c_str(), &stat_buf);
+    return rc == 0 ? stat_buf.st_size : -1;
+  }
 
     inline void  Trace( const char* format, ... )
     {

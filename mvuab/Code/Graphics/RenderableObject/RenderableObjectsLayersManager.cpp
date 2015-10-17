@@ -138,52 +138,50 @@ CRenderableObjectsManager* CRenderableObjectsLayersManager::GetRenderableObjectM
 
 CInstanceMesh* CRenderableObjectsLayersManager::AddDynamic( const CXMLTreeNode& atts )
 {
-	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
-	
-	l_InstanceMesh->SetType("dynamic");
-
-	// User data
-	CPhysicUserData * lData = new CPhysicUserData( l_InstanceMesh->GetName() );
-	lData->SetGroup( ECG_DYNAMIC_OBJECTS );
-	
-	// Phyx actor
-	CPhysicActor* l_MeshActor = new CPhysicActor(lData);
-	l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
-
-	// Obtain a box from the static mesh aabb
-	CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
-
+  CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+  if( !l_InstanceMesh->IsOk() )
+  {
+    LOG_WARNING_APPLICATION("The instance mesh %s, is not correct, it would not be rendererd", l_InstanceMesh->GetName().c_str());
+    CHECKED_DELETE(l_InstanceMesh);
+  }
+  else
+  {
+    l_InstanceMesh->SetType("dynamic");
+    // User data
+    CPhysicUserData * lData = new CPhysicUserData( l_InstanceMesh->GetName() );
+    lData->SetGroup( ECG_DYNAMIC_OBJECTS );
+    // Phyx actor
+    CPhysicActor* l_MeshActor = new CPhysicActor(lData);
+    l_MeshActor->SetCollisionGroup( ECG_DYNAMIC_OBJECTS );
+    // Obtain a box from the static mesh aabb
+    CStaticMesh* l_StaticMesh = l_InstanceMesh->GetStaticMesh();
     Math::AABB3f l_AABB = l_StaticMesh->GetAABB();
     Math::Vect3f l_Pos = l_InstanceMesh->GetTransform() * l_AABB.GetCenter();
-
     l_MeshActor->AddBoxShape( Vect3f( l_AABB.GetWidth() * 0.5f, l_AABB.GetHeight() * 0.5f, l_AABB.GetDepth() * 0.5f ), l_Pos );
     l_MeshActor->CreateBody( 1.0f );
-#ifdef _USING_MESH_FOR_PHYSX
-#endif
-
-	l_InstanceMesh->SetActor( l_MeshActor );
-	PhysXMInstance->AddPhysicActor( l_MeshActor, false );
-
-	return l_InstanceMesh;
+    l_InstanceMesh->SetActor( l_MeshActor );
+    PhysXMInstance->AddPhysicActor( l_MeshActor, false );
+  }
+  return l_InstanceMesh;
 }
 
 CInstanceMesh* CRenderableObjectsLayersManager::AddStatic( const CXMLTreeNode& atts )
 {
-	CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+  CInstanceMesh* l_InstanceMesh = new CInstanceMesh( atts );
+  
+  if( !l_InstanceMesh->IsOk() )
+  {
+    LOG_WARNING_APPLICATION("The instance mesh %s, is not correct, it would not be rendererd", l_InstanceMesh->GetName().c_str());
+    CHECKED_DELETE(l_InstanceMesh);
+  }
+  else if(!PhysXMInstance->GetLoadASE())
+  {
+    CPhysicActor* l_MeshActor = new CPhysicActor( new CPhysicUserData( l_InstanceMesh->GetName() ) );
+    NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
+    l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
+    l_InstanceMesh->SetActor( l_MeshActor );
+    PhysXMInstance->AddPhysicActor( l_MeshActor, false );
+  }
 
-    ASSERT(l_InstanceMesh->GetStaticMesh(), "Null static mesh for instance mesh %s", l_InstanceMesh->GetName().c_str() );
-
-	// If there is no ase loaded and we want phyx
-	if (!PhysXMInstance->GetLoadASE())
-    {
-		CPhysicActor* l_MeshActor = new CPhysicActor( new CPhysicUserData( l_InstanceMesh->GetName() ) );
-		NxTriangleMesh* l_TriangleMesh = PhysXMInstance->GetCookingMesh()->CreatePhysicMesh( l_InstanceMesh->GetVertexBuffer(), l_InstanceMesh->GetIndexBuffer() );
-		l_MeshActor->AddMeshShape( l_TriangleMesh, l_InstanceMesh->GetTransform() );
-		l_InstanceMesh->SetActor( l_MeshActor );
-		PhysXMInstance->AddPhysicActor( l_MeshActor, false );
-	}
-#ifdef _USING_MESH_FOR_PHYSX
-#endif
-
-	return l_InstanceMesh;
+  return l_InstanceMesh;
 }

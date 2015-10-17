@@ -17,17 +17,13 @@ class CInstanceMesh : public CRenderableObject
         std::string   mType;
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
-
-        std::vector<Math::Vect3f> Dummy01;
-        std::vector<uint32> Dummy02;
-
+        bool          mIsOk;
     public:
         CInstanceMesh( const std::string& aName, const std::string& CoreName );
-        CInstanceMesh( const std::string& aName );
-
         CInstanceMesh( const CXMLTreeNode& atts );
         ~CInstanceMesh();
 
+        bool IsOk() const { return mIsOk; }
         void Render();
         void SetActor( CPhysicActor* lPhysicActor );
         CPhysicActor* GetActor();

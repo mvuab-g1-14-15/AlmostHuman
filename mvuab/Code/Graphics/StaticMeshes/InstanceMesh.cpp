@@ -13,16 +13,6 @@
 #include "Cameras/Frustum.h"
 #include "Cameras/CameraManager.h"
 
-CInstanceMesh::CInstanceMesh( const std::string& aName )
-	: CRenderableObject()
-	, mStaticMesh( 0 )
-	, mType( "static" )
-	, mPhysicActor( 0 )
-{
-  SetName( aName );
-}
-
-
 CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreName )
 	: CRenderableObject()
     , mType( "static" )
@@ -30,14 +20,17 @@ CInstanceMesh::CInstanceMesh( const std::string& aName, const std::string& CoreN
     , mStaticMesh( SMeshMInstance->GetResource( CoreName ) )
 {
   SetName( aName );
+  mIsOk = mStaticMesh != NULL;
 }
 
 
-CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts ) : CRenderableObject( atts ),
-  mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
+CInstanceMesh::CInstanceMesh( const CXMLTreeNode& atts )
+  : CRenderableObject( atts )
+  , mStaticMesh( SMeshMInstance->GetResource( atts.GetAttribute<std::string>( "core", "no_staticMesh" ) ) )
   , mType( "static" )
   , mPhysicActor( 0 )
 {
+  mIsOk = mStaticMesh != NULL;
 }
 
 CInstanceMesh::~CInstanceMesh()
@@ -50,12 +43,12 @@ CInstanceMesh::~CInstanceMesh()
 
 const std::vector<Math::Vect3f>& CInstanceMesh::GetVertexBuffer()
 {
-  return mStaticMesh == 0 ? Dummy01 : mStaticMesh->GetVertexBuffer();
+  return  mStaticMesh->GetVertexBuffer();
 }
 
 const std::vector<uint32>& CInstanceMesh::GetIndexBuffer()
 {
-  return  mStaticMesh == 0 ? Dummy02 :  mStaticMesh->GetIndexBuffer();
+  return mStaticMesh->GetIndexBuffer();
 }
 
 void CInstanceMesh::Render()
@@ -106,7 +99,7 @@ void CInstanceMesh::Render()
 void CInstanceMesh::SetActor( CPhysicActor* lPhysicActor )
 {
   mPhysicActor = lPhysicActor;
-}
+} 
 
 CPhysicActor* CInstanceMesh::GetActor()
 {
