@@ -45,7 +45,12 @@ function CPlayer:Update()
 	
 	local l_MeshOffset = self:GetMeshOffset()
 	local l_MeshPosition = self.PlayerController:GetPosition()
-	l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
+	if self.PlayerController:GetIsCrouch() then
+		l_MeshPosition.y = l_MeshPosition.y - 1.6 - self.PlayerController:GetHeight() * 2.0
+	else
+		l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
+	end
+	
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)

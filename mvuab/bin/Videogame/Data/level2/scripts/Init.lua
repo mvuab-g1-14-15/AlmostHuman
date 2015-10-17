@@ -23,10 +23,8 @@ function load_basics()
 	-- basic loads
 	scene:ActivateRoom("sala1")
 	scene:ActivateRoom("pasillo")
-	scene:ActivateRoom("sala4")
 	scene:ActivateRoom("sala2")
-	scene:ActivateRoom("sala3")
-	engine:Trace("Finish the load_basics()")
+	--scene:ActivateRoom("sala3")	engine:Trace("Finish the load_basics()")
 end
 
 function load_gameplay()
