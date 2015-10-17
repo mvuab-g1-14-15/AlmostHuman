@@ -113,17 +113,25 @@ utility UABUtility "UAB Utility" width:170 height:761
 	on CinematicsButton pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
+		IsEmptyLevelList LevelList.selected
 		
-		CinematicsDir = PathLabel.text + "\\cinematics.xml"
+		local rootDir = PathLabel.text
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		
+		CinematicsDir = l_DirToXML + "\\cinematics.xml"
 		nFrames = 1
 		
-		ExportCinematicObjects nFrames CinematicsDir
+		ExportCinematicObjects nFrames CinematicsDir LevelList.selected
 	)
 	on CameraButon pressed do
 	(		
 		IsEmptyDestPath PathLabel.text
+		IsEmptyLevelList LevelList.selected
 		
-		cameraDir = PathLabel.text + "\\camera.xml"
+		local rootDir = PathLabel.text
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		
+		cameraDir = l_DirToXML + "\\camera.xml"
 		nFrames = 1
 		isCycle = 1
 		isReverse = 0

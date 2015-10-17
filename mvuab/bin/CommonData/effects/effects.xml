@@ -22,6 +22,11 @@
 		<define name="ALIGNED_TO_UP_AXIS" description=""/>
 	</technique>
 	
+	<technique name="BillboardAlignedToCameraTechniqueONEONEADD" file="../CommonData/effects/BillboardEffect.fx">
+		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
+		<define name="ONEONEADD" description=""/>
+	</technique>
+	
 	<technique name="BillboardAlignedToCameraTechnique" file="../CommonData/effects/BillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 	</technique>

@@ -10,9 +10,12 @@
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha01.dds" stage_id="2"/>
 	</billboard>
-	<billboard name="blaster" technique="BlasterTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true">
+	<billboard name="blaster" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true">
 		<texture filename="../CommonData/textures/Billboards/blue_fire.jpg" stage_id="0"/>
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha02.png" stage_id="2"/>
+	</billboard>
+	<billboard name="blash" technique="BillboardAlignedToCameraTechnique" alpha="0.2" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true">
+		<texture filename="../CommonData/textures/PS/blash02.png" stage_id="0"/>
 	</billboard>
 </billboards>

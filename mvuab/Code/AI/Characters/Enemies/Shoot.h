@@ -6,6 +6,7 @@
 
 class CLight;
 class CInstanceMesh;
+class CBillboardInstance;
 
 class CShoot : public CObject3D, public CName
 {
@@ -22,6 +23,7 @@ public:
 
 private:
     float mSpeed;
+    CBillboardInstance* mInstance;
     float mDamage;
     bool mImpacted;
     Math::Vect3f mDirection;
