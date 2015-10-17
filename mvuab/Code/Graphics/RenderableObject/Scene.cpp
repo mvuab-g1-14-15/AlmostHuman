@@ -55,7 +55,7 @@ void CScene::Destroy()
 void CScene::Init()
 {
     Load( mConfigPath );
-	//LoadAllRoom();
+	LoadAllRoom();
 }
 
 bool CScene::Load( const std::string& l_FilePath )
