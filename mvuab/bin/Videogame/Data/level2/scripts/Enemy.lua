@@ -88,6 +88,8 @@ function CEnemy:__init( aInfo )
 	self.DontMove = false
 	
 	self.ChaseDistance = aInfo.chase_distance
+	
+	self.CanSee = aInfo.can_see
 end
 
 function CEnemy:Destroy()
@@ -107,7 +109,10 @@ function CEnemy:Update()
 	
 	self:UpdateCamera()
 	
-	local IsPlayerInSight = self:PlayerInSight()
+	local IsPlayerInSight = false
+	if self.CanSee then
+		local IsPlayerInSight = self:PlayerInSight()
+	end
 	
 	if IsPlayerInSight then
 		local lDist = PlayerDistance(self)
@@ -155,6 +160,9 @@ function CEnemy:Update()
 			if self.Suspected then
 				self.Suspected = false
 				self.TargetPos = self.InitPosition
+				if self.IsPatrol then
+					self.ActualWaypoint = 1
+				end
 				if self.UseGraph then
 					self.PathCalculated = false
 				end

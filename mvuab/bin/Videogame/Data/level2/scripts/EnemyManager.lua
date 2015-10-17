@@ -30,6 +30,7 @@ function CEnemyManager:__init()
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
+	lInfo.can_see = true
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
@@ -50,6 +51,7 @@ function CEnemyManager:__init()
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
+	lInfo.can_see = false
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 end
 

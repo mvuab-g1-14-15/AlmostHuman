@@ -36,7 +36,7 @@ void CAStar::SetRender()
     CGizmo* lGizmo = new CGizmo( mRoomName + "GraphGizmo", Math::Vect3f(0.0f), 0.0f, 0.0f);
 
     Math::Vect3f lCurrentPoint = m_Graph->GetNodeInfo( 0 );
-    lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 1.0f, lCurrentPoint, 0.0, 0.0, Math::colGREEN ) );
+    lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 0.5f, lCurrentPoint, 0.0, 0.0, Math::colGREEN ) );
 
     Math::Vect3f final_pos;
     Math::Vect3f lDir;
@@ -50,8 +50,8 @@ void CAStar::SetRender()
         Math::Vect3f pos( m_Graph->GetNodeInfo( i ) );
         lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 0.5f, pos, 0.0, 0.0, Math::colGREEN ) );
 
-        std::map<unsigned int, unsigned int> l_Arcs = m_Graph->GetArcs( i );
-        std::map<unsigned int, unsigned int>::iterator it = l_Arcs.begin(),
+        std::map<unsigned int, float> l_Arcs = m_Graph->GetArcs( i );
+        std::map<unsigned int, float>::iterator it = l_Arcs.begin(),
                                                        it_end = l_Arcs.end();
         for ( ; it != it_end; ++it )
         {
@@ -176,8 +176,8 @@ std::vector<Math::Vect3f>
 
         l_OpenSet.erase( std::remove( l_OpenSet.begin(), l_OpenSet.end(), l_ActualNode ), l_OpenSet.end() );
         l_ClosedSet.push_back( l_ActualNode );
-        std::map<unsigned int, unsigned int> l_Neighbours = m_Graph->GetArcs( l_ActualNode );
-        std::map<unsigned int, unsigned int>::iterator it = l_Neighbours.begin(),
+        std::map<unsigned int, float> l_Neighbours = m_Graph->GetArcs( l_ActualNode );
+        std::map<unsigned int, float>::iterator it = l_Neighbours.begin(),
             it_end = l_Neighbours.end();
 
         for ( ; it != it_end; ++it )
