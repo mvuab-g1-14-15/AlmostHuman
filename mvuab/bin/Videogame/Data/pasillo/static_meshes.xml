@@ -1,18 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="ceiling_pasillo" filename="meshes\ceiling.mesh" />
-  <static_mesh name="Figure_1_pasillo" filename="meshes\Figure_1.mesh" />
-  <static_mesh name="leftWall_pasillo" filename="meshes\leftWall.mesh" />
-  <static_mesh name="ceiling001_pasillo" filename="meshes\ceiling001.mesh" />
+  <static_mesh name="doorUpper002_pasillo" filename="meshes\doorUpper002.mesh" />
+  <static_mesh name="doorLower002_pasillo" filename="meshes\doorLower002.mesh" />
   <static_mesh name="leftwall2_pasillo" filename="meshes\leftwall2.mesh" />
-  <static_mesh name="doorUpper_pasillo" filename="meshes\doorUpper.mesh" />
-  <static_mesh name="doorLower_pasillo" filename="meshes\doorLower.mesh" />
-  <static_mesh name="rightWall_pasillo" filename="meshes\rightWall.mesh" />
-  <static_mesh name="arch_pasillo" filename="meshes\arch.mesh" />
-  <static_mesh name="floor_pasillo" filename="meshes\floor.mesh" />
-  <static_mesh name="floor001_pasillo" filename="meshes\floor001.mesh" />
-  <static_mesh name="Figure_002_pasillo" filename="meshes\Figure_002.mesh" />
+  <static_mesh name="arch_1_pasillo" filename="meshes\arch_1.mesh" />
+  <static_mesh name="Floor_pasillo" filename="meshes\Floor.mesh" />
   <static_mesh name="rightwall1_pasillo" filename="meshes\rightwall1.mesh" />
-  <static_mesh name="doorUpper001_pasillo" filename="meshes\doorUpper001.mesh" />
-  <static_mesh name="doorLower001_pasillo" filename="meshes\doorLower001.mesh" />
+  <static_mesh name="rightwall002_pasillo" filename="meshes\rightwall002.mesh" />
+  <static_mesh name="Roof_pasillo" filename="meshes\Roof.mesh" />
+  <static_mesh name="leftWall001_pasillo" filename="meshes\leftWall001.mesh" />
+  <static_mesh name="Floor_side_left_pasillo" filename="meshes\Floor_side_left.mesh" />
+  <static_mesh name="metal_barrel084_pasillo" filename="meshes\metal_barrel084.mesh" />
+  <static_mesh name="Ammo_box_pasillo" filename="meshes\Ammo_box.mesh" />
+  <static_mesh name="bomb_pasillo" filename="meshes\bomb.mesh" />
+  <static_mesh name="doorUpper003_pasillo" filename="meshes\doorUpper003.mesh" />
+  <static_mesh name="doorLower003_pasillo" filename="meshes\doorLower003.mesh" />
+  <static_mesh name="Tube001_pasillo" filename="meshes\Tube001.mesh" />
+  <static_mesh name="Tube002_pasillo" filename="meshes\Tube002.mesh" />
+  <static_mesh name="Tube003_pasillo" filename="meshes\Tube003.mesh" />
+  <static_mesh name="Tube004_pasillo" filename="meshes\Tube004.mesh" />
+  <static_mesh name="Tube005_pasillo" filename="meshes\Tube005.mesh" />
+  <static_mesh name="Tube006_pasillo" filename="meshes\Tube006.mesh" />
+  <static_mesh name="Lights_1_glow_pasillo" filename="meshes\Lights_1_glow.mesh" />
+  <static_mesh name="Lights_2_glow_pasillo" filename="meshes\Lights_2_glow.mesh" />
+  <static_mesh name="Lights_3_glow_pasillo" filename="meshes\Lights_3_glow.mesh" />
+  <static_mesh name="Lights_4_glow_pasillo" filename="meshes\Lights_4_glow.mesh" />
+  <static_mesh name="ventilador_aspas001_pasillo" filename="meshes\ventilador_aspas001.mesh" />
+  <static_mesh name="arch_2_pasillo" filename="meshes\arch_2.mesh" />
+  <static_mesh name="Lights_red_wall_001_pasillo" filename="meshes\Lights_red_wall_001.mesh" />
+  <static_mesh name="lights_red_wall02_pasillo" filename="meshes\lights_red_wall02.mesh" />
+  <static_mesh name="lights_white_door_pasillo" filename="meshes\lights_white_door.mesh" />
+  <static_mesh name="lights_roof_pasillo" filename="meshes\lights_roof.mesh" />
 </static_meshes>
