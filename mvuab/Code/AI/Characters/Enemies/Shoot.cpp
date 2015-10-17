@@ -159,8 +159,11 @@ void CShoot::Update()
 
           if ( lPUD->GetController() )
 		  {
-            ScriptMInstance->RunCode( "enemy_manager:AddDamage('" + lName + "')" );
-			ScriptMInstance->RunCode( "local enemy = enemy_manager:GetEnemy('" + lName + "');enemy.Suspected = true; enemy.SuspectedPosition = g_Player:GetPosition();enemy:SetIsHurting();" );
+              std::ostringstream ss;
+              ss << mDamage;
+              std::string s(ss.str());
+              ScriptMInstance->RunCode( "enemy_manager:AddDamage('" + lName + "', " + s +")" );
+              ScriptMInstance->RunCode( "local enemy = enemy_manager:GetEnemy('" + lName + "');enemy:SetSuspected(true); enemy:SetSuspectedPosition(g_Player:GetPosition());--enemy:SetIsHurting();" );
 		  }
 
           //lEnemy->AddDamage( mDamage );

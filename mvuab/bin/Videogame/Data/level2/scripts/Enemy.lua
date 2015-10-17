@@ -67,10 +67,18 @@ function CEnemy:__init( aInfo )
 	if self.OnDead then
 		self.OnDeadCode = aInfo.on_dead_code
 	end
+	
+	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
+	self.Camera = camera_manager:GetCamera(self.Name)
+	self.Camera:SetZFar(20.0)
+	if self.Type == "drone" then
+		self.Camera:SetFovInRadians(20.0)
+	end
+	self.PitchCameraMove = 0.0
+	self:UpdateCamera()
 end
 
 function CEnemy:Destroy()
-	engine:Trace( self.Name .." dead :)")
 	if self.OnDead then
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..
 							  "local selfName = '"..self:GetName().."';"..
@@ -85,6 +93,14 @@ end
 function CEnemy:Update()
 	local dt = timer:GetElapsedTime()
 	
+	self:UpdateCamera()
+	
+	local IsPlayerInSight = self:PlayerInSight()
+	
+	if IsPlayerInSight then
+		engine:Trace("Player in sight")
+	end
+	
 	if self.Suspected then
 		self.UseGraph = true
 		self.TargetPos = self.SuspectedPosition
@@ -92,12 +108,10 @@ function CEnemy:Update()
 		
 	if self:MoveToPos( self.TargetPos ) then
 		if self.Suspected then
-			engine:Trace("Arrive at suspected posiiton")
 			self.Suspected = false
 			self.TargetPos = self.InitPosition
 			if self.UseGraph then
 				self.PathCalculated = false
-				engine:TraceOnce("Must recalculate path")
 			end
 		else
 			if self.TargetPos == self.InitPosition then
@@ -117,6 +131,10 @@ function CEnemy:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
+end
+
+function CEnemy:PlayerInSight()
+	return PlayerInSight(self.Camera)
 end
 
 function CEnemy:GetName()
@@ -186,20 +204,14 @@ function CEnemy:MoveToPos( aPos )
 			if self.AStar == nil then
 				self.AStar = enemy_manager:GetAStar(self.Room)
 			end
-			engine:Trace("Recalculating the path")
 			self.Path = self.AStar:GetPath( self:GetPosition(), aPos )
 			self.PathCalculated = true
 			self.ActualPathPoint = 1
 		end
 		
 		local lRealTargetPos = self.Path:GetResource(self.ActualPathPoint)
-		--engine:TraceOnce("Next position in path: "..lRealTargetPos:ToString()..". Enemy position: "..self:GetPosition():ToString()..". Actual path point: "..self.ActualPathPoint)
-		debug_helper:Set(self.Name.."IsInPos", "false")
 		if not self:IsInPos( lRealTargetPos ) then
-			debug_helper:Set(self.Name.."IsInPos", "true")
-			debug_helper:Set(self.Name.."IsRotated", "false")
 			if self:RotateToPos( lRealTargetPos ) then
-				debug_helper:Set(self.Name.."IsRotated", "true")
 				local DirVector = self:GetDirVectorNormalized2D( lRealTargetPos )
 				self.CharacterController:Move(DirVector * self.Speed, dt)
 				self.Gizmo:SetPosition(lRealTargetPos)
@@ -242,12 +254,35 @@ function CEnemy:RotateToPos( aPos )
 	local DirVector = self:GetDirVectorNormalized2D( aPos )
 	
 	local ActualYaw = self.CharacterController:GetYaw()
+	local ActualYawPlus = ActualYaw + g_DoublePi
+	local ActualYawMinus = ActualYaw - g_DoublePi
 	local DirYaw = math.atan2( DirVector.z, DirVector.x )
 	local DiffYaw = math.abs(DirYaw - ActualYaw)
+	local DiffYawPlus = math.abs(DirYaw - ActualYawPlus) 
+	local DiffYawMinus = math.abs(DirYaw - ActualYawMinus)
+	
+	if DiffYawPlus < DiffYaw then
+		ActualYaw = ActualYawPlus
+		DiffYaw = DiffYawPlus
+		if DiffYawMinus < DiffYawPlus then
+			ActualYaw = ActualYawMinus
+			DiffYaw = DiffYawMinus
+		end
+		self.LerpInited = false
+	else
+		if DiffYawMinus < DiffYaw then
+			ActualYaw = ActualYawMinus
+			DiffYaw = DiffYawMinus
+			if DiffYawPlus < DiffYawMinus then
+				ActualYaw = ActualYawPlus
+				DiffYaw = DiffYawPlus
+			end
+			self.LerpInited = false
+		end
+	end
 	
 	if DiffYaw > self.DeltaRot then
 		if not self.LerpInited then
-			engine:TraceOnce("Actual yaw: "..ActualYaw..". Target yaw: "..DirYaw..". Diff yaw: "..DiffYaw)
 			self.Lerp:SetValues(ActualYaw, DirYaw, self.TimeToRot, 0)
 			self.LerpInited = true
 		end
@@ -258,7 +293,6 @@ function CEnemy:RotateToPos( aPos )
 		end
 		
 		local TickYaw = self.Lerp:Value(dt)
-		engine:TraceOnce("Tick yaw: "..TickYaw)
 		
 		self:SetYaw( TickYaw )
 		return false
@@ -299,6 +333,26 @@ end
 
 function CEnemy:AddDamage(amount)
 	self.Life = self.Life - amount
+end
+
+function CEnemy:GetYaw()
+	return self.CharacterController:GetYaw()
+end
+
+function CEnemy:GetPitch()
+	return self.CharacterController:GetPitch()
+end
+
+function CEnemy:UpdateCamera()
+	local lPosition = self:GetPosition()
+	lPosition.y = lPosition.y + self:GetHeight()
+	lPosition.x = lPosition.x + self:GetDirection().x
+	lPosition.z = lPosition.z + self:GetDirection().z
+	self.Camera:SetPosition(lPosition)
+	self.Camera:SetYaw( self:GetYaw() )
+	self.Camera:SetPitch( self:GetPitch() )
+	self.Camera:MakeTransform()
+	self.Camera:UpdateFrustum()
 end
 
 --class "CEnemyLUA"

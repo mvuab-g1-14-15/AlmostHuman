@@ -96,6 +96,20 @@ SCollisionInfo RaycastCollisionGroup( CPhysicsManager* PhysicManager, Math::Vect
   return hit_info;
 }
 
+std::string RaycastName( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction, uint32 impactMask,
+                         float maxDist )
+{
+    SCollisionInfo hit_info;
+    CPhysicUserData* lPUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist );
+
+    if ( lPUD )
+    {
+        return lPUD->GetName();
+    }
+
+    return "";
+}
+
 ECollisionGroup RaycastType( CPhysicsManager* PhysicManager, Math::Vect3f position, Math::Vect3f direction,
                              uint32 impactMask )
 {
@@ -267,6 +281,7 @@ void registerPhysX( lua_State* m_LS )
   .def( "PlayerInSight", &PlayerInSight )
   //  .def( "GetClosestEnemy", &GetClosestEnemy )
   .def( "RaycastCollisionGroup", &RaycastCollisionGroup )
+  .def( "RaycastName", &RaycastName )
   LUA_END_DECLARATION
 
   REGISTER_LUA_FUNCTION( m_LS, AddGrenade );
