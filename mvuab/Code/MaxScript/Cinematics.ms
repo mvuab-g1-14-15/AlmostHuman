@@ -126,7 +126,7 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 	return xDoc.PrettySaveXML()
 )
 
-fn ExportCinematicObjects nFrames filenameXML =
+fn ExportCinematicObjects nFrames filenameXML aRoom =
 (
 	try
 	(
@@ -155,9 +155,12 @@ fn ExportCinematicObjects nFrames filenameXML =
 			
 				-- append the new node cinematic_object to the root node cinematic
 				l_RootNode.AppendNode l_NewCinematicObjectNode 
-
-				l_NewCinematicObjectNode.AddAttributeAsString "resource" Obj.name
-				l_NewCinematicObjectNode.AddAttributeAsString "renderable_objects_manager" Obj.name
+				lObjName = Obj.name +"_"+ aRoom; 
+				
+				l_NewCinematicObjectNode.AddAttributeAsString "resource" lObjName
+				l_NewCinematicObjectNode.AddAttributeAsString "renderable_objects_manager" lObjName
+				l_NewCinematicObjectNode.AddAttributeAsString "room" aRoom
+				l_NewCinematicObjectNode.AddAttributeAsString "active" "false"
 				
 				
 				for t = animationRange.start to animationRange.end by nFrames do
