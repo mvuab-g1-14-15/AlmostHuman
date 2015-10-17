@@ -76,6 +76,18 @@ function CEnemy:__init( aInfo )
 	end
 	self.PitchCameraMove = 0.0
 	self:UpdateCamera()
+	
+	self.ShootSpeed = aInfo.shoot_speed
+	
+	self.TimeToShoot = aInfo.time_to_shoot
+	self.TimeBurst = 0.3
+	self.NumShootBurst = 3
+	self.ActualShootBurst = 0
+	self.CountTimeShoot = 0.0
+	
+	self.DontMove = false
+	
+	self.ChaseDistance = aInfo.chase_distance
 end
 
 function CEnemy:Destroy()
@@ -98,31 +110,65 @@ function CEnemy:Update()
 	local IsPlayerInSight = self:PlayerInSight()
 	
 	if IsPlayerInSight then
-		engine:Trace("Player in sight")
+		local lDist = PlayerDistance(self)
+		if lDist < self.ChaseDistance then
+			self.DontMove = true
+			if self:RotateToPos(g_Player:GetPosition()) then
+				local lDir = GetPlayerDirection(self:GetPosition())
+		
+				self.CountTimeShoot = self.CountTimeShoot + dt
+				local timerBurst = "Burst"..self.Name
+				if self.CountTimeShoot >= self.TimeToShoot then
+					if not countdowntimer_manager:ExistTimer(timerBurst) then
+						countdowntimer_manager:AddTimer(timerBurst, self.TimeBurst, false)
+					else
+						countdowntimer_manager:SetActive(timerBurst, true)
+					end
+					if countdowntimer_manager:isTimerFinish(timerBurst) then
+						self:MakeShoot(lDir)
+						self.ActualShootBurst = self.ActualShootBurst + 1
+						countdowntimer_manager:Reset(timerBurst, false)
+					end
+					if self.ActualShootBurst == 0 then
+						self:MakeShoot(lDir)
+						self.ActualShootBurst = self.ActualShootBurst + 1
+					end
+					if self.ActualShootBurst == self.NumShootBurst then
+						self.CountTimeShoot = 0.0
+						self.ActualShootBurst = 0
+					end
+				end
+			end
+		else
+			self.Suspected = true
+			self.SuspectedPosition = g_Player:GetPosition()
+		end
 	end
 	
 	if self.Suspected then
 		self.UseGraph = true
 		self.TargetPos = self.SuspectedPosition
 	end
-		
-	if self:MoveToPos( self.TargetPos ) then
-		if self.Suspected then
-			self.Suspected = false
-			self.TargetPos = self.InitPosition
-			if self.UseGraph then
-				self.PathCalculated = false
-			end
-		else
-			if self.TargetPos == self.InitPosition then
-				self.UseGraph = false
-			end
-			if self.IsPatrol then
-				self.ActualWaypoint = self.ActualWaypoint + 1
-				if self.ActualWaypoint > #self.Waypoints then
-					self.ActualWaypoint = 1
+	
+	if not self.DontMove then
+		if self:MoveToPos( self.TargetPos ) then
+			if self.Suspected then
+				self.Suspected = false
+				self.TargetPos = self.InitPosition
+				if self.UseGraph then
+					self.PathCalculated = false
 				end
-				self.TargetPos = self.Waypoints[self.ActualWaypoint]
+			else
+				if self.TargetPos == self.InitPosition then
+					self.UseGraph = false
+				end
+				if self.IsPatrol then
+					self.ActualWaypoint = self.ActualWaypoint + 1
+					if self.ActualWaypoint > #self.Waypoints then
+						self.ActualWaypoint = 1
+					end
+					self.TargetPos = self.Waypoints[self.ActualWaypoint]
+				end
 			end
 		end
 	end
@@ -353,6 +399,14 @@ function CEnemy:UpdateCamera()
 	self.Camera:SetPitch( self:GetPitch() )
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
+end
+
+function CEnemy:MakeShoot(aDirection)
+	lPosition = self:GetPosition() + aDirection * 0.4
+	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
+	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
+	enemy_manager:AddShoot(lShoot)
+	--Play shoot enemy sound
 end
 
 --class "CEnemyLUA"

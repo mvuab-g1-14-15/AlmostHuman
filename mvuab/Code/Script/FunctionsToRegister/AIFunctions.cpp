@@ -288,7 +288,7 @@ void registerStar( lua_State* aLuaState )
   LUA_DECLARE_CLASS( CAStar )
   LUA_DECLARE_CTOR_1( std::string )
   LUA_DECLARE_METHOD( CAStar, Init )
-  LUA_DECLARE_METHOD( CAStar, Render )
+  LUA_DECLARE_METHOD( CAStar, SetRender )
   LUA_DECLARE_METHOD( CAStar, GetPath )
   LUA_END_DECLARATION
 }

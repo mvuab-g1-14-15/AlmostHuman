@@ -5,6 +5,9 @@
 
 #include "EngineManagers.h"
 #include <algorithm>
+#include "Gizmos\Gizmo.h"
+#include "Gizmos\GizmoElement.h"
+#include "Gizmos\GizmosManager.h"
 
 CAStar::CAStar( std::string aRoomName )
     : mRoomName( aRoomName )
@@ -23,30 +26,50 @@ void CAStar::Init()
     m_Graph->Parse( "Data/"+mRoomName+"/graph.xml" );
 }
 
-void CAStar::Render()
+void CAStar::SetRender()
 {
-    CGraphicsManager* l_GM = GraphicsInstance;
+    CGizmosManager* l_GM = GizmosMInstance;
 
     if ( m_Graph->GetSize() == 0 )
     { return; }
 
+    CGizmo* lGizmo = new CGizmo( mRoomName + "GraphGizmo", Math::Vect3f(0.0f), 0.0f, 0.0f);
+
     Math::Vect3f lCurrentPoint = m_Graph->GetNodeInfo( 0 );
-    l_GM->DrawCube( lCurrentPoint, 0.1f, Math::colORANGE );
+    lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 1.0f, lCurrentPoint, 0.0, 0.0, Math::colGREEN ) );
+
+    Math::Vect3f final_pos;
+    Math::Vect3f lDir;
+    float lLenght;
+    Math::Vect3f lPosStep;
+
+    unsigned int steps = 10;
 
     for ( unsigned int i = 1; i < m_Graph->GetSize(); ++i )
     {
         Math::Vect3f pos( m_Graph->GetNodeInfo( i ) );
-        l_GM->DrawCube( pos, 0.1f, Math::colORANGE );
+        lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 0.5f, pos, 0.0, 0.0, Math::colGREEN ) );
+
         std::map<unsigned int, unsigned int> l_Arcs = m_Graph->GetArcs( i );
         std::map<unsigned int, unsigned int>::iterator it = l_Arcs.begin(),
-            it_end = l_Arcs.end();
-
-        if ( i == 1 )
+                                                       it_end = l_Arcs.end();
+        for ( ; it != it_end; ++it )
         {
-            for ( ; it != it_end; ++it )
-            { l_GM->DrawLine( pos, m_Graph->GetNodeInfo( it->first ), Math::colGREEN ); }
+            final_pos = m_Graph->GetNodeInfo( it->first );
+            lDir = final_pos - pos;
+            lLenght = lDir.Length();
+            lDir.Normalize();
+
+            for( unsigned int j = 0; j < steps; ++j )
+            {
+                float lPercentage = (float)j/(float)steps;
+                lPosStep = pos * (1-lPercentage) + final_pos * lPercentage;
+                lGizmo->AddElement( new CGizmoElement( CGizmoElement::eCube, 0.1f, lPosStep, 0.0, 0.0, Math::colORANGE ) );
+            }
         }
     }
+
+    l_GM->AddResource(mRoomName + "GraphGizmo", lGizmo);
 }
 
 

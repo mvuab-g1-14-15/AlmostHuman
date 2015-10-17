@@ -8,6 +8,9 @@ function CEnemyManager:__init()
 	self.AStar.sala2 = CAStar( "sala2" )
 	self.AStar.sala3 = CAStar( "sala3" )
 	
+	self.AStar.sala2:SetRender()
+	self.AStar.sala3:SetRender()
+	
 	local lInfo = {}
 	
 	-- Patrol 1
@@ -24,6 +27,9 @@ function CEnemyManager:__init()
 	lInfo.room = "sala2"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
+	lInfo.shoot_speed = 40.0
+	lInfo.time_to_shoot = 1.0
+	lInfo.chase_distance = 5.0
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
@@ -41,6 +47,9 @@ function CEnemyManager:__init()
 						 "	closeEnemy:SetSuspected(true);"..
 						 "	closeEnemy:SetSuspectedPosition(lPos);"..
 						 "end;"
+	lInfo.shoot_speed = 50.0
+	lInfo.time_to_shoot = 2.0
+	lInfo.chase_distance = 5.0
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 end
 
@@ -154,6 +163,10 @@ end
 
 function CEnemyManager:GetAStar( aRoomName )
 	return self.AStar[ aRoomName ]
+end
+
+function CEnemyManager:AddShoot(aShoot)
+	table.insert(self.Shoots, aShoot)
 end
 
 --dofile("./data/level2/scripts/StateMachine.lua")

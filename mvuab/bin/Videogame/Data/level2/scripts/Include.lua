@@ -65,7 +65,7 @@ function GetAngleEnemyPlayer(enemy)
 	l_DistanceVector.y = 0.0
 	l_DistanceVector:Normalize()
 	
-	local l_EnemyDir = enemy:GetDirectionEnemy()
+	local l_EnemyDir = enemy:GetDirection()
 	l_EnemyDir.y = 0.0
 	l_EnemyDir:Normalize()
 	
