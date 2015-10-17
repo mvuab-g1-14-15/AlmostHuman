@@ -35,7 +35,7 @@ function load_gameplay()
 		g_HUD = CHUD()
 	end
 	if enemy_manager == nil then
-		enemy_manager = CEnemyManagerLUA()	
+		enemy_manager = CEnemyManager()	
 	end
 	
 	enemy_manager:CreateBoss()
@@ -70,6 +70,8 @@ function update_gameplay()
 		load_gameplay()
 		initialized1 = true
 	end
+	
+	debug_helper:Update()
 
 	enemy_manager:Update()
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()

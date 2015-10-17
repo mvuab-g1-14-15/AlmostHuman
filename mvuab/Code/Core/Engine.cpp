@@ -25,6 +25,7 @@ CEngine::CEngine()
   , m_pTimer( new CTimer( 30 ) )
   , m_Play( false )
   , mConsoleEnabled( false )
+  , mLastTraceMsg("")
 {
 }
 
@@ -89,21 +90,30 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
   }
 }
 
+void CEngine::TraceOnce( const std::string& TraceStr )
+{
+    if (TraceStr == mLastTraceMsg)
+        return;
+
+    Trace(TraceStr);
+
+    mLastTraceMsg = TraceStr;
+
+}
 void CEngine::Trace( const std::string& TraceStr )
 {
-  if ( mConsoleEnabled )
-  {
-    HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-    SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-    std::cout << TraceStr << std::endl << std::endl;
-  }
-  else
-  {
-    std::stringstream lMsg;
-    lMsg << "[APPLICATION]" << TraceStr << std::endl;
-    OutputDebugString( lMsg.str().c_str() );
-  }
-
+    if ( mConsoleEnabled )
+    {
+        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+        std::cout << TraceStr << std::endl << std::endl;
+    }
+    else
+    {
+        std::stringstream lMsg;
+        lMsg << "[APPLICATION]" << TraceStr << std::endl;
+        OutputDebugString( lMsg.str().c_str() );
+    }
 }
 
 void CEngine::QuitGame()

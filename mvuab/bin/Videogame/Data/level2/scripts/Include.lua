@@ -22,6 +22,7 @@ light_manager = GetLightManager()
 texture_manager = GetTextureManager()
 trigger_manager = GetTriggerManager()
 engine_manager = CEngineManagers.GetSingletonPtr()
+debug_helper = CDebugHelper()
 
 -- Global Variables
 g_CameraSensibility = 30.0

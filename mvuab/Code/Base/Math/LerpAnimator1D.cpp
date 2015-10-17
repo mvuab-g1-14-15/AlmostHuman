@@ -60,3 +60,13 @@ bool Math::CLerpAnimator1D::Update (float32 ElapsedTime, float32 &value)
 
     return finish;
 }
+
+bool Math::CLerpAnimator1D::IsFinish()
+{
+    bool finish = false;
+    if (m_fElapsedTime >= m_fTotalTime)
+    {
+        finish = true;
+    }
+    return finish;
+}

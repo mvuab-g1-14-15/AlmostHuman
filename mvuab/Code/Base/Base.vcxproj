@@ -64,6 +64,7 @@
     <ClInclude Include="Utils\AVIReader.h" />
     <ClInclude Include="Utils\BaseUtils.h" />
     <ClInclude Include="Utils\ConditionVarible.h" />
+    <ClInclude Include="Utils\DebugHelper.h" />
     <ClInclude Include="Utils\Defines.h" />
     <ClInclude Include="Utils\GPUStatics.h" />
     <ClInclude Include="Utils\IdManager.h" />

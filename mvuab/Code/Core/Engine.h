@@ -37,6 +37,7 @@ class CEngine: public CSingleton<CEngine>
         GET_SET( bool, Play );
 
         void Trace( const std::string& TraceStr );
+        void TraceOnce( const std::string& TraceStr );
 
     private:
         CProcess*           m_pProcess;
@@ -48,6 +49,8 @@ class CEngine: public CSingleton<CEngine>
 
         bool                m_Play;
         bool                mConsoleEnabled;
+
+        std::string         mLastTraceMsg;
 };
 
 #endif // ENGINE_H

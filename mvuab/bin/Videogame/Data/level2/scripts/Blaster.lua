@@ -1,4 +1,3 @@
-
 class 'CBlaster'
 
 function CBlaster:__init()
@@ -43,9 +42,8 @@ function CBlaster:Shoot()
 	local lEnemies = enemy_manager:GetEnemiesAtDistance( 5.0 )
 	for i = 1, #lEnemies do
 		lEnemy = lEnemies[i]
-		lEnemy.Suspected = true
-		lEnemy.SuspectedPosition = g_Player:GetPosition()
-		lEnemy:ChangeState("perseguir")
+		lEnemy:SetSuspected(true)
+		lEnemy:SuspectedPosition(g_Player:GetPosition())
 	end
 
 --[[ Old code
