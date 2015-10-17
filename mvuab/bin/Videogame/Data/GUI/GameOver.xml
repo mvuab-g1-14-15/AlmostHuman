@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+  <!--<Image name="main_fondo" pos="0.00 0.00" height="100.00" width="100.00" visible="true" active="true"
+         default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
+    <texture name="img1" name_texture="Data/textures/GUI/Almost_human.jpg"/>
+  </Image>-->
+
+  <Image name="game_over" pos="0.00 0.00" height="100.00" width="100.00" visible="true" active="true"
+      default="0" 
+      OnLoadValue=""
+      OnSaveValue=""
+      flip="" is_background="true">
+    <texture name="0" name_texture="Data/textures/GUI/gameover_ffvii.png"/>
+    
+  </Image>
+
+  
+  <Button name="CargarPuntoControl" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
+          active="true" texture_normal="Data/textures/GUI/continuegame.jpg"
+          texture_over="Data/textures/GUI/continuegame.jpg"
+          texture_clicked="Data/textures/GUI/continuegame.jpg"
+          texture_deactivated="Data/textures/GUI/continuegame.jpg"
+          OnClickedAction="PuntoControl()"
+          OnOverAction="SoundGUI()"/>
+  
+</Windows>

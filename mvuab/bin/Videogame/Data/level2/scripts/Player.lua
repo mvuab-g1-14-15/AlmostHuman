@@ -32,7 +32,6 @@ function CPlayer:__init()
 	l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi);
-
 	self.RenderableObject:MakeTransform();
 	
 	self.Animation = "idle"
@@ -91,6 +90,7 @@ function CPlayer:Update()
 	self.Blaster:Update()
 	self.StealthAttack:Update()
 	if self.Life <= 0 then
+		FunctionGameOver()
 		self.PlayerController:SetPosition(Respawn())
 		self.Life= 100.0
 	end

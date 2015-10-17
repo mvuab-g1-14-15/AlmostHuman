@@ -12,6 +12,20 @@ sound_manager:PlayParticlesSFX()
 --gui_manager:ShowDialogTex("Test")
 end
 
+function FunctionGameOver()
+gui_manager:ActiveWindows("GameOver.xml")
+gui_manager:SetRenderPointer(true)
+
+end
+
+function PuntoControl()
+engine:SetPlay(true)
+sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+gui_manager:ActiveWindows("HUD.xml")
+gui_manager:SetRenderPointer(false)
+sound_manager:PlayParticlesSFX()
+end
+
 function IrASetup()
 	gui_manager:ActiveWindows("Setup.xml")
 end
