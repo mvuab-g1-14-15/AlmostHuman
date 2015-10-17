@@ -11,7 +11,6 @@ class CRenderableObject : public CObject3D, public CName
 {
     public:
         CRenderableObject();
-        CRenderableObject(const std::string & aName );
         CRenderableObject( const CXMLTreeNode &atts);
         virtual ~CRenderableObject();
 

@@ -6,12 +6,6 @@ CRenderableObject::CRenderableObject() : CObject3D(), CName()
 {
 }
 
-CRenderableObject::CRenderableObject(const std::string & aName )
-    : CName( aName )
-    , CObject3D()
-{
-}
-
 CRenderableObject::CRenderableObject(const CXMLTreeNode &atts)
     : CObject3D(atts)
     , CName(atts.GetAttribute<std::string>("name", ""))

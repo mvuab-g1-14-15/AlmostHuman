@@ -28,14 +28,14 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
     CXMLTreeNode newFile;
     if (!newFile.LoadFile(aFilePath.c_str()))
     {
-        LOG_ERROR_APPLICATION( "Load No se puede abrir \"%s\"!", aFilePath.c_str());
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load No se puede abrir \"%s\"!", aFilePath.c_str());
         return;
     }
 
     CXMLTreeNode node = newFile["static_meshes"];
     if(!node.Exists())
     {
-        LOG_ERROR_APPLICATION( "Load Tag \"%s\" no existe",  "static_meshes");
+        LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
         return;
     }
 

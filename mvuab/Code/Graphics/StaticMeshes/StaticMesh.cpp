@@ -20,7 +20,7 @@
 #include "Materials/Material.h"
 
 #include <cstdio>
-#include <sys/stat.h>
+#include "Utils/BaseUtils.h"
 
 namespace
 {
@@ -77,13 +77,6 @@ void CStaticMesh::Destroy()
     m_RVs.clear();
 }
 
-long GetFileSize(std::string filename)
-{
-    struct stat stat_buf;
-    int rc = stat(filename.c_str(), &stat_buf);
-    return rc == 0 ? stat_buf.st_size : -1;
-}
-
 bool CStaticMesh::Load( const std::string& FileName )
 {
     bool lOk = false;
@@ -91,20 +84,11 @@ bool CStaticMesh::Load( const std::string& FileName )
     m_FileName = FileName;
     fopen_s(&l_pFile, FileName.c_str(), "rb");
 
-#ifdef _DEBUG
-    std::string lErrorMsg = "Errors in static mesh " + FileName + ":\n";
-    if( !l_pFile )
-      lErrorMsg += "- Null file.\n";
+    ASSERT(l_pFile, "Null file %s", FileName.c_str() );
+    ASSERT( baseUtils::GetFileSize( FileName ) != 0 , "File %s is empty", FileName.c_str() );
 
     if (l_pFile)
     {
-      long lFileSize = GetFileSize( FileName );
-      if( lFileSize == 0 )
-        lErrorMsg += "- The file has 0 bytes, it is empty.\n";
-#else
-    if (l_pFile)
-    {
-#endif // _DEBUG
         unsigned short int l_header = 0;
         std::fread(&l_header, sizeof( unsigned short int ), 1, l_pFile);
 
@@ -112,6 +96,9 @@ bool CStaticMesh::Load( const std::string& FileName )
         {
             unsigned short int l_SubMeshes = 0;
             std::fread(&l_SubMeshes, sizeof(unsigned short int), 1, l_pFile);
+
+            int l_MaxIndex = 0;
+
             for (unsigned int i = 0; i < l_SubMeshes; ++i)
             {
                 // Obtain the vertex type
@@ -171,7 +158,6 @@ bool CStaticMesh::Load( const std::string& FileName )
                 void* l_IdxAddress = malloc( sizeof( unsigned int ) * l_IdxCount );
                 std::fread( l_IdxAddress, sizeof( unsigned int ) * l_IdxCount, 1, l_pFile );
 
-                int l_MaxIndex = 0;
                 uint32 *l_Indexs = (uint32 *) l_IdxAddress;
                 for (unsigned int j = 0; j < l_IdxCount; ++j ) //Vector para physx
                 {
@@ -232,15 +218,8 @@ bool CStaticMesh::Load( const std::string& FileName )
                 }
 
                 // Check the renderable object
-                if (l_RV && l_RV->isRenderOK())
-                {
-                  m_RVs.push_back(l_RV);
-                }
-                else
-                {
-                  lOk = false;
-                  CHECKED_DELETE(l_RV);
-                }
+                if (l_RV && l_RV->isRenderOK()) m_RVs.push_back(l_RV);
+                else CHECKED_DELETE(l_RV);
 
                 free(l_VtxsAddress);
                 free(l_IdxAddress);
@@ -259,20 +238,7 @@ bool CStaticMesh::Load( const std::string& FileName )
         std::fclose( l_pFile );
     }
 
-    lOk = lOk && GetRenderableObjectTechnique();
-    lOk = lOk && m_RVs.size() == m_RenderableObjectTechniques.size();
-
-#ifdef _DEBUG
-    if(m_RVs.size() != m_RenderableObjectTechniques.size() )
-      lErrorMsg += "-The number of submeshes is different than the techinques\n";
-
-    if(m_RVs.size() != mMaterials.size() )
-      lErrorMsg += "-The number of submeshes is different than the materials\n";
-
-    ASSERT( lOk, "%s", lErrorMsg.c_str() );
-#endif // _DEBUG
-
-    return lOk;
+    return lOk && GetRenderableObjectTechnique() && m_RVs.size() == mMaterials.size();
 }
 
 bool CStaticMesh::ReLoad()

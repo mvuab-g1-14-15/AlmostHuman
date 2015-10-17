@@ -47,7 +47,6 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
                         m_vLogs.push_back( newLog );
                         free(buffer);
                         m_Mutex.UnLock();
-                        return;
                         SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
                     }
                     break;
@@ -67,12 +66,7 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
 
             std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
             lCopyClassStr.insert( 5, lStr );
-            std::cout <<
-                      "----------------------------------------------------------------------------------------------------------------------------------";
-            std::cout << "[" << lCopyClassStr << "]" << "[File][" << file << "]" << "[Line][" << line <<
-                      "]" << std::endl << "[Message]" << newLog.m_sLogText << std::endl;
-            std::cout <<
-                      "----------------------------------------------------------------------------------------------------------------------------------";
+            std::cout << "[" << lCopyClassStr << "]" << "[File][" << file << "]" << "[Line][" << line << "]" << "[Message]" << newLog.m_sLogText << std::endl;
         }
         else
         {
