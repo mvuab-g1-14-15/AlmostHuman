@@ -24,6 +24,10 @@
 #include "Cameras\Camera.h"
 #include "Cameras/CameraManager.h"
 
+#include "Billboard/BillboardCore.h"
+#include "Billboard/BillboardManager.h"
+#include "Billboard/BillboardInstance.h"
+
 CShoot::CShoot()
   : CObject3D()
   , mSpeed( 0.0f )
@@ -68,6 +72,8 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
   mShoot->SetPosition(aPosition);
   mShootGlow->SetPosition(aPosition);
 
+  CBillboardCore * lCore = BillboardMan->GetResource("blash");
+  
   //mShoot->SetDirection( aDirection );
   //mShootGlow->SetDirection( aDirection );
 
@@ -84,6 +90,11 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
   CCamera* p_cam = CameraMInstance->GetCurrentCamera();
   float lYaw = p_cam->GetYaw();
   float lPitch = p_cam->GetPitch();
+  Math::Vect3f lSide = p_cam->GetVecUp().CrossProduct( p_cam->GetDirection() ).Normalize();
+  mInstance = new CBillboardInstance();
+  mInstance->ChangePosition( aPosition + lSide * 0.23f );
+  mInstance->SetActive( true );
+  lCore->AddInstance(mInstance);
 
   mShoot->SetYaw( -lYaw );
   mShoot->SetPitch(lPitch);
@@ -103,6 +114,7 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 CShoot::~CShoot()
 {
   LightMInstance->RemoveResource( GetName() );
+  mInstance->SetActive(false);
 
   SceneInstance->GetResource("core")->GetLayer("solid")->RemoveResource(GetName());
   SceneInstance->GetResource("core")->GetLayer("glow")->RemoveResource(GetName());

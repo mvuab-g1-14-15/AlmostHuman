@@ -11,6 +11,13 @@ CParticleInstance::CParticleInstance( const CXMLTreeNode& atts )
 {
 }
 
+CParticleInstance::CParticleInstance( const Math::Vect3f& aPosition )
+  : CObject3D( aPosition, 0, 0 )
+  , mActive(false)
+{
+
+}
+
 CParticleInstance::~CParticleInstance()
 {
 }
