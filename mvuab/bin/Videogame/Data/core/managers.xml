@@ -18,7 +18,7 @@
 	<scene_render_command_manager file_config="../CommonData/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
 	<countdowntimer_manager file_config="no_name"/>
-	<script_manager file_config="Data/level2/scripts/"/>
+	<script_manager file_config="Data/scripts/"/>
 	<lens_flares_manager file_config="../CommonData/LF/lens_flare.xml"/>
 	<light_manager file_config="Data/lights.xml"/>
 	<!--<enemy_manager file_config="Data/enemies/enemies.xml"/>-->
