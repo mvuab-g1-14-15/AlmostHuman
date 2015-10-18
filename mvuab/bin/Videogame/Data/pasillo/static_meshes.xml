@@ -27,8 +27,6 @@
   <static_mesh name="Lights_4_glow_pasillo" filename="meshes\Lights_4_glow.mesh" />
   <static_mesh name="ventilador_aspas001_pasillo" filename="meshes\ventilador_aspas001.mesh" />
   <static_mesh name="arch_2_pasillo" filename="meshes\arch_2.mesh" />
-  <static_mesh name="Lights_red_wall_001_pasillo" filename="meshes\Lights_red_wall_001.mesh" />
-  <static_mesh name="lights_red_wall02_pasillo" filename="meshes\lights_red_wall02.mesh" />
-  <static_mesh name="lights_white_door_pasillo" filename="meshes\lights_white_door.mesh" />
-  <static_mesh name="lights_roof_pasillo" filename="meshes\lights_roof.mesh" />
+  <static_mesh name="light_red_roof_glow_pasillo" filename="meshes\light_red_roof_glow.mesh" />
+  <static_mesh name="lights_white_door002_glow_pasillo" filename="meshes\lights_white_door002_glow.mesh" />
 </static_meshes>

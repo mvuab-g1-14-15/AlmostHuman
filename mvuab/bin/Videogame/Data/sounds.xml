@@ -13,4 +13,5 @@
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
+	<GameObject3d name="Rejilla" register="true" pos="113.54 -9.37 -44.35" dir="114.53 -9.29 -44.44"/>
  </sounds>
