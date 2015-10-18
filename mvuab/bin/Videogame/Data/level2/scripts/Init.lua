@@ -22,9 +22,10 @@ function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	scene:ActivateRoom("pasillo")
+	--scene:ActivateRoom("pasillo")
 	scene:ActivateRoom("sala2")
-	--scene:ActivateRoom("sala3")	engine:Trace("Finish the load_basics()")
+	scene:ActivateRoom("sala3")	
+	engine:Trace("Finish the load_basics()")
 end
 
 function load_gameplay()
@@ -58,6 +59,7 @@ function load_gameplay()
 	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
 	g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
 	g_bCinematicLoopMain = true
+	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
 	g_Player:Update()
 	g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
 	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
