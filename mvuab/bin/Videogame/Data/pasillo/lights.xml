@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
   <ambient_light color="0.0 0.0 0.0" />
-  <omni_light name="Omni001" pos="53.9883 -15.6603 -6.83341" color="1.0 1.0 1.0" att_start_range="9.08" att_end_range="14.0" />
+  <!--omni_light name="Omni001" pos="53.9883 -15.6603 -6.83341" color="1.0 1.0 1.0" att_start_range="9.08" att_end_range="14.0" /-->
 </lights>
