@@ -26,6 +26,7 @@ public:
   void Render();
   void Update();
 
+  CBillboardInstance* CreateInstance( const std::string& aCoreName, const Math::Vect3f& aPosition, bool aActive );
   void LoadInstances( const std::string& aFileName );
   void FlushInstances();
 

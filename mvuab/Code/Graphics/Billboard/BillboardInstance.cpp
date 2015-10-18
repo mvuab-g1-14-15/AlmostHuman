@@ -17,7 +17,6 @@
 CBillboardInstance::CBillboardInstance()
     : CName()
     , CObject3D()
-    , mActive( true )
 {
 }
 
@@ -30,7 +29,7 @@ bool CBillboardInstance::Init( const CXMLTreeNode& atts )
     bool lOk( true );
     SetName( atts.GetAttribute<std::string>( "name", "unknown" ) );
     lOk = lOk && CObject3D::Init( atts );
-    mActive = atts.GetAttribute<bool>( "active", false );
+    mIsVisible = atts.GetAttribute<bool>( "active", false );
     return lOk;
 }
 
@@ -41,7 +40,7 @@ void CBillboardInstance::Update()
 
 void CBillboardInstance::Render(CRenderableVertexs* aRV,CGraphicsManager* aGM, CEffectTechnique* aTechnique )
 {
-    if ( mActive )
+    if ( mIsVisible )
     {
         aGM->SetTransform( GetTransform() );
         aRV->Render( aGM, aTechnique );

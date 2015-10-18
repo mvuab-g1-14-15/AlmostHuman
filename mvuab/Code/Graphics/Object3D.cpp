@@ -7,6 +7,7 @@ CObject3D::CObject3D( const CXMLTreeNode& atts )
     , m_fPitch( atts.GetAttribute<float>( "pitch", 0.0f ) )
     , m_fRoll( atts.GetAttribute<float>( "roll", 0.0f ) )
     , m_Scale( atts.GetAttribute<Math::Vect3f>( "scale", Math::Vect3f( 1.0f, 1.0f, 1.0f ) ) )
+    , mIsVisible( true )
 {
     MakeTransform();
 }
@@ -18,6 +19,7 @@ CObject3D::CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float
     m_fPitch    = pitch;
     m_fRoll     = roll;
     m_Scale     = scale;
+    mIsVisible = true;
 
     MakeTransform();
 }
@@ -28,6 +30,7 @@ CObject3D::CObject3D()
     , m_fPitch( 0.f )
     , m_fRoll( 0.f )
     , m_Scale( Math::Vect3f( 1.0f, 1.0f, 1.0f ) )
+    , mIsVisible( true )
 {
 }
 

@@ -25,12 +25,15 @@ class CObject3D
         float32       m_fYaw;
         float32       m_fPitch;
         float32       m_fRoll;
-
+        bool          mIsVisible;
     public:
         CObject3D();
         CObject3D( const CXMLTreeNode& atts );
         CObject3D( const Math::Vect3f& pos, float32 yaw, float32 pitch, float32 roll = 0,
                    Math::Vect3f scale = Math::Vect3f( 1.0f, 1.0f, 1.0f ) );
+
+        bool IsVisible() const { return mIsVisible; }
+        void ChangeVisibility( bool aVisibility ) { mIsVisible = aVisibility;}
 
         virtual ~CObject3D( void )
         {
