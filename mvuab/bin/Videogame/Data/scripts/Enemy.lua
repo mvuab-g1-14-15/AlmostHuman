@@ -94,7 +94,12 @@ function CEnemy:__init( aInfo )
 	self.CanSee = aInfo.can_see
 	
 	self.Fly = aInfo.fly
-	self.InitHeight = self.TargetPos.y
+	self.InitHeight = self.InitPosition.y
+	
+	self.Alarm = aInfo.alarm
+	if self.Alarm then
+		self.AlarmTimer = countdowntimer_manager:AddTimer(self.Name.."AlarmTimer", aInfo.alarm_time, false)
+	end
 end
 
 function CEnemy:Destroy()
@@ -120,6 +125,14 @@ function CEnemy:Update()
 	end
 	
 	if IsPlayerInSight then
+		if self.Alarm then
+			countdowntimer_manager:SetActive(self.Name.."AlarmTimer", true)
+			if countdowntimer_manager:isTimerFinish(self.Name.."AlarmTimer") then
+				enemy_manager:SetAlarm(self.Room)
+				countdowntimer_manager:Reset(self.Name.."AlarmTimer", false)
+			end
+		end
+		
 		local lDist = PlayerDistance(self)
 		if lDist < self.ChaseDistance then
 			self.DontMove = true
@@ -156,6 +169,8 @@ function CEnemy:Update()
 		
 		self.Suspected = true
 		self.SuspectedPosition = g_Player:GetPosition()
+	else
+		self.DontMove = false
 	end
 	
 	if self.Suspected then
@@ -283,16 +298,26 @@ function CEnemy:MoveToPos( aPos )
 		end
 		
 		local lRealTargetPos = self.Path:GetResource(self.ActualPathPoint)
+		if lRealTargetPos:Length() < 0.1 then
+			engine:Trace(self.Name.." target pos in graph is "..lRealTargetPos:ToString())
+		end
 		if not self:IsInPos( lRealTargetPos ) then
 			self:ChangeAnimation("walk", 0.5, 1.0)
 			if self:RotateToPos( lRealTargetPos ) then
 				local DirVector = self:GetDirVectorNormalized2D( lRealTargetPos )
-				self.CharacterController:Move(DirVector * self.Speed, dt)
-				self.Gizmo:SetPosition(lRealTargetPos)
-				self.Gizmo:MakeTransform()
+				if CheckVector(DirVector) then
+					self.CharacterController:Move(DirVector * self.Speed, dt)
+				end
+				if self.UseGizmo then
+					self.Gizmo:SetPosition(lRealTargetPos)
+					self.Gizmo:MakeTransform()
+				end
 			end
 		else
 			self.ActualPathPoint = self.ActualPathPoint + 1
+			if self.ActualPathPoint == self.Path:size() then
+				self.ActualPathPoint = self.ActualPathPoint - 1
+			end
 		end
 		
 		if ( self.Path:GetResource(self.Path:size() - 1):Distance( aPos ) > 5.0 ) then
@@ -312,9 +337,13 @@ function CEnemy:MoveToPos( aPos )
 		self:ChangeAnimation("walk", 0.5, 1.0)
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
-			self.CharacterController:Move(DirVector * self.Speed, dt)
-			self.Gizmo:SetPosition(aPos)
-			self.Gizmo:MakeTransform()
+			if CheckVector(DirVector) then
+				self.CharacterController:Move(DirVector * self.Speed, dt)
+			end
+			if self.UseGizmo then
+				self.Gizmo:SetPosition(aPos)
+				self.Gizmo:MakeTransform()
+			end
 		end
 		return false
 	end

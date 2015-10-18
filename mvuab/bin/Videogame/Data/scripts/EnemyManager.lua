@@ -13,6 +13,12 @@ function CEnemyManager:__init()
 	self.AStar.sala2 = CAStar( "sala2" )
 	self.AStar.sala3 = CAStar( "sala3" )
 	
+	self.Alarm = {}
+	self.Alarm.sala2 = false
+	self.Alarm.pasillo = false
+	self.Alarm.sala3 = false
+	self.Alarm.sala4 = false
+	
 	--self.AStar.sala2:SetRender()
 	--self.AStar.sala3:SetRender()
 	
@@ -47,6 +53,8 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
+	lInfo.alarm = true
+	lInfo.alarm_time = 5.0
 	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
@@ -63,7 +71,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.use_gizmo = true
 	lInfo.on_dead = true
 	lInfo.on_dead_code = "local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName);"..
-						 "if closeEnemy ~= nil then"..
+						 "if closeEnemy ~= nil then "..
 						 "	closeEnemy:SetSuspected(true);"..
 						 "	closeEnemy:SetSuspectedPosition(lPos);"..
 						 "end;"
@@ -71,9 +79,63 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
-	lInfo.can_see = false
+	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
+	lInfo.alarm = true
+	lInfo.alarm_time = 10.0
+	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+end
+
+function CEnemyManager:CreateEnemiesExtraSala2()
+	local lInfo = {}
+	
+	-- Patrol 1
+	lInfo.name = "ExtraEnemy1_S2"
+	lInfo.life = 100.0
+	lInfo.damage = 10.0
+	lInfo.radius = 0.4
+	lInfo.height = 2.0
+	lInfo.speed = 4.0
+	lInfo.position = Vect3f(53.8, -16.5334, -54.26)
+	lInfo.is_patrol = false
+	lInfo.mesh = "enemy1"
+	lInfo.room = "sala2"
+	lInfo.use_gizmo = true
+	lInfo.on_dead = false
+	lInfo.shoot_speed = 40.0
+	lInfo.time_to_shoot = 1.0
+	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = 0.0
+	lInfo.can_see = true
+	lInfo.fly = false
+	lInfo.can_use_graph = true
+	lInfo.alarm = true
+	lInfo.alarm_time = 10.0
+	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+
+	-- Stairs Enemy
+	lInfo.name = "ExtraEnemy2_S2"
+	lInfo.life = 100.0
+	lInfo.damage = 10.0
+	lInfo.radius = 0.4
+	lInfo.height = 2.0
+	lInfo.speed = 4.0
+	lInfo.position = Vect3f(73.14, -16.5334, -86.37)
+	lInfo.is_patrol = false
+	lInfo.mesh = "enemy1"
+	lInfo.room = "sala2"
+	lInfo.use_gizmo = true
+	lInfo.on_dead = false
+	lInfo.shoot_speed = 50.0
+	lInfo.time_to_shoot = 2.0
+	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = 0.0
+	lInfo.can_see = true
+	lInfo.fly = false
+	lInfo.can_use_graph = true
+	lInfo.alarm = true
+	lInfo.alarm_time = 10.0
 	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 end
 
@@ -102,6 +164,8 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.can_see = true
 	lInfo.fly = true
 	lInfo.can_use_graph = false
+	lInfo.alarm = true
+	lInfo.alarm_time = 10.0
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
 end
 
@@ -109,6 +173,8 @@ function CEnemyManager:Reinit( aRoom )
 	for i in pairs (self.Enemy[aRoom]) do
 		self.Enemy[aRoom][i]:Destroy()
 	end
+	
+	self.Alarm[aRoom] = false
 	
 	for k in pairs (self.Shoots) do
 		self.Shoots[k]:Destroy()
@@ -168,6 +234,22 @@ function CEnemyManager:Update()
 	
 	for k in pairs (self.Shoots) do
 		self.Shoots[k]:Update()
+	end
+end
+
+function CEnemyManager:SetAlarm( aRoom )
+	lRoom = self.Enemy[aRoom]
+	for i in pairs(lRoom) do
+		lActualEnemy = lRoom[i]
+		lActualEnemy:SetSuspected(true)
+		lActualEnemy:SetSuspectedPosition(g_Player:GetPosition())
+	end
+	
+	if not self.Alarm[aRoom] then
+		if aRoom == "sala2" then
+			self:CreateEnemiesExtraSala2()
+		end
+		self.Alarm[aRoom] = true
 	end
 end
 
