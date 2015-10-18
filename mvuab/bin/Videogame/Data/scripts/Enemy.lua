@@ -42,6 +42,7 @@ function CEnemy:__init( aInfo )
 		self.RenderableObject:SetRoomName( aInfo.room )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)
 	
 	self.UseGizmo = aInfo.use_gizmo
 	if self.UseGizmo then
@@ -94,8 +95,6 @@ function CEnemy:__init( aInfo )
 	
 	self.Fly = aInfo.fly
 	self.InitHeight = self.TargetPos.y
-	
-	self.CurrentAnimation = "idle"
 end
 
 function CEnemy:Destroy()
@@ -441,8 +440,11 @@ function CEnemy:MakeShoot(aDirection)
 end
 
 function CEnemy:ChangeAnimation(animation, delayin, delayout)
-	self.CurrentAnimation = animation
 	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
+end
+
+function CEnemy:ChangeAnimationAction(animation, delayin, delayout)
+	self.RenderableObject:ChangeAnimationAction(animation, delayin, delayout)
 end
 
 --class "CEnemyLUA"

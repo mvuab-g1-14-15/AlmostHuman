@@ -132,8 +132,9 @@ function CEnemyManager:Update()
 				if lActualEnemy:GetLife() > 0 then
 					lActualEnemy:Update()
 				else
+					lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
 					if not countdowntimer_manager:ExistTimer(lActualEnemy:GetName().."DeadTimer") then
-						countdowntimer_manager:AddTimer(lActualEnemy:GetName().."DeadTimer", 10.0, false)
+						countdowntimer_manager:AddTimer(lActualEnemy:GetName().."DeadTimer", 5.0, false)
 					end
 				
 					if countdowntimer_manager:isTimerFinish(lActualEnemy:GetName().."DeadTimer") then				
