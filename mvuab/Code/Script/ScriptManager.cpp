@@ -25,6 +25,8 @@
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
+#include "Engine.h"
+
 using namespace luabind;
 
 
@@ -88,6 +90,9 @@ void CScriptManager::RunCode( const std::string& Code )
     if ( luaL_dostring( m_LS, Code.c_str() ) )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
+        CEngine::GetSingleton().Trace("Error running lua code:");
+        CEngine::GetSingleton().Trace(Code);
+        CEngine::GetSingleton().Trace(l_Str);
         ASSERT( false, "Error running lua code: %s\n %s", Code.c_str(), l_Str );
 
 #ifdef _DEBUG
@@ -101,6 +106,9 @@ void CScriptManager::RunFile( const std::string& FileName )
     if ( luaL_dofile( m_LS, FileName.c_str() ) )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
+        CEngine::GetSingleton().Trace("Error running lua file:");
+        CEngine::GetSingleton().Trace(FileName);
+        CEngine::GetSingleton().Trace(l_Str);
         ASSERT( false, "Error running lua file: %s\n %s", FileName.c_str(), l_Str );
 
 #ifdef _DEBUG

@@ -57,7 +57,7 @@ function CPlayer:Update()
 		engine:Trace("He entrado en el update sala1")
 		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi)
 	else
-		engine:Trace("He entrado en el update malo sala1")
+		--engine:Trace("He entrado en el update malo sala1")
 		--self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
 	end
 	

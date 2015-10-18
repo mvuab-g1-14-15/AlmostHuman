@@ -2,6 +2,7 @@
 #include "BillboardInstance.h"
 #include "Texture\Texture.h"
 #include "Texture\TextureManager.h"
+#include "Utils\BaseUtils.h"
 
 #include "GraphicsManager.h"
 
@@ -20,6 +21,8 @@ CBillboardCore::CBillboardCore()
     , mAlpha(1.0f)
     , mFlipUVHorizontal( false )
     , mFlipUVVertical( false )
+    , mRandomAngle( false )
+    , mAngle( 0.1f )
 {
 }
 
@@ -34,12 +37,14 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
 
     // Get the technique of the BillboardCore
     mTechnique        = atts.GetAttribute<CEffectTechnique>("technique");
-    mSize             = atts.GetAttribute<float>( "size"              , 1.0f  );
-    mAlpha            = atts.GetAttribute<float>( "alpha"             , 1.0f  );
-    mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal", false );
-    mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"  , false );
-    mUseTick          = atts.GetAttribute<bool> ( "use_tick"          , false );
-    mUseDeltaTime     = atts.GetAttribute<bool> ( "use_delta_time"    , false );
+    mSize             = atts.GetAttribute<float>( "size"                  , 1.0f  );
+    mAngle            = atts.GetAttribute<float>( "angle"                 , 0.1f  );
+    mAlpha            = atts.GetAttribute<float>( "alpha"                 , 1.0f  );
+    mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal"    , false );
+    mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"      , false );
+    mUseTick          = atts.GetAttribute<bool> ( "use_tick"              , false );
+    mUseDeltaTime     = atts.GetAttribute<bool> ( "use_delta_time"        , false );
+    mRandomAngle = atts.GetAttribute<bool> ( "random_angle", false );
     mTick             = float( (rand() % 100 + 1) / 10);
 
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i<lCount; ++i)
@@ -84,6 +89,7 @@ void CBillboardCore::AddInstance( CBillboardInstance* aInstance )
 {
   if( aInstance )
   {
+    aInstance->SetAngle( ( mRandomAngle  ) ? baseUtils::RandRange( 0.0f, 360.0f ) : mAngle );
     mInstances.push_back( aInstance );
   }
 }
