@@ -25,7 +25,7 @@ struct STexture
 	(
 		if IsNotNull() then
 		(
-			format "Texture name: %\n" m_Name
+			--format "Texture name: %\n" m_Name
 			--format "Texture length: %\n" m_Name.count
 			WriteShort file m_Name.count #unsigned--Write Lenght Name
 			WriteString file m_Name --Write Name
@@ -57,7 +57,7 @@ struct SMaterial
 	(
 		m_Type = (bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL)
 		m_SelfIlumAmount = mat.selfIllumAmount
-		format "% self ilum amount\n" m_SelfIlumAmount
+		--format "% self ilum amount\n" m_SelfIlumAmount
 		
 		if mat != undefined then
 		(
@@ -128,7 +128,7 @@ struct SMaterial
 				
 				m_Color = bit.shift m_ColorAlpha 24 + bit.shift m_ColorRed 16 + bit.shift m_ColorGreen 8 + m_ColorBlue
 				
-				format "Diffuse Color: %\n" m_Color
+				--format "Diffuse Color: %\n" m_Color
 				
 				if mat.bumpMapEnable == true AND classOf(mat.bumpMap) == BitmapTexture then
 				(
@@ -241,7 +241,7 @@ struct SVertexBuffer
 		--format "Writing BV\n"
 		local l_NumVertex = m_VertexList.count 
 		WriteLong file l_NumVertex #unsigned
-		format "Vtx count: %\n" l_NumVertex
+		--format "Vtx count: %\n" l_NumVertex
 		for iVertex in m_VertexList do
 		(
 			iVertex.WriteToFile file
@@ -264,7 +264,7 @@ struct SIndexBuffer
 		--format "Writing IB\n"
 		local l_NumIds = m_IndexList.count
 		WriteLong file l_NumIds #unsigned
-		format "Idx count: %\n" l_NumIds
+		--format "Idx count: %\n" l_NumIds
 		for iIndex in m_IndexList do
 		(
 			WriteLong file iIndex #unsigned
@@ -335,7 +335,7 @@ struct SMesh
 	(
 		--format "Creating submeshes\n"
     	local l_Material = Obj.material
-		format "-->Material: %\n" l_Material
+		--format "-->Material: %\n" l_Material
 		if classof l_Material == Multimaterial then
 		(
 			--format "Saving multimaterial object...\n"
@@ -548,7 +548,7 @@ struct SMesh
 				throw "SplineShape =>" Obj.name
 			)
 			
-			format "Object name: %\n" Obj.name
+			--format "Object name: %\n" Obj.name
 			
 			maxOps.cloneNodes Obj cloneType:#instance newNodes:&newObj #nodialog
 			actualObj = newObj[1]
@@ -596,7 +596,7 @@ struct SMesh
 		)
 		
 		WriteShort file counter #unsigned--Write number of materials
-		format "Submeshes: %\n" counter
+		--format "Submeshes: %\n" counter
 		
 		for iSubMesh in m_SubMeshes do
 		(
@@ -612,7 +612,7 @@ struct SMesh
 	
 		--WriteShort file 0xff55 #unsigned
 		WriteShort file 0xff56 #unsigned
-		format "Footer writed!\n"
+		--format "Footer writed!\n"
 	)
 )
 

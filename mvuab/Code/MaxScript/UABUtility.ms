@@ -118,6 +118,8 @@ utility UABUtility "UAB Utility" width:170 height:761
 		local rootDir = PathLabel.text
 		local l_DirToXML = rootDir + "\\" +LevelList.selected
 		
+		DoesFolderExist l_DirToXML
+		
 		CinematicsDir = l_DirToXML + "\\cinematics.xml"
 		nFrames = 1
 		

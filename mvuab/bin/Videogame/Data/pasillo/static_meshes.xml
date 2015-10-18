@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="doorUpper002_pasillo" filename="meshes\doorUpper002.mesh" />
-  <static_mesh name="doorLower002_pasillo" filename="meshes\doorLower002.mesh" />
   <static_mesh name="leftwall2_pasillo" filename="meshes\leftwall2.mesh" />
   <static_mesh name="arch_1_pasillo" filename="meshes\arch_1.mesh" />
   <static_mesh name="Floor_pasillo" filename="meshes\Floor.mesh" />
