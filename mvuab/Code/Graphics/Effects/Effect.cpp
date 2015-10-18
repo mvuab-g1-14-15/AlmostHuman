@@ -239,6 +239,7 @@ bool CEffect::SetLights( size_t NumOfLights )
 
     if ( l_pCurrentLight != NULL )
     {
+      m_LightsEnabled[i] = (BOOL) l_pCurrentLight->IsVisible() ? 0 : 1;
       CLight::ELightType l_LightType = l_pCurrentLight->GetType();
       m_LightsType[i] = static_cast<int>( l_LightType );
       m_LightsStartRangeAttenuation[i] = l_pCurrentLight->GetStartRangeAttenuation();

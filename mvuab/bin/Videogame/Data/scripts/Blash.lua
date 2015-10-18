@@ -26,7 +26,7 @@ function CBlash:End()
 end
 
 function CBlash:Update()
-	engine:Trace("Blash update ")
+	--engine:Trace("Blash update ")
 	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
 		engine:Trace("Blash update inside")
 		if countdowntimer_manager:isTimerFinish("BlashTTL") then
