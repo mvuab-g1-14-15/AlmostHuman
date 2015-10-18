@@ -68,7 +68,6 @@ function CBoss:Update()
 		elseif self.TargetPos == self.FarPos then
 			self.TargetPos = self.MediumPos
 		end
-		engine:Trace( "Next position is "..self.TargetPos:ToString() )
 	end
 	
 	local lROPos = self:GetPosition()

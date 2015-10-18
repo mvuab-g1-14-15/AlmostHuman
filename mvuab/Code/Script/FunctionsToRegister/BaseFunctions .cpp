@@ -22,6 +22,8 @@
 #include "Timer\CounTDownTimerManager.h"
 #include "Math/LerpAnimator1D.h"
 
+#include "Utils/DebugHelper.h"
+
 #include "XML\XMLTreeNode.h"
 
 #include <sstream>
@@ -359,5 +361,14 @@ void registerBase( lua_State* m_LS )
       .def( constructor<>() )
       .def( "SetValues", &Math::CLerpAnimator1D::SetValues )
       .def( "Value", &Math::CLerpAnimator1D::Value )
+      .def( "IsFinish", &Math::CLerpAnimator1D::IsFinish )
   ];
+
+    module( m_LS )
+    [
+        class_<CDebugHelper>("CDebugHelper")
+        .def( constructor<>() )
+        .def( "Set", &CDebugHelper::Set )
+        .def( "Update", &CDebugHelper::Update )
+    ];
 }

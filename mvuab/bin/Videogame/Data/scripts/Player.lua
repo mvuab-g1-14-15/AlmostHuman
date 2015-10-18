@@ -38,6 +38,8 @@ function CPlayer:__init()
 	self.Animation = "idle"
 	
 	self.Life = 100.0
+	
+	self.Room = "sala1"
 end
 
 function CPlayer:Update()
@@ -54,11 +56,11 @@ function CPlayer:Update()
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
 	if self.Animation == "cinematica_inicial_sala1_pos00" then
-		engine:Trace("He entrado en el update sala1")
-		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi)
+		--engine:Trace("He entrado en el update sala1")
+		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw())
 	else
 		--engine:Trace("He entrado en el update malo sala1")
-		--self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
 	end
 	
 	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
@@ -101,9 +103,14 @@ function CPlayer:Update()
 		FunctionGameOver()
 		self.PlayerController:SetPosition(Respawn())
 		self.Life= 100.0
+		enemy_manager:Reinit(self.Room)
 	end
 	
 	self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+end
+
+function CPlayer:SetRoom( aName )
+	self.Room = aName
 end
 
 function CPlayer:SetAnimation( aName )

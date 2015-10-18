@@ -23,6 +23,8 @@ public:
     void        SetDegree            (uint32 degree) { m_uDegree = degree;}
     bool        Update                (float32 ElapsedTime, float32 &value);
     void        Pause                    (bool flag) {m_bPause = flag;}
+
+    bool        IsFinish();
     
 private:
     ETypeFunction    m_eFunction;

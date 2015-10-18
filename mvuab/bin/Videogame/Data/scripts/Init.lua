@@ -36,12 +36,12 @@ function load_gameplay()
 		g_HUD = CHUD()
 	end
 	if enemy_manager == nil then
-		enemy_manager = CEnemyManagerLUA()	
+		enemy_manager = CEnemyManager()	
 	end
 	
 	enemy_manager:CreateBoss()
 	
-	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
+	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(58.33, -18.0, 5.0))
 
 	--sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
@@ -72,6 +72,8 @@ function update_gameplay()
 		load_gameplay()
 		initialized1 = true
 	end
+	
+	debug_helper:Update()
 
 	enemy_manager:Update()
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
@@ -84,7 +86,6 @@ function update_gameplay()
 			g_Player:Update()
 			g_HUD:Update()
 		end
-		
 	end
 	
 	if g_PauseGame then

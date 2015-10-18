@@ -6,6 +6,23 @@ function ChangeRoom()
 	if g_ActualRoom > #g_Rooms then
 		g_ActualRoom = 1
 	end
+	
+	if g_ActualRoom == 1 then
+		g_Player:SetRoom("sala1")
+	end
+	if g_ActualRoom == 2 then
+		g_Player:SetRoom("sala2")
+	end
+	if g_ActualRoom == 3 then
+		g_Player:SetRoom("pasillo")
+	end
+	if g_ActualRoom == 4 then
+		g_Player:SetRoom("sala3")
+	end
+	if g_ActualRoom == 5 then
+		g_Player:SetRoom("sala4")
+	end
+	
 	sound_manager:PlayEvent("Open_Close_Door_Event","TestGameObject3d")
 	return g_Rooms[g_ActualRoom]
 end

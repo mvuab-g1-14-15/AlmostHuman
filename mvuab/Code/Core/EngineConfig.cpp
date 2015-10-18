@@ -112,11 +112,11 @@ CEngineConfig::EOutputMode CEngineConfig::GetTraceOutputMode()
 
 bool CEngineConfig::GetEnableConsole()
 {
-    #ifdef _DEBUG
+    //#ifdef _DEBUG
     return m_EnableConsole;
-    #else
-    return false;
-    #endif
+    //#else
+    //return false;
+    //#endif
 }
 
 void CEngineConfig::SetEnableConsole( bool a_EnableConsole )

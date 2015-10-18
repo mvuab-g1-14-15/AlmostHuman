@@ -93,7 +93,7 @@
 
 #define _USING_MESH_FOR_PHYSX
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 
 #define ASSERT(expr, msg, ... ) \
     {\
@@ -111,17 +111,17 @@
 #define STATIC_LOG_ERROR_APPLICATION( x, ...  )         CLogger::GetSingletonPtr()->AddNewLog( eLogWarning, "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
 #define STATIC_LOG_WARNING_APPLICATION( x, ...  )       CLogger::GetSingletonPtr()->AddNewLog( eLogError,   "static_method", __FILE__, __LINE__, x, __VA_ARGS__ )
 
-#else
-
-#define ASSERT(expr, msg, ... ){}
-#define LOG_ERROR_APPLICATION( x, ... ){}
-#define LOG_WARNING_APPLICATION( x, ...  ){}
-#define LOG_INFO_APPLICATION( x, ...  ){}
-#define STATIC_LOG_INFO_APPLICATION( x, ...  ){}
-#define STATIC_LOG_ERROR_APPLICATION( x, ...  ){}
-#define STATIC_LOG_WARNING_APPLICATION( x, ...  ){}
-
-#endif
+//#else
+//
+//#define ASSERT(expr, msg, ... ){}
+//#define LOG_ERROR_APPLICATION( x, ... ){}
+//#define LOG_WARNING_APPLICATION( x, ...  ){}
+//#define LOG_INFO_APPLICATION( x, ...  ){}
+//#define STATIC_LOG_INFO_APPLICATION( x, ...  ){}
+//#define STATIC_LOG_ERROR_APPLICATION( x, ...  ){}
+//#define STATIC_LOG_WARNING_APPLICATION( x, ...  ){}
+//
+//#endif
 
 #define FATAL_ERROR( msg, ... ) \
     {\

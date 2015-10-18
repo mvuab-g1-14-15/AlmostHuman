@@ -3,8 +3,9 @@
 	<skeleton file="drone.csf"/>
 	<mesh file="drone.cmf"/>
 	<animation name="idle" file="idle.caf"/>
-	<animation name="atacar" file="shoot.caf"/>
+	<animation name="walk" file="idle.caf"/>
+	<animation name="shoot" file="shoot.caf"/>
 	<animation name="pose_atac" file="pose_atac.caf"/>
-	<animation name="morir" file="death.caf"/>
+	<animation name="death" file="death.caf"/>
 	<animation name="hurt" file="hurt.caf"/>
 </animated_model>

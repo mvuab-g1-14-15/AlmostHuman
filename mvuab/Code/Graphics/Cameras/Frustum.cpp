@@ -105,6 +105,11 @@ bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float32 radius) const
     return true;
 }
 
+bool CFrustum::SphereIsVisible(const Math::Vect3f &center,float32 radius) const
+{
+    return SphereVisible( D3DXVECTOR3(center.u), radius);
+}
+
 bool CFrustum::BoxVisibleByVertexs( const Math::Vect3f* points) const
 {
 	// RETURN TRUE FOR DEBUG!

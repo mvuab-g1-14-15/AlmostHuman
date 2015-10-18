@@ -22,6 +22,7 @@ light_manager = GetLightManager()
 texture_manager = GetTextureManager()
 trigger_manager = GetTriggerManager()
 engine_manager = CEngineManagers.GetSingletonPtr()
+debug_helper = CDebugHelper()
 
 -- Global Variables
 g_CameraSensibility = 30.0
@@ -64,7 +65,7 @@ function GetAngleEnemyPlayer(enemy)
 	l_DistanceVector.y = 0.0
 	l_DistanceVector:Normalize()
 	
-	local l_EnemyDir = enemy:GetDirectionEnemy()
+	local l_EnemyDir = enemy:GetDirection()
 	l_EnemyDir.y = 0.0
 	l_EnemyDir:Normalize()
 	

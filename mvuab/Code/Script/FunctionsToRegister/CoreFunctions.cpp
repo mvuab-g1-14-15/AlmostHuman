@@ -145,6 +145,7 @@ void registerEngine( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CEngine, SetPlay )
   LUA_DECLARE_METHOD( CEngine, QuitGame )
   LUA_DECLARE_METHOD( CEngine, Trace )
+  LUA_DECLARE_METHOD( CEngine, TraceOnce )
   LUA_BEGIN_SCOPE
   LUA_DECLARE_METHOD_SCOPE( CEngine, GetSingletonPtr )
   LUA_END_SCOPE

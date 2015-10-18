@@ -171,6 +171,7 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CCameraManager, NewCamera )
   LUA_DECLARE_METHOD( CCameraManager, DeleteCamera )
   LUA_END_DECLARATION
+
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // CAMERA
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,7 +195,16 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CCamera, AddYaw )
   LUA_DECLARE_METHOD( CCamera, AddPitch )
   LUA_DECLARE_METHOD( CCamera, SetFovInRadians )
+  LUA_DECLARE_METHOD( CCamera, GetFrustum )
   LUA_DECLARE_METHOD_PROTO( CCamera, UpdateFrustum, void( CCamera::* )( void ) )
+  LUA_END_DECLARATION
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // FRUSTUM
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CFrustum )
+  LUA_DECLARE_METHOD( CFrustum, SphereIsVisible )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

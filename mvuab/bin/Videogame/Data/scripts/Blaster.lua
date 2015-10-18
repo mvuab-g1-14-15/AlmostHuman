@@ -1,5 +1,4 @@
 dofile("./data/scripts/Blash.lua")
-
 class 'CBlaster'
 
 function CBlaster:__init()
@@ -44,11 +43,11 @@ function CBlaster:Shoot()
 	table.insert(self.Shoots, lShoot)
 	
 	local lEnemies = enemy_manager:GetEnemiesAtDistance( 5.0 )
+	local lPlayerPos = g_Player:GetPosition()
 	for i = 1, #lEnemies do
 		lEnemy = lEnemies[i]
-		lEnemy.Suspected = true
-		lEnemy.SuspectedPosition = g_Player:GetPosition()
-		lEnemy:ChangeState("perseguir")
+		lEnemy:SetSuspected(true)
+		lEnemy:SetSuspectedPosition(lPlayerPos)
 	end
 	
 	self.Blash:Begin(lPosition)
@@ -124,6 +123,7 @@ function CBlaster:Update()
 				if self.TimePressed < (self.MaxTimePressed * 0.1) then
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
+					
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)

@@ -222,6 +222,9 @@
     <ClInclude Include="Utils\ConditionVarible.h" />
     <ClInclude Include="Utils\Mutex.h" />
     <ClInclude Include="Utils\RWLock.h" />
+    <ClInclude Include="Utils\DebugHelper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\MathUtils.inl">

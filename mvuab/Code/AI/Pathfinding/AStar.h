@@ -14,7 +14,7 @@ public:
   ~CAStar();
 
   void Init();
-  void Render();
+  void SetRender();
 
   CGraph* m_Graph;
   std::string mRoomName;
