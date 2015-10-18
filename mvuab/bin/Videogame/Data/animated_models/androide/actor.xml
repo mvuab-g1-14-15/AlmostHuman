@@ -3,11 +3,10 @@
 	<skeleton file="androide.csf"/>
 	<mesh file="androide.cmf"/>
 	<animation name="idle" file="idle.caf"/>
-	<animation name="andando" file="walk.caf"/>
-	<animation name="atacar" file="shoot.caf"/>
-	<animation name="perseguir" file="walk.caf"/>
-	<animation name="morir" file="death.caf"/>
-	<animation name="activacion" file="activacion.caf"/>
+	<animation name="walk" file="walk.caf"/>
+	<animation name="shoot" file="shoot.caf"/>
+	<animation name="death" file="death.caf"/>
+	<animation name="activation" file="activacion.caf"/>
 	<animation name="hurt" file="hurt.caf"/>
-	<animation name="idle_to_atac" file="idle_to_atac.caf"/>
+	<animation name="idle_to_shoot" file="idle_to_atac.caf"/>
 </animated_model>

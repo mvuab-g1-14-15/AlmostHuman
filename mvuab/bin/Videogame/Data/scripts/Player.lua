@@ -38,6 +38,8 @@ function CPlayer:__init()
 	self.Animation = "idle"
 	
 	self.Life = 100.0
+	
+	self.Room = "sala1"
 end
 
 function CPlayer:Update()
@@ -101,9 +103,14 @@ function CPlayer:Update()
 		FunctionGameOver()
 		self.PlayerController:SetPosition(Respawn())
 		self.Life= 100.0
+		enemy_manager:Reinit(self.Room)
 	end
 	
 	self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+end
+
+function CPlayer:SetRoom( aName )
+	self.Room = aName
 end
 
 function CPlayer:SetAnimation( aName )

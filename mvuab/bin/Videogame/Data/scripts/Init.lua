@@ -86,7 +86,6 @@ function update_gameplay()
 			g_Player:Update()
 			g_HUD:Update()
 		end
-		
 	end
 	
 	if g_PauseGame then

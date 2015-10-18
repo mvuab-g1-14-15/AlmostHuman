@@ -2,19 +2,29 @@ class "CEnemyManager"
 
 function CEnemyManager:__init()
 	self.Enemy = {}
+	self.Enemy.sala2 = {}
+	self.Enemy.pasillo = {}
+	self.Enemy.sala3 = {}
+	self.Enemy.sala4 = {}
+	
 	self.Shoots = {}
 	
 	self.AStar = {}
 	self.AStar.sala2 = CAStar( "sala2" )
 	self.AStar.sala3 = CAStar( "sala3" )
 	
-	self.AStar.sala2:SetRender()
-	self.AStar.sala3:SetRender()
+	--self.AStar.sala2:SetRender()
+	--self.AStar.sala3:SetRender()
 	
+	self:CreateEnemiesSala2()
+	self:CreateEnemiesPasillo()
+end
+
+function CEnemyManager:CreateEnemiesSala2()
 	local lInfo = {}
 	
 	-- Patrol 1
-	lInfo.name = "Enemy1"
+	lInfo.name = "Enemy1_S2"
 	lInfo.life = 100.0
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
@@ -37,10 +47,10 @@ function CEnemyManager:__init()
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
-	self.Enemy[lInfo.name] = CEnemy(lInfo)
+	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
-	lInfo.name = "Enemy2"
+	lInfo.name = "Enemy2_S2"
 	lInfo.life = 100.0
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
@@ -64,10 +74,14 @@ function CEnemyManager:__init()
 	lInfo.can_see = false
 	lInfo.fly = false
 	lInfo.can_use_graph = true
-	self.Enemy[lInfo.name] = CEnemy(lInfo)
+	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+end
+
+function CEnemyManager:CreateEnemiesPasillo()
+	local lInfo = {}
 	
 	-- Drone 1
-	lInfo.name = "Drone1"
+	lInfo.name = "Drone1_P"
 	lInfo.life = 50.0
 	lInfo.damage = 2.0
 	lInfo.radius = 0.5
@@ -88,27 +102,48 @@ function CEnemyManager:__init()
 	lInfo.can_see = true
 	lInfo.fly = true
 	lInfo.can_use_graph = false
-	self.Enemy[lInfo.name] = CEnemy(lInfo)
+	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+end
+
+function CEnemyManager:Reinit( aRoom )
+	for i in pairs (self.Enemy[aRoom]) do
+		self.Enemy[aRoom][i]:Destroy()
+	end
+	
+	for k in pairs (self.Shoots) do
+		self.Shoots[k]:Destroy()
+		table.remove(self.Shoots, k)
+	end
+	collectgarbage()
+		
+	if aRoom == "sala2" then
+		self:CreateEnemiesSala2()
+	end
+	if aRoom == "pasillo" then
+		self:CreateEnemiesPasillo()
+	end
 end
 
 function CEnemyManager:Update()
-	for i in pairs (self.Enemy) do
-		if self.Enemy[i] ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así
-			self.ActualEnemy = self.Enemy[i]			
-			if self.ActualEnemy:GetLife() > 0 then
-				self.ActualEnemy:Update()
-			else
-				if not countdowntimer_manager:ExistTimer(self.ActualEnemy:GetName().."DeadTimer") then
-					countdowntimer_manager:AddTimer(self.ActualEnemy:GetName().."DeadTimer", 10.0, false)
-				end
-			
-				if countdowntimer_manager:isTimerFinish(self.ActualEnemy:GetName().."DeadTimer") then				
-					countdowntimer_manager:Reset(self.ActualEnemy:GetName().."DeadTimer", false)
-					
-					self.ActualEnemy:Destroy()
-					self.Enemy[i] = nil
-					--table.remove(self.Enemy, i)
-					collectgarbage()
+	for lRoom in pairs (self.Enemy) do
+		for i in pairs(self.Enemy[lRoom]) do
+			lActualEnemy = self.Enemy[lRoom][i]
+			if lActualEnemy ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así			
+				if lActualEnemy:GetLife() > 0 then
+					lActualEnemy:Update()
+				else
+					if not countdowntimer_manager:ExistTimer(lActualEnemy:GetName().."DeadTimer") then
+						countdowntimer_manager:AddTimer(lActualEnemy:GetName().."DeadTimer", 10.0, false)
+					end
+				
+					if countdowntimer_manager:isTimerFinish(lActualEnemy:GetName().."DeadTimer") then				
+						countdowntimer_manager:Reset(lActualEnemy:GetName().."DeadTimer", false)
+						
+						lActualEnemy:Destroy()
+						self.Enemy[lRoom][i] = nil
+						--table.remove(self.Enemy[lRoom], i)
+						collectgarbage()
+					end
 				end
 			end
 		end
@@ -118,12 +153,16 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 	end
 	
+	local lGarbage = false
 	for k in pairs (self.Shoots) do
 		if self.Shoots[k]:GetImpacted() then
 			self.Shoots[k]:Destroy()
 			table.remove(self.Shoots, k)
-			collectgarbage()
+			lGarbage = true
 		end
+	end
+	if lGarbage then
+		collectgarbage()
 	end
 	
 	for k in pairs (self.Shoots) do
@@ -141,13 +180,15 @@ function CEnemyManager:GetCloseEnemy(aPos)
 	lEnemy = nil
 	lActualEnemy = 0
 
-	for i in pairs (self.Enemy) do
-		lActualEnemy = self.Enemy[i]
-		lActualDist = lActualEnemy:GetPosition():Distance( aPos )
+	for lRoom in pairs (self.Enemy) do
+		for i in pairs(self.Enemy[lRoom]) do
+			lActualEnemy = self.Enemy[lRoom][i]
+			lActualDist = lActualEnemy:GetPosition():Distance( aPos )
 
-		if ( lActualDist < lDist ) then
-		  lDist = lActualDist
-		  lEnemy = lActualEnemy
+			if ( lActualDist < lDist ) then
+			  lDist = lActualDist
+			  lEnemy = lActualEnemy
+			end
 		end
 	end
 
@@ -157,12 +198,15 @@ end
 function CEnemyManager:GetEnemiesAtDistance( aDist )
 	lEnemyList = {}
 	local PlayerPos = g_Player:GetPosition()
-	for i in pairs (self.Enemy) do
-		if self.Enemy[i] ~= nil then
-			local EnemyPos = self.Enemy[i]:GetPosition()
-			local Dist = PlayerPos:Distance(EnemyPos)
-			if Dist <= aDist then
-				table.insert(lEnemyList, self.Enemy[i])
+	for lRoom in pairs (self.Enemy) do
+		for i in pairs(self.Enemy[lRoom]) do
+			lActualEnemy = self.Enemy[lRoom][i]
+			if lActualEnemy ~= nil then
+				local EnemyPos = lActualEnemy:GetPosition()
+				local Dist = PlayerPos:Distance(EnemyPos)
+				if Dist <= aDist then
+					table.insert(lEnemyList, lActualEnemy)
+				end
 			end
 		end
 	end
@@ -175,14 +219,16 @@ function CEnemyManager:GetCloseEnemyNotSelf(aPos, aName)
 	lEnemy = nil
 	lActualEnemy = 0
 
-	for i in pairs (self.Enemy) do
-		lActualEnemy = self.Enemy[i]
-		if lActualEnemy:GetName() ~= aName then
-			lActualDist = lActualEnemy:GetPosition():Distance( aPos )
+	for lRoom in pairs (self.Enemy) do
+		for i in pairs(self.Enemy[lRoom]) do
+			lActualEnemy = self.Enemy[lRoom][i]
+			if lActualEnemy:GetName() ~= aName then
+				lActualDist = lActualEnemy:GetPosition():Distance( aPos )
 
-			if ( lActualDist < lDist ) then
-				lDist = lActualDist
-				lEnemy = lActualEnemy
+				if ( lActualDist < lDist ) then
+					lDist = lActualDist
+					lEnemy = lActualEnemy
+				end
 			end
 		end
 	end
@@ -191,12 +237,19 @@ function CEnemyManager:GetCloseEnemyNotSelf(aPos, aName)
 end
 
 function CEnemyManager:GetEnemy( aName )
-	return self.Enemy[aName]
+	for lRoom in pairs (self.Enemy) do
+		if self.Enemy[lRoom][aName] ~= nil then
+			return self.Enemy[lRoom][aName]
+		end
+	end
 end
 
-function CEnemyManager:AddDamage(name, amount)
-	lEnemy = self.Enemy[name]
-	lEnemy:AddDamage(amount)
+function CEnemyManager:AddDamage(aName, aAmount)
+	for lRoom in pairs (self.Enemy) do
+		if self.Enemy[lRoom][aName] ~= nil then
+			self.Enemy[lRoom][aName]:AddDamage(aAmount)
+		end
+	end
 end
 
 function CEnemyManager:GetAStar( aRoomName )

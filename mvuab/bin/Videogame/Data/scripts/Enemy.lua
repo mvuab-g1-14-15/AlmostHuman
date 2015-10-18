@@ -94,6 +94,8 @@ function CEnemy:__init( aInfo )
 	
 	self.Fly = aInfo.fly
 	self.InitHeight = self.TargetPos.y
+	
+	self.CurrentAnimation = "idle"
 end
 
 function CEnemy:Destroy()
@@ -123,6 +125,7 @@ function CEnemy:Update()
 		if lDist < self.ChaseDistance then
 			self.DontMove = true
 			if self:RotateToPos(g_Player:GetPosition()) then
+				self:ChangeAnimation("shoot", 0.5, 1.0)
 				local lDir = GetPlayerDirection(self:GetPosition())
 		
 				self.CountTimeShoot = self.CountTimeShoot + dt
@@ -282,6 +285,7 @@ function CEnemy:MoveToPos( aPos )
 		
 		local lRealTargetPos = self.Path:GetResource(self.ActualPathPoint)
 		if not self:IsInPos( lRealTargetPos ) then
+			self:ChangeAnimation("walk", 0.5, 1.0)
 			if self:RotateToPos( lRealTargetPos ) then
 				local DirVector = self:GetDirVectorNormalized2D( lRealTargetPos )
 				self.CharacterController:Move(DirVector * self.Speed, dt)
@@ -306,6 +310,7 @@ function CEnemy:MoveToPos( aPos )
 	end
 	
 	if not self:IsInPos( aPos ) then
+		self:ChangeAnimation("walk", 0.5, 1.0)
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
 			self.CharacterController:Move(DirVector * self.Speed, dt)
@@ -403,8 +408,8 @@ function CEnemy:GetSuspectedPosition()
 	return self.SuspectedPosition
 end
 
-function CEnemy:AddDamage(amount)
-	self.Life = self.Life - amount
+function CEnemy:AddDamage( aAmount )
+	self.Life = self.Life - aAmount
 end
 
 function CEnemy:GetYaw()
@@ -433,6 +438,11 @@ function CEnemy:MakeShoot(aDirection)
 	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
 	enemy_manager:AddShoot(lShoot)
 	--Play shoot enemy sound
+end
+
+function CEnemy:ChangeAnimation(animation, delayin, delayout)
+	self.CurrentAnimation = animation
+	self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
 end
 
 --class "CEnemyLUA"
