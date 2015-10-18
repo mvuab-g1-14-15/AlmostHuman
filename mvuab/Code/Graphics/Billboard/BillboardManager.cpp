@@ -128,3 +128,17 @@ void CBillboardManager::DestroyBillBoardGeometry()
 {
   CHECKED_DELETE(sRV);
 }
+
+CBillboardInstance* CBillboardManager::CreateInstance( const std::string& aCoreName, const Math::Vect3f& aPosition, bool aActive )
+{
+  CBillboardInstance* lInstance = NULL;
+  CBillboardCore* lCore = GetResource(aCoreName);
+  if( lCore )
+  {
+    lInstance = new CBillboardInstance();
+    lInstance->ChangePosition( aPosition );
+    lInstance->ChangeVisibility( aActive );
+  }
+
+  return lInstance;
+}

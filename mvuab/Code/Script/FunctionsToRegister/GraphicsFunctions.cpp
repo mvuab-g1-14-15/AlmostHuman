@@ -15,6 +15,7 @@
 #include "Object3D.h"
 
 #include "Billboard\BillboardInstance.h"
+#include "Billboard\BillboardCore.h"
 #include "Billboard\BillboardManager.h"
 
 #include "Cameras/CameraManager.h"
@@ -96,11 +97,19 @@ void registerBillboards( lua_State* aLuaState )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS( CBillboardCore, CName )
+  LUA_DECLARE_METHOD( CBillboardCore, AddInstance )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CBillboardCore> )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CBillboardCore>, GetResource )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CBillboardCore>, Exist )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS2( CBillboardManager, CManager, CTemplatedVectorMapManager<CBillboardCore> )
+  LUA_DECLARE_METHOD( CBillboardManager, CreateInstance )
   LUA_END_DECLARATION
 }
 
@@ -234,6 +243,8 @@ void registerObject3D( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CObject3D, GetScale )
   LUA_DECLARE_METHOD( CObject3D, GetDirection )
   LUA_DECLARE_METHOD( CObject3D, SetDirection )
+  LUA_DECLARE_METHOD( CObject3D, IsVisible )
+  LUA_DECLARE_METHOD( CObject3D, ChangeVisibility )
   LUA_END_DECLARATION
 }
 
