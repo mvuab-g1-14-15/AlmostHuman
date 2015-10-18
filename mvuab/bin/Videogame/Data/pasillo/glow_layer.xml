@@ -4,8 +4,6 @@
   <MeshInstance name="Lights_2_glow_pasillo" core="Lights_2_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lights_3_glow_pasillo" core="Lights_3_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lights_4_glow_pasillo" core="Lights_4_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lights_red_wall_001_pasillo" core="Lights_red_wall_001_pasillo" pos="50.3634 -17.7021 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="lights_red_wall02_pasillo" core="lights_red_wall02_pasillo" pos="50.3633 -17.7021 23.1089" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="lights_white_door_pasillo" core="lights_white_door_pasillo" pos="54.886 -15.4267 39.806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="lights_roof_pasillo" core="lights_roof_pasillo" pos="54.6263 -18.1912 -24.4116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="light_red_roof_glow_pasillo" core="light_red_roof_glow_pasillo" pos="54.6263 -18.1912 -24.4116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="lights_white_door002_glow_pasillo" core="lights_white_door002_glow_pasillo" pos="54.886 -15.4267 37.7638" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>
