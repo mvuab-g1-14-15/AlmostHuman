@@ -54,7 +54,7 @@ float       g_PercentageTexture1                                                
 float       g_PercentageTexture2                                                  : PercentageTexture2;
 
 float       g_Size                                                  : Size;
-int         g_Angle                                                 : Angle;
+float       g_Angle                                                 : Angle;
 float       g_Alpha                                                 : Alpha;
 float3      g_Color                                                 : Color;
 float3      g_Direction                                             : Direction;

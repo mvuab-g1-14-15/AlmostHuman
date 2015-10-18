@@ -93,8 +93,8 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
   Math::Vect3f lSide = p_cam->GetVecUp().CrossProduct( p_cam->GetDirection() ).Normalize();
   mInstance = new CBillboardInstance();
   mInstance->ChangePosition( aPosition + lSide * 0.23f );
-  mInstance->SetActive( true );
-  lCore->AddInstance(mInstance);
+  //mInstance->ChangeVisibility( true );
+  //lCore->AddInstance(mInstance);
 
   mShoot->SetYaw( -lYaw );
   mShoot->SetPitch(lPitch);
@@ -114,7 +114,7 @@ CShoot::CShoot( float aSpeed, Math::Vect3f aDirection, Math::Vect3f aPosition, f
 CShoot::~CShoot()
 {
   LightMInstance->RemoveResource( GetName() );
-  mInstance->SetActive(false);
+  //mInstance->ChangeVisibility(false);
 
   SceneInstance->GetResource("core")->GetLayer("solid")->RemoveResource(GetName());
   SceneInstance->GetResource("core")->GetLayer("glow")->RemoveResource(GetName());

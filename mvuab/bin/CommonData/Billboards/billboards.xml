@@ -1,5 +1,5 @@
 <billboards>
-	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="true" flip_uv_vertical="true">
+	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true">
 		<texture filename="../CommonData/textures/Billboards/target.png" stage_id="0"/>
 	</billboard>
 	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true">
@@ -15,7 +15,7 @@
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha02.png" stage_id="2"/>
 	</billboard>
-	<billboard name="blash" technique="BillboardAlignedToCameraTechnique" alpha="0.2" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true">
-		<texture filename="../CommonData/textures/PS/blash02.png" stage_id="0"/>
+	<billboard name="blash" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
+		<texture filename="../CommonData/textures/PS/blash03.jpg" stage_id="0"/>
 	</billboard>
 </billboards>

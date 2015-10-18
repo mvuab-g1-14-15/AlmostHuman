@@ -16,10 +16,16 @@ TT1_VERTEX_PS mainBillboardVS(TT1_VERTEX_VS IN)
 		upVector 			= float3(0,1,0);
 	#endif
 
-	position 			= (IN.Position.x*rightVector+IN.Position.z*upVector) * g_Size;
-
-#endif
+	float sn = sin(g_Angle);
+	float cs = cos(g_Angle);
+		
+	float3 vUpNew    = cs * rightVector - sn * upVector;
+	float3 vRightNew = sn * rightVector + cs * upVector;
+	position = ( ( IN.Position.x * vRightNew  )+ (IN.Position.z*vUpNew)) * g_Size;
 	
+	
+#endif
+
 	TT1_VERTEX_PS OUT=(TT1_VERTEX_PS)0;
 	OUT.Position		= mul( float4( position.xyz, 1), g_WorldViewProj);
 	OUT.WorldPosition	= OUT.Position;
@@ -34,20 +40,21 @@ TT1_VERTEX_PS mainBillboardVS(TT1_VERTEX_VS IN)
 }
 float4 mainBillboardPS(TT1_VERTEX_PS IN) : COLOR
 {
-	float4 l_Color=tex2D(S0PointSampler, IN.UV);
-	return float4(l_Color.xyz*l_Color.a, l_Color.a*g_Alpha);//float4(1, 0, 0, 1);
+	float4 l_Color=tex2D(S0LinearSampler, IN.UV);
+	float lAlpha = l_Color.a * g_Alpha;
+	return float4(l_Color.xyz*lAlpha, lAlpha);
 }
 
 technique TECHNIQUE_NAME
 {
 	pass p0
 	{
-#if defined(ONEONEADD)
+	    CullMode = NONE; // NONE - CW
 		AlphaBlendEnable = true;
 		BlendOp=Add;
 		SrcBlend = one;
 		DestBlend = one;
-#endif
+
 		VertexShader = compile vs_3_0 mainBillboardVS();
 		PixelShader = compile ps_3_0 mainBillboardPS();
 	}

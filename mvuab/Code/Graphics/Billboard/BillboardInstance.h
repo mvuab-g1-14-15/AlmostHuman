@@ -24,19 +24,13 @@ class CBillboardInstance : public CName, public CObject3D
 
         bool Init(const CXMLTreeNode& atts);
         void ChangePosition( const Math::Vect3f& aPosition );
-        void SetActive( bool aActive );
+        void SetAngle( float aAngle ) { mAngle = aAngle; }
 
         void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, CEffectTechnique* aTechnique );
         void Update();
 
     private:
-        bool                mActive;
+      float mAngle;
 };
-
-//--------------------------------------------------------------------------------------------------------------
-inline void CBillboardInstance::SetActive( bool aActive )
-{
-    mActive = aActive;
-}
 
 #endif //_BillboardInstance_H

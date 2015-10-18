@@ -138,6 +138,7 @@ CBillboardInstance* CBillboardManager::CreateInstance( const std::string& aCoreN
     lInstance = new CBillboardInstance();
     lInstance->ChangePosition( aPosition );
     lInstance->ChangeVisibility( aActive );
+    lCore->AddInstance( lInstance );
   }
 
   return lInstance;

@@ -17,6 +17,7 @@
 CBillboardInstance::CBillboardInstance()
     : CName()
     , CObject3D()
+    , mAngle( 0.1f )
 {
 }
 
@@ -42,6 +43,7 @@ void CBillboardInstance::Render(CRenderableVertexs* aRV,CGraphicsManager* aGM, C
 {
     if ( mIsVisible )
     {
+        aTechnique->GetEffect()->SetAngle( mAngle );
         aGM->SetTransform( GetTransform() );
         aRV->Render( aGM, aTechnique );
         aGM->SetTransform( Math::Mat44f() );

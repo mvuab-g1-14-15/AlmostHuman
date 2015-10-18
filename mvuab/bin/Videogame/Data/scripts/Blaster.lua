@@ -1,3 +1,4 @@
+dofile("./data/scripts/Blash.lua")
 class 'CBlaster'
 
 function CBlaster:__init()
@@ -19,6 +20,8 @@ function CBlaster:__init()
 	self.IsShooting = false
 	FinishShooting = false
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
+	
+	self.Blash = CBlash()
 	
     --engine:Trace("Blaster initialized")
 end
@@ -46,6 +49,8 @@ function CBlaster:Shoot()
 		lEnemy:SetSuspected(true)
 		lEnemy:SetSuspectedPosition(lPlayerPos)
 	end
+	
+	self.Blash:Begin(lPosition)
 
 --[[ Old code
 	local lEnemy = self:GetEnemyFromRay()
@@ -153,6 +158,8 @@ function CBlaster:Update()
 			end
 		end
 	end
+	
+	self.Blash:Update()
 end
 
 function CBlaster:GetIsShooting()

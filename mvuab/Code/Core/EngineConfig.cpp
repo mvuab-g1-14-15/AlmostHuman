@@ -14,6 +14,7 @@ CEngineConfig::CEngineConfig()
     , m_DataPath( "" )
     , mLoggerOutpuMode( eMVSOutputWindow )
     , mTraceOutpuMode( eConsole )
+    , m_EnableConsole( false )
 {
 }
 
@@ -51,13 +52,13 @@ void CEngineConfig::Load( const std::string& aCfg )
         {
             const std::string& lLoggerMode = lNode.GetAttribute<std::string>("mode", "console");
             mLoggerOutpuMode = ( lLoggerMode == "console") ? eConsole : eMVSOutputWindow;
-            m_EnableConsole = ( lLoggerMode == "console");
+            m_EnableConsole = m_EnableConsole || ( lLoggerMode == "console");
         }
         else if( lTagName == "trace" )
         {
             const std::string& lTraceMode = lNode.GetAttribute<std::string>("mode", "console");
             mTraceOutpuMode = ( lTraceMode == "console") ? eConsole : eMVSOutputWindow;
-            m_EnableConsole = ( lTraceMode == "console");
+            m_EnableConsole = m_EnableConsole || ( lTraceMode == "console");
         }
         else if ( lTagName == "window_properties" )
         {
@@ -112,11 +113,7 @@ CEngineConfig::EOutputMode CEngineConfig::GetTraceOutputMode()
 
 bool CEngineConfig::GetEnableConsole()
 {
-    //#ifdef _DEBUG
     return m_EnableConsole;
-    //#else
-    //return false;
-    //#endif
 }
 
 void CEngineConfig::SetEnableConsole( bool a_EnableConsole )
