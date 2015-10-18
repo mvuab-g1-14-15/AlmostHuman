@@ -1,6 +1,6 @@
-dofile("./data/level2/scripts/Player.lua")
-dofile("./data/level2/scripts/EnemyManager.lua")
-dofile("./data/level2/scripts/Barrel.lua")
+dofile("./data/scripts/Player.lua")
+dofile("./data/scripts/EnemyManager.lua")
+dofile("./data/scripts/Barrel.lua")
 
 g_Player = nil
 g_HUD = nil

@@ -1,4 +1,4 @@
-dofile("./data/level2/scripts/Include.lua")
+dofile("./data/scripts/Include.lua")
 
 class "CPlayerController"
 

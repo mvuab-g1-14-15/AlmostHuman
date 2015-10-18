@@ -1,4 +1,4 @@
-dofile("./data/level2/scripts/Action.lua")
+dofile("./data/scripts/Action.lua")
 
 class 'CStateLUA'
 

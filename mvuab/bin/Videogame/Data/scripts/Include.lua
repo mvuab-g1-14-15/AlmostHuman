@@ -1,4 +1,4 @@
-dofile("./data/level2/scripts/IdManager.lua")
+dofile("./data/scripts/IdManager.lua")
 
 engine = CEngine.GetSingletonPtr()
 action_manager = GetActionManager()

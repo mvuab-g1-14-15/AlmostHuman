@@ -1,7 +1,7 @@
-dofile("./data/level2/scripts/PlayerController.lua")
-dofile("./data/level2/scripts/Blaster.lua")
-dofile("./data/level2/scripts/Grenade.lua")
-dofile("./data/level2/scripts/StealthAttack.lua")
+dofile("./data/scripts/PlayerController.lua")
+dofile("./data/scripts/Blaster.lua")
+dofile("./data/scripts/Grenade.lua")
+dofile("./data/scripts/StealthAttack.lua")
 
 class "CPlayer"
 
@@ -31,8 +31,9 @@ function CPlayer:__init()
 	local l_MeshPosition = self.PlayerController:GetPosition()
 	l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
-	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi);
+	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi);
 	self.RenderableObject:MakeTransform();
+	engine:Trace("He entrado en el init sala1")
 	
 	self.Animation = "idle"
 	
@@ -52,7 +53,14 @@ function CPlayer:Update()
 	
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
-	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+	if self.Animation == "cinematica_inicial_sala1_pos00" then
+		engine:Trace("He entrado en el update sala1")
+		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi)
+	else
+		engine:Trace("He entrado en el update malo sala1")
+		--self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+	end
+	
 	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
