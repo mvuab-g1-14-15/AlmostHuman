@@ -54,11 +54,11 @@ function CPlayer:Update()
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
 	if self.Animation == "cinematica_inicial_sala1_pos00" then
-		engine:Trace("He entrado en el update sala1")
-		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi)
+		--engine:Trace("He entrado en el update sala1")
+		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw())
 	else
-		engine:Trace("He entrado en el update malo sala1")
-		--self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+		--engine:Trace("He entrado en el update malo sala1")
+		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
 	end
 	
 	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())

@@ -17,6 +17,9 @@ function CEnemyManager:__init()
 	lInfo.name = "Enemy1"
 	lInfo.life = 100.0
 	lInfo.damage = 10.0
+	lInfo.radius = 0.4
+	lInfo.height = 2.0
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(56.1998, -16.5334, -52.8975)
 	lInfo.is_patrol = true
 	lInfo.waypoints = { Vect3f(56.1998, -16.5334, -52.8975),
@@ -30,13 +33,19 @@ function CEnemyManager:__init()
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = 0.0
 	lInfo.can_see = true
+	lInfo.fly = false
+	lInfo.can_use_graph = true
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
 	lInfo.name = "Enemy2"
 	lInfo.life = 100.0
 	lInfo.damage = 10.0
+	lInfo.radius = 0.4
+	lInfo.height = 2.0
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(63.044, -16.5334, -86.1066)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
@@ -51,7 +60,34 @@ function CEnemyManager:__init()
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = 0.0
 	lInfo.can_see = false
+	lInfo.fly = false
+	lInfo.can_use_graph = true
+	self.Enemy[lInfo.name] = CEnemy(lInfo)
+	
+	-- Drone 1
+	lInfo.name = "Drone1"
+	lInfo.life = 50.0
+	lInfo.damage = 2.0
+	lInfo.radius = 0.5
+	lInfo.height = 0.5
+	lInfo.speed = 2.0
+	lInfo.position = Vect3f(54.0, -13.68, 6.31)
+	lInfo.is_patrol = true
+	lInfo.waypoints = { Vect3f(54.0, -13.68, 12.0),
+						Vect3f(54.0, -13.68, 23.0)}
+	lInfo.mesh = "drone"
+	lInfo.room = "pasillo"
+	lInfo.use_gizmo = true
+	lInfo.on_dead = false
+	lInfo.shoot_speed = 10.0
+	lInfo.time_to_shoot = 5.0
+	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = -g_HalfPi
+	lInfo.can_see = true
+	lInfo.fly = true
+	lInfo.can_use_graph = false
 	self.Enemy[lInfo.name] = CEnemy(lInfo)
 end
 

@@ -6,13 +6,13 @@ function CEnemy:__init( aInfo )
 	
 	self.Damage = aInfo.damage
 	
-	self.Radius = 0.4
-	self.Height = 2.0
+	self.Radius = aInfo.radius
+	self.Height = aInfo.height
 	
 	self.Delta = 1.0
 	self.DeltaRot = 0.01
 	
-	self.Speed = 5.0
+	self.Speed = aInfo.speed
 	self.TimeToRot = 1.0
 	
 	self.Lerp = CLerpAnimator1D()
@@ -58,6 +58,7 @@ function CEnemy:__init( aInfo )
 	self.Path = {}
 	self.ActualPathPoint = 0
 	
+	self.CanUseGraph = aInfo.can_use_graph
 	self.UseGraph = false
 	
 	self.Suspected = false
@@ -74,7 +75,7 @@ function CEnemy:__init( aInfo )
 	if self.Type == "drone" then
 		self.Camera:SetFovInRadians(20.0)
 	end
-	self.PitchCameraMove = 0.0
+	self.CameraPitch = aInfo.camera_pitch
 	self:UpdateCamera()
 	
 	self.ShootSpeed = aInfo.shoot_speed
@@ -90,6 +91,9 @@ function CEnemy:__init( aInfo )
 	self.ChaseDistance = aInfo.chase_distance
 	
 	self.CanSee = aInfo.can_see
+	
+	self.Fly = aInfo.fly
+	self.InitHeight = self.TargetPos.y
 end
 
 function CEnemy:Destroy()
@@ -111,7 +115,7 @@ function CEnemy:Update()
 	
 	local IsPlayerInSight = false
 	if self.CanSee then
-		local IsPlayerInSight = self:PlayerInSight()
+		IsPlayerInSight = self:PlayerInSight()
 	end
 	
 	if IsPlayerInSight then
@@ -145,13 +149,17 @@ function CEnemy:Update()
 				end
 			end
 		else
-			self.Suspected = true
-			self.SuspectedPosition = g_Player:GetPosition()
+			self.DontMove = false
 		end
+		
+		self.Suspected = true
+		self.SuspectedPosition = g_Player:GetPosition()
 	end
 	
 	if self.Suspected then
-		self.UseGraph = true
+		if self.CanUseGraph then
+			self.UseGraph = true
+		end
 		self.TargetPos = self.SuspectedPosition
 	end
 	
@@ -181,6 +189,12 @@ function CEnemy:Update()
 		end
 	end
 	
+	if self.Fly then
+		local lPos = self:GetPosition()
+		lPos.y = self.InitHeight
+		self:SetPosition(lPos)
+	end
+	
 	local lROPos = self:GetPosition()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
@@ -188,6 +202,9 @@ function CEnemy:Update()
 end
 
 function CEnemy:PlayerInSight()
+	if g_Player:GetIsHidden() then
+		return false
+	end
 	return PlayerInSight(self.Camera)
 end
 
@@ -351,6 +368,7 @@ function CEnemy:RotateToPos( aPos )
 		self:SetYaw( TickYaw )
 		return false
 	end
+
 	self.LerpInited = false
 	return true
 end
@@ -404,7 +422,7 @@ function CEnemy:UpdateCamera()
 	lPosition.z = lPosition.z + self:GetDirection().z
 	self.Camera:SetPosition(lPosition)
 	self.Camera:SetYaw( self:GetYaw() )
-	self.Camera:SetPitch( self:GetPitch() )
+	self.Camera:SetPitch( self.CameraPitch )
 	self.Camera:MakeTransform()
 	self.Camera:UpdateFrustum()
 end

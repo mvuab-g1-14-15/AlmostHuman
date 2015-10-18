@@ -41,7 +41,7 @@ function load_gameplay()
 	
 	enemy_manager:CreateBoss()
 	
-	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(76.50, -12.30, -42.30))
+	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(58.33, -18.0, 5.0))
 
 	--sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
