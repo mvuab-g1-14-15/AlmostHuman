@@ -11,7 +11,7 @@
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
 	
-	<Map name="Radar" pos="0 59" width="20" height="36" texture_marco="Data/textures/GUI/marco2.png" texture_map="Data/textures/GUI/mapa.jpg"
+	<Map name="Radar" pos="0 59" width="20" height="36" texture_marco="Data/textures/GUI/MarcoHierro.png" texture_map="Data/textures/GUI/mapa.jpg"
 	 width_map="0.08" height_map="0.045" pos_0_0_3d_map="-2.956 533.182" pos_1_1_3d_map="359.366 -111.979" visible="true" active="true" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 		<item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
@@ -31,9 +31,9 @@
 	<StaticText name="RomperRejilla" pos="50 60" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
-			quad="Data/textures/GUI/BaseDialegBox.jpg" pos_button="40.00 15.00" height_button="5.00" width_button="5.00"
-          buttonClose_normal="Data/textures/GUI/ButtonDialegBoxC.jpg"  buttonClose_over="Data/textures/GUI/ButtonDialegBoxN.jpg"
-          buttonClose_clicked="Data/textures/GUI/ButtonDialegBoxO.jpg" buttonClose_deactivated="Data/textures/GUI/exit_normal.png">
+			quad="Data/textures/GUI/marco2.png" pos_button="41.20 13.50" height_button="5.00" width_button="2.8"
+          buttonClose_normal="Data/textures/GUI/mouse.png"  buttonClose_over="Data/textures/GUI/mouse.png"
+          buttonClose_clicked="Data/textures/GUI/mouse.png" buttonClose_deactivated="Data/textures/GUI/mouse.png">
 		  <Dialog>
 			<StaticText name="Texto1" pos="5.0 5.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea01" />
 			<StaticText name="Texto2" pos="5.0 10.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea02" />
