@@ -37,6 +37,8 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
 
+    CEngineManagers::GetSingletonPtr();
+
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(92.0f, -9.0f, -44.0f));
 
@@ -48,6 +50,17 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
+
+    CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    for(unsigned int i = 0; i < l_PosLights.size(); i++)
+    {
+        l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 0.1f);
+    }
+
+    if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
+    {
+        return;
+    }
 
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
