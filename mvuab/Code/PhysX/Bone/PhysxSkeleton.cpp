@@ -2,19 +2,19 @@
 #include "PhysicsManager.h"
 #include "PhysxSkeleton.h"
 #include "PhysxBone.h"
-#include "PhysicFixedJoint.h"
-#include "PhysicSphericalJoint.h"
-#include "PhysicRevoluteJoint.h"
+#include "Joints/PhysicFixedJoint.h"
+#include "Joints/PhysicSphericalJoint.h"
+#include "Joints/PhysicRevoluteJoint.h"
 #include "PhysicsManager.h"
-#include "PhysicActor.h"
-#include "PhysicUserData.h"
+#include "Actor/PhysicActor.h"
+#include "Utils/PhysicUserData.h"
 #include "PhysxBone.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
+#include "EngineManagers.h"
 #include "GraphicsManager.h"
 
-#include "base.h"
 #include "Math\Matrix44.h"
 #include "Logger\Logger.h"
 #include "Object3D.h"
@@ -25,8 +25,7 @@
 #include "NxPhysics.h"
 //---------------------//
 
-bool CPhysxSkeleton::Init( const std::string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup,
-                           CObject3D *_pEntity )
+bool CPhysxSkeleton::Init( const std::string& _szFileName, CalModel* _pCalModel, Math::Mat44f _vMat, ECollisionGroup aGrp, CObject3D *_pEntity )
 {
     m_pEntity = _pEntity;
     m_mTransform = _vMat;
@@ -40,7 +39,7 @@ bool CPhysxSkeleton::Init( const std::string& _szFileName, CalModel* _pCalModel,
     {
         CalBone* l_pBone = l_vLlistaBones[i];
         CPhysxBone* l_pPhysXBone = new CPhysxBone(l_pBone->getCoreBone()->getName());
-        l_pPhysXBone->Init(l_pBone, _vMat, _iColisionGroup);
+        l_pPhysXBone->Init(l_pBone, _vMat, aGrp);
         m_vBones.push_back(l_pPhysXBone);
     }
 
@@ -49,9 +48,7 @@ bool CPhysxSkeleton::Init( const std::string& _szFileName, CalModel* _pCalModel,
 
     InitParents();
     InitPhysXJoints(_szFileName);
-
-    SetOk(true);
-    return IsOk();
+    return true;
 }
 
 void CPhysxSkeleton::Release()
@@ -85,12 +82,13 @@ void CPhysxSkeleton::Release()
 
 bool CPhysxSkeleton::Load(const std::string& _szFileName)
 {
+  ASSERT(false,"No deberia de hacer esto!!!!");
     bool lOk = true;
     CXMLTreeNode l_XML;
     CXMLTreeNode l_XMLObjects;
-    if(!l_XML.LoadAndFindNode(_szFileName.c_str()))
+    if(!l_XML.LoadAndFindNode(_szFileName.c_str(), "node" , l_XMLObjects))
     {
-        LOG_WARNING_APPLICATION "Could not open file %s", _szFileName.c_str());
+        LOG_WARNING_APPLICATION( "Could not open file %s", _szFileName.c_str());
         lOk = false;
     }
     else
@@ -156,7 +154,7 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
     CXMLTreeNode l_XMLObjects;
     if(!l_XML.LoadFile(_szFileName.c_str()))
     {
-        CLogger::GetSingletonPtr()->AddNewLog(ELL_WARNING, "CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+      LOG_WARNING_APPLICATION( "CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
         return false;
     }
 
@@ -169,10 +167,6 @@ bool CPhysxSkeleton::InitPhysXJoints(const std::string& _szFileName)
     {
         string l_szType;
         CXMLTreeNode l_XMLObject = l_XMLObjects(i);
-        if(l_XMLObject.IsComment())
-        {
-            continue;
-        }
 
         l_szType = l_XMLObject.GetAttribute<std::string>("type" , "");
 
@@ -249,6 +243,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
     }
     else if (l_szDirection == "In")
     {
+      /*
         if (!l_pBone1->IsBoneRoot())
         {
             int l_pParentID = l_pBone1->GetParentID();
@@ -257,9 +252,9 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
             CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
             l_vVect.x = -l_vVect.x;
             /*  l_vAxis = Math::Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
-                l_vAxis.Normalize();*/
+                l_vAxis.Normalize();
         }
-
+    */
     }
 
 
@@ -344,28 +339,28 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
 
     if (l_sInfo.JointSpring)
     {
-        Vect2f l_vJointSpring = _XMLObjects.GetAttribute<Math::Vect2f>("JointSpring", v2fZERO, false);
+        Vect2f l_vJointSpring = _XMLObjects.GetAttribute<Math::Vect2f>("JointSpring", Math::v2fZERO);
         l_sInfo.JointSpringValue = l_vJointSpring.x;
         l_sInfo.JointSpringDamper = l_vJointSpring.y;
     }
 
     if (l_sInfo.TwistSpring)
     {
-        Vect2f l_vTwistSpring = _XMLObjects.GetAttribute<Math::Vect2f>("TwistSpring", v2fZERO, false);
+        Vect2f l_vTwistSpring = _XMLObjects.GetAttribute<Math::Vect2f>("TwistSpring", Math::v2fZERO);
         l_sInfo.TwistSpringValue = l_vTwistSpring.x;
         l_sInfo.TwistSpringDamper = l_vTwistSpring.y;
     }
 
     if (l_sInfo.SwingSpring)
     {
-        Vect2f l_vSwingSpring = _XMLObjects.GetAttribute<Math::Vect2f>("SwingSpring", v2fZERO, false);
+        Vect2f l_vSwingSpring = _XMLObjects.GetAttribute<Math::Vect2f>("SwingSpring", Math::v2fZERO);
         l_sInfo.SwingSpringValue = l_vSwingSpring.x;
         l_sInfo.SwingSpringDamper = l_vSwingSpring.y;
     }
 
     if (l_sInfo.SwingLimit)
     {
-        Vect2f l_vSwingLimit = _XMLObjects.GetAttribute<Math::Vect2f>("SwingLimit", v2fZERO, false);
+        Vect2f l_vSwingLimit = _XMLObjects.GetAttribute<Math::Vect2f>("SwingLimit", Math::v2fZERO);
         l_sInfo.SwingValue = l_vSwingLimit.x;
         l_sInfo.SwingRestitution = l_vSwingLimit.y;
     }
@@ -373,8 +368,8 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
     if (l_bTwistLimitLow && l_bTwistLimitHigh)
     {
         l_sInfo.TwistLimit = true;
-        Vect2f l_vTwistLimitLow = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitLow", v2fZERO, false);
-        Vect2f l_vTwistLimitHigh = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitHigh", v2fZERO, false);
+        Vect2f l_vTwistLimitLow = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitLow", Math::v2fZERO );
+        Vect2f l_vTwistLimitHigh = _XMLObjects.GetAttribute<Math::Vect2f>("TwistLimitHigh", Math::v2fZERO);
 
         l_sInfo.TwistLowValue = l_vTwistLimitLow.x;
         l_sInfo.TwistLowRestitution = l_vTwistLimitLow.y;
@@ -579,7 +574,7 @@ void CPhysxSkeleton::SetContactReportThreshold(float _fThreshold)
     }
 }
 
-void CPhysxSkeleton::SetTransformAfterUpdate(const Mat44f& _mTransform)
+void CPhysxSkeleton::SetTransformAfterUpdate(const Math::Mat44f& _mTransform)
 {
     m_mTransform = _mTransform;
 
@@ -589,11 +584,11 @@ void CPhysxSkeleton::SetTransformAfterUpdate(const Mat44f& _mTransform)
     }
 }
 
-CBoundingBox CPhysxSkeleton::ComputeBoundingBox()
+AABB3f CPhysxSkeleton::ComputeBoundingBox()
 {
     vector<CPhysxBone*>::iterator l_it  = m_vBones.begin();
     vector<CPhysxBone*>::iterator l_end = m_vBones.end();
-    Mat44f m;
+    Math::Mat44f m;
     bool m_bFirst = true;
     Math::Vect3f v, min, max;
 
@@ -623,8 +618,9 @@ CBoundingBox CPhysxSkeleton::ComputeBoundingBox()
         }
     }
 
-    CBoundingBox l_BB;
-    l_BB.Init(min, max);
+    AABB3f l_BB;
+    l_BB.MinPnt = min;
+    l_BB.MaxPnt = max;
 
     return l_BB;
 }

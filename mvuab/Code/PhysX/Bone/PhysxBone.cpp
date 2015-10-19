@@ -12,6 +12,8 @@
 #include "AnimatedModels\AnimatedModelsManager.h"
 #include "GraphicsManager.h"
 #include <XML/XMLTreeNode.h>
+#include "EngineManagers.h"
+#include "Utils/Defines.h"
 
 //#include "base.h"
 
@@ -23,7 +25,7 @@
 
 using namespace Math;
 
-bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44, int _iColisionGroup)
+bool CPhysxBone::Init(CalBone* _pBone, Math::Mat44f _vMat44, int _iColisionGroup)
 {
     SetCalBone(_pBone);
     CalCoreBone* l_pCoreBone = m_pCalBone->getCoreBone();
@@ -57,7 +59,7 @@ void CPhysxBone::Release()
 
 }
 
-Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
+Math::Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 {
     //rotacio i translacio del bone (absoluta)
     CalVector l_vTranslation = _pBone->getTranslationAbsolute();
@@ -68,7 +70,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
     l_RotationQuaternion.y = -l_RotationQuaternion.y;
     l_RotationQuaternion.z = -l_RotationQuaternion.z;
 
-    //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
+    //creem la matriu de transformacio Cal3d (absolute) -> Math::Mat44f
     CalMatrix l_RotationMatrix(l_RotationQuaternion);
 
     Mat33f l_Rotation = Mat33f( l_RotationMatrix.dxdx   , l_RotationMatrix.dydx  , l_RotationMatrix.dzdx,
@@ -79,7 +81,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
     float l_fAngleY = pi32 - l_Rotation.GetAngleY();
     float l_fAngleZ = pi32 - l_Rotation.GetAngleZ();
 
-    Mat44f l_Transform;
+    Math::Mat44f l_Transform;
     l_Transform.SetIdentity();
     l_Transform.RotByAnglesYXZ(l_fAngleY, l_fAngleX, l_fAngleZ);
     l_Transform.Translate(Math::Vect3f(-l_vTranslation.x, l_vTranslation.y, l_vTranslation.z));
@@ -97,16 +99,16 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     float l_fDensity;
 
     l_szName                  = _XMLObjects.GetAttribute<std::string>("name" , "");
-    l_fDensity            = _XMLObjects.GetAttribute<float>("density");
-    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f), false);
-    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f), false);
+    l_fDensity            = _XMLObjects.GetAttribute<float>("density" ,0.0f );
+    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f) );
+    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f));
 
     CPhysicsManager* l_pPM = PhysXMInstance;
-    Mat44f l_vMatActor;
+    Math::Mat44f l_vMatActor;
     l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
     m_vMiddlePoint = l_fMiddlePoint;
 
-    Mat44f l_mTotal = m_vMatAnimatedModel * l_vMatActor;
+    Math::Mat44f l_mTotal = m_vMatAnimatedModel * l_vMatActor;
 
     CPhysicUserData* l_pUserData = new CPhysicUserData(l_szName);
     l_pUserData->SetPaint(true);
@@ -134,13 +136,13 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CObject3D* _pEntity)
     Math::Vect3f l_vSize, l_fMiddlePoint;
     float l_fDensity;
 
-    l_szName                  = _XMLObjects.GetAttribute<std::string>("name" , "");
-    l_fDensity            = _XMLObjects.GetAttribute<float>("density");
-    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f), false);
-    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f), false);
+    l_szName              = _XMLObjects.GetAttribute<std::string>("name" , "");
+    l_fDensity            = _XMLObjects.GetAttribute<float>("density", 0.0f);
+    l_fMiddlePoint        = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_middle_point", Math::Vect3f(0.0f));
+    l_vSize               = _XMLObjects.GetAttribute<Math::Vect3f>("bounding_box_size", Math::Vect3f(0.0f));
 
     CPhysicsManager* l_pPM = PhysXMInstance;
-    Mat44f l_vMatActor;
+    Math::Mat44f l_vMatActor;
     l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
     m_vMiddlePoint = l_fMiddlePoint;
     CPhysicUserData* l_pUserData = new CPhysicUserData(l_szName);
@@ -179,11 +181,11 @@ void CPhysxBone::UpdateCal3dFromPhysx()
     {
         if (m_pParent->GetPhysxActor() != 0)
         {
-            Mat44f l_vAbsoluteParent, l_vAbsolute;
+            Math::Mat44f l_vAbsoluteParent, l_vAbsolute;
             m_pParent->GetPhysxActor()->GetMat44(l_vAbsoluteParent);
             GetPhysxActor()->GetMat44(l_vAbsolute);
-            Mat44f l_vInverseParent = l_vAbsoluteParent.GetInverted();
-            Mat44f l_vRelative = l_vInverseParent * l_vAbsolute;
+            Math::Mat44f l_vInverseParent = l_vAbsoluteParent.GetInverted();
+            Math::Mat44f l_vRelative = l_vInverseParent * l_vAbsolute;
 
             Vect4f l_vTranslate = l_vRelative.GetTranslationVector();
             CalVector l_vRelativeTranslation(-l_vTranslate.x, l_vTranslate.y, l_vTranslate.z);
@@ -218,11 +220,11 @@ void CPhysxBone::UpdateCal3dFromPhysx()
         }
         else
         {
-            Mat44f l_vAbsolute;
+            Math::Mat44f l_vAbsolute;
             GetPhysxActor()->GetMat44(l_vAbsolute);
-            Mat44f l_vRelative = l_vAbsolute;
+            Math::Mat44f l_vRelative = l_vAbsolute;
 
-            Mat44f l_matRelativeTransformation;
+            Math::Mat44f l_matRelativeTransformation;
             l_matRelativeTransformation = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone).Invert();
 
             m_vMatActor.SetIdentity();
@@ -234,7 +236,7 @@ void CPhysxBone::UpdateCal3dFromPhysx()
 
 }
 
-void CPhysxBone::UpdatePhysxFromCal3d(const Mat44f& _mTransform)
+void CPhysxBone::UpdatePhysxFromCal3d(const Math::Mat44f& _mTransform)
 {
     if (m_pActor != 0)
     {
@@ -242,7 +244,7 @@ void CPhysxBone::UpdatePhysxFromCal3d(const Mat44f& _mTransform)
     }
 }
 
-void CPhysxBone::SetTransformAfterUpdate(const Mat44f& _mTransform)
+void CPhysxBone::SetTransformAfterUpdate(const Math::Mat44f& _mTransform)
 {
     m_vMatActor = _mTransform;
 

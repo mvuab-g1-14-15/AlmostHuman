@@ -43,7 +43,7 @@ function CEnemy:__init( aInfo )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
 	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)
-	
+
 	self.UseGizmo = aInfo.use_gizmo
 	if self.UseGizmo then
 		self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", Vect3f(0.0), 0.0, 0.0)
@@ -100,6 +100,8 @@ function CEnemy:__init( aInfo )
 	if self.Alarm then
 		self.AlarmTimer = countdowntimer_manager:AddTimer(self.Name.."AlarmTimer", aInfo.alarm_time, false)
 	end
+	
+	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
 function CEnemy:Destroy()
@@ -216,6 +218,7 @@ function CEnemy:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
+	self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead") )
 end
 
 function CEnemy:PlayerInSight()

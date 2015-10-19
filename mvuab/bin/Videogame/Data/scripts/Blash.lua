@@ -3,7 +3,7 @@ class 'CBlash'
 
 function CBlash:__init()
 	self.Active = false
-	countdowntimer_manager:AddTimer("BlashTTL", 0.1, false) 
+	countdowntimer_manager:AddTimer("BlashTTL", 0.01, false) 
 	self.BillboardBlash = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), false)
 	engine:Trace("Blash ctor")
 end

@@ -63,7 +63,7 @@ CBillboardInstance* CreateBillBoard()
 	return new CBillboardInstance();
 }
 
-CInstanceMesh* CreateInstanceMesh( const std::string& Name, const std::string& CoreName )
+CInstanceMesh* CreateInstanceMesh( const char* Name, const char* CoreName )
 {
   return new CInstanceMesh( Name, CoreName );
 }
@@ -357,6 +357,7 @@ void registerAnimatedModels( lua_State* aLuaState )
   LUA_DECLARE_METHOD_PROTO( CAnimatedInstanceModel, IsActionAnimationActive, bool( CAnimatedInstanceModel::* )( const std::string& ) const )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, SetVelocity )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, GetVelocity )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, GetBonePosition )
   LUA_END_DECLARATION
 }
 

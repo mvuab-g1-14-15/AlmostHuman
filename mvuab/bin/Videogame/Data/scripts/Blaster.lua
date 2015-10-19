@@ -22,8 +22,10 @@ function CBlaster:__init()
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
 	
 	self.Blash = CBlash()
+	--self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
+	--self.AmmunitionUsed = {}
 	
-    --engine:Trace("Blaster initialized")
+    engine:Trace("Blaster initialized")
 end
 
 function CBlaster:CalculateDamage()

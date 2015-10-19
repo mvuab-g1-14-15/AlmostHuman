@@ -24,13 +24,15 @@
 #include "RenderableObject\Scene.h"
 
 #include "Timer\CountDownTimerManager.h"
+#include <cal3d\corebone.h>
+#include "Bone\PhysxBone.h"
 
 #define MAXBONES 29
 
-CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
-    const std::string& CoreName ) :
-  m_CalModel( 0 ),
-  m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) ),
+CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
+  : CRenderableObject()
+  , m_CalModel( 0 )
+  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) ),
   m_BlendTime( 0.3f ),
   m_LodLevel( 1.0f ),
   m_CurrentAnimationId( 5 ),
@@ -39,8 +41,7 @@ CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name,
   m_pIB( 0 ),
   m_pVB( 0 ),
   m_ChangeAnimation( 0 ),
-  m_Velocity( 1.0 ),
-  CRenderableObject()
+  m_Velocity( 1.0 )
 {
   SetName( Name );
   CRenderableObjectTechniqueManager* lROT = ROTMInstance;
@@ -470,4 +471,28 @@ void CAnimatedInstanceModel::CalculateNewLightProbeMatrix()
 	}
 
 	m_PreviousPosition = GetPosition();
+}
+
+Math::Vect3f CAnimatedInstanceModel::GetBonePosition( const std::string& aBoneName )
+{
+  Math::Vect3f lBonePosition;
+  CalSkeleton* l_pSkeleton = m_CalModel->getSkeleton();
+
+  if( l_pSkeleton )
+  {
+    /*
+    const std::vector< CalCoreBone*>& mBones = l_pSkeleton->getCoreSkeleton()->getVectorCoreBone();
+    for( uint32 i = 0; i < mBones.size(); ++i )
+    {
+      LOG_INFO_APPLICATION( "Bone %s ", mBones[i]->getName().c_str() );
+    }
+    */
+    int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId(aBoneName);
+    CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+    Math::Mat44f l_vMat = CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(l_pBone);
+    Math::Mat44f l_vTotal = GetTransform()*l_vMat;
+    lBonePosition = l_vTotal.GetPos();
+  }
+
+  return lBonePosition;
 }

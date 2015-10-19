@@ -27,6 +27,8 @@ class CAnimatedInstanceModel : public CRenderableObject
         void RenderModelBySoftware();
         void RenderModelByHardware();
 
+        Math::Vect3f GetBonePosition( const std::string& aBoneName );
+
         void Update();
         void ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f, bool AutoLock = true);
 		
@@ -40,7 +42,7 @@ class CAnimatedInstanceModel : public CRenderableObject
 
         void ExecuteAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f,
                            bool AutoLock = true);
-		void ExecuteActionLUA(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
+        void ExecuteActionLUA(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
         void RemoveAction(const std::string &AnimationName);
 
         void BlendCycle(const std::string &AnimationName, float32 Weight, float32 DelayIn);

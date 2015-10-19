@@ -26,9 +26,9 @@ function CShootLUA:__init(speed, direction, position, damage)
     self.Light:SetRenderShadows( false )
 	light_manager:AddResource(self.Name, self.Light)
 	
-	self.mShoot = CreateInstanceMesh(self.Name, "Blaster");
+	self.mShoot = CreateInstanceMesh("AmmoSolid", "Blaster");
 	scene:GetResource("core"):GetLayer("solid"):AddResource(self.Name, self.mShoot);
-	self.mShootGlow = CreateInstanceMesh(self.Name, "Blaster");
+	self.mShootGlow = CreateInstanceMesh("AmmoGlow", "Blaster");
 	scene:GetResource("core"):GetLayer("glow"):AddResource(self.Name, self.mShootGlow);
 
 	self.mShoot:SetPosition(position);
