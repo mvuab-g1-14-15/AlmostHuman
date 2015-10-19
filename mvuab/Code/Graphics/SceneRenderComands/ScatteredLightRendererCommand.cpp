@@ -52,9 +52,13 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
 
     CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
+    Math::Vect3f l_CameraDirection = CameraMInstance->GetCurrentCamera()->GetDirection();
+
     for(unsigned int i = 0; i < l_PosLights.size(); i++)
     {
-        l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 0.1f);
+        l_ActiveLights[i] = l_PosLights[i].Normalize().DotProduct(l_CameraDirection) < 0.5f; // cos(60º)
+        //l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 30.0f);
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
