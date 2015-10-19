@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "Utils\Defines.h"
 #include "EngineManagers.h"
+#include "Texture\TextureManager.h"
 #include "RenderableVertex\VertexTypes.h"
 #include "RenderableVertex\IndexedVertexs.h"
 #include "RenderableVertex\RenderableVertex.h"
@@ -39,6 +40,13 @@ CBillboardManager::~CBillboardManager()
 
 void CBillboardManager::Render()
 {
+  /*if( !mLinearDepthTexture )
+  {
+    mLinearDepthTexture = TextureMInstance->GetTexture("DepthMapTexture");
+  }
+
+  mLinearDepthTexture->Activate(6);*/
+
   for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
     (*lItb)->Render( sRV, mGM );
 }

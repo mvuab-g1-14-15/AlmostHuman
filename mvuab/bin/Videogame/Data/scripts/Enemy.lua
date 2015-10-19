@@ -218,7 +218,7 @@ function CEnemy:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
-	self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead") )
+	self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
 end
 
 function CEnemy:PlayerInSight()

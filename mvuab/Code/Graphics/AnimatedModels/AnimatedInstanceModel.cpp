@@ -480,18 +480,49 @@ Math::Vect3f CAnimatedInstanceModel::GetBonePosition( const std::string& aBoneNa
 
   if( l_pSkeleton )
   {
-    /*
-    const std::vector< CalCoreBone*>& mBones = l_pSkeleton->getCoreSkeleton()->getVectorCoreBone();
-    for( uint32 i = 0; i < mBones.size(); ++i )
-    {
-      LOG_INFO_APPLICATION( "Bone %s ", mBones[i]->getName().c_str() );
-    }
-    */
+
+//     const std::vector< CalCoreBone*>& mBones = l_pSkeleton->getCoreSkeleton()->getVectorCoreBone();
+//     for( uint32 i = 0; i < mBones.size(); ++i )
+//     {
+//       LOG_INFO_APPLICATION( "Bone %s ", mBones[i]->getName().c_str() );
+//     }
+
     int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId(aBoneName);
-    CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
-    Math::Mat44f l_vMat = CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(l_pBone);
-    Math::Mat44f l_vTotal = GetTransform()*l_vMat;
-    lBonePosition = l_vTotal.GetPos();
+
+    if( l_iBoneId > 0 )
+    {
+      CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+
+      ASSERT( l_pBone, "Null bone %s", aBoneName.c_str() );
+
+      //rotacio i translacio del bone (absoluta)
+      CalVector l_vTranslation = l_pBone->getTranslationAbsolute();
+      CalQuaternion l_RotationQuaternion = l_pBone->getRotationAbsolute();
+
+      //passem el quaternion a left handed
+      l_RotationQuaternion.x = -l_RotationQuaternion.x;
+      l_RotationQuaternion.y = -l_RotationQuaternion.y;
+      l_RotationQuaternion.z = -l_RotationQuaternion.z;
+
+      //creem la matriu de transformacio Cal3d (absolute) -> Math::Mat44f
+      CalMatrix l_RotationMatrix(l_RotationQuaternion);
+
+      Math::Mat33f l_Rotation = Math::Mat33f( l_RotationMatrix.dxdx   , l_RotationMatrix.dydx  , l_RotationMatrix.dzdx,
+        l_RotationMatrix.dxdy   , l_RotationMatrix.dydy  , l_RotationMatrix.dzdy,
+        l_RotationMatrix.dxdz   , l_RotationMatrix.dydz  , l_RotationMatrix.dzdz).Get33RotationNormalized();
+
+      float l_fAngleX = Math::pi32 - l_Rotation.GetAngleX();
+      float l_fAngleY = Math::pi32 - l_Rotation.GetAngleY();
+      float l_fAngleZ = Math::pi32 - l_Rotation.GetAngleZ();
+
+      Math::Mat44f l_Transform;
+      l_Transform.SetIdentity();
+      l_Transform.RotByAnglesYXZ(l_fAngleY, l_fAngleX, l_fAngleZ);
+      l_Transform.Translate(Math::Vect3f(-l_vTranslation.x, l_vTranslation.y, l_vTranslation.z));
+
+      Math::Mat44f l_vTotal = GetTransform()*l_Transform;
+      lBonePosition = l_vTotal.GetPos();
+    }
   }
 
   return lBonePosition;

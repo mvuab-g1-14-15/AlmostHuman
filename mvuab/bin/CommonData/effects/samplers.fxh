@@ -327,6 +327,15 @@ sampler ShadowMapTextureDynamicSampler : register( s6 ) = sampler_state
     AddressV = Clamp;
 };
 
+sampler LinearDephtSampler : register( s6 ) = sampler_state
+{
+	MinFilter = Point;
+    MagFilter = Point;
+    MipFilter = Point;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
 sampler LightProbeSampler : register( s6 ) = sampler_state
 {
 	MinFilter = Point;

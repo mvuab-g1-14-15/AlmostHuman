@@ -9,6 +9,7 @@
 
 class CRenderableVertexs;
 class CGraphicsManager;
+class CTexture;
 
 class CBillboardManager : public CTemplatedVectorMapManager<CBillboardCore>, public CManager
 {
@@ -33,6 +34,7 @@ public:
 private:
   static CRenderableVertexs* sRV;
   CGraphicsManager         * mGM;
+  CTexture* mLinearDepthTexture;
 };
 
 #endif // INC_CAMERAMANAGER_H_

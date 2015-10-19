@@ -40,6 +40,8 @@ function CPlayer:__init()
 	self.Life = 100.0
 	
 	self.Room = "sala1"
+	
+	self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
 function CPlayer:Update()
@@ -66,6 +68,7 @@ function CPlayer:Update()
 	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
+	self.BillboardPlayer:ChangePosition( self.RenderableObject:GetBonePosition("CATRigRArmPalm") )
 	
 	if not self.Blaster:GetIsShooting() then
 		if self.PlayerController:GetIsMoving() then
