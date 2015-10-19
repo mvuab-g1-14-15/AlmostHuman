@@ -29,6 +29,26 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
+    // 92.0f, -9.0f, -44.0f
+    // 94.0f, -9.0f, -25.3f 
+    //
+    //
+    //
+    std::vector<BOOL> l_ActiveLights; ;
+    std::vector<Math::Vect3f> l_PosLights;
+
+    l_ActiveLights.push_back(FALSE);
+    l_PosLights.push_back(Math::Vect3f(92.0f, -9.0f, -44.0f));
+
+    l_ActiveLights.push_back(FALSE);
+    l_PosLights.push_back(Math::Vect3f(94.0f, -9.0f, -25.3f));
+
+    l_ActiveLights.push_back(FALSE);
+    l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
+
+    l_ActiveLights.push_back(FALSE);
+    l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
+
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
     m_RenderTarget1.SetAsRenderTarget(0);
@@ -47,7 +67,9 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
     CRenderableObjectTechnique* l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
     CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
 
     m_RenderTarget2.SetAsRenderTarget(0);
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect1, Math::CColor::CColor(), &m_RenderTarget1, 0.0f, 0.0f, 1.0f, 1.0f);

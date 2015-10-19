@@ -106,6 +106,7 @@ public:
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
   void SetDirection( const Math::Vect3f& aDirection );
+  void SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights);
 
 protected:
   LPD3DXEFFECT m_Effect;

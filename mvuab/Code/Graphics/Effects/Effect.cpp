@@ -465,9 +465,15 @@ bool CEffect::SetDeltaTime( const float dt )
     return S_OK == SET_FLOAT_PARAMETER( DeltaTime, dt );
 }
 
-bool CEffect::SetSelfIlumAmount            ( float aSelfIlumAmount )
+bool CEffect::SetSelfIlumAmount( float aSelfIlumAmount )
 {
     HRESULT lRes = SET_FLOAT_PARAMETER( SelfIlumAmount, aSelfIlumAmount );
     ASSERT( lRes == S_OK, "Error setting selfilumamount" );
     return lRes == S_OK;
+}
+
+void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights)
+{
+    m_Effect->SetBoolArray(m_LightEnabledParameter, &l_ActiveLights[0], MAX_LIGHTS_BY_SHADER);
+    m_Effect->SetFloatArray(m_LightsPositionParameter, &l_PosLights[0].x, l_PosLights.size() * 3);
 }

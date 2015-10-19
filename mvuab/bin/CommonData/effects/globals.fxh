@@ -50,8 +50,8 @@ int         g_ShadowMapTextureSize                                  : ShadowMapT
 bool        g_FlipUVHorizontal                                      : FlipUVHorizontal;
 bool        g_FlipUVVertical                                        : FlipUVVertical;
 
-float       g_PercentageTexture1                                                  : PercentageTexture1;
-float       g_PercentageTexture2                                                  : PercentageTexture2;
+float       g_PercentageTexture1                                    : PercentageTexture1;
+float       g_PercentageTexture2                                    : PercentageTexture2;
 
 float       g_Size                                                  : Size;
 float       g_Angle                                                 : Angle;
