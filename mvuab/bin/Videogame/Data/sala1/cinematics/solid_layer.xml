@@ -41,4 +41,6 @@
   <MeshInstance name="Rejilla_frag_039_sala1" core="Rejilla_frag_039_sala1" active="false" pos="113.124 -8.92063 -44.1531" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Rejilla_frag_040_sala1" core="Rejilla_frag_040_sala1" active="false" pos="113.124 -9.01432 -44.7292" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Rejilla_frag_041_sala1" core="Rejilla_frag_041_sala1" active="false" pos="113.124 -9.01432 -44.4524" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="Logan_cinematica1_sala1"	core="Player" active="false" pos="124.989,-7.31726,-51.9642" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="Logan_cinematica2_sala1"	core="Player" active="false" pos="113.118 -9.17377 -44.4424" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

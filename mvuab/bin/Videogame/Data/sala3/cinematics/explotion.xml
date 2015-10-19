@@ -1,0 +1,7 @@
+<cinematic>
+	<add_renderable path="Data\sala3\cinematics/" room="sala3" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.1"/>
+	<set_active name="explotion_fragment" resource_id_file="Data/sala3/cinematics/elementos_explosion.xml" active="true" time="0.1"/>
+	<!--<set_camera name="CameraCinematica" name_camera="camera_cinematica2_sala1" active="true" time="0.1" blocker="true" />-->
+	<play_animation name="Montaje" room="sala3" resource_id_file="Data/sala3/cinematics/machine_broken.xml" time="10.0"/>
+	<!--<set_camera name="CameraCinematica" name_camera="camera_cinematica2_sala1" active="false" time="0.1" blocker="false" />-->
+</cinematic>

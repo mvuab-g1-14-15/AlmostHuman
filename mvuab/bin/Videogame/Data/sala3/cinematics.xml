@@ -1,3 +1,4 @@
 <cinematics>
 	<cinematic name="elevator" resource_id_file="Data/sala3/cinematics/elevatorUp.xml"/>
+	<cinematic name="explotion" resource_id_file="Data/sala3/cinematics/explotion.xml"/>
 </cinematics>

@@ -1,3 +1,3 @@
 <cinematic>
-	<play_animation name="Elevator" resource_id_file="Data/sala3/cinematics/elevator.xml" time="4.0" />
+	<play_animation name="Elevator" resource_id_file="Data/sala3/cinematics/elevator.xml" time="16.6667" />
 </cinematic>

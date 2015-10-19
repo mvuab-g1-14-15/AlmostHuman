@@ -4,6 +4,7 @@
 #include "Cinematics\CinematicsElement\CinematicsElement.h"
 #include "XML\XMLTreeNode.h"
 
+class CCamera;
 class CGraphicsManager;
 
 class CSetCameraElement : public CCinematicsElement
@@ -12,13 +13,11 @@ class CSetCameraElement : public CCinematicsElement
       CSetCameraElement(CXMLTreeNode& atts);
       virtual void Update();
       virtual void Execute(CGraphicsManager& GM);
-		  virtual void Render();
-		  virtual void Render2D(CGraphicsManager &GM);
+	  virtual void Render();
+	  virtual void Render2D(CGraphicsManager &GM);
     private:
-		  Math::Vect3f		m_Position;
-      float           m_Yaw;
-      float           m_Pitch;
-      float           m_Roll;
+	  CCamera* m_CameraCinematical;
+	  std::string		m_CameraName;
 };
 
 #endif //_SET_CAMERA_ELEMENT_

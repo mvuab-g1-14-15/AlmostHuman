@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<camera>
+﻿<camera>
   <camera_key_controller name="Camera001" cycle="1" reverse="0" total_time="33.3333">
     <key time="0.0" pos="124.992 -8.28323 -51.2118" look_at="124.979 -7.28513 -51.1517" up_vector="0.0403929 -0.0595896 0.997406" fov="70.0" near_plane="0.1" far_plane="60.0" />
     <key time="0.0333333" pos="124.992 -8.28323 -51.2118" look_at="124.979 -7.28513 -51.1516" up_vector="0.041703 -0.0595933 0.997351" fov="70.0" near_plane="0.1" far_plane="60.0" />

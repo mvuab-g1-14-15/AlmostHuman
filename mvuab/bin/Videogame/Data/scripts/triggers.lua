@@ -200,6 +200,7 @@ function StayText(room, message, other_shape)
 			g_bPressedRoom3X = false
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
+			cinematic_manager:Execute("elevator")
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end

@@ -3,23 +3,30 @@
 #include "EngineManagers.h"
 #include "Cameras\CameraManager.h"
 #include "Timer\Timer.h"
+#include "Cinematics\CinematicManager.h"
 
 CSetCameraElement::CSetCameraElement( CXMLTreeNode& atts ) : CCinematicsElement( atts )
-    , m_Position( atts.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f(0, 0, 0) ) )
-    , m_Yaw( atts.GetAttribute<float>( "yaw", 0.0 ) )
-    , m_Pitch( atts.GetAttribute<float>( "pitch", 0.0 ) )
-    , m_Roll( atts.GetAttribute<float>( "roll", 0.0 ) )
+	, m_CameraName(atts.GetAttribute<std::string>("name_camera", "") )
+	, m_CameraCinematical( CameraMInstance->GetCamera( atts.GetAttribute<std::string>("name_camera", "")) )
+	
 {
 }
 
 void CSetCameraElement::Update()
 {
-    CCamera* lCamera = CameraMInstance->GetCurrentCamera();
-    lCamera->SetPosition(m_Position);
-    lCamera->SetYaw(m_Yaw);
-    lCamera->SetPitch(m_Pitch);
-    lCamera->SetRoll(m_Roll);
-    lCamera->MakeTransform();
+	if(m_Visible)
+	{
+		CinematicMInstance->SetCurrentCamera( CameraMInstance->GetCurrentCameraName() );
+		CameraMInstance->SetCurrentCamera( m_CameraName );
+		CameraMInstance->GetCurrentCamera()->SetEnable(true);
+		CinematicMInstance->SetCinematicActive( true );
+	}
+	else
+	{
+		CameraMInstance->GetCurrentCamera()->SetEnable(false);
+		CameraMInstance->SetCurrentCamera( CinematicMInstance->GetCurrentCamera() );
+		CinematicMInstance->SetCinematicActive( false );
+	}
     m_CurrentTime += deltaTimeMacro;
 }
 void CSetCameraElement::Execute( CGraphicsManager& GM )

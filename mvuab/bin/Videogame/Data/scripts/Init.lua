@@ -168,13 +168,14 @@ function update_gameplay()
 			end
 		end	
 		if action_manager:DoAction("DetonarC4") then
-			if g_bDistanceC4 and g_bC41 and g_bC42 then
+			--if g_bDistanceC4 and g_bC41 and g_bC42 then
 				g_bC41 = false
 				g_bC42 = false
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
+				cinematic_manager:Execute("explotion")
 				--Code para montar las cinematicas y matar a los drones
-			end
+			--end
 		end	
 		dt = timer:GetElapsedTime()
 		UpdateVariables(dt)
