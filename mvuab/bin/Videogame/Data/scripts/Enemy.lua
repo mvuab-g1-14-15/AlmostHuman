@@ -10,6 +10,7 @@ function CEnemy:__init( aInfo )
 	self.Height = aInfo.height
 	
 	self.Delta = 1.0
+	self.InitDelta = self.Delta
 	self.DeltaRot = 0.01
 	
 	self.Speed = aInfo.speed
@@ -135,6 +136,8 @@ function CEnemy:Update()
 			end
 		end
 		
+		self.Delta = self.InitDelta * 2.0
+		
 		local lDist = PlayerDistance(self)
 		if lDist < self.ChaseDistance then
 			self.DontMove = true
@@ -187,6 +190,7 @@ function CEnemy:Update()
 			if self.Suspected then
 				self.Suspected = false
 				self.TargetPos = self.InitPosition
+				self.Delta = self.InitDelta
 				if self.IsPatrol then
 					self.ActualWaypoint = 1
 				end
@@ -308,7 +312,25 @@ function CEnemy:MoveToPos( aPos )
 			self:ChangeAnimation("walk", 0.5, 1.0)
 			if self:RotateToPos( lRealTargetPos ) then
 				local DirVector = self:GetDirVectorNormalized2D( lRealTargetPos )
-				if CheckVector(DirVector) then
+				local lPos = self:GetPosition()
+				lBool, lEnemy = enemy_manager:CollisionWithEnemy(self.Name, lPos, self.Radius)
+				if lBool then
+					local lDirToEnemy = lEnemy:GetPosition() - lPos
+					lDirToEnemy.y = 0.0
+					if CheckVector(lDirToEnemy) then
+						lDirToEnemy:Normalize()
+					end
+					if DirVector:DotProduct(lDirToEnemy) > 0 then					
+						local lDir = lDirToEnemy ^ Vect3f(0.0, 1.0, 0.0)
+						if CheckVector(lDir) then
+							lDir:Normalize()
+							lDir = lDir - lDirToEnemy * 0.2
+							lDir:Normalize()
+						end
+						self.CharacterController:Move(lDir * self.Speed*5.0, dt)
+						engine:Trace(self.Name.." entro! "..(lDir * self.Speed):ToString())
+					end
+				else
 					self.CharacterController:Move(DirVector * self.Speed, dt)
 				end
 				if self.UseGizmo then
@@ -340,7 +362,25 @@ function CEnemy:MoveToPos( aPos )
 		self:ChangeAnimation("walk", 0.5, 1.0)
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
-			if CheckVector(DirVector) then
+			local lPos = self:GetPosition()
+			lBool, lEnemy = enemy_manager:CollisionWithEnemy(self.Name, lPos, self.Radius)
+			if lBool then
+				local lDirToEnemy = lEnemy:GetPosition() - lPos
+				lDirToEnemy.y = 0.0
+				if CheckVector(lDirToEnemy) then
+					lDirToEnemy:Normalize()
+				end
+				if DirVector:DotProduct(lDirToEnemy) > 0 then					
+					local lDir = lDirToEnemy ^ Vect3f(0.0, 1.0, 0.0)
+					if CheckVector(lDir) then
+						lDir:Normalize()
+						lDir = lDir - lDirToEnemy * 0.2
+						lDir:Normalize()
+					end
+					self.CharacterController:Move(lDir * self.Speed*5.0, dt)
+					engine:Trace(self.Name.." entro! "..(lDir * self.Speed):ToString())
+				end
+			else
 				self.CharacterController:Move(DirVector * self.Speed, dt)
 			end
 			if self.UseGizmo then
