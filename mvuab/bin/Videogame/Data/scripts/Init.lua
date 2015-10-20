@@ -22,9 +22,9 @@ function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
 	scene:ActivateRoom("sala1")
-	scene:ActivateRoom("pasillo")
-	scene:ActivateRoom("sala2")
-	scene:ActivateRoom("sala3")	
+	--scene:ActivateRoom("pasillo")
+	--scene:ActivateRoom("sala2")
+	--scene:ActivateRoom("sala3")	
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -55,7 +55,7 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
 	g_Player:Update()
-	cinematic_manager:PlayCinematic("cinematica_inicial")
+	--cinematic_manager:PlayCinematic("cinematica_inicial")
 	--
 	-- if renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1")) == false  then
 		-- renderable_objects_manager_characters:RemoveResource("PlayerCinematic")

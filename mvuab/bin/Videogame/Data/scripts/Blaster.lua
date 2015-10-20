@@ -22,9 +22,7 @@ function CBlaster:__init()
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
 	
 	self.Blash = CBlash()
-	self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
-	engine:Trace("Ammunition"..#self.Ammunition)
-	self.AmmunitionUsed = {}
+	self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
 end
 
 function CBlaster:CalculateDamage()
@@ -38,37 +36,34 @@ end
 
 function CBlaster:HasAmmo()
 	if #self.Ammunition == 0 then
-		engine:Trace("Empty Ammo")
 		return false;
 	else
-		engine:Trace("Has ammo")
 		return true;
 	end
 end
 
 function CBlaster:UpdateAmmo()
-	for i=1,#self.AmmunitionUsed do
-		--engine:Trace("ammo update "..i)
-		self.AmmunitionUsed[i]:Update();
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		lAmmo:Update();
 	end
 end
 
 function CBlaster:Shoot( aPosition )
-	if self:HasAmmo() then
-		self.Blash:Begin(aPosition)
-		--local lDirection = camera_manager:GetCurrentCamera():GetDirection()
-		
-		--Obtain the last index
-		--local lAmmoSize  = #self.Ammunition;
-		
-		-- Extract the ammo
-		--local lAmmo	 = self.Ammunition[lAmmoSize];
-		
-		-- Remove It from the avilable ammo
-		--table.remove(self.Ammunition, lAmmoSize);
-		
-		--lAmmo:Begin( aPosition, lDirection, 2.0 );
-		--table.insert( self.AmmunitionUsed, lAmmo );
+	engine:Trace("Blaster Shoot")
+	self.Blash:Begin(aPosition)
+	local lAlreadyShoot = false;
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		if not lAmmo:IsActive() and not lAlreadyShoot then
+			local lDirection = camera_manager:GetCurrentCamera():GetDirection()
+			lAmmo:Begin( aPosition, lDirection, 30.0 );
+			lAlreadyShoot = true;
+		end
+		-- Update the impacted ones
+		if lAmmo:IsImpacted() then
+			lAmmo:End();
+		end
 	end
 end
 

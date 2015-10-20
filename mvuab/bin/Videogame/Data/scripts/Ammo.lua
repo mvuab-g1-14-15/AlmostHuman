@@ -13,24 +13,16 @@ function CAmmo:__init()
     self.Light:SetPosition( Vect3f(0, 0, 0)	)
     self.Light:SetRenderShadows( false )
 	light_manager:AddResource(self.Light:GetName(), self.Light)
-	
-	self.mShoot = CreateInstanceMesh("AmmoSolid", "Blaster");
-	scene:GetResource("core"):GetLayer("solid"):AddResource(self.mShoot:GetName(), self.mShoot);
-	self.mShootGlow = CreateInstanceMesh("AmmoGlow", "Blaster");
-	scene:GetResource("core"):GetLayer("glow"):AddResource(self.mShootGlow:GetName(), self.mShootGlow);
-
-	self.mShoot:SetPosition( Vect3f(0, 0, 0));
-	self.mShootGlow:SetPosition( Vect3f(0, 0, 0));
-	
-	self.mShoot:MakeTransform();
-    self.mShootGlow:MakeTransform();
-	
 	self.Impacted = false;
-	self.MaxDistance = 100;
+	self.MaxDistance = 20;
 	self.CurrentDistance = 0;
 end
 
-function CAmmo:Impacted()
+function CAmmo:IsActive()
+	return self.Active;
+end
+
+function CAmmo:IsImpacted()
 	return self.Impacted;
 end
 
@@ -38,16 +30,11 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed )
 	engine:Trace( "ammo is "..aPosition:ToString() )
 	self.Active = true
 	
-	-- set the position to the data
-	self.mShoot:ChangePosition(aPosition);
-	self.mShootGlow:ChangePosition(aPosition);
 	self.BillboardAmmo:ChangePosition( aPosition );
 	self.Light:SetPosition( aPosition );
 	
 	--all must be visible
 	self.Light:ChangeVisibility( true );
-	self.mShootGlow:ChangeVisibility( true );
-	self.mShoot:ChangeVisibility( true );
 	self.BillboardAmmo:ChangeVisibility( true );
 	
 	self.Direction       = aDirection;
@@ -59,11 +46,10 @@ end
 function CAmmo:End()
 	engine:Trace("ammo end")
 	self.Active = false;
+	self.Impacted = false;
 	
 	--hide all the elements
 	self.Light:ChangeVisibility( false )
-	self.mShootGlow:ChangeVisibility( false )
-	self.mShoot:ChangeVisibility( false )
 	self.BillboardAmmo:ChangeVisibility( false )
 end
 
@@ -73,11 +59,12 @@ function CAmmo:Update()
 			dt              = timer:GetElapsedTime()
 			lVelocity 		= self.Direction * self.Speed * dt
 			lLength 		= lVelocity:Length()
-			lNewPosition 	= self.Position + lVelocity
+			local lNewPosition 	= self.Position + lVelocity
 		
 			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
-			engine:Trace("hit_info_name->"..hit_info:GetName())
-			self.CurrentDistance = self.CurrentDistance + self.Position:Length(lNewPosition);
+			--engine:Trace("hit_info_name->"..hit_info:GetName())
+			local lNewVector = lNewPosition - self.Position;
+			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
 			if not (hit_info.Distance == 0.0) then
 				lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 				lDistance = lCollisionPoint:Distance( lNewPosition )
@@ -97,8 +84,6 @@ function CAmmo:Update()
 			end
 			
 			-- set the position to the data
-			self.mShoot:ChangePosition(self.Position);
-			self.mShootGlow:ChangePosition(self.Position);
 			self.BillboardAmmo:ChangePosition( self.Position );
 			self.Light:SetPosition( self.Position );
 		end
