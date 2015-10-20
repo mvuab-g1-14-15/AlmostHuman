@@ -78,8 +78,7 @@
     </zblur>
     ZBLUR_END
     -->
-    
-    
+    <!--
     SCATTERED_LIGHT_START
     <capture_frame_buffer name="FB1">
 		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
@@ -89,7 +88,7 @@
         <texture stage_id="0" name="FB1"/>
     </scattered_light>
     SCATTERED_LIGHT_END
-    
+    -->
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_gui render="true"/>
