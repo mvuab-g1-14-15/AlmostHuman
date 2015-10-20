@@ -82,3 +82,9 @@ void CObject3D::SetDirection( const Math::Vect3f& aDirection )
     SetRoll( 0.0f );
     MakeTransform();
 }
+
+void CObject3D::ChangePosition( const Math::Vect3f& aPosition )
+{
+  m_Position = aPosition;
+  MakeTransform();
+}
