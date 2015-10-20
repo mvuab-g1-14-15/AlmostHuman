@@ -47,7 +47,7 @@ bool CObject3D::Init( const CXMLTreeNode& atts )
 }
 
 void CObject3D::MakeTransform()
-{
+{	
     Math::Mat44f world;
     Math::Mat44f scale;
 
@@ -56,14 +56,14 @@ void CObject3D::MakeTransform()
     Math::Mat44f rotationZ;
     Math::Mat44f translation;
 
-    translation.SetFromPos( m_Position );
+    translation.Translate( m_Position );
     scale.SetFromScale( m_Scale.x, m_Scale.y, m_Scale.z );
 
-    rotationX.SetFromAngleX( m_fPitch );
+    rotationX.SetFromAngleX( -m_fPitch );
     rotationY.SetFromAngleY( m_fYaw );
     rotationZ.SetFromAngleZ( m_fRoll );
 
-    m_Transform = translation * scale * ( rotationX * rotationY * rotationZ );
+    m_Transform = translation * ( rotationY * rotationX * rotationZ ) * scale;
 }
 
 const Math::Vect3f CObject3D::GetDirection() const

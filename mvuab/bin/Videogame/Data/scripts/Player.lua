@@ -65,7 +65,7 @@ function CPlayer:Update()
 		self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
 	end
 	
-	--self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
+	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
 	self.BillboardPlayer:ChangePosition( self.RenderableObject:GetBonePosition("CATRigRArmPalm") )
