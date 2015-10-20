@@ -46,8 +46,8 @@ fn ExportStaticMeshXMLFile filenameXML MeshDir aRoom =
 --export de la class
 fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 (
-	try
-	(
+	--try
+	--(
 			
 		local unique_instances = GetUniqueInstancesScene()
 		local m_LayersIndex = dotnetobject "System.Collections.Generic.Dictionary`2[System.String,System.Int16]"
@@ -77,15 +77,26 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 			
 			local l_Layer = (getUserProp Obj "layer_render")
 			
-			if l_Layer == undefined then
+			if l_Layer == undefined or l_Layer == "" then
 			(
 				l_Layer = "solid"
 				setUserProp Obj "layer_render" "solid"
 			)
-
-			local l_index = m_LayersIndex.Item[l_Layer]
-						
-			append m_LayersVector[l_index] Obj
+			
+			if (l_Layer != "solid") then
+			(
+				local l_index = m_LayersIndex.Item[l_Layer]	
+				local l_index_solid = m_LayersIndex.Item["solid"]						
+				append m_LayersVector[l_index] Obj
+				append m_LayersVector[l_index_solid] Obj
+			)
+			else
+			(
+				local l_index = m_LayersIndex.Item[l_Layer]				
+				append m_LayersVector[l_index] Obj
+			)
+			
+		
 		)	
 		
 		for LayerItem in m_LayersVector do
@@ -102,38 +113,65 @@ fn ExportRenderableObjectXMLFile AllObj filenameXML l_Layers l_Room=
 				
 			for Obj in LayerItem do
 			(	
-				local l_CoreName = GetObjectCore Obj unique_instances
-				local lRotation = Obj.rotation 
-				local l_Yaw = GetYaw lRotation as string
-				local l_Pitch = GetPitch lRotation as string
-				local l_Roll = GetRoll lRotation as string
+				if (getUserProp Obj "anim_model" != undefined AND getUserProp Obj "anim_model" != "") then
+				(
+					local l_CoreName = getUserProp Obj "anim_model"
+					local lRotation = Obj.rotation 
+					local l_Yaw = GetYaw lRotation as string
+					local l_Pitch = GetPitch lRotation as string
+					local l_Roll = GetRoll lRotation as string
+					
+					local l_Name = (Obj.name + "_" + l_Room) as String
+					local l_Core = (l_CoreName + "_" + l_Room) as String
+
+					local l_NewMeshInstanceNode = xDoc.getNewNode "AnimatedInstance"			
+					-- append the new node MeshInstance to the root node RenderableObjects
+					l_RootNode.AppendNode l_NewMeshInstanceNode 
+
+					l_NewMeshInstanceNode.AddAttributeAsString "name" l_Name	
+					l_NewMeshInstanceNode.AddAttributeAsString "core" l_CoreName
+					l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+					
+					l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
+					l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
+					l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 				
-				local l_Name = (Obj.name + "_" + l_Room) as String
-				local l_Core = (l_CoreName + "_" + l_Room) as String
+					l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
+				)
+				else
+				(
+					local l_CoreName = GetObjectCore Obj unique_instances
+					local lRotation = Obj.rotation 
+					local l_Yaw = GetYaw lRotation as string
+					local l_Pitch = GetPitch lRotation as string
+					local l_Roll = GetRoll lRotation as string
+					
+					local l_Name = (Obj.name + "_" + l_Room) as String
+					local l_Core = (l_CoreName + "_" + l_Room) as String
 
-				local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
-				-- append the new node MeshInstance to the root node RenderableObjects
-				l_RootNode.AppendNode l_NewMeshInstanceNode 
+					local l_NewMeshInstanceNode = xDoc.getNewNode "MeshInstance"			
+					-- append the new node MeshInstance to the root node RenderableObjects
+					l_RootNode.AppendNode l_NewMeshInstanceNode 
 
-				l_NewMeshInstanceNode.AddAttributeAsString "name" l_Name	
-				l_NewMeshInstanceNode.AddAttributeAsString "core" l_Core
-				l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+					l_NewMeshInstanceNode.AddAttributeAsString "name" l_Name	
+					l_NewMeshInstanceNode.AddAttributeAsString "core" l_Core
+					l_NewMeshInstanceNode.AddAttributeCoordinate "pos" Obj.Pos
+					
+					l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
+					l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
+					l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
 				
-				l_NewMeshInstanceNode.AddAttributeAsString "yaw" l_Yaw
-				l_NewMeshInstanceNode.AddAttributeAsString "pitch" l_Pitch
-				l_NewMeshInstanceNode.AddAttributeAsString "roll" l_Roll
-			
-				l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
-
+					l_NewMeshInstanceNode.AddAttributeCoordinate "scale" [Obj.Scale.z, Obj.Scale.x, Obj.Scale.y]
+				)	
 			)
 			xDoc.PrettySaveXML()
 		)	
 		
-	)
-	catch
-	(
-		format "Error generating renderable object\n"
-	)
+	--)
+	--catch
+	--(
+	---	format "Error generating renderable object\n"
+	--)
 )
 
 fn ExportTextureFile AllObj DestPath = 
@@ -391,4 +429,49 @@ function ExportLayerFile AllObj aDirToXML aRoom =
 	(
 		format "Error generating layer XML file\n"
 	)
+)
+
+fn ExportEnemyPositionToXML aDirToXML =
+(
+	
+	--<enemy name="Enemy1" type="easy" pos="5.0 2.0 3.0" yaw="0.0"/>
+	
+		local l_OutXmlFilenameToWrite = (aDirToXML +"\\"+ "enemies_pos.xml")
+	
+		-- create the document and set the filename
+		xDoc = XMLDocument l_OutXmlFilenameToWrite
+		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "enemies_pos"
+		xDoc.AppendNode l_RootNode
+		
+		if selection.count == 0 then 
+		(
+			format "Empty selection. Select any object \n"
+			return -1
+		)
+		
+		local layers=#()
+		
+		local lCount = 20
+		
+		for Obj in selection do
+		(
+
+			local lRotation = Obj.rotation 
+			local l_Yaw = GetYaw lRotation as string
+			local l_EnemyName =  ("Enemy_"+""+ (lCount)as String) 
+					
+			local l_NewLayerNode = xDoc.getNewNode "enemy"
+			l_RootNode.AppendNode l_NewLayerNode
+			l_NewLayerNode.AddAttributeAsString "name" l_EnemyName
+			l_NewLayerNode.AddAttributeAsString "type" "easy"
+			l_NewLayerNode.AddAttributeCoordinate "pos" Obj.Pos
+			l_NewLayerNode.AddAttributeAsString "yaw" l_Yaw
+			
+			lCount = lCount + 1
+		)
+		format "Enemies XML created on: % \n" (l_OutXmlFilenameToWrite as String)		
+		xDoc.PrettySaveXML()
+	
 )

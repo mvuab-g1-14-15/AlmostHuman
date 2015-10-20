@@ -4,4 +4,5 @@
 	<animated_model name="Player" path="Data/animated_models/logan/"/>
 	<animated_model name="boss" path="Data/animated_models/boss/"/>
 	<animated_model name="playercinematic1" path="Data/animated_models/PlayerCinematic/"/>
+	<animated_model name="robot_assembly" path="Data/animated_models/robot_assembly/"/>
 </animated_models>
