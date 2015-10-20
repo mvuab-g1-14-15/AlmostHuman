@@ -36,12 +36,10 @@ function CPlayer:__init()
 	engine:Trace("He entrado en el init sala1")
 	
 	self.Animation = "idle"
-	
 	self.Life = 100.0
-	
 	self.Room = "sala1"
 	
-	self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
+	--self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
 function CPlayer:Update()
@@ -57,7 +55,9 @@ function CPlayer:Update()
 	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
-	self.BillboardPlayer:ChangePosition( self.RenderableObject:GetBonePosition("CATRigRArmPalm") )
+	self.BlasterPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm")
+	self.Blaster:Update(self.BlasterPosition)
+	--self.BillboardPlayer:ChangePosition( self.BlasterPosition )
 	
 	if not self.Blaster:GetIsShooting() then
 		if self.PlayerController:GetIsMoving() then
@@ -89,7 +89,6 @@ function CPlayer:Update()
 		end
 	end
 	
-	self.Blaster:Update()
 	self.StealthAttack:Update()
 	if self.Life <= 0 then
 		FunctionGameOver()
