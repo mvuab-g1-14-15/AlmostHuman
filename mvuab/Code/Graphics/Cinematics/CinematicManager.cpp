@@ -8,6 +8,7 @@
 #include "Cinematics\CinematicsElement\SetActiveElement.h"
 #include "Cinematics\CinematicsElement\AddRenderablesElement.h"
 #include "Cameras\CameraCinematical.h"
+#include "Cameras\CameraFPShooter.h"
 #include "Cameras\CameraManager.h"
 #include "Cinematics\Cinematic.h"
 #include "XML\XMLTreeNode.h"
@@ -126,6 +127,19 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
                     CHECKED_DELETE( ObjectCinematic );
                 }
             }
+			else if( TagName == "camera" )
+			{
+				const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
+				Math::Vect3f lPos = SubTreeNode.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f() );
+				Math::Vect3f lLookAt = SubTreeNode.GetAttribute<Math::Vect3f>( "look_at", Math::Vect3f() );
+				CCameraFPShooter* lCamera = new CCameraFPShooter();				
+				Math::Vect3f& d = lLookAt - lPos;
+				lCamera->SetYaw( Math::Utils::ATan2( d.z, d.x ) );
+				lCamera->SetPitch( Math::Utils::ATan2( d.y, Math::Utils::Sqrt( d.z * d.z + d.x * d.x ) ) );
+				lCamera->SetPosition( lPos );
+				lCamera->SetName( lName );
+				CameraMInstance->AddResource( lName, lCamera );
+			}
         }
     }
 }

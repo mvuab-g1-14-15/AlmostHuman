@@ -14,6 +14,7 @@
 	<renderable_technique_manager file_config="../CommonData/effects/effects_pools.xml"/>
 	<static_mesh_manager file_config=""/>
 	<animated_manager file_config="Data/animated_models.xml"/>
+	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 	<scene file_config="Data/scene.xml"/>
 	<scene_render_command_manager file_config="../CommonData/scene_renderer_commands.xml"/>
 	<camera_manager file_config="no_name"/>
@@ -25,7 +26,6 @@
 	<gui_manager file_config="Data/gui.xml"/>
 	<trigger_manager file_config="Data/triggers.xml"/>
 	<sound_manager file_config ="Data/sounds.xml"/>
-	<cinematic_manager file_config="Data/cinematic/cinematics.xml"/>
 	<id_manager file_config="no_name"/>
 	<editors_manager file_config=""/>
 </managers>
