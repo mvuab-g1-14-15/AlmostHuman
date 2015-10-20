@@ -49,9 +49,3 @@ void CBillboardInstance::Render(CRenderableVertexs* aRV,CGraphicsManager* aGM, C
         aGM->SetTransform( Math::Mat44f() );
     }
 }
-
-void CBillboardInstance::ChangePosition( const Math::Vect3f& aPosition )
-{
-  m_Position = aPosition;
-  MakeTransform();
-}

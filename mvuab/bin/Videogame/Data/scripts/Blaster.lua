@@ -22,10 +22,7 @@ function CBlaster:__init()
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
 	
 	self.Blash = CBlash()
-	--self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
-	--self.AmmunitionUsed = {}
-	
-    engine:Trace("Blaster initialized")
+	self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
 end
 
 function CBlaster:CalculateDamage()
@@ -37,32 +34,37 @@ function CBlaster:CalculateDamage()
 	return damage
 end
 
-function CBlaster:Shoot()
-	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
-	local lPosition = camera_manager:GetCurrentCamera():GetPosition() + lDirection * 0.5
-	local lShoot = CShoot(self.ShootSpeed, lDirection, lPosition, self:CalculateDamage())
-	lShoot:Init()
-	table.insert(self.Shoots, lShoot)
-	
-	local lEnemies = enemy_manager:GetEnemiesAtDistance( 5.0 )
-	local lPlayerPos = g_Player:GetPosition()
-	for i = 1, #lEnemies do
-		lEnemy = lEnemies[i]
-		lEnemy:SetSuspected(true)
-		lEnemy:SetSuspectedPosition(lPlayerPos)
+function CBlaster:HasAmmo()
+	if #self.Ammunition == 0 then
+		return false;
+	else
+		return true;
 	end
-	
-	self.Blash:Begin(lPosition)
+end
 
---[[ Old code
-	local lEnemy = self:GetEnemyFromRay()
-    
-	if lEnemy ~= nil then
-		local damage = self:CalculateDamage()
-		lEnemy:AddDamage( damage )
-		--engine:Trace("Enemy -> Actual HP: " .. lEnemy:GetLife() .. " Damage: " .. damage)
+function CBlaster:UpdateAmmo()
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		lAmmo:Update();
 	end
-	]]
+end
+
+function CBlaster:Shoot( aPosition )
+	engine:Trace("Blaster Shoot")
+	self.Blash:Begin(aPosition)
+	local lAlreadyShoot = false;
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		if not lAmmo:IsActive() and not lAlreadyShoot then
+			local lDirection = camera_manager:GetCurrentCamera():GetDirection()
+			lAmmo:Begin( aPosition, lDirection, 30.0 );
+			lAlreadyShoot = true;
+		end
+		-- Update the impacted ones
+		if lAmmo:IsImpacted() then
+			lAmmo:End();
+		end
+	end
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -98,8 +100,9 @@ function CBlaster:CreateParticles(position, direction)
 	--particle_manager:AddEmitter( l_Emitter )
 end
 
-function CBlaster:Update()
+function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
+		self:UpdateAmmo();
 		if action_manager:DoAction("Shoot") then
 			if self.Energy > 1 then
 				self.IsShooting = true
@@ -121,16 +124,16 @@ function CBlaster:Update()
 			end
 		end
 		if action_manager:DoAction("ShootUp") then
+			engine:Trace("ShootUp")
 			if self.Energy > 1 then
 				if self.TimePressed < (self.MaxTimePressed * 0.1) then
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
-					
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
 				end
-				self:Shoot()
+				self:Shoot( aPosition )
 				g_Player:SetAnimation("shoot")
 			else
 			--SONIDO DE PEDO AQUI
@@ -148,7 +151,6 @@ function CBlaster:Update()
 				countdowntimer_manager:Reset("BlasterFinish", false)
 			end
 		end
-			
 
 		for i = #self.Shoots,1,-1 do
 			local lShoot = self.Shoots[i]
@@ -161,7 +163,8 @@ function CBlaster:Update()
 		end
 	end
 	
-	self.Blash:Update()
+	--Update the blash
+	self.Blash:Update( aPosition )
 end
 
 function CBlaster:GetIsShooting()

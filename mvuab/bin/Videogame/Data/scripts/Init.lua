@@ -21,7 +21,8 @@ g_PlayerCinematic = nil
 function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
-	--scene:ActivateRoom("sala1")
+
+	scene:ActivateRoom("sala1")
 	--scene:ActivateRoom("pasillo")
 	--scene:ActivateRoom("sala2")
 	--scene:ActivateRoom("sala3")	
@@ -55,7 +56,7 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	engine:Trace("Finish the load_gameplay()")
 	g_Player:Update()
-	cinematic_manager:PlayCinematic("cinematica_inicial")
+	--cinematic_manager:PlayCinematic("cinematica_inicial")
 	--
 	-- if renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1")) == false  then
 		-- renderable_objects_manager_characters:RemoveResource("PlayerCinematic")
@@ -187,7 +188,7 @@ function update_gameplay()
 			end
 		end	
 		
-		--if g_bDistanceC4 and g_bC41 and g_bC42 then
+		if g_bDistanceC4 and g_bC41 and g_bC42 then
 			if action_manager:DoAction("DetonarC4") then
 				g_bC41 = false
 				g_bC42 = false
@@ -196,7 +197,7 @@ function update_gameplay()
 				cinematic_manager:Execute("explotion")
 				--Code para montar las cinematicas y matar a los drones
 			end
-		--end	
+		end	
 		dt = timer:GetElapsedTime()
 		UpdateVariables(dt)
 	end

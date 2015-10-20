@@ -34,6 +34,7 @@ class CObject3D
 
         bool IsVisible() const { return mIsVisible; }
         void ChangeVisibility( bool aVisibility ) { mIsVisible = aVisibility;}
+        void ChangePosition( const Math::Vect3f& aPosition );
 
         virtual ~CObject3D( void )
         {

@@ -3,7 +3,7 @@ class 'CBlash'
 
 function CBlash:__init()
 	self.Active = false
-	countdowntimer_manager:AddTimer("BlashTTL", 0.01, false) 
+	countdowntimer_manager:AddTimer("BlashTTL", 0.21, false) 
 	self.BillboardBlash = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), false)
 	engine:Trace("Blash ctor")
 end
@@ -25,10 +25,10 @@ function CBlash:End()
 	countdowntimer_manager:Reset("BlashTTL", false)
 end
 
-function CBlash:Update()
-	--engine:Trace("Blash update ")
+function CBlash:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
-		engine:Trace("Blash update inside")
+		--engine:Trace("Blash update ")
+		self.BillboardBlash:ChangePosition( aPosition )
 		if countdowntimer_manager:isTimerFinish("BlashTTL") then
 			self:End()
 		end

@@ -127,7 +127,7 @@ bool CShoot::Init()
 
 void CShoot::Update()
 {
-  if ( !mImpacted )
+  if ( false )
   {
     const Math::Vect3f& lDirection = GetDirection();
     const Math::Vect3f& lPosition = GetPosition();

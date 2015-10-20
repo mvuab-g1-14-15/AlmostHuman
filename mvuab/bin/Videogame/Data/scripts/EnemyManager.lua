@@ -343,6 +343,16 @@ function CEnemyManager:AddShoot(aShoot)
 	table.insert(self.Shoots, aShoot)
 end
 
+function CEnemyManager:CollisionWithEnemy(aName, aPos, aRadius)
+	lEnemy = self:GetCloseEnemyNotSelf(aPos, aName)
+	if lEnemy == nil then
+		return false, nil
+	end
+	local lPos = lEnemy:GetPosition()
+	local lDist = lPos:Distance(aPos)
+	return lDist < aRadius * 3.0, lEnemy
+end
+
 --dofile("./data/level2/scripts/StateMachine.lua")
 --dofile("./data/level2/scripts/CoreEnemy.lua")
 --dofile("./data/level2/scripts/shoot.lua")

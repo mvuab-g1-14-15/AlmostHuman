@@ -4,8 +4,11 @@
 	<mesh file="logan.cmf"/>
 	<animation name="idle" file="idle.caf"/>
 	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
-	<animation name="shoot" file="shoot_00.caf"/>
+	<animation name="shoot" file="shoot.caf"/>
+	<animation name="carga_blaster" file="carga_blaster.caf"/>
+	<animation name="shoot_blaster" file="shoot_blaster.caf"/>
+	<animation name="carga_energia" file="carga_energia.caf"/>
+	<animation name="atac_sigil" file="atac_sigil.caf"/>
 	<animation name="cinematica_inicial_sala1" file="cinematica_inicial_sala1.caf"/>
-	<animation name="cinematica_inicial_sala1_pos00" file="cinematica_inicial_sala1_pos00.caf"/>
 	<animation name="crash_rejilla" file="crash_rejilla.caf"/>	
 </animated_model>

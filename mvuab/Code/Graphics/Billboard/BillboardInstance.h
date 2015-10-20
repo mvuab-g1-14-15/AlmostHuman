@@ -23,7 +23,6 @@ class CBillboardInstance : public CName, public CObject3D
         static void DestroyBillboardInstanceGeometry();
 
         bool Init(const CXMLTreeNode& atts);
-        void ChangePosition( const Math::Vect3f& aPosition );
         void SetAngle( float aAngle ) { mAngle = aAngle; }
 
         void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, CEffectTechnique* aTechnique );

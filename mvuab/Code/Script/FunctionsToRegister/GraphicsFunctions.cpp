@@ -92,7 +92,6 @@ void registerBillboards( lua_State* aLuaState )
   
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS2( CBillboardInstance, CName, CObject3D )
-  LUA_DECLARE_METHOD( CBillboardInstance, ChangePosition )
   LUA_DECLARE_METHOD( CBillboardInstance, SetAngle )
   LUA_END_DECLARATION
 
@@ -245,6 +244,7 @@ void registerObject3D( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CObject3D, SetDirection )
   LUA_DECLARE_METHOD( CObject3D, IsVisible )
   LUA_DECLARE_METHOD( CObject3D, ChangeVisibility )
+  LUA_DECLARE_METHOD( CObject3D, ChangePosition )
   LUA_END_DECLARATION
 }
 
