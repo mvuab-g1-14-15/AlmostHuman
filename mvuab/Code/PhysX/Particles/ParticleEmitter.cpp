@@ -285,3 +285,9 @@ bool CParticleEmitter::IsActive()
 
   return mIsActive;
 }
+
+void CParticleEmitter::Reset()
+{
+  mActualTime = 0.0f;
+  mIsActive = true;
+}

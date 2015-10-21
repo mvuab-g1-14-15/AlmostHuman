@@ -1,15 +1,16 @@
 class 'CAmmo'
 --Clase que implementa la primera rafaga del disparo de logan
 
-function CAmmo:__init()
-	engine:Trace("ammo ctor")
+function CAmmo:__init( aId )
+	self.Id = aId;
+	engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false)
 	self.Light = CreateOmniLight()
-	self.Light:SetName("AmmoLight")
+	self.Light:SetName("AmmoLight_".. self.Id )
     self.Light:SetIntensity( 0.65 )
-    self.Light:SetEndRangeAttenuation( 2.0 )
-    self.Light:SetColor( CColor(0.0, 0.0, 1.0, 1.0 ) )
+    self.Light:SetEndRangeAttenuation( 1.0 )
+    self.Light:SetColor( CColor(0.5, 0.5, 1.0, 1.0 ) )
     self.Light:SetPosition( Vect3f(0, 0, 0)	)
     self.Light:SetRenderShadows( false )
 	light_manager:AddResource(self.Light:GetName(), self.Light)

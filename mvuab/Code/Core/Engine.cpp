@@ -90,6 +90,11 @@ void CEngine::Init( CEngineConfig* aEngineConfig )
   }
 }
 
+
+#ifdef NO_TRACE
+void CEngine::TraceOnce( const std::string& /*TraceStr*/ ){}
+void CEngine::Trace( const std::string& /*TraceStr*/ ){}
+#else
 void CEngine::TraceOnce( const std::string& TraceStr )
 {
     if (TraceStr == mLastTraceMsg)
@@ -98,7 +103,6 @@ void CEngine::TraceOnce( const std::string& TraceStr )
     Trace(TraceStr);
 
     mLastTraceMsg = TraceStr;
-
 }
 void CEngine::Trace( const std::string& TraceStr )
 {
@@ -115,6 +119,7 @@ void CEngine::Trace( const std::string& TraceStr )
         OutputDebugString( lMsg.str().c_str() );
     }
 }
+#endif
 
 void CEngine::QuitGame()
 {

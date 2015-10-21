@@ -26,7 +26,8 @@ public:
   virtual bool Init( const CXMLTreeNode& atts );
   void         Update( float dt );
   void         Render();
-  bool IsActive();
+  bool         IsActive();
+  void         Reset();
 
   const uint32 GetParticleCount() const;
   const CParticle* GetParticle( const uint32 aIdx ) const;
