@@ -15,7 +15,7 @@
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha02.png" stage_id="2"/>
 	</billboard>
-	<billboard name="blash" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
+	<billboard name="blash" technique="BillboardAlignedToCameraTechnique" alpha="0.3" size="0.2" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
 		<texture filename="../CommonData/textures/Billboards/blash2.jpg" stage_id="0"/>
 	</billboard>
 	<billboard name="ammo" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">

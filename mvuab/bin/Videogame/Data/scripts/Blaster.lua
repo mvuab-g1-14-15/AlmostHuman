@@ -22,7 +22,13 @@ function CBlaster:__init()
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
 	
 	self.Blash = CBlash()
-	self.Ammunition = {CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() , CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo(), CAmmo() }
+	self.Ammunition = {}
+	self.MaxAmmo = 25;
+	self.AmmoId = 0;
+	for i=1,self.MaxAmmo do
+		table.insert( self.Ammunition, CAmmo(i) );
+		self.AmmoId = self.AmmoId + 1;
+	end
 end
 
 function CBlaster:CalculateDamage()
@@ -128,8 +134,6 @@ function CBlaster:Update( aPosition )
 					g_Player:SetAnimation("charge_loop")
 					self.IsAcumulatorSound = true
 				end
-			else
-				self:EndAmmo()
 			end
 		end
 		if action_manager:DoAction("ShootUp") then
@@ -173,7 +177,8 @@ function CBlaster:Update( aPosition )
 	end
 	
 	--Update the blash
-	self.Blash:Update( aPosition )
+	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
+	self.Blash:Update( aPosition + lDirection* 0.1)
 end
 
 function CBlaster:GetIsShooting()
