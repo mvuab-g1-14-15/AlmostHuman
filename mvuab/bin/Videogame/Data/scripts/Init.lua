@@ -21,6 +21,7 @@ g_PlayerCinematic = nil
 function load_basics()
 	engine:Trace("Init the load_basics()")
 	-- basic loads
+
 	scene:ActivateRoom("sala1")
 	--scene:ActivateRoom("pasillo")
 	--scene:ActivateRoom("sala2")
@@ -126,21 +127,28 @@ function update_gameplay()
 			end
 			
 		end
-		if action_manager:DoAction("PressR") then
-			if g_bChargeEnergy then
+		
+		if g_bChargeEnergy then
+			if action_manager:DoAction("PressR") then
 				ChargeEnergy()
 			end
-			if g_bChangeRoom then
+		end
+		
+		if g_bChangeRoom then
+			if action_manager:DoAction("PressR") then
 				g_Player:SetPosition(ChangeRoom())
 			end
 		end
-		if action_manager:DoAction("PressX") then			
-			if g_bPressRoom2X then
+		if g_bPressRoom2X then
+			if action_manager:DoAction("PressX") then						
 				if CuentaAtras == 3 then
 					gui_manager:ShowStaticText("Block")
 				end
 				g_bPressedRoom2X = true
-			elseif g_bOpenDoor2 then
+			end
+		end
+		if g_bOpenDoor2 then
+			if action_manager:DoAction("PressX") then						
 				cinematic_manager:Execute("OpenDoor")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				gui_manager:ShowStaticText("OpenDoor")
@@ -148,26 +156,29 @@ function update_gameplay()
 			end
 		end	
 		
-		if action_manager:DoAction("RomperRejilla") then			
-			if g_bPressRoom1Button then				
+		if g_bPressRoom1Button then
+			if action_manager:DoAction("RomperRejilla") then									
 				g_bPressedRoom1Button = true
 				cinematic_manager:Execute("rejilla")
 			end
 		end	
 		
-		if action_manager:DoAction("OpenDoorRoom3") then
-			if g_bPressRoom3X then
+		if g_bPressRoom3X then
+			if action_manager:DoAction("OpenDoorRoom3") then			
 				--gui_manager:ShowStaticText("Alarm")
 				g_bAlarmRoom3 = true
 				enemy_manager:AlarmRoom("room3")				
 				g_bPressedRoom3X = true
-			elseif g_bOpenDoor3 then
+			end
+		end
+		if g_bOpenDoor3 then
+			if action_manager:DoAction("OpenDoorRoom3") then
 				--Code para abrir puerta
 			end
 		end	
 		
-		if action_manager:DoAction("PressR") then
-			if g_bPressE then
+		if g_bPressE then
+			if action_manager:DoAction("PressR") then			
 				g_bPressedE = true
 				if g_fC4Colocada == "1" then
 					g_bC41 = true
@@ -176,15 +187,16 @@ function update_gameplay()
 				end
 			end
 		end	
-		if action_manager:DoAction("DetonarC4") then
-			--if g_bDistanceC4 and g_bC41 and g_bC42 then
+		
+		if g_bDistanceC4 and g_bC41 and g_bC42 then
+			if action_manager:DoAction("DetonarC4") then
 				g_bC41 = false
 				g_bC42 = false
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
 				cinematic_manager:Execute("explotion")
 				--Code para montar las cinematicas y matar a los drones
-			--end
+			end
 		end	
 		dt = timer:GetElapsedTime()
 		UpdateVariables(dt)
@@ -199,7 +211,7 @@ function update_gameplay()
 			gui_manager:ShowStaticText("HideInBarrel")
 		end
 	end
-	--if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
+	if not (g_ConsoleActivate or g_CinematicActive or g_PauseGame) then
 		if action_manager:DoAction("ChangeCamera" ) then
 			if "FreeCam" == camera_manager:GetCurrentCameraName() then
 				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
@@ -223,7 +235,7 @@ function update_gameplay()
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
 		end
-	--end
+	end
 end
 
 function UpdateVariables(dt)

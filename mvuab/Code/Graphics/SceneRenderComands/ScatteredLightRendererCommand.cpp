@@ -29,9 +29,9 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
-    // 92.0f, -9.0f, -44.0f
-    // 94.0f, -9.0f, -25.3f 
-    //
+    // 92.0f,   -9.0f,  -44.0f
+    // 94.0f,   -9.0f,  -25.3f 
+    // 2095.0f, -65.0f, 167.0f
     //
     //
     std::vector<BOOL> l_ActiveLights; ;
@@ -46,7 +46,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(94.0f, -9.0f, -25.3f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
+    l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
 
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
