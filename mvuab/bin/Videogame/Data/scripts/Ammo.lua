@@ -29,6 +29,7 @@ end
 function CAmmo:Begin( aPosition, aDirection, aSpeed )
 	engine:Trace( "ammo is "..aPosition:ToString() )
 	self.Active = true
+	self.Impacted = false;
 	
 	self.BillboardAmmo:ChangePosition( aPosition );
 	self.Light:SetPosition( aPosition );
@@ -46,7 +47,6 @@ end
 function CAmmo:End()
 	engine:Trace("ammo end")
 	self.Active = false;
-	self.Impacted = false;
 	
 	--hide all the elements
 	self.Light:ChangeVisibility( false )
@@ -70,6 +70,7 @@ function CAmmo:Update()
 				lDistance = lCollisionPoint:Distance( lNewPosition )
 				if ( lDistance < lLength ) then
 					self.Impacted = true
+					engine:Trace("Impacted to something")
 					self.Position = lCollisionPoint
 				else
 					self.Position = lNewPosition
@@ -80,7 +81,9 @@ function CAmmo:Update()
 			
 			-- If the ammo has not impacted to something, do not allow to be updated
 			if self.CurrentDistance > self.MaxDistance then
+				engine:Trace("Impacted max distance")
 				self.Impacted = true
+				self:End();
 			end
 			
 			-- set the position to the data

@@ -49,6 +49,13 @@ function CBlaster:UpdateAmmo()
 	end
 end
 
+function CBlaster:EndAmmo()
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		lAmmo:End();
+	end
+end
+
 function CBlaster:Shoot( aPosition )
 	engine:Trace("Blaster Shoot")
 	self.Blash:Begin(aPosition)
@@ -121,6 +128,8 @@ function CBlaster:Update( aPosition )
 					g_Player:SetAnimation("charge_loop")
 					self.IsAcumulatorSound = true
 				end
+			else
+				self:EndAmmo()
 			end
 		end
 		if action_manager:DoAction("ShootUp") then
