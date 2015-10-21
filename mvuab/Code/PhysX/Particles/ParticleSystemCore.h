@@ -17,6 +17,7 @@ class CParticleSystemCore
         ~CParticleSystemCore();
         void AddInstance( CParticleInstance* aInstance );
         void AddEmitter( CParticleEmitter* aEmitter );
+        void ResetEmitters();
         void Update();
         void Render();
         void Refresh();

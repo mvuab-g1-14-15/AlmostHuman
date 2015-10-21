@@ -83,3 +83,11 @@ void CParticleSystemCore::AddEmitter( CParticleEmitter* aEmitter )
     else
         LOG_ERROR_APPLICATION("Adding a null emitter to the core");
 }
+
+void CParticleSystemCore::ResetEmitters()
+{
+  BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+  {
+    lParticleEmitter->Reset();
+  }
+}
