@@ -129,56 +129,74 @@ function update_gameplay()
 		end
 		
 		if g_bChargeEnergy then
-			if action_manager:DoAction("PressR") then
+			if action_manager:DoAction("Action") then
 				ChargeEnergy()
 			end
 		end
 		
 		if g_bChangeRoom then
-			if action_manager:DoAction("PressR") then
+			if action_manager:DoAction("Action") then
 				g_Player:SetPosition(ChangeRoom())
 			end
 		end
+		
+		if g_bPressRoomPasillo then
+			if action_manager:DoAction("Action") then
+					cinematic_manager:Execute("OpenDoorPasillo")
+					trigger_manager:GetTriggerByName("pasillo_sala3"):SetActive(false)
+					gui_manager:ShowStaticText("OpenDoor")
+					--physic_manager:ReleasePhysicActor("puerta_fisica_sala2")				
+					g_bPressRoomPasillo = false
+			end
+		end
+		
 		if g_bPressRoom2X then
-			if action_manager:DoAction("PressX") then						
-				if CuentaAtras == 3 then
+			if action_manager:DoAction("Action") then
+				if not enemigosVivos then
+					cinematic_manager:Execute("OpenDoor")
+					trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
+					gui_manager:ShowStaticText("OpenDoor")
+					g_bPressRoom2X = false
+					--physic_manager:ReleasePhysicActor("puerta_fisica_sala2")				
+				elseif CuentaAtras == 3 then
 					gui_manager:ShowStaticText("Block")
 				end
 				g_bPressedRoom2X = true
 			end
 		end
-		if g_bOpenDoor2 then
-			if action_manager:DoAction("PressX") then						
-				cinematic_manager:Execute("OpenDoor")
-				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
-				gui_manager:ShowStaticText("OpenDoor")
-				--Code para abrir puerta
-			end
-		end	
+		-- if g_bOpenDoor2 then
+			-- if action_manager:DoAction("Action") then						
+				-- cinematic_manager:Execute("OpenDoor")
+				-- trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
+				-- gui_manager:ShowStaticText("OpenDoor")
+				-- physic_manager:ReleasePhysicActor("puerta_fisica_sala2")
+				-- --Code para abrir puerta
+			-- end
+		-- end	
 		
 		if g_bPressRoom1Button then
-			if action_manager:DoAction("RomperRejilla") then									
+			if action_manager:DoAction("Action") then								
 				g_bPressedRoom1Button = true
 				cinematic_manager:Execute("rejilla")
 			end
 		end	
 		
 		if g_bPressRoom3X then
-			if action_manager:DoAction("OpenDoorRoom3") then			
+			if action_manager:DoAction("Action") then			
 				--gui_manager:ShowStaticText("Alarm")
 				g_bAlarmRoom3 = true
-				enemy_manager:AlarmRoom("room3")				
+				--enemy_manager:AlarmRoom("room3")				
 				g_bPressedRoom3X = true
 			end
 		end
 		if g_bOpenDoor3 then
-			if action_manager:DoAction("OpenDoorRoom3") then
+			if action_manager:DoAction("Action") then
 				--Code para abrir puerta
 			end
 		end	
 		
 		if g_bPressE then
-			if action_manager:DoAction("PressR") then			
+			if action_manager:DoAction("Action") then			
 				g_bPressedE = true
 				if g_fC4Colocada == "1" then
 					g_bC41 = true
@@ -189,7 +207,7 @@ function update_gameplay()
 		end	
 		
 		if g_bDistanceC4 and g_bC41 and g_bC42 then
-			if action_manager:DoAction("DetonarC4") then
+			if action_manager:DoAction("Action") then
 				g_bC41 = false
 				g_bC42 = false
 				g_bBombaActivada = true
