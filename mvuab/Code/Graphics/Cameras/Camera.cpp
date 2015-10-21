@@ -10,7 +10,7 @@ CCamera::CCamera()
   , m_view_d( 2.0f )
   , m_FovInRadians( Math::Utils::Deg2Rad( 60.0f ) )
   , m_ZNear( 0.1f )
-  , m_ZFar( 65.0f )
+  , m_ZFar( 1000.0f )
   , m_Enable( false )
 {
   uint32 w, h;
