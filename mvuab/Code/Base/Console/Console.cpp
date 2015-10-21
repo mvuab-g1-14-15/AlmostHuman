@@ -35,6 +35,10 @@ CConsole::CConsole( const CXMLTreeNode & atts )
 
 void CConsole::Init()
 {
+#ifdef NO_TRACE
+  return;
+#endif // NO_TRACE
+
     if( !CEngineConfig::GetSingleton().GetEnableConsole() )
     {
         return;
