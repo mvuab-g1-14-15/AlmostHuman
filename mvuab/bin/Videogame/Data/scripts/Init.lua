@@ -52,8 +52,21 @@ function load_gameplay()
 	g_Barrels["Barrel008"] = CBarrel("Barrel008", Vect3f(19.0254, -17.9324, 74.0891))
 	g_Barrels["Barrel009"] = CBarrel("Barrel009", Vect3f(35.0987, -17.9324, 67.464))
 	g_Barrels["Barrel010"] = CBarrel("Barrel010", Vect3f(46.8367, -17.9324, 58.3305))
-
+	
+	--Load Ambient
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
+	
+	--Sounds Sala3 TODO: Poner en metodos de carga de sonidos por sala
+	--Load Assembly Machine
+	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine1_2")
+	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine2_2")
+	--Load Robot Assembly
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly1")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly2")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly3")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly4")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly5")
+	
 	engine:Trace("Finish the load_gameplay()")
 	g_Player:Update()
 	--cinematic_manager:PlayCinematic("cinematica_inicial")

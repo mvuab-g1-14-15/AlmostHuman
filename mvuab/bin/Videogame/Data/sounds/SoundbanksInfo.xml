@@ -295,6 +295,8 @@
 			<IncludedEvents>
 				<Event Id="2757069037" Name="Play_Fan"/>
 				<Event Id="1355231703" Name="Play_LightHumming"/>
+				<Event Id="2425205996" Name="Play_Machine_Assembly"/>
+				<Event Id="3759318933" Name="Play_Robot_Arm"/>
 				<Event Id="2995129850" Name="Play_Shoot_Nave"/>
 				<Event Id="2858841480" Name="Play_sparks"/>
 				<Event Id="3459205581" Name="Play_steams"/>
@@ -303,6 +305,10 @@
 				<File Id="10864768" Language="SFX">
 					<ShortName>steam(vapor)_short.wav</ShortName>
 					<Path>SFX\steam(vapor)_short_BADC626A.wem</Path>
+				</File>
+				<File Id="274114536" Language="SFX">
+					<ShortName>ensamblaje_sfx_short_1.wav</ShortName>
+					<Path>SFX\ensamblaje_sfx_short_1_E106FFBE.wem</Path>
 				</File>
 				<File Id="294083481" Language="SFX">
 					<ShortName>Light Humming.wav</ShortName>
@@ -316,9 +322,25 @@
 					<ShortName>Fan.wav</ShortName>
 					<Path>SFX\Fan_76A5D070.wem</Path>
 				</File>
+				<File Id="455030148" Language="SFX">
+					<ShortName>ensamblaje_sfx_short_3.wav</ShortName>
+					<Path>SFX\ensamblaje_sfx_short_3_E106FFBE.wem</Path>
+				</File>
+				<File Id="576668268" Language="SFX">
+					<ShortName>ensamblaje_sfx_short_2.wav</ShortName>
+					<Path>SFX\ensamblaje_sfx_short_2_E106FFBE.wem</Path>
+				</File>
+				<File Id="588687617" Language="SFX">
+					<ShortName>ensamblaje_sfx_short_4.wav</ShortName>
+					<Path>SFX\ensamblaje_sfx_short_4_E106FFBE.wem</Path>
+				</File>
 				<File Id="707043063" Language="SFX">
 					<ShortName>sparks(chispas).wav</ShortName>
 					<Path>SFX\sparks(chispas)_BADC626A.wem</Path>
+				</File>
+				<File Id="999780021" Language="SFX">
+					<ShortName>robot_arm_sfx.wav</ShortName>
+					<Path>SFX\robot_arm_sfx_BADC626A.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
