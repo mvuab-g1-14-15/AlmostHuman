@@ -1,3 +1,0 @@
-﻿<cinematic>
-	<play_animation name="OpenDoor" resource_id_file="Data/pasillo/cinematics/door.xml" time="4.0" />
-</cinematic>

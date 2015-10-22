@@ -34,6 +34,7 @@ void CPlayAnimationElement::Update()
 	if( m_Animated)
 	{
 		m_pModeloAnimado->SetActive(true);
+		m_pModeloAnimado->SetYaw(-m_pModeloAnimado->GetYaw() + Math::half_pi32 );
 		m_pModeloAnimado->ChangeAnimation(m_Animation, 0.2f, 0.0f);
 		m_CurrentTime += deltaTimeMacro;
 	}
