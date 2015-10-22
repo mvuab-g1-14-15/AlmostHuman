@@ -17,6 +17,7 @@
 				<Event Id="2902920709" Name="Play_Alerta"/>
 				<Event Id="1704638915" Name="Play_Ambient_Pasillo"/>
 				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
+				<Event Id="2626091016" Name="Play_Final_Theme"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
 				<Event Id="3568813383" Name="Play_Main_Theme"/>
 				<Event Id="74299344" Name="Play_Musica_Boss"/>
@@ -25,7 +26,7 @@
 			<IncludedMemoryFiles>
 				<File Id="84672891" Language="SFX">
 					<ShortName>Final boss Almost Human.wav</ShortName>
-					<Path>SFX\Final boss Almost Human_E106FFBE.wem</Path>
+					<Path>SFX\Final boss Almost Human_951343B8.wem</Path>
 				</File>
 				<File Id="197167235" Language="SFX">
 					<ShortName>dark soundscapes 14.wav</ShortName>
@@ -148,6 +149,60 @@
 		<SoundBank Id="166012248" Language="SFX">
 			<ShortName>Irirs</ShortName>
 			<Path>Irirs.bnk</Path>
+			<IncludedEvents>
+				<Event Id="4150758548" Name="Play_Abriendo_Compuertas"/>
+				<Event Id="2073520317" Name="Play_Mi_nombre_es_logan"/>
+				<Event Id="3595090698" Name="Play_Pasillo"/>
+				<Event Id="2376878504" Name="Play_Sala1"/>
+				<Event Id="2376878507" Name="Play_Sala2"/>
+				<Event Id="2956457727" Name="Play_Sala3A"/>
+				<Event Id="2956457724" Name="Play_Sala3B"/>
+				<Event Id="3006790454" Name="Play_Sala4A"/>
+				<Event Id="3006790453" Name="Play_Sala4B"/>
+				<Event Id="2362998284" Name="Play_Tunel"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="264910040" Language="SFX">
+					<ShortName>Abiendo_Compuertas_Despres Mort_FinalBoss.wav</ShortName>
+					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem</Path>
+				</File>
+				<File Id="305988357" Language="SFX">
+					<ShortName>Pasillo.wav</ShortName>
+					<Path>SFX\Pasillo_E106FFBE.wem</Path>
+				</File>
+				<File Id="405981009" Language="SFX">
+					<ShortName>Sala4A.wav</ShortName>
+					<Path>SFX\Sala4A_E106FFBE.wem</Path>
+				</File>
+				<File Id="572734564" Language="SFX">
+					<ShortName>Sala2.wav</ShortName>
+					<Path>SFX\Sala2_E106FFBE.wem</Path>
+				</File>
+				<File Id="653913708" Language="SFX">
+					<ShortName>Sala3A.wav</ShortName>
+					<Path>SFX\Sala3A_E106FFBE.wem</Path>
+				</File>
+				<File Id="856495406" Language="SFX">
+					<ShortName>Sala3B.wav</ShortName>
+					<Path>SFX\Sala3B_E106FFBE.wem</Path>
+				</File>
+				<File Id="856892216" Language="SFX">
+					<ShortName>Me llamo logan_despres explosio.wav</ShortName>
+					<Path>SFX\Me llamo logan_despres explosio_E106FFBE.wem</Path>
+				</File>
+				<File Id="919748428" Language="SFX">
+					<ShortName>Sala4B.wav</ShortName>
+					<Path>SFX\Sala4B_E106FFBE.wem</Path>
+				</File>
+				<File Id="951761237" Language="SFX">
+					<ShortName>Sala1.wav</ShortName>
+					<Path>SFX\Sala1_E106FFBE.wem</Path>
+				</File>
+				<File Id="969083466" Language="SFX">
+					<ShortName>Tunel.wav</ShortName>
+					<Path>SFX\Tunel_E106FFBE.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="207235876" Language="SFX">
 			<ShortName>Logan</ShortName>

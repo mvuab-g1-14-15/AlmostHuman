@@ -1,0 +1,24 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2073520317	Play_Mi_nombre_es_logan			\Iris\Play_Mi_nombre_es_logan	
+	2362998284	Play_Tunel			\Iris\Play_Tunel	
+	2376878504	Play_Sala1			\Iris\Play_Sala1	
+	2376878507	Play_Sala2			\Iris\Play_Sala2	
+	2956457724	Play_Sala3B			\Iris\Play_Sala3B	
+	2956457727	Play_Sala3A			\Iris\Play_Sala3A	
+	3006790453	Play_Sala4B			\Iris\Play_Sala4B	
+	3006790454	Play_Sala4A			\Iris\Play_Sala4A	
+	3595090698	Play_Pasillo			\Iris\Play_Pasillo	
+	4150758548	Play_Abriendo_Compuertas			\Iris\Play_Abriendo_Compuertas	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		99127
+	305988357	Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Pasillo_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Pasillo		296933
+	405981009	Sala4A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4A		188563
+	572734564	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala2		86999
+	653913708	Sala3A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3A		246633
+	856495406	Sala3B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3B		240403
+	856892216	Me llamo logan_AfterExplosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Me llamo logan_despres explosio_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Me llamo logan_AfterExplosion		36990
+	919748428	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		592037
+	951761237	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		499287
+	969083466	Tunnel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Tunel_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Tunnel		659583
+
