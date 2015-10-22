@@ -481,11 +481,11 @@ Math::Vect3f CAnimatedInstanceModel::GetBonePosition( const std::string& aBoneNa
   if( l_pSkeleton )
   {
 
-//     const std::vector< CalCoreBone*>& mBones = l_pSkeleton->getCoreSkeleton()->getVectorCoreBone();
-//     for( uint32 i = 0; i < mBones.size(); ++i )
-//     {
-//       LOG_INFO_APPLICATION( "Bone %s ", mBones[i]->getName().c_str() );
-//     }
+//      const std::vector< CalCoreBone*>& mBones = l_pSkeleton->getCoreSkeleton()->getVectorCoreBone();
+//      for( uint32 i = 0; i < mBones.size(); ++i )
+//      {
+//        LOG_INFO_APPLICATION( "Bone %s ", mBones[i]->getName().c_str() );
+//      }
 
     int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId(aBoneName);
 

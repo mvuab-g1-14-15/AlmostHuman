@@ -22,6 +22,9 @@ function CEnemy:__init( aInfo )
 	self.InitPosition = aInfo.position
 	self.TargetPos = self.InitPosition
 	
+	self.BlashRight = CBlash( self.Name.."Right")
+	self.BlashLeft  = CBlash( self.Name.."Left")
+	
 	self.IsPatrol = aInfo.is_patrol
 	if self.IsPatrol then
 		self.Waypoints = aInfo.waypoints
@@ -222,7 +225,7 @@ function CEnemy:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
-	self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
+	--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
 end
 
 function CEnemy:PlayerInSight()
@@ -499,11 +502,12 @@ function CEnemy:UpdateCamera()
 end
 
 function CEnemy:MakeShoot(aDirection)
-	lPosition = self:GetPosition() + aDirection * 0.4
-	lPosition.y = lPosition.y + (self:GetHeight() / 2.0)
-	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
-	enemy_manager:AddShoot(lShoot)
-	--Play shoot enemy sound
+	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm");
+	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm");
+	self.BlashLeft:Begin(lPositionLeftArm)
+	self.BlashRight:Begin(lPositionRightArm)
+	
+	--Todo play enemy sound
 end
 
 function CEnemy:ChangeAnimation(animation, delayin, delayout)

@@ -21,7 +21,7 @@ function CBlaster:__init()
 	FinishShooting = false
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
 	
-	self.Blash = CBlash()
+	self.Blash = CBlash( "Player" )
 	self.Ammunition = {}
 	self.MaxAmmo = 25;
 	self.AmmoId = 0;
