@@ -213,7 +213,7 @@ function StayText(room, message, other_shape)
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
 			cinematic_manager:Execute("elevator")
-			physic_manager:ReleaseActor("Puerta_ascensor")
+			physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala3DoorEscenario"))
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end

@@ -158,7 +158,7 @@ function update_gameplay()
 					cinematic_manager:Execute("OpenDoorPasillo")
 					trigger_manager:GetTriggerByName("pasillo_sala3"):SetActive(false)
 					gui_manager:ShowStaticText("OpenDoor")
-					--physic_manager:ReleasePhysicActor("puerta_fisica_sala2")				
+					physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
 					g_bPressRoomPasillo = false
 			end
 		end
@@ -170,7 +170,7 @@ function update_gameplay()
 					trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 					gui_manager:ShowStaticText("OpenDoor")
 					g_bPressRoom2X = false
-					--physic_manager:ReleasePhysicActor("puerta_fisica_sala2")				
+					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))				
 				elseif CuentaAtras == 3 then
 					gui_manager:ShowStaticText("Block")
 				end
