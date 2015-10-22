@@ -61,7 +61,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
         //l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 30.0f);
     }*/
 
-    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetRoomName();
+    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetCurrentRoom()->GetName();
 
     if(l_RoomName == "sala1")
     {
