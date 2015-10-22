@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PluginInfo Project="AlmostHuman" Platform="Windows" Motion="false">
 	<Plugins>
-		<Plugin Name="Wwise Compressor" ID="7077891"/>
 		<Plugin Name="Wwise RoomVerb" ID="7733251"/>
 	</Plugins>
 </PluginInfo>
