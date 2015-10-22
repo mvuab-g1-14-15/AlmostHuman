@@ -31,8 +31,7 @@ bool CRenderableObjectsManager::Load( const std::string& FileName )
 
     if ( !m.Exists() )
     {
-        LOG_ERROR_APPLICATION( "CRenderableObjectsManager::Load --> RenderableObjects tag not found in the file %s",
-                               FileName.c_str() );
+        LOG_ERROR_APPLICATION("CRenderableObjectsManager::Load --> RenderableObjects tag not found in the file %s", FileName.c_str());
         return false;
     }
 
@@ -104,6 +103,12 @@ void CRenderableObjectsManager::Update()
 CCinematic* CRenderableObjectsManager::CreateCinematic( const std::string& FileName )
 {
     CCinematic* l_Cinematic = new CCinematic( FileName );
-    AddResource( l_Cinematic->GetName(), l_Cinematic );
+
+    if(!AddResource(l_Cinematic->GetName(), l_Cinematic))
+    {
+        CHECKED_DELETE(l_Cinematic);
+        return NULL;
+    }
+
     return l_Cinematic;
 }

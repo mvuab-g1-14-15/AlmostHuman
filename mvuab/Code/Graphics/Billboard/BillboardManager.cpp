@@ -47,14 +47,18 @@ void CBillboardManager::Render()
 
   mLinearDepthTexture->Activate(6);*/
 
-  for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
-    (*lItb)->Render( sRV, mGM );
+  for(unsigned int i = 0, l_Size = m_ResourcesVector.size(); i < l_Size; ++i)
+  {
+      m_ResourcesVector[i]->Render(sRV, mGM);
+  }
 }
 
 void CBillboardManager::Update()
 {
-    for ( TVectorResources::iterator lItb = m_ResourcesVector.begin(), lIte = m_ResourcesVector.end(); lItb != lIte; ++lItb )
-        (*lItb)->Update();
+    for(unsigned int i = 0, l_Size = m_ResourcesVector.size(); i < l_Size; ++i)
+    {
+        m_ResourcesVector[i]->Update();
+    }
 }
 
 void CBillboardManager::Init()

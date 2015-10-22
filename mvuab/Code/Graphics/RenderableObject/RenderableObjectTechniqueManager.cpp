@@ -46,8 +46,7 @@ void CRenderableObjectTechniqueManager::Load(const std::string& aFile)
             if (TagName == "pool_renderable_object_technique")
             {
                 CPoolRenderableObjectTechnique* PoolRenderableObjectTechnique = new CPoolRenderableObjectTechnique(l_PoolNode);
-                if(!m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(),
-                        PoolRenderableObjectTechnique))
+                if(!m_PoolRenderableObjectTechniques.AddResource(PoolRenderableObjectTechnique->GetName(), PoolRenderableObjectTechnique))
                 {
                     CHECKED_DELETE(PoolRenderableObjectTechnique);
                     continue;
@@ -58,16 +57,13 @@ void CRenderableObjectTechniqueManager::Load(const std::string& aFile)
                     const std::string& SubTagName = l_PoolNode(j).GetName();
                     if (SubTagName == "default_technique")
                     {
-                        const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(
-                                j).GetAttribute<int32>("vertex_type", 0));
+                        const  std::string&  l_VertexTypeStr = GetRenderableObjectTechniqueNameByVertexType(l_PoolNode(j).GetAttribute<int32>("vertex_type", 0));
                         const std::string& l_TechniqueName = l_PoolNode(j).GetAttribute<std::string>("technique", "");
 
                         InsertRenderableObjectTechnique( l_VertexTypeStr , l_TechniqueName );
                         PoolRenderableObjectTechnique->AddElement(l_VertexTypeStr, l_TechniqueName, GetResource(l_VertexTypeStr));
                     }
                 }
-
-
             }
             else if( TagName == "pool")
             {
@@ -85,17 +81,12 @@ std::string CRenderableObjectTechniqueManager::GetRenderableObjectTechniqueNameB
     return l_VertexType.str();
 }
 
-void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique
-(
-    const std::string& aROTName,
-    const std::string& aTechniqueName )
+void CRenderableObjectTechniqueManager::InsertRenderableObjectTechnique(const std::string& aROTName, const std::string& aTechniqueName)
 {
     // Only store the default renderable objects techniques, therefore check if they exist before inserting them
     if( !Exist(aROTName) )
     {
-        CRenderableObjectTechnique* lRenderableObjectTechnique =
-            new CRenderableObjectTechnique( aROTName,
-                                            EffectManagerInstance->GetResource( aTechniqueName ) );
+        CRenderableObjectTechnique* lRenderableObjectTechnique = new CRenderableObjectTechnique(aROTName, EffectManagerInstance->GetResource(aTechniqueName));
 
         if( !AddResource(aROTName, lRenderableObjectTechnique) )
         {
