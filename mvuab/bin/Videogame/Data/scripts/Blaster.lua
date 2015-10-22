@@ -80,6 +80,24 @@ function CBlaster:Shoot( aPosition )
 	end
 end
 
+function CBlaster:ShootCharged( aPosition )
+	engine:Trace("Blaster Shoot cargado")
+	self.Blash:Begin(aPosition)
+	local lAlreadyShoot = false;
+	for i=1,#self.Ammunition do
+		lAmmo = self.Ammunition[i];
+		if not lAmmo:IsActive() and not lAlreadyShoot then
+			local lDirection = camera_manager:GetCurrentCamera():GetDirection()
+			lAmmo:Begin( aPosition, lDirection, 30.0, self:CalculateDamage() );
+			lAlreadyShoot = true;
+		end
+		-- Update the impacted ones
+		if lAmmo:IsImpacted() then
+			lAmmo:End();
+		end
+	end
+end
+
 function CBlaster:GetEnemyFromRay()
 	local l_OriRay = camera_manager:GetCurrentCamera():GetPosition()
 	local l_DirRay = camera_manager:GetCurrentCamera():GetDirection()
@@ -142,11 +160,12 @@ function CBlaster:Update( aPosition )
 				if self.TimePressed < (self.MaxTimePressed * 0.1) then
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
+					self:Shoot( aPosition )
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
+					self:ShootCharged( aPosition )
 				end
-				self:Shoot( aPosition )
 				g_Player:SetAnimation("shoot")
 			else
 			--SONIDO DE PEDO AQUI
