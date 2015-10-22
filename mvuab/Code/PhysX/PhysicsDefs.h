@@ -39,6 +39,7 @@ struct SCollisionInfo
   float           m_fDistance;
   Math::Vect3f    m_Normal;
   Math::Vect3f    m_CollisionPoint;
+  std::string     m_Name;
 };
 
 enum ECollisionGroup

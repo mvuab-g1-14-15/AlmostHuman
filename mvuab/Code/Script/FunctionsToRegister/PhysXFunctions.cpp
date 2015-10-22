@@ -72,14 +72,7 @@ SCollisionInfo RaycastCollisionGroup( CPhysicsManager* PhysicManager, Math::Vect
                                       float maxDist )
 {
   SCollisionInfo hit_info;
-  CPhysicUserData* lPUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist );
-
-  if ( !lPUD || lPUD->GetName() != "Player" )
-  {
-    hit_info = SCollisionInfo();
-    return hit_info;
-  }
-
+  PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist );
   return hit_info;
 }
 
@@ -299,6 +292,7 @@ void registerPhysX( lua_State* m_LS )
   .def_readwrite( "CollisionPoint", &SCollisionInfo::m_CollisionPoint )
   .def_readwrite( "Distance", &SCollisionInfo::m_fDistance )
   .def_readwrite( "Normal", &SCollisionInfo::m_Normal )
+  .def_readwrite( "Name", &SCollisionInfo::m_Name )
   LUA_END_DECLARATION
 
   module( m_LS ) [

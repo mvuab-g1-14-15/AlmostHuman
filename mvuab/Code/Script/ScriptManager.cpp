@@ -95,9 +95,7 @@ void CScriptManager::RunCode( const std::string& Code )
         CEngine::GetSingleton().Trace(l_Str);
         ASSERT( false, "Error running lua code: %s\n %s", Code.c_str(), l_Str );
 
-#ifdef _DEBUG
-		Reload();
-#endif
+		    Reload();
     }
 }
 
@@ -111,9 +109,7 @@ void CScriptManager::RunFile( const std::string& FileName )
         CEngine::GetSingleton().Trace(l_Str);
         ASSERT( false, "Error running lua file: %s\n %s", FileName.c_str(), l_Str );
 
-#ifdef _DEBUG
-		Reload();
-#endif
+		    Reload();
     }
 }
 

@@ -867,6 +867,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
     _Info.m_fDistance       = hit.distance;
     _Info.m_Normal          = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
     _Info.m_CollisionPoint  = Math::Vect3f( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
+    _Info.m_Name            = impactObject->GetName();
     return impactObject;
 }
 

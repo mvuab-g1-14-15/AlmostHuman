@@ -305,9 +305,6 @@ function CEnemy:MoveToPos( aPos )
 		end
 		
 		local lRealTargetPos = self.Path:GetResource(self.ActualPathPoint)
-		if lRealTargetPos:Length() < 0.1 then
-			engine:Trace(self.Name.." target pos in graph is "..lRealTargetPos:ToString())
-		end
 		if not self:IsInPos( lRealTargetPos ) then
 			self:ChangeAnimation("walk", 0.5, 1.0)
 			if self:RotateToPos( lRealTargetPos ) then
@@ -328,7 +325,6 @@ function CEnemy:MoveToPos( aPos )
 							lDir:Normalize()
 						end
 						self.CharacterController:Move(lDir * self.Speed*5.0, dt)
-						engine:Trace(self.Name.." entro! "..(lDir * self.Speed):ToString())
 					end
 				else
 					self.CharacterController:Move(DirVector * self.Speed, dt)
@@ -378,7 +374,6 @@ function CEnemy:MoveToPos( aPos )
 						lDir:Normalize()
 					end
 					self.CharacterController:Move(lDir * self.Speed*5.0, dt)
-					engine:Trace(self.Name.." entro! "..(lDir * self.Speed):ToString())
 				end
 			else
 				self.CharacterController:Move(DirVector * self.Speed, dt)

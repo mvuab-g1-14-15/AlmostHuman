@@ -130,21 +130,22 @@ void CPhysicController::SetPosition( const Math::Vect3f& pos )
     position.z = pos.z;
     m_pPhXController->setPosition( position );
   }
-  //TODO ASK MIRAR SI FUNCIONA ALGUNA VEZ
-  else if ( m_pPhXBoxControllerDesc != NULL )
+  else if ( m_pPhXBoxControllerDesc != NULL && GetType() == ::BOX )
   {
     m_pPhXBoxControllerDesc->position.x = pos.x;
     m_pPhXBoxControllerDesc->position.y = pos.y;
     m_pPhXBoxControllerDesc->position.z = pos.z;
   }
-  else if ( m_pPhXCapsuleControllerDesc != NULL )
+  else if ( m_pPhXCapsuleControllerDesc != NULL && GetType() == ::CAPSULE)
   {
     m_pPhXCapsuleControllerDesc->position.x = pos.x;
     m_pPhXCapsuleControllerDesc->position.y = pos.y;
     m_pPhXCapsuleControllerDesc->position.z = pos.z;
   }
   else
-    return;
+  {
+    ASSERT(false, "Something bad setting the position");
+  }
 
   //CObject3D::m_vPosition = pos;
   //CObject3D::InitMat44();
@@ -164,21 +165,17 @@ Math::Vect3f CPhysicController::GetPosition()
     vec.y = ( float )tmp.y;
     vec.z = ( float )tmp.z;
   }
-  //TODO ASK MIRAR SI FUNCIONA ALGUNA VEZ
-  else if ( m_pPhXBoxControllerDesc != NULL )
+  else if ( m_pPhXBoxControllerDesc != NULL && GetType() == ::BOX )
   {
-    if ( GetType() == ::BOX )
-    {
       vec.x = ( float )m_pPhXBoxControllerDesc->position.x;
       vec.y = ( float )m_pPhXBoxControllerDesc->position.y;
       vec.z = ( float )m_pPhXBoxControllerDesc->position.z;
-    }
-    else
-    {
+  }
+  else if( m_pPhXCapsuleControllerDesc != NULL && GetType() == ::CAPSULE )
+  {
       vec.x = ( float )m_pPhXCapsuleControllerDesc->position.x;
       vec.y = ( float )m_pPhXCapsuleControllerDesc->position.y;
       vec.z = ( float )m_pPhXCapsuleControllerDesc->position.z;
-    }
   }
 
   return vec;

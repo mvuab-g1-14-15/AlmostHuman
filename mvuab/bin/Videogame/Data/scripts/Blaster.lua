@@ -70,7 +70,7 @@ function CBlaster:Shoot( aPosition )
 		lAmmo = self.Ammunition[i];
 		if not lAmmo:IsActive() and not lAlreadyShoot then
 			local lDirection = camera_manager:GetCurrentCamera():GetDirection()
-			lAmmo:Begin( aPosition, lDirection, 30.0 );
+			lAmmo:Begin( aPosition, lDirection, 30.0, self:CalculateDamage() );
 			lAlreadyShoot = true;
 		end
 		-- Update the impacted ones

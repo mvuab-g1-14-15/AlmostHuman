@@ -3,7 +3,7 @@ class 'CAmmo'
 
 function CAmmo:__init( aId )
 	self.Id = aId;
-	engine:Trace("ammo ctor".. self.Id )
+	--engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false)
 	self.Light = CreateOmniLight()
@@ -27,8 +27,8 @@ function CAmmo:IsImpacted()
 	return self.Impacted;
 end
 
-function CAmmo:Begin( aPosition, aDirection, aSpeed )
-	engine:Trace( "ammo is "..aPosition:ToString() )
+function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
+	--engine:Trace( "ammo is "..aPosition:ToString() )
 	self.Active = true
 	self.Impacted = false;
 	
@@ -43,6 +43,8 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed )
 	self.Position        = aPosition;
 	self.Speed	         = aSpeed;
 	self.CurrentDistance = 0;
+	
+	self.Damage = aDamage
 end
 
 function CAmmo:End()
@@ -63,16 +65,21 @@ function CAmmo:Update()
 			local lNewPosition 	= self.Position + lVelocity
 		
 			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
-			--engine:Trace("hit_info_name->"..hit_info:GetName())
+			engine:Trace("hit_info_name->"..hit_info.Name)
 			local lNewVector = lNewPosition - self.Position;
 			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
 			if not (hit_info.Distance == 0.0) then
 				lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 				lDistance = lCollisionPoint:Distance( lNewPosition )
+				engine:Trace("Distance is "..lDistance..". Velocity length "..lVelocity:Length())
 				if ( lDistance < lLength ) then
 					self.Impacted = true
 					engine:Trace("Impacted to something")
 					self.Position = lCollisionPoint
+					
+					local lName = hit_info.Name
+					engine:Trace("Impacted in "..lName)
+					enemy_manager:AddDamage(lName, self.Damage)
 				else
 					self.Position = lNewPosition
 				end
