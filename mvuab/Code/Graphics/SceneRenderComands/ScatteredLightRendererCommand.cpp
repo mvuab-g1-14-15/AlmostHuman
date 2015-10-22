@@ -51,7 +51,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
 
-    CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    /*CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
     Math::Vect3f l_CameraDirection = CameraMInstance->GetCurrentCamera()->GetDirection();
 
@@ -59,6 +59,19 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     {
         l_ActiveLights[i] = l_PosLights[i].Normalize().DotProduct(l_CameraDirection) < 0.5f; // cos(60º)
         //l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 30.0f);
+    }*/
+
+    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetCurrentRoom()->GetName();
+
+    if(l_RoomName == "sala1")
+    {
+        l_ActiveLights[0] = TRUE;
+        l_ActiveLights[1] = TRUE;
+    }
+
+    if(l_RoomName == "sala4")
+    {
+        l_ActiveLights[3] = TRUE;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
