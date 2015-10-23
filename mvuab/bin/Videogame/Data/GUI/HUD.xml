@@ -19,16 +19,16 @@
 	
 	<StaticText name="ButtonEnergy" pos="40 80" height="30" width="12" visible="false" active="false" Literal="ButtonEnergy" />
 	<StaticText name="StealthAttack" pos="40 80" height="30" width="12" visible="false" active="false" Literal="StealthAttack" />
-	<StaticText name="OpenDoor" pos="40 80" height="30" width="12" visible="false" active="false" Literal="OpenDoor" />
+	<StaticText name="OpenDoor" pos="45 80" height="30" width="12" visible="false" active="false" Literal="OpenDoor" />
 	<StaticText name="Block" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Block" />
-	<StaticText name="CambiarSala" pos="40 80" height="30" width="12" visible="false" active="false" Literal="CambiarSala" />
+	<StaticText name="CambiarSala" pos="45 80" height="30" width="12" visible="false" active="false" Literal="CambiarSala" />
 	<StaticText name="HideInBarrel" pos="40 80" height="30" width="12" visible="false" active="false" Literal="HideInBarrel" />
-	<StaticText name="ColocarC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="ColocarC4" />
-	<StaticText name="DetonarC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="DetonarC4" />
-	<StaticText name="FaltanC4" pos="50 60" height="30" width="12" visible="false" active="false" Literal="FaltanC4" />
-	<StaticText name="C4Colocada" pos="50 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
+	<StaticText name="ColocarC4" pos="45 80" height="30" width="12" visible="false" active="false" Literal="ColocarC4" />
+	<StaticText name="DetonarC4" pos="45 80" height="30" width="12" visible="false" active="false" Literal="DetonarC4" />
+	<StaticText name="FaltanC4" pos="45 60" height="30" width="12" visible="false" active="false" Literal="FaltanC4" />
+	<StaticText name="C4Colocada" pos="45 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
 	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
-	<StaticText name="RomperRejilla" pos="50 60" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
+	<StaticText name="RomperRejilla" pos="45 80" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
 			quad="Data/textures/GUI/marco2.png" pos_button="41.20 13.50" height_button="5.00" width_button="2.8"
