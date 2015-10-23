@@ -24,8 +24,8 @@
   <MeshInstance name="Reixa_027_sala3" core="Reixa_027_sala3" pos="43.5194 -17.0164 40.2488" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_028_sala3" core="Reixa_028_sala3" pos="42.0425 -17.0164 70.6488" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_029_sala3" core="Reixa_029_sala3" pos="42.0425 -17.0164 68.7558" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_assembly007_sala3" core="robot_assembly007_sala3" pos="39.09 -17.2543 64.4197" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_assembly009_sala3" core="robot_assembly009_sala3" pos="40.9251 -17.2543 61.8405" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="robot_assembly007_sala3" core="robot_assembly" pos="39.09 -17.2543 64.4197" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="robot_assembly009_sala3" core="robot_assembly" pos="40.9251 -17.2543 61.8405" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_016_sala3" core="cinta_016_sala3" pos="40.4 -17.9602 70.5015" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_030_sala3" core="Reixa_030_sala3" pos="44.7861 -17.0164 55.5384" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_031_sala3" core="Reixa_031_sala3" pos="42.0425 -17.0164 72.5903" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -41,15 +41,15 @@
   <MeshInstance name="Reixa_1_sala3" core="Reixa_1_sala3" pos="31.2702 -17.0164 66.1797" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_007_sala3" core="Reixa_007_sala3" pos="31.2702 -17.0164 54.6568" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_003_sala3" core="Reixa_003_sala3" pos="31.2702 -17.0164 62.3458" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_assembly_sala3" core="robot_assembly_sala3" pos="26.898 -17.2543 54.9822" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="robot_assembly_sala3" core="robot_assembly" pos="26.898 -17.2543 54.9822" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_002_sala3" core="Reixa_002_sala3" pos="31.2702 -17.0164 64.2628" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_004_sala3" core="Reixa_004_sala3" pos="31.2702 -17.0164 60.4288" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_006_sala3" core="Reixa_006_sala3" pos="31.2702 -17.0164 56.5948" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_005_sala3" core="Reixa_005_sala3" pos="31.2702 -17.0164 58.5118" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_4_sala3" core="cinta_4_sala3" pos="25.1571 -17.4696 63.1727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_5_sala3" core="cinta_5_sala3" pos="25.1571 -17.4696 63.1727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_assembly004_sala3" core="robot_assembly004_sala3" pos="26.2452 -17.2543 61.9089" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="robot_assembly001_sala3" core="robot_assembly001_sala3" pos="26.0422 -17.2543 59.1685" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="robot_assembly004_sala3" core="robot_assembly" pos="26.2452 -17.2543 61.9089" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="robot_assembly001_sala3" core="robot_assembly" pos="26.0422 -17.2543 59.1685" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_3_sala3" core="cinta_3_sala3" pos="25.1571 -17.4696 63.1727" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_035_sala3" core="Reixa_035_sala3" pos="34.8422 -17.0164 55.4339" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_036_sala3" core="Reixa_036_sala3" pos="34.8422 -17.0164 57.5117" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -217,7 +217,6 @@
   <MeshInstance name="Box156_sala3" core="Box156_sala3" pos="24.8277 -18.5732 62.1488" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
   <MeshInstance name="Box157_sala3" core="Box157_sala3" pos="40.2746 -18.5732 64.5755" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
   <MeshInstance name="Box158_sala3" core="Box158_sala3" pos="42.5966 -18.5732 61.7357" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
-  <MeshInstance name="Box159_sala3" core="Box159_sala3" pos="41.1935 -18.7021 69.5498" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Object030_sala3" core="Object030_sala3" pos="40.2685 -17.6019 64.5302" yaw="0.0" pitch="1.0472" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="arm_sala3" core="arm_sala3" pos="40.4024 -17.5525 64.6044" yaw="-1.65159" pitch="-1.37864" roll="-0.42926" scale="1.0 1.0 1.0" />
   <MeshInstance name="foot_sala3" core="foot_sala3" pos="40.845 -17.4784 64.3203" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -228,12 +227,6 @@
   <MeshInstance name="Object031_sala3" core="Object031_sala3" pos="40.6183 -17.6019 64.1629" yaw="0.0" pitch="1.0472" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="body001_sala3" core="body001_sala3" pos="41.598 -19.7302 64.9802" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Cylinder244_sala3" core="Cylinder244_sala3" pos="-44.5468 -13.4566 63.86" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="0.694444 0.694444 0.694444" />
-  <MeshInstance name="metal_barrel084_sala3" core="metal_barrel084_sala3" pos="46.8367 -18.6705 58.3305" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
-  <MeshInstance name="metal_barrel085_sala3" core="metal_barrel085_sala3" pos="35.0987 -18.6705 67.464" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
-  <MeshInstance name="metal_barrel086_sala3" core="metal_barrel086_sala3" pos="19.0254 -18.6705 74.0891" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
-  <MeshInstance name="metal_barrel087_sala3" core="metal_barrel087_sala3" pos="19.5512 -18.6705 51.9935" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
-  <MeshInstance name="metal_barrel088_sala3" core="metal_barrel088_sala3" pos="33.833 -18.6705 46.2461" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
-  <MeshInstance name="metal_barrel089_sala3" core="metal_barrel089_sala3" pos="30.6394 -18.6705 67.8429" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.21285 1.21285 1.21285" />
   <MeshInstance name="sala_3_sala3" core="sala_3_sala3" pos="13.3405 -15.3614 60.1768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sala_3_sala3" core="sala_3_sala3" pos="13.3405 -15.3614 60.1768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_3_wall_up_1_sala3" core="Sala_3_wall_up_1_sala3" pos="12.8158 -5.20697 60.057" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

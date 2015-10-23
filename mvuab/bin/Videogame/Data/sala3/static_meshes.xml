@@ -217,7 +217,6 @@
   <static_mesh name="Box156_sala3" filename="meshes\Box156.mesh" />
   <static_mesh name="Box157_sala3" filename="meshes\Box157.mesh" />
   <static_mesh name="Box158_sala3" filename="meshes\Box158.mesh" />
-  <static_mesh name="Box159_sala3" filename="meshes\Box159.mesh" />
   <static_mesh name="Object030_sala3" filename="meshes\Object030.mesh" />
   <static_mesh name="arm_sala3" filename="meshes\arm.mesh" />
   <static_mesh name="foot_sala3" filename="meshes\foot.mesh" />
@@ -228,12 +227,6 @@
   <static_mesh name="Object031_sala3" filename="meshes\Object031.mesh" />
   <static_mesh name="body001_sala3" filename="meshes\body001.mesh" />
   <static_mesh name="Cylinder244_sala3" filename="meshes\Cylinder244.mesh" />
-  <static_mesh name="metal_barrel084_sala3" filename="meshes\metal_barrel084.mesh" />
-  <static_mesh name="metal_barrel085_sala3" filename="meshes\metal_barrel085.mesh" />
-  <static_mesh name="metal_barrel086_sala3" filename="meshes\metal_barrel086.mesh" />
-  <static_mesh name="metal_barrel087_sala3" filename="meshes\metal_barrel087.mesh" />
-  <static_mesh name="metal_barrel088_sala3" filename="meshes\metal_barrel088.mesh" />
-  <static_mesh name="metal_barrel089_sala3" filename="meshes\metal_barrel089.mesh" />
   <static_mesh name="sala_3_sala3" filename="meshes\sala_3.mesh" />
   <static_mesh name="sala_3_sala3" filename="meshes\sala_3.mesh" />
   <static_mesh name="Sala_3_wall_up_1_sala3" filename="meshes\Sala_3_wall_up_1.mesh" />
