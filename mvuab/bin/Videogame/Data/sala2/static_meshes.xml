@@ -23,4 +23,6 @@
   <static_mesh name="Pack_obj_006_sala2" filename="meshes\Pack_obj_006.mesh" />
   <static_mesh name="Barriers_sala2" filename="meshes\Barriers.mesh" />
   <static_mesh name="Volumetric_light_sala2" filename="meshes\Volumetric_light.mesh" />
+  <static_mesh name="lights_white_upper_glow_sala2" filename="meshes\lights_white_upper_glow.mesh" />
+  <static_mesh name="light_white_down_glow_sala2" filename="meshes\light_white_down_glow.mesh" />
 </static_meshes>

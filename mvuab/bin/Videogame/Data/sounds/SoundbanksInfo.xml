@@ -96,6 +96,10 @@
 					<ShortName>dark soundscapes 07.wav</ShortName>
 					<Path>SFX\dark soundscapes 07_950FF8F3.wem</Path>
 				</File>
+				<File Id="932544539" Language="SFX">
+					<ShortName>Main Theme.wav</ShortName>
+					<Path>SFX\Main Theme_951343B8.wem</Path>
+				</File>
 				<File Id="1022880071" Language="SFX">
 					<ShortName>dark soundscapes 02.wav</ShortName>
 					<Path>SFX\dark soundscapes 02_950FF8F3.wem</Path>
