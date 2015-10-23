@@ -563,7 +563,8 @@ bool CPhysicsManager::ReleasePhysicActor( CPhysicActor* _pActor )
 
         for ( NxU32 i = 0; i < skeletons.size(); i++ )
             m_pPhysicsSDK->releaseCCDSkeleton( *skeletons[i] );
-
+		
+		CMapManager<CPhysicActor>::RemoveResource(_pActor->GetUserData()->GetName() );
         m_pScene->releaseActor( *nxActor );
         nxActor = 0;
         isOk = true;
@@ -667,6 +668,26 @@ bool CPhysicsManager::AddPhysicRevoluteJoint( CPhysicRevoluteJoint* _pJoint )
     return l_IsOk;
 }
 
+
+bool CPhysicsManager::AddPhysicRevoluteJoint( const std::string& _aName, CPhysicRevoluteJoint* _pJoint )
+{
+    assert( _pJoint != NULL );
+    assert( m_pScene != NULL );
+    bool l_IsOk = false;
+    NxJoint* nxJoint = 0;
+    NxRevoluteJointDesc* l_JointDesc = _pJoint->GetPhXDescJoint();
+    assert( l_JointDesc != NULL );
+    nxJoint = m_pScene->createJoint( *l_JointDesc );
+
+    if ( nxJoint != NULL )
+    {
+		CMapManager<CPhysicRevoluteJoint>::AddResource( _aName, _pJoint );
+        _pJoint->CreateJoint( nxJoint );
+        l_IsOk = true;
+    }
+
+    return l_IsOk;
+}
 //----------------------------------------------------------------------------
 // ReleasePhysicRevoluteJoint : Liberamos un joint de bisagra de la escena
 //----------------------------------------------------------------------------
@@ -867,6 +888,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
     _Info.m_fDistance       = hit.distance;
     _Info.m_Normal          = Math::Vect3f( hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z );
     _Info.m_CollisionPoint  = Math::Vect3f( hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z );
+    _Info.m_Name            = impactObject->GetName();
     return impactObject;
 }
 
@@ -1300,43 +1322,44 @@ bool CPhysicsManager::CreateMeshFromXML( const std::string& FileName )
     m_FileName = FileName;
     CXMLTreeNode newFile;
 
-    if ( !newFile.LoadFile( FileName.c_str() ) )
-    {
-        LOG_WARNING_APPLICATION( "ERROR loading the file %s.\n", FileName );
-        return false;
-    }
+	//TODO RULY
+    //if ( !newFile.LoadFile( FileName.c_str() ) )
+    //{
+    //    LOG_WARNING_APPLICATION( "ERROR loading the file %s.\n", FileName );
+    //    return false;
+    //}
 
-    CXMLTreeNode  m = newFile["PhyX"];
+    //CXMLTreeNode  m = newFile["PhyX"];
 
-    if ( m.Exists() )
-    {
-        std::string folder  =  m( 0 ).GetAttribute<std::string>( "folder" , "" );
-        std::string path    = "./assets/PhX/" + folder + "/";
-        unsigned int count  = ( unsigned int )m.GetNumChildren();
+    //if ( m.Exists() )
+    //{
+    //    std::string folder  =  m( 0 ).GetAttribute<std::string>( "folder" , "" );
+    //    std::string path    = "./assets/PhX/" + folder + "/";
+    //    unsigned int count  = ( unsigned int )m.GetNumChildren();
 
-        for ( size_t i = 1; i < count; ++i )
-        {
-            //path viejo - "./assets/data/ases/barrioRico/"
-            //path nuevo - "./assets/PhX/Fisicas_arturo/"
-            //std::string path = "./assets/PhX/Fisicas_arturo/";
-            std::string name = m( i ).GetAttribute<std::string>( "name", "" );
-            std::string file = path + name + ".ASE";
-            // Guardar id elemento
-            m_vIds.insert( std::pair<std::string, unsigned int>( name, i - 1 ) );
-            /********************/
-            CPhysicUserData* l_pUserData = new CPhysicUserData( name );
-            l_pUserData->SetName( name );
-            l_pUserData->SetPaint( true );
-            l_pUserData->SetColor( colGREEN );
-            l_pUserData->SetGroup( ECG_ESCENE );
-            m_vUsersData.push_back( l_pUserData );
-            CPhysicActor* l_pSceneMesh = new CPhysicActor( l_pUserData );
-            m_vActors.push_back( l_pSceneMesh );
-            GetCookingMesh()->CreateMeshFromASE( file, name );
-            l_pSceneMesh->AddMeshShape( GetCookingMesh()->GetPhysicMesh( name ) );
-            AddPhysicActor( l_pSceneMesh );
-        }
-    }
+    //    for ( size_t i = 1; i < count; ++i )
+    //    {
+    //        //path viejo - "./assets/data/ases/barrioRico/"
+    //        //path nuevo - "./assets/PhX/Fisicas_arturo/"
+    //        //std::string path = "./assets/PhX/Fisicas_arturo/";
+    //        std::string name = m( i ).GetAttribute<std::string>( "name", "" );
+    //        std::string file = path + name + ".ASE";
+    //        // Guardar id elemento
+    //        m_vIds.insert( std::pair<std::string, unsigned int>( name, i - 1 ) );
+    //        /********************/
+    //        CPhysicUserData* l_pUserData = new CPhysicUserData( name );
+    //        l_pUserData->SetName( name );
+    //        l_pUserData->SetPaint( true );
+    //        l_pUserData->SetColor( colGREEN );
+    //        l_pUserData->SetGroup( ECG_ESCENE );
+    //        m_vUsersData.push_back( l_pUserData );
+    //        CPhysicActor* l_pSceneMesh = new CPhysicActor( l_pUserData );
+    //        m_vActors.push_back( l_pSceneMesh );
+    //        GetCookingMesh()->CreateMeshFromASE( file, name );
+    //        l_pSceneMesh->AddMeshShape( GetCookingMesh()->GetPhysicMesh( name ) );
+    //        AddPhysicActor( l_pSceneMesh );
+    //    }
+    //}
 
     return true;
 }
@@ -1470,7 +1493,8 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
 
 bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name )
 {
-    if ( m_pCookingMesh->CreateMeshFromASE( Path, Name ) )
+	//TODO RULY
+    /*if ( m_pCookingMesh->CreateMeshFromASE( Path, Name ) )
     {
         CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( Name );
         l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
@@ -1496,6 +1520,6 @@ bool CPhysicsManager::AddMesh( const std::string& Path, const std::string& Name 
             }
         }
     }
-
+	*/
     return false;
 }

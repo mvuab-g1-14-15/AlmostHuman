@@ -178,9 +178,13 @@ void CGraphicsManager::BeginRender()
   HR( mDirectXDevice->SetRenderState( D3DRS_SPECULARENABLE, FALSE ) );
 
   if ( m_bPaintSolid )
+  {
      HR( mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID ) );
+  }
   else
+  {
      HR( mDirectXDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME ) );
+  }
 }
 
 void CGraphicsManager::Clear()

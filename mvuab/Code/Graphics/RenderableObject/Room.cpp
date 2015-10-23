@@ -14,6 +14,7 @@
 #include "Billboard/BillboardManager.h"
 #include "Particles/ParticleSystemManager.h"
 #include "WWSoundManager.h"
+#include "Joints\PhysicRevoluteJoint.h"
 #include "Cinematics/CinematicManager.h"
 
 CRoom::CRoom( const CXMLTreeNode& aNode )
@@ -113,18 +114,42 @@ void CRoom::Load()
         CPhysicsManager *lPM = PhysXMInstance;
         if (lPM->GetLoadASE())
         {
-            if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + ".ase", GetName()))
+            if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + ".ase", GetName(), GetName()))
             {
                 CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( lName + "Escenario" );
                 l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
                 CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
 
-                VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
+                VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes(GetName());
 
                 for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
                     l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
 
                 lPM->AddPhysicActor( l_AseMeshActor );
+            }
+        }
+
+		if (lPM->GetLoadASE())
+        {
+            if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + "_door.ase", GetName()+"_door", GetName() + "_door"))
+            {
+                CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData( lName + "DoorEscenario" );
+                l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
+                CPhysicActor* l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
+
+                VecMeshes l_CookMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes(GetName()+"_door");
+
+                for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
+                    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
+
+				//l_AseMeshActor->CreateBody(1.0f);
+                lPM->AddPhysicActor( l_AseMeshActor );
+
+				CPhysicRevoluteJoint* m_PRJ = new CPhysicRevoluteJoint();
+				m_PRJ->SetInfo( Math::Vect3f( 0, 0, -1 ), Math::Vect3f( 0, 0, 0 ),
+								l_AseMeshActor );
+				m_PRJ->SetMotor( 20, 5.f );
+				lPM->AddPhysicRevoluteJoint( lName + "DoorEscenario", m_PRJ );
             }
         }
 

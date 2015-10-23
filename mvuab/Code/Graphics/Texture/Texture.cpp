@@ -37,7 +37,11 @@ CTexture::~CTexture()
 
 bool CTexture::LoadFile()
 {
-    HR(D3DXCreateTextureFromFileEx( GraphicsInstance->GetDevice(), m_FileName.c_str(), D3DX_DEFAULT, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &m_Texture));
+    HRESULT lHR = (D3DXCreateTextureFromFileEx( GraphicsInstance->GetDevice(), m_FileName.c_str(), D3DX_DEFAULT, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &m_Texture));
+    
+    const char* error = DXGetErrorStringA(lHR);
+    const char* description =DXGetErrorDescriptionA(lHR);
+    ASSERT( SUCCEEDED( lHR ), "Loading %s -> %s -> %s", m_FileName.c_str(), error, description );
 
     D3DXIMAGE_INFO lTextureInfo;
     HR( D3DXGetImageInfoFromFile(m_FileName.c_str(),&lTextureInfo) );

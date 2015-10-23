@@ -7,7 +7,7 @@
 #include <d3dx9math.h>
 #include <d3dx9.h>
 
-#define ENABLE_HR_INST 0
+#define ENABLE_HR_INST 1
 
 #if ENABLE_HR_INST == 1
 
@@ -64,5 +64,6 @@
 #define HR(x) x
 #endif
 #endif
+
 
 #endif// D3DX9_H

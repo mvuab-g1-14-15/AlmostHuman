@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <MeshInstance name="lights_white_upper_glow_sala2" core="lights_white_upper_glow_sala2" pos="49.0188 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="light_white_down_glow_sala2" core="light_white_down_glow_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>

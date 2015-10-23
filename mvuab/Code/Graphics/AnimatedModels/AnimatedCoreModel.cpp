@@ -142,17 +142,6 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CGraphicsManager *GM)
     return true;
 }
 
-bool CAnimatedCoreModel::LoadTexture(const std::string &Filename)
-{
-    // Get the texture from the texture manager
-    CTexture *t = ( Filename.empty() ) ? TextureMInstance->GetTexture(sDummyTextureName) : TextureMInstance->GetTexture( m_Path + Filename);
-    if(t)
-    {
-        m_TextureVector.push_back(t);
-    }
-    return (t != 0);
-}
-
 const std::string & CAnimatedCoreModel::GetTextureName( size_t id )
 {
     return m_TextureVector[id]->GetFileName();
@@ -194,11 +183,7 @@ bool CAnimatedCoreModel::Load()
 
         if( TagName == "texture" )
         {
-            const std::string &textureFilename = lCurrentNode.GetAttribute<std::string>("file", "no_file");
-            if(  !LoadTexture(textureFilename))
-            {
-                LOG_ERROR_APPLICATION( "%s could not be loaded!", m_FileName.c_str());
-            }
+          m_TextureVector.push_back( lCurrentNode.GetAttribute<CTexture>("file") );
         }
         else if( TagName == "skeleton" )
         {

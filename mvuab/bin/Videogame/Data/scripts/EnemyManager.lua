@@ -16,6 +16,7 @@ function CEnemyManager:__init()
 	self.Alarm = {}
 	self.Alarm.sala2 = false
 	self.Alarm.pasillo = false
+	self.Alarm.pasillo = false
 	self.Alarm.sala3 = false
 	self.Alarm.sala4 = false
 	
@@ -170,9 +171,12 @@ function CEnemyManager:CreateEnemiesPasillo()
 end
 
 function CEnemyManager:Reinit( aRoom )
+	--[[
 	for i in pairs (self.Enemy[aRoom]) do
+		self.Enemy[aRoom][i].OnDead = false
 		self.Enemy[aRoom][i]:Destroy()
 	end
+	]]
 	
 	self.Alarm[aRoom] = false
 	

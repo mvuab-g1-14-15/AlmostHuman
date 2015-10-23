@@ -13,6 +13,7 @@
 #include <map>
 #include <vector>
 #include "Math\Vector3.h"
+#include "Utils\MapManager.h"
 
 //---Forward Declarations---
 class NxPhysicsSDK;
@@ -49,19 +50,20 @@ public:
 
 
   NxTriangleMesh*       GetPhysicMesh( const std::string& name );
-  const VecMeshes		&GetMeshes() { return m_TriangleMeshes; }
+  //const VecMeshes		&GetMeshes() { return m_TriangleMeshes; }
+  const VecMeshes		&GetMeshes(std::string _NameRoom) { return m_TriangleMeshes.find(_NameRoom)->second; }
 
 
   bool            CreatePhysicMesh(const std::string& _BinFilename, const std::string& _NameMesh );
   NxTriangleMesh *CreatePhysicMesh( const std::vector<Math::Vect3f> &l_VB, const std::vector<uint32> &l_IB);
 
 
-  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces );
-  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f> &_Vertices, std::vector<unsigned int> &_Faces );
+  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<std::vector<Math::Vect3f>> &_Vertices, std::vector<std::vector<unsigned int>> &_Faces, std::string _NameRoom  );
+  bool            CreatePhysicMesh( std::string _NameMesh, std::vector<Math::Vect3f>& _Vertices, std::vector<unsigned int>& _Faces, std::string _NameRoom, VecMeshes& lRoomVecMesh );
 
   bool            SavePhysicMesh( const std::vector<Math::Vect3f>& _Vertices, const std::vector<uint32>& _Faces, const std::string& _BinFilename );
-
-  bool            CreateMeshFromASE( std::string _FileName, std::string _Name );
+  bool			  CreateMeshFromASE( std::string _FileName, std::string _Name,  std::string _RoomName);
+ // bool            CreateMeshFromASE( std::string _FileName, std::string _Name );
   bool            CookClothMesh( const NxClothMeshDesc& _Desc, NxStream& _Stream );
 
   void            Release( void );
@@ -76,7 +78,7 @@ private:
   CPhysicUserAllocator*		m_pMyAllocator;
 
   NxCookingInterface*		m_pCooking;
-  VecMeshes					m_TriangleMeshes;
+  std::map<std::string, VecMeshes>	m_TriangleMeshes;
 };
 
 #endif // INC_PHYSIC_COOKING_MESH_H_

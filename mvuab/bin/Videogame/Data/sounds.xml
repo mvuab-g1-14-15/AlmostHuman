@@ -13,5 +13,18 @@
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
+	<GameObject3d name="Base_de_carga_sala2" register="true" pos="75.8046 -17.8002 -25.0035" dir="75.8046 -17.8002 -25.003"/>
+	<GameObject3d name="Door_sala2" register="true" pos="53.0744 -16.6341 -24.2395" dir="53.0744 -16.6341 -24.2395"/>
+	<GameObject3d name="C4_pasillo" register="true" pos="59.3535 -17.1847 6.01426" dir="59.3535 -17.1847 6.01426"/>
+	<GameObject3d name="Door_pasillo" register="true" pos="53.6564 -16.2673 38.8278" dir="53.6564 -16.2673 38.8278"/>
+	<GameObject3d name="Robot_assembly1" register="true" pos="40.8983 -17.1728 62.2339" dir="40.8983 -17.1728 62.2339"/>
+	<GameObject3d name="Robot_assembly2" register="true" pos="38.9783 -17.1728 64.8406" dir="38.9783 -17.1728 64.8406"/>
+	<GameObject3d name="Robot_assembly3" register="true" pos="26.4247 -17.1728 61.6571" dir="26.4247 -17.1728 61.6571"/>
+	<GameObject3d name="Robot_assembly4" register="true" pos="26.5254 -17.1728 59.4931" dir="26.5254 -17.1728 59.4931"/>
+	<GameObject3d name="Robot_assembly5" register="true" pos="27.0225 -17.1728 54.6786" dir="27.0225 -17.1728 54.6786"/>
+	<GameObject3d name="Assembly_Machine1_1" register="true" pos="36.65 -16.51 54.73" dir="37.32 -16.76 57.34"/>
+	<GameObject3d name="Assembly_Machine1_2" register="true" pos="40 -16.46 54.38" dir="40.76 -16.65 53.77"/>
+	<GameObject3d name="Assembly_Machine2_1" register="true" pos="23.24 -15.63 64.84" dir="23.48 -15.99 63.93"/>
+	<GameObject3d name="Assembly_Machine2_2" register="true" pos="25.75 -15.80 68" dir="26.56 -16.11 67.49"/>
 	<GameObject3d name="Rejilla" register="true" pos="113.54 -9.37 -44.35" dir="114.53 -9.29 -44.44"/>
  </sounds>

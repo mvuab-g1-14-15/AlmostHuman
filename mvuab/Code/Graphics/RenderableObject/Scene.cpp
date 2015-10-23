@@ -20,6 +20,7 @@
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
     , mCurrentRoom( 0 )
+    , mRoomName("")
     , mToDelete( 0 )
 {
 
@@ -101,6 +102,7 @@ void CScene::ActivateRoom( const std::string& aRoomName )
 
         lRoom->Activate();
         mCurrentRoom = lRoom;
+        mRoomName = aRoomName;
     }
 }
 

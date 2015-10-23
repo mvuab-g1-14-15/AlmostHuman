@@ -1,7 +1,10 @@
 <cinematic>
 	<add_renderable path="Data\sala1\cinematics/" room="sala1" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.1"/>
 	<set_active name="rejilla_fragment" resource_id_file="Data/sala1/cinematics/elementos_rejilla.xml" active="true" time="0.00001"/>
+	<set_active name="rejilla_LOGAN" resource_id_file="Data/sala1/cinematics/elementos_rejilla_player.xml" active="true" time="0.00001"/>
 	<set_camera name="CameraCinematica" name_camera="camera_cinematica2_sala1" active="true" time="0.00001" blocker="true" />
+	<play_animation name="Logan_cinematica2_sala1" animated="true" room="sala1"  time="0.0001" animation="crash_rejilla" />
 	<play_animation name="Rejilla" room="sala1" resource_id_file="Data/sala1/cinematics/cinematica_rompe_rejilla.xml" time="5.0"/>
+	<set_active name="rejilla_LOGAN2" resource_id_file="Data/sala1/cinematics/elementos_rejilla_player.xml" active="false" time="0.00001"/>
 	<set_camera name="CameraPlayer" name_camera="TestProcess" active="false" time="0.000001" blocker="false" />
 </cinematic>

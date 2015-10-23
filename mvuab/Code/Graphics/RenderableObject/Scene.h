@@ -41,10 +41,12 @@ public:
   std::vector<CLightProbe*> GetClosedLightProbes( std::string, Math::Vect3f );
   const std::string GetActivateRoom();
 
-  CRoom* GetCurrentRoom(){return mCurrentRoom;}
+  CRoom* GetCurrentRoom() { return mCurrentRoom; }
+  std::string GetRoomName() { return mRoomName; }
 
 private:
   CRoom* mCurrentRoom;
+  std::string mRoomName;
   CRenderableObjectsManager *mToDelete;
 };
 

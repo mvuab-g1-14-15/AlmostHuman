@@ -67,35 +67,16 @@ bool fileExists(const std::string& file)
 
 bool CTextureManager::TryToLoad(CTexture* aTexture, std::string aFileName)
 {
-    if (fileExists(aFileName))
-    {
-        if( aTexture->Load( aFileName ) )
-        {
-            return true;
-        }
-    }
-    return false;
+    return (fileExists(aFileName)) && aTexture->Load( aFileName );
 }
 
 CTexture* CTextureManager::AddTexture( const std::string& fileName )
 {
-    CTexture* t;
-
-    if ( fileName.find( "Cube" ) != std::string::npos )
-    {
-        t = new CCubedTexture();
-    }
-    else if ( fileName.find( "GUI" ) != std::string::npos )
-    {
-        t = new CGUITexture();
-    }
-    else
-    {
-        t = new CTexture();
-    }
+    CTexture* t = ( fileName.find( "Cube" ) != std::string::npos ) ? new CCubedTexture() : new CTexture();
 
     std::string lFileName = fileName;
     lFileName.erase(lFileName.find_last_of("."), std::string::npos);
+
     if (!TryToLoad( t, lFileName + ".dds"))
     {
         if (!TryToLoad( t, fileName))

@@ -2,6 +2,7 @@ g_bChargeEnergy = false
 g_bChangeRoom = false
 g_bPressedRoom1Button = false
 g_bPressRoom1Button = false
+g_bPressRoomPasillo = false
 g_bRejillaBreak = false
 g_bPressRoom2X = false
 g_bPressRoom3X = false
@@ -96,6 +97,15 @@ function ShowTextDoor2(text, other_shape)
 	gui_manager:ShowStaticText(text)
 end
 
+function ShowTextDoorPasillo(text, other_shape)
+	if g_bPressRoomPasillo then
+		g_bPressRoomPasillo = false
+	else
+		g_bPressRoomPasillo = true
+	end
+	gui_manager:ShowStaticText(text)
+end
+
 function OpenDoor(text, other_shape)
 	if g_bPressRoom3X then
 		g_bPressRoom3X = false	
@@ -162,12 +172,14 @@ end
 function StayRejilla(text, other_shape)
 	if not g_bRejillaBreak and g_bPressedRoom1Button then
 		g_bRejillaBreak = true
+		g_bPressRoom1Button = false
+		trigger_manager:GetTriggerByName("rejilla_sala1"):SetActive(false)	
 		gui_manager:ShowStaticText(text)		
 	end
 end
 
 function StayText(room, message, other_shape)
-	local enemigosVivos = GetEnemyLive(room)
+	local enemigosVivos = false --GetEnemyLive(room)
 	if room == "room2" then
 		if g_bPressedRoom2X and enemigosVivos then
 			engine:Trace("Hay enemigos vivos todavia")
@@ -201,9 +213,19 @@ function StayText(room, message, other_shape)
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
 			cinematic_manager:Execute("elevator")
+			physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala3DoorEscenario"))
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end
+	end
+end
+
+function StayText(room, other_shape)
+	if g_bPressedRoomPasillo and enemigosVivos then
+		g_bPressedRoomPasillo = false
+		g_bPressRoomPasillo = false
+		g_bOpenPasillo = true
+		--Codigo para cambiar de sala o abrir la puerta
 	end
 end
 

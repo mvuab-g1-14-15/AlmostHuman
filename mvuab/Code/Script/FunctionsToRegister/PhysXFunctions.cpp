@@ -39,6 +39,8 @@ extern "C"
 #include "Particles/InstanceParticle.h"
 #include "Particles/ParticleSystemCore.h"
 
+#include "Joints\PhysicRevoluteJoint.h"
+
 #define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
 
 using namespace luabind;
@@ -74,14 +76,7 @@ SCollisionInfo RaycastCollisionGroup( CPhysicsManager* PhysicManager, Math::Vect
                                       float maxDist )
 {
   SCollisionInfo hit_info;
-  CPhysicUserData* lPUD = PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist );
-
-  if ( !lPUD || lPUD->GetName() != "Player" )
-  {
-    hit_info = SCollisionInfo();
-    return hit_info;
-  }
-
+  PhysicManager->RaycastClosestActor( position, direction, impactMask, hit_info, maxDist );
   return hit_info;
 }
 
@@ -231,6 +226,8 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD( CPhysicActor, CreateBody )
   LUA_DECLARE_METHOD( CPhysicActor, AddImpulseAtPos )
   //LUA_DECLARE_METHOD( CPhysicActor, AddForceAtPos )
+  LUA_DECLARE_METHOD( CPhysicActor, SetPosition )
+  LUA_DECLARE_METHOD( CPhysicActor, Activate )
   LUA_DECLARE_METHOD( CPhysicActor, GetPosition )
   LUA_DECLARE_METHOD( CPhysicActor, MoveGlobalPosition)
   LUA_END_DECLARATION
@@ -253,7 +250,9 @@ void registerPhysX( lua_State* m_LS )
   .def( "OverlapSphere", &CPhysicsManager::OverlapSphereHardcoded )
   .def( "AddPhysicController", &Add_PhysicController )
   .def( "GetController", &CPhysicsManager::CMapManager<CPhysicController>::GetResource )
+  .def( "GetJoint", &CPhysicsManager::CMapManager<CPhysicRevoluteJoint>::GetResource )
   .def( "GetActor", &CPhysicsManager::CMapManager<CPhysicActor>::GetResource )
+  .def( "RemoveActor", &CPhysicsManager::CMapManager<CPhysicActor>::RemoveResource )
   .def( "RaycastType", &RaycastType )
   .def( "PlayerInSight", &PlayerInSight )
   //  .def( "GetClosestEnemy", &GetClosestEnemy )
@@ -289,6 +288,7 @@ void registerPhysX( lua_State* m_LS )
   .def_readwrite( "CollisionPoint", &SCollisionInfo::m_CollisionPoint )
   .def_readwrite( "Distance", &SCollisionInfo::m_fDistance )
   .def_readwrite( "Normal", &SCollisionInfo::m_Normal )
+  .def_readwrite( "Name", &SCollisionInfo::m_Name )
   LUA_END_DECLARATION
 
   module( m_LS ) [
@@ -320,6 +320,11 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD( CTrigger, GetActive )
   LUA_DECLARE_METHOD( CTrigger, SetPosition )
   LUA_DECLARE_METHOD( CTrigger, GetPosition )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( m_LS )
+  LUA_DECLARE_CLASS(CPhysicRevoluteJoint)
+  LUA_DECLARE_METHOD( CPhysicRevoluteJoint, ActiveMotor )
   LUA_END_DECLARATION
   
   LUA_BEGIN_DECLARATION( m_LS )

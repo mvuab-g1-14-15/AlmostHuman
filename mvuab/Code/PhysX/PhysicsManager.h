@@ -59,7 +59,7 @@ struct TActorInfo
 }
 */
 
-class CPhysicsManager : public CManager, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>
+class CPhysicsManager : public CManager, public CMapManager<CPhysicActor>, public CMapManager<CPhysicController>, public CMapManager<CPhysicRevoluteJoint>
 {
 public:
   //--- Init and End protocols------------------------------------------
@@ -115,7 +115,7 @@ public:
   bool          ReleasePhysicRevoluteJoint	( CPhysicRevoluteJoint* _pJoint );
   bool          AddPhysicFixedJoint			( CPhysicFixedJoint* _pJoint );
   bool          ReleasePhysicFixedJoint		( CPhysicFixedJoint* _pJoint );
-
+  bool			AddPhysicRevoluteJoint( const std::string& _aName, CPhysicRevoluteJoint* _pJoint );
   //Materials
 
   int            AddMaterial( float restitution, float staticFriction, float dynamicFriction );

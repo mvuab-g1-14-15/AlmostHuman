@@ -21,6 +21,7 @@ void CPoolRenderableObjectTechnique::Destroy()
     {
         CHECKED_DELETE( m_RenderableObjectTechniqueElements[i] );
     }
+
     if (m_RenderableObjectTechniqueElements.size() != 0)
     {
         m_RenderableObjectTechniqueElements.clear();

@@ -28,6 +28,7 @@ CLight::CLight()
     , mLensFlare( 0 )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
+    , m_MustUpdateStaticShadowMap( false )
 {
 }
 
@@ -185,13 +186,14 @@ void CLight::GenerateShadowMap( CGraphicsManager *GM )
     {
         SetShadowMap( GM );
 
-        if ( m_MustUpdateStaticShadowMap )
+        if ( m_MustUpdateStaticShadowMap && mStaticShadowMap)
         {
             mStaticShadowMap->Generate();
             m_MustUpdateStaticShadowMap = false;
         }
 
-        mDynamicShadowMap->Generate();
+        if( mDynamicShadowMap )
+          mDynamicShadowMap->Generate();
     }
 }
 

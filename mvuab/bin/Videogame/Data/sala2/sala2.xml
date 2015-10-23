@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <room path="Data\sala2">
   <layer name="solid" file="solid_layer.xml" />
+  <layer name="glow" file="glow_layer.xml" />
 </room>

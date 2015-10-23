@@ -23,4 +23,6 @@
   <MeshInstance name="Pack_obj_006_sala2" core="Pack_obj_006_sala2" pos="61.9889 -16.8616 -69.6353" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Barriers_sala2" core="Barriers_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Volumetric_light_sala2" core="Volumetric_light_sala2" pos="57.768 -18.5742 -69.752" yaw="0.0" pitch="0.0" roll="0.0" scale="2.48033 2.43807 2.43807" />
+  <MeshInstance name="lights_white_upper_glow_sala2" core="lights_white_upper_glow_sala2" pos="49.0188 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="light_white_down_glow_sala2" core="light_white_down_glow_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>
