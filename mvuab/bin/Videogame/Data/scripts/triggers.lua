@@ -115,24 +115,39 @@ function OpenDoor(text, other_shape)
 	gui_manager:ShowStaticText(text)
 end
 
-function ShowText(text, num, textC4Colocada, text2, other_shape)	
-	if g_bPressedE == false and g_bC41 then
-		g_bPressE = false
-		g_bPressedE = true
-		gui_manager:ShowStaticText(textC4Colocada)
-	elseif g_bPressedE == false and g_bC42 then
-		g_bPressE = false	
-		g_bPressedE = true
-		gui_manager:ShowStaticText(textC4Colocada)
-	elseif g_bPressE then
+function ShowText(text, num, textC4Colocada, text2, other_shape)
+	if num == "1" then
+		if not g_bPressedE and g_bC41 then
+			g_bPressE = false
+			g_bPressedE = true
+			gui_manager:ShowStaticText(textC4Colocada)
+			trigger_manager:GetTriggerByName("punto_explosivo_1_sala3"):SetActive(false)
+		elseif g_bPressE then
+			g_bPressE = false
+			gui_manager:ShowStaticText(text)
+		else
+			g_bPressE = true
+			g_bPressedE = false
+			g_fC4Colocada = num
+			gui_manager:ShowStaticText(text)
+		end
+	elseif num == "2" then
+		if not g_bPressedE and g_bC42 then
+			g_bPressE = false	
+			g_bPressedE = true
+			gui_manager:ShowStaticText(textC4Colocada)
+			trigger_manager:GetTriggerByName("punto_explosivo_2_sala3"):SetActive(false)
+		elseif g_bPressE then
 		g_bPressE = false
 		gui_manager:ShowStaticText(text)
-	else
-		g_bPressE = true
-		g_bPressedE = false
-		g_fC4Colocada = num
-		gui_manager:ShowStaticText(text)
+		else
+			g_bPressE = true
+			g_bPressedE = false
+			g_fC4Colocada = num
+			gui_manager:ShowStaticText(text)
+		end
 	end
+	
 	
 end
 
@@ -140,8 +155,8 @@ function CheckC4(num, textC4Colocada, text2, other_shape)
 	
 	if g_bPressedE then
 		gui_manager:ShowStaticText(num)
-		gui_manager:ShowStaticText(textC4Colocada)
 		g_bPressedE = false
+		gui_manager:ShowStaticText(textC4Colocada)
 		gui_manager:ShowStaticText(text2, true)
 	end
 		
