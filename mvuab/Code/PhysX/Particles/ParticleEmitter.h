@@ -28,17 +28,20 @@ public:
   void         Render();
   bool         IsActive();
   void         Reset();
+  void         SetFixedDirection( const Math::Vect3f& aDirection );
 
   const uint32 GetParticleCount() const;
   const CParticle* GetParticle( const uint32 aIdx ) const;
   CParticle* GetParticle( const uint32 aIdx );
 
 public:
-  Math::Vect3f                mCubicSize;
+  Math::Vect3f                 mCubicSize;
   float32                      mAngleStep;
   float32                      mCurrentAngle;
   float32                      mRadiusMin;
   float32                      mRadiusMax;
+  bool                         mUseFixedDirection;
+  Math::Vect3f                 mFixedDirection;
 
 private:
   float*                        mParticlesLifeTime;

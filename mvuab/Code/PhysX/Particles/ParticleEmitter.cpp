@@ -44,6 +44,7 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
   , mTimeSinceLastEmission( 0.0f )
   , mMaxLife( 0.0f )
   , mActualTime( 0.0f )
+  , mUseFixedDirection( false )
 {
 }
 
@@ -231,7 +232,11 @@ void CParticleEmitter::EmitParticles( )
         {
           mParticlesIsAlive[i] =  true;
           mParticlesSpeed[i] = baseUtils::RandRange( mMotion.mLinearSpeed.x, mMotion.mLinearSpeed.y );
-          mParticlesDirections[i]= baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax );
+          
+          if( mUseFixedDirection )
+            mParticlesDirections[i] = mFixedDirection;
+          else
+            mParticlesDirections[i]= baseUtils::RandRange( mMotion.mInitialDirectionMin, mMotion.mInitialDirectionMax );
 
           mParticlesTTL[i] = baseUtils::RandRange( mTTLParticles.x, mTTLParticles.y );
           mParticlesPositions[i] = mSpawnFn( this );
@@ -290,4 +295,10 @@ void CParticleEmitter::Reset()
 {
   mActualTime = 0.0f;
   mIsActive = true;
+}
+
+void CParticleEmitter::SetFixedDirection( const Math::Vect3f& aDirection )
+{
+  mUseFixedDirection = true;
+  mFixedDirection = aDirection;
 }

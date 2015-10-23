@@ -50,7 +50,7 @@ void CParticleSystemCore::Render()
 
     BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
     {
-        if( lParticleInstance->IsActive() )
+        if( lParticleInstance->IsVisible() )
         {
             lGM->SetTransform( lParticleInstance->GetTransform() );
             BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
@@ -66,6 +66,14 @@ void CParticleSystemCore::Render()
 
 void CParticleSystemCore::Refresh()
 {
+}
+
+void CParticleSystemCore::SetFixedDirection( const Math::Vect3f& aDirection )
+{
+  BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+  {
+    lParticleEmitter->SetFixedDirection(aDirection);
+  }
 }
 
 void CParticleSystemCore::AddInstance( CParticleInstance* aInstance )

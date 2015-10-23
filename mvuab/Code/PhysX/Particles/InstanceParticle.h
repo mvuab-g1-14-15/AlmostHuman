@@ -15,8 +15,6 @@ public:
   CParticleInstance( const Math::Vect3f& aPosition );
   ~CParticleInstance();
   void Update( float dt ) { lCurrentTime += dt;};
-  bool IsActive() const { return mActive; }
-  void Activate( bool aActivate ) { mActive = aActivate; }
 };
 
 #endif //_INSTANCE_PARTICLE_H

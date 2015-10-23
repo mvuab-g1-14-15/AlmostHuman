@@ -36,6 +36,8 @@ extern "C"
 
 #include "Triggers/Trigger.h"
 #include "Triggers/TriggerManager.h"
+#include "Particles/InstanceParticle.h"
+#include "Particles/ParticleSystemCore.h"
 
 #define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
 
@@ -175,33 +177,6 @@ bool PlayerInSight( CPhysicsManager* PhysicManager, float _Distance, float _Angl
   return false;
 }
 
-//CEnemy* GetClosestEnemy( CPhysicsManager* PhysicManager )
-//{
-//  CPhysicController* l_PlayerController = PhysicManager->CMapManager<CPhysicController>::GetResource( "Player" );
-//  Math::Vect3f l_PlayerPos = l_PlayerController->GetPosition();
-//  std::map<std::string, CEnemy*>::const_iterator it = EnemyMInstance->GetResourcesMap().begin(),
-//                                                 it_end = EnemyMInstance->GetResourcesMap().end();
-//
-//  float l_ActualDistance = 999999.99f;
-//  CEnemy* l_Enemy = 0;
-//
-//  for ( ; it != it_end; ++it )
-//  {
-//    CPhysicController* l_EnemyController = PhysicManager->CMapManager<CPhysicController>::GetResource( it->first );
-//
-//    float l_Dist = ( l_PlayerPos - l_EnemyController->GetPosition() ).Length();
-//
-//    if ( l_ActualDistance > l_Dist )
-//    {
-//      l_ActualDistance = l_Dist;
-//      l_Enemy = it->second;
-//
-//    }
-//  }
-//
-//  return l_Enemy;
-//}
-
 bool AddGrenade( CPhysicsManager* PhysicManager, const std::string& name, const std::string& group,
                  const Math::Vect3f& dimensions,
                  const Math::Vect3f& position, unsigned int mask )
@@ -213,6 +188,21 @@ bool AddGrenade( CPhysicsManager* PhysicManager, const std::string& name, const 
            0, mask
          );
   return true;
+}
+
+void registerParticles( lua_State* aLuaState )
+{
+  ASSERT( aLuaState, "LuaState error in Register Billboard" );
+  
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_DERIVED_CLASS( CParticleInstance, CObject3D )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+    LUA_DECLARE_CLASS( CParticleSystemCore )
+    LUA_DECLARE_METHOD( CParticleSystemCore, ResetEmitters )
+    LUA_DECLARE_METHOD( CParticleSystemCore, SetFixedDirection )
+  LUA_END_DECLARATION
 }
 
 void registerPhysX( lua_State* m_LS )
