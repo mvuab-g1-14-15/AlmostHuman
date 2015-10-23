@@ -142,15 +142,8 @@ void CRoom::Load()
 
                 for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
                     l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-				//l_AseMeshActor->CreateBody(1.0f);
+				
                 lPM->AddPhysicActor( l_AseMeshActor );
-
-				CPhysicRevoluteJoint* m_PRJ = new CPhysicRevoluteJoint();
-				m_PRJ->SetInfo( Math::Vect3f( 0, 0, -1 ), Math::Vect3f( 0, 0, 0 ),
-								l_AseMeshActor );
-				m_PRJ->SetMotor( 20, 5.f );
-				lPM->AddPhysicRevoluteJoint( lName + "DoorEscenario", m_PRJ );
             }
         }
 
