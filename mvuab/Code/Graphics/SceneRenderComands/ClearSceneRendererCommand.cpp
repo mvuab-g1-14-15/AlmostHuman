@@ -12,5 +12,6 @@ CClearSceneRendererCommand::CClearSceneRendererCommand( CXMLTreeNode& atts )
 
 void CClearSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CClearSceneRendererCommand::Execute", Profiler::Color::Orchid )
     GM.Clear( m_Color, m_Depht, m_Stencil, D3DCOLOR_XRGB((int)m_ClearColor.r, (int)m_ClearColor.g, (int)m_ClearColor.b) );
 }

@@ -6,6 +6,7 @@
 #include "Utils\Name.h"
 #include "Utils\Visible.h"
 #include "XML\XMLTreeNode.h"
+#include "Utils/Defines.h"
 
 class CGraphicsManager;
 

@@ -26,6 +26,7 @@ COcclusionMapSceneRendererCommand::~COcclusionMapSceneRendererCommand()
 
 void COcclusionMapSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
+  BROFILER_CATEGORY( "COcclusionMapSceneRendererCommand::Execute", Profiler::Color::Orchid )
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
     CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
 }

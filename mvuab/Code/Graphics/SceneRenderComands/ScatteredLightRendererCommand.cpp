@@ -29,6 +29,7 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
+  BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
     // 92.0f,   -9.0f,  -44.0f
     // 94.0f,   -9.0f,  -25.3f 
     // 2095.0f, -65.0f, 167.0f

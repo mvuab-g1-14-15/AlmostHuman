@@ -12,5 +12,6 @@ CDisableZTestSceneRendererCommand::~CDisableZTestSceneRendererCommand()
 
 void CDisableZTestSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CDisableZTestSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	GM.DisableZTest();
 }

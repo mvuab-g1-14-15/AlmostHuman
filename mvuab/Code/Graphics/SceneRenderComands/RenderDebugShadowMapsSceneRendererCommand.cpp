@@ -13,5 +13,5 @@ CRenderDebugShadowMapsSceneRendererCommand::~CRenderDebugShadowMapsSceneRenderer
 
 void CRenderDebugShadowMapsSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-
+  BROFILER_CATEGORY( "CRenderDebugShadowMapsSceneRendererCommand::Execute", Profiler::Color::Orchid )
 }

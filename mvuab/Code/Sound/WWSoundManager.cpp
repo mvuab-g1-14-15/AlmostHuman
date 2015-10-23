@@ -197,6 +197,7 @@ void CWWSoundManager::Init()
 
 void CWWSoundManager::Update()
 {
+  BROFILER_CATEGORY( "CWWSoundManager::Update()", Profiler::Color::Orchid )
     AK::SoundEngine::RenderAudio();
 }
 

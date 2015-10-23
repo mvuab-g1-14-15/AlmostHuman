@@ -11,5 +11,6 @@ CDisableAlphaBlendSceneRendererCommand::~CDisableAlphaBlendSceneRendererCommand(
 }
 void CDisableAlphaBlendSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDisableAlphaBlendSceneRendererCommand::Execute", Profiler::Color::Orchid )
   GM.DisableAlphaBlend();
 }

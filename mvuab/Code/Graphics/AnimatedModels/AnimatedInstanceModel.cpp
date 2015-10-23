@@ -290,6 +290,7 @@ void CAnimatedInstanceModel::Destroy()
 
 void CAnimatedInstanceModel::Update()
 {
+  BROFILER_CATEGORY( "CAnimatedInstanceModel::Update()", Profiler::Color::Orchid )
   m_CalModel->update( deltaTimeMacro * m_Velocity);
 }
 

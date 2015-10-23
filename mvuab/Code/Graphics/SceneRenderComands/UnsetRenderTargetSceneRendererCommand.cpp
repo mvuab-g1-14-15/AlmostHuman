@@ -15,5 +15,6 @@ CUnsetRenderTargetSceneRendererCommand::~CUnsetRenderTargetSceneRendererCommand(
 
 void CUnsetRenderTargetSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CUnsetRenderTargetSceneRendererCommand::Execute", Profiler::Color::Orchid )
     m_SetRenderTargetRendererCommand->UnSetRenderTarget(m_UseDepthStencilBuffer);
 }

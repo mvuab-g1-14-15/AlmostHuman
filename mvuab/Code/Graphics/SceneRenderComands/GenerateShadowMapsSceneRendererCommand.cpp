@@ -16,5 +16,6 @@ CGenerateShadowMapsSceneRendererCommand::~CGenerateShadowMapsSceneRendererComman
 
 void CGenerateShadowMapsSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CGenerateShadowMapsSceneRendererCommand::Execute", Profiler::Color::Orchid )
     LightMInstance->GenerateShadowMap( GraphicsInstance );
 }

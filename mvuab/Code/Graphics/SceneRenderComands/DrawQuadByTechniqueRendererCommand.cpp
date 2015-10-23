@@ -30,6 +30,7 @@ CDrawQuadByTechniqueRendererCommand::~CDrawQuadByTechniqueRendererCommand()
 
 void CDrawQuadByTechniqueRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDrawQuadByTechniqueRendererCommand::Execute", Profiler::Color::Orchid )
     ActivateTextures();
 
     #ifdef _DEBUG

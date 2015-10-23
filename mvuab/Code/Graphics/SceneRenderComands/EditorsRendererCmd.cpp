@@ -9,5 +9,6 @@ CEditorsRenderCmd::CEditorsRenderCmd( CXMLTreeNode& atts ) : CSceneRendererComma
 
 void CEditorsRenderCmd::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CEditorsRenderCmd::Execute", Profiler::Color::Orchid )
     CEngineManagers::GetSingletonPtr()->GetEditorsManager()->Render();
 }

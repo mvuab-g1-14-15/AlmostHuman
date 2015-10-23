@@ -38,7 +38,7 @@ bool CActionManager::DoAction( const std::string& action )
 
 void CActionManager::ProcessInputs()
 {
-  mMutex.Lock();
+  BROFILER_CATEGORY( "CActionManager::ProcessInputs()", Profiler::Color::Orchid )
   mDoActions.clear();
 
   MapActions::const_iterator lItb = mActions.begin(), lIte = mActions.end();
@@ -145,14 +145,12 @@ void CActionManager::ProcessInputs()
         doIt = false;
     }
 
-	if( doIt )
-	{
-		SActionDone lAction = { doIt, amount };
-		mDoActions[lItb->first] = lAction;
-	}
+    if( doIt )
+    {
+      SActionDone lAction = { doIt, amount };
+      mDoActions[lItb->first] = lAction;
+    }
   }
-
-  mMutex.UnLock();
 }
 
 bool CActionManager::DoAction( const std::string& action, float32& amount )

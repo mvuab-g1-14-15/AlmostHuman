@@ -33,6 +33,7 @@ CGaussianSceneRendererCommand::~CGaussianSceneRendererCommand()
 
 void CGaussianSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
+  BROFILER_CATEGORY( "CGaussianSceneRendererCommand::Execute", Profiler::Color::Orchid )
     CRenderableObjectTechniqueManager* lROTM = ROTMInstance;
 
     const std::string & l_EffectTechName = lROTM->GetRenderableObjectTechniqueNameByVertexType(

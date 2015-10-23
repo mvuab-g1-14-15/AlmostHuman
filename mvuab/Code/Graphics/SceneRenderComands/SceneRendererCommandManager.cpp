@@ -229,9 +229,10 @@ bool CSceneRendererCommandManager::Execute()
   for ( uint32 i = 0, lCount = m_ResourcesVector.size(); i < lCount; ++i )
   {
     CSceneRendererCommand* lCommand = m_ResourcesVector[i];
-
     if ( lCommand->GetVisible() )
+    {
       lCommand->Execute( *lGM );
+    }
   }
 
   return true;

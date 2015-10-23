@@ -13,6 +13,7 @@ CCaptureFrameBufferSceneRendererCommand::~CCaptureFrameBufferSceneRendererComman
 
 void CCaptureFrameBufferSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CCaptureFrameBufferSceneRendererCommand::Execute", Profiler::Color::Orchid )
   for ( size_t i = 0; i < m_StageTextures.size()  ; ++i )
     m_StageTextures[i].m_Texture->CaptureFrameBuffer( m_StageTextures[i].m_StageId );
 

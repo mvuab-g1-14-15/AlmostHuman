@@ -38,6 +38,7 @@ void CScene::Render()
 
 void CScene::Update()
 {
+  BROFILER_CATEGORY( "CScene::Update()", Profiler::Color::Orchid )
     // Update the core room, in order to update all the characters
     GetResource( "core" )->Update();
 
@@ -56,7 +57,7 @@ void CScene::Destroy()
 void CScene::Init()
 {
     Load( mConfigPath );
-	LoadAllRoom();
+    //LoadAllRoom();
 }
 
 bool CScene::Load( const std::string& l_FilePath )

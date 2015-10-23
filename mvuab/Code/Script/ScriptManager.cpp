@@ -87,6 +87,7 @@ void CScriptManager::Load()
 
 void CScriptManager::RunCode( const std::string& Code )
 {
+  BROFILER_CATEGORY( "CScriptManager::RunCode()", Profiler::Color::Orchid )
     if ( luaL_dostring( m_LS, Code.c_str() ) )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );
@@ -101,6 +102,7 @@ void CScriptManager::RunCode( const std::string& Code )
 
 void CScriptManager::RunFile( const std::string& FileName )
 {
+  BROFILER_CATEGORY( "CScriptManager::RunFile()", Profiler::Color::Orchid )
     if ( luaL_dofile( m_LS, FileName.c_str() ) )
     {
         const char* l_Str = lua_tostring( m_LS, -1 );

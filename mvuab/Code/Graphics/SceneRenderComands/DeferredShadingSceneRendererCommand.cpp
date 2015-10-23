@@ -29,6 +29,7 @@ CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
 
 void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDeferredShadingSceneRendererCommand::Execute", Profiler::Color::Orchid )
     ActivateTextures();
     SetLightsData( GM );
 }

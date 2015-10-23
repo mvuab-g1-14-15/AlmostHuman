@@ -18,6 +18,7 @@ CSetBlendSceneRendererCommand::~CSetBlendSceneRendererCommand()
 
 void  CSetBlendSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CSetBlendSceneRendererCommand::Execute", Profiler::Color::Orchid )
     GM.SetSrcBlend( m_SrcBlend );
     GM.SetDstBlend( m_DstBlend );
 }

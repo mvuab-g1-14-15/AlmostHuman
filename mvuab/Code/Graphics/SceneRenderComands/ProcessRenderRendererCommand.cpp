@@ -9,5 +9,6 @@ CProcessRenderRendererCommand::CProcessRenderRendererCommand(CXMLTreeNode &atts)
 
 void CProcessRenderRendererCommand::Execute(CGraphicsManager &GM)
 {
+    BROFILER_CATEGORY( "CDrawQuadByTechniqueRendererCommand::Execute", Profiler::Color::Orchid )
     CEngine::GetSingletonPtr()->GetProcess()->Render();
 }

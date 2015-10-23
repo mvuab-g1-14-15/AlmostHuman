@@ -49,6 +49,7 @@ CBloomSceneRendererCommand::~CBloomSceneRendererCommand()
 
 void CBloomSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CBloomSceneRendererCommand::Execute", Profiler::Color::Orchid )
     ActivateTextures();
 
     for ( size_t i = 0; i < m_StageTextures.size()  ; ++i )

@@ -100,6 +100,7 @@ std::vector<CLightProbe*> CRoom::GetClosedLightProbes( Math::Vect3f aPos )
 
 void CRoom::RenderLayer( const std::string& aLayerName )
 {
+  BROFILER_CATEGORY( GetName().c_str(), Profiler::Color::Orchid )
     if( m_pLayers ) m_pLayers->Render(aLayerName);
 }
 
@@ -192,5 +193,6 @@ CRenderableObjectsManager* CRoom::GetLayer( const std::string& aLayer ) const
 
 void CRoom::Update()
 {
-    m_pLayers->Update();
+  BROFILER_CATEGORY( GetName().c_str(), Profiler::Color::Orchid )
+  m_pLayers->Update();
 }

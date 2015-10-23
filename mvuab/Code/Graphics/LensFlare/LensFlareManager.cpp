@@ -52,11 +52,12 @@ void CLensFlareManager::Init()
 
 void CLensFlareManager::Update()
 {
-
+  BROFILER_CATEGORY( "CLensFlareManager::Update()", Profiler::Color::Orchid )
 }
 
 void CLensFlareManager::Render()
 {
+  BROFILER_CATEGORY( "CLensFlareManager::Render()", Profiler::Color::Orchid )
     CGraphicsManager* lGM = GraphicsInstance;
     uint32 lWidth, lHeight;
     lGM->GetWidthAndHeight(lWidth, lHeight);

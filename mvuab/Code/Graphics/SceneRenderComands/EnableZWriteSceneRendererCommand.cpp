@@ -12,5 +12,6 @@ CEnableZWriteSceneRendererCommand::~CEnableZWriteSceneRendererCommand()
 
 void  CEnableZWriteSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CEnableZWriteSceneRendererCommand::Execute", Profiler::Color::Orchid )
   GM.EnableZWrite();
 }

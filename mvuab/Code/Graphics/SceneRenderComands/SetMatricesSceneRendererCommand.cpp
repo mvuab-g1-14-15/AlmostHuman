@@ -15,5 +15,6 @@ CSetMatricesSceneRendererCommand::~CSetMatricesSceneRendererCommand()
 
 void CSetMatricesSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
-    GraphicsInstance->SetupMatrices();
+  BROFILER_CATEGORY( "CSetMatricesSceneRendererCommand::Execute", Profiler::Color::Orchid )
+  GM.SetupMatrices();
 }

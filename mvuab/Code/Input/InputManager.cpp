@@ -143,6 +143,7 @@ bool CInputManager::HasGamePad( EInputDeviceType device ) const
 //----------------------------------------------------------------------------
 void CInputManager::Update( void )
 {
+  BROFILER_CATEGORY( "CInputManager::Update()", Profiler::Color::Orchid )
     HRESULT hr;
 
     if ( !IsOk() )

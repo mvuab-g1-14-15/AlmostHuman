@@ -91,7 +91,8 @@ bool CXMLTreeNode::LoadFile( const char* _pszFileName )
         m_pDoc = xmlParseFile( _pszFileName );
 
         xmlErrorPtr lError = xmlGetLastError();
-        ASSERT( !lError, "%s in file %s", ( const char* ) lError->message, _pszFileName );
+        if( lError )
+          FATAL_ERROR("%s in file %s", ( const char* ) lError->message, _pszFileName );
 
         if ( m_pDoc )
         {

@@ -28,6 +28,8 @@ CRenderDebugCommand::~CRenderDebugCommand()
 
 void CRenderDebugCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CRenderDebugCommand::Execute", Profiler::Color::Orchid )
+
   if ( m_RenderCameras )
     CameraMInstance->Render();
 

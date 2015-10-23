@@ -9,5 +9,6 @@ CTriggerRenderCommand::CTriggerRenderCommand( CXMLTreeNode& atts ) : CSceneRende
 
 void CTriggerRenderCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CRenderDebugShadowMapsSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	TriggersMInstance->Render();
 }

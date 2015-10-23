@@ -21,6 +21,7 @@ CDrawQuadRendererCommand::~CDrawQuadRendererCommand()
 
 void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDrawQuadRendererCommand::Execute", Profiler::Color::Orchid )
     ActivateTextures();
 
     CRenderableObjectTechniqueManager* lROTM = ROTMInstance;

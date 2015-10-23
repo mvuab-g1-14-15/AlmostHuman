@@ -123,6 +123,7 @@ void CCameraManager::Render()
 
 void CCameraManager::Update()
 {
+  BROFILER_CATEGORY( "CCameraManager::Update()", Profiler::Color::Orchid )
     TMapResource::iterator itb = m_Resources.begin(), ite = m_Resources.end();
 
     for ( ; itb != ite; ++itb )

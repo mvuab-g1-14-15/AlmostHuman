@@ -191,6 +191,7 @@ CCinematicManager::CCinematicsItems::CCinematicsItems( const std::string& Node )
 
 void CCinematicManager::CCinematicsItems::Execute()
 {
+  BROFILER_CATEGORY( "CCinematicsItems::Execute", Profiler::Color::Orchid )
     CGraphicsManager* gm = GraphicsInstance;
     std::vector<CCinematicsElement*>::iterator it = m_CinematicsItems.GetResourcesVector().begin(),
                                                it_end = m_CinematicsItems.GetResourcesVector().end();

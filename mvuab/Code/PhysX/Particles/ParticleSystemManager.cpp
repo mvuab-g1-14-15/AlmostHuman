@@ -65,6 +65,7 @@ void CParticleSystemManager::Init()
 
 void CParticleSystemManager::Update()
 {
+  BROFILER_CATEGORY( "CParticleSystemManager::Update()", Profiler::Color::Orchid )
     BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
     {
         lCore->Update();
@@ -73,6 +74,7 @@ void CParticleSystemManager::Update()
 
 void CParticleSystemManager::Render()
 {
+  BROFILER_CATEGORY( "CParticleSystemManager::Render()", Profiler::Color::Orchid )
     BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
     {
         lCore->Render();

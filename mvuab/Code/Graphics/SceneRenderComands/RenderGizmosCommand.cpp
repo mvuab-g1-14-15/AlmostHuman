@@ -17,6 +17,7 @@ CRenderGizmosCommand::~CRenderGizmosCommand()
 
 void CRenderGizmosCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CRenderDebugShadowMapsSceneRendererCommand::Execute", Profiler::Color::Orchid )
     if ( m_RenderGizmos )
     {
         CGizmosManager* l_GM = GizmosMInstance;

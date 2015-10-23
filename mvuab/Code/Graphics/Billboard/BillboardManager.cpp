@@ -47,6 +47,7 @@ void CBillboardManager::Render()
 
   mLinearDepthTexture->Activate(6);*/
 
+  BROFILER_CATEGORY( "CBillboardManager::Render()", Profiler::Color::Orchid )
   for(unsigned int i = 0, l_Size = m_ResourcesVector.size(); i < l_Size; ++i)
   {
       m_ResourcesVector[i]->Render(sRV, mGM);
@@ -54,7 +55,7 @@ void CBillboardManager::Render()
 }
 
 void CBillboardManager::Update()
-{
+{BROFILER_CATEGORY( "CBillboardManager::Update()", Profiler::Color::Orchid )
     for(unsigned int i = 0, l_Size = m_ResourcesVector.size(); i < l_Size; ++i)
     {
         m_ResourcesVector[i]->Update();

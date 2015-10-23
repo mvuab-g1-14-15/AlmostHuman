@@ -18,4 +18,5 @@ CRenderDebugSceneSceneRendererCommand::~CRenderDebugSceneSceneRendererCommand()
 
 void CRenderDebugSceneSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CRenderDebugSceneSceneRendererCommand::Execute", Profiler::Color::Orchid )
 }

@@ -65,7 +65,7 @@ void CEngine::Render()
 }
 
 void CEngine::ProcessInputs()
-{ BROFILER_CATEGORY("CEngine:Update", Profiler::Color::Green)
+{
   ActionManagerInstance->ProcessInputs();
 }
 

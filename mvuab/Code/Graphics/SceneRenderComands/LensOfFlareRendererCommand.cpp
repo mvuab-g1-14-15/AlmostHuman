@@ -11,5 +11,6 @@ CLensOfFlareRendererCommand::CLensOfFlareRendererCommand( CXMLTreeNode& atts ) :
 
 void CLensOfFlareRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CLensOfFlareRendererCommand::Execute", Profiler::Color::Orchid )
     FlareMan->Render();
 }

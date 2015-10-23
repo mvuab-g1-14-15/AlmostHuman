@@ -22,6 +22,7 @@ CZBlurSceneRendererCommand::~CZBlurSceneRendererCommand()
 
 void CZBlurSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
+  BROFILER_CATEGORY( "CZBlurSceneRendererCommand::Execute", Profiler::Color::Orchid )
     ActivateTextures();
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("ZBlur_pool_renderable_object_technique")->Apply();
 

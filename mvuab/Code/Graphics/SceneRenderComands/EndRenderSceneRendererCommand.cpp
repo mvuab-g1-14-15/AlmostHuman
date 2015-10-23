@@ -13,5 +13,6 @@ CEndRenderSceneRendererCommand::~CEndRenderSceneRendererCommand()
 
 void CEndRenderSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CEndRenderSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	GM.EndScene();
 }

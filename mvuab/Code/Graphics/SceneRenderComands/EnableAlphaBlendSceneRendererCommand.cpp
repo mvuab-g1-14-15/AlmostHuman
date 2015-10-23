@@ -12,5 +12,6 @@ CEnableAlphaBlendSceneRendererCommand::~CEnableAlphaBlendSceneRendererCommand()
 
 void  CEnableAlphaBlendSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CEnableAlphaBlendSceneRendererCommand::Execute", Profiler::Color::Orchid )
   GM.EnableAlphaBlend();
 }

@@ -12,5 +12,6 @@ CPresentSceneRendererCommand::~CPresentSceneRendererCommand()
 
 void CPresentSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CPresentSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	GM.Present();
 }

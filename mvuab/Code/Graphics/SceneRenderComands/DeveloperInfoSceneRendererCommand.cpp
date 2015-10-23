@@ -17,6 +17,7 @@ CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode
 
 void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDeveloperInfoSceneRenderCommand::Execute", Profiler::Color::Orchid )
     CFontManager* FM = FontInstance;
     int32 FontId = FM->GetTTF_Id( "Consolas" );
     uint32 width, height;

@@ -12,5 +12,6 @@ CEnableZTestSceneRendererCommand::~CEnableZTestSceneRendererCommand()
 
 void CEnableZTestSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CEnableZTestSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	GM.EnableZTest();
 }

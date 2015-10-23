@@ -9,6 +9,7 @@
 #include "Logger\Logger.h"
 #include "MessageHandler\MessageHandler.h"
 #include <Windows.h>
+#include "Brofiler.h"
 
 // MACROS
 #define GET_SET(TYPE, PARAMETER_NAME) \

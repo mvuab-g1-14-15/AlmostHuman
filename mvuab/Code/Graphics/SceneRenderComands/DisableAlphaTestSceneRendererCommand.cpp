@@ -11,5 +11,6 @@ CDisableAlphaTestSceneRendererCommand::~CDisableAlphaTestSceneRendererCommand()
 }
 void CDisableAlphaTestSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CDisableAlphaTestSceneRendererCommand::Execute", Profiler::Color::Orchid )
   GM.DisableAlphaTest();
 }

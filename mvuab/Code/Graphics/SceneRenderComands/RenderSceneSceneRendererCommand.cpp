@@ -20,5 +20,6 @@ CRenderSceneSceneRendererCommand::~CRenderSceneSceneRendererCommand()
 
 void CRenderSceneSceneRendererCommand::Execute(CGraphicsManager &GM)
 {
+  BROFILER_CATEGORY( "CRenderSceneSceneRendererCommand::Execute", Profiler::Color::Orchid )
 	mScene->RenderLayer( mLayer );
 }

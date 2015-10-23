@@ -16,5 +16,6 @@ CRenderableObjectTechniquesSceneRendererCommand::~CRenderableObjectTechniquesSce
 
 void CRenderableObjectTechniquesSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
+  BROFILER_CATEGORY( "CRenderableObjectTechniquesSceneRendererCommand::Execute", Profiler::Color::Orchid )
     m_PoolRenderableObjectTechnique->Apply();
 }
