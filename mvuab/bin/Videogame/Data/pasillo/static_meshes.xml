@@ -8,7 +8,6 @@
   <static_mesh name="Roof_pasillo" filename="meshes\Roof.mesh" />
   <static_mesh name="leftWall001_pasillo" filename="meshes\leftWall001.mesh" />
   <static_mesh name="Floor_side_left_pasillo" filename="meshes\Floor_side_left.mesh" />
-  <static_mesh name="metal_barrel084_pasillo" filename="meshes\metal_barrel084.mesh" />
   <static_mesh name="Ammo_box_pasillo" filename="meshes\Ammo_box.mesh" />
   <static_mesh name="bomb_pasillo" filename="meshes\bomb.mesh" />
   <static_mesh name="doorUpper003_pasillo" filename="meshes\doorUpper003.mesh" />
@@ -27,4 +26,16 @@
   <static_mesh name="arch_2_pasillo" filename="meshes\arch_2.mesh" />
   <static_mesh name="light_red_roof_glow_pasillo" filename="meshes\light_red_roof_glow.mesh" />
   <static_mesh name="lights_white_door002_glow_pasillo" filename="meshes\lights_white_door002_glow.mesh" />
+  <static_mesh name="lights_blue_roof_glow_pasillo" filename="meshes\lights_blue_roof_glow.mesh" />
+  <static_mesh name="llums_vermelles_wall_lat_01_glow_pasillo" filename="meshes\llums_vermelles_wall_lat_01_glow.mesh" />
+  <static_mesh name="llums_verdes_wall_lat_upper_glow_pasillo" filename="meshes\llums_verdes_wall_lat_upper_glow.mesh" />
+  <static_mesh name="llums_verdes_rodetes_wall_lat_glow_pasillo" filename="meshes\llums_verdes_rodetes_wall_lat_glow.mesh" />
+  <static_mesh name="llums_verdes_wall_lat_upper001_glow_pasillo" filename="meshes\llums_verdes_wall_lat_upper001_glow.mesh" />
+  <static_mesh name="llums_vermelles_lat_fllooe001_glow_pasillo" filename="meshes\llums_vermelles_lat_fllooe001_glow.mesh" />
+  <static_mesh name="llum_verdes_rodes_lat001_glow_pasillo" filename="meshes\llum_verdes_rodes_lat001_glow.mesh" />
+  <static_mesh name="llums_verdes_rodes_003_glow_pasillo" filename="meshes\llums_verdes_rodes_003_glow.mesh" />
+  <static_mesh name="llums_verdes_upper_003_glow_pasillo" filename="meshes\llums_verdes_upper_003_glow.mesh" />
+  <static_mesh name="llums_verdes_upper_005_glow_pasillo" filename="meshes\llums_verdes_upper_005_glow.mesh" />
+  <static_mesh name="llums_verdes_upper_lat_006_glow_pasillo" filename="meshes\llums_verdes_upper_lat_006_glow.mesh" />
+  <static_mesh name="llums_blanques_porta_002_glow_pasillo" filename="meshes\llums_blanques_porta_002_glow.mesh" />
 </static_meshes>
