@@ -97,6 +97,8 @@ function CAmmo:Update()
 			-- set the position to the data
 			self.BillboardAmmo:ChangePosition( self.Position );
 			self.Light:SetPosition( self.Position );
+		else
+			self:End();
 		end
 	end
 end
