@@ -57,7 +57,6 @@ function CAmmo:Update()
 					self.Position = lCollisionPoint
 					
 					local lName = hit_info.Name
-					engine:Trace("Impacted with "..lName)
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					else

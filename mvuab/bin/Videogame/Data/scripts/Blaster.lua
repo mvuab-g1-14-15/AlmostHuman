@@ -83,7 +83,6 @@ function CBlaster:Shoot( aPosition )
 end
 
 function CBlaster:ShootCharged( aPosition )
-	engine:Trace("CBlaster:Charged:Begin")
 	self.AmmoCharged:Begin( aPosition, camera_manager:GetCurrentCamera():GetDirection(), self:CalculateDamage() );
 end
 

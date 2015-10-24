@@ -32,9 +32,9 @@ function CEnemy:__init( aInfo )
 		self.TargetPos = self.Waypoints[self.ActualWaypoint]
 	end
 	
-	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
-		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0)
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
 	
@@ -50,8 +50,8 @@ function CEnemy:__init( aInfo )
 
 	self.UseGizmo = aInfo.use_gizmo
 	if self.UseGizmo then
-		self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", Vect3f(0.0), 0.0, 0.0)
-		local lGizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
+		self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", self.InitPosition, 0.0, 0.0)
+		local lGizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, self.InitPosition, 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
 		self.Gizmo:AddElement( lGizmoElement )
 		gizmos_manager:AddResource( self.Name.."TargetPos", self.Gizmo )
 	end
@@ -98,24 +98,27 @@ function CEnemy:__init( aInfo )
 	self.Fly = aInfo.fly
 	self.InitHeight = self.InitPosition.y
 	
+	if self.Fly then
+		self.Laser = renderable_objects_manager_glow:GetResource(self.Name.."Laser")
+		if self.Laser == nil then
+			self.Laser = CreateInstanceMesh(self.Name.."Laser", "DroneLaser")
+			self.Laser:SetRoomName( aInfo.room )
+			renderable_objects_manager_glow:AddResource(self.Name.."Laser", self.Laser)
+		end
+		self.Laser:SetPitch(self.CameraPitch + g_HalfPi)
+	end
+	
 	self.Alarm = aInfo.alarm
 	if self.Alarm then
 		self.AlarmTimer = countdowntimer_manager:AddTimer(self.Name.."AlarmTimer", aInfo.alarm_time, false)
 	end
 	
 	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
-	
-	self.Ammunition = {}
-	self.MaxAmmo = 25;
-	self.AmmoId = 0;
-	for i=1,self.MaxAmmo do
-		table.insert( self.Ammunition, CAmmo(i) );
-		self.AmmoId = self.AmmoId + 1;
-	end
 end
 
 function CEnemy:Destroy()
 	if self.OnDead then
+		engine:Trace(self.Name.." executing on dead code.")
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..
 							  "local selfName = '"..self:GetName().."';"..
 							  self.OnDeadCode
@@ -224,6 +227,9 @@ function CEnemy:Update()
 		local lPos = self:GetPosition()
 		lPos.y = self.InitHeight
 		self:SetPosition(lPos)
+		self.Laser:SetPosition(lPos)
+		self.Laser:SetYaw(self.Camera:GetYaw() - g_HalfPi)
+		self.Laser:MakeTransform()
 	end
 	
 	local lROPos = self:GetPosition()

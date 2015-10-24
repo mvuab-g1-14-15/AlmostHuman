@@ -33,7 +33,6 @@ function CPlayer:__init()
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi);
 	self.RenderableObject:MakeTransform();
-	engine:Trace("He entrado en el init sala1")
 	
 	self.Animation = "idle"
 	self.Life = 100.0

@@ -18,6 +18,9 @@ class CInstanceMesh : public CRenderableObject
         CStaticMesh*  mStaticMesh;
         CPhysicActor* mPhysicActor;
         bool          mIsOk;
+        bool          mIsDynamic;
+        float         mRadius;
+        Math::Vect3f  mCenter;
     public:
         CInstanceMesh( const std::string& aName, const std::string& CoreName );
         CInstanceMesh( const CXMLTreeNode& atts );

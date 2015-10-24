@@ -23,9 +23,9 @@ function load_basics()
 	-- basic loads
 
 	scene:ActivateRoom("sala1")
-	--scene:ActivateRoom("pasillo")
-	--scene:ActivateRoom("sala2")
-	--scene:ActivateRoom("sala3")	
+	scene:ActivateRoom("pasillo")
+	scene:ActivateRoom("sala2")
+	scene:ActivateRoom("sala3")	
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -86,7 +86,7 @@ function load_gameplay()
 	g_Player:Update()
 	g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
 	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
-
+	scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
 end
 
 function update_gameplay()
@@ -165,10 +165,10 @@ function update_gameplay()
 		
 		if g_bPressRoom2X then
 			if action_manager:DoAction("Action") then
-				if not enemigosVivos then
-					cinematic_manager:Execute("OpenDoor")
+				if enemigosVivos >= 1 then
+					
 					trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
-					gui_manager:ShowStaticText("OpenDoor")
+					
 					g_bPressRoom2X = false
 					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))				
 				elseif CuentaAtras == 3 then
@@ -186,16 +186,22 @@ function update_gameplay()
 				-- --Code para abrir puerta
 			-- end
 		-- end	
+		if g_bPressRoom1X then		
+			if action_manager:DoAction("Action") then
+				g_bPressedRoom1X = true				
+			end	
+		end
 		
 		if g_bPressRoom1Button then
 			if action_manager:DoAction("Action") then								
 				g_bPressedRoom1Button = true
 				cinematic_manager:Execute("rejilla")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
 			end
 		end	
 		
 		if g_bPressRoom3X then
-			if action_manager:DoAction("Action") then			
+			if action_manager:DoAction("Action") then		
 				--gui_manager:ShowStaticText("Alarm")
 				g_bAlarmRoom3 = true
 				--enemy_manager:AlarmRoom("room3")				
@@ -226,6 +232,8 @@ function update_gameplay()
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
 				cinematic_manager:Execute("explotion")
+				g_Player:SetPosition(Vect3f(-4.58296, -14.0589, 60.0993))
+				g_Player:ChangeAnimation("logan_cinem_sala3", 0.2, 0)
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
