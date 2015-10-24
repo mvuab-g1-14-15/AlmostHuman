@@ -2,6 +2,5 @@
 	<texture file="robot_assembly.tga"/>
 	<skeleton file="robot_assembly.csf"/>
 	<mesh file="robot_assembly.cmf"/>
-	<animation name="move_00" file="move_pos_00.caf"/>
-	<animation name="move" file="move_original_pos.caf"/>
+	<animation name="move_00" file="move.caf"/>
 </animated_model>
