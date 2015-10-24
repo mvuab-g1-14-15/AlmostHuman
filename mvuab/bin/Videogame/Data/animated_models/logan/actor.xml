@@ -11,4 +11,5 @@
 	<animation name="atac_sigil" file="atac_sigil.caf"/>
 	<animation name="cinematica_inicial_sala1" file="cinematica_inicial_sala1.caf"/>
 	<animation name="crash_rejilla" file="crash_rejilla.caf"/>	
+	<animation name="logan_cinem_sala3" file="logan_cinem_sala3.caf"/>	
 </animated_model>
