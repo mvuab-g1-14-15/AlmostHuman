@@ -25,4 +25,9 @@
 		<radial_emitter file="charge_emitter_2.xml"/>
 		<radial_emitter file="charge_emitter_3.xml"/>
 	</particle_system_core>
+	
+	<particle_system_core name="blaster">
+		<cube_emitter file="blaster_emitter.xml"/>
+	</particle_system_core>
+	
 </particles_systems>

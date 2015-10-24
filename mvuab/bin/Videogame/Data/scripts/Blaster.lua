@@ -63,7 +63,7 @@ function CBlaster:EndAmmo()
 end
 
 function CBlaster:Shoot( aPosition )
-	engine:Trace("Blaster Shoot")
+	--engine:Trace("Blaster Shoot")
 	self.Blash:Begin(aPosition)
 	local lAlreadyShoot = false;
 	for i=1,#self.Ammunition do
@@ -81,54 +81,18 @@ function CBlaster:Shoot( aPosition )
 end
 
 function CBlaster:ShootCharged( aPosition )
-	engine:Trace("Blaster Shoot cargado")
+	--engine:Trace("Blaster Shoot cargado")
 	self.Blash:Begin(aPosition)
 	local lAlreadyShoot = false;
-	for i=1,#self.Ammunition do
-		lAmmo = self.Ammunition[i];
-		if not lAmmo:IsActive() and not lAlreadyShoot then
-			local lDirection = camera_manager:GetCurrentCamera():GetDirection()
-			lAmmo:Begin( aPosition, lDirection, 30.0, self:CalculateDamage() );
-			lAlreadyShoot = true;
-		end
-		-- Update the impacted ones
-		if lAmmo:IsImpacted() then
-			lAmmo:End();
-		end
-	end
 end
 
 function CBlaster:GetEnemyFromRay()
 	local l_OriRay = camera_manager:GetCurrentCamera():GetPosition()
 	local l_DirRay = camera_manager:GetCurrentCamera():GetDirection()
     l_DirRay:Normalize()
-	self:CreateParticles(l_OriRay, l_DirRay)
 	local l_ImpactMask = BitOr(2 ^ CollisionGroup.ECG_ENEMY.value, 2 ^ CollisionGroup.ECG_ESCENE.value)
 	local l_EnemyName = physic_manager:RaycastClosestActorName(l_OriRay, l_DirRay, l_ImpactMask)
     return enemy_manager:GetResource(l_EnemyName)
-end
-
-function CBlaster:CreateParticles(position, direction)
-	--l_Emitter = particle_manager:CreateSphereEmitter()
-	--l_Emitter:SetTextureName( "Data/textures/red_smoke.png" )
-	--
-	--l_Emitter:SetActive( true )
-    --l_Emitter:SetEmitterLifeTime(10)
-    --l_Emitter:SetLifeTime(1.0, 5.0)
-	--l_Emitter:SetTimeToEmit(0.1);
-	--
-    --l_Emitter:SetAcceleration(Vect3f(0.0))
-    --l_Emitter:SetPosition(position)
-    --l_Emitter:SetVelocity(direction)
-    --
-	--l_Emitter:SetSize(0.1, 0.5)
-    --l_Emitter:SetPitch(0.0, 180.0)
-    --l_Emitter:SetYaw(0.0, 360.0)
-	--
-	--l_Emitter:SetSize(0.1, 1.0)
-	--l_Emitter:SetRandom(1, 1)
-    --l_Emitter:Generate(1, true)
-	--particle_manager:AddEmitter( l_Emitter )
 end
 
 function CBlaster:Update( aPosition )
@@ -174,6 +138,11 @@ function CBlaster:Update( aPosition )
 			self.IsAcumulatorSound = false
 			self.FinishShooting = true
 			countdowntimer_manager:SetActive("BlasterFinish", true)
+		end
+		
+		-- Miramos que nunca tengamos un energy negativo, para que la barra de energia no haga cosas raras
+		if self.Energy < 1 then
+			self.Energy = 0;
 		end
 		
 		if self.FinishShooting then

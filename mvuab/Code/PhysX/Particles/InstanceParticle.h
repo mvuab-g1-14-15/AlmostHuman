@@ -6,15 +6,10 @@
 
 class CParticleInstance : public CObject3D
 {
-private:
-    bool mActive;
-    float lCurrentTime;
-
 public:
   CParticleInstance( const CXMLTreeNode& atts );
   CParticleInstance( const Math::Vect3f& aPosition );
   ~CParticleInstance();
-  void Update( float dt ) { lCurrentTime += dt;};
 };
 
 #endif //_INSTANCE_PARTICLE_H

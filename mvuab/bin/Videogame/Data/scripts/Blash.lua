@@ -4,7 +4,7 @@ class 'CBlash'
 function CBlash:__init( aTimeName )
 	self.Active = false
 	self.TimerName = aTimeName
-	countdowntimer_manager:AddTimer(self.TimerName, 0.21, false) 
+	countdowntimer_manager:AddTimer(self.TimerName, 0.05, false) 
 	self.BillboardBlash = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), false)
 	engine:Trace("Blash ctor"..self.TimerName)
 end

@@ -5,15 +5,16 @@ function CAmmo:__init( aId )
 	self.Id = aId;
 	--engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
-	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false)
-	self.Light = CreateOmniLight()
+	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
+	--Slow as hell
+	--[[lf.Light = CreateOmniLight()
 	self.Light:SetName("AmmoLight_".. self.Id )
     self.Light:SetIntensity( 0.65 )
     self.Light:SetEndRangeAttenuation( 1.0 )
     self.Light:SetColor( CColor(0.5, 0.5, 1.0, 1.0 ) )
     self.Light:SetPosition( Vect3f(0, 0, 0)	)
     self.Light:SetRenderShadows( false )
-	light_manager:AddResource(self.Light:GetName(), self.Light)
+	light_manager:AddResource(self.Light:GetName(), self.Light)]]
 	self.Impacted = false;
 	self.MaxDistance = 20;
 	self.CurrentDistance = 0;
@@ -33,10 +34,10 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
 	self.Impacted = false;
 	
 	self.BillboardAmmo:ChangePosition( aPosition );
-	self.Light:SetPosition( aPosition );
+	--self.Light:SetPosition( aPosition );
 	
 	--all must be visible
-	self.Light:ChangeVisibility( true );
+	--self.Light:ChangeVisibility( true );
 	self.BillboardAmmo:ChangeVisibility( true );
 	
 	self.Direction       = aDirection;
@@ -52,7 +53,7 @@ function CAmmo:End()
 	self.Active = false;
 	
 	--hide all the elements
-	self.Light:ChangeVisibility( false )
+	--self.Light:ChangeVisibility( false )
 	self.BillboardAmmo:ChangeVisibility( false )
 end
 
@@ -65,20 +66,20 @@ function CAmmo:Update()
 			local lNewPosition 	= self.Position + lVelocity
 		
 			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
-			engine:Trace("hit_info_name->"..hit_info.Name)
+			--engine:Trace("hit_info_name->"..hit_info.Name)
 			local lNewVector = lNewPosition - self.Position;
 			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
 			if not (hit_info.Distance == 0.0) then
 				lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 				lDistance = lCollisionPoint:Distance( lNewPosition )
-				engine:Trace("Distance is "..lDistance..". Velocity length "..lVelocity:Length())
+				--engine:Trace("Distance is "..lDistance..". Velocity length "..lVelocity:Length())
 				if ( lDistance < lLength ) then
 					self.Impacted = true
-					engine:Trace("Impacted to something")
+					--engine:Trace("Impacted to something")
 					self.Position = lCollisionPoint
 					
 					local lName = hit_info.Name
-					engine:Trace("Impacted in "..lName)
+					--engine:Trace("Impacted in "..lName)
 					enemy_manager:AddDamage(lName, self.Damage)
 				else
 					self.Position = lNewPosition
@@ -89,14 +90,14 @@ function CAmmo:Update()
 			
 			-- If the ammo has not impacted to something, do not allow to be updated
 			if self.CurrentDistance > self.MaxDistance then
-				engine:Trace("Impacted max distance")
+				--engine:Trace("Impacted max distance")
 				self.Impacted = true
 				self:End();
 			end
 			
 			-- set the position to the data
 			self.BillboardAmmo:ChangePosition( self.Position );
-			self.Light:SetPosition( self.Position );
+			--self.Light:SetPosition( self.Position );
 		else
 			self:End();
 		end

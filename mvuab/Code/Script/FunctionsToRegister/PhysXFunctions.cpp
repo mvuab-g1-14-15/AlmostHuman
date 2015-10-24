@@ -6,6 +6,7 @@
 #include "Utils\Name.h"
 #include "PhysicsDefs.h"
 #include "Utils\Defines.h"
+#include "Utils/Manager.h"
 
 #include "Engine.h"
 
@@ -36,14 +37,23 @@ extern "C"
 
 #include "Triggers/Trigger.h"
 #include "Triggers/TriggerManager.h"
+
 #include "Particles/InstanceParticle.h"
 #include "Particles/ParticleSystemCore.h"
+#include "Particles/ParticleSystemManager.h"
+#include "EngineManagers.h"
+#include "Utils/Defines.h"
 
 #include "Joints\PhysicRevoluteJoint.h"
 
 #define REGISTER_LUA_FUNCTION(LuaState, AddrFunction) {luabind::module(LuaState) [ luabind::def(#AddrFunction,AddrFunction) ];}
 
 using namespace luabind;
+
+CParticleSystemManager* GetParticleSystemManager()
+{
+  return PSManager;
+}
 
 CTrigger* CreateTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, bool aEnter, bool aStay, bool aLeave, std::string aEnterEvent ,std::string aStayEvent, std::string aLeaveEvent) 
 {
@@ -191,12 +201,27 @@ void registerParticles( lua_State* aLuaState )
   
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_DERIVED_CLASS( CParticleInstance, CObject3D )
+    LUA_DECLARE_CTOR_1( const Math::Vect3f& )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CParticleSystemCore )
     LUA_DECLARE_METHOD( CParticleSystemCore, ResetEmitters )
     LUA_DECLARE_METHOD( CParticleSystemCore, SetFixedDirection )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CParticleSystemCore> )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CParticleSystemCore>, GetResource )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CParticleSystemCore>, Exist )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_DERIVED_CLASS2( CParticleSystemManager, CManager, CTemplatedVectorMapManager<CParticleSystemCore> )
+  LUA_END_DECLARATION
+
+  LUA_BEGIN_DECLARATION( aLuaState )
+  LUA_DECLARE_METHOD_WITHOUT_CLASS( GetParticleSystemManager )
   LUA_END_DECLARATION
 }
 
@@ -331,58 +356,5 @@ void registerPhysX( lua_State* m_LS )
   LUA_DECLARE_METHOD_WITHOUT_CLASS( CreateTrigger )
   LUA_END_DECLARATION
 
-  /*
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // PARTICLE MANAGER
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_CLASS( CParticleManager )
-      LUA_DECLARE_METHOD( CParticleManager, AddEmitter )
-      LUA_DECLARE_METHOD( CParticleManager, CreateCubeEmitter )
-      LUA_DECLARE_METHOD( CParticleManager, CreateSphereEmitter )
-      LUA_END_DECLARATION
-
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // PARTICLE EMITTER
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_CLASS( CParticleEmitter )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetActive )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetAcceleration )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetDirection )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetPosition )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetVelocity )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetLifeTime )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetEmitterLifeTime )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetSize )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetTextureName )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetTimeToEmit )
-      LUA_DECLARE_METHOD( CParticleEmitter, Generate )
-      LUA_DECLARE_METHOD( CParticleEmitter, SetOrientate )
-      LUA_END_DECLARATION
-
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // CUBE EMITTER
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_DERIVED_CLASS( CCubeEmitter, CParticleEmitter )
-      LUA_DECLARE_DEFAULT_CTOR
-      LUA_DECLARE_METHOD( CCubeEmitter, SetDepth )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetWidth )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetHeight )
-      LUA_DECLARE_METHOD( CCubeEmitter, SetRandom )
-      LUA_END_DECLARATION
-
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // SPHERE EMITTER
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      LUA_BEGIN_DECLARATION( m_LS )
-      LUA_DECLARE_DERIVED_CLASS( CSphereEmitter, CParticleEmitter )
-      LUA_DECLARE_DEFAULT_CTOR
-      LUA_DECLARE_METHOD( CSphereEmitter, SetRandom )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetRadius )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetPitch )
-      LUA_DECLARE_METHOD( CSphereEmitter, SetYaw )
-      LUA_END_DECLARATION
-  */
+  registerParticles(m_LS);
 }
