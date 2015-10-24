@@ -50,13 +50,13 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 	//-------------------------------------------------------------------------------------------------
 	// SHADOW MAP
 	//-------------------------------------------------------------------------------------------------
-	/*float4 PosLight = mul( float4(l_WorldPosition.xyz, 1.0), g_ViewToLightProjMatrix );
+	float4 PosLight = mul( float4(l_WorldPosition.xyz, 1.0), g_ViewToLightProjMatrix );
 	
 	//transform from RT space to texture space.
     float2 ShadowTexC = 0.5 * PosLight.xy / PosLight.w + float2( 0.5, 0.5 );
     ShadowTexC.y = 1.0f - ShadowTexC.y;
 	
-	if( g_UseShadowMapStatic )
+	//if( g_UseShadowMapStatic )
 	{	
 		if(!(ShadowTexC.x<0.0 || ShadowTexC.x>1.0 || ShadowTexC.y<0.0 || ShadowTexC.y>1.0))
 		{
@@ -71,7 +71,6 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 			LightAmount = (tex2D( ShadowMapTextureDynamicSampler, ShadowTexC ) + SHADOW_EPSILON) < (PosLight.z / PosLight.w)? 0.5f: 1.0f;  
 		}
 	}
-	*/
 	
 	return float4(l_PixelColor.xyz * LightAmount, 1.0);
 }
