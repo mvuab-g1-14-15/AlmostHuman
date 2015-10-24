@@ -39,8 +39,8 @@ function CPlayer:__init()
 	self.Life = 100.0
 	self.Room = "sala1"
 	
+	--Luz de logan para iluminar un poco al player
 	self.Light = light_manager:GetResource( "PlayerLight" );
-	
 	if self.Light == nil then
 		self.Light = CreateOmniLight()
 		self.Light:SetName("PlayerLight" )
@@ -51,9 +51,6 @@ function CPlayer:__init()
 		self.Light:SetRenderShadows( false )
 	end
 	light_manager:AddResource(self.Light:GetName(), self.Light)
-	
-	self.ChargedParticle = CParticle( "blaster", Vect3f(0, 0, 0) )
-	--self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
 function CPlayer:Update()
@@ -71,10 +68,7 @@ function CPlayer:Update()
 
 	self.RenderableObject:MakeTransform();
 	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
-	self.ChargedParticle:ChangePosition( lArmPosition )
-	self.ChargedParticle:SetDirection( camera_manager:GetCurrentCamera():GetDirection() );
 	self.Blaster:Update( lArmPosition )
-	--self.BillboardPlayer:ChangePosition( self.BlasterPosition )
 	
 	if not self.Blaster:GetIsShooting() then
 		if self.PlayerController:GetIsMoving() then

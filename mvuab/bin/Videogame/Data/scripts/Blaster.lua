@@ -20,6 +20,7 @@ function CBlaster:__init()
 	self.IsShooting = false
 	FinishShooting = false
 	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
+	countdowntimer_manager:AddTimer("BlasterChargedFinish", 0.5, false)
 	
 	self.Blash = CBlash( "Player" )
 	self.Ammunition = {}
@@ -29,6 +30,8 @@ function CBlaster:__init()
 		table.insert( self.Ammunition, CAmmo(i) );
 		self.AmmoId = self.AmmoId + 1;
 	end
+	
+	self.AmmoCharged = CAmmoCharged();
 end
 
 function CBlaster:CalculateDamage()
@@ -63,7 +66,6 @@ function CBlaster:EndAmmo()
 end
 
 function CBlaster:Shoot( aPosition )
-	--engine:Trace("Blaster Shoot")
 	self.Blash:Begin(aPosition)
 	local lAlreadyShoot = false;
 	for i=1,#self.Ammunition do
@@ -81,9 +83,8 @@ function CBlaster:Shoot( aPosition )
 end
 
 function CBlaster:ShootCharged( aPosition )
-	--engine:Trace("Blaster Shoot cargado")
-	self.Blash:Begin(aPosition)
-	local lAlreadyShoot = false;
+	engine:Trace("CBlaster:Charged:Begin")
+	self.AmmoCharged:Begin( aPosition, camera_manager:GetCurrentCamera():GetDirection(), self:CalculateDamage() );
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -98,6 +99,7 @@ end
 function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
 		self:UpdateAmmo();
+		self.AmmoCharged:Update( aPosition )
 		if action_manager:DoAction("Shoot") then
 			if self.Energy > 1 then
 				self.IsShooting = true

@@ -1,4 +1,4 @@
-<emitter active="true" name="blaster" loop="true" time_to_live="1">
+<emitter active="true" name="blaster" loop="false" time_to_live="0.5">
 	<particles max_alive_particles="200" time_to_live="2 2">
 		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/Billboards/ammo.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>

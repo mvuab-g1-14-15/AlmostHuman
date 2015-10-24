@@ -1,51 +1,41 @@
-class 'CAmmo'
---Clase que implementa la primera rafaga del disparo de logan
+class 'CAmmoCharged'
 
-function CAmmo:__init( aId )
-	self.Id = aId;
-	self.Active = false
-	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
-	self.Impacted = false;
-	self.MaxDistance = 20;
-	self.CurrentDistance = 0;
+function CAmmoCharged:__init()
+	self.Active 	     = false 
+	self.Impacted 		 = false;
+	self.Speed			 = 10;
+	self.ChargedParticle = CParticle( "blaster", Vect3f(0, 0, 0) )
+	self.CurrentDistance = 0
 end
 
-function CAmmo:IsActive()
+function CAmmoCharged:IsActive()
 	return self.Active;
 end
 
-function CAmmo:IsImpacted()
+function CAmmoCharged:IsImpacted()
 	return self.Impacted;
 end
 
-function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
-	self.Active = true
-	self.Impacted = false;
-	
-	self.BillboardAmmo:ChangePosition( aPosition );
-	self.BillboardAmmo:ChangeVisibility( true );
-	
+function CAmmoCharged:Begin( aPosition, aDirection, aDamage )
+	engine:Trace("Charged:Begin")
+	self.Active 	     = true;
+	self.Impacted 		 = false;
 	self.Direction       = aDirection;
 	self.Position        = aPosition;
-	self.Speed	         = aSpeed;
+	self.Damage 		 = aDamage;
 	self.CurrentDistance = 0;
-	
-	self.Damage = aDamage
+	self.ChargedParticle:Init( aPosition );
+	self.ChargedParticle:SetDirection( aDirection );
 end
 
-function CAmmo:End()
-	self.Active = false;
-	self.BillboardAmmo:ChangeVisibility( false )
-end
-
-function CAmmo:Update()
+function CAmmoCharged:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
 		if not self.Impacted then
+			self.ChargedParticle:ChangePosition( aPosition )
 			dt              = timer:GetElapsedTime()
 			lVelocity 		= self.Direction * self.Speed * dt
 			lLength 		= lVelocity:Length()
 			local lNewPosition 	= self.Position + lVelocity
-		
 			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
 			local lNewVector = lNewPosition - self.Position;
 			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
@@ -55,9 +45,8 @@ function CAmmo:Update()
 				if ( lDistance < lLength ) then
 					self.Impacted = true
 					self.Position = lCollisionPoint
-					
 					local lName = hit_info.Name
-					engine:Trace("Impacted with "..lName)
+					engine:Trace("Charged:Impacted with "..lName)
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					else
@@ -69,19 +58,6 @@ function CAmmo:Update()
 			else
 				self.Position = lNewPosition
 			end
-			
-			-- If the ammo has not impacted to something, do not allow to be updated
-			if self.CurrentDistance > self.MaxDistance then
-				--engine:Trace("Impacted max distance")
-				self.Impacted = true
-				self:End();
-			end
-			
-			-- set the position to the data
-			self.BillboardAmmo:ChangePosition( self.Position );
-			--self.Light:SetPosition( self.Position );
-		else
-			self:End();
 		end
 	end
 end
