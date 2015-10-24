@@ -7,7 +7,7 @@ function CAmmo:__init( aId )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
 	--Slow as hell
-	--[[lf.Light = CreateOmniLight()
+	--[[self.Light = CreateOmniLight()
 	self.Light:SetName("AmmoLight_".. self.Id )
     self.Light:SetIntensity( 0.65 )
     self.Light:SetEndRangeAttenuation( 1.0 )

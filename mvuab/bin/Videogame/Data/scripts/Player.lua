@@ -39,6 +39,19 @@ function CPlayer:__init()
 	self.Life = 100.0
 	self.Room = "sala1"
 	
+	self.Light = light_manager:GetResource( "PlayerLight" );
+	
+	if self.Light == nil then
+		self.Light = CreateOmniLight()
+		self.Light:SetName("PlayerLight" )
+		self.Light:SetIntensity( 1 )
+		self.Light:SetEndRangeAttenuation( 1.0 )
+		self.Light:SetColor( CColor(0.5, 0.5, 0.5, 1.0 ) )
+		self.Light:SetPosition( Vect3f(0, 0, 0)	)
+		self.Light:SetRenderShadows( false )
+	end
+	light_manager:AddResource(self.Light:GetName(), self.Light)
+	
 	--self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
@@ -47,6 +60,7 @@ function CPlayer:Update()
 	
 	local l_MeshOffset = self:GetMeshOffset()
 	local l_MeshPosition = self.PlayerController:GetPosition()
+	self.Light:SetPosition( l_MeshPosition );
 	
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)

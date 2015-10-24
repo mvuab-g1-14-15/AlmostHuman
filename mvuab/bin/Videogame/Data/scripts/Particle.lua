@@ -4,7 +4,6 @@ function CParticle:__init( aCoreName, aPosition )
 	self.Active   = false
 	self.Core 	  = particle_system_manager:GetResource( aCoreName )
 	self.Instance = CParticleInstance( aPosition );
-	self
 end
 
 function CParticle:Begin( aPosition )

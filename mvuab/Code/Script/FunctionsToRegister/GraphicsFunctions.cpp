@@ -138,6 +138,7 @@ void registerLights( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CLight> )
   LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CLight>, AddResource )
+  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CLight>, GetResource )
   LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CLight>, RemoveResource )
   LUA_END_DECLARATION
 
