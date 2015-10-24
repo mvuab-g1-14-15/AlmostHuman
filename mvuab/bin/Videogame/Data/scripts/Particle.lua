@@ -20,3 +20,8 @@ end
 function CParticle:ChangePosition( aPosition )
 	self.Instance:ChangePosition( aPosition )
 end
+
+function CParticle:SetDirection( aDir )
+	--engine:Trace("Particle::SetDirection".. aDir:ToString() )
+	self.Core:SetFixedDirection( aDir )
+end
