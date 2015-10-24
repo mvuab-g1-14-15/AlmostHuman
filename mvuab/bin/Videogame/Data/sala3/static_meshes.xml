@@ -271,4 +271,8 @@
   <static_mesh name="Sala_3_Roof001_sala3" filename="meshes\Sala_3_Roof001.mesh" />
   <static_mesh name="container002_sala3" filename="meshes\container002.mesh" />
   <static_mesh name="lamps_sala3" filename="meshes\lamps.mesh" />
+  <static_mesh name="Torso001_sala3" filename="meshes\Torso001.mesh" />
+  <static_mesh name="cap003_sala3" filename="meshes\cap003.mesh" />
+  <static_mesh name="Leg004_sala3" filename="meshes\Leg004.mesh" />
+  <static_mesh name="Leg002_sala3" filename="meshes\Leg002.mesh" />
 </static_meshes>

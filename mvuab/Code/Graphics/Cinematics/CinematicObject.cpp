@@ -27,7 +27,8 @@ CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
       if( lLayer )
       {
           const std::string& resource = atts.GetAttribute<std::string>( "resource", "" );
-          m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );
+          m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );		
+		  m_CurrentTime = atts.GetAttribute<float>("init_keyframe", 0.0f);
           for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
               m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
       }

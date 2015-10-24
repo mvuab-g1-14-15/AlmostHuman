@@ -11,7 +11,6 @@ CCinematic::CCinematic(const std::string &FileName) : CRenderableObject()  , CCi
     {
         m_Name = cinematic.GetAttribute<std::string>("name", "");
         m_Duration = cinematic.GetAttribute<float>("duration", 0.0f);
-		m_CurrentTime = cinematic.GetAttribute<float>("init_keyframe", 0.0f);
 
         CCinematicObject* l_CinematicObject;
         for( uint32 i = 0, lCount = cinematic.GetNumChildren(); i < lCount ; ++i)
