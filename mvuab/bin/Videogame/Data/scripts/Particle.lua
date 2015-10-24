@@ -4,6 +4,7 @@ function CParticle:__init( aCoreName, aPosition )
 	self.Active   = false
 	self.Core 	  = particle_system_manager:GetResource( aCoreName )
 	self.Instance = CParticleInstance( aPosition );
+	self.Core:AddInstance( self.Instance );
 end
 
 function CParticle:Begin( aPosition )
@@ -16,7 +17,6 @@ function CParticle:End()
 	self.Instance:ChangeVisibility( false )
 end
 
-function CParticle:Update( aPosition )
-	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
-	end
+function CParticle:ChangePosition( aPosition )
+	self.Instance:ChangePosition( aPosition )
 end
