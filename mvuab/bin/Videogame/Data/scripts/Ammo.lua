@@ -5,7 +5,7 @@ function CAmmo:__init( aId )
 	self.Id = aId;
 	--engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
-	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false)
+	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
 	--self.Light = CreateOmniLight()
 	--self.Light:SetName("AmmoLight_".. self.Id )
     --self.Light:SetIntensity( 0.65 )
@@ -89,7 +89,7 @@ function CAmmo:Update()
 			
 			-- If the ammo has not impacted to something, do not allow to be updated
 			if self.CurrentDistance > self.MaxDistance then
-				engine:Trace("Impacted max distance")
+				--engine:Trace("Impacted max distance")
 				self.Impacted = true
 				self:End();
 			end

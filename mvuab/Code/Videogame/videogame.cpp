@@ -174,14 +174,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
         UpdateWindow( hWnd );
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
-
-        /*CVideoPlayer l_VideoPlayer;
-        if(!l_VideoPlayer.Play("test.avi"))
-        {
-            char s[] = "Error playing video\n";
-            OutputDebugStringA(s);
-        }*/
-
         while ( msg.message != WM_QUIT )
         {
             if ( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )

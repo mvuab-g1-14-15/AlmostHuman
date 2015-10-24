@@ -72,23 +72,8 @@ void CProgressBar::Update()
     if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
     {
         m_sText = std::to_string((long double)((int)m_fProgress));
-        /*  m_fCountTime += deltaTime;
-            if( m_fCountTime > m_fTimeToUpdate )
-            {
-            m_fCountTime = 0.f;
-
-            if( m_sText.compare("Loading") == 0 )
-            { m_sText = "Loading."; }
-            else if( m_sText.compare("Loading.") == 0 )
-            { m_sText = "Loading.."; }
-            else if( m_sText.compare("Loading..") == 0 )
-            { m_sText = "Loading..."; }
-            else if( m_sText.compare("Loading...") == 0 )
-            { m_sText = "Loading"; }
-            }*/
     }
 }
-
 
 //---------------Interfaz de ProgressBar---------------------------
 void CProgressBar::SetTextures (CTexture* background, CTexture* progress)
@@ -112,12 +97,6 @@ void CProgressBar::SetFont (uint32 fontID, const Math::CColor& textColor)
 void CProgressBar::SetProgress (float progress)
 {
     m_fProgress = progress;
-    /*  if( m_fProgress >= 100 )
-        {
-        m_fProgress = 0;
-        OnComplete();
-        }*/
-
 }
 
 void CProgressBar::OnComplete( void )
