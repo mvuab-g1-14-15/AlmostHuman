@@ -5,16 +5,13 @@ function CParticle:__init( aCoreName, aPosition )
 	self.Core 	  = particle_system_manager:GetResource( aCoreName )
 	self.Instance = CParticleInstance( aPosition );
 	self.Core:AddInstance( self.Instance );
+	self.Instance:ChangeVisibility( false );
 end
 
-function CParticle:Begin( aPosition )
+function CParticle:Init( aPosition )
 	self.Active = true;
+	self.Instance:ChangeVisibility( true )
 	self.Core:ResetEmitters();
-end
-
-function CParticle:End()
-	self.Active = false;
-	self.Instance:ChangeVisibility( false )
 end
 
 function CParticle:ChangePosition( aPosition )
@@ -22,6 +19,5 @@ function CParticle:ChangePosition( aPosition )
 end
 
 function CParticle:SetDirection( aDir )
-	--engine:Trace("Particle::SetDirection".. aDir:ToString() )
 	self.Core:SetFixedDirection( aDir )
 end

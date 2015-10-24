@@ -5,14 +5,6 @@ function CAmmo:__init( aId )
 	self.Id = aId;
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
-	--self.Light = CreateOmniLight()
-	--self.Light:SetName("AmmoLight_".. self.Id )
-    --self.Light:SetIntensity( 0.65 )
-    --self.Light:SetEndRangeAttenuation( 1.0 )
-    --self.Light:SetColor( CColor(0.5, 0.5, 1.0, 1.0 ) )
-    --self.Light:SetPosition( Vect3f(0, 0, 0)	)
-    --self.Light:SetRenderShadows( false )
-	--light_manager:AddResource(self.Light:GetName(), self.Light)
 	self.Impacted = false;
 	self.MaxDistance = 20;
 	self.CurrentDistance = 0;
@@ -31,10 +23,6 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
 	self.Impacted = false;
 	
 	self.BillboardAmmo:ChangePosition( aPosition );
-	--self.Light:SetPosition( aPosition );
-	
-	--all must be visible
-	--self.Light:ChangeVisibility( true );
 	self.BillboardAmmo:ChangeVisibility( true );
 	
 	self.Direction       = aDirection;
@@ -47,9 +35,6 @@ end
 
 function CAmmo:End()
 	self.Active = false;
-	
-	--hide all the elements
-	--self.Light:ChangeVisibility( false )
 	self.BillboardAmmo:ChangeVisibility( false )
 end
 
