@@ -76,10 +76,8 @@ function CEnemy:__init( aInfo )
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
-	self.Camera:SetZFar(20.0)
-	if self.Type == "drone" then
-		self.Camera:SetFovInRadians(20.0)
-	end
+	self.Camera:SetZFar(aInfo.camera_far)
+	self.Camera:SetFovInRadians(aInfo.camera_fov)
 	self.CameraPitch = aInfo.camera_pitch
 	self:UpdateCamera()
 	

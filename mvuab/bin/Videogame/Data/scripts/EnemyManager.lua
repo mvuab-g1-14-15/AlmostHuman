@@ -55,6 +55,8 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -84,6 +86,8 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -112,6 +116,8 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -136,6 +142,8 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -165,7 +173,9 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.shoot_speed = 10.0
 	lInfo.time_to_shoot = 5.0
 	lInfo.chase_distance = 5.0
-	lInfo.camera_pitch = -g_HalfPi
+	lInfo.camera_pitch = -1.04719755 -- 60 grados
+	lInfo.camera_fov = 25.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = true
 	lInfo.can_use_graph = false
