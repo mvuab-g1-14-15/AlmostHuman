@@ -6,6 +6,9 @@
 
 #include "Cameras\Camera.h"
 #include "Cameras\CameraManager.h"
+#include "Billboard\BillboardCore.h"
+#include "Billboard\BillboardInstance.h"
+#include "Billboard/BillboardManager.h"
 
 
 #define D3DFVF_CUSTOMVERTEXLIGHT (D3DFVF_XYZ|D3DFVF_DIFFUSE)
@@ -26,6 +29,21 @@ CSpotLight::CSpotLight( CXMLTreeNode node )
     , m_FallOff( Math::Utils::Deg2Rad( node.GetAttribute<float>( "fall_off", 0 )))
 {
     SetType( CLight::SPOT );
+    CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
+    if( lBillboardCore  )
+    {
+      mBillboard = new CBillboardInstance();
+      mBillboard->ChangePosition( m_Position );
+      lBillboardCore->AddInstance( mBillboard );
+    }
+
+    lBillboardCore = BillboardMan->GetResource("LightTarget");
+    if( lBillboardCore  )
+    {
+      mLookAtBillboard = new CBillboardInstance();
+      mLookAtBillboard->ChangePosition( mLookAt );
+      lBillboardCore->AddInstance( mLookAtBillboard );
+    }
 }
 
 void CSpotLight::SetFallOff( const float FallOff )
@@ -50,16 +68,6 @@ float CSpotLight::GetFallOff() const
 
 void CSpotLight::Render()
 {
-    GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.1f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.2f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.3f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.4f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.5f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.6f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.7f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.8f, 0.08f, Math::colYELLOW );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.9f, 0.08f, Math::colYELLOW );
 }
 
 void CSpotLight::SetShadowMap( CGraphicsManager* GM )

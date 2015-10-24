@@ -22,6 +22,7 @@ class CGraphicsManager;
 class CEffect;
 class CLensFlare;
 class CShadowMap;
+class CBillboardInstance;
 
 class CLight : public CObject3D, public CName
 {
@@ -39,7 +40,6 @@ class CLight : public CObject3D, public CName
         float               GetStartRangeAttenuation() const;
         void                SetEndRangeAttenuation( const float EndRangeAttenuation );
         float               GetEndRangeAttenuation() const;
-        bool                RenderShadows() const;
         void                SetType( const ELightType Type );
         ELightType          GetType() const;
         virtual void        Render() = 0;
@@ -70,6 +70,7 @@ class CLight : public CObject3D, public CName
         CLensFlare *mLensFlare;
         Math::CColor m_Color;
         ELightType m_Type;
+        CBillboardInstance* mBillboard;
 
         float m_Intensity;
         float m_StartRangeAttenuation;
@@ -88,6 +89,8 @@ class CLight : public CObject3D, public CName
         CShadowMap *mDynamicShadowMap;
 
         std::string m_RoomName;
+
+        void CreateGizmo();
 };
 
 #endif // LIGHT_H
