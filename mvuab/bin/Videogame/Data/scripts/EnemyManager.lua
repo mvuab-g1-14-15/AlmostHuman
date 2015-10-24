@@ -298,6 +298,17 @@ function CEnemyManager:Update()
 	end
 end
 
+function CEnemyManager:GetNumEnemy( aRoom )
+	lCount = 0
+	lRoom = self.Enemy[aRoom]
+	for _,lEnemy in pairs (lRoom) do
+		if lEnemy ~= nil then
+			lCount = lCount + 1
+		end
+	end
+	return lCount
+end
+
 function CEnemyManager:SetAlarm( aRoom )
 	lRoom = self.Enemy[aRoom]
 	for i in pairs(lRoom) do
