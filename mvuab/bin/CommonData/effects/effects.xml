@@ -14,6 +14,7 @@
 	<technique name="BlasterTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
 		<define name="BLASTER" description=""/>
+		<define name="ALPHA_BLEND_ADD" description=""/>
 	</technique>
 	
 	<technique name="FireTechnique" file="../CommonData/effects/AnimatedBillboardEffect.fx">
@@ -24,7 +25,7 @@
 	
 	<technique name="BillboardAlignedToCameraTechniqueONEONEADD" file="../CommonData/effects/BillboardEffect.fx">
 		<handles use_world_matrix="true" use_view_matrix="true" use_world_view_projection_matrix="true"/>
-		<define name="ONEONEADD" description=""/>
+		<define name="ALPHA_BLEND_ADD" description=""/>
 	</technique>
 	
 	<technique name="BillboardAlignedToCameraTechnique" file="../CommonData/effects/BillboardEffect.fx">
