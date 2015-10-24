@@ -44,9 +44,9 @@ function CBoss:__init()
 	self.RenderableObject:ChangeAnimation("walk", 0.2, 1)
 	
 	--Character controller
-	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.NearPos, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
-		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0)
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.NearPos, CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
 	self.CharacterController:SetYaw(0.0)
@@ -102,12 +102,23 @@ function CBoss:SetYaw( aYaw )
 	self.RenderableObject:MakeTransform()
 end
 
+function CBoss:MoveToPos( aPos )	
+	local dt = timer:GetElapsedTime()
+	if not self:IsInPos( aPos ) then
+		if self:RotateToPos( aPos ) then
+			local DirVector = self:GetDirVectorNormalized2D( aPos )
+			self.CharacterController:Move(DirVector * self.Speed, dt)
+		else
+			self.CharacterController:Move(Vect3f(0.0), dt)
+		end
+		return false
+	end
+	self.CharacterController:Move(Vect3f(0.0), dt)
+	return true
+end
+
 function CBoss:GetDirVector( aPos )
-	local ActualPos = self:GetPosition()
-	local FinalPos = aPos
-	FinalPos.y = 0.0
-	ActualPos.y = 0.0
-	local DirVector = FinalPos - ActualPos
+	local DirVector = aPos - self:GetPosition()
 	
 	return DirVector
 end
@@ -119,29 +130,47 @@ function CBoss:GetDirVectorNormalized( aPos )
 	return DirVector
 end
 
-function CBoss:MoveToPos( aPos )	
-	if not self:IsInPos( aPos ) then
-		if self:RotateToPos( aPos ) then
-			local dt = timer:GetElapsedTime()
-
-			local DirVector = self:GetDirVectorNormalized( aPos )
-		
-			self.CharacterController:Move(DirVector * self.Speed, dt)
-		end
-		return false
-	end
-	return true
+function CBoss:GetDirVectorNormalized2D( aPos )
+	local DirVector = self:GetDirVector( aPos )
+	DirVector.y = 0.0
+	DirVector:Normalize()
+	
+	return DirVector
 end
 
 function CBoss:RotateToPos( aPos )
 	local ActualPos = self:GetPosition()
 	local FinalPos = aPos
 
-	local DirVector = self:GetDirVectorNormalized( aPos )
+	local DirVector = self:GetDirVectorNormalized2D( aPos )
 	
 	local ActualYaw = self.CharacterController:GetYaw()
+	local ActualYawPlus = ActualYaw + g_DoublePi
+	local ActualYawMinus = ActualYaw - g_DoublePi
 	local DirYaw = math.atan2( DirVector.z, DirVector.x )
 	local DiffYaw = math.abs(DirYaw - ActualYaw)
+	local DiffYawPlus = math.abs(DirYaw - ActualYawPlus) 
+	local DiffYawMinus = math.abs(DirYaw - ActualYawMinus)
+	
+	if DiffYawPlus < DiffYaw then
+		ActualYaw = ActualYawPlus
+		DiffYaw = DiffYawPlus
+		if DiffYawMinus < DiffYawPlus then
+			ActualYaw = ActualYawMinus
+			DiffYaw = DiffYawMinus
+		end
+		self.LerpInited = false
+	else
+		if DiffYawMinus < DiffYaw then
+			ActualYaw = ActualYawMinus
+			DiffYaw = DiffYawMinus
+			if DiffYawPlus < DiffYawMinus then
+				ActualYaw = ActualYawPlus
+				DiffYaw = DiffYawPlus
+			end
+			self.LerpInited = false
+		end
+	end
 	
 	if DiffYaw > self.DeltaRot then
 		if not self.LerpInited then
@@ -150,16 +179,23 @@ function CBoss:RotateToPos( aPos )
 		end
 		local dt = timer:GetElapsedTime()
 		
+		if self.Lerp:IsFinish() then
+			self.LerpInited = false
+		end
+		
 		local TickYaw = self.Lerp:Value(dt)
+		
 		self:SetYaw( TickYaw )
 		return false
 	end
+
 	self.LerpInited = false
 	return true
 end
 
 function CBoss:IsInPos( aPos )
 	local DirVector = self:GetDirVector( aPos )
+	DirVector.y = 0.0
 	local Distance = DirVector:Length()
 	return Distance < self.Delta
 end

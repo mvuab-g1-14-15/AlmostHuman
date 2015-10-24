@@ -32,9 +32,9 @@ function CEnemy:__init( aInfo )
 		self.TargetPos = self.Waypoints[self.ActualWaypoint]
 	end
 	
-	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
-		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.TargetPos, CollisionGroup.ECG_ENEMY.value, -10.0)
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
 	
@@ -50,8 +50,8 @@ function CEnemy:__init( aInfo )
 
 	self.UseGizmo = aInfo.use_gizmo
 	if self.UseGizmo then
-		self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", Vect3f(0.0), 0.0, 0.0)
-		local lGizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, Vect3f(0.0), 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
+		self.Gizmo = gizmos_manager:CreateGizmo( self.Name.."TargetPos", self.InitPosition, 0.0, 0.0)
+		local lGizmoElement = gizmos_manager:CreateGizmoElement(1, 0.2, self.InitPosition, 0.0, 0.0, CColor(1.0, 0.0, 0.0, 1.0))
 		self.Gizmo:AddElement( lGizmoElement )
 		gizmos_manager:AddResource( self.Name.."TargetPos", self.Gizmo )
 	end
@@ -76,10 +76,8 @@ function CEnemy:__init( aInfo )
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
-	self.Camera:SetZFar(20.0)
-	if self.Type == "drone" then
-		self.Camera:SetFovInRadians(20.0)
-	end
+	self.Camera:SetZFar(aInfo.camera_far)
+	self.Camera:SetFovInRadians(aInfo.camera_fov)
 	self.CameraPitch = aInfo.camera_pitch
 	self:UpdateCamera()
 	
@@ -110,6 +108,7 @@ end
 
 function CEnemy:Destroy()
 	if self.OnDead then
+		engine:Trace(self.Name.." executing on dead code.")
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..
 							  "local selfName = '"..self:GetName().."';"..
 							  self.OnDeadCode
@@ -146,7 +145,6 @@ function CEnemy:Update()
 			self.DontMove = true
 			if self:RotateToPos(g_Player:GetPosition()) then
 				self:ChangeAnimation("shoot", 0.5, 1.0)
-				local lDir = GetPlayerDirection(self:GetPosition())
 		
 				self.CountTimeShoot = self.CountTimeShoot + dt
 				local timerBurst = "Burst"..self.Name
@@ -157,12 +155,12 @@ function CEnemy:Update()
 						countdowntimer_manager:SetActive(timerBurst, true)
 					end
 					if countdowntimer_manager:isTimerFinish(timerBurst) then
-						self:MakeShoot(lDir)
+						self:MakeShoot()
 						self.ActualShootBurst = self.ActualShootBurst + 1
 						countdowntimer_manager:Reset(timerBurst, false)
 					end
 					if self.ActualShootBurst == 0 then
-						self:MakeShoot(lDir)
+						self:MakeShoot()
 						self.ActualShootBurst = self.ActualShootBurst + 1
 					end
 					if self.ActualShootBurst == self.NumShootBurst then
@@ -336,6 +334,8 @@ function CEnemy:MoveToPos( aPos )
 					self.Gizmo:SetPosition(lRealTargetPos)
 					self.Gizmo:MakeTransform()
 				end
+			else
+				self.CharacterController:Move(Vect3f(0.0), dt)
 			end
 		else
 			self.ActualPathPoint = self.ActualPathPoint + 1
@@ -354,6 +354,7 @@ function CEnemy:MoveToPos( aPos )
 		if lDist < self.Delta then
 			return true
 		end
+		self.CharacterController:Move(Vect3f(0.0), dt)
 		return false
 	end
 	
@@ -385,6 +386,8 @@ function CEnemy:MoveToPos( aPos )
 				self.Gizmo:SetPosition(aPos)
 				self.Gizmo:MakeTransform()
 			end
+		else
+			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
 		return false
 	end
@@ -489,6 +492,10 @@ function CEnemy:GetPitch()
 	return self.CharacterController:GetPitch()
 end
 
+function CEnemy:SetOnDead(aBool)
+	self.OnDead = aBool
+end
+
 function CEnemy:UpdateCamera()
 	local lPosition = self:GetPosition()
 	lPosition.y = lPosition.y + self:GetHeight()
@@ -501,12 +508,13 @@ function CEnemy:UpdateCamera()
 	self.Camera:UpdateFrustum()
 end
 
-function CEnemy:MakeShoot(aDirection)
-	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm");
-	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm");
+function CEnemy:MakeShoot()
+	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm")
+	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm")
+	local lDir = GetPlayerDirection( lPositionRightArm )
 	self.BlashLeft:Begin(lPositionLeftArm)
 	self.BlashRight:Begin(lPositionRightArm)
-	
+	enemy_manager:AddShoot( lPositionRightArm, lDir, self.ShootSpeed, self.Damage )
 	--Todo play enemy sound
 end
 

@@ -23,9 +23,6 @@ function CBarrel:__init(aName, aPosition)
 	
 	self.RenderableObject:SetPosition(self.Pos)
 	self.RenderableObject:MakeTransform()
-	
-	--engine:Trace("CBarrel: " .. self.Name .. " initialized")
-	--engine:Trace("CBarrel Pos: " .. self.Pos:ToString())
 end
 
 function CBarrel:Destroy()

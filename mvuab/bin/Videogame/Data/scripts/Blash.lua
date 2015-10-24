@@ -4,13 +4,11 @@ class 'CBlash'
 function CBlash:__init( aTimeName )
 	self.Active = false
 	self.TimerName = aTimeName
-	countdowntimer_manager:AddTimer(self.TimerName, 0.05, false) 
+	countdowntimer_manager:AddTimer(self.TimerName, 0.05, false);
 	self.BillboardBlash = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), false)
-	engine:Trace("Blash ctor"..self.TimerName)
 end
 
 function CBlash:Begin( aPosition )
-	engine:Trace( "Blash is "..aPosition:ToString() )
 	self.Active = true
 	countdowntimer_manager:SetActive(self.TimerName, true)
 	self.Angle = math.random(0.1, 2* math.pi)

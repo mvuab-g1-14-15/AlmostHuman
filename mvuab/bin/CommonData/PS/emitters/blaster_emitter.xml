@@ -1,13 +1,13 @@
-<emitter active="true" name="blaster" loop="true" time_to_live="20.0">
-	<particles max_alive_particles="50" time_to_live="5 7">
+<emitter active="true" name="blaster" loop="false" time_to_live="0.5">
+	<particles max_alive_particles="200" time_to_live="2 2">
 		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
-		<texture name="../CommonData/textures/PS/other/spiral3.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<texture name="../CommonData/textures/Billboards/ammo.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 		<interpolators>
-			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.05"/>
-			<interpolator alpha="0.2" color="0.0 1 0" size="0.1"/>
-			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.15"/>
+			<interpolator alpha="0.0" color="1.0 1.0 1.0" size="0.5"/>
+			<interpolator alpha="0.2" color="1.0 1.0 1.0" size="0.5"/>
+			<interpolator alpha="0.0" color="1.0 1.0 1.0" size="0.5"/>
 		</interpolators>
-		<motion linear_speed="0.1 0.3" initial_dir_min="0.1 0 0.1" initial_dir_max="-0.1 0 -0.1" radial_speed="20 50" gravity="-1"/>
+		<motion linear_speed="5 5" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="20 50" gravity=""/>
 	</particles>
-	<emissions random_initial_angle="false" emission_time="0.1" particles_per_emission="1 2  " cubic_size="0.0 0 0.0"/>
+	<emissions random_initial_angle="false" emission_time="0.0" particles_per_emission="2 2" cubic_size="0.0 0 0.0"/>
 </emitter>

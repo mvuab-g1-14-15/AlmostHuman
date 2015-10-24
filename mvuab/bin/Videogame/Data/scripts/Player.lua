@@ -33,14 +33,13 @@ function CPlayer:__init()
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi);
 	self.RenderableObject:MakeTransform();
-	engine:Trace("He entrado en el init sala1")
 	
 	self.Animation = "idle"
 	self.Life = 100.0
 	self.Room = "sala1"
 	
+	--Luz de logan para iluminar un poco al player
 	self.Light = light_manager:GetResource( "PlayerLight" );
-	
 	if self.Light == nil then
 		self.Light = CreateOmniLight()
 		self.Light:SetName("PlayerLight" )
@@ -51,8 +50,6 @@ function CPlayer:__init()
 		self.Light:SetRenderShadows( false )
 	end
 	light_manager:AddResource(self.Light:GetName(), self.Light)
-	
-	--self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
 function CPlayer:Update()
@@ -69,9 +66,8 @@ function CPlayer:Update()
 	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
-	self.BlasterPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm")
-	self.Blaster:Update(self.BlasterPosition)
-	--self.BillboardPlayer:ChangePosition( self.BlasterPosition )
+	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
+	self.Blaster:Update( lArmPosition )
 	
 	if not self.Blaster:GetIsShooting() then
 		if self.PlayerController:GetIsMoving() then
@@ -111,7 +107,11 @@ function CPlayer:Update()
 		enemy_manager:Reinit(self.Room)
 	end
 	
-	self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+	if self.Animation == "shoot" or self.Animation == "charge_loop" then
+		self.RenderableObject:ChangeAnimationAction(self.Animation, 0.5, 0)
+	else
+		self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+	end
 end
 
 function CPlayer:SetRoom( aName )

@@ -207,6 +207,7 @@ void registerParticles( lua_State* aLuaState )
   LUA_BEGIN_DECLARATION( aLuaState )
     LUA_DECLARE_CLASS( CParticleSystemCore )
     LUA_DECLARE_METHOD( CParticleSystemCore, ResetEmitters )
+    LUA_DECLARE_METHOD( CParticleSystemCore, AddInstance )
     LUA_DECLARE_METHOD( CParticleSystemCore, SetFixedDirection )
   LUA_END_DECLARATION
 

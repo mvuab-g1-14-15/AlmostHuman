@@ -3,18 +3,8 @@ class 'CAmmo'
 
 function CAmmo:__init( aId )
 	self.Id = aId;
-	--engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
-	--Slow as hell
-	--[[self.Light = CreateOmniLight()
-	self.Light:SetName("AmmoLight_".. self.Id )
-    self.Light:SetIntensity( 0.65 )
-    self.Light:SetEndRangeAttenuation( 1.0 )
-    self.Light:SetColor( CColor(0.5, 0.5, 1.0, 1.0 ) )
-    self.Light:SetPosition( Vect3f(0, 0, 0)	)
-    self.Light:SetRenderShadows( false )
-	light_manager:AddResource(self.Light:GetName(), self.Light)]]
 	self.Impacted = false;
 	self.MaxDistance = 20;
 	self.CurrentDistance = 0;
@@ -29,15 +19,10 @@ function CAmmo:IsImpacted()
 end
 
 function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
-	--engine:Trace( "ammo is "..aPosition:ToString() )
 	self.Active = true
 	self.Impacted = false;
 	
 	self.BillboardAmmo:ChangePosition( aPosition );
-	--self.Light:SetPosition( aPosition );
-	
-	--all must be visible
-	--self.Light:ChangeVisibility( true );
 	self.BillboardAmmo:ChangeVisibility( true );
 	
 	self.Direction       = aDirection;
@@ -49,11 +34,7 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
 end
 
 function CAmmo:End()
-	engine:Trace("ammo end")
 	self.Active = false;
-	
-	--hide all the elements
-	--self.Light:ChangeVisibility( false )
 	self.BillboardAmmo:ChangeVisibility( false )
 end
 
@@ -66,21 +47,21 @@ function CAmmo:Update()
 			local lNewPosition 	= self.Position + lVelocity
 		
 			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
-			--engine:Trace("hit_info_name->"..hit_info.Name)
 			local lNewVector = lNewPosition - self.Position;
 			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
 			if not (hit_info.Distance == 0.0) then
 				lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 				lDistance = lCollisionPoint:Distance( lNewPosition )
-				--engine:Trace("Distance is "..lDistance..". Velocity length "..lVelocity:Length())
 				if ( lDistance < lLength ) then
 					self.Impacted = true
-					--engine:Trace("Impacted to something")
 					self.Position = lCollisionPoint
 					
 					local lName = hit_info.Name
-					--engine:Trace("Impacted in "..lName)
-					enemy_manager:AddDamage(lName, self.Damage)
+					if lName == "Player" then
+						g_Player:AddDamage(self.Damage)
+					else
+						enemy_manager:AddDamage(lName, self.Damage)
+					end
 				else
 					self.Position = lNewPosition
 				end
