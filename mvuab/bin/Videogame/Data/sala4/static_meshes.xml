@@ -80,7 +80,6 @@
   <static_mesh name="Line28_sala4" filename="meshes\Line28.mesh" />
   <static_mesh name="Box05_sala4" filename="meshes\Box05.mesh" />
   <static_mesh name="Box110_sala4" filename="meshes\Box110.mesh" />
-  <static_mesh name="Box113_sala4" filename="meshes\Box113.mesh" />
   <static_mesh name="Box114_sala4" filename="meshes\Box114.mesh" />
   <static_mesh name="Box115_sala4" filename="meshes\Box115.mesh" />
   <static_mesh name="Box117_sala4" filename="meshes\Box117.mesh" />
@@ -168,18 +167,14 @@
   <static_mesh name="Box146_sala4" filename="meshes\Box146.mesh" />
   <static_mesh name="Box147_sala4" filename="meshes\Box147.mesh" />
   <static_mesh name="Box148_sala4" filename="meshes\Box148.mesh" />
-  <static_mesh name="Line10_sala4" filename="meshes\Line10.mesh" />
   <static_mesh name="Box150_sala4" filename="meshes\Box150.mesh" />
   <static_mesh name="Box151_sala4" filename="meshes\Box151.mesh" />
   <static_mesh name="Box152_sala4" filename="meshes\Box152.mesh" />
   <static_mesh name="Box153_sala4" filename="meshes\Box153.mesh" />
   <static_mesh name="Box155_sala4" filename="meshes\Box155.mesh" />
-  <static_mesh name="Cylinder1524_sala4" filename="meshes\Cylinder1524.mesh" />
   <static_mesh name="Box159_sala4" filename="meshes\Box159.mesh" />
   <static_mesh name="Box160_sala4" filename="meshes\Box160.mesh" />
   <static_mesh name="Box162_sala4" filename="meshes\Box162.mesh" />
-  <static_mesh name="Line073_sala4" filename="meshes\Line073.mesh" />
-  <static_mesh name="nau_01_sala4" filename="meshes\nau_01.mesh" />
   <static_mesh name="Box163_sala4" filename="meshes\Box163.mesh" />
   <static_mesh name="Box164_sala4" filename="meshes\Box164.mesh" />
   <static_mesh name="Box165_sala4" filename="meshes\Box165.mesh" />
@@ -250,63 +245,25 @@
   <static_mesh name="155x182_sala4" filename="meshes\155x182.mesh" />
   <static_mesh name="Object002_sala4" filename="meshes\Object002.mesh" />
   <static_mesh name="Object004_sala4" filename="meshes\Object004.mesh" />
-  <static_mesh name="Columna_15_sala4" filename="meshes\Columna_15.mesh" />
-  <static_mesh name="Columna_14_sala4" filename="meshes\Columna_14.mesh" />
-  <static_mesh name="Wall1_sala4" filename="meshes\Wall1.mesh" />
-  <static_mesh name="Wall002_sala4" filename="meshes\Wall002.mesh" />
-  <static_mesh name="Wall003_sala4" filename="meshes\Wall003.mesh" />
-  <static_mesh name="Wall004_sala4" filename="meshes\Wall004.mesh" />
-  <static_mesh name="sic_Wall3_sala4" filename="meshes\sic_Wall3.mesh" />
-  <static_mesh name="Wall005_sala4" filename="meshes\Wall005.mesh" />
-  <static_mesh name="sic_Wall006_sala4" filename="meshes\sic_Wall006.mesh" />
-  <static_mesh name="sic_Wall007_sala4" filename="meshes\sic_Wall007.mesh" />
-  <static_mesh name="Floor1_sala4" filename="meshes\Floor1.mesh" />
-  <static_mesh name="Floor002_sala4" filename="meshes\Floor002.mesh" />
-  <static_mesh name="Floor003_sala4" filename="meshes\Floor003.mesh" />
-  <static_mesh name="Floor004_sala4" filename="meshes\Floor004.mesh" />
-  <static_mesh name="Ceiling1_sala4" filename="meshes\Ceiling1.mesh" />
-  <static_mesh name="Ceiling002_sala4" filename="meshes\Ceiling002.mesh" />
+  <static_mesh name="Sala_4_Wall004_sala4" filename="meshes\Sala_4_Wall004.mesh" />
+  <static_mesh name="Sala_4_Wall005_sala4" filename="meshes\Sala_4_Wall005.mesh" />
+  <static_mesh name="Sala_4_Wall001_sala4" filename="meshes\Sala_4_Wall001.mesh" />
+  <static_mesh name="Sala_4_Wall002_sala4" filename="meshes\Sala_4_Wall002.mesh" />
+  <static_mesh name="Sala_4_upper_wall_1_sala4" filename="meshes\Sala_4_upper_wall_1.mesh" />
+  <static_mesh name="Sala_4_upper_wall_4_sala4" filename="meshes\Sala_4_upper_wall_4.mesh" />
+  <static_mesh name="Sala_4_upper_wall_3_sala4" filename="meshes\Sala_4_upper_wall_3.mesh" />
+  <static_mesh name=" Sala_4_left_floor_1_sala4" filename="meshes\ Sala_4_left_floor_1.mesh" />
+  <static_mesh name="Sala_4_right_floor_1_sala4" filename="meshes\Sala_4_right_floor_1.mesh" />
+  <static_mesh name="Sala_4_right_floor_2_sala4" filename="meshes\Sala_4_right_floor_2.mesh" />
+  <static_mesh name="Sala_4_left_floor_2_sala4" filename="meshes\Sala_4_left_floor_2.mesh" />
+  <static_mesh name="Sala_4_Ceiling_1_sala4" filename="meshes\Sala_4_Ceiling_1.mesh" />
+  <static_mesh name="Sala_4_Ceiling_3_sala4" filename="meshes\Sala_4_Ceiling_3.mesh" />
   <static_mesh name="Lums_pista001_sala4" filename="meshes\Lums_pista001.mesh" />
-  <static_mesh name="sic_Wall4_sala4" filename="meshes\sic_Wall4.mesh" />
-  <static_mesh name="Door1_sala4" filename="meshes\Door1.mesh" />
-  <static_mesh name="Door002_sala4" filename="meshes\Door002.mesh" />
-  <static_mesh name="sic_Door003_sala4" filename="meshes\sic_Door003.mesh" />
-  <static_mesh name="Door004_sala4" filename="meshes\Door004.mesh" />
-  <static_mesh name="Door005_sala4" filename="meshes\Door005.mesh" />
-  <static_mesh name="Door006_sala4" filename="meshes\Door006.mesh" />
-  <static_mesh name="Door007_sala4" filename="meshes\Door007.mesh" />
-  <static_mesh name="Door008_sala4" filename="meshes\Door008.mesh" />
-  <static_mesh name="porta_mitjana_sala4" filename="meshes\porta_mitjana.mesh" />
-  <static_mesh name="Stairs1_sala4" filename="meshes\Stairs1.mesh" />
-  <static_mesh name="escales_sala4" filename="meshes\escales.mesh" />
-  <static_mesh name="Object017_sala4" filename="meshes\Object017.mesh" />
-  <static_mesh name="escales001_sala4" filename="meshes\escales001.mesh" />
-  <static_mesh name="Floor3_sala4" filename="meshes\Floor3.mesh" />
-  <static_mesh name="Floor005_sala4" filename="meshes\Floor005.mesh" />
-  <static_mesh name="Columna_10_sala4" filename="meshes\Columna_10.mesh" />
-  <static_mesh name="Columna_09_sala4" filename="meshes\Columna_09.mesh" />
-  <static_mesh name="Columna_06_sala4" filename="meshes\Columna_06.mesh" />
-  <static_mesh name="Columna_05_sala4" filename="meshes\Columna_05.mesh" />
-  <static_mesh name="Columna_02_sala4" filename="meshes\Columna_02.mesh" />
-  <static_mesh name="Columna_01_sala4" filename="meshes\Columna_01.mesh" />
-  <static_mesh name="Columna_16_sala4" filename="meshes\Columna_16.mesh" />
-  <static_mesh name="Columna_04_sala4" filename="meshes\Columna_04.mesh" />
-  <static_mesh name="Columna_03_sala4" filename="meshes\Columna_03.mesh" />
-  <static_mesh name="Columna_08_sala4" filename="meshes\Columna_08.mesh" />
-  <static_mesh name="Columna_07_sala4" filename="meshes\Columna_07.mesh" />
-  <static_mesh name="Columna_12_sala4" filename="meshes\Columna_12.mesh" />
-  <static_mesh name="Columna_13_sala4" filename="meshes\Columna_13.mesh" />
-  <static_mesh name="Columna_17_sala4" filename="meshes\Columna_17.mesh" />
-  <static_mesh name="Columna_19_sala4" filename="meshes\Columna_19.mesh" />
-  <static_mesh name="Columna_18_sala4" filename="meshes\Columna_18.mesh" />
-  <static_mesh name="Columna_20_sala4" filename="meshes\Columna_20.mesh" />
-  <static_mesh name="Columna_11_sala4" filename="meshes\Columna_11.mesh" />
-  <static_mesh name="Cylinder1850_sala4" filename="meshes\Cylinder1850.mesh" />
+  <static_mesh name="Doors_small_sala4" filename="meshes\Doors_small.mesh" />
+  <static_mesh name="Door_middle_sala4" filename="meshes\Door_middle.mesh" />
+  <static_mesh name="Sala_4_central_floor_1_sala4" filename="meshes\Sala_4_central_floor_1.mesh" />
+  <static_mesh name="Sala_4_central_floor_2_sala4" filename="meshes\Sala_4_central_floor_2.mesh" />
   <static_mesh name="Pared_fons_sala4" filename="meshes\Pared_fons.mesh" />
-  <static_mesh name="nau_005_sala4" filename="meshes\nau_005.mesh" />
-  <static_mesh name="nau_006_sala4" filename="meshes\nau_006.mesh" />
-  <static_mesh name="nau_007_sala4" filename="meshes\nau_007.mesh" />
-  <static_mesh name="Big_door_sala4" filename="meshes\Big_door.mesh" />
   <static_mesh name="Door_right_sala4" filename="meshes\Door_right.mesh" />
   <static_mesh name="door_left_sala4" filename="meshes\door_left.mesh" />
   <static_mesh name="Lums_pista002_sala4" filename="meshes\Lums_pista002.mesh" />
@@ -350,12 +307,67 @@
   <static_mesh name="Lums_pista040_sala4" filename="meshes\Lums_pista040.mesh" />
   <static_mesh name="Lums_pista041_sala4" filename="meshes\Lums_pista041.mesh" />
   <static_mesh name="Lums_pista042_sala4" filename="meshes\Lums_pista042.mesh" />
-  <static_mesh name="Ceiling003_sala4" filename="meshes\Ceiling003.mesh" />
-  <static_mesh name="sic_Ceiling004_sala4" filename="meshes\sic_Ceiling004.mesh" />
-  <static_mesh name="Pared_fons001_sala4" filename="meshes\Pared_fons001.mesh" />
-  <static_mesh name="columnes_sala4" filename="meshes\columnes.mesh" />
-  <static_mesh name="columnes001_sala4" filename="meshes\columnes001.mesh" />
-  <static_mesh name="Wall011_sala4" filename="meshes\Wall011.mesh" />
-  <static_mesh name="Wall012_sala4" filename="meshes\Wall012.mesh" />
-  <static_mesh name="Object018_sala4" filename="meshes\Object018.mesh" />
+  <static_mesh name="Sala_4_Ceiling_4_sala4" filename="meshes\Sala_4_Ceiling_4.mesh" />
+  <static_mesh name="Sala_4_Ceiling_2_sala4" filename="meshes\Sala_4_Ceiling_2.mesh" />
+  <static_mesh name="Sala_4_Wall003_sala4" filename="meshes\Sala_4_Wall003.mesh" />
+  <static_mesh name="Sala_4_Wall006_sala4" filename="meshes\Sala_4_Wall006.mesh" />
+  <static_mesh name="Box199_sala4" filename="meshes\Box199.mesh" />
+  <static_mesh name="Object005_sala4" filename="meshes\Object005.mesh" />
+  <static_mesh name="Columna_low_023_sala4" filename="meshes\Columna_low_023.mesh" />
+  <static_mesh name="Columna_low_007_sala4" filename="meshes\Columna_low_007.mesh" />
+  <static_mesh name="Columna_low_1_sala4" filename="meshes\Columna_low_1.mesh" />
+  <static_mesh name="Columna_low_002_sala4" filename="meshes\Columna_low_002.mesh" />
+  <static_mesh name="Columna_low_003_sala4" filename="meshes\Columna_low_003.mesh" />
+  <static_mesh name="Columna_low_004_sala4" filename="meshes\Columna_low_004.mesh" />
+  <static_mesh name="Columna_low_008_sala4" filename="meshes\Columna_low_008.mesh" />
+  <static_mesh name="Columna_low_009_sala4" filename="meshes\Columna_low_009.mesh" />
+  <static_mesh name="Columna_low_010_sala4" filename="meshes\Columna_low_010.mesh" />
+  <static_mesh name="Columna_low_011_sala4" filename="meshes\Columna_low_011.mesh" />
+  <static_mesh name="Columna_low_012_sala4" filename="meshes\Columna_low_012.mesh" />
+  <static_mesh name="Columna_low_013_sala4" filename="meshes\Columna_low_013.mesh" />
+  <static_mesh name="Columna_low_014_sala4" filename="meshes\Columna_low_014.mesh" />
+  <static_mesh name="Columna_low_015_sala4" filename="meshes\Columna_low_015.mesh" />
+  <static_mesh name="Columna_low_016_sala4" filename="meshes\Columna_low_016.mesh" />
+  <static_mesh name="Columna_low_017_sala4" filename="meshes\Columna_low_017.mesh" />
+  <static_mesh name="Columna_low_018_sala4" filename="meshes\Columna_low_018.mesh" />
+  <static_mesh name="Columna_low_019_sala4" filename="meshes\Columna_low_019.mesh" />
+  <static_mesh name="Columna_low_020_sala4" filename="meshes\Columna_low_020.mesh" />
+  <static_mesh name="Columna_low_024_sala4" filename="meshes\Columna_low_024.mesh" />
+  <static_mesh name="Columna_low_025_sala4" filename="meshes\Columna_low_025.mesh" />
+  <static_mesh name="Columna_low_026_sala4" filename="meshes\Columna_low_026.mesh" />
+  <static_mesh name="Columna_low_027_sala4" filename="meshes\Columna_low_027.mesh" />
+  <static_mesh name="Columna_low_028_sala4" filename="meshes\Columna_low_028.mesh" />
+  <static_mesh name="Columna_low_029_sala4" filename="meshes\Columna_low_029.mesh" />
+  <static_mesh name="Columna_low_030_sala4" filename="meshes\Columna_low_030.mesh" />
+  <static_mesh name="Columna_low_031_sala4" filename="meshes\Columna_low_031.mesh" />
+  <static_mesh name="Columna_low_032_sala4" filename="meshes\Columna_low_032.mesh" />
+  <static_mesh name="Columna_low_033_sala4" filename="meshes\Columna_low_033.mesh" />
+  <static_mesh name="Columna_low_034_sala4" filename="meshes\Columna_low_034.mesh" />
+  <static_mesh name="Columna_low_035_sala4" filename="meshes\Columna_low_035.mesh" />
+  <static_mesh name="Columna_low_036_sala4" filename="meshes\Columna_low_036.mesh" />
+  <static_mesh name="Columna_low_022_sala4" filename="meshes\Columna_low_022.mesh" />
+  <static_mesh name="Columna_low_021_sala4" filename="meshes\Columna_low_021.mesh" />
+  <static_mesh name="Columna_low_006_sala4" filename="meshes\Columna_low_006.mesh" />
+  <static_mesh name="Cylinder1850_sala4" filename="meshes\Cylinder1850.mesh" />
+  <static_mesh name="Box113_sala4" filename="meshes\Box113.mesh" />
+  <static_mesh name="Stairs1_sala4" filename="meshes\Stairs1.mesh" />
+  <static_mesh name="Sala_4_Columnes_01_sala4" filename="meshes\Sala_4_Columnes_01.mesh" />
+  <static_mesh name="Big_door_sala4" filename="meshes\Big_door.mesh" />
+  <static_mesh name="nau_02_sala4" filename="meshes\nau_02.mesh" />
+  <static_mesh name="Crates_011_sala4" filename="meshes\Crates_011.mesh" />
+  <static_mesh name="Crates010_sala4" filename="meshes\Crates010.mesh" />
+  <static_mesh name="sic_Crates012_sala4" filename="meshes\sic_Crates012.mesh" />
+  <static_mesh name="Crates013_sala4" filename="meshes\Crates013.mesh" />
+  <static_mesh name="nau_03_sala4" filename="meshes\nau_03.mesh" />
+  <static_mesh name="sic_Crates014_sala4" filename="meshes\sic_Crates014.mesh" />
+  <static_mesh name="sic_Crates015_sala4" filename="meshes\sic_Crates015.mesh" />
+  <static_mesh name="nau_01_sala4" filename="meshes\nau_01.mesh" />
+  <static_mesh name="nau_04_sala4" filename="meshes\nau_04.mesh" />
+  <static_mesh name="sic_Crates016_sala4" filename="meshes\sic_Crates016.mesh" />
+  <static_mesh name="sic_Crates017_sala4" filename="meshes\sic_Crates017.mesh" />
+  <static_mesh name="sic_Crates007_sala4" filename="meshes\sic_Crates007.mesh" />
+  <static_mesh name="sic_Crates4_sala4" filename="meshes\sic_Crates4.mesh" />
+  <static_mesh name="sic_Crates008_sala4" filename="meshes\sic_Crates008.mesh" />
+  <static_mesh name="sic_Crates009_sala4" filename="meshes\sic_Crates009.mesh" />
+  <static_mesh name="Sala_4_upper_wall_2_sala4" filename="meshes\Sala_4_upper_wall_2.mesh" />
 </static_meshes>

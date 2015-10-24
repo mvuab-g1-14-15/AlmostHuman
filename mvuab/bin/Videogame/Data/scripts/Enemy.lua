@@ -152,7 +152,6 @@ function CEnemy:Update()
 			self.DontMove = true
 			if self:RotateToPos(g_Player:GetPosition()) then
 				self:ChangeAnimation("shoot", 0.5, 1.0)
-				local lDir = GetPlayerDirection(self:GetPosition())
 		
 				self.CountTimeShoot = self.CountTimeShoot + dt
 				local timerBurst = "Burst"..self.Name
@@ -163,12 +162,12 @@ function CEnemy:Update()
 						countdowntimer_manager:SetActive(timerBurst, true)
 					end
 					if countdowntimer_manager:isTimerFinish(timerBurst) then
-						self:MakeShoot(lDir)
+						self:MakeShoot()
 						self.ActualShootBurst = self.ActualShootBurst + 1
 						countdowntimer_manager:Reset(timerBurst, false)
 					end
 					if self.ActualShootBurst == 0 then
-						self:MakeShoot(lDir)
+						self:MakeShoot()
 						self.ActualShootBurst = self.ActualShootBurst + 1
 					end
 					if self.ActualShootBurst == self.NumShootBurst then
@@ -516,12 +515,13 @@ function CEnemy:UpdateCamera()
 	self.Camera:UpdateFrustum()
 end
 
-function CEnemy:MakeShoot(aDirection)
+function CEnemy:MakeShoot()
 	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm")
 	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm")
+	local lDir = GetPlayerDirection( lPositionRightArm )
 	self.BlashLeft:Begin(lPositionLeftArm)
 	self.BlashRight:Begin(lPositionRightArm)
-	enemy_manager:AddShoot( lPositionLeftArm, aDirection, self.ShootSpeed, self.Damage )
+	enemy_manager:AddShoot( lPositionRightArm, lDir, self.ShootSpeed, self.Damage )
 	--Todo play enemy sound
 end
 
