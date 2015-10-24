@@ -1,5 +1,5 @@
 <animated_model name="boss">
-	<texture file="final_boss_compo.jpg"/>
+	<texture file="final_boss_compo"/>
 	<skeleton file="final_boss.csf"/>
 	<mesh file="final_boss.cmf"/>
 	<animation name="hurt" file="hurt.caf"/>
