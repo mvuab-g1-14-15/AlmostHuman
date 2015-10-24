@@ -98,6 +98,16 @@ function CEnemy:__init( aInfo )
 	self.Fly = aInfo.fly
 	self.InitHeight = self.InitPosition.y
 	
+	if self.Fly then
+		self.Laser = renderable_objects_manager_glow:GetResource(self.Name.."Laser")
+		if self.Laser == nil then
+			self.Laser = CreateInstanceMesh(self.Name.."Laser", "DroneLaser")
+			self.Laser:SetRoomName( aInfo.room )
+			renderable_objects_manager_glow:AddResource(self.Name.."Laser", self.Laser)
+		end
+		self.Laser:SetPitch(self.CameraPitch + g_HalfPi)
+	end
+	
 	self.Alarm = aInfo.alarm
 	if self.Alarm then
 		self.AlarmTimer = countdowntimer_manager:AddTimer(self.Name.."AlarmTimer", aInfo.alarm_time, false)
@@ -217,6 +227,9 @@ function CEnemy:Update()
 		local lPos = self:GetPosition()
 		lPos.y = self.InitHeight
 		self:SetPosition(lPos)
+		self.Laser:SetPosition(lPos)
+		self.Laser:SetYaw(self.Camera:GetYaw() - g_HalfPi)
+		self.Laser:MakeTransform()
 	end
 	
 	local lROPos = self:GetPosition()

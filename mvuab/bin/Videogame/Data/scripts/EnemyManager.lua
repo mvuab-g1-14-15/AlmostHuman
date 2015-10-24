@@ -205,10 +205,10 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
 	lInfo.speed = 2.0
-	lInfo.position = Vect3f(39.0, -8.0, 70.0)
+	lInfo.position = Vect3f(39.0, -12.0, 70.0)
 	lInfo.is_patrol = true
-	lInfo.waypoints = { Vect3f(39.0, -8.0, 70.0),
-						Vect3f(39.0, -8.0, 50.0)}
+	lInfo.waypoints = { Vect3f(39.0, -12.0, 70.0),
+						Vect3f(39.0, -12.0, 50.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "pasillo"
 	lInfo.use_gizmo = true
@@ -228,9 +228,9 @@ function CEnemyManager:CreateEnemiesSala3()
 	
 	-- Drone 2
 	lInfo.name = "Drone2_S3"
-	lInfo.position = Vect3f(25.0, -8.0, 70.0)
-	lInfo.waypoints = { Vect3f(25.0, -8.0, 70.0),
-						Vect3f(25.0, -8.0, 52.0)}
+	lInfo.position = Vect3f(25.0, -12.0, 70.0)
+	lInfo.waypoints = { Vect3f(25.0, -12.0, 70.0),
+						Vect3f(25.0, -12.0, 52.0)}
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
 end
 
