@@ -1,5 +1,8 @@
 g_bChargeEnergy = false
 g_bChangeRoom = false
+g_bPressRoom1X = false
+g_bPressedRoom1X = false
+g_bBlockShow = false
 g_bPressedRoom1Button = false
 g_bPressRoom1Button = false
 g_bPressRoomPasillo = false
@@ -66,7 +69,7 @@ function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
 		g_Player:SetWeak(false)
-		enemy_manager:AlarmRoom("room2")
+		enemy_manager:AlarmRoom("sala2")
 		g_bChargeEnergy = false
 	else
 		g_bChargeEnergy = true
@@ -190,16 +193,17 @@ function StayRejilla(text, other_shape)
 		g_bPressRoom1Button = false
 		trigger_manager:GetTriggerByName("rejilla_sala1"):SetActive(false)	
 		gui_manager:ShowStaticText(text)		
+		g_bPressRoom1Button = false	
 	end
 end
 
 function StayText(room, message, other_shape)
-	local enemigosVivos = false --GetEnemyLive(room)
-	if room == "room2" then
-		if g_bPressedRoom2X and enemigosVivos then
-			engine:Trace("Hay enemigos vivos todavia")
-			CuentaAtras = CuentaAtras - timer:GetElapsedTime()
-			engine:Trace("Cuenta atras: "..CuentaAtras)
+	local enemigosVivos = enemy_manager:GetNumEnemy(room)
+	engine:Trace("Sala  "..room)
+	engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
+	if room == "sala2" then
+		if g_bPressedRoom2X and enemigosVivos >= 1 then
+			CuentaAtras = CuentaAtras - timer:GetElapsedTime()	
 			if CuentaAtras <= 0 then
 				gui_manager:ShowStaticText(message)
 				CuentaAtras = 3
@@ -216,13 +220,12 @@ function StayText(room, message, other_shape)
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end
-	elseif room == "room3" then
-		if g_bPressedRoom3X and enemigosVivos then
+	elseif room == "sala3" then
+		if g_bPressedRoom3X and enemigosVivos >= 1 then
 				gui_manager:ShowStaticText(message)
 				g_sMessageAlarm = message
 				g_bPressedRoom3X = false
 		elseif g_bPressedRoom3X then
-			
 			--gui_manager:ShowStaticText(message)
 			g_bPressedRoom3X = false
 			g_bPressRoom3X = false
@@ -232,10 +235,17 @@ function StayText(room, message, other_shape)
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end
+	elseif room == "sala1" then
+		if g_bPressedRoom1X and not g_bBlockShow then
+				gui_manager:ShowStaticText(message)
+				g_bBlockShow = true
+				g_bPressedRoom1X = false		
+		end
 	end
+	
 end
 
-function StayText(room, other_shape)
+function StayTextPasillo(room, other_shape)
 	if g_bPressedRoomPasillo and enemigosVivos then
 		g_bPressedRoomPasillo = false
 		g_bPressRoomPasillo = false
@@ -286,4 +296,17 @@ end
 
 function TracePhysX(message, other_shape)
 	--engine:Trace(message)
+end
+
+function ShowTextDoor1(message, other_shape)
+	if g_bPressRoom1X then
+		g_bPressRoom1X = false	
+		if g_bBlockShow then
+			g_bBlockShow = false
+			gui_manager:ShowStaticText("Block")			
+		end
+	else
+		g_bPressRoom1X = true
+	end
+	gui_manager:ShowStaticText(message)
 end

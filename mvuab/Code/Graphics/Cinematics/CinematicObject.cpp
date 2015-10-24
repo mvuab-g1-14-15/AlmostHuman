@@ -177,7 +177,7 @@ void CCinematicObject::Update()
   lerp_animator_3D.Update( l_CurrentP, scale );
 
   //baseUtils::Trace("Scale=>%f-%f-%f\n", scale.x, scale.y,scale.z);
-
+  ASSERT( m_RenderableObject, "Puntero null del objeto cinematic");
   m_RenderableObject->SetPosition( pos );
   m_RenderableObject->SetYaw( yaw );
   m_RenderableObject->SetPitch( pitch );
