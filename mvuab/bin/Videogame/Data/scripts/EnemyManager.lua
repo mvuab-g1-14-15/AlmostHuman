@@ -8,6 +8,10 @@ function CEnemyManager:__init()
 	self.Enemy.sala4 = {}
 	
 	self.Shoots = {}
+	self.MaxShoots = 50
+	for i=1,self.MaxShoots do
+		table.insert( self.Shoots, CAmmo(i) )
+	end
 	
 	self.AStar = {}
 	self.AStar.sala2 = CAStar( "sala2" )
@@ -51,6 +55,8 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -80,6 +86,8 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -108,6 +116,8 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.time_to_shoot = 1.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -132,6 +142,8 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.time_to_shoot = 2.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = false
 	lInfo.can_use_graph = true
@@ -161,7 +173,9 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.shoot_speed = 10.0
 	lInfo.time_to_shoot = 5.0
 	lInfo.chase_distance = 5.0
-	lInfo.camera_pitch = -g_HalfPi
+	lInfo.camera_pitch = -1.04719755 -- 60 grados
+	lInfo.camera_fov = 25.0
+	lInfo.camera_far = 20.0
 	lInfo.can_see = true
 	lInfo.fly = true
 	lInfo.can_use_graph = false
@@ -171,20 +185,16 @@ function CEnemyManager:CreateEnemiesPasillo()
 end
 
 function CEnemyManager:Reinit( aRoom )
-	--[[
 	for i in pairs (self.Enemy[aRoom]) do
-		self.Enemy[aRoom][i].OnDead = false
+		self.Enemy[aRoom][i]:SetOnDead(false)
 		self.Enemy[aRoom][i]:Destroy()
 	end
-	]]
 	
 	self.Alarm[aRoom] = false
 	
 	for k in pairs (self.Shoots) do
-		self.Shoots[k]:Destroy()
-		table.remove(self.Shoots, k)
+		self.Shoots[k]:End()
 	end
-	collectgarbage()
 		
 	if aRoom == "sala2" then
 		self:CreateEnemiesSala2()
@@ -224,16 +234,10 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 	end
 	
-	local lGarbage = false
 	for k in pairs (self.Shoots) do
-		if self.Shoots[k]:GetImpacted() then
-			self.Shoots[k]:Destroy()
-			table.remove(self.Shoots, k)
-			lGarbage = true
+		if self.Shoots[k]:IsImpacted() then
+			self.Shoots[k]:End()
 		end
-	end
-	if lGarbage then
-		collectgarbage()
 	end
 	
 	for k in pairs (self.Shoots) do
@@ -343,8 +347,12 @@ function CEnemyManager:GetAStar( aRoomName )
 	return self.AStar[ aRoomName ]
 end
 
-function CEnemyManager:AddShoot(aShoot)
-	table.insert(self.Shoots, aShoot)
+function CEnemyManager:AddShoot( aPosition, aDirection, aSpeed, aDamage )
+	for k in pairs (self.Shoots) do
+		if not self.Shoots[k]:IsActive() then
+			self.Shoots[k]:Begin(aPosition, aDirection, aSpeed, aDamage)
+		end
+	end
 end
 
 function CEnemyManager:CollisionWithEnemy(aName, aPos, aRadius)

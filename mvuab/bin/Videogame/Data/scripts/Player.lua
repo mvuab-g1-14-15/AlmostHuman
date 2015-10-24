@@ -114,7 +114,11 @@ function CPlayer:Update()
 		enemy_manager:Reinit(self.Room)
 	end
 	
-	self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+	if self.Animation == "shoot" or self.Animation == "charge_loop" then
+		self.RenderableObject:ChangeAnimationAction(self.Animation, 0.5, 0)
+	else
+		self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
+	end
 end
 
 function CPlayer:SetRoom( aName )

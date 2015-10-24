@@ -76,10 +76,8 @@ function CEnemy:__init( aInfo )
 	
 	camera_manager:NewCamera(CameraType.Free.value, self.Name, Vect3f( 0.0, 1.0, 0.0), Vect3f( 0.0 ))
 	self.Camera = camera_manager:GetCamera(self.Name)
-	self.Camera:SetZFar(20.0)
-	if self.Type == "drone" then
-		self.Camera:SetFovInRadians(20.0)
-	end
+	self.Camera:SetZFar(aInfo.camera_far)
+	self.Camera:SetFovInRadians(aInfo.camera_fov)
 	self.CameraPitch = aInfo.camera_pitch
 	self:UpdateCamera()
 	
@@ -106,6 +104,14 @@ function CEnemy:__init( aInfo )
 	end
 	
 	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
+	
+	self.Ammunition = {}
+	self.MaxAmmo = 25;
+	self.AmmoId = 0;
+	for i=1,self.MaxAmmo do
+		table.insert( self.Ammunition, CAmmo(i) );
+		self.AmmoId = self.AmmoId + 1;
+	end
 end
 
 function CEnemy:Destroy()
@@ -336,6 +342,8 @@ function CEnemy:MoveToPos( aPos )
 					self.Gizmo:SetPosition(lRealTargetPos)
 					self.Gizmo:MakeTransform()
 				end
+			else
+				self.CharacterController:Move(Vect3f(0.0), dt)
 			end
 		else
 			self.ActualPathPoint = self.ActualPathPoint + 1
@@ -354,6 +362,7 @@ function CEnemy:MoveToPos( aPos )
 		if lDist < self.Delta then
 			return true
 		end
+		self.CharacterController:Move(Vect3f(0.0), dt)
 		return false
 	end
 	
@@ -385,6 +394,8 @@ function CEnemy:MoveToPos( aPos )
 				self.Gizmo:SetPosition(aPos)
 				self.Gizmo:MakeTransform()
 			end
+		else
+			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
 		return false
 	end
@@ -489,6 +500,10 @@ function CEnemy:GetPitch()
 	return self.CharacterController:GetPitch()
 end
 
+function CEnemy:SetOnDead(aBool)
+	self.OnDead = aBool
+end
+
 function CEnemy:UpdateCamera()
 	local lPosition = self:GetPosition()
 	lPosition.y = lPosition.y + self:GetHeight()
@@ -502,11 +517,11 @@ function CEnemy:UpdateCamera()
 end
 
 function CEnemy:MakeShoot(aDirection)
-	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm");
-	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm");
+	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm")
+	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm")
 	self.BlashLeft:Begin(lPositionLeftArm)
 	self.BlashRight:Begin(lPositionRightArm)
-	
+	enemy_manager:AddShoot( lPositionLeftArm, aDirection, self.ShootSpeed, self.Damage )
 	--Todo play enemy sound
 end
 
