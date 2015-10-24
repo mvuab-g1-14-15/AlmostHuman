@@ -52,6 +52,7 @@ function CPlayer:__init()
 	end
 	light_manager:AddResource(self.Light:GetName(), self.Light)
 	
+	self.ChargedParticle = CParticle( "blaster", Vect3f(0, 0, 0) )
 	--self.BillboardPlayer = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 end
 
@@ -69,8 +70,10 @@ function CPlayer:Update()
 	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
-	self.BlasterPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm")
-	self.Blaster:Update(self.BlasterPosition)
+	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
+	self.ChargedParticle:ChangePosition( lArmPosition )
+	self.ChargedParticle:SetDirection( camera_manager:GetCurrentCamera():GetDirection() );
+	self.Blaster:Update( lArmPosition )
 	--self.BillboardPlayer:ChangePosition( self.BlasterPosition )
 	
 	if not self.Blaster:GetIsShooting() then

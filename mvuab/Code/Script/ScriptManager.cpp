@@ -88,16 +88,16 @@ void CScriptManager::Load()
 void CScriptManager::RunCode( const std::string& Code )
 {
   BROFILER_CATEGORY( "CScriptManager::RunCode()", Profiler::Color::Orchid )
-    if ( luaL_dostring( m_LS, Code.c_str() ) )
-    {
-        const char* l_Str = lua_tostring( m_LS, -1 );
-        CEngine::GetSingleton().Trace("Error running lua code:");
-        CEngine::GetSingleton().Trace(Code);
-        CEngine::GetSingleton().Trace(l_Str);
-        ASSERT( false, "Error running lua code: %s\n %s", Code.c_str(), l_Str );
+  if ( luaL_dostring( m_LS, Code.c_str() ) )
+  {
+    const char* l_Str = lua_tostring( m_LS, -1 );
+    CEngine::GetSingleton().Trace("Error running lua code:");
+    CEngine::GetSingleton().Trace(Code);
+    CEngine::GetSingleton().Trace(l_Str);
+    ASSERT( false, "Error running lua code: %s\n %s", Code.c_str(), l_Str );
 
-		    Reload();
-    }
+    Reload();
+  }
 }
 
 void CScriptManager::RunFile( const std::string& FileName )
