@@ -1,5 +1,5 @@
 <animated_model name="enemy1">
-	<texture file="androide_compo.tga"/>
+	<texture file="Data/animated_models/androide/androide_compo.tga"/>
 	<skeleton file="androide.csf"/>
 	<mesh file="androide.cmf"/>
 	<animation name="idle" file="idle.caf"/>
