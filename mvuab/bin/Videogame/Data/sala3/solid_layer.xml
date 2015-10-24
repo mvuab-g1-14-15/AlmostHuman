@@ -271,4 +271,9 @@
   <MeshInstance name="Sala_3_Roof001_sala3" core="Sala_3_Roof001_sala3" pos="-2.15056 -1.53177 59.9283" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 0.930556" />
   <MeshInstance name="container002_sala3" core="container002_sala3" pos="-1.54794 -15.8763 75.8133" yaw="0.0795515" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamps_sala3" core="lamps_sala3" pos="5.37434 -7.15009 95.2646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 82.8136" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap003_sala3" core="cap003_sala3" pos="40.4543 -17.3208 79.8817" yaw="0.0" pitch="1.5708" roll="0.959931" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Leg004_sala3" core="Leg004_sala3" pos="40.4789 -17.2726 86.2265" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Leg002_sala3" core="Leg002_sala3" pos="40.4789 -17.2726 77.6021" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
+  
 </RenderableObjects>
