@@ -43,12 +43,10 @@ bool CShadowMap::Generate()
         mTexture->SetAsRenderTarget();
         lGM->BeginRender();
         lGM->Clear( true, true, false, mClearMask );
-		SceneInstance->RenderLayer(mLayer);
+        SceneInstance->RenderLayer(mLayer);
         lGM->EndRender();
         mTexture->UnsetAsRenderTarget();
-#ifdef _DEBUG
-		mTexture->Save("ShadownMap");
-#endif // _DEBUG
+        //mTexture->Save("ShadownMap");
         lOk = true;
     }
     return lOk;

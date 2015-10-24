@@ -23,7 +23,7 @@ CTrigger::CTrigger( const CXMLTreeNode& Node )
     , m_PhysicUserData( new CPhysicUserData( Node.GetAttribute<std::string>( "name", "unknown" ) ) )
     , mTechnique( Node.GetAttribute<CEffectTechnique>("technique") )
     , mShape( 0 )
-	, mActive( true )
+    , mActive( true )
 {
     m_bEnter = Node.GetAttribute<bool>( "enter_event", false );
 
@@ -99,7 +99,7 @@ CTrigger::CTrigger
     , m_PhysicUserData( new CPhysicUserData( name ) )
     , mTechnique( EffectManagerInstance->GetEffectTechnique("RenderForwardDebugShapeTechnique") )
     , mShape( 0 )
-	, mActive( true )
+    , mActive( true )
 {
     m_bEnter = bEnter;
 

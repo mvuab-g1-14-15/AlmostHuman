@@ -49,12 +49,13 @@ technique TECHNIQUE_NAME
 {
 	pass p0
 	{
-	    CullMode = NONE; // NONE - CW
+	#if defined( ALPHA_BLEND_ADD )
 		AlphaBlendEnable = true;
 		BlendOp=Add;
 		SrcBlend = one;
 		DestBlend = one;
-
+	#endif
+	    CullMode = NONE; // NONE - CW
 		VertexShader = compile vs_3_0 mainBillboardVS();
 		PixelShader = compile ps_3_0 mainBillboardPS();
 	}

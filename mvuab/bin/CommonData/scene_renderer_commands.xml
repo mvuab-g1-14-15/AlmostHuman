@@ -25,8 +25,8 @@
 	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<render_billboards/>
-	<!--<render_editors/>
-	<render_triggers/>-->
+	<!--<render_editors/>-->
+	<render_triggers/>
 	<render_gizmos render="true"/>
 	<render_process/>
 	
@@ -66,29 +66,6 @@
 	
 	<disable_z_test/>
     
-    <!--
-    ZBLUT_START
-    <capture_frame_buffer name="Z_NO_BLUR">
-		<dynamic_texture stage_id="0" name="Z_NO_BLUR" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-
-    <zblur>
-		<texture stage_id="0" name="Z_NO_BLUR"/>
-        <texture stage_id="1" name="DepthMapTexture"/>
-    </zblur>
-    ZBLUR_END
-    -->
-    <!--
-    SCATTERED_LIGHT_START
-    <capture_frame_buffer name="FB1">
-		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
-	</capture_frame_buffer>
-
-    <scattered_light>
-        <texture stage_id="0" name="FB1"/>
-    </scattered_light>
-    SCATTERED_LIGHT_END
-    -->
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
 	<render_gui render="true"/>

@@ -13,6 +13,7 @@
 #include "EngineManagers.h"
 #include "Texture\TextureManager.h"
 #include <string>
+#include "Billboard/BillboardInstance.h"
 
 CLight::CLight()
     : CObject3D()
@@ -45,7 +46,8 @@ CLight::CLight( const CXMLTreeNode& node )
     , mLensFlare( 0 )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
-    , m_RoomName(  )
+    , m_RoomName()
+    , mBillboard(0)
 {
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
             m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
@@ -56,7 +58,7 @@ CLight::CLight( const CXMLTreeNode& node )
         const std::string& TagName = lNode.GetName();
 
         if ( TagName == "lens_flare" )
-        {
+        { 
             ASSERT( !mLensFlare, "The light %s only could have one lens flare", GetName().c_str() );
             mLensFlare = FlareMan->GetResource( lNode.GetAttribute<std::string>( "name", "null_flare" ) );
         }
@@ -143,11 +145,6 @@ void CLight::SetEndRangeAttenuation( const float EndRangeAttenuation )
 float CLight::GetEndRangeAttenuation() const
 {
     return m_EndRangeAttenuation;
-}
-
-bool CLight::RenderShadows() const
-{
-    return false;
 }
 
 CLight::ELightType CLight::GetType() const

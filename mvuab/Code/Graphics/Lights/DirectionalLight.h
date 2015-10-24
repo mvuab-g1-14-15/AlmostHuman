@@ -3,6 +3,8 @@
 
 #include "Light.h"
 
+class CBillboardInstance;
+
 class CDirectionalLight : public CLight
 {
 public:
@@ -13,7 +15,9 @@ public:
   virtual void SetShadowMap( CGraphicsManager* GM );
 
 protected:
+  CBillboardInstance* mLookAtBillboard;
   Math::Vect3f m_Direction;
+  Math::Vect3f mLookAt;
   Math::Vect2f m_OrthoShadowMapSize;
 };
 

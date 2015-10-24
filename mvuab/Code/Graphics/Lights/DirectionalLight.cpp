@@ -22,9 +22,9 @@ typedef struct CUSTOMVERTEXLIGHT
 
 CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
     : CLight( node )
+    , mLookAt( node.GetAttribute<Math::Vect3f>( "look_at", Math::Vect3f( 0, 0, 0 ) ) )
 {
-    const Math::Vect3f& lLookAt = node.GetAttribute<Math::Vect3f>( "look_at", Math::Vect3f( 0, 0, 0 ) );
-    m_Direction = (lLookAt - m_Position).GetNormalized();
+    m_Direction = ( mLookAt - m_Position ).GetNormalized();
     m_OrthoShadowMapSize.x = node.GetAttribute<float>( "shadow_map_width", 0 );
     m_OrthoShadowMapSize.y = node.GetAttribute<float>( "shadow_map_height", 0 );
     SetType( CLight::DIRECTIONAL );
@@ -38,20 +38,6 @@ void CDirectionalLight::SetDirection( const Math::Vect3f& Direction )
 Math::Vect3f CDirectionalLight::GetDirection() const
 {
     return m_Direction;
-}
-
-void CDirectionalLight::Render()
-{
-    GraphicsInstance->DrawSphere( m_Position, 0.3f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.1f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.2f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.3f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.4f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.5f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.6f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.7f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.8f, 0.08f, Math::colGREEN );
-    GraphicsInstance->DrawSphere( m_Position + m_Direction * 0.9f, 0.08f, Math::colGREEN );
 }
 
 void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
@@ -97,3 +83,5 @@ void CDirectionalLight::SetShadowMap( CGraphicsManager* GM )
     lDevice->SetTransform( D3DTS_VIEW, &l_View );
     lDevice->SetTransform( D3DTS_PROJECTION, &l_Ortho );
 }
+
+void CDirectionalLight::Render(){}
