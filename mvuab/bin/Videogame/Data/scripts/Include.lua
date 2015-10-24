@@ -23,6 +23,7 @@ texture_manager = GetTextureManager()
 trigger_manager = GetTriggerManager()
 engine_manager = CEngineManagers.GetSingletonPtr()
 debug_helper = CDebugHelper()
+particle_system_manager = GetParticleSystemManager()
 
 -- Global Variables
 g_CameraSensibility = 30.0
