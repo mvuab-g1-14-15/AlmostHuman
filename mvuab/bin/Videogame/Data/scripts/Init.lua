@@ -232,6 +232,8 @@ function update_gameplay()
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
 				cinematic_manager:Execute("explotion")
+				g_Player:SetPosition(Vect3f(-4.58296 -14.0589 60.0993))
+				g_Player:ChangeAnimation("logan_cinem_sala3", 0.2, 0)
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
