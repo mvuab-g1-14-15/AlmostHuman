@@ -63,7 +63,6 @@ function CBlaster:EndAmmo()
 end
 
 function CBlaster:Shoot( aPosition )
-	--engine:Trace("Blaster Shoot")
 	self.Blash:Begin(aPosition)
 	local lAlreadyShoot = false;
 	for i=1,#self.Ammunition do
@@ -81,7 +80,6 @@ function CBlaster:Shoot( aPosition )
 end
 
 function CBlaster:ShootCharged( aPosition )
-	--engine:Trace("Blaster Shoot cargado")
 	self.Blash:Begin(aPosition)
 	local lAlreadyShoot = false;
 end

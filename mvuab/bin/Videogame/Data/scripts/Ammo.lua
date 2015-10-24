@@ -3,7 +3,6 @@ class 'CAmmo'
 
 function CAmmo:__init( aId )
 	self.Id = aId;
-	--engine:Trace("ammo ctor".. self.Id )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
 	--self.Light = CreateOmniLight()
@@ -28,7 +27,6 @@ function CAmmo:IsImpacted()
 end
 
 function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
-	--engine:Trace( "ammo is "..aPosition:ToString() )
 	self.Active = true
 	self.Impacted = false;
 	
@@ -74,7 +72,6 @@ function CAmmo:Update()
 					self.Position = lCollisionPoint
 					
 					local lName = hit_info.Name
-					engine:Trace("Impacted with "..lName)
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					else

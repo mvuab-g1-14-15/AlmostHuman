@@ -53,7 +53,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
-	lInfo.chase_distance = 5.0
+	lInfo.chase_distance = 10.0
 	lInfo.camera_pitch = 0.0
 	lInfo.camera_fov = 40.0
 	lInfo.camera_far = 20.0
@@ -63,9 +63,19 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.alarm = true
 	lInfo.alarm_time = 5.0
 	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	
+	-- Patrol 2
+	lInfo.name = "Enemy2_S2"
+	lInfo.position = Vect3f(75.4508, -16.5334, -76.6861)
+	lInfo.waypoints = { Vect3f(75.4508, -16.5334, -76.6861),
+						Vect3f(49.5813, -16.5334, -76.6861),
+						Vect3f(49.681, -16.5334, -43.0683 ),
+						Vect3f(74.6564, -16.5334, -43.7134),
+						Vect3f(74.6564, -16.5334, -54.4482)}
+	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
-	lInfo.name = "Enemy2_S2"
+	lInfo.name = "Enemy3_S2"
 	lInfo.life = 100.0
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
