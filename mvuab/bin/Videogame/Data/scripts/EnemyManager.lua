@@ -29,6 +29,7 @@ function CEnemyManager:__init()
 	
 	self:CreateEnemiesSala2()
 	self:CreateEnemiesPasillo()
+	self:CreateEnemiesSala3()
 end
 
 function CEnemyManager:CreateEnemiesSala2()
@@ -194,6 +195,45 @@ function CEnemyManager:CreateEnemiesPasillo()
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
 end
 
+function CEnemyManager:CreateEnemiesSala3()
+	local lInfo = {}
+	
+	-- Drone 1
+	lInfo.name = "Drone1_S3"
+	lInfo.life = 50.0
+	lInfo.damage = 2.0
+	lInfo.radius = 0.5
+	lInfo.height = 0.5
+	lInfo.speed = 2.0
+	lInfo.position = Vect3f(39.0, -8.0, 70.0)
+	lInfo.is_patrol = true
+	lInfo.waypoints = { Vect3f(39.0, -8.0, 70.0),
+						Vect3f(39.0, -8.0, 50.0)}
+	lInfo.mesh = "drone"
+	lInfo.room = "pasillo"
+	lInfo.use_gizmo = true
+	lInfo.on_dead = false
+	lInfo.shoot_speed = 10.0
+	lInfo.time_to_shoot = 5.0
+	lInfo.chase_distance = 5.0
+	lInfo.camera_pitch = -1.04719755 -- 60 grados
+	lInfo.camera_fov = 25.0
+	lInfo.camera_far = 20.0
+	lInfo.can_see = true
+	lInfo.fly = true
+	lInfo.can_use_graph = false
+	lInfo.alarm = true
+	lInfo.alarm_time = 10.0
+	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+	
+	-- Drone 2
+	lInfo.name = "Drone2_S3"
+	lInfo.position = Vect3f(25.0, -8.0, 70.0)
+	lInfo.waypoints = { Vect3f(25.0, -8.0, 70.0),
+						Vect3f(25.0, -8.0, 52.0)}
+	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+end
+
 function CEnemyManager:Reinit( aRoom )
 	for i in pairs (self.Enemy[aRoom]) do
 		self.Enemy[aRoom][i]:SetOnDead(false)
@@ -211,6 +251,9 @@ function CEnemyManager:Reinit( aRoom )
 	end
 	if aRoom == "pasillo" then
 		self:CreateEnemiesPasillo()
+	end
+	if aRoom == "sala3" then
+		self:CreateEnemiesSala3()
 	end
 end
 
