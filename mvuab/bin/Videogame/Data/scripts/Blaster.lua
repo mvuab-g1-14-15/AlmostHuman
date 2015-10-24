@@ -139,7 +139,7 @@ function CBlaster:Update( aPosition )
 				self.IsShooting = true
 				self.FinishShooting = false
 				if self.TimePressed == 0 then
-					g_Player:SetAnimation("idle_to_shoot")
+					g_Player:SetAnimation("charge_loop")
 				end
 				if self.TimePressed < self.MaxTimePressed then
 					--Implementar shoot acumulado
@@ -181,16 +181,6 @@ function CBlaster:Update( aPosition )
 				self.IsShooting = false
 				self.FinishShooting = false
 				countdowntimer_manager:Reset("BlasterFinish", false)
-			end
-		end
-
-		for i = #self.Shoots,1,-1 do
-			local lShoot = self.Shoots[i]
-			lShoot:Update()
-			if lShoot:Impacted() then
-				table.remove(self.Shoots, i)
-				-- Run the garbage collector for remove the shoot in cpp
-				collectgarbage()
 			end
 		end
 	end
