@@ -342,6 +342,8 @@ function CEnemy:MoveToPos( aPos )
 					self.Gizmo:SetPosition(lRealTargetPos)
 					self.Gizmo:MakeTransform()
 				end
+			else
+				self.CharacterController:Move(Vect3f(0.0), dt)
 			end
 		else
 			self.ActualPathPoint = self.ActualPathPoint + 1
@@ -360,6 +362,7 @@ function CEnemy:MoveToPos( aPos )
 		if lDist < self.Delta then
 			return true
 		end
+		self.CharacterController:Move(Vect3f(0.0), dt)
 		return false
 	end
 	
@@ -391,6 +394,8 @@ function CEnemy:MoveToPos( aPos )
 				self.Gizmo:SetPosition(aPos)
 				self.Gizmo:MakeTransform()
 			end
+		else
+			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
 		return false
 	end
