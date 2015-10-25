@@ -40,13 +40,7 @@ template <class T> class CTemplatedVectorMapManagerObject
 
         bool Exist( const std::string & Name )
         {
-            bool e = false;
-
-            m_Lock.ReadLock();
-                e = m_ResourcesMap.find( Name ) != m_ResourcesMap.end();
-            m_Lock.ReadUnLock();
-
-            return e;
+            return m_ResourcesMap.find( Name ) != m_ResourcesMap.end();
         }
 
         void RemoveResource( const std::string& Name )
@@ -74,13 +68,12 @@ template <class T> class CTemplatedVectorMapManagerObject
 
         virtual T GetResourceById(size_t Id)
         {
-            T e;
+            return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
+        }
 
-            m_Lock.ReadLock();
-                e = (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
-            m_Lock.ReadUnLock();
-
-            return e;
+        virtual T GetConstResourceById(size_t Id)
+        {
+          return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
         }
 
         virtual T GetResource(const std::string& Name)
