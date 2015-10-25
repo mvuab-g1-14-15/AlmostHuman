@@ -49,7 +49,7 @@
  		<texture stage_id="0" name="Data/textures/mirilla.png"/>
  	</render_weapon_target>
     
-    <!--<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_ColorGrading.xml"/>-->
+    <postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_ColorGrading.xml"/>
     <!--postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_LightScattering.xml"/-->
 	
 	<enable_z_test/>
