@@ -8,6 +8,7 @@
 #include "RenderableVertex\IndexedVertexs.h"
 #include "RenderableVertex\RenderableVertex.h"
 #include "BillboardInstance.h"
+#include "Cameras/CameraManager.h"
 
 CRenderableVertexs* CBillboardManager::sRV = 0;
 
@@ -40,17 +41,11 @@ CBillboardManager::~CBillboardManager()
 
 void CBillboardManager::Render()
 {
-  /*if( !mLinearDepthTexture )
-  {
-    mLinearDepthTexture = TextureMInstance->GetTexture("DepthMapTexture");
-  }
-
-  mLinearDepthTexture->Activate(6);*/
-
   BROFILER_CATEGORY( "CBillboardManager::Render()", Profiler::Color::Orchid )
+  const Math::Vect3f& lCameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
   for(unsigned int i = 0, l_Size = m_ResourcesVector.size(); i < l_Size; ++i)
   {
-      m_ResourcesVector[i]->Render(sRV, mGM);
+      m_ResourcesVector[i]->Render(sRV, mGM, lCameraPosition );
   }
 }
 

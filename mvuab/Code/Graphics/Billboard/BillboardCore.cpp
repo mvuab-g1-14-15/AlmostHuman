@@ -58,7 +58,7 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     return ( mTechnique != 0 );
 }
 
-void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
+void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, const Math::Vect3f& aCameraPosition )
 {
   if ( !mInstances.empty() )
   {
@@ -71,16 +71,19 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
 
     for( uint32 i = 0, lCount = mInstances.size(); i < lCount; ++i )
     {
-      CEffect* lEffect = mTechnique->GetEffect();
+      if( mInstances[i]->GetPosition().Distance( aCameraPosition ) < mDistance )
+      {
+        CEffect* lEffect = mTechnique->GetEffect();
 
-      lEffect->SetSize( mSize );
-      lEffect->SetAlpha( mAlpha );
-      lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
-      
-      if( mUseTick || mUseDeltaTime )
+        lEffect->SetSize( mSize );
+        lEffect->SetAlpha( mAlpha );
+        lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
+
+        if( mUseTick || mUseDeltaTime )
           lEffect->SetDeltaTime( mTick );
 
-      mInstances[i]->Render(aRV, aGM, mTechnique );
+        mInstances[i]->Render(aRV, aGM, mTechnique );
+      }
     }
   }
 }
