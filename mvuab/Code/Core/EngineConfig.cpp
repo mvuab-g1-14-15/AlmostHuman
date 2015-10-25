@@ -62,10 +62,10 @@ void CEngineConfig::Load( const std::string& aCfg )
         }
         else if ( lTagName == "window_properties" )
         {
-            m_ScreenResolution  = lNode.GetAttribute<Math::Vect2i>( "resolution" , Math::Vect2i( 800, 600 ) );
-            m_ScreenSize        = lNode.GetAttribute<Math::Vect2i>( "size", Math::Vect2i( 800, 600 ) );
-            m_ScreenPosition    = lNode.GetAttribute<Math::Vect2i>( "position", Math::Vect2i( 0, 0 ) );
-            const std::string& lMode = lNode.GetAttribute<std::string>( "mode", "fit_desktop");
+            m_ScreenResolution        = lNode.GetAttribute<Math::Vect2i>( "resolution" , Math::Vect2i( 800, 600 ) );
+            m_ScreenSize              = lNode.GetAttribute<Math::Vect2i>( "size", Math::Vect2i( 800, 600 ) );
+            m_ScreenPosition          = lNode.GetAttribute<Math::Vect2i>( "position", Math::Vect2i( 0, 0 ) );
+            const std::string& lMode  = lNode.GetAttribute<std::string>( "mode", "fit_desktop");
             // Switch the modes of the screen
             m_FullScreenMode  = ( lMode == "full_screen" );
             m_FitDesktop      = ( lMode == "fit_desktop" );

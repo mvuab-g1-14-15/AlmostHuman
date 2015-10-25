@@ -53,15 +53,10 @@ void CEngine::Update()
 }
 
 void CEngine::Render()
-{ BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
-  //if ( m_Play )
-    if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost()) 
-        SRCMInstance->Execute();
-  /*  else
-      {
-      CRenderGUISceneRendererCommand* l_GUICommand = SRCMInstance->GetCommandGUI();
-      l_GUICommand->Execute( *GraphicsInstance );
-      }*/
+{
+  BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
+  if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost())
+    SRCMInstance->Execute();
 }
 
 void CEngine::ProcessInputs()

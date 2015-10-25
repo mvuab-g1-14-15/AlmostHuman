@@ -71,25 +71,28 @@ void CLensFlareManager::Render()
     {
         CLight* lCurrentLight = lLM->GetLight(i);
 
-        CLensFlare* lLensFlare = lCurrentLight->GetLensFlare();
-
-        if( lLensFlare )
+        if( lCurrentLight->IsVisible() )
         {
-            const Math::Vect3f& lLightPosition = lCurrentLight->GetPosition();
-			const Math::Vect3f& lCameraPosition = lCurrentCamera->GetPosition();
+          CLensFlare* lLensFlare = lCurrentLight->GetLensFlare();
 
-			// Check with the frustum
+          if( lLensFlare )
+          {
+            const Math::Vect3f& lLightPosition = lCurrentLight->GetPosition();
+            const Math::Vect3f& lCameraPosition = lCurrentCamera->GetPosition();
+
+            // Check with the frustum
             if ( lCurrentCamera->GetFrustum().SphereVisible( D3DXVECTOR3( lLightPosition.x, lLightPosition.y, lLightPosition.z ), lCurrentLight->GetStartRangeAttenuation() ) )
             {
-				if( lCurrentCamera->GetDirection().DotProduct( lLightPosition - lCameraPosition ) > 0 )
-				{
-					if( !PhysXMInstance->RayCastSceneObject( lCurrentCamera->GetPosition(), lLightPosition ) )
-					{
-						Math::Vect2f lLightProj = lGM->ToScreenCoordinates(lCurrentLight->GetPosition());
-						lLensFlare->Render( Math::Vect2u( uint32(lLightProj.x), uint32(lLightProj.y )), Math::Vect2u( lWidth/2, lHeight/2 ), lAspectRatio );
-					}
-				}
+              if( lCurrentCamera->GetDirection().DotProduct( lLightPosition - lCameraPosition ) > 0 )
+              {
+                if( !PhysXMInstance->RayCastSceneObject( lCurrentCamera->GetPosition(), lLightPosition ) )
+                {
+                  Math::Vect2f lLightProj = lGM->ToScreenCoordinates(lCurrentLight->GetPosition());
+                  lLensFlare->Render( Math::Vect2u( uint32(lLightProj.x), uint32(lLightProj.y )), Math::Vect2u( lWidth/2, lHeight/2 ), lAspectRatio );
+                }
+              }
             }
+          }
         }
     }
 }

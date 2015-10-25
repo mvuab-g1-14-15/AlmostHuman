@@ -271,26 +271,26 @@ bool CEffect::SetLights( size_t NumOfLights )
 
   return true;
 }
-bool CEffect::SetLight( size_t i_light )
+
+bool CEffect::SetLight( CLight * aLight )
 {
   ResetLightsHandle();
-  CLight* lLight = LightMInstance->GetLight( i_light );
-
-  if ( lLight )
+  
+  if ( aLight )
   {
-    m_LightsEnabled[0] = ( BOOL )lLight == NULL ? 0 : 1;
-    m_LightsType[0] = static_cast<int>( lLight->GetType() );
-    m_LightsStartRangeAttenuation[0] = lLight->GetStartRangeAttenuation();
-    m_LightsEndRangeAttenuation[0] = lLight->GetEndRangeAttenuation();
-    m_LightsPosition[0] = lLight->GetPosition();
-    Math::CColor l_Color = lLight->GetColor();
+    m_LightsEnabled[0] = ( BOOL )aLight == NULL ? 0 : 1;
+    m_LightsType[0] = static_cast<int>( aLight->GetType() );
+    m_LightsStartRangeAttenuation[0] = aLight->GetStartRangeAttenuation();
+    m_LightsEndRangeAttenuation[0] = aLight->GetEndRangeAttenuation();
+    m_LightsPosition[0] = aLight->GetPosition();
+    Math::CColor l_Color = aLight->GetColor();
     m_LightsColor[0] = Math::Vect3f( l_Color.GetRed(), l_Color.GetGreen(), l_Color.GetBlue() );
-    CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( lLight );
+    CDirectionalLight* l_pDirectionalLight = dynamic_cast<CDirectionalLight*>( aLight );
 
     if ( l_pDirectionalLight )
     {
       m_LightsDirection[0] = l_pDirectionalLight->GetDirection();
-      CSpotLight* lSpotLight = dynamic_cast<CSpotLight*>( lLight );
+      CSpotLight* lSpotLight = dynamic_cast<CSpotLight*>( aLight );
 
       if ( lSpotLight )
       {
@@ -300,7 +300,7 @@ bool CEffect::SetLight( size_t i_light )
     }
 
     //Begin the render of the shadow
-    lLight->BeginRenderEffectManagerShadowMap( this );
+    aLight->BeginRenderEffectManagerShadowMap( this );
   }
 
   return true;
