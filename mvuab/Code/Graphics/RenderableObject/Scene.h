@@ -42,7 +42,9 @@ public:
   const std::string GetActivateRoom();
 
   CRoom* GetCurrentRoom() { return mCurrentRoom; }
+
   std::string GetRoomName() { return mRoomName; }
+  void SetRoomName(const std::string &l_RoomName) { mRoomName = l_RoomName; }
 
 private:
   CRoom* mCurrentRoom;
