@@ -502,7 +502,7 @@
     <cinematic_object_key_frame time="16.6333" pos="-50.7405 -13.6052 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="16.6667" pos="-50.7405 -13.6052 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Door_elevator_sala3" renderable_objects_manager="Door_elevator_sala3" room="sala3">
+ <!--  <cinematic_object resource="Door_elevator_sala3" renderable_objects_manager="Door_elevator_sala3" room="sala3">
     <cinematic_object_key_frame time="0.0" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1004,5 +1004,5 @@
     <cinematic_object_key_frame time="16.6" pos="-48.3367 -9.90752 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="16.6333" pos="-48.3367 -9.8885 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="16.6667" pos="-48.3367 -9.86977 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
-  </cinematic_object>
+  </cinematic_object> -->
 </cinematic>
