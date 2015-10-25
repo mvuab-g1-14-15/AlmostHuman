@@ -81,6 +81,8 @@
 	<render_gui render="true"/>
 	<disable_alpha_blend/>
 	
+	<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Damage.xml"/>
+	
 	<render_developer_info/>
     <end_scene/>
 

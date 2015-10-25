@@ -12,6 +12,7 @@ class CDrawQuadRendererCommand : public CStagedTexturedRendererCommand
 {
 protected:
   Math::CColor m_Color;
+  bool         mSetPlayerLife;
 public:
   CDrawQuadRendererCommand( CXMLTreeNode& atts );
   ~ CDrawQuadRendererCommand();

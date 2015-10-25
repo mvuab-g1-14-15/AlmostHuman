@@ -49,7 +49,8 @@ class CGuiElement
         virtual void                Update                                ();
         virtual void                OnClickedChild                (const std::string& name) = 0;
 
-        virtual void                SetProgress(float) {};
+        virtual void                SetProgress(float) {}
+        virtual float                GetProgress() const { return 0; }
 
         void                                OnLoadValue                        ();
         void                                OnSaveValue                        ();
