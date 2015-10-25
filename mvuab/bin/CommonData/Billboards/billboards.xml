@@ -1,30 +1,30 @@
 <billboards>
-	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true">
+	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true" distance="5">
 		<texture filename="../CommonData/textures/Billboards/target.png" stage_id="0"/>
 	</billboard>
-	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true">
+	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/refill.png" stage_id="0"/>
 	</billboard>
-	<billboard name="fire" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true">
+	<billboard name="fire" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/fire01.dds" stage_id="0"/>
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha01.dds" stage_id="2"/>
 	</billboard>
-	<billboard name="blaster" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true">
+	<billboard name="blaster" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true" distance="20">
 		<texture filename="../CommonData/textures/Billboards/blue_fire.jpg" stage_id="0"/>
 		<texture filename="../CommonData/textures/Billboards/noise01.dds" stage_id="1"/>
 		<texture filename="../CommonData/textures/Billboards/alpha02.png" stage_id="2"/>
 	</billboard>
-	<billboard name="blash" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.3" size="0.2" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
+	<billboard name="blash" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.3" size="0.2" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true" distance="20">
 		<texture filename="../CommonData/textures/Billboards/blash2.jpg" stage_id="0"/>
 	</billboard>
-	<billboard name="LightTarget" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
+	<billboard name="LightTarget" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true" distance="20">
 		<texture filename="../CommonData/textures/Billboards/targetLight.png" stage_id="0"/>
 	</billboard>
-	<billboard name="ammo" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true">
+	<billboard name="ammo" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/ammo.png" stage_id="0"/>
 	</billboard>
-	<billboard name="SpotLight" technique="BillboardAlignedToCameraTechnique" alpha="0.25" size="1" flip_uv_horizontal="false" flip_uv_vertical="false" random_angle="false">
+	<billboard name="SpotLight" technique="BillboardAlignedToCameraTechnique" alpha="0.25" size="1" flip_uv_horizontal="false" flip_uv_vertical="false" random_angle="false" distance="30">
 		<texture filename="../CommonData/textures/Billboards/SpotLight.png" stage_id="0"/>
 	</billboard>
 </billboards>

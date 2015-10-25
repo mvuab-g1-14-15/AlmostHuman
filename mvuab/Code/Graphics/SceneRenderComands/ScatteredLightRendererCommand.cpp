@@ -30,10 +30,10 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
   BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
-    // 92.0f,   -9.0f,  -44.0f
-    // 94.0f,   -9.0f,  -25.3f 
-    // 2095.0f, -65.0f, 167.0f
-    //
+    // 92.0f,   -9.0f,  -44.0f sala1 vent1
+    // 94.0f,   -9.0f,  -25.3f sala1 vent2
+    // 2095.0f, -65.0f, 167.0f sala4
+    // 16.5f,    18.6f,   6.5f pasillo
     //
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
@@ -50,29 +50,28 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(0.0f, 0.0f, 0.0f));
+    l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
 
-    /*CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
+    CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
     Math::Vect3f l_CameraDirection = CameraMInstance->GetCurrentCamera()->GetDirection();
 
-    for(unsigned int i = 0; i < l_PosLights.size(); i++)
-    {
-        l_ActiveLights[i] = l_PosLights[i].Normalize().DotProduct(l_CameraDirection) < 0.5f; // cos(60º)
-        //l_ActiveLights[i] = l_CameraFrustum.SphereIsVisible(l_PosLights[i], 30.0f);
-    }*/
-
-    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetCurrentRoom()->GetName();
+    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetRoomName();
 
     if(l_RoomName == "sala1")
     {
-        l_ActiveLights[0] = TRUE;
-        l_ActiveLights[1] = TRUE;
+        l_ActiveLights[0] = (l_PosLights[0] - Math::Vect3f(94.0f, -9.0f, -44.0f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
+        l_ActiveLights[1] = (l_PosLights[1] - Math::Vect3f(94.0f, -9.0f, -27.0f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
     }
 
     if(l_RoomName == "sala4")
     {
-        l_ActiveLights[3] = TRUE;
+        l_ActiveLights[2] = TRUE;
+    }
+
+    if(l_RoomName == "pasillo")
+    {
+        l_ActiveLights[3] =  (l_PosLights[3] - Math::Vect3f(54.0f, -16.4f, 5.3f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
@@ -85,7 +84,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     m_RenderTarget1.SetAsRenderTarget(0);
 
     GM.DisableZTest(); GM.DisableZWrite();
-    GM.GetDevice()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(50, 50, 50), 1, 0);
+    GM.GetDevice()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(255, 251, 170), 1, 0);
 
     CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
 
@@ -111,10 +110,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     GM.GetWidthAndHeight(l_Width, l_Height);
     RECT l_Rect2 = { 0, 0, l_Width, l_Height };
 
-    /*ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
+    ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
     m_RenderTarget3.SetAsRenderTarget(0);
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
-    m_RenderTarget3.UnsetAsRenderTarget(0);*/
+    m_RenderTarget3.UnsetAsRenderTarget(0);
 
     // Merge Rays Of God and normal scene texture
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("merge_pool_renderable_object_technique")->Apply();
