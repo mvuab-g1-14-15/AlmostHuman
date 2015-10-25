@@ -5,5 +5,7 @@
 	<animation name="hurt" file="hurt.caf"/>
 	<animation name="attack" file="shoot.caf"/>
 	<animation name="walk" file="walk.caf"/>
+	<animation name="giro_der" file="giro_der.caf"/>
+	<animation name="giro_izq" file="giro_izq.caf"/>
 	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>	
 </animated_model>
