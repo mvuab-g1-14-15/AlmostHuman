@@ -68,7 +68,6 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly5")
 	
 	engine:Trace("Finish the load_gameplay()")
-	g_Player:Update()
 	--cinematic_manager:PlayCinematic("cinematica_inicial")
 	--
 	-- if renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1")) == false  then
@@ -83,7 +82,6 @@ function load_gameplay()
 	g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
 	g_bCinematicLoopMain = true
 	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
-	g_Player:Update()
 	g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
 	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
 	scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
@@ -188,7 +186,7 @@ function update_gameplay()
 		-- end	
 		if g_bPressRoom1X then		
 			if action_manager:DoAction("Action") then
-				g_bPressedRoom1X = true				
+				g_bPressedRoom1X = true
 			end	
 		end
 		
