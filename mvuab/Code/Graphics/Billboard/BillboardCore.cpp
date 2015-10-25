@@ -46,7 +46,7 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"      , false );
     mUseTick          = atts.GetAttribute<bool> ( "use_tick"              , false );
     mUseDeltaTime     = atts.GetAttribute<bool> ( "use_delta_time"        , false );
-    mRandomAngle = atts.GetAttribute<bool> ( "random_angle", false );
+    mRandomAngle      = atts.GetAttribute<bool> ( "random_angle", false );
     mTick             = float( (rand() % 100 + 1) / 10);
 
     for( uint32 i = 0, lCount = atts.GetNumChildren(); i<lCount; ++i)
@@ -64,7 +64,6 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, con
 {
   if ( !mInstances.empty() )
   {
-    //if ( mDistance )
     for( uint32 i = 0, lCount = mTextures.size(); i<lCount; ++i)
     {
         mTextures[i].m_Texture->Activate(mTextures[i].mStage);
