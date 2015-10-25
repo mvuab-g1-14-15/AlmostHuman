@@ -9,9 +9,13 @@
 #include "RenderableObject\RenderableObjectTechnique.h"
 
 #include "EngineManagers.h"
+#include "Utils/Defines.h"
+#include "GUIManager.h"
+#include "Window/Windows.h"
 
-CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts ):
-    CStagedTexturedRendererCommand( atts )
+CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts )
+  : CStagedTexturedRendererCommand( atts )
+  , mSetPlayerLife( atts.GetAttribute<bool>( "set_player_life", false ) )
 {
 }
 
@@ -37,6 +41,14 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
     RECT l_Rect = { 0, 0, ( long )width - 1, ( long )height - 1 };
 
     l_EffectTech->GetEffect()->SetLight( 0 );
+
+    if( mSetPlayerLife )
+    {
+      CEffect* lEffect = l_EffectTech->GetEffect();
+     
+      lEffect->SetLife(GUIInstance->GetWindow("HUD.xml")->GetElement("Life")->GetProgress());
+      //LOG_INFO_APPLICATION("Life: %f",  GUIInstance->GetWindow("HUD.xml")->GetElement("Life")->GetProgress());
+    }
 
     if ( l_EffectTech )
     {

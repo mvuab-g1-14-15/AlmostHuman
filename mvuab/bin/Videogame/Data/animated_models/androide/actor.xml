@@ -8,5 +8,7 @@
 	<animation name="death" file="death.caf"/>
 	<animation name="activation" file="activacion.caf"/>
 	<animation name="hurt" file="hurt.caf"/>
+	<animation name="giro" file="giro.caf"/>
+	<animation name="rotation" file="rotation.caf"/>
 	<animation name="idle_to_shoot" file="idle_to_atac.caf"/>
 </animated_model>

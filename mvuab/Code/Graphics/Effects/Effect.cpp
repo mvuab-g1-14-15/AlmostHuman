@@ -56,6 +56,7 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( PercentageTexture1 )
   , CTOR_EFFECT_PARAMETER( PercentageTexture2 )
   , CTOR_EFFECT_PARAMETER( SelfIlumAmount )
+  , CTOR_EFFECT_PARAMETER( Life   )
 {
   ResetLightsHandle();
 }
@@ -103,9 +104,9 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( LightsEndRangeAttenuationParameter)
   RESET_EFFECT_PARAMETER( BonesParameter )
   RESET_EFFECT_PARAMETER( LightProbesParameter )
-
   RESET_EFFECT_PARAMETER( PercentageTexture1 );
   RESET_EFFECT_PARAMETER( PercentageTexture2 );
+  RESET_EFFECT_PARAMETER( Life   );
 
   ResetLightsHandle();
 }
@@ -137,6 +138,7 @@ void CEffect::LinkSemantics()
   LINK_EFFECT_PARAMETER( PercentageTexture1 );
   LINK_EFFECT_PARAMETER( PercentageTexture2 );
   LINK_EFFECT_PARAMETER( SelfIlumAmount );
+  LINK_EFFECT_PARAMETER( Life   );
 
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
@@ -476,4 +478,10 @@ void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const st
 {
     m_Effect->SetBoolArray(m_LightEnabledParameter, &l_ActiveLights[0], MAX_LIGHTS_BY_SHADER);
     m_Effect->SetFloatArray(m_LightsPositionParameter, &l_PosLights[0].x, l_PosLights.size() * 3);
+}
+
+void CEffect::SetLife( float aLife )
+{
+  HRESULT lRes = SET_FLOAT_PARAMETER( Life, aLife );
+  ASSERT( lRes == S_OK, "Error setting life" );
 }

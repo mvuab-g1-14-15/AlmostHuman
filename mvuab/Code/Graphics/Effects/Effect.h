@@ -107,6 +107,7 @@ public:
   void SetAngle( float aAngle );
   void SetDirection( const Math::Vect3f& aDirection );
   void SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights);
+  void SetLife( float aLife );
 
 protected:
   LPD3DXEFFECT m_Effect;
@@ -154,6 +155,7 @@ private: // Members
   DECLARE_EFFECT_PARAMETER( DeltaTime );
   DECLARE_EFFECT_PARAMETER( FlipUVHorizontal );
   DECLARE_EFFECT_PARAMETER( FlipUVVertical   );
+  DECLARE_EFFECT_PARAMETER( Life   );
 
   D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
 

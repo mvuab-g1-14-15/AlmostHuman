@@ -1,0 +1,10 @@
+﻿<scene_renderer_commands>
+	<capture_frame_buffer name="FinalScene">
+		<dynamic_texture stage_id="0" name="FinalSceneTextureFB" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+
+	<set_pool_renderable_objects_technique pool="pool_damage"/>
+	<render_draw_quad active="true" name="DrawFinalDamage" set_player_life="true">
+		<texture stage_id="0" name="FinalSceneTextureFB"/>
+	</render_draw_quad>
+</scene_renderer_commands>

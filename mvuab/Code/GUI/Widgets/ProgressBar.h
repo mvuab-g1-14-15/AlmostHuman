@@ -44,7 +44,7 @@ class CProgressBar: public CGuiElement
         void                    SetFont                                    (uint32 fontID = 0,
                 const Math::CColor& textColor = Math::colBLACK);
         void                    SetProgress                            (float progress);
-        float                    GetProgress                            () const
+        virtual float                    GetProgress                            () const
         {
             return m_fProgress;
         }
