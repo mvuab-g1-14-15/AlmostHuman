@@ -40,6 +40,7 @@ class CBillboardCore : public CName
         bool                mUseTick;
         float               mTick;
         float               mAngle;
+        float               mDistance;
         bool                mRandomAngle;
         bool                mUseDeltaTime;
         bool                mFlipUVHorizontal;
