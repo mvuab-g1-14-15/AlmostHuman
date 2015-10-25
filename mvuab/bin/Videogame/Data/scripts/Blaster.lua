@@ -19,8 +19,6 @@ function CBlaster:__init()
 	
 	self.IsShooting = false
 	FinishShooting = false
-	countdowntimer_manager:AddTimer("BlasterFinish", 0.2, false)
-	countdowntimer_manager:AddTimer("BlasterChargedFinish", 0.5, false)
 	
 	self.Blash = CBlash( "Player" )
 	self.Ammunition = {}
@@ -104,7 +102,10 @@ function CBlaster:Update( aPosition )
 				self.IsShooting = true
 				self.FinishShooting = false
 				if self.TimePressed == 0 then
-					g_Player:SetAnimation("charge_loop")
+					g_Player:SetAnimation("idle_to_shoot", 0.5, 0.5)
+				end
+				if self.TimePressed > 0.5 then
+					g_Player:SetAnimation("carga_blaster", 0.5, 0.5)
 				end
 				if self.TimePressed < self.MaxTimePressed then
 					--Implementar shoot acumulado
@@ -114,7 +115,6 @@ function CBlaster:Update( aPosition )
 				end
 				if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
 					sound_manager:PlayEvent( "Play_Acumulator_Long_Shoot_Event", "Logan" )
-					g_Player:SetAnimation("charge_loop")
 					self.IsAcumulatorSound = true
 				end
 			end
@@ -126,32 +126,24 @@ function CBlaster:Update( aPosition )
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
 					self:Shoot( aPosition )
+					g_Player:SetAnimation("shoot", 0.0, 0.0)
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
 					self:ShootCharged( aPosition )
+					g_Player:SetAnimation("shoot_blaster", 0.0, 0.0)
 				end
-				g_Player:SetAnimation("shoot")
 			else
 			--SONIDO DE PEDO AQUI
 			end
 			self.TimePressed = 0.0
 			self.IsAcumulatorSound = false
-			self.FinishShooting = true
-			countdowntimer_manager:SetActive("BlasterFinish", true)
+			self.IsShooting = false
 		end
 		
 		-- Miramos que nunca tengamos un energy negativo, para que la barra de energia no haga cosas raras
 		if self.Energy < 1 then
 			self.Energy = 0;
-		end
-		
-		if self.FinishShooting then
-			if countdowntimer_manager:isTimerFinish("BlasterFinish") then
-				self.IsShooting = false
-				self.FinishShooting = false
-				countdowntimer_manager:Reset("BlasterFinish", false)
-			end
 		end
 	end
 	

@@ -20,7 +20,7 @@ function CPlayer:__init()
 	self.InsideBarrel = false
 	self.BarrelName = ""
 	
-	self.MeshOffset = Vect3f(0.5, 0.0, 0.0)
+	self.MeshOffset = Vect3f(0.4, -0.1, 0.0)
 	
 	self.RenderableObject = renderable_objects_manager_characters:GetResource("Player")
 	if self.RenderableObject == nil then
@@ -30,26 +30,26 @@ function CPlayer:__init()
 	end
 
 	local l_MeshPosition = self.PlayerController:GetPosition()
-	l_MeshPosition.y = l_MeshPosition.y - self.PlayerController:GetHeight() * 2.0
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi);
+	--self.RenderableObject:SetScale( Vect3f(2.0) )
 	self.RenderableObject:MakeTransform();
 
 	self.Life = 100.0
 	self.Room = "sala1"
 	
 	--Luz de logan para iluminar un poco al player
-	self.Light = light_manager:GetResource( "PlayerLight" );
-	if self.Light == nil then
-		self.Light = light_manager:CreateLight("omni", "core")
-		self.Light:SetName("PlayerLight" )
-		self.Light:SetIntensity( 1 )
-		self.Light:SetEndRangeAttenuation( 1.0 )
-		self.Light:SetColor( CColor(0.5, 0.5, 0.5, 1.0 ) )
-		self.Light:SetPosition( Vect3f(0, 0, 0)	)
-		self.Light:SetRenderShadows( false )
-	end
-	light_manager:AddResource(self.Light:GetName(), self.Light)
+	--self.Light = light_manager:GetResource( "PlayerLight" );
+	--if self.Light == nil then
+	--	self.Light = light_manager:CreateLight("omni", "core")
+	--	self.Light:SetName("PlayerLight" )
+	--	self.Light:SetIntensity( 1 )
+	--	self.Light:SetEndRangeAttenuation( 1.0 )
+	--	self.Light:SetColor( CColor(0.5, 0.5, 0.5, 1.0 ) )
+	--	self.Light:SetPosition( Vect3f(0, 0, 0)	)
+	--	self.Light:SetRenderShadows( false )
+	--end
+	--light_manager:AddResource(self.Light:GetName(), self.Light)
 	
 	self.Checkpoint = {}
 	self.Checkpoint.room = "sala1"
@@ -63,7 +63,7 @@ function CPlayer:Update()
 	
 	local l_MeshOffset = self:GetMeshOffset()
 	local l_MeshPosition = self.PlayerController:GetPosition()
-	self.Light:SetPosition( l_MeshPosition );
+	--self.Light:SetPosition( l_MeshPosition );
 	
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
@@ -76,15 +76,7 @@ function CPlayer:Update()
 	self.Blaster:Update( lArmPosition )
 	
 	if not self.Blaster:GetIsShooting() then
-		if self.PlayerController:GetIsMoving() then
-			if self.PlayerController:GetIsRunning() then
-				self:SetAnimation("run")
-			else
-				self:SetAnimation("walk")
-			end
-		else
-			self:SetAnimation("idle")
-		end
+		self:SetAnimation("idle", 0.0, 0.0)
 	end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
@@ -126,12 +118,16 @@ function CPlayer:SetRoom( aName )
 	self.Room = aName
 end
 
-function CPlayer:SetAnimation( aName )
-	if aName == "shoot" or aName == "charge_loop" or aName == "atac_sigil" then
-		self.RenderableObject:ChangeAnimationAction(aName, 0.5, 0)
+function CPlayer:SetAnimation( aName, aIn, aOut )
+	if aName == "shoot" or aName == "idle_to_shoot" or aName == "atac_sigil" or aName == "shoot_blaster" or aName == "carga_blaster" then
+		self.RenderableObject:ChangeAnimationAction(aName, aIn, aOut)
 	else
-		self.RenderableObject:ChangeAnimation(aName, 0.5, 0)
+		self.RenderableObject:ChangeAnimation(aName, aIn, aOut)
 	end
+end
+
+function CPlayer:ClearAnimation( aName )
+	self.RenderableObject:RemoveAction(aName)
 end
 
 function CPlayer:GetMeshOffset()

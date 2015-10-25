@@ -81,9 +81,8 @@ function load_gameplay()
 	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
 	g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
 	g_bCinematicLoopMain = true
-	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
-	g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
-	g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
+	g_Player:SetAnimation("cinematica_inicial_sala1_pos00", 0.2, 0.0)
+	g_Player:SetAnimation("cinematica_inicial_sala1_pos00", 0.2, 0.0)
 	scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
 end
 

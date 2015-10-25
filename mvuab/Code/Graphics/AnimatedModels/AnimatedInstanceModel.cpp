@@ -323,6 +323,7 @@ void CAnimatedInstanceModel::ChangeAnimationAction( const std::string& Animation
 void CAnimatedInstanceModel::ExecuteAction( uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget,
     bool AutoLock )
 {
+  m_CalModel->getMixer()->removeAction( Id );
   m_CalModel->getMixer()->executeAction( Id, DelayIn, DelayOut, WeightTarget, AutoLock );
 }
 
