@@ -302,7 +302,7 @@ function CEnemyManager:GetNumEnemy( aRoom )
 	lCount = 0
 	lRoom = self.Enemy[aRoom]
 	for _,lEnemy in pairs (lRoom) do
-		if lEnemy ~= nil then
+		if lEnemy:GetLife() > 0.0 then
 			lCount = lCount + 1
 		end
 	end
