@@ -60,6 +60,7 @@ float3      g_Color                                                 : Color;
 float3      g_Direction                                             : Direction;
 
 float		g_SelfIlumAmount										: SelfIlumAmount;
+float		g_Life												    : Life;
 
 //
 // Lights data
