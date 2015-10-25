@@ -8,6 +8,7 @@ class CBillboardInstance;
 class CDirectionalLight : public CLight
 {
 public:
+  CDirectionalLight();
   CDirectionalLight( const CXMLTreeNode& node );
   void SetDirection( const Math::Vect3f& Direction );
   Math::Vect3f GetDirection() const;

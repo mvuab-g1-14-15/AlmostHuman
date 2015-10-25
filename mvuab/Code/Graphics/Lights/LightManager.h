@@ -24,13 +24,20 @@ class CLightManager : public CTemplatedVectorMapManager<CLight>, public CManager
         void    Render();
         void    GenerateShadowMap( CGraphicsManager* GM );
         bool    ReLoad();
+        void    SetAmbientLight(const Math::Vect3f& );
         const Math::Vect3f& GetAmbientLight() const;
         Math::Vect3f& GetAmbientLight();
         void    SetActive( const std::string& aName, bool aActive );
+        CLight* CreateLight( const std::string& aType, const std::string& aRoom );
     private:
         Math::Vect3f mAmbientLightColor;
         CTemplatedVectorMapManager<CLensFlare> mLensFlares;
 };
+
+inline void CLightManager::SetAmbientLight(const Math::Vect3f& aAmbientLight )
+{
+  mAmbientLightColor = aAmbientLight;
+}
 
 //-----------------------------------------------------------------------------
 inline const Math::Vect3f& CLightManager::GetAmbientLight() const

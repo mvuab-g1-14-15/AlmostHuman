@@ -140,3 +140,23 @@ void CLightManager::SetActive( const std::string& aName, bool aActive )
       (*itb)->ChangeVisibility( aActive );
   }
 }
+
+CLight* CLightManager::CreateLight( const std::string& aType, const std::string& aRoom )
+{
+  CLight* lLight = NULL;
+  if( aType == "omni" )
+  {
+    lLight = new COmniLight();
+  }
+  else if ( aType == "spot" )
+  {
+    lLight = new CSpotLight();
+  }
+  else if ( aType == "directional" )
+  {
+    lLight = new CDirectionalLight();
+  }
+
+  lLight->SetRoomName( aRoom );
+  return lLight;
+}

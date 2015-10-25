@@ -42,7 +42,7 @@ function CPlayer:__init()
 	--Luz de logan para iluminar un poco al player
 	self.Light = light_manager:GetResource( "PlayerLight" );
 	if self.Light == nil then
-		self.Light = CreateOmniLight()
+		self.Light = light_manager:CreateLight("omni", "core")
 		self.Light:SetName("PlayerLight" )
 		self.Light:SetIntensity( 1 )
 		self.Light:SetEndRangeAttenuation( 1.0 )

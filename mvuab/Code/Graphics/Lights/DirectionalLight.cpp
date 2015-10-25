@@ -20,6 +20,12 @@ typedef struct CUSTOMVERTEXLIGHT
     }
 } CUSTOMVERTEXLIGHT;
 
+CDirectionalLight::CDirectionalLight()
+  : CLight()
+  , mLookAt(Math::Vect3f( 0, 0, 0 ))
+{
+}
+
 CDirectionalLight::CDirectionalLight( const CXMLTreeNode& node )
     : CLight( node )
     , mLookAt( node.GetAttribute<Math::Vect3f>( "look_at", Math::Vect3f( 0, 0, 0 ) ) )

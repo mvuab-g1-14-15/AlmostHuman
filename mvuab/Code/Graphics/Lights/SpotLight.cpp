@@ -23,6 +23,13 @@ typedef struct CUSTOMVERTEXLIGHT
     }
 } CUSTOMVERTEXLIGHT;
 
+CSpotLight::CSpotLight()
+  : CDirectionalLight()
+  , m_Angle(0)
+  , m_FallOff(0)
+{
+}
+
 CSpotLight::CSpotLight( CXMLTreeNode node )
     : CDirectionalLight( node )
     , m_Angle( Math::Utils::Deg2Rad( node.GetAttribute<float>( "angle", 0 ) ))

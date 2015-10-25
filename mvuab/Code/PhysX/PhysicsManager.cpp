@@ -927,12 +927,11 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot( const Math::Vect3f _
 
 bool CPhysicsManager::RayCastSceneObject( const Math::Vect3f& aOrigin, const Math::Vect3f& aTarget )
 {
-	ASSERT( m_pScene != NULL , "NULL SCENE" );
-	NxRay ray;
-	PhysicUtils::Convert<Math::Vect3f, NxVec3>( aOrigin, ray.orig );
-	PhysicUtils::Convert<Math::Vect3f, NxVec3>( ( aTarget - aOrigin ), ray.dir );
-	NxRaycastHit hit;
-	return ( m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit ) != NULL );
+  const Math::Vect3f& lDirection = aTarget - aOrigin;
+  NxRay ray(NxVec3( aOrigin.x, aOrigin.y, aOrigin.z ), NxVec3( lDirection.x, lDirection.y, lDirection.z ) );
+  NxRaycastHit  hit;
+  NxShape*      closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit );
+  return ( closestShape != NULL);
 }
 
 std::string CPhysicsManager::RaycastClosestActorName( const Math::Vect3f oriRay, const Math::Vect3f& dirRay,
