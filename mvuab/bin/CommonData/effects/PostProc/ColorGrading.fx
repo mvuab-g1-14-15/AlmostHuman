@@ -13,7 +13,7 @@ float g_MonochromeColorGrading = 0.0;
 float g_BrownSepiaColorGrading = 0.1;
 float g_GreenSepiaColorGrading = 0.3;
 float g_BlueSepiaColorGrading = 0.3;
-float g_ContrastColorGrading = 1.0;
+float g_ContrastColorGrading = 0.5;
 float g_BrightnessColorGrading = 0.0;
 float g_ColorColorGrading = 1.0;   
 // Modificar ROGER

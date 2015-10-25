@@ -39,7 +39,7 @@ function CStealthAttack:Update()
 			--engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
 				enemy:AddDamage(enemy:GetLife())
-				g_Player:SetAnimation("atac_sigil")
+				g_Player:SetAnimation("atac_sigil", 0.0, 0.5)
 			end
 		end
 	else
