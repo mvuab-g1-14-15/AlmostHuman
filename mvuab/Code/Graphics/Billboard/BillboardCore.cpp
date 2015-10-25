@@ -22,6 +22,7 @@ CBillboardCore::CBillboardCore()
     , mFlipUVHorizontal( false )
     , mFlipUVVertical( false )
     , mRandomAngle( false )
+    , mDistance( 100 )
     , mAngle( 0.1f )
 {
 }
@@ -40,6 +41,7 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     mSize             = atts.GetAttribute<float>( "size"                  , 1.0f  );
     mAngle            = atts.GetAttribute<float>( "angle"                 , 0.1f  );
     mAlpha            = atts.GetAttribute<float>( "alpha"                 , 1.0f  );
+    mDistance         = atts.GetAttribute<float>( "distance"                 , 100  );
     mFlipUVHorizontal = atts.GetAttribute<bool> ( "flip_uv_horizontal"    , false );
     mFlipUVVertical   = atts.GetAttribute<bool> ( "flip_uv_vertical"      , false );
     mUseTick          = atts.GetAttribute<bool> ( "use_tick"              , false );
@@ -58,10 +60,11 @@ bool CBillboardCore::Init( const CXMLTreeNode& atts )
     return ( mTechnique != 0 );
 }
 
-void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
+void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, const Math::Vect3f& aCameraPosition )
 {
   if ( !mInstances.empty() )
   {
+    //if ( mDistance )
     for( uint32 i = 0, lCount = mTextures.size(); i<lCount; ++i)
     {
         mTextures[i].m_Texture->Activate(mTextures[i].mStage);
@@ -71,16 +74,19 @@ void CBillboardCore::Render( CRenderableVertexs* aRV, CGraphicsManager* aGM )
 
     for( uint32 i = 0, lCount = mInstances.size(); i < lCount; ++i )
     {
-      CEffect* lEffect = mTechnique->GetEffect();
+      if( mInstances[i]->GetPosition().Distance( aCameraPosition ) < mDistance )
+      {
+        CEffect* lEffect = mTechnique->GetEffect();
 
-      lEffect->SetSize( mSize );
-      lEffect->SetAlpha( mAlpha );
-      lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
-      
-      if( mUseTick || mUseDeltaTime )
+        lEffect->SetSize( mSize );
+        lEffect->SetAlpha( mAlpha );
+        lEffect->SetFlipUVs( mFlipUVHorizontal, mFlipUVVertical );
+
+        if( mUseTick || mUseDeltaTime )
           lEffect->SetDeltaTime( mTick );
 
-      mInstances[i]->Render(aRV, aGM, mTechnique );
+        mInstances[i]->Render(aRV, aGM, mTechnique );
+      }
     }
   }
 }

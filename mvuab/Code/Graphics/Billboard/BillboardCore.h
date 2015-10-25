@@ -21,7 +21,7 @@ class CBillboardCore : public CName
         bool Init(const CXMLTreeNode& atts);
         void AddInstance( CBillboardInstance * aInstance );
 
-        void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM );
+        void Render( CRenderableVertexs* aRV, CGraphicsManager* aGM, const Math::Vect3f& aCameraPosition );
         void Update();
         void Flush();
     private:
@@ -40,6 +40,7 @@ class CBillboardCore : public CName
         bool                mUseTick;
         float               mTick;
         float               mAngle;
+        float               mDistance;
         bool                mRandomAngle;
         bool                mUseDeltaTime;
         bool                mFlipUVHorizontal;
