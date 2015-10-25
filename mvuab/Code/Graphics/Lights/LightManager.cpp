@@ -129,3 +129,14 @@ bool CLightManager::ReLoad()
     Destroy();
     return Load( mConfigPath );
 }
+
+void CLightManager::SetActive( const std::string& aName, bool aActive )
+{
+  TVectorResources::iterator itb = m_ResourcesVector.begin(), ite = m_ResourcesVector.end();
+
+  for ( ; itb != ite; ++itb )
+  {
+    if( (*itb)->GetRoom() == aName )
+      (*itb)->ChangeVisibility( aActive );
+  }
+}

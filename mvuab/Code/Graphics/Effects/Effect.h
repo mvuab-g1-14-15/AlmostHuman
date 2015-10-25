@@ -19,7 +19,7 @@ public:
 
   void LinkSemantics();
   bool SetLights( size_t NumOfLights );
-  bool SetLight( size_t i_light );
+  bool SetLight( CLight * aLight );
 
   bool SetViewToLightMatrix( const Math::Mat44f& Matrix );
 

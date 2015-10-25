@@ -2,10 +2,18 @@ class "CEnemyManager"
 
 function CEnemyManager:__init()
 	self.Enemy = {}
+	self.Enemy.sala1 = {}
 	self.Enemy.sala2 = {}
 	self.Enemy.pasillo = {}
 	self.Enemy.sala3 = {}
 	self.Enemy.sala4 = {}
+	
+	self.GarbageMesh = {}
+	self.GarbageMesh.sala1 = {}
+	self.GarbageMesh.sala2 = {}
+	self.GarbageMesh.pasillo = {}
+	self.GarbageMesh.sala3 = {}
+	self.GarbageMesh.sala4 = {}
 	
 	self.Shoots = {}
 	self.MaxShoots = 50
@@ -235,9 +243,17 @@ function CEnemyManager:CreateEnemiesSala3()
 end
 
 function CEnemyManager:Reinit( aRoom )
-	for i in pairs (self.Enemy[aRoom]) do
-		self.Enemy[aRoom][i]:SetOnDead(false)
-		self.Enemy[aRoom][i]:Destroy()
+	for _,lEnemy in pairs (self.Enemy[aRoom]) do
+		lEnemy:SetOnDead(false)
+		lEnemy:Destroy()
+	end
+	self.Enemy[aRoom] = {}
+	
+	for lName, lBool in pairs(self.GarbageMesh[aRoom]) do
+		if lBool then
+			renderable_objects_manager_characters:RemoveResource(lName)
+		end
+		self.GarbageMesh[aRoom][lName] = false
 	end
 	
 	self.Alarm[aRoom] = false
@@ -255,6 +271,10 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
 	end
+end
+
+function CEnemyManager:AddGarbageMesh(aRoom, aName)
+	self.GarbageMesh[aRoom][aName] = true
 end
 
 function CEnemyManager:Update()

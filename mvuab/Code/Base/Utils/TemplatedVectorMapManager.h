@@ -66,10 +66,21 @@ template <class T> class CTemplatedVectorMapManager
             return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
         }
 
+        virtual T* GetConstResourceById(size_t Id) const
+        {
+          return (m_ResourcesVector.size() > Id) ? m_ResourcesVector[Id] : 0;
+        }
+
         virtual T* GetResource(const std::string& Name)
         {
             TMapResources::iterator it = m_ResourcesMap.find(Name );
             return (it != m_ResourcesMap.end()) ? it->second.m_Value : 0;
+        }
+
+        virtual T* GetConstResource(const std::string& Name) const
+        {
+          TMapResources::const_iterator it = m_ResourcesMap.find(Name );
+          return (it != m_ResourcesMap.end()) ? it->second.m_Value : 0;
         }
 
         virtual bool AddResource( const std::string& Name, T* Resource )
@@ -117,7 +128,7 @@ template <class T> class CTemplatedVectorMapManager
             m_ResourcesMap.clear();
         }
 
-        const uint32 GetResourcesCount()
+        const uint32 GetResourcesCount() const
         {
             ASSERT( m_ResourcesMap.size() == m_ResourcesVector.size(), "map size != vector size" );
             return m_ResourcesVector.size();

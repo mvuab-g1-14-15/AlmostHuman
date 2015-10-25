@@ -53,6 +53,7 @@ class CLight : public CObject3D, public CName
         const Mat44f&       GetViewShadowMap() const;
         const Mat44f&       GetProjectionShadowMap() const;
         void                BeginRenderEffectManagerShadowMap( CEffect *Effect );
+        const std::string&  GetRoom() const;
 
         void SetRenderShadows( bool aBool )
         {

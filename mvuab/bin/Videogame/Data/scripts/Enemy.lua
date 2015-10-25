@@ -126,7 +126,7 @@ function CEnemy:Destroy()
 	end
 		
 	physic_manager:ReleasePhysicController(self.CharacterController)
-	renderable_objects_manager_characters:RemoveResource(self.Name)
+	enemy_manager:AddGarbageMesh(self.Room, self.Name)
 end
 
 function CEnemy:Update()

@@ -42,7 +42,7 @@ end
 function CBarrel:ExitBarrel( aPos )
 	--engine:Trace("He pasado por aqui: "..aPos:ToString())
 	final_pos = aPos;
-	final_pos.y = final_pos.y - self.Height * 0.5
+	final_pos.y = final_pos.y + self.Height * 0.3
 	self.Pos = final_pos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )

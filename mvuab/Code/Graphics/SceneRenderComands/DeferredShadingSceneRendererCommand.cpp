@@ -30,28 +30,31 @@ CDeferredShadingSceneRendererCommand::~CDeferredShadingSceneRendererCommand()
 void CDeferredShadingSceneRendererCommand::Execute( CGraphicsManager& GM )
 {
   BROFILER_CATEGORY( "CDeferredShadingSceneRendererCommand::Execute", Profiler::Color::Orchid )
-    ActivateTextures();
-    SetLightsData( GM );
+  ActivateTextures();
+  SetLightsData( GM );
 }
 
 
 void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
 {
-    CLightManager* l_LightManager = LightMInstance;
+    CLightManager* lLM = LightMInstance;
     uint32 l_Width, l_Height;
     GM.GetWidthAndHeight( l_Width, l_Height );
     RECT l_Rect = { 0, 0, ( long )l_Width, ( long )l_Height};
 
     if ( m_RenderableObjectTechnique != NULL )
     {
-        CEffectTechnique* l_ET = m_RenderableObjectTechnique->GetEffectTechnique();
-        size_t n_lights = l_LightManager->GetResourcesVector().size();
+      CEffectTechnique* l_ET = m_RenderableObjectTechnique->GetEffectTechnique();
+      uint32 n_lights = lLM->GetLightCount();
+      for ( uint32 i = 0, lCount = lLM->GetLightCount(); i < lCount; ++i )
+      {
+        CLight* lLight = lLM->GetLight( i );
 
-        for ( size_t i = 0; i < n_lights; ++i )
+        if( lLight && lLight->IsVisible() )
         {
-            l_ET->GetEffect()->SetLight( i );
-            GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1,
-                    1 );
+          l_ET->GetEffect()->SetLight( lLight );
+          GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1, 1 );
         }
+      }
     }
 }
