@@ -29,18 +29,20 @@ CLightProbe::CLightProbe( const CXMLTreeNode& aXMLNode )
 					CLightProbeVertex* v = new CLightProbeVertex(lPos, lUV);
 
 					std::string lKey( "" );
-					if (lDir.x == 1.0f)
-						lKey = "x";
-					if (lDir.x == -1.0f)
-						lKey = "-x";
-					if (lDir.y == 1.0f)
-						lKey = "y";
-					if (lDir.y == -1.0f)
-						lKey = "-y";
-					if (lDir.z == 1.0f)
-						lKey = "z";
-					if (lDir.z == -1.0f)
-						lKey = "-z";
+                    if (lDir.x > 0.9f)
+                        lKey = "x";
+                    if (lDir.x < -0.9f)
+                        lKey = "-x";
+                    if (lDir.y > 0.9f)
+                        lKey = "y";
+                    if (lDir.y < -0.9f)
+                        lKey = "-y";
+                    if (lDir.z > 0.9f)
+                        lKey = "z";
+                    if (lDir.z < -0.9f)
+                        lKey = "-z";
+
+                    ASSERT(lKey != "", "LightProbe incorrect.")
 
 					mVertexs[lKey] = v;
 				}
