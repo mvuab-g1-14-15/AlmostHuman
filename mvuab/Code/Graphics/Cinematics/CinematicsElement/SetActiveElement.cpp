@@ -19,7 +19,7 @@ CSetActiveElement::CSetActiveElement( CXMLTreeNode& atts ) : CCinematicsElement(
         {
 			CXMLTreeNode lSubElement = element(i);
 			const std::string& lName = lSubElement.GetAttribute<std::string>("name", "" );
-			lRenderableObject = SceneInstance->GetResource(lSubElement.GetAttribute<std::string>("room", ""))->GetLayer("solid")->GetResource(lName);            
+			lRenderableObject = SceneInstance->GetResource(lSubElement.GetAttribute<std::string>("room", ""))->GetLayer(lSubElement.GetAttribute<std::string>("layer", "solid"))->GetResource(lName);            
 			m_vRenderableObject.push_back(lRenderableObject);
         }
     }

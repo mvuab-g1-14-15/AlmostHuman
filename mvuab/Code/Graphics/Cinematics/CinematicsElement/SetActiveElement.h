@@ -18,6 +18,7 @@ class CSetActiveElement : public CCinematicsElement
 	private:
 		    std::vector<CRenderableObject*> m_vRenderableObject;
         bool       m_bActive;
+
 };
 
 #endif //_SET_ACTIVE_ELEMENT_
