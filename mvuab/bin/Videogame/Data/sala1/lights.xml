@@ -1,6 +1,6 @@
 ﻿<lights>
   <ambient_light color="1 1 1" />
-  <spot_light name="Ventilador01" room="sala1" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="1.0 0.0 0.0" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="0.5" enabled="true" >
+  <spot_light name="Ventilador01" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="1.0 0.0 0.0" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="0.5" enabled="true" room="sala1">
 		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala1">
 			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
 			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
