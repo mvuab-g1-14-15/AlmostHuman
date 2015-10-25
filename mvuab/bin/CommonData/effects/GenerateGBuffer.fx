@@ -146,8 +146,8 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	
 	l_AmbientColor *= l_DiffuseColor;
 	
-	// OUT.Ambient=float4( l_AmbientColor, 0 );
-	OUT.Ambient = float4(l_DiffuseColor.xyz, g_SpecularFactor);
+	OUT.Ambient=float4( l_AmbientColor, 0 );
+	//OUT.Ambient = float4(l_DiffuseColor.xyz, g_SpecularFactor);
 #else
 	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 #endif
