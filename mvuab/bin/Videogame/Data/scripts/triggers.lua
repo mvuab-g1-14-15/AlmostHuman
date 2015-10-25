@@ -24,6 +24,7 @@ g_bC42 = false
 g_bDistanceC4 = false
 g_sTextC4Press = ""
 g_bBombaActivada = false
+enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
 	physicUserData = process:GetNewPUD("Box6")
@@ -198,7 +199,7 @@ function StayRejilla(text, other_shape)
 end
 
 function StayText(room, message, other_shape)
-	local enemigosVivos = enemy_manager:GetNumEnemy(room)
+	enemigosVivos = enemy_manager:GetNumEnemy(room)
 	engine:Trace("Sala  "..room)
 	engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
 	if room == "sala2" then

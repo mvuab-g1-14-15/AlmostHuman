@@ -2,6 +2,7 @@ class "CEnemyManager"
 
 function CEnemyManager:__init()
 	self.Enemy = {}
+	self.Enemy.sala1 = {}
 	self.Enemy.sala2 = {}
 	self.Enemy.pasillo = {}
 	self.Enemy.sala3 = {}
