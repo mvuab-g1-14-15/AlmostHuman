@@ -26,6 +26,7 @@ class CLightManager : public CTemplatedVectorMapManager<CLight>, public CManager
         bool    ReLoad();
         const Math::Vect3f& GetAmbientLight() const;
         Math::Vect3f& GetAmbientLight();
+        void    SetActive( const std::string& aName, bool aActive );
     private:
         Math::Vect3f mAmbientLightColor;
         CTemplatedVectorMapManager<CLensFlare> mLensFlares;

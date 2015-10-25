@@ -46,7 +46,7 @@ CLight::CLight( const CXMLTreeNode& node )
     , mLensFlare( 0 )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
-    , m_RoomName()
+    , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
     , mBillboard(0)
 {
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
@@ -232,4 +232,9 @@ void CLight::BeginRenderEffectManagerShadowMap( CEffect *Effect )
 
         Effect->SetShadowMapParameters( lUseMaskShadowMap, lUseStaticShadowMap, lUseDynamicShadowMap );
     }
+}
+
+const std::string& CLight::GetRoom() const
+{
+  return m_RoomName;
 }
