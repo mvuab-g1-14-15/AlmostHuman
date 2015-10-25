@@ -440,7 +440,9 @@ void registerGraphics( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CScene, UnloadRoom )
   LUA_DECLARE_METHOD( CScene, DesactivateRoom )
   LUA_DECLARE_METHOD( CScene, GetActivateRoom )
-  LUA_DECLARE_METHOD( CScene, LoadAllRoom)
+  LUA_DECLARE_METHOD( CScene, LoadAllRoom )
+  LUA_DECLARE_METHOD( CScene, GetRoomName )
+  LUA_DECLARE_METHOD( CScene, SetRoomName )
   LUA_END_DECLARATION
 
 }
