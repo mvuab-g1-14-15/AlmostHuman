@@ -52,6 +52,8 @@ function CBarrel:ExitBarrel( aPos )
 	
 	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius, self.Height, self.Radius), false, false, true, "", "", "HiddenBarrelExit('"..self.Name.."')")
 	self.Trigger:SetActive(true)
+	
+	sound_manager:PlayEvent( "Play_In_Out_Barrel", "Logan" )
 end
 
 function CBarrel:SetStateInside()
@@ -64,6 +66,8 @@ function CBarrel:SetStateInside()
 	g_bInBarrel = false
 	
 	self.Trigger:SetActive(false)
+	
+	sound_manager:PlayEvent( "Play_In_Out_Barrel", "Logan" )
 end
 
 function CBarrel:SetIsSafe( aSafe )

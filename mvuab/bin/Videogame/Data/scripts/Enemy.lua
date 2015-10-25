@@ -15,6 +15,7 @@ function CEnemy:__init( aInfo )
 	
 	self.Speed = aInfo.speed
 	self.TimeToRot = 1.0
+	self.InitTimeToRot = self.TimeToRot
 	
 	self.Lerp = CLerpAnimator1D()
 	self.LerpInited = false
@@ -84,8 +85,8 @@ function CEnemy:__init( aInfo )
 	self.ShootSpeed = aInfo.shoot_speed
 	
 	self.TimeToShoot = aInfo.time_to_shoot
-	self.TimeBurst = 0.3
-	self.NumShootBurst = 3
+	self.TimeBurst = aInfo.time_burst
+	self.NumShootBurst = aInfo.num_shoot_burst
 	self.ActualShootBurst = 0
 	self.CountTimeShoot = 0.0
 	
@@ -110,7 +111,8 @@ function CEnemy:__init( aInfo )
 	
 	self.Alarm = aInfo.alarm
 	if self.Alarm then
-		self.AlarmTimer = countdowntimer_manager:AddTimer(self.Name.."AlarmTimer", aInfo.alarm_time, false)
+		self.AlarmTimerName = self.Name.."AlarmTimer"
+		self.AlarmTime = aInfo.alarm_time
 	end
 	
 	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
@@ -141,14 +143,19 @@ function CEnemy:Update()
 	
 	if IsPlayerInSight then
 		if self.Alarm then
-			countdowntimer_manager:SetActive(self.Name.."AlarmTimer", true)
-			if countdowntimer_manager:isTimerFinish(self.Name.."AlarmTimer") then
+			if not countdowntimer_manager:ExistTimer(self.AlarmTimerName) then
+				countdowntimer_manager:AddTimer(self.AlarmTimerName, self.AlarmTime, false)
+			else
+				countdowntimer_manager:SetActive(self.AlarmTimerName, true)
+			end
+			if countdowntimer_manager:isTimerFinish(self.AlarmTimerName) then
 				enemy_manager:SetAlarm(self.Room)
-				countdowntimer_manager:Reset(self.Name.."AlarmTimer", false)
+				countdowntimer_manager:Reset(self.AlarmTimerName, false)
 			end
 		end
 		
 		self.Delta = self.InitDelta * 2.0
+		self.TimeToRot = self.InitTimeToRot / 2.0
 		
 		local lDist = PlayerDistance(self)
 		if lDist < self.ChaseDistance then
@@ -202,6 +209,7 @@ function CEnemy:Update()
 				self.Suspected = false
 				self.TargetPos = self.InitPosition
 				self.Delta = self.InitDelta
+				self.TimeToRot = self.InitTimeToRot
 				if self.IsPatrol then
 					self.ActualWaypoint = 1
 				end

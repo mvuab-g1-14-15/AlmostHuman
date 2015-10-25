@@ -34,8 +34,7 @@ function CPlayer:__init()
 	self.RenderableObject:SetPosition(l_MeshPosition);
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + 4*g_HalfPi);
 	self.RenderableObject:MakeTransform();
-	
-	self.Animation = "idle"
+
 	self.Life = 100.0
 	self.Room = "sala1"
 	
@@ -114,12 +113,6 @@ function CPlayer:Update()
 		self.Blaster:SetEnergy(self.Checkpoint.energy)
 		enemy_manager:Reinit(self.Checkpoint.room)
 	end
-	
-	if self.Animation == "shoot" or self.Animation == "charge_loop" then
-		self.RenderableObject:ChangeAnimationAction(self.Animation, 0.5, 0)
-	else
-		self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
-	end
 end
 
 function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy)
@@ -134,7 +127,11 @@ function CPlayer:SetRoom( aName )
 end
 
 function CPlayer:SetAnimation( aName )
-	self.Animation = aName
+	if aName == "shoot" or aName == "charge_loop" or aName == "atac_sigil" then
+		self.RenderableObject:ChangeAnimationAction(aName, 0.5, 0)
+	else
+		self.RenderableObject:ChangeAnimation(aName, 0.5, 0)
+	end
 end
 
 function CPlayer:GetMeshOffset()
