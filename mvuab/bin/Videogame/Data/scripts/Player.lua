@@ -13,6 +13,7 @@ function CPlayer:__init()
 	self.GrenadeQueue[#self.GrenadeQueue + 1] = CGrenade()
 	
 	self.Blaster = CBlaster()
+	self:SetEnergy(100.0) --TODO: Change to 0.0
 	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	
@@ -50,6 +51,12 @@ function CPlayer:__init()
 		self.Light:SetRenderShadows( false )
 	end
 	light_manager:AddResource(self.Light:GetName(), self.Light)
+	
+	self.Checkpoint = {}
+	self.Checkpoint.room = "sala1"
+	self.Checkpoint.position = Vect3f( 136.84, -7.99, -62 )
+	self.Checkpoint.life = 100.0
+	self.Checkpoint.energy = 0.0
 end
 
 function CPlayer:Update()
@@ -102,9 +109,10 @@ function CPlayer:Update()
 	self.StealthAttack:Update()
 	if self.Life <= 0 then
 		FunctionGameOver()
-		self.PlayerController:SetPosition(Respawn())
-		self.Life= 100.0
-		enemy_manager:Reinit(self.Room)
+		self:SetPosition(self.Checkpoint.position)
+		self.Life= self.Checkpoint.life
+		self.Blaster:SetEnergy(self.Checkpoint.energy)
+		enemy_manager:Reinit(self.Checkpoint.room)
 	end
 	
 	if self.Animation == "shoot" or self.Animation == "charge_loop" then
@@ -112,6 +120,13 @@ function CPlayer:Update()
 	else
 		self.RenderableObject:ChangeAnimation(self.Animation, 0.5, 0)
 	end
+end
+
+function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy)
+	self.Checkpoint.room = aRoom
+	self.Checkpoint.position = aPosition
+	self.Checkpoint.life = aLife
+	self.Checkpoint.energy = aEnergy
 end
 
 function CPlayer:SetRoom( aName )
