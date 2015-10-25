@@ -42,7 +42,7 @@ end
 function CBarrel:ExitBarrel( aPos )
 	--engine:Trace("He pasado por aqui: "..aPos:ToString())
 	final_pos = aPos;
-	final_pos.y = final_pos.y - self.Height * 0.5
+	final_pos.y = final_pos.y + self.Height * 0.3
 	self.Pos = final_pos
 	
 	--self.Actor:MoveGlobalPosition( self.Pos )
@@ -52,6 +52,8 @@ function CBarrel:ExitBarrel( aPos )
 	
 	trigger_manager:ModifyTrigger( self.Name, self.Pos, Vect3f(self.Radius, self.Height, self.Radius), false, false, true, "", "", "HiddenBarrelExit('"..self.Name.."')")
 	self.Trigger:SetActive(true)
+	
+	sound_manager:PlayEvent( "Play_In_Out_Barrel", "Logan" )
 end
 
 function CBarrel:SetStateInside()
@@ -64,6 +66,8 @@ function CBarrel:SetStateInside()
 	g_bInBarrel = false
 	
 	self.Trigger:SetActive(false)
+	
+	sound_manager:PlayEvent( "Play_In_Out_Barrel", "Logan" )
 end
 
 function CBarrel:SetIsSafe( aSafe )

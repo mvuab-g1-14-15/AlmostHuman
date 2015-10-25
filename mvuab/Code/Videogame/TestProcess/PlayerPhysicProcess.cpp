@@ -343,7 +343,7 @@ void CPlayerPhysicProcess::OnEnter( CPhysicUserData* _Entity_Trigger1,
     std::string l_LuaCode = l_Trigger->GetLUAByName( l_Trigger->ENTER );
     std::string l_NameShape = _Other_Shape->GetName();
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-    LOG_INFO_APPLICATION( l_Msg.c_str() );
+    //LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
 }
 
@@ -363,7 +363,7 @@ void CPlayerPhysicProcess::OnLeave( CPhysicUserData* _Entity_Trigger1,
     std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::LEAVE );
     std::string l_NameShape = _Other_Shape->GetName();
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-    LOG_INFO_APPLICATION( l_Msg.c_str() );
+    //LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
 }
 
@@ -383,6 +383,6 @@ void CPlayerPhysicProcess::OnStay( CPhysicUserData* _Entity_Trigger1,
     std::string l_LuaCode = l_Trigger->GetLUAByName( CTrigger::STAY );
     std::string l_NameShape = _Other_Shape->GetName();
     ScriptMInstance->RunCode( GetLuaCodeComplete( l_LuaCode, l_NameShape ) );
-    LOG_INFO_APPLICATION( l_Msg.c_str() );
+    //LOG_INFO_APPLICATION( l_Msg.c_str() );
   }
 }

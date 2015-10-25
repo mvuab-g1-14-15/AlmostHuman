@@ -60,9 +60,11 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.room = "sala2"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
-	lInfo.shoot_speed = 40.0
+	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 1.0
-	lInfo.chase_distance = 10.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
+	lInfo.chase_distance = 20.0
 	lInfo.camera_pitch = 0.0
 	lInfo.camera_fov = 40.0
 	lInfo.camera_far = 20.0
@@ -103,6 +105,8 @@ function CEnemyManager:CreateEnemiesSala2()
 						 "end;"
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = 0.0
 	lInfo.camera_fov = 40.0
@@ -133,7 +137,9 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
-	lInfo.chase_distance = 5.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
+	lInfo.chase_distance = 20.0
 	lInfo.camera_pitch = 0.0
 	lInfo.camera_fov = 40.0
 	lInfo.camera_far = 20.0
@@ -159,7 +165,9 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
-	lInfo.chase_distance = 5.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
+	lInfo.chase_distance = 20.0
 	lInfo.camera_pitch = 0.0
 	lInfo.camera_fov = 40.0
 	lInfo.camera_far = 20.0
@@ -191,6 +199,8 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 10.0
 	lInfo.time_to_shoot = 5.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = -1.04719755 -- 60 grados
 	lInfo.camera_fov = 25.0
@@ -223,6 +233,8 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 10.0
 	lInfo.time_to_shoot = 5.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = -1.04719755 -- 60 grados
 	lInfo.camera_fov = 25.0
@@ -322,7 +334,7 @@ function CEnemyManager:GetNumEnemy( aRoom )
 	lCount = 0
 	lRoom = self.Enemy[aRoom]
 	for _,lEnemy in pairs (lRoom) do
-		if lEnemy ~= nil then
+		if lEnemy:GetLife() > 0.0 then
 			lCount = lCount + 1
 		end
 	end
