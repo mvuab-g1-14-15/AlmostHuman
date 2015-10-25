@@ -2,7 +2,7 @@
 fileIn "XMLStruct.ms"
 filein "Utils.ms"
 
-fn ExportLights filenameXML aLights  =
+fn ExportLights filenameXML aLights aRoom =
 (
 	clearListener()
 	
@@ -73,6 +73,7 @@ fn ExportLights filenameXML aLights  =
 					--add the common attributes of the light
 					local l_LightTypeStr = iLight.type as string
 					l_NewLightNode.AddAttributeAsString "name" l_LightName
+					l_NewLightNode.AddAttributeAsString "room" aRoom
 					l_NewLightNode.AddAttributeCoordinate "pos" iLight.pos
 					l_NewLightNode.AddAttributeRGB "color" iLight.rgb
 					l_NewLightNode.AddAttributeFloat "att_start_range" iLight.farAttenStart

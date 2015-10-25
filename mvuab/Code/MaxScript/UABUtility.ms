@@ -77,7 +77,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	(
 		--export lights
 		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\lights.xml"
-		ExportLights LightDir selection
+		ExportLights LightDir selection LevelList.selected
 	)
 	on MeshButton pressed do
 	(		
