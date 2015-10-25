@@ -155,6 +155,7 @@
 			<Path>Irirs.bnk</Path>
 			<IncludedEvents>
 				<Event Id="4150758548" Name="Play_Abriendo_Compuertas"/>
+				<Event Id="526096065" Name="Play_Ayer_Tuve_Una"/>
 				<Event Id="2073520317" Name="Play_Mi_nombre_es_logan"/>
 				<Event Id="3595090698" Name="Play_Pasillo"/>
 				<Event Id="2376878504" Name="Play_Sala1"/>
@@ -194,17 +195,21 @@
 					<ShortName>Me llamo logan_despres explosio.wav</ShortName>
 					<Path>SFX\Me llamo logan_despres explosio_E106FFBE.wem</Path>
 				</File>
+				<File Id="891960782" Language="SFX">
+					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
+					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
+				</File>
 				<File Id="919748428" Language="SFX">
 					<ShortName>Sala4B.wav</ShortName>
 					<Path>SFX\Sala4B_E106FFBE.wem</Path>
 				</File>
-				<File Id="951761237" Language="SFX">
-					<ShortName>Sala1.wav</ShortName>
-					<Path>SFX\Sala1_E106FFBE.wem</Path>
-				</File>
 				<File Id="969083466" Language="SFX">
 					<ShortName>Tunel.wav</ShortName>
 					<Path>SFX\Tunel_E106FFBE.wem</Path>
+				</File>
+				<File Id="970675140" Language="SFX">
+					<ShortName>Sala1.wav</ShortName>
+					<Path>SFX\Sala1_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
