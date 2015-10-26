@@ -26,6 +26,9 @@ function load_basics()
 	scene:ActivateRoom("pasillo")
 	scene:ActivateRoom("sala2")
 	scene:ActivateRoom("sala3")	
+	scene:ActivateRoom("elevator")	
+	scene:ActivateRoom("sala4")	
+	
 	engine:Trace("Finish the load_basics()")
 end
 

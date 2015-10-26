@@ -2,8 +2,14 @@
 	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true" distance="5">
 		<texture filename="../CommonData/textures/Billboards/target.png" stage_id="0"/>
 	</billboard>
+	<billboard name="hand_action" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="true" distance="5">
+		<texture filename="../CommonData/textures/Billboards/hand_action.png" stage_id="0"/>
+	</billboard>
 	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/refill.png" stage_id="0"/>
+	</billboard>
+	<billboard name="dlc" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" distance="15">
+		<texture filename="../CommonData/textures/Billboards/dlc.png" stage_id="0"/>
 	</billboard>
 	<billboard name="fire" technique="FireTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" use_tick="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/fire01.dds" stage_id="0"/>

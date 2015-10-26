@@ -282,7 +282,12 @@ end
 function CPlayerController:PlayFootstep()
 	if countdowntimer_manager:isTimerFinish("Footstep") and not self.CharacterController:IsJumping() then
 		--if trigger pavimento
-		sound_manager:PlayEvent( "Logan_Footstep_Walk_Pavimento", "Logan" )
+		if (g_bFootstepType == "metal") then
+			sound_manager:PlayEvent( "Logan_Footstep_Walk_Metal", "Logan")
+		end
+		if (g_bFootstepType == "pavimento") then
+			sound_manager:PlayEvent( "Logan_Footstep_Walk_Pavimento", "Logan" )
+		end
 		-- if trigger metal
 		--sound_manager:PlayEvent( "Logan_Footstep_Walk_Metal", "Logan" )
 		countdowntimer_manager:Reset("Footstep", true)

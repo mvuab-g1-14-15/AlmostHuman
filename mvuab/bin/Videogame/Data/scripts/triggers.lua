@@ -195,6 +195,7 @@ function StayRejilla(text, other_shape)
 		g_bRejillaBreak = true
 		g_bPressRoom1Button = false
 		trigger_manager:GetTriggerByName("rejilla_sala1"):SetActive(false)	
+		--sound_manager:PlayEvent("Play_Crash_Metal_Grille", "Rejilla" )
 		gui_manager:ShowStaticText(text)		
 		g_bPressRoom1Button = false	
 	end
