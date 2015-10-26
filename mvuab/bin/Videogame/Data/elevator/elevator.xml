@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<room path="Data\elevator">
+  <layer name="solid" file="solid_layer.xml" />
+</room>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <MeshInstance name="ray_of_god_sala3" core="ray_of_god_sala3" pos="1.1419 -18.4693 44.6744" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god001_sala3" core="ray_of_god001_sala3" pos="1.1419 -18.4693 53.0032" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god002_sala3" core="ray_of_god002_sala3" pos="3.5736 -18.4693 60.4816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god003_sala3" core="ray_of_god003_sala3" pos="1.18723 -18.4693 67.7239" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god004_sala3" core="ray_of_god004_sala3" pos="-5.61677 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god005_sala3" core="ray_of_god005_sala3" pos="-20.8578 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god006_sala3" core="ray_of_god006_sala3" pos="-30.0957 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god007_sala3" core="ray_of_god007_sala3" pos="-40.6862 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ray_of_god008_sala3" core="ray_of_god008_sala3" pos="1.18723 -18.4693 75.8246" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>

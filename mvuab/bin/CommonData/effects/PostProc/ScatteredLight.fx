@@ -23,30 +23,33 @@ float4 ScatterLight(in float2 UV : TEXCOORD0) : COLOR
 {
     float4 l_Color = float4(0, 0, 0, 0);
     l_Color = tex2D(S0LinearSampler, UV);
-
-    for(int i = 0; i < MAX_LIGHTS_BY_SHADER && g_LightsEnabled[i]; i++)
+        
+    for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
-        float4 l = mul(float4(g_LightsPosition[i], 1.0f), g_WorldViewProj);
-        l.xy /= l.w;
-        
-        l.x = 0.5f + l.x / 2.0f;
-        l.y = 1.0f - (0.5f + l.y / 2.0f);	
-        
-        float2 l_DeltaTexCoord = UV - l.xy;
-        float2 l_TexCoord = UV;
-        
-        float l_IlluminationDecay = 1.0;
-        l_DeltaTexCoord *= g_SDensity / float(g_Samples); 
-        
-        for(int j = 0; j < g_Samples; j++)
+        if(g_LightsEnabled[i])
         {
-            l_TexCoord -= l_DeltaTexCoord;
+            float4 l = mul(float4(g_LightsPosition[i], 1.0f), g_WorldViewProj);
+            l.xy /= l.w;
             
-            float4 sample = tex2D(S0LinearSampler, l_TexCoord);
-            sample *= l_IlluminationDecay * g_SWeight;
+            l.x = 0.5f + l.x / 2.0f;
+            l.y = 1.0f - (0.5f + l.y / 2.0f);	
             
-            l_Color += sample;
-            l_IlluminationDecay *= g_SDecay;
+            float2 l_DeltaTexCoord = UV - l.xy;
+            float2 l_TexCoord = UV;
+            
+            float l_IlluminationDecay = 1.0;
+            l_DeltaTexCoord *= g_SDensity / float(g_Samples); 
+            
+            for(int j = 0; j < g_Samples; j++)
+            {
+                l_TexCoord -= l_DeltaTexCoord;
+                
+                float4 sample = tex2D(S0LinearSampler, l_TexCoord);
+                sample *= l_IlluminationDecay * g_SWeight;
+                
+                l_Color += sample;
+                l_IlluminationDecay *= g_SDecay;
+            }
         }
     }
     
