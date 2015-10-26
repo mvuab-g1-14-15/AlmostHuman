@@ -107,6 +107,7 @@ function CEnemy:__init( aInfo )
 			renderable_objects_manager_glow:AddResource(self.Name.."Laser", self.Laser)
 		end
 		self.Laser:SetPitch(self.CameraPitch + g_HalfPi)
+		self.RenderableObject:SetPitch(self.CameraPitch)
 	end
 	
 	self.Alarm = aInfo.alarm
@@ -156,6 +157,14 @@ function CEnemy:Update()
 		
 		self.Delta = self.InitDelta * 2.0
 		self.TimeToRot = self.InitTimeToRot / 2.0
+		
+		if self.Fly then
+			local lPlayerDir = GetPlayerDirection(self:GetPosition())
+			lPlayerDir:Normalize()
+			local lPitch = math.atan2( lPlayerDir.y, math.sqrt( lPlayerDir.z * lPlayerDir.z + lPlayerDir.x * lPlayerDir.x ) )
+			self.RenderableObject:SetPitch(lPitch)
+			self.Laser:SetPitch(lPitch + g_HalfPi)
+		end
 		
 		local lDist = PlayerDistance(self)
 		if lDist < self.ChaseDistance then
@@ -236,7 +245,7 @@ function CEnemy:Update()
 		lPos.y = self.InitHeight
 		self:SetPosition(lPos)
 		self.Laser:SetPosition(lPos)
-		self.Laser:SetYaw(self.Camera:GetYaw() - g_HalfPi)
+		self.Laser:SetYaw(-self.Camera:GetYaw() + g_HalfPi)
 		self.Laser:MakeTransform()
 	end
 	

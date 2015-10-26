@@ -79,11 +79,16 @@ function load_gameplay()
 	-- g_PlayerCinematic:MakeTransform()
 	-- g_PlayerCinematic:SetRoomName( "sala1" )
 	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
-	g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
+	--g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
+	g_Player:Update()
 	g_bCinematicLoopMain = true
-	g_Player:SetAnimation("cinematica_inicial_sala1_pos00", 0.2, 0.0)
-	g_Player:SetAnimation("cinematica_inicial_sala1_pos00", 0.2, 0.0)
+	-- g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
+	-- g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
+	-- g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
+
 	scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
+	
+	renderable_objects_manager_characters_sala1 = scene:GetResource("sala1"):GetLayer("solid")
 end
 
 function update_gameplay()
@@ -117,6 +122,9 @@ function update_gameplay()
 		end
 	end
 	
+	if action_manager:DoAction("Action") then
+		renderable_objects_manager_characters_sala1:GetResource("Logan_cinematica1_sala1"):SetPosition(Vect3f(123.989, -8.32, -52.4142))
+	end
 	if action_manager:DoAction("PlayAmbient") then	
 		sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 	end
@@ -162,10 +170,10 @@ function update_gameplay()
 		
 		if g_bPressRoom2X then
 			if action_manager:DoAction("Action") then
-				if enemigosVivos >= 1 then
-					
+				if enemigosVivos == 0 then
+					engine:Trace("He entrado en abrir la puerta")
 					trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
-					
+					cinematic_manager:Execute("OpenDoor")
 					g_bPressRoom2X = false
 					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))				
 				elseif CuentaAtras == 3 then
@@ -229,8 +237,9 @@ function update_gameplay()
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
 				cinematic_manager:Execute("explotion")
-				g_Player:SetPosition(Vect3f(-4.58296, -14.0589, 60.0993))
-				g_Player:ChangeAnimation("logan_cinem_sala3", 0.2, 0)
+				-- g_Player:SetPosition(Vect3f(-4.58296, -14.0589, 60.0993))
+				-- g_Player:SetAnimation("logan_cinem_sala3")
+				-- g_Player:Update()
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	

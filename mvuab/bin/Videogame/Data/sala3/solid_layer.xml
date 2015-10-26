@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RenderableObjects>
+﻿<RenderableObjects>
   <MeshInstance name="cinta_010_sala3" core="cinta_010_sala3" pos="38.8332 -18.0331 66.253" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_011_sala3" core="cinta_011_sala3" pos="36.9927 -17.9226 65.1835" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_012_sala3" core="cinta_012_sala3" pos="40.3123 -17.4696 60.586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

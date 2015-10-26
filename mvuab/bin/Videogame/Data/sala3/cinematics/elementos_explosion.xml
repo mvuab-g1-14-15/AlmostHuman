@@ -1,4 +1,5 @@
 <elements>
+  <element name="Cylinder001_sala3" room="sala3"/>
   <element name="assambly_machine_part3_Part_240_sala3" room="sala3" />
   <element name="assambly_machine_part4_Part_160_sala3" room="sala3" />
   <element name="assambly_machine_part4_Part_159_sala3" room="sala3" />
