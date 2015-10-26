@@ -92,7 +92,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
 	lInfo.speed = 4.0
-	lInfo.position = Vect3f(63.044, -16.5334, -86.1066)
+	lInfo.position = Vect3f(63.044, -16.5334, -88.0)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
@@ -449,6 +449,7 @@ function CEnemyManager:AddShoot( aPosition, aDirection, aSpeed, aDamage )
 	for k in pairs (self.Shoots) do
 		if not self.Shoots[k]:IsActive() then
 			self.Shoots[k]:Begin(aPosition, aDirection, aSpeed, aDamage)
+			return
 		end
 	end
 end

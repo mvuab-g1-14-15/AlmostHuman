@@ -47,6 +47,8 @@ function CEnemy:__init( aInfo )
 		self.RenderableObject:SetRoomName( aInfo.room )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:SetYaw( -self.CharacterController:GetYaw() + g_HalfPi )
+	self.RenderableObject:MakeTransform()
 	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)
 
 	self.UseGizmo = aInfo.use_gizmo
