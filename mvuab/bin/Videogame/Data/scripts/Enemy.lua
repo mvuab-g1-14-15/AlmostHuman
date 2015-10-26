@@ -133,6 +133,7 @@ function CEnemy:Destroy()
 end
 
 function CEnemy:Update()
+	--profiler:AddInit("CEnemy:Update()")
 	local dt = timer:GetElapsedTime()
 	
 	self:UpdateCamera()
@@ -254,6 +255,8 @@ function CEnemy:Update()
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
 	--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
+	
+	--profiler:AddEnd("CEnemy:Update()")
 end
 
 function CEnemy:PlayerInSight()

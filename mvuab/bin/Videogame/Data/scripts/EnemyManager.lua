@@ -290,6 +290,7 @@ function CEnemyManager:AddGarbageMesh(aRoom, aName)
 end
 
 function CEnemyManager:Update()
+	--profiler:AddInit("CEnemyManager:Update()")
 	for lRoom in pairs (self.Enemy) do
 		for i in pairs(self.Enemy[lRoom]) do
 			lActualEnemy = self.Enemy[lRoom][i]
@@ -328,6 +329,7 @@ function CEnemyManager:Update()
 	for k in pairs (self.Shoots) do
 		self.Shoots[k]:Update()
 	end
+	--profiler:AddEnd("CEnemyManager:Update()")
 end
 
 function CEnemyManager:GetNumEnemy( aRoom )

@@ -338,6 +338,8 @@ void registerBase( lua_State* m_LS )
   [
     class_<CTimer>( "CTimer" )
     .def( "GetElapsedTime", &CTimer::GetElapsedTime )
+    .def( "GetTime", &CTimer::GetTime )
+    .def( "GetTimeMs", &CTimer::GetTimeMs )
   ];
   module( m_LS )
   [

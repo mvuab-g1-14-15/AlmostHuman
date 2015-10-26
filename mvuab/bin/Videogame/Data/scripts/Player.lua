@@ -59,6 +59,7 @@ function CPlayer:__init()
 end
 
 function CPlayer:Update()
+	--profiler:AddInit("CPlayer:Update()")
 	self.PlayerController:Update()
 	
 	local l_MeshOffset = self:GetMeshOffset()
@@ -105,6 +106,7 @@ function CPlayer:Update()
 		self.Blaster:SetEnergy(self.Checkpoint.energy)
 		enemy_manager:Reinit(self.Checkpoint.room)
 	end
+	--profiler:AddEnd("CPlayer:Update()")
 end
 
 function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy)

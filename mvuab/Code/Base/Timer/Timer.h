@@ -31,6 +31,7 @@ class CTimer
             return m_DeltaTime;
         }
         float32 GetTime() const { return m_fTime; }
+        float32 GetTimeMs() const { return m_fTime * 1000.0f; }
 
         float32 GetFPS() const { return m_FPS; }
         float32 GetMaxFPS() const { return m_MaxFps; }
