@@ -108,8 +108,12 @@ function CEnemy:__init( aInfo )
 			self.Laser:SetRoomName( aInfo.room )
 			renderable_objects_manager_glow:AddResource(self.Name.."Laser", self.Laser)
 		end
-		self.Laser:SetPitch(self.CameraPitch + g_HalfPi)
+		self.Laser:SetScale(Vect3f(3.0, 1.0, 1.0))
+		self.Laser:SetPitch(self.CameraPitch + g_HalfPi + 0.3 )
 		self.RenderableObject:SetPitch(self.CameraPitch)
+		
+		self.Laser:MakeTransform()
+		self.RenderableObject:MakeTransform()
 	end
 	
 	self.Alarm = aInfo.alarm
