@@ -1,4 +1,5 @@
 dofile("./data/scripts/IdManager.lua")
+--dofile("./data/scripts/Profiler.lua")
 
 engine = CEngine.GetSingletonPtr()
 action_manager = GetActionManager()
@@ -25,6 +26,7 @@ trigger_manager = GetTriggerManager()
 engine_manager = CEngineManagers.GetSingletonPtr()
 debug_helper = CDebugHelper()
 particle_system_manager = GetParticleSystemManager()
+--profiler = nil
 
 -- Global Variables
 g_CameraSensibility = 30.0

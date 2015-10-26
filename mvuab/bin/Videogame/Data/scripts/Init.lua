@@ -31,6 +31,14 @@ end
 
 function load_gameplay()
 	engine:Trace("Init the load_gameplay()")
+	
+	--Profiler entries
+	--profiler = CProfiler()
+	
+	--profiler:AddEntry("CPlayer:Update()")
+	--profiler:AddEntry("CEnemyManager:Update()")
+	--profiler:AddEntry("CEnemy:Update()")
+	
     g_Player = CPlayer()
 	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
@@ -281,6 +289,9 @@ function update_gameplay()
 			ChangeCameraCloseEnemy()
 		end
 	end
+	
+	--profiler:Trace()
+	--profiler:Tick()
 end
 
 function UpdateVariables(dt)
