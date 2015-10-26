@@ -185,7 +185,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 	-- Drone 1
 	lInfo.name = "Drone1_P"
 	lInfo.life = 50.0
-	lInfo.damage = 0.2
+	lInfo.damage = 1.0
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
 	lInfo.speed = 2.0
@@ -219,7 +219,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	-- Drone 1
 	lInfo.name = "Drone1_S3"
 	lInfo.life = 50.0
-	lInfo.damage = 0.2
+	lInfo.damage = 1.0
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
 	lInfo.speed = 2.0

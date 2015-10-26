@@ -106,6 +106,10 @@ function CPlayer:Update()
 		self.Blaster:SetEnergy(self.Checkpoint.energy)
 		enemy_manager:Reinit(self.Checkpoint.room)
 	end
+	
+	if self.Life < 25 then
+		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
+	end
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
