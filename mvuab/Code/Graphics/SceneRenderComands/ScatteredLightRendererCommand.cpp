@@ -47,10 +47,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(94.0f, -9.0f, -25.3f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
+    l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
+    l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
 
     CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
@@ -64,14 +64,14 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
         l_ActiveLights[1] = (l_PosLights[1] - Math::Vect3f(94.0f, -9.0f, -27.0f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
     }
 
-    if(l_RoomName == "sala4")
-    {
-        l_ActiveLights[2] = TRUE;
-    }
-
     if(l_RoomName == "pasillo")
     {
-        l_ActiveLights[3] =  (l_PosLights[3] - Math::Vect3f(54.0f, -16.4f, 5.3f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
+        l_ActiveLights[2] =  (l_PosLights[3] - Math::Vect3f(54.0f, -16.4f, 5.3f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
+    }
+
+    if(l_RoomName == "sala4")
+    {
+        l_ActiveLights[3] = TRUE;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
@@ -110,10 +110,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     GM.GetWidthAndHeight(l_Width, l_Height);
     RECT l_Rect2 = { 0, 0, l_Width, l_Height };
 
-    ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
-    m_RenderTarget3.SetAsRenderTarget(0);
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
-    m_RenderTarget3.UnsetAsRenderTarget(0);
+    //ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
+    //m_RenderTarget3.SetAsRenderTarget(0);
+    //GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
+    //m_RenderTarget3.UnsetAsRenderTarget(0);
 
     // Merge Rays Of God and normal scene texture
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("merge_pool_renderable_object_technique")->Apply();
