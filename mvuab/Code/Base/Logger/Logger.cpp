@@ -60,7 +60,7 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
         }
 
         std::string lMsg;
-        StringUtils::Format( newLog.m_sLogText, "[%s]%s[File]%s[Line]%d\n", newLog.m_class.c_str(), newLog.m_sLogText.c_str(), file, line );
+        StringUtils::Format( lMsg, "[%s]%s[File]%s[Line]%d\n", newLog.m_class.c_str(), newLog.m_sLogText.c_str(), file, line );
         OutputDebugString(lMsg.c_str());
       }
 
