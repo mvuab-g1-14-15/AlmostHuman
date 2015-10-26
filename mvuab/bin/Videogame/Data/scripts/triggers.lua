@@ -24,6 +24,8 @@ g_bC42 = false
 g_bDistanceC4 = false
 g_sTextC4Press = ""
 g_bBombaActivada = false
+g_bFootstepType = "pavimento"
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -310,4 +312,38 @@ function ShowTextDoor1(message, other_shape)
 		g_bPressRoom1X = true
 	end
 	gui_manager:ShowStaticText(message)
+end
+
+function PlaySound(event,game_object)
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
+	sound_manager:PlayEvent(event, game_object)
+end
+
+
+function SetPropTunel()
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
+	g_bFootstepType = "metal"
+end
+
+function SetPropSala2()
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
+	g_bFootstepType = "pavimento"
+end
+	
+function SetPropPasillo()
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
+end
+
+function SetPropSala3()
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
+end
+
+function SetPropSala4()
+	--PlaySound('Play_Tunel','Iris')
+	--cinematic_manager:Execute("cinematica_1")
 end

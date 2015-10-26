@@ -171,21 +171,25 @@
 					<ShortName>Abiendo_Compuertas_Despres Mort_FinalBoss.wav</ShortName>
 					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem</Path>
 				</File>
-				<File Id="305988357" Language="SFX">
-					<ShortName>Pasillo.wav</ShortName>
-					<Path>SFX\Pasillo_E106FFBE.wem</Path>
+				<File Id="341959684" Language="SFX">
+					<ShortName>Tunel.wav</ShortName>
+					<Path>SFX\Tunel_E106FFBE.wem</Path>
 				</File>
 				<File Id="405981009" Language="SFX">
 					<ShortName>Sala4A.wav</ShortName>
 					<Path>SFX\Sala4A_E106FFBE.wem</Path>
 				</File>
-				<File Id="572734564" Language="SFX">
-					<ShortName>Sala2.wav</ShortName>
-					<Path>SFX\Sala2_E106FFBE.wem</Path>
+				<File Id="430266122" Language="SFX">
+					<ShortName>Sala1.wav</ShortName>
+					<Path>SFX\Sala1_E106FFBE.wem</Path>
 				</File>
-				<File Id="653913708" Language="SFX">
+				<File Id="520901286" Language="SFX">
 					<ShortName>Sala3A.wav</ShortName>
 					<Path>SFX\Sala3A_E106FFBE.wem</Path>
+				</File>
+				<File Id="752280793" Language="SFX">
+					<ShortName>Pasillo.wav</ShortName>
+					<Path>SFX\Pasillo_E106FFBE.wem</Path>
 				</File>
 				<File Id="856495406" Language="SFX">
 					<ShortName>Sala3B.wav</ShortName>
@@ -203,13 +207,9 @@
 					<ShortName>Sala4B.wav</ShortName>
 					<Path>SFX\Sala4B_E106FFBE.wem</Path>
 				</File>
-				<File Id="969083466" Language="SFX">
-					<ShortName>Tunel.wav</ShortName>
-					<Path>SFX\Tunel_E106FFBE.wem</Path>
-				</File>
-				<File Id="970675140" Language="SFX">
-					<ShortName>Sala1.wav</ShortName>
-					<Path>SFX\Sala1_E106FFBE.wem</Path>
+				<File Id="999865395" Language="SFX">
+					<ShortName>Sala2.wav</ShortName>
+					<Path>SFX\Sala2_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -370,6 +370,14 @@
 					<ShortName>footstep_right.wav</ShortName>
 					<Path>SFX\footstep_right_E106FFBE.wem</Path>
 				</File>
+				<File Id="263902756" Language="SFX">
+					<ShortName>Boss -Disparo 6.wav</ShortName>
+					<Path>SFX\Boss -Disparo 6_E106FFBE.wem</Path>
+				</File>
+				<File Id="281377803" Language="SFX">
+					<ShortName>Boss - Disparo 3.wav</ShortName>
+					<Path>SFX\Boss - Disparo 3_E106FFBE.wem</Path>
+				</File>
 				<File Id="297188304" Language="SFX">
 					<ShortName>footstep_left.wav</ShortName>
 					<Path>SFX\footstep_left_E106FFBE.wem</Path>
@@ -382,13 +390,13 @@
 					<ShortName>Drone Movement_loop.wav</ShortName>
 					<Path>SFX\Drone Movement_loop_76A5D070.wem</Path>
 				</File>
+				<File Id="788965310" Language="SFX">
+					<ShortName>Boss - Disparo 4.wav</ShortName>
+					<Path>SFX\Boss - Disparo 4_E106FFBE.wem</Path>
+				</File>
 				<File Id="803787533" Language="SFX">
 					<ShortName>Footstep_androide.wav</ShortName>
 					<Path>SFX\Footstep_androide_E106FFBE.wem</Path>
-				</File>
-				<File Id="826784510" Language="SFX">
-					<ShortName>Metralleta 1.wav</ShortName>
-					<Path>SFX\Metralleta 1_E106FFBE.wem</Path>
 				</File>
 				<File Id="848849463" Language="SFX">
 					<ShortName>Disparo Androide.wav</ShortName>

@@ -160,13 +160,10 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 			(			
 				l_InitKeyframe  = 0
 			)
-			
-						
-			
-			
-			format "Obj name: % \n" Obj.name
-			format "InitKeyFrame % \n" l_InitKeyframe
-			format "InitKeyFrame to seconds % \n" strInitKeyFrame
+
+			--format "Obj name: % \n" Obj.name
+			--format "InitKeyFrame % \n" l_InitKeyframe
+			--format "InitKeyFrame to seconds % \n" strInitKeyFrame
 			
 			if (isCinematic == true) then 
 			(
