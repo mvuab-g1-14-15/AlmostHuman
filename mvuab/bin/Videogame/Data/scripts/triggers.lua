@@ -71,7 +71,6 @@ end
 function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
-		g_Player:SetWeak(false)
 		enemy_manager:AlarmRoom("sala2")
 		g_bChargeEnergy = false
 	else

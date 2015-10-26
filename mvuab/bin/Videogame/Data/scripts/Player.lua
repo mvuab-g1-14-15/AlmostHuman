@@ -145,16 +145,11 @@ function CPlayer:AddDamage(amount)
 		lBarrel:SetIsSafe(false)
 		self:ExitBarrel()
 	else
-		if self.PlayerController.Weak then
-			amount =  25.0
+		if self.Blaster:GetEnergy() == 0 then
+			amount = amount * 2.0
 		end
 		self.Life = self.Life - amount
 	end
-	--engine:Trace("Life: ".. self.Life)
-end
-
-function CPlayer:SetWeak(weak)
-	self.PlayerController.Weak = weak
 end
 
 function CPlayer:GetLife()

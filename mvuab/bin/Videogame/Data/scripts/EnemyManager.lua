@@ -185,7 +185,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 	-- Drone 1
 	lInfo.name = "Drone1_P"
 	lInfo.life = 50.0
-	lInfo.damage = 2.0
+	lInfo.damage = 0.2
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
 	lInfo.speed = 2.0
@@ -197,10 +197,10 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.room = "pasillo"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
-	lInfo.shoot_speed = 10.0
-	lInfo.time_to_shoot = 5.0
-	lInfo.time_burst = 0.3
-	lInfo.num_shoot_burst = 3.0
+	lInfo.shoot_speed = 20.0
+	lInfo.time_to_shoot = 1.0
+	lInfo.time_burst = 0.2
+	lInfo.num_shoot_burst = 5.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = -1.04719755 -- 60 grados
 	lInfo.camera_fov = 25.0
@@ -219,7 +219,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	-- Drone 1
 	lInfo.name = "Drone1_S3"
 	lInfo.life = 50.0
-	lInfo.damage = 2.0
+	lInfo.damage = 0.2
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
 	lInfo.speed = 2.0
@@ -231,10 +231,10 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.room = "pasillo"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
-	lInfo.shoot_speed = 10.0
-	lInfo.time_to_shoot = 5.0
-	lInfo.time_burst = 0.3
-	lInfo.num_shoot_burst = 3.0
+	lInfo.shoot_speed = 20.0
+	lInfo.time_to_shoot = 1.0
+	lInfo.time_burst = 0.2
+	lInfo.num_shoot_burst = 5.0
 	lInfo.chase_distance = 5.0
 	lInfo.camera_pitch = -1.04719755 -- 60 grados
 	lInfo.camera_fov = 25.0

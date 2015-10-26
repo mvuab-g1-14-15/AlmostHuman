@@ -548,12 +548,39 @@ function CEnemy:UpdateCamera()
 end
 
 function CEnemy:MakeShoot()
-	local lPositionRightArm = self.RenderableObject:GetBonePosition("Base HumanRPalm")
-	local lPositionLeftArm = self.RenderableObject:GetBonePosition("Base HumanLPalm")
-	local lDir = GetPlayerDirection( lPositionRightArm )
-	self.BlashLeft:Begin(lPositionLeftArm)
-	self.BlashRight:Begin(lPositionRightArm)
-	enemy_manager:AddShoot( lPositionRightArm, lDir, self.ShootSpeed, self.Damage )
+	if self.Fly then
+		local lDir = self.Camera:GetDirection()
+		local lSide = lDir ^ Vect3f(0.0, 1.0, 0.0)
+		local lUp = lSide ^ lDir
+		if CheckVector(lDir) then
+			lDir:Normalize()
+		end
+		if CheckVector(lSide) then
+			lSide:Normalize()
+		end
+		if CheckVector(lUp) then
+			lUp:Normalize()
+		end
+		
+		local lPos = self:GetPosition()
+		
+		local lPos1 = lPos + lDir * 0.4 + lSide * 0.2 + lUp * 0.3
+		local lPos2 = lPos + lDir * 0.4 - lSide * 0.2 + lUp * 0.3
+		
+		self.BlashRight:Begin(lPos1)
+		self.BlashLeft:Begin(lPos2)
+		
+		local lDirShoot1 = GetPlayerDirection( lPos1 )
+		local lDirShoot2 = GetPlayerDirection( lPos2 )
+		local lSingleShootDamage = self.Damage/2.0
+		enemy_manager:AddShoot( lPos1, lDirShoot1, self.ShootSpeed, lSingleShootDamage )
+		enemy_manager:AddShoot( lPos2, lDirShoot2, self.ShootSpeed, lSingleShootDamage )
+	else
+		local lPos = self.RenderableObject:GetBonePosition("Base HumanRPalm")
+		local lDir = GetPlayerDirection( lPos )
+		self.BlashRight:Begin(lPos)
+		enemy_manager:AddShoot( lPos, lDir, self.ShootSpeed, self.Damage )
+	end
 	--Todo play enemy sound
 end
 

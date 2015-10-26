@@ -50,8 +50,6 @@ function CPlayerController:__init()
 	self.ShakeVerticalAmplitude = 0.01
 	self.ShakeHorizontalAmplitude = 0.01
 	
-	self.Weak = true
-	
 	physic_manager:AddController("Player", self.Radius, self.Height/2.0, math.cos(g_HalfPi/2.0), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
 	self.CharacterController = physic_manager:GetController("Player")
 	--engine:Trace("Player Controller initialized")
