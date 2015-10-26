@@ -1603,7 +1603,7 @@
     <cinematic_object_key_frame time="53.3" pos="38.2986 -17.2726 52.8908" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="53.3333" pos="38.2986 -17.2726 52.8905" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />	
   </cinematic_object>
-  <cinematic_object resource="Leg002_sala3" renderable_objects_manager="Leg002_sala3" init_keyframe="7.66" room="sala3">
+  <!-- <cinematic_object resource="Leg002_sala3" renderable_objects_manager="Leg002_sala3" init_keyframe="7.66" room="sala3">
     <cinematic_object_key_frame time="0.0" pos="40.4789 -17.2726 86.2265" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="40.4789 -17.2726 86.2262" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="40.4789 -17.2726 86.2255" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
@@ -3205,7 +3205,7 @@
     <cinematic_object_key_frame time="53.2667" pos="38.2986 -17.2726 52.892" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="53.3" pos="38.2986 -17.2726 52.8908" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="53.3333" pos="38.2986 -17.2726 52.8905" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
-</cinematic_object>
+</cinematic_object> -->
 <cinematic_object resource="Torso001_sala3" renderable_objects_manager="Torso001_sala3" init_keyframe="4.36" room="sala3">
     <cinematic_object_key_frame time="0.0" pos="40.4789 -17.2726 86.2265" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="40.4789 -17.2726 86.2262" yaw="0.174533" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />

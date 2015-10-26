@@ -1,6 +1,5 @@
 <cinematics>
 	<camera name="camera_cinematica1_sala3" pos="-4.58296 -14.0589 60.0993" look_at="-3.58385 -14.0537 60.1412" fov="75.0" near_plane="1.0" far_plane="100.0"/>
-	<!--object_cinematic name="itemLista1" resource_id_file="Data/sala3/cinematics/cinematics1.xml"/-->
-	<!--cinematic name="elevator" resource_id_file="Data/sala3/cinematics/elevatorUp.xml"/>
-	<cinematic name="explotion" resource_id_file="Data/sala3/cinematics/explotion.xml"/-->
+	<object_cinematic name="itemLista1" resource_id_file="Data/sala3/cinematics/cinematics1.xml"/>
+	<cinematic name="explotion" resource_id_file="Data/sala3/cinematics/explotion.xml"/>
 </cinematics>
