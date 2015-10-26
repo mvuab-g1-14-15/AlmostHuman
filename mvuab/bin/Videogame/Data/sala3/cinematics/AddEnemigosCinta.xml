@@ -1,0 +1,3 @@
+<cinematic>
+	<add_renderable path="Data\sala3\cinematics/" room="sala3" renderable_objects_file="solid_layer_Enemigos_Cinta.xml" static_meshes_file="static_meshes_Enemigos_Cinta.xml" time="0.1"/>
+</cinematic>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="Box021_sala3" filename="meshes\Box021.mesh" />
+  <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
+  <static_mesh name="andride085_sala3" filename="meshes\andride085.mesh" />
+  <static_mesh name="enganche_023_sala3" filename="meshes\enganche_023.mesh" />
+  <static_mesh name="andride088_sala3" filename="meshes\andride088.mesh" />
+  <static_mesh name="enganche_026_sala3" filename="meshes\enganche_026.mesh" />
+  <static_mesh name="enganche_027_sala3" filename="meshes\enganche_027.mesh" />
+  <static_mesh name="andride089_sala3" filename="meshes\andride089.mesh" />
+  <static_mesh name="enganche_028_sala3" filename="meshes\enganche_028.mesh" />
+  <static_mesh name="andride090_sala3" filename="meshes\andride090.mesh" />
+  <static_mesh name="andride091_sala3" filename="meshes\andride091.mesh" />
+  <static_mesh name="enganche_029_sala3" filename="meshes\enganche_029.mesh" />
+  <static_mesh name="enganche_030_sala3" filename="meshes\enganche_030.mesh" />
+  <static_mesh name="andride092_sala3" filename="meshes\andride092.mesh" />
+  <static_mesh name="enganche_031_sala3" filename="meshes\enganche_031.mesh" />
+  <static_mesh name="andride093_sala3" filename="meshes\andride093.mesh" />
+  <static_mesh name="enganche_032_sala3" filename="meshes\enganche_032.mesh" />
+  <static_mesh name="andride094_sala3" filename="meshes\andride094.mesh" />
+  <static_mesh name="enganche_033_sala3" filename="meshes\enganche_033.mesh" />
+  <static_mesh name="andride095_sala3" filename="meshes\andride095.mesh" />
+  <static_mesh name="andride096_sala3" filename="meshes\andride096.mesh" />
+  <static_mesh name="enganche_034_sala3" filename="meshes\enganche_034.mesh" />
+</static_meshes>

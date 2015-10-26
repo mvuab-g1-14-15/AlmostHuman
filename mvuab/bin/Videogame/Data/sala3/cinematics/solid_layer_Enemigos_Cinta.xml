@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>
+  <MeshInstance name="Box021_sala3" core="Box021_sala3" pos="37.8948 -16.2356 43.4142" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box023_sala3" core="Box023_sala3" pos="23.9954 -16.2356 75.5401" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride085_sala3" core="andride085_sala3" pos="37.704 -16.2711 48.6454" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_023_sala3" core="enganche_023_sala3" pos="37.704 -16.2711 48.6454" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride088_sala3" core="andride088_sala3" pos="37.704 -12.8172 35.0013" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_026_sala3" core="enganche_026_sala3" pos="37.704 -12.8172 35.0013" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_027_sala3" core="enganche_027_sala3" pos="37.704 -12.8172 28.3289" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride089_sala3" core="andride089_sala3" pos="37.704 -12.8172 28.3289" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_028_sala3" core="enganche_028_sala3" pos="37.704 -12.8172 21.6566" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride090_sala3" core="andride090_sala3" pos="37.704 -12.8172 21.6566" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride091_sala3" core="andride091_sala3" pos="24.203 -16.2702 71.8662" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_029_sala3" core="enganche_029_sala3" pos="24.203 -16.2702 71.8662" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_030_sala3" core="enganche_030_sala3" pos="24.203 -13.0698 76.5895" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride092_sala3" core="andride092_sala3" pos="24.203 -13.0698 76.5895" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_031_sala3" core="enganche_031_sala3" pos="24.203 -12.8036 83.4489" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride093_sala3" core="andride093_sala3" pos="24.203 -12.8036 83.4489" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_032_sala3" core="enganche_032_sala3" pos="24.203 -12.8074 91.3435" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride094_sala3" core="andride094_sala3" pos="24.203 -12.8074 91.3435" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_033_sala3" core="enganche_033_sala3" pos="24.203 -12.8108 98.2971" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride095_sala3" core="andride095_sala3" pos="24.203 -12.8108 98.2971" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride096_sala3" core="andride096_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="enganche_034_sala3" core="enganche_034_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>
