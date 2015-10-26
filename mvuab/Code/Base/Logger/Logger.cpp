@@ -21,83 +21,51 @@ void CLogger::AddNewLog( ELogLevel ll, const char* class_str, const char* file, 
 {
     if ( ll >= m_eLogLevel )
     {
-        va_list args;
-        char* buffer;
-        va_start( args, format );
-        int len = _vscprintf( format, args ) + 1;
-        buffer = ( char* )malloc( len * sizeof( char ) );
-        vsprintf_s( buffer, len, format, args );
-        SLog newLog;
-        newLog.m_bLineFeed    = false;
-        newLog.m_sLogText     = buffer;
-        newLog.m_eLogLevel    = ll;
-        newLog.m_class        = class_str;
-        newLog.m_File         = file;
-        newLog.m_Line         = line;
-        va_end(args);
+      va_list args;
+      char* buffer;
+      va_start( args, format );
+      int len = _vscprintf( format, args ) + 1;
+      buffer = ( char* )malloc( len * sizeof( char ) );
+      vsprintf_s( buffer, len, format, args );
+      SLog newLog;
+      newLog.m_bLineFeed    = false;
+      newLog.m_sLogText     = buffer;
+      newLog.m_bLineFeed    = false;
+      newLog.m_eLogLevel    = ll;
+      newLog.m_class        = class_str;
+      newLog.m_File         = file;
+      newLog.m_Line         = line;
 
-        if( mEnabledConsole )
+      // Add new log to the vector
+      m_vLogs.push_back( newLog );
+
+      if( mEnabledConsole )
+      {
+        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+        switch ( ll )
         {
-            HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-            switch ( ll )
-            {
-                case eLogInfo:
-                    {
-                        m_vLogs.push_back( newLog );
-                        free(buffer);
-                        m_Mutex.UnLock();
-                        SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-                    }
-                    break;
-
-                case eLogWarning:
-                    {
-                        SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-                    }
-                    break;
-
-                case eLogError:
-                    {
-                        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY );
-                    }
-                    break;
-            }
-
-            std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
-            lCopyClassStr.insert( 5, lStr );
-            std::cout << "[" << lCopyClassStr << "]" << "[File][" << file << "]" << "[Line][" << line << "]" << "[Message]" << newLog.m_sLogText << std::endl;
+          case eLogInfo:    SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY );                  std::cout << "[INFO]"; break;
+          case eLogWarning: SetConsoleTextAttribute( hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY ); std::cout << "[WARNING]"; break;
+          case eLogError:   SetConsoleTextAttribute( hConsole, FOREGROUND_RED   | FOREGROUND_INTENSITY );                  std::cout << "[ERROR]";  break;
         }
-        else
+        std::cout << newLog.m_sLogText << std::endl;
+      }
+      else
+      {
+        std::string lTag("[INFO]");
+        switch ( ll )
         {
-            std::stringstream lMsg;
-            switch ( ll )
-            {
-                case eLogInfo:
-                    {
-                        lMsg << "[INFO]";
-                    }
-                    break;
-
-                case eLogWarning:
-                    {
-                        lMsg << "[WARNING]";
-                    }
-                    break;
-
-                case eLogError:
-                    {
-                        lMsg << "[ERROR]";
-                    }
-                    break;
-            }
-            std::string lStr( "][" ), lCopyClassStr( newLog.m_class );
-            lMsg << "[" << lCopyClassStr << "]" << newLog.m_sLogText << "[File][" << file << "]" << "[Line][" << line <<
-                 "]" << std::endl;
-            OutputDebugString(lMsg.str().c_str());
+        case eLogWarning: lTag =" [WARNING]"; break;
+        case eLogError:   lTag =" [ERROR]"; break;
         }
-        // Add new log to the vector
-        m_vLogs.push_back( newLog );
-        free(buffer);
+
+        std::string lMsg;
+        StringUtils::Format( newLog.m_sLogText, "[%s]%s[File]%s[Line]%d\n", newLog.m_class.c_str(), newLog.m_sLogText.c_str(), file, line );
+        OutputDebugString(lMsg.c_str());
+      }
+
+      free(buffer);
+      va_end(args);
     }
 }
 
