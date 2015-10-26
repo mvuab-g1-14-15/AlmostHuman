@@ -9,7 +9,7 @@
 #include "RenderableVertex/InstancingVertexs.h"
 #include "Shapes/Shapes.h"
 
-#define MAX_PARTICLES 400
+#define MAX_PARTICLES 800
 using namespace baseUtils;
 
 const uint32 lIdxCount = 6;

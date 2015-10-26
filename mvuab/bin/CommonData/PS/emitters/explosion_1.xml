@@ -1,0 +1,13 @@
+<emitter active="true" name="smoke" loop="true" time_to_live="20.0">
+	<particles max_alive_particles="200" time_to_live="2 3">
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/flame/explosion_fire.jpg" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.0" color="0.2 0.2 0.2" size="2"/>
+			<interpolator alpha="0.3" color="0.4 0.4 0.4" size="5"/>
+			<interpolator alpha="0.1" color="0.1 0.1 0.1" size="1"/>
+		</interpolators>
+		<motion linear_speed="0.6 1" initial_dir_min="-1 0 0" initial_dir_max="1 0 0" radial_speed="20 50" gravity="-1"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0.0" particles_per_emission="5 6" cubic_size="5 2 5"/>
+</emitter>

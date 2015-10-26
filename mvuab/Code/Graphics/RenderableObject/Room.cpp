@@ -180,8 +180,7 @@ void CRoom::LoadLights()
 
 CRenderableObjectsManager* CRoom::GetLayer( const std::string& aLayer ) const 
 {
-    ASSERT( m_pLayers, "Null Layers for room %s", GetName().c_str() );
-    return m_pLayers->GetResource(aLayer);
+  return (m_pLayers ) ? m_pLayers->GetResource(aLayer) : NULL;
 }
 
 void CRoom::Update()

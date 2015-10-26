@@ -27,7 +27,7 @@ void CParticleSystemManager::Refresh()
 {
   Destroy();
   LoadXML();
-  LoadInstances("Data/sala1/particles.xml"); // The refresh only is available in developer mode
+  LoadInstances("Data/sala3/particles.xml"); // The refresh only is available in developer mode
 }
 
 void CParticleSystemManager::LoadXML()
