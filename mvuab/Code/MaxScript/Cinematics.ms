@@ -4,8 +4,8 @@ fileIn "Utils.ms"
 
 fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
-	--try 
-	--(
+	try 
+	(
 		if cameras.count == 0 then
 		(
 			format "No cameras in the scene \n"
@@ -122,11 +122,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				)			
 			)
 		)
-	--)
-	--catch
-	--(
-	--	format "Error generating camera XML \n"
-	--)
+	)
+	catch
+	(
+		format "Error generating camera cinematic XML \n"
+	)
 	
 	format "Camera XML created successfully: % \n" filenameXML
 	return xDoc.PrettySaveXML()
@@ -149,13 +149,31 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 
 		l_RootNode.AddAttributeAsString "name"		maxFileName
 		l_RootNode.AddAttributeAsString "duration" 	totalTimeStr
+		
 
 		for Obj in geometry do
 		(
 			isCinematic = getUserProp Obj "export_to_cinematics"
+			local l_InitKeyframe = getUserProp Obj "Init_Keyframe" 
+			
+			if (l_InitKeyframe == undefined OR l_InitKeyframe == "") then
+			(			
+				l_InitKeyframe  = 0
+			)
+			
+						
+			
+			
+			format "Obj name: % \n" Obj.name
+			format "InitKeyFrame % \n" l_InitKeyframe
+			format "InitKeyFrame to seconds % \n" strInitKeyFrame
 			
 			if (isCinematic == true) then 
 			(
+				
+				InitKeyFrameStr = stringStream ""
+				format "%" (l_InitKeyframe as float/ framerate) to:InitKeyFrameStr
+				strInitKeyFrame = InitKeyFrameStr as string
 				
 				local l_NewCinematicObjectNode = xDoc.getNewNode "cinematic_object"
 			
@@ -167,7 +185,7 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 				l_NewCinematicObjectNode.AddAttributeAsString "renderable_objects_manager" lObjName
 				l_NewCinematicObjectNode.AddAttributeAsString "room" aRoom
 				l_NewCinematicObjectNode.AddAttributeAsString "active" "false"
-				
+				l_NewCinematicObjectNode.AddAttributeAsString "init_keyframe" strInitKeyFrame
 				
 				for t = animationRange.start to animationRange.end by nFrames do
 				(
@@ -200,6 +218,7 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 					)
 				)
 			)
+
 		)
 		format "Cinematics XML created successfully: % \n" filenameXML
 		return xDoc.PrettySaveXML()
