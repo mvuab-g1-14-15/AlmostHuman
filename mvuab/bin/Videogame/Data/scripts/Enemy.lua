@@ -47,6 +47,8 @@ function CEnemy:__init( aInfo )
 		self.RenderableObject:SetRoomName( aInfo.room )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:SetYaw( -self.CharacterController:GetYaw() + g_HalfPi )
+	self.RenderableObject:MakeTransform()
 	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)
 
 	self.UseGizmo = aInfo.use_gizmo
@@ -133,6 +135,7 @@ function CEnemy:Destroy()
 end
 
 function CEnemy:Update()
+	--profiler:AddInit("CEnemy:Update()")
 	local dt = timer:GetElapsedTime()
 	
 	self:UpdateCamera()
@@ -254,6 +257,8 @@ function CEnemy:Update()
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
 	--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
+	
+	--profiler:AddEnd("CEnemy:Update()")
 end
 
 function CEnemy:PlayerInSight()

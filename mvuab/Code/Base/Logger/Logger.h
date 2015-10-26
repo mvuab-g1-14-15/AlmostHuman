@@ -65,8 +65,6 @@ class CLogger: public CSingleton<CLogger>
         ELogLevel m_eLogLevel;
         std::string     m_sPathFile;
         bool            mEnabledConsole;
-        CMutex          m_Mutex;
-
 };
 
 enum CodeColors
