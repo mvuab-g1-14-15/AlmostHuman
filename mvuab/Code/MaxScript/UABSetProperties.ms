@@ -19,11 +19,14 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	checkbox GenerateCheckLogic "Generate" pos:[343,34] width:66 height:13
 	dropdownList GenerateListLogic "" pos:[429,30] width:123 height:21 enabled:false items:#("", "event_box", "event_sphere", "stairs", "grippable_edges", "edges_where_to_be_dropped")
 	
-	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[51,232] width:217 height:17
-	checkbox WorldTransformCheckBox "Don't export world transform" pos:[51,250] width:217 height:17
+	checkbox CameraVisibilityCheckBox "Don't test camera visibility" pos:[52,209] width:217 height:17
+	checkbox WorldTransformCheckBox "Don't export world transform" pos:[52,227] width:217 height:17
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[50,184] width:91 height:17
 	edittext LinkedToBoneEditText "" pos:[141,184] width:120 height:19
-	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[51,268] width:217 height:17
+	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[52,251] width:217 height:17
+	label InitKeyframeEditText "Init Keyframe" pos:[55,271] width:75 height:18
+	edittext InitKeyframeValue "" pos:[143,269] width:53 height:19
+	
 	label lbl7 "Technique" pos:[50,152] width:64 height:18
 	edittext LineEditTechnique "" pos:[141,152] width:120 height:19
 	checkbox ShowNormalCheck "Show Normal" pos:[343,56] width:139 height:13
@@ -42,7 +45,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	
 		--Shadow Map
 	label lbl8 "ShadowMapFormatType" pos:[49,341] width:120 height:18
-	edittext ShadowMapFormatType "" pos:[171,341] width:90 height:19
+	edittext ShadowMapFormatType "" pos:[171,342] width:90 height:19
 	label lbl9 "ShadowMapHeight" pos:[48,367] width:120 height:18
 	edittext ShadowMapHeight "" pos:[170,367] width:90 height:19
 	label lbl10 "ShadowMapWidth" pos:[48,394] width:120 height:18
@@ -324,6 +327,9 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			
 			SetPropertyEditText Obj "Particle_Core" ParticleName
 			SetPropertyEditText Obj "Billboard_Core" BillboardName
+			
+			SetPropertyEditText Obj "Init_Keyframe" InitKeyframeValue
+			
 				
 			ObjAnterior=Obj
 		)
@@ -416,6 +422,8 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 				SetPropertyEditText Obj[i] "Particle_Core" ParticleName
 				SetPropertyEditText Obj[i] "Billboard_Core" BillboardName
 				
+				SetPropertyEditText Obj[i] "Init_Keyframe" InitKeyframeValue
+				
 				ObjAnterior=Obj[i]
 			)
 		)
@@ -429,6 +437,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
 	
 	
+
 	on ExportCheckRender changed theState do
 	(
 			if (ExportCheckRender.checked)==true then
@@ -629,6 +638,9 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			GetPropertyEditText Property ParticleName
 			Property=getUserProp $ "Billboard_Core" 	
 			GetPropertyEditText Property BillboardName
+	
+			Property=getUserProp $ "Init_Keyframe" 	
+			GetPropertyEditText Property InitKeyframeValue
 			
 				
 			ObjAnterior=$

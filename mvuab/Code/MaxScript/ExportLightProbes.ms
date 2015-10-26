@@ -127,6 +127,3 @@ fn ExportLightProbes Obj =
 	lLightProbeRoom.mLightProbe = lLightProbes
 	return lLightProbeRoom
 )
-
-lTest = ExportLightProbes $
-lTest.WriteToFile "E:/Master/GameEngineUAB/mvuab/test.xml"

@@ -8,6 +8,7 @@ filein "Triggers.ms"
 filein "Paths.ms"
 filein "Particles.ms"
 filein "Billboards.ms"
+filein "ExportLightProbes.ms"
 		
 utility UABUtility "UAB Utility" width:170 height:761
 (
@@ -47,6 +48,7 @@ utility UABUtility "UAB Utility" width:170 height:761
 	button PathButton "Paths" pos:[20,260] width:57 height:17
 	button BillboardButton "Billboards" pos:[84,260] width:57 height:17
 	button ExportEnemyPos "Enemies" pos:[24,283] width:57 height:17
+	button LightprobeButton "Lightprobe" pos:[84,284] width:57 height:17
 	
 	/*on RouteButton pressed do
 	(
@@ -60,10 +62,9 @@ utility UABUtility "UAB Utility" width:170 height:761
 		graphExporter.ExportRouteXML RouteDir
 	)*/
 
-
 	on UABUtility open do
 	(
-		local levels=#("","sala1","sala2","pasillo","sala3","sala4")
+		local levels=#("","sala1","sala2","pasillo","sala3","elevator","sala4","space")
 		LevelList.items=levels
 		PathLabel.text = "C:\Users\Galix\Desktop"
 	)
@@ -78,6 +79,13 @@ utility UABUtility "UAB Utility" width:170 height:761
 		--export lights
 		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\lights.xml"
 		ExportLights LightDir selection LevelList.selected
+	)
+	on LightprobeButton pressed do
+	(
+		--export lights
+		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\light_probe.xml"
+		lTest = ExportLightProbes $
+		lTest.WriteToFile LightDir
 	)
 	on MeshButton pressed do
 	(		
@@ -320,6 +328,13 @@ utility UABUtility "UAB Utility" width:170 height:761
 		ExportBillboards PathDir		
 	)
 	on ExportEnemyPos pressed do
+	(
+		format " PathLabel % \n" PathLabel.text
+		IsEmptyDestPath PathLabel.text
+			
+		ExportEnemyPositionToXML PathLabel.text		
+	)
+	on LightprobeBtn pressed do
 	(
 		format " PathLabel % \n" PathLabel.text
 		IsEmptyDestPath PathLabel.text
