@@ -1,0 +1,3 @@
+<cinematic>
+	<play_animation name="ElevatorDown" resource_id_file="Data/pasillo/cinematics/elevator_down.xml" time="33.3333" />
+</cinematic>
