@@ -11,6 +11,7 @@ end
 function CParticle:Init( aPosition )
 	self.Active = true;
 	self.Instance:ChangeVisibility( true )
+	self:ChangePosition( aPosition )
 	self.Core:ResetEmitters();
 end
 

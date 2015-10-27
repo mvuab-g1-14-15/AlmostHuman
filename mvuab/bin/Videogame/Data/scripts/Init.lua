@@ -23,11 +23,18 @@ function load_basics()
 	-- basic loads
 
 	scene:ActivateRoom("sala1")
-	scene:ActivateRoom("pasillo")
-	scene:ActivateRoom("sala2")
-	scene:ActivateRoom("sala3")	
-	scene:ActivateRoom("elevator")	
-	scene:ActivateRoom("sala4")	
+	scene:SetCurrentRoomName("sala1")
+	scene:LoadRoom("pasillo")
+	scene:LoadRoom("sala2")
+	scene:LoadRoom("sala3")	
+	scene:LoadRoom("elevator")
+	scene:LoadRoom("sala4")	
+	
+	scene:DesactivateRoom("pasillo")
+	scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("sala3")	
+	scene:DesactivateRoom("elevator")	
+	scene:DesactivateRoom("sala4")
 	
 	engine:Trace("Finish the load_basics()")
 end
@@ -97,7 +104,9 @@ function load_gameplay()
 	-- g_Player:GetRenderableObject():ChangeAnimation("cinematica_inicial_sala1_pos00", 0.2, 0)
 	-- g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
 
-	scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
+	if scene:GetResource("sala3") ~= nil and scene:GetResource("sala3"):GetLayer("solid") ~= nil then
+        scene:GetResource("sala3"):GetLayer("solid"):GetResource("robot_assembly007_sala3"):ChangeAnimation("move", 0.2, 0)
+    end
 	
 	renderable_objects_manager_characters_sala1 = scene:GetResource("sala1"):GetLayer("solid")
 end
@@ -171,18 +180,20 @@ function update_gameplay()
 		
 		if g_bPressRoomPasillo then
 			if action_manager:DoAction("Action") then
-					cinematic_manager:Execute("OpenDoorPasillo")
-					trigger_manager:GetTriggerByName("pasillo_sala3"):SetActive(false)
-					gui_manager:ShowStaticText("OpenDoor")
-					physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
-					g_bPressRoomPasillo = false
+				scene:ActivateRoom("sala3")
+				scene:ActivateRoom("elevator")
+				cinematic_manager:Execute("OpenDoorPasillo")
+				trigger_manager:GetTriggerByName("pasillo_sala3"):SetActive(false)
+				gui_manager:ShowStaticText("OpenDoor")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
+				g_bPressRoomPasillo = false
 			end
 		end
 		
 		if g_bPressRoom2X then
 			if action_manager:DoAction("Action") then
 				if enemigosVivos == 0 then
-					engine:Trace("He entrado en abrir la puerta")
+					scene:ActivateRoom("pasillo")
 					trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 					cinematic_manager:Execute("OpenDoor")
 					g_bPressRoom2X = false
@@ -247,6 +258,11 @@ function update_gameplay()
 				g_bC42 = false
 				g_bBombaActivada = true
 				gui_manager:ShowStaticText(g_sTextC4Press)
+				--explosion particulas
+				lExplosion1 = CParticle( "explosion", Vect3f(0.0, 0.0, 0.0) )
+				lExplosion2 = CParticle( "explosion", Vect3f(0.0, 0.0, 0.0) )
+				lExplosion1:Init(Vect3f(37.83, -17.57, 51.61))
+				lExplosion2:Init(Vect3f(24.22, -17.74, 68.83))
 				cinematic_manager:Execute("explotion")
 				-- g_Player:SetPosition(Vect3f(-4.58296, -14.0589, 60.0993))
 				-- g_Player:SetAnimation("logan_cinem_sala3")

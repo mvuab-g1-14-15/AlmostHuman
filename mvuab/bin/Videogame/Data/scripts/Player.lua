@@ -176,6 +176,10 @@ function CPlayer:GetHeight()
 	return self.PlayerController:GetHeight()
 end
 
+function CPlayer:GetEnergy()
+	return self.Blaster:GetEnergy()
+end
+
 function CPlayer:AddEnergy(amount)
 	local TotalEnergy = self.Blaster:GetEnergy()+amount
 	if TotalEnergy > 100.0 then

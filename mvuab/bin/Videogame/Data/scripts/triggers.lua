@@ -26,6 +26,11 @@ g_sTextC4Press = ""
 g_bBombaActivada = false
 g_bFootstepType = "pavimento"
 
+g_EnteredSala2 = false
+g_EnteredPasillo = false
+g_EnteredSala3 = false
+g_EnteredSala4 = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -71,7 +76,7 @@ end
 function ShowImage1(other_shape)
 	--cinematic_manager:Execute("cinematica_1")
 	if g_bChargeEnergy then
-		enemy_manager:AlarmRoom("sala2")
+		--enemy_manager:AlarmRoom("sala2")
 		g_bChargeEnergy = false
 	else
 		g_bChargeEnergy = true
@@ -318,7 +323,6 @@ function PlaySound(event,game_object)
 	sound_manager:PlayEvent(event, game_object)
 end
 
-
 function SetPropTunel()
 	--PlaySound('Play_Tunel','Iris')
 	--cinematic_manager:Execute("cinematica_1")
@@ -326,24 +330,62 @@ function SetPropTunel()
 end
 
 function SetPropSala2()
-	--PlaySound('Play_Tunel','Iris')
-	--cinematic_manager:Execute("cinematica_1")
-	g_bFootstepType = "pavimento"
+	if not g_EnteredSala2 then
+		--PlaySound('Play_Tunel','Iris')
+		--cinematic_manager:Execute("cinematica_1")
+		
+		scene:SetCurrentRoomName("sala2")
+		g_Player:SetRoom("sala2")
+		g_Player:SetCheckpoint("sala2", Vect3f( 76.51, -10.60, -31.10 ), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		scene:DesactivateRoom("sala1")
+		
+		g_bFootstepType = "pavimento"
+		g_EnteredSala2 = true
+		engine:Trace("Setted properties of sala2")
+	end
 end
 	
 function SetPropPasillo()
-	--PlaySound('Play_Tunel','Iris')
-	--cinematic_manager:Execute("cinematica_1")
+	if not g_EnteredPasillo then
+		--PlaySound('Play_Tunel','Iris')
+		--cinematic_manager:Execute("cinematica_1")
+		
+		scene:SetCurrentRoomName("pasillo")
+		g_Player:SetRoom("pasillo")
+		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		g_EnteredPasillo = true
+		engine:Trace("Setted properties of pasillo")
+	end
 end
 
 function SetPropSala3()
-	--PlaySound('Play_Tunel','Iris')
-	--cinematic_manager:Execute("cinematica_1")
+	if not g_EnteredSala3 then
+		--PlaySound('Play_Tunel','Iris')
+		--cinematic_manager:Execute("cinematica_1")
+		
+		scene:SetCurrentRoomName("sala3")
+		g_Player:SetRoom("sala3")
+		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		g_EnteredSala3 = true
+		engine:Trace("Setted properties of sala3")
+	end
 end
 
 function SetPropSala4()
-	--PlaySound('Play_Tunel','Iris')
-	--cinematic_manager:Execute("cinematica_1")
+	if not g_EnteredSala4 then
+		--PlaySound('Play_Tunel','Iris')
+		--cinematic_manager:Execute("cinematica_1")
+		
+		scene:SetCurrentRoomName("sala4")
+		g_Player:SetRoom("sala4")
+		g_Player:SetCheckpoint("sala4", Vect3f( -53.01, 35.79, 62.32 ), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		g_EnteredSala4 = true
+		engine:Trace("Setted properties of sala4")
+	end
 end
 
 function Hacknave(nave_obj)
@@ -359,6 +401,7 @@ function UpdateDLC(text_to_show)
 end
 
 function ActiveRoom(room)
+	scene:ActivateRoom(room)
 end
 
 function take_C4()

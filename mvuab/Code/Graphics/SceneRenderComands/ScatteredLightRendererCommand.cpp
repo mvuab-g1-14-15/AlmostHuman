@@ -56,7 +56,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
     Math::Vect3f l_CameraDirection = CameraMInstance->GetCurrentCamera()->GetDirection();
 
-    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetRoomName();
+    std::string l_RoomName = CEngineManagers::GetSingletonPtr()->GetSceneManager()->GetCurrentRoomName();
 
     if(l_RoomName == "sala1")
     {

@@ -43,12 +43,16 @@ public:
 
   CRoom* GetCurrentRoom() { return mCurrentRoom; }
 
-  std::string GetRoomName() { return mRoomName; }
-  void SetRoomName(const std::string &l_RoomName) { mRoomName = l_RoomName; }
+  std::string GetCurrentRoomName() { return mCurrentRoomName; }
+  void SetCurrentRoomName(const std::string &l_RoomName)
+  {
+    mCurrentRoomName = l_RoomName;
+    mCurrentRoom = GetResource(l_RoomName);
+  }
 
 private:
   CRoom* mCurrentRoom;
-  std::string mRoomName;
+  std::string mCurrentRoomName;
   CRenderableObjectsManager *mToDelete;
 };
 

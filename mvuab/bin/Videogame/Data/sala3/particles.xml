@@ -1,4 +1,2 @@
 <particles_instances>
-	<particle_instance name="explosion01" core="explosion" pos="37.83 -17.57 51.61" active="true"/>
-    <particle_instance name="explosion01" core="explosion" pos="24.22 -17.74 68.83" active="true"/>
 </particles_instances>

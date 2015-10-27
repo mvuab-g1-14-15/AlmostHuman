@@ -20,7 +20,7 @@
 CScene::CScene( const CXMLTreeNode& atts )
     : CManager( atts )
     , mCurrentRoom( 0 )
-    , mRoomName("")
+    , mCurrentRoomName("")
     , mToDelete( 0 )
 {
 
@@ -57,7 +57,7 @@ void CScene::Destroy()
 void CScene::Init()
 {
     Load( mConfigPath );
-    //LoadAllRoom();
+    //LoadAllRoo(m);
 }
 
 bool CScene::Load( const std::string& l_FilePath )
@@ -102,8 +102,6 @@ void CScene::ActivateRoom( const std::string& aRoomName )
             lRoom->Load();
 
         lRoom->Activate();
-        mCurrentRoom = lRoom;
-        mRoomName = aRoomName;
     }
 }
 

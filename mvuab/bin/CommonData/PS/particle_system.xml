@@ -30,10 +30,11 @@
 		<cube_emitter file="blaster_emitter.xml"/>
 	</particle_system_core>
     
-    <particle_system_core name="explosion">
+    <particle_system_core name="explosion" delay_in="10">
 		<cube_emitter file="explosion_1.xml"/>
         <cube_emitter file="explosion_2.xml"/>
         <cube_emitter file="explosion_3.xml"/>
         <cube_emitter file="explosion_4.xml"/>
 	</particle_system_core>
+	
 </particles_systems>

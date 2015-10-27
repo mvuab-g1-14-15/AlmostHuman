@@ -9,6 +9,8 @@
 #include "EngineManagers.h"
 
 CParticleSystemCore::CParticleSystemCore()
+  : mDelayIn( 0.0 )
+  , mCurrentTime( 0.0 )
 {
 }
 
@@ -38,9 +40,14 @@ CParticleSystemCore::~CParticleSystemCore()
 void CParticleSystemCore::Update()
 {
     float dt = deltaTimeMacro;
-    BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+    mCurrentTime += dt;
+
+    if( mCurrentTime > mDelayIn )
     {
+      BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+      {
         lParticleEmitter->Update(dt);
+      }
     }
 }
 
@@ -48,16 +55,19 @@ void CParticleSystemCore::Render()
 {
     CGraphicsManager* lGM = GraphicsInstance;
 
-    BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
+    if( mCurrentTime > mDelayIn )
     {
-        if( lParticleInstance->IsVisible() )
-        {
-            lGM->SetTransform( lParticleInstance->GetTransform() );
-            BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
-            {
-                lParticleEmitter->Render();
-            }
-        }
+      BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
+      {
+          if( lParticleInstance->IsVisible() )
+          {
+              lGM->SetTransform( lParticleInstance->GetTransform() );
+              BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+              {
+                  lParticleEmitter->Render();
+              }
+          }
+      }
     }
 
     // Set the indentity
@@ -94,6 +104,7 @@ void CParticleSystemCore::AddEmitter( CParticleEmitter* aEmitter )
 
 void CParticleSystemCore::ResetEmitters()
 {
+  mCurrentTime = 0.0;
   BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
   {
     lParticleEmitter->Reset();

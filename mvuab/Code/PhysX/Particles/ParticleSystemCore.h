@@ -27,6 +27,9 @@ class CParticleSystemCore
         typedef std::vector< CParticleEmitter * > TParticleEmittersVector;
         TParticleInstanceVector mInstances;
         TParticleEmittersVector mEmitters;
+
+        float mDelayIn;
+        float mCurrentTime;
 };
 
 #endif //_PARTICLE_SYSTEM_CORE_H
