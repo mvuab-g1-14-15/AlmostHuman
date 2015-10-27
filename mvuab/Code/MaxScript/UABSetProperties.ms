@@ -1,6 +1,6 @@
 rollout UABSetProperties "UABSetProperties" width:600 height:800
 (
-	GroupBox RenderGroup "Render" pos:[47,16] width:226 height:280
+	GroupBox RenderGroup "Render" pos:[47,16] width:226 height:300
 	checkbox ExportCheckRender "Export" pos:[50,37] width:61 height:17
 	dropdownList ExportListRender "" pos:[141,35] width:120 height:21 enabled:false items:#("instance_mesh", "animated_mesh")
 	checkbox VisibleCheckRender "Visible" pos:[50,63] width:51 height:17
@@ -24,8 +24,10 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	checkbox LinkedToBoneCheckBox "Linked to bone" pos:[50,184] width:91 height:17
 	edittext LinkedToBoneEditText "" pos:[141,184] width:120 height:19
 	checkbox ExportToCinematicsCheckbox "Export to cinematics" pos:[52,251] width:217 height:17
-	label InitKeyframeEditText "Init Keyframe" pos:[55,271] width:75 height:18
-	edittext InitKeyframeValue "" pos:[143,269] width:53 height:19
+	label InitKeyframeEditText "Init Keyframe" pos:[54,289] width:75 height:18
+	edittext InitKeyframeValue "" pos:[142,287] width:53 height:19
+	label CinematicsCoreObjEditText "CinematicsCoreObj" pos:[53,269] width:95 height:18
+	edittext CoreObjCinematicsValue "" pos:[148,266] width:124 height:19
 	
 	label lbl7 "Technique" pos:[50,152] width:64 height:18
 	edittext LineEditTechnique "" pos:[141,152] width:120 height:19
@@ -41,27 +43,27 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	checkbox ReverseCameraCheckBox "Reverse" pos:[432,269] width:123 height:21
 	
 	--  LIGHTS	
-	GroupBox GBLights "Lights" pos:[43,307] width:244 height:282
+	GroupBox GBLights "Lights" pos:[43,330] width:244 height:282
 	
 		--Shadow Map
-	label lbl8 "ShadowMapFormatType" pos:[49,341] width:120 height:18
-	edittext ShadowMapFormatType "" pos:[171,342] width:90 height:19
-	label lbl9 "ShadowMapHeight" pos:[48,367] width:120 height:18
-	edittext ShadowMapHeight "" pos:[170,367] width:90 height:19
-	label lbl10 "ShadowMapWidth" pos:[48,394] width:120 height:18
-	edittext ShadowMapWidth "" pos:[170,394] width:90 height:19
-	checkbox ExportGenerateShadowMap "Generate Shadow Map" pos:[89,420] width:150 height:13
+	label lbl8 "ShadowMapFormatType" pos:[49,364] width:120 height:18
+	edittext ShadowMapFormatType "" pos:[171,365] width:90 height:19
+	label lbl9 "ShadowMapHeight" pos:[48,390] width:120 height:18
+	edittext ShadowMapHeight "" pos:[170,390] width:90 height:19
+	label lbl10 "ShadowMapWidth" pos:[48,417] width:120 height:18
+	edittext ShadowMapWidth "" pos:[170,417] width:90 height:19
+	checkbox ExportGenerateShadowMap "Generate Shadow Map" pos:[89,443] width:150 height:13
 
 		--Static Shadow Map
-	label lbl11 "ShadowMapWidth" pos:[48,447] width:120 height:18
-	edittext StaticShadowMapFormatType "" pos:[170,447] width:90 height:19
-	label lbl12 "StaticShadowMapHeight" pos:[48,473] width:120 height:18
-	edittext StaticShadowMapHeight "" pos:[170,473] width:90 height:19
-	label lbl13 "StaticShadowMapWidth" pos:[47,496] width:120 height:18
-	edittext StaticShadowMapWidth "" pos:[169,496] width:90 height:19
-	checkbox ExportGenerateStaticShadowMap "Generate Static Shadow Map" pos:[88,527] width:150 height:13
+	label lbl11 "ShadowMapWidth" pos:[48,470] width:120 height:18
+	edittext StaticShadowMapFormatType "" pos:[170,470] width:90 height:19
+	label lbl12 "StaticShadowMapHeight" pos:[48,496] width:120 height:18
+	edittext StaticShadowMapHeight "" pos:[170,496] width:90 height:19
+	label lbl13 "StaticShadowMapWidth" pos:[47,519] width:120 height:18
+	edittext StaticShadowMapWidth "" pos:[169,519] width:90 height:19
+	checkbox ExportGenerateStaticShadowMap "Generate Static Shadow Map" pos:[88,550] width:150 height:13
 		
-	checkbox ExportLightsCheckBox "no_export_lights" pos:[50,561] width:118 height:18
+	checkbox ExportLightsCheckBox "no_export_lights" pos:[50,584] width:118 height:18
 	
 	--  TRIGGERS	
 	GroupBox grp8 "Trigger" pos:[336,440] width:256 height:124
@@ -329,6 +331,9 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			SetPropertyEditText Obj "Billboard_Core" BillboardName
 			
 			SetPropertyEditText Obj "Init_Keyframe" InitKeyframeValue
+			SetPropertyEditText Obj "CoreObjCinematics" CoreObjCinematicsValue
+			
+			
 			
 				
 			ObjAnterior=Obj
@@ -423,6 +428,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 				SetPropertyEditText Obj[i] "Billboard_Core" BillboardName
 				
 				SetPropertyEditText Obj[i] "Init_Keyframe" InitKeyframeValue
+				SetPropertyEditText Obj[i] "CoreObjCinematics" CoreObjCinematicsValue
 				
 				ObjAnterior=Obj[i]
 			)
@@ -438,6 +444,7 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	
 	
 
+	
 	on ExportCheckRender changed theState do
 	(
 			if (ExportCheckRender.checked)==true then
@@ -642,6 +649,8 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			Property=getUserProp $ "Init_Keyframe" 	
 			GetPropertyEditText Property InitKeyframeValue
 			
+			Property=getUserProp $ "CoreObjCinematics" 	
+			GetPropertyEditText Property CoreObjCinematicsValue
 				
 			ObjAnterior=$
 		)

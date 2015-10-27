@@ -279,4 +279,6 @@
   <MeshInstance name="andride095_sala3" core="andride095_sala3" pos="24.203 -12.8108 98.2971" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride096_sala3" core="andride096_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="enganche_034_sala3" core="enganche_034_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap009_sala3" core="cap009_sala3" pos="38.2314 -17.3208 55.9542" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap017_sala3" core="cap017_sala3" pos="24.244 -17.3208 64.4532" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
 </RenderableObjects>

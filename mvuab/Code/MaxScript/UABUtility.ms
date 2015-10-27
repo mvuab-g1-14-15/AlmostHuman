@@ -22,8 +22,8 @@ utility UABUtility "UAB Utility" width:170 height:761
 	button MeshButton "Mesh" pos:[85,171] width:57 height:17
 	button CinematicsButton "Cinematics" pos:[85,193] width:57 height:17
 	button CameraButon "Camera" pos:[21,192] width:57 height:17
-	button GraphButton "Graph" pos:[21,213] width:57 height:17
-	button ExportLayersButton "ExportLayers" pos:[85,213] width:57 height:17
+	button GraphButton "Graph" pos:[21,230] width:57 height:17
+	button ExportLayersButton "ExportLayers" pos:[85,230] width:57 height:17
 	button StaticMeshManagerButton "Static Mesh Manager" pos:[20,324] width:124 height:17
 	button SceneButton "Scene" pos:[19,347] width:124 height:17
 	
@@ -43,25 +43,16 @@ utility UABUtility "UAB Utility" width:170 height:761
 	
 	button SetProperties "Set Properties" pos:[16,381] width:141 height:17
 	
-	button TriggerButton "Triggers" pos:[20,237] width:57 height:17
-	button ParticlesButton "Particles" pos:[84,237] width:57 height:17
-	button PathButton "Paths" pos:[20,260] width:57 height:17
-	button BillboardButton "Billboards" pos:[84,260] width:57 height:17
-	button ExportEnemyPos "Enemies" pos:[24,283] width:57 height:17
-	button LightprobeButton "Lightprobe" pos:[84,284] width:57 height:17
+	button TriggerButton "Triggers" pos:[20,254] width:57 height:17
+	button ParticlesButton "Particles" pos:[84,254] width:57 height:17
+	button PathButton "Paths" pos:[20,277] width:57 height:17
+	button BillboardButton "Billboards" pos:[84,277] width:57 height:17
+	button ExportEnemyPos "Enemies" pos:[24,300] width:57 height:17
+	button LightprobeButton "Lightprobe" pos:[84,301] width:57 height:17
 	
-	/*on RouteButton pressed do
-	(
-		format " PathLabel % \n" PathLabel.text
-		IsEmptyDestPath PathLabel.text
-		
-		RouteDir = PathLabel.text + "\\route.xml"
-		
-		local graphExporter = RouteAndGraph()
-		graphExporter.Calculate()
-		graphExporter.ExportRouteXML RouteDir
-	)*/
-
+	button CinematicsCloneButton "Clone Cinematics" pos:[21,211] width:122 height:17
+	
+	
 	on UABUtility open do
 	(
 		local levels=#("","sala1","sala2","pasillo","sala3","elevator","sala4","space")
@@ -79,13 +70,6 @@ utility UABUtility "UAB Utility" width:170 height:761
 		--export lights
 		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\lights.xml"
 		ExportLights LightDir selection LevelList.selected
-	)
-	on LightprobeButton pressed do
-	(
-		--export lights
-		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\light_probe.xml"
-		lTest = ExportLightProbes $
-		lTest.WriteToFile LightDir
 	)
 	on MeshButton pressed do
 	(		
@@ -334,11 +318,26 @@ utility UABUtility "UAB Utility" width:170 height:761
 			
 		ExportEnemyPositionToXML PathLabel.text		
 	)
-	on LightprobeBtn pressed do
+	on LightprobeButton pressed do
 	(
-		format " PathLabel % \n" PathLabel.text
+		--export lights
+		local LightDir = PathLabel.text + "\\" +LevelList.selected + "\\light_probe.xml"
+		lTest = ExportLightProbes $
+		lTest.WriteToFile LightDir
+	)
+	on CinematicsCloneButton pressed do
+	(		
 		IsEmptyDestPath PathLabel.text
-			
-		ExportEnemyPositionToXML PathLabel.text		
+		IsEmptyLevelList LevelList.selected
+		
+		local rootDir = PathLabel.text
+		local l_DirToXML = rootDir + "\\" +LevelList.selected
+		
+		DoesFolderExist l_DirToXML
+		
+		CinematicsDir = l_DirToXML + "\\cinematics.xml"
+		nFrames = 1
+		
+		ExportCloneCinematicObjects nFrames CinematicsDir LevelList.selected
 	)
 )

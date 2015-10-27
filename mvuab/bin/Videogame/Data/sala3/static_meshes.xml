@@ -279,4 +279,6 @@
   <static_mesh name="andride095_sala3" filename="meshes\andride095.mesh" />
   <static_mesh name="andride096_sala3" filename="meshes\andride096.mesh" />
   <static_mesh name="enganche_034_sala3" filename="meshes\enganche_034.mesh" />
+  <static_mesh name="cap009_sala3" filename="meshes\cap009.mesh" />
+  <static_mesh name="cap017_sala3" filename="meshes\cap017.mesh" />
 </static_meshes>

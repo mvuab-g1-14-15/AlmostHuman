@@ -225,3 +225,98 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 		format "Error generating cinematics XML \n"
 	)
 )
+
+
+
+fn ExportCloneCinematicObjects nFrames filenameXML aRoom =
+(
+	--try
+	--(
+		totalTimeStr = stringStream ""
+		format "%" (((animationRange.end as float) / ticksPerFrame) / framerate) to:totalTimeStr
+		strTotalTime = totalTimeStr as string
+			
+		-- create the document and set the filename
+		xDoc = XMLDocument filenameXML
+		
+		--create the base node and append the node to the document
+		local l_RootNode = xDoc.getNewNode "cinematic"
+		xDoc.AppendNode l_RootNode
+
+		l_RootNode.AddAttributeAsString "name"		maxFileName
+		l_RootNode.AddAttributeAsString "duration" 	totalTimeStr
+		
+
+		for Obj in geometry do
+		(
+			local isCinematic = getUserProp Obj "export_to_cinematics"
+			local l_InitKeyframe = getUserProp Obj "Init_Keyframe" 
+						
+			if (l_InitKeyframe == undefined OR l_InitKeyframe == "") then
+			(			
+				l_InitKeyframe  = 0
+			)
+
+			if (isCinematic == true) then 
+			(
+				
+				InitKeyFrameStr = stringStream ""
+				format "%" (l_InitKeyframe as float/ framerate) to:InitKeyFrameStr
+				strInitKeyFrame = InitKeyFrameStr as string
+				
+				local l_CoreCinematics = getUserProp Obj "CoreObjCinematics"
+				l_CorCinematicObj = execute ("$'"+l_CoreCinematics + "'")
+				
+				local l_NewCinematicObjectNode = xDoc.getNewNode "cinematic_object"
+			
+				-- append the new node cinematic_object to the root node cinematic
+				l_RootNode.AppendNode l_NewCinematicObjectNode 
+				lObjName = Obj.name +"_"+ aRoom; 
+				
+				l_NewCinematicObjectNode.AddAttributeAsString "resource" lObjName
+				l_NewCinematicObjectNode.AddAttributeAsString "renderable_objects_manager" lObjName
+				l_NewCinematicObjectNode.AddAttributeAsString "room" aRoom
+				l_NewCinematicObjectNode.AddAttributeAsString "active" "false"
+				l_NewCinematicObjectNode.AddAttributeAsString "init_keyframe" strInitKeyFrame
+				
+				for t = animationRange.start to animationRange.end by nFrames do
+				(
+					animate on
+					(
+						at time t
+						(
+							TimeInSeconds = stringStream ""
+							format "%" (((t as float) / ticksPerFrame) / framerate) to:TimeInSeconds
+							strTime = TimeInSeconds as string
+								
+							YawAngle =GetYaw l_CorCinematicObj.transform
+							PitchAngle= GetPitch l_CorCinematicObj.transform
+							RollAngle= GetRoll l_CorCinematicObj.transform
+
+							--<cinematic_object_key_frame time="0.0333333" pos="1.63108 0.564489 10.0025" yaw="-1.19209e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0"/>
+							local l_NewCinematicObjectKeyNode = xDoc.getNewNode "cinematic_object_key_frame"
+							
+							-- append the new node cinematic_key_object to the cinematic_object
+							l_NewCinematicObjectNode.AppendNode l_NewCinematicObjectKeyNode 
+							
+							l_NewCinematicObjectKeyNode.AddAttributeAsString "time" strTime
+							l_NewCinematicObjectKeyNode.AddAttributeCoordinate "pos" l_CorCinematicObj.Pos
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "yaw" YawAngle
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "pitch" PitchAngle
+							l_NewCinematicObjectKeyNode.AddAttributeFloat "roll" RollAngle
+							l_NewCinematicObjectKeyNode.AddAttributeCoordinate "scale" l_CorCinematicObj.Scale						
+							
+						)
+					)
+				)
+			)
+
+		)
+		format "Cinematics clone XML created successfully: % \n" filenameXML
+		return xDoc.PrettySaveXML()
+	--)
+	--catch
+	--(
+	--	format "Error generating clone cinematics XML \n"
+--	)
+)
