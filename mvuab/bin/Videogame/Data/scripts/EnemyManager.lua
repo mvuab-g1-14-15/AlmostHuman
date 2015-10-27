@@ -285,10 +285,6 @@ function CEnemyManager:Reinit( aRoom )
 	end
 end
 
-function CEnemyManager:AddGarbageMesh(aRoom, aName)
-	self.GarbageMesh[aRoom][aName] = true
-end
-
 function CEnemyManager:Update()
 	--profiler:AddInit("CEnemyManager:Update()")
 	for lRoom in pairs (self.Enemy) do
@@ -299,18 +295,12 @@ function CEnemyManager:Update()
 					lActualEnemy:Update()
 				else
 					lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
-					if not countdowntimer_manager:ExistTimer(lActualEnemy:GetName().."DeadTimer") then
-						countdowntimer_manager:AddTimer(lActualEnemy:GetName().."DeadTimer", 5.0, false)
-					end
-				
-					if countdowntimer_manager:isTimerFinish(lActualEnemy:GetName().."DeadTimer") then				
-						countdowntimer_manager:Reset(lActualEnemy:GetName().."DeadTimer", false)
-						
-						lActualEnemy:Destroy()
-						self.Enemy[lRoom][i] = nil
-						--table.remove(self.Enemy[lRoom], i)
-						collectgarbage()
-					end
+					self.GarbageMesh[lActualEnemy:GetRoom()][lActualEnemy:GetName()] = true
+					--Add death particle
+					lActualEnemy:Destroy()
+					self.Enemy[lRoom][i] = nil
+					--table.remove(self.Enemy[lRoom], i)
+					--collectgarbage()
 				end
 			end
 		end
