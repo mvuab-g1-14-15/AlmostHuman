@@ -196,15 +196,6 @@
   <MeshInstance name="Sala_3_Roof001_sala3" core="Sala_3_Roof001_sala3" pos="-2.15056 -1.53177 59.9283" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 0.930556" />
   <MeshInstance name="container002_sala3" core="container002_sala3" pos="-1.54794 -15.8763 75.8133" yaw="0.0795515" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamps_sala3" core="lamps_sala3" pos="-18.5606 -2.95393 60.2359" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god_sala3" core="ray_of_god_sala3" pos="1.1419 -18.4693 44.6744" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god001_sala3" core="ray_of_god001_sala3" pos="1.1419 -18.4693 53.0032" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god002_sala3" core="ray_of_god002_sala3" pos="3.5736 -18.4693 60.4816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god003_sala3" core="ray_of_god003_sala3" pos="1.18723 -18.4693 67.7239" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god004_sala3" core="ray_of_god004_sala3" pos="-5.61677 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god005_sala3" core="ray_of_god005_sala3" pos="-20.8578 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god006_sala3" core="ray_of_god006_sala3" pos="-30.0957 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god007_sala3" core="ray_of_god007_sala3" pos="-40.6862 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="ray_of_god008_sala3" core="ray_of_god008_sala3" pos="1.18723 -18.4693 75.8246" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 81.3461" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg004_sala3" core="Leg004_sala3" pos="40.4789 -17.2726 85.9099" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
   <MeshInstance name="feet_01_sala3" core="feet_01_sala3" pos="40.1754 -17.2726 83.5393" yaw="-1.39093e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
