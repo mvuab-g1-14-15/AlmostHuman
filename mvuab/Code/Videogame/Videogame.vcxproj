@@ -165,6 +165,7 @@
     <ClCompile Include="videogame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TestProcess.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Final|Win32'">true</ExcludedFromBuild>
@@ -186,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="TestProcess\PlayerPhysicProcess.h" />
     <ClInclude Include="TestProcess\PreProcess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Videogame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\Videogame\favicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
