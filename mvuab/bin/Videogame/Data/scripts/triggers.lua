@@ -355,6 +355,8 @@ function SetPropPasillo()
 		g_Player:SetRoom("pasillo")
 		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
 		
+		scene:DesactivateRoom("sala2")
+		
 		g_EnteredPasillo = true
 		engine:Trace("Setted properties of pasillo")
 	end
@@ -368,6 +370,8 @@ function SetPropSala3()
 		scene:SetCurrentRoomName("sala3")
 		g_Player:SetRoom("sala3")
 		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		scene:DesactivateRoom("pasillo")
 		
 		g_EnteredSala3 = true
 		engine:Trace("Setted properties of sala3")
