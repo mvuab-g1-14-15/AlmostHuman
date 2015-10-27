@@ -16,6 +16,7 @@ CParticleSystemCore::CParticleSystemCore()
 
 CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFactory* aEmitterFactory )
 {
+    mDelayIn = atts.GetAttribute<float>("delay_in", 0.0f);
     for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
     {
         const CXMLTreeNode& lCurrentEmitter = atts( i );

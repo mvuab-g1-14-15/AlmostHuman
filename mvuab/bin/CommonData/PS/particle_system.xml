@@ -30,7 +30,7 @@
 		<cube_emitter file="blaster_emitter.xml"/>
 	</particle_system_core>
     
-    <particle_system_core name="explosion" delay_in="10">
+    <particle_system_core name="explosion" delay_in="7.0">
 		<cube_emitter file="explosion_1.xml"/>
         <cube_emitter file="explosion_2.xml"/>
         <cube_emitter file="explosion_3.xml"/>
