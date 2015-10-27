@@ -1,10 +1,10 @@
 <cinematic>
-	<add_renderable path="Data\sala3\cinematics/" room="sala3" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.1"/>
+	<add_renderable path="Data\sala3\cinematics/" room="sala3" renderable_objects_file="solid_layer_explosion.xml" static_meshes_file="static_meshes_explosion.xml" time="0.1"/>
 	<set_active name="explotion_fragment" resource_id_file="Data/sala3/cinematics/elementos_explosion_desactivated.xml" active="false" time="0.1"/>
 	<set_active name="explotion_fragment2" resource_id_file="Data/sala3/cinematics/elementos_explosion.xml" active="true" time="0.1"/>
 	<set_camera name="CameraCinematica" name_camera="camera_cinematica1_sala3" active="true" time="0.1" blocker="true" />
 	<play_animation name="Cylinder001_sala3" animated="true" room="sala3"  time="0.0001" animation="logan_cinem_sala3" />
-	<play_animation name="Montaje" room="sala3" resource_id_file="Data/sala3/cinematics/machine_broken.xml" time="10.0"/>
+	<play_animation name="Montaje" room="sala3" resource_id_file="Data/sala3/cinematics/cinematics_explosion.xml" time="10.0"/>
 	<set_active name="explotion_fragment3" resource_id_file="Data/sala3/cinematics/elementos_explosion_desactivated_player.xml" active="false" time="0.1"/>
 	<set_camera name="CameraCinematica2" name_camera="camera_cinematica1_sala3" active="false" time="0.1" blocker="false" />
 </cinematic>
