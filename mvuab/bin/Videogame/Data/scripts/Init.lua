@@ -28,7 +28,7 @@ function load_basics()
 	scene:ActivateRoom("sala3")	
 	scene:ActivateRoom("elevator")	
 	scene:ActivateRoom("sala4")	
-	
+	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	engine:Trace("Finish the load_basics()")
 end
 

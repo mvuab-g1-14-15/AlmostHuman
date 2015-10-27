@@ -208,9 +208,6 @@
   <static_mesh name="Torso001_sala3" filename="meshes\Torso001.mesh" />
   <static_mesh name="Leg004_sala3" filename="meshes\Leg004.mesh" />
   <static_mesh name="feet_01_sala3" filename="meshes\feet_01.mesh" />
-  <static_mesh name="lamp_01_sala3" filename="meshes\lamp_01.mesh" />
-  <static_mesh name="lamp_002_sala3" filename="meshes\lamp_002.mesh" />
-  <static_mesh name="lamp_008_sala3" filename="meshes\lamp_008.mesh" />
   <static_mesh name="cap_sala3" filename="meshes\cap.mesh" />
   <static_mesh name="Torso_sala3" filename="meshes\Torso.mesh" />
   <static_mesh name="cap001_sala3" filename="meshes\cap001.mesh" />
