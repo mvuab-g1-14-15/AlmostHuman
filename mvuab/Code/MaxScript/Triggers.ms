@@ -44,7 +44,7 @@ fn ExportTriggers filenameXML =
 			l_NewTriggerNode.AddAttributeAsString "name" l_Name
 			l_NewTriggerNode.AddAttributeAsString "shape" l_Shape
 			l_NewTriggerNode.AddAttributeCoordinate "position" Obj.Pos
-			l_NewTriggerNode.AddAttributeCoordinate "size" (point3 Obj.width Obj.height Obj.length)
+			l_NewTriggerNode.AddAttributeCoordinate "size" (point3 Obj.width Obj.length Obj.height)
 			-- AddAttributeBool exists? YES
 			-- Todo a falso y nulo de momento. A lo mejor es mejor ni ponerlo. Hay que pensar esta parte.
 			-- O poner con user properties si se usan alguno de los eventos y que el nombre de la funcion sea a partir del nombre del trigger, supongo que es mejor asi.
