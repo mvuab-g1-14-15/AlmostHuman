@@ -6,7 +6,6 @@
   <static_mesh name="cinta_013_sala3" filename="meshes\cinta_013.mesh" />
   <static_mesh name="cinta_014_sala3" filename="meshes\cinta_014.mesh" />
   <static_mesh name="cinta_015_sala3" filename="meshes\cinta_015.mesh" />
-  <static_mesh name="Box021_sala3" filename="meshes\Box021.mesh" />
   <static_mesh name="Box022_sala3" filename="meshes\Box022.mesh" />
   <static_mesh name="Reixa_014_sala3" filename="meshes\Reixa_014.mesh" />
   <static_mesh name="Reixa_015_sala3" filename="meshes\Reixa_015.mesh" />
@@ -109,11 +108,9 @@
   <static_mesh name="Reixa_094_sala3" filename="meshes\Reixa_094.mesh" />
   <static_mesh name="Reixa_095_sala3" filename="meshes\Reixa_095.mesh" />
   <static_mesh name="Reixa_097_sala3" filename="meshes\Reixa_097.mesh" />
-  <static_mesh name="andride084_sala3" filename="meshes\andride084.mesh" />
   <static_mesh name="Stairs_sala3" filename="meshes\Stairs.mesh" />
   <static_mesh name="assambly_machine_1_sala3" filename="meshes\assambly_machine_1.mesh" />
   <static_mesh name="assambly_machine_2_sala3" filename="meshes\assambly_machine_2.mesh" />
-  <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
   <static_mesh name="Box024_sala3" filename="meshes\Box024.mesh" />
   <static_mesh name="Reixa_105_sala3" filename="meshes\Reixa_105.mesh" />
   <static_mesh name="Reixa_106_sala3" filename="meshes\Reixa_106.mesh" />
@@ -154,13 +151,8 @@
   <static_mesh name="Box158_sala3" filename="meshes\Box158.mesh" />
   <static_mesh name="Object030_sala3" filename="meshes\Object030.mesh" />
   <static_mesh name="arm_sala3" filename="meshes\arm.mesh" />
-  <static_mesh name="foot_sala3" filename="meshes\foot.mesh" />
-  <static_mesh name="body_sala3" filename="meshes\body.mesh" />
   <static_mesh name="leg_sala3" filename="meshes\leg.mesh" />
   <static_mesh name="arm001_sala3" filename="meshes\arm001.mesh" />
-  <static_mesh name="foot001_sala3" filename="meshes\foot001.mesh" />
-  <static_mesh name="Object031_sala3" filename="meshes\Object031.mesh" />
-  <static_mesh name="body001_sala3" filename="meshes\body001.mesh" />
   <static_mesh name="sala_3_sala3" filename="meshes\sala_3.mesh" />
   <static_mesh name="Sala_3_wall_up_1_sala3" filename="meshes\Sala_3_wall_up_1.mesh" />
   <static_mesh name="Sala_3_Wall_down_3_sala3" filename="meshes\Sala_3_Wall_down_3.mesh" />
@@ -213,6 +205,9 @@
   <static_mesh name="ray_of_god006_sala3" filename="meshes\ray_of_god006.mesh" />
   <static_mesh name="ray_of_god007_sala3" filename="meshes\ray_of_god007.mesh" />
   <static_mesh name="ray_of_god008_sala3" filename="meshes\ray_of_god008.mesh" />
+  <static_mesh name="Torso001_sala3" filename="meshes\Torso001.mesh" />
+  <static_mesh name="Leg004_sala3" filename="meshes\Leg004.mesh" />
+  <static_mesh name="feet_01_sala3" filename="meshes\feet_01.mesh" />
   <static_mesh name="cap_sala3" filename="meshes\cap.mesh" />
   <static_mesh name="Torso_sala3" filename="meshes\Torso.mesh" />
   <static_mesh name="cap001_sala3" filename="meshes\cap001.mesh" />
@@ -225,6 +220,7 @@
   <static_mesh name="Torso002_sala3" filename="meshes\Torso002.mesh" />
   <static_mesh name="cap004_sala3" filename="meshes\cap004.mesh" />
   <static_mesh name="Torso008_sala3" filename="meshes\Torso008.mesh" />
+  <static_mesh name="cap009_sala3" filename="meshes\cap009.mesh" />
   <static_mesh name="cap010_sala3" filename="meshes\cap010.mesh" />
   <static_mesh name="feet_01_sala3" filename="meshes\feet_01.mesh" />
   <static_mesh name="arm_01_sala3" filename="meshes\arm_01.mesh" />
@@ -243,7 +239,6 @@
   <static_mesh name="cap013_sala3" filename="meshes\cap013.mesh" />
   <static_mesh name="cap014_sala3" filename="meshes\cap014.mesh" />
   <static_mesh name="Leg007_sala3" filename="meshes\Leg007.mesh" />
-  <static_mesh name="feet_003_sala3" filename="meshes\feet_003.mesh" />
   <static_mesh name="hand_004_sala3" filename="meshes\hand_004.mesh" />
   <static_mesh name="Torso011_sala3" filename="meshes\Torso011.mesh" />
   <static_mesh name="arm_004_sala3" filename="meshes\arm_004.mesh" />
@@ -259,6 +254,9 @@
   <static_mesh name="arm_005_sala3" filename="meshes\arm_005.mesh" />
   <static_mesh name="hand_007_sala3" filename="meshes\hand_007.mesh" />
   <static_mesh name="Leg010_sala3" filename="meshes\Leg010.mesh" />
+  <static_mesh name="cap017_sala3" filename="meshes\cap017.mesh" />
+  <static_mesh name="Box021_sala3" filename="meshes\Box021.mesh" />
+  <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
   <static_mesh name="andride085_sala3" filename="meshes\andride085.mesh" />
   <static_mesh name="enganche_023_sala3" filename="meshes\enganche_023.mesh" />
   <static_mesh name="andride088_sala3" filename="meshes\andride088.mesh" />
@@ -279,6 +277,5 @@
   <static_mesh name="andride095_sala3" filename="meshes\andride095.mesh" />
   <static_mesh name="andride096_sala3" filename="meshes\andride096.mesh" />
   <static_mesh name="enganche_034_sala3" filename="meshes\enganche_034.mesh" />
-  <static_mesh name="cap009_sala3" filename="meshes\cap009.mesh" />
-  <static_mesh name="cap017_sala3" filename="meshes\cap017.mesh" />
+  <static_mesh name="andride108_sala3" filename="meshes\andride108.mesh" />
 </static_meshes>

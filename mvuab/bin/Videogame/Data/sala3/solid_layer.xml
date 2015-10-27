@@ -6,7 +6,6 @@
   <MeshInstance name="cinta_013_sala3" core="cinta_013_sala3" pos="44.9622 -17.4696 58.574" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_014_sala3" core="cinta_014_sala3" pos="45.2235 -17.4696 58.4456" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="cinta_015_sala3" core="cinta_015_sala3" pos="38.2339 -17.9226 54.633" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box021_sala3" core="Box021_sala3" pos="37.8948 -16.2356 43.4142" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box022_sala3" core="Box022_sala3" pos="37.4299 -14.2923 33.587" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_014_sala3" core="Reixa_014_sala3" pos="42.0517 -17.0164 66.7066" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_015_sala3" core="Reixa_015_sala3" pos="45.9371 -17.0164 64.664" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -109,11 +108,9 @@
   <MeshInstance name="Reixa_094_sala3" core="Reixa_094_sala3" pos="34.8422 -17.0164 46.6223" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_095_sala3" core="Reixa_095_sala3" pos="34.8422 -17.0164 44.4637" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_097_sala3" core="Reixa_097_sala3" pos="34.8422 -17.0164 40.2963" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="andride084_sala3" core="andride084_sala3" pos="-26.6936 -15.8939 66.3417" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Stairs_sala3" core="Stairs_sala3" pos="4.14305 -17.1213 60.2106" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.53289 1.53289 1.53289" />
   <MeshInstance name="assambly_machine_1_sala3" core="assambly_machine_1_sala3" pos="37.9761 -15.2039 54.2635" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="assambly_machine_2_sala3" core="assambly_machine_2_sala3" pos="23.972 -15.2039 71.0914" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box023_sala3" core="Box023_sala3" pos="23.9954 -16.2356 75.5401" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box024_sala3" core="Box024_sala3" pos="24.6283 -14.5718 87.7269" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_105_sala3" core="Reixa_105_sala3" pos="37.6293 -17.0164 38.3712" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_106_sala3" core="Reixa_106_sala3" pos="24.5216 -17.0164 82.5586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -146,7 +143,7 @@
   <MeshInstance name="Reixa_114_sala3" core="Reixa_114_sala3" pos="30.2201 -17.0164 51.781" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_115_sala3" core="Reixa_115_sala3" pos="28.2154 -17.0164 51.781" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Reixa_116_sala3" core="Reixa_116_sala3" pos="44.993 -17.0164 65.7061" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="msf2_Lamp013_sala3" core="msf2_Lamp013_sala3" pos="-41.7709 -1.71632 44.0559" yaw="1.5708" pitch="3.14159" roll="-1.50996e-007" scale="17.3303 17.3303 17.3303" />
+  <MeshInstance name="msf2_Lamp013_sala3" core="msf2_Lamp013_sala3" pos="-1.66827 -1.95547 58.9794" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box154_sala3" core="Box154_sala3" pos="25.8017 -18.5732 55.2064" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
   <MeshInstance name="Box155_sala3" core="Box155_sala3" pos="27.5946 -18.5732 59.2088" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
   <MeshInstance name="Box156_sala3" core="Box156_sala3" pos="24.8277 -18.5732 62.1488" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
@@ -154,13 +151,8 @@
   <MeshInstance name="Box158_sala3" core="Box158_sala3" pos="42.5966 -18.5732 61.7357" yaw="0.0" pitch="0.0" roll="0.0" scale="0.561809 0.574417 0.574417" />
   <MeshInstance name="Object030_sala3" core="Object030_sala3" pos="40.2685 -17.6019 64.5302" yaw="0.0" pitch="1.0472" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="arm_sala3" core="arm_sala3" pos="40.4024 -17.5525 64.6044" yaw="-1.65159" pitch="-1.37864" roll="-0.42926" scale="1.0 1.0 1.0" />
-  <MeshInstance name="foot_sala3" core="foot_sala3" pos="40.845 -17.4784 64.3203" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="body_sala3" core="body_sala3" pos="41.5401 -19.7302 64.3203" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="leg_sala3" core="leg_sala3" pos="41.7221 -17.5858 65.2866" yaw="0.0" pitch="-1.48353" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="arm001_sala3" core="arm001_sala3" pos="40.5107 -17.5525 64.7525" yaw="-1.71549" pitch="-1.34456" roll="-0.685451" scale="1.0 1.0 1.0" />
-  <MeshInstance name="foot001_sala3" core="foot001_sala3" pos="41.1805 -17.4784 64.9682" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Object031_sala3" core="Object031_sala3" pos="40.6183 -17.6019 64.1629" yaw="0.0" pitch="1.0472" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="body001_sala3" core="body001_sala3" pos="41.598 -19.7302 64.9802" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="sala_3_sala3" core="sala_3_sala3" pos="13.3405 -15.3614 60.1768" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_3_wall_up_1_sala3" core="Sala_3_wall_up_1_sala3" pos="12.8158 -5.20697 60.057" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_3_Wall_down_3_sala3" core="Sala_3_Wall_down_3_sala3" pos="-57.7099 -14.0752 60.0882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -203,7 +195,7 @@
   <MeshInstance name="container032_sala3" core="container032_sala3" pos="-8.36366 -15.8763 52.0585" yaw="0.0671269" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_3_Roof001_sala3" core="Sala_3_Roof001_sala3" pos="-2.15056 -1.53177 59.9283" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 0.930556" />
   <MeshInstance name="container002_sala3" core="container002_sala3" pos="-1.54794 -15.8763 75.8133" yaw="0.0795515" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="lamps_sala3" core="lamps_sala3" pos="5.37434 -7.15009 95.2646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="lamps_sala3" core="lamps_sala3" pos="-18.5606 -2.95393 60.2359" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god_sala3" core="ray_of_god_sala3" pos="1.1419 -18.4693 44.6744" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god001_sala3" core="ray_of_god001_sala3" pos="1.1419 -18.4693 53.0032" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god002_sala3" core="ray_of_god002_sala3" pos="3.5736 -18.4693 60.4816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -213,7 +205,10 @@
   <MeshInstance name="ray_of_god006_sala3" core="ray_of_god006_sala3" pos="-30.0957 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god007_sala3" core="ray_of_god007_sala3" pos="-40.6862 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god008_sala3" core="ray_of_god008_sala3" pos="1.18723 -18.4693 75.8246" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cap_sala3" core="cap_sala3" pos="40.4208 -17.3208 74.882" yaw="0.0" pitch="1.5708" roll="-0.523599" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 81.3461" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Leg004_sala3" core="Leg004_sala3" pos="40.4789 -17.2726 85.9099" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
+  <MeshInstance name="feet_01_sala3" core="feet_01_sala3" pos="40.1754 -17.2726 83.5393" yaw="-1.39093e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap_sala3" core="cap_sala3" pos="40.4208 -17.3208 74.8819" yaw="0.0" pitch="1.5708" roll="-0.523599" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso_sala3" core="Torso_sala3" pos="40.466 -17.2269 73.2516" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap001_sala3" core="cap001_sala3" pos="40.4543 -17.3208 70.4258" yaw="0.0" pitch="1.5708" roll="0.959931" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 81.3461" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
@@ -222,10 +217,11 @@
   <MeshInstance name="cap007_sala3" core="cap007_sala3" pos="41.2986 -17.259 58.2028" yaw="2.84943" pitch="-1.23176" roll="-1.02145" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso006_sala3" core="Torso006_sala3" pos="44.4059 -17.2269 60.6108" yaw="0.0" pitch="1.5708" roll="2.79253" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso004_sala3" core="Torso004_sala3" pos="40.7261 -17.2269 62.9416" yaw="-3.14159" pitch="-1.5708" roll="-1.13446" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Torso002_sala3" core="Torso002_sala3" pos="40.1215 -17.2269 66.255" yaw="-3.14159" pitch="-1.5708" roll="-1.13446" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cap004_sala3" core="cap004_sala3" pos="38.5867 -17.3208 66.3468" yaw="1.78814e-007" pitch="1.5708" roll="-2.09439" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso002_sala3" core="Torso002_sala3" pos="40.1216 -17.2269 66.255" yaw="-3.14159" pitch="-1.5708" roll="-1.13446" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap004_sala3" core="cap004_sala3" pos="38.5867 -17.3208 66.3468" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso008_sala3" core="Torso008_sala3" pos="38.2603 -17.2269 58.0772" yaw="0.0" pitch="1.5708" roll="2.79253" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cap010_sala3" core="cap010_sala3" pos="38.5867 -17.3208 63.1473" yaw="1.78814e-007" pitch="1.5708" roll="-2.09439" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap009_sala3" core="cap009_sala3" pos="38.2314 -17.3208 55.9542" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap010_sala3" core="cap010_sala3" pos="38.5867 -17.3208 63.1473" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
   <MeshInstance name="feet_01_sala3" core="feet_01_sala3" pos="40.1754 -17.2726 83.5393" yaw="-1.39093e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
   <MeshInstance name="arm_01_sala3" core="arm_01_sala3" pos="40.4491 -17.2163 71.4204" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="hand_01_sala3" core="hand_01_sala3" pos="40.4491 -17.2651 68.4136" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
@@ -237,28 +233,30 @@
   <MeshInstance name="cap011_sala3" core="cap011_sala3" pos="37.0137 -17.3208 63.2258" yaw="0.0" pitch="1.5708" roll="0.959931" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg006_sala3" core="Leg006_sala3" pos="41.8101 -17.2726 62.7956" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap012_sala3" core="cap012_sala3" pos="25.8531 -17.3208 44.5256" yaw="0.0" pitch="1.5708" roll="2.61799" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Torso009_sala3" core="Torso009_sala3" pos="25.8079 -17.2269 46.1559" yaw="0.0" pitch="1.5708" roll="2.70526" scale="1.0 1.0 1.0" />
-  <MeshInstance name="arm_003_sala3" core="arm_003_sala3" pos="23.5804 -17.2163 61.0514" yaw="-1.20445e-007" pitch="1.5708" roll="2.61799" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Torso010_sala3" core="Torso010_sala3" pos="25.8079 -17.2269 38.0615" yaw="0.0" pitch="1.5708" roll="2.70526" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso009_sala3" core="Torso009_sala3" pos="25.8079 -17.2269 46.1559" yaw="-1.31533e-007" pitch="1.5708" roll="2.70526" scale="1.0 1.0 1.0" />
+  <MeshInstance name="arm_003_sala3" core="arm_003_sala3" pos="23.5804 -17.2163 61.0514" yaw="-1.37651e-007" pitch="1.5708" roll="2.61799" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso010_sala3" core="Torso010_sala3" pos="25.8079 -17.2269 38.0615" yaw="-1.31533e-007" pitch="1.5708" roll="2.70526" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap013_sala3" core="cap013_sala3" pos="29.5832 -17.3208 56.1818" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap014_sala3" core="cap014_sala3" pos="25.8197 -17.3208 39.5258" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg007_sala3" core="Leg007_sala3" pos="29.5443 -17.2726 53.8672" yaw="0.0" pitch="1.5708" roll="-2.96706" scale="1.0 1.0 1.0" />
-  <MeshInstance name="feet_003_sala3" core="feet_003_sala3" pos="26.0985 -17.2726 35.8682" yaw="-2.78185e-007" pitch="1.5708" roll="-0.872664" scale="1.0 1.0 1.0" />
   <MeshInstance name="hand_004_sala3" core="hand_004_sala3" pos="25.8248 -17.2651 42.1751" yaw="0.0" pitch="1.5708" roll="-3.14159" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso011_sala3" core="Torso011_sala3" pos="22.2701 -17.2269 58.7967" yaw="0.0" pitch="1.5708" roll="-0.349066" scale="1.0 1.0 1.0" />
   <MeshInstance name="arm_004_sala3" core="arm_004_sala3" pos="25.8248 -17.2163 47.9872" yaw="0.0" pitch="1.5708" roll="-3.14159" scale="1.0 1.0 1.0" />
   <MeshInstance name="hand_005_sala3" core="hand_005_sala3" pos="25.8248 -17.2651 50.9939" yaw="0.0" pitch="1.5708" roll="-3.14159" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap015_sala3" core="cap015_sala3" pos="25.8197 -17.3208 48.9817" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso012_sala3" core="Torso012_sala3" pos="28.0136 -17.2269 60.6918" yaw="3.48544e-007" pitch="1.5708" roll="-1.91986" scale="1.0 1.0 1.0" />
-  <MeshInstance name="hand_006_sala3" core="hand_006_sala3" pos="23.7321 -17.2651 57.5798" yaw="3.14159" pitch="-1.5708" roll="0.436332" scale="1.0 1.0 1.0" />
+  <MeshInstance name="hand_006_sala3" core="hand_006_sala3" pos="23.7321 -17.2651 57.5798" yaw="-1.31533e-007" pitch="1.5708" roll="2.70526" scale="1.0 1.0 1.0" />
   <MeshInstance name="feet_004_sala3" core="feet_004_sala3" pos="28.6842 -17.2726 57.9209" yaw="-2.78185e-007" pitch="1.5708" roll="-0.872664" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso013_sala3" core="Torso013_sala3" pos="26.1524 -17.2269 53.1525" yaw="2.82074e-007" pitch="1.5708" roll="1.13446" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg008_sala3" core="Leg008_sala3" pos="25.795 -17.2726 37.132" yaw="0.0" pitch="1.5708" roll="-2.96706" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg009_sala3" core="Leg009_sala3" pos="26.4595 -17.2726 57.9428" yaw="0.0" pitch="1.5708" roll="-2.96706" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap016_sala3" core="cap016_sala3" pos="24.9753 -17.259 60.5662" yaw="-0.292161" pitch="1.23176" roll="1.02145" scale="1.0 1.0 1.0" />
-  <MeshInstance name="arm_005_sala3" core="arm_005_sala3" pos="29.4605 -17.2163 61.8547" yaw="-3.14159" pitch="-1.5708" roll="-0.610865" scale="1.0 1.0 1.0" />
-  <MeshInstance name="hand_007_sala3" core="hand_007_sala3" pos="28.0272 -17.2651 63.4636" yaw="-1.39092e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Leg010_sala3" core="Leg010_sala3" pos="25.537 -17.2726 63.8109" yaw="1.78814e-007" pitch="1.5708" roll="-2.09439" scale="1.0 1.0 1.0" />
+  <MeshInstance name="arm_005_sala3" core="arm_005_sala3" pos="29.4605 -17.2163 61.8548" yaw="-3.14159" pitch="-1.5708" roll="-0.610865" scale="1.0 1.0 1.0" />
+  <MeshInstance name="hand_007_sala3" core="hand_007_sala3" pos="28.0272 -17.2651 63.4636" yaw="-2.78185e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Leg010_sala3" core="Leg010_sala3" pos="25.537 -17.2726 63.8109" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cap017_sala3" core="cap017_sala3" pos="24.244 -17.3208 64.4532" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box021_sala3" core="Box021_sala3" pos="37.8948 -16.2356 43.4143" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box023_sala3" core="Box023_sala3" pos="23.9954 -16.2356 75.5401" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride085_sala3" core="andride085_sala3" pos="37.704 -16.2711 48.6454" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="enganche_023_sala3" core="enganche_023_sala3" pos="37.704 -16.2711 48.6454" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride088_sala3" core="andride088_sala3" pos="37.704 -12.8172 35.0013" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -279,6 +277,28 @@
   <MeshInstance name="andride095_sala3" core="andride095_sala3" pos="24.203 -12.8108 98.2971" yaw="-3.14159" pitch="0.000491171" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride096_sala3" core="andride096_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="enganche_034_sala3" core="enganche_034_sala3" pos="37.704 -12.8172 41.9275" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cap009_sala3" core="cap009_sala3" pos="38.2314 -17.3208 55.9542" yaw="1.78814e-007" pitch="1.5708" roll="-2.0944" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cap017_sala3" core="cap017_sala3" pos="24.244 -17.3208 64.4532" yaw="2.59794e-007" pitch="1.5708" roll="-2.18166" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride085_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 66.0912" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride086_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 66.0912" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride087_sala3" core="andride108_sala3" pos="-33.329 -17.1952 66.0912" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride088_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 66.0912" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride089_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 70.3295" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride090_sala3" core="andride108_sala3" pos="-33.329 -17.1952 70.3295" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride091_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 70.3295" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride092_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 70.3295" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride093_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 74.5678" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride094_sala3" core="andride108_sala3" pos="-33.329 -17.1952 74.5678" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride095_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 74.5678" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride096_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 74.5678" yaw="1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride098_sala3" core="andride108_sala3" pos="-33.329 -17.1952 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride097_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride099_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride100_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride101_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride102_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride103_sala3" core="andride108_sala3" pos="-33.329 -17.1952 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride104_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride105_sala3" core="andride108_sala3" pos="-23.2439 -17.1952 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride106_sala3" core="andride108_sala3" pos="-28.2865 -17.1952 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride107_sala3" core="andride108_sala3" pos="-33.329 -17.1952 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="andride108_sala3" core="andride108_sala3" pos="-38.3715 -17.1952 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

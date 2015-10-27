@@ -1,7 +1,7 @@
 ﻿<scene_renderer_commands>
 	<!--generate the shadow maps-->
-	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
-	<generate_shadow_maps/>
+	<!--set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
+	<generate_shadow_maps/-->
 	
 	<begin_scene/>
 	<!--generate the deferred textures-->
@@ -20,9 +20,6 @@
 		<set_matrices/>
 		<render_scene name="render_solid" layer="solid" active="true"/>
 		<render_scene name="render_characters" layer="characters" active="true"/>
-		<!--render_debug render_lights="true" render_physics="false" render_cameras="false" render_graph="false" render_triggers="false"/-->
     <unset_render_target render_target="deferred_multiple_render_target" use_depth_stencil_buffer="0"/>
-   
-	<!--render_debug render_lights="true" render_physics="true" render_cameras="false" render_graph="true"/>
-	<render_gizmos render="true"/-->
+    
 </scene_renderer_commands>

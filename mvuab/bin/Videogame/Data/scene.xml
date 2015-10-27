@@ -6,4 +6,5 @@
 	<room level="sala1" path="Data/sala1" renderable_objects_file="sala1.xml" static_meshes_file="static_meshes.xml"/>
 	<room level="pasillo" path="Data/pasillo" renderable_objects_file="pasillo.xml" static_meshes_file="static_meshes.xml"/>
 	<room level="sala4" path="Data/sala4" renderable_objects_file="sala4.xml" static_meshes_file="static_meshes.xml"/>
+	<room level="space" path="Data/space" renderable_objects_file="space.xml" static_meshes_file="static_meshes.xml"/>
 </scene>

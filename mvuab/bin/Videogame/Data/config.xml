@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <config>
 	<!-- available modes for window=full_screen, windowed, fit_desktop -->
+	<!--window_properties resolution="640 360" position="0 0" mode="windowed" size="640 360"/-->
 	<window_properties resolution="1280 720" position="0 0" mode="windowed" size="1280 720"/>
 	<!-- available modes for logger console, output_window -->
 	<logger mode="output_window"/>

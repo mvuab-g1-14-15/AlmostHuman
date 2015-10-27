@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="Sphere001_space" filename="meshes\Sphere001.mesh" />
+  <static_mesh name="moon_space" filename="meshes\moon.mesh" />
+  <static_mesh name="sol_space" filename="meshes\sol.mesh" />
+  <static_mesh name="Sphere004_space" filename="meshes\Sphere004.mesh" />
+</static_meshes>

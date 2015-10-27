@@ -19,7 +19,9 @@ mvuab/3rdParty/
 mvuab/bin/lib/*.*
 mvuab/bin/lib/*.*
 mvuab/bin/Viewer/*.dll
+mvuab/bin/Viewer/*.exe
 mvuab/bin/Videogame/*.dll
+mvuab/bin/Videogame/*.exe
 mvuab/bin/Intermediate/
 mvuab/bin/*.exe
 WwiseProject
