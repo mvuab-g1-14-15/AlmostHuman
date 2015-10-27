@@ -315,8 +315,6 @@ function ShowTextDoor1(message, other_shape)
 end
 
 function PlaySound(event,game_object)
-	--PlaySound('Play_Tunel','Iris')
-	--cinematic_manager:Execute("cinematica_1")
 	sound_manager:PlayEvent(event, game_object)
 end
 
@@ -346,4 +344,25 @@ end
 function SetPropSala4()
 	--PlaySound('Play_Tunel','Iris')
 	--cinematic_manager:Execute("cinematica_1")
+end
+
+function Hacknave(nave_obj)
+end
+
+function UpToSala4()
+end
+
+function ActivateLightsSala3()
+end
+
+function UpdateDLC(text_to_show)
+end
+
+function ActiveRoom(room)
+end
+
+function take_C4()
+end
+
+function ActivateBoss()
 end
