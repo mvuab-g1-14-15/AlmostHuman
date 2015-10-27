@@ -22,6 +22,7 @@ class CParticleSystemCore
         void Update();
         void Render();
         void Refresh();
+        void Start();
     private:
         typedef std::vector< CParticleInstance * > TParticleInstanceVector;
         typedef std::vector< CParticleEmitter * > TParticleEmittersVector;
@@ -30,6 +31,7 @@ class CParticleSystemCore
 
         float mDelayIn;
         float mCurrentTime;
+        bool  mIsStarted;
 };
 
 #endif //_PARTICLE_SYSTEM_CORE_H

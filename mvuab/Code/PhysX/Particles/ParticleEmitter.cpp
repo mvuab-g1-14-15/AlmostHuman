@@ -295,6 +295,13 @@ void CParticleEmitter::Reset()
 {
   mActualTime = 0.0f;
   mIsActive = true;
+  mAliveParticlesCount = 0.0;
+  
+  for ( uint32 i = 0; i < mMaxAliveParticles; ++i )
+  {
+      mParticlesIsAlive[i] = false;
+      mParticlesLifeTime[i] = 0.0f;
+  }
 }
 
 void CParticleEmitter::SetFixedDirection( const Math::Vect3f& aDirection )
