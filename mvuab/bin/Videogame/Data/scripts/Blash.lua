@@ -33,3 +33,11 @@ function CBlash:Update( aPosition )
 		end
 	end
 end
+
+function CBlash:Tick()
+	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
+		if countdowntimer_manager:isTimerFinish(self.TimerName) then
+			self:End()
+		end
+	end
+end

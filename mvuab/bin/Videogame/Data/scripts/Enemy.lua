@@ -133,9 +133,10 @@ function CEnemy:Destroy()
 							  self.OnDeadCode
 		script_manager:RunCode(codeToExecute)
 	end
-		
+	
+	self.BlashRight:End()
+	self.BlashLeft:End()
 	physic_manager:ReleasePhysicController(self.CharacterController)
-	enemy_manager:AddGarbageMesh(self.Room, self.Name)
 end
 
 function CEnemy:Update()
@@ -143,6 +144,9 @@ function CEnemy:Update()
 	local dt = timer:GetElapsedTime()
 	
 	self:UpdateCamera()
+	
+	self.BlashRight:Tick()
+	self.BlashLeft:Tick()
 	
 	local IsPlayerInSight = false
 	if self.CanSee then
@@ -501,6 +505,10 @@ function CEnemy:PlayFootstep()
 	--	sound_manager:PlayEvent( "Play_Footstep_enemy", "Logan" )
 	--	countdowntimer_manager:Reset("Footstep"..self.Name, true)
 	--end
+end
+
+function CEnemy:GetRoom()
+	return self.Room
 end
 
 function CEnemy:SetSuspected( aBool )
