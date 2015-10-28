@@ -143,7 +143,6 @@
   <static_mesh name="Reixa_114_sala3" filename="meshes\Reixa_114.mesh" />
   <static_mesh name="Reixa_115_sala3" filename="meshes\Reixa_115.mesh" />
   <static_mesh name="Reixa_116_sala3" filename="meshes\Reixa_116.mesh" />
-  <static_mesh name="msf2_Lamp013_sala3" filename="meshes\msf2_Lamp013.mesh" />
   <static_mesh name="Box154_sala3" filename="meshes\Box154.mesh" />
   <static_mesh name="Box155_sala3" filename="meshes\Box155.mesh" />
   <static_mesh name="Box156_sala3" filename="meshes\Box156.mesh" />
@@ -277,6 +276,7 @@
   <static_mesh name="andride095_sala3" filename="meshes\andride095.mesh" />
   <static_mesh name="andride096_sala3" filename="meshes\andride096.mesh" />
   <static_mesh name="enganche_034_sala3" filename="meshes\enganche_034.mesh" />
+  <static_mesh name="msf2_Lamp013_sala3" filename="meshes\msf2_Lamp013.mesh" />
   <static_mesh name="andride108_sala3" filename="meshes\andride108.mesh" />
   <static_mesh name="bomb_sala3" filename="meshes\bomb.mesh" />
   <static_mesh name="bomb002_sala3" filename="meshes\bomb002.mesh" />

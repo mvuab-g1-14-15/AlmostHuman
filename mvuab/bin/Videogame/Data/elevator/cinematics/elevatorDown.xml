@@ -1,3 +1,4 @@
 <cinematic>
 	<play_animation name="ElevatorDown" resource_id_file="Data/elevator/cinematics/elevator_down.xml" time="33.3333" />
+	<remove_physx resource="sala3DoorEscenario" time="0.0001"/>
 </cinematic>

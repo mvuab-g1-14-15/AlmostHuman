@@ -5,8 +5,8 @@
 
 CCameraFPShooter::CCameraFPShooter()
     : m_Height( 2.0f ),
-      m_YawSpeed(100.f),
-      m_PitchSpeed( 60.0f),
+      m_YawSpeed(0.002f),
+      m_PitchSpeed( 0.0014f),
       m_ForwardSpeed(10.f),
       m_StrafeSpeed(5.0f),
       m_Speed(2.f)
