@@ -108,7 +108,7 @@ function CPlayer:Update()
 	end
 	
 	if self.Life < 25 then
-		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
+		self.Life = self.Life + 2.0 / 30 * timer:GetSpeedFactor()
 	end
 	--profiler:AddEnd("CPlayer:Update()")
 end
