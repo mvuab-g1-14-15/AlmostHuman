@@ -1,0 +1,5 @@
+<ASE>
+	<element name="elevator_cabin" resource_id_file="Data/elevator/cinematics/elevator_cabin.ASE"/>
+	<element name="elevator_door_down" resource_id_file="Data/elevator/cinematics/elevator_door_down.ASE"/>
+	<element name="elevator_door_up" resource_id_file="Data/elevator/cinematics/elevator_door_up.ASE"/>
+</ASE>

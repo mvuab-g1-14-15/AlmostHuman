@@ -1,4 +1,5 @@
 <cinematics>
+	<cinematic name="physxElevator" resource_id_file="Data/elevator/cinematics/phyxsElevator.xml"/>
 	<cinematic name="elevatorUp" resource_id_file="Data/elevator/cinematics/elevatorUp.xml"/>
 	<cinematic name="elevatorDown" resource_id_file="Data/elevator/cinematics/elevatorDown.xml"/>
 	<!-- <cinematic name="OpenDoorPasillo" resource_id_file="Data/pasillo/cinematics/open_door_pasillo.xml"/> -->

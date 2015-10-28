@@ -34,7 +34,10 @@ m_Actor(0)
 		  ASSERT(m_RenderableObject, "Error al cargar el renderable %s", resource.c_str());
 		  m_CurrentTime = atts.GetAttribute<float>("init_keyframe", 0.0f);
 		  if( atts.GetAttribute<bool>("physx", false) )
+		  {
 			  m_Actor = PhysXMInstance->CMapManager<CPhysicActor>::GetResource(atts.GetAttribute<std::string>("name_physx", ""));
+			  m_Actor->SetKinematic(true);
+		  }
           for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
               m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
       }

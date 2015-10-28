@@ -1,0 +1,3 @@
+<cinematic>
+	<add_physx name="elevatorPhysx" resource_id_file="Data/elevator/cinematics/ase.xml"/>
+</cinematic>
