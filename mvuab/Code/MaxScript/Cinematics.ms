@@ -226,8 +226,6 @@ fn ExportCinematicObjects nFrames filenameXML aRoom =
 	)
 )
 
-
-
 fn ExportCloneCinematicObjects nFrames filenameXML aRoom =
 (
 	--try
