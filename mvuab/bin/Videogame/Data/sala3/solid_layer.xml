@@ -301,6 +301,6 @@
   <MeshInstance name="andride106_sala3" core="andride108_sala3" pos="-28.2864 -15.8644 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride107_sala3" core="andride108_sala3" pos="-33.329 -15.8644 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride108_sala3" core="andride108_sala3" pos="-38.3715 -15.8644 44.9564" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="bomb_sala3" core="bomb_sala3" pos="40.6495 -16.7378 51.8676" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="bomb002_sala3" core="bomb002_sala3" pos="26.6375 -16.776 68.7003" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="bomb_sala3" core="bomb_sala3" pos="40.6495 -16.7378 51.8676" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false"/>
+  <MeshInstance name="bomb002_sala3" core="bomb002_sala3" pos="26.6375 -16.776 68.7003" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false"/>
 </RenderableObjects>

@@ -247,8 +247,12 @@ function update_gameplay()
 				g_bPressedE = true
 				if g_fC4Colocada == "1" then
 					g_bC41 = true
+					scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb_sala3"):SetActive(false)
+					scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb_sala3"):SetActive(true)
 				elseif g_fC4Colocada == "2" then
 					g_bC42 = true
+					scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb002_sala3"):SetActive(false)
+					scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb002_sala3"):SetActive(true)
 				end
 			end
 		end	
