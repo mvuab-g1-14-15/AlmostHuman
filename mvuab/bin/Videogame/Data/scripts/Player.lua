@@ -124,6 +124,10 @@ function CPlayer:SetRoom( aName )
 	self.Room = aName
 end
 
+function CPlayer:GetRoom()
+	return self.Room
+end
+
 function CPlayer:SetAnimation( aName, aIn, aOut )
 	if aName == "shoot" or aName == "idle_to_shoot" or aName == "atac_sigil" or aName == "shoot_blaster" or aName == "carga_blaster" then
 		self.RenderableObject:ChangeAnimationAction(aName, aIn, aOut)
