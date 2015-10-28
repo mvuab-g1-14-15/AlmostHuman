@@ -126,6 +126,9 @@ function CEnemy:__init( aInfo )
 	
 	sound_manager:RegisterGameObject(self.Name)
 	self.FootstepTime = 0.5
+	if self.Fly then
+		--sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
+	end
 end
 
 function CEnemy:Destroy()
@@ -511,15 +514,17 @@ function CEnemy:IsInPos( aPos )
 end
 
 function CEnemy:PlayFootstep()
-	local lTimerName = "Footstep"..self.Name
-	if not countdowntimer_manager:ExistTimer(lTimerName) then
-		countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
-	else
-		countdowntimer_manager:SetActive(lTimerName, true)
-	end
-	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		--sound_manager:PlayEvent( "Play_Footstep_Androide", self.Name )
-		countdowntimer_manager:Reset(lTimerName, true)
+	if not self.Fly then
+		local lTimerName = "Footstep"..self.Name
+		if not countdowntimer_manager:ExistTimer(lTimerName) then
+			countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
+		else
+			countdowntimer_manager:SetActive(lTimerName, true)
+		end
+		if countdowntimer_manager:isTimerFinish(lTimerName) then
+			--sound_manager:PlayEvent( "Play_Footstep_Androide", self.Name )
+			countdowntimer_manager:Reset(lTimerName, true)
+		end
 	end
 end
 

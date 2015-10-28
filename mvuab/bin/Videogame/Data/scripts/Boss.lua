@@ -107,6 +107,7 @@ function CBoss:MoveToPos( aPos )
 	if not self:IsInPos( aPos ) then
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
+			self:PlayFootstep()
 			self.CharacterController:Move(DirVector * self.Speed, dt)
 		else
 			self.CharacterController:Move(Vect3f(0.0), dt)
@@ -204,8 +205,16 @@ function CBoss:IsInPos( aPos )
 end
 
 function CBoss:PlayFootstep()
-	--if countdowntimer_manager:isTimerFinish("FootstepBoss") then
-	--	sound_manager:PlayEvent( "Play_Footstep_boss", "Logan" )
-	--	countdowntimer_manager:Reset("FootstepBoss", true)
-	--end
+	if not self.Fly then
+		local lTimerName = "Footstep"..self.Name
+		if not countdowntimer_manager:ExistTimer(lTimerName) then
+			countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
+		else
+			countdowntimer_manager:SetActive(lTimerName, true)
+		end
+		if countdowntimer_manager:isTimerFinish(lTimerName) then
+			--sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
+			countdowntimer_manager:Reset(lTimerName, true)
+		end
+	end
 end
