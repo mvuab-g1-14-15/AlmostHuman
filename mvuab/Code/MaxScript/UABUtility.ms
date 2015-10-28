@@ -50,7 +50,9 @@ utility UABUtility "UAB Utility" width:170 height:761
 	button ExportEnemyPos "Enemies" pos:[24,300] width:57 height:17
 	button LightprobeButton "Lightprobe" pos:[84,301] width:57 height:17
 	
-	button CinematicsCloneButton "Clone Cinematics" pos:[21,211] width:122 height:17
+	button CinematicsCloneButton "CloneCin" pos:[21,211] width:59 height:17
+	button ReverseAnimationButton "ReverseAnimation" pos:[84,212] width:59 height:17
+	
 	
 	
 	on UABUtility open do
@@ -339,5 +341,9 @@ utility UABUtility "UAB Utility" width:170 height:761
 		nFrames = 1
 		
 		ExportCloneCinematicObjects nFrames CinematicsDir LevelList.selected
+	)
+	on ReverseAnimationButton pressed do
+	(		
+		filein "reverseTime.ms"
 	)
 )
