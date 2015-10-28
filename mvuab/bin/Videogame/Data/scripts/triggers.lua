@@ -238,7 +238,7 @@ function StayText(room, message, other_shape)
 			g_bPressedRoom3X = false
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
-			cinematic_manager:Execute("elevator")
+			cinematic_manager:Execute("elevatorDown")
 			physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala3DoorEscenario"))
 			--Codigo para cambiar de sala o abrir la puerta
 			
@@ -251,6 +251,16 @@ function StayText(room, message, other_shape)
 		end
 	end
 	
+end
+
+function StayTextElevatorDown(text, other_shape)
+	if g_bPressedRoom3X then
+		gui_manager:ShowStaticText(text)
+		g_bPressedRoom3X = false
+		g_bPressRoom3X = false
+		cinematic_manager:Execute("elevatorDown")
+		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)			
+	end
 end
 
 function StayTextPasillo(room, other_shape)
@@ -395,7 +405,8 @@ end
 function Hacknave(nave_obj)
 end
 
-function UpToSala4()
+function UpToSala4(text, other_shape)
+	cinematic_manager:Execute("elevatorUp")
 end
 
 function ActivateLightsSala3()
