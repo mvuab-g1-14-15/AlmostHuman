@@ -337,6 +337,9 @@
     <ClCompile Include="Cinematics\CinematicsElement\AddRenderablesElement.cpp">
       <Filter>Cinematics\CinematicsElement</Filter>
     </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\RemovePhysxElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -683,6 +686,9 @@
       <Filter>Materials</Filter>
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicsElement\AddRenderablesElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\RemovePhysxElement.h">
       <Filter>Cinematics\CinematicsElement</Filter>
     </ClInclude>
   </ItemGroup>
