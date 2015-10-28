@@ -16,7 +16,7 @@ function CEnemyManager:__init()
 	self.GarbageMesh.sala4 = {}
 	
 	self.Shoots = {}
-	self.MaxShoots = 50
+	self.MaxShoots = 100
 	for i=1,self.MaxShoots do
 		table.insert( self.Shoots, CAmmo(i) )
 	end
@@ -49,7 +49,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
-	lInfo.speed = 4.0 
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(56.1998, -16.5334, -52.8975)
 	lInfo.is_patrol = true
 	lInfo.waypoints = { Vect3f(56.1998, -16.5334, -52.8975),
@@ -91,7 +91,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
-	lInfo.speed = 4.0 
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(63.044, -16.5334, -88.0)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
@@ -128,7 +128,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
-	lInfo.speed = 4.0 
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(53.8, -16.5334, -54.26)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
@@ -156,7 +156,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
-	lInfo.speed = 4.0 
+	lInfo.speed = 4.0
 	lInfo.position = Vect3f(73.14, -16.5334, -86.37)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
@@ -188,7 +188,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.damage = 1.0
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
-	lInfo.speed = 2.0 
+	lInfo.speed = 2.0
 	lInfo.position = Vect3f(54.0, -13.68, 6.31)
 	lInfo.is_patrol = true
 	lInfo.waypoints = { Vect3f(54.0, -13.68, 12.0),
@@ -222,7 +222,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.damage = 1.0
 	lInfo.radius = 0.5
 	lInfo.height = 0.5
-	lInfo.speed = 2.0 
+	lInfo.speed = 2.0
 	lInfo.position = Vect3f(39.0, -12.0, 70.0)
 	lInfo.is_patrol = true
 	lInfo.waypoints = { Vect3f(39.0, -12.0, 70.0),

@@ -4,7 +4,6 @@
 #include "Utils/BaseUtils.h"
 
 #include "EngineManagers.h"
-#include "Timer/Timer.h"
 
 CCamera::CCamera()
   : CObject3D()
@@ -176,11 +175,11 @@ void CCamera::UpdateFrustum( void )
 
 void CCamera::AddYaw( float32 aRadian )
 {
-  m_fYaw += D3DXToRadian( aRadian * 0.015f * speedTimeFactor );
+  m_fYaw += D3DXToRadian( aRadian );
 }
 void CCamera::AddPitch( float32 aRadian )
 {
-  m_fPitch += D3DXToRadian( aRadian * 0.015f * speedTimeFactor );
+  m_fPitch += D3DXToRadian( aRadian );
 }
 void CCamera::AddZf( float32 aAmont )
 {
