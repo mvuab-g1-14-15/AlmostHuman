@@ -26,10 +26,9 @@ class CTimer
 
         void Update();
 
-        float32 GetElapsedTime() const
-        {
-            return m_DeltaTime;
-        }
+        float32 GetElapsedTime() const { return m_DeltaTime; }
+        float32 GetSpeedFactor() const { return m_SpeedFactor; }
+
         float32 GetTime() const { return m_fTime; }
         float32 GetTimeMs() const { return m_fTime * 1000.0f; }
 
@@ -51,9 +50,12 @@ class CTimer
         float32*        m_Deltas;               // array of instant delta times
         uint32          m_uSamples;             // deltas arrays length
         uint32          m_uIndex;               // current array position
+        float32         m_SpeedFactor;
 };
 
 #define deltaTimeMacro  CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime()
+#define speedTimeFactor CEngine::GetSingletonPtr()->GetTimer()->GetSpeedFactor()
+
 #define FPS             CEngine::GetSingletonPtr()->GetTimer()->GetFPS()
 #define MinFPS          CEngine::GetSingletonPtr()->GetTimer()->GetMinFPS()
 #define MaxFPS          CEngine::GetSingletonPtr()->GetTimer()->GetMaxFPS()

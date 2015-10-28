@@ -16,6 +16,7 @@ CTimer::CTimer (uint32 avgSamples)
     , m_uIndex(0)
     , m_MinFps(FLT_MAX)
     , m_MaxFps(-FLT_MAX)
+    , m_SpeedFactor(1.0f)
 {
     m_Deltas = new float32[m_uSamples];
     for(uint32 j=0;j<m_uSamples;j++)
@@ -60,6 +61,9 @@ void CTimer::Update( void )
     m_fFPSTime += m_DeltaTime;
 
     m_FPS = (m_fFPSTime > 0.0f ) ? m_NumberFPSCount/m_fFPSTime : 0.0f;
+
+    m_SpeedFactor = m_uSamples / (1.0f / m_DeltaTime);
+    if(m_SpeedFactor <= 0.0f) m_SpeedFactor = 1.0f;
 
     if( l_dCurTime - m_fLastFps > 1000 )    //Solo mostramos los fps cada segundo
     {
