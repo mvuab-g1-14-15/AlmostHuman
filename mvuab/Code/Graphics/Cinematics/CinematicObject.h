@@ -8,6 +8,7 @@
 class CCinematicObjectKeyFrame;
 class CInstanceMesh;
 class CXMLTreeNode;
+class CPhysicActor;
 
 class CCinematicObject : public CCinematicPlayer
 {
@@ -15,6 +16,7 @@ private:
 	std::vector<CCinematicObjectKeyFrame *> m_CinematicObjectKeyFrames;
 	size_t m_CurrentKeyFrame;
 	CInstanceMesh *m_RenderableObject;
+	CPhysicActor *m_Actor;
 public:
 	CCinematicObject(CXMLTreeNode &atts);
 	bool IsOk();

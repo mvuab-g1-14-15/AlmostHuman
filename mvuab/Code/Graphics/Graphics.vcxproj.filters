@@ -340,6 +340,9 @@
     <ClCompile Include="Cinematics\CinematicsElement\RemovePhysxElement.cpp">
       <Filter>Cinematics\CinematicsElement</Filter>
     </ClCompile>
+    <ClCompile Include="Cinematics\CinematicsElement\LoadASEElement.cpp">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
@@ -689,6 +692,9 @@
       <Filter>Cinematics\CinematicsElement</Filter>
     </ClInclude>
     <ClInclude Include="Cinematics\CinematicsElement\RemovePhysxElement.h">
+      <Filter>Cinematics\CinematicsElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinematics\CinematicsElement\LoadASEElement.h">
       <Filter>Cinematics\CinematicsElement</Filter>
     </ClInclude>
   </ItemGroup>

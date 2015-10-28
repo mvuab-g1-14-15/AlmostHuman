@@ -6,7 +6,7 @@ function CAmmo:__init( aId )
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
 	self.Impacted = false;
-	self.MaxDistance = 20;
+	self.MaxDistance = 100;
 	self.CurrentDistance = 0;
 end
 
