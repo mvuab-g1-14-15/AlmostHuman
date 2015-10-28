@@ -184,7 +184,7 @@ function update_gameplay()
 				scene:ActivateRoom("sala3")
 				scene:ActivateRoom("elevator")
 				cinematic_manager:Execute("OpenDoorPasillo")
-				trigger_manager:GetTriggerByName("pasillo_sala3"):SetActive(false)
+				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				gui_manager:ShowStaticText("OpenDoor")
 				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
 				g_bPressRoomPasillo = false
