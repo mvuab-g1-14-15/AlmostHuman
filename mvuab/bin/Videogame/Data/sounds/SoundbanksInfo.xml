@@ -171,6 +171,10 @@
 					<ShortName>Abiendo_Compuertas_Despres Mort_FinalBoss.wav</ShortName>
 					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem</Path>
 				</File>
+				<File Id="322989847" Language="SFX">
+					<ShortName>Sala4B.wav</ShortName>
+					<Path>SFX\Sala4B_E106FFBE.wem</Path>
+				</File>
 				<File Id="341959684" Language="SFX">
 					<ShortName>Tunel.wav</ShortName>
 					<Path>SFX\Tunel_E106FFBE.wem</Path>
@@ -203,10 +207,6 @@
 					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
 					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
 				</File>
-				<File Id="919748428" Language="SFX">
-					<ShortName>Sala4B.wav</ShortName>
-					<Path>SFX\Sala4B_E106FFBE.wem</Path>
-				</File>
 				<File Id="999865395" Language="SFX">
 					<ShortName>Sala2.wav</ShortName>
 					<Path>SFX\Sala2_E106FFBE.wem</Path>
@@ -226,29 +226,37 @@
 				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="32348632" Language="SFX">
-					<ShortName>Paso metal der_amp.wav</ShortName>
-					<Path>SFX\Paso metal der_amp_76A5D070.wem</Path>
-				</File>
-				<File Id="262355845" Language="SFX">
-					<ShortName>Paso metal izq_amp.wav</ShortName>
-					<Path>SFX\Paso metal izq_amp_76A5D070.wem</Path>
-				</File>
-				<File Id="267394215" Language="SFX">
-					<ShortName>Paso suelo1.wav</ShortName>
-					<Path>SFX\Paso suelo1_76A5D070.wem</Path>
+				<File Id="161980965" Language="SFX">
+					<ShortName>footstep pav 2.wav</ShortName>
+					<Path>SFX\footstep pav 2_76A5D070.wem</Path>
 				</File>
 				<File Id="273085640" Language="SFX">
 					<ShortName>Logan Large Shoot.wav</ShortName>
 					<Path>SFX\Logan Large Shoot_76A5D070.wem</Path>
 				</File>
+				<File Id="285410270" Language="SFX">
+					<ShortName>PasoMetal4.wav</ShortName>
+					<Path>SFX\PasoMetal4_76A5D070.wem</Path>
+				</File>
+				<File Id="418888533" Language="SFX">
+					<ShortName>PasoMetal1.wav</ShortName>
+					<Path>SFX\PasoMetal1_76A5D070.wem</Path>
+				</File>
+				<File Id="529741867" Language="SFX">
+					<ShortName>PasoMetal3.wav</ShortName>
+					<Path>SFX\PasoMetal3_76A5D070.wem</Path>
+				</File>
 				<File Id="535759751" Language="SFX">
 					<ShortName>Logan Short Shoot.wav</ShortName>
 					<Path>SFX\Logan Short Shoot_DDC98EF4.wem</Path>
 				</File>
-				<File Id="787840959" Language="SFX">
-					<ShortName>Paso suelo2.wav</ShortName>
-					<Path>SFX\Paso suelo2_76A5D070.wem</Path>
+				<File Id="539246233" Language="SFX">
+					<ShortName>PasoMetal2.wav</ShortName>
+					<Path>SFX\PasoMetal2_76A5D070.wem</Path>
+				</File>
+				<File Id="746662347" Language="SFX">
+					<ShortName>footstep pav3.wav</ShortName>
+					<Path>SFX\footstep pav3_76A5D070.wem</Path>
 				</File>
 				<File Id="864427922" Language="SFX">
 					<ShortName>Logan Carga.wav</ShortName>
@@ -257,6 +265,10 @@
 				<File Id="866851989" Language="SFX">
 					<ShortName>panting(jadeo).wav</ShortName>
 					<Path>SFX\panting(jadeo)_951343B8.wem</Path>
+				</File>
+				<File Id="967663123" Language="SFX">
+					<ShortName>footstep_paviment1.wav</ShortName>
+					<Path>SFX\footstep_paviment1_76A5D070.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

@@ -7,13 +7,20 @@ Event	ID	Name			Wwise Object Path	Notes
 	3876631393	Play_Acumulator_Long_Shoot_Event			\Logan\Play_Acumulator_Long_Shoot_Event	
 	4202206853	Play_Long_Shoot_Event			\Logan\Play_Long_Shoot_Event	
 
+Effect plug-ins	ID	Name	Type				Notes
+	2891462749	Room_Medium_High_Absorbtion	Wwise RoomVerb			
+	2995775460	Room_Small	Wwise RoomVerb			
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	32348632	Paso metal der_amp	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso metal der_amp_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\Paso metal der_amp		11193
-	262355845	Paso metal izq_amp	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso metal izq_amp_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\Paso metal izq_amp		9403
-	267394215	Paso suelo1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\Paso suelo1		4362
+	161980965	footstep pav 2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep pav 2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\footstep pav 2		10047
 	273085640	LongShoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Large Shoot_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Long Shoot\LongShoot		41279
+	285410270	PasoMetal4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal4_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal4		3704
+	418888533	PasoMetal1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal1		3846
+	529741867	PasoMetal3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal3_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal3		3082
 	535759751	Logan Short Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Short Shoot_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Short Shoot\Logan Short Shoot		56348
-	787840959	Paso suelo2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Paso suelo2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\Paso suelo2		3963
+	539246233	PasoMetal2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal2		4283
+	746662347	footstep pav3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep pav3_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\footstep pav3		10291
 	864427922	Logan Carga	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Carga_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Long Shoot\AcumLongShoot\Logan Carga		311024
 	866851989	Panting	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\panting(jadeo)_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Panting		22591
+	967663123	footstep_paviment1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_paviment1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\footstep_paviment1		9258
 

@@ -6,4 +6,16 @@
   <MeshInstance name="Lights_4_glow_pasillo" core="Lights_4_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="light_red_roof_glow_pasillo" core="light_red_roof_glow_pasillo" pos="54.6263 -18.1912 -24.4116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lights_white_door002_glow_pasillo" core="lights_white_door002_glow_pasillo" pos="54.886 -15.4267 37.7638" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="lights_blue_roof_glow_pasillo" core="lights_blue_roof_glow_pasillo" pos="54.6263 -18.1912 -24.4116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_vermelles_wall_lat_01_glow_pasillo" core="llums_vermelles_wall_lat_01_glow_pasillo" pos="50.3633 -17.7021 23.1089" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_wall_lat_upper_glow_pasillo" core="llums_verdes_wall_lat_upper_glow_pasillo" pos="50.3633 -17.7021 23.1089" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_rodetes_wall_lat_glow_pasillo" core="llums_verdes_rodetes_wall_lat_glow_pasillo" pos="50.3633 -17.7021 23.1089" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_wall_lat_upper001_glow_pasillo" core="llums_verdes_wall_lat_upper001_glow_pasillo" pos="50.3634 -17.7021 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_vermelles_lat_fllooe001_glow_pasillo" core="llums_vermelles_lat_fllooe001_glow_pasillo" pos="50.3634 -17.7021 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llum_verdes_rodes_lat001_glow_pasillo" core="llum_verdes_rodes_lat001_glow_pasillo" pos="50.3634 -17.7021 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_rodes_003_glow_pasillo" core="llums_verdes_rodes_003_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_upper_003_glow_pasillo" core="llums_verdes_upper_003_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_upper_005_glow_pasillo" core="llums_verdes_upper_005_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_verdes_upper_lat_006_glow_pasillo" core="llums_verdes_upper_lat_006_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="llums_blanques_porta_002_glow_pasillo" core="llums_blanques_porta_002_glow_pasillo" pos="54.886 -15.4267 -24.0192" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

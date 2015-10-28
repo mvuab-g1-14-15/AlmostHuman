@@ -9,6 +9,7 @@ Event	ID	Name			Wwise Object Path	Notes
 
 Effect plug-ins	ID	Name	Type				Notes
 	602546716	Room_Large	Wwise RoomVerb			
+	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	17079506	footstep_boss_right	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_right_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_right		6902
