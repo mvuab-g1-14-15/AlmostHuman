@@ -7,6 +7,7 @@
 #include "Cinematics\CinematicsElement\WaitTimeElement.h"
 #include "Cinematics\CinematicsElement\SetActiveElement.h"
 #include "Cinematics\CinematicsElement\AddRenderablesElement.h"
+#include "Cinematics\CinematicsElement\RemovePhysxElement.h"
 #include "Cameras\CameraCinematical.h"
 #include "Cameras\CameraFPShooter.h"
 #include "Cameras\CameraManager.h"
@@ -68,6 +69,7 @@ void CCinematicManager::Init()
     CommandFactory.Register( "hide", Type2Type<CHideElement>( ) );
 	CommandFactory.Register( "set_active", Type2Type<CSetActiveElement>( ) );
 	CommandFactory.Register( "add_renderable", Type2Type<CAddRenderablesElement>( ) );
+	CommandFactory.Register( "remove_physx", Type2Type<CRemovePhysxElement>( ) );
 }
 
 void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
