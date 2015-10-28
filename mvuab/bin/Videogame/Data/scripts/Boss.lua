@@ -5,7 +5,7 @@ function CBoss:__init()
 	self.Name = "Boss"
 	
 	self.Radius = 2.0
-	self.Height = 8.0
+	self.Height = 6.0
 	
 	self.Delta = 1.0
 	self.DeltaRot = 0.01
@@ -16,13 +16,13 @@ function CBoss:__init()
 	self.Lerp = CLerpAnimator1D()
 	self.LerpInited = false
 	
-	self.NearPos = Vect3f(-92.0, 42.0, 62.0)
-	self.MediumPos = Vect3f(-110.0, 42.0, 62.0)
-	self.FarPos = Vect3f(-139.0, 42.0, 62.0)
+	self.NearPos = Vect3f(-142.0,25.0, 58.0)
+	self.MediumPos = Vect3f(-177.0,25.0, 58.0)
+	self.FarPos = Vect3f(-200.0,25.0, 58.0)
 	
-	self.DoorPos = Vect3f(-137.0, 33.0, 87.0)
+	self.InitPos = Vect3f(-177.0, 25.0, 120.0)
 	
-	self.TargetPos = self.NearPos
+	self.TargetPos = self.MediumPos
 	
 	self.HeightOffsetRO = 0.0
 	
@@ -33,20 +33,20 @@ function CBoss:__init()
 		self.RenderableObject:SetRoomName( "sala4" )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
-	local lROPos = self.TargetPos
+	local lROPos = self.InitPos
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:SetYaw(g_HalfPi)
-	self.RenderableObject:SetScale( Vect3f(0.4) )
+	self.RenderableObject:SetScale( Vect3f(0.3) )
 	self.RenderableObject:MakeTransform()
 	
 	self.RenderableObject:SetVelocity( 0.6 )
 	self.RenderableObject:ChangeAnimation("walk", 0.2, 1)
 	
 	--Character controller
-	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.NearPos, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+	if not physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 1.0, 0.01, 1.0, self.InitPos, CollisionGroup.ECG_ENEMY.value, -10.0) then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
-		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.NearPos, CollisionGroup.ECG_ENEMY.value, -10.0)
+		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 1.0, 0.01, 1.0, self.InitPos, CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
 	self.CharacterController = physic_manager:GetController(self.Name)
 	self.CharacterController:SetYaw(0.0)
@@ -107,12 +107,15 @@ function CBoss:MoveToPos( aPos )
 	if not self:IsInPos( aPos ) then
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
+			self:PlayFootstep()
 			self.CharacterController:Move(DirVector * self.Speed, dt)
 		else
 			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
+		engine:TraceOnce("Moving to pos "..aPos:ToString())
 		return false
 	end
+	engine:TraceOnce("Moved to pos "..aPos:ToString())
 	self.CharacterController:Move(Vect3f(0.0), dt)
 	return true
 end
@@ -186,9 +189,10 @@ function CBoss:RotateToPos( aPos )
 		local TickYaw = self.Lerp:Value(dt)
 		
 		self:SetYaw( TickYaw )
+		engine:TraceOnce("Rotating to pos "..aPos:ToString())
 		return false
 	end
-
+	engine:TraceOnce("Rotated to pos "..aPos:ToString())
 	self.LerpInited = false
 	return true
 end
@@ -201,8 +205,16 @@ function CBoss:IsInPos( aPos )
 end
 
 function CBoss:PlayFootstep()
-	--if countdowntimer_manager:isTimerFinish("FootstepBoss") then
-	--	sound_manager:PlayEvent( "Play_Footstep_boss", "Logan" )
-	--	countdowntimer_manager:Reset("FootstepBoss", true)
-	--end
+	if not self.Fly then
+		local lTimerName = "Footstep"..self.Name
+		if not countdowntimer_manager:ExistTimer(lTimerName) then
+			countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
+		else
+			countdowntimer_manager:SetActive(lTimerName, true)
+		end
+		if countdowntimer_manager:isTimerFinish(lTimerName) then
+			--sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
+			countdowntimer_manager:Reset(lTimerName, true)
+		end
+	end
 end

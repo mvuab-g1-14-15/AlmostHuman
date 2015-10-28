@@ -413,3 +413,7 @@ end
 
 function ActivateBoss()
 end
+
+function CreateBoss()
+	enemy_manager:CreateBoss()
+end

@@ -29,12 +29,14 @@ function load_basics()
 	scene:LoadRoom("sala3")	
 	scene:LoadRoom("elevator")
 	scene:LoadRoom("sala4")	
+	scene:LoadRoom("space")	
 	
-	scene:DesactivateRoom("pasillo")
-	scene:DesactivateRoom("sala2")
-	scene:DesactivateRoom("sala3")	
-	scene:DesactivateRoom("elevator")	
-	scene:DesactivateRoom("sala4")
+	--scene:DesactivateRoom("pasillo")
+	--scene:DesactivateRoom("sala2")
+	--scene:DesactivateRoom("sala3")	
+	--scene:DesactivateRoom("elevator")	
+	--scene:DesactivateRoom("sala4")
+	--scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	engine:Trace("Finish the load_basics()")
@@ -58,8 +60,6 @@ function load_gameplay()
 	if enemy_manager == nil then
 		enemy_manager = CEnemyManager()	
 	end
-	
-	enemy_manager:CreateBoss()
 	
 	g_Barrels["Barrel001"] = CBarrel("Barrel001", Vect3f(60.1564, -17.9148,-56.3638))
 	g_Barrels["Barrel002"] = CBarrel("Barrel002", Vect3f(51.7177, -17.9148, -67.583))
