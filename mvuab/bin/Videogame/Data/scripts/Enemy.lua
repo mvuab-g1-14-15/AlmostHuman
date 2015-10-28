@@ -270,7 +270,7 @@ function CEnemy:Update()
 end
 
 function CEnemy:PlayerInSight()
-	if g_Player:GetIsHidden() then
+	if g_Player:GetIsHidden() or g_Player:GetRoom() ~= self.Room then
 		return false
 	end
 	return PlayerInSight(self.Camera)
