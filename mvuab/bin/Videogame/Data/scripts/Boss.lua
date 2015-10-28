@@ -245,10 +245,8 @@ function CBoss:MoveToPos( aPos )
 		else
 			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
-		engine:TraceOnce("Moving to pos "..aPos:ToString())
 		return false
 	end
-	engine:TraceOnce("Moved to pos "..aPos:ToString())
 	self.CharacterController:Move(Vect3f(0.0), dt)
 	return true
 end
@@ -322,10 +320,8 @@ function CBoss:RotateToPos( aPos )
 		local TickYaw = self.Lerp:Value(dt)
 		
 		self:SetYaw( TickYaw )
-		engine:TraceOnce("Rotating to pos "..aPos:ToString())
 		return false
 	end
-	engine:TraceOnce("Rotated to pos "..aPos:ToString())
 	self.LerpInited = false
 	return true
 end
