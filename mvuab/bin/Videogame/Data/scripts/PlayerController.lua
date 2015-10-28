@@ -8,7 +8,7 @@ function CPlayerController:__init()
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
-	self.Speed = 4.0 / 30
+	self.Speed = 4.0
 	self.JumpForce = 180.0
 	
 	self.Forward = Vect3f(0.0)
@@ -45,8 +45,8 @@ function CPlayerController:__init()
 	self.ShakeValueVertical = 0.0
 	self.ShakeValueHorizontal = 0.0
 	
-	self.ShakeVerticalSpeed = 4.0 / 30
-	self.ShakeHorizontalSpeed = 3.0 / 30
+	self.ShakeVerticalSpeed = 4.0
+	self.ShakeHorizontalSpeed = 3.0
 	self.ShakeVerticalAmplitude = 0.01
 	self.ShakeHorizontalAmplitude = 0.01
 	
@@ -59,7 +59,7 @@ function CPlayerController:__init()
 end
 
 function CPlayerController:Update()
-	local dt = timer:GetSpeedFactor()
+	local dt = timer:GetElapsedTime()
 
 	--local l_PlayerCamera = camera_manager:GetCamera("TestProcessCam")
 	local l_PlayerCamera = camera_manager:GetCurrentCamera()
