@@ -21,6 +21,7 @@ function CBoss:__init()
 	self.FarPos = Vect3f(-200.0,25.0, 58.0)
 	
 	self.InitPos = Vect3f(-177.0, 25.0, 120.0)
+	self.InitPos = self.MediumPos
 	
 	self.TargetPos = self.MediumPos
 	
@@ -52,6 +53,16 @@ function CBoss:__init()
 	self.CharacterController:SetYaw(0.0)
 	self.CharacterController:SetScale( Vect3f(1.0) )
 	
+	self.FootstepTime = 1.0
+	
+	self.AttackingNear = false
+	self.AttackingMedium = false
+	self.AttackingFar = false
+	
+	self.Counter = 0
+	
+	self.BlashRight = CBlash( self.Name.."BlashRight")
+	self.BlashLeft  = CBlash( self.Name.."BlashLeft")
 end
 
 function CBoss:Destroy()
@@ -60,20 +71,142 @@ end
 function CBoss:Update()
 	local dt = timer:GetElapsedTime()
 	
-	if self:MoveToPos( self.TargetPos ) then
-		if self.TargetPos == self.NearPos then
-			self.TargetPos = self.FarPos
-		elseif self.TargetPos == self.MediumPos then
-			self.TargetPos = self.NearPos
-		elseif self.TargetPos == self.FarPos then
-			self.TargetPos = self.MediumPos
+	if self.AttackingNear then
+		self:NearAttack()
+	elseif self.AttackingMedium then
+		self:MediumAttack()
+	elseif self.AttackingFar then
+		self:FarAttack()
+	else
+		if self:MoveToPos( self.TargetPos ) then
+			if self.TargetPos == self.NearPos then
+				self.TargetPos = self.FarPos
+				self.AttackingNear = true
+			elseif self.TargetPos == self.MediumPos then
+				self.TargetPos = self.NearPos
+				self.AttackingMedium = true
+			elseif self.TargetPos == self.FarPos then
+				self.TargetPos = self.MediumPos
+				self.AttackingFar = true
+			end
 		end
 	end
+	
+	self.BlashRight:Tick()
+	self.BlashLeft:Tick()
 	
 	local lROPos = self:GetPosition()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
+end
+
+function CBoss:NearAttack()
+	local lTimerName = "NearShootTimer"
+	if not countdowntimer_manager:ExistTimer(lTimerName) then
+		countdowntimer_manager:AddTimer(lTimerName, 1.0, false)
+	else
+		countdowntimer_manager:SetActive(lTimerName, true)
+	end
+	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self:MakeShootNear()
+		self.Counter = self.Counter + 1
+		if self.Counter > 5 then
+			self.AttackingNear = false
+			self.Counter = 0
+		end
+		countdowntimer_manager:Reset(lTimerName, true)
+	else
+		self:RotateToPos( g_Player:GetPosition() )
+	end
+end
+
+function CBoss:MediumAttack()
+	local lTimerName = "MediumShootTimer"
+	if not countdowntimer_manager:ExistTimer(lTimerName) then
+		countdowntimer_manager:AddTimer(lTimerName, 3.0, false)
+	else
+		countdowntimer_manager:SetActive(lTimerName, true)
+	end
+	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self:MakeShootMedium()
+		self.Counter = self.Counter + 1
+		if self.Counter > 3 then
+			self.AttackingMedium = false
+			self.Counter = 0
+		end
+		countdowntimer_manager:Reset(lTimerName, true)
+	else
+		self:RotateToPos( g_Player:GetPosition() )
+	end
+end
+
+function CBoss:FarAttack()
+	local lTimerName = "FarShootTimer"
+	if not countdowntimer_manager:ExistTimer(lTimerName) then
+		countdowntimer_manager:AddTimer(lTimerName, 5.0, false)
+	else
+		countdowntimer_manager:SetActive(lTimerName, true)
+	end
+	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self:MakeShootFar()
+		self.Counter = self.Counter + 1
+		if self.Counter > 2 then
+			self.AttackingFar = false
+			self.Counter = 0
+		end
+		countdowntimer_manager:Reset(lTimerName, true)
+	else
+		self:RotateToPos( g_Player:GetPosition() )
+	end
+end
+
+function CBoss:MakeShootNear()
+	local lShootSpeed = 20.0
+	local lDamage = 5.0
+	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
+	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
+	local lDir1 = GetPlayerDirection( lPos1 )
+	local lDir2 = GetPlayerDirection( lPos2 )
+	self.BlashRight:Begin(lPos1)
+	self.BlashLeft:Begin(lPos2)
+	for i=1,10 do
+		lRandom = Vect3f(0.1*(math.random()-0.5), 0.1*(math.random()-0.5), 0.1*(math.random()-0.5))
+		enemy_manager:AddShoot( lPos1, lDir1 + lRandom, lShootSpeed, lDamage/2.0 )
+		lRandom = Vect3f(0.1*(math.random()-0.5), 0.1*(math.random()-0.5), 0.1*(math.random()-0.5))
+		enemy_manager:AddShoot( lPos2, lDir2 + lRandom, lShootSpeed, lDamage/2.0 )
+	end
+	--Todo play enemy sound
+end
+
+function CBoss:MakeShootMedium()
+	local lShootSpeed = 40.0
+	local lDamage = 10.0
+	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
+	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
+	local lDir1 = GetPlayerDirection( lPos1 )
+	local lDir2 = GetPlayerDirection( lPos2 )
+	self.BlashRight:Begin(lPos1)
+	self.BlashLeft:Begin(lPos2)
+	for i=1,6 do
+		enemy_manager:AddShoot( lPos1, lDir1, lShootSpeed-i*4, lDamage/2.0 )
+		enemy_manager:AddShoot( lPos2, lDir2, lShootSpeed-i*4, lDamage/2.0 )
+	end
+	--Todo play enemy sound
+end
+
+function CBoss:MakeShootFar()
+	local lShootSpeed = 50.0
+	local lDamage = 20.0
+	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
+	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
+	local lDir1 = GetPlayerDirection( lPos1 )
+	local lDir2 = GetPlayerDirection( lPos2 )
+	self.BlashRight:Begin(lPos1)
+	self.BlashLeft:Begin(lPos2)
+	enemy_manager:AddShoot( lPos1, lDir1, lShootSpeed, lDamage/2.0 )
+	enemy_manager:AddShoot( lPos2, lDir2, lShootSpeed, lDamage/2.0 )
+	--Todo play enemy sound
 end
 
 function CBoss:GetName()
@@ -205,16 +338,14 @@ function CBoss:IsInPos( aPos )
 end
 
 function CBoss:PlayFootstep()
-	if not self.Fly then
-		local lTimerName = "Footstep"..self.Name
-		if not countdowntimer_manager:ExistTimer(lTimerName) then
-			countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
-		else
-			countdowntimer_manager:SetActive(lTimerName, true)
-		end
-		if countdowntimer_manager:isTimerFinish(lTimerName) then
-			--sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
-			countdowntimer_manager:Reset(lTimerName, true)
-		end
+	local lTimerName = "FootstepBoss"
+	if not countdowntimer_manager:ExistTimer(lTimerName) then
+		countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
+	else
+		countdowntimer_manager:SetActive(lTimerName, true)
+	end
+	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		--sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
+		countdowntimer_manager:Reset(lTimerName, true)
 	end
 end

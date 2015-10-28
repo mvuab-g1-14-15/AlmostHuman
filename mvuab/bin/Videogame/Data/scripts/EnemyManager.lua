@@ -16,7 +16,7 @@ function CEnemyManager:__init()
 	self.GarbageMesh.sala4 = {}
 	
 	self.Shoots = {}
-	self.MaxShoots = 50
+	self.MaxShoots = 100
 	for i=1,self.MaxShoots do
 		table.insert( self.Shoots, CAmmo(i) )
 	end
