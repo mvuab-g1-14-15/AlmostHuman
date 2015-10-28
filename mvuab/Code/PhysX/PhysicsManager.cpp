@@ -138,17 +138,13 @@ void CPhysicsManager::Init()
     }
 
     /*Precompilation Directives*/
-#if defined( _DEBUG )
+//#if defined( _DEBUG )
     //#define USE_DEBUGGER
     //#ifdef USE_DEBUGGER
     m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect( "127.0.0.1" );
     //#endif
-#endif
+//#endif
     //return m_bIsOk;
-
-#ifndef _USING_MESH_FOR_PHYSX
-	m_pCookingMesh->CreateMeshFromASE("Data/PhysXMeshes.ase", "PhysXMeshes");
-#endif
 }
 
 //----------------------------------------------------------------------------
@@ -1467,7 +1463,7 @@ bool CPhysicsManager::AddController( const std::string& Name, float radius, floa
     CPhysicController*  l_Controller  = new CPhysicController( radius, height, slope, skin_width, step, ColliusionGroup,
             l_UserData, pos, gravity );
 
-    if ( !CMapManager<CPhysicController>::GetResource( Name ) )
+    if ( !CMapManager<CPhysicController>::Exist( Name ) )
     {
         if ( AddPhysicController( l_Controller, l_Controller->GetType(), l_Controller->GetColisionGroup() ) )
         {

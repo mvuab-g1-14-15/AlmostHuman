@@ -33,7 +33,7 @@ function CEnemy:__init( aInfo )
 		self.TargetPos = self.Waypoints[self.ActualWaypoint]
 	end
 	
-	if physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0) == false then 
+	if not physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0) then 
 		physic_manager:ReleasePhysicController(physic_manager:GetController(self.Name))
 		physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 0.2, 0.01, 0.5, self.InitPosition, CollisionGroup.ECG_ENEMY.value, -10.0)
 	end
@@ -123,6 +123,9 @@ function CEnemy:__init( aInfo )
 	end
 	
 	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
+	
+	sound_manager:RegisterGameObject(self.Name)
+	self.FootstepTime = 0.5
 end
 
 function CEnemy:Destroy()
@@ -137,6 +140,7 @@ function CEnemy:Destroy()
 	self.BlashRight:End()
 	self.BlashLeft:End()
 	physic_manager:ReleasePhysicController(self.CharacterController)
+	sound_manager:UnregisterGameObject(self.Name)
 end
 
 function CEnemy:Update()
@@ -264,6 +268,8 @@ function CEnemy:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
+	
+	sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), Vect3f(0.0))
 	--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
 	
 	--profiler:AddEnd("CEnemy:Update()")
@@ -368,9 +374,11 @@ function CEnemy:MoveToPos( aPos )
 							lDir = lDir - lDirToEnemy * 0.2
 							lDir:Normalize()
 						end
+						self:PlayFootstep()
 						self.CharacterController:Move(lDir * self.Speed*5.0, dt)
 					end
 				else
+					self:PlayFootstep()
 					self.CharacterController:Move(DirVector * self.Speed, dt)
 				end
 				if self.UseGizmo then
@@ -420,9 +428,11 @@ function CEnemy:MoveToPos( aPos )
 						lDir = lDir - lDirToEnemy * 0.2
 						lDir:Normalize()
 					end
+					self:PlayFootstep()
 					self.CharacterController:Move(lDir * self.Speed*5.0, dt)
 				end
 			else
+				self:PlayFootstep()
 				self.CharacterController:Move(DirVector * self.Speed, dt)
 			end
 			if self.UseGizmo then
@@ -501,10 +511,16 @@ function CEnemy:IsInPos( aPos )
 end
 
 function CEnemy:PlayFootstep()
-	--if countdowntimer_manager:isTimerFinish("Footstep"..self.Name) then
-	--	sound_manager:PlayEvent( "Play_Footstep_enemy", "Logan" )
-	--	countdowntimer_manager:Reset("Footstep"..self.Name, true)
-	--end
+	local lTimerName = "Footstep"..self.Name
+	if not countdowntimer_manager:ExistTimer(lTimerName) then
+		countdowntimer_manager:AddTimer(lTimerName, self.FootstepTime, false)
+	else
+		countdowntimer_manager:SetActive(lTimerName, true)
+	end
+	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		--sound_manager:PlayEvent( "Play_Footstep_Androide", self.Name )
+		countdowntimer_manager:Reset(lTimerName, true)
+	end
 end
 
 function CEnemy:GetRoom()
