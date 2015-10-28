@@ -9,4 +9,6 @@
   <MeshInstance name="ray_of_god006_sala3" core="ray_of_god006_sala3" pos="-30.0957 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god007_sala3" core="ray_of_god007_sala3" pos="-40.6862 -18.4693 60.5085" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="ray_of_god008_sala3" core="ray_of_god008_sala3" pos="1.18723 -18.4693 75.8246" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="bomb_sala3" core="bomb_sala3" pos="40.6495 -16.7378 51.8676" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="bomb002_sala3" core="bomb002_sala3" pos="26.6375 -16.776 68.7003" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>
