@@ -15,8 +15,11 @@
 
 #include "RenderableObject/Room.h"
 #include "RenderableObject/Scene.h"
+#include "PhysicsManager.h"
+#include "Actor\PhysicActor.h"
 
-CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
+CCinematicObject::CCinematicObject( CXMLTreeNode& atts ):
+m_Actor(0)
 {
   CRoom* lRoom = SceneInstance->GetResource( atts.GetAttribute<std::string>("room", "" ) );
   ASSERT( lRoom, "The room %s doesn't exist", atts.GetAttribute<std::string>("room", "" ).c_str() );
@@ -30,6 +33,8 @@ CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
           m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );
 		  ASSERT(m_RenderableObject, "Error al cargar el renderable %s", resource.c_str());
 		  m_CurrentTime = atts.GetAttribute<float>("init_keyframe", 0.0f);
+		  if( atts.GetAttribute<bool>("physx", false) )
+			  m_Actor = PhysXMInstance->CMapManager<CPhysicActor>::GetResource(atts.GetAttribute<std::string>("name_physx", ""));
           for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount ; ++i )
               m_CinematicObjectKeyFrames.push_back( new CCinematicObjectKeyFrame( atts( i ) ) );
       }
@@ -186,6 +191,8 @@ void CCinematicObject::Update()
   m_RenderableObject->SetRoll( roll );
   m_RenderableObject->SetScale( scale );
   m_RenderableObject->MakeTransform();
+  if(m_Actor)
+	  m_Actor->SetPosition(pos);
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
 

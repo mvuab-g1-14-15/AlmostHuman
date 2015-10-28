@@ -38,6 +38,7 @@
     <ClCompile Include="Cinematics\CinematicsElement\AddRenderablesElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\CinematicsElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\HideElement.cpp" />
+    <ClCompile Include="Cinematics\CinematicsElement\LoadASEElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\PlayAnimationElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\RemovePhysxElement.cpp" />
     <ClCompile Include="Cinematics\CinematicsElement\SetActiveElement.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Cinematics\CinematicsElement\AddRenderablesElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\CinematicsElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\HideElement.h" />
+    <ClInclude Include="Cinematics\CinematicsElement\LoadASEElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\PlayAnimationElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\RemovePhysxElement.h" />
     <ClInclude Include="Cinematics\CinematicsElement\SetActiveElement.h" />

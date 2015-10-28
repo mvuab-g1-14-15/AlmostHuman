@@ -8,6 +8,7 @@
 #include "Cinematics\CinematicsElement\SetActiveElement.h"
 #include "Cinematics\CinematicsElement\AddRenderablesElement.h"
 #include "Cinematics\CinematicsElement\RemovePhysxElement.h"
+#include "Cinematics\CinematicsElement\LoadASEElement.h"
 #include "Cameras\CameraCinematical.h"
 #include "Cameras\CameraFPShooter.h"
 #include "Cameras\CameraManager.h"
@@ -70,6 +71,7 @@ void CCinematicManager::Init()
 	CommandFactory.Register( "set_active", Type2Type<CSetActiveElement>( ) );
 	CommandFactory.Register( "add_renderable", Type2Type<CAddRenderablesElement>( ) );
 	CommandFactory.Register( "remove_physx", Type2Type<CRemovePhysxElement>( ) );
+	CommandFactory.Register( "add_physx", Type2Type<CLoadASEElement>( ) );
 }
 
 void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
