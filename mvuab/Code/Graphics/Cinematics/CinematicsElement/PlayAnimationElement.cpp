@@ -25,7 +25,10 @@ CPlayAnimationElement::CPlayAnimationElement( CXMLTreeNode& atts ) : CCinematics
 
 CPlayAnimationElement::~CPlayAnimationElement()
 {
-	//CHECKED_DELETE(m_Cinematic);
+	if(!m_Animated)
+    {
+        CHECKED_DELETE(m_Cinematic);
+    }
 }
 
 
