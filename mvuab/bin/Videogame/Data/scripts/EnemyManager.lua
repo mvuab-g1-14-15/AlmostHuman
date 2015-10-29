@@ -312,6 +312,9 @@ function CEnemyManager:Update()
 	
 	if self.Boss ~= nil then
 		self.Boss:Update()
+		if self.Boss:GetLife() <= 0 then
+			--execute dead code
+		end
 	end
 	
 	for k in pairs (self.Shoots) do
@@ -354,7 +357,13 @@ function CEnemyManager:SetAlarm( aRoom )
 end
 
 function CEnemyManager:CreateBoss()
-	self.Boss = CBoss()
+	if self.Boss == nil then
+		self.Boss = CBoss()
+	end
+end
+
+function CEnemyManager:GetBoss()
+	return self.Boss
 end
 
 function CEnemyManager:GetCloseEnemy(aPos)

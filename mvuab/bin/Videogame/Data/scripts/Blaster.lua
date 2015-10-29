@@ -120,7 +120,6 @@ function CBlaster:Update( aPosition )
 			end
 		end
 		if action_manager:DoAction("ShootUp") then
-			engine:Trace("ShootUp")
 			if self.Energy > 1 then
 				if self.TimePressed < (self.MaxTimePressed * 0.1) then
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )

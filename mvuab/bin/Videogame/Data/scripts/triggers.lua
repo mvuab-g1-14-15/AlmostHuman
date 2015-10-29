@@ -31,6 +31,12 @@ g_EnteredPasillo = false
 g_EnteredSala3 = false
 g_EnteredSala4 = false
 
+g_Hacked = {}
+g_Hacked.nave1 = false
+g_Hacked.nave2 = false
+g_Hacked.nave3 = false
+g_Hacked.nave4 = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -403,6 +409,14 @@ function SetPropSala4()
 end
 
 function Hacknave(nave_obj)
+	if enemy_manager:GetBoss():IsStunned() then
+		if not g_Hacked[nave_obj] then
+			--logica de disparo hacia el boss
+			engine:TraceOnce("Hacked space ship "..nave_obj)
+			g_Hacked[nave_obj] = true
+			enemy_manager:GetBoss():ClearStun()
+		end
+	end
 end
 
 function UpToSala4(text, other_shape)
@@ -426,5 +440,9 @@ function ActivateBoss()
 end
 
 function CreateBoss()
+	g_Hacked.nave1 = false
+	g_Hacked.nave2 = false
+	g_Hacked.nave3 = false
+	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
 end

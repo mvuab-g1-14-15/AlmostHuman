@@ -17,7 +17,6 @@ function CAmmoCharged:IsImpacted()
 end
 
 function CAmmoCharged:Begin( aPosition, aDirection, aDamage )
-	engine:Trace("Charged:Begin")
 	self.Active 	     = true;
 	self.Impacted 		 = false;
 	self.Direction       = aDirection;
@@ -46,7 +45,6 @@ function CAmmoCharged:Update( aPosition )
 					self.Impacted = true
 					self.Position = lCollisionPoint
 					local lName = hit_info.Name
-					engine:Trace("Charged:Impacted with "..lName)
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					else

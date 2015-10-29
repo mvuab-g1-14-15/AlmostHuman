@@ -62,6 +62,11 @@ function CBoss:__init()
 	
 	self.BlashRight = CBlash( self.Name.."BlashRight")
 	self.BlashLeft  = CBlash( self.Name.."BlashLeft")
+	
+	self.Life = 100.0
+	
+	self.InitStunBar = 1000.0
+	self.StunBar = self.InitStunBar
 end
 
 function CBoss:Destroy()
@@ -75,25 +80,29 @@ end
 function CBoss:Update()
 	local dt = timer:GetElapsedTime()
 	
-	if self.AttackingNear then
-		self:NearAttack()
-	elseif self.AttackingMedium then
-		self:MediumAttack()
-	elseif self.AttackingFar then
-		self:FarAttack()
-	else
-		if self:MoveToPos( self.TargetPos ) then
-			if self.TargetPos == self.NearPos then
-				self.TargetPos = self.FarPos
-				self.AttackingNear = true
-			elseif self.TargetPos == self.MediumPos then
-				self.TargetPos = self.NearPos
-				self.AttackingMedium = true
-			elseif self.TargetPos == self.FarPos then
-				self.TargetPos = self.MediumPos
-				self.AttackingFar = true
+	if not self:IsStunned() then
+		if self.AttackingNear then
+			self:NearAttack()
+		elseif self.AttackingMedium then
+			self:MediumAttack()
+		elseif self.AttackingFar then
+			self:FarAttack()
+		else
+			if self:MoveToPos( self.TargetPos ) then
+				if self.TargetPos == self.NearPos then
+					self.TargetPos = self.FarPos
+					self.AttackingNear = true
+				elseif self.TargetPos == self.MediumPos then
+					self.TargetPos = self.NearPos
+					self.AttackingMedium = true
+				elseif self.TargetPos == self.FarPos then
+					self.TargetPos = self.MediumPos
+					self.AttackingFar = true
+				end
 			end
 		end
+	else
+		engine:TraceOnce("Boss stunned!")
 	end
 	
 	self.BlashRight:Tick()
@@ -103,6 +112,26 @@ function CBoss:Update()
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
+end
+
+function CBoss:GetLife()
+	return self.Life
+end
+
+function CBoss:AddDamage(aValue)
+	self.Life = self.Life - aValue
+end
+
+function CBoss:IsStunned()
+	return self.StunBar <= 0
+end
+
+function CBoss:AddStun( aValue )
+	self.StunBar = self.StunBar - aValue
+end
+
+function CBoss:ClearStun()
+	self.StunBar = self.InitStunBar
 end
 
 function CBoss:NearAttack()
