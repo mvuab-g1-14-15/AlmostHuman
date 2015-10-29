@@ -21,7 +21,6 @@ function CBoss:__init()
 	self.FarPos = Vect3f(-200.0,25.0, 58.0)
 	
 	self.InitPos = Vect3f(-177.0, 25.0, 120.0)
-	self.InitPos = self.MediumPos
 	
 	self.TargetPos = self.MediumPos
 	
@@ -66,6 +65,11 @@ function CBoss:__init()
 end
 
 function CBoss:Destroy()
+	self.BlashRight:End()
+	self.BlashLeft:End()
+	renderable_objects_manager_characters:RemoveResource(self.Name)
+	physic_manager:ReleasePhysicController(self.CharacterController)
+	sound_manager:UnregisterGameObject(self.Name)
 end
 
 function CBoss:Update()
@@ -171,9 +175,9 @@ function CBoss:MakeShootNear()
 	self.BlashRight:Begin(lPos1)
 	self.BlashLeft:Begin(lPos2)
 	for i=1,10 do
-		lRandom = Vect3f(0.1*(math.random()-0.5), 0.1*(math.random()-0.5), 0.1*(math.random()-0.5))
+		lRandom = Vect3f(0.02*(math.random()-0.5), 0.02*(math.random()-0.5), 0.02*(math.random()-0.5))
 		enemy_manager:AddShoot( lPos1, lDir1 + lRandom, lShootSpeed, lDamage/2.0 )
-		lRandom = Vect3f(0.1*(math.random()-0.5), 0.1*(math.random()-0.5), 0.1*(math.random()-0.5))
+		lRandom = Vect3f(0.02*(math.random()-0.5), 0.02*(math.random()-0.5), 0.02*(math.random()-0.5))
 		enemy_manager:AddShoot( lPos2, lDir2 + lRandom, lShootSpeed, lDamage/2.0 )
 	end
 	--Todo play enemy sound

@@ -283,6 +283,10 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
 	end
+	if aRoom == "sala4" then
+		self.Boss:Destroy()
+		self.Boss = nil
+	end
 end
 
 function CEnemyManager:Update()

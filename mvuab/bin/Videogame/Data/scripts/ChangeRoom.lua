@@ -1,4 +1,4 @@
-g_Rooms = { Vect3f( 136.84, -7.99, -62 ), Vect3f( 76.51, -10.60, -31.10 ), Vect3f( 53.72, -16.66, -17.16 ), Vect3f( 53.80, -16.23, 41.77 ), Vect3f( -53.01, 35.79, 62.32 ),Vect3f( -347.22, 21.80, 56.73 )}
+g_Rooms = { Vect3f( 136.84, -7.99, -62 ), Vect3f( 76.51, -10.60, -31.10 ), Vect3f( 53.72, -16.66, -17.16 ), Vect3f( 53.80, -16.23, 41.77 ), Vect3f( -70.0, 22.0, 59.0 ),Vect3f( -347.22, 21.80, 56.73 )}
 g_ActualRoom = 1
 
 function ChangeRoom()
@@ -25,7 +25,7 @@ function ChangeRoom()
 	end
 	if g_ActualRoom == 5 then
 		g_Player:SetRoom("sala4")
-		g_Player:SetCheckpoint("sala4", Vect3f( -53.01, 35.79, 62.32 ), 100.0, 100.0)
+		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), 100.0, 100.0)
 	end
 	
 	sound_manager:PlayEvent("Open_Close_Door_Event","TestGameObject3d")
