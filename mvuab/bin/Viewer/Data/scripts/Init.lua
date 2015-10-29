@@ -75,7 +75,7 @@ function update_gameplay()
 				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
 				l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
 				l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
-				camera_manager:SetCurrentCamera( "TestProcessCam" )
+				camera_manager:SetCurrentCamera( "Main" )
 				camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
 				camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
 			else

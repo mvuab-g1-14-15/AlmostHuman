@@ -160,7 +160,7 @@ function ChangeCameraCloseEnemy()
 	
 	if lActualCameraName == lEnemyName then
 		--engine:Trace("Changing camera to Player")
-		camera_manager:SetCurrentCamera("TestProcessCam")
+		camera_manager:SetCurrentCamera("Main")
 	else
 		--engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
 		--engine:Trace("Cantidad de enemigos: "..enemy_manager:GetNumEnemys())

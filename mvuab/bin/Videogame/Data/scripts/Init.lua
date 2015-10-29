@@ -105,6 +105,9 @@ function load_gameplay()
     end
 	
 	renderable_objects_manager_characters_sala1 = scene:GetResource("sala1"):GetLayer("solid")
+	
+	camera_manager:GetCamera("Main"):SetZFar(5000.0)
+	camera_manager:GetCamera("FreeCam"):SetZFar(5000.0)
 end
 
 function update_gameplay()
@@ -289,7 +292,7 @@ function update_gameplay()
 				g_Player:SetPosition(camera_manager:GetCurrentCamera():GetPosition())
 				l_Yaw = camera_manager:GetCurrentCamera():GetYaw()
 				l_Pitch = camera_manager:GetCurrentCamera():GetPitch()
-				camera_manager:SetCurrentCamera( "TestProcessCam" )
+				camera_manager:SetCurrentCamera( "Main" )
 				camera_manager:GetCurrentCamera():SetYaw(l_Yaw)
 				camera_manager:GetCurrentCamera():SetPitch(l_Pitch)
 			else

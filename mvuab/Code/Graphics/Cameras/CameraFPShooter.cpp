@@ -4,7 +4,8 @@
 #include "Timer\Timer.h"
 
 CCameraFPShooter::CCameraFPShooter()
-    : m_Height( 2.0f ),
+    : CCamera(),
+      m_Height( 2.0f ),
       m_YawSpeed(100.f),
       m_PitchSpeed( 60.0f),
       m_ForwardSpeed(10.f),

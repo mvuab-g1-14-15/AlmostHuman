@@ -65,7 +65,7 @@ function CPlayerController:Update()
 	local sf = timer:GetSpeedFactor()
     local dt = timer:GetElapsedTime()
 
-	--local l_PlayerCamera = camera_manager:GetCamera("TestProcessCam")
+	--local l_PlayerCamera = camera_manager:GetCamera("Main")
 	local l_PlayerCamera = camera_manager:GetCurrentCamera()
 	self:CalculateDirectionVectors(l_PlayerCamera)
 	self:UpdateCamera(l_PlayerCamera, sf)
