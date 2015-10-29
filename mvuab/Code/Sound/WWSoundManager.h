@@ -49,26 +49,26 @@ public:
 
 
   /***************************** WWISE FUNCTIONS *****************************************/
-  AKRESULT SetSwitch( std::string _Group, std::string _Gravel, std::string _KeyGameObjectMap );
-  AKRESULT RegisterGameObject( std::string _KeyGameObjectMap );
-  AKRESULT UnregisterGameObject( std::string _KeyGameObjectMap );
-  AKRESULT SetState( std::string _Group, std::string _State );
+  AKRESULT SetSwitch( const std::string& _Group, const std::string& _Gravel, const std::string& _KeyGameObjectMap );
+  AKRESULT RegisterGameObject( const std::string& _KeyGameObjectMap );
+  AKRESULT UnregisterGameObject( const std::string& _KeyGameObjectMap );
+  AKRESULT SetState( const std::string& _Group, const std::string& _State );
   AKRESULT SetListenerPosition( Math::Vect3f _ListenerPosition, Math::Vect3f _Direction, Math::Vect3f _Up );
-  AKRESULT SetGameObjectPosition( std::string _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation );
-  AKRESULT SetGameObjectMultiplePositions( std::string _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
-      std::vector<Math::Vect3f> _GameObjectOrientation, std::string _TypePos );
+  AKRESULT SetGameObjectPosition( const std::string& _KeyGameObjectMap, Math::Vect3f _GameObjectPosition, Math::Vect3f _GameObjectOrientation );
+  AKRESULT SetGameObjectMultiplePositions( const std::string& _KeyGameObjectMap, std::vector<Math::Vect3f> _GameObjectPosition,
+      std::vector<Math::Vect3f> _GameObjectOrientation, const std::string& _TypePos );
   /******************************* Particles OP  ************/
   void LoadParticlePosSound(const std::string& aFileName);
   void PlayParticlesSFX();
     /***************************** BASIC OPS ***********************************************/
-  AkPlayingID PlayEvent( std::string _Event, std::string _GameObjectId );
-  void ResumeEvent( std::string _Event, std::string _KeyGameObjectMap );
-  void PauseEvent( std::string _Event, std::string _KeyGameObjectMap );
-  void ResumeAllFromGameObject( std::string _KeyGameObjectMap );
-  void PauseAllFromGameObject( std::string _KeyGameObjectMap );
+  AkPlayingID PlayEvent( const std::string& _Event, const std::string& _GameObjectId );
+  void ResumeEvent( const std::string& _Event, const std::string& _KeyGameObjectMap );
+  void PauseEvent( const std::string& _Event, const std::string& _KeyGameObjectMap );
+  void ResumeAllFromGameObject( const std::string& _KeyGameObjectMap );
+  void PauseAllFromGameObject( const std::string& _KeyGameObjectMap );
 
-  AkGameObjectID GetGameObjectMapById( std::string _KeyGameObjectMap );
-  void SetGameObjectMapById( std::string _KeyGameObjectMap );
+  AkGameObjectID GetGameObjectMapById( const std::string& _KeyGameObjectMap );
+  void SetGameObjectMapById( const std::string& _KeyGameObjectMap );
   //void PauseAllSounds();
   //void ResumeAllSounds();
 

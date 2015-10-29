@@ -40,7 +40,8 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	checkbox GenerateTracksCheckBox "Generate" pos:[346,227] width:66 height:13
 	GroupBox GBCameras "Cameras" pos:[339,255] width:226 height:40
 	checkbox CycleCameraCheckBox "Cycle" pos:[347,273] width:66 height:13
-	checkbox ReverseCameraCheckBox "Reverse" pos:[432,269] width:123 height:21
+	checkbox ReverseCameraCheckBox "Reverse" pos:[404,269] width:68 height:21
+	checkbox IsFixedCheckBox "Is Fixed" pos:[474,269] width:68 height:21
 	
 	--  LIGHTS	
 	GroupBox GBLights "Lights" pos:[43,330] width:244 height:282
@@ -298,6 +299,10 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			SetPropertyCheck Obj "cycle_camera" CycleCameraCheckBox
 			--ADD/UPDATE PROPERTY REVERSE CAMERA
 			SetPropertyCheck Obj "reverse_camera" ReverseCameraCheckBox
+			SetPropertyCheck Obj "is_fixed_camera" IsFixedCheckBox
+			
+			
+			
 			
 			--------LIGHTS---------
 				--Shadow Map SET 
@@ -396,6 +401,8 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 				SetPropertyCheck Obj[i] "cycle_camera" CycleCameraCheckBox
 				--ADD/UPDATE PROPERTY REVERSE CAMERA
 				SetPropertyCheck Obj[i] "reverse_camera" ReverseCameraCheckBox
+				SetPropertyCheck Obj[i] "is_fixed_camera" IsFixedCheckBox
+				
 				--------LIGHTS---------
 					--Shadow Map SET 
 					SetPropertyEditText Obj[i] "Shadow_Map_Format_Type" ShadowMapFormatType
@@ -441,9 +448,6 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 	
 	--SETBUTTON METHOD TO UPDATE THE PROPERTIES
 	---SETBUTTON METHOD TO UPDATE THE PROPERTIES END
-	
-	
-
 	
 	on ExportCheckRender changed theState do
 	(
@@ -594,6 +598,9 @@ rollout UABSetProperties "UABSetProperties" width:600 height:800
 			--OBTAIN REVERSE CAMERA
 			Property=getUserProp $ "reverse_camera"
 			GetPropertyCheckBox Property ReverseCameraCheckBox
+			Property=getUserProp $ "is_fixed_camera"
+			GetPropertyCheckBox Property IsFixedCheckBox
+			
 			--------LIGHTS---------
 			--Shadow Map GET 
 			Property=getUserProp $ "Shadow_Map_Format_Type" 

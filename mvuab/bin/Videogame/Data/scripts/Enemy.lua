@@ -124,10 +124,11 @@ function CEnemy:__init( aInfo )
 	
 	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
 	
+	sound_manager:SetGameObjectMapById(self.Name)
 	sound_manager:RegisterGameObject(self.Name)
 	self.FootstepTime = 0.5
 	if self.Fly then
-		--sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
+		sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
 	end
 end
 
@@ -272,7 +273,7 @@ function CEnemy:Update()
 	self.RenderableObject:SetPosition( lROPos )
 	self.RenderableObject:MakeTransform()
 	
-	sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), Vect3f(0.0))
+	sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), self:GetPosition())
 	--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
 	
 	--profiler:AddEnd("CEnemy:Update()")
@@ -522,7 +523,7 @@ function CEnemy:PlayFootstep()
 			countdowntimer_manager:SetActive(lTimerName, true)
 		end
 		if countdowntimer_manager:isTimerFinish(lTimerName) then
-			--sound_manager:PlayEvent( "Play_Footstep_Androide", self.Name )
+			sound_manager:PlayEvent( "Play_Footstep_Androide", self.Name )
 			countdowntimer_manager:Reset(lTimerName, true)
 		end
 	end

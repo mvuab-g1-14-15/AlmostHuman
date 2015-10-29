@@ -4,8 +4,8 @@ fileIn "Utils.ms"
 
 fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 (
-	try 
-	(
+	--try 
+	--(
 		if cameras.count == 0 then
 		(
 			format "No cameras in the scene \n"
@@ -27,8 +27,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				fov = EachCamera.Fov as string
 				nearclip = EachCamera.nearclip as string
 				farclip = EachCamera.farclip as string
+				l_IsFixed = getUserProp EachCamera "is_fixed_camera"
 				
-				if (EachCamera.position.controller.keys.count > 0) then 
+				format "Is Fixed Camera: % \n" l_IsFixed
+				
+				if (l_IsFixed == undefined OR l_IsFixed == false) then 
 				(
 					
 					--If number of frames is empty, set to 1
@@ -122,11 +125,11 @@ fn ExportKeyCamera nFrames isCycle isReverse filenameXML =
 				)			
 			)
 		)
-	)
-	catch
-	(
-		format "Error generating camera cinematic XML \n"
-	)
+	--)
+	--catch
+	--(
+	--	format "Error generating camera cinematic XML \n"
+	--)
 	
 	format "Camera XML created successfully: % \n" filenameXML
 	return xDoc.PrettySaveXML()

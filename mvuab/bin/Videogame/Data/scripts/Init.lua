@@ -87,18 +87,13 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly5")
 	
 	engine:Trace("Finish the load_gameplay()")
-	--cinematic_manager:PlayCinematic("cinematica_inicial")
-	--
-	-- if renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1")) == false  then
-		-- renderable_objects_manager_characters:RemoveResource("PlayerCinematic")
-		-- renderable_objects_manager_characters:AddResource("PlayerCinematic", CreateAnimatedInstanceModel("PlayerCinematic", "playercinematic1"))
-	-- end
-	-- g_PlayerCinematic = renderable_objects_manager_characters:GetResource("PlayerCinematic")
-	-- g_PlayerCinematic:SetPosition(Vect3f(124.989,-8.31726,-51.9642))
-	-- g_PlayerCinematic:MakeTransform()
-	-- g_PlayerCinematic:SetRoomName( "sala1" )
-	-- g_PlayerCinematic:ChangeAnimation("anim_cinem_inicial_sala1", 0.2, 1)
-	--g_Player:SetPosition(Vect3f(124.989,-7.31726,-51.9642))
+	
+	--Test sound_manager
+	--sound_manager:SetGameObjectMapById("Drone")
+	--sound_manager:RegisterGameObject("Drone")
+	--sound_manager:SetGameObjectPosition("Drone", Vect3f(-152.77, 31.50, 61.55), Vect3f(-152.77, 31.50, 61.55))
+	--sound_manager:PlayEvent( "Play_Drone_Movement", "Drone" )
+	
 	g_Player:Update()
 	g_bCinematicLoopMain = true
 	-- g_Player:SetAnimation("cinematica_inicial_sala1_pos00")
