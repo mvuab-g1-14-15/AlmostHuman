@@ -81,7 +81,9 @@ function CBlaster:Shoot( aPosition )
 end
 
 function CBlaster:ShootCharged( aPosition )
-	self.AmmoCharged:Begin( aPosition, camera_manager:GetCurrentCamera():GetDirection(), self:CalculateDamage() );
+	self.Blash:Begin(aPosition)
+	local lDirection = camera_manager:GetCurrentCamera():GetDirection();
+	self.AmmoCharged:Begin( aPosition + lDirection * 0.1, lDirection, self:CalculateDamage() );
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -95,8 +97,6 @@ end
 
 function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
-		self:UpdateAmmo();
-		self.AmmoCharged:Update( aPosition )
 		if action_manager:DoAction("Shoot") then
 			if self.Energy > 1 then
 				self.IsShooting = true
@@ -108,7 +108,6 @@ function CBlaster:Update( aPosition )
 					g_Player:SetAnimation("carga_blaster", 0.5, 0.5)
 				end
 				if self.TimePressed < self.MaxTimePressed then
-					--Implementar shoot acumulado
 					self.TimePressed = self.TimePressed + timer:GetElapsedTime()
 				else
 					self.TimePressed = self.MaxTimePressed
@@ -148,7 +147,9 @@ function CBlaster:Update( aPosition )
 	
 	--Update the blash
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
-	self.Blash:Update( aPosition + lDirection* 0.1)
+	self.Blash:Update( aPosition );
+	self:UpdateAmmo();
+	self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
 end
 
 function CBlaster:GetIsShooting()

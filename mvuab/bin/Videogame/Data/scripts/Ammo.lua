@@ -5,6 +5,7 @@ function CAmmo:__init( aId )
 	self.Id = aId;
 	self.Active = false
 	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
+	self.BillboardAmmo2 = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
 	self.Impacted = false;
 	self.MaxDistance = 100;
 	self.CurrentDistance = 0;
@@ -23,7 +24,9 @@ function CAmmo:Begin( aPosition, aDirection, aSpeed, aDamage )
 	self.Impacted = false;
 	
 	self.BillboardAmmo:ChangePosition( aPosition );
+	self.BillboardAmmo2:ChangePosition( aPosition );
 	self.BillboardAmmo:ChangeVisibility( true );
+	self.BillboardAmmo2:ChangeVisibility( true );
 	
 	self.Direction       = aDirection;
 	self.Position        = aPosition;
@@ -36,6 +39,7 @@ end
 function CAmmo:End()
 	self.Active = false;
 	self.BillboardAmmo:ChangeVisibility( false )
+	self.BillboardAmmo2:ChangeVisibility( false )
 end
 
 function CAmmo:Update()
@@ -80,7 +84,7 @@ function CAmmo:Update()
 			
 			-- set the position to the data
 			self.BillboardAmmo:ChangePosition( self.Position );
-			--self.Light:SetPosition( self.Position );
+			self.BillboardAmmo2:ChangePosition( self.Position );
 		else
 			self:End();
 		end
