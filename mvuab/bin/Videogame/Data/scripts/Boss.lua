@@ -120,6 +120,7 @@ end
 
 function CBoss:AddDamage(aValue)
 	self.Life = self.Life - aValue
+	engine:TraceOnce("Damage to boss. Current life "..self.Life)
 end
 
 function CBoss:IsStunned()

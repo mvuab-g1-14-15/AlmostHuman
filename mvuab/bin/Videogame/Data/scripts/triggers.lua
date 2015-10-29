@@ -415,6 +415,7 @@ function Hacknave(nave_obj)
 			engine:TraceOnce("Hacked space ship "..nave_obj)
 			g_Hacked[nave_obj] = true
 			enemy_manager:GetBoss():ClearStun()
+			enemy_manager:GetBoss():AddDamage(25.0)
 		end
 	end
 end
