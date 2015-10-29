@@ -45,6 +45,13 @@ namespace baseUtils
     return rc == 0 ? stat_buf.st_size : -1;
   }
 
+  inline bool fileExists(const std::string& file)
+  {
+    struct stat buf;
+    return (stat(file.c_str(), &buf) == 0);
+  }
+
+
     inline void  Trace( const char* format, ... )
     {
         va_list args;

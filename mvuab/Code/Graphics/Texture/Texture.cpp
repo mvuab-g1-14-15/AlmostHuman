@@ -38,39 +38,37 @@ CTexture::~CTexture()
 bool CTexture::LoadFile()
 {
     HRESULT lHR = (D3DXCreateTextureFromFileEx( GraphicsInstance->GetDevice(), m_FileName.c_str(), D3DX_DEFAULT, D3DX_DEFAULT, 1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &m_Texture));
-    
-    const char* error = DXGetErrorStringA(lHR);
-    const char* description =DXGetErrorDescriptionA(lHR);
-    ASSERT( SUCCEEDED( lHR ), "Loading %s -> %s -> %s", m_FileName.c_str(), error, description );
+
+    if( FAILED( lHR ) )
+    {
+      const char* error       = DXGetErrorStringA(lHR);
+      const char* description = DXGetErrorDescriptionA(lHR);
+      LOG_ERROR_APPLICATION( "Loading %s -> %s -> %s", m_FileName.c_str(), error, description );
+    }
 
     D3DXIMAGE_INFO lTextureInfo;
-    HR( D3DXGetImageInfoFromFile(m_FileName.c_str(),&lTextureInfo) );
+    D3DXGetImageInfoFromFile(m_FileName.c_str(),&lTextureInfo);
 
-    m_Width = lTextureInfo.Width;
+    m_Width  = lTextureInfo.Width;
     m_Height = lTextureInfo.Height;
 
-	if( m_Width > 2048 || m_Height > 2048 )
-	{
-		LOG_ERROR_APPLICATION( "The texture %s, is greater than 2048", m_FileName.c_str() );
-	}
+    if( m_Width > 2048 || m_Height > 2048 )
+    {
+      LOG_ERROR_APPLICATION( "The texture %s, is greater than 2048", m_FileName.c_str() );
+    }
 
-	if( Math::Utils::IsPowerOf2( m_Width )|| Math::Utils::IsPowerOf2( m_Height ) )
-	{
-		LOG_ERROR_APPLICATION( "The texture %s, is greater than 2048", m_FileName.c_str() );
-	}
+    std::set< D3DFORMAT > lCompressedFormats;
+    lCompressedFormats.insert( D3DFMT_DXT1 );
+    lCompressedFormats.insert( D3DFMT_DXT2 );
+    lCompressedFormats.insert( D3DFMT_DXT3 );
+    lCompressedFormats.insert( D3DFMT_DXT4 );
+    lCompressedFormats.insert( D3DFMT_DXT5 );
+    if(lCompressedFormats.count(lTextureInfo.Format) == 0)
+    {
+      LOG_ERROR_APPLICATION( "The texture %s, is not compressed", m_FileName.c_str() );
+    }
 
-	std::set< D3DFORMAT > lCompressedFormats;
-	lCompressedFormats.insert( D3DFMT_DXT1 );
-	lCompressedFormats.insert( D3DFMT_DXT2 );
-	lCompressedFormats.insert( D3DFMT_DXT3 );
-	lCompressedFormats.insert( D3DFMT_DXT4 );
-	lCompressedFormats.insert( D3DFMT_DXT5 );
-	if(lCompressedFormats.count(lTextureInfo.Format) == 0)
-	{
-		LOG_ERROR_APPLICATION( "The texture %s, is not compressed", m_FileName.c_str() );
-	}
-
-    return true;
+    return SUCCEEDED( lHR );
 }
 
 void CTexture::Unload()

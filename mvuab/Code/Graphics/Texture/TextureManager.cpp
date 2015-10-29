@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 
 #include <sys\stat.h>
+#include "Utils\BaseUtils.h"
 
 CTextureManager::CTextureManager()
     : CManager()
@@ -41,33 +42,13 @@ void CTextureManager::Reload()
 
 CTexture* CTextureManager::GetTexture( const std::string& fileName )
 {
-  CTexture* lTexture = NULL;
-
-  TMapResource::iterator l_It = m_Resources.find(fileName);
-
-  if( !Exist( fileName ) )
-    lTexture = AddTexture( fileName );
-  else
-    lTexture = l_It->second;
-    
-  if( fileName == ""  )
-  {
-    ASSERT( false, "Null texture name" );
-    lTexture = m_DummyTexture;
-  }
-
-  return lTexture;
-}
-
-bool fileExists(const std::string& file)
-{
-    struct stat buf;
-    return (stat(file.c_str(), &buf) == 0);
+  CTexture* lTexture = (Exist( fileName )) ? m_Resources[fileName] : AddTexture(fileName);
+  return (lTexture) ? lTexture : m_DummyTexture;
 }
 
 bool CTextureManager::TryToLoad(CTexture* aTexture, std::string aFileName)
 {
-    return (fileExists(aFileName)) && aTexture->Load( aFileName );
+    return (baseUtils::fileExists(aFileName)) && aTexture->Load( aFileName );
 }
 
 CTexture* CTextureManager::AddTexture( const std::string& fileName )
@@ -77,21 +58,18 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
     std::string lFileName = fileName;
     lFileName.erase(lFileName.find_last_of("."), std::string::npos);
 
-    if (!TryToLoad( t, lFileName + ".dds"))
-    {
-        if (!TryToLoad( t, fileName))
-        {
-            CHECKED_DELETE( t );
-            LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-            return m_DummyTexture;
-        }
-    }
+    // Try with dds files
+    bool lOk = TryToLoad( t, lFileName + ".dds");
 
-    if ( !AddResource( fileName, t) )
+    // Load the not compressed texture
+    if (!lOk)
+      lOk = !TryToLoad( t, fileName);
+
+    // Check if something has gone wrong
+    if ( !lOk || !AddResource( fileName, t) )
     {
         CHECKED_DELETE( t );
         LOG_ERROR_APPLICATION( "The texture %s could not be loaded", fileName.c_str() );
-        return m_DummyTexture;
     }
 
     return t;
