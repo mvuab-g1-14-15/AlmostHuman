@@ -38,6 +38,7 @@ function CEnemyManager:__init()
 	self:CreateEnemiesSala2()
 	self:CreateEnemiesPasillo()
 	self:CreateEnemiesSala3()
+	self:CreateDesactivateEnemiesSala3()
 end
 
 function CEnemyManager:CreateEnemiesSala2()
@@ -73,6 +74,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.can_use_graph = true
 	lInfo.alarm = true
 	lInfo.alarm_time = 5.0
+	lInfo.active = true
 	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	
 	-- Patrol 2
@@ -148,6 +150,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.can_use_graph = true
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
+	lInfo.active = true
 	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 
 	-- Stairs Enemy
@@ -210,6 +213,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.can_use_graph = false
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
+	lInfo.active = true
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
 end
 
@@ -244,6 +248,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.can_use_graph = false
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
+	lInfo.active = true
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
 	
 	-- Drone 2
@@ -252,6 +257,50 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.waypoints = { Vect3f(25.0, -12.0, 70.0),
 						Vect3f(25.0, -12.0, 52.0)}
 	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+end
+
+function CEnemyManager:CreateDesactivateEnemiesSala3()
+	local lInfo = {}
+	
+	-- Desactivate 1
+	lInfo.name = "Enemy1_S3"
+	lInfo.life = 100.0
+	lInfo.damage = 10.0
+	lInfo.radius = 0.4
+	lInfo.height = 2.0
+	lInfo.speed = 4.0
+	lInfo.position = Vect3f(-38.44, -14.0, 65.41)
+	lInfo.is_patrol = false
+	lInfo.mesh = "enemy1"
+	lInfo.room = "sala3"
+	lInfo.use_gizmo = true
+	lInfo.on_dead = false
+	lInfo.shoot_speed = 50.0
+	lInfo.time_to_shoot = 1.0
+	lInfo.time_burst = 0.3
+	lInfo.num_shoot_burst = 3.0
+	lInfo.chase_distance = 20.0
+	lInfo.camera_pitch = 0.0
+	lInfo.camera_fov = 40.0
+	lInfo.camera_far = 20.0
+	lInfo.can_see = true
+	lInfo.fly = false
+	lInfo.can_use_graph = false
+	lInfo.alarm = true
+	lInfo.alarm_time = 5.0
+	lInfo.active = false
+	self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	
+	-- Desactivate 2
+	lInfo.name = "Enemy2_S3"
+	lInfo.position = Vect3f(-23.34, -14.0, 65.41)
+	self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+end
+
+function CEnemyManager:ActivateEnemiesSala3()
+	for _,lEnemy in pairs (self.Enemy.sala3) do
+		lEnemy:SetActive(true)
+	end
 end
 
 function CEnemyManager:Reinit( aRoom )
@@ -282,6 +331,7 @@ function CEnemyManager:Reinit( aRoom )
 	end
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
+		self:CreateDesactivateEnemiesSala3()
 	end
 	if aRoom == "sala4" then
 		self.Boss:Destroy()

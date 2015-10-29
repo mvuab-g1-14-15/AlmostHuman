@@ -425,6 +425,9 @@ function UpToSala4(text, other_shape)
 end
 
 function ActivateLightsSala3()
+	-- activate the lights
+	engine:TraceOnce("Executing trigger enemies sala3 activation")
+	enemy_manager:ActivateEnemiesSala3()
 end
 
 function UpdateDLC(text_to_show)
