@@ -17,6 +17,9 @@
 #include "RenderableObject/Scene.h"
 #include "PhysicsManager.h"
 #include "Actor\PhysicActor.h"
+#include "Cameras\CameraManager.h"
+#include "Cameras\CameraCinematical.h"
+#include "ScriptManager.h"
 
 CCinematicObject::CCinematicObject( CXMLTreeNode& atts ):
 m_Actor(0)
@@ -33,6 +36,7 @@ m_Actor(0)
           m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );
 		  ASSERT(m_RenderableObject, "Error al cargar el renderable %s", resource.c_str());
 		  m_CurrentTime = atts.GetAttribute<float>("init_keyframe", 0.0f);
+		  m_PlayerUpdate = atts.GetAttribute<bool>("update_player", false);
 		  if( atts.GetAttribute<bool>("physx", false) )
 		  {
 			  m_Actor = PhysXMInstance->CMapManager<CPhysicActor>::GetResource(atts.GetAttribute<std::string>("name_physx", ""));
@@ -196,6 +200,14 @@ void CCinematicObject::Update()
   m_RenderableObject->MakeTransform();
   if(m_Actor)
 	  m_Actor->SetPosition(pos);
+  if(m_PlayerUpdate)
+  {
+	  CCamera* lCamera = CameraMInstance->GetCurrentCamera();
+	  Math::Vect3f lPos = lCamera->GetPosition();
+	  std::stringstream lCode;
+	  lCode << "g_Player:UpdatePlayer(Vect3f(" << lPos.x << ", " << lPos.y << ", " << lPos.z << "), " << lCamera->GetYaw() << ", " << lCamera->GetPitch() << ")";
+	  ScriptMInstance->RunCode(lCode.str());
+  }
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
 

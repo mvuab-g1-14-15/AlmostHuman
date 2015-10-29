@@ -17,6 +17,7 @@ private:
 	size_t m_CurrentKeyFrame;
 	CInstanceMesh *m_RenderableObject;
 	CPhysicActor *m_Actor;
+	bool m_PlayerUpdate;
 public:
 	CCinematicObject(CXMLTreeNode &atts);
 	bool IsOk();
