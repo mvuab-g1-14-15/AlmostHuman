@@ -39,6 +39,9 @@ function load_basics()
 	--scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
+	
+	PlaySoundStaticElement()
+	
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -75,7 +78,8 @@ function load_gameplay()
 	--Load Ambient
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	
-	--Sounds Sala3 TODO: Poner en metodos de carga de sonidos por sala
+	engine:Trace("Finish the load_gameplay()")
+	
 	--Load Assembly Machine
 	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine1_2")
 	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine2_2")
@@ -86,13 +90,8 @@ function load_gameplay()
 	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly4")
 	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly5")
 	
-	engine:Trace("Finish the load_gameplay()")
-	
-	--Test sound_manager
-	--sound_manager:SetGameObjectMapById("Drone")
-	--sound_manager:RegisterGameObject("Drone")
-	--sound_manager:SetGameObjectPosition("Drone", Vect3f(-152.77, 31.50, 61.55), Vect3f(-152.77, 31.50, 61.55))
-	--sound_manager:PlayEvent( "Play_Drone_Movement", "Drone" )
+	sound_manager:PlayEvent("Play_Fan", "Fan1")
+	sound_manager:PlayEvent("Play_Fan", "Fan2")
 	
 	g_Player:Update()
 	g_bCinematicLoopMain = true
@@ -244,10 +243,12 @@ function update_gameplay()
 					g_bC41 = true
 					scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb_sala3"):SetActive(false)
 					scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb_sala3"):SetActive(true)
+					sound_manager:PlayEvent("Play_Plant_C4","C4_1")
 				elseif g_fC4Colocada == "2" then
 					g_bC42 = true
 					scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb002_sala3"):SetActive(false)
 					scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb002_sala3"):SetActive(true)
+					sound_manager:PlayEvent("Play_Plant_C4","C4_2")
 				end
 			end
 		end	
@@ -264,6 +265,7 @@ function update_gameplay()
 				lExplosion1:Init(Vect3f(37.83, -17.57, 51.61))
 				lExplosion2:Init(Vect3f(24.22, -17.74, 68.83))
 				cinematic_manager:Execute("explotion")
+				sound_manager:PlayEvent("Play_C4_Explosion","Explosio")
 				-- g_Player:SetPosition(Vect3f(-4.58296, -14.0589, 60.0993))
 				-- g_Player:SetAnimation("logan_cinem_sala3")
 				-- g_Player:Update()
@@ -322,4 +324,21 @@ function UpdateVariables(dt)
 			gui_manager:ShowStaticText(g_sMessageAlarm)
 		end
 	end
+end
+
+function PlaySoundStaticElement()
+
+	--Load Assembly Machine
+	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine1_2")
+	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine2_2")
+	--Load Robot Assembly
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly1")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly2")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly3")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly4")
+	sound_manager:PlayEvent("Play_Robot_Arm", "Robot_assembly5")
+	
+	sound_manager:PlayEvent("Play_Fan", "Fan1")
+	sound_manager:PlayEvent("Play_Fan", "Fan2")
+
 end
