@@ -63,7 +63,7 @@ CTexture* CTextureManager::AddTexture( const std::string& fileName )
 
     // Load the not compressed texture
     if (!lOk)
-      lOk = !TryToLoad( t, fileName);
+      lOk = TryToLoad( t, fileName);
 
     // Check if something has gone wrong
     if ( !lOk || !AddResource( fileName, t) )
