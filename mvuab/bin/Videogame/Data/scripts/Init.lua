@@ -309,6 +309,7 @@ function update_gameplay()
 		end
 	end
 	
+    collectgarbage() --force to clean memory
 	--profiler:Trace()
 	--profiler:Tick()
 end
