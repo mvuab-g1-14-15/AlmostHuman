@@ -18,7 +18,6 @@ function CBlash:Begin( aPosition )
 end
 
 function CBlash:End()
-	engine:Trace("Blash end")
 	self.Active = false;
 	self.BillboardBlash:ChangeVisibility( false )
 	countdowntimer_manager:Reset(self.TimerName, false)

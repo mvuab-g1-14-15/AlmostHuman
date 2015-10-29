@@ -59,6 +59,8 @@ function CAmmo:Update()
 					local lName = hit_info.Name
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
+					elseif lName == "Boss" then
+						enemy_manager:GetBoss():AddStun(self.Damage)
 					else
 						enemy_manager:AddDamage(lName, self.Damage)
 					end
