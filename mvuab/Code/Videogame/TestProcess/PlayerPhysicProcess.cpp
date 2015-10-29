@@ -97,16 +97,6 @@ void CPlayerPhysicProcess::Update()
 
   //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
-
-  if (CEngineManagers::GetSingletonPtr()->GetActionManager()->DoAction("PlayVideo"))
-  {
-      CVideoPlayer l_VideoPlayer;
-      if(!l_VideoPlayer.Play("test.avi"))
-      {
-          char s[] = "Error playing video\n";
-          OutputDebugStringA(s);
-      }
-  }
 }
 
 

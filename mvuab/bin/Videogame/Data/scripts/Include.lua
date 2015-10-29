@@ -29,7 +29,7 @@ particle_system_manager = GetParticleSystemManager()
 --profiler = nil
 
 -- Global Variables
-g_CameraSensibility = 1.0
+g_CameraSensibility = 30.0
 g_HalfPi = 1.57079632679
 g_Pi = 3.141592
 g_DoublePi = 2*g_Pi
