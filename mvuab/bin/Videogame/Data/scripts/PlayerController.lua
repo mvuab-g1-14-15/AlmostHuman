@@ -70,7 +70,7 @@ function CPlayerController:Update()
         dt = 1.0 / self.fps
     end
 
-	--local l_PlayerCamera = camera_manager:GetCamera("TestProcessCam")
+	--local l_PlayerCamera = camera_manager:GetCamera("Main")
 	local l_PlayerCamera = camera_manager:GetCurrentCamera()
 	self:CalculateDirectionVectors(l_PlayerCamera)
 	self:UpdateCamera(l_PlayerCamera, dt)
