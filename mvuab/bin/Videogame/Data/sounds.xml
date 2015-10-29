@@ -17,6 +17,11 @@
 	<GameObject3d name="Door_sala2" register="true" pos="53.0744 -16.6341 -24.2395" dir="53.0744 -16.6341 -24.2395"/>
 	<GameObject3d name="C4_pasillo" register="true" pos="59.3535 -17.1847 6.01426" dir="59.3535 -17.1847 6.01426"/>
 	<GameObject3d name="Door_pasillo" register="true" pos="53.6564 -16.2673 38.8278" dir="53.6564 -16.2673 38.8278"/>
+	<GameObject3d name="Fan1" register="true" pos="93.28 -9.13 -44.26" dir="94.26 -9.28 -44.40"/>
+	<GameObject3d name="Fan2" register="true" pos="94 -9.07 -26.88" dir="94 -9 -27.88"/>
+	<GameObject3d name="C4_1" register="true" pos="41.47 -16.98 51.98" dir="40.50 -16.70 52"/>
+	<GameObject3d name="C4_2" register="true" pos="27 -16.75 68.67" dir="26 -16.72 68.70"/>
+	<GameObject3d name="Explosio" register="true" pos="26.53 -13.42 59.17" dir="25.33 -13.48 59.13"/>
 	<GameObject3d name="Robot_assembly1" register="true" pos="40.8983 -17.1728 62.2339" dir="40.8983 -17.1728 62.2339"/>
 	<GameObject3d name="Robot_assembly2" register="true" pos="38.9783 -17.1728 64.8406" dir="38.9783 -17.1728 64.8406"/>
 	<GameObject3d name="Robot_assembly3" register="true" pos="26.4247 -17.1728 61.6571" dir="26.4247 -17.1728 61.6571"/>

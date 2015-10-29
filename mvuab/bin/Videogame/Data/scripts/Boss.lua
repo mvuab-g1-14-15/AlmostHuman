@@ -341,7 +341,7 @@ function CBoss:PlayFootstep()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		--sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
+		sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
 		countdowntimer_manager:Reset(lTimerName, true)
 	end
 end
