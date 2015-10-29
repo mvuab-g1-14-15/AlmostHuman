@@ -395,7 +395,7 @@ function SetPropSala4()
 		
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
-		g_Player:SetCheckpoint("sala4", Vect3f( -53.01, 35.79, 62.32 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())
 		
 		g_EnteredSala4 = true
 		engine:Trace("Setted properties of sala4")
