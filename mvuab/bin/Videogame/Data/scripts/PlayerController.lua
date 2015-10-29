@@ -3,13 +3,16 @@ dofile("./data/scripts/Include.lua")
 class "CPlayerController"
 
 function CPlayerController:__init()
+    self.fps = 30
+    self.MaxDt = 0.0
+    
 	self.Position = Vect3f(136.84, -7.99, -62)
 	self.Height = 1.8
 	self.Position.y = self.Position.y + self.Height/2.0
 	self.Radius = 0.4
 	self.Direction = Vect3f(0.0)
-	self.Speed = 4.0
-	self.JumpForce = 180.0
+	self.Speed = 4.0 / self.fps
+	self.JumpForce = 1.3
 	
 	self.Forward = Vect3f(0.0)
 	self.Side = Vect3f(0.0)
@@ -45,26 +48,27 @@ function CPlayerController:__init()
 	self.ShakeValueVertical = 0.0
 	self.ShakeValueHorizontal = 0.0
 	
-	self.ShakeVerticalSpeed = 4.0
-	self.ShakeHorizontalSpeed = 3.0
-	self.ShakeVerticalAmplitude = 0.01
+	self.ShakeVerticalSpeed = 4.0 / self.fps
+	self.ShakeHorizontalSpeed = 3.0 / self.fps
+	self.ShakeVerticalAmplitude = 0.01 
 	self.ShakeHorizontalAmplitude = 0.01
 	
-	if not physic_manager:AddController("Player", self.Radius, self.Height/2.0, math.cos(g_HalfPi/2.0), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490) then
+	if not physic_manager:AddController("Player", self.Radius, self.Height * 0.5, math.cos(g_HalfPi * 0.5), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -9.8 / self.fps) then
 		physic_manager:ReleasePhysicController(physic_manager:GetController("Player"))
-		physic_manager:AddController("Player", self.Radius, self.Height/2.0, math.cos(g_HalfPi/2.0), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -490)
+		physic_manager:AddController("Player", self.Radius, self.Height * 0.5, math.cos(g_HalfPi * 0.5), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -9.8 / self.fps)
 	end
 	self.CharacterController = physic_manager:GetController("Player")
 	--engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()
-	local dt = timer:GetElapsedTime()
+	local sf = timer:GetSpeedFactor()
+    local dt = timer:GetElapsedTime()
 
 	--local l_PlayerCamera = camera_manager:GetCamera("TestProcessCam")
 	local l_PlayerCamera = camera_manager:GetCurrentCamera()
 	self:CalculateDirectionVectors(l_PlayerCamera)
-	self:UpdateCamera(l_PlayerCamera, dt)
+	self:UpdateCamera(l_PlayerCamera, sf)
 	
 	--Yaw smooth movement
 	local l_CameraYaw = l_PlayerCamera:GetYaw()
@@ -111,7 +115,7 @@ function CPlayerController:Update()
 	local l_Speed = self.Speed
 	if self.Crouch then
 		l_Speed = l_Speed / 3.0
-		countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep * 2.0, false)
+		countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep * 0.5, false)
 	end
 	if self.Run then
 		l_Speed = l_Speed * 2.0
@@ -127,7 +131,13 @@ function CPlayerController:Update()
 		self.CharacterController:Jump(self.JumpForce)
 		self.Jump = false
 	end
-	self.CharacterController:Move(l_Velocity, dt)
+    
+    --if dt > self.MaxDt then
+    --    self.MaxDt = dt
+    --    engine:Trace("dt - sf:" .. dt .. " - " .. sf)
+    --end
+   
+    self.CharacterController:Move(l_Velocity, sf)
 	self.Position = self.CharacterController:GetPosition()
 	
 	local l_CameraPosition = self.Position
@@ -137,11 +147,11 @@ function CPlayerController:Update()
 	local l_Initial = 0
 	local l_Final = l_CameraPosition.y
 	if self.Crouch then
-		l_Initial = l_CameraPosition.y + self.Height/2.0
+		l_Initial = l_CameraPosition.y + self.Height * 0.5
 		l_Final = l_CameraPosition.y
 	else
 		l_Initial = l_CameraPosition.y
-		l_Final = l_CameraPosition.y + self.Height/2.0
+		l_Final = l_CameraPosition.y + self.Height * 0.5
 	end
 	l_CameraPosition.y = (1.0 - l_Percentage) * l_Initial + l_Percentage * l_Final
 	
@@ -176,21 +186,21 @@ function CPlayerController:Update()
 			l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 5.0
 			l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 3.0
 			if self.Crouch then
-				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed / 2.0
-				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed / 2.0
-				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude / 2.0
-				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude / 2.0
+				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 0.5
+				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 0.5
+				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 0.5
+				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 0.5
 			end
 			if self.Run then
-				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 2.0
-				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 2.0
-				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 2.0
-				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 2.0
+				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 0.5
+				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 0.5
+				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 0.5
+				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 0.5
 			end
 		end
 		
-		self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
-		self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
+		self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * sf
+		self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * sf
 		l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * l_Up * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * self.Side * math.cos(self.ShakeValueHorizontal)
 	end
 	
@@ -239,6 +249,7 @@ function CPlayerController:UpdateTimers(dt)
 	else
 		self.ActualTimeCrouch = self.TimeCrouch
 	end
+    
 	if self.ActualTimeLeanOut < self.TimeLeanOut then
 		self.ActualTimeLeanOut = self.ActualTimeLeanOut + dt
 	else
@@ -250,7 +261,7 @@ function CPlayerController:UpdateCamera(camera, dt)
 	local delta = 0.1
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager_lua_wrapper:DoAction(action_manager, "MoveYaw") then
-			camera:AddYaw( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+			camera:AddYaw( -action_manager_lua_wrapper.amount * g_CameraSensibility );
 			if not self.YawMoved and math.abs(action_manager_lua_wrapper.amount) < 2 then
 				self.YawMoved = true
 				self.ActualTimeMoveYaw = 0.0
@@ -259,7 +270,7 @@ function CPlayerController:UpdateCamera(camera, dt)
 			end
 		end
 		if action_manager_lua_wrapper:DoAction(action_manager, "MovePitch") then
-			camera:AddPitch( -action_manager_lua_wrapper.amount * dt * g_CameraSensibility );
+			camera:AddPitch( -action_manager_lua_wrapper.amount * g_CameraSensibility );
 			if camera:GetPitch() > g_HalfPi - delta then
 				camera:SetPitch(g_HalfPi - delta)
 			end
