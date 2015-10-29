@@ -1,4 +1,5 @@
 <cinematic>
+	<set_camera name="CameraCinematicaElevator1" name_camera="camera_cinematica1_elevator" active="true" time="0.00001" blocker="true" />
 	<play_animation name="ElevatorUp" resource_id_file="Data/elevator/cinematics/elevator_up.xml" time="33.3333" />
-	
+	<set_camera name="CameraCinematicaElevator2" name_camera="camera_cinematica1_elevator" active="false" time="0.00001" blocker="false" />
 </cinematic>
