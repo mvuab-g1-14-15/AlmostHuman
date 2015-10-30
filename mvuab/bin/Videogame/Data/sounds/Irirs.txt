@@ -20,7 +20,7 @@ Event	ID	Name			Wwise Object Path	Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	88444989	Iris_Poca_Energia	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Energia_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Energia		34658
-	110529738	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		554341
+	110529738	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		470972
 	139045063	Iris_Naves_Preparadas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves_Preparadas		55247
 	241038503	Iris_Poca_Vida	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Vida_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Vida		29681
 	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		99127
