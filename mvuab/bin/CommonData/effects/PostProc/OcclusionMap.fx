@@ -26,7 +26,18 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 
 float4 mainPS(UBER_VERTEX_PS IN) : COLOR
 {
-    //if(IN.WorldPosition.z > g_LightPos.z) discard;
+    for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
+    {
+        if(g_LightsEnabled[i])
+        {
+            float4 l_LightPos = mul(float4(g_LightsPosition[i], 1.0f), g_WorldMatrix);
+            float l_Dst2Vertex = length(IN.WorldPosition - g_CameraPosition);
+            float l_Dst2Sun = length(l_LightPos - g_CameraPosition);
+            
+            if(l_Dst2Vertex > l_Dst2Sun) discard;
+        }
+    }
+    
     return float4(0, 0, 0, 1);
 }
 

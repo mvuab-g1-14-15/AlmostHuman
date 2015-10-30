@@ -161,17 +161,10 @@ bool CAnimatedCoreModel::Load(const std::string &Path)
 
 bool CAnimatedCoreModel::Load()
 {
-    CXMLTreeNode newFile;
-    if (!newFile.LoadFile(m_FileName.c_str()))
+    CXMLTreeNode newFile, node;
+    if ( !newFile.LoadAndFindNode( m_FileName.c_str(), "animated_model", node ) )
     {
         LOG_ERROR_APPLICATION( "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
-        return false;
-    }
-
-    CXMLTreeNode node = newFile["animated_model"];
-    if(!node.Exists())
-    {
-        LOG_ERROR_APPLICATION( "CAnimatedCoreModel::Load Tag \"%s\" no existe",  "static_meshes");
         return false;
     }
 
@@ -210,18 +203,14 @@ bool CAnimatedCoreModel::Load()
                 LOG_ERROR_APPLICATION( "CAnimatedCoreModel::LoadAnimation No se puede abrir %s!", m_FileName.c_str());
             }
         }
-    }
-
-    CXMLTreeNode l_xmlAnimationStates = newFile["animation_states"];
-    if(l_xmlAnimationStates.Exists())
-    {
-        LoadAnimationStates(l_xmlAnimationStates);
-    }
-
-    CXMLTreeNode l_xmlAnimationChanges = newFile["animation_changes"];
-    if(l_xmlAnimationChanges.Exists())
-    {
-        LoadAnimationChanges(l_xmlAnimationChanges);
+        else if( TagName == "animation_states")
+        {
+            LoadAnimationStates(lCurrentNode);
+        }
+        else if( TagName == "animation_changes")
+        {
+            LoadAnimationChanges(lCurrentNode);
+        }
     }
 
     return true;
@@ -304,31 +293,26 @@ void CAnimatedCoreModel::ReloadAnimationStates()
     }
 }
 
-void CAnimatedCoreModel::LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates)
+void CAnimatedCoreModel::LoadAnimationStates( const CXMLTreeNode& _xmlAnimationStates)
 {
     m_szDefaultAnimationState = _xmlAnimationStates.GetAttribute<std::string>("default", "");
-    int l_iNumChild = _xmlAnimationStates.GetNumChildren();
-    for(int i = 0; i < l_iNumChild; ++i)
+    for(int i = 0, l_iNumChild = _xmlAnimationStates.GetNumChildren(); i < l_iNumChild; ++i)
     {
-        CXMLTreeNode l_xmlAnimationState = _xmlAnimationStates(i);
-        if(strcmp(l_xmlAnimationState.GetName(), "animation_state") == 0)
+        const CXMLTreeNode& l_xmlAnimationState = _xmlAnimationStates(i);
+        const std::string& lTagName = l_xmlAnimationState.GetName();
+        if( lTagName == "animation_state" )
         {
-            std::string l_szName = l_xmlAnimationState.GetAttribute<std::string>("name", "no_name");
+            const std::string& l_szName = l_xmlAnimationState.GetAttribute<std::string>("name", "no_name");
             SAnimationState l_AnimationState;
-
-            if(LoadAnimationState(l_xmlAnimationState, l_AnimationState))
-            {
+            if( LoadAnimationState(l_xmlAnimationState, l_AnimationState) )
                 m_AnimationStates[l_szName] = l_AnimationState;
-            }
-
         }
     }
 }
 
-void CAnimatedCoreModel::LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges)
+void CAnimatedCoreModel::LoadAnimationChanges( const CXMLTreeNode& _xmlAnimationChanges)
 {
-    int l_iNumChild = _xmlAnimationChanges.GetNumChildren();
-    for(int i = 0; i < l_iNumChild; ++i)
+    for(int i = 0, l_iNumChild = _xmlAnimationChanges.GetNumChildren(); i < l_iNumChild; ++i)
     {
         CXMLTreeNode l_xmlAnimationChange = _xmlAnimationChanges(i);
         if(strcmp(l_xmlAnimationChange.GetName(), "animation_change") == 0)
@@ -346,7 +330,7 @@ void CAnimatedCoreModel::LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges
     }
 }
 
-bool CAnimatedCoreModel::LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_)
+bool CAnimatedCoreModel::LoadAnimationFromState( const CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_)
 {
     assert(strcmp(_xmlAnimation.GetName(), "cycle") == 0 || strcmp(_xmlAnimation.GetName(), "action") == 0);
 
@@ -378,7 +362,7 @@ bool CAnimatedCoreModel::LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAn
     return true;
 }
 
-bool CAnimatedCoreModel::LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_)
+bool CAnimatedCoreModel::LoadActionFromState( const CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_)
 {
     assert(strcmp(_xmlAction.GetName(), "action") == 0);
 
@@ -397,96 +381,62 @@ bool CAnimatedCoreModel::LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimated
     return true;
 }
 
-bool CAnimatedCoreModel::LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_)
+bool CAnimatedCoreModel::LoadAnimationState( const CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_)
 {
-    assert(strcmp(_xmlAnimationState.GetName(), "animation_state") == 0);
-
     AnimationState_.fDefaultFadeIn  = _xmlAnimationState.GetAttribute<float>("default_fade_in", 0.3f);
     AnimationState_.fDefaultFadeOut = _xmlAnimationState.GetAttribute<float>("default_fade_out", 0.3f);
-
-
-    int l_iNumChild = _xmlAnimationState.GetNumChildren();
-    for(int i = 0; i < l_iNumChild; ++i)
+    for(int i = 0, l_iNumChild = _xmlAnimationState.GetNumChildren(); i < l_iNumChild; ++i)
     {
-        CXMLTreeNode l_xmlCycle = _xmlAnimationState(i);
-        if(strcmp(l_xmlCycle.GetName(), "cycle") == 0)
+        const CXMLTreeNode &lCurrentNode = _xmlAnimationState(i);
+        const std::string& lTagName      =  lCurrentNode.GetName();
+        if( lTagName == std::string( "cycle" ) )
         {
             CAnimatedCoreModel::SCycle l_Cycle;
-
-            if(LoadAnimationFromState(l_xmlCycle, l_Cycle))
-            {
+            if(LoadAnimationFromState(lCurrentNode, l_Cycle))
                 AnimationState_.Cycles.insert(l_Cycle);
-            }
-
         }
-    }
-
-    {
-        CXMLTreeNode l_xmlOnEnter = _xmlAnimationState["on_enter"];
-
-        if(l_xmlOnEnter.Exists())
+        else if( lTagName == std::string( "on_enter" ) )
         {
-            int l_iNumChild = l_xmlOnEnter.GetNumChildren();
-            for(int i = 0; i < l_iNumChild; ++i)
+            for(int j = 0, lCount = lCurrentNode.GetNumChildren(); j < lCount; ++j )
             {
-                CXMLTreeNode l_xmlAction = l_xmlOnEnter(i);
-                if(strcmp(l_xmlAction.GetName(), "action") == 0)
+                const CXMLTreeNode& l_xmlAction = lCurrentNode(i);
+                if(l_xmlAction.GetName() == std::string( "action") )
                 {
                     CAnimatedCoreModel::SAction l_Action;
-
                     if(LoadActionFromState(l_xmlAction, l_Action))
-                    {
                         AnimationState_.OnEnter.insert(l_Action);
-                    }
-
                 }
-            }
+            }   
         }
-    }
-    {
-        CXMLTreeNode l_xmlOnExit = _xmlAnimationState["on_exit"];
-
-        if(l_xmlOnExit.Exists())
+        else if( lTagName == std::string( "on_exit" ) )
         {
-            int l_iNumChild = l_xmlOnExit.GetNumChildren();
-            for(int i = 0; i < l_iNumChild; ++i)
+            for(int j = 0, lCount = lCurrentNode.GetNumChildren(); j < lCount; ++j )
             {
-                CXMLTreeNode l_xmlAction = l_xmlOnExit(i);
-                if(strcmp(l_xmlAction.GetName(), "action") == 0)
+                const CXMLTreeNode& l_xmlAction = lCurrentNode(i);
+                if(l_xmlAction.GetName() == std::string( "action") )
                 {
                     CAnimatedCoreModel::SAction l_Action;
-
                     if(LoadActionFromState(l_xmlAction, l_Action))
-                    {
                         AnimationState_.OnExit.insert(l_Action);
-                    }
-
                 }
-            }
+            }   
         }
     }
-
     return true;
 }
 
-bool CAnimatedCoreModel::LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_)
+bool CAnimatedCoreModel::LoadAnimationChange( const CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_)
 {
-    assert(strcmp(_xmlAnimationChange.GetName(), "animation_change") == 0);
-
     AnimationChange_.fFade  = _xmlAnimationChange.GetAttribute<float>("fade", 0.3f);
-
     int l_iNumChild = _xmlAnimationChange.GetNumChildren();
     for(int i = 0; i < l_iNumChild; ++i)
     {
-        CXMLTreeNode l_xmlAction = _xmlAnimationChange(i);
-        if(strcmp(l_xmlAction.GetName(), "action") == 0)
+        const CXMLTreeNode& l_xmlAction = _xmlAnimationChange(i);
+        if( l_xmlAction.GetName() == std::string( "action" ) )
         {
             CAnimatedCoreModel::SAction l_Action;
-
             if(LoadActionFromState(l_xmlAction, l_Action))
-            {
                 AnimationChange_.Actions.insert(l_Action);
-            }
         }
     }
     return true;

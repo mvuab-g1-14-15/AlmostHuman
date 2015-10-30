@@ -38,8 +38,8 @@ function CStealthAttack:Update()
 			local angle = GetAngleEnemyPlayer(enemy)
 			--engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
+				g_Player:SetAnimation("stealth")
 				enemy:AddDamage(enemy:GetLife())
-				g_Player:SetAnimation("atac_sigil", 0.0, 0.5)
 			end
 		end
 	else

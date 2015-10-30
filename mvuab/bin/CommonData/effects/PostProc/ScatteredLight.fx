@@ -5,7 +5,7 @@
 #include "../samplers.fxh"
 #include "../globals.fxh"
 
-int        g_Samples = 100;
+int        g_Samples = 50;
 float      g_SDecay = 1.0;
 float      g_SExposure = 0.0034;
 float      g_SDensity  = 0.84;

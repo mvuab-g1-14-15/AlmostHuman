@@ -4,7 +4,7 @@ function CAmmoCharged:__init()
 	self.Active 	     = false 
 	self.Impacted 		 = false;
 	self.Speed			 = 15;
-	self.ChargedParticle = CParticle( "blaster", Vect3f(0, 0, 0) )
+	self.ChargedParticle = CParticle( "AmmoChargedParticle", "blaster", "core" )
 	self.CurrentDistance = 0
 end
 

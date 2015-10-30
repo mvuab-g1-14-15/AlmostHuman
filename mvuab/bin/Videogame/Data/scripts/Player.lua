@@ -77,7 +77,7 @@ function CPlayer:Update()
 	self.Blaster:Update( lArmPosition )
 	
 	if not self.Blaster:GetIsShooting() then
-		self:SetAnimation("idle", 0.0, 0.0)
+		self:SetAnimation("idle")
 	end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
@@ -128,12 +128,8 @@ function CPlayer:GetRoom()
 	return self.Room
 end
 
-function CPlayer:SetAnimation( aName, aIn, aOut )
-	if aName == "shoot" or aName == "idle_to_shoot" or aName == "atac_sigil" or aName == "shoot_blaster" or aName == "carga_blaster" then
-		self.RenderableObject:ChangeAnimationAction(aName, aIn, aOut)
-	else
-		self.RenderableObject:ChangeAnimation(aName, aIn, aOut)
-	end
+function CPlayer:SetAnimation( aName )
+	self.RenderableObject:SetAnimationState(aName)
 end
 
 function CPlayer:ClearAnimation( aName )

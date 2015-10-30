@@ -27,6 +27,8 @@ class CParticleSystemManager: public CManager
         void LoadInstances( const std::string& aFileName, const std::string& aRoomName );
         void Refresh();
         CParticleSystemCore* GetPSCore( const std::string & aCoreName );
+        void AddInstance( CParticleInstance* aParticleInstance );
+        CParticleInstance* GetInstance( const std::string& aInstanceName, const std::string& aCoreName, const std::string& aRoomName );
     private:
         CEmitterFactory* mEmitterFactory;
         CTemplatedVectorMapManager<CParticleSystemCore> mCores;

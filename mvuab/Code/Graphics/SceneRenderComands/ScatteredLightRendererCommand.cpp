@@ -29,11 +29,11 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
-  BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
+    BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
     // 92.0f,   -9.0f,  -44.0f sala1 vent1
     // 94.0f,   -9.0f,  -25.3f sala1 vent2
-    // 2095.0f, -65.0f, 167.0f sala4
     // 16.5f,    18.6f,   6.5f pasillo
+    // 2095.0f, -65.0f, 167.0f space
     //
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
@@ -60,16 +60,16 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     if(l_RoomName == "sala1")
     {
-        l_ActiveLights[0] = (l_PosLights[0] - Math::Vect3f(94.0f, -9.0f, -44.0f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
-        l_ActiveLights[1] = (l_PosLights[1] - Math::Vect3f(94.0f, -9.0f, -27.0f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
+        l_ActiveLights[0] = TRUE;
+        l_ActiveLights[1] = TRUE;
     }
 
     if(l_RoomName == "pasillo")
     {
-        l_ActiveLights[2] =  (l_PosLights[3] - Math::Vect3f(54.0f, -16.4f, 5.3f)).Normalize().DotProduct(l_CameraDirection) < 0.5f;
+        l_ActiveLights[2] =  TRUE;
     }
 
-    if(l_RoomName == "sala4")
+    if(l_RoomName == "space")
     {
         l_ActiveLights[3] = TRUE;
     }
@@ -81,12 +81,21 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
+
+    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+    CRenderableObjectTechnique *l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    CEffectTechnique *l_EffectTech =  l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
     m_RenderTarget1.SetAsRenderTarget(0);
 
     GM.DisableZTest(); GM.DisableZWrite();
-    GM.GetDevice()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(255, 251, 170), 1, 0);
+    GM.GetDevice()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(255, 255, 255), 1, 0);
 
     CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
+    CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("characters");
 
     m_RenderTarget1.UnsetAsRenderTarget(0);
     GM.EnableZTest(); GM.EnableZWrite();
@@ -95,10 +104,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     RECT l_Rect1 = { 0, 0, 640, 360 };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
-    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
-    CRenderableObjectTechnique* l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
-    CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
+    l_EffectTech =  l_ROT->GetEffectTechnique();
     l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
 
     m_RenderTarget2.SetAsRenderTarget(0);

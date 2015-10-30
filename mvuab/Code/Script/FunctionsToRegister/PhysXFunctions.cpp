@@ -208,6 +208,8 @@ void registerParticles( lua_State* aLuaState )
 
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CParticleSystemManager, CManager )
+  LUA_DECLARE_METHOD( CParticleSystemManager, AddInstance )
+  LUA_DECLARE_METHOD( CParticleSystemManager, GetInstance )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

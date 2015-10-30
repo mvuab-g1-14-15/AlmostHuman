@@ -490,9 +490,17 @@ bool CGUIManager::LoadGuiFiles( const std::string& pathGUI_XML )
                         windows->SetName( FindFileData.cFileName );
                         m_WindowsMap.insert( std::pair<std::string, CWindows*>( FindFileData.cFileName, windows ) );
                     }
+                    else
+                    {
+                        delete windows;
+                    }
                 }
 
                 FindClose( hFind );
+            }
+            else
+            {
+                delete windows;
             }
         }
 

@@ -110,12 +110,12 @@ private:
 
   friend class CAnimatedInstanceModel;
 
-  void LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates);
-  void LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges);
-  bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_);
-  bool LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_);
-  bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_);
-  bool LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_);
+  void LoadAnimationStates( const CXMLTreeNode& _xmlAnimationStates);
+  void LoadAnimationChanges( const CXMLTreeNode& _xmlAnimationChanges);
+  bool LoadAnimationFromState( const CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_);
+  bool LoadActionFromState( const CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_);
+  bool LoadAnimationState( const CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_);
+  bool LoadAnimationChange( const CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_);
 };
 
 #endif
