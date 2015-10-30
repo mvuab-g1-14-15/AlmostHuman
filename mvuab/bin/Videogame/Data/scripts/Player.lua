@@ -184,6 +184,10 @@ function CPlayer:GetEnergy()
 	return self.Blaster:GetEnergy()
 end
 
+function CPlayer:SetEnergy(aAmount)
+	return self.Blaster:SetEnergy(aAmount)
+end
+
 function CPlayer:AddEnergy(amount)
 	local TotalEnergy = self.Blaster:GetEnergy()+amount
 	if TotalEnergy > 100.0 then
@@ -276,5 +280,4 @@ function CPlayer:UpdatePlayer(pos, yaw, pitch)
 	
 	self.RenderableObject:SetPitch(pitch)
 	self.RenderableObject:MakeTransform()
-	
 end
