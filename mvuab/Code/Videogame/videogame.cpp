@@ -204,6 +204,10 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
     {
         ShowErrorMessage( e.GetDescription() );
     }
+    catch (const std::out_of_range& oor)
+    {
+      ASSERT( false,"Out of Range error: ", oor.what() );
+    }
     catch ( ... )
     {
         ShowErrorMessage( "Exception Occured" );

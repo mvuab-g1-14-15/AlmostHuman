@@ -3,6 +3,7 @@
 
 #include "XML\XMLTreeNode.h"
 #include "ParticleSystemCore.h"
+#include "InstanceParticle.h"
 #include "Utils\Manager.h"
 #include "Utils\TemplatedVectorMapManager.h"
 
@@ -10,8 +11,10 @@
 #include <vector>
 
 class CEmitterFactory;
+class CParticleSystemCore;
+class CParticleInstance;
 
-class CParticleSystemManager: public CManager, public CTemplatedVectorMapManager<CParticleSystemCore>
+class CParticleSystemManager: public CManager
 {
     public:
         CParticleSystemManager();
@@ -21,11 +24,13 @@ class CParticleSystemManager: public CManager, public CTemplatedVectorMapManager
         void Init();
         void Update();
         void Render();
-        void LoadInstances( const std::string& aFileName );
+        void LoadInstances( const std::string& aFileName, const std::string& aRoomName );
         void Refresh();
+        CParticleSystemCore* GetPSCore( const std::string & aCoreName );
     private:
         CEmitterFactory* mEmitterFactory;
-
+        CTemplatedVectorMapManager<CParticleSystemCore> mCores;
+        CTemplatedVectorMapManager<CParticleInstance>  mInstances;
         void LoadXML();
 };
 

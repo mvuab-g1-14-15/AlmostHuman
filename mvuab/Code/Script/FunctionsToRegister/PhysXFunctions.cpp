@@ -200,25 +200,14 @@ void registerParticles( lua_State* aLuaState )
   ASSERT( aLuaState, "LuaState error in Register Billboard" );
   
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_DERIVED_CLASS( CParticleInstance, CObject3D )
-    LUA_DECLARE_CTOR_1( const Math::Vect3f& )
+    LUA_DECLARE_DERIVED_CLASS2( CParticleInstance, CObject3D, CName )
+    LUA_DECLARE_CTOR_3( const std::string&, const std::string&, const std::string& )
+    LUA_DECLARE_METHOD( CParticleInstance, Reset )
+    LUA_DECLARE_METHOD( CParticleInstance, SetDirection )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )
-    LUA_DECLARE_CLASS( CParticleSystemCore )
-    LUA_DECLARE_METHOD( CParticleSystemCore, ResetEmitters )
-    LUA_DECLARE_METHOD( CParticleSystemCore, AddInstance )
-    LUA_DECLARE_METHOD( CParticleSystemCore, SetFixedDirection )
-  LUA_END_DECLARATION
-
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CTemplatedVectorMapManager<CParticleSystemCore> )
-  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CParticleSystemCore>, GetResource )
-  LUA_DECLARE_METHOD( CTemplatedVectorMapManager<CParticleSystemCore>, Exist )
-  LUA_END_DECLARATION
-
-  LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_DERIVED_CLASS2( CParticleSystemManager, CManager, CTemplatedVectorMapManager<CParticleSystemCore> )
+  LUA_DECLARE_DERIVED_CLASS( CParticleSystemManager, CManager )
   LUA_END_DECLARATION
 
   LUA_BEGIN_DECLARATION( aLuaState )

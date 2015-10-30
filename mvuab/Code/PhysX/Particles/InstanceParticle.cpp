@@ -7,15 +7,49 @@
 
 CParticleInstance::CParticleInstance( const CXMLTreeNode& atts )
     : CObject3D( atts )
+    , CName( atts.GetAttribute<std::string>("name", "null_name") )
+    , mRoomName( atts.GetAttribute<std::string>("room", "null_room") )
 {
-  mIsVisible = atts.GetAttribute<bool>( "active", false );
+  mCore       = PSManager->GetPSCore( atts.GetAttribute<std::string>("core", "null_core") );
+  mIsVisible  = atts.GetAttribute<bool>( "active", false );
+  mIsOk = mCore != NULL;
 }
 
-CParticleInstance::CParticleInstance( const Math::Vect3f& aPosition )
-  : CObject3D( aPosition, 0, 0 )
+CParticleInstance::CParticleInstance( const std::string& aName, const std::string& aCoreName, const std::string& aRoomName )
+  : CName( aName )
+  , mRoomName( aRoomName )
+  , mCore( PSManager->GetPSCore( aCoreName ) )
 {
+  mIsOk = mCore != NULL;
 }
 
 CParticleInstance::~CParticleInstance()
 {
+  CHECKED_DELETE( mCore );
+}
+
+void CParticleInstance::Update( float dt )
+{
+  mCore->Update( dt );
+}
+
+void CParticleInstance::Render()
+{
+  if(mIsVisible)
+  {
+    CGraphicsManager* lGM = GraphicsInstance;
+    lGM->SetTransform( GetTransform() );
+    mCore->Render();
+    lGM->SetTransform( Math::Mat44f() );
+  }
+}
+
+void CParticleInstance::Reset()
+{
+  mCore->ResetEmitters();
+}
+
+void CParticleInstance::SetDirection( const Math::Vect3f& aDirection )
+{
+  mCore->SetFixedDirection( aDirection );
 }

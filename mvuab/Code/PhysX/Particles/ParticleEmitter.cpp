@@ -45,6 +45,22 @@ CParticleEmitter::CParticleEmitter( ps::TEmitterType aType, ps::TSpawnFunction a
   , mMaxLife( 0.0f )
   , mActualTime( 0.0f )
   , mUseFixedDirection( false )
+  , mCurrentAngle( 0.0f )
+  , mAngleStep( 0.0f )
+  , mRadiusMin( 0.0f )
+  , mRadiusMax( 0.0f )
+  , mParticlesStream(NULL)
+  , mParticlesTTL(NULL)
+  , mParticlesLifeTime(NULL)
+  , mParticlesAngles(NULL)
+  , mParticlesSpeed(NULL)
+  , mParticlesRadialSpeed(NULL)
+  , mParticlesIsAlive(NULL)
+  , mParticlesFlipUVHorizontal(NULL)
+  , mParticlesFlipUVVertical(NULL)
+  , mParticlesDirections(NULL)
+  , mParticlesPositions(NULL)
+  , mMaxAliveParticles( 0 )
 {
 }
 
@@ -124,25 +140,7 @@ void CParticleEmitter::LoadFromNode( const CXMLTreeNode& atts )
     }
   }
 
-  ASSERT( mMaxAliveParticles <= MAX_PARTICLES, "The maxiumum number of particles is %u it could not be %u", mMaxAliveParticles, MAX_PARTICLES );
-  if ( mMaxAliveParticles )
-  {
-    // Reserve the memory for the particles
-    ALLOC_PARTICLES_PROPERTY( mParticlesStream,     TPARTICLE_VERTEX_INSTANCE,  mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesTTL,        float,                      mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesLifeTime,   float,                      mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesAngles,     float,                      mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesSpeed,      float,                      mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesRadialSpeed,float,                      mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesIsAlive,    bool,                       mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVHorizontal,    bool,             mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVVertical,    bool,                mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesDirections, Math::Vect3f,               mMaxAliveParticles );
-    ALLOC_PARTICLES_PROPERTY( mParticlesPositions,  Math::Vect3f,               mMaxAliveParticles );
-
-    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>
-      ( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mMaxAliveParticles );
-  }
+  AllocParticlesProperties();
 }
 
 bool CParticleEmitter::Init( const CXMLTreeNode& atts )
@@ -308,4 +306,54 @@ void CParticleEmitter::SetFixedDirection( const Math::Vect3f& aDirection )
 {
   mUseFixedDirection = true;
   mFixedDirection = aDirection;
+}
+
+CParticleEmitter* CParticleEmitter::Clone() const
+{
+  CParticleEmitter* lEmitter = new CParticleEmitter( mType, mSpawnFn );
+  lEmitter->mCubicSize            = mCubicSize;
+  lEmitter->mAngleStep            = mAngleStep;
+  lEmitter->mRadiusMin            = mRadiusMin;
+  lEmitter->mRadiusMax            = mRadiusMax;
+  lEmitter->mUseFixedDirection    = mUseFixedDirection;
+  lEmitter->mFixedDirection       = mFixedDirection;
+  lEmitter->mMaxAliveParticles    = mMaxAliveParticles;
+  lEmitter->mMotion               = mMotion;
+  lEmitter->mTexture              = mTexture;
+  lEmitter->mTTLEmitter           = mTTLEmitter;
+  lEmitter->mTTLParticles         = mTTLParticles;
+  lEmitter->mTechnique            = mTechnique;
+  lEmitter->mInterpolator         = mInterpolator;
+  lEmitter->mRandomInitialAngle   = mRandomInitialAngle;
+  lEmitter->mParticlesPerEmission = mParticlesPerEmission;
+  lEmitter->mMaxLife              = mMaxLife;
+  lEmitter->mIsLoop               = mIsLoop;
+  lEmitter->mIsActive             = mIsActive;
+  lEmitter->mEmissionTime         = mEmissionTime;
+  lEmitter->AllocParticlesProperties();
+
+  return lEmitter;
+}
+
+void CParticleEmitter::AllocParticlesProperties()
+{
+  ASSERT( mMaxAliveParticles <= MAX_PARTICLES, "The maxiumum number of particles is %u it could not be %u", mMaxAliveParticles, MAX_PARTICLES );
+  if ( mMaxAliveParticles )
+  {
+    // Reserve the memory for the particles
+    ALLOC_PARTICLES_PROPERTY( mParticlesStream,     TPARTICLE_VERTEX_INSTANCE,  mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesTTL,        float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesLifeTime,   float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesAngles,     float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesSpeed,      float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesRadialSpeed,float,                      mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesIsAlive,    bool,                       mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVHorizontal,    bool,              mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesFlipUVVertical,    bool,                mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesDirections, Math::Vect3f,               mMaxAliveParticles );
+    ALLOC_PARTICLES_PROPERTY( mParticlesPositions,  Math::Vect3f,               mMaxAliveParticles );
+
+    mRV = new CInstancingVertexs<TPARTICLE_VERTEX, TPARTICLE_VERTEX_INSTANCE>
+      ( GraphicsInstance, &lVtx, &lIdx, lVtxCount, lIdxCount, mMaxAliveParticles );
+  }
 }

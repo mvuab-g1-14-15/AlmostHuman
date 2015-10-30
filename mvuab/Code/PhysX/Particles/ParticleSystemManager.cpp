@@ -1,8 +1,9 @@
 #include "ParticleSystemManager.h"
 #include "EngineConfig.h"
 #include "Emitters/EmitterFactory.h"
+#include "Timer/Timer.h"
+
 #include <boost/foreach.hpp>
-#include "InstanceParticle.h"
 
 
 CParticleSystemManager::CParticleSystemManager()
@@ -19,15 +20,15 @@ CParticleSystemManager::CParticleSystemManager( CXMLTreeNode& atts )
 
 CParticleSystemManager::~CParticleSystemManager()
 {
-    Destroy();
     CHECKED_DELETE( mEmitterFactory );
+    mCores.Destroy();
+    mInstances.Destroy();
 }
 
 void CParticleSystemManager::Refresh()
 {
-  Destroy();
   LoadXML();
-  LoadInstances("Data/sala3/particles.xml"); // The refresh only is available in developer mode
+  LoadInstances( "Data/sala3/particles.xml", "sala3" ); // The refresh only is available in developer mode
 }
 
 void CParticleSystemManager::LoadXML()
@@ -47,7 +48,7 @@ void CParticleSystemManager::LoadXML()
 
             ASSERT( lSystemCore, "Null PSystemCore" );
 
-            if ( lSystemCoreName == "" || !AddResource( lSystemCoreName, lSystemCore ) )
+            if ( lSystemCoreName == "" || !mCores.AddResource( lSystemCoreName, lSystemCore ) )
             {
                 LOG_ERROR_APPLICATION( "Error initing emitter %s", lSystemCoreName );
                 CHECKED_DELETE( lSystemCore );
@@ -66,35 +67,41 @@ void CParticleSystemManager::Init()
 void CParticleSystemManager::Update()
 {
   BROFILER_CATEGORY( "CParticleSystemManager::Update()", Profiler::Color::Orchid )
-    BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
-    {
-        lCore->Update();
-    }
+  float dt = deltaTimeMacro;
+  BOOST_FOREACH( CParticleInstance* lInstance, mInstances.GetResourcesVector() )
+  {
+    lInstance->Update(dt);
+  }
 }
 
 void CParticleSystemManager::Render()
 {
   BROFILER_CATEGORY( "CParticleSystemManager::Render()", Profiler::Color::Orchid )
-    BOOST_FOREACH( CParticleSystemCore* lCore, m_ResourcesVector )
-    {
-        lCore->Render();
-    }
+  BOOST_FOREACH( CParticleInstance* lInstance, mInstances.GetResourcesVector() )
+  {
+    lInstance->Render();
+  }
 }
 
-void CParticleSystemManager::LoadInstances( const std::string& aFileName )
+void CParticleSystemManager::LoadInstances( const std::string& aFileName, const std::string& aRoomName )
 {
     CXMLTreeNode l_XML, l_Node;
     if ( l_XML.LoadAndFindNode( aFileName.c_str(), "particles_instances", l_Node ) )
     {
         for ( uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount; ++i )
         {
-            const CXMLTreeNode& lCurrentParticle = l_Node( i );
-            const std::string& lNameParticle = lCurrentParticle.GetAttribute<std::string>( "name", "" );
-
-            CParticleSystemCore * lCore = GetResource(lCurrentParticle.GetAttribute<std::string>( "core", "" ));
-            ASSERT(lCore, "Triying to add a instance particle (%s) with out a core(%s)", lNameParticle.c_str(), lCurrentParticle.GetAttribute<std::string>( "core", "" ).c_str() );
-            if(lCore)
-                lCore->AddInstance( new CParticleInstance( lCurrentParticle ) );
+            CParticleInstance* lInstance = new CParticleInstance( l_Node( i ) );
+            lInstance->SetRoomName( aRoomName );
+            if( !lInstance->IsOk() || !mInstances.AddResource( lInstance->GetName() + aRoomName, lInstance ) )
+            {
+              LOG_ERROR_APPLICATION("Error adding the instance %s to the particle system manager of room %s", lInstance->GetName().c_str(), aRoomName.c_str() );
+              CHECKED_DELETE( lInstance );
+            }
         }
     }
+}
+
+CParticleSystemCore* CParticleSystemManager::GetPSCore( const std::string & aCoreName )
+{
+  return mCores.GetResource( aCoreName )->Clone();
 }
