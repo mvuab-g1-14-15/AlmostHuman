@@ -2,11 +2,15 @@
 	<texture file="Data/animated_models/logan/Compo_loogan.tga"/>
 	<skeleton file="logan.csf"/>
 	<mesh file="logan.cmf"/>
+	
 	<animation name="idle" file="idle.caf"/>
 	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
 	<animation name="shoot" file="shoot.caf"/>
-	<animation name="carga_blaster" file="carga_blaster.caf"/>
-	<animation name="shoot_blaster" file="shoot_blaster.caf"/>
+	
+	<animation name="carga_blaster" 	file="shoot_cargado_carga.caf"/>
+	<animation name="blaster_bloqueado" file="shoot_cargado_ciclo.caf"/>
+	<animation name="shoot_blaster" 	file="shoot_cargado_disparo.caf"/>
+	
 	<animation name="carga_energia" file="carga_energia.caf"/>
 	<animation name="atac_sigil" file="atac_sigil.caf"/>
 	<animation name="cinematica_inicial_sala1" file="cinematica_inicial_sala1.caf"/>
@@ -14,25 +18,28 @@
 	<animation name="logan_cinem_sala3" file="logan_cinem_sala3.caf"/>	
 	
 	<animation_states default="idle">
-    <animation_state name="idle" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="idle"/>
-    </animation_state>
-	<animation_state name="charge" default_fade_in="0.3" default_fade_out="0.3">
-      <on_enter>
-        <action name="carga_blaster" block="true" fade_in="0.0"/>
-      </on_enter>
-	  <cycle name="shoot"/>
-    </animation_state>
-	<animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
-      <on_enter>
-        <action name="shoot_blaster" fade_in="0.0"/>
-      </on_enter>
-    </animation_state>
-	<animation_state name="stealth" default_fade_in="0.3" default_fade_out="0.3">
-		<on_enter>
-			<action name="atac_sigil" fade_in="0.0"/>
-		</on_enter>
-	</animation_state>
+		<animation_state name="idle" default_fade_in="0.0" default_fade_out="0.0">
+		  <cycle name="idle"/>
+		</animation_state>
+		<animation_state name="charge" default_fade_in="0.3" default_fade_out="0.3">
+		  <on_enter>
+			<action name="carga_blaster" fade_in="0.0"/>
+		  </on_enter>
+		  <cycle name="blaster_bloqueado"/>
+		  <on_exit>
+			<action name="shoot_blaster" fade_out="0.0"/>
+		  </on_exit>
+		</animation_state>
+		<animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
+		  <on_enter>
+			<action name="shoot" fade_in="0.0"/>
+		  </on_enter>
+		</animation_state>
+		<animation_state name="stealth" default_fade_in="0.3" default_fade_out="0.3">
+			<on_enter>
+				<action name="atac_sigil" fade_in="0.0"/>
+			</on_enter>
+		</animation_state>
     <!-- -->
     <!--animation_state name="walk" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="walk" weight="0.98" />
@@ -91,13 +98,16 @@
     </animation_state-->
   </animation_states>
   
+  <animation_changes>
+    <animation_change from="shoot" to="idle" fade="0.5" />
+	<animation_change from="charge" to="idle" fade="0.5" />
+  </animation_changes>
+  
+  
   <!--animation_changes>
     <animation_change from="walk aim" to="aim" fade="0.5" />
     <animation_change from="aim" to="walk aim" fade="0.5" />
     <animation_change from="aim" to="idle" fade="0.5" />
   </animation_changes-->
-  <!--animation_changes>
-    <animation_change from="shoot" to="idle" fade="0.5" />
-    <animation_change from="charge" to="idle" fade="0.5" />
-  </animation_changes-->
+
 </animated_model>

@@ -194,9 +194,17 @@
   </action>
   
   <action name="Shoot">
- 	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_LEFT"/>
   </action>
-	
+  
+  <action name="ShootChargedDown">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_UP_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+  
+    <action name="ShootChargedUp">
+ 	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP"  Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+  	
 	<action name="RightMouseButtonPressed">
    	 <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN"  Code="MOUSE_BUTTON_RIGHT"/>
     </action>

@@ -76,7 +76,7 @@ function CPlayer:Update()
 	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
 	self.Blaster:Update( lArmPosition )
 	
-	if not self.Blaster:GetIsShooting() then
+	if not self.Blaster:GetIsCharging() then
 		self:SetAnimation("idle")
 	end
 	

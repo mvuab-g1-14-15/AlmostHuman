@@ -23,6 +23,7 @@ class CAnimatedCoreModel : public CName
 {
 public:
     struct SAnimation {
+        std::string mName;
         int iId;
         float fWeight;
         bool bFromParameter, bFromComplementaryParameter;
@@ -35,14 +36,18 @@ public:
     struct SCycle: SAnimation {
     };
 
-    struct SAction: SAnimation {
-        bool bBlock, bStop;
-        float fFadeIn, fFadeOut;
+    struct SAction: SAnimation
+    {
+        bool bBlock;
+        bool bStop;
+        float fFadeIn;
+        float fFadeOut;
 
         SAction():bBlock(false),bStop(false),fFadeIn(.3f),fFadeOut(.3f){};
     };
 
     struct SAnimationState {
+        std::string mName;
         float fDefaultFadeIn, fDefaultFadeOut;
         std::set<SCycle> Cycles;
         std::set<SAction> OnEnter;
