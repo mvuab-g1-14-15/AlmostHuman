@@ -1,26 +1,41 @@
 Event	ID	Name			Wwise Object Path	Notes
 	526096065	Play_Ayer_Tuve_Una			\Iris\Play_Ayer_Tuve_Una	
-	2073520317	Play_Mi_nombre_es_logan			\Iris\Play_Mi_nombre_es_logan	
+	1181951480	Play_GP_Bidon			\Iris\Gameplay\Play_GP_Bidon	
+	1944364177	Play_GP_Poca_Energia			\Iris\Gameplay\Play_GP_Poca_Energia	
+	2023934178	Play_GP_Poca_Vida			\Iris\Gameplay\Play_GP_Poca_Vida	
 	2362998284	Play_Tunel			\Iris\Play_Tunel	
 	2376878504	Play_Sala1			\Iris\Play_Sala1	
 	2376878507	Play_Sala2			\Iris\Play_Sala2	
+	2694084567	Play_GP_Naves_Preparadas			\Iris\Gameplay\Play_GP_Naves_Preparadas	
 	2956457724	Play_Sala3B			\Iris\Play_Sala3B	
 	2956457727	Play_Sala3A			\Iris\Play_Sala3A	
 	3006790453	Play_Sala4B			\Iris\Play_Sala4B	
 	3006790454	Play_Sala4A			\Iris\Play_Sala4A	
+	3526099323	Play_GP_Agacharse			\Iris\Gameplay\Play_GP_Agacharse	
 	3595090698	Play_Pasillo			\Iris\Play_Pasillo	
+	3951885308	Play_GP_Esconderse_Bidones			\Iris\Gameplay\Play_GP_Esconderse_Bidones	
+	4016846353	Play_GP_Disparo_Bloqueado			\Iris\Gameplay\Play_GP_Disparo_Bloqueado	
+	4020926666	Play_GP_Puerta_Bloqueada			\Iris\Gameplay\Play_GP_Puerta_Bloqueada	
 	4150758548	Play_Abriendo_Compuertas			\Iris\Play_Abriendo_Compuertas	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	88444989	Iris_Poca_Energia	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Energia_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Energia		34658
+	110529738	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		554341
+	139045063	Iris_Naves_Preparadas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves_Preparadas		55247
+	241038503	Iris_Poca_Vida	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Vida_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Vida		29681
 	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		99127
-	322989847	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		467306
 	341959684	Tunnel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Tunel_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Tunnel		276024
+	364103296	Iris_Disparo_Bloqueado	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo_Bloqueado_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Disparo_Bloqueado		27794
 	405981009	Sala4A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4A		188563
+	426310337	Final Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final Theme_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Final Theme		1048136
 	430266122	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		189804
 	520901286	Sala3A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3A		122572
+	677660058	Iris_Esconderse_Bidones	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Esconderse_Bidones_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Esconderse_Bidones		63519
 	752280793	Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Pasillo_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Pasillo		230823
+	753798982	Iris_Agacharse	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Agacharse_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Agacharse		41088
+	765819752	Iris_Puerta_Bloqueada	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Puerta_Bloqueada_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Puerta_Bloqueada		53916
+	766947946	Iris_Bidon	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Bidon_movimiento_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Bidon		46707
 	856495406	Sala3B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3B		240403
-	856892216	Me llamo logan_AfterExplosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Me llamo logan_despres explosio_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Me llamo logan_AfterExplosion		36990
 	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		247728
 	999865395	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala2		68678
 
