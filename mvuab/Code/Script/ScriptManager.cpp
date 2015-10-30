@@ -41,7 +41,7 @@ CScriptManager::CScriptManager( CXMLTreeNode& atts )
 
 CScriptManager::~CScriptManager()
 {
-    //Destroy(); // TODO Esto peta cuando se cierra lua
+    Destroy();
 }
 
 void CScriptManager::Init()
@@ -55,7 +55,10 @@ void CScriptManager::Init()
 
 void CScriptManager::Destroy()
 {
-    lua_close( m_LS );
+    if(m_LS)
+    {
+        lua_close( m_LS );
+    }
 }
 
 void CScriptManager::Reload()
