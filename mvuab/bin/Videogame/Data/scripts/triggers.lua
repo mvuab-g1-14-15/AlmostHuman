@@ -391,6 +391,8 @@ function SetPropSala3()
 		g_Player:SetRoom("sala3")
 		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
 		
+		sound_manager:PlayEvent("Play_Sala3A", "Logan")
+		
 		scene:DesactivateRoom("pasillo")
 		
 		g_EnteredSala3 = true
@@ -436,13 +438,27 @@ function ActivateLightsSala3()
 end
 
 function UpdateDLC(text_to_show)
+	g_Player:SetEnergy(100.0)
+	sound_manager:PlayEvent("Play_Sala2", "Logan")
 end
 
 function ActiveRoom(room)
 	scene:ActivateRoom(room)
+	
+	if room == "sala2" then
+		enemy_manager:CreateEnemiesSala2()
+	end
+	if room == "pasillo" then
+		enemy_manager:CreateEnemiesPasillo()
+	end
+	if room == "sala3" then
+		enemy_manager:CreateEnemiesSala3()
+		enemy_manager:CreateDesactivateEnemiesSala3()
+	end
 end
 
 function take_C4()
+	sound_manager:PlayEvent("Play_Pasillo", "Logan")
 end
 
 function ActivateBoss()
