@@ -102,10 +102,10 @@ function CBlaster:Update( aPosition )
 				self.IsShooting = true
 				self.FinishShooting = false
 				if self.TimePressed == 0 then
-					g_Player:SetAnimation("idle_to_shoot", 0.5, 0.5)
+					g_Player:SetAnimation("shoot")
 				end
 				if self.TimePressed > 0.5 then
-					g_Player:SetAnimation("carga_blaster", 0.5, 0.5)
+					g_Player:SetAnimation("carga_blaster")
 				end
 				if self.TimePressed < self.MaxTimePressed then
 					self.TimePressed = self.TimePressed + timer:GetElapsedTime()
@@ -124,12 +124,12 @@ function CBlaster:Update( aPosition )
 					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - 1
 					self:Shoot( aPosition )
-					g_Player:SetAnimation("shoot", 0.0, 0.0)
+					--g_Player:SetAnimation("shoot")
 				else
 					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
 					self:ShootCharged( aPosition )
-					g_Player:SetAnimation("shoot_blaster", 0.0, 0.0)
+					--g_Player:SetAnimation("shoot_blaster")
 				end
 			else
 			--SONIDO DE PEDO AQUI
