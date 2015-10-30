@@ -302,10 +302,12 @@ void CAnimatedCoreModel::LoadAnimationStates( const CXMLTreeNode& _xmlAnimationS
         const std::string& lTagName = l_xmlAnimationState.GetName();
         if( lTagName == "animation_state" )
         {
-            const std::string& l_szName = l_xmlAnimationState.GetAttribute<std::string>("name", "no_name");
             SAnimationState l_AnimationState;
+            l_AnimationState.mName =  l_xmlAnimationState.GetAttribute<std::string>("name", "no_name");
             if( LoadAnimationState(l_xmlAnimationState, l_AnimationState) )
-                m_AnimationStates[l_szName] = l_AnimationState;
+            {
+                m_AnimationStates[l_AnimationState.mName] = l_AnimationState;
+            }
         }
     }
 }
@@ -332,14 +334,12 @@ void CAnimatedCoreModel::LoadAnimationChanges( const CXMLTreeNode& _xmlAnimation
 
 bool CAnimatedCoreModel::LoadAnimationFromState( const CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_)
 {
-    assert(strcmp(_xmlAnimation.GetName(), "cycle") == 0 || strcmp(_xmlAnimation.GetName(), "action") == 0);
-
-    std::string l_szCycleName = _xmlAnimation.GetAttribute<std::string>("name", "no_name");
-    Animation_.iId = m_CalCoreModel->getCoreAnimationId(l_szCycleName);
+    Animation_.mName = _xmlAnimation.GetAttribute<std::string>("name", "no_name");
+    Animation_.iId = m_CalCoreModel->getCoreAnimationId(Animation_.mName);
 
     if(Animation_.iId < 0)
     {
-        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" no existeix", l_szCycleName.c_str());
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" no existeix", Animation_.mName.c_str());
         return false;
     }
 
@@ -351,7 +351,7 @@ bool CAnimatedCoreModel::LoadAnimationFromState( const CXMLTreeNode &_xmlAnimati
 
     if(Animation_.bFromParameter && Animation_.bFromComplementaryParameter)
     {
-        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", l_szCycleName.c_str());
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", Animation_.mName.c_str());
         return false;
     }
     else if(Animation_.bFromParameter || Animation_.bFromComplementaryParameter)
@@ -412,7 +412,7 @@ bool CAnimatedCoreModel::LoadAnimationState( const CXMLTreeNode &_xmlAnimationSt
         {
             for(int j = 0, lCount = lCurrentNode.GetNumChildren(); j < lCount; ++j )
             {
-                const CXMLTreeNode& l_xmlAction = lCurrentNode(i);
+                const CXMLTreeNode& l_xmlAction = lCurrentNode(j);
                 if(l_xmlAction.GetName() == std::string( "action") )
                 {
                     CAnimatedCoreModel::SAction l_Action;

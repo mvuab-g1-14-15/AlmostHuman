@@ -17,7 +17,7 @@ function CBlaster:__init()
 	
 	self.Shoots = {}
 	
-	self.IsShooting = false
+	self.IsCharging = false
 	FinishShooting = false
 	
 	self.Blash = CBlash( "Player" )
@@ -97,49 +97,31 @@ end
 
 function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
-		if action_manager:DoAction("Shoot") then
-			if self.Energy > 1 then
-				self.IsShooting = true
-				self.FinishShooting = false
-				if self.TimePressed == 0 then
-					g_Player:SetAnimation("shoot")
-				end
-				if self.TimePressed > 0.5 then
-					g_Player:SetAnimation("carga_blaster")
-				end
-				if self.TimePressed < self.MaxTimePressed then
-					self.TimePressed = self.TimePressed + timer:GetElapsedTime()
-				else
-					self.TimePressed = self.MaxTimePressed
-				end
-				if self.TimePressed  > (self.MaxTimePressed * 0.1) and not self.IsAcumulatorSound then 
-					sound_manager:PlayEvent( "Play_Acumulator_Long_Shoot_Event", "Logan" )
-					self.IsAcumulatorSound = true
-				end
+		if self.Energy > 1 then
+			if action_manager:DoAction("Shoot") and not self.IsCharging then
+				g_Player:SetAnimation("shoot")
+				self.Energy = self.Energy - 1
+				sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
+				self:Shoot( aPosition )
+			elseif action_manager:DoAction("ShootChargedDown") and not self.IsCharging then
+				self.IsCharging = true
+				self.TimePressed = 0;
+				g_Player:SetAnimation("charge")
+				sound_manager:PlayEvent( "Play_Acumulator_Long_Shoot_Event", "Logan" )
+			elseif action_manager:DoAction("ShootChargedUp") and self.IsCharging then
+				self.IsCharging = false
+				self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
+				self:ShootCharged( aPosition )
+				sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 			end
-		end
-		if action_manager:DoAction("ShootUp") then
-			if self.Energy > 1 then
-				if self.TimePressed < (self.MaxTimePressed * 0.1) then
-					sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
-					self.Energy = self.Energy - 1
-					self:Shoot( aPosition )
-					--g_Player:SetAnimation("shoot")
-				else
-					sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
-					self.Energy = self.Energy - (self.TimePressed*self.Multiplicador)
-					self:ShootCharged( aPosition )
-					--g_Player:SetAnimation("shoot_blaster")
-				end
-			else
-			--SONIDO DE PEDO AQUI
-			end
-			self.TimePressed = 0.0
-			self.IsAcumulatorSound = false
-			self.IsShooting = false
+		else
+			--play sound no energy TODO
 		end
 		
-		-- Miramos que nunca tengamos un energy negativo, para que la barra de energia no haga cosas raras
+		if self.IsCharging == true then
+			self.TimePressed = self.TimePressed + timer:GetElapsedTime()
+		end
+		
 		if self.Energy < 1 then
 			self.Energy = 0;
 		end
@@ -152,8 +134,8 @@ function CBlaster:Update( aPosition )
 	self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
 end
 
-function CBlaster:GetIsShooting()
-	return self.IsShooting
+function CBlaster:GetIsCharging()
+	return self.IsCharging
 end
 
 function CBlaster:GetEnergy()
