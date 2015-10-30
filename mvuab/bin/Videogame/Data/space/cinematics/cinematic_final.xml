@@ -1,0 +1,5 @@
+<cinematic>
+	<set_camera name="CameraCinematicaFinal1" name_camera="camera_cinematica_final" active="true" time="0.00001" blocker="true" />
+	<play_animation name="final" resource_id_file="Data/space/cinematics/cinematics_final_sala4.xml" time="33.3333" />
+	<set_camera name="CameraCinematicaFinal2" name_camera="camera_cinematica_final" active="false" time="0.00001" blocker="false" />
+</cinematic>
