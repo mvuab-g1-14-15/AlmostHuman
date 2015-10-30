@@ -15,23 +15,19 @@ class CParticleSystemCore
         CParticleSystemCore();
         CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFactory* aEmitterFactory );
         ~CParticleSystemCore();
-        void AddInstance( CParticleInstance* aInstance );
         void AddEmitter( CParticleEmitter* aEmitter );
         void SetFixedDirection( const Math::Vect3f& aDirection );
         void ResetEmitters();
-        void Update();
+        void Update( float dt );
         void Render();
         void Refresh();
-        void Start();
+        CParticleSystemCore* Clone() const;
     private:
-        typedef std::vector< CParticleInstance * > TParticleInstanceVector;
         typedef std::vector< CParticleEmitter * > TParticleEmittersVector;
-        TParticleInstanceVector mInstances;
         TParticleEmittersVector mEmitters;
 
         float mDelayIn;
         float mCurrentTime;
-        bool  mIsStarted;
 };
 
 #endif //_PARTICLE_SYSTEM_CORE_H

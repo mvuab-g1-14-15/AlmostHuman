@@ -195,13 +195,12 @@
   <MeshInstance name="Sala_3_Roof001_sala3" core="Sala_3_Roof001_sala3" pos="-2.15056 -1.53177 59.9283" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 0.930556" />
   <MeshInstance name="container002_sala3" core="container002_sala3" pos="-1.54794 -15.8763 75.8133" yaw="0.0795517" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamps_sala3" core="lamps_sala3" pos="5.37434 -7.15009 95.2646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 81.3461" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg004_sala3" core="Leg004_sala3" pos="40.4789 -17.2726 85.9099" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
   <MeshInstance name="feet_01_sala3" core="feet_01_sala3" pos="40.1754 -17.2726 83.5393" yaw="-1.39093e-007" pitch="1.5708" roll="2.26893" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap_sala3" core="cap_sala3" pos="40.4208 -17.3208 74.8819" yaw="0.0" pitch="1.5708" roll="-0.523599" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Torso_sala3" core="Torso_sala3" pos="40.466 -17.2269 73.2516" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap001_sala3" core="cap001_sala3" pos="40.4543 -17.3208 70.4258" yaw="0.0" pitch="1.5708" roll="0.959931" scale="1.0 1.0 1.0" />
   <MeshInstance name="Torso001_sala3" core="Torso001_sala3" pos="40.466 -17.2269 81.3461" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Torso_sala3" core="Torso_sala3" pos="40.466 -17.2269 73.2516" yaw="0.0" pitch="1.5708" roll="-0.436332" scale="1.0 1.0 1.0" />
   <MeshInstance name="Leg004_sala3" core="Leg004_sala3" pos="40.4789 -17.2726 85.9099" yaw="0.0" pitch="1.5708" roll="0.174533" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap003_sala3" core="cap003_sala3" pos="40.4543 -17.3208 79.8817" yaw="0.0" pitch="1.5708" roll="0.959931" scale="1.0 1.0 1.0" />
   <MeshInstance name="cap007_sala3" core="cap007_sala3" pos="41.2986 -17.259 58.2028" yaw="2.84943" pitch="-1.23176" roll="-1.02145" scale="1.0 1.0 1.0" />

@@ -34,6 +34,8 @@ public:
   const CParticle* GetParticle( const uint32 aIdx ) const;
   CParticle* GetParticle( const uint32 aIdx );
 
+  CParticleEmitter* Clone() const;
+
 public:
   Math::Vect3f                 mCubicSize;
   float32                      mAngleStep;
@@ -103,6 +105,7 @@ private:
   void EmitParticles();
   void KillParticles();
   void ActivateTextures();
+  void AllocParticlesProperties();
   void LoadFromNode( const CXMLTreeNode& atts );
 };
 

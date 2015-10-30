@@ -15,6 +15,8 @@ CParticleSystemCore::CParticleSystemCore()
 }
 
 CParticleSystemCore::CParticleSystemCore( const CXMLTreeNode& atts, CEmitterFactory* aEmitterFactory )
+  : mDelayIn( 0.0 )
+  , mCurrentTime( 0.0 )
 {
     mDelayIn = atts.GetAttribute<float>("delay_in", 0.0f);
     for ( uint32 i = 0, lCount = atts.GetNumChildren(); i < lCount; ++i )
@@ -31,16 +33,10 @@ CParticleSystemCore::~CParticleSystemCore()
     {
         CHECKED_DELETE( lParticleEmitter );
     }
-
-    BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
-    {
-        CHECKED_DELETE( lParticleInstance );
-    }
 }
 
-void CParticleSystemCore::Update()
+void CParticleSystemCore::Update( float dt )
 {
-    float dt = deltaTimeMacro;
     mCurrentTime += dt;
 
     if( mCurrentTime > mDelayIn )
@@ -58,21 +54,11 @@ void CParticleSystemCore::Render()
 
     if( mCurrentTime > mDelayIn )
     {
-      BOOST_FOREACH( CParticleInstance* lParticleInstance, mInstances )
+      BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
       {
-          if( lParticleInstance->IsVisible() )
-          {
-              lGM->SetTransform( lParticleInstance->GetTransform() );
-              BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
-              {
-                  lParticleEmitter->Render();
-              }
-          }
+        lParticleEmitter->Render();
       }
     }
-
-    // Set the indentity
-    lGM->SetTransform( Math::Mat44f() );
 }
 
 void CParticleSystemCore::Refresh()
@@ -85,14 +71,6 @@ void CParticleSystemCore::SetFixedDirection( const Math::Vect3f& aDirection )
   {
     lParticleEmitter->SetFixedDirection(aDirection);
   }
-}
-
-void CParticleSystemCore::AddInstance( CParticleInstance* aInstance )
-{
-    if( aInstance )
-        mInstances.push_back(aInstance);
-    else
-        LOG_ERROR_APPLICATION("Adding a null instance to the core");
 }
 
 void CParticleSystemCore::AddEmitter( CParticleEmitter* aEmitter )
@@ -110,4 +88,15 @@ void CParticleSystemCore::ResetEmitters()
   {
     lParticleEmitter->Reset();
   }
+}
+
+CParticleSystemCore* CParticleSystemCore::Clone() const
+{
+  CParticleSystemCore* lCore = new CParticleSystemCore();
+  lCore->mDelayIn = mDelayIn;
+  BOOST_FOREACH( CParticleEmitter* lParticleEmitter, mEmitters )
+  {
+    lCore->mEmitters.push_back( lParticleEmitter->Clone() );
+  }
+  return lCore;
 }
