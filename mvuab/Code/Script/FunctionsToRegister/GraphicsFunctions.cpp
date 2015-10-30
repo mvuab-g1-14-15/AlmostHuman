@@ -339,6 +339,7 @@ void registerAnimatedModels( lua_State* aLuaState )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, SetVelocity )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, GetVelocity )
   LUA_DECLARE_METHOD( CAnimatedInstanceModel, GetBonePosition )
+  LUA_DECLARE_METHOD( CAnimatedInstanceModel, SetAnimationState )
   LUA_END_DECLARATION
 }
 

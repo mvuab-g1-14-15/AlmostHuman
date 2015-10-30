@@ -632,7 +632,7 @@ void CAnimatedInstanceModel::SetAnimationState(const std::string& _szAnimationSt
 
     float l_fFade = l_NextAnimationState.fDefaultFadeIn;
 
-    const set<SCycle>& l_CyclesToActivate = l_NextAnimationState.Cycles;
+    const std::set<SCycle>& l_CyclesToActivate = l_NextAnimationState.Cycles;
 
     if(m_szAnimationState != "")
     {
