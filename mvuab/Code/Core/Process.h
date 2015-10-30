@@ -17,6 +17,7 @@ typedef enum EMenuOption
     eOptionAnimatedModels,
     eOptionExit,
     eOptionGUI,
+    eOptionRenderCmd,
 };
 
 class CProcess

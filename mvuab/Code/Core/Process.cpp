@@ -77,6 +77,12 @@ void OnOptionEffectsClicked()
 }
 
 //---------------------------------------------------------------------------------------------------------------
+void OnOptionRenderCmdClicked()
+{
+    SRCMInstance->ReLoad();
+}
+
+//---------------------------------------------------------------------------------------------------------------
 void OnOptionReloadLua()
 {
     ScriptMInstance->Reload();
@@ -155,6 +161,10 @@ void CProcess::OnClickedMenuOption( EMenuOption aMenuOption )
         OnOptionEffectsClicked();
         break;
 
+    case eOptionRenderCmd:
+        OnOptionRenderCmdClicked();
+        break;
+
     default:
         LOG_ERROR_APPLICATION( "Invalid option for menu" );
     }
@@ -174,6 +184,8 @@ void CProcess::ProcessReloads()
         OnOptionEffectsClicked();
     else if ( lAM->DoAction( "ReloadParticles" ) )
         OnOptionParticlesClicked();
+    else if ( lAM->DoAction("ReloadSceneRendererCmd") )
+        OnOptionRenderCmdClicked();
 }
 
 void CProcess::ProcessKey()

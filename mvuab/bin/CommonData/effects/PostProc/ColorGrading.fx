@@ -62,8 +62,6 @@ technique ColorGradingTechnique
 {
 	pass p0
 	{
-		AlphaBlendEnable = false;
-		//CullMode = CCW;
 		PixelShader = compile ps_3_0 ColorGradingPS();
 	}
 }
