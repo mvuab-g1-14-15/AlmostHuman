@@ -265,7 +265,9 @@ function StayTextElevatorDown(text, other_shape)
 		g_bPressedRoom3X = false
 		g_bPressRoom3X = false
 		cinematic_manager:Execute("elevatorDown")
-		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)			
+		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
+		enemy_manager:ActivateEnemiesSala3()
+		g_Player:SetCheckpoint("sala3", Vect3f( -7, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 	end
 end
 
@@ -426,12 +428,11 @@ end
 
 function UpToSala4(text, other_shape)
 	cinematic_manager:Execute("elevatorUp")
+	scene:ActivateRoom("sala4")
 end
 
 function ActivateLightsSala3()
 	-- activate the lights
-	engine:TraceOnce("Executing trigger enemies sala3 activation")
-	enemy_manager:ActivateEnemiesSala3()
 end
 
 function UpdateDLC(text_to_show)
