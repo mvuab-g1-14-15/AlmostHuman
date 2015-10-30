@@ -40,16 +40,21 @@ private:
     void Execute();
     std::string GetNextName();
   };
+
   CTemplatedVectorMapManager<CCinematicsItems>     m_vCinematicsElement;
   CTemplatedVectorMapManager<CCinematic>		   m_vCinematicLoop;
+
   CCinematicsItems*								   m_CurrentCinematicsElement;
   CCinematicsElement*							   m_CurrentElement;
+
   //CCameraCinematical*							   m_CurrentCameraCinematical;
-  std::string							   m_CurrentCamera;
+  std::string							           m_CurrentCamera;
   bool											   m_CinematicActive;
+
   bool											   m_CheckBlock;
   size_t										   m_CurrentElementId;
   bool											   m_FirstFrame;
+
   void CleanUp();
   std::string GetNextName(); 
 };

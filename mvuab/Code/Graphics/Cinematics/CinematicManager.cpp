@@ -46,11 +46,13 @@ CCinematicManager::CCinematicManager( CXMLTreeNode& atts )
 CCinematicManager::~CCinematicManager()
 {
     m_vCinematicsElement.Destroy();
+    m_vCinematicLoop.Destroy();
 }
 
 void CCinematicManager::CleanUp()
 {
     m_vCinematicsElement.Destroy();
+    m_vCinematicLoop.Destroy();
 }
 std::string CCinematicManager::GetNextName()
 {
@@ -96,8 +98,7 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
                 }
                 else
                 {
-                    if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetAttribute<std::string>( "name",
-                        GetNextName().c_str() ), CinematicsItems ) )
+                    if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetAttribute<std::string>( "name", GetNextName().c_str() ), CinematicsItems ) )
                     {
                         CHECKED_DELETE( CinematicsItems );
                     }
@@ -107,10 +108,12 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
             {
                 const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
                 CXMLTreeNode l_SubFile, SubTreeNode3;
+
                 if (l_SubFile.LoadAndFindNode( ResourceFileName.c_str(), "camera", SubTreeNode3 ) )
                 {
                     CCameraKeyController* CameraKeyController = new CCameraKeyController( );
                     CameraKeyController->LoadXML(SubTreeNode3(0));
+
                     CCameraCinematical* lCameraCinematical = new CCameraCinematical( CameraKeyController );
                     if ( !CameraMInstance->AddResource( lName, lCameraCinematical ) )
                     {
@@ -125,6 +128,7 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
                 const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
                 CCinematic* ObjectCinematic = new CCinematic(ResourceFileName);
                 ObjectCinematic->Play(true);
+
                 if ( !m_vCinematicLoop.AddResource( lName, ObjectCinematic ) )
                 {
                     LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
@@ -136,13 +140,20 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
 				const std::string& lName = SubTreeNode.GetAttribute<std::string>( "name", "" );
 				Math::Vect3f lPos = SubTreeNode.GetAttribute<Math::Vect3f>( "pos", Math::Vect3f() );
 				Math::Vect3f lLookAt = SubTreeNode.GetAttribute<Math::Vect3f>( "look_at", Math::Vect3f() );
+
 				CCameraFPShooter* lCamera = new CCameraFPShooter();				
 				Math::Vect3f& d = lLookAt - lPos;
+
 				lCamera->SetYaw( Math::Utils::ATan2( d.z, d.x ) );
 				lCamera->SetPitch( Math::Utils::ATan2( d.y, Math::Utils::Sqrt( d.z * d.z + d.x * d.x ) ) );
 				lCamera->SetPosition( lPos );
 				lCamera->SetName( lName );
-				CameraMInstance->AddResource( lName, lCamera );
+
+				if(!CameraMInstance->AddResource(lName, lCamera))
+                {
+                    LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
+                    CHECKED_DELETE( lCamera );
+                }
 			}
         }
     }
