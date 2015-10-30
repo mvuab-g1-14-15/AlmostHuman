@@ -4,8 +4,9 @@
 #include "RenderableObject/RenderableObject.h"
 #include "cal3d/cal3d.h"
 #include "Utils/Name.h"
+#include "AnimatedCoreModel.h"
 
-class CAnimatedCoreModel;
+
 class CEffectTechnique;
 class CTexture;
 class CXMLTreeNode;
@@ -54,6 +55,8 @@ class CAnimatedInstanceModel : public CRenderableObject
         void ChangeAnimation(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
         void ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
 
+        void SetAnimationState(const std::string& _szAnimationState);
+
 		GET_SET(float32, Velocity);
 
     private:
@@ -85,6 +88,20 @@ class CAnimatedInstanceModel : public CRenderableObject
 		Math::Vect3f m_PreviousPosition;
 
         void LoadTextures();
+
+        typedef CAnimatedCoreModel::SAnimation       SAnimation;
+        typedef CAnimatedCoreModel::SAction          SAction;
+        typedef CAnimatedCoreModel::SCycle           SCycle;
+        typedef CAnimatedCoreModel::SAnimationState  SAnimationState;
+        typedef CAnimatedCoreModel::SAnimationChange SAnimationChange;
+
+        float ExecuteChange(const SAnimationChange& _AnimationChange);//retorna el fade
+        void  ExecuteAction(const SAction& _Action);
+        void  BlendCycle(const SCycle& _Cycle, float _fBlendTime);
+        void  ClearCycle(const SCycle& _Cycle, float _fBlendTime);
+
+        std::string m_szAnimationState;
+        float  m_fAnimationParameter;
 };
 
 #endif
