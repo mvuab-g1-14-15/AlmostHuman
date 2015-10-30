@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
   <MeshInstance name="sala_2_sala2" core="sala_2_sala2" pos="63.5475 -15.746 -59.1113" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pack_obj_3_sala2" core="Pack_obj_3_sala2" pos="61.9889 -16.8616 -69.6353" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pack_obj_04_sala2" core="Pack_obj_04_sala2" pos="67.9355 -16.904 -79.3606" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pack_obj_2_sala2" core="Pack_obj_2_sala2" pos="61.9621 -16.5709 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Estanteria_05_sala2" core="Estanteria_05_sala2" pos="65.9941 -16.6012 -58.93" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Estanteria_13_sala2" core="Estanteria_13_sala2" pos="67.9355 -16.7873 -79.3606" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Estanteria_10_sala2" core="Estanteria_10_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_4_sala2" core="Walls_upper_4_sala2" pos="49.0188 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Roof_sala2" core="Roof_sala2" pos="63.4862 -5.20385 -57.6083" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamps_sala2" core="lamps_sala2" pos="62.4198 -7.15009 -69.8001" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -14,15 +14,114 @@
   <MeshInstance name="wall_down_2_sala2" core="wall_down_2_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_3_sala2" core="wall_down_3_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_1_sala2" core="wall_down_1_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pack_obj_1_sala2" core="Pack_obj_1_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pack_obj_05_sala2" core="Pack_obj_05_sala2" pos="53.5694 -16.6887 -47.8849" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Trampilla_sala2" core="Trampilla_sala2" pos="61.6719 -19.3348 -31.8813" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Estanteria_11_sala2" core="Estanteria_11_sala2" pos="53.5694 -16.4214 -47.8849" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_1_sala2" core="Walls_upper_1_sala2" pos="78.2065 -9.9588 -46.5061" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_2_sala2" core="Walls_upper_2_sala2" pos="49.0812 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_3_sala2" core="Walls_upper_3_sala2" pos="78.2065 -9.9588 -46.5061" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Base_carga_sala2" core="Base_carga_sala2" pos="75.8046 -17.8002 -25.0035" yaw="0.0" pitch="0.0" roll="0.0" scale="0.570386 0.570386 0.570386" />
-  <MeshInstance name="Pack_obj_006_sala2" core="Pack_obj_006_sala2" pos="61.9889 -16.8616 -69.6353" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Barriers_sala2" core="Barriers_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Volumetric_light_sala2" core="Volumetric_light_sala2" pos="57.768 -18.5742 -69.752" yaw="0.0" pitch="0.0" roll="0.0" scale="2.48033 2.43807 2.43807" />
+  <MeshInstance name="EStanteria_02_sala2" core="EStanteria_02_sala2" pos="61.9889 -16.8616 -69.6353" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Estanteria_01_sala2" core="Estanteria_01_sala2" pos="70.2292 -16.5805 -69.8638" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_07_sala2" core="amm_box_07_sala2" pos="70.1716 -16.7228 -68.2254" yaw="-0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box001_sala2" core="amm_box001_sala2" pos="70.1716 -16.7228 -69.3627" yaw="0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box002_sala2" core="amm_box002_sala2" pos="70.1716 -16.7228 -70.3337" yaw="0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box003_sala2" core="amm_box003_sala2" pos="70.1716 -15.5755 -71.0175" yaw="-0.349066" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box004_sala2" core="amm_box004_sala2" pos="70.1716 -15.5755 -69.6227" yaw="0.0872663" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box005_sala2" core="amm_box005_sala2" pos="70.1716 -16.7228 -71.3347" yaw="0.0872663" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box006_sala2" core="amm_box006_sala2" pos="70.1716 -15.5755 -68.4588" yaw="0.349066" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_008_sala2" core="amm_box_008_sala2" pos="61.87 -16.8832 -67.1919" yaw="-0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_009_sala2" core="amm_box_009_sala2" pos="61.87 -16.8832 -68.5813" yaw="0.436332" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_010_sala2" core="amm_box_010_sala2" pos="61.87 -16.8832 -70.0401" yaw="-0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_011_sala2" core="amm_box_011_sala2" pos="61.87 -16.8832 -71.9181" yaw="-1.22173" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_012_sala2" core="amm_box_012_sala2" pos="61.87 -15.3056 -67.3822" yaw="0.349066" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_013_sala2" core="amm_box_013_sala2" pos="61.87 -15.3035 -68.6785" yaw="-0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_014_sala2" core="amm_box_014_sala2" pos="61.87 -15.3547 -69.7897" yaw="0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_015_sala2" core="amm_box_015_sala2" pos="61.87 -15.2993 -71.0648" yaw="0.0872663" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_016_sala2" core="amm_box_016_sala2" pos="61.87 -15.3147 -72.1624" yaw="-0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_03_sala2" core="Estanteria_03_sala2" pos="53.414 -17.1881 -69.892" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_017_sala2" core="amm_box_017_sala2" pos="53.3972 -17.1132 -71.7134" yaw="0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_018_sala2" core="amm_box_018_sala2" pos="53.3972 -17.1132 -70.2301" yaw="1.0472" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_019_sala2" core="amm_box_019_sala2" pos="53.3972 -17.1132 -68.3381" yaw="-0.436332" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_020_sala2" core="amm_box_020_sala2" pos="53.3763 -15.8239 -69.427" yaw="0.174533" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_021_sala2" core="amm_box_021_sala2" pos="53.3976 -15.8239 -67.9776" yaw="-1.78814e-007" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_022_sala2" core="amm_box_022_sala2" pos="53.4687 -15.8239 -71.157" yaw="-0.698132" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_04_sala2" core="Estanteria_04_sala2" pos="61.9889 -16.8616 -69.6353" yaw="-1.74846e-007" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_023_sala2" core="amm_box_023_sala2" pos="70.732 -15.469 -60.8333" yaw="0.349066" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_024_sala2" core="amm_box_024_sala2" pos="70.732 -15.469 -59.5388" yaw="-0.0872665" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_025_sala2" core="amm_box_025_sala2" pos="70.732 -15.469 -57.8176" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_026_sala2" core="amm_box_026_sala2" pos="70.732 -16.7573 -60.6594" yaw="1.0472" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_027_sala2" core="amm_box_027_sala2" pos="70.732 -16.7573 -57.6436" yaw="-2.79253" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_028_sala2" core="amm_box_028_sala2" pos="70.732 -16.7573 -58.9382" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_029_sala2" core="amm_box_029_sala2" pos="62.1645 -16.608 -56.5025" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_030_sala2" core="amm_box_030_sala2" pos="62.1645 -16.608 -57.5596" yaw="-3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_031_sala2" core="amm_box_031_sala2" pos="62.1645 -16.608 -58.6166" yaw="2.96706" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_032_sala2" core="amm_box_032_sala2" pos="62.1645 -16.608 -59.6736" yaw="-3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_033_sala2" core="amm_box_033_sala2" pos="62.1645 -16.608 -61.0952" yaw="-2.61799" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_034_sala2" core="amm_box_034_sala2" pos="62.1645 -15.0995 -57.1905" yaw="-2.96706" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_035_sala2" core="amm_box_035_sala2" pos="62.1645 -15.0995 -58.2475" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_036_sala2" core="amm_box_036_sala2" pos="62.1645 -15.0995 -59.3046" yaw="2.94009" pitch="-0.0200487" roll="-0.00185022" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_037_sala2" core="amm_box_037_sala2" pos="62.1645 -15.0995 -60.7704" yaw="2.44346" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_06_sala2" core="Estanteria_06_sala2" pos="53.5694 -16.4214 -47.8849" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_038_sala2" core="amm_box_038_sala2" pos="53.7255 -15.5025 -60.7704" yaw="2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_039_sala2" core="amm_box_039_sala2" pos="53.7255 -15.5025 -59.6029" yaw="-3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_040_sala2" core="amm_box_040_sala2" pos="53.7255 -15.5025 -58.4353" yaw="-2.70526" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_041_sala2" core="amm_box_041_sala2" pos="53.5727 -15.5025 -57.1003" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_042_sala2" core="amm_box_042_sala2" pos="53.7255 -16.8089 -60.8917" yaw="2.70526" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_043_sala2" core="amm_box_043_sala2" pos="53.7255 -16.8089 -59.2821" yaw="-2.79253" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_044_sala2" core="amm_box_044_sala2" pos="53.7255 -16.8089 -57.7735" yaw="2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_7_sala2" core="Estanteria_7_sala2" pos="53.5694 -16.4214 -47.8849" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_045_sala2" core="amm_box_045_sala2" pos="53.7255 -16.8089 -49.705" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_046_sala2" core="amm_box_046_sala2" pos="53.7255 -16.8089 -48.5301" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_047_sala2" core="amm_box_047_sala2" pos="53.7255 -16.8089 -47.267" yaw="-2.79253" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_048_sala2" core="amm_box_048_sala2" pos="53.7255 -16.8089 -46.0403" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_049_sala2" core="amm_box_049_sala2" pos="53.7255 -15.4749 -46.0403" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_050_sala2" core="amm_box_050_sala2" pos="53.7255 -15.4749 -47.2369" yaw="-2.96706" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_051_sala2" core="amm_box_051_sala2" pos="53.7255 -15.4749 -48.3421" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_052_sala2" core="amm_box_052_sala2" pos="53.7255 -15.4749 -49.6781" yaw="-2.61799" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_8_sala2" core="Estanteria_8_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_053_sala2" core="amm_box_053_sala2" pos="61.8392 -15.4749 -50.3224" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_054_sala2" core="amm_box_054_sala2" pos="61.8392 -15.4749 -48.8274" yaw="-2.18166" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_055_sala2" core="amm_box_055_sala2" pos="61.8392 -15.4749 -46.7082" yaw="2.35619" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_056_sala2" core="amm_box_056_sala2" pos="61.8392 -16.9986 -46.7083" yaw="1.309" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_057_sala2" core="amm_box_057_sala2" pos="61.8392 -16.9986 -48.8274" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_058_sala2" core="amm_box_058_sala2" pos="61.8392 -16.9986 -50.3224" yaw="2.35619" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="Estanteria_9_sala2" core="Estanteria_9_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_059_sala2" core="amm_box_059_sala2" pos="70.7388 -17.0996 -50.3257" yaw="2.79253" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_060_sala2" core="amm_box_060_sala2" pos="70.7388 -17.0996 -48.5781" yaw="-2.53073" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_061_sala2" core="amm_box_061_sala2" pos="70.7388 -17.0996 -46.7316" yaw="2.79253" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_062_sala2" core="amm_box_062_sala2" pos="70.7388 -15.8328 -46.7316" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_063_sala2" core="amm_box_063_sala2" pos="70.7388 -15.8328 -48.5781" yaw="-1.91986" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_064_sala2" core="amm_box_064_sala2" pos="70.7388 -15.8328 -50.3257" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.42205 1.42205 1.42205" />
+  <MeshInstance name="amm_box_065_sala2" core="amm_box_065_sala2" pos="68.4158 -16.6064 -41.0414" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_066_sala2" core="amm_box_066_sala2" pos="65.7738 -16.6064 -41.0414" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_067_sala2" core="amm_box_067_sala2" pos="65.7738 -15.1293 -41.0414" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_068_sala2" core="amm_box_068_sala2" pos="68.4158 -15.1293 -41.0414" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_069_sala2" core="amm_box_069_sala2" pos="58.3393 -15.453 -40.7374" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_070_sala2" core="amm_box_070_sala2" pos="55.6861 -15.453 -40.9695" yaw="-2.53073" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_071_sala2" core="amm_box_071_sala2" pos="55.9017 -16.7181 -40.6949" yaw="2.44346" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_072_sala2" core="amm_box_072_sala2" pos="58.3393 -16.7181 -40.7374" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="Estaneria_12_sala2" core="Estaneria_12_sala2" pos="67.9355 -16.7873 -79.3606" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="amm_box_073_sala2" core="amm_box_073_sala2" pos="57.497 -16.7181 -78.7892" yaw="3.05433" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_074_sala2" core="amm_box_074_sala2" pos="59.3759 -16.7181 -79.9764" yaw="-2.87979" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_075_sala2" core="amm_box_075_sala2" pos="61.4736 -16.7181 -79.57" yaw="2.0944" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_076_sala2" core="amm_box_076_sala2" pos="57.387 -15.1904 -79.1067" yaw="0.698132" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_077_sala2" core="amm_box_077_sala2" pos="59.235 -15.1904 -79.3947" yaw="1.0472" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_078_sala2" core="amm_box_078_sala2" pos="61.3704 -15.1904 -79.4527" yaw="-0.2618" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_079_sala2" core="amm_box_079_sala2" pos="66.1958 -15.1904 -79.3288" yaw="0.610865" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_080_sala2" core="amm_box_080_sala2" pos="68.1732 -15.1904 -79.5097" yaw="2.00713" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_081_sala2" core="amm_box_081_sala2" pos="69.8339 -15.1904 -79.4244" yaw="-0.698132" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_082_sala2" core="amm_box_082_sala2" pos="69.8339 -16.6836 -79.4244" yaw="-2.53073" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_083_sala2" core="amm_box_083_sala2" pos="68.1732 -16.6836 -79.5097" yaw="1.39626" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_084_sala2" core="amm_box_084_sala2" pos="66.1958 -16.6836 -79.3288" yaw="-2.38419e-007" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_085_sala2" core="amm_box_085_sala2" pos="71.8694 -16.9274 -30.8716" yaw="-1.309" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_086_sala2" core="amm_box_086_sala2" pos="71.9682 -16.9274 -27.9145" yaw="-1.8326" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_087_sala2" core="amm_box_087_sala2" pos="72.2118 -15.346 -27.7541" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="amm_box_088_sala2" core="amm_box_088_sala2" pos="71.4426 -15.346 -30.6251" yaw="-1.0472" pitch="0.0" roll="0.0" scale="1.61467 1.61467 1.61467" />
+  <MeshInstance name="Estanteria_14_sala2" core="Estanteria_14_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Barrier_1_sala2" core="Barrier_1_sala2" pos="68.0239 -17.7517 -32.4552" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Barrier_3_sala2" core="Barrier_3_sala2" pos="58.4652 -17.7517 -34.3569" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Barrier_4_sala2" core="Barrier_4_sala2" pos="61.9621 -16.5223 -41.1796" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Barrier_2_sala2" core="Barrier_2_sala2" pos="63.5949 -17.7517 -33.7992" yaw="0.0872665" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lights_white_upper_glow_sala2" core="lights_white_upper_glow_sala2" pos="49.0188 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="light_white_down_glow_sala2" core="light_white_down_glow_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Base_carga_sala2" core="Base_carga_sala2" pos="75.3452 -17.8115 -24.9531" yaw="0.0" pitch="0.0" roll="0.0" scale="0.570386 0.570386 0.570386" />
 </RenderableObjects>

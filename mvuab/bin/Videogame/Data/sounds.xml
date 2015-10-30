@@ -13,7 +13,9 @@
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
-	<GameObject3d name="Base_de_carga_sala2" register="true" pos="75.8046 -17.8002 -25.0035" dir="75.8046 -17.8002 -25.003"/>
+	<GameObject3d name="DLC" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
+	<GameObject3d name="BaseCargaSala3" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
+	<GameObject3d name="BaseCargaSala4" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
 	<GameObject3d name="Door_sala2" register="true" pos="53.0744 -16.6341 -24.2395" dir="53.0744 -16.6341 -24.2395"/>
 	<GameObject3d name="C4_pasillo" register="true" pos="59.3535 -17.1847 6.01426" dir="59.3535 -17.1847 6.01426"/>
 	<GameObject3d name="Door_pasillo" register="true" pos="53.6564 -16.2673 38.8278" dir="53.6564 -16.2673 38.8278"/>

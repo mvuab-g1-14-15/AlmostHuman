@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
+  <MeshInstance name="ray_of_god_01_sala2" core="ray_of_god_01_sala2" pos="67.0558 -18.6616 -48.2902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_002_sala2" core="ray_of_god_002_sala2" pos="67.0558 -18.6616 -58.8596" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_003_sala2" core="ray_of_god_003_sala2" pos="67.0466 -18.6616 -69.8418" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_004_sala2" core="ray_of_god_004_sala2" pos="67.0578 -18.6616 -77.3597" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_005_sala2" core="ray_of_god_005_sala2" pos="57.7668 -18.6616 -69.7793" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_006_sala2" core="ray_of_god_006_sala2" pos="57.778 -18.6616 -77.2972" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_007_sala2" core="ray_of_god_007_sala2" pos="57.7761 -18.6616 -58.7971" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_008_sala2" core="ray_of_god_008_sala2" pos="57.7761 -18.6616 -48.2277" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_009_sala2" core="ray_of_god_009_sala2" pos="57.7528 -18.6616 -33.581" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
+  <MeshInstance name="ray_of_god_010_sala2" core="ray_of_god_010_sala2" pos="67.0009 -18.6616 -33.581" yaw="0.0" pitch="0.0" roll="0.0" scale="1.91715 1.44928 1.44928" />
   <MeshInstance name="lights_white_upper_glow_sala2" core="lights_white_upper_glow_sala2" pos="49.0188 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="light_white_down_glow_sala2" core="light_white_down_glow_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

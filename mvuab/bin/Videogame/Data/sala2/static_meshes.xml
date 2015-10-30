@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
   <static_mesh name="sala_2_sala2" filename="meshes\sala_2.mesh" />
-  <static_mesh name="Pack_obj_3_sala2" filename="meshes\Pack_obj_3.mesh" />
-  <static_mesh name="Pack_obj_04_sala2" filename="meshes\Pack_obj_04.mesh" />
-  <static_mesh name="Pack_obj_2_sala2" filename="meshes\Pack_obj_2.mesh" />
+  <static_mesh name="Estanteria_05_sala2" filename="meshes\Estanteria_05.mesh" />
+  <static_mesh name="Estanteria_13_sala2" filename="meshes\Estanteria_13.mesh" />
+  <static_mesh name="Estanteria_10_sala2" filename="meshes\Estanteria_10.mesh" />
   <static_mesh name="Walls_upper_4_sala2" filename="meshes\Walls_upper_4.mesh" />
   <static_mesh name="Roof_sala2" filename="meshes\Roof.mesh" />
   <static_mesh name="lamps_sala2" filename="meshes\lamps.mesh" />
@@ -14,15 +14,124 @@
   <static_mesh name="wall_down_2_sala2" filename="meshes\wall_down_2.mesh" />
   <static_mesh name="wall_down_3_sala2" filename="meshes\wall_down_3.mesh" />
   <static_mesh name="wall_down_1_sala2" filename="meshes\wall_down_1.mesh" />
-  <static_mesh name="Pack_obj_1_sala2" filename="meshes\Pack_obj_1.mesh" />
-  <static_mesh name="Pack_obj_05_sala2" filename="meshes\Pack_obj_05.mesh" />
+  <static_mesh name="Trampilla_sala2" filename="meshes\Trampilla.mesh" />
+  <static_mesh name="Estanteria_11_sala2" filename="meshes\Estanteria_11.mesh" />
   <static_mesh name="Walls_upper_1_sala2" filename="meshes\Walls_upper_1.mesh" />
   <static_mesh name="Walls_upper_2_sala2" filename="meshes\Walls_upper_2.mesh" />
   <static_mesh name="Walls_upper_3_sala2" filename="meshes\Walls_upper_3.mesh" />
-  <static_mesh name="Base_carga_sala2" filename="meshes\Base_carga.mesh" />
-  <static_mesh name="Pack_obj_006_sala2" filename="meshes\Pack_obj_006.mesh" />
-  <static_mesh name="Barriers_sala2" filename="meshes\Barriers.mesh" />
-  <static_mesh name="Volumetric_light_sala2" filename="meshes\Volumetric_light.mesh" />
+  <static_mesh name="EStanteria_02_sala2" filename="meshes\EStanteria_02.mesh" />
+  <static_mesh name="ray_of_god_01_sala2" filename="meshes\ray_of_god_01.mesh" />
+  <static_mesh name="ray_of_god_002_sala2" filename="meshes\ray_of_god_002.mesh" />
+  <static_mesh name="ray_of_god_003_sala2" filename="meshes\ray_of_god_003.mesh" />
+  <static_mesh name="ray_of_god_004_sala2" filename="meshes\ray_of_god_004.mesh" />
+  <static_mesh name="ray_of_god_005_sala2" filename="meshes\ray_of_god_005.mesh" />
+  <static_mesh name="ray_of_god_006_sala2" filename="meshes\ray_of_god_006.mesh" />
+  <static_mesh name="ray_of_god_007_sala2" filename="meshes\ray_of_god_007.mesh" />
+  <static_mesh name="ray_of_god_008_sala2" filename="meshes\ray_of_god_008.mesh" />
+  <static_mesh name="ray_of_god_009_sala2" filename="meshes\ray_of_god_009.mesh" />
+  <static_mesh name="ray_of_god_010_sala2" filename="meshes\ray_of_god_010.mesh" />
+  <static_mesh name="Estanteria_01_sala2" filename="meshes\Estanteria_01.mesh" />
+  <static_mesh name="amm_box_07_sala2" filename="meshes\amm_box_07.mesh" />
+  <static_mesh name="amm_box001_sala2" filename="meshes\amm_box001.mesh" />
+  <static_mesh name="amm_box002_sala2" filename="meshes\amm_box002.mesh" />
+  <static_mesh name="amm_box003_sala2" filename="meshes\amm_box003.mesh" />
+  <static_mesh name="amm_box004_sala2" filename="meshes\amm_box004.mesh" />
+  <static_mesh name="amm_box005_sala2" filename="meshes\amm_box005.mesh" />
+  <static_mesh name="amm_box006_sala2" filename="meshes\amm_box006.mesh" />
+  <static_mesh name="amm_box_008_sala2" filename="meshes\amm_box_008.mesh" />
+  <static_mesh name="amm_box_009_sala2" filename="meshes\amm_box_009.mesh" />
+  <static_mesh name="amm_box_010_sala2" filename="meshes\amm_box_010.mesh" />
+  <static_mesh name="amm_box_011_sala2" filename="meshes\amm_box_011.mesh" />
+  <static_mesh name="amm_box_012_sala2" filename="meshes\amm_box_012.mesh" />
+  <static_mesh name="amm_box_013_sala2" filename="meshes\amm_box_013.mesh" />
+  <static_mesh name="amm_box_014_sala2" filename="meshes\amm_box_014.mesh" />
+  <static_mesh name="amm_box_015_sala2" filename="meshes\amm_box_015.mesh" />
+  <static_mesh name="amm_box_016_sala2" filename="meshes\amm_box_016.mesh" />
+  <static_mesh name="Estanteria_03_sala2" filename="meshes\Estanteria_03.mesh" />
+  <static_mesh name="amm_box_017_sala2" filename="meshes\amm_box_017.mesh" />
+  <static_mesh name="amm_box_018_sala2" filename="meshes\amm_box_018.mesh" />
+  <static_mesh name="amm_box_019_sala2" filename="meshes\amm_box_019.mesh" />
+  <static_mesh name="amm_box_020_sala2" filename="meshes\amm_box_020.mesh" />
+  <static_mesh name="amm_box_021_sala2" filename="meshes\amm_box_021.mesh" />
+  <static_mesh name="amm_box_022_sala2" filename="meshes\amm_box_022.mesh" />
+  <static_mesh name="Estanteria_04_sala2" filename="meshes\Estanteria_04.mesh" />
+  <static_mesh name="amm_box_023_sala2" filename="meshes\amm_box_023.mesh" />
+  <static_mesh name="amm_box_024_sala2" filename="meshes\amm_box_024.mesh" />
+  <static_mesh name="amm_box_025_sala2" filename="meshes\amm_box_025.mesh" />
+  <static_mesh name="amm_box_026_sala2" filename="meshes\amm_box_026.mesh" />
+  <static_mesh name="amm_box_027_sala2" filename="meshes\amm_box_027.mesh" />
+  <static_mesh name="amm_box_028_sala2" filename="meshes\amm_box_028.mesh" />
+  <static_mesh name="amm_box_029_sala2" filename="meshes\amm_box_029.mesh" />
+  <static_mesh name="amm_box_030_sala2" filename="meshes\amm_box_030.mesh" />
+  <static_mesh name="amm_box_031_sala2" filename="meshes\amm_box_031.mesh" />
+  <static_mesh name="amm_box_032_sala2" filename="meshes\amm_box_032.mesh" />
+  <static_mesh name="amm_box_033_sala2" filename="meshes\amm_box_033.mesh" />
+  <static_mesh name="amm_box_034_sala2" filename="meshes\amm_box_034.mesh" />
+  <static_mesh name="amm_box_035_sala2" filename="meshes\amm_box_035.mesh" />
+  <static_mesh name="amm_box_036_sala2" filename="meshes\amm_box_036.mesh" />
+  <static_mesh name="amm_box_037_sala2" filename="meshes\amm_box_037.mesh" />
+  <static_mesh name="Estanteria_06_sala2" filename="meshes\Estanteria_06.mesh" />
+  <static_mesh name="amm_box_038_sala2" filename="meshes\amm_box_038.mesh" />
+  <static_mesh name="amm_box_039_sala2" filename="meshes\amm_box_039.mesh" />
+  <static_mesh name="amm_box_040_sala2" filename="meshes\amm_box_040.mesh" />
+  <static_mesh name="amm_box_041_sala2" filename="meshes\amm_box_041.mesh" />
+  <static_mesh name="amm_box_042_sala2" filename="meshes\amm_box_042.mesh" />
+  <static_mesh name="amm_box_043_sala2" filename="meshes\amm_box_043.mesh" />
+  <static_mesh name="amm_box_044_sala2" filename="meshes\amm_box_044.mesh" />
+  <static_mesh name="Estanteria_7_sala2" filename="meshes\Estanteria_7.mesh" />
+  <static_mesh name="amm_box_045_sala2" filename="meshes\amm_box_045.mesh" />
+  <static_mesh name="amm_box_046_sala2" filename="meshes\amm_box_046.mesh" />
+  <static_mesh name="amm_box_047_sala2" filename="meshes\amm_box_047.mesh" />
+  <static_mesh name="amm_box_048_sala2" filename="meshes\amm_box_048.mesh" />
+  <static_mesh name="amm_box_049_sala2" filename="meshes\amm_box_049.mesh" />
+  <static_mesh name="amm_box_050_sala2" filename="meshes\amm_box_050.mesh" />
+  <static_mesh name="amm_box_051_sala2" filename="meshes\amm_box_051.mesh" />
+  <static_mesh name="amm_box_052_sala2" filename="meshes\amm_box_052.mesh" />
+  <static_mesh name="Estanteria_8_sala2" filename="meshes\Estanteria_8.mesh" />
+  <static_mesh name="amm_box_053_sala2" filename="meshes\amm_box_053.mesh" />
+  <static_mesh name="amm_box_054_sala2" filename="meshes\amm_box_054.mesh" />
+  <static_mesh name="amm_box_055_sala2" filename="meshes\amm_box_055.mesh" />
+  <static_mesh name="amm_box_056_sala2" filename="meshes\amm_box_056.mesh" />
+  <static_mesh name="amm_box_057_sala2" filename="meshes\amm_box_057.mesh" />
+  <static_mesh name="amm_box_058_sala2" filename="meshes\amm_box_058.mesh" />
+  <static_mesh name="Estanteria_9_sala2" filename="meshes\Estanteria_9.mesh" />
+  <static_mesh name="amm_box_059_sala2" filename="meshes\amm_box_059.mesh" />
+  <static_mesh name="amm_box_060_sala2" filename="meshes\amm_box_060.mesh" />
+  <static_mesh name="amm_box_061_sala2" filename="meshes\amm_box_061.mesh" />
+  <static_mesh name="amm_box_062_sala2" filename="meshes\amm_box_062.mesh" />
+  <static_mesh name="amm_box_063_sala2" filename="meshes\amm_box_063.mesh" />
+  <static_mesh name="amm_box_064_sala2" filename="meshes\amm_box_064.mesh" />
+  <static_mesh name="amm_box_065_sala2" filename="meshes\amm_box_065.mesh" />
+  <static_mesh name="amm_box_066_sala2" filename="meshes\amm_box_066.mesh" />
+  <static_mesh name="amm_box_067_sala2" filename="meshes\amm_box_067.mesh" />
+  <static_mesh name="amm_box_068_sala2" filename="meshes\amm_box_068.mesh" />
+  <static_mesh name="amm_box_069_sala2" filename="meshes\amm_box_069.mesh" />
+  <static_mesh name="amm_box_070_sala2" filename="meshes\amm_box_070.mesh" />
+  <static_mesh name="amm_box_071_sala2" filename="meshes\amm_box_071.mesh" />
+  <static_mesh name="amm_box_072_sala2" filename="meshes\amm_box_072.mesh" />
+  <static_mesh name="Estaneria_12_sala2" filename="meshes\Estaneria_12.mesh" />
+  <static_mesh name="amm_box_073_sala2" filename="meshes\amm_box_073.mesh" />
+  <static_mesh name="amm_box_074_sala2" filename="meshes\amm_box_074.mesh" />
+  <static_mesh name="amm_box_075_sala2" filename="meshes\amm_box_075.mesh" />
+  <static_mesh name="amm_box_076_sala2" filename="meshes\amm_box_076.mesh" />
+  <static_mesh name="amm_box_077_sala2" filename="meshes\amm_box_077.mesh" />
+  <static_mesh name="amm_box_078_sala2" filename="meshes\amm_box_078.mesh" />
+  <static_mesh name="amm_box_079_sala2" filename="meshes\amm_box_079.mesh" />
+  <static_mesh name="amm_box_080_sala2" filename="meshes\amm_box_080.mesh" />
+  <static_mesh name="amm_box_081_sala2" filename="meshes\amm_box_081.mesh" />
+  <static_mesh name="amm_box_082_sala2" filename="meshes\amm_box_082.mesh" />
+  <static_mesh name="amm_box_083_sala2" filename="meshes\amm_box_083.mesh" />
+  <static_mesh name="amm_box_084_sala2" filename="meshes\amm_box_084.mesh" />
+  <static_mesh name="amm_box_085_sala2" filename="meshes\amm_box_085.mesh" />
+  <static_mesh name="amm_box_086_sala2" filename="meshes\amm_box_086.mesh" />
+  <static_mesh name="amm_box_087_sala2" filename="meshes\amm_box_087.mesh" />
+  <static_mesh name="amm_box_088_sala2" filename="meshes\amm_box_088.mesh" />
+  <static_mesh name="Estanteria_14_sala2" filename="meshes\Estanteria_14.mesh" />
+  <static_mesh name="Barrier_1_sala2" filename="meshes\Barrier_1.mesh" />
+  <static_mesh name="Barrier_3_sala2" filename="meshes\Barrier_3.mesh" />
+  <static_mesh name="Barrier_4_sala2" filename="meshes\Barrier_4.mesh" />
+  <static_mesh name="Barrier_2_sala2" filename="meshes\Barrier_2.mesh" />
   <static_mesh name="lights_white_upper_glow_sala2" filename="meshes\lights_white_upper_glow.mesh" />
   <static_mesh name="light_white_down_glow_sala2" filename="meshes\light_white_down_glow.mesh" />
+  <static_mesh name="Base_carga_sala2" filename="meshes\Base_carga.mesh" />
 </static_meshes>
