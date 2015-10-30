@@ -105,3 +105,28 @@ CParticleSystemCore* CParticleSystemManager::GetPSCore( const std::string & aCor
 {
   return mCores.GetResource( aCoreName )->Clone();
 }
+
+void CParticleSystemManager::AddInstance( CParticleInstance* aParticleInstance )
+{
+  if( aParticleInstance )
+  {
+    mInstances.AddResource( aParticleInstance->GetName(), aParticleInstance );
+  }
+}
+
+CParticleInstance* CParticleSystemManager::GetInstance( const std::string& aInstanceName, const std::string& aCoreName, const std::string& aRoomName )
+{
+  CParticleInstance* lInstance = mInstances.GetResource( aInstanceName );
+
+  if( !lInstance )
+  {
+    lInstance = new CParticleInstance( aInstanceName, aCoreName, aRoomName );
+    if( !lInstance->IsOk() || !mInstances.AddResource( aInstanceName, lInstance ) )
+    {
+      ASSERT( false, "The particle instance %s of room %s with a core %s could not be added", aInstanceName.c_str(), aRoomName.c_str(), aCoreName.c_str() );
+      CHECKED_DELETE( lInstance );
+    }
+  }
+
+  return lInstance;
+}
