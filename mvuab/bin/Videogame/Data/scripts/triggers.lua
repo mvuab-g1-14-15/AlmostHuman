@@ -366,7 +366,8 @@ function SetPropPasillo()
 	if not g_EnteredPasillo then
 		--PlaySound('Play_Tunel','Iris')
 		--cinematic_manager:Execute("cinematica_1")
-		
+		gui_manager:SetCurrentMap("Radar2")
+		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("pasillo")
 		g_Player:SetRoom("pasillo")
 		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
@@ -382,7 +383,8 @@ function SetPropSala3()
 	if not g_EnteredSala3 then
 		--PlaySound('Play_Tunel','Iris')
 		--cinematic_manager:Execute("cinematica_1")
-		
+		gui_manager:SetCurrentMap("Radar3")
+		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala3")
 		g_Player:SetRoom("sala3")
 		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
@@ -398,7 +400,8 @@ function SetPropSala4()
 	if not g_EnteredSala4 then
 		--PlaySound('Play_Tunel','Iris')
 		--cinematic_manager:Execute("cinematica_1")
-		
+		gui_manager:SetCurrentMap("Radar4")
+		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
 		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())

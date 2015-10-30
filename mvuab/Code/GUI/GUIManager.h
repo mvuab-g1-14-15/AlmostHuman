@@ -129,6 +129,11 @@ public:
   GET_SET_PTR( CConsoleGUI, Console )
   GET_SET_PTR( CImage, PressButton )
   GET_SET_PTR( CTextBox, TextBox )
+
+  void SetCurrentMap( CMap* aMap );
+  void SetCurrentMap( const std::string& aName);
+  CMap* GetCurrentMap();
+
   //-----------------------------------------------------------------------------------------------------------//
 
 private:
@@ -156,6 +161,7 @@ private:
   TransitionEffect m_sTransitionEffect;
   CImage* m_pPressButton;
   CDialogBox* m_CurrentDialogBox;
+  CMap* m_pCurrentMap;
 };
 
 #endif //INC_GUI_MANAGER_H

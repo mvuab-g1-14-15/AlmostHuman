@@ -66,6 +66,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
     , m_pConsole( 0 )
     , m_RenderPointer( false )
     , m_pPressButton( 0 )
+	, m_pCurrentMap( 0 )
 {
 }
 //----------------------------------------------------------------------------
@@ -988,6 +989,29 @@ void CGUIManager::Reload()
 //-------------------------------------------------------------------------
 
 
+void CGUIManager::SetCurrentMap( CMap* aMap )
+{
+	m_pCurrentMap = aMap;
+}
+
+void CGUIManager::SetCurrentMap( const std::string& aName)
+{
+	std::map<std::string, CGuiElement*>::iterator it;
+	it = m_ElementsMap.find(aName);	
+	if (it->second)
+	{
+		m_pCurrentMap->SetActive(false);
+		m_pCurrentMap->SetVisible(false);
+		m_pCurrentMap = dynamic_cast<CMap*>(it->second);
+		m_pCurrentMap->SetActive(true);
+		m_pCurrentMap->SetVisible(true);
+	}
+}
+  
+CMap* CGUIManager::GetCurrentMap()
+{
+	return m_pCurrentMap;
+}
 
 
 //void CGUIManager::RegisterFunctions (CScriptManager* scriptManager)

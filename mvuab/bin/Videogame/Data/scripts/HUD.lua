@@ -8,7 +8,7 @@ function CHUD:__init()
 	l_Energy = g_Player:GetBlaster():GetEnergy()
 	self.Energy:SetProgress(l_Energy)
 	self.Grenades = self.Window:GetElement("Grenades")
-	self.Map = self.Window:GetElement("Radar")
+	self.Map = gui_manager:GetCurrentMap()
 end
 
 function CHUD:Update()
@@ -43,6 +43,9 @@ function CHUD:UpdateYawEnemy(name)
 	end
 end
 
+function CHUD:ChangeCurrentMap()
+	self.Map = gui_manager:GetCurrentMap()
+end
 
 local doit=true
 

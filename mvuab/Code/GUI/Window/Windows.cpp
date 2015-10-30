@@ -8,6 +8,7 @@
 #include "EngineManagers.h"
 #include "xml/XMLTreeNode.h"
 #include "Utils\ObjectFactory.h"
+#include "GUIManager.h"
 
 //---Elementos que puede contener una Windows--
 #include "Widgets\Button.h"
@@ -267,6 +268,10 @@ bool CWindows::LoadXML( const std::string& xmlGuiFile, const Math::Vect2i& scree
             const std::string& TagName = Node.GetName();
 
             CGuiElement* lGuiElement = ManagerFactory.Create( TagName.c_str(), Node, screenResolution);
+
+			if(TagName == "Map" && Node.GetAttribute<bool>("current", false))
+				GUIInstance->SetCurrentMap(dynamic_cast<CMap*>(lGuiElement));
+
 
             if ( !lGuiElement )
             {

@@ -16,7 +16,7 @@ CMap::CMap( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
   , m_Width_Map( aNode.GetAttribute<float>( "width_map", 0.02f ) )
   , m_Height_Map( aNode.GetAttribute<float>( "height_map", 0.02f ) )
   , m_Mapa( aNode.GetAttribute<CTexture>( "texture_map" ) )
-  , m_Marco( aNode.GetAttribute<CTexture>( "texture_marco" ) )
+ // , m_Marco( aNode.GetAttribute<CTexture>( "texture_marco" ) )
   , m_Cone( aNode.GetAttribute<CTexture>( "Data/textures/GUI/Textures_Test/conotrans.png" ) ) // TODO Ruly, poner esto en el xml tambien
   , m_Player( 0 )
 {
@@ -80,30 +80,30 @@ void CMap::Render()
     CGuiElement::Render();
 
     //Nos aseguramos que la posición del player no salga del mapa
-    if ( m_posNPlayer.x <= ( m_Width_Map / 2 ) )
-      m_posNPlayer.x = m_Width_Map / 2;
+    if ( m_posNPlayer.x <= ( m_Width_Map / 4 ) )
+      m_posNPlayer.x = m_Width_Map / 4;
 
-    if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 2 ) ) )
-      m_posNPlayer.x = 1 - ( m_Width_Map / 2 );
+    if ( m_posNPlayer.x >= ( 1 - ( m_Width_Map / 4 ) ) )
+      m_posNPlayer.x = 1 - ( m_Width_Map / 4 );
 
-    if ( m_posNPlayer.y <= m_Height_Map / 2 )
-      m_posNPlayer.y = m_Height_Map / 2;
+    if ( m_posNPlayer.y <= m_Height_Map / 4 )
+      m_posNPlayer.y = m_Height_Map / 4;
 
-    if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 2 ) ) )
-      m_posNPlayer.y = 1 - ( m_Height_Map / 2 ) ;
+    if ( m_posNPlayer.y >= ( 1 - ( m_Height_Map / 4 ) ) )
+      m_posNPlayer.y = 1 - ( m_Height_Map / 4 ) ;
 
-    float l_PosX0 = m_posNPlayer.x - ( m_Width_Map / 2 );
-    float l_PosY0 = m_posNPlayer.y - ( m_Height_Map / 2 );
-    float l_PosX1 = m_posNPlayer.x + ( m_Width_Map / 2 );
-    float l_PosY1 = m_posNPlayer.y + ( m_Height_Map / 2 );
+    float l_PosX0 = m_posNPlayer.x - ( m_Width_Map / 4 );
+    float l_PosY0 = m_posNPlayer.y - ( m_Height_Map / 4 );
+    float l_PosX1 = m_posNPlayer.x + ( m_Width_Map / 4 );
+    float l_PosY1 = m_posNPlayer.y + ( m_Height_Map / 4 );
 
     //RENDER MAPA
     GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Mapa, l_PosX0,
                                   l_PosY0, l_PosX1, l_PosY1 );
 
     //RENDER MARCO
-    GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Marco, 0, 0, 1,
-                                  1 );
+ /*   GraphicsInstance->DrawQuad2D( CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight, CGraphicsManager::UPPER_LEFT, m_Marco, 0, 0, 1,
+                                  1 );*/
 
     //RENDER ITEM
     for ( size_t i = 0 ; i < m_vItems.size() ; ++i )
