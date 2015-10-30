@@ -265,7 +265,9 @@ function StayTextElevatorDown(text, other_shape)
 		g_bPressedRoom3X = false
 		g_bPressRoom3X = false
 		cinematic_manager:Execute("elevatorDown")
-		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)			
+		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
+		enemy_manager:ActivateEnemiesSala3()
+		g_Player:SetCheckpoint("sala3", Vect3f( -7, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 	end
 end
 
@@ -389,6 +391,8 @@ function SetPropSala3()
 		g_Player:SetRoom("sala3")
 		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
 		
+		sound_manager:PlayEvent("Play_Sala3A", "Logan")
+		
 		scene:DesactivateRoom("pasillo")
 		
 		g_EnteredSala3 = true
@@ -426,22 +430,35 @@ end
 
 function UpToSala4(text, other_shape)
 	cinematic_manager:Execute("elevatorUp")
+	scene:ActivateRoom("sala4")
 end
 
 function ActivateLightsSala3()
 	-- activate the lights
-	engine:TraceOnce("Executing trigger enemies sala3 activation")
-	enemy_manager:ActivateEnemiesSala3()
 end
 
 function UpdateDLC(text_to_show)
+	g_Player:SetEnergy(100.0)
+	sound_manager:PlayEvent("Play_Sala2", "Logan")
 end
 
 function ActiveRoom(room)
 	scene:ActivateRoom(room)
+	
+	if room == "sala2" then
+		enemy_manager:CreateEnemiesSala2()
+	end
+	if room == "pasillo" then
+		enemy_manager:CreateEnemiesPasillo()
+	end
+	if room == "sala3" then
+		enemy_manager:CreateEnemiesSala3()
+		enemy_manager:CreateDesactivateEnemiesSala3()
+	end
 end
 
 function take_C4()
+	sound_manager:PlayEvent("Play_Pasillo", "Logan")
 end
 
 function ActivateBoss()

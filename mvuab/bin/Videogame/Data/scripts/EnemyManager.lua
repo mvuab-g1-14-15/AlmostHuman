@@ -35,10 +35,10 @@ function CEnemyManager:__init()
 	--self.AStar.sala2:SetRender()
 	--self.AStar.sala3:SetRender()
 	
-	self:CreateEnemiesSala2()
-	self:CreateEnemiesPasillo()
-	self:CreateEnemiesSala3()
-	self:CreateDesactivateEnemiesSala3()
+	--self:CreateEnemiesSala2()
+	--self:CreateEnemiesPasillo()
+	--self:CreateEnemiesSala3()
+	--self:CreateDesactivateEnemiesSala3()
 end
 
 function CEnemyManager:CreateEnemiesSala2()
@@ -364,6 +364,7 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
+			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 		end
 	end
 	

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
 
 #include "Utils\Name.h"
 
@@ -16,10 +17,47 @@ class CalHardwareModel;
 class CGraphicsManager;
 class CalCoreModel;
 class CTexture;
+class CXMLTreeNode;
 
 class CAnimatedCoreModel : public CName
 {
 public:
+    struct SAnimation {
+        int iId;
+        float fWeight;
+        bool bFromParameter, bFromComplementaryParameter;
+        float fFadeOnChange;
+
+        SAnimation():iId(0),fWeight(0),bFromParameter(false),bFromComplementaryParameter(false),fFadeOnChange(0) {};
+        bool operator <(const SAnimation& _other) const { return iId < _other.iId; };
+    };
+
+    struct SCycle: SAnimation {
+    };
+
+    struct SAction: SAnimation {
+        bool bBlock, bStop;
+        float fFadeIn, fFadeOut;
+
+        SAction():bBlock(false),bStop(false),fFadeIn(.3f),fFadeOut(.3f){};
+    };
+
+    struct SAnimationState {
+        float fDefaultFadeIn, fDefaultFadeOut;
+        std::set<SCycle> Cycles;
+        std::set<SAction> OnEnter;
+        std::set<SAction> OnExit;
+
+        SAnimationState():fDefaultFadeIn(0),fDefaultFadeOut(0){};
+    };
+
+    struct SAnimationChange {
+        float fFade;
+        std::set<SAction> Actions;
+
+        SAnimationChange():fFade(0){}
+    };
+
   CAnimatedCoreModel( const std::string& Name );
   ~CAnimatedCoreModel();
 
@@ -38,6 +76,8 @@ public:
   size_t  GetNumTextures();
 
   bool Reload();
+
+  void ReloadAnimationStates();
 
 protected:
   typedef std::vector<CTexture*> TTextureVector;
@@ -64,7 +104,18 @@ private:
   bool LoadAnimation( const std::string& Name, const std::string& Filename );
   void LoadTextures();
 
+  std::string m_szDefaultAnimationState;
+  std::map<std::string, SAnimationState>               m_AnimationStates;
+  std::map<std::string, std::map<std::string, SAnimationChange>> m_AnimationChanges;
 
+  friend class CAnimatedInstanceModel;
+
+  void LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates);
+  void LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges);
+  bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_);
+  bool LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_);
+  bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_);
+  bool LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_);
 };
 
 #endif

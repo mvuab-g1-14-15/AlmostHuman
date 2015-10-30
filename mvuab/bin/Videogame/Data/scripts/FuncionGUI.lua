@@ -3,28 +3,28 @@ function shoot()
 end
 
 function CargarJuego()
-engine:SetPlay(true)
-sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-gui_manager:ActiveWindows("HUD.xml")
-gui_manager:SetRenderPointer(false)
---cinematic_manager:Execute("inicial")
---cinematic_manager:StopCinematic("cinematica_inicial")
-sound_manager:PlayParticlesSFX()
---gui_manager:ShowDialogTex("Test")
+	engine:SetPlay(true)
+	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+	gui_manager:ActiveWindows("HUD.xml")
+	gui_manager:SetRenderPointer(false)
+	--cinematic_manager:Execute("inicial")
+	sound_manager:PlayEvent("Play_Ayer_Tuve_Una", "Logan")
+	cinematic_manager:StopCinematic("cinematica_inicial")
+	sound_manager:PlayParticlesSFX()
+	--gui_manager:ShowDialogTex("Test")
 end
 
 function FunctionGameOver()
-gui_manager:ActiveWindows("GameOver.xml")
-gui_manager:SetRenderPointer(true)
-
+	gui_manager:ActiveWindows("GameOver.xml")
+	gui_manager:SetRenderPointer(true)
 end
 
 function PuntoControl()
-engine:SetPlay(true)
-sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
-gui_manager:ActiveWindows("HUD.xml")
-gui_manager:SetRenderPointer(false)
-sound_manager:PlayParticlesSFX()
+	engine:SetPlay(true)
+	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
+	gui_manager:ActiveWindows("HUD.xml")
+	gui_manager:SetRenderPointer(false)
+	sound_manager:PlayParticlesSFX()
 end
 
 function IrASetup()

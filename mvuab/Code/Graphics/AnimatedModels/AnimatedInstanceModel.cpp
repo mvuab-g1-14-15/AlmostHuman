@@ -27,6 +27,8 @@
 #include <cal3d\corebone.h>
 #include "Bone\PhysxBone.h"
 
+#include <boost\foreach.hpp>
+
 #define MAXBONES 29
 
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
@@ -279,6 +281,25 @@ void CAnimatedInstanceModel::Initialize()
   }
 
   CountDownTimerInstance->AddTimer( GetName() + "LightProbeTimer", 1.0f);
+
+  m_szAnimationState = m_AnimatedCoreModel->m_szDefaultAnimationState;
+  if(m_szAnimationState != "")
+  {
+      std::map<std::string, SAnimationState>::iterator l_it = m_AnimatedCoreModel->m_AnimationStates.find(m_szAnimationState);
+      if(l_it != m_AnimatedCoreModel->m_AnimationStates.end())
+      {
+          BOOST_FOREACH(const SCycle& cycle, l_it->second.Cycles)
+          {
+              float l_fWeight = (cycle.bFromParameter)? m_fAnimationParameter : ((cycle.bFromComplementaryParameter)? 1 - m_fAnimationParameter : 1);
+              l_fWeight *= cycle.fWeight;
+              m_CalModel->getMixer()->blendCycle(cycle.iId,l_fWeight,0.f);
+          }
+
+      } else {
+          LOG_WARNING_APPLICATION("CAnimatedInstanceModel::Initialize Invalid default animation state %s", m_szAnimationState.c_str());
+          m_szAnimationState = "";
+      }
+  }
 }
 
 void CAnimatedInstanceModel::Destroy()
@@ -528,4 +549,134 @@ Math::Vect3f CAnimatedInstanceModel::GetBonePosition( const std::string& aBoneNa
   }
 
   return lBonePosition;
+}
+
+float CAnimatedInstanceModel::ExecuteChange(const SAnimationChange& _AnimationChange)
+{
+    BOOST_FOREACH(const SAction& l_Action, _AnimationChange.Actions)
+    {
+        ExecuteAction(l_Action);
+    }
+
+    return _AnimationChange.fFade;
+}
+
+void  CAnimatedInstanceModel::ExecuteAction(const SAction& _Action)
+{
+    CalMixer *l_pMixer = m_CalModel->getMixer();
+    if(_Action.bStop)
+    {
+        l_pMixer->removeAction(_Action.iId);
+    }
+    else
+    {
+        float l_fWeight;
+        if(_Action.bFromParameter)
+        {
+            l_fWeight = m_fAnimationParameter * _Action.fWeight;
+        } else if(_Action.bFromComplementaryParameter)
+        {
+            l_fWeight = (1.f - m_fAnimationParameter) * _Action.fWeight;
+        } else
+        {
+            l_fWeight = _Action.fWeight;
+        }
+
+        float l_fBlendIn  = (_Action.fFadeIn  < 0)? 0 : _Action.fFadeIn;
+        float l_fBlendOut = (_Action.fFadeOut < 0)? 0 : _Action.fFadeOut;
+
+        l_pMixer->executeAction(_Action.iId, l_fBlendIn, l_fBlendOut, l_fWeight, _Action.bBlock);
+    }
+}
+
+void  CAnimatedInstanceModel::BlendCycle(const SCycle& _Cycle, float _fBlendTime)
+{
+    float l_fWeight;
+    if(_Cycle.bFromParameter)
+    {
+        l_fWeight = m_fAnimationParameter * _Cycle.fWeight;
+    } else if(_Cycle.bFromComplementaryParameter)
+    {
+        l_fWeight = (1.f - m_fAnimationParameter) * _Cycle.fWeight;
+    } else
+    {
+        l_fWeight = _Cycle.fWeight;
+    }
+
+    _fBlendTime = (_fBlendTime < 0)? 0 : _fBlendTime;
+
+    m_CalModel->getMixer()->blendCycle(_Cycle.iId, l_fWeight, _fBlendTime);
+}
+
+void  CAnimatedInstanceModel::ClearCycle(const SCycle& _Cycle, float _fBlendTime)
+{
+    m_CalModel->getMixer()->clearCycle(_Cycle.iId, _fBlendTime);
+}
+
+void CAnimatedInstanceModel::SetAnimationState(const std::string& _szAnimationState)
+{
+    if(_szAnimationState == m_szAnimationState)
+    {
+        return;
+    }
+
+    std::map<std::string,SAnimationState>::const_iterator l_itNextAnimationState = m_AnimatedCoreModel->m_AnimationStates.find(_szAnimationState);
+
+    if(l_itNextAnimationState == m_AnimatedCoreModel->m_AnimationStates.end())
+    {
+        LOG_WARNING_APPLICATION("CAnimatedInstanceModel::SetAnimationState intentant canviar a un estat inexistent \"%s\"", _szAnimationState.c_str());
+        return;
+    }
+
+    const SAnimationState& l_NextAnimationState = l_itNextAnimationState->second;
+
+    float l_fFade = l_NextAnimationState.fDefaultFadeIn;
+
+    const set<SCycle>& l_CyclesToActivate = l_NextAnimationState.Cycles;
+
+    if(m_szAnimationState != "")
+    {
+        SAnimationState &l_PrevAnimationState = m_AnimatedCoreModel->m_AnimationStates.find(m_szAnimationState)->second;
+
+        BOOST_FOREACH(const SAction& l_Action, l_PrevAnimationState.OnExit)
+        {
+            ExecuteAction(l_Action);
+        }
+
+        const std::map<std::string, SAnimationChange>& l_ChangesFromPrev = m_AnimatedCoreModel->m_AnimationChanges[m_szAnimationState];
+        std::map<std::string, SAnimationChange>::const_iterator l_it = l_ChangesFromPrev.find(_szAnimationState);
+
+        if(l_it != l_ChangesFromPrev.end())
+        {
+            l_fFade = ExecuteChange(l_it->second);
+        }
+        else
+        {
+            l_fFade += l_PrevAnimationState.fDefaultFadeOut;
+            l_fFade *= .5f;
+        }
+
+        const set<SCycle>& l_PrevCycles = l_PrevAnimationState.Cycles;
+
+        BOOST_FOREACH(const SCycle& l_Cycle, l_PrevAnimationState.Cycles)
+        {
+            if(l_CyclesToActivate.find(l_Cycle) == l_CyclesToActivate.end())
+            {
+                ClearCycle(l_Cycle, l_fFade);
+            }
+        }
+    }
+
+
+    BOOST_FOREACH(const SAction& l_Action, l_NextAnimationState.OnEnter)
+    {
+        ExecuteAction(l_Action);
+    }
+
+    BOOST_FOREACH(const SCycle& l_Cycle, l_CyclesToActivate)
+    {
+        BlendCycle(l_Cycle, l_fFade);
+    }
+
+    m_szAnimationState = _szAnimationState;
 }

@@ -348,7 +348,7 @@ function CPlayerController:UpdateInput()
 			if action_manager:DoAction("Crouch") then
 				self:MakeCrouch()
 			end
-			if action_manager:DoAction("Jump") then
+			if action_manager:DoAction("Jump") and not self.Crouch then
 				self.Jump = true
 			end
 		end

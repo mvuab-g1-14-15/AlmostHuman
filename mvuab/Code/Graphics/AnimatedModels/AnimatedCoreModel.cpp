@@ -212,6 +212,18 @@ bool CAnimatedCoreModel::Load()
         }
     }
 
+    CXMLTreeNode l_xmlAnimationStates = newFile["animation_states"];
+    if(l_xmlAnimationStates.Exists())
+    {
+        LoadAnimationStates(l_xmlAnimationStates);
+    }
+
+    CXMLTreeNode l_xmlAnimationChanges = newFile["animation_changes"];
+    if(l_xmlAnimationChanges.Exists())
+    {
+        LoadAnimationChanges(l_xmlAnimationChanges);
+    }
+
     return true;
 }
 
@@ -267,4 +279,215 @@ void CAnimatedCoreModel::ActivateTextures()
     {
         (*itb)->Activate(i);
     }
+}
+
+void CAnimatedCoreModel::ReloadAnimationStates()
+{
+    CXMLTreeNode l_treeActor;
+    if(l_treeActor.LoadFile(m_FileName.c_str()))
+    {
+        LOG_INFO_APPLICATION("CAnimatedCoreModel::ReloadAnimaionStates Loading \"%s\"", m_FileName.c_str());
+        CXMLTreeNode l_xmlAnimationStates = l_treeActor["animation_states"];
+        if(l_xmlAnimationStates.Exists())
+        {
+            LoadAnimationStates(l_xmlAnimationStates);
+        }
+
+        CXMLTreeNode l_xmlAnimationChanges = l_treeActor["animation_changes"];
+        if(l_xmlAnimationChanges.Exists())
+        {
+            LoadAnimationChanges(l_xmlAnimationChanges);
+        }
+    } else 
+    {
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::ReloadAnimaionStates No s'ha trobat l'arxiu \"%s\"", m_FileName.c_str());
+    }
+}
+
+void CAnimatedCoreModel::LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates)
+{
+    m_szDefaultAnimationState = _xmlAnimationStates.GetAttribute<std::string>("default", "");
+    int l_iNumChild = _xmlAnimationStates.GetNumChildren();
+    for(int i = 0; i < l_iNumChild; ++i)
+    {
+        CXMLTreeNode l_xmlAnimationState = _xmlAnimationStates(i);
+        if(strcmp(l_xmlAnimationState.GetName(), "animation_state") == 0)
+        {
+            std::string l_szName = l_xmlAnimationState.GetAttribute<std::string>("name", "no_name");
+            SAnimationState l_AnimationState;
+
+            if(LoadAnimationState(l_xmlAnimationState, l_AnimationState))
+            {
+                m_AnimationStates[l_szName] = l_AnimationState;
+            }
+
+        }
+    }
+}
+
+void CAnimatedCoreModel::LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges)
+{
+    int l_iNumChild = _xmlAnimationChanges.GetNumChildren();
+    for(int i = 0; i < l_iNumChild; ++i)
+    {
+        CXMLTreeNode l_xmlAnimationChange = _xmlAnimationChanges(i);
+        if(strcmp(l_xmlAnimationChange.GetName(), "animation_change") == 0)
+        {
+            std::string l_szFrom = l_xmlAnimationChange.GetAttribute<std::string>("from", "");
+            std::string l_szTo = l_xmlAnimationChange.GetAttribute<std::string>("to", "");
+            SAnimationChange l_AnimationChange;
+
+            if(LoadAnimationChange(l_xmlAnimationChange, l_AnimationChange))
+            {
+                m_AnimationChanges[l_szFrom][l_szTo] = l_AnimationChange;
+            }
+
+        }
+    }
+}
+
+bool CAnimatedCoreModel::LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_)
+{
+    assert(strcmp(_xmlAnimation.GetName(), "cycle") == 0 || strcmp(_xmlAnimation.GetName(), "action") == 0);
+
+    std::string l_szCycleName = _xmlAnimation.GetAttribute<std::string>("name", "no_name");
+    Animation_.iId = m_CalCoreModel->getCoreAnimationId(l_szCycleName);
+
+    if(Animation_.iId < 0)
+    {
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" no existeix", l_szCycleName.c_str());
+        return false;
+    }
+
+    Animation_.fWeight = _xmlAnimation.GetAttribute<float>("weight", 1.f);
+
+    Animation_.bFromParameter = _xmlAnimation.GetAttribute<bool>("weight_from_parameter", false);
+    Animation_.bFromComplementaryParameter = _xmlAnimation.GetAttribute<bool>("weight_from_complementary_parameter", false);
+
+
+    if(Animation_.bFromParameter && Animation_.bFromComplementaryParameter)
+    {
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", l_szCycleName.c_str());
+        return false;
+    }
+    else if(Animation_.bFromParameter || Animation_.bFromComplementaryParameter)
+    {
+        Animation_.fFadeOnChange = _xmlAnimation.GetAttribute<float>("fade_on_change", .15f);
+    }
+
+    return true;
+}
+
+bool CAnimatedCoreModel::LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_)
+{
+    assert(strcmp(_xmlAction.GetName(), "action") == 0);
+
+    if(!LoadAnimationFromState(_xmlAction, Action_))
+        return false;
+
+    Action_.bBlock   = _xmlAction.GetAttribute<bool>("block", false);
+    Action_.bStop    = _xmlAction.GetAttribute<bool>("stop", false);
+    Action_.fFadeIn  = _xmlAction.GetAttribute<float>("fade_in", .3f);
+    Action_.fFadeOut = _xmlAction.GetAttribute<float>("fade_out", .3f);
+
+    if(Action_.bBlock && Action_.bStop)
+    {
+        LOG_WARNING_APPLICATION("CAnimatedCoreModel::LoadActionFromState action can not block and stop");
+    }
+    return true;
+}
+
+bool CAnimatedCoreModel::LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_)
+{
+    assert(strcmp(_xmlAnimationState.GetName(), "animation_state") == 0);
+
+    AnimationState_.fDefaultFadeIn  = _xmlAnimationState.GetAttribute<float>("default_fade_in", 0.3f);
+    AnimationState_.fDefaultFadeOut = _xmlAnimationState.GetAttribute<float>("default_fade_out", 0.3f);
+
+
+    int l_iNumChild = _xmlAnimationState.GetNumChildren();
+    for(int i = 0; i < l_iNumChild; ++i)
+    {
+        CXMLTreeNode l_xmlCycle = _xmlAnimationState(i);
+        if(strcmp(l_xmlCycle.GetName(), "cycle") == 0)
+        {
+            CAnimatedCoreModel::SCycle l_Cycle;
+
+            if(LoadAnimationFromState(l_xmlCycle, l_Cycle))
+            {
+                AnimationState_.Cycles.insert(l_Cycle);
+            }
+
+        }
+    }
+
+    {
+        CXMLTreeNode l_xmlOnEnter = _xmlAnimationState["on_enter"];
+
+        if(l_xmlOnEnter.Exists())
+        {
+            int l_iNumChild = l_xmlOnEnter.GetNumChildren();
+            for(int i = 0; i < l_iNumChild; ++i)
+            {
+                CXMLTreeNode l_xmlAction = l_xmlOnEnter(i);
+                if(strcmp(l_xmlAction.GetName(), "action") == 0)
+                {
+                    CAnimatedCoreModel::SAction l_Action;
+
+                    if(LoadActionFromState(l_xmlAction, l_Action))
+                    {
+                        AnimationState_.OnEnter.insert(l_Action);
+                    }
+
+                }
+            }
+        }
+    }
+    {
+        CXMLTreeNode l_xmlOnExit = _xmlAnimationState["on_exit"];
+
+        if(l_xmlOnExit.Exists())
+        {
+            int l_iNumChild = l_xmlOnExit.GetNumChildren();
+            for(int i = 0; i < l_iNumChild; ++i)
+            {
+                CXMLTreeNode l_xmlAction = l_xmlOnExit(i);
+                if(strcmp(l_xmlAction.GetName(), "action") == 0)
+                {
+                    CAnimatedCoreModel::SAction l_Action;
+
+                    if(LoadActionFromState(l_xmlAction, l_Action))
+                    {
+                        AnimationState_.OnExit.insert(l_Action);
+                    }
+
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+bool CAnimatedCoreModel::LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_)
+{
+    assert(strcmp(_xmlAnimationChange.GetName(), "animation_change") == 0);
+
+    AnimationChange_.fFade  = _xmlAnimationChange.GetAttribute<float>("fade", 0.3f);
+
+    int l_iNumChild = _xmlAnimationChange.GetNumChildren();
+    for(int i = 0; i < l_iNumChild; ++i)
+    {
+        CXMLTreeNode l_xmlAction = _xmlAnimationChange(i);
+        if(strcmp(l_xmlAction.GetName(), "action") == 0)
+        {
+            CAnimatedCoreModel::SAction l_Action;
+
+            if(LoadActionFromState(l_xmlAction, l_Action))
+            {
+                AnimationChange_.Actions.insert(l_Action);
+            }
+        }
+    }
+    return true;
 }
