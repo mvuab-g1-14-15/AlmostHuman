@@ -415,11 +415,7 @@ bool CEffect::SetWorldViewProjectionMatrix( const Math::Mat44f& Matrix )
 
 bool CEffect::SetCameraPosition( const Math::Vect3f &CameraPosition )
 {
-    float32 l_Camera[3];
-    l_Camera[0] = CameraPosition.x;
-    l_Camera[1] = CameraPosition.y;
-    l_Camera[2] = CameraPosition.z;
-    return ( m_Effect->SetFloatArray( m_CameraPosition, l_Camera, 3 ) == S_OK );
+    return ( m_Effect->SetFloatArray( m_CameraPosition, &CameraPosition.x, 3 ) == S_OK );
 }
 
 bool CEffect::SetViewMatrix( const Math::Mat44f& Matrix )

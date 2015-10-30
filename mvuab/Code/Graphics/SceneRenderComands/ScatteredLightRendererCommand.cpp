@@ -81,6 +81,14 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
+
+    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+    CRenderableObjectTechnique *l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    CEffectTechnique *l_EffectTech =  l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
     m_RenderTarget1.SetAsRenderTarget(0);
 
     GM.DisableZTest(); GM.DisableZWrite();
@@ -96,10 +104,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     RECT l_Rect1 = { 0, 0, 640, 360 };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
-    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
-    CRenderableObjectTechnique* l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
-    CEffectTechnique* l_EffectTech =  l_ROT->GetEffectTechnique();
+    l_EffectTech =  l_ROT->GetEffectTechnique();
     l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
 
     m_RenderTarget2.SetAsRenderTarget(0);
