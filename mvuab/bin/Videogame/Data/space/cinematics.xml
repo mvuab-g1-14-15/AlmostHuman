@@ -1,4 +1,4 @@
 <cinematics>
-	<camera_cinematic name="camera_cinematica_final" resource_id_file="data/space/cinematics/camera_cinematica_final.xml"/>
-	<cinematic name="FinalGame" resource_id_file="data/space/cinematics/cinematic_final.xml"/>
+<!-- 	<camera_cinematic name="camera_cinematica_final" resource_id_file="data/space/cinematics/camera_cinematica_final.xml"/>
+	<cinematic name="FinalGame" resource_id_file="data/space/cinematics/cinematic_final.xml"/> -->
 </cinematics>
