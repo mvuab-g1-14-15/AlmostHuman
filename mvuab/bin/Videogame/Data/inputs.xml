@@ -124,6 +124,10 @@
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F11"/>
     </action>
 	
+	<action name="ReloadSceneRendererCmd">
+   	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F12"/>
+    </action>
+	
 	<action name="ReloadParticles">
    	 <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP"  Code="KEY_F10"/>
     </action>
