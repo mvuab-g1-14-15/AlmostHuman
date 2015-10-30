@@ -1,254 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <MeshInstance name="Box08_sala4" core="Box08_sala4" pos="-51.9602 36.3657 64.5513" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Box07_sala4" core="Box07_sala4" pos="-51.9602 34.6552 64.5513" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line05_sala4" core="Line05_sala4" pos="-51.9714 35.5021 63.6386" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Text01_sala4" core="Text01_sala4" pos="-52.0101 35.5825 63.6429" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line07_sala4" core="Line07_sala4" pos="-52.0164 34.4635 62.8313" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Box107_sala4" core="Box107_sala4" pos="-51.9602 36.3657 62.7121" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Box108_sala4" core="Box108_sala4" pos="-51.9602 34.6552 62.7121" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line01_sala4" core="Line01_sala4" pos="-51.7891 35.4583 63.3067" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line02_sala4" core="Line02_sala4" pos="-51.7891 35.4583 63.9704" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Cylinder243_sala4" core="Cylinder243_sala4" pos="-51.9789 35.5198 63.6442" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Box47_sala4" core="Box47_sala4" pos="-51.9489 35.5579 62.0548" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box48_sala4" core="Box48_sala4" pos="-51.6795 36.3881 62.321" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box60_sala4" core="Box60_sala4" pos="-51.9417 36.3856 62.0955" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box61_sala4" core="Box61_sala4" pos="-51.6795 36.3881 62.3023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box62_sala4" core="Box62_sala4" pos="-51.6795 36.3881 62.2648" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box63_sala4" core="Box63_sala4" pos="-51.6795 36.3881 62.2835" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box64_sala4" core="Box64_sala4" pos="-51.6795 36.3881 62.2813" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box65_sala4" core="Box65_sala4" pos="-51.6795 36.3881 62.2439" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box66_sala4" core="Box66_sala4" pos="-51.6795 36.3881 62.2626" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box67_sala4" core="Box67_sala4" pos="-51.6795 36.3881 62.3" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box68_sala4" core="Box68_sala4" pos="-51.6795 36.3881 62.2048" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box69_sala4" core="Box69_sala4" pos="-51.6795 36.3881 62.1673" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box70_sala4" core="Box70_sala4" pos="-51.6795 36.3881 62.186" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box71_sala4" core="Box71_sala4" pos="-51.6795 36.3881 62.1284" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box72_sala4" core="Box72_sala4" pos="-51.6795 36.3881 62.0909" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box73_sala4" core="Box73_sala4" pos="-51.6795 36.3881 62.1096" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box74_sala4" core="Box74_sala4" pos="-51.6795 36.3881 62.1471" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box75_sala4" core="Box75_sala4" pos="-51.6795 36.3881 62.2235" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box76_sala4" core="Box76_sala4" pos="-51.6795 36.3881 61.9013" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box77_sala4" core="Box77_sala4" pos="-51.6795 36.3881 62.0543" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box78_sala4" core="Box78_sala4" pos="-51.6795 36.3881 62.0168" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box79_sala4" core="Box79_sala4" pos="-51.6795 36.3881 62.0355" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box80_sala4" core="Box80_sala4" pos="-51.6795 36.3881 61.9778" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box81_sala4" core="Box81_sala4" pos="-51.6795 36.3881 61.9404" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box82_sala4" core="Box82_sala4" pos="-51.6795 36.3881 61.9591" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box83_sala4" core="Box83_sala4" pos="-51.6795 36.3881 61.9965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box84_sala4" core="Box84_sala4" pos="-51.6795 36.3881 62.073" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box85_sala4" core="Box85_sala4" pos="-51.6795 36.3881 61.8638" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box86_sala4" core="Box86_sala4" pos="-51.6795 36.3881 61.8825" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box87_sala4" core="Box87_sala4" pos="-51.6795 36.3881 61.8249" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box88_sala4" core="Box88_sala4" pos="-51.6795 36.3881 61.7874" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box89_sala4" core="Box89_sala4" pos="-51.6795 36.3881 61.8061" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box90_sala4" core="Box90_sala4" pos="-51.6795 36.3881 61.8436" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box91_sala4" core="Box91_sala4" pos="-51.6795 36.3881 61.92" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box49_sala4" core="Box49_sala4" pos="-51.9698 35.9423 62.0939" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box50_sala4" core="Box50_sala4" pos="-51.9699 35.5156 62.3212" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box51_sala4" core="Box51_sala4" pos="-51.9607 34.5578 62.3458" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box95_sala4" core="Box95_sala4" pos="-51.9607 34.5578 61.8776" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box52_sala4" core="Box52_sala4" pos="-51.9702 34.9415 62.0965" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line20_sala4" core="Line20_sala4" pos="-52.0503 34.8946 62.2224" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line21_sala4" core="Line21_sala4" pos="-52.0503 34.8946 61.7514" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box53_sala4" core="Box53_sala4" pos="-51.9985 35.0075 62.0983" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box03_sala4" core="Box03_sala4" pos="-52.0171 35.5135 62.3231" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box96_sala4" core="Box96_sala4" pos="-52.0171 35.5135 61.8828" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box97_sala4" core="Box97_sala4" pos="-51.9699 35.5156 61.8808" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box09_sala4" core="Box09_sala4" pos="-52.0522 34.6226 62.0991" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box54_sala4" core="Box54_sala4" pos="-51.999 36.0174 62.261" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box98_sala4" core="Box98_sala4" pos="-52.0152 36.0974 62.333" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box100_sala4" core="Box100_sala4" pos="-52.0152 35.9363 62.1832" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box101_sala4" core="Box101_sala4" pos="-52.0152 36.0974 62.1851" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box102_sala4" core="Box102_sala4" pos="-51.999 36.0174 61.9078" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box104_sala4" core="Box104_sala4" pos="-52.0152 35.9363 61.8279" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line03_sala4" core="Line03_sala4" pos="-51.7496 35.5122 63.6379" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="155x158_sala4" core="155x158_sala4" pos="-50.6114 36.6335 63.6369" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x159_sala4" core="155x159_sala4" pos="-50.6225 34.3933 63.6369" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x173_sala4" core="155x173_sala4" pos="-49.5208 35.14 63.6424" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line04_sala4" core="Line04_sala4" pos="-51.0149 35.4762 62.4501" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Cylinder242_sala4" core="Cylinder242_sala4" pos="-51.6054 34.4161 64.7012" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line25_sala4" core="Line25_sala4" pos="-50.2256 35.4762 64.8329" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x157_sala4" core="155x157_sala4" pos="-51.7408 35.5209 63.5898" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x179_sala4" core="155x179_sala4" pos="-49.5208 24.3677 63.6424" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line06_sala4" core="Line06_sala4" pos="-49.49 34.087 62.506" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box02_sala4" core="Box02_sala4" pos="-51.8006 37.7516 63.6452" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box04_sala4" core="Box04_sala4" pos="-51.8978 36.6409 62.5946" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box109_sala4" core="Box109_sala4" pos="-51.8978 36.6409 64.7019" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line26_sala4" core="Line26_sala4" pos="-49.49 34.087 64.7723" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line27_sala4" core="Line27_sala4" pos="-51.7478 34.0816 64.7612" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line28_sala4" core="Line28_sala4" pos="-51.7478 34.0816 62.4949" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box05_sala4" core="Box05_sala4" pos="-50.6151 36.5934 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box110_sala4" core="Box110_sala4" pos="-50.6151 38.745 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box114_sala4" core="Box114_sala4" pos="-50.6151 40.8962 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box115_sala4" core="Box115_sala4" pos="-50.6151 34.1128 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box117_sala4" core="Box117_sala4" pos="-50.6151 31.9452 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box119_sala4" core="Box119_sala4" pos="-50.6151 29.783 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box120_sala4" core="Box120_sala4" pos="-50.6151 27.6319 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line08_sala4" core="Line08_sala4" pos="-50.6461 33.1413 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line29_sala4" core="Line29_sala4" pos="-50.6461 33.1413 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line30_sala4" core="Line30_sala4" pos="-50.6461 30.9885 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line31_sala4" core="Line31_sala4" pos="-50.6461 30.9885 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line32_sala4" core="Line32_sala4" pos="-50.6461 28.8372 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line33_sala4" core="Line33_sala4" pos="-50.6461 28.8372 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line34_sala4" core="Line34_sala4" pos="-50.6461 37.7736 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line35_sala4" core="Line35_sala4" pos="-50.6461 37.7736 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line36_sala4" core="Line36_sala4" pos="-50.6461 39.941 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line37_sala4" core="Line37_sala4" pos="-50.6461 39.941 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line38_sala4" core="Line38_sala4" pos="-50.6461 42.1391 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line39_sala4" core="Line39_sala4" pos="-50.6461 42.1391 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box06_sala4" core="Box06_sala4" pos="-49.411 42.0955 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box121_sala4" core="Box121_sala4" pos="-49.411 31.0219 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box122_sala4" core="Box122_sala4" pos="-49.411 33.158 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box123_sala4" core="Box123_sala4" pos="-49.411 39.9743 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box124_sala4" core="Box124_sala4" pos="-51.8978 36.6409 61.5845" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line45_sala4" core="Line45_sala4" pos="-51.7496 35.5122 60.519" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Cylinder247_sala4" core="Cylinder247_sala4" pos="-49.6351 34.4138 61.5752" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="155x174_sala4" core="155x174_sala4" pos="-50.6114 36.6312 60.52" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="155x175_sala4" core="155x175_sala4" pos="-50.6225 34.391 60.52" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="155x176_sala4" core="155x176_sala4" pos="-49.5208 35.1377 60.5146" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line46_sala4" core="Line46_sala4" pos="-51.0149 35.4739 61.7069" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Cylinder248_sala4" core="Cylinder248_sala4" pos="-51.6054 34.4138 59.4557" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line47_sala4" core="Line47_sala4" pos="-50.2256 35.4739 59.324" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="155x177_sala4" core="155x177_sala4" pos="-51.7408 35.5186 60.5643" yaw="-1.5708" pitch="-1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="155x178_sala4" core="155x178_sala4" pos="-49.5208 24.3654 60.5146" yaw="0.0" pitch="0.0" roll="-3.14159" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line48_sala4" core="Line48_sala4" pos="-49.49 34.087 61.6731" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line49_sala4" core="Line49_sala4" pos="-50.6461 33.1413 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box129_sala4" core="Box129_sala4" pos="-51.8006 37.7516 60.5339" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box125_sala4" core="Box125_sala4" pos="-51.9602 36.3657 59.6057" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Cylinder244_sala4" core="Cylinder244_sala4" pos="-52.0302 34.4874 61.1566" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Box126_sala4" core="Box126_sala4" pos="-51.9602 34.6552 59.6057" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line40_sala4" core="Line40_sala4" pos="-51.979 35.5021 60.5183" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Cylinder245_sala4" core="Cylinder245_sala4" pos="-52.0302 34.4874 61.1566" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line42_sala4" core="Line42_sala4" pos="-52.0164 34.4635 61.3256" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Box127_sala4" core="Box127_sala4" pos="-51.9602 36.3657 61.4448" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Box128_sala4" core="Box128_sala4" pos="-51.9602 34.6552 61.4448" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line43_sala4" core="Line43_sala4" pos="-51.7891 35.4583 60.8502" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Line44_sala4" core="Line44_sala4" pos="-51.7891 35.4583 60.1865" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Cylinder246_sala4" core="Cylinder246_sala4" pos="-51.9789 35.5198 60.5127" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="-0.566789 -0.566789 -0.566789" />
-  <MeshInstance name="Box130_sala4" core="Box130_sala4" pos="-51.8978 36.6409 59.4772" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line50_sala4" core="Line50_sala4" pos="-49.49 34.087 59.4068" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line51_sala4" core="Line51_sala4" pos="-51.7478 34.0816 59.3957" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line52_sala4" core="Line52_sala4" pos="-51.7478 34.0816 61.662" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box131_sala4" core="Box131_sala4" pos="-50.6151 36.5934 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box132_sala4" core="Box132_sala4" pos="-50.6151 38.745 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box133_sala4" core="Box133_sala4" pos="-50.6151 43.0478 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box134_sala4" core="Box134_sala4" pos="-50.6151 40.8962 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box135_sala4" core="Box135_sala4" pos="-50.6151 34.1128 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box136_sala4" core="Box136_sala4" pos="-50.6151 31.9452 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box137_sala4" core="Box137_sala4" pos="-50.6151 29.783 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box138_sala4" core="Box138_sala4" pos="-50.6151 27.6319 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line53_sala4" core="Line53_sala4" pos="-50.6461 39.941 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line54_sala4" core="Line54_sala4" pos="-50.6461 33.1413 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line55_sala4" core="Line55_sala4" pos="-50.6461 30.9885 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line56_sala4" core="Line56_sala4" pos="-50.6461 30.9885 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line57_sala4" core="Line57_sala4" pos="-50.6461 28.8372 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line58_sala4" core="Line58_sala4" pos="-50.6461 28.8372 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line59_sala4" core="Line59_sala4" pos="-50.6461 37.7736 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line60_sala4" core="Line60_sala4" pos="-50.6461 37.7736 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line61_sala4" core="Line61_sala4" pos="-50.6461 39.941 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line62_sala4" core="Line62_sala4" pos="-50.6461 42.1391 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line63_sala4" core="Line63_sala4" pos="-50.6461 42.1391 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box139_sala4" core="Box139_sala4" pos="-161.733 36.2607 102.006" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box140_sala4" core="Box140_sala4" pos="-49.411 31.0219 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box141_sala4" core="Box141_sala4" pos="-49.411 33.158 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box142_sala4" core="Box142_sala4" pos="-49.411 39.9743 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line64_sala4" core="Line64_sala4" pos="-50.6461 35.5286 64.7923" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line65_sala4" core="Line65_sala4" pos="-50.6461 35.5286 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line66_sala4" core="Line66_sala4" pos="-50.6461 35.5286 61.6996" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line67_sala4" core="Line67_sala4" pos="-50.6461 35.5286 59.2879" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box143_sala4" core="Box143_sala4" pos="-49.411 35.6209 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box10_sala4" core="Box10_sala4" pos="-51.5329 35.5077 66.0724" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box01_sala4" core="Box01_sala4" pos="-52.0074 36.0188 61.9078" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box144_sala4" core="Box144_sala4" pos="-52.0074 36.0188 62.2619" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Text03_sala4" core="Text03_sala4" pos="-52.0216 35.5879 60.5262" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box11_sala4" core="Box11_sala4" pos="-37.7586 56.0345 80.5087" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box145_sala4" core="Box145_sala4" pos="-37.7586 53.3027 80.5087" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box146_sala4" core="Box146_sala4" pos="-35.2508 49.394 92.6053" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box147_sala4" core="Box147_sala4" pos="-35.2508 49.3681 92.6053" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box148_sala4" core="Box148_sala4" pos="-37.7586 53.2823 49.151" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box150_sala4" core="Box150_sala4" pos="-51.6795 36.3881 62.3777" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box151_sala4" core="Box151_sala4" pos="-51.6795 36.3881 62.359" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box152_sala4" core="Box152_sala4" pos="-51.6795 36.3881 62.3403" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box153_sala4" core="Box153_sala4" pos="-51.9903 34.633 62.0991" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box155_sala4" core="Box155_sala4" pos="-37.7586 53.3027 65.9919" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box159_sala4" core="Box159_sala4" pos="-37.7586 53.3027 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box160_sala4" core="Box160_sala4" pos="-37.7586 53.2823 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box162_sala4" core="Box162_sala4" pos="-37.7586 46.6205 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box163_sala4" core="Box163_sala4" pos="-37.7586 35.2144 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box164_sala4" core="Box164_sala4" pos="-37.7586 35.2349 80.5087" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box165_sala4" core="Box165_sala4" pos="-37.7586 37.9666 80.5087" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box165_sala4" core="Box165_sala4" pos="-37.7586 37.9666 84.3627" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box166_sala4" core="Box166_sala4" pos="-37.7586 28.5526 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box170_sala4" core="Box170_sala4" pos="-37.7586 35.2349 18.6034" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box172_sala4" core="Box172_sala4" pos="-35.2508 22.8337 92.6053" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line075_sala4" core="Line075_sala4" pos="-50.6461 26.5489 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box173_sala4" core="Box173_sala4" pos="-49.411 26.5053 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box174_sala4" core="Box174_sala4" pos="-50.6151 27.4576 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line080_sala4" core="Line080_sala4" pos="-50.6461 26.5489 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line081_sala4" core="Line081_sala4" pos="-50.6461 26.5489 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box175_sala4" core="Box175_sala4" pos="-49.411 26.5053 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box176_sala4" core="Box176_sala4" pos="-50.6151 27.4576 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box177_sala4" core="Box177_sala4" pos="-50.6151 15.9603 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box178_sala4" core="Box178_sala4" pos="-50.6151 13.7981 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line082_sala4" core="Line082_sala4" pos="-50.6461 17.1563 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line083_sala4" core="Line083_sala4" pos="-50.6461 15.0036 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line084_sala4" core="Line084_sala4" pos="-50.6461 12.8523 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box179_sala4" core="Box179_sala4" pos="-49.411 15.0369 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box180_sala4" core="Box180_sala4" pos="-49.411 17.1731 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line085_sala4" core="Line085_sala4" pos="-50.6461 17.1563 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box181_sala4" core="Box181_sala4" pos="-50.6151 15.9603 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box182_sala4" core="Box182_sala4" pos="-50.6151 13.7981 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line086_sala4" core="Line086_sala4" pos="-50.6461 17.1563 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line087_sala4" core="Line087_sala4" pos="-50.6461 15.0036 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line088_sala4" core="Line088_sala4" pos="-50.6461 15.0036 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line089_sala4" core="Line089_sala4" pos="-50.6461 12.8523 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line090_sala4" core="Line090_sala4" pos="-50.6461 12.8523 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box183_sala4" core="Box183_sala4" pos="-49.411 15.0369 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box184_sala4" core="Box184_sala4" pos="-49.411 17.1731 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line092_sala4" core="Line092_sala4" pos="-49.49 18.102 61.6731" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line093_sala4" core="Line093_sala4" pos="-49.49 18.102 59.4068" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line094_sala4" core="Line094_sala4" pos="-51.7478 18.0967 59.3957" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line095_sala4" core="Line095_sala4" pos="-51.7478 18.0967 61.662" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line096_sala4" core="Line096_sala4" pos="-49.49 18.102 62.506" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line097_sala4" core="Line097_sala4" pos="-49.49 18.102 64.7723" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line098_sala4" core="Line098_sala4" pos="-51.7478 18.0967 64.7612" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line099_sala4" core="Line099_sala4" pos="-51.7478 18.0967 62.4949" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box185_sala4" core="Box185_sala4" pos="-51.8978 20.656 62.5946" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box186_sala4" core="Box186_sala4" pos="-51.8006 21.7666 63.6452" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line101_sala4" core="Line101_sala4" pos="-50.6461 21.7886 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line102_sala4" core="Line102_sala4" pos="-50.6461 23.956 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box187_sala4" core="Box187_sala4" pos="-49.411 26.1105 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line103_sala4" core="Line103_sala4" pos="-50.6461 26.1541 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box188_sala4" core="Box188_sala4" pos="-49.411 23.9894 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box189_sala4" core="Box189_sala4" pos="-51.8978 20.656 61.5845" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box190_sala4" core="Box190_sala4" pos="-51.8006 21.7666 60.5339" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box191_sala4" core="Box191_sala4" pos="-51.8978 20.656 59.4772" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box192_sala4" core="Box192_sala4" pos="-50.6151 22.7601 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box193_sala4" core="Box193_sala4" pos="-50.6151 24.9112 60.5315" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line104_sala4" core="Line104_sala4" pos="-50.6461 26.1541 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box194_sala4" core="Box194_sala4" pos="-49.411 26.1105 63.6472" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line105_sala4" core="Line105_sala4" pos="-50.6461 23.956 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line106_sala4" core="Line106_sala4" pos="-50.6461 26.1541 62.3806" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box195_sala4" core="Box195_sala4" pos="-50.6151 24.9112 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box196_sala4" core="Box196_sala4" pos="-50.6151 22.7601 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line107_sala4" core="Line107_sala4" pos="-50.6461 21.7886 59.3646" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line108_sala4" core="Line108_sala4" pos="-50.6461 21.7886 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line109_sala4" core="Line109_sala4" pos="-50.6461 23.956 61.7763" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box197_sala4" core="Box197_sala4" pos="-51.8978 20.656 64.7019" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box198_sala4" core="Box198_sala4" pos="-49.411 23.9894 60.5319" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="155x180_sala4" core="155x180_sala4" pos="-49.5208 12.7844 63.6424" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x181_sala4" core="155x181_sala4" pos="-49.5208 23.5567 63.6424" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line091_sala4" core="Line091_sala4" pos="-51.0149 23.8929 62.4501" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Line100_sala4" core="Line100_sala4" pos="-50.2256 23.8929 64.8329" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x183_sala4" core="155x183_sala4" pos="-50.6114 25.0502 63.6369" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x184_sala4" core="155x184_sala4" pos="-50.6225 22.8101 63.6369" yaw="-3.14159" pitch="1.5708" roll="0.0" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="155x182_sala4" core="155x182_sala4" pos="-51.7408 23.9377 63.5898" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="0.566789 0.566789 0.566789" />
-  <MeshInstance name="Object002_sala4" core="Object002_sala4" pos="-154.396 34.875 81.4332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Object004_sala4" core="Object004_sala4" pos="-159.087 34.875 81.4332" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Wall004_sala4" core="Sala_4_Wall004_sala4" pos="-94.3929 42.1879 35.3586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Wall005_sala4" core="Sala_4_Wall005_sala4" pos="-215.34 42.1879 35.3586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Sala_4_Wall001_sala4" core="Sala_4_Wall001_sala4" pos="-98.9407 34.5871 97.5311" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Sala_4_Wall002_sala4" core="Sala_4_Wall002_sala4" pos="-219.193 34.5871 97.5312" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_Wall001_sala4" core="Sala_4_Wall001_sala4" pos="-98.9406 34.5871 97.5311" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_Wall002_sala4" core="Sala_4_Wall002_sala4" pos="-219.193 34.5871 97.5311" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_upper_wall_1_sala4" core="Sala_4_upper_wall_1_sala4" pos="-279.002 23.2025 82.1306" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_upper_wall_4_sala4" core="Sala_4_upper_wall_4_sala4" pos="-279.002 23.2016 35.8081" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_upper_wall_3_sala4" core="Sala_4_upper_wall_3_sala4" pos="-116.877 50.3256 20.5213" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -257,63 +28,51 @@
   <MeshInstance name="Sala_4_right_floor_2_sala4" core="Sala_4_right_floor_2_sala4" pos="-284.216 19.8741 78.0855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_left_floor_2_sala4" core="Sala_4_left_floor_2_sala4" pos="-284.186 19.8741 39.6586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Ceiling_1_sala4" core="Sala_4_Ceiling_1_sala4" pos="-143.047 57.1227 43.2459" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Sala_4_Ceiling_3_sala4" core="Sala_4_Ceiling_3_sala4" pos="-143.047 57.1227 76.5526" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista001_sala4" core="Lums_pista001_sala4" pos="-56.2877 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_Ceiling_3_sala4" core="Sala_4_Ceiling_3_sala4" pos="-143.046 57.1227 76.5526" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Doors_small_sala4" core="Doors_small_sala4" pos="-83.9772 36.3582 95.4325" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Door_middle_sala4" core="Door_middle_sala4" pos="-178.117 25.0947 84.4217" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_central_floor_1_sala4" core="Sala_4_central_floor_1_sala4" pos="-151.335 18.8911 58.9419" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_central_floor_2_sala4" core="Sala_4_central_floor_2_sala4" pos="-391.818 18.8911 58.9419" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Pared_fons_sala4" core="Pared_fons_sala4" pos="-24.4091 37.6524 62.5471" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Door_right_sala4" core="Door_right_sala4" pos="-339.06 37.1601 58.4335" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="door_left_sala4" core="door_left_sala4" pos="-339.06 37.1601 58.4335" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista002_sala4" core="Lums_pista002_sala4" pos="-56.2877 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista003_sala4" core="Lums_pista003_sala4" pos="-71.0125 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista004_sala4" core="Lums_pista004_sala4" pos="-71.0125 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista005_sala4" core="Lums_pista005_sala4" pos="-85.7373 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista006_sala4" core="Lums_pista006_sala4" pos="-85.7373 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista007_sala4" core="Lums_pista007_sala4" pos="-100.462 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista008_sala4" core="Lums_pista008_sala4" pos="-100.462 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista009_sala4" core="Lums_pista009_sala4" pos="-115.187 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista010_sala4" core="Lums_pista010_sala4" pos="-115.187 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista011_sala4" core="Lums_pista011_sala4" pos="-129.912 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista012_sala4" core="Lums_pista012_sala4" pos="-129.912 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista013_sala4" core="Lums_pista013_sala4" pos="-144.636 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista014_sala4" core="Lums_pista014_sala4" pos="-144.636 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista015_sala4" core="Lums_pista015_sala4" pos="-159.361 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista016_sala4" core="Lums_pista016_sala4" pos="-159.361 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista017_sala4" core="Lums_pista017_sala4" pos="-174.086 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista018_sala4" core="Lums_pista018_sala4" pos="-174.086 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista019_sala4" core="Lums_pista019_sala4" pos="-188.811 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista020_sala4" core="Lums_pista020_sala4" pos="-188.811 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista021_sala4" core="Lums_pista021_sala4" pos="-203.536 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista022_sala4" core="Lums_pista022_sala4" pos="-203.536 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista023_sala4" core="Lums_pista023_sala4" pos="-218.26 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista024_sala4" core="Lums_pista024_sala4" pos="-218.26 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista025_sala4" core="Lums_pista025_sala4" pos="-232.985 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista026_sala4" core="Lums_pista026_sala4" pos="-232.985 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista027_sala4" core="Lums_pista027_sala4" pos="-247.71 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista028_sala4" core="Lums_pista028_sala4" pos="-247.71 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista029_sala4" core="Lums_pista029_sala4" pos="-262.435 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista030_sala4" core="Lums_pista030_sala4" pos="-262.435 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista031_sala4" core="Lums_pista031_sala4" pos="-277.16 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista032_sala4" core="Lums_pista032_sala4" pos="-277.16 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista033_sala4" core="Lums_pista033_sala4" pos="-291.884 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista034_sala4" core="Lums_pista034_sala4" pos="-291.884 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista035_sala4" core="Lums_pista035_sala4" pos="-306.609 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista036_sala4" core="Lums_pista036_sala4" pos="-306.609 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista037_sala4" core="Lums_pista037_sala4" pos="-321.334 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista038_sala4" core="Lums_pista038_sala4" pos="-321.334 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista039_sala4" core="Lums_pista039_sala4" pos="-336.059 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista040_sala4" core="Lums_pista040_sala4" pos="-336.059 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Lums_pista041_sala4" core="Lums_pista041_sala4" pos="-350.784 19.8966 67.6334" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lums_pista042_sala4" core="Lums_pista042_sala4" pos="-350.784 19.8966 50.1902" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Ceiling_4_sala4" core="Sala_4_Ceiling_4_sala4" pos="-308.061 57.1227 76.5548" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Ceiling_2_sala4" core="Sala_4_Ceiling_2_sala4" pos="-308.297 57.1227 43.2459" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Wall003_sala4" core="Sala_4_Wall003_sala4" pos="-305.966 34.5871 97.5311" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_Wall006_sala4" core="Sala_4_Wall006_sala4" pos="-304.688 33.7099 21.226" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box199_sala4" core="Box199_sala4" pos="-177.512 22.7334 112.217" yaw="0.0" pitch="0.0" roll="0.0" scale="0.90056 1.0 0.852398" />
-  <MeshInstance name="Object005_sala4" core="Object005_sala4" pos="-50.6151 43.0478 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Columna_low_023_sala4" core="Columna_low_023_sala4" pos="-162.958 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
+  <MeshInstance name="Pasarela_sala4" core="Pasarela_sala4" pos="-50.6151 43.0478 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Stairs1_sala4" core="Stairs1_sala4" pos="-57.0317 33.1227 77.7605" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_Columnes_porta_sala4" core="Sala_4_Columnes_porta_sala4" pos="-324.888 38.3554 99.3333" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Big_door_sala4" core="Big_door_sala4" pos="-339.06 37.1601 58.4335" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="nau_02_sala4" core="nau_02_sala4" pos="-167.071 20.5849 73.964" yaw="0.0" pitch="0.0872665" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Crates_011_sala4" core="Crates_011_sala4" pos="-162.378 19.5558 71.5628" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="Crates010_sala4" core="Crates010_sala4" pos="-159.689 19.5558 71.5628" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates012_sala4" core="sic_Crates012_sala4" pos="-145.335 19.5558 78.4389" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="Crates013_sala4" core="Crates013_sala4" pos="-148.024 19.5558 78.4389" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="nau_03_sala4" core="nau_03_sala4" pos="-125.451 21.1244 73.2839" yaw="0.0" pitch="0.0872665" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sic_Crates014_sala4" core="sic_Crates014_sala4" pos="-118.712 19.5558 75.4973" yaw="1.8326" pitch="0.0" roll="0.0" scale="6.11807 6.11808 6.11808" />
+  <MeshInstance name="sic_Crates015_sala4" core="sic_Crates015_sala4" pos="-116.185 19.5558 74.5776" yaw="2.26893" pitch="0.0" roll="0.0" scale="6.11807 6.11808 6.11808" />
+  <MeshInstance name="nau_01_sala4" core="nau_01_sala4" pos="-151.448 20.8962 43.607" yaw="0.0" pitch="-0.0872664" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="nau_04_sala4" core="nau_04_sala4" pos="-126.702 20.8962 43.607" yaw="0.0" pitch="-0.0872664" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="sic_Crates016_sala4" core="sic_Crates016_sala4" pos="-139.405 19.5558 38.0423" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates017_sala4" core="sic_Crates017_sala4" pos="-142.094 19.5558 38.0423" yaw="-1.74533" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates007_sala4" core="sic_Crates007_sala4" pos="-114.177 19.5558 44.9124" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates4_sala4" core="sic_Crates4_sala4" pos="-116.866 19.5558 44.9124" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates008_sala4" core="sic_Crates008_sala4" pos="-156.763 19.5558 44.9124" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="sic_Crates009_sala4" core="sic_Crates009_sala4" pos="-159.452 19.5558 44.9124" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
+  <MeshInstance name="Sala_4_upper_wall_2_sala4" core="Sala_4_upper_wall_2_sala4" pos="-123.31 23.2025 82.1306" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Pared_fons_sala4" core="Pared_fons_sala4" pos="-24.4091 37.6524 62.5471" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Columna_low_007_sala4" core="Columna_low_007_sala4" pos="-162.958 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Columna_low_1_sala4" core="Columna_low_1_sala4" pos="-82.2956 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Columna_low_002_sala4" core="Columna_low_002_sala4" pos="-82.2956 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
@@ -331,43 +90,9 @@
   <MeshInstance name="Columna_low_017_sala4" core="Columna_low_017_sala4" pos="-161.801 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Columna_low_018_sala4" core="Columna_low_018_sala4" pos="-161.801 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Columna_low_019_sala4" core="Columna_low_019_sala4" pos="-188.688 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_020_sala4" core="Columna_low_020_sala4" pos="-188.688 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_024_sala4" core="Columna_low_024_sala4" pos="-162.958 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_025_sala4" core="Columna_low_025_sala4" pos="-187.795 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_026_sala4" core="Columna_low_026_sala4" pos="-187.795 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_027_sala4" core="Columna_low_027_sala4" pos="-81.1382 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_028_sala4" core="Columna_low_028_sala4" pos="-81.1382 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_029_sala4" core="Columna_low_029_sala4" pos="-108.026 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_030_sala4" core="Columna_low_030_sala4" pos="-108.026 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_031_sala4" core="Columna_low_031_sala4" pos="-134.913 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_032_sala4" core="Columna_low_032_sala4" pos="-134.913 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_033_sala4" core="Columna_low_033_sala4" pos="-161.801 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_034_sala4" core="Columna_low_034_sala4" pos="-161.801 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_035_sala4" core="Columna_low_035_sala4" pos="-188.688 48.3357 83.9715" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_036_sala4" core="Columna_low_036_sala4" pos="-188.688 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_022_sala4" core="Columna_low_022_sala4" pos="-136.071 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Columna_low_021_sala4" core="Columna_low_021_sala4" pos="-136.071 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
+  <MeshInstance name="Columna_low_005_sala4" core="Columna_low_005_sala4" pos="-188.688 48.3357 79.1577" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
+  <MeshInstance name="Columna_low_020_sala4" core="Columna_low_020_sala4" pos="-136.071 48.3357 39.7788" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Columna_low_006_sala4" core="Columna_low_006_sala4" pos="-136.071 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
-  <MeshInstance name="Cylinder1850_sala4" core="Cylinder1850_sala4" pos="-31.03 43.1536 63.4776" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box113_sala4" core="Box113_sala4" pos="-50.6151 43.0478 63.6254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Stairs1_sala4" core="Stairs1_sala4" pos="-57.0317 33.1227 77.7605" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Sala_4_Columnes_01_sala4" core="Sala_4_Columnes_01_sala4" pos="-324.888 38.3554 99.3333" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Big_door_sala4" core="Big_door_sala4" pos="-339.06 37.1601 58.4335" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="nau_02_sala4" core="nau_02_sala4" pos="-167.071 20.4879 75.9931" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Crates_011_sala4" core="Crates_011_sala4" pos="-162.378 19.5558 71.5628" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="Crates010_sala4" core="Crates010_sala4" pos="-159.689 19.5558 71.5628" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates012_sala4" core="sic_Crates012_sala4" pos="-145.335 19.5558 78.4389" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="Crates013_sala4" core="Crates013_sala4" pos="-148.024 19.5558 78.4389" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="nau_03_sala4" core="nau_03_sala4" pos="-125.451 20.4879 75.9931" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sic_Crates014_sala4" core="sic_Crates014_sala4" pos="-118.712 19.5558 75.4973" yaw="1.8326" pitch="0.0" roll="0.0" scale="6.11807 6.11808 6.11808" />
-  <MeshInstance name="sic_Crates015_sala4" core="sic_Crates015_sala4" pos="-116.185 19.5558 74.5776" yaw="2.26893" pitch="0.0" roll="0.0" scale="6.11807 6.11808 6.11808" />
-  <MeshInstance name="nau_01_sala4" core="nau_01_sala4" pos="-151.448 20.4879 43.6645" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="nau_04_sala4" core="nau_04_sala4" pos="-126.702 20.4879 43.6645" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sic_Crates016_sala4" core="sic_Crates016_sala4" pos="-139.405 19.5558 38.0423" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates017_sala4" core="sic_Crates017_sala4" pos="-142.094 19.5558 38.0423" yaw="-1.74533" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates007_sala4" core="sic_Crates007_sala4" pos="-114.177 19.5558 44.9124" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates4_sala4" core="sic_Crates4_sala4" pos="-116.866 19.5558 44.9124" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates008_sala4" core="sic_Crates008_sala4" pos="-156.763 19.5558 44.9124" yaw="-1.65806" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="sic_Crates009_sala4" core="sic_Crates009_sala4" pos="-159.452 19.5558 44.9124" yaw="-1.22173" pitch="0.0" roll="0.0" scale="6.11807 6.11807 6.11807" />
-  <MeshInstance name="Sala_4_upper_wall_2_sala4" core="Sala_4_upper_wall_2_sala4" pos="-123.31 23.2025 82.1306" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_Columnes_ascensor_sala4" core="Sala_4_Columnes_ascensor_sala4" pos="-31.03 43.1536 63.4776" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box199_sala4" core="Box199_sala4" pos="-177.512 22.7334 112.014" yaw="0.0" pitch="0.0" roll="0.0" scale="0.90056 1.0 0.852398" />
 </RenderableObjects>

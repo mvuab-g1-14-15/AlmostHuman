@@ -32,7 +32,7 @@ function load_basics()
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
 	--scene:LoadRoom("elevator")
-	--scene:LoadRoom("sala4")	
+	scene:LoadRoom("sala4")	
 	--scene:LoadRoom("space")	
 	
 	--scene:DesactivateRoom("pasillo")
