@@ -35,9 +35,7 @@
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
     <render_particules/>
-    
     <render_command filename="../CommonData/glow_cmd.xml"/>
-
 	<enable_alpha_test/>
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
