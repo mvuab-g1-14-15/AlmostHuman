@@ -31,7 +31,11 @@ void CSetActiveElement::Update()
 												   it_end = m_vRenderableObject.end();
 	for(; it != it_end; ++it)
 	{
-		(*it)->SetActive(m_bActive);
+		if((*it) == 0)
+		{
+			(*it) = SceneInstance->GetResource("core")->GetLayer("characters")->GetResource(m_Name);
+		}
+			(*it)->SetActive(m_bActive);
 	}
 	m_CurrentTime += deltaTimeMacro;
 }

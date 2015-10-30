@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<static_meshes>
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_1_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_1.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_2_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_2.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_3_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_3.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_4_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_4.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_5_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_5.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_6_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_6.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_7_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_7.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_8_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_8.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_9_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_9.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_10_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_10.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_11_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_11.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_12_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_12.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_13_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_13.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_14_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_14.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_15_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_15.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_16_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_16.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_17_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_17.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_18_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_18.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_19_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_19.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_20_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_20.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_21_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_21.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_22_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_22.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_23_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_23.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_24_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_24.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_25_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_25.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_26_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_26.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_27_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_27.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_28_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_28.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_29_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_29.mesh" />
+  <static_mesh name="SKL_Robot_Boss_Uberwalker_Part_30_sala4" filename="meshes\SKL_Robot_Boss_Uberwalker_Part_30.mesh" />
+</static_meshes>

@@ -1,2 +1,3 @@
 <cinematics>
+	<cinematic name="explotion_boss" resource_id_file="data/sala4/cinematics/explotion_boss.xml" />
 </cinematics>
