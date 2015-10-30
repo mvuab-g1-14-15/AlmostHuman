@@ -412,6 +412,7 @@ function SetPropSala4()
 end
 
 function Hacknave(nave_obj)
+	cinematic_manager:Execute("FinalGame")
 	if enemy_manager:GetBoss():IsStunned() then
 		if not g_Hacked[nave_obj] then
 			--logica de disparo hacia el boss
