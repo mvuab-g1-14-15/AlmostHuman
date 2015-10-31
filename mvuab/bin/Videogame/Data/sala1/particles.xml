@@ -1,10 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <particles_instances>
-	<particle_instance name="charge01" core="charge" pos="135.25 -9.5 -39.60" active="true"/>
-	<particle_instance name="charge02" core="charge" pos="136.25 -9.5 -39.60" active="true"/>
-	<particle_instance name="spark01" core="sparks" pos="129.45 -3.7 -46.82" active="true"/>
-	<particle_instance name="ray01" core="ray" pos="125.71 -6.087 -51.53" active="true"/>
-	<particle_instance name="ray02" core="ray" pos="125.71 -6.087 -52.77" active="true"/>
-	<particle_instance name="ray03" core="ray" pos="123.71 -6.087 -52.77" active="true"/>
-	<particle_instance name="ray04" core="ray" pos="123.71 -6.087 -52.77" active="true"/>
-	<particle_instance name="ray05" core="ray" pos="123.71 -6.087 -52.77" active="true"/>
+  <particle_instance name="steam_down0" core="steam_down" pos="130.413 -4.81354 -45.3755" active="true" sound="true" />
+  <particle_instance name="steam_up1" core="steam_up" pos="105.808 -9.73766 -44.2404" active="true" sound="true" />
+  <particle_instance name="steam_up2" core="steam_up" pos="94.12 -9.73766 -38.6464" active="true" sound="true" />
+  <particle_instance name="steam_up3" core="steam_up" pos="87.3216 -9.86553 -27.5755" active="true" sound="true" />
+  <particle_instance name="sparks_inter4" core="sparks_inter" pos="119.979 -5.00594 -51.0719" active="true" sound="true" />
+  <particle_instance name="sparks_inter5" core="sparks_inter" pos="119.368 -4.99348 -40.7965" active="true" sound="true" />
 </particles_instances>
