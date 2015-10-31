@@ -345,7 +345,9 @@ function CEnemyManager:ActivateEnemiesSala3()
 end
 
 function CEnemyManager:Reinit( aRoom )
+	engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
+		self.GarbageMesh[lEnemy:GetRoom()][lEnemy:GetName()] = true
 		lEnemy:SetOnDead(false)
 		lEnemy:Destroy()
 	end
