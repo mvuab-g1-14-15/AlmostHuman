@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cinematic name="cinematicaSala_04_final_posicioOK.max" duration="66.6667">
-  <cinematic_object resource="Door_right001_sala4" renderable_objects_manager="Door_right001_sala4" room="sala4" active="false" init_keyframe="0.0">
+  <cinematic_object resource="Door_right_sala4" renderable_objects_manager="Door_right_sala4" room="sala4" active="false" init_keyframe="0.0">
     <cinematic_object_key_frame time="0.0" pos="-341.149 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-341.149 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-341.149 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -2003,7 +2003,7 @@
     <cinematic_object_key_frame time="66.6333" pos="-341.149 37.1601 77.8394" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="66.6667" pos="-341.149 37.1601 77.8394" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="door_left001_sala4" renderable_objects_manager="door_left001_sala4" room="sala4" active="false" init_keyframe="0.0">
+  <cinematic_object resource="door_left_sala4" renderable_objects_manager="door_left_sala4" room="sala4" active="false" init_keyframe="0.0">
     <cinematic_object_key_frame time="0.0" pos="-341.074 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-341.074 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-341.074 37.1601 58.6705" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -12018,7 +12018,6 @@
     <cinematic_object_key_frame time="66.6333" pos="-346.2 18.8742 58.8691" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="66.6667" pos="-346.2 18.8742 58.8691" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Cylinder1851_sala4" renderable_objects_manager="Cylinder1851_space" room="sala4" active="false" init_keyframe="0.0">
     <cinematic_object_key_frame time="0.0" pos="-346.2 13.8622 58.8691" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-346.2 13.8622 58.8691" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-346.2 13.8622 58.8691" yaw="-1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

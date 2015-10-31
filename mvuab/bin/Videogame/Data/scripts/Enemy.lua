@@ -260,6 +260,9 @@ function CEnemy:Update()
 					end
 				end
 			end
+		else
+			local dt = timer:GetElapsedTime()
+			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
 		
 		if self.Fly then
