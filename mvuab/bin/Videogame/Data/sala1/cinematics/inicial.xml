@@ -2,7 +2,7 @@
 	<set_active name="logan" resource_id_file="Data/sala1/cinematics/elementos_cinematica_inicial.xml" active="true" time="0.0001"/>
 	<set_camera name="camerainicial" name_camera="cinematica_inicial" active="true" time="0.00001" blocker="true" name_current_camera="Main"/>
 	<play_animation name="Logan_cinematica1_sala1" animated="true" room="sala1"  time="0.00001" animation="cinematica_inicial_sala1" />
-	<wait name="espera_animacion" time="33" />
+	<wait name="espera_animacion" time="0.033" />
 	<set_active name="logan1" resource_id_file="Data/sala1/cinematics/elementos_cinematica_inicial.xml" active="false" time="0.0001"/>
 	<set_camera name="CameraCinematica" name_camera="cinematica_inicial" active="false" time="0.00001" blocker="false" />
 </cinematic>
