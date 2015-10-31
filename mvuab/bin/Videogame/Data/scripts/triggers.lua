@@ -57,6 +57,8 @@ g_C4Colocada2 = false
 
 g_FaltanC4Text = false
 
+g_ExplotionDone = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -315,7 +317,7 @@ function StayTextElevatorDown(text, other_shape)
 		cinematic_manager:Execute("elevatorDown")
 		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
 		enemy_manager:ActivateEnemiesSala3()
-		g_Player:SetCheckpoint("sala3", Vect3f( -7, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 	end
 end
 
@@ -656,6 +658,8 @@ function UpdateTriggers()
 				sound_manager:PlayEvent("Play_C4_Explosion","Explosio")
 				sound_manager:PlayEvent("Play_Sala3B", "Logan")
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
+				g_ExplotionDone = true
+				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 			else
 				if not g_FaltanC4Text then
 					g_FaltanC4Text = true
