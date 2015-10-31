@@ -417,13 +417,16 @@ end
 
 function Hacknave(nave_obj, other_shape)
 	cinematic_manager:Execute("explotion_boss")
-	if enemy_manager:GetBoss():IsStunned() then
-		if not g_Hacked[nave_obj] then
-			--logica de disparo hacia el boss
-			engine:TraceOnce("Hacked space ship "..nave_obj)
-			g_Hacked[nave_obj] = true
-			enemy_manager:GetBoss():ClearStun()
-			enemy_manager:GetBoss():AddDamage(25.0)
+	lBoss = enemy_manager:GetBoss()
+	if lBoss ~= nil then
+		if lBoss:IsStunned() then
+			if not g_Hacked[nave_obj] then
+				--logica de disparo hacia el boss
+				engine:TraceOnce("Hacked space ship "..nave_obj)
+				g_Hacked[nave_obj] = true
+				lBoss:ClearStun()
+				lBoss:AddDamage(25.0)
+			end
 		end
 	end
 end
