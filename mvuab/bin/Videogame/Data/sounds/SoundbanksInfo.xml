@@ -271,8 +271,10 @@
 				<Event Id="3876631393" Name="Play_Acumulator_Long_Shoot_Event"/>
 				<Event Id="4202206853" Name="Play_Long_Shoot_Event"/>
 				<Event Id="1958143393" Name="Play_Panting_Logan"/>
+				<Event Id="328617822" Name="Play_Panting_Logan_Loop"/>
 				<Event Id="3668163621" Name="Play_Short_Shoot_Event"/>
 				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
+				<Event Id="537533500" Name="Stop_Panting_Logan_Loop"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="161980965" Language="SFX">
