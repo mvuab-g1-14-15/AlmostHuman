@@ -26,7 +26,7 @@ CButton::CButton( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolutio
 //---------------Interfaz de GuiElement----------------------
 void CButton::Render    ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( GetVisible())
     {
         //Primero renderizamos todos los hijos que pudiera tener el Button:
         CGuiElement::Render();
@@ -72,7 +72,7 @@ void CButton::Render    ()
             }
             break;
         default:
-            LOG_ERROR_APPLICATION("CButton::Render Tipo de estado desconocido en el boton %s", CGuiElement::m_sName.c_str());
+            LOG_ERROR_APPLICATION("CButton::Render Tipo de estado desconocido en el boton %s", GetName().c_str());
             break;
         }
 
@@ -94,12 +94,12 @@ void CButton::Render    ()
         //Finalmente renderizamos el texto:
         CGuiElement::RenderText();
 
-    }//END if( CGuiElement::m_bIsVisible )
+    }//END if( GetVisible() )
 }
 
 void CButton::Update()
 {
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if( GetVisible() && CGuiElement::m_bIsActive )
     {
         //Primero actualizamos todos los hijos que pudiera tener el button:
         CGuiElement::Update();
@@ -175,7 +175,7 @@ void CButton::OnClickedButton( void )
 {
     if( CGuiElement::m_pParent != NULL )
     {
-        m_pParent->OnClickedChild(CGuiElement::m_sName);
+        m_pParent->OnClickedChild(GetName());
     }
 
     if (m_sLuaCode_OnClicked.compare(""))

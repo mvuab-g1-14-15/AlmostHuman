@@ -11,6 +11,7 @@ function CargarJuego()
 	--sound_manager:PlayEvent("Play_Ayer_Tuve_Una", "Logan")
 	cinematic_manager:StopCinematic("cinematica_inicial")
 	sound_manager:PlayParticlesSFX()
+	g_GameIsOn = true;
 	--gui_manager:ShowDialogTex("Test")
 end
 

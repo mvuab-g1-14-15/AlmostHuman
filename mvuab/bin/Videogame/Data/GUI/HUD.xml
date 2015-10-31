@@ -1,7 +1,7 @@
 <Windows OnLoadWindows=""
          OnSaveWindows=""
          OnUpdateWindows="">
-
+		 
 	<ProgressBar name="Life" pos="2 5" height="4" width="30" visible="true" active="true"
 	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
@@ -68,4 +68,9 @@
 			<StaticText name="Texto3" pos="5.0 15.0" height="5" width="35" visible="false" active="false" Literal="Documento1Linea23" />
 		  </Dialog>
 	</DialogBox>
+	
+	<Image name="point" time_per_image="2.0" is_loop="false" is_animated="false" pos="50.00 50.00" height="5.00" width="5.00" use_texture_size="true" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+		<texture texture="Data/textures/GUI/aim.png"/>
+	</Image>
+	
 </Windows>

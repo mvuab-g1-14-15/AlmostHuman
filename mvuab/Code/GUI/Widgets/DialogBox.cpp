@@ -57,7 +57,7 @@ CDialogBox::CDialogBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenRes
 //---------------Interfaz de GuiElement----------------------
 void CDialogBox::Render    ()
 {
-    if (CGuiElement::m_bIsVisible)
+    if (GetVisible())
     {
         if (m_pBackGroundTexture)
         {
@@ -82,7 +82,7 @@ void CDialogBox::Render    ()
 
 void CDialogBox::Update ()
 {
-    if (CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive)
+    if (GetVisible() && CGuiElement::m_bIsActive)
     {
        // Math::Vect2i posMouse;
        // InputManagerInstance->GetPosition(IDV_MOUSE, posMouse);
@@ -137,7 +137,7 @@ void CDialogBox::OnClickedChild( const std::string& name )
     if( name.compare("buttonClose") == 0 )
     {
         CGuiElement::m_bIsActive = false;
-        CGuiElement::m_bIsVisible = false;
+        SetVisible( false );
     }
 }
 
@@ -193,7 +193,7 @@ bool CDialogBox::NextDialog()
 	if( m_CurrentDialog == m_Dialogo.end() )
 	{
 		//m_CurrentDialog->SetActive(false);
-		/*CGuiElement::m_bIsVisible = false;
+		/*GetVisible() = false;
 		CGuiElement::m_bIsActive = false;*/
 		m_CurrentDialog = m_Dialogo.begin();
 		return true;

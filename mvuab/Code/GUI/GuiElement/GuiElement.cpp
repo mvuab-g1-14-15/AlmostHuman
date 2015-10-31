@@ -7,19 +7,19 @@
 #include "EngineManagers.h"
 
 CGuiElement::CGuiElement( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
-  : m_uWindowsHeight( screenResolution.y )
+  : CName( aNode.GetAttribute<std::string>( "name", "DefaultGuiElement" ) )
+  , CVisible( aNode.GetAttribute<bool>( "visible", true ) )
+  , m_uWindowsHeight( screenResolution.y )
   , m_uWindowsWidth( screenResolution.x )
   , m_fWidthPercent( aNode.GetAttribute<float>( "width", 50.f ) )
   , m_fHeightPercent( aNode.GetAttribute<float>( "height", 50.f ) )
   , m_PositionPercent( Math::Vect2f( aNode.GetAttribute<Math::Vect2f>( "pos", Math::Vect2f( 0.f, 0.f ) ) ) )
-  , m_bIsVisible( aNode.GetAttribute<bool>( "visible", true ) )
   , m_bIsActive( aNode.GetAttribute<bool>( "active", true ) )
   , m_bIsOver( false )
   , m_bIsInside( false )
   , m_bFocus( false )
   , m_sLuaCode_OnLoadValue( aNode.GetAttribute<std::string>( "OnLoadValue", "" ) )
   , m_sLuaCode_OnSaveValue( aNode.GetAttribute<std::string>( "OnSaveValue", "" ) )
-  , m_sName( aNode.GetAttribute<std::string>( "name", "DefaultGuiElement" ) )
   , m_pParent( NULL )
   , m_eEditMode( DISABLE )
   , m_eType( GUI )
@@ -76,7 +76,7 @@ void  CGuiElement::SetPosition( const Math::Vect2i& pos )
 
 void CGuiElement::CalculatePosMouse( const Math::Vect2i& mousePosition )
 {
-  if ( m_bIsActive && m_bIsVisible )
+  if ( m_bIsActive && IsVisible() )
   {
     // (0,0) ________
     //  |  |
@@ -184,7 +184,7 @@ void CGuiElement::OnSaveValue( void )
 
 void CGuiElement::Render()
 {
-  if ( m_bIsVisible )
+  if ( IsVisible() )
   {
     //Renderizamos todos los hijos que cuelgan de este CGuiElement:
     std::vector<CGuiElement*>::iterator it = m_Children.begin();
@@ -201,7 +201,7 @@ void CGuiElement::Render()
 
 void CGuiElement::RenderText()
 {
-  if ( m_bIsVisible )
+  if ( IsVisible() )
   {
     //Render text:
     if ( m_sLiteral != "" )
@@ -217,7 +217,7 @@ void CGuiElement::RenderText()
 
 void CGuiElement::Update()
 {
-  if ( m_bIsVisible && m_bIsActive )
+  if ( IsVisible() && m_bIsActive )
   {
     //Renderizamos todos los hijos que cuelgan de este CGuiElement:
     std::vector<CGuiElement*>::iterator it = m_Children.begin();
