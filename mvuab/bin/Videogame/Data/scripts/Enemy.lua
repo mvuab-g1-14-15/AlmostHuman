@@ -146,6 +146,10 @@ function CEnemy:Destroy()
 		script_manager:RunCode(codeToExecute)
 	end
 	
+	if self.Fly then
+		renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+	end
+			
 	self.BlashRight:End()
 	self.BlashLeft:End()
 	physic_manager:ReleasePhysicController(self.CharacterController)
@@ -284,7 +288,9 @@ function CEnemy:Update()
 	else
 		if not self.Death then
 			lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
-			renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+			if self.Fly then
+				renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+			end
 			self.Death = true
 		end
 		local dt = timer:GetElapsedTime()
