@@ -256,8 +256,33 @@ CRenderableVertexs* CAnimatedCoreModel::GetRenderableVertexs()
 
 bool CAnimatedCoreModel::Reload()
 {
-    Destroy();
-    return Load();
+  // Only reload the animations states and the changes
+  m_AnimationStates.clear();
+  m_AnimationChanges.clear();
+  CXMLTreeNode newFile, node;
+  if ( !newFile.LoadAndFindNode( m_FileName.c_str(), "animated_model", node ) )
+  {
+    LOG_ERROR_APPLICATION( "CAnimatedCoreModel::Load No se puede abrir \"%s\"!", m_FileName.c_str());
+    return false;
+  }
+
+  // Parse the animation stuff
+  for(uint32 i = 0, lCount = node.GetNumChildren(); i < lCount ; ++i)
+  {
+    const CXMLTreeNode& lCurrentNode = node(i);
+    const std::string &TagName = lCurrentNode.GetName();
+
+    if( TagName == "animation_states")
+    {
+      LoadAnimationStates(lCurrentNode);
+    }
+    else if( TagName == "animation_changes")
+    {
+      LoadAnimationChanges(lCurrentNode);
+    }
+  }
+
+  return true;
 }
 
 void CAnimatedCoreModel::ActivateTextures()

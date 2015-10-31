@@ -4,6 +4,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	736447403	Play_Countdown_Explosion			\Gameplay\Play_Countdown_Explosion	
 	847470298	Open_Close_Door_Event			\Gameplay\Open_Close_Door_Event	
 	1558590687	Play_C4_Explosion			\Gameplay\Play_C4_Explosion	
+	2016578452	Play_Elevator_Up			\Gameplay\Play_Elevator_Up	
+	2235207626	Play_Open_Elevator_Door			\Gameplay\Play_Open_Elevator_Door	
 	2456271929	Play_In_Out_Barrel			\Gameplay\Play_In_Out_Barrel	
 	2558030041	Play_Plant_C4			\Gameplay\Play_Plant_C4	
 	2989601031	Play_Crash_Metal_Grille			\Gameplay\Play_Crash_Metal_Grille	
@@ -19,5 +21,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Close_Door		31048
 	709423413	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\alarm2_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		20042
 	752427372	Countdown_Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Countdown_Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Explosion Sequence\Countdown_Explosion		86769
+	761975416	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OenDoor_Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		82879
+	942893070	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Spaceship-elevator-up_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		484819
 	1064441044	Plant C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Plant C4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Plant C4		22201
 

@@ -115,7 +115,9 @@
 				<Event Id="1558590687" Name="Play_C4_Explosion"/>
 				<Event Id="736447403" Name="Play_Countdown_Explosion"/>
 				<Event Id="2989601031" Name="Play_Crash_Metal_Grille"/>
+				<Event Id="2016578452" Name="Play_Elevator_Up"/>
 				<Event Id="2456271929" Name="Play_In_Out_Barrel"/>
+				<Event Id="2235207626" Name="Play_Open_Elevator_Door"/>
 				<Event Id="2558030041" Name="Play_Plant_C4"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
 			</IncludedEvents>
@@ -143,6 +145,14 @@
 				<File Id="752427372" Language="SFX">
 					<ShortName>Countdown_Explosion.wav</ShortName>
 					<Path>SFX\Countdown_Explosion_E106FFBE.wem</Path>
+				</File>
+				<File Id="761975416" Language="SFX">
+					<ShortName>OenDoor_Elevator.wav</ShortName>
+					<Path>SFX\OenDoor_Elevator_E106FFBE.wem</Path>
+				</File>
+				<File Id="942893070" Language="SFX">
+					<ShortName>Spaceship-elevator-up.wav</ShortName>
+					<Path>SFX\Spaceship-elevator-up_E106FFBE.wem</Path>
 				</File>
 				<File Id="1064441044" Language="SFX">
 					<ShortName>Plant C4.wav</ShortName>
@@ -261,8 +271,10 @@
 				<Event Id="3876631393" Name="Play_Acumulator_Long_Shoot_Event"/>
 				<Event Id="4202206853" Name="Play_Long_Shoot_Event"/>
 				<Event Id="1958143393" Name="Play_Panting_Logan"/>
+				<Event Id="328617822" Name="Play_Panting_Logan_Loop"/>
 				<Event Id="3668163621" Name="Play_Short_Shoot_Event"/>
 				<Event Id="1082697451" Name="Stop_Acumulator_Long_Shoot_Event"/>
+				<Event Id="537533500" Name="Stop_Panting_Logan_Loop"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="161980965" Language="SFX">
