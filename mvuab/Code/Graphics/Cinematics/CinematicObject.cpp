@@ -33,10 +33,14 @@ m_Actor(0)
       if( lLayer )
       {
           const std::string& resource = atts.GetAttribute<std::string>( "resource", "" );
-          m_RenderableObject = dynamic_cast<CInstanceMesh*>( lLayer->GetResource( resource ) );
+          m_RenderableObject = lLayer->GetResource( resource );
 		  ASSERT(m_RenderableObject, "Error al cargar el renderable %s", resource.c_str());
 		  m_CurrentTime = atts.GetAttribute<float>("init_keyframe", 0.0f);
 		  m_PlayerUpdate = atts.GetAttribute<bool>("update_player", false);
+		  m_LuaCode = atts.GetAttribute<std::string>("lua_code", "");
+		  m_KeyAction = atts.GetAttribute<float>("key_action", 0.0f);
+		  if(m_LuaCode != "")
+			  m_bLuaEnable = true;
 		  if( atts.GetAttribute<bool>("physx", false) )
 		  {
 			  m_Actor = PhysXMInstance->CMapManager<CPhysicActor>::GetResource(atts.GetAttribute<std::string>("name_physx", ""));
@@ -207,6 +211,11 @@ void CCinematicObject::Update()
 	  std::stringstream lCode;
 	  lCode << "g_Player:UpdatePlayer(Vect3f(" << lPos.x << ", " << lPos.y << ", " << lPos.z << "), " << lCamera->GetYaw() << ", " << lCamera->GetPitch() << ")";
 	  ScriptMInstance->RunCode(lCode.str());
+  }
+  if(m_bLuaEnable && m_KeyAction < m_CurrentTime)
+  {
+	  ScriptMInstance->RunCode(m_LuaCode);
+	  m_bLuaEnable = false;
   }
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
