@@ -25,7 +25,7 @@ function load_basics()
 
 	scene:ActivateRoom("sala1")
 	scene:SetCurrentRoomName("sala1")
-	scene:LoadRoom("pasillo")
+	--scene:LoadRoom("pasillo")
 	--enemy_manager:CreateEnemiesPasillo()
 	scene:LoadRoom("sala2")
 	--enemy_manager:CreateEnemiesSala2()
@@ -33,15 +33,15 @@ function load_basics()
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
 	--scene:LoadRoom("elevator")
-	scene:LoadRoom("sala4")	
-	scene:LoadRoom("space")
+	--scene:LoadRoom("sala4")	
+	--scene:LoadRoom("space")
 	
 	scene:DesactivateRoom("pasillo")
-	--scene:DesactivateRoom("sala2")
-	scene:DesactivateRoom("sala3")	
+	scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("sala3")
 	scene:DesactivateRoom("elevator")	
-	--scene:DesactivateRoom("sala4")
-	--scene:DesactivateRoom("space")	
+	scene:DesactivateRoom("sala4")
+	scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
@@ -237,10 +237,12 @@ function update_gameplay()
 		end
 		
 		if g_bPressRoom1Button then
-			if action_manager:DoAction("Action") then								
-				g_bPressedRoom1Button = true
-				cinematic_manager:Execute("rejilla")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
+			if g_Player:GetIsCrouch() then
+				if action_manager:DoAction("Action") then
+					g_bPressedRoom1Button = true
+					cinematic_manager:Execute("rejilla")
+					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
+				end
 			end
 		end	
 		

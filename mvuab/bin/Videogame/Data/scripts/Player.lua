@@ -110,6 +110,19 @@ function CPlayer:Update()
 	if self.Life < 25 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
 	end
+	
+	if self.Life < 15 then
+		if not self.Pain then
+			sound_manager:PlayEvent("Play_Panting_Logan_Loop", "Logan")
+			self.Pain = true
+		end
+	else
+		if self.Pain then
+			sound_manager:PlayEvent("Stop_Panting_Logan_Loop", "Logan")
+			self.Pain = false
+		end
+	end
+		
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
@@ -269,7 +282,11 @@ function CPlayer:GetIsCrouch()
 end
 
 function CPlayer:UpdatePlayer(pos, yaw, pitch)
-	pos.y = pos.y - self.PlayerController.Height/2
+	if not self:GetIsCrouch() then
+		pos.y = pos.y - self.PlayerController.Height/2
+	else
+		pos.y = pos.y - self.PlayerController.Height/4
+	end
 	self.PlayerController.CharacterController:SetPosition(pos)
 	self.RenderableObject:SetPosition(pos)
 	self.RenderableObject:SetYaw(-yaw + g_HalfPi)
