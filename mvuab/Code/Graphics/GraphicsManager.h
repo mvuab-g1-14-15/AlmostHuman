@@ -29,7 +29,7 @@ public:
   void Update();
   void Render();
   void Release();
-  void SetupMatrices();
+  void SetupMatrices(bool l_OrtoProj = false);
   void BeginScene();
   void BeginRender();
   void EndScene();
@@ -111,7 +111,7 @@ public:
   void CreateQuadBuffers();
 
   void DrawColoredQuad2DTexturedInPixels( RECT Rect, Math::CColor& Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
-  void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0, float V0, float U1, float V1 );
+  void DrawColoredQuad2DTexturedInPixelsByEffectTechnique( CEffectTechnique* EffectTechnique, RECT Rect, Math::CColor Color, CTexture* Texture, float U0, float V0, float U1, float V1 ); 
 
 private: // Members
   HWND                    m_WindowId;                      // 3D render window handle
