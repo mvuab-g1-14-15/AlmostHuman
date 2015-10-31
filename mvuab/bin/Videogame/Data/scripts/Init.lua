@@ -25,23 +25,23 @@ function load_basics()
 
 	scene:ActivateRoom("sala1")
 	scene:SetCurrentRoomName("sala1")
-	scene:LoadRoom("pasillo")
+	--scene:LoadRoom("pasillo")
 	--enemy_manager:CreateEnemiesPasillo()
 	--scene:LoadRoom("sala2")
 	--enemy_manager:CreateEnemiesSala2()
-	--scene:LoadRoom("sala3")
+	scene:LoadRoom("sala3")
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
-	--scene:LoadRoom("elevator")
+	scene:LoadRoom("elevator")
 	--scene:LoadRoom("sala4")	
-	--scene:LoadRoom("space")	
+	--scene:LoadRoom("space")
 	
 	--scene:DesactivateRoom("pasillo")
-	--scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("sala2")
 	--scene:DesactivateRoom("sala3")	
 	--scene:DesactivateRoom("elevator")	
-	--scene:DesactivateRoom("sala4")
-	--scene:DesactivateRoom("space")	
+	scene:DesactivateRoom("sala4")
+	scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
@@ -331,6 +331,10 @@ function update_gameplay()
 		
 		if action_manager:DoAction("ChangeCameraEnemy") then
 			ChangeCameraCloseEnemy()
+		end
+		
+		if action_manager:DoAction("PlayerDamage") then
+			g_Player:AddDamage(5.0)
 		end
 	end
 	

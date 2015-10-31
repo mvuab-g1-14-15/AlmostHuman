@@ -4,6 +4,6 @@
   <MeshInstance name="moon_space" core="moon_space" pos="-1405.46 145.053 6.90963" yaw="1.04686" pitch="0.33781" roll="0.348382" scale="1.0 1.0 1.0" />
   <MeshInstance name="sol_space" core="sol_space" pos="-2190.12 290.544 76.5433" yaw="0.0" pitch="0.0" roll="0.0" scale="0.897812 0.897812 0.897812" />
   <MeshInstance name="Sphere004_space" core="Sphere004_space" pos="-1889.71 197.716 27.0051" yaw="2.97065" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <AnimatedInstance name="Cylinder001_space" core="Player" pos="-346.2 18.8742 58.8691" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <AnimatedInstance name="Cylinder001_space" core="Player" pos="-346.2 18.8742 58.8691" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false"/>
   <MeshInstance name="Cylinder1851_space" core="Cylinder1851_space" pos="-346.2 18.8742 58.8691" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

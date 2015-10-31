@@ -16,6 +16,7 @@
 	<animation name="cinematica_inicial_sala1" file="cinematica_inicial_sala1.caf"/>
 	<animation name="crash_rejilla" file="crash_rejilla.caf"/>	
 	<animation name="logan_cinem_sala3" file="logan_cinem_sala3.caf"/>	
+	<animation name="logan_cinem_final" file="logan_cinem_final.caf"/>	
 	
 	<animation_states default="idle">
 		<animation_state name="idle" default_fade_in="0.0" default_fade_out="0.0">

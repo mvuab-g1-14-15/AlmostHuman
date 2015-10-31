@@ -18,9 +18,12 @@
 
 CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTreeNode& atts) : CStagedTexturedRendererCommand(atts)
 {
-    m_RenderTarget1.Create("OcclusionMap",  640, 360, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
-    m_RenderTarget2.Create("OcclusionMap",  640, 360, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
-    m_RenderTarget3.Create("OcclusionMap", 1280, 720, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
+    uint32 w = 0, h = 0;
+    GraphicsInstance->GetWidthAndHeight(w, h);
+
+    m_RenderTarget1.Create("OcclusionMap", w, h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
+    m_RenderTarget2.Create("ScatteredLight", w , h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
+    m_RenderTarget3.Create("MergeOcclusionScattering", w, h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
 }
 
 CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
@@ -30,21 +33,22 @@ CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
 void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 {
     BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
-    // 92.0f,   -9.0f,  -44.0f sala1 vent1
-    // 94.0f,   -9.0f,  -25.3f sala1 vent2
-    // 16.5f,    18.6f,   6.5f pasillo
-    // 2095.0f, -65.0f, 167.0f space
-    //
+    //  92.31f, -9.304f, -44.21f sala1 vent1
+    //  94.02f, -9.206f, -23.10f sala1 vent2
+    //   16.5f,   18.6f,    6.5f pasillo
+    // 2095.0f,  -65.0f,  167.0f space
+
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
 
-    CEngineManagers::GetSingletonPtr();
+    unsigned int l_Width = 0, l_Height = 0;
+    GM.GetWidthAndHeight(l_Width, l_Height);
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(92.0f, -9.0f, -44.0f));
+    l_PosLights.push_back(Math::Vect3f(92.31f, -9.304f, -44.21f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(94.0f, -9.0f, -25.3f));
+    l_PosLights.push_back(Math::Vect3f(94.02f, -9.206f, -23.10f));
 
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
@@ -60,18 +64,18 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     if(l_RoomName == "sala1")
     {
-        l_ActiveLights[0] = TRUE;
-        l_ActiveLights[1] = TRUE;
+        l_ActiveLights[0] = l_CameraFrustum.SphereIsVisible(l_PosLights[0], 2.0f) ? TRUE : FALSE;
+        l_ActiveLights[1] = l_CameraFrustum.SphereIsVisible(l_PosLights[1], 2.0f) ? TRUE : FALSE;
     }
 
     if(l_RoomName == "pasillo")
     {
-        l_ActiveLights[2] =  TRUE;
+        l_ActiveLights[2] = l_CameraFrustum.SphereIsVisible(l_PosLights[2], 2.0f) ? TRUE : FALSE;
     }
 
     if(l_RoomName == "space")
     {
-        l_ActiveLights[3] = TRUE;
+        l_ActiveLights[3] = l_CameraFrustum.SphereIsVisible(l_PosLights[3], 2.0f) ? TRUE : FALSE;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
@@ -82,10 +86,51 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
 
-    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
+    // Vertex 19
+    std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(19);
     CRenderableObjectTechnique *l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
-    CEffectTechnique *l_EffectTech =  l_ROT->GetEffectTechnique();
+    CEffectTechnique *l_EffectTech = l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
+    // Vertex 31
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(31);
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    l_EffectTech = l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
+    // Vertex 51
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(51);
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    l_EffectTech = l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
+    // Vertex 63
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(63);
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    l_EffectTech = l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
+    // Vertex 67
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(67);
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    l_EffectTech = l_ROT->GetEffectTechnique();
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
+
+    // Vertex 415
+    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(415);
+    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
+
+    l_EffectTech = l_ROT->GetEffectTechnique();
     l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
@@ -97,11 +142,11 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("solid");
     CEngineManagers::GetSingletonPtr()->GetSceneManager()->RenderLayer("characters");
 
-    m_RenderTarget1.UnsetAsRenderTarget(0);
     GM.EnableZTest(); GM.EnableZWrite();
+    m_RenderTarget1.UnsetAsRenderTarget(0);
 
     // Generate Rays Of God over occlusion Map
-    RECT l_Rect1 = { 0, 0, 640, 360 };
+    RECT l_Rect1 = { 0, 0, l_Width, l_Height };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
     l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
@@ -115,8 +160,6 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     m_RenderTarget2.UnsetAsRenderTarget(0);
 
     // Set texture to original size
-    unsigned int l_Width = 0, l_Height = 0;
-    GM.GetWidthAndHeight(l_Width, l_Height);
     RECT l_Rect2 = { 0, 0, l_Width, l_Height };
 
     //ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
