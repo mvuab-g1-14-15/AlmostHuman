@@ -419,7 +419,7 @@ function SetPropSala4()
 end
 
 function Hacknave(nave_obj, other_shape)
-	cinematic_manager:Execute("explotion_boss")
+	cinematic_manager:Execute("FinalGame")
 	lBoss = enemy_manager:GetBoss()
 	if lBoss ~= nil then
 		if lBoss:IsStunned() then
