@@ -132,6 +132,9 @@ function CEnemy:__init( aInfo )
 	if self.Fly then
 		sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
 	end
+	
+	self.LastPos = Vect3f(0.0)
+	self.Death = false
 end
 
 function CEnemy:Destroy()
@@ -151,132 +154,149 @@ end
 
 function CEnemy:Update()
 	--profiler:AddInit("CEnemy:Update()")
-	if self.Active then
-		local dt = timer:GetElapsedTime()
-		
-		self:UpdateCamera()
-		
-		self.BlashRight:Tick()
-		self.BlashLeft:Tick()
-		
-		local IsPlayerInSight = false
-		if self.CanSee then
-			IsPlayerInSight = self:PlayerInSight()
-		end
-		
-		if IsPlayerInSight then
-			if self.Alarm then
-				if not countdowntimer_manager:ExistTimer(self.AlarmTimerName) then
-					countdowntimer_manager:AddTimer(self.AlarmTimerName, self.AlarmTime, false)
-				else
-					countdowntimer_manager:SetActive(self.AlarmTimerName, true)
-				end
-				if countdowntimer_manager:isTimerFinish(self.AlarmTimerName) then
-					enemy_manager:SetAlarm(self.Room)
-					countdowntimer_manager:Reset(self.AlarmTimerName, false)
-				end
+	if self.Life > 0 then
+		if self.Active then
+			local dt = timer:GetElapsedTime()
+			
+			self:UpdateCamera()
+			
+			self.BlashRight:Tick()
+			self.BlashLeft:Tick()
+			
+			local IsPlayerInSight = false
+			if self.CanSee then
+				IsPlayerInSight = self:PlayerInSight()
 			end
 			
-			self.Delta = self.InitDelta * 2.0
-			self.TimeToRot = self.InitTimeToRot / 2.0
-			
-			if self.Fly then
-				local lPlayerDir = GetPlayerDirection(self:GetPosition())
-				lPlayerDir:Normalize()
-				local lPitch = math.atan2( lPlayerDir.y, math.sqrt( lPlayerDir.z * lPlayerDir.z + lPlayerDir.x * lPlayerDir.x ) )
-				self.RenderableObject:SetPitch(lPitch)
-				self.Laser:SetPitch(lPitch + g_HalfPi)
-			end
-			
-			local lDist = PlayerDistance(self)
-			if lDist < self.ChaseDistance then
-				self.DontMove = true
-				if self:RotateToPos(g_Player:GetPosition()) then
-					self:ChangeAnimation("shoot", 0.5, 1.0)
-			
-					self.CountTimeShoot = self.CountTimeShoot + dt
-					local timerBurst = "Burst"..self.Name
-					if self.CountTimeShoot >= self.TimeToShoot then
-						if not countdowntimer_manager:ExistTimer(timerBurst) then
-							countdowntimer_manager:AddTimer(timerBurst, self.TimeBurst, false)
-						else
-							countdowntimer_manager:SetActive(timerBurst, true)
-						end
-						if countdowntimer_manager:isTimerFinish(timerBurst) then
-							self:MakeShoot()
-							self.ActualShootBurst = self.ActualShootBurst + 1
-							countdowntimer_manager:Reset(timerBurst, false)
-						end
-						if self.ActualShootBurst == 0 then
-							self:MakeShoot()
-							self.ActualShootBurst = self.ActualShootBurst + 1
-						end
-						if self.ActualShootBurst == self.NumShootBurst then
-							self.CountTimeShoot = 0.0
-							self.ActualShootBurst = 0
-						end
+			if IsPlayerInSight then
+				if self.Alarm then
+					if not countdowntimer_manager:ExistTimer(self.AlarmTimerName) then
+						countdowntimer_manager:AddTimer(self.AlarmTimerName, self.AlarmTime, false)
+					else
+						countdowntimer_manager:SetActive(self.AlarmTimerName, true)
+					end
+					if countdowntimer_manager:isTimerFinish(self.AlarmTimerName) then
+						enemy_manager:SetAlarm(self.Room)
+						countdowntimer_manager:Reset(self.AlarmTimerName, false)
 					end
 				end
+				
+				self.Delta = self.InitDelta * 2.0
+				self.TimeToRot = self.InitTimeToRot / 2.0
+				
+				if self.Fly then
+					local lPlayerDir = GetPlayerDirection(self:GetPosition())
+					lPlayerDir:Normalize()
+					local lPitch = math.atan2( lPlayerDir.y, math.sqrt( lPlayerDir.z * lPlayerDir.z + lPlayerDir.x * lPlayerDir.x ) )
+					self.RenderableObject:SetPitch(lPitch)
+					self.Laser:SetPitch(lPitch + g_HalfPi)
+				end
+				
+				local lDist = PlayerDistance(self)
+				if lDist < self.ChaseDistance then
+					self.DontMove = true
+					if self:RotateToPos(g_Player:GetPosition()) then
+						self:ChangeAnimation("shoot", 0.5, 1.0)
+				
+						self.CountTimeShoot = self.CountTimeShoot + dt
+						local timerBurst = "Burst"..self.Name
+						if self.CountTimeShoot >= self.TimeToShoot then
+							if not countdowntimer_manager:ExistTimer(timerBurst) then
+								countdowntimer_manager:AddTimer(timerBurst, self.TimeBurst, false)
+							else
+								countdowntimer_manager:SetActive(timerBurst, true)
+							end
+							if countdowntimer_manager:isTimerFinish(timerBurst) then
+								self:MakeShoot()
+								self.ActualShootBurst = self.ActualShootBurst + 1
+								countdowntimer_manager:Reset(timerBurst, false)
+							end
+							if self.ActualShootBurst == 0 then
+								self:MakeShoot()
+								self.ActualShootBurst = self.ActualShootBurst + 1
+							end
+							if self.ActualShootBurst == self.NumShootBurst then
+								self.CountTimeShoot = 0.0
+								self.ActualShootBurst = 0
+							end
+						end
+					end
+				else
+					self.DontMove = false
+				end
+				
+				self.Suspected = true
+				self.SuspectedPosition = g_Player:GetPosition()
 			else
 				self.DontMove = false
 			end
 			
-			self.Suspected = true
-			self.SuspectedPosition = g_Player:GetPosition()
-		else
-			self.DontMove = false
-		end
-		
-		if self.Suspected then
-			if self.CanUseGraph then
-				self.UseGraph = true
+			if self.Suspected then
+				if self.CanUseGraph then
+					self.UseGraph = true
+				end
+				self.TargetPos = self.SuspectedPosition
 			end
-			self.TargetPos = self.SuspectedPosition
-		end
-		
-		if not self.DontMove then
-			if self:MoveToPos( self.TargetPos ) then
-				if self.Suspected then
-					self.Suspected = false
-					self.TargetPos = self.InitPosition
-					self.Delta = self.InitDelta
-					self.TimeToRot = self.InitTimeToRot
-					if self.IsPatrol then
-						self.ActualWaypoint = 1
-					end
-					if self.UseGraph then
-						self.PathCalculated = false
-					end
-				else
-					if self.TargetPos == self.InitPosition then
-						self.UseGraph = false
-					end
-					if self.IsPatrol then
-						self.ActualWaypoint = self.ActualWaypoint + 1
-						if self.ActualWaypoint > #self.Waypoints then
+			
+			if not self.DontMove then
+				if self:MoveToPos( self.TargetPos ) then
+					if self.Suspected then
+						self.Suspected = false
+						self.TargetPos = self.InitPosition
+						self.Delta = self.InitDelta
+						self.TimeToRot = self.InitTimeToRot
+						if self.IsPatrol then
 							self.ActualWaypoint = 1
 						end
-						self.TargetPos = self.Waypoints[self.ActualWaypoint]
+						if self.UseGraph then
+							self.PathCalculated = false
+						end
+					else
+						if self.TargetPos == self.InitPosition then
+							self.UseGraph = false
+						end
+						if self.IsPatrol then
+							self.ActualWaypoint = self.ActualWaypoint + 1
+							if self.ActualWaypoint > #self.Waypoints then
+								self.ActualWaypoint = 1
+							end
+							self.TargetPos = self.Waypoints[self.ActualWaypoint]
+						end
 					end
 				end
+			else
+				local dt = timer:GetElapsedTime()
+				self.CharacterController:Move(Vect3f(0.0), dt)
+			end
+			
+			if self.Fly then
+				local lPos = self:GetPosition()
+				lPos.y = self.InitHeight
+				self:SetPosition(lPos)
+				self.Laser:SetPosition(lPos)
+				self.Laser:SetYaw(-self.Camera:GetYaw() + g_HalfPi)
+				self.Laser:MakeTransform()
 			end
 		else
 			local dt = timer:GetElapsedTime()
 			self.CharacterController:Move(Vect3f(0.0), dt)
 		end
-		
-		if self.Fly then
-			local lPos = self:GetPosition()
-			lPos.y = self.InitHeight
-			self:SetPosition(lPos)
-			self.Laser:SetPosition(lPos)
-			self.Laser:SetYaw(-self.Camera:GetYaw() + g_HalfPi)
-			self.Laser:MakeTransform()
-		end
-		--self.BillboardEnemy:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRPalm") ) --Descomentar codigo de cpp para dumpear todos los huesos del androide
 	else
+		if not self.Death then
+			lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
+			renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+			self.Death = true
+		end
 		local dt = timer:GetElapsedTime()
 		self.CharacterController:Move(Vect3f(0.0), dt)
+		local lActualPos = self:GetPosition()
+		engine:TraceOnce("Actual pos "..lActualPos:ToString().." last pos "..self.LastPos:ToString())
+		if self.LastPos == lActualPos then
+			enemy_manager:DestroyEnemy(self)
+			return
+		else
+			self.LastPos = lActualPos
+		end
 	end
 	
 	local lROPos = self:GetPosition()
@@ -285,7 +305,6 @@ function CEnemy:Update()
 	self.RenderableObject:MakeTransform()
 	
 	sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), self:GetPosition())
-		
 	--profiler:AddEnd("CEnemy:Update()")
 end
 

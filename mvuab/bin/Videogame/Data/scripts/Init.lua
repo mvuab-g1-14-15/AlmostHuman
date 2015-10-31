@@ -24,7 +24,7 @@ function load_basics()
 
 	scene:ActivateRoom("sala1")
 	scene:SetCurrentRoomName("sala1")
-	--scene:LoadRoom("pasillo")
+	scene:LoadRoom("pasillo")
 	--enemy_manager:CreateEnemiesPasillo()
 	--scene:LoadRoom("sala2")
 	--enemy_manager:CreateEnemiesSala2()
@@ -32,7 +32,7 @@ function load_basics()
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
 	--scene:LoadRoom("elevator")
-	scene:LoadRoom("sala4")	
+	--scene:LoadRoom("sala4")	
 	--scene:LoadRoom("space")	
 	
 	--scene:DesactivateRoom("pasillo")
@@ -181,16 +181,18 @@ function update_gameplay()
 		end
 		
 		if g_bPressRoomPasillo then
-			if action_manager:DoAction("Action") then
-				scene:ActivateRoom("sala3")
-				enemy_manager:CreateEnemiesSala3()
-				enemy_manager:CreateDesactivateEnemiesSala3()
-				scene:ActivateRoom("elevator")
-				cinematic_manager:Execute("OpenDoorPasillo")
-				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
-				gui_manager:ShowStaticText("OpenDoor")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
-				g_bPressRoomPasillo = false
+			if g_C4Taken then
+				if action_manager:DoAction("Action") then
+					scene:ActivateRoom("sala3")
+					enemy_manager:CreateEnemiesSala3()
+					enemy_manager:CreateDesactivateEnemiesSala3()
+					scene:ActivateRoom("elevator")
+					cinematic_manager:Execute("OpenDoorPasillo")
+					trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
+					gui_manager:ShowStaticText("OpenDoor")
+					physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
+					g_bPressRoomPasillo = false
+				end
 			end
 		end
 		
@@ -321,6 +323,8 @@ function update_gameplay()
 			ChangeCameraCloseEnemy()
 		end
 	end
+	
+	UpdateTriggers()
 	
     collectgarbage() --force to clean memory
 	--profiler:Trace()
