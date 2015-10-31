@@ -472,7 +472,8 @@ bool CEffect::SetSelfIlumAmount( float aSelfIlumAmount )
 
 void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights)
 {
-    m_Effect->SetBoolArray(m_LightEnabledParameter, &l_ActiveLights[0], MAX_LIGHTS_BY_SHADER);
+    if(l_ActiveLights.size() > MAX_LIGHTS_BY_SHADER) return;
+    m_Effect->SetBoolArray(m_LightEnabledParameter, &l_ActiveLights[0], l_ActiveLights.size());
     m_Effect->SetFloatArray(m_LightsPositionParameter, &l_PosLights[0].x, l_PosLights.size() * 3);
 }
 
