@@ -112,6 +112,11 @@ function load_gameplay()
 	
 	camera_manager:GetCamera("Main"):SetZFar(5000.0)
 	camera_manager:GetCamera("FreeCam"):SetZFar(5000.0)
+	
+	camera_manager:SetCurrentCamera( "fixed_initial_camera" );
+	lCamera = camera_manager:GetCurrentCamera();
+	lCamera:SetEnable(true);
+	g_Player:UpdatePlayer(Vect3f( lCamera:GetPosition() ), lCamera:GetYaw(), lCamera:GetPitch() );
 end
 
 function update_gameplay()

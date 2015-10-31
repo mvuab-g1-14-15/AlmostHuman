@@ -18,6 +18,7 @@ class CSetCameraElement : public CCinematicsElement
     private:
 	  CCamera* m_CameraCinematical;
 	  std::string		m_CameraName;
+    std::string		m_CurrentCameraName;
 };
 
 #endif //_SET_CAMERA_ELEMENT_

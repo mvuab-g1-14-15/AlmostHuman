@@ -21,8 +21,8 @@
 #include "Cameras\CameraCinematical.h"
 #include "ScriptManager.h"
 
-CCinematicObject::CCinematicObject( CXMLTreeNode& atts ):
-m_Actor(0)
+CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
+  : m_Actor(0)
 {
   CRoom* lRoom = SceneInstance->GetResource( atts.GetAttribute<std::string>("room", "" ) );
   ASSERT( lRoom, "The room %s doesn't exist", atts.GetAttribute<std::string>("room", "" ).c_str() );

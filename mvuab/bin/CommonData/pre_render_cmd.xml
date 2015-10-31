@@ -1,7 +1,7 @@
 ﻿<scene_renderer_commands>
 	<!--generate the shadow maps-->
-	<!--set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
-	<generate_shadow_maps/-->
+	<set_pool_renderable_objects_technique pool="shadow_map_pool_renderable_object_technique"/>
+	<generate_shadow_maps/>
 	
 	<begin_scene/>
 	<!--generate the deferred textures-->
