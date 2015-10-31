@@ -59,6 +59,8 @@ g_FaltanC4Text = false
 
 g_ExplotionDone = false
 
+g_InsideElevator = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -317,7 +319,6 @@ function StayTextElevatorDown(text, other_shape)
 		cinematic_manager:Execute("elevatorDown")
 		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
 		enemy_manager:ActivateEnemiesSala3()
-		g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 	end
 end
 
@@ -467,6 +468,8 @@ end
 
 function Hacknave(nave_obj, other_shape)
 	cinematic_manager:Execute("FinalGame")
+	scene:ActivateRoom("space")
+	-- //////////////////
 	lBoss = enemy_manager:GetBoss()
 	if lBoss ~= nil then
 		if lBoss:IsStunned() then
@@ -481,7 +484,7 @@ function Hacknave(nave_obj, other_shape)
 	end
 end
 
-function UpToSala4(text, other_shape)
+function UpToSala4()
 	cinematic_manager:Execute("elevatorUp")
 	scene:ActivateRoom("sala4")
 end
@@ -574,6 +577,14 @@ function PuntoDetonacion_exit()
 	end
 end
 
+function Elevator_enter()
+	g_InsideElevator = true
+end
+
+function Elevator_exit()
+	g_InsideElevator = false
+end
+
 function UpdateTriggers()
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
@@ -617,6 +628,9 @@ function UpdateTriggers()
 			else
 				DoorPasillo_exit()
 				scene:ActivateRoom("sala3")
+				scene:ActivateRoom("elevator")
+				enemy_manager:CreateEnemiesSala3()
+				enemy_manager:CreateDesactivateEnemiesSala3()
 				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				cinematic_manager:Execute("OpenDoorPasillo")
 				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))
@@ -666,6 +680,15 @@ function UpdateTriggers()
 					gui_manager:ShowStaticText("FaltanC4")
 				end
 			end
+		end
+	end
+	
+	if g_InsideElevator then
+		if action_manager:DoAction("Action") then
+			Elevator_exit()
+			cinematic_manager:Execute("elevatorDown")
+			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
+			enemy_manager:ActivateEnemiesSala3()
 		end
 	end
 end
