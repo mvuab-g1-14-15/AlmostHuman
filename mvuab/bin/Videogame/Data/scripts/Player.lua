@@ -110,6 +110,19 @@ function CPlayer:Update()
 	if self.Life < 25 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
 	end
+	
+	if self.Life < 15 then
+		if not self.Pain then
+			--sonido pain
+			self.Pain = true
+		end
+	else
+		if self.Pain then
+			--parar sonido pain
+			self.Pain = false
+		end
+	end
+		
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
