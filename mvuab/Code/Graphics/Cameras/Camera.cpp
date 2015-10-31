@@ -58,6 +58,15 @@ D3DXMATRIX CCamera::GetMatrixProj( void )
   return m_proj;
 }
 
+D3DXMATRIX CCamera::GetMatrixOrto( void )
+{
+    uint32 w = 0, h = 0;
+    GraphicsInstance->GetWidthAndHeight( w, h );
+
+    D3DXMatrixOrthoRH(&m_proj, (float) w, (float) h, m_ZNear, m_ZFar);
+    return m_proj;
+}
+
 void CCamera::RenderCamera( LPDIRECT3DDEVICE9 device )
 {
 #ifdef _DEBUG

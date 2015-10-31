@@ -31,16 +31,19 @@ public:
 
 private: // Members
     std::string                 m_FileName;
+	std::string                 m_LuaCode;
     std::vector<CCameraKey *>   m_Keys;
     size_t                      m_CurrentKey;
     size_t                      m_NextKey;
     float32                     m_CurrentTime;
+	float32                     m_KeyAction;
     float32                     m_TotalTime;
     bool                        m_PlayingForward;
     bool                        m_PlayingBackward;
     bool                        m_Cycle;
     bool                        m_Reverse;
     bool                        m_Finish;
+	bool                        m_bLuaEnable;
     CCameraInfo*          m_pCameraInfo;
 
 private: // Methods

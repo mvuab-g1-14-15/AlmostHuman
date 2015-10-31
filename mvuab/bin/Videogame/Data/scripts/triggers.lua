@@ -37,6 +37,9 @@ g_Hacked.nave2 = false
 g_Hacked.nave3 = false
 g_Hacked.nave4 = false
 
+g_C4Taken = false
+g_InsideTakeC4 = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -451,17 +454,18 @@ function ActiveRoom(room)
 	if room == "sala2" then
 		enemy_manager:CreateEnemiesSala2()
 	end
-	if room == "pasillo" then
-		enemy_manager:CreateEnemiesPasillo()
-	end
 	if room == "sala3" then
 		enemy_manager:CreateEnemiesSala3()
 		enemy_manager:CreateDesactivateEnemiesSala3()
 	end
 end
 
-function take_C4()
-	sound_manager:PlayEvent("Play_Pasillo", "Logan")
+function take_C4_enter()
+	g_InsideTakeC4 = true
+end
+
+function take_C4_exit()
+	g_InsideTakeC4 = false
 end
 
 function ActivateBoss()
@@ -473,4 +477,16 @@ function CreateBoss()
 	g_Hacked.nave3 = false
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
+end
+
+function UpdateTriggers()
+	if g_InsideTakeC4 then
+		if action_manager:DoAction("Action") then
+			g_C4Taken = true
+			sound_manager:PlayEvent("Play_Pasillo", "Logan")
+			enemy_manager:CreateEnemiesPasillo()
+			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
+			g_InsideTakeC4 = false
+		end
+	end
 end

@@ -24,7 +24,8 @@ public:
   virtual Math::Vect3f GetVecUp( void ) const;
 
   D3DXMATRIX GetMatrixView( void );
-  D3DXMATRIX  GetMatrixProj( void );
+  D3DXMATRIX GetMatrixProj( void );
+  D3DXMATRIX GetMatrixOrto( void );
 
   GET_SET( Type, CameraType )
   GET_SET( float32, ZNear )
