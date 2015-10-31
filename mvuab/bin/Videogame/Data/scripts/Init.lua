@@ -121,13 +121,8 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
-	if action_manager:AnyKey() then
-		engine:Trace("Any Acton")
-	end
-	
 	if not g_GameIsOn and action_manager:AnyKey() then
 		CargarJuego();
-		engine:Trace("Launch game")
 	end
 	
 	debug_helper:Update()
