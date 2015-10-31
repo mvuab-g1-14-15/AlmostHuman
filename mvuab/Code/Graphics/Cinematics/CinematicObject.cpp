@@ -39,6 +39,7 @@ m_Actor(0)
 		  m_PlayerUpdate = atts.GetAttribute<bool>("update_player", false);
 		  m_LuaCode = atts.GetAttribute<std::string>("lua_code", "");
 		  m_KeyAction = atts.GetAttribute<float>("key_action", 0.0f);
+		  m_bMoveBack = atts.GetAttribute<bool>("move_back", false);
 		  if(m_LuaCode != "")
 			  m_bLuaEnable = true;
 		  if( atts.GetAttribute<bool>("physx", false) )
@@ -201,7 +202,6 @@ void CCinematicObject::Update()
   m_RenderableObject->SetPitch( pitch );
   m_RenderableObject->SetRoll( roll );
   m_RenderableObject->SetScale( scale );
-  m_RenderableObject->MakeTransform();
   if(m_Actor)
 	  m_Actor->SetPosition(pos);
   if(m_PlayerUpdate)
@@ -217,6 +217,16 @@ void CCinematicObject::Update()
 	  ScriptMInstance->RunCode(m_LuaCode);
 	  m_bLuaEnable = false;
   }
+
+  if(m_bMoveBack)
+  {
+	  CCamera* lCamera = CameraMInstance->GetCurrentCamera();
+	  Math::Vect3f lDirection = lCamera->GetDirection();
+	  lDirection.y = 0.0f;
+	  m_RenderableObject->SetPosition(pos - (lDirection/7.5f));
+  }
+  
+  m_RenderableObject->MakeTransform();
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
 }
 

@@ -20,6 +20,7 @@ private:
 	CPhysicActor*							m_Actor;
 	bool									m_PlayerUpdate;
 	bool									m_bLuaEnable;
+	bool									m_bMoveBack;
 	float32									m_KeyAction;
 	std::string								m_LuaCode;
 
