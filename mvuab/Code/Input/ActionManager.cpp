@@ -49,6 +49,8 @@ void CActionManager::ProcessInputs()
     TInputsVector::const_iterator lItb_inputs = lItb->second.begin(), lIte_inputs = lItb->second.end();
     float32 amount = 0.0f;
 
+    EInputDeviceType lDeviceType = IDV_KEYBOARD;
+
     for ( ; lItb_inputs != lIte_inputs; ++lItb_inputs )
     {
 
@@ -133,6 +135,7 @@ void CActionManager::ProcessInputs()
 
       }
 
+      lDeviceType = current_action.m_DeviceType;
       if ( current_action.m_EventType == EVENT_DOWN )
         doIt = doIt && mInputManager->IsDown( current_action.m_DeviceType, current_action.m_Code );
       else if ( current_action.m_EventType == EVENT_DOWN_UP )
@@ -147,7 +150,7 @@ void CActionManager::ProcessInputs()
 
     if( doIt )
     {
-      SActionDone lAction = { doIt, amount };
+      SActionDone lAction = { doIt, amount, lDeviceType };
       mDoActions[lItb->first] = lAction;
     }
   }
@@ -155,7 +158,7 @@ void CActionManager::ProcessInputs()
 
 bool CActionManager::DoAction( const std::string& action, float32& amount )
 {
-  mMutex.Lock();
+  //mMutex.Lock();
   MapActionsDone::iterator lItfind = mDoActions.find( action );
 
   if ( lItfind != mDoActions.end() )
@@ -165,7 +168,17 @@ bool CActionManager::DoAction( const std::string& action, float32& amount )
     return lItfind->second.mIsActionDone;
   }
 
-  mMutex.UnLock();
+  //mMutex.UnLock();
+  return false;
+}
+
+bool CActionManager::AnyKey()
+{
+  for( MapActionsDone::iterator lItb = mDoActions.begin(), lIte = mDoActions.end(); lItb != lIte; ++lItb )
+  {
+     if ( lItb->second.m_DeviceType == IDV_KEYBOARD )
+       return true;
+  }
   return false;
 }
 

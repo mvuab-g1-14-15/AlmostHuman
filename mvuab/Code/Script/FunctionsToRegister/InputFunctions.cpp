@@ -49,6 +49,7 @@ void registerInputs( lua_State* m_LS )
   LUA_DECLARE_CLASS( CActionManager )
   LUA_DECLARE_DEFAULT_CTOR
   LUA_DECLARE_METHOD( CActionManager, LoadXML )
+  LUA_DECLARE_METHOD( CActionManager, AnyKey )
   LUA_DECLARE_METHOD( CActionManager, SaveXML )
   LUA_DECLARE_METHOD_PROTO( CActionManager, DoAction, bool( CActionManager::* )( const std::string& ) )
   //luabind::pure_out_value(_3) -> Cuenta como primer parámetro el this de la clase, el segundo parámetro es el tercero realmente

@@ -250,7 +250,7 @@ void CGraphicsManager::SetupMatrices(bool l_OrtoProj)
     GetWidthAndHeight(w, h);
 
     //Setup Matrix projection
-    if(l_OrtoProj) D3DXMatrixOrthoRH(&l_matProject, (float) w, (float) h, l_CurrentCamera->GetZNear(), l_CurrentCamera->GetZFar());
+    if(l_OrtoProj) D3DXMatrixOrthoLH(&l_matProject, (float) w, (float) h, l_CurrentCamera->GetZNear(), l_CurrentCamera->GetZFar());
     else D3DXMatrixPerspectiveFovLH(&l_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f);
   }
   else

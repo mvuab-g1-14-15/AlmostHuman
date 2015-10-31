@@ -51,7 +51,7 @@ CEditableTextBox::~CEditableTextBox()
 //---------------Interfaz de GuiElement----------------------
 void CEditableTextBox::Render()
 {
-    if ( CGuiElement::m_bIsVisible )
+    if ( GetVisible() )
     {
 
         if ( m_pBackGroundTexture )
@@ -97,14 +97,14 @@ void CEditableTextBox::Render()
         //Finalmente renderizamos el texto:
         CGuiElement::RenderText();
 
-    }//END if( CGuiElement::m_bIsVisible )
+    }//END if( GetVisible() )
 }
 
 void CEditableTextBox::Update()
 {
     std::string buffer_prev = m_sBuffer;
 
-    if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if ( GetVisible() && CGuiElement::m_bIsActive )
     {
         Math::Vect2i mousePosition;
         InputManagerInstance->GetPosition( IDV_MOUSE, mousePosition );

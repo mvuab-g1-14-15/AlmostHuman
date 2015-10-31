@@ -17,6 +17,7 @@ g_bAlarmRoom3 = false
 g_fOcultarMensaje = 5.0
 g_sMessageAlarm = ""
 g_PlayerCinematic = nil
+g_GameIsOn		= false;
 
 function load_basics()
 	engine:Trace("Init the load_basics()")
@@ -45,7 +46,7 @@ function load_basics()
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
 	PlaySoundStaticElement()
-	
+		
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -120,6 +121,15 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
+	if action_manager:AnyKey() then
+		engine:Trace("Any Acton")
+	end
+	
+	if not g_GameIsOn and action_manager:AnyKey() then
+		CargarJuego();
+		engine:Trace("Launch game")
+	end
+	
 	debug_helper:Update()
 
 	enemy_manager:Update()
@@ -129,7 +139,7 @@ function update_gameplay()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
-		if not (g_CinematicActive or g_PauseGame) then
+		if not (g_CinematicActive or g_PauseGame) and g_GameIsOn then
 			g_Player:Update()
 			g_HUD:Update()
 		end

@@ -36,7 +36,7 @@ CSlider::CSlider( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolutio
 //---------------Interfaz de GuiElement----------------------
 void CSlider::Render    ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( GetVisible())
     {
         //Primero renderizamos todos los hijos que pudiera tener el Button:
         CGuiElement::Render();
@@ -64,7 +64,7 @@ void CSlider::Render    ()
 
 void CSlider::Update()
 {
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if( GetVisible() && CGuiElement::m_bIsActive )
     {
         //Primero actualizamos todos los hijos que pudiera tener el checkButton:
         CGuiElement::Update();
@@ -128,7 +128,7 @@ void CSlider::Update()
             m_bStart_to_Move = false;
         }
 
-    }//END if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    }//END if( GetVisible() && CGuiElement::m_bIsActive )
 }
 
 

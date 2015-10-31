@@ -42,6 +42,11 @@ class CStaticText: public CGuiElement
         void                    SetLiteral                    (const std::string& lit);
 
     private:
+
+      bool mAnimateText;
+      float mTime;
+      float mTimeVisible;
+      float mTimeNoVisible;
 };
 
 #endif //INC_STATIC_TEXT_H

@@ -8,17 +8,13 @@
     <texture name="img1" name_texture="Data/textures/GUI/Almost_human.jpg"/>
   </Image>-->
 
-  <Image name="almost_human" pos="35.00 12.00" height="25.00" width="30.00" visible="true" active="true"
-      default="0" 
-      OnLoadValue=""
-      OnSaveValue=""
-      flip="" is_background="false">
-    <texture name="0" name_texture="Data/textures/GUI/AlmostHumanLogo.png"/>
-    
+  <Image name="almost_human" pos="50.00 50.00" visible="true" active="true" default="0" is_background="false" use_texture_size="true">
+    <texture texture="Data/textures/GUI/AlmostHumanLogo.png"/>
   </Image>
-
   
-  <Button name="Play" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
+  <StaticText name="ButtonEnergy" pos="50 90" height="30" width="12" visible="true" active="false" Literal="AnyKey" animate_font="true" time_visible="1" time_no_visible="1" />
+
+  <!--<Button name="Play" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
           active="true" texture_normal="Data/textures/GUI/Play.png"
           texture_over="Data/textures/GUI/play-over.png"
           texture_clicked="Data/textures/GUI/play-click.png"
@@ -26,13 +22,13 @@
           OnClickedAction="CargarJuego()"
           OnOverAction="SoundGUI()"/>
   
- <!-- <Button name="Setup" pos="38.00 60.00" height="10.00" width="25.00" visible="true" active="true" 
+  <Button name="Setup" pos="38.00 60.00" height="10.00" width="25.00" visible="true" active="true" 
           texture_normal="Data/textures/GUI/setup.png"
           texture_over="Data/textures/GUI/setup-over.png" 
           texture_clicked="Data/textures/GUI/setup-click.png"
           texture_deactivated= "Data/textures/GUI/setup_normal.png"
           OnClickedAction="IrASetup()"
-          OnOverAction="SoundGUI()"/>-->
+          OnOverAction="SoundGUI()"/>
 
   
   <Button name="Exit" pos="38.00 75.00" height="10.00" width="25.00" visible="true" active="true" 
@@ -41,5 +37,5 @@
           texture_clicked="Data/textures/GUI/exit-click.png"
           texture_deactivated="Data/textures/GUI/exit_normal.png"
           OnClickedAction="SalirJuego()"
-          OnOverAction="SoundGUI()"/>
+          OnOverAction="SoundGUI()"/>-->
 </Windows>

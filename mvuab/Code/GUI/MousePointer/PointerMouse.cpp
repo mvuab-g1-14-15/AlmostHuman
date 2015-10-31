@@ -23,7 +23,7 @@ CPointerMouse::CPointerMouse(  const CXMLTreeNode& aNode, const Math::Vect2i& sc
 //---------------CGuiElement Interface----------------------
 void CPointerMouse::Render()
 {
-    if ( CGuiElement::m_bIsVisible )
+    if ( GetVisible() )
     {
         tTexturesMap::iterator it = m_Textures.find( m_sActiveTexture );
 
@@ -45,7 +45,7 @@ void CPointerMouse::Render()
 
 void CPointerMouse::Update()
 {
-    if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if ( GetVisible() && CGuiElement::m_bIsActive )
     {
         Math::Vect2i pos;
         InputManagerInstance->GetPosition( IDV_MOUSE, pos );
@@ -69,7 +69,7 @@ void CPointerMouse::Update()
             }
         }//END if (m_bAnimated)
 
-    }//END if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    }//END if( GetVisible() && CGuiElement::m_bIsActive )
 }
 
 //---------------CImage Interface----------------------
