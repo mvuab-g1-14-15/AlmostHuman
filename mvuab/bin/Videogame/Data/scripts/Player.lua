@@ -282,7 +282,11 @@ function CPlayer:GetIsCrouch()
 end
 
 function CPlayer:UpdatePlayer(pos, yaw, pitch)
-	pos.y = pos.y - self.PlayerController.Height/2
+	if not self:GetIsCrouch() then
+		pos.y = pos.y - self.PlayerController.Height/2
+	else
+		pos.y = pos.y - self.PlayerController.Height/4
+	end
 	self.PlayerController.CharacterController:SetPosition(pos)
 	self.RenderableObject:SetPosition(pos)
 	self.RenderableObject:SetYaw(-yaw + g_HalfPi)

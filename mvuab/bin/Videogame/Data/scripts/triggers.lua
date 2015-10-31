@@ -61,6 +61,8 @@ g_ExplotionDone = false
 
 g_InsideElevator = false
 
+g_InsideUpdateDLC = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -585,6 +587,14 @@ function Elevator_exit()
 	g_InsideElevator = false
 end
 
+function UpdateDLC_enter()
+	g_InsideUpdateDLC = true
+end
+
+function UpdateDLC_exit()
+	g_InsideUpdateDLC = false
+end
+
 function UpdateTriggers()
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
@@ -689,6 +699,16 @@ function UpdateTriggers()
 			cinematic_manager:Execute("elevatorDown")
 			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
 			enemy_manager:ActivateEnemiesSala3()
+		end
+	end
+	
+	if g_InsideUpdateDLC then
+		if action_manager:DoAction("Action") then
+			UpdateDLC_exit()
+			trigger_manager:GetTriggerByName("base_DLC_sala2"):SetActive(false)
+			sound_manager:PlayEvent("Play_Sala2", "Logan")
+			g_Player:SetEnergy(100.0)
+			g_Player:SetCheckpoint("sala2", Vect3f(test), g_Player:GetLife(), g_Player:GetEnergy())
 		end
 	end
 end
