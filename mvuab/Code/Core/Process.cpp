@@ -40,16 +40,7 @@ void OnOptionMeshClicked()
 
 void OnOptionAnimatedModelsClicked()
 {
-    /*
-        EffectManagerInstance->Reload();
-        LightMInstance->ReLoad();
-        ROTMInstance->ReLoad();
-        SMeshMInstance->Destroy();
-        ROLMInstance->Reload();
-        AnimatedMInstance->Reload();
-        LightMInstance->ReLoad();
-        SRCMInstance->ReLoad();
-    */
+  AnimatedMInstance->Reload();
 }
 
 //---------------------------------------------------------------------------------------------------------------
@@ -173,7 +164,6 @@ void CProcess::OnClickedMenuOption( EMenuOption aMenuOption )
 void CProcess::ProcessReloads()
 {
     CActionManager* lAM = ActionManagerInstance;
-
     if ( lAM->DoAction( "ReloadStaticMesh" ) )
         OnOptionMeshClicked();
     else if ( lAM->DoAction( "ReloadLUA" ) )
@@ -186,6 +176,8 @@ void CProcess::ProcessReloads()
         OnOptionParticlesClicked();
     else if ( lAM->DoAction("ReloadSceneRendererCmd") )
         OnOptionRenderCmdClicked();
+    else if ( lAM->DoAction("ReloadAnimations") )
+      OnOptionAnimatedModelsClicked();
 }
 
 void CProcess::ProcessKey()

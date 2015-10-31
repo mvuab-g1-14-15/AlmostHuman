@@ -4,7 +4,6 @@
 	<mesh file="logan.cmf"/>
 	
 	<animation name="idle" file="idle.caf"/>
-	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
 	<animation name="shoot" file="shoot.caf"/>
 	
 	<animation name="carga_blaster" 	file="shoot_cargado_carga.caf"/>
@@ -18,9 +17,22 @@
 	<animation name="logan_cinem_sala3" file="logan_cinem_sala3.caf"/>	
 	<animation name="logan_cinem_final" file="logan_cinem_final.caf"/>	
 	
+	<animation name="shoot_to_idle" file="shoot_to_idle.caf"/>
+	<animation name="aim" file="aiming.caf"/>
+	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
+	
 	<animation_states default="idle">
 		<animation_state name="idle" default_fade_in="0.0" default_fade_out="0.0">
 		  <cycle name="idle"/>
+		</animation_state>
+		<animation_state name="aim" default_fade_in="0.0" default_fade_out="0.0">
+		  <on_enter>
+			<action name="idle_to_shoot" fade_in="0.0"/>
+		  </on_enter>
+		  <cycle name="aim"/>
+		  <on_exit>
+			<action name="shoot_to_idle" fade_out="0.0"/>
+		  </on_exit>
 		</animation_state>
 		<animation_state name="charge" default_fade_in="0.3" default_fade_out="0.3">
 		  <on_enter>
@@ -33,8 +45,12 @@
 		</animation_state>
 		<animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
 		  <on_enter>
-			<action name="shoot" fade_in="0.0"/>
+			<action name="idle_to_shoot" fade_in="0.0"/>
 		  </on_enter>
+		   <cycle name="shoot"/>
+		  <on_exit>
+			<action name="shoot_to_idle" fade_out="0.0"/>
+		  </on_exit>
 		</animation_state>
 		<animation_state name="stealth" default_fade_in="0.3" default_fade_out="0.3">
 			<on_enter>
@@ -101,7 +117,7 @@
   
   <animation_changes>
     <animation_change from="shoot" to="idle" fade="0.5" />
-	<animation_change from="charge" to="idle" fade="0.5" />
+	<animation_change from="charge" to="idle" fade="1" />
   </animation_changes>
   
   

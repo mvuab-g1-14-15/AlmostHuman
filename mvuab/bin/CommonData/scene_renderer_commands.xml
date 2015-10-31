@@ -43,7 +43,7 @@
  	</render_draw_quad>
 	<disable_alpha_test/>
 	
-    <postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_LightScattering.xml"/>	
+    <!--<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_LightScattering.xml"/>-->
 	<!--<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_ColorGrading.xml"/>-->
 	
 	<capture_frame_buffer name="FrameBuffer">
