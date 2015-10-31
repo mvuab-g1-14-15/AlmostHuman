@@ -105,10 +105,10 @@ bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)
     m_Cycle = (aNode.GetAttribute<int32>("cycle", 0) != 0);
     m_Reverse = (aNode.GetAttribute<int32>("reverse", 0) != 0);
     m_TotalTime = aNode.GetAttribute<float>("total_time", 0.0f);
-	m_LuaCode = aNode.GetAttribute<std::string>("lua_code", "");
-	m_KeyAction = aNode.GetAttribute<float>("key_action", 0.0f);
-	if(m_LuaCode != "")
-		m_bLuaEnable = true;
+    m_LuaCode = aNode.GetAttribute<std::string>("lua_code", "");
+    m_KeyAction = aNode.GetAttribute<float>("key_action", 0.0f);
+    if(m_LuaCode != "")
+      m_bLuaEnable = true;
 
     for(uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount ; i++)
     {

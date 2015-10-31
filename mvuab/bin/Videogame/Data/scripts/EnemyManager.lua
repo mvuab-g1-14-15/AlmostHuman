@@ -368,8 +368,10 @@ function CEnemyManager:Reinit( aRoom )
 		
 	if aRoom == "sala2" then
 		self:CreateEnemiesSala2()
+		gui_manager:ShowStaticText("Block", true)
 	end
 	if aRoom == "pasillo" then
+		gui_manager:ShowStaticText("Block", true)
 		trigger_manager:GetTriggerByName("take_C4"):SetActive(true)
 		local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
 		if lBombMesh ~= nil then
@@ -379,6 +381,26 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
 		self:CreateDesactivateEnemiesSala3()
+		if not g_ExplotionDone then
+			g_InsidePuntoExplosivo1 = false
+			g_InsidePuntoExplosivo2 = false
+			g_C4ColocadaText = false
+			g_InsidePuntoDetonacion = false
+			g_C4Colocada1 = false
+			g_C4Colocada2 = false
+			g_FaltanC4Text = false
+			g_ExplotionDone = false
+			scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb_sala3"):SetActive(true)
+			scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb_sala3"):SetActive(false)
+			scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb002_sala3"):SetActive(true)
+			scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb002_sala3"):SetActive(false)
+			trigger_manager:GetTriggerByName("punto_explosivo_2_sala3"):SetActive(true)
+			trigger_manager:GetTriggerByName("punto_explosivo_1_sala3"):SetActive(true)
+			gui_manager:ShowStaticText("C4Colocada", true)
+			gui_manager:ShowStaticText("FaltanC4", true)
+			gui_manager:ShowStaticText("DetonarC4", true)
+			gui_manager:ShowStaticText("ColocarC4", true)
+		end
 	end
 	if aRoom == "sala4" then
 		self.Boss:Destroy()
