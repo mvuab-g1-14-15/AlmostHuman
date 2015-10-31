@@ -12,12 +12,13 @@ function CargarJuego()
 	sound_manager:PlayEvent("Play_Long_Ambient", "Ambient" )
 	gui_manager:ActiveWindows("HUD.xml")
 	gui_manager:SetRenderPointer(false)
-	--cinematic_manager:Execute("inicial")
+	cinematic_manager:Execute("inicial")
 	--sound_manager:PlayEvent("Play_Ayer_Tuve_Una", "Logan")
 	cinematic_manager:StopCinematic("cinematica_inicial")
 	cinematic_manager:SetCinematicActive(true)
 	sound_manager:PlayParticlesSFX()
 	g_GameIsOn = true;
+	engine:Trace("CargarJuego OK")
 	--gui_manager:ShowDialogTex("Test")
 end
 
