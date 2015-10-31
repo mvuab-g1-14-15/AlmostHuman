@@ -10,6 +10,8 @@
 #include "Math\Vector3.h"
 #include "Math\LerpAnimator1D.h"
 #include <sstream>
+#include "ScriptManager.h"
+#include "EngineManagers.h"
 
 CCameraKeyController::CCameraKeyController()
     :
@@ -23,7 +25,10 @@ CCameraKeyController::CCameraKeyController()
     m_PlayingBackward(false),
     m_PlayingForward(true),
     m_FileName(""),
-    m_pCameraInfo(new CCameraInfo())
+    m_pCameraInfo(new CCameraInfo()),
+	m_bLuaEnable( false ),
+	m_LuaCode( "" ),
+	m_KeyAction( 0.0f )
 {
 }
 
@@ -39,7 +44,10 @@ CCameraKeyController::CCameraKeyController(CXMLTreeNode &atts)
     m_PlayingBackward(false),
     m_PlayingForward(true),
     m_FileName(""),
-    m_pCameraInfo(new CCameraInfo())
+    m_pCameraInfo(new CCameraInfo()),
+	m_bLuaEnable( false ),
+	m_LuaCode( "" ),
+	m_KeyAction( 0.0f )
 {
 }
 
@@ -57,7 +65,10 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
         m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
         m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
         m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
-
+		m_LuaCode = l_Node.GetAttribute<std::string>("lua_code", "");
+		m_KeyAction = l_Node.GetAttribute<float>("key_action", 0.0f);
+		if(m_LuaCode != "")
+			m_bLuaEnable = true;
         for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; i++)
         {
             const CXMLTreeNode &l_CurrentNode = l_Node(i);
@@ -94,6 +105,10 @@ bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)
     m_Cycle = (aNode.GetAttribute<int32>("cycle", 0) != 0);
     m_Reverse = (aNode.GetAttribute<int32>("reverse", 0) != 0);
     m_TotalTime = aNode.GetAttribute<float>("total_time", 0.0f);
+	m_LuaCode = aNode.GetAttribute<std::string>("lua_code", "");
+	m_KeyAction = aNode.GetAttribute<float>("key_action", 0.0f);
+	if(m_LuaCode != "")
+		m_bLuaEnable = true;
 
     for(uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount ; i++)
     {
@@ -168,11 +183,22 @@ void CCameraKeyController::Update()
     if( m_PlayingBackward )
     {
         PlayBackward();
+		if(m_bLuaEnable && m_KeyAction > m_CurrentTime)
+		{
+			ScriptMInstance->RunCode(m_LuaCode);
+			m_bLuaEnable = false;
+		}
     }
     else if( m_PlayingForward )
     {
         PlayFoward();
+		if(m_bLuaEnable && m_KeyAction < m_CurrentTime)
+		{
+			ScriptMInstance->RunCode(m_LuaCode);
+			m_bLuaEnable = false;
+		}
     }
+	
 }
 
 void CCameraKeyController::SetCurrentTime(float32 CurrentTime)
