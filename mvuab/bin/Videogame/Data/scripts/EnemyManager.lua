@@ -297,6 +297,47 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
 end
 
+function CEnemyManager:SpawnEnemy( aPos )	
+	local lCount = 0
+	for _,lEnemy in pairs(self.Enemy.sala4) do
+		if lEnemy ~= nil then
+			lCount = lCount + 1
+		end
+	end
+	
+	if lCount < 6 then
+		local lInfo = {}
+		lInfo.name = "Enemy"..id_manager:GetId().."_S4"
+		engine:Trace("Name: "..lInfo.name)
+		lInfo.life = 100.0
+		lInfo.damage = 10.0
+		lInfo.radius = 0.4
+		lInfo.height = 2.0
+		lInfo.speed = 4.0
+		lInfo.position = aPos
+		lInfo.is_patrol = false
+		lInfo.mesh = "enemy1"
+		lInfo.room = "sala4"
+		lInfo.use_gizmo = false
+		lInfo.on_dead = false
+		lInfo.shoot_speed = 50.0
+		lInfo.time_to_shoot = 1.0
+		lInfo.time_burst = 0.3
+		lInfo.num_shoot_burst = 3.0
+		lInfo.chase_distance = 20.0
+		lInfo.camera_pitch = 0.0
+		lInfo.camera_fov = 40.0
+		lInfo.camera_far = 20.0
+		lInfo.can_see = true
+		lInfo.fly = false
+		lInfo.can_use_graph = false
+		lInfo.alarm = true
+		lInfo.alarm_time = 5.0
+		lInfo.active = true
+		self.Enemy.sala4[lInfo.name] = CEnemy(lInfo)
+	end
+end
+
 function CEnemyManager:ActivateEnemiesSala3()
 	for _,lEnemy in pairs (self.Enemy.sala3) do
 		lEnemy:SetActive(true)
@@ -304,7 +345,9 @@ function CEnemyManager:ActivateEnemiesSala3()
 end
 
 function CEnemyManager:Reinit( aRoom )
+	engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
+		self.GarbageMesh[lEnemy:GetRoom()][lEnemy:GetName()] = true
 		lEnemy:SetOnDead(false)
 		lEnemy:Destroy()
 	end

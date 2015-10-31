@@ -54,6 +54,13 @@ function CBoss:__init()
 	
 	self.FootstepTime = 1.0
 	
+	self.SpawnPositions = { Vect3f(-110.0, 21.0, 52.0)
+						  , Vect3f(-110.0, 21.0, 60.0)
+						  , Vect3f(-110.0, 21.0, 68.0)
+						  , Vect3f(-180.0, 21.0, 52.0)
+						  , Vect3f(-180.0, 21.0, 60.0)
+						  , Vect3f(-180.0, 21.0, 68.0)}
+	
 	self.AttackingNear = false
 	self.AttackingMedium = false
 	self.AttackingFar = false
@@ -105,6 +112,8 @@ function CBoss:Update()
 		engine:TraceOnce("Boss stunned!")
 	end
 	
+	enemy_manager:SetAlarm( "sala4" )
+	
 	self.BlashRight:Tick()
 	self.BlashLeft:Tick()
 	
@@ -148,6 +157,7 @@ function CBoss:NearAttack()
 		if self.Counter > 5 then
 			self.AttackingNear = false
 			self.Counter = 0
+			self:SpawnEnemies()
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
@@ -168,6 +178,7 @@ function CBoss:MediumAttack()
 		if self.Counter > 3 then
 			self.AttackingMedium = false
 			self.Counter = 0
+			self:SpawnEnemies()
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
@@ -188,10 +199,31 @@ function CBoss:FarAttack()
 		if self.Counter > 2 then
 			self.AttackingFar = false
 			self.Counter = 0
+			self:SpawnEnemies()
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
 		self:RotateToPos( g_Player:GetPosition() )
+	end
+end
+
+function CBoss:SpawnEnemies()
+	local lIndexList = {}
+	table.insert(lIndexList, math.random( #self.SpawnPositions ))
+	while #lIndexList < 6 do
+		lNum = math.random( #self.SpawnPositions )
+		local lFound = false
+		for _,lIndex in pairs(lIndexList) do
+			if lIndex == lNum then
+				lFound = true
+			end
+		end
+		if not lFound then
+			table.insert(lIndexList, lNum)
+		end
+	end
+	for _,lNum in pairs(lIndexList) do
+		enemy_manager:SpawnEnemy(self.SpawnPositions[lNum])
 	end
 end
 
