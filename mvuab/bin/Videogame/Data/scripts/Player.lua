@@ -113,12 +113,12 @@ function CPlayer:Update()
 	
 	if self.Life < 15 then
 		if not self.Pain then
-			--sonido pain
+			sound_manager:PlayEvent("Play_Panting_Logan_Loop", "Logan")
 			self.Pain = true
 		end
 	else
 		if self.Pain then
-			--parar sonido pain
+			sound_manager:PlayEvent("Stop_Panting_Logan_Loop", "Logan")
 			self.Pain = false
 		end
 	end
