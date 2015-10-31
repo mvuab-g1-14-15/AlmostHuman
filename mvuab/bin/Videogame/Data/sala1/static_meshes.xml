@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
-  <static_mesh name="tunel_1_sala1" filename="meshes\tunel_1.mesh" />
+  <static_mesh name="tunel_right_wall_1_sala1" filename="meshes\tunel_right_wall_1.mesh" />
   <static_mesh name="Base_carga_sala1" filename="meshes\Base_carga.mesh" />
   <static_mesh name="Figure_1_sala1" filename="meshes\Figure_1.mesh" />
   <static_mesh name="Figure_002_sala1" filename="meshes\Figure_002.mesh" />
@@ -19,7 +19,7 @@
   <static_mesh name="Floor_sala1_sala1" filename="meshes\Floor_sala1.mesh" />
   <static_mesh name="Roof_sala1_sala1" filename="meshes\Roof_sala1.mesh" />
   <static_mesh name="wall_3_sala1" filename="meshes\wall_3.mesh" />
-  <static_mesh name="Door_sala1" filename="meshes\Door.mesh" />
+  <static_mesh name="Sala_1_Door_sala1" filename="meshes\Sala_1_Door.mesh" />
   <static_mesh name="wall_1_sala1" filename="meshes\wall_1.mesh" />
   <static_mesh name="wall_4_sala1" filename="meshes\wall_4.mesh" />
   <static_mesh name="Wall_2_sala1" filename="meshes\Wall_2.mesh" />
@@ -30,9 +30,8 @@
   <static_mesh name="ventilador_aspas_sala1" filename="meshes\ventilador_aspas.mesh" />
   <static_mesh name="ventilador_aspas001_sala1" filename="meshes\ventilador_aspas001.mesh" />
   <static_mesh name="Tunnel_greebles_sala1" filename="meshes\Tunnel_greebles.mesh" />
-  <static_mesh name="Taula_llums_sala1" filename="meshes\Taula_llums.mesh" />
-  <static_mesh name="Box005_sala1" filename="meshes\Box005.mesh" />
-  <static_mesh name="Tunnel_2_sala1" filename="meshes\Tunnel_2.mesh" />
+  <static_mesh name="Wall_lights_sala1" filename="meshes\Wall_lights.mesh" />
+  <static_mesh name="Tunnel_second_part_sala1" filename="meshes\Tunnel_second_part.mesh" />
   <static_mesh name="Med_bay_camilla_down_sala1" filename="meshes\Med_bay_camilla_down.mesh" />
   <static_mesh name="Med_bay_support_sala1" filename="meshes\Med_bay_support.mesh" />
   <static_mesh name="screen_01_sala1" filename="meshes\screen_01.mesh" />
@@ -42,4 +41,13 @@
   <static_mesh name="Lights_Roof_Glow_sala1" filename="meshes\Lights_Roof_Glow.mesh" />
   <static_mesh name="Lights_wall_glow_sala1" filename="meshes\Lights_wall_glow.mesh" />
   <static_mesh name="Lights_tunnel_glow_sala1" filename="meshes\Lights_tunnel_glow.mesh" />
+  <static_mesh name="Ventilador_2_sala1" filename="meshes\Ventilador_2.mesh" />
+  <static_mesh name="Ventilador_1_sala1" filename="meshes\Ventilador_1.mesh" />
+  <static_mesh name="Tunnel_roof_1_sala1" filename="meshes\Tunnel_roof_1.mesh" />
+  <static_mesh name="Tunnel_left_wall_1_sala1" filename="meshes\Tunnel_left_wall_1.mesh" />
+  <static_mesh name="Tunnel_floor_1_sala1" filename="meshes\Tunnel_floor_1.mesh" />
+  <static_mesh name="Light_1_sala1" filename="meshes\Light_1.mesh" />
+  <static_mesh name="Light_2_sala1" filename="meshes\Light_2.mesh" />
+  <static_mesh name="Box197_sala1" filename="meshes\Box197.mesh" />
+  <static_mesh name="Taula_sala1" filename="meshes\Taula.mesh" />
 </static_meshes>
