@@ -157,7 +157,7 @@ uint32 CFontManager::DrawText( uint32 x, uint32 y, Math::CColor color,
     // Calcular el tamaño del rectangulo necesario para pintar ese texto
     m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_CALCRECT, color_aux );
     // pintarlo
-    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_LEFT, color_aux );
+    m_Fonts.GetResourceById(idFont)->DrawText( NULL, buffer, -1, &rect, DT_CENTER, color_aux );
     free( buffer );
     return ( rect.bottom  - rect.top );
 }

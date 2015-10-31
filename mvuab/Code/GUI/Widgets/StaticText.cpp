@@ -4,17 +4,21 @@
 #include "GraphicsManager.h"
 #include "Logger/Logger.h"
 #include "EngineManagers.h"
+#include "Timer/Timer.h"
 
 CStaticText::CStaticText( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution )
     : CGuiElement( aNode, screenResolution )
+    , mAnimateText( aNode.GetAttribute<bool>("animate_font", false))
+    , mTime( 0.0f )
+    , mTimeVisible( aNode.GetAttribute<float>("time_visible", 0.0f) )
+    , mTimeNoVisible( aNode.GetAttribute<float>("time_no_visible", 0.0f) )
 {
-
 }
 
 //---------------Interfaz de GuiElement----------------------
 void    CStaticText::Render ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( IsVisible() )
     {
         //Primero renderizamos todos los hijos que pudiera tener el Static Text:
         CGuiElement::Render();
@@ -26,11 +30,23 @@ void    CStaticText::Render ()
 
 void CStaticText::Update()
 {
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+  if( mAnimateText )
+  {
+    mTime += deltaTimeMacro;
+    if( mTime > mTimeVisible && IsVisible() )
     {
-        //Primero actualizamos todos los hijos que pudiera tener el checkButton:
-        CGuiElement::Update();
+      SetVisible( false );
+      mTime = 0.0f;
     }
+    
+    if( mTime > mTimeNoVisible && !IsVisible() )
+    {
+      SetVisible( true );
+      mTime = 0.0f;
+    }
+  }
+
+  CGuiElement::Update();
 }
 
 void CStaticText::SetLiteral( const std::string& lit)

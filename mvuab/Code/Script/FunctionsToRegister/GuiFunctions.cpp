@@ -42,7 +42,7 @@ void registerGUI( lua_State* aLuaState )
   // GUI ELEMENT
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   LUA_BEGIN_DECLARATION( aLuaState )
-  LUA_DECLARE_CLASS( CGuiElement )
+  LUA_DECLARE_DERIVED_CLASS2( CGuiElement, CName, CVisible )
   LUA_DECLARE_METHOD( CGuiElement, SetPositionPercent )
   LUA_DECLARE_METHOD( CGuiElement, SetHeightPercent )
   LUA_DECLARE_METHOD( CGuiElement, SetWidthPercent )
@@ -74,13 +74,11 @@ void registerGUI( lua_State* aLuaState )
   //CConsoleGUI
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CConsoleGUI, CEditableTextBox )
-  LUA_DECLARE_METHOD( CConsoleGUI, GetVisible )
   LUA_END_DECLARATION
 
   //CEditableTextBox
   LUA_BEGIN_DECLARATION( aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CImage, CGuiElement )
-  LUA_DECLARE_METHOD( CImage, GetVisible )
+  LUA_DECLARE_METHOD( CImage, PlayAnimation )
   LUA_END_DECLARATION
-
 }

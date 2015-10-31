@@ -25,7 +25,7 @@ CCheckButton::CCheckButton( const CXMLTreeNode& aNode, const Math::Vect2i& scree
 //---------------Interfaz de CGuiElement----------------------
 void CCheckButton::Render ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( GetVisible())
     {
         //Primero renderizamos todos los hijos que pudiera tener el checkBbutton:
         CGuiElement::Render();
@@ -78,13 +78,13 @@ void CCheckButton::Render ()
         //Finalmente renderizamos el texto:
         CGuiElement::RenderText();
 
-    } //END if( CGuiElement::m_bIsVisible )
+    } //END if( GetVisible() )
 }
 
 void CCheckButton::Update ()
 {
 
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if( GetVisible() && CGuiElement::m_bIsActive )
     {
         //Primero actualizamos todos los hijos que pudiera tener el checkButton:
         CGuiElement::Update();
@@ -156,7 +156,7 @@ void CCheckButton::OnCheckOn ()
 {
     if( CGuiElement::m_pParent != NULL )
     {
-        m_pParent->OnClickedChild(CGuiElement::m_sName);
+        m_pParent->OnClickedChild(GetName());
     }
 
     if (m_sLuaCode_OnCheckOn.compare(""))
@@ -172,7 +172,7 @@ void CCheckButton::OnCheckOff ()
 {
     if( CGuiElement::m_pParent != NULL )
     {
-        m_pParent->OnClickedChild(CGuiElement::m_sName);
+        m_pParent->OnClickedChild(GetName());
     }
 
     if (m_sLuaCode_OnCheckOff.compare(""))

@@ -100,7 +100,6 @@ void CWindows::Render()
 
 void CWindows::Update()
 {
-
     if ( m_sLuaCode_OnUpdateWindows.compare( "" ) )
     {
         //Lanzar acción en Lua:

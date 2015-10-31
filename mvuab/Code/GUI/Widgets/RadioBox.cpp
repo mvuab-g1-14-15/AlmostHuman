@@ -47,7 +47,7 @@ CRadioBox::CRadioBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResol
 //---------------CGuiElement Interface----------------------
 void CRadioBox::Render ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( GetVisible())
     {
         if (m_pBackGroundTexture)
         {
@@ -69,7 +69,7 @@ void CRadioBox::Render ()
 }
 void CRadioBox::Update ()
 {
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if( GetVisible() && CGuiElement::m_bIsActive )
     {
         uint32 cont_init = m_uBlockCheckButton * (m_uColumns * m_uRows);
         uint32 cont_end = m_uColumns * m_uRows;

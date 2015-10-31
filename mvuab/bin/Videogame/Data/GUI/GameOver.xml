@@ -13,7 +13,7 @@
       OnLoadValue=""
       OnSaveValue=""
       flip="" is_background="true">
-    <texture name="0" name_texture="Data/textures/GUI/gameover_ffvii.png"/>
+    <texture texture="Data/textures/GUI/gameover_ffvii.png"/>
     
   </Image>
 
