@@ -29,19 +29,19 @@ function load_basics()
 	--enemy_manager:CreateEnemiesPasillo()
 	scene:LoadRoom("sala2")
 	--enemy_manager:CreateEnemiesSala2()
-	scene:LoadRoom("sala3")
+	--scene:LoadRoom("sala3")
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
-	scene:LoadRoom("elevator")
+	--scene:LoadRoom("elevator")
 	scene:LoadRoom("sala4")	
 	scene:LoadRoom("space")
 	
 	scene:DesactivateRoom("pasillo")
-	scene:DesactivateRoom("sala2")
+	--scene:DesactivateRoom("sala2")
 	scene:DesactivateRoom("sala3")	
 	scene:DesactivateRoom("elevator")	
-	scene:DesactivateRoom("sala4")
-	scene:DesactivateRoom("space")	
+	--scene:DesactivateRoom("sala4")
+	--scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
@@ -112,6 +112,11 @@ function load_gameplay()
 	
 	camera_manager:GetCamera("Main"):SetZFar(5000.0)
 	camera_manager:GetCamera("FreeCam"):SetZFar(5000.0)
+	
+	camera_manager:SetCurrentCamera( "fixed_initial_camera" );
+	lCamera = camera_manager:GetCurrentCamera();
+	lCamera:SetEnable(true);
+	g_Player:UpdatePlayer(Vect3f( lCamera:GetPosition() ), lCamera:GetYaw(), lCamera:GetPitch() );
 end
 
 function update_gameplay()
@@ -121,13 +126,8 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
-	if action_manager:AnyKey() then
-		engine:Trace("Any Acton")
-	end
-	
 	if not g_GameIsOn and action_manager:AnyKey() then
 		CargarJuego();
-		engine:Trace("Launch game")
 	end
 	
 	debug_helper:Update()
