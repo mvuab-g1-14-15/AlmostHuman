@@ -1,4 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
+	328617822	Play_Panting_Logan_Loop			\Logan\Play_Panting_Logan_Loop	
+	537533500	Stop_Panting_Logan_Loop			\Logan\Stop_Panting_Logan_Loop	
 	1082697451	Stop_Acumulator_Long_Shoot_Event			\Logan\Stop_Acumulator_Long_Shoot_Event	
 	1958143393	Play_Panting_Logan			\Logan\Play_Panting_Logan	
 	2855377483	Logan_Footstep_Walk_Pavimento			\Logan\Logan_Footstep_Walk_Pavimento	

@@ -110,6 +110,19 @@ function CPlayer:Update()
 	if self.Life < 25 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
 	end
+	
+	if self.Life < 15 then
+		if not self.Pain then
+			sound_manager:PlayEvent("Play_Panting_Logan_Loop", "Logan")
+			self.Pain = true
+		end
+	else
+		if self.Pain then
+			sound_manager:PlayEvent("Stop_Panting_Logan_Loop", "Logan")
+			self.Pain = false
+		end
+	end
+		
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
