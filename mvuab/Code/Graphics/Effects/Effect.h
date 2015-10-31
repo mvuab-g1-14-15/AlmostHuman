@@ -47,6 +47,8 @@ public:
 
   GET_SET( D3DXHANDLE, ViewToLightProjectionMatrixParameter );
 
+  GET_SET( D3DXHANDLE, LightsSpecularIntensityParameter );
+  GET_SET( D3DXHANDLE, LightsIntensityParameter );
   GET_SET( D3DXHANDLE, LightEnabledParameter );
   GET_SET( D3DXHANDLE, LightsTypeParameter );
   GET_SET( D3DXHANDLE, LightsPositionParameter );
@@ -69,6 +71,14 @@ public:
   const int32* GetLightsType()
   {
     return m_LightsType;
+  }
+  const float32* GetLightsSpecularIntensity()
+  {
+    return m_LightsIntensity;
+  }
+  const float32* GetLightsIntensity()
+  {
+    return m_LightsSpecularIntensity;
   }
   const float32* GetLightsAngle()
   {
@@ -120,6 +130,8 @@ private: // Members
   BOOL m_LightsEnabled[MAX_LIGHTS_BY_SHADER];
   int32 m_LightsType[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsAngle[MAX_LIGHTS_BY_SHADER];
+  float32 m_LightsIntensity[MAX_LIGHTS_BY_SHADER];
+  float32 m_LightsSpecularIntensity[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsFallOff[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER];
   float32 m_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER];
@@ -161,7 +173,7 @@ private: // Members
 
   D3DXHANDLE m_LightEnabledParameter, m_LightsTypeParameter,
              m_LightsPositionParameter, m_LightsDirectionParameter, m_LightsAngleParameter,
-             m_LightsColorParameter;
+             m_LightsColorParameter, m_LightsSpecularIntensityParameter, m_LightsIntensityParameter;
 
   D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter,
              m_LightsEndRangeAttenuationParameter;

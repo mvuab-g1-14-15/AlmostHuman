@@ -74,6 +74,7 @@ class CLight : public CObject3D, public CName
         CBillboardInstance* mBillboard;
 
         float m_Intensity;
+        float mSpecularIntensity;
         float m_StartRangeAttenuation;
         float m_EndRangeAttenuation;
 

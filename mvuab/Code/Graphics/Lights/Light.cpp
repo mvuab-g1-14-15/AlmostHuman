@@ -30,6 +30,7 @@ CLight::CLight()
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
     , m_MustUpdateStaticShadowMap( false )
+    , mSpecularIntensity( 1.0f )
 {
 }
 
@@ -39,7 +40,7 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_EndRangeAttenuation( node.GetAttribute<float>( "att_end_range", 0 ) )
     , m_Color( node.GetAttribute<Math::Vect3f>( "color", Math::Vect3f( 1, 1, 1 ) ) )
     , m_Intensity( node.GetAttribute<float>( "intensity", 0 ) )
-    , m_RenderShadows( node.GetAttribute<bool>( "render_shadows", false ) )
+    , mSpecularIntensity( node.GetAttribute<float>( "specular_intensity", 0 ) )
     , m_ViewShadowMap( Math::m44fIDENTITY )
     , m_ProjectionShadowMap( Math:: m44fIDENTITY )
     , m_ShadowMaskTexture( 0 )
@@ -47,7 +48,7 @@ CLight::CLight( const CXMLTreeNode& node )
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
     , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
-    , mBillboard(0)
+    , mBillboard( 0 )
 {
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
             m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
