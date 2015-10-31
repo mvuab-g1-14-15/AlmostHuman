@@ -28,7 +28,7 @@ CProgressBar::CProgressBar( const CXMLTreeNode& aNode, const Math::Vect2i& scree
 //---------------Interfaz de CGuiElement----------------------
 void CProgressBar::Render  ()
 {
-    if( CGuiElement::m_bIsVisible)
+    if( GetVisible())
     {
         if (m_pBackgroundTexture)
         {
@@ -69,7 +69,7 @@ void CProgressBar::Render  ()
 
 void CProgressBar::Update()
 {
-    if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+    if( GetVisible() && CGuiElement::m_bIsActive )
     {
         m_sText = std::to_string((long double)((int)m_fProgress));
     }

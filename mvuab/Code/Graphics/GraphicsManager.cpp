@@ -228,7 +228,7 @@ void CGraphicsManager::EndRender()
   HR( mDirectXDevice->EndScene() );
 }
 
-void CGraphicsManager::SetupMatrices()
+void CGraphicsManager::SetupMatrices(bool l_OrtoProj)
 {
   Math::Vect3f l_CameraPosition;
   D3DXMATRIX l_matView;
@@ -246,14 +246,18 @@ void CGraphicsManager::SetupMatrices()
     D3DXVECTOR3 l_Eye( 0.0f, 5.0f, -5.0f ), l_LookAt( 0.0f, 0.0f, 0.0f ), l_VUP( 0.0f, 1.0f, 0.0f );
     D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP );
 
+    uint32 w = 0, h = 0;
+    GetWidthAndHeight(w, h);
+
     //Setup Matrix projection
-    D3DXMatrixPerspectiveFovLH( &l_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f );
+    if(l_OrtoProj) D3DXMatrixOrthoRH(&l_matProject, (float) w, (float) h, l_CurrentCamera->GetZNear(), l_CurrentCamera->GetZFar());
+    else D3DXMatrixPerspectiveFovLH(&l_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f);
   }
   else
   {
     l_CameraPosition = l_CurrentCamera->GetPosition();
     l_matView        = l_CurrentCamera->GetMatrixView();
-    l_matProject     = l_CurrentCamera->GetMatrixProj();
+    l_matProject     = (l_OrtoProj) ? l_CurrentCamera->GetMatrixOrto() : l_CurrentCamera->GetMatrixProj();
     l_CurrentCamera->UpdateFrustum( l_matView * l_matProject );
   }
 

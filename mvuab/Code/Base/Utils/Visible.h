@@ -9,11 +9,16 @@ public:
 	{
 	}
 
+  CVisible( bool aVisible ) : m_Visible( aVisible )
+  {
+  }
+
     ~CVisible()
 	{
 	}
 	
 	bool GetVisible(){return m_Visible;}
+  bool IsVisible(){return m_Visible;}
 	void SetVisible( bool visible ){ m_Visible = visible; }
 
 protected:

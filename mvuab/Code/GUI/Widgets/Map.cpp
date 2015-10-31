@@ -74,7 +74,7 @@ CMap::~CMap()
 //---------------CGuiElement Interface----------------------
 void CMap::Render()
 {
-  if ( CGuiElement::m_bIsVisible )
+  if ( GetVisible() )
   {
     //Primero renderizamos todos los hijos que pudiera tener el Mapa:
     CGuiElement::Render();
@@ -165,7 +165,7 @@ void CMap::Update()
     ScriptMInstance->RunCode( m_vEnemy[i]->m_OrientationScript );
   }
 
-  if ( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
+  if ( GetVisible() && CGuiElement::m_bIsActive )
   {
     m_posNPlayer = NormalizePlayerPos( m_Player->m_PosPlayer.x, m_Player->m_PosPlayer.z );
 

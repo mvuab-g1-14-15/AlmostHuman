@@ -315,6 +315,7 @@ void registerBase( lua_State* m_LS )
     class_<CVisible>( "CVisible" )
     .def( constructor<>() )
     .def( "SetVisible", &CVisible::SetVisible )
+    .def( "SetVisible", &CVisible::IsVisible  )
     .def( "GetVisible", &CVisible::GetVisible )
   ];
   module( m_LS )

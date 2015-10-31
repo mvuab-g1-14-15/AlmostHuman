@@ -15,7 +15,7 @@ CTextBox::CTextBox( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolut
 void CTextBox::Render ()
 {
 
-    if (CGuiElement::m_bIsVisible)
+    if (GetVisible())
     {
         CDialogBox::Render();
         //Pintamos el texto

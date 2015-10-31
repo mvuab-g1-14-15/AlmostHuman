@@ -190,12 +190,12 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.life = 50.0
 	lInfo.damage = 1.0
 	lInfo.radius = 0.5
-	lInfo.height = 0.5
-	lInfo.speed = 2.0
-	lInfo.position = Vect3f(54.0, -13.68, 6.31)
+	lInfo.height = 0.25
+	lInfo.speed = 0.8
+	lInfo.position = Vect3f(54.0, -13.68, 35.0)
 	lInfo.is_patrol = true
-	lInfo.waypoints = { Vect3f(54.0, -13.68, 12.0),
-						Vect3f(54.0, -13.68, 23.0)}
+	lInfo.waypoints = { Vect3f(54.0, -13.68, -20.0),
+						Vect3f(54.0, -13.68, 35.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "pasillo"
 	lInfo.use_gizmo = true
@@ -225,7 +225,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.life = 50.0
 	lInfo.damage = 1.0
 	lInfo.radius = 0.5
-	lInfo.height = 0.5
+	lInfo.height = 0.25
 	lInfo.speed = 2.0
 	lInfo.position = Vect3f(39.0, -12.0, 70.0)
 	lInfo.is_patrol = true
@@ -370,7 +370,7 @@ function CEnemyManager:Reinit( aRoom )
 		self:CreateEnemiesSala2()
 	end
 	if aRoom == "pasillo" then
-		self:CreateEnemiesPasillo()
+		trigger_manager:GetTriggerByName("take_C4"):SetActive(true)
 	end
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
@@ -387,18 +387,8 @@ function CEnemyManager:Update()
 	for lRoom in pairs (self.Enemy) do
 		for i in pairs(self.Enemy[lRoom]) do
 			lActualEnemy = self.Enemy[lRoom][i]
-			if lActualEnemy ~= nil then --http://swfoo.com/?p=623 hay que hacerlo así			
-				if lActualEnemy:GetLife() > 0 then
-					lActualEnemy:Update()
-				else
-					lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
-					self.GarbageMesh[lActualEnemy:GetRoom()][lActualEnemy:GetName()] = true
-					--Add death particle
-					lActualEnemy:Destroy()
-					self.Enemy[lRoom][i] = nil
-					--table.remove(self.Enemy[lRoom], i)
-					--collectgarbage()
-				end
+			if lActualEnemy ~= nil then
+				lActualEnemy:Update()
 			end
 		end
 	end
@@ -421,6 +411,14 @@ function CEnemyManager:Update()
 		self.Shoots[k]:Update()
 	end
 	--profiler:AddEnd("CEnemyManager:Update()")
+end
+
+function CEnemyManager:DestroyEnemy(aEnemy)
+	local lRoom = aEnemy:GetRoom()
+	local lName = aEnemy:GetName()
+	aEnemy:Destroy()
+	self.GarbageMesh[lRoom][lName] = true
+	self.Enemy[lRoom][lName] = nil
 end
 
 function CEnemyManager:GetNumEnemy( aRoom )

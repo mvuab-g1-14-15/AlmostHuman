@@ -17,6 +17,7 @@ g_bAlarmRoom3 = false
 g_fOcultarMensaje = 5.0
 g_sMessageAlarm = ""
 g_PlayerCinematic = nil
+g_GameIsOn		= false;
 
 function load_basics()
 	engine:Trace("Init the load_basics()")
@@ -24,7 +25,7 @@ function load_basics()
 
 	scene:ActivateRoom("sala1")
 	scene:SetCurrentRoomName("sala1")
-	--scene:LoadRoom("pasillo")
+	scene:LoadRoom("pasillo")
 	--enemy_manager:CreateEnemiesPasillo()
 	--scene:LoadRoom("sala2")
 	--enemy_manager:CreateEnemiesSala2()
@@ -32,7 +33,7 @@ function load_basics()
 	--enemy_manager:CreateEnemiesSala3()
 	--enemy_manager:CreateDesactivateEnemiesSala3()
 	--scene:LoadRoom("elevator")
-	scene:LoadRoom("sala4")	
+	--scene:LoadRoom("sala4")	
 	--scene:LoadRoom("space")	
 	
 	--scene:DesactivateRoom("pasillo")
@@ -45,7 +46,7 @@ function load_basics()
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
 	PlaySoundStaticElement()
-	
+		
 	engine:Trace("Finish the load_basics()")
 end
 
@@ -120,6 +121,15 @@ function update_gameplay()
 		initialized1 = true
 	end
 	
+	if action_manager:AnyKey() then
+		engine:Trace("Any Acton")
+	end
+	
+	if not g_GameIsOn and action_manager:AnyKey() then
+		CargarJuego();
+		engine:Trace("Launch game")
+	end
+	
 	debug_helper:Update()
 
 	enemy_manager:Update()
@@ -129,7 +139,7 @@ function update_gameplay()
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else
-		if not (g_CinematicActive or g_PauseGame) then
+		if not (g_CinematicActive or g_PauseGame) and g_GameIsOn then
 			g_Player:Update()
 			g_HUD:Update()
 		end
@@ -181,16 +191,18 @@ function update_gameplay()
 		end
 		
 		if g_bPressRoomPasillo then
-			if action_manager:DoAction("Action") then
-				scene:ActivateRoom("sala3")
-				enemy_manager:CreateEnemiesSala3()
-				enemy_manager:CreateDesactivateEnemiesSala3()
-				scene:ActivateRoom("elevator")
-				cinematic_manager:Execute("OpenDoorPasillo")
-				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
-				gui_manager:ShowStaticText("OpenDoor")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
-				g_bPressRoomPasillo = false
+			if g_C4Taken then
+				if action_manager:DoAction("Action") then
+					scene:ActivateRoom("sala3")
+					enemy_manager:CreateEnemiesSala3()
+					enemy_manager:CreateDesactivateEnemiesSala3()
+					scene:ActivateRoom("elevator")
+					cinematic_manager:Execute("OpenDoorPasillo")
+					trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
+					gui_manager:ShowStaticText("OpenDoor")
+					physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))				
+					g_bPressRoomPasillo = false
+				end
 			end
 		end
 		
@@ -321,6 +333,8 @@ function update_gameplay()
 			ChangeCameraCloseEnemy()
 		end
 	end
+	
+	UpdateTriggers()
 	
     collectgarbage() --force to clean memory
 	--profiler:Trace()

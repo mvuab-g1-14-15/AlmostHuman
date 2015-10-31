@@ -32,6 +32,7 @@ struct SActionDone
 {
     bool mIsActionDone;
     float32 mActionAmount;
+    EInputDeviceType        m_DeviceType;
 };
 
 typedef std::vector<SInputActions> TInputsVector;
@@ -52,7 +53,7 @@ class CActionManager : public CManager
 
         bool DoAction     (const std::string &action);
         bool DoAction     (const std::string &action, float32 &amount);
-
+        bool AnyKey();
         void SetAction    (const std::string &action, TInputsVector &a_vInputs);
 
         void Update       ();

@@ -16,8 +16,10 @@
 #include "Math\Vector2.h"
 #include "Utils/Defines.h"
 #include "XML\XMLTreeNode.h"
+#include "Utils/Name.h"
+#include "Utils/Visible.h"
 
-class CGuiElement
+class CGuiElement : public CName, public CVisible
 {
     public:
         typedef enum
@@ -77,27 +79,12 @@ class CGuiElement
         {
             return m_bIsInside;
         }
-        bool                                IsVisible                            ()
-        const
-        {
-            return m_bIsVisible;
-        }
         bool                                IsActive                            ()
         const
         {
             return m_bIsActive;
         }
-
-        void                                SetVisible                        (bool flag)
-        {
-            m_bIsVisible = flag;
-        }
-        bool                                GetVisible                        ()
-        {
-            return m_bIsVisible;
-        }
-        void                                SetActive                            (bool
-                flag)
+        void SetActive( bool flag )
         {
             m_bIsActive = flag;
         }
@@ -137,8 +124,7 @@ class CGuiElement
         void                                SetHeightPercent            (float height_percent);
         void                                SetWidthPercent                (float width_percent);
         void                                SetPositionPercent        (const Math::Vect2f& pos);
-        virtual void                SetPosition                        (const Math::Vect2i& pos);
-
+        virtual void                        SetPosition                        (const Math::Vect2i& pos);
         void                                SetLiteral                        (const std::string& lit)
         {
             m_sLiteral = lit;
@@ -189,15 +175,6 @@ class CGuiElement
         {
             return m_bFocus;
         }
-
-        void                                SetName                                (const std::string& name)
-        {
-            m_sName = name;
-        }
-        const std::string&    GetName                                () const
-        {
-            return m_sName;
-        }
         TypeGuiElement            GetType                                () const
         {
             return m_eType;
@@ -208,33 +185,18 @@ class CGuiElement
         GET_SET(uint32, uWindowsHeight)
     protected:
 
-        float
-        m_fWidthPercent;                    //% del Ancho del GuiElement respecto el size del Window
-        uint32
-        m_uWidth;                                    //Ancho en pixeles del GuiElement
-        float
-        m_fHeightPercent;                    //% de Altura del GuiElement respecto el size del Window
-        uint32
-        m_uHeight;                                //Altura en pixeles del GuiElement
-        uint32
-        m_uWindowsWidth;                    //Ancho en pixeles de la windows que contiene a este GuiElement
-        uint32
-        m_uWindowsHeight;                    //Altura en pixeles de la windows que contiene a este GuiElement
-        Math::Vect2f
-        m_PositionPercent;                //Posición del GuiElement (x,y) en % respecto el size del Window
-        Math::Vect2i
-        m_Position;                                //Posición del GuiElement (x,y) en pixeles
-        bool
-        m_bIsVisible;                            //Indica si el elemento es o no visible
-        bool
-        m_bIsActive;                            //Indica si el elemento está o no activado
-        bool
-        m_bIsOver;                                //Indica si el puntero del mouse es la primera vez que ha entrado
-        bool
-        m_bIsInside;                            //Indica si el puntero del mouse está dentro
-        bool
-        m_bFocus;                                    //Indica que es el guielement que tiene el foco dentro de la windows actual
-        std::string                                m_sName;                                    //Identificador del GuiElement
+        float         m_fWidthPercent;                    //% del Ancho del GuiElement respecto el size del Window
+        uint32        m_uWidth;                           //Ancho en pixeles del GuiElement
+        float         m_fHeightPercent;                   //% de Altura del GuiElement respecto el size del Window
+        uint32        m_uHeight;                          //Altura en pixeles del GuiElement
+        uint32        m_uWindowsWidth;                    //Ancho en pixeles de la windows que contiene a este GuiElement
+        uint32        m_uWindowsHeight;                   //Altura en pixeles de la windows que contiene a este GuiElement
+        Math::Vect2f  m_PositionPercent;                  //Posición del GuiElement (x,y) en % respecto el size del Window
+        Math::Vect2i  m_Position;                         //Posición del GuiElement (x,y) en pixeles
+        bool          m_bIsActive;                        //Indica si el elemento está o no activado
+        bool          m_bIsOver;                          //Indica si el puntero del mouse es la primera vez que ha entrado
+        bool          m_bIsInside;                        //Indica si el puntero del mouse está dentro
+        bool          m_bFocus;                                    //Indica que es el guielement que tiene el foco dentro de la windows actual
         std::string
         m_sLuaCode_OnLoadValue;        //Codigo LUA que ha de ejecutar cuando se entre por primera vez en la ventana que contiene al GuiElement
         std::string
