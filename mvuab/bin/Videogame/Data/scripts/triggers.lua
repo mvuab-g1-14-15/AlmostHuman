@@ -40,6 +40,11 @@ g_Hacked.nave4 = false
 g_C4Taken = false
 g_InsideTakeC4 = false
 
+g_InsideDoor2 = false
+g_BlockTextActive = false
+
+g_InsideDoorPasillo = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -101,6 +106,34 @@ function ShowImageRoom(other_shape)
 		g_bChangeRoom = true
 	end
 	gui_manager:ShowStaticText("CambiarSala")
+end
+
+function Door2_enter()
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoor2 = true
+end
+
+function Door2_exit()
+	if g_BlockTextActive then
+		gui_manager:ShowStaticText("Block")
+		g_BlockTextActive = false
+	end
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoor2 = false
+end
+
+function DoorPasillo_enter()
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoorPasillo = true
+end
+
+function DoorPasillo_exit()
+	if g_BlockTextActive then
+		gui_manager:ShowStaticText("Block")
+		g_BlockTextActive = false
+	end
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoorPasillo = false
 end
 
 function ShowTextDoor2(text, other_shape)
@@ -486,7 +519,46 @@ function UpdateTriggers()
 			sound_manager:PlayEvent("Play_Pasillo", "Logan")
 			enemy_manager:CreateEnemiesPasillo()
 			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
+			local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
+			if lBombMesh ~= nil then
+				lBombMesh:SetActive(false)
+			end
 			g_InsideTakeC4 = false
+		end
+	end
+	
+	if g_InsideDoor2 then
+		if action_manager:DoAction("Action") then
+			local lNumEnemies = enemy_manager:GetNumEnemy("sala2")
+			if lNumEnemies > 0 then
+				if not g_BlockTextActive then
+					gui_manager:ShowStaticText("Block")
+					g_BlockTextActive = true
+				end
+			else
+				Door2_exit()
+				scene:ActivateRoom("pasillo")
+				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
+				cinematic_manager:Execute("OpenDoor")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))
+			end
+		end
+	end
+	
+	if g_InsideDoorPasillo then
+		if action_manager:DoAction("Action") then
+			if not g_C4Taken then
+				if not g_BlockTextActive then
+					gui_manager:ShowStaticText("Block")
+					g_BlockTextActive = true
+				end
+			else
+				DoorPasillo_exit()
+				scene:ActivateRoom("sala3")
+				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
+				cinematic_manager:Execute("OpenDoorPasillo")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))
+			end
 		end
 	end
 end

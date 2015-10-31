@@ -371,6 +371,10 @@ function CEnemyManager:Reinit( aRoom )
 	end
 	if aRoom == "pasillo" then
 		trigger_manager:GetTriggerByName("take_C4"):SetActive(true)
+		local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
+		if lBombMesh ~= nil then
+			lBombMesh:SetActive(true)
+		end
 	end
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
