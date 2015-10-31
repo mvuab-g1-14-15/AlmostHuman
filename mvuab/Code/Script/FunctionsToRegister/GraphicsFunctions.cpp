@@ -193,6 +193,7 @@ void registerCameras( lua_State* aLuaState )
   LUA_DECLARE_DERIVED_CLASS( CCinematicManager, CManager )
   LUA_DECLARE_METHOD( CCinematicManager, Execute )
   LUA_DECLARE_METHOD( CCinematicManager, GetCinematicActive )
+  LUA_DECLARE_METHOD( CCinematicManager, SetCinematicActive )
   LUA_DECLARE_METHOD( CCinematicManager, PlayCinematic )
   LUA_DECLARE_METHOD( CCinematicManager, StopCinematic )
   LUA_END_DECLARATION

@@ -40,6 +40,25 @@ g_Hacked.nave4 = false
 g_C4Taken = false
 g_InsideTakeC4 = false
 
+g_InsideDoor2 = false
+g_BlockTextActive = false
+
+g_InsideDoorPasillo = false
+
+g_InsidePuntoExplosivo1 = false
+g_InsidePuntoExplosivo2 = false
+
+g_C4ColocadaText = false
+
+g_InsidePuntoDetonacion = false
+
+g_C4Colocada1 = false
+g_C4Colocada2 = false
+
+g_FaltanC4Text = false
+
+g_ExplotionDone = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -101,6 +120,34 @@ function ShowImageRoom(other_shape)
 		g_bChangeRoom = true
 	end
 	gui_manager:ShowStaticText("CambiarSala")
+end
+
+function Door2_enter()
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoor2 = true
+end
+
+function Door2_exit()
+	if g_BlockTextActive then
+		gui_manager:ShowStaticText("Block")
+		g_BlockTextActive = false
+	end
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoor2 = false
+end
+
+function DoorPasillo_enter()
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoorPasillo = true
+end
+
+function DoorPasillo_exit()
+	if g_BlockTextActive then
+		gui_manager:ShowStaticText("Block")
+		g_BlockTextActive = false
+	end
+	gui_manager:ShowStaticText("OpenDoor")
+	g_InsideDoorPasillo = false
 end
 
 function ShowTextDoor2(text, other_shape)
@@ -270,7 +317,7 @@ function StayTextElevatorDown(text, other_shape)
 		cinematic_manager:Execute("elevatorDown")
 		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
 		enemy_manager:ActivateEnemiesSala3()
-		g_Player:SetCheckpoint("sala3", Vect3f( -7, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
 	end
 end
 
@@ -419,7 +466,7 @@ function SetPropSala4()
 end
 
 function Hacknave(nave_obj, other_shape)
-	cinematic_manager:Execute("explotion_boss")
+	cinematic_manager:Execute("FinalGame")
 	lBoss = enemy_manager:GetBoss()
 	if lBoss ~= nil then
 		if lBoss:IsStunned() then
@@ -479,6 +526,54 @@ function CreateBoss()
 	enemy_manager:CreateBoss()
 end
 
+function PuntoExplosivo1_enter()
+	g_InsidePuntoExplosivo1 = true
+	gui_manager:ShowStaticText("ColocarC4")
+end
+
+function PuntoExplosivo1_exit()
+	g_InsidePuntoExplosivo1 = false
+	gui_manager:ShowStaticText("ColocarC4")
+	if g_C4ColocadaText then
+		gui_manager:ShowStaticText("C4Colocada")
+		g_C4ColocadaText = false
+	end
+	if g_C4Colocada1 then
+		trigger_manager:GetTriggerByName("punto_explosivo_1_sala3"):SetActive(false)
+	end
+end
+
+function PuntoExplosivo2_enter()
+	g_InsidePuntoExplosivo2 = true
+	gui_manager:ShowStaticText("ColocarC4")
+end
+
+function PuntoExplosivo2_exit()
+	g_InsidePuntoExplosivo2 = false
+	gui_manager:ShowStaticText("ColocarC4")
+	if g_C4ColocadaText then
+		gui_manager:ShowStaticText("C4Colocada")
+		g_C4ColocadaText = false
+	end
+	if g_C4Colocada2 then
+		trigger_manager:GetTriggerByName("punto_explosivo_2_sala3"):SetActive(false)
+	end
+end
+
+function PuntoDetonacion_enter()
+	gui_manager:ShowStaticText("DetonarC4")
+	g_InsidePuntoDetonacion = true
+end
+
+function PuntoDetonacion_exit()
+	gui_manager:ShowStaticText("DetonarC4")
+	g_InsidePuntoDetonacion = false
+	if g_FaltanC4Text then
+		gui_manager:ShowStaticText("FaltanC4")
+		g_FaltanC4Text = false
+	end
+end
+
 function UpdateTriggers()
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
@@ -486,7 +581,91 @@ function UpdateTriggers()
 			sound_manager:PlayEvent("Play_Pasillo", "Logan")
 			enemy_manager:CreateEnemiesPasillo()
 			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
+			local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
+			if lBombMesh ~= nil then
+				lBombMesh:SetActive(false)
+			end
 			g_InsideTakeC4 = false
+		end
+	end
+	
+	if g_InsideDoor2 then
+		if action_manager:DoAction("Action") then
+			local lNumEnemies = enemy_manager:GetNumEnemy("sala2")
+			if lNumEnemies > 0 then
+				if not g_BlockTextActive then
+					gui_manager:ShowStaticText("Block")
+					g_BlockTextActive = true
+				end
+			else
+				Door2_exit()
+				scene:ActivateRoom("pasillo")
+				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
+				cinematic_manager:Execute("OpenDoor")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))
+			end
+		end
+	end
+	
+	if g_InsideDoorPasillo then
+		if action_manager:DoAction("Action") then
+			if not g_C4Taken then
+				if not g_BlockTextActive then
+					gui_manager:ShowStaticText("Block")
+					g_BlockTextActive = true
+				end
+			else
+				DoorPasillo_exit()
+				scene:ActivateRoom("sala3")
+				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
+				cinematic_manager:Execute("OpenDoorPasillo")
+				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))
+			end
+		end
+	end
+	
+	if g_InsidePuntoExplosivo1 then
+		if action_manager:DoAction("Action") then
+			gui_manager:ShowStaticText("C4Colocada")
+			g_C4Colocada1 = true
+			g_C4ColocadaText = true
+			scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb_sala3"):SetActive(false)
+			scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb_sala3"):SetActive(true)
+			sound_manager:PlayEvent("Play_Plant_C4","C4_1")
+		end
+	end
+	
+	if g_InsidePuntoExplosivo2 then
+		if action_manager:DoAction("Action") then
+			gui_manager:ShowStaticText("C4Colocada")
+			g_C4Colocada2 = true
+			g_C4ColocadaText = true
+			scene:GetResource("sala3"):GetLayer("glow"):GetResource("bomb002_sala3"):SetActive(false)
+			scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb002_sala3"):SetActive(true)
+			sound_manager:PlayEvent("Play_Plant_C4","C4_2")
+		end
+	end
+	
+	if g_InsidePuntoDetonacion then
+		if action_manager:DoAction("Action") then
+			if g_C4Colocada1 and g_C4Colocada2 then
+				PuntoDetonacion_exit()
+				lExplosion1 = CParticle("explosion1", "explosion", "sala3")
+				lExplosion2 = CParticle("explosion2", "explosion", "sala3")
+				lExplosion1:Init(Vect3f(37.83, -17.57, 51.61))
+				lExplosion2:Init(Vect3f(24.22, -17.74, 68.83))
+				cinematic_manager:Execute("explotion")
+				sound_manager:PlayEvent("Play_C4_Explosion","Explosio")
+				sound_manager:PlayEvent("Play_Sala3B", "Logan")
+				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
+				g_ExplotionDone = true
+				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+			else
+				if not g_FaltanC4Text then
+					g_FaltanC4Text = true
+					gui_manager:ShowStaticText("FaltanC4")
+				end
+			end
 		end
 	end
 end

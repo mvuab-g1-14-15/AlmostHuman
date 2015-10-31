@@ -20,30 +20,27 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
     OUT.WorldPosition = mul(float4(IN.Position, 1.0), g_WorldMatrix);
 #endif
 
-    int l_VertexNoLight = 0;
-    int l_NumLightsEnable = 0;
-
-    for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
-    {
-        if(g_LightsEnabled[i])
-        {
-            float l_Dst2Vertex = length(OUT.WorldPosition.xyz - g_CameraPosition);
-            float l_Dst2Light = length(g_LightsPosition[i] - g_CameraPosition);
-            
-            l_NumLightsEnable++;
-            if(l_Dst2Vertex > l_Dst2Light) l_VertexNoLight++;
-        }
-    }
-    
-    if((l_NumLightsEnable == 0) || (l_NumLightsEnable > l_VertexNoLight)) OUT.Normal = float4(1, 0, 0, 0);
-    else OUT.Normal = float4(0, 0, 0, 0);
-    
     return OUT;
 }
 
 float4 mainPS(UBER_VERTEX_PS IN) : COLOR
 {
-    if(IN.Normal.x > 0) return float4(0, 0, 0, 1);
+    int l_VertexNoLight = 0;
+    int l_NumLightsEnable = 0;
+    
+    for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
+    {
+        if(g_LightsEnabled[i])
+        {
+            float l_Dst2Vertex = length(IN.WorldPosition.xyz - g_CameraPosition);
+            float l_Dst2Light = length(g_LightsPosition[i] - g_CameraPosition);
+            
+            l_NumLightsEnable++;
+            if(l_Dst2Vertex >= l_Dst2Light) l_VertexNoLight++;
+        }
+    }
+    
+    if(l_NumLightsEnable > l_VertexNoLight) return float4(0, 0, 0, 1);
     else discard;
     
 }
