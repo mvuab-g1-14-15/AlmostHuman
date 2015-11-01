@@ -1,4 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
   <ambient_light color="0.0 0.0 0.0" />
+  <spot_light name="Fspot001" room="sala3" intensity="12.9476" specular_intensity="0.0" pos="37.9869 -16.3763 52.0073" color="0.988235 0.282353 0.0666667" att_start_range="8.52341" att_end_range="27.12" look_at="37.9869 -19.5894 78.0073" angle="28.9" fall_off="45.1">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Fspot002" room="sala3" intensity="4.25327" specular_intensity="0.0" pos="38.0098 -16.5237 49.9798" color="0.988235 0.282353 0.0666667" att_start_range="12.4041" att_end_range="13.2807" look_at="38.0098 -16.5237 25.9798" angle="28.9" fall_off="45.1">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Fspot003" room="sala3" intensity="12.9476" specular_intensity="0.0" pos="24.0546 -16.2837 69.3198" color="0.988235 0.282353 0.0666667" att_start_range="8.52341" att_end_range="27.12" look_at="23.9734 -18.309 48.2072" angle="28.9" fall_off="45.1">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Fspot004" room="sala3" intensity="4.25327" specular_intensity="0.0" pos="23.7088 -16.5237 71.4906" color="0.988235 0.282353 0.0666667" att_start_range="12.4041" att_end_range="13.2807" look_at="23.8023 -16.5237 86.0867" angle="28.9" fall_off="45.1">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Luz_activación_01" room="sala3" intensity="3.06236" specular_intensity="0.0" pos="-20.8149 -8.42862 60.5598" color="0.52549 0.658824 0.996078" att_start_range="9.79925" att_end_range="15.6292" look_at="-20.8149 -17.4286 60.5598" angle="42.0" fall_off="69.3">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Luz_activación_02" room="sala3" intensity="3.06236" specular_intensity="0.0" pos="-30.2159 -8.42862 60.5598" color="0.52549 0.658824 0.996078" att_start_range="9.79925" att_end_range="15.6292" look_at="-30.2159 -17.4286 60.5598" angle="42.0" fall_off="69.3">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
+  <spot_light name="Luz_activación_03" room="sala3" intensity="3.06236" specular_intensity="0.0" pos="-40.6287 -8.42862 60.5598" color="0.52549 0.658824 0.996078" att_start_range="9.79925" att_end_range="15.6292" look_at="-40.6287 -17.4286 60.5598" angle="42.0" fall_off="69.3">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="sala3">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
 </lights>

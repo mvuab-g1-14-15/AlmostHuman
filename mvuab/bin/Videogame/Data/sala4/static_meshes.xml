@@ -23,7 +23,7 @@
   <static_mesh name="Sala_4_upper_wall_1_sala4" filename="meshes\Sala_4_upper_wall_1.mesh" />
   <static_mesh name="Sala_4_upper_wall_4_sala4" filename="meshes\Sala_4_upper_wall_4.mesh" />
   <static_mesh name="Sala_4_upper_wall_3_sala4" filename="meshes\Sala_4_upper_wall_3.mesh" />
-  <static_mesh name=" Sala_4_left_floor_1_sala4" filename="meshes\ Sala_4_left_floor_1.mesh" />
+  <static_mesh name="Sala_4_left_floor_1_sala4" filename="meshes\Sala_4_left_floor_1.mesh" />
   <static_mesh name="Sala_4_right_floor_1_sala4" filename="meshes\Sala_4_right_floor_1.mesh" />
   <static_mesh name="Sala_4_right_floor_2_sala4" filename="meshes\Sala_4_right_floor_2.mesh" />
   <static_mesh name="Sala_4_left_floor_2_sala4" filename="meshes\Sala_4_left_floor_2.mesh" />

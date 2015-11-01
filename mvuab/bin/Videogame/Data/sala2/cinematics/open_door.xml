@@ -1,3 +1,4 @@
-﻿<cinematic>
-	<play_animation name="OpenDoor" resource_id_file="Data/sala2/cinematics/door.xml" time="4.0" />
+﻿<cinematic>	
+	<play_animation name="OpenDoor" resource_id_file="Data/sala2/cinematics/door.xml" time="4.0" blocker="true"/>
+	<wait name="waitdoor" time="0.0001" blocker="false"/>
 </cinematic>

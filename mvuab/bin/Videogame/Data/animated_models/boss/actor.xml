@@ -2,12 +2,13 @@
 	<texture file="Data/animated_models/boss/final_boss_compo.jpg"/>
 	<skeleton file="final_boss.csf"/>
 	<mesh file="final_boss.cmf"/>
+	<animation name="idle" file="idle.caf"/>
 	<animation name="hurt" file="hurt.caf"/>
 	<animation name="attack" file="shoot.caf"/>
 	<animation name="walk" file="walk.caf"/>
 	<animation name="giro_der" file="giro_der.caf"/>
 	<animation name="giro_izq" file="giro_izq.caf"/>
-	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>	
+	<animation name="idle_to_shoot" file="idle_to_shoot.caf"/>
 	
 	<animation_states default="idle">
 		<animation_state name="idle" default_fade_in="0.0" default_fade_out="0.0">
@@ -15,7 +16,7 @@
 		</animation_state>
 		<animation_state name="attack" default_fade_in="0.0" default_fade_out="0.0">
 		  <on_enter>
-			<action name="idle_to_shoot" fade_in="0.5"/>
+			<action name="idle_to_shoot" fade_in="1"/>
 		  </on_enter>
 		  <cycle name="attack"/>
 		</animation_state>
@@ -23,19 +24,15 @@
 		  <cycle name="walk"/>
 		</animation_state>
 		<animation_state name="hurt" default_fade_in="0.3" default_fade_out="0.3">
-		  <cycle name="hurt"/>
+		  <on_exit>
+			<action name="hurt" fade_in="0.6"/>
+		  </on_exit>
 		</animation_state>
 		<animation_state name="giro_izq" default_fade_in="0.2" default_fade_out="0.1">
-		  <on_enter>
-			<action name="giro_izq" fade_in="0.0"/>
-		  </on_enter>
-		  <cycle name="walk"/>
+		  <cycle name="giro_izq"/>
 		</animation_state>
 		<animation_state name="giro_der" default_fade_in="0.2" default_fade_out="0.1">
-		  <on_enter>
-			<action name="giro_der" fade_in="0.0"/>
-		  </on_enter>
-		  <cycle name="walk"/>
+		  <action name="giro_der"/>
 		</animation_state>
   </animation_states>
   

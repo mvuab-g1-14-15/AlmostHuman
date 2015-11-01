@@ -1,2 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <particles_instances>
+  <particle_instance name="smoke_emitter_denso_inv0" core="smoke_emitter_denso_inv" pos="38.2538 -17.0133 56.3635" active="true" sound="true" />
+  <particle_instance name="smoke_emitter_denso1" core="smoke_emitter_denso" pos="38.2538 -17.0133 47.5798" active="true" sound="true" />
+  <particle_instance name="smoke_emitter_denso2" core="smoke_emitter_denso" pos="24.0319 -17.0133 64.5445" active="true" sound="true" />
+  <particle_instance name="smoke_emitter_denso_inv3" core="smoke_emitter_denso_inv" pos="24.0319 -17.0133 73.0393" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big4" core="steam_down_slow_big" pos="27.1107 -1.68649 68.4673" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big5" core="steam_down_slow_big" pos="26.4146 -1.54398 51.4418" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big6" core="steam_down_slow_big" pos="-1.13168 -1.54398 51.4585" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big7" core="steam_down_slow_big" pos="-1.13168 -1.54398 68.4262" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big8" core="steam_down_slow_big" pos="-28.915 -1.54398 68.4262" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big9" core="steam_down_slow_big" pos="-28.915 -1.54398 51.4705" active="true" sound="true" />
 </particles_instances>

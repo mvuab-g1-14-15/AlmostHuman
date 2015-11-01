@@ -3,4 +3,6 @@
 	<set_transform name="cabin_elevator" room="elevator" pos="-50.7405 36.49 60.7332" yaw="0.0" pitch="-1.5708" roll="0.0" size="1.0 1.0 1.0" time="0.0001"/>
 	<set_transform name="Door_elevator_elevator" room="elevator" pos="-48.3367 -13.4405 60.7384" yaw="0.0" pitch="-1.5708" roll="-1.5708" size="1.0 1.0 1.0" time="0.0001"/>
 	<play_animation name="ElevatorDown" resource_id_file="Data/elevator/cinematics/elevator_down.xml" time="33.3333" />	
+	<remove_physx name="removeDoorElevator" resource="sala3DoorEscenario" blocker="true" time="0.0001"/>
+	<wait name="waitDoorElevator" time="0.0001" blocker="false"/>
 </cinematic>

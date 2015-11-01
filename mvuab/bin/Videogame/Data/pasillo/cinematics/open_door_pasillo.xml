@@ -1,3 +1,4 @@
 ﻿<cinematic>
-	<play_animation name="OpenDoorPasillo" resource_id_file="Data/pasillo/cinematics/door_pasillo.xml" time="4.0" />
+	<play_animation name="OpenDoorPasillo" resource_id_file="Data/pasillo/cinematics/door_pasillo.xml" time="4.0" blocker="true"/>
+	<wait name="waitdoorpasillo" time="0.0001" blocker="false"/>
 </cinematic>

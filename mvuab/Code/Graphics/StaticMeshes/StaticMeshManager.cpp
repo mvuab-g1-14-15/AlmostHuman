@@ -38,7 +38,7 @@ void CStaticMeshManager::Load( std::string aFilePath, std::string aBasePath )
         LOG_ERROR_APPLICATION( "CStaticMeshManager::Load Tag \"%s\" no existe",  "static_meshes");
         return;
     }
-
+      
     int lCount( node.GetNumChildren() );
     for( int i = 0; i < lCount ; ++i )
     {
