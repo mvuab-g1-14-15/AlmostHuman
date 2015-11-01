@@ -1,6 +1,7 @@
 ﻿<camera>
-  <camera_key_controller name="Camera001" cycle="1" reverse="0" total_time="33.3333" lua_code="sound_manager:PlayEvent('Play_Ayer_Tuve_Una', 'Logan')" key_action="15.0">
+  <camera_key_controller name="Camera001" cycle="0" reverse="0" total_time="0.0333333" lua_code="sound_manager:PlayEvent('Play_Ayer_Tuve_Una', 'Logan')" key_action="15.0">
     <key time="0.0" pos="124.992 -8.28323 -51.2118" look_at="124.979 -7.28513 -51.1517" up_vector="0.0403929 -0.0595896 0.997406" fov="30.0" near_plane="0.01" far_plane="60.0" />
+	<!--
     <key time="0.0333333" pos="124.992 -8.28323 -51.2118" look_at="124.979 -7.28513 -51.1516" up_vector="0.041703 -0.0595933 0.997351" fov="30.0" near_plane="0.01" far_plane="60.0" />
     <key time="0.0666667" pos="124.992 -8.28323 -51.2118" look_at="124.978 -7.28515 -51.1515" up_vector="0.0455455 -0.0596012 0.997183" fov="30.0" near_plane="0.01" far_plane="60.0" />
     <key time="0.1" pos="124.992 -8.28323 -51.2118" look_at="124.976 -7.28518 -51.1514" up_vector="0.0517799 -0.0596031 0.996879" fov="30.0" near_plane="0.01" far_plane="60.0" />
@@ -1000,6 +1001,7 @@
     <key time="33.2333" pos="123.69 -7.92023 -51.9583" look_at="122.693 -7.91072 -51.879" up_vector="0.00861603 0.999896 -0.0115717" fov="30.0" near_plane="0.01" far_plane="60.0" />
     <key time="33.2667" pos="123.69 -7.92023 -51.9583" look_at="122.693 -7.91072 -51.879" up_vector="0.00861603 0.999896 -0.0115717" fov="30.0" near_plane="0.01" far_plane="60.0" />
     <key time="33.3" pos="123.69 -7.92023 -51.9583" look_at="122.693 -7.91072 -51.879" up_vector="0.00861603 0.999896 -0.0115717" fov="30.0" near_plane="0.01" far_plane="60.0" />
-    <key time="33.3333" pos="123.69 -7.92023 -51.9583" look_at="122.693 -7.91072 -51.879" up_vector="0.00861603 0.999896 -0.0115717" fov="30.0" near_plane="0.01" far_plane="60.0" />
+	-->
+    <key time="0.0333333" pos="123.69 -7.92023 -51.9583" look_at="122.693 -7.91072 -51.879" up_vector="0.00861603 0.999896 -0.0115717" fov="30.0" near_plane="0.01" far_plane="60.0" />
   </camera_key_controller>
 </camera>

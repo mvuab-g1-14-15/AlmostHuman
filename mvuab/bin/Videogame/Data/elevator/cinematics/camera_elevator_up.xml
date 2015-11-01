@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <camera>
-  <camera_key_controller name="Camera001" cycle="0" reverse="0" total_time="36.6667">
+  <camera_key_controller name="Camera001" cycle="0" reverse="0" total_time="36.6667" lua_code="sound_manager:PlayEvent('Play_Elevator_Up', 'Logan')" key_action="0.0">
     <key time="0.0" pos="-50.7405 -12.7676 60.7332" look_at="-49.7405 -12.7676 60.7332" up_vector="0.0 1.0 0.0" fov="60.0" near_plane="0.01" far_plane="1000.0" />
     <key time="0.0333333" pos="-50.7405 -12.7676 60.7332" look_at="-49.7405 -12.7676 60.7332" up_vector="0.0 1.0 0.0" fov="60.0" near_plane="0.01" far_plane="1000.0" />
     <key time="0.0666667" pos="-50.7405 -12.7676 60.7332" look_at="-49.7405 -12.7676 60.7332" up_vector="0.0 1.0 0.0" fov="60.0" near_plane="0.01" far_plane="1000.0" />

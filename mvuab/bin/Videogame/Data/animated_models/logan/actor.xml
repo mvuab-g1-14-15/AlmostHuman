@@ -47,7 +47,7 @@
 		  <on_enter>
 			<action name="idle_to_shoot" fade_in="0.0"/>
 		  </on_enter>
-		   <cycle name="shoot"/>
+		  <cycle name="shoot"/>
 		  <on_exit>
 			<action name="shoot_to_idle" fade_out="0.0"/>
 		  </on_exit>
