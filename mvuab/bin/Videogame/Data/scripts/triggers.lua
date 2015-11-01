@@ -675,8 +675,7 @@ function UpdateTriggers()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
-				
-				--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, -500, 0))
+				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_sala2")
 			end
 		end
 	end
@@ -696,7 +695,7 @@ function UpdateTriggers()
 				enemy_manager:CreateDesactivateEnemiesSala3()
 				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				cinematic_manager:Execute("OpenDoorPasillo")
-				
+				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_pasillo")
 			end
 		end
 	end
