@@ -21,6 +21,7 @@
 	<literal id="C4Colocada"			font="Titania"  color="1.0 1.0 1.0 1.0" value="C4 planted"/>
 	<literal id="Alarm"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Alarm activate"/>
 	<literal id="RomperRejilla"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Press F to break the grating"/>
+	<literal id="Hackear"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Press F to hack the space ship"/>
 	<literal id="Documento1Linea01"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba1"/>
 	<literal id="Documento1Linea02"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba2"/>
 	<literal id="Documento1Linea03"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba3"/>
