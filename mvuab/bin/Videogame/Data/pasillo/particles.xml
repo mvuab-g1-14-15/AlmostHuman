@@ -1,2 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <particles_instances>
+  <particle_instance name="steam_down_larger0" core="steam_down_larger" pos="52.4962 -13.0846 -13.302" active="true" sound="true" />
+  <particle_instance name="steam_down_larger1" core="steam_down_larger" pos="52.4962 -13.0846 13.3347" active="true" sound="true" />
+  <particle_instance name="steam_down_larger2" core="steam_down_larger" pos="52.4962 -13.0846 31.9735" active="true" sound="true" />
+  <particle_instance name="sparks_inter3" core="sparks_inter" pos="53.93 -13.1637 14.2856" active="true" sound="true" />
 </particles_instances>

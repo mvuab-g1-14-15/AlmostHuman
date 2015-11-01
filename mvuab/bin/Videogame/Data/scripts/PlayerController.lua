@@ -121,7 +121,7 @@ function CPlayerController:Update()
 		l_Speed = l_Speed / 3.0
 		countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep * 0.5, false)
 	end
-	if self.Run and not self.Crouch then
+	if self.Run then
 		l_Speed = l_Speed * 2.0
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
 	end
