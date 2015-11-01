@@ -138,6 +138,8 @@ function CEnemy:__init( aInfo )
 	self.lParticle2 = CParticle( self.Name.."particle_dead2", "ray", self.Room );
 	self.lParticle3 = CParticle( self.Name.."particle_dead3", "ray", self.Room );
 	self.lParticle4 = CParticle( self.Name.."particle_dead4", "ray", self.Room );
+	
+	self.UpdateMeshPos = true
 end
 
 function CEnemy:IsDeath()
@@ -166,6 +168,8 @@ function CEnemy:Destroy()
 	lPosition.y = lPosition.y - 50;
     self.CharacterController:SetPosition( lPosition );
 	sound_manager:UnregisterGameObject(self.Name)
+	
+	self.UpdateMeshPos = false
 end
 
 function CEnemy:Update()	
@@ -327,7 +331,7 @@ function CEnemy:Update()
 		end
 	end
 	
-	if not self.Death then
+	if self.UpdateMeshPos then
 		local lROPos = self:GetPosition()
 		lROPos.y = lROPos.y - self.HeightOffsetRO
 		self.RenderableObject:SetPosition( lROPos )
