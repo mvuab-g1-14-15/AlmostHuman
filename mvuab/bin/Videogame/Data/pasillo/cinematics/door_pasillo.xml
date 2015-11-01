@@ -1,5 +1,5 @@
 ﻿<cinematic name="Portes_animades_Pasillo" duration="4.0">
-  <cinematic_object resource="doorUpper003_pasillo" room="pasillo" renderable_objects_manager="doorUpper">
+  <cinematic_object resource="doorUpper003_pasillo" room="pasillo" renderable_objects_manager="doorUpper" lua_code="physic_manager:ReleasePhysicActor(physic_manager:GetActor('pasilloDoorEscenario'))" key_action="3.9">
     <cinematic_object_key_frame time="0.0" pos="53.969 -15.5009 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="53.969 -15.4961 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="53.969 -15.4872 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
