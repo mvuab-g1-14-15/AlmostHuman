@@ -16,6 +16,14 @@
 		<cube_emitter file="steam_emitter_up.xml"/>
 	</particle_system_core>
 	
+	<particle_system_core name="steam_up_slow_big" sound="false">
+		<cube_emitter file="steam_up_slow_big.xml"/>
+	</particle_system_core>
+	
+	<particle_system_core name="steam_emitter_aside" sound="false">
+		<cube_emitter file="steam_emitter_aside.xml"/>
+	</particle_system_core>
+	
 	<particle_system_core name="ray" sound="false">
 		<cube_emitter file="ray_emitter_1.xml"/>
 	</particle_system_core>
@@ -30,10 +38,6 @@
 	
 	<particle_system_core name="sparks_inter" sound="true">
 		<cube_emitter file="sparks_emitter_1.xml"/>
-		<cube_emitter file="sparks_emitter_2.xml"/>
-		<cube_emitter file="sparks_emitter_3.xml"/>
-		<cube_emitter file="ray_emitter_1.xml"/>
-		<cube_emitter file="sparks_emitter_4.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="charge">
