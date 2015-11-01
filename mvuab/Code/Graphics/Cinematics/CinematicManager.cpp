@@ -98,7 +98,10 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
                 }
                 else
                 {
-                    if ( !m_vCinematicsElement.AddResource( SubTreeNode.GetAttribute<std::string>( "name", GetNextName().c_str() ), CinematicsItems ) )
+					const std::string& lSubName = SubTreeNode.GetAttribute<std::string>( "name", GetNextName().c_str());
+					if( m_vCinematicsElement.GetResource(lSubName))
+						m_vCinematicsElement.RemoveResource(lSubName);
+                    if ( !m_vCinematicsElement.AddResource( lSubName.c_str() , CinematicsItems ) )
                     {
                         CHECKED_DELETE( CinematicsItems );
                     }
@@ -118,8 +121,7 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
                     if ( !CameraMInstance->AddResource( lName, lCameraCinematical ) )
                     {
                         LOG_ERROR_APPLICATION( "Error making %s!", TagName.c_str() );
-                        CHECKED_DELETE( lCameraCinematical );
-                        CHECKED_DELETE( CameraKeyController );
+                        CHECKED_DELETE( lCameraCinematical );                        
                     }
                 }
             }
@@ -162,6 +164,7 @@ void CCinematicManager::LoadCinematics( const std::string& aCinematicsFile )
 void CCinematicManager::Execute( const std::string& NameCinematic )
 {
     m_CurrentCinematicsElement = m_vCinematicsElement.GetResource( NameCinematic );
+	m_CurrentElementId = 0;
     m_CurrentElement = m_CurrentCinematicsElement->m_CinematicsItems.GetResourceById( m_CurrentElementId );
 }
 
@@ -295,4 +298,12 @@ void CCinematicManager::StopCinematic( const std::string& aName )
     CameraMInstance->GetCurrentCamera()->SetEnable(false);
     CameraMInstance->SetCurrentCamera( m_CurrentCamera );
     m_CinematicActive = false;
+}
+
+void CCinematicManager::ReloadCinematic( const std::string& aName)
+{
+	LoadCinematics(aName);
+	m_CurrentElement = 0;
+	m_CurrentElementId = 0;
+	m_CinematicActive = false;
 }
