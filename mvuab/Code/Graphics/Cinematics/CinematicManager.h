@@ -27,6 +27,7 @@ public:
   void Render();
   void PlayCinematic( const std::string& aName );
   void StopCinematic( const std::string& aName );
+  void ReloadCinematic( const std::string& aName );
 
   GET_SET(bool, CinematicActive);
   GET_SET(std::string, CurrentCamera); 

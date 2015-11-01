@@ -193,10 +193,12 @@ void CRoom::Activate()
 {
   m_Active = true;
   PSManager->ActivateInstancesOfRoom( GetName() );
+  LightMInstance->SetActive(GetName(), true);
 }
 
 void CRoom::Deactivate()
 {
   m_Active = false;
   PSManager->DeactivateInstancesOfRoom( GetName() );
+  LightMInstance->SetActive(GetName(), false);
 }
