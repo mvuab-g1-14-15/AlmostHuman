@@ -29,6 +29,8 @@ function CBlaster:__init()
 		self.AmmoId = self.AmmoId + 1;
 	end
 	
+	self.PlayerIsShooting = false;
+	
 	self.AmmoCharged = CAmmoCharged();
 end
 
@@ -98,11 +100,14 @@ end
 function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if self.Energy > 1 then
-			if action_manager:DoAction("Shoot") and not self.IsCharging then
+			if action_manager:DoAction("ShootDown") and not self.IsCharging then
 				g_Player:SetAnimation("fast_shoot")
 				self.Energy = self.Energy - 1
 				sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
+				self.PlayerIsShooting = true;
 				self:Shoot( aPosition )
+			elseif action_manager:DoAction("ShootUp") then
+				self.PlayerIsShooting = false;
 			elseif action_manager:DoAction("ShootChargedDown") and not self.IsCharging then
 				self.IsCharging = true
 				self.TimePressed = 0;
@@ -136,6 +141,10 @@ end
 
 function CBlaster:GetIsCharging()
 	return self.IsCharging
+end
+
+function CBlaster:GetIsShooting()
+	return self.PlayerIsShooting; 
 end
 
 function CBlaster:GetEnergy()
