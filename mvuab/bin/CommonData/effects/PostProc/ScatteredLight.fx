@@ -11,18 +11,10 @@ float      g_SExposure = 0.0034;
 float      g_SDensity  = 0.84;
 float      g_SWeight = 5.65;
 
-float4 Merge(in float2 UV : TEXCOORD0) : COLOR
-{
-    float4 s1 = tex2D(S0LinearSampler, UV);
-    float4 s2 = tex2D(S1LinearSampler, UV);
-    
-    return lerp(s1, s2, 0.7);
-}
-
 float4 ScatterLight(in float2 UV : TEXCOORD0) : COLOR
 {
-    float4 l_Color = float4(0, 0, 0, 0);
-    l_Color = tex2D(S0LinearSampler, UV);
+    float4 l_RaysTexture = tex2D(S0LinearSampler, UV);
+    float4 l_ColorTexture = tex2D(S1LinearSampler, UV);
         
     for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
     {
@@ -47,21 +39,13 @@ float4 ScatterLight(in float2 UV : TEXCOORD0) : COLOR
                 float4 sample = tex2D(S0LinearSampler, l_TexCoord);
                 sample *= l_IlluminationDecay * g_SWeight;
                 
-                l_Color += sample;
+                l_RaysTexture += sample;
                 l_IlluminationDecay *= g_SDecay;
             }
         }
     }
     
-    return float4(l_Color.xyz * g_SExposure, 1.0);
-}
-
-technique MergeTechnique
-{
-    pass p0
-    {
-        PixelShader = compile ps_3_0 Merge();
-    }
+    return float4(l_RaysTexture.xyz * g_SExposure, 1.0) + l_ColorTexture * 1.1;
 }
 
 technique ScatteredLightTechnique

@@ -42,7 +42,6 @@ float4 mainPS(UBER_VERTEX_PS IN) : COLOR
     
     if(l_NumLightsEnable > l_VertexNoLight) return float4(0, 0, 0, 1);
     else discard;
-    
 }
 
 technique TECHNIQUE_NAME
