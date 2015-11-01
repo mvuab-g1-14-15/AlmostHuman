@@ -1,8 +1,6 @@
 <cinematics>
 	<camera_cinematic name="camera_cinematica1_elevatorPart1" resource_id_file="data/elevator/cinematics/camera001.xml"/>
-	<camera_cinematic name="camera_cinematica1_elevatorPart2" resource_id_file="data/elevator/cinematics/camera002.xml"/>
-	<cinematic name="physxElevator" resource_id_file="Data/elevator/cinematics/phyxsElevator.xml"/>
+	<camera_cinematic name="camera_cinematica1_elevatorPart2" resource_id_file="data/elevator/cinematics/camera002.xml"/>	
 	<cinematic name="elevatorUp" resource_id_file="Data/elevator/cinematics/elevatorUp.xml"/>
 	<cinematic name="elevatorDown" resource_id_file="Data/elevator/cinematics/elevatorDown.xml"/>
-	<!-- <cinematic name="OpenDoorPasillo" resource_id_file="Data/pasillo/cinematics/open_door_pasillo.xml"/> -->
 </cinematics>
