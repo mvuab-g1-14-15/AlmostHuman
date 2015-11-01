@@ -4,16 +4,16 @@
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="stealth_atack" sound="false">
-		<cube_emitter file="stealth_emitter_1.xml"/>
-	</particle_system_core>
-	
 	<particle_system_core name="steam" sound="false">
 		<cube_emitter file="steam_emitter.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="steam_down" sound="false">
 		<cube_emitter file="steam_emitter_down.xml"/>
+	</particle_system_core>
+	
+	<particle_system_core name="steam_down_larger" sound="false">
+		<cube_emitter file="steam_down_larger.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="steam_up" sound="false">
