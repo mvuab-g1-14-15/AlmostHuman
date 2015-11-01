@@ -3,7 +3,7 @@
 CCinematicsElement::CCinematicsElement( CXMLTreeNode& atts )
     : m_IsBlocker( atts.GetAttribute<bool>("blocker", false) )
     , m_Time( atts.GetAttribute<float>("time", 0.0f) )
-    , m_CurrentTime( 0 )
+    , m_CurrentTime( 0.0f )
 {
     if ( atts.Exists() )
     {

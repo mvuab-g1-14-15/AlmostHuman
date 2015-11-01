@@ -1,4 +1,6 @@
 <cinematics>
+	<set_active name="player_LOGAN1" resource_id_file="Data/space/cinematics/player_element.xml" active="false" time="0.00001"/>
 	<camera_cinematic name="camera_cinematica_final" resource_id_file="Data/space/cinematics/camera_cinematica_final.xml"/>
 	<cinematic name="FinalGame" resource_id_file="Data/space/cinematics/cinematic_final.xml"/>
+	<set_active name="player_LOGAN2" resource_id_file="Data/space/cinematics/player_element.xml" active="true" time="0.00001"/>
 </cinematics>
