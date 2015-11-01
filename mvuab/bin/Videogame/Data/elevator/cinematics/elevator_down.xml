@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cinematic name="Elevator_down.max" duration="33.3333">
-  <cinematic_object resource="Door_elevator001_elevator" physx="true" name_physx="elevator_door_upEscenario" renderable_objects_manager="Door_elevator001_elevator" room="elevator" active="false" init_keyframe="0.0">
+  <cinematic_object resource="Door_elevator001_elevator" renderable_objects_manager="Door_elevator001_elevator" room="elevator" active="false" init_keyframe="0.0">
     <cinematic_object_key_frame time="0.0" pos="-53.0468 36.6702 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-53.0468 36.6702 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-53.0468 36.6702 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
@@ -1003,7 +1003,7 @@
     <cinematic_object_key_frame time="33.3" pos="-53.0468 40.6172 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="33.3333" pos="-53.0468 40.6172 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="cabin_elevator" physx="true" name_physx="elevator_cabinEscenario" renderable_objects_manager="cabin_elevator" room="elevator" active="false" init_keyframe="0.0">
+  <cinematic_object resource="cabin_elevator" renderable_objects_manager="cabin_elevator" room="elevator" active="false" init_keyframe="0.0" lua_code="physic_manager:ReleasePhysicActor(physic_manager:GetActor('sala3DoorEscenario'))" key_action="33.0">
     <cinematic_object_key_frame time="0.0" pos="-50.7405 36.74 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-50.7405 36.7398 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-50.7405 36.7391 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
@@ -2006,7 +2006,7 @@
     <cinematic_object_key_frame time="33.3" pos="-50.7405 -13.6052 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="33.3333" pos="-50.7405 -13.6052 60.7332" yaw="0.0" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Door_elevator_elevator" physx="true" name_physx="elevator_door_downEscenario" renderable_objects_manager="Door_elevator_elevator" room="elevator" active="false" init_keyframe="0.0">
+  <cinematic_object resource="Door_elevator_elevator" renderable_objects_manager="Door_elevator_elevator" room="elevator" active="false" init_keyframe="0.0">
     <cinematic_object_key_frame time="0.0" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-48.3367 -13.4424 60.7384" yaw="1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />

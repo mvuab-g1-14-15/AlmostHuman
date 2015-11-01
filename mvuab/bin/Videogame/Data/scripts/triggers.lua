@@ -308,7 +308,7 @@ function StayText(room, message, other_shape)
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
 			cinematic_manager:Execute("elevatorDown")
-			physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala3DoorEscenario"))
+			
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end
@@ -549,6 +549,8 @@ function CreateBoss()
 	g_Hacked.nave3 = false
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
+	trigger_manager:GetTriggerByName("final"):SetActive(false)
+	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(true)
 end
 
 function PuntoExplosivo1_enter()
@@ -627,6 +629,18 @@ function UpdateDLC_exit()
 	end
 end
 
+function Final_enter()
+	scene:ActivateRoom("space")
+	cinematic_manager:Execute("FinalGame")
+	sound_manager:PlayEvent("Play_Sala4B", "Logan")
+	trigger_manager:GetTriggerByName("final"):SetActive(false)
+end
+
+function ViewBoss_enter()
+	sound_manager:PlayEvent("Play_Sala4A", "Logan")
+	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(false)
+end
+
 function UpdateTriggers()
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
@@ -655,7 +669,7 @@ function UpdateTriggers()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))
+				
 				--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, -500, 0))
 			end
 		end
@@ -676,7 +690,7 @@ function UpdateTriggers()
 				enemy_manager:CreateDesactivateEnemiesSala3()
 				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				cinematic_manager:Execute("OpenDoorPasillo")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))
+				
 			end
 		end
 	end
