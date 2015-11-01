@@ -1,5 +1,5 @@
-﻿<billboards_instances>
-	<billboard_instance name="blaster001" core="blaster" pos="134 -5 -58" active="true" />
-	<billboard_instance name="target001" core="target" pos="134 -6 -58" active="true" />
-	<billboard_instance name="fire001" core="fire" pos="125.71 -6.08 -52.63" active="true" />
-</billboards_instances>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<billboard_instances>
+  <billboard_instance name="hand_action0" core="hand_action" pos="129.941 -7.72387 -33.0116" active="true" />
+  <billboard_instance name="energy1" core="energy" pos="135.238 -7.81542 -39.9036" active="true" />
+</billboard_instances>
