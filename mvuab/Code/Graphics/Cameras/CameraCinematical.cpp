@@ -39,7 +39,7 @@ void CCameraCinematical::Update( )
   }
   else
   {
-    m_pKeyController->SetCurrentTime(0);
+    //m_pKeyController->SetCurrentTime(0);
   }
 }
 
