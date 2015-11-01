@@ -133,24 +133,28 @@ function CEnemy:__init( aInfo )
 	
 	self.LastPos = Vect3f(0.0)
 	self.Death = false
+	
+	self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
+	self.lParticle2 = CParticle( self.Name.."particle_dead2", "ray", self.Room );
+	self.lParticle3 = CParticle( self.Name.."particle_dead3", "ray", self.Room );
+	self.lParticle4 = CParticle( self.Name.."particle_dead4", "ray", self.Room );
+end
+
+function CEnemy:IsDeath()
+	return self.Death;
 end
 
 function CEnemy:Destroy()
 	if self.OnDead then
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..
 							  "local selfName = '"..self:GetName().."';"..
-							  self.OnDeadCode
-		
-		lParticle = CParticle( self.Name.."particle_dead1", "ray", self.Room );
-		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigPelvis001") );
-		lParticle = CParticle( self.Name.."particle_dead2", "ray", self.Room );
-		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigRArm1") );
-		lParticle = CParticle( self.Name.."particle_dead3", "ray", self.Room );
-		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigLArmCollarbone") );
+							  self.OnDeadCode		
 		
 		engine:Trace(self.Name.." executing on dead code.")
 		script_manager:RunCode(codeToExecute)
 	end
+	
+	self.OnDead = false;
 	
 	if self.Fly then
 		renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
@@ -158,11 +162,13 @@ function CEnemy:Destroy()
 			
 	self.BlashRight:End()
 	self.BlashLeft:End()
-	physic_manager:ReleasePhysicController(self.CharacterController)
+	local lPosition = self.CharacterController:GetPosition();
+	lPosition.y = lPosition.y - 50;
+    self.CharacterController:SetPosition( lPosition );
 	sound_manager:UnregisterGameObject(self.Name)
 end
 
-function CEnemy:Update()
+function CEnemy:Update()	
 	--profiler:AddInit("CEnemy:Update()")
 	if self.Life > 0 then
 		if self.Active then
@@ -298,6 +304,16 @@ function CEnemy:Update()
 				renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
 			end
 			self.Death = true
+			
+			if self.Fly then
+				--renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+			else
+				self.lParticle1:Init( self.RenderableObject:GetBonePosition("Base HumanHead")     );
+				self.lParticle2:Init( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
+				self.lParticle3:Init( self.RenderableObject:GetBonePosition("Base HumanRForeArm") );
+				self.lParticle4:Init( self.RenderableObject:GetBonePosition("Base HumanLThigh")   );
+			end
+			
 		end
 		local dt = timer:GetElapsedTime()
 		self.CharacterController:Move(Vect3f(0.0), dt)
@@ -311,12 +327,23 @@ function CEnemy:Update()
 		end
 	end
 	
-	local lROPos = self:GetPosition()
-	lROPos.y = lROPos.y - self.HeightOffsetRO
-	self.RenderableObject:SetPosition( lROPos )
-	self.RenderableObject:MakeTransform()
+	if not self.Death then
+		local lROPos = self:GetPosition()
+		lROPos.y = lROPos.y - self.HeightOffsetRO
+		self.RenderableObject:SetPosition( lROPos )
+		self.RenderableObject:MakeTransform()
+		sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), self:GetPosition())
+	end
 	
-	sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), self:GetPosition())
+	if self.Fly then
+		--renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+	else
+		self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead")     );
+		self.lParticle2:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
+		self.lParticle3:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRForeArm") );
+		self.lParticle4:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanLThigh")   );
+	end
+
 	--profiler:AddEnd("CEnemy:Update()")
 end
 
@@ -1235,3 +1262,4 @@ end
 --function CEnemyLUA:GetSuspectedPosition()
 --	return self.SuspectedPosition
 --end
+
