@@ -73,6 +73,14 @@ function CBoss:__init()
 	self.StunBar = self.InitStunBar
 	
 	self.ArrivedNear = false
+	
+	self.lParticle1 = CParticle( self.Name.."particle_stun1", "steam_up", "core" );
+	self.lParticle2 = CParticle( self.Name.."particle_stun2", "steam_up", "core" );
+	self.lParticle3 = CParticle( self.Name.."particle_stun3", "steam_up", "core" );
+	
+	self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub004")              );
+	self.lParticle2:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));
+	self.lParticle3:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
 end
 
 function CBoss:Destroy()
@@ -87,6 +95,9 @@ function CBoss:Update()
 	local dt = timer:GetElapsedTime()
 	
 	if not self:IsStunned() then
+		self.lParticle1:Hide();
+		self.lParticle2:Hide();
+		self.lParticle3:Hide();
 		if not self.ArrivedNear then
 			if self:MoveToPos( self.TargetPos ) then
 				if self.TargetPos == self.MediumPos then
@@ -112,9 +123,16 @@ function CBoss:Update()
 			end
 		end
 	else
-		self:SetAnimation("hurt")
+		self.lParticle1:Show();
+		self.lParticle2:Show();
+		self.lParticle3:Show();
+		self:SetAnimation("idle");
 		engine:TraceOnce("Boss stunned!")
 	end
+	
+	self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004")              );
+	self.lParticle2:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));
+	self.lParticle3:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
 	
 	enemy_manager:SetAlarm( "sala4" )
 	
@@ -142,6 +160,9 @@ end
 
 function CBoss:AddStun( aValue )
 	self.StunBar = self.StunBar - aValue
+	if self:IsStunned() then
+		self:SetAnimation("hurt")
+	end
 end
 
 function CBoss:ClearStun()
