@@ -456,7 +456,6 @@ function SetPropSala3()
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
 		cinematic_manager:Execute("CloseDoorPasillo")
-		scene:DesactivateRoom("pasillo")
 		
 		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
 		light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(false)
@@ -476,6 +475,9 @@ function SetPropSala4()
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
 		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		scene:DesactivateRoom("pasillo")
+		scene:DesactivateRoom("sala3")
 		
 		g_EnteredSala4 = true
 		engine:Trace("Setted properties of sala4")
@@ -645,6 +647,10 @@ end
 function ViewBoss_enter()
 	sound_manager:PlayEvent("Play_Sala4A", "Logan")
 	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(false)
+end
+
+function CargarEnergia_enter()
+	g_Player:SetEnergy(100.0)
 end
 
 function UpdateTriggers()

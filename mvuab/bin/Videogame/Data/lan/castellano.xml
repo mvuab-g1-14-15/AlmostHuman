@@ -9,7 +9,7 @@
 	<literal id="textoCinematic"	font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
 	<literal id="FPS"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
 	<literal id="ButtonEnergy"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para cargar energia"/>
-	<literal id="AnyKey"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa ESPACIO para empezar"/>
+	<literal id="AnyKey"			font="Titania"  color="0.0 0.0 0.0 1.0" value="Pulsa ESPACIO para empezar"/>
 	<literal id="HideInBarrel"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para esconderte en el barril"/>
 	<literal id="StealthAttack"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa E para ataque sigiloso"/>
 	<literal id="CambiarSala"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Press R to change room"/>
