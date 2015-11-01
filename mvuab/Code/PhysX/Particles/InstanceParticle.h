@@ -17,6 +17,7 @@ public:
   void Render();
   bool IsOk() const { return mIsOk; }
   void SetRoomName( const std::string& aRoomName ) { mRoomName = aRoomName; }
+  const std::string& GetRoomName() const { return mRoomName; }
   void Reset();
   void SetDirection( const Math::Vect3f& aDirection );
 private:
