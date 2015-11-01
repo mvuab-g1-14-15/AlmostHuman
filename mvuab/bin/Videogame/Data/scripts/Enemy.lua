@@ -655,11 +655,13 @@ function CEnemy:MakeShoot()
 		local lSingleShootDamage = self.Damage/2.0
 		enemy_manager:AddShoot( lPos1, lDirShoot1, self.ShootSpeed, lSingleShootDamage )
 		enemy_manager:AddShoot( lPos2, lDirShoot2, self.ShootSpeed, lSingleShootDamage )
+		sound_manager:PlayEvent("Play_Shoot_Drone", self.Name)
 	else
 		local lPos = self.RenderableObject:GetBonePosition("Base HumanRPalm")
 		local lDir = GetPlayerDirection( lPos )
 		self.BlashRight:Begin(lPos)
 		enemy_manager:AddShoot( lPos, lDir, self.ShootSpeed, self.Damage )
+		sound_manager:PlayEvent("Play_Shoot_Androide", self.Name)
 	end
 	--Todo play enemy sound
 end
