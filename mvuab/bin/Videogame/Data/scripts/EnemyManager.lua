@@ -261,7 +261,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.time_to_shoot = 1.0
 	lInfo.time_burst = 0.2
 	lInfo.num_shoot_burst = 5.0
-	lInfo.chase_distance = 5.0
+	lInfo.chase_distance = 20.0
 	lInfo.camera_pitch = -1.04719755 -- 60 grados
 	lInfo.camera_fov = 25.0
 	lInfo.camera_far = 20.0
@@ -282,7 +282,6 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.position = Vect3f(25.0, -12.0, 70.0)
 	lInfo.waypoints = { Vect3f(25.0, -12.0, 70.0),
 						Vect3f(25.0, -12.0, 52.0)}
-						
 	if self.Enemy.sala3[lInfo.name] == nil then
 		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
 	else
@@ -297,18 +296,18 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	-- Desactivate 1
 	lInfo.name = "Enemy1_S3"
 	lInfo.life = 100.0
-	lInfo.damage = 10.0
+	lInfo.damage = 5.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
 	lInfo.speed = 4.0
-	lInfo.position = Vect3f(-38.44, -14.0, 65.41)
+	lInfo.position = Vect3f(-28.26, -14.0, 67.10)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala3"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
-	lInfo.time_to_shoot = 1.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.3
 	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 20.0
@@ -327,11 +326,27 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	else
 		self.Enemy.sala3[lInfo.name]:__init( lInfo );
 	end
+	self.Enemy.sala3[lInfo.name]:SetYaw(-g_HalfPi)
 	
 	-- Desactivate 2
 	lInfo.name = "Enemy2_S3"
-	lInfo.position = Vect3f(-23.34, -14.0, 65.41)
-	self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	lInfo.position = Vect3f(-33.28, -14.0, 67.10)
+	if self.Enemy.sala3[lInfo.name] == nil then
+		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala3[lInfo.name]:__init( lInfo );
+	end
+	self.Enemy.sala3[lInfo.name]:SetYaw(-g_HalfPi)
+	
+	-- Desactivate 3
+	lInfo.name = "Enemy3_S3"
+	lInfo.position = Vect3f(-23.30, -14.0, 53.47)
+	if self.Enemy.sala3[lInfo.name] == nil then
+		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala3[lInfo.name]:__init( lInfo );
+	end
+	self.Enemy.sala3[lInfo.name]:SetYaw(g_HalfPi)
 end
 
 function CEnemyManager:SpawnEnemy( aPos )	

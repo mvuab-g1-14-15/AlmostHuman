@@ -721,12 +721,7 @@ function UpdateTriggers()
 		if action_manager:DoAction("Action") then
 			if g_C4Colocada1 and g_C4Colocada2 then
 				PuntoDetonacion_exit()
-				lExplosion1 = CParticle("explosion1", "explosion", "sala3")
-				lExplosion2 = CParticle("explosion2", "explosion", "sala3")
-				lExplosion1:Init(Vect3f(37.83, -17.57, 51.61))
-				lExplosion2:Init(Vect3f(24.22, -17.74, 68.83))
 				cinematic_manager:Execute("explotion")
-				sound_manager:PlayEvent("Play_C4_Explosion","Explosio")
 				sound_manager:PlayEvent("Play_Sala3B", "Logan")
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
@@ -746,6 +741,7 @@ function UpdateTriggers()
 			cinematic_manager:Execute("elevatorDown")
 			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
 			enemy_manager:ActivateEnemiesSala3()
+			enemy_manager:SetAlarm("sala3")
 		end
 	end
 	

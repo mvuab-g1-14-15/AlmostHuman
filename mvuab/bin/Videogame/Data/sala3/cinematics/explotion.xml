@@ -2,8 +2,9 @@
 	<add_renderable path="Data\sala3\cinematics/" room="sala3" renderable_objects_file="solid_layer_explosion.xml" static_meshes_file="static_meshes_explosion.xml" time="0.1"/>
 	<set_active name="player_LOGAN" resource_id_file="Data/sala3/cinematics/player_element.xml" active="false" time="0.00001"/>
 	<set_camera name="CameraCinematica" name_camera="camera_cinematica1_sala3" active="true" time="0.00001" blocker="true" />
-	<set_active name="player_logan_temp" resource_id_file="Data/sala3/cinematics/elementos_logan.xml" active="true" time="0.00001"/>	
+	<wait name="esperar_audio" time="22.1"/>
 	<play_animation name="Cylinder001_sala3" animated="true" room="sala3"  time="0.0001" animation="logan_cinem_sala3" />
+	<set_active name="player_logan_temp" resource_id_file="Data/sala3/cinematics/elementos_logan.xml" active="true" time="0.00001"/>	
 	<play_animation name="MontajePart1" room="sala3" resource_id_file="Data/sala3/cinematics/cinematics_explosion.xml" time="3.93333"/>
 	<set_active name="explotion_fragment2" resource_id_file="Data/sala3/cinematics/elementos_explosion.xml" active="true" time="0.00001"/>	
 	<set_active name="explotion_fragment" resource_id_file="Data/sala3/cinematics/elementos_explosion_desactivated.xml" active="false" time="0.00001"/>
