@@ -218,13 +218,13 @@ void CCinematicObject::Update()
 	  m_bLuaEnable = false;
   }
 
-  if(m_bMoveBack)
+ /* if(m_bMoveBack)
   {
 	  CCamera* lCamera = CameraMInstance->GetCurrentCamera();
 	  Math::Vect3f lDirection = lCamera->GetDirection();
 	  lDirection.y = 0.0f;
-	  m_RenderableObject->SetPosition(pos - (lDirection/7.5f));
-  }
+	  m_RenderableObject->SetPosition(pos - (lDirection/10.0f));
+  }*/
   
   m_RenderableObject->MakeTransform();
   //baseUtils::Trace("KeyFrame:=>%d\n", m_CurrentKeyFrame);
