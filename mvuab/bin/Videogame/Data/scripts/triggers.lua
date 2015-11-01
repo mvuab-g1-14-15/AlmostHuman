@@ -458,6 +458,10 @@ function SetPropSala3()
 		cinematic_manager:Execute("CloseDoorPasillo")
 		scene:DesactivateRoom("pasillo")
 		
+		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
+		light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(false)
+		light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(false)
+		
 		g_EnteredSala3 = true
 		engine:Trace("Setted properties of sala3")
 	end
@@ -506,7 +510,9 @@ function UpToSala4()
 end
 
 function ActivateLightsSala3()
-	-- activate the lights
+	light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(true)
+	light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(true)
+	light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(true)
 end
 
 function UpdateDLC(text_to_show)
