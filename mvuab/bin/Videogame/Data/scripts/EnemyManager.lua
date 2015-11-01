@@ -389,6 +389,7 @@ function CEnemyManager:Reinit( aRoom )
 	engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
 		lEnemy:SetOnDead(false)
+		lEnemy:RemoveMesh()
 		lEnemy:Destroy()
 	end
 	self.Enemy[aRoom] = {}
