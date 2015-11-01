@@ -1,0 +1,13 @@
+<emitter active="true" name="smoke" loop="false" time_to_live="3.0">
+	<particles max_alive_particles="100" time_to_live="5 7">
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/negras/light_textures.dds" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.05"/>
+			<interpolator alpha="0.2" color="0.0 1 0" size="0.1"/>
+			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.15"/>
+		</interpolators>
+		<motion linear_speed="2 2.5" initial_dir_min="0.0 0 0.0" initial_dir_max="0 0 -0.1" radial_speed="20 50" gravity="0"/>
+	</particles>
+	<emissions random_initial_angle="false" emission_time="0.1" particles_per_emission="1 2" cubic_size="0.0 0 0.0"/>
+</emitter>
