@@ -60,6 +60,8 @@ CLight::CLight( const CXMLTreeNode& node )
     lBillboardCore->AddInstance( mBillboard );
   }
 
+  mIsVisible = node.GetAttribute<bool>( "active", true );
+
   LOG_INFO_APPLICATION("Intensity %f", m_Intensity );
 
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&

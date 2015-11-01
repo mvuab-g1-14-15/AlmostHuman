@@ -451,6 +451,9 @@ function CEnemyManager:Reinit( aRoom )
 			gui_manager:ShowStaticText("ColocarC4", true)
 			gui_manager:ShowStaticText("TakeElevator", true)
 		end
+		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
+		light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(false)
+		light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(false)
 	end
 	if aRoom == "sala4" then
 		self.Boss:Destroy()
