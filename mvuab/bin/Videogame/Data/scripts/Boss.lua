@@ -155,6 +155,7 @@ function CBoss:NearAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
 		self:MakeShootNear()
 		self.Counter = self.Counter + 1
 		if self.Counter > 5 then
@@ -178,6 +179,7 @@ function CBoss:MediumAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
 		self:MakeShootMedium()
 		self.Counter = self.Counter + 1
 		if self.Counter > 3 then
@@ -198,6 +200,7 @@ function CBoss:FarAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
+		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
 		self:MakeShootFar()
 		self.Counter = self.Counter + 1
 		if self.Counter > 25 then
@@ -290,7 +293,7 @@ function CBoss:MakeShootNear()
 		lRandom = Vect3f(0.02*(math.random()-0.5), 0.02*(math.random()-0.5), 0.02*(math.random()-0.5))
 		enemy_manager:AddShoot( lPos2, lDir2 + lRandom, lShootSpeed, lDamage/2.0 )
 	end
-	--Todo play enemy sound
+	sound_manager:PlayEvent("Play_Shoot_boss", self.Name)
 end
 
 function CBoss:MakeShootMedium()
@@ -328,7 +331,7 @@ function CBoss:MakeShootMedium()
 		enemy_manager:AddShoot( lPos1, lDir1, lShootSpeed-i*4, lDamage/2.0 )
 		enemy_manager:AddShoot( lPos2, lDir2, lShootSpeed-i*4, lDamage/2.0 )
 	end
-	--Todo play enemy sound
+	sound_manager:PlayEvent("Play_Shoot_boss", self.Name)
 end
 
 function CBoss:MakeShootFar()
@@ -364,7 +367,7 @@ function CBoss:MakeShootFar()
 	self.BlashLeft:Begin(lPos2)
 	enemy_manager:AddShoot( lPos1, lDir1, lShootSpeed, lDamage/2.0 )
 	enemy_manager:AddShoot( lPos2, lDir2, lShootSpeed, lDamage/2.0 )
-	--Todo play enemy sound
+	sound_manager:PlayEvent("Play_Shoot_boss", self.Name)
 end
 
 function CBoss:GetName()
@@ -465,6 +468,11 @@ function CBoss:RotateToPos( aPos )
 	end
 	
 	if DiffYaw > self.DeltaRot then
+		if DiffYaw < 0 then
+			self.RenderableObject:ChangeAnimation("giro_der", 0.2, 1)
+		else
+			self.RenderableObject:ChangeAnimation("giro_izq", 0.2, 1)
+		end
 		if not self.LerpInited then
 			self.Lerp:SetValues(ActualYaw, DirYaw, self.TimeToRot, 0)
 			self.LerpInited = true

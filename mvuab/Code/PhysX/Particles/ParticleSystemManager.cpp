@@ -139,3 +139,21 @@ CParticleInstance* CParticleSystemManager::GetInstance( const std::string& aInst
 
   return lInstance;
 }
+
+void CParticleSystemManager::DeactivateInstancesOfRoom( const std::string& aRoomName )
+{
+  BOOST_FOREACH( CParticleInstance* lInstance, mInstances.GetResourcesVector() )
+  {
+    if( lInstance->GetRoomName() == aRoomName )
+      lInstance->ChangeVisibility( false );
+  }
+}
+
+void CParticleSystemManager::ActivateInstancesOfRoom( const std::string& aRoomName )
+{
+  BOOST_FOREACH( CParticleInstance* lInstance, mInstances.GetResourcesVector() )
+  {
+    if( lInstance->GetRoomName() == aRoomName )
+      lInstance->ChangeVisibility( true );
+  }
+}

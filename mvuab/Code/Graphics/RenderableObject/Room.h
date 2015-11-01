@@ -28,8 +28,8 @@ class CRoom : public CName
 		void LoadLights();
 		void RenderLayer( const std::string& aLayerName );
 		bool IsActive() const { return m_Active; }
-		void Activate() { m_Active = true; }
-		void Deactivate() { m_Active = false; }
+		void Activate();
+		void Deactivate();
 		bool IsLoaded() const { return mIsLoaded; }
 		CRenderableObjectsManager* GetLayer( const std::string& aLayer ) const;
 

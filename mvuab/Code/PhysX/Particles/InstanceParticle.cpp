@@ -30,7 +30,8 @@ CParticleInstance::~CParticleInstance()
 
 void CParticleInstance::Update( float dt )
 {
-  mCore->Update( dt );
+  if( mIsVisible )
+    mCore->Update( dt );
 }
 
 void CParticleInstance::Render()
