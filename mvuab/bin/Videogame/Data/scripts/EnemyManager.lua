@@ -521,7 +521,7 @@ function CEnemyManager:CreateBoss()
 		self.Boss = CBoss()
 		engine:Trace("Creando boss desde 0");
 	end
-	if self.Boss.IsDeath() then
+	if self.Boss:IsDeath() then
 		engine:Trace("Reviviendo boss");
 		self.Boss:__init();
 	end
