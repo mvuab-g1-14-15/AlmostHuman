@@ -43,9 +43,6 @@
         <handles use_world_view_projection_matrix="true" />
 	</technique>
     
-    <technique name="MergeTechnique" vertex_type="1104" file="../CommonData/effects/PostProc/ScatteredLight.fx">
-	</technique>
-    
     <technique name="DrawQuadSampler0Technique" vertex_type="1104" file="../CommonData/effects/DrawQuad.fx">
 	</technique>
 

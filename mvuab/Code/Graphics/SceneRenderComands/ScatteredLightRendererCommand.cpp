@@ -150,7 +150,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     GM.EnableZTest(); GM.EnableZWrite();
     m_RenderTarget1.UnsetAsRenderTarget(0);
 
-    // Generate Rays Of God over occlusion Map
+    // Generate Rays Of God
     RECT l_Rect1 = { 0, 0, l_Width / 2, l_Height / 2 };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
@@ -160,25 +160,15 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_EffectTech =  l_ROT->GetEffectTechnique();
     l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
 
+    m_RenderTarget1.Activate(0);
+    m_StageTextures[0].m_Texture->Activate(1);
+
     m_RenderTarget2.SetAsRenderTarget(0);
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect1, Math::CColor::CColor(), &m_RenderTarget1, 0.0f, 0.0f, 1.0f, 1.0f);
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect1, Math::CColor::CColor(), NULL, 0.0f, 0.0f, 1.0f, 1.0f);
     m_RenderTarget2.UnsetAsRenderTarget(0);
 
     // Set texture to original size
     RECT l_Rect2 = { 0, 0, l_Width, l_Height };
-
-    //ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
-    //m_RenderTarget3.SetAsRenderTarget(0);
-    //GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
-    //m_RenderTarget3.UnsetAsRenderTarget(0);
-
-    // Merge Rays Of God and normal scene texture
-    ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("merge_pool_renderable_object_technique")->Apply();
-    l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());
-    l_ROT = ROTMInstance->GetResource(l_TechniqueName);
-    l_EffectTech =  l_ROT->GetEffectTechnique();
-
-    m_RenderTarget2.Activate(0);
-    m_StageTextures[0].m_Texture->Activate(1);
-    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), NULL, 0.0f, 0.0f, 1.0f, 1.0f);
+    ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
+    GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
 }
