@@ -36,13 +36,10 @@
 			<action name="idle_to_shoot" fade_in="0.0"/>
 		  </on_enter>
 		  <cycle name="aim"/>
-		  <on_exit>
-			<action name="shoot_to_idle" fade_out="0.0"/>
-		  </on_exit>
 		</animation_state>
 		<animation_state name="charge" default_fade_in="0.3" default_fade_out="0.3">
 		  <on_enter>
-			<action name="carga_blaster" fade_in="0.5"/>
+			<action name="carga_blaster" fade_in="0.0"/>
 		  </on_enter>
 		  <cycle name="blaster_bloqueado"/>
 		  <on_exit>
@@ -50,69 +47,16 @@
 		  </on_exit>
 		</animation_state>
 		<animation_state name="fast_shoot" default_fade_in="0.3" default_fade_out="0.3">
-		  <cycle name="shoot"/>
+		  <on_enter>
+			<action name="carga_blaster" fade_in="0.5"/>
+		  </on_enter>
+		  <cycle name="shoot_blaster"/>
 		</animation_state>
 		<animation_state name="stealth" default_fade_in="0.3" default_fade_out="0.3">
 			<on_enter>
 				<action name="atac_sigil" fade_in="0.0"/>
 			</on_enter>
 		</animation_state>
-    <!-- -->
-    <!--animation_state name="walk" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="walk" weight="0.98" />
-      <cycle name="run"  weight="0.01" />
-      <cycle name="pointWalkUp"   weight="0.01" weight_from_parameter="true"               fade_on_change="0.05"/>
-      <cycle name="pointWalkDown" weight="0.01" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="run" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="walk" weight="0.01" />
-      <cycle name="run"  weight="0.98" />
-      <cycle name="pointWalkUp"   weight="0.01" weight_from_parameter="true"               fade_on_change="0.05"/>
-      <cycle name="pointWalkDown" weight="0.01" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="walk back" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="walk back"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="aim" default_fade_in="0.0" default_fade_out="0.3">
-      <cycle name="PointUpIdle" weight_from_parameter="true" fade_on_change="0.05"/>
-      <cycle name="pointDownIdle" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="walk aim" default_fade_in="0.0" default_fade_out="0.3">
-      <cycle name="walk" weight="0.01" />
-      <cycle name="run"  weight="0.01" />
-      <cycle name="pointWalkUp"   weight="0.98" weight_from_parameter="true"               fade_on_change="0.05"/>
-      <cycle name="pointWalkDown" weight="0.98" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="force" default_fade_in="0.0" default_fade_out="0.0">
-      <cycle name="protection"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="die" default_fade_in="0.3" default_fade_out="0.3">
-      <on_enter>
-        <action name="dead" block="true" fade_in="0.3"/>
-      </on_enter>
-      <on_exit>
-        <action name="dead" stop="true"/>
-      </on_exit>
-      <cycle name="idle"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="cover down" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="CoverAvallDretaIdle"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="cover up" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="CoverDretaIdle"/>
-    </animation_state-->
-    <!-- -->
-    <!--animation_state name="dance" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="RiggleDance"/>
-    </animation_state-->
   </animation_states>
   
   <animation_changes>
