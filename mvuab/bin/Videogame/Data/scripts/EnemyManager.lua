@@ -409,6 +409,7 @@ function CEnemyManager:Reinit( aRoom )
 		if lBombMesh ~= nil then
 			lBombMesh:SetActive(true)
 		end
+		gui_manager:ShowStaticText("UpdateDLC", true)
 	end
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
@@ -432,6 +433,7 @@ function CEnemyManager:Reinit( aRoom )
 			gui_manager:ShowStaticText("FaltanC4", true)
 			gui_manager:ShowStaticText("DetonarC4", true)
 			gui_manager:ShowStaticText("ColocarC4", true)
+			gui_manager:ShowStaticText("TakeElevator", true)
 		end
 	end
 	if aRoom == "sala4" then
@@ -462,9 +464,10 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
-			scene:ActivateRoom("space")
-			cinematic_manager:Execute("FinalGame")
+			cinematic_manager:Execute("explotion_boss")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
+			trigger_manager:GetTriggerByName("final"):SetActive(true)
+			self.Boss = nil
 		end
 	end
 	

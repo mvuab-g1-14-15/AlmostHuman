@@ -21,8 +21,8 @@ CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTre
     uint32 w = 0, h = 0;
     GraphicsInstance->GetWidthAndHeight(w, h);
 
-    m_RenderTarget1.Create("OcclusionMap", w, h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
-    m_RenderTarget2.Create("ScatteredLight", w , h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
+    m_RenderTarget1.Create("OcclusionMap", w / 2, h / 2, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
+    m_RenderTarget2.Create("ScatteredLight", w / 2, h / 2, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
     m_RenderTarget3.Create("MergeOcclusionScattering", w, h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
 }
 
@@ -35,8 +35,13 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
     //  92.31f, -9.304f, -44.21f sala1 vent1
     //  94.02f, -9.206f, -23.10f sala1 vent2
-    //   16.5f,   18.6f,    6.5f pasillo
-    // 2095.0f,  -65.0f,  167.0f space
+    //   10.0f,   80.0f,   10.0f pasillo
+    //-2000.0f,  291.0f,  76.0f space
+
+    if(!GetVisible())
+    {
+        return;
+    }
 
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
@@ -51,10 +56,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(94.02f, -9.206f, -23.10f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
+    l_PosLights.push_back(Math::Vect3f(10.0f, 80.0f, 10.0f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
+    l_PosLights.push_back(Math::Vect3f(-2000.0f, 351.0f, 106.0f));
 
     CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
@@ -70,12 +75,12 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     if(l_RoomName == "pasillo")
     {
-        l_ActiveLights[2] = l_CameraFrustum.SphereIsVisible(l_PosLights[2], 2.0f) ? TRUE : FALSE;
+        l_ActiveLights[2] = TRUE;
     }
 
     if(l_RoomName == "space")
     {
-        l_ActiveLights[3] = l_CameraFrustum.SphereIsVisible(l_PosLights[3], 2.0f) ? TRUE : FALSE;
+        l_ActiveLights[3] = TRUE;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
@@ -146,7 +151,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     m_RenderTarget1.UnsetAsRenderTarget(0);
 
     // Generate Rays Of God over occlusion Map
-    RECT l_Rect1 = { 0, 0, l_Width, l_Height };
+    RECT l_Rect1 = { 0, 0, l_Width / 2, l_Height / 2 };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("scattering_light_pool_renderable_object_technique")->Apply();
 
     l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(SCREEN_COLOR_VERTEX::GetVertexType());

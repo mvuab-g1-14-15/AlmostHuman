@@ -29,6 +29,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	405981009	Sala4A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4A		188563
 	426310337	Final Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final Theme_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Final Theme		1048136
 	430266122	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		189804
+	493938362	Update_brazo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\actualizacion de brazo v2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Sala2_Update_Dialogo\Update_brazo		175028
 	520901286	Sala3A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3A		122572
 	677660058	Iris_Esconderse_Bidones	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Esconderse_Bidones_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Esconderse_Bidones		63519
 	752280793	Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Pasillo_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Pasillo		230823
@@ -37,5 +38,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	766947946	Iris_Bidon	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Bidon_movimiento_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Bidon		46707
 	856495406	Sala3B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3B		240403
 	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		247728
-	999865395	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala2		68678
+	999865395	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Sala2_Update_Dialogo\Sala2		68678
 

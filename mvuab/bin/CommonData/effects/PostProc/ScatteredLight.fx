@@ -16,7 +16,7 @@ float4 Merge(in float2 UV : TEXCOORD0) : COLOR
     float4 s1 = tex2D(S0LinearSampler, UV);
     float4 s2 = tex2D(S1LinearSampler, UV);
     
-    return s1 + s2;
+    return lerp(s1, s2, 0.7);
 }
 
 float4 ScatterLight(in float2 UV : TEXCOORD0) : COLOR

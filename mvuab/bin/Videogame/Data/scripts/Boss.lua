@@ -254,12 +254,34 @@ function CBoss:SpawnEnemies()
 end
 
 function CBoss:MakeShootNear()
+	local lDirToPlayer = GetPlayerDirection(self:GetPosition())
+	lDirToPlayer.y = 0.0
+	if CheckVector(lDirToPlayer) then
+		lDirToPlayer:Normalize()
+	end
+	local lBossDir = self:GetDirection()
+	lBossDir.y = 0.0
+	if CheckVector(lBossDir) then
+		lBossDir:Normalize()
+	end
+	
+	local lDot = lDirToPlayer:DotProduct(lBossDir)
+	
 	local lShootSpeed = 20.0
 	local lDamage = 5.0
 	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
 	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
-	local lDir1 = GetPlayerDirection( lPos1 )
-	local lDir2 = GetPlayerDirection( lPos2 )
+	
+	local lDir1
+	local lDir2
+	if lDot > 0 then
+		lDir1 = GetPlayerDirection( lPos1 )
+		lDir2 = GetPlayerDirection( lPos2 )
+	else
+		lDir1 = lBossDir;
+		lDir2 = lBossDir;
+	end
+	
 	self.BlashRight:Begin(lPos1)
 	self.BlashLeft:Begin(lPos2)
 	for i=1,10 do
@@ -272,12 +294,34 @@ function CBoss:MakeShootNear()
 end
 
 function CBoss:MakeShootMedium()
+	local lDirToPlayer = GetPlayerDirection(self:GetPosition())
+	lDirToPlayer.y = 0.0
+	if CheckVector(lDirToPlayer) then
+		lDirToPlayer:Normalize()
+	end
+	local lBossDir = self:GetDirection()
+	lBossDir.y = 0.0
+	if CheckVector(lBossDir) then
+		lBossDir:Normalize()
+	end
+	
+	local lDot = lDirToPlayer:DotProduct(lBossDir)
+
 	local lShootSpeed = 40.0
 	local lDamage = 10.0
 	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
 	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
-	local lDir1 = GetPlayerDirection( lPos1 )
-	local lDir2 = GetPlayerDirection( lPos2 )
+
+	local lDir1
+	local lDir2
+	if lDot > 0 then
+		lDir1 = GetPlayerDirection( lPos1 )
+		lDir2 = GetPlayerDirection( lPos2 )
+	else
+		lDir1 = lBossDir;
+		lDir2 = lBossDir;
+	end
+	
 	self.BlashRight:Begin(lPos1)
 	self.BlashLeft:Begin(lPos2)
 	for i=1,6 do
@@ -288,12 +332,34 @@ function CBoss:MakeShootMedium()
 end
 
 function CBoss:MakeShootFar()
+	local lDirToPlayer = GetPlayerDirection(self:GetPosition())
+	lDirToPlayer.y = 0.0
+	if CheckVector(lDirToPlayer) then
+		lDirToPlayer:Normalize()
+	end
+	local lBossDir = self:GetDirection()
+	lBossDir.y = 0.0
+	if CheckVector(lBossDir) then
+		lBossDir:Normalize()
+	end
+	
+	local lDot = lDirToPlayer:DotProduct(lBossDir)
+	
 	local lShootSpeed = 50.0
 	local lDamage = 20.0
 	local lPos1 = self.RenderableObject:GetBonePosition("CATRigHub004Bone011Bone001Bone001")
 	local lPos2 = self.RenderableObject:GetBonePosition("CATRigHub004Bone006Bone001")
-	local lDir1 = GetPlayerDirection( lPos1 )
-	local lDir2 = GetPlayerDirection( lPos2 )
+
+	local lDir1
+	local lDir2
+	if lDot > 0 then
+		lDir1 = GetPlayerDirection( lPos1 )
+		lDir2 = GetPlayerDirection( lPos2 )
+	else
+		lDir1 = lBossDir;
+		lDir2 = lBossDir;
+	end
+	
 	self.BlashRight:Begin(lPos1)
 	self.BlashLeft:Begin(lPos2)
 	enemy_manager:AddShoot( lPos1, lDir1, lShootSpeed, lDamage/2.0 )
@@ -436,4 +502,8 @@ function CBoss:PlayFootstep()
 		sound_manager:PlayEvent( "Play_Footstep_boss", self.Name )
 		countdowntimer_manager:Reset(lTimerName, true)
 	end
+end
+
+function CBoss:GetDirection()
+	return self.CharacterController:GetDirection()
 end

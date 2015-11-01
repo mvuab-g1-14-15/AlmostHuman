@@ -1,3 +1,4 @@
 <cinematics>
 	<cinematic name="OpenDoorPasillo" resource_id_file="Data/pasillo/cinematics/open_door_pasillo.xml"/>
+	<cinematic name="CloseDoorPasillo" resource_id_file="Data/pasillo/cinematics/close_door_cinematic.xml"/>
 </cinematics>

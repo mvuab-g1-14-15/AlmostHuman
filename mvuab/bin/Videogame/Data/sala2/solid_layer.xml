@@ -8,8 +8,8 @@
   <MeshInstance name="Roof_sala2" core="Roof_sala2" pos="63.4862 -5.20385 -57.6083" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="lamps_sala2" core="lamps_sala2" pos="62.4198 -7.15009 -69.8001" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Door_sala2" core="Door_sala2" pos="53.1516 -15.7438 -23.9144" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="doorUpper_sala2" core="doorUpper_sala2" pos="53.1895 -15.5009 -24.1402" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="doorLower_sala2" core="doorLower_sala2" pos="53.1872 -17.4442 -24.163" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorUpper_sala2" core="doorUpper_sala2" pos="53.1895 -15.5009 -24.140" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="doorLower_sala2" core="doorLower_sala2" pos="52.5177 -18.5058 -24.8134" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_4_sala2" core="wall_down_4_sala2" pos="63.2041 -15.5096 -89.5245" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_2_sala2" core="wall_down_2_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_3_sala2" core="wall_down_3_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
