@@ -35,7 +35,7 @@ CGUIManager::CGUIManager( const Math::Vect2i& resolution )
     CManager()
     , m_sCurrentWindows( "Main.xml" )
     , m_pTextBox( NULL )
-    , m_PointerMouse( NULL )
+   // , m_PointerMouse( NULL )
     , m_bRenderError( false )
     , m_bUpdateError( false )
     , m_ScreenResolution( EngineConfigInstance->GetScreenResolution() )
@@ -54,7 +54,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
     CManager( atts )
     , m_sCurrentWindows( "Main.xml" )
     , m_pTextBox( NULL )
-    , m_PointerMouse( NULL )
+    //, m_PointerMouse( NULL )
     , m_bRenderError( false )
     , m_bUpdateError( false )
     , m_ScreenResolution( EngineConfigInstance->GetScreenResolution() )
@@ -64,7 +64,7 @@ CGUIManager::CGUIManager( const CXMLTreeNode& atts )
     , m_bFirstUpdate( true )
     , m_bVisiblePointerMouse( true )
     , m_pConsole( 0 )
-    , m_RenderPointer( false )
+    //, m_RenderPointer( false )
     , m_pPressButton( 0 )
 	, m_pCurrentMap( 0 )
 {
@@ -102,7 +102,7 @@ void CGUIManager::Release()
     m_WindowsMap.clear();
 
     CHECKED_DELETE( m_pTextBox );
-    CHECKED_DELETE( m_PointerMouse );
+    //CHECKED_DELETE( m_PointerMouse );
     CHECKED_DELETE( m_pConsole );
     CHECKED_DELETE( m_pPressButton );
 
@@ -145,12 +145,12 @@ void CGUIManager::Init()
 
         m = parser["PointerMouse"];
 
-        if ( m.Exists() )
+        /*if ( m.Exists() )
             m_PointerMouse = new CPointerMouse( m, m_ScreenResolution );
         else
-            LOG_WARNING_APPLICATION( "Error al intentar leer el tag <PointerMouse> del archivo de configuracion GUI: ", mConfigPath.c_str() );
+            LOG_WARNING_APPLICATION( "Error al intentar leer el tag <PointerMouse> del archivo de configuracion GUI: ", mConfigPath.c_str() );*/
 
-        m_bIsOk = m_pTextBox && m_PointerMouse;
+        m_bIsOk = m_pTextBox;// && m_PointerMouse;
     }
 
     //CONSOLA GUI LUA
@@ -199,11 +199,11 @@ void CGUIManager::Render()
         /*  assert( m_pPressButton );
         m_pPressButton->Render();*/
 
-        if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
+        /*if ( m_sCurrentWindows.compare( "Main.xml" ) == 0 )
             m_RenderPointer = true;
 
         if ( m_RenderPointer )
-            RenderPointerMouse();
+            RenderPointerMouse();*/
 
     }//END if (m_bIsOk)
 }
@@ -211,8 +211,8 @@ void CGUIManager::Render()
 
 void  CGUIManager::RenderPointerMouse()
 {
-    if ( m_bVisiblePointerMouse )
-        m_PointerMouse->Render();
+   /* if ( m_bVisiblePointerMouse )
+        m_PointerMouse->Render();*/
 }
 //----------------------------------------------------------------------------
 // Update
@@ -223,7 +223,7 @@ void CGUIManager::Update()
     if ( m_bIsOk )
     {
         assert( m_pTextBox );
-        assert( m_PointerMouse );
+      //  assert( m_PointerMouse );
 
         //Si es la primera vez que actualizamos la GUI debemos hacer un load de la main.xml:
         if ( m_bFirstUpdate )
@@ -240,7 +240,7 @@ void CGUIManager::Update()
             m_bFirstUpdate = false;
         }
 
-        m_PointerMouse->Update();
+        //m_PointerMouse->Update();
 
         m_pTextBox->Update();
 

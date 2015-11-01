@@ -57,10 +57,10 @@ void CProgressBar::Render  ()
         {
             GraphicsInstance->DrawQuad2D(posProgress, w, h, CGraphicsManager::UPPER_LEFT, m_ProgressColor);
         }
-        Math::Vect2i pos;
+       /* Math::Vect2i pos;
         pos.x = (uint32)(CGuiElement::m_Position.x + 0.4f * m_uWidth);
         pos.y = (uint32)(CGuiElement::m_Position.y + 0.2f * m_uHeight);
-        FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sText.c_str());
+        FontInstance->DrawText(pos.x, pos.y, m_TextColor, m_uFontID, m_sText.c_str());*/
 
         //Finalmente renderizamos el texto:
         CGuiElement::RenderText();
