@@ -95,4 +95,5 @@
   <MeshInstance name="Columna_low_006_sala4" core="Columna_low_006_sala4" pos="-136.071 48.3357 34.9651" yaw="1.5708" pitch="0.0" roll="0.0" scale="1.18383 1.18383 1.18383" />
   <MeshInstance name="Sala_4_Columnes_ascensor_sala4" core="Sala_4_Columnes_ascensor_sala4" pos="-31.03 43.1536 63.4776" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box199_sala4" core="Box199_sala4" pos="-177.512 22.7334 112.014" yaw="0.0" pitch="0.0" roll="0.0" scale="0.90056 1.0 0.852398" />
+  <MeshInstance name="Base_carga_sala4" core="Base_carga_sala4" pos="-56.0784 35.1127 65.5115" yaw="-1.5708" pitch="0.0" roll="0.0" scale="0.570386 0.570386 0.570386" />
 </RenderableObjects>

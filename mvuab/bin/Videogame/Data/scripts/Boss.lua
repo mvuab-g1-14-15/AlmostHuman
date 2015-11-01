@@ -23,7 +23,7 @@ function CBoss:__init()
 	
 	self.TargetPos = self.MediumPos
 	
-	self.HeightOffsetRO = 0.0
+	self.HeightOffsetRO = 0.5
 	
 	--Renderable object
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
@@ -40,7 +40,7 @@ function CBoss:__init()
 	self.RenderableObject:MakeTransform()
 	
 	self.RenderableObject:SetVelocity( 0.6 )
-	self:SetAnimation("idle")
+	self:SetAnimation("walk")
 	
 	--Character controller
 	if not physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 1.0, 0.01, 1.0, self.InitPos, CollisionGroup.ECG_ENEMY.value, -10.0) then 
@@ -104,6 +104,7 @@ function CBoss:Update()
 					self.TargetPos = self.NearPos
 				else
 					self.ArrivedNear = true
+					self:SetAnimation("attack")
 				end
 			end
 		else
@@ -177,7 +178,7 @@ function CBoss:NearAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		--self:SetAnimation("attack")
+		self:SetAnimation("attack")
 		self:MakeShootNear()
 		self.Counter = self.Counter + 1
 		if self.Counter > 5 then
@@ -201,7 +202,7 @@ function CBoss:MediumAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		--self:SetAnimation("attack")
+		self:SetAnimation("attack")
 		self:MakeShootMedium()
 		self.Counter = self.Counter + 1
 		if self.Counter > 3 then
@@ -222,7 +223,7 @@ function CBoss:FarAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		--self:SetAnimation("attack")
+		self:SetAnimation("attack")
 		self:MakeShootFar()
 		self.Counter = self.Counter + 1
 		if self.Counter > 25 then
