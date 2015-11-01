@@ -61,7 +61,6 @@ function load_gameplay()
 	--profiler:AddEntry("CEnemy:Update()")
 	
     g_Player = CPlayer()
-	g_Player:SetEnergy(100.0)
 	if g_HUD == nil then
 		g_HUD = CHUD()
 	end
