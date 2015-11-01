@@ -29,10 +29,10 @@
 		  </on_exit>
 		</animation_state>
 		<animation_state name="giro_izq" default_fade_in="0.2" default_fade_out="0.1">
-		  <cycle name="giro_izq"/>
+		  <cycle name="giro_izq" weight ="0.5"/>
 		</animation_state>
 		<animation_state name="giro_der" default_fade_in="0.2" default_fade_out="0.1">
-		  <action name="giro_der"/>
+		  <action name="giro_der" weight ="0.5"/>
 		</animation_state>
   </animation_states>
   
