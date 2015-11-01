@@ -83,7 +83,7 @@ end
 function CBlaster:ShootCharged( aPosition )
 	self.Blash:Begin(aPosition)
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection();
-	self.AmmoCharged:Begin( aPosition + lDirection * 0.1, lDirection, self:CalculateDamage() );
+	self.AmmoCharged:Begin( aPosition , lDirection, self:CalculateDamage() );
 end
 
 function CBlaster:GetEnemyFromRay()
@@ -99,7 +99,7 @@ function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if self.Energy > 1 then
 			if action_manager:DoAction("Shoot") and not self.IsCharging then
-				g_Player:SetAnimation("shoot")
+				g_Player:SetAnimation("fast_shoot")
 				self.Energy = self.Energy - 1
 				sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
 				self:Shoot( aPosition )
@@ -131,7 +131,7 @@ function CBlaster:Update( aPosition )
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
 	self.Blash:Update( aPosition );
 	self:UpdateAmmo();
-	self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
+	--self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
 end
 
 function CBlaster:GetIsCharging()
