@@ -13,6 +13,8 @@ CParticleInstance::CParticleInstance( const CXMLTreeNode& atts )
   mCore       = PSManager->GetPSCore( atts.GetAttribute<std::string>("core", "null_core") );
   mIsVisible  = atts.GetAttribute<bool>( "active", false );
   mIsOk = mCore != NULL;
+
+  ASSERT( mIsOk, "The instance is not ok %s, %s", GetName().c_str(),atts.GetAttribute<std::string>("core", "null_core").c_str() );
 }
 
 CParticleInstance::CParticleInstance( const std::string& aName, const std::string& aCoreName, const std::string& aRoomName )
@@ -21,6 +23,7 @@ CParticleInstance::CParticleInstance( const std::string& aName, const std::strin
   , mCore( PSManager->GetPSCore( aCoreName ) )
 {
   mIsOk = mCore != NULL;
+  ASSERT( mIsOk, "The instance is not ok %s, %s", aName.c_str(), aCoreName.c_str() );
 }
 
 CParticleInstance::~CParticleInstance()
