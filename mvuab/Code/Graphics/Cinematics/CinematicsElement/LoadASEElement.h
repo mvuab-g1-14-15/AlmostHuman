@@ -17,6 +17,7 @@ class CLoadASEElement : public CCinematicsElement
 		    virtual void Render2D(CGraphicsManager &GM);
 	private:
 		CPhysicActor* m_Actor;
+		bool			m_bLoadLater;
 
 };
 
