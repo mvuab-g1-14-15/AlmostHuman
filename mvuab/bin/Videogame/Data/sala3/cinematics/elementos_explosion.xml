@@ -1,5 +1,4 @@
-<elements>
-  <element name="Cylinder001_sala3" room="sala3"/>
+<elements>  
   <element name="Reixa_014_sala3" room="sala3" />
   <element name="Reixa_015_sala3" room="sala3" />
   <element name="Reixa_016_sala3" room="sala3" />
