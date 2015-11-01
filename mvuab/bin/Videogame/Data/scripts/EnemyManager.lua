@@ -377,6 +377,7 @@ function CEnemyManager:Reinit( aRoom )
 		if lBombMesh ~= nil then
 			lBombMesh:SetActive(true)
 		end
+		gui_manager:ShowStaticText("UpdateDLC", true)
 	end
 	if aRoom == "sala3" then
 		self:CreateEnemiesSala3()
@@ -400,6 +401,7 @@ function CEnemyManager:Reinit( aRoom )
 			gui_manager:ShowStaticText("FaltanC4", true)
 			gui_manager:ShowStaticText("DetonarC4", true)
 			gui_manager:ShowStaticText("ColocarC4", true)
+			gui_manager:ShowStaticText("TakeElevator", true)
 		end
 	end
 	if aRoom == "sala4" then

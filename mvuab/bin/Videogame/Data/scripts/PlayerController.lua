@@ -121,7 +121,7 @@ function CPlayerController:Update()
 		l_Speed = l_Speed / 3.0
 		countdowntimer_manager:AddTimer("Footstep", self.TimeFootstep * 0.5, false)
 	end
-	if self.Run then
+	if self.Run and not self.Crouch then
 		l_Speed = l_Speed * 2.0
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep * 0.8)
 	end
@@ -196,7 +196,7 @@ function CPlayerController:Update()
 				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 0.5
 				l_ShakeHorizontalAmplitude = l_ShakeHorizontalAmplitude * 0.5
 			end
-			if self.Run then
+			if self.Run and not self.Crouch then
 				l_ShakeVerticalSpeed = l_ShakeVerticalSpeed * 0.5
 				l_ShakeHorizontalSpeed = l_ShakeHorizontalSpeed * 0.5
 				l_ShakeVerticalAmplitude = l_ShakeVerticalAmplitude * 0.5

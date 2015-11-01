@@ -225,6 +225,10 @@
 					<ShortName>Sala1.wav</ShortName>
 					<Path>SFX\Sala1_E106FFBE.wem</Path>
 				</File>
+				<File Id="493938362" Language="SFX">
+					<ShortName>actualizacion de brazo v2.wav</ShortName>
+					<Path>SFX\actualizacion de brazo v2_E106FFBE.wem</Path>
+				</File>
 				<File Id="520901286" Language="SFX">
 					<ShortName>Sala3A.wav</ShortName>
 					<Path>SFX\Sala3A_E106FFBE.wem</Path>
