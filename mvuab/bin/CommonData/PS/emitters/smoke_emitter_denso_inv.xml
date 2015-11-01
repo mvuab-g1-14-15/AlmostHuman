@@ -1,0 +1,13 @@
+<emitter active="true" name="steam_emitter_down" loop="true" time_to_live="20.0">
+	<particles max_alive_particles="800" time_to_live="3 4">
+		<technique name="SmokeTechnique" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/smoke/smoke_2.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.1" color="1 1 1" size="0.5"/>
+			<interpolator alpha="0.3" color="1 1 1" size="1"/>
+			<interpolator alpha="0.0" color="1 1 1" size="0.5"/>
+		</interpolators>
+		<motion linear_speed="1.5 1.5" initial_dir_min="0 0 1" initial_dir_max="0 0 1" radial_speed="50 60" gravity="-1"/>
+	</particles>
+	<emissions random_initial_angle="false" emission_time="0.0" particles_per_emission="8 10" cubic_size="1 1 1"/>
+</emitter>

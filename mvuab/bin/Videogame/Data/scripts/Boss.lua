@@ -40,7 +40,7 @@ function CBoss:__init()
 	self.RenderableObject:MakeTransform()
 	
 	self.RenderableObject:SetVelocity( 0.6 )
-	self.RenderableObject:ChangeAnimation("walk", 0.2, 1)
+	self:SetAnimation("walk")
 	
 	--Character controller
 	if not physic_manager:AddController(self.Name, self.Radius, (self.Height/2.0)+0.25, 1.0, 0.01, 1.0, self.InitPos, CollisionGroup.ECG_ENEMY.value, -10.0) then 
@@ -73,6 +73,14 @@ function CBoss:__init()
 	self.StunBar = self.InitStunBar
 	
 	self.ArrivedNear = false
+	
+	self.lParticle1 = CParticle( self.Name.."particle_stun1", "steam_up", "core" );
+	self.lParticle2 = CParticle( self.Name.."particle_stun2", "steam_up", "core" );
+	self.lParticle3 = CParticle( self.Name.."particle_stun3", "steam_up", "core" );
+	
+	self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub004")              );
+	self.lParticle2:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));
+	self.lParticle3:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
 end
 
 function CBoss:Destroy()
@@ -87,6 +95,9 @@ function CBoss:Update()
 	local dt = timer:GetElapsedTime()
 	
 	if not self:IsStunned() then
+		self.lParticle1:Hide();
+		self.lParticle2:Hide();
+		self.lParticle3:Hide();
 		if not self.ArrivedNear then
 			if self:MoveToPos( self.TargetPos ) then
 				if self.TargetPos == self.MediumPos then
@@ -112,8 +123,16 @@ function CBoss:Update()
 			end
 		end
 	else
+		self.lParticle1:Show();
+		self.lParticle2:Show();
+		self.lParticle3:Show();
+		self:SetAnimation("idle");
 		engine:TraceOnce("Boss stunned!")
 	end
+	
+	self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004")              );
+	self.lParticle2:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));
+	self.lParticle3:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
 	
 	enemy_manager:SetAlarm( "sala4" )
 	
@@ -141,6 +160,9 @@ end
 
 function CBoss:AddStun( aValue )
 	self.StunBar = self.StunBar - aValue
+	if self:IsStunned() then
+		self:SetAnimation("hurt")
+	end
 end
 
 function CBoss:ClearStun()
@@ -155,7 +177,7 @@ function CBoss:NearAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
+		self:SetAnimation("attack")
 		self:MakeShootNear()
 		self.Counter = self.Counter + 1
 		if self.Counter > 5 then
@@ -179,7 +201,7 @@ function CBoss:MediumAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
+		self:SetAnimation("attack")
 		self:MakeShootMedium()
 		self.Counter = self.Counter + 1
 		if self.Counter > 3 then
@@ -200,7 +222,7 @@ function CBoss:FarAttack()
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
-		self.RenderableObject:ChangeAnimation("attack", 0.2, 1)
+		self:SetAnimation("attack")
 		self:MakeShootFar()
 		self.Counter = self.Counter + 1
 		if self.Counter > 25 then
@@ -469,9 +491,9 @@ function CBoss:RotateToPos( aPos )
 	
 	if DiffYaw > self.DeltaRot then
 		if DiffYaw < 0 then
-			self.RenderableObject:ChangeAnimation("giro_der", 0.2, 1)
+			self:SetAnimation("giro_der")
 		else
-			self.RenderableObject:ChangeAnimation("giro_izq", 0.2, 1)
+			self:SetAnimation("giro_izq")
 		end
 		if not self.LerpInited then
 			self.Lerp:SetValues(ActualYaw, DirYaw, self.TimeToRot, 0)
@@ -514,4 +536,8 @@ end
 
 function CBoss:GetDirection()
 	return self.CharacterController:GetDirection()
+end
+
+function CBoss:SetAnimation( aName )
+	self.RenderableObject:SetAnimationState(aName)
 end

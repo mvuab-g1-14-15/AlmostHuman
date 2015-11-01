@@ -4,6 +4,14 @@
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
+	<particle_system_core name="smoke_emitter_denso" sound="false">
+		<cube_emitter file="smoke_emitter_denso.xml"/>
+	</particle_system_core>
+	
+	<particle_system_core name="smoke_emitter_denso_inv" sound="false">
+		<cube_emitter file="smoke_emitter_denso_inv.xml"/>
+	</particle_system_core>
+	
 	<particle_system_core name="steam" sound="false">
 		<cube_emitter file="steam_emitter.xml"/>
 	</particle_system_core>
@@ -26,6 +34,10 @@
 	
 	<particle_system_core name="steam_up_slow_big" sound="false">
 		<cube_emitter file="steam_up_slow_big.xml"/>
+	</particle_system_core>
+	
+	<particle_system_core name="steam_down_slow_big" sound="false">
+		<cube_emitter file="steam_down_slow_big.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="steam_emitter_aside" sound="false">
