@@ -400,10 +400,12 @@ function CEnemyManager:Reinit( aRoom )
 	end
 		
 	if aRoom == "sala2" then
+		cinematic_manager:ReloadCinematic("data/sala2/cinematics.xml")
 		self:CreateEnemiesSala2()
 		gui_manager:ShowStaticText("Block", true)
 	end
 	if aRoom == "pasillo" then
+		cinematic_manager:ReloadCinematic("data/pasillo/cinematics.xml")
 		gui_manager:ShowStaticText("Block", true)
 		trigger_manager:GetTriggerByName("take_C4"):SetActive(true)
 		local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
@@ -413,6 +415,7 @@ function CEnemyManager:Reinit( aRoom )
 		gui_manager:ShowStaticText("UpdateDLC", true)
 	end
 	if aRoom == "sala3" then
+		cinematic_manager:ReloadCinematic("data/elevator/cinematics.xml")
 		self:CreateEnemiesSala3()
 		self:CreateDesactivateEnemiesSala3()
 		if not g_ExplotionDone then
@@ -430,6 +433,7 @@ function CEnemyManager:Reinit( aRoom )
 			scene:GetResource("sala3"):GetLayer("solid"):GetResource("bomb002_sala3"):SetActive(false)
 			trigger_manager:GetTriggerByName("punto_explosivo_2_sala3"):SetActive(true)
 			trigger_manager:GetTriggerByName("punto_explosivo_1_sala3"):SetActive(true)
+			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(true)
 			gui_manager:ShowStaticText("C4Colocada", true)
 			gui_manager:ShowStaticText("FaltanC4", true)
 			gui_manager:ShowStaticText("DetonarC4", true)
@@ -438,6 +442,7 @@ function CEnemyManager:Reinit( aRoom )
 		end
 	end
 	if aRoom == "sala4" then
+		cinematic_manager:ReloadCinematic("data/sala4/cinematics.xml")
 		self.Boss:Destroy()
 		self.Boss = nil
 		
