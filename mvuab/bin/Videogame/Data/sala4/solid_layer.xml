@@ -23,7 +23,7 @@
   <MeshInstance name="Sala_4_upper_wall_1_sala4" core="Sala_4_upper_wall_1_sala4" pos="-279.002 23.2025 82.1306" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_upper_wall_4_sala4" core="Sala_4_upper_wall_4_sala4" pos="-279.002 23.2016 35.8081" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_upper_wall_3_sala4" core="Sala_4_upper_wall_3_sala4" pos="-116.877 50.3256 20.5213" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name=" Sala_4_left_floor_1_sala4" core=" Sala_4_left_floor_1_sala4" pos="-120.629 19.8741 39.6586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Sala_4_left_floor_1_sala4" core="Sala_4_left_floor_1_sala4" pos="-120.629 19.8741 39.6586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_right_floor_1_sala4" core="Sala_4_right_floor_1_sala4" pos="-120.629 19.8741 78.0864" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_right_floor_2_sala4" core="Sala_4_right_floor_2_sala4" pos="-284.216 19.8741 78.0855" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Sala_4_left_floor_2_sala4" core="Sala_4_left_floor_2_sala4" pos="-284.186 19.8741 39.6586" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
