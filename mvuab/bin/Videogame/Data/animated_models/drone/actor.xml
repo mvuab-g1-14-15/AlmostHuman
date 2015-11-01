@@ -1,5 +1,5 @@
 <animated_model name="drone">
-	<texture file="Data/animated_models/drone/drone_compo.dds"/>
+	<texture file="Data/animated_models/drone/drone_compo.png"/>
 	<skeleton file="drone.csf"/>
 	<mesh file="drone.cmf"/>
 	<animation name="idle" file="idle.caf"/>
