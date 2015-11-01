@@ -1,3 +1,3 @@
 <elements>
-<element name="Cylinder001_space" room="space" /> 
+	<element name="Player" room="core" layer="characters"/>
 </elements>
