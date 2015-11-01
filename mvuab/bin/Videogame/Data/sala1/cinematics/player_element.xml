@@ -1,0 +1,3 @@
+<elements>
+	<element name="Player" room="core" layer="characters"/>
+</elements>

@@ -75,9 +75,9 @@ function CPlayer:Update()
 	self.RenderableObject:MakeTransform();
 	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
 	self.Blaster:Update( lArmPosition )
-	
-	if not self.Blaster:GetIsCharging() then
-		self:SetAnimation("idle")
+
+	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() then
+	self:SetAnimation("aim")
 	end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
