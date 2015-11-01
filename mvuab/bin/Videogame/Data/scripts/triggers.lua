@@ -308,7 +308,7 @@ function StayText(room, message, other_shape)
 			g_bPressRoom3X = false
 			g_bOpenDoor3 = true
 			cinematic_manager:Execute("elevatorDown")
-			physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala3DoorEscenario"))
+			
 			--Codigo para cambiar de sala o abrir la puerta
 			
 		end
@@ -669,7 +669,7 @@ function UpdateTriggers()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))
+				
 				--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, -500, 0))
 			end
 		end
@@ -690,7 +690,7 @@ function UpdateTriggers()
 				enemy_manager:CreateDesactivateEnemiesSala3()
 				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				cinematic_manager:Execute("OpenDoorPasillo")
-				physic_manager:ReleasePhysicActor(physic_manager:GetActor("pasilloDoorEscenario"))
+				
 			end
 		end
 	end

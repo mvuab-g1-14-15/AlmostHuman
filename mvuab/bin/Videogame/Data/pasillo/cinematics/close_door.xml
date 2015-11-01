@@ -1,5 +1,5 @@
 ﻿<cinematic name="CerrarPuertas2" duration="4.0">
-  <cinematic_object resource="doorUpper003_pasillo" renderable_objects_manager="doorUpper_pasillo" room="pasillo" active="false" init_keyframe="0.0">
+  <cinematic_object resource="doorUpper003_pasillo" renderable_objects_manager="doorUpper_pasillo" room="pasillo" active="false" init_keyframe="0.0" lua_code="physic_manager:ReleasePhysicActor(physic_manager:GetActor('pasilloDoorEscenario'))" key_action="3.9">
     <cinematic_object_key_frame time="0.0" pos="53.969 -13.4651 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="53.969 -13.4651 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="53.969 -13.4651 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
