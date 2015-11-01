@@ -7,10 +7,12 @@ function CStealthAttack:__init()
 	self.MaxDistance = 3.0
 	self.MaxAngle = -0.507
 	self.Show = 0
+	
+	self.CStealthParticle = CParticle( "StealthAttackParticle", "blaster", "core" )
     --engine:Trace("StealthAttack initialized")
 end
 
-function CStealthAttack:Update()
+function CStealthAttack:Update( aPosition )
 	self:UpdateInput()
 	local enemy = enemy_manager:GetCloseEnemy(GetPlayerPosition())
 	if enemy == nil then
@@ -39,6 +41,8 @@ function CStealthAttack:Update()
 			--engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
 				g_Player:SetAnimation("stealth")
+				self.ChargedParticle:Init( aPosition );
+				self.ChargedParticle:SetDirection( aPosition - enemy:GetPosition() );
 				enemy:AddDamage(enemy:GetLife())
 			end
 		end
@@ -59,7 +63,8 @@ function CStealthAttack:UpdateInput()
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("StealthAttack") then
 			self.Doing = true
-			--engine:Trace("Stealth attack press")
+			g_Player:SetAnimation("stealth")
+			engine:Trace("Stealth attack press")
 		end
 	end
 end
