@@ -11,26 +11,26 @@
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
 	
-	<Map name="Radar1" pos="0 78" width="20" height="18" current="true" texture_map="Data/textures/GUI/sala1-sala2-pasillo.jpg"
-	 width_map="0.32" height_map="0.12" pos_0_0_3d_map="27.91 -14.41" pos_1_1_3d_map="146.15 -96.03" visible="true" active="true" >
+	<Map name="Radar1" pos="0 74" width="20" height="22" current="true" texture_map="Data/textures/GUI/sala1-sala2-pasillo.png"
+	 width_map="0.50" height_map="0.2818" pos_0_0_3d_map="27.91 -14.41" pos_1_1_3d_map="146.15 -96.03" visible="true" active="true" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 <!-- 		<item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/> -->
 	</Map>
 	
-	<Map name="Radar2" pos="0 78" width="20" height="18" texture_marco="" texture_map="Data/textures/GUI/sala3-sala2-pasillo.jpg"
-	 width_map="0.32" height_map="0.18" pos_0_0_3d_map="-3.7 46.98" pos_1_1_3d_map="114.52 -34.65" visible="false" active="false" >
+	<Map name="Radar2" pos="0 74" width="20" height="22" texture_marco="" texture_map="Data/textures/GUI/sala3-sala2-pasillo.png"
+	 width_map="0.50" height_map="0.2818" pos_0_0_3d_map="-3.7 46.98" pos_1_1_3d_map="114.52 -34.65" visible="false" active="false" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 		<!-- <item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/> -->
 	</Map>
 	
-	<Map name="Radar3" pos="0 78" width="20" height="18" texture_marco="" texture_map="Data/textures/GUI/sala3-pasillo.jpg"
-	 width_map="0.32" height_map="0.18" pos_0_0_3d_map="-78.04 114.55" pos_1_1_3d_map="66.63 14.68" visible="false" active="false" >
+	<Map name="Radar3" pos="0 74" width="20" height="22" texture_marco="" texture_map="Data/textures/GUI/sala3-pasillo.jpg"
+	 width_map="0.50" height_map="0.2818" pos_0_0_3d_map="-78.04 114.55" pos_1_1_3d_map="66.63 14.68" visible="false" active="false" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 		<item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 	</Map>
 	
-	<Map name="Radar4" pos="0 78" width="20" height="18" texture_marco="" texture_map="Data/textures/GUI/sala4.jpg"
-	 width_map="0.32" height_map="0.18" pos_0_0_3d_map="-381.966 130.314" pos_1_1_3d_map="-9.38 -6.77" visible="false" active="false" >
+	<Map name="Radar4" pos="0 74" width="20" height="22" texture_marco="" texture_map="Data/textures/GUI/sala4.jpg"
+	 width_map="0.50" height_map="0.2818" pos_0_0_3d_map="-381.966 130.314" pos_1_1_3d_map="-9.38 -6.77" visible="false" active="false" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 		<item name="door1" texture="Data/textures/GUI/alcantarilla.jpg" pos_in_map="3.0 0.0 -4.0" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
 	</Map>
@@ -48,6 +48,9 @@
 	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
 	<StaticText name="RomperRejilla" pos="45 80" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
 	<StaticText name="Hackear" pos="45 80" height="30" width="12" visible="false" active="false" Literal="Hackear" />
+	<StaticText name="TakeC4" pos="45 80" height="30" width="12" visible="false" active="false" Literal="TakeC4" />
+	<StaticText name="TakeElevator" pos="45 80" height="30" width="12" visible="false" active="false" Literal="TakeElevator" />
+	<StaticText name="UpdateDLC" pos="45 80" height="30" width="12" visible="false" active="false" Literal="UpdateDLC" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
 			quad="Data/textures/GUI/marco2.png" pos_button="41.20 13.50" height_button="5.00" width_button="2.8"
