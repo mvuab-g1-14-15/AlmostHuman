@@ -34,6 +34,8 @@ class CLight : public CObject3D, public CName
         virtual ~CLight();
         void                SetIntensity( const float intensity );
         float               GetIntensity() const;
+        void                SetSpecularIntensity( const float intensity );
+        float               GetSpecularIntensity() const;
         void                SetColor( const Math::CColor& Color );
         const Math::CColor& GetColor() const;
         void                SetStartRangeAttenuation( const float StartRangeAttenuation );
@@ -74,7 +76,7 @@ class CLight : public CObject3D, public CName
         CBillboardInstance* mBillboard;
 
         float m_Intensity;
-        float mSpecularIntensity;
+        float m_SpecularIntensity;
         float m_StartRangeAttenuation;
         float m_EndRangeAttenuation;
 

@@ -142,6 +142,8 @@ void CEffect::LinkSemantics()
 
   GetParameterBySemantic( ViewToLightProjectionMatrixParameterStr,  m_ViewToLightProjectionMatrixParameter );
   GetParameterBySemantic( LightEnabledParameterStr, m_LightEnabledParameter );
+  GetParameterBySemantic( LightsSpecularIntensityParameterStr, m_LightsSpecularIntensityParameter );
+  GetParameterBySemantic( LightsIntensityParameterStr, m_LightsIntensityParameter);
   GetParameterBySemantic( LightsTypeParameterStr, m_LightsTypeParameter );
   GetParameterBySemantic( LightsPositionParameterStr, m_LightsPositionParameter );
   GetParameterBySemantic( LightsDirectionParameterStr, m_LightsDirectionParameter );
@@ -241,29 +243,28 @@ bool CEffect::SetLights( size_t NumOfLights )
 
     if ( l_pCurrentLight != NULL )
     {
-      m_LightsEnabled[i] = (BOOL) l_pCurrentLight->IsVisible() ? 0 : 1;
-      CLight::ELightType l_LightType = l_pCurrentLight->GetType();
-      m_LightsType[i] = static_cast<int>( l_LightType );
+      m_LightsEnabled[i]               = (BOOL) l_pCurrentLight->IsVisible() ? 0 : 1;
+      CLight::ELightType l_LightType   = l_pCurrentLight->GetType();
+      m_LightsIntensity[i]             = l_pCurrentLight->GetIntensity();
+      m_LightsSpecularIntensity[i]     = l_pCurrentLight->GetSpecularIntensity();
+      m_LightsType[i]                  = static_cast<int>( l_LightType );
       m_LightsStartRangeAttenuation[i] = l_pCurrentLight->GetStartRangeAttenuation();
-      m_LightsEndRangeAttenuation[i] = l_pCurrentLight->GetEndRangeAttenuation();
-      m_LightsPosition[i] = l_pCurrentLight->GetPosition();
-      Math::CColor l_Color = l_pCurrentLight->GetColor();
-      m_LightsColor[i] = Math::Vect3f( l_Color.GetRed() ,
-                                       l_Color.GetGreen() ,
-                                       l_Color.GetBlue() );
+      m_LightsEndRangeAttenuation[i]   = l_pCurrentLight->GetEndRangeAttenuation();
+      m_LightsPosition[i]              = l_pCurrentLight->GetPosition();
+      Math::CColor l_Color             = l_pCurrentLight->GetColor();
+      m_LightsColor[i]                 = Math::Vect3f( l_Color.GetRed() , l_Color.GetGreen(), l_Color.GetBlue() );
 
       if ( l_LightType == CLight::DIRECTIONAL )
       {
-        CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*>
-            ( l_pCurrentLight );
-        m_LightsDirection[i] = l_pDirectionalLight->GetDirection();
+        CDirectionalLight* l_pDirectionalLight = static_cast<CDirectionalLight*> ( l_pCurrentLight );
+        m_LightsDirection[i]                   = l_pDirectionalLight->GetDirection();
       }
       else if ( l_LightType == CLight::SPOT )
       {
         CSpotLight* l_SpotLight = static_cast<CSpotLight*>( l_pCurrentLight );
-        m_LightsDirection[i] = l_SpotLight->GetDirection();
-        m_LightsAngle[i] = l_SpotLight->GetAngle();
-        m_LightsFallOff[i] = l_SpotLight->GetFallOff();
+        m_LightsDirection[i]    = l_SpotLight->GetDirection();
+        m_LightsAngle[i]        = l_SpotLight->GetAngle();
+        m_LightsFallOff[i]      = l_SpotLight->GetFallOff();
       }
 
       //Begin the render of the shadow
@@ -282,6 +283,8 @@ bool CEffect::SetLight( CLight * aLight )
   {
     m_LightsEnabled[0] = ( BOOL )aLight == NULL ? 0 : 1;
     m_LightsType[0] = static_cast<int>( aLight->GetType() );
+    m_LightsIntensity[0]             = aLight->GetIntensity();
+    m_LightsSpecularIntensity[0]     = aLight->GetSpecularIntensity();
     m_LightsStartRangeAttenuation[0] = aLight->GetStartRangeAttenuation();
     m_LightsEndRangeAttenuation[0] = aLight->GetEndRangeAttenuation();
     m_LightsPosition[0] = aLight->GetPosition();
@@ -347,6 +350,8 @@ void CEffect::ResetLightsHandle()
   //Reset all the lights of the effect
   memset( m_LightsEnabled,                  0, sizeof( BOOL ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsType,                     0, sizeof( int32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsIntensity,                0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
+  memset( m_LightsSpecularIntensity,        0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsAngle,                    0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsFallOff,                  0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );
   memset( m_LightsStartRangeAttenuation,    0, sizeof( float32 ) * MAX_LIGHTS_BY_SHADER );

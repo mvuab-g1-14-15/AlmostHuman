@@ -74,11 +74,11 @@ public:
   }
   const float32* GetLightsSpecularIntensity()
   {
-    return m_LightsIntensity;
+    return m_LightsSpecularIntensity;
   }
   const float32* GetLightsIntensity()
   {
-    return m_LightsSpecularIntensity;
+    return m_LightsIntensity;
   }
   const float32* GetLightsAngle()
   {

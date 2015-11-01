@@ -31,12 +31,13 @@ const char ViewToLightProjectionMatrixParameterStr[] = "ViewToLightProjection";
 //-Lights Handles ---------------------------------------------------------
 const char LightEnabledParameterStr[]                 = "LightsEnabled";
 const char LightsTypeParameterStr[]                   = "LightsTypes";
-const char LightsPositionParameterStr[]               = "LightsPositions";
 const char LightsDirectionParameterStr[]              = "LightsDirections";
+const char LightsPositionParameterStr[]               = "LightsPositions";
 const char LightsAngleParameterStr[]                  = "LightsAngles";
 const char LightsFallOffParameterStr[]                = "LightsFallOffs";
 const char LightsColorParameterStr[]                  = "LightsColors";
 const char LightsIntensityParameterStr[]              = "LightsIntensity";
+const char LightsSpecularIntensityParameterStr[]      = "LightsSpecularIntensity";
 const char LightsStartRangeAttenuationParameterStr[]  = "LightsStartAngle";
 const char LightsEndRangeAttenuationParameterStr[]    = "LightsEndAngle";
 const char BonesParameterStr[] = "Bones";

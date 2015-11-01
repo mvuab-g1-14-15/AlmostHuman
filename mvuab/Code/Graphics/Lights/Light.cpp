@@ -13,7 +13,9 @@
 #include "EngineManagers.h"
 #include "Texture\TextureManager.h"
 #include <string>
-#include "Billboard/BillboardInstance.h"
+#include "Billboard\BillboardCore.h"
+#include "Billboard\BillboardInstance.h"
+#include "Billboard/BillboardManager.h"
 
 CLight::CLight()
     : CObject3D()
@@ -21,7 +23,7 @@ CLight::CLight()
     , m_StartRangeAttenuation( 0 )
     , m_EndRangeAttenuation( 0 )
     , m_Color( Math::Vect3f( 1, 1, 1 ) )
-    , m_Intensity( 0 )
+    , m_Intensity( 1.0 )
     , m_RenderShadows( 0 )
     , m_ViewShadowMap( Math::m44fIDENTITY )
     , m_ProjectionShadowMap( Math:: m44fIDENTITY )
@@ -30,7 +32,7 @@ CLight::CLight()
     , mStaticShadowMap( 0 )
     , mDynamicShadowMap( 0 )
     , m_MustUpdateStaticShadowMap( false )
-    , mSpecularIntensity( 1.0f )
+    , m_SpecularIntensity( 1.0f )
 {
 }
 
@@ -39,8 +41,8 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_StartRangeAttenuation( node.GetAttribute<float>( "att_start_range", 0 ) )
     , m_EndRangeAttenuation( node.GetAttribute<float>( "att_end_range", 0 ) )
     , m_Color( node.GetAttribute<Math::Vect3f>( "color", Math::Vect3f( 1, 1, 1 ) ) )
-    , m_Intensity( node.GetAttribute<float>( "intensity", 0 ) )
-    , mSpecularIntensity( node.GetAttribute<float>( "specular_intensity", 0 ) )
+    , m_Intensity( node.GetAttribute<float>( "intensity", 1.0f ) )
+    , m_SpecularIntensity( node.GetAttribute<float>( "specular_intensity", 0 ) )
     , m_ViewShadowMap( Math::m44fIDENTITY )
     , m_ProjectionShadowMap( Math:: m44fIDENTITY )
     , m_ShadowMaskTexture( 0 )
@@ -50,6 +52,16 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
     , mBillboard( 0 )
 {
+  CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
+  if( lBillboardCore  )
+  {
+    mBillboard = new CBillboardInstance();
+    mBillboard->ChangePosition( m_Position );
+    lBillboardCore->AddInstance( mBillboard );
+  }
+
+  LOG_INFO_APPLICATION("Intensity %f", m_Intensity );
+
     ASSERT( m_Color.GetRed() <= 1.0f && m_Color.GetGreen() <= 1.0f &&
             m_Color.GetBlue() <= 1.0f, "Normalized Color for light %s", GetName().c_str() );
 
@@ -111,6 +123,16 @@ void CLight::SetIntensity( const float intensity )
 float CLight::GetIntensity() const
 {
     return m_Intensity;
+}
+
+void CLight::SetSpecularIntensity( const float intensity )
+{
+  m_SpecularIntensity = intensity;
+}
+
+float CLight::GetSpecularIntensity() const
+{
+  return m_SpecularIntensity;
 }
 
 void CLight::SetType( const ELightType Type )

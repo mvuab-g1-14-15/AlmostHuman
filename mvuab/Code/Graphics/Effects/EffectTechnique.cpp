@@ -284,6 +284,18 @@ bool CEffectTechnique::SetupLights()
             LOG_WARNING_APPLICATION( "CEffectTechnique::SetupLights->Error Setting start range" );
         }
 
+        if ( l_Effect->SetFloatArray( m_Effect->GetLightsIntensityParameter(),
+          &m_Effect->GetLightsIntensity()[0], MAX_LIGHTS_BY_SHADER ) != S_OK )
+        {
+          LOG_WARNING_APPLICATION( "SetupLights->Error Setting lights intensity" );
+        }
+
+        if ( l_Effect->SetFloatArray( m_Effect->GetLightsSpecularIntensityParameter(),
+          &m_Effect->GetLightsSpecularIntensity()[0], MAX_LIGHTS_BY_SHADER ) != S_OK )
+        {
+          LOG_WARNING_APPLICATION( "CEffectTechnique::SetupLights->Error Setting specular intensity" );
+        }
+
         if ( l_Effect->SetFloatArray( m_Effect->GetLightsEndRangeAttenuationParameter(),
                                       &m_Effect->GetLightsEndRangeAttenuation()[0], MAX_LIGHTS_BY_SHADER ) != S_OK )
         {

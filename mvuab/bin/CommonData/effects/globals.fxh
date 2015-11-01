@@ -69,6 +69,7 @@ int         g_LightsType[MAX_LIGHTS_BY_SHADER]                      : LightsType
 bool        g_LightsEnabled[MAX_LIGHTS_BY_SHADER]                   : LightsEnabled;
 float       g_LightsAngle[MAX_LIGHTS_BY_SHADER]                     : LightsAngles;
 float       g_LightsIntensity[MAX_LIGHTS_BY_SHADER]                 : LightsIntensity;
+float       g_LightsSpecularIntensity[MAX_LIGHTS_BY_SHADER]         : LightsSpecularIntensity;
 float       g_LightsFallOff[MAX_LIGHTS_BY_SHADER]                   : LightsFallOffs;
 float       g_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER]       : LightsEndAngle;
 float       g_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER]     : LightsStartAngle;

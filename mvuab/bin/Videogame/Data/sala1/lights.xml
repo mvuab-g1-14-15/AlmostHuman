@@ -1,10 +1,11 @@
 ﻿<lights>
-  <!--<spot_light name="Fspot001" room="sala1" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="0.992157 0.47451 0.133333" att_start_range="3.85958" att_end_range="5.71101" angle="43.0" fall_off="56.3" render_shadows="false"> 
+  <!--<omni_light name="Fspot001" room="sala1" pos="123.38 -7.15 -44.29" intensity="1.0" color="0.992157 0.47451 0.133333" att_start_range="23.85958" att_end_range="25.71101" angle="43.0" fall_off="56.3" /> 
 		<shadow_map render_shadows="true" shadow_texture_mask="" room="room1">
 				<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
 				<dynamic_shadow_map generate="false" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
 		</shadow_map>
-  </spot_light>
+  </spot_light>-->
+  <!--
   <spot_light name="Fspot002" room="sala1" pos="92.8469 -9.21049 -44.2049" color="0.992157 0.47451 0.133333" att_start_range="3.85958" att_end_range="5.71101" look_at="100.548 -9.21049 -44.2049" angle="43.0" fall_off="56.3" render_shadows="false">
 		<shadow_map render_shadows="true" shadow_texture_mask="" room="room1">
 				<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
