@@ -8,13 +8,6 @@ function CEnemyManager:__init()
 	self.Enemy.sala3 = {}
 	self.Enemy.sala4 = {}
 	
-	self.GarbageMesh = {}
-	self.GarbageMesh.sala1 = {}
-	self.GarbageMesh.sala2 = {}
-	self.GarbageMesh.pasillo = {}
-	self.GarbageMesh.sala3 = {}
-	self.GarbageMesh.sala4 = {}
-	
 	self.Shoots = {}
 	self.MaxShoots = 100
 	for i=1,self.MaxShoots do
@@ -35,7 +28,7 @@ function CEnemyManager:__init()
 	--self.AStar.sala2:SetRender()
 	--self.AStar.sala3:SetRender()
 	
-	--self:CreateEnemiesSala2()
+	self:CreateEnemiesSala2()
 	--self:CreateEnemiesPasillo()
 	--self:CreateEnemiesSala3()
 	--self:CreateDesactivateEnemiesSala3()
@@ -75,7 +68,12 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.alarm = true
 	lInfo.alarm_time = 5.0
 	lInfo.active = true
-	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+	end
 	
 	-- Patrol 2
 	lInfo.name = "Enemy2_S2"
@@ -85,7 +83,11 @@ function CEnemyManager:CreateEnemiesSala2()
 						Vect3f(49.681, -16.5334, -43.0683 ),
 						Vect3f(74.6564, -16.5334, -43.7134),
 						Vect3f(74.6564, -16.5334, -54.4482)}
-	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+	end
 
 	-- Stairs Enemy
 	lInfo.name = "Enemy3_S2"
@@ -118,7 +120,13 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.can_use_graph = true
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
-	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+	end
+	
 end
 
 function CEnemyManager:CreateEnemiesExtraSala2()
@@ -151,8 +159,13 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
 	lInfo.active = true
-	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
-
+	
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+	end
+	
 	-- Stairs Enemy
 	lInfo.name = "ExtraEnemy2_S2"
 	lInfo.life = 100.0
@@ -179,7 +192,11 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.can_use_graph = true
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
-	self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+	end
 end
 
 function CEnemyManager:CreateEnemiesPasillo()
@@ -214,7 +231,12 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
 	lInfo.active = true
-	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+	
+	if self.Enemy.pasillo[lInfo.name] == nil then
+		self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.pasillo[lInfo.name]:__init( lInfo );
+	end
 end
 
 function CEnemyManager:CreateEnemiesSala3()
@@ -232,7 +254,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.waypoints = { Vect3f(39.0, -12.0, 70.0),
 						Vect3f(39.0, -12.0, 50.0)}
 	lInfo.mesh = "drone"
-	lInfo.room = "pasillo"
+	lInfo.room = "sala3"
 	lInfo.use_gizmo = true
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
@@ -249,14 +271,24 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.alarm = true
 	lInfo.alarm_time = 10.0
 	lInfo.active = true
-	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+	if self.Enemy.sala3[lInfo.name] == nil then
+		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala3[lInfo.name]:__init( lInfo );
+	end
 	
 	-- Drone 2
 	lInfo.name = "Drone2_S3"
 	lInfo.position = Vect3f(25.0, -12.0, 70.0)
 	lInfo.waypoints = { Vect3f(25.0, -12.0, 70.0),
 						Vect3f(25.0, -12.0, 52.0)}
-	self.Enemy.pasillo[lInfo.name] = CEnemy(lInfo)
+						
+	if self.Enemy.sala3[lInfo.name] == nil then
+		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala3[lInfo.name]:__init( lInfo );
+	end
+	
 end
 
 function CEnemyManager:CreateDesactivateEnemiesSala3()
@@ -289,7 +321,12 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	lInfo.alarm = true
 	lInfo.alarm_time = 5.0
 	lInfo.active = false
-	self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	
+	if self.Enemy.sala3[lInfo.name] == nil then
+		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala3[lInfo.name]:__init( lInfo );
+	end
 	
 	-- Desactivate 2
 	lInfo.name = "Enemy2_S3"
@@ -300,7 +337,7 @@ end
 function CEnemyManager:SpawnEnemy( aPos )	
 	local lCount = 0
 	for _,lEnemy in pairs(self.Enemy.sala4) do
-		if lEnemy ~= nil then
+		if not lEnemy:IsDeath() then
 			lCount = lCount + 1
 		end
 	end
@@ -334,7 +371,11 @@ function CEnemyManager:SpawnEnemy( aPos )
 		lInfo.alarm = true
 		lInfo.alarm_time = 5.0
 		lInfo.active = true
-		self.Enemy.sala4[lInfo.name] = CEnemy(lInfo)
+		if self.Enemy.sala4[lInfo.name] == nil then
+			self.Enemy.sala4[lInfo.name] = CEnemy(lInfo)
+		else
+			self.Enemy.sala4[lInfo.name]:__init( lInfo );
+		end
 	end
 end
 
@@ -347,19 +388,10 @@ end
 function CEnemyManager:Reinit( aRoom )
 	engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
-		self.GarbageMesh[lEnemy:GetRoom()][lEnemy:GetName()] = true
 		lEnemy:SetOnDead(false)
 		lEnemy:Destroy()
 	end
 	self.Enemy[aRoom] = {}
-	
-	for lName, lBool in pairs(self.GarbageMesh[aRoom]) do
-		if lBool then
-			renderable_objects_manager_characters:RemoveResource(lName)
-		end
-		self.GarbageMesh[aRoom][lName] = false
-	end
-	
 	self.Alarm[aRoom] = false
 	
 	for k in pairs (self.Shoots) do
@@ -455,8 +487,6 @@ function CEnemyManager:DestroyEnemy(aEnemy)
 	local lRoom = aEnemy:GetRoom()
 	local lName = aEnemy:GetName()
 	aEnemy:Destroy()
-	self.GarbageMesh[lRoom][lName] = true
-	self.Enemy[lRoom][lName] = nil
 end
 
 function CEnemyManager:GetNumEnemy( aRoom )
@@ -489,6 +519,11 @@ end
 function CEnemyManager:CreateBoss()
 	if self.Boss == nil then
 		self.Boss = CBoss()
+		engine:Trace("Creando boss desde 0");
+	end
+	if self.Boss:IsDeath() then
+		engine:Trace("Reviviendo boss");
+		self.Boss:__init();
 	end
 end
 
@@ -523,7 +558,7 @@ function CEnemyManager:GetEnemiesAtDistance( aDist )
 	for lRoom in pairs (self.Enemy) do
 		for i in pairs(self.Enemy[lRoom]) do
 			lActualEnemy = self.Enemy[lRoom][i]
-			if lActualEnemy ~= nil then
+			if not lActualEnemy:IsDeath() then
 				local EnemyPos = lActualEnemy:GetPosition()
 				local Dist = PlayerPos:Distance(EnemyPos)
 				if Dist <= aDist then
@@ -560,7 +595,7 @@ end
 
 function CEnemyManager:GetEnemy( aName )
 	for lRoom in pairs (self.Enemy) do
-		if self.Enemy[lRoom][aName] ~= nil then
+		if not self.Enemy[lRoom][aName]:IsDeath() then
 			return self.Enemy[lRoom][aName]
 		end
 	end
@@ -568,7 +603,7 @@ end
 
 function CEnemyManager:AddDamage(aName, aAmount)
 	for lRoom in pairs (self.Enemy) do
-		if self.Enemy[lRoom][aName] ~= nil then
+		if self.Enemy[lRoom][aName] ~= nil and not self.Enemy[lRoom][aName]:IsDeath() then
 			self.Enemy[lRoom][aName]:AddDamage(aAmount)
 		end
 	end
@@ -589,7 +624,7 @@ end
 
 function CEnemyManager:CollisionWithEnemy(aName, aPos, aRadius)
 	lEnemy = self:GetCloseEnemyNotSelf(aPos, aName)
-	if lEnemy == nil then
+	if lEnemy:IsDeath() then
 		return false, nil
 	end
 	local lPos = lEnemy:GetPosition()

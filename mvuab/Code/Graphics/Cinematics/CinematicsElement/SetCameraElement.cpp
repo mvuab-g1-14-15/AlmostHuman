@@ -27,7 +27,6 @@ void CSetCameraElement::Update()
       lCiM->SetCurrentCamera( lCM->GetCurrentCameraName() );
     lCM->SetCurrentCamera( m_CameraName );
     lCM->GetCurrentCamera()->SetEnable(true);
-    lCiM->SetCinematicActive( true );
   }
   else
   {
@@ -54,8 +53,6 @@ void CSetCameraElement::Update()
     lCurrentCamera->SetEnable( false );
     lCM->SetCurrentCamera( lCiM->GetCurrentCamera() );
 
-    // Disable the cinematic
-    lCiM->SetCinematicActive( false );
   }
 
   m_CurrentTime += deltaTimeMacro;

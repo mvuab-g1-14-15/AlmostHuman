@@ -39,7 +39,7 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
 			l_Attenuation = l_Attenuation * SpotAttenuation(0, l_LightDirection);
 		}
 		
-		float  lCommon = l_Attenuation * g_LightsColor[0] * g_LightsIntensity[0];
+		float3  lCommon = l_Attenuation * g_LightsColor[0] * g_LightsIntensity[0];
 		float3 l_DiffuseContrib = l_DiffuseColor*saturate(dot(l_Normal,-l_LightDirection)) * lCommon;
 		
 		float3 l_Hn = normalize( normalize( g_CameraPosition - l_WorldPosition ) - l_LightDirection );

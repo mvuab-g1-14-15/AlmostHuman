@@ -129,8 +129,8 @@ void CRoom::Load()
                 lPM->AddPhysicActor( l_AseMeshActor );
             }
         }
-
-		if (lPM->GetLoadASE())
+        
+        if (lPM->GetLoadASE())
         {
             if (PhysXMInstance->GetCookingMesh()->CreateMeshFromASE(m_BasePath + "" + GetName() + "_door.ase", GetName()+"_door", GetName() + "_door"))
             {
@@ -187,4 +187,16 @@ void CRoom::Update()
 {
   BROFILER_CATEGORY( GetName().c_str(), Profiler::Color::Orchid )
   m_pLayers->Update();
+}
+
+void CRoom::Activate()
+{
+  m_Active = true;
+  PSManager->ActivateInstancesOfRoom( GetName() );
+}
+
+void CRoom::Deactivate()
+{
+  m_Active = false;
+  PSManager->DeactivateInstancesOfRoom( GetName() );
 }
