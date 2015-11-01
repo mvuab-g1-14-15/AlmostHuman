@@ -297,7 +297,7 @@ end
 
 function CBoss:SetYaw( aYaw )
 	self.CharacterController:SetYaw( aYaw )
-	self.RenderableObject:SetYaw( aYaw + g_HalfPi )
+	self.RenderableObject:SetYaw( -aYaw + g_HalfPi )
 	self.RenderableObject:MakeTransform()
 end
 

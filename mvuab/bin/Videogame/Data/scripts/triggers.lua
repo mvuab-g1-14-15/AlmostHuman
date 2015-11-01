@@ -708,7 +708,7 @@ function UpdateTriggers()
 			trigger_manager:GetTriggerByName("base_DLC_sala2"):SetActive(false)
 			sound_manager:PlayEvent("Play_Sala2", "Logan")
 			g_Player:SetEnergy(100.0)
-			g_Player:SetCheckpoint("sala2", Vect3f(test), g_Player:GetLife(), g_Player:GetEnergy())
+			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy())
 		end
 	end
 end

@@ -1,11 +1,11 @@
 <emitter active="true" name="smoke" loop="true" time_to_live="20.0">
 	<particles max_alive_particles="400" time_to_live="1 2">
-		<technique name="ParticleTechnique" render_group="alpha_blend"/>
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/PS/spark.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 		<interpolators>
-			<interpolator alpha="1.0" color="1.0 0.7 0.0" size="0.02"/>
-			<interpolator alpha="1.0" color="1.0 0.5 0.0" size="0.03"/>
-			<interpolator alpha="1.0" color="1.0 0.3 0.0" size="0.01"/>
+			<interpolator alpha="1.0" color="1.0 0.5 0.0" size="0.05"/>
+			<interpolator alpha="1.0" color="1.0 0.5 0.0" size="0.1"/>
+			<interpolator alpha="1.0" color="1.0 0.5 0.0" size="0.05"/>
 		</interpolators>
 		<motion linear_speed="4 4.3" initial_dir_min="-0.1 -1 -0.1" initial_dir_max="0.0 -1 0.0" radial_speed="0 0" gravity="1"/>
 	</particles>
