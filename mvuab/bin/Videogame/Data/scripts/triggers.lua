@@ -431,7 +431,8 @@ function SetPropPasillo()
 		scene:SetCurrentRoomName("pasillo")
 		g_Player:SetRoom("pasillo")
 		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
-		
+		cinematic_manager:Execute("CloseDoor")
+		--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, 0, 0))
 		scene:DesactivateRoom("sala2")
 		
 		g_EnteredPasillo = true
@@ -450,7 +451,7 @@ function SetPropSala3()
 		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
-		
+		cinematic_manager:Execute("CloseDoorPasillo")
 		scene:DesactivateRoom("pasillo")
 		
 		g_EnteredSala3 = true
@@ -633,6 +634,7 @@ function UpdateTriggers()
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
 				physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala2DoorEscenario"))
+				--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, -500, 0))
 			end
 		end
 	end
