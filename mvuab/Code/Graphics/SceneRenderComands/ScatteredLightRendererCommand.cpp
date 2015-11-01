@@ -36,7 +36,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     //  92.31f, -9.304f, -44.21f sala1 vent1
     //  94.02f, -9.206f, -23.10f sala1 vent2
     //   10.0f,   80.0f,   10.0f pasillo
-    // 2095.0f,  -65.0f,  167.0f space
+    //-2000.0f,  291.0f,  76.0f space
 
     if(!GetVisible())
     {
@@ -59,7 +59,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(10.0f, 80.0f, 10.0f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
+    l_PosLights.push_back(Math::Vect3f(-2000.0f, 351.0f, 106.0f));
 
     CFrustum l_CameraFrustum = CameraMInstance->GetCurrentCamera()->GetFrustum();
     Math::Vect3f l_CameraPosition = CameraMInstance->GetCurrentCamera()->GetPosition();
@@ -82,6 +82,8 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     {
         l_ActiveLights[3] = TRUE;
     }
+
+    l_ActiveLights[3] = TRUE;
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
     {
