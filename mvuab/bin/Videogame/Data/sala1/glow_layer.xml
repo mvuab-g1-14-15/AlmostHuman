@@ -2,4 +2,5 @@
 <RenderableObjects>
   <MeshInstance name="Lights_Roof_Glow_sala1" core="Lights_Roof_Glow_sala1" pos="125.515 -4.80595 -45.925" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Med_bay_camilla_up_sala1" core="Med_bay_camilla_up_sala1" pos="124.863 -7.25003 -51.8878" yaw="0.0" pitch="0.0" roll="0.0" scale="0.902438 0.902438 0.902438" />
+  <MeshInstance name="Med_bay_camilla_down_sala1" core="Med_bay_camilla_down_sala1" pos="124.863 -8.90367 -51.8979" yaw="0.0" pitch="0.0" roll="0.0" scale="0.902438 0.902438 0.902438" />
 </RenderableObjects>
