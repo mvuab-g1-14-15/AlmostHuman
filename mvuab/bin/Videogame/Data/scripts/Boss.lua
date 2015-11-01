@@ -16,11 +16,10 @@ function CBoss:__init()
 	self.Lerp = CLerpAnimator1D()
 	self.LerpInited = false
 	
-	self.NearPos = Vect3f(-142.0,25.0, 58.0)
+	self.NearPos = Vect3f(-142.0,25.0, 60.0)
 	self.MediumPos = Vect3f(-177.0,25.0, 58.0)
-	self.FarPos = Vect3f(-200.0,25.0, 58.0)
 	
-	self.InitPos = Vect3f(-177.0, 25.0, 120.0)
+	self.InitPos = Vect3f(-177.0, 25.0, 98.0)
 	
 	self.TargetPos = self.MediumPos
 	
@@ -54,14 +53,12 @@ function CBoss:__init()
 	
 	self.FootstepTime = 1.0
 	
-	self.SpawnPositions = { Vect3f(-110.0, 21.0, 52.0)
-						  , Vect3f(-110.0, 21.0, 60.0)
-						  , Vect3f(-110.0, 21.0, 68.0)
-						  , Vect3f(-180.0, 21.0, 52.0)
-						  , Vect3f(-180.0, 21.0, 60.0)
-						  , Vect3f(-180.0, 21.0, 68.0)}
+	self.SpawnPositions = { Vect3f(-110.0, 21.0, 54.0)
+						  , Vect3f(-110.0, 21.0, 66.0)
+						  , Vect3f(-180.0, 21.0, 54.0)
+						  , Vect3f(-180.0, 21.0, 66.0)}
 	
-	self.AttackingNear = false
+	self.AttackingNear = true
 	self.AttackingMedium = false
 	self.AttackingFar = false
 	
@@ -72,8 +69,10 @@ function CBoss:__init()
 	
 	self.Life = 100.0
 	
-	self.InitStunBar = 1000.0
+	self.InitStunBar = 800.0
 	self.StunBar = self.InitStunBar
+	
+	self.ArrivedNear = false
 end
 
 function CBoss:Destroy()
@@ -88,23 +87,27 @@ function CBoss:Update()
 	local dt = timer:GetElapsedTime()
 	
 	if not self:IsStunned() then
-		if self.AttackingNear then
-			self:NearAttack()
-		elseif self.AttackingMedium then
-			self:MediumAttack()
-		elseif self.AttackingFar then
-			self:FarAttack()
-		else
+		if not self.ArrivedNear then
 			if self:MoveToPos( self.TargetPos ) then
-				if self.TargetPos == self.NearPos then
-					self.TargetPos = self.FarPos
-					self.AttackingNear = true
-				elseif self.TargetPos == self.MediumPos then
+				if self.TargetPos == self.MediumPos then
 					self.TargetPos = self.NearPos
-					self.AttackingMedium = true
-				elseif self.TargetPos == self.FarPos then
-					self.TargetPos = self.MediumPos
-					self.AttackingFar = true
+				else
+					self.ArrivedNear = true
+				end
+			end
+		else
+			if not countdowntimer_manager:ExistTimer("AttackTimer") then
+				countdowntimer_manager:AddTimer("AttackTimer", 4.0, false)
+			else
+				countdowntimer_manager:SetActive("AttackTimer", true)
+			end
+			if countdowntimer_manager:isTimerFinish("AttackTimer") then
+				if self.AttackingNear then
+					self:NearAttack()
+				elseif self.AttackingMedium then
+					self:MediumAttack()
+				elseif self.AttackingFar then
+					self:FarAttack()
 				end
 			end
 		end
@@ -155,9 +158,11 @@ function CBoss:NearAttack()
 		self:MakeShootNear()
 		self.Counter = self.Counter + 1
 		if self.Counter > 5 then
-			self.AttackingNear = false
 			self.Counter = 0
-			self:SpawnEnemies()
+			countdowntimer_manager:Reset("AttackTimer", true)
+			if enemy_manager:GetNumEnemy("sala4") == 0 then
+				self:SetAttack("medium")
+			end
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
@@ -176,9 +181,8 @@ function CBoss:MediumAttack()
 		self:MakeShootMedium()
 		self.Counter = self.Counter + 1
 		if self.Counter > 3 then
-			self.AttackingMedium = false
 			self.Counter = 0
-			self:SpawnEnemies()
+			countdowntimer_manager:Reset("AttackTimer", true)
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
@@ -189,17 +193,17 @@ end
 function CBoss:FarAttack()
 	local lTimerName = "FarShootTimer"
 	if not countdowntimer_manager:ExistTimer(lTimerName) then
-		countdowntimer_manager:AddTimer(lTimerName, 5.0, false)
+		countdowntimer_manager:AddTimer(lTimerName, 0.5, false)
 	else
 		countdowntimer_manager:SetActive(lTimerName, true)
 	end
 	if countdowntimer_manager:isTimerFinish(lTimerName) then
 		self:MakeShootFar()
 		self.Counter = self.Counter + 1
-		if self.Counter > 2 then
-			self.AttackingFar = false
+		if self.Counter > 25 then
 			self.Counter = 0
-			self:SpawnEnemies()
+			countdowntimer_manager:Reset("AttackTimer", true)
+			self:SetAttack("near")
 		end
 		countdowntimer_manager:Reset(lTimerName, true)
 	else
@@ -207,10 +211,28 @@ function CBoss:FarAttack()
 	end
 end
 
+function CBoss:SetAttack(aAttack)
+	if aAttack == "near" then
+		self.AttackingNear = true
+		self.AttackingMedium = false
+		self.AttackingFar = false
+	end
+	if aAttack == "medium" then
+		self.AttackingNear = false
+		self.AttackingMedium = true
+		self.AttackingFar = false
+	end
+	if aAttack == "far" then
+		self.AttackingNear = false
+		self.AttackingMedium = false
+		self.AttackingFar = true
+	end
+end
+
 function CBoss:SpawnEnemies()
 	local lIndexList = {}
 	table.insert(lIndexList, math.random( #self.SpawnPositions ))
-	while #lIndexList < 6 do
+	while #lIndexList < 3 do
 		lNum = math.random( #self.SpawnPositions )
 		local lFound = false
 		for _,lIndex in pairs(lIndexList) do
@@ -222,8 +244,12 @@ function CBoss:SpawnEnemies()
 			table.insert(lIndexList, lNum)
 		end
 	end
+	local lNuMEnemies = enemy_manager:GetNumEnemy("sala4")
 	for _,lNum in pairs(lIndexList) do
-		enemy_manager:SpawnEnemy(self.SpawnPositions[lNum])
+		if lNuMEnemies < 3 then
+			enemy_manager:SpawnEnemy(self.SpawnPositions[lNum])
+			lNuMEnemies = enemy_manager:GetNumEnemy("sala4")
+		end
 	end
 end
 

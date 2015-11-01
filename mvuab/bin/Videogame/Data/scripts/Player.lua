@@ -109,6 +109,11 @@ function CPlayer:Update()
 	
 	if self.Life < 25 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
+	else
+		self.Life = self.Life + 0.2 * timer:GetElapsedTime()
+		if self.Life > 100.0 then
+			self.Life = 100.0
+		end
 	end
 	
 	if self.Life < 15 then

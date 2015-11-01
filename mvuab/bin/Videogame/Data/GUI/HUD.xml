@@ -47,6 +47,7 @@
 	<StaticText name="C4Colocada" pos="45 60" height="30" width="12" visible="false" active="false" Literal="C4Colocada" />
 	<StaticText name="Alarm" pos="50 60" height="30" width="12" visible="false" active="false" Literal="Alarm" />
 	<StaticText name="RomperRejilla" pos="45 80" height="30" width="12" visible="false" active="false" Literal="RomperRejilla" />
+	<StaticText name="Hackear" pos="45 80" height="30" width="12" visible="false" active="false" Literal="Hackear" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
 			quad="Data/textures/GUI/marco2.png" pos_button="41.20 13.50" height_button="5.00" width_button="2.8"
