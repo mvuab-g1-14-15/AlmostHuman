@@ -432,9 +432,10 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
-			scene:ActivateRoom("space")
-			cinematic_manager:Execute("FinalGame")
+			cinematic_manager:Execute("explotion_boss")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
+			trigger_manager:GetTriggerByName("final"):SetActive(true)
+			self.Boss = nil
 		end
 	end
 	

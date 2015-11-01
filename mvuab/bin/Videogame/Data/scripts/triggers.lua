@@ -549,6 +549,8 @@ function CreateBoss()
 	g_Hacked.nave3 = false
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
+	trigger_manager:GetTriggerByName("final"):SetActive(false)
+	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(true)
 end
 
 function PuntoExplosivo1_enter()
@@ -625,6 +627,18 @@ function UpdateDLC_exit()
 		gui_manager:ShowStaticText("UpdateDLC")
 		g_UpdateDLCText = false
 	end
+end
+
+function Final_enter()
+	scene:ActivateRoom("space")
+	cinematic_manager:Execute("FinalGame")
+	sound_manager:PlayEvent("Play_Sala4B", "Logan")
+	trigger_manager:GetTriggerByName("final"):SetActive(false)
+end
+
+function ViewBoss_enter()
+	sound_manager:PlayEvent("Play_Sala4A", "Logan")
+	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(false)
 end
 
 function UpdateTriggers()
