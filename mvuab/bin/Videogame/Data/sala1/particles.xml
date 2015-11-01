@@ -4,6 +4,6 @@
   <particle_instance name="steam_up1" core="steam_up" pos="105.808 -9.73766 -44.2404" active="true" sound="true" />
   <particle_instance name="steam_up2" core="steam_up" pos="94.12 -9.73766 -38.6464" active="true" sound="true" />
   <particle_instance name="steam_up3" core="steam_up" pos="87.3216 -9.86553 -27.5755" active="true" sound="true" />
-  <particle_instance name="sparks_inter4" core="sparks_inter" pos="119.979 -5.00594 -51.0719" active="true" sound="true" />
-  <particle_instance name="sparks_inter5" core="sparks_inter" pos="119.368 -4.99348 -40.7965" active="true" sound="true" />
+  <particle_instance name="sparks_inter4" core="sparks_inter" pos="119.368 -4.99348 -40.7965" active="true" sound="true" />
+  <particle_instance name="steam_down5" core="steam_down" pos="130.413 -4.81354 -55.0071" active="true" sound="true" />
 </particles_instances>
