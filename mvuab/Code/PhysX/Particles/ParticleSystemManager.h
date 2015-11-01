@@ -25,6 +25,8 @@ class CParticleSystemManager: public CManager
         void Update();
         void Render();
         void LoadInstances( const std::string& aFileName, const std::string& aRoomName );
+        void ActivateInstancesOfRoom( const std::string& aRoomName );
+        void DeactivateInstancesOfRoom( const std::string& aRoomName );
         void Refresh();
         CParticleSystemCore* GetPSCore( const std::string & aCoreName );
         void AddInstance( CParticleInstance* aParticleInstance );

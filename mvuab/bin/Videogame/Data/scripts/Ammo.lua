@@ -64,7 +64,10 @@ function CAmmo:Update()
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					elseif lName == "Boss" then
-						enemy_manager:GetBoss():AddStun(self.Damage)
+						lBoss = enemy_manager:GetBoss()
+						if lBoss ~= nil then
+							lBoss:AddStun(self.Damage)
+						end
 					else
 						enemy_manager:AddDamage(lName, self.Damage)
 					end
