@@ -351,6 +351,10 @@ function CEnemy:Update()
 	--profiler:AddEnd("CEnemy:Update()")
 end
 
+function CEnemy:RemoveMesh()
+	renderable_objects_manager_characters:RemoveResource(self.Name)
+end
+
 function CEnemy:PlayerInSight()
 	if g_Player:GetIsHidden() or g_Player:GetRoom() ~= self.Room then
 		return false
