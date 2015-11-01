@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	194392270	Stop_Elevator_Up			\Gameplay\Stop_Elevator_Up	
 	377487063	Stop_Alarm			\Gameplay\Stop_Alarm	
 	603937113	Play_Alarm			\Gameplay\Play_Alarm	
 	736447403	Play_Countdown_Explosion			\Gameplay\Play_Countdown_Explosion	
@@ -15,13 +16,13 @@ Effect plug-ins	ID	Name	Type				Notes
 	3043085106	High_Impact	Wwise Compressor			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	80304484	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_Goes_Up_2_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		12597
 	207815857	CrashMetalGrille	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\crash_metal_grille_curt_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\CrashMetalGrille		57510
 	328627046	enter_leave_barrel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\enter_leave_barrel_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\enter_leave_barrel		9667
 	341974608	C4 Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\C4 Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\C4 Explosion		38172
 	427511858	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\open_close_door_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Close_Door		31048
 	709423413	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\alarm2_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		20042
 	752427372	Countdown_Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Countdown_Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Explosion Sequence\Countdown_Explosion		86769
-	761975416	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OenDoor_Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		82879
-	942893070	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Spaceship-elevator-up_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		484819
+	832049234	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OpenDoor Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		54143
 	1064441044	Plant C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Plant C4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Plant C4		22201
 

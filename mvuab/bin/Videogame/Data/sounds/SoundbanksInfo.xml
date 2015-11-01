@@ -120,8 +120,13 @@
 				<Event Id="2235207626" Name="Play_Open_Elevator_Door"/>
 				<Event Id="2558030041" Name="Play_Plant_C4"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
+				<Event Id="194392270" Name="Stop_Elevator_Up"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="80304484" Language="SFX">
+					<ShortName>Elevator_Goes_Up_2.wav</ShortName>
+					<Path>SFX\Elevator_Goes_Up_2_951343B8.wem</Path>
+				</File>
 				<File Id="207815857" Language="SFX">
 					<ShortName>crash_metal_grille_curt.wav</ShortName>
 					<Path>SFX\crash_metal_grille_curt_E106FFBE.wem</Path>
@@ -146,13 +151,9 @@
 					<ShortName>Countdown_Explosion.wav</ShortName>
 					<Path>SFX\Countdown_Explosion_E106FFBE.wem</Path>
 				</File>
-				<File Id="761975416" Language="SFX">
-					<ShortName>OenDoor_Elevator.wav</ShortName>
-					<Path>SFX\OenDoor_Elevator_E106FFBE.wem</Path>
-				</File>
-				<File Id="942893070" Language="SFX">
-					<ShortName>Spaceship-elevator-up.wav</ShortName>
-					<Path>SFX\Spaceship-elevator-up_E106FFBE.wem</Path>
+				<File Id="832049234" Language="SFX">
+					<ShortName>OpenDoor Elevator.wav</ShortName>
+					<Path>SFX\OpenDoor Elevator_E106FFBE.wem</Path>
 				</File>
 				<File Id="1064441044" Language="SFX">
 					<ShortName>Plant C4.wav</ShortName>
