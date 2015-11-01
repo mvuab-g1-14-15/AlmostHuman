@@ -271,7 +271,6 @@
   <MeshInstance name="andride098_sala3" core="andride108_sala3" pos="-33.329 -15.8644 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride097_sala3" core="andride108_sala3" pos="-38.3715 -15.8644 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride099_sala3" core="andride108_sala3" pos="-28.2864 -15.8644 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="andride100_sala3" core="andride108_sala3" pos="-23.2439 -15.8644 53.433" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride101_sala3" core="andride108_sala3" pos="-23.2439 -15.8644 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride102_sala3" core="andride108_sala3" pos="-28.2864 -15.8644 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride103_sala3" core="andride108_sala3" pos="-33.329 -15.8644 49.1947" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -292,7 +291,5 @@
   <MeshInstance name="andride127_sala3" core="andride127_sala3" pos="-33.329 -14.5798 71.3477" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride128_sala3" core="andride128_sala3" pos="-38.3715 -14.5798 71.3477" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride129_sala3" core="andride129_sala3" pos="-23.2439 -14.5798 67.1094" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="andride130_sala3" core="andride130_sala3" pos="-28.2864 -14.5798 67.1094" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="andride131_sala3" core="andride131_sala3" pos="-33.329 -14.5798 67.1094" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="andride132_sala3" core="andride132_sala3" pos="-38.3715 -14.5798 67.1094" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

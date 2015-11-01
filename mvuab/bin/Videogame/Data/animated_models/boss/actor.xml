@@ -14,28 +14,23 @@
 		  <cycle name="idle"/>
 		</animation_state>
 		<animation_state name="attack" default_fade_in="0.0" default_fade_out="0.0">
-		  <on_enter>
-			<action name="idle_to_shoot" fade_in="0.5"/>
-		  </on_enter>
-		  <cycle name="attack"/>
+		  <cycle name="idle"/>
 		</animation_state>
 		<animation_state name="walk" default_fade_in="0.0" default_fade_out="0.0">
-		  <cycle name="walk"/>
+		  <cycle name="idle"/>
 		</animation_state>
 		<animation_state name="hurt" default_fade_in="0.3" default_fade_out="0.3">
-		  <cycle name="hurt"/>
+		  <cycle name="idle"/>
 		</animation_state>
 		<animation_state name="giro_izq" default_fade_in="0.2" default_fade_out="0.1">
 		  <on_enter>
-			<action name="giro_izq" fade_in="0.0"/>
+			<action name="idle" fade_in="0.0"/>
 		  </on_enter>
-		  <cycle name="walk"/>
 		</animation_state>
 		<animation_state name="giro_der" default_fade_in="0.2" default_fade_out="0.1">
 		  <on_enter>
-			<action name="giro_der" fade_in="0.0"/>
+			<action name="idle" fade_in="0.0"/>
 		  </on_enter>
-		  <cycle name="walk"/>
 		</animation_state>
   </animation_states>
   

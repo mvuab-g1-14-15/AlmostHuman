@@ -24,3 +24,11 @@ function CParticle:SetDirection( aDir )
 	self.Instance:SetDirection( aDir )
 end
 
+function CParticle:Hide()
+	self.Instance:ChangeVisibility( false )
+end
+
+function CParticle:Show()
+	self.Instance:ChangeVisibility( true )
+end
+
