@@ -2,7 +2,7 @@
 	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true" distance="5">
 		<texture filename="../CommonData/textures/Billboards/target.png" stage_id="0"/>
 	</billboard>
-	<billboard name="hand_action" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="true" distance="5">
+	<billboard name="hand_action" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="20">
 		<texture filename="../CommonData/textures/Billboards/hand_action.png" stage_id="0"/>
 	</billboard>
 	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" distance="30">
