@@ -27,8 +27,17 @@ CParticleSystemManager::~CParticleSystemManager()
 
 void CParticleSystemManager::Refresh()
 {
+  mCores.Destroy();
+  mInstances.Destroy();
+
   LoadXML();
-  LoadInstances( "Data/sala3/particles.xml", "sala3" ); // The refresh only is available in developer mode
+
+  LoadInstances( "Data/sala1/particles.xml",   "sala1" );
+  LoadInstances( "Data/sala2/particles.xml", "sala2" );
+  LoadInstances( "Data/sala3/particles.xml", "sala3" );
+  LoadInstances( "Data/sala4/particles.xml", "sala4" );
+  LoadInstances( "Data/pasillo/particles.xml", "pasillo" );
+  LoadInstances( "Data/space/particles.xml", "space" );
 }
 
 void CParticleSystemManager::LoadXML()
@@ -94,7 +103,7 @@ void CParticleSystemManager::LoadInstances( const std::string& aFileName, const 
             lInstance->SetRoomName( aRoomName );
             if( !lInstance->IsOk() || !mInstances.AddResource( lInstance->GetName() + aRoomName, lInstance ) )
             {
-              LOG_ERROR_APPLICATION("Error adding the instance %s to the particle system manager of room %s", lInstance->GetName().c_str(), aRoomName.c_str() );
+              LOG_ERROR_APPLICATION("%s Duplicated! ", lInstance->GetName().c_str() );
               CHECKED_DELETE( lInstance );
             }
         }
