@@ -75,6 +75,7 @@ function CPlayer:Update()
 	self.RenderableObject:MakeTransform();
 	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm");
 	self.Blaster:Update( lArmPosition )
+	self.StealthAttack:Update( lArmPosition )
 
 	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() then
 	self:SetAnimation("aim")
@@ -98,7 +99,6 @@ function CPlayer:Update()
 		end
 	end
 	
-	self.StealthAttack:Update()
 	if self.Life <= 0 then
 		FunctionGameOver()
 		self:SetPosition(self.Checkpoint.position)
@@ -109,6 +109,11 @@ function CPlayer:Update()
 	
 	if self.Life < 25 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
+	else
+		self.Life = self.Life + 0.2 * timer:GetElapsedTime()
+		if self.Life > 100.0 then
+			self.Life = 100.0
+		end
 	end
 	
 	if self.Life < 15 then
