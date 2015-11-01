@@ -124,8 +124,6 @@ function CEnemy:__init( aInfo )
 		self.AlarmTime = aInfo.alarm_time
 	end
 	
-	self.BillboardEnemy = billboard_manager:CreateInstance("blash", Vect3f(0, 0, 0), true)
-	
 	sound_manager:SetGameObjectMapById(self.Name)
 	sound_manager:RegisterGameObject(self.Name)
 	self.FootstepTime = 0.5
@@ -139,10 +137,18 @@ end
 
 function CEnemy:Destroy()
 	if self.OnDead then
-		engine:Trace(self.Name.." executing on dead code.")
 		local codeToExecute = "local lPos = Vect3f"..self:GetPosition():ToString()..";"..
 							  "local selfName = '"..self:GetName().."';"..
 							  self.OnDeadCode
+		
+		lParticle = CParticle( self.Name.."particle_dead1", "ray", self.Room );
+		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigPelvis001") );
+		lParticle = CParticle( self.Name.."particle_dead2", "ray", self.Room );
+		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigRArm1") );
+		lParticle = CParticle( self.Name.."particle_dead3", "ray", self.Room );
+		lParticle:Init( self.RenderableObject:GetBonePosition("CATRigLArmCollarbone") );
+		
+		engine:Trace(self.Name.." executing on dead code.")
 		script_manager:RunCode(codeToExecute)
 	end
 	

@@ -8,16 +8,10 @@
   <MeshInstance name="Roof_pasillo" core="Roof_pasillo" pos="54.6263 -18.1912 -24.4116" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="leftWall001_pasillo" core="leftWall001_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Floor_side_left_pasillo" core="Floor_side_left_pasillo" pos="62.6751 -15.9016 5.59631" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Ammo_box_pasillo" core="Ammo_box_pasillo" pos="58.1212 -18.1312 7.52446" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="bomb_pasillo" core="bomb_pasillo" pos="59.5681 -16.5716 5.92569" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Ammo_box_pasillo" core="Ammo_box_pasillo" pos="59.1109 -18.1312 7.58562" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="bomb_pasillo" core="bomb_pasillo" pos="61.4233 -17.2799 7.21634" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="doorUpper003_pasillo" core="doorUpper003_pasillo" pos="53.969 -15.2292 38.0481" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="doorLower003_pasillo" core="doorLower003_pasillo" pos="53.2973 -18.2341 37.3749" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube001_pasillo" core="Tube001_pasillo" pos="50.4734 -13.1355 29.5125" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube002_pasillo" core="Tube002_pasillo" pos="50.4734 -13.1355 16.6937" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube003_pasillo" core="Tube003_pasillo" pos="50.4734 -13.1355 9.79788" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube004_pasillo" core="Tube004_pasillo" pos="50.4734 -13.1355 -1.93142" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube005_pasillo" core="Tube005_pasillo" pos="50.4734 -13.1355 -14.6366" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Tube006_pasillo" core="Tube006_pasillo" pos="50.4734 -13.1355 -21.7189" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lights_1_glow_pasillo" core="Lights_1_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lights_2_glow_pasillo" core="Lights_2_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Lights_3_glow_pasillo" core="Lights_3_glow_pasillo" pos="60.3878 -18.119 23.0204" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -38,4 +32,11 @@
   <MeshInstance name="llums_verdes_upper_005_glow_pasillo" core="llums_verdes_upper_005_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="llums_verdes_upper_lat_006_glow_pasillo" core="llums_verdes_upper_lat_006_glow_pasillo" pos="60.3878 -18.119 -8.29942" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="llums_blanques_porta_002_glow_pasillo" core="llums_blanques_porta_002_glow_pasillo" pos="54.886 -15.4267 -24.0192" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ventilador_aspas002_pasillo" core="ventilador_aspas002_pasillo" pos="50.55 -13.1495 -14.6501" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas003_pasillo" core="ventilador_aspas003_pasillo" pos="50.55 -13.1495 -1.89706" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas004_pasillo" core="ventilador_aspas004_pasillo" pos="50.55 -13.1495 5.03771" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas005_pasillo" core="ventilador_aspas005_pasillo" pos="50.55 -13.1495 9.80499" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas006_pasillo" core="ventilador_aspas006_pasillo" pos="50.55 -13.1495 16.7398" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas007_pasillo" core="ventilador_aspas007_pasillo" pos="50.55 -13.1495 29.5127" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
+  <MeshInstance name="ventilador_aspas008_pasillo" core="ventilador_aspas008_pasillo" pos="50.55 -13.1495 36.4515" yaw="1.13446" pitch="-1.54287" roll="0.0" scale="2.01587 2.01587 2.01588" />
 </RenderableObjects>
