@@ -5,7 +5,7 @@
 	</particle_system_core>
 	
 	<particle_system_core name="stealth_atack" sound="false">
-		<cube_emitter file="charge_emitter_1.xml"/>
+		<cube_emitter file="stealth_emitter_1.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="steam" sound="false">
