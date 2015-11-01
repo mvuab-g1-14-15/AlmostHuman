@@ -221,7 +221,7 @@
   <static_mesh name="cap017_sala3" filename="meshes\cap017.mesh" />
   <static_mesh name="Box021_sala3" filename="meshes\Box021.mesh" />
   <static_mesh name="Box023_sala3" filename="meshes\Box023.mesh" />
-    <static_mesh name="andride085_sala3" filename="meshes\andride085.mesh" />
+  <static_mesh name="andride085_sala3" filename="meshes\andride085.mesh" />
   <static_mesh name="enganche_023_sala3" filename="meshes\enganche_023.mesh" />
   <static_mesh name="andride088_sala3" filename="meshes\andride088.mesh" />
   <static_mesh name="enganche_026_sala3" filename="meshes\enganche_026.mesh" />
@@ -241,23 +241,10 @@
   <static_mesh name="andride095_sala3" filename="meshes\andride095.mesh" />
   <static_mesh name="andride096_sala3" filename="meshes\andride096.mesh" />
   <static_mesh name="enganche_034_sala3" filename="meshes\enganche_034.mesh" />
-  <static_mesh name="andride108_sala3" filename="meshes\andride108.mesh" />
-  <static_mesh name="andride121_sala3" filename="meshes\andride121.mesh" />
-  <static_mesh name="andride122_sala3" filename="meshes\andride122.mesh" />
-  <static_mesh name="andride123_sala3" filename="meshes\andride123.mesh" />
-  <static_mesh name="andride124_sala3" filename="meshes\andride124.mesh" />
-  <static_mesh name="andride125_sala3" filename="meshes\andride125.mesh" />
-  <static_mesh name="andride126_sala3" filename="meshes\andride126.mesh" />
-  <static_mesh name="andride127_sala3" filename="meshes\andride127.mesh" />
-  <static_mesh name="andride128_sala3" filename="meshes\andride128.mesh" />
-  <static_mesh name="andride129_sala3" filename="meshes\andride129.mesh" />
-  <static_mesh name="andride132_sala3" filename="meshes\andride132.mesh" />
   <static_mesh name="Base_carga_sala3" filename="meshes\Base_carga.mesh" />
   <static_mesh name="Container_003_sala3" filename="meshes\Container_003.mesh" />
   <static_mesh name="Container_004_sala3" filename="meshes\Container_004.mesh" />
   <static_mesh name="Container_005_sala3" filename="meshes\Container_005.mesh" />
   <static_mesh name="Container_006_sala3" filename="meshes\Container_006.mesh" />
   <static_mesh name="Container_008_sala3" filename="meshes\Container_008.mesh" />
-  <static_mesh name="bomb_sala3" filename="meshes\bomb.mesh" />
-  <static_mesh name="bomb002_sala3" filename="meshes\bomb002.mesh" />
 </static_meshes>
