@@ -1,6 +1,6 @@
 <cinematics>
-	<camera_cinematic name="cinematica_inicial" resource_id_file="Data/sala1/cinematics/cinematica_inicial.xml"/>
 	<camera_cinematic name="fixed_initial_camera" resource_id_file="Data/sala1/cinematics/fixed_camera.xml"/>
+	<camera_cinematic name="cinematica_inicial" resource_id_file="Data/sala1/cinematics/cinematica_inicial.xml"/>
 	<camera_cinematic name="camera_cinematica2_sala1" resource_id_file="Data/sala1/cinematics/camera_cinematica2_sala1.xml"/>
 	<object_cinematic name="ventilador01" resource_id_file="Data/sala1/cinematics/ventilador.xml"/>
 	<cinematic name="rejilla" resource_id_file="Data/sala1/cinematics/rejilla.xml"/>

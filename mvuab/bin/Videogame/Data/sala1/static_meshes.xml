@@ -6,14 +6,6 @@
   <static_mesh name="Figure_002_sala1" filename="meshes\Figure_002.mesh" />
   <static_mesh name="Figure_003_sala1" filename="meshes\Figure_003.mesh" />
   <static_mesh name="Figure_004_sala1" filename="meshes\Figure_004.mesh" />
-  <static_mesh name="Cylinder050_sala1" filename="meshes\Cylinder050.mesh" />
-  <static_mesh name="Box196_sala1" filename="meshes\Box196.mesh" />
-  <static_mesh name="Cylinder051_sala1" filename="meshes\Cylinder051.mesh" />
-  <static_mesh name="Cylinder052_sala1" filename="meshes\Cylinder052.mesh" />
-  <static_mesh name="Cylinder053_sala1" filename="meshes\Cylinder053.mesh" />
-  <static_mesh name="Cylinder054_sala1" filename="meshes\Cylinder054.mesh" />
-  <static_mesh name="Cylinder055_sala1" filename="meshes\Cylinder055.mesh" />
-  <static_mesh name="Cylinder056_sala1" filename="meshes\Cylinder056.mesh" />
   <static_mesh name="Figure_005_sala1" filename="meshes\Figure_005.mesh" />
   <static_mesh name="tuberia001_sala1" filename="meshes\tuberia001.mesh" />
   <static_mesh name="Floor_sala1_sala1" filename="meshes\Floor_sala1.mesh" />
@@ -50,4 +42,6 @@
   <static_mesh name="Light_2_sala1" filename="meshes\Light_2.mesh" />
   <static_mesh name="Box197_sala1" filename="meshes\Box197.mesh" />
   <static_mesh name="Taula_sala1" filename="meshes\Taula.mesh" />
+  <static_mesh name="Box198_sala1" filename="meshes\Box198.mesh" />
+  <static_mesh name="Rejilla_sala1" filename="meshes\Rejilla.mesh" />
 </static_meshes>
