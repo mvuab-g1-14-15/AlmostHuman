@@ -35,8 +35,13 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     BROFILER_CATEGORY( "CScatteredLightSceneRendererCommand::Execute", Profiler::Color::Orchid )
     //  92.31f, -9.304f, -44.21f sala1 vent1
     //  94.02f, -9.206f, -23.10f sala1 vent2
-    //   16.5f,   18.6f,    6.5f pasillo
+    //   10.0f,   80.0f,   10.0f pasillo
     // 2095.0f,  -65.0f,  167.0f space
+
+    if(!GetVisible())
+    {
+        return;
+    }
 
     std::vector<BOOL> l_ActiveLights; ;
     std::vector<Math::Vect3f> l_PosLights;
@@ -51,7 +56,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_PosLights.push_back(Math::Vect3f(94.02f, -9.206f, -23.10f));
 
     l_ActiveLights.push_back(FALSE);
-    l_PosLights.push_back(Math::Vect3f(35.5f, 2.1f, -1.9f));
+    l_PosLights.push_back(Math::Vect3f(10.0f, 80.0f, 10.0f));
 
     l_ActiveLights.push_back(FALSE);
     l_PosLights.push_back(Math::Vect3f(2095.0f, -65.0f, 167.0f));
@@ -70,12 +75,12 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     if(l_RoomName == "pasillo")
     {
-        l_ActiveLights[2] = l_CameraFrustum.SphereIsVisible(l_PosLights[2], 2.0f) ? TRUE : FALSE;
+        l_ActiveLights[2] = TRUE;
     }
 
     if(l_RoomName == "space")
     {
-        l_ActiveLights[3] = l_CameraFrustum.SphereIsVisible(l_PosLights[3], 2.0f) ? TRUE : FALSE;
+        l_ActiveLights[3] = TRUE;
     }
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)

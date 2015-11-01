@@ -12,12 +12,6 @@
   <static_mesh name="bomb_pasillo" filename="meshes\bomb.mesh" />
   <static_mesh name="doorUpper003_pasillo" filename="meshes\doorUpper003.mesh" />
   <static_mesh name="doorLower003_pasillo" filename="meshes\doorLower003.mesh" />
-  <static_mesh name="Tube001_pasillo" filename="meshes\Tube001.mesh" />
-  <static_mesh name="Tube002_pasillo" filename="meshes\Tube002.mesh" />
-  <static_mesh name="Tube003_pasillo" filename="meshes\Tube003.mesh" />
-  <static_mesh name="Tube004_pasillo" filename="meshes\Tube004.mesh" />
-  <static_mesh name="Tube005_pasillo" filename="meshes\Tube005.mesh" />
-  <static_mesh name="Tube006_pasillo" filename="meshes\Tube006.mesh" />
   <static_mesh name="Lights_1_glow_pasillo" filename="meshes\Lights_1_glow.mesh" />
   <static_mesh name="Lights_2_glow_pasillo" filename="meshes\Lights_2_glow.mesh" />
   <static_mesh name="Lights_3_glow_pasillo" filename="meshes\Lights_3_glow.mesh" />
@@ -38,4 +32,11 @@
   <static_mesh name="llums_verdes_upper_005_glow_pasillo" filename="meshes\llums_verdes_upper_005_glow.mesh" />
   <static_mesh name="llums_verdes_upper_lat_006_glow_pasillo" filename="meshes\llums_verdes_upper_lat_006_glow.mesh" />
   <static_mesh name="llums_blanques_porta_002_glow_pasillo" filename="meshes\llums_blanques_porta_002_glow.mesh" />
+  <static_mesh name="ventilador_aspas002_pasillo" filename="meshes\ventilador_aspas002.mesh" />
+  <static_mesh name="ventilador_aspas003_pasillo" filename="meshes\ventilador_aspas003.mesh" />
+  <static_mesh name="ventilador_aspas004_pasillo" filename="meshes\ventilador_aspas004.mesh" />
+  <static_mesh name="ventilador_aspas005_pasillo" filename="meshes\ventilador_aspas005.mesh" />
+  <static_mesh name="ventilador_aspas006_pasillo" filename="meshes\ventilador_aspas006.mesh" />
+  <static_mesh name="ventilador_aspas007_pasillo" filename="meshes\ventilador_aspas007.mesh" />
+  <static_mesh name="ventilador_aspas008_pasillo" filename="meshes\ventilador_aspas008.mesh" />
 </static_meshes>
