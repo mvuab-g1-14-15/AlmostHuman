@@ -309,8 +309,8 @@ function CEnemyManager:SpawnEnemy( aPos )
 		local lInfo = {}
 		lInfo.name = "Enemy"..id_manager:GetId().."_S4"
 		engine:Trace("Name: "..lInfo.name)
-		lInfo.life = 100.0
-		lInfo.damage = 10.0
+		lInfo.life = 50.0
+		lInfo.damage = 5.0
 		lInfo.radius = 0.4
 		lInfo.height = 2.0
 		lInfo.speed = 4.0
@@ -321,7 +321,7 @@ function CEnemyManager:SpawnEnemy( aPos )
 		lInfo.use_gizmo = false
 		lInfo.on_dead = false
 		lInfo.shoot_speed = 50.0
-		lInfo.time_to_shoot = 1.0
+		lInfo.time_to_shoot = 0.1
 		lInfo.time_burst = 0.3
 		lInfo.num_shoot_burst = 3.0
 		lInfo.chase_distance = 20.0
@@ -405,6 +405,13 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala4" then
 		self.Boss:Destroy()
 		self.Boss = nil
+		
+		trigger_manager:GetTriggerByName("Hack_nave1"):SetActive(true)
+		trigger_manager:GetTriggerByName("Hack_nave2"):SetActive(true)
+		trigger_manager:GetTriggerByName("Hack_nave3"):SetActive(true)
+		trigger_manager:GetTriggerByName("Hack_nave4"):SetActive(true)
+		
+		gui_manager:ShowStaticText("Hackear", true)
 	end
 end
 
@@ -423,6 +430,8 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
+			scene:ActivateRoom("space")
+			cinematic_manager:Execute("FinalGame")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 		end
 	end

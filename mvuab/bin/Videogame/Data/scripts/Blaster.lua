@@ -101,16 +101,13 @@ function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if self.Energy > 1 then
 			if action_manager:DoAction("ShootDown") and not self.IsCharging then
-				g_Player:SetAnimation("aim")
-				self.PlayerIsShooting = true;
-				engine:Trace("ShootDown")
-			elseif action_manager:DoAction("ShootUp") then
-				self.PlayerIsShooting = false;
+				g_Player:SetAnimation("fast_shoot")
 				self.Energy = self.Energy - 1
 				sound_manager:PlayEvent( "Play_Short_Shoot_Event", "Logan" )
-				engine:Trace("ShootUp")
-				g_Player:SetAnimation("fast_shoot")
+				self.PlayerIsShooting = true;
 				self:Shoot( aPosition )
+			elseif action_manager:DoAction("ShootUp") then
+				self.PlayerIsShooting = false;
 			elseif action_manager:DoAction("ShootChargedDown") and not self.IsCharging then
 				self.IsCharging = true
 				self.TimePressed = 0;

@@ -63,6 +63,11 @@ g_InsideElevator = false
 
 g_InsideUpdateDLC = false
 
+g_InsideHackedNave = false
+g_NaveToHack = ""
+
+g_HackedText = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -468,21 +473,25 @@ function SetPropSala4()
 	end
 end
 
-function Hacknave(nave_obj, other_shape)
-	cinematic_manager:Execute("FinalGame")
-	scene:ActivateRoom("space")
-	-- //////////////////
-	lBoss = enemy_manager:GetBoss()
-	if lBoss ~= nil then
-		if lBoss:IsStunned() then
-			if not g_Hacked[nave_obj] then
-				--logica de disparo hacia el boss
-				engine:TraceOnce("Hacked space ship "..nave_obj)
-				g_Hacked[nave_obj] = true
-				lBoss:ClearStun()
-				lBoss:AddDamage(25.0)
+function Hacknave_enter(nave_obj)
+	g_InsideHackedNave = true
+	g_NaveToHack = nave_obj
+	if not g_HackedText then
+		lBoss = enemy_manager:GetBoss()
+		if lBoss ~= nil then
+			if lBoss:IsStunned() then
+				g_HackedText = true
+				gui_manager:ShowStaticText("Hackear")
 			end
 		end
+	end
+end
+
+function Hacknave_exit(nave_obj)
+	g_InsideHackedNave = false
+	if g_HackedText then
+		gui_manager:ShowStaticText("Hackear")
+		g_HackedText = false
 	end
 end
 
@@ -709,6 +718,38 @@ function UpdateTriggers()
 			sound_manager:PlayEvent("Play_Sala2", "Logan")
 			g_Player:SetEnergy(100.0)
 			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy())
+		end
+	end
+	
+	if g_InsideHackedNave then
+		if action_manager:DoAction("Action") then
+			lBoss = enemy_manager:GetBoss()
+			if lBoss ~= nil then
+				if lBoss:IsStunned() then
+					if not g_Hacked[g_NaveToHack] then
+						g_Hacked[g_NaveToHack] = true
+						lBoss:ClearStun()
+						lBoss:AddDamage(25.0)
+						lBoss:SpawnEnemies()
+						lBoss:SetAttack("far")
+						g_Player:SetEnergy(100.0)
+						Hacknave_exit(g_NaveToHack)
+						if g_NaveToHack == "nave1" then
+							trigger_manager:GetTriggerByName("Hack_nave1"):SetActive(false)
+						end
+						if g_NaveToHack == "nave2" then
+							trigger_manager:GetTriggerByName("Hack_nave2"):SetActive(false)
+						end
+						if g_NaveToHack == "nave3" then
+							trigger_manager:GetTriggerByName("Hack_nave3"):SetActive(false)
+						end
+						if g_NaveToHack == "nave4" then
+							trigger_manager:GetTriggerByName("Hack_nave4"):SetActive(false)
+						end
+						g_NaveToHack = ""
+					end
+				end
+			end
 		end
 	end
 end
