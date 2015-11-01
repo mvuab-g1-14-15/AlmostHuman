@@ -1,9 +1,9 @@
 ﻿<scene_renderer_commands>
-	<capture_frame_buffer name="FB1">
-		<dynamic_texture stage_id="0" name="FB1" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	<capture_frame_buffer name="FB_ScatteredLight">
+		<dynamic_texture stage_id="0" name="FB_ScatteredLight" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
 
-    <scattered_light>
-        <texture stage_id="0" name="FB1"/>
+    <scattered_light active="true" name="scattered_light">
+        <texture stage_id="0" name="FB_ScatteredLight"/>
     </scattered_light>
 </scene_renderer_commands>
