@@ -23,7 +23,13 @@
 	
 	<animation_states default="idle">
 		<animation_state name="idle" default_fade_in="0.0" default_fade_out="0.0">
+		  <on_enter>
+			<action name="idle_to_shoot" fade_in="0.5"/>
+		  </on_enter>
 		  <cycle name="idle"/>
+		  <on_exit>
+			<action name="idle_to_shoot" fade_out="0.3"/>
+		  </on_exit>
 		</animation_state>
 		<animation_state name="aim" default_fade_in="0.0" default_fade_out="0.0">
 		  <on_enter>
@@ -36,21 +42,15 @@
 		</animation_state>
 		<animation_state name="charge" default_fade_in="0.3" default_fade_out="0.3">
 		  <on_enter>
-			<action name="carga_blaster" fade_in="0.0"/>
+			<action name="carga_blaster" fade_in="0.5"/>
 		  </on_enter>
 		  <cycle name="blaster_bloqueado"/>
 		  <on_exit>
-			<action name="shoot_blaster" fade_out="0.0"/>
+			<action name="shoot_blaster" fade_out="0.2"/>
 		  </on_exit>
 		</animation_state>
-		<animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
-		  <on_enter>
-			<action name="idle_to_shoot" fade_in="0.0"/>
-		  </on_enter>
+		<animation_state name="fast_shoot" default_fade_in="0.3" default_fade_out="0.3">
 		  <cycle name="shoot"/>
-		  <on_exit>
-			<action name="shoot_to_idle" fade_out="0.0"/>
-		  </on_exit>
 		</animation_state>
 		<animation_state name="stealth" default_fade_in="0.3" default_fade_out="0.3">
 			<on_enter>
