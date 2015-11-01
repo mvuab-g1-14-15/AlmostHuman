@@ -68,6 +68,10 @@ g_NaveToHack = ""
 
 g_HackedText = false
 
+g_FaltanC4Text = false
+
+g_TakeElevatorText = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -524,10 +528,16 @@ end
 
 function take_C4_enter()
 	g_InsideTakeC4 = true
+	gui_manager:ShowStaticText("TakeC4")
+	g_TakeC4Text = true
 end
 
 function take_C4_exit()
 	g_InsideTakeC4 = false
+	if g_TakeC4Text then
+		gui_manager:ShowStaticText("TakeC4")
+		g_TakeC4Text = false
+	end
 end
 
 function ActivateBoss()
@@ -591,18 +601,30 @@ end
 
 function Elevator_enter()
 	g_InsideElevator = true
+	gui_manager:ShowStaticText("TakeElevator")
+	g_TakeElevatorText = true
 end
 
 function Elevator_exit()
 	g_InsideElevator = false
+	if g_TakeElevatorText then
+		gui_manager:ShowStaticText("TakeElevator")
+		g_TakeElevatorText = false
+	end
 end
 
 function UpdateDLC_enter()
 	g_InsideUpdateDLC = true
+	gui_manager:ShowStaticText("UpdateDLC")
+	g_UpdateDLCText = true
 end
 
 function UpdateDLC_exit()
 	g_InsideUpdateDLC = false
+	if g_UpdateDLCText then
+		gui_manager:ShowStaticText("UpdateDLC")
+		g_UpdateDLCText = false
+	end
 end
 
 function UpdateTriggers()
@@ -611,12 +633,12 @@ function UpdateTriggers()
 			g_C4Taken = true
 			sound_manager:PlayEvent("Play_Pasillo", "Logan")
 			enemy_manager:CreateEnemiesPasillo()
+			take_C4_exit()
 			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
 			local lBombMesh = scene:GetResource("pasillo"):GetLayer("solid"):GetResource("bomb_pasillo")
 			if lBombMesh ~= nil then
 				lBombMesh:SetActive(false)
 			end
-			g_InsideTakeC4 = false
 		end
 	end
 	
