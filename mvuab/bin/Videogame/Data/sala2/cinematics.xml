@@ -1,3 +1,4 @@
 <cinematics>
 	<cinematic name="OpenDoor" resource_id_file="Data/sala2/cinematics/open_door.xml"/>
+	<cinematic name="CloseDoor" resource_id_file="Data/sala2/cinematics/close_door_cinematic.xml"/>
 </cinematics>

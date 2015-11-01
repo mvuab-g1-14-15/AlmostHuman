@@ -1,0 +1,4 @@
+<cinematic>
+	<add_physx name="elevatorPhysx" resource_id_file="Data/elevator/cinematics/ase.xml" load_later="true" time="0.0001"/>
+	<play_animation name="CloseDoor" resource_id_file="Data/sala2/cinematics/close_door.xml" time="4.0" />
+</cinematic>
