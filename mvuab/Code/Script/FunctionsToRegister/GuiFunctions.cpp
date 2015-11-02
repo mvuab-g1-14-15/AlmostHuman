@@ -36,6 +36,7 @@ void registerGUI( lua_State* aLuaState )
   LUA_DECLARE_METHOD_PROTO( CGUIManager, ShowStaticText, void(CGUIManager::*)(const std::string&) )
   LUA_DECLARE_METHOD_PROTO( CGUIManager, ShowStaticText, void(CGUIManager::*)(const std::string&, bool))
   LUA_DECLARE_METHOD( CGUIManager, ShowImage )
+  LUA_DECLARE_METHOD( CGUIManager, HideAllText )
   LUA_END_DECLARATION
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

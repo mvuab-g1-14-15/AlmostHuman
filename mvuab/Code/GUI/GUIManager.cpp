@@ -882,6 +882,15 @@ void CGUIManager::ShowStaticText( const std::string& inStaticText )
     }
 }
 
+void CGUIManager::HideAllText()
+{
+    for(std::map<std::string, CGuiElement*>::iterator it = m_ElementsMap.begin(); it != m_ElementsMap.end(); it++)
+    {
+        it->second->SetActive(false);
+        it->second->SetVisible(false);
+    }
+}
+
 void CGUIManager::ShowStaticText( const std::string& inStaticText, bool inActive)
 {
 	std::map<std::string, CGuiElement*>::iterator it;
