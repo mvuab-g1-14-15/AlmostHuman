@@ -39,6 +39,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	766947946	Iris_Bidon	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Bidon_movimiento_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Bidon		46707
 	856495406	Sala3B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3B		240403
 	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		247728
+	959572413	Elevator	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Elevator		387944
 	999865395	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Sala2_Update_Dialogo\Sala2		68678
-	1052402412	Elevator	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Elevator		421588
 

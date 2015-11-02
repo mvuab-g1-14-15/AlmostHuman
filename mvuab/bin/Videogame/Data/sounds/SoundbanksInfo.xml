@@ -262,13 +262,13 @@
 					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
 					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
 				</File>
+				<File Id="959572413" Language="SFX">
+					<ShortName>Elevator.wav</ShortName>
+					<Path>SFX\Elevator_E106FFBE.wem</Path>
+				</File>
 				<File Id="999865395" Language="SFX">
 					<ShortName>Sala2.wav</ShortName>
 					<Path>SFX\Sala2_E106FFBE.wem</Path>
-				</File>
-				<File Id="1052402412" Language="SFX">
-					<ShortName>Elevator.wav</ShortName>
-					<Path>SFX\Elevator_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
