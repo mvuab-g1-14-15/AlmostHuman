@@ -280,8 +280,8 @@ end
 
 function StayText(room, message, other_shape)
 	enemigosVivos = enemy_manager:GetNumEnemy(room)
-	engine:Trace("Sala  "..room)
-	engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
+	--engine:Trace("Sala  "..room)
+	--engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
 	if room == "sala2" then
 		if g_bPressedRoom2X and enemigosVivos >= 1 then
 			CuentaAtras = CuentaAtras - timer:GetElapsedTime()	
@@ -348,7 +348,7 @@ end
 
 function GetEnemyLive(room)
 	lEnemy = enemy_manager:GetEnemys()
-	--engine:Trace("La room es "..room)
+	----engine:Trace("La room es "..room)
 	for i in pairs (lEnemy) do
 		lActualEnemy = lEnemy[i]
 		if lEnemy[i] ~= nil and lActualEnemy:GetRoom() == room then
@@ -387,7 +387,7 @@ function ChargeEnergy()
 end
 
 function TracePhysX(message, other_shape)
-	--engine:Trace(message)
+	----engine:Trace(message)
 end
 
 function ShowTextDoor1(message, other_shape)
@@ -395,7 +395,8 @@ function ShowTextDoor1(message, other_shape)
 		g_bPressRoom1X = false	
 		if g_bBlockShow then
 			g_bBlockShow = false
-			gui_manager:ShowStaticText("Block")			
+			gui_manager:ShowStaticText("Block")
+			sound_manager:PlayEvent("Play_GP_Puerta_Bloqueada", "Logan")
 		end
 	else
 		g_bPressRoom1X = true
@@ -426,7 +427,7 @@ function SetPropSala2()
 		
 		g_bFootstepType = "pavimento"
 		g_EnteredSala2 = true
-		engine:Trace("Setted properties of sala2")
+		--engine:Trace("Setted properties of sala2")
 	end
 end
 	
@@ -444,7 +445,7 @@ function SetPropPasillo()
 		scene:DesactivateRoom("sala2")
 		
 		g_EnteredPasillo = true
-		engine:Trace("Setted properties of pasillo")
+		--engine:Trace("Setted properties of pasillo")
 	end
 end
 
@@ -466,7 +467,7 @@ function SetPropSala3()
 		light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(false)
 		
 		g_EnteredSala3 = true
-		engine:Trace("Setted properties of sala3")
+		--engine:Trace("Setted properties of sala3")
 	end
 end
 
@@ -484,7 +485,7 @@ function SetPropSala4()
 		scene:DesactivateRoom("sala3")
 		
 		g_EnteredSala4 = true
-		engine:Trace("Setted properties of sala4")
+		--engine:Trace("Setted properties of sala4")
 	end
 end
 
@@ -761,6 +762,14 @@ function UpdateTriggers()
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
 				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+				lEnemy = enemy_manager:GetEnemy("Drone1_S3")
+				if lEnemy ~= nil then
+					lEnemy:AddDamage(lEnemy:GetLife())
+				end
+				lEnemy = enemy_manager:GetEnemy("Drone2_S3")
+				if lEnemy ~= nil then
+					lEnemy:AddDamage(lEnemy:GetLife())
+				end
 			else
 				if not g_FaltanC4Text then
 					g_FaltanC4Text = true

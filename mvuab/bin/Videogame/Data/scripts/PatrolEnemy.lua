@@ -12,7 +12,7 @@
 --	self.TurnSpeed = 1
 --	self.Delta = 0.2
 --	self.Path = vecVect3f()
---	--engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
+--	----engine:Trace("CPatrolEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 --end
 --
 --function CPatrolEnemyLUA:Destroy()

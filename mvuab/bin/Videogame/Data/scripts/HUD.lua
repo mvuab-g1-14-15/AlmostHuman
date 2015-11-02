@@ -79,10 +79,10 @@ function GetMapItemPosition()
 		
 	if doit then
 		doit=false
-		--engine:Trace("eo "..l_UVItemMapPosition.x.." "..l_UVItemMapPosition.y.." "..l_UVItemMapPosition.z)
-		--engine:Trace("eo2 "..l_UVPlayerMapPosition.x.." "..l_UVPlayerMapPosition.y.." "..l_UVPlayerMapPosition.z)
-		--engine:Trace("eo3 "..l_UVMapPosition.x.." "..l_UVMapPosition.y.." "..l_UVMapPosition.z)
-		--engine:Trace("l_Offset "..l_Offset.x.." "..l_Offset.y.." "..l_Offset.z)
+		----engine:Trace("eo "..l_UVItemMapPosition.x.." "..l_UVItemMapPosition.y.." "..l_UVItemMapPosition.z)
+		----engine:Trace("eo2 "..l_UVPlayerMapPosition.x.." "..l_UVPlayerMapPosition.y.." "..l_UVPlayerMapPosition.z)
+		----engine:Trace("eo3 "..l_UVMapPosition.x.." "..l_UVMapPosition.y.." "..l_UVMapPosition.z)
+		----engine:Trace("l_Offset "..l_Offset.x.." "..l_Offset.y.." "..l_Offset.z)
 	end
 	
 	
@@ -95,7 +95,7 @@ function GetMapItemPosition()
 end
 
 function CHUD:AddEnemy( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
-	--engine:Trace("He llegado antes de petar")
+	----engine:Trace("He llegado antes de petar")
 	self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
 end
 

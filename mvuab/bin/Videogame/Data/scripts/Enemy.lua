@@ -155,7 +155,7 @@ function CEnemy:Destroy()
 							  "local selfName = '"..self:GetName().."';"..
 							  self.OnDeadCode		
 		
-		engine:Trace(self.Name.." executing on dead code.")
+		--engine:Trace(self.Name.." executing on dead code.")
 		script_manager:RunCode(codeToExecute)
 	end
 	
@@ -325,7 +325,7 @@ function CEnemy:Update()
 		local dt = timer:GetElapsedTime()
 		self.CharacterController:Move(Vect3f(0.0), dt)
 		local lActualPos = self:GetPosition()
-		engine:TraceOnce("Actual pos "..lActualPos:ToString().." last pos "..self.LastPos:ToString())
+		--engine:TraceOnce("Actual pos "..lActualPos:ToString().." last pos "..self.LastPos:ToString())
 		if self.LastPos == lActualPos then
 			enemy_manager:DestroyEnemy(self)
 			return
@@ -378,7 +378,7 @@ function CEnemy:GetActive()
 end
 
 function CEnemy:SetActive( aBool )
-engine:TraceOnce("Setting the enemy "..self.Name.." active")
+--engine:TraceOnce("Setting the enemy "..self.Name.." active")
 	self.Active = aBool
 end
 
@@ -804,7 +804,7 @@ end
 --	
 --	AddEnemy(Node:GetAttributeString("texture_enemy", ""), Node:GetAttributeVect3f("pos", Vect3f(0,0,0)), Node:GetAttributeInt("width", 50.0), Node:GetAttributeInt("height", 50.0), self.CharacterController:GetYaw(), Node:GetAttributeString("get_position_script", "no_script"), Node:GetAttributeString("orientation", "no_script"), self.Name)
 --	
---	--engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
+--	----engine:Trace("CEnemyLUA: " .. self.Name .. " initialized")
 --end
 --
 --function CEnemyLUA:Destroy()
@@ -816,7 +816,7 @@ end
 --	physic_manager:ReleasePhysicController(self.CharacterController)
 --	renderable_objects_manager_characters:RemoveResource(self.Name)
 --	
---	--engine:Trace("He muerto Vida actual: "..self.Life)
+--	----engine:Trace("He muerto Vida actual: "..self.Life)
 --end
 --
 --function CEnemyLUA:Update()
@@ -879,7 +879,7 @@ end
 --
 --function CEnemyLUA:AddDamage(amount)
 --	self.Life = self.Life - amount
---	--engine:Trace("Vida actual: "..self.Life)
+--	----engine:Trace("Vida actual: "..self.Life)
 --end
 --
 --function CEnemyLUA:SetYaw(yaw)
@@ -963,7 +963,7 @@ end
 --	lShoot = CShootLUA( self.ShootSpeed, aDirection, lPosition, self.Damage )	
 --	enemy_manager:AddShoot(lShoot)
 --	if self.Type == "drone" then
---		engine:Trace("He entrado en el disparo del drone")
+--		--engine:Trace("He entrado en el disparo del drone")
 --		local YawTmp = math.atan2(aDirection.z, aDirection.x)
 --		local PitchTmp = math.atan2(aDirection.y, math.sqrt( (aDirection.z * aDirection.z) + (aDirection.x * aDirection.x) ) )
 --		self.RenderableObject:SetYaw(YawTmp + g_HalfPi)
@@ -1008,7 +1008,7 @@ end
 --    lAStar = enemy_manager:GetAStar( self.Room )
 --
 --    if ( not self.PathCalculated ) then  
---		engine:Trace("He entrado a calcular la posicion")
+--		--engine:Trace("He entrado a calcular la posicion")
 --        self.Path = lAStar:GetPath( lPos, aPos )
 --        self.PathCalculated = true
 --    end
@@ -1023,7 +1023,7 @@ end
 --    lDist = lTargetPos:Distance( lWaypointPos )
 --	
 --	count = self.Path:size()
---	--engine:Trace("El tamaño de la path es: "..lDist)
+--	----engine:Trace("El tamaño de la path es: "..lDist)
 --    if ( (count - self.ActualPathPoint) > 2 ) then
 --        if ( lDist < 1 ) then
 --            self.ActualPathPoint = self.ActualPathPoint + 1
@@ -1032,7 +1032,7 @@ end
 --    end
 --    lTargetPos.y = 0
 --	
---	--engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
+--	----engine:Trace("la posicion a la que voy: "..lTargetPos:ToString())
 --	self:MoveToWaypoint(lTargetPos)
 --    
 --    if ( self.Path:GetResource(count - 1):Distance( aPos ) > 5.0 ) then
@@ -1040,7 +1040,7 @@ end
 --		self.ActualPathPoint = 1
 --	end
 --	
---	engine:Trace("Estoy en "..lPos:ToString()..". Voy a "..self.Path:GetResource(count - 1):ToString()..".")
+--	--engine:Trace("Estoy en "..lPos:ToString()..". Voy a "..self.Path:GetResource(count - 1):ToString()..".")
 --	
 --	return false
 --end
@@ -1186,9 +1186,9 @@ end
 --end
 --
 --function CEnemyLUA:ChangeAnimation(animation, delayin, delayout)
---	engine:Trace("Next animation: "..animation)
+--	--engine:Trace("Next animation: "..animation)
 --	if not self.IsHurting then
---		engine:Trace("Is not hurting.")
+--		--engine:Trace("Is not hurting.")
 --		self.CurrentAnimation = animation
 --		self.RenderableObject:ChangeAnimation(animation, delayin, delayout)
 --	end
@@ -1264,7 +1264,7 @@ end
 --end
 --
 --function CEnemyLUA:SetSuspected( aBool )
---	engine:Trace("Setting suspected "..self:GetName())
+--	--engine:Trace("Setting suspected "..self:GetName())
 --	self.Suspected = aBool
 --end
 --

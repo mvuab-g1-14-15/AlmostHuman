@@ -59,7 +59,7 @@ function CPlayerController:__init()
 		physic_manager:AddController("Player", self.Radius, self.Height * 0.5, math.cos(g_HalfPi * 0.5), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -350.0)
 	end
 	self.CharacterController = physic_manager:GetController("Player")
-	--engine:Trace("Player Controller initialized")
+	----engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()
@@ -136,7 +136,7 @@ function CPlayerController:Update()
 		self.Jump = false
 	end
     
-    --engine:Trace("dt - sf:" .. dt .. " - " .. sf)
+    ----engine:Trace("dt - sf:" .. dt .. " - " .. sf)
 
     self.Accum = self.Accum + dt;
     while self.Accum >= self.FrameTime do

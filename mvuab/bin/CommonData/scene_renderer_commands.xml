@@ -39,7 +39,7 @@
 	<enable_alpha_test/>
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
     <render_draw_quad active="false" name="InsideBarrel">
- 		<texture stage_id="0" name="Data/textures/InsideBarrel.png"/>
+ 		<texture stage_id="0" name="Data/textures/inside_barrel.tga"/>
  	</render_draw_quad>
 	<disable_alpha_test/>
 	
