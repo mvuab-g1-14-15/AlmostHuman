@@ -621,24 +621,24 @@ function PuntoDetonacion_exit()
 end
 
 function Elevator_enter()
-    if g_C4Colocada1 and g_C4Colocada2 then -- cambiar esto por alguna variable que controle la detonacion
+    if g_ExplotionDone then
         g_InsideElevator = true
         gui_manager:ShowStaticText("TakeElevator")
         g_TakeElevatorText = true
     else
-        gui_manager:ShowStaticText("DetonarC4") -- si no se ha detonado el C4
+        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
     end
 end
 
 function Elevator_exit()
-    if g_C4Colocada1 and g_C4Colocada2 then -- cambiar esto por alguna variable que controle la detonacion
+    if g_ExplotionDone then
         g_InsideElevator = false
         if g_TakeElevatorText then
             gui_manager:ShowStaticText("TakeElevator")
             g_TakeElevatorText = false
         end
     else
-        gui_manager:ShowStaticText("DetonarC4") -- si no se ha detonado el C4
+        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
     end
 end
 
