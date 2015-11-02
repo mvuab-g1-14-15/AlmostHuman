@@ -35,7 +35,7 @@ function CAmmoCharged:Update( aPosition )
 			lVelocity 		= self.Direction * self.Speed * dt
 			lLength 		= lVelocity:Length()
 			local lNewPosition 	= self.Position + lVelocity
-			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 );
+			hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0x200C7, 200.0 );
 			local lNewVector = lNewPosition - self.Position;
 			self.CurrentDistance = self.CurrentDistance + lNewVector:Length();
 			if not (hit_info.Distance == 0.0) then
