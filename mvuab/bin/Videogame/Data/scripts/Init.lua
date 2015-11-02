@@ -235,8 +235,7 @@ function update_gameplay()
 			if g_Player:GetIsCrouch() then
 				if action_manager:DoAction("Action") then
 					g_bPressedRoom1Button = true
-					cinematic_manager:Execute("rejilla")
-					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
+					cinematic_manager:Execute("rejilla")					
 				end
 			end
 		end	
