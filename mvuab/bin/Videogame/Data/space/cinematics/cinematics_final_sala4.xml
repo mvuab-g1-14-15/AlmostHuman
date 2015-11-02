@@ -6008,7 +6008,7 @@
     <cinematic_object_key_frame time="66.6333" pos="-1405.84 277.587 -77.0534" yaw="2.29757" pitch="0.126818" roll="-0.464639" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="66.6667" pos="-1405.84 277.587 -77.0534" yaw="2.29923" pitch="0.126818" roll="-0.464639" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="sol_space" renderable_objects_manager="sol_space" room="space" active="false" init_keyframe="0.0">
+  <cinematic_object resource="sol_space" renderable_objects_manager="sol_space" room="space" active="false" init_keyframe="0.0" lua_code="g_Player:UpdatePlayer(Vect3f(0,0,0), 0, 0)" key_action="0.0">
     <cinematic_object_key_frame time="0.0" pos="-2190.49 423.078 -7.41968" yaw="0.0" pitch="0.0" roll="0.0" scale="0.897812 0.897812 0.897812" />
     <cinematic_object_key_frame time="0.0333333" pos="-2190.49 423.078 -7.41968" yaw="0.0" pitch="0.0" roll="0.0" scale="0.897812 0.897812 0.897812" />
     <cinematic_object_key_frame time="0.0666667" pos="-2190.49 423.078 -7.41968" yaw="0.0" pitch="0.0" roll="0.0" scale="0.897812 0.897812 0.897812" />
