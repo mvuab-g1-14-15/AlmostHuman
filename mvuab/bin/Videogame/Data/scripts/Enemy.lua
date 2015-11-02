@@ -129,15 +129,18 @@ function CEnemy:__init( aInfo )
 	self.FootstepTime = 0.5
 	if self.Fly then
 		sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
+		self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
 	end
 	
 	self.LastPos = Vect3f(0.0)
 	self.Death = false
 	
-	self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
-	self.lParticle2 = CParticle( self.Name.."particle_dead2", "ray", self.Room );
-	self.lParticle3 = CParticle( self.Name.."particle_dead3", "ray", self.Room );
-	self.lParticle4 = CParticle( self.Name.."particle_dead4", "ray", self.Room );
+	if not self.Fly then
+		self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
+		self.lParticle2 = CParticle( self.Name.."particle_dead2", "ray", self.Room );
+		self.lParticle3 = CParticle( self.Name.."particle_dead3", "ray", self.Room );
+		self.lParticle4 = CParticle( self.Name.."particle_dead4", "ray", self.Room );
+	end
 	
 	self.UpdateMeshPos = true
 end
@@ -310,7 +313,7 @@ function CEnemy:Update()
 			self.Death = true
 			
 			if self.Fly then
-				--renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+				self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub002")       );
 			else
 				self.lParticle1:Init( self.RenderableObject:GetBonePosition("Base HumanHead")     );
 				self.lParticle2:Init( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
@@ -340,7 +343,7 @@ function CEnemy:Update()
 	end
 	
 	if self.Fly then
-		--renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")
+		self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub002")     );
 	else
 		self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead")     );
 		self.lParticle2:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
@@ -707,6 +710,10 @@ end
 
 function CEnemy:ChangeAnimationAction(animation, delayin, delayout)
 	self.RenderableObject:ChangeAnimationAction(animation, delayin, delayout)
+end
+
+function CEnemy:SetAnimation( aName )
+	self.RenderableObject:SetAnimationState( aName )
 end
 
 --class "CEnemyLUA"

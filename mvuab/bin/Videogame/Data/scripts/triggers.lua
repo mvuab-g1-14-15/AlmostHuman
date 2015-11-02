@@ -456,7 +456,6 @@ function SetPropSala3()
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
 		cinematic_manager:Execute("CloseDoorPasillo")
-		scene:DesactivateRoom("pasillo")
 		
 		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
 		light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(false)
@@ -476,6 +475,9 @@ function SetPropSala4()
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
 		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())
+		
+		scene:DesactivateRoom("pasillo")
+		scene:DesactivateRoom("sala3")
 		
 		g_EnteredSala4 = true
 		engine:Trace("Setted properties of sala4")
@@ -647,6 +649,10 @@ function ViewBoss_enter()
 	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(false)
 end
 
+function CargarEnergia_enter()
+	g_Player:SetEnergy(100.0)
+end
+
 function UpdateTriggers()
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
@@ -675,8 +681,7 @@ function UpdateTriggers()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
-				
-				--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, -500, 0))
+				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_sala2")
 			end
 		end
 	end
@@ -696,7 +701,7 @@ function UpdateTriggers()
 				enemy_manager:CreateDesactivateEnemiesSala3()
 				trigger_manager:GetTriggerByName("door_pasillo_to_sala3"):SetActive(false)
 				cinematic_manager:Execute("OpenDoorPasillo")
-				
+				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_pasillo")
 			end
 		end
 	end

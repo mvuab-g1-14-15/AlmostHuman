@@ -1,0 +1,13 @@
+<emitter active="true" name="ray" loop="true" time_to_live="0.5">
+	<particles max_alive_particles="40" time_to_live="0.01 0.2">
+		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/rays/Ray01.png" name2="../CommonData/textures/PS/rays/Ray02.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.0" color="1.0 0.8.0 0.0" size="0.9"/>
+			<interpolator alpha="0.7" color="1.0 0.7 0.0" size="1.2"/>
+			<interpolator alpha="0.0" color="1.0 0.65 0.0" size="0.6"/>
+		</interpolators>
+		<motion linear_speed="0.01 0.01" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="0 0" gravity="0"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0.25" particles_per_emission="10 15" cubic_size="1 1 1"/>
+</emitter>

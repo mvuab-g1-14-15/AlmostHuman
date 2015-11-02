@@ -21,7 +21,9 @@ CSetTransformElement::CSetTransformElement( CXMLTreeNode& atts ) : CCinematicsEl
 
 void CSetTransformElement::Update()
 {
-	ASSERT(m_pObject, "Error al leer el renderable en SetTransform");
+	//ASSERT(m_pObject, "Error al leer el renderable en SetTransform");
+	if(m_pObject == 0)
+		m_pObject = SceneInstance->GetResource( "core" )->GetLayer( "characters" )->GetResource(m_Name );
     m_pObject->SetPosition( m_Position );
     m_pObject->SetScale( m_Size );
     m_pObject->SetYaw( m_Yaw );

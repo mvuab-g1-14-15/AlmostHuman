@@ -100,7 +100,7 @@ function CPlayer:Update()
 	end
 	
 	if self.Life <= 0 then
-		FunctionGameOver()
+		--FunctionGameOver()
 		self:SetPosition(self.Checkpoint.position)
 		self.Life= self.Checkpoint.life
 		self.Blaster:SetEnergy(self.Checkpoint.energy)

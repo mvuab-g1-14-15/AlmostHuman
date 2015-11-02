@@ -155,7 +155,7 @@ private:
   bool  m_bFirstUpdate;
   bool  m_RenderPointer;
   bool  m_bLoadedGuiFiles;
-  CPointerMouse*  m_PointerMouse;
+  //CPointerMouse*  m_PointerMouse;
   CTextBox* m_pTextBox;
   CConsoleGUI*  m_pConsole;
   TransitionEffect m_sTransitionEffect;

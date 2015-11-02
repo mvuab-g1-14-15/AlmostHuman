@@ -25,12 +25,12 @@ function load_basics()
 
 	scene:ActivateRoom("sala1")
 	scene:SetCurrentRoomName("sala1")
-	--scene:LoadRoom("sala2")
+	scene:LoadRoom("sala2")
 	scene:LoadRoom("pasillo")
-	--scene:LoadRoom("sala3")
-	--scene:LoadRoom("elevator")
+	scene:LoadRoom("sala3")
+	scene:LoadRoom("elevator")
 	scene:LoadRoom("sala4")	
-	--scene:LoadRoom("space")
+	scene:LoadRoom("space")
 	
 	--scene:DesactivateRoom("sala2")
 	--scene:DesactivateRoom("pasillo")
@@ -235,8 +235,7 @@ function update_gameplay()
 			if g_Player:GetIsCrouch() then
 				if action_manager:DoAction("Action") then
 					g_bPressedRoom1Button = true
-					cinematic_manager:Execute("rejilla")
-					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
+					cinematic_manager:Execute("rejilla")					
 				end
 			end
 		end	

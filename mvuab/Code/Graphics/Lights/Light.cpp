@@ -52,13 +52,13 @@ CLight::CLight( const CXMLTreeNode& node )
     , m_RoomName( node.GetAttribute<std::string>( "room", "" ) )
     , mBillboard( 0 )
 {
-  CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
-  if( lBillboardCore  )
-  {
-    mBillboard = new CBillboardInstance();
-    mBillboard->ChangePosition( m_Position );
-    lBillboardCore->AddInstance( mBillboard );
-  }
+//   CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
+//   if( lBillboardCore  )
+//   {
+//     mBillboard = new CBillboardInstance();
+//     mBillboard->ChangePosition( m_Position );
+//     lBillboardCore->AddInstance( mBillboard );
+//   }
 
   mIsVisible = node.GetAttribute<bool>( "active", true );
 
@@ -204,7 +204,7 @@ CTexture *CLight::GetShadowMaskTexture() const
 
 void CLight::GenerateShadowMap( CGraphicsManager *GM )
 {
-    if ( m_RenderShadows )
+    if ( m_RenderShadows && mIsVisible )
     {
         SetShadowMap( GM );
 

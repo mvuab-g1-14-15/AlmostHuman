@@ -414,8 +414,7 @@ function CEnemyManager:Reinit( aRoom )
 		self.Shoots[k]:End()
 	end
 		
-	if aRoom == "sala2" then
-		cinematic_manager:ReloadCinematic("data/sala2/cinematics.xml")
+	if aRoom == "sala2" then		
 		self:CreateEnemiesSala2()
 		gui_manager:ShowStaticText("Block", true)
 	end
@@ -488,6 +487,10 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
+			lExplosionBoss = CParticle( "boss_explosion_bum", Vect3f(0.0, 0.0, 0.0) )
+			lExplosionBoss:Init(self.Boss:GetPosition())
+			lHumoBoss = CParticle( "boss_explosion_fum", Vect3f(0.0, 0.0, 0.0) )
+			lHumoBoss:Init(self.Boss:GetPosition())
 			cinematic_manager:Execute("explotion_boss")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 			trigger_manager:GetTriggerByName("final"):SetActive(true)
