@@ -43,7 +43,7 @@
   <static_mesh name="Line115_elevator" filename="meshes\Line115.mesh" />
   <static_mesh name="Cylinder3820_elevator" filename="meshes\Cylinder3820.mesh" />
   <static_mesh name="Cylinder3821_elevator" filename="meshes\Cylinder3821.mesh" />
-  <static_mesh name="elevator_box_elevator" filename="meshes\elevator_box_elevator.mesh" />
+  <static_mesh name="Elevator_box_elevator" filename="meshes\Elevator_box.mesh" />
   <static_mesh name="Line111_elevator" filename="meshes\Line111.mesh" />
   <static_mesh name="Box233_elevator" filename="meshes\Box233.mesh" />
   <static_mesh name="Box209_elevator" filename="meshes\Box209.mesh" />

@@ -37,13 +37,13 @@
   <MeshInstance name="Box521_elevator" core="Box521_elevator" pos="-53.1065 37.5513 57.8328" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box522_elevator" core="Box522_elevator" pos="-53.1153 36.6598 58.5655" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Cylinder3822_elevator" core="Cylinder3822_elevator" pos="-53.1819 35.444 58.1831" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Door_elevator001_elevator" core="Door_elevator001_elevator" pos="-53.0468 40.6172 60.9059" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box512_elevator" core="Box512_elevator" pos="-53.0688 39.0733 62.5257" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box513_elevator" core="Box513_elevator" pos="-53.0688 39.0733 59.2809" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line115_elevator" core="Line115_elevator" pos="-53.1027 38.7535 60.907" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Cylinder3820_elevator" core="Cylinder3820_elevator" pos="-53.1364 38.8058 60.9055" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Cylinder3821_elevator" core="Cylinder3821_elevator" pos="-53.1364 38.8058 60.9163" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="elevator_box_elevator" core="elevator_box_elevator" pos="-50.5308 3.30505 60.6921" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Door_elevator001_elevator" core="Door_elevator001_elevator" pos="-53.0468 36.6702 60.9059" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box512_elevator" core="Box512_elevator" pos="-53.0688 35.1263 62.5257" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box513_elevator" core="Box513_elevator" pos="-53.0688 35.1263 59.2809" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Line115_elevator" core="Line115_elevator" pos="-53.1027 34.8065 60.907" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Cylinder3820_elevator" core="Cylinder3820_elevator" pos="-53.1364 34.8588 60.9055" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Cylinder3821_elevator" core="Cylinder3821_elevator" pos="-53.1364 34.8588 60.9163" yaw="0.0" pitch="-1.5708" roll="1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Elevator_box_elevator" core="Elevator_box_elevator" pos="-50.5308 3.30505 60.6921" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Line111_elevator" core="Line111_elevator" pos="-50.6891 -13.4168 62.8816" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box233_elevator" core="Box233_elevator" pos="-50.513 -13.5002 63.4829" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box209_elevator" core="Box209_elevator" pos="-50.2772 -1.89511 61.2753" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
@@ -74,11 +74,11 @@
   <MeshInstance name="Box242_elevator" core="Box242_elevator" pos="-48.2769 -12.5614 63.8115" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Cylinder24_elevator" core="Cylinder24_elevator" pos="-48.2016 -14.6686 63.4611" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Box213_elevator" core="Box213_elevator" pos="-48.3869 -11.9098 63.1035" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="cabin_elevator" core="cabin_elevator" pos="-50.7405 36.49 60.7332" yaw="0.0" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Door_elevator_elevator" core="Door_elevator_elevator" pos="-48.3367 -13.4405 60.7384" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Cylinder01_elevator" core="Cylinder01_elevator" pos="-48.2471 -15.252 60.7279" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box245_elevator" core="Box245_elevator" pos="-48.3147 -14.9845 59.1185" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Cylinder3819_elevator" core="Cylinder3819_elevator" pos="-48.2471 -15.252 60.7387" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Line112_elevator" core="Line112_elevator" pos="-48.2808 -15.3042 60.7372" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box246_elevator" core="Box246_elevator" pos="-48.3147 -14.9845 62.3633" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="cabin_elevator" core="cabin_elevator" pos="-50.7405 -12.7676 60.7332" yaw="0.0" pitch="-1.5708" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Door_elevator_elevator" core="Door_elevator_elevator" pos="-48.3367 -9.49539 60.7384" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Cylinder01_elevator" core="Cylinder01_elevator" pos="-48.2471 -11.3068 60.7279" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box245_elevator" core="Box245_elevator" pos="-48.3147 -11.0393 59.1185" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Cylinder3819_elevator" core="Cylinder3819_elevator" pos="-48.2471 -11.3068 60.7387" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Line112_elevator" core="Line112_elevator" pos="-48.2808 -11.3591 60.7372" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box246_elevator" core="Box246_elevator" pos="-48.3147 -11.0393 62.3633" yaw="0.0" pitch="-1.5708" roll="-1.5708" scale="1.0 1.0 1.0" />
 </RenderableObjects>
