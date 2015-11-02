@@ -72,6 +72,10 @@ g_FaltanC4Text = false
 
 g_TakeElevatorText = false
 
+g_InsideBaseCargaError = false
+
+g_BaseCargaErrorText = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -653,7 +657,27 @@ function CargarEnergia_enter()
 	g_Player:SetEnergy(100.0)
 end
 
+function BaseCargaError_enter()
+	g_InsideBaseCargaError = true
+	--texto carga
+end
+
+function BaseCargaError_exit()
+	g_InsideBaseCargaError = false
+	--quitar texto carga
+	if g_BaseCargaErrorText then
+		gui_manager:ShowStaticText("BaseCargaError")
+		g_BaseCargaErrorText = false
+	end
+end
+
 function UpdateTriggers()
+	if g_InsideBaseCargaError then
+		if action_manager:DoAction("Action") then
+			gui_manager:ShowStaticText("BaseCargaError")
+			g_BaseCargaErrorText = true
+		end
+	end
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
 			g_C4Taken = true

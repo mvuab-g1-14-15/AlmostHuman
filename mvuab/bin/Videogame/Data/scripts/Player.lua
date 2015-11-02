@@ -13,7 +13,7 @@ function CPlayer:__init()
 	self.GrenadeQueue[#self.GrenadeQueue + 1] = CGrenade()
 	
 	self.Blaster = CBlaster()
-	self:SetEnergy(100.0) --TODO: Change to 0.0
+	self:SetEnergy(0.0) --TODO: Change to 0.0
 	self.StealthAttack = CStealthAttack()
 	self.Grenade = nil
 	

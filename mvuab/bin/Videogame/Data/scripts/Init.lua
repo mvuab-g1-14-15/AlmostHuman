@@ -32,12 +32,12 @@ function load_basics()
 	scene:LoadRoom("sala4")	
 	scene:LoadRoom("space")
 	
-	--scene:DesactivateRoom("sala2")
-	--scene:DesactivateRoom("pasillo")
-	--scene:DesactivateRoom("sala3")
-	--scene:DesactivateRoom("elevator")	
-	--scene:DesactivateRoom("sala4")
-	--scene:DesactivateRoom("space")	
+	scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("pasillo")
+	scene:DesactivateRoom("sala3")
+	scene:DesactivateRoom("elevator")	
+	scene:DesactivateRoom("sala4")
+	scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	

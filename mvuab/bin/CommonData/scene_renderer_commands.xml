@@ -25,7 +25,7 @@
 	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
 	<render_billboards/>
-	<render_triggers/>
+	<!--render_triggers/-->
     <lens_of_flare/>
 	<disable_alpha_blend/>
 	<disable_z_test/>
@@ -62,7 +62,7 @@
 	
 	<postproc filename="../CommonData/Scene_Renderer_Commands_Post_Proc/Scene_Renderer_Command_Damage.xml"/>
 	
-	<render_developer_info/>
+	<!--render_developer_info/-->
     <end_scene/>
 
     <present/>

@@ -52,7 +52,7 @@ function CEnemyManager:CreateEnemiesSala2()
 						Vect3f(56.1998, -16.5334, -65.033 )}
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 1.0
@@ -100,7 +100,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = true
 	lInfo.on_dead_code = "local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName);"..
 						 "if closeEnemy ~= nil then "..
@@ -143,7 +143,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
@@ -177,7 +177,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
@@ -215,7 +215,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 						Vect3f(54.0, -13.68, 35.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "pasillo"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
 	lInfo.time_to_shoot = 1.0
@@ -255,7 +255,7 @@ function CEnemyManager:CreateEnemiesSala3()
 						Vect3f(39.0, -12.0, 50.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "sala3"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
 	lInfo.time_to_shoot = 1.0
@@ -304,7 +304,7 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala3"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 0.2
