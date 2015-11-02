@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RenderableObjects>  
+  <MeshInstance name="ventilador_aspas_sala1" core="ventilador_aspas_sala1" pos="93.9949 -9.166 -26.8925" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="ventilador_aspas001_sala1" core="ventilador_aspas001_sala1" pos="93.3124 -9.16831 -44.2135" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+</RenderableObjects>

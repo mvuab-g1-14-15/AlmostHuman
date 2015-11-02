@@ -1,15 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="0.0 0.0 0.0" />
-  <spot_light name="Fspot001" pos="94.002 -9.0354 -26.5093" color="0.992157 0.47451 0.133333" att_start_range="3.85958" att_end_range="5.71101" look_at="94.002 -9.94604 -34.5093" angle="43.0" fall_off="56.3" render_shadows="false" />
-  <spot_light name="Fspot002" pos="92.8469 -9.07491 -44.2049" color="0.992157 0.47451 0.133333" att_start_range="3.85958" att_end_range="5.71101" look_at="100.548 -9.9687 -44.2049" angle="43.0" fall_off="56.3" render_shadows="false" />
-  <omni_light name="Omni002" pos="119.473 -7.68359 -50.1482" color="0.270588 0.627451 0.87451" att_start_range="1.41" att_end_range="2.5" />
-  <omni_light name="Omni003" pos="107.146 -8.89107 -44.9194" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
-  <omni_light name="Omni004" pos="100.646 -8.7546 -44.7571" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
-  <omni_light name="Omni005" pos="94.4333 -8.75765 -37.1949" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
+  <spot_light room="sala1" name="Fspot001" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
+		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala1">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
+		</shadow_map>
+  </spot_light>
+  <spot_light room="sala1" name="Fspot002" look_at="94.18 -9.55 -27.71" pos="93.59 -8.9 -26.5" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
+		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala1">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
+		</shadow_map>
+  </spot_light>
+  <spot_light room="sala1" name="Fspot002" pos="92.8469 -9.07491 -44.2049" color="0.992157 0.47451 0.133333" att_start_range="3.85958" att_end_range="5.71101" look_at="100.548 -9.9687 -44.2049" angle="43.0" fall_off="56.3" render_shadows="false" />
+  <omni_light room="sala1" name="Omni002" pos="119.473 -7.68359 -50.1482" color="0.270588 0.627451 0.87451" att_start_range="1.41" att_end_range="2.5" />
+  <omni_light room="sala1" name="Omni003" pos="107.146 -8.89107 -44.9194" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
+  <omni_light room="sala1" name="Omni004" pos="100.646 -8.7546 -44.7571" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
+  <omni_light room="sala1" name="Omni005" pos="94.4333 -8.75765 -37.1949" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
   <omni_light name="Omni008" pos="124.885 -7.3678 -51.4841" color="1.0 1.0 1.0" att_start_range="2.76" att_end_range="3.69" />
-  <omni_light name="Omni009" pos="89.1245 -8.71688 -28.1258" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
-  <omni_light name="Omni010" pos="82.4724 -8.75185 -28.1258" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
-  <omni_light name="Omni012" pos="127.848 -8.73819 -50.7034" color="0.270588 0.627451 0.87451" att_start_range="1.41" att_end_range="2.5" />
-  <omni_light name="Omni013" pos="114.033 -9.12561 -44.3299" color="0.784314 0.87451 0.890196" att_start_range="0.3914" att_end_range="1.25654" />
+  <omni_light room="sala1" name="Omni009" pos="89.1245 -8.71688 -28.1258" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
+  <omni_light room="sala1" name="Omni010" pos="82.4724 -8.75185 -28.1258" color="0.427451 0.615686 0.956863" att_start_range="0.7614" att_end_range="2.16" />
+  <omni_light room="sala1" name="Omni012" pos="127.848 -8.73819 -50.7034" color="0.270588 0.627451 0.87451" att_start_range="1.41" att_end_range="2.5" />
+  <omni_light room="sala1" name="Omni013" pos="114.033 -9.12561 -44.3299" color="0.784314 0.87451 0.890196" att_start_range="0.3914" att_end_range="1.25654" />
 </lights>

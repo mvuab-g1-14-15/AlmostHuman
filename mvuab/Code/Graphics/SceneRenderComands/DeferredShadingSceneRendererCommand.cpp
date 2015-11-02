@@ -49,9 +49,9 @@ void CDeferredShadingSceneRendererCommand::SetLightsData( CGraphicsManager& GM )
       for ( uint32 i = 0, lCount = lLM->GetLightCount(); i < lCount; ++i )
       {
         CLight* lLight = lLM->GetLight( i );
-
         if( lLight && lLight->IsVisible() )
         {
+          //LOG_INFO_APPLICATION("Rendering light %s of room %s", lLight->GetName().c_str(), lLight->GetRoomName().c_str());
           l_ET->GetEffect()->SetLight( lLight );
           GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique( l_ET, l_Rect, Math::colWHITE, NULL, 0, 0, 1, 1 );
         }
