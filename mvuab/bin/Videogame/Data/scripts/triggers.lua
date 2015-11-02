@@ -78,6 +78,8 @@ g_BaseCargaErrorText = false
 
 g_Door2Unblocked = false
 
+g_DetonarC4Text = false;
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -626,6 +628,7 @@ function Elevator_enter()
         gui_manager:ShowStaticText("TakeElevator")
         g_TakeElevatorText = true
     else
+        g_DetonarC4Text = true
         gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
     end
 end
@@ -638,7 +641,10 @@ function Elevator_exit()
             g_TakeElevatorText = false
         end
     else
-        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+        if g_DetonarC4Text then
+            g_DetonarC4Text = false
+            gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+        end
     end
 end
 
@@ -716,12 +722,14 @@ function UpdateTriggers()
 					gui_manager:ShowStaticText("Block")
 					g_BlockTextActive = true
 				end
-			else
+			elseif g_Player:GetEnergy() > 0 then
 				Door2_exit()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
 				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_sala2")
+            else
+                -- show message that needs energy
 			end
 		end
 	end
