@@ -150,7 +150,7 @@ void CGUIManager::Init()
         else
             LOG_WARNING_APPLICATION( "Error al intentar leer el tag <PointerMouse> del archivo de configuracion GUI: ", mConfigPath.c_str() );*/
 
-        m_bIsOk = m_pTextBox;// && m_PointerMouse;
+        m_bIsOk = m_pTextBox != NULL;// && m_PointerMouse;
     }
 
     //CONSOLA GUI LUA
