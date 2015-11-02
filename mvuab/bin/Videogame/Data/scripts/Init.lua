@@ -105,8 +105,8 @@ function load_gameplay()
 	
 	renderable_objects_manager_characters_sala1 = scene:GetResource("sala1"):GetLayer("solid")
 	
-	camera_manager:GetCamera("Main"):SetZFar(5000.0)
-	camera_manager:GetCamera("FreeCam"):SetZFar(5000.0)
+	camera_manager:GetCamera("Main"):SetZFar(100.0)
+	camera_manager:GetCamera("FreeCam"):SetZFar(100.0)
 	
 	camera_manager:SetCurrentCamera( "fixed_initial_camera" );
 	lCamera = camera_manager:GetCurrentCamera();
