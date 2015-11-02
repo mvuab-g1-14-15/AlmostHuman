@@ -22,24 +22,24 @@ function CHUD:Update()
 end
 
 function CHUD:UpdatePositionPlayer()
-	self.Map:SetPositionPlayer(g_Player:GetPosition())
+	--self.Map:SetPositionPlayer(g_Player:GetPosition())
 end
 
 function CHUD:UpdateYawPlayer()
-	self.Map:SetYawPlayer((-g_Player:GetYaw()+3.1416/2.0))
+	--self.Map:SetYawPlayer((-g_Player:GetYaw()+3.1416/2.0))
 end
 
 function CHUD:UpdatePositionEnemy(name)
 	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
-		self.Map:SetPositionEnemy(name, enemy:GetPosition())
+		--self.Map:SetPositionEnemy(name, enemy:GetPosition())
 	end
 end
 
 function CHUD:UpdateYawEnemy(name)
 	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
-		self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
+		--self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
 	end
 end
 
@@ -79,10 +79,10 @@ function GetMapItemPosition()
 		
 	if doit then
 		doit=false
-		--engine:Trace("eo "..l_UVItemMapPosition.x.." "..l_UVItemMapPosition.y.." "..l_UVItemMapPosition.z)
-		--engine:Trace("eo2 "..l_UVPlayerMapPosition.x.." "..l_UVPlayerMapPosition.y.." "..l_UVPlayerMapPosition.z)
-		--engine:Trace("eo3 "..l_UVMapPosition.x.." "..l_UVMapPosition.y.." "..l_UVMapPosition.z)
-		--engine:Trace("l_Offset "..l_Offset.x.." "..l_Offset.y.." "..l_Offset.z)
+		----engine:Trace("eo "..l_UVItemMapPosition.x.." "..l_UVItemMapPosition.y.." "..l_UVItemMapPosition.z)
+		----engine:Trace("eo2 "..l_UVPlayerMapPosition.x.." "..l_UVPlayerMapPosition.y.." "..l_UVPlayerMapPosition.z)
+		----engine:Trace("eo3 "..l_UVMapPosition.x.." "..l_UVMapPosition.y.." "..l_UVMapPosition.z)
+		----engine:Trace("l_Offset "..l_Offset.x.." "..l_Offset.y.." "..l_Offset.z)
 	end
 	
 	
@@ -95,10 +95,10 @@ function GetMapItemPosition()
 end
 
 function CHUD:AddEnemy( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
-	--engine:Trace("He llegado antes de petar")
-	self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
+	----engine:Trace("He llegado antes de petar")
+	--self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
 end
 
 function CHUD:NormalizePlayerPos(x, z)
-	return self.Map:NormalizePlayerPos(x, z)
+	return --self.Map:NormalizePlayerPos(x, z)
 end

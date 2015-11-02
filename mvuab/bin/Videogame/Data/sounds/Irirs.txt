@@ -13,6 +13,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3006790454	Play_Sala4A			\Iris\Play_Sala4A	
 	3526099323	Play_GP_Agacharse			\Iris\Gameplay\Play_GP_Agacharse	
 	3595090698	Play_Pasillo			\Iris\Play_Pasillo	
+	3621014260	Play_Elevator			\Iris\Play_Elevator	
 	3951885308	Play_GP_Esconderse_Bidones			\Iris\Gameplay\Play_GP_Esconderse_Bidones	
 	4016846353	Play_GP_Disparo_Bloqueado			\Iris\Gameplay\Play_GP_Disparo_Bloqueado	
 	4020926666	Play_GP_Puerta_Bloqueada			\Iris\Gameplay\Play_GP_Puerta_Bloqueada	
@@ -39,4 +40,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	856495406	Sala3B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala3B_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala3B		240403
 	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		247728
 	999865395	Sala2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Sala2_Update_Dialogo\Sala2		68678
+	1052402412	Elevator	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Elevator		421588
 

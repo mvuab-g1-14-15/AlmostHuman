@@ -52,7 +52,7 @@ function CEnemyManager:CreateEnemiesSala2()
 						Vect3f(56.1998, -16.5334, -65.033 )}
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 1.0
@@ -100,7 +100,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = true
 	lInfo.on_dead_code = "local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName);"..
 						 "if closeEnemy ~= nil then "..
@@ -143,7 +143,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 40.0
 	lInfo.time_to_shoot = 1.0
@@ -177,7 +177,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala2"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 2.0
@@ -215,7 +215,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 						Vect3f(54.0, -13.68, 35.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "pasillo"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
 	lInfo.time_to_shoot = 1.0
@@ -255,7 +255,7 @@ function CEnemyManager:CreateEnemiesSala3()
 						Vect3f(39.0, -12.0, 50.0)}
 	lInfo.mesh = "drone"
 	lInfo.room = "sala3"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
 	lInfo.time_to_shoot = 1.0
@@ -304,7 +304,7 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala3"
-	lInfo.use_gizmo = true
+	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
 	lInfo.time_to_shoot = 0.2
@@ -360,7 +360,7 @@ function CEnemyManager:SpawnEnemy( aPos )
 	if lCount < 6 then
 		local lInfo = {}
 		lInfo.name = "Enemy"..id_manager:GetId().."_S4"
-		engine:Trace("Name: "..lInfo.name)
+		--engine:Trace("Name: "..lInfo.name)
 		lInfo.life = 50.0
 		lInfo.damage = 5.0
 		lInfo.radius = 0.4
@@ -401,7 +401,7 @@ function CEnemyManager:ActivateEnemiesSala3()
 end
 
 function CEnemyManager:Reinit( aRoom )
-	engine:Trace("Reinit room "..aRoom)
+	--engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
 		lEnemy:SetOnDead(false)
 		lEnemy:RemoveMesh()
@@ -487,9 +487,9 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
-			lExplosionBoss = CParticle( "boss_explosion_bum", Vect3f(0.0, 0.0, 0.0) )
+			lExplosionBoss = CParticle( "explosion_boss_bom", "boss_explosion_bum", "sala4" )
 			lExplosionBoss:Init(self.Boss:GetPosition())
-			lHumoBoss = CParticle( "boss_explosion_fum", Vect3f(0.0, 0.0, 0.0) )
+			lHumoBoss = CParticle( "explosion_boss_fum", "boss_explosion_fum", "sala4" )
 			lHumoBoss:Init(self.Boss:GetPosition())
 			cinematic_manager:Execute("explotion_boss")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
@@ -617,7 +617,7 @@ end
 
 function CEnemyManager:GetEnemy( aName )
 	for lRoom in pairs (self.Enemy) do
-		if not self.Enemy[lRoom][aName]:IsDeath() then
+		if self.Enemy[lRoom][aName] ~= nil then
 			return self.Enemy[lRoom][aName]
 		end
 	end
@@ -686,7 +686,7 @@ end
 --	l_File = CXMLTreeNode()
 --	Node = CXMLTreeNode()
 --    if not l_File:LoadAndFindNode( filename, "enemies", Node ) then
---        --engine:Trace( "File '"..filename.."' not correctly loaded" )
+--        ----engine:Trace( "File '"..filename.."' not correctly loaded" )
 --    end
 --
 --    if Node:Exists() then
@@ -829,9 +829,9 @@ end
 --    for i = 0, count-1 do
 --		CurrentNode = Node:GetChildren(i)
 --        l_Point = Vect3f(CurrentNode:GetAttributeVect3f( "value", Vect3f( 0.0, -99999999.0, 0.0 ) ))
---		--engine:Trace("Nodo ".. i)
+--		----engine:Trace("Nodo ".. i)
 --        if ( l_Point == Vect3f( 0.0, -99999999.0, 0.0 ) ) then        
---            --engine:Trace( "Point in the route '".. l_Id .."' not correctly loaded.")        
+--            ----engine:Trace( "Point in the route '".. l_Id .."' not correctly loaded.")        
 --        else     
 --            table.insert(l_Route, l_Point)
 --        end
@@ -845,13 +845,13 @@ end
 --    lCoreEnemy = self.CoreEnemy[lType]
 --
 --    if ( lCoreEnemy == nil) then
---        --engine:Trace("Core '".. lType .."' not found")
+--        ----engine:Trace("Core '".. lType .."' not found")
 --    end
 --
 --    lStateMachine = self.StatesMachine[self.CoreEnemy[lType]:GetStateMachineName()]
 --
 --    if ( lStateMachine == nil) then
---        --engine:Trace("State machine for '".. lType .."' not found")
+--        ----engine:Trace("State machine for '".. lType .."' not found")
 --    end
 --	
 --	lEnemy = nil
@@ -864,7 +864,7 @@ end
 --		lEnemy = CEasyEnemyLUA(Node, self.Routes[Node:GetAttributeInt("route", -1)], lStateMachine, lCoreEnemy)	
 --	end
 --	name = Node:GetAttributeString("name", "no_name")
---	--engine:Trace("Enemy: "..name)
+--	----engine:Trace("Enemy: "..name)
 --	self.Enemy[name] = lEnemy
 --	self.ActualEnemy = lEnemy
 --end
@@ -915,7 +915,7 @@ end
 --end
 --
 --function CEnemyManagerLUA:GetCloseEnemyNotSelf(aPos, aName)
---	engine:Trace("Getting close enemy, not self")
+--	--engine:Trace("Getting close enemy, not self")
 --	lDist = 999999.99
 --	lActualDist = 0.0
 --	lEnemy = nil
@@ -958,7 +958,7 @@ end
 --
 --function CEnemyManagerLUA:GenerateEnemy()
 --	local lRoom = "room2"--scene:GetActivateRoom()
---	--engine:Trace("Name room:"..lRoom)
+--	----engine:Trace("Name room:"..lRoom)
 --	local Node = self.ExtraEnemy[lRoom]
 --	if not Node == nil then
 --		self:AddNewEnemy( Node:GetChildren(self.ExtraEnemyCount) )

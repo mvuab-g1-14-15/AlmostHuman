@@ -167,6 +167,7 @@
 			<IncludedEvents>
 				<Event Id="4150758548" Name="Play_Abriendo_Compuertas"/>
 				<Event Id="526096065" Name="Play_Ayer_Tuve_Una"/>
+				<Event Id="3621014260" Name="Play_Elevator"/>
 				<Event Id="3526099323" Name="Play_GP_Agacharse"/>
 				<Event Id="1181951480" Name="Play_GP_Bidon"/>
 				<Event Id="4016846353" Name="Play_GP_Disparo_Bloqueado"/>
@@ -264,6 +265,10 @@
 				<File Id="999865395" Language="SFX">
 					<ShortName>Sala2.wav</ShortName>
 					<Path>SFX\Sala2_E106FFBE.wem</Path>
+				</File>
+				<File Id="1052402412" Language="SFX">
+					<ShortName>Elevator.wav</ShortName>
+					<Path>SFX\Elevator_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

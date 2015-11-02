@@ -29,12 +29,12 @@ function check_next_state()
 	local l_DistanceToPlayer = PlayerDistance(enemy)
 	local l_HearSomething = HearPlayer(enemy)
 	local angle = GetAngleEnemyPlayer(enemy)
-	--engine:Trace("Veo al player "..tostring(l_PlayerInSight))
-	--engine:Trace("Estado actual "..l_CurrentState)
+	----engine:Trace("Veo al player "..tostring(l_PlayerInSight))
+	----engine:Trace("Estado actual "..l_CurrentState)
 	--local l_DistanceToPlayer = PlayerDistance(enemy)
 	
 	if enemy:GetSuspected() then
-		--engine:Trace("Enemy suspected")
+		----engine:Trace("Enemy suspected")
 		l_NextState = "investigate"
 	else
 		l_NextState = "andando"
@@ -101,7 +101,7 @@ end
 function investigate()
 	enemy = enemy_manager:GetActualEnemy()
 	
-	--engine:Trace("Investigate")
+	----engine:Trace("Investigate")
 	
 	if enemy:MoveToPos(enemy:GetSuspectedPosition()) then
 		enemy:SetSuspected(false)
@@ -199,12 +199,12 @@ function perseguir()
 		enemy:SetVelocity(5.0)
 	end
 	if enemy.Alarmado then
-		--engine:Trace("He entrado en Alarmado pos: "..enemy.PositionAlarm:ToString())
+		----engine:Trace("He entrado en Alarmado pos: "..enemy.PositionAlarm:ToString())
 		if enemy:MoveToPos(enemy.PositionAlarm) then
-			engine:Trace("Estoy en la posición")
+			--engine:Trace("Estoy en la posición")
 		end
 	elseif enemy.Suspected then
-		engine:Trace("Moviendose a posicion sospechosa")
+		--engine:Trace("Moviendose a posicion sospechosa")
 		if enemy:MoveToPos(enemy.SuspectedPosition) then
 			enemy.Suspected = false
 		end
