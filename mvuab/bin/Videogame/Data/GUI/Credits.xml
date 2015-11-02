@@ -18,12 +18,12 @@
   </Image>
 
   
-  <Button name="CargarPuntoControl" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
+  <!-- <Button name="CargarPuntoControl" pos="38.00 45.00" height="10.00" width="25.00" visible="true" 
           active="true" texture_normal="Data/textures/GUI/continuegame.jpg"
           texture_over="Data/textures/GUI/continuegame.jpg"
           texture_clicked="Data/textures/GUI/continuegame.jpg"
           texture_deactivated="Data/textures/GUI/continuegame.jpg"
           OnClickedAction="PuntoControl()"
-          OnOverAction="SoundGUI()"/>
+          OnOverAction="SoundGUI()"/> -->
   
 </Windows>

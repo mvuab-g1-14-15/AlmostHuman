@@ -4005,7 +4005,7 @@
     <cinematic_object_key_frame time="66.6333" pos="-341.074 37.1601 39.375" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="66.6667" pos="-341.074 37.1601 39.375" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="moon_space" renderable_objects_manager="moon_space" room="space" active="false" init_keyframe="0.0">
+  <cinematic_object resource="moon_space" renderable_objects_manager="moon_space" room="space" active="false" init_keyframe="0.0" lua_code="gui_manager:ActiveWindows('Credits.xml')" key_action="66.6333">
     <cinematic_object_key_frame time="0.0" pos="-1405.84 277.587 -77.0534" yaw="-1.0169" pitch="0.126818" roll="-0.464639" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-1405.84 277.587 -77.0534" yaw="-1.01524" pitch="0.126818" roll="-0.464639" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0666667" pos="-1405.84 277.587 -77.0534" yaw="-1.01358" pitch="0.126818" roll="-0.464639" scale="1.0 1.0 1.0" />
