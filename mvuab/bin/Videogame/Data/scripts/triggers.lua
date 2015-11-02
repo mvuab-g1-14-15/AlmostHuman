@@ -486,6 +486,9 @@ function SetPropSala4()
 		scene:DesactivateRoom("pasillo")
 		scene:DesactivateRoom("sala3")
 		
+		camera_manager:GetCamera("Main"):SetZFar(600.0)
+		camera_manager:GetCamera("FreeCam"):SetZFar(600.0)
+		
 		g_EnteredSala4 = true
 		--engine:Trace("Setted properties of sala4")
 	end
