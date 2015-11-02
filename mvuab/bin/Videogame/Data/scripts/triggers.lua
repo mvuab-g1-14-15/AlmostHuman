@@ -76,6 +76,8 @@ g_InsideBaseCargaError = false
 
 g_BaseCargaErrorText = false
 
+g_Door2Unblocked = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -525,6 +527,8 @@ end
 function UpdateDLC(text_to_show)
 	g_Player:SetEnergy(100.0)
 	sound_manager:PlayEvent("Play_Sala2", "Logan")
+	g_Player:SetAnimation("stealth")
+	g_Door2Unblocked = true
 end
 
 function ActiveRoom(room)
@@ -694,8 +698,7 @@ function UpdateTriggers()
 	
 	if g_InsideDoor2 then
 		if action_manager:DoAction("Action") then
-			local lNumEnemies = enemy_manager:GetNumEnemy("sala2")
-			if lNumEnemies > 0 then
+			if g_Door2Unblocked then
 				if not g_BlockTextActive then
 					gui_manager:ShowStaticText("Block")
 					g_BlockTextActive = true
