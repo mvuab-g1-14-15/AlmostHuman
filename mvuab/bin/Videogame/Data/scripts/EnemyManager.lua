@@ -414,8 +414,7 @@ function CEnemyManager:Reinit( aRoom )
 		self.Shoots[k]:End()
 	end
 		
-	if aRoom == "sala2" then
-		cinematic_manager:ReloadCinematic("data/sala2/cinematics.xml")
+	if aRoom == "sala2" then		
 		self:CreateEnemiesSala2()
 		gui_manager:ShowStaticText("Block", true)
 	end
