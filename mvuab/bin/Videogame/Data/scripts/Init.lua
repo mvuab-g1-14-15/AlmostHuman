@@ -20,7 +20,7 @@ g_PlayerCinematic = nil
 g_GameIsOn		= false;
 
 function load_basics()
-	engine:Trace("Init the load_basics()")
+	--engine:Trace("Init the load_basics()")
 	-- basic loads
 
 	scene:ActivateRoom("sala1")
@@ -32,22 +32,22 @@ function load_basics()
 	scene:LoadRoom("sala4")	
 	scene:LoadRoom("space")
 	
-	--scene:DesactivateRoom("sala2")
-	--scene:DesactivateRoom("pasillo")
-	--scene:DesactivateRoom("sala3")
-	--scene:DesactivateRoom("elevator")	
-	--scene:DesactivateRoom("sala4")
-	--scene:DesactivateRoom("space")	
+	scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("pasillo")
+	scene:DesactivateRoom("sala3")
+	scene:DesactivateRoom("elevator")	
+	scene:DesactivateRoom("sala4")
+	scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
 	PlaySoundStaticElement()
 		
-	engine:Trace("Finish the load_basics()")
+	--engine:Trace("Finish the load_basics()")
 end
 
 function load_gameplay()
-	engine:Trace("Init the load_gameplay()")
+	--engine:Trace("Init the load_gameplay()")
 	
 	--Profiler entries
 	--profiler = CProfiler()
@@ -78,7 +78,7 @@ function load_gameplay()
 	--Load Ambient
 	sound_manager:PlayEvent("Play_Main_Theme", "Ambient" )
 	
-	engine:Trace("Finish the load_gameplay()")
+	--engine:Trace("Finish the load_gameplay()")
 	
 	--Load Assembly Machine
 	sound_manager:PlayEvent("Play_Machine_Assembly", "Assembly_Machine1_2")
@@ -105,8 +105,8 @@ function load_gameplay()
 	
 	renderable_objects_manager_characters_sala1 = scene:GetResource("sala1"):GetLayer("solid")
 	
-	camera_manager:GetCamera("Main"):SetZFar(5000.0)
-	camera_manager:GetCamera("FreeCam"):SetZFar(5000.0)
+	camera_manager:GetCamera("Main"):SetZFar(100.0)
+	camera_manager:GetCamera("FreeCam"):SetZFar(100.0)
 	
 	camera_manager:SetCurrentCamera( "fixed_initial_camera" );
 	lCamera = camera_manager:GetCurrentCamera();
@@ -235,8 +235,7 @@ function update_gameplay()
 			if g_Player:GetIsCrouch() then
 				if action_manager:DoAction("Action") then
 					g_bPressedRoom1Button = true
-					cinematic_manager:Execute("rejilla")
-					physic_manager:ReleasePhysicActor(physic_manager:GetActor("sala1DoorEscenario"))	
+					cinematic_manager:Execute("rejilla")					
 				end
 			end
 		end	
@@ -296,9 +295,9 @@ function update_gameplay()
 		UpdateVariables(dt)
 	end
 	if g_bInBarrel then
-		--engine:Trace("Next to barrel "..g_BarrelName)
+		----engine:Trace("Next to barrel "..g_BarrelName)
 		if action_manager:DoAction("EnterBarrel") then
-			--engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
+			----engine:Trace("Entered in barrel!!!!!  "..g_BarrelName)
 			lBarrel = g_Barrels[g_BarrelName]
 			lBarrel:SetStateInside()
 			g_bInBarrel = false

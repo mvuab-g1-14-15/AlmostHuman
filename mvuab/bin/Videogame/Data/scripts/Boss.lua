@@ -39,6 +39,8 @@ function CBoss:__init()
 	self.RenderableObject:SetScale( Vect3f(0.3) )
 	self.RenderableObject:MakeTransform()
 	
+	self.RenderableObject:ChangeVisibility(true)
+	
 	self.RenderableObject:SetVelocity( 0.6 )
 	self:SetAnimation("walk")
 	
@@ -105,6 +107,7 @@ function CBoss:Update()
 				else
 					self.ArrivedNear = true
 					self:SetAnimation("attack")
+					sound_manager:PlayEvent("Play_Musica_Boss", "Ambient")
 				end
 			end
 		else
@@ -128,7 +131,7 @@ function CBoss:Update()
 		self.lParticle2:Show();
 		self.lParticle3:Show();
 		--self:SetAnimation("idle");
-		engine:TraceOnce("Boss stunned!")
+		--engine:TraceOnce("Boss stunned!")
 	end
 	
 	self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004")              );
@@ -152,7 +155,7 @@ end
 
 function CBoss:AddDamage(aValue)
 	self.Life = self.Life - aValue
-	engine:TraceOnce("Damage to boss. Current life "..self.Life)
+	--engine:TraceOnce("Damage to boss. Current life "..self.Life)
 end
 
 function CBoss:IsStunned()

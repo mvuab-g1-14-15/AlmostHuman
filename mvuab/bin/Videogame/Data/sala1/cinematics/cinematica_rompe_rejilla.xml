@@ -66,7 +66,7 @@
     <cinematic_object_key_frame time="4.83333" pos="111.928 -20.2434 -44.5382" yaw="-0.449769" pitch="0.31953" roll="-3.03819" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="5.0" pos="111.874 -22.4931 -44.5466" yaw="-0.442361" pitch="0.286886" roll="3.06686" scale="1.0 1.0 1.0" />
   </cinematic_object>
-  <cinematic_object resource="Rejilla_frag_002_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_002">
+  <cinematic_object resource="Rejilla_frag_002_sala1" room="sala1" renderable_objects_manager="Rejilla_frag_002" lua_code="physic_manager:ReleasePhysicActor(physic_manager:GetActor('sala1DoorEscenario'))" key_action="4.9">
     <cinematic_object_key_frame time="0.0" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.166667" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.333333" pos="113.124 -8.82694 -44.6023" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

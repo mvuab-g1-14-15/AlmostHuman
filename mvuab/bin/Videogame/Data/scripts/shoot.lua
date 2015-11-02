@@ -33,7 +33,7 @@ function CShootLUA:Update()
 		hit_info = physic_manager:RaycastCollisionGroup( self.Position, self.Direction, 0xffffff, 200.0 )
 		
 		local lDistanceInitial = self.InitialPosition:Distance(lNewPosition)
-		--engine:Trace("Distancia que ha recorrido: "..lDistanceInitial)
+		----engine:Trace("Distancia que ha recorrido: "..lDistanceInitial)
 		if not (hit_info.Distance == 0.0) then
 			lCollisionPoint = Vect3f(hit_info.CollisionPoint)
 			lDistance = lCollisionPoint:Distance( lNewPosition )
