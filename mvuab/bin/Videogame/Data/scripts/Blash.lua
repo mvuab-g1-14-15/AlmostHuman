@@ -25,7 +25,7 @@ end
 
 function CBlash:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
-		--engine:Trace("Blash update ")
+		----engine:Trace("Blash update ")
 		self.BillboardBlash:ChangePosition( aPosition )
 		if countdowntimer_manager:isTimerFinish(self.TimerName) then
 			self:End()

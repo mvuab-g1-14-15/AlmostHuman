@@ -28,7 +28,7 @@ end
 function CBarrel:Destroy()
 	physic_manager:ReleasePhysicActor(self.Actor)
 	renderable_objects_manager_characters:RemoveResource(self.Name)
-	--engine:Trace("CBarrel: " .. self.Name .. " destroyed")
+	----engine:Trace("CBarrel: " .. self.Name .. " destroyed")
 end
 
 function CBarrel:RestoreBarrel()
@@ -40,7 +40,7 @@ function CBarrel:RestoreBarrel()
 end
 
 function CBarrel:ExitBarrel( aPos )
-	--engine:Trace("He pasado por aqui: "..aPos:ToString())
+	----engine:Trace("He pasado por aqui: "..aPos:ToString())
 	final_pos = aPos;
 	final_pos.y = final_pos.y + self.Height * 0.3
 	self.Pos = final_pos
