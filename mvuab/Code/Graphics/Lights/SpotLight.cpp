@@ -36,21 +36,21 @@ CSpotLight::CSpotLight( CXMLTreeNode node )
     , m_FallOff( Math::Utils::Deg2Rad( node.GetAttribute<float>( "fall_off", 0 )))
 {
     SetType( CLight::SPOT );
-    CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
-    if( lBillboardCore  )
-    {
-      mBillboard = new CBillboardInstance();
-      mBillboard->ChangePosition( m_Position );
-      lBillboardCore->AddInstance( mBillboard );
-    }
-
-    lBillboardCore = BillboardMan->GetResource("LightTarget");
-    if( lBillboardCore  )
-    {
-      mLookAtBillboard = new CBillboardInstance();
-      mLookAtBillboard->ChangePosition( mLookAt );
-      lBillboardCore->AddInstance( mLookAtBillboard );
-    }
+//     CBillboardCore* lBillboardCore = BillboardMan->GetResource("SpotLight");
+//     if( lBillboardCore  )
+//     {
+//       mBillboard = new CBillboardInstance();
+//       mBillboard->ChangePosition( m_Position );
+//       lBillboardCore->AddInstance( mBillboard );
+//     }
+// 
+//     lBillboardCore = BillboardMan->GetResource("LightTarget");
+//     if( lBillboardCore  )
+//     {
+//       mLookAtBillboard = new CBillboardInstance();
+//       mLookAtBillboard->ChangePosition( mLookAt );
+//       lBillboardCore->AddInstance( mLookAtBillboard );
+//     }
 }
 
 void CSpotLight::SetFallOff( const float FallOff )
