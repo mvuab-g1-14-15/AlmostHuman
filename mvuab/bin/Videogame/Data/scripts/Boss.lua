@@ -58,9 +58,9 @@ function CBoss:__init()
 						  , Vect3f(-180.0, 21.0, 54.0)
 						  , Vect3f(-180.0, 21.0, 66.0)}
 	
-	self.AttackingNear = true
+	self.AttackingNear   = true
 	self.AttackingMedium = false
-	self.AttackingFar = false
+	self.AttackingFar    = false
 	
 	self.Counter = 0
 	
@@ -74,9 +74,9 @@ function CBoss:__init()
 	
 	self.ArrivedNear = false
 	
-	self.lParticle1 = CParticle( self.Name.."particle_stun1", "steam_up", "core" );
-	self.lParticle2 = CParticle( self.Name.."particle_stun2", "steam_up", "core" );
-	self.lParticle3 = CParticle( self.Name.."particle_stun3", "steam_up", "core" );
+	self.lParticle1 = CParticle( self.Name.."particle_stun1", "stunned", "core" );
+	self.lParticle2 = CParticle( self.Name.."particle_stun2", "stunned", "core" );
+	self.lParticle3 = CParticle( self.Name.."particle_stun3", "stunned", "core" );
 	
 	self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub004")              );
 	self.lParticle2:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));

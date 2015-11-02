@@ -56,6 +56,11 @@
 		<cube_emitter file="sparks_emitter_4.xml"/>
 	</particle_system_core>
 	
+	<particle_system_core name="stunned" sound="true">
+		<cube_emitter file="steam_up_slow_stunned.xml"/>
+		<cube_emitter file="ray_emitter_stunned.xml"/>
+	</particle_system_core>
+	
 	<particle_system_core name="sparks_inter" sound="true">
 		<cube_emitter file="sparks_emitter_1.xml"/>
 	</particle_system_core>
@@ -70,11 +75,21 @@
 		<cube_emitter file="blaster_emitter.xml"/>
 	</particle_system_core>
     
-    <particle_system_core name="explosion">
+    <particle_system_core name="explosion" delay_in="4.7">
 		<cube_emitter file="explosion_1.xml"/>
         <cube_emitter file="explosion_2.xml"/>
         <cube_emitter file="explosion_3.xml"/>
         <cube_emitter file="explosion_4.xml"/>
 	</particle_system_core>
+	
+	 <particle_system_core name="boss_explosion_bum">
+		<cube_emitter file="boss_explosion_bum.xml"/>   
+	</particle_system_core>
+	
+	<particle_system_core name="boss_explosion_fum" delay_in="1.2">
+		<cube_emitter file="boss_explosion_fum.xml"/>
+	</particle_system_core>
+	
+	
 	
 </particles_systems>
