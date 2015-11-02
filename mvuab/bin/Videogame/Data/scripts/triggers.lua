@@ -650,6 +650,7 @@ end
 
 function Final_enter()
 	scene:ActivateRoom("space")
+    scene:SetCurrentRoomName("space")
 	cinematic_manager:Execute("FinalGame")
 	sound_manager:PlayEvent("Stop_Musica_Boss", "Ambient")
 	sound_manager:PlayEvent("Play_Sala4B", "Logan")
