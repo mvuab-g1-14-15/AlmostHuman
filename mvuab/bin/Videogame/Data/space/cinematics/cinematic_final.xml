@@ -1,5 +1,5 @@
 <cinematic>	
-	<set_transform name="Logan" room="elevator" pos="0 0 0" yaw="0.0" pitch="-1.5708" roll="1.5708" size="1.0 1.0 1.0" time="0.0001"/>
+	<set_transform name="Player" room="elevator" pos="0 0 0" yaw="0.0" pitch="-1.5708" roll="1.5708" size="1.0 1.0 1.0" time="0.0001"/>
 	<set_active name="logan" resource_id_file="Data/space/cinematics/player_element.xml" active="false" time="0.0001"/>
 	<set_camera name="CameraCinematicaFinal1" name_camera="camera_cinematica_final" active="true" time="0.00001" blocker="true" />
 	<play_animation name="Cylinder001_space" animated="true" room="space"  time="0.00001" animation="logan_cinem_final" />	
