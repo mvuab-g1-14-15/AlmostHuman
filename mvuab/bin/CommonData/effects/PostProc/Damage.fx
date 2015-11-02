@@ -2,17 +2,14 @@
 #include "../samplers.fxh"
 
 
-float StartRange = 0.75;
-float EndRange   = 1.00;
-  
+float DeadRange = 30;
 float4 DamagePS( in float2 UV : TEXCOORD0 ) : COLOR
-{
-	//1.0 - saturate((g_Life - StartRange)/( EndRange-StartRange));
-	return tex2D(S0LinearSampler, UV);
-	
-	//float4 lColor = tex2D(S0LinearSampler, UV);
-	//float lColorBandW = ( lColor.r + lColor.g + lColor.b ) / 3.0;
-	//return float4( 0.4, lColorBandW, lColorBandW, 1 ) ;
+{   
+	float4 lFullLife = tex2D(S0LinearSampler, UV);
+	float lColorDead = ( lFullLife.r + lFullLife.g + lFullLife.b ) / 3.0;
+    float pFullLife = saturate( smoothstep( 0, DeadRange, g_Life ) );
+    float4 lColorBandW = ( 1- pFullLife ) * lColorDead +  pFullLife * lFullLife;
+	return lColorBandW;
 }
 
 technique TECHNIQUE_NAME

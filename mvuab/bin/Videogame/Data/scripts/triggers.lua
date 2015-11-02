@@ -621,17 +621,25 @@ function PuntoDetonacion_exit()
 end
 
 function Elevator_enter()
-	g_InsideElevator = true
-	gui_manager:ShowStaticText("TakeElevator")
-	g_TakeElevatorText = true
+    if g_ExplotionDone then
+        g_InsideElevator = true
+        gui_manager:ShowStaticText("TakeElevator")
+        g_TakeElevatorText = true
+    else
+        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+    end
 end
 
 function Elevator_exit()
-	g_InsideElevator = false
-	if g_TakeElevatorText then
-		gui_manager:ShowStaticText("TakeElevator")
-		g_TakeElevatorText = false
-	end
+    if g_ExplotionDone then
+        g_InsideElevator = false
+        if g_TakeElevatorText then
+            gui_manager:ShowStaticText("TakeElevator")
+            g_TakeElevatorText = false
+        end
+    else
+        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+    end
 end
 
 function UpdateDLC_enter()
@@ -650,6 +658,7 @@ end
 
 function Final_enter()
 	scene:ActivateRoom("space")
+    scene:SetCurrentRoomName("space")
 	cinematic_manager:Execute("FinalGame")
 	sound_manager:PlayEvent("Stop_Musica_Boss", "Ambient")
 	sound_manager:PlayEvent("Play_Sala4B", "Logan")

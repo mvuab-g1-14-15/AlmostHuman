@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Language id="castellano">
-	<literal id="HiWorld" 		font="xfiles"  color="0.5 0.1 0.1 1.0" value="Hola Mundo"/>
-	<literal id="Exit"     		font="xfiles"  color="0.1 0.1 0.1 1.0" value="Salir"/>
-	<literal id="PickUp"   		font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press E to grab the item"/>
-	<literal id="puertaBruja"   font="xfiles"  color="0.1 0.1 0.1 1.0" value="The door has opened, you can now advance to the next level"/>
-	<literal id="textoItem"		font="xfiles"  color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
-	<literal id="textoPuerta"   font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
-	<literal id="textoCinematic"	font="xfiles"  color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
-	<literal id="FPS"			font="xfiles"  color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
-	<literal id="ButtonEnergy"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para cargar energia"/>
-	<literal id="AnyKey"			font="Titania"  color="0.0 0.0 0.0 1.0" value="Pulsa ESPACIO para empezar"/>
-	<literal id="HideInBarrel"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para esconderte en el barril"/>
-	<literal id="StealthAttack"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa E para ataque sigiloso"/>
-	<literal id="CambiarSala"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Press R to change room"/>
-	<literal id="OpenDoor"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para abrir puerta"/>
-	<literal id="Block"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Bloqueado"/>
-	<literal id="ColocarC4"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para plantar el C4"/>
-	<literal id="DetonarC4"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para detonar el C4"/>
-	<literal id="FaltanC4"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Debes plantar los explosivos"/>
-	<literal id="C4Colocada"			font="Titania"  color="1.0 1.0 1.0 1.0" value="C4 plantado"/>
-	<literal id="Alarm"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Alarm activada"/>
-	<literal id="RomperRejilla"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para romper la rejilla"/>
-	<literal id="Hackear"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para hackear la nave"/>
-	<literal id="TakeC4"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para coger el C4"/>
-	<literal id="UpdateDLC"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para actualizar el brazo"/>
-	<literal id="TakeElevator"			font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para llamar al ascensor"/>
-	<literal id="Documento1Linea01"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba1"/>
-	<literal id="Documento1Linea02"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba2"/>
-	<literal id="Documento1Linea03"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba3"/>
-	<literal id="Documento1Linea11"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba4"/>
-	<literal id="Documento1Linea12"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba5"/>
-	<literal id="Documento1Linea13"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba6"/>
-	<literal id="Documento1Linea21"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba7"/>
-	<literal id="Documento1Linea22"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba8"/>
-	<literal id="Documento1Linea23"			font="xfiles"  color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba9"/>
+    <literal id="HiWorld"           font="xfiles"   color="0.5 0.1 0.1 1.0" value="Hola Mundo"/>
+    <literal id="Exit"              font="xfiles"   color="0.1 0.1 0.1 1.0" value="Salir"/>
+    <literal id="PickUp"            font="xfiles"   color="0.1 0.1 0.1 1.0" value="Press E to grab the item"/>
+    <literal id="puertaBruja"       font="xfiles"   color="0.1 0.1 0.1 1.0" value="The door has opened, you can now advance to the next level"/>
+    <literal id="textoItem"         font="xfiles"   color="0.1 0.1 0.1 1.0" value="You need more items to go through this door"/>
+    <literal id="textoPuerta"       font="xfiles"   color="0.1 0.1 0.1 1.0" value="Press E to go through this door"/>
+    <literal id="textoCinematic"    font="xfiles"   color="0.1 0.1 0.1 1.0" value="Press F repeatedly"/>
+    <literal id="FPS"               font="xfiles"   color="0.9 0.1 0.1 1.0" value="Frames Per Second"/>
+    <literal id="ButtonEnergy"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para cargar energia"/>
+    <literal id="AnyKey"            font="Titania"  color="0.0 0.0 0.0 1.0" value="Pulsa ESPACIO para empezar"/>
+    <literal id="HideInBarrel"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para esconderte en el barril"/>
+    <literal id="StealthAttack"     font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa E para ataque sigiloso"/>
+    <literal id="CambiarSala"       font="Titania"  color="1.0 1.0 1.0 1.0" value="Press R to change room"/>
+    <literal id="OpenDoor"          font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para abrir puerta"/>
+    <literal id="Block"             font="Titania"  color="1.0 1.0 1.0 1.0" value="Bloqueado"/>
+    <literal id="ColocarC4"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para plantar el C4"/>
+    <literal id="DetonarC4"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para detonar el C4"/>
+    <literal id="C4NoDetonado"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Tienes que volver y detonar el C4"/>
+    <literal id="FaltanC4"          font="Titania"  color="1.0 1.0 1.0 1.0" value="Debes plantar los explosivos"/>
+    <literal id="C4Colocada"        font="Titania"  color="1.0 1.0 1.0 1.0" value="C4 plantado"/>
+    <literal id="Alarm"             font="Titania"  color="1.0 1.0 1.0 1.0" value="Alarm activada"/>
+    <literal id="RomperRejilla"     font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para romper la rejilla"/>
+    <literal id="Hackear"           font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para hackear la nave"/>
+    <literal id="TakeC4"            font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para coger el C4"/>
+    <literal id="UpdateDLC"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para actualizar el brazo"/>
+    <literal id="TakeElevator"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para llamar al ascensor"/>
+    <literal id="Documento1Linea01" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba1"/>
+    <literal id="Documento1Linea02" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba2"/>
+    <literal id="Documento1Linea03" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba3"/>
+    <literal id="Documento1Linea11" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba4"/>
+    <literal id="Documento1Linea12" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba5"/>
+    <literal id="Documento1Linea13" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba6"/>
+    <literal id="Documento1Linea21" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba7"/>
+    <literal id="Documento1Linea22" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba8"/>
+    <literal id="Documento1Linea23" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba9"/>
 </Language>
