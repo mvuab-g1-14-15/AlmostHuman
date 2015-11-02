@@ -44,7 +44,7 @@ function CHUD:UpdateYawEnemy(name)
 end
 
 function CHUD:ChangeCurrentMap()
-	self.Map = gui_manager:GetCurrentMap()
+	--self.Map = gui_manager:GetCurrentMap()
 end
 
 local doit=true
