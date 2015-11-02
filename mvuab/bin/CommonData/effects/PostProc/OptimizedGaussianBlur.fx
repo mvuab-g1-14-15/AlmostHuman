@@ -2,6 +2,9 @@
 #include "../samplers.fxh"
 #include "../globals.fxh"
 
+int blurSizeY = 5;
+int blurSizeX = 5;
+
 // Blurs using a 5x5 filter kernel
 float4 BlurFunction5x5(float2 UV : TEXCOORD) : COLOR0
 {
@@ -100,9 +103,6 @@ float4 BlurFunction7x7(float2 UV : TEXCOORD) : COLOR0
     tex2D(S0LinearSampler, UV + float2(3.0f / g_TextureWidth,      3.0f / g_TextureHeight))
   ) / 49;
 }
-
-int blurSizeY = 5;
-int blurSizeX = 5;
 
 float4 PS_BlurHorizontal( float2 UV : TEXCOORD ) : COLOR0
 {
