@@ -1,3 +1,4 @@
 <elements>
+	<element name="Rejilla_sala1" room="sala1"/>
 	<element name="Player" room="core" layer="characters"/>
 </elements>
