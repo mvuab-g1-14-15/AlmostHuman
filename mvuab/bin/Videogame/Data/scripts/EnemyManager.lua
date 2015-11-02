@@ -487,6 +487,10 @@ function CEnemyManager:Update()
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
 			--execute dead code
+			lExplosionBoss = CParticle( "boss_explosion_bum", Vect3f(0.0, 0.0, 0.0) )
+			lExplosionBoss:Init(self.Boss:GetPosition())
+			lHumoBoss = CParticle( "boss_explosion_fum", Vect3f(0.0, 0.0, 0.0) )
+			lHumoBoss:Init(self.Boss:GetPosition())
 			cinematic_manager:Execute("explotion_boss")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 			trigger_manager:GetTriggerByName("final"):SetActive(true)
