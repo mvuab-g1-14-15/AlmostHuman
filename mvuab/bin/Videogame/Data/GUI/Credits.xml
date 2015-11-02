@@ -8,7 +8,7 @@
     <texture name="img1" name_texture="Data/textures/GUI/Almost_human.jpg"/>
   </Image>-->
 
-  <Image name="game_over" pos="0.00 0.00" height="100.00" width="100.00" visible="true" active="true"
+  <Image name="game_over" pos="50.00 50.00" height="100.00" width="100.00" visible="true" active="true"
       default="0" 
       OnLoadValue=""
       OnSaveValue=""
