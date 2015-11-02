@@ -563,7 +563,6 @@ function CreateBoss()
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
 	trigger_manager:GetTriggerByName("final"):SetActive(false)
-	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(true)
 end
 
 function PuntoExplosivo1_enter()

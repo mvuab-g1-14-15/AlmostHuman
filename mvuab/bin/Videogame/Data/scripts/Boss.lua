@@ -39,6 +39,8 @@ function CBoss:__init()
 	self.RenderableObject:SetScale( Vect3f(0.3) )
 	self.RenderableObject:MakeTransform()
 	
+	self.RenderableObject:ChangeVisibility(true)
+	
 	self.RenderableObject:SetVelocity( 0.6 )
 	self:SetAnimation("walk")
 	

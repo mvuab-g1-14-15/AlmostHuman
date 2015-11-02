@@ -52,6 +52,8 @@ function CEnemy:__init( aInfo )
 	self.RenderableObject:SetYaw( -self.CharacterController:GetYaw() + g_HalfPi )
 	self.RenderableObject:MakeTransform()
 	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)
+	
+	self.RenderableObject:ChangeVisibility(true)
 
 	self.UseGizmo = aInfo.use_gizmo
 	if self.UseGizmo then

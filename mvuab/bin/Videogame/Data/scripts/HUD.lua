@@ -22,24 +22,24 @@ function CHUD:Update()
 end
 
 function CHUD:UpdatePositionPlayer()
-	self.Map:SetPositionPlayer(g_Player:GetPosition())
+	--self.Map:SetPositionPlayer(g_Player:GetPosition())
 end
 
 function CHUD:UpdateYawPlayer()
-	self.Map:SetYawPlayer((-g_Player:GetYaw()+3.1416/2.0))
+	--self.Map:SetYawPlayer((-g_Player:GetYaw()+3.1416/2.0))
 end
 
 function CHUD:UpdatePositionEnemy(name)
 	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
-		self.Map:SetPositionEnemy(name, enemy:GetPosition())
+		--self.Map:SetPositionEnemy(name, enemy:GetPosition())
 	end
 end
 
 function CHUD:UpdateYawEnemy(name)
 	enemy = enemy_manager:GetResource(name)
 	if enemy ~= nil then
-		self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
+		--self.Map:SetYawEnemy(name, enemy:GetCharacterController():GetYaw())
 	end
 end
 
@@ -96,9 +96,9 @@ end
 
 function CHUD:AddEnemy( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
 	----engine:Trace("He llegado antes de petar")
-	self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
+	--self.Map:AddEnemyLUA( aName, aTexture, aPosInMap3d, aposInMap, aWidth, aHeight, aYaw, aPositionScriptComplete, aOrientationScriptComplete )
 end
 
 function CHUD:NormalizePlayerPos(x, z)
-	return self.Map:NormalizePlayerPos(x, z)
+	return --self.Map:NormalizePlayerPos(x, z)
 end
