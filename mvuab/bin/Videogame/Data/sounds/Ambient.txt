@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	74299344	Play_Musica_Boss			\Music & Ambients\Play_Musica_Boss	
+	106104822	Stop_Musica_Boss			\Music & Ambients\Stop_Musica_Boss	
 	339442378	Play_Panico			\Music & Ambients\Play_Panico	
 	1203582209	Play_Long_Ambient			\Music & Ambients\Play_Long_Ambient	
 	1704638915	Play_Ambient_Pasillo			\Music & Ambients\Play_Ambient_Pasillo	

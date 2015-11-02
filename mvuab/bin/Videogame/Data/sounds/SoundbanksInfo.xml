@@ -22,6 +22,7 @@
 				<Event Id="3568813383" Name="Play_Main_Theme"/>
 				<Event Id="74299344" Name="Play_Musica_Boss"/>
 				<Event Id="339442378" Name="Play_Panico"/>
+				<Event Id="106104822" Name="Stop_Musica_Boss"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="84672891" Language="SFX">
