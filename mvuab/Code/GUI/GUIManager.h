@@ -134,6 +134,8 @@ public:
   void SetCurrentMap( const std::string& aName);
   CMap* GetCurrentMap();
 
+  void HideAllText();
+
   //-----------------------------------------------------------------------------------------------------------//
 
 private:

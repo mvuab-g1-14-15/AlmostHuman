@@ -77,6 +77,7 @@ void OnOptionRenderCmdClicked()
 void OnOptionReloadLua()
 {
     ScriptMInstance->Reload();
+    GUIInstance->HideAllText();
 }
 
 void OnOptionReloadGui()
