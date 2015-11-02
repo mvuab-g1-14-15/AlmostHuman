@@ -869,14 +869,8 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor( const Math::Vect3f _vPosR
     //closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, 0xffffffff, NX_MAX_F32, 0xffffffff, NULL, NULL );
     NxReal l_Distance = ( NxReal ) _uiMaxDistance;
     // --- Jordi : Provisional. Cal deixar aquesta linia i modificar la col·lisió de càmera
-	
-	int mask = 1 << ECG_PLAYER;
-	mask |= 1 << ECG_DYNAMIC_OBJECTS;
-	mask |= 1 << ECG_STATIC_OBJECTS;
-	mask |= 1 << ECG_ESCENE;
-	mask |= 1 << ECG_ENEMY;
-	mask |= 1 << ECG_LIMITS;
-    closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, mask, l_Distance );
+
+    closestShape = m_pScene->raycastClosestShape( ray, NX_ALL_SHAPES, hit, _uiImpactMask, l_Distance );
 
     if ( !closestShape )
     {
