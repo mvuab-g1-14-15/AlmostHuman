@@ -20,6 +20,7 @@ function CPlayerController:__init()
 	
 	self.InitialYaw = 0.0
 	self.Yaw = 0.0
+	self.Pitch = 0.0
 	
 	--States
 	self.Run = false
@@ -59,6 +60,8 @@ function CPlayerController:__init()
 		physic_manager:AddController("Player", self.Radius, self.Height * 0.5, math.cos(g_HalfPi * 0.5), 0.01, 0.5, self.Position, CollisionGroup.ECG_PLAYER.value, -350.0)
 	end
 	self.CharacterController = physic_manager:GetController("Player")
+	
+	self.PlayerCamera = camera_manager:GetCamera("Main")
 	----engine:Trace("Player Controller initialized")
 end
 
@@ -70,14 +73,13 @@ function CPlayerController:Update()
         dt = 1.0 / self.fps
     end
 
-	--local l_PlayerCamera = camera_manager:GetCamera("Main")
-	local l_PlayerCamera = camera_manager:GetCurrentCamera()
-	self:CalculateDirectionVectors(l_PlayerCamera)
-	self:UpdateCamera(l_PlayerCamera, dt)
+	self:CalculateDirectionVectors(self.PlayerCamera)
+	self:UpdateCamera(self.PlayerCamera, dt)
 	
 	--Yaw smooth movement
-	local l_CameraYaw = l_PlayerCamera:GetYaw()
+	local l_CameraYaw = self.PlayerCamera:GetYaw()
 	self.Yaw = l_CameraYaw
+	self.Pitch = self.PlayerCamera:GetPitch()
 	local l_Yaw = self.CharacterController:GetYaw()
 	
 	
@@ -115,7 +117,7 @@ function CPlayerController:Update()
 	end
 
 	--Set Listenr Postion 
-	sound_manager:SetListenerPosition(self:GetPosition(),l_PlayerCamera:GetDirection(),l_PlayerCamera:GetVecUp());
+	sound_manager:SetListenerPosition(self:GetPosition(),self.PlayerCamera:GetDirection(),self.PlayerCamera:GetVecUp());
 	local l_Speed = self.Speed
 	if self.Crouch then
 		l_Speed = l_Speed / 3.0
@@ -181,7 +183,7 @@ function CPlayerController:Update()
 	end
 	
 	if not self.CharacterController:IsJumping() then
-		local l_Up = l_PlayerCamera:GetVecUp()
+		local l_Up = self.PlayerCamera:GetVecUp()
 		
 		local l_ShakeVerticalSpeed = self.ShakeHorizontalSpeed
 		local l_ShakeHorizontalSpeed = self.ShakeHorizontalSpeed
@@ -213,7 +215,7 @@ function CPlayerController:Update()
 	l_CameraPosition = l_CameraPosition + self.Forward * self.Radius
 	
 	--l_CameraPosition = l_CameraPosition - self.Forward
-	l_PlayerCamera:SetPosition(l_CameraPosition)
+	self.PlayerCamera:SetPosition(l_CameraPosition)
 	
 	self:MakeGizmo()
 end
@@ -246,6 +248,17 @@ end
 
 function CPlayerController:GetYaw()
 	return self.Yaw
+end
+
+function CPlayerController:SetYaw(aYaw)
+	self.Yaw = aYaw
+	self.PlayerCamera:SetYaw(aYaw)
+	self.CharacterController:SetYaw(aYaw)
+end
+
+function CPlayerController:SetPitch(aPitch)
+	self.Pitch = Pitch
+	self.PlayerCamera:SetPitch(aPitch)
 end
 
 function CPlayerController:UpdateTimers(dt)
