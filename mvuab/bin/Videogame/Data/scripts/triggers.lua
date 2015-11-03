@@ -78,7 +78,11 @@ g_BaseCargaErrorText = false
 
 g_Door2Unblocked = false
 
-g_DetonarC4Text = false;
+g_DetonarC4Text = false
+
+g_BrazoOperativo = false
+
+g_CargandoEnergia = false
 
 enemigosVivos = 1
 function OnEnter()
@@ -425,7 +429,7 @@ function SetPropSala2()
 		
 		scene:SetCurrentRoomName("sala2")
 		g_Player:SetRoom("sala2")
-		g_Player:SetCheckpoint("sala2", Vect3f( 76.51, -10.60, -31.10 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala2", Vect3f( 76.51, -10.60, -31.10 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		scene:DesactivateRoom("sala1")
 		
@@ -443,7 +447,7 @@ function SetPropPasillo()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("pasillo")
 		g_Player:SetRoom("pasillo")
-		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		cinematic_manager:Execute("CloseDoor")
 		--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, 0, 0))
 		scene:DesactivateRoom("sala2")
@@ -461,7 +465,7 @@ function SetPropSala3()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala3")
 		g_Player:SetRoom("sala3")
-		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
 		cinematic_manager:Execute("CloseDoorPasillo")
@@ -483,7 +487,7 @@ function SetPropSala4()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
-		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		scene:DesactivateRoom("pasillo")
 		scene:DesactivateRoom("sala3")
@@ -572,6 +576,7 @@ function CreateBoss()
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
 	trigger_manager:GetTriggerByName("final"):SetActive(false)
+	g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 end
 
 function PuntoExplosivo1_enter()
@@ -623,29 +628,25 @@ function PuntoDetonacion_exit()
 end
 
 function Elevator_enter()
-    if g_ExplotionDone then
-        g_InsideElevator = true
-        gui_manager:ShowStaticText("TakeElevator")
-        g_TakeElevatorText = true
-    else
-        g_DetonarC4Text = true
-        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
-    end
+	g_InsideElevator = true
+	gui_manager:ShowStaticText("TakeElevator")
+	g_TakeElevatorText = true
+	if not g_ExplotionDone then
+		gui_manager:ShowStaticText("C4NoDetonado")
+		g_DetonarC4Text = true
+	end
 end
 
 function Elevator_exit()
-    if g_ExplotionDone then
-        g_InsideElevator = false
-        if g_TakeElevatorText then
-            gui_manager:ShowStaticText("TakeElevator")
-            g_TakeElevatorText = false
-        end
-    else
-        if g_DetonarC4Text then
-            g_DetonarC4Text = false
-            gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
-        end
-    end
+	g_InsideElevator = false
+	if g_TakeElevatorText then
+		gui_manager:ShowStaticText("TakeElevator")
+		g_TakeElevatorText = false
+	end
+	if g_DetonarC4Text then
+		g_DetonarC4Text = false
+		gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+	end
 end
 
 function UpdateDLC_enter()
@@ -677,7 +678,23 @@ function ViewBoss_enter()
 end
 
 function CargarEnergia_enter()
-	g_Player:SetEnergy(100.0)
+	if g_BrazoOperativo then
+		gui_manager:ShowStaticText("CargarEnergia")
+		g_CargarEnergiaText = true
+		g_InsideCargarEnergia = true
+	end
+end
+
+function CargarEnergia_exit()
+	if g_BrazoOperativo then
+		g_InsideCargarEnergia = false
+		if g_CargarEnergiaText then
+			gui_manager:ShowStaticText("CargarEnergia")
+			g_InsideCargarEnergia = false
+			countdowntimer_manager:Reset("BaseDeCargaTimer", false)
+		end
+		g_CargandoEnergia = false
+	end
 end
 
 function BaseCargaError_enter()
@@ -695,6 +712,27 @@ function BaseCargaError_exit()
 end
 
 function UpdateTriggers()
+	if g_CargandoEnergia then
+		if not countdowntimer_manager:ExistTimer("BaseDeCargaTimer") then
+			countdowntimer_manager:AddTimer("BaseDeCargaTimer", 0.25, false)
+		else
+			countdowntimer_manager:SetActive("BaseDeCargaTimer", true)
+		end
+		if countdowntimer_manager:isTimerFinish("BaseDeCargaTimer") then
+			g_Player:AddEnergy(10.0)
+			g_Player:AddLife(10.0)
+			countdowntimer_manager:Reset("BaseDeCargaTimer", false)
+		end
+	end
+	if g_InsideCargarEnergia then
+		if action_manager:DoAction("Action") then
+			if g_CargarEnergiaText then
+				gui_manager:ShowStaticText("CargarEnergia")
+				g_CargarEnergiaText = false
+			end
+			g_CargandoEnergia = true
+		end
+	end
 	if g_InsideBaseCargaError then
 		if action_manager:DoAction("Action") then
 			gui_manager:ShowStaticText("BaseCargaError")
@@ -717,20 +755,18 @@ function UpdateTriggers()
 	
 	if g_InsideDoor2 then
 		if action_manager:DoAction("Action") then
-			if g_Door2Unblocked then
+			if not g_BrazoOperativo then
 				if not g_BlockTextActive then
 					gui_manager:ShowStaticText("Block")
 					g_BlockTextActive = true
 				end
-			elseif g_Player:GetEnergy() > 0 then
+			else
 				Door2_exit()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
 				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_sala2")
-            else
-                -- show message that needs energy
-			end
+            end
 		end
 	end
 	
@@ -784,15 +820,7 @@ function UpdateTriggers()
 				sound_manager:PlayEvent("Play_Sala3B", "Logan")
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
-				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
-				lEnemy = enemy_manager:GetEnemy("Drone1_S3")
-				if lEnemy ~= nil then
-					lEnemy:AddDamage(lEnemy:GetLife())
-				end
-				lEnemy = enemy_manager:GetEnemy("Drone2_S3")
-				if lEnemy ~= nil then
-					lEnemy:AddDamage(lEnemy:GetLife())
-				end
+				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 			else
 				if not g_FaltanC4Text then
 					g_FaltanC4Text = true
@@ -803,12 +831,14 @@ function UpdateTriggers()
 	end
 	
 	if g_InsideElevator then
-		if action_manager:DoAction("Action") then
-			Elevator_exit()
-			cinematic_manager:Execute("elevatorDown")
-			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
-			enemy_manager:ActivateEnemiesSala3()
-			enemy_manager:SetAlarm("sala3")
+		if g_ExplotionDone then
+			if action_manager:DoAction("Action") then
+				Elevator_exit()
+				cinematic_manager:Execute("elevatorDown")
+				trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
+				enemy_manager:ActivateEnemiesSala3()
+				enemy_manager:SetAlarm("sala3")
+			end
 		end
 	end
 	
@@ -818,7 +848,8 @@ function UpdateTriggers()
 			trigger_manager:GetTriggerByName("base_DLC_sala2"):SetActive(false)
 			sound_manager:PlayEvent("Play_Sala2", "Logan")
 			g_Player:SetEnergy(100.0)
-			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy())
+			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
+			g_BrazoOperativo = true
 		end
 	end
 	

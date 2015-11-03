@@ -14,12 +14,21 @@ class CScatteredLightSceneRendererCommand : public CStagedTexturedRendererComman
     private:
         CTexture m_RenderTarget1;
         CTexture m_RenderTarget2;
-        CTexture m_RenderTarget3;        
+
+        float m_StartWeight;
+        float m_EndWeight;
+
+        float m_Time;
+        float m_AccTime;
 
     public:
         CScatteredLightSceneRendererCommand( CXMLTreeNode& atts );
         ~ CScatteredLightSceneRendererCommand();
 
-        void Execute( CGraphicsManager& GM );
+        void Execute(CGraphicsManager& GM);
+        float Lerp(float v1, float v2, float t);
+
+        void TurnOff(float l_Time, float l_Weigth = 0.0f);
+        void TurnOn(float l_Time, float l_Weigth = 5.65f);
 };
 #endif

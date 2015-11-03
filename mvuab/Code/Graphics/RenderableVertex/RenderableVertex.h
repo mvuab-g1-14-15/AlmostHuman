@@ -17,9 +17,11 @@ class CRenderableVertexs
 
     public:
         CRenderableVertexs()
+            : m_IndexCount( 0 )
+            , m_VertexCount( 0 )
+            , m_VB( 0 )
+            , m_IB( 0 )
         {
-            m_IndexCount = 0;
-            m_VertexCount = 0;
         }
 
         virtual ~CRenderableVertexs()

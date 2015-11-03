@@ -218,8 +218,10 @@ bool CStaticMesh::Load( const std::string& FileName )
                 }
 
                 // Check the renderable object
-                if (l_RV && l_RV->isRenderOK()) m_RVs.push_back(l_RV);
-                else CHECKED_DELETE(l_RV);
+                if (l_RV && l_RV->GetVertexsCount() != 0 && l_RV->GetFacesCount() != 0)
+                  m_RVs.push_back(l_RV);
+                else
+                  CHECKED_DELETE(l_RV);
 
                 free(l_VtxsAddress);
                 free(l_IdxAddress);

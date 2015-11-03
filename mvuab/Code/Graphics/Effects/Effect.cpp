@@ -57,6 +57,8 @@ CEffect::CEffect( const std::string& EffectName )
   , CTOR_EFFECT_PARAMETER( PercentageTexture2 )
   , CTOR_EFFECT_PARAMETER( SelfIlumAmount )
   , CTOR_EFFECT_PARAMETER( Life   )
+  // Rays Of God
+  , CTOR_EFFECT_PARAMETER( RaysWeight )
 {
   ResetLightsHandle();
 }
@@ -107,7 +109,7 @@ void CEffect::SetNullParameters()
   RESET_EFFECT_PARAMETER( PercentageTexture1 );
   RESET_EFFECT_PARAMETER( PercentageTexture2 );
   RESET_EFFECT_PARAMETER( Life   );
-
+  RESET_EFFECT_PARAMETER( RaysWeight );
   ResetLightsHandle();
 }
 
@@ -160,6 +162,7 @@ void CEffect::LinkSemantics()
   GetParameterBySemantic( UseShadowMaskTextureStr, m_UseShadowMaskTextureParameter );
   GetParameterBySemantic( UseShadowStaticStr, m_UseStaticShadowmapParameter );
   GetParameterBySemantic( UseShadowDynamicStr, m_UseDynamicShadowmapParameter );
+  GetParameterBySemantic( RaysOfGodWeigth, m_RaysWeight );
 }
 
 void CEffect::GetParameterBySemantic( const std::string& SemanticName, D3DXHANDLE& a_Handle )
@@ -475,7 +478,7 @@ bool CEffect::SetSelfIlumAmount( float aSelfIlumAmount )
     return lRes == S_OK;
 }
 
-void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights)
+void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights, float l_Weight)
 {
     ASSERT(l_ActiveLights.size() <= MAX_LIGHTS_BY_SHADER, "Error setting scattering params");
 
@@ -484,6 +487,9 @@ void CEffect::SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const st
 
     HRESULT lRes2 = m_Effect->SetFloatArray(m_LightsPositionParameter, &l_PosLights[0].x, l_PosLights.size() * 3);
     ASSERT(lRes2 == S_OK, "Error setting lights position");
+
+    HRESULT lRes3 = m_Effect->SetFloat(m_RaysWeight, l_Weight);
+    ASSERT(lRes3 == S_OK, "Error setting rays weight");
 }
 
 void CEffect::SetLife( float aLife )

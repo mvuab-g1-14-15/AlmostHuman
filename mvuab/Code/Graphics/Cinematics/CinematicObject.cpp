@@ -29,7 +29,7 @@ CCinematicObject::CCinematicObject( CXMLTreeNode& atts )
   if( lRoom )
   {
       CRenderableObjectsManager* lLayer = lRoom->GetLayer( "solid" );
-      ASSERT( lRoom, "The layer %s doesn't exist in the room %s", "solid", atts.GetAttribute<std::string>("room", "" ).c_str() );
+      ASSERT( lLayer, "The layer %s doesn't exist in the room %s", "solid", atts.GetAttribute<std::string>("room", "" ).c_str() );
       if( lLayer )
       {
           const std::string& resource = atts.GetAttribute<std::string>( "resource", "" );

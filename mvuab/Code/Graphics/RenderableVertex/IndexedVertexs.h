@@ -3,10 +3,7 @@
 #pragma once
 
 #include <Windows.h>
-#include <DxErr.h>
-#pragma comment(lib, "dxerr.lib")
-
-#include "Utils\GPUStatics.h"
+#include "dx9.h"
 #include "RenderableVertex.h"
 
 #include "Effects\Effect.h"
@@ -14,9 +11,6 @@
 
 template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 {
-    private:
-        bool m_RenderOK;
-
     protected:
         inline size_t GetVertexSize()
         {
@@ -32,7 +26,8 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
         template<>        D3DFORMAT GetIndexFormat<short>() { return D3DFMT_INDEX16; }
 
     public:
-        CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount ) : m_RenderOK(false)
+        CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount )
+            : CRenderableVertexs()
         {
             if ( IndexCount != 0 || VertexCount != 0 )
             {
@@ -42,51 +37,18 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 m_IndexCount = IndexCount;
                 m_VertexCount = VertexCount;
 
-                HRESULT HR1 = GM->GetDevice()->CreateIndexBuffer(IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0);
-                if(HR1 != D3D_OK)
-                {
-                    char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Index Buffer: %s\n", DXGetErrorString(HR1));
-                    OutputDebugStringA(s);
-                }
-
-                HRESULT HR2 = GM->GetDevice()->CreateVertexBuffer(VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0);
-                if(HR2 != D3D_OK)
-                {
-                    char s[256] = { 0 }; sprintf_s(s, sizeof(s), "ERROR Creating Vertex Buffer: %s\n", DXGetErrorString(HR2));
-                    OutputDebugStringA(s);
-                }
+                HR( GM->GetDevice()->CreateIndexBuffer(IndexCount * GetIndexSize(), 0, GetIndexFormat<S>(), D3DPOOL_DEFAULT, &m_IB, 0) );
+                HR( GM->GetDevice()->CreateVertexBuffer(VertexCount * GetVertexSize(), 0, T::GetFVF(), D3DPOOL_DEFAULT, &m_VB, 0) );
                 
                 if(m_VB != NULL && m_IB != NULL)
                 {
-                    bool l_OkVB = false;
-                    bool l_OkIB = false;
-
-                    /*if(m_VB->Lock(0, VertexCount * GetVertexSize(), &l_memSrcV, 0) ==  D3D_OK)
-                    {
-                        memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
-                        m_VB->Unlock(); l_OkVB = true;
-                    }
-
-                    if(m_IB->Lock(0, IndexCount * GetIndexSize(), &l_memSrcI, 0) == D3D_OK)
-                    {
-                        memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
-                        m_IB->Unlock(); l_OkIB = true;
-                    }*/
-
                     m_VB->Lock(0, VertexCount * GetVertexSize(), &l_memSrcV, 0);
                     memcpy( l_memSrcV, VertexAddress, VertexCount * GetVertexSize() );
-                    m_VB->Unlock(); l_OkVB = true;
-                    
+                    m_VB->Unlock();
 
                     m_IB->Lock(0, IndexCount * GetIndexSize(), &l_memSrcI, 0);
                     memcpy( l_memSrcI, IndexAddres, IndexCount * GetIndexSize() );
-                    m_IB->Unlock(); l_OkIB = true;
-
-                    if(!(m_RenderOK = l_OkIB & l_OkVB))
-                    {
-                        CHECKED_RELEASE(m_IB);
-                        CHECKED_RELEASE(m_VB);
-                    }
+                    m_IB->Unlock();
                 }
             }
         }
@@ -95,26 +57,27 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
         {
         }
 
-        virtual bool isRenderOK()
+        const LPDIRECT3DVERTEXBUFFER9 GetVertexBuffer()
         {
-            return m_RenderOK;
+          return m_VB;
+        }
+        const LPDIRECT3DINDEXBUFFER9 GetIndexBuffer()
+        {
+          return m_IB;
         }
 
         virtual bool Render( CGraphicsManager* GM )
         {
-            if(!m_RenderOK) return false;
-
-            HRESULT lOk = GM->GetDevice()->SetStreamSource( 0, m_VB, 0, GetVertexSize() );
-            lOk = GM->GetDevice()->SetIndices( m_IB );
-            lOk = GM->GetDevice()->SetFVF( T::GetFVF() );
-            lOk = GM->GetDevice()->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 );
-            return lOk == S_OK;
+            const LPDIRECT3DDEVICE9 lDevice = GM->GetDevice();
+            bool    lOk = ( lDevice->SetStreamSource( 0, m_VB, 0, GetVertexSize() ) == S_OK );
+                    lOk = ( lOk && lDevice->SetIndices( m_IB ) == S_OK );
+                    lOk = ( lOk && lDevice->SetFVF( T::GetFVF() ) == S_OK );
+                    lOk = ( lOk && lDevice->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, m_VertexCount, 0, m_IndexCount / 3 ) == S_OK );
+            return lOk;
         }
 
         virtual bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique, int baseVertexIndexCount, int minVertexIndex, int verticesCount, int startIndex, int facesCount )
         {
-            if(!m_RenderOK) return false;
-
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();
             UINT l_NumPasses = 0;
@@ -136,19 +99,12 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
                 l_Effect->EndPass();
             }
 
-			CGPUStatics* GPU = CGPUStatics::GetSingletonPtr();
-			GPU->AddVertexCount(verticesCount);
-			GPU->AddFacesCount(facesCount);
-			GPU->AddDrawCount(1);
-
             l_Effect->End();
             return ( true );
         }
 
         bool Render( CGraphicsManager* GM, CEffectTechnique* EffectTechnique )
         {
-            if(!m_RenderOK) return false;
-
             EffectTechnique->BeginRender();
             LPD3DXEFFECT l_Effect = EffectTechnique->GetEffect()->GetEffect();
             LPDIRECT3DDEVICE9 l_Device = GM->GetDevice();

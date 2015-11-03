@@ -113,6 +113,8 @@ int         g_WindowHeight                                          : WindowHeig
 float      g_Time                                                   : Time;
 float      g_DeltaTime                                              : DeltaTime;
 
+//Rays Of God
+float      g_SWeight                                                : RaysWeight = 5.65;
 
 //
 // Functions

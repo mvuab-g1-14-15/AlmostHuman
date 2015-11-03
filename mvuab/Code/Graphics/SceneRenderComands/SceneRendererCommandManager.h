@@ -5,6 +5,7 @@
 
 #include "Utils\TemplatedVectorMapManager.h"
 #include "RenderGUISceneRendererCommand.h"
+#include "SceneRenderComands\ScatteredLightRendererCommand.h"
 #include "SceneRendererCommand.h"
 #include <string>
 #include "Utils/Manager.h"
@@ -16,7 +17,9 @@ public:
   CSceneRendererCommandManager();
   CSceneRendererCommandManager( CXMLTreeNode& atts );
   ~ CSceneRendererCommandManager();
+
   CRenderGUISceneRendererCommand* GetCommandGUI( );
+  CScatteredLightSceneRendererCommand *GetScatteredLight();
 
   void Init();
   bool Load( const std::string& lFile );

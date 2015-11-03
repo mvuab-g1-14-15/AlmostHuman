@@ -57,21 +57,6 @@ void CTestProcess::Init()
 
 void CTestProcess::Render()
 {
-    CGraphicsManager* pGraphicsManager = GraphicsInstance;
-
-    /*  pGraphicsManager->DrawAxis(5);
-        pGraphicsManager->DrawGrid(100, Math::colORANGE, 50, 50);*/
-    //pGraphicsManager->DrawTeapot();
-    ScriptMInstance->RunCode( "render()" );
-    // START: TO DELETE LATER IF IS NOT NECESSARY,
-    unsigned int v = CGPUStatics::GetSingletonPtr()->GetVertexCount();
-    unsigned int f = CGPUStatics::GetSingletonPtr()->GetFacesCount();
-    unsigned int d = CGPUStatics::GetSingletonPtr()->GetDrawCount();
-    CGPUStatics::GetSingletonPtr()->SetToZero();
-    FontInstance->DrawDefaultText( 300, 0,
-                                   Math::CColor( 0.0f, 0.0f, 0.0f ), "Vertex: %u   Faces: %u   Draws:%u", v, f,
-                                   d );
-    // END: TO DELETE LATER IF IS NOT NECESSARY
 }
 
 void CTestProcess::RenderDebugInfo()

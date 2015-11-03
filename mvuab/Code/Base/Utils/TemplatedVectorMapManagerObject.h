@@ -7,7 +7,6 @@
 #include <vector>
 #include <map>
 
-#include "./RWLock.h"
 #include "Utils\Defines.h"
 
 template <class T> class CTemplatedVectorMapManagerObject
@@ -29,7 +28,6 @@ template <class T> class CTemplatedVectorMapManagerObject
     protected:
         TVectorResources    m_ResourcesVector;
         TMapResources       m_ResourcesMap;
-        CRWLock             m_Lock;
 
     public:
         CTemplatedVectorMapManagerObject() { }
@@ -45,25 +43,23 @@ template <class T> class CTemplatedVectorMapManagerObject
 
         void RemoveResource( const std::string& Name )
         {
-            m_Lock.WriteLock();
-                TMapResources::iterator it = m_ResourcesMap.find(Name);
-                if ( it == m_ResourcesMap.end() ) return;
+          TMapResources::iterator it = m_ResourcesMap.find(Name);
+          if ( it == m_ResourcesMap.end() ) return;
 
-                CHECKED_DELETE(it->second.m_Value);
-                size_t l_ID = it->second.m_Id;
+          CHECKED_DELETE(it->second.m_Value);
+          size_t l_ID = it->second.m_Id;
 
-                m_ResourcesMap.erase(it);
-                m_ResourcesVector.erase(m_ResourcesVector.begin() + l_ID);
+          m_ResourcesMap.erase(it);
+          m_ResourcesVector.erase(m_ResourcesVector.begin() + l_ID);
 
-                for (size_t i =  l_ID; i < m_ResourcesVector.size();  ++i)
-                {
-                    T* l_TElement = m_ResourcesVector[i];
-                    TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
+          for (size_t i =  l_ID; i < m_ResourcesVector.size();  ++i)
+          {
+            T* l_TElement = m_ResourcesVector[i];
+            TMapResources::iterator l_ItMap = m_ResourcesMap.begin();
 
-                    while (l_ItMap->second.m_Value != l_TElement) ++l_ItMap;
-                    l_ItMap->second.m_Id = i;
-                }
-            m_Lock.WriteUnLock();
+            while (l_ItMap->second.m_Value != l_TElement) ++l_ItMap;
+            l_ItMap->second.m_Id = i;
+          }
         }
 
         virtual T GetResourceById(size_t Id)
@@ -80,33 +76,25 @@ template <class T> class CTemplatedVectorMapManagerObject
         {
             TMapResources::iterator it;
 
-            m_Lock.ReadLock();
-                it = m_ResourcesMap.find(Name);
-                if(it == m_ResourcesMap.end())
-                {
-                    m_Lock.ReadUnLock();
-                    return 0;
-                }
-            m_Lock.ReadUnLock();
+            it = m_ResourcesMap.find(Name);
+            if(it == m_ResourcesMap.end())
+            {
+              return 0;
+            }
 
             return it->second.m_Value;
         }
 
         virtual bool AddResource( const std::string& Name, T Resource )
         {
-            m_Lock.ReadLock();
-                if( m_ResourcesMap.end() !=  m_ResourcesMap.find(Name))
-                {
-                    m_Lock.ReadUnLock();
-                    return false;
-                }
-            m_Lock.ReadUnLock();
+            if( m_ResourcesMap.end() !=  m_ResourcesMap.find(Name))
+            {
+              return false;
+            }
 
-            m_Lock.WriteLock();
-                CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
-                m_ResourcesVector.push_back(Resource);
-                m_ResourcesMap[Name] = l_Resource;
-            m_Lock.WriteUnLock();
+            CMapResourceValue l_Resource(Resource, m_ResourcesVector.size());
+            m_ResourcesVector.push_back(Resource);
+            m_ResourcesMap[Name] = l_Resource;
 
             return true;
         }
@@ -139,10 +127,8 @@ template <class T> class CTemplatedVectorMapManagerObject
         {
             uint32 l_Size = 0;
 
-            m_Lock.ReadLock();
-                ASSERT( m_ResourcesMap.size() == m_ResourcesVector.size(), "map size != vector size" );
-                l_Size = m_ResourcesVector.size();
-            m_Lock.ReadUnLock();
+            ASSERT( m_ResourcesMap.size() == m_ResourcesVector.size(), "map size != vector size" );
+            l_Size = m_ResourcesVector.size();
 
             return l_Size;
         }

@@ -400,6 +400,16 @@ function CEnemyManager:ActivateEnemiesSala3()
 	end
 end
 
+function CEnemyManager:DeathRoom( aRoom )
+	for _,lEnemy in pairs (self.Enemy[aRoom]) do
+		lEnemy:AddDamage(lEnemy:GetLife())
+	end
+	
+	for k in pairs (self.Shoots) do
+		self.Shoots[k]:End()
+	end
+end
+
 function CEnemyManager:Reinit( aRoom )
 	--engine:Trace("Reinit room "..aRoom)
 	for _,lEnemy in pairs (self.Enemy[aRoom]) do
@@ -452,6 +462,7 @@ function CEnemyManager:Reinit( aRoom )
 			gui_manager:ShowStaticText("DetonarC4", true)
 			gui_manager:ShowStaticText("ColocarC4", true)
 			gui_manager:ShowStaticText("TakeElevator", true)
+			gui_manager:ShowStaticText("C4NoDetonado", true)
 		end
 		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(true)
 		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
@@ -461,8 +472,7 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala4" then
 		cinematic_manager:ReloadCinematic("data/sala4/cinematics.xml")
 		self.Boss:Destroy()
-		self.Boss = nil
-		
+		self.Boss = nil		
 		trigger_manager:GetTriggerByName("Hack_nave1"):SetActive(true)
 		trigger_manager:GetTriggerByName("Hack_nave2"):SetActive(true)
 		trigger_manager:GetTriggerByName("Hack_nave3"):SetActive(true)
@@ -492,6 +502,7 @@ function CEnemyManager:Update()
 			lHumoBoss = CParticle( "explosion_boss_fum", "boss_explosion_fum", "sala4" )
 			lHumoBoss:Init(self.Boss:GetPosition())
 			cinematic_manager:Execute("explotion_boss")
+			self:DeathRoom("sala4")
 			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 			trigger_manager:GetTriggerByName("final"):SetActive(true)
 			self.Boss = nil

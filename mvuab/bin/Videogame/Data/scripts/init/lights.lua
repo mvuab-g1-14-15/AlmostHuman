@@ -52,6 +52,3 @@ function update()
 	current_light:SetPosition( pos + addPos )
 	
 end
-
-function render()
-end

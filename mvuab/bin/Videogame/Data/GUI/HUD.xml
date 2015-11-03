@@ -51,6 +51,8 @@
 	<StaticText name="TakeC4" pos="45 80" height="30" width="12" visible="false" active="false" Literal="TakeC4" />
 	<StaticText name="TakeElevator" pos="45 80" height="30" width="12" visible="false" active="false" Literal="TakeElevator" />
 	<StaticText name="UpdateDLC" pos="45 80" height="30" width="12" visible="false" active="false" Literal="UpdateDLC" />
+	<StaticText name="CargarEnergia" pos="45 80" height="30" width="12" visible="false" active="false" Literal="CargarEnergia" />
+	<StaticText name="C4NoDetonado" pos="50 60" height="30" width="12" visible="false" active="false" Literal="CargarEnergia" />
 	
 	<DialogBox name="Test" pos="28.00 74.00" height="20.00" width="45.00" visible="false" active="false"
 			quad="Data/textures/GUI/marco2.png" pos_button="41.20 13.50" height_button="5.00" width_button="2.8"

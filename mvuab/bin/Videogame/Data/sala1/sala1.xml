@@ -2,5 +2,5 @@
 <room path="Data\sala1">
   <layer name="solid" file="solid_layer.xml" />
   <layer name="glow" file="glow_layer.xml" />
-  <!--layer name="cinematic" file="cinematic_layer.xml" /-->
+  <layer name="cinematic" file="cinematic_layer.xml" />
 </room>

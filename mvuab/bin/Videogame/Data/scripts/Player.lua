@@ -56,6 +56,7 @@ function CPlayer:__init()
 	self.Checkpoint.position = Vect3f( 136.84, -7.99, -62 )
 	self.Checkpoint.life = 100.0
 	self.Checkpoint.energy = 0.0
+	self.Checkpoint.yaw = 0.0 --TODO: Check the initial yaw of the game
 end
 
 function CPlayer:Update()
@@ -78,7 +79,7 @@ function CPlayer:Update()
 	self.StealthAttack:Update( lArmPosition )
 
 	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() then
-	self:SetAnimation("aim")
+        self:SetAnimation("aim")
 	end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
@@ -104,13 +105,15 @@ function CPlayer:Update()
 		self:SetPosition(self.Checkpoint.position)
 		self.Life= self.Checkpoint.life
 		self.Blaster:SetEnergy(self.Checkpoint.energy)
+		self:SetYaw(self.Checkpoint.yaw)
+		self:SetPitch(0.0)
 		enemy_manager:Reinit(self.Checkpoint.room)
 	end
 	
-	if self.Life < 25 then
+	if self.Life < 30 then
 		self.Life = self.Life + 2.0 * timer:GetElapsedTime()
 	else
-		self.Life = self.Life + 0.2 * timer:GetElapsedTime()
+		self.Life = self.Life + 0.5 * timer:GetElapsedTime()
 		if self.Life > 100.0 then
 			self.Life = 100.0
 		end
@@ -131,11 +134,12 @@ function CPlayer:Update()
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
-function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy)
+function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy, aYaw)
 	self.Checkpoint.room = aRoom
 	self.Checkpoint.position = aPosition
 	self.Checkpoint.life = aLife
 	self.Checkpoint.energy = aEnergy
+	self.Checkpoint.yaw = aYaw
 end
 
 function CPlayer:SetRoom( aName )
@@ -190,6 +194,14 @@ function CPlayer:GetYaw()
 	return self.PlayerController:GetYaw()
 end
 
+function CPlayer:SetYaw(aYaw)
+	self.PlayerController:SetYaw(aYaw)
+end
+
+function CPlayer:SetPitch(aPitch)
+	self.PlayerController:SetPitch(aPitch)
+end
+
 function CPlayer:GetHeight()
 	return self.PlayerController:GetHeight()
 end
@@ -208,6 +220,14 @@ function CPlayer:AddEnergy(amount)
 		TotalEnergy = 100.0
 	end
 	self.Blaster:SetEnergy(TotalEnergy)
+end
+
+function CPlayer:AddLife(aAmount)
+	local lTotalLife = self.Life+aAmount
+	if lTotalLife > 100.0 then
+		lTotalLife = 100.0
+	end
+	self.Life = lTotalLife
 end
 
 function CPlayer:GetRenderableObject()

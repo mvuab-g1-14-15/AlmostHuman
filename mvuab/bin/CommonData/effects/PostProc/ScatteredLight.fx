@@ -9,7 +9,7 @@ int        g_Samples = 50;
 float      g_SDecay = 1.0;
 float      g_SExposure = 0.0034;
 float      g_SDensity  = 0.84;
-float      g_SWeight = 5.65;
+
 
 float4 ScatterLight(in float2 UV : TEXCOORD0) : COLOR
 {
