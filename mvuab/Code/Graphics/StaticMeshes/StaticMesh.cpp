@@ -218,7 +218,7 @@ bool CStaticMesh::Load( const std::string& FileName )
                 }
 
                 // Check the renderable object
-                if (l_RV && l_RV->GetVertexsCount())
+                if (l_RV && l_RV->GetVertexsCount() != 0 && l_RV->GetFacesCount() != 0)
                   m_RVs.push_back(l_RV);
                 else
                   CHECKED_DELETE(l_RV);

@@ -27,6 +27,7 @@ template<class T, class S> class CIndexedVertexs : public CRenderableVertexs
 
     public:
         CIndexedVertexs( CGraphicsManager* GM, void* VertexAddress, void* IndexAddres, size_t VertexCount, size_t IndexCount )
+            : CRenderableVertexs()
         {
             if ( IndexCount != 0 || VertexCount != 0 )
             {
