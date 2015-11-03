@@ -12,7 +12,7 @@ class CTexture;
 class CXMLTreeNode;
 class CRenderableObjectTechnique;
 
-static const unsigned int gLightProbeSize = 4 * 6 * 2 + 4; // 4 light probes * 6 directions * 2 components in uv + 4 factors
+static const unsigned int gLightProbeSize = ( 4 * 6 * 2  )+ 4; // 4 light probes * 6 directions * 2 components in uv + 4 factors
 
 class CAnimatedInstanceModel : public CRenderableObject
 {
@@ -32,7 +32,6 @@ class CAnimatedInstanceModel : public CRenderableObject
 
         void Update();
         void ExecuteAction(uint32 Id, float32 DelayIn, float32 DelayOut, float32 WeightTarget = 1.0f, bool AutoLock = true);
-		
         void RemoveAction(uint32 Id);
 
         void BlendCycle(uint32 Id, float32 Weight, float32 DelayIn);
@@ -56,36 +55,33 @@ class CAnimatedInstanceModel : public CRenderableObject
         void ChangeAnimationAction(const std::string &AnimationName, float32 DelayIn, float32 DelayOut);
 
         void SetAnimationState(const std::string& _szAnimationState);
-
-		GET_SET(float32, Velocity);
+        GET_SET(float32, Velocity);
 
     private:
         CalModel*             m_CalModel;
         CAnimatedCoreModel*   m_AnimatedCoreModel;
 
         LPDIRECT3DVERTEXBUFFER9 m_pVB;
-        int m_VBCursor;
-
-        std::vector<CTexture*> m_Textures;
+        int                     m_VBCursor;
+        
         LPDIRECT3DINDEXBUFFER9  m_pIB;
         int m_IBCursor;
 
         uint32 m_NumVtxs;
         uint32 m_NumFaces;
         uint32 m_CurrentAnimationId;
+        float32     m_BlendTime;
+        float32     m_ChangeAnimation;
+        float32     m_Velocity;
+        float32     m_fAnimationParameter;
 
-        float32 m_LodLevel;
-        float32 m_BlendTime;
-        float32 m_ChangeAnimation;
-		float32 m_Velocity;
+        std::string m_szAnimationState;
+        std::vector<CTexture*> m_Textures;
         CRenderableObjectTechnique*  m_RenderableObjectTechnique;
-
-		void CalculateNewLightProbeMatrix();
-
-		float m_LPMatrixInitial[gLightProbeSize];
-		float m_LPMatrixTarget[gLightProbeSize];
-
-		Math::Vect3f m_PreviousPosition;
+        
+        float m_LPMatrixInitial[gLightProbeSize];
+        float m_LPMatrixTarget[gLightProbeSize];
+        Math::Vect3f m_PreviousPosition;
 
         void LoadTextures();
 
@@ -95,13 +91,12 @@ class CAnimatedInstanceModel : public CRenderableObject
         typedef CAnimatedCoreModel::SAnimationState  SAnimationState;
         typedef CAnimatedCoreModel::SAnimationChange SAnimationChange;
 
+        void CalculateNewLightProbeMatrix();
+
         float ExecuteChange(const SAnimationChange& _AnimationChange);//retorna el fade
         void  ExecuteAction(const SAction& _Action);
         void  BlendCycle(const SCycle& _Cycle, float _fBlendTime);
         void  ClearCycle(const SCycle& _Cycle, float _fBlendTime);
-
-        std::string m_szAnimationState;
-        float  m_fAnimationParameter;
 };
 
 #endif

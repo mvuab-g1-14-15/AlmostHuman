@@ -62,6 +62,8 @@ function CPlayerController:__init()
 	self.CharacterController = physic_manager:GetController("Player")
 	
 	self.PlayerCamera = camera_manager:GetCamera("Main")
+	
+	self.CanMove = true
 	----engine:Trace("Player Controller initialized")
 end
 
@@ -131,6 +133,9 @@ function CPlayerController:Update()
 		countdowntimer_manager:ChangeTotalTime("Footstep", self.TimeFootstep)
 	end
 	
+	if not self.CanMove then
+		self.Direction = Vect3f(0.0)
+	end
 	local l_Velocity = self.Direction * l_Speed
 	
 	if self.Jump then
@@ -218,6 +223,10 @@ function CPlayerController:Update()
 	self.PlayerCamera:SetPosition(l_CameraPosition)
 	
 	self:MakeGizmo()
+end
+
+function CPlayerController:SetCanMove(aBool)
+	self.CanMove = aBool
 end
 
 function CPlayerController:MakeGizmo()

@@ -2,7 +2,11 @@
 
 #include "XML\XMLTreeNode.h"
 
-CRenderableObject::CRenderableObject() : CObject3D(), CName()
+CRenderableObject::CRenderableObject()
+  : CObject3D()
+  , CName()
+  , m_Active( true )
+  , m_RoomName( "" )
 {
 }
 

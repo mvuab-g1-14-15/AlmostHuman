@@ -34,38 +34,53 @@
 CAnimatedInstanceModel::CAnimatedInstanceModel( const std::string& Name, const std::string& CoreName )
   : CRenderableObject()
   , m_CalModel( 0 )
-  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) ),
-  m_BlendTime( 0.3f ),
-  m_LodLevel( 1.0f ),
-  m_CurrentAnimationId( 5 ),
-  m_NumVtxs( 0 ),
-  m_NumFaces( 0 ),
-  m_pIB( 0 ),
-  m_pVB( 0 ),
-  m_ChangeAnimation( 0 ),
-  m_Velocity( 1.0 )
-{
-  SetName( Name );
-  CRenderableObjectTechniqueManager* lROT = ROTMInstance;
-  const std::string& l_TechniqueName =
-    lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
-  m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
-  Initialize();
-}
-CAnimatedInstanceModel::CAnimatedInstanceModel( const CXMLTreeNode& atts )
-  : CRenderableObject( atts )
-  , m_CalModel( 0 )
-  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( atts.GetAttribute<std::string>( "core", "" ) ) )
+  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( CoreName ) )
   , m_BlendTime( 0.3f )
-  , m_LodLevel( 1.0f )
   , m_CurrentAnimationId( 0 )
   , m_NumVtxs( 0 )
   , m_NumFaces( 0 )
   , m_pIB( 0 )
   , m_pVB( 0 )
+  , m_IBCursor( 0 )
+  , m_VBCursor( 0 )
   , m_Velocity( 1.0 )
-  , m_ChangeAnimation( )
+  , m_ChangeAnimation( 0 )
+  , m_RenderableObjectTechnique( 0 )
+  , m_PreviousPosition( Math::Vect3f(0.0f,0.0f,0.0f))
+  , m_fAnimationParameter( 0.0f )
+  , m_szAnimationState( "" )
 {
+  ZeroMemory( &m_LPMatrixInitial, gLightProbeSize * sizeof( float ));
+  ZeroMemory( &m_LPMatrixTarget, gLightProbeSize * sizeof( float ));
+  SetName( Name );
+  CRenderableObjectTechniqueManager* lROT = ROTMInstance;
+  const std::string& l_TechniqueName = lROT->GetRenderableObjectTechniqueNameByVertexType( CAL3D_HW_VERTEX::GetVertexType() );
+  m_RenderableObjectTechnique = lROT->GetResource( l_TechniqueName );
+  Initialize();
+}
+
+CAnimatedInstanceModel::CAnimatedInstanceModel( const CXMLTreeNode& atts )
+  : CRenderableObject( atts )
+  , m_CalModel( 0 )
+  , m_AnimatedCoreModel( AnimatedMInstance->GetCore( atts.GetAttribute<std::string>( "core", "" ) ) )
+  , m_BlendTime( 0.3f )
+  , m_CurrentAnimationId( 0 )
+  , m_NumVtxs( 0 )
+  , m_NumFaces( 0 )
+  , m_pIB( 0 )
+  , m_pVB( 0 )
+  , m_IBCursor( 0 )
+  , m_VBCursor( 0 )
+  , m_Velocity( 1.0 )
+  , m_ChangeAnimation( 0 )
+  , m_RenderableObjectTechnique( 0 )
+  , m_PreviousPosition( Math::Vect3f(0.0f,0.0f,0.0f))
+  , m_fAnimationParameter( 0.0f )
+  , m_szAnimationState( "" )
+{
+  ZeroMemory( &m_LPMatrixInitial, gLightProbeSize * sizeof( float ));
+  ZeroMemory( &m_LPMatrixTarget, gLightProbeSize * sizeof( float ));
+
   CRenderableObjectTechniqueManager* lROT = ROTMInstance;
   const std::string& l_TechniqueName = lROT->GetRenderableObjectTechniqueNameByVertexType(
                                          CAL3D_HW_VERTEX::GetVertexType() );
@@ -88,7 +103,10 @@ void CAnimatedInstanceModel::Render()
 void CAnimatedInstanceModel::RenderModelByHardware()
 {
   if ( !m_RenderableObjectTechnique )
+  {
+    LOG_INFO_APPLICATION("Null effect technique!");
     return;
+  }
 
   // Get the shader of the current pool of effects
   CEffectTechnique* lEffectTechnique = m_RenderableObjectTechnique->GetEffectTechnique();
@@ -107,8 +125,7 @@ void CAnimatedInstanceModel::RenderModelByHardware()
   CalHardwareModel* l_pCalHardwareModel = m_AnimatedCoreModel->GetCalHardwareModel();
   D3DXMATRIX transformation[MAXBONES];
 
-  for
-  ( int hardwareMeshId = 0, lCountHardwareMesh = l_pCalHardwareModel->getHardwareMeshCount();
+  for( int hardwareMeshId = 0, lCountHardwareMesh = l_pCalHardwareModel->getHardwareMeshCount();
       hardwareMeshId < lCountHardwareMesh;
       ++hardwareMeshId
   )
@@ -128,23 +145,24 @@ void CAnimatedInstanceModel::RenderModelByHardware()
     }
 
     float l_Matrix[MAXBONES * 3 * 4];
+    ZeroMemory( &l_Matrix, sizeof( float ) * MAXBONES * 3 * 4 );
 
     for ( int i = 0; i < l_pCalHardwareModel->getBoneCount(); ++i )
+    {
       memcpy( &l_Matrix[i * 3 * 4], &transformation[i], sizeof( float ) * 3 * 4 );
+    }
 
-    lDXEffect->SetFloatArray( lEffect->GetBonesParameter(), ( float* ) l_Matrix,
-                              l_pCalHardwareModel->getBoneCount() * 3 * 4 );
-
-	CalculateNewLightProbeMatrix();
-	float l_LPMatrix[gLightProbeSize*2 +1];
-
-	for (unsigned int i=0; i<gLightProbeSize; ++i)
-		l_LPMatrix[i] = m_LPMatrixInitial[i];
-	for (unsigned int i=0; i<gLightProbeSize; ++i)
-		l_LPMatrix[i+gLightProbeSize] = m_LPMatrixTarget[i];
-	l_LPMatrix[gLightProbeSize*2] = CountDownTimerInstance->GetElapsedTimeInPercent( GetName() + "LightProbeTimer" );
-
-	lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, gLightProbeSize*2 + 1 );
+    lDXEffect->SetFloatArray( lEffect->GetBonesParameter(), ( float* ) l_Matrix, l_pCalHardwareModel->getBoneCount() * 3 * 4 );
+    
+    CalculateNewLightProbeMatrix();
+    float l_LPMatrix[gLightProbeSize*2 +1];
+    for (unsigned int i=0; i<gLightProbeSize; ++i)
+      l_LPMatrix[i] = m_LPMatrixInitial[i];
+    for (unsigned int i=0; i<gLightProbeSize; ++i)
+      l_LPMatrix[i+gLightProbeSize] = m_LPMatrixTarget[i];
+    l_LPMatrix[gLightProbeSize*2] = CountDownTimerInstance->GetElapsedTimeInPercent( GetName() + "LightProbeTimer" );
+    
+    lDXEffect->SetFloatArray( lEffect->GetLightProbesParameter(), ( float* ) l_LPMatrix, gLightProbeSize*2 + 1 );
 
     m_Textures[0]->Activate( 0 );
 
