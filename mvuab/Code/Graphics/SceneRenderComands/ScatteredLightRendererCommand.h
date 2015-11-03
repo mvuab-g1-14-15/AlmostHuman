@@ -26,7 +26,7 @@ class CScatteredLightSceneRendererCommand : public CStagedTexturedRendererComman
         ~ CScatteredLightSceneRendererCommand();
 
         void Execute(CGraphicsManager& GM);
-        float MyLerp(float v1, float v2, float t);
+        float Lerp(float v1, float v2, float t);
 
         void TurnOff(float l_Time);
         void TurnOn(float l_Time, float l_Weigth = 5.65f);

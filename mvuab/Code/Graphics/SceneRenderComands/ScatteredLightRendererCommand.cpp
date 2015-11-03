@@ -98,8 +98,10 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
     m_AccTime += CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime();
 
-    float l_ActualWeight = MyLerp(m_StartWeight, m_EndWeight, m_AccTime / m_Time);
-    l_ActualWeight = (l_ActualWeight > m_EndWeight) ? m_EndWeight : l_ActualWeight;
+    float l_ActualWeight = Lerp(m_StartWeight, m_EndWeight, m_AccTime / m_Time);
+
+    if(m_StartWeight > m_EndWeight) l_ActualWeight = (l_ActualWeight < m_EndWeight) ? m_EndWeight : l_ActualWeight;
+    else l_ActualWeight = (l_ActualWeight > m_EndWeight) ? m_EndWeight : l_ActualWeight;
 
     if(l_ActualWeight < 0.0f)
     {
@@ -188,7 +190,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
 }
 
-float CScatteredLightSceneRendererCommand::MyLerp(float v1, float v2, float t)
+float CScatteredLightSceneRendererCommand::Lerp(float v1, float v2, float t)
 {
     float l = (1.0f - t) * v1 + t * v2;
     return l;
@@ -205,8 +207,8 @@ void CScatteredLightSceneRendererCommand::TurnOff(float l_Time)
 
 void CScatteredLightSceneRendererCommand::TurnOn(float l_Time, float l_Weigth)
 {
+    m_StartWeight = m_EndWeight;
     m_EndWeight = l_Weigth;
-    m_StartWeight = 0.0f;
 
     m_Time = (l_Time > 0.001f) ? l_Time : 0.1f;
     m_AccTime = 0.0f;
