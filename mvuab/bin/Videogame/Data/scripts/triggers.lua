@@ -84,6 +84,8 @@ g_BrazoOperativo = false
 
 g_CargandoEnergia = false
 
+g_SpeechIrisBoss = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -452,6 +454,8 @@ function SetPropPasillo()
 		--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, 0, 0))
 		scene:DesactivateRoom("sala2")
 		
+		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient")
+		
 		g_EnteredPasillo = true
 		--engine:Trace("Setted properties of pasillo")
 	end
@@ -469,6 +473,8 @@ function SetPropSala3()
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
 		cinematic_manager:Execute("CloseDoorPasillo")
+		
+		sound_manager:PlayEvent("Play_Ambient_Sala3", "Ambient")
 		
 		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
 		light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(false)
@@ -569,14 +575,22 @@ end
 function ActivateBoss()
 end
 
-function CreateBoss()
+function CreateBoss_enter()
 	g_Hacked.nave1 = false
 	g_Hacked.nave2 = false
 	g_Hacked.nave3 = false
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
-	trigger_manager:GetTriggerByName("final"):SetActive(false)
 	g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
+end
+
+function CreateBoss_exit()
+	if not g_SpeechIrisBoss then
+		trigger_manager:GetTriggerByName("final"):SetActive(false)
+		sound_manager:PlayEvent("Play_Sala4A", "Logan")
+		g_SpeechIrisBoss = true
+	end
+	g_Player:SetCanMove(false)
 end
 
 function PuntoExplosivo1_enter()
@@ -670,11 +684,6 @@ function Final_enter()
 	sound_manager:PlayEvent("Stop_Musica_Boss", "Ambient")
 	sound_manager:PlayEvent("Play_Sala4B", "Logan")
 	trigger_manager:GetTriggerByName("final"):SetActive(false)
-end
-
-function ViewBoss_enter()
-	sound_manager:PlayEvent("Play_Sala4A", "Logan")
-	trigger_manager:GetTriggerByName("ViewBoss"):SetActive(false)
 end
 
 function CargarEnergia_enter()

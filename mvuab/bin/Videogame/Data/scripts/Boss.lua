@@ -108,6 +108,7 @@ function CBoss:Update()
 					self.ArrivedNear = true
 					self:SetAnimation("attack")
 					sound_manager:PlayEvent("Play_Musica_Boss", "Ambient")
+					g_Player:SetCanMove(true)
 				end
 			end
 		else
