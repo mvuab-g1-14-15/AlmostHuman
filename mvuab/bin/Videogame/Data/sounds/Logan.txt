@@ -3,6 +3,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	537533500	Stop_Panting_Logan_Loop			\Logan\Stop_Panting_Logan_Loop	
 	1082697451	Stop_Acumulator_Long_Shoot_Event			\Logan\Stop_Acumulator_Long_Shoot_Event	
 	1958143393	Play_Panting_Logan			\Logan\Play_Panting_Logan	
+	1963497497	Play_No_Shoot_Logan			\Logan\Play_No_Shoot_Logan	
 	2855377483	Logan_Footstep_Walk_Pavimento			\Logan\Logan_Footstep_Walk_Pavimento	
 	3002718147	Logan_Footstep_Walk_Metal			\Logan\Logan_Footstep_Walk_Metal	
 	3668163621	Play_Short_Shoot_Event			\Logan\Play_Short_Shoot_Event	
@@ -21,6 +22,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	529741867	PasoMetal3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal3_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal3		3082
 	535759751	Logan Short Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Short Shoot_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Short Shoot\Logan Short Shoot		56348
 	539246233	PasoMetal2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\PasoMetal2_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\MetalFootstep\PasoMetal2		4283
+	656055319	No Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\RS2_POWER_CHARGE_001_Ab_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\No Shoot		8089
 	746662347	footstep pav3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep pav3_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Footstep_Logan\PavimentoFootstep\footstep pav3		10291
 	864427922	Logan Carga	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan Carga_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Shoot\Long Shoot\AcumLongShoot\Logan Carga		311024
 	866851989	Panting	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\panting(jadeo)_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Logan\Panting		22591

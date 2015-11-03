@@ -13,10 +13,12 @@
 	<GameObject2d name="Ambient" register="true"/>
 	<GameObject2d name="Logan" register="true"/>
 	<GameObject3d name="Alarma_Sala2" register="true" pos="76.23 -16.254 -25.653" dir="76.23 -16.254 -25.653"/>
+	<GameObject3d name="Alarma_Sala3" register="true" pos="32.597 -5.43704 60.465" dir="32.597 -5.43704 60.465"/>
 	<GameObject3d name="DLC" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
-	<GameObject3d name="BaseCargaSala3" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
-	<GameObject3d name="BaseCargaSala4" register="true" pos="75.79 -17.02 -25" dir="75.86 -17.20 -25.98"/>
-	<GameObject3d name="Door_sala2" register="true" pos="53.0744 -16.6341 -24.2395" dir="53.0744 -16.6341 -24.2395"/>
+	<GameObject3d name="BaseCargaSala1" register="true" pos="135.284 -8.74741 -38.9083" dir="135.284 -8.74741 -38.9083"/>
+	<GameObject3d name="BaseCargaSala3" register="true" pos="6.27806 -17.2373 64.0523" dir="6.27806 -17.2373 64.0523"/>
+	<GameObject3d name="BaseCargaSala4" register="true" pos="-56.0085 34.367 66.3074" dir="-56.0085 34.367 66.3074"/>
+	<GameObject3d name="Door_sala2" register="true" pos="75.235 -16.6817 -25.4065" dir="75.235 -16.6817 -25.4065"/>
 	<GameObject3d name="C4_pasillo" register="true" pos="59.3535 -17.1847 6.01426" dir="59.3535 -17.1847 6.01426"/>
 	<GameObject3d name="Door_pasillo" register="true" pos="53.6564 -16.2673 38.8278" dir="53.6564 -16.2673 38.8278"/>
 	<GameObject3d name="Fan1" register="true" pos="93.28 -9.13 -44.26" dir="94.26 -9.28 -44.40"/>
@@ -34,4 +36,8 @@
 	<GameObject3d name="Assembly_Machine2_1" register="true" pos="23.24 -15.63 64.84" dir="23.48 -15.99 63.93"/>
 	<GameObject3d name="Assembly_Machine2_2" register="true" pos="25.75 -15.80 68" dir="26.56 -16.11 67.49"/>
 	<GameObject3d name="Rejilla" register="true" pos="113.54 -9.37 -44.35" dir="114.53 -9.29 -44.44"/>
+	<GameObject3d name="Lights_On" register="true" pos="-30.1018 -9.80911 60.2125" dir="-30.1018 -9.80911 60.2125"/>
+	<GameObject3d name="Elevator_Door_Sala3" register="true" pos="-48.2954 -14.6316 60.2125" dir="-48.2954 -14.6316 60.2125"/>
+	<GameObject3d name="Elevator_Door_Sala4" register="true" pos="-53.0032 34.367 60.5883" dir="-53.0032 34.367 60.5883"/>
+	<GameObject3d name="Hangar_Door" register="true" pos="-330.582 25.7677 58.6625" dir="-330.582 25.7677 58.6625"/>
  </sounds>
