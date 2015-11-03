@@ -331,6 +331,24 @@ void CEffectTechnique::SetDebugColor( Math::CColor color )
 
 void CEffectTechnique::ReadFlags( const CXMLTreeNode& aFlagsNode )
 {
+    mUseWorld                 = true;
+    mUseInverseWorld          = true;
+    mUseView                  = true;
+    mUseInverseView           = true;
+    mUseProjection            = true;
+    mUseInverseProjection     = true;
+    mUseViewProjection        = true;
+    mUseWorldView             = true;
+    mUseWorldViewProjection   = true;
+    mUseViewToLightProjection = true;
+    mUseFog                   = true;
+    mUseLights                = true;
+    mUseDebugColor            = true;
+    mUseFBSize                = true;
+    mUseAmbientLight          = true;
+    mUseCamera                = true;
+    mUseTime                  = true;
+
     m_NumOfLights   = aFlagsNode.GetAttribute<int32>( "num_of_lights", 0 );
 
     // Read the flags of the technique from the handles node

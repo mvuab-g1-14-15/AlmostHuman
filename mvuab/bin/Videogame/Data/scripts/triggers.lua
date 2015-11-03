@@ -78,7 +78,11 @@ g_BaseCargaErrorText = false
 
 g_Door2Unblocked = false
 
-g_DetonarC4Text = false;
+g_DetonarC4Text = false
+
+g_BrazoOperativo = false
+
+g_CargandoEnergia = false
 
 enemigosVivos = 1
 function OnEnter()
@@ -572,6 +576,7 @@ function CreateBoss()
 	g_Hacked.nave4 = false
 	enemy_manager:CreateBoss()
 	trigger_manager:GetTriggerByName("final"):SetActive(false)
+	g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 end
 
 function PuntoExplosivo1_enter()
@@ -673,7 +678,23 @@ function ViewBoss_enter()
 end
 
 function CargarEnergia_enter()
-	g_Player:SetEnergy(100.0)
+	if g_BrazoOperativo then
+		gui_manager:ShowStaticText("CargarEnergia")
+		g_CargarEnergiaText = true
+		g_InsideCargarEnergia = true
+	end
+end
+
+function CargarEnergia_exit()
+	if g_BrazoOperativo then
+		g_InsideCargarEnergia = false
+		if g_CargarEnergiaText then
+			gui_manager:ShowStaticText("CargarEnergia")
+			g_InsideCargarEnergia = false
+			countdowntimer_manager:Reset("BaseDeCargaTimer", false)
+		end
+		g_CargandoEnergia = false
+	end
 end
 
 function BaseCargaError_enter()
@@ -691,6 +712,27 @@ function BaseCargaError_exit()
 end
 
 function UpdateTriggers()
+	if g_CargandoEnergia then
+		if not countdowntimer_manager:ExistTimer("BaseDeCargaTimer") then
+			countdowntimer_manager:AddTimer("BaseDeCargaTimer", 0.25, false)
+		else
+			countdowntimer_manager:SetActive("BaseDeCargaTimer", true)
+		end
+		if countdowntimer_manager:isTimerFinish("BaseDeCargaTimer") then
+			g_Player:AddEnergy(10.0)
+			g_Player:AddLife(10.0)
+			countdowntimer_manager:Reset("BaseDeCargaTimer", false)
+		end
+	end
+	if g_InsideCargarEnergia then
+		if action_manager:DoAction("Action") then
+			if g_CargarEnergiaText then
+				gui_manager:ShowStaticText("CargarEnergia")
+				g_CargarEnergiaText = false
+			end
+			g_CargandoEnergia = true
+		end
+	end
 	if g_InsideBaseCargaError then
 		if action_manager:DoAction("Action") then
 			gui_manager:ShowStaticText("BaseCargaError")
@@ -809,6 +851,7 @@ function UpdateTriggers()
 			sound_manager:PlayEvent("Play_Sala2", "Logan")
 			g_Player:SetEnergy(100.0)
 			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
+			g_BrazoOperativo = true
 		end
 	end
 	

@@ -17,7 +17,7 @@
     <literal id="Block"             font="Titania"  color="1.0 1.0 1.0 1.0" value="Bloqueado"/>
     <literal id="ColocarC4"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para plantar el C4"/>
     <literal id="DetonarC4"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para detonar el C4"/>
-    <literal id="C4NoDetonado"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Tienes que volver y detonar el C4"/>
+    <literal id="C4NoDetonado"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Debes volver y detonar el C4"/>
     <literal id="FaltanC4"          font="Titania"  color="1.0 1.0 1.0 1.0" value="Debes plantar los explosivos"/>
     <literal id="C4Colocada"        font="Titania"  color="1.0 1.0 1.0 1.0" value="C4 plantado"/>
     <literal id="Alarm"             font="Titania"  color="1.0 1.0 1.0 1.0" value="Alarm activada"/>
@@ -26,6 +26,7 @@
     <literal id="TakeC4"            font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para coger el C4"/>
     <literal id="UpdateDLC"         font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para actualizar el brazo"/>
     <literal id="TakeElevator"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para llamar al ascensor"/>
+	<literal id="CargarEnergia"      font="Titania"  color="1.0 1.0 1.0 1.0" value="Pulsa F para recuperarte"/>
     <literal id="Documento1Linea01" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba1"/>
     <literal id="Documento1Linea02" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba2"/>
     <literal id="Documento1Linea03" font="xfiles"   color="0.0 1.0 0.1 1.0" value="Esto es un texto de prueba3"/>
