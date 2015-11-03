@@ -222,6 +222,14 @@ function CPlayer:AddEnergy(amount)
 	self.Blaster:SetEnergy(TotalEnergy)
 end
 
+function CPlayer:AddLife(aAmount)
+	local lTotalLife = self.Life+aAmount
+	if lTotalLife > 100.0 then
+		lTotalLife = 100.0
+	end
+	self.Life = lTotalLife
+end
+
 function CPlayer:GetRenderableObject()
 	return self.RenderableObject;
 end
