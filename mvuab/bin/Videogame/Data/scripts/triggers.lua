@@ -755,20 +755,18 @@ function UpdateTriggers()
 	
 	if g_InsideDoor2 then
 		if action_manager:DoAction("Action") then
-			if g_Door2Unblocked then
+			if not g_BrazoOperativo then
 				if not g_BlockTextActive then
 					gui_manager:ShowStaticText("Block")
 					g_BlockTextActive = true
 				end
-			elseif g_Player:GetEnergy() > 0 then
+			else
 				Door2_exit()
 				scene:ActivateRoom("pasillo")
 				trigger_manager:GetTriggerByName("puerta_sala2"):SetActive(false)
 				cinematic_manager:Execute("OpenDoor")
 				sound_manager:PlayEvent("Open_Close_Door_Event", "Door_sala2")
-            else
-                -- show message that needs energy
-			end
+            end
 		end
 	end
 	
