@@ -89,8 +89,6 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
         l_ActiveLights[3] = TRUE;
     }
 
-    l_ActiveLights[3] = TRUE;
-
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
     {
         return;
