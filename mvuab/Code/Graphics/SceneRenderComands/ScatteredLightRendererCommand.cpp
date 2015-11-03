@@ -79,15 +79,17 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
         l_ActiveLights[1] = l_CameraFrustum.SphereIsVisible(l_PosLights[1], 2.0f) ? TRUE : FALSE;
     }
 
-    if(l_RoomName == "pasillo")
+    /*if(l_RoomName == "pasillo")
     {
         l_ActiveLights[2] = TRUE;
-    }
+    }*/
 
     if(l_RoomName == "space")
     {
         l_ActiveLights[3] = TRUE;
     }
+
+    l_ActiveLights[3] = TRUE;
 
     if((l_ActiveLights[0] | l_ActiveLights[1] | l_ActiveLights[2] | l_ActiveLights[3]) == 0)
     {
@@ -103,7 +105,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     if(m_StartWeight > m_EndWeight) l_ActualWeight = (l_ActualWeight < m_EndWeight) ? m_EndWeight : l_ActualWeight;
     else l_ActualWeight = (l_ActualWeight > m_EndWeight) ? m_EndWeight : l_ActualWeight;
 
-    if(l_ActualWeight < 0.0f)
+    if(l_ActualWeight <= 0.0f)
     {
         return;
     }
@@ -196,10 +198,10 @@ float CScatteredLightSceneRendererCommand::Lerp(float v1, float v2, float t)
     return l;
 }
 
-void CScatteredLightSceneRendererCommand::TurnOff(float l_Time)
+void CScatteredLightSceneRendererCommand::TurnOff(float l_Time,  float l_Weigth)
 {
     m_StartWeight = m_EndWeight;
-    m_EndWeight = 0.0f;
+    m_EndWeight = l_Weigth;
 
     m_Time = (l_Time > 0.001f) ? l_Time : 0.1f;
     m_AccTime = 0.0f;
