@@ -4,7 +4,6 @@
 
 #include "Utils\SingletonPattern.h"
 #include "Utils\Types.h"
-#include "Utils\Mutex.h"
 
 #include <vector>
 #include <string>

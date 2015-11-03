@@ -263,15 +263,6 @@ function moveFree( flag_speed, forward, strafe, dt )
 	current_camera:SetPosition((cam_pos + addPos))
 end
 
-function render()
-	--local t = Mat44f()
-	--t:SetPos(pos)
-	--graphics_manager:SetTransform(t)
-	--graphics_manager:DrawSphere(0.2)
-	--t:SetIdentity()
-	--graphics_manager:SetTransform(t)
-end
-
 function cambiar_sala()
 	g_Room = g_Room + 1
 	if(g_Room > 5) then

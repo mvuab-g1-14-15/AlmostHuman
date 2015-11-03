@@ -10,7 +10,6 @@
 #include <string>
 #include "Exceptions\Exception.h"
 
-#include "Utils\GPUStatics.h"
 #include "Console\Console.h"
 
 #include "ViewerProcess.h"
@@ -155,7 +154,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "Data/config.xml" );
 
-        CGPUStatics* gpu = new CGPUStatics();
         CLogger* pLogger = new CLogger();
 
         CEngine* pEngine = new CEngine();
@@ -234,7 +232,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
         CHECKED_DELETE( pLogger );
-        CHECKED_DELETE( gpu );
         CHECKED_DELETE( lEngineConfig );
 #if _DEBUG
         MemLeaks::MemoryEnd();

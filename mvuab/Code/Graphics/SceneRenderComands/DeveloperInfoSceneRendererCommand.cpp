@@ -5,7 +5,6 @@
 
 #include "Cameras\Camera.h"
 #include "Cameras\CameraManager.h"
-#include "Utils\GPUStatics.h"
 #include "EngineManagers.h"
 
 CDeveloperInfoSceneRenderCommand::CDeveloperInfoSceneRenderCommand( CXMLTreeNode& atts )
@@ -25,13 +24,4 @@ void CDeveloperInfoSceneRenderCommand::Execute( CGraphicsManager& GM )
     CCamera* lCurrentCamera = CameraMInstance->GetCurrentCamera();
     Math::Vect3f lPosition = lCurrentCamera->GetPosition();
     Math::Vect3f lTarget = lCurrentCamera->GetLookAt();
-    int32 lFontHeight = FM->SizeY( "FPS", FontId );
-    CGPUStatics* GPU = CGPUStatics::GetSingletonPtr();
-    GM.DrawRectangle2D( Math::Vect2i( 5, 7 ), width - 10, lFontHeight + 5, m_Quad2dColor, 2, 2, m_Quad2dEdgeColor );
-    FM->DrawTextA( 8, 10, Math::colWHITE, FontId,
-                   "Stats: FPS <%5.2f> Cam<%5.2f %5.2f %5.2f> Look<%5.2f %5.2f %5.2f> Objs<%d> Vtxs<%d> Tri<%d> Faces<%d>",
-                   FPS, lPosition.x, lPosition.y, lPosition.z, lTarget.x, lTarget.y, lTarget.z, GPU->GetDrawCount(),
-                   GPU->GetVertexCount(), uint32( GPU->GetVertexCount() / 3 ), GPU->GetFacesCount() );
-
-    GPU->SetToZero();
 }

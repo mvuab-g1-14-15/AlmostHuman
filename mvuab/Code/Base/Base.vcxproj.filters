@@ -88,9 +88,6 @@
     <ClCompile Include="Math\SplineInterpolator.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\ConditionVarible.cpp" />
-    <ClCompile Include="Utils\Mutex.cpp" />
-    <ClCompile Include="Utils\RWLock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathTypes.h">
@@ -177,9 +174,6 @@
     <ClInclude Include="Utils\Visible.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\GPUStatics.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Console\Console.h">
       <Filter>Console</Filter>
     </ClInclude>
@@ -219,9 +213,6 @@
     <ClInclude Include="Utils\AVIReader.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\ConditionVarible.h" />
-    <ClInclude Include="Utils\Mutex.h" />
-    <ClInclude Include="Utils\RWLock.h" />
     <ClInclude Include="Utils\DebugHelper.h">
       <Filter>Utils</Filter>
     </ClInclude>

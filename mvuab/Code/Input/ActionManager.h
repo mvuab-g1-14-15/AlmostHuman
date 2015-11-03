@@ -6,7 +6,6 @@
 #include <map>
 
 #include "Utils\Manager.h"
-#include "Utils\Mutex.h"
 
 #include "InputDefs.h"
 #include "InputManager.h"
@@ -67,13 +66,12 @@ class CActionManager : public CManager
         MapActionsDone      mDoActions;
         MapActions          mActions;
 
-        CMutex              mMutex;
         CInputManager*      mInputManager;
 
         EInputDeviceType   strDeviceToCode    (const std::string &strAction);
         EInputAxisType     strAxisToCode      (const std::string &strAxis);
         EInputEventType    strEventToCode     (const std::string &strEvent);
-        unsigned int        strKeyToCode       (const std::string &strKey);
+        unsigned int       strKeyToCode       (const std::string &strKey);
 
 };
 

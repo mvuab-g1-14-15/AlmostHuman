@@ -12,7 +12,6 @@
 #include <string>
 #include "Exceptions\Exception.h"
 
-#include "Utils\GPUStatics.h"
 #include "Console\Console.h"
 #include "TestProcess\PhysicProcess.h"
 #include "TestProcess\PlayerPhysicProcess.h"
@@ -121,7 +120,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
         CEngineConfig* lEngineConfig = new CEngineConfig();
         lEngineConfig->Load( "Data/config.xml" );
 
-        CGPUStatics* gpu = new CGPUStatics();
         CLogger* pLogger = new CLogger();
 
         CEngine* pEngine = new CEngine();
@@ -194,7 +192,6 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
         CHECKED_DELETE( pLogger );
-        CHECKED_DELETE( gpu );
         CHECKED_DELETE( lEngineConfig );
         #if _DEBUG
         MemLeaks::MemoryEnd();

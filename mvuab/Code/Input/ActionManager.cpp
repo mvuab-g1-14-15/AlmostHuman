@@ -53,7 +53,6 @@ void CActionManager::ProcessInputs()
 
     for ( ; lItb_inputs != lIte_inputs; ++lItb_inputs )
     {
-
       SInputActions current_action = *lItb_inputs;
 
       if ( current_action.m_AxisType != AXIS_NOTHING )
@@ -158,17 +157,14 @@ void CActionManager::ProcessInputs()
 
 bool CActionManager::DoAction( const std::string& action, float32& amount )
 {
-  //mMutex.Lock();
   MapActionsDone::iterator lItfind = mDoActions.find( action );
 
   if ( lItfind != mDoActions.end() )
   {
     amount = lItfind->second.mActionAmount;
-    mMutex.UnLock();
     return lItfind->second.mIsActionDone;
   }
 
-  //mMutex.UnLock();
   return false;
 }
 
