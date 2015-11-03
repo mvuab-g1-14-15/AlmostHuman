@@ -40,8 +40,8 @@
   <MeshInstance name="Tunnel_floor_1_sala1" core="Tunnel_floor_1_sala1" pos="109.842 -9.74718 -44.9369" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Light_1_sala1" core="Light_1_sala1" pos="106.397 -9.74718 -44.9369" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Light_2_sala1" core="Light_2_sala1" pos="106.397 -9.74718 -44.9369" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box197_sala1" core="Box197_sala1" pos="119.554 -15.9236 -49.0071" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box197_sala1" core="Box197_sala1" pos="119.478 -15.9236 -49.0071" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Taula_sala1" core="Taula_sala1" pos="112.818 -8.59541 -42.4039" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Box198_sala1" core="Box198_sala1" pos="113.172 -9.94003 -44.254" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Box198_sala1" core="Box198_sala1" pos="113.172 -9.94003 -44.254" yaw="0.0" pitch="0.0" roll="0.0" scale="2.21736 1.07113 1.0" />
   <MeshInstance name="Rejilla_sala1" core="Rejilla_sala1" pos="113.117 -9.7692 -44.2291" yaw="0.0" pitch="0.0" roll="0.0" scale="1.01791 1.01791 1.01791" />
 </RenderableObjects>
