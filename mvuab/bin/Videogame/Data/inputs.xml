@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Actions>
-    <action name="PlayVideo">
-        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_P"/>
-        <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN"  Code="KEY_LCTRL"/>
+    <action name="test1">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_O"/>
+    </action>
+    
+    <action name="test2">
+        <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN"  Code="KEY_P"/>
     </action>
 
     <action name="Alarm">

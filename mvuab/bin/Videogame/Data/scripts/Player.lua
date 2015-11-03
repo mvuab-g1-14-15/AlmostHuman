@@ -79,8 +79,18 @@ function CPlayer:Update()
 	self.StealthAttack:Update( lArmPosition )
 
 	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() then
-	self:SetAnimation("aim")
+        self:SetAnimation("aim")
 	end
+    
+    if action_manager:DoAction("test1") then
+        local s = scene_renderer_commands_manager:GetScatteredLight()
+        s:TurnOff(10.0)
+    end
+    
+    if action_manager:DoAction("test2") then
+        local s = scene_renderer_commands_manager:GetScatteredLight()
+        s:TurnOn(10.0, 5.65)
+    end
 	
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("ThrowGrenade") and #self.GrenadeQueue > 0 then

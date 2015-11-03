@@ -262,3 +262,8 @@ void CSceneRendererCommandManager::SetVisibleCommand( std::string aName, bool aV
   if ( lCommand )
     lCommand->SetVisible( aVisible );
 }
+
+CScatteredLightSceneRendererCommand *CSceneRendererCommandManager::GetScatteredLight()
+{
+    return dynamic_cast<CScatteredLightSceneRendererCommand *>(GetResource("scattered_light"));
+}
