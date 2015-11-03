@@ -44,8 +44,6 @@ UBER_VERTEX_PS mainVS(UBER_VERTEX_VS IN)
 	OUT.UV=IN.UV;
 #endif
 
-
-
 #if defined( USE_NORMAL )
 	OUT.WorldTangent = float4( mul(IN.Tangent.xyz, (float3x3)g_WorldMatrix), 1.0);
 	OUT.WorldBinormal = float4(mul(IN.Binormal.xyz, (float3x3)g_WorldMatrix),1.0);
@@ -70,6 +68,10 @@ float4 PackAlbedo( UBER_VERTEX_PS IN )
 #elif defined ( USE_DEBUG )
 	return g_DebugColor;
 #else
+	#if defined( USE_CAL3D_HW )
+		return float4( 1, 0, 0, 1 );
+	#endif
+	
 	return tex2D(S0LinearSampler,IN.UV);
 #endif
 }
@@ -110,6 +112,10 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 #endif
 
 #if defined( USE_CAL3D_HW )
+
+	OUT.Ambient=float4( 1, 0, 0, 1);
+	
+	/*
 	// Light probes
 	float3 l_LightProbeColorInit = float3(0.0, 0.0, 0.0);
 	float3 lFixedNormal = l_Normal;
@@ -146,8 +152,8 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	
 	l_AmbientColor *= l_DiffuseColor;
 	
-	OUT.Ambient=float4( l_AmbientColor, 0 );
-	//OUT.Ambient = float4(l_DiffuseColor.xyz, g_SpecularFactor);
+	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
+	*/
 #else
 	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 #endif

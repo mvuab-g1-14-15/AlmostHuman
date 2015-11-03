@@ -15,6 +15,11 @@ class CWaitTimeElement : public CCinematicsElement
 		  virtual void Render();
 		  virtual void Render2D(CGraphicsManager &GM);     
 
+private:
+	std::string			m_LuaCode;
+	bool				m_bLua;
+	float				m_KeyAction;
+
 };
 
 #endif //_WAIT_TIME_ELEMENT_
