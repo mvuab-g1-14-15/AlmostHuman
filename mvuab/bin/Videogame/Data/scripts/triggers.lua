@@ -425,7 +425,7 @@ function SetPropSala2()
 		
 		scene:SetCurrentRoomName("sala2")
 		g_Player:SetRoom("sala2")
-		g_Player:SetCheckpoint("sala2", Vect3f( 76.51, -10.60, -31.10 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala2", Vect3f( 76.51, -10.60, -31.10 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		scene:DesactivateRoom("sala1")
 		
@@ -443,7 +443,7 @@ function SetPropPasillo()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("pasillo")
 		g_Player:SetRoom("pasillo")
-		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("pasillo", Vect3f( 53.72, -16.66, -17.16 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		cinematic_manager:Execute("CloseDoor")
 		--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, 0, 0))
 		scene:DesactivateRoom("sala2")
@@ -461,7 +461,7 @@ function SetPropSala3()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala3")
 		g_Player:SetRoom("sala3")
-		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala3", Vect3f( 53.80, -16.23, 41.77), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		sound_manager:PlayEvent("Play_Sala3A", "Logan")
 		cinematic_manager:Execute("CloseDoorPasillo")
@@ -483,7 +483,7 @@ function SetPropSala4()
 		g_HUD:ChangeCurrentMap()
 		scene:SetCurrentRoomName("sala4")
 		g_Player:SetRoom("sala4")
-		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy())
+		g_Player:SetCheckpoint("sala4", Vect3f( -70.0, 22.0, 59.0 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		
 		scene:DesactivateRoom("pasillo")
 		scene:DesactivateRoom("sala3")
@@ -780,7 +780,7 @@ function UpdateTriggers()
 				sound_manager:PlayEvent("Play_Sala3B", "Logan")
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
-				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 			else
 				if not g_FaltanC4Text then
 					g_FaltanC4Text = true
@@ -808,7 +808,7 @@ function UpdateTriggers()
 			trigger_manager:GetTriggerByName("base_DLC_sala2"):SetActive(false)
 			sound_manager:PlayEvent("Play_Sala2", "Logan")
 			g_Player:SetEnergy(100.0)
-			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy())
+			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 		end
 	end
 	

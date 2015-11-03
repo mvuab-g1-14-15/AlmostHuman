@@ -56,6 +56,7 @@ function CPlayer:__init()
 	self.Checkpoint.position = Vect3f( 136.84, -7.99, -62 )
 	self.Checkpoint.life = 100.0
 	self.Checkpoint.energy = 0.0
+	self.Checkpoint.yaw = 0.0 --TODO: Check the initial yaw of the game
 end
 
 function CPlayer:Update()
@@ -104,6 +105,8 @@ function CPlayer:Update()
 		self:SetPosition(self.Checkpoint.position)
 		self.Life= self.Checkpoint.life
 		self.Blaster:SetEnergy(self.Checkpoint.energy)
+		self:SetYaw(self.Checkpoint.yaw)
+		self:SetPitch(0.0)
 		enemy_manager:Reinit(self.Checkpoint.room)
 	end
 	
@@ -131,11 +134,12 @@ function CPlayer:Update()
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
-function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy)
+function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy, aYaw)
 	self.Checkpoint.room = aRoom
 	self.Checkpoint.position = aPosition
 	self.Checkpoint.life = aLife
 	self.Checkpoint.energy = aEnergy
+	self.Checkpoint.yaw = aYaw
 end
 
 function CPlayer:SetRoom( aName )
@@ -188,6 +192,14 @@ end
 
 function CPlayer:GetYaw()
 	return self.PlayerController:GetYaw()
+end
+
+function CPlayer:SetYaw(aYaw)
+	self.PlayerController:SetYaw(aYaw)
+end
+
+function CPlayer:SetPitch(aPitch)
+	self.PlayerController:SetPitch(aPitch)
 end
 
 function CPlayer:GetHeight()
