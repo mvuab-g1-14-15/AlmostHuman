@@ -60,3 +60,8 @@ end
 function SoundGUI()
 	sound_manager:PlayEvent("Play_Gui_Over","GUI")
 end
+
+function End()
+	gui_manager:ActiveWindows("Credits.xml")
+	engine_manager:SetbGamePause(true)
+end
