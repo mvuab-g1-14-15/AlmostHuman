@@ -65,11 +65,6 @@
     <pool_renderable_object_technique name="scattering_light_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="ScatteredLightTechnique"/>
 	</pool_renderable_object_technique>
-    
-    <!-- Draw Quad (pixel pass throw) -->
-    <pool_renderable_object_technique name="draw_quad_pool_renderable_object_technique">
-		<default_technique vertex_type="1104" technique="DrawQuadSampler0Technique"/>
-	</pool_renderable_object_technique>
 	
 	<pool_renderable_object_technique name="pool_damage">
 		<default_technique vertex_type="1104" technique="DamageTechnique"/>
