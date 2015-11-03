@@ -188,6 +188,11 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
             }
         }
 
+
+        #if !defined(_DEBUG)
+            exit(EXIT_SUCCESS);
+        #endif
+
         UnregisterClass( APPLICATION_NAME, wc.hInstance );
         // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
         CHECKED_DELETE( pEngine );
