@@ -34,9 +34,6 @@ CImage::CImage( const CXMLTreeNode& aNode, const Math::Vect2i& screenResolution 
       AddTexture( lTextureNode );
     }
   }
-
-  m_bAnimated        = true;
-  m_bLoop            = true;
 }
 
 //---------------CGuiElement Interface----------------------
