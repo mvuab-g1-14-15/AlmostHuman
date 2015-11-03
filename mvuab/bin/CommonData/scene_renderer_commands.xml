@@ -24,7 +24,6 @@
 	<enable_z_test/>
 	<enable_alpha_blend/>
 	<set_blend srcblend="One" dstblend="One" blendop="Add"/>
-	<render_billboards/>
 	<!--render_triggers/-->
     <lens_of_flare/>
 	<disable_alpha_blend/>
@@ -35,6 +34,7 @@
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>
     <render_particules/>
+	<render_billboards/>
     <render_command filename="../CommonData/glow_cmd.xml"/>
 	<enable_alpha_test/>
 	<set_pool_renderable_objects_technique pool="lens_flare_pool_renderable_object_technique"/>
