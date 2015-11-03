@@ -116,7 +116,7 @@ public:
   void SetAlpha( float aAlpha );
   void SetAngle( float aAngle );
   void SetDirection( const Math::Vect3f& aDirection );
-  void SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights);
+  void SetScatterLights(const std::vector<BOOL> &l_ActiveLights, const std::vector<Math::Vect3f> &l_PosLights, float l_Weight);
   void SetLife( float aLife );
 
 protected:
@@ -185,6 +185,10 @@ private: // Members
   D3DXHANDLE m_DebugColor;
   D3DXHANDLE m_UseDebugColor;
 
+  //
+  // Rays Of God
+  //
+   D3DXHANDLE m_RaysWeight;
   //
   // Shadow map handles
   //

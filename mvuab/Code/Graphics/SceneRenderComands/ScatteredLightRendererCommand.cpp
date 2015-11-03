@@ -15,15 +15,21 @@
 #include "GraphicsManager.h"
 #include "EngineManagers.h"
 #include "Utils/Defines.h"
+#include "Timer/Timer.h"
 
 CScatteredLightSceneRendererCommand::CScatteredLightSceneRendererCommand(CXMLTreeNode& atts) : CStagedTexturedRendererCommand(atts)
 {
     uint32 w = 0, h = 0;
     GraphicsInstance->GetWidthAndHeight(w, h);
 
+    m_StartWeight = 5.65f;
+    m_EndWeight = 5.65f;
+
+    m_AccTime = 0.0f;
+    m_Time = 1.0f;
+
     m_RenderTarget1.Create("OcclusionMap", w / 2, h / 2, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
     m_RenderTarget2.Create("ScatteredLight", w / 2, h / 2, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
-    m_RenderTarget3.Create("MergeOcclusionScattering", w, h, 1, CTexture::eUsageRenderTarget, CTexture::eDefaultPool, CTexture::eRGBA8);
 }
 
 CScatteredLightSceneRendererCommand::~CScatteredLightSceneRendererCommand()
@@ -90,13 +96,22 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
 
     // Occlusion Map
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("occlusion_map_pool_renderable_object_technique")->Apply();
+    m_AccTime += CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime();
+
+    float l_ActualWeight = MyLerp(m_StartWeight, m_EndWeight, m_AccTime / m_Time);
+    l_ActualWeight = (l_ActualWeight > m_EndWeight) ? m_EndWeight : l_ActualWeight;
+
+    if(l_ActualWeight < 0.0f)
+    {
+        return;
+    }
 
     // Vertex 19
     std::string &l_TechniqueName = ROTMInstance->GetRenderableObjectTechniqueNameByVertexType(19);
     CRenderableObjectTechnique *l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     CEffectTechnique *l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     // Vertex 31
@@ -104,7 +119,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     // Vertex 51
@@ -112,7 +127,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     // Vertex 63
@@ -120,7 +135,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     // Vertex 67
@@ -128,7 +143,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     // Vertex 415
@@ -136,7 +151,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech = l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
     l_EffectTech->GetEffect()->SetCameraPosition(CameraMInstance->GetCurrentCamera()->GetPosition());
 
     m_RenderTarget1.SetAsRenderTarget(0);
@@ -158,7 +173,7 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     l_ROT = ROTMInstance->GetResource(l_TechniqueName);
 
     l_EffectTech =  l_ROT->GetEffectTechnique();
-    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights);
+    l_EffectTech->GetEffect()->SetScatterLights(l_ActiveLights, l_PosLights, l_ActualWeight);
 
     m_RenderTarget1.Activate(0);
     m_StageTextures[0].m_Texture->Activate(1);
@@ -171,4 +186,28 @@ void CScatteredLightSceneRendererCommand::Execute( CGraphicsManager & GM )
     RECT l_Rect2 = { 0, 0, l_Width, l_Height };
     ROTMInstance->GetPoolRenderableObjectTechniques().GetResource("draw_quad_pool_renderable_object_technique")->Apply();
     GM.DrawColoredQuad2DTexturedInPixelsByEffectTechnique(l_EffectTech, l_Rect2, Math::CColor::CColor(), &m_RenderTarget2, 0.0f, 0.0f, 1.0f, 1.0f);
+}
+
+float CScatteredLightSceneRendererCommand::MyLerp(float v1, float v2, float t)
+{
+    float l = (1.0f - t) * v1 + t * v2;
+    return l;
+}
+
+void CScatteredLightSceneRendererCommand::TurnOff(float l_Time)
+{
+    m_StartWeight = m_EndWeight;
+    m_EndWeight = 0.0f;
+
+    m_Time = (l_Time > 0.001f) ? l_Time : 0.1f;
+    m_AccTime = 0.0f;
+}
+
+void CScatteredLightSceneRendererCommand::TurnOn(float l_Time, float l_Weigth)
+{
+    m_EndWeight = l_Weigth;
+    m_StartWeight = 0.0f;
+
+    m_Time = (l_Time > 0.001f) ? l_Time : 0.1f;
+    m_AccTime = 0.0f;
 }

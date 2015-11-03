@@ -84,4 +84,7 @@ const char UseShadowDynamicStr[]        = "UseDynamicShadowMap";
 const char ShadowMapTextureSizeStr[]    = "ShadowMapTextureSize";
 //-----------------------------------------------------------------------
 
+// Rays of god  ---------------------------------------------------------
+const char RaysOfGodWeigth[] = "RaysWeight";
+//-----------------------------------------------------------------------
 #endif //EFFECTS_DEFINES_H

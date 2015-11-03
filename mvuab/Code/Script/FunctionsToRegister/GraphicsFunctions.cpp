@@ -53,6 +53,7 @@ extern "C"
 #include "Gizmos/Gizmo.h"
 #include "Gizmos/GizmosManager.h"
 #include "SceneRenderComands/SceneRendererCommandManager.h"
+#include "SceneRenderComands/ScatteredLightRendererCommand.h"
 
 
 
@@ -406,11 +407,22 @@ void registerSceneRendererCommand( lua_State* aLuaState )
   LUA_DECLARE_CLASS( CSceneRendererCommandManager )
   LUA_DECLARE_METHOD( CSceneRendererCommandManager, GetVisibleCommand )
   LUA_DECLARE_METHOD( CSceneRendererCommandManager, SetVisibleCommand )
+  LUA_DECLARE_METHOD( CSceneRendererCommandManager, GetScatteredLight )
   LUA_END_DECLARATION
+}
+
+void registerRaysOfGod( lua_State* aLuaState )
+{
+    LUA_BEGIN_DECLARATION(aLuaState)
+    LUA_DECLARE_CLASS(CScatteredLightSceneRendererCommand)
+    LUA_DECLARE_METHOD(CScatteredLightSceneRendererCommand, TurnOff)
+    LUA_DECLARE_METHOD(CScatteredLightSceneRendererCommand, TurnOn)
+    LUA_END_DECLARATION
 }
 
 void registerGraphics( lua_State* aLuaState )
 {
+  registerRaysOfGod( aLuaState );
   registerObject3D( aLuaState );
   registerCameras( aLuaState );
   registerGizmos( aLuaState );
