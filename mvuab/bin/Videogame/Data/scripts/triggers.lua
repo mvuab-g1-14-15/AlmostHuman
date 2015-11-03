@@ -623,29 +623,25 @@ function PuntoDetonacion_exit()
 end
 
 function Elevator_enter()
-    if g_ExplotionDone then
-        g_InsideElevator = true
-        gui_manager:ShowStaticText("TakeElevator")
-        g_TakeElevatorText = true
-    else
-        g_DetonarC4Text = true
-        gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
-    end
+	g_InsideElevator = true
+	gui_manager:ShowStaticText("TakeElevator")
+	g_TakeElevatorText = true
+	if not g_ExplotionDone then
+		gui_manager:ShowStaticText("C4NoDetonado")
+		g_DetonarC4Text = true
+	end
 end
 
 function Elevator_exit()
-    if g_ExplotionDone then
-        g_InsideElevator = false
-        if g_TakeElevatorText then
-            gui_manager:ShowStaticText("TakeElevator")
-            g_TakeElevatorText = false
-        end
-    else
-        if g_DetonarC4Text then
-            g_DetonarC4Text = false
-            gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
-        end
-    end
+	g_InsideElevator = false
+	if g_TakeElevatorText then
+		gui_manager:ShowStaticText("TakeElevator")
+		g_TakeElevatorText = false
+	end
+	if g_DetonarC4Text then
+		g_DetonarC4Text = false
+		gui_manager:ShowStaticText("C4NoDetonado") -- si no se ha detonado el C4
+	end
 end
 
 function UpdateDLC_enter()
@@ -785,6 +781,7 @@ function UpdateTriggers()
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
 				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
+				--matar los enemigos en la cinematica
 				lEnemy = enemy_manager:GetEnemy("Drone1_S3")
 				if lEnemy ~= nil then
 					lEnemy:AddDamage(lEnemy:GetLife())
@@ -803,12 +800,14 @@ function UpdateTriggers()
 	end
 	
 	if g_InsideElevator then
-		if action_manager:DoAction("Action") then
-			Elevator_exit()
-			cinematic_manager:Execute("elevatorDown")
-			trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
-			enemy_manager:ActivateEnemiesSala3()
-			enemy_manager:SetAlarm("sala3")
+		if g_ExplotionDone then
+			if action_manager:DoAction("Action") then
+				Elevator_exit()
+				cinematic_manager:Execute("elevatorDown")
+				trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(false)	
+				enemy_manager:ActivateEnemiesSala3()
+				enemy_manager:SetAlarm("sala3")
+			end
 		end
 	end
 	

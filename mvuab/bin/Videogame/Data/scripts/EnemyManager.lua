@@ -452,6 +452,7 @@ function CEnemyManager:Reinit( aRoom )
 			gui_manager:ShowStaticText("DetonarC4", true)
 			gui_manager:ShowStaticText("ColocarC4", true)
 			gui_manager:ShowStaticText("TakeElevator", true)
+			gui_manager:ShowStaticText("C4NoDetonado", true)
 		end
 		trigger_manager:GetTriggerByName("elevator_sala3"):SetActive(true)
 		light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(false)
