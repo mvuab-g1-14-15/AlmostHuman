@@ -10,7 +10,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3568813383	Play_Main_Theme			\Music & Ambients\Play_Main_Theme	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	84672891	Musica boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final boss Almost Human_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Musica boss		2419469
+	84672891	Musica boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final boss Almost Human_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sequence Boss\Musica boss		2419469
 	197167235	Ambient_Inici_Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 14_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient_Inici_Pasillo		844774
 	342893694	Ambient_Inici_Sala3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 16_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient_Inici_Sala3		549387
 	354184061	dark soundscapes 11	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\dark soundscapes 11_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Ambient(Long)\dark soundscapes 11		2986058
