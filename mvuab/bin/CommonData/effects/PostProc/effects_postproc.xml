@@ -46,5 +46,7 @@
         <handles use_world_view_projection_matrix="true" />
 	</technique>
     
+    <technique name="DrawQuadSampler0Technique" vertex_type="1104" file="../CommonData/effects/DrawQuad.fx" />
+
 	<effect file="../CommonData/effects/PostProc/glow_effects.xml"/>
     <effect file="../CommonData/effects/PostProc/occlussion_effects.xml"/></effects>
