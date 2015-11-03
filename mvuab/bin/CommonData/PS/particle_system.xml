@@ -1,18 +1,18 @@
 <particles_systems emitters_path="../CommonData/PS/emitters/">
-	<particle_system_core name="smoke" sound="false">
+	<particle_system_core name="smoke" sound="true">
 		<cube_emitter file="smoke_emitter.xml"/>
 		<cube_emitter file="smoke_emitter_2.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="smoke_emitter_denso" sound="false">
+	<particle_system_core name="smoke_emitter_denso" sound="true">
 		<cube_emitter file="smoke_emitter_denso.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="smoke_emitter_denso_inv" sound="false">
+	<particle_system_core name="smoke_emitter_denso_inv" sound="true">
 		<cube_emitter file="smoke_emitter_denso_inv.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam" sound="false">
+	<particle_system_core name="steam" sound="true">
 		<cube_emitter file="steam_emitter.xml"/>
 	</particle_system_core>
 	
@@ -20,31 +20,31 @@
 		<cube_emitter file="stealth_emitter_1.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_down" sound="false">
+	<particle_system_core name="steam_down" sound="true">
 		<cube_emitter file="steam_emitter_down.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_down_larger" sound="false">
+	<particle_system_core name="steam_down_larger" sound="true">
 		<cube_emitter file="steam_down_larger.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_up" sound="false">
+	<particle_system_core name="steam_up" sound="true">
 		<cube_emitter file="steam_emitter_up.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_up_slow_big" sound="false">
+	<particle_system_core name="steam_up_slow_big" sound="true">
 		<cube_emitter file="steam_up_slow_big.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_down_slow_big" sound="false">
+	<particle_system_core name="steam_down_slow_big" sound="true">
 		<cube_emitter file="steam_down_slow_big.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="steam_emitter_aside" sound="false">
+	<particle_system_core name="steam_emitter_aside" sound="true">
 		<cube_emitter file="steam_emitter_aside.xml"/>
 	</particle_system_core>
 	
-	<particle_system_core name="ray" sound="false">
+	<particle_system_core name="ray" sound="true">
 		<cube_emitter file="ray_emitter_1.xml"/>
 	</particle_system_core>
 	

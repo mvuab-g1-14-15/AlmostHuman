@@ -1,9 +1,9 @@
 <cinematic>
 	<add_renderable path="Data\sala1\cinematics/" room="sala1" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.1"/>
+	<set_active name="rejilla_fragment" resource_id_file="Data/sala1/cinematics/elementos_rejilla.xml" active="true" time="0.00001"/>
 	<set_active name="player_LOGAN" resource_id_file="Data/sala1/cinematics/elemento_rejilla.xml" active="false" time="0.00001"/>
 	<set_active name="player_LOGAN3" resource_id_file="Data/sala1/cinematics/player_element.xml" active="false" time="0.00001"/>
 	<set_camera name="CameraCinematica" name_camera="camera_cinematica2_sala1" active="true" time="0.00001" blocker="true" />
-	<set_active name="rejilla_fragment" resource_id_file="Data/sala1/cinematics/elementos_rejilla.xml" active="true" time="0.00001"/>
 	<set_active name="rejilla_LOGAN" resource_id_file="Data/sala1/cinematics/elementos_rejilla_player.xml" active="true" time="0.00001"/>
 	
 	

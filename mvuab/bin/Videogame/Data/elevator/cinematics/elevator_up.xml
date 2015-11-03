@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<cinematic name="Elevator_up.max" duration="33.3333">
+﻿<cinematic name="Elevator_up.max" duration="33.3333">
   <cinematic_object resource="Door_elevator001_elevator" renderable_objects_manager="Door_elevator001_elevator" room="elevator" active="false" init_keyframe="0.0" lua_code="sound_manager:PlayEvent('Play_Elevator', 'Iris');sound_manager:PlayEvent('Play_Elevator_Up', 'Logan')" key_action="0.0">
     <cinematic_object_key_frame time="0.0" pos="-53.0468 36.6702 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />
     <cinematic_object_key_frame time="0.0333333" pos="-53.0468 36.6702 60.9059" yaw="-1.5708" pitch="1.5708" roll="0.0" scale="1.0 1.0 1.0" />

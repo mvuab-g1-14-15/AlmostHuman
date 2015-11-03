@@ -1,8 +1,10 @@
 <cinematic>
+	<set_active name="player_elevator_enter" resource_id_file="Data/elevator/cinematics/player_element.xml" active="false" time="0.00001"/>
 	<set_camera name="CameraCinematicaElevator1" name_camera="camera_cinematica1_elevatorPart1" active="true" time="0.00001" blocker="true" />
 	<play_animation name="ElevatorUp" resource_id_file="Data/elevator/cinematics/elevator_up.xml" time="33.3333" />
 	<set_camera name="CameraCinematicaElevator2" name_camera="camera_cinematica1_elevatorPart1" active="false" time="0.00001" blocker="true" />
 	<set_camera name="CameraCinematicaElevator3" name_camera="camera_cinematica1_elevatorPart2" active="true" time="0.00001" blocker="true" />
 	<wait name="espera_camera" time="3.334" />
 	<set_camera name="CameraCinematicaElevator4" name_camera="camera_cinematica1_elevatorPart2" active="false" time="0.00001" blocker="false" />
+	<set_active name="player_elevator_leave" resource_id_file="Data/elevator/cinematics/player_element.xml" active="true" time="0.00001"/>
 </cinematic>

@@ -124,6 +124,7 @@
 				<Event Id="1705329517" Name="Play_Open_Door_Hangar"/>
 				<Event Id="2235207626" Name="Play_Open_Elevator_Door"/>
 				<Event Id="3613560533" Name="Play_Pick_Object"/>
+				<Event Id="2558030041" Name="Play_Plant_C4"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
 				<Event Id="194392270" Name="Stop_Elevator_Up"/>
 			</IncludedEvents>
@@ -179,6 +180,10 @@
 				<File Id="1059316681" Language="SFX">
 					<ShortName>Alarm.wav</ShortName>
 					<Path>SFX\Alarm_BADC626A.wem</Path>
+				</File>
+				<File Id="1064441044" Language="SFX">
+					<ShortName>Plant C4.wav</ShortName>
+					<Path>SFX\Plant C4_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
