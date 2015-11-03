@@ -781,15 +781,6 @@ function UpdateTriggers()
 				trigger_manager:GetTriggerByName("punto_detonacion"):SetActive(false)
 				g_ExplotionDone = true
 				g_Player:SetCheckpoint("sala3", Vect3f( -7.0, -14.14, 60.05 ), g_Player:GetLife(), g_Player:GetEnergy())
-				--matar los enemigos en la cinematica
-				lEnemy = enemy_manager:GetEnemy("Drone1_S3")
-				if lEnemy ~= nil then
-					lEnemy:AddDamage(lEnemy:GetLife())
-				end
-				lEnemy = enemy_manager:GetEnemy("Drone2_S3")
-				if lEnemy ~= nil then
-					lEnemy:AddDamage(lEnemy:GetLife())
-				end
 			else
 				if not g_FaltanC4Text then
 					g_FaltanC4Text = true
