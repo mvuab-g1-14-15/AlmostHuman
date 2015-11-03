@@ -462,6 +462,15 @@ function CEnemyManager:Reinit( aRoom )
 		cinematic_manager:ReloadCinematic("data/sala4/cinematics.xml")
 		self.Boss:Destroy()
 		self.Boss = nil
+        
+        self.Enemy = {}
+        self.Enemy.sala1 = {}
+        self.Enemy.sala2 = {}
+        self.Enemy.pasillo = {}
+        self.Enemy.sala3 = {}
+        self.Enemy.sala4 = {}
+	
+        self.Shoots = {}
 		
 		trigger_manager:GetTriggerByName("Hack_nave1"):SetActive(true)
 		trigger_manager:GetTriggerByName("Hack_nave2"):SetActive(true)
