@@ -29,9 +29,9 @@ function CBoss:__init()
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel(self.Name, "boss")
-		self.RenderableObject:SetRoomName( "sala4" )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:SetRoomName( "sala4" )
 	local lROPos = self.InitPos
 	lROPos.y = lROPos.y - self.HeightOffsetRO
 	self.RenderableObject:SetPosition( lROPos )

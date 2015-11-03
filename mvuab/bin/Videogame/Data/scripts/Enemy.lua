@@ -46,9 +46,9 @@ function CEnemy:__init( aInfo )
 	self.RenderableObject = renderable_objects_manager_characters:GetResource(self.Name)
 	if self.RenderableObject == nil then
 		self.RenderableObject = CreateAnimatedInstanceModel(self.Name, aInfo.mesh)
-		self.RenderableObject:SetRoomName( aInfo.room )
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:SetRoomName( aInfo.room )
 	self.RenderableObject:SetYaw( -self.CharacterController:GetYaw() + g_HalfPi )
 	self.RenderableObject:MakeTransform()
 	self.RenderableObject:ChangeAnimation("idle", 0.5, 1.0)

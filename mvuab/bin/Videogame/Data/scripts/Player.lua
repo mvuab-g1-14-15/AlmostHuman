@@ -148,6 +148,7 @@ end
 
 function CPlayer:SetRoom( aName )
 	self.Room = aName
+	self.RenderableObject:SetRoomName(aName)
 end
 
 function CPlayer:GetRoom()
