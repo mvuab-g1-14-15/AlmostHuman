@@ -1,6 +1,6 @@
 class "CBarrel"
 
-function CBarrel:__init(aName, aPosition)
+function CBarrel:__init(aName, aPosition, aRoom)
 	self.Pos = aPosition
 	self.Name = aName
 	self.Radius = 0.2
@@ -20,6 +20,7 @@ function CBarrel:__init(aName, aPosition)
 		self.RenderableObject = CreateInstanceMesh(self.Name, "Barrel")
 		renderable_objects_manager_characters:AddResource(self.Name, self.RenderableObject)
 	end
+	self.RenderableObject:SetRoomName( aRoom )
 	
 	self.RenderableObject:SetPosition(self.Pos)
 	self.RenderableObject:MakeTransform()
