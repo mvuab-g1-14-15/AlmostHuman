@@ -8,6 +8,8 @@
 #include "Trigger.h"
 #include "EngineConfig.h"
 
+#include <boost/foreach.hpp>
+
 CTriggerManager::CTriggerManager()
     : CManager()
 {
@@ -110,9 +112,18 @@ std::vector<CTrigger*> CTriggerManager::GetTriggersVector()
 {
     return m_ResourcesVector;
 }
+
 CTrigger* CTriggerManager::GetTriggerByName( std::string Name )
 {
     return GetResource( Name );
+}
+
+void CTriggerManager::SetCollision(bool aBool)
+{
+  BOOST_FOREACH(CTrigger* lTrigger, m_ResourcesVector)
+  {
+    lTrigger->SetCollision( aBool );
+  }
 }
 
 void

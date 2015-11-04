@@ -51,6 +51,8 @@ public:
   };
   bool GetActive() { return mActive; };
 
+  void SetCollision(bool aBool);
+
 private: // Members
 
 	bool mActive;

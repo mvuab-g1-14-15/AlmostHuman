@@ -54,6 +54,8 @@ public:
   int                                 GetValue() const;
   void                                SetValue( const unsigned int& v );
 
+  void                                SetCollision( bool aBool );
+
   void ModifyTrigger( std::string name, Math::Vect3f position, Math::Vect3f size, bool aEnter, bool aStay, bool aLeave, std::string aEnterEvent ,std::string aStayEvent, std::string aLeaveEvent);
 };
 

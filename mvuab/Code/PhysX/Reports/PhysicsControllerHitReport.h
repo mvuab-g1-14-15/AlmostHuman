@@ -12,6 +12,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 
         virtual NxControllerAction onShapeHit(const NxControllerShapeHit& hit)
         {
+			/*
             if(hit.shape)
             {
                 NxCollisionGroup group = hit.shape->getGroup();
@@ -38,7 +39,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
                     return NX_ACTION_NONE;
                 }
             }
-
+			*/
             return NX_ACTION_NONE;
         }
 

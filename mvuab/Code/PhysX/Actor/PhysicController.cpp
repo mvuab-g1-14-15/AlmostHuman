@@ -14,6 +14,10 @@
 #include "PhysicsManager.h"
 #include "Reports\PhysicsControllerHitReport.h"
 
+#include "Utils\Defines.h"
+#include "EngineManagers.h"
+#include "Triggers/TriggerManager.h"
+
 CPhysicController::CPhysicController( float _fRadius, float _fHeight, float _fSlope,
                                       float _fSkinwidth, float _fStepOffset
                                       , ECollisionGroup _uiCollisionGroups, CPhysicUserData* _pUserData, const Math::Vect3f& _vPos,
@@ -295,8 +299,10 @@ bool CPhysicController::UpdateCharacterExtents( bool bent, float ammount )
   worldCapsule.p1.y += height * 0.5f;
   worldCapsule.radius = radius;
   m_pPhXController->setCollision( false ); // Avoid checking overlap with ourself
+  TriggersMInstance->SetCollision( false ); // Avoid checking overlap with triggers
   bool Status = m_pPhXScene->checkOverlapCapsule( worldCapsule);
   m_pPhXController->setCollision( true );
+  TriggersMInstance->SetCollision( true );
 
   if ( Status )
     return false;

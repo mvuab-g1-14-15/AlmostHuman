@@ -255,3 +255,8 @@ Math::Vect3f CTrigger::GetPosition()
 {
 	return m_Position;
 }
+
+void CTrigger::SetCollision(bool aBool)
+{
+  m_PhysicActor->Activate(aBool);
+}
