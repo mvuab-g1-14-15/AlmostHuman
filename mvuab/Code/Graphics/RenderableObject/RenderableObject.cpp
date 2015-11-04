@@ -12,9 +12,9 @@ CRenderableObject::CRenderableObject()
 
 CRenderableObject::CRenderableObject(const CXMLTreeNode &atts)
     : CObject3D(atts)
-    , CName(atts.GetAttribute<std::string>("name", ""))
-    , m_Active( atts.GetAttribute<bool>("active", true ))
-    , m_RoomName( "" )
+    , CName( atts.GetAttribute<std::string>("name", "") )
+    , m_Active( atts.GetAttribute<bool>("active", true ) )
+    , m_RoomName( atts.GetAttribute<std::string>("room", "") )
 {
 }
 
