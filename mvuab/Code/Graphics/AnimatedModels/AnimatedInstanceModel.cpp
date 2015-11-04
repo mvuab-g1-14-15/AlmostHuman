@@ -168,7 +168,10 @@ void CAnimatedInstanceModel::RenderModelByHardware()
 
 	// Activate light probe texture
 	//TextureMInstance->GetTexture("Data/room2/LightProbeLightingMap.tga")->Save("lightprobe");
-	TextureMInstance->GetTexture("Data/"+GetRoomName()+"/LightProbeLightingMap.tga")->Activate(6); //Hardcoded to test
+    const std::string lRoomName = GetRoomName();
+    ASSERT(lRoomName != "",  "The object %s has no room", GetName().c_str() );
+    if (lRoomName != "")
+	    TextureMInstance->GetTexture("Data/"+GetRoomName()+"/LightProbeLightingMap.tga")->Activate(6); //Hardcoded to test
 
     //m_NormalTextureList[0]->Activate(1);
     m_AnimatedCoreModel->GetRenderableVertexs()->Render
