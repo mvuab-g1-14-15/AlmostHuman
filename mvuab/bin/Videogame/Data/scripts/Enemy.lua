@@ -131,17 +131,17 @@ function CEnemy:__init( aInfo )
 	self.FootstepTime = 0.5
 	if self.Fly then
 		sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
-		self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
+		self.lParticle1 = CParticle( self.Name.."particle_dead1", "stunned_little", self.Room );
 	end
 	
 	self.LastPos = Vect3f(0.0)
 	self.Death = false
 	
 	if not self.Fly then
-		self.lParticle1 = CParticle( self.Name.."particle_dead1", "ray", self.Room );
-		self.lParticle2 = CParticle( self.Name.."particle_dead2", "ray", self.Room );
-		self.lParticle3 = CParticle( self.Name.."particle_dead3", "ray", self.Room );
-		self.lParticle4 = CParticle( self.Name.."particle_dead4", "ray", self.Room );
+		self.lParticle1 = CParticle( self.Name.."particle_dead1", "stunned_little", self.Room );
+		self.lParticle2 = CParticle( self.Name.."particle_dead2", "stunned_little", self.Room );
+		self.lParticle3 = CParticle( self.Name.."particle_dead3", "stunned_little", self.Room );
+		self.lParticle4 = CParticle( self.Name.."particle_dead4", "stunned_little", self.Room );
 	end
 	
 	self.UpdateMeshPos = true
@@ -315,7 +315,9 @@ function CEnemy:Update()
 			self.Death = true
 			
 			if self.Fly then
-				self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub002")       );
+				local lPosition = self:GetPosition();
+				lPosition.y = lPosition.y - self.InitHeight;
+				self.lParticle1:Init( lPosition );
 			else
 				self.lParticle1:Init( self.RenderableObject:GetBonePosition("Base HumanHead")     );
 				self.lParticle2:Init( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
@@ -344,9 +346,7 @@ function CEnemy:Update()
 		sound_manager:SetGameObjectPosition(self.Name, self:GetPosition(), self:GetPosition())
 	end
 	
-	if self.Fly then
-		self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub002")     );
-	else
+	if not self.Fly then
 		self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanHead")     );
 		self.lParticle2:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
 		self.lParticle3:ChangePosition( self.RenderableObject:GetBonePosition("Base HumanRForeArm") );
