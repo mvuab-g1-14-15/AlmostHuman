@@ -49,10 +49,12 @@ void CEngine::Execute()
 void CEngine::Update()
 {
     BROFILER_CATEGORY("CEngine:Update", Profiler::Color::LightBlue)
-    m_pTimer->Update();
 
+    m_pTimer->Update();
     m_pProcess->ProcessReloads();
+
     m_RenderTime = m_pTimer->GetElapsedTime();
+    m_RenderTime = (m_RenderTime > m_RenderTarget) ? m_RenderTarget : m_RenderTime;
 
     m_AccTime += m_RenderTime;
     while(m_AccTime >= m_RenderTarget)
