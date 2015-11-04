@@ -21,7 +21,7 @@ CAddRenderablesElement::CAddRenderablesElement( CXMLTreeNode& atts ) : CCinemati
 
 void CAddRenderablesElement::Update()
 {
-	m_CurrentTime += deltaTimeMacro;
+	m_CurrentTime += constFrameTime;
 }
 
 void CAddRenderablesElement::Execute( CGraphicsManager& GM )

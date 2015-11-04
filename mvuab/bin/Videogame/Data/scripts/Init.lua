@@ -1,6 +1,7 @@
 dofile("./data/scripts/Player.lua")
 dofile("./data/scripts/EnemyManager.lua")
 dofile("./data/scripts/Barrel.lua")
+dofile("./data/scripts/Blash.lua")
 
 g_Player = nil
 g_HUD = nil
@@ -297,8 +298,7 @@ function update_gameplay()
 				--Code para montar las cinematicas y matar a los drones
 			end
 		end	
-		dt = timer:GetElapsedTime()
-		UpdateVariables(dt)
+		UpdateVariables(g_FrameTime)
 	end
 	if g_bInBarrel then
 		----engine:Trace("Next to barrel "..g_BarrelName)

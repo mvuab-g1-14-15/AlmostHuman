@@ -23,7 +23,7 @@ void CCinematicPlayer::Init(float Duration)
 void CCinematicPlayer::Update()
 {
     if (m_Playing)
-    { m_CurrentTime += deltaTimeMacro; }
+    { m_CurrentTime += constFrameTime; }
 }
 
 void CCinematicPlayer::Stop()

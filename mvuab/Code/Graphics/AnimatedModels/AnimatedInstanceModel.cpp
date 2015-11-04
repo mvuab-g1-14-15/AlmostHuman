@@ -331,7 +331,7 @@ void CAnimatedInstanceModel::Destroy()
 void CAnimatedInstanceModel::Update()
 {
   BROFILER_CATEGORY( "CAnimatedInstanceModel::Update()", Profiler::Color::Orchid )
-  m_CalModel->update( deltaTimeMacro * m_Velocity);
+  m_CalModel->update( constFrameTime * m_Velocity);
 }
 
 void CAnimatedInstanceModel::ChangeAnimation( const std::string& AnimationName, float32 DelayIn, float32 DelayOut )

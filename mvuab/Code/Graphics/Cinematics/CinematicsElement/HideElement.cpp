@@ -18,7 +18,7 @@ void CHideElement::Update()
         //  GUIInstance->GetTextBox()->SetVisible(false);
         //  GUIInstance->GetTextBox()->SetActive(false);
     }
-    m_CurrentTime += deltaTimeMacro;
+    m_CurrentTime += constFrameTime;
 }
 
 void CHideElement::Execute( CGraphicsManager& GM )

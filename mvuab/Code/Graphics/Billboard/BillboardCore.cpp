@@ -112,13 +112,13 @@ void CBillboardCore::Update()
 {
     if( mUseTick )
     {
-        mTick += deltaTimeMacro;
+        mTick += constFrameTime;
         if (mTick >= 100.f)
             mTick = 0.f;
     }
     else
     {
-        mTick = deltaTimeMacro;
+        mTick = constFrameTime;
     }
     
 }

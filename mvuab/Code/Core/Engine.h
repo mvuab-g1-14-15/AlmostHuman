@@ -44,6 +44,8 @@ class CEngine: public CSingleton<CEngine>
         CLogRender*         m_pLogRender;
         CEngineManagers*    m_pEngineManagers;
         CTimer*             m_pTimer;
+
+        float               m_AccTime;
         float               m_RenderTime;
         float               m_RenderTarget;
 

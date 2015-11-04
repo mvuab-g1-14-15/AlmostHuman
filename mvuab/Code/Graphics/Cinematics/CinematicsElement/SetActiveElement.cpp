@@ -37,7 +37,7 @@ void CSetActiveElement::Update()
 		}
 			(*it)->SetActive(m_bActive);
 	}
-	m_CurrentTime += deltaTimeMacro;
+	m_CurrentTime += constFrameTime;
 }
 
 void CSetActiveElement::Execute( CGraphicsManager& GM )

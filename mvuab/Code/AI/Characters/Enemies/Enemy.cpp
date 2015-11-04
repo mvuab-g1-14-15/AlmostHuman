@@ -289,7 +289,7 @@ void CEnemy::MoveAStar( Math::Vect3f aTargetPos )
   lDir.y = 0.0;
   lDir.Normalize();
 
-  Move( lDir, deltaTimeMacro );
+  Move( lDir, constFrameTime );
 
   aTargetPos.y = 0.0;
 

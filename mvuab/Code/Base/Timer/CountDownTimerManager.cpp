@@ -39,7 +39,7 @@ void CCountDownTimerManager::Update()
 
     do{
         CCountDownTimer* l_Timer = it->second;
-        if(l_Timer->isActive()) l_Timer->Update(deltaTimeMacro);
+        if(l_Timer->isActive()) l_Timer->Update(constFrameTime);
     }while(++it != it_end);
 }
 

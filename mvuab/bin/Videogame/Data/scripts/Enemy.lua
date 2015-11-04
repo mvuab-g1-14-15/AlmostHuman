@@ -1,3 +1,5 @@
+dofile("./data/scripts/Include.lua")
+
 class "CEnemy"
 
 function CEnemy:__init( aInfo )
@@ -180,9 +182,7 @@ end
 function CEnemy:Update()	
 	--profiler:AddInit("CEnemy:Update()")
 	if self.Life > 0 then
-		if self.Active then
-			local dt = timer:GetElapsedTime()
-			
+		if self.Active then			
 			self:UpdateCamera()
 			
 			self.BlashRight:Tick()
@@ -223,7 +223,7 @@ function CEnemy:Update()
 					if self:RotateToPos(g_Player:GetPosition()) then
 						self:ChangeAnimation("shoot", 0.5, 1.0)
 				
-						self.CountTimeShoot = self.CountTimeShoot + dt
+						self.CountTimeShoot = self.CountTimeShoot + g_FrameTime
 						local timerBurst = "Burst"..self.Name
 						if self.CountTimeShoot >= self.TimeToShoot then
 							if not countdowntimer_manager:ExistTimer(timerBurst) then
@@ -290,8 +290,7 @@ function CEnemy:Update()
 					end
 				end
 			else
-				local dt = timer:GetElapsedTime()
-				self.CharacterController:Move(Vect3f(0.0), dt)
+				self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 			end
 			
 			if self.Fly then
@@ -303,8 +302,7 @@ function CEnemy:Update()
 				self.Laser:MakeTransform()
 			end
 		else
-			local dt = timer:GetElapsedTime()
-			self.CharacterController:Move(Vect3f(0.0), dt)
+			self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 		end
 	else
 		if not self.Death then
@@ -326,8 +324,7 @@ function CEnemy:Update()
 			end
 			
 		end
-		local dt = timer:GetElapsedTime()
-		self.CharacterController:Move(Vect3f(0.0), dt)
+		self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 		local lActualPos = self:GetPosition()
 		--engine:TraceOnce("Actual pos "..lActualPos:ToString().." last pos "..self.LastPos:ToString())
 		if self.LastPos == lActualPos then
@@ -436,7 +433,6 @@ function CEnemy:GetDirVectorNormalized2D( aPos )
 end
 
 function CEnemy:MoveToPos( aPos )
-	local dt = timer:GetElapsedTime()
 	
 	if self.UseGraph then
 		if not self.PathCalculated then  
@@ -469,18 +465,18 @@ function CEnemy:MoveToPos( aPos )
 							lDir:Normalize()
 						end
 						self:PlayFootstep()
-						self.CharacterController:Move(lDir * self.Speed*5.0, dt)
+						self.CharacterController:Move(lDir * self.Speed*5.0, g_FrameTime)
 					end
 				else
 					self:PlayFootstep()
-					self.CharacterController:Move(DirVector * self.Speed, dt)
+					self.CharacterController:Move(DirVector * self.Speed, g_FrameTime)
 				end
 				if self.UseGizmo then
 					self.Gizmo:SetPosition(lRealTargetPos)
 					self.Gizmo:MakeTransform()
 				end
 			else
-				self.CharacterController:Move(Vect3f(0.0), dt)
+				self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 			end
 		else
 			self.ActualPathPoint = self.ActualPathPoint + 1
@@ -499,7 +495,7 @@ function CEnemy:MoveToPos( aPos )
 		if lDist < self.Delta then
 			return true
 		end
-		self.CharacterController:Move(Vect3f(0.0), dt)
+		self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 		return false
 	end
 	
@@ -523,22 +519,22 @@ function CEnemy:MoveToPos( aPos )
 						lDir:Normalize()
 					end
 					self:PlayFootstep()
-					self.CharacterController:Move(lDir * self.Speed*5.0, dt)
+					self.CharacterController:Move(lDir * self.Speed*5.0, g_FrameTime)
 				end
 			else
 				self:PlayFootstep()
-				self.CharacterController:Move(DirVector * self.Speed, dt)
+				self.CharacterController:Move(DirVector * self.Speed, g_FrameTime)
 			end
 			if self.UseGizmo then
 				self.Gizmo:SetPosition(aPos)
 				self.Gizmo:MakeTransform()
 			end
 		else
-			self.CharacterController:Move(Vect3f(0.0), dt)
+			self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 		end
 		return false
 	end
-	self.CharacterController:Move(Vect3f(0.0), dt)
+	self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 	return true
 end
 
@@ -581,13 +577,12 @@ function CEnemy:RotateToPos( aPos )
 			self.Lerp:SetValues(ActualYaw, DirYaw, self.TimeToRot, 0)
 			self.LerpInited = true
 		end
-		local dt = timer:GetElapsedTime()
 		
 		if self.Lerp:IsFinish() then
 			self.LerpInited = false
 		end
 		
-		local TickYaw = self.Lerp:Value(dt)
+		local TickYaw = self.Lerp:Value(g_FrameTime)
 		
 		self:SetYaw( TickYaw )
 		return false

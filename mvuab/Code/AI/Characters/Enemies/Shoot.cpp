@@ -132,7 +132,7 @@ void CShoot::Update()
     const Math::Vect3f& lDirection = GetDirection();
     const Math::Vect3f& lPosition = GetPosition();
 
-    const Math::Vect3f lVelocity( lDirection * mSpeed * deltaTimeMacro );
+    const Math::Vect3f lVelocity( lDirection * mSpeed * constFrameTime );
 
     const float lLength( lVelocity.Length() );
 

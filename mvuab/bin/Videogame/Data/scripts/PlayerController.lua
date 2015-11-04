@@ -2,11 +2,7 @@ dofile("./data/scripts/Include.lua")
 
 class "CPlayerController"
 
-function CPlayerController:__init()
-    self.fps = 30.0
-    self.Accum = 0.0
-    self.FrameTime = 1.0 / self.fps
-    
+function CPlayerController:__init()    
 	self.Position = Vect3f(136.84, -7.99, -62)
 	self.Height = 1.8
 	self.Position.y = self.Position.y + self.Height/2.0
@@ -68,15 +64,8 @@ function CPlayerController:__init()
 end
 
 function CPlayerController:Update()
-	local sf = timer:GetSpeedFactor()
-    local dt = timer:GetElapsedTime()
-    
-    if dt > 1.0 / self.fps then
-        dt = 1.0 / self.fps
-    end
-
 	self:CalculateDirectionVectors(self.PlayerCamera)
-	self:UpdateCamera(self.PlayerCamera, dt)
+	self:UpdateCamera(self.PlayerCamera, g_FrameTime)
 	
 	--Yaw smooth movement
 	local l_CameraYaw = self.PlayerCamera:GetYaw()
@@ -94,14 +83,14 @@ function CPlayerController:Update()
 		local l_Final = l_CameraYaw
 		local l_ActualYaw = (1.0 - l_Percentage) * l_Initial + l_Percentage * l_Final
 		self.CharacterController:SetYaw(l_ActualYaw)
-		self.ActualTimeMoveYaw = self.ActualTimeMoveYaw + dt
+		self.ActualTimeMoveYaw = self.ActualTimeMoveYaw + g_FrameTime
 		if self.ActualTimeMoveYaw > self.TimeMoveYaw then
 			self.ActualTimeMoveYaw = self.TimeMoveYaw
 		end
 	end
 	
 	self:UpdateInput()
-	self:UpdateTimers(dt)
+	self:UpdateTimers(g_FrameTime)
 	
 	--Is Player moving?
 	if CheckVector(self.Direction) then
@@ -142,14 +131,8 @@ function CPlayerController:Update()
 		self.CharacterController:Jump(self.JumpForce)
 		self.Jump = false
 	end
-    
-    ----engine:Trace("dt - sf:" .. dt .. " - " .. sf)
-
-    self.Accum = self.Accum + dt;
-    while self.Accum >= self.FrameTime do
-        self.CharacterController:Move(l_Velocity, self.FrameTime)
-        self.Accum = self.Accum - self.FrameTime;
-    end
+        
+    self.CharacterController:Move(l_Velocity, g_FrameTime)
 	self.Position = self.CharacterController:GetPosition()
 	
 	local l_CameraPosition = self.Position
@@ -211,8 +194,8 @@ function CPlayerController:Update()
 			end
 		end
 		
-		self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * dt
-		self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * dt
+		self.ShakeValueVertical = self.ShakeValueVertical + l_ShakeVerticalSpeed * g_FrameTime
+		self.ShakeValueHorizontal = self.ShakeValueHorizontal + l_ShakeHorizontalSpeed * g_FrameTime
 		l_CameraPosition = l_CameraPosition + l_ShakeVerticalAmplitude * l_Up * math.sin(self.ShakeValueVertical) + l_ShakeHorizontalAmplitude * self.Side * math.cos(self.ShakeValueHorizontal)
 	end
 	

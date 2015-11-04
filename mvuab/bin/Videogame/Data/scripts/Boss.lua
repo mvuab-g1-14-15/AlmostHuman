@@ -1,3 +1,5 @@
+dofile("./data/scripts/Blash.lua")
+
 class "CBoss"
 
 function CBoss:__init()
@@ -93,9 +95,7 @@ function CBoss:Destroy()
 	sound_manager:UnregisterGameObject(self.Name)
 end
 
-function CBoss:Update()
-	local dt = timer:GetElapsedTime()
-	
+function CBoss:Update()	
 	if not self:IsStunned() then
 		self.lParticle1:Hide();
 		self.lParticle2:Hide();
@@ -424,18 +424,17 @@ function CBoss:SetYaw( aYaw )
 end
 
 function CBoss:MoveToPos( aPos )	
-	local dt = timer:GetElapsedTime()
 	if not self:IsInPos( aPos ) then
 		if self:RotateToPos( aPos ) then
 			local DirVector = self:GetDirVectorNormalized2D( aPos )
 			self:PlayFootstep()
-			self.CharacterController:Move(DirVector * self.Speed, dt)
+			self.CharacterController:Move(DirVector * self.Speed, g_FrameTime)
 		else
-			self.CharacterController:Move(Vect3f(0.0), dt)
+			self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 		end
 		return false
 	end
-	self.CharacterController:Move(Vect3f(0.0), dt)
+	self.CharacterController:Move(Vect3f(0.0), g_FrameTime)
 	return true
 end
 
@@ -504,13 +503,12 @@ function CBoss:RotateToPos( aPos )
 			self.Lerp:SetValues(ActualYaw, DirYaw, self.TimeToRot, 0)
 			self.LerpInited = true
 		end
-		local dt = timer:GetElapsedTime()
 		
 		if self.Lerp:IsFinish() then
 			self.LerpInited = false
 		end
 		
-		local TickYaw = self.Lerp:Value(dt)
+		local TickYaw = self.Lerp:Value(g_FrameTime)
 		
 		self:SetYaw( TickYaw )
 		return false

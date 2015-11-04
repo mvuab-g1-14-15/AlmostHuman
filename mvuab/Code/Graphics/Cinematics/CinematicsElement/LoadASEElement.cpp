@@ -77,7 +77,7 @@ void CLoadASEElement::Update()
 			}
 		}
 	}
-	m_CurrentTime += deltaTimeMacro;
+	m_CurrentTime += constFrameTime;
 }
 
 void CLoadASEElement::Execute( CGraphicsManager& GM )

@@ -1,4 +1,5 @@
 dofile("./data/scripts/Blash.lua")
+
 class 'CBlaster'
 
 function CBlaster:__init()
@@ -124,7 +125,7 @@ function CBlaster:Update( aPosition )
 		end
 		
 		if self.IsCharging == true then
-			self.TimePressed = self.TimePressed + timer:GetElapsedTime()
+			self.TimePressed = self.TimePressed + g_FrameTime
 		end
 		
 		if self.Energy < 1 then

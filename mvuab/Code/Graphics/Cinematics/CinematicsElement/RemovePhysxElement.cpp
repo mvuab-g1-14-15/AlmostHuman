@@ -12,7 +12,7 @@ CRemovePhysxElement::CRemovePhysxElement( CXMLTreeNode& atts ) : CCinematicsElem
 void CRemovePhysxElement::Update()
 {
 	PhysXMInstance->ReleasePhysicActor(m_Actor);
-	m_CurrentTime += deltaTimeMacro;
+	m_CurrentTime += constFrameTime;
 }
 
 void CRemovePhysxElement::Execute( CGraphicsManager& GM )

@@ -241,7 +241,7 @@ void CCameraKeyController::SetReverse(bool Reverse)
 void CCameraKeyController::PlayBackward()
 {
     // Decrement the time
-    m_CurrentTime -= deltaTimeMacro;
+    m_CurrentTime -= constFrameTime;
 
     // Obtain the current key
     GetCurrentKeyBackward();
@@ -269,7 +269,7 @@ void CCameraKeyController::PlayBackward()
 void CCameraKeyController::PlayFoward()
 {
     // Increment the time
-    m_CurrentTime += deltaTimeMacro;
+    m_CurrentTime += constFrameTime;
 
     // Obtain the current key
     GetCurrentKeyForward();

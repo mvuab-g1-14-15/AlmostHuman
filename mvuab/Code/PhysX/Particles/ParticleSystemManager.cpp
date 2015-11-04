@@ -76,7 +76,7 @@ void CParticleSystemManager::Init()
 void CParticleSystemManager::Update()
 {
   BROFILER_CATEGORY( "CParticleSystemManager::Update()", Profiler::Color::Orchid )
-  float dt = deltaTimeMacro;
+  float dt = constFrameTime;
   BOOST_FOREACH( CParticleInstance* lInstance, mInstances.GetResourcesVector() )
   {
     lInstance->Update(dt);
