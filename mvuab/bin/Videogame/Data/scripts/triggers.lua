@@ -590,7 +590,7 @@ function CreateBoss_exit()
 		sound_manager:PlayEvent("Play_Sala4A", "Logan")
 		g_SpeechIrisBoss = true
 	end
-	g_Player:SetCanMove(false)
+	g_Player:SetCanMove(true)
 end
 
 function PuntoExplosivo1_enter()
