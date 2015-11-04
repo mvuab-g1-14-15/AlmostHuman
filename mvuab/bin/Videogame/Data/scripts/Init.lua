@@ -32,12 +32,12 @@ function load_basics()
 	scene:LoadRoom("sala4")
 	scene:LoadRoom("space")
 	
-	--scene:DesactivateRoom("sala2")
-	--scene:DesactivateRoom("pasillo")
-	--scene:DesactivateRoom("sala3")
-	--scene:DesactivateRoom("elevator")	
-	--scene:DesactivateRoom("sala4")
-	--scene:DesactivateRoom("space")	
+	scene:DesactivateRoom("sala2")
+	scene:DesactivateRoom("pasillo")
+	scene:DesactivateRoom("sala3")
+	scene:DesactivateRoom("elevator")	
+	scene:DesactivateRoom("sala4")
+	scene:DesactivateRoom("space")	
 	
 	light_manager:SetAmbientLight( Vect3f(0.5, 0.5,0.5))
 	
@@ -127,10 +127,16 @@ function update_gameplay()
 	
 	debug_helper:Update()
 
-	enemy_manager:Update()
+	
 	--g_ConsoleActivate = gui_manager:GetConsole():GetVisible()
 	g_CinematicActive = cinematic_manager:GetCinematicActive()
 	g_PauseGame = engine_manager:GetbGamePause()
+	
+	if not g_PauseGame then
+		enemy_manager:Update()
+	end
+	
+	
 	if ( CameraType.Free.value == camera_manager:GetCurrentCamera():GetCameraType() ) then
 		UpdateFree()
 	else

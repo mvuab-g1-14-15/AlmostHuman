@@ -68,9 +68,9 @@ float4 PackAlbedo( UBER_VERTEX_PS IN )
 #elif defined ( USE_DEBUG )
 	return g_DebugColor;
 #else
-	#if defined( USE_CAL3D_HW )
-		return float4( 1, 0, 0, 1 );
-	#endif
+	//#if defined( USE_CAL3D_HW )
+		//return float4( 1, 0, 0, 1 );
+	//#endif
 	
 	return tex2D(S0LinearSampler,IN.UV);
 #endif
@@ -113,9 +113,8 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 
 #if defined( USE_CAL3D_HW )
 
-	OUT.Ambient=float4( 1, 0, 0, 1);
+	//OUT.Ambient=float4( 1, 0, 0, 1);
 	
-	/*
 	// Light probes
 	float3 l_LightProbeColorInit = float3(0.0, 0.0, 0.0);
 	float3 lFixedNormal = l_Normal;
@@ -153,7 +152,7 @@ TMultiRenderTargetPixel mainPS(UBER_VERTEX_PS IN) : COLOR
 	l_AmbientColor *= l_DiffuseColor;
 	
 	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
-	*/
+
 #else
 	OUT.Ambient=float4( l_AmbientColor, g_SpecularExponent );
 #endif
