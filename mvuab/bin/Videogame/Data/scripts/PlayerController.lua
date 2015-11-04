@@ -387,7 +387,11 @@ function CPlayerController:MakeCrouch()
 	else
 		l_Can = self.CharacterController:UpdateCharacterExtents(false, self.Height / 2.0)
 	end
+	
 	if l_Can then
+		if not self.Crouch then
+			g_Player:SetAnimation("crouch");
+		end
 		self.Crouch = not self.Crouch
 		self.CharacterController:SetbCrouch(self.Crouch)
 		self.ActualTimeCrouch = 0.0
