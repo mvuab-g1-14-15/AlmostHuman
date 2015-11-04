@@ -33,7 +33,7 @@
 		</animation_state>
 		<animation_state name="crouch" default_fade_in="0.3" default_fade_out="0.3">
 		  <on_enter>
-			<action name="shoot_to_idle" fade_in="0.5"/>
+			<action name="shoot_to_idle" fade_in="1"/>
 		  </on_enter>
 		  <cycle name="idle"/>
 		  <on_exit>
