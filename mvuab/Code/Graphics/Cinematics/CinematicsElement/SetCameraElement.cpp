@@ -55,7 +55,7 @@ void CSetCameraElement::Update()
 
   }
 
-  m_CurrentTime += deltaTimeMacro;
+  m_CurrentTime += constFrameTime;
 }
 void CSetCameraElement::Execute( CGraphicsManager& GM )
 {

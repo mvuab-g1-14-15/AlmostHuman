@@ -12,7 +12,7 @@ CShowDialogElement::CShowDialogElement( CXMLTreeNode& atts ) : CCinematicsElemen
 void CShowDialogElement::Update()
 {
     GUIInstance->SetMessageBox(m_Text);
-    m_CurrentTime += deltaTimeMacro;
+    m_CurrentTime += constFrameTime;
 }
 void CShowDialogElement::Execute( CGraphicsManager& GM )
 {

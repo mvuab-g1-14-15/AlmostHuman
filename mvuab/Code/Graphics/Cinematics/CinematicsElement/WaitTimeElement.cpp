@@ -15,7 +15,7 @@ m_bLua( false )
 
 void CWaitTimeElement::Update()
 {
-  m_CurrentTime += deltaTimeMacro;
+  m_CurrentTime += constFrameTime;
   if( m_CurrentTime > m_KeyAction && m_bLua)
   {
 	  ScriptMInstance->RunCode(m_LuaCode);

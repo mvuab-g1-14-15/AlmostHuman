@@ -20,20 +20,21 @@
 #include "Brofiler.h"
 
 CEngine::CEngine()
-  : m_pEngineManagers( new CEngineManagers( EngineConfigInstance->GetManagersPath() ) )
-  , m_pProcess( 0 )
-  , m_pTimer( new CTimer( 30 ) )
-  , m_Play( false )
-  , mConsoleEnabled( false )
-  , mLastTraceMsg("")
+    : m_pEngineManagers(new CEngineManagers(EngineConfigInstance->GetManagersPath()))
+    , m_pProcess(0)
+    , m_pTimer(new CTimer(30))
+    , m_Play(false)
+    , mConsoleEnabled(false)
+    , mLastTraceMsg("")
+    , m_AccTime(0.0f)
 {
 }
 
 CEngine::~CEngine()
 {
-  CHECKED_DELETE( m_pEngineManagers );
-  CHECKED_DELETE( m_pProcess );
-  CHECKED_DELETE( m_pTimer );
+    CHECKED_DELETE(m_pEngineManagers);
+    CHECKED_DELETE(m_pProcess);
+    CHECKED_DELETE(m_pTimer);
 }
 
 void CEngine::Execute()
@@ -44,79 +45,87 @@ void CEngine::Execute()
 }
 
 void CEngine::Update()
-{ BROFILER_CATEGORY("CEngine:Update", Profiler::Color::LightBlue)
-  m_pTimer->Update();
-  m_pEngineManagers->Update();
-  m_pProcess->ProcessReloads();
-  m_pProcess->ProcessKey();
-  m_pProcess->Update();
+{
+    BROFILER_CATEGORY("CEngine:Update", Profiler::Color::LightBlue)
+    m_pTimer->Update();
+
+    m_pProcess->ProcessReloads();
+    m_pProcess->ProcessKey();
+
+    m_AccTime += m_pTimer->GetElapsedTime();
+    while(m_AccTime >= m_RenderTarget)
+    {
+        m_AccTime -= m_RenderTarget;
+        m_pEngineManagers->Update();
+        m_pProcess->Update();
+    }
 }
 
 void CEngine::Render()
 {
-  BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
-  if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost())
-    SRCMInstance->Execute();
+    BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
+    if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost())
+        SRCMInstance->Execute();
 }
 
 void CEngine::ProcessInputs()
 {
-  ActionManagerInstance->ProcessInputs();
+    ActionManagerInstance->ProcessInputs();
 }
 
-void CEngine::SetRunnigProcess( CProcess* aProcess )
+void CEngine::SetRunnigProcess(CProcess* aProcess)
 {
-  m_pProcess = aProcess;
+    m_pProcess = aProcess;
 }
 
 
-void CEngine::Init( CEngineConfig* aEngineConfig )
+void CEngine::Init(CEngineConfig* aEngineConfig)
 {
-  m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
+    m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
 
-  if ( aEngineConfig )
-  {
-    mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;
-    // Init the managers of the engine
-    m_pEngineManagers->Init();
+    if(aEngineConfig)
+    {
+        mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;
+        // Init the managers of the engine
+        m_pEngineManagers->Init();
 
-    // Init the videogame
-    m_pProcess->Init();
-  }
+        // Init the videogame
+        m_pProcess->Init();
+    }
 }
 
 
 #ifdef NO_TRACE
-void CEngine::TraceOnce( const std::string& /*TraceStr*/ ){}
-void CEngine::Trace( const std::string& /*TraceStr*/ ){}
+void CEngine::TraceOnce(const std::string& /*TraceStr*/) {}
+void CEngine::Trace(const std::string& /*TraceStr*/) {}
 #else
-void CEngine::TraceOnce( const std::string& TraceStr )
+void CEngine::TraceOnce(const std::string& TraceStr)
 {
-    if (TraceStr == mLastTraceMsg)
+    if(TraceStr == mLastTraceMsg)
         return;
 
     Trace(TraceStr);
 
     mLastTraceMsg = TraceStr;
 }
-void CEngine::Trace( const std::string& TraceStr )
+void CEngine::Trace(const std::string& TraceStr)
 {
-    if ( mConsoleEnabled )
+    if(mConsoleEnabled)
     {
-        HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
-        SetConsoleTextAttribute( hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
         std::cout << TraceStr << std::endl << std::endl;
     }
     else
     {
         std::stringstream lMsg;
         lMsg << "[APPLICATION]" << TraceStr << std::endl;
-        OutputDebugString( lMsg.str().c_str() );
+        OutputDebugString(lMsg.str().c_str());
     }
 }
 #endif
 
 void CEngine::QuitGame()
 {
-  PostQuitMessage( 0 );
+    PostQuitMessage(0);
 }

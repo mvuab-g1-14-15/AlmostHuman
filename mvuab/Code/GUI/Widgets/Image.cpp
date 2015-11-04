@@ -77,7 +77,7 @@ void CImage::Update()
 {
   if ( m_bAnimated )
   {
-    m_fCounter += deltaTimeMacro;
+    m_fCounter += constFrameTime;
 
     if ( m_fCounter > m_fTimePerImage )
     {

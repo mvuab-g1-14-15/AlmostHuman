@@ -32,7 +32,7 @@ void CStaticText::Update()
 {
   if( mAnimateText )
   {
-    mTime += deltaTimeMacro;
+    mTime += constFrameTime;
     if( mTime > mTimeVisible && IsVisible() )
     {
       SetVisible( false );

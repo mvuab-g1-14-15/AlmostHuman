@@ -234,7 +234,7 @@ void CEffectTechnique::SetupMatrices()
 
     if ( CHECK_FLAG( mUseTime ) )
     {
-      if( !m_Effect->SetDeltaTime( deltaTimeMacro ) )
+      if( !m_Effect->SetDeltaTime( constFrameTime ) )
       {
         LOG_ERROR_APPLICATION( "Error binding the delta time to the shared effect!!" );
       }

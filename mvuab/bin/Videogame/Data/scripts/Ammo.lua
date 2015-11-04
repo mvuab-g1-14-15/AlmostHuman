@@ -1,3 +1,5 @@
+dofile("./data/scripts/Include.lua")
+
 class 'CAmmo'
 --Clase que implementa la primera rafaga del disparo de logan
 
@@ -45,8 +47,7 @@ end
 function CAmmo:Update()
 	if not g_ConsoleActivate and not g_CinematicActive and self.Active then
 		if not self.Impacted then
-			dt              = timer:GetElapsedTime()
-			lVelocity 		= self.Direction * self.Speed * dt
+			lVelocity 		= self.Direction * self.Speed * g_FrameTime
 			lLength 		= lVelocity:Length()
 			local lNewPosition 	= self.Position + lVelocity
 		

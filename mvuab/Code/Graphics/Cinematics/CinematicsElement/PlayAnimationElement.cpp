@@ -40,7 +40,7 @@ void CPlayAnimationElement::Update()
 		m_pModeloAnimado->SetYaw(m_pModeloAnimado->GetYaw() + Math::pi32);
 		m_pModeloAnimado->MakeTransform();
 		m_pModeloAnimado->ChangeAnimation(m_Animation, 0.2f, 0.0f);
-		m_CurrentTime += deltaTimeMacro;
+		m_CurrentTime += constFrameTime;
 	}
 	else
 	{
@@ -51,7 +51,7 @@ void CPlayAnimationElement::Update()
 		}
 		m_Cinematic->Update();
 
-		m_CurrentTime += deltaTimeMacro;
+		m_CurrentTime += constFrameTime;
 		if( m_CurrentTime >= m_Time )
 		{
 			m_IsBlocker = false;

@@ -26,6 +26,7 @@ class CTimer
 
         void Update();
 
+        float32 GetConstFrameTime() const { return 1.0f / (float) m_uSamples; }
         float32 GetElapsedTime() const { return m_DeltaTime; }
         float32 GetSpeedFactor() const { return m_SpeedFactor; }
 
@@ -55,6 +56,7 @@ class CTimer
 
 #define deltaTimeMacro  CEngine::GetSingletonPtr()->GetTimer()->GetElapsedTime()
 #define speedTimeFactor CEngine::GetSingletonPtr()->GetTimer()->GetSpeedFactor()
+#define constFrameTime CEngine::GetSingletonPtr()->GetTimer()->GetConstFrameTime()
 
 #define FPS             CEngine::GetSingletonPtr()->GetTimer()->GetFPS()
 #define MinFPS          CEngine::GetSingletonPtr()->GetTimer()->GetMinFPS()

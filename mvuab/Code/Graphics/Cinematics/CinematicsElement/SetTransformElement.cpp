@@ -30,7 +30,7 @@ void CSetTransformElement::Update()
     m_pObject->SetPitch( m_Pitch );
     m_pObject->SetRoll( m_Roll );
     m_pObject->MakeTransform();
-    m_CurrentTime += deltaTimeMacro;
+    m_CurrentTime += constFrameTime;
 
 }
 void CSetTransformElement::Execute( CGraphicsManager& GM )

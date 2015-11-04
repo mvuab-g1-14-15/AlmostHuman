@@ -1,5 +1,6 @@
+dofile("./data/scripts/Include.lua")
+
 function UpdateFree()
-	dt = timer:GetElapsedTime()
 	local current_camera = camera_manager:GetCurrentCamera()
 	
 	flag_speed = 0
@@ -30,7 +31,7 @@ function UpdateFree()
 		end
 	end
 	
-	moveFree( flag_speed, forward, strafe, vertical, dt )
+	moveFree( flag_speed, forward, strafe, vertical, g_FrameTime )
 	
 	local l_ActionManagerLuaWrapper=CActionManagerLuaWrapper()
 	
@@ -42,13 +43,13 @@ function UpdateFree()
 	local current_camera = camera_manager:GetCurrentCamera();
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if l_ActionManagerLuaWrapper:DoAction(action_manager, "MoveYaw") then
-			current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+			current_camera:AddYaw( -l_ActionManagerLuaWrapper.amount * g_FrameTime * 100.0 );
 		end
 	end
 	local current_camera = camera_manager:GetCurrentCamera();
 	if not g_ConsoleActivate then
 		if l_ActionManagerLuaWrapper:DoAction(action_manager, "MovePitch") then
-			current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * dt * 100.0 );
+			current_camera:AddPitch( -l_ActionManagerLuaWrapper.amount * g_FrameTime * 100.0 );
 		end
 	end
 end

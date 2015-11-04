@@ -1,3 +1,5 @@
+dofile("./data/scripts/Include.lua")
+
 class 'CShootLUA'
 
 function CShootLUA:__init(speed, direction, position, damage)
@@ -25,8 +27,7 @@ end
 
 function CShootLUA:Update()
 	if not self.Impacted then
-		dt = timer:GetElapsedTime()
-		lVelocity 		= self.Direction * self.Speed * dt
+		lVelocity 		= self.Direction * self.Speed * g_FrameTime
 		lLength 		= lVelocity:Length()
 		lNewPosition 	= self.Position + lVelocity
 		
