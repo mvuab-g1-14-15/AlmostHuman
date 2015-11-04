@@ -86,6 +86,8 @@ g_CargandoEnergia = false
 
 g_SpeechIrisBoss = false
 
+g_BossInAction = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -590,7 +592,9 @@ function CreateBoss_exit()
 		sound_manager:PlayEvent("Play_Sala4A", "Logan")
 		g_SpeechIrisBoss = true
 	end
-	g_Player:SetCanMove(true)
+	if not g_BossInAction then
+		g_Player:SetCanMove(false)
+	end
 end
 
 function PuntoExplosivo1_enter()

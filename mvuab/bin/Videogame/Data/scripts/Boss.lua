@@ -85,6 +85,8 @@ function CBoss:__init()
 	self.lParticle1:Init( self.RenderableObject:GetBonePosition("CATRigHub004")              );
 	self.lParticle2:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone001Bone001"));
 	self.lParticle3:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
+	
+	g_BossInAction = false
 end
 
 function CBoss:Destroy()
@@ -109,6 +111,7 @@ function CBoss:Update()
 					self:SetAnimation("attack")
 					sound_manager:PlayEvent("Play_Musica_Boss", "Ambient")
 					g_Player:SetCanMove(true)
+					g_BossInAction = true
 				end
 			end
 		else

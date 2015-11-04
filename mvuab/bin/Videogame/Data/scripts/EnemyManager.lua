@@ -472,7 +472,8 @@ function CEnemyManager:Reinit( aRoom )
 	if aRoom == "sala4" then
 		cinematic_manager:ReloadCinematic("data/sala4/cinematics.xml")
 		self.Boss:Destroy()
-		self.Boss = nil		
+		self.Boss = nil
+		g_BossInAction = false
 		trigger_manager:GetTriggerByName("Hack_nave1"):SetActive(true)
 		trigger_manager:GetTriggerByName("Hack_nave2"):SetActive(true)
 		trigger_manager:GetTriggerByName("Hack_nave3"):SetActive(true)
