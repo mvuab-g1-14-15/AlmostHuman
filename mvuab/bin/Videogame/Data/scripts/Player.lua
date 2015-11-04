@@ -72,6 +72,7 @@ function CPlayer:Update()
 	l_MeshPosition = l_MeshPosition + l_MeshOffset
 	self.RenderableObject:SetPosition(l_MeshPosition)
 	self.RenderableObject:SetYaw(-self.PlayerController:GetYaw() + g_HalfPi)
+	self.RenderableObject:SetRoomName("sala1")
 	
 	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
