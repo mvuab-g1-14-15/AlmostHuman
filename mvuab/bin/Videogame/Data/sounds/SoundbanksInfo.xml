@@ -125,10 +125,31 @@
 				<Event Id="2235207626" Name="Play_Open_Elevator_Door"/>
 				<Event Id="3613560533" Name="Play_Pick_Object"/>
 				<Event Id="2558030041" Name="Play_Plant_C4"/>
+				<Event Id="2620876462" Name="Play_ray"/>
+				<Event Id="2555336501" Name="Play_smoke"/>
+				<Event Id="1767791012" Name="Play_smoke_emitter_denso"/>
+				<Event Id="1784081340" Name="Play_smoke_emitter_denso_inv"/>
+				<Event Id="2858841480" Name="Play_sparks"/>
+				<Event Id="1709733779" Name="Play_sparks_inter"/>
+				<Event Id="2885688842" Name="Play_steam"/>
+				<Event Id="1468888117" Name="Play_steam_down"/>
+				<Event Id="30378733" Name="Play_steam_down_larger"/>
+				<Event Id="3367095392" Name="Play_steam_down_slow_big"/>
+				<Event Id="1824717772" Name="Play_steam_emitter_aside"/>
+				<Event Id="660383042" Name="Play_steam_up"/>
+				<Event Id="1099641613" Name="Play_steam_up_slow_big"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
 				<Event Id="194392270" Name="Stop_Elevator_Up"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="3693618" Language="SFX">
+					<ShortName>gas.wav</ShortName>
+					<Path>SFX\gas_951343B8.wem</Path>
+				</File>
+				<File Id="10864768" Language="SFX">
+					<ShortName>steam(vapor)_short.wav</ShortName>
+					<Path>SFX\steam(vapor)_short_BADC626A.wem</Path>
+				</File>
 				<File Id="25300159" Language="SFX">
 					<ShortName>Open_Door_Hangar.wav</ShortName>
 					<Path>SFX\Open_Door_Hangar_E106FFBE.wem</Path>
@@ -160,6 +181,10 @@
 				<File Id="341974608" Language="SFX">
 					<ShortName>C4 Explosion.wav</ShortName>
 					<Path>SFX\C4 Explosion_E106FFBE.wem</Path>
+				</File>
+				<File Id="707043063" Language="SFX">
+					<ShortName>sparks(chispas).wav</ShortName>
+					<Path>SFX\sparks(chispas)_BADC626A.wem</Path>
 				</File>
 				<File Id="752427372" Language="SFX">
 					<ShortName>Countdown_Explosion.wav</ShortName>

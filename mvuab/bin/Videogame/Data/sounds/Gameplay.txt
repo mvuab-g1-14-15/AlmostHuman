@@ -1,19 +1,32 @@
 Event	ID	Name			Wwise Object Path	Notes
+	30378733	Play_steam_down_larger			\Particles\Play_steam_down_larger	
 	194392270	Stop_Elevator_Up			\Gameplay\Stop_Elevator_Up	
 	377487063	Stop_Alarm			\Gameplay\Stop_Alarm	
 	406918311	Play_Lights_On			\Gameplay\Play_Lights_On	
 	603937113	Play_Alarm			\Gameplay\Play_Alarm	
+	660383042	Play_steam_up			\Particles\Play_steam_up	
 	736447403	Play_Countdown_Explosion			\Gameplay\Play_Countdown_Explosion	
 	847470298	Open_Close_Door_Event			\Gameplay\Open_Close_Door_Event	
+	1099641613	Play_steam_up_slow_big			\Particles\Play_steam_up_slow_big	
+	1468888117	Play_steam_down			\Particles\Play_steam_down	
 	1558590687	Play_C4_Explosion			\Gameplay\Play_C4_Explosion	
 	1705329517	Play_Open_Door_Hangar			\Gameplay\Play_Open_Door_Hangar	
+	1709733779	Play_sparks_inter			\Particles\Play_sparks_inter	
 	1744910862	Play_Base_Carga			\Gameplay\Play_Base_Carga	
+	1767791012	Play_smoke_emitter_denso			\Particles\Play_smoke_emitter_denso	
+	1784081340	Play_smoke_emitter_denso_inv			\Particles\Play_smoke_emitter_denso_inv	
+	1824717772	Play_steam_emitter_aside			\Particles\Play_steam_emitter_aside	
 	2016578452	Play_Elevator_Up			\Gameplay\Play_Elevator_Up	
 	2235207626	Play_Open_Elevator_Door			\Gameplay\Play_Open_Elevator_Door	
 	2456271929	Play_In_Out_Barrel			\Gameplay\Play_In_Out_Barrel	
+	2555336501	Play_smoke			\Particles\Play_smoke	
 	2558030041	Play_Plant_C4			\Gameplay\Play_Plant_C4	
+	2620876462	Play_ray			\Particles\Play_ray	
 	2762455437	Play_Base_Carga_Failure			\Gameplay\Play_Base_Carga_Failure	
+	2858841480	Play_sparks			\Particles\Play_sparks	
+	2885688842	Play_steam			\Particles\Play_steam	
 	2989601031	Play_Crash_Metal_Grille			\Gameplay\Play_Crash_Metal_Grille	
+	3367095392	Play_steam_down_slow_big			\Particles\Play_steam_down_slow_big	
 	3613560533	Play_Pick_Object			\Gameplay\Play_Pick_Object	
 
 Effect plug-ins	ID	Name	Type				Notes
@@ -24,6 +37,8 @@ Effect plug-ins	ID	Name	Type				Notes
 	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	3693618	gas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gas_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\gas		18017
+	10864768	Steam_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\steam(vapor)_short_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Steam_down		25859
 	25300159	Open_Door_Hangar	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Open_Door_Hangar_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Door_Hangar		522840
 	47795385	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\porta 1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Close_Door		94128
 	80304484	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_Goes_Up_2_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		12597
@@ -32,6 +47,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	267134055	power_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\power down\power_down1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\power_down		11038
 	328627046	enter_leave_barrel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\enter_leave_barrel_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\enter_leave_barrel		9667
 	341974608	C4 Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\C4 Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\C4 Explosion		38172
+	707043063	Spark	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Spark		170387
 	752427372	Countdown_Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Countdown_Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Explosion Sequence\Countdown_Explosion		86769
 	832049234	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OpenDoor Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		54143
 	900520075	lights_on	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\lights_on_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\lights_on		36658
