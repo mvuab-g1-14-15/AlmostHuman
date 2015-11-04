@@ -62,7 +62,7 @@
 	</particle_system_core>
 	
 	<particle_system_core name="stunned_little" sound="true">
-		<cube_emitter file="steam_up_slow_stunned.xml"/>
+		<cube_emitter file="steam_up_slow_stunned_little.xml"/>
 		<cube_emitter file="ray_emitter_1.xml"/>
 	</particle_system_core>
 	

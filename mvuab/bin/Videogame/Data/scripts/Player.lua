@@ -83,7 +83,7 @@ function CPlayer:Update()
 	end
 	self.StealthAttack:Update( lArmPosition )
 
-	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() then
+	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() and not self:GetIsCrouch() then
         self:SetAnimation("aim")
 	end
 	

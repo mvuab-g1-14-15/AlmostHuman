@@ -37,25 +37,34 @@ CEffectTechnique::CEffectTechnique( const CXMLTreeNode& aTechniqueNode )
 {
   ASSERT( m_Filename != "null_file", "Check the file of the technique %s", GetName().c_str() );
 
+  //Use the compiled effect
+  m_Filename = "../CommonData/fx/" + GetName() + ".o";
+
+  LOG_INFO_APPLICATION( "Loading effect tecnhique %s", m_Filename.c_str() );
+
   for ( uint32 j = 0, lCount = aTechniqueNode.GetNumChildren(); j < lCount; ++j )
   {
     const CXMLTreeNode& lCurrentNode = aTechniqueNode( j );
     const std::string& l_TagName = lCurrentNode.GetName();
-    
+
+    if ( l_TagName == "handles" )
+    {
+      ReadFlags( lCurrentNode );
+    }
+#ifdef _DEBUG
     if( l_TagName == "define" )
     {
       SDefines lDefine = { lCurrentNode.GetAttribute<std::string>("name", "null_name"), lCurrentNode.GetAttribute<std::string>("description", "") };
       m_Defines.push_back(lDefine);
     }
-    else if ( l_TagName == "handles" )
-    {
-      ReadFlags( lCurrentNode );
-    }
+#endif
   }
 
-  // By default insert the definition of the techinque name
+#ifdef _DEBUG
+  // By default insert the definition of the technique name
   SDefines lDefine = { "TECHNIQUE_NAME", GetName() };
   m_Defines.push_back(lDefine);
+#endif
 
   m_Effect = new CEffect(GetName() + "_Effect" );
   bool lLoaded = m_Effect->Load( m_Filename, m_Defines );
@@ -93,7 +102,8 @@ bool CEffectTechnique::BeginRender()
         {
           uint32 lWidth, lHeight;
           GraphicsInstance->GetWidthAndHeight( lWidth, lHeight );
-          m_Effect->SetFBSize( Math::Vect2u(lWidth, lHeight ) );
+          if( !m_Effect->SetFBSize( Math::Vect2u(lWidth, lHeight ) ) )
+            LOG_WARNING_APPLICATION("Error setting Fb size" );
         }
 
         SetupMatrices();

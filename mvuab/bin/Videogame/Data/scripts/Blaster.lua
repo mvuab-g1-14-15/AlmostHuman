@@ -100,7 +100,7 @@ end
 
 function CBlaster:Update( aPosition )
 	if not g_ConsoleActivate and not g_CinematicActive then
-		if self.Energy > 1 then
+		if self.Energy > 1 and not g_Player:GetIsCrouch() then
 			if action_manager:DoAction("ShootDown") and not self.IsCharging then
 				g_Player:SetAnimation("fast_shoot")
 				self.Energy = self.Energy - 1

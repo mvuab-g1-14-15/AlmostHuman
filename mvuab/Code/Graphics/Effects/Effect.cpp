@@ -187,30 +187,41 @@ void CEffect::Unload()
 
 bool CEffect::Load( const std::string& aFileName, const std::vector<SDefines>& aDefines )
 {
+  SetNullParameters();
+
   bool lOk( true );
 
   // Store the filename 
   m_FileName = aFileName;
 
+  // Obtain the device from the graphics manager and load the effect
+  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
+  DWORD dwShaderFlags = 0;
+  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
+  //dwShaderFlags |= D3DXFX_LARGEADDRESSAWARE;
+  LPD3DXBUFFER l_ErrorBuffer = 0;
+
+#ifdef _DEBUG
   // Transform the defines struct to dx9 struct
   std::vector<D3DXMACRO> lDefines;
   for ( uint32 j = 0, lCount = aDefines.size(); j < lCount; ++j )
   {
-      D3DXMACRO macro = { aDefines[j].name.c_str(), aDefines[j].description.c_str() };
-      lDefines.push_back( macro );
+    D3DXMACRO macro = { aDefines[j].name.c_str(), aDefines[j].description.c_str() };
+    lDefines.push_back( macro );
   }
 
   // Set the end of the vector
   D3DXMACRO null = { NULL, NULL };
   lDefines.push_back( null );
 
-  // Obtain the device from the graphics manager and load the effect
-  LPDIRECT3DDEVICE9 l_Device = GraphicsInstance->GetDevice();
-  DWORD dwShaderFlags = 0;
-  dwShaderFlags |= D3DXSHADER_USE_LEGACY_D3DX9_31_DLL;
-  LPD3DXBUFFER l_ErrorBuffer = 0;
   lOk = D3DXCreateEffectFromFile( l_Device, m_FileName.c_str(), &lDefines[0], 0, dwShaderFlags, 0, &m_Effect, &l_ErrorBuffer ) == S_OK;
-  
+
+#else
+
+  lOk = D3DXCreateEffectFromFile( l_Device, m_FileName.c_str(), 0, 0, dwShaderFlags, 0, &m_Effect, &l_ErrorBuffer ) == S_OK;
+
+#endif // _DEBUG
+
   if ( l_ErrorBuffer )
   {
     lOk = false;
@@ -322,20 +333,26 @@ bool CEffect::SetViewToLightMatrix( const Math::Mat44f& Matrix )
 
 void CEffect::SetFlipUVs( bool aHorizontal, bool aVertical )
 {
-  SET_BOOL_PARAMETER( FlipUVHorizontal, aHorizontal );
-  SET_BOOL_PARAMETER( FlipUVVertical  , aVertical   );
+  HRESULT lRes = SET_BOOL_PARAMETER( FlipUVHorizontal, aHorizontal );
+  ASSERT( lRes == S_OK, "Error setting flip horizontal" );
+  lRes = SET_BOOL_PARAMETER( FlipUVVertical  , aVertical   );
+  ASSERT( lRes == S_OK, "Error setting flip vertical" );
 }
 
 void CEffect::SetShadowMapParameters ( bool UseShadowMaskTexture, bool UseStaticShadowmap, bool UseDynamicShadowmap )
 {
-  SET_BOOL_PARAMETER( UseShadowMaskTextureParameter, UseShadowMaskTexture );
-  SET_BOOL_PARAMETER( UseStaticShadowmapParameter  , UseStaticShadowmap   );
-  SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
+  HRESULT lRes = SET_BOOL_PARAMETER( UseShadowMaskTextureParameter, UseShadowMaskTexture );
+  ASSERT( lRes == S_OK, "Error setting shadow mask" );
+  lRes = SET_BOOL_PARAMETER( UseStaticShadowmapParameter  , UseStaticShadowmap   );
+  ASSERT( lRes == S_OK, "Error setting static shadow map" );
+  lRes = SET_BOOL_PARAMETER( UseDynamicShadowmapParameter , UseDynamicShadowmap   );
+  ASSERT( lRes == S_OK, "Error setting dynamic shadow map" );
 }
 
 void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
 {
-  SET_BOOL_PARAMETER( UseDebugColor , aUse );
+  HRESULT lRes = SET_BOOL_PARAMETER( UseDebugColor , aUse );
+  ASSERT( lRes == S_OK, "Error setting debug color" );
 
   if ( aUse )
   {
@@ -344,7 +361,8 @@ void CEffect::SetDebugColor( bool aUse, const Math::CColor aColor )
     l_DebugColor[1] = aColor.GetGreen();
     l_DebugColor[2] = aColor.GetBlue();
     l_DebugColor[3] = aColor.GetAlpha();
-    m_Effect->SetFloatArray( m_DebugColor, l_DebugColor, sizeof( float ) * 4 );
+    lRes = m_Effect->SetFloatArray( m_DebugColor, l_DebugColor, sizeof( float ) * 4 );
+    ASSERT( lRes == S_OK, "Error setting float array" );
   }
 }
 

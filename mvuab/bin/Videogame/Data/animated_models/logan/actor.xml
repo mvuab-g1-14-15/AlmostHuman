@@ -31,6 +31,15 @@
 			<action name="idle_to_shoot" fade_out="0.3"/>
 		  </on_exit>
 		</animation_state>
+		<animation_state name="crouch" default_fade_in="1" default_fade_out="0.5">
+		  <on_enter>
+			<action name="shoot_to_idle" fade_in="1"/>
+		  </on_enter>
+		  <cycle name="idle"/>
+		  <on_exit>
+			<action name="idle_to_shoot" fade_out="0.5"/>
+		  </on_exit>
+		</animation_state>
 		<animation_state name="aim" default_fade_in="0.0" default_fade_out="0.0">
 		  <cycle name="aim"/>
 		</animation_state>
