@@ -117,7 +117,7 @@ void CImage::AddTexture( const CXMLTreeNode& aNode )
   if( lTexture )
   {
     bool lAdded        = m_Textures.AddResource( lTexture->GetName(), lTexture );
-    ASSERT( lAdded, "The texture %s could not be added");
+    ASSERT( lAdded, "The texture %s, could not be added to the map", lTexture->GetName().c_str());
   }
 }
 
