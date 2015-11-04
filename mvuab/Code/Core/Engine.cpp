@@ -50,12 +50,13 @@ void CEngine::Update()
     m_pTimer->Update();
 
     m_pProcess->ProcessReloads();
-    m_pProcess->ProcessKey();
 
     m_AccTime += m_pTimer->GetElapsedTime();
     while(m_AccTime >= m_RenderTarget)
     {
         m_AccTime -= m_RenderTarget;
+        m_pProcess->ProcessKey();
+
         m_pEngineManagers->Update();
         m_pProcess->Update();
     }
