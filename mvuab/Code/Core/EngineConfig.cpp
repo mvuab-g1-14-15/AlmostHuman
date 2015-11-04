@@ -15,6 +15,7 @@ CEngineConfig::CEngineConfig()
     , mLoggerOutpuMode( eMVSOutputWindow )
     , mTraceOutpuMode( eConsole )
     , m_EnableConsole( false )
+    , m_Fps( 30 )
 {
 }
 
@@ -97,6 +98,10 @@ void CEngineConfig::Load( const std::string& aCfg )
         else if ( lTagName == "dataPath" )
         {
             m_DataPath = lNode.GetAttribute<std::string>( "path", "" );
+        }
+        else if ( lTagName == "fps" )
+        {
+            m_Fps = lNode.GetAttribute<int>( "fps", 30 );
         }
     }
 }

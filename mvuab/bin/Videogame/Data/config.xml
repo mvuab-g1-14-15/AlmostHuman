@@ -11,4 +11,5 @@
 	<sound init_sound_path="./Data/sounds.xml"/>
 	<animation animated_model="./Data/animated_model.xml" animated_model_path="./Data/animated_models/"/>
 	<data path="./Data/"/>
+    <fps fps="30" />
 </config>

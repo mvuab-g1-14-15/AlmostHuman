@@ -22,12 +22,14 @@
 CEngine::CEngine()
     : m_pEngineManagers(new CEngineManagers(EngineConfigInstance->GetManagersPath()))
     , m_pProcess(0)
-    , m_pTimer(new CTimer(30))
+    , m_pTimer(new CTimer(EngineConfigInstance->GetFps()))
     , m_Play(false)
     , mConsoleEnabled(false)
     , mLastTraceMsg("")
     , m_AccTime(0.0f)
 {
+    m_RenderTime = 0.0f;
+    m_RenderTarget = m_pTimer->GetConstFrameTime();
 }
 
 CEngine::~CEngine()
@@ -50,8 +52,9 @@ void CEngine::Update()
     m_pTimer->Update();
 
     m_pProcess->ProcessReloads();
+    m_RenderTime = m_pTimer->GetElapsedTime();
 
-    m_AccTime += m_pTimer->GetElapsedTime();
+    m_AccTime += m_RenderTime;
     while(m_AccTime >= m_RenderTarget)
     {
         m_AccTime -= m_RenderTarget;
@@ -82,8 +85,6 @@ void CEngine::SetRunnigProcess(CProcess* aProcess)
 
 void CEngine::Init(CEngineConfig* aEngineConfig)
 {
-    m_RenderTime = m_RenderTarget = 1.0f / 30.0f;
-
     if(aEngineConfig)
     {
         mConsoleEnabled = CEngineConfig::GetSingletonPtr()->GetTraceOutputMode() == CEngineConfig::eConsole;

@@ -39,6 +39,7 @@ class CEngineConfig : public CSingleton<CEngineConfig>
         GET_SET( HWND , WindowId );
         GET_SET( bool , DrawPointerMouse );
         GET_SET( bool , FitDesktop );
+        GET_SET( int  , Fps);
         GET_SET_REF( std::string , ConfigPath );
         GET_SET_REF( std::string , GUIPath );
         GET_SET_REF( std::string , SoundPath );
@@ -46,6 +47,7 @@ class CEngineConfig : public CSingleton<CEngineConfig>
         GET_SET_REF( std::string , DataPath );
 
     private:
+        int                             m_Fps;
         bool                            m_EnableConsole;
         bool                            m_FullScreenMode;
         bool                            m_FitDesktop;
