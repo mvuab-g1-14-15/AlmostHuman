@@ -61,9 +61,10 @@ void CLensFlare::Render
     float lAspectRatio
 )
 {
+    ASSERT( mTechnique, "Null technique");
     mTechnique->BeginRender();
 
-    FontInstance->DrawDefaultText( aLightProjPos.x, aLightProjPos.y, Math::colWHITE, "X");
+    ASSERT( mTechnique->GetEffect(), "Null effect");
 
     LPD3DXEFFECT l_Effect = mTechnique->GetEffect()->GetEffect();
 
