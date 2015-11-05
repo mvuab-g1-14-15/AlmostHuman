@@ -18,6 +18,7 @@
 	
 	<particle_system_core name="stealth_atack" sound="false">
 		<cube_emitter file="stealth_emitter_1.xml"/>
+		<cube_emitter file="ray_emitter_1.xml"/>
 	</particle_system_core>
 	
 	<particle_system_core name="steam_down" sound="true">
@@ -62,7 +63,7 @@
 	</particle_system_core>
 	
 	<particle_system_core name="stunned_little" sound="true">
-		<cube_emitter file="steam_up_slow_stunned_little.xml"/>
+		<cube_emitter file="steam_up_slow_stunned.xml"/>
 		<cube_emitter file="ray_emitter_1.xml"/>
 	</particle_system_core>
 	
@@ -71,9 +72,9 @@
 	</particle_system_core>
 	
 	<particle_system_core name="charge">
-		<cube_emitter file="charge_emitter_1.xml"/>
+		<!--cube_emitter file="charge_emitter_1.xml"/-->
 		<radial_emitter file="charge_emitter_2.xml"/>
-		<radial_emitter file="charge_emitter_3.xml"/>
+		<!--radial_emitter file="charge_emitter_3.xml"/-->
 	</particle_system_core>
 	
 	<particle_system_core name="blaster">

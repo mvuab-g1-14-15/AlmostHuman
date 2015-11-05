@@ -41,7 +41,11 @@
   <static_mesh name="Light_1_sala1" filename="meshes\Light_1.mesh" />
   <static_mesh name="Light_2_sala1" filename="meshes\Light_2.mesh" />
   <static_mesh name="Box197_sala1" filename="meshes\Box197.mesh" />
-  <static_mesh name="Taula_sala1" filename="meshes\Taula.mesh" />
   <static_mesh name="Box198_sala1" filename="meshes\Box198.mesh" />
   <static_mesh name="Rejilla_sala1" filename="meshes\Rejilla.mesh" />
+  <static_mesh name="Taula_sala1" filename="meshes\Taula.mesh" />
+  <static_mesh name="Container1_sala1" filename="meshes\Container1.mesh" />
+  <static_mesh name="Container002_sala1" filename="meshes\Container002.mesh" />
+  <static_mesh name="Radioctive_box_sala1" filename="meshes\Radioctive_box.mesh" />
+  <static_mesh name="Container003_sala1" filename="meshes\Container003.mesh" />
 </static_meshes>

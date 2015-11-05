@@ -1,13 +1,14 @@
 <emitter active="true" name="smoke" loop="true" time_to_live="20.0">
-	<particles max_alive_particles="100" time_to_live="0.5 1">
+	<particles max_alive_particles="800" time_to_live="0.3 0.8">
 		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
-		<texture name="../CommonData/textures/PS/negras/light_textures.dds" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<texture name="../CommonData/textures/PS/negras/raro2.dds" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 		<interpolators>
-			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.1"/>
-			<interpolator alpha="0.2" color="0.0 1 0" size="0.2"/>
-			<interpolator alpha="0.0" color="0.0 1 0.5" size="0.1"/>
+			<interpolator alpha="0" color="0.1 0.0 1" size="0.09"/>
+			<interpolator alpha="0.5" color="0.0 0.0 0.7" size="0.06"/>
+			<interpolator alpha="0.5" color="0.0 0.0 0.7" size="0.05"/>
+			<interpolator alpha="0" color="0.1 0.0 1" size="0.09"/>
 		</interpolators>
-		<motion linear_speed="0.1 0.1" initial_dir_min="0.1 0 0.1" initial_dir_max="-0.1 0 -0.1" radial_speed="0 0" gravity="-0.5"/>
+		<motion linear_speed="0.1 0.1" initial_dir_min="0.1 0 0.1" initial_dir_max="-0.1 0 -0.1" radial_speed="3 5" gravity="0"/>
 	</particles>
-	<emissions random_initial_angle="true" emission_time="0.1" particles_per_emission="1 5" radius_max="0.2" angle_step="1"/>
+	<emissions random_initial_angle="false" emission_time="0" particles_per_emission="15 20" radius_max="0.3" angle_step="50"/>
 </emitter>

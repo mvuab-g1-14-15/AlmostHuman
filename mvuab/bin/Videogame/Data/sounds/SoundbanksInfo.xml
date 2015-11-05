@@ -49,10 +49,6 @@
 					<ShortName>Almost Panico.wav</ShortName>
 					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
 				</File>
-				<File Id="426310337" Language="SFX">
-					<ShortName>Final Theme.wav</ShortName>
-					<Path>SFX\Final Theme_E106FFBE.wem</Path>
-				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
 					<Path>SFX\dark soundscapes 12_950FF8F3.wem</Path>
@@ -77,6 +73,14 @@
 					<ShortName>dark soundscapes 06.wav</ShortName>
 					<Path>SFX\dark soundscapes 06_950FF8F3.wem</Path>
 				</File>
+				<File Id="718615655" Language="SFX">
+					<ShortName>Main_Theme_Loop.wav</ShortName>
+					<Path>SFX\Main_Theme_Loop_951343B8.wem</Path>
+				</File>
+				<File Id="761229201" Language="SFX">
+					<ShortName>Final_Theme_Loop.wav</ShortName>
+					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
+				</File>
 				<File Id="772078166" Language="SFX">
 					<ShortName>Almost ok.wav</ShortName>
 					<Path>SFX\Almost ok_950FF8F3.wem</Path>
@@ -96,10 +100,6 @@
 				<File Id="918214348" Language="SFX">
 					<ShortName>dark soundscapes 07.wav</ShortName>
 					<Path>SFX\dark soundscapes 07_950FF8F3.wem</Path>
-				</File>
-				<File Id="932544539" Language="SFX">
-					<ShortName>Main Theme.wav</ShortName>
-					<Path>SFX\Main Theme_951343B8.wem</Path>
 				</File>
 				<File Id="1022880071" Language="SFX">
 					<ShortName>dark soundscapes 02.wav</ShortName>
@@ -249,6 +249,10 @@
 					<ShortName>Sala4B.wav</ShortName>
 					<Path>SFX\Sala4B_E106FFBE.wem</Path>
 				</File>
+				<File Id="117715303" Language="SFX">
+					<ShortName>Sala3B_Versio_Cut.wav</ShortName>
+					<Path>SFX\Sala3B_Versio_Cut_E106FFBE.wem</Path>
+				</File>
 				<File Id="139045063" Language="SFX">
 					<ShortName>naves_preparadas.wav</ShortName>
 					<Path>SFX\naves_preparadas_E106FFBE.wem</Path>
@@ -273,10 +277,6 @@
 					<ShortName>Sala4A.wav</ShortName>
 					<Path>SFX\Sala4A_E106FFBE.wem</Path>
 				</File>
-				<File Id="426310337" Language="SFX">
-					<ShortName>Final Theme.wav</ShortName>
-					<Path>SFX\Final Theme_E106FFBE.wem</Path>
-				</File>
 				<File Id="430266122" Language="SFX">
 					<ShortName>Sala1.wav</ShortName>
 					<Path>SFX\Sala1_E106FFBE.wem</Path>
@@ -284,10 +284,6 @@
 				<File Id="493938362" Language="SFX">
 					<ShortName>actualizacion de brazo v2.wav</ShortName>
 					<Path>SFX\actualizacion de brazo v2_E106FFBE.wem</Path>
-				</File>
-				<File Id="520901286" Language="SFX">
-					<ShortName>Sala3A.wav</ShortName>
-					<Path>SFX\Sala3A_E106FFBE.wem</Path>
 				</File>
 				<File Id="677660058" Language="SFX">
 					<ShortName>Esconderse_Bidones.wav</ShortName>
@@ -301,6 +297,10 @@
 					<ShortName>Agacharse.wav</ShortName>
 					<Path>SFX\Agacharse_E106FFBE.wem</Path>
 				</File>
+				<File Id="761229201" Language="SFX">
+					<ShortName>Final_Theme_Loop.wav</ShortName>
+					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
+				</File>
 				<File Id="765819752" Language="SFX">
 					<ShortName>Puerta_Bloqueada.wav</ShortName>
 					<Path>SFX\Puerta_Bloqueada_E106FFBE.wem</Path>
@@ -309,13 +309,13 @@
 					<ShortName>Bidon_movimiento.wav</ShortName>
 					<Path>SFX\Bidon_movimiento_E106FFBE.wem</Path>
 				</File>
-				<File Id="856495406" Language="SFX">
-					<ShortName>Sala3B.wav</ShortName>
-					<Path>SFX\Sala3B_E106FFBE.wem</Path>
-				</File>
 				<File Id="891960782" Language="SFX">
 					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
 					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
+				</File>
+				<File Id="953393735" Language="SFX">
+					<ShortName>Sala3A_version2.wav</ShortName>
+					<Path>SFX\Sala3A_version2_E106FFBE.wem</Path>
 				</File>
 				<File Id="959572413" Language="SFX">
 					<ShortName>Elevator.wav</ShortName>
