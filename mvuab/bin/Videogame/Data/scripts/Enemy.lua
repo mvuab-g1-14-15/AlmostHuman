@@ -313,7 +313,7 @@ function CEnemy:Update()
 			self.Death = true
 			
 			if self.Fly then
-				local lPosition = self:GetPosition();
+				local lPosition = self.RenderableObject:GetPosition();
 				lPosition.y = lPosition.y - self.InitHeight;
 				self.lParticle1:Init( lPosition );
 			else
