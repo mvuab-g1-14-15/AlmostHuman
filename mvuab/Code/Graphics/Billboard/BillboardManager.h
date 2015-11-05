@@ -34,7 +34,6 @@ public:
 private:
   static CRenderableVertexs* sRV;
   CGraphicsManager         * mGM;
-  CTexture* mLinearDepthTexture;
 };
 
 #endif // INC_CAMERAMANAGER_H_
