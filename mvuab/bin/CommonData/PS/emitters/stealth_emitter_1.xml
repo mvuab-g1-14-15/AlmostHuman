@@ -1,4 +1,4 @@
-<emitter active="true" name="smoke" loop="false" time_to_live="3.0">
+<emitter active="true" name="smoke" loop="false" time_to_live="1.0">
 	<particles max_alive_particles="800" time_to_live="2 2">
 		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/PS/negras/light_textures.dds" flip_uv_horizontal="true" flip_uv_vertical="true"/>
