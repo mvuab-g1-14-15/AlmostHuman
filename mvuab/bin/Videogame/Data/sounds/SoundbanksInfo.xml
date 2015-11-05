@@ -17,6 +17,7 @@
 				<Event Id="2902920709" Name="Play_Alerta"/>
 				<Event Id="1704638915" Name="Play_Ambient_Pasillo"/>
 				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
+				<Event Id="2212402943" Name="Play_Creditos"/>
 				<Event Id="2626091016" Name="Play_Final_Theme"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
 				<Event Id="3568813383" Name="Play_Main_Theme"/>
@@ -48,6 +49,10 @@
 				<File Id="384441130" Language="SFX">
 					<ShortName>Almost Panico.wav</ShortName>
 					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
+				</File>
+				<File Id="426310337" Language="SFX">
+					<ShortName>Final Theme.wav</ShortName>
+					<Path>SFX\Final Theme_951343B8.wem</Path>
 				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
@@ -237,10 +242,6 @@
 				<Event Id="2362998284" Name="Play_Tunel"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="84672891" Language="SFX">
-					<ShortName>Final boss Almost Human.wav</ShortName>
-					<Path>SFX\Final boss Almost Human_951343B8.wem</Path>
-				</File>
 				<File Id="88444989" Language="SFX">
 					<ShortName>Poca_Energia.wav</ShortName>
 					<Path>SFX\Poca_Energia_E106FFBE.wem</Path>
@@ -273,9 +274,9 @@
 					<ShortName>Disparo_Bloqueado.wav</ShortName>
 					<Path>SFX\Disparo_Bloqueado_E106FFBE.wem</Path>
 				</File>
-				<File Id="405981009" Language="SFX">
-					<ShortName>Sala4A.wav</ShortName>
-					<Path>SFX\Sala4A_E106FFBE.wem</Path>
+				<File Id="426310337" Language="SFX">
+					<ShortName>Final Theme.wav</ShortName>
+					<Path>SFX\Final Theme_951343B8.wem</Path>
 				</File>
 				<File Id="430266122" Language="SFX">
 					<ShortName>Sala1.wav</ShortName>
@@ -296,10 +297,6 @@
 				<File Id="753798982" Language="SFX">
 					<ShortName>Agacharse.wav</ShortName>
 					<Path>SFX\Agacharse_E106FFBE.wem</Path>
-				</File>
-				<File Id="761229201" Language="SFX">
-					<ShortName>Final_Theme_Loop.wav</ShortName>
-					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
 				</File>
 				<File Id="765819752" Language="SFX">
 					<ShortName>Puerta_Bloqueada.wav</ShortName>
