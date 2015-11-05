@@ -36,7 +36,7 @@ fn ExportLights filenameXML aLights aRoom =
 			(	
 				if classof iLight != Targetobject and classof iLight != freeDirect and classof iLight != freeSpot AND l_IsLightExportable == true then
 				(
-					local l_LightName = iLight.name
+					local l_LightName = (iLight.name + "_" + aRoom) as String
 					--create the light node
 					
 					local l_NewLightNode;
