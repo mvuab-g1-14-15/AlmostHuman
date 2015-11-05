@@ -1,14 +1,6 @@
 #include "../samplers.fxh"
 #include "../globals.fxh"
 
-//
-// ZBlur data
-//
-float g_ZBlurFocalStart = 2.0;
-float g_ZBlurFocalEnd = 5.0;
-float g_ConstantBlur = 0.1;
-float g_ZBlurEnd = 50.0;
-
 float4 ZBlurPS(in float2 UV : TEXCOORD0) : COLOR
 {
     float4 l_Color = float4(0.0, 0.0, 0.0, 0.0);

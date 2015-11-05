@@ -116,6 +116,15 @@ float      g_DeltaTime                                              : DeltaTime;
 //Rays Of God
 float      g_SWeight                                                : RaysWeight = 5.65;
 
+
+//
+// ZBlur data
+//
+float g_ZBlurFocalStart                                             : FocalStart = 2.0;
+float g_ZBlurFocalEnd                                               : FocalEnd = 5.0;
+float g_ConstantBlur                                                : BlurConstant = 0.1;
+float g_ZBlurEnd                                                    : BlurEnd = 50.0;
+
 //
 // Functions
 //

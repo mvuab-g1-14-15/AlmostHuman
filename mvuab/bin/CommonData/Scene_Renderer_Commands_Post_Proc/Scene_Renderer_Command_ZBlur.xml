@@ -1,0 +1,10 @@
+﻿<scene_renderer_commands>
+	<capture_frame_buffer name="ZBlurFrame">
+		<dynamic_texture stage_id="0" name="ZBlurFrame" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
+	</capture_frame_buffer>
+    
+    <zblur active="false" name="zblur" FocalStart="0.01" FocalEnd="0.1" BlurConstant="0.001" BlurEnd="5.0">
+        <texture stage_id="0" name="ZBlurFrame"/>
+        <texture stage_id="1" name="DepthMapTexture"/>
+    </zblur>
+</scene_renderer_commands>

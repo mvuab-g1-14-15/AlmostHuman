@@ -54,216 +54,221 @@
 
 
 CSceneRendererCommandManager::CSceneRendererCommandManager()
-  : CManager()
+    : CManager()
 {
 }
 
-CSceneRendererCommandManager::CSceneRendererCommandManager( CXMLTreeNode& atts )
-  : CManager( atts )
+CSceneRendererCommandManager::CSceneRendererCommandManager(CXMLTreeNode& atts)
+    : CManager(atts)
 {
 }
 
 CSceneRendererCommandManager::~CSceneRendererCommandManager()
 {
-  Destroy();
+    Destroy();
 }
 
 void CSceneRendererCommandManager::CleanUp()
 {
-  Destroy();
+    Destroy();
 }
 
 std::string CSceneRendererCommandManager::GetNextName()
 {
-  std::stringstream l_Str;
-  l_Str << "default_scene_renderer_command_";
-  l_Str << m_ResourcesVector.size();
-  return l_Str.str();
+    std::stringstream l_Str;
+    l_Str << "default_scene_renderer_command_";
+    l_Str << m_ResourcesVector.size();
+    return l_Str.str();
 }
 
 void CSceneRendererCommandManager::Init()
 {
-  // Register all the commands with the object factory class
-  m_CommandFactory.Register( "begin_scene",
-                             Type2Type<CBeginRenderSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "generate_shadow_maps",
-                             Type2Type<CGenerateShadowMapsSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "clear_scene",
-                             Type2Type<CClearSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "enable_z_write",
-                             Type2Type<CEnableZWriteSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "enable_z_test",
-                             Type2Type<CEnableZTestSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "set_matrices",
-                             Type2Type<CSetMatricesSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "set_pool_renderable_objects_technique",
-                             Type2Type<CRenderableObjectTechniquesSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "set_render_target",
-                             Type2Type<CSetRenderTargetSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "disable_z_write",
-                             Type2Type<CDisableZWriteSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "disable_z_test",
-                             Type2Type<CDisableZTestSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_draw_quad",
-                             Type2Type<CDrawQuadRendererCommand>( ) );
-  m_CommandFactory.Register( "render_draw_quad_by_technique",
-                             Type2Type<CDrawQuadByTechniqueRendererCommand>( ) );
-  m_CommandFactory.Register( "capture_frame_buffer",
-                             Type2Type<CCaptureFrameBufferSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "end_scene",
-                             Type2Type<CEndRenderSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_deferred_shading",
-                             Type2Type<CDeferredShadingSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_debug_scene",
-                             Type2Type<CRenderDebugSceneSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_debug_shadow_maps",
-                             Type2Type<CRenderDebugShadowMapsSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_gui",
-                             Type2Type<CRenderGUISceneRendererCommand>( ) );
-  m_CommandFactory.Register( "present",
-                             Type2Type<CPresentSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "enable_alpha_blend",
-                             Type2Type<CEnableAlphaBlendSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "disable_alpha_blend",
-                             Type2Type<CDisableAlphaBlendSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "gaussian",
-                             Type2Type<CGaussianSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "lens_of_flare",
-                             Type2Type<CLensOfFlareRendererCommand>( ) );
-  m_CommandFactory.Register( "enable_alpha_test",
-                             Type2Type<CEnableAlphaTestSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "set_blend",
-                             Type2Type<CSetBlendSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "disable_alpha_test",
-                             Type2Type<CDisableAlphaTestSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_scene",
-                             Type2Type<CRenderSceneSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_developer_info",
-                             Type2Type<CDeveloperInfoSceneRenderCommand>( ) );
-  m_CommandFactory.Register( "render_particules",
-                             Type2Type<CParticleRenderCommand>( ) );
-  m_CommandFactory.Register( "render_weapon_target",
-                             Type2Type<CWeaponTargetRendererCommand>( ) );
-  m_CommandFactory.Register( "render_debug",
-                             Type2Type<CRenderDebugCommand>( ) );
-  m_CommandFactory.Register( "render_gizmos",
-                             Type2Type<CRenderGizmosCommand>( ) );
-  m_CommandFactory.Register( "render_gui",
-                             Type2Type<CRenderGUISceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_billboards",
-                             Type2Type<CBillboardRenderCommand>( ) );
-  m_CommandFactory.Register( "render_process",
-                             Type2Type<CProcessRenderRendererCommand>( ) );
-  m_CommandFactory.Register( "render_triggers",
-                             Type2Type<CTriggerRenderCommand>( ) );
-  m_CommandFactory.Register( "bloom", Type2Type<CBloomSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "render_editors", Type2Type<CEditorsRenderCmd>( ) );
-  m_CommandFactory.Register( "zblur", Type2Type<CZBlurSceneRendererCommand>( ) );
-  m_CommandFactory.Register( "scattered_light", Type2Type<CScatteredLightSceneRendererCommand>() );
-  m_CommandFactory.Register( "occlusion_map", Type2Type<COcclusionMapSceneRendererCommand>() );
+    // Register all the commands with the object factory class
+    m_CommandFactory.Register("begin_scene",
+                              Type2Type<CBeginRenderSceneRendererCommand>());
+    m_CommandFactory.Register("generate_shadow_maps",
+                              Type2Type<CGenerateShadowMapsSceneRendererCommand>());
+    m_CommandFactory.Register("clear_scene",
+                              Type2Type<CClearSceneRendererCommand>());
+    m_CommandFactory.Register("enable_z_write",
+                              Type2Type<CEnableZWriteSceneRendererCommand>());
+    m_CommandFactory.Register("enable_z_test",
+                              Type2Type<CEnableZTestSceneRendererCommand>());
+    m_CommandFactory.Register("set_matrices",
+                              Type2Type<CSetMatricesSceneRendererCommand>());
+    m_CommandFactory.Register("set_pool_renderable_objects_technique",
+                              Type2Type<CRenderableObjectTechniquesSceneRendererCommand>());
+    m_CommandFactory.Register("set_render_target",
+                              Type2Type<CSetRenderTargetSceneRendererCommand>());
+    m_CommandFactory.Register("disable_z_write",
+                              Type2Type<CDisableZWriteSceneRendererCommand>());
+    m_CommandFactory.Register("disable_z_test",
+                              Type2Type<CDisableZTestSceneRendererCommand>());
+    m_CommandFactory.Register("render_draw_quad",
+                              Type2Type<CDrawQuadRendererCommand>());
+    m_CommandFactory.Register("render_draw_quad_by_technique",
+                              Type2Type<CDrawQuadByTechniqueRendererCommand>());
+    m_CommandFactory.Register("capture_frame_buffer",
+                              Type2Type<CCaptureFrameBufferSceneRendererCommand>());
+    m_CommandFactory.Register("end_scene",
+                              Type2Type<CEndRenderSceneRendererCommand>());
+    m_CommandFactory.Register("render_deferred_shading",
+                              Type2Type<CDeferredShadingSceneRendererCommand>());
+    m_CommandFactory.Register("render_debug_scene",
+                              Type2Type<CRenderDebugSceneSceneRendererCommand>());
+    m_CommandFactory.Register("render_debug_shadow_maps",
+                              Type2Type<CRenderDebugShadowMapsSceneRendererCommand>());
+    m_CommandFactory.Register("render_gui",
+                              Type2Type<CRenderGUISceneRendererCommand>());
+    m_CommandFactory.Register("present",
+                              Type2Type<CPresentSceneRendererCommand>());
+    m_CommandFactory.Register("enable_alpha_blend",
+                              Type2Type<CEnableAlphaBlendSceneRendererCommand>());
+    m_CommandFactory.Register("disable_alpha_blend",
+                              Type2Type<CDisableAlphaBlendSceneRendererCommand>());
+    m_CommandFactory.Register("gaussian",
+                              Type2Type<CGaussianSceneRendererCommand>());
+    m_CommandFactory.Register("lens_of_flare",
+                              Type2Type<CLensOfFlareRendererCommand>());
+    m_CommandFactory.Register("enable_alpha_test",
+                              Type2Type<CEnableAlphaTestSceneRendererCommand>());
+    m_CommandFactory.Register("set_blend",
+                              Type2Type<CSetBlendSceneRendererCommand>());
+    m_CommandFactory.Register("disable_alpha_test",
+                              Type2Type<CDisableAlphaTestSceneRendererCommand>());
+    m_CommandFactory.Register("render_scene",
+                              Type2Type<CRenderSceneSceneRendererCommand>());
+    m_CommandFactory.Register("render_developer_info",
+                              Type2Type<CDeveloperInfoSceneRenderCommand>());
+    m_CommandFactory.Register("render_particules",
+                              Type2Type<CParticleRenderCommand>());
+    m_CommandFactory.Register("render_weapon_target",
+                              Type2Type<CWeaponTargetRendererCommand>());
+    m_CommandFactory.Register("render_debug",
+                              Type2Type<CRenderDebugCommand>());
+    m_CommandFactory.Register("render_gizmos",
+                              Type2Type<CRenderGizmosCommand>());
+    m_CommandFactory.Register("render_gui",
+                              Type2Type<CRenderGUISceneRendererCommand>());
+    m_CommandFactory.Register("render_billboards",
+                              Type2Type<CBillboardRenderCommand>());
+    m_CommandFactory.Register("render_process",
+                              Type2Type<CProcessRenderRendererCommand>());
+    m_CommandFactory.Register("render_triggers",
+                              Type2Type<CTriggerRenderCommand>());
+    m_CommandFactory.Register("bloom", Type2Type<CBloomSceneRendererCommand>());
+    m_CommandFactory.Register("render_editors", Type2Type<CEditorsRenderCmd>());
+    m_CommandFactory.Register("zblur", Type2Type<CZBlurSceneRendererCommand>());
+    m_CommandFactory.Register("scattered_light", Type2Type<CScatteredLightSceneRendererCommand>());
+    m_CommandFactory.Register("occlusion_map", Type2Type<COcclusionMapSceneRendererCommand>());
 
-  Load( mConfigPath );
+    Load(mConfigPath);
 }
 
-bool CSceneRendererCommandManager::Load( const std::string& lFile )
+bool CSceneRendererCommandManager::Load(const std::string& lFile)
 {
-  CXMLTreeNode l_Node, SceneRendererXml;
+    CXMLTreeNode l_Node, SceneRendererXml;
 
-  if ( !SceneRendererXml.LoadAndFindNode( lFile.c_str(), "scene_renderer_commands", l_Node ) )
-  {
-    FATAL_ERROR( "Error reading the file %s", lFile.c_str() );
-    return false;
-  }
-
-  bool lOk = true;
-
-  for ( int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i )
-  {
-    CXMLTreeNode& l_CurrentNode = l_Node( i );
-    const std::string& l_TagName = l_CurrentNode.GetName();
-    std::string lName = l_CurrentNode.GetAttribute<std::string>( "name", GetNextName().c_str() );
-
-    if ( l_TagName == "postproc" || l_TagName == "render_command" )
+    if(!SceneRendererXml.LoadAndFindNode(lFile.c_str(), "scene_renderer_commands", l_Node))
     {
-      if ( !Load( l_CurrentNode.GetAttribute<std::string>( "filename", "" ) ) )
-      {
-        LOG_ERROR_APPLICATION( "Load->Error al intentar cargar el command: %s", l_TagName.c_str() );
-        lOk = false;
-      }
+        FATAL_ERROR("Error reading the file %s", lFile.c_str());
+        return false;
     }
-    else
+
+    bool lOk = true;
+
+    for(int i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; ++i)
     {
-      CSceneRendererCommand* Command = 0;
+        CXMLTreeNode& l_CurrentNode = l_Node(i);
+        const std::string& l_TagName = l_CurrentNode.GetName();
+        std::string lName = l_CurrentNode.GetAttribute<std::string>("name", GetNextName().c_str());
 
-      if ( l_TagName == "unset_render_target" )
-      {
-        CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
-          dynamic_cast<CSetRenderTargetSceneRendererCommand*>( GetResource(
-                l_CurrentNode.GetAttribute<std::string>( "render_target", "" ) ) );
-        Command = new CUnsetRenderTargetSceneRendererCommand( SetRenderTargetSceneRendererCommand, l_CurrentNode );
-        LOG_INFO_APPLICATION( "Command added %s",  l_TagName.c_str() );
-      }
-      else
-        Command = m_CommandFactory.Create( l_TagName.c_str(), l_CurrentNode );
+        if(l_TagName == "postproc" || l_TagName == "render_command")
+        {
+            if(!Load(l_CurrentNode.GetAttribute<std::string>("filename", "")))
+            {
+                LOG_ERROR_APPLICATION("Load->Error al intentar cargar el command: %s", l_TagName.c_str());
+                lOk = false;
+            }
+        }
+        else
+        {
+            CSceneRendererCommand* Command = 0;
 
-      if ( !Command )
-      {
-        LOG_ERROR_APPLICATION( "Command %s not found in the factory of commands!", l_TagName.c_str() );
-        lOk = false;
-      }
-      else
-      {
-        if ( !AddResource( lName , Command ) )
-          CHECKED_DELETE( Command );
-      }
+            if(l_TagName == "unset_render_target")
+            {
+                CSetRenderTargetSceneRendererCommand* SetRenderTargetSceneRendererCommand =
+                    dynamic_cast<CSetRenderTargetSceneRendererCommand*>(GetResource(
+                                l_CurrentNode.GetAttribute<std::string>("render_target", "")));
+                Command = new CUnsetRenderTargetSceneRendererCommand(SetRenderTargetSceneRendererCommand, l_CurrentNode);
+                LOG_INFO_APPLICATION("Command added %s",  l_TagName.c_str());
+            }
+            else
+                Command = m_CommandFactory.Create(l_TagName.c_str(), l_CurrentNode);
+
+            if(!Command)
+            {
+                LOG_ERROR_APPLICATION("Command %s not found in the factory of commands!", l_TagName.c_str());
+                lOk = false;
+            }
+            else
+            {
+                if(!AddResource(lName , Command))
+                    CHECKED_DELETE(Command);
+            }
+        }
     }
-  }
 
-  return lOk;
+    return lOk;
 }
 
 bool CSceneRendererCommandManager::Execute()
 {
-  CGraphicsManager* lGM = GraphicsInstance;
+    CGraphicsManager* lGM = GraphicsInstance;
 
-  for ( uint32 i = 0, lCount = m_ResourcesVector.size(); i < lCount; ++i )
-  {
-    CSceneRendererCommand* lCommand = m_ResourcesVector[i];
-    if ( lCommand->GetVisible() )
+    for(uint32 i = 0, lCount = m_ResourcesVector.size(); i < lCount; ++i)
     {
-      lCommand->Execute( *lGM );
+        CSceneRendererCommand* lCommand = m_ResourcesVector[i];
+        if(lCommand->GetVisible())
+        {
+            lCommand->Execute(*lGM);
+        }
     }
-  }
 
-  return true;
+    return true;
 }
 
 void CSceneRendererCommandManager::ReLoad()
 {
-  CleanUp();
-  Init();
+    CleanUp();
+    Init();
 }
 
-CRenderGUISceneRendererCommand* CSceneRendererCommandManager::GetCommandGUI( )
+CRenderGUISceneRendererCommand* CSceneRendererCommandManager::GetCommandGUI()
 {
-  return dynamic_cast<CRenderGUISceneRendererCommand*>( GetResource( "render_gui" ) );
+    return dynamic_cast<CRenderGUISceneRendererCommand*>(GetResource("render_gui"));
 }
 
-bool CSceneRendererCommandManager::GetVisibleCommand( std::string aName )
+bool CSceneRendererCommandManager::GetVisibleCommand(std::string aName)
 {
-  CSceneRendererCommand* lCommand = GetResource( aName );
-  return ( lCommand ) ? lCommand->GetVisible( ) : false;
+    CSceneRendererCommand* lCommand = GetResource(aName);
+    return (lCommand) ? lCommand->GetVisible() : false;
 }
 
-void CSceneRendererCommandManager::SetVisibleCommand( std::string aName, bool aVisible )
+void CSceneRendererCommandManager::SetVisibleCommand(std::string aName, bool aVisible)
 {
-  CSceneRendererCommand* lCommand = GetResource( aName );
+    CSceneRendererCommand* lCommand = GetResource(aName);
 
-  if ( lCommand )
-    lCommand->SetVisible( aVisible );
+    if(lCommand)
+        lCommand->SetVisible(aVisible);
 }
 
 CScatteredLightSceneRendererCommand *CSceneRendererCommandManager::GetScatteredLight()
 {
     return dynamic_cast<CScatteredLightSceneRendererCommand *>(GetResource("scattered_light"));
+}
+
+CZBlurSceneRendererCommand *CSceneRendererCommandManager::GetZBlur()
+{
+    return dynamic_cast<CZBlurSceneRendererCommand *>(GetResource("zblur"));
 }
