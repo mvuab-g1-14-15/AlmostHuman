@@ -26,7 +26,7 @@ class EffectTechnique:
 
 class EffectsPool:
     def __init__(self):
-        print "Initing Effects Pool"
+        print("Initing Effects Pool")
         
     def CreateEffect( self, node ):
         if node.tag == 'technique' :
@@ -36,7 +36,7 @@ class EffectsPool:
             self.ParseXMLEffects(node.get('file'))
             
     def ParseXMLEffects( self, file ):
-        print file
+        print(file)
         root = xml.etree.ElementTree.parse(file).getroot()
         for child in root:
             self.CreateEffect( child )
