@@ -568,11 +568,11 @@ function CEnemyManager:CreateEnemiesFinal()
 	lInfo.damage = 10.0
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
-	lInfo.speed = 2.0
+	lInfo.speed = 1.2
 	lInfo.position = Vect3f(-300.0, 21.0, 56.0)
 	lInfo.is_patrol = true
 	lInfo.waypoints = { Vect3f(-300.0, 21.0, 56.0),
-						Vect3f(-325.0, 21.0, 56.0)}
+						Vect3f(-346.0, 21.0, 56.0)}
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala4"
 	lInfo.use_gizmo = false
@@ -605,17 +605,17 @@ function CEnemyManager:CreateEnemiesFinal()
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy3_F"
-	lInfo.position = Vect3f(-302.0, 21.0, 62.0)
-	lInfo.waypoints = { Vect3f(-302.0, 21.0, 62.0),
-						Vect3f(-346.0, 21.0, 62.0)}
+	lInfo.position = Vect3f(-302.0, 21.0, 56.0)
+	lInfo.waypoints = { Vect3f(-302.0, 21.0, 56.0),
+						Vect3f(-346.0, 21.0, 56.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy4_F"
@@ -625,17 +625,17 @@ function CEnemyManager:CreateEnemiesFinal()
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy5_F"
-	lInfo.position = Vect3f(-304.0, 21.0, 62.0)
-	lInfo.waypoints = { Vect3f(-304.0, 21.0, 62.0),
-						Vect3f(-346.0, 21.0, 62.0)}
+	lInfo.position = Vect3f(-304.0, 21.0, 56.0)
+	lInfo.waypoints = { Vect3f(-304.0, 21.0, 56.0),
+						Vect3f(-346.0, 21.0, 56.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy6_F"
@@ -645,17 +645,17 @@ function CEnemyManager:CreateEnemiesFinal()
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy7_F"
-	lInfo.position = Vect3f(-306.0, 21.0, 62.0)
-	lInfo.waypoints = { Vect3f(-306.0, 21.0, 62.0),
-						Vect3f(-346.0, 21.0, 62.0)}
+	lInfo.position = Vect3f(-306.0, 21.0, 56.0)
+	lInfo.waypoints = { Vect3f(-306.0, 21.0, 56.0),
+						Vect3f(-346.0, 21.0, 56.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy8_F"
@@ -665,17 +665,17 @@ function CEnemyManager:CreateEnemiesFinal()
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy9_F"
-	lInfo.position = Vect3f(-308.0, 21.0, 62.0)
-	lInfo.waypoints = { Vect3f(-308.0, 21.0, 62.0),
-						Vect3f(-346.0, 21.0, 62.0)}
+	lInfo.position = Vect3f(-308.0, 21.0, 56.0)
+	lInfo.waypoints = { Vect3f(-308.0, 21.0, 56.0),
+						Vect3f(-346.0, 21.0, 56.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 	
 	lInfo.name = "Enemy10_F"
@@ -685,7 +685,81 @@ function CEnemyManager:CreateEnemiesFinal()
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
-		self.Enemy.sala2[lInfo.name]:__init( lInfo );
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Enemy11_F"
+	lInfo.position = Vect3f(-300.0, 21.0, 59.0)
+	lInfo.waypoints = { Vect3f(-300.0, 21.0, 59.0),
+						Vect3f(-346.0, 21.0, 59.0)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Enemy12_F"
+	lInfo.position = Vect3f(-302.0, 21.0, 59.0)
+	lInfo.waypoints = { Vect3f(-302.0, 21.0, 59.0),
+						Vect3f(-346.0, 21.0, 59.0)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Enemy13_F"
+	lInfo.position = Vect3f(-304.0, 21.0, 59.0)
+	lInfo.waypoints = { Vect3f(-304.0, 21.0, 59.0),
+						Vect3f(-346.0, 21.0, 59.0)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Enemy14_F"
+	lInfo.position = Vect3f(-306.0, 21.0, 59.0)
+	lInfo.waypoints = { Vect3f(-306.0, 21.0, 59.0),
+						Vect3f(-346.0, 21.0, 59.0)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Enemy15_F"
+	lInfo.position = Vect3f(-308.0, 21.0, 59.0)
+	lInfo.waypoints = { Vect3f(-308.0, 21.0, 59.0),
+						Vect3f(-346.0, 21.0, 59.0)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Drone3_F"
+	lInfo.mesh = "drone"
+	lInfo.fly = true
+	lInfo.camera_pitch = -1.04719755
+	lInfo.position = Vect3f(-304.0, 24.0, 54.5)
+	lInfo.waypoints = { Vect3f(-304.0, 24.0, 54.5),
+						Vect3f(-346.0, 24.0, 54.5)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
+	end
+	
+	lInfo.name = "Drone2_F"
+	lInfo.mesh = "drone"
+	lInfo.position = Vect3f(-304.0, 24.0, 60.5)
+	lInfo.waypoints = { Vect3f(-304.0, 24.0, 60.5),
+						Vect3f(-346.0, 24.0, 60.5)}
+	if self.Enemy.sala2[lInfo.name] == nil then
+		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
+	else
+		self.Enemy.sala2[lInfo.name]:__init( lInfo )
 	end
 end
 
