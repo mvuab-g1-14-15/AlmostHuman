@@ -30,6 +30,9 @@
 	<billboard name="ammo" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true" distance="30">
 		<texture filename="../CommonData/textures/Billboards/ammo.png" stage_id="0"/>
 	</billboard>
+	<billboard name="ammo_pink" technique="BillboardAlignedToCameraTechniqueONEONEADD" alpha="0.5" size="0.3" flip_uv_horizontal="false" flip_uv_vertical="true" random_angle="true" distance="30">
+		<texture filename="../CommonData/textures/Billboards/ammo_pink.png" stage_id="0"/>
+	</billboard>
 	<billboard name="SpotLight" technique="BillboardAlignedToCameraTechnique" alpha="0.25" size="1" flip_uv_horizontal="false" flip_uv_vertical="false" random_angle="false" distance="30">
 		<texture filename="../CommonData/textures/Billboards/SpotLight.png" stage_id="0"/>
 	</billboard>
