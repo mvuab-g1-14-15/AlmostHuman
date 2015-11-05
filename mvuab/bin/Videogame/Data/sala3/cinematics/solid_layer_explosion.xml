@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-<AnimatedInstance name="Cylinder001_sala3" core="Player" pos="-4.58296 -14.0589 60.0993" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false" />
+  <AnimatedInstance name="Cylinder001_sala3" core="Player" room="sala3" pos="-4.58296 -14.0589 60.0993" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false" />
   <MeshInstance active="false" name="Reixa_014_sala3" core="Reixa_014_sala3" pos="42.0517 -17.0164 66.7066" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance active="false" name="Reixa_015_sala3" core="Reixa_015_sala3" pos="45.9371 -17.0164 64.664" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance active="false" name="Reixa_016_sala3" core="Reixa_016_sala3" pos="45.9371 -17.0164 62.6215" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />

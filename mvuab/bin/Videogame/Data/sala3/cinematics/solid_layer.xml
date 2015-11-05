@@ -257,5 +257,5 @@
   <MeshInstance name="assambly_machine_part4_Part_098_sala3" core="assambly_machine_part4_Part_098_sala3" active="false" pos="24.7949 -15.3837 73.3938" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="assambly_machine_part4_Part_099_sala3" core="assambly_machine_part4_Part_099_sala3" active="false" pos="26.161 -18.0939 73.4167" yaw="-3.14159" pitch="1.78872e-007" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="assambly_machine_part4_Part_100_sala3" core="assambly_machine_part4_Part_100_sala3" active="false" pos="24.3171 -15.2777 73.4181" yaw="-3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <AnimatedInstance name="Cylinder001_sala3" core="Player" pos="-4.58296 -14.0589 60.0993" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false" />
+  <AnimatedInstance name="Cylinder001_sala3" core="Player" pos="-4.58296 -14.0589 60.0993" room="sala3" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" active="false" />
 </RenderableObjects>
