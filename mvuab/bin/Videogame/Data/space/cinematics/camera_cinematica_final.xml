@@ -1,5 +1,5 @@
 ﻿<camera>
-  <camera_key_controller name="camera_cinematica_final" cycle="1" reverse="0" total_time="66.6667">
+  <camera_key_controller name="camera_cinematica_final" cycle="1" reverse="0" total_time="66.6667" lua_code="enemy_manager:CreateEnemiesFinal()" key_action="21.8">
     <key time="0.0" pos="-174.003 20.5802 58.8702" look_at="-174.998 20.6743 58.8963" up_vector="0.094074 0.995562 -0.00246184" fov="60" near_plane="0.01" far_plane="6000.0" />
     <key time="0.0333333" pos="-174.004 20.5802 58.8702" look_at="-175.0 20.6743 58.8963" up_vector="0.094074 0.995562 -0.00246184" fov="60" near_plane="0.01" far_plane="6000.0" />
     <key time="0.0666667" pos="-174.01 20.5802 58.8702" look_at="-175.005 20.6743 58.8963" up_vector="0.094074 0.995562 -0.00246184" fov="60" near_plane="0.01" far_plane="6000.0" />

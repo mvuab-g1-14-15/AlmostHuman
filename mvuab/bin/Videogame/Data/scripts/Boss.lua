@@ -12,7 +12,7 @@ function CBoss:__init()
 	self.Delta = 1.0
 	self.DeltaRot = 0.01
 	
-	self.Speed = 5.0
+	self.Speed = 3.0
 	self.TimeToRot = 1.0
 	
 	self.Lerp = CLerpAnimator1D()
@@ -21,7 +21,7 @@ function CBoss:__init()
 	self.NearPos = Vect3f(-142.0,25.0, 60.0)
 	self.MediumPos = Vect3f(-177.0,25.0, 58.0)
 	
-	self.InitPos = Vect3f(-177.0, 25.0, 98.0)
+	self.InitPos = Vect3f(-177.0, 25.0, 88.0)
 	
 	self.TargetPos = self.MediumPos
 	
@@ -55,7 +55,7 @@ function CBoss:__init()
 	self.CharacterController:SetYaw(0.0)
 	self.CharacterController:SetScale( Vect3f(1.0) )
 	
-	self.FootstepTime = 1.0
+	self.FootstepTime = 1.2
 	
 	self.SpawnPositions = { Vect3f(-110.0, 21.0, 54.0)
 						  , Vect3f(-110.0, 21.0, 66.0)
