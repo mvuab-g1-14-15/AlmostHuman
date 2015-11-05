@@ -121,6 +121,14 @@ bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)
         {
             float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
             m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
+
+            S_LUACodePerKey l_LuaCode = 
+            {
+                l_CurrentNode.GetAttribute<std::string>("lua_code", ""),
+                false
+            };
+
+            m_LuaCodePerKey.push_back(l_LuaCode);
         }
     }
 
@@ -170,6 +178,7 @@ CCameraKeyController::~CCameraKeyController()
     }
 
     m_Keys.clear();
+    m_LuaCodePerKey.clear();
 
     CHECKED_DELETE(m_pCameraInfo)
 }
@@ -180,6 +189,12 @@ void CCameraKeyController::Update()
     if( m_Finish )
     {
         return;
+    }
+
+    if(!m_LuaCodePerKey[m_KeyAction].Executed && m_LuaCodePerKey[m_KeyAction].LuaCode.size() > 1)
+    {
+        ScriptMInstance->RunCode(m_LuaCodePerKey[m_KeyAction].LuaCode);
+        m_LuaCodePerKey[m_KeyAction].Executed = true;
     }
 
     if( m_PlayingBackward )
