@@ -34,8 +34,7 @@ g_HalfPi = 1.57079632679
 g_Pi = 3.141592
 g_DoublePi = 2*g_Pi
 
-g_fps = 30.0
-g_FrameTime = 1.0 / g_fps
+g_FrameTime = timer:GetConstFrameTime()
 
 -- Global Functions
 function OverlapSphere(radius, position)

@@ -2,4 +2,5 @@
 <RenderableObjects>
   <MeshInstance name="bomb_sala3" core="bomb_sala3" pos="40.6495 -16.7378 51.8676" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="bomb002_sala3" core="bomb002_sala3" pos="26.6375 -16.776 68.7003" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Lamps_sala_3_Glow_sala3" core="Lamps_sala_3_Glow_sala3" pos="-1.66827 -1.95547 58.9794" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
 </RenderableObjects>

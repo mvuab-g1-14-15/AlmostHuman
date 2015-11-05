@@ -2,10 +2,10 @@
 	<billboard name="target" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="true" flip_uv_vertical="true" distance="5">
 		<texture filename="../CommonData/textures/Billboards/target.png" stage_id="0"/>
 	</billboard>
-	<billboard name="hand_action" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="20">
+	<billboard name="hand_action" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="20">
 		<texture filename="../CommonData/textures/Billboards/hand_action.png" stage_id="0"/>
 	</billboard>
-	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="30">
+	<billboard name="energy" technique="BillboardAlignedToCameraTechnique" alpha="0.8" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="30">
 		<texture filename="../CommonData/textures/Billboards/energy_icon.dds" stage_id="0"/>
 	</billboard>
 	<billboard name="dlc" technique="BillboardAlignedToCameraTechnique" alpha="0.5" size="0.5" flip_uv_horizontal="false" flip_uv_vertical="true" distance="15">
@@ -33,4 +33,37 @@
 	<billboard name="SpotLight" technique="BillboardAlignedToCameraTechnique" alpha="0.25" size="1" flip_uv_horizontal="false" flip_uv_vertical="false" random_angle="false" distance="30">
 		<texture filename="../CommonData/textures/Billboards/SpotLight.png" stage_id="0"/>
 	</billboard>
+	
+	<billboard name="mouse_movement" technique="BillboardAlignedToCameraTechnique" alpha="0.8" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="2">
+		<texture filename="../CommonData/textures/Billboards/mouse_movement.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="space" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="2">
+		<texture filename="../CommonData/textures/Billboards/space.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="move" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="2">
+		<texture filename="../CommonData/textures/Billboards/move.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="E" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="10">
+		<texture filename="../CommonData/textures/Billboards/E.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="F" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="10">
+		<texture filename="../CommonData/textures/Billboards/F.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="C" technique="BillboardAlignedToCameraTechnique" alpha="0.7" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="5">
+		<texture filename="../CommonData/textures/Billboards/C.dds" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="disparo_cargado" technique="BillboardAlignedToCameraTechnique" alpha="0.8" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="20">
+		<texture filename="../CommonData/textures/Billboards/disparo_cargado.png" stage_id="0"/>
+	</billboard>
+	
+	<billboard name="disparo_simple" technique="BillboardAlignedToCameraTechnique" alpha="0.8" size="0.5" angle="1.57" flip_uv_horizontal="false" flip_uv_vertical="false" distance="20">
+		<texture filename="../CommonData/textures/Billboards/disparo_simple.png" stage_id="0"/>
+	</billboard>
+	
 </billboards>

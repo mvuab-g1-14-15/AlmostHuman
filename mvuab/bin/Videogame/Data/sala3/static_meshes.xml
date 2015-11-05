@@ -260,4 +260,5 @@
   <static_mesh name="Container_008_sala3" filename="meshes\Container_008.mesh" />
   <static_mesh name="bomb_sala3" filename="meshes\bomb.mesh" />
   <static_mesh name="bomb002_sala3" filename="meshes\bomb002.mesh" />
+  <static_mesh name="Lamps_sala_3_Glow_sala3" filename="meshes\Lamps_sala_3_Glow.mesh" />
 </static_meshes>

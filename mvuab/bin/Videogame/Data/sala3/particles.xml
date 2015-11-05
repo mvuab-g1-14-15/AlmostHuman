@@ -10,4 +10,13 @@
   <particle_instance name="steam_down_slow_big7" core="steam_down_slow_big" pos="-1.13168 -1.54398 68.4262" active="true" sound="true" />
   <particle_instance name="steam_down_slow_big8" core="steam_down_slow_big" pos="-28.915 -1.54398 68.4262" active="true" sound="true" />
   <particle_instance name="steam_down_slow_big9" core="steam_down_slow_big" pos="-28.915 -1.54398 51.4705" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big10" core="steam_down_slow_big" pos="26.4146 -1.54398 60.1215" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big11" core="steam_down_slow_big" pos="-1.13168 -1.54398 60.1805" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big12" core="steam_down_slow_big" pos="-1.13168 -1.54398 43.4344" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big13" core="steam_down_slow_big" pos="-1.13168 -1.54398 77.0213" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big14" core="steam_down_slow_big" pos="44.3794 -1.54398 77.0213" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big15" core="steam_down_slow_big" pos="44.3794 -1.54398 58.8997" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big16" core="steam_down_slow_big" pos="27.5769 -1.54398 67.9585" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big17" core="steam_down_slow_big" pos="27.5769 -1.54398 43.6802" active="true" sound="true" />
+  <particle_instance name="steam_down_slow_big18" core="steam_down_slow_big" pos="-47.4391 -1.54398 74.984" active="true" sound="true" />
 </particles_instances>

@@ -340,6 +340,7 @@ void registerBase( lua_State* m_LS )
     class_<CTimer>( "CTimer" )
     .def( "GetElapsedTime", &CTimer::GetElapsedTime )
     .def( "GetSpeedFactor", &CTimer::GetSpeedFactor)
+    .def( "GetConstFrameTime", &CTimer::GetConstFrameTime)
     .def( "GetTime", &CTimer::GetTime )
     .def( "GetTimeMs", &CTimer::GetTimeMs )
   ];

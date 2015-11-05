@@ -1,0 +1,13 @@
+<emitter active="true" name="steam_stuned_little" loop="true" time_to_live="40.0">
+	<particles max_alive_particles="50" time_to_live="6 7">
+		<technique name="SmokeTechnique" render_group="alpha_blend"/>
+		<texture name="../CommonData/textures/PS/smoke/smoke_2.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
+		<interpolators>
+			<interpolator alpha="0.0" color="1 1 1" size="0.5"/>
+			<interpolator alpha="0.1" color="1 1 1" size="0.8"/>
+			<interpolator alpha="0.0" color="0.6 0.6 0.6" size="1"/>
+		</interpolators>
+		<motion linear_speed="0.4 0.6" initial_dir_min="0 1 0" initial_dir_max="0 1 0" radial_speed="20 30" gravity="1"/>
+	</particles>
+	<emissions random_initial_angle="true" emission_time="0.2" particles_per_emission="10 15" cubic_size="1 0.8 1"/>
+</emitter>
