@@ -539,6 +539,7 @@ function ActivateLightsSala3()
 	light_manager:GetResource("Luz_activacion_01"):ChangeVisibility(true)
 	light_manager:GetResource("Luz_activacion_02"):ChangeVisibility(true)
 	light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(true)
+	sound_manager:PlayEvent("Play_Lights_On", "Lights_On")
 end
 
 function UpdateDLC(text_to_show)
