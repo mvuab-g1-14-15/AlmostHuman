@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <static_meshes>
+  <static_mesh name="ray_of_god_SALA_2_sala2" filename="meshes\ray_of_god_SALA_2.mesh" />
   <static_mesh name="sala_2_sala2" filename="meshes\sala_2.mesh" />
   <static_mesh name="Estanteria_05_sala2" filename="meshes\Estanteria_05.mesh" />
   <static_mesh name="Estanteria_13_sala2" filename="meshes\Estanteria_13.mesh" />
