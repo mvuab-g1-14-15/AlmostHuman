@@ -1,14 +1,14 @@
 ﻿<lens_flares>
 	<lens_flare name ="flare001" technique="DrawTextureInScreenTechnique">
-		<flare texture ="../CommonData/textures/LF/4785514.png" color="1.0 0.0 0.0" distance="0.0" size="400" max_size="450" alpha="0.5"/>
-		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic3.png" color="1.0 0.0 0.0" distance="0.0" size="50" max_size="60" alpha="0.3"/>
-		<flare texture ="../CommonData/textures/LF/tunel.png" color="1.0 0.0 0.0" distance="0.2" size="150" max_size="200" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic6.png" color="1.0 0.0 0.0" distance="0.5" size="150" max_size="200" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic3.png" color="1.0 0.0 0.0" distance="0.3" size="70" max_size="80" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/hexangle.png" color="1.0 0.0 0.0" distance="0.5" size="20" max_size="20" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/tunel.png" color="1.0 0.0 0.0" distance="0.7" size="40" max_size="45" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic4.png" color="1.0 0.0 0.0" distance="0.8" size="200" max_size="250" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/hexangle.png" color="1.0 0.0 0.0" distance="0.9" size="100" max_size="150" alpha="0.2"/>
-		<flare texture ="../CommonData/textures/LF/ompKMAM.jpg" color="1.0 0.0 0.0" distance="1.0" size="300" max_size="350" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/4785514.png" color="0.0 0.0 1.0" distance="0.0" size="400" max_size="450" alpha="0.5"/>
+		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic3.png" color="0.0 0.0 1.0" distance="0.0" size="50" max_size="60" alpha="0.3"/>
+		<flare texture ="../CommonData/textures/LF/tunel.png" color="0.0 0.0 1.0" distance="0.2" size="150" max_size="200" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic6.png" color="0.0 0.0 1.0" distance="0.5" size="150" max_size="200" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic3.png" color="0.0 0.0 1.0" distance="0.3" size="70" max_size="80" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/hexangle.png" color="0.0 0.0 1.0" distance="0.5" size="20" max_size="20" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/tunel.png" color="0.0 0.0 1.0" distance="0.7" size="40" max_size="45" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/swirls_assortedlunatic4.png" color="0.0 0.0 1.0" distance="0.8" size="200" max_size="250" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/hexangle.png" color="0.0 0.0 1.0" distance="0.9" size="100" max_size="150" alpha="0.2"/>
+		<flare texture ="../CommonData/textures/LF/ompKMAM.jpg" color="0.0 0.0 1.0" distance="1.0" size="300" max_size="350" alpha="0.2"/>
 	</lens_flare>
 </lens_flares>
