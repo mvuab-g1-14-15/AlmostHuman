@@ -3,7 +3,9 @@
 		<handles use_view_matrix="true"/>
 	</technique>
 	
-	<technique name="DrawTextureInScreenTechnique" vertex_type="1104" file="../CommonData/effects/DrawTextureInScreenEffect.fx"/>
+	<technique name="DrawTextureInScreenTechnique" vertex_type="1104" file="../CommonData/effects/DrawTextureInScreenEffect.fx">
+		<handles use_debug_color="true"/>
+	</technique>
 	
 	<technique name="InitRenderDeferredTechnique" vertex_type="1104" file="../CommonData/effects/InitRenderDeferred.fx"/>
 	<technique name="RenderDeferredTechnique" vertex_type="1104" file="../CommonData/effects/RenderDeferred.fx">
