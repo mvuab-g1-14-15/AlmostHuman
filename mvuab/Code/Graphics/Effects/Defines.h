@@ -87,4 +87,12 @@ const char ShadowMapTextureSizeStr[]    = "ShadowMapTextureSize";
 // Rays of god  ---------------------------------------------------------
 const char RaysOfGodWeigth[] = "RaysWeight";
 //-----------------------------------------------------------------------
+
+// ZBlur ----------------------------------------------------------------
+const char FocalStartStr[] = "FocalStart";
+const char FocalEndStr[] = "FocalEnd";
+const char BlurConstantstr[] = "BlurConstant";
+const char BlurEndStr[] = "BlurEnd";
+//-----------------------------------------------------------------------
+
 #endif //EFFECTS_DEFINES_H

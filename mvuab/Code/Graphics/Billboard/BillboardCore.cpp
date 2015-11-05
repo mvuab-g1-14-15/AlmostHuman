@@ -24,6 +24,9 @@ CBillboardCore::CBillboardCore()
     , mRandomAngle( false )
     , mDistance( 100 )
     , mAngle( 0.1f )
+    , mUseTick( false )
+    , mTick( 0.0f )
+    , mUseDeltaTime( false )
 {
 }
 

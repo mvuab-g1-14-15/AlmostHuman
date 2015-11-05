@@ -61,6 +61,11 @@
 		<default_technique vertex_type="1104" technique="ZBlurTechnique"/>
 	</pool_renderable_object_technique>
     
+     <!-- Black Texture -->
+    <pool_renderable_object_technique name="black_texture_pool_renderable_object_technique">
+		<default_technique vertex_type="1104" technique="BlackTextureTechnique"/>
+	</pool_renderable_object_technique>
+    
     <!-- Scattering Light -->
     <pool_renderable_object_technique name="scattering_light_pool_renderable_object_technique">
 		<default_technique vertex_type="1104" technique="ScatteredLightTechnique"/>

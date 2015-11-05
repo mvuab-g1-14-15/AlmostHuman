@@ -62,13 +62,16 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
     if (!newFile.LoadAndFindNode(m_FileName.c_str(), "camera_key_controller", l_Node ))
     {
         SetName( l_Node.GetAttribute<std::string>("name", "no_name") );
+
         m_Cycle = (l_Node.GetAttribute<int32>("cycle", 0) != 0);
         m_Reverse = (l_Node.GetAttribute<int32>("reverse", 0) != 0);
+
         m_TotalTime = l_Node.GetAttribute<float>("total_time", 0.0f);
-		m_LuaCode = l_Node.GetAttribute<std::string>("lua_code", "");
 		m_KeyAction = l_Node.GetAttribute<float>("key_action", 0.0f);
-		if(m_LuaCode != "")
-			m_bLuaEnable = true;
+
+		m_LuaCode = l_Node.GetAttribute<std::string>("lua_code", "");
+		if(m_LuaCode != "") m_bLuaEnable = true;
+
         for(uint32 i = 0, lCount = l_Node.GetNumChildren(); i < lCount ; i++)
         {
             const CXMLTreeNode &l_CurrentNode = l_Node(i);
@@ -78,6 +81,14 @@ bool CCameraKeyController::LoadXML(const std::string &FileName)
             {
                 float32 l_Time = l_CurrentNode.GetAttribute<float>("time", 0.0f);
                 m_Keys.push_back( new CCameraKey( CCameraInfo( l_CurrentNode ) , l_Time ) );
+
+                S_LUACodePerKey l_LuaCode = 
+                {
+                    l_CurrentNode.GetAttribute<std::string>("lua_code", ""),
+                    false
+                };
+
+                m_LuaCodePerKey.push_back(l_LuaCode);
             }
         }
 
@@ -102,14 +113,16 @@ bool CCameraKeyController::LoadXML(CXMLTreeNode &aNode)
     }
 
     SetName( aNode.GetAttribute<std::string>("name", "no_name") );
+
     m_Cycle = (aNode.GetAttribute<int32>("cycle", 0) != 0);
     m_Reverse = (aNode.GetAttribute<int32>("reverse", 0) != 0);
+
 	m_CurrentTime = aNode.GetAttribute<float>("init_keyframe", 0.0f);
     m_TotalTime = aNode.GetAttribute<float>("total_time", 0.0f);
-    m_LuaCode = aNode.GetAttribute<std::string>("lua_code", "");
     m_KeyAction = aNode.GetAttribute<float>("key_action", 0.0f);
-    if(m_LuaCode != "")
-      m_bLuaEnable = true;
+
+    m_LuaCode = aNode.GetAttribute<std::string>("lua_code", "");
+    if(m_LuaCode != "") m_bLuaEnable = true;
 
 
     for(uint32 i = 0, lCount = aNode.GetNumChildren(); i < lCount ; i++)
@@ -191,10 +204,10 @@ void CCameraKeyController::Update()
         return;
     }
 
-    if(!m_LuaCodePerKey[m_KeyAction].Executed && m_LuaCodePerKey[m_KeyAction].LuaCode.size() > 1)
+    if(!m_LuaCodePerKey[m_CurrentKey].Executed && m_LuaCodePerKey[m_CurrentKey].LuaCode.size() > 1)
     {
-        ScriptMInstance->RunCode(m_LuaCodePerKey[m_KeyAction].LuaCode);
-        m_LuaCodePerKey[m_KeyAction].Executed = true;
+        ScriptMInstance->RunCode(m_LuaCodePerKey[m_CurrentKey].LuaCode);
+        m_LuaCodePerKey[m_CurrentKey].Executed = true;
     }
 
     if( m_PlayingBackward )
