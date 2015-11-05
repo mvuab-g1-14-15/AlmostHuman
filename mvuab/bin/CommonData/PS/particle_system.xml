@@ -79,6 +79,7 @@
 	
 	<particle_system_core name="blaster">
 		<cube_emitter file="blaster_emitter.xml"/>
+		<cube_emitter file="blaster_emitter2.xml"/>
 	</particle_system_core>
     
     <particle_system_core name="explosion">
