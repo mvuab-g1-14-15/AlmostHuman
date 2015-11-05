@@ -14,7 +14,7 @@
   <MeshInstance name="wall_down_2_sala2" core="wall_down_2_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_3_sala2" core="wall_down_3_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="wall_down_1_sala2" core="wall_down_1_sala2" pos="78.3626 -15.5219 -50.7222" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
-  <MeshInstance name="Trampilla_sala2" core="Trampilla_sala2" pos="61.6719 -19.3348 -31.8813" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
+  <MeshInstance name="Trampilla_sala2" core="Trampilla_sala2" pos="61.6719 -19.7835 -33.1735" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Estanteria_11_sala2" core="Estanteria_11_sala2" pos="53.5694 -16.4214 -47.8849" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_1_sala2" core="Walls_upper_1_sala2" pos="78.2065 -9.9588 -46.5061" yaw="3.14159" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
   <MeshInstance name="Walls_upper_2_sala2" core="Walls_upper_2_sala2" pos="49.0812 -9.9588 -66.6882" yaw="0.0" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" />
