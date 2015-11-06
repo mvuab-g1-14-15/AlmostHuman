@@ -514,7 +514,7 @@ function CEnemyManager:KillBoss()
 	cinematic_manager:Execute("explotion_boss")
 	sound_manager:PlayEvent("Play_Explosion_Boss", "Boss")
 	self:DeathRoom("sala4")
-	--sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
+	sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 	trigger_manager:GetTriggerByName("final"):SetActive(true)
 	self.Boss:Destroy()
 	self.Boss = nil
