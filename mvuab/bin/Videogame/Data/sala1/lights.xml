@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <spot_light room="sala1" name="Fspot001" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
+  <spot_light room="sala1" name="LuzPasillo1" look_at="95.02 -10.42 -44.29" pos="92.00 -8.96 -44.12" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
 		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala1">
 			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
 			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
 		</shadow_map>
   </spot_light>
-  <spot_light room="sala1" name="Fspot002" look_at="94.18 -9.55 -27.71" pos="93.59 -8.9 -26.5" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
+  <spot_light room="sala1" name="LuzPasillo2" pos="94.13 -9.77 -25.2" look_at="93.92 -8.74 -27.69" color="0.992157 0.47451 0.133333" att_start_range="0.01" att_end_range="30.0" angle="20.0" fall_off="45.0" intensity="1" enabled="true" >
 		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala1">
 			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5"/>
 			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6"/>
