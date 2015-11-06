@@ -11,11 +11,10 @@ float4 mainPS(in float2 UV : TEXCOORD0) : COLOR
     return float4(l_Color.xyz * l_NoiseColor.xyz * (1.0 - l_Vignetting.a), 1.0);
 }
 
-technique VignettingTechnique 
+technique TECHNIQUE_NAME
 {
-    pass p0 
-    {
-        CullMode = CCW;
-        PixelShader = compile ps_3_0 mainPS();
-    }
+	pass p0
+	{
+		PixelShader = compile ps_3_0 mainPS();
+	}
 }

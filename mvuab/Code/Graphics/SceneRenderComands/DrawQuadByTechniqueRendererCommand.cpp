@@ -20,6 +20,7 @@
 CDrawQuadByTechniqueRendererCommand::CDrawQuadByTechniqueRendererCommand( CXMLTreeNode& atts )
     :   CStagedTexturedRendererCommand( atts )
     ,   m_Technique (EffectManagerInstance->GetEffectTechnique(atts.GetAttribute<std::string>("technique", "null_tech")))
+    ,   m_Color( Math::colWHITE )
 {
     ASSERT(m_Technique, "DrawQuadByTechniqueRendererCommand empty technique");
 }
