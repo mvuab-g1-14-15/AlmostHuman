@@ -459,7 +459,7 @@ function SetPropPasillo()
 		cinematic_manager:Execute("CloseDoor")
 		--physic_manager:GetActor("sala2DoorEscenario"):SetPosition(Vect3f(0, 0, 0))
 		scene:DesactivateRoom("sala2")
-		sound_manager:PlayEvent("Stop_Ambient_Sala2", "Ambient")
+		
 		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient")
 		
 		g_EnteredPasillo = true
