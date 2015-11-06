@@ -916,6 +916,7 @@ function UpdateTriggers()
 		if action_manager:DoAction("Action") then
 			g_FinalBossDead = true
 			g_BossDeath = false
+			g_Player:SetGodMode(true)
 			enemy_manager:ShootSpaceShip()
 		end
 	end
