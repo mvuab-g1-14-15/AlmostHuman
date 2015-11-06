@@ -60,7 +60,7 @@ function CPlayerController:__init()
 	self.PlayerCamera = camera_manager:GetCamera("Main")
 	
 	self.CanMove = true
-	----engine:Trace("Player Controller initialized")
+	------engine:Trace("Player Controller initialized")
 end
 
 function CPlayerController:Update()

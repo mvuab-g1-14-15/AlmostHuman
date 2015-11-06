@@ -18,7 +18,7 @@ function CargarJuego()
 	cinematic_manager:SetCinematicActive(true)
 	sound_manager:PlayParticlesSFX()
 	g_GameIsOn = true;
-	--engine:Trace("CargarJuego OK")
+	----engine:Trace("CargarJuego OK")
 	--gui_manager:ShowDialogTex("Test")
 end
 

@@ -296,8 +296,8 @@ end
 
 function StayText(room, message, other_shape)
 	enemigosVivos = enemy_manager:GetNumEnemy(room)
-	--engine:Trace("Sala  "..room)
-	--engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
+	----engine:Trace("Sala  "..room)
+	----engine:Trace("Hay estos enemigos vivos "..enemigosVivos)
 	if room == "sala2" then
 		if g_bPressedRoom2X and enemigosVivos >= 1 then
 			CuentaAtras = CuentaAtras - timer:GetElapsedTime()	
@@ -364,7 +364,7 @@ end
 
 function GetEnemyLive(room)
 	lEnemy = enemy_manager:GetEnemys()
-	----engine:Trace("La room es "..room)
+	------engine:Trace("La room es "..room)
 	for i in pairs (lEnemy) do
 		lActualEnemy = lEnemy[i]
 		if lEnemy[i] ~= nil and lActualEnemy:GetRoom() == room then
@@ -403,7 +403,7 @@ function ChargeEnergy()
 end
 
 function TracePhysX(message, other_shape)
-	----engine:Trace(message)
+	------engine:Trace(message)
 end
 
 function ShowTextDoor1(message, other_shape)
@@ -443,7 +443,7 @@ function SetPropSala2()
 		
 		g_bFootstepType = "pavimento"
 		g_EnteredSala2 = true
-		--engine:Trace("Setted properties of sala2")
+		----engine:Trace("Setted properties of sala2")
 	end
 end
 	
@@ -463,7 +463,7 @@ function SetPropPasillo()
 		sound_manager:PlayEvent("Play_Ambient_Pasillo", "Ambient")
 		
 		g_EnteredPasillo = true
-		--engine:Trace("Setted properties of pasillo")
+		----engine:Trace("Setted properties of pasillo")
 	end
 end
 
@@ -487,7 +487,7 @@ function SetPropSala3()
 		light_manager:GetResource("Luz_activacion_03"):ChangeVisibility(false)
 		
 		g_EnteredSala3 = true
-		--engine:Trace("Setted properties of sala3")
+		----engine:Trace("Setted properties of sala3")
 	end
 end
 
@@ -508,7 +508,7 @@ function SetPropSala4()
 		camera_manager:GetCamera("FreeCam"):SetZFar(600.0)
 		
 		g_EnteredSala4 = true
-		--engine:Trace("Setted properties of sala4")
+		----engine:Trace("Setted properties of sala4")
 	end
 end
 
@@ -764,6 +764,7 @@ function UpdateTriggers()
 		if action_manager:DoAction("Action") then
 			g_C4Taken = true
 			sound_manager:PlayEvent("Play_Pick_Object", "Logan")
+			sound_manager:PlayEvent("Play_Pasillo", "Logan")
 			enemy_manager:CreateEnemiesPasillo()
 			take_C4_exit()
 			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
