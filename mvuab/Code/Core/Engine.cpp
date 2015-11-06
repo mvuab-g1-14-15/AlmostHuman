@@ -66,7 +66,7 @@ void CEngine::Update()
         m_pProcess->Update();
     }
 
-    LOG_INFO_APPLICATION("Engine update finish");
+    //LOG_INFO_APPLICATION("Engine update finish");
 }
 
 void CEngine::Render()
@@ -75,20 +75,19 @@ void CEngine::Render()
     if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost())
         SRCMInstance->Execute();
 
-    LOG_INFO_APPLICATION("Engine render finish");
+    //LOG_INFO_APPLICATION("Engine render finish");
 }
 
 void CEngine::ProcessInputs()
 {
     ActionManagerInstance->ProcessInputs();
-    LOG_INFO_APPLICATION("Engine process inputs finish");
+    //LOG_INFO_APPLICATION("Engine process inputs finish");
 }
 
 void CEngine::SetRunnigProcess(CProcess* aProcess)
 {
     m_pProcess = aProcess;
 }
-
 
 void CEngine::Init(CEngineConfig* aEngineConfig)
 {
