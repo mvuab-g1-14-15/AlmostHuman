@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <particles_instances>
-  <particle_instance name="steam_down_larger0" core="steam_down_larger" pos="52.4962 -13.0846 -13.302" active="true" sound="true" />
-  <particle_instance name="steam_down_larger1" core="steam_down_larger" pos="52.4962 -13.0846 13.3347" active="true" sound="true" />
-  <particle_instance name="steam_down_larger2" core="steam_down_larger" pos="52.4962 -13.0846 31.9735" active="true" sound="true" />
-  <particle_instance name="sparks_inter3" core="sparks_inter" pos="53.93 -13.1637 14.2856" active="true" sound="true" />
-  <particle_instance name="sparks_inter4" core="sparks_inter" pos="58.9394 -13.1329 -0.202806" active="true" sound="true" />
-  <particle_instance name="steam_down_larger5" core="steam_up_slow_big" pos="58.0923 -18.4981 -13.302" active="true" sound="true" />
-  <particle_instance name="steam_down_larger6" core="steam_up_slow_big" pos="58.7712 -18.4981 0.507515" active="true" sound="true" />
-  <particle_instance name="steam_down_larger7" core="steam_up_slow_big" pos="58.7712 -18.4981 18.1268" active="true" sound="true" />
-  <particle_instance name="steam_down_larger8" core="steam_up_slow_big" pos="58.12 -18.4981 31.5508" active="true" sound="true" />
+  <particle_instance name="steam_down_larger0_pasillo" core="steam_down_larger" pos="52.4962 -13.0846 -13.302" active="true" sound="true" />
+  <particle_instance name="steam_down_larger1_pasillo" core="steam_down_larger" pos="52.4962 -13.0846 13.3347" active="true" sound="true" />
+  <particle_instance name="steam_down_larger2_pasillo" core="steam_down_larger" pos="52.4962 -13.0846 31.9735" active="true" sound="true" />
+  <particle_instance name="sparks_inter3_pasillo" core="sparks_inter" pos="53.93 -13.1637 14.2856" active="true" sound="true" />
+  <particle_instance name="sparks_inter4_pasillo" core="sparks_inter" pos="58.9394 -13.1329 -0.202806" active="true" sound="true" />
+  <particle_instance name="steam_down_larger5_pasillo" core="steam_up_slow_big" pos="58.0923 -18.4981 -13.302" active="true" sound="true" />
+  <particle_instance name="steam_down_larger6_pasillo" core="steam_up_slow_big" pos="58.7712 -18.4981 0.507515" active="true" sound="true" />
+  <particle_instance name="steam_down_larger7_pasillo" core="steam_up_slow_big" pos="58.7712 -18.4981 18.1268" active="true" sound="true" />
+  <particle_instance name="steam_down_larger8_pasillo" core="steam_up_slow_big" pos="58.12 -18.4981 31.5508" active="true" sound="true" />
 </particles_instances>
