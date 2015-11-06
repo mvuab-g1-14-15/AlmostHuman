@@ -61,6 +61,8 @@ function CPlayer:__init()
 	self.CanMove = true
 	
 	self.ArmPosition = Vect3f(0.0)
+	
+	self.GodMode = false
 end
 
 function CPlayer:Update()
@@ -183,6 +185,10 @@ function CPlayer:Update()
 	--profiler:AddEnd("CPlayer:Update()")
 end
 
+function CPlayer:SetGodMode(aBool)
+	self.GodMode = aBool
+end
+
 function CPlayer:SetCheckpoint(aRoom, aPosition, aLife, aEnergy, aYaw)
 	self.Checkpoint.room = aRoom
 	self.Checkpoint.position = aPosition
@@ -211,20 +217,23 @@ end
 function CPlayer:GetMeshOffset()
 	return self.PlayerController:GetMeshOffset( self.MeshOffset )
 end
+
 function CPlayer:SetPosition(position)
 	self.PlayerController:SetPosition(position)
 end
 
 function CPlayer:AddDamage(amount)
-	if self.InsideBarrel then
-		lBarrel = g_Barrels[self.BarrelName]
-		lBarrel:SetIsSafe(false)
-		self:ExitBarrel()
-	else
-		if self.Blaster:GetEnergy() == 0 then
-			amount = amount * 2.0
+	if not self.GodMode then
+		if self.InsideBarrel then
+			lBarrel = g_Barrels[self.BarrelName]
+			lBarrel:SetIsSafe(false)
+			self:ExitBarrel()
+		else
+			if self.Blaster:GetEnergy() == 0 then
+				amount = amount * 2.0
+			end
+			self.Life = self.Life - amount
 		end
-		self.Life = self.Life - amount
 	end
 end
 
