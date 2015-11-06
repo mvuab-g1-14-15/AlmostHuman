@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
-  <ambient_light color="0.0 0.0 0.0" />
-  <!--omni_light name="Omni005" pos="-233.5 56.4808 77.7189" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" />
-  <omni_light name="Omni004" pos="-43.5042 83.2495 45.8103" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" /-->
+  <ambient_light color="0.04314 0.04314 0.04314" />
+  <omni_light name="Omni006" room="sala4" intensity="1.0" specular_intensity="0.0" pos="-355.338 34.2981 59.1117" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="152.0" />
 </lights>
