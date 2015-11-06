@@ -84,162 +84,19 @@ CPlayerPhysicProcess::~CPlayerPhysicProcess()
 
 void CPlayerPhysicProcess::Update()
 {
-  /*
-      CGraph l_Graph;
-      l_Graph.Parse("./Data/graph1.xml");
-
-      unsigned int a = l_Graph.GetArcWeight(0, 3);
-      unsigned int b = l_Graph.GetArcWeight(4, 1);
-
-      Math::Vect3f v = l_Graph.GetNodeInfo(4);
-  */
-  // m_ConsoleActivate = GUIInstance->GetConsole()->GetVisible();
-
-  //ScriptMInstance->RunCode( "update()" );
   ScriptMInstance->RunCode( "update_gameplay()" );
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////        INICIALIZACIÓN DE LA ESCENA PARA EL TEST DEL CHARACTER CONTROLLER      ///////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPlayerPhysicProcess::InitSceneCharacterController()
-{
-  /*
-      //Scene Character Controller
-      //Step1
-      std::string l_Type = "Box";
-      PhysXMInstance->AddActor( "BoxCharacter1", l_Type, Math::Vect3f( 2, 1, 2 ), colWHITE, true, Math::Vect3f( 0, 20, 5 ),
-                          v3fZERO,
-                          v3fZERO, 0, 0 );
-
-      //Step2
-      l_Type = "Box";
-      PhysXMInstance->AddActor( "BoxCharacter2", l_Type, Math::Vect3f( 2, 2, 2 ), colWHITE, true, Math::Vect3f( 0, 21, 5 ),
-                          Math::Vect3f( 4, 0, 0 ), v3fZERO, 0, 0 );
-
-      //Step3
-      l_Type = "Box";
-      PhysXMInstance->AddActor( "BoxCharacter3", l_Type, Math::Vect3f( 2, 3, 2 ), colWHITE, true, Math::Vect3f( 0, 22, 5 ),
-                          Math::Vect3f( 8, 0, 0 ), v3fZERO, 0, 0 );
-
-      //Plano Inclinado TODO
-      l_Type = "Box";
-      PhysXMInstance->AddActor( "Rampa", l_Type, Math::Vect3f( 0.5f, 10, 4 ), colWHITE, true, Math::Vect3f( 0, 20, -5 ),
-                          Math::Vect3f( 3, 0, 0 ), Math::Vect3f( 0, 0, 1.3f ), 0, 0 );
-  */
-
 }
 
 void CPlayerPhysicProcess::Init()
 {
-  //ScriptMInstance->RunCode( "init()" );
-  //ScriptMInstance->RunCode( "load_gameplay()" );
   CPhysicsManager* l_PM = PhysXMInstance;
   l_PM->SetTriggerReport( this );
 
-  /*  CWWSoundManager* l_SM = SoundMan;
-
-      uint32 l_source1 =  l_SM->CreateSource();
-      l_SM->SetSourcePosition( l_source1, Math::Vect3f( 2.0 ) );
-      l_SM->SetSourceGain( l_source1, 100.0f );
-
-      uint32 l_source2 =  l_SM->CreateSource();
-      l_SM->SetSourcePosition( l_source2, Math::Vect3f( 5.0 ) );
-      l_SM->SetSourceGain( l_source2, 100.0f );
-
-      uint32 l_source3 =  l_SM->CreateSource();
-      l_SM->SetSourcePosition( l_source3, Math::Vect3f( 5.0 ) );
-      l_SM->SetSourceGain( l_source3, 100.0f );
-
-      l_SM->SetListenerPosition( Math::Vect3f( 0.0 ) );
-      l_SM->SetListenerOrientation( CameraMInstance->GetCurrentCamera()->GetDirection(),
-                                CameraMInstance->GetCurrentCamera()->GetVecUp() );
-  */
-  //l_SM->PlayAction2D( "test" );
-  //l_SM->PlaySource2D( l_source3 , "test", true );
-
-  //CPhysicUserData* l_pPhysicUserDataASEMesh;
-  //CPhysicActor*  l_AseMeshActor;
-
-  //CPhysicCookingMesh* l_pMeshes = PhysXMInstance->GetCookingMesh();
-  //CStaticMeshManager* l_StaticMeshManager = SMeshMInstance;
-
-  //if ( l_pMeshes->CreateMeshFromASE( "Data/a.ASE", "Escenario" ) )
-  //{
-  //  l_pPhysicUserDataASEMesh = new CPhysicUserData( "Escenario" );
-  //  l_pPhysicUserDataASEMesh->SetColor( Math::colBLACK );
-  //  m_vPUD.push_back( l_pPhysicUserDataASEMesh );
-  //  l_AseMeshActor = new CPhysicActor( l_pPhysicUserDataASEMesh );
-
-  //  VecMeshes l_CookMeshes = l_pMeshes->GetMeshes();
-
-  //  for ( VecMeshes::iterator it = l_CookMeshes.begin(); it != l_CookMeshes.end(); it++ )
-  //    l_AseMeshActor->AddMeshShape( it->second, Vect3f( 0, 0, 0 ) );
-
-  //  //m_AseMeshActor->CreateBody ( 10.f );
-  //  PhysXMInstance->AddPhysicActor( l_AseMeshActor );
-  //  m_vPA.push_back( l_AseMeshActor );
-  //}
-
-  //Add Escenario
-
-  /*
-      CRenderableObjectsLayersManager *l_ROLM = CEngineManagers::GetSingletonPtr()->GetROLManager();
-      l_ROLM->GetResourcesVector()[0]-;
-      std::map<std::string, CStaticMesh*> &l_MapResources = SMeshMInstance->GetResourcesMap();
-      std::map<std::string, CStaticMesh*>::iterator l_itBegin = l_MapResources.begin();
-      std::map<std::string, CStaticMesh*>::iterator l_itEnd = l_MapResources.end();
-
-
-
-      while(l_itBegin != l_itEnd)
-      {
-        PhysXMInstance->GetCookingMesh()->CreatePhysicMesh(l_itBegin->first, l_itBegin->second->GetVB(), l_itBegin->second->GetIB());
-        l_itBegin++;
-      }
-
-      VecMeshes l_VecMeshes = PhysXMInstance->GetCookingMesh()->GetMeshes();
-      for (VecMeshes::iterator it = l_VecMeshes.begin(); it != l_VecMeshes.end(); it++)
-      {
-        CPhysicUserData* l_pPhysicUserDataASEMesh = new CPhysicUserData(it->first);
-        CPhysicActor* l_AseMeshActor = new CPhysicActor(l_pPhysicUserDataASEMesh);
-
-        l_AseMeshActor->AddMeshShape(it->second, Vect3f(0, 0, 0));
-        bool oK = false;
-
-        if(PhysXMInstance->CMapManager<CPhysicActor>::GetResource(it->first) == 0)
-        {
-            if(PhysXMInstance->AddPhysicActor(l_AseMeshActor))
-            {
-                PhysXMInstance->CMapManager<CPhysicActor>::AddResource(it->first, l_AseMeshActor);
-                oK = TRUE;
-            }
-        }
-
-        if(!oK)
-        {
-            CHECKED_DELETE(l_AseMeshActor);
-            CHECKED_DELETE(l_pPhysicUserDataASEMesh);
-        }
-      }
-  */
-
-  /*  if ( !PhysXMInstance->AddMesh( "Data/a.ASE", "Escenario" ) )
-      LOG_ERROR_APPLICATION( "CPlayerPhysicProcess::Init No se pudo crear la malla Escenario!" );*/
-
-  m_PointInicial = Math::Vect3f( 6, 0, -6 );
-  m_PointFinal = Math::Vect3f( 6, 0, 6 );
-  InitSceneCharacterController();
+  LOG_INFO_APPLICATION("Process finish init");
 }
 
 void CPlayerPhysicProcess::Render()
 {
-  //m_Grenade->Render();
-  //  m_AStar->Render();
-  //m_Billboard->Render();
-
-  //    m_Blaster->Render();
 }
 
 void CPlayerPhysicProcess::RenderDebugInfo()

@@ -575,11 +575,6 @@ function CEnemyManager:SetAlarm( aRoom )
 	end
 end
 
--- -102.0, 21.0, 56.0
--- -102.0, 21.0, 62.0
-
--- -325.0, 21.0, 56.0
--- -325.0, 21.0, 62.0
 function CEnemyManager:CreateEnemiesFinal()
 	local lInfo = {}
 	
@@ -762,9 +757,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	lInfo.mesh = "drone"
 	lInfo.fly = true
 	lInfo.camera_pitch = -1.04719755
-	lInfo.position = Vect3f(-304.0, 24.0, 54.5)
-	lInfo.waypoints = { Vect3f(-304.0, 24.0, 54.5),
-						Vect3f(-346.0, 24.0, 54.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 54.5)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 54.5),
+						Vect3f(-340.0, 25.0, 54.5)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
@@ -773,9 +768,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	
 	lInfo.name = "Drone2_F"
 	lInfo.mesh = "drone"
-	lInfo.position = Vect3f(-304.0, 24.0, 60.5)
-	lInfo.waypoints = { Vect3f(-304.0, 24.0, 60.5),
-						Vect3f(-346.0, 24.0, 60.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 60.5)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 60.5),
+						Vect3f(-340.0, 25.0, 60.5)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else

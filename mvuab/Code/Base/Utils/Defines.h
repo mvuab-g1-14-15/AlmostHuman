@@ -9,6 +9,9 @@
 #include "Logger\Logger.h"
 #include "MessageHandler\MessageHandler.h"
 #include <Windows.h>
+
+#define _FINALRELEASE
+
 #include "Brofiler.h"
 
 // MACROS
