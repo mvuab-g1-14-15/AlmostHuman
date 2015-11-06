@@ -11,13 +11,12 @@
   <Image name="game_over" pos="50.00 50.00" height="100.00" width="100.00" visible="true" active="true"
       default="0" is_animated="true" time_per_image="4.0"
       flip="" is_background="true">
-    <texture texture="Data/textures/GUI/Creditos_Logo.jpg"/>
+    <texture texture="Data/textures/GUI/LOGO.jpg"/>
     <texture texture="Data/textures/GUI/Creditos_1.jpg"/>
     <texture texture="Data/textures/GUI/Creditos_2.jpg"/>
     <texture texture="Data/textures/GUI/Creditos_3.jpg"/>
     <texture texture="Data/textures/GUI/Creditos_4.jpg"/>
-    <texture texture="Data/textures/GUI/Creditos_Logo2.jpg"/>
-    
+    <texture texture="Data/textures/GUI/LOGO2.jpg"/>
   </Image>
 
   
