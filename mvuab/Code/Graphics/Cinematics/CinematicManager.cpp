@@ -307,3 +307,8 @@ void CCinematicManager::ReloadCinematic( const std::string& aName)
 	m_CurrentElementId = 0;
 	m_CinematicActive = false;
 }
+
+CCinematic* CCinematicManager::GetCinematicLoop( const std::string& aName )
+{
+	return m_vCinematicLoop.GetResource(aName);
+}

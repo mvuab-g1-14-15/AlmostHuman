@@ -29,6 +29,7 @@ public:
   void StopCinematic( const std::string& aName );
   void ReloadCinematic( const std::string& aName );
 
+  CCinematic* GetCinematicLoop( const std::string& aName );
   GET_SET(bool, CinematicActive);
   GET_SET(std::string, CurrentCamera); 
 
