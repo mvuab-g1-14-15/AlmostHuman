@@ -737,9 +737,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	lInfo.mesh = "drone"
 	lInfo.fly = true
 	lInfo.camera_pitch = -1.04719755
-	lInfo.position = Vect3f(-304.0, 25.0, 54.5)
-	lInfo.waypoints = { Vect3f(-304.0, 25.0, 54.5),
-						Vect3f(-340.0, 25.0, 54.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 55.0)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 55.0),
+						Vect3f(-340.0, 25.0, 55.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
@@ -748,9 +748,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	
 	lInfo.name = "Drone2_F"
 	lInfo.mesh = "drone"
-	lInfo.position = Vect3f(-304.0, 25.0, 60.5)
-	lInfo.waypoints = { Vect3f(-304.0, 25.0, 60.5),
-						Vect3f(-340.0, 25.0, 60.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 63.0)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 63.0),
+						Vect3f(-340.0, 25.0, 63.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
