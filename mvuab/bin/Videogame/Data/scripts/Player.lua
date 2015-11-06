@@ -127,7 +127,11 @@ function CPlayer:Update()
 	if self.Life < 25 then
 		if not countdowntimer_manager:ExistTimer("LowLifeTimer") then
 			countdowntimer_manager:AddTimer("LowLifeTimer", 60.0, false)
+			sound_manager:PlayEvent("Play_GP_Poca_Vida", "Logan")
 		else
+			if not countdowntimer_manager:IsActive("LowLifeTimer") then
+				sound_manager:PlayEvent("Play_GP_Poca_Vida", "Logan")
+			end
 			countdowntimer_manager:SetActive("LowLifeTimer", true)
 		end
 		if countdowntimer_manager:isTimerFinish("LowLifeTimer") then
@@ -151,17 +155,27 @@ function CPlayer:Update()
 	end
 	
 	if self:GetEnergy() < 25 then
+		if g_BrazoOperativo then
+			if not countdowntimer_manager:ExistTimer("LowEnergyTimer") then
+				countdowntimer_manager:AddTimer("LowEnergyTimer", 60.0, false)
+				sound_manager:PlayEvent("Play_GP_Poca_Energia", "Logan")
+			else
+				if not countdowntimer_manager:IsActive("LowEnergyTimer") then
+					sound_manager:PlayEvent("Play_GP_Poca_Energia", "Logan")
+				end
+				countdowntimer_manager:SetActive("LowEnergyTimer", true)
+			end
+			if countdowntimer_manager:isTimerFinish("LowEnergyTimer") then
+				sound_manager:PlayEvent("Play_GP_Poca_Energia", "Logan")
+				countdowntimer_manager:Reset("LowEnergyTimer", true)
+			end
+		end
+	else
 		if not countdowntimer_manager:ExistTimer("LowEnergyTimer") then
 			countdowntimer_manager:AddTimer("LowEnergyTimer", 60.0, false)
 		else
-			countdowntimer_manager:SetActive("LowEnergyTimer", true)
-		end
-		if countdowntimer_manager:isTimerFinish("LowEnergyTimer") then
-			sound_manager:PlayEvent("Play_GP_Poca_Energia", "Logan")
 			countdowntimer_manager:Reset("LowEnergyTimer", true)
 		end
-	else
-		countdowntimer_manager:Reset("LowEnergyTimer", true)
 	end
 		
 	--profiler:AddEnd("CPlayer:Update()")
