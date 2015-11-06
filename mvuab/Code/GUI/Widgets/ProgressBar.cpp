@@ -43,15 +43,15 @@ void CProgressBar::Render  ()
         }
 
 
-        Math::Vect2i posProgress(  (uint32)(CGuiElement::m_Position.x + (uint32)CGuiElement::m_uWidth * 0.05f),
-                                   (uint32)(CGuiElement::m_Position.y + (uint32)CGuiElement::m_uHeight * 0.2f));
+        Math::Vect2i posProgress(  (uint32)(CGuiElement::m_Position.x - (uint32)CGuiElement::m_uWidth  * 0.05f),
+                                   (uint32)(CGuiElement::m_Position.y - (uint32)CGuiElement::m_uHeight * 0.2f));
 
-        uint32 h = (uint32)(CGuiElement::m_uHeight * 0.6f);
-        uint32 w = (uint32)(CGuiElement::m_uWidth * 0.9f * (m_fProgress * 0.01f));
+        uint32 w = (uint32)(CGuiElement::m_uWidth);
+        uint32 h = (uint32)(CGuiElement::m_uHeight * (m_fProgress * 0.01f));
         if (m_pProgressTexture)
         {
             //TODO RAUL
-            GraphicsInstance->DrawQuad2D(posProgress, w, h, CGraphicsManager::UPPER_LEFT, m_pProgressTexture);
+			GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, w, h, CGraphicsManager::LOWER_RIGHT, m_pProgressTexture);
         }
         else
         {
