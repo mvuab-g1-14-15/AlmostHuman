@@ -121,7 +121,11 @@ function CBlaster:Update( aPosition )
 				sound_manager:PlayEvent( "Play_Long_Shoot_Event", "Logan" )
 			end
 		else
-			--play sound no energy TODO
+			if not g_Player:GetIsCrouch() then
+				if action_manager:DoAction("ShootDown") or action_manager:DoAction("ShootChargedUp") then
+					sound_manager:PlayEvent( "Play_No_Shoot_Logan", "Logan" )
+				end
+			end
 		end
 		
 		if self.IsCharging == true then
