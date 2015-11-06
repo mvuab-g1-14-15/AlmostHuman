@@ -743,6 +743,8 @@ function UpdateTriggers()
 			if g_CargarEnergiaText then
 				gui_manager:ShowStaticText("CargarEnergia")
 				g_CargarEnergiaText = false
+				g_Player:SetAnimation("stealth")
+				sound_manager:PlayEvent("Play_Base_Carga", "Logan")
 			end
 			g_CargandoEnergia = true
 		end
@@ -751,6 +753,7 @@ function UpdateTriggers()
 		if action_manager:DoAction("Action") then
 			gui_manager:ShowStaticText("BaseCargaError")
 			g_BaseCargaErrorText = true
+			sound_manager:PlayEvent("Play_Base_Carga_Failure", "Logan")
 		end
 	end
 	if g_InsideTakeC4 then
@@ -864,6 +867,7 @@ function UpdateTriggers()
 			g_Player:SetEnergy(100.0)
 			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 			g_BrazoOperativo = true
+			g_Player:SetAnimation("stealth")
 		end
 	end
 	
