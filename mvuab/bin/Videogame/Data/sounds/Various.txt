@@ -15,7 +15,6 @@ Effect plug-ins	ID	Name	Type				Notes
 	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	259982886	Nave_Hack	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\hack_nave2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Nave_Hack		25572
 	274114536	ensamblaje_sfx_short_1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_1		19534
 	294083481	LightHumming	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Light Humming_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\LightHumming		22420
 	418116809	Fan	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Fan_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Fan		29812
@@ -24,5 +23,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	588687617	ensamblaje_sfx_short_4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_4		18380
 	659011718	Boss Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Explosio boss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Boss Explosion		52417
 	999780021	robot_arm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\robot_arm_sfx_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\robot_arm		110257
+	1043545804	Nave_Hack	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\hack_spacecraft_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Nave_Hack		99763
 	1071045796	Naves_Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Shoot Nau_Impact_Lent_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Naves_Shoot		100960
 

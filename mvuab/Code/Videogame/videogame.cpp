@@ -171,7 +171,9 @@ int APIENTRY WinMain( HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpC
         pEngine->SetRunnigProcess( new CPlayerPhysicProcess() );
         pEngine->Init( lEngineConfig );
         ShowWindow( hWnd, SW_SHOWDEFAULT );
+        STATIC_LOG_INFO_APPLICATION("Show window");
         UpdateWindow( hWnd );
+        STATIC_LOG_INFO_APPLICATION("Update window");
         MSG msg;
         ZeroMemory( &msg, sizeof( msg ) );
         while ( msg.message != WM_QUIT )

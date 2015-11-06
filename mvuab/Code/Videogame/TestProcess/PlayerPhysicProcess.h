@@ -22,8 +22,6 @@ class CAStar;
 class CPlayerPhysicProcess : public CProcess, public CPhysicTriggerReport
 {
     private:
-        Math::Vect3f          m_PointInicial;
-        Math::Vect3f          m_PointFinal;
         std::vector<Math::Vect3f>   m_Path;
         std::vector<CPhysicActor*>    m_vPA;
         std::vector<CPhysicUserData*> m_vPUD;
@@ -41,8 +39,6 @@ class CPlayerPhysicProcess : public CProcess, public CPhysicTriggerReport
         virtual void Render();
         virtual void RenderDebugInfo();
 
-        GET_SET( Math::Vect3f, PointInicial );
-        GET_SET( Math::Vect3f, PointFinal );
         CPhysicUserData*    GetNewPUD( const std::string& Name );
         CPhysicActor*       GetNewPhysicActor( CPhysicUserData* PUD );
         CPhysicController*  GetNewController( float _fRadius, float _fHeight, float _fSlope, float _fSkinwidth,
