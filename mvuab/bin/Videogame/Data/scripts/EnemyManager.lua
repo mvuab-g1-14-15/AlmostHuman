@@ -483,6 +483,26 @@ function CEnemyManager:Reinit( aRoom )
 	end
 end
 
+function CEnemyManager:ShootSpaceShip()
+	lBossPosition = self.Boss:GetPosition();
+	lSpaceShipPosition1  = Vect3f(-126.695, 20.5072, 49.4604);
+	lSpaceShipPosition2  = Vect3f(-151.469, 20.5072, 49.4604);
+	lSpaceShipPosition3  = Vect3f(-167.066, 20.1984, 68.0122);
+	lSpaceShipPosition4  = Vect3f(-125.451, 20.7374, 67.3436);
+	lSpaceShipParticle1 = CParticle( "lSpaceShipParticle1", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle1:Init( lSpaceShipPosition1 )
+	lSpaceShipParticle1:SetDirection( lBossPosition - lSpaceShipParticle1 );
+	lSpaceShipParticle2 = CParticle( "lSpaceShipParticle2", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle2:Init( lSpaceShipPosition2 )
+	lSpaceShipParticle2:SetDirection( lBossPosition - lSpaceShipParticle2 );
+	lSpaceShipParticle3 = CParticle( "lSpaceShipParticle3", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle3:Init( lSpaceShipPosition3 )
+	lSpaceShipParticle3:SetDirection( lBossPosition - lSpaceShipParticle3 );
+	lSpaceShipParticle4 = CParticle( "lSpaceShipParticle4", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle4:Init( lSpaceShipPosition4 )
+	lSpaceShipParticle4:SetDirection( lBossPosition - lSpaceShipParticle4 );
+end
+
 function CEnemyManager:Update()
 	--profiler:AddInit("CEnemyManager:Update()")
 	for lRoom in pairs (self.Enemy) do
