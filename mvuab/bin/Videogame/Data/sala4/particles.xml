@@ -1,2 +1,3 @@
 <particles_instances>
+	<particle_instance name="base_de_carga_sala1" core="charge" pos="-55.94 35.68 65.49" active="true" sound="true" />
 </particles_instances>
