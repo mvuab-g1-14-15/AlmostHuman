@@ -87,6 +87,8 @@ function CBoss:__init()
 	self.lParticle3:Init( self.RenderableObject:GetBonePosition("CATRigHub004Bone007")       );
 	
 	g_BossInAction = false
+	
+	self.EnterShock = false
 end
 
 function CBoss:Destroy()
@@ -134,6 +136,11 @@ function CBoss:Update()
 		self.lParticle1:Show();
 		self.lParticle2:Show();
 		self.lParticle3:Show();
+		if not self.EnterShock then
+			sound_manager:PlayEvent("Play_Electrocution_Boss", "Boss")
+			self.EnterShock = true
+		end
+		sound_manager:PlayEvent("Play_Spark_Boss", "Boss")
 		--self:SetAnimation("idle");
 		--engine:TraceOnce("Boss stunned!")
 	end
@@ -174,6 +181,7 @@ function CBoss:AddStun( aValue )
 end
 
 function CBoss:ClearStun()
+	sound_manager:PlayEvent("Stop_Spark_Boss", "Boss")
 	self.StunBar = self.InitStunBar
 end
 
