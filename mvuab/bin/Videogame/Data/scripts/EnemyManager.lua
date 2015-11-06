@@ -484,6 +484,7 @@ function CEnemyManager:Reinit( aRoom )
 end
 
 function CEnemyManager:ShootSpaceShip()
+	sound_manager:PlayEvent("Play_Shoot_Nave", "Logan")
 	lBossPosition = self.Boss:GetPosition();
 	lBossPosition.y = lBossPosition.y + 2.5
 	lSpaceShipPosition1  = Vect3f(-126.78, 20.04, 51.24);
@@ -510,8 +511,9 @@ function CEnemyManager:KillBoss()
 	lHumoBoss = CParticle( "explosion_boss_fum", "boss_explosion_fum", "sala4" )
 	lHumoBoss:Init(self.Boss:GetPosition())
 	cinematic_manager:Execute("explotion_boss")
+	sound_manager:PlayEvent("Play_Explosion_Boss", "Boss")
 	self:DeathRoom("sala4")
-	sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
+	--sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
 	trigger_manager:GetTriggerByName("final"):SetActive(true)
 	self.Boss = nil
 end
