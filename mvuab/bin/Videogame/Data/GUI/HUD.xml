@@ -1,16 +1,22 @@
 <Windows OnLoadWindows=""
          OnSaveWindows=""
          OnUpdateWindows="">
-		 
-	<ProgressBar name="Life" pos="2 5" height="4" width="30" visible="true" active="true"
-	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
+	
+	
+	
+	<ProgressBar name="Life" pos="2 5" height="5.01" width="16.9" visible="true" active="true" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
+	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
+	<Image name="MarcoLife" time_per_image="2.0" is_loop="false" is_animated="false" pos="10.45 7.5" height="5.00" width="16.9" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+		<texture texture="Data/textures/GUI/MarcoEnergy.png"/>
+	</Image>
+	
+	
+	<ProgressBar name="Energy" pos="2 10" height="5.01" width="16.9" visible="true" active="true" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
-	<ProgressBar name="Energy" pos="2 10" height="4" width="30" visible="true" active="true"
-	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
-	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
-	
-	
+	<Image name="MarcoEnergy" time_per_image="2.0" is_loop="false" is_animated="false" pos="10.45 12.433" height="5.00" width="16.9" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+		<texture texture="Data/textures/GUI/MarcoEnergy.png"/>
+	</Image>
 	<Map name="Radar1" pos="0 74" width="20" height="22" current="true" texture_map="Data/textures/GUI/sala1-sala2-pasillo.png"
 	 width_map="0.50" height_map="0.2818" pos_0_0_3d_map="27.91 -14.41" pos_1_1_3d_map="146.15 -96.03" visible="false" active="false" >
 		<mark_player name="player" texture="Data/textures/GUI/flecha.png" width="20" height="20" get_position_script="get_player_position()" orientation="get_player_orientation_on_map()"/>
@@ -75,7 +81,7 @@
 		  </Dialog>
 	</DialogBox>
 	
-	<Image name="point" time_per_image="2.0" is_loop="false" is_animated="false" pos="50.00 50.00" height="5.00" width="5.00" use_texture_size="true" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+	<Image name="point" time_per_image="2.0" is_loop="false" is_animated="false" pos="50.50 50.50" height="5.00" width="5.00" use_texture_size="true" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
 		<texture texture="Data/textures/GUI/aim.png"/>
 	</Image>
 	

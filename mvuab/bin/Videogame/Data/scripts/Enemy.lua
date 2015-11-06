@@ -133,7 +133,6 @@ function CEnemy:__init( aInfo )
 	self.FootstepTime = 0.5
 	if self.Fly then
 		sound_manager:PlayEvent( "Play_Drone_Movement", self.Name )
-		self.lParticle1 = CParticle( self.Name.."particle_dead1", "stunned_little", self.Room );
 	end
 	
 	self.LastPos = Vect3f(0.0)
@@ -312,11 +311,7 @@ function CEnemy:Update()
 			end
 			self.Death = true
 			
-			if self.Fly then
-				local lPosition = self.RenderableObject:GetPosition();
-				lPosition.y = lPosition.y - self.InitHeight;
-				self.lParticle1:Init( lPosition );
-			else
+			if not self.Fly then
 				self.lParticle1:Init( self.RenderableObject:GetBonePosition("Base HumanHead")     );
 				self.lParticle2:Init( self.RenderableObject:GetBonePosition("Base HumanRibCage")  );
 				self.lParticle3:Init( self.RenderableObject:GetBonePosition("Base HumanRForeArm") );

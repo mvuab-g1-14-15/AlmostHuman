@@ -506,6 +506,8 @@ void CWWSoundManager::PauseEvent( const std::string& _Event,  const std::string&
 {
     if ( AK::SoundEngine::IsInitialized() )
     {
+        std::string lMsg = "Playing " + _Event + " event in " + _KeyGameObjectMap + " game object.";
+        LOG_INFO_APPLICATION(lMsg.c_str());
         AK::SoundEngine::PostEvent( _Event.c_str(), m_GameObjectMap[_KeyGameObjectMap] );
         AK::SoundEngine::RenderAudio();
 

@@ -11,7 +11,7 @@ function CEnemyManager:__init()
 	self.Shoots = {}
 	self.MaxShoots = 100
 	for i=1,self.MaxShoots do
-		table.insert( self.Shoots, CAmmo(i) )
+		table.insert( self.Shoots, CAmmo(i, "ammo_pink") )
 	end
 	
 	self.AStar = {}
@@ -483,6 +483,26 @@ function CEnemyManager:Reinit( aRoom )
 	end
 end
 
+function CEnemyManager:ShootSpaceShip()
+	lBossPosition = self.Boss:GetPosition();
+	lSpaceShipPosition1  = Vect3f(-126.695, 20.5072, 49.4604);
+	lSpaceShipPosition2  = Vect3f(-151.469, 20.5072, 49.4604);
+	lSpaceShipPosition3  = Vect3f(-167.066, 20.1984, 68.0122);
+	lSpaceShipPosition4  = Vect3f(-125.451, 20.7374, 67.3436);
+	lSpaceShipParticle1 = CParticle( "lSpaceShipParticle1", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle1:Init( lSpaceShipPosition1 )
+	lSpaceShipParticle1:SetDirection( lBossPosition - lSpaceShipParticle1 );
+	lSpaceShipParticle2 = CParticle( "lSpaceShipParticle2", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle2:Init( lSpaceShipPosition2 )
+	lSpaceShipParticle2:SetDirection( lBossPosition - lSpaceShipParticle2 );
+	lSpaceShipParticle3 = CParticle( "lSpaceShipParticle3", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle3:Init( lSpaceShipPosition3 )
+	lSpaceShipParticle3:SetDirection( lBossPosition - lSpaceShipParticle3 );
+	lSpaceShipParticle4 = CParticle( "lSpaceShipParticle4", "space_ship_shoot", "sala4" )
+	lSpaceShipParticle4:Init( lSpaceShipPosition4 )
+	lSpaceShipParticle4:SetDirection( lBossPosition - lSpaceShipParticle4 );
+end
+
 function CEnemyManager:Update()
 	--profiler:AddInit("CEnemyManager:Update()")
 	for lRoom in pairs (self.Enemy) do
@@ -555,11 +575,6 @@ function CEnemyManager:SetAlarm( aRoom )
 	end
 end
 
--- -102.0, 21.0, 56.0
--- -102.0, 21.0, 62.0
-
--- -325.0, 21.0, 56.0
--- -325.0, 21.0, 62.0
 function CEnemyManager:CreateEnemiesFinal()
 	local lInfo = {}
 	
@@ -742,9 +757,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	lInfo.mesh = "drone"
 	lInfo.fly = true
 	lInfo.camera_pitch = -1.04719755
-	lInfo.position = Vect3f(-304.0, 24.0, 54.5)
-	lInfo.waypoints = { Vect3f(-304.0, 24.0, 54.5),
-						Vect3f(-346.0, 24.0, 54.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 55.0)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 55.0),
+						Vect3f(-340.0, 25.0, 55.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else
@@ -753,9 +768,9 @@ function CEnemyManager:CreateEnemiesFinal()
 	
 	lInfo.name = "Drone2_F"
 	lInfo.mesh = "drone"
-	lInfo.position = Vect3f(-304.0, 24.0, 60.5)
-	lInfo.waypoints = { Vect3f(-304.0, 24.0, 60.5),
-						Vect3f(-346.0, 24.0, 60.5)}
+	lInfo.position = Vect3f(-304.0, 25.0, 63.0)
+	lInfo.waypoints = { Vect3f(-304.0, 25.0, 63.0),
+						Vect3f(-340.0, 25.0, 63.0)}
 	if self.Enemy.sala2[lInfo.name] == nil then
 		self.Enemy.sala2[lInfo.name] = CEnemy(lInfo)
 	else

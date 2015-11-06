@@ -204,8 +204,8 @@ void CEngineManagers::Init()
 #else
     for( uint32 i = 0, lCount = GetResourcesCount(); i < lCount; ++i )
     {
-       LOG_INFO_APPLICATION("Initing manager %s", m_ResourcesVector[i]->GetName().c_str() );
         m_ResourcesVector[i]->Init();
+        LOG_INFO_APPLICATION("Initing manager %s", m_ResourcesVector[i]->GetName().c_str() );
     }
 #endif // _DEBUG
 }

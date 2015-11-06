@@ -65,6 +65,8 @@ void CEngine::Update()
         m_pEngineManagers->Update();
         m_pProcess->Update();
     }
+
+    //LOG_INFO_APPLICATION("Engine update finish");
 }
 
 void CEngine::Render()
@@ -72,18 +74,20 @@ void CEngine::Render()
     BROFILER_CATEGORY("CEngine:Render", Profiler::Color::Red)
     if(!m_pEngineManagers->GetGraphicsManager()->isDeviceLost())
         SRCMInstance->Execute();
+
+    //LOG_INFO_APPLICATION("Engine render finish");
 }
 
 void CEngine::ProcessInputs()
 {
     ActionManagerInstance->ProcessInputs();
+    //LOG_INFO_APPLICATION("Engine process inputs finish");
 }
 
 void CEngine::SetRunnigProcess(CProcess* aProcess)
 {
     m_pProcess = aProcess;
 }
-
 
 void CEngine::Init(CEngineConfig* aEngineConfig)
 {
@@ -96,6 +100,8 @@ void CEngine::Init(CEngineConfig* aEngineConfig)
         // Init the videogame
         m_pProcess->Init();
     }
+
+    LOG_INFO_APPLICATION("Engine finish init");
 }
 
 

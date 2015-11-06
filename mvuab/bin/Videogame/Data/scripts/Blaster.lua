@@ -26,7 +26,7 @@ function CBlaster:__init()
 	self.MaxAmmo = 25;
 	self.AmmoId = 0;
 	for i=1,self.MaxAmmo do
-		table.insert( self.Ammunition, CAmmo(i) );
+		table.insert( self.Ammunition, CAmmo(i, "ammo") );
 		self.AmmoId = self.AmmoId + 1;
 	end
 	

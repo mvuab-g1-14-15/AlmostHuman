@@ -17,8 +17,6 @@
 				<Event Id="2902920709" Name="Play_Alerta"/>
 				<Event Id="1704638915" Name="Play_Ambient_Pasillo"/>
 				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
-				<Event Id="2212402943" Name="Play_Creditos"/>
-				<Event Id="2626091016" Name="Play_Final_Theme"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
 				<Event Id="3568813383" Name="Play_Main_Theme"/>
 				<Event Id="74299344" Name="Play_Musica_Boss"/>
@@ -50,10 +48,6 @@
 					<ShortName>Almost Panico.wav</ShortName>
 					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
 				</File>
-				<File Id="426310337" Language="SFX">
-					<ShortName>Final Theme.wav</ShortName>
-					<Path>SFX\Final Theme_951343B8.wem</Path>
-				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
 					<Path>SFX\dark soundscapes 12_950FF8F3.wem</Path>
@@ -81,10 +75,6 @@
 				<File Id="718615655" Language="SFX">
 					<ShortName>Main_Theme_Loop.wav</ShortName>
 					<Path>SFX\Main_Theme_Loop_951343B8.wem</Path>
-				</File>
-				<File Id="761229201" Language="SFX">
-					<ShortName>Final_Theme_Loop.wav</ShortName>
-					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
 				</File>
 				<File Id="772078166" Language="SFX">
 					<ShortName>Almost ok.wav</ShortName>
@@ -274,6 +264,10 @@
 					<ShortName>Disparo_Bloqueado.wav</ShortName>
 					<Path>SFX\Disparo_Bloqueado_E106FFBE.wem</Path>
 				</File>
+				<File Id="405981009" Language="SFX">
+					<ShortName>Sala4A.wav</ShortName>
+					<Path>SFX\Sala4A_E106FFBE.wem</Path>
+				</File>
 				<File Id="426310337" Language="SFX">
 					<ShortName>Final Theme.wav</ShortName>
 					<Path>SFX\Final Theme_951343B8.wem</Path>
@@ -297,6 +291,10 @@
 				<File Id="753798982" Language="SFX">
 					<ShortName>Agacharse.wav</ShortName>
 					<Path>SFX\Agacharse_E106FFBE.wem</Path>
+				</File>
+				<File Id="761229201" Language="SFX">
+					<ShortName>Final_Theme_Loop.wav</ShortName>
+					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
 				</File>
 				<File Id="765819752" Language="SFX">
 					<ShortName>Puerta_Bloqueada.wav</ShortName>
@@ -441,10 +439,6 @@
 				<Event Id="2995129850" Name="Play_Shoot_Nave"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="259982886" Language="SFX">
-					<ShortName>hack_nave2.wav</ShortName>
-					<Path>SFX\hack_nave2_E106FFBE.wem</Path>
-				</File>
 				<File Id="274114536" Language="SFX">
 					<ShortName>ensamblaje_sfx_short_1.wav</ShortName>
 					<Path>SFX\ensamblaje_sfx_short_1_E106FFBE.wem</Path>
@@ -476,6 +470,10 @@
 				<File Id="999780021" Language="SFX">
 					<ShortName>robot_arm_sfx.wav</ShortName>
 					<Path>SFX\robot_arm_sfx_BADC626A.wem</Path>
+				</File>
+				<File Id="1043545804" Language="SFX">
+					<ShortName>hack_spacecraft.wav</ShortName>
+					<Path>SFX\hack_spacecraft_E106FFBE.wem</Path>
 				</File>
 				<File Id="1071045796" Language="SFX">
 					<ShortName>Shoot Nau_Impact_Lent.wav</ShortName>
