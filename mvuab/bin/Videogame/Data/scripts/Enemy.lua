@@ -140,9 +140,13 @@ function CEnemy:__init( aInfo )
 	
 	if not self.Fly then
 		self.lParticle1 = CParticle( self.Name.."particle_dead1", "stunned_little", self.Room );
+		self.lParticle1:Hide();
 		self.lParticle2 = CParticle( self.Name.."particle_dead2", "stunned_little", self.Room );
+		self.lParticle2:Hide();
 		self.lParticle3 = CParticle( self.Name.."particle_dead3", "stunned_little", self.Room );
+		self.lParticle3:Hide();
 		self.lParticle4 = CParticle( self.Name.."particle_dead4", "stunned_little", self.Room );
+		self.lParticle4:Hide();
 	end
 	
 	self.UpdateMeshPos = true

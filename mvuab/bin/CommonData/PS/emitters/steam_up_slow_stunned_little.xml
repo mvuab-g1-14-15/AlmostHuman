@@ -1,4 +1,4 @@
-<emitter active="true" name="steam_stuned_little" loop="false" time_to_live="10.0">
+<emitter active="true" name="steam_stuned_little" loop="false" time_to_live="3.0">
 	<particles max_alive_particles="50" time_to_live="6 7">
 		<technique name="SmokeTechnique" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/PS/smoke/smoke_2.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
