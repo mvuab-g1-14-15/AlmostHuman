@@ -3,11 +3,11 @@
          OnUpdateWindows="">
 		 
 	<ProgressBar name="Life" pos="2 5" height="4" width="30" visible="true" active="true"
-	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
+	background_texture="Data/textures/GUI/MarcoEnergy.png" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
 	<ProgressBar name="Energy" pos="2 10" height="4" width="30" visible="true" active="true"
-	background_texture="Data/textures/GUI/marco2.png" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
+	background_texture="Data/textures/GUI/MarcoEnergy.png" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
 	
