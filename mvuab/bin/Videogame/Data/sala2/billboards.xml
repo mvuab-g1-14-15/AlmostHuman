@@ -14,10 +14,8 @@
   <billboard_instance name="hand_action12" core="hand_action" pos="-124.632 20.3233 45.1655" active="true" />
   <billboard_instance name="hand_action13" core="hand_action" pos="-149.342 20.3233 45.1655" active="true" />
   <billboard_instance name="hand_action14" core="hand_action" pos="-164.635 20.685 73.4753" active="true" />
-  <billboard_instance name="teclas_mouse_move" core="mouse_movement" pos="118.826 -8.0712 -51.0" active="true" />
-  <billboard_instance name="teclas_c" core="C" pos="115.571 -7.98746 -44.2411" active="true" />
-  <billboard_instance name="teclas_awsd_" core="move" pos="118.826 -8.0712 -52.0" active="true" />
+  <billboard_instance name="teclas_c" core="C" pos="115.571 -8.98746 -44.2411" active="true" />
   <billboard_instance name="tecla_E" core="E" pos="62.1967 -16.5846 -86.0625" active="true" />
-  <billboard_instance name="mouse_shoot_cargado" core="disparo_cargado" pos="76.0346 -16.7035 -33.3747" active="false" />
-  <billboard_instance name="mouse_shoot" core="disparo_simple" pos="75.7872 -16.7035 -28.7959" active="false" />
+  <billboard_instance name="mouse_shoot_cargado" core="disparo_cargado" pos="76.0346 -16.7035 -33.3747" active="true" />
+  <billboard_instance name="mouse_shoot" core="disparo_simple" pos="75.7872 -16.7035 -28.7959" active="true" />
 </billboards_instances>
