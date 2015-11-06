@@ -3,11 +3,11 @@ dofile("./data/scripts/Include.lua")
 class 'CAmmo'
 --Clase que implementa la primera rafaga del disparo de logan
 
-function CAmmo:__init( aId )
+function CAmmo:__init( aId, aCore )
 	self.Id = aId;
 	self.Active = false
-	self.BillboardAmmo = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
-	self.BillboardAmmo2 = billboard_manager:CreateInstance("ammo", Vect3f(0, 0, 0), false);
+	self.BillboardAmmo = billboard_manager:CreateInstance(aCore, Vect3f(0, 0, 0), false);
+	self.BillboardAmmo2 = billboard_manager:CreateInstance(aCore, Vect3f(0, 0, 0), false);
 	self.Impacted = false;
 	self.MaxDistance = 100;
 	self.CurrentDistance = 0;

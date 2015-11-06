@@ -11,7 +11,7 @@ function CEnemyManager:__init()
 	self.Shoots = {}
 	self.MaxShoots = 100
 	for i=1,self.MaxShoots do
-		table.insert( self.Shoots, CAmmo(i) )
+		table.insert( self.Shoots, CAmmo(i, "ammo_pink") )
 	end
 	
 	self.AStar = {}

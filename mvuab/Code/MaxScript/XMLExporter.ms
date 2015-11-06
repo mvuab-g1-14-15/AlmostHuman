@@ -464,7 +464,7 @@ fn ExportEnemyPositionToXML aDirToXML =
 					
 			local l_NewLayerNode = xDoc.getNewNode "enemy"
 			l_RootNode.AppendNode l_NewLayerNode
-			l_NewLayerNode.AddAttributeAsString "name" l_EnemyName
+			l_NewLayerNode.AddAttributeAsString "name" Obj.name
 			l_NewLayerNode.AddAttributeAsString "type" "easy"
 			l_NewLayerNode.AddAttributeCoordinate "pos" Obj.Pos
 			l_NewLayerNode.AddAttributeAsString "yaw" l_Yaw
