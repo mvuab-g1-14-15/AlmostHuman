@@ -88,6 +88,10 @@ g_SpeechIrisBoss = false
 
 g_BossInAction = false
 
+g_BossDeath = false
+
+g_FinalBossDead = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -896,6 +900,27 @@ function UpdateTriggers()
 					end
 				end
 			end
+		end
+	end
+	
+	if g_BossDeath then
+		if action_manager:DoAction("Action") then
+			g_FinalBossDead = true
+			g_BossDeath = false
+			enemy_manager:ShootSpaceShip()
+		end
+	end
+	
+	if g_FinalBossDead then
+		if not countdowntimer_manager:ExistTimer("BossDeathTimer") then
+			countdowntimer_manager:AddTimer("BossDeathTimer", 3.0, false)
+		else
+			countdowntimer_manager:SetActive("BossDeathTimer", true)
+		end
+		if countdowntimer_manager:isTimerFinish("BossDeathTimer") then
+			enemy_manager:KillBoss()
+			g_FinalBossDead = false
+			countdowntimer_manager:Reset("BossDeathTimer", false)
 		end
 	end
 end

@@ -1,13 +1,14 @@
-<emitter active="true" name="blaster" loop="false" time_to_live="0.5">
-	<particles max_alive_particles="300" time_to_live="2 2">
+<emitter active="true" name="blaster" loop="false" time_to_live="2">
+	<particles max_alive_particles="800" time_to_live="2 2">
 		<technique name="ParticleTechniqueV2" render_group="alpha_blend"/>
 		<texture name="../CommonData/textures/Billboards/ammo_green.png" flip_uv_horizontal="true" flip_uv_vertical="true"/>
 		<interpolators>
-			<interpolator alpha="0.1" color="1.0 1.0 1.0" size="0.8"/>
-			<interpolator alpha="0.2" color="1.0 0.8 0.8" size="0.5"/>
-			<interpolator alpha="0.1" color="1.0 1.0 1.0" size="0.2"/>
+			<interpolator alpha="1.0" color="1.0 1.0 1.0" size="1"/>
+			<interpolator alpha="1.0" color="1.0 0.8 0.8" size="2"/>
+			<interpolator alpha="1.0" color="1.0 1.0 1.0" size="3"/>
+			<interpolator alpha="1.0" color="1.0 1.0 1.0" size="5"/>
 		</interpolators>
 		<motion linear_speed="20 20" initial_dir_min="0 0 0" initial_dir_max="0 0 0" radial_speed="20 50" gravity=""/>
 	</particles>
-	<emissions random_initial_angle="true" emission_time="0.0" particles_per_emission="5 6" cubic_size="0.0 0 0.0"/>
+	<emissions random_initial_angle="true" emission_time="0.0" particles_per_emission="1 2" cubic_size="0.0 0 0.0"/>
 </emitter>
