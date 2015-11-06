@@ -12,7 +12,7 @@ function CBlaster:__init()
 	self.IsAcumulatorSound = false
 	
 	self.Energy = 100.0
-	self.Multiplicador = 2
+	self.Multiplicador = 5
 	
 	self.ShootSpeed = 50.0
 	
