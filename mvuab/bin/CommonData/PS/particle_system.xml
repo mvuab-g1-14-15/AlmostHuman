@@ -81,6 +81,10 @@
 		<cube_emitter file="blaster_emitter.xml"/>
 		<cube_emitter file="blaster_emitter2.xml"/>
 	</particle_system_core>
+	
+	<particle_system_core name="space_ship_shoot">
+		<cube_emitter file="spaceship_emitter.xml"/>
+	</particle_system_core>
     
     <particle_system_core name="explosion">
 		<cube_emitter file="explosion_1.xml"/>
