@@ -197,6 +197,7 @@ void registerCameras(lua_State* aLuaState)
     LUA_DECLARE_METHOD(CCinematicManager, PlayCinematic)
     LUA_DECLARE_METHOD(CCinematicManager, StopCinematic)
     LUA_DECLARE_METHOD(CCinematicManager, ReloadCinematic)
+	LUA_DECLARE_METHOD(CCinematicManager, GetCinematicLoop)
     LUA_END_DECLARATION
 }
 

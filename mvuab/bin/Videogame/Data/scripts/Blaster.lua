@@ -4,10 +4,10 @@ class 'CBlaster'
 
 function CBlaster:__init()
     self.TimePressed = 0.0
-    self.MaxTimePressed = 3.0
+    self.MaxTimePressed = 1.0
 	
 	self.BaseDamage = 20.0
-	self.MaxDamage = 50.0
+	self.MaxDamage = 40.0
 	
 	self.IsAcumulatorSound = false
 	
@@ -141,7 +141,7 @@ function CBlaster:Update( aPosition )
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
 	self.Blash:Update( aPosition );
 	self:UpdateAmmo();
-	--self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
+	self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
 end
 
 function CBlaster:GetIsCharging()

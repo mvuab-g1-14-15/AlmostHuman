@@ -485,22 +485,35 @@ end
 
 function CEnemyManager:ShootSpaceShip()
 	lBossPosition = self.Boss:GetPosition();
-	lSpaceShipPosition1  = Vect3f(-126.695, 20.5072, 49.4604);
-	lSpaceShipPosition2  = Vect3f(-151.469, 20.5072, 49.4604);
-	lSpaceShipPosition3  = Vect3f(-167.066, 20.1984, 68.0122);
-	lSpaceShipPosition4  = Vect3f(-125.451, 20.7374, 67.3436);
+	lBossPosition.y = lBossPosition.y + 2.5
+	lSpaceShipPosition1  = Vect3f(-126.78, 20.04, 51.24);
+	lSpaceShipPosition2  = Vect3f(-125.43, 20.34, 65.71);
+	lSpaceShipPosition3  = Vect3f(-151.52, 20.19, 50.95);
+	lSpaceShipPosition4  = Vect3f(-166.98, 19.91, 66.64);
 	lSpaceShipParticle1 = CParticle( "lSpaceShipParticle1", "space_ship_shoot", "sala4" )
 	lSpaceShipParticle1:Init( lSpaceShipPosition1 )
-	lSpaceShipParticle1:SetDirection( lBossPosition - lSpaceShipParticle1 );
+	lSpaceShipParticle1:SetDirection( lBossPosition - lSpaceShipPosition1 );
 	lSpaceShipParticle2 = CParticle( "lSpaceShipParticle2", "space_ship_shoot", "sala4" )
 	lSpaceShipParticle2:Init( lSpaceShipPosition2 )
-	lSpaceShipParticle2:SetDirection( lBossPosition - lSpaceShipParticle2 );
+	lSpaceShipParticle2:SetDirection( lBossPosition - lSpaceShipPosition2 );
 	lSpaceShipParticle3 = CParticle( "lSpaceShipParticle3", "space_ship_shoot", "sala4" )
 	lSpaceShipParticle3:Init( lSpaceShipPosition3 )
-	lSpaceShipParticle3:SetDirection( lBossPosition - lSpaceShipParticle3 );
+	lSpaceShipParticle3:SetDirection( lBossPosition - lSpaceShipPosition3 );
 	lSpaceShipParticle4 = CParticle( "lSpaceShipParticle4", "space_ship_shoot", "sala4" )
 	lSpaceShipParticle4:Init( lSpaceShipPosition4 )
-	lSpaceShipParticle4:SetDirection( lBossPosition - lSpaceShipParticle4 );
+	lSpaceShipParticle4:SetDirection( lBossPosition - lSpaceShipPosition4 );
+end
+
+function CEnemyManager:KillBoss()
+	lExplosionBoss = CParticle( "explosion_boss_bom", "boss_explosion_bum", "sala4" )
+	lExplosionBoss:Init(self.Boss:GetPosition())
+	lHumoBoss = CParticle( "explosion_boss_fum", "boss_explosion_fum", "sala4" )
+	lHumoBoss:Init(self.Boss:GetPosition())
+	cinematic_manager:Execute("explotion_boss")
+	self:DeathRoom("sala4")
+	sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
+	trigger_manager:GetTriggerByName("final"):SetActive(true)
+	self.Boss = nil
 end
 
 function CEnemyManager:Update()
@@ -517,16 +530,10 @@ function CEnemyManager:Update()
 	if self.Boss ~= nil then
 		self.Boss:Update()
 		if self.Boss:GetLife() <= 0 then
-			--execute dead code
-			lExplosionBoss = CParticle( "explosion_boss_bom", "boss_explosion_bum", "sala4" )
-			lExplosionBoss:Init(self.Boss:GetPosition())
-			lHumoBoss = CParticle( "explosion_boss_fum", "boss_explosion_fum", "sala4" )
-			lHumoBoss:Init(self.Boss:GetPosition())
-			cinematic_manager:Execute("explotion_boss")
-			self:DeathRoom("sala4")
-			sound_manager:PlayEvent("Play_Abriendo_Compuertas", "Logan")
-			trigger_manager:GetTriggerByName("final"):SetActive(true)
-			self.Boss = nil
+			if not g_BossDeath then
+				sound_manager:PlayEvent("Play_GP_Naves_Preparadas", "Logan")
+			end
+			g_BossDeath = true
 		end
 	end
 	

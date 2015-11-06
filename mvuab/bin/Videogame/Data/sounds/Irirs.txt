@@ -29,7 +29,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	341959684	Tunnel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Tunel_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Tunnel		276024
 	364103296	Iris_Disparo_Bloqueado	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo_Bloqueado_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Disparo_Bloqueado		27794
 	405981009	Sala4A	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4A_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4A		188563
-	426310337	Final Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final Theme_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Musica Finales Cin Fin_Cred\Final Theme		1048136
+	426310337	Final Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final Theme_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Musica Finales Cin Fin_Cred\Final Theme		1048136
 	430266122	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		189804
 	493938362	Update_brazo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\actualizacion de brazo v2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Sala2_Update_Dialogo\Update_brazo		175028
 	677660058	Iris_Esconderse_Bidones	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Esconderse_Bidones_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Esconderse_Bidones		63519
