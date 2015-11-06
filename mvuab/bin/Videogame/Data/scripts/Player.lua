@@ -59,6 +59,8 @@ function CPlayer:__init()
 	self.Checkpoint.yaw = 0.0 --TODO: Check the initial yaw of the game
 	
 	self.CanMove = true
+	
+	self.ArmPosition = Vect3f(0.0)
 end
 
 function CPlayer:Update()
@@ -77,11 +79,11 @@ function CPlayer:Update()
 	self.RenderableObject:SetPitch(camera_manager:GetCurrentCamera():GetPitch())
 
 	self.RenderableObject:MakeTransform();
-	lArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm")
+	self.ArmPosition = self.RenderableObject:GetBonePosition("CATRigRArmPalm")
 	if self.CanMove then
-		self.Blaster:Update( lArmPosition )
+		self.Blaster:Update( self.ArmPosition )
 	end
-	self.StealthAttack:Update( lArmPosition )
+	self.StealthAttack:Update( self.ArmPosition )
 
 	if not self.Blaster:GetIsCharging() and not self.Blaster:GetIsShooting() and not self:GetIsCrouch() then
         self:SetAnimation("aim")
@@ -284,6 +286,10 @@ end
 
 function CPlayer:SetEnergy(amount)
 	self.Blaster:SetEnergy(amount)
+end
+
+function CPlayer:GetHandPos()
+	return self.ArmPosition
 end
 
 function CPlayer:HideInBarrel( aName )

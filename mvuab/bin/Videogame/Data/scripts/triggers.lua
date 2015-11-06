@@ -872,6 +872,9 @@ function UpdateTriggers()
 			g_Player:SetCheckpoint("sala2", Vect3f(75.66, -16.77, -29.67), g_Player:GetLife(), g_Player:GetEnergy(), g_Player:GetYaw())
 			g_BrazoOperativo = true
 			g_Player:SetAnimation("stealth")
+			lParticle = CParticle( "DLCParticle", "stealth_atack", "core" )
+			lParticle:Init( Vect3f(75.35, -17.23, -25.03) );
+			lParticle:SetDirection( g_Player:GetHandPos() - Vect3f(75.35, -17.23, -25.03) )
 		end
 	end
 	

@@ -2,4 +2,10 @@
 <lights>
   <ambient_light color="0.04314 0.04314 0.04314" />
   <omni_light name="Omni006" room="sala4" intensity="1.0" specular_intensity="0.0" pos="-355.338 34.2981 59.1117" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="152.0" />
+  <spot_light room="sala4" name="LuzBoss" pos="-147.69 30.70 63.40" look_at="-147.21 29.85 63.10" color="1.0 1.0 1.0" att_start_range="0.01" att_end_range="100.0" angle="90.0" fall_off="100.0" intensity="1" enabled="true" >
+		<shadow_map render_shadows="true" shadow_texture_mask="" room="sala4">
+			<static_shadow_map generate="true" layer ="static" renderable_objects_manager="characters" format_type="R32F" size="1024 1024" stage="5"/>
+			<dynamic_shadow_map generate="true" layer ="dynamic" renderable_objects_manager="characters" format_type="R32F" size="1024 1024" stage="6"/>
+		</shadow_map>
+  </spot_light>
 </lights>

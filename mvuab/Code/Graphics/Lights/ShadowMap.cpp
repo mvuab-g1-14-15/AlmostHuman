@@ -9,6 +9,8 @@
 #include "RenderableObject\Scene.h"
 #include "RenderableObject\Room.h"
 
+#include "ActionManager.h"
+
 //<shadow_map generate="true" layer ="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024"/>
 CShadowMap::CShadowMap( const CXMLTreeNode& node, const std::string& aRoomName )
     : mColor( Math::CColor(1.0f, 1.0f, 1.0f, 1.0f ) )
@@ -46,7 +48,10 @@ bool CShadowMap::Generate()
         SceneInstance->RenderLayer(mLayer);
         lGM->EndRender();
         mTexture->UnsetAsRenderTarget();
-        //mTexture->Save("ShadownMap");
+        if(false)
+        {
+            mTexture->Save("ShadownMap");
+        }
         lOk = true;
     }
     return lOk;

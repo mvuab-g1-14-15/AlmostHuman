@@ -141,7 +141,7 @@ function CBlaster:Update( aPosition )
 	local lDirection = camera_manager:GetCurrentCamera():GetDirection()
 	self.Blash:Update( aPosition );
 	self:UpdateAmmo();
-	self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
+	--self.AmmoCharged:Update( aPosition + lDirection* 0.1 )
 end
 
 function CBlaster:GetIsCharging()
