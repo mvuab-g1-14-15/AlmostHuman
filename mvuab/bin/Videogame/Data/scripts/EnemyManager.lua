@@ -28,7 +28,7 @@ function CEnemyManager:__init()
 	--self.AStar.sala2:SetRender()
 	--self.AStar.sala3:SetRender()
 	
-	self:CreateEnemiesSala2()
+	--self:CreateEnemiesSala2()
 	--self:CreateEnemiesPasillo()
 	--self:CreateEnemiesSala3()
 	--self:CreateDesactivateEnemiesSala3()
@@ -300,7 +300,7 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	lInfo.radius = 0.4
 	lInfo.height = 2.0
 	lInfo.speed = 4.0
-	lInfo.position = Vect3f(-28.26, -14.0, 67.10)
+	lInfo.position = Vect3f(-28.26, -14.5, 67.10)
 	lInfo.is_patrol = false
 	lInfo.mesh = "enemy1"
 	lInfo.room = "sala3"
@@ -330,7 +330,7 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	
 	-- Desactivate 2
 	lInfo.name = "Enemy2_S3"
-	lInfo.position = Vect3f(-33.28, -14.0, 67.10)
+	lInfo.position = Vect3f(-33.28, -14.5, 67.10)
 	if self.Enemy.sala3[lInfo.name] == nil then
 		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
 	else
@@ -340,7 +340,7 @@ function CEnemyManager:CreateDesactivateEnemiesSala3()
 	
 	-- Desactivate 3
 	lInfo.name = "Enemy3_S3"
-	lInfo.position = Vect3f(-23.30, -14.0, 53.47)
+	lInfo.position = Vect3f(-23.30, -14.5, 53.47)
 	if self.Enemy.sala3[lInfo.name] == nil then
 		self.Enemy.sala3[lInfo.name] = CEnemy(lInfo)
 	else

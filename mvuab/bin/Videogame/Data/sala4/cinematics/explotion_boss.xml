@@ -1,6 +1,5 @@
 <cinematics>
 <add_renderable path="Data\sala4\cinematics/" room="sala4" renderable_objects_file="solid_layer.xml" static_meshes_file="static_meshes.xml" time="0.0001"/>
-<set_active name="Boss" resource_id_file="Data/sala4/cinematics/boss.xml" time="0.0001" active="false" />
 <set_active name="activeBossByPart" resource_id_file="Data/sala4/cinematics/element_boss.xml" time="0.0001" active="true" />
 <play_animation name="explotion_boss" resource_id_file="Data/sala4/cinematics/cinematics_boss.xml" time="33.3333" />
 </cinematics>

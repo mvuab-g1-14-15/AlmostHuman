@@ -65,13 +65,11 @@ function CAmmo:Update()
 					if lName == "Player" then
 						g_Player:AddDamage(self.Damage)
 					elseif lName == "Boss" then
-						sound_manager:PlayEvent("Play_impact_to_boss", "Boss")
 						lBoss = enemy_manager:GetBoss()
 						if lBoss ~= nil then
 							lBoss:AddStun(self.Damage)
 						end
 					else
-						sound_manager:PlayEvent("Play_Impact_Androide_Dron", lName)
 						enemy_manager:AddDamage(lName, self.Damage)
 					end
 				else
