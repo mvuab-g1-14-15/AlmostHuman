@@ -13,7 +13,7 @@
 --	self.PathCalculated = false
 --	self.Path = vecVect3f()
 --	self.HeightFly = Node:GetAttributeVect3f("pos", Vect3f(0,0,0)).y
---	----engine:Trace("CDroneEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
+--	------engine:Trace("CDroneEnemyLUA: " .. CEnemyLUA.GetName(self) .. " initialized")
 --end
 --
 --function CDroneEnemyLUA:Destroy()

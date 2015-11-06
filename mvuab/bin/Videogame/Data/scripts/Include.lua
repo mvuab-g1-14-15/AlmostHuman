@@ -52,12 +52,12 @@ function PlayerDistance(enemy)
 	l_EnemyPos.y = l_EnemyPos.y + enemy:GetHeight()
 	local DifHeight = l_EnemyPos.y - l_PlayerPos.y
 	if DifHeight < -2 then
-		----engine:Trace("El player está más alto")
+		------engine:Trace("El player está más alto")
 		return 9999
 	end
 	local l_DistanceVector = l_PlayerPos - l_EnemyPos
 	
-	------engine:Trace("Player distance: " .. l_DistanceVector:Length())
+	--------engine:Trace("Player distance: " .. l_DistanceVector:Length())
 	return l_DistanceVector:Length()
 end
 
@@ -79,11 +79,11 @@ function GetAngleEnemyPlayer(enemy)
 	
 	local lDot = l_DistanceVector:DotProduct(l_EnemyDir)
 	
-	----engine:Trace("Dot product: " .. lDot)
+	------engine:Trace("Dot product: " .. lDot)
 	
-	------engine:Trace(tostring(angle))
+	--------engine:Trace(tostring(angle))
 	--angle = math.acos(angle)
-	------engine:Trace(tostring(angle))
+	--------engine:Trace(tostring(angle))
 	return lDot
 end
 
@@ -140,7 +140,7 @@ function HearPlayer(enemy)
 		end
 	end
 	message_str = message_str.." At distance "..playerDistance
-	--engine:Trace(message_str)
+	----engine:Trace(message_str)
 	]]
 	
 	
@@ -161,11 +161,11 @@ function ChangeCameraCloseEnemy()
 	local lActualCameraName = camera_manager:GetCurrentCameraName()
 	
 	if lActualCameraName == lEnemyName then
-		----engine:Trace("Changing camera to Player")
+		------engine:Trace("Changing camera to Player")
 		camera_manager:SetCurrentCamera("Main")
 	else
-		----engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
-		----engine:Trace("Cantidad de enemigos: "..enemy_manager:GetNumEnemys())
+		------engine:Trace("Changing camera to close Enemy --> "..lEnemyName)
+		------engine:Trace("Cantidad de enemigos: "..enemy_manager:GetNumEnemys())
 		camera_manager:SetCurrentCamera(lEnemyName)
 	end
 end

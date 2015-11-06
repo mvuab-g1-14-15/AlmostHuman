@@ -55,7 +55,7 @@ function CBoss:__init()
 	self.CharacterController:SetYaw(0.0)
 	self.CharacterController:SetScale( Vect3f(1.0) )
 	
-	self.FootstepTime = 1.2
+	self.FootstepTime = 0.6
 	
 	self.SpawnPositions = { Vect3f(-110.0, 21.0, 54.0)
 						  , Vect3f(-110.0, 21.0, 66.0)
@@ -142,7 +142,7 @@ function CBoss:Update()
 		end
 		sound_manager:PlayEvent("Play_Spark_Boss", "Boss")
 		--self:SetAnimation("idle");
-		--engine:TraceOnce("Boss stunned!")
+		----engine:TraceOnce("Boss stunned!")
 	end
 	
 	self.lParticle1:ChangePosition( self.RenderableObject:GetBonePosition("CATRigHub004")              );
@@ -166,7 +166,7 @@ end
 
 function CBoss:AddDamage(aValue)
 	self.Life = self.Life - aValue
-	--engine:TraceOnce("Damage to boss. Current life "..self.Life)
+	----engine:TraceOnce("Damage to boss. Current life "..self.Life)
 end
 
 function CBoss:IsStunned()

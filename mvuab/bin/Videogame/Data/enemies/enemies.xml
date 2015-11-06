@@ -75,7 +75,7 @@
 	<enemy name="Enemy3" room="sala2" type="patroll" route="3" route_alarm="5" state="inicial" pos="56.1998 -16.5334 -52.8975" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>
 	<enemy name="Enemy4" room="sala2" type="easy" route="4" route_alarm="5" state="inicial" pos="63.044 -16.5334 -86.1066" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
-	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png" on_dead_code="local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName); closeEnemy:SetSuspected(true); closeEnemy:SetSuspectedPosition(lPos);engine:Trace('Executing enemy dead script');"/>
+	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png" on_dead_code="local closeEnemy = enemy_manager:GetCloseEnemyNotSelf(lPos, selfName); closeEnemy:SetSuspected(true); closeEnemy:SetSuspectedPosition(lPos);--engine:Trace('Executing enemy dead script');"/>
 	 <!--
 	<enemy name="Enemy5" room="sala3" type="easy" route="1" route_alarm="8" state="idle" pos="80.7825 21.4127 46.6002" yaw="0.0" mesh="enemy1" get_position_script="get_enemy_position" 
 	 orientation="get_enemy_orientation" width="25" height="25" texture_enemy="Data/textures/GUI/conotrans3.png"/>

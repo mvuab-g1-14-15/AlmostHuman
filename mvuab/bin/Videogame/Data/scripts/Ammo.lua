@@ -83,7 +83,7 @@ function CAmmo:Update()
 			
 			-- If the ammo has not impacted to something, do not allow to be updated
 			if self.CurrentDistance > self.MaxDistance then
-				----engine:Trace("Impacted max distance")
+				------engine:Trace("Impacted max distance")
 				self.Impacted = true
 				self:End();
 			end

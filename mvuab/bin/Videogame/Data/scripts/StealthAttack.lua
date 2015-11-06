@@ -10,7 +10,7 @@ function CStealthAttack:__init()
 	
 	self.CStealthParticle = CParticle( "StealthAttackParticle", "stealth_atack", "core" )
 	self.EnemyStealthPosition = Vect3f(0,0,0);
-    ----engine:Trace("StealthAttack initialized")
+    ------engine:Trace("StealthAttack initialized")
 end
 
 function CStealthAttack:Update( aPosition )
@@ -40,7 +40,7 @@ function CStealthAttack:Update( aPosition )
 		self.Show = self.Show + 1
 		if self.Doing then	
 			local angle = GetAngleEnemyPlayer(enemy)
-			----engine:Trace("Angulo".. angle)
+			------engine:Trace("Angulo".. angle)
 			if angle < self.MaxAngle then
 				g_Player:SetAnimation("stealth")
 				self.EnemyStealthPosition = enemy:GetPosition();
@@ -48,7 +48,6 @@ function CStealthAttack:Update( aPosition )
 				self.CStealthParticle:Init( self.EnemyStealthPosition );
 				self.CStealthParticle:SetDirection( aPosition - self.EnemyStealthPosition );
 				sound_manager:PlayEvent("Play_Electrocution_Androide_Dron", enemy.Name)
-				--engine:Trace("Stealth attack press")
 				enemy:AddDamage(enemy:GetLife())
 			end
 		end
@@ -70,7 +69,6 @@ function CStealthAttack:UpdateInput()
 		if action_manager:DoAction("StealthAttack") then
 			self.Doing = true
 			
-			--engine:Trace("Stealth attack press")
 		end
 	end
 end
