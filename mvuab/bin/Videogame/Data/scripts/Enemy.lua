@@ -305,6 +305,7 @@ function CEnemy:Update()
 		end
 	else
 		if not self.Death then
+			sound_manager:PlayEvent("Play_Electrocution_Androide_Dron", self.Name)
 			lActualEnemy:ChangeAnimationAction("death", 0.5, 1.0)
 			if self.Fly then
 				renderable_objects_manager_glow:RemoveResource(self.Name.."Laser")

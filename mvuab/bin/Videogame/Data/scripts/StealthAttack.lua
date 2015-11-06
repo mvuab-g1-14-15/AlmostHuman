@@ -47,7 +47,7 @@ function CStealthAttack:Update( aPosition )
 				self.EnemyStealthPosition.y = self.EnemyStealthPosition.y + enemy:GetHeight()
 				self.CStealthParticle:Init( self.EnemyStealthPosition );
 				self.CStealthParticle:SetDirection( aPosition - self.EnemyStealthPosition );
-				----engine:Trace("Stealth attack press")
+				sound_manager:PlayEvent("Play_Electrocution_Androide_Dron", enemy.Name)
 				enemy:AddDamage(enemy:GetLife())
 			end
 		end
@@ -68,7 +68,7 @@ function CStealthAttack:UpdateInput()
 	if not g_ConsoleActivate and not g_CinematicActive then
 		if action_manager:DoAction("StealthAttack") then
 			self.Doing = true
-			----engine:Trace("Stealth attack press")
+			
 		end
 	end
 end
