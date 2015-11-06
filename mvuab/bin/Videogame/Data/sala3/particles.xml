@@ -19,4 +19,5 @@
   <particle_instance name="steam_down_slow_big16_sala3" core="steam_down_slow_big" pos="27.5769 -1.54398 67.9585" active="true" sound="true" />
   <particle_instance name="steam_down_slow_big17_sala3" core="steam_down_slow_big" pos="27.5769 -1.54398 43.6802" active="true" sound="true" />
   <particle_instance name="steam_down_slow_big18_sala3" core="steam_down_slow_big" pos="-47.4391 -1.54398 74.984" active="true" sound="true" />
+  <particle_instance name="base_de_carga_sala1" core="charge" pos="7.21 -17.44 63.85" active="true" sound="true" />
 </particles_instances>
