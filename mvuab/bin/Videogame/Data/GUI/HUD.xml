@@ -4,18 +4,18 @@
 	
 	
 	
-	<ProgressBar name="Life" pos="2 3" height="4.2" width="14.8" visible="true" active="true" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
+	<ProgressBar name="Life" pos="0.5 100" height="100" width="0.5" visible="true" active="true" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
-	<Image name="MarcoLife" time_per_image="2.0" is_loop="false" is_animated="false" pos="9.305 4.95" height="4.5" width="15.21" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+	<!-- <Image name="MarcoLife" time_per_image="2.0" is_loop="false" is_animated="false" pos="9.305 4.95" height="4.5" width="15.21" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
 		<texture texture="Data/textures/GUI/MarcoEnergy.png"/>
-	</Image>
+	</Image> -->
 	
-	<ProgressBar name="Energy" pos="2 8" height="4.2" width="14.8" visible="true" active="true" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
+	<ProgressBar name="Energy" pos="100 100" height="100" width="0.5" visible="true" active="true" progress_texture="Data/textures/GUI/barEnergy.png"  id_font="0" font_color="0 0 0" 
 	Literal="" widthOffset="" heightOffset="" OnComplete=""/>
 	
-	<Image name="MarcoEnergy" time_per_image="2.0" is_loop="false" is_animated="false" pos="9.305 9.85" height="4.5" width="15.21" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
+	<!-- <Image name="MarcoEnergy" time_per_image="2.0" is_loop="false" is_animated="false" pos="9.305 9.85" height="4.5" width="15.21" visible="true" active="true" default="0" OnLoadValue="" OnSaveValue="" flip="" is_background="false">
 		<texture texture="Data/textures/GUI/MarcoEnergy.png"/>
-	</Image>
+	</Image> -->
 	
 	
 	<!-- <ProgressBar name="Life" pos="35.09 3" height="4.2" width="14.8" visible="true" active="true" progress_texture="Data/textures/GUI/barLife.png"  id_font="0" font_color="0 0 0"

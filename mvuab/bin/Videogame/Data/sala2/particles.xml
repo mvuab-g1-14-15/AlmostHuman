@@ -13,4 +13,5 @@
   <particle_instance name="steam_emitter_aside10_sala2" core="steam_emitter_aside" pos="55.0499 -19.9551 -35.0958" active="true" sound="true" />
   <particle_instance name="steam_up_slow_big11_sala2" core="steam_up_slow_big" pos="57.2677 -18.6368 -48.4232" active="true" sound="true" />
   <particle_instance name="steam_up_slow_big12_sala2" core="steam_up_slow_big" pos="61.7219 -18.6368 -34.937" active="true" sound="true" />
+  <particle_instance name="base_de_carga_sala1" core="charge" pos="75.37 -17.27 -25.00" active="true" sound="true" />
 </particles_instances>

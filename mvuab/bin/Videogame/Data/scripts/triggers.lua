@@ -757,13 +757,13 @@ function UpdateTriggers()
 		if action_manager:DoAction("Action") then
 			gui_manager:ShowStaticText("BaseCargaError")
 			g_BaseCargaErrorText = true
-			sound_manager:PlayEvent("Play_Base_Carga_Failure", "Logan")
+			sound_manager:PlayEvent("Play_Base_Carga_Failure", "BaseCargaSala1")
 		end
 	end
 	if g_InsideTakeC4 then
 		if action_manager:DoAction("Action") then
 			g_C4Taken = true
-			sound_manager:PlayEvent("Play_Pasillo", "Logan")
+			sound_manager:PlayEvent("Play_Pick_Object", "Logan")
 			enemy_manager:CreateEnemiesPasillo()
 			take_C4_exit()
 			trigger_manager:GetTriggerByName("take_C4"):SetActive(false)
@@ -885,6 +885,7 @@ function UpdateTriggers()
 				if lBoss:IsStunned() then
 					if not g_Hacked[g_NaveToHack] then
 						g_Hacked[g_NaveToHack] = true
+						sound_manager:PlayEvent("Play_Hack_Nave", "Logan")
 						lBoss:ClearStun()
 						lBoss:AddDamage(25.0)
 						lBoss:SpawnEnemies()
