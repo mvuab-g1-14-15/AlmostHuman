@@ -55,7 +55,7 @@ function CEnemyManager:CreateEnemiesSala2()
 	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
-	lInfo.time_to_shoot = 1.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.3
 	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 20.0
@@ -108,7 +108,7 @@ function CEnemyManager:CreateEnemiesSala2()
 						 "	closeEnemy:SetSuspectedPosition(lPos);"..
 						 "end;"
 	lInfo.shoot_speed = 50.0
-	lInfo.time_to_shoot = 2.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.3
 	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 5.0
@@ -146,7 +146,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 40.0
-	lInfo.time_to_shoot = 1.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.3
 	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 20.0
@@ -180,7 +180,7 @@ function CEnemyManager:CreateEnemiesExtraSala2()
 	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 50.0
-	lInfo.time_to_shoot = 2.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.3
 	lInfo.num_shoot_burst = 3.0
 	lInfo.chase_distance = 20.0
@@ -218,7 +218,7 @@ function CEnemyManager:CreateEnemiesPasillo()
 	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
-	lInfo.time_to_shoot = 1.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.2
 	lInfo.num_shoot_burst = 5.0
 	lInfo.chase_distance = 5.0
@@ -258,7 +258,7 @@ function CEnemyManager:CreateEnemiesSala3()
 	lInfo.use_gizmo = false
 	lInfo.on_dead = false
 	lInfo.shoot_speed = 20.0
-	lInfo.time_to_shoot = 1.0
+	lInfo.time_to_shoot = 0.2
 	lInfo.time_burst = 0.2
 	lInfo.num_shoot_burst = 5.0
 	lInfo.chase_distance = 20.0
