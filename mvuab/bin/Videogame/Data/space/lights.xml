@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <lights>
   <ambient_light color="0.04314 0.04314 0.04314" />
-  <omni_light name="Omni001" room="space" pos="-1260.92 1901.9 59.5051" color="1.0 1.0 1.0" att_start_range="2.0" att_end_range="2.0" >
-	<lens_flare name="flare001"/>
-  </omni_light>
+  <spot_light name="Fspot001" room="space" intensity="1.0" specular_intensity="0.0" pos="-2069.16 432.341 282.933" color="1.0 1.0 1.0" att_start_range="1607.2" att_end_range="1842.4" look_at="-1582.45 311.779 149.535" angle="86.3" fall_off="108.6">
+    <shadow_map render_shadows="true" shadow_texture_mask="" room="space">
+      <static_shadow_map generate="true" layer="static" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="5" />
+      <dynamic_shadow_map generate="true" layer="dynamic" renderable_objects_manager="solid" format_type="R32F" size="1024 1024" stage="6" />
+    </shadow_map>
+  </spot_light>
 </lights>

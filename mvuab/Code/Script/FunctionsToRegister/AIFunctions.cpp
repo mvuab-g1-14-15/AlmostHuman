@@ -140,10 +140,10 @@ bool PlayerInSight( CCamera& aCamera )
 
     if ( lRayCollision )
     {
-      if ( lPosition.Distance( hit.m_CollisionPoint ) < 1.0f || lRayCollision->GetName() == "Player" )
+      if ( lPosition.Distance( hit.m_CollisionPoint ) < 0.5f || lRayCollision->GetName() == "Player" )
         return true;
     }
-    else if ( lPosition.Distance( hit.m_CollisionPoint ) < 1.0f )
+    else if ( lPosition.Distance( hit.m_CollisionPoint ) < 0.5f )
       return true;
   }
 

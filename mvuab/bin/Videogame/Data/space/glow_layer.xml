@@ -1,7 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RenderableObjects>
-  <!--MeshInstance name="Sphere001_space" core="Sphere001_space" pos="-524.22 0.0 135.208" yaw="0.0" pitch="0.0" roll="0.0" scale="5.9237 5.9237 5.9237" />
-  <MeshInstance name="moon_space" core="moon_space" pos="-1405.46 145.053 6.90963" yaw="1.04686" pitch="0.33781" roll="0.348382" scale="1.0 1.0 1.0" />
-  <MeshInstance name="sol_space" core="sol_space" pos="-2190.12 290.544 76.5433" yaw="0.0" pitch="0.0" roll="0.0" scale="0.897812 0.897812 0.897812" />
-  <MeshInstance name="Sphere004_space" core="Sphere004_space" pos="-1889.71 197.716 27.0051" yaw="2.97065" pitch="0.0" roll="0.0" scale="1.0 1.0 1.0" /-->
+  <MeshInstance name="sol_space" core="sol_space" pos="-2190.12 453.159 -24.4147" yaw="0.0" pitch="0.0" roll="0.0" scale="1.7 1.7 1.7" />
 </RenderableObjects>

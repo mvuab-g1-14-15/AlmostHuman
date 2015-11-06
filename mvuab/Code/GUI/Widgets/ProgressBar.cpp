@@ -38,8 +38,8 @@ void CProgressBar::Render  ()
         }
         else
         {
-            GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
-                                         CGraphicsManager::UPPER_LEFT, m_BackGroundColor);
+           /* GraphicsInstance->DrawQuad2D(CGuiElement::m_Position, CGuiElement::m_uWidth, CGuiElement::m_uHeight,
+                                         CGraphicsManager::UPPER_LEFT, m_BackGroundColor);*/
         }
 
 
