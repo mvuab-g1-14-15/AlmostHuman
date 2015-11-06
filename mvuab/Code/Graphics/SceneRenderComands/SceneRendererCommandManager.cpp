@@ -231,6 +231,7 @@ bool CSceneRendererCommandManager::Execute()
         CSceneRendererCommand* lCommand = m_ResourcesVector[i];
         if(lCommand->GetVisible())
         {
+            //LOG_INFO_APPLICATION("Rendering %s command", lCommand->GetName().c_str());
             lCommand->Execute(*lGM);
         }
     }

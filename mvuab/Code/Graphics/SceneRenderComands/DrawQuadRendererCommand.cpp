@@ -45,9 +45,11 @@ void CDrawQuadRendererCommand::Execute( CGraphicsManager& GM )
     if( mSetPlayerLife )
     {
       CEffect* lEffect = l_EffectTech->GetEffect();
-     
-      lEffect->SetLife(GUIInstance->GetWindow("HUD.xml")->GetElement("Life")->GetProgress());
-      //LOG_INFO_APPLICATION("Life: %f",  GUIInstance->GetWindow("HUD.xml")->GetElement("Life")->GetProgress());
+
+      float lLife = GUIInstance->GetWindow("HUD.xml")->GetElement("Life")->GetProgress();
+      //LOG_INFO_APPLICATION("Setting life %5.2f", lLife);
+      lLife = Math::Utils::Clamp(lLife, 0.05f, 100.0f);
+      lEffect->SetLife(lLife);
     }
 
     if ( l_EffectTech )
