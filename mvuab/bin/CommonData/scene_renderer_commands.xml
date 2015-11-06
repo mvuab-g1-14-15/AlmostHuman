@@ -45,11 +45,12 @@
 	<capture_frame_buffer name="FrameBuffer">
 		<dynamic_texture stage_id="0" name="FrameBuffer" texture_width_as_frame_buffer="true" format_type="A8R8G8B8"/>
 	</capture_frame_buffer>
-	<render_draw_quad_by_technique active="true" name="VignettingAndNoise" technique="VignettingTechnique">
+	<set_pool_renderable_objects_technique pool="VignettingAndNoise_pool_renderable_object_technique"/>
+	<render_draw_quad active="true" name="VignettingAndNoise">
 		<texture stage_id="0" name="FrameBuffer"/>
 		<texture stage_id="1" name="Data/textures/vignetting.tga"/>
 		<texture stage_id="2" name="Data/textures/noise.png"/>
-	</render_draw_quad_by_technique>
+	</render_draw_quad>
 	
 	<enable_alpha_blend/>
 	<set_blend srcblend="SrcAlpha" dstblend="InvSrcAlpha" blendop="Add"/>

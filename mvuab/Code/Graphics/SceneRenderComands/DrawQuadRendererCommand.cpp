@@ -16,6 +16,7 @@
 CDrawQuadRendererCommand::CDrawQuadRendererCommand( CXMLTreeNode& atts )
   : CStagedTexturedRendererCommand( atts )
   , mSetPlayerLife( atts.GetAttribute<bool>( "set_player_life", false ) )
+  ,   m_Color( Math::colWHITE )
 {
 }
 
