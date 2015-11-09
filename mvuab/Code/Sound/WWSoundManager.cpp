@@ -106,29 +106,16 @@ void CWWSoundManager::Init()
     //
 
     AkMemSettings memSettings;
-    memSettings.uMaxNumPools = 50;
-
+    
+    memSettings.uMaxNumPools = 250;
+  
     if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success )
     {
         assert( ! "Could not create the memory manager." );
     }
 
+    
     //
-    // Create and initialize an instance of the default streaming manager. Note
-    // that you can override the default streaming manager with your own. Refer
-    // to the SDK documentation for more information.
-    //
-
-    AkStreamMgrSettings stmSettings;
-    AK::StreamMgr::GetDefaultSettings( stmSettings );
-
-    // Customize the Stream Manager settings here.
-
-    if ( !AK::StreamMgr::Create( stmSettings ) )
-    {
-        assert( ! "Could not create the Streaming Manager" );
-    }
-
     //
     // Create a streaming device with blocking low-level I/O handshaking.
     // Note that you can override the default low-level I/O module with your own. Refer
@@ -137,6 +124,24 @@ void CWWSoundManager::Init()
     AkDeviceSettings deviceSettings;
     AK::StreamMgr::GetDefaultDeviceSettings( deviceSettings );
 
+    //
+    // Create and initialize an instance of the default streaming manager. Note
+    // that you can override the default streaming manager with your own. Refer
+    // to the SDK documentation for more information.
+
+    AkStreamMgrSettings stmSettings;
+    AK::StreamMgr::GetDefaultSettings( stmSettings );
+    
+    stmSettings.uMemorySize =  2 * deviceSettings.uGranularity * 150;
+
+    // Customize the Stream Manager settings here.
+
+    if ( !AK::StreamMgr::Create( stmSettings ) )
+    {
+        assert( ! "Could not create the Streaming Manager" );
+    }
+
+   
     // Customize the streaming device settings here.
     m_lowLevelIO = new CAkDefaultIOHookBlocking();
 
@@ -151,6 +156,12 @@ void CWWSoundManager::Init()
     AkPlatformInitSettings platformInitSettings;
     AK::SoundEngine::GetDefaultInitSettings( initSettings );
     AK::SoundEngine::GetDefaultPlatformInitSettings( platformInitSettings );
+
+    initSettings.uDefaultPoolSize           = 250 * 1024 * 1024;  // 4 MB
+    initSettings.uMaxNumPaths               = 100;
+    initSettings.uMaxNumTransitions         = 250;
+
+    platformInitSettings.uLEngineDefaultPoolSize    = 250 * 1024 * 1024;  // 4 MB
 
     if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success )
     {

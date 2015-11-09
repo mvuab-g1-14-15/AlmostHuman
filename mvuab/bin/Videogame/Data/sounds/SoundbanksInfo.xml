@@ -18,16 +18,8 @@
 				<Event Id="1704638915" Name="Play_Ambient_Pasillo"/>
 				<Event Id="1827037115" Name="Play_Ambient_Sala3"/>
 				<Event Id="1203582209" Name="Play_Long_Ambient"/>
-				<Event Id="3568813383" Name="Play_Main_Theme"/>
-				<Event Id="74299344" Name="Play_Musica_Boss"/>
-				<Event Id="339442378" Name="Play_Panico"/>
-				<Event Id="106104822" Name="Stop_Musica_Boss"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="84672891" Language="SFX">
-					<ShortName>Final boss Almost Human.wav</ShortName>
-					<Path>SFX\Final boss Almost Human_951343B8.wem</Path>
-				</File>
 				<File Id="197167235" Language="SFX">
 					<ShortName>dark soundscapes 14.wav</ShortName>
 					<Path>SFX\dark soundscapes 14_E106FFBE.wem</Path>
@@ -43,10 +35,6 @@
 				<File Id="362224286" Language="SFX">
 					<ShortName>dark soundscapes 01.wav</ShortName>
 					<Path>SFX\dark soundscapes 01_950FF8F3.wem</Path>
-				</File>
-				<File Id="384441130" Language="SFX">
-					<ShortName>Almost Panico.wav</ShortName>
-					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
 				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
@@ -71,10 +59,6 @@
 				<File Id="677139355" Language="SFX">
 					<ShortName>dark soundscapes 06.wav</ShortName>
 					<Path>SFX\dark soundscapes 06_950FF8F3.wem</Path>
-				</File>
-				<File Id="718615655" Language="SFX">
-					<ShortName>Main_Theme_Loop.wav</ShortName>
-					<Path>SFX\Main_Theme_Loop_951343B8.wem</Path>
 				</File>
 				<File Id="772078166" Language="SFX">
 					<ShortName>Almost ok.wav</ShortName>
@@ -207,13 +191,67 @@
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
+		<SoundBank Id="149234602" Language="SFX">
+			<ShortName>Iris2</ShortName>
+			<Path>Iris2.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3621014260" Name="Play_Elevator"/>
+				<Event Id="2376878507" Name="Play_Sala2"/>
+				<Event Id="2956457727" Name="Play_Sala3A"/>
+				<Event Id="2956457724" Name="Play_Sala3B"/>
+				<Event Id="3006790454" Name="Play_Sala4A"/>
+				<Event Id="3006790453" Name="Play_Sala4B"/>
+				<Event Id="2362998284" Name="Play_Tunel"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="110529738" Language="SFX">
+					<ShortName>Sala4B.wav</ShortName>
+					<Path>SFX\Sala4B_E106FFBE.wem</Path>
+				</File>
+				<File Id="117715303" Language="SFX">
+					<ShortName>Sala3B_Versio_Cut.wav</ShortName>
+					<Path>SFX\Sala3B_Versio_Cut_E106FFBE.wem</Path>
+				</File>
+				<File Id="341959684" Language="SFX">
+					<ShortName>Tunel.wav</ShortName>
+					<Path>SFX\Tunel_E106FFBE.wem</Path>
+				</File>
+				<File Id="405981009" Language="SFX">
+					<ShortName>Sala4A.wav</ShortName>
+					<Path>SFX\Sala4A_E106FFBE.wem</Path>
+				</File>
+				<File Id="426310337" Language="SFX">
+					<ShortName>Final Theme.wav</ShortName>
+					<Path>SFX\Final Theme_E106FFBE.wem</Path>
+				</File>
+				<File Id="493938362" Language="SFX">
+					<ShortName>actualizacion de brazo v2.wav</ShortName>
+					<Path>SFX\actualizacion de brazo v2_E106FFBE.wem</Path>
+				</File>
+				<File Id="761229201" Language="SFX">
+					<ShortName>Final_Theme_Loop.wav</ShortName>
+					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
+				</File>
+				<File Id="953393735" Language="SFX">
+					<ShortName>Sala3A_version2.wav</ShortName>
+					<Path>SFX\Sala3A_version2_E106FFBE.wem</Path>
+				</File>
+				<File Id="959572413" Language="SFX">
+					<ShortName>Elevator.wav</ShortName>
+					<Path>SFX\Elevator_E106FFBE.wem</Path>
+				</File>
+				<File Id="999865395" Language="SFX">
+					<ShortName>Sala2.wav</ShortName>
+					<Path>SFX\Sala2_E106FFBE.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="166012248" Language="SFX">
 			<ShortName>Irirs</ShortName>
 			<Path>Irirs.bnk</Path>
 			<IncludedEvents>
 				<Event Id="4150758548" Name="Play_Abriendo_Compuertas"/>
 				<Event Id="526096065" Name="Play_Ayer_Tuve_Una"/>
-				<Event Id="3621014260" Name="Play_Elevator"/>
 				<Event Id="3526099323" Name="Play_GP_Agacharse"/>
 				<Event Id="1181951480" Name="Play_GP_Bidon"/>
 				<Event Id="4016846353" Name="Play_GP_Disparo_Bloqueado"/>
@@ -224,25 +262,11 @@
 				<Event Id="4020926666" Name="Play_GP_Puerta_Bloqueada"/>
 				<Event Id="3595090698" Name="Play_Pasillo"/>
 				<Event Id="2376878504" Name="Play_Sala1"/>
-				<Event Id="2376878507" Name="Play_Sala2"/>
-				<Event Id="2956457727" Name="Play_Sala3A"/>
-				<Event Id="2956457724" Name="Play_Sala3B"/>
-				<Event Id="3006790454" Name="Play_Sala4A"/>
-				<Event Id="3006790453" Name="Play_Sala4B"/>
-				<Event Id="2362998284" Name="Play_Tunel"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="88444989" Language="SFX">
 					<ShortName>Poca_Energia.wav</ShortName>
 					<Path>SFX\Poca_Energia_E106FFBE.wem</Path>
-				</File>
-				<File Id="110529738" Language="SFX">
-					<ShortName>Sala4B.wav</ShortName>
-					<Path>SFX\Sala4B_E106FFBE.wem</Path>
-				</File>
-				<File Id="117715303" Language="SFX">
-					<ShortName>Sala3B_Versio_Cut.wav</ShortName>
-					<Path>SFX\Sala3B_Versio_Cut_E106FFBE.wem</Path>
 				</File>
 				<File Id="139045063" Language="SFX">
 					<ShortName>naves_preparadas.wav</ShortName>
@@ -256,29 +280,13 @@
 					<ShortName>Abiendo_Compuertas_Despres Mort_FinalBoss.wav</ShortName>
 					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem</Path>
 				</File>
-				<File Id="341959684" Language="SFX">
-					<ShortName>Tunel.wav</ShortName>
-					<Path>SFX\Tunel_E106FFBE.wem</Path>
-				</File>
 				<File Id="364103296" Language="SFX">
 					<ShortName>Disparo_Bloqueado.wav</ShortName>
 					<Path>SFX\Disparo_Bloqueado_E106FFBE.wem</Path>
 				</File>
-				<File Id="405981009" Language="SFX">
-					<ShortName>Sala4A.wav</ShortName>
-					<Path>SFX\Sala4A_E106FFBE.wem</Path>
-				</File>
-				<File Id="426310337" Language="SFX">
-					<ShortName>Final Theme.wav</ShortName>
-					<Path>SFX\Final Theme_E106FFBE.wem</Path>
-				</File>
 				<File Id="430266122" Language="SFX">
 					<ShortName>Sala1.wav</ShortName>
 					<Path>SFX\Sala1_E106FFBE.wem</Path>
-				</File>
-				<File Id="493938362" Language="SFX">
-					<ShortName>actualizacion de brazo v2.wav</ShortName>
-					<Path>SFX\actualizacion de brazo v2_E106FFBE.wem</Path>
 				</File>
 				<File Id="677660058" Language="SFX">
 					<ShortName>Esconderse_Bidones.wav</ShortName>
@@ -292,10 +300,6 @@
 					<ShortName>Agacharse.wav</ShortName>
 					<Path>SFX\Agacharse_E106FFBE.wem</Path>
 				</File>
-				<File Id="761229201" Language="SFX">
-					<ShortName>Final_Theme_Loop.wav</ShortName>
-					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
-				</File>
 				<File Id="765819752" Language="SFX">
 					<ShortName>Puerta_Bloqueada.wav</ShortName>
 					<Path>SFX\Puerta_Bloqueada_E106FFBE.wem</Path>
@@ -307,18 +311,6 @@
 				<File Id="891960782" Language="SFX">
 					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
 					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
-				</File>
-				<File Id="953393735" Language="SFX">
-					<ShortName>Sala3A_version2.wav</ShortName>
-					<Path>SFX\Sala3A_version2_E106FFBE.wem</Path>
-				</File>
-				<File Id="959572413" Language="SFX">
-					<ShortName>Elevator.wav</ShortName>
-					<Path>SFX\Elevator_E106FFBE.wem</Path>
-				</File>
-				<File Id="999865395" Language="SFX">
-					<ShortName>Sala2.wav</ShortName>
-					<Path>SFX\Sala2_E106FFBE.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -385,40 +377,6 @@
 				<File Id="967663123" Language="SFX">
 					<ShortName>footstep_paviment1.wav</ShortName>
 					<Path>SFX\footstep_paviment1_76A5D070.wem</Path>
-				</File>
-			</IncludedMemoryFiles>
-		</SoundBank>
-		<SoundBank Id="1275829538" Language="SFX">
-			<ShortName>AlmostHuman</ShortName>
-			<Path>AlmostHuman.bnk</Path>
-			<IncludedEvents>
-				<Event Id="1292086503" Name="Play_Back"/>
-				<Event Id="3174629258" Name="Play_GameOver"/>
-				<Event Id="785979864" Name="Play_Gui_Over"/>
-				<Event Id="2513968146" Name="Play_LoopGen"/>
-				<Event Id="474386569" Name="Play_Next"/>
-				<Event Id="2348692292" Name="Play_Over"/>
-			</IncludedEvents>
-			<IncludedMemoryFiles>
-				<File Id="45634969" Language="SFX">
-					<ShortName>gui_back.wav</ShortName>
-					<Path>SFX\gui_back_76A5D070.wem</Path>
-				</File>
-				<File Id="193371772" Language="SFX">
-					<ShortName>gui_next.wav</ShortName>
-					<Path>SFX\gui_next_76A5D070.wem</Path>
-				</File>
-				<File Id="444784154" Language="SFX">
-					<ShortName>gameOver.wav</ShortName>
-					<Path>SFX\gameOver_76A5D070.wem</Path>
-				</File>
-				<File Id="482623365" Language="SFX">
-					<ShortName>loop-gen.wav</ShortName>
-					<Path>SFX\loop-gen_76A5D070.wem</Path>
-				</File>
-				<File Id="507701302" Language="SFX">
-					<ShortName>gui_over.wav</ShortName>
-					<Path>SFX\gui_over_76A5D070.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -545,6 +503,10 @@
 					<ShortName>Disparo Androide.wav</ShortName>
 					<Path>SFX\Disparo Androide_E106FFBE.wem</Path>
 				</File>
+				<File Id="924432000" Language="SFX">
+					<ShortName>sparks(chispas).wav</ShortName>
+					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
+				</File>
 				<File Id="940048716" Language="SFX">
 					<ShortName>Boss_Impact.wav</ShortName>
 					<Path>SFX\Boss_Impact_E106FFBE.wem</Path>
@@ -552,6 +514,30 @@
 				<File Id="1012046756" Language="SFX">
 					<ShortName>impact_shoot_to_enemies.wav</ShortName>
 					<Path>SFX\impact_shoot_to_enemies_E106FFBE.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="3991942870" Language="SFX">
+			<ShortName>Music</ShortName>
+			<Path>Music.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3568813383" Name="Play_Main_Theme"/>
+				<Event Id="74299344" Name="Play_Musica_Boss"/>
+				<Event Id="339442378" Name="Play_Panico"/>
+				<Event Id="106104822" Name="Stop_Musica_Boss"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="84672891" Language="SFX">
+					<ShortName>Final boss Almost Human.wav</ShortName>
+					<Path>SFX\Final boss Almost Human_951343B8.wem</Path>
+				</File>
+				<File Id="384441130" Language="SFX">
+					<ShortName>Almost Panico.wav</ShortName>
+					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
+				</File>
+				<File Id="718615655" Language="SFX">
+					<ShortName>Main_Theme_Loop.wav</ShortName>
+					<Path>SFX\Main_Theme_Loop_951343B8.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

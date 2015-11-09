@@ -32,6 +32,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	788965310	Boss - Disparo 4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss - Disparo 4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss - Disparo 4		5645
 	803787533	Footstep_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Footstep_androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Footstep_Androide		7568
 	848849463	Shoot_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo Androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Shoot_Androide		4218
+	924432000	Spark_boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Spark_boss		170387
 	940048716	Boss Impact	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss_Impact_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Boss Impact		6587
 	1012046756	impact_shoot_to_enemies	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\impact_shoot_to_enemies_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\impact_shoot_to_enemies		8722
 
