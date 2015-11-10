@@ -107,7 +107,7 @@ void CWWSoundManager::Init()
 
     AkMemSettings memSettings;
     
-    memSettings.uMaxNumPools = 250;
+    memSettings.uMaxNumPools = 50;
   
     if ( AK::MemoryMgr::Init( &memSettings ) != AK_Success )
     {
@@ -132,7 +132,7 @@ void CWWSoundManager::Init()
     AkStreamMgrSettings stmSettings;
     AK::StreamMgr::GetDefaultSettings( stmSettings );
     
-    stmSettings.uMemorySize =  2 * deviceSettings.uGranularity * 150;
+    stmSettings.uMemorySize =  2 * deviceSettings.uGranularity * 200;
 
     // Customize the Stream Manager settings here.
 
@@ -157,11 +157,11 @@ void CWWSoundManager::Init()
     AK::SoundEngine::GetDefaultInitSettings( initSettings );
     AK::SoundEngine::GetDefaultPlatformInitSettings( platformInitSettings );
 
-    initSettings.uDefaultPoolSize           = 250 * 1024 * 1024;  // 4 MB
-    initSettings.uMaxNumPaths               = 100;
-    initSettings.uMaxNumTransitions         = 250;
+    initSettings.uDefaultPoolSize           = 32 * 1024 * 1024;  // 4 MB
+    //initSettings.uMaxNumPaths               = 40;
+    //initSettings.uMaxNumTransitions         = 40;
 
-    platformInitSettings.uLEngineDefaultPoolSize    = 250 * 1024 * 1024;  // 4 MB
+    platformInitSettings.uLEngineDefaultPoolSize    = 16 * 1024 * 1024;  // 4 MB
 
     if ( AK::SoundEngine::Init( &initSettings, &platformInitSettings ) != AK_Success )
     {
