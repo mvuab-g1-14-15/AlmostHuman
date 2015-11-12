@@ -37,21 +37,21 @@ Effect plug-ins	ID	Name	Type				Notes
 	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	3693618	gas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gas_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\gas		18017
-	10864768	Steam_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\steam(vapor)_short_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Steam_down		25859
-	25300159	Open_Door_Hangar	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Open_Door_Hangar_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Door_Hangar		522840
-	47795385	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\porta 1_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Close_Door		94128
-	80304484	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_Goes_Up_2_951343B8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		12597
-	207815857	CrashMetalGrille	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\crash_metal_grille_curt_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\CrashMetalGrille		57510
-	259584406	pick_C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\pick_C4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\pick_C4		4120
-	267134055	power_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\power down\power_down1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\power_down		11038
-	328627046	enter_leave_barrel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\enter_leave_barrel_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\enter_leave_barrel		9667
-	341974608	C4 Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\C4 Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\C4 Explosion		38172
-	707043063	Spark	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Spark		170387
-	752427372	Countdown_Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Countdown_Explosion_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Explosion Sequence\Countdown_Explosion		86769
-	832049234	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OpenDoor Elevator_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		54143
-	900520075	lights_on	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\lights_on_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\lights_on		36658
-	987205478	Base_carga	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\base de carga_v1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Base_carga		34546
-	1059316681	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Alarm_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		26003
-	1064441044	Plant C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Plant C4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Plant C4		22201
+	3693618	gas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\gas_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\gas		277844
+	25300159	Open_Door_Hangar	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Open_Door_Hangar_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Door_Hangar		6001860
+	47795385	Open_Close_Door	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\porta 1_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Open_Close_Door		706684
+	80304484	Elevator_Up	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Elevator_Goes_Up_2_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_Up		276716
+	207815857	CrashMetalGrille	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\crash_metal_grille_curt_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\CrashMetalGrille		464840
+	259584406	pick_C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\pick_C4_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\pick_C4		26524
+	267134055	power_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\power down\power_down1_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\power_down		324512
+	328627046	enter_leave_barrel	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\enter_leave_barrel_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\enter_leave_barrel		63202
+	341974608	C4 Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\C4 Explosion_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\C4 Explosion		487328
+	406861289	Spark	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Spark		1043036
+	752427372	Countdown_Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Countdown_Explosion_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Explosion Sequence\Countdown_Explosion		821764
+	823457565	Steam_down	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\steam(vapor)_short_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Steam_down		179512
+	832049234	Elevator_OpenDoor	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\OpenDoor Elevator_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Elevator\Elevator_OpenDoor		616256
+	900520075	lights_on	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\lights_on_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\lights_on		427388
+	987205478	Base_carga	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\base de carga_v1_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Base_carga		358080
+	1059316681	Alarm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Alarm_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Alarm		176464
+	1064441044	Plant C4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Plant C4_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bomb_C4\Plant C4		213780
 

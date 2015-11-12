@@ -8,21 +8,20 @@ Event	ID	Name			Wwise Object Path	Notes
 	3759318933	Play_Robot_Arm			\Various\Play_Robot_Arm	
 
 Effect plug-ins	ID	Name	Type				Notes
-	602546716	Room_Large	Wwise RoomVerb			
 	1203617187	Machine_Gun_Hangar	Wwise RoomVerb			
 	1706684651	Plate_Medium	Wwise RoomVerb			
 	1990128658	Room_Medium	Wwise RoomVerb			
 	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	274114536	ensamblaje_sfx_short_1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_1		19534
-	294083481	LightHumming	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Light Humming_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\LightHumming		22420
-	418116809	Fan	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Fan_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Fan		29812
-	455030148	ensamblaje_sfx_short_3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_3_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_3		16387
-	576668268	ensamblaje_sfx_short_2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_2_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_2		18679
-	588687617	ensamblaje_sfx_short_4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_4		18380
-	659011718	Boss Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Explosio boss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Boss Explosion		52417
-	999780021	robot_arm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\robot_arm_sfx_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\robot_arm		110257
-	1043545804	Nave_Hack	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\hack_spacecraft_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Nave_Hack		99763
-	1071045796	Naves_Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Shoot Nau_Impact_Lent_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Naves_Shoot		100960
+	274114536	ensamblaje_sfx_short_1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_1_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_1		302588
+	294083481	LightHumming	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Light Humming_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\LightHumming		198104
+	418116809	Fan	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Fan_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Fan		343540
+	455030148	ensamblaje_sfx_short_3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_3_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_3		244572
+	576668268	ensamblaje_sfx_short_2	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_2_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_2		286784
+	588687617	ensamblaje_sfx_short_4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\ensamblaje_sfx_short_4_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\Machine Assembly\ensamblaje_sfx_short_4		277724
+	659011718	Boss Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Explosio boss_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Boss Explosion		616580
+	999780021	robot_arm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\robot_arm_sfx_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\robot_arm		1082336
+	1043545804	Nave_Hack	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\hack_spacecraft_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Nave_Hack		1039504
+	1071045796	Naves_Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Shoot Nau_Impact_Lent_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Naves_Shoot		1099280
 

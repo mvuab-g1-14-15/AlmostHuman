@@ -22,67 +22,67 @@
 			<IncludedMemoryFiles>
 				<File Id="197167235" Language="SFX">
 					<ShortName>dark soundscapes 14.wav</ShortName>
-					<Path>SFX\dark soundscapes 14_E106FFBE.wem</Path>
+					<Path>SFX\dark soundscapes 14_45687BFF.wem</Path>
 				</File>
 				<File Id="342893694" Language="SFX">
 					<ShortName>dark soundscapes 16.wav</ShortName>
-					<Path>SFX\dark soundscapes 16_E106FFBE.wem</Path>
+					<Path>SFX\dark soundscapes 16_45687BFF.wem</Path>
 				</File>
 				<File Id="354184061" Language="SFX">
 					<ShortName>dark soundscapes 11.wav</ShortName>
-					<Path>SFX\dark soundscapes 11_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 11_45687BFF.wem</Path>
 				</File>
 				<File Id="362224286" Language="SFX">
 					<ShortName>dark soundscapes 01.wav</ShortName>
-					<Path>SFX\dark soundscapes 01_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 01_45687BFF.wem</Path>
 				</File>
 				<File Id="438075751" Language="SFX">
 					<ShortName>dark soundscapes 12.wav</ShortName>
-					<Path>SFX\dark soundscapes 12_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 12_45687BFF.wem</Path>
 				</File>
 				<File Id="466521606" Language="SFX">
 					<ShortName>dark soundscapes 13.wav</ShortName>
-					<Path>SFX\dark soundscapes 13_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 13_45687BFF.wem</Path>
 				</File>
 				<File Id="497909137" Language="SFX">
 					<ShortName>dark soundscapes 10.wav</ShortName>
-					<Path>SFX\dark soundscapes 10_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 10_45687BFF.wem</Path>
 				</File>
 				<File Id="585946315" Language="SFX">
 					<ShortName>Almost alerta.wav</ShortName>
-					<Path>SFX\Almost alerta_E106FFBE.wem</Path>
+					<Path>SFX\Almost alerta_602496C7.wem</Path>
 				</File>
 				<File Id="615389019" Language="SFX">
 					<ShortName>dark soundscapes 08.wav</ShortName>
-					<Path>SFX\dark soundscapes 08_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 08_45687BFF.wem</Path>
 				</File>
 				<File Id="677139355" Language="SFX">
 					<ShortName>dark soundscapes 06.wav</ShortName>
-					<Path>SFX\dark soundscapes 06_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 06_45687BFF.wem</Path>
 				</File>
 				<File Id="772078166" Language="SFX">
 					<ShortName>Almost ok.wav</ShortName>
-					<Path>SFX\Almost ok_950FF8F3.wem</Path>
+					<Path>SFX\Almost ok_45687BFF.wem</Path>
 				</File>
 				<File Id="773649004" Language="SFX">
 					<ShortName>dark soundscapes 19.wav</ShortName>
-					<Path>SFX\dark soundscapes 19_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 19_45687BFF.wem</Path>
 				</File>
 				<File Id="808935493" Language="SFX">
 					<ShortName>dark soundscapes 09.wav</ShortName>
-					<Path>SFX\dark soundscapes 09_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 09_45687BFF.wem</Path>
 				</File>
 				<File Id="900351120" Language="SFX">
 					<ShortName>dark soundscapes 15.wav</ShortName>
-					<Path>SFX\dark soundscapes 15_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 15_45687BFF.wem</Path>
 				</File>
 				<File Id="918214348" Language="SFX">
 					<ShortName>dark soundscapes 07.wav</ShortName>
-					<Path>SFX\dark soundscapes 07_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 07_45687BFF.wem</Path>
 				</File>
 				<File Id="1022880071" Language="SFX">
 					<ShortName>dark soundscapes 02.wav</ShortName>
-					<Path>SFX\dark soundscapes 02_950FF8F3.wem</Path>
+					<Path>SFX\dark soundscapes 02_45687BFF.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -123,71 +123,71 @@
 			<IncludedMemoryFiles>
 				<File Id="3693618" Language="SFX">
 					<ShortName>gas.wav</ShortName>
-					<Path>SFX\gas_951343B8.wem</Path>
-				</File>
-				<File Id="10864768" Language="SFX">
-					<ShortName>steam(vapor)_short.wav</ShortName>
-					<Path>SFX\steam(vapor)_short_BADC626A.wem</Path>
+					<Path>SFX\gas_8BD76F1E.wem</Path>
 				</File>
 				<File Id="25300159" Language="SFX">
 					<ShortName>Open_Door_Hangar.wav</ShortName>
-					<Path>SFX\Open_Door_Hangar_E106FFBE.wem</Path>
+					<Path>SFX\Open_Door_Hangar_DDC98EF4.wem</Path>
 				</File>
 				<File Id="47795385" Language="SFX">
 					<ShortName>porta 1.wav</ShortName>
-					<Path>SFX\porta 1_76A5D070.wem</Path>
+					<Path>SFX\porta 1_DDC98EF4.wem</Path>
 				</File>
 				<File Id="80304484" Language="SFX">
 					<ShortName>Elevator_Goes_Up_2.wav</ShortName>
-					<Path>SFX\Elevator_Goes_Up_2_951343B8.wem</Path>
+					<Path>SFX\Elevator_Goes_Up_2_8BD76F1E.wem</Path>
 				</File>
 				<File Id="207815857" Language="SFX">
 					<ShortName>crash_metal_grille_curt.wav</ShortName>
-					<Path>SFX\crash_metal_grille_curt_E106FFBE.wem</Path>
+					<Path>SFX\crash_metal_grille_curt_DDC98EF4.wem</Path>
 				</File>
 				<File Id="259584406" Language="SFX">
 					<ShortName>pick_C4.wav</ShortName>
-					<Path>SFX\pick_C4_E106FFBE.wem</Path>
+					<Path>SFX\pick_C4_DDC98EF4.wem</Path>
 				</File>
 				<File Id="267134055" Language="SFX">
 					<ShortName>power down\power_down1.wav</ShortName>
-					<Path>SFX\power down\power_down1_E106FFBE.wem</Path>
+					<Path>SFX\power down\power_down1_DDC98EF4.wem</Path>
 				</File>
 				<File Id="328627046" Language="SFX">
 					<ShortName>enter_leave_barrel.wav</ShortName>
-					<Path>SFX\enter_leave_barrel_76A5D070.wem</Path>
+					<Path>SFX\enter_leave_barrel_DDC98EF4.wem</Path>
 				</File>
 				<File Id="341974608" Language="SFX">
 					<ShortName>C4 Explosion.wav</ShortName>
-					<Path>SFX\C4 Explosion_E106FFBE.wem</Path>
+					<Path>SFX\C4 Explosion_DDC98EF4.wem</Path>
 				</File>
-				<File Id="707043063" Language="SFX">
+				<File Id="406861289" Language="SFX">
 					<ShortName>sparks(chispas).wav</ShortName>
-					<Path>SFX\sparks(chispas)_BADC626A.wem</Path>
+					<Path>SFX\sparks(chispas)_8BD76F1E.wem</Path>
 				</File>
 				<File Id="752427372" Language="SFX">
 					<ShortName>Countdown_Explosion.wav</ShortName>
-					<Path>SFX\Countdown_Explosion_E106FFBE.wem</Path>
+					<Path>SFX\Countdown_Explosion_DDC98EF4.wem</Path>
+				</File>
+				<File Id="823457565" Language="SFX">
+					<ShortName>steam(vapor)_short.wav</ShortName>
+					<Path>SFX\steam(vapor)_short_8BD76F1E.wem</Path>
 				</File>
 				<File Id="832049234" Language="SFX">
 					<ShortName>OpenDoor Elevator.wav</ShortName>
-					<Path>SFX\OpenDoor Elevator_E106FFBE.wem</Path>
+					<Path>SFX\OpenDoor Elevator_DDC98EF4.wem</Path>
 				</File>
 				<File Id="900520075" Language="SFX">
 					<ShortName>lights_on.wav</ShortName>
-					<Path>SFX\lights_on_E106FFBE.wem</Path>
+					<Path>SFX\lights_on_DDC98EF4.wem</Path>
 				</File>
 				<File Id="987205478" Language="SFX">
 					<ShortName>base de carga_v1.wav</ShortName>
-					<Path>SFX\base de carga_v1_E106FFBE.wem</Path>
+					<Path>SFX\base de carga_v1_DDC98EF4.wem</Path>
 				</File>
 				<File Id="1059316681" Language="SFX">
 					<ShortName>Alarm.wav</ShortName>
-					<Path>SFX\Alarm_BADC626A.wem</Path>
+					<Path>SFX\Alarm_8BD76F1E.wem</Path>
 				</File>
 				<File Id="1064441044" Language="SFX">
 					<ShortName>Plant C4.wav</ShortName>
-					<Path>SFX\Plant C4_E106FFBE.wem</Path>
+					<Path>SFX\Plant C4_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -200,49 +200,36 @@
 				<Event Id="2956457727" Name="Play_Sala3A"/>
 				<Event Id="2956457724" Name="Play_Sala3B"/>
 				<Event Id="3006790454" Name="Play_Sala4A"/>
-				<Event Id="3006790453" Name="Play_Sala4B"/>
 				<Event Id="2362998284" Name="Play_Tunel"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="110529738" Language="SFX">
-					<ShortName>Sala4B.wav</ShortName>
-					<Path>SFX\Sala4B_E106FFBE.wem</Path>
-				</File>
 				<File Id="117715303" Language="SFX">
 					<ShortName>Sala3B_Versio_Cut.wav</ShortName>
-					<Path>SFX\Sala3B_Versio_Cut_E106FFBE.wem</Path>
+					<Path>SFX\Sala3B_Versio_Cut_45687BFF.wem</Path>
 				</File>
 				<File Id="341959684" Language="SFX">
 					<ShortName>Tunel.wav</ShortName>
-					<Path>SFX\Tunel_E106FFBE.wem</Path>
+					<Path>SFX\Tunel_45687BFF.wem</Path>
 				</File>
 				<File Id="405981009" Language="SFX">
 					<ShortName>Sala4A.wav</ShortName>
-					<Path>SFX\Sala4A_E106FFBE.wem</Path>
-				</File>
-				<File Id="426310337" Language="SFX">
-					<ShortName>Final Theme.wav</ShortName>
-					<Path>SFX\Final Theme_E106FFBE.wem</Path>
+					<Path>SFX\Sala4A_45687BFF.wem</Path>
 				</File>
 				<File Id="493938362" Language="SFX">
 					<ShortName>actualizacion de brazo v2.wav</ShortName>
-					<Path>SFX\actualizacion de brazo v2_E106FFBE.wem</Path>
-				</File>
-				<File Id="761229201" Language="SFX">
-					<ShortName>Final_Theme_Loop.wav</ShortName>
-					<Path>SFX\Final_Theme_Loop_951343B8.wem</Path>
+					<Path>SFX\actualizacion de brazo v2_DDC98EF4.wem</Path>
 				</File>
 				<File Id="953393735" Language="SFX">
 					<ShortName>Sala3A_version2.wav</ShortName>
-					<Path>SFX\Sala3A_version2_E106FFBE.wem</Path>
+					<Path>SFX\Sala3A_version2_45687BFF.wem</Path>
 				</File>
 				<File Id="959572413" Language="SFX">
 					<ShortName>Elevator.wav</ShortName>
-					<Path>SFX\Elevator_E106FFBE.wem</Path>
+					<Path>SFX\Elevator_45687BFF.wem</Path>
 				</File>
 				<File Id="999865395" Language="SFX">
 					<ShortName>Sala2.wav</ShortName>
-					<Path>SFX\Sala2_E106FFBE.wem</Path>
+					<Path>SFX\Sala2_602496C7.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -266,51 +253,51 @@
 			<IncludedMemoryFiles>
 				<File Id="88444989" Language="SFX">
 					<ShortName>Poca_Energia.wav</ShortName>
-					<Path>SFX\Poca_Energia_E106FFBE.wem</Path>
+					<Path>SFX\Poca_Energia_45687BFF.wem</Path>
 				</File>
 				<File Id="139045063" Language="SFX">
 					<ShortName>naves_preparadas.wav</ShortName>
-					<Path>SFX\naves_preparadas_E106FFBE.wem</Path>
+					<Path>SFX\naves_preparadas_45687BFF.wem</Path>
 				</File>
 				<File Id="241038503" Language="SFX">
 					<ShortName>Poca_Vida.wav</ShortName>
-					<Path>SFX\Poca_Vida_E106FFBE.wem</Path>
+					<Path>SFX\Poca_Vida_45687BFF.wem</Path>
 				</File>
 				<File Id="264910040" Language="SFX">
 					<ShortName>Abiendo_Compuertas_Despres Mort_FinalBoss.wav</ShortName>
-					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem</Path>
+					<Path>SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_45687BFF.wem</Path>
 				</File>
 				<File Id="364103296" Language="SFX">
 					<ShortName>Disparo_Bloqueado.wav</ShortName>
-					<Path>SFX\Disparo_Bloqueado_E106FFBE.wem</Path>
+					<Path>SFX\Disparo_Bloqueado_45687BFF.wem</Path>
 				</File>
 				<File Id="430266122" Language="SFX">
 					<ShortName>Sala1.wav</ShortName>
-					<Path>SFX\Sala1_E106FFBE.wem</Path>
+					<Path>SFX\Sala1_45687BFF.wem</Path>
 				</File>
 				<File Id="677660058" Language="SFX">
 					<ShortName>Esconderse_Bidones.wav</ShortName>
-					<Path>SFX\Esconderse_Bidones_E106FFBE.wem</Path>
+					<Path>SFX\Esconderse_Bidones_45687BFF.wem</Path>
 				</File>
 				<File Id="752280793" Language="SFX">
 					<ShortName>Pasillo.wav</ShortName>
-					<Path>SFX\Pasillo_E106FFBE.wem</Path>
+					<Path>SFX\Pasillo_45687BFF.wem</Path>
 				</File>
 				<File Id="753798982" Language="SFX">
 					<ShortName>Agacharse.wav</ShortName>
-					<Path>SFX\Agacharse_E106FFBE.wem</Path>
+					<Path>SFX\Agacharse_45687BFF.wem</Path>
 				</File>
 				<File Id="765819752" Language="SFX">
 					<ShortName>Puerta_Bloqueada.wav</ShortName>
-					<Path>SFX\Puerta_Bloqueada_E106FFBE.wem</Path>
+					<Path>SFX\Puerta_Bloqueada_45687BFF.wem</Path>
 				</File>
 				<File Id="766947946" Language="SFX">
 					<ShortName>Bidon_movimiento.wav</ShortName>
-					<Path>SFX\Bidon_movimiento_E106FFBE.wem</Path>
+					<Path>SFX\Bidon_movimiento_45687BFF.wem</Path>
 				</File>
 				<File Id="891960782" Language="SFX">
 					<ShortName>Logan-Ayer tuve una pesadilla horrible.wav</ShortName>
-					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem</Path>
+					<Path>SFX\Logan-Ayer tuve una pesadilla horrible_45687BFF.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -330,25 +317,21 @@
 				<Event Id="537533500" Name="Stop_Panting_Logan_Loop"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="161980965" Language="SFX">
-					<ShortName>footstep pav 2.wav</ShortName>
-					<Path>SFX\footstep pav 2_76A5D070.wem</Path>
-				</File>
 				<File Id="273085640" Language="SFX">
 					<ShortName>Logan Large Shoot.wav</ShortName>
-					<Path>SFX\Logan Large Shoot_76A5D070.wem</Path>
+					<Path>SFX\Logan Large Shoot_DDC98EF4.wem</Path>
 				</File>
 				<File Id="285410270" Language="SFX">
 					<ShortName>PasoMetal4.wav</ShortName>
-					<Path>SFX\PasoMetal4_76A5D070.wem</Path>
+					<Path>SFX\PasoMetal4_DDC98EF4.wem</Path>
 				</File>
 				<File Id="418888533" Language="SFX">
 					<ShortName>PasoMetal1.wav</ShortName>
-					<Path>SFX\PasoMetal1_76A5D070.wem</Path>
+					<Path>SFX\PasoMetal1_DDC98EF4.wem</Path>
 				</File>
 				<File Id="529741867" Language="SFX">
 					<ShortName>PasoMetal3.wav</ShortName>
-					<Path>SFX\PasoMetal3_76A5D070.wem</Path>
+					<Path>SFX\PasoMetal3_DDC98EF4.wem</Path>
 				</File>
 				<File Id="535759751" Language="SFX">
 					<ShortName>Logan Short Shoot.wav</ShortName>
@@ -356,33 +339,58 @@
 				</File>
 				<File Id="539246233" Language="SFX">
 					<ShortName>PasoMetal2.wav</ShortName>
-					<Path>SFX\PasoMetal2_76A5D070.wem</Path>
+					<Path>SFX\PasoMetal2_DDC98EF4.wem</Path>
+				</File>
+				<File Id="629608753" Language="SFX">
+					<ShortName>footstep pav3.wav</ShortName>
+					<Path>SFX\footstep pav3_DDC98EF4.wem</Path>
 				</File>
 				<File Id="656055319" Language="SFX">
 					<ShortName>RS2_POWER_CHARGE_001_Ab.wav</ShortName>
-					<Path>SFX\RS2_POWER_CHARGE_001_Ab_E106FFBE.wem</Path>
+					<Path>SFX\RS2_POWER_CHARGE_001_Ab_DDC98EF4.wem</Path>
 				</File>
-				<File Id="746662347" Language="SFX">
-					<ShortName>footstep pav3.wav</ShortName>
-					<Path>SFX\footstep pav3_76A5D070.wem</Path>
+				<File Id="815159621" Language="SFX">
+					<ShortName>footstep pav 2.wav</ShortName>
+					<Path>SFX\footstep pav 2_DDC98EF4.wem</Path>
 				</File>
 				<File Id="864427922" Language="SFX">
 					<ShortName>Logan Carga.wav</ShortName>
 					<Path>SFX\Logan Carga_DDC98EF4.wem</Path>
 				</File>
-				<File Id="866851989" Language="SFX">
+				<File Id="949671801" Language="SFX">
 					<ShortName>panting(jadeo).wav</ShortName>
-					<Path>SFX\panting(jadeo)_951343B8.wem</Path>
+					<Path>SFX\panting(jadeo)_8BD76F1E.wem</Path>
 				</File>
-				<File Id="967663123" Language="SFX">
+				<File Id="990709436" Language="SFX">
 					<ShortName>footstep_paviment1.wav</ShortName>
-					<Path>SFX\footstep_paviment1_76A5D070.wem</Path>
+					<Path>SFX\footstep_paviment1_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1355168291" Language="SFX">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1774445604" Language="SFX">
+			<ShortName>Cinematica_Final</ShortName>
+			<Path>Cinematica_Final.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3006790453" Name="Play_Sala4B"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="110529738" Language="SFX">
+					<ShortName>Sala4B.wav</ShortName>
+					<Path>SFX\Sala4B_45687BFF.wem</Path>
+				</File>
+				<File Id="426310337" Language="SFX">
+					<ShortName>Final Theme.wav</ShortName>
+					<Path>SFX\Final Theme_45687BFF.wem</Path>
+				</File>
+				<File Id="761229201" Language="SFX">
+					<ShortName>Final_Theme_Loop.wav</ShortName>
+					<Path>SFX\Final_Theme_Loop_9FBAE3ED.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1904121556" Language="SFX">
 			<ShortName>Various</ShortName>
@@ -399,43 +407,43 @@
 			<IncludedMemoryFiles>
 				<File Id="274114536" Language="SFX">
 					<ShortName>ensamblaje_sfx_short_1.wav</ShortName>
-					<Path>SFX\ensamblaje_sfx_short_1_E106FFBE.wem</Path>
+					<Path>SFX\ensamblaje_sfx_short_1_DDC98EF4.wem</Path>
 				</File>
 				<File Id="294083481" Language="SFX">
 					<ShortName>Light Humming.wav</ShortName>
-					<Path>SFX\Light Humming_BADC626A.wem</Path>
+					<Path>SFX\Light Humming_8BD76F1E.wem</Path>
 				</File>
 				<File Id="418116809" Language="SFX">
 					<ShortName>Fan.wav</ShortName>
-					<Path>SFX\Fan_BADC626A.wem</Path>
+					<Path>SFX\Fan_8BD76F1E.wem</Path>
 				</File>
 				<File Id="455030148" Language="SFX">
 					<ShortName>ensamblaje_sfx_short_3.wav</ShortName>
-					<Path>SFX\ensamblaje_sfx_short_3_E106FFBE.wem</Path>
+					<Path>SFX\ensamblaje_sfx_short_3_DDC98EF4.wem</Path>
 				</File>
 				<File Id="576668268" Language="SFX">
 					<ShortName>ensamblaje_sfx_short_2.wav</ShortName>
-					<Path>SFX\ensamblaje_sfx_short_2_E106FFBE.wem</Path>
+					<Path>SFX\ensamblaje_sfx_short_2_DDC98EF4.wem</Path>
 				</File>
 				<File Id="588687617" Language="SFX">
 					<ShortName>ensamblaje_sfx_short_4.wav</ShortName>
-					<Path>SFX\ensamblaje_sfx_short_4_E106FFBE.wem</Path>
+					<Path>SFX\ensamblaje_sfx_short_4_DDC98EF4.wem</Path>
 				</File>
 				<File Id="659011718" Language="SFX">
 					<ShortName>Explosio boss.wav</ShortName>
-					<Path>SFX\Explosio boss_E106FFBE.wem</Path>
+					<Path>SFX\Explosio boss_DDC98EF4.wem</Path>
 				</File>
 				<File Id="999780021" Language="SFX">
 					<ShortName>robot_arm_sfx.wav</ShortName>
-					<Path>SFX\robot_arm_sfx_BADC626A.wem</Path>
+					<Path>SFX\robot_arm_sfx_8BD76F1E.wem</Path>
 				</File>
 				<File Id="1043545804" Language="SFX">
 					<ShortName>hack_spacecraft.wav</ShortName>
-					<Path>SFX\hack_spacecraft_E106FFBE.wem</Path>
+					<Path>SFX\hack_spacecraft_DDC98EF4.wem</Path>
 				</File>
 				<File Id="1071045796" Language="SFX">
 					<ShortName>Shoot Nau_Impact_Lent.wav</ShortName>
-					<Path>SFX\Shoot Nau_Impact_Lent_E106FFBE.wem</Path>
+					<Path>SFX\Shoot Nau_Impact_Lent_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -461,59 +469,59 @@
 			<IncludedMemoryFiles>
 				<File Id="17079506" Language="SFX">
 					<ShortName>footstep_right.wav</ShortName>
-					<Path>SFX\footstep_right_E106FFBE.wem</Path>
-				</File>
-				<File Id="39369208" Language="SFX">
-					<ShortName>electrocution.wav</ShortName>
-					<Path>SFX\electrocution_E106FFBE.wem</Path>
+					<Path>SFX\footstep_right_DDC98EF4.wem</Path>
 				</File>
 				<File Id="263902756" Language="SFX">
 					<ShortName>Boss -Disparo 6.wav</ShortName>
-					<Path>SFX\Boss -Disparo 6_E106FFBE.wem</Path>
+					<Path>SFX\Boss -Disparo 6_DDC98EF4.wem</Path>
 				</File>
 				<File Id="281377803" Language="SFX">
 					<ShortName>Boss - Disparo 3.wav</ShortName>
-					<Path>SFX\Boss - Disparo 3_E106FFBE.wem</Path>
+					<Path>SFX\Boss - Disparo 3_DDC98EF4.wem</Path>
+				</File>
+				<File Id="296545048" Language="SFX">
+					<ShortName>electrocution.wav</ShortName>
+					<Path>SFX\electrocution_DDC98EF4.wem</Path>
 				</File>
 				<File Id="297188304" Language="SFX">
 					<ShortName>footstep_left.wav</ShortName>
-					<Path>SFX\footstep_left_E106FFBE.wem</Path>
+					<Path>SFX\footstep_left_DDC98EF4.wem</Path>
 				</File>
 				<File Id="378953843" Language="SFX">
 					<ShortName>Drone Shoot.wav</ShortName>
-					<Path>SFX\Drone Shoot_E106FFBE.wem</Path>
+					<Path>SFX\Drone Shoot_DDC98EF4.wem</Path>
+				</File>
+				<File Id="406861289" Language="SFX">
+					<ShortName>sparks(chispas).wav</ShortName>
+					<Path>SFX\sparks(chispas)_8BD76F1E.wem</Path>
 				</File>
 				<File Id="499018898" Language="SFX">
 					<ShortName>Drone Movement_loop.wav</ShortName>
-					<Path>SFX\Drone Movement_loop_76A5D070.wem</Path>
-				</File>
-				<File Id="707043063" Language="SFX">
-					<ShortName>sparks(chispas).wav</ShortName>
-					<Path>SFX\sparks(chispas)_BADC626A.wem</Path>
+					<Path>SFX\Drone Movement_loop_DDC98EF4.wem</Path>
 				</File>
 				<File Id="788965310" Language="SFX">
 					<ShortName>Boss - Disparo 4.wav</ShortName>
-					<Path>SFX\Boss - Disparo 4_E106FFBE.wem</Path>
+					<Path>SFX\Boss - Disparo 4_DDC98EF4.wem</Path>
 				</File>
 				<File Id="803787533" Language="SFX">
 					<ShortName>Footstep_androide.wav</ShortName>
-					<Path>SFX\Footstep_androide_E106FFBE.wem</Path>
+					<Path>SFX\Footstep_androide_DDC98EF4.wem</Path>
 				</File>
 				<File Id="848849463" Language="SFX">
 					<ShortName>Disparo Androide.wav</ShortName>
-					<Path>SFX\Disparo Androide_E106FFBE.wem</Path>
+					<Path>SFX\Disparo Androide_DDC98EF4.wem</Path>
 				</File>
 				<File Id="924432000" Language="SFX">
 					<ShortName>sparks(chispas).wav</ShortName>
-					<Path>SFX\sparks(chispas)_76A5D070.wem</Path>
+					<Path>SFX\sparks(chispas)_DDC98EF4.wem</Path>
 				</File>
 				<File Id="940048716" Language="SFX">
 					<ShortName>Boss_Impact.wav</ShortName>
-					<Path>SFX\Boss_Impact_E106FFBE.wem</Path>
+					<Path>SFX\Boss_Impact_DDC98EF4.wem</Path>
 				</File>
 				<File Id="1012046756" Language="SFX">
 					<ShortName>impact_shoot_to_enemies.wav</ShortName>
-					<Path>SFX\impact_shoot_to_enemies_E106FFBE.wem</Path>
+					<Path>SFX\impact_shoot_to_enemies_DDC98EF4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -529,15 +537,15 @@
 			<IncludedMemoryFiles>
 				<File Id="84672891" Language="SFX">
 					<ShortName>Final boss Almost Human.wav</ShortName>
-					<Path>SFX\Final boss Almost Human_951343B8.wem</Path>
+					<Path>SFX\Final boss Almost Human_9FBAE3ED.wem</Path>
 				</File>
 				<File Id="384441130" Language="SFX">
 					<ShortName>Almost Panico.wav</ShortName>
-					<Path>SFX\Almost Panico_E106FFBE.wem</Path>
+					<Path>SFX\Almost Panico_602496C7.wem</Path>
 				</File>
 				<File Id="718615655" Language="SFX">
 					<ShortName>Main_Theme_Loop.wav</ShortName>
-					<Path>SFX\Main_Theme_Loop_951343B8.wem</Path>
+					<Path>SFX\Main_Theme_Loop_9FBAE3ED.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

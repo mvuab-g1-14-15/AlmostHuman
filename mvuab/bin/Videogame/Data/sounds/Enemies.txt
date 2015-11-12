@@ -21,18 +21,18 @@ Effect plug-ins	ID	Name	Type				Notes
 	3900114836	Metal_Hangar	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	17079506	footstep_boss_right	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_right_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_right		6902
-	39369208	Electrocution_androide_dron	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\electrocution_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Electrocution_androide_dron		37594
-	263902756	Boss -Disparo 6	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss -Disparo 6_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss -Disparo 6		4644
-	281377803	Boss - Disparo 3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss - Disparo 3_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss - Disparo 3		4821
-	297188304	footstep_boss_left	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_left_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_left		6700
-	378953843	Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Shoot_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Shoot		5197
-	499018898	Movimiento	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Movement_loop_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Movimiento		2437916
-	707043063	Spark_androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_BADC626A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Spark_androide		170387
-	788965310	Boss - Disparo 4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss - Disparo 4_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss - Disparo 4		5645
-	803787533	Footstep_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Footstep_androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Footstep_Androide		7568
-	848849463	Shoot_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo Androide_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Shoot_Androide		4218
-	924432000	Spark_boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_76A5D070.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Spark_boss		170387
-	940048716	Boss Impact	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss_Impact_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Boss Impact		6587
-	1012046756	impact_shoot_to_enemies	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\impact_shoot_to_enemies_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\impact_shoot_to_enemies		8722
+	17079506	footstep_boss_right	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_right_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_right		138468
+	263902756	Boss -Disparo 6	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss -Disparo 6_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss -Disparo 6		54356
+	281377803	Boss - Disparo 3	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss - Disparo 3_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss - Disparo 3		56060
+	296545048	Electrocution_androide_dron	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\electrocution_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Electrocution_androide_dron		458704
+	297188304	footstep_boss_left	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\footstep_left_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Footstep_Boss\footstep_boss_left		139092
+	378953843	Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Shoot_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Shoot		180168
+	406861289	Spark_androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Spark_androide		1043036
+	499018898	Movimiento	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Drone Movement_loop_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Drone\Movimiento		33602688
+	788965310	Boss - Disparo 4	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss - Disparo 4_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Shoot Boss\Boss - Disparo 4		62928
+	803787533	Footstep_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Footstep_androide_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Footstep_Androide		167644
+	848849463	Shoot_Androide	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo Androide_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\Shoot_Androide		47904
+	924432000	Spark_boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\sparks(chispas)_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Spark_boss		1043036
+	940048716	Boss Impact	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Boss_Impact_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\Boss Impact		153768
+	1012046756	impact_shoot_to_enemies	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\impact_shoot_to_enemies_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Androide\impact_shoot_to_enemies		95172
 

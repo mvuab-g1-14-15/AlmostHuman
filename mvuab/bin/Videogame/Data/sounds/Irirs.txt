@@ -13,16 +13,16 @@ Event	ID	Name			Wwise Object Path	Notes
 	4150758548	Play_Abriendo_Compuertas			\Iris\Play_Abriendo_Compuertas	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	88444989	Iris_Poca_Energia	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Energia_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Energia		34658
-	139045063	Iris_Naves_Preparadas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves_Preparadas		55247
-	241038503	Iris_Poca_Vida	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Vida_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Vida		29681
-	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		99127
-	364103296	Iris_Disparo_Bloqueado	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo_Bloqueado_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Disparo_Bloqueado		27794
-	430266122	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		189804
-	677660058	Iris_Esconderse_Bidones	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Esconderse_Bidones_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Esconderse_Bidones		63519
-	752280793	Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Pasillo_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Pasillo		95252
-	753798982	Iris_Agacharse	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Agacharse_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Agacharse		41088
-	765819752	Iris_Puerta_Bloqueada	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Puerta_Bloqueada_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Puerta_Bloqueada		53916
-	766947946	Iris_Bidon	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Bidon_movimiento_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Bidon		46707
-	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_E106FFBE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		247728
+	88444989	Iris_Poca_Energia	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Energia_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Energia		153928
+	139045063	Iris_Naves_Preparadas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves_Preparadas		228304
+	241038503	Iris_Poca_Vida	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Vida_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Vida		138808
+	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		413992
+	364103296	Iris_Disparo_Bloqueado	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo_Bloqueado_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Disparo_Bloqueado		85456
+	430266122	Sala1	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala1_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala1		873432
+	677660058	Iris_Esconderse_Bidones	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Esconderse_Bidones_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Esconderse_Bidones		294040
+	752280793	Pasillo	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Pasillo_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Pasillo		341920
+	753798982	Iris_Agacharse	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Agacharse_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Agacharse		145360
+	765819752	Iris_Puerta_Bloqueada	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Puerta_Bloqueada_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Puerta_Bloqueada		171928
+	766947946	Iris_Bidon	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Bidon_movimiento_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Bidon		187408
+	891960782	Logan-Ayer tuve una pesadilla	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Logan-Ayer tuve una pesadilla horrible_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Logan-Ayer tuve una pesadilla		1118728
 
