@@ -92,6 +92,8 @@ g_BossDeath = false
 
 g_FinalBossDead = false
 
+g_UpdateDLC = false
+
 enemigosVivos = 1
 function OnEnter()
 	process = engine:GetProcess()
@@ -875,7 +877,8 @@ function UpdateTriggers()
 			g_Player:SetAnimation("stealth")
 			lParticle = CParticle( "DLCParticle", "stealth_atack", "core" )
 			lParticle:Init( Vect3f(75.35, -17.23, -25.03) );
-			lParticle:SetDirection( g_Player:GetHandPos() - Vect3f(75.35, -17.23, -25.03) )
+			lParticle:SetDirection( g_Player:GetHandPos() - Vect3f(75.35, -17.23, -25.03) )			
+			g_UpdateDLC = true
 		end
 	end
 	
@@ -931,6 +934,19 @@ function UpdateTriggers()
 			enemy_manager:KillBoss()
 			g_FinalBossDead = false
 			countdowntimer_manager:Reset("BossDeathTimer", false)
+		end
+	end
+	
+	if g_UpdateDLC then
+		if not countdowntimer_manager:ExistTimer("UpdateDLC") then
+			countdowntimer_manager:AddTimer("UpdateDLC", 10.0, false)
+		else
+			countdowntimer_manager:SetActive("UpdateDLC", true)
+		end
+		if countdowntimer_manager:isTimerFinish("UpdateDLC") then
+			sound_manager:PlayEvent("Play_Alarm", "Alarma_Sala2")
+			g_UpdateDLC = false
+			countdowntimer_manager:Reset("UpdateDLC", false)
 		end
 	end
 end
