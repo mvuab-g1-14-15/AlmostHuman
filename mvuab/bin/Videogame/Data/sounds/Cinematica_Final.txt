@@ -3,6 +3,6 @@ Event	ID	Name			Wwise Object Path	Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	110529738	Sala4B	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Sala4B_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Sala4B		3575808
+	186749015	Credits Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final 1_9FBAE3ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Cinematica Final\Credits Theme		1254880
 	426310337	Final Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final Theme_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Cinematica Final\Final Theme		3574144
-	761229201	Credits Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final_Theme_Loop_9FBAE3ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Cinematica Final\Credits Theme		522352
 
