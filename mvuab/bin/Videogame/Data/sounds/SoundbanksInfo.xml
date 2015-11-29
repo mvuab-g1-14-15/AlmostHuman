@@ -382,13 +382,13 @@
 					<ShortName>Sala4B.wav</ShortName>
 					<Path>SFX\Sala4B_45687BFF.wem</Path>
 				</File>
+				<File Id="186749015" Language="SFX">
+					<ShortName>Final 1.wav</ShortName>
+					<Path>SFX\Final 1_9FBAE3ED.wem</Path>
+				</File>
 				<File Id="426310337" Language="SFX">
 					<ShortName>Final Theme.wav</ShortName>
 					<Path>SFX\Final Theme_45687BFF.wem</Path>
-				</File>
-				<File Id="761229201" Language="SFX">
-					<ShortName>Final_Theme_Loop.wav</ShortName>
-					<Path>SFX\Final_Theme_Loop_9FBAE3ED.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -539,13 +539,13 @@
 					<ShortName>Final boss Almost Human.wav</ShortName>
 					<Path>SFX\Final boss Almost Human_9FBAE3ED.wem</Path>
 				</File>
+				<File Id="188698436" Language="SFX">
+					<ShortName>Start almost 1.wav</ShortName>
+					<Path>SFX\Start almost 1_9FBAE3ED.wem</Path>
+				</File>
 				<File Id="384441130" Language="SFX">
 					<ShortName>Almost Panico.wav</ShortName>
 					<Path>SFX\Almost Panico_602496C7.wem</Path>
-				</File>
-				<File Id="718615655" Language="SFX">
-					<ShortName>Main_Theme_Loop.wav</ShortName>
-					<Path>SFX\Main_Theme_Loop_9FBAE3ED.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

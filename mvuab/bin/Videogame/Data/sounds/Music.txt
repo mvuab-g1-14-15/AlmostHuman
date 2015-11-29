@@ -6,6 +6,6 @@ Event	ID	Name			Wwise Object Path	Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	84672891	Musica boss	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Final boss Almost Human_9FBAE3ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Musica boss		4535992
+	188698436	Main Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Start almost 1_9FBAE3ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Main Theme		4969000
 	384441130	Panico	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Almost Panico_602496C7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Estados\Panico		716306
-	718615655	Main Theme	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Main_Theme_Loop_9FBAE3ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Main Theme		293824
 
