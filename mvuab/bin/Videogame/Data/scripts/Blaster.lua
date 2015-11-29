@@ -7,7 +7,7 @@ function CBlaster:__init()
     self.MaxTimePressed = 1.0
 	
 	self.BaseDamage = 20.0
-	self.MaxDamage = 40.0
+	self.MaxDamage = 70.0
 	
 	self.IsAcumulatorSound = false
 	
@@ -24,15 +24,15 @@ function CBlaster:__init()
 	self.Blash = CBlash( "Player" )
 	self.Ammunition = {}
 	self.MaxAmmo = 25;
-	self.AmmoId = 0;
+	self.AmmoId = 0
 	for i=1,self.MaxAmmo do
-		table.insert( self.Ammunition, CAmmo(i, "ammo") );
-		self.AmmoId = self.AmmoId + 1;
+		table.insert( self.Ammunition, CAmmo(i, "ammo") )
+		self.AmmoId = self.AmmoId + 1
 	end
 	
-	self.PlayerIsShooting = false;
+	self.PlayerIsShooting = false
 	
-	self.AmmoCharged = CAmmoCharged();
+	self.AmmoCharged = CAmmoCharged()
 end
 
 function CBlaster:CalculateDamage()
@@ -46,23 +46,23 @@ end
 
 function CBlaster:HasAmmo()
 	if #self.Ammunition == 0 then
-		return false;
+		return false
 	else
-		return true;
+		return true
 	end
 end
 
 function CBlaster:UpdateAmmo()
 	for i=1,#self.Ammunition do
-		lAmmo = self.Ammunition[i];
-		lAmmo:Update();
+		lAmmo = self.Ammunition[i]
+		lAmmo:Update()
 	end
 end
 
 function CBlaster:EndAmmo()
 	for i=1,#self.Ammunition do
-		lAmmo = self.Ammunition[i];
-		lAmmo:End();
+		lAmmo = self.Ammunition[i]
+		lAmmo:End()
 	end
 end
 
