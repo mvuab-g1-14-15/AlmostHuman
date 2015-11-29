@@ -25,9 +25,11 @@ Event	ID	Name			Wwise Object Path	Notes
 	2762455437	Play_Base_Carga_Failure			\Gameplay\Play_Base_Carga_Failure	
 	2858841480	Play_sparks			\Particles\Play_sparks	
 	2885688842	Play_steam			\Particles\Play_steam	
+	2916295522	Stop_Alarm_Sala3			\Gameplay\Stop_Alarm_Sala3	
 	2989601031	Play_Crash_Metal_Grille			\Gameplay\Play_Crash_Metal_Grille	
 	3367095392	Play_steam_down_slow_big			\Particles\Play_steam_down_slow_big	
 	3613560533	Play_Pick_Object			\Gameplay\Play_Pick_Object	
+	3766305992	Play_Alarm_Sala3			\Gameplay\Play_Alarm_Sala3	
 
 Effect plug-ins	ID	Name	Type				Notes
 	1990128658	Room_Medium	Wwise RoomVerb			

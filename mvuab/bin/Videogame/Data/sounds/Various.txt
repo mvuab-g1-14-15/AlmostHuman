@@ -8,7 +8,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3759318933	Play_Robot_Arm			\Various\Play_Robot_Arm	
 
 Effect plug-ins	ID	Name	Type				Notes
-	1203617187	Machine_Gun_Hangar	Wwise RoomVerb			
 	1706684651	Plate_Medium	Wwise RoomVerb			
 	1990128658	Room_Medium	Wwise RoomVerb			
 	3900114836	Metal_Hangar	Wwise RoomVerb			
@@ -23,5 +22,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	659011718	Boss Explosion	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Explosio boss_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Boss Explosion		616580
 	999780021	robot_arm	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\robot_arm_sfx_8BD76F1E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Various\robot_arm		1082336
 	1043545804	Nave_Hack	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\hack_spacecraft_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Nave_Hack		1039504
-	1071045796	Naves_Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Shoot Nau_Impact_Lent_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Naves_Shoot		1099280
+	1071045796	Naves_Shoot	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Shoot Nau_Impact_Lent_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Naves\Naves_Shoot		282748
 

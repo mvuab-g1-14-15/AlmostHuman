@@ -92,6 +92,7 @@
 			<IncludedEvents>
 				<Event Id="847470298" Name="Open_Close_Door_Event"/>
 				<Event Id="603937113" Name="Play_Alarm"/>
+				<Event Id="3766305992" Name="Play_Alarm_Sala3"/>
 				<Event Id="1744910862" Name="Play_Base_Carga"/>
 				<Event Id="2762455437" Name="Play_Base_Carga_Failure"/>
 				<Event Id="1558590687" Name="Play_C4_Explosion"/>
@@ -118,6 +119,7 @@
 				<Event Id="660383042" Name="Play_steam_up"/>
 				<Event Id="1099641613" Name="Play_steam_up_slow_big"/>
 				<Event Id="377487063" Name="Stop_Alarm"/>
+				<Event Id="2916295522" Name="Stop_Alarm_Sala3"/>
 				<Event Id="194392270" Name="Stop_Elevator_Up"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
