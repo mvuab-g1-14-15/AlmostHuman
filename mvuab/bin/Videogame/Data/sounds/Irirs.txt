@@ -14,7 +14,7 @@ Event	ID	Name			Wwise Object Path	Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	88444989	Iris_Poca_Energia	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Energia_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Energia		153928
-	139045063	Iris_Naves_Preparadas	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves_Preparadas		228304
+	139045063	Iris_Naves	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\naves_preparadas_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Naves		228304
 	241038503	Iris_Poca_Vida	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Poca_Vida_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Poca_Vida		138808
 	264910040	Abriendo Compuerta_BigBossDeath	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Abiendo_Compuertas_Despres Mort_FinalBoss_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music&Ambient\Dialogos\Abriendo Compuerta_BigBossDeath		413992
 	364103296	Iris_Disparo_Bloqueado	C:\Users\Public\Documents\Dev\WwiseProject\AlmostHuman\.cache\Windows\SFX\Disparo_Bloqueado_45687BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Iris\Iris_Disparo_Bloqueado		85456
