@@ -129,7 +129,11 @@ function CBlaster:Update( aPosition )
 		end
 		
 		if self.IsCharging == true then
-			self.TimePressed = self.TimePressed + g_FrameTime
+			if self.MaxTimePressed > self.TimePressed then
+				self.TimePressed = self.TimePressed + g_FrameTime
+			else
+				self.TimePressed = self.MaxTimePressed
+			end
 		end
 		
 		if self.Energy < 1 then
