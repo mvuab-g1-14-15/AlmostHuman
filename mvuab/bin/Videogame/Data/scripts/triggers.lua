@@ -923,7 +923,7 @@ function UpdateTriggers()
 	
 	if g_FinalBossDead then
 		if not countdowntimer_manager:ExistTimer("BossDeathTimer") then
-			countdowntimer_manager:AddTimer("BossDeathTimer", 3.0, false)
+			countdowntimer_manager:AddTimer("BossDeathTimer", 0.6, false)
 		else
 			countdowntimer_manager:SetActive("BossDeathTimer", true)
 		end
